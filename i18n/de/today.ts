@@ -48,6 +48,10 @@
         <source>Opiemail not installed</source>
         <translation>Opiemail ist nicht installiert</translation>
     </message>
+    <message>
+        <source>Today</source>
+        <translation type="unfinished">Heute</translation>
+    </message>
 </context>
 <context>
     <name>todayconfig</name>
@@ -131,6 +135,12 @@ resume? (Opie only)</source>
 automatisch
 gestartet werden?
 (Nur in Opie)</translation>
+    </message>
+    <message>
+        <source>Activate the  
+autostart after how
+many minutes?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

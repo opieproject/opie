@@ -45,5 +45,9 @@
         <source>Off</source>
         <translation>Aus</translation>
     </message>
+    <message>
+        <source>Only deactivate LCD during Suspend</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

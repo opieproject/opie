@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Load</source>
-        <translation>Laden</translation>
+        <translation type="obsolete">Laden</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -82,7 +82,19 @@
     </message>
     <message>
         <source>Open File</source>
-        <translation>Öffne Datei</translation>
+        <translation type="obsolete">Öffne Datei</translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -93,128 +105,128 @@
     </message>
     <message>
         <source>More</source>
-        <translation>Mehr</translation>
+        <translation type="obsolete">Mehr</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation>Mehr...</translation>
+        <translation type="obsolete">Mehr...</translation>
     </message>
 </context>
 <context>
     <name>QColorDialog</name>
     <message>
         <source>Hue:</source>
-        <translation>Ton:</translation>
+        <translation type="obsolete">Ton:</translation>
     </message>
     <message>
         <source>Sat:</source>
-        <translation>Sät:</translation>
+        <translation type="obsolete">Sät:</translation>
     </message>
     <message>
         <source>Val:</source>
-        <translation>Wert:</translation>
+        <translation type="obsolete">Wert:</translation>
     </message>
     <message>
         <source>Red:</source>
-        <translation>Rot:</translation>
+        <translation type="obsolete">Rot:</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation>Grün:</translation>
+        <translation type="obsolete">Grün:</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation>Blau:</translation>
+        <translation type="obsolete">Blau:</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation>Alphakanal:</translation>
+        <translation type="obsolete">Alphakanal:</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation>Farbe auswählen</translation>
+        <translation type="obsolete">Farbe auswählen</translation>
     </message>
 </context>
 <context>
     <name>fileBrowser</name>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="obsolete">Name</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Größe</translation>
+        <translation type="obsolete">Größe</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation>Dokumente</translation>
+        <translation type="obsolete">Dokumente</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation>Alle Dateien</translation>
+        <translation type="obsolete">Alle Dateien</translation>
     </message>
     <message>
         <source>Hidden files</source>
-        <translation>Versteckte Dateien</translation>
+        <translation type="obsolete">Versteckte Dateien</translation>
     </message>
     <message>
         <source>Type: %1</source>
-        <translation>Type: %1</translation>
+        <translation type="obsolete">Type: %1</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation>Verzeichnis wechseln</translation>
+        <translation type="obsolete">Verzeichnis wechseln</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation>Verzeichnis erstellen</translation>
+        <translation type="obsolete">Verzeichnis erstellen</translation>
     </message>
     <message>
         <source>Rescan</source>
-        <translation>Neu laden</translation>
+        <translation type="obsolete">Neu laden</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation>Umbenennen</translation>
+        <translation type="obsolete">Umbenennen</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation type="obsolete">Löschen</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Alle</translation>
+        <translation type="obsolete">Alle</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Datum</translation>
+        <translation type="obsolete">Datum</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation>Notiz</translation>
+        <translation type="obsolete">Notiz</translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation>Konnte nicht umbenennen</translation>
+        <translation type="obsolete">Konnte nicht umbenennen</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation>Wollen Sie wirklich löschen?
+        <translation type="obsolete">Wollen Sie wirklich löschen?
 </translation>
     </message>
     <message>
         <source> ?
 It must be empty</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Ja</translation>
+        <translation type="obsolete">Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nein</translation>
+        <translation type="obsolete">Nein</translation>
     </message>
 </context>
 </TS>

@@ -41,7 +41,7 @@
     <name>MountInfo</name>
     <message>
         <source> total: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Used (%1 kB)</source>
@@ -49,6 +49,10 @@
     </message>
     <message>
         <source>Available (%1 kB)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> : %1 kB</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -82,7 +86,7 @@
     <name>StorageInfo</name>
     <message>
         <source>CF Card</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Hard Disk</source>
@@ -90,7 +94,7 @@
     </message>
     <message>
         <source>SD Card</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
@@ -98,6 +102,10 @@
     </message>
     <message>
         <source>Internal Storage</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Int. Storage</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

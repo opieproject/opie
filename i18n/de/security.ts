@@ -59,7 +59,7 @@ Access denied</source>
     </message>
     <message>
         <source>192.168.1.0/24 (default)</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>
@@ -84,6 +84,14 @@ Access denied</source>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
         <translation>&lt;P&gt;Das Passwort bietet einen minimalen Schutz, sollte jemand unerwünscht Zugriff auf dieses Gerät erhalten.</translation>
+    </message>
+    <message>
+        <source>192.168.129.0/24 (default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>192.168.1.0/24</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

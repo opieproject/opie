@@ -107,7 +107,7 @@ Trozdem beenden?</translation>
     <name>DateBookDayHeaderBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>M</source>
@@ -246,7 +246,7 @@ Trozdem beenden?</translation>
     <name>DateBookWeekHeaderBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Y: </source>
@@ -265,7 +265,7 @@ Trozdem beenden?</translation>
     <name>DateBookWeekLstDayHdrBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
 </context>
 <context>
@@ -359,6 +359,14 @@ Trozdem beenden?</translation>
         <source>No Repeat...</source>
         <translation>Keine Wiederholung...</translation>
     </message>
+    <message>
+        <source>Start Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End Time</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateEntryBase</name>
@@ -392,7 +400,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Beschreibung</translation>
+        <translation type="obsolete">Beschreibung</translation>
     </message>
     <message>
         <source>Office</source>
@@ -404,7 +412,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Start - End</source>
-        <translation>Start - Ende</translation>
+        <translation type="obsolete">Start - Ende</translation>
     </message>
     <message>
         <source>Jan 02 00</source>
@@ -445,6 +453,29 @@ Trozdem beenden?</translation>
     <message>
         <source>No Repeat...</source>
         <translation>Keine Wiederholung...</translation>
+    </message>
+    <message>
+        <source>Description </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start - End </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NoteEntryBase</name>
+    <message>
+        <source>Edit Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;1/10&lt;/b&gt; Lunch</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -49,6 +49,10 @@
         <source>Alarm Is Off</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Set date and time.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Set_Alarm</name>
