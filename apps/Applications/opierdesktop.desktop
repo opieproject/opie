@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=ordesktop
+File=ordesktop
+Icon=opierdesktop/appicon
+Type=Application
+Name=o-rdesktop
+Comment=Remote Desktop Protocol Client
