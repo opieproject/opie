@@ -6,6 +6,7 @@ INCLUDEPATH    += $(OPIEDIR)/noncore/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe 
 INTERFACES      = pindlgbase.ui
+TARGET		= bluepin
 
 TRANSLATIONS = ../../../../i18n/de/bluepin.ts \
 	 ../../../../i18n/nl/bluepin.ts \
