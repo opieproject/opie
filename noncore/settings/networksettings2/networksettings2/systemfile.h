@@ -24,8 +24,8 @@ public :
     bool postSection( void );
     bool preNodeSection( ANetNodeInstance * NNI, long DevNr );
     bool postNodeSection( ANetNodeInstance * NNI, long DevNr );
-    bool preDeviceSection( ANetNodeInstance * NNI, long DevNr );
-    bool postDeviceSection( ANetNodeInstance * NNI, long DevNr );
+    bool preDeviceSection( ANetNode * NN );
+    bool postDeviceSection( ANetNode * NN );
 
 private :
 

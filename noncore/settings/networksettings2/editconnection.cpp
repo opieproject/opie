@@ -104,16 +104,14 @@ NodeCollection * EditConnection::getTmpCollection( void ) {
         return &(TmpCollection);
 
       // reset collection -> delete all NEW NetNodes
-      { ANetNodeInstance * NNI;
-        for( QListIterator<ANetNodeInstance> it(TmpCollection);
-             it.current();
-             ++it ) {
-          if( it.current()->isNew() ) {
-            delete it.current();
-          }
+      for( QListIterator<ANetNodeInstance> it(TmpCollection);
+           it.current();
+           ++it ) {
+        if( it.current()->isNew() ) {
+          delete it.current();
         }
-        TmpCollection.clear();
       }
+      TmpCollection.clear();
 
       // update content
       QListViewItem * it = Nodes_LV->firstChild();
@@ -135,7 +133,7 @@ NodeCollection * EditConnection::getTmpCollection( void ) {
               // this radio is selected -> go deeper
               if( SelectedNodes == 0 || 
                   NNI == 0 ||
-                  NNI->netNode()->nodeName() != it->text(0) ) {
+                  NNI->nodeClass()->nodeName() != it->text(0) ) {
                 // new item not in previous collection
                 ANetNodeInstance * NNI = (*Mapping)[it]->createInstance();
                 NNI->initialize();
@@ -198,10 +196,10 @@ void EditConnection::setConnection( NodeCollection * NC ) {
           it = it->firstChild();
           Found = 0;
           while( it ) {
-            if( NNI && NNI->netNode()->nodeName() == it->text(0) ) {
+            if( NNI && NNI->nodeClass()->nodeName() == it->text(0) ) {
               // this radio is part of the collection
               ((QCheckListItem *)it)->setOn( 1 );
-              updateGUI( it, NNI->netNode() );
+              updateGUI( it, NNI->nodeClass() );
               // check its children
               Found = 1;
               it = it->firstChild();
@@ -240,13 +238,10 @@ NodeCollection * EditConnection::connection( void ) {
       SelectedNodes->clear();
 
       // transfer 
-      { ANetNodeInstance * NNI;
-
-        for( QListIterator<ANetNodeInstance> it(TmpCollection);
-             it.current();
-             ++it ) {
-          SelectedNodes->append( it.current() );
-        }
+      for( QListIterator<ANetNodeInstance> it(TmpCollection);
+           it.current();
+           ++it ) {
+        SelectedNodes->append( it.current() );
       }
 
       if( TmpCollection.isModified() )
@@ -448,8 +443,8 @@ void EditConnection::SLOT_AlterTab( const QString & S ) {
           for ( ; it.current(); ++it ) {
             NNI = it.current();
             Devices_CB->insertItem(
-                NSResources->getPixmap( NNI->netNode()->pixmapName() ),
-                NNI->netNode()->nodeName()
+                NSResources->getPixmap( NNI->nodeClass()->pixmapName() ),
+                NNI->nodeClass()->nodeName()
             );
 
             // add edit widget

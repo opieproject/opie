@@ -174,9 +174,3 @@ bool USBRun::handlesInterface( const QString & S ) {
     return Pat.match( S ) >= 0;
 }
 
-QString USBRun::genNic( long nr ) {
-    QString S; 
-    S.sprintf( "usbf" ); 
-    return S;
-}
-

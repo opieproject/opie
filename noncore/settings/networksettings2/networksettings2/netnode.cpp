@@ -177,7 +177,7 @@ ANetNodeInstance * NodeCollection::getToplevel( void ) {
          it.current();
          ++it ) {
       NNI = it.current();
-      if( NNI->netNode()->isToplevel() )
+      if( NNI->nodeClass()->isToplevel() )
         break;
     }
     return NNI;

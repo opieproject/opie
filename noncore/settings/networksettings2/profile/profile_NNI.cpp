@@ -46,3 +46,9 @@ void AProfile::commit( void ) {
       setModified( 1 );
 }
 
+bool AProfile::generateDataForCommonFile( 
+                                SystemFile & , 
+                                long) {
+      return 1;
+}
+

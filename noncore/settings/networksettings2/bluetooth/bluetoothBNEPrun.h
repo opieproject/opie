@@ -9,11 +9,6 @@ public :
                         BluetoothBNEPData & Data ) : AsDevice( NNI )
         { }
 
-      virtual long count( void )
-        { return 3; }
-      virtual QString genNic( long nr )
-        { QString S; return S.sprintf( "bnep%ld", nr ); }
-
       virtual AsDevice * asDevice( void ) 
         { return (AsDevice *)this; }
 

@@ -29,3 +29,9 @@ void AModem::commit( void ) {
       setModified( 1 );
 }
 
+bool AModem::generateDataForCommonFile( 
+                                SystemFile & , 
+                                long ) {
+      return 1;
+}
+

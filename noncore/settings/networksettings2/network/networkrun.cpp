@@ -10,6 +10,7 @@ void NetworkRun::detectState( NodeCollection * NC ) {
     if( II ) {
       // device has assigned interface
       NC->setCurrentState( (( II->IsUp ) ? IsUp : Available) );
+      return;
     }
 
     // has no interface -> delegate

@@ -27,6 +27,9 @@ public :
       virtual void * data( void )
         { return (void *)&Data; }
 
+      virtual bool hasDataFor( const QString & S );
+      virtual bool generateDataForCommonFile( SystemFile & SF, long );
+
 protected :
 
       virtual void setSpecificAttribute( QString & Attr, QString & Value );

@@ -41,21 +41,9 @@ bool CableNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool CableNetNode::hasDataFor( const QString &, bool  ) {
-      return 0;
-}
-
-bool CableNetNode::generateDataForCommonFile( 
-                                SystemFile & , 
-                                long ,
-                                ANetNodeInstance * ) {
-      return 1;
-}
-
 bool CableNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
-                                long ,
-                                ANetNodeInstance * ) {
+                                long ) {
       return 1;
 }
 

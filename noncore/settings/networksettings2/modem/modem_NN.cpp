@@ -42,21 +42,9 @@ bool ModemNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool ModemNetNode::hasDataFor( const QString &, bool ) {
-      return 0;
-}
-
-bool ModemNetNode::generateDataForCommonFile( 
-                                SystemFile & , 
-                                long ,
-                                ANetNodeInstance * ) {
-      return 1;
-}
-
 bool ModemNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
-                                long ,
-                                ANetNodeInstance * ) {
+                                long ) {
       return 1;
 }
 

@@ -27,8 +27,9 @@ public :
       virtual void * data( void ) 
         { return (void *)&Data; }
 
-      bool generateDataForCommonFile( SystemFile & S, long DevNr );
-      bool generateDeviceDataForCommonFile( SystemFile & S, long DevNr );
+      virtual bool hasDataFor( const QString & S);
+      virtual bool generateDataForCommonFile( 
+          SystemFile & SF, long DevNr );
 
 protected :
 

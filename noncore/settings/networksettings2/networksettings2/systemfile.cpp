@@ -124,7 +124,7 @@ bool SystemFile::preNodeSection( ANetNodeInstance * NNI, long ) {
         QString S = TX.readLine();
         while( ! TX.eof() ) {
           Out = S.
-              arg(NNI->netNode()->nodeName());
+              arg(NNI->nodeClass()->nodeName());
           (*this) << Out << endl;
           S = TX.readLine();
         }
@@ -132,7 +132,7 @@ bool SystemFile::preNodeSection( ANetNodeInstance * NNI, long ) {
       return 0;
 }
 
-bool SystemFile::postNodeSection( ANetNodeInstance * NNI, long DevNr ) {
+bool SystemFile::postNodeSection( ANetNodeInstance * NNI, long ) {
       if( hasPostNodeSection ) {
         QFile Fl( TemplDir + Name + "/postnodesection" );
         if( ! Fl.open( IO_ReadOnly ) )
@@ -150,7 +150,7 @@ bool SystemFile::postNodeSection( ANetNodeInstance * NNI, long DevNr ) {
       return 0;
 }
 
-bool SystemFile::preDeviceSection( ANetNodeInstance * NNI, long ) {
+bool SystemFile::preDeviceSection( ANetNode * NN ) {
       if( hasPreDeviceSection ) {
         QFile Fl( TemplDir + Name + "/predevicesection" );
         if( ! Fl.open( IO_ReadOnly ) )
@@ -159,8 +159,7 @@ bool SystemFile::preDeviceSection( ANetNodeInstance * NNI, long ) {
         QString Out;
         QString S = TX.readLine();
         while( ! TX.eof() ) {
-          Out = S.
-              arg(NNI->netNode()->nodeName());
+          Out = S.arg(NN->nodeName());
           (*this) << Out << endl;
           S = TX.readLine();
         }
@@ -168,7 +167,7 @@ bool SystemFile::preDeviceSection( ANetNodeInstance * NNI, long ) {
       return 0;
 }
 
-bool SystemFile::postDeviceSection( ANetNodeInstance * NNI, long DevNr ) {
+bool SystemFile::postDeviceSection( ANetNode * NN ) {
       if( hasPostDeviceSection ) {
         QFile Fl( TemplDir + Name + "/postdevicesection" );
         if( ! Fl.open( IO_ReadOnly ) )
@@ -177,8 +176,7 @@ bool SystemFile::postDeviceSection( ANetNodeInstance * NNI, long DevNr ) {
         QString Out;
         QString S = TX.readLine();
         while( ! TX.eof() ) {
-          Out = S.
-              arg(NNI->nodeName());
+          Out = S.arg(NN->nodeName());
           (*this) << Out << endl;
           S = TX.readLine();
         }

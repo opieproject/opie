@@ -28,11 +28,11 @@ public:
     virtual const char * provides( void );
 
     virtual bool generateProperFilesFor( ANetNodeInstance * NNI );
-    virtual bool hasDataFor( const QString & S, bool DeviceSpec );
-    virtual bool generateDataForCommonFile( 
-        SystemFile & SF, long DevNr, ANetNodeInstance * NNI );
+    virtual bool hasDataFor( const QString & S);
     virtual bool generateDeviceDataForCommonFile( 
-        SystemFile & SF, long DevNr, ANetNodeInstance * NNI );
+        SystemFile & SF, long DevNr );
+
+    virtual QString genNic( long nr );
 
 private:
 

@@ -113,3 +113,9 @@ void APPP::commit( void ) {
     }
 }
 
+bool APPP::generateDataForCommonFile( 
+                                SystemFile & , 
+                                long) {
+      return 1;
+}
+

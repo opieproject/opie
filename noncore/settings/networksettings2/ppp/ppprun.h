@@ -12,8 +12,6 @@ public :
 
       PPPRun( ANetNodeInstance * NNI, 
               PPPData & Data );
-      virtual QString genNic( long NicNr )
-        { QString S; return S.sprintf( "ppp%ld", NicNr ); }
 
       virtual AsDevice * asDevice( void ) 
         { return (AsDevice *)this; }

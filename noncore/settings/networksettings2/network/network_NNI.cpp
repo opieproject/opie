@@ -99,9 +99,12 @@ void ANetwork::commit( void ) {
       setModified( 1 );
 }
 
+bool ANetwork::hasDataFor( const QString & S ) {
+      return S == "interfaces";
+}
+
 bool ANetwork::generateDataForCommonFile( SystemFile & S, long DevNr ) {
-    AsDevice * Dev = runtime()->device();
-    QString NIC = Dev->genNic( DevNr );
+    QString NIC = runtime()->device()->netNode()->nodeClass()->genNic( DevNr );
 
     if( S.name() == "interfaces" ) {
       // we can safely call from here since device item is deeper

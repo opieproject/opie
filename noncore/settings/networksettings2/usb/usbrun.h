@@ -15,10 +15,6 @@ public :
                 Pat( "usb[0-9abcdef]" )
         { }
 
-      virtual long count( void )
-        { return 1; }
-      virtual QString genNic( long nr );
-
       virtual AsDevice * device( void ) 
         { return (AsDevice *)this; }
 

@@ -28,3 +28,9 @@ void AVPN::commit( void ) {
       setModified( 1 );
 }
 
+bool AVPN::generateDataForCommonFile( 
+                                SystemFile & , 
+                                long) {
+      return 1;
+}
+

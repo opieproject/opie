@@ -44,22 +44,15 @@ bool PPPNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool PPPNetNode::hasDataFor( const QString &, bool  ) {
-      return 0;
-}
-
-bool PPPNetNode::generateDataForCommonFile( 
-                                SystemFile & , 
-                                long,
-                                ANetNodeInstance * ) {
-      return 1;
-}
-
 bool PPPNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
-                                long ,
-                                ANetNodeInstance * ) {
+                                long ) {
       return 1;
+}
+
+QString PPPNetNode::genNic( long NicNr ) { 
+      QString S; 
+      return S.sprintf( "ppp%ld", NicNr ); 
 }
 
 extern "C" {

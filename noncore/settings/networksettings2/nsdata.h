@@ -29,6 +29,11 @@ public :
 
 private :
 
+      QString NetworkSettingsData::generateSystemFileNode(
+              SystemFile & SF,
+              AsDevice * CurDev,
+              ANetNodeInstance * DevNNI,
+              long DevInstNr );
       bool IsModified;
       bool Force;
 

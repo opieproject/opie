@@ -43,21 +43,9 @@ bool VPNNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool VPNNetNode::hasDataFor( const QString &, bool ) {
-      return 0;
-}
-
-bool VPNNetNode::generateDataForCommonFile( 
-                                SystemFile & , 
-                                long,
-                                ANetNodeInstance * ) {
-      return 1;
-}
-
 bool VPNNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
-                                long ,
-                                ANetNodeInstance * ) {
+                                long ) {
       return 1;
 }
 

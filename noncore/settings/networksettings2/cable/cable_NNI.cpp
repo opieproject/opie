@@ -64,3 +64,10 @@ void ACable::commit( void ) {
       setModified( 1 );
     }
 }
+
+bool ACable::generateDataForCommonFile( 
+                                SystemFile & , 
+                                long ) {
+      return 1;
+}
+

@@ -42,22 +42,27 @@ bool LanCardNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool LanCardNetNode::hasDataFor( const QString & S, bool DS ) {
-      return DS && S == "interfaces";
-}
-
-bool LanCardNetNode::generateDataForCommonFile( 
-                                SystemFile & , 
-                                long ,
-                                ANetNodeInstance * ) {
-      return 1;
+bool LanCardNetNode::hasDataFor( const QString & S ) {
+      return S == "interfaces";
 }
 
 bool LanCardNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & S , 
-                                long DevNr ,
-                                ANetNodeInstance * NNI ) {
-      return ((ALanCard *)NNI)->generateDeviceDataForCommonFile(S, DevNr);
+                                long DevNr ) {
+      QString NIC = genNic( DevNr );
+
+      if( S.name() == "interfaces" ) {
+        // generate mapping stanza for this interface
+        S << "# check if " << NIC << " can be brought UP" << endl;
+        S << "mapping " << NIC << endl;
+        S << "  script networksettings2-request" << endl << endl;
+      }
+      return 0;
+}
+
+QString LanCardNetNode::genNic( long nr ) { 
+      QString S; 
+      return S.sprintf( "eth%ld", nr );
 }
 
 extern "C" {

@@ -73,7 +73,7 @@ NetworkSettings::~NetworkSettings() {
     if( ! S.isEmpty() ) {
       QMessageBox::warning(
         0, 
-        tr( "Generating system configuration" ),
+        tr( "In System Config" ),
         S 
       );
     }
@@ -183,7 +183,7 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
               if( LCN ) {
                 QMessageBox::warning(
                   0, 
-                  tr( "Generating system configuration" ),
+                  tr( "In System Config" ),
                   tr( "Name %1 already exists" ).arg(NC->name())
                 );
                 continue; // restart exec

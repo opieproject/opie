@@ -22,12 +22,6 @@ public :
     virtual void assignInterface( InterfaceInfo * NI )
       { AssignedInterface = NI; }
 
-    // number of device to configure for this Device type
-    virtual long count( void )
-      { return 1; }
-    // generate NIC name of device number ...
-    virtual QString genNic( long NicNr ) = 0;
-
 private :
 
     InterfaceInfo * AssignedInterface;

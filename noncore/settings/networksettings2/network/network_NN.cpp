@@ -43,24 +43,9 @@ bool NetworkNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool NetworkNetNode::hasDataFor( const QString & S, bool DS ) {
-      if( ! DS && S == "interfaces" ) {
-        return 1;
-      }
-      return 0;
-}
-
-bool NetworkNetNode::generateDataForCommonFile( 
-                                SystemFile & S, 
-                                long DevNr,
-                                ANetNodeInstance * NNI ) {
-      return ((ANetwork *)NNI)->generateDataForCommonFile(S, DevNr);
-}
-
 bool NetworkNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
-                                long ,
-                                ANetNodeInstance * ) {
+                                long ) {
       return 1;
 }
 

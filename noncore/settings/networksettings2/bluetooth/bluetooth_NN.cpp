@@ -49,22 +49,19 @@ bool BluetoothBNEPNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool BluetoothBNEPNetNode::hasDataFor( const QString & S, bool DS ) {
-      return DS && S == "interfaces";
-}
-
-bool BluetoothBNEPNetNode::generateDataForCommonFile( 
-                                SystemFile & , 
-                                long ,
-                                ANetNodeInstance * ) {
-      return 1;
+bool BluetoothBNEPNetNode::hasDataFor( const QString & S ) {
+      return S == "interfaces";
 }
 
 bool BluetoothBNEPNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
-                                long ,
-                                ANetNodeInstance * ) {
+                                long ) {
       return 1;
+}
+
+QString BluetoothBNEPNetNode::genNic( long nr ) { 
+      QString S; 
+      return S.sprintf( "bnep%ld", nr );
 }
 
 //
@@ -108,14 +105,13 @@ bool BluetoothRFCOMMNetNode::generateProperFilesFor(
       return 0;
 }
 
-bool BluetoothRFCOMMNetNode::hasDataFor( const QString &, bool  ) {
+bool BluetoothRFCOMMNetNode::hasDataFor( const QString &  ) {
       return 0;
 }
 
-bool BluetoothRFCOMMNetNode::generateDataForCommonFile( 
+bool BluetoothRFCOMMNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & , 
-                                long,
-                                ANetNodeInstance * ) {
+                                long ) {
       return 0;
 }
 

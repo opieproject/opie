@@ -28,3 +28,10 @@ void AIRDA::commit( void ) {
     if( GUI && GUI->commit( Data ) )
       setModified( 1 );
 }
+
+bool AIRDA::generateDataForCommonFile( 
+                                SystemFile & , 
+                                long ) {
+      return 1;
+}
+

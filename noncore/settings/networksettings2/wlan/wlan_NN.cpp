@@ -42,22 +42,27 @@ bool WLanNetNode::generateProperFilesFor(
       return 1;
 }
 
-bool WLanNetNode::hasDataFor( const QString & S, bool DS ) {
-      return DS && S == "interfaces";
-}
-
-bool WLanNetNode::generateDataForCommonFile( 
-                                SystemFile &, 
-                                long ,
-                                ANetNodeInstance * ) {
-      return 1;
+bool WLanNetNode::hasDataFor( const QString & S ) {
+      return S == "interfaces";
 }
 
 bool WLanNetNode::generateDeviceDataForCommonFile( 
                                 SystemFile & S, 
-                                long DevNr,
-                                ANetNodeInstance * NNI ) {
-      return ((AWLan *)NNI)->generateDeviceDataForCommonFile(S, DevNr);
+                                long DevNr ) {
+      QString NIC = genNic( DevNr );
+
+      if( S.name() == "interfaces" ) {
+        // generate mapping stanza for this interface
+        S << "# check if " << NIC << " can be brought UP" << endl;
+        S << "mapping " << NIC << endl;
+        S << "  script networksettings2-request" << endl << endl;
+      }
+      return 0;
+}
+
+QString WLanNetNode::genNic( long nr ) { 
+      QString S; 
+      return S.sprintf( "wlan%ld", nr );
 }
 
 extern "C" {
