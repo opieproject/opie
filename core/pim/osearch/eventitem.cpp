@@ -2,7 +2,7 @@
 //
 // C++ Implementation: $MODULE$
 //
-// Description: 
+// Description:
 //
 //
 // Author: Patrick S. Vogt <tille@handhelds.org>, (C) 2003
@@ -12,6 +12,7 @@
 //
 #include "eventitem.h"
 
+#include <qdatetime.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <opie/oevent.h>
 
@@ -38,3 +39,12 @@ void EventItem::editItem()
 	QCopEnvelope e("QPE/Application/datebook", "editEvent(int)");
 	e << _event->uid();
 }
+
+void EventItem::showItem()
+{
+	QCopEnvelope e("QPE/Application/datebook", "viewDefault(QDate)");
+	QDate day = _event->startDateTime().date();
+	qDebug("sending view day %s",day.toString().latin1());
+	e << day;
+}
+

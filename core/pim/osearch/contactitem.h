@@ -28,6 +28,8 @@ public:
     ~ContactItem();
 
     virtual QString toRichText();
+    virtual void showItem();
+    virtual void editItem();
 
 private:
 	OContact *_contact;

@@ -29,6 +29,7 @@ public:
 
     virtual QString toRichText();
     virtual void editItem();
+    virtual void showItem();
 
 private:
     OEvent *_event;
