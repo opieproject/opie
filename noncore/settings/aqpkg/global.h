@@ -18,7 +18,7 @@
 #ifndef __GLOBAL_H
 #define __GLOBAL_H
 
-#define VERSION_TEXT "AQPkg Version 0.6"
+#define VERSION_TEXT "AQPkg Version 0.7"
 
 // Uncomment the below line to run on a Linux box rather than a Zaurus
 // box this allows you to change where root is, and where to load config files from
