@@ -19,6 +19,7 @@
 /*                        */
 /* -------------------------------------------------------------------------- */
 // enhancements added by L.J. Potter <ljp@llornkcor.com>
+#define QWS_QT_OPIE
 
 #include <qpe/resource.h>
 
@@ -54,7 +55,9 @@
 #include "keytrans.h"
 #include "commandeditdialog.h"
 
+#ifdef  QWS_QT_OPIE
 #include <opie/colorpopupmenu.h>
+#endif
 
 class EKNumTabBar : public QTabBar {
 public:
@@ -292,7 +295,11 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   colorMenu->insertItem(tr( "White on Cyan"));
   colorMenu->insertItem(tr( "Blue on Black"));
   colorMenu->insertItem(tr( "Amber on Black"));
+
+#ifdef QWS_QT_OPIE
   colorMenu->insertItem(tr( "Custom"));
+#endif
+  
   configMenu->insertItem(tr( "Colors") ,colorMenu);
 
   connect( fontList, SIGNAL( activated(int) ), this, SLOT( fontChanged(int) ));
@@ -742,7 +749,9 @@ void Konsole::colorMenuSelected(int iD)
             cfg.writeEntry("Schema","18");
             colorMenu->setItemChecked(-18,TRUE);
         }
-        if(iD==-19) {// Custom
+#ifdef QWS_QT_OPIE        
+        if(iD==-19) {
+// Custom
             qDebug("do custom");
             if(fromMenu) {
             ColorPopupMenu* penColorPopupMenu = new ColorPopupMenu(Qt::black, this, "foreground color");
@@ -758,7 +767,7 @@ void Konsole::colorMenuSelected(int iD)
             fromMenu=FALSE;
             colorMenu->setItemChecked(-19,TRUE);
         }
-
+#endif
         for (i = 0; i < TABLE_COLORS; i++)  {
             if(i==0 || i == 10) {
                 m_table[i].color = foreground;
@@ -778,8 +787,8 @@ void Konsole::colorMenuSelected(int iD)
 
 void Konsole::configMenuSelected(int iD)
 {
-        QString temp;
-        qDebug( temp.sprintf("configmenu %d",iD));
+//         QString temp;
+//         qDebug( temp.sprintf("configmenu %d",iD));
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("Menubar");
@@ -797,7 +806,14 @@ void Konsole::configMenuSelected(int iD)
             cfg.writeEntry("Position","Top");
         }
     }
-    if( iD  == -29) {
+    int i;
+#ifdef QWS_QT_OPIE
+i=-29;
+#else
+i=-28;
+#endif
+
+    if( iD  == i) {
     cfg.setGroup("ScrollBar");
           bool b=cfg.readBoolEntry("HorzScroll",0);
           b=!b;
@@ -971,11 +987,13 @@ void Konsole::changeForegroundColor(const QColor &color) {
     cfg.write();
 
 qDebug("do other dialog");
+#ifdef QWS_QT_OPIE
+
  ColorPopupMenu* penColorPopupMenu2 = new ColorPopupMenu(Qt::black, this,"background color");
     connect(penColorPopupMenu2, SIGNAL(colorSelected(const QColor&)), this,
             SLOT(changeBackgroundColor(const QColor&)));
    penColorPopupMenu2->exec();
-
+#endif
 }
 
 void Konsole::changeBackgroundColor(const QColor &color) {
@@ -993,15 +1011,22 @@ void Konsole::changeBackgroundColor(const QColor &color) {
 }
 
 void Konsole::doWrap() {
-    Config cfg("Konsole");
+int i;
+#ifdef QWS_QT_OPIE
+i=-29;
+#else
+i=-28;
+#endif
+    
+ Config cfg("Konsole");
     cfg.setGroup("ScrollBar");
     TEWidget* te = getTe();
     if( !cfg.readBoolEntry("HorzScroll",0)) {
         te->setWrapAt(0);
-        configMenu->setItemChecked(-29,FALSE);
+        configMenu->setItemChecked( i,FALSE);
     } else {
         te->setWrapAt(90);
 //        te->setWrapAt(120);
-        configMenu->setItemChecked(-29,TRUE);
+        configMenu->setItemChecked( i,TRUE);
     }       
 }
