@@ -24,15 +24,6 @@ class QCheckListItem;
 class QPushButton;
 class QListView;
 
-//#define       INT_TEST_ITERATIONS      50
-//#define       CHAR_TEST_ITERATIONS     15000
-//#define       DRAW_TEST_ITERATIONS     5000
-
-#define       INT_TEST_ITERATIONS      50
-#define       DHRYSTONE_RUNS           20000000
-#define       CHAR_TEST_ITERATIONS     15000
-#define       DRAW_TEST_ITERATIONS     5000
-
 class BenchmarkInfo : public QWidget
 {
     Q_OBJECT
@@ -61,9 +52,8 @@ public:
     QListView* tests;
     QPushButton* startButton;
 
-    void benchInteger() const;
-    void paintChar();
-    void paintLineRect();
+    int textRendering( int );
+    int gfxRendering( int );
     bool writeFile( const QString& );
     bool readFile( const QString& );
 

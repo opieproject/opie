@@ -50,6 +50,9 @@ extern "C"
     double dhry_main( int );
 }
 
+#define DHRYSTONE_RUNS   20000000
+#define TEST_DURATION    3
+
 //===========================================================================
 
 class BenchmarkPaintWidget : public QWidget
@@ -125,7 +128,7 @@ void BenchmarkInfo::run()
     if ( test_alu->isOn() )
     {
         int d = round( dhry_main( DHRYSTONE_RUNS ) );
-        test_alu->setText( 1, QString( "%1 DHRYS" ).arg( QString::number( d ) ) );
+        test_alu->setText( 1, QString( "%1 dhrys" ).arg( QString::number( d ) ) );
         test_alu->setOn( false );
     }
 
@@ -139,17 +142,15 @@ void BenchmarkInfo::run()
 
     if ( test_txt->isOn() )
     {
-        t.start();
-        paintChar();
-        test_txt->setText( 1, QString( "%1 secs" ).arg( QString::number( t.elapsed() / 1000.0 ) ) );
+        int value = textRendering( TEST_DURATION );
+        test_txt->setText( 1, QString( "%1 chars/sec" ).arg( QString::number( value / TEST_DURATION ) ) );
         test_txt->setOn( false );
     }
 
     if ( test_gfx->isOn() )
     {
-        t.start();
-        paintLineRect();
-        test_gfx->setText( 1, QString( "%1 secs" ).arg( QString::number( t.elapsed() / 1000.0 ) ) );
+        int value = gfxRendering( TEST_DURATION );
+        test_gfx->setText( 1, QString( "%1 gops/sec" ).arg( QString::number( value / 4 / TEST_DURATION ) ) ); // 4 tests
         test_gfx->setOn( false );
     }
 
@@ -190,33 +191,12 @@ void BenchmarkInfo::run()
 }
 
 
-void BenchmarkInfo::benchInteger() const
+int BenchmarkInfo::textRendering( int seconds )
 {
-    long dummy = 1;
+    QTime t;
+    t.start();
+    int stop = t.elapsed() + seconds * 1000;
 
-    for ( long i= 0 ; i < INT_TEST_ITERATIONS ; i++ )
-    {
-        for ( long j= 0 ; j < INT_TEST_ITERATIONS ; j++ )
-        {
-            for( long k= 0 ; k < INT_TEST_ITERATIONS ; k++ )
-            {
-                long xx = ( rand() % 1000 + 111 ) * 7 / 3 + 31;
-                long yy = ( rand() % 100 + 23 ) * 11 / 7 + 17;
-                long zz = ( rand() % 100 + 47 ) * 13 / 11 - 211;
-                dummy = xx * yy / zz;
-                dummy *= 23;
-                dummy += ( xx - yy + zz );
-                dummy -= ( xx + yy - zz );
-                dummy *= ( xx * zz * yy );
-                dummy /= 1 + ( xx * yy * zz );
-            }
-        }
-    }
-}
-
-
-void BenchmarkInfo::paintChar()
-{
     int rr[] = { 255, 255, 255, 0, 0, 0, 0, 128, 128 };
     int gg[] = { 0, 255, 0, 0, 255, 255, 0, 128, 128 };
     int bb[] = { 0, 0, 255, 0, 0, 255, 255, 128, 0 };
@@ -229,16 +209,22 @@ void BenchmarkInfo::paintChar()
 
     BenchmarkPaintWidget bpw;
 
-    for ( int i = 0; i < CHAR_TEST_ITERATIONS; ++i )
+    int loops = 0;
+    
+    while ( t.elapsed() < stop )
     {
         int k = rand() % 9;
+        int s = rand() % 100;
         bpw.p.setPen( QColor( rr[ k ], gg[ k ], bb[ k ] ) );
-        bpw.p.setFont( QFont( "Vera", k*10 ) );
+        bpw.p.setFont( QFont( "Vera", s ) );
         bpw.p.drawText( rand() % w, rand() % h, text, text.length() );
+        ++loops;
     }
+    
+    return loops * text.length();
 }
 
-void BenchmarkInfo::paintLineRect()
+int BenchmarkInfo::gfxRendering( int seconds )
 {
     int rr[] = { 255, 255, 255, 0, 0, 0, 0, 128, 128 };
     int gg[] = { 0, 255, 0, 0, 255, 255, 0, 128, 128 };
@@ -251,37 +237,55 @@ void BenchmarkInfo::paintLineRect()
 
     BenchmarkPaintWidget bpw;
 
-    for ( int i = 0; i < DRAW_TEST_ITERATIONS*3; ++i )
+    QTime t;
+    t.start();
+    int stop = t.elapsed() + seconds*1000;
+    int loops = 0;
+    
+    while ( t.elapsed() < stop )
     {
         int k = rand() % 9;
         bpw.p.setPen( QColor( rr[ k ], gg[ k ], bb[ k ] ) );
         bpw.p.drawLine( rand()%w, rand()%h, rand()%w, rand()%h );
+        ++loops;
     }
 
-    for ( int i = 0; i < DRAW_TEST_ITERATIONS; ++i )
+    t.restart();
+    stop = t.elapsed() + seconds*1000;
+    
+    while ( t.elapsed() < stop )
     {
         int k = rand() % 9;
         bpw.p.setPen( QColor( rr[ k ], gg[ k ], bb[ k ] ) );
         bpw.p.drawArc( rand()%w, rand()%h, rand()%w, rand()%h, 360 * 16, 360 * 16 );
+        ++loops;
     }
 
     QBrush br1;
     br1.setStyle( SolidPattern );
-
-    for ( int i = 0; i < DRAW_TEST_ITERATIONS*2; ++i )
+    t.restart();
+    stop = t.elapsed() + seconds*1000;
+    
+    while ( t.elapsed() < stop )
     {
         int k = rand() % 9;
         br1.setColor( QColor( rr[ k ], gg[ k ], bb[ k ] ) );
         bpw.p.fillRect( rand()%w, rand()%h, rand()%w, rand()%h, br1 );
+        ++loops;
     }
 
-    QPixmap p = Resource::loadPixmap( "pattern" );
-    for ( int i = 0; i < DRAW_TEST_ITERATIONS; ++i )
+    QPixmap p = Resource::loadPixmap( "sysinfo/pattern" );
+    t.restart();
+    stop = t.elapsed() + seconds*1000;
+    
+    while ( t.elapsed() < stop )
     {
         bpw.p.drawPixmap( rand()%w, rand()%h, p );
+        ++loops;
     }
 
-
+    return loops;
+    
 }
 
 // **********************************************************************
