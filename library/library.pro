@@ -125,7 +125,7 @@ INTERFACES = passwordbase_p.ui categoryeditbase_p.ui findwidgetbase_p.ui lnkprop
 TARGET		= qpe
 DESTDIR		= $(QTDIR)/lib$(PROJMAK)
 # This is set by configure$(OPIEDIR).
-VERSION		= 1.5.0
+VERSION		= 1.5.0.1
 
 TRANSLATIONS = ../i18n/de/libqpe.ts
 TRANSLATIONS += ../i18n/es/libqpe.ts
