@@ -63,7 +63,7 @@ lrelease.target = lrelease
 lrelease.commands = lrelease $(PRO)
 
 ipk.target = ipk
-ipk.commands = tmp=`mktemp -d /tmp/ipkg-opie.XXXXXXXXXX` && ( $(MAKE) DESTDIR="$$$$tmp" install && ipkg-build $$$$tmp; rm -rf $$$$tmp; )
+ipk.commands = tmp=`mktemp -d /tmp/ipkg-opie.XXXXXXXXXX` && ( $(MAKE) INSTALL_ROOT="$$$$tmp" install && ipkg-build $$$$tmp; rm -rf $$$$tmp; )
 
 QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk
 
