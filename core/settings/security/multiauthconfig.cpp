@@ -3,6 +3,7 @@
 #include <opie2/odebug.h>
 
 #include <qgroupbox.h>
+#include <qvgroupbox.h>
 #include <qpe/resource.h>
 #include <qlayout.h>
 #include <qlabel.h>
@@ -55,8 +56,8 @@ class ToolButton : public QToolButton {
             }
 };
 
-MultiauthGeneralConfig::MultiauthGeneralConfig(QWidget * parent, const char * name = "general Opie-multiauthentication config widget")
-    : QWidget(parent, name), onStart(0), onResume(0), nbSuccessMin(0)
+    MultiauthGeneralConfig::MultiauthGeneralConfig(QWidget * parent, const char * name = "general Opie-multiauthentication config widget")
+: QWidget(parent, name), onStart(0), onResume(0), nbSuccessMin(0)
 {
     QVBoxLayout *vb = new QVBoxLayout(this);
     vb->setSpacing(11);
@@ -131,53 +132,68 @@ static void test_and_start() {
     bool protectConfigDialog = ! pcfg.readBoolEntry("noProtectConfig", true);
 
     if (protectConfigDialog && Opie::Security::Internal::runPlugins() != 0) {
-         owarn << "authentication failed, not showing opie-security" << oendl;
+        owarn << "authentication failed, not showing opie-security" << oendl;
         exit( -1 );
     }
 }
 
 
 
-MultiauthConfig::MultiauthConfig(QWidget* par, const char* w,  WFlags f)
-    : QDialog(par, w, TRUE, f),
-      m_mainTW(0), m_pluginListView(0), m_pluginListWidget(0),
-      m_generalConfig(0), m_loginWidget(0), m_syncWidget(0),
-      m_nbSuccessReq(0), m_plugins_changed(false)
+    MultiauthConfig::MultiauthConfig(QWidget* par, const char* w,  WFlags f)
+: QDialog(par, w, TRUE, f),
+    m_mainTW(0), m_pluginListView(0), m_pluginListWidget(0),
+    m_generalConfig(0), m_loginWidget(0), m_syncWidget(0),
+    m_nbSuccessReq(0), m_plugins_changed(false)
 {
     /* Initializes the global configuration window
-     */
+    */
     test_and_start();
+
+    /* Checks (and memorizes) if any authentication plugins are
+     * installed on the system
+     */
+    QString path = QPEApplication::qpeDir() + "/plugins/security";
+    QDir dir( path, "lib*.so" );
+    QStringList list = dir.entryList();
+    
+    m_pluginsInstalled = ! list.isEmpty();
+    if (m_pluginsInstalled == false)
+        owarn << "no authentication plugins installed! Talking about it in the last tab..." << oendl;
 
     setCaption( tr( "Security configuration" ) );
     QVBoxLayout *layout = new QVBoxLayout( this );
     m_mainTW = new Opie::Ui::OTabWidget( this );
     layout->addWidget(m_mainTW);
-    m_pluginListWidget = new QWidget(m_mainTW, "plugin list widget");
-    QVBoxLayout * pluginListLayout = new QVBoxLayout(m_pluginListWidget);
-    pluginListLayout->setSpacing(6);
-    pluginListLayout->setMargin(11);
-    QLabel * pluginListTitle = new QLabel( tr( "Load which plugins in what order:" ), m_pluginListWidget );
-    pluginListLayout->addWidget(pluginListTitle);
-    QHBox * pluginListHB = new QHBox(m_pluginListWidget);
-    pluginListLayout->addWidget(pluginListHB);
 
-    m_pluginListView = new QListView(pluginListHB);
-    m_pluginListView->addColumn("PluginList");
-    m_pluginListView->header()->hide();
-    m_pluginListView->setSorting(-1);
-    QWhatsThis::add(m_pluginListView, tr( "Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the order they will appear in" ));
+    if (m_pluginsInstalled)
+    {
+        m_pluginListWidget = new QWidget(m_mainTW, "plugin list widget");
+        QVBoxLayout * pluginListLayout = new QVBoxLayout(m_pluginListWidget);
+        pluginListLayout->setSpacing(6);
+        pluginListLayout->setMargin(11);
+        QLabel * pluginListTitle = new QLabel( tr( "Load which plugins in what order:" ), m_pluginListWidget );
+        pluginListLayout->addWidget(pluginListTitle);
+        QHBox * pluginListHB = new QHBox(m_pluginListWidget);
+        pluginListLayout->addWidget(pluginListHB);
 
-    QVBox * pluginListVB = new QVBox(pluginListHB);
-    new ToolButton( pluginListVB, tr( "Move Up" ), "up",  this , SLOT( moveSelectedUp() ) );
-    new ToolButton( pluginListVB, tr( "Move Down" ), "down", this , SLOT( moveSelectedDown() ) );
-    m_mainTW->addTab( m_pluginListWidget, "pass", tr( "plugins" ) );
+        m_pluginListView = new QListView(pluginListHB);
+        m_pluginListView->addColumn("PluginList");
+        m_pluginListView->header()->hide();
+        m_pluginListView->setSorting(-1);
+        QWhatsThis::add(m_pluginListView, tr( "Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the order they will appear in" ));
 
-    connect ( m_pluginListView , SIGNAL( clicked ( QListViewItem * ) ), this, SLOT( pluginsChanged ( ) ) );
+        QVBox * pluginListVB = new QVBox(pluginListHB);
+        new ToolButton( pluginListVB, tr( "Move Up" ), "up",  this , SLOT( moveSelectedUp() ) );
+        new ToolButton( pluginListVB, tr( "Move Down" ), "down", this , SLOT( moveSelectedDown() ) );
+        m_mainTW->addTab( m_pluginListWidget, "pass", tr( "plugins" ) );
 
-    // general Opie multi-authentication configuration tab
-    m_generalConfig = new MultiauthGeneralConfig(m_mainTW);
-    m_mainTW->addTab(m_generalConfig, "SettingsIcon", tr( "Authentication") );
+        connect ( m_pluginListView , SIGNAL( clicked ( QListViewItem * ) ), this, SLOT( pluginsChanged ( ) ) );
 
+        // general Opie multi-authentication configuration tab
+        m_generalConfig = new MultiauthGeneralConfig(m_mainTW);
+        m_mainTW->addTab(m_generalConfig, "SettingsIcon", tr( "Authentication") );
+
+    }
     // login settings page
     m_loginWidget = new LoginBase(m_mainTW, "login config widget");
     m_mainTW->addTab(m_loginWidget, "security/users", tr( "Login") );
@@ -189,40 +205,63 @@ MultiauthConfig::MultiauthConfig(QWidget* par, const char* w,  WFlags f)
     // read the "Security" Config file and update our UI
     readConfig();
 
-    /* loads plugins configuration widgets in mainTW tabs and in pluginListView
-     */
 
-    loadPlugins();
+    if (m_pluginsInstalled)
+    {
+        /* loads plugins configuration widgets in mainTW tabs and in pluginListView
+        */
 
-    for ( int i = pluginList.count() - 1; i >= 0; i-- ) {
-        MultiauthPlugin plugin = pluginList[i];
+        loadPlugins();
 
-        // load the config widgets in the tabs
-        // (configWidget will return 0l if there is no configuration GUI)
-        MultiauthConfigWidget* widget = plugin.pluginObject->configWidget(m_mainTW);
-        if ( widget != 0l ) {
-            odebug << "plugin " << plugin.name << " has a configuration widget" << oendl;
-            configWidgetList.append(widget);
-            m_mainTW->addTab( widget, plugin.pluginObject->pixmapNameConfig(),
-                              plugin.pluginObject->pluginName() );
+        for ( int i = pluginList.count() - 1; i >= 0; i-- ) {
+            MultiauthPlugin plugin = pluginList[i];
+
+            // load the config widgets in the tabs
+            // (configWidget will return 0l if there is no configuration GUI)
+            MultiauthConfigWidget* widget = plugin.pluginObject->configWidget(m_mainTW);
+            if ( widget != 0l ) {
+                odebug << "plugin " << plugin.name << " has a configuration widget" << oendl;
+                configWidgetList.append(widget);
+                m_mainTW->addTab( widget, plugin.pluginObject->pixmapNameConfig(),
+                                  plugin.pluginObject->pluginName() );
+            }
+            // set the order/activate tab
+            QPixmap icon = Resource::loadPixmap( plugin.pluginObject->pixmapNameWidget() );
+            QCheckListItem * item = new QCheckListItem(m_pluginListView, plugin.pluginObject->pluginName(), QCheckListItem::CheckBox );
+            if ( !icon.isNull() ) {
+                item->setPixmap( 0, icon );
+            }
+            if ( m_excludePlugins.find( plugin.name ) == m_excludePlugins.end() ) {
+                item->setOn( TRUE );
+            }
+            m_plugins[plugin.name] = item;
         }
-        // set the order/activate tab
-        QPixmap icon = Resource::loadPixmap( plugin.pluginObject->pixmapNameWidget() );
-        QCheckListItem * item = new QCheckListItem(m_pluginListView, plugin.pluginObject->pluginName(), QCheckListItem::CheckBox );
-        if ( !icon.isNull() ) {
-            item->setPixmap( 0, icon );
-        }
-        if ( m_excludePlugins.find( plugin.name ) == m_excludePlugins.end() ) {
-            item->setOn( TRUE );
-        }
-        m_plugins[plugin.name] = item;
+
+        // set the first tab as default.
+        m_mainTW->setCurrentTab(m_pluginListWidget);
+
+        // put the number of plugins as the max number of req. auth.
+        m_generalConfig->nbSuccessMin->setMaxValue( pluginList.count() );
     }
+    else
+    {
+        /* we don't have any installed plugin there. Let's tell
+         * that to the user in a third tab, using the m_pluginListWidget widget
+         */
+        m_pluginListWidget = new QWidget(m_mainTW, "plugin list widget (no plugins warning)");
+        QVBoxLayout * pluginListLayout = new QVBoxLayout(m_pluginListWidget);
+        pluginListLayout->setSpacing(11);
+        pluginListLayout->setMargin(11);
+        pluginListLayout->setAlignment( Qt::AlignTop );
+        QVGroupBox *warningBox = new QVGroupBox(tr("Important notice"), m_pluginListWidget, "noPlugins warning box");
+        pluginListLayout->addWidget(warningBox);
+        QLabel * warningText = new QLabel( "<p>" + tr("To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one <em>opie-multiauth-*</em> package! Once you have done that, you will be able to configure your PDA protection here.") + "</p>", warningBox );
 
-    // set the first tab as default.
-    m_mainTW->setCurrentTab(m_pluginListWidget);
+        m_mainTW->addTab(m_pluginListWidget, "security/Security", tr( "Locking") );
 
-    // put the number of plugins as the max number of req. auth.
-    m_generalConfig->nbSuccessMin->setMaxValue( pluginList.count() );
+        // set the first tab as default.
+        m_mainTW->setCurrentTab(m_loginWidget);
+    }
 
     showMaximized();
 }
@@ -271,17 +310,21 @@ void MultiauthConfig::readConfig()
 {
     // pointer, so we release this Config when we want
     Config* pcfg = new Config("Security");
-    pcfg->setGroup( "Misc" );
-    m_generalConfig->onStart->setChecked( pcfg->readBoolEntry( "onStart", false ) );
-    m_generalConfig->onResume->setChecked( pcfg->readBoolEntry( "onResume", false ) );
-    m_generalConfig->nbSuccessMin->setValue( pcfg->readNumEntry( "nbSuccessMin", 1 ) );
-    m_generalConfig->noProtectConfig->setChecked( pcfg->readBoolEntry( "noProtectConfig", true) );
-    m_generalConfig->explanScreens->setChecked( pcfg->readBoolEntry( "explanScreens", true ) );
-    m_generalConfig->allowBypass->setChecked( pcfg->readBoolEntry( "allowBypass", false ) );
 
-    pcfg->setGroup( "Plugins" );
-    m_excludePlugins = pcfg->readListEntry( "ExcludePlugins", ',' );
-    m_allPlugins = pcfg->readListEntry( "AllPlugins", ',' );
+    if (m_pluginsInstalled)
+    {
+        pcfg->setGroup( "Misc" );
+        m_generalConfig->onStart->setChecked( pcfg->readBoolEntry( "onStart", false ) );
+        m_generalConfig->onResume->setChecked( pcfg->readBoolEntry( "onResume", false ) );
+        m_generalConfig->nbSuccessMin->setValue( pcfg->readNumEntry( "nbSuccessMin", 1 ) );
+        m_generalConfig->noProtectConfig->setChecked( pcfg->readBoolEntry( "noProtectConfig", true) );
+        m_generalConfig->explanScreens->setChecked( pcfg->readBoolEntry( "explanScreens", true ) );
+        m_generalConfig->allowBypass->setChecked( pcfg->readBoolEntry( "allowBypass", false ) );
+
+        pcfg->setGroup( "Plugins" );
+        m_excludePlugins = pcfg->readListEntry( "ExcludePlugins", ',' );
+        m_allPlugins = pcfg->readListEntry( "AllPlugins", ',' );
+    }
 
     /* Login and Sync stuff */
     pcfg->setGroup("Sync");
@@ -313,7 +356,7 @@ void MultiauthConfig::readConfig()
        ssh->setChecked(cfg.readEntry("allow_ssh"));
        else
        ssh->hide();
-     */
+       */
 
     // release the Config handler
     delete pcfg;
@@ -351,38 +394,42 @@ void MultiauthConfig::readConfig()
 void MultiauthConfig::writeConfig()
 {
     Config* pcfg = new Config("Security");
-    pcfg->setGroup( "Plugins" );
-    QStringList exclude;
-    QStringList include;
-    QStringList allPlugins;
 
-    QListViewItemIterator list_it( m_pluginListView );
+    if (m_pluginsInstalled)
+    {
+        pcfg->setGroup( "Plugins" );
+        QStringList exclude;
+        QStringList include;
+        QStringList allPlugins;
 
-    // this makes sure the names get saved in the order selected
-    for ( ; list_it.current(); ++list_it ) {
-        QMap <QString, QCheckListItem *>::Iterator it;
-        for ( it = m_plugins.begin(); it != m_plugins. end (); ++it ) {
-            if ( list_it.current() == (*it) && !(*it)-> isOn () ) {
-                exclude << it.key();
-            } else if ( list_it.current() == (*it) && (*it)-> isOn () ){
-                include << it.key();
-            }
-            if ( list_it.current() == (*it) ) {
-                allPlugins << it.key();
+        QListViewItemIterator list_it( m_pluginListView );
+
+        // this makes sure the names get saved in the order selected
+        for ( ; list_it.current(); ++list_it ) {
+            QMap <QString, QCheckListItem *>::Iterator it;
+            for ( it = m_plugins.begin(); it != m_plugins. end (); ++it ) {
+                if ( list_it.current() == (*it) && !(*it)-> isOn () ) {
+                    exclude << it.key();
+                } else if ( list_it.current() == (*it) && (*it)-> isOn () ){
+                    include << it.key();
+                }
+                if ( list_it.current() == (*it) ) {
+                    allPlugins << it.key();
+                }
             }
         }
-    }
-    pcfg->writeEntry( "ExcludePlugins", exclude, ',' );
-    pcfg->writeEntry( "IncludePlugins", include, ',' );
-    pcfg->writeEntry( "AllPlugins",  allPlugins, ',' );
+        pcfg->writeEntry( "ExcludePlugins", exclude, ',' );
+        pcfg->writeEntry( "IncludePlugins", include, ',' );
+        pcfg->writeEntry( "AllPlugins",  allPlugins, ',' );
 
-    pcfg->setGroup( "Misc" );
-    pcfg->writeEntry( "onStart",  m_generalConfig->onStart->isChecked() );
-    pcfg->writeEntry( "onResume",  m_generalConfig->onResume->isChecked() );
-    pcfg->writeEntry( "nbSuccessMin",  m_generalConfig->nbSuccessMin->text() );
-    pcfg->writeEntry( "noProtectConfig",  m_generalConfig->noProtectConfig->isChecked() );
-    pcfg->writeEntry( "explanScreens",  m_generalConfig->explanScreens->isChecked() );
-    pcfg->writeEntry( "allowBypass",  m_generalConfig->allowBypass->isChecked() );
+        pcfg->setGroup( "Misc" );
+        pcfg->writeEntry( "onStart",  m_generalConfig->onStart->isChecked() );
+        pcfg->writeEntry( "onResume",  m_generalConfig->onResume->isChecked() );
+        pcfg->writeEntry( "nbSuccessMin",  m_generalConfig->nbSuccessMin->text() );
+        pcfg->writeEntry( "noProtectConfig",  m_generalConfig->noProtectConfig->isChecked() );
+        pcfg->writeEntry( "explanScreens",  m_generalConfig->explanScreens->isChecked() );
+        pcfg->writeEntry( "allowBypass",  m_generalConfig->allowBypass->isChecked() );
+    }
 
     /* Login and Sync stuff */
 
@@ -400,7 +447,10 @@ void MultiauthConfig::writeConfig()
     for (int i=0; i<10; i++) {
         QString target;
         target.sprintf("net%d", i);
-        pcfg->writeEntry(target,m_syncWidget->syncnet->text(i));
+        if ( i < m_syncWidget->syncnet->count() )
+            pcfg->writeEntry(target, m_syncWidget->syncnet->text(i));
+        else // no more entry in the syncnet list -> we clear the line
+            pcfg->writeEntry(target, "");
     }
 
 #ifdef ODP
@@ -429,7 +479,7 @@ void MultiauthConfig::writeConfig()
        if ( sshAvailable() )
        pcfg->writeEntry("allow_ssh",ssh->isChecked());
     // ### write ssh/telnet sys config files
-     */
+    */
 
     //release the Config handler
     delete pcfg;

@@ -121,6 +121,7 @@ private:
 
     int m_nbSuccessReq;
     bool m_plugins_changed;
+    bool m_pluginsInstalled;
     
     void readConfig();
     void loadPlugins();
