@@ -1,64 +1,56 @@
-As to popular request....
+TODO:
 
-1.) fix up the core/backend mess.
+ -  Exposing of Attributes of a Record in OPimRecord (translatable and sortable)
+ -  Add generic Journal Implementation for the XML files
+ -  fix up the core/backend mess.
     The actual Backend Implementation + Interface should be there
     The API frontend used by the developer should not be used
 
 	Rename ODateBookAccess* to OPimDateBookAccess*
 	Rename OContactAccess* to OpimContactAccess*
 	Fix filenames to OPim* ...    
-
-2.) Move sorting, Query By Example, Exposing of Attributes of a Record
-    available to the Ptr base class and have sane implementation
-    on the template level
     
-3.) Have something like QProperty to expose attributes from OPimRecord.
+ -  Have something like QProperty to expose attributes from OPimRecord.
     This would include exporting,importing of data, and translated names.
     This can be used for Cross Reference, Selector Widget, Generic Table
-    Shower
-    
-4.) Marshall/Demarshall all PIM Records correctly
+    Shower    
+ -  Marshall/Demarshall all PIM Records correctly
+ -  Flag the OPimRecord to which backend it belongs. And make it accessible
+    for the internal implementations    
+ -  Add signals for updating/adding/removing records to the access template
+    Internal connect method and keep the backends current    
+ -  internal QCOP communication between the interfaces
+ -  GUI:Better and Improved Recurrence Widget
+ -  GUI:Improved Alarm Widget and handling classes
+ -  GUI:Undo/Redo template look at KDE
+ -  GUI: Generic X-Ref Selector using the factory and pointer interface
+ -  GUI: Factory and also registration of foreign services. generate a records of type
+ -  Multiple Backends for an Access Template
+ -  ReadOnly Access
+ -  GUI: Generic Table Widget maybe even baed on Selector with 
+     configuration of shown Attribute   
+ -  Multiple Categories with Sub Categories including popup selector
+    Widget. Fix Bug with changing visible. Both helper class + gui. 
+    Also group PopupNames  Like in Function Menu of XEmacs     
+ -  ListView for TodolIst At least introduce parents and child
+    And query for them     
+ -  Clean Up
+ -  Datebook Classes
+ -  Better helper for AlarmServer
 
-5.) Add the Private Backend to the OPimRecord ( private ) make the base
-    access class friend and allow retrieving the backend. Make it virtual
-    so the template gets the right pointer. So it can only be accessed from
-    the inside
-    
-6.) Add signals for updating/adding/removing records to the access template
-    Internal connect method
-    
-7.) internal QCOP communication between the interfaces
 
-8.) GUI:Better and Improved Recurrence Widget
+Work in Progress
 
-9.) GUI:Improved Alarm Widget and handling classes
+- Fully implement sorting and filtering in generic Contact Backend
+- Implement QueryByExample generically in Todo,Event,Contact
+- Add querySettings to OPimAccessBackend as used to be found in OContactAccess(Backend)
+- Implement accelerated versions of sort,filter,queryByExample in the SQL resources
 
-10.) GUI:Undo/Redo template look at KDE
 
-11.) GUI: Generic X-Ref Selector using the factory and pointer interface
 
-12.) GUI: Factory and also registration of foreign services. generate a records of type
+Done
 
-13.) Multiple Backends for an Access Template
-
-14.) ReadOnly Access
-
-15.) GUI: Generic Table Widget maybe even baed on Selector with 
-     configuration of shown Attribute
-    
-16.) Multiple Categories with Sub Categories including popup selector
-     Widget. Fix Bug with changing visible. Both helper class + gui. 
-     Also group PopupNames  Like in Function Menu of XEmacs
-     
-17.) ListView for TodolIst At least introduce parents and child
-     And query for them
-     
-18.) Add querieng to Ptr Level for dates and date ranges. 
-     Return OEffectiveEvents or such which is also only loaded
-     if required.
-
-19.) Clean Up
-
-20.) Datebook Classes
-
-22.) Better helper for AlarmServer
+- Move sorting, Query By Example to  the Ptr base class
+- Added OPimOccurrence, OPimBackendOccurrence and conversion
+- Added Sort Implementation for Contact and Todo
+- Generic Implementation of sorting and filtering for Todos
