@@ -50,7 +50,7 @@ void MainWindow::initUI() {
      * new Action for new sessions
      */
     QAction* a = new QAction(tr("New Connection"),
-                             Resource::loadPixmap( "new" ), 
+                             Resource::loadPixmap( "new" ),
                              QString::null, 0, this, 0);
     a->addTo( m_console );
     a->addTo( m_icons );
@@ -100,7 +100,7 @@ void MainWindow::initUI() {
      * the settings action
      */
     m_setProfiles = new QAction(tr("Configure Profiles"),
-                             Resource::loadPixmap( "SettingsIcon" ), 
+                             Resource::loadPixmap( "SettingsIcon" ),
                              QString::null, 0, this, 0);
     m_setProfiles->addTo( m_settings );
     m_setProfiles->addTo( m_icons );
@@ -113,11 +113,11 @@ void MainWindow::initUI() {
     m_recordScript = new QAction(tr("Record Script"), QString::null, 0, this, 0);
     m_recordScript->addTo(m_scripts);
     connect(m_recordScript, SIGNAL(activated()), this, SLOT(slotRecordScript()));
-    
+
     m_saveScript = new QAction(tr("Save Script"), QString::null, 0, this, 0);
     m_saveScript->addTo(m_scripts);
     connect(m_saveScript, SIGNAL(activated()), this, SLOT(slotSaveScript()));
-    
+
     m_runScript = new QAction(tr("Run Script"), QString::null, 0, this, 0);
     m_runScript->addTo(m_scripts);
     connect(m_runScript, SIGNAL(activated()), this, SLOT(slotRunScript()));
@@ -125,16 +125,16 @@ void MainWindow::initUI() {
     /*
      * action that open/closes the keyboard
      */
-    m_openKeys = new QAction (tr("Open Keyboard..."), 
-                             Resource::loadPixmap( "down" ), 
+    m_openKeys = new QAction (tr("Open Keyboard..."),
+                             Resource::loadPixmap( "down" ),
                              QString::null, 0, this, 0);
 
     m_openKeys->setToggleAction(true);
 
-    connect (m_openKeys, SIGNAL(toggled(bool)), 
+    connect (m_openKeys, SIGNAL(toggled(bool)),
              this, SLOT(slotOpenKeb(bool)));
     m_openKeys->addTo(m_icons);
-    
+
 
     /* insert the submenu */
     m_console->insertItem(tr("New from Profile"), m_sessionsPop,
@@ -145,7 +145,7 @@ void MainWindow::initUI() {
 
     /* the scripts menu */
     m_bar->insertItem( tr("Scripts"), m_scripts );
-    
+
     /* the settings menu */
     m_bar->insertItem( tr("Settings"), m_settings );
 
@@ -156,7 +156,7 @@ void MainWindow::initUI() {
     m_keyBar->hide();
 
     m_kb = new FunctionKeyboard(m_keyBar);
-             
+
     /*
      * connect to the menu activation
      */
@@ -202,6 +202,7 @@ QList<Session> MainWindow::sessions() {
 void MainWindow::slotNew() {
     qWarning("New Connection");
     ProfileEditorDialog dlg(factory() );
+    dlg.showMaximized();
     int ret = dlg.exec();
 
     if ( ret == QDialog::Accepted ) {

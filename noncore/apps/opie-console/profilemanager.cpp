@@ -77,7 +77,7 @@ Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent) {
 
     QWidgetStack *stack = new QWidgetStack(parent);
     session->setWidgetStack( stack );
-    QWidget* dummy = new QWidget(stack );
+    QWidget* dummy = new QWidget( stack );
     QHBoxLayout* lay = new QHBoxLayout(dummy );
     stack->addWidget( dummy, 0 );
     stack->raiseWidget( 0 );
