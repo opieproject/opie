@@ -89,6 +89,9 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     setUpdatesEnabled( true );
     viewport()->setUpdatesEnabled( true );
     viewport()->update();
+    setSortOrder( 0 );
+    setAscending( TRUE );
+    m_first = true;
 }
 /* a new day has started
  * update the day
@@ -109,9 +112,9 @@ QString TableView::type() const {
     return QString::fromLatin1( tr("Table View") );
 }
 int TableView::current() {
-    int cur = 0;
-    // FIXME
-    return cur;
+    int uid = sorted().uidAt(currentRow() );
+    qWarning("uid %d", uid );
+    return uid;
 }
 QString TableView::currentRepresentation() {
     return text( currentRow(), 2);
@@ -123,8 +126,6 @@ void TableView::showOverDue( bool ) {
 }
 
 void TableView::updateView( ) {
-    setSortOrder( 0 );
-    setAscending( true );
     sort();
     OTodoAccess::List::Iterator it, end;
     it = sorted().begin();
@@ -187,9 +188,14 @@ void TableView::setShowDeadline( bool b) {
     else
         hideColumn(3 );
 }
-void TableView::setShowCategory( const QString& ) {
+void TableView::setShowCategory( const QString& str) {
     qWarning("setShowCategory");
-    updateView();
+    if ( str != m_oleCat || m_first )
+        updateView();
+
+    m_oleCat = str;
+    m_first = false;
+
 }
 void TableView::clear() {
     setNumRows(0);
@@ -198,27 +204,25 @@ void TableView::slotClicked(int row, int col, int,
                             const QPoint& point) {
     if ( !cellGeometry(row, col ).contains(point ) )
         return;
-    int ui=0; // FIXME = uid(row);
+
+    int ui= sorted().uidAt( row );
 
 
     switch( col ) {
-    case 0: {
-        // FIXME
-        CheckItem* item = 0l;
-        /*
-         * let's see if we centered clicked
-         */
-        if ( item ) {
-            int x = point.x() -columnPos( col );
-            int y = point.y() -rowPos( row );
-            int w = columnWidth( col );
-            int h = rowHeight( row );
-            if ( x >= ( w - OCheckItem::BoxSize ) / 2 &&
-                 x <= ( w - OCheckItem::BoxSize ) / 2 + OCheckItem::BoxSize &&
-                 y >= ( h - OCheckItem::BoxSize ) / 2 &&
-                 y <= ( h - OCheckItem::BoxSize ) / 2 + OCheckItem::BoxSize )
-                item->toggle();
-        }
+    case 0:{
+         int x = point.x() -columnPos( col );
+         int y = point.y() -rowPos( row );
+         int w = columnWidth( col );
+         int h = rowHeight( row );
+         if ( x >= ( w - BoxSize ) / 2 &&
+              x <= ( w - BoxSize ) / 2 + BoxSize &&
+              y >= ( h - BoxSize ) / 2 &&
+              y <= ( h - BoxSize ) / 2 + BoxSize ) {
+             OTodo todo = sorted()[row];
+             todo.setCompleted( !todo.isCompleted() );
+             TodoView::update( todo.uid(), todo );
+             updateView();
+         }
     }
         break;
 
@@ -262,9 +266,11 @@ QWidget* TableView::widget() {
  * We event want to set the setOrder
  * to a sort() and update()
  */
-void TableView::sortColumn( int row, bool asc, bool ) {
-    QTable::sortColumn( row, asc, TRUE );
-
+void TableView::sortColumn( int col, bool asc, bool ) {
+    qWarning("bool %d", asc );
+    setSortOrder( col );
+    setAscending( asc );
+    updateView();
 }
 void TableView::viewportPaintEvent( QPaintEvent* e) {
     qWarning("Paint event" );
@@ -356,4 +362,39 @@ void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool 
 	    break;
     }
     p->restore();
+}
+QWidget* TableView::createEditor(int row, int col, bool )const {
+    switch( col ) {
+    case 1: {
+        /* the priority stuff */
+        QComboBox* combo = new QComboBox( viewport() );
+        combo->insertItem( "1" );
+        combo->insertItem( "2" );
+        combo->insertItem( "3" );
+        combo->insertItem( "4" );
+        combo->insertItem( "5" );
+        combo->setCurrentItem( sorted()[row].priority()-1 );
+        return combo;
+    }
+    case 0:
+    default:
+        return 0l;
+    }
+}
+void TableView::setCellContentFromEditor(int row, int col ) {
+    if ( col == 1 ) {
+        QWidget* wid = cellWidget(row, 1 );
+        if ( wid->inherits("QComboBox") ) {
+            int pri = ((QComboBox*)wid)->currentItem() + 1;
+            OTodo todo = sorted()[row];
+            if ( todo.priority() != pri ) {
+                todo.setPriority( pri  );
+                TodoView::update( todo.uid(), todo );
+                updateView();
+            }
+        }
+    }
+}
+void TableView::slotPriority() {
+    setCellContentFromEditor( currentRow(), currentColumn() );
 }

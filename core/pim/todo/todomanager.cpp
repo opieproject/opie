@@ -47,6 +47,7 @@ OTodo TodoManager::event(int uid ) {
     return m_db->find( uid );
 }
 void TodoManager::updateList() {
+    qWarning("update list");
     m_list = m_db->allRecords();
 }
 OTodoAccess::List TodoManager::list() const{
@@ -118,6 +119,7 @@ bool TodoManager::isLoaded()const {
 }
 void TodoManager::load() {
     if (!m_db) {
+        qWarning("loading!");
         m_db = new OTodoAccess();
         m_db->load();
     }

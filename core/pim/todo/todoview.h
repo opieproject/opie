@@ -157,7 +157,7 @@ namespace Todo {
         MainWindow* todoWindow();
         OTodo event(int uid );
         OTodoAccess::List list();
-        OTodoAccess::List sorted();
+        OTodoAccess::List sorted()const;
         void sort();
         void sort(int sort );
         void setSortOrder( int order );

@@ -420,7 +420,6 @@ void MainWindow::slotNew() {
         // but only call if we changed something -zecke
         populateCategories();
     }
-
     raiseCurrentView( );
 }
 void MainWindow::slotDuplicate() {
@@ -497,6 +496,7 @@ void MainWindow::slotEdit() {
 void MainWindow::setCategory( int c) {
     if ( c <= 0 ) return;
 
+
     qWarning("Iterating over cats %d", c );
     for ( unsigned int i = 1; i < m_catMenu->count(); i++ )
         m_catMenu->setItemChecked(i, c == (int)i );
@@ -513,6 +513,7 @@ void MainWindow::setCategory( int c) {
         setCaption( tr("Todo") + " - " + m_curCat );
     }
     m_catMenu->setItemChecked( c, true );
+
     currentView()->setShowCategory( m_curCat );
     raiseCurrentView();
 }
@@ -549,8 +550,7 @@ void MainWindow::slotShowDetails() {
  * Menu
  */
 void MainWindow::populateCategories() {
-    if (m_todoMgr.isLoaded() )
-        m_todoMgr.load();
+    m_todoMgr.load();
 
     m_catMenu->clear();
     int id, rememberId;
@@ -614,6 +614,7 @@ void MainWindow::slotEdit( int uid ) {
         qWarning("Replacing now" );
         m_todoMgr.update( todo.uid(), todo );
 	currentView()->replaceEvent( todo );
+        /* a Category might have changed */
         populateCategories();
     }
 

@@ -31,7 +31,7 @@ void myMessages( QtMsgType, const char*  ) {
 
 int main( int argc, char **argv )
 {
-    qInstallMsgHandler( myMessages );
+//    qInstallMsgHandler( myMessages );
     QPEApplication a( argc, argv );
 
     QTime time;

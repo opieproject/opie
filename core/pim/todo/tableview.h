@@ -78,6 +78,12 @@ namespace Todo {
         void viewportPaintEvent( QPaintEvent* );
         QTimer *m_menuTimer;
         bool m_enablePaint:1;
+        QString m_oleCat;
+        bool m_first : 1;
+
+    protected:
+        QWidget* createEditor(int row, int col, bool initFromCell )const;
+        void setCellContentFromEditor( int row, int col );
 
 private slots:
         void slotShowMenu();
@@ -87,6 +93,7 @@ private slots:
                          const QPoint& );
         void slotValueChanged(int, int);
         void slotCurrentChanged(int, int );
+        void slotPriority();
     };
 };
 

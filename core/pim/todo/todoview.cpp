@@ -54,7 +54,7 @@ OTodoAccess::List TodoView::list(){
     todoWindow()->updateList();
     return todoWindow()->list();
 }
-OTodoAccess::List TodoView::sorted(){
+OTodoAccess::List TodoView::sorted()const{
     return m_sort;
 }
 void TodoView::sort() {
@@ -68,6 +68,7 @@ void TodoView::setSortOrder( int order ) {
     m_sortOrder = order;
 }
 void TodoView::setAscending( bool b ) {
+    qWarning("setAscending %d", b );
     m_asc = b;
 }
 void TodoView::update(int uid, const SmallTodo& to ) {
