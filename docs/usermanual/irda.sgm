@@ -17,7 +17,7 @@ If you want to recieve files like images or contact information from another dev
 start looking for other devices.  Do this by clicking on the IrDA Applet icon and selectiong "Enable Discovery".  A 
 green dot should appear in the upper right hand corner of the IrDA Applet icon.  Then select "Enable Recieve" from 
 the applet's menu, and a white box should appear in the bottom left corner of the IrDA Applet's icon.  You can then 
-have the other device send the file, and Opie should recieve it and open the file in whatever application is 
+have the other device send the file, and &opie; should recieve it and open the file in whatever application is 
 appropriate.
 </para>
 <para>
@@ -33,7 +33,7 @@ file type.  To do this, you can use either AdvancedFM (yet to be documented), or
 Documents tab.  To beam a file from the Documents tab, you must first add that file to the Documents tab if you 
 havent already (see <xref linkend="adddoc">).  Then, go to the Documents tab and press and hold on the icon for 
 the file you want to send.  A dialog should appear, with a button in the bottom right labeled "Beam".  Press this 
-button, and Opie will beam the file to any waiting devices.
+button, and &opie; will beam the file to any waiting devices.
 </para>
 </section>
 <section><title>Stoping IrDA</title>

@@ -37,7 +37,7 @@ If you have a 3100 or 3800 series iPAQ, run:
      ipkg install qt-embedded-rotation
 </literallayout>
 </informalexample>
-finally, start Opie with:
+finally, start &opie; with:
 <informalexample>
 <literallayout>
      /etc/init.d/opie start
@@ -46,21 +46,21 @@ finally, start Opie with:
 </para>
 
 <para>
-Opie should now be running (if you should have to reboot, which is rare, Opie
+&opie; should now be running (if you should have to reboot, which is rare, &opie;
 will start automatically). From here, you can use either the "Software"
 application in the Settings tab, or run ipkg from the command line to install
-other Opie apps. Check out the various task-opie-* ipkgs to install various sets
+other &opie; apps. Check out the various task-opie-* ipkgs to install various sets
 of apps at once (you can always uninstall individual apps individually). You
 will probably want to install opie-embeddedkonsole first, so you have access to
-the command line in Opie.
+the command line in &opie;.
 </para>
 </section>
 
 <section><title>Zaurus</title>
 <para>
-To completely install Opie on the Zaurus, you will have to install OpenZaurus,
-which includes Opie. However, individual Opie applications will work fine on the
-default Zaurus rom. Do not install Opie's launcher on a default Zaurus ROM
+To completely install &opie; on the Zaurus, you will have to install OpenZaurus,
+which includes &opie;. However, individual &opie; applications will work fine on the
+default Zaurus rom. Do not install &opie;'s launcher on a default Zaurus ROM
 though.
 </para>
 </section>

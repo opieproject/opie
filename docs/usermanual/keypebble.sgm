@@ -1,6 +1,6 @@
 <chapter><title>VNC Viewer</title>
 <para>
-The OPIE VNC Viewer allows you to connect to servers that are compatible with
+The &opie; VNC Viewer allows you to connect to servers that are compatible with
 the Remote Frame Buffer (RFB) protocol, most commonly used by the VNC remote 
 access software. 
 </para>

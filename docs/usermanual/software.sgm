@@ -22,9 +22,9 @@ There are several way to install a software package, depending on how you are
 accessing the package.
 </para>
 <para>
-To install software from a feed (see <xref linkend=feed>), first select "Opie" from the
+To install software from a feed (see <xref linkend=feed>), first select "&opie;" from the
 "Section" pulldown menu, the press the "+" icon next to "Feeds" in the main view.  
-This will show all the available Opie packages (you can change which packages 
+This will show all the available &opie; packages (you can change which packages 
 to view by selecting something else from the "Section" pulldown).  Installed 
 packages are marked with a blue circle, while packages that are not installed are marked with a red
 box.  If you click on the icon for an uninstalled package, it will turn into an
@@ -38,7 +38,7 @@ arguments to be sent to ipkg, which you can usually ignore.  After verifying
 that all the packages to be installed are correct, press "Ok" in the upper
 right corner (or press "x" to cancel and go back to the package selection
 window).  The packages should then install, and you should see their icons
-appear in the Launcher, if they are Opie applications.
+appear in the Launcher, if they are &opie; applications.
 </para>
 <para>
 If you would like to install software that is not avaialable in a feed, you can 
@@ -132,7 +132,7 @@ then the files will be installed in /mnt/hda/opt/QtPalmtop/.
 </para>
 <para>
 The problem with installing file in a destination other than root is that the 
-software usually does not know where to fine the installed files, and Opie does 
+software usually does not know where to fine the installed files, and &opie; does 
 not know where to find the information that tells it how to display the program 
 in the Launcher.  To get around this, the package manager creates links 
 <footnote><para>See <xref linkend=symlink> for more information on symbolic 

@@ -1,6 +1,6 @@
 <chapter><title>Embedded Konsole</title>
 <para>
-EmbeddedKonsole is Opie's terminal emulator.  From here you can do pretty much
+EmbeddedKonsole is &opie;'s terminal emulator.  From here you can do pretty much
 anything (since Linux is actually a command line based OS by itself).  I will
 not go into much detail on using the linux command line, as that is covered in
 many other places (http://www.tldp.org is a good place to start, or read
@@ -64,7 +64,7 @@ program in order to save space).  Shells can actually be very powerful, and many
 of them allow you to write something called "shell scripts" which are just a
 sequence of commands, sometimes with some flow control statements, saved to a 
 file and run each time the script is run.  For the most part, the average user
-does not need to know about any of this, though.  If you are running Opie on the
+does not need to know about any of this, though.  If you are running &opie; on the
 Familiar distribution, it is advisable to install the bash shell (ipkg install
 bash) because it offers things like tab completion, use of the backspace key,
 and a command history, as well as offering a more advanced scripting languauge

@@ -1,77 +1,192 @@
-<chapter id=i18n><title>Translations</title>
-	<para>
-		The OPIE-Project tries to offer the support for as many languages as possible.
-		In this chapter the process of translating OPIE and its documentation is explained.
-	</para>
+<chapter id=i18n>
 <section>
-	<title>Introduction</title>
+	<title>Translations</title>
+
 	<para>
-		To ensure that OPIE can be used by as many people as possible the OPIE-project 
-		aims to be translated in as many languages as possible. Of course, as there are so many
-		different languages, there is always a lot work to do. Furthermore, OPIE evolves and thus
-		most likely there are translations for applications which should be updated. In this tutorial
-		you will learn how to help OPIE to be availeble in as many languages as possible and see how
-		easy it is to give something very much respected to the open-source community.
+		The &opie;-Project tries to offer the support for as many languages
+		as possible.  In this chapter the process of translating &opie; and its
+		documentation is explained.
+	</para>
+	<para>
+		To ensure that &opie; can be used by as many people as possible the
+		&opie;-project aims to be translated in as many languages as possible. Of
+		course, as there are so many different languages, there is always a lot
+		work to do. Furthermore, &opie; evolves and thus most likely there are
+		translations for applications which should be updated. In this tutorial
+		you will learn how to help &opie; to be available in as many languages as
+		possible and see how easy it is to give something very much respected to
+		the open-source community.
+	</para>
+</section> 
+
+<section>
+	<title>Preferences</title> 
+	
+	<para>
+		In order to translate for &opie; you need an editor to edit the
+		translationfile and preferably access to cvs.  The preferred editor
+		is Linguist. That is an application which comes with &qt;.  It has a
+		intuitive GUI and is very easy to use.  A tutorial can be found <ulink
+		url="http://doc.trolltech.com/3.1/linguist-manual-3.html">here</ulink>.
+	</para> 
+	<para>
+		However, you can use every editor which works with UTF8, for example VIM or
+		EMACS.  The advantage of Linguist is that its GUI is optimized for &opie;s
+		translationfiles and can help you by proposing a translation and notice
+		you if there is an error within the translation.
+	</para> 
+	<para>
+		CVS is a tool which the developers and most translators use to get the source
+		of &opie;.  If you already have an anonymous account for the &opie;-cvs you
+		should go to <filename class='directory'>OPIEDIR/i18n</filename> and do 
+		<programlisting>cvs up</programlisting>.  If there is already a translation for the language you would like to
+		translate you will see the language code in that directory.  For example,
+		for german this is <programlisting>de</programlisting> and for danish it is
+		<programlisting>da</programlisting>.  If not, you should contact the coordinator
+		<personname><firstname>Carsten</firstname><surname>Niehaus</surname></personname>
+		so that everything will be set up for your language.
+	</para>
+</section> 
+
+<section>
+	<title>Styleguide</title> 
+	<para>
+		To ensure a high quality of the translations the translatiors have to keep certain things
+		in mind.
+	</para>
+	<itemizedlist mark='opencircle'>
+		<listitem>
+		<para>
+			The applications do not speak to the user. This means that for example it should not
+			be <errortext>I didn't find the file!</errortext> but <errortext>File not found!</errortext>.
+		</para>
+		</listitem>
+		<listitem>
+		<para>
+			Try not to use exclamationmarks. If the users sees them to often the ! looses it function
+			as a amplifier of a warning.
+		</para>
+		</listitem>
+		<listitem>
+		<para>
+			Don't put a space in front of a punctuation mark. So write eg "this is a demonstation!" insteadt
+			of "this is a demonstation !".
+		</para>
+		</listitem>
+	</itemizedlist>
+</section>
+
+<section>
+	<title>Examplecode</title> 
+	
+	<para>
+		In the next paragraph you see an example of how the XML looks like.
+	</para>
+
+	<programlisting>
+		<message> 
+			<source>New</source> 
+			<translation>Neu</translation>
+		</message> 
+		<message> 
+			<source>Today</source>
+			<translation>Heute</translation>
+		</message>
+		<message> 
+			<source>Day</source> 
+			<translation type="unfinished"></translation> 
+		</message>
+	</programlisting>
+
+	</para> 
+	<para>
+		As you can see the markup is very simple.  The part between two source-tags is
+		the english text which appears if there is no translation yet. In the first
+		case this is <quote>New</quote>.  The next row is where the translated string
+		would be.  The first two messages are already translated, the third is
+		not.  This is marked by the <programlisting>type="unfinished"</programlisting>.
+	</para> 
+	<para>
+		If you choose to use an editor like VIM instead of the prefered tool
+		-Linguist- you have to remove that mark and add the translated string
+		between the two <programlisting>translation</programlisting>-tags.
+	</para>
+	<para>
+		It might happen that you see <programlisting>type="obsolete"</programlisting> in a
+		.ts-file. You should not translate these stings as they do no longer appear in the
+		application. The translationcoordinator removes those strings from time to time. In
+		Linguist those strings are grey and not translatable.
+	</para>
+</section> 
+
+<section>
+	<title>Filetypes</title>
+	<para>
+		As a translator one need to know three different filetypes.
+		
+		<filename class='extension'>ts</filename>
+		.ts-files are the most important files for translators.  In these files are all strings which
+		need to be translated and the translations themselfs.  All .ts-files are located in 
+		<filename class='directory'>OPIEDIR/i18n/xx</filename> while xx is a languagecode (eg. de or de).  
+		In theory .ts-files are the only ones a translator needs to know.
+		
+		<filename class='extension'>pro</filename>
+		Every application has a .pro-file from which the Makefiles are generated.  As a translator
+		you need to check if in every .pro-file is a line for the language you would to
+		translate for.  A line like this should look this way:
+
+		<programlisting>
+			 ../../../i18n/de/today.ts \
+		</programlisting>
+		
+		Usually the translationcoordinator takes care of these entries so you should not
+		need to edit them.
+		
+		<filename class='extension'>qm</filename>
+		These are binary files used by &opie; to display the translated strings.  They are
+		automatically generated by calling the command <command>make lrelease</command>.  Of course,
+		you need to have the binary of <application>lrelease</application> which comes with &qt;.
 	</para>
 </section>
+
 <section>
-	<title>Preferences</title>
-	<para>
-		In order to translate for OPIE you need an editor to edit the translationfile
-		and preferably access to cvs. The preferred editor is Linguist. That is an application which
-		comes with Qt. It has a intuitive GUI and is very easy to use. A tutorial can be found here: 
-		<link>http://doc.trolltech.com/3.1/linguist-manual-3.html</link>.
-	</para>
-	<para>
-		However, you can use every editor which works with UTF8, for example VIM or EMACS. The advantage
-		of Linguist is that its GUI is optimized for OPIEs translationfiles and can help you be
-		proposing a translation and notice you if there is an error within the translation.
-	</para>
-	<para>
-		CVS is a tool which the developers and most translators use to get the source of OPIE. If you
-		already have an anonymous account for the OPIE-cvs you should go to $OPIEDIR/i18n and do <code>cvs up</code>.
-		If there is already a translation for the language you would like to translate you will see
-		the language code in that directory. For example, for german this is <code>de</code> and for danish
-		it is <code>da</code>. If not you should contact the coordinator Carsten Niehaus so that 
-		everything will be set up for your language.
-	</para>
-</section>
-<section>
-	<title>Examplecode</title>
-	<para>
-		In the next paragraph you see an example of how the XML looks like. 
-	</para>
-	<!--
-	<message>
-	<source>New</source>
-	<translation>Neu</translation>
-	</message>
-	<message>
-	<source>Today</source>
-	<translation>Heute</translation>
-	</message>
-	<message>
-	<source>Day</source>
-	<translation type="unfinished"></translation>
-	</message>
-	-->
-	</para>
-	<para>
-		As you can see the markup is very simple. The part between two source-tags is the english 
-		text which appears if there is no translation yet. In the first case this is <quote>New</quote>.
-		In the next row	is where the translation would be. The first two messages are already translated,
-		the third is not. This is marked by the <code>type="unfinished"</code>.
-	</para>
-	<para>
-		If you choose to use an editor like vim instead of the prefered tool -Linguist- you have to remove
-		that mark and add the translated string between the two <code>translation</code>-tags. 
-	</para>
-</section>
-<section>
-	<title>Do's and don'ts</title>
-	<para>
-		There are certain things that should only be done be the translationcoordinator or one of the
-		core developers.
-	</para>
-</section>
+	<title>Do's and don'ts</title> 
+	There are certain things that should only be done be the
+	translationcoordinator or one of the core developers.  
+	<itemizedlist mark='opencircle'>
+		<listitem>
+		<para>
+			The translationfiles should never be updated by the translators.  Only the 
+			translationcoordinator updates the repository.  This is to avoid merging conflicts.  
+		</para>
+		</listitem>
+		<listitem>
+		<para>
+			The binary .qm-files are created by either the translationcoordinator or by the feed-manager.
+			Of course, the translators can created them as described above for testingpurposes but 
+			the official files will be provided.  
+		</para>
+		</listitem>
+		<listitem>
+		<para>
+			Whenever you find a typo or an incorrect message contact the author of the application
+			and/or use our bugtrackingsystem (Mantis) to make sure this string will be fixed.
+		</para>
+		</listitem>
+		<listitem>
+		<para>
+			If you find a string like "Form1" contact the translationcoordinator. These strings
+			should not be in the translationfiles. You don't need to translate them.
+		</para>
+		</listitem>
+		<listitem>
+		<para>
+			If you check you translation and see a not translated string even though you translationfile
+			is 100% translated use the bugtrackingsystem and/or contact the author of that application
+			directly so that this bug is fixed.
+		</para>
+		</listitem>
+	</itemizedlist>
+</section> 
+
 </chapter>

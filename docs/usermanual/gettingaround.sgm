@@ -1,7 +1,7 @@
-<chapter><title>Using Opie</title>
+<chapter><title>Using &opie;</title>
 <para>
-Now that Opie is installed and running, it's time to start using it.  When you
-first start Opie, you will see the "Launcher" from which you can start all of
+Now that &opie; is installed and running, it's time to start using it.  When you
+first start &opie;, you will see the "Launcher" from which you can start all of
 your Applications, and the "Taskbar" along the bottom, where you can see all
 the running applications, select an input method, and interact with the
 installed "applets".
@@ -9,7 +9,7 @@ installed "applets".
 
 <section><title>Getting Around</title>
 <para>
-Getting around in Opie is very easy, you simply click your stylus on whatever
+Getting around in &opie; is very easy, you simply click your stylus on whatever
 icon or button you want to click on.  The main difference between using the
 stylus and using a mouse is that you cannot right click with a stylus, so things
 that require a right click are kept to a minimum.  However, it is sometimes
@@ -50,7 +50,7 @@ Documents tab see the <xref linkend="adddoc">.
 
 <section><title>Taskbar</title>
 <para>
-Opie has a "Taskbar" that always runs along the bottom of the screen in Opie,
+&opie; has a "Taskbar" that always runs along the bottom of the screen in &opie;,
 except for a few "fullscreen" applications that cover it up.  The Taskbar is
 what lets you select which input method you would like to use, shows what
 applications are running, and is also where the "applets" draw their icons.
@@ -79,7 +79,7 @@ become the current input method, with its icon replacing the previous one.
 
 <section><title>Dialogs</title>
 <para>
-In Opie, dialogs, as well as some applications, have a button labeled "Ok" on
+In &opie;, dialogs, as well as some applications, have a button labeled "Ok" on
 the right side of the window title bar, in addition to the normal "x".  For 
 dialogs, the "Ok" button will apply your changes and close the window, while
 the "x" will cancel them before closing the window (for people used to most
