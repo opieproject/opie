@@ -42,6 +42,8 @@ protected slots:
 	void slotQueueMail();
 	void slotSendError(const QString &);
 	void slotSendFinished();
+	void slotSendQueuedError(const QString &);
+	void slotSendQueuedFinished();
 	void slotResizing();
 	void slotFillStuff();
 	void slotFromChanged(int id);
@@ -54,6 +56,7 @@ protected:
 
 private:
 	bool _sendQueued;
+ 	int _toSend, _sendCount, _sendError;
 	bool _inLoop;
 	QString _inReplyTo;
 

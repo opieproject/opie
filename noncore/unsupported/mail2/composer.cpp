@@ -66,7 +66,6 @@ void Composer::hide()
 void Composer::exec()
 {
 	show();
-
 	if (!_inLoop) {
 		_inLoop = true;
 		qApp->enter_loop();
@@ -94,11 +93,7 @@ void Composer::slotResizing()
 {
 	from->setMaximumWidth(width() - fromBox->width());
 	from->resize(width() - fromBox->width(), y());
- 	if (_sendQueued)
-  {
-   	slotSendQueued();
-    close();
-  }
+  if (_sendQueued) slotSendQueued();
 }
 
 void Composer::slotPopupHandler(int itemid)
@@ -171,15 +166,15 @@ void Composer::slotSendQueued()
 	qDebug("Sending queued messages");
 	Config cfg( "mailqueue", Config::User );
 	cfg.setGroup( "Settings" );
-	int count = cfg.readNumEntry( "count", 0 );
- 	// tille: should not be here
-  // but no error checking for the moment
-	cfg.writeEntry( "count", 0 );
+	_sendCount = 0;
+	_sendError = 0;
+	_toSend = cfg.readNumEntry( "count", 0 );
 	
+ 	if (_toSend == 0) close();
 	
- 	qDebug("%i messages to send", count);
+ 	qDebug("%i messages to send", _toSend);
   QString str;
-	for (int i=1;i<=count;i++)
+	for (int i=1;i<=_toSend;i++)
 	  {
      	qDebug("sending message %i",i);
 	    cfg.setGroup( "Mail_" + QString::number(i) );
@@ -249,13 +244,10 @@ void Composer::slotSendQueued()
      	qDebug("Sending to %s",toAdr.latin1());
 	    SmtpHandler *handler = new SmtpHandler(header, message, accnt ,toAdr);
      	
-    	connect(handler, SIGNAL(finished()), SLOT(slotSendFinished()));
-  	  connect(handler, SIGNAL(error(const QString &)), SLOT(slotSendError(const QString &)));
+    	connect(handler, SIGNAL(finished()), SLOT(slotSendQueuedFinished()));
+  	  connect(handler, SIGNAL(error(const QString &)), SLOT(slotSendQueuedError(const QString &)));
 	    connect(handler, SIGNAL(status(const QString &)), status, SLOT(setText(const QString &)));
 
-     	qDebug("remove mail %i", i);
-      cfg.clearGroup();
-      cfg.removeEntry( "Mail_" + QString::number(i) );
    	}
 }
 
@@ -310,12 +302,41 @@ void Composer::slotSendError(const QString &error)
 	QMessageBox::warning(this, tr("Error"), tr("<p>%1</p").arg(error), tr("Ok"));
 }
 
+void Composer::slotSendQueuedError(const QString &error)
+{
+	_sendError++;
+	qDebug("error send mail %i",_sendCount);
+	status->setText(tr("<font color=#ff0000>Error occoured during sending.</font>"));
+	QMessageBox::warning(this, tr("Error"), tr("<p>%1</p").arg(error), tr("Ok"));
+}
+
 void Composer::slotSendFinished()
 {
 	QMessageBox::information(this, tr("Success"), tr("<p>The mail was sent successfully.</p>"), tr("Ok"));
 
 	status->setText(QString(0));
 	abort->setEnabled(false);
+}
+
+void Composer::slotSendQueuedFinished()
+{
+	
+	_sendCount++;
+ 	qDebug("finished send mail %i of %i (error %i)",_sendCount,_toSend,_sendError);
+	if (_sendCount < _toSend) return;
+  if (_sendError == _toSend) close();
+	QMessageBox::information(this, tr("Success"), tr("<p>The queued mails ")+QString::number(_toSend-_sendError)+tr(" of ")+QString::number(_toSend)+(" were sent successfully.</p>"), tr("Ok"));
+	Config cfg( "mailqueue", Config::User );
+	cfg.setGroup( "Settings" );
+	cfg.writeEntry( "count", 0 );
+  for (int i=1;i<=_sendCount;i++)
+	  {
+	    cfg.setGroup( "Mail_" + QString::number(i) );
+     	qDebug("remove mail %i", i);
+      cfg.clearGroup();
+      cfg.removeEntry( "Mail_" + QString::number(i) );
+   	}
+ 	close();
 }
 
 void Composer::slotFillStuff()

@@ -8,6 +8,7 @@
 #include <qvbox.h>
 
 #include <qpe/qpetoolbar.h>
+#include <qpe/qpemenubar.h>
 #include <qpe/resource.h>
 
 #include "listviewplus.h"
@@ -20,21 +21,28 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 	setToolBarsMovable(false);
 
 	toolbar = new QPEToolBar(this);
+  menubar = new QPEMenuBar( toolbar );
+  mailmenu = new QPopupMenu( menubar );
+  menubar->insertItem( tr( "Mail" ), mailmenu );
 	addToolBar(toolbar);
 	toolbar->setHorizontalStretchable(true);
 
 	sendmail = new QAction(tr("Send the mail"), QIconSet(Resource::loadPixmap("mail/sendmail")), 0, 0, this);
 	sendmail->addTo(toolbar);
+	sendmail->addTo(mailmenu);
 
 	queuemail = new QAction(tr("Queue the mail"), QIconSet(Resource::loadPixmap("mail/sendall")), 0, 0, this);
 	queuemail->addTo(toolbar);
+	queuemail->addTo(mailmenu);
 
 	attachfile = new QAction(tr("Attach a file"), QIconSet(Resource::loadPixmap("mail/attach")), 0, 0, this, 0, true);
 	attachfile->addTo(toolbar);
+	attachfile->addTo(mailmenu);
 	connect(attachfile, SIGNAL(toggled(bool)), SLOT(slotAttachfileChanged(bool)));
 
 	addressbook = new QAction(tr("Addressbook"), QIconSet(Resource::loadPixmap("mail/addbook")), 0, 0, this);
 	addressbook->addTo(toolbar);
+	addressbook->addTo(mailmenu);
 
 	QLabel *spacer = new QLabel(toolbar);
 	spacer->setBackgroundMode(QWidget::PaletteButton);
@@ -42,6 +50,7 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 
 	abort = new QAction(tr("Abort sending"), QIconSet(Resource::loadPixmap("mail/abort")), 0, 0, this);
 	abort->addTo(toolbar);
+	abort->addTo(mailmenu);
 
 	QWidget *main = new QWidget(this);
 	setCentralWidget(main);
