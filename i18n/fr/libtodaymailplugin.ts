@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt;nouveau(x) message(s), &lt;b&gt;%2&lt;/b&gt; sortants</translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; nouveau(x) message(s), &lt;b&gt;%2&lt;/b&gt; sortant(s)</translation>
     </message>
 </context>
 </TS>

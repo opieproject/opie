@@ -78,15 +78,15 @@ jours</translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Pas d&apos;anniversaire prévu (+&lt;b&gt;%1&lt;/b&gt; jours)!</translation>
+        <translation>Pas d&apos;anniversaire prévu (+/- &lt;b&gt;%1&lt;/b&gt; jours)!</translation>
     </message>
     <message>
         <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Anniversaire dans &lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
+        <translation>Autre anniversaire dans &lt;b&gt;%1&lt;/b&gt; jour(s):</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Pas d&apos;anniversaire autre (+&lt;b&gt;%1&lt;/b&gt; jours)!</translation>
+        <translation>Pas d&apos;anniversaire autre (+/- &lt;b&gt;%1&lt;/b&gt; jours)!</translation>
     </message>
     <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>
