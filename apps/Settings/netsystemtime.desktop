@@ -1,10 +1,10 @@
 [Desktop Entry]
 Comment=Set date and time from network
-Exec=netsystemtime
+Exec=systemtime
 Icon=DateTime
 Type=Application
-Name=NTP-Date/Time
+Name=Date/Time
 Name[zh_TW]=網絡時間
 Name[ko]=네트워크로 시간 설정
-Name[it]=NTP
-Name[de]=NTP-Datum
+Name[it]=Data e Ora
+Name[de]=Datum
