@@ -33,7 +33,7 @@ protected:
 
 public slots:
     void buttonClicked();
-    void addNewStation( QString type, QString essid, QString ap, bool wep, int channel, int signal );
+    void addNewItem( QString type, QString essid, QString ap, bool wep, int channel, int signal );
 
 private:
     int daemon_fd;             // socket filedescriptor for udp communication socket

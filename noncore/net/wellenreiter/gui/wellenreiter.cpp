@@ -28,6 +28,7 @@
 #include "scanlistitem.h"
 
 #include "../libwellenreiter/source/sock.hh"    // <--- ugly path, FIX THIS!
+#include "../libwellenreiter/source/proto.hh"    // <--- ugly path, FIX THIS!
 #include "../daemon/source/config.hh"           // <--- ugly path, FIX THIS!
 
 Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
@@ -59,23 +60,68 @@ void Wellenreiter::handleMessage()
     // FIXME: receive message and handle it
 
     qDebug( "received message from daemon." );
+    
+    char buffer[128];
+
+    int result = recvcomm( &daemon_fd, (char*) &buffer, sizeof(buffer) );
+    qDebug( "received %d from recvcomm", result );
+
+/*
+typedef struct {
+  int net_type;     1 = Accesspoint ; 2 = Ad-Hoc
+  int ssid_len;     Length of SSID
+  int channel;      Channel
+  int wep;          1 = WEP enabled ; 0 = disabled
+  char mac[64];     MAC address of Accesspoint
+  char bssid[128];  BSSID of Accesspoint
+} wl_network_t;
+*/
+
+    if ( result == 1 )  /* new network found */
+    {
+        qDebug( "Sniffer said: new network found." );
+        wl_network_t n;
+        get_network_found( &n, (const char*) &buffer );
+        n.bssid[n.ssid_len] = "\0";
+
+        QString type;
+
+        if ( n.net_type == 1 )
+            type == "managed";
+        else
+            type == "adhoc";
+
+        addNewItem( type, n.bssid, n.mac, n.wep, n.channel, 0 );
+
+    }
+
+    else
+
+    {
+        qDebug( "unknown sniffer command." );
+    }
+
 }
 
 
 bool Wellenreiter::hasMessage()
 {
+
+    // FIXME: do this in libwellenreiter, not here!!!
+
     fd_set rfds;
     FD_ZERO( &rfds );
     FD_SET( daemon_fd, &rfds );
     struct timeval tv;
     tv.tv_sec = 0;
     tv.tv_usec = 0;
-    return select( 1, &rfds, NULL, NULL, &tv );
+    int result = select( daemon_fd+1, &rfds, NULL, NULL, &tv );
+    return FD_ISSET( daemon_fd, &rfds );
 }
 
 void Wellenreiter::timerEvent( QTimerEvent* e )
 {
-    // qDebug( "checking for message..." );
+     qDebug( "checking for message..." );
 
     if ( hasMessage() )
     {
@@ -83,11 +129,11 @@ void Wellenreiter::timerEvent( QTimerEvent* e )
     }
     else
     {
-        // qDebug( "no message :(" );
+        qDebug( "no message :(" );
     }
 }
 
-void Wellenreiter::addNewStation( QString type, QString essid, QString ap, bool wep, int channel, int signal )
+void Wellenreiter::addNewItem( QString type, QString essid, QString ap, bool wep, int channel, int signal )
 {
     // FIXME: this code belongs in customized QListView, not into this class
 
@@ -120,7 +166,7 @@ void Wellenreiter::buttonClicked()
 
     // add some icons, so that we can see if this works
 
-    addNewStation( "managed", "MyNet", "04:00:20:EF:A6:43", true, 6, 80 );
-    addNewStation( "adhoc", "YourNet", "40:03:A3:E7:56:22", false, 11, 30 );
+    addNewItem( "managed", "MyNet", "04:00:20:EF:A6:43", true, 6, 80 );
+    addNewItem( "adhoc", "YourNet", "40:03:A3:E7:56:22", false, 11, 30 );
 
 }
