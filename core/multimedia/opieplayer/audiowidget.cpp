@@ -121,7 +121,17 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
         buttonPixDown[i] = NULL;
     }
 
-    setBackgroundPixmap( *pixBg );
+ 		QWidget *d = QApplication::desktop();
+ 		int width = d->width();
+ 		int height = d->height();
+
+    if( (width != pixBg->width() ) || (height != pixBg->height() ) ) {
+//				qDebug("<<<<<<<< scale image >>>>>>>>>>>>");
+				QImage img;
+				img = pixBg->convertToImage();
+				pixBg->convertFromImage( img.smoothScale( width, height));
+		}
+    setBackgroundPixmap( *pixBg);
 
     songInfo.setFocusPolicy( QWidget::NoFocus );
     
@@ -136,6 +146,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     slider.setMinValue( 0 );
     slider.setMaxValue( 1 );
     slider.setFocusPolicy( QWidget::NoFocus );
+
     slider.setBackgroundPixmap( *pixBg );
 
     time.setFocusPolicy( QWidget::NoFocus );

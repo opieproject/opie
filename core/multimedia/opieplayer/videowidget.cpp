@@ -97,22 +97,18 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
    imgButtonMask = new QImage( imgUp->width(), imgUp->height(), 8, 255 );
    imgButtonMask->fill( 0 );
 
-   for ( int i = 0; i < 7; i++ )
-   {
+   for ( int i = 0; i < 7; i++ ) {
       QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath +
                                   "/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
       //      qDebug("loading "+filename);
       masks[i] = new QBitmap( filename );
 
-      if ( !masks[i]->isNull() )
-      {
+      if ( !masks[i]->isNull() ) {
          QImage imgMask = masks[i]->convertToImage();
          uchar **dest = imgButtonMask->jumpTable();
-         for ( int y = 0; y < imgUp->height(); y++ )
-         {
+         for ( int y = 0; y < imgUp->height(); y++ ) {
             uchar *line = dest[y];
-            for ( int x = 0; x < imgUp->width(); x++ )
-            {
+            for ( int x = 0; x < imgUp->width(); x++ ) {
                if ( !qRed( imgMask.pixel( x, y ) ) )
                   line[x] = i + 1;
             }
@@ -120,12 +116,22 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
       }
    }
    //   qDebug("finished loading first pics");
-   for ( int i = 0; i < 7; i++ )
-   {
+   for ( int i = 0; i < 7; i++ ) {
       buttonPixUp[i] = NULL;
       buttonPixDown[i] = NULL;
    }
 
+
+ 		QWidget *d = QApplication::desktop();
+ 		int width = d->width();
+ 		int height = d->height();
+
+    if( (width != pixBg->width() ) || (height != pixBg->height() ) ) {
+//				qDebug("<<<<<<<< scale image >>>>>>>>>>>>");
+				QImage img;
+				img = pixBg->convertToImage();
+				pixBg->convertFromImage( img.smoothScale( width, height));
+		}
    setBackgroundPixmap( *pixBg );
 
    currentFrame = new QImage( 220 + 2, 160, (QPixmap::defaultDepth() == 16) ? 16 : 32 );
