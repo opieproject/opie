@@ -1,4 +1,4 @@
   config LIBMAIL
-    boolean "libmail"
-    default "y"
+    boolean
+    default "y" if MAIL
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
