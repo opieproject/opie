@@ -1,4 +1,4 @@
-Files: bin/opieftp pics/opieftp.png apps/Applications/opieftp.desktop
+Files: bin/opieftp pics/opieftp/opieftp.png apps/Applications/opieftp.desktop
 Priority: optional
 Package: opieftp
 Section: opie/applications

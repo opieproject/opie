@@ -1,4 +1,4 @@
-Files: bin/example apps/Applications/example.desktop pics/Example.png
+Files: bin/example apps/Applications/example.desktop pics/example.png
 Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>

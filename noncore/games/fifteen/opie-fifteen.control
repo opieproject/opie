@@ -1,4 +1,4 @@
-Files: bin/fifteen apps/Games/fifteen.desktop pics/Fifteen.png
+Files: bin/fifteen apps/Games/fifteen.desktop
 Priority: optional
 Section: opie/games
 Maintainer: Warwick Allison <warwick@trolltech.com>

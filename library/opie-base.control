@@ -1,4 +1,4 @@
-Files: etc/qimpen etc/colors etc/init.d/qpe etc/rc2.d/S98qpe bin/qpe-reorgfiles $QTDIR/lib/libqpe.so.$VERSION_MAJ.$VERSION_MIN.$VERSION_PAT $QTDIR/lib/libqpe.so.$VERSION_MAJ.$VERSION_MIN $QTDIR/lib/libqpe.so.$VERSION_MAJ apps/__7separator.desktop apps/__9quit.desktop apps/*/.directory etc/mime.types apps/Settings/quit.desktop pics/UnknownDocument-14.png pics/UnknownDocument.png
+Files: etc/qimpen etc/colors etc/init.d/qpe etc/rc2.d/S98qpe bin/qpe-reorgfiles $QTDIR/lib/libqpe.so.$VERSION_MAJ.$VERSION_MIN.$VERSION_PAT $QTDIR/lib/libqpe.so.$VERSION_MAJ.$VERSION_MIN $QTDIR/lib/libqpe.so.$VERSION_MAJ apps/__7separator.desktop apps/__9quit.desktop apps/*/.directory etc/mime.types apps/Settings/quit.desktop
 Priority: required
 Section: opie/system
 Maintainer: Warwick Allison <warwick@trolltech.com>
