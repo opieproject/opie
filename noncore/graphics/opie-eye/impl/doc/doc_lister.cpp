@@ -63,7 +63,6 @@ QString Doc_DirLister::setStartPath(const QString&) {
         }
         QListIterator<DocLnk> dit(m_ds.children());
         for( ; dit.current(); ++dit) {
-//            if (! (*dit)->isValid()) continue;
             if (!matchCat((*dit))) continue;
             m_namemap[(*dit)->name()]=(*dit)->file();
             m_filemap[(*dit)->file()]=(*dit)->name();
@@ -182,8 +181,6 @@ QWidget* Doc_DirLister::widget(QWidget*parent)
 
 void Doc_DirLister::showCategory(int which)
 {
-    Categories cat;
-    cat.load( categoryFileName() );
     m_catFilter = which==-2?0:which;
     m_namemap.clear();
     setStartPath("");
