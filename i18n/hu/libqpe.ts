@@ -890,6 +890,10 @@ Szabadítson fel némi memóriát és próbálja újra.</translation>
         <source>%1 document</source>
         <translation>%1 dokumentum</translation>
     </message>
+    <message>
+        <source>Please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEManager</name>

@@ -891,6 +891,10 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
         <source>%1 document</source>
         <translation>%1 dokument</translation>
     </message>
+    <message>
+        <source>Please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEDecoration</name>

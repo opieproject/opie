@@ -899,6 +899,10 @@ Kort voor Maand</translation>
         <source>%1 document</source>
         <translation>%1 document</translation>
     </message>
+    <message>
+        <source>Please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEDecoration</name>

@@ -903,6 +903,10 @@ novamente.</translation>
         <source>%1 document</source>
         <translation>documento %1</translation>
     </message>
+    <message>
+        <source>Please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEManager</name>

@@ -907,6 +907,10 @@ frei und versuchen Sie es noch einmal
         <source>%1 document</source>
         <translation>%1 Dokument</translation>
     </message>
+    <message>
+        <source>Please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEManager</name>

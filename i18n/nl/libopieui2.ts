@@ -122,6 +122,10 @@
         <source>Save</source>
         <translation>Sla op</translation>
     </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OFileSelector</name>
@@ -826,6 +830,14 @@ and </source>
     <message>
         <source>None</source>
         <translation>Geen</translation>
+    </message>
+    <message>
+        <source>Directories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Directories</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -882,6 +882,10 @@ Uvolněte nějakou paměť a zkuste to znovu.</translation>
         <source>%1 document</source>
         <translation>Dokument %1</translation>
     </message>
+    <message>
+        <source>Please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEManager</name>

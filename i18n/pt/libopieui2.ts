@@ -122,6 +122,10 @@
         <source>Save</source>
         <translation>Gravar</translation>
     </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OFileSelector</name>
@@ -779,6 +783,14 @@ e</translation>
     <message>
         <source>None</source>
         <translation type="unfinished">Nenhum</translation>
+    </message>
+    <message>
+        <source>Directories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Directories</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

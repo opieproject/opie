@@ -892,6 +892,10 @@ Zwolnij więcej pamięci i spróbuj ponownie.</translation>
         <source>%1 document</source>
         <translation>dokument %1</translation>
     </message>
+    <message>
+        <source>Please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEManager</name>

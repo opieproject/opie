@@ -13,6 +13,10 @@
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Select Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OFontSelector</name>
@@ -300,6 +304,14 @@
     <message>
         <source>None</source>
         <translation type="unfinished">Nincs</translation>
+    </message>
+    <message>
+        <source>Directories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Directories</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

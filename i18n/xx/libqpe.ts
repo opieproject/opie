@@ -881,6 +881,10 @@ Free some memory and try again.</source>
         <source>%1 document</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEManager</name>
