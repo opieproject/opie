@@ -91,6 +91,8 @@ QRESULT UniKeyboardImpl::queryInterface( const QUuid &uuid, QUnknownInterface **
 	*iface = this;
     else if ( uuid == IID_InputMethod )
 	*iface = this;
+    else
+	return QS_FALSE;
 
     if ( *iface )
 	(*iface)->addRef();

@@ -84,6 +84,8 @@ QRESULT KeyboardImpl::queryInterface( const QUuid &uuid, QUnknownInterface **ifa
 	*iface = this;
     else if ( uuid == IID_InputMethod )
 	*iface = this;
+    else
+	return QS_FALSE;
 
     if ( *iface )
 	(*iface)->addRef();
