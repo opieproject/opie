@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>246</width>
+            <width>250</width>
             <height>371</height>
         </rect>
     </property>
@@ -596,43 +596,6 @@
                         <name>spacing</name>
                         <number>3</number>
                     </property>
-                    <widget row="2"  column="0"  rowspan="1"  colspan="3" >
-                        <class>ProtocolListView</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>capturePackets</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>enabled</name>
-                            <bool>false</bool>
-                        </property>
-                        <property stdset="1">
-                            <name>sizePolicy</name>
-                            <sizepolicy>
-                                <hsizetype>7</hsizetype>
-                                <vsizetype>7</vsizetype>
-                            </sizepolicy>
-                        </property>
-                    </widget>
-                    <widget row="1"  column="0"  rowspan="1"  colspan="3" >
-                        <class>QLineEdit</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>captureFileName</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>enabled</name>
-                            <bool>false</bool>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>/tmp/capture</string>
-                        </property>
-                        <property>
-                            <name>whatsThis</name>
-                            <string>Configure the name of the capture file.</string>
-                        </property>
-                    </widget>
                     <widget row="0"  column="2" >
                         <class>QToolButton</class>
                         <property stdset="1">
@@ -687,10 +650,152 @@
                             <name>text</name>
                             <string>Write Capture Files To</string>
                         </property>
+                        <property stdset="1">
+                            <name>checked</name>
+                            <bool>true</bool>
+                        </property>
                         <property>
                             <name>whatsThis</name>
                             <string>Check this to write an ethereal compatible capture file.</string>
                         </property>
+                    </widget>
+                    <widget row="1"  column="0"  rowspan="1"  colspan="3" >
+                        <class>QLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>captureFileName</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>enabled</name>
+                            <bool>false</bool>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>/tmp/capture</string>
+                        </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string>Configure the name of the capture file.</string>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="0"  rowspan="1"  colspan="3" >
+                        <class>ProtocolListView</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>capturePackets</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>enabled</name>
+                            <bool>false</bool>
+                        </property>
+                        <property stdset="1">
+                            <name>sizePolicy</name>
+                            <sizepolicy>
+                                <hsizetype>7</hsizetype>
+                                <vsizetype>7</vsizetype>
+                            </sizepolicy>
+                        </property>
+                    </widget>
+                    <widget row="3"  column="0"  rowspan="1"  colspan="3" >
+                        <class>QButtonGroup</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>ButtonGroup1</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>title</name>
+                            <string>Hex View Buffer</string>
+                        </property>
+                        <property stdset="1">
+                            <name>exclusive</name>
+                            <bool>true</bool>
+                        </property>
+                        <property>
+                            <name>layoutMargin</name>
+                        </property>
+                        <property>
+                            <name>layoutSpacing</name>
+                        </property>
+                        <grid>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>6</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>1</number>
+                            </property>
+                            <widget row="0"  column="0" >
+                                <class>QRadioButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>hexViewBufferUnlimited</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>unlimited</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>checked</name>
+                                    <bool>true</bool>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="0" >
+                                <class>QLayoutWidget</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>Layout7</cstring>
+                                </property>
+                                <hbox>
+                                    <property stdset="1">
+                                        <name>margin</name>
+                                        <number>0</number>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>spacing</name>
+                                        <number>6</number>
+                                    </property>
+                                    <widget>
+                                        <class>QRadioButton</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>hexViewBufferLimited</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>limited to</string>
+                                        </property>
+                                    </widget>
+                                    <widget>
+                                        <class>QSpinBox</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>hexViewBufferSize</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>enabled</name>
+                                            <bool>false</bool>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>suffix</name>
+                                            <string> Packets</string>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>maxValue</name>
+                                            <number>10000</number>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>lineStep</name>
+                                            <number>100</number>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>value</name>
+                                            <number>2000</number>
+                                        </property>
+                                    </widget>
+                                </hbox>
+                            </widget>
+                        </grid>
                     </widget>
                 </grid>
             </widget>
@@ -1596,6 +1701,12 @@
         <sender>startGPS</sender>
         <signal>toggled(bool)</signal>
         <receiver>commandGPS</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>hexViewBufferLimited</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>hexViewBufferSize</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>

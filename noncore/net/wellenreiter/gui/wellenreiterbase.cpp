@@ -116,13 +116,15 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     TextLabel1_4_2_font.setFamily( "adobe-helvetica" );
     TextLabel1_4_2_font.setPointSize( 10 );
     TextLabel1_4_2->setFont( TextLabel1_4_2_font );
-    TextLabel1_4_2->setText( tr( "<p align=center>\n"
-"<hr>\n"
-"Michael 'Mickey' Lauer<br><hr>\n"
-"Max Moser<br>\n"
-"Martin J. Muench<br>\n"
-"<b>www.wellenreiter.net</b>\n"
-"</p>" ) );
+    TextLabel1_4_2->setText(
+"<p align=center>"
+"<hr>"
+"<b>(C) Michael 'Mickey' Lauer</b><br>"
+"<hr>"
+"mickey@Vanille.de<br>"
+"www.Vanille.de/projects/wellenreiter.html<br>"
+"www.wellenreiter.net"
+"</p>" );
     TextLabel1_4_2->setAlignment( int( QLabel::AlignCenter ) );
 
     aboutLayout->addWidget( TextLabel1_4_2, 1, 0 );
