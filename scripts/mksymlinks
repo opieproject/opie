@@ -3,11 +3,11 @@ cd $OPIEDIR
 
 for file in `make showcomponents`
 do
-  if [ -d $file/pics ]
+  dir=`echo $file|sed -e 's#\(.*\)/##g'`
+  path=`echo $file|sed -e "s#\(.*\)$dir#\1#g"`
+  if [ -d $file/pics -a ! -e $OPIEDIR/pics/$dir ]
   then 
-    dir=`echo $file|sed -e 's#\(.*\)/##g'`
-    path=`echo $file|sed -e "s#\(.*\)$dir#\1#g"`
-    ln -sf $OPIEDIR/$path$dir/pics $OPIEDIR/pics/$dir
+    ln -sf ../$path$dir/pics $OPIEDIR/pics/$dir
   fi
 done
 exit 0
