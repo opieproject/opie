@@ -149,6 +149,15 @@ void CategoryTabWidget::nextTab()
     }
 }
 
+
+void CategoryTabWidget::showTab(const QString& id)
+{
+    if ( categoryBar ) {
+	int idx = ids.findIndex( id );
+	categoryBar->setCurrentTab( idx );
+    }
+}
+
 void CategoryTabWidget::addItem( const QString& linkfile )
 {
     int i=0;
@@ -187,6 +196,12 @@ void CategoryTabWidget::addItem( const QString& linkfile )
 void CategoryTabWidget::initializeCategories(AppLnkSet* rootFolder,
 	AppLnkSet* docFolder, const QList<FileSystem> &fs)
 {
+    QString current;
+    if ( categoryBar ) {
+        int c = categoryBar->currentTab();
+        if ( c >= 0 ) current = ids[c];
+    }
+
     delete categoryBar;
     categoryBar = new CategoryTabBar( this );
     QPalette pal = categoryBar->palette();
@@ -248,8 +263,14 @@ void CategoryTabWidget::initializeCategories(AppLnkSet* rootFolder,
     cfg. setGroup ( "GUI" );
     setBusyIndicatorType ( cfg. readEntry ( "BusyType", QString::null ));
 
+    if ( !current.isNull() ) {
+        showTab(current);
+    }
+
     categoryBar->show();
     stack->show();
+
+    QCopEnvelope e("QPE/TaskBar","reloadApps()");
 }
 
 void CategoryTabWidget::setTabAppearance( const QString &id, Config &cfg )
@@ -614,7 +635,6 @@ Launcher::Launcher( QWidget* parent, const char* name, WFlags fl )
     m_timeStamp = QString::number( stamp  );
 
     tabs = new CategoryTabWidget( this );
-    tabs->setMaximumWidth( qApp->desktop()->width() );
     setCentralWidget( tabs );
 
     connect( tabs, SIGNAL(selected(const QString&)),
@@ -674,6 +694,7 @@ void Launcher::showMaximized()
 void Launcher::doMaximize()
 {
     QMainWindow::showMaximized();
+    tabs->setMaximumWidth( qApp->desktop()->width() );
 }
 
 void Launcher::updateMimeTypes()
@@ -832,6 +853,11 @@ void Launcher::nextView()
     tabs->nextTab();
 }
 
+void Launcher::showTab(const QString& id)
+{
+    tabs->showTab(id);
+    raise();
+}
 
 void Launcher::select( const AppLnk *appLnk )
 {
@@ -889,7 +915,7 @@ void Launcher::updateLink(const QString& link)
 	tabs->updateLink(link);
 	notify_sm = true;
     }
-    
+
     if ( notify_sm )
     	QCopEnvelope e ( "QPE/TaskBar", "reloadApps()" );
 }
@@ -1189,7 +1215,7 @@ void Launcher::launcherMessage( const QCString &msg, const QByteArray &data)
     }
     else if ( msg == "setBusyIndicatorType(QString)" ) {
 	QString type;
-	stream >> type;	
+	stream >> type;
 	tabs->setBusyIndicatorType(type);
     }
     else if ( msg == "home()" ) {
@@ -1197,7 +1223,7 @@ void Launcher::launcherMessage( const QCString &msg, const QByteArray &data)
 	   nextView ( );
 	else
 	   raise ( );
-    	
+
     }
 }
 
