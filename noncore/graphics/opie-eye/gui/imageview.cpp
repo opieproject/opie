@@ -276,7 +276,7 @@ void ImageView::enableFullscreen()
       setUpdatesEnabled(false);
       // This is needed because showNormal() forcefully changes the window
       // style to WSTyle_TopLevel.
-      reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));
+      reparent(0, WStyle_Customize | WStyle_NoBorderEx, QPoint(0,0));
       // Enable fullscreen.
       /* this is the trick - I don't now why, but after a showFullScreen QTE toggles the focus
        * so we must block it here! */

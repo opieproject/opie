@@ -307,7 +307,7 @@ void PMainWindow::setupViewWindow(bool current, bool forceDisplay)
     }
     if (current) {
         m_disp->setBackgroundColor(black);
-        m_disp->reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));
+        m_disp->reparent(0, WStyle_Customize | WStyle_NoBorderEx, QPoint(0,0));
         m_disp->setVScrollBarMode(QScrollView::AlwaysOff);
         m_disp->setHScrollBarMode(QScrollView::AlwaysOff);
         m_disp->resize(qApp->desktop()->width(), qApp->desktop()->height());
@@ -375,29 +375,13 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
 
 void PMainWindow::slotDisplay( const QString& inf ) {
     bool nwindow = false;
-    bool disp_hack = false;
-    int lb;
-    if (m_disp && m_disp->fullScreen()) {
-        lb = m_disp->Intensity();
-        delete m_disp;
-        m_disp = 0;
-
-        disp_hack = true;
-    }
     if ( !m_disp ) {
         nwindow = true;
         initDisp();
-        m_disp->setIntensity((disp_hack?lb:m_Intensity));
+        m_disp->setIntensity(m_Intensity);
+        m_setCurrentBrightness->setEnabled(true);
     }
-    m_setCurrentBrightness->setEnabled(true);
-
-    Opie::Ui::OWait wdlg;
-    wdlg.setTimerLength(30);
-    wdlg.show();
-    //qApp->processEvents(20);
     m_disp->setImage( inf );
-    wdlg.hide();
-    //qApp->processEvents(20);
     if (m_SmallWindow) {
         if (m_gPrevNext->isEnabled()==false) {
             m_gPrevNext->addTo(toolBar);
@@ -414,7 +398,10 @@ void PMainWindow::slotDisplay( const QString& inf ) {
         slotFullScreenToggled(m_aFullScreen->isOn());
     }
     if (m_disp->fullScreen()) {
-        qwsDisplay()->requestFocus( m_disp->winId(), TRUE);
+        if (!m_disp->isVisible()) {
+            m_disp->showFullScreen();
+            qwsDisplay()->requestFocus( m_disp->winId(), TRUE);
+        }
     } else {
         m_stack->raiseWidget( ImageDisplay );
     }
