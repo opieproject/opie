@@ -64,7 +64,7 @@ public slots:
 	void flush();
 	void reload();
 	void appMessage(const QCString &, const QByteArray &);
-	void setDocument( const QString & );
+	void setDocument( const QString & );  // Called by obex receiver and internally!
 #ifdef __DEBUG_RELEASE
 	// void slotSave();
 #endif

@@ -157,14 +157,22 @@ void AbView::load()
 	// Letter Search is stopped at this place
 	emit signalClearLetterPicker();
 
-	if ( m_inPersonal )
-		// VCard Backend does not sort..
-		m_list = m_contactdb->allRecords();
-	else{
-		m_list = m_contactdb->sorted( true, 0, 0, 0 );
-		if ( m_curr_category != -1 )
-			clearForCategory();
+	if ( m_curr_category == 0 ) {
+		// Show unfiled 
+		m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName, 
+					      Opie::OPimContactAccess::DoNotShowWithCategory, 0 );
+	} else	if ( m_curr_category != -1 ){
+		// Just show selected category
+		m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName, 
+					      Opie::OPimBase::FilterCategory, m_curr_category );
+	} else {
+		// Show all categories
+		m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName, 
+					      Opie::OPimBase::FilterOff, 0 );
 	}
+	
+// 	if ( m_curr_category != -1 )
+// 		clearForCategory();
 
 	odebug << "Number of contacts: " << m_list.count() << oendl;
 
@@ -237,7 +245,10 @@ void AbView::setShowByLetter( char c, AbConfig::LPSearchMode mode )
 	}else{
 		// If the current Backend is unable to solve the query, we will
 		// ignore the request ..
-		if ( ! m_contactdb->hasQuerySettings( Opie::OPimContactAccess::WildCards | Opie::OPimContactAccess::IgnoreCase ) ){
+		if ( ! m_contactdb->hasQuerySettings( Opie::OPimContactAccess::WildCards | 
+						      Opie::OPimContactAccess::IgnoreCase ) ){
+			owarn << "Tried to access queryByExample which is not supported by the current backend!!" << oendl;
+			owarn << "I have to ignore this access!" << oendl;
 			return;
 		}
 

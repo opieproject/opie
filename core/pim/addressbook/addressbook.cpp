@@ -352,6 +352,13 @@ void AddressbookWindow::setDocument( const QString &filename )
 {
 	odebug << "void AddressbookWindow::setDocument( " << filename << " )" << oendl;
 
+	// Switch to default backend. This should avoid to import into
+	// the personal database accidently.
+	if ( actionPersonal->isOn() ){
+		actionPersonal->setOn( false );
+		slotPersonalView();
+	}
+
 	if ( filename.find(".vcf") != int(filename.length()) - 4 ){
 
 
