@@ -957,7 +957,11 @@ void MainWindow :: applyChanges()
     {
         if ( item->isOn() )
         {
-            workingPackages.append( dealWithItem( item ) );
+            InstallData *instdata = dealWithItem( item );
+            if ( instdata )
+                workingPackages.append( instdata );
+            else
+                return;
 		}
     }
 
@@ -1067,14 +1071,19 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
             {
                 QString msgtext;
                 msgtext = caption.arg( ( const char * )name );
-                switch( QMessageBox::information( this, text,
-                                    msgtext, tr( "Remove" ), secondButton ) )
+//                switch( QMessageBox::information( this, text,
+//                        msgtext, tr( "Remove" ), secondButton ) )
+                QuestionDlg dlg( text, msgtext, secondButton );
+                switch( dlg.exec() )
                 {
-                    case 0: // Try again or Enter
-                        // option 0 = Remove
+                    case 0: // Cancel
+                        delete newitem;
+                        return 0x0;
+                        break;
+                    case 1: // Remove
                         newitem->option = "D";
                         break;
-                    case 1: // Quit or Escape
+                    case 2: // Reinstall or Upgrade
                         newitem->option = secondOption;
                         break;
                 }
@@ -1163,4 +1172,52 @@ void MainWindow :: slotDisplayPackage( QListViewItem *item )
     QString itemstr( ((QCheckListItem*)item)->text() );
     PackageWindow *p = new PackageWindow( mgr->getServer( serversList->currentText() )->getPackage( itemstr ) );
     p->showMaximized();
+}
+
+QuestionDlg::QuestionDlg( const QString &caption, const QString &text, const QString &secondbtn )
+    : QWidget( 0x0, 0x0, WType_Modal | WType_TopLevel | WStyle_Dialog )
+{
+    setCaption( caption );
+    resize( 175, 100 );
+    
+    QGridLayout *layout = new QGridLayout( this );
+    
+    QLabel *l = new QLabel( text, this );
+    l->setAlignment( AlignCenter | WordBreak );
+    layout->addMultiCellWidget( l, 0, 0, 0, 1 );
+    
+    btn1 = new QPushButton( tr( "Remove" ), this );
+    connect( btn1, SIGNAL(clicked()), this, SLOT(slotButtonPressed()) );
+    layout->addWidget( btn1, 1, 0 );
+    
+    btn2 = new QPushButton( secondbtn, this );
+    connect( btn2, SIGNAL(clicked()), this, SLOT(slotButtonPressed()) );
+    layout->addWidget( btn2, 1, 1 );
+    
+    executing = FALSE;
+}
+
+int QuestionDlg::exec()
+{
+    show();
+
+    if ( !executing )
+    {
+        executing = TRUE;
+        qApp->enter_loop();
+    }
+    
+    return buttonpressed;
+}
+
+void QuestionDlg::slotButtonPressed()
+{
+    if ( sender() == btn1 )
+        buttonpressed = 1;
+    else if ( sender() == btn2 )
+        buttonpressed = 2;
+    else
+        buttonpressed = 0;
+        
+    qApp->exit_loop();
 }

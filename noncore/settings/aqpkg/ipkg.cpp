@@ -227,6 +227,7 @@ void Ipkg :: removeStatusEntry()
     QString key;
     QString value;
     vector<QString> lines;
+    int i = 0;
     do
     {
         in.getline( line, 1000 );
@@ -254,6 +255,11 @@ void Ipkg :: removeStatusEntry()
 
         lines.push_back( QString( line ) );
         out << line << endl;
+
+        // Improve UI responsiveness    
+        i++;
+        if ( ( i % 50 ) == 0 )
+            qApp->processEvents();
     } while ( !in.eof() );
 
     // Write lines out
@@ -261,6 +267,11 @@ void Ipkg :: removeStatusEntry()
     for ( it = lines.begin() ; it != lines.end() ; ++it )
     {
         out << (const char *)(*it) << endl;
+        
+        // Improve UI responsiveness    
+        i++;
+        if ( ( i % 50 ) == 0 )
+            qApp->processEvents();
     }
     
     in.close();
