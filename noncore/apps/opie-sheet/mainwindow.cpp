@@ -53,6 +53,7 @@ MainWindow::MainWindow()
   documentModified=FALSE;
 
   // construct objects
+  currentDoc=0;
   fileSelector=new FileSelector("application/sheet-qt", this, QString::null);
   connect(fileSelector, SIGNAL(closeMe()), this, SLOT(selectorHide()));
   connect(fileSelector, SIGNAL(newSelected(const DocLnk &)), this, SLOT(selectorFileNew(const DocLnk &)));
@@ -71,14 +72,15 @@ MainWindow::MainWindow()
   setCaption(tr("Opie Sheet"));
 
   // create sheets
-  selectorFileNew(currentDoc);
+  selectorFileNew(DocLnk());
 }
 
 MainWindow::~MainWindow()
 {
+  if (currentDoc) delete currentDoc;
 }
 
-void MainWindow::documentSave(DocLnk &lnkDoc)
+void MainWindow::documentSave(DocLnk *lnkDoc)
 {
   FileManager fm;
   QByteArray streamBuffer;
@@ -100,8 +102,8 @@ void MainWindow::documentSave(DocLnk &lnkDoc)
       stream << (Q_UINT32)tempCell->col << (Q_UINT32)tempCell->row << tempCell->borders.right << tempCell->borders.bottom << tempCell->background << (Q_UINT32)tempCell->alignment << tempCell->fontColor << tempCell->font << tempCell->data;
   }
 
-  lnkDoc.setType("application/sheet-qt");
-  if (!fm.saveFile(lnkDoc, streamBuffer))
+  lnkDoc->setType("application/sheet-qt");
+  if (!fm.saveFile(*lnkDoc, streamBuffer))
   {
     QMessageBox::critical(this, tr("Error"), tr("File cannot be saved!"));
     return;
@@ -172,26 +174,18 @@ int MainWindow::saveCurrentFile(bool ask=TRUE)
     if (result!=QMessageBox::Yes) return result;
   }
 
-  if (currentDoc.name().isEmpty() || !currentDoc.isValid())
+  if (!currentDoc->isValid())
   {
     TextDialog dialogText(this);
     if (dialogText.exec(tr("Save File"), tr("&File Name:"), tr("UnnamedFile"))!=QDialog::Accepted || dialogText.getValue().isEmpty()) return QMessageBox::Cancel;
 
-    currentDoc.setName(dialogText.getValue());
+    currentDoc->setName(dialogText.getValue());
+    currentDoc->setFile(QString::null);
+    currentDoc->setLinkFile(QString::null);
   }
 
   documentSave(currentDoc);
   return QMessageBox::Yes;
-}
-
-void MainWindow::copyDocLnk(const DocLnk &source, DocLnk &target)
-{
-  target.setName(source.name());
-  target.setFile(source.file());
-  target.setLinkFile(source.linkFile());
-  target.setComment(source.comment());
-  target.setType(source.type());
-  target.setCategories(source.categories());
 }
 
 void MainWindow::selectorFileNew(const DocLnk &lnkDoc)
@@ -199,7 +193,8 @@ void MainWindow::selectorFileNew(const DocLnk &lnkDoc)
   selectorHide();
 
   if (documentModified && saveCurrentFile()==QMessageBox::Cancel) return;
-  copyDocLnk(lnkDoc, currentDoc);
+  if (currentDoc) delete currentDoc;
+  currentDoc = new DocLnk(lnkDoc);
   listSheets.clear();
   comboSheets->clear();
 
@@ -223,7 +218,8 @@ void MainWindow::selectorFileOpen(const DocLnk &lnkDoc)
   selectorHide();
 
   if (documentModified && saveCurrentFile()==QMessageBox::Cancel) return;
-  copyDocLnk(lnkDoc, currentDoc);
+  if (currentDoc) delete currentDoc;
+  currentDoc = new DocLnk(lnkDoc);
   listSheets.clear();
   comboSheets->clear();
 
@@ -754,9 +750,11 @@ void MainWindow::slotColumnHide()
 void MainWindow::slotFileSaveAs()
 {
   TextDialog dialogText(this);
-  if (dialogText.exec(tr("Save File As"), tr("&File Name:"), currentDoc.name())!=QDialog::Accepted || dialogText.getValue().isEmpty()) return;
+  if (dialogText.exec(tr("Save File As"), tr("&File Name:"), currentDoc->name())!=QDialog::Accepted || dialogText.getValue().isEmpty()) return;
 
-  currentDoc.setName(dialogText.getValue());
+  currentDoc->setName(dialogText.getValue());
+  currentDoc->setFile(QString::null);
+  currentDoc->setLinkFile(QString::null);
   documentSave(currentDoc);
 }
 

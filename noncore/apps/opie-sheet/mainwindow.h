@@ -39,7 +39,7 @@ class MainWindow: public QMainWindow
   Q_OBJECT
 
   // QPE objects
-  DocLnk currentDoc;
+  DocLnk* currentDoc;
   QPEMenuBar *menu;
   QPEToolBar *toolbarFunctions, *toolbarEdit, *toolbarStandard;
   FileSelector *fileSelector;
@@ -76,8 +76,7 @@ class MainWindow: public QMainWindow
   void addToData(const QString &data);
   int saveCurrentFile(bool ask=TRUE);
   void documentOpen(const DocLnk &lnkDoc);
-  void copyDocLnk(const DocLnk &source, DocLnk &target);
-  void documentSave(DocLnk &lnkDoc);
+  void documentSave(DocLnk *lnkDoc);
   void closeEvent(QCloseEvent *e);
   void addFlyAction(const QString &text, const QString &menuText, const QString &tip, QWidget *w);
   typeSheet *createNewSheet();
