@@ -20,9 +20,9 @@
 #include <qwidget.h>
 #include <qspinbox.h>
 
-#include "../../configwidget.h"
+#include "../../todayconfigwidget.h"
 
-class TodolistPluginConfig : public ConfigWidget {
+class TodolistPluginConfig : public TodayConfigWidget {
 
 
 public:

@@ -49,19 +49,11 @@ QString DatebookPlugin::pixmapNameConfig() const {
     return "DateBook";
 }
 
-ConfigWidget* DatebookPlugin::configWidget( QWidget* wid ) {
+TodayConfigWidget* DatebookPlugin::configWidget( QWidget* wid ) {
     return new DatebookPluginConfig( wid , "Datebook" );
 }
 
 QString DatebookPlugin::appName()  const {
     return QObject::tr( "Datebook" );
-}
-
-int DatebookPlugin::minHeight()  const {
-    return 10;
-}
-
-int DatebookPlugin::maxHeight()  const {
-    return 100;
 }
 

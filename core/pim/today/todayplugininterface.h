@@ -3,7 +3,7 @@
 #define TODAY_PLUGIN_INTERFACE
 
 #include <qpe/qcom.h>
-#include "configwidget.h"
+#include "todayconfigwidget.h"
 
 class QString;
 class QWidget;
@@ -35,10 +35,7 @@ public:
      */
     virtual double versionNumber() const = 0;
 
-    /**
-     * the path and name of the identifer icon that should be shown
-     * in "Resource" notation, that means only subdir/picname form $QPEDIR/pics
-     */
+
     virtual  QString pixmapNameWidget() const = 0;
 
     /**    widget for the today view
@@ -55,7 +52,7 @@ public:
      * Config plugin widget - optional
      * If the plugin has a config widget, it  _needs_  a parent here.
      */
-    virtual ConfigWidget* configWidget( QWidget * ) = 0;
+    virtual TodayConfigWidget* configWidget( QWidget * ) = 0;
 
     /**
      * The application that should be assigned to the button (pixmap)
@@ -65,12 +62,12 @@ public:
     /**
      * minimum height the plugin at least should have
      */
-    virtual int minHeight()  const = 0;
+    // virtual int minHeight()  const = 0;
 
     /**
      *  maximum height that should be used before starting scrolling
      */
-    virtual int maxHeight() const = 0;
+    // virtual int maxHeight() const = 0;
 
 };
 

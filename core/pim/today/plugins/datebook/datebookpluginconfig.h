@@ -2,13 +2,13 @@
 #ifndef DATEBOOK_PLUGIN_CONFIG_H
 #define DATEBOOK_PLUGIN_CONFIG_H
 
-//#include <qwidget.h>
+
 #include <qcheckbox.h>
 #include <qspinbox.h>
 
-#include "../../configwidget.h"
+#include "../../todayconfigwidget.h"
 
-class DatebookPluginConfig : public ConfigWidget {
+class DatebookPluginConfig : public TodayConfigWidget {
 
 
 

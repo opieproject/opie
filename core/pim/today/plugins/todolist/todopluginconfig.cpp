@@ -26,7 +26,7 @@
 
 
 TodolistPluginConfig::TodolistPluginConfig( QWidget *parent,  const char* name)
-    : ConfigWidget(parent,  name ) {
+    : TodayConfigWidget(parent,  name ) {
 
     QVBoxLayout * layout = new QVBoxLayout( this );
     layout->setMargin( 20 );

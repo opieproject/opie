@@ -47,7 +47,7 @@ QString TodolistPlugin::pixmapNameConfig() const {
     return "TodoList";
 }
 
-ConfigWidget* TodolistPlugin::configWidget( QWidget* wid ) {
+TodayConfigWidget* TodolistPlugin::configWidget( QWidget* wid ) {
     return new TodolistPluginConfig( wid , "Todolist" );
 }
 
@@ -55,11 +55,4 @@ QString TodolistPlugin::appName() const {
     return  QObject::tr( "Todolist" );
 }
 
-int TodolistPlugin::minHeight()  const {
-    return 10;
-}
-
-int TodolistPlugin::maxHeight()  const {
-    return 100;
-}
 

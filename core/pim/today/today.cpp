@@ -16,7 +16,7 @@
 
 
 #include "today.h"
-#include "configwidget.h"
+#include "todayconfigwidget.h"
 
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -169,7 +169,8 @@ void Today::loadPlugins() {
             // a scrollview for each plugin
             QScrollView* sv = new QScrollView( plugin.guiBox );
             QWidget *plugWidget = plugin.guiPart->widget( sv->viewport() );
-            sv->setMinimumHeight( plugin.guiPart->minHeight() );
+            // not sure if that is good .-)
+            sv->setMinimumHeight( 10 );
             sv->setResizePolicy( QScrollView::AutoOneFit );
             sv->setHScrollBarMode( QScrollView::AlwaysOff );
             sv->setFrameShape( QFrame::NoFrame );
@@ -251,14 +252,14 @@ void Today::startConfig() {
     TodayConfig conf( this, "dialog", true );
 
     TodayPlugin plugin;
-    QList<ConfigWidget> configWidgetList;
+    QList<TodayConfigWidget> configWidgetList;
 
     for ( int i = pluginList.count() - 1  ; i >= 0; i-- ) {
         plugin = pluginList[i];
 
         // load the config widgets in the tabs
         if ( plugin.guiPart->configWidget( this ) != 0l ) {
-            ConfigWidget* widget = plugin.guiPart->configWidget( conf.TabWidget3  );
+            TodayConfigWidget* widget = plugin.guiPart->configWidget( conf.TabWidget3  );
             configWidgetList.append( widget );
             conf.TabWidget3->addTab( widget, plugin.guiPart->pixmapNameConfig()
                                      , plugin.guiPart->appName() );
@@ -270,7 +271,7 @@ void Today::startConfig() {
 
     if ( conf.exec() == QDialog::Accepted ) {
         conf.writeConfig();
-        ConfigWidget *confWidget;
+        TodayConfigWidget *confWidget;
         for ( confWidget = configWidgetList.first(); confWidget != 0;
               confWidget = configWidgetList.next() ) {
             confWidget->writeConfig();

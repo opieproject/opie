@@ -30,7 +30,7 @@ QString MailPlugin::pluginName() const {
 }
 
 double MailPlugin::versionNumber() const {
-    return 0.1;
+    return 0.5;
 }
 
 QString MailPlugin::pixmapNameWidget() const {
@@ -45,7 +45,7 @@ QString MailPlugin::pixmapNameConfig() const {
     return 0l;
 }
 
-ConfigWidget* MailPlugin::configWidget( QWidget* wid ) {
+TodayConfigWidget* MailPlugin::configWidget( QWidget* wid ) {
     return 0l;
 }
 
@@ -53,11 +53,4 @@ QString MailPlugin::appName() const {
     return "Mail";
 }
 
-int MailPlugin::minHeight()  const {
-    return 10;
-}
-
-int MailPlugin::maxHeight()  const {
-    return 10;
-}
 

@@ -36,10 +36,9 @@ public:
     QString pixmapNameWidget() const;
     QWidget* widget(QWidget *);
     QString pixmapNameConfig() const;
-    ConfigWidget* configWidget(QWidget *);
+    TodayConfigWidget* configWidget(QWidget *);
     QString appName() const;
-    virtual int minHeight()  const;
-    virtual int maxHeight()  const;
+
 };
 
 #endif
