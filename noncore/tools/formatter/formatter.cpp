@@ -21,12 +21,11 @@
 
 #include <qmultilineedit.h>
 #include <qstring.h>
-#include <qlist.h>
 #include <qstringlist.h>
 #include <qdir.h>
 #include <qfile.h>
 
-#include <qtstream.h>
+#include <qtextstream.h>
 
 #include <qcombobox.h>
 #include <qpopupmenu.h>
