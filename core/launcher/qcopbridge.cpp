@@ -45,6 +45,7 @@ using namespace Opie::Core;
 #ifndef Q_OS_WIN32
 #include <pwd.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <sys/types.h>
 #endif
 
@@ -61,8 +62,9 @@ QCopBridge::QCopBridge( Q_UINT16 port, QObject *parent,
       cardChannel( 0 )
 {
     if ( !ok() )
-    owarn << "Failed to bind to port " << port << "" << oendl;
+        owarn << "Failed to bind to port " << port << "" << oendl;
     else {
+        ::fcntl( socket(), F_SETFD, FD_CLOEXEC );
 #ifndef QT_NO_COP
 	desktopChannel = new QCopChannel( "QPE/Desktop", this );
 	connect( desktopChannel, SIGNAL(received(const QCString&,const QByteArray&)),

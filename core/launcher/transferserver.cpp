@@ -39,6 +39,7 @@ using namespace Opie::Core;
 #include <pwd.h>
 #include <sys/types.h>
 #include <unistd.h>
+#include <fcntl.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -55,7 +56,9 @@ TransferServer::TransferServer( Q_UINT16 port, QObject *parent,
 {
     connections.setAutoDelete( TRUE );
     if ( !ok() )
-    owarn << "Failed to bind to port " << port << "" << oendl;
+    	owarn << "Failed to bind to port " << port << "" << oendl;
+    else
+        ::fcntl( socket(), F_SETFD, FD_CLOEXEC );	
 }
 
 void TransferServer::authorizeConnections()
