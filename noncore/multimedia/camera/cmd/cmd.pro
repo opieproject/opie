@@ -2,7 +2,7 @@ MOC_DIR         = ./moc
 OBJECTS_DIR     = ./obj
 DESTDIR         = $(OPIEDIR)/bin
 TEMPLATE        = app
-CONFIG          = qt warn_on debug
+CONFIG          += qt warn_on debug
 
 HEADERS         = capture.h
 
@@ -10,7 +10,7 @@ SOURCES         = capture.cpp
 
 INCLUDEPATH     += $(OPIEDIR)/include ../lib
 DEPENDPATH      += $(OPIEDIR)/include ../lib
-LIBS            += -lopiecore2 -lopiecam
+LIBS            += -lqpe -lopiecore2 -lopiecam
 INTERFACES      =
 TARGET          = capture
 

@@ -2,7 +2,7 @@ MOC_DIR         = ./moc
 OBJECTS_DIR     = ./obj
 DESTDIR         = $(OPIEDIR)/lib
 TEMPLATE        = lib
-CONFIG          = qt warn_on debug
+CONFIG          += qt warn_on debug
 
 HEADERS         = avi.h \
                   imageio.h \
