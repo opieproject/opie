@@ -2,6 +2,9 @@
 #define OSQL_LITE_DRIVER_H
 
 #include <sqlite.h>
+#if defined (__GNUC__) && (__GNUC__ < 3)
+#include <sys/types.h>
+#endif
 #include <regex.h>
 
 #include "osqldriver.h"
