@@ -196,3 +196,4 @@ CONFIG_BIGSCREEN_EXAMPLE       libopie/big-screen/example      osplitter_mail.pr
 CONFIG_APPLET_EXAMPLE	examples/applet	example.pro
 CONFIG_TODAY_EXAMPLE	examples/todayplugin	example.pro
 CONFIG_EXAMPLE_MENU	examples/menuapplet menuapplet.pro
+CONFIG_EXAMPLE_BOARD	examples/inputmethod	example.pro
