@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>232</width>
+            <width>228</width>
             <height>267</height>
         </rect>
     </property>
@@ -32,7 +32,7 @@
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>0</number>
+            <number>1</number>
         </property>
         <widget>
             <class>QLayoutWidget</class>
@@ -175,12 +175,6 @@
                         <property>
                             <name>text</name>
                             <string>&lt;select&gt;</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>cisco</string>
                         </property>
                     </item>
                     <item>

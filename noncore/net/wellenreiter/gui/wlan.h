@@ -13,24 +13,25 @@
 **
 **********************************************************************/
 
-#ifndef SCANLIST_H
-#define SCANLIST_H
-
-#include <qlistview.h>
+#ifndef WLAN_H
+#define WLAN_H
 
 class QString;
+class CardConfig;
 
-class MScanListView: public QListView
+class WLAN
 {
-  Q_OBJECT
-  
   public:
-    MScanListView( QWidget* parent = 0, const char* name = 0 );
-    virtual ~MScanListView();
   
-  public slots:
-    void addNewItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal );
-
+    WLAN( const QString& interface );
+    WLAN( const CardConfig* );
+    virtual ~WLAN();
+    void setMonitorMode( bool enabled );
+    
+  private:
+  
+    const CardConfig* _configuration;
+    
 };
 
 #endif

@@ -19,11 +19,19 @@
 #include <qmessagebox.h>
 #include <qcombobox.h>
 #include <qspinbox.h>
+#include <qsocketnotifier.h>
 
 // Qtopia
 
 #ifdef QWS
 #include <qpe/global.h>
+#endif
+
+// Opie
+
+#ifdef QWS
+#include <opie/odevice.h>
+using namespace Opie;
 #endif
 
 // Standard
@@ -33,12 +41,14 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/types.h>
+#include <sys/socket.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 // Local
 
 #include "wellenreiter.h"
-#include "scanlistitem.h"
+#include "scanlist.h"
 #include "logwindow.h"
 #include "hexwindow.h"
 #include "configwindow.h"
@@ -53,22 +63,41 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
 
     logwindow->log( "(i) Wellenreiter has been started." );
     
-    connect( button, SIGNAL( clicked() ), this, SLOT( buttonClicked() ) );
-    netview->setColumnWidthMode( 1, QListView::Manual );
-
     //
-    // setup socket for daemon communication and start poller
+    // detect operating system
+    //
+    
+    #ifdef QWS
+    QString sys;
+    sys.sprintf( "(i) Running on '%s'.", (const char*) ODevice::inst()->systemString() );
+    _system = ODevice::inst()->system();
+    logwindow->log( sys );
+    #endif
+    
+    //
+    // setup socket for daemon communication, register socket notifier
     //
 
     daemon_fd = wl_setupsock( GUIADDR, GUIPORT );
     if ( daemon_fd == -1 )
     {
         logwindow->log( "(E) Couldn't get file descriptor for commsocket." );
-        qDebug( "D'oh! Could not get file descriptor for daemon-->gui communication socket." );
     }
     else
-        startTimer( 700 );
+    {
+        int flags;
+        flags = fcntl( daemon_fd, F_GETFL, 0 );
+        fcntl( daemon_fd, F_SETFL, flags | O_NONBLOCK );
+        QSocketNotifier *sn  = new QSocketNotifier( daemon_fd, QSocketNotifier::Read, parent );
+        connect( sn, SIGNAL( activated( int ) ), this, SLOT( dataReceived() ) );
+    }
 
+    // setup GUI
+        
+    connect( button, SIGNAL( clicked() ), this, SLOT( buttonClicked() ) );
+    button->setEnabled( false );
+    netview->setColumnWidthMode( 1, QListView::Manual );
+        
 }
 
 Wellenreiter::~Wellenreiter()
@@ -82,11 +111,26 @@ void Wellenreiter::handleMessage()
 
     qDebug( "received message from daemon." );
 
-    char buffer[128];
+    char buffer[10000];
+    memset( &buffer, 0, sizeof( buffer ) );
 
-    int result = wl_recv( &daemon_fd, (char*) &buffer, sizeof(buffer) );
-    qDebug( "received %d from recvcomm", result );
-
+    // int result = #wl_recv( &daemon_fd, (char*) &buffer, sizeof(buffer) );
+    
+    struct sockaddr from;
+    socklen_t len;
+    
+    int result = recvfrom( daemon_fd, &buffer, 8192, MSG_WAITALL, &from, &len );
+    
+    qDebug( "received %d from recv [%d bytes]", result, len );
+        
+    if ( result == -1 )
+    {
+        qDebug( "Warning: %s", strerror( errno ) );
+        return;
+    }
+    
+    int command = buffer[1] - 48;
+    
 /*
 typedef struct {
   int net_type;     1 = Accesspoint ; 2 = Ad-Hoc
@@ -98,10 +142,11 @@ typedef struct {
 } wl_network_t;
 */
 
-    // qDebug( "Sniffer sent: '%s'", (const char*) buffer );
+    qDebug( "Recv result: %d", ( result ) );
+    qDebug( "Sniffer sent: '%s'", (const char*) buffer );
     hexwindow->log( (const char*) &buffer );
 
-    if ( result == NETFOUND )  /* new network found */
+    if ( command == NETFOUND )  /* new network found */
     {
         qDebug( "Sniffer said: new network found." );
         wl_network_t n;
@@ -119,7 +164,7 @@ typedef struct {
         else
             type = "adhoc";
 
-        addNewItem( type, n.bssid, QString( (const char*) &n.mac ), n.wep, n.channel, 0 );
+        netview->addNewItem( type, n.bssid, QString( (const char*) &n.mac ), n.wep, n.channel, 0 );
 
     }
 
@@ -131,125 +176,28 @@ typedef struct {
 
 }
 
-
-bool Wellenreiter::hasMessage()
+void Wellenreiter::dataReceived()
 {
-
-    // FIXME: do this in libwellenreiter, not here!!!
-
-    fd_set rfds;
-    FD_ZERO( &rfds );
-    FD_SET( daemon_fd, &rfds );
-    struct timeval tv;
-    tv.tv_sec = 0;
-    tv.tv_usec = 10;
-    int result = select( daemon_fd+1, &rfds, NULL, NULL, &tv );
-    
-    if ( result == 0 )
-    {
-        return false;
-    }
-    else if ( result == -1 )
-    {
-        qDebug( "selected returned: %s", strerror( errno ) );
-        return false;
-    }
-    else
-        return true; //FD_ISSET( daemon_fd, &rfds ); gibbet 'eh nur einen Deskriptor
-}
-
-void Wellenreiter::timerEvent( QTimerEvent* e )
-{
-    //qDebug( "checking for message..." );
-    if ( hasMessage() )
-    {
-        //qDebug( "got message from daemon" );
-        handleMessage();
-    }
-    else
-    {
-        //qDebug( "no message..." );
-    }
-}
-
-void Wellenreiter::addNewItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal )
-{
-    // FIXME: this code belongs in customized QListView, not into this class
-    // FIXME: scanlistitem needs a proper encapsulation and not such a damn dealing with text(...)
-
-        qDebug( "Wellenreiter::addNewItem( %s / %s / %s [%d]",
-        (const char*) type,
-        (const char*) essid,
-        (const char*) macaddr,
-        channel );
-        
-    // search, if we already have seen this net
-      
-    QString s;
-    MScanListItem* network;
-    MScanListItem* item = static_cast<MScanListItem*> ( netview->firstChild() );
-
-    while ( item && ( item->text( 0 ) != essid ) )
-    {
-        qDebug( "itemtext: %s", (const char*) item->text( 0 ) );
-        item = static_cast<MScanListItem*> ( item->itemBelow() );
-    }
-    if ( item )
-    {
-        // we have already seen this net, check all childs if MAC exists
-        
-        network = item;
-        
-        item = static_cast<MScanListItem*> ( item->firstChild() );
-        assert( item ); // this shouldn't fail
-        
-        while ( item && ( item->text( 2 ) != macaddr ) )
-        {
-            qDebug( "subitemtext: %s", (const char*) item->text( 2 ) );
-            item = static_cast<MScanListItem*> ( item->itemBelow() );
-        }
-        
-        if ( item )
-        {
-            // we have already seen this item, it's a dupe
-            qDebug( "%s is a dupe - ignoring...", (const char*) macaddr );
-            return;
-        }
-    }
-    else
-    {
-        s.sprintf( "(i) new network: '%s'", (const char*) essid );
-        logwindow->log( s );
-        
-        network = new MScanListItem( netview, "networks", essid, QString::null, 0, 0, 0 );
-    }    
-        
-        
-    // insert new station as child from network
-        
-    // no essid to reduce clutter, maybe later we have a nick or stationname to display!?
-    
-    qDebug( "inserting new station %s", (const char*) macaddr );
-    
-    new MScanListItem( network, type, "", macaddr, wep, channel, signal ); 
-
-    if ( type == "managed" )
-    {
-        s.sprintf( "(i) new AP in '%s' [%d]", (const char*) essid, channel );
-    }
-    else
-    {
-        s.sprintf( "(i) new adhoc station in '%s' [%d]", (const char*) essid, channel );
-    }
-    
-    logwindow->log( s );
-
+    logwindow->log( "(d) Received data from daemon" );
+    handleMessage();    
 }
 
 void Wellenreiter::buttonClicked()
 {
+        /*
+        // add some test stations, so that we can see if the GUI part works
+        addNewItem( "managed", "Vanille", "04:00:20:EF:A6:43", true, 6, 80 );
+        addNewItem( "managed", "Vanille", "04:00:20:EF:A6:23", true, 11, 10 );
+        addNewItem( "adhoc", "ELAN", "40:03:43:E7:16:22", false, 3, 10 );
+        addNewItem( "adhoc", "ELAN", "40:03:53:E7:56:62", false, 3, 15 );
+        addNewItem( "adhoc", "ELAN", "40:03:63:E7:56:E2", false, 3, 20 );
+        */
+
+
     if ( daemonRunning )
     {
+        daemonRunning = false;
+        
         logwindow->log( "(i) Daemon has been stopped." );
         button->setText( "Start Scanning" );
         
@@ -316,20 +264,5 @@ void Wellenreiter::buttonClicked()
         system( cmdline );
         qDebug( "done" );
 
-        /*
-        
-        // add some test stations, so that we can see if the GUI part works
-
-        addNewItem( "managed", "Vanille", "04:00:20:EF:A6:43", true, 6, 80 );
-        addNewItem( "managed", "Vanille", "04:00:20:EF:A6:23", true, 11, 10 );
-        addNewItem( "adhoc", "ELAN", "40:03:43:E7:16:22", false, 3, 10 );
-        addNewItem( "adhoc", "ELAN", "40:03:53:E7:56:62", false, 3, 15 );
-        addNewItem( "adhoc", "ELAN", "40:03:63:E7:56:E2", false, 3, 20 );
-
-        QString command ("98");
-
-        //sendcomm( DAEMONADDR, DAEMONPORT, (const char*) command );
-
-        */
     }
 }

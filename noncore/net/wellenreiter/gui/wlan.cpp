@@ -13,44 +13,45 @@
 **
 **********************************************************************/
 
-#ifndef WELLENREITER_H
-#define WELLENREITER_H
+#include "wlan.h"
+#include "cardconfig.h"
 
-#include "wellenreiterbase.h"
+// Qt
+#include <qstring.h>
 
+// Qtopia
 #ifdef QWS
 #include <opie/odevice.h>
 using namespace Opie;
 #endif
 
-class QTimerEvent;
-class QPixmap;
+WLAN::WLAN( const QString& interface )
+{
+    _configuration = new CardConfig( interface );
+}
 
-class Wellenreiter : public WellenreiterBase {
-    Q_OBJECT
+WLAN::WLAN( const CardConfig* configuration )
+{
+    _configuration = configuration;
 
-public:
+}
 
-    Wellenreiter( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-    ~Wellenreiter();
+WLAN::~WLAN()
+{
+    delete _configuration;
 
-protected:
+}
+  
+void WLAN::setMonitorMode( bool enabled )
+{
+
+    /*
     
-    bool daemonRunning;
-
-public slots:
-    void buttonClicked();
-    void dataReceived();
-
-private:
-    int daemon_fd;                  // socket filedescriptor for udp communication socket
-    #ifdef QWS
-    OSystem _system;                // Opie Operating System identifier
-    #endif
-    void handleMessage();
+    if ( _configuration->system() == System_OpenZaurus && _configuration->type() == CardConfig::Prism )
+    {
+    }
     
-    //void readConfig();
-    //void writeConfig();
-};
+    */
 
-#endif
+}
+

@@ -13,25 +13,17 @@
 **
 **********************************************************************/
 
-#ifndef SCANLIST_H
-#define SCANLIST_H
+#include "cardconfig.h"
 
-#include <qlistview.h>
+#include <qstring.h>
 
-class QString;
-
-class MScanListView: public QListView
+CardConfig::CardConfig( const QString& interface, Type type, int hopinterval )
+           :_interface( interface ), _type( type ), _hopinterval( hopinterval )
 {
-  Q_OBJECT
-  
-  public:
-    MScanListView( QWidget* parent = 0, const char* name = 0 );
-    virtual ~MScanListView();
-  
-  public slots:
-    void addNewItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal );
 
-};
+}
 
-#endif
+CardConfig::~CardConfig()
+{
+}
 

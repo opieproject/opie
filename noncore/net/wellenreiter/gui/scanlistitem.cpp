@@ -76,3 +76,4 @@ void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, 
     this->type = type;
 
 }
+

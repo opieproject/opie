@@ -30,6 +30,7 @@
 #include "logwindow.h"
 #include "hexwindow.h"
 #include "configwindow.h"
+#include "scanlist.h"
 
 #ifdef QWS
 #include <qpe/resource.h>
@@ -47,6 +48,11 @@
 WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
+    ani1 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot0" ) );
+    ani2 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot90" ) );
+    ani3 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot180" ) );
+    ani4 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot270" ) );
+    
     if ( !name )
         setName( "WellenreiterBase" );
     resize( 191, 294 ); 
@@ -66,7 +72,7 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
 
     //--------- NETVIEW TAB --------------    
     
-    netview = new QListView( ap, "netview" );
+    netview = new MScanListView( ap );
     netview->addColumn( tr( "SSID" ) );
     netview->setColumnAlignment( 0, AlignLeft || AlignVCenter );
     netview->addColumn( tr( "Sig" ) );

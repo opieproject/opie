@@ -22,8 +22,8 @@ class QVBoxLayout;
 class QHBoxLayout; 
 class QGridLayout; 
 class QLabel;
-class QListView;
-class QListViewItem;
+class MScanListView;
+class MScanListItem;
 class QPushButton;
 class MLogWindow;
 class MHexWindow;
@@ -49,7 +49,7 @@ public:
     QTabWidget* TabWidget;
 #endif
     QWidget* ap;
-    QListView* netview;
+    MScanListView* netview;
     MLogWindow* logwindow;
     MHexWindow* hexwindow;
     WellenreiterConfigWindow* configwindow;
@@ -63,6 +63,13 @@ protected:
     QVBoxLayout* apLayout;
     QGridLayout* aboutLayout;
     bool event( QEvent* );
+    
+    QPixmap* ani1;
+    QPixmap* ani2;
+    QPixmap* ani3;
+    QPixmap* ani4;
+
+    
 };
 
 #endif // WELLENREITERBASE_H

@@ -13,44 +13,46 @@
 **
 **********************************************************************/
 
-#ifndef WELLENREITER_H
-#define WELLENREITER_H
+#ifndef CARDCONFIG_H
+#define CARDCONFIG_H
 
-#include "wellenreiterbase.h"
+#include <qstring.h>
 
 #ifdef QWS
 #include <opie/odevice.h>
 using namespace Opie;
 #endif
 
-class QTimerEvent;
-class QPixmap;
-
-class Wellenreiter : public WellenreiterBase {
-    Q_OBJECT
-
-public:
-
-    Wellenreiter( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-    ~Wellenreiter();
-
-protected:
+class CardConfig
+{
+  public:
+  
+    typedef enum { Prism, Orinoco, HostAP, Manual } Type;
+  
+  public:
+      
+    CardConfig( const QString& interface, Type type = Manual, int hopinterval = 100 );
+    virtual ~CardConfig();
     
-    bool daemonRunning;
-
-public slots:
-    void buttonClicked();
-    void dataReceived();
-
-private:
-    int daemon_fd;                  // socket filedescriptor for udp communication socket
+    const QString& interface() { return _interface; };
+    int hopinterval() { return _hopinterval; };
+    Type type() { return _type; };
+    
     #ifdef QWS
-    OSystem _system;                // Opie Operating System identifier
+    OSystem system() { return _system; };
     #endif
-    void handleMessage();
     
-    //void readConfig();
-    //void writeConfig();
+  private:
+    
+    QString _interface;
+    Type _type;
+    int _hopinterval;
+    
+    #ifdef QWS
+    OSystem _system;
+    #endif
+    
 };
 
 #endif
+
