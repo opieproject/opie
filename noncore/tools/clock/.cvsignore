@@ -2,3 +2,8 @@ Makefile*
 moc_*
 .moc
 .obj
+clockbase.h
+clockbase.cpp
+alarmdlgbase.h
+alarmdlgbase.cpp
+
