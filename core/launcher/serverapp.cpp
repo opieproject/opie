@@ -20,7 +20,7 @@
 
 #include "serverapp.h"
 
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 
 #include <qtopia/password.h>
 #include <qtopia/config.h>
@@ -369,10 +369,10 @@ void ServerApplication::apmTimeout() {
     if ( m_ps->acStatus() != m_ps_last-> acStatus() )
         m_screensaver-> powerStatusChanged( *m_ps );
 
-    if ( m_ps->acStatus() == PowerStatus::Online ) {  
+    if ( m_ps->acStatus() == PowerStatus::Online ) {
         return;
     }
-    
+
     int bat = m_ps-> batteryPercentRemaining();
 
     if ( bat < m_ps_last-> batteryPercentRemaining() ) {
@@ -385,11 +385,11 @@ void ServerApplication::apmTimeout() {
 		QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
 		0, QString::null, TRUE, WStyle_StaysOnTop);
 	    battlow.setButtonText(QMessageBox::Cancel, tr("Ok"));
-	    battlow.exec();     
+	    battlow.exec();
         } else if ( bat <= m_powerVeryLow )
             pa->alert( tr( "The battery is running very low. "), 2 );
     }
-    
+
     if ( m_ps-> backupBatteryStatus() == PowerStatus::VeryLow ) {
 	    QMessageBox battlow(
 		tr("WARNING"),
@@ -399,8 +399,8 @@ void ServerApplication::apmTimeout() {
 		QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
 		0, QString::null, TRUE, WStyle_StaysOnTop);
 	    battlow.setButtonText(QMessageBox::Cancel, tr("Ok"));
-	    battlow.exec();   
-    }    
+	    battlow.exec();
+    }
 }
 
 void ServerApplication::systemMessage( const QCString& msg,
@@ -826,19 +826,19 @@ bool ServerApplication::recoverMemory()
 void ServerApplication::keyClick(int , bool press, bool )
 {
     if ( press && m_keyclick_sound )
-        ODevice::inst() -> keySound();
+        ODevice::inst() -> playKeySound();
 
 }
 
 void ServerApplication::screenClick(bool press)
 {
     if ( press && m_screentap_sound )
-        ODevice::inst() -> touchSound();
+        ODevice::inst() -> playTouchSound();
 }
 
 void ServerApplication::soundAlarm() {
     if ( me ()->m_alarm_sound )
-        ODevice::inst()->alarmSound();
+        ODevice::inst()->playAlarmSound();
 }
 
 ServerApplication *ServerApplication::me ( )
