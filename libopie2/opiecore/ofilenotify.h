@@ -116,6 +116,7 @@ class OFileNotification : public QObject
      *         ... // create and show your widgets
      *         return a.exec();
      *     }
+     *  </pre>
      *
      * This sample program automatically terminates when the file "/tmp/quite" has been created.
      *
