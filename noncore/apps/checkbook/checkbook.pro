@@ -29,25 +29,4 @@ DEPENDPATH      += $(OPIEDIR)/include
 LIBS    += -lqpe -lopie
 TARGET    = checkbook
 
-TRANSLATIONS = ../../../i18n/de/checkbook.ts \
-	 ../../../i18n/nl/checkbook.ts \
-	 ../../../i18n/da/checkbook.ts \
-	 ../../../i18n/xx/checkbook.ts \
-   ../../../i18n/en/checkbook.ts    \
-   ../../../i18n/es/checkbook.ts    \
-   ../../../i18n/fr/checkbook.ts    \
-   ../../../i18n/hu/checkbook.ts    \
-   ../../../i18n/ja/checkbook.ts    \
-   ../../../i18n/ko/checkbook.ts    \
-   ../../../i18n/no/checkbook.ts    \
-   ../../../i18n/pl/checkbook.ts    \
-   ../../../i18n/pt/checkbook.ts    \
-   ../../../i18n/pt_BR/checkbook.ts \
-   ../../../i18n/sl/checkbook.ts    \
-   ../../../i18n/zh_CN/checkbook.ts \
-   ../../../i18n/zh_TW/checkbook.ts \
-   ../../../i18n/it/checkbook.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

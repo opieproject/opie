@@ -32,24 +32,4 @@ LIBS            += -lqpe
 
 TARGET		= keypebble
 
-TRANSLATIONS = ../../../i18n/de/keypebble.ts \
-	 ../../../i18n/nl/keypebble.ts \
-	 ../../../i18n/da/keypebble.ts \
-	 ../../../i18n/xx/keypebble.ts \
-	 ../../../i18n/en/keypebble.ts \
-	 ../../../i18n/es/keypebble.ts \
-	 ../../../i18n/fr/keypebble.ts \
-	 ../../../i18n/hu/keypebble.ts \
-	 ../../../i18n/ja/keypebble.ts \
-	 ../../../i18n/ko/keypebble.ts \
-	 ../../../i18n/no/keypebble.ts \
-	 ../../../i18n/pl/keypebble.ts \
-	 ../../../i18n/pt/keypebble.ts \
-	 ../../../i18n/pt_BR/keypebble.ts \
-	 ../../../i18n/sl/keypebble.ts \
-	 ../../../i18n/zh_CN/keypebble.ts \
-	 ../../../i18n/zh_TW/keypebble.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

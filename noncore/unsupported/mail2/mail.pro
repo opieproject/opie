@@ -43,24 +43,4 @@ INCLUDEPATH    += 	$(OPIEDIR)/include libmail
 LIBS           += 	-lcoremail -lqpe -lopie
 TARGET		= 	mail 
 
-TRANSLATIONS = ../../i18n/de/mail.ts \
-	 ../../i18n/nl/mail.ts \
-	 ../../i18n/da/mail.ts \
-	 ../../i18n/xx/mail.ts \
-	 ../../i18n/en/mail.ts \
-	 ../../i18n/es/mail.ts \
-	 ../../i18n/fr/mail.ts \
-	 ../../i18n/hu/mail.ts \
-	 ../../i18n/ja/mail.ts \
-	 ../../i18n/ko/mail.ts \
-	 ../../i18n/no/mail.ts \
-	 ../../i18n/pl/mail.ts \
-	 ../../i18n/pt/mail.ts \
-	 ../../i18n/pt_BR/mail.ts \
-	 ../../i18n/sl/mail.ts \
-	 ../../i18n/zh_CN/mail.ts \
-	 ../../i18n/zh_TW/mail.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

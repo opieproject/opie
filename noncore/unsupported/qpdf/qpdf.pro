@@ -53,25 +53,4 @@ LIBS        += -L $(OPIEDIR)/lib -lqpe -lopie -lstdc++
 DESTDIR      = $(OPIEDIR)/bin
 TARGET       = qpdf
 
-TRANSLATIONS = ../../../i18n/de/qpdf.ts \
-	 ../../../i18n/nl/qpdf.ts \
-	 ../../../i18n/da/qpdf.ts \
-	 ../../../i18n/xx/qpdf.ts \
-	 ../../../i18n/en/qpdf.ts \
-	 ../../../i18n/es/qpdf.ts \
-	 ../../../i18n/fr/qpdf.ts \
-	 ../../../i18n/hu/qpdf.ts \
-	 ../../../i18n/ja/qpdf.ts \
-	 ../../../i18n/ko/qpdf.ts \
-	 ../../../i18n/no/qpdf.ts \
-	 ../../../i18n/pl/qpdf.ts \
-	 ../../../i18n/pt/qpdf.ts \
-	 ../../../i18n/pt_BR/qpdf.ts \
-	 ../../../i18n/sl/qpdf.ts \
-	 ../../../i18n/zh_CN/qpdf.ts \
-	 ../../../i18n/it/qpdf.ts \
-	 ../../../i18n/zh_TW/qpdf.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

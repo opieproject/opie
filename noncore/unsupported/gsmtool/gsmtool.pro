@@ -13,24 +13,4 @@ LIBS            += -lqpe -L$(GSMLIBDIR)/gsmlib/.libs -lgsmme
 INTERFACES	= gsmtoolbase.ui
 TARGET		= gsmtool
 
-TRANSLATIONS = ../../../i18n/de/gsmtool.ts \
-	 ../../../i18n/nl/gsmtool.ts \
-	 ../../../i18n/da/gsmtool.ts \
-	 ../../../i18n/xx/gsmtool.ts \
-	 ../../../i18n/en/gsmtool.ts \
-	 ../../../i18n/es/gsmtool.ts \
-	 ../../../i18n/fr/gsmtool.ts \
-	 ../../../i18n/hu/gsmtool.ts \
-	 ../../../i18n/ja/gsmtool.ts \
-	 ../../../i18n/ko/gsmtool.ts \
-	 ../../../i18n/no/gsmtool.ts \
-	 ../../../i18n/pl/gsmtool.ts \
-	 ../../../i18n/pt/gsmtool.ts \
-	 ../../../i18n/pt_BR/gsmtool.ts \
-	 ../../../i18n/sl/gsmtool.ts \
-	 ../../../i18n/zh_CN/gsmtool.ts \
-	 ../../../i18n/zh_TW/gsmtool.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

@@ -44,23 +44,4 @@ LIBS		+= -lqpe -lopie
 
 TARGET		= drawpad
 
-TRANSLATIONS = ../../../i18n/de/drawpad.ts \
-	 ../../../i18n/nl/drawpad.ts \
-	 ../../../i18n/da/drawpad.ts \
-	 ../../../i18n/xx/drawpad.ts \
-	 ../../../i18n/en/drawpad.ts \
-	 ../../../i18n/es/drawpad.ts \
-	 ../../../i18n/fr/drawpad.ts \
-	 ../../../i18n/hu/drawpad.ts \
-	 ../../../i18n/ja/drawpad.ts \
-	 ../../../i18n/ko/drawpad.ts \
-	 ../../../i18n/no/drawpad.ts \
-	 ../../../i18n/pl/drawpad.ts \
-	 ../../../i18n/pt/drawpad.ts \
-	 ../../../i18n/pt_BR/drawpad.ts \
-	 ../../../i18n/sl/drawpad.ts \
-	 ../../../i18n/zh_CN/drawpad.ts \
-	 ../../../i18n/it/drawpad.ts \
-	 ../../../i18n/zh_TW/drawpad.ts
-
 include ( $(OPIEDIR)/include.pro )

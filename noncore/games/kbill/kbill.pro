@@ -13,24 +13,4 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS		+= -lqpe -lstdc++
 DESTDIR 	=  $(OPIEDIR)/bin
 
-TRANSLATIONS = ../../../i18n/de/kbill.ts \
-	 ../../../i18n/nl/kbill.ts \
-	 ../../../i18n/da/kbill.ts \
-	 ../../../i18n/xx/kbill.ts \
-	 ../../../i18n/en/kbill.ts \
-	 ../../../i18n/es/kbill.ts \
-	 ../../../i18n/fr/kbill.ts \
-	 ../../../i18n/hu/kbill.ts \
-	 ../../../i18n/ja/kbill.ts \
-	 ../../../i18n/ko/kbill.ts \
-	 ../../../i18n/no/kbill.ts \
-	 ../../../i18n/pl/kbill.ts \
-	 ../../../i18n/pt/kbill.ts \
-	 ../../../i18n/pt_BR/kbill.ts \
-	 ../../../i18n/sl/kbill.ts \
-	 ../../../i18n/zh_CN/kbill.ts \
-	 ../../../i18n/zh_TW/kbill.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

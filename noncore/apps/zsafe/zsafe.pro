@@ -12,7 +12,6 @@ INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS        += -Wl,-rpath,$(OPIEDIR)/lib -L$(OPIEDIR)/lib -lqpe -lopie -lstdc++
 TARGET		 = zsafe
-TRANSLATIONS = $(OPIEDIR)/noncore/apps/zsafe/i18n/de/zsafe.ts
 
 include ( $(OPIEDIR)/include.pro )
 

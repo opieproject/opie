@@ -9,23 +9,4 @@ DEPENDPATH  += $(OPIEDIR)/include
 
 TARGET 		= appearance
 
-TRANSLATIONS = ../../../i18n/de/appearance.ts \
-	 ../../../i18n/nl/appearance.ts \
-	 ../../../i18n/xx/appearance.ts \
-	 ../../../i18n/en/appearance.ts \
-	 ../../../i18n/es/appearance.ts \
-	 ../../../i18n/fr/appearance.ts \
-	 ../../../i18n/hu/appearance.ts \
-	 ../../../i18n/ja/appearance.ts \
-	 ../../../i18n/ko/appearance.ts \
-	 ../../../i18n/no/appearance.ts \
-	 ../../../i18n/pl/appearance.ts \
-	 ../../../i18n/pt/appearance.ts \
-	 ../../../i18n/pt_BR/appearance.ts \
-	 ../../../i18n/sl/appearance.ts \
-	 ../../../i18n/zh_CN/appearance.ts \
-	 ../../../i18n/zh_TW/appearance.ts \
-	 ../../../i18n/da/appearance.ts
-
-
 include ( $(OPIEDIR)/include.pro )

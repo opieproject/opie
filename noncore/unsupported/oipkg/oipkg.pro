@@ -37,24 +37,4 @@ INTERFACES	= runwindow.ui \
    		pksettingsbase.ui
 TARGET		= oipkg
 
-TRANSLATIONS = ../../../i18n/de/oipkg.ts \
-	 ../../../i18n/nl/oipkg.ts \
-	 ../../../i18n/da/oipkg.ts \
-	 ../../../i18n/xx/oipkg.ts \
-	 ../../../i18n/en/oipkg.ts \
-	 ../../../i18n/es/oipkg.ts \
-	 ../../../i18n/fr/oipkg.ts \
-	 ../../../i18n/hu/oipkg.ts \
-	 ../../../i18n/ja/oipkg.ts \
-	 ../../../i18n/ko/oipkg.ts \
-	 ../../../i18n/no/oipkg.ts \
-	 ../../../i18n/pl/oipkg.ts \
-	 ../../../i18n/pt/oipkg.ts \
-	 ../../../i18n/pt_BR/oipkg.ts \
-	 ../../../i18n/sl/oipkg.ts \
-	 ../../../i18n/zh_CN/oipkg.ts \
-	 ../../../i18n/zh_TW/oipkg.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

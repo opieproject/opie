@@ -8,24 +8,4 @@ DEPENDPATH	+=$(OPIEDIR)/include
 LIBS		+=-lqpe -lopie
 TARGET          = remote
 
-TRANSLATIONS = ../../../i18n/de/remote.ts \
-	 ../../../i18n/nl/remote.ts \
-	 ../../../i18n/da/remote.ts \
-	 ../../../i18n/xx/remote.ts \
-	 ../../../i18n/en/remote.ts \
-	 ../../../i18n/es/remote.ts \
-	 ../../../i18n/fr/remote.ts \
-	 ../../../i18n/hu/remote.ts \
-	 ../../../i18n/ja/remote.ts \
-	 ../../../i18n/ko/remote.ts \
-	 ../../../i18n/no/remote.ts \
-	 ../../../i18n/pl/remote.ts \
-	 ../../../i18n/pt/remote.ts \
-	 ../../../i18n/pt_BR/remote.ts \
-	 ../../../i18n/sl/remote.ts \
-	 ../../../i18n/zh_CN/remote.ts \
-	 ../../../i18n/zh_TW/remote.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

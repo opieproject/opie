@@ -18,25 +18,4 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe
 
-TRANSLATIONS = ../../../i18n/de/patience.ts \
-	 ../../../i18n/nl/patience.ts \
-	 ../../../i18n/da/patience.ts \
-	 ../../../i18n/xx/patience.ts \
-   ../../../i18n/en/patience.ts \
-   ../../../i18n/es/patience.ts \
-   ../../../i18n/fr/patience.ts \
-   ../../../i18n/hu/patience.ts \
-   ../../../i18n/ja/patience.ts \
-   ../../../i18n/ko/patience.ts \
-   ../../../i18n/no/patience.ts \
-   ../../../i18n/pl/patience.ts \
-   ../../../i18n/pt/patience.ts \
-   ../../../i18n/pt_BR/patience.ts \
-   ../../../i18n/sl/patience.ts \
-   ../../../i18n/zh_CN/patience.ts \
-   ../../../i18n/zh_TW/patience.ts \
-     ../../../i18n/it/patience.ts
-
-
-
 include ( $(OPIEDIR)/include.pro )

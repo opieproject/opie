@@ -8,23 +8,4 @@ LIBS            += -lqpe
 INTERFACES      = pindlgbase.ui
 TARGET		= bluepin
 
-TRANSLATIONS = ../../../../i18n/de/bluepin.ts \
-	 ../../../../i18n/nl/bluepin.ts \
-	 ../../../../i18n/da/bluepin.ts \
-	 ../../../../i18n/xx/bluepin.ts \
-	 ../../../../i18n/en/bluepin.ts \
-	 ../../../../i18n/es/bluepin.ts \
-	 ../../../../i18n/fr/bluepin.ts \
-	 ../../../../i18n/hu/bluepin.ts \
-	 ../../../../i18n/ja/bluepin.ts \
-	 ../../../../i18n/ko/bluepin.ts \
-	 ../../../../i18n/no/bluepin.ts \
-	 ../../../../i18n/pl/bluepin.ts \
-	 ../../../../i18n/pt/bluepin.ts \
-	 ../../../../i18n/pt_BR/bluepin.ts \
-	 ../../../../i18n/sl/bluepin.ts \
-	 ../../../../i18n/zh_CN/bluepin.ts \
-	 ../../../../i18n/zh_TW/bluepin.ts
-
-
 include ( $(OPIEDIR)/include.pro )
