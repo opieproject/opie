@@ -109,7 +109,6 @@ APPS=$(LOCALAPPS) $(PIMAPPS)  $(COREAPPS)     \
 NONTMAKEAPPS := ipaq/opiealarm 
 
 DOCS = docs/src/opie-policy
-single: mpegplayer/libmpeg3
 
 dynamic: $(APPS) $(NONTMAKEAPPS)
 
@@ -119,14 +118,13 @@ $(COMPONENTS): $(LIBS)
 
 $(NONTMAKEAPPS) $(APPS): $(LIBS) $(COMPONENTS)
 
-$(LIBS) $(COMPONENTS) $(NONTMAKEAPPS) $(APPS) $(DOCS) single:
+$(LIBS) $(COMPONENTS) $(NONTMAKEAPPS) $(APPS) $(DOCS):
 	$(MAKE) -C $@ -f Makefile
 
 showcomponents:
-	@echo $(LIBS) $(APPS) $(COMPONENTS) single
+	@echo $(LIBS) $(APPS) $(COMPONENTS)
 
 clean:
-	$(MAKE) -C single -f Makefile $@
 	for dir in $(NONTMAKEAPPS) $(APPS) $(LIBS) $(COMPONENTS) $(DOCS); do $(MAKE) -C $$dir -f Makefile $@ || exit 1; done
 
 lupdate:
@@ -136,4 +134,4 @@ lrelease:
 	for dir in $(APPS) $(LIBS) $(COMPONENTS); do $(MAKE) -C $$dir -f Makefile $@ || exit 1; done
 
 
-.PHONY: default dynamic $(NONTMAKEAPPS) $(LIBS) $(APPS) $(COMPONENTS) $(DOCS) single showcomponents clean
+.PHONY: default dynamic $(NONTMAKEAPPS) $(LIBS) $(APPS) $(COMPONENTS) $(DOCS) showcomponents clean
