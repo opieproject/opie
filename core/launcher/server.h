@@ -41,6 +41,7 @@ class QueuedRequestRunner;
 namespace Opie {
 namespace Core {
     class ODeviceButton;
+    class OProcess;
 }
 }
 
@@ -63,6 +64,10 @@ public slots:
     void pokeTimeMonitors();
 
 private slots:
+    //@{
+    void startSoundServer();
+    void soundServerExited();
+    //@}
     void activate(const Opie::Core::ODeviceButton*,bool);
     void syncConnectionClosed( const QHostAddress & );
     void applicationLaunched(int pid, const QString &app);
@@ -104,6 +109,8 @@ private:
     int pendingFlushes;
     bool directAccessRun;
     QueuedRequestRunner *qrr;
+
+    Opie::Core::OProcess *process;
 };
 
 

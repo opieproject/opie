@@ -41,6 +41,8 @@
 #include <opie2/odebug.h>
 #include <opie2/odevicebutton.h>
 #include <opie2/odevice.h>
+#include <opie2/oprocess.h>
+
 #include <qtopia/applnk.h>
 #include <qtopia/private/categories.h>
 #include <qtopia/mimetype.h>
@@ -133,7 +135,8 @@ Server::Server() :
     qcopBridge( 0 ),
     transferServer( 0 ),
     packageHandler( 0 ),
-    syncDialog( 0 )
+    syncDialog( 0 ),
+    process( 0 )
 {
     Global::setBuiltinCommands(builtins);
 
@@ -166,6 +169,8 @@ Server::Server() :
     connect( desktopChannel, SIGNAL(received( const QCString &, const QByteArray & )),
          this, SLOT(desktopMessage( const QCString &, const QByteArray & )) );
 #endif
+
+    soundServerExited();
 
     // start services
     startTransferServer();
@@ -984,3 +989,18 @@ void Server::finishedQueuedRequests()
     }
 }
 
+void Server::startSoundServer() {
+    if ( !process ) {
+        process = new Opie::Core::OProcess( this );
+        connect(process, SIGNAL(processExited(Opie::Core::OProcess*)),
+                SLOT(soundServerExited()));
+    }
+
+    process->clearArguments();
+    *process << QPEApplication::qpeDir() + "bin/qss";
+    process->start();
+}
+
+void Server::soundServerExited() {
+    QTimer::singleShot(5000, this, SLOT(startSoundServer()));
+}
