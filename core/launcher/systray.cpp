@@ -80,7 +80,11 @@ void SysTray::addApplets()
 #ifndef SINGLE_APP
     Config cfg( "Taskbar" );
     cfg.setGroup( "Applets" );
-    bool safe = cfg.readBoolEntry("SafeMode",FALSE);
+    
+    // SafeMode causes too much problems, so we disable it for now --
+    // maybe we should reenable it for OPIE 1.0 - sandman 26.09.02
+    
+    bool safe = false; //cfg.readBoolEntry("SafeMode",FALSE);
     if ( safe && !safety_tid )
 	return;
     cfg.writeEntry("SafeMode",TRUE);
