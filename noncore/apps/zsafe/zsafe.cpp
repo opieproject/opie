@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.3 2003-08-01 07:01:38 zcarsten Exp $
+** $Id: zsafe.cpp,v 1.4 2003-08-06 20:15:19 zcarsten Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -2597,6 +2597,7 @@ void ZSafe::addCategory()
 #endif
         QStringList::Iterator it = list.begin();
         QString categ;
+        QString firstCategory;
         dialog->CategoryField->clear(); // remove all items
         while( it != list.end() ) 
         {
@@ -2618,13 +2619,18 @@ void ZSafe::addCategory()
               if (!categ.isEmpty())
               {
                  dialog->CategoryField->insertItem (categ, -1);
+                 if (firstCategory.isEmpty())
+                    firstCategory = categ;
               }
            }
            ++it;
         }
 
 
-        setCategoryDialogFields(dialog);
+        if (firstCategory.isEmpty())
+           setCategoryDialogFields(dialog);
+        else
+           setCategoryDialogFields(dialog, firstCategory);
 
         // CategoryDialog *dialog = new CategoryDialog(this, "Category", TRUE);
 
@@ -2786,18 +2792,33 @@ void ZSafe::delCategory()
 
 void ZSafe::setCategoryDialogFields(CategoryDialog *dialog)
 {
-   dialog->Field1->setText(getFieldLabel (selectedItem, "1", tr("Name")));
-   dialog->Field2->setText(getFieldLabel (selectedItem, "2", tr("Username")));
-   dialog->Field3->setText(getFieldLabel (selectedItem, "3", tr("Password")));
-   dialog->Field4->setText(getFieldLabel (selectedItem, "4", tr("Comment")));
-   dialog->Field5->setText(getFieldLabel (selectedItem, "5", tr("Field 4")));
-   dialog->Field6->setText(getFieldLabel (selectedItem, "6", tr("Field 5")));
+   if (!dialog)
+      return;
 
    QString icon;
-   Category *cat= categories.find (selectedItem->text(0));
-   if (cat)
+   if (selectedItem) 
    {
-      icon = cat->getIconName();
+      dialog->Field1->setText(getFieldLabel (selectedItem, "1", tr("Name")));
+      dialog->Field2->setText(getFieldLabel (selectedItem, "2", tr("Username")));
+      dialog->Field3->setText(getFieldLabel (selectedItem, "3", tr("Password")));
+      dialog->Field4->setText(getFieldLabel (selectedItem, "4", tr("Comment")));
+      dialog->Field5->setText(getFieldLabel (selectedItem, "5", tr("Field 4")));
+      dialog->Field6->setText(getFieldLabel (selectedItem, "6", tr("Field 5")));
+
+      Category *cat= categories.find (selectedItem->text(0));
+      if (cat)
+      {
+         icon = cat->getIconName();
+      }
+   }
+   else
+   {
+      dialog->Field1->setText(tr("Name"));
+      dialog->Field2->setText(tr("Username"));
+      dialog->Field3->setText(tr("Password"));
+      dialog->Field4->setText(tr("Comment"));
+      dialog->Field5->setText(tr("Field 4"));
+      dialog->Field6->setText(tr("Field 5"));
    }
 
 #ifdef DESKTOP
@@ -2838,6 +2859,9 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog)
 
 void ZSafe::setCategoryDialogFields(CategoryDialog *dialog, QString category)
 {
+   if (!dialog)
+      return;
+
    dialog->Field1->setText(getFieldLabel (category, "1", tr("Name")));
    dialog->Field2->setText(getFieldLabel (category, "2", tr("Username")));
    dialog->Field3->setText(getFieldLabel (category, "3", tr("Password")));
