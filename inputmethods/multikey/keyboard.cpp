@@ -1045,6 +1045,9 @@ void Keys::setKeysFromFile(const char * filename) {
         buf = t.readLine();
         while (buf) {
 
+            // get rid of comments
+            buf.replace(QRegExp("#.*$", FALSE, FALSE), "");
+
             // key definition
             if (buf.contains(QRegExp("^\\d+\\s+[0-1a-fx]+", FALSE, FALSE))) { 
             // no $1 type referencing!!! this implementation of regexp sucks
