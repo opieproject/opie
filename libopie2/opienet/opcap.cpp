@@ -1143,7 +1143,7 @@ OPacket* OPacketCapturer::next( int time )
     FD_SET( pcap_fileno( _pch ), &fds );
     tv.tv_sec = time / 1000;
     tv.tv_usec = time % 1000;
-    int retval = select( 1, &fds, NULL, NULL, &tv);
+    int retval = select( pcap_fileno( _pch )+1, &fds, NULL, NULL, &tv);
     if ( retval > 0 ) // clear to read!
         return next();
     else

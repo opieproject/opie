@@ -593,7 +593,7 @@ int OWirelessNetworkInterface::channel() const
 
 void OWirelessNetworkInterface::setChannel( int c ) const
 {
-    if ( c )
+    if ( !c )
     {
         qWarning( "OWirelessNetworkInterface::setChannel( 0 ) called - fix your application!" );
         return;
