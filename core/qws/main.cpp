@@ -1,5 +1,3 @@
-#include <qwindowsystem_qws.h>
-#include <qapplication.h>
 
 #include "oqwsserver.h"
 

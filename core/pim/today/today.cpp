@@ -21,7 +21,6 @@
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
-#include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/contact.h>
 

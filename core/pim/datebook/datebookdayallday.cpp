@@ -8,20 +8,10 @@
 ****************************************************************************/
 #include "datebookdayallday.h"
 
-#include <qpushbutton.h>
 #include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
-#include <qwhatsthis.h>
-#include <qobjectlist.h>
-#include <qpe/event.h>
 #include <qpe/ir.h>
-#include <qpe/datebookdb.h>
-#include <qpe/resource.h>
 #include <qpopupmenu.h>
 #include <qtimer.h>
-#include <qregexp.h>
-#include <qdatetime.h>
 
 #include "datebookday.h"
 

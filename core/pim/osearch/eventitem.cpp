@@ -16,8 +16,6 @@
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
-#include <qdatetime.h>
-#include <qpixmap.h>
 
 EventItem::EventItem(OListViewItem* parent, OPimEvent *event)
  : ResultItem(parent)

@@ -21,12 +21,8 @@
 
 #include <qpe/datebookmonth.h>
 #include <qpe/resource.h>
-#include <qpe/timestring.h>
 
 #include <qbuttongroup.h>
-#include <qpopupmenu.h>
-#include <qstringlist.h>
-#include <qtimer.h>
 #include <qtoolbutton.h>
 
 

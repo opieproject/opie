@@ -16,7 +16,6 @@
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
-#include <qpixmap.h>
 
 
 TodoItem::TodoItem(OListViewItem* parent, OPimTodo *todo)

@@ -4,7 +4,6 @@
 #include <qradiobutton.h>
 #include <qlistbox.h>
 #include <qpushbutton.h>
-#include <qiconset.h> 
 
 #include <qpe/resource.h>
 

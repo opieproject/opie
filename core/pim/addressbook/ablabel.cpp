@@ -20,10 +20,7 @@
 
 #include "ablabel.h"
 
-#include <qpe/stringutil.h>
 
-#include <qregexp.h>
-#include <qstylesheet.h>
 
 AbLabel::AbLabel( QWidget *parent, const char *name ):
 	QTextView( parent, name ),

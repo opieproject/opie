@@ -25,13 +25,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/version.h>
 
-#include <qdir.h>
-#include <qfile.h>
 #include <qtextstream.h>
-#include <qdatastream.h>
-#include <qstringlist.h>
-#include <qfileinfo.h>
-#include <qregexp.h>
 #ifdef QWS
 #include <qcopchannel_qws.h>
 #endif

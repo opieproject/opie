@@ -15,7 +15,6 @@
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
-#include <qpixmap.h>
 
 
 ContactItem::ContactItem(OListViewItem* parent, OPimContact *contact)

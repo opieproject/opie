@@ -1,6 +1,4 @@
 #include "noteentryimpl.h"
-#include "qstring.h"
-#include "qmultilinedit.h"
 #include "qlabel.h"
 #include "onoteedit.h"
 

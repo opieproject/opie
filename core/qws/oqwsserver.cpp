@@ -24,15 +24,6 @@
 #include "qcopbridge.h"
 #include "transferserver.h"
 
-#include <qpe/applnk.h>
-#include <qpe/mimetype.h>
-#include <qpe/password.h>
-#include <qpe/config.h>
-#include <qpe/power.h>
-#include <qpe/timeconversion.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/network.h>
-#include <qpe/global.h>
 
 #if defined( QT_QWS_SL5XXX ) || defined( QT_QWS_IPAQ )
 #include <qpe/custom.h>
@@ -40,13 +31,7 @@
 
 #include <opie/odevice.h>
 
-#include <qgfx_qws.h>
-#include <qmainwindow.h>
-#include <qmessagebox.h>
-#include <qtimer.h>
-#include <qwindowsystem_qws.h>
 
-#include <qvaluelist.h>
 
 #include <stdlib.h>
 #include <unistd.h>

@@ -10,13 +10,10 @@
 // Copyright: See COPYING file that comes with this distribution
 //
 //
-#include "olistviewitem.h"
 #include "searchgroup.h"
 
 #include <opie2/owait.h>
 
-#include <qobject.h>
-#include <qregexp.h>
 #include <qapplication.h>
 
 #ifndef NEW_OWAIT

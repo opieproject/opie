@@ -22,13 +22,9 @@
 
 #include <qpe/datebookmonth.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/timestring.h>
 
-#include <qbuttongroup.h>
 #include <qlabel.h>
-#include <qpopupmenu.h>
 #include <qspinbox.h>
-#include <qtoolbutton.h>
 
 #include <time.h>
 

@@ -15,7 +15,6 @@
 #include <qpe/applnk.h>
 #include <qpe/qcopenvelope_qws.h>
 
-#include <qfile.h>
 #include <qtextstream.h>
 #include <qfileinfo.h>
 

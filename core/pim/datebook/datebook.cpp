@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.32 2004-02-18 23:19:17 zecke Exp $
+** $Id: datebook.cpp,v 1.33 2004-03-01 17:39:51 chicken Exp $
 **
 **********************************************************************/
 
@@ -32,36 +32,21 @@
 #include <qpe/datebookmonth.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
-#include <qpe/qpedebug.h>
-#include <qpe/event.h>
 #include <qpe/finddialog.h>
 #include <qpe/ir.h>
-#include <qmenubar.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/resource.h>
 #include <qpe/sound.h>
-#include <qpe/timestring.h>
 #include <qtoolbar.h>
 #include <qpe/tzselect.h>
-#include <qpe/xmlreader.h>
 
 #include <qaction.h>
 #include <qcopchannel_qws.h>
-#include <qdatetime.h>
-#include <qdialog.h>
-#include <qfile.h>
-#include <qlabel.h>
 #include <qlayout.h>
 #include <qmessagebox.h>
-#include <qpopupmenu.h>
-#include <qpushbutton.h>
-#include <qregexp.h>
-#include <qtextcodec.h>
-#include <qtextstream.h>
 #include <qtimer.h>
 #include <qtl.h>
 #include <qwidgetstack.h>
-#include <qwindowsystem_qws.h>
 
 #include <sys/stat.h>
 #include <sys/types.h>

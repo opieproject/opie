@@ -13,7 +13,6 @@
 #include "resultitem.h"
 
 
-#include <qmessagebox.h>
 
 ResultItem::ResultItem(OListViewItem* parent)
 : OListViewItem(parent)

@@ -15,8 +15,6 @@
 
 #include <qpe/resource.h>
 
-#include <qstring.h>
-#include <qiconset.h>
 //#include <qwhatsthis.h>
 
 AdressSearch::AdressSearch(QListView* parent, QString name):

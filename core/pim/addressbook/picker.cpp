@@ -1,7 +1,5 @@
 #include "picker.h"
 
-#include <qfont.h>
-#include <qstring.h>
 #include <qtimer.h>
 #include <qlayout.h>
 

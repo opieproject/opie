@@ -20,20 +20,11 @@
 **********************************************************************/
 
 
-#include <qpe/categoryselect.h>
-#include <qpe/config.h>
-#include <qpe/stringutil.h>
-#include <qpe/qcopenvelope_qws.h>
 #include <qpe/timestring.h>
 #include <qpe/resource.h>
 
 #include <opie/orecordlist.h>
 
-#include <qasciidict.h>
-#include <qdatetime.h>
-#include <qfile.h>
-#include <qregexp.h>
-#include <qmessagebox.h>
 
 #include "abtable.h"
 

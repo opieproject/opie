@@ -20,9 +20,7 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
-#include <qiconset.h>
 #include <qaction.h>
-#include <qdatetime.h>
 #include <qpopupmenu.h>
 
 

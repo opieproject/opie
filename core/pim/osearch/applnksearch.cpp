@@ -17,7 +17,6 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 
-#include <qiconset.h>
 
 AppLnkSearch::AppLnkSearch(QListView* parent, QString name): SearchGroup(parent, name)
 {

@@ -18,11 +18,7 @@
 **
 **********************************************************************/
 #include "datebookweekheaderimpl.h"
-#include "datebookweekheader.h"
 #include "datebookweek.h"
-#include <qlabel.h>
-#include <qspinbox.h>
-#include <qdatetime.h>
 #include <qpe/resource.h>
 #include <qpe/datebookmonth.h>
 

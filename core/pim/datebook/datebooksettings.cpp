@@ -24,7 +24,6 @@
 
 #include <qspinbox.h>
 #include <qcheckbox.h>
-#include <qcombobox.h>
 
 DateBookSettings::DateBookSettings( bool whichClock, QWidget *parent,
                                     const char *name, bool modal, WFlags fl )

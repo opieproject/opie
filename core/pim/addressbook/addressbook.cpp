@@ -19,10 +19,6 @@
 
 #define QTOPIA_INTERNAL_FD
 
-#include "contacteditor.h"
-#include "ablabel.h"
-#include "abview.h"
-#include "abtable.h"
 // #include "addresssettings.h"
 #include "addressbook.h"
 
@@ -35,27 +31,15 @@
 #include <qpe/resource.h>
 #include <qpe/ir.h>
 #include <qpe/qpemessagebox.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <qtoolbar.h>
 #include <qmenubar.h>
 // #include <qtoolbar.h>
 // #include <qmenubar.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/config.h>
 
 #include <qaction.h>
-#include <qdialog.h>
-#include <qdir.h>
-#include <qfile.h>
-#include <qimage.h>
 #include <qlayout.h>
 #include <qmessagebox.h>
-#include <qpixmap.h>
-#include <qpopupmenu.h>
-#include <qstringlist.h>
 #include <qtoolbutton.h>
-#include <qwhatsthis.h>
-#include <qdatetime.h>
 
 #include <stdlib.h>
 #include <sys/stat.h>

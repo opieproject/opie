@@ -24,7 +24,6 @@
 
 #include <qaction.h>
 #include <qfile.h>
-#include <qiconset.h>
 #include <qpopupmenu.h>
 #include <qtextstream.h>
 

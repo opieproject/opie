@@ -13,7 +13,6 @@
 
 #include <qpe/qpeapplication.h>
 
-#include <qmessagebox.h>
 
 
 OListView::OListView(QWidget *parent, const char *name )

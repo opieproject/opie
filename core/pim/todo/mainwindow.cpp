@@ -39,20 +39,14 @@
 #include <qpe/resource.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/alarmserver.h>
-#include <qpe/timestring.h>
 #include <qpe/qpeapplication.h>
 
 #include <qmenubar.h>
 #include <qmessagebox.h>
-#include <qtoolbar.h>
-#include <qpopupmenu.h>
 #include <qpushbutton.h>
-#include <qwidgetstack.h>
 #include <qaction.h>
 #include <qtimer.h>
-#include <qvbox.h>
 #include <qlayout.h>
-#include <qlineedit.h>
 #include <qwhatsthis.h>
 
 #include "quickeditimpl.h"

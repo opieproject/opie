@@ -24,21 +24,10 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/categoryselect.h>
 #include <qpe/datebookmonth.h>
-#include <qpe/global.h>
-#include <qpe/timeconversion.h>
-#include <qpe/timestring.h>
 #include <qpe/tzselect.h>
 
-#include <qevent.h>
-#include <qcheckbox.h>
-#include <qcombobox.h>
-#include <qlayout.h>
 #include <qlineedit.h>
-#include <qmultilineedit.h>
-#include <qpopupmenu.h>
-#include <qscrollview.h>
 #include <qspinbox.h>
-#include <qtoolbutton.h>
 
 #include <opie/otimepicker.h>
 #include "onoteedit.h"

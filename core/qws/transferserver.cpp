@@ -29,7 +29,6 @@
 #endif /* Q_OS_MACX */
 
 /* we need the _OS_LINUX stuff first ! */
-#include <qglobal.h>
 
 #ifndef  _OS_LINUX_
 // Is anybody able to review this ? The include "uuid/uuid.h" couldn't be found
@@ -54,20 +53,13 @@ extern "C"
 #include <stdlib.h>
 #endif
 
-#include <qdir.h>
-#include <qfile.h>
 #include <qtextstream.h>
-#include <qdatastream.h>
 #include <qmessagebox.h>
-#include <qstringlist.h>
-#include <qfileinfo.h>
-#include <qregexp.h> 
 //#include <qpe/qcopchannel_qws.h>
 #include <qpe/process.h>
 #include <qpe/global.h>
 #include <qpe/config.h>
 #include <qpe/contact.h>
-#include <qpe/quuid.h>
 #include <qpe/version.h>
 #include <qpe/qcopenvelope_qws.h>
 

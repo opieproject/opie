@@ -26,8 +26,8 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
+
 #include <qpe/qpeapplication.h>
-#include <qpe/config.h>
 #include <qpe/global.h>
 
 #include <qtoolbar.h>

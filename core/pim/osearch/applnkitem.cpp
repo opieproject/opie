@@ -15,7 +15,6 @@
 #include <qpe/applnk.h>
 #include <qpe/qcopenvelope_qws.h>
 
-#include <qfileinfo.h>
 
 AppLnkItem::AppLnkItem(OListViewItem* parent, AppLnk *app)
 	: ResultItem(parent)

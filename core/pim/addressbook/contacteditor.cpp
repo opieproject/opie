@@ -20,31 +20,20 @@
  */
 
 #include "contacteditor.h"
-#include "addresspicker.h"
 
 #include <qpe/categoryselect.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpedialog.h>
-#include <qpe/timeconversion.h>
 #include <opie/ocontact.h>
 #include <qpe/resource.h>
 
-#include <qcombobox.h>
 #include <qlabel.h>
 #include <qtabwidget.h>
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qmultilineedit.h>
-#include <qscrollview.h>
 #include <qtoolbutton.h>
-#include <qpushbutton.h>
-#include <qmainwindow.h>
-#include <qvaluelist.h>
-#include <qpopupmenu.h> 
 #include <qlistbox.h> 
-#include <qhbox.h>
-#include <qaction.h>
-#include <qiconset.h> 
 #include <qmessagebox.h> 
 #include <qwhatsthis.h>
 
