@@ -109,7 +109,7 @@ protected:
 class Jornada : public ODevice {
 protected:
 	virtual void init ( );
-	virtual void initButtons ( );
+	//virtual void initButtons ( );
 public:
 	virtual bool setSoftSuspend ( bool soft );
 	virtual bool setDisplayBrightness ( int b );
@@ -207,12 +207,12 @@ struct i_button {
 	char *fheldservice;
 	char *fheldaction;
 } ipaq_buttons [] = {
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx,
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
     Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
 	"devicebuttons/ipaq_calendar",
 	"datebook", "nextView()",
 	"today", "raise()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx,
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
     Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
 	"devicebuttons/ipaq_contact",
 	"addressbook", "raise()",
@@ -222,17 +222,17 @@ struct i_button {
 	"devicebuttons/ipaq_menu",
  	"QPE/TaskBar", "toggleMenu()",
 	"QPE/TaskBar", "toggleStartMenu()" },
-    { Model_iPAQ_H38xx | Model_iPAQ_H39xx,
+    { Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
     Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
 	"devicebuttons/ipaq_mail",
 	"mail", "raise()",
 	"mail", "newMail()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx,
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
     Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
 	"devicebuttons/ipaq_home",
 	"QPE/Launcher", "home()",
 	"buttonsettings", "raise()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx,
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
     Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"),
 	"devicebuttons/ipaq_record",
 	"QPE/VMemo", "toggleRecord()",
@@ -1118,6 +1118,8 @@ void iPAQ::init ( )
 			d-> m_model = Model_iPAQ_H38xx;
 		else if ( d-> m_modelstr == "H3900" )
 			d-> m_model = Model_iPAQ_H39xx;
+		else if ( d-> m_modelstr == "H5400" )
+			d-> m_model = Model_iPAQ_H5xxx;
 		else
 			d-> m_model = Model_Unknown;
 
@@ -1135,7 +1137,9 @@ void iPAQ::init ( )
 		default:
 			d-> m_rotation = Rot270;
 			break;
-	}
+		case Model_iPAQ_H5xxx:
+			d-> m_rotation = Rot0;
+		}
 
 	f. setName ( "/etc/familiar-version" );
 	if ( f. open ( IO_ReadOnly )) {
@@ -1292,7 +1296,8 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
 		// H38xx/H39xx have no "Q" key anymore - this is now the Mail key
 		case HardKey_Menu: {
 			if (( d-> m_model == Model_iPAQ_H38xx ) ||
-			    ( d-> m_model == Model_iPAQ_H39xx )) {
+			    ( d-> m_model == Model_iPAQ_H39xx ) ||
+			    ( d-> m_model == Model_iPAQ_H5xxx)) {
 				newkeycode = HardKey_Mail;
 			}
 			break;
@@ -1436,6 +1441,8 @@ int iPAQ::displayBrightnessResolution ( ) const
 		case Model_iPAQ_H38xx:
 		case Model_iPAQ_H39xx:
 			return 64;
+		case Model_iPAQ_H5xxx:
+			return 255;
 
 		default:
 			return 2;
@@ -2516,7 +2523,7 @@ void Jornada::init ( )
 	}
 }
 
-
+#if 0
 void Jornada::initButtons ( )
 {
 	if ( d-> m_buttons )
@@ -2545,7 +2552,7 @@ void Jornada::initButtons ( )
 	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
 	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
 }
-
+#endif
 int Jornada::displayBrightnessResolution ( ) const
 {
 }
