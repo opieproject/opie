@@ -5,7 +5,7 @@ Depends: task-opie-minimal, opie-sh
 Priority: optional
 Section: opie/sh
 Maintainer: spiralman <spiralman@softhome.net
-Architecture: arm
+Architecture: all
 License: GPL
-Description: frontend to start/stop Stowaway keyboard
+Description: Frontend to start/stop Stowaway keyboard
 Version: $QPE_VERSION$EXTRAVERSION

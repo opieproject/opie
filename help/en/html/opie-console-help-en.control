@@ -6,6 +6,6 @@ Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Depends: opie-console
 License: GPL
-Description: Opie terminal app help files (english)
+Description: Opie terminal app help files (English)
 
 Version: $QPE_VERSION$EXTRAVERSION

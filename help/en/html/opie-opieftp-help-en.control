@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-opieftp
 License: GPL
-Description: opieftp help files (en)
+Description: OpieFTP help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

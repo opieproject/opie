@@ -6,5 +6,5 @@ Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Depends: opie-backgammon
 License: GPL
-Description: backgammon help files (en)
+Description: backgammon help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -6,6 +6,5 @@ Maintainer: ljp <llornkcor@handhelds.org>
 Architecture: arm
 Depends: opie-advancedfm
 License: GPL
-Description: Opie Advanced file manager help files (english)
-
+Description: Opie Advanced file manager help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

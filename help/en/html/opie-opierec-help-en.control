@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-opierec
 License: GPL
-Description: opierec help files (en)
+Description: Opierec help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -2,7 +2,7 @@ Package: opie-clock
 Files: plugins/application/libclock.so* bin/clock apps/Applications/clock.desktop
 Priority: optional
 Section: opie/applications
-Maintainer: Opie Project <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Clock and stop-watch

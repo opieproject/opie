@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-mediummount
 License: GPL
-Description: mediummount help files (en)
+Description: Mediummount help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -5,6 +5,6 @@ Section: opie/system
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
-Description: OPIE widget style
- Simple, flat widget style for OPIE.
+Description: Opie widget style
+ Simple, flat widget style for Opie.
 Version: $QPE_VERSION$EXTRAVERSION

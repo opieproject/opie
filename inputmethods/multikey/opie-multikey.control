@@ -6,5 +6,5 @@ Maintainer: Jake Richardson (jake@asdfnews.org)
 Architecture: arm
 Depends: task-opie-minimal, opie-pickboard
 Description: Multiple language keyboard
- Keyboard for inputing multiple languages in the OPIE environment.
+ Keyboard for inputing multiple languages in the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION

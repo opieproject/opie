@@ -6,7 +6,7 @@ Architecture: arm
 Version: 0.5-$SUB_VERSION
 Depends: task-opie-minimal, libopie1, opie-today, opie-today-datebookplugin, opie-today-todolistplugin
 License: GPL
-Description: Task for basic today setup
- includes datebook, todolist and mail plugin
+Description: Task for basic Today app setup
+ Includes datebook and todolist plugins.
 
 Files:

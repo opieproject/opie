@@ -10,4 +10,3 @@ Provides: qt-embedded, libqt2-emb
 Replaces: qt-embedded, libqt2-emb
 Description: Qt/Embedded environment
  A complete windowing system and GUI toolkit for handhelds.
- See "QPE" for applications.

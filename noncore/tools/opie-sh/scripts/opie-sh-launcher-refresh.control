@@ -5,7 +5,7 @@ Depends: task-opie-minimal, opie-sh
 Priority: optional
 Section: opie/sh
 Maintainer: gonz <gonz@directbox.com>
-Architecture: arm
+Architecture: all
 License: GPL
-Description: refresh the launcher so that new installed applications appear
+Description: Refresh the launcher so that new installed applications appear
 Version: $QPE_VERSION$EXTRAVERSION

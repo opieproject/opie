@@ -2,7 +2,7 @@ Package: timezones
 Files: root/usr/share/zoneinfo
 Priority: optional
 Section: base
-Maintainer: Opie Project <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Version: 1.0.0-6
 Architecture: arm
 Description: Timezone data

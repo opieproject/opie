@@ -5,6 +5,6 @@ Section: opie/applications
 Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
-Description: Dictionarylookupprogram
+Description: Dictionary look-up program
  Look up words :)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-keypebble
 License: GPL
-Description: keypebble help files (en)
+Description: Keypebble help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

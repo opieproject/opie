@@ -6,5 +6,5 @@ Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
 Description: OPIE window decoration style
- Liquid (KDE3) window decoration style for OPIE.
+ Liquid (KDE3) window decoration style for Opie.
 Version: $QPE_VERSION$EXTRAVERSION

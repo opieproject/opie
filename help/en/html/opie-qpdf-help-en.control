@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-qpdf
 License: GPL
-Description: qpdf help files (en)
+Description: QPdf help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

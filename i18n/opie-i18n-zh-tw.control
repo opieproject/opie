@@ -6,6 +6,6 @@ Maintainer: Carstem Niehaus <cniehaus@kde.org>
 Architecture: arm
 Arch: iPAQ
 Depends: task-opie-minimal, qpf-cyberbit-120-50-t10, opie-language
-Description: i18n: Chinese (TW)
- Chinese UI texts for OPIE environment.
+Description: Chinese (TW)
+ Chinese UI texts and dictionary for Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION

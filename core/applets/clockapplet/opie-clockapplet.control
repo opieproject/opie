@@ -2,7 +2,7 @@ Package: opie-clockapplet
 Files: plugins/applets/libclockapplet.so*
 Priority: optional
 Section: opie/applets
-Maintainer: Opie Project <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Clock applet

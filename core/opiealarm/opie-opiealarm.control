@@ -6,7 +6,7 @@ Conflicts: ipaqalarm, atd
 Section: opie/system
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
-Description: A wakeup system for OPIE events.
- Tiny, OPIE specific replacement for ipaqalarm,
+Description: A wakeup system for Opie events.
+ Tiny, Opie specific replacement for ipaqalarm,
  uschedule and qpe2uschedule
 Version: $QPE_VERSION$EXTRAVERSION

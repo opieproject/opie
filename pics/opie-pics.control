@@ -3,7 +3,7 @@ Files: pics/??*.* pics/opie/* pics/addressbook/*.png pics/todo/*.png pics/datebo
 Priority: required
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
-Architecture: arm
-Description: Including unassigned and pim pics (TodoList, Addressbook, Datebook).
+Architecture: all
+Description: Including unassigned and PIM pics (TodoList, Addressbook, Datebook).
  These icons are available to all Opie applications.
 Version: $QPE_VERSION$EXTRAVERSION

@@ -8,4 +8,3 @@ Version: 1.8.2-$SUB_VERSION.2
 Depends: libopiecore2 (1.8.2), libopiedb2 (1.8.2), libopiemm2 (1.8.2), libopienet2 (1.8.2), libopiepim2 (1.8.2), libopieui2 (1.8.2)
 Provides: libopie2
 Description: Opie library 2.0
-

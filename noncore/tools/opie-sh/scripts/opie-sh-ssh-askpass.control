@@ -5,7 +5,7 @@ Depends: task-opie-minimal (1.5.0+), opie-sh (0.5-20020919+)
 Priority: optional
 Section: opie/sh
 Maintainer: David Woodhouse <dwmw2@infradead.org>
-Architecture: arm
+Architecture: all
 License: GPL
 Description: Popup dialog box for OpenSSH to ask for user input
 Version: $QPE_VERSION$EXTRAVERSION

@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-tinykate
 License: GPL
-Description: tinykate help files (en)
+Description: Tinykate help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

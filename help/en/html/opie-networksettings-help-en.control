@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-networksettings
 License: GPL
-Description: networksettings help files (en)
+Description: Network settings help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -7,4 +7,3 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: An enditor for the ~/Settings/*.conf files
-

@@ -5,6 +5,6 @@ Section: opie/applets
 Maintainer: David Woodhouse <dwmw2@infradead.org>
 Architecture: arm
 Depends: task-opie-minimal, libopieobex1
-Description: Irda Applet
+Description: IrDA Applet
  An IrDA taskbar applet for the Opie environment
 Version: $QPE_VERSION$EXTRAVERSION

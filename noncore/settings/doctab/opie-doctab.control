@@ -5,6 +5,5 @@ Section: opie/settings
 Maintainer: The Opie Team <opie-devel@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
-Description: DocTab settings dialog
- For the Opie environment.
+Description: DocTab settings dialog for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION

@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-usermanager
 License: GPL
-Description: usermanager help files (en)
+Description: User manager help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -5,6 +5,6 @@ Section: opie/i18n
 Maintainer: Daniel Grabowski <daniel@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal, opie-language
-Description: i18n: Polish
- Polish UI texts and dictionary for OPIE environment.
+Description: Polish
+ Polish UI texts and dictionary for Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION

@@ -7,5 +7,5 @@ Architecture: arm
 Depends: task-opie-minimal
 Description: MP3 file plugin using libmad
  Plugin to play MP3 files with the mediaplayer in the Opie environment.
- It also hast streaming support (Shoutcast/Icecast).
+ It also has streaming support (Shoutcast/Icecast).
 Version: $QPE_VERSION$EXTRAVERSION

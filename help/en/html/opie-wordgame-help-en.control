@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-wordgame
 License: GPL
-Description: wordgame help files (en)
+Description: Wordgame help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -6,5 +6,5 @@ Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
 Description: OPIE window decoration style
- Blended window decoration style for OPIE.
+ Blended window decoration style for Opie.
 Version: $QPE_VERSION$EXTRAVERSION

@@ -6,5 +6,5 @@ Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Depends: opie-backup
 License: GPL
-Description: backup help files (en)
+Description: backup help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

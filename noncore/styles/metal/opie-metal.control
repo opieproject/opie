@@ -1,10 +1,10 @@
 Package: opie-metal
-Files: plugins/styles/libmetal.so* 
+Files: plugins/styles/libmetal.so*
 Priority: optional
 Section: opie/system
 Maintainer: L.J. Potter <ljp@llornkcor.com>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Metal style by Trolltech.
- Metal style ported to OPIE.
+ Metal style ported to Opie.
 Version: $QPE_VERSION$EXTRAVERSION

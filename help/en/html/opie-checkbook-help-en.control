@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-checkbook
 License: GPL
-Description: checkbook help files (en)
+Description: Checkbook help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

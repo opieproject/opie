@@ -3,6 +3,5 @@ Files: pics/mediaplayer/skins/Pod
 Priority: optional
 Section: opie/playerskins
 Maintainer: ljp <llornkcor@handhelds.org>
-Description: Opie Mediaplayer's skin.
-
+Description: Opie mediaplayers skin.
 Version: $QPE_VERSION$EXTRAVERSION

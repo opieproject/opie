@@ -6,6 +6,6 @@ Depends: task-opie-minimal (1.5.0+), opie-sh
 Priority: optional
 Section: opie/sh
 Maintainer: gonz <gonz@directbox.com>
-Architecture: arm
+Architecture: all
 License: GPL
-Description: frontend to choose wavelan config
+Description: Frontend to choose wavelan config

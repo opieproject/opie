@@ -7,4 +7,4 @@ Architecture: arm
 Version: 0.1-$SUB_VERSION
 Depends: task-opie-minimal
 License: GPL
-Description: a very small web browser
+Description: A very small web browser

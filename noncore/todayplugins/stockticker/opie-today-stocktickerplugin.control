@@ -5,5 +5,5 @@ Section: opie/plugins
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: libqte2, opie-today
-Description: stockticker plugin for today
+Description: Stock ticker plugin for Today
 Version: $QPE_VERSION$EXTRAVERSION

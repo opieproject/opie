@@ -5,5 +5,5 @@ Section: opie/playerskins
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal
-Description: Landscape skin for opie mediaplayer's
+Description: Landscape skin for Opie mediaplayers
 Version: $QPE_VERSION$EXTRAVERSION

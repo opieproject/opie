@@ -5,7 +5,7 @@ Depends: task-opie-minimal, opie-sh
 Priority: optional
 Section: opie/sh
 Maintainer: gonz <gonz@directbox.com>
-Architecture: arm
+Architecture: all
 License: GPL
-Description: frontend to viewing logfiles
+Description: Frontend to viewing logfiles
 Version: $QPE_VERSION$EXTRAVERSION

@@ -6,6 +6,5 @@ Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org>
 Architecture: arm
 Depends: opie-wellenreiter
 License: GPL
-Description: Opie Wellenreiter help files (english)
-
+Description: Opie Wellenreiter help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

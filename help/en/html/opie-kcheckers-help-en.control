@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-kcheckers
 License: GPL
-Description: kcheckers help files (en)
+Description: KCheckers help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -6,6 +6,6 @@ Maintainer: Carstem Niehaus <cniehaus@kde.org>
 Architecture: arm
 Arch: iPAQ
 Depends: task-opie-minimal, opie-language
-Description: i18n: Magyar
- Hungarian UI texts and dictionary for OPIE environment.
+Description: Magyar
+ Hungarian UI texts and dictionary for Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION

@@ -4,6 +4,6 @@ Priority: required
 Section: opie/system
 Maintainer: Chris Larson <kergoth@handhelds.org>
 Depends: qte-fonts-common
-Architecture: arm
+Architecture: all
 Version: 1:$QTE_VERSION-$QTE_REVISION
 Description: Helvetica font - precompiled QPFs

@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-sysinfo
 License: GPL
-Description: sysinfo help files (en)
+Description: System info help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

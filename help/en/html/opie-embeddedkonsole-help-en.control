@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-embeddedkonsole
 License: GPL
-Description: embeddedkonsole help files (en)
+Description: Embeddedkonsole help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-qasteroids
 License: GPL
-Description: qasteroids help files (en)
+Description: QAsteroids help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

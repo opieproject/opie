@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-shutdown
 License: GPL
-Description: shutdown help files (en)
+Description: Shutdown help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

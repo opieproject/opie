@@ -5,7 +5,7 @@ Depends: task-opie-minimal, opie-sh
 Priority: optional
 Section: opie/sh
 Maintainer: gonz <gonz@directbox.com>
-Architecture: arm
+Architecture: all
 License: GPL
-Description: frontend to rsync
+Description: Frontend to rsync
 Version: $QPE_VERSION$EXTRAVERSION

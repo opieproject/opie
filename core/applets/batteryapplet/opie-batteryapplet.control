@@ -2,7 +2,7 @@ Package: opie-batteryapplet
 Files: plugins/applets/libbatteryapplet.so*
 Priority: optional
 Section: opie/applets
-Maintainer: Opie team <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
 Conflicts: opie-batteryapplet-ipaq

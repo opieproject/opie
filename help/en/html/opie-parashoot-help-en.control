@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-parashoot
 License: GPL
-Description: parashoot help files (en)
+Description: Parashoot help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-mindbreaker
 License: GPL
-Description: mindbreaker help files (en)
+Description: Mindbreaker help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

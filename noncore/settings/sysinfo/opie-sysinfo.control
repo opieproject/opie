@@ -2,9 +2,8 @@ Package: opie-sysinfo
 Files: plugins/application/libsysinfo.so* bin/sysinfo apps/Settings/sysinfo.desktop pics/sysinfo
 Priority: optional
 Section: opie/settings
-Maintainer: Dan Williams <williamsdr@acm.org>
+Maintainer: Dan Williams <drw@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal, libopie1
-Description: System Information dialog
- For the Opie environment.
+Description: System Information dialog for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION

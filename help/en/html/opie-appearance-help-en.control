@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-appearance
 License: GPL
-Description: appearance help files (en)
+Description: Appearance help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -6,4 +6,4 @@ Maintainer: Maximilian Reiss <harlekin@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: libqte2, opie-today, opie-mailapplet
-Description: Mail plugin for today
+Description: Mail plugin for Today

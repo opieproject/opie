@@ -3,7 +3,7 @@ Files: $QTDIR/lib/fonts/fixed_*_50.* $QTDIR/lib/fonts/fixed_*_t*5* $QTDIR/lib/fo
 Priority: required
 Section: opie/system
 Maintainer: Chris Larson <kergoth@handhelds.org>
-Architecture: arm
+Architecture: all
 Depends: qte-fonts-common
 Version: 1:$QTE_VERSION-$QTE_REVISION
 Description: Fixed font - precompiled QPFs

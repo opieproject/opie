@@ -6,5 +6,5 @@ Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Depends: opie-bluetooth-manager
 License: GPL
-Description: bluetooth-manager help files (en)
+Description: Bluetooth-manager help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -2,8 +2,8 @@ Package: qpf-cyberbit-120-50-t10
 Files: $QTDIR/lib/fonts/cyberbit_120_50_t10.qpf
 Priority: required
 Section: opie/system
-Maintainer: Opie Project <opie@handhelds.org>
-Architecture: arm
+Maintainer: Opie Team <opie@handhelds.org>
+Architecture: all
 Version: 2.3.0-6
 Depends: qte-fonts-common
 Description: Unicode font

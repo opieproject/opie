@@ -3,7 +3,7 @@ Files: $QTDIR/lib/fonts/smoothtimes_{170,100}_{50,50_t15,50_t5}.* $QTDIR/lib/fon
 Priority: required
 Section: opie/system
 Maintainer: Chris Larson <kergoth@handhelds.org>
-Architecture: arm
+Architecture: all
 Depends: qte-fonts-common
 Version: 1:$QTE_VERSION-$QTE_REVISION
 Description: Smoothtimes font - precompiled QPFs

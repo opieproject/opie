@@ -5,5 +5,5 @@ Section: opie/plugins
 Maintainer: Chris Larson <kergoth@handhelds.org>
 Architecture: arm
 Depends: opie-today, fortune (<=9708-0.1) | fortune-mod
-Description: 'fortune' plugin for today
+Description: 'fortune' plugin for Today
 Version: $QPE_VERSION$EXTRAVERSION

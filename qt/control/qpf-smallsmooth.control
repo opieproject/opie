@@ -3,7 +3,7 @@ Files: $QTDIR/lib/fonts/smallsmooth_*{50,50_t15,50_t5}.* $QTDIR/lib/fonts/smalls
 Priority: required
 Section: opie/system
 Maintainer: Chris Larson <kergoth@handhelds.org>
-Architecture: arm
+Architecture: all
 Depends: qte-fonts-common
 Version: 1:$QTE_VERSION-$QTE_REVISION
 Description: Smallsmooth font - precompiled QPFs

@@ -7,7 +7,7 @@ Architecture: arm
 Version: 0.8-$SUB_VERSION
 Depends: task-opie-minimal
 License: GPL
-Description: the famous hit Bill game
+Description: The famous hit Bill game
  Hit Bill as hard as you can before he
- infects your network with a wannabe 
+ infects your network with a wannabe
  OS.

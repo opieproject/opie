@@ -6,6 +6,6 @@ Maintainer: Holger Freyther <zecke@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
 License: GPL
-Description: Configure app for the medium mounter
- Configure app for the medium mounter
+Description: Medium mount configuration
+ Configuration application for the medium mounter.
 Version: $QPE_VERSION$EXTRAVERSION

@@ -6,6 +6,5 @@ Maintainer: Andy Qua (andy.qua@blueyonder.co.uk)
 Architecture: arm
 Depends: opie-aqpkg
 License: GPL
-Description: AQPkg Opie package manager help files (english)
-
+Description: AQPkg Opie package manager help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

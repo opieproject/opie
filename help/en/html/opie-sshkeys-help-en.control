@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-sshkeys
 License: GPL
-Description: sshkeys help files (en)
+Description: SSHKeys help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

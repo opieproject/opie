@@ -3,7 +3,7 @@ Files: bin/calibrate
 Priority: optional
 Section: opie/applications
 Architecture: arm
-Maintainer: ?
+Maintainer: Opie Team <opie@handhelds.org>
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, libopie1
 Description: Standalone calibration utility

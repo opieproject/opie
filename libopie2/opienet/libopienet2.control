@@ -8,4 +8,3 @@ Version: 1.8.3-$SUB_VERSION
 Depends: libopiecore2 (1.8.3)
 Provides: libopienet2
 Description: Opie library 2.0 NET
-

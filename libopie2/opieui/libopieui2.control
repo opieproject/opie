@@ -8,4 +8,3 @@ Version: 1.8.5-$SUB_VERSION.1
 Depends: libqpe1, libopiecore2 (1.8.5)
 Provides: libopieui2
 Description: Opie library 2.0 UI
-

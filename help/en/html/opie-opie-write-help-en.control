@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-opie-write
 License: GPL
-Description: opie-write help files (en)
+Description: Opie-write help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -5,5 +5,5 @@ Section: opie/onlinedoc
 Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-minesweep
 License: GPL
-Description: minesweep help files (en)
+Description: Minesweep help files (English)
 Version: $QPE_VERSION$EXTRAVERSION

@@ -2,9 +2,9 @@ Package: opie-tableviewer
 Files: plugins/application/libtableviewer.so* bin/tableviewer apps/Applications/tableviewer.desktop
 Priority: optional
 Section: opie/applications
-Maintainer: Opie Project <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Arch: iPAQ
+Arch: arm
 Depends: task-opie-minimal
 Description: XML database browsers
  A table/database viewer for the Opie environment.

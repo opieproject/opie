@@ -5,7 +5,7 @@ Depends: task-opie-minimal, opie-sh
 Priority: optional
 Section: opie/sh
 Maintainer: gonz <gonz@directbox.com>
-Architecture: arm
+Architecture: all
 License: GPL
-Description: frontend to start/stop init scripts
+Description: Frontend to start/stop init scripts
 Version: $QPE_VERSION$EXTRAVERSION

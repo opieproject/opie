@@ -5,5 +5,5 @@ Section: opie/applications
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
-Description: Kate for opie
+Description: Kate for Opie
 Version: $QPE_VERSION$EXTRAVERSION

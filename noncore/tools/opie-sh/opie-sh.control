@@ -7,5 +7,5 @@ Architecture: arm
 Version: 0.5-$SUB_VERSION
 Depends: task-opie-minimal
 License: GPL
-Description: a QDialog shell frontend
+Description: A QDialog shell frontend
  A program to let you use various dialogs from the console (or a shell script)
