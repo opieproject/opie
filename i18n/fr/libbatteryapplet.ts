@@ -82,5 +82,17 @@
         <source>No jacket with battery inserted</source>
         <translation>Aucune module avec batterie</translation>
     </message>
+    <message>
+        <source>no data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ipaq  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jacket  </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

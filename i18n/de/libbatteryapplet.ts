@@ -82,5 +82,17 @@
         <source>Battery status</source>
         <translation>Batteriestatus</translation>
     </message>
+    <message>
+        <source>no data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ipaq  </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jacket  </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
