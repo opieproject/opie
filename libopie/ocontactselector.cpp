@@ -12,11 +12,17 @@
  * =====================================================================
  * ToDo: There is a lot todo.. It is currently very simplistic..
  * =====================================================================
- * Version: $Id: ocontactselector.cpp,v 1.1.2.5 2002-07-06 16:07:23 eilers Exp $
+ * Version: $Id: ocontactselector.cpp,v 1.1.2.6 2002-07-13 17:19:20 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactselector.cpp,v $
- * Revision 1.1.2.5  2002-07-06 16:07:23  eilers
+ * Revision 1.1.2.6  2002-07-13 17:19:20  eilers
+ * Added signal handling:
+ * The database will be informed if it is changed externally and if flush() or
+ * reload() signals sent. The application which is using the database may
+ * reload manually if this happens...
+ *
+ * Revision 1.1.2.5  2002/07/06 16:07:23  eilers
  * Added keyboard handling
  *
  * Revision 1.1.2.4  2002/07/05 11:17:19  zecke
@@ -77,7 +83,18 @@ OContactSelector::OContactSelector (QWidget * parent):
 
 	connect( this, SIGNAL( clicked( int, int, int, const QPoint & ) ),
 		 this, SLOT( slotClicked( int, int, int, const QPoint & ) ) );
+	connect( &contactdb, SIGNAL( signalChanged( const OContactDB * ) ),
+		 this, SLOT( slotDBChanged( const OContactDB * ) ) );
 
+	loadTable();
+
+}
+
+
+OContactSelector::~OContactSelector (){}
+
+void OContactSelector::loadTable()
+{
 	/* Fill the table with all entries of the contact database */
 	QValueList<Contact> allContacts = contactdb.allContacts();
 	QValueListIterator<Contact> it;
@@ -97,11 +114,7 @@ OContactSelector::OContactSelector (QWidget * parent):
 	}
 
 	sortColumn (0, TRUE, TRUE);
-
 }
-
-
-OContactSelector::~OContactSelector (){}
 
 ONameItem *OContactSelector::getItemAtRow (int row)const
 {
@@ -145,6 +158,13 @@ void OContactSelector::slotClicked( int row, int col, int, const QPoint &pos )
 		case 1:
 			break;
 		}
+}
+
+void OContactSelector::slotDBChanged ( const OContactDB * )
+{
+	qWarning ("OContactSelector: Received slotDBChanged()");
+	contactdb.reload();
+	loadTable();
 }
 
 void OContactSelector::keyPressEvent( QKeyEvent *e )

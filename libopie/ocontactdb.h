@@ -13,11 +13,17 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.7 2002-07-07 16:24:47 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.8 2002-07-13 17:19:20 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.7  2002-07-07 16:24:47  eilers
+ * Revision 1.1.2.8  2002-07-13 17:19:20  eilers
+ * Added signal handling:
+ * The database will be informed if it is changed externally and if flush() or
+ * reload() signals sent. The application which is using the database may
+ * reload manually if this happens...
+ *
+ * Revision 1.1.2.7  2002/07/07 16:24:47  eilers
  * All active parts moved into the backend. It should be easily possible to
  * use a database as backend
  *
@@ -51,6 +57,9 @@
  */
 #ifndef _OCONTACTDB_H
 #define _OCONTACTDB_H
+
+#include <qobject.h>
+#include <qcopchannel_qws.h> 
 
 // #include <qpe/categories.h>
 #include <qpe/contact.h>
@@ -145,7 +154,10 @@ class OContactBackend {
  * This is just a frontend for the real database handling which ich
  * done by the backend.
  */
-class OContactDB {
+class OContactDB: public QObject 
+{
+    Q_OBJECT
+
  public:
 	/** Create Database with contacts (addressbook).
 	 * @param appname Name of application which wants access to the database
@@ -154,10 +166,14 @@ class OContactDB {
 	 * is used.
 	 * @param backend Pointer to an alternative Backend. If not set, we will use
 	 * the default backend.
+	 * @param autosync If <b>true</b> the database stores the current state 
+	 * automatically if it receives the signals <i>flush()</i> and <i>reload()</i>
+	 * which are used before and after synchronisation. If the application wants 
+	 * to react itself, it should be disabled by setting it to <b>false</b>
 	 * @see OContactBackend 
 	 */
 	OContactDB (const QString appname, const QString filename = 0l,
-                    OContactBackend* backend = 0l);
+                    OContactBackend* backend = 0l, bool autosync = true);
 	~OContactDB ();
 	
 	/** Returns all Contacts.
@@ -214,12 +230,25 @@ class OContactDB {
 	 * @return true if successful
 	 */
 	bool save(bool autoreload = true);
+
+ signals:
+	/* Signal is emitted if the database was changed. Therefore
+	 * we may need to reload to stay consistent.
+	 * @param which Pointer to the database who created this event. This pointer
+	 * is useful if an application has to handle multiple databases at the same time.
+	 */ 
+	void signalChanged ( const OContactDB *which );
+
 	
  private:
 	/*         class OContactDBPrivate; */
 	/*         OContactDBPrivate* d; */
         OContactBackend *m_backEnd;
         bool m_loading:1;
+
+ private slots:
+	void copMessage( const QCString &msg, const QByteArray &data );
+
 	
 };
 #endif

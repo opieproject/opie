@@ -14,11 +14,17 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.6 2002-07-07 16:24:47 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.7 2002-07-13 17:19:20 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.6  2002-07-07 16:24:47  eilers
+ * Revision 1.1.2.7  2002-07-13 17:19:20  eilers
+ * Added signal handling:
+ * The database will be informed if it is changed externally and if flush() or
+ * reload() signals sent. The application which is using the database may
+ * reload manually if this happens...
+ *
+ * Revision 1.1.2.6  2002/07/07 16:24:47  eilers
  * All active parts moved into the backend. It should be easily possible to
  * use a database as backend
  *
@@ -457,7 +463,7 @@ namespace {
 
 
 OContactDB::OContactDB ( const QString appname, const QString filename,
-                        OContactBackend* end )
+			 OContactBackend* end, bool autosync )
 {
         /* take care of the backend */
         if( end == 0 ) {
@@ -465,6 +471,16 @@ OContactDB::OContactDB ( const QString appname, const QString filename,
         }
         m_backEnd = end;
         m_backEnd->setParent ( this );
+
+	/* Connect signal of external db change to function */
+	QCopChannel *dbchannel = new QCopChannel( "QPE/PIM", this );
+	connect( dbchannel, SIGNAL(received(const QCString &, const QByteArray &)),
+               this, SLOT(copMessage( const QCString &, const QByteArray &)) );
+	if ( autosync ){
+		QCopChannel *syncchannel = new QCopChannel( "QPE/Sync", this );
+		connect( syncchannel, SIGNAL(received(const QCString &, const QByteArray &)),
+			 this, SLOT(copMessage( const QCString &, const QByteArray &)) );
+	}
 
 	
 }
@@ -488,9 +504,9 @@ bool OContactDB::save ( bool autoreload )
 	
         if ( !status ) return false;
 	
-	/* Now tell everyone that new data is available */
+	/* Now tell everyone that new data is available. 
+	 */
 	QCopEnvelope e( "QPE/PIM", "addressbookUpdated()" );
-	// e << m_loc_fileName;
 	
 	return true;
 }
@@ -531,3 +547,17 @@ void OContactDB::reload()
 	m_backEnd->reload();
 }
 
+void OContactDB::copMessage( const QCString &msg, const QByteArray & )
+{
+	if ( msg == "addressbookUpdated()" ){
+		qWarning ("OContactDB: Received addressbokUpdated()");
+		emit signalChanged ( this );
+	} else if ( msg == "flush()" ) {
+		qWarning ("OContactDB: Received flush()");
+		save ( true );
+	} else if ( msg == "reload()" ) {
+		qWarning ("OContactDB: Received reload()");
+		reload ();
+		emit signalChanged ( this );
+	}
+}

@@ -12,11 +12,17 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactselector.h,v 1.1.2.5 2002-07-06 16:07:23 eilers Exp $
+ * Version: $Id: ocontactselector.h,v 1.1.2.6 2002-07-13 17:19:20 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactselector.h,v $
- * Revision 1.1.2.5  2002-07-06 16:07:23  eilers
+ * Revision 1.1.2.6  2002-07-13 17:19:20  eilers
+ * Added signal handling:
+ * The database will be informed if it is changed externally and if flush() or
+ * reload() signals sent. The application which is using the database may
+ * reload manually if this happens...
+ *
+ * Revision 1.1.2.5  2002/07/06 16:07:23  eilers
  * Added keyboard handling
  *
  * Revision 1.1.2.4  2002/07/05 11:17:19  zecke
@@ -115,9 +121,11 @@ class OContactSelector: public QTable
 
  private slots:
 	void slotClicked( int row, int col, int button, const QPoint &pos );
+        void slotDBChanged ( const OContactDB *which );
 
  protected:
-    void keyPressEvent( QKeyEvent *e );
+	void loadTable();
+	void keyPressEvent( QKeyEvent *e );
 
  
 
