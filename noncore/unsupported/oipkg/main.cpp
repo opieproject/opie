@@ -3,7 +3,7 @@
 
 #include <qpe/qpeapplication.h>
 #include <qstring.h>
-#include <qmessagebox.h>
+//#include <qmessagebox.h>
 int debugLevel;
 
 int main( int argc, char ** argv )
@@ -17,8 +17,8 @@ int main( int argc, char ** argv )
   }
   QPEApplication a( argc, argv );
   MainWindow mw;
-  if (argc > 2)
-		QMessageBox::information( &mw, "oipkg","While ipkg is working\noipkg is hanging.\nPlease be patient!");
+//  if (argc > 2)
+//		QMessageBox::information( &mw, "oipkg","While ipkg is working\noipkg is hanging.\nPlease be patient!");
   a.showMainDocumentWidget( &mw );
   return a.exec();
 }

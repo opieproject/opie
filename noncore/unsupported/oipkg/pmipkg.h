@@ -27,8 +27,7 @@ public:
   void loadList( PackageList* );
   void commit();
   void update();
-  void showButtons(bool b=true);
-  void show( bool buttons=true );
+  void show();
 
 public slots:
 	void doIt();
@@ -53,7 +52,7 @@ private:
   void makeLinks(Package*);
   void linkPackage( QString, QString );
   void processLinkDir( QString , QString );
-  int  runIpkg(const QString& args, const QString& dest="" );
+  bool runIpkg(const QString& args, const QString& dest="" );
   void out( QString );
 	QStringList* getList( QString, QString );
 	void processFileList( QStringList*, QString );
