@@ -1,12 +1,5 @@
 #include "tabmainwindow.h"
-#include <qpe/qpeapplication.h>
+#include <opie2/oapplicationfactory.h>
 
-int main( int argc, char **argv ){
-  QPEApplication application( argc, argv );
-  TabMainWindow mainWindow;
-  application.showMainWidget(&mainWindow);
-  return application.exec();
-}
-
-//main.cpp
+OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<TabMainWindow> )
 

@@ -10,7 +10,9 @@
 class TabMainWindow : public QMainWindow { 
 
 public:
-  TabMainWindow( QWidget* parent = 0, const char* name = 0) : QMainWindow(parent, name){
+  static QString appName() { return QString::fromLatin1( QUICKAPP_NAME ); }
+
+  TabMainWindow( QWidget* parent = 0, const char* name = 0, WFlags fl = 0) : QMainWindow(parent, name, fl){
     tabManager = new TabManager(this, "TabManger");
     setCaption("Tab Manager");
     setToolBarsMovable(false);
