@@ -58,8 +58,13 @@ const OMacAddress& OMacAddress::broadcast = OMacAddress( __broadcast );
 const unsigned char __unknown[6] = { 0x44, 0x44, 0x44, 0x44, 0x44, 0x44 };
 const OMacAddress& OMacAddress::unknown = OMacAddress( __unknown );
 
+//TODO: Incorporate Ethernet Manufacturer database here! (inline or so)
 
-//TODO: Incorporate Ethernet Manufacturer database here!
+OMacAddress::OMacAddress()
+{
+    memcpy( _bytes, __unknown, 6 );
+}
+
 
 OMacAddress::OMacAddress( unsigned char* p )
 {

@@ -51,6 +51,7 @@ class OMacAddress
 {
   public:
     // QString c'tor? -zecke
+    OMacAddress();
     OMacAddress( unsigned char* );
     OMacAddress( const unsigned char* );
     OMacAddress( struct ifreq& );

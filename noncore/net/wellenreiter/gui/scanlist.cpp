@@ -339,6 +339,54 @@ void MScanListView::identify( const OMacAddress& macaddr, const QString& ip )
 }
 
 
+void MScanListView::addService( const QString& name, const OMacAddress& macaddr, const QString& ip )
+{
+    qDebug( "addService '%s', Server = %s = %s", (const char*) name, (const char*) macaddr.toString(), (const char*) ip );
+
+    //TODO: Refactor that out, we need it all over the place.
+    //      Best to do it in a more comfortable abstraction in OListView
+    //      (Hmm, didn't I already start something in this direction?)
+
+    QListViewItemIterator it( this );
+    for ( ; it.current(); ++it )
+    {
+        if ( it.current()->text( col_ap ) == macaddr.toString(true) )
+        {
+
+            MScanListItem* subitem = static_cast<MScanListItem*>( it.current()->firstChild() );
+
+            while ( subitem && ( subitem->text( col_essid ) != name ) )
+            {
+                #ifdef DEBUG
+                qDebug( "subitemtext: %s", (const char*) subitem->text( col_essid ) );
+                #endif
+                subitem = static_cast<MScanListItem*> ( subitem->nextSibling() );
+            }
+
+            if ( subitem )
+            {
+                // we have already seen this item, it's a dupe
+                #ifdef DEBUG
+                qDebug( "%s is a dupe - ignoring...", (const char*) name );
+                #endif
+                subitem->receivedBeacon(); //FIXME: sent data bit
+                return;
+            }
+
+            // never seen that - add new item
+
+            MScanListItem* item = new MScanListItem( it.current(), "service", "N/A", false, -1, -1 );
+            item->setText( col_essid, name );
+
+            return;
+        }
+    }
+    qDebug( "D'oh! Received identification, but item not yet in list... ==> Handle this!" );
+    MLogWindow::logwindow()->log( QString().sprintf( "WARNING: Unhandled service addition %s = %s!",
+                                                     (const char*) macaddr.toString(), (const char*) ip ) );
+}
+
+
 void MScanListView::contextMenuRequested( QListViewItem* item, const QPoint&, int col )
 {
     if ( !item ) return;

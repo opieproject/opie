@@ -194,26 +194,47 @@ void Wellenreiter::handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon )
 }
 
 
-void Wellenreiter::handleData( OPacket* p, OWaveLanDataPacket* data )
+void Wellenreiter::handleWlanData( OPacket* p, OWaveLanDataPacket* data, OMacAddress& from, OMacAddress& to )
 {
     OWaveLanPacket* wlan = (OWaveLanPacket*) p->child( "802.11" );
     if ( wlan->fromDS() && !wlan->toDS() )
     {
         netView()->fromDStraffic( wlan->macAddress3(), wlan->macAddress1(), wlan->macAddress2() );
+        from = wlan->macAddress3();
+        to = wlan->macAddress2();
     }
     else if ( !wlan->fromDS() && wlan->toDS() )
     {
         netView()->toDStraffic( wlan->macAddress2(), wlan->macAddress3(), wlan->macAddress1() );
+        from = wlan->macAddress2();
+        to = wlan->macAddress3();
     }
     else if ( wlan->fromDS() && wlan->toDS() )
     {
         netView()->WDStraffic( wlan->macAddress4(), wlan->macAddress3(), wlan->macAddress1(), wlan->macAddress2() );
+        from = wlan->macAddress4();
+        to = wlan->macAddress3();
     }
     else
     {
         netView()->IBSStraffic( wlan->macAddress2(), wlan->macAddress1(), wlan->macAddress3() );
+        from = wlan->macAddress2();
+        to = wlan->macAddress1();
     }
+}
 
+
+void Wellenreiter::handleEthernetData( OPacket* p, OEthernetPacket* data, OMacAddress& from, OMacAddress& to )
+{
+    from = data->sourceAddress();
+    to = data->destinationAddress();
+
+    netView()->addNewItem( "station", "<wired>", from, false, -1, 0, GpsLocation( 0, 0 ) );
+}
+
+
+void Wellenreiter::handleIPData( OPacket* p, OIPPacket* ip, OMacAddress& source, OMacAddress& dest )
+{
     OARPPacket* arp = (OARPPacket*) p->child( "ARP" );
     if ( arp )
     {
@@ -229,10 +250,18 @@ void Wellenreiter::handleData( OPacket* p, OWaveLanDataPacket* data )
         }
     }
 
-    OIPPacket* ip = (OIPPacket*) p->child( "IP" );
-    if ( ip )
+    ODHCPPacket* dhcp = (ODHCPPacket*) p->child( "DHCP" );
+    if ( dhcp )
     {
-        qDebug( "Received IP packet." );
+        qDebug( "Received DHCP '%s' packet", (const char*) dhcp->type() );
+        if ( dhcp->type() == "OFFER" )
+        {
+            qDebug( "ADDSERVICE: '%s' ('%s') seems to be a DHCP server.", (const char*) source.toString(), (const char*) dhcp->serverAddress().toString() );
+            //netView()->addNewItem( "station", "<wired>", from, false, -1, 0, GpsLocation( 0, 0 ) );
+
+            netView()->identify( source, dhcp->serverAddress().toString() );
+            netView()->addService( "DHCP", source, dhcp->serverAddress().toString() );
+        }
     }
 }
 
@@ -298,16 +327,33 @@ void Wellenreiter::receivePacket( OPacket* p )
         return;
     }
 
+    OMacAddress source;
+    OMacAddress dest;
+
     //TODO: WEP check here
 
-    // check for a data frame
-    OWaveLanDataPacket* data = static_cast<OWaveLanDataPacket*>( childIfToParse( p, "802.11 Data" ) );
-    if ( data )
+    // check for a wireless data frame
+    OWaveLanDataPacket* wlan = static_cast<OWaveLanDataPacket*>( childIfToParse( p, "802.11 Data" ) );
+    if ( wlan )
     {
-        handleData( p, data );
+        handleWlanData( p, wlan, source, dest );
     }
 
-    handleNotification( p );
+    // check for a wired data frame
+    OEthernetPacket* eth = static_cast<OEthernetPacket*>( childIfToParse( p, "Ethernet" ) );
+    if ( eth )
+    {
+        handleEthernetData( p, eth, source, dest );
+    }
+
+    // check for a ip frame
+    OIPPacket* ip = static_cast<OIPPacket*>( childIfToParse( p, "IP" ) );
+    if ( ip )
+    {
+        handleIPData( p, ip, source, dest );
+    }
+
+    //handleNotification( p );
 
 }
 

@@ -42,6 +42,7 @@ class MScanListView: public OListView
 
   public slots:
     void addNewItem( const QString& type, const QString& essid, const OMacAddress& macaddr, bool wep, int channel, int signal, const GpsLocation& location );
+    void addService( const QString& name, const OMacAddress& macaddr, const QString& ip );
 
     void fromDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via );
     void toDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via );

@@ -108,6 +108,29 @@ void OPacket::updateStats( QMap<QString,int>& stats, QObjectList* l )
 }
 
 
+void OPacket::dumpStructure( QObjectList* l )
+{
+    QString packetString( "[ |" + _dumpStructure( l ) + " ]" );
+    qDebug( "OPacket::dumpStructure: %s", (const char*) packetString );
+}
+
+
+QString OPacket::_dumpStructure( QObjectList* l )
+{
+    if (!l) return QString::null;
+    QObject* o = l->first();
+    QString str(" ");
+
+    while ( o )
+    {
+        str.append( o->name() );
+        str.append( " |" );
+        str += _dumpStructure( const_cast<QObjectList*>( o->children() ) );
+        o = l->next();
+    }
+    return str;
+}
+
 QString OPacket::dump( int bpl ) const
 {
     static int index = 0;
@@ -1116,7 +1139,9 @@ OPacket* OPacketCapturer::next()
         // by emit() [ see below ]
         //TODO: make gathering statistics optional, because it takes time
         p->updateStats( _stats, const_cast<QObjectList*>( p->children() ) );
-
+        #ifndef NODEBUG
+        p->dumpStructure( const_cast<QObjectList*>( p->children() ) );
+        #endif
         return p;
     }
     else

@@ -133,6 +133,11 @@ class OPacket : public QObject
     void updateStats( QMap<QString,int>&, QObjectList* );
 
   private:
+
+    void dumpStructure( QObjectList* );
+    QString _dumpStructure( QObjectList* );
+
+  private:
     const packetheaderstruct _hdr;  // pcap packet header
     const unsigned char* _data;     // pcap packet data
     const unsigned char* _end;      // end of pcap packet data

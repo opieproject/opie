@@ -28,6 +28,9 @@ class QPixmap;
 class OPacket;
 class OWaveLanManagementPacket;
 class OWaveLanDataPacket;
+class OEthernetPacket;
+class OMacAddress;
+class OIPPacket;
 class OPacketCapturer;
 class OWirelessNetworkInterface;
 class WellenreiterConfigWindow;
@@ -68,7 +71,9 @@ class Wellenreiter : public WellenreiterBase {
 
   private:
     void handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon );
-    void handleData( OPacket* p, OWaveLanDataPacket* data );
+    void handleWlanData( OPacket* p, OWaveLanDataPacket* data, OMacAddress& from, OMacAddress& to );
+    void handleEthernetData( OPacket* p, OEthernetPacket* data, OMacAddress& from, OMacAddress& to );
+    void handleIPData( OPacket* p, OIPPacket* ip, OMacAddress& from, OMacAddress& to );
     void handleNotification( OPacket* p );
     void doAction( const QString& action, const QString& protocol, OPacket* p );
     QObject* childIfToParse( OPacket* p, const QString& protocol );
