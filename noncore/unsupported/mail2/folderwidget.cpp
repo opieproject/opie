@@ -230,7 +230,7 @@ void FolderWidget::slotIMAPLogin(IMAPResponse &response)
 	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPLogin(IMAPResponse &)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
-		emit status(tr("Login successfull!"));
+		emit status(tr("Login successful!"));
 	} else {
 		QMessageBox::warning(this, tr("Error"), tr("<p>Login failed. Go away.</p>"), tr("Ok"));
 	}
@@ -241,7 +241,7 @@ void FolderWidget::slotIMAPRename(IMAPResponse &response)
 	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPRename(IMAPResponse &)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
-		emit status(tr("Renaming successfull!"));
+		emit status(tr("Renaming successful!"));
 	} else {
 		QMessageBox::warning(this, tr("Error"), tr("<p>Renaming failed. (Server said: %1)</p>").arg(response.statusResponse().comment()), tr("Ok"));
 	}
@@ -252,7 +252,7 @@ void FolderWidget::slotIMAPDelete(IMAPResponse &response)
 	disconnect(response.imapHandler(), SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPDelete(IMAPResponse &)));
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
-		emit status(tr("Deletion successfull!"));
+		emit status(tr("Deletion successful!"));
 
 		_rescanAccount = _createFolder.topFolder().account();
 

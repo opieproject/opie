@@ -1,6 +1,6 @@
 /**
- * $Author: kergoth $
- * $Date: 2003-08-09 17:14:55 $
+ * $Author: zecke $
+ * $Date: 2004-01-05 14:44:47 $
  */
 
 #include "interface.h"
@@ -74,7 +74,7 @@ void Interface::start(){
   }
 
   int ret = system(QString("%1 %2 up").arg(IFCONFIG).arg(this->name()).latin1());
-  // See if it was successfull...
+  // See if it was successful...
   if(ret != 0){
     emit (updateMessage("Starting interface failed"));
     return;
@@ -82,7 +82,7 @@ void Interface::start(){
 
   status = true;
   refresh();
-  emit (updateMessage("Start successfull"));
+  emit (updateMessage("Start successful"));
 }
 
 /**
@@ -103,7 +103,7 @@ void Interface::stop(){
 
   status = false;
   refresh();
-  emit (updateMessage("Stop successfull"));
+  emit (updateMessage("Stop successful"));
 }
 
 /**
@@ -117,7 +117,7 @@ void Interface::restart(){
 /**
  * Try to refresh the information about the interface.
  * First call ifconfig, then check the dhcp-info file
- * @return bool true if successfull.
+ * @return bool true if successful.
  */
 bool Interface::refresh(){
   // See if we are up.

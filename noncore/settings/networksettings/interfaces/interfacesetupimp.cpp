@@ -83,7 +83,7 @@ bool InterfaceSetupImp::saveChanges(){
 
 /**
  * Save the settings for the current Interface.
- * @return bool true if successfull, false otherwise
+ * @return bool true if successful, false otherwise
  */
 bool InterfaceSetupImp::saveSettings(){
   // eh can't really do anything about it other then return. :-D

@@ -120,7 +120,7 @@ void FileReceive::setupChild() {
         close(m_info[0] );
     /*
      * FD_CLOEXEC will close the
-     * fd on successfull exec
+     * fd on successful exec
      */
     if (m_info[1] )
         fcntl(m_info[1], F_SETFD, FD_CLOEXEC );

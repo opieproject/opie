@@ -288,7 +288,7 @@ void BackupAndRestore::backup()
     }
     else
     {
-        QMessageBox::information(this, tr( "Message" ), tr( "Backup Successfull." ), QString(tr( "Ok" ) ) );
+        QMessageBox::information(this, tr( "Message" ), tr( "Backup Successful." ), QString(tr( "Ok" ) ) );
 
     }
 
@@ -456,7 +456,7 @@ void BackupAndRestore::restore()
     }
     else
     {
-        QMessageBox::information(this, tr( "Message" ), tr( "Restore Successfull." ), QString( tr( "Ok") ) );
+        QMessageBox::information(this, tr( "Message" ), tr( "Restore Successful." ), QString( tr( "Ok") ) );
     }
 
     //write restore-location

@@ -64,7 +64,7 @@ is a useful one.
 ================
 
 The following Libraries are used in Opie.
-For a successfull build you must install these librarys and headers.
+For a successful build you must install these librarys and headers.
 The versions are known-good versions. If you successfully try newer ones,
 commit a new README or send a mail to opie-devel@handhelds.org
 

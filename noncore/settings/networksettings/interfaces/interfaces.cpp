@@ -44,7 +44,7 @@ Interfaces::Interfaces(QString useInterfacesFile){
 
 
 /**
- * Get a list of all interfaces in the interface file.  Usefull for
+ * Get a list of all interfaces in the interface file.  Useful for
  * hardware that is not currently connected such as an 802.11b card
  * not plugged in, but configured for when it is plugged in.
  * @return Return string list of interfaces.
@@ -126,7 +126,7 @@ bool Interfaces::setAuto(const QString &interface, bool setAuto){
  *  can call getFamily(), getMethod, and get/setOption().
  * @param interface the name of the interface to set.  All whitespace is
  *  removed from the interface name.
- * @return bool true if it is successfull.
+ * @return bool true if it is successful.
  */
 bool Interfaces::setInterface(QString interface){
   interface = interface.simplifyWhiteSpace();
@@ -149,7 +149,7 @@ bool Interfaces::isInterfaceSet() const {
  * @param family the family of this interface inet or inet, ipx or inet6
  *  Must of one of the families defined in interfaces.h
  * @param method for the family.  see interfaces man page for family methods.
- * @return true if successfull.
+ * @return true if successful.
  */
 bool Interfaces::addInterface(const QString &interface, const QString &family, const QString &method){
     qDebug("Interfaces::addInterface(%s)",interface.latin1());
@@ -165,7 +165,7 @@ bool Interfaces::addInterface(const QString &interface, const QString &family, c
 /**
  * Copies interface with name interface to name newInterface
  * @param newInterface name of the new interface.
- * @return bool true if successfull
+ * @return bool true if successful
  */
 bool Interfaces::copyInterface(const QString &interface, const QString &newInterface){
     qDebug("copy interface %s to %s", interface.latin1(), newInterface.latin1());
@@ -197,7 +197,7 @@ bool Interfaces::copyInterface(const QString &interface, const QString &newInter
 
 /**
  * Remove the currently selected interface and all of its options.
- * @return bool if successfull or not.
+ * @return bool if successful or not.
  */
 bool Interfaces::removeInterface(){
   return removeStanza(currentIface);
@@ -272,7 +272,7 @@ QString Interfaces::getInterfaceMethod(bool &error){
 /**
  * Sets the interface name to newName.
  * @param newName the new name of the interface.  All whitespace is removed.
- * @return bool true if successfull.
+ * @return bool true if successful.
  */
 bool Interfaces::setInterfaceName(const QString &newName){
     qDebug("setInterfaceName %s", newName.latin1());
@@ -292,7 +292,7 @@ bool Interfaces::setInterfaceName(const QString &newName){
  * Sets the interface family to newName.
  * @param newName the new name of the interface.  Must be one of the families
  *  defined in the interfaces.h file.
- * @return bool true if successfull.
+ * @return bool true if successful.
  */
 bool Interfaces::setInterfaceFamily(const QString &newName){
   if(currentIface == interfaces.end())
@@ -307,7 +307,7 @@ bool Interfaces::setInterfaceFamily(const QString &newName){
 /**
  * Sets the interface method to newName
  * @param newName the new name of the interface
- * @return bool true if successfull.
+ * @return bool true if successful.
  */
 bool Interfaces::setInterfaceMethod(const QString &newName){
   if(currentIface == interfaces.end())
@@ -372,7 +372,7 @@ bool Interfaces::removeInterfaceOption(const QString &option, const QString &val
 
 /**
  * Removes all of the options from the currently selected interface.
- * @return bool error if if successfull
+ * @return bool error if if successful
  */
 bool Interfaces::removeAllInterfaceOptions(){
   return removeAllOptions(currentIface);
@@ -383,7 +383,7 @@ bool Interfaces::removeAllInterfaceOptions(){
  *  can call addMapping(), set/getMap(), and get/setScript().
  * @param interface the name of the interface to set.  All whitespace is
  *  removed from the interface name.
- * @return bool true if it is successfull.
+ * @return bool true if it is successful.
  */
 bool Interfaces::setMapping(const QString &interface){
   QString interfaceName = interface.simplifyWhiteSpace();
@@ -402,7 +402,7 @@ void Interfaces::addMapping(const QString &option){
 
 /**
  * Remove the currently selected map and all of its options.
- * @return bool if successfull or not.
+ * @return bool if successful or not.
  */
 bool Interfaces::removeMapping(){
   return removeStanza(currentMapping);
@@ -412,7 +412,7 @@ bool Interfaces::removeMapping(){
  * Set a map option within a mapping.
  * @param map map to use
  * @param value value to go with map
- * @return bool true if it is successfull.
+ * @return bool true if it is successful.
  */
 bool Interfaces::setMap(const QString &map, const QString &value){
   return setOption(currentMapping, map, value);
@@ -422,7 +422,7 @@ bool Interfaces::setMap(const QString &map, const QString &value){
  * Removes a map option within a mapping.
  * @param map map to use
  * @param value value to go with map
- * @return bool true if it is successfull.
+ * @return bool true if it is successful.
  */
 bool Interfaces::removeMap(const QString &map, const QString &value){
   return removeOption(currentMapping, map, value);
@@ -431,7 +431,7 @@ bool Interfaces::removeMap(const QString &map, const QString &value){
 /**
  * Get a map value within a mapping.
  * @param map map to get value of
- * @param bool true if it is successfull.
+ * @param bool true if it is successful.
  * @return value that goes to the map
  */
 QString Interfaces::getMap(const QString &map, bool &error){
@@ -441,7 +441,7 @@ QString Interfaces::getMap(const QString &map, bool &error){
 /**
  * Sets a script value of the current mapping to argument.
  * @param argument the script name.
- * @return true if successfull.
+ * @return true if successful.
  */
 bool Interfaces::setScript(const QString &argument){
   return setOption(currentMapping, "script", argument);
@@ -462,7 +462,7 @@ QString Interfaces::getScript(bool &error){
  *  the correct place.
  * @param stanza The stanza (auto, iface, mapping) to look for.
  * @param option string that must be in the stanza's main line.
- * @param interator interator to place at location of stanza if successfull.
+ * @param interator interator to place at location of stanza if successful.
  * @return bool true if the stanza is found.
  */
 bool Interfaces::setStanza(const QString &stanza, const QString &option, QStringList::Iterator &iterator){
@@ -500,7 +500,7 @@ bool Interfaces::setStanza(const QString &stanza, const QString &option, QString
  * Sets a value of an option in a stanza
  * @param start the start of the stanza
  * @param option the option to use when setting value.
- * @return bool true if successfull, false otherwise.
+ * @return bool true if successful, false otherwise.
  */
 bool Interfaces::setOption(const QStringList::Iterator &start, const QString &option, const QString &value){
   if(start == interfaces.end())
@@ -554,7 +554,7 @@ bool Interfaces::setOption(const QStringList::Iterator &start, const QString &op
 /**
  * Removes a stanza and all of its options
  * @param stanza the stanza to remove
- * @return bool true if successfull.
+ * @return bool true if successful.
  */
 bool Interfaces::removeStanza(QStringList::Iterator &stanza){
   if(stanza == interfaces.end())
@@ -567,7 +567,7 @@ bool Interfaces::removeStanza(QStringList::Iterator &stanza){
  * Removes a option in a stanza
  * @param start the start of the stanza
  * @param option the option to remove
- * @return bool true if successfull, false otherwise.
+ * @return bool true if successful, false otherwise.
  */
 bool Interfaces::removeOption(const QStringList::Iterator &start, const QString &option){
   if(start == interfaces.end())
@@ -595,7 +595,7 @@ bool Interfaces::removeOption(const QStringList::Iterator &start, const QString 
  * Removes a option in a stanza
  * @param start the start of the stanza
  * @param option the option to use when setting value.
- * @return bool true if successfull, false otherwise.
+ * @return bool true if successful, false otherwise.
  */
 bool Interfaces::removeOption(const QStringList::Iterator &start, const QString &option, const QString &value){
   if(start == interfaces.end())
@@ -622,7 +622,7 @@ bool Interfaces::removeOption(const QStringList::Iterator &start, const QString 
 /**
  * Removes all options in a stanza
  * @param start the start of the stanza
- * @return bool true if successfull, false otherwise.
+ * @return bool true if successful, false otherwise.
  */
 bool Interfaces::removeAllOptions(const QStringList::Iterator &start){
   if(start == interfaces.end())
@@ -680,7 +680,7 @@ QString Interfaces::getOption(const QStringList::Iterator &start, const QString 
 /**
  * Write out the interfaces file to the file passed into the constructor.
  * Removes any excess blank lines over 1 line long.
- * @return bool true if successfull, false if not.
+ * @return bool true if successful, false if not.
  */
 bool Interfaces::write(){
   QFile::remove(interfacesFile);

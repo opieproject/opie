@@ -155,7 +155,7 @@ QString WExtensions::ap(){
  * @param signal the signal strength of interface
  * @param noise the noise level of the interface
  * @param quality the quality level of the interface
- * @return bool true if successfull
+ * @return bool true if successful
  */ 
 bool WExtensions::stats(int &signal, int &noise, int &quality){
   // gather link quality from /proc/net/wireless

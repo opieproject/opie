@@ -85,7 +85,7 @@ public:
 
   /**
    * Attempts to remove the interface, doesn't delete i
-   * @return bool true if successfull, false otherwise.
+   * @return bool true if successful, false otherwise.
    */
   virtual bool remove(Interface* i) = 0;
 

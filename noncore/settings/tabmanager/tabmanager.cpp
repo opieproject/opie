@@ -188,11 +188,11 @@ void TabManager::removeItem(){
   if (answer)
     return;
   
-  bool removeSuccessfull = true;
+  bool removeSuccessful = true;
   QString location = itemList[item];
   // Remove file (.directory in a Directory case)
   if(!QFile::remove(location))
-      removeSuccessfull = false;
+      removeSuccessful = false;
   
   // Remove directory
   if(item->parent() == NULL){
@@ -200,13 +200,13 @@ void TabManager::removeItem(){
     location = location.mid(0,location.length()-10);
     QDir dir;
     if(!dir.rmdir(location))
-      removeSuccessfull = false;
+      removeSuccessful = false;
     else
-      removeSuccessfull = true;
+      removeSuccessful = true;
   }
  
   // If removing failed. 
-  if(!removeSuccessfull){
+  if(!removeSuccessful){
     qDebug((QString("removeItem: ") + location).latin1());
     QMessageBox::critical(this, tr("Message"), tr("Can't remove."), tr("Ok") );
     return;
@@ -436,7 +436,7 @@ void TabManager::moveApplication(QListViewItem *item, QListViewItem *newGroup){
  * file
  * @param desktopFile - the .desktop file to search for [foo.desktop]
  * @param installedAppFile - location of the app install list
- * @return true if successfull, false if file not found.
+ * @return true if successful, false if file not found.
  */ 
 bool TabManager::findInstalledApplication(QString desktopFile, QString &installedAppFile){
   

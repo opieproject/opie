@@ -110,7 +110,7 @@ Interface *WLANModule::addNewInterface(const QString &){
 
 /**
  * Attempts to remove the interface, doesn't delete i
- * @return bool true if successfull, false otherwise.
+ * @return bool true if successful, false otherwise.
  */
 bool WLANModule::remove(Interface*){
   // Can't remove a hardware device, you can stop it though.

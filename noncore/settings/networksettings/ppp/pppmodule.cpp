@@ -180,7 +180,7 @@ Interface *PPPModule::addNewInterface(const QString &newInterface){
 
 /**
  * Attempts to remove the interface, doesn't delete i
- * @return bool true if successfull, false otherwise.
+ * @return bool true if successful, false otherwise.
  */
 bool PPPModule::remove(Interface *i){
     return list.remove(i);

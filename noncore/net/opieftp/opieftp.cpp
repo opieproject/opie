@@ -755,7 +755,7 @@ bool OpieFtp::populateRemoteView( )
         if( file.exists())
             file. remove();
     } else
-        qDebug("temp file not opened successfullly "+sfile);
+        qDebug("temp file not opened successfully "+sfile);
     Remote_View->setSorting( 4,TRUE);
     return true;
 }

@@ -115,7 +115,7 @@ void OCopServer::newOnServer() {
         return;
 
     /*
-     * we got a successfull new connection
+     * we got a successful new connection
      * be happy
      * set SocketNotifier
      * connect it
