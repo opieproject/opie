@@ -1,4 +1,12 @@
-# This is part of the taskbar
+TEMPLATE	= app
+CONFIG		= qt warn_on release
+DESTDIR		= $(OPIEDIR)/bin
+HEADERS		= calibrate.h
+SOURCES		= calibrate.cpp main.cpp
+INCLUDEPATH	+= $(QTDIR)/include $(OPIEDIR)/include
+DEPENDPATH	+= $(QTDIR)/include $(OPIEDIR)/include
+TARGET		= calibrate
+LIBS		+= -lqpe 
 
 TRANSLATIONS = ../../../i18n/de/calibrate.pro.in.ts \
 	 ../../../i18n/da/calibrate.pro.in.ts \
@@ -17,7 +25,5 @@ TRANSLATIONS = ../../../i18n/de/calibrate.pro.in.ts \
 	 ../../../i18n/zh_CN/calibrate.pro.in.ts \
 	 ../../../i18n/it/calibrate.pro.in.ts \
 	 ../../../i18n/zh_TW/calibrate.pro.in.ts
-
-
 
 include ( $(OPIEDIR)/include.pro )
