@@ -1,7 +1,5 @@
 
 #define QTOPIA_INTERNAL_FSLP
-#include <qpe/qcopenvelope_qws.h>
-
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/fileselector.h>
@@ -44,17 +42,6 @@
 #include <stdlib.h>
 #include "audiowidget.h"
 #include "videowidget.h"
-
-#include <unistd.h>
-#include <sys/file.h>
-#include <sys/ioctl.h>
-#include <sys/soundcard.h>
-
-// for setBacklight()
-#include <linux/fb.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdlib.h>
 
 #define BUTTONS_ON_TOOLBAR
 #define SIDE_BUTTONS
@@ -1010,7 +997,7 @@ void PlayListWidget::keyReleaseEvent( QKeyEvent *e)
       case Key_F11: //menu
           break;
       case Key_F12: //home
-//           doBlank();
+//          doBlank();
           break;
       case Key_F13: //mail
 //           doUnblank();
@@ -1079,27 +1066,7 @@ void PlayListWidget::keyPressEvent( QKeyEvent *)
 //     }
 }
 
-void PlayListWidget::doBlank() {
-    qDebug("do blanking");
-    fd=open("/dev/fb0",O_RDWR);
-    if (fd != -1) {
-        ioctl(fd,FBIOBLANK,1);
-//            close(fd);
-    }
-}
 
-void PlayListWidget::doUnblank() {
-    // this crashes opieplayer with a segfault
-    //      int fd;
-    //       fd=open("/dev/fb0",O_RDWR);
-    qDebug("do unblanking");
-    if (fd != -1) {
-        ioctl(fd,FBIOBLANK,0);
-        close(fd);
-    }
-    QCopEnvelope h("QPE/System", "setBacklight(int)");
-    h <<-3;// v[1]; // -3 Force on
-}
 
 void PlayListWidget::readm3u(const QString &filename) {
 

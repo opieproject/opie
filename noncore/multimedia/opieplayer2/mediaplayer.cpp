@@ -2,6 +2,7 @@
 #include <qpe/qlibrary.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
+#include <qpe/qcopenvelope_qws.h>
 
 #include <qmainwindow.h>
 #include <qmessagebox.h>
@@ -16,6 +17,10 @@
 
 #include "mediaplayerstate.h"
 
+// for setBacklight()
+#include <linux/fb.h>
+#include <sys/file.h>
+#include <sys/ioctl.h>
 
 
 extern AudioWidget *audioUI;
@@ -28,7 +33,7 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL ) {
 
 
-    xineControl = new XineControl();
+    //   xineControl = new XineControl();
 //    QPEApplication::grabKeyboard(); // EVIL
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
@@ -38,6 +43,7 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
 
     connect( mediaPlayerState, SIGNAL( next() ), this, SLOT( next() ) );
     connect( mediaPlayerState, SIGNAL( prev() ), this, SLOT( prev() ) );
+    connect( mediaPlayerState, SIGNAL( blankToggled( bool ) ), this, SLOT ( blank( bool ) ) );
 
     connect( audioUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
     connect( audioUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
@@ -50,7 +56,7 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     connect( videoUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
 
     volControl = new VolumeControl;
-
+    xineControl = new XineControl();
 }
 
 MediaPlayer::~MediaPlayer() {
@@ -71,7 +77,6 @@ void MediaPlayer::play() {
 
 void MediaPlayer::setPlaying( bool play ) {
     if ( !play ) {
-        // mediaPlayerState->setPaused( FALSE );
         return;
     }
 
@@ -97,12 +102,6 @@ void MediaPlayer::setPlaying( bool play ) {
      tickerText= tr( " File: " ) + currentFile->name();
     else
     tickerText = tr( " File: " ) + currentFile->name() + tr(", Length: ") + time;
-
-//     QString fileInfo = mediaPlayerState->curDecoder()->fileInfo();
-
-//     if ( !fileInfo.isEmpty() )
-//         tickerText += ", " + fileInfo;
-//     audioUI->setTickerText( tickerText + "." );
 
     audioUI->setTickerText( currentFile->file( ) );
 
@@ -249,6 +248,24 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
     }
 }
 
+
+void MediaPlayer::blank( bool b ) {
+    fd=open("/dev/fb0",O_RDWR);
+    if (fd != -1) {
+
+        if ( !b ) {
+            qDebug("do blanking");
+            ioctl( fd, FBIOBLANK, 3 );
+            isBlanked = TRUE;
+        } else {
+            qDebug("do unblanking");
+            ioctl( fd, FBIOBLANK, 0);
+            isBlanked = FALSE;
+        }
+        close( fd );
+    }
+}
+
 void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
     switch ( e->key() ) {
 ////////////////////////////// Zaurus keys
@@ -262,22 +279,16 @@ void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
           break;
       case Key_F12: //home
           qDebug("Blank here");
+//          mediaPlayerState->toggleBlank();
           break;
       case Key_F13: //mail
-          break;
+          qDebug("Blank here");
+//           mediaPlayerState->toggleBlank();
+           break;
     }
-}
-
-void MediaPlayer::doBlank() {
-
-}
-
-void MediaPlayer::doUnblank() {
-
 }
 
 void MediaPlayer::cleanUp() {
 //     QPEApplication::grabKeyboard();
 //     QPEApplication::ungrabKeyboard();
-
 }

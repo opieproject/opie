@@ -115,12 +115,21 @@ void MediaPlayerState::setIsStreaming( bool b ) {
 }
 
 
-void MediaPlayerState::setFullscreen( bool b ) {
+void MediaPlayerState::setBlank( bool b ) {
     if ( isFullscreen == b ) {
         return;
     }
     isFullscreen = b;
     emit fullscreenToggled(b);
+}
+
+
+void MediaPlayerState::setFullscreen( bool b ) {
+    if ( isBlanked == b ) {
+        return;
+    }
+    isBlanked = b;
+    emit blankToggled(b);
 }
 
 
@@ -257,13 +266,16 @@ void MediaPlayerState::togglePlaylist() {
 }
 
 void MediaPlayerState::togglePaused() {
- setPaused( !isPaused);
+    setPaused( !isPaused);
 }
 
 void MediaPlayerState::togglePlaying() {
     setPlaying( !isPlaying);
 }
 
+void MediaPlayerState::toggleBlank() {
+    setBlank( !isBlanked);
+}
 
 
 

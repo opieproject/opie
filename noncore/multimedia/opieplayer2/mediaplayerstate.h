@@ -78,6 +78,7 @@ public slots:
     void updatePosition( long p );
     void setLength( long l );
     void setView( char v );
+    void setBlank( bool b );
 
     void setPrev();
     void setNext();
@@ -92,6 +93,7 @@ public slots:
     void togglePlaylist();
     void togglePaused();
     void togglePlaying();
+    void toggleBlank();
 
 signals:
     void fullscreenToggled( bool );
@@ -106,7 +108,7 @@ signals:
     void positionUpdated( long ); // When the media file progresses
     void lengthChanged( long );
     void viewChanged( char );
-
+    void blankToggled( bool );
     void prev();
     void next();
 
@@ -114,6 +116,7 @@ private:
     bool isStreaming;
     bool isFullscreen;
     bool isScaled;
+    bool isBlanked;
     bool isLooping;
     bool isShuffled;
     bool usePlaylist;

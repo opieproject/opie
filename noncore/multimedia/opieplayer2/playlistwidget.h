@@ -42,7 +42,7 @@ public:
 /*     QTimer    * menuTimer; */
     FileSelector*  playLists;
     QPushButton *tbDeletePlaylist;
-    int fd, selected;
+    int selected;
 public slots:
     bool first();
     bool last();
@@ -56,11 +56,9 @@ protected:
 void keyReleaseEvent( QKeyEvent *e);
 void keyPressEvent( QKeyEvent *e);
 private:
-    int defaultSkinIndex; 
-    QPopupMenu *skinsMenu; 
+    int defaultSkinIndex;
+    QPopupMenu *skinsMenu;
     bool audioScan, videoScan;
-    void doBlank();
-    void doUnblank();
     void readm3u(const QString &);
     void readPls(const QString &);
 
@@ -72,7 +70,7 @@ private:
     void populateVideoView();
 private slots:
     void populateSkinsMenu();
-    void skinsMenuActivated(int); 
+    void skinsMenuActivated(int);
     void pmViewActivated(int);
     void writem3u();
     void scanForAudio();

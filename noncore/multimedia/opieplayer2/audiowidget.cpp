@@ -536,6 +536,7 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e)
       case Key_F12: //home
           break;
       case Key_F13: //mail
+          mediaPlayerState->toggleBlank();
           break;
       case Key_Space: {
           if(mediaPlayerState->playing()) {
@@ -579,7 +580,7 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e)
           } else if( !mediaPlayerState->isPaused ) {
               setToggleButton( i, TRUE );
               mediaPlayerState->setPaused( TRUE );
-          }           
+          }
 #endif
       }
           break;

@@ -28,13 +28,14 @@ private slots:
     void startDecreasingVolume();
     void stopChangingVolume();
     void cleanUp();
+    void blank( bool );
 
 protected:
     void timerEvent( QTimerEvent *e );
     void keyReleaseEvent( QKeyEvent *e);
-    void doBlank();
-    void doUnblank();
 private:
+    bool isBlanked;
+    int fd;
     int     volumeDirection;
     const DocLnk  *currentFile;
     XineControl *xineControl;
