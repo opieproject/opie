@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation>elementare Zusammensetzunh (%):</translation>
+        <translation>elementare Zusammensetzung (%):</translation>
     </message>
 </context>
 <context>
@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>Ionizationenergie</source>
-        <translation>Ionsationsenergie</translation>
+        <translation>Ionisationsenergie</translation>
     </message>
     <message>
         <source>Density</source>
@@ -138,7 +138,7 @@
     </message>
     <message>
         <source>Fluorine</source>
-        <translation>Flour</translation>
+        <translation>Fluor</translation>
     </message>
     <message>
         <source>Neon</source>
@@ -158,7 +158,7 @@
     </message>
     <message>
         <source>Silicon</source>
-        <translation>Silikon</translation>
+        <translation>Silizium</translation>
     </message>
     <message>
         <source>Phosphorus</source>
@@ -202,7 +202,7 @@
     </message>
     <message>
         <source>Manganese</source>
-        <translation>Mangesium</translation>
+        <translation>Mangan</translation>
     </message>
     <message>
         <source>Iron</source>
@@ -262,7 +262,7 @@
     </message>
     <message>
         <source>Zirconium</source>
-        <translation>Zirconium</translation>
+        <translation>Zirkonium</translation>
     </message>
     <message>
         <source>Niobium</source>
@@ -338,11 +338,11 @@
     </message>
     <message>
         <source>Praseodymium</source>
-        <translation>Praseodymium</translation>
+        <translation>Praseodym</translation>
     </message>
     <message>
         <source>Neodymium</source>
-        <translation>Neodymium</translation>
+        <translation>Neodym</translation>
     </message>
     <message>
         <source>Promethium</source>
@@ -394,7 +394,7 @@
     </message>
     <message>
         <source>Tantalum</source>
-        <translation>Tantalum</translation>
+        <translation>Tantal</translation>
     </message>
     <message>
         <source>Tungsten</source>
@@ -442,7 +442,7 @@
     </message>
     <message>
         <source>Astatine</source>
-        <translation>Astatine</translation>
+        <translation>Astat</translation>
     </message>
     <message>
         <source>Radon</source>

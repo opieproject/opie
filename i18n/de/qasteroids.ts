@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Fuel</source>
-        <translation>Sprit</translation>
+        <translation>Treibstoff</translation>
     </message>
     <message>
         <source>Press Calendar to start playing</source>
@@ -36,7 +36,7 @@ Drücken Sie die Addressbuch-/Home-Taste</translation>
         <source>Game Over.
 Press Calendar for a new game.</source>
         <translation>Game Over: 
-Drücken Sie die Kalendertste für ein weiteres Spiel</translation>
+Drücken Sie die Kalendertaste für ein weiteres Spiel</translation>
     </message>
 </context>
 </TS>

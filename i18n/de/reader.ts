@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>QTReaderApp</name>
     <message>
@@ -63,7 +64,7 @@
     </message>
     <message>
         <source>Two/One Touch</source>
-        <translation>Doppel/Singel Touch</translation>
+        <translation>Doppel-/Einfachklick</translation>
     </message>
     <message>
         <source>Target</source>
@@ -95,7 +96,7 @@
     </message>
     <message>
         <source>Continuous</source>
-        <translation>Pausenlos</translation>
+        <translation>Fortlaufend</translation>
     </message>
     <message>
         <source>Markup</source>
@@ -119,7 +120,7 @@
     </message>
     <message>
         <source>Peanut/PML</source>
-        <translation>Peanut/ML</translation>
+        <translation>Peanut/PML</translation>
     </message>
     <message>
         <source>Layout</source>
@@ -131,11 +132,11 @@
     </message>
     <message>
         <source>Dehyphen</source>
-        <translation>ohne Bindestr. </translation>
+        <translation>ohne Bindestriche</translation>
     </message>
     <message>
         <source>Single Space</source>
-        <translation>Einzelleerzeichen</translation>
+        <translation>Einzelne Leerzeichen</translation>
     </message>
     <message>
         <source>Unindent</source>
@@ -147,7 +148,7 @@
     </message>
     <message>
         <source>Double Space</source>
-        <translation>Doppelleerzeichen</translation>
+        <translation>Doppelte Leerzeichen</translation>
     </message>
     <message>
         <source>Indent+</source>
@@ -271,7 +272,7 @@
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Suche schliessen</translation>
+        <translation>Suche schließen</translation>
     </message>
     <message>
         <source>Do Reg</source>
@@ -286,7 +287,7 @@
     <name>fileBrowser</name>
     <message>
         <source>Browse for file</source>
-        <translation>Dateien suchen</translation>
+        <translation>Datei suchen</translation>
     </message>
     <message>
         <source>/</source>

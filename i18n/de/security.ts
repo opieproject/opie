@@ -4,7 +4,7 @@
     <name>Security</name>
     <message>
         <source>Set passcode</source>
-        <translation>Passwort einstellen</translation>
+        <translation>Passwort festlegen</translation>
     </message>
     <message>
         <source>Change passcode</source>
@@ -56,8 +56,7 @@ Access denied</source>
     </message>
     <message>
         <source>Require pass code at power-on</source>
-        <translation>Passwort muss beim Starten 
-eingegeben werden</translation>
+        <translation>Passwort beim Starten eingeben</translation>
     </message>
     <message>
         <source>Sync</source>

@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Lösche</translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 </TS>
