@@ -2,7 +2,5 @@ Makefile*
 instoptions.cpp
 instoptions.h
 moc*
-settings.cpp
-settings.h
 categoryfilter.cpp
 categoryfilter.h

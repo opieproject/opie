@@ -19,14 +19,19 @@
 #include <algorithm>
 using namespace std;
 
-#include <qlistbox.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
-#include <qtabwidget.h>
 #include <qcheckbox.h>
+#include <qgroupbox.h>
+#include <qlabel.h>
+#include <qlayout.h>
+#include <qlineedit.h>
+#include <qlistbox.h>
+#include <qpushbutton.h>
+
+#include <opie/otabwidget.h>
 
 #ifdef QWS
 #include <qpe/config.h>
+#include <qpe/resource.h>
 #endif
 
 #include "settingsimpl.h"
@@ -34,10 +39,25 @@ using namespace std;
 #include "global.h"
 
 SettingsImpl :: SettingsImpl( DataManager *dataManager, QWidget * parent, const char* name, bool modal, WFlags fl )
-    : SettingsBase( parent, name, modal, fl )
+    : QDialog( parent, name, modal, fl )
 {
-    dataMgr = dataManager;
+    setCaption( tr( "Configuration" ) );
+    
+    // Setup layout to make everything pretty
+    QVBoxLayout *layout = new QVBoxLayout( this );
+    layout->setMargin( 2 );
+    layout->setSpacing( 4 );
 
+    // Setup tabs for all info
+    OTabWidget *tabwidget = new OTabWidget( this );
+    layout->addWidget( tabwidget );
+
+    tabwidget->addTab( initServerTab(), "aqpkg/servertab", tr( "Servers" ) );
+    tabwidget->addTab( initDestinationTab(), "aqpkg/desttab", tr( "Destinations" ) );
+    tabwidget->addTab( initProxyTab(), "aqpkg/proxytab", tr( "Proxies" ) );
+    tabwidget->setCurrentTab( tr( "Servers" ) );
+    
+    dataMgr = dataManager;
     setupData();
     changed = false;
     newserver = false;
@@ -49,9 +69,8 @@ SettingsImpl :: ~SettingsImpl()
 
 }
 
-bool SettingsImpl :: showDlg( int i )
+bool SettingsImpl :: showDlg()
 {
-	TabWidget->setCurrentPage( i );
 	showMaximized();
 	exec();
 
@@ -59,6 +78,177 @@ bool SettingsImpl :: showDlg( int i )
 		dataMgr->writeOutIpkgConf();
 
 	return changed;
+}
+
+QWidget *SettingsImpl :: initServerTab()
+{
+    QWidget *control = new QWidget( this );
+
+    QVBoxLayout *vb = new QVBoxLayout( control );
+
+    QScrollView *sv = new QScrollView( control );
+    vb->addWidget( sv, 0, 0 );
+    sv->setResizePolicy( QScrollView::AutoOneFit );
+    sv->setFrameStyle( QFrame::NoFrame );
+
+    QWidget *container = new QWidget( sv->viewport() );
+    sv->addChild( container );
+
+    QGridLayout *layout = new QGridLayout( container );
+    layout->setSpacing( 2 );
+    layout->setMargin( 4 );
+
+    servers = new QListBox( container );
+    servers->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Preferred ) );
+    connect( servers, SIGNAL( highlighted( int ) ), this, SLOT( editServer( int ) ) );
+    layout->addMultiCellWidget( servers, 0, 0, 0, 1 );
+
+    QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
+    connect( btn, SIGNAL( clicked() ), this, SLOT( newServer() ) );
+    layout->addWidget( btn, 1, 0 );
+    
+    btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
+    connect( btn, SIGNAL( clicked() ), this, SLOT( removeServer() ) );
+    layout->addWidget( btn, 1, 1 );
+    
+    QGroupBox *grpbox = new QGroupBox( 0, Qt::Vertical, tr( "Server" ), container );
+    grpbox->layout()->setSpacing( 2 );
+    grpbox->layout()->setMargin( 4 );
+    layout->addMultiCellWidget( grpbox, 2, 2, 0, 1 );
+
+    QGridLayout *grplayout = new QGridLayout( grpbox->layout() );
+    
+    QLabel *label = new QLabel( tr( "Name:" ), grpbox );
+    grplayout->addWidget( label, 0, 0 );
+    servername = new QLineEdit( grpbox );
+    grplayout->addWidget( servername, 0, 1 );
+
+    label = new QLabel( tr( "Address:" ), grpbox );
+    grplayout->addWidget( label, 1, 0 );
+    serverurl = new QLineEdit( grpbox );
+    grplayout->addWidget( serverurl, 1, 1 );
+
+    active = new QCheckBox( tr( "Active Server" ), grpbox );
+    grplayout->addMultiCellWidget( active, 2, 2, 0, 1 );
+    
+    btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), grpbox );
+    connect( btn, SIGNAL( clicked() ), this, SLOT( changeServerDetails() ) );
+    grplayout->addMultiCellWidget( btn, 3, 3, 0, 1 );
+    
+    return control;
+}
+
+QWidget *SettingsImpl :: initDestinationTab()
+{
+    QWidget *control = new QWidget( this );
+
+    QVBoxLayout *vb = new QVBoxLayout( control );
+
+    QScrollView *sv = new QScrollView( control );
+    vb->addWidget( sv, 0, 0 );
+    sv->setResizePolicy( QScrollView::AutoOneFit );
+    sv->setFrameStyle( QFrame::NoFrame );
+
+    QWidget *container = new QWidget( sv->viewport() );
+    sv->addChild( container );
+
+    QGridLayout *layout = new QGridLayout( container );
+    layout->setSpacing( 2 );
+    layout->setMargin( 4 );
+
+    destinations = new QListBox( container );
+    destinations->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Preferred ) );
+    connect( destinations, SIGNAL( highlighted( int ) ), this, SLOT( editDestination( int ) ) );
+    layout->addMultiCellWidget( destinations, 0, 0, 0, 1 );
+
+    QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
+    connect( btn, SIGNAL( clicked() ), this, SLOT( newDestination() ) );
+    layout->addWidget( btn, 1, 0 );
+    
+    btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
+    connect( btn, SIGNAL( clicked() ), this, SLOT( removeDestination() ) );
+    layout->addWidget( btn, 1, 1 );
+    
+    QGroupBox *grpbox = new QGroupBox( 0, Qt::Vertical, tr( "Destination" ), container );
+    grpbox->layout()->setSpacing( 2 );
+    grpbox->layout()->setMargin( 4 );
+    layout->addMultiCellWidget( grpbox, 2, 2, 0, 1 );
+
+    QGridLayout *grplayout = new QGridLayout( grpbox->layout() );
+    
+    QLabel *label = new QLabel( tr( "Name:" ), grpbox );
+    grplayout->addWidget( label, 0, 0 );
+    destinationname = new QLineEdit( grpbox );
+    grplayout->addWidget( destinationname, 0, 1 );
+
+    label = new QLabel( tr( "Location:" ), grpbox );
+    grplayout->addWidget( label, 1, 0 );
+    destinationurl = new QLineEdit( grpbox );
+    grplayout->addWidget( destinationurl, 1, 1 );
+
+    linkToRoot = new QCheckBox( tr( "Link to root" ), grpbox );
+    grplayout->addMultiCellWidget( linkToRoot, 2, 2, 0, 1 );
+    
+    btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), grpbox );
+    connect( btn, SIGNAL( clicked() ), this, SLOT( changeDestinationDetails() ) );
+    grplayout->addMultiCellWidget( btn, 3, 3, 0, 1 );
+    
+    return control;
+}
+
+QWidget *SettingsImpl :: initProxyTab()
+{
+    QWidget *control = new QWidget( this );
+
+    QVBoxLayout *vb = new QVBoxLayout( control );
+
+    QScrollView *sv = new QScrollView( control );
+    vb->addWidget( sv, 0, 0 );
+    sv->setResizePolicy( QScrollView::AutoOneFit );
+    sv->setFrameStyle( QFrame::NoFrame );
+
+    QWidget *container = new QWidget( sv->viewport() );
+    sv->addChild( container );
+
+    QGridLayout *layout = new QGridLayout( container );
+    layout->setSpacing( 2 );
+    layout->setMargin( 4 );
+
+    QGroupBox *grpbox = new QGroupBox( 0, Qt::Vertical, tr( "HTTP Proxy" ), container );
+    grpbox->layout()->setSpacing( 2 );
+    grpbox->layout()->setMargin( 4 );
+    layout->addMultiCellWidget( grpbox, 0, 0, 0, 1 );
+    QVBoxLayout *grplayout = new QVBoxLayout( grpbox->layout() );
+    txtHttpProxy = new QLineEdit( grpbox );
+    grplayout->addWidget( txtHttpProxy );
+    chkHttpProxyEnabled = new QCheckBox( tr( "Enabled" ), grpbox );
+    grplayout->addWidget( chkHttpProxyEnabled );
+    
+    grpbox = new QGroupBox( 0, Qt::Vertical, tr( "FTP Proxy" ), container );
+    grpbox->layout()->setSpacing( 2 );
+    grpbox->layout()->setMargin( 4 );
+    layout->addMultiCellWidget( grpbox, 1, 1, 0, 1 );
+    grplayout = new QVBoxLayout( grpbox->layout() );
+    txtFtpProxy = new QLineEdit( grpbox );
+    grplayout->addWidget( txtFtpProxy );
+    chkFtpProxyEnabled = new QCheckBox( tr( "Enabled" ), grpbox );
+    grplayout->addWidget( chkFtpProxyEnabled );
+    
+    QLabel *label = new QLabel( tr( "Username:" ), container );
+    layout->addWidget( label, 2, 0 );
+    txtUsername = new QLineEdit( container );
+    layout->addWidget( txtUsername, 2, 1 );
+
+    label = new QLabel( tr( "Password:" ), container );
+    layout->addWidget( label, 3, 0 );
+    txtPassword = new QLineEdit( container );
+    layout->addWidget( txtPassword, 3, 1 );
+
+    QPushButton *btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), container );
+    connect( btn, SIGNAL( clicked() ), this, SLOT( proxyApplyChanges() ) );
+    layout->addMultiCellWidget( btn, 4, 4, 0, 1 );
+    
+    return control;
 }
 
 void SettingsImpl :: setupData()
@@ -73,20 +263,12 @@ void SettingsImpl :: setupData()
         servers->insertItem( it->getServerName() );
 	}
 
+
     // add destinations
     vector<Destination>::iterator it2;
     for ( it2 = dataMgr->getDestinationList().begin() ; it2 != dataMgr->getDestinationList().end() ; ++it2 )
         destinations->insertItem( it2->getDestinationName() );
-
-    // setup general tab
-#ifdef QWS
-    Config cfg( "aqpkg" );
-    cfg.setGroup( "settings" );
-    jumpTo->setChecked( cfg.readBoolEntry( "showJumpTo", "true" ) );
-#else
-    jumpTo->setChecked( true );
-#endif
-
+    
     // setup proxy tab
     txtHttpProxy->setText( dataMgr->getHttpProxy() );
     txtFtpProxy->setText( dataMgr->getFtpProxy() );
@@ -100,7 +282,7 @@ void SettingsImpl :: setupData()
 
 void SettingsImpl :: editServer( int sel )
 {
-	currentSelectedServer = sel;
+    currentSelectedServer = sel;
     vector<Server>::iterator s = dataMgr->getServer( servers->currentText() );
     serverName = s->getServerName();
     servername->setText( s->getServerName() );
@@ -110,10 +292,10 @@ void SettingsImpl :: editServer( int sel )
 
 void SettingsImpl :: newServer()
 {
-	newserver = true;
-	servername->setText( "" );
-	serverurl->setText( "" );
-	servername->setFocus();
+    newserver = true;
+    servername->setText( "" );
+    serverurl->setText( "" );
+    servername->setFocus();
     active->setChecked( true );
 }
 
@@ -240,17 +422,6 @@ void SettingsImpl :: changeDestinationDetails()
         cfg.writeEntry( key, true );
 #endif
 	}
-}
-
-//------------------ General tab ----------------------
-
-void SettingsImpl :: toggleJumpTo( bool val )
-{
-#ifdef QWS
-    Config cfg( "aqpkg" );
-    cfg.setGroup( "settings" );
-    cfg.writeEntry( "showJumpTo", val );
-#endif
 }
 
 //------------------ Proxy tab ----------------------

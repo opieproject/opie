@@ -345,7 +345,7 @@ void MainWindow :: setDocument( const QString &doc )
 void MainWindow :: displaySettings()
 {
     SettingsImpl *dlg = new SettingsImpl( mgr, this, "Settings", true );
-    if ( dlg->showDlg( 0 ) )
+    if ( dlg->showDlg() )
     {
         stack->raiseWidget( progressWindow );
     	updateData();
