@@ -33,6 +33,6 @@ INTERFACES	= ui/tvkeyedit_gen.ui
 TARGET		= tableviewer
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH     += $(OPIEDIR)/include
-LIBS	       += -lqpe
+LIBS	       += -lqpe -lopiecore2
 
 include ( $(OPIEDIR)/include.pro )
