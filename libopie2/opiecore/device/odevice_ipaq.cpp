@@ -169,8 +169,7 @@ void iPAQ::initButtons()
         return;
 
     if ( isQWS( ) ) {
-        Opie::Core::OKeyFilter::inst()->addPreHandler(this);
-        //QWSServer::setKeyboardFilter ( this );
+        addPreHandler(this);
     }
 
     d->m_buttons = new QValueList <ODeviceButton>;

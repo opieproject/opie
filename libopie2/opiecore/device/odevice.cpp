@@ -1,27 +1,27 @@
 /*
-                             This file is part of the Opie Project
-                             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+                     This file is part of the Opie Project
+                      Copyright (C) The Opie Team <opie-devel@handhelds.org>
               =.
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           Library General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -45,6 +45,7 @@
 #include <qpe/resource.h>
 #include <qpe/sound.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <opie2/okeyfilter.h>
 
 /* STD */
 #include <fcntl.h>
@@ -676,7 +677,7 @@ void ODevice::remapPressedAction ( int button, const OQCopMessage &action )
     buttonFile. writeEntry ( "PressedActionChannel", (const char*) mb_chan);
     buttonFile. writeEntry ( "PressedActionMessage", (const char*) b. pressedAction(). message());
 
-//	buttonFile. writeEntry ( "PressedActionArgs", encodeBase64 ( b. pressedAction(). data()));
+//  buttonFile. writeEntry ( "PressedActionArgs", encodeBase64 ( b. pressedAction(). data()));
 
     QCopEnvelope ( "QPE/System", "deviceButtonMappingChanged()" );
 }
@@ -696,7 +697,7 @@ void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
     buttonFile. writeEntry ( "HeldActionChannel", (const char *) b. heldAction(). channel());
     buttonFile. writeEntry ( "HeldActionMessage", (const char *) b. heldAction(). message());
 
-//	buttonFile. writeEntry ( "HeldActionArgs", decodeBase64 ( b. heldAction(). data()));
+//  buttonFile. writeEntry ( "HeldActionArgs", decodeBase64 ( b. heldAction(). data()));
 
     QCopEnvelope ( "QPE/System", "deviceButtonMappingChanged()" );
 }
@@ -710,6 +711,16 @@ void ODevice::sendSuspendmsg()
         return;
 
     QCopEnvelope ( "QPE/System", "aboutToSuspend()" );
+}
+
+void ODevice::addPreHandler(QWSServer::KeyboardFilter*aFilter)
+{
+    Opie::Core::OKeyFilter::inst()->addPreHandler(aFilter);
+}
+
+void ODevice::remPreHandler(QWSServer::KeyboardFilter*aFilter)
+{
+    Opie::Core::OKeyFilter::inst()->remPreHandler(aFilter);
 }
 
 

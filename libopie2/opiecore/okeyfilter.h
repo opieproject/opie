@@ -33,10 +33,7 @@ _;:,     .>    :=|.         This program is free software; you can
 namespace Opie {
 namespace Core {
     class ODevice;
-namespace Internal {
-    class iPAQ;
-    class SIMpad;
-}
+
 
 /**
  * A singleton which will manage all possible keyboard filters inside opie.
@@ -50,8 +47,6 @@ namespace Internal {
 class OKeyFilter
 {
     friend class Opie::Core::ODevice;
-    friend class Opie::Core::Internal::iPAQ;
-    friend class Opie::Core::Internal::SIMpad;
 
 protected:
     /**

@@ -147,8 +147,7 @@ void SIMpad::initButtons()
         return;
 
     if ( isQWS( ) ) {
-        Opie::Core::OKeyFilter::inst()->addPreHandler(this);
-//        QWSServer::setKeyboardFilter ( this );
+        addPreHandler(this);
     }
 
 
