@@ -329,7 +329,7 @@ QString OFileSelector::selectedName( )const
   }else if(m_selector == EXTENDED || m_selector == EXTENDED_ALL ) {
     QListViewItem *item = m_View->currentItem();
     if(item != 0 ){
-      string = item->text( 1 );
+      string = m_currentDir + "/" + item->text( 1 );
     }
   }
   return string;
