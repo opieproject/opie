@@ -91,11 +91,10 @@ config EXPERIMENTAL
 
 endmenu
 
-menu "Opie Compile Configs"
+menu "Configuration"
 config OPIE_NO_OVERRIDE_QT
   boolean "Build Opie against an unpatched version of Qt"
   default n
-
 
 config OPIE_NO_BUILTIN_SHUTDOWN
   boolean "Disable the built in shutdown application"
@@ -122,7 +121,7 @@ config QT_QWS_ALLOW_OVERCLOCK
   default n
 
 config OPIE_HIGH_RES_SMALL_PHY
-  boolean "Resolution is bigger than physical scrren"
+  boolean "Resolution is bigger than physical screen"
   default y if TARGET_C700
   default n
 
@@ -132,9 +131,14 @@ config OPIE_NEW_ALLOC
   default n
 
 config OPIE_NO_SOUND_PCM_READ_BITS
-  boolean "there is not a pcm_read_bits io control"
+  boolean "There is not a pcm_read_bits io control"
   default y if TARGET_SHARP
   default n
+
+config OPIE_WE_VERSION
+  string  "The wireless extension (WE) version to build against"
+  default "15" if ! TARGET_X86
+  default "16" if TAGET_X86
 
 endmenu
 
