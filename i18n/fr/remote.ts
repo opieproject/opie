@@ -4,7 +4,7 @@
     <name>MainView</name>
     <message>
         <source>Remote</source>
-        <translation>Distant</translation>
+        <translation>Télécommande</translation>
     </message>
     <message>
         <source>Learn</source>
