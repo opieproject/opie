@@ -1,6 +1,6 @@
 #!/bin/sh
 
-permin ()
+permout ()
 {
 	if [ -e $1 ]
 	then
