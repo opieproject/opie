@@ -121,6 +121,8 @@ public:
 	 */
 	virtual void scroll( int value ) = 0;
 		
+
+	virtual bool eventFilter( QObject *obj, QEvent *event );
 signals:
 
 	/**

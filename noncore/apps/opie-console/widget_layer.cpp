@@ -55,6 +55,85 @@ void WidgetLayer::bell()
 	QApplication::beep();
 }
 
+bool WidgetLayer::eventFilter( QObject *obj, QEvent *e )
+{
+    if ( (e->type() == QEvent::Accel ||
+          e->type() == QEvent::AccelAvailable ) && qApp->focusWidget() == this )  {
+        static_cast<QKeyEvent *>( e )->ignore();
+        return true;
+    }
+    if ( obj != this /* when embedded */ && obj != parent() /* when standalone */ )
+        return FALSE; // not us
+    if ( e->type() == QEvent::Wheel)  {
+        QApplication::sendEvent( m_scrollbar, e);
+    }
+
+#ifdef FAKE_CTRL_AND_ALT
+    static bool control = FALSE;
+    static bool alt = FALSE;
+//    qDebug(" Has a keyboard with no CTRL and ALT keys, but we fake it:");
+    bool dele=FALSE;
+    if ( e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease ) {
+        QKeyEvent* ke = (QKeyEvent*)e;
+        bool keydown = e->type() == QEvent::KeyPress || ke->isAutoRepeat();
+        switch (ke->key()) {
+          case Key_F9: // let this be "Control"
+              control = keydown;
+              e = new QKeyEvent(QEvent::KeyPress, Key_Control, 0, ke->state());
+              dele=TRUE;
+              break;
+          case Key_F13: // let this be "Alt"
+	      alt = keydown;
+              e = new QKeyEvent(QEvent::KeyPress, Key_Alt, 0, ke->state());
+              dele=TRUE;
+              break;
+          default:
+              if ( control ) {
+                  int a = toupper(ke->ascii())-64;
+                  if ( a >= 0 && a < ' ' ) {
+                      e = new QKeyEvent(e->type(), ke->key(),
+                                        a, ke->state()|ControlButton,
+QChar(a,0));
+                      dele=TRUE;
+                  }
+              }
+              if ( alt ) {
+                  e = new QKeyEvent(e->type(), ke->key(),
+                                    ke->ascii(), ke->state()|AltButton, ke->text());
+                  dele=TRUE;
+              }
+        }
+    }
+#endif
+
+    if ( e->type() == QEvent::KeyPress )  {
+        QKeyEvent* ke = (QKeyEvent*)e;
+        //actSel=0; // Key stroke implies a screen update, so Widget won't
+          // know where the current selection is.
+
+//     qDebug("key pressed is 0x%x",ke->key());
+
+        if( ke->state() == ShiftButton && ke->key() == Key_Tab) { //lets hardcode this sucker
+            insertText("\\"); // expose
+        } else
+            emit keyPressed( ke ); // expose
+        ke->accept();
+#ifdef FAKE_CTRL_AND_ALT
+        if ( dele ) delete e;
+#endif
+        return true;               // stop the event
+    }
+    if ( e->type() == QEvent::Enter )  {
+        QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()),
+                             this, SLOT(onClearSelection()) );
+    }
+    if ( e->type() == QEvent::Leave )  {
+        QObject::connect( (QObject*)cb, SIGNAL(dataChanged()),
+                          this, SLOT(onClearSelection()) );
+    }
+    return QFrame::eventFilter( obj, e );
+}
+
 
 /* --------------------------------- screen --------------------------------- */
 
