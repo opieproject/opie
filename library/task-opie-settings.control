@@ -1,7 +1,7 @@
 Package: task-opie-settings
-Files: 
+Files:
 Priority: optional
-Section: opie/applications
+Section: opie/settings
 Maintainer: Maximilian Reiss <max.reiss@gmx.de>
 Architecture: arm
 Depends: task-opie-minimal, opie-appearance, opie-security, opie-systemtime, opie-light-and-power

@@ -1,7 +1,7 @@
 Package: task-opie-pim
-Files: 
+Files:
 Priority: optional
-Section: opie/applications
+Section: opie/pim
 Maintainer: Maximilian Reiss <max.reiss@gmx.de>
 Architecture: arm
 Depends: task-opie-minimal, opie-datebook, opie-todo, opie-addressbook, task-opie-today, opie-drawpad, opie-multikey, opie-osearch

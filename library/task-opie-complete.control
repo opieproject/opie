@@ -1,7 +1,7 @@
 Package: task-opie-complete
-Files: 
+Files:
 Priority: optional
-Section: opie/applications
+Section: opie/system
 Maintainer: Maximilian Reiss <max.reiss@gmx.de>
 Architecture: arm
 Depends: task-opie-apps, task-opie-settings, task-opie-games, task-opie-applets

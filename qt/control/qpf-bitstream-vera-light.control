@@ -2,7 +2,7 @@ Package: qpf-bitstream-vera-small
 Files: $QTDIR/lib/fonts/vera_{80,100,120}_{50,50i,75,75i}*
 Version: 1.10-4
 Priority: optional
-Section: base
+Section: opie/system
 Depends: qte-fonts-common
 Provides: qpf-bitstream-vera
 Maintainer: Chris Larson <kergoth@handhelds.org>
