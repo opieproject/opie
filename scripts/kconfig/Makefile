@@ -1,6 +1,6 @@
 VERSION=1.4
-CC=gcc
-CXX=g++
+CC=$(CCACHE) gcc
+CXX=$(CCACHE) g++
 CFLAGS=-O0 -Wall -g -fPIC
 CXXFLAGS=$(CFLAGS) -I$(QTDIR)/include
 LDFLAGS=

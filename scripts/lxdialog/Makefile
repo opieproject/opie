@@ -1,6 +1,6 @@
 HOST_EXTRACFLAGS := -DLOCALE 
 HOST_LOADLIBES   := -lncurses
-HOSTCC = gcc
+HOSTCC = $(CCACHE) gcc
 
 ifeq (/usr/include/ncurses/ncurses.h, $(wildcard /usr/include/ncurses/ncurses.h))
 HOST_EXTRACFLAGS += -I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>"
