@@ -1,5 +1,5 @@
-#CONFIG   = qt qtopia warn_on release pdaudio
-CONFIG   = qt warn_on release opie
+CONFIG   = qt qtopia warn_on release pdaudio
+#CONFIG   = qt warn_on release opie
 #CONFIG    = qt warn_on release quick-app
 HEADERS   = adpcm.h \
 	pixmaps.h \
@@ -22,7 +22,8 @@ contains(CONFIG, pdaudio) {
   LIBS += -L$(QPEDIR)/lib -lqpe -lpthread -ljpeg -lpng -lz
   INCLUDEPATH += $(QPEDIR)/include
   DEPENDPATH  += $(QPEDIR)/include
-  DEFINES += PDAUDIO
+  DEFINES += PDAUDIO 
+  DEFINES += THREADED
   TARGET    = qperec
 
 #  DESTDIR=$(QPEDIR)/bin
