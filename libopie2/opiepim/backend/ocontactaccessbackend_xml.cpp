@@ -43,7 +43,7 @@
 
 #include <qpe/global.h>
 
-#include <opie/xmltree.h>
+#include <opie2/xmltree.h>
 #include <opie2/ocontactaccessbackend.h>
 #include <opie2/ocontactaccess.h>
 
