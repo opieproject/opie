@@ -127,10 +127,13 @@ public:
 	virtual OLedState ledState ( OLed led ) const;
 	virtual bool setLedState ( OLed led, OLedState st );
 
+	static bool isZaurus();
+
 protected:
 	virtual void buzzer ( int snd );
 
 	OLedState m_leds [1];
+	bool m_embedix;
 };
 
 class SIMpad : public ODevice, public QWSServer::KeyboardFilter {
@@ -383,10 +386,10 @@ ODevice *ODevice::inst ( )
 {
 	static ODevice *dev = 0;
 
-	if ( !dev ) {
+	if ( !dev ) {		
 		if ( QFile::exists ( "/proc/hal/model" ))
 			dev = new iPAQ ( );
-		else if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ))
+		else if ( Zaurus::isZaurus() )
 			dev = new Zaurus ( );
 		else if ( QFile::exists ( "/proc/ucb1x00" ) && QFile::exists ( "/proc/cs3" ))
 			dev = new SIMpad ( );
@@ -928,7 +931,6 @@ void ODevice::virtual_hook(int, void* ){
 }
 
 
-
 /**************************************************
  *
  * iPAQ
@@ -1321,29 +1323,87 @@ int iPAQ::lightSensorResolution ( ) const
  *
  **************************************************/
 
+// Check whether this device is the sharp zaurus..
+bool Zaurus::isZaurus()
+{
+
+	// If the special devices by embedix exist, it is quite simple: it is a Zaurus !
+	if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ) ){
+		return true;
+	}	
+
+	// On non-embedix kenrnels, we have too look closer.
+	bool is_zaurus = false;
+	QFile f ( "/proc/cpuinfo" );
+	if ( f. open ( IO_ReadOnly ) ) {
+		QString model;
+		QFile f ( "/proc/cpuinfo" );
+
+  		QTextStream ts ( &f );
+  		QString line;
+  		while( line = ts. readLine ( ) ) {
+  			if ( line. left ( 8 ) == "Hardware" )
+  				break;
+  		}
+  		int loc = line. find ( ":" );
+  		if ( loc != -1 )
+  			model = line. mid ( loc + 2 ). simplifyWhiteSpace( );
+
+		if ( model == "Sharp-Collie" 
+		     || model == "Collie" 
+		     || model == "SHARP Corgi"
+		     || model == "SHARP Shepherd" 
+		     || model == "SHARP Poodle" 
+		   )
+			is_zaurus = true;
+
+  	}
+	return is_zaurus;
+}
 
 
 void Zaurus::init ( )
 {
 	d-> m_vendorstr = "Sharp";
 	d-> m_vendor = Vendor_Sharp;
+	m_embedix = true;  // Not openzaurus means: It has an embedix kernel !
 
-	QFile f ( "/proc/filesystems" );
+	// QFile f ( "/proc/filesystems" );
 	QString model;
 
-	if ( f. open ( IO_ReadOnly ) && ( QTextStream ( &f ). read ( ). find ( "\tjffs2\n" ) >= 0 )) {
+	// It isn't a good idea to check the system configuration to 
+	// detect the distribution ! 
+	// Otherwise it may happen that any other distribution is detected as openzaurus, just
+	// because it uses a jffs2 filesystem..  
+	// (eilers)
+	// if ( f. open ( IO_ReadOnly ) && ( QTextStream ( &f ). read ( ). find ( "\tjffs2\n" ) >= 0 )) {
+	QFile f ("/etc/oz_version");
+	if ( f.exists() ){
 		d-> m_vendorstr = "OpenZaurus Team";
 		d-> m_systemstr = "OpenZaurus";
 		d-> m_system = System_OpenZaurus;
 
-		f. close ( );
-
-		f. setName ( "/etc/oz_version" );
 		if ( f. open ( IO_ReadOnly )) {
 			QTextStream ts ( &f );
 			d-> m_sysverstr = ts. readLine ( );//. mid ( 10 );
 			f. close ( );
 		}
+
+		// Openzaurus sometimes uses the embedix kernel!
+		// => Check whether this is an embedix kernel
+		FILE *uname = popen("uname -r", "r");
+		QString line;
+		if ( f.open(IO_ReadOnly, uname) ) {
+			QTextStream ts ( &f );
+			line = ts. readLine ( );
+			int loc = line. find ( "embedix" );
+			if ( loc != -1 )
+				m_embedix = true;
+			else
+				m_embedix = false;
+			f. close ( );
+		}
+		pclose(uname);
 	}
 	else {
 		d-> m_systemstr = "Zaurus";
@@ -1366,10 +1426,13 @@ void Zaurus::init ( )
 	if ( model == "SHARP Corgi" ) {
 		d-> m_model = Model_Zaurus_SLC700;
 		d-> m_modelstr = "Zaurus SL-C700";
+	} else if ( model == "SHARP Shepherd" ) {
+		d-> m_model = Model_Zaurus_SLC700; // Do we need a special type for the C750 ? (eilers)
+		d-> m_modelstr = "Zaurus SL-C750";
 	} else if ( model == "SHARP Poodle" ) {
 		d-> m_model = Model_Zaurus_SLB600;
 		d-> m_modelstr = "Zaurus SL-B500 or SL-5600";
-	} else if ( model = "Sharp-Collie" ) {
+	} else if ( model == "Sharp-Collie" || model == "Collie" ) {
 		d-> m_model = Model_Zaurus_SL5500;
 		d-> m_modelstr = "Zaurus SL-5500 or SL-5000d";
 	} else {
@@ -1434,8 +1497,10 @@ void Zaurus::initButtons ( )
 		b. setKeycode ( zb-> code );
 		b. setUserText ( QObject::tr ( "Button", zb-> utext ));
 		b. setPixmap ( Resource::loadPixmap ( zb-> pix ));
-		b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( zb-> fpressedservice ), zb-> fpressedaction ));
-		b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( zb-> fheldservice ), zb-> fheldaction ));
+		b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( zb-> fpressedservice ), 
+								  zb-> fpressedaction ));
+		b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( zb-> fheldservice ), 
+							       zb-> fheldaction ));
 
 		d-> m_buttons-> append ( b );
 	}
@@ -1443,7 +1508,8 @@ void Zaurus::initButtons ( )
 	reloadButtonMapping ( );
 
 	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
-	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
+	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), 
+		  this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
 }
 
 #include <unistd.h>
@@ -1515,12 +1581,77 @@ typedef struct sharp_led_status {
 
 void Zaurus::buzzer ( int sound )
 {
-	int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
+#ifndef QT_NO_SOUND
+	QString soundname;
 
-	if ( fd >= 0 ) {
-		::ioctl ( fd, SHARP_BUZZER_MAKESOUND, sound );
-		::close ( fd );
+	// Not all devices have real sound. But I expect
+	// that Openzaurus now has a sound driver which 
+	// I will use instead the buzzer...		
+	if ( ( d->m_model == Model_Zaurus_SLC700 )
+	     /* || d->m_system == System_OpenZaurus */ ){
+
+		switch ( sound ){
+		case SHARP_BUZ_SCHEDULE_ALARM:
+			soundname = "alarm";
+			break;
+		case SHARP_BUZ_TOUCHSOUND:
+			soundname = "touchsound";
+			break;
+		case SHARP_BUZ_KEYSOUND:
+			soundname = "keysound";
+			break;
+		default:
+			soundname = "alarm";
+			
+		}
 	}
+
+	// If a soundname is defined, we expect that this device has
+	// sound capabilities.. Otherwise we expect to have the buzzer
+	// device..
+	if ( !soundname.isEmpty() ){
+		int fd;
+		int vol;
+		bool vol_reset = false;
+
+		Sound snd ( soundname );
+		
+		if (( fd = ::open ( "/dev/sound/mixer", O_RDWR )) >= 0 ) {
+			if ( ::ioctl ( fd, MIXER_READ( 0 ), &vol ) >= 0 ) {
+				Config cfg ( "qpe" );
+				cfg. setGroup ( "Volume" );
+
+				int volalarm = cfg. readNumEntry ( "AlarmPercent", 50 );
+				if ( volalarm < 0 )
+					volalarm = 0;
+				else if ( volalarm > 100 )
+					volalarm = 100;
+				volalarm |= ( volalarm << 8 );
+
+				if ( ::ioctl ( fd, MIXER_WRITE( 0 ), &volalarm ) >= 0 )
+					vol_reset = true;
+			}
+		}
+
+		snd. play ( );
+		while ( !snd. isFinished ( ))
+			qApp-> processEvents ( );
+
+		if ( fd >= 0 ) {
+			if ( vol_reset )
+				::ioctl ( fd, MIXER_WRITE( 0 ), &vol );
+			::close ( fd );
+		}
+	} else {		
+		int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
+		
+		if ( fd >= 0 ) {
+			::ioctl ( fd, SHARP_BUZZER_MAKESOUND, sound );
+			::close ( fd );
+		}
+
+	} 
+#endif
 }
 
 
@@ -1566,6 +1697,9 @@ OLedState Zaurus::ledState ( OLed which ) const
 
 bool Zaurus::setLedState ( OLed which, OLedState st )
 {
+	if (!m_embedix) // Currently not supported on non_embedix kernels
+		return false;
+
 	static int fd = ::open ( "/dev/sharp_led", O_RDWR|O_NONBLOCK );
 
 	if ( which == Led_Mail ) {
@@ -1593,6 +1727,11 @@ bool Zaurus::setLedState ( OLed which, OLedState st )
 
 bool Zaurus::setSoftSuspend ( bool soft )
 {
+	if (!m_embedix) {
+		/* non-Embedix kernels dont have kernel autosuspend */
+		return ODevice::setSoftSuspend( soft );
+	}
+
 	bool res = false;
 	int fd;
 
@@ -1634,12 +1773,20 @@ bool Zaurus::setDisplayBrightness ( int bright )
 	if ( bright < 0 )
 		bright = 0;
 
-	if (( fd = ::open ( "/dev/fl", O_WRONLY )) >= 0 ) {
-		int bl = ( bright * 4 + 127 ) / 255; // only 4 steps on zaurus
-		if ( bright && !bl )
-			bl = 1;
-		res = ( ::ioctl ( fd, FL_IOCTL_STEP_CONTRAST, bl ) == 0 );
-		::close ( fd );
+	if (m_embedix) {
+		if (( fd = ::open ( "/dev/fl", O_WRONLY )) >= 0 ) {
+			int bl = ( bright * 4 + 127 ) / 255; // only 4 steps on zaurus
+			if ( bright && !bl )
+				bl = 1;
+			res = ( ::ioctl ( fd, FL_IOCTL_STEP_CONTRAST, bl ) == 0 );
+			::close ( fd );
+		}
+	} else {
+#define FB_BACKLIGHT_SET_BRIGHTNESS     _IOW('F', 1, u_int)             /* set brightness */
+		if (( fd = ::open ( "/dev/fb0", O_WRONLY )) >= 0 ) {
+			res = ( ::ioctl ( fd , FB_BACKLIGHT_SET_BRIGHTNESS, bright ) == 0 );
+			::close ( fd );
+		}
 	}
 	return res;
 }
@@ -1647,9 +1794,11 @@ bool Zaurus::setDisplayBrightness ( int bright )
 
 int Zaurus::displayBrightnessResolution ( ) const
 {
-	return 5;
+	if (m_embedix)
+		return 5;
+	else
+		return 256;
 }
-
 
 /**************************************************
  *
