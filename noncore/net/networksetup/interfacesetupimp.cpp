@@ -92,7 +92,6 @@ void InterfaceSetupImp::setProfile(const QString &profile){
   QString newInterfaceName = interface->getInterfaceName();
   if(profile.length() > 0)
     newInterfaceName += "_" + profile;
-  qDebug( newInterfaceName.latin1());
   // See if we have to make a interface.
   if(!interfaces->setInterface(newInterfaceName)){
     // Add making for this new interface if need too

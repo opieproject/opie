@@ -41,11 +41,14 @@ public:
   bool setInterfaceMethod(QString newName);
   QString getInterfaceOption(QString option, bool &error); 
   bool setInterfaceOption(QString option, QString value);
+  bool removeInterfaceOption(QString option, QString value);
   bool removeAllInterfaceOptions();
   
   bool setMapping(QString interface);
+  bool removeMapping();
   void addMapping(QString options);
   bool setMap(QString map, QString value);
+  bool removeMap(QString map, QString value);
   QString getMap(QString map, bool &error);
   bool setScript(QString);
   QString getScript(bool &error);
@@ -55,6 +58,7 @@ public:
 private:
   bool setStanza(QString stanza, QString option,QStringList::Iterator &iterator);
   bool setOption(QStringList::Iterator start, QString option, QString value);
+  bool removeOption(QStringList::Iterator start, QString option, QString value);
   QString getOption(QStringList::Iterator start, QString option, bool &error);
   bool removeAllOptions(QStringList::Iterator start);
   

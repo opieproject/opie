@@ -32,7 +32,8 @@
 #define TEMP_ALL "/tmp/ifconfig-a"
 #define TEMP_UP "/tmp/ifconfig"
 
-#define SCHEME "/var/lib/pcmcia/scheme"
+#define DEFAULT_SCHEME "/var/lib/pcmcia/scheme"
+
 MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name, true), advancedUserMode(false){
   connect(addConnectionButton, SIGNAL(clicked()), this, SLOT(addClicked()));
   connect(removeConnectionButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
@@ -56,8 +57,9 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
     profilesList->insertItem((*it));  
   currentProfileLabel->setText(cfg.readEntry("CurrentProfile", "All"));
   advancedUserMode = cfg.readBoolEntry("AdvancedUserMode", false);
+  scheme = cfg.readEntry("SchemeFile", DEFAULT_SCHEME);
 
-  QFile file(SCHEME);
+  QFile file(scheme);
   if ( file.open(IO_ReadOnly) ) {    // file opened successfully
     QTextStream stream( &file );        // use a text stream
     while ( !stream.eof() ) {        // until end of file...
@@ -95,7 +97,7 @@ MainWindowImp::~MainWindowImp(){
  *  and attempts to load them
  */ 
 void MainWindowImp::loadModules(QString path){
-  qDebug(path.latin1());
+  //qDebug(path.latin1());
   QDir d(path);
   if(!d.exists())
     return;
@@ -120,7 +122,7 @@ void MainWindowImp::loadModules(QString path){
  * @return pointer to the function with name resolveString or NULL
  */ 
 Module* MainWindowImp::loadPlugin(QString pluginFileName, QString resolveString){
-  qDebug(QString("MainWindowImp::loadPlugin: %1").arg(pluginFileName).latin1());
+  //qDebug(QString("MainWindowImp::loadPlugin: %1").arg(pluginFileName).latin1());
   QLibrary *lib = new QLibrary(pluginFileName);
   void *functionPointer = lib->resolve(resolveString);
   if( !functionPointer ){
@@ -490,10 +492,28 @@ void MainWindowImp::removeProfile(){
     profilesList->clear();
     for ( QStringList::Iterator it = profiles.begin(); it != profiles.end(); ++it)
       profilesList->insertItem((*it));
-  }
 
-  // Remove any interface settings and mappings.
-  //TODO
+    // Remove any interface settings and mappings.
+    Interfaces interfaces;
+    // Go through them one by one
+    QMap<Interface*, QListViewItem*>::Iterator it;
+    for( it = items.begin(); it != items.end(); ++it ){
+      QString interfaceName = it.key()->getInterfaceName();
+      qDebug(interfaceName.latin1());
+      if(interfaces.setInterface(interfaceName + "_" + profileToRemove)){
+       interfaces.removeInterface();
+       if(interfaces.setMapping(interfaceName)){
+         if(profilesList->count() == 1)
+            interfaces.removeMapping();
+          else{
+            interfaces.removeMap("map", interfaceName + "_" + profileToRemove);
+          }
+        }
+        interfaces.write();
+	break;
+      }
+    }
+  }
 }
 
 /**
@@ -508,8 +528,8 @@ void MainWindowImp::changeProfile(){
   QString newProfile = profilesList->text(profilesList->currentItem());
   if(newProfile != currentProfileLabel->text()){
     currentProfileLabel->setText(newProfile);
-    QFile::remove(SCHEME);
-    QFile file(SCHEME);
+    QFile::remove(scheme);
+    QFile file(scheme);
     if ( file.open(IO_ReadWrite) ) {
       QTextStream stream( &file );
       stream << QString("SCHEME=%1").arg(newProfile);

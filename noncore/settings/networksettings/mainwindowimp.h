@@ -50,6 +50,7 @@ private:
   QStringList profiles;
 
   bool advancedUserMode;
+  QString scheme;
 };
 
 #endif

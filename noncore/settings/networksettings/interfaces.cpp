@@ -335,8 +335,7 @@ QString Interfaces::getInterfaceOption(QString option, bool &error){
 
 /**
  * Set a value for an option in the currently selected interface.  If option
- *  doesn't exist then it is added along with the value. If value is set to an
- *  empty string then option is removed.
+ *  doesn't exist then it is added along with the value.
  * @param option the options to set the value.
  * @param value the value that option should be set to.
  * @param error set to true if any error occurs, false otherwise.
@@ -344,6 +343,17 @@ QString Interfaces::getInterfaceOption(QString option, bool &error){
  */ 
 bool Interfaces::setInterfaceOption(QString option, QString value){
   return setOption(currentIface, option, value);
+}
+
+/**
+ * Removes a value for an option in the currently selected interface. 
+ * @param option the options to set the value.
+ * @param value the value that option should be set to.
+ * @param error set to true if any error occurs, false otherwise.
+ * @return QString the options value. QString::null if error == true
+ */ 
+bool Interfaces::removeInterfaceOption(QString option, QString value){
+  return removeOption(currentIface, option, value);
 }
 
 /**
@@ -377,6 +387,17 @@ void Interfaces::addMapping(QString option){
 }
 
 /**
+ * Remove the currently selected map and all of its options.
+ * @return bool if successfull or not.
+ */
+bool Interfaces::removeMapping(){
+  if(currentMapping == interfaces.end())
+    return false;
+  (*currentMapping) = "";
+  return removeAllOptions(currentMapping);
+} 
+
+/**
  * Set a map option within a mapping.
  * @param map map to use
  * @param value value to go with map
@@ -384,6 +405,16 @@ void Interfaces::addMapping(QString option){
  */ 
 bool Interfaces::setMap(QString map, QString value){
   return setOption(currentMapping, map, value);
+}
+
+/**
+ * Removes a map option within a mapping.
+ * @param map map to use
+ * @param value value to go with map
+ * @return bool true if it is successfull.
+ */ 
+bool Interfaces::removeMap(QString map, QString value){
+  return removeOption(currentMapping, map, value);
 }
 
 /**
@@ -477,9 +508,6 @@ bool Interfaces::setOption(QStringList::Iterator start, QString option, QString 
       if(found)
         qDebug(QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1());
       found = true;
-      if(value == "")
-        (*it) = "";
-      else      
         (*it) = QString("\t%1 %2").arg(option).arg(value);
     }
   }
@@ -487,6 +515,32 @@ bool Interfaces::setOption(QStringList::Iterator start, QString option, QString 
     QStringList::Iterator p = start;
     interfaces.insert(++p, QString("\t%1 %2").arg(option).arg(value));
     found = true;
+  }
+  return found;
+}
+/**
+ * Removes a option in a stanza
+ * @param start the start of the stanza
+ * @param option the option to use when setting value.
+ * @return bool true if successfull, false otherwise.
+ */
+bool Interfaces::removeOption(QStringList::Iterator start, QString option, QString value){
+  if(start == interfaces.end())
+    return false;
+  
+  bool found = false;
+  for ( QStringList::Iterator it = start; it != interfaces.end(); ++it ) {
+    if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO))  && it != start){
+      // got to the end without finding it
+      break;
+    }
+    if((*it).contains(option) && (*it).contains(value) &&it != start){
+      // Found it in stanza so replace it.
+      if(found)
+        qDebug(QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1());
+      found = true;
+      (*it) = "";
+    }
   }
   return found;
 }
