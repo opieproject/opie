@@ -29,6 +29,17 @@ then
 fi
 rm .test.qpe.
 
+if [ '!' -f $TMAKEPATH/tmake.conf ]
+then
+    # You have tmake. We'll regenerate the file for you...
+    echo '  The environment variable $TMAKEPATH is not set correclty. '
+    echo '  It should be set to the tmake path'
+    echo 
+    echo '  Please read the INSTALL file for instructions on how to set $TMAKEPATH'
+    echo '  to the environment variable correctly.'
+    exit 1
+fi
+
 VERSION_MAJ=$(sed -n -e 's/.*QPE_VERSION "\([0-9]*\)\.[0-9]*\.[0-9]*.*".*/\1/p' <library/version.h)
 VERSION_MIN=$(sed -n -e 's/.*QPE_VERSION "[0-9]*\.\([0-9]\)\.[0-9]*.*".*/\1/p' <library/version.h)
 VERSION_PAT=$(sed -n -e 's/.*QPE_VERSION "[0-9]*\.[0-9]*\.\([0-9]*\).*".*/\1/p' <library/version.h)

@@ -139,7 +139,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 
     a = new QAction( tr( "Write Mail To" ), Resource::loadPixmap( "qtmail/reply" ),
                      QString::null, 0, this, 0 );
-    a->setEnabled( FALSE );
+    //a->setEnabled( FALSE ); we got support for it now :) zecke
     actionMail = a;
     connect( a, SIGNAL( activated() ), this, SLOT( writeMail() ) );
     a->addTo( edit );

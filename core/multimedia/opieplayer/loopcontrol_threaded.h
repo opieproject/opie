@@ -20,7 +20,6 @@
 #ifndef MPEGVIEW_H
 #define MPEGVIEW_H
 
-
 #include <qwidget.h>
 #include <qdatetime.h>
 

@@ -1,7 +1,8 @@
 moc_*
 *.moc
-Makefile
+Makefile*
 shutdown.cpp
 shutdown.h
 qimpenprefbase.h
 lnkpropertiesbase.h
+syncdialog.*

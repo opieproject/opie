@@ -1,0 +1,67 @@
+/****************************************************************************
+**
+** Created: Fri Dec 14 08:16:02 2001
+**
+** This file may be distributed and/or modified under the terms of the
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
+**
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+**
+copyright Sun 02-17-2002 22:28:23 L. J. Potter ljp@llornkcor.com
+****************************************************************************/
+#ifndef FILEBROWSER_H
+#define FILEBROWSER_H
+
+//#include <qvariant.h>
+#include <qdialog.h>
+#include <qfile.h> 
+#include <qdir.h> 
+#include <qstringlist.h> 
+#include <qlabel.h>
+#include <qstring.h>
+
+class QVBoxLayout; 
+class QHBoxLayout; 
+class QGridLayout; 
+class QListView;
+class QListViewItem;
+class QPushButton;
+
+class fileBrowser : public QDialog
+{ 
+    Q_OBJECT
+
+public:
+  void populateList();
+    fileBrowser( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 ,const QString filter=0);
+    ~fileBrowser();
+
+    QPushButton* buttonOk;
+    QListView* ListView;
+    QPushButton* buttonCancel;
+    QLabel *dirLabel;
+    QString selectedFileName, filterStr;
+    QDir currentDir;
+    QFile file;
+    QStringList fileList;
+ 
+QListViewItem * item;
+public slots:
+void homeButtonPushed();
+private:
+
+private slots: 
+        void upDir();
+        void listDoubleClicked(QListViewItem *);
+        void listClicked(QListViewItem *);
+        void OnOK();
+protected slots: 
+
+protected:
+
+};
+
+#endif // FILEBROWSER_H

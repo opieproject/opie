@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -25,7 +25,6 @@
 #include "loopcontrol.h"
 #include "mediaplayer.h"
 
-
 MediaPlayerState *mediaPlayerState;
 PlayListWidget *playList;
 AudioWidget *audioUI;
@@ -48,7 +47,7 @@ int main(int argc, char **argv) {
     loopControl = &lc;
     MediaPlayer mp( 0, "mediaPlayer" );
 
-    pl.setCaption( MediaPlayer::tr("Media Player") );
+    pl.setCaption( MediaPlayer::tr("OpiePlayer") );
     a.showMainDocumentWidget(&pl);
 
     return a.exec();

@@ -20,7 +20,6 @@
 #ifndef AUDIO_WIDGET_H
 #define AUDIO_WIDGET_H
 
-
 #include <qwidget.h>
 #include <qpainter.h>
 #include <qdrawutil.h>

@@ -17,11 +17,15 @@
 ** not clear to you.
 **
 **********************************************************************/
+// additions made by L.J. Potter Sun 02-17-2002 22:27:46
 
 #ifndef TEXTEDIT_H
 #define TEXTEDIT_H
 
 #define QTEXTEDIT_OPEN_API
+
+#include "fileBrowser.h"
+#include "fileSaver.h"
 
 #include <qpe/filemanager.h>
 
@@ -54,15 +58,20 @@ protected:
 
 private slots:
     void setDocument(const QString&);
-
+    void changeFont();
     void fileNew();
     void fileRevert();
     void fileOpen();
+    void newFileOpen();
+    bool save();
+    bool saveAs();
+
 
     void editCut();
     void editCopy();
     void editPaste();
     void editFind();
+    void editDelete();
 
     void findNext();
     void findClose();
@@ -82,7 +91,6 @@ private slots:
 
 private:
     void colorChanged( const QColor &c );
-    bool save();
     void clear();
     void updateCaption( const QString &name=QString::null );
     void setFontSize(int sz, bool round_down_not_up);
@@ -90,6 +98,9 @@ private:
 private:
     QWidgetStack *editorStack;
     FileSelector *fileSelector;
+    fileSaver *fileSaveDlg;
+    fileBrowser *browseForFiles;
+
     QpeEditor* editor;
     QToolBar *menu, *editBar, *searchBar;
     QLineEdit *searchEdit;
@@ -97,6 +108,7 @@ private:
     bool searchVisible;
     bool bFromDocView;
     QAction *zin, *zout;
+    QString currentFileName;
 };
 
 #endif

@@ -21,7 +21,7 @@
 #define WAV_PLUGIN_IMPL_H
 
 
-#include <qpe/mediaplayerplugininterface.h>
+/* #include "../mediaplayerplugininterface.h" */
 
 
 class WavPlugin;

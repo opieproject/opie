@@ -1,6 +1,6 @@
 moc_*
 *.moc
-Makefile
+Makefile*
 proxiesbase_p.h
 proxiesbase_p.cpp
 passwordbase_p.h

@@ -328,6 +328,23 @@
                         <bool>false</bool>
                     </property>
                 </widget>
+	
+    		<widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>delicon</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Del Icon</string>
+                    </property>
+                    <property stdset="1">
+                        <name>autoDefault</name>
+                        <bool>false</bool>
+                    </property>
+                </widget>	
+
                 <widget>
                     <class>QPushButton</class>
                     <property stdset="1">

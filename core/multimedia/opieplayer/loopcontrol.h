@@ -17,6 +17,9 @@
 ** not clear to you.
 **
 **********************************************************************/
+// L.J.Potter added changes Fri 02-15-2002
+
+
 #ifndef MPEGVIEW_H
 #define MPEGVIEW_H
 

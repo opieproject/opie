@@ -47,8 +47,30 @@
 #include <qtimer.h>
 #include <qwindowsystem_qws.h>
 
+#include <qvaluelist.h>
+
 #include <stdlib.h>
 #include <unistd.h>
+
+
+class QCopKeyRegister
+{
+public:
+  QCopKeyRegister() : keyCode(0) { }
+  QCopKeyRegister(int k, const QString &c, const QString &m) 
+	: keyCode(k), channel(c), message(m) { }
+
+  int getKeyCode() const { return keyCode; }
+  QString getChannel() const { return channel; }
+  QString getMessage() const { return message; }
+
+private:
+  int keyCode;
+  QString channel, message;
+};
+
+typedef QValueList<QCopKeyRegister> KeyRegisterList;
+KeyRegisterList keyRegisterList;
 
 static Desktop* qpedesktop = 0;
 static int loggedin=0;
@@ -123,6 +145,10 @@ DesktopApplication::DesktopApplication( int& argc, char **argv, Type t )
     t->start( 10000 );
     ps = new PowerStatus;
     pa = new DesktopPowerAlerter( 0 );
+
+  channel = new QCopChannel( "QPE/Desktop", this );
+  connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+		   this, SLOT(receive(const QCString&, const QByteArray&)) );
 }
 
 
@@ -132,6 +158,22 @@ DesktopApplication::~DesktopApplication()
     delete pa;
 }
 
+void DesktopApplication::receive( const QCString &msg, const QByteArray &data )
+{
+  QDataStream stream( data, IO_ReadOnly );
+  if (msg == "keyRegister(int key, QString channel, QString message)")
+	{
+	  int k;
+	  QString c, m;
+
+	  stream >> k;
+	  stream >> c;
+	  stream >> m;
+	  
+	  qWarning("KeyRegisterRecieved: %i, %s, %s", k, (const char*)c, (const char *)m);
+	  keyRegisterList.append(QCopKeyRegister(k,c,m));
+	}
+}
 
 enum MemState { Unknown, VeryLow, Low, Normal } memstate=Unknown;
 
@@ -141,82 +183,94 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
     qpedesktop->checkMemory();
 
     if ( e->type == QWSEvent::Key ) {
-	QWSKeyEvent *ke = (QWSKeyEvent *)e;
-	if ( !loggedin && ke->simpleData.keycode != Key_F34 )
+	  QWSKeyEvent *ke = (QWSKeyEvent *)e;
+	  if ( !loggedin && ke->simpleData.keycode != Key_F34 )
 	    return TRUE;
-	bool press = ke->simpleData.is_press;
-	if ( !keyboardGrabbed() ) {
+	  bool press = ke->simpleData.is_press;
+
+	  if (!keyRegisterList.isEmpty())
+		{
+		  KeyRegisterList::Iterator it;
+		  for( it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it )
+			{
+			  if ((*it).getKeyCode() == ke->simpleData.keycode)
+				QCopEnvelope((*it).getChannel().utf8(), (*it).getMessage().utf8());
+			}
+		}
+
+	  if ( !keyboardGrabbed() ) {
 	    if ( ke->simpleData.keycode == Key_F9 ) {
-		if ( press ) emit datebook();
-		return TRUE;
+		  if ( press ) emit datebook();
+		  return TRUE;
 	    }
 	    if ( ke->simpleData.keycode == Key_F10 ) {
 	      if ( !press && cardSendTimer ) {
 		    emit contacts();
 		    delete cardSendTimer;
-		} else if ( press ) {
+		  } else if ( press ) {
 		    cardSendTimer = new QTimer();
 		    cardSendTimer->start( 2000, TRUE );
 		    connect( cardSendTimer, SIGNAL( timeout() ), this, SLOT( sendCard() ) );
-		}
-		return TRUE;
+		  }
+		  return TRUE;
 	    }
 	    /* menu key now opens application menu/toolbar
-	    if ( ke->simpleData.keycode == Key_F11 ) {
-		if ( press ) emit menu();
-		return TRUE;
-	    }
+		   if ( ke->simpleData.keycode == Key_F11 ) {
+		   if ( press ) emit menu();
+		   return TRUE;
+		   }
 	    */
 	    if ( ke->simpleData.keycode == Key_F12 ) {
-		while( activePopupWidget() )
+		  while( activePopupWidget() )
 		    activePopupWidget()->close();
-		if ( press ) emit launch();
-		return TRUE;
+		  if ( press ) emit launch();
+		  return TRUE;
 	    }
 	    if ( ke->simpleData.keycode == Key_F13 ) {
-		if ( press ) emit email();
-		return TRUE;
+		  if ( press ) emit email();
+		  return TRUE;
 	    }
-	}
-	if ( ke->simpleData.keycode == Key_F34 ) {
+	  }
+
+	  if ( ke->simpleData.keycode == Key_F34 ) {
 	    if ( press ) emit power();
 	    return TRUE;
-	}
-	if ( ke->simpleData.keycode == Key_F35 ) {
+	  }
+	  if ( ke->simpleData.keycode == Key_F35 ) {
 	    if ( press ) emit backlight();
 	    return TRUE;
-	}
-	if ( ke->simpleData.keycode == Key_F32 ) {
+	  }
+	  if ( ke->simpleData.keycode == Key_F32 ) {
 	    if ( press ) QCopEnvelope e( "QPE/Desktop", "startSync()" );
 	    return TRUE;
-	}
-	if ( ke->simpleData.keycode == Key_F31 && !ke->simpleData.modifiers ) {
+	  }
+	  if ( ke->simpleData.keycode == Key_F31 && !ke->simpleData.modifiers ) {
 	    if ( press ) emit symbol();
 	    return TRUE;
-	}
-	if ( ke->simpleData.keycode == Key_NumLock ) {
+	  }
+	  if ( ke->simpleData.keycode == Key_NumLock ) {
 	    if ( press ) emit numLockStateToggle();
-	}
-	if ( ke->simpleData.keycode == Key_CapsLock ) {
+	  }
+	  if ( ke->simpleData.keycode == Key_CapsLock ) {
 	    if ( press ) emit capsLockStateToggle();
-	}
-	if ( press )
+	  }
+	  if ( press )
 	    qpedesktop->keyClick();
     } else {
-	if ( e->type == QWSEvent::Mouse ) {
+	  if ( e->type == QWSEvent::Mouse ) {
 	    QWSMouseEvent *me = (QWSMouseEvent *)e;
 	    static bool up = TRUE;
 	    if ( me->simpleData.state&LeftButton ) {
-		if ( up ) {
+		  if ( up ) {
 		    up = FALSE;
 		    qpedesktop->screenClick();
-		}
+		  }
 	    } else {
-		up = TRUE;
+		  up = TRUE;
 	    }
-	}
+	  }
     }
-
+	
     return QPEApplication::qwsEventFilter( e );
 }
 #endif

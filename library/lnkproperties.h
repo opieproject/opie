@@ -52,6 +52,7 @@ public:
 private slots:
     void beamLnk();
     void unlinkLnk();
+    void unlinkIcon();
     void duplicateLnk();
 
 signals:

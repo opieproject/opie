@@ -17,7 +17,6 @@
 ** not clear to you.
 **
 **********************************************************************/
-
 #define _REENTRANT
 
 #include <qpe/qpeapplication.h>
@@ -26,7 +25,7 @@
 #ifdef Q_WS_QWS
 #include <qpe/qcopenvelope_qws.h>
 #endif
-#include <qpe/mediaplayerplugininterface.h>
+#include "mediaplayerplugininterface.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

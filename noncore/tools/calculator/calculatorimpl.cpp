@@ -41,7 +41,7 @@
 #include <math.h>
 
 CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
-				WFlags f )
+        WFlags f )
     : Calculator( parent, name, f )
 {
     xtopowerofy = Resource::loadPixmap("xtopowerofy");
@@ -120,10 +120,10 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
     // now add in the conversion modes
     // when the menu gets done, these should be in a submenu
     QString tmp = QPEApplication::qpeDir();
-    tmp += "/etc/unit_conversion.dat";
+    tmp += "etc/unit_conversion.dat";
     QFile myfile(tmp);
     if ( !myfile.open( IO_Translate | IO_ReadOnly ) ) {
-        // QMessageBox::warning(this, "Warning", "Data file\nunit_conversion.dat\nnot found\nNo conversion\nfeatures will\nbe available");
+        qDebug("Data file unit_conversion.dat not found\nNo conversion features will be available\n"+tmp);
         // disable the f button if no conv file available
         ComboBoxFunction->setEnabled(FALSE);
     }
@@ -139,8 +139,8 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
         }
 
         entry_list = new double[conversion_mode_count*func_button_count];
-		preoffset_list = new double[conversion_mode_count*func_button_count];
-		postoffset_list = new double[conversion_mode_count*func_button_count];
+    preoffset_list = new double[conversion_mode_count*func_button_count];
+    postoffset_list = new double[conversion_mode_count*func_button_count];
         myfile.close();
         myfile.open( IO_Translate | IO_ReadOnly );
         QTextStream ts2(&myfile);
@@ -151,7 +151,7 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
                 line = ts2.readLine();
                 if ( line.contains("STARTTYPE") ) {
                         captions << line.remove(0,10);
-			ComboBoxFunction->insertItem(captions.last());
+      ComboBoxFunction->insertItem(captions.last());
                         while ( !line.contains("ENDTYPE") ) {
                             line = ts2.readLine();
                             if ( line.contains("NAME") ) {
@@ -159,10 +159,10 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
                                 line2 = ts2.readLine();
                                 line2.remove(0,6);
                                 entry_list[x] = line2.toDouble();
-								line2 = ts2.readLine();
+                line2 = ts2.readLine();
                                 line2.remove(0,7);
                                 preoffset_list[x] = line2.toDouble();
-								line2 = ts2.readLine();
+                line2 = ts2.readLine();
                                 line2.remove(0,8);
                                 postoffset_list[x] = line2.toDouble();
                                 x++;
@@ -182,68 +182,68 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
 bool CalculatorImpl::eventFilter( QObject *o, QEvent *e )
 {
     if ( e->type() == QEvent::KeyPress && state != sError ) {
-	QKeyEvent *k = (QKeyEvent*)e;
-	if ( k->key() >= Key_0 && k->key() <= Key_9 ) {
-	    enterNumber( k->key() - Key_0 );
-	    return true;
-	} else {
-	    switch ( k->key() ) {
-		case Key_Equal:
-		    std_buttons(0);
-		    return true;
-		case Key_Period:
-		    std_buttons(1);
-		    return true;
-		case Key_Plus:
-		    std_buttons(2);
-		    return true;
-		case Key_Minus:
-		    std_buttons(3);
-		    return true;
-		case Key_Slash:
-		    std_buttons(4);
-		    return true;
-		case Key_Asterisk:
-		    std_buttons(5);
-		    return true;
-		case Key_Percent:
-		    execOp( oPercent );
-		    return true;
-		case Key_ParenLeft:
-		    if ( current_mode <  pre_conv_modes_count )
-			execOp( oOpenBrace );
-		    return true;
-		case Key_ParenRight:
-		    if ( current_mode <  pre_conv_modes_count )
-			execOp( oCloseBrace );
-		    return true;
-		default:
-		    break;
-	    }
-	}
+  QKeyEvent *k = (QKeyEvent*)e;
+  if ( k->key() >= Key_0 && k->key() <= Key_9 ) {
+      enterNumber( k->key() - Key_0 );
+      return true;
+  } else {
+      switch ( k->key() ) {
+    case Key_Equal:
+        std_buttons(0);
+        return true;
+    case Key_Period:
+        std_buttons(1);
+        return true;
+    case Key_Plus:
+        std_buttons(2);
+        return true;
+    case Key_Minus:
+        std_buttons(3);
+        return true;
+    case Key_Slash:
+        std_buttons(4);
+        return true;
+    case Key_Asterisk:
+        std_buttons(5);
+        return true;
+    case Key_Percent:
+        execOp( oPercent );
+        return true;
+    case Key_ParenLeft:
+        if ( current_mode <  pre_conv_modes_count )
+      execOp( oOpenBrace );
+        return true;
+    case Key_ParenRight:
+        if ( current_mode <  pre_conv_modes_count )
+      execOp( oCloseBrace );
+        return true;
+    default:
+        break;
+      }
+  }
     }
     return Calculator::eventFilter( o, e );
 }
 
 void CalculatorImpl::do_convert(int button) {
     if ( state == sError )
-	return;
+  return;
     if ( current_mode >= pre_conv_modes_count && current_mode <= (max_mode - post_conv_modes_count) &&
-	button < changeable_func_button_count ) {
+  button < changeable_func_button_count ) {
         if ( last_conversion > -1 ) {
             if( state == sNewNumber ){
-			  acc = (num+ preoffset_list[(current_mode - pre_conv_modes_count) * func_button_count + last_conversion])
+        acc = (num+ preoffset_list[(current_mode - pre_conv_modes_count) * func_button_count + last_conversion])
                     / (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + last_conversion])
-                    * (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + button]) 
-				+postoffset_list[(current_mode - pre_conv_modes_count) * func_button_count + button];
-		num = acc;
+                    * (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + button])
+        +postoffset_list[(current_mode - pre_conv_modes_count) * func_button_count + button];
+    num = acc;
                 LCD->display( acc );
             } else {
                 state = sNewNumber;
                 num = (num+ preoffset_list[(current_mode - pre_conv_modes_count) * func_button_count + last_conversion])
                     / (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + last_conversion])
-                    * (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + button]) 
-				  + postoffset_list[(current_mode - pre_conv_modes_count) * func_button_count + button];;
+                    * (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + button])
+          + postoffset_list[(current_mode - pre_conv_modes_count) * func_button_count + button];;
                 LCD->display( num );
                 acc = num;
             }
@@ -254,8 +254,8 @@ void CalculatorImpl::do_convert(int button) {
 
 
 void CalculatorImpl::function_button(int mode){
-    if ( state == sError ) 
-	clear();
+    if ( state == sError )
+  clear();
     // dont need the next line when using a popup menu
     current_mode = mode;
 
@@ -328,22 +328,22 @@ void CalculatorImpl::reset_conv() {
 void CalculatorImpl::std_buttons(int button)
 {
     if ( state == sError )
-	return;
+  return;
     execOp( (Operation)(button + oSum) );
 }
 
 void CalculatorImpl::std_funcs(int button) {
     if ( state == sError )
-	return;
+  return;
     if ( current_mode <  pre_conv_modes_count ||
-	button > changeable_func_button_count-1 ) {
-	Operation op;
-	if ( button < 10 )
-	    op = (Operation)(button + oSin);
-	else if ( button == 10 )
-	    op = oOpenBrace;
-	else 
-	    op = oCloseBrace;
+  button > changeable_func_button_count-1 ) {
+  Operation op;
+  if ( button < 10 )
+      op = (Operation)(button + oSin);
+  else if ( button == 10 )
+      op = oOpenBrace;
+  else
+      op = oCloseBrace;
         execOp( op );
     }
 }
@@ -351,78 +351,78 @@ void CalculatorImpl::std_funcs(int button) {
 void CalculatorImpl::execOp( Operation i )
 {
     switch (i) {
-	    // these operators only affect the current number.
-	case oDivX:
-	case oLog:
-	case oLn:
-	case oSin:
-	case oCos:
-	case oTan:
-	    num = evalExpr(i);
-	    break;
+      // these operators only affect the current number.
+  case oDivX:
+  case oLog:
+  case oLn:
+  case oSin:
+  case oCos:
+  case oTan:
+      num = evalExpr(i);
+      break;
 
-	case oAdd:
-	case oSub: {
-	    processStack( oAdd );
-	    Op op( num, i );
-	    operationStack.push( op );
-	    break;
-	}
-	case oDiv:
-	case oMult:
-	case oRoot:
-	case oXsquared: {
-	    processStack( oDiv );
-	    Op op( num, i );
-	    operationStack.push( op );
-	    break;
-	}
-	case oChSign:
-	    num = -num;
-	    LCD->display(num);
-	    return;
+  case oAdd:
+  case oSub: {
+      processStack( oAdd );
+      Op op( num, i );
+      operationStack.push( op );
+      break;
+  }
+  case oDiv:
+  case oMult:
+  case oRoot:
+  case oXsquared: {
+      processStack( oDiv );
+      Op op( num, i );
+      operationStack.push( op );
+      break;
+  }
+  case oChSign:
+      num = -num;
+      LCD->display(num);
+      return;
 
-	case oOpenBrace: {
-	    Op op( 0, oOpenBrace );
-	    operationStack.push( op );
-	    numOpenBraces++;
-	    state = sNewNumber;
-	    return;
-	}
-	case oCloseBrace: {
-	    if ( numOpenBraces == 0 )
-		return;
-	    processStack( oAdd );
-	    if ( operationStack.top().operation != oOpenBrace )
-		qDebug( "Calculator: internal Error" );
-	    operationStack.pop();
-	    state = sNewNumber;
-	    numOpenBraces--;
-	    break;
-	}
-	    
-	case oPoint:
-	    flPoint = TRUE;
-	    return;
+  case oOpenBrace: {
+      Op op( 0, oOpenBrace );
+      operationStack.push( op );
+      numOpenBraces++;
+      state = sNewNumber;
+      return;
+  }
+  case oCloseBrace: {
+      if ( numOpenBraces == 0 )
+    return;
+      processStack( oAdd );
+      if ( operationStack.top().operation != oOpenBrace )
+    qDebug( "Calculator: internal Error" );
+      operationStack.pop();
+      state = sNewNumber;
+      numOpenBraces--;
+      break;
+  }
 
-	case oPercent:
-	    processStack( oPercent );
-	    break;
-	    
-	    
-	case oSum:
-	    processStack( oSum );
-	    break;
+  case oPoint:
+      flPoint = TRUE;
+      return;
 
-	default:
-	    return;
+  case oPercent:
+      processStack( oPercent );
+      break;
+
+
+  case oSum:
+      processStack( oSum );
+      break;
+
+  default:
+      return;
     };
-    
+
     if ( state == sError ) {
-	LCD->display( "Error" );
-	return;
+  LCD->display( "Error" );
+  return;
     } else {
-	LCD->display(num);
+  LCD->display(num);
     }
     state  = sNewNumber;
     numDecimals = 0;
@@ -436,20 +436,20 @@ void CalculatorImpl::processStack( int op )
     //pretty much hardwired to be less than the non-changeable
     bool percent = FALSE;
     if ( op == oPercent ) {
-	percent = TRUE;
-	op = oSum;
+  percent = TRUE;
+  op = oSum;
     }
     while( !operationStack.isEmpty() && operationStack.top().operation >= op ) {
-	Op operation = operationStack.pop();
-	acc = operation.number;
-	if ( percent ) {
-	    if ( operation.operation == oAdd || operation.operation == oSub )
-		num = acc*num/100;
-	    else
-		num = num / 100;
-	}
-	num = evalExpr( operation.operation );
-	percent = FALSE;
+  Op operation = operationStack.pop();
+  acc = operation.number;
+  if ( percent ) {
+      if ( operation.operation == oAdd || operation.operation == oSub )
+    num = acc*num/100;
+      else
+    num = num / 100;
+  }
+  num = evalExpr( operation.operation );
+  percent = FALSE;
     }
 }
 
@@ -459,51 +459,51 @@ double CalculatorImpl::evalExpr( int op ) {
 
     switch( op ){
         case oPercent: sum = num / 100.; break;
-        case oDivX: 
-	    if (num == 0) 
-		state = sError;
-	    else
-		sum = 1 / num; 
-	    break;
+        case oDivX:
+      if (num == 0)
+    state = sError;
+      else
+    sum = 1 / num;
+      break;
         case oXsquared:
-	    sum = pow(acc,num); 
-	    break;
+      sum = pow(acc,num);
+      break;
         case oChSign: (state == sStart) ? sum = -num : sum = -acc; break;
-    	case oSub:  sum = acc - num; break;
-    	case oMult: sum = acc * num; break;
-    	case oAdd:  sum = acc + num; break;
+      case oSub:  sum = acc - num; break;
+      case oMult: sum = acc * num; break;
+      case oAdd:  sum = acc + num; break;
         case oDiv:  {
-	    if (num == 0) {
-		state = sError;
-	    } else {
-		sum = acc / num;
-	    }
-	    break;
-	}
-        case oRoot: 
-	    /* the linux library is dumb, and can't to -x to 1/n 
-	       when n is odd.  (even and error of course is acceptable */
+      if (num == 0) {
+    state = sError;
+      } else {
+    sum = acc / num;
+      }
+      break;
+  }
+        case oRoot:
+      /* the linux library is dumb, and can't to -x to 1/n
+         when n is odd.  (even and error of course is acceptable */
             if((acc < 0) && (int(num) == num) && (int(num) % 2 == 1 )) {
-		sum = pow(-acc, 1 / num);
-		sum = -sum;
-	    } else {
-		sum = pow(acc, 1 / num); 
-	    }
-	    break;
+    sum = pow(-acc, 1 / num);
+    sum = -sum;
+      } else {
+    sum = pow(acc, 1 / num);
+      }
+      break;
         case oLog:
-	    sum = log10(num);
-	    break;
-        case oLn: 
-	    sum = log(num);
-	    break;
+      sum = log10(num);
+      break;
+        case oLn:
+      sum = log(num);
+      break;
         case oTan: sum = qTan(num);break;
         case oSin: sum = qSin(num);break;
         case oCos: sum = qCos(num);break;
-    	default: sum = num; break;
+      default: sum = num; break;
     }
-    
+
     if ( isinf( sum ) || isnan( sum ) )
-	state = sError;
+  state = sError;
     return sum;
 }
 
@@ -511,38 +511,38 @@ double CalculatorImpl::evalExpr( int op ) {
 void CalculatorImpl::enterNumber( int n )
 {
     if ( state == sError )
-	return;
+  return;
     if( state == sStart ){
-	if( LCD->value() > 0 ){
-	    QString s = QString::number( LCD->value(), 'g', LCD->numDigits());
-	    if( s.length() > (uint)(LCD->numDigits() - 2)) return;
+  if( LCD->value() > 0 ){
+      QString s = QString::number( LCD->value(), 'g', LCD->numDigits());
+      if( s.length() > (uint)(LCD->numDigits() - 2)) return;
 
-	} else if( (int)fake.length() >= LCD->numDigits() || numDecimals >=12 ){
-	    return;
-	}
+  } else if( (int)fake.length() >= LCD->numDigits() || numDecimals >=12 ){
+      return;
+  }
     }
 
     if( state == sNewNumber ){
-	    state = sStart;
-	    acc = 0;
-	if( flPoint ){
-	    numDecimals = 1;
-	    num = n / pow(10, numDecimals);
-	} else
-	    num = n;
+      state = sStart;
+      acc = 0;
+  if( flPoint ){
+      numDecimals = 1;
+      num = n / pow(10, numDecimals);
+  } else
+      num = n;
     } else if( flPoint ){
-	numDecimals++;
-	if( num < 0 ){
-	    num -= n / pow(10, numDecimals);
-	} else {
-	    num += n / pow(10, numDecimals);
-	}
+  numDecimals++;
+  if( num < 0 ){
+      num -= n / pow(10, numDecimals);
+  } else {
+      num += n / pow(10, numDecimals);
+  }
     } else {
-	num *= 10;
-	if( num  < 0 )
-	    num -= n;
-	else
-	    num += n;
+  num *= 10;
+  if( num  < 0 )
+      num -= n;
+  else
+      num += n;
     }
 
     // We need feedback in the calc display while entering fl.point zeros.
@@ -550,46 +550,46 @@ void CalculatorImpl::enterNumber( int n )
     double integer, fraction;
     fraction = modf( num, &integer );
     if( flPoint ){
-	QString is, fs, zeros;
-	
-	is = QString::number( integer, 'g', 13 );
-	fs = QString::number( fraction, 'g', numDecimals );
-	if( fs.contains('e') ){
-	    fs = QString::number( fraction, 'f', LCD->numDigits() );
-	}
-	fs = fs.mid( 2, numDecimals );
+  QString is, fs, zeros;
 
-	if( (integer == 0) && (fraction == 0) )
-	    fake = "0.";
-	else if( (integer != 0) && (fraction == 0) )
-	    fake = is + ".";
-	else
-	    fake = is + "." + fs;
+  is = QString::number( integer, 'g', 13 );
+  fs = QString::number( fraction, 'g', numDecimals );
+  if( fs.contains('e') ){
+      fs = QString::number( fraction, 'f', LCD->numDigits() );
+  }
+  fs = fs.mid( 2, numDecimals );
 
-	zeros.fill( '0', (numDecimals - fs.length()) );
-	fake += zeros;
-	// ### This code sets LCD->value() to zero since it sets a text
-	// ### Avoid getting the current value from LCD->value() for
-	// ### calculations.
-	LCD->display( fake );
+  if( (integer == 0) && (fraction == 0) )
+      fake = "0.";
+  else if( (integer != 0) && (fraction == 0) )
+      fake = is + ".";
+  else
+      fake = is + "." + fs;
+
+  zeros.fill( '0', (numDecimals - fs.length()) );
+  fake += zeros;
+  // ### This code sets LCD->value() to zero since it sets a text
+  // ### Avoid getting the current value from LCD->value() for
+  // ### calculations.
+  LCD->display( fake );
     } else
-	LCD->display( num );
+  LCD->display( num );
 }
 
 void CalculatorImpl::command_buttons(int i) {
     if ( state == sError && i != 3 )
-	return;
+  return;
     switch (i) {
     case 0:  // M+
-    	mem += num; 
+      mem += num;
         if( mem != 0 ){
-	        memMark->show();
-	        PushButtonMR->setEnabled( TRUE ); };
-	state = sNewNumber;
+          memMark->show();
+          PushButtonMR->setEnabled( TRUE ); };
+  state = sNewNumber;
          break;
     case 1: // MR
-	acc = num = mem;
-	state = sNewNumber;
+  acc = num = mem;
+  state = sNewNumber;
         LCD->display( mem );
         break;
     case 2: // MC
@@ -598,17 +598,17 @@ void CalculatorImpl::command_buttons(int i) {
         PushButtonMR->setEnabled( FALSE );
         break;
     case 3: // CE
-	if ( state == sStart ) {
-	    // clear the entered number on the first press
-	    state = sNewNumber;
-	    num = acc = 0;
-	    flPoint = FALSE;
-	    LCD->display( 0 );
-	    fake = QString::null;
-	    numDecimals = 0;
-	} else {
-	    clear();
-	}
+  if ( state == sStart ) {
+      // clear the entered number on the first press
+      state = sNewNumber;
+      num = acc = 0;
+      flPoint = FALSE;
+      LCD->display( 0 );
+      fake = QString::null;
+      numDecimals = 0;
+  } else {
+      clear();
+  }
         break;
     };
 

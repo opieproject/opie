@@ -19,12 +19,14 @@
 **********************************************************************/
 #include <qpe/qpeapplication.h>
 #include <qpe/qlibrary.h>
-#include <qpe/mediaplayerplugininterface.h>
 #include <qpe/config.h>
 #include <qvaluelist.h>
 #include <qobject.h>
 #include <qdir.h>
+#include <qpe/mediaplayerplugininterface.h>
 #include "mediaplayerstate.h"
+
+
 
 #ifdef QT_NO_COMPONENT
 // Plugins which are compiled in when no plugin architecture available
@@ -34,8 +36,8 @@
 #endif
 
 
-#define MediaPlayerDebug(x)	qDebug x
-//#define MediaPlayerDebug(x)
+//#define MediaPlayerDebug(x) qDebug x
+#define MediaPlayerDebug(x)
 
 
 MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
@@ -59,6 +61,7 @@ void MediaPlayerState::readConfig( Config& cfg ) {
     isLooping = cfg.readBoolEntry( "Looping" );
     isShuffled = cfg.readBoolEntry( "Shuffle" );
     usePlaylist = cfg.readBoolEntry( "UsePlayList" );
+    usePlaylist = TRUE;
     isPlaying = FALSE;
     isPaused = FALSE;
     curPosition = 0;
@@ -95,10 +98,10 @@ MediaPlayerDecoder *MediaPlayerState::newDecoder( const QString& file ) {
     MediaPlayerDecoder *tmpDecoder = NULL;
     QValueList<MediaPlayerPlugin>::Iterator it;
     for ( it = pluginList.begin(); it != pluginList.end(); ++it ) {
-	if ( (*it).decoder->isFileSupported( file ) ) {
-	    tmpDecoder = (*it).decoder;
-	    break;
-	}
+  if ( (*it).decoder->isFileSupported( file ) ) {
+      tmpDecoder = (*it).decoder;
+      break;
+  }
     }
     return decoder = tmpDecoder; 
 }
@@ -114,15 +117,19 @@ MediaPlayerDecoder *MediaPlayerState::libMpeg3Decoder() {
     return libmpeg3decoder;
 }
 
+// ### hack to get true sample count
+// MediaPlayerDecoder *MediaPlayerState::libWavDecoder() {
+//     return libwavdecoder;
+// }
 
 void MediaPlayerState::loadPlugins() {
-
+    qDebug("load plugins");
 #ifndef QT_NO_COMPONENT
     QValueList<MediaPlayerPlugin>::Iterator mit;
     for ( mit = pluginList.begin(); mit != pluginList.end(); ++mit ) {
-	(*mit).iface->release();
-	(*mit).library->unload();
-	delete (*mit).library;
+  (*mit).iface->release();
+  (*mit).library->unload();
+  delete (*mit).library;
     }
     pluginList.clear();
 
@@ -131,29 +138,28 @@ void MediaPlayerState::loadPlugins() {
     QStringList list = dir.entryList();
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
-	MediaPlayerPluginInterface *iface = 0;
-	QLibrary *lib = new QLibrary( path + "/" + *it );
+  MediaPlayerPluginInterface *iface = 0;
+  QLibrary *lib = new QLibrary( path + "/" + *it );
+//   qDebug( "querying: %s", QString( path + "/" + *it ).latin1() );
 
-	MediaPlayerDebug(( "querying: %s", QString( path + "/" + *it ).latin1() ));
+  if ( lib->queryInterface( IID_MediaPlayerPlugin, (QUnknownInterface**)&iface ) == QS_OK ) {
 
-	if ( lib->queryInterface( IID_MediaPlayerPlugin, (QUnknownInterface**)&iface ) == QS_OK ) {
+//       qDebug( "loading: %s", QString( path + "/" + *it ).latin1() );
 
-	    MediaPlayerDebug(( "loading: %s", QString( path + "/" + *it ).latin1() ));
+      MediaPlayerPlugin plugin;
+      plugin.library = lib;
+      plugin.iface = iface;
+      plugin.decoder = plugin.iface->decoder();
+      plugin.encoder = plugin.iface->encoder();
+      pluginList.append( plugin );
 
-	    MediaPlayerPlugin plugin;
-	    plugin.library = lib;
-	    plugin.iface = iface;
-	    plugin.decoder = plugin.iface->decoder();
-	    plugin.encoder = plugin.iface->encoder();
-	    pluginList.append( plugin );
+      // ### hack to get true sample count
+      if ( plugin.decoder->pluginName() == QString("LibMpeg3Plugin") )
+    libmpeg3decoder = plugin.decoder;
 
-	    // ### hack to get true sample count
-	    if ( plugin.decoder->pluginName() == QString("LibMpeg3Plugin") )
-		libmpeg3decoder = plugin.decoder;
-
-	} else {
-	    delete lib;
-	}
+  } else {
+      delete lib;
+  }
     }
 #else
     pluginList.clear();
@@ -178,8 +184,8 @@ void MediaPlayerState::loadPlugins() {
 #endif
 
     if ( pluginList.count() ) 
-	MediaPlayerDebug(( "%i decoders found", pluginList.count() ));
+  MediaPlayerDebug(( "%i decoders found", pluginList.count() ));
     else
-	MediaPlayerDebug(( "No decoders found" ));
+  MediaPlayerDebug(( "No decoders found" ));
 }
 

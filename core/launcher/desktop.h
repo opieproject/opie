@@ -63,6 +63,9 @@ protected:
     void shutdown();
     void restart();
 
+public slots:
+  void receive( const QCString &msg, const QByteArray &data );
+
 protected slots:
     void shutdown(ShutdownImpl::Type);
     void psTimeout();
@@ -71,6 +74,7 @@ private:
     DesktopPowerAlerter *pa;
     PowerStatus *ps;
     QTimer *cardSendTimer;
+	QCopChannel *channel;
 };
 
 

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #include <qpe/qpeapplication.h>
 #include <qpe/qlibrary.h>
 #include <qpe/resource.h>
@@ -47,8 +48,8 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
 
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( setPlaying( bool ) ) );
     connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pauseCheck( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( next() ),		 this, SLOT( next() ) );
-    connect( mediaPlayerState, SIGNAL( prev() ),		 this, SLOT( prev() ) );
+    connect( mediaPlayerState, SIGNAL( next() ),     this, SLOT( next() ) );
+    connect( mediaPlayerState, SIGNAL( prev() ),     this, SLOT( prev() ) );
 
     connect( audioUI,  SIGNAL( moreClicked() ),         this, SLOT( startIncreasingVolume() ) );
     connect( audioUI,  SIGNAL( lessClicked() ),         this, SLOT( startDecreasingVolume() ) );
@@ -64,7 +65,7 @@ MediaPlayer::~MediaPlayer() {
 void MediaPlayer::pauseCheck( bool b ) {
     // Only pause if playing
     if ( b && !mediaPlayerState->playing() )
-	mediaPlayerState->setPaused( FALSE );
+  mediaPlayerState->setPaused( FALSE );
 }
 
 
@@ -75,55 +76,50 @@ void MediaPlayer::play() {
 
 
 void MediaPlayer::setPlaying( bool play ) {
-
     if ( !play ) {
-	mediaPlayerState->setPaused( FALSE );
-	loopControl->stop( FALSE );
-	return;
+  mediaPlayerState->setPaused( FALSE );
+  loopControl->stop( FALSE );
+  return;
     }
 
     if ( mediaPlayerState->paused() ) {
-	mediaPlayerState->setPaused( FALSE );
-	return;
+  mediaPlayerState->setPaused( FALSE );
+  return;
     }
 
     const DocLnk *playListCurrent = playList->current();
-
     if ( playListCurrent != NULL ) {
-	loopControl->stop( TRUE );
-	currentFile = playListCurrent;
+  loopControl->stop( TRUE );
+  currentFile = playListCurrent;
     }
-
     if ( currentFile == NULL ) {
-	QMessageBox::critical( 0, tr( "No file"), tr( "Error: There is no file selected" ) );
-	mediaPlayerState->setPlaying( FALSE );
-	return;
+  QMessageBox::critical( 0, tr( "No file"), tr( "Error: There is no file selected" ) );
+  mediaPlayerState->setPlaying( FALSE );
+  return;
     }
-
     if ( !QFile::exists( currentFile->file() ) ) {
-	QMessageBox::critical( 0, tr( "File not found"), tr( "The following file was not found: <i>" ) + currentFile->file() + "</i>" );
-	mediaPlayerState->setPlaying( FALSE );
-	return;
+  QMessageBox::critical( 0, tr( "File not found"), tr( "The following file was not found: <i>" ) + currentFile->file() + "</i>" );
+  mediaPlayerState->setPlaying( FALSE );
+  return;
     }
 
     if ( !mediaPlayerState->newDecoder( currentFile->file() ) ) {
-	QMessageBox::critical( 0, tr( "No decoder found"), tr( "Sorry, no appropriate decoders found for this file: <i>" ) + currentFile->file() + "</i>" );
-	mediaPlayerState->setPlaying( FALSE );
-	return;
+  QMessageBox::critical( 0, tr( "No decoder found"), tr( "Sorry, no appropriate decoders found for this file: <i>" ) + currentFile->file() + "</i>" );
+  mediaPlayerState->setPlaying( FALSE );
+  return;
     }
 
     if ( !loopControl->init( currentFile->file() ) ) {
-	QMessageBox::critical( 0, tr( "Error opening file"), tr( "Sorry, an error occured trying to play the file: <i>" ) + currentFile->file() + "</i>" );
-	mediaPlayerState->setPlaying( FALSE );
-	return;
+  QMessageBox::critical( 0, tr( "Error opening file"), tr( "Sorry, an error occured trying to play the file: <i>" ) + currentFile->file() + "</i>" );
+  mediaPlayerState->setPlaying( FALSE );
+  return;
     }
-
     long seconds = loopControl->totalPlaytime();
     QString time; time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
     QString tickerText = tr( " File: " ) + currentFile->name() + tr(", Length: ") + time;
     QString fileInfo = mediaPlayerState->curDecoder()->fileInfo();
     if ( !fileInfo.isEmpty() )
-	tickerText += ", " + fileInfo;
+  tickerText += ", " + fileInfo;
     audioUI->setTickerText( tickerText + "." );
 
     loopControl->play();
@@ -134,23 +130,23 @@ void MediaPlayer::setPlaying( bool play ) {
 
 void MediaPlayer::prev() {
     if ( playList->prev() )
-	play();
+  play();
     else if ( mediaPlayerState->looping() ) {
         if ( playList->last() )
-	    play();
+      play();
     } else 
-	mediaPlayerState->setList();
+  mediaPlayerState->setList();
 }
 
 
 void MediaPlayer::next() {
     if ( playList->next() ) 
-	play(); 
+  play(); 
     else if ( mediaPlayerState->looping() ) {
         if ( playList->first() )
-	    play();
+      play();
     } else
-	mediaPlayerState->setList();
+  mediaPlayerState->setList();
 }
 
 
@@ -175,7 +171,7 @@ void MediaPlayer::stopChangingVolume() {
 
 void MediaPlayer::timerEvent( QTimerEvent * ) {
     if ( volumeDirection == +1 ) 
-	AudioDevice::increaseVolume();
+  AudioDevice::increaseVolume();
     else if ( volumeDirection == -1 ) 
         AudioDevice::decreaseVolume();
 }

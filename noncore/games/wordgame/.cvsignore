@@ -1,5 +1,5 @@
 moc_*
-Makefile
+Makefile*
 newgamebase.h
 rulesbase.h
 newgamebase.cpp

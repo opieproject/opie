@@ -9,17 +9,20 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	inputmethods/handwriting \
 	inputmethods/unikeyboard \
 	inputmethods/jumpx \
+	inputmethods/dvorak \
 	taskbar/batteryapplet \
 	taskbar/volumeapplet \
 	taskbar/clockapplet \
 	taskbar/netmonapplet \
+	taskbar/screenshotapplet \
+	taskbar/vmemo \
 	netsetup/dialup \
 	netsetup/lan \
 	mpegplayer/libmpeg3 \
 	mpegplayer/libmad \
 	mpegplayer/wavplugin \
 	cardmon \
-	sdmon
+	sdmon 
 
 APPS=$(LOCALAPPS) addressbook calculator clock datebook \
     filebrowser helpbrowser minesweep mpegplayer \
@@ -31,9 +34,9 @@ APPS=$(LOCALAPPS) addressbook calculator clock datebook \
     settings/sound \
     settings/systemtime \
     solitaire spreadsheet tetrix textedit \
-    todo tux wordgame embeddedkonsole taskbar sysinfo \
+    todo wordgame embeddedkonsole taskbar sysinfo \
     parashoot snake citytime showimg netsetup \
-    qipkg mindbreaker go qasteroids qcop fifteen keypebble opiemail/lib opiemail
+    qipkg mindbreaker go qasteroids qcop fifteen keypebble  today 
 
 DOCS = docs/src/opie-policy
 single: mpegplayer/libmpeg3

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,7 +20,6 @@
 #ifndef PLAY_LIST_SELECTION_H
 #define PLAY_LIST_SELECTION_H
 
-
 #include <qlist.h>
 #include <qlistview.h>
 #include <qpe/applnk.h>
@@ -33,7 +32,6 @@ public:
     ~PlayListSelection();
 
     const DocLnk *current(); // retrieve the current playlist entry (media file link)
-
 public slots:
     void addToSelection( const DocLnk & ); // Add a media file to the playlist
     void removeSelected();   // Remove a media file from the playlist
@@ -46,10 +44,10 @@ public slots:
 
 protected:
     virtual void contentsMouseMoveEvent(QMouseEvent *);
-#ifdef USE_PLAYLIST_BACKGROUND
+/* #ifdef USE_PLAYLIST_BACKGROUND */
     virtual void drawBackground( QPainter *p, const QRect &r );
     virtual void paintEmptyArea( QPainter *p, const QRect &r ) { drawBackground( p, r ); };
-#endif
+/* #endif */
 
 private:
     QList<DocLnk>   selectedList;

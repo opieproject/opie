@@ -28,6 +28,8 @@
 #include <qtimer.h>
 #include <ctype.h>
 
+#include <sys/utsname.h>
+
 
 #define USE_SMALL_BACKSPACE
 
@@ -49,7 +51,19 @@ Keyboard::Keyboard(QWidget* parent, const char* name, WFlags f) :
             this, SIGNAL(key(ushort,ushort,ushort,bool,bool)) );
 
     repeatTimer = new QTimer( this );
-    connect( repeatTimer, SIGNAL(timeout()), this, SLOT(repeat()) );
+
+    // temporary quick and dirty fix for the "sticky keyboard bug"
+    // on ipaq.
+    struct utsname name;
+    if (uname(&name) != -1)
+      {
+	QString release=name.release;
+	qWarning("System release: %s\n", name.release);
+	if(release.find("embedix",0,TRUE) !=-1)
+	  {
+	    connect( repeatTimer, SIGNAL(timeout()), this, SLOT(repeat()) );
+	  }
+      }
 }
 
 void Keyboard::resizeEvent(QResizeEvent*)
@@ -761,8 +775,9 @@ void Keyboard::timerEvent(QTimerEvent* e)
 
 void Keyboard::repeat()
 {
-    repeatTimer->start( 150 );
-    emit key( unicode, qkeycode, modifiers, true, true );
+  
+  repeatTimer->start( 200 );
+  emit key( unicode, qkeycode, modifiers, true, true );
 }
 
 void Keyboard::clearHighlight()

@@ -20,28 +20,44 @@
 #ifndef PLAY_LIST_WIDGET_H
 #define PLAY_LIST_WIDGET_H
 
-
 #include <qmainwindow.h>
 #include <qpe/applnk.h>
+#include <qtabwidget.h>
+#include <qpe/fileselector.h>
+#include <qpushbutton.h>
+
+/* #include <qtimer.h> */
 
 
 class PlayListWidgetPrivate;
 class Config;
-
+class QListViewItem;
+class QListView;
+class QPoint;
+class QAction;
+class QLabel;
 
 class PlayListWidget : public QMainWindow {
     Q_OBJECT
 public:
     PlayListWidget( QWidget* parent=0, const char* name=0, WFlags fl=0 );
     ~PlayListWidget();
-
+    QTabWidget * tabWidget;
+  QAction *fullScreenButton, *scaleButton;
+     DocLnkSet files;
+     DocLnkSet vFiles;
+     QListView *audioView, *videoView, *playlistView;
+     QLabel *libString; 
     // retrieve the current playlist entry (media file link)
     const DocLnk *current();
     void useSelectedDocument();
-
+/*     QTimer    * menuTimer; */
+    FileSelector*  playLists;
+    QPushButton *tbDeletePlaylist;
 public slots:
     void setDocument( const QString& fileref );
     void addToSelection( const DocLnk& ); // Add a media file to the playlist
+    void addToSelection( QListViewItem* ); // Add a media file to the playlist
     void setActiveWindow(); // need to handle this to show the right view
     void setPlaylist( bool ); // Show/Hide the playlist
     void setView( char );
@@ -50,17 +66,35 @@ public slots:
     void addAllMusicToList(); 
     void addAllVideoToList(); 
     void saveList();  // Save the playlist
-    void loadList();  // Load a playlist
+    void loadList( const DocLnk &);  // Load a playlist
+    void playIt( QListViewItem *);
+    void fauxPlay(QListViewItem *);
+    void btnPlay(bool);
+    void deletePlaylist();
     bool first();
     bool last();
     bool next();
     bool prev();
+    void addSelected();
+    void removeSelected();
+    void tabChanged(QWidget*);
+/*     void setFullScreen(); */
+/*     void setScaled(); */
+protected:
+/*     void contentsMousePressEvent( QMouseEvent * e ); */
+/*     void contentsMouseReleaseEvent( QMouseEvent * e ); */
 
 private:
     void initializeStates();
     void readConfig( Config& cfg );
     void writeConfig( Config& cfg ) const;
     PlayListWidgetPrivate *d; // Private implementation data
+
+protected slots:
+/*     void cancelMenuTimer(); */
+/*     void showFileMenu(); */
+
+
 };
 
 

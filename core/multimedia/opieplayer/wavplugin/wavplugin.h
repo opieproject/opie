@@ -17,12 +17,14 @@
 ** not clear to you.
 **
 **********************************************************************/
+// L.J.Potter added changes Fri 02-15-2002
+
 #ifndef WAV_PLUGIN_H 
 #define WAV_PLUGIN_H
 
-
 #include <qstring.h>
 #include <qapplication.h>
+/* #include "../mediaplayerplugininterface.h" */
 #include <qpe/mediaplayerplugininterface.h>
 
 
@@ -52,6 +54,7 @@ public:
     int audioStreams();
     int audioChannels( int stream ); 
     int audioFrequency( int stream );
+/*     int audioBitsPerSample( int stream ); */
     int audioSamples( int stream );
     bool audioSetSample( long sample, int stream );
     long audioGetSample( int stream );

@@ -1,0 +1,45 @@
+0.2.6
+
+* added scrollbars to dates and todo
+* all day detection
+* some smaller bugfixes
+
+0.2.5
+
+* some other minor fixes regarding autoupdate
+* fixed segfault with todolist > 7 entries
+* fixed the "ugly grey border around buttons" issue
+* fixed the "empty calendar field" "bug"
+* shown only later appointments as option
+
+
+0.2.4
+
+* added support for email 
+* autoupdates after 1 min
+* QCopEnvelope instead of system()
+* starting to use qvbox in gui
+
+
+0.2.3
+
+* the 4 am release
+* several bugfixes
+
+
+0.2.2 
+
+* started working on calling other apps
+* and finished it
+
+0.2.1
+
+* images no more inline
+* config dialog
+
+0.1.1
+
+* started changelog.
+* fixed segfault on empty/nonexistant todolist.xml
+* better handling for file location 
+

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -30,12 +30,11 @@
 
 #include <stdlib.h>
 
-
 class PlayListSelectionItem : public QListViewItem {
 public:
     PlayListSelectionItem( QListView *parent, const DocLnk *f ) : QListViewItem( parent ), fl( f ) {
-	setText( 0, f->name() );
-	setPixmap( 0, f->pixmap() );
+  setText( 0, f->name() );
+  setPixmap( 0, f->pixmap() );
     }
 
     ~PlayListSelectionItem() {
@@ -51,12 +50,16 @@ private:
 PlayListSelection::PlayListSelection( QWidget *parent, const char *name )
     : QListView( parent, name )
 {
-#ifdef USE_PLAYLIST_BACKGROUND
-    setStaticBackground( TRUE );
-    setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/background" ) );
-#endif
-    setAllColumnsShowFocus( TRUE );
-    addColumn( tr( "Playlist Selection" ) );
+    qDebug("starting playlistselector");
+// #ifdef USE_PLAYLIST_BACKGROUND
+//    setStaticBackground( TRUE );
+//      setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/background" ) );
+
+//    setBackgroundPixmap( Resource::loadPixmap( "opielogo" ) );
+// #endif
+//      addColumn("Title",236);
+//      setAllColumnsShowFocus( TRUE );
+     addColumn( tr( "Playlist Selection" ) );
     header()->hide();
     setSorting( -1, FALSE );
 }
@@ -66,24 +69,26 @@ PlayListSelection::~PlayListSelection() {
 }
 
 
-#ifdef USE_PLAYLIST_BACKGROUND
+// #ifdef USE_PLAYLIST_BACKGROUND
 void PlayListSelection::drawBackground( QPainter *p, const QRect &r ) {
-    p->fillRect( r, QBrush( white ) );
-    QImage logo = Resource::loadImage( "mpegplayer/background" );
-    if ( !logo.isNull() )
-	p->drawImage( (width() - logo.width()) / 2, (height() - logo.height()) / 2, logo );
+//  qDebug("drawBackground");
+//   p->fillRect( r, QBrush( white ) );
+//      QImage logo = Resource::loadImage( "mpegplayer/background" );
+//  //      QImage logo = Resource::loadImage( "opielogo" );
+//        if ( !logo.isNull() )
+//      p->drawImage( (width() - logo.width()) / 2, (height() - logo.height()) / 2, logo );
 }
-#endif
+// #endif
 
 
 void PlayListSelection::contentsMouseMoveEvent( QMouseEvent *event ) {
     if ( event->state() == QMouseEvent::LeftButton ) {
-	QListViewItem *currentItem = selectedItem();
-	QListViewItem *itemUnder = itemAt( QPoint( event->pos().x(), event->pos().y() - contentsY() ) );
-	if ( currentItem && currentItem->itemAbove() == itemUnder )
-	    moveSelectedUp();
-	else if ( currentItem && currentItem->itemBelow() == itemUnder )
-	    moveSelectedDown();
+  QListViewItem *currentItem = selectedItem();
+  QListViewItem *itemUnder = itemAt( QPoint( event->pos().x(), event->pos().y() - contentsY() ) );
+  if ( currentItem && currentItem->itemAbove() == itemUnder )
+      moveSelectedUp();
+  else if ( currentItem && currentItem->itemBelow() == itemUnder )
+      moveSelectedDown();
     }
 }
 
@@ -91,7 +96,7 @@ void PlayListSelection::contentsMouseMoveEvent( QMouseEvent *event ) {
 const DocLnk *PlayListSelection::current() {
     PlayListSelectionItem *item = (PlayListSelectionItem *)selectedItem();
     if ( item )
-	return item->file();
+  return item->file();
     return NULL;
 }
 
@@ -109,7 +114,7 @@ void PlayListSelection::addToSelection( const DocLnk &lnk ) {
 void PlayListSelection::removeSelected() {
     QListViewItem *item = selectedItem();
     if ( item )
-	delete item;
+  delete item;
     setSelected( currentItem(), TRUE );
     ensureItemVisible( selectedItem() );
 }
@@ -118,7 +123,7 @@ void PlayListSelection::removeSelected() {
 void PlayListSelection::moveSelectedUp() {
     QListViewItem *item = selectedItem();
     if ( item && item->itemAbove() )
-	item->itemAbove()->moveItem( item );
+  item->itemAbove()->moveItem( item );
     ensureItemVisible( selectedItem() );
 }
 
@@ -136,7 +141,7 @@ bool PlayListSelection::prev() {
     if ( item && item->itemAbove() )
         setSelected( item->itemAbove(), TRUE );
     else
-	return FALSE;
+  return FALSE;
     ensureItemVisible( selectedItem() );
     return TRUE;
 }
@@ -147,7 +152,7 @@ bool PlayListSelection::next() {
     if ( item && item->itemBelow() )
         setSelected( item->itemBelow(), TRUE );
     else
-	return FALSE;
+  return FALSE;
     ensureItemVisible( selectedItem() );
     return TRUE;
 }
@@ -158,7 +163,7 @@ bool PlayListSelection::first() {
     if ( item )
         setSelected( item, TRUE );
     else
-	return FALSE;
+  return FALSE;
     ensureItemVisible( selectedItem() );
     return TRUE;
 }
@@ -168,11 +173,11 @@ bool PlayListSelection::last() {
     QListViewItem *prevItem = NULL;
     QListViewItem *item = firstChild();
     while ( ( item = item->nextSibling() ) )
-	prevItem = item;
+  prevItem = item;
     if ( prevItem )
         setSelected( prevItem, TRUE );
     else
-	return FALSE;
+  return FALSE;
     ensureItemVisible( selectedItem() );
     return TRUE;
 }

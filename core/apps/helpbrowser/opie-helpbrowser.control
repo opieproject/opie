@@ -1,4 +1,4 @@
-Files: bin/helpbrowser apps/Applications/helpbrowser.desktop docs
+Files: bin/helpbrowser apps/Applications/helpbrowser.desktop docs pics/helpbrowser/*
 Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>

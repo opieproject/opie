@@ -62,6 +62,7 @@ class FileSelectorViewPrivate
 {
 public:
     CategoryMenu *cm;
+    bool m_noItems:1;
 };
 
 FileSelectorView::FileSelectorView( const QString &f, QWidget *parent, const char *name )
@@ -69,6 +70,7 @@ FileSelectorView::FileSelectorView( const QString &f, QWidget *parent, const cha
 {
     d = new FileSelectorViewPrivate();
     d->cm = 0;
+    d->m_noItems = false;
     setAllColumnsShowFocus( TRUE );
     addColumn( tr( "Name" ) );
     header()->hide();
@@ -86,14 +88,23 @@ FileSelectorView::~FileSelectorView()
 
 void FileSelectorView::reread()
 {
-    FileSelectorItem *item = (FileSelectorItem *)selectedItem();
     QString oldFile;
-    if ( item )
-	oldFile = item->file().file();
+    FileSelectorItem *item;
+    if( !d->m_noItems ) { // there are items
+      item = (FileSelectorItem *)selectedItem();
+      if ( item )
+	  oldFile = item->file().file();
+    }
     clear();
     DocLnkSet files;
     Global::findDocuments(&files, filter);
     count = files.children().count();
+    if(count == 0 ){ // No Documents
+      d->m_noItems = true;
+      QListViewItem *it = new QListViewItem(this, tr("There are no files in this directory." ), "empty" );
+      it->setSelectable(FALSE );
+      return;
+    }
     QListIterator<DocLnk> dit( files.children() );
     for ( ; dit.current(); ++dit ) {
 	if (d->cm)
@@ -243,6 +254,9 @@ void FileSelector::fileClicked( int button, QListViewItem *i, const QPoint &, in
 {
     if ( !i )
 	return;
+    if(i->text(1) == QString::fromLatin1("empty" ) )
+      return; 
+
     if ( button == Qt::LeftButton ) {
 	fileClicked( i );
     }
@@ -252,6 +266,9 @@ void FileSelector::filePressed( int button, QListViewItem *i, const QPoint &, in
 {
     if ( !i )
 	return;
+    if(i->text(1) == QString::fromLatin1("empty" ) )
+      return; 
+
     if ( button == Qt::RightButton ) {
 	DocLnk l = ((FileSelectorItem *)i)->file();
 	LnkProperties prop( &l );
@@ -333,3 +350,4 @@ void FileSelector::reread()
 {
     view->reread();
 }
+

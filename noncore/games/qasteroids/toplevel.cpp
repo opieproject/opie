@@ -35,6 +35,8 @@
 #include <qlcdnumber.h>
 #include <qpushbutton.h>
 
+#include <sys/utsname.h>
+
 
 #define SB_SCORE	1
 #define SB_LEVEL	2
@@ -253,9 +255,25 @@ KAstTopLevel::KAstTopLevel( QWidget *parent, const char *name )
     actions.insert( Qt::Key_Z, Teleport );
     actions.insert( Qt::Key_Down, Brake );
     actions.insert( Qt::Key_P, Pause );
-    actions.insert( Key_F12, Launch );
-    actions.insert( Key_F11, Shield );
-    actions.insert( Key_F9, NewGame );
+
+
+    struct utsname name; /* check for embedix kernel running on the zaurus, if 
+			    lineo change string, this break
+			 */
+    if (uname(&name) != -1) {
+	QString release=name.release;
+	if(release.find("embedix",0,TRUE) !=-1) {
+	  actions.insert( Key_F12, Launch );
+	  actions.insert( Key_F11, Shield );
+	  actions.insert( Key_F9, NewGame );
+	} else {
+	  // ipaq
+	  actions.insert( Key_F12, Shoot );
+	  actions.insert( Key_F11, Shield );
+	  actions.insert( Key_F10, Launch );
+	  actions.insert( Key_F9, NewGame );
+	}
+      }
 
 //    actions.insert( Qt::Key_S, Shield );
 //    actions.insert( Qt::Key_X, Brake );
@@ -451,7 +469,7 @@ void KAstTopLevel::slotShipKilled()
     if ( shipsRemain > 0 )
     {
         waitShip = TRUE;
-        view->showText( tr( "Ship Destroyed.\nPress Launch/Home key."), yellow );
+        view->showText( tr( "Ship Destroyed.\nPress Contacts/Home key."), yellow );
     }
     else
     {

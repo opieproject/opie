@@ -30,14 +30,14 @@ LibMpeg3PluginImpl::LibMpeg3PluginImpl()
 LibMpeg3PluginImpl::~LibMpeg3PluginImpl()
 {
     if ( libmpeg3plugin )
-	delete libmpeg3plugin;
+  delete libmpeg3plugin;
 }
 
 
 MediaPlayerDecoder *LibMpeg3PluginImpl::decoder()
 {
     if ( !libmpeg3plugin )
-	libmpeg3plugin = new LibMpeg3Plugin;
+  libmpeg3plugin = new LibMpeg3Plugin;
     return libmpeg3plugin;
 }
 
@@ -54,8 +54,8 @@ MediaPlayerEncoder *LibMpeg3PluginImpl::encoder()
 QRESULT LibMpeg3PluginImpl::queryInterface( const QUuid &uuid, QUnknownInterface **iface )
 {
     *iface = 0;
-    if ( ( uuid == IID_QUnknown ) || ( uuid == IID_MediaPlayerPlugin ) )
-	*iface = this, (*iface)->addRef();
+    if ( ( uuid == IID_QUnknown )  || ( uuid == IID_MediaPlayerPlugin )  )
+  *iface = this, (*iface)->addRef();
     return QS_OK;
 }
 

@@ -1,0 +1,10 @@
+Files: bin/today apps/Applications/today.desktop pics/today_icon.png pics/today/today_logo.png pics/today/config.png pics/today/mail.png
+Priority: optional
+Section: opie/applications
+Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
+Architecture: arm
+Version: 0.2.6
+Depends: opie-base ($QPE_VERSION)
+License: GPL
+Description: today screen
+ A short overview over current appointments and tasks.
