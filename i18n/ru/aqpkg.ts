@@ -212,7 +212,7 @@
     </message>
     <message>
         <source>Creating directory </source>
-        <translation>Создаю директорию</translation>
+        <translation>Создаю каталог</translation>
     </message>
     <message>
         <source>Linked %1 to %2</source>

@@ -397,9 +397,9 @@ edit</source>
     <message>
         <source>ComboBox Directory 
 edit or select the directories name</source>
-        <translation>КомбоСписок Директории
+        <translation>КомбоСписок Каталогов
 
-правка или выбор директорий</translation>
+правка или выбор каталогов</translation>
     </message>
     <message>
         <source>Name</source>
@@ -415,15 +415,15 @@ edit or select the directories name</source>
     </message>
     <message>
         <source>directory listview</source>
-        <translation>директории в виде списка</translation>
+        <translation>каталоги в виде списка</translation>
     </message>
     <message>
         <source>Directory ListView
 
 shows the list of dirs and files</source>
-        <translation>Директории в виде списка
+        <translation>Каталоги в виде списка
 
-показывает список директорий и файлов</translation>
+показывает список каталогов и файлов</translation>
     </message>
 </context>
 <context>
@@ -478,7 +478,7 @@ shows the list of dirs and files</source>
 %1
 
 ZSafe will now exit.</source>
-        <translation>Не могу создать директорию
+        <translation>Не могу создать каталог
 %1
 
 ZСейф будет закрыт.</translation>
@@ -600,7 +600,7 @@ ZСейф будет закрыт.</translation>
 .../Documents/application
 
 ZSafe will now exit.</source>
-        <translation>Не могу создать директорию
+        <translation>Не могу создать каталог
 ...//Documents/application
 
 ZСейф будет закрыт.</translation>
@@ -610,7 +610,7 @@ ZСейф будет закрыт.</translation>
 ...//Documents/application/zsafe
 
 ZSafe will now exit.</source>
-        <translation>Не могу создать директорию
+        <translation>Не могу создать каталог
 ...//Documents/application/zsafe
 
 ZСейф будет закрыт.</translation>

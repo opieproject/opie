@@ -102,7 +102,7 @@
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation>Директория для записей:</translation>
+        <translation>Каталог для записей:</translation>
     </message>
     <message>
         <source>Recording Key:</source>

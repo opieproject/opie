@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Make Directory</source>
-        <translation>Создать директорию</translation>
+        <translation>Создать каталог</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation>Директория не существует</translation>
+        <translation>Каталог не существует</translation>
     </message>
     <message>
         <source>Copy As</source>
@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Change Directory</source>
-        <translation>Сменить директорию</translation>
+        <translation>Сменить каталог</translation>
     </message>
     <message>
         <source>Execute</source>
@@ -182,7 +182,7 @@
     </message>
     <message>
         <source>Delete Directory?</source>
-        <translation>Удалить директорию?</translation>
+        <translation>Удалить каталог?</translation>
     </message>
     <message>
         <source>Really copy
@@ -230,7 +230,7 @@ L.J.Potter&lt;llornkcor@handhelds.org&gt;
     </message>
     <message>
         <source>Remove Current Directory from Bookmarks</source>
-        <translation>Убрать директорию из закладок</translation>
+        <translation>Убрать каталог из закладок</translation>
     </message>
     <message>
         <source>Error</source>
@@ -240,9 +240,9 @@ L.J.Potter&lt;llornkcor@handhelds.org&gt;
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation>Не могу убрать директорию
+        <translation>Не могу убрать каталог
 из закладок.
-Она не заложена!
+Он не заложен!
 
 </translation>
     </message>

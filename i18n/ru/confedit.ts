@@ -30,7 +30,7 @@
     </message>
     <message>
         <source>The directory </source>
-        <translation>Директорию</translation>
+        <translation>Каталог</translation>
     </message>
     <message>
         <source> could not be opened.</source>

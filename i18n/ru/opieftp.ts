@@ -3,237 +3,251 @@
     <name>OpieFtp</name>
     <message>
         <source>OpieFtp</source>
-        <translation type="unfinished"></translation>
+        <translation>OpieFtp</translation>
     </message>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Соединение</translation>
     </message>
     <message>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Местные</translation>
     </message>
     <message>
         <source>Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Удаленные</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Вид</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Новый</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Подключиться</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключиться</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать скрытые файлы</translation>
     </message>
     <message>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать каталог</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Переименовать</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Скачать</translation>
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключиться на местный</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключиться на удаленный</translation>
     </message>
     <message>
         <source>Switch to Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключиться на конфигурацию</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата</translation>
     </message>
     <message>
         <source>Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Директория</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя пользователя</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <source>Remote server</source>
-        <translation type="unfinished"></translation>
+        <translation>Удаленный сервер</translation>
     </message>
     <message>
         <source>Remote path</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь на сервере</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурация</translation>
     </message>
     <message>
         <source>Ftp</source>
-        <translation type="unfinished"></translation>
+        <translation>FTP</translation>
     </message>
     <message>
         <source>Please set the server info</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста задайте информацию о сервере</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Заметьте</translation>
     </message>
     <message>
         <source>Unable to connect to
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу подключиться к
+</translation>
     </message>
     <message>
         <source>Unable to log in
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу зарегистрироваться на
+</translation>
     </message>
     <message>
         <source>Unable to upload
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу загрузить
+</translation>
     </message>
     <message>
         <source>Cannot upload directories</source>
-        <translation type="unfinished"></translation>
+        <translation>Не умею загружать каталоги</translation>
     </message>
     <message>
         <source>Unable to download 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу скачать
+</translation>
     </message>
     <message>
         <source>Unable to list the directory
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу показать файлы в каталоге
+</translation>
     </message>
     <message>
         <source>Unable to change directories
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу сменить каталог
+</translation>
     </message>
     <message>
         <source>Unable to cd up
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу перейти на уровень выше
+</translation>
     </message>
     <message>
         <source>Unable to get working dir
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу получить рабочий каталог
+</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить каталог</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Вы действительно хотите удалить
+</translation>
     </message>
     <message>
         <source> ?
 It must be empty</source>
-        <translation type="unfinished"></translation>
+        <translation>?
+Должен быть пустым</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Unable to make directory
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу создать каталог
+</translation>
     </message>
     <message>
         <source>Unable to remove directory
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу удалить каталог
+</translation>
     </message>
     <message>
         <source>Unable to delete file
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу удалить файл
+</translation>
     </message>
     <message>
         <source>Unable to rename file
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу переименовать файл
+</translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Не смог переименовать</translation>
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Такого каталога не существует</translation>
     </message>
     <message>
         <source>Rescan</source>
-        <translation type="unfinished"></translation>
+        <translation>Пересканировать</translation>
     </message>
     <message>
         <source>New Server name</source>
-        <translation type="unfinished"></translation>
+        <translation>Новое имя сервера</translation>
     </message>
     <message>
         <source>Sorry name already taken</source>
-        <translation type="unfinished"></translation>
+        <translation>Извините, такое имя уже есть</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить</translation>
     </message>
 </context>
 </TS>
