@@ -6,6 +6,8 @@
 	* LauncherSettings: Choose whether to have a static background pixmap (mickeyl)
 	* PackageManager supports the 'lists_dir' ipkg configuration option (drw)
 	* Added hi-res inline images for large resolution devices (drw)
+	* Datebook: Added plugin system to datebook so holidays and birthdays from
+	  contacts may displayed in datebook. (alwin)
 
 	Fixed Bugs
 	----------
