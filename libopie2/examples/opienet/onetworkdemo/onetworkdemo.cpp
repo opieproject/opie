@@ -28,12 +28,30 @@ int main( int argc, char** argv )
 
             // try to set monitor mode
 
+            /*
+
             // first some wrong calls to check if this is working
             iface->setPrivate( "seppel", 10 );
             iface->setPrivate( "monitor", 0 );
 
             // now the real deal
             iface->setPrivate( "monitor", 2, 2, 3 );
+
+            */
+
+            // trying to set hw address to 12:34:56:AB:CD:EF
+
+            /*
+
+            OMacAddress addr = OMacAddress::fromString( "12:34:56:AB:CD:EF" );
+            iface->setUp( false );
+            iface->setMacAddress( addr );
+            iface->setUp( true );
+            qDebug( "DEMO: MAC Address now is '%s'", (const char*) iface->macAddress().toString() );
+
+            */
+
+
         }
         ++it;
     }

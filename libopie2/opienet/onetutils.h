@@ -56,6 +56,9 @@ class OMacAddress
     ~OMacAddress();
 
     QString toString() const;
+    const unsigned char* native() const;
+
+    static OMacAddress fromString( const QString& );
 
   public:
     static const OMacAddress& broadcast; // ff:ff:ff:ff:ff:ff

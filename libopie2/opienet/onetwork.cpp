@@ -224,6 +224,14 @@ QString ONetworkInterface::ipV4Address() const
 }
 
 
+void ONetworkInterface::setMacAddress( const OMacAddress& addr )
+{
+    _ifr.ifr_hwaddr.sa_family = ARPHRD_ETHER;
+    memcpy( &_ifr.ifr_hwaddr.sa_data, addr.native(), 6 );
+    ioctl( SIOCSIFHWADDR );
+}
+
+
 OMacAddress ONetworkInterface::macAddress() const
 {
     if ( ioctl( SIOCGIFHWADDR ) )
@@ -647,6 +655,13 @@ void OWirelessNetworkInterface::setPrivate( const QString& call, int numargs, ..
 
 void OWirelessNetworkInterface::getPrivate( const QString& call )
 {
+    qWarning( "OWirelessNetworkInterface::getPrivate() is not implemented yet." );
+}
+
+
+bool OWirelessNetworkInterface::hasPrivate( const QString& call )
+{
+    return child( (const char*) call );
 }
 
 
@@ -834,29 +849,16 @@ void OHostAPMonitoringInterface::setEnabled( bool b )
     // IW_MODE_MONITOR was introduced in Wireless Extensions Version 15
     // Wireless Extensions < Version 15 need iwpriv commandos for monitoring
 
+    //TODO: check wireless extensions version on runtime and use
+    //TODO: SIOCSIWMODE( IW_MODE_MONITOR ) if running on WE >= 15
+
     if ( b )
     {
-        #if WIRELESS_EXT > 14
-        _if->_iwr.u.mode = IW_MODE_MONITOR;
-        _if->wioctl( SIOCSIWMODE );
-        #else
-        int* args = (int*) &_if->_iwr.u.name;
-        args[0] = 2;
-        args[1] = 0;
-        _if->wioctl( SIOCDEVPRIVATE );
-        #endif
+        _if->setPrivate( "monitor", 1, 2 );
     }
     else
     {
-        #if WIRELESS_EXT > 14
-        _if->_iwr.u.mode = IW_MODE_INFRA;
-        _if->wioctl( SIOCSIWMODE );
-        #else
-        int* args = (int*) &_if->_iwr.u.name;
-        args[0] = 0;
-        args[1] = 0;
-        _if->wioctl( SIOCDEVPRIVATE );
-        #endif
+        _if->setPrivate( "monitor", 1, 0 );
     }
 }
 
@@ -885,11 +887,7 @@ OOrinocoMonitoringInterface::~OOrinocoMonitoringInterface()
 
 void OOrinocoMonitoringInterface::setChannel( int c )
 {
-    // call iwpriv <device> monitor 2 <channel>
-    int* args = (int*) &_if->_iwr.u.name;
-    args[0] = 2;
-    args[1] = c;
-    _if->wioctl( SIOCIWFIRSTPRIV + 0x8 );
+    _if->setPrivate( "monitor", 2, 2, c );
 }
 
 
@@ -901,11 +899,7 @@ void OOrinocoMonitoringInterface::setEnabled( bool b )
     }
     else
     {
-        // call iwpriv <device> monitor 0 0
-        int* args = (int*) &_if->_iwr.u.name;
-        args[0] = 0;
-        args[1] = 0;
-        _if->wioctl( SIOCIWFIRSTPRIV + 0x8 );
+        _if->setPrivate( "monitor", 2, 0, 0 );
     }
 }
 

@@ -63,10 +63,6 @@
 #define _LINUX_IF_H
 #include <linux/wireless.h>
 
-#ifndef SIOCIWFIRSTPRIV
-#define SIOCIWFIRSTPRIV SIOCDEVPRIVATE
-#endif
-
 class ONetworkInterface;
 class OWirelessNetworkInterface;
 class OChannelHopper;
@@ -125,6 +121,7 @@ class ONetworkInterface : public QObject
     bool isLoopback() const;
     bool isWireless() const;
     QString ipV4Address() const;
+    void setMacAddress( const OMacAddress& );
     OMacAddress macAddress() const;
     int dataLinkType() const;
 
@@ -204,6 +201,7 @@ class OWirelessNetworkInterface : public ONetworkInterface
     virtual QString nickName() const;
 
     virtual void setPrivate( const QString&, int, ... );
+    virtual bool hasPrivate( const QString& );
     virtual void getPrivate( const QString& );
 
     virtual bool isAssociated() const {};
@@ -249,7 +247,7 @@ class OMonitoringInterface
     virtual QString name() const = 0;
 
   protected:
-    const OWirelessNetworkInterface* _if;
+    OWirelessNetworkInterface* _if;
 
 };
 

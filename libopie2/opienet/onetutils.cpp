@@ -62,7 +62,7 @@ const OMacAddress& OMacAddress::unknown = OMacAddress( __unknown );
 
 OMacAddress::OMacAddress( unsigned char* p )
 {
-    memcpy( _bytes, p, 6 ); // D'OH! memcpy in my sources... eeek...
+    memcpy( _bytes, p, 6 );
 }
 
 
@@ -80,6 +80,32 @@ OMacAddress::OMacAddress( struct ifreq& ifr )
 
 OMacAddress::~OMacAddress()
 {
+}
+
+
+#ifdef QT_NO_DEBUG
+inline
+#endif
+const unsigned char* OMacAddress::native() const
+{
+    return (const unsigned char*) &_bytes;
+}
+
+
+OMacAddress OMacAddress::fromString( const QString& str )
+{
+    QString addr( str );
+    unsigned char buf[6];
+    bool ok = true;
+    int index = 14;
+    for ( int i = 5; i >= 0; --i )
+    {
+        buf[i] = addr.right( 2 ).toUShort( &ok, 16 );
+        if ( !ok ) return OMacAddress::unknown;
+        addr.truncate( index );
+        index -= 3;
+    }
+    return (const unsigned char*) &buf;
 }
 
 
