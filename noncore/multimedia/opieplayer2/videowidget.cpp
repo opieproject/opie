@@ -189,13 +189,16 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
     //int Vw = 220;
 
     slider->setFixedWidth( w - 20 );
-    slider->setGeometry( QRect( 15, h - 30, w - 90, 20 ) );
+    slider->setGeometry( QRect( 15, h - 22, w - 90, 20 ) );
     slider->setBackgroundOrigin( QWidget::ParentOrigin );
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setBackgroundPixmap( *pixBg );
 
     xoff = 0;// ( imgUp->width() ) / 2;
-    yoff = 185;//(( Vh  - imgUp->height() ) / 2) - 10;
+    if(w>h)
+        yoff = 0;
+    else
+        yoff = 185;//(( Vh  - imgUp->height() ) / 2) - 10;
     QPoint p( xoff, yoff );
 
     QPixmap *pixUp = combineVImageWithBackground( *imgUp, *pixBg, p );
@@ -395,7 +398,17 @@ void VideoWidget::makeVisible() {
             connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
             connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
         }
-        videoFrame->setGeometry( QRect( 0, 30, 240, 170  ) );
+
+        QWidget *d = QApplication::desktop();
+        int w=d->width(); 
+        int h=d->height();
+
+        if(w>h) {
+            int newW=(w/2)-(246/2); //this will only work with 320x240
+            videoFrame->setGeometry( QRect( newW, 4, 240, 170  ) );
+        } else
+            videoFrame->setGeometry( QRect( 0, 30, 240, 170  ) );
+
         qApp->processEvents();
     }
 }
