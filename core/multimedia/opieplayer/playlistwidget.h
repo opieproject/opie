@@ -57,6 +57,7 @@ public:
 /*     QTimer    * menuTimer; */
     FileSelector*  playLists;
     QPushButton *tbDeletePlaylist;
+    int fd;
 public slots:
     bool first();
     bool last();
@@ -69,6 +70,9 @@ protected:
 /*     void contentsMouseReleaseEvent( QMouseEvent * e ); */
 void keyReleaseEvent( QKeyEvent *e);
 private:
+    void doBlank();
+    void doUnblank();
+ 
     void initializeStates();
     void readConfig( Config& cfg );
     void writeConfig( Config& cfg ) const;

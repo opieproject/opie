@@ -45,7 +45,9 @@ extern MediaPlayerState *mediaPlayerState;
 
 MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL ) {
-    QPEApplication::grabKeyboard();
+
+//    QPEApplication::grabKeyboard();
+    connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( setPlaying( bool ) ) );
     connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pauseCheck( bool ) ) );
@@ -60,8 +62,6 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
 
 
 MediaPlayer::~MediaPlayer() {
-    QPEApplication::grabKeyboard();
-    QPEApplication::ungrabKeyboard();
 }
 
 
@@ -185,3 +185,35 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
         AudioDevice::decreaseVolume();
 }
 
+void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
+    switch ( e->key() ) {
+////////////////////////////// Zaurus keys
+      case Key_Home:
+          break;
+      case Key_F9: //activity
+          break;
+      case Key_F10: //contacts
+          break;
+      case Key_F11: //menu
+          break;
+      case Key_F12: //home
+          qDebug("Blank here");
+          break;
+      case Key_F13: //mail
+          break;
+    }
+}
+
+void MediaPlayer::doBlank() {
+
+}
+
+void MediaPlayer::doUnblank() {
+
+}
+
+void MediaPlayer::cleanUp() {
+//     QPEApplication::grabKeyboard();
+//     QPEApplication::ungrabKeyboard();
+
+}

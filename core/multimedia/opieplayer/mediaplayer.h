@@ -47,8 +47,10 @@ private slots:
 
 protected:
     void timerEvent( QTimerEvent *e );
-//    void keyReleaseEvent( QKeyEvent *e);
-
+    void keyReleaseEvent( QKeyEvent *e);
+    void doBlank();
+    void doUnblank();
+    void cleanUp();
 private:
     int     volumeDirection;
     const DocLnk  *currentFile;

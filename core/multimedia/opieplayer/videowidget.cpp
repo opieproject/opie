@@ -432,7 +432,7 @@ void VideoWidget::keyReleaseEvent( QKeyEvent *e)
       case Key_F9: //activity
           break;
       case Key_F10: //contacts
-          hide();
+//           hide();
           break;
       case Key_F11: //menu
           break;
