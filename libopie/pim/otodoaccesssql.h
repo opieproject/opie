@@ -32,9 +32,9 @@ public:
 private:
     void update();
     void fillDict();
-    bool date( QDate& date, const QString& )const;
-    OTodo todo( const OSQLResult& )const;
-    QArray<int> uids( const OSQLResult& )const;
+    inline bool date( QDate& date, const QString& )const;
+    inline OTodo todo( const OSQLResult& )const;
+    inline QArray<int> uids( const OSQLResult& )const;
     OTodo todo( int uid )const;
 
     QAsciiDict<int> m_dict;

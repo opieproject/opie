@@ -21,9 +21,9 @@ public:
                      Priority,
                      Description,
                      Deadline };
-    enum SortFilter{ ShowOverdue = 0,
-                     Category =1,
-                     OnlyOverDue= 2 };
+    enum SortFilter{ Category =1,
+                     OnlyOverDue= 2,
+                     DoNotShowCompleted =4  };
     /**
      * if you use 0l
      * the default resource will be

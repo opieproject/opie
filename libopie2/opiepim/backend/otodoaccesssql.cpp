@@ -308,10 +308,67 @@ QArray<int> OTodoAccessBackendSQL::effectiveToDos( const QDate& s,
     EffQuery ef(s, t, u );
     return uids (m_driver->query(&ef) );
 }
+/*
+ *
+ */
 QArray<int> OTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
                                            int sortFilter, int cat ) {
-    QArray<int> ints(0);
-    return ints;
+    QString query;
+    query = "select uid from todolist WHERE ";
+
+    /*
+     * Sort Filter stuff
+     * not that straight forward
+     *
+     */
+    /* Category */
+    if ( sortFilter & 1 ) {
+        query += " categories like '%" +QString::number(cat)+"%' AND";
+    }
+    /* Show only overdue */
+    if ( sortFilter & 2 ) {
+        QDate date = QDate::currentDate();
+        QString due;
+        QString base;
+        base = QString("DueDate <= '%1-%2-%3' AND WHERE completed = 0").arg( date.year() ).arg( date.month() ).arg( date.day() );
+        query += " " + base + " AND";
+    }
+    /* not show completed */
+    if ( sortFilter & 4 ) {
+        query += " completed = 0 AND";
+    }else{
+       query += " ( completed = 1 OR  completed = 0) AND";
+    }
+    /* srtip the end */
+    query = query.remove( query.length()-3, 3 );
+
+
+    /*
+     * sort order stuff
+     * quite straight forward
+     */
+    query += "ORDER BY ";
+    switch( sortOrder ) {
+        /* completed */
+    case 0:
+        query += "completed";
+        break;
+    case 1:
+        query += "priority";
+        break;
+    case 2:
+        query += "description";
+        break;
+    case 3:
+        query += "DueDate";
+        break;
+    }
+    if ( !asc )
+        query += " DESC";
+
+    qWarning( query );
+    OSQLRawQuery raw(query );
+    return uids( m_driver->query(&raw) );
 }
 bool OTodoAccessBackendSQL::date( QDate& da, const QString& str ) const{
     if ( str == "0-0-0" )
