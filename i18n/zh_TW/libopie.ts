@@ -93,10 +93,6 @@
 <context>
     <name>OTimePickerDialogBase</name>
     <message>
-        <source>TimePicker</source>
-        <translation>TimePicker</translation>
-    </message>
-    <message>
         <source>Time:</source>
         <translation>Time:</translation>
     </message>

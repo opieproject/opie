@@ -1,156 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>MainWindow</name>
-    <message>
-        <source>New Task</source>
-        <translation>Nueva tarea</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation>Editar tarea</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation>Ver tarea</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Eliminar...</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation>Borrar todo...</translation>
-    </message>
-    <message>
-        <source>Delete completed</source>
-        <translation>Borrado completado</translation>
-    </message>
-    <message>
-        <source>Duplicate</source>
-        <translation>Duplicar</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation>Emitir</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation>Buscar</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation>Datos</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation>Categorí­a</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation>Opciones</translation>
-    </message>
-    <message>
-        <source>New from template</source>
-        <translation>Nuevo desde plantilla</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation>Todas</translation>
-    </message>
-    <message>
-        <source>Out of space</source>
-        <translation>Sin espacio</translation>
-    </message>
-    <message>
-        <source>Todo was unable
-to save your changes.
-Free up some space
-and try again.
-
-Quit Anyway?</source>
-        <translation>Tareas fue incapaz de
-salvar sus cambios.
-Libere algo de espacio
-e inténtelo de nuevo.
-
-¿Salir de todas formas?</translation>
-    </message>
-    <message>
-        <source>Todo</source>
-        <translation>Tareas</translation>
-    </message>
-    <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation>No puedo editar datos, estoy sincronizando</translation>
-    </message>
-    <message>
-        <source>all tasks?</source>
-        <translation>¿todas las tareas?</translation>
-    </message>
-    <message>
-        <source>all completed tasks?</source>
-        <translation>¿todas las tareas completadas?</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation>En blanco</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
-        <translation>&lt;P&gt;Han llegado %1 nuevas tareas.&lt;p&gt;¿Desea añadirlas a su lista de tareas?</translation>
-    </message>
-    <message>
-        <source>New Tasks</source>
-        <translation>Nuevas tareas</translation>
-    </message>
-    <message>
-        <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show only over-due tasks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show task deadlines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show quick task bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QuickEdit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is a listing of all current tasks.
-
-The list displays the following information:
-1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
-2. Priority - a graphical representation of task priority.  Double-click here to modify.
-3. Description - description of task.  Click here to select the task.
-4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>OTaskEditor</name>
     <message>
         <source>Alarms</source>
@@ -189,19 +38,182 @@ The list displays the following information:
     </message>
 </context>
 <context>
-    <name>TableView</name>
+    <name>QWidget</name>
+    <message>
+        <source>New from template</source>
+        <translation type="unfinished">Nuevo desde plantilla</translation>
+    </message>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Nueva tarea</translation>
+    </message>
+    <message>
+        <source>Click here to create a new task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished">Editar Tarea</translation>
+    </message>
+    <message>
+        <source>Click here to modify the current task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished">Ver tarea</translation>
+    </message>
+    <message>
+        <source>Delete...</source>
+        <translation type="unfinished">Eliminar...</translation>
+    </message>
+    <message>
+        <source>Click here to remove the current task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all...</source>
+        <translation type="unfinished">Borrar todo...</translation>
+    </message>
+    <message>
+        <source>Delete completed</source>
+        <translation type="unfinished">Borrado completado</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Emitir</translation>
+    </message>
+    <message>
+        <source>Click here to send the current task to another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">Buscar</translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show only over-due tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show task deadlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show quick task bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished">Datos</translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished">Categorí­a</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Opciones</translation>
+    </message>
+    <message>
+        <source>QuickEdit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a listing of all current tasks.
+
+The list displays the following information:
+1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
+2. Priority - a graphical representation of task priority.  Double-click here to modify.
+3. Description - description of task.  Click here to select the task.
+4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Categories</source>
+        <translation type="unfinished">Todas</translation>
+    </message>
+    <message>
+        <source>Out of space</source>
+        <translation type="unfinished">Sin espacio</translation>
+    </message>
+    <message>
+        <source>Todo was unable
+to save your changes.
+Free up some space
+and try again.
+
+Quit Anyway?</source>
+        <translation type="unfinished">Tareas fue incapaz de
+salvar sus cambios.
+Libere algo de espacio
+e inténtelo de nuevo.
+
+¿Salir de todas formas?</translation>
+    </message>
+    <message>
+        <source>Todo</source>
+        <translation type="unfinished">Tareas</translation>
+    </message>
+    <message>
+        <source>Can not edit data, currently syncing</source>
+        <translation type="unfinished">No puedo editar datos, estoy sincronizando</translation>
+    </message>
+    <message>
+        <source>all tasks?</source>
+        <translation type="unfinished">¿todas las tareas?</translation>
+    </message>
+    <message>
+        <source>all completed tasks?</source>
+        <translation type="unfinished">¿todas las tareas completadas?</translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">En blanco</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
+        <translation type="unfinished">&lt;P&gt;Han llegado %1 nuevas tareas.&lt;p&gt;¿Desea añadirlas a su lista de tareas?</translation>
+    </message>
+    <message>
+        <source>New Tasks</source>
+        <translation type="unfinished">Nuevas tareas</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Duplicar</translation>
+    </message>
     <message>
         <source>C.</source>
-        <translation>C.</translation>
+        <translation type="unfinished">C.</translation>
+    </message>
+    <message>
+        <source>Priority</source>
+        <translation type="unfinished">Prioridad</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Descripción</translation>
+        <translation type="unfinished">Descripción</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation>Fecha lí­mite</translation>
+        <translation type="unfinished">Fecha lí­mite</translation>
     </message>
+    <message>
+        <source>Configure Templates</source>
+        <translation type="unfinished">Configurar Platillas</translation>
+    </message>
+    <message>
+        <source>Priority:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TableView</name>
     <message>
         <source>Table View</source>
         <translation>Vista de tablas</translation>
@@ -213,10 +225,6 @@ The list displays the following information:
     <message>
         <source>%1 day(s)</source>
         <translation>%1 dia(s)</translation>
-    </message>
-    <message>
-        <source>Priority</source>
-        <translation type="unfinished">Prioridad</translation>
     </message>
 </context>
 <context>
@@ -282,10 +290,6 @@ The list displays the following information:
     </message>
     <message>
         <source>Mail </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Priority:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -496,13 +500,6 @@ The list displays the following information:
     <message>
         <source>New Template %1</source>
         <translation>Nueva plantilla %1</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateEditor</name>
-    <message>
-        <source>Configure Templates</source>
-        <translation>Configurar Platillas</translation>
     </message>
 </context>
 <context>

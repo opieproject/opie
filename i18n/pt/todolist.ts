@@ -1,13 +1,63 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>MainWindow</name>
+    <name>OTaskEditor</name>
+    <message>
+        <source>Alarms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reminders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X-Ref</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recurrence</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Enter Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished">Editar Tarefa</translation>
+    </message>
+</context>
+<context>
+    <name>QWidget</name>
+    <message>
+        <source>New from template</source>
+        <translation type="unfinished"></translation>
+    </message>
     <message>
         <source>New Task</source>
         <translation type="unfinished">Nova Tarefa</translation>
     </message>
     <message>
+        <source>Click here to create a new task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Edit Task</source>
         <translation type="unfinished">Editar Tarefa</translation>
+    </message>
+    <message>
+        <source>Click here to modify the current task.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>View Task</source>
@@ -18,6 +68,10 @@
         <translation type="unfinished">Apagar...</translation>
     </message>
     <message>
+        <source>Click here to remove the current task.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Delete all...</source>
         <translation type="unfinished">Apagar Todas...</translation>
     </message>
@@ -26,16 +80,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Duplicate</source>
-        <translation type="unfinished">Duplicar</translation>
-    </message>
-    <message>
         <source>Beam</source>
         <translation type="unfinished">Irradiar</translation>
     </message>
     <message>
+        <source>Click here to send the current task to another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Find</source>
         <translation type="unfinished">Procurar</translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show only over-due tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show task deadlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show quick task bar</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Data</source>
@@ -50,7 +120,17 @@
         <translation type="unfinished">Opções</translation>
     </message>
     <message>
-        <source>New from template</source>
+        <source>QuickEdit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a listing of all current tasks.
+
+The list displays the following information:
+1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
+2. Priority - a graphical representation of task priority.  Double-click here to modify.
+3. Description - description of task.  Click here to select the task.
+4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -99,95 +179,16 @@ Quit Anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <source>Duplicate</source>
+        <translation type="unfinished">Duplicar</translation>
     </message>
-    <message>
-        <source>Show only over-due tasks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show task deadlines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show quick task bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QuickEdit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is a listing of all current tasks.
-
-The list displays the following information:
-1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
-2. Priority - a graphical representation of task priority.  Double-click here to modify.
-3. Description - description of task.  Click here to select the task.
-4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>OTaskEditor</name>
-    <message>
-        <source>Alarms</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reminders</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>X-Ref</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Recurrence</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Enter Task</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="unfinished">Editar Tarefa</translation>
-    </message>
-</context>
-<context>
-    <name>TableView</name>
     <message>
         <source>C.</source>
         <translation type="unfinished">C.</translation>
+    </message>
+    <message>
+        <source>Priority</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Description</source>
@@ -198,6 +199,17 @@ The list displays the following information:
         <translation type="unfinished">Limite</translation>
     </message>
     <message>
+        <source>Configure Templates</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TableView</name>
+    <message>
         <source>Table View</source>
         <translation type="unfinished"></translation>
     </message>
@@ -207,10 +219,6 @@ The list displays the following information:
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Priority</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -277,10 +285,6 @@ The list displays the following information:
     </message>
     <message>
         <source>Mail </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Priority:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -490,13 +494,6 @@ The list displays the following information:
     </message>
     <message>
         <source>New Template %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>TemplateEditor</name>
-    <message>
-        <source>Configure Templates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

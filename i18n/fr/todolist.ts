@@ -1,161 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>MainWindow</name>
-    <message>
-        <source>New Task</source>
-        <translation>Nouvelle Tâche</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation>Editer une Tâche</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation>Voir la Tâche</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Effacer...</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation>Effacer Tout...</translation>
-    </message>
-    <message>
-        <source>Delete completed</source>
-        <translation>Effacement Terminé</translation>
-    </message>
-    <message>
-        <source>Duplicate</source>
-        <translation>Dupliquer</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation>Transmettre</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation>Rechercher</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation>Date</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation>Catégorie</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation>Options</translation>
-    </message>
-    <message>
-        <source>New from template</source>
-        <translation>Nouvelle à Partir d&apos;un Modèle</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation>Toutes les Catégories</translation>
-    </message>
-    <message>
-        <source>Out of space</source>
-        <translation>Plus de Mémoire Disponible</translation>
-    </message>
-    <message>
-        <source>Todo was unable
-to save your changes.
-Free up some space
-and try again.
-
-Quit Anyway?</source>
-        <translation>Tâche n&apos;a pas pu
-enregistrer vos changements.
-Libérez de l&apos;espace
-et réessayez.
-
-Quitter?</translation>
-    </message>
-    <message>
-        <source>Todo</source>
-        <translation>Tâche</translation>
-    </message>
-    <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation>Impossible d&apos;éditer les données, Synchronization en cours</translation>
-    </message>
-    <message>
-        <source>all tasks?</source>
-        <translation>Toutes les Tâches?</translation>
-    </message>
-    <message>
-        <source>all completed tasks?</source>
-        <translation>Toutes les tâches effectuées?</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation>Non classé</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
-        <translation>&lt;P&gt;%1 Il y  une nouvelle tâches.&lt;p&gt; Voulez-vous l&apos;ajouter à votre liste?</translation>
-    </message>
-    <message>
-        <source>New Tasks</source>
-        <translation>Nouvelles Tâches</translation>
-    </message>
-    <message>
-        <source>Show completed tasks</source>
-        <translation>Montrer les tâches terminées</translation>
-    </message>
-    <message>
-        <source>Show only over-due tasks</source>
-        <translation>Montrer seulement les tâches échues</translation>
-    </message>
-    <message>
-        <source>Show task deadlines</source>
-        <translation>Montrer les échéances</translation>
-    </message>
-    <message>
-        <source>Show quick task bar</source>
-        <translation>Montrer la barre d&apos;outils</translation>
-    </message>
-    <message>
-        <source>QuickEdit</source>
-        <translation>Edition Rapide</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation>Cliquer ici pour créer une nouvelle tâche.</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation>Cliquer ici pour modifier la tâche courante.</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation>Cliquer  ici pour effacer la tâche courante.</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation>Cliquer ici pour transmettre la tâche courante à un autre périphérique.</translation>
-    </message>
-    <message>
-        <source>This is a listing of all current tasks.
-
-The list displays the following information:
-1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
-2. Priority - a graphical representation of task priority.  Double-click here to modify.
-3. Description - description of task.  Click here to select the task.
-4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
-        <translation>Voici la liste de toutes les tâches en cours.
-
-La liste affiche les informations suivantes:
-1. Terminé - Un marque verte indique une tâche terminée. Cliquer ici pour terminer un tâche.
-2. Priorité - Une représentation graphique de la priorité de la tâche. Double-cliquer ici pour la modifier.
-3. Description - Date d&apos;échéance de la tâche. This colonne peut être affichée ou cachée en séléctionnant Options-&gt;&apos;Montrer les dates d&apos;échéance&apos; à partir du menu ci-dessus.</translation>
-    </message>
-</context>
-<context>
     <name>OTaskEditor</name>
     <message>
         <source>Alarms</source>
@@ -194,19 +38,187 @@ La liste affiche les informations suivantes:
     </message>
 </context>
 <context>
-    <name>TableView</name>
+    <name>QWidget</name>
+    <message>
+        <source>New from template</source>
+        <translation type="unfinished">Nouvelle à Partir d&apos;un Modèle</translation>
+    </message>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Nouvelle Tâche</translation>
+    </message>
+    <message>
+        <source>Click here to create a new task.</source>
+        <translation type="unfinished">Cliquer ici pour créer une nouvelle tâche.</translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished">Editer la Tâche</translation>
+    </message>
+    <message>
+        <source>Click here to modify the current task.</source>
+        <translation type="unfinished">Cliquer ici pour modifier la tâche courante.</translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished">Voir la Tâche</translation>
+    </message>
+    <message>
+        <source>Delete...</source>
+        <translation type="unfinished">Effacer...</translation>
+    </message>
+    <message>
+        <source>Click here to remove the current task.</source>
+        <translation type="unfinished">Cliquer  ici pour effacer la tâche courante.</translation>
+    </message>
+    <message>
+        <source>Delete all...</source>
+        <translation type="unfinished">Effacer Tout...</translation>
+    </message>
+    <message>
+        <source>Delete completed</source>
+        <translation type="unfinished">Effacement Terminé</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Transmettre</translation>
+    </message>
+    <message>
+        <source>Click here to send the current task to another device.</source>
+        <translation type="unfinished">Cliquer ici pour transmettre la tâche courante à un autre périphérique.</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">Rechercher</translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished">Montrer les tâches terminées</translation>
+    </message>
+    <message>
+        <source>Show only over-due tasks</source>
+        <translation type="unfinished">Montrer seulement les tâches échues</translation>
+    </message>
+    <message>
+        <source>Show task deadlines</source>
+        <translation type="unfinished">Montrer les échéances</translation>
+    </message>
+    <message>
+        <source>Show quick task bar</source>
+        <translation type="unfinished">Montrer la barre d&apos;outils</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished">Date</translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished">Catégorie</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Options</translation>
+    </message>
+    <message>
+        <source>QuickEdit</source>
+        <translation type="unfinished">Edition Rapide</translation>
+    </message>
+    <message>
+        <source>This is a listing of all current tasks.
+
+The list displays the following information:
+1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
+2. Priority - a graphical representation of task priority.  Double-click here to modify.
+3. Description - description of task.  Click here to select the task.
+4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
+        <translation type="unfinished">Voici la liste de toutes les tâches en cours.
+
+La liste affiche les informations suivantes:
+1. Terminé - Un marque verte indique une tâche terminée. Cliquer ici pour terminer un tâche.
+2. Priorité - Une représentation graphique de la priorité de la tâche. Double-cliquer ici pour la modifier.
+3. Description - Date d&apos;échéance de la tâche. This colonne peut être affichée ou cachée en séléctionnant Options-&gt;&apos;Montrer les dates d&apos;échéance&apos; à partir du menu ci-dessus.</translation>
+    </message>
+    <message>
+        <source>All Categories</source>
+        <translation type="unfinished">Toutes les Catégories</translation>
+    </message>
+    <message>
+        <source>Out of space</source>
+        <translation type="unfinished">Plus de Mémoire Disponible</translation>
+    </message>
+    <message>
+        <source>Todo was unable
+to save your changes.
+Free up some space
+and try again.
+
+Quit Anyway?</source>
+        <translation type="unfinished">Tâche n&apos;a pas pu
+enregistrer vos changements.
+Libérez de l&apos;espace
+et réessayez.
+
+Quitter?</translation>
+    </message>
+    <message>
+        <source>Todo</source>
+        <translation type="unfinished">Tâche</translation>
+    </message>
+    <message>
+        <source>Can not edit data, currently syncing</source>
+        <translation type="unfinished">Impossible d&apos;éditer les données, Synchronization en cours</translation>
+    </message>
+    <message>
+        <source>all tasks?</source>
+        <translation type="unfinished">Toutes les Tâches?</translation>
+    </message>
+    <message>
+        <source>all completed tasks?</source>
+        <translation type="unfinished">Toutes les tâches effectuées?</translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Non classé</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
+        <translation type="unfinished">&lt;P&gt;%1 Il y  une nouvelle tâches.&lt;p&gt; Voulez-vous l&apos;ajouter à votre liste?</translation>
+    </message>
+    <message>
+        <source>New Tasks</source>
+        <translation type="unfinished">Nouvelles Tâches</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Dupliquer</translation>
+    </message>
     <message>
         <source>C.</source>
-        <translation>C.</translation>
+        <translation type="unfinished">C.</translation>
+    </message>
+    <message>
+        <source>Priority</source>
+        <translation type="unfinished">Priorité</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Description</translation>
+        <translation type="unfinished">Description</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation>Echéance</translation>
+        <translation type="unfinished">Echéance</translation>
     </message>
+    <message>
+        <source>Configure Templates</source>
+        <translation type="unfinished">Configurer les Modèles</translation>
+    </message>
+    <message>
+        <source>Priority:</source>
+        <translation type="unfinished">Priorité:</translation>
+    </message>
+</context>
+<context>
+    <name>TableView</name>
     <message>
         <source>Table View</source>
         <translation>Vue en Tableau</translation>
@@ -218,10 +230,6 @@ La liste affiche les informations suivantes:
     <message>
         <source>%1 day(s)</source>
         <translation>%1 jour(s)</translation>
-    </message>
-    <message>
-        <source>Priority</source>
-        <translation>Priorité</translation>
     </message>
 </context>
 <context>
@@ -288,10 +296,6 @@ La liste affiche les informations suivantes:
     <message>
         <source>Mail </source>
         <translation>Courrier</translation>
-    </message>
-    <message>
-        <source>Priority:</source>
-        <translation>Priorité:</translation>
     </message>
     <message>
         <source>Select priority of task here.</source>
@@ -501,13 +505,6 @@ La liste affiche les informations suivantes:
     <message>
         <source>New Template %1</source>
         <translation>Nouveau Modèle %1</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateEditor</name>
-    <message>
-        <source>Configure Templates</source>
-        <translation>Configurer les Modèles</translation>
     </message>
 </context>
 <context>

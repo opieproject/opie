@@ -1,162 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>MainWindow</name>
-    <message>
-        <source>New Task</source>
-        <translation>Új feladat</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation>Feladat szerkesztése</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation>Feladat megnézése</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation>Töröl...</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation>Mindent töröl...</translation>
-    </message>
-    <message>
-        <source>Delete completed</source>
-        <translation>Elvégzettek törlése</translation>
-    </message>
-    <message>
-        <source>Duplicate</source>
-        <translation>Dupláz</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation>Átsugárzás</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation>Keresés</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation>Adat</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation>Kategória</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation>Beállítások</translation>
-    </message>
-    <message>
-        <source>New from template</source>
-        <translation>Új sablonból</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation>Minden kategória</translation>
-    </message>
-    <message>
-        <source>Out of space</source>
-        <translation>Nincs hely</translation>
-    </message>
-    <message>
-        <source>Todo was unable
-to save your changes.
-Free up some space
-and try again.
-
-Quit Anyway?</source>
-        <translation>A Teendők nem tudta elmenteni
-a változásokat.
-Szabaditson fel némi helyet
-és próbálja újra.
-
-Mégis kilép?</translation>
-    </message>
-    <message>
-        <source>Todo</source>
-        <translation>Teendők</translation>
-    </message>
-    <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation>Az adat nem szerkeszthető, szinkronizáció folyamatban</translation>
-    </message>
-    <message>
-        <source>all tasks?</source>
-        <translation>minden feladat?</translation>
-    </message>
-    <message>
-        <source>all completed tasks?</source>
-        <translation>minden elvégzett feladat?</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation>Iktatatlan</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
-        <translation>&lt;P&gt;%1 új feladat érkezett.&lt;p&gt;Szeretné hozzáadni a Teendőkhöz?</translation>
-    </message>
-    <message>
-        <source>New Tasks</source>
-        <translation>Új feladatok</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation>Bökjön ide új feladat létrehozásához.</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation>Bökjön ide az aktuális feladat módosításához.</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation>Bökjön ide az aktuális feladat eltávolításához.</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation>Bökjön ide az aktuális felada másik eszköznek küldéséhez.</translation>
-    </message>
-    <message>
-        <source>Show completed tasks</source>
-        <translation>Mutasd az elvégzett feladatokat</translation>
-    </message>
-    <message>
-        <source>Show only over-due tasks</source>
-        <translation>Csak a lejárt feladatokat mutasd</translation>
-    </message>
-    <message>
-        <source>Show task deadlines</source>
-        <translation>Mutasd a feladatok határidejét</translation>
-    </message>
-    <message>
-        <source>Show quick task bar</source>
-        <translation>Mutasd a gyors feladatcsíkot</translation>
-    </message>
-    <message>
-        <source>QuickEdit</source>
-        <translation>GyorsSzerkesztés</translation>
-    </message>
-    <message>
-        <source>This is a listing of all current tasks.
-
-The list displays the following information:
-1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
-2. Priority - a graphical representation of task priority.  Double-click here to modify.
-3. Description - description of task.  Click here to select the task.
-4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
-        <translation>Ez az összes aktuális feladat listája.
-
-A lista az alábbi információkat tartalmazza:
-1. Teljesített -  Egy zöld pipa jelzi a feladat teljesítését. Bökjön ide, ha teljesítette a feladatot.
-2. Fontosság - grafikus megjelenítése a feladat fontosságának. Duplán bökjön ide a módosításhoz.
-3. Leírás - a feladat leírása. Bökjön ide a feladat kiválasztásához.
-4. Határidő - megmutatja mikorra kell készlegyen a feladattal. Ez az oszlop mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a feladatok határidejét&apos; kiválasztásával a fenti menüből.</translation>
-    </message>
-</context>
-<context>
     <name>OTaskEditor</name>
     <message>
         <source>Alarms</source>
@@ -195,19 +38,188 @@ A lista az alábbi információkat tartalmazza:
     </message>
 </context>
 <context>
-    <name>TableView</name>
+    <name>QWidget</name>
+    <message>
+        <source>New from template</source>
+        <translation type="unfinished">Új sablonból</translation>
+    </message>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">Új feladat</translation>
+    </message>
+    <message>
+        <source>Click here to create a new task.</source>
+        <translation type="unfinished">Bökjön ide új feladat létrehozásához.</translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished">Feladat szerkesztése</translation>
+    </message>
+    <message>
+        <source>Click here to modify the current task.</source>
+        <translation type="unfinished">Bökjön ide az aktuális feladat módosításához.</translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished">Feladat megnézése</translation>
+    </message>
+    <message>
+        <source>Delete...</source>
+        <translation type="unfinished">Töröl...</translation>
+    </message>
+    <message>
+        <source>Click here to remove the current task.</source>
+        <translation type="unfinished">Bökjön ide az aktuális feladat eltávolításához.</translation>
+    </message>
+    <message>
+        <source>Delete all...</source>
+        <translation type="unfinished">Mindent töröl...</translation>
+    </message>
+    <message>
+        <source>Delete completed</source>
+        <translation type="unfinished">Elvégzettek törlése</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Átsugárzás</translation>
+    </message>
+    <message>
+        <source>Click here to send the current task to another device.</source>
+        <translation type="unfinished">Bökjön ide az aktuális felada másik eszköznek küldéséhez.</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">Keresés</translation>
+    </message>
+    <message>
+        <source>Show completed tasks</source>
+        <translation type="unfinished">Mutasd az elvégzett feladatokat</translation>
+    </message>
+    <message>
+        <source>Show only over-due tasks</source>
+        <translation type="unfinished">Csak a lejárt feladatokat mutasd</translation>
+    </message>
+    <message>
+        <source>Show task deadlines</source>
+        <translation type="unfinished">Mutasd a feladatok határidejét</translation>
+    </message>
+    <message>
+        <source>Show quick task bar</source>
+        <translation type="unfinished">Mutasd a gyors feladatcsíkot</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished">Adat</translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished">Kategória</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">Beállítások</translation>
+    </message>
+    <message>
+        <source>QuickEdit</source>
+        <translation type="unfinished">GyorsSzerkesztés</translation>
+    </message>
+    <message>
+        <source>This is a listing of all current tasks.
+
+The list displays the following information:
+1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
+2. Priority - a graphical representation of task priority.  Double-click here to modify.
+3. Description - description of task.  Click here to select the task.
+4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
+        <translation type="unfinished">Ez az összes aktuális feladat listája.
+
+A lista az alábbi információkat tartalmazza:
+1. Teljesített -  Egy zöld pipa jelzi a feladat teljesítését. Bökjön ide, ha teljesítette a feladatot.
+2. Fontosság - grafikus megjelenítése a feladat fontosságának. Duplán bökjön ide a módosításhoz.
+3. Leírás - a feladat leírása. Bökjön ide a feladat kiválasztásához.
+4. Határidő - megmutatja mikorra kell készlegyen a feladattal. Ez az oszlop mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a feladatok határidejét&apos; kiválasztásával a fenti menüből.</translation>
+    </message>
+    <message>
+        <source>All Categories</source>
+        <translation type="unfinished">Minden kategória</translation>
+    </message>
+    <message>
+        <source>Out of space</source>
+        <translation type="unfinished">Nincs hely</translation>
+    </message>
+    <message>
+        <source>Todo was unable
+to save your changes.
+Free up some space
+and try again.
+
+Quit Anyway?</source>
+        <translation type="unfinished">A Teendők nem tudta elmenteni
+a változásokat.
+Szabaditson fel némi helyet
+és próbálja újra.
+
+Mégis kilép?</translation>
+    </message>
+    <message>
+        <source>Todo</source>
+        <translation type="unfinished">Teendők</translation>
+    </message>
+    <message>
+        <source>Can not edit data, currently syncing</source>
+        <translation type="unfinished">Az adat nem szerkeszthető, szinkronizáció folyamatban</translation>
+    </message>
+    <message>
+        <source>all tasks?</source>
+        <translation type="unfinished">minden feladat?</translation>
+    </message>
+    <message>
+        <source>all completed tasks?</source>
+        <translation type="unfinished">minden elvégzett feladat?</translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished">Iktatatlan</translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
+        <translation type="unfinished">&lt;P&gt;%1 új feladat érkezett.&lt;p&gt;Szeretné hozzáadni a Teendőkhöz?</translation>
+    </message>
+    <message>
+        <source>New Tasks</source>
+        <translation type="unfinished">Új feladatok</translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">Dupláz</translation>
+    </message>
     <message>
         <source>C.</source>
-        <translation>T.</translation>
+        <translation type="unfinished">T.</translation>
+    </message>
+    <message>
+        <source>Priority</source>
+        <translation type="unfinished">Fontosság</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Leírás</translation>
+        <translation type="unfinished">Leírás</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation>Határidő</translation>
+        <translation type="unfinished">Határidő</translation>
     </message>
+    <message>
+        <source>Configure Templates</source>
+        <translation type="unfinished">Sablonok beállítása</translation>
+    </message>
+    <message>
+        <source>Priority:</source>
+        <translation type="unfinished">Fontosság:</translation>
+    </message>
+</context>
+<context>
+    <name>TableView</name>
     <message>
         <source>Table View</source>
         <translation>Tábla nézet</translation>
@@ -219,10 +231,6 @@ A lista az alábbi információkat tartalmazza:
     <message>
         <source>%1 day(s)</source>
         <translation>%1 nap</translation>
-    </message>
-    <message>
-        <source>Priority</source>
-        <translation>Fontosság</translation>
     </message>
 </context>
 <context>
@@ -289,10 +297,6 @@ A lista az alábbi információkat tartalmazza:
     <message>
         <source>Mail </source>
         <translation>Írj levelet</translation>
-    </message>
-    <message>
-        <source>Priority:</source>
-        <translation>Fontosság:</translation>
     </message>
     <message>
         <source>Select priority of task here.</source>
@@ -502,13 +506,6 @@ A lista az alábbi információkat tartalmazza:
     <message>
         <source>New Template %1</source>
         <translation>új sablon %1</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateEditor</name>
-    <message>
-        <source>Configure Templates</source>
-        <translation>Sablonok beállítása</translation>
     </message>
 </context>
 <context>
