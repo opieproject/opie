@@ -45,7 +45,7 @@ protected:
     QString parseAddressList( mailimf_address_list *list );
     QString parseDateTime( mailimf_date_time *date );
     
-    void traverseBody(RecBody&target,mailmessage*message,mailmime*mime,QValueList<int>recList,unsigned int current_rek=0,int current_count=0);
+    void traverseBody(RecBody&target,mailmessage*message,mailmime*mime,QValueList<int>recList,unsigned int current_rek=0,int current_count=1);
     static void fillSingleBody(RecPart&target,mailmessage*message,mailmime*mime);
     static void fillParameters(RecPart&target,clist*parameters);
     static QString getencoding(mailmime_mechanism*aEnc);

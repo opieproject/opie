@@ -138,8 +138,6 @@ void Genericwrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mi
     QString b;
     RecPart part;
     
-    //current_count;
-    
     switch (mime->mm_type) {
     case MAILMIME_SINGLE:
     {
@@ -155,8 +153,13 @@ void Genericwrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mi
             encodedString*r = new encodedString();
             r->setContent(data,len);
             encodedString*res = decode_String(r,part.Encoding());
+            if (countlist.count()>2) {
+                bodyCache[b]=r;
+                target.addPart(part);
+            } else {
+                delete r;
+            }
             b = QString(res->Content());
-            delete r;
             delete res;
             target.setBodytext(b);
             target.setDescription(part);
@@ -168,9 +171,22 @@ void Genericwrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mi
     break;
     case MAILMIME_MULTIPLE:
     {
-        unsigned int ccount = current_count;
+        unsigned int ccount = 1;
+        mailmime*cbody=0;
+        QValueList<int>countlist = recList;
         for (cur = clist_begin(mime->mm_data.mm_multipart.mm_mp_list) ; cur != NULL ; cur = clist_next(cur)) {
-            traverseBody(target,message, (mailmime*)clist_content(cur),recList,current_rec+1,ccount);
+            cbody = (mailmime*)clist_content(cur);
+            if (cbody->mm_type==MAILMIME_MULTIPLE) {
+                RecPart targetPart;
+                targetPart.setType("multipart");
+                countlist.append(current_count);
+                targetPart.setPositionlist(countlist);
+                target.addPart(targetPart);
+            }
+            traverseBody(target,message, cbody,countlist,current_rec+1,ccount);
+            if (cbody->mm_type==MAILMIME_MULTIPLE) {
+                countlist = recList;
+            }
             ++ccount;
         }
     }
