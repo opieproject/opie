@@ -6,7 +6,7 @@ SOURCES         = keyboard.cpp \
                   keyboardimpl.cpp
 TARGET          = qjumpx
 DESTDIR         = ../../plugins/inputmethods
-INCLUDEPATH    += ../../include/qpe
-DEPENDPATH     += ../../include/qpe
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH      += $(OPIEDIR)/include
 LIBS           += -lqpe
 VERSION         = 1.0.0
