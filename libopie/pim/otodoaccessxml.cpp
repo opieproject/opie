@@ -445,7 +445,6 @@ public:
      *
      */
     int compareItems( Item d1, Item d2 ) {
-        qWarning("compare items");
         int ret =0;
         OTodoXMLContainer* con1 = (OTodoXMLContainer*)d1;
         OTodoXMLContainer* con2 = (OTodoXMLContainer*)d2;
@@ -453,7 +452,6 @@ public:
         /* same item */
         if ( con1->todo.uid() == con2->todo.uid() )
             return 0;
-        qWarning("m_sort %d", m_sort );
 
         switch ( m_sort ) {
             /* completed */
@@ -487,6 +485,8 @@ public:
             if ( con1->todo.hasDueDate() &&
                  con2->todo.hasDueDate() )
                 ret = con1->todo.dueDate().daysTo( con2->todo.dueDate() );
+
+
             else if ( con1->todo.hasDueDate() )
                 ret = -1;
             else if ( con2->todo.hasDueDate() )
@@ -511,21 +511,21 @@ public:
 
 QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
                                     int sortFilter,  int cat ) {
+    qWarning("sorted! %d cat",  cat);
     OTodoXMLVector vector(m_events.count(), asc,sortOrder );
     QMap<int, OTodo>::Iterator it;
     int item = 0;
 
     bool bCat = sortFilter & 1 ? true : false;
-    bool bOver = sortFilter & 0 ? true : false;
     bool bOnly = sortFilter & 2 ? true : false;
     for ( it = m_events.begin(); it != m_events.end(); ++it ) {
 
         /* show category */
-        if ( bCat )
+        if ( bCat && cat != 0)
             if (!(*it).categories().contains( cat ) )
                 continue;
         /* isOverdue but we should not show overdue */
-        if ( (*it).isOverdue() && ( !bOver || !bOnly ) )
+        if ( (*it).isOverdue() &&  !bOnly  )
             continue;
         if ( !(*it).isOverdue() && bOnly )
             continue;
@@ -544,5 +544,6 @@ QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
     for (uint i= 0; i < vector.count(); i++ ) {
         array[i] = ( vector.at(i) )->todo.uid();
     }
+    qWarning("array count = %d %d", array.count(), vector.count() );
     return array;
 };
