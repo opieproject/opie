@@ -112,6 +112,11 @@ public:
 	    if ( oldbsy )
 		oldbsy-> repaint ( );
 	
+	    if ( busytimer ) {
+		killTimer ( busytimer );
+	        busytimer = 0;
+	    }
+	    
 	    if ( bsy ) {
 		QPixmap *src = bsy-> QIconViewItem::pixmap();
 	    	for ( int i = 0; i <= 5; i++ ) {
@@ -142,19 +147,15 @@ public:
 
 		    bpm [i].convertFromImage( img );
 		}
+		    
 		if ( busyType == BIT_Blinking ) {
 		    busystate = 0;	
-		    if ( busytimer )
-			killTimer ( busytimer );
 		    busytimer = startTimer ( 200 );
 		}
-		else
+		else {		    
 		    busystate = 3;
+		}
 		timerEvent ( 0 );
-	    }
-	    else {
-		killTimer ( busytimer );
-		busytimer = 0;
 	    }
 	}
     }
@@ -332,6 +333,47 @@ protected:
 	}
     }
 
+
+    // flicker free redrawing of busy indicator
+    // code was taken from QScrollView::viewportPaintEvent
+	void viewportPaintEvent( QPaintEvent* pe )
+	{
+		static QPixmap *pix = new QPixmap ( );
+
+		QWidget* vp = viewport();
+
+		if ( vp-> size ( ) != pix-> size ( ))
+			pix-> resize ( vp-> size ( ));
+
+		QPainter p(pix, vp);
+		QRect r = pe->rect();
+		if ( clipper ( ) != vp ) {
+			QRect rr(
+				-vp->x(), -vp->y(),
+				clipper()->width(), clipper()->height()
+			);
+			r &= rr;
+			if ( r.isValid() ) {
+				int ex = r.x() + vp->x() + contentsX();
+				int ey = r.y() + vp->y() + contentsY();
+				int ew = r.width();
+				int eh = r.height();
+				drawContentsOffset(&p,
+					contentsX()+vp->x(),
+					contentsY()+vp->y(),
+					ex, ey, ew, eh);
+			}
+		} else {
+			r &= clipper()->rect();
+			int ex = r.x() + contentsX();
+			int ey = r.y() + contentsY();
+			int ew = r.width();
+			int eh = r.height();
+			drawContentsOffset(&p, contentsX(), contentsY(), ex, ey, ew, eh);
+		}
+		bitBlt ( vp, r.topLeft(), pix, r );
+	}
+                                                                                                                                                                                     
 private:
     QList<AppLnk> hidden;
     QDict<void> mimes;
@@ -931,3 +973,4 @@ void LauncherView::setBusyIndicatorType ( const QString &type )
     else
 	icons-> setBusyIndicatorType ( BIT_Normal );
 }
+
