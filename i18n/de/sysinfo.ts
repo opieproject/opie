@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>LoadInfo</name>
     <message>
@@ -263,7 +264,7 @@ Clicken Sie und halten Sie den Stylus um weitere Prozessinformationen angezeigt 
     </message>
     <message>
         <source>Process</source>
-        <translation>Prozess</translation>
+        <translation>Prozesse</translation>
     </message>
     <message>
         <source>Version</source>

@@ -468,34 +468,6 @@ Libere memoria e intételo de nuevo.</translation>
         <translation>AM</translation>
     </message>
     <message>
-        <source>Mon</source>
-        <translation>Lun</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation>Mar</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation>Mie</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation>Jue</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation>Vie</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation>Sáb</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation>Dom</translation>
-    </message>
-    <message>
         <source>Are you sure you want to delete
  %1?</source>
         <translation>¿Seguro que quiere borrar
@@ -851,6 +823,37 @@ Libere memoria e intételo de nuevo.</translation>
     <message>
         <source>None</source>
         <translation>Ninguno</translation>
+    </message>
+</context>
+<context>
+    <name>TimeString</name>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">Lun</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">Mar</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">Mie</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">Jue</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">Vie</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">Sáb</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">Dom</translation>
     </message>
 </context>
 <context>

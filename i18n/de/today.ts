@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Please fill out the business card</source>
-        <translation>Bitte füllen Sie die Visitenkarte aus</translation>
+        <translation>Bitte füllen Sie Ihre Visitenkarte aus</translation>
     </message>
     <message>
         <source>No plugins found</source>
@@ -88,7 +88,7 @@ automatisch laden?
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation>Wieviele Minuten war der PDA ausgeschaltet bevor Autostart nach dem Einschalten aktiv wird</translation>
+        <translation>Der Autostart wird erst aktivt, wenn das Gerät über den eingestellten Zeitraum hinaus ausgeschaltet war.</translation>
     </message>
     <message>
         <source>Icon size</source>

@@ -468,34 +468,6 @@ Zwolnij wiecej pamieci</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Mon</source>
-        <translation>Pon</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation>Wto</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation>Sro</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation>Czw</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation>Pia</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation>Sob</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation>Nie</translation>
-    </message>
-    <message>
         <source>Are you sure you want to delete
  %1?</source>
         <translation>Jestes pewnien ze chces zusunac
@@ -851,6 +823,37 @@ Zwolnij wiecej pamieci</translation>
     <message>
         <source>None</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeString</name>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">Pon</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">Wto</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">Sro</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">Czw</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">Pia</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">Sob</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">Nie</translation>
     </message>
 </context>
 <context>

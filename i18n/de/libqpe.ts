@@ -40,6 +40,10 @@
         <source>New Category</source>
         <translation>Neue Kategorie</translation>
     </message>
+    <message>
+        <source>New Category </source>
+        <translation>Neue Kategorie</translation>
+    </message>
 </context>
 <context>
     <name>CategoryEditBase</name>
@@ -470,34 +474,6 @@ frei und versuchen Sie es noch einmal
         <translation>AM</translation>
     </message>
     <message>
-        <source>Mon</source>
-        <translation>Mon</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation>Die</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation>Mi</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation>Do</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation>Fr</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation>Sa</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation>So</translation>
-    </message>
-    <message>
         <source>Are you sure you want to delete
  %1?</source>
         <translation>Wollen Sie %1 wirklich entfernen ?</translation>
@@ -852,6 +828,37 @@ frei und versuchen Sie es noch einmal
     <message>
         <source>None</source>
         <translation>Keine</translation>
+    </message>
+</context>
+<context>
+    <name>TimeString</name>
+    <message>
+        <source>Mon</source>
+        <translation>Mon</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation>Die</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation>Mit</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation>Don</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation>Fre</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation>Sam</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation>Son</translation>
     </message>
 </context>
 <context>

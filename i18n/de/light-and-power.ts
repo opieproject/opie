@@ -134,7 +134,7 @@
     </message>
     <message>
         <source>Light</source>
-        <translation>Licht</translation>
+        <translation>Hell</translation>
     </message>
     <message>
         <source>Steps</source>

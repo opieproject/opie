@@ -460,34 +460,6 @@ Free some memory and try again.</source>
         <translation>AM</translation>
     </message>
     <message>
-        <source>Mon</source>
-        <translation>Seg</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation>Ter</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation>Qua</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation>Qui</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation>Sex</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation>Sáb</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation>Dom</translation>
-    </message>
-    <message>
         <source>Are you sure you want to delete
  %1?</source>
         <translation type="unfinished"></translation>
@@ -842,6 +814,37 @@ Free some memory and try again.</source>
     <message>
         <source>None</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeString</name>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">Seg</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">Ter</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">Qua</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">Qui</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">Sex</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">Sáb</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">Dom</translation>
     </message>
 </context>
 <context>

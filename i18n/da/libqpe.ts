@@ -473,34 +473,6 @@ Frigør noget hukommelse og prøv igen.</translation>
         <translation></translation>
     </message>
     <message>
-        <source>Mon</source>
-        <translation>Man</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation>Tir</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation>Ons</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation>Tor</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation>Fre</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation>Lør</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation>Søn</translation>
-    </message>
-    <message>
         <source>Are you sure you want to delete
  %1?</source>
         <translation>Er du sikker på du vil slette
@@ -852,6 +824,37 @@ Frigør noget hukommelse og prøv igen.</translation>
     <message>
         <source>None</source>
         <translation>Ingen</translation>
+    </message>
+</context>
+<context>
+    <name>TimeString</name>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">Man</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">Tir</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">Ons</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">Tor</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">Fre</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">Lør</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">Søn</translation>
     </message>
 </context>
 <context>

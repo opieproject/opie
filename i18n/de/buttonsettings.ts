@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>ButtonSettings</name>
     <message>
@@ -7,15 +8,15 @@
     </message>
     <message>
         <source>&lt;center&gt;Press or hold the button you want to remap.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Drücken Sie oder Halten Sie die Taste, die Sie ändern möchten&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;Drücken Sie oder halten Sie die Taste, die Sie ändern möchten&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Press:</source>
-        <translation>Gedrück:</translation>
+        <translation>Gedrückt: </translation>
     </message>
     <message>
         <source>Hold:</source>
-        <translation>Gehalten:</translation>
+        <translation>Gehalten: </translation>
     </message>
     <message>
         <source>Beam VCard</source>
@@ -47,15 +48,15 @@
     </message>
     <message>
         <source>&lt;nobr&gt;Show &lt;b&gt;%1&lt;/b&gt;&lt;/nobr&gt;</source>
-        <translation>&lt;nobr&gt;Anzeige &lt;b&gt;%1&gt;&lt;/b&gt;&lt;/nobr&gt;</translation>
+        <translation>&lt;nobr&gt;Anzeige &lt;b&gt;%1&lt;/b&gt;&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Call &lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</source>
-        <translation>&lt;nobr&gt;Aufruf von &lt;b&gt;%1&gt;&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
+        <translation>&lt;nobr&gt;Aufruf von &lt;b&gt;%1&lt;/b&gt;: &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Call &lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</source>
-        <translation>&lt;nobr&gt;Aufruf von &lt;b&gt;%1&gt;&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
+        <translation>&lt;nobr&gt;Aufruf von &lt;b&gt;%1&lt;/b&gt; &lt;i&gt;%2&lt;/i&gt;&lt;/nobr&gt;</translation>
     </message>
 </context>
 <context>

@@ -468,34 +468,6 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
         <translation>AM</translation>
     </message>
     <message>
-        <source>Mon</source>
-        <translation>Pon</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation>Tor</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation>Sre</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation>Čet</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation>Pet</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation>Sob</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation>Ned</translation>
-    </message>
-    <message>
         <source>Are you sure you want to delete
  %1?</source>
         <translation>Ste prepričani, da želite izbrisati
@@ -851,6 +823,37 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     <message>
         <source>None</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeString</name>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">Pon</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">Tor</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">Sre</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">Čet</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">Pet</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">Sob</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">Ned</translation>
     </message>
 </context>
 <context>

@@ -469,34 +469,6 @@ riprovare.</translation>
         <translation>AM</translation>
     </message>
     <message>
-        <source>Mon</source>
-        <translation>Lun</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation>Mar</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation>Mer</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation>Gio</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation>Ven</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation>Sab</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation>Dom</translation>
-    </message>
-    <message>
         <source>Are you sure you want to delete
  %1?</source>
         <translation>Sei sicuro di voler cancellare
@@ -852,6 +824,37 @@ riprovare.</translation>
     <message>
         <source>None</source>
         <translation>Nessuna</translation>
+    </message>
+</context>
+<context>
+    <name>TimeString</name>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished">Lun</translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished">Mar</translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished">Mer</translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished">Gio</translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished">Ven</translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished">Sab</translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished">Dom</translation>
     </message>
 </context>
 <context>

@@ -3,7 +3,7 @@
     <name>Checkbook</name>
     <message>
         <source>Checkbook</source>
-        <translation>Kontopbuch</translation>
+        <translation>Kontobuch</translation>
     </message>
     <message>
         <source>New checkbook</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Checking</source>
-        <translation>Schecks</translation>
+        <translation>Rechnung</translation>
     </message>
     <message>
         <source>CD</source>
@@ -63,7 +63,7 @@
     </message>
     <message>
         <source>Bank:</source>
-        <translation>Bank:</translation>
+        <translation>Bank: </translation>
     </message>
     <message>
         <source>Enter name of the bank for this checkbook here.</source>
@@ -71,7 +71,7 @@
     </message>
     <message>
         <source>Account number:</source>
-        <translation>Kontonummer:</translation>
+        <translation>Kontonummer: </translation>
     </message>
     <message>
         <source>Enter account number for this checkbook here.</source>
@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>PIN number:</source>
-        <translation>PIN:</translation>
+        <translation>PIN: </translation>
     </message>
     <message>
         <source>Enter PIN number for this checkbook here.</source>
@@ -87,7 +87,7 @@
     </message>
     <message>
         <source>Starting balance:</source>
-        <translation>Startguthaben:</translation>
+        <translation>Startguthaben: </translation>
     </message>
     <message>
         <source>Enter the initial balance for this checkbook here.</source>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Notizen:</translation>
+        <translation>Notizen: </translation>
     </message>
     <message>
         <source>Enter any additional information for this checkbook here.</source>
@@ -166,11 +166,11 @@ Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</tra
     </message>
     <message>
         <source>Withdrawals by category</source>
-        <translation>Ausgaben nach Kategorie</translation>
+        <translation>Ausgaben n. Kategorie</translation>
     </message>
     <message>
         <source>Deposits by category</source>
-        <translation>Einlagen nach Kategorie</translation>
+        <translation>Einnahmen n. Kategorie</translation>
     </message>
     <message>
         <source>Draw</source>
@@ -206,7 +206,7 @@ Um Einträge nach einem Feld zu sortieren klicken Sie auf den Spaltennamen.</tra
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation>Bitte geben Sie ein Passwort ein:</translation>
+        <translation>Bitte geben Sie ein Passwort ein: </translation>
     </message>
     <message>
         <source>Confirm password</source>
@@ -329,7 +329,7 @@ Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Konto-menü wählen.</trans
     <name>Transaction</name>
     <message>
         <source>Transaction for </source>
-        <translation>Transaktion für</translation>
+        <translation>Transaktion für </translation>
     </message>
     <message>
         <source>Withdrawal</source>
@@ -345,7 +345,7 @@ Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Konto-menü wählen.</trans
     </message>
     <message>
         <source>Date:</source>
-        <translation>Datum:</translation>
+        <translation>Datum: </translation>
     </message>
     <message>
         <source>Select date of transaction here.</source>
@@ -353,7 +353,7 @@ Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Konto-menü wählen.</trans
     </message>
     <message>
         <source>Number:</source>
-        <translation>Nummer:</translation>
+        <translation>Nummer: </translation>
     </message>
     <message>
         <source>Enter check number here.</source>
@@ -361,7 +361,7 @@ Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Konto-menü wählen.</trans
     </message>
     <message>
         <source>Description:</source>
-        <translation>Beschreibung:</translation>
+        <translation>Beschreibung: </translation>
     </message>
     <message>
         <source>Enter description of transaction here.</source>
@@ -369,7 +369,7 @@ Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Konto-menü wählen.</trans
     </message>
     <message>
         <source>Category:</source>
-        <translation>Kategorie:</translation>
+        <translation>Kategorie: </translation>
     </message>
     <message>
         <source>Select transaction category here.</source>
@@ -377,7 +377,7 @@ Sie können auch &lt;b&gt;Löschen&lt;/b&gt; aus dem Konto-menü wählen.</trans
     </message>
     <message>
         <source>Type:</source>
-        <translation>Typ:</translation>
+        <translation>Typ: </translation>
     </message>
     <message>
         <source>Select transaction type here.
@@ -388,7 +388,7 @@ Die verfügbaren Optionen hängen davon ab, ob es sich um eine Einnahme oder Aus
     </message>
     <message>
         <source>Amount:</source>
-        <translation>Wert:</translation>
+        <translation>Menge: </translation>
     </message>
     <message>
         <source>Enter the amount of transaction here.
@@ -399,7 +399,7 @@ Der eingegebene sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Fee:</source>
-        <translation>Gebühr:</translation>
+        <translation>Gebühr: </translation>
     </message>
     <message>
         <source>Enter any fee amount assoiciated with this transaction.
@@ -410,7 +410,7 @@ Der Wer der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Notizen:</translation>
+        <translation>Notizen: </translation>
     </message>
     <message>
         <source>Enter any additional information for this transaction here.</source>
@@ -458,7 +458,7 @@ Der Wer der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation>Verschiedenes</translation>
+        <translation>Versch.</translation>
     </message>
     <message>
         <source>Movies</source>
@@ -474,7 +474,7 @@ Der Wer der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Debit Charge</source>
-        <translation>Schuldzinsen</translation>
+        <translation>Abzahlung</translation>
     </message>
     <message>
         <source>Written Check</source>
@@ -498,7 +498,7 @@ Der Wer der Gebühr sollte immer positiv sein.</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation>Versch. Kreditsachen</translation>
+        <translation>Kreditsache</translation>
     </message>
     <message>
         <source>Automatic Payment</source>

@@ -20,7 +20,7 @@
     </message>
     <message>
         <source> seconds</source>
-        <translation>sekunden</translation>
+        <translation> Sekunden</translation>
     </message>
     <message>
         <source>last [h]</source>
@@ -32,11 +32,11 @@
     </message>
     <message>
         <source>shift [s/h]</source>
-        <translation>Verschiebung [s/h]</translation>
+        <translation>Differenz [s/h]</translation>
     </message>
     <message>
         <source> s/h</source>
-        <translation>s/h</translation>
+        <translation> s/h</translation>
     </message>
     <message>
         <source>Get time from network</source>
@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Set predicted time: </source>
-        <translation>Berechnete Zeit:</translation>
+        <translation>Zeitvorschlag:</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
@@ -52,7 +52,7 @@
     </message>
     <message>
         <source>Predict</source>
-        <translation>Voraussagung</translation>
+        <translation>Vorschlag</translation>
     </message>
     <message>
         <source>NTP</source>
@@ -123,11 +123,11 @@
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation>Setze Voraussagung</translation>
+        <translation>Vorschlag setzen</translation>
     </message>
     <message>
         <source>Predict time</source>
-        <translation>Zeitvoraussage</translation>
+        <translation>Zeitvorschlag</translation>
     </message>
     <message>
         <source>Use</source>
@@ -151,15 +151,15 @@
     </message>
     <message>
         <source>NTP tries to syncronises the clock with the network.</source>
-        <translation>NTP versucht die Uhr mit dem Netz abzugleichen.</translation>
+        <translation>NTP-Abgleich mit dem Netzserver</translation>
     </message>
     <message>
         <source>Insure a delay of</source>
-        <translation>Gewährleiste Verzögerung von</translation>
+        <translation>Mindestdifferenz </translation>
     </message>
     <message>
         <source>a new NTP lookup will be used to predict the time.</source>
-        <translation>Neuer NTP-Abgleich wird zur Voraussage verwendent</translation>
+        <translation>NTP-Abgleich wird als Vorschlag verwendet.</translation>
     </message>
     <message>
         <source>Set time</source>
@@ -179,7 +179,7 @@
     </message>
     <message>
         <source>Predict</source>
-        <translation>Voraussage</translation>
+        <translation>Vorschlag</translation>
     </message>
     <message>
         <source>NTP</source>
