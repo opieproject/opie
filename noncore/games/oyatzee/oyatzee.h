@@ -12,9 +12,13 @@ class Dice;
 class Game;
 class Scoreboard;
 class DiceWidget;
+class Resultboard;
+class Player;
 
 typedef QList<Dice> dicesList;
+typedef QList<Resultboard> resultboardList;
 typedef QValueList<int> QValueListInt;
+typedef QList<Player> playerList;
 
 class OYatzee : public QMainWindow {
 	Q_OBJECT
@@ -54,6 +58,9 @@ class OYatzee : public QMainWindow {
 		int numOfPlayers;
 		int numOfRounds;
 
+		/*
+		 * Check what posibilities the player currently has
+		 */
 		void detectPosibilities();
 		void displayPossibilites();
 
@@ -94,15 +101,57 @@ class DiceWidget : public QWidget
 		dicesList diceList;
 };
 
+
+class Board : public QWidget
+{
+	Q_OBJECT
+	public:
+		Board( QWidget *parent = 0, const char* name = 0 );
+
+	protected:
+		virtual void paintEvent(  QPaintEvent *e );
+};
+
+class Possibilityboard : public Board
+{
+	Q_OBJECT
+
+	public:
+		Possibilityboard( QWidget *parent = 0, const char* name = 0 );
+	
+	protected:
+		virtual void paintEvent(  QPaintEvent *e );
+};
+
+class Resultboard : public Board
+{
+	Q_OBJECT
+
+	public:
+		Resultboard( QString playerName , QWidget *parent = 0, const char* name = 0 );
+		QString pName;
+
+	protected:
+		virtual void paintEvent(  QPaintEvent *e );
+};
+
+
 class Scoreboard : public QWidget
 {
 	Q_OBJECT
 	public:
-		Scoreboard( QWidget *parent = 0, const char* name = 0 );
+		Scoreboard( playerList ps, QWidget *parent = 0, const char* name = 0 );
 
+		Possibilityboard *pb;
+		resultboardList rbList;
+		playerList ps_;
+
+		void createResultboards(const int);
+		
 	protected:
 		void paintEvent(  QPaintEvent *e );
 };
+
 
 class Player
 {
@@ -111,6 +160,13 @@ class Player
 
 		QString playerName;
 		int totalPoints;
+};
+
+class Game
+{
+	public:
+		Game( playerList pla );
+		playerList players;
 };
 
 #endif // WORDGAME_H

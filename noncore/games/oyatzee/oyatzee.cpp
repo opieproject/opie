@@ -37,18 +37,27 @@ OYatzee::OYatzee( QWidget *parent , const char *name, WFlags fl ) : QMainWindow(
 	QWidget *thing = new QWidget( this );
 	setCentralWidget( thing );
 	
+
+	setPlayerNumber( 4 );
+	setRoundsNumber( 1 );
+	
+	playerList ps;
+	ps.append( new Player( "Carsten" ) );
+	ps.append( new Player( "Julia" ) );
+	ps.append( new Player( "Christine" ) );
+	ps.append( new Player( "Stephan" ) );
+
+	Game *g = new Game( ps );
+	
+	
 	QVBoxLayout *vbox = new QVBoxLayout( thing );
 
-	sb = new Scoreboard( thing , "sb" );
+	sb = new Scoreboard( ps, thing , "sb" );
 	dw = new DiceWidget( thing , "dw" );
+	connect( dw->rollButton, SIGNAL( clicked() ), this , SLOT( slotRollDices() ) );
 	
 	vbox->addWidget( sb );
 	vbox->addWidget( dw );
-
-	setPlayerNumber( 2 );
-	setRoundsNumber( 1 );
-	
-	connect( dw->rollButton, SIGNAL( clicked() ), this , SLOT( slotRollDices() ) );
 }
 
 OYatzee::~OYatzee()
@@ -160,8 +169,6 @@ void OYatzee::detectPosibilities()
 
 void OYatzee::displayPossibilites()
 {
-	qDebug( "running displayPossibilites(), %d item", posibilities.count() );
-	
 	for ( QValueListInt::Iterator it = posibilities.begin() ; it != posibilities.end(); ++it )
 	{
 		qDebug( QString::number( *it ) );
@@ -240,8 +247,36 @@ void OYatzee::slotRollDices()
 /*
  * Scoreboard
  */
-Scoreboard::Scoreboard( QWidget *parent, const char *name ) : QWidget( parent , name )
+Scoreboard::Scoreboard( playerList ps, QWidget *parent, const char *name ) : QWidget( parent , name )
+{ 
+	ps_ = ps;
+
+	pb = new Possibilityboard( this , "pb" );
+
+	createResultboards( 4 );
+
+	QHBoxLayout *hbox = new QHBoxLayout( this );
+
+	hbox->addWidget( pb );
+
+	hbox->addSpacing( 25 );
+
+	Resultboard *r = rbList.first();
+	
+	for ( ; r != 0 ; r = rbList.next() )
+	{
+		hbox->addWidget( r );
+	}
+}
+
+void Scoreboard::createResultboards(const int num)
 {
+	Player *p = ps_.first();
+	for ( int i = 0 ; i < num ; ++i , p = ps_.next() )
+	{
+		QString n = p->playerName;
+		rbList.append( new Resultboard( n , this ) );
+	}
 }
 
 void Scoreboard::paintEvent( QPaintEvent * )
@@ -359,5 +394,64 @@ DiceWidget::DiceWidget( QWidget *parent , const char *name ) : QWidget(  parent 
 Player::Player( QString name )
 {
 	playerName = name;
+}
+
+
+/*
+ * Board
+ */
+Board::Board( QWidget *parent , const char* name ) : QWidget ( parent , name )
+{
+}
+
+void Board::paintEvent( QPaintEvent* )
+{
+	QPainter p;
+	p.begin( this );
+
+	p.drawRect( 0,0, this->width() , this->height() );
+}
+
+/*
+ * Resultboard
+ */
+
+Resultboard::Resultboard( QString playerName , QWidget *parent , const char* name ) : Board ( parent , name )
+{
+	pName = playerName;
+}
+
+void Resultboard::paintEvent( QPaintEvent* )
+{
+	QPainter p;
+	p.begin( this );
+
+	p.drawText( 10,10, pName );
+	p.drawRect( 0,0, this->width() , this->height() );
+}
+
+/*
+ * Possibilityboard
+ */
+
+Possibilityboard::Possibilityboard( QWidget *parent , const char* name ) : Board ( parent , name )
+{
+}
+
+void Possibilityboard::paintEvent( QPaintEvent* )
+{
+	QPainter p;
+	p.begin( this );
+
+	p.drawRect( 0,0, this->width() , this->height() );
+}
+
+/*
+ * Game
+ */
+
+Game::Game( playerList pla )
+{
+	players = pla;
 }
 
