@@ -3,342 +3,342 @@
     <name>AccountView</name>
     <message>
         <source>Error creating new Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al crear un nuevo Directorio</translation>
     </message>
     <message>
         <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Error al crear&lt;br&gt;un nuevo directorio - saliendo.&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
     <name>AddressPicker</name>
     <message>
         <source>There are no entries in the addressbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay entradas en la libreta de direcciones.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to select at least one address entry.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Debe seleccionar al menos una entrada de la libreta de direcciones.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
     <name>AddressPickerUI</name>
     <message>
         <source>Address Picker</source>
-        <translation type="unfinished"></translation>
+        <translation>Selector de direcciones</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 <context>
     <name>ComposeMail</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>Problem</source>
-        <translation type="unfinished"></translation>
+        <translation>Problema</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please create an SMTP account first.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Por favor cree una cuenta SMTP antes.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select a File.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Por favor seleccione un Fichero.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Sending mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviando correo</translation>
     </message>
     <message>
         <source>Store message</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar mensajes</translation>
     </message>
     <message>
         <source>Store message into drafts?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Guardar mensajes en la carpeta de borradores?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>&lt;center&gt;Attachments will not be stored in &quot;Draft&quot; folder&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Los Adjuntos no serán almacenados en el directorio &quot;Borradores&quot;&lt;/center&gt;</translation>
     </message>
     <message>
         <source>No Receiver specified</source>
-        <translation type="unfinished"></translation>
+        <translation>No se ha especificado el Destinatario</translation>
     </message>
 </context>
 <context>
     <name>ComposeMailUI</name>
     <message>
         <source>Compose Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Escribir Mensaje</translation>
     </message>
     <message>
         <source>send later</source>
-        <translation type="unfinished"></translation>
+        <translation>enviar despúes</translation>
     </message>
     <message>
         <source>use:</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar:</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Correo</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Asunto</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>De</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Para</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones</translation>
     </message>
     <message>
         <source>Reply-To</source>
-        <translation type="unfinished"></translation>
+        <translation>Responder-A</translation>
     </message>
     <message>
         <source>BCC</source>
-        <translation type="unfinished"></translation>
+        <translation>BCC</translation>
     </message>
     <message>
         <source>Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Firma</translation>
     </message>
     <message>
         <source>CC</source>
-        <translation type="unfinished"></translation>
+        <translation>CC</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>Adjunto</translation>
     </message>
     <message>
         <source>Delete File</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar Fichero</translation>
     </message>
     <message>
         <source>Add File</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir Fichero</translation>
     </message>
 </context>
 <context>
     <name>EditAccounts</name>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuenta</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Pregunta</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete the selected Account?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;¿Está seguro de que quiere borrar la cuenta seleccionada?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select an account.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Por favor seleccione una cuenta.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
     <name>EditAccountsUI</name>
     <message>
         <source>Configure Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar Cuentas</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Correo</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de la Cuenta</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar</translation>
     </message>
     <message>
         <source>News</source>
-        <translation type="unfinished"></translation>
+        <translation>Noticias</translation>
     </message>
 </context>
 <context>
     <name>IMAPconfigUI</name>
     <message>
         <source>Configure IMAP</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar IMAP</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuario</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraseña</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Puerto</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidor</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de la Cuenta</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuenta</translation>
     </message>
     <message>
         <source>Prefix</source>
-        <translation type="unfinished"></translation>
+        <translation>Prefijo</translation>
     </message>
     <message>
         <source>ssh $SERVER exec</source>
-        <translation type="unfinished"></translation>
+        <translation>ssh $SERVER exec</translation>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar SSL:</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Correo</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración</translation>
     </message>
     <message>
         <source>Compose new mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Escribir mensaje nuevo</translation>
     </message>
     <message>
         <source>Send queued mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar mensajes encolados</translation>
     </message>
     <message>
         <source>Show/Hide folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar/Ocultar directorios</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar Correo</translation>
     </message>
     <message>
         <source>Edit settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar Configuración</translation>
     </message>
     <message>
         <source>Configure accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar Cuentas</translation>
     </message>
     <message>
         <source>Mailbox</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Asunto</translation>
     </message>
     <message>
         <source>Sender</source>
-        <translation type="unfinished"></translation>
+        <translation>Remitente</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha</translation>
     </message>
 </context>
 <context>
     <name>NNTPGroupsDlg</name>
     <message>
         <source>Subscribed newsgroups</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupos a los que está suscrito</translation>
     </message>
 </context>
 <context>
@@ -378,35 +378,35 @@ with that filter will be listed.</source>
     <name>NNTPconfigUI</name>
     <message>
         <source>Configure NNTP</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar NNTP</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Puerto</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre de la Cuenta</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Cuenta</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidor</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar SSL</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Usuario</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraseña</translation>
     </message>
     <message>
         <source>Use Login</source>
@@ -414,7 +414,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupos</translation>
     </message>
     <message>
         <source>Newsgroup</source>
@@ -422,22 +422,22 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Get newsgroup list from server</source>
-        <translation type="unfinished"></translation>
+        <translation>Obtener lista de grupos desde el servidor</translation>
     </message>
 </context>
 <context>
     <name>Newmdirdlgui</name>
     <message>
         <source>Enter directory name</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca el nombre del directorio</translation>
     </message>
     <message>
         <source>Directory name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre del Directorio:</translation>
     </message>
     <message>
         <source>Directory contains other subdirs</source>
-        <translation type="unfinished"></translation>
+        <translation>El Directorio contiene otros Subdirectorios</translation>
     </message>
 </context>
 <context>
@@ -597,23 +597,23 @@ with that filter will be listed.</source>
     <name>SelectMailTypeUI</name>
     <message>
         <source>Select Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar Tipo</translation>
     </message>
     <message>
         <source>Select Account Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar Tipo de Cuenta</translation>
     </message>
     <message>
         <source>IMAP</source>
-        <translation type="unfinished"></translation>
+        <translation>IMAP</translation>
     </message>
     <message>
         <source>POP3</source>
-        <translation type="unfinished"></translation>
+        <translation>POP3</translation>
     </message>
     <message>
         <source>SMTP</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP</translation>
     </message>
 </context>
 <context>
@@ -780,7 +780,7 @@ with that filter will be listed.</source>
     <name>selectsmtp</name>
     <message>
         <source>Select SMTP Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione la Cuenta SMTP</translation>
     </message>
 </context>
 <context>
