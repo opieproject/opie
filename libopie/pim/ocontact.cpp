@@ -663,8 +663,8 @@ QString OContact::find( int key ) const
 */
 QString OContact::findCustom( const QString & key ) const
 {
-  qDebug("find custom key >%s<",key.latint1());
-  qDebug("got >%s<",eMap[key].latint1());
+  qDebug("find custom key >%s<",key.latin1());
+  qDebug("got >%s<",eMap[key].latin1());
     return eMap[key];
 }
 
