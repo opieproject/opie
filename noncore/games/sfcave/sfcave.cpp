@@ -9,11 +9,12 @@
 #else
 #include <qapplication.h>
 #endif
+#include <qdir.h>
 
 #include "helpwindow.h"
 #include "sfcave.h"
 
-#define CAPTION "SFCave 1.8 by AndyQ"
+#define CAPTION "SFCave 1.10 by AndyQ"
 
 #define UP_THRUST               0.6
 #define NO_THRUST               0.8
@@ -135,6 +136,10 @@ SFCave :: SFCave( int spd, QWidget *w, char *name )
 #else
     resize( 240, 284 );
 #endif
+
+    replayFile = QDir::home().path();
+    replayFile += "/sfcave.replay";
+    printf( "%s\n", (const char *)replayFile );
 
     sWidth = width();
     sHeight = height();
@@ -683,10 +688,19 @@ void SFCave :: draw()
         if ( state == STATE_CRASHED )
         {
             QString text = "Press up or down to start";
-            p.drawText( (sWidth/2) - (fm.width( text )/2), 140, text );
+            p.drawText( (sWidth/2) - (fm.width( text )/2), 120, text );
 
-            text = "or press OK for menu";
-            p.drawText( (sWidth/2) - (fm.width( text )/2), 155, text );
+            text = "Press OK for menu";
+            p.drawText( (sWidth/2) - (fm.width( text )/2), 135, text );
+
+            text = "Press r to replay";
+            p.drawText( (sWidth/2) - (fm.width( text )/2), 150, text );
+                                                           
+            text = "Press s to save the replay";
+            p.drawText( (sWidth/2) - (fm.width( text )/2), 165, text );
+
+            text = "Press r to load a saved replay";
+            p.drawText( (sWidth/2) - (fm.width( text )/2), 180, text );
         }
         else
             crashLineLength ++;
@@ -867,6 +881,14 @@ void SFCave :: keyReleaseEvent( QKeyEvent *e )
                 if ( state == STATE_CRASHED )
                     state = STATE_NEWGAME;
                 break;
+
+            case Qt::Key_S:
+                saveReplay();
+                break;
+
+            case Qt::Key_L:
+                loadReplay();
+                break;
            default:
                 e->ignore();
                 break;
@@ -1000,4 +1022,75 @@ void SFCave :: saveScore()
     key += CURRENT_GAME_TYPE;
     cfg.writeEntry( key, highestScore[currentGameType] );
 #endif
+}
+
+void SFCave :: saveReplay()
+{
+    FILE *out;
+    out = fopen( (const char *)replayFile, "w" );
+    if ( !out )
+    {
+        printf( "Couldn't write to /home/root/sfcave.replay\n" );
+        return;
+    }
+
+    // Build up string of values
+    // Format is:: <landscape seed> <framenr> <framenr>.......
+    QString val;
+    val.sprintf( "%d ", currentSeed );
+    
+    QListIterator<int> it( replayList );
+    while( it.current() )
+    {
+        QString tmp;
+        tmp.sprintf( "%d ", (*it.current()) );
+        val += tmp;
+
+        ++it;
+    }
+    val += "\n";
+
+    QString line;
+    line.sprintf( "%d\n", val.length() );
+    fwrite( (const char *)line, 1, line.length(), out );
+    fwrite( (const char *)val, 1, val.length(), out );
+   
+    fclose( out );
+
+    printf( "Replay saved to %s\n", (const char *)replayFile );
+
+}
+
+void SFCave :: loadReplay()
+{
+    FILE *in = fopen( (const char *)replayFile, "r" );
+
+    // Read size of next line
+    char line[10+1];
+    fgets( line, 10, in );
+
+    int length = -1;
+    sscanf( line, "%d", &length );
+    char *data = new char[length+1];
+
+    fread( data, 1, length, in );
+
+    QString sep  = " ";
+    QStringList list = QStringList::split( sep, QString( data ) );
+    
+    // print it out
+    QStringList::Iterator it = list.begin();
+    currentSeed = (*it).toInt();
+    ++it;
+
+    replayList.clear();
+    for ( ; it != list.end(); ++it )
+    {
+        int v = (*it).toInt();
+        replayList.append( new int( v ) );
+    }
+
+    delete data;
+
+    fclose( in );
 }
