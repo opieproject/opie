@@ -31,6 +31,6 @@ SOURCES		= main.cpp \
 		  db/common.cpp
 INTERFACES	= ui/tvkeyedit_gen.ui
 TARGET		= tableviewer
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH     += $(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH     += $(OPIEDIR)/include
 LIBS	       += -lqpe

@@ -2,7 +2,7 @@ TEMPLATE	= app
 
 CONFIG		+= qt warn_on release
 
-DESTDIR		= $(QPEDIR)/bin
+DESTDIR		= $(OPIEDIR)/bin
 
 HEADERS		= TEWidget.h \
 		  TEScreen.h \
@@ -28,9 +28,9 @@ SOURCES		= TEScreen.cpp \
 
 TARGET		= embeddedkonsole
 
-INCLUDEPATH += $(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
 
-DEPENDPATH	+= $(QPEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
 
 LIBS            += -lqpe
 

@@ -6,7 +6,7 @@ CXX	=	$(SYSCONF_CXX) $(QT_CXX_MT)
 CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS)
 CC	=	$(SYSCONF_CC) $(QT_C_MT)
 CFLAGS	=	$(SYSCONF_CFLAGS)
-INCPATH =	-I$(QPEDIR)/include -I$(QPEDIR)/calibrate -I$(QPEDIR)/rsync
+INCPATH =	-I$(OPIEDIR)/include -I$(OPIEDIR)/calibrate -I$(OPIEDIR)/rsync
 LFLAGS	=	$(SYSCONF_LFLAGS_QT) $(SYSCONF_RPATH_QT) $(SYSCONF_LFLAGS) $(QT_LFLAGS_MT)
 LIBS	=	$(SUBLIBS) -lqpe -lcrypt $(SYSCONF_LIBS_QT) $(SYSCONF_LIBS) $(SYSCONF_LIBS_QTAPP)
 MOC	=	$(SYSCONF_MOC)
@@ -14,7 +14,7 @@ UIC	=	$(SYSCONF_UIC)
 
 ####### Target
 
-DESTDIR = $(QPEDIR)/bin/
+DESTDIR = $(OPIEDIR)/bin/
 VER_MAJ = 1
 VER_MIN = 0
 VER_PATCH = 0
@@ -43,24 +43,24 @@ HEADERS =	background.h \
 		qcopbridge.h \
 		packageslave.h \
 		irserver.h \
-		$(QPEDIR)/rsync/buf.h \
-		$(QPEDIR)/rsync/checksum.h \
-		$(QPEDIR)/rsync/command.h \
-		$(QPEDIR)/rsync/emit.h \
-		$(QPEDIR)/rsync/job.h \
-		$(QPEDIR)/rsync/netint.h \
-		$(QPEDIR)/rsync/protocol.h \
-		$(QPEDIR)/rsync/prototab.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/search.h \
-		$(QPEDIR)/rsync/stream.h \
-		$(QPEDIR)/rsync/sumset.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/types.h \
-		$(QPEDIR)/rsync/util.h \
-		$(QPEDIR)/rsync/whole.h \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/qrsync.h
+		$(OPIEDIR)/rsync/buf.h \
+		$(OPIEDIR)/rsync/checksum.h \
+		$(OPIEDIR)/rsync/command.h \
+		$(OPIEDIR)/rsync/emit.h \
+		$(OPIEDIR)/rsync/job.h \
+		$(OPIEDIR)/rsync/netint.h \
+		$(OPIEDIR)/rsync/protocol.h \
+		$(OPIEDIR)/rsync/prototab.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/search.h \
+		$(OPIEDIR)/rsync/stream.h \
+		$(OPIEDIR)/rsync/sumset.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/types.h \
+		$(OPIEDIR)/rsync/util.h \
+		$(OPIEDIR)/rsync/whole.h \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/qrsync.h
 SOURCES =	background.cpp \
 		desktop.cpp \
 		info.cpp \
@@ -75,39 +75,39 @@ SOURCES =	background.cpp \
 		shutdownimpl.cpp \
 		launcher.cpp \
 		launcherview.cpp \
-		$(QPEDIR)/calibrate/calibrate.cpp \
+		$(OPIEDIR)/calibrate/calibrate.cpp \
 		transferserver.cpp \
 		packageslave.cpp \
 		irserver.cpp \
 		qcopbridge.cpp \
 		startmenu.cpp \
 		main.cpp \
-		$(QPEDIR)/rsync/base64.c \
-		$(QPEDIR)/rsync/buf.c \
-		$(QPEDIR)/rsync/checksum.c \
-		$(QPEDIR)/rsync/command.c \
-		$(QPEDIR)/rsync/delta.c \
-		$(QPEDIR)/rsync/emit.c \
-		$(QPEDIR)/rsync/hex.c \
-		$(QPEDIR)/rsync/job.c \
-		$(QPEDIR)/rsync/mdfour.c \
-		$(QPEDIR)/rsync/mksum.c \
-		$(QPEDIR)/rsync/msg.c \
-		$(QPEDIR)/rsync/netint.c \
-		$(QPEDIR)/rsync/patch.c \
-		$(QPEDIR)/rsync/prototab.c \
-		$(QPEDIR)/rsync/readsums.c \
-		$(QPEDIR)/rsync/scoop.c \
-		$(QPEDIR)/rsync/search.c \
-		$(QPEDIR)/rsync/stats.c \
-		$(QPEDIR)/rsync/stream.c \
-		$(QPEDIR)/rsync/sumset.c \
-		$(QPEDIR)/rsync/trace.c \
-		$(QPEDIR)/rsync/tube.c \
-		$(QPEDIR)/rsync/util.c \
-		$(QPEDIR)/rsync/version.c \
-		$(QPEDIR)/rsync/whole.c \
-		$(QPEDIR)/rsync/qrsync.cpp
+		$(OPIEDIR)/rsync/base64.c \
+		$(OPIEDIR)/rsync/buf.c \
+		$(OPIEDIR)/rsync/checksum.c \
+		$(OPIEDIR)/rsync/command.c \
+		$(OPIEDIR)/rsync/delta.c \
+		$(OPIEDIR)/rsync/emit.c \
+		$(OPIEDIR)/rsync/hex.c \
+		$(OPIEDIR)/rsync/job.c \
+		$(OPIEDIR)/rsync/mdfour.c \
+		$(OPIEDIR)/rsync/mksum.c \
+		$(OPIEDIR)/rsync/msg.c \
+		$(OPIEDIR)/rsync/netint.c \
+		$(OPIEDIR)/rsync/patch.c \
+		$(OPIEDIR)/rsync/prototab.c \
+		$(OPIEDIR)/rsync/readsums.c \
+		$(OPIEDIR)/rsync/scoop.c \
+		$(OPIEDIR)/rsync/search.c \
+		$(OPIEDIR)/rsync/stats.c \
+		$(OPIEDIR)/rsync/stream.c \
+		$(OPIEDIR)/rsync/sumset.c \
+		$(OPIEDIR)/rsync/trace.c \
+		$(OPIEDIR)/rsync/tube.c \
+		$(OPIEDIR)/rsync/util.c \
+		$(OPIEDIR)/rsync/version.c \
+		$(OPIEDIR)/rsync/whole.c \
+		$(OPIEDIR)/rsync/qrsync.cpp
 OBJECTS =	background.o \
 		desktop.o \
 		info.o \
@@ -122,39 +122,39 @@ OBJECTS =	background.o \
 		shutdownimpl.o \
 		launcher.o \
 		launcherview.o \
-		$(QPEDIR)/calibrate/calibrate.o \
+		$(OPIEDIR)/calibrate/calibrate.o \
 		transferserver.o \
 		packageslave.o \
 		irserver.o \
 		qcopbridge.o \
 		startmenu.o \
 		main.o \
-		$(QPEDIR)/rsync/base64.o \
-		$(QPEDIR)/rsync/buf.o \
-		$(QPEDIR)/rsync/checksum.o \
-		$(QPEDIR)/rsync/command.o \
-		$(QPEDIR)/rsync/delta.o \
-		$(QPEDIR)/rsync/emit.o \
-		$(QPEDIR)/rsync/hex.o \
-		$(QPEDIR)/rsync/job.o \
-		$(QPEDIR)/rsync/mdfour.o \
-		$(QPEDIR)/rsync/mksum.o \
-		$(QPEDIR)/rsync/msg.o \
-		$(QPEDIR)/rsync/netint.o \
-		$(QPEDIR)/rsync/patch.o \
-		$(QPEDIR)/rsync/prototab.o \
-		$(QPEDIR)/rsync/readsums.o \
-		$(QPEDIR)/rsync/scoop.o \
-		$(QPEDIR)/rsync/search.o \
-		$(QPEDIR)/rsync/stats.o \
-		$(QPEDIR)/rsync/stream.o \
-		$(QPEDIR)/rsync/sumset.o \
-		$(QPEDIR)/rsync/trace.o \
-		$(QPEDIR)/rsync/tube.o \
-		$(QPEDIR)/rsync/util.o \
-		$(QPEDIR)/rsync/version.o \
-		$(QPEDIR)/rsync/whole.o \
-		$(QPEDIR)/rsync/qrsync.o \
+		$(OPIEDIR)/rsync/base64.o \
+		$(OPIEDIR)/rsync/buf.o \
+		$(OPIEDIR)/rsync/checksum.o \
+		$(OPIEDIR)/rsync/command.o \
+		$(OPIEDIR)/rsync/delta.o \
+		$(OPIEDIR)/rsync/emit.o \
+		$(OPIEDIR)/rsync/hex.o \
+		$(OPIEDIR)/rsync/job.o \
+		$(OPIEDIR)/rsync/mdfour.o \
+		$(OPIEDIR)/rsync/mksum.o \
+		$(OPIEDIR)/rsync/msg.o \
+		$(OPIEDIR)/rsync/netint.o \
+		$(OPIEDIR)/rsync/patch.o \
+		$(OPIEDIR)/rsync/prototab.o \
+		$(OPIEDIR)/rsync/readsums.o \
+		$(OPIEDIR)/rsync/scoop.o \
+		$(OPIEDIR)/rsync/search.o \
+		$(OPIEDIR)/rsync/stats.o \
+		$(OPIEDIR)/rsync/stream.o \
+		$(OPIEDIR)/rsync/sumset.o \
+		$(OPIEDIR)/rsync/trace.o \
+		$(OPIEDIR)/rsync/tube.o \
+		$(OPIEDIR)/rsync/util.o \
+		$(OPIEDIR)/rsync/version.o \
+		$(OPIEDIR)/rsync/whole.o \
+		$(OPIEDIR)/rsync/qrsync.o \
 		shutdown.o \
 		syncdialog.o
 INTERFACES =    shutdown.ui \
@@ -272,34 +272,34 @@ background.o: background.cpp \
 		desktop.h \
 		shutdownimpl.h \
 		shutdown.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
-		$(QPEDIR)/include/qpe/resource.h
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpe/resource.h
 
 desktop.o: desktop.cpp \
 		desktop.h \
 		shutdownimpl.h \
 		shutdown.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
 		info.h \
 		background.h \
 		launcher.h \
 		launcherview.h \
-		$(QPEDIR)/include/qpe/storage.h \
+		$(OPIEDIR)/include/qpe/storage.h \
 		mrulist.h \
-		$(QPEDIR)/include/qpe/applnk.h \
+		$(OPIEDIR)/include/qpe/applnk.h \
 		qcopbridge.h \
 		startmenu.h \
 		taskbar.h \
-		$(QPEDIR)/include/qpe/custom.h \
+		$(OPIEDIR)/include/qpe/custom.h \
 		transferserver.h \
 		irserver.h \
 		packageslave.h \
-		$(QPEDIR)/include/qpe/mimetype.h \
-		$(QPEDIR)/include/qpe/password.h \
-		$(QPEDIR)/include/qpe/config.h \
-		$(QPEDIR)/include/qpe/power.h \
-		$(QPEDIR)/include/qpe/qcopenvelope_qws.h \
-		$(QPEDIR)/include/qpe/global.h
+		$(OPIEDIR)/include/qpe/mimetype.h \
+		$(OPIEDIR)/include/qpe/password.h \
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/power.h \
+		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h \
+		$(OPIEDIR)/include/qpe/global.h
 
 info.o: info.cpp \
 		info.h \
@@ -307,47 +307,49 @@ info.o: info.cpp \
 		desktop.h \
 		shutdownimpl.h \
 		shutdown.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
-		$(QPEDIR)/include/qpe/resource.h \
-		$(QPEDIR)/include/qpe/version.h
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpe/resource.h \
+		$(OPIEDIR)/include/qpe/version.h
 
 appicons.o: appicons.cpp \
 		appicons.moc \
 		appicons.h \
-		$(QPEDIR)/include/qpe/qcopenvelope_qws.h
+		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h
 
 taskbar.o: taskbar.cpp \
 		startmenu.h \
 		inputmethods.h \
-		$(QPEDIR)/include/qpe/inputmethodinterface.h \
-		$(QPEDIR)/include/qpe/qcom.h \
-		$(QPEDIR)/include/qpe/quuid.h \
+		$(OPIEDIR)/include/qpe/inputmethodinterface.h \
+		$(OPIEDIR)/include/qpe/qcom.h \
+		$(OPIEDIR)/include/qpe/quuid.h \
 		mrulist.h \
-		$(QPEDIR)/include/qpe/applnk.h \
+		$(OPIEDIR)/include/qpe/applnk.h \
 		systray.h \
-		$(QPEDIR)/include/qpe/taskbarappletinterface.h \
-		$(QPEDIR)/calibrate/calibrate.h \
+		$(OPIEDIR)/include/qpe/taskbarappletinterface.h \
+		$(OPIEDIR)/calibrate/calibrate.h \
 		wait.h \
-		$(QPEDIR)/include/qpe/resource.h \
+		$(OPIEDIR)/include/qpe/resource.h \
 		appicons.h \
 		taskbar.h \
-		$(QPEDIR)/include/qpe/custom.h \
+		$(OPIEDIR)/include/qpe/custom.h \
 		desktop.h \
 		shutdownimpl.h \
 		shutdown.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
-		$(QPEDIR)/include/qpe/qcopenvelope_qws.h \
-		$(QPEDIR)/include/qpe/global.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h \
+		$(OPIEDIR)/include/qpe/global.h \
 		../taskbar/apps.h \
 		../addressbook/addressbook.h \
 		../datebook/datebook.h \
-		$(QPEDIR)/include/qpe/datebookdb.h \
-		$(QPEDIR)/include/qpe/event.h \
-		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(OPIEDIR)/include/qpe/datebookdb.h \
+		$(OPIEDIR)/include/qpe/event.h \
+		$(OPIEDIR)/include/qpe/palmtoprecord.h \
+		$(OPIEDIR)/include/qpe/timeconversion.h \
+		$(OPIEDIR)/include/qpe/qpcglobal.h \
 		../helpbrowser/helpbrowser.h \
 		../minesweep/minesweep.h \
 		../textedit/textedit.h \
-		$(QPEDIR)/include/qpe/filemanager.h \
+		$(OPIEDIR)/include/qpe/filemanager.h \
 		../todo/mainwindow.h \
 		../citytime/citytime.h \
 		../clock/clock.h \
@@ -355,362 +357,370 @@ taskbar.o: taskbar.cpp \
 		../sysinfo/sysinfo.h \
 		../settings/appearance/settings.h \
 		../settings/systemtime/settime.h \
-		$(QPEDIR)/include/qpe/timestring.h \
+		$(OPIEDIR)/include/qpe/timestring.h \
 		../filebrowser/filebrowser.h \
 		../solitaire/canvascardwindow.h \
 		../snake/interface.h \
 		../parashoot/interface.h \
-		$(QPEDIR)/include/qpe/sound.h \
+		$(OPIEDIR)/include/qpe/sound.h \
 		../mpegplayer/mediaplayer.h \
-		$(QPEDIR)/include/qpe/qlibrary.h \
+		$(OPIEDIR)/include/qpe/qlibrary.h \
 		../embeddedkonsole/konsole.h \
 		../wordgame/wordgame.h \
-		$(QPEDIR)/include/qpe/qdawg.h
+		$(OPIEDIR)/include/qpe/qdawg.h
 
 sidething.o: sidething.cpp \
 		sidething.h \
 		startmenu.h \
-		$(QPEDIR)/include/qpe/resource.h
+		$(OPIEDIR)/include/qpe/resource.h
 
 mrulist.o: mrulist.cpp \
 		mrulist.h \
-		$(QPEDIR)/include/qpe/applnk.h \
-		$(QPEDIR)/include/qpe/global.h \
-		$(QPEDIR)/include/qpe/resource.h
+		$(OPIEDIR)/include/qpe/applnk.h \
+		$(OPIEDIR)/include/qpe/global.h \
+		$(OPIEDIR)/include/qpe/resource.h
 
 stabmon.o: stabmon.cpp \
 		stabmon.h \
-		$(QPEDIR)/include/qpe/qcopenvelope_qws.h
+		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h
 
 inputmethods.o: inputmethods.cpp \
 		inputmethods.h \
-		$(QPEDIR)/include/qpe/inputmethodinterface.h \
-		$(QPEDIR)/include/qpe/qcom.h \
-		$(QPEDIR)/include/qpe/quuid.h \
-		$(QPEDIR)/include/qpe/config.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
-		$(QPEDIR)/include/qpe/qlibrary.h
+		$(OPIEDIR)/include/qpe/inputmethodinterface.h \
+		$(OPIEDIR)/include/qpe/qcom.h \
+		$(OPIEDIR)/include/qpe/quuid.h \
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpe/qlibrary.h
 
 systray.o: systray.cpp \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
-		$(QPEDIR)/include/qpe/qlibrary.h \
-		$(QPEDIR)/include/qpe/qcom.h \
-		$(QPEDIR)/include/qpe/quuid.h \
-		$(QPEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpe/qlibrary.h \
+		$(OPIEDIR)/include/qpe/qcom.h \
+		$(OPIEDIR)/include/qpe/quuid.h \
+		$(OPIEDIR)/include/qpe/config.h \
 		quicklauncher.h \
 		systray.h \
-		$(QPEDIR)/include/qpe/taskbarappletinterface.h
+		$(OPIEDIR)/include/qpe/taskbarappletinterface.h
 
 wait.o: wait.cpp \
 		wait.h \
-		$(QPEDIR)/include/qpe/resource.h
+		$(OPIEDIR)/include/qpe/resource.h
 
 shutdownimpl.o: shutdownimpl.cpp \
 		shutdownimpl.h \
 		shutdown.h \
-		$(QPEDIR)/include/qpe/global.h
+		$(OPIEDIR)/include/qpe/global.h
 
 launcher.o: launcher.cpp \
-		$(QPEDIR)/include/qpe/qcopenvelope_qws.h \
-		$(QPEDIR)/include/qpe/resource.h \
-		$(QPEDIR)/include/qpe/applnk.h \
-		$(QPEDIR)/include/qpe/config.h \
-		$(QPEDIR)/include/qpe/global.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
-		$(QPEDIR)/include/qpe/mimetype.h \
-		$(QPEDIR)/include/qpe/storage.h \
+		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h \
+		$(OPIEDIR)/include/qpe/resource.h \
+		$(OPIEDIR)/include/qpe/applnk.h \
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/global.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpe/mimetype.h \
+		$(OPIEDIR)/include/qpe/storage.h \
+		$(OPIEDIR)/include/qpe/palmtoprecord.h \
 		launcherview.h \
 		launcher.h \
-		$(QPEDIR)/include/qpe/lnkproperties.h \
+		syncdialog.h \
+		desktop.h \
+		shutdownimpl.h \
+		shutdown.h \
+		$(OPIEDIR)/include/qpe/lnkproperties.h \
 		mrulist.h \
-		$(QPEDIR)/rsync/qrsync.h
+		$(OPIEDIR)/rsync/qrsync.h
 
 launcherview.o: launcherview.cpp \
 		launcherview.h \
-		$(QPEDIR)/include/qpe/storage.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
-		$(QPEDIR)/include/qpe/applnk.h \
-		$(QPEDIR)/include/qpe/qpedebug.h \
-		$(QPEDIR)/include/qpe/categories.h \
-		$(QPEDIR)/include/qpe/categoryselect.h \
-		$(QPEDIR)/include/qpe/menubutton.h \
-		$(QPEDIR)/include/qpe/resource.h \
-		$(QPEDIR)/include/qpe/qpetoolbar.h
+		$(OPIEDIR)/include/qpe/storage.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpe/applnk.h \
+		$(OPIEDIR)/include/qpe/qpedebug.h \
+		$(OPIEDIR)/include/qpe/categories.h \
+		$(OPIEDIR)/include/qpe/categoryselect.h \
+		$(OPIEDIR)/include/qpe/menubutton.h \
+		$(OPIEDIR)/include/qpe/resource.h \
+		$(OPIEDIR)/include/qpe/qpetoolbar.h
 
-$(QPEDIR)/calibrate/calibrate.o: $(QPEDIR)/calibrate/calibrate.cpp \
-		$(QPEDIR)/calibrate/calibrate.h \
-		$(QPEDIR)/include/qpe/resource.h
+$(OPIEDIR)/calibrate/calibrate.o: $(OPIEDIR)/calibrate/calibrate.cpp \
+		$(OPIEDIR)/calibrate/calibrate.h \
+		$(OPIEDIR)/include/qpe/resource.h
 
 transferserver.o: transferserver.cpp \
-		$(QPEDIR)/include/qpe/qprocess.h \
-		$(QPEDIR)/include/qpe/process.h \
+		$(OPIEDIR)/include/qpe/qprocess.h \
+		$(OPIEDIR)/include/qpe/process.h \
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h \
 		transferserver.h
 
 packageslave.o: packageslave.cpp \
 		packageslave.h \
-		$(QPEDIR)/include/qpe/process.h \
-		$(QPEDIR)/include/qpe/qcopenvelope_qws.h
+		$(OPIEDIR)/include/qpe/process.h \
+		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h
 
 irserver.o: irserver.cpp \
 		irserver.h \
-		$(QPEDIR)/include/qpe/qlibrary.h \
-		$(QPEDIR)/include/qpe/qcom.h \
-		$(QPEDIR)/include/qpe/quuid.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpe/qlibrary.h \
+		$(OPIEDIR)/include/qpe/qcom.h \
+		$(OPIEDIR)/include/qpe/quuid.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
 		obexinterface.h
 
 qcopbridge.o: qcopbridge.cpp \
 		qcopbridge.h \
-		$(QPEDIR)/include/qpe/qcopenvelope_qws.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h
+		transferserver.h \
+		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h
 
 startmenu.o: startmenu.cpp \
 		startmenu.h \
 		sidething.h \
 		mrulist.h \
-		$(QPEDIR)/include/qpe/applnk.h \
+		$(OPIEDIR)/include/qpe/applnk.h \
 		info.h \
 		background.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
-		$(QPEDIR)/include/qpe/config.h \
-		$(QPEDIR)/include/qpe/global.h \
-		$(QPEDIR)/include/qpe/resource.h
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/global.h \
+		$(OPIEDIR)/include/qpe/resource.h
 
 main.o: main.cpp \
 		desktop.h \
 		shutdownimpl.h \
 		shutdown.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
 		taskbar.h \
-		$(QPEDIR)/include/qpe/custom.h \
+		$(OPIEDIR)/include/qpe/custom.h \
 		stabmon.h \
-		$(QPEDIR)/include/qpe/network.h \
-		$(QPEDIR)/include/qpe/config.h \
-		$(QPEDIR)/include/qpe/qcopenvelope_qws.h \
-		$(QPEDIR)/include/qpe/alarmserver.h \
+		$(OPIEDIR)/include/qpe/network.h \
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h \
+		$(OPIEDIR)/include/qpe/alarmserver.h \
 		../calibrate/calibrate.h \
 		../login/qdmdialogimpl.h \
-		$(QPEDIR)/include/qpe/global.h
+		$(OPIEDIR)/include/qpe/global.h
 
-$(QPEDIR)/rsync/base64.o: $(QPEDIR)/rsync/base64.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h
+$(OPIEDIR)/rsync/base64.o: $(OPIEDIR)/rsync/base64.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h
 
-$(QPEDIR)/rsync/buf.o: $(QPEDIR)/rsync/buf.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/buf.h \
-		$(QPEDIR)/rsync/util.h
+$(OPIEDIR)/rsync/buf.o: $(OPIEDIR)/rsync/buf.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/buf.h \
+		$(OPIEDIR)/rsync/util.h
 
-$(QPEDIR)/rsync/checksum.o: $(QPEDIR)/rsync/checksum.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/checksum.h
+$(OPIEDIR)/rsync/checksum.o: $(OPIEDIR)/rsync/checksum.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/checksum.h
 
-$(QPEDIR)/rsync/command.o: $(QPEDIR)/rsync/command.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/command.h
+$(OPIEDIR)/rsync/command.o: $(OPIEDIR)/rsync/command.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/command.h
 
-$(QPEDIR)/rsync/delta.o: $(QPEDIR)/rsync/delta.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/emit.h \
-		$(QPEDIR)/rsync/stream.h \
-		$(QPEDIR)/rsync/util.h \
-		$(QPEDIR)/rsync/sumset.h \
-		$(QPEDIR)/rsync/job.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/checksum.h \
-		$(QPEDIR)/rsync/search.h \
-		$(QPEDIR)/rsync/types.h
+$(OPIEDIR)/rsync/delta.o: $(OPIEDIR)/rsync/delta.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/emit.h \
+		$(OPIEDIR)/rsync/stream.h \
+		$(OPIEDIR)/rsync/util.h \
+		$(OPIEDIR)/rsync/sumset.h \
+		$(OPIEDIR)/rsync/job.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/checksum.h \
+		$(OPIEDIR)/rsync/search.h \
+		$(OPIEDIR)/rsync/types.h
 
-$(QPEDIR)/rsync/emit.o: $(QPEDIR)/rsync/emit.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/command.h \
-		$(QPEDIR)/rsync/protocol.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/emit.h \
-		$(QPEDIR)/rsync/prototab.h \
-		$(QPEDIR)/rsync/netint.h \
-		$(QPEDIR)/rsync/sumset.h \
-		$(QPEDIR)/rsync/job.h
+$(OPIEDIR)/rsync/emit.o: $(OPIEDIR)/rsync/emit.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/command.h \
+		$(OPIEDIR)/rsync/protocol.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/emit.h \
+		$(OPIEDIR)/rsync/prototab.h \
+		$(OPIEDIR)/rsync/netint.h \
+		$(OPIEDIR)/rsync/sumset.h \
+		$(OPIEDIR)/rsync/job.h
 
-$(QPEDIR)/rsync/hex.o: $(QPEDIR)/rsync/hex.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h
+$(OPIEDIR)/rsync/hex.o: $(OPIEDIR)/rsync/hex.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h
 
-$(QPEDIR)/rsync/job.o: $(QPEDIR)/rsync/job.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/stream.h \
-		$(QPEDIR)/rsync/util.h \
-		$(QPEDIR)/rsync/sumset.h \
-		$(QPEDIR)/rsync/job.h \
-		$(QPEDIR)/rsync/trace.h
+$(OPIEDIR)/rsync/job.o: $(OPIEDIR)/rsync/job.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/stream.h \
+		$(OPIEDIR)/rsync/util.h \
+		$(OPIEDIR)/rsync/sumset.h \
+		$(OPIEDIR)/rsync/job.h \
+		$(OPIEDIR)/rsync/trace.h
 
-$(QPEDIR)/rsync/mdfour.o: $(QPEDIR)/rsync/mdfour.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/types.h
+$(OPIEDIR)/rsync/mdfour.o: $(OPIEDIR)/rsync/mdfour.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/types.h
 
-$(QPEDIR)/rsync/mksum.o: $(QPEDIR)/rsync/mksum.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/stream.h \
-		$(QPEDIR)/rsync/util.h \
-		$(QPEDIR)/rsync/sumset.h \
-		$(QPEDIR)/rsync/job.h \
-		$(QPEDIR)/rsync/protocol.h \
-		$(QPEDIR)/rsync/netint.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/checksum.h
+$(OPIEDIR)/rsync/mksum.o: $(OPIEDIR)/rsync/mksum.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/stream.h \
+		$(OPIEDIR)/rsync/util.h \
+		$(OPIEDIR)/rsync/sumset.h \
+		$(OPIEDIR)/rsync/job.h \
+		$(OPIEDIR)/rsync/protocol.h \
+		$(OPIEDIR)/rsync/netint.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/checksum.h
 
-$(QPEDIR)/rsync/msg.o: $(QPEDIR)/rsync/msg.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h
+$(OPIEDIR)/rsync/msg.o: $(OPIEDIR)/rsync/msg.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h
 
-$(QPEDIR)/rsync/netint.o: $(QPEDIR)/rsync/netint.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/job.h \
-		$(QPEDIR)/rsync/netint.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/stream.h
+$(OPIEDIR)/rsync/netint.o: $(OPIEDIR)/rsync/netint.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/job.h \
+		$(OPIEDIR)/rsync/netint.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/stream.h
 
-$(QPEDIR)/rsync/patch.o: $(QPEDIR)/rsync/patch.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/util.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/protocol.h \
-		$(QPEDIR)/rsync/netint.h \
-		$(QPEDIR)/rsync/command.h \
-		$(QPEDIR)/rsync/sumset.h \
-		$(QPEDIR)/rsync/prototab.h \
-		$(QPEDIR)/rsync/stream.h \
-		$(QPEDIR)/rsync/job.h
+$(OPIEDIR)/rsync/patch.o: $(OPIEDIR)/rsync/patch.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/util.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/protocol.h \
+		$(OPIEDIR)/rsync/netint.h \
+		$(OPIEDIR)/rsync/command.h \
+		$(OPIEDIR)/rsync/sumset.h \
+		$(OPIEDIR)/rsync/prototab.h \
+		$(OPIEDIR)/rsync/stream.h \
+		$(OPIEDIR)/rsync/job.h
 
-$(QPEDIR)/rsync/prototab.o: $(QPEDIR)/rsync/prototab.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/protocol.h \
-		$(QPEDIR)/rsync/command.h \
-		$(QPEDIR)/rsync/prototab.h
+$(OPIEDIR)/rsync/prototab.o: $(OPIEDIR)/rsync/prototab.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/protocol.h \
+		$(OPIEDIR)/rsync/command.h \
+		$(OPIEDIR)/rsync/prototab.h
 
-$(QPEDIR)/rsync/readsums.o: $(QPEDIR)/rsync/readsums.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/sumset.h \
-		$(QPEDIR)/rsync/job.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/netint.h \
-		$(QPEDIR)/rsync/protocol.h \
-		$(QPEDIR)/rsync/util.h \
-		$(QPEDIR)/rsync/stream.h
+$(OPIEDIR)/rsync/readsums.o: $(OPIEDIR)/rsync/readsums.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/sumset.h \
+		$(OPIEDIR)/rsync/job.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/netint.h \
+		$(OPIEDIR)/rsync/protocol.h \
+		$(OPIEDIR)/rsync/util.h \
+		$(OPIEDIR)/rsync/stream.h
 
-$(QPEDIR)/rsync/scoop.o: $(QPEDIR)/rsync/scoop.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/job.h \
-		$(QPEDIR)/rsync/stream.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/util.h
+$(OPIEDIR)/rsync/scoop.o: $(OPIEDIR)/rsync/scoop.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/job.h \
+		$(OPIEDIR)/rsync/stream.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/util.h
 
-$(QPEDIR)/rsync/search.o: $(QPEDIR)/rsync/search.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/util.h \
-		$(QPEDIR)/rsync/sumset.h \
-		$(QPEDIR)/rsync/search.h \
-		$(QPEDIR)/rsync/checksum.h
+$(OPIEDIR)/rsync/search.o: $(OPIEDIR)/rsync/search.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/util.h \
+		$(OPIEDIR)/rsync/sumset.h \
+		$(OPIEDIR)/rsync/search.h \
+		$(OPIEDIR)/rsync/checksum.h
 
-$(QPEDIR)/rsync/stats.o: $(QPEDIR)/rsync/stats.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/trace.h
+$(OPIEDIR)/rsync/stats.o: $(OPIEDIR)/rsync/stats.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/trace.h
 
-$(QPEDIR)/rsync/stream.o: $(QPEDIR)/rsync/stream.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/stream.h \
-		$(QPEDIR)/rsync/util.h \
-		$(QPEDIR)/rsync/trace.h
+$(OPIEDIR)/rsync/stream.o: $(OPIEDIR)/rsync/stream.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/stream.h \
+		$(OPIEDIR)/rsync/util.h \
+		$(OPIEDIR)/rsync/trace.h
 
-$(QPEDIR)/rsync/sumset.o: $(QPEDIR)/rsync/sumset.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/sumset.h \
-		$(QPEDIR)/rsync/util.h \
-		$(QPEDIR)/rsync/trace.h
+$(OPIEDIR)/rsync/sumset.o: $(OPIEDIR)/rsync/sumset.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/sumset.h \
+		$(OPIEDIR)/rsync/util.h \
+		$(OPIEDIR)/rsync/trace.h
 
-$(QPEDIR)/rsync/trace.o: $(QPEDIR)/rsync/trace.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/util.h \
-		$(QPEDIR)/rsync/trace.h
+$(OPIEDIR)/rsync/trace.o: $(OPIEDIR)/rsync/trace.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/util.h \
+		$(OPIEDIR)/rsync/trace.h
 
-$(QPEDIR)/rsync/tube.o: $(QPEDIR)/rsync/tube.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/util.h \
-		$(QPEDIR)/rsync/job.h \
-		$(QPEDIR)/rsync/stream.h
+$(OPIEDIR)/rsync/tube.o: $(OPIEDIR)/rsync/tube.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/util.h \
+		$(OPIEDIR)/rsync/job.h \
+		$(OPIEDIR)/rsync/stream.h
 
-$(QPEDIR)/rsync/util.o: $(QPEDIR)/rsync/util.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/util.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/trace.h
+$(OPIEDIR)/rsync/util.o: $(OPIEDIR)/rsync/util.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/util.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/trace.h
 
-$(QPEDIR)/rsync/version.o: $(QPEDIR)/rsync/version.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h
+$(OPIEDIR)/rsync/version.o: $(OPIEDIR)/rsync/version.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h
 
-$(QPEDIR)/rsync/whole.o: $(QPEDIR)/rsync/whole.c \
-		$(QPEDIR)/rsync/config_rsync.h \
-		$(QPEDIR)/rsync/config_linux.h \
-		$(QPEDIR)/rsync/rsync.h \
-		$(QPEDIR)/rsync/trace.h \
-		$(QPEDIR)/rsync/fileutil.h \
-		$(QPEDIR)/rsync/sumset.h \
-		$(QPEDIR)/rsync/job.h \
-		$(QPEDIR)/rsync/buf.h \
-		$(QPEDIR)/rsync/whole.h \
-		$(QPEDIR)/rsync/util.h
+$(OPIEDIR)/rsync/whole.o: $(OPIEDIR)/rsync/whole.c \
+		$(OPIEDIR)/rsync/config_rsync.h \
+		$(OPIEDIR)/rsync/config_linux.h \
+		$(OPIEDIR)/rsync/rsync.h \
+		$(OPIEDIR)/rsync/trace.h \
+		$(OPIEDIR)/rsync/fileutil.h \
+		$(OPIEDIR)/rsync/sumset.h \
+		$(OPIEDIR)/rsync/job.h \
+		$(OPIEDIR)/rsync/buf.h \
+		$(OPIEDIR)/rsync/whole.h \
+		$(OPIEDIR)/rsync/util.h
 
-$(QPEDIR)/rsync/qrsync.o: $(QPEDIR)/rsync/qrsync.cpp \
-		$(QPEDIR)/rsync/qrsync.h \
-		$(QPEDIR)/rsync/rsync.h
+$(OPIEDIR)/rsync/qrsync.o: $(OPIEDIR)/rsync/qrsync.cpp \
+		$(OPIEDIR)/rsync/qrsync.h \
+		$(OPIEDIR)/rsync/rsync.h
 
 shutdown.h: shutdown.ui
 	$(UIC) shutdown.ui -o $(INTERFACE_DECL_PATH)/shutdown.h
@@ -724,8 +734,7 @@ syncdialog.h: syncdialog.ui
 syncdialog.cpp: syncdialog.ui
 	$(UIC) syncdialog.ui -i syncdialog.h -o syncdialog.cpp
 
-shutdown.o: shutdown.cpp \
-		shutdown.h
+shutdown.o: shutdown.cpp
 
 syncdialog.o: syncdialog.cpp
 
@@ -736,7 +745,7 @@ moc_desktop.o: moc_desktop.cpp \
 		desktop.h \
 		shutdownimpl.h \
 		shutdown.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h
+		$(OPIEDIR)/include/qpe/qpeapplication.h
 
 moc_info.o: moc_info.cpp \
 		info.h \
@@ -747,7 +756,7 @@ moc_appicons.o: moc_appicons.cpp \
 
 moc_taskbar.o: moc_taskbar.cpp \
 		taskbar.h \
-		$(QPEDIR)/include/qpe/custom.h
+		$(OPIEDIR)/include/qpe/custom.h
 
 moc_sidething.o: moc_sidething.cpp \
 		sidething.h \
@@ -755,15 +764,15 @@ moc_sidething.o: moc_sidething.cpp \
 
 moc_inputmethods.o: moc_inputmethods.cpp \
 		inputmethods.h \
-		$(QPEDIR)/include/qpe/inputmethodinterface.h \
-		$(QPEDIR)/include/qpe/qcom.h \
-		$(QPEDIR)/include/qpe/quuid.h
+		$(OPIEDIR)/include/qpe/inputmethodinterface.h \
+		$(OPIEDIR)/include/qpe/qcom.h \
+		$(OPIEDIR)/include/qpe/quuid.h
 
 moc_systray.o: moc_systray.cpp \
 		systray.h \
-		$(QPEDIR)/include/qpe/taskbarappletinterface.h \
-		$(QPEDIR)/include/qpe/qcom.h \
-		$(QPEDIR)/include/qpe/quuid.h
+		$(OPIEDIR)/include/qpe/taskbarappletinterface.h \
+		$(OPIEDIR)/include/qpe/qcom.h \
+		$(OPIEDIR)/include/qpe/quuid.h
 
 moc_shutdownimpl.o: moc_shutdownimpl.cpp \
 		shutdownimpl.h \
@@ -772,11 +781,11 @@ moc_shutdownimpl.o: moc_shutdownimpl.cpp \
 moc_launcher.o: moc_launcher.cpp \
 		launcher.h \
 		launcherview.h \
-		$(QPEDIR)/include/qpe/storage.h
+		$(OPIEDIR)/include/qpe/storage.h
 
 moc_launcherview.o: moc_launcherview.cpp \
 		launcherview.h \
-		$(QPEDIR)/include/qpe/storage.h
+		$(OPIEDIR)/include/qpe/storage.h
 
 ../calibrate/moc_calibrate.o: ../calibrate/moc_calibrate.cpp \
 		../calibrate/calibrate.h
@@ -799,7 +808,7 @@ moc_irserver.o: moc_irserver.cpp \
 moc_shutdown.o: appicons.moc \
 		appicons.cpp \
 		appicons.h \
-		$(QPEDIR)/include/qpe/qcopenvelope_qws.h
+		$(OPIEDIR)/include/qpe/qcopenvelope_qws.h
 
 moc_syncdialog.o: moc_shutdown.cpp \
 		shutdown.h

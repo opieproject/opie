@@ -134,7 +134,7 @@ static QDict<QDawg> *named_dawg = 0;
 
 static QString qpeDir()
 {
-    QString dir = getenv("QPEDIR");
+    QString dir = getenv("OPIEDIR");
     if ( dir.isEmpty() ) dir = "..";
     return dir;
 }

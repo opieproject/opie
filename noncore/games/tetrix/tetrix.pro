@@ -11,7 +11,7 @@ SOURCES		= main.cpp \
 		    qtetrix.cpp \
 		    qtetrixb.cpp \
 		    tpiece.cpp
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH	+= $(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 INTERFACES	= 

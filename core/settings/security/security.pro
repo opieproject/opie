@@ -4,8 +4,8 @@ DESTDIR		= ../../bin
 HEADERS		= security.h
 SOURCES		= security.cpp main.cpp
 INTERFACES	= securitybase.ui
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH	+= ../$(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH	+= ../$(OPIEDIR)/include
 LIBS            += -lqpe
 TARGET		= security
 

@@ -11,17 +11,17 @@ DEBUG=
 QCONFIGARG=
 
 touch .test.qpe.
-if [ '!' -f ${QPEDIR}/.test.qpe. ];
+if [ '!' -f ${OPIEDIR}/.test.qpe. ];
 then
     rm .test.qpe.
     echo
     echo
-    echo '   The environment variable $QPEDIR is not set correctly. It is currently'
-    echo '   set to "'$QPEDIR'", but it should be set to this directory,'
+    echo '   The environment variable $OPIEDIR is not set correctly. It is currently'
+    echo '   set to "'$OPIEDIR'", but it should be set to this directory,'
     echo '   which is "'`pwd`'".'
     echo
-    echo '   Please read the INSTALL file for instructions on how to set $QPEDIR'
-    echo '   correctly. If you have set $QPEDIR in your .profile or .login, you '
+    echo '   Please read the INSTALL file for instructions on how to set $OPIEDIR'
+    echo '   correctly. If you have set $OPIEDIR in your .profile or .login, you '
     echo '   will need to log out and log in again to make the setting effective.'
     echo
     echo
@@ -154,7 +154,7 @@ for a in $TOMAKE ; do
 	    TMAKEPATH=$QTDIR/tmake:$TMAKEPATH \
 		tmake $QCONFIGARG CONFIG+=embedded $VCONFIG \
 		    -t $H/qt/tmake/propagate.t $f.pro |
-		    sed -e "s|$QTDIR|\$(QTDIR)|g" -e "s|$QPEDIR|\$(QPEDIR)|g" >Makefile.in;
+		    sed -e "s|$QTDIR|\$(QTDIR)|g" -e "s|$OPIEDIR|\$(OPIEDIR)|g" >Makefile.in;
 	)
 	echo -n "."
 	appname=`grep '^TARGET' $a/$f.pro | sed 's/^TARGET.*=//' | sed 's/ //g'`

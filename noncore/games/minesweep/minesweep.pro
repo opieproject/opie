@@ -1,13 +1,13 @@
 TEMPLATE	= app
 CONFIG		= qt warn_on release
-DESTDIR		= $(QPEDIR)/bin
+DESTDIR		= $(OPIEDIR)/bin
 HEADERS		= minefield.h \
 		  minesweep.h
 SOURCES		= main.cpp \
 		  minefield.cpp \
 		  minesweep.cpp
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH	+= $(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 INTERFACES	= 
 

@@ -4,8 +4,8 @@ HEADERS	=   clock.h clockappletimpl.h
 SOURCES	=   clock.cpp clockappletimpl.cpp
 TARGET		= clockapplet
 DESTDIR		= ../../plugins/applets
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH      += ../$(QPEDIR)/include ..
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH      += ../$(OPIEDIR)/include ..
 LIBS            += -lqpe
 VERSION		= 1.0.0
 

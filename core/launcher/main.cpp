@@ -85,7 +85,7 @@ void initCassiopeia()
 	perror("Mounting - shm");
     }
     setenv( "QTDIR", "/", 1 );
-    setenv( "QPEDIR", "/", 1 );
+    setenv( "OPIEDIR", "/", 1 );
     setenv( "HOME", "/home", 1 );
     mkdir( "/home/Documents", 0755 );
 

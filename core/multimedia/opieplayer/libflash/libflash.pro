@@ -8,8 +8,8 @@ SOURCES		=   libflashplugin.cpp libflashpluginimpl.cpp \
 		    program.cc sound.cc text.cc
 TARGET		=   flashplugin
 DESTDIR		=   ../../plugins/codecs
-INCLUDEPATH += $(QPEDIR)/include ..
-DEPENDPATH      +=  ../$(QPEDIR)/include ..
+INCLUDEPATH += $(OPIEDIR)/include ..
+DEPENDPATH      +=  ../$(OPIEDIR)/include ..
 LIBS            +=  -lqpe
 VERSION		=   1.0.0
 

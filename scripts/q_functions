@@ -139,16 +139,16 @@ function print_install_file
 {
 cat << END
 #!/bin/sh
-if [ a\$QPEDIR = a ]
+if [ a\$OPIEDIR = a ]
 then
-echo QPEDIR must be set
+echo OPIEDIR must be set
 exit
 fi
-[ -f \$QPEDIR/pics/$NEW_APP_ICON_FILE ] || cp $NEW_APP_ICON_FILE \$QPEDIR/pics/
-[ -f \$QPEDIR/apps/$NEW_APP_DESKTOP_FILE ] || cp $NEW_APP_DESKTOP_FILE \$QPEDIR/apps/
-mv \$QPEDIR/Makefile \$QPEDIR/Makefile.orig
+[ -f \$OPIEDIR/pics/$NEW_APP_ICON_FILE ] || cp $NEW_APP_ICON_FILE \$OPIEDIR/pics/
+[ -f \$OPIEDIR/apps/$NEW_APP_DESKTOP_FILE ] || cp $NEW_APP_DESKTOP_FILE \$OPIEDIR/apps/
+mv \$OPIEDIR/Makefile \$OPIEDIR/Makefile.orig
 sed "s/APPS=/&$NEW_APP_NAME \\\\\\\\ \\\\
-    /" \$QPEDIR/Makefile.orig >> \$QPEDIR/Makefile
+    /" \$OPIEDIR/Makefile.orig >> \$OPIEDIR/Makefile
 echo You may wish to move the desktop file in to
 echo an appropriate subdirectory of the menus.
 END

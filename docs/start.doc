@@ -58,7 +58,7 @@ To compile the example program for running on the Linux desktop:
 
     <p>
 <pre>
-    export QPEDIR=/opt/Qtopia
+    export OPIEDIR=/opt/Qtopia
     export QTDIR=/opt/Qtopia
     export PATH=$QTDIR/bin:$PATH
     export TMAKEPATH=/opt/Qtopia/tmake/lib/qws/linux-generic-g++
@@ -69,7 +69,7 @@ To compile the example program for running on the Linux desktop:
 
 <pre>
    cd somewhere
-   cp -r $QPEDIR/example .
+   cp -r $OPIEDIR/example .
    cd example
 </pre>
 
@@ -89,9 +89,9 @@ To compile the example program for running on the Linux desktop:
 
 <pre>
    su # root privileges required to install
-   cp example.desktop $QPEDIR/apps/Applications
-   cp Example.png $QPEDIR/pics
-   cp example $QPEDIR/bin
+   cp example.desktop $OPIEDIR/apps/Applications
+   cp Example.png $OPIEDIR/pics
+   cp example $OPIEDIR/bin
    exit # no need to be root anymore
 </pre>
 
@@ -135,7 +135,7 @@ on the desktop, the process is similar:
 
     <p>
 <pre>
-    export QPEDIR=/opt/Qtopia/sharp
+    export OPIEDIR=/opt/Qtopia/sharp
     export QTDIR=/opt/Qtopia/sharp
     export PATH=$QTDIR/bin:/usr/local/arm/bin:$PATH
     export TMAKEPATH=/opt/Qtopia/tmake/lib/qws/linux-sharp-g++

@@ -32,7 +32,7 @@ SOURCES		= d3des.c \
 INTERFACES	= vncoptionsbase.ui
 TARGET          = keypebble
 
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH      += $(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
 

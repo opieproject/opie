@@ -5,7 +5,7 @@ CONFIG += qt release
 HEADERS += calc.h plugininterface.h instruction.h engine.h stdinstructions.h
 SOURCES += calc.cpp main.cpp engine.cpp
 
-INCLUDEPATH     += $(QPEDIR)/include 
-DEPENDPATH      += $(QPEDIR)/include 
+INCLUDEPATH     += $(OPIEDIR)/include 
+DEPENDPATH      += $(OPIEDIR)/include 
 LIBS += -lqpe -Wl,-export-dynamic 
 

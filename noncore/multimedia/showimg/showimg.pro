@@ -1,7 +1,7 @@
 TEMPLATE        = app
 
 CONFIG          += qt warn_on release
-DESTDIR         = $(QPEDIR)/bin
+DESTDIR         = $(OPIEDIR)/bin
 
 HEADERS		= showimg.h
 
@@ -10,8 +10,8 @@ SOURCES		= main.cpp \
 
 TARGET          = showimg
 
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH      += $(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
 
 REQUIRES        = showimg

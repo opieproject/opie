@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.1 2002-01-25 22:14:56 kergoth Exp $
+** $Id: qpeapplication.cpp,v 1.2 2002-01-28 23:28:15 kergoth Exp $
 **
 **********************************************************************/
 #include <stdlib.h>
@@ -790,11 +790,11 @@ QPEApplication::~QPEApplication()
 }
 
 /*!
-  Returns <tt>$QPEDIR/</tt>.
+  Returns <tt>$OPIEDIR/</tt>.
 */
 QString QPEApplication::qpeDir()
 {
-    const char *base = getenv( "QPEDIR" );
+    const char *base = getenv( "OPIEDIR" );
     if ( base )
 	return QString( base ) + "/";
 
