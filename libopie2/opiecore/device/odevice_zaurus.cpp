@@ -496,7 +496,7 @@ bool Zaurus::setDisplayStatus( bool on )
         if ( fd )
         {
             char buf[10];
-            buf[0] = on ? '0' : '1';
+            buf[0] = on ? '1' : '0';
             buf[1] = '\0';
             res = ( ::write( fd, &buf[0], 2 ) == 0 );
             ::close( fd );
