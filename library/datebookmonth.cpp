@@ -54,7 +54,7 @@ DateBookMonthHeader::DateBookMonthHeader( QWidget *parent, const char *name )
     for ( int i = 0; i < 12; ++i )
 	month->insertItem( Calendar::nameOfMonth( i + 1 ) );
 
-    year = new QSpinBox( 1970, 2037, 1, this );
+    year = new QSpinBox( 1752, 8000, 1, this );
 
     next = new QToolButton( this );
     next->setFocusPolicy(NoFocus);
