@@ -434,7 +434,7 @@ void Clock::alarmOn()
                          "QPE/Application/clock",
                          "alarm(QDateTime,int)", warn );
 //  setCaption( "Alarm set: " + whenl.toString() );
-  setCaption( tr("Alarm set: %1".arg(whenl.toString())) );
+  setCaption( tr("Alarm set: %1" ).arg(whenl.toString()) );
 }
 
 void Clock::alarmOff()
