@@ -441,6 +441,11 @@ void DocumentListPrivate::appendDocpath(FileSystem*fs)
     }
     Config conf(f.filePath(), Config::File );
     conf.setGroup("subdirs");
+    bool read_all = conf.readBoolEntry("wholemedia",true);
+    if (read_all) {
+        docPaths+=fs->path();
+        return;
+    }
     QStringList subDirs = conf.readListEntry("subdirs",':');
     if (subDirs.isEmpty()) {
         if (defPath.exists()) {
