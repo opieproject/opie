@@ -31,17 +31,18 @@ class imageinfo : public QWidget
 public:
     imageinfo( QWidget* parent = 0, const char* name = 0,  WFlags fl =0);
     imageinfo(const QString&_path, QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-    ~imageinfo();
+    virtual ~imageinfo();
 
     void setDestructiveClose();
     Opie::Ui::OKeyConfigManager* manager();
 
 signals:
     void dispImage(const QString&);
+    void sig_return();
 
 public slots:
-    void setPath( const QString& path );
-    void slotShowImage();
+    virtual void setPath( const QString& path );
+    virtual void slotShowImage();
 
 private:
     void init(const char* name);

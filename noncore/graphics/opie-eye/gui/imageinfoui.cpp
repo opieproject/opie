@@ -63,7 +63,7 @@ void imageinfo::initKeys()
     lst.append( Opie::Ui::OKeyPair::downArrowKey() );
     lst.append( Opie::Ui::OKeyPair::leftArrowKey() );
     lst.append( Opie::Ui::OKeyPair::rightArrowKey() );
-//    lst.append( Opie::Ui::OKeyPair::returnKey() );
+    lst.append( Opie::Ui::OKeyPair::returnKey() );
 
     m_viewManager = new Opie::Ui::OKeyConfigManager(m_cfg, "Imageinfo-KeyBoard-Config",
                                                     lst, false,this, "keyconfig name" );
