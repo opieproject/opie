@@ -1,14 +1,14 @@
 /***************************************************************************
    advancedfm.h
                              -------------------
-** Created: Sat Mar 9 23:33:09 2002
+                             ** Created: Sat Mar 9 23:33:09 2002
     copyright            : (C) 2002 by ljp
     email                : ljp@llornkcor.com
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- ***************************************************************************/
+    *   This program is free software; you can redistribute it and/or modify  *
+    *   it under the terms of the GNU General Public License as published by  *
+    *   the Free Software Foundation; either version 2 of the License, or     *
+    *   (at your option) any later version.                                   *
+    ***************************************************************************/
 #ifndef ADVANCEDFM_H
 #define ADVANCEDFM_H
 #define QTOPIA_INTERNAL_FSLP // to get access to fileproperties
@@ -52,54 +52,46 @@ class Ir;
 
 class AdvancedFm : public QMainWindow
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    AdvancedFm();
-    ~AdvancedFm();
+  AdvancedFm();
+  ~AdvancedFm();
 protected slots:
-    void selectAll();
-    void addToDocs();
-    void doLocalCd();
-    void doRemoteCd();
-//    void copy();
-    void mkDir();
-    void del();
-    void rn();
-    void populateLocalView();
-    void populateRemoteView();
-    void showHidden();
-    void showMenuHidden();
-    void showRemoteHidden();
-    void writeConfig();
-    void readConfig();
-    void localListClicked(QListViewItem *);
-    void remoteListClicked(QListViewItem *);
-    void localListPressed( int, QListViewItem *, const QPoint&, int);
-    void remoteListPressed( int, QListViewItem *, const QPoint&, int);
-    void localMakDir();
-    void localDelete();
-    void remoteMakDir();
-    void remoteDelete();
-/*     bool remoteDirList(const QString &); */
-/*     bool remoteChDir(const QString &); */
-    void tabChanged(QWidget*);
-    void cleanUp();
-    void remoteRename();
-    void localRename();
-    void runThis();
-    void runText();
-    void filePerms();
-    void doProperties();
-    void runCommand();
-    void runCommandStd();
-    QStringList getPath();
-    void mkSym();
+  void selectAll();
+  void addToDocs();
+  void doDirChange();
+  void mkDir();
+  void del();
+  void rn();
+  void populateLocalView();
+  void populateRemoteView();
+  void showHidden();
+  void showMenuHidden();
+//  void showRemoteHidden();
+  void writeConfig();
+  void readConfig();
+  void ListClicked(QListViewItem *);
+  void ListPressed( int, QListViewItem *, const QPoint&, int);
+  void makeDir();
+  void doDelete();
+  void tabChanged(QWidget*);
+  void cleanUp();
+  void renameIt();
+  void runThis();
+  void runText();
+  void filePerms();
+  void doProperties();
+  void runCommand();
+  void runCommandStd();
+  QStringList getPath();
+  void mkSym();
   void switchToLocalTab();
   void switchToRemoteTab();
 
 protected:
 
   OTabWidget *TabWidget;
+  int whichTab;
 //    QTabWidget *TabWidget;
   QWidget *tab, *tab_2, *tab_3;
   QListView *Local_View, *Remote_View;
@@ -119,18 +111,24 @@ protected:
   QGridLayout *tabLayout, *tabLayout_2, *tabLayout_3;
   QStringList remoteDirPathStringList, localDirPathStringList;
   QLineEdit *renameBox;
- 
+
   void init();
   void initConnections();
   void keyReleaseEvent( QKeyEvent *);
+  void keyPressEvent( QKeyEvent *);
   QString getFileSystemType(const QString &);
   QString getDiskSpace(const QString &);
   void parsetab(const QString &fileName);
   QString checkDiskSpace(const QString &);
   QString dealWithSymName(const QString &);
-  
+  QDir *CurrentDir();
+  QDir *OtherDir(); 
+  QListView *CurrentView();
+  QListView *OtherView();
+  void PopulateView();
+
 protected slots:
-    void dirMenuSelected(int);
+  void dirMenuSelected(int);
   void showFileMenu();
   void cancelMenuTimer();
   void homeButtonPushed();
@@ -153,21 +151,21 @@ protected slots:
   void fileBeamFinished( Ir *);
 
 private:
-    MenuButton *menuButton;
-    QString oldName;
-    QTimer menuTimer;
-    void startProcess(const QString &);
-    bool eventFilter( QObject * , QEvent * );
-    void cancelRename();
-    void doRename(QListView *);
-    void okRename();
-    void customDirsToMenu();
-    void addCustomDir();
-    void removeCustomDir();
+  MenuButton *menuButton;
+  QString oldName;
+  QTimer menuTimer;
+  void startProcess(const QString &);
+  bool eventFilter( QObject * , QEvent * );
+  void cancelRename();
+  void doRename(QListView *);
+  void okRename();
+  void customDirsToMenu();
+  void addCustomDir();
+  void removeCustomDir();
 
 private slots:
-    void processEnded();
-    void gotoCustomDir(const QString &); 
+  void processEnded();
+  void gotoCustomDir(const QString &);
 };
 
 #endif // ADVANCEDFM_H

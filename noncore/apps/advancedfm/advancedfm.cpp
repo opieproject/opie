@@ -69,20 +69,22 @@
 #include <sys/utsname.h>
 
 AdvancedFm::AdvancedFm( )
-        : QMainWindow( ) {
-    init();
-    renameBox = 0;
+		: QMainWindow( ) {
+	init();
+	renameBox = 0;
 
-    initConnections();
-    populateLocalView();
-    populateRemoteView();
-    currentPathCombo->setFocus();
+	initConnections();
+	populateLocalView();
+	populateRemoteView();
+	currentPathCombo->setFocus();
 }
 
 AdvancedFm::~AdvancedFm() {
 }
 
-void AdvancedFm::cleanUp() {
+
+void AdvancedFm::cleanUp()
+{
   QString sfile=QDir::homeDirPath();
   if(sfile.right(1) != "/")
     sfile+="/._temp";
@@ -93,35 +95,31 @@ void AdvancedFm::cleanUp() {
     file.remove();
 }
 
-void AdvancedFm::tabChanged(QWidget *w) {
-//    qDebug("tab changed %d",TabWidget->getCurrentTab());
+void AdvancedFm::tabChanged(QWidget *w)
+{
+	if( w == tab)
+		whichTab = 1;
+	else
+		whichTab = 2;
 
-    if ( w == tab) {
-//    if (TabWidget->getCurrentTab() == 0) {
-//  if (TabWidget->currentPageIndex() == 0) {
-        currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
-        viewMenu->setItemChecked(viewMenu->idAt(0),TRUE);
-        viewMenu->setItemChecked(viewMenu->idAt(1),FALSE);
-        QString fs= getFileSystemType((const QString &) currentDir.canonicalPath());
-        setCaption("AdvancedFm :: "+fs+" :: "
-                   +checkDiskSpace((const QString &) currentDir.canonicalPath())+" kB free" );
-    
-    }
-    if ( w == tab_2) {
-//    if (TabWidget->getCurrentTab() == 1) {
-  
-//  if (TabWidget->currentPageIndex() == 1) {
-        currentPathCombo->lineEdit()->setText( currentRemoteDir.canonicalPath());
-        viewMenu->setItemChecked(viewMenu->idAt(1),TRUE);
-        viewMenu->setItemChecked(viewMenu->idAt(0),FALSE);
-        QString fs= getFileSystemType((const QString &) currentRemoteDir.canonicalPath());
-        setCaption("AdvancedFm :: "+fs+" :: "
-                   +checkDiskSpace((const QString &) currentRemoteDir.canonicalPath())+" kB free" );
-    }
+//	qDebug("tab changed %d", whichTab );
+
+   QString path = CurrentDir()->canonicalPath();
+	currentPathCombo->lineEdit()->setText( path );
+
+	viewMenu->setItemChecked(viewMenu->idAt(0),TRUE);
+	viewMenu->setItemChecked(viewMenu->idAt(1),FALSE);
+
+	QString fs= getFileSystemType( (const QString &)  path);
+
+	setCaption("AdvancedFm :: "+fs+" :: "
+						 +checkDiskSpace( (const QString &) path )+ " kB free" );
+	chdir( path.latin1());
 }
 
 
-void AdvancedFm::populateLocalView() {
+void AdvancedFm::populateLocalView()
+{
   QPixmap pm;
   Local_View->clear();
   currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
@@ -135,90 +133,110 @@ void AdvancedFm::populateLocalView() {
   const QFileInfoList *list = currentDir.entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
   QFileInfoListIterator it(*list);
   QFileInfo *fi;
-  while ( (fi=it.current()) ) {
-    if (fi->isSymLink() ) {
-      QString symLink=fi->readLink();
-      QFileInfo sym( symLink);
-      fileS.sprintf( "%10i", sym.size() );
-      fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.filePath().data() );
-      fileDate = sym.lastModified().toString();
-    } else {
-      fileS.sprintf( "%10i", fi->size() );
-      fileL.sprintf( "%s",fi->fileName().data() );
-      fileDate= fi->lastModified().toString();
-      if( QDir(QDir::cleanDirPath( currentDir.canonicalPath()+"/"+fileL)).exists() ) {
-        fileL+="/";
-        isDir=TRUE;
-      }
-    }
-    QFileInfo fileInfo(  currentDir.canonicalPath()+"/"+fileL);
-    if(fileL !="./" && fi->exists()) {
-      item= new QListViewItem( Local_View, fileL, fileS , fileDate);
+  while ( (fi=it.current()) )
+		{
+			if (fi->isSymLink() )
+				{
+					QString symLink=fi->readLink();
+					QFileInfo sym( symLink);
+					fileS.sprintf( "%10i", sym.size() );
+					fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.filePath().data() );
+					fileDate = sym.lastModified().toString();
+				}
+			else
+				{
+					fileS.sprintf( "%10i", fi->size() );
+					fileL.sprintf( "%s",fi->fileName().data() );
+					fileDate= fi->lastModified().toString();
+					if( QDir(QDir::cleanDirPath( currentDir.canonicalPath()+"/"+fileL)).exists() )
+						{
+							fileL+="/";
+							isDir=TRUE;
+						}
+				}
+			QFileInfo fileInfo(  currentDir.canonicalPath()+"/"+fileL);
+			if(fileL !="./" && fi->exists())
+				{
+					item= new QListViewItem( Local_View, fileL, fileS , fileDate);
 
-      if(isDir || fileL.find("/",0,TRUE) != -1) {
+					if(isDir || fileL.find("/",0,TRUE) != -1)
+						{
 
-        if( !QDir( fi->filePath() ).isReadable()) //is directory
-          pm = Resource::loadPixmap( "lockedfolder" );
-        else
-          pm= Resource::loadPixmap( "folder" );
-      } else if ( fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
-        pm = Resource::loadPixmap( "exec");
-      } else if( (fileInfo.permission( QFileInfo::ExeUser)
-                  | fileInfo.permission( QFileInfo::ExeGroup)
-                  | fileInfo.permission( QFileInfo::ExeOther)) && fs != "vfat" ) {
-        pm = Resource::loadPixmap( "exec");
-      } else if( !fi->isReadable() ) {
-        pm = Resource::loadPixmap( "locked" );
-      } else { //everything else goes by mimetype
-        MimeType mt(fi->filePath());
-        pm=mt.pixmap(); //sets the correct pixmap for mimetype
-        if(pm.isNull())
-          pm =  Resource::loadPixmap( "UnknownDocument-14" );
-      }
-      item->setPixmap( 0,pm);
-      if(  fi->isSymLink() && fileL.find("->",0,TRUE) != -1) {
-        // overlay link image
-        pm= Resource::loadPixmap( "folder" );
-        QPixmap lnk = Resource::loadPixmap( "opie/symlink" );
-        QPainter painter( &pm );
-        painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
-        pm.setMask( pm.createHeuristicMask( FALSE ) );
-        item->setPixmap( 0, pm);
-      }
-    }
-    isDir=FALSE;
-    ++it;
-  }
+							if( !QDir( fi->filePath() ).isReadable()) //is directory
+								pm = Resource::loadPixmap( "lockedfolder" );
+							else
+								pm= Resource::loadPixmap( "folder" );
+						}
+					else if ( fs == "vfat" && fileInfo.filePath().contains("/bin") )
+						{
+							pm = Resource::loadPixmap( "exec");
+						}
+					else if( (fileInfo.permission( QFileInfo::ExeUser)
+										| fileInfo.permission( QFileInfo::ExeGroup)
+										| fileInfo.permission( QFileInfo::ExeOther)) && fs != "vfat" )
+						{
+							pm = Resource::loadPixmap( "exec");
+						}
+					else if( !fi->isReadable() )
+						{
+							pm = Resource::loadPixmap( "locked" );
+						}
+					else { //everything else goes by mimetype
+						MimeType mt(fi->filePath());
+						pm=mt.pixmap(); //sets the correct pixmap for mimetype
+						if(pm.isNull())
+							pm =  Resource::loadPixmap( "UnknownDocument-14" );
+					}
+					item->setPixmap( 0,pm);
+					if(  fi->isSymLink() && fileL.find("->",0,TRUE) != -1)
+						{
+								// overlay link image
+							pm= Resource::loadPixmap( "folder" );
+							QPixmap lnk = Resource::loadPixmap( "opie/symlink" );
+							QPainter painter( &pm );
+							painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
+							pm.setMask( pm.createHeuristicMask( FALSE ) );
+							item->setPixmap( 0, pm);
+						}
+				}
+			isDir=FALSE;
+			++it;
+		}
 
-  if(currentDir.canonicalPath().find("dev",0,TRUE) != -1) {
-    struct stat buf;
-    dev_t devT;
-    DIR *dir;
-    struct dirent *mydirent;
-    if((dir = opendir( currentDir.canonicalPath().latin1())) != NULL)
-      while ((mydirent = readdir(dir)) != NULL) {
-        lstat( mydirent->d_name, &buf);
+  if(currentDir.canonicalPath().find("dev",0,TRUE) != -1)
+		{
+			struct stat buf;
+			dev_t devT;
+			DIR *dir;
+			struct dirent *mydirent;
+
+			if((dir = opendir( currentDir.canonicalPath().latin1())) != NULL)
+				while ((mydirent = readdir(dir)) != NULL)
+					{
+						lstat( mydirent->d_name, &buf);
 //        qDebug(mydirent->d_name);
-        fileL.sprintf("%s", mydirent->d_name);
-        devT = buf.st_dev;
-        fileS.sprintf("%d, %d", (int) ( devT >>8) &0xFF, (int)devT &0xFF);
-        fileDate.sprintf("%s", ctime( &buf.st_mtime));
-        if( fileL.find(".") == -1 ){
-          item= new QListViewItem( Local_View, fileL, fileS, fileDate);
-          pm =  Resource::loadPixmap( "UnknownDocument-14" );
-          item->setPixmap( 0,pm);
-        }
-      }
+						fileL.sprintf("%s", mydirent->d_name);
+						devT = buf.st_dev;
+						fileS.sprintf("%d, %d", (int) ( devT >>8) &0xFF, (int)devT &0xFF);
+						fileDate.sprintf("%s", ctime( &buf.st_mtime));
+						if( fileL.find(".") == -1 )
+							{
+								item= new QListViewItem( Local_View, fileL, fileS, fileDate);
+								pm =  Resource::loadPixmap( "UnknownDocument-14" );
+								item->setPixmap( 0,pm);
+							}
+					}
 
-    closedir(dir);
-  }
+			closedir(dir);
+		}
 
   Local_View->setSorting( 3,FALSE);
   fillCombo( (const QString &) currentDir.canonicalPath());
 }
 
 
-void AdvancedFm::populateRemoteView() {
+void AdvancedFm::populateRemoteView()
+{
   QPixmap pm;
   Remote_View->clear();
   currentRemoteDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
@@ -233,482 +251,406 @@ void AdvancedFm::populateRemoteView() {
   const QFileInfoList *list = currentRemoteDir.entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
   QFileInfoListIterator it(*list);
   QFileInfo *fi;
-  while ( (fi=it.current()) ) {
-    if (fi->isSymLink() ){
-      QString symLink=fi->readLink();
-      //         qDebug("Symlink detected "+symLink);
-      QFileInfo sym( symLink);
-      fileS.sprintf( "%10i", sym.size() );
-      fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.filePath().data() );
-      fileDate = sym.lastModified().toString();
-    } else {
-      //        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
-      fileS.sprintf( "%10i", fi->size() );
-      fileL.sprintf( "%s",fi->fileName().data() );
-      fileDate= fi->lastModified().toString();
-      if( QDir(QDir::cleanDirPath( currentRemoteDir.canonicalPath()+"/"+fileL)).exists() ) {
-        fileL+="/";
-        isDir=TRUE;
-        //     qDebug( fileL);
-      }
-    }
-    QFileInfo fileInfo(  currentRemoteDir.canonicalPath()+"/"+fileL);
-    if(fileL !="./" && fi->exists()) {
-      item= new QListViewItem( Remote_View, fileL, fileS, fileDate);
-      QPixmap pm;
+  while ( (fi=it.current()) )
+		{
+			if (fi->isSymLink() )
+				{
+					QString symLink=fi->readLink();
+						//         qDebug("Symlink detected "+symLink);
+					QFileInfo sym( symLink);
+					fileS.sprintf( "%10i", sym.size() );
+					fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.filePath().data() );
+					fileDate = sym.lastModified().toString();
+				}
+			else
+				{
+						//        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
+					fileS.sprintf( "%10i", fi->size() );
+					fileL.sprintf( "%s",fi->fileName().data() );
+					fileDate= fi->lastModified().toString();
 
-      if(isDir || fileL.find("/",0,TRUE) != -1) {
-        if( !QDir( fi->filePath() ).isReadable())
-          pm = Resource::loadPixmap( "lockedfolder" );
-        else
-          pm= Resource::loadPixmap( "folder" );
-      } else if ( fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
-        pm = Resource::loadPixmap( "exec");
-      } else if( (fileInfo.permission( QFileInfo::ExeUser)
-                  | fileInfo.permission( QFileInfo::ExeGroup)
-                  | fileInfo.permission( QFileInfo::ExeOther)) && fs != "vfat" ) {
-        pm = Resource::loadPixmap( "exec");
-      } else if( !fi->isReadable() ) {
-        pm = Resource::loadPixmap( "locked" );
-      } else {
-        MimeType mt(fi->filePath());
-        pm=mt.pixmap(); //sets the correct pixmap for mimetype
-        if(pm.isNull())
-          pm =  Resource::loadPixmap( "UnknownDocument-14" );
-      }
-      if(  fi->isSymLink() && fileL.find("->",0,TRUE) != -1) {
-        // overlay link image
-        pm= Resource::loadPixmap( "folder" );
-        QPixmap lnk = Resource::loadPixmap( "opie/symlink" );
-        QPainter painter( &pm );
-        painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
-        pm.setMask( pm.createHeuristicMask( FALSE ) );
-      }
-      item->setPixmap( 0, pm);
-    }
-    isDir=FALSE;
-    ++it;
-  }
+					if( QDir(QDir::cleanDirPath( currentRemoteDir.canonicalPath()+"/"+fileL)).exists() )
+						{
+							fileL+="/";
+							isDir=TRUE;
+								//     qDebug( fileL);
+						}
+				}
 
-  if(currentRemoteDir.canonicalPath().find("dev",0,TRUE) != -1) {
-    struct stat buf;
-    DIR *dir;
-    struct dirent *mydirent;
-    if((dir = opendir( currentRemoteDir.canonicalPath().latin1())) != NULL)
-      while ((mydirent = readdir(dir)) != NULL) {
-        lstat( mydirent->d_name, &buf);
+			QFileInfo fileInfo(  currentRemoteDir.canonicalPath()+"/"+fileL);
+			if(fileL !="./" && fi->exists())
+				{
+					item= new QListViewItem( Remote_View, fileL, fileS, fileDate);
+					QPixmap pm;
+
+					if(isDir || fileL.find("/",0,TRUE) != -1)
+						{
+							if( !QDir( fi->filePath() ).isReadable())
+								pm = Resource::loadPixmap( "lockedfolder" );
+							else
+								pm= Resource::loadPixmap( "folder" );
+						}
+					else if ( fs == "vfat" && fileInfo.filePath().contains("/bin") )
+						{
+							pm = Resource::loadPixmap( "exec");
+						}
+					else if( (fileInfo.permission( QFileInfo::ExeUser)
+										| fileInfo.permission( QFileInfo::ExeGroup)
+										| fileInfo.permission( QFileInfo::ExeOther)) && fs != "vfat" )
+						{
+							pm = Resource::loadPixmap( "exec");
+						}
+					else if( !fi->isReadable() )
+						{
+							pm = Resource::loadPixmap( "locked" );
+						}
+					else
+						{
+							MimeType mt(fi->filePath());
+							pm=mt.pixmap(); //sets the correct pixmap for mimetype
+							if(pm.isNull())
+								pm =  Resource::loadPixmap( "UnknownDocument-14" );
+						}
+					if(  fi->isSymLink() && fileL.find("->",0,TRUE) != -1)
+						{
+								// overlay link image
+							pm= Resource::loadPixmap( "folder" );
+							QPixmap lnk = Resource::loadPixmap( "opie/symlink" );
+							QPainter painter( &pm );
+							painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
+							pm.setMask( pm.createHeuristicMask( FALSE ) );
+						}
+					item->setPixmap( 0, pm);
+				}
+			isDir=FALSE;
+			++it;
+		}
+
+  if(currentRemoteDir.canonicalPath().find("dev",0,TRUE) != -1)
+		{
+			struct stat buf;
+			DIR *dir;
+			struct dirent *mydirent;
+			if((dir = opendir( currentRemoteDir.canonicalPath().latin1())) != NULL)
+
+				while ((mydirent = readdir(dir)) != NULL)
+					{
+						lstat( mydirent->d_name, &buf);
 //        qDebug(mydirent->d_name);
-        fileL.sprintf("%s", mydirent->d_name);
-        fileS.sprintf("%d,%d", (int) (buf.st_dev>>8)&0xFF, (int) buf.st_dev &0xFF);
-        fileDate.sprintf("%s", ctime( &buf.st_mtime));
-        if( fileL.find(".") == -1 ){
-          item= new QListViewItem( Remote_View, fileL, fileS, fileDate);
-          pm =  Resource::loadPixmap( "UnknownDocument-14" );
-          item->setPixmap( 0,pm);
-        }
-      }
+						fileL.sprintf("%s", mydirent->d_name);
+						fileS.sprintf("%d,%d", (int) (buf.st_dev>>8)&0xFF, (int) buf.st_dev &0xFF);
+						fileDate.sprintf("%s", ctime( &buf.st_mtime));
 
-    closedir(dir);
-  }
+						if( fileL.find(".") == -1 )
+							{
+								item= new QListViewItem( Remote_View, fileL, fileS, fileDate);
+								pm =  Resource::loadPixmap( "UnknownDocument-14" );
+								item->setPixmap( 0,pm);
+							}
+					}
+
+			closedir(dir);
+		}
 
   Remote_View->setSorting( 3,FALSE);
   fillCombo( (const QString &) currentRemoteDir.canonicalPath() );
 }
 
-void AdvancedFm::localListClicked(QListViewItem *selectedItem) {
-  if(selectedItem) {
-    QString strItem=selectedItem->text(0);
-    QString strSize=selectedItem->text(1);
-    strSize=strSize.stripWhiteSpace();
-    if(strItem.find("@",0,TRUE) !=-1 || strItem.find("->",0,TRUE) !=-1 ) { //if symlink
-        QString strItem2 = dealWithSymName((const QString&)strItem);
-//      QString strItem2 = strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
-      if(QDir(strItem2).exists() ) {
-        currentDir.cd(strItem2, TRUE);
-        populateLocalView();
+void AdvancedFm::ListClicked(QListViewItem *selectedItem)
+{
+  if(selectedItem)
+		{
+			QString strItem=selectedItem->text(0);
+			QString strSize=selectedItem->text(1);
+			strSize=strSize.stripWhiteSpace();
+			bool isDirectory = false;
+			QString strItem2;
 
-      }
-    } else { // not a symlink
-      if(strItem.find(". .",0,TRUE) && strItem.find("/",0,TRUE)!=-1 ) {
-        if(QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem)).exists() ) {
-          strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
-          currentDir.cd(strItem,FALSE);
-          populateLocalView();
-    Local_View->ensureItemVisible(Local_View->firstChild());
-          
-        } else {
-          currentDir.cdUp();
-          populateLocalView();
-    Local_View->ensureItemVisible(Local_View->firstChild());
-        }
-        if(QDir(strItem).exists()){
-          currentDir.cd(strItem, TRUE);
-    Local_View->ensureItemVisible(Local_View->firstChild());
-          populateLocalView();
-        }
-      } else {
-        strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
-        if( QFile::exists(strItem ) ) {
-          //                     qDebug("clicked item "+strItem);
-          //                     DocLnk doc( strItem, FALSE );
-          //                     doc.execute();
-          //    Local_View->clearSelection();
-        }
-      } //end not symlink
-      chdir(strItem.latin1());
-    }
-    
-  }
+			if(strItem.find("@",0,TRUE) !=-1 || strItem.find("->",0,TRUE) !=-1 )//if symlink
+				{
+					strItem2 = dealWithSymName((const QString&)strItem);
+					if(QDir(strItem2).exists() )
+						strItem = strItem2;
+				}
+
+			if( strItem.find(". .",0,TRUE) && strItem.find("/",0,TRUE)!=-1 )
+				{
+
+					if(QDir(strItem).exists())
+						isDirectory = true;
+				}
+
+			if( isDirectory )
+				{
+					CurrentDir()->cd( strItem, TRUE);
+					PopulateView();
+					CurrentView()->ensureItemVisible( CurrentView()->firstChild());
+				}
+			chdir( strItem.latin1());
+		}
 }
 
-void AdvancedFm::remoteListClicked(QListViewItem *selectedItem) {
-    
-  if(selectedItem) {
-    QString strItem=selectedItem->text(0);
-    QString strSize=selectedItem->text(1);
-    strSize=strSize.stripWhiteSpace();
-    if(strItem.find("@",0,TRUE) !=-1 || strItem.find("->",0,TRUE) !=-1 ) { //if symlink
-        QString strItem2 = dealWithSymName((const QString&)strItem);
-//      QString strItem2 = strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
-        currentRemoteDir.cd(strItem2, TRUE);
-        populateRemoteView();
-    } else { // not a symlink
-      if(strItem.find(". .",0,TRUE) && strItem.find("/",0,TRUE)!=-1 ) {
-        if(QDir(QDir::cleanDirPath( currentRemoteDir.canonicalPath()+"/"+strItem)).exists() ) {
-          strItem=QDir::cleanDirPath( currentRemoteDir.canonicalPath()+"/"+strItem);
-          currentRemoteDir.cd(strItem,FALSE);
-          populateRemoteView();
-    Remote_View->ensureItemVisible(Remote_View->firstChild());
-        } else {
-          currentRemoteDir.cdUp();
-          populateRemoteView();
-    Remote_View->ensureItemVisible(Remote_View->firstChild());
-        }
-        if(QDir(strItem).exists()){
-          currentRemoteDir.cd(strItem, TRUE);
-          populateRemoteView();
-    Remote_View->ensureItemVisible(Remote_View->firstChild());
-        }
-      } else {
-        strItem=QDir::cleanDirPath( currentRemoteDir.canonicalPath()+"/"+strItem);
-        if( QFile::exists(strItem ) ) {
-          //                     qDebug("clicked item "+strItem);
-          //                     DocLnk doc( strItem, FALSE );
-          //                     doc.execute();
-          //    Remote_View->clearSelection();
-        }
-      } //end not symlink
-      chdir(strItem.latin1());
-    }
-  }
-}
-
-
-void AdvancedFm::localListPressed( int mouse, QListViewItem *, const QPoint& , int ) {
-//  qDebug("list pressed");
+void AdvancedFm::ListPressed( int mouse, QListViewItem *, const QPoint& , int ) {
   switch (mouse) {
   case 1:
   {
-        if(renameBox != 0 )
-    {
-//        qDebug("cancel rename");
+		if(renameBox != 0 )
+			{
         cancelRename();
-    }
+			}
 
   }
-    break;
+	break;
   case 2:
     menuTimer.start( 500, TRUE );
-//    qDebug("Start menu timer\n");
     break;
   };
 }
 
-void AdvancedFm::remoteListPressed( int mouse, QListViewItem*, const QPoint&, int ) {
-
-    switch (mouse) {
-      case 1:
-      {
-          if(renameBox != 0 )
-            {
-//                qDebug("cancel rename");
-                cancelRename();
-            }
-      }
-      break;
-      case 2:
-          menuTimer.start( 500, TRUE );
-//          qDebug("Start menu timer");
-          break;
-    };
-}
-
-
-void AdvancedFm::switchToLocalTab() {
+void AdvancedFm::switchToLocalTab()
+{
   TabWidget->setCurrentTab(0);
   Local_View->setFocus();
 }
 
-void AdvancedFm::switchToRemoteTab() {
+void AdvancedFm::switchToRemoteTab()
+{
   TabWidget->setCurrentTab(1);
   Remote_View->setFocus();
 }
 
-void AdvancedFm::readConfig() {
+void AdvancedFm::readConfig()
+{
   Config cfg("AdvancedFm");
 }
 
-void AdvancedFm::writeConfig() {
+void AdvancedFm::writeConfig()
+{
   Config cfg("AdvancedFm");
 }
 
-void  AdvancedFm::currentPathComboChanged() {
-  if (TabWidget->getCurrentTab() == 0) {
-//  if (TabWidget->currentPageIndex() == 0) {
-    if(QDir( currentPathCombo->lineEdit()->text()).exists()) {
-      currentDir.setPath( currentPathCombo->lineEdit()->text() );
-      populateLocalView();
-    } else {
-      QMessageBox::message(tr("Note"),tr("That directory does not exist"));
-    }
-  }
-  if (TabWidget->getCurrentTab() == 0) {
-//  if (TabWidget->currentPageIndex() == 0) {
-    if(QDir( currentPathCombo->lineEdit()->text()).exists()) {
-      currentRemoteDir.setPath( currentPathCombo->lineEdit()->text() );
-      populateRemoteView();
-    } else {
-      QMessageBox::message(tr("Note"),tr("That directory does not exist"));
-    }
-  }
+void  AdvancedFm::currentPathComboChanged()
+{
+	if(QDir( currentPathCombo->lineEdit()->text()).exists())
+		{
+			CurrentDir()->setPath( currentPathCombo->lineEdit()->text() );
+			PopulateView();
+		}
+	else
+		{
+			QMessageBox::message(tr("Note"),tr("That directory does not exist"));
+		}
 }
 
-void  AdvancedFm::fillCombo(const QString &currentPath) {
+void  AdvancedFm::fillCombo(const QString &currentPath)
+{
 //    qDebug("%d",TabWidget->getCurrentTab());
-  if (TabWidget->getCurrentTab() == 0) {
-//  if (TabWidget->currentPageIndex() == 0) {
-    currentPathCombo->lineEdit()->setText( currentPath);
-    if( localDirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
-      currentPathCombo->clear();
-      localDirPathStringList.prepend( currentPath );
-      currentPathCombo->insertStringList( localDirPathStringList,-1);
-    }
-  } else {
-    currentPathCombo->lineEdit()->setText( currentPath);
-    if( remoteDirPathStringList.grep( currentPath,TRUE).isEmpty() ) {
-      currentPathCombo->clear();
-      remoteDirPathStringList.prepend( currentPath );
-      currentPathCombo->insertStringList( remoteDirPathStringList,-1);
-    }
-  }
+  if ( whichTab == 1)
+		{
+			currentPathCombo->lineEdit()->setText( currentPath);
+			if( localDirPathStringList.grep( currentPath,TRUE).isEmpty() )
+				{
+					currentPathCombo->clear();
+					localDirPathStringList.prepend( currentPath );
+					currentPathCombo->insertStringList( localDirPathStringList,-1);
+				}
+		}
+	else
+		{
+			currentPathCombo->lineEdit()->setText( currentPath);
+			if( remoteDirPathStringList.grep( currentPath,TRUE).isEmpty() )
+				{
+					currentPathCombo->clear();
+					remoteDirPathStringList.prepend( currentPath );
+					currentPathCombo->insertStringList( remoteDirPathStringList,-1);
+				}
+		}
 }
 
-void AdvancedFm::currentPathComboActivated(const QString & currentPath) {
-  if (TabWidget->getCurrentTab() == 0) {
-//  if (TabWidget->currentPageIndex() == 0) {
+void AdvancedFm::currentPathComboActivated(const QString & currentPath)
+{
     chdir( currentPath.latin1() );
-    currentDir.cd( currentPath, TRUE);
-    populateLocalView();
+    CurrentDir()->cd( currentPath, TRUE);
+    PopulateView();
     update();
-  } else {
-    chdir( currentPath.latin1() );
-    currentRemoteDir.cd( currentPath, TRUE);
-    populateRemoteView();
-    update();
-  }
 }
 
-QStringList AdvancedFm::getPath() {
+QStringList AdvancedFm::getPath()
+{
   QStringList strList;
-  if (TabWidget->getCurrentTab() == 0) {
-//  if (TabWidget->currentPageIndex() == 0) {
-    QList<QListViewItem> * getSelectedItems( QListView * Local_View );
-    QListViewItemIterator it( Local_View );
-    for ( ; it.current(); ++it ) {
-      if ( it.current()->isSelected() ) {
-        strList <<  it.current()->text(0);
+	QListView *thisView=CurrentView();
+    QList<QListViewItem> * getSelectedItems( QListView * thisView );
+    QListViewItemIterator it( thisView );
+    for ( ; it.current(); ++it )
+			{
+				if ( it.current()->isSelected() )
+					{
+						strList <<  it.current()->text(0);
 //        qDebug(it.current()->text(0));
-      }
-    }
+					}
+			}
     return strList;
-  } else {
-    QList<QListViewItem> * getSelectedItems( QListView * Remote_View );
-    QListViewItemIterator it( Remote_View );
-    for ( ; it.current(); ++it ) {
-      if ( it.current()->isSelected() ) {
-        strList << it.current()->text(0);
-//        qDebug(it.current()->text(0));
-      }
-    }
-    return strList;
-  }
-  return "";
 }
 
-void AdvancedFm::homeButtonPushed() {
+void AdvancedFm::homeButtonPushed()
+{
   QString current = QDir::homeDirPath();
   chdir( current.latin1() );
-  if (TabWidget->getCurrentTab() == 0) {
-//  if (TabWidget->currentPageIndex() == 0) {
-    currentDir.cd(  current, TRUE);
-    populateLocalView();
-  } else {
-    currentRemoteDir.cd(  current, TRUE);
-    populateRemoteView();
-  }
+	CurrentDir()->cd(  current, TRUE);
+	PopulateView();
   update();
 }
 
-void AdvancedFm::docButtonPushed() {
+void AdvancedFm::docButtonPushed()
+{
   QString current = QPEApplication::documentDir();
   chdir( current.latin1() );
 
-    if (TabWidget->getCurrentTab() == 0) {
-//if (TabWidget->currentPageIndex() == 0) {
-    currentDir.cd( current, TRUE);
-    populateLocalView();
-  } else {
-    currentRemoteDir.cd( current, TRUE);
-    populateRemoteView();
-  }
+    CurrentDir()->cd( current, TRUE);
+    PopulateView();
   update();
 }
 
-void AdvancedFm::SDButtonPushed() {
-    QString current = "/mnt/card";// this can change so fix
+void AdvancedFm::SDButtonPushed()
+{
+	QString current = "/mnt/card";// this can change so fix
   chdir( current.latin1() );
-  if (TabWidget->getCurrentTab() == 0) {
-//  if (TabWidget->currentPageIndex() == 0) {
-    currentDir.cd( current, TRUE);
-    populateLocalView();
-  } else {
-    currentRemoteDir.cd( current, TRUE);
-    populateRemoteView();
-  }
+    CurrentDir()->cd( current, TRUE);
+    PopulateView();
   update();
-
 }
 
-void AdvancedFm::CFButtonPushed() {
-    QString current;
-    if(zaurusDevice)
-        current= "/mnt/cf"; //zaurus
-    else
-        current = "/mnt/hda"; //ipaq
-     
-    chdir( current.latin1() );
-  if (TabWidget->getCurrentTab() == 0) {
-//    if (TabWidget->currentPageIndex() == 0) {
-        currentDir.cd( current, TRUE);
-        populateLocalView();
-    } else {
-        currentRemoteDir.cd( current, TRUE);
-        populateRemoteView();
-    }
-    update();
+void AdvancedFm::CFButtonPushed()
+{
+	QString current;
+	if(zaurusDevice)
+		current= "/mnt/cf"; //zaurus
+	else
+		current = "/mnt/hda"; //ipaq
+
+	chdir( current.latin1() );
+	CurrentDir()->cd( current, TRUE);
+	PopulateView();
+	update();
 }
 
 
-
-void AdvancedFm::doAbout() {
+void AdvancedFm::doAbout()
+{
   QMessageBox::message("AdvancedFm",tr("Advanced FileManager\n"
-                       "is copyright 2002 by\n"
-                       "L.J.Potter<llornkcor@handhelds.org>\n"
-                       "and is licensed by the GPL"));
+																			 "is copyright 2002-2003 by\n"
+																			 "L.J.Potter<llornkcor@handhelds.org>\n"
+																			 "and is licensed by the GPL"));
 }
 
-void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
-  if( TabWidget->hasFocus()) 
-    switch ( e->key() ) {
-    case Key_Delete:
-      del();
+void AdvancedFm::keyPressEvent( QKeyEvent *e)
+{
+//    e->accept();
+  if( CurrentView()->hasFocus()  )
+    {
+			switch ( e->key() ) {
+			case Key_Delete:
+				del();
+				break;
+			case Key_A:
+				copyAs();
+				break;
+			case Key_C:
+				copy();
+				break;
+			case Key_E:
+				runThis();
+				break;
+      case Key_G:
+      {
+				currentPathCombo->lineEdit()->setFocus();
+      }
       break;
-    case Key_H:
-      showHidden();
-      break;
-    case Key_E:
-      runThis();
-      break;
-    case Key_C:
-      copy();
-      break;
-    case Key_A:
-      copyAs();
-      break;
-    case Key_M:
-      move();
-      break;
-    case Key_R:
-      rn();
-      break;
-    case Key_I:
-      fileStatus();
-      break;
-    case Key_U:
-      upDir();
-      break;
-    case Key_P:
-      filePerms();
-      break;
-    case Key_N:
-      mkDir();
-      break;
-    case Key_1:
-      switchToLocalTab();
-      break;
-    case Key_2:
-      switchToRemoteTab();
-      break;
-    case Key_3:
-      CFButtonPushed();
-      break;
-    case Key_4:
-      SDButtonPushed();
-      break;
-    case Key_5:
-      homeButtonPushed();
-      break;
-    case Key_6:
-      docButtonPushed();
-      break;
-    case Key_7:
-      break;
-    case Key_8:
-      break;
-    case Key_9:
-      break;
-    case Key_0:
-      break;
+
+			case Key_H:
+				showHidden();
+				break;
+			case Key_I:
+				fileStatus();
+				break;
+			case Key_M:
+				move();
+				break;
+			case Key_N:
+				mkDir();
+				break;
+			case Key_P:
+				filePerms();
+				break;
+			case Key_R:
+				rn();
+				break;
+			case Key_U:
+				upDir();
+				break;
+			case Key_1:
+				switchToLocalTab();
+				break;
+			case Key_2:
+				switchToRemoteTab();
+				break;
+			case Key_3:
+				CFButtonPushed();
+				break;
+			case Key_4:
+				SDButtonPushed();
+				break;
+			case Key_5:
+				homeButtonPushed();
+				break;
+			case Key_6:
+				docButtonPushed();
+				break;
+			case Key_7:
+				break;
+			case Key_8:
+				break;
+			case Key_9:
+				break;
+			case Key_0:
+				break;
+			};
+			e->accept();
     }
 }
 
+void AdvancedFm::keyReleaseEvent( QKeyEvent *e)
+{
+	if( CurrentView()->hasFocus() )
+		e->ignore();
+}
 
-void AdvancedFm::QPEButtonPushed() {
+
+void AdvancedFm::QPEButtonPushed()
+{
   QString current = QPEApplication::qpeDir();
   chdir( current.latin1() );
-  if (TabWidget->getCurrentTab() == 0) {
-//  if (TabWidget->currentPageIndex() == 0) {
-    currentDir.cd( current, TRUE);
-    populateLocalView();
-  } else {
-    currentRemoteDir.cd( current, TRUE);
-    populateRemoteView();
-  }
+    CurrentDir()->cd( current, TRUE);
+    PopulateView();
   update();
 }
 
-void AdvancedFm::parsetab(const QString &fileName) {
+void AdvancedFm::parsetab(const QString &fileName)
+{
 
   fileSystemTypeList.clear();
   fsList.clear();
   struct mntent *me;
   FILE *mntfp = setmntent( fileName.latin1(), "r" );
-  if ( mntfp ) {
-    while ( (me = getmntent( mntfp )) != 0 ) {
+  if ( mntfp )
+		{
+    while ( (me = getmntent( mntfp )) != 0 )
+			{
       QString deviceName = me->mnt_fsname;
       QString filesystemType = me->mnt_type;
       QString mountDir = me->mnt_dir;
-      if(deviceName != "none") {
+      if(deviceName != "none")
+				{
         if( fsList.contains(filesystemType) == 0
             & filesystemType.find("proc",0,TRUE) == -1
             & filesystemType.find("cramfs",0,TRUE) == -1
@@ -721,7 +663,8 @@ void AdvancedFm::parsetab(const QString &fileName) {
   endmntent( mntfp );
 }
 
-QString  AdvancedFm::getFileSystemType(const QString &currentText) {
+QString  AdvancedFm::getFileSystemType(const QString &currentText)
+{
   parsetab("/etc/mtab"); //why did TT forget filesystem type?
   QString current = currentText;//.right( currentText.length()-1);
   QString baseFs;
@@ -737,125 +680,107 @@ QString  AdvancedFm::getFileSystemType(const QString &currentText) {
   return baseFs;
 }
 
-QString  AdvancedFm::getDiskSpace( const QString &path) {
-   struct statfs fss;
-   if ( !statfs( path.latin1(), &fss ) ) {
-     int blkSize = fss.f_bsize;
- //    int totalBlks = fs.f_blocks;
-     int availBlks = fss.f_bavail;
- 
-     long mult = blkSize / 1024;
-     long div = 1024 / blkSize;
-     if ( !mult ) mult = 1;
-     if ( !div ) div = 1;
- 
-     return QString::number(availBlks * mult / div);
-   }
-   return "";
+QString  AdvancedFm::getDiskSpace( const QString &path)
+{
+	struct statfs fss;
+	if ( !statfs( path.latin1(), &fss ) ) {
+		int blkSize = fss.f_bsize;
+			//    int totalBlks = fs.f_blocks;
+		int availBlks = fss.f_bavail;
+
+		long mult = blkSize / 1024;
+		long div = 1024 / blkSize;
+		if ( !mult ) mult = 1;
+		if ( !div ) div = 1;
+
+		return QString::number(availBlks * mult / div);
+	}
+	return "";
 }
 
 
-void AdvancedFm::showFileMenu() {
+void AdvancedFm::showFileMenu()
+{
+	QString curApp;
+	curApp = CurrentView()->currentItem()->text(0);
 
-    QString curApp;
-    bool isLocalView = false;
-  if (TabWidget->getCurrentTab() == 0) {
-//    if (TabWidget->currentPageIndex() == 0) {
-        isLocalView = TRUE;
-        curApp = Local_View->currentItem()->text(0);
-    }   else {
-        curApp = Remote_View->currentItem()->text(0);
-    }
+	MimeType mt( curApp );
+	const AppLnk* app = mt.application();
+	QFile fi(curApp);
+	QPopupMenu *m = new QPopupMenu(0);
+	QPopupMenu *n = new QPopupMenu(0);
+		//    QPopupMenu *o = new QPopupMenu(0);
+	m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
 
-     MimeType mt( curApp );
-     const AppLnk* app = mt.application();
-     QFile fi(curApp);
-     QPopupMenu *m = new QPopupMenu(0);
-     QPopupMenu *n = new QPopupMenu(0);
-     //    QPopupMenu *o = new QPopupMenu(0);
-  if (TabWidget->getCurrentTab() == 0) 
-     m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
-  else
-     m->insertItem(  tr( "Show Hidden Files" ), this,  SLOT( showRemoteHidden() ));
-      
-     if ( QFileInfo(fi).isDir() ) {
-       m->insertSeparator();
-       m->insertItem( tr( "Change Directory" ), this, SLOT( doLocalCd() ));
-     } else {
+	if ( QFileInfo(fi).isDir() )
+		{
+			m->insertSeparator();
+			m->insertItem( tr( "Change Directory" ), this, SLOT( doDirChange() ));
+		}
+	else
+		{
 
-       if ( app )
-         m->insertItem( app->pixmap(), tr( "Open in "
-                                           + app->name() ), this, SLOT( runThis() ) );
-       else if( QFileInfo(fi).isExecutable() ) //damn opie doesnt like this
-         m->insertItem( tr( "Execute" ), this, SLOT( runThis() ) );
-       m->insertItem( Resource::loadPixmap( "txt" ), tr( "Open as text" ),this, SLOT( runText() ) );
-     }
+			if ( app )
+				m->insertItem( app->pixmap(), tr( "Open in "
+																					+ app->name() ), this, SLOT( runThis() ) );
+			else if( QFileInfo(fi).isExecutable() ) //damn opie doesnt like this
+				m->insertItem( tr( "Execute" ), this, SLOT( runThis() ) );
+			m->insertItem( Resource::loadPixmap( "txt" ), tr( "Open as text" ),this, SLOT( runText() ) );
+		}
 
-     m->insertItem(tr("Actions"),n);
-     if(isLocalView)
-       n->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
-     else
-       n->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
+	m->insertItem(tr("Actions"),n);
+	n->insertItem( tr( "Make Directory" ), this, SLOT( makeDir() ));
 
-     n->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
+	n->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
 
-    n->insertSeparator();
-    
-    
-    if(isLocalView)
-        n->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
-    else
-        n->insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
+	n->insertSeparator();
+	n->insertItem( tr( "Rename" ), this, SLOT( renameIt() ));
 
-    n->insertItem( tr( "Copy" ), this, SLOT( copy() ));
-    n->insertItem( tr( "Copy As" ), this, SLOT( copyAs() ));
-    n->insertItem( tr( "Copy Same Dir" ), this, SLOT( copySameDir() ));
-    n->insertItem( tr( "Move" ), this, SLOT( move() ));
+	n->insertItem( tr( "Copy" ), this, SLOT( copy() ));
+	n->insertItem( tr( "Copy As" ), this, SLOT( copyAs() ));
+	n->insertItem( tr( "Copy Same Dir" ), this, SLOT( copySameDir() ));
+	n->insertItem( tr( "Move" ), this, SLOT( move() ));
 
-    n->insertSeparator();
+	n->insertSeparator();
+	n->insertItem( tr( "Delete" ), this, SLOT( doDelete() ));
+	m->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
 
-    if(isLocalView)
-        n->insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
-    else
-        n->insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
+	m->insertItem( tr( "Run Command" ), this, SLOT( runCommand() ));
+	m->insertItem( tr( "File Info" ), this, SLOT( fileStatus() ));
 
-
-    m->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
-
-    m->insertItem( tr( "Run Command" ), this, SLOT( runCommand() ));
-    m->insertItem( tr( "File Info" ), this, SLOT( fileStatus() ));
-
-    m->insertSeparator();
-    m->insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
+	m->insertSeparator();
+	m->insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
 
 #if defined(QT_QWS_OPIE)
-    m->insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
-#endif    
-    m->setCheckable(TRUE);
-    if (!b)
-        m->setItemChecked(m->idAt(0),TRUE);
-    else
-        m->setItemChecked(m->idAt(0),FALSE);
+	m->insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
+#endif
+	m->setCheckable(TRUE);
+	if (!b)
+		m->setItemChecked(m->idAt(0),TRUE);
+	else
+		m->setItemChecked(m->idAt(0),FALSE);
 
-    if(Ir::supported())
-        m->insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
-    m->setFocus();
-    m->exec( QPoint( 4,QCursor::pos().y()) );
+	if(Ir::supported())
+		m->insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
+	m->setFocus();
+	m->exec( QPoint( 4,QCursor::pos().y()) );
 
-    if(m) delete m;
+	if(m) delete m;
 }
 
 
-void AdvancedFm::cancelMenuTimer() {
-
+void AdvancedFm::cancelMenuTimer()
+{
 //  qDebug("selectionChanged: cancel menu timer");
   if( menuTimer.isActive() )
     menuTimer.stop();
 }
 
-QString AdvancedFm::checkDiskSpace(const QString &path) {
+QString AdvancedFm::checkDiskSpace(const QString &path)
+{
   struct statfs fss;
-  if ( !statfs( path.latin1(), &fss ) ) {
+  if ( !statfs( path.latin1(), &fss ) )
+		{
     int blkSize = fss.f_bsize;
 //    int totalBlks = fs.f_blocks;
     int availBlks = fss.f_bavail;
@@ -871,45 +796,36 @@ QString AdvancedFm::checkDiskSpace(const QString &path) {
   return "";
 }
 
-void AdvancedFm::addToDocs() {
-    QStringList strListPaths = getPath();
-    if( strListPaths.count() > 0) {
-        QString curFile;
-  if (TabWidget->getCurrentTab() == 0) {
-//        if (TabWidget->currentPageIndex() == 0) {
-            for ( QStringList::Iterator it = strListPaths.begin(); it != strListPaths.end(); ++it ) {
-                curFile = currentDir.canonicalPath()+"/"+(*it);
-//                qDebug(curFile);
-                DocLnk f;
-//                curFile.replace(QRegExp("\\..*"),"");
-                f.setName((*it));
-                f.setFile( curFile);
-                f.writeLink();
-            }
-        } else {
-            for ( QStringList::Iterator it = strListPaths.begin(); it != strListPaths.end(); ++it ) {
-                curFile =  currentRemoteDir.canonicalPath()+"/"+(*it);
-//                qDebug(curFile);
+void AdvancedFm::addToDocs()
+{
+	QStringList strListPaths = getPath();
+	QDir *thisDir = CurrentDir();
 
-                DocLnk f;
+	if( strListPaths.count() > 0)
+		{
+		QString curFile;
+			for ( QStringList::Iterator it = strListPaths.begin(); it != strListPaths.end(); ++it )
+				{
+				curFile = thisDir->canonicalPath()+"/"+(*it);
+//                qDebug(curFile);
+				DocLnk f;
 //                curFile.replace(QRegExp("\\..*"),"");
-                f.setName((*it));
-                f.setFile( curFile);
-                f.writeLink();
-            }
-        }
-    }
+				f.setName((*it));
+				f.setFile( curFile);
+				f.writeLink();
+			}
+		}
 }
 
 
 void AdvancedFm::customDirsToMenu()
 {
- 
-    Config cfg("AdvancedFm");
-    cfg.setGroup("Menu");
 
-    QStringList list = cfg.readListEntry( "CustomDir", ',');
-    menuButton->insertItems(list );
+	Config cfg("AdvancedFm");
+	cfg.setGroup("Menu");
+
+	QStringList list = cfg.readListEntry( "CustomDir", ',');
+	menuButton->insertItems(list );
 
 //      for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
 //        {
@@ -919,61 +835,54 @@ void AdvancedFm::customDirsToMenu()
 
 void AdvancedFm::dirMenuSelected(int item)
 {
-    qDebug("menu item %d", item);
-    switch(item)
-      {
-          
-        case -21:
-        case 0: 
-            addCustomDir();
-            break;
-        case -22:
-        case 1:   
-            removeCustomDir();
-            break;
-        default:
-        {
-//            gotoCustomDir( menuButton->text(item));            
-//            gotoCustomDir( customDirMenu->text(item));            
-        }
-        break;
-        
-      };
+	qDebug("menu item %d", item);
+	switch(item)
+		{
+
+		case -21:
+		case 0:
+			addCustomDir();
+			break;
+		case -22:
+		case 1:
+			removeCustomDir();
+			break;
+		default:
+		{
+//            gotoCustomDir( menuButton->text(item));
+//            gotoCustomDir( customDirMenu->text(item));
+		}
+		break;
+
+		};
 }
 
 void AdvancedFm::addCustomDir()
 {
-    Config cfg("AdvancedFm");
-    cfg.setGroup("Menu");
-    QString dir;
-    QStringList list = cfg.readListEntry( (const QString &)"CustomDir", (const QChar)',');
+	Config cfg("AdvancedFm");
+	cfg.setGroup("Menu");
+	QString dir;
+	QStringList list = cfg.readListEntry( (const QString &)"CustomDir", (const QChar)',');
 
-    if (TabWidget->getCurrentTab() == 0)
-      {
-          dir =  currentDir.canonicalPath();
-      }
-    else
-      {
-          dir =  currentRemoteDir.canonicalPath();
-      }
+	dir =  CurrentDir()->canonicalPath();
 
-    bool addIt=true; 
-    for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
-      {
-          if( dir == (*it))
-            {
-                addIt=false;
-            }
-      }
-    if(addIt)
-      {
-          menuButton->insertItem(dir);
+	bool addIt=true;
+	for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
+		{
+			if( dir == (*it))
+				{
+					addIt=false;
+				}
+		}
+	if(addIt)
+		{
+			menuButton->insertItem(dir);
 //          customDirMenu->insertItem(dir);
-          list <<  dir;
-      }
+			list <<  dir;
+		}
 
-    cfg.writeEntry("CustomDir", list, ',');
-    cfg.write();
+	cfg.writeEntry("CustomDir", list, ',');
+	cfg.write();
 }
 
 void AdvancedFm::removeCustomDir()
@@ -984,42 +893,34 @@ void AdvancedFm::removeCustomDir()
   QString dir;
   QStringList list = cfg.readListEntry( (const QString &)"CustomDir", (const QChar)',');
   QStringList list2;
-
-  if (TabWidget->getCurrentTab() == 0)
-      {
-          dir =  currentDir.canonicalPath();
-      }
-    else
-      {
-          dir =  currentRemoteDir.canonicalPath();
-      }
+	dir =  CurrentDir()->canonicalPath();
   int ramble=2;
 //  int ramble=-24;
 //first remove list
   if(list.grep(dir,true).isEmpty())
     {
-        QMessageBox::message("AdvancedFm",tr("Cannot remove current directory\nfrom bookmarks.\nIt is not bookmarked!!"));
+			QMessageBox::message("AdvancedFm",tr("Cannot remove current directory\nfrom bookmarks.\nIt is not bookmarked!!"));
     }
   else
     {
-        for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
-          {
-              if((*it) != dir)//current item is not our current dir, so add it to temp list
-                {
-                    list2 <<(*it);
-                }
-              else
-                {
+			for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
+				{
+					if((*it) != dir)//current item is not our current dir, so add it to temp list
+						{
+							list2 <<(*it);
+						}
+					else
+						{
 //              customDirMenu->removeItem( ramble);
-                    menuButton->remove( ramble);
-              
-                }
-              ramble++;
-//        ramble--;
-          }
+							menuButton->remove( ramble);
 
-        cfg.writeEntry("CustomDir", list2, ',');
-        cfg.write();
+						}
+					ramble++;
+//        ramble--;
+				}
+
+			cfg.writeEntry("CustomDir", list2, ',');
+			cfg.write();
     }
 //    customDirsToMenu();
 
@@ -1028,57 +929,74 @@ void AdvancedFm::removeCustomDir()
 void AdvancedFm::gotoCustomDir(const QString &dir)
 {
 //     qDebug("gotoCustomDir(const QString &dir) " +dir );
-    QString curDir = dir;
+	QString curDir = dir;
+	QDir *thisDir = CurrentDir();
 //     if( curDir.isEmpty()) {
 //     }
-     if( curDir == s_addBookmark)
-       {
-           addCustomDir();
-       }
-     if( curDir == s_removeBookmark)
-       {
-           removeCustomDir( );
-       }
-     else
-       {
-           if(QDir( curDir).exists() )
-             {
-                 if (TabWidget->getCurrentTab() == 0)
-                   {
-                       currentDir.setPath( curDir );
-                       chdir( curDir.latin1() );
-                       currentDir.cd( curDir, TRUE);
-                       populateLocalView();
-                   }
-                 else
-                   {
-                       currentRemoteDir.setPath( curDir );
-                       chdir( curDir.latin1() );
-                       currentRemoteDir.cd( curDir, TRUE);
-                       populateRemoteView();
-                   }
-             }
-       }
-//    menuButton
-//    qDebug("gotoCustomDir(const QString &dir) " +dir );
-//     QString curDir = dir;
-//     if(QDir( curDir).exists() )
-//       {
-//           if (TabWidget->getCurrentTab() == 0)
-//             {
-//                 currentDir.setPath( curDir );
-//                 chdir( curDir.latin1() );
-//                 currentDir.cd( curDir, TRUE);
-//                 populateLocalView();
-//             }
-//           else
-//             {
-//                 currentRemoteDir.setPath( curDir );
-//                 chdir( curDir.latin1() );
-//                 currentRemoteDir.cd( curDir, TRUE);
-//                 populateRemoteView();
-//             }
-//       }
-//     menuButton->setLabel(" ");
-//    menuButton
+	if( curDir == s_addBookmark)
+		{
+			addCustomDir();
+		}
+	if( curDir == s_removeBookmark)
+		{
+			removeCustomDir( );
+		}
+	else
+		{
+			if(QDir( curDir).exists() )
+				{
+					thisDir->setPath( curDir );
+					chdir( curDir.latin1() );
+					thisDir->cd( curDir, TRUE);
+					PopulateView();
+				}
+		}
+}
+
+QDir *AdvancedFm::CurrentDir()
+{
+	if ( whichTab == 1)
+		{
+		return &currentDir;
+		}
+	else
+		{
+		return &currentRemoteDir;
+		}
+}
+
+QDir *AdvancedFm::OtherDir()
+{
+	if ( whichTab == 1)
+		{
+		return &currentRemoteDir;
+		}
+	else
+		{
+		return &currentDir;
+		}
+}
+
+void AdvancedFm::PopulateView()
+{
+	if ( whichTab == 1)
+		populateLocalView();
+	else
+		populateRemoteView();
+}
+
+QListView * AdvancedFm::CurrentView()
+{
+	if ( whichTab == 1)
+		return Local_View;
+	else
+		return Remote_View;
+}
+
+QListView * AdvancedFm::OtherView()
+{
+	if ( whichTab == 1)
+		return Remote_View;
+	else
+		return Local_View;
 }

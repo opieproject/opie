@@ -46,22 +46,23 @@
 #include <dirent.h>
 
 
-void AdvancedFm::doLocalCd() {
-  localListClicked( Local_View->currentItem());
+void AdvancedFm::doDirChange()
+{
+  ListClicked( CurrentView()->currentItem());
 }
 
-void AdvancedFm::doRemoteCd() {
-  localListClicked( Remote_View->currentItem());
-}
-
-void AdvancedFm::showMenuHidden() {
-  if (b) {
+void AdvancedFm::showMenuHidden()
+{
+  if (b)
+		{
     currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
 //    b=FALSE;
 
-  }  else {
+  }
+	else
+		{
     currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
     currentRemoteDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
     fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
@@ -69,158 +70,119 @@ void AdvancedFm::showMenuHidden() {
   }
   populateLocalView();
   populateRemoteView();
-//     if(TabWidget->getCurrentTab() == 0)
-//         showHidden();
-//     else
-//         showRemoteHidden();
 //    if(b) qDebug("<<<<<<<<<<<<<<<<<<<<<<<<<<<< true");
     if(b) b = false; else b = true;
 }
 
-void AdvancedFm::showHidden() {
-  if (b) {
-    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+void AdvancedFm::showHidden()
+{
+  if (b)
+		{
+			CurrentDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
 //     fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
 //    b=FALSE;
 
-  }  else {
-    currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+		}
+	else
+		{
+			CurrentDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
 //     fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
 //    b=TRUE;
-  }
-  populateLocalView();
+		}
+  PopulateView();
 }
 
-void AdvancedFm::showRemoteHidden() {
-  if (b) {
-    currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
-//    b=TRUE;
-
-  }  else {
-    currentRemoteDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
-//    b=FALSE;
-  }
-  populateRemoteView();
-}
-
-QString AdvancedFm::dealWithSymName(const QString &fileName) {
+QString AdvancedFm::dealWithSymName(const QString &fileName)
+{
         QString strItem = fileName;
         return  strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
 }
 
-void AdvancedFm::runThis() {
-  QString fs;
-  if (TabWidget->getCurrentTab() == 0) {
-    QString curFile = Local_View->currentItem()->text(0);
-    if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
-        curFile = dealWithSymName((const QString&)curFile);
+void AdvancedFm::runThis()
+{
+	QString fs;
+	QDir *thisDir = CurrentDir();
 
-    if(curFile != "../") {
+	QString curFile = CurrentView()->currentItem()->text(0);
+	QString path = thisDir->canonicalPath();
 
-      fs = getFileSystemType((const QString &) currentDir.canonicalPath());
-      QFileInfo fileInfo( currentDir.canonicalPath()+"/"+curFile);
-      qDebug( fileInfo.owner());
-      if( (fileInfo.permission( QFileInfo::ExeUser)
-           | fileInfo.permission( QFileInfo::ExeGroup)
-           | fileInfo.permission( QFileInfo::ExeOther)) // & fs.find("vfat",0,TRUE) == -1) {
-          | fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
-        QCopEnvelope e("QPE/System", "execute(QString)" );
-        e << curFile;
-      } else {
-        curFile =  currentDir.canonicalPath()+"/"+curFile;
-        DocLnk nf(curFile);
-        QString execStr = nf.exec();
-        qDebug( execStr);
-        if( execStr.isEmpty() ) {
-        } else {
-          nf.execute();
-        }
-      }
-    }
-  } else {
-    QString curFile = Remote_View->currentItem()->text(0);
-    if(curFile != "../") {
-    if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
-        curFile = dealWithSymName((const QString&)curFile);
+	if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
 
-      fs= getFileSystemType((const QString &) currentRemoteDir.canonicalPath());
-      qDebug("Filesystemtype is "+fs);
-      QFileInfo fileInfo( currentRemoteDir.canonicalPath()+"/"+curFile);
-      if( (fileInfo.permission( QFileInfo::ExeUser)
-           | fileInfo.permission( QFileInfo::ExeGroup)
-           | fileInfo.permission( QFileInfo::ExeOther)) // & fs.find("vfat",0,TRUE) == -1) {
-          | fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
-        QCopEnvelope e("QPE/System", "execute(QString)" );
-        e << curFile;
-      } else {
-        curFile =  currentRemoteDir.canonicalPath()+"/"+curFile;
-        DocLnk nf(curFile);
-        QString execStr = nf.exec();
-        qDebug(execStr);
-        if( execStr.isEmpty() ) {
-        } else {
-          nf.execute();
-        }
-      }
-    }
-  }
+		curFile = dealWithSymName((const QString&)curFile);
+
+	if(curFile != "../")
+		{
+
+			fs = getFileSystemType((const QString &) path);
+			QFileInfo fileInfo( path  + "/" + curFile);
+			qDebug( fileInfo.owner());
+
+			if( (fileInfo.permission( QFileInfo::ExeUser)
+					 | fileInfo.permission( QFileInfo::ExeGroup)
+					 | fileInfo.permission( QFileInfo::ExeOther)) // & fs.find("vfat",0,TRUE) == -1) {
+					| fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
+				QCopEnvelope e("QPE/System", "execute(QString)" );
+				e << curFile;
+			}
+			else
+				{
+					curFile =  path + "/" + curFile;
+					DocLnk nf(curFile);
+					QString execStr = nf.exec();
+					qDebug( execStr);
+					if( execStr.isEmpty() )
+						{
+						}
+					else
+						{
+							nf.execute();
+						}
+				}
+		}
 }
 
-void AdvancedFm::runText() {
-  if (TabWidget->getCurrentTab() == 0) {
-    QString curFile = Local_View->currentItem()->text(0);
-    if(curFile != "../") {
-    if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
+void AdvancedFm::runText()
+{
+	QString curFile = CurrentView()->currentItem()->text(0);
+	if(curFile != "../")
+		{
+			if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
         curFile = dealWithSymName((const QString&)curFile);
-      curFile =  currentDir.canonicalPath()+"/"+curFile;
+      curFile =  CurrentDir()->canonicalPath()+"/"+curFile;
       QCopEnvelope e("QPE/Application/textedit", "setDocument(QString)" );
       e << curFile;
     }
-  } else {
-    QString curFile = Remote_View->currentItem()->text(0);
-    if(curFile != "../") {
-      curFile =  currentRemoteDir.canonicalPath()+"/"+curFile;
-    if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
-        curFile = dealWithSymName((const QString&)curFile);
-      DocLnk nf(curFile);
-      QCopEnvelope e("QPE/Application/textedit", "setDocument(QString)" );
-      e << curFile;
-    }
-  }
 }
 
-void AdvancedFm::localMakDir() {
+void AdvancedFm::makeDir()
+{
   InputDialog *fileDlg;
   fileDlg = new InputDialog(this,tr("Make Directory"),TRUE, 0);
   fileDlg->exec();
-  if( fileDlg->result() == 1 ) {
-    QString  filename = fileDlg->LineEdit1->text();
-    currentDir.mkdir( currentDir.canonicalPath()+"/"+filename);
+  if( fileDlg->result() == 1 )
+		{
+			QDir *thisDir = CurrentDir();
+			QString  filename = fileDlg->LineEdit1->text();
+			thisDir->mkdir( thisDir->canonicalPath()+"/"+filename);
   }
-  populateLocalView();
+  PopulateView();
 }
 
-void AdvancedFm::remoteMakDir() {
-  InputDialog *fileDlg;
-  fileDlg = new InputDialog(this,tr("Make Directory"),TRUE, 0);
-  fileDlg->exec();
-  if( fileDlg->result() == 1 ) {
-    QString  filename = fileDlg->LineEdit1->text();
-    currentRemoteDir.mkdir(  currentRemoteDir.canonicalPath()+"/"+filename);
-  }
-  populateRemoteView();
-}
+void AdvancedFm::doDelete()
+{
 
-void AdvancedFm::localDelete() {
   QStringList curFileList = getPath();
   bool doMsg=true;
-  int count=curFileList.count();
-  if( count > 0) {
-      if(count > 1 ){
+  int count = curFileList.count();
+  if( count > 0)
+		{
+      if(count > 1 )
+				{
           QString msg;
           msg=tr("Really delete\n%1 files?").arg(count);
           switch ( QMessageBox::warning(this,tr("Delete"),msg
-                                        ,tr("Yes"),tr("No"),0,0,1) ) {
+                                        ,tr("Yes"),tr("No"),0,0,1) )
+						{
             case 0:
                 doMsg=false;
                 break;
@@ -231,24 +193,28 @@ void AdvancedFm::localDelete() {
       }
 
       QString myFile;
-    for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+    for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
+			{
       myFile = (*it);
       if( myFile.find(" -> ",0,TRUE) != -1)
         myFile = myFile.left( myFile.find(" -> ",0,TRUE));
 
-      QString f = currentDir.canonicalPath();
+      QString f = CurrentDir()->canonicalPath();
       if(f.right(1).find("/",0,TRUE) == -1)
-        f+="/";
-      f+=myFile;
-      if(QDir(f).exists() && !QFileInfo(f).isSymLink() ) {
-        switch ( QMessageBox::warning(this,tr("Delete Directory?"),tr("Really delete\n")+f+
+        f += "/";
+      f += myFile;
+      if(QDir(f).exists() && !QFileInfo(f).isSymLink() )
+				{
+        switch ( QMessageBox::warning( this, tr("Delete Directory?"), tr("Really delete\n") + f +
                                       "\nand all it's contents ?"
-                                      ,tr("Yes"),tr("No"),0,0,1) ) {
-        case 0: {
+                                      ,tr("Yes"),tr("No"),0,0,1) )
+					{
+        case 0:
+				{
           f=f.left(f.length()-1);
           QString cmd="rm -rf "+f;
           startProcess( (const QString)cmd.latin1() );
-          populateLocalView();
+          PopulateView();
         }
           break;
         case 1:
@@ -272,485 +238,286 @@ void AdvancedFm::localDelete() {
       }
     }
   }
-  populateLocalView();
+  PopulateView();
 }
 
-void AdvancedFm::remoteDelete() {
-    QStringList curFileList = getPath();
-    bool doMsg=true;
-    int count=curFileList.count();
-    if( count > 0) {
-        if(count > 1 ){
-            QString msg;
-            msg=tr("Really delete\n%1 files?").arg(count);
-            switch ( QMessageBox::warning(this,tr("Delete"),msg
-                                          ,tr("Yes"),tr("No"),0,0,1) ) {
-              case 0:
-                  doMsg=false;
-                  break;
-              case 1:
-                  return;
-                  break;
-            };
-        }
-
-        QString myFile;
-
-        for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-            myFile = (*it);
-            if(myFile.find(" -> ",0,TRUE) != -1)
-                myFile = myFile.left(myFile.find(" -> ",0,TRUE));
-            QString f = currentRemoteDir.canonicalPath();
-            if(f.right(1).find("/",0,TRUE) == -1)
-                f+="/";
-            f+=myFile;
-            if(QDir(f).exists() && !QFileInfo(f).isSymLink()  ) {
-                switch ( QMessageBox::warning(this,tr("Delete Directory"),tr("Really delete\n")+f+
-                                              "\nand all it's contents ?",
-                                              tr("Yes"),tr("No"),0,0,1) ) {
-                  case 0: {
-                      f=f.left(f.length()-1);
-                      QString cmd="rm -rf "+f;
-                      startProcess( (const QString)cmd );
-                      populateRemoteView();
-                  }
-                      break;
-                  case 1:
-                        // exit
-                      break;
-                };
-
-            } else {
-                if(doMsg) {
-                    switch ( QMessageBox::warning(this,tr("Delete"),tr("Really delete\n")+f
-                                                  +" ?",tr("Yes"),tr("No"),0,0,1) ) {
-                      case 1:
-                          return;
-                          break;
-                    };
-                }
-                QString cmd="rm "+f;
-                QFile file(f);
-                if(QFileInfo(myFile).fileName().find("../",0,TRUE)==-1)
-                    file.remove();
-            }
-        }
-    }
-    populateRemoteView();
-}
-
-
-void AdvancedFm::filePerms() {
-
-  QStringList curFileList = getPath();
+void AdvancedFm::filePerms()
+{
+	QStringList curFileList = getPath();
   QString filePath;
 
-  if (TabWidget->getCurrentTab() == 0) {
-    filePath = currentDir.canonicalPath()+"/";
-  } else {
-    filePath= currentRemoteDir.canonicalPath()+"/";
-  }
+	filePath = CurrentDir()->canonicalPath()+"/";
 
-  for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-    filePermissions *filePerm;
-    filePerm = new filePermissions(this, "Permissions",true,0,(const QString &)(filePath+*it));
-    filePerm->showMaximized();
-    filePerm->exec();
-    if( filePerm)
-      delete  filePerm;
-  }
-  if (TabWidget->getCurrentTab() == 0) {
-    populateLocalView();
-  } else {
-    populateRemoteView();
-  }
+  for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
+		{
+			filePermissions *filePerm;
+			filePerm = new filePermissions(this, "Permissions",true,0,(const QString &)(filePath+*it));
+			filePerm->showMaximized();
+			filePerm->exec();
+			if( filePerm)
+				delete  filePerm;
+		}
+	PopulateView();
 }
 
-void AdvancedFm::doProperties() {
+void AdvancedFm::doProperties()
+{
 #if defined(QT_QWS_OPIE)
-    
-  QStringList curFileList = getPath();
-  
-  QString filePath;
-  if (TabWidget->getCurrentTab() == 0) {
-    filePath = currentDir.canonicalPath()+"/";
-  } else {
-    filePath= currentRemoteDir.canonicalPath()+"/";
-  }
-   qDebug("%d",curFileList.count());
 
-   for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+  QStringList curFileList = getPath();
+
+  QString filePath;
+    filePath = CurrentDir()->canonicalPath()+"/";
+
+		qDebug("%d",curFileList.count());
+
+   for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
+		 {
     qDebug((filePath+*it));
     DocLnk lnk( (filePath+*it));
     LnkProperties prop( &lnk );
     prop.showMaximized();
     prop.exec();
   }
-#endif    
-  
+#endif
+
 }
 
-void AdvancedFm::upDir() {
-  if (TabWidget->getCurrentTab() == 0) {
-    QString current = currentDir.canonicalPath();
-    QDir dir(current);
-    dir.cdUp();
-    current = dir.canonicalPath();
-    chdir( current.latin1() );
-    currentDir.cd(  current, TRUE);
-    populateLocalView();
-    update();
-  } else {
-    QString current = currentRemoteDir.canonicalPath();
-    QDir dir(current);
-    dir.cdUp();
-    current = dir.canonicalPath();
-    chdir( current.latin1() );
-    currentRemoteDir.cd(  current, TRUE);
-    populateRemoteView();
-    update();
-  }
+void AdvancedFm::upDir()
+{
+	QDir *thisDir = CurrentDir();
+	QString current = thisDir->canonicalPath();
+	QDir dir(current);
+	dir.cdUp();
+	current = dir.canonicalPath();
+	chdir( current.latin1() );
+  thisDir->cd(  current, TRUE);
+
+  PopulateView();
+	update();
 }
 
-void AdvancedFm::copy() {
+void AdvancedFm::copy()
+{
   qApp->processEvents();
   QStringList curFileList = getPath();
-    bool doMsg=true;
-    int count=curFileList.count();
-    if( count > 0) {
-        if(count > 1 ){
-            QString msg;
-            msg=tr("Really copy\n%1 files?").arg(count);
-            switch ( QMessageBox::warning(this,tr("Delete"),msg
-                                          ,tr("Yes"),tr("No"),0,0,1) ) {
-              case 0:
-                  doMsg=false;
-                  break;
-              case 1:
-                  return;
-                  break;
-            };
-        }
+
+  QDir *thisDir = CurrentDir();
+	QDir *thatDir = OtherDir();
+
+  bool doMsg=true;
+	int count=curFileList.count();
+	if( count > 0) {
+		if(count > 1 ){
+			QString msg;
+			msg=tr("Really copy\n%1 files?").arg(count);
+			switch ( QMessageBox::warning(this,tr("Delete"),msg
+																		,tr("Yes"),tr("No"),0,0,1) )
+				{
+				case 0:
+					doMsg=false;
+					break;
+				case 1:
+					return;
+					break;
+				};
+		}
 
     QString curFile, item, destFile;
-    if (TabWidget->getCurrentTab() == 0) {
-        for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-          item=(*it);
-          if(item.find("->",0,TRUE)) //symlink
-              item = item.left(item.find("->",0,TRUE));
+		for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
+			{
+				item=(*it);
+				if(item.find("->",0,TRUE)) //symlink
+					item = item.left(item.find("->",0,TRUE));
 
-          destFile = currentRemoteDir.canonicalPath()+"/"+ item;
-          qDebug("Destination file is "+destFile);
+				curFile = thisDir->canonicalPath()+"/"+ item;
+				destFile = thatDir->canonicalPath()+"/"+ item;
 
-          curFile = currentDir.canonicalPath()+"/"+ item;
-          qDebug("CurrentFile file is " + curFile);
+				qDebug("Destination file is "+destFile);
+				qDebug("CurrentFile file is " + curFile);
 
-          QFile f(destFile);
-          if( f.exists()) {
-              if(doMsg) {
-                  switch ( QMessageBox::warning(this,tr("File Exists!"), tr("%1 exists. Ok to overwrite?").arg( item ), tr("Yes"),tr("No"),0,0,1) ) {
-                    case 1:
-                        return;
-                        break;
+				QFile f(destFile);
+				if( f.exists())
+					{
+						if(doMsg)
+							{
+								switch ( QMessageBox::warning(this,tr("File Exists!"),
+																							tr("%1 exists. Ok to overwrite?").arg( item ),
+																							tr("Yes"),tr("No"),0,0,1) )
+									{
+									case 1:
+										return;
+										break;
                   };
               }
-              f.remove();                 
+						f.remove();
           }
-          if(!copyFile( curFile, destFile) ) {
-              QMessageBox::message("AdvancedFm",tr( "Could not copy %1 to %2").arg( curFile ).arg( destFile ) );
-          return;
-        }
+
+				if( !copyFile( curFile, destFile) )
+					{
+						QMessageBox::message("AdvancedFm",
+																 tr( "Could not copy %1 to %2").arg( curFile ).arg( destFile ) );
+						return;
+					}
       }
-      populateRemoteView();
-      TabWidget->setCurrentTab(1);
 
-    } else {
-      for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-          item= (*it);
-          if(item.find("->",0,TRUE)) //symlink
-              item = item.left(item.find("->",0,TRUE));
-
-          destFile = currentDir.canonicalPath()+"/"+ item;
-          qDebug("Destination file is "+destFile);
-
-          curFile = currentRemoteDir.canonicalPath()+"/"+ item;;
-          qDebug("CurrentFile file is " + curFile);
-
-          QFile f(destFile);
-          if( f.exists()) {
-              switch ( QMessageBox::warning(this,tr("File Exists!"),
-                   item+tr("\nexists. Ok to overwrite?"),
-                   tr("Yes"),tr("No"),0,0,1) ) {
-          case 1:
-            return;
-            break;
-          };
-            f.remove();
-        }
-        if(!copyFile( curFile, destFile) ) {
-          QMessageBox::message("AdvancedFm",tr("Could not copy\n")
-                               +curFile +tr("to\n")+destFile);
-          return;
-
-        }
-      }
-      populateLocalView();
-      TabWidget->setCurrentTab(0);
-    }
-
-  }
+		PopulateView();
+//		TabWidget->setCurrentTab(1);
+   }
 }
 
-void AdvancedFm::copyAs() {
+void AdvancedFm::copyAs()
+{
   qApp->processEvents();
 
   QStringList curFileList = getPath();
   QString curFile, item;
   InputDialog *fileDlg;
-  if (TabWidget->getCurrentTab() == 0) {
-    qDebug("tab 1");
-    for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-      QString destFile;
+
+	QDir *thisDir = CurrentDir();
+	QDir *thatDir = OtherDir();
+
+	for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
+		{
+			QString destFile;
       item=(*it);
-      curFile = currentDir.canonicalPath()+"/"+(*it);
-      fileDlg = new InputDialog( this,tr("Copy "+curFile+" As"), TRUE, 0);
+      curFile = thisDir->canonicalPath()+"/"+(*it);
+      fileDlg = new InputDialog( this, tr("Copy "+curFile+" As"), TRUE, 0);
 
       fileDlg->setInputText((const QString &) destFile );
       fileDlg->exec();
 
-      if( fileDlg->result() == 1 ) {
-        QString  filename = fileDlg->LineEdit1->text();
-        destFile = currentRemoteDir.canonicalPath()+"/"+filename;
+      if( fileDlg->result() == 1 )
+				{
+					QString  filename = fileDlg->LineEdit1->text();
+					destFile = thatDir->canonicalPath()+"/"+filename;
 
-        QFile f(destFile);
-        if( f.exists()) {
-          switch (QMessageBox::warning(this,tr("File Exists!"),
-                  item+tr("\nexists. Ok to overwrite?"),
-                  tr("Yes"),tr("No"),0,0,1) ) {
-          case 0: 
-            f.remove();
-            break;
-          case 1:
-            return;
-            break;
-          };
-        }
-        if(!copyFile( curFile,destFile) ) {
-          QMessageBox::message("AdvancedFm",tr("Could not copy\n")
-                               +curFile +tr("to\n")+destFile);
-          return;
-        }
-      }
+					QFile f( destFile);
+					if( f.exists())
+						{
+							switch (QMessageBox::warning(this,tr("File Exists!"),
+																					 item+tr("\nexists. Ok to overwrite?"),
+																					 tr("Yes"),tr("No"),0,0,1) )
+								{
+								case 0:
+									f.remove();
+									break;
+								case 1:
+									return;
+									break;
+								};
+						}
+					if( !copyFile( curFile, destFile) )
+						{
+							QMessageBox::message("AdvancedFm",tr("Could not copy\n")
+																	 +curFile +tr("to\n")+destFile);
+							return;
+						}
+				}
       delete fileDlg;
 
     }
-    populateRemoteView();
-    TabWidget->setCurrentTab(1);
-
-  } else {
-    for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-
-      item=(*it);
-      curFile = currentRemoteDir.canonicalPath()+"/"+(*it);
-      fileDlg = new InputDialog( this,tr("Copy "+curFile+" As"), TRUE, 0);
-
-      QString destFile;
-      fileDlg->setInputText((const QString &) destFile);
-      fileDlg->exec();
-
-      if( fileDlg->result() == 1 ) {
-        QString  filename = fileDlg->LineEdit1->text();
-        destFile = currentDir.canonicalPath()+"/"+filename;
-
-        QFile f( destFile);
-        if( f.exists()) {
-          switch ( QMessageBox::warning(this,tr("File Exists!"),
-                   item+tr("\nexists. Ok to overwrite?"),
-                   tr("Yes"),tr("No"),0,0,1) ) {
-          case 0: 
-            f.remove();
-            break;
-          case 1:
-            return;
-            break;
-          };
-        }
-        if(!copyFile( curFile,destFile) ) {
-          QMessageBox::message("AdvancedFm",tr("Could not copy\n")
-                               +curFile +tr("to\n")+destFile);
-          return;
-        }
-                        
-      }
-      delete fileDlg;
-
-    }
-    populateLocalView();
-    TabWidget->setCurrentTab(0);
-  }
+	PopulateView();
 }
 
-void AdvancedFm::copySameDir() {
+void AdvancedFm::copySameDir()
+{
   qApp->processEvents();
   QStringList curFileList = getPath();
   QString curFile, item, destFile;
   InputDialog *fileDlg;
 
-  if (TabWidget->getCurrentTab() == 0) {
+	QDir *thisDir = CurrentDir();
 
-    for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-        item=(*it);
-      curFile = currentDir.canonicalPath()+"/"+ item;
+	for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
+		{
+			item=(*it);
+      curFile = thisDir->canonicalPath()+"/"+ item;
 
       fileDlg = new InputDialog(this,tr("Copy ")+curFile+tr(" As"),TRUE, 0);
       fileDlg->setInputText((const QString &) destFile );
       fileDlg->exec();
 
-      if( fileDlg->result() == 1 ) {
+      if( fileDlg->result() == 1 )
+				{
 
-        QString filename = fileDlg->LineEdit1->text();
-        destFile = currentDir.canonicalPath()+"/"+filename;
+					QString filename = fileDlg->LineEdit1->text();
+					destFile = thisDir->canonicalPath()+"/"+filename;
 
-        QFile f(destFile);
-        if( f.exists()) {
-          switch (QMessageBox::warning(this,tr("Delete"),
-                  destFile+tr(" already exists.\nDo you really want to delete it?"),
-                  tr("Yes"),tr("No"),0,0,1) ) {
-          case 0:
+					QFile f(destFile);
+					if( f.exists())
+						{
+							switch (QMessageBox::warning(this,tr("Delete"),
+																					 destFile+tr(" already exists.\nDo you really want to delete it?"),
+																					 tr("Yes"),tr("No"),0,0,1) ) {
+							case 0:
 
-            f.remove();
-            break;
-          case 1:
-            return;
-            break;
-          };
-        }
-        if(!copyFile( curFile,destFile) ) {
-          QMessageBox::message("AdvancedFm",tr("Could not copy\n")
-                               +curFile +tr("to\n")+destFile);
-          return;
-        }
-                    
-        qDebug("copy "+curFile+" as "+destFile);
-      }
+								f.remove();
+								break;
+							case 1:
+								return;
+								break;
+							};
+						}
+					if(!copyFile( curFile,destFile) )
+						{
+							QMessageBox::message("AdvancedFm",tr("Could not copy\n")
+																	 +curFile +tr("to\n")+destFile);
+							return;
+						}
+
+					qDebug("copy "+curFile+" as "+destFile);
+				}
       delete fileDlg;
     }
-    populateLocalView();
-
-  } else {
-    for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-        item=(*it);
-      curFile = currentRemoteDir.canonicalPath()+"/"+ item;
-
-      fileDlg = new InputDialog(this,tr("Copy ")+curFile+tr(" As"),TRUE, 0);
-      fileDlg->setInputText((const QString &) destFile);
-      fileDlg->exec();
-      if( fileDlg->result() == 1 ) {
-        QString  filename = fileDlg->LineEdit1->text();
-
-        destFile = currentRemoteDir.canonicalPath()+"/"+filename;
-
-        QFile f(destFile);
-        if( f.exists()) {
-          switch ( QMessageBox::warning(this,tr("Delete"),
-                   destFile+tr(" already exists.\nDo you really want to delete it?"),
-                   tr("Yes"),tr("No"),0,0,1) ) {
-          case 0: 
-            f.remove();
-            break;
-          case 1:
-            return;
-            break;
-          };
-        }
-        if(!copyFile( curFile,destFile) ) {
-          QMessageBox::message("AdvancedFm",tr("Could not copy\n")
-                               +curFile +tr("to\n")+destFile);
-          return;
-        }
-        qDebug("copy "+curFile+" as "+destFile);
-      }
-      delete fileDlg;
-    }
-    populateRemoteView();
-  }
+	PopulateView();
 }
- 
-void AdvancedFm::move() {
+
+void AdvancedFm::move()
+{
   qApp->processEvents();
 
   QStringList curFileList = getPath();
-  if( curFileList.count() > 0) {
-    QString curFile, destFile, item;
+  if( curFileList.count() > 0)
+		{
+			QString curFile, destFile, item;
 
-    if (TabWidget->getCurrentTab() == 0) {
+			QDir *thisDir = CurrentDir();
+			QDir *thatDir = OtherDir();
+			for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
+				{
+					item=(*it);
+					QString destFile =  thatDir->canonicalPath();
 
-      for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-          item=(*it);
-        QString destFile =  currentRemoteDir.canonicalPath();
+					if(destFile.right(1).find("/",0,TRUE) == -1)
+						destFile+="/";
+					destFile += item;
+					qDebug("Destination file is "+destFile);
 
-        if(destFile.right(1).find("/",0,TRUE) == -1)
-          destFile+="/";
-        destFile += item;
-        curFile = currentDir.canonicalPath();
+					curFile = thisDir->canonicalPath();
+					if(curFile.right(1).find("/",0,TRUE) == -1)
+						curFile +="/";
+					curFile+= item;
+					qDebug("CurrentFile file is " + curFile);
 
-        qDebug("Destination file is "+destFile);
+					QFile f( curFile);
+					if( f.exists()) {
+						if( !copyFile(  curFile, destFile) )
+							{
+								QMessageBox::message(tr("Note"),tr("Could not move\n")+curFile);
+								return;
+							} else
+								QFile::remove(curFile);
+					}
+				}
 
-        if(curFile.right(1).find("/",0,TRUE) == -1)
-          curFile +="/";
-
-        curFile+= item;
-        qDebug("CurrentFile file is " + curFile);
-
-        QFile f( curFile);
-        if( f.exists()) {
-          if(!copyFile(  curFile,destFile) ) {
-            QMessageBox::message(tr("Note"),tr("Could not move\n")+curFile);
-            return;
-          } else
-            QFile::remove(curFile);
-        }
-      }
-
-      TabWidget->setCurrentTab(1);
-
-    } else { //view 2
-
-      for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-          item = (*it);
-        QString destFile = currentDir.canonicalPath();
-
-        if(destFile.right(1).find("/",0,TRUE) == -1)
-          destFile+="/";
-
-        destFile += item;
-
-        qDebug("Destination file is "+destFile);
-
-        curFile = currentRemoteDir.canonicalPath();
-
-        if(curFile.right(1).find("/",0,TRUE) == -1)
-          curFile +="/";
-        curFile+= item;
-        qDebug("CurrentFile file is " + curFile);
-
-        QFile f( curFile);
-        if( f.exists()) {
-          if(!copyFile( curFile, destFile) ) {
-            QMessageBox::message(tr("Note"),tr("Could not move\n") + curFile);
-            return;
-          } else
-            QFile::remove( curFile);
-        }
-        TabWidget->setCurrentTab(0);
-      }
-    }
-    populateRemoteView();
-    populateLocalView();
-  }
+		}
+			populateRemoteView();
+			populateLocalView();
 }
 
-bool AdvancedFm::copyFile( const QString & src, const QString & dest ) {
+bool AdvancedFm::copyFile( const QString & src, const QString & dest )
+{
   char bf[ 50000 ];
   int  bytesRead;
   bool success = TRUE;
@@ -759,304 +526,290 @@ bool AdvancedFm::copyFile( const QString & src, const QString & dest ) {
   QFile s( src );
   QFile d( dest );
 
-  if( s.open( IO_ReadOnly | IO_Raw ) &&  d.open( IO_WriteOnly | IO_Raw ) )  {
-    while( (bytesRead = s.readBlock( bf, sizeof( bf ) )) == sizeof( bf ) ) {
-      if( d.writeBlock( bf, sizeof( bf ) ) != sizeof( bf ) ){
-        success = FALSE;
-        break;
-      }
-    }
-    if( success && (bytesRead > 0) ){
-      d.writeBlock( bf, bytesRead );
-    }
-  } else {
-    success = FALSE;
-  }
+  if( s.open( IO_ReadOnly | IO_Raw ) &&  d.open( IO_WriteOnly | IO_Raw ) )
+		{
+			while( (bytesRead = s.readBlock( bf, sizeof( bf ) )) == sizeof( bf ) )
+				{
+				if( d.writeBlock( bf, sizeof( bf ) ) != sizeof( bf ) ){
+					success = FALSE;
+					break;
+				}
+			}
+			if( success && (bytesRead > 0) )
+				{
+					d.writeBlock( bf, bytesRead );
+				}
+		}
+	else
+		{
+			success = FALSE;
+		}
 
-  // Set file permissions
-  if( stat( (const char *) src, &status ) == 0 ){
-    chmod( (const char *) dest, status.st_mode );
-  }
+		// Set file permissions
+  if( stat( (const char *) src, &status ) == 0 )
+		{
+			chmod( (const char *) dest, status.st_mode );
+		}
 
   return success;
 }
 
-void AdvancedFm::runCommand() {
-    QString curFile;
-    if (TabWidget->getCurrentTab() == 0) {
-        if( Local_View->currentItem())
-            curFile = currentDir.canonicalPath() +"/"+ Local_View->currentItem()->text(0);
-    } else {
-        if(Remote_View->currentItem())
-            curFile = currentRemoteDir.canonicalPath() + "/"+Remote_View->currentItem()->text(0);
-    }
+void AdvancedFm::runCommand()
+{
+	QDir *thisDir = CurrentDir();
 
-    InputDialog *fileDlg;
-    fileDlg = new InputDialog(this,tr("Run Command"),TRUE, 0);
-    fileDlg->setInputText(curFile);
-    fileDlg->exec();
-      //QString command;
+	QString curFile;
+	curFile = thisDir->canonicalPath() +"/"+ CurrentView()->currentItem()->text(0);
 
-    if( fileDlg->result() == 1 ) {
-        qDebug(fileDlg->LineEdit1->text());
-        QStringList command;
+	InputDialog *fileDlg;
+	fileDlg = new InputDialog(this,tr("Run Command"),TRUE, 0);
+	fileDlg->setInputText(curFile);
+	fileDlg->exec();
+		//QString command;
 
-        command << "/bin/sh";
-        command << "-c";
-        command <<  fileDlg->LineEdit1->text();
-        Output *outDlg;
-        outDlg = new Output( command, this, tr("AdvancedFm Output"), true);
-        outDlg->showMaximized();
-        outDlg->exec();
-        qApp->processEvents();
+	if( fileDlg->result() == 1 )
+		{
+			qDebug(fileDlg->LineEdit1->text());
+			QStringList command;
+
+			command << "/bin/sh";
+			command << "-c";
+			command <<  fileDlg->LineEdit1->text();
+			Output *outDlg;
+			outDlg = new Output( command, this, tr("AdvancedFm Output"), true);
+			outDlg->showMaximized();
+			outDlg->exec();
+			qApp->processEvents();
 
     }
 }
 
-void AdvancedFm::runCommandStd() {
+void AdvancedFm::runCommandStd()
+{
   QString curFile;
-  if (TabWidget->getCurrentTab() == 0) {
-    if( Local_View->currentItem())
-      curFile = currentDir.canonicalPath() +"/"+  Local_View->currentItem()->text(0);
-  } else {
-    if(Remote_View->currentItem())
-      curFile = currentRemoteDir.canonicalPath() +"/"
-          +  Remote_View->currentItem()->text(0);
-  }
+	QDir *thisDir = CurrentDir();
+	QListView *thisView = CurrentView();
+	if( thisView->currentItem())
+		curFile = thisDir->canonicalPath() +"/"+  thisView->currentItem()->text(0);
 
   InputDialog *fileDlg;
   fileDlg = new InputDialog(this,tr("Run Command"),TRUE, 0);
   fileDlg->setInputText(curFile);
   fileDlg->exec();
 
-  if( fileDlg->result() == 1 ) {
+  if( fileDlg->result() == 1 )
+		{
       qApp->processEvents();
       startProcess( (const QString)fileDlg->LineEdit1->text().latin1());
-  }
+		}
 }
 
-void AdvancedFm::fileStatus() {
+void AdvancedFm::fileStatus()
+{
   QString curFile;
-  if (TabWidget->getCurrentTab() == 0) {
-    curFile = Local_View->currentItem()->text(0);
-  } else {
-    curFile = Remote_View->currentItem()->text(0);
-  }
+	curFile = CurrentView()->currentItem()->text(0);
 
-    QStringList command;
-    command << "/bin/sh";
-    command << "-c";
-    command << "stat -l "+ curFile;
+	QStringList command;
+	command << "/bin/sh";
+	command << "-c";
+	command << "stat -l "+ curFile;
 
-    Output *outDlg;
-    outDlg = new Output( command, this, tr("AdvancedFm Output"), true);
-    outDlg->showMaximized();
-    outDlg->exec();
-    qApp->processEvents();
-
-
-//   Output *outDlg;
-//   outDlg = new Output(this, tr("AdvancedFm Output"),FALSE);
-//   outDlg->showMaximized();
-//   outDlg->show();
-//   qApp->processEvents();
-
-//   FILE *fp;
-//   char line[130];
-//   sleep(1);
-//   fp = popen(  (const char *) command, "r");
-//   if ( !fp ) {
-//     qDebug("Could not execute '" + command + "'! err=%d", fp);
-//     QMessageBox::warning( this, "AdvancedFm", tr("command failed!"), tr("&OK") );
-//     pclose(fp);
-//     return;
-//   } else {
-//     while ( fgets( line, sizeof line, fp)) {
-//       outDlg->OutputEdit->append(line);
-//       outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-
-//     }
-
-//   }
-//   pclose(fp);
+	Output *outDlg;
+	outDlg = new Output( command, this, tr("AdvancedFm Output"), true);
+	outDlg->showMaximized();
+	outDlg->exec();
+	qApp->processEvents();
 }
 
 
-void AdvancedFm::mkDir() {
-  if (TabWidget->getCurrentTab() == 0)
-    localMakDir();
-  else
-    remoteMakDir();
-
+void AdvancedFm::mkDir()
+{
+    makeDir();
 }
 
-void AdvancedFm::rn() {
-  if (TabWidget->getCurrentTab() == 0)
-    localRename();
-  else
-    remoteRename();
-
+void AdvancedFm::rn()
+{
+	renameIt();
 }
 
-void AdvancedFm::del() {
-  if (TabWidget->getCurrentTab() == 0)
-    localDelete();
-  else
-    remoteDelete();
+void AdvancedFm::del()
+{
+    doDelete();
 }
 
-void AdvancedFm::mkSym() {
-    QString cmd;
-    QStringList curFileList = getPath();
-    if( curFileList.count() > 0) {
+void AdvancedFm::mkSym()
+{
+	QString cmd;
+	QStringList curFileList = getPath();
+	if( curFileList.count() > 0)
+		{
+			if ( whichTab == 1)
+				{
+					for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
+						{
 
-        if (TabWidget->getCurrentTab() == 0) {
-            for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-
-                QString destName = currentRemoteDir.canonicalPath()+"/"+(*it);
-                if(destName.right(1) == "/") destName = destName.left( destName.length() -1);
-                QString curFile =  currentDir.canonicalPath()+"/"+(*it);
-                if( curFile.right(1) == "/") curFile = curFile.left( curFile.length() -1);
-                cmd = "ln -s "+curFile+" "+destName;
-                qDebug(cmd);
-                startProcess( (const QString)cmd );
+							QString destName = currentRemoteDir.canonicalPath()+"/"+(*it);
+							if(destName.right(1) == "/")
+								{
+									destName = destName.left( destName.length() -1);
+								}
+							QString curFile =  currentDir.canonicalPath()+"/"+(*it);
+							if( curFile.right(1) == "/")
+								{
+									curFile = curFile.left( curFile.length() -1);
+								}
+							cmd = "ln -s "+curFile+" "+destName;
+							qDebug(cmd);
+							startProcess( (const QString)cmd );
             }
-            populateRemoteView();
-            TabWidget->setCurrentTab(1);
-        } else {
-            for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+					populateRemoteView();
+					TabWidget->setCurrentTab(1);
+        }
+			else
+				{
+					for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
+						{
 
-                QString destName = currentDir.canonicalPath()+"/"+(*it);
-                if(destName.right(1) == "/") destName = destName.left( destName.length() -1);
-                QString curFile =  currentRemoteDir.canonicalPath()+"/"+(*it);
-                if( curFile.right(1) == "/") curFile = curFile.left( curFile.length() -1);
+							QString destName = currentDir.canonicalPath()+"/"+(*it);
+							if(destName.right(1) == "/")
+								{
+									destName = destName.left( destName.length() -1);
+								}
+							QString curFile =  currentRemoteDir.canonicalPath()+"/"+(*it);
+							if( curFile.right(1) == "/")
+								{
+									curFile = curFile.left( curFile.length() -1);
+								}
 
-                cmd = "ln -s "+curFile+" "+destName;
-                qDebug(cmd);
-                startProcess( (const QString)cmd );
+							cmd = "ln -s "+curFile+" "+destName;
+							qDebug(cmd);
+							startProcess( (const QString)cmd );
             }
-            populateLocalView();
-            TabWidget->setCurrentTab(0);
+					populateLocalView();
+					TabWidget->setCurrentTab(0);
         }
     }
 }
 
-void AdvancedFm::doBeam() {
+void AdvancedFm::doBeam()
+{
   Ir ir;
-  if(!ir.supported()){
-  } else {
+  if(!ir.supported())
+		{
+		}
+	else
+		{
 
-    QStringList curFileList = getPath();
-    if( curFileList.count() > 0) {
+			QStringList curFileList = getPath();
+			if( curFileList.count() > 0)
+				{
+					for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
+						{
 
-      if (TabWidget->getCurrentTab() == 0) {
-        for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-
-          QString curFile =  currentDir.canonicalPath()+"/"+(*it);
-          if( curFile.right(1) == "/") curFile = curFile.left( curFile.length() -1);
-          Ir *file = new Ir(this, "IR");
-          connect(file, SIGNAL(done(Ir*)), this, SLOT( fileBeamFinished( Ir * )));
-          file->send( curFile, curFile );
-        }
-
-      }  else {
-        for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-
-          QString curFile =  currentRemoteDir.canonicalPath()+"/"+(*it);
-          if( curFile.right(1) == "/") curFile = curFile.left( curFile.length() -1);
-          Ir *file = new Ir(this, "IR");
-          connect(file, SIGNAL(done(Ir*)), this, SLOT( fileBeamFinished( Ir * )));
-          file->send( curFile, curFile );
-
-        }
-      }
-    }
-  }
+							QString curFile =  CurrentDir()->canonicalPath()+"/"+(*it);
+							if( curFile.right(1) == "/")
+								{
+									curFile = curFile.left( curFile.length() -1);
+								}
+							Ir *file = new Ir(this, "IR");
+							connect(file, SIGNAL(done(Ir*)), this, SLOT( fileBeamFinished( Ir * )));
+							file->send( curFile, curFile );
+						}
+				}
+		}
 
 }
 
-void AdvancedFm::fileBeamFinished( Ir *) {
+void AdvancedFm::fileBeamFinished( Ir *)
+{
   QMessageBox::message( tr("Advancedfm Beam out"), tr("Ir sent.") ,tr("Ok") );
-
 }
 
-void AdvancedFm::selectAll() {
-    if (TabWidget->getCurrentTab() == 0) {
-        Local_View->selectAll(true);
-        Local_View->setSelected( Local_View->firstChild(),false);
-    } else {
-        Remote_View->selectAll(true);
-        Remote_View->setSelected( Remote_View->firstChild(),false);
-    }
+void AdvancedFm::selectAll()
+{
+//    if (TabWidget->getCurrentTab() == 0) {
+	QListView *thisView = CurrentView();
+	thisView->selectAll(true);
+	thisView->setSelected( thisView->firstChild(),false);
+//     } else {
+//         Remote_View->selectAll(true);
+//         Remote_View->setSelected( Remote_View->firstChild(),false);
+//     }
 }
 
-void AdvancedFm::startProcess(const QString & cmd) {
-      QStringList command;
-      OProcess *process;
-      process = new OProcess();
-      connect(process, SIGNAL(processExited(OProcess *)),
-              this, SLOT( processEnded()));
+void AdvancedFm::startProcess(const QString & cmd)
+{
+	QStringList command;
+	OProcess *process;
+	process = new OProcess();
+	connect(process, SIGNAL(processExited(OProcess *)),
+					this, SLOT( processEnded()));
 
-      command << "/bin/sh";
-      command << "-c";
-      command << cmd.latin1();
-      *process << command;
-      if(!process->start(OProcess::NotifyOnExit) )
-          qDebug("could not start process");
+	command << "/bin/sh";
+	command << "-c";
+	command << cmd.latin1();
+	*process << command;
+	if(!process->start(OProcess::NotifyOnExit) )
+		qDebug("could not start process");
 }
 
-void AdvancedFm::processEnded() {
+void AdvancedFm::processEnded()
+{
   populateLocalView();
   populateRemoteView();
 }
 
-bool AdvancedFm::eventFilter( QObject * o, QEvent * e ) {
-    if ( o->inherits( "QLineEdit" ) ) {
-        if ( e->type() == QEvent::KeyPress ) {
-            QKeyEvent *ke = (QKeyEvent*)e;
-            if ( ke->key() == Key_Return ||
-                 ke->key() == Key_Enter ) {
-                okRename();
-                return true;
-            } else if ( ke->key() == Key_Escape ) {
-                cancelRename();
-                return true;
+bool AdvancedFm::eventFilter( QObject * o, QEvent * e )
+{
+	if ( o->inherits( "QLineEdit" ) )
+		{
+			if ( e->type() == QEvent::KeyPress )
+				{
+					QKeyEvent *ke = (QKeyEvent*)e;
+					if ( ke->key() == Key_Return ||
+							 ke->key() == Key_Enter )
+						{
+							okRename();
+							return true;
             }
-        } else if ( e->type() == QEvent::FocusOut ) {
-            cancelRename();
-            return true;
+					else if ( ke->key() == Key_Escape )
+							{
+								cancelRename();
+								return true;
+							}
+        }
+			else if ( e->type() == QEvent::FocusOut )
+					{
+						cancelRename();
+						return true;
+					}
+    }
+	if ( o->inherits( "QListView" ) )
+		{
+			if ( e->type() == QEvent::FocusOut )
+				{
+					printf("focusIn\n");
+
         }
     }
-    if ( o->inherits( "QListView" ) ) {
-        if ( e->type() == QEvent::FocusOut ) {
-            printf("focusIn\n");
-            
-        }
-    }   
 
-    return QWidget::eventFilter( o, e );
+	return QWidget::eventFilter( o, e );
 }
 
 
 void AdvancedFm::cancelRename()
 {
-    qDebug("cancel rename");
-    QListView * view;
-    if (TabWidget->getCurrentTab() == 0)
-      {
-          view = Local_View;
-      }
-    else
-      {
-          view = Remote_View;
-      }
+	qDebug("cancel rename");
+	QListView * view;
+	view = CurrentView();
 
-    bool resetFocus = view->viewport()->focusProxy() == renameBox;
-    delete renameBox;
-    renameBox = 0;
-    if ( resetFocus ) {
-        view->viewport()->setFocusProxy( view);
-        view->setFocus();
+	bool resetFocus = view->viewport()->focusProxy() == renameBox;
+	delete renameBox;
+	renameBox = 0;
+	if ( resetFocus )
+		{
+			view->viewport()->setFocusProxy( view);
+			view->setFocus();
     }
 }
 
@@ -1085,53 +838,32 @@ void AdvancedFm::doRename(QListView * view)
 }
 
 
-void AdvancedFm::localRename()
+void AdvancedFm::renameIt()
 {
-    oldName = Local_View->currentItem()->text(0);
-    doRename(Local_View );
-    populateLocalView();
-}
-
-void AdvancedFm::remoteRename()
-{
-    oldName = Remote_View->currentItem()->text(0);
-    doRename(Remote_View );
-    populateRemoteView();
+	QListView *thisView = CurrentView();
+    oldName = thisView->currentItem()->text(0);
+    doRename( thisView );
+    PopulateView();
 }
 
 void AdvancedFm::okRename()
 {
-    QString newName = renameBox->text();
-    cancelRename();
-    int tabs=0;
-     QListView * view;
-     tabs = TabWidget->getCurrentTab();
-     if ( tabs == 0)
-       {
-           view = Local_View;
-           QString path =  currentDir.canonicalPath() + "/";
-           oldName = path + oldName;
-           newName = path + newName;
-        }
-     else
-       {
-           view = Remote_View;
-           QString path =  currentRemoteDir.canonicalPath() + "/";
-           oldName = path + oldName;
-           newName = path + newName;
-       }
+	QString newName = renameBox->text();
+	cancelRename();
+//	int tabs=0;
+	QListView * view = CurrentView();
+	QString path =  CurrentDir()->canonicalPath() + "/";
+	oldName = path + oldName;
+	newName = path + newName;
 
-     if(  view->currentItem() == NULL)
-         return;
-       if( rename(oldName.latin1(), newName.latin1())== -1)
-         QMessageBox::message(tr("Note"),tr("Could not rename"));
-       else
-           oldName = "";
+	if(  view->currentItem() == NULL)
+		return;
+	if( rename( oldName.latin1(), newName.latin1())== -1)
+		QMessageBox::message(tr("Note"),tr("Could not rename"));
+	else
+		oldName = "";
 
-    view->takeItem( view->currentItem() );
-    delete view->currentItem();
-    if ( tabs == 0)
-        populateLocalView();
-    else
-        populateRemoteView();
+	view->takeItem( view->currentItem() );
+	delete view->currentItem();
+	PopulateView();
 }

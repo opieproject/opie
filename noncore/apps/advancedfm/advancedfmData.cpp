@@ -197,12 +197,12 @@ void AdvancedFm::init() {
          QListView *fileTree;
          fileTree = new QListView( tab_3, "tree" );
 
-      
+
          tabLayout_3->addMultiCellWidget( fileTree, 0, 0, 0, 3 );
 
          TabWidget->insertTab( tab_3, tr( "Remote" ) );
   */
-         
+
   ///////////////
 
   struct utsname name; /* check for embedix kernel running on the zaurus*/
@@ -215,7 +215,7 @@ void AdvancedFm::init() {
           sdButton->hide();
       }
   }
-  
+
   currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
   currentDir.setPath( QDir::currentDirPath());
 
@@ -227,17 +227,26 @@ void AdvancedFm::init() {
   filterStr="*";
   b=FALSE;
   TabWidget->setCurrentTab(0);
-   
+
 }
 
-void AdvancedFm::initConnections() {
-  connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
-  connect( qpeDirButton ,SIGNAL(released()),this,SLOT( QPEButtonPushed()) );
-  connect( cfButton ,SIGNAL(released()),this,SLOT( CFButtonPushed()) );
-  connect( sdButton ,SIGNAL(released()),this,SLOT( SDButtonPushed()) );
-  connect( cdUpButton ,SIGNAL(released()),this,SLOT( upDir()) );
-  connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
-  connect( homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
+void AdvancedFm::initConnections()
+{
+
+  connect( qApp,SIGNAL( aboutToQuit()),
+					 this, SLOT( cleanUp()) );
+  connect( qpeDirButton ,SIGNAL(released()),
+					 this,SLOT( QPEButtonPushed()) );
+  connect( cfButton ,SIGNAL(released()),
+					 this,SLOT( CFButtonPushed()) );
+  connect( sdButton ,SIGNAL(released()),
+					 this,SLOT( SDButtonPushed()) );
+  connect( cdUpButton ,SIGNAL(released()),
+					 this,SLOT( upDir()) );
+  connect( docButton,SIGNAL(released()),
+					 this,SLOT( docButtonPushed()) );
+  connect( homeButton,SIGNAL(released()),
+					 this,SLOT( homeButtonPushed()) );
   connect( currentPathCombo, SIGNAL( activated( const QString & ) ),
            this, SLOT(  currentPathComboActivated( const QString & ) ) );
 
@@ -245,16 +254,16 @@ void AdvancedFm::initConnections() {
            this,SLOT(currentPathComboChanged()));
 
   connect( Local_View, SIGNAL( clicked( QListViewItem*)),
-           this,SLOT( localListClicked(QListViewItem *)) );
+           this,SLOT( ListClicked(QListViewItem *)) );
   connect( Local_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-           this,SLOT( localListPressed(int, QListViewItem *, const QPoint&, int)) );
+           this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
 
   connect( Local_View, SIGNAL( selectionChanged() ), SLOT( cancelMenuTimer() ) );
 
   connect( Remote_View, SIGNAL( clicked( QListViewItem*)),
-           this,SLOT( remoteListClicked(QListViewItem *)) );
+           this,SLOT( ListClicked(QListViewItem *)) );
   connect( Remote_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-           this,SLOT( remoteListPressed(int, QListViewItem *, const QPoint&, int)) );
+           this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
 
   connect( TabWidget,SIGNAL(currentChanged(QWidget *)),
           this,SLOT(tabChanged(QWidget*)));
