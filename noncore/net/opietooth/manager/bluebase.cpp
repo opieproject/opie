@@ -143,15 +143,14 @@ void BlueBase::writeConfig() {
     writeToHciConfig();
 }
 
+/**
+ * Modify the hcid.conf file to our needs
+ */
 void BlueBase::writeToHciConfig() {
     qWarning("writeToHciConfig");
     HciConfWrapper hciconf ( "/etc/bluetooth/hcid.conf" );
     hciconf.load();
     hciconf.setPinHelper( "/bin/QtPalmtop/bin/blue-pin" );
-
-
-    //    hciconf->setPinHelper( "/bin/QtPalmtop/bin/blue-pin" );
-
     hciconf.setName( m_deviceName );
     hciconf.setEncrypt( m_useEncryption );
     hciconf.setAuth( m_enableAuthentification );
@@ -173,6 +172,7 @@ void BlueBase::readSavedDevices() {
 
     addSearchedDevices( loadedDevices );
 }
+
 
 /**
  * Write the list of allready known devices
@@ -277,6 +277,7 @@ void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices ) 
 void BlueBase::startServiceActionClicked( QListViewItem */*item*/ ) {
 }
 
+
 /**
  * Action that are toggled on hold (mostly QPopups i guess)
  */
@@ -313,7 +314,8 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         delete groups;
 
     }
-    /**
+
+    /*
      * We got service sensitive PopupMenus in our factory
      * We will create one through the factory and will insert
      * our Separator + ShowInfo into the menu or create a new
@@ -363,10 +365,11 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
     delete menu;
 }
 
-    /**
-     * Search and display avail. services for a device (on expand from device listing)
-     *
-     */
+
+/**
+ * Search and display avail. services for a device (on expand from device listing)
+ * @param item the service item returned
+ */
 void BlueBase::addServicesToDevice( BTDeviceItem * item ) {
     qDebug("addServicesToDevice");
     // row of mac adress text(3)
@@ -430,7 +433,15 @@ void BlueBase::addConnectedDevices() {
 }
 
 
+/**
+ * This adds the found connections to the connection tab.
+ * @param connectionList the ValueList with all current connections
+ */
 void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList ) {
+
+    // clear the ListView first
+    ListView4->clear();
+
     QValueList<OpieTooth::ConnectionState>::Iterator it;
     BTConnectionItem * connectionItem;
 
@@ -449,14 +460,17 @@ void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList ) 
     QTimer::singleShot( 20000, this, SLOT( addConnectedDevices() ) );
 }
 
+
 /**
  * Find out if a device can  currently be reached
+ * @param device
  */
 void BlueBase::deviceActive( const RemoteDevice &device ) {
     // search by mac, async, gets a signal back
     // We should have a BTDeviceItem there or where does it get added to the map -zecke
     m_localDevice->isAvailable( device.mac() );
 }
+
 
 /**
  * The signal catcher. Set the avail. status on device.
@@ -483,6 +497,7 @@ void BlueBase::deviceActive( const QString& device, bool connected  ) {
     m_deviceList.remove( it );
 }
 
+
 /**
  * Open the "scan for devices"  dialog
  */
@@ -503,6 +518,7 @@ void BlueBase::setInfo() {
     StatusLabel->setText( status() );
 }
 
+
 /**
  * Decontructor
  */
@@ -510,6 +526,7 @@ BlueBase::~BlueBase() {
     writeSavedDevices();
     delete m_iconLoader;
 }
+
 
 /**
  * find searches the ListView for a BTDeviceItem containig
