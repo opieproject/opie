@@ -1226,8 +1226,11 @@ bool ConnectWidget::execppp() {
 
   // PAP/CHAP settings
   if(_ifaceppp->data()->authMethod() == AUTH_PAPCHAP) {
-    command += " user ";
-    command = command + _ifaceppp->data()->storedUsername();
+      QString tmpName = _ifaceppp->data()->storedUsername();
+      if ( !tmpName.isEmpty() )  {
+          command += " user ";
+          command = command + tmpName;
+      }
   }
 
   // check for debug
