@@ -1028,13 +1028,18 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
         actSel=0; // Key stroke implies a screen update, so TEWidget won't
           // know where the current selection is.
 
-//     qDebug("key pressed is 0x%x",ke->key());
+//     qDebug("key pressed is 0x%x, state %d",ke->key(), ke->state());
 
-        if( ke->state() == ShiftButton && ke->key() == Key_Tab) { //lets hardcode this sucker
+        if( ke->state() == ShiftButton && ke->key() == Key_Tab) {
+          //lets hardcode this sucker
 
 //     qDebug("key pressed 2 is 0x%x",ke->key());
             emitText("\\"); // expose
-        } else
+        }
+        else if( ke->state() == ControlButton && ke->key() == Key_V) {
+          pasteClipboard();
+        }
+        else
             emit keyPressedSignal(ke); // expose
         ke->accept();
 #ifdef FAKE_CTRL_AND_ALT
