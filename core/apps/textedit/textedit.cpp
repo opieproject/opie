@@ -771,7 +771,6 @@ file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
         filer = sf.file();
         if(filer.right(1) == "/")
             filer = f;
-    }
         
     DocLnk nf;
     nf.setType("text/plain");
@@ -783,6 +782,7 @@ file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?"),
 
         qDebug("openFile string "+currentFileName);
 
+    }
     showEditTools();
       // Show filename in caption
     QString name = filer;
