@@ -28,6 +28,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/timestring.h>
 #include <qpe/qpedebug.h>
+#include <qpe/ir.h>
 
 #include <qheader.h>
 #include <qdatetime.h>
@@ -722,7 +723,7 @@ void DateBookDayWidget::mousePressEvent( QMouseEvent *e )
     QPopupMenu m;
     m.insertItem( tr( "Edit" ), 1 );
     m.insertItem( tr( "Delete" ), 2 );
-    m.insertItem( tr( "Beam" ), 3 );
+    if(Ir::supported()) m.insertItem( tr( "Beam" ), 3 );
     int r = m.exec( e->globalPos() );
     if ( r == 1 ) {
         emit editMe( ev.event() );
