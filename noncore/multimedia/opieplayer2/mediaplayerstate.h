@@ -41,7 +41,7 @@ public slots:
     void setLength( long l );
     void setView( char v );
 
-    void setPrev() ;
+    void setPrev();
     void setNext();
     void setList();
     void setVideo();
@@ -85,6 +85,8 @@ private:
 
     void readConfig( Config& cfg );
     void writeConfig( Config& cfg ) const;
+
+
 };
 
 

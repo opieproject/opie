@@ -15,6 +15,7 @@
 #include "mediaplayerstate.h"
 
 
+
 extern AudioWidget *audioUI;
 extern PlayListWidget *playList;
 extern MediaPlayerState *mediaPlayerState;
@@ -24,18 +25,20 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL ) {
 
 
+    xineControl = new XineControl();
 //    QPEApplication::grabKeyboard(); // EVIL
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( setPlaying( bool ) ) );
     connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pauseCheck( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( next() ),     this, SLOT( next() ) );
-    connect( mediaPlayerState, SIGNAL( prev() ),     this, SLOT( prev() ) );
+    connect( mediaPlayerState, SIGNAL( next() ), this, SLOT( next() ) );
+    connect( mediaPlayerState, SIGNAL( prev() ), this, SLOT( prev() ) );
 
-    connect( audioUI,  SIGNAL( moreClicked() ),         this, SLOT( startIncreasingVolume() ) );
-    connect( audioUI,  SIGNAL( lessClicked() ),         this, SLOT( startDecreasingVolume() ) );
-    connect( audioUI,  SIGNAL( moreReleased() ),        this, SLOT( stopChangingVolume() ) );
-    connect( audioUI,  SIGNAL( lessReleased() ),        this, SLOT( stopChangingVolume() ) );
+    connect( audioUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
+    connect( audioUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
+    connect( audioUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
+    connect( audioUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
+
 }
 
 MediaPlayer::~MediaPlayer() {
@@ -43,8 +46,9 @@ MediaPlayer::~MediaPlayer() {
 
 void MediaPlayer::pauseCheck( bool b ) {
     // Only pause if playing
-    if ( b && !mediaPlayerState->playing() )
-  mediaPlayerState->setPaused( FALSE );
+    if ( b && !mediaPlayerState->playing() ) {
+        mediaPlayerState->setPaused( FALSE );
+    }
 }
 
 void MediaPlayer::play() {
@@ -68,8 +72,9 @@ void MediaPlayer::setPlaying( bool play ) {
         currentFile = playListCurrent;
     }
 
-    audioUI->setTickerText( currentFile->file() );
+    audioUI->setTickerText( currentFile->file( ) );
 
+    xineControl->play( currentFile->file() );
 
     // alles nicht nötig, xine kümmert sich drum, man muss nur den return andio oder video gui geben
 

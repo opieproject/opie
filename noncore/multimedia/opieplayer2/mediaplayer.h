@@ -7,6 +7,7 @@
 #include <qpe/qlibrary.h>
 #include <qpe/mediaplayerplugininterface.h>
 
+#include "xinecontrol.h"
 
 class DocLnk;
 
@@ -36,6 +37,8 @@ protected:
 private:
     int     volumeDirection;
     const DocLnk  *currentFile;
+    XineControl *xineControl;
+
 };
 
 

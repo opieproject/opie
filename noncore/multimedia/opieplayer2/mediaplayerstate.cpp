@@ -1,13 +1,9 @@
-
-
-
 #include <qpe/qpeapplication.h>
 #include <qpe/qlibrary.h>
 #include <qpe/config.h>
 #include <qvaluelist.h>
 #include <qobject.h>
 #include <qdir.h>
-#include <qpe/mediaplayerplugininterface.h>
 #include "mediaplayerstate.h"
 
 
@@ -20,12 +16,14 @@ MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
         : QObject( parent, name ) {
     Config cfg( "OpiePlayer" );
     readConfig( cfg );
+
 }
 
 
 MediaPlayerState::~MediaPlayerState() {
     Config cfg( "OpiePlayer" );
     writeConfig( cfg );
+
 }
 
 

@@ -2,15 +2,15 @@ TEMPLATE  = app
 CONFIG    = qt warn_on release
 #release
 DESTDIR   = $(OPIEDIR)/bin
-HEADERS   = playlistselection.h mediaplayerstate.h \
+HEADERS   = playlistselection.h mediaplayerstate.h xinecontrol.h\
 	      videowidget.h audiowidget.h playlistwidget.h mediaplayer.h inputDialog.h
 SOURCES   = main.cpp \
-    	  playlistselection.cpp mediaplayerstate.cpp \
+    	  playlistselection.cpp mediaplayerstate.cpp xinecontrol.cpp\
      	 videowidget.cpp audiowidget.cpp playlistwidget.cpp mediaplayer.cpp inputDialog.cpp
 TARGET    = opieplayer
-INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lpthread -lopie
+INCLUDEPATH += $(OPIEDIR)/include /usr/include
+DEPENDPATH  += $(OPIEDIR)/include /usr/include
+LIBS            += -lqpe -lpthread -lopie -lxine -lxineutils
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
