@@ -8,7 +8,7 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 INTERFACES	=
-
+TARGET          = helpbrowser
 TRANSLATIONS = ../../../i18n/de/helpbrowser.ts \
 	 ../../../i18n/nl/helpbrowser.ts \
 	 ../../../i18n/xx/helpbrowser.ts \

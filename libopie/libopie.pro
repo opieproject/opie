@@ -96,6 +96,7 @@ LIBS += -lqpe
 # LIBS            += -lopiesql
 
 INTERFACES      = otimepickerbase.ui orecurrancebase.ui
+TARGET          = opie
 
 TRANSLATIONS = ../i18n/de/libopie.ts \
 	 ../i18n/nl/libopie.ts \
