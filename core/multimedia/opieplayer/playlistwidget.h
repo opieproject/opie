@@ -26,6 +26,8 @@
 #include <qpe/fileselector.h>
 #include <qpushbutton.h>
 
+#include <qpe/qcopenvelope_qws.h>
+
 #include "om3u.h"
 /* #include <qtimer.h> */
 
@@ -68,6 +70,7 @@ public slots:
 /*     void setFullScreen(); */
 /*     void setScaled(); */
 protected:
+   QCopChannel * channel;
         QPopupMenu *skinsMenu;
 /*     void contentsMousePressEvent( QMouseEvent * e ); */
 /*     void contentsMouseReleaseEvent( QMouseEvent * e ); */
@@ -90,6 +93,7 @@ private:
     void populateVideoView();
 private slots:
 
+    void qcopReceive(const QCString&, const QByteArray&);
     void populateSkinsMenu();
     void skinsMenuActivated(int);
     void writem3u();
