@@ -34,7 +34,7 @@ using namespace Opie;
 #include <qmessagebox.h>
 #include <qcombobox.h>
 #include <qspinbox.h>
-#include <qsocketnotifier.h>
+#include <qmainwindow.h>
 
 // Standard
 
@@ -95,6 +95,7 @@ Wellenreiter::Wellenreiter( QWidget* parent )
 
 }
 
+
 Wellenreiter::~Wellenreiter()
 {
     // no need to delete child widgets, Qt does it all for us
@@ -103,10 +104,32 @@ Wellenreiter::~Wellenreiter()
     delete pcap;
 }
 
+
 void Wellenreiter::setConfigWindow( WellenreiterConfigWindow* cw )
 {
     configwindow = cw;
 }
+
+
+void Wellenreiter::channelHopped(int c)
+{
+    QString title = "Wellenreiter II -scan- [";
+    QString left;
+    if ( c > 1 ) left.fill( '.', c-1 );
+    title.append( left );
+    title.append( '|' );
+    if ( c < iface->channels() )
+    {
+        QString right;
+        right.fill( '.', iface->channels()-c );
+        title.append( right );
+    }
+    title.append( "]" );
+    //title.append( QString().sprintf( " %02d", c ) );
+    assert( parent() );
+    ( (QMainWindow*) parent() )->setCaption( title );
+}
+
 
 void Wellenreiter::receivePacket(OPacket* p)
 {
@@ -186,7 +209,7 @@ void Wellenreiter::receivePacket(OPacket* p)
                 (const char*) wlan->macAddress2().toString(true),
                 (const char*) wlan->macAddress1().toString(true),
                 (const char*) wlan->macAddress3().toString(true) );
-            netView()->traffic( "fromDS", wlan->macAddress2().toString(),
+            netView()->traffic( "IBSS", wlan->macAddress2().toString(),
                                         wlan->macAddress1().toString(),
                                         wlan->macAddress3().toString() );
         }
@@ -199,7 +222,7 @@ void Wellenreiter::startStopClicked()
     if ( sniffing )
     {
         disconnect( SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
-
+        disconnect( SIGNAL( hopped(int) ), this, SLOT( channelHopped(int) ) );
         iface->setChannelHopping(); // stop hopping channels
         pcap->close();
         sniffing = false;
@@ -221,6 +244,8 @@ void Wellenreiter::startStopClicked()
 
         system( "cardctl reset; sleep 1" ); //FIXME: Use OProcess
         logwindow->log( "(i) Stopped Scanning." );
+        assert( parent() );
+        ( (QMainWindow*) parent() )->setCaption( "Wellenreiter II" );
 
         // message the user
         QMessageBox::information( this, "Wellenreiter II", "Your wireless card\nshould now be usable again." );
@@ -281,13 +306,9 @@ void Wellenreiter::startStopClicked()
 
         // connect
         connect( pcap, SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
+        connect( iface->channelHopper(), SIGNAL( hopped(int) ), this, SLOT( channelHopped(int) ) );
 
         logwindow->log( "(i) Started Scanning." );
-        #ifdef QWS
-        oApp->setTitle( "Scanning ..." );
-        #else
-        qApp->mainWidget()->setCaption( "Wellenreiter II / Scanning ..." );
-        #endif
         sniffing = true;
 
     }

@@ -48,6 +48,7 @@ class Wellenreiter : public WellenreiterBase {
     bool isDaemonRunning() const { return sniffing; };
 
   public slots:
+    void channelHopped(int);
     void receivePacket(OPacket*);
     void startStopClicked();
 
