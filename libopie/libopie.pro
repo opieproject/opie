@@ -109,6 +109,5 @@ SOURCES += pim/otodoaccesssql.cpp pim/ocontactaccessbackend_sql.cpp pim/odateboo
 INTERFACES      = otimepickerbase.ui orecurrancebase.ui
 TARGET          = opie
 
-include ( big-screen/big-screen.pro )
 
 include ( $(OPIEDIR)/include.pro )
