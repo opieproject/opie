@@ -54,7 +54,9 @@ public:
   void show();
   void setColor();
   int lastSelectedMenu;
+  int startUp;
 private slots:
+  void setDocument(const QString &);
   void doneSession(TESession*,int);
   void changeColumns(int);
   void fontChanged(int);
@@ -73,6 +75,7 @@ private slots:
   void initCommandList();
   void scrollMenuSelected(int);
   void editCommandListMenuSelected(int);
+  void parseCommandLine();
 private:
   void init(const char* _pgm, QStrList & _args);
   void initSession(const char* _pgm, QStrList & _args);

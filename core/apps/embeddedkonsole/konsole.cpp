@@ -18,6 +18,7 @@
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
 /*                        */
 /* -------------------------------------------------------------------------- */
+// enhancements added by L.J. Potter <ljp@llornkcor.com>
 
 #include <qpe/resource.h>
 
@@ -201,7 +202,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   b_scroll = TRUE; // histon;
   n_keytab = 0;
   n_render = 0;
-
+  startUp=0;
   setCaption( tr("Terminal") );
   setIcon( Resource::loadPixmap( "konsole" ) );
 
@@ -364,12 +365,12 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   se_pgm = _pgm;
   se_args = _args;
 
+parseCommandLine();
   // read and apply default values ///////////////////////////////////////////
   resize(321, 321); // Dummy.
   QSize currentSize = size();
   if (currentSize != size())
      defaultSize = size();
-
 }
 
 void Konsole::show()
@@ -389,7 +390,7 @@ Konsole::~Konsole()
 {
     while (nsessions > 0) {
       doneSession(getTe()->currentSession, 0);
-    }
+     }
 
   Config cfg("Konsole");
   cfg.setGroup("Konsole");
@@ -842,4 +843,42 @@ void Konsole::editCommandListMenuSelected(int iD)
     m->showMaximized();
     }
 
+}
+
+// $QPEDIR/bin/qcop QPE/Application/embeddedkonsole 'setDocument(QString)' 'ssh -V'
+void Konsole::setDocument( const QString &cmd) {
+    newSession();
+    TEWidget* te = getTe();
+    if(cmd.find("-e", 0, TRUE) != -1) {
+        QString cmd2;
+        cmd2=cmd.right(cmd.length()-3)+" &";
+        system(cmd2.latin1());
+        if(startUp <= 1 && nsessions < 2) {
+            doneSession(getTe()->currentSession, 0);
+            exit(0);
+        } else
+            doneSession(getTe()->currentSession, 0);
+    } else {
+        if (te != 0) {
+            te->emitText(cmd+"\r");
+        }
+    }
+    startUp++;
+}
+
+void Konsole::parseCommandLine() {
+    QString cmd;
+      //    newSession();
+    for (int i=1;i< qApp->argc();i++) {
+        if( QString(qApp->argv()[i]) == "-e") {
+            i++;
+            for ( int j=i;j< qApp->argc();j++) {
+                cmd+=QString(qApp->argv()[j])+" ";
+            }
+            cmd.stripWhiteSpace();
+            system(cmd.latin1());
+            exit(0);//close();
+        } // end -e switch
+    }
+    startUp++;
 }
