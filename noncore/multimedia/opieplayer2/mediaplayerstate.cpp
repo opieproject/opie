@@ -66,9 +66,7 @@ void MediaPlayerState::readConfig( Config& cfg ) {
     scaled = cfg.readBoolEntry( "Scaling" );
     looping = cfg.readBoolEntry( "Looping" );
     shuffled = cfg.readBoolEntry( "Shuffle" );
-    usePlaylist = cfg.readBoolEntry( "UsePlayList" );
     videoGamma = cfg.readNumEntry( "VideoGamma" );
-    usePlaylist = TRUE;
     playing = FALSE;
     streaming = FALSE;
     paused = FALSE;
@@ -84,7 +82,6 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
     cfg.writeEntry( "Scaling", scaled );
     cfg.writeEntry( "Looping", looping );
     cfg.writeEntry( "Shuffle", shuffled );
-    cfg.writeEntry( "UsePlayList", usePlaylist );
     cfg.writeEntry( "VideoGamma",  videoGamma );
 }
 

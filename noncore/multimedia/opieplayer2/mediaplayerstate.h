@@ -56,7 +56,6 @@ public:
     bool isScaled() const { return scaled; }
     bool isLooping() const { return looping; }
     bool isShuffled() const { return shuffled; }
-    bool isUsingPlaylist() const { return usePlaylist; }
     bool isPaused() const { return paused; }
     bool isPlaying() const { return playing; }
     bool isStopped() const { return stopped; }

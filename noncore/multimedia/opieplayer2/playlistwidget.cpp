@@ -205,15 +205,11 @@ void PlayListWidget::writeDefaultPlaylist() {
 
 void PlayListWidget::addToSelection( const DocLnk& lnk ) {
     d->setDocumentUsed = FALSE;
-    if ( mediaPlayerState->isUsingPlaylist() ) {
-        if( QFileInfo( lnk.file() ).exists() ||
-            lnk.file().left(4) == "http" ) {
-            d->selectedFiles->addToSelection( lnk );
-        }
-//          writeCurrentM3u();          
+    if( QFileInfo( lnk.file() ).exists() ||
+        lnk.file().left(4) == "http" ) {
+        d->selectedFiles->addToSelection( lnk );
     }
-    else
-        mediaPlayerState->setPlaying( TRUE );
+//          writeCurrentM3u();          
 }
 
 
@@ -422,78 +418,60 @@ void PlayListWidget::useSelectedDocument() {
 const DocLnk *PlayListWidget::current() const { // this is fugly
     assert( currentTab() == CurrentPlayList );
 
-//      qDebug("playlist");
-    if ( mediaPlayerState->isUsingPlaylist() )
-        return d->selectedFiles->current();
-
-    assert( false );
+    return d->selectedFiles->current();
 }
 
 
 bool PlayListWidget::prev() {
-    if ( mediaPlayerState->isUsingPlaylist() ) {
-        if ( mediaPlayerState->isShuffled() ) {
-            const DocLnk *cur = current();
-            int j = 1 + (int)(97.0 * rand() / (RAND_MAX + 1.0));
-            for ( int i = 0; i < j; i++ ) {
-                if ( !d->selectedFiles->next() )
-                    d->selectedFiles->first();
-            }
-            if ( cur == current() )
-                if ( !d->selectedFiles->next() ) {
-                    d->selectedFiles->first();
-                }
-            return TRUE;
-        } else {
-            if ( !d->selectedFiles->prev() ) {
-                if ( mediaPlayerState->isLooping() ) {
-                    return d->selectedFiles->last();
-                } else {
-                    return FALSE;
-                }
-            }
-            return TRUE;
+    if ( mediaPlayerState->isShuffled() ) {
+        const DocLnk *cur = current();
+        int j = 1 + (int)(97.0 * rand() / (RAND_MAX + 1.0));
+        for ( int i = 0; i < j; i++ ) {
+            if ( !d->selectedFiles->next() )
+                d->selectedFiles->first();
         }
+        if ( cur == current() )
+            if ( !d->selectedFiles->next() ) {
+                d->selectedFiles->first();
+            }
+        return TRUE;
     } else {
-        return mediaPlayerState->isLooping();
-  }
+        if ( !d->selectedFiles->prev() ) {
+            if ( mediaPlayerState->isLooping() ) {
+                return d->selectedFiles->last();
+            } else {
+                return FALSE;
+            }
+        }
+        return TRUE;
+    }
 }
 
 
 bool PlayListWidget::next() {
 //qDebug("<<<<<<<<<<<<next()");
- if ( mediaPlayerState->isUsingPlaylist() ) {
-        if ( mediaPlayerState->isShuffled() ) {
-            return prev();
-        } else {
-            if ( !d->selectedFiles->next() ) {
-                if ( mediaPlayerState->isLooping() ) {
-                    return d->selectedFiles->first();
-                } else {
-                    return FALSE;
-                }
-            }
-            return TRUE;
-        }
+    if ( mediaPlayerState->isShuffled() ) {
+        return prev();
     } else {
-        return mediaPlayerState->isLooping();
+        if ( !d->selectedFiles->next() ) {
+            if ( mediaPlayerState->isLooping() ) {
+                return d->selectedFiles->first();
+            } else {
+                return FALSE;
+            }
+        }
+        return TRUE;
     }
 }
 
 
 bool PlayListWidget::first() {
-    if ( mediaPlayerState->isUsingPlaylist() )
-        return d->selectedFiles->first();
-    else
-        return mediaPlayerState->isLooping();
+    return d->selectedFiles->first();
 }
 
 
 bool PlayListWidget::last() {
-    if ( mediaPlayerState->isUsingPlaylist() )
-        return d->selectedFiles->last();
-    else
-        return mediaPlayerState->isLooping();
+    return d->selectedFiles->last();
 }
 
 
