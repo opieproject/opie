@@ -1,0 +1,9 @@
+Files: plugins/applets/libsdmonapplet.so* pics/sdmon/sdcard.png
+Priority: optional
+Section: opie/taskbar
+Maintainer: Charles-Edouard Ruault <ce@ruault.com>
+Architecture: arm
+Version: $QPE_VERSION-3
+Depends: qpe-base ($QPE_VERSION)
+Description: SD/MMC Card Monitor applet
+ SD/MMC Card Monitor applet for the Qtopia environment taskbar.
