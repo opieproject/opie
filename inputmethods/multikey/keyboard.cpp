@@ -59,10 +59,10 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     usePicks = config->readBoolEntry ("open", "0"); // default closed
     delete config;
 
-    setFont( QFont( familyStr, 8 ) );
+    setFont( QFont( familyStr, 10 ) );
 
     picks = new KeyboardPicks( this );
-    picks->setFont( QFont( familyStr, 8 ) );
+    picks->setFont( QFont( familyStr, 10 ) );
     picks->initialise();
     if (usePicks) {
 
