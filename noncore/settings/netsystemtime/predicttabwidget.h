@@ -26,16 +26,43 @@
 
 */
 
-#include "mainwindow.h"
+#ifndef PREDICTTABWIDGET_H
+#define PREDICTTABWIDGET_H
 
-#include <qpe/qpeapplication.h>
+#include <qdatetime.h>
+#include <qstring.h>
+#include <qwidget.h>
 
-int main( int argc, char ** argv )
+class QLabel;
+class QTable;
+
+class PredictTabWidget : public QWidget
 {
-    QPEApplication a( argc, argv );
+	Q_OBJECT
 
-    MainWindow mw;
-    a.showMainWidget( &mw );
+public:
+	PredictTabWidget( QWidget * = 0x0 );
+	~PredictTabWidget();
 
-    return a.exec();
-}
+	void setShiftPerSec( int );
+
+private:
+	QTable *tblLookups;
+	QLabel *lblDrift;
+	QLabel *lblDiff;
+	QLabel *lblPredicted;
+
+	float     _shiftPerSec;
+	QString   tz;
+	QDateTime predictedTime;
+
+signals:
+	void setTime( const QDateTime & );
+
+public slots:
+	void slotTZChanged( const QString & );
+	void slotPredictTime();
+	void slotSetPredictedTime();
+};
+
+#endif

@@ -26,16 +26,37 @@
 
 */
 
-#include "mainwindow.h"
+#ifndef SETTINGSTABWIDGET_H
+#define SETTINGSTABWIDGET_H
 
-#include <qpe/qpeapplication.h>
+#include <qwidget.h>
 
-int main( int argc, char ** argv )
+class QCheckBox;
+class QComboBox;
+class QSpinBox;
+
+class SettingsTabWidget : public QWidget
 {
-    QPEApplication a( argc, argv );
+	Q_OBJECT
 
-    MainWindow mw;
-    a.showMainWidget( &mw );
+public:
+	SettingsTabWidget( QWidget * = 0x0 );
+	~SettingsTabWidget();
 
-    return a.exec();
-}
+	void saveSettings();
+	QString ntpServer();
+
+private:
+	QComboBox *cbTimeServer;
+	QSpinBox  *sbNtpDelay;
+	QSpinBox  *sbPredictDelay;
+	QCheckBox *chNtpTab;
+	QCheckBox *chPredictTab;
+
+signals:
+	void ntpDelayChanged( int );
+	void displayNTPTab( bool );
+	void displayPredictTab( bool );
+};
+
+#endif

@@ -1,13 +1,24 @@
 TEMPLATE	= app
 CONFIG		= qt warn_on debug
 #CONFIG		= qt warn_on release
-HEADERS		= ntp.h settime.h 
-SOURCES		= main.cpp ntp.cpp settime.cpp 
+HEADERS		= mainwindow.h          \
+				timetabwidget.h     \
+				formattabwidget.h   \
+				settingstabwidget.h \
+				predicttabwidget.h  \
+				ntptabwidget.h
+SOURCES		= main.cpp                \
+				mainwindow.cpp        \
+				timetabwidget.cpp     \
+				formattabwidget.cpp   \
+				settingstabwidget.cpp \
+				predicttabwidget.cpp  \
+				ntptabwidget.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe -lopie
-INTERFACES	= ntpbase.ui
-DESTDIR         = $(OPIEDIR)/bin
+LIBS		+= -lqpe -lopie
+INTERFACES	= 
+DESTDIR		= $(OPIEDIR)/bin
 TARGET		= systemtime
 
 TRANSLATIONS = ../../../i18n/de/systemtime.ts \

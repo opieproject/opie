@@ -26,16 +26,52 @@
 
 */
 
-#include "mainwindow.h"
+#ifndef TIMETABWIDGET_H
+#define TIMETABWIDGET_H
 
-#include <qpe/qpeapplication.h>
+#include <qwidget.h>
 
-int main( int argc, char ** argv )
+class DateButton;
+class DateFormat;
+class QComboBox;
+class QDateTime;
+class QSpinBox;
+class TimeZoneSelector;
+
+class TimeTabWidget : public QWidget
 {
-    QPEApplication a( argc, argv );
+	Q_OBJECT
 
-    MainWindow mw;
-    a.showMainWidget( &mw );
+public:
+	TimeTabWidget( QWidget * = 0x0 );
+	~TimeTabWidget();
 
-    return a.exec();
-}
+	void saveSettings( bool );
+	void setDateTime( const QDateTime & );
+
+private:
+	QSpinBox         *sbHour;
+	QSpinBox         *sbMin;
+	QComboBox        *cbAmpm;
+	DateButton       *btnDate;
+	TimeZoneSelector *selTimeZone;
+
+	bool use12HourTime;
+
+	void setSystemTime( const QDateTime & );
+
+signals:
+	void tzChanged( const QString & );
+	void getNTPTime();
+	void getPredictedTime();
+
+public slots:
+	void slotUse12HourTime( int );
+	void slotDateFormatChanged( const DateFormat & );
+	void slotWeekStartChanged( int );
+
+private slots:
+	void slotTZChanged( const QString & );
+};
+
+#endif

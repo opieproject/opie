@@ -26,16 +26,35 @@
 
 */
 
-#include "mainwindow.h"
+#ifndef NTPTABWIDGET_H
+#define NTPTABWIDGET_H
 
-#include <qpe/qpeapplication.h>
+#include <qwidget.h>
 
-int main( int argc, char ** argv )
+class QLabel;
+class QMultiLineEdit;
+
+class NTPTabWidget : public QWidget
 {
-    QPEApplication a( argc, argv );
+	Q_OBJECT
 
-    MainWindow mw;
-    a.showMainWidget( &mw );
+public:
+	NTPTabWidget( QWidget * = 0x0 );
+	~NTPTabWidget();
 
-    return a.exec();
-}
+	void setStartTime( const QString & );
+	void setTimeShift( const QString & );
+	void setNewTime( const QString & );
+	void addNtpOutput( const QString & );
+
+private:
+	QLabel         *lblStartTime;
+	QLabel         *lblTimeShift;
+	QLabel         *lblNewTime;
+	QMultiLineEdit *mleNtpOutput;
+
+signals:
+	void getNTPTime();
+};
+
+#endif

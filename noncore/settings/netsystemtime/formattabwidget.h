@@ -26,16 +26,40 @@
 
 */
 
-#include "mainwindow.h"
+#ifndef FORMATTABWIDGET_H
+#define FORMATTABWIDGET_H
 
-#include <qpe/qpeapplication.h>
+#include <qpe/timestring.h>
 
-int main( int argc, char ** argv )
+#include <qwidget.h>
+
+class QComboBox;
+
+class FormatTabWidget : public QWidget
 {
-    QPEApplication a( argc, argv );
+	Q_OBJECT
 
-    MainWindow mw;
-    a.showMainWidget( &mw );
+public:
+	FormatTabWidget( QWidget * = 0x0 );
+	~FormatTabWidget();
 
-    return a.exec();
-}
+	void saveSettings( bool );
+
+private:
+	QComboBox *cbAmpm;
+	QComboBox *cbWeekStart;
+	QComboBox *cbDateFormat;
+	QComboBox *cbAppletFormat;
+    DateFormat date_formats[4];
+
+signals:
+	void show12HourTime( int );
+	void dateFormatChanged( const DateFormat & );
+	void weekStartChanged( int );
+
+private slots:
+	void slotDateFormatChanged( int );
+	void sendOptions();
+};
+
+#endif
