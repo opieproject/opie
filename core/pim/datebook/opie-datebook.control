@@ -1,6 +1,7 @@
 Files: bin/datebook apps/1Pim/datebook.desktop pics/datebook
 Priority: optional
 Section: opie/applications
+Conflicts: qpe-tkccalendar
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION

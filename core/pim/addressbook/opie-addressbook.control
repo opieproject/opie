@@ -1,6 +1,7 @@
 Files: bin/addressbook apps/1Pim/addressbook.desktop
 Priority: optional
 Section: opie/applications
+Conflicts: qpe-tkcaddressbook
 Maintainer: Stefan Eilers <eilers.stefan@epost.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
