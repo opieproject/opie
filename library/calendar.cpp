@@ -18,9 +18,11 @@
 **
 **********************************************************************/
 #include "calendar.h"
+#include "qpeglobal.h"
 
 #include <qdatetime.h>
 #include <qobject.h>
+
 
 /*! \class Calendar calendar.html
 
@@ -30,14 +32,7 @@
   \ingroup qtopiaemb
 */
 
-#ifdef Q_OS_MACX
-   #define ATTRIBUTE_UNUSED
-#else
-   #define ATTRIBUTE_UNUSED __attribute__((unused))
-#endif
-
-
-static void never_called_tr_function_um_libqpe_ts_etwas_unter_zu_jubeln() ATTRIBUTE_UNUSED;
+static void never_called_tr_function_um_libqpe_ts_etwas_unter_zu_jubeln() QPE_SYMBOL_UNUSED;
 static void never_called_tr_function_um_libqpe_ts_etwas_unter_zu_jubeln() {
     (void)QObject::tr("Jan");
     (void)QObject::tr("Feb");

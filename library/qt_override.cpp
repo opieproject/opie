@@ -8,6 +8,7 @@
 #include <limits.h>
 #include <sys/param.h> // for toolchains with old libc headers
 
+#include <qtopia/qpeglobal.h>
 #include "qt_override_p.h"
 
 #if QT_VERSION > 233
@@ -85,8 +86,7 @@ int Opie::force_appearance = 0;
 
 extern "C" {
 
-extern void __gmon_start__ ( ) __attribute__(( weak ));
-
+extern void __gmon_start__ ( ) QPE_WEAK_SYMBOL;
 extern void __gmon_start__ ( )
 {
 }
@@ -102,8 +102,6 @@ extern void __gmon_start__ ( )
 void QPEApplication::polish ( QWidget *w )
 {
 #ifndef OPIE_NO_OVERRIDE_QT
-//	qDebug ( "QPEApplication::polish()" );
-
 	for ( const color_fix_t *ptr = apps_that_need_special_colors; ptr-> m_app; ptr++ ) {
 		if (( ::strcmp ( Opie::binaryName ( ), ptr-> m_app ) == 0 ) &&
 		    ( ptr-> m_class ? w-> inherits ( ptr-> m_class ) : true ) &&
@@ -125,8 +123,6 @@ void QPEApplication::polish ( QWidget *w )
 
 QValueList <int> QFontDatabase::pointSizes ( QString const &family, QString const &style, QString const &charset )
 {
-//	qDebug ( "QFontDatabase::pointSizes()" );
-
 	QValueList <int> sl = pointSizes_NonWeak ( family, style, charset );
 
 	for ( const char * const *ptr = apps_that_need_pointsizes_times_10; *ptr; ptr++ ) {
@@ -144,8 +140,6 @@ QValueList <int> QFontDatabase::pointSizes ( QString const &family, QString cons
 
 void QApplication::setStyle ( QStyle *style )
 {
-//	qDebug ( "QApplication::setStyle()" );
-
 	if ( Opie::force_appearance & Opie::Force_Style )
 		delete style;
 	else
@@ -154,16 +148,12 @@ void QApplication::setStyle ( QStyle *style )
 
 void QApplication::setPalette ( const QPalette &pal, bool informWidgets, const char *className )
 {
-//	qDebug ( "QApplication::setPalette()" );
-
 	if (!( Opie::force_appearance & Opie::Force_Style ))
 		QApplication::setPalette_NonWeak ( pal, informWidgets, className );
 }
 
 void QApplication::setFont ( const QFont &fnt, bool informWidgets, const char *className )
 {
-//	qDebug ( "QApplication::setFont()" );
-
 	if (!( Opie::force_appearance & Opie::Force_Font ))
 		QApplication::setFont_NonWeak ( fnt, informWidgets, className );
 }
@@ -171,8 +161,6 @@ void QApplication::setFont ( const QFont &fnt, bool informWidgets, const char *c
 
 void QApplication::qwsSetDecoration ( QWSDecoration *deco )
 {
-//	qDebug ( "QApplication::qwsSetDecoration()" );
-
 	if ( Opie::force_appearance & Opie::Force_Decoration )
 		delete deco;
 	else

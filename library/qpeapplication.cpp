@@ -88,6 +88,7 @@
 #include "qpemenubar.h"
 #include "textcodecinterface.h"
 #include "imagecodecinterface.h"
+#include <qtopia/qpeglobal.h>
 
 #include <unistd.h>
 #include <sys/file.h>
@@ -1294,12 +1295,7 @@ void QPEApplication::reset() {
 #if (QT_VERSION < 238) && defined Q_OS_MACX
 bool qt_left_hand_scrollbars = false;
 #else
-#ifdef Q_OS_MACX
-#define WEAK_SYMBOL __attribute__((weak_import))
-#else
-#define WEAK_SYMBOL __attribute__((weak))
-#endif
-extern bool qt_left_hand_scrollbars WEAK_SYMBOL;
+extern bool qt_left_hand_scrollbars QPE_WEAK_SYMBOL;
 #endif
 
 /*!

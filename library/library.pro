@@ -59,7 +59,8 @@ HEADERS	=   calendar.h \
 	windowdecorationinterface.h \
 	textcodecinterface.h \
 	imagecodecinterface.h \
-	qt_override_p.h
+	qt_override_p.h \
+	qpeglobal.h
 	
 SOURCES	=   calendar.cpp \
 	    global.cpp \

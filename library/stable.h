@@ -72,6 +72,6 @@
 #undef  QTOPIA_INTERNAL_TZSELECT_INC_LOCAL
 
 #include <qtopia/applicationinterface.h>
-
+#include <qtopia/qpeglobal.h>
 
 #endif
