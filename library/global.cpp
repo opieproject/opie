@@ -656,6 +656,20 @@ void Global::findDocuments(DocLnkSet* folder, const QString &mimefilter)
     QString homedocs = QString(getenv("HOME")) + "/Documents";
     DocLnkSet d(homedocs,mimefilter);
     folder->appendFrom(d);
+    /** let's do intellegint way of searching these files
+     *  a) the user don't want to check mediums global
+     *  b) the user wants to check but use the global options for it
+     *  c) the user wants to check it but not this medium
+     *  d) the user wants to check and this medium as well
+     * 
+     *  In all cases we need to apply a different mimefilter to 
+     *  the medium.
+     *  a) mimefilter.isEmpty() we need to apply the responding filter
+     *     either the global or the one on the medium
+     *
+     *  b) mimefilter is set to an application we need to find out if the
+     *     mimetypes are included in the mime mask of the medium
+     */
     StorageInfo storage;
     const QList<FileSystem> &fs = storage.fileSystems();
     QListIterator<FileSystem> it ( fs );

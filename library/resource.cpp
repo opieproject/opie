@@ -68,7 +68,7 @@ QBitmap Resource::loadBitmap( const QString &pix )
 
 /*!
   Returns the filename of a pixmap named \a pix. You should avoid including
-  any filename type extension (eg. .png, .xpm).
+  any filename type extension (eg. .png, .xpm .jpg .jpeg).
 
   Normally you will use loadPixmap() rather than this function.
 */
@@ -78,6 +78,10 @@ QString Resource::findPixmap( const QString &pix )
 
     if ( QFile( picsPath + pix + ".png").exists() )
 	return picsPath + pix + ".png";
+    else if ( QFile( picsPath + pix + ".jpeg").exists() )
+	return picsPath + pix + ".jpeg";
+    else if ( QFile( picsPath + pix + ".jpg").exists() )
+	return picsPath + pix + ".jpg";
     else if ( QFile( picsPath + pix + ".xpm").exists() )
 	return picsPath + pix + ".xpm";
     else if ( QFile( picsPath + pix ).exists() )
@@ -117,7 +121,7 @@ QStringList Resource::allSounds()
 
 /*!
   Returns the QImage named \a name. You should avoid including
-  any filename type extension (eg. .png, .xpm).
+  any filename type extension (eg. .png, .xpm .jpg).
 */
 QImage Resource::loadImage( const QString &name)
 {
