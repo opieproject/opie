@@ -3,6 +3,9 @@
 export TOPDIR:=$(shell pwd)
 
 include $(TOPDIR)/Vars.make
+ifneq ($(wildcard $(TOPDIR)/Vars.local),)
+include $(TOPDIR)/Vars.local
+endif
 
 noconfig_targets := xconfig menuconfig config oldconfig randconfig \
 		    defconfig allyesconfig allnoconfig allmodconfig \
