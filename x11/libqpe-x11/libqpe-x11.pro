@@ -53,6 +53,7 @@ HEADERS	=   ../../library/calendar.h \
             ../../library/windowdecorationinterface.h \
             ../../library/textcodecinterface.h \
             ../../library/imagecodecinterface.h \
+	    ../../library/fontdatabase.h \
             qt/qcopchannel_qws.h \
 	    qpe/qpeapplication.h \
 	    qpe/fontmanager.h \
@@ -111,6 +112,7 @@ SOURCES	=   ../../library/calendar.cpp \
             ../../library/findwidget_p.cpp \
             ../../library/finddialog.cpp \
             ../../library/lnkproperties.cpp \
+	    ../../library/fontdatabase.cpp \
             qt/qcopchannel_qws.cpp \
             qpe/qpeapplication.cpp \
             ../ipc/client/ocopclient.cpp \
