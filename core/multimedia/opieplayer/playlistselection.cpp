@@ -198,6 +198,18 @@ void PlayListSelection::writeCurrent( Config& cfg ) {
 }
 
 void  PlayListSelection::setSelectedItem(const QString &strk ) {
+
+    unSelect();
+    QListViewItemIterator it( this );
+    for ( ; it.current(); ++it ) {
+//        qDebug( it.current()->text(0));
+        if( strk == it.current()->text(0)) {
+//             qDebug( "We have a match "+strk);
+            setSelected( it.current(), TRUE);
+            ensureItemVisible( it.current() );
+            return;
+        }
+    }
 //     setSelected( item, TRUE );
 //     ensureItemVisible( selectedItem() );
 }

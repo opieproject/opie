@@ -319,7 +319,8 @@ void PlayListWidget::initializeStates() {
 //     d->tbScale->setEnabled( mediaPlayerState->fullscreen() );
 //    setPlaylist( mediaPlayerState->playlist() );
      setPlaylist( true);
-     d->selectedFiles->first();
+//     d->selectedFiles->first();
+
 }
 
 
@@ -336,6 +337,7 @@ void PlayListWidget::readConfig( Config& cfg ) {
             d->selectedFiles->addToSelection( lnk );
         }
     }
+     d->selectedFiles->setSelectedItem( currentString);
 //    d->selectedFiles->setSelectedItem( (const QString &)currentString);
 }
 
@@ -351,7 +353,7 @@ void PlayListWidget::writeConfig( Config& cfg ) const {
         if ( lnk ) {
             QString entryName;
             entryName.sprintf( "File%i", noOfFiles + 1 );
-            qDebug(entryName);
+//            qDebug(entryName);
             cfg.writeEntry( entryName, lnk->linkFile() );
               // if this link does exist, add it so we have the file
               // next time...
@@ -473,7 +475,7 @@ const DocLnk *PlayListWidget::current() { // this is fugly
 //     switch (tabWidget->currentPageIndex()) {
 //          case 0: //playlist
 //          {
-    qDebug("playlist");
+//    qDebug("playlist");
     if ( mediaPlayerState->playlist() ) {
         return d->selectedFiles->current();
     }
@@ -609,7 +611,7 @@ void PlayListWidget::saveList() {
         lnk.setType("playlist/plain");// hey is this a REGISTERED mime type?!?!? ;D
         lnk.setIcon("mpegplayer/playlist2");
         lnk.setName( filename); //sets file name
-        qDebug(filename);
+//        qDebug(filename);
         if(!lnk.writeLink())
             qDebug("Writing doclink did not work");
       }
@@ -886,7 +888,7 @@ void PlayListWidget::listDelete() {
           QListIterator<DocLnk> dit( files.children() );
           for ( ; dit.current(); ++dit ) {
               if( dit.current()->name() == file) {
-                  qDebug(file);
+//                  qDebug(file);
                   LnkProperties prop( dit.current() );
 //  connect(&prop, SIGNAL(select(const AppLnk *)), this, SLOT(externalSelected(const AppLnk *)));
                   prop.showMaximized();
