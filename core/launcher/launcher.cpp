@@ -592,7 +592,7 @@ void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 	    }
 	  }
 	} 
-      }
+       }
     }
     m_timeStamp = newStamp;
 }

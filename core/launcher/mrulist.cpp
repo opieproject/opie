@@ -1,4 +1,5 @@
 /**********************************************************************
+** Copyright (C) 2002 Holger 'zecke' Freyther
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
 ** This file is part of Qtopia Environment.
@@ -71,7 +72,35 @@ void MRUList::addTask( const AppLnk *appLnk )
 
     if ( !task )
 	return;
+    // ok we wan't to delete old icons from the taskbar
+    // get the window list and see which windows aren't there any more
+    QList<AppLnk> cleanUp;
+    cleanUp.setAutoDelete( TRUE );
+    const QList<QWSWindow> &list = qwsServer->clientWindows();
+    QWSWindow* w;
+    bool running = false; // to see what we should do
+    for ( ; i < task->count(); i++ ) {
+      AppLnk *t = task->at(i);
+      running = false;
+      for (QListIterator<QWSWindow> it(list); (w=it.current()); ++it) {
+	QString app = w->client()->identity();
+	if( app == t->exec( ) ){
+	  running = true;
+	  break;
+	} 
+      }
+      if(!running ) { // gues what we do now
+	cleanUp.append( t);
+      }
+    }
+    // no do a clean up of these old icons
+    AppLnk *lnk;
+    for( lnk = cleanUp.first(); lnk != 0; lnk = cleanUp.next() ){
+      task->remove( lnk );
+    }    
+    cleanUp.clear(); // should be deleted too
 
+    i = 0;
     for ( ; i < task->count(); i++ ) {
 	AppLnk *t = task->at(i);
 	if ( t->exec() == appLnk->exec() ) {
@@ -84,7 +113,7 @@ void MRUList::addTask( const AppLnk *appLnk )
 	    return;
 	}
     }
-
+    // check which tasks are running and delete them from the list
     AppLnk *t = new AppLnk( *appLnk );
     // DocLnks have an overloaded virtual function exec()
     t->setExec( appLnk->exec() );
@@ -113,7 +142,7 @@ bool MRUList::quitOldApps()
     const QList<QWSWindow> &list = qwsServer->clientWindows();
     QWSWindow* w;
     for (QListIterator<QWSWindow> it(list); (w=it.current()); ++it) {
-	QString app = w->client()->identity();
+      QString app = w->client()->identity();
 	if ( appsstarted.contains(app) && !appsrunning.contains(app) )
 	    appsrunning.append(app);
     }
@@ -124,8 +153,11 @@ bool MRUList::quitOldApps()
 	for (; it != appsrunning.end(); it++) {
 	    for ( int i=task->count()-1; i>=0; --i ) {
 		AppLnk *t = task->at(i);
-		if ( t->exec() == *it )
-		    Global::terminate(t);
+		if ( t->exec() == *it ){
+		  task->remove(i );
+		  delete t;
+		  Global::terminate(t);
+		}
 	    }
 	}
 	return TRUE;
