@@ -76,13 +76,6 @@ Por favor cárguela.</translation>
     </message>
 </context>
 <context>
-    <name>DesktopPowerAlerter</name>
-    <message>
-        <source>Battery Status</source>
-        <translation>Estado de la Batería</translation>
-    </message>
-</context>
-<context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
@@ -177,6 +170,13 @@ Por favor cárguela.</translation>
     <message>
         <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</source>
         <translation>Se insertó un &lt;b&gt;medio de almacenamiento&lt;/b&gt;. ¿Examino sus ficheros?</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Battery Status</source>
+        <translation type="unfinished">Estado de la Batería</translation>
     </message>
 </context>
 <context>

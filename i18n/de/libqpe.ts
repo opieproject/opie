@@ -773,27 +773,6 @@ frei und versuchen Sie es noch einmal
         <source>Sun</source>
         <translation>Son</translation>
     </message>
-</context>
-<context>
-    <name>QPEApplication</name>
-    <message>
-        <source>%1 document</source>
-        <translation>%1 Dokument</translation>
-    </message>
-</context>
-<context>
-    <name>QPEDecoration</name>
-    <message>
-        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation>&lt;Qt&gt;Keine allgemeine Hilfe vorhanden- bitte benutzen Sie die kontextsensitve Hilfe:&lt;p&gt;Um kontextsensitive Hilfe zu verwenden: &lt;p&gt;&lt;ol&gt;&lt;li&gt;Klicken und halten Sie den Stift auf dem Hilfebutton.&lt;li&gt;Wenn die Titelzeile &lt;b&gt;What&apos;s this...&lt;/b&gt; anzeigt können Sie auf ein beliebiges Objekt klicken um die zugehörige Hilfe zu erhalten.&lt;/ol&gt;&lt;/Qt&gt;</translation>
-    </message>
-    <message>
-        <source>What&apos;s this...</source>
-        <translation>Was ist das...</translation>
-    </message>
-</context>
-<context>
-    <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
         <translation>Klicken Sie hier, um das Fenster zu schliessen und alle Änderungen zu verwerfen.</translation>
@@ -813,6 +792,21 @@ frei und versuchen Sie es noch einmal
     <message>
         <source>Click to make this window use all available screen area.</source>
         <translation>Klicken sie hier, um das Fenster zu maximieren.</translation>
+    </message>
+    <message>
+        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
+        <translation>&lt;Qt&gt;Keine allgemeine Hilfe vorhanden- bitte benutzen Sie die kontextsensitve Hilfe:&lt;p&gt;Um kontextsensitive Hilfe zu verwenden: &lt;p&gt;&lt;ol&gt;&lt;li&gt;Klicken und halten Sie den Stift auf dem Hilfebutton.&lt;li&gt;Wenn die Titelzeile &lt;b&gt;What&apos;s this...&lt;/b&gt; anzeigt können Sie auf ein beliebiges Objekt klicken um die zugehörige Hilfe zu erhalten.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+    </message>
+    <message>
+        <source>What&apos;s this...</source>
+        <translation>Was ist das...</translation>
+    </message>
+</context>
+<context>
+    <name>QPEApplication</name>
+    <message>
+        <source>%1 document</source>
+        <translation>%1 Dokument</translation>
     </message>
 </context>
 <context>

@@ -377,43 +377,43 @@ Sair na mesma?</translation>
 <context>
     <name>DateBookWeekView</name>
     <message>
-        <source>M</source>
-        <comment>Monday</comment>
-        <translation>Se</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Tuesday</comment>
-        <translation>Te</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <comment>Wednesday</comment>
-        <translation>Qu</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Thursday</comment>
-        <translation>Qu</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <comment>Friday</comment>
-        <translation>Se</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Saturday</comment>
-        <translation>Sá</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Sunday</comment>
-        <translation>Do</translation>
-    </message>
-    <message>
         <source>p</source>
         <translation>p</translation>
+    </message>
+    <message>
+        <source>Mo</source>
+        <comment>Monday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tu</source>
+        <comment>Tuesday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>We</source>
+        <comment>Wednesday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Th</source>
+        <comment>Thursday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fr</source>
+        <comment>Friday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sa</source>
+        <comment>Saturday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Su</source>
+        <comment>Sunday</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -620,19 +620,19 @@ Sair na mesma?</translation>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>nd</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>rd</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>th</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
 </context>
 <context>

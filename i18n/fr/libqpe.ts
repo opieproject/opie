@@ -770,46 +770,40 @@ Libérez de la mémoire et réessayez.</translation>
         <source>Sun</source>
         <translation>Di</translation>
     </message>
+    <message>
+        <source>Click to close this window, discarding changes.</source>
+        <translation type="unfinished">Cliquez pour fermer cette fenêtre et abandonner les changements.</translation>
+    </message>
+    <message>
+        <source>Click to close this window.</source>
+        <translation type="unfinished">Cliquez pour fermer cette fenêtre.</translation>
+    </message>
+    <message>
+        <source>Click to close this window and apply changes.</source>
+        <translation type="unfinished">Cliquez pour fermer cette fenêtre et appliquer les changements.</translation>
+    </message>
+    <message>
+        <source>Click to make this window moveable.</source>
+        <translation type="unfinished">Clqiuez pour rendre cette fenêtre déplaçable.</translation>
+    </message>
+    <message>
+        <source>Click to make this window use all available screen area.</source>
+        <translation type="unfinished">Cliquez pour que cette fenêtre remplisse l&apos;écran.</translation>
+    </message>
+    <message>
+        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
+        <translation type="unfinished">&lt;Qt&gt;Aide globale n&apos;est pas disponible poyur cette application, cependant, il existe une aide contectuelle.&lt;p&gt; pour utiliser l&apos;aide contectuelle:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Cliquez and maintenez sur le bouton d&apos;aide.&lt;li&gt;Lorsque la barre de titre affiche &lt;b&gt;qu&apos;est-ce-que c&apos;est...&lt;/b&gt;, cliquez sur n&apos;importe quel control.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+    </message>
+    <message>
+        <source>What&apos;s this...</source>
+        <translation type="unfinished">Qu&apos;est ce que c&apos;est...</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
         <translation>%1 document</translation>
-    </message>
-</context>
-<context>
-    <name>QPEDecoration</name>
-    <message>
-        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation>&lt;Qt&gt;Aide globale n&apos;est pas disponible poyur cette application, cependant, il existe une aide contectuelle.&lt;p&gt; pour utiliser l&apos;aide contectuelle:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Cliquez and maintenez sur le bouton d&apos;aide.&lt;li&gt;Lorsque la barre de titre affiche &lt;b&gt;qu&apos;est-ce-que c&apos;est...&lt;/b&gt;, cliquez sur n&apos;importe quel control.&lt;/ol&gt;&lt;/Qt&gt;</translation>
-    </message>
-    <message>
-        <source>What&apos;s this...</source>
-        <translation>Qu&apos;est ce que c&apos;est...</translation>
-    </message>
-</context>
-<context>
-    <name>QPEManager</name>
-    <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation>Cliquez pour fermer cette fenêtre et abandonner les changements.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation>Cliquez pour fermer cette fenêtre.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation>Cliquez pour fermer cette fenêtre et appliquer les changements.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation>Clqiuez pour rendre cette fenêtre déplaçable.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation>Cliquez pour que cette fenêtre remplisse l&apos;écran.</translation>
     </message>
 </context>
 <context>

@@ -190,11 +190,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Really copy
 %1 files?</source>
         <translation type="unfinished"></translation>
@@ -248,6 +243,16 @@ It is not bookmarked!</source>
     </message>
     <message>
         <source>File Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

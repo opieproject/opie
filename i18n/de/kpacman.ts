@@ -93,15 +93,6 @@ die letzten 10 Jahre Ihrer Freundschaft.</translation>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
-    <message>
-        <source>Configuration Error</source>
-        <translation>Konfigurationsfehler</translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
-        <translation>Es sind keine Schemata definiert oder es wurde keines ausgewählt.</translation>
-    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>
@@ -224,6 +215,10 @@ oder iist in einem unbekannten Format.</translation>
     <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@DD@/@MM@/@YY@</translation>
+    </message>
+    <message>
+        <source>                          </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

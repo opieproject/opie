@@ -91,9 +91,9 @@ public:
 		calculateGrid ( Bottom );
 
 
-		new SampleItem ( this, tr( "Sample 1" ), Resource::loadPixmap ( "datebook/DateBook" ));
-		new SampleItem ( this, tr( "Sample 2" ), Resource::loadPixmap ( "Calibrate" ));
-		new SampleItem ( this, tr( "Sample 3" ), Resource::loadPixmap ( "UnknownDocument" ));
+		new SampleItem ( this, QObject::tr( "Sample 1" ), Resource::loadPixmap ( "datebook/DateBook" ));
+		new SampleItem ( this, QObject::tr( "Sample 2" ), Resource::loadPixmap ( "Calibrate" ));
+		new SampleItem ( this, QObject::tr( "Sample 3" ), Resource::loadPixmap ( "UnknownDocument" ));
 
 		setBackgroundType ( TabConfig::Ruled, QString::null );
 

@@ -95,16 +95,6 @@ the last 10 years of her friendship.
         <source>&amp;Help</source>
         <translation>&amp;Aide</translation>
     </message>
-    <message>
-        <source>Configuration Error</source>
-        <translation>Erreur de configuration</translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
-        <translation>Il n&apos;y a pas de thème défini
-ou auncun thème n&apos;est sélectionné.</translation>
-    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>

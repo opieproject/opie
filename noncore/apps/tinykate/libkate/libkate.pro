@@ -28,7 +28,7 @@ HEADERS		= microkde/kapplication.h \
 		  \
 	          \
 		  qt3back/qregexp3.h \
-		  kde/ksharedptr.h \
+		  microkde/ksharedptr.h \
 		  document/katebuffer.h  document/katedialogs.h \
 		  document/katetextline.h \
 		  document/katecmd.h \

@@ -378,43 +378,43 @@ Afslut alligevel?</translation>
 <context>
     <name>DateBookWeekView</name>
     <message>
-        <source>M</source>
-        <comment>Monday</comment>
-        <translation>M</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Tuesday</comment>
-        <translation>T</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <comment>Wednesday</comment>
-        <translation>O</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Thursday</comment>
-        <translation>T</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <comment>Friday</comment>
-        <translation>F</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Saturday</comment>
-        <translation>L</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Sunday</comment>
-        <translation>S</translation>
-    </message>
-    <message>
         <source>p</source>
         <translation>p</translation>
+    </message>
+    <message>
+        <source>Mo</source>
+        <comment>Monday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tu</source>
+        <comment>Tuesday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>We</source>
+        <comment>Wednesday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Th</source>
+        <comment>Thursday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fr</source>
+        <comment>Friday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sa</source>
+        <comment>Saturday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Su</source>
+        <comment>Sunday</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

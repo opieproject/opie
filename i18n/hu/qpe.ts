@@ -76,13 +76,6 @@ Kérem töltse fel a biztonsági-elemt.</translation>
     </message>
 </context>
 <context>
-    <name>DesktopPowerAlerter</name>
-    <message>
-        <source>Battery Status</source>
-        <translation>Elem állapot</translation>
-    </message>
-</context>
-<context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
@@ -177,6 +170,13 @@ Kérem töltse fel a biztonsági-elemt.</translation>
     <message>
         <source>Do not ask again for this medium</source>
         <translation>Ennél az eszköznél ne kérdezze újra</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Battery Status</source>
+        <translation type="unfinished">Elem állapot</translation>
     </message>
 </context>
 <context>

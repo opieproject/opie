@@ -10,14 +10,6 @@
         <translation>Suchmethode</translation>
     </message>
     <message>
-        <source>General Settings</source>
-        <translation type="obsolete">Allg. Einstellungen</translation>
-    </message>
-    <message>
-        <source>Searchmethods</source>
-        <translation type="obsolete">Suchemethoden</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Neu</translation>
     </message>
@@ -43,10 +35,6 @@
     <message>
         <source>&amp;Ok</source>
         <translation>&amp;Ok</translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="obsolete">Einstellungen</translation>
     </message>
     <message>
         <source>Searchmethods</source>

@@ -29,9 +29,5 @@
         <source>Help Browser</source>
         <translation>Brskalnik pomoči</translation>
     </message>
-    <message>
-        <source>HelpBrowser</source>
-        <translation>BrskalnikPomoči</translation>
-    </message>
 </context>
 </TS>

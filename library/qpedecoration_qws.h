@@ -51,7 +51,7 @@ public:
 
     enum QPERegion { Help=LastRegion+1 };
     void buttonClicked( QPERegion r );
-    
+
 protected:
     virtual int getTitleHeight(const QWidget *);
     virtual const char **menuPixmap();

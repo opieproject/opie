@@ -29,9 +29,5 @@
         <source>Help Browser</source>
         <translation>FOO</translation>
     </message>
-    <message>
-        <source>HelpBrowser</source>
-        <translation>FOO</translation>
-    </message>
 </context>
 </TS>

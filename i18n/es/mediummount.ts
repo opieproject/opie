@@ -1,95 +1,95 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>MainWindow</name>
-    <message>
-        <source>Global</source>
-        <translation>Global</translation>
-    </message>
+    <name>MediumMountSetting::MainWindow</name>
     <message>
         <source>Medium Mount Settings</source>
-        <translation>Configuración del Montador de Medios</translation>
+        <translation type="unfinished">Configuración del Montador de Medios</translation>
+    </message>
+    <message>
+        <source>Global</source>
+        <translation type="unfinished">Global</translation>
     </message>
 </context>
 <context>
-    <name>MediumGlobalWidget</name>
+    <name>MediumMountSetting::MediumGlobalWidget</name>
+    <message>
+        <source>If a medium gets inserted into this device Opie tries to search the medium for Documents. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
+        <translation type="unfinished">Si un medio se inserta en este dispositivo, Opie intenta buscar documentos en el medio. En medios grandes esto puede llevar algún tiempo. Puede elegir si Opie debe examinar globalmente o por medio. También puede reconfigurar cada medio.</translation>
+    </message>
     <message>
         <source>Enable medium checking</source>
-        <translation>Habilitar comprobación medio</translation>
+        <translation type="unfinished">Habilitar comprobación medio</translation>
     </message>
     <message>
         <source>Use global settings</source>
-        <translation>Usar configuración global</translation>
+        <translation type="unfinished">Usar configuración global</translation>
     </message>
     <message>
         <source>Which media files</source>
-        <translation>Qué ficheros de medio</translation>
+        <translation type="unfinished">Qué ficheros de medio</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Audio</translation>
+        <translation type="unfinished">Audio</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Todo</translation>
+        <translation type="unfinished">Todo</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>Imagen</translation>
+        <translation type="unfinished">Imagen</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Texto</translation>
+        <translation type="unfinished">Texto</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Vídeo</translation>
-    </message>
-    <message>
-        <source>If a medium gets inserted into this device Opie tries to search the medium for Documents. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
-        <translation>Si un medio se inserta en este dispositivo, Opie intenta buscar documentos en el medio. En medios grandes esto puede llevar algún tiempo. Puede elegir si Opie debe examinar globalmente o por medio. También puede reconfigurar cada medio.</translation>
+        <translation type="unfinished">Vídeo</translation>
     </message>
 </context>
 <context>
-    <name>MediumMountWidget</name>
+    <name>MediumMountSetting::MediumMountWidget</name>
+    <message>
+        <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
+        <translation type="unfinished">Configurar este medio. Los cambios tendrán efecto cuando la aplicación sea cerrada. Para actualizar la etiqueta de documentos necesita quitar e insertar este medio.</translation>
+    </message>
     <message>
         <source>Which media files</source>
-        <translation>Qué ficheros de medio</translation>
+        <translation type="unfinished">Qué ficheros de medio</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Audio</translation>
+        <translation type="unfinished">Audio</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Todo</translation>
+        <translation type="unfinished">Todo</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>Imagen</translation>
+        <translation type="unfinished">Imagen</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Texto</translation>
+        <translation type="unfinished">Texto</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Vídeo</translation>
+        <translation type="unfinished">Vídeo</translation>
     </message>
     <message>
         <source>Limit search to:</source>
-        <translation>Limitar búsqueda a:</translation>
+        <translation type="unfinished">Limitar búsqueda a:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Añadir</translation>
+        <translation type="unfinished">Añadir</translation>
     </message>
     <message>
         <source>Always check this medium</source>
-        <translation>Comprobar siempre este medio</translation>
-    </message>
-    <message>
-        <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
-        <translation>Configurar este medio. Los cambios tendrán efecto cuando la aplicación sea cerrada. Para actualizar la etiqueta de documentos necesita quitar e insertar este medio.</translation>
+        <translation type="unfinished">Comprobar siempre este medio</translation>
     </message>
 </context>
 </TS>

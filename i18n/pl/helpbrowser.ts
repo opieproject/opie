@@ -29,9 +29,5 @@
         <source>Help Browser</source>
         <translation>Pomoc</translation>
     </message>
-    <message>
-        <source>HelpBrowser</source>
-        <translation>Pomoc</translation>
-    </message>
 </context>
 </TS>

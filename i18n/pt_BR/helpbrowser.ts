@@ -19,10 +19,6 @@
         <translation>Remover dos Marcadores</translation>
     </message>
     <message>
-        <source>HelpBrowser</source>
-        <translation>NavegadorDeAjuda</translation>
-    </message>
-    <message>
         <source>Forward</source>
         <translation>Avançar</translation>
     </message>

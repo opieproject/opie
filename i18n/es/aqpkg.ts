@@ -331,34 +331,6 @@ Pulse en el recuadro de la izquierda para seleccionar un paquete.</translation>
 <byte value="x9"/>%1</translation>
     </message>
     <message>
-        <source>Installed To - %1</source>
-        <translation type="obsolete">Instalado en - %1</translation>
-    </message>
-    <message>
-        <source>Description - %1</source>
-        <translation type="obsolete">Descripción - %1</translation>
-    </message>
-    <message>
-        <source>Size - %1</source>
-        <translation type="obsolete">Tamaño - %1</translation>
-    </message>
-    <message>
-        <source>Section - %1</source>
-        <translation type="obsolete">Sección - %1</translation>
-    </message>
-    <message>
-        <source>Filename - %1</source>
-        <translation type="obsolete">Nombre fichero - %1</translation>
-    </message>
-    <message>
-        <source>V. Installed - %1</source>
-        <translation type="obsolete">Ver. instalada - %1</translation>
-    </message>
-    <message>
-        <source>V. Available - %1</source>
-        <translation type="obsolete">Ver. disponible - %1</translation>
-    </message>
-    <message>
         <source>Refreshing server package lists</source>
         <translation>Refrescando listas de paquetes del servidor</translation>
     </message>
@@ -507,6 +479,13 @@ Opie/Qtopia está corriendo!
     <message>
         <source>Close</source>
         <translation>Cerrar</translation>
+    </message>
+</context>
+<context>
+    <name>QuestionDlg</name>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Borrar</translation>
     </message>
 </context>
 <context>

@@ -69,14 +69,6 @@
         <translation type="unfinished">預報</translation>
     </message>
     <message>
-        <source>You asked for a delay of </source>
-        <translation type="obsolete">您要求延遲 </translation>
-    </message>
-    <message>
-        <source> minutes, but only </source>
-        <translation type="obsolete"> 分鐘, 但是只有 </translation>
-    </message>
-    <message>
         <source>Continue?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -105,10 +97,6 @@ ntpdate </source>
         <source>Error while getting time from
  server: </source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> seconds</source>
-        <translation type="obsolete"> 秒</translation>
     </message>
     <message>
         <source>Could not connect to server </source>

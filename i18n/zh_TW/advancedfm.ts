@@ -191,11 +191,6 @@
         <translation>刪除目錄?</translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation>確定刪除</translation>
-    </message>
-    <message>
         <source>Really copy
 %1 files?</source>
         <translation>確定要複製
@@ -254,6 +249,16 @@ It is not bookmarked!</source>
     </message>
     <message>
         <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

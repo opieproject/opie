@@ -769,46 +769,40 @@ Free some memory and try again.</source>
         <source>New Document</source>
         <translation>新增文件</translation>
     </message>
+    <message>
+        <source>Click to close this window, discarding changes.</source>
+        <translation type="unfinished">按這裡關閉這個視窗, 放棄所做的變更.</translation>
+    </message>
+    <message>
+        <source>Click to close this window.</source>
+        <translation type="unfinished">按這裡關閉視窗.</translation>
+    </message>
+    <message>
+        <source>Click to close this window and apply changes.</source>
+        <translation type="unfinished">按這裡關閉視窗並接受所有的變更.</translation>
+    </message>
+    <message>
+        <source>Click to make this window moveable.</source>
+        <translation type="unfinished">按這裡讓這個視窗可以移動.</translation>
+    </message>
+    <message>
+        <source>Click to make this window use all available screen area.</source>
+        <translation type="unfinished">按這裡讓這個視窗使用所有可用的螢幕區域.</translation>
+    </message>
+    <message>
+        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
+        <translation type="unfinished">&lt;QT&gt;泛用說明無法用於這個應用程式, 不過還有內容感應式說明.&lt;p&gt;要使用內容感應式說明:&lt;p&gt;&lt;ol&gt;&lt;li&gt;按住並停留在說明按鈕上.&lt;li&gt;當標題列顯示 &lt;b&gt;這是什麼...&lt;/b&gt; 時, 按一下任何控制元.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+    </message>
+    <message>
+        <source>What&apos;s this...</source>
+        <translation type="unfinished">這是什麼...</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
         <translation>%1 文件</translation>
-    </message>
-</context>
-<context>
-    <name>QPEDecoration</name>
-    <message>
-        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation>&lt;QT&gt;泛用說明無法用於這個應用程式, 不過還有內容感應式說明.&lt;p&gt;要使用內容感應式說明:&lt;p&gt;&lt;ol&gt;&lt;li&gt;按住並停留在說明按鈕上.&lt;li&gt;當標題列顯示 &lt;b&gt;這是什麼...&lt;/b&gt; 時, 按一下任何控制元.&lt;/ol&gt;&lt;/Qt&gt;</translation>
-    </message>
-    <message>
-        <source>What&apos;s this...</source>
-        <translation>這是什麼...</translation>
-    </message>
-</context>
-<context>
-    <name>QPEManager</name>
-    <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation>按這裡關閉這個視窗, 放棄所做的變更.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation>按這裡關閉視窗.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation>按這裡關閉視窗並接受所有的變更.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation>按這裡讓這個視窗可以移動.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation>按這裡讓這個視窗使用所有可用的螢幕區域.</translation>
     </message>
 </context>
 <context>

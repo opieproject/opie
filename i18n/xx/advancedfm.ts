@@ -147,11 +147,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
         <source>Could not rename</source>
         <translation>FOO</translation>
     </message>
@@ -248,6 +243,16 @@ It is not bookmarked!</source>
     </message>
     <message>
         <source>File Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -38,18 +38,18 @@
     </message>
 </context>
 <context>
-    <name>SampleView</name>
+    <name>QObject</name>
     <message>
         <source>Sample 1</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Sample 2</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
     <message>
         <source>Sample 3</source>
-        <translation>FOO</translation>
+        <translation type="unfinished">FOO</translation>
     </message>
 </context>
 <context>

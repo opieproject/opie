@@ -32,7 +32,6 @@ class LibMadPluginData;
 
 
 class LibMadPlugin : public MediaPlayerDecoder {
-
 public:
     LibMadPlugin();
     ~LibMadPlugin();

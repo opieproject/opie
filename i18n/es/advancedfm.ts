@@ -194,12 +194,6 @@ de los ficheros %1?</translation>
         <translation>¿Borrar directorio?</translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation>Confirme borrado
-</translation>
-    </message>
-    <message>
         <source>Really copy
 %1 files?</source>
         <translation>¿Confirma la copia
@@ -241,14 +235,6 @@ y está bajo licencia GPL
 </translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation>No puedo borrar el directorio
-actual de los favoritos.
-¡No está entre los favoritos!</translation>
-    </message>
-    <message>
         <source>Bookmark Directory</source>
         <translation>Directorio de favoritos</translation>
     </message>
@@ -259,6 +245,26 @@ actual de los favoritos.
     <message>
         <source>Error</source>
         <translation>Error</translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

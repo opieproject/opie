@@ -94,16 +94,6 @@ Rad bi se zahvalil svoji punci Elke Krueers za
         <source>&amp;Help</source>
         <translation>&amp;Pomoč</translation>
     </message>
-    <message>
-        <source>Configuration Error</source>
-        <translation>Napaka pri nastavitvah</translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
-        <translation>Nobena shema ni definirana
-ali pa ni nobena izbrana.</translation>
-    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>

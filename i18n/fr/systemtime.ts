@@ -99,10 +99,6 @@ ntpdate </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> seconds</source>
-        <translation type="obsolete">secondes</translation>
-    </message>
-    <message>
         <source>Could not connect to server </source>
         <translation type="unfinished">Impossible de se connecter au serveur</translation>
     </message>

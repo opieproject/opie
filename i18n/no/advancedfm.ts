@@ -96,14 +96,6 @@ og er GPL lisensiert</translation>
         <translation>Beam fil</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!!</source>
-        <translation>Kan ikke slette denne katalogen
-fra bokmerker.
-Den er ikke blitt bokmerket!!</translation>
-    </message>
-    <message>
         <source>AdvancedFm</source>
         <translation>AvansertFm</translation>
     </message>
@@ -172,12 +164,6 @@ filene %1 ?</translation>
     <message>
         <source>Delete Directory?</source>
         <translation>Slette katalog?</translation>
-    </message>
-    <message>
-        <source>Really delete
-</source>
-        <translation>Sikker på at du vil slette?
-</translation>
     </message>
     <message>
         <source>Really copy
@@ -255,6 +241,26 @@ Er du sikker på at du vil slette?</translation>
     <message>
         <source>Could not rename</source>
         <translation>Kunne ikke endre filnavn</translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

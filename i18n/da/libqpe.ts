@@ -770,46 +770,40 @@ Frigør noget hukommelse og prøv igen.</translation>
         <source>Sun</source>
         <translation>Søn</translation>
     </message>
+    <message>
+        <source>Click to close this window, discarding changes.</source>
+        <translation type="unfinished">Klik for at lukke dette vindue og kassere ændringer.</translation>
+    </message>
+    <message>
+        <source>Click to close this window.</source>
+        <translation type="unfinished">Klik for at lukke dette vindue.</translation>
+    </message>
+    <message>
+        <source>Click to close this window and apply changes.</source>
+        <translation type="unfinished">Klik for at lukke dette vindue og anvende ændringer.</translation>
+    </message>
+    <message>
+        <source>Click to make this window moveable.</source>
+        <translation type="unfinished">Klik for at gøre dette vindue flytbart.</translation>
+    </message>
+    <message>
+        <source>Click to make this window use all available screen area.</source>
+        <translation type="unfinished">Klik for at få dette vindue til at bruge hele skærmen.</translation>
+    </message>
+    <message>
+        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
+        <translation type="unfinished">&lt;Qt&gt;Der findes ikke nogen omfattende hjælp til dette program, men der er stadig kontekstfølsom hjælp.&lt;p&gt;Sådan bruger du kontekstfølsom hjælp:&lt;p&gt;&lt;ol&gt;&lt;li&gt;klik og hold hjælpeknappen&lt;li&gt;når vindues titlen viser &lt;b&gt;Hvad er det...&lt;/b&gt;, så klik på det du vil have hjælp med.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+    </message>
+    <message>
+        <source>What&apos;s this...</source>
+        <translation type="unfinished">Hvad er det...</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
         <translation>%1 dokument</translation>
-    </message>
-</context>
-<context>
-    <name>QPEDecoration</name>
-    <message>
-        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation>&lt;Qt&gt;Der findes ikke nogen omfattende hjælp til dette program, men der er stadig kontekstfølsom hjælp.&lt;p&gt;Sådan bruger du kontekstfølsom hjælp:&lt;p&gt;&lt;ol&gt;&lt;li&gt;klik og hold hjælpeknappen&lt;li&gt;når vindues titlen viser &lt;b&gt;Hvad er det...&lt;/b&gt;, så klik på det du vil have hjælp med.&lt;/ol&gt;&lt;/Qt&gt;</translation>
-    </message>
-    <message>
-        <source>What&apos;s this...</source>
-        <translation>Hvad er det...</translation>
-    </message>
-</context>
-<context>
-    <name>QPEManager</name>
-    <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation>Klik for at lukke dette vindue og kassere ændringer.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation>Klik for at lukke dette vindue.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation>Klik for at lukke dette vindue og anvende ændringer.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation>Klik for at gøre dette vindue flytbart.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation>Klik for at få dette vindue til at bruge hele skærmen.</translation>
     </message>
 </context>
 <context>

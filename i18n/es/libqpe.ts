@@ -769,46 +769,40 @@ Libere memoria e intételo de nuevo.</translation>
         <source>Sun</source>
         <translation>Dom</translation>
     </message>
+    <message>
+        <source>Click to close this window, discarding changes.</source>
+        <translation type="unfinished">Pulse para cerrar esta ventana, descartando los cambios.</translation>
+    </message>
+    <message>
+        <source>Click to close this window.</source>
+        <translation type="unfinished">Pulse para cerrar esta ventana.</translation>
+    </message>
+    <message>
+        <source>Click to close this window and apply changes.</source>
+        <translation type="unfinished">Pulse para cerrar esta ventana y aplicar los cambios.</translation>
+    </message>
+    <message>
+        <source>Click to make this window moveable.</source>
+        <translation type="unfinished">Pulse para hacer esta ventana móvil.</translation>
+    </message>
+    <message>
+        <source>Click to make this window use all available screen area.</source>
+        <translation type="unfinished">Pulse para hacer que esta ventana use toda la pantalla disponible.</translation>
+    </message>
+    <message>
+        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
+        <translation type="unfinished">&lt;Qt&gt;No se dispone de ayuda exhaustiva para esta aplicación, sin embargo hay ayuda sensible al contexto.&lt;p&gt;Para usar esta ayuda:&lt;p&gt;&lt;ol&gt;&lt;li&gt;mantenga pulsado el botón de ayuda.&lt;li&gt;cuando la barra de título muestre &lt;b&gt;Qué es esto...&lt;/b&gt;, pulse en cualquier control.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+    </message>
+    <message>
+        <source>What&apos;s this...</source>
+        <translation type="unfinished">Qué es esto...</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
         <translation>%1 documento</translation>
-    </message>
-</context>
-<context>
-    <name>QPEDecoration</name>
-    <message>
-        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation>&lt;Qt&gt;No se dispone de ayuda exhaustiva para esta aplicación, sin embargo hay ayuda sensible al contexto.&lt;p&gt;Para usar esta ayuda:&lt;p&gt;&lt;ol&gt;&lt;li&gt;mantenga pulsado el botón de ayuda.&lt;li&gt;cuando la barra de título muestre &lt;b&gt;Qué es esto...&lt;/b&gt;, pulse en cualquier control.&lt;/ol&gt;&lt;/Qt&gt;</translation>
-    </message>
-    <message>
-        <source>What&apos;s this...</source>
-        <translation>Qué es esto...</translation>
-    </message>
-</context>
-<context>
-    <name>QPEManager</name>
-    <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation>Pulse para cerrar esta ventana, descartando los cambios.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation>Pulse para cerrar esta ventana.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation>Pulse para cerrar esta ventana y aplicar los cambios.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation>Pulse para hacer esta ventana móvil.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation>Pulse para hacer que esta ventana use toda la pantalla disponible.</translation>
     </message>
 </context>
 <context>

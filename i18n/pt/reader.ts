@@ -455,7 +455,7 @@ Leading</source>
     </message>
     <message>
         <source>Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Deslizar</translation>
     </message>
     <message>
         <source>Jump</source>

@@ -69,18 +69,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>You asked for a delay of </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source> minutes, but only </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source> minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Continue?</source>
         <translation>FOO</translation>
     </message>
@@ -109,10 +97,6 @@ ntpdate </source>
         <source>Error while getting time from
  server: </source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source> seconds</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Could not connect to server </source>

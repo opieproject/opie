@@ -76,13 +76,6 @@ Genoplad venligst back-up batteriet.</translation>
     </message>
 </context>
 <context>
-    <name>DesktopPowerAlerter</name>
-    <message>
-        <source>Battery Status</source>
-        <translation>Batteri Status</translation>
-    </message>
-</context>
-<context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
@@ -177,6 +170,13 @@ Genoplad venligst back-up batteriet.</translation>
     <message>
         <source>Do not ask again for this medium</source>
         <translation>Spørg ikke igen for dette medie</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Battery Status</source>
+        <translation type="unfinished">Batteri Status</translation>
     </message>
 </context>
 <context>

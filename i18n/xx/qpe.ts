@@ -72,13 +72,6 @@ Please charge the back-up battery.</source>
     </message>
 </context>
 <context>
-    <name>DesktopPowerAlerter</name>
-    <message>
-        <source>Battery Status</source>
-        <translation>FOO</translation>
-    </message>
-</context>
-<context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
@@ -173,6 +166,13 @@ Please charge the back-up battery.</source>
     <message>
         <source>Do not ask again for this medium</source>
         <translation>FOO</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Battery Status</source>
+        <translation type="unfinished">FOO</translation>
     </message>
 </context>
 <context>

@@ -118,7 +118,7 @@ class DesktopPowerAlerter : public QMessageBox
 {
 public:
 	DesktopPowerAlerter( QWidget *parent, const char *name = 0 )
-			: QMessageBox( tr( "Battery Status" ), "Low Battery",
+			: QMessageBox( QObject::tr( "Battery Status" ), "Low Battery",
 			               QMessageBox::Critical,
 			               QMessageBox::Ok | QMessageBox::Default,
 			               QMessageBox::NoButton, QMessageBox::NoButton,
@@ -182,13 +182,13 @@ DesktopApplication::DesktopApplication( int& argc, char **argv, Type appType )
 	pa = new DesktopPowerAlerter( 0 );
 
 	m_apm_timer = new QTimer ( this );
-	connect ( m_apm_timer, SIGNAL( timeout ( )), this, SLOT( apmTimeout ( )));	
+	connect ( m_apm_timer, SIGNAL( timeout ( )), this, SLOT( apmTimeout ( )));
 	reloadPowerWarnSettings ( );
 
 	m_last_button = 0;
 	m_button_timer = new QTimer ( );
 	connect ( m_button_timer, SIGNAL( timeout ( )), this, SLOT( sendHeldAction ( )));
-	
+
 	channel = new QCopChannel( "QPE/System", this );
 	connect( channel, SIGNAL( received( const QCString&, const QByteArray& ) ),
 	         this, SLOT( systemMessage( const QCString&, const QByteArray& ) ) );
@@ -203,9 +203,9 @@ DesktopApplication::DesktopApplication( int& argc, char **argv, Type appType )
 
 	rereadVolumes();
 	connect( qApp, SIGNAL( volumeChanged( bool ) ), this, SLOT( rereadVolumes() ) );
-	
+
 	apmTimeout ( );
-	
+
 	grabKeyboard ( );
 }
 
@@ -298,10 +298,10 @@ void DesktopApplication::reloadPowerWarnSettings ( )
 
 	int iv = cfg. readNumEntry ( "checkinterval", 10000 );
 
-	m_apm_timer-> stop ( );	
+	m_apm_timer-> stop ( );
 	if ( iv )
 		m_apm_timer-> start ( iv );
-		
+
 	m_powerVeryLow  = cfg. readNumEntry ( "powerverylow", 10 );
 	m_powerCritical = cfg. readNumEntry ( "powervcritical", 5 );
 }
@@ -317,9 +317,9 @@ void DesktopApplication::launcherMessage( const QCString & msg, const QByteArray
 	if ( msg == "deviceButton(int,int,int)" ) {
 		int keycode, press, autoRepeat;
 		stream >> keycode >> press >> autoRepeat;
-		
+
 		const ODeviceButton *db = ODevice::inst ( )-> buttonForKeycode ( keycode );
-		
+
 		if ( db )
 	    	checkButtonAction ( db, keycode, press, autoRepeat );
 	}
@@ -343,11 +343,11 @@ void DesktopApplication::sendHeldAction ( )
 
 
 bool DesktopApplication::checkButtonAction ( const ODeviceButton *db, int /*keycode*/, bool press, bool autoRepeat )
-{		
+{
 	if ( db ) {
 		if ( !press && !autoRepeat && m_button_timer-> isActive ( )) {
 			m_button_timer-> stop ( );
-			
+
 			if (!db-> pressedAction ( ). channel ( ) .isEmpty())
 			{
 
@@ -355,7 +355,7 @@ bool DesktopApplication::checkButtonAction ( const ODeviceButton *db, int /*keyc
 
 					db-> pressedAction ( ). send ( );
 				}
-				else 
+				else
 				   return false;
 			}
 		}
@@ -363,7 +363,7 @@ bool DesktopApplication::checkButtonAction ( const ODeviceButton *db, int /*keyc
 			m_button_timer-> stop ( );
 			if (!db-> pressedAction ( ). channel ( ) .isEmpty())
 			{
-			
+
 				if ( db-> heldAction ( ). channel ( )!="ignore") {
 					m_last_button = db;
 					m_button_timer-> start ( ODevice::inst ( )-> buttonHoldTime ( ), true );
@@ -380,9 +380,9 @@ bool DesktopApplication::eventFilter ( QObject *o, QEvent *e )
 
 	if ( e-> type ( ) == QEvent::KeyPress || e-> type ( ) == QEvent::KeyRelease ) {
 		QKeyEvent *ke = (QKeyEvent *) e;
-	
+
 		const ODeviceButton *db = ODevice::inst ( )-> buttonForKeycode ( ke-> key ( ));
-        
+
 		if ( db ) {
 			if (checkButtonAction ( db, ke-> key ( ), e-> type ( ) == QEvent::KeyPress, ke-> isAutoRepeat ( )))
 				return true;		//checkButtonAction retrune false if events should be routed through
@@ -403,7 +403,7 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
 
 		if ( !loggedin && keycode != Key_F34 )
 			return true;
-			
+
 		bool press = ke-> simpleData. is_press;
 		bool autoRepeat = ke-> simpleData. is_auto_repeat;
 
@@ -412,7 +412,7 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
 			// when user presses key, unless keyboard has been requested from app.
 			// will not send multiple repeats if user holds key
 			// i.e. one shot
-		 
+
 			if ( keycode != 0 && press && !autoRepeat ) {
 				for ( KeyRegisterList::Iterator it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it ) {
 					if (( *it ). getKeyCode ( ) == keycode ) {
@@ -859,7 +859,7 @@ void DesktopApplication::rereadVolumes()
 {
 	Config cfg( "qpe" );
 	cfg. setGroup ( "Volume" );
-	
+
 	m_screentap_sound = cfg. readBoolEntry ( "TouchSound" );
 	m_keyclick_sound  = cfg. readBoolEntry ( "KeySound" );
 	m_alarm_sound     = cfg. readBoolEntry ( "AlarmSound" );

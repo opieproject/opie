@@ -29,9 +29,5 @@
         <source>Help Browser</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>HelpBrowser</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 </TS>

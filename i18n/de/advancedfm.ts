@@ -194,13 +194,6 @@
         <translation>Verzeichnis löschen?</translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation>Wirklich löschen
-
-</translation>
-    </message>
-    <message>
         <source>Really copy
 %1 files?</source>
         <translation>Wirklich %1 Dateien kopieren?</translation>
@@ -262,6 +255,16 @@ da es nicht in den Lesezeichen ist!</translation>
     <message>
         <source>File Search</source>
         <translation>Dateisuche</translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

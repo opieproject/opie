@@ -95,69 +95,27 @@
 <context>
     <name>OFileSelector</name>
     <message>
-        <source>Documents</source>
-        <translation>Documenti</translation>
-    </message>
-    <message>
-        <source>Files</source>
-        <translation>File</translation>
-    </message>
-    <message>
-        <source>All Files</source>
-        <translation>Tutti i File</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation>Tutti</translation>
-    </message>
-    <message>
         <source>Name:</source>
         <translation>Nome:</translation>
     </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Salva</translation>
-    </message>
-    <message>
-        <source>C&amp;ancel</source>
-        <translation>C&amp;ancella</translation>
-    </message>
+</context>
+<context>
+    <name>OFileViewFileListView</name>
     <message>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation type="unfinished">Nome</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Dimensione</translation>
+        <translation type="unfinished">Dimensione</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Data</translation>
+        <translation type="unfinished">Data</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation>Mime Type</translation>
-    </message>
-    <message>
-        <source>Ser Permission</source>
-        <translation>Imposta Permessi</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Cancella</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete
-</source>
-        <translation>Vuoi veramente cancellare</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>Sì</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>No</translation>
+        <translation type="unfinished">Mime Type</translation>
     </message>
 </context>
 <context>
@@ -420,10 +378,6 @@ e </translation>
 <context>
     <name>QObject</name>
     <message>
-        <source>Summary:</source>
-        <translation>Summario:</translation>
-    </message>
-    <message>
         <source>Description:</source>
         <translation>Descrizione:</translation>
     </message>
@@ -606,6 +560,50 @@ e </translation>
     <message>
         <source>Sunday</source>
         <translation>Domenica</translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished">Documenti</translation>
+    </message>
+    <message>
+        <source>Files</source>
+        <translation type="unfinished">File</translation>
+    </message>
+    <message>
+        <source>All Files</source>
+        <translation type="unfinished">Tutti i File</translation>
+    </message>
+    <message>
+        <source>Very high</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is an all day event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a multiple day event</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

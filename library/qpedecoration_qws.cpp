@@ -189,18 +189,18 @@ bool QPEManager::eventFilter( QObject *o, QEvent *e )
 		    switch ( inRegion ) {
 			case QWSDecoration::Close:
 			    if ( ((HackWidget*)w)->needsOk() )
-				text = tr("Click to close this window, discarding changes.");
+				text = QObject::tr("Click to close this window, discarding changes.");
 			    else
-				text = tr("Click to close this window.");
+				text = QObject::tr("Click to close this window.");
 			    break;
 			case QWSDecoration::Minimize:
-			    text = tr("Click to close this window and apply changes.");
+			    text = QObject::tr("Click to close this window and apply changes.");
 			    break;
 			case QWSDecoration::Maximize:
 			    if ( w->isMaximized() )
-				text = tr("Click to make this window moveable.");
+				text = QObject::tr("Click to make this window moveable.");
 			    else
-				text = tr("Click to make this window use all available screen area.");
+				text = QObject::tr("Click to make this window use all available screen area.");
 			    break;
 			default:
 			    break;
@@ -508,7 +508,7 @@ void QPEDecoration::init ( const QString &plugin )
     } else {
 	delete wdiface;
     }
-        
+
     WindowDecorationInterface *iface = 0;
     QString path = QPEApplication::qpeDir() + "/plugins/decorations";
     QLibrary *lib = new QLibrary( path + "/" + plugin );
@@ -525,14 +525,14 @@ void QPEDecoration::init ( const QString &plugin )
     helpExists = FALSE;
     for (QStringList::ConstIterator it=helpPath.begin(); it!=helpPath.end() && !helpExists; ++it) {
 	helpExists = QFile::exists( *it + "/" + helpFile );
-    	//qDebug ( "Checking %s/%s for help: %d", (*it).latin1(), helpFile.latin1(),helpExists); 
+    	//qDebug ( "Checking %s/%s for help: %d", (*it).latin1(), helpFile.latin1(),helpExists);
     }
     qpeManager = new QPEManager( this );
-    
+
     // Qtopia 1.5 compatibility
     imageOk    = *okImage ( 15 );
     imageClose = *closeImage ( 15 );
-    imageHelp  = *helpImage ( 15 ); 
+    imageHelp  = *helpImage ( 15 );
 }
 
 QPEDecoration::~QPEDecoration()
@@ -870,7 +870,7 @@ void QPEDecoration::help( QWidget *w )
 	Global::execute( "helpbrowser", helpFile );
     } else if ( w && w->testWFlags(Qt::WStyle_ContextHelp) ) {
 	QWhatsThis::enterWhatsThisMode();
-	QWhatsThis::leaveWhatsThisMode( qApp->tr(
+	QWhatsThis::leaveWhatsThisMode( QObject::tr(
 	    "<Qt>Comprehensive help is not available for this application, "
 	    "however there is context-sensitive help.<p>To use context-sensitive help:<p>"
 	    "<ol><li>click and hold the help button."
@@ -883,7 +883,7 @@ void QPEDecoration::windowData( const QWidget *w, WindowDecorationInterface::Win
 {
     wd.rect = w->rect();
     if ( qpeManager->whatsThisWidget() == w )
-	wd.caption = qApp->tr("What's this..." );
+	wd.caption = QObject::tr("What's this..." );
     else
 	wd.caption = w->caption();
     wd.palette = qApp->palette();

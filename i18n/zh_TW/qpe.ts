@@ -75,13 +75,6 @@ Please charge the back-up battery.</source>
     </message>
 </context>
 <context>
-    <name>DesktopPowerAlerter</name>
-    <message>
-        <source>Battery Status</source>
-        <translation>電池狀態</translation>
-    </message>
-</context>
-<context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
@@ -176,6 +169,13 @@ Please charge the back-up battery.</source>
     <message>
         <source>Do not ask again for this medium</source>
         <translation>不再詢問這一個儲存媒体</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Battery Status</source>
+        <translation type="unfinished">電池狀態</translation>
     </message>
 </context>
 <context>

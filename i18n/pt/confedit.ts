@@ -49,7 +49,7 @@
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">não pode ser acedida.</translation>
     </message>
     <message>
         <source>no group</source>

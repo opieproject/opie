@@ -1,6 +1,6 @@
 TEMPLATE  =   lib
 CONFIG    +=  qt warn_on release
-HEADERS   =   libtremorplugin.h libtremorinimpl.h
+HEADERS   =   libtremorplugin.h libtremorpluginimpl.h
 SOURCES         =   libtremorplugin.cpp libtremorpluginimpl.cpp
 TARGET    =   tremorplugin
 DESTDIR   =   $(OPIEDIR)/plugins/codecs

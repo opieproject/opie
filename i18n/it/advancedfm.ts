@@ -213,12 +213,6 @@ sotto licenza GPL</translation>
         <translation>Cancella Directory?</translation>
     </message>
     <message>
-        <source>Really delete
-</source>
-        <translation>Eliminare realmente
-</translation>
-    </message>
-    <message>
         <source>Really copy
 %1 files?</source>
         <translation>Copiare realmente
@@ -263,6 +257,16 @@ Non è inserita nei bookmark!</translation>
     <message>
         <source>File Search</source>
         <translation>Cerca File</translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

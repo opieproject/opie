@@ -95,33 +95,12 @@
 <context>
     <name>OFileSelector</name>
     <message>
-        <source>Documents</source>
-        <translation>Dokumente</translation>
-    </message>
-    <message>
-        <source>Files</source>
-        <translation>Dateien</translation>
-    </message>
-    <message>
-        <source>All Files</source>
-        <translation>All Dateien</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation>Alles</translation>
-    </message>
-    <message>
         <source>Name:</source>
         <translation>Name:</translation>
     </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Speichern</translation>
-    </message>
-    <message>
-        <source>C&amp;ancel</source>
-        <translation>&amp;Abbrechen</translation>
-    </message>
+</context>
+<context>
+    <name>OFileViewFileListView</name>
     <message>
         <source>Name</source>
         <translation>Name</translation>
@@ -137,28 +116,6 @@
     <message>
         <source>Mime Type</source>
         <translation>Dateityp</translation>
-    </message>
-    <message>
-        <source>Ser Permission</source>
-        <translation>Rechte setzen</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Löschen</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete
-</source>
-        <translation>Möchten sie wirklich löschen
-</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>Ja</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>Nein</translation>
     </message>
 </context>
 <context>
@@ -421,10 +378,6 @@ und</translation>
 <context>
     <name>QObject</name>
     <message>
-        <source>Summary:</source>
-        <translation>Zusammenfassung:</translation>
-    </message>
-    <message>
         <source>Description:</source>
         <translation>Beschreibung:</translation>
     </message>
@@ -607,6 +560,50 @@ und</translation>
     <message>
         <source>Note:</source>
         <translation>Notiz:</translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation>Dokumente</translation>
+    </message>
+    <message>
+        <source>Files</source>
+        <translation>Dateien</translation>
+    </message>
+    <message>
+        <source>All Files</source>
+        <translation>All Dateien</translation>
+    </message>
+    <message>
+        <source>Very high</source>
+        <translation>Sehr hoch</translation>
+    </message>
+    <message>
+        <source>High</source>
+        <translation>Hoch</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation></translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation>Niedrig</translation>
+    </message>
+    <message>
+        <source>Very low</source>
+        <translation>Sehr niedrig</translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation>Ort:</translation>
+    </message>
+    <message>
+        <source>This is an all day event</source>
+        <translation>Das ist ein Termin ohne Zeit</translation>
+    </message>
+    <message>
+        <source>This is a multiple day event</source>
+        <translation>Das ist ein mehrtägiger Termin</translation>
     </message>
 </context>
 <context>

@@ -94,70 +94,27 @@
 <context>
     <name>OFileSelector</name>
     <message>
-        <source>Documents</source>
-        <translation>Documentos</translation>
-    </message>
-    <message>
-        <source>Files</source>
-        <translation>Ficheiros</translation>
-    </message>
-    <message>
-        <source>All Files</source>
-        <translation>Todos os Ficheiros</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation>Todos</translation>
-    </message>
-    <message>
         <source>Name:</source>
         <translation>Nome:</translation>
     </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation>&amp;Gravar</translation>
-    </message>
-    <message>
-        <source>C&amp;ancel</source>
-        <translation>C&amp;ancelar</translation>
-    </message>
+</context>
+<context>
+    <name>OFileViewFileListView</name>
     <message>
         <source>Name</source>
-        <translation>Nome</translation>
+        <translation type="unfinished">Nome</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Tamanho</translation>
+        <translation type="unfinished">Tamanho</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Data</translation>
+        <translation type="unfinished">Data</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation>Tipo de Mime</translation>
-    </message>
-    <message>
-        <source>Ser Permission</source>
-        <translation>Permissões</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation>Apagar</translation>
-    </message>
-    <message>
-        <source>Do you really want to delete
-</source>
-        <translation>Tem a certeza que quer apagar
-</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>Sim</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>Não</translation>
+        <translation type="unfinished">Tipo de Mime</translation>
     </message>
 </context>
 <context>
@@ -420,10 +377,6 @@ e</translation>
 <context>
     <name>QObject</name>
     <message>
-        <source>Summary:</source>
-        <translation>Sumário:</translation>
-    </message>
-    <message>
         <source>Description:</source>
         <translation>Descrição:</translation>
     </message>
@@ -607,24 +560,68 @@ e</translation>
         <source>Sunday</source>
         <translation>Domingo</translation>
     </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished">Documentos</translation>
+    </message>
+    <message>
+        <source>Files</source>
+        <translation type="unfinished">Ficheiros</translation>
+    </message>
+    <message>
+        <source>All Files</source>
+        <translation type="unfinished">Todos os Ficheiros</translation>
+    </message>
+    <message>
+        <source>Very high</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>High</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Very low</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is an all day event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a multiple day event</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>nd</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>rd</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>th</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

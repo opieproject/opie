@@ -377,42 +377,42 @@ Wyjsc ?</translation>
 <context>
     <name>DateBookWeekView</name>
     <message>
-        <source>M</source>
+        <source>p</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mo</source>
         <comment>Monday</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>T</source>
+        <source>Tu</source>
         <comment>Tuesday</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>W</source>
+        <source>We</source>
         <comment>Wednesday</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>T</source>
+        <source>Th</source>
         <comment>Thursday</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>F</source>
+        <source>Fr</source>
         <comment>Friday</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>S</source>
+        <source>Sa</source>
         <comment>Saturday</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>S</source>
+        <source>Su</source>
         <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>p</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

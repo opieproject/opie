@@ -770,46 +770,40 @@ riprovare.</translation>
         <source>Sun</source>
         <translation>Dom</translation>
     </message>
+    <message>
+        <source>Click to close this window, discarding changes.</source>
+        <translation type="unfinished">Premi per chiudere questa finestra, abbandonando le modifiche effettuate.</translation>
+    </message>
+    <message>
+        <source>Click to close this window.</source>
+        <translation type="unfinished">Premi per chiudere questa finestra.</translation>
+    </message>
+    <message>
+        <source>Click to close this window and apply changes.</source>
+        <translation type="unfinished">Premi per chiudere questa finestra e salvare le modifiche effettuate.</translation>
+    </message>
+    <message>
+        <source>Click to make this window moveable.</source>
+        <translation type="unfinished">Premi per spostare la finestra.</translation>
+    </message>
+    <message>
+        <source>Click to make this window use all available screen area.</source>
+        <translation type="unfinished">Premi per ingrandire al massimo questa finestra.</translation>
+    </message>
+    <message>
+        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
+        <translation type="unfinished">&lt;Qt&gt;La guida completa non è disponibile per questa applicazione, è comunque presente la guida base.&lt;p&gt;Per usare la guida:&lt;p&gt;&lt;ol&gt;&lt;li&gt;tieni premuto il tasto di aiuto.&lt;li&gt;quando apparirà &lt;b&gt;Cos&apos;è...&lt;/b&gt;, premi un qualunque tasto.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+    </message>
+    <message>
+        <source>What&apos;s this...</source>
+        <translation type="unfinished">Cos&apos;è...</translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
         <translation>%1 documento</translation>
-    </message>
-</context>
-<context>
-    <name>QPEDecoration</name>
-    <message>
-        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation>&lt;Qt&gt;La guida completa non è disponibile per questa applicazione, è comunque presente la guida base.&lt;p&gt;Per usare la guida:&lt;p&gt;&lt;ol&gt;&lt;li&gt;tieni premuto il tasto di aiuto.&lt;li&gt;quando apparirà &lt;b&gt;Cos&apos;è...&lt;/b&gt;, premi un qualunque tasto.&lt;/ol&gt;&lt;/Qt&gt;</translation>
-    </message>
-    <message>
-        <source>What&apos;s this...</source>
-        <translation>Cos&apos;è...</translation>
-    </message>
-</context>
-<context>
-    <name>QPEManager</name>
-    <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation>Premi per chiudere questa finestra, abbandonando le modifiche effettuate.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation>Premi per chiudere questa finestra.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation>Premi per chiudere questa finestra e salvare le modifiche effettuate.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation>Premi per spostare la finestra.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation>Premi per ingrandire al massimo questa finestra.</translation>
     </message>
 </context>
 <context>

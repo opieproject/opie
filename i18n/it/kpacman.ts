@@ -95,16 +95,6 @@ gli ultimi 10 anni della sua amicizia.
         <source>&amp;Help</source>
         <translation>&amp;Aiuto</translation>
     </message>
-    <message>
-        <source>Configuration Error</source>
-        <translation>Errore di Configurazioneù</translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
-        <translation>Non ci sono schemi definiti, o non è
-stato selezionato nessuno schema.</translation>
-    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>

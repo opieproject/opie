@@ -77,13 +77,6 @@ Bitte laden Sie sie auf.</translation>
     </message>
 </context>
 <context>
-    <name>DesktopPowerAlerter</name>
-    <message>
-        <source>Battery Status</source>
-        <translation>Batteriestatus</translation>
-    </message>
-</context>
-<context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
@@ -179,6 +172,13 @@ Soll es nach neuen Dokumenten durchsucht werden ?</translation>
     <message>
         <source>Do not ask again for this medium</source>
         <translation>Dieses Medium nie mehr nachfragen</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Battery Status</source>
+        <translation type="unfinished">Batteriestatus</translation>
     </message>
 </context>
 <context>

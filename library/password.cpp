@@ -81,7 +81,7 @@ PasswordDialog::PasswordDialog( QWidget* parent,  const char* name, WFlags fl )
 	f.setPointSize( 12 );
 	prompt->setFont( f );
     }
-    
+
     button_0->installEventFilter( this );
     button_1->installEventFilter( this );
     button_2->installEventFilter( this );
@@ -216,12 +216,13 @@ public:
 
 class OwnerDlg : public QDialog
 {
+    Q_OBJECT
 public:
 
     OwnerDlg( QWidget *parent, const char * name, Contact c,
 	    bool modal, bool fullscreen = FALSE )
-	: QDialog( parent, name, modal, 
-		fullscreen ? 
+	: QDialog( parent, name, modal,
+		fullscreen ?
 		WStyle_NoBorder | WStyle_Customize | WStyle_StaysOnTop : 0 )
     {
 	if ( fullscreen ) {
@@ -242,7 +243,7 @@ public:
     {
 	tv->resize( size() );
     }
-   
+
     bool eventFilter(QObject *o, QEvent *e)
     {
 	if (e->type() == QEvent::KeyPress || e->type() == QEvent::MouseButtonPress ) {
@@ -289,7 +290,7 @@ QString Password::getPassword( const QString& prompt )
 
   If \a at_poweron is TRUE, the dialog is only used if the user's
   preference request it at poweron
-  
+
   Opie extension to speed up suspend/resume.
 */
 
@@ -298,7 +299,7 @@ bool Password::needToAuthenticate(bool at_poweron)
     Config cfg("Security");
     cfg.setGroup("Passcode");
     QString passcode = cfg.readEntry("passcode");
-    
+
     return ( !passcode.isEmpty()
 	    && (!at_poweron || cfg.readNumEntry("passcode_poweron",0)) );
 }
@@ -324,7 +325,7 @@ void Password::authenticate(bool at_poweron)
 
 	// see if there is contact information.
 	OwnerDlg *oi = 0;
-	QString vfilename = Global::applicationFileName("addressbook", 
+	QString vfilename = Global::applicationFileName("addressbook",
 		"businesscard.vcf");
 	if (QFile::exists(vfilename)) {
 	    Contact c;

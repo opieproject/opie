@@ -4,7 +4,7 @@ CONFIG		= qt warn_on debug
 HEADERS		= odict.h \
 				searchmethoddlg.h \
 				configdlg.h \
-				dingwidget.h \
+				dingwidget.h 
 
 SOURCES		= main.cpp \
 		  odict.cpp \

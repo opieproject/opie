@@ -29,9 +29,5 @@
         <source>Help Browser</source>
         <translation>Navegador de ayuda</translation>
     </message>
-    <message>
-        <source>HelpBrowser</source>
-        <translation>NavegadorAyuda</translation>
-    </message>
 </context>
 </TS>

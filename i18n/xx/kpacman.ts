@@ -81,15 +81,6 @@ the last 10 years of her friendship.
         <source>&amp;Help</source>
         <translation>FOO</translation>
     </message>
-    <message>
-        <source>Configuration Error</source>
-        <translation>FOO</translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
-        <translation>FOO</translation>
-    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>

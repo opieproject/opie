@@ -76,13 +76,6 @@ Cambiarla subito.</translation>
     </message>
 </context>
 <context>
-    <name>DesktopPowerAlerter</name>
-    <message>
-        <source>Battery Status</source>
-        <translation>Stato Batteria</translation>
-    </message>
-</context>
-<context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
@@ -177,6 +170,13 @@ Cambiarla subito.</translation>
     <message>
         <source>Do not ask again for this medium</source>
         <translation>Non chiedere nuovamente per questo supporto</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Battery Status</source>
+        <translation type="unfinished">Stato Batteria</translation>
     </message>
 </context>
 <context>

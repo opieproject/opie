@@ -94,16 +94,6 @@ Quiero agradecer a mi novia Elke Krueers sus
         <source>&amp;Help</source>
         <translation>&amp;Ayuda</translation>
     </message>
-    <message>
-        <source>Configuration Error</source>
-        <translation>Error de configuración</translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
-        <translation>No hay esquemas definidos, o
-no seleccionó ningún esquema.</translation>
-    </message>
 </context>
 <context>
     <name>KpacmanWidget</name>
@@ -226,6 +216,10 @@ o está en un formato desconocido.</translation>
     <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@YY@/@MM@/@DD@</translation>
+    </message>
+    <message>
+        <source>                          </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

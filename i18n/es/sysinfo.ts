@@ -1,5 +1,52 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>FileSysInfo</name>
+    <message>
+        <source>CF</source>
+        <translation type="unfinished">CF</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
+        <translation type="unfinished">Este gráfico representa la memoria usada actualmente es esta tarjeta de memoria Compact Flash.</translation>
+    </message>
+    <message>
+        <source>Ha</source>
+        <translation type="unfinished">Ha</translation>
+    </message>
+    <message>
+        <source>This graph represents how much storage is currently used on this hard drive.</source>
+        <translation type="unfinished">Este gráfico representa el almacenamiento usado en este disco duro.</translation>
+    </message>
+    <message>
+        <source>SD</source>
+        <translation type="unfinished">SD</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
+        <translation type="unfinished">Este gráfico representa cuanta memoria se usa actualmente en esta tarjeta Secure Digital.</translation>
+    </message>
+    <message>
+        <source>SC</source>
+        <translation type="unfinished">SC</translation>
+    </message>
+    <message>
+        <source>In</source>
+        <translation type="unfinished">En</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
+        <translation type="unfinished">Este gráfico representa cuanta memoria se usa actualmente de la memoria incorporada (p.e. Flash) en este dispositivo.</translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation type="unfinished">RA</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
+        <translation type="unfinished">Este gráfico representa cuánta memoria usa actualmente el disco RAM temporal.</translation>
+    </message>
+</context>
+<context>
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
@@ -168,81 +215,6 @@ Mantenga pulsado un proceso para ver información adicional, o para enviarle una
 </source>
         <translation>Seguro que quiere enviar
 </translation>
-    </message>
-</context>
-<context>
-    <name>StorageInfo</name>
-    <message>
-        <source>CF Card: </source>
-        <translation>Tarjeta CF: </translation>
-    </message>
-    <message>
-        <source>Hard Disk </source>
-        <translation>Disco duro </translation>
-    </message>
-    <message>
-        <source>SD Card </source>
-        <translation>Tarjeta SD </translation>
-    </message>
-    <message>
-        <source>Hard Disk /dev/hd </source>
-        <translation>Disco duro /dev/hd </translation>
-    </message>
-    <message>
-        <source>SCSI Hard Disk /dev/sd </source>
-        <translation>Disco duro SCSI /dev/sd </translation>
-    </message>
-    <message>
-        <source>Int. Storage </source>
-        <translation>Almac. interno </translation>
-    </message>
-    <message>
-        <source>CF</source>
-        <translation>CF</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation>Este gráfico representa la memoria usada actualmente es esta tarjeta de memoria Compact Flash.</translation>
-    </message>
-    <message>
-        <source>Ha</source>
-        <translation>Ha</translation>
-    </message>
-    <message>
-        <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation>Este gráfico representa el almacenamiento usado en este disco duro.</translation>
-    </message>
-    <message>
-        <source>SD</source>
-        <translation>SD</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation>Este gráfico representa cuanta memoria se usa actualmente en esta tarjeta Secure Digital.</translation>
-    </message>
-    <message>
-        <source>SC</source>
-        <translation>SC</translation>
-    </message>
-    <message>
-        <source>In</source>
-        <translation>En</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation>Este gráfico representa cuanta memoria se usa actualmente de la memoria incorporada (p.e. Flash) en este dispositivo.</translation>
-    </message>
-    <message>
-        <source>RAM disk</source>
-        <translation>Disco RAM</translation>
-    </message>
-    <message>
-        <source>RA</source>
-        <translation>RA</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation>Este gráfico representa cuánta memoria usa actualmente el disco RAM temporal.</translation>
     </message>
 </context>
 <context>

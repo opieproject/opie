@@ -11,8 +11,7 @@ HEADERS		= d3des.h \
 		  krfbserverinfo.h \
 		  kvnc.h \
 		  kvncconndlg.h \
-		  kvncbookmarkdlg.h \
-		  version.h \
+		  kvncbookmarkdlg.h \		  
 		  vncauth.h
 SOURCES		= d3des.c \
 		  vncauth.c \
