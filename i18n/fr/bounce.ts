@@ -103,7 +103,7 @@ Vous avez %2 vies cette fois!</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>À propos</translation>
     </message>
     <message>
         <source>Written by: Stefan Schimanski
@@ -115,7 +115,15 @@ Try to reduce total space by 75%.
 
 This program is distributed under
 the terms of the GPL v2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Écrit par: Stefan Schimanski
+Porté par: Martin Imobersteg
+
+Cliquez pour faire des murs.
+Tapez espace pour changer leur direction.
+Tentez de réduire l&quot;espace total de 75%.
+
+Ce programme est distribué sous les
+termes de la GPL v2.</translation>
     </message>
 </context>
 </TS>

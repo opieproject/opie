@@ -52,7 +52,7 @@
     </message>
     <message>
         <source>Alarm set: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Réveil à: %1</translation>
     </message>
 </context>
 <context>

@@ -1,58 +1,60 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AI_Dialog</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Préférences</translation>
     </message>
     <message>
         <source>&lt;b&gt;Rescue&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Secour&lt;/b&gt;</translation>
     </message>
     <message>
         <source>?</source>
-        <translation type="unfinished"></translation>
+        <translation>?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Eliminate&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Éliminer&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Expose&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Exposer&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Protect&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Protéger&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Safe&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;assurer&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Empty&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vider&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Default Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Valeurs par défaut</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Aide</translation>
     </message>
     <message>
         <source>Bring the pieces out of the endzone</source>
-        <translation type="unfinished"></translation>
+        <translation>Amener la pièce en dehors de la zone.</translation>
     </message>
     <message>
         <source>Eliminate an opponents piece</source>
-        <translation type="unfinished"></translation>
+        <translation>Éliminer la pièce de l&apos;adversaire</translation>
     </message>
     <message>
         <source>Expose you own pieces.
 After such a move only one piece will remain in the slot</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Exposer vos propres pièces.
+</translation>
     </message>
     <message>
         <source>Protect a single piece by

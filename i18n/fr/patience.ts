@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished">A &amp;Propos</translation>
+        <translation>A &amp;Propos</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -64,7 +64,7 @@
     </message>
     <message>
         <source>&amp;Change card backs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Changer le dos des cartes</translation>
     </message>
     <message>
         <source>&amp;Snap to position</source>
@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>Change card backs</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer le dos des cartes</translation>
     </message>
     <message>
         <source>Snap to position</source>
@@ -80,11 +80,11 @@
     </message>
     <message>
         <source>Turn one card</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourner une carte</translation>
     </message>
     <message>
         <source>Turn three cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Retourner 3 cartes</translation>
     </message>
 </context>
 </TS>
