@@ -26,6 +26,7 @@
 	* #1570 - Confirmation needed befor Restore a backup and overwrite local data (ar)
 	* #1599 - Security - change recommendation for opie-multiauth to opie-securityplugin (gints)
 	* #1604 - Checkbook crashed on startup (drw)
+	* #1608 - Addressbook crashed after search, which may caused by not initialzed member variable (eilers)
 	* n.a.  - Netsystemtime - fixed UI to prevent error dialog from displaying when it shouldn't, get rid of some compiler warnings (drw)
 	* n.a.  - PackageManager - fixed where last package in status file was not shown as installed when it should be (drw)
 	* n.a.  - PackageManager - fixed bug where lists_dir was not being honored at startup (drw)
