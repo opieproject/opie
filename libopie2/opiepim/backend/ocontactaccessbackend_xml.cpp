@@ -600,7 +600,7 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
          */
         XMLElement *element = root->firstChild();
         //owarn << "OPimContactAccess::load tagName(): " << root->tagName() << "" << oendl;
-        element = element->firstChild();
+        element = element ? element->firstChild() : 0;
 
         /* Search Tag "Contacts" which is the parent of all Contacts */
         while( element && !isJournal ){
