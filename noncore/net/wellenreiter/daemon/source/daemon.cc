@@ -1,42 +1,30 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.5 2002-11-27 21:21:42 mjm Exp $
+ * $Id: daemon.cc,v 1.6 2002-11-27 22:06:44 mjm Exp $
  */
 
 #include "config.hh"
 #include "daemon.hh"
-#include "cardmode.hh"
-#include "sniffer.hh"
 
 /* Main function of wellenreiterd */
 int main(int argc, char **argv)
 {
   int sock, maxfd, retval;
   char buffer[128];
-  pcap_t *handletopcap;             /* The handle to the libpcap */
-  char errbuf[PCAP_ERRBUF_SIZE]; /* The errorbuffer of libpacap */
-  struct pcap_pkthdr header;     /* The packet header from pcap*/
-  const u_char *packet;          /* The actual packet content*/
+  pcap_t *handletopcap;
 
   fd_set rset;
 
   fprintf(stderr, "wellenreiterd %s\n\n", VERSION);
 
-#if 0
   /* will be replaced soon, just for max because max is lazy :-) */
-  if(card_into_monitormode (SNIFFER_DEVICE, CARD_TYPE_NG) < 0)
+  if(!card_into_monitormode(handletopcap, SNIFFER_DEVICE, CARD_TYPE_NG))
   {
-    fprintf(stderr, "Cannot set card into mon mode, aborting\n");
+    wl_logerr("Cannot set card into mon mode, aborting");
     exit(-1);
   }
-#endif
-
-  /* opening the pcap for sniffing */
-  handletopcap = pcap_open_live(SNIFFER_DEVICE, BUFSIZ, 1, 1000, errbuf);
-#ifdef HAVE_PCAP_NONBLOCK
-  pcap_setnonblock(handletopcap, 1, errstr);
-#endif
+  wl_loginfo("Set card into monitor mode");
 
   /* Setup socket for incoming commands */
   if((sock=commsock(DAEMONADDR, DAEMONPORT)) < 0)

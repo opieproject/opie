@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.4 2002-11-23 21:42:41 mjm Exp $
+# $Id: Makefile,v 1.5 2002-11-27 22:06:43 mjm Exp $
 
 CPP	       = g++
 
@@ -6,7 +6,7 @@ OPTIMFLAGS	= -g
 WARNFLAGS	= -Wall  -pedantic -DDEBUG
 LDFLAGS		= 
 LIBS		= -lpcap ../../libwellenreiter/source/libwellenreiter.a
-OBJ		= daemon.o cardmode.o sniffer.o
+OBJ		= daemon.o
 
 .SUFFIXES:
 .PHONY:		all wellenreiterd clean distclean realclean

@@ -2,7 +2,7 @@
  *
  * Global configuration for wellenreiter
  *
- * $Id: config.hh,v 1.2 2002-11-22 23:41:17 mjm Exp $
+ * $Id: config.hh,v 1.3 2002-11-27 22:06:44 mjm Exp $
  *
  * Written by Martin J. Muench <mjm@codito.de>
  *
@@ -19,5 +19,12 @@
 
 #define GUIADDR  "127.0.0.1"     /* Adress of GUI, later specified in configfile */
 #define GUIPORT  37773          /* Port of GUI, "   " */
+
+
+/* Temporary cardmode stuff, will hopefully removed soon */
+#define   CARD_TYPE_CISCO       1
+#define   CARD_TYPE_NG          2
+#define   CARD_TYPE_HOSTAP      3
+#define   SNIFFER_DEVICE         "wlan0"
 
 #endif /* CONFIG_HH */
