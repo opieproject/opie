@@ -6,6 +6,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/lnkproperties.h>
 #include <qpe/storage.h>
+#include <qpe/mimetype.h>
 
 #include <qpe/applnk.h>
 #include <qpopupmenu.h>
@@ -307,10 +308,14 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
 
 PlayListWidget::~PlayListWidget() {
-   if ( d->current ) {
-     delete d->current;
-   }
-   delete d;
+/* fixing symptoms and not sources is entirely stupid - zecke */
+//  Config cfg( "OpiePlayer" );
+//  writeConfig( cfg );
+
+  if ( d->current ) {
+    delete d->current;
+  }
+  delete d;
 }
 
 
@@ -952,11 +957,13 @@ void PlayListWidget::openFile() {
     } else if(filename.right(3) == "pls") {
       readPls( filename );
     } else {
+      /* FIXME ....... AUDIO/X-MPEGURL is bad*/ 
       DocLnk lnk;
 
       lnk.setName(filename); //sets file name
       lnk.setFile(filename); //sets File property
-      lnk.setType("audio/x-mpegurl");
+      //qWarning( "Mimetype: " + MimeType( QFile::encodeName(filename) ).id() );
+      lnk.setType( MimeType( QFile::encodeName(filename) ).id() );
       lnk.setExec("opieplayer");
       lnk.setIcon("opieplayer2/MPEGPlayer");
 
@@ -1236,7 +1243,7 @@ void PlayListWidget::populateSkinsMenu() {
 }
 
 void PlayListWidget::skinsMenuActivated(int item) {
-  for(int i = defaultSkinIndex; i > defaultSkinIndex - skinsMenu->count(); i--) {
+  for(uint i = defaultSkinIndex; i > defaultSkinIndex - skinsMenu->count(); i--) {
     skinsMenu->setItemChecked( i, FALSE);
   }
   skinsMenu->setItemChecked( item, TRUE);

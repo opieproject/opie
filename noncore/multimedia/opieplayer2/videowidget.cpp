@@ -379,7 +379,7 @@ void VideoWidget::makeVisible() {
         resize( qApp->desktop()->size() );
         slider->hide();
         videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
-
+        qApp->processEvents();
     } else {
         showNormal();
         showMaximized();

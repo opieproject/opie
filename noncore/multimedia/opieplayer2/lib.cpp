@@ -106,10 +106,11 @@ Lib::Lib(XineVideoWidget* widget) {
 }
 
 Lib::~Lib() {
-    delete m_config;
+    free( m_config );
     xine_remove_event_listener( m_xine, xine_event_handler );
     xine_exit( m_xine );
-    delete m_videoOutput;
+    /* FIXME either free or delete but valgrind bitches against both */
+    //free( m_videoOutput );
     //delete m_audioOutput;
 
 }
