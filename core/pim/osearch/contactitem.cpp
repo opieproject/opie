@@ -89,7 +89,7 @@ void ContactItem::setIcon()
  	case Qtopia::Manager:
  	case Qtopia::BusinessPager:
  	case Qtopia::Profession:
-		icon = Resource::loadPixmap( "addressbook/addresshome" );
+		icon = Resource::loadPixmap( "osearch/addresshome" );
  		break;
  	case Qtopia::Assistant:
 	case Qtopia::Spouse:

@@ -50,29 +50,28 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 {
   setCaption( tr("OSearch") );
 
-  setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding));
+  setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
 
   QFrame *mainFrame = new QFrame( this, "mainFrame" );
+  mainFrame->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
 
   mainLayout = new QVBoxLayout( mainFrame );
   mainLayout->setSpacing( 0 );
   mainLayout->setMargin( 0 );
 
   resultsList = new OListView( mainFrame );
-  resultsList->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding));
-  mainLayout->addWidget( resultsList, 1 );
+  resultsList->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
+  mainLayout->addWidget( resultsList );
 
   detailsFrame = new QFrame( mainFrame, "detailsFrame" );
   QVBoxLayout *detailsLayout = new QVBoxLayout( detailsFrame );
   richEdit = new QTextView( detailsFrame );
-  richEdit->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding));
-  //richEdit->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum ));
-  detailsLayout->addWidget( richEdit, 1 );
+  richEdit->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
+  detailsLayout->addWidget( richEdit );
 
   buttonGroupActions = new QHButtonGroup( this );
   buttonGroupActions->hide();
   _buttonCount = 0;
-//  buttonGroupActions->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
 
   buttonLayout = new QHBoxLayout( detailsFrame );
   detailsLayout->addLayout( buttonLayout );
