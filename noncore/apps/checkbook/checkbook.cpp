@@ -1,7 +1,7 @@
 /*
                              This file is part of the OPIE Project
                =.
-             .=l.            Copyright (c)  2002 Dan Williams <williamsdr@acm.org>
+             .=l.            Copyright (c)  2002 Dan Williams <drw@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This file is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or modify it under
@@ -39,10 +39,10 @@
 
 #include <qcombobox.h>
 #include <qfile.h>
+#include <qfontmetrics.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlineedit.h>
-#include <qlistview.h>
 #include <qmultilineedit.h>
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
@@ -201,12 +201,14 @@ QWidget *Checkbook::initTransactions()
 
 	tranTable = new QListView( control );
 	QWhatsThis::add( tranTable, tr( "This is a listing of all transactions entered for this checkbook.\n\nTo sort entries by a specific field, click on the column name." ) );
-	tranTable->addColumn( tr( "ID" ) );
+	tranTable->addColumn( tr( "Num" ) );
 	tranTable->addColumn( tr( "Date" ) );
+	//tranTable->addColumn( tr( "Cleared" ) );
 	tranTable->addColumn( tr( "Description" ) );
 	int colnum = tranTable->addColumn( tr( "Amount" ) );
 	tranTable->setColumnAlignment( colnum, Qt::AlignRight );
 	tranTable->setAllColumnsShowFocus( TRUE );
+	tranTable->setSorting( 1 );
 	layout->addMultiCellWidget( tranTable, 1, 1, 0, 2 );
 	QPEApplication::setStylusOperation( tranTable->viewport(), QPEApplication::RightOnHold );
 	connect( tranTable, SIGNAL( rightButtonPressed( QListViewItem *, const QPoint &, int ) ),
@@ -314,8 +316,7 @@ void Checkbook::loadCheckbook()
 			transactions.inSort( tran );
 
 			// Add to transaction table
-			( void ) new QListViewItem( tranTable, QString::number( i ), tran->datestr(),
-										trandesc, stramount );
+			( void ) new CBListItem( tranTable, tran->number(), tran->datestr(), trandesc, stramount );
 		}
 		else
 		{
@@ -334,11 +335,14 @@ void Checkbook::adjustBalance( float amount )
 
 }
 
-TranInfo *Checkbook::findTranByID( int id )
+TranInfo *Checkbook::findTran( const QString &checknum, const QString &date, const QString &desc )
 {
 	TranInfo *traninfo = transactions.first();
-	while ( traninfo && traninfo->id() != id )
+	while ( traninfo )
 	{
+		if ( traninfo->number() == checknum && traninfo->datestr() == date &&
+			 traninfo->desc() == desc )
+			break;
 		traninfo = transactions.next();
 	}
 	return( traninfo );
@@ -418,8 +422,8 @@ void Checkbook::slotNewTran()
 		transactions.inSort( traninfo );
 
 		// Add to transaction table
-		( void ) new QListViewItem( tranTable, QString::number( highTranNum ),
-									traninfo->datestr(), traninfo->desc(), stramount );
+		( void ) new CBListItem( tranTable, traninfo->number(), traninfo->datestr(), traninfo->desc(),
+								  stramount );
 
 		adjustBalance( amount );
 	}
@@ -439,8 +443,7 @@ void Checkbook::slotEditTran()
 		return;
 	}
 
-	int tranid = curritem->text( 0 ).toInt( &ok );
-	TranInfo *traninfo = findTranByID( tranid );
+	TranInfo *traninfo = findTran( curritem->text( 0 ), curritem->text( 1 ), curritem->text( 2 ) );
 	float origamt = traninfo->amount();
 	if ( traninfo->withdrawal() )
 	{
@@ -482,9 +485,7 @@ void Checkbook::slotDeleteTran()
 		return;
 	}
 
-	bool ok;
-	int tranid = curritem->text( 0 ).toInt( &ok );
-	TranInfo *traninfo = findTranByID( tranid );
+	TranInfo *traninfo = findTran( curritem->text( 0 ), curritem->text( 1 ), curritem->text( 2 ) );
 
 	if ( QPEMessageBox::confirmDelete ( this, tr( "Delete transaction" ), traninfo->desc() ) )
 	{
@@ -593,4 +594,68 @@ void Checkbook::drawCategoryChart( bool withdrawals )
 	}
 
 	graphInfo = new GraphInfo( GraphInfo::PieChart, list );
+}
+
+CBListItem::CBListItem( QListView *parent, QString label1, QString label2,
+					 QString label3, QString label4, QString label5, QString label6, QString label7,
+					 QString label8 )
+	: QListViewItem( parent, label1, label2, label3, label4, label5, label6, label7, label8 )
+{
+	m_known = FALSE;
+	owner = parent;
+}
+
+void CBListItem::paintCell( QPainter *p, const QColorGroup &cg, int column, int width, int align )
+{
+	QColorGroup _cg = cg;
+	const QPixmap *pm = listView()->viewport()->backgroundPixmap();
+	if ( pm && !pm->isNull() )
+	{
+		_cg.setBrush( QColorGroup::Base, QBrush( cg.base(), *pm ) );
+		p->setBrushOrigin( -listView()->contentsX(), -listView()->contentsY() );
+	}
+	else if ( isAltBackground() )
+		_cg.setColor(QColorGroup::Base, QColor( 200, 255, 200 ) );
+
+	QListViewItem::paintCell(p, _cg, column, width, align);
+}
+
+bool CBListItem::isAltBackground()
+{
+	QListView *lv = static_cast<QListView *>( listView() );
+	if ( lv )
+	{
+		CBListItem *above = 0;
+		above = (CBListItem *)( itemAbove() );
+		m_known = above ? above->m_known : true;
+		if ( m_known )
+		{
+			m_odd = above ? !above->m_odd : false;
+		}
+		else
+		{
+			CBListItem *item;
+			bool previous = true;
+			if ( parent() )
+			{
+				item = (CBListItem *)( parent() );
+				if ( item )
+					previous = item->m_odd;
+				item = (CBListItem *)( parent()->firstChild() );
+			}
+			else
+			{
+				item = (CBListItem *)( lv->firstChild() );
+			}
+
+			while(item)
+			{
+				item->m_odd = previous = !previous;
+				item->m_known = true;
+				item = (CBListItem *)( item->nextSibling() );
+			}
+		}
+		return m_odd;
+	}
+	return false;
 }

@@ -1,7 +1,7 @@
 /*
                              This file is part of the OPIE Project
                =.
-             .=l.            Copyright (c)  2002 Dan Williams <williamsdr@acm.org>
+             .=l.            Copyright (c)  2002 Dan Williams <drw@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This file is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or modify it under
@@ -32,6 +32,7 @@
 #include "traninfo.h"
 
 #include <qdialog.h>
+#include <qlistview.h>
 
 class OTabWidget;
 
@@ -65,7 +66,7 @@ class Checkbook : public QDialog
 		OTabWidget *mainWidget;
 		void        loadCheckbook();
 		void        adjustBalance( float );
-		TranInfo   *findTranByID( int );
+		TranInfo   *findTran( const QString &, const QString &, const QString & );
 
 		// Info tab
 		QWidget        *initInfo();
@@ -103,6 +104,25 @@ class Checkbook : public QDialog
 		void slotEditTran();
 		void slotDeleteTran();
 		void slotDrawGraph();
+};
+
+class CBListItem :  public QListViewItem
+{
+	//Q_OBJECT
+
+	public:
+		CBListItem( QListView *, QString = QString::null, QString = QString::null,
+					 QString = QString::null, QString = QString::null, QString = QString::null,
+					 QString = QString::null, QString = QString::null, QString = QString::null );
+
+		void paintCell( QPainter *, const QColorGroup &, int, int, int );
+
+	private:
+		QListView *owner;
+		bool m_known;
+		bool m_odd;
+
+		bool isAltBackground();
 };
 
 #endif
