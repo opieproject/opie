@@ -38,11 +38,10 @@
 #include <ctype.h>
 
 using namespace Opie::Core;
-static char *keynames[] = { "identity", "id_rsa", "id_dsa" };
+static const char *keynames[] = { "identity", "id_rsa", "id_dsa" };
 
-SSHKeysApp::SSHKeysApp( QWidget* parent,  const char* name, WFlags fl )
-    : SSHKeysBase( parent, name, fl )
-{
+
+static void detachTerminal() {
     /* If we had a controlling TTY, detach from it.
        This is to ensure that SSH uses ssh-askpass */
     int fd = open("/dev/tty", O_RDONLY);
@@ -50,6 +49,14 @@ SSHKeysApp::SSHKeysApp( QWidget* parent,  const char* name, WFlags fl )
         ioctl(fd, TIOCNOTTY, NULL);
         close(fd);
     }
+}
+
+
+SSHKeysApp::SSHKeysApp( QWidget* parent,  const char* name, WFlags fl )
+    : SSHKeysBase( parent, name, fl )
+{
+    detachTerminal();
+
 
     QCString home = QFile::encodeName( QDir::homeDirPath() );
     unsigned i;
