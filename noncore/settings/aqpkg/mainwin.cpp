@@ -134,6 +134,12 @@ MainWindow :: MainWindow()
     a->addTo( popup );
     a->addTo( bar );
 
+    popup->insertSeparator();
+
+    a = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ), QString::null, 0, this, 0 );
+    a->setWhatsThis( tr( "Click here to configure this application." ) );
+    connect( a, SIGNAL( activated() ), this, SLOT( displaySettings() ) );
+    a->addTo( popup );
     mb->insertItem( tr( "Actions" ), popup );
 
     // View menu
@@ -193,17 +199,6 @@ MainWindow :: MainWindow()
     a->addTo( popup );
     
     mb->insertItem( tr( "View" ), popup );
-
-    
-    // Options menu
-    popup = new QPopupMenu( this );
-
-    a = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ), QString::null, 0, this, 0 );
-    a->setWhatsThis( tr( "Click here to configure this application." ) );
-    connect( a, SIGNAL( activated() ), this, SLOT( displaySettings() ) );
-    a->addTo( popup );
-
-    mb->insertItem( tr( "Options" ), popup );
     
     // Finish find toolbar creation
     a = new QAction( QString::null, Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
