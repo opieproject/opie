@@ -1,5 +1,5 @@
 Package: opie-networksettings2
-Files: plugins/application/libnetworksettings2.so* bin/networksettings2 apps/Settings/networksettings2.desktop pics/networksettings2/*.png pics/networksettings2/Devices/*.png
+Files: plugins/application/libnetworksettings2.so* bin/networksettings2 apps/Settings/networksettings2.desktop pics/networksettings2/*.png lib/libnetworksettings2.so* pics/networksettings2/Devices/*.png
 Priority: optional
 Section: opie/settings
 Maintainer: wim delvaux <wimpie@handhelds.org>
