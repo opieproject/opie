@@ -14,26 +14,25 @@ public :
 
       AProfile( ProfileNetNode * PNN );
 
+      RuntimeInfo * runtime( void ) 
+        { return
+            ( RT ) ? RT : ( RT = new ProfileRun( this, Data ) );
+        }
+
       QWidget * edit( QWidget * parent );
       QString acceptable( void );
       void commit( void );
 
-      const QString & description( void ) 
-        { return Data.Description; }
-      RuntimeInfo * runtime( void ) 
-        { if( RT == 0 ) 
-            RT = new ProfileRun( this, Data );
-          return RT;
-        }
-
       virtual void * data( void ) 
         { return (void *)&Data; }
 
-      virtual bool hasDataFor( const QString & )
-        { return 0; }
+      virtual short generateFileEmbedded( const QString & ID,
+                                         const QString & Path,
+                                         QTextStream & TS,
+                                         long DevNr );
 
-      virtual bool generateDataForCommonFile( 
-          SystemFile & SF, long DevNr);
+      const QString & description( void ) 
+        { return Data.Description; }
 
 protected :
 

@@ -1,3 +1,5 @@
+#include <qfile.h>
+#include <qfileinfo.h>
 #include "PPPedit.h"
 #include "ppp_NNI.h"
 #include "ppp_NN.h"
@@ -113,9 +115,107 @@ void APPP::commit( void ) {
     }
 }
 
-bool APPP::generateDataForCommonFile( 
-                                SystemFile & , 
-                                long) {
-      return 1;
+QFile * APPP::openFile( const QString & ID ) {
+      QFile * F = 0;
+      QString S;
+
+      if( ID == "peers" ) {
+        S = removeSpaces( QString("/tmp/") + connection()->name() );
+
+        F = new QFile( S );
+
+        if( ! F->open( IO_WriteOnly ) ) {
+          Log(("Cannot open file %s\n", S.latin1() ));
+          return 0;
+        }
+      } else if ( ID == "chatscripts" ) {
+        S = removeSpaces( QString("/tmp/") + connection()->name() + ".chat" );
+        F = new QFile( S );
+
+        if( ! F->open( IO_WriteOnly ) ) {
+          Log(("Cannot open file %s\n", S.latin1() ));
+          return 0;
+        }
+      }
+      if( F ) {
+        Log(("Generate proper file %s = %s\n", 
+              ID.latin1(), F->name().latin1()));
+      }
+      return F;
 }
 
+short APPP::generateFile( const QString & ID,
+                         const QString & Path,
+                         QTextStream & TS,
+                         long DevNr ) {
+    short rvl, rvd;
+
+    rvl = 1;
+    rvd = 1;
+
+    if( ID == "pap-secrets" ) {
+      Log(("Generate PPP for %s\n", ID.latin1() ));
+      if( Data.Auth.Mode == 1 && Data.Auth.PCEMode == 0 ) {
+        TS << "# secrets for " 
+           << connection()->name().latin1() 
+           << endl;
+        TS << Data.Auth.Client 
+           << " " 
+           << Data.Auth.Server 
+           << " " 
+           << Data.Auth.Secret
+           << endl;
+        rvl = 0;
+        rvd = connection()->getToplevel()->generateFileEmbedded( 
+                ID, Path, TS, DevNr );
+      }
+    } else if( ID == "chap-secrets" ) {
+      Log(("Generate PPP for %s\n", ID.latin1() ));
+      if( Data.Auth.Mode == 1 && Data.Auth.PCEMode != 0 ) {
+        // used for both EAP and Chap
+        TS << "# secrets for "
+           << connection()->name().latin1() 
+           << endl;
+        TS << Data.Auth.Client 
+           << " " 
+           << Data.Auth.Server 
+           << " " 
+           << Data.Auth.Secret
+           << endl;
+
+        rvl = 0;
+        rvd = connection()->getToplevel()->generateFileEmbedded( 
+            ID, Path, TS, DevNr );
+      }
+    } else if ( ID == "peers" ) {
+      QFileInfo FI(Path);
+      Log(("Generate PPP for %s\n", ID.latin1() ));
+
+      TS << "connect \"/usr/sbin/chat -v -f /etc/ppp/"
+         << FI.baseName()
+         << ".chat\""
+         << endl;
+
+      if( Data.IP.GWIsDefault ) {
+        TS << "defaultroute" 
+           << endl;
+      }
+
+      TS << "linkname "
+         << removeSpaces( ID.latin1() )
+         << endl;
+
+      // insert other data here
+      rvl = 0;
+      rvd = connection()->getToplevel()->generateFileEmbedded(
+            ID, Path, TS, DevNr );
+    } else if ( ID == "chatscripts" ) {
+      Log(("Generate PPP for %s\n", ID.latin1() ));
+      rvl = 0;
+      rvd = connection()->getToplevel()->generateFileEmbedded(
+            ID, Path, TS, DevNr );
+    }
+
+    return (rvd == 2 || rvl == 2 ) ? 2 :
+           (rvd == 0 || rvl == 0 ) ? 0 : 1;
+}

@@ -36,17 +36,6 @@ const char * IRDANetNode::provides( void ) {
       return "line";
 }
 
-bool IRDANetNode::generateProperFilesFor( 
-            ANetNodeInstance * ) {
-      return 0;
-}
-
-bool IRDANetNode::generateDeviceDataForCommonFile( 
-                                SystemFile & , 
-                                long ) {
-      return 0;
-}
-
 void IRDANetNode::setSpecificAttribute( QString & , QString & ) {
 }
 

@@ -11,7 +11,9 @@
 #define TEMPLATEDIR "networktemplates/"
 QString TemplDir;
 
-SystemFile::SystemFile( const QString & N, const QString & P ){
+SystemFile::SystemFile( const QString & N, 
+                        const QString & P,
+                        bool KDI ){
       Name = N;
       Path = P;
       F = 0;
@@ -57,6 +59,8 @@ SystemFile::SystemFile( const QString & N, const QString & P ){
         FI.setFile( S );
         hasPostDeviceSection = ( FI.exists() && FI.isReadable() );
       }
+
+      KnowsDeviceInstances = KDI;
 }
 
 SystemFile::~SystemFile( void ) {
@@ -96,29 +100,29 @@ bool SystemFile::preSection( void ) {
       if( hasPreSection ) {
         QFile Fl( TemplDir + Name + "/presection" );
         if( ! Fl.open( IO_ReadOnly ) )
-          return 1; // error
+          return 0; // error
         // copy file to this file
         F->writeBlock( Fl.readAll() );
       }
-      return 0;
+      return 1;
 }
 
 bool SystemFile::postSection( void ) {
       if( hasPostSection ) {
         QFile Fl( TemplDir + Name + "/postsection" );
         if( ! Fl.open( IO_ReadOnly ) )
-          return 1; // error
+          return 0; // error
         // copy file to this file
         F->writeBlock( Fl.readAll() );
       }
-      return 0;
+      return 1;
 }
 
 bool SystemFile::preNodeSection( ANetNodeInstance * NNI, long ) {
       if( hasPreNodeSection ) {
         QFile Fl( TemplDir + Name + "/prenodesection" );
         if( ! Fl.open( IO_ReadOnly ) )
-          return 1; // error
+          return 0; // error
         QTextStream TX( &Fl );
         QString Out;
         QString S = TX.readLine();
@@ -129,14 +133,14 @@ bool SystemFile::preNodeSection( ANetNodeInstance * NNI, long ) {
           S = TX.readLine();
         }
       }
-      return 0;
+      return 1;
 }
 
 bool SystemFile::postNodeSection( ANetNodeInstance * NNI, long ) {
       if( hasPostNodeSection ) {
         QFile Fl( TemplDir + Name + "/postnodesection" );
         if( ! Fl.open( IO_ReadOnly ) )
-          return 1; // error
+          return 0; // error
         QTextStream TX( &Fl );
         QString Out;
         QString S = TX.readLine();
@@ -147,14 +151,14 @@ bool SystemFile::postNodeSection( ANetNodeInstance * NNI, long ) {
           S = TX.readLine();
         }
       }
-      return 0;
+      return 1;
 }
 
 bool SystemFile::preDeviceSection( ANetNode * NN ) {
       if( hasPreDeviceSection ) {
         QFile Fl( TemplDir + Name + "/predevicesection" );
         if( ! Fl.open( IO_ReadOnly ) )
-          return 1; // error
+          return 0; // error
         QTextStream TX( &Fl );
         QString Out;
         QString S = TX.readLine();
@@ -164,14 +168,14 @@ bool SystemFile::preDeviceSection( ANetNode * NN ) {
           S = TX.readLine();
         }
       }
-      return 0;
+      return 1;
 }
 
 bool SystemFile::postDeviceSection( ANetNode * NN ) {
       if( hasPostDeviceSection ) {
         QFile Fl( TemplDir + Name + "/postdevicesection" );
         if( ! Fl.open( IO_ReadOnly ) )
-          return 1; // error
+          return 0; // error
         QTextStream TX( &Fl );
         QString Out;
         QString S = TX.readLine();
@@ -181,5 +185,5 @@ bool SystemFile::postDeviceSection( ANetNode * NN ) {
           S = TX.readLine();
         }
       }
-      return 0;
+      return 1;
 }

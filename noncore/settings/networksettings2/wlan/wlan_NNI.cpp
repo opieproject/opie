@@ -79,62 +79,73 @@ void AWLan::commit( void ) {
       setModified( 1 );
 }
 
-bool AWLan::generateDataForCommonFile( 
-                                SystemFile & S, 
-                                long ) {
+short AWLan::generateFileEmbedded( const QString & ID,
+                                  const QString & Path,
+                                  QTextStream & TS,
+                                  long DevNr ) {
 
-      S << "  wireless_essid \""
-        << Data.ESSID
-        << "\""
-        << endl;
+      short rvl, rvd;
 
-      if( ! Data.NodeName.isEmpty() ) {
-        if( Data.NodeName == tr("<UseHostName>") ) {
-          char Buf[100];
-          if( gethostname(Buf, sizeof(Buf) ) == 0 ) {
-            Buf[99] = '\0'; // just to make sure
-            S << "  wireless_nick "  
-              << Buf
-              << endl;
-          }
-        } else {
-          S << "  wireless_nick \""  
-            << Data.NodeName
-            << "\""
-            << endl;
-        }
-      }
+      rvl = 1;
 
-      char * M;
-      switch ( Data.Mode ) {
-        case 0 : 
-          M = "Auto";
-          break;
-        case 1 : 
-          M = "Managed";
-          break;
-        case 2 : 
-          M = "Ad-Hoc";
-          break;
-      }
+      if( ID == "interfaces" ) {
+        Log(("Generate WLanNNI for %s\n", ID.latin1() ));
+        TS << "  wireless_essid \""
+           << Data.ESSID
+           << "\""
+           << endl;
 
-      S << "  wireless_mode "
-        << M
-        << endl;
-      if( Data.Encrypted ) {
-        for( int i = 0; i < 4; i ++ ) {
-          if( ! Data.Key[i].isEmpty() ) {
-            S << "  wireless_key"
-              << i
-              << " "
-              << Data.Key[i]
-              << endl;
+        if( ! Data.NodeName.isEmpty() ) {
+          if( Data.NodeName == tr("<UseHostName>") ) {
+            char Buf[100];
+            if( gethostname(Buf, sizeof(Buf) ) == 0 ) {
+              Buf[99] = '\0'; // just to make sure
+              TS << "  wireless_nick "  
+                 << Buf
+                 << endl;
+            }
+          } else {
+            TS << "  wireless_nick \""  
+               << Data.NodeName
+               << "\""
+               << endl;
           }
         }
-        S << "  wireless_keymode "
-          << ((Data.AcceptNonEncrypted) ? "open" : "restricted")
-          << endl;
+
+        char * M = "Auto";
+        switch ( Data.Mode ) {
+          case 0 : 
+            break;
+          case 1 : 
+            M = "Managed";
+            break;
+          case 2 : 
+            M = "Ad-Hoc";
+            break;
+        }
+
+        TS << "  wireless_mode "
+           << M
+           << endl;
+        if( Data.Encrypted ) {
+          for( int i = 0; i < 4; i ++ ) {
+            if( ! Data.Key[i].isEmpty() ) {
+              TS << "  wireless_key"
+                 << i
+                 << " "
+                 << Data.Key[i]
+                 << endl;
+            }
+          }
+          TS << "  wireless_keymode "
+             << ((Data.AcceptNonEncrypted) ? "open" : "restricted")
+             << endl;
+        }
+        rvl = 0;
       }
-      return 0;
+      rvd = ANetNodeInstance::generateFileEmbedded( ID, Path, TS, DevNr);
+
+      return (rvd == 2 || rvl == 2 ) ? 2 :
+             (rvd == 0 || rvl == 0 ) ? 0 : 1;
 }
 

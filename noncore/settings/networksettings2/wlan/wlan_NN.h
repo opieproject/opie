@@ -18,21 +18,12 @@ public:
       { return "Devices/wlan"; }
 
     virtual const QString nodeDescription() ;
-
     virtual ANetNodeInstance * createInstance( void );
-
     virtual const char ** needs( void );
     virtual const char * provides( void );
 
-    virtual bool generateProperFilesFor( ANetNodeInstance * NNI );
-
-    virtual bool hasDataFor( const QString & S );
-    virtual bool generateDeviceDataForCommonFile( 
-        SystemFile & SF, long DevNr );
-
     virtual long instanceCount( void )
       { return InstanceCount; }
-
     virtual QString genNic( long );
 
 private:

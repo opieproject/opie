@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>249</width>
+            <width>245</width>
             <height>209</height>
         </rect>
     </property>
@@ -57,11 +57,11 @@
             <vbox>
                 <property stdset="1">
                     <name>margin</name>
-                    <number>0</number>
+                    <number>3</number>
                 </property>
                 <property stdset="1">
                     <name>spacing</name>
-                    <number>0</number>
+                    <number>2</number>
                 </property>
                 <widget>
                     <class>QRadioButton</class>
@@ -191,15 +191,54 @@
                     </hbox>
                 </widget>
                 <widget>
-                    <class>QRadioButton</class>
+                    <class>QLayoutWidget</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>PapChap_RB</cstring>
+                        <cstring>Layout3</cstring>
                     </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Pap/Chap/EAP</string>
-                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <widget>
+                            <class>QRadioButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Pap_RB</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Pap</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QRadioButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Chap_RB</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Chap</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QRadioButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>EAP_RB</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>EAP</string>
+                            </property>
+                        </widget>
+                    </hbox>
                 </widget>
                 <widget>
                     <class>QLayoutWidget</class>
@@ -275,9 +314,9 @@
                                 </property>
                                 <property stdset="1">
                                     <name>spacing</name>
-                                    <number>1</number>
+                                    <number>2</number>
                                 </property>
-                                <widget row="2"  column="0" >
+                                <widget row="1"  column="0" >
                                     <class>QLabel</class>
                                     <property stdset="1">
                                         <name>name</name>
@@ -288,7 +327,7 @@
                                         <string>Server</string>
                                     </property>
                                 </widget>
-                                <widget row="3"  column="0" >
+                                <widget row="2"  column="0" >
                                     <class>QLabel</class>
                                     <property stdset="1">
                                         <name>name</name>
@@ -299,65 +338,7 @@
                                         <string>Secret</string>
                                     </property>
                                 </widget>
-                                <widget row="0"  column="1" >
-                                    <class>QComboBox</class>
-                                    <item>
-                                        <property>
-                                            <name>text</name>
-                                            <string>PAP</string>
-                                        </property>
-                                    </item>
-                                    <item>
-                                        <property>
-                                            <name>text</name>
-                                            <string>CHAP</string>
-                                        </property>
-                                    </item>
-                                    <item>
-                                        <property>
-                                            <name>text</name>
-                                            <string>EAP</string>
-                                        </property>
-                                    </item>
-                                    <property stdset="1">
-                                        <name>name</name>
-                                        <cstring>AuthMethod_CB</cstring>
-                                    </property>
-                                </widget>
-                                <widget row="1"  column="0" >
-                                    <class>QLabel</class>
-                                    <property stdset="1">
-                                        <name>name</name>
-                                        <cstring>TextLabel1</cstring>
-                                    </property>
-                                    <property stdset="1">
-                                        <name>text</name>
-                                        <string>Client</string>
-                                    </property>
-                                </widget>
-                                <widget row="0"  column="0" >
-                                    <class>QLabel</class>
-                                    <property stdset="1">
-                                        <name>name</name>
-                                        <cstring>TextLabel1_4</cstring>
-                                    </property>
-                                    <property stdset="1">
-                                        <name>text</name>
-                                        <string>Method</string>
-                                    </property>
-                                </widget>
-                                <widget row="1"  column="1"  rowspan="1"  colspan="2" >
-                                    <class>QLineEdit</class>
-                                    <property stdset="1">
-                                        <name>name</name>
-                                        <cstring>Client_LE</cstring>
-                                    </property>
-                                    <property stdset="1">
-                                        <name>text</name>
-                                        <string>*</string>
-                                    </property>
-                                </widget>
-                                <widget row="2"  column="1"  rowspan="1"  colspan="2" >
+                                <widget row="1"  column="1" >
                                     <class>QLineEdit</class>
                                     <property stdset="1">
                                         <name>name</name>
@@ -368,34 +349,35 @@
                                         <string>*</string>
                                     </property>
                                 </widget>
-                                <widget row="3"  column="1"  rowspan="1"  colspan="2" >
+                                <widget row="2"  column="1" >
                                     <class>QLineEdit</class>
                                     <property stdset="1">
                                         <name>name</name>
                                         <cstring>Secret_LE</cstring>
                                     </property>
                                 </widget>
-                                <spacer row="0"  column="2" >
-                                    <property>
+                                <widget row="0"  column="1" >
+                                    <class>QLineEdit</class>
+                                    <property stdset="1">
                                         <name>name</name>
-                                        <cstring>Spacer7</cstring>
+                                        <cstring>Client_LE</cstring>
                                     </property>
                                     <property stdset="1">
-                                        <name>orientation</name>
-                                        <enum>Horizontal</enum>
+                                        <name>text</name>
+                                        <string>*</string>
+                                    </property>
+                                </widget>
+                                <widget row="0"  column="0" >
+                                    <class>QLabel</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>TextLabel1</cstring>
                                     </property>
                                     <property stdset="1">
-                                        <name>sizeType</name>
-                                        <enum>Expanding</enum>
+                                        <name>text</name>
+                                        <string>Client</string>
                                     </property>
-                                    <property>
-                                        <name>sizeHint</name>
-                                        <size>
-                                            <width>20</width>
-                                            <height>20</height>
-                                        </size>
-                                    </property>
-                                </spacer>
+                                </widget>
                             </grid>
                         </widget>
                     </hbox>
@@ -417,7 +399,7 @@
 </widget>
 <connections>
     <connection>
-        <sender>PapChap_RB</sender>
+        <sender>Pap_RB</sender>
         <signal>toggled(bool)</signal>
         <receiver>GroupBox3</receiver>
         <slot>setEnabled(bool)</slot>
@@ -426,6 +408,18 @@
         <sender>Login_RB</sender>
         <signal>toggled(bool)</signal>
         <receiver>GroupBox1</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>Chap_RB</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>GroupBox3</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>EAP_RB</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>GroupBox3</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>

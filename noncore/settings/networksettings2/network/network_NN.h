@@ -7,28 +7,27 @@ class ANetwork;
 
 class NetworkNetNode : public ANetNode{
 
-    Q_OBJECT
+      Q_OBJECT
 
 public:
 
-    NetworkNetNode();
-    virtual ~NetworkNetNode();
+      NetworkNetNode();
+      virtual ~NetworkNetNode();
 
-    virtual const QString pixmapName() 
-      { return "Devices/tcpip"; }
+      virtual bool hasDataForFile( const QString & S );
 
-    virtual const QString nodeDescription() ;
+      virtual short generateFile( const QString & ID,
+                                 const QString & Path,
+                                 QTextStream & TS, 
+                                 ANetNodeInstance * NNI,
+                                 long DevNr );
+      virtual const QString pixmapName() 
+        { return "Devices/tcpip"; }
 
-    virtual ANetNodeInstance * createInstance( void );
-
-    virtual const char ** needs( void );
-    virtual const char * provides( void );
-
-    virtual bool generateProperFilesFor( ANetNodeInstance * NNI );
-    virtual bool hasDataFor( const QString & )
-      { return 0; }
-    virtual bool generateDeviceDataForCommonFile( 
-        SystemFile & SF, long DevNr );
+      virtual const QString nodeDescription() ;
+      virtual ANetNodeInstance * createInstance( void );
+      virtual const char ** needs( void );
+      virtual const char * provides( void );
 
 private:
 

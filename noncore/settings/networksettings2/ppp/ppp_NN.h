@@ -7,35 +7,32 @@ class APPP;
 
 class PPPNetNode : public ANetNode{
 
-    Q_OBJECT
+      Q_OBJECT
 
 public:
 
-    PPPNetNode();
-    virtual ~PPPNetNode();
+      PPPNetNode();
+      virtual ~PPPNetNode();
 
-    virtual const QString pixmapName() 
-      { return "Devices/ppp"; }
+      virtual const QString pixmapName() 
+        { return "Devices/ppp"; }
 
-    virtual const QString nodeDescription() ;
+      virtual bool hasDataForFile( const QString & S );
 
-    virtual ANetNodeInstance * createInstance( void );
+      virtual const QString nodeDescription() ;
+      virtual ANetNodeInstance * createInstance( void );
+      virtual const char ** needs( void );
+      virtual const char * provides( void );
 
-    virtual const char ** needs( void );
-    virtual const char * provides( void );
-
-    virtual bool generateProperFilesFor( ANetNodeInstance * NNI );
-    virtual bool hasDataFor( const QString & )
-      { return 0; }
-    virtual bool generateDeviceDataForCommonFile( 
-        SystemFile & SF, long DevNr );
-
-    virtual QString genNic( long NicNr );
+      virtual QString genNic( long NicNr );
+      virtual QStringList * properFiles( void );
 
 private:
 
       virtual void setSpecificAttribute( QString & Attr, QString & Value );
       virtual void saveSpecificAttribute( QTextStream & TS );
+
+      static QStringList * ProperFiles;
 };
 
 extern "C"

@@ -46,29 +46,6 @@ const char * BluetoothBNEPNetNode::provides( void ) {
       return "device";
 }
 
-bool BluetoothBNEPNetNode::generateProperFilesFor( 
-            ANetNodeInstance * ) {
-      return 0;
-}
-
-bool BluetoothBNEPNetNode::hasDataFor( const QString & S ) {
-      return S == "interfaces";
-}
-
-bool BluetoothBNEPNetNode::generateDeviceDataForCommonFile( 
-                                SystemFile & S , 
-                                long DevNr) {
-      QString NIC = genNic( DevNr );
-
-      if( S.name() == "interfaces" ) {
-        // generate mapping stanza for this interface
-        S << "# check if " << NIC << " can be brought UP" << endl;
-        S << "mapping " << NIC << endl;
-        S << "  script networksettings2-request" << endl << endl;
-      }
-      return 0;
-}
-
 QString BluetoothBNEPNetNode::genNic( long nr ) { 
       QString S; 
       return S.sprintf( "bnep%ld", nr );
@@ -122,21 +99,6 @@ const char ** BluetoothRFCOMMNetNode::needs( void ) {
 
 const char * BluetoothRFCOMMNetNode::provides( void ) {
       return "line";
-}
-
-bool BluetoothRFCOMMNetNode::generateProperFilesFor( 
-            ANetNodeInstance * ) {
-      return 0;
-}
-
-bool BluetoothRFCOMMNetNode::hasDataFor( const QString &  ) {
-      return 0;
-}
-
-bool BluetoothRFCOMMNetNode::generateDeviceDataForCommonFile( 
-                                SystemFile & , 
-                                long ) {
-      return 0;
 }
 
 void BluetoothRFCOMMNetNode::setSpecificAttribute( QString &, QString & ) {

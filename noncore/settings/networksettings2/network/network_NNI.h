@@ -15,22 +15,23 @@ public :
 
       ANetwork( NetworkNetNode * PNN );
 
+      RuntimeInfo * runtime( void ) 
+        { return
+           ( RT ) ? RT : ( RT = new NetworkRun( this, Data ) );
+        }
+
       QWidget * edit( QWidget * parent );
       QString acceptable( void );
       void commit( void );
 
-      RuntimeInfo * runtime( void ) 
-        { if( RT == 0 ) 
-            RT = new NetworkRun( this, Data );
-          return RT;
-        }
-
       virtual void * data( void ) 
         { return (void *)&Data; }
 
-      virtual bool hasDataFor( const QString & S );
-      virtual bool generateDataForCommonFile( 
-          SystemFile & SF, long DevNr );
+      virtual bool hasDataForFile( const QString & S );
+      virtual short generateFile( const QString & ID,
+                                 const QString & Path,
+                                 QTextStream &TS,
+                                 long DevNr );
 
 protected :
 

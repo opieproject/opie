@@ -144,7 +144,7 @@ NodeCollection::NodeCollection( QTextStream & TS ) :
       if( A == "name" ) {
         Name = N;
       } else if( A == "number" ) {
-      Log(( "read number %s\n", N.latin1() ));
+        Log(( "Profile number %s\n", N.latin1() ));
         setNumber( N.toLong() );
       } else if( A == "node" ) {
         ANetNodeInstance * NNI = NSResources->findNodeInstance( N );
@@ -295,8 +295,27 @@ void NodeCollection::reassign( void ) {
 }
 
 bool NodeCollection::triggersVPN() {
-  return getToplevel()->runtime()->asFullSetup()->triggersVPN();
+    return getToplevel()->runtime()->asFullSetup()->triggersVPN();
 }
+
+bool NodeCollection::hasDataForFile( const QString & S ) {
+    return ( firstWithDataForFile( S ) != 0 );
+}
+
+ANetNodeInstance * NodeCollection::firstWithDataForFile( const QString & S ) {
+    for( QListIterator<ANetNodeInstance> it(*this); 
+         it.current();
+         ++it ) {
+      if( it.current()->hasDataForFile( S ) ) {
+        Log(( "Node %s has data for %s\n",
+            it.current()->nodeClass()->name(),
+            S.latin1() ));
+        return it.current();
+      }
+    }
+    return 0;
+}
+
 //
 //
 // RUNTIMEINFO

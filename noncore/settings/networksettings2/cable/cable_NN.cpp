@@ -36,17 +36,6 @@ const char * CableNetNode::provides( void ) {
       return "line";
 }
 
-bool CableNetNode::generateProperFilesFor( 
-            ANetNodeInstance * ) {
-      return 0;
-}
-
-bool CableNetNode::generateDeviceDataForCommonFile( 
-                                SystemFile & , 
-                                long ) {
-      return 0;
-}
-
 void CableNetNode::setSpecificAttribute( QString & , QString &  ) {
 }
 

@@ -6,6 +6,7 @@ class ANetNode;
 class ANetNodeInstance;
 class QTimer;
 class QListBoxItem;
+class QEvent;
 
 class NetworkSettings : public NetworkSettingsGUI {
 
@@ -28,7 +29,6 @@ public :
 
 public slots :
 
-      void SLOT_NoLongerBusy( void );
       void SLOT_AddNode( void );
       void SLOT_DeleteNode( void );
       void SLOT_ShowNode( QListBoxItem * );
@@ -50,5 +50,4 @@ private :
       void updateProfileState( QListBoxItem * it );
       QTimer * UpdateTimer;
       NetworkSettingsData NSD;
-
 };

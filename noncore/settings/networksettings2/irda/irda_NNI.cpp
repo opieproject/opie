@@ -29,9 +29,3 @@ void AIRDA::commit( void ) {
       setModified( 1 );
 }
 
-bool AIRDA::generateDataForCommonFile( 
-                                SystemFile & , 
-                                long ) {
-      return 1;
-}
-

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <errno.h>
 
 #include <qpe/qpeapplication.h>
 #include <qlistbox.h>
@@ -12,6 +13,7 @@
 #include <qtimer.h>
 #include <qpe/qpeapplication.h>
 #include <qtoolbutton.h>
+#include <qevent.h>
 
 #include <asdevice.h>
 #include "networksettings.h"
@@ -41,6 +43,13 @@ NetworkSettings::NetworkSettings( QWidget *parent,
 
     // populate main Listbox
     Profiles_LB->clear();
+    QPEApplication::setStylusOperation( 
+        Profiles_LB->viewport(), QPEApplication::RightOnHold );
+
+    connect( Profiles_LB, 
+             SIGNAL(rightButtonPressed(QListBoxItem*,const QPoint&)),
+             this, SLOT(SLOT_EditNode(QListBoxItem*)) );
+
     { Name2Connection_t & M = NSResources->connections();
       NodeCollection * NC;
       // for all connections
@@ -78,22 +87,18 @@ NetworkSettings::NetworkSettings( QWidget *parent,
 NetworkSettings::~NetworkSettings() {
     QString S;
 
-    S = NSD.generateSettings();
-    if( ! S.isEmpty() ) {
-      QMessageBox::warning(
-        0, 
-        tr( "In System Config" ),
-        S 
-      );
+    if( isModified() ) {
+      S = NSD.saveSettings();
+      if( ! S.isEmpty() ) {
+        // problem saving
+        QMessageBox::warning(
+              0, 
+              tr( "Saving setup" ), S );
+      }
+
+      SLOT_GenerateConfig();
     }
 
-    S = NSD.saveSettings();
-    if( ! S.isEmpty() ) {
-      // problem saving
-      QMessageBox::warning(
-            0, 
-            tr( "Saving setup" ), S );
-    }
 }
 
 void NetworkSettings::SLOT_CmdMessage( const QString & S ) {
@@ -145,9 +150,6 @@ void NetworkSettings::SLOT_RefreshStates( void ) {
     */
 }
 
-void NetworkSettings::SLOT_NoLongerBusy( void ) {
-      NSResources->busy( FALSE );
-}
 void NetworkSettings::SLOT_AddNode( void ) {
     SLOT_EditNode( 0 );
 }
@@ -166,12 +168,13 @@ void NetworkSettings::SLOT_DeleteNode( void ) {
       NSResources->removeConnection( LBI->text() );
       delete LBI;
       setModified( 1 );
-      NSD.forceGeneration(1);
     }
 }
 
 void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
     QString OldName = "";
+
+    printf( "------------------ Edit NOde\n" );
     EditConnection EC( this );
 
     if( LBI ) {
@@ -186,8 +189,7 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
     EC.showMaximized();
     // disable refresh timer 
     UpdateTimer->stop();
-    NSResources->busy( TRUE );
-    QTimer::singleShot( 1000, this, SLOT( SLOT_NoLongerBusy() ));
+
     // we need to retry
     while( 1 ) {
       if( EC.exec() == QDialog::Accepted ) {
@@ -319,15 +321,7 @@ void NetworkSettings::updateProfileState( QListBoxItem * LBI ) {
 }
 
 void NetworkSettings::SLOT_GenerateConfig( void ) {
-    QString S = NSD.generateSettings( TRUE );
-
-    if( ! S.isEmpty() ) {
-      QMessageBox::warning(
-        0, 
-        tr( "Generating system configuration" ),
-        S 
-      );
-    }
+    NSD.regenerate();
 }
 
 void NetworkSettings::SLOT_Enable( void ) {

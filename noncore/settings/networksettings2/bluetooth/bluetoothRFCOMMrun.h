@@ -12,6 +12,9 @@ public :
       virtual AsLine * asLine( void ) 
         { return (AsLine *)this; }
 
+      virtual QString deviceFile( void )
+        { return QString( "/dev/rfcomm..." ); }
+
 protected :
 
       void detectState( NodeCollection * )

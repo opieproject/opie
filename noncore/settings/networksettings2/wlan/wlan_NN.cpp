@@ -38,29 +38,6 @@ const char * WLanNetNode::provides( void ) {
       return "device";
 }
 
-bool WLanNetNode::generateProperFilesFor( 
-            ANetNodeInstance * ) {
-      return 0;
-}
-
-bool WLanNetNode::hasDataFor( const QString & S ) {
-      return S == "interfaces";
-}
-
-bool WLanNetNode::generateDeviceDataForCommonFile( 
-                                SystemFile & S, 
-                                long DevNr ) {
-      QString NIC = genNic( DevNr );
-
-      if( S.name() == "interfaces" ) {
-        // generate mapping stanza for this interface
-        S << "# check if " << NIC << " can be brought UP" << endl;
-        S << "mapping " << NIC << endl;
-        S << "  script networksettings2-request" << endl << endl;
-      }
-      return 0;
-}
-
 QString WLanNetNode::genNic( long nr ) { 
       QString S; 
       return S.sprintf( "wlan%ld", nr );

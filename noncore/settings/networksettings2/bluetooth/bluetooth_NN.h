@@ -7,31 +7,23 @@ class ABluetoothBNEP;
 
 class BluetoothBNEPNetNode : public ANetNode {
 
-    Q_OBJECT
+      Q_OBJECT
 
 public:
 
-    BluetoothBNEPNetNode();
-    virtual ~BluetoothBNEPNetNode();
+      BluetoothBNEPNetNode();
+      virtual ~BluetoothBNEPNetNode();
 
-    virtual const QString pixmapName() 
-      { return "Devices/bluetooth"; }
+      virtual QString genNic( long );
+      virtual long instanceCount( void )
+        { return InstanceCount; }
+      virtual const QString pixmapName() 
+        { return "Devices/bluetooth"; }
 
-    virtual const QString nodeDescription() ;
-
-    virtual ANetNodeInstance * createInstance( void );
-
-    virtual const char ** needs( void );
-    virtual const char * provides( void );
-
-    virtual bool generateProperFilesFor( ANetNodeInstance * NNI );
-    virtual bool hasDataFor( const QString & S );
-    virtual bool generateDeviceDataForCommonFile( 
-        SystemFile & , long DevNr );
-
-    virtual long instanceCount( void )
-      { return InstanceCount; }
-    virtual QString genNic( long );
+      virtual const QString nodeDescription() ;
+      virtual ANetNodeInstance * createInstance( void );
+      virtual const char * provides( void );
+      virtual const char ** needs( void );
 
 private:
 
@@ -45,27 +37,20 @@ private:
 
 class BluetoothRFCOMMNetNode : public ANetNode {
 
-    Q_OBJECT
+      Q_OBJECT
 
 public:
 
-    BluetoothRFCOMMNetNode();
-    virtual ~BluetoothRFCOMMNetNode();
+      BluetoothRFCOMMNetNode();
+      virtual ~BluetoothRFCOMMNetNode();
 
-    virtual const QString pixmapName() 
-      { return "Devices/bluetooth"; }
+      virtual const QString pixmapName() 
+        { return "Devices/bluetooth"; }
 
-    virtual const QString nodeDescription() ;
-
-    virtual ANetNodeInstance * createInstance( void );
-
-    virtual const char ** needs( void );
-    virtual const char * provides( void );
-
-    virtual bool generateProperFilesFor( ANetNodeInstance * NNI );
-    virtual bool hasDataFor( const QString & S );
-    virtual bool generateDeviceDataForCommonFile( 
-        SystemFile & , long );
+      virtual const QString nodeDescription() ;
+      virtual ANetNodeInstance * createInstance( void );
+      virtual const char ** needs( void );
+      virtual const char * provides( void );
 
 private:
 

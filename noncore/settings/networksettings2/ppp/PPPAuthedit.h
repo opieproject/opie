@@ -9,6 +9,8 @@ public :
     QString acceptable( void );
     bool commit( PPPData_t & Data );
     void showData( PPPData_t & Data );
+    bool PAP_Checked( void );
+
 
 private :
 

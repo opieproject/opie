@@ -1,3 +1,4 @@
+#include <asdevice.h>
 #include "network_NN.h"
 #include "network_NNI.h"
 
@@ -30,23 +31,42 @@ ANetNodeInstance * NetworkNetNode::createInstance( void ) {
       return new ANetwork( this );
 }
 
+bool NetworkNetNode::hasDataForFile( const QString & S ) {
+      return S == "interfaces";
+}
+
+short NetworkNetNode::generateFile( const QString & ID,
+                                   const QString & ,
+                                   QTextStream & TS, 
+                                   ANetNodeInstance * NNI,
+                                   long DevNr ) {
+                                   
+      QString NIC = NNI->runtime()->device()->netNode()->nodeClass()->genNic( DevNr );
+
+      if( ID == "interfaces" ) {
+        Log(("Generate entry for %s in %s\n", NIC.latin1(), ID.latin1() ));
+        // generate mapping stanza for this interface
+        TS << "# check if " 
+           << NIC 
+           << " can be brought UP" 
+           << endl;
+        TS << "mapping " 
+           << NIC 
+           << endl;
+        TS << "  script networksettings2-request" 
+           << endl 
+           << endl;
+        return 0;
+      }
+      return 1;
+}
+
 const char ** NetworkNetNode::needs( void ) {
       return NetworkNeeds;
 }
 
 const char * NetworkNetNode::provides( void ) {
       return "connection";
-}
-
-bool NetworkNetNode::generateProperFilesFor( 
-            ANetNodeInstance * ) {
-      return 0;
-}
-
-bool NetworkNetNode::generateDeviceDataForCommonFile( 
-                                SystemFile & , 
-                                long ) {
-      return 0;
 }
 
 void NetworkNetNode::setSpecificAttribute( QString & , QString & ) {

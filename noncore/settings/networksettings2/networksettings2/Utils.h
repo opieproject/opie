@@ -4,5 +4,6 @@
 #define Log(x)  VLog x
 extern void VLog( char * Format, ... );
 extern void LogClose( void );
+extern QString removeSpaces( const QString & X );
 
 #endif

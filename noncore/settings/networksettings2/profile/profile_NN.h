@@ -18,17 +18,9 @@ public:
       { return "Devices/commprofile"; }
 
     virtual const QString nodeDescription() ;
-
     virtual ANetNodeInstance * createInstance( void );
-
     virtual const char ** needs( void );
     virtual const char * provides( void );
-
-    virtual bool generateProperFilesFor( ANetNodeInstance * NNI );
-    virtual bool hasDataFor( const QString & )
-      { return 0; }
-    virtual bool generateDeviceDataForCommonFile( 
-        SystemFile & SF, long DevNr);
 
 private:
 

@@ -13,7 +13,7 @@ public :
       void loadSettings( void );
       QString saveSettings( void );
 
-      QString generateSettings( bool Force = FALSE );
+      QString generateSettings( void );
 
       bool isModified( void ) 
         { return IsModified; }
@@ -25,18 +25,9 @@ public :
       bool canStart( const char * Interface );
       bool regenerate( void );
 
-      void forceGeneration( bool m ) 
-        { Force = m; }
-
 private :
 
-      QString NetworkSettingsData::generateSystemFileNode(
-              SystemFile & SF,
-              AsDevice * CurDev,
-              ANetNodeInstance * DevNNI,
-              long DevInstNr );
       bool IsModified;
-      bool Force;
 
       // collect strings in config file nobody wants
       QStringList LeftOvers;

@@ -2,8 +2,7 @@
 #include "vpn_NNI.h"
 
 static const char * VPNNeeds[] = 
-    { "connection", 
-      0
+    { 0
     };
 
 /**
@@ -36,17 +35,6 @@ const char ** VPNNetNode::needs( void ) {
 
 const char * VPNNetNode::provides( void ) {
       return "connection";
-}
-
-bool VPNNetNode::generateProperFilesFor( 
-            ANetNodeInstance * ) {
-      return 0;
-}
-
-bool VPNNetNode::generateDeviceDataForCommonFile( 
-                                SystemFile & , 
-                                long ) {
-      return 0;
 }
 
 void VPNNetNode::setSpecificAttribute( QString & , QString & ) {

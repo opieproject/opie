@@ -43,9 +43,3 @@ void ALanCard::commit( void ) {
       setModified( 1 );
 }
 
-bool ALanCard::generateDataForCommonFile( 
-                                SystemFile & , 
-                                long ) {
-      return 1;
-}
-

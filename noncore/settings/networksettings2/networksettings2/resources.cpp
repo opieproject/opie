@@ -77,7 +77,7 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
         tr( "<p>Fully configured connection profile</p>" ) );
 
     // define system files
-    addSystemFile( new SystemFile( "interfaces", "./interfaces" ) );
+    addSystemFile( "interfaces", "/tmp/interfaces", 1 );
 
     // get access to the system
     TheSystem = new System();
@@ -88,7 +88,16 @@ TheNSResources::~TheNSResources( void ) {
     delete TheSystem;
 }
 
-void TheNSResources::busy( bool B ) {
+void TheNSResources::addSystemFile( const QString & ID, 
+                                    const QString & P,
+                                    bool KDI ) {
+    if( ! SystemFiles.find( ID ) ) {
+      // new system file
+      SystemFiles.insert( ID, new SystemFile( ID, P, KDI ) ); 
+    } // else existed
+}
+
+void TheNSResources::busy( bool ) {
 /*
       if( B ) {
         ShowWait->show();

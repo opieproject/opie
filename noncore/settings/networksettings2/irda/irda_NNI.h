@@ -14,23 +14,17 @@ public :
 
       AIRDA( IRDANetNode * PNN );
 
+      RuntimeInfo * runtime( void )
+        {  return 
+           ( RT ) ? RT : ( RT = new IRDARun( this, Data ) );
+        }
+
       QWidget * edit( QWidget * parent );
       QString acceptable( void );
       void commit( void );
 
-      RuntimeInfo * runtime( void ) 
-        { if( RT == 0 ) 
-            RT = new IRDARun( this, Data );
-          return RT;
-        }
-
       virtual void * data( void ) 
         { return (void *)&Data; }
-
-      virtual bool hasDataFor( const QString & )
-        { return 0; }
-      virtual bool generateDataForCommonFile( 
-          SystemFile & SF, long DevNr );
 
 protected :
 

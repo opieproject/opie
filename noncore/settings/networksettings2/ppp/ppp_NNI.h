@@ -7,6 +7,7 @@
 
 class PPPNetNode;
 class PPPEdit;
+class QTextStream;
 
 class APPP : public ANetNodeInstance {
 
@@ -14,24 +15,26 @@ public :
 
       APPP( PPPNetNode * PNN );
 
+      RuntimeInfo * runtime( void ) 
+        { if( RT == 0 ) {
+            RT = new PPPRun( this, Data );
+          }
+          return RT->runtimeInfo();
+        }
+
       QWidget * edit( QWidget * parent );
       QString acceptable( void );
       void commit( void );
 
-      RuntimeInfo * runtime( void ) 
-        { if( RT == 0 ) 
-            RT = new PPPRun( this, Data );
-          return RT->runtimeInfo();
-        }
-
       virtual void * data( void ) 
         { return (void *)&Data; }
 
-      virtual bool hasDataFor( const QString & )
-        { return 0; }
+      virtual QFile * openFile( const QString & ID );
+      short generateFile( const QString & ID, 
+                         const QString & Path,
+                         QTextStream & TS,
+                         long DevNr );
 
-      virtual bool generateDataForCommonFile( 
-          SystemFile & SF, long DevNr );
 protected :
 
       virtual void setSpecificAttribute( QString & Attr, QString & Value );

@@ -11,11 +11,17 @@ class SystemFile : public QTextStream {
 
 public :
 
-    SystemFile( const QString & Name, const QString & Path );
+    SystemFile( const QString & Name, 
+                const QString & Path,
+                bool KnowsDevicesInstances );
     ~SystemFile( void );
 
-    const QString & name( void )
+    const QString & name( void ) const
       { return Name; }
+    const QString & path( void ) const
+      { return Path; }
+    bool  knowsDeviceInstances( void ) const
+      { return KnowsDeviceInstances; }
 
     bool open( void );
     bool close( void );
@@ -38,6 +44,7 @@ private :
     bool hasPostNodeSection;
     bool hasPreDeviceSection;
     bool hasPostDeviceSection;
+    bool KnowsDeviceInstances;
 
 };
 #endif

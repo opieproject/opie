@@ -1,5 +1,9 @@
+#include <qfile.h>
+#include <qtextstream.h>
 #include "ppp_NN.h"
 #include "ppp_NNI.h"
+
+QStringList * PPPNetNode::ProperFiles = 0;
 
 static const char * PPPNeeds[] = 
     { "line", 
@@ -11,6 +15,17 @@ static const char * PPPNeeds[] =
  * Constructor, find all of the possible interfaces
  */
 PPPNetNode::PPPNetNode() : ANetNode(tr("PPP Connection")) {
+
+      // proper files : will leak
+      ProperFiles =new QStringList;
+      *ProperFiles << "peers";
+      *ProperFiles << "chatscript";
+
+      // system files
+      NSResources->addSystemFile( 
+        "pap-secrets", "/tmp/pap-secrets", 0 );
+      NSResources->addSystemFile( 
+        "chap-secrets", "/tmp/chap-secrets", 0 );
 }
 
 /**
@@ -39,15 +54,17 @@ const char * PPPNetNode::provides( void ) {
       return "connection";
 }
 
-bool PPPNetNode::generateProperFilesFor( 
-            ANetNodeInstance * ) {
-      return 0;
+QStringList * PPPNetNode::properFiles( void ) {
+      return ProperFiles;
+
 }
 
-bool PPPNetNode::generateDeviceDataForCommonFile( 
-                                SystemFile & , 
-                                long ) {
-      return 0;
+// need to generate :
+//      /etc/ppp/pap-secrets
+//      /etc/ppp/pap-secrets
+bool PPPNetNode::hasDataForFile( const QString & S ) {
+      return S == "pap-secrets" || 
+             S == "chap-secrets" ;
 }
 
 QString PPPNetNode::genNic( long NicNr ) { 

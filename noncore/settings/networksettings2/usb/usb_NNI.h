@@ -14,22 +14,22 @@ public :
 
       AUSB( USBNetNode * PNN );
 
+      RuntimeInfo * runtime( void ) 
+        { return
+            ( RT ) ? RT : ( RT = new USBRun( this, Data ) );
+        }
+
       QWidget * edit( QWidget * parent );
       QString acceptable( void );
       void commit( void );
 
-      RuntimeInfo * runtime( void ) 
-        { if( RT == 0 ) 
-            RT = new USBRun( this, Data );
-          return RT;
-        }
-
       virtual void * data( void ) 
         { return (void *)&Data; }
 
-      virtual bool hasDataFor( const QString & S);
-      virtual bool generateDataForCommonFile( 
-          SystemFile & SF, long DevNr );
+      virtual short generateFileEmbedded( const QString & ID,
+                                         const QString & Path,
+                                         QTextStream & TS,
+                                         long DevNr );
 
 protected :
 

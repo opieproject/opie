@@ -37,17 +37,6 @@ const char * ModemNetNode::provides( void ) {
       return "line";
 }
 
-bool ModemNetNode::generateProperFilesFor( 
-            ANetNodeInstance * ) {
-      return 0;
-}
-
-bool ModemNetNode::generateDeviceDataForCommonFile( 
-                                SystemFile & , 
-                                long ) {
-      return 0;
-}
-
 void ModemNetNode::setSpecificAttribute( QString & , QString & ) {
 }
 

@@ -50,9 +50,28 @@ void AProfile::commit( void ) {
       setModified( 1 );
 }
 
-bool AProfile::generateDataForCommonFile( 
-                                SystemFile & , 
-                                long) {
-      return 1;
+short AProfile::generateFileEmbedded( const QString & ID,
+                                     const QString & Path,
+                                     QTextStream & TS,
+                                     long DevNr ) {
+
+      short rvl, rvd;
+
+      rvl = 1;
+
+      if( ID == "interfaces" ) {
+        Log(("Generate Profile for %s\n", ID.latin1() ));
+        if( Data.TriggerVPN ) {
+          // this profile triggers VPN -> insert trigger
+          TS << "  up        networksettings2 --triggervpn" 
+             << endl;
+          rvl = 0;
+        }
+      }
+      rvd = ANetNodeInstance::generateFileEmbedded( ID, Path, TS, DevNr );
+      return (rvd == 2 || rvl == 2 ) ? 2 :
+             (rvd == 0 || rvl == 0 ) ? 0 : 1;
 }
+
+
 

@@ -14,24 +14,22 @@ public :
 
       ACable( CableNetNode * PNN );
 
+      RuntimeInfo * runtime( void ) 
+        {  return 
+           ( RT ) ? RT : ( RT = new CableRun( this, Data ) );
+        }
+
       QWidget * edit( QWidget * parent );
       QString acceptable( void );
       void commit( void );
 
-      RuntimeInfo * runtime( void ) 
-        { if( RT == 0 ) 
-            RT = new CableRun( this, Data );
-          return RT;
-        }
-
       virtual void * data( void ) 
         { return (void *)&Data; }
 
-      virtual bool hasDataFor( const QString & )
-        { return 0; }
-      virtual bool generateDataForCommonFile( 
-          SystemFile & SF, long DevNr );
-
+      short generateFileEmbedded( const QString & ID, 
+                                  const QString & Path,
+                                  QTextStream & TS,
+                                  long DevNr );
 protected :
 
       virtual void setSpecificAttribute( QString & Attr, QString & Value );

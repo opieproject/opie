@@ -9,6 +9,13 @@
 PPPAuthEdit::PPPAuthEdit( QWidget * Parent ) : PPPAuthGUI( Parent ){
 }
 
+bool PPPAuthEdit::PAP_Checked( void ) {
+      return ( Pap_RB->isChecked() ||
+               Chap_RB->isChecked() ||
+               EAP_RB->isChecked() 
+             );
+}
+
 QString PPPAuthEdit::acceptable( void ) {
     if( Login_RB->isChecked() ) {
       if( LoginSend_LE->text().isEmpty() )
@@ -19,7 +26,7 @@ QString PPPAuthEdit::acceptable( void ) {
         return tr("Password send missing");
       if( PasswordExpect_LE->text().isEmpty() )
         return tr("Password expect missing");
-    } else if( PapChap_RB->isChecked() ) {
+    } else if( PAP_Checked() ) {
       if( Client_LE->text().isEmpty() )
         return tr("Pap/Chap/EAP client id missing");
       if( Server_LE->text().isEmpty() )
@@ -34,14 +41,13 @@ bool PPPAuthEdit::commit( PPPData_t & D ) {
     bool SM = 0;
 
     if( ( D.Auth.Mode == 0 && ! Login_RB->isChecked() ) ||
-        ( D.Auth.Mode == 1 && ! PapChap_RB->isChecked() ) ||
+        ( D.Auth.Mode == 1 && ! PAP_Checked() ) ||
         ( D.Auth.Mode == 2 && ! Terminal_RB->isChecked() ) ) {
       // mode modifed
       SM = 1;
       D.Auth.Mode = ( Login_RB->isChecked() ) ? 
                     0 :
-                    ( ( PapChap_RB->isChecked() ) ? 
-                      1 : 2 );
+                    ( PAP_Checked() ) ? 1 : 2;
     }
 
     if( Login_RB->isChecked() ) {
@@ -49,11 +55,17 @@ bool PPPAuthEdit::commit( PPPData_t & D ) {
       TXTM( D.Auth.Login.Send, LoginSend_LE, SM );
       TXTM( D.Auth.Password.Expect, PasswordExpect_LE, SM );
       TXTM( D.Auth.Password.Send, PasswordSend_LE, SM );
-    } else if( PapChap_RB->isChecked() ) {
+    } else if( PAP_Checked() ) {
       TXTM( D.Auth.Client, Client_LE, SM );
       TXTM( D.Auth.Server, Server_LE, SM );
       TXTM( D.Auth.Secret, Secret_LE, SM );
-      CIM( D.Auth.PCEMode, AuthMethod_CB, SM );
+      if( Pap_RB->isChecked() ) {
+        D.Auth.PCEMode = 0;
+      } else if( Chap_RB->isChecked() ) {
+        D.Auth.PCEMode = 1;
+      } else if( EAP_RB->isChecked() ) {
+        D.Auth.PCEMode = 2;
+      }
     }
     return SM;
 }
@@ -62,13 +74,23 @@ void PPPAuthEdit::showData( PPPData_t & D ) {
 
     switch( D.Auth.Mode ) {
       case 0 : 
-        Login_RB->isChecked();
+        Login_RB->setChecked( TRUE );
         break;
       case 1 : 
-        PapChap_RB->isChecked();
+        switch( D.Auth.PCEMode ) {
+          case 0 :
+            Pap_RB->setChecked( TRUE );
+            break;
+          case 1 :
+            Chap_RB->setChecked( TRUE );
+            break;
+          case 2 :
+            EAP_RB->setChecked( TRUE );
+            break;
+        }
         break;
       case 2 : 
-        Terminal_RB->isChecked();
+        Terminal_RB->setChecked( TRUE );
         break;
     }
 
@@ -80,6 +102,4 @@ void PPPAuthEdit::showData( PPPData_t & D ) {
     Client_LE->setText( D.Auth.Client );
     Server_LE->setText( D.Auth.Server );
     Secret_LE->setText( D.Auth.Secret );
-
-    AuthMethod_CB->setCurrentItem( D.Auth.PCEMode );
 }

@@ -9,7 +9,7 @@ static const char * ProfileNeeds[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-ProfileNetNode::ProfileNetNode() : ANetNode( tr("Regular profile")) {
+ProfileNetNode::ProfileNetNode() : ANetNode( tr("Regular connection profile")) {
 }
 
 /**
@@ -36,17 +36,6 @@ const char ** ProfileNetNode::needs( void ) {
 
 const char * ProfileNetNode::provides( void ) {
       return "fullsetup";
-}
-
-bool ProfileNetNode::generateProperFilesFor( 
-            ANetNodeInstance * ) {
-      return 0;
-}
-
-bool ProfileNetNode::generateDeviceDataForCommonFile( 
-                                SystemFile & , 
-                                long ) {
-      return 0;
 }
 
 void ProfileNetNode::setSpecificAttribute( QString & , QString & ) {

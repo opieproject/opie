@@ -390,8 +390,11 @@ void VLog( char * Format, ... ) {
       va_start(l, Format );
 
       if( logf == (FILE *)0 ) {
-        // logf = fopen( "/tmp/ns2log", "a" );
-        logf = stderr;
+        if( getenv("NS2STDERR") ) {
+          logf = stderr;
+        } else {
+          logf = fopen( "/tmp/ns2log", "a" );
+        }
         if( ! logf ) {
           fprintf( stderr, "Cannot open logfile /tmp/ns2log %d\n", 
               errno );
@@ -411,7 +414,16 @@ void VLog( char * Format, ... ) {
 void LogClose( void ) {
       if( (long)logf > 1 ) {
         fprintf( logf, "____ CLOSE LOGFILE ____\n");
-        fclose( logf );
+        if( logf != stderr ) {
+          fclose( logf );
+        }
         logf = 0;
       }
+}
+
+QString removeSpaces( const QString & X ) {
+      QStringList SL;
+
+      SL = QStringList::split( " ", X );
+      return SL.join( "_" );
 }

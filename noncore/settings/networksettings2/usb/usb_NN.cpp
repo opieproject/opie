@@ -37,29 +37,6 @@ const char * USBNetNode::provides( void ) {
       return "device";
 }
 
-bool USBNetNode::generateProperFilesFor( 
-            ANetNodeInstance * ) {
-      return 0;
-}
-
-bool USBNetNode::hasDataFor( const QString & S ) {
-      return (S== "interfaces");
-}
-
-bool USBNetNode::generateDeviceDataForCommonFile( 
-                                SystemFile & S , 
-                                long DevNr ) {
-    QString NIC = genNic( DevNr );
-
-    if( S.name() == "interfaces" ) {
-      // generate mapping stanza for this interface
-      S << "# check if " << NIC << " can be brought UP" << endl;
-      S << "mapping " << NIC << endl;
-      S << "  script networksettings2-request" << endl << endl;
-    }
-    return 0;
-}
-
 QString USBNetNode::genNic( long ) {
     return QString( "usbf" ); 
 }

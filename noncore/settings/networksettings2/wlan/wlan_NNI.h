@@ -14,23 +14,23 @@ public :
 
       AWLan( WLanNetNode * PNN );
 
+      RuntimeInfo * runtime( void ) 
+        { return
+            ( RT ) ? RT : ( RT = new WLanRun( this, Data ) );
+        }
+
       QWidget * edit( QWidget * parent );
       QString acceptable( void );
       void commit( void );
 
-      RuntimeInfo * runtime( void ) 
-        { if( RT == 0 ) 
-            RT = new WLanRun( this, Data );
-          return RT;
-        }
-
       virtual void  * data( void ) 
         { return (void *)&Data; }
 
-      virtual bool hasDataFor( const QString & )
-        { return 1; }
-      virtual bool generateDataForCommonFile( 
-          SystemFile & SF, long DevNr );
+      virtual short generateFileEmbedded( const QString & ID,
+                                         const QString & Path,
+                                         QTextStream & TS,
+                                         long DevNr ); 
+
 protected :
 
       virtual void setSpecificAttribute( QString & Attr, QString & Value );

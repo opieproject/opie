@@ -13,6 +13,8 @@ public :
         RuntimeInfo( NNI ) { 
     }
 
+    virtual QString deviceFile( void ) = 0;
+
 };
 
 #endif

@@ -4,7 +4,7 @@
 
 void CableRun::detectState( NodeCollection * NC ) { 
 
-      int fd = open( D->Device.latin1(), O_RDWR );
+      int fd = open( Data->Device.latin1(), O_RDWR );
 
       if( fd < 0 ) {
         NC->setCurrentState( Unavailable );
@@ -23,4 +23,8 @@ bool CableRun::setState( NodeCollection * NC, Action_t A, bool ) {
 
 bool CableRun::canSetState( State_t , Action_t  ) { 
       return 1;
+}
+
+QString CableRun::deviceFile( void ) {
+      return Data->Device;
 }

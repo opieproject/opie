@@ -66,8 +66,9 @@ public :
 
     Name2SystemFile_t & systemFiles( void )
       { return SystemFiles; }
-    void addSystemFile( SystemFile * SF )
-      { SystemFiles.insert( SF->name(), SF ); }
+    void addSystemFile( const QString & ID, 
+                        const QString & P,
+                        bool KDI );
 
     ANetNodeInstance * createNodeInstance( const QString & S )
       { ANetNodeInstance * NNI = 0;

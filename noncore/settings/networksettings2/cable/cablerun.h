@@ -6,11 +6,13 @@ class CableRun  : public AsLine {
 public :
 
       CableRun( ANetNodeInstance * NNI, 
-                CableData & Data ) : AsLine( NNI )
-        { D = &Data; }
+                CableData_t & D ) : AsLine( NNI )
+        { Data = &D; }
 
       virtual AsLine * asLine( void ) 
         { return (AsLine *)this; }
+
+      virtual QString deviceFile( void );
 
 protected :
 
@@ -20,5 +22,5 @@ protected :
 
 private :
 
-      CableData_t * D;
+      CableData_t * Data;
 };
