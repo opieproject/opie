@@ -3,6 +3,8 @@
 
 #include "ircmessageparser.h"
 #include "ircversion.h"
+#include "ircchannelperson.h"
+//#include "transferreceiver.h"
 
 /* Lookup table for literal commands */
 IRCLiteralMessageParserStruct IRCMessageParser::literalParserProcTable[] = {
@@ -26,6 +28,7 @@ IRCCTCPMessageParserStruct IRCMessageParser::ctcpParserProcTable[] = {
     { "PING",    FUNC(parseCTCPPing) },
     { "VERSION", FUNC(parseCTCPVersion) },
     { "ACTION",  FUNC(parseCTCPAction) },
+    { "DCC",     FUNC(parseCTCPDCC) },
     { 0 , 0 }
 };
 
@@ -50,10 +53,11 @@ IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
     { 263, QT_TR_NOOP("Please wait a while and try again"), 0, 0 }, // RPL_TRYAGAIN
     { 265, "%1", "1", 0 },                                  // RPL_LOCALUSERS
     { 266, "%1", "1", 0 },                                  // RPL_GLOBALUSERS
-    { 311, QT_TR_NOOP("Whois %1 (%2@%3)\nReal name: %4"), "1:3,5" },    // RPL_WHOISUSER
+    { 311, QT_TR_NOOP("Whois %1 (%2@%3)\nReal name: %4"), "1:3,5", 0 },    // RPL_WHOISUSER
     { 312, QT_TR_NOOP("%1 is using server %2"), "1,2", 0 },             // RPL_WHOISSERVER
     { 317, 0, 0, FUNC(parseNumericalWhoisIdle) },           // RPL_WHOISIDLE 
     { 318, "%1 :%2", "1,2", 0 },                            // RPL_ENDOFWHOIS
+    { 319, QT_TR_NOOP("%1 is on channels: %2"), "1,2", 0 },             // RPL_WHOISCHANNELS
     { 320, "%1 %2", "1,2", 0},                              // RPL_WHOISVIRT
     { 332, 0, 0, FUNC(parseNumericalTopic) },               // RPL_TOPIC
     { 333, 0, 0, FUNC(parseNumericalTopicWhoTime) },        // RPL_TOPICWHOTIME*/
@@ -67,7 +71,7 @@ IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
     { 378, "%1", "1", 0 },                                  // RPL_MOTD3
     { 391, QT_TR_NOOP("Time on server %1 is %2"), "1,2", 0 },           // RPL_TIME
     { 401, QT_TR_NOOP("Channel or nick %1 doesn't exists"), "1", 0 },   // ERR_NOSUCHNICK
-    { 406, QT_TR_NOOP("There is no history information for %1"), "1" }, // ERR_WASNOSUCHNICK
+    { 406, QT_TR_NOOP("There is no history information for %1"), "1", 0 }, // ERR_WASNOSUCHNICK
     { 409, "%1", "1", 0 },                                  // ERR_NOORIGIN
     { 411, "%1", "1", 0 },                                  // ERR_NORECIPIENT
     { 412, "%1", "1", 0 },                                  // ERR_NOTEXTTOSEND
@@ -99,7 +103,7 @@ void IRCMessageParser::parse(IRCMessage *message) {
     } else if (message->isCTCP()) {
         for (int i=0; ctcpParserProcTable[i].commandName; i++) {
             if (message->ctcpCommand() == ctcpParserProcTable[i].commandName) {
-                (this->*(ctcpParserProcTable[i].proc))(message);
+                parseCTCP(message, i);
                 return;
             }
         }
@@ -134,9 +138,16 @@ void IRCMessageParser::parseNumerical(IRCMessage *message, int position) {
         (this->*(numericalParserProcTable[position].proc))(message);
 }
 
+void IRCMessageParser::parseCTCP(IRCMessage *message, int position) {
+    if(ctcpParserProcTable[position].proc)
+        (this->*(ctcpParserProcTable[position].proc))(message);
+}
+
+	
+
 void IRCMessageParser::parseNumericalServerName(IRCMessage *message) {
     emit outputReady(IRCOutput(OUTPUT_TITLE, tr("Connected to")+" <b>" + message->prefix() + "</b>"));
-    /* Register EFFECTIVE nickname, some networks (as irc-hispano) uses nick:password
+    /* Register EFFECTIVE nickname, some networks (as irc-hispano) use nick:password
      * for authentication and the parser gets confused */
     m_session->m_server->setNick(message->param(0));
 
@@ -189,14 +200,12 @@ void IRCMessageParser::parseLiteralJoin(IRCMessage *message) {
         /* Someone else joined */
         if (mask.nick() != m_session->m_server->nick()) {
             if (!channel->getPerson(mask.nick())) {
-                IRCChannelPerson *chanperson = new IRCChannelPerson();
                 IRCPerson *person = m_session->getPerson(mask.nick());
                 if (!person) {
                     person = new IRCPerson(message->prefix());
                     m_session->addPerson(person);
                 }
-                chanperson->flags = 0;
-                chanperson->person = person;
+                IRCChannelPerson *chanperson = new IRCChannelPerson(person);
                 channel->addPerson(chanperson);
                 IRCOutput output(OUTPUT_OTHERJOIN ,tr("%1 joined channel %2").arg( mask.nick() ).arg( channelName ));
                 output.addParam(channel);
@@ -355,8 +364,8 @@ void IRCMessageParser::parseLiteralError(IRCMessage *message) {
 
 void IRCMessageParser::parseCTCPPing(IRCMessage *message) {
     IRCPerson mask(message->prefix());
-    m_session->m_connection->sendCTCP(mask.nick(), "PING " + message->allParameters());
-    emit outputReady(IRCOutput(OUTPUT_CTCP, tr("Received a CTCP PING from ")+mask.nick()));
+    m_session->m_connection->sendCTCPReply(mask.nick(), "PING", message->allParameters());
+    emit outputReady(IRCOutput(OUTPUT_CTCP, tr("Received a CTCP PING from ") + mask.nick()));
 
     //IRCPerson mask(message->prefix());
     QString dest = message->ctcpDestination();
@@ -395,8 +404,16 @@ void IRCMessageParser::parseCTCPPing(IRCMessage *message) {
 
 void IRCMessageParser::parseCTCPVersion(IRCMessage *message) {
     IRCPerson mask(message->prefix());
-    m_session->m_connection->sendCTCP(mask.nick(), "VERSION " APP_VERSION " "  APP_COPYSTR);
-    emit outputReady(IRCOutput(OUTPUT_CTCP, tr("Received a CTCP VERSION from ")+mask.nick()));
+    IRCOutput output(OUTPUT_CTCP);
+    if(message->isCTCPRequest()) {
+        m_session->m_connection->sendCTCPReply(mask.nick(), "VERSION", APP_VERSION " "  APP_COPYSTR);
+        output.setMessage(tr("Received a CTCP VERSION request from ") + mask.nick());
+    }
+
+    else { 
+        output.setMessage("Received CTCP VERSION reply from " + mask.nick() + ":" + message->param(0));
+    }
+    emit outputReady(output);
 }
 
 void IRCMessageParser::parseCTCPAction(IRCMessage *message) {
@@ -434,6 +451,16 @@ void IRCMessageParser::parseCTCPAction(IRCMessage *message) {
     }
 }
 
+void IRCMessageParser::parseCTCPDCC(IRCMessage *message) {
+    QStringList params = QStringList::split(' ', message->param(0).stripWhiteSpace());
+    if( params.count() != 5) {
+        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Malformed DCC request from ") + IRCPerson(message->prefix()).nick()));
+        return;
+    }
+
+    //TransferReceiver *foo = new TransferReceiver(params[2].toUInt(),  params[3].toUInt(), params[1], params[4].toUInt());
+}
+
 void IRCMessageParser::parseLiteralMode(IRCMessage *message) {
     IRCPerson mask(message->prefix());
 
@@ -448,57 +475,47 @@ void IRCMessageParser::parseLiteralMode(IRCMessage *message) {
                 if (temp.startsWith("+")) {
                     set = TRUE;
                     temp = temp.right(1);
-                } else if (temp.startsWith("-")) {
-                    set = FALSE;
-                    temp = temp.right(1);
-                } else {
-                    emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change has unknown type")));
-                    return;
-                }
+                } 
+                else
+                    if (temp.startsWith("-")) {
+                        set = FALSE;
+                        temp = temp.right(1);
+                    } 
+                    else {
+                        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change has unknown type")));
+                        return;
+                    }
                 if (temp == "o") {
                     stream >> temp;
                     IRCChannelPerson *person = channel->getPerson(temp);
                     if (person) {
-                        if (set) {
-                            person->flags |= PERSON_FLAG_OP;
-                            IRCOutput output(OUTPUT_CHANPERSONMODE, mask.nick() + tr(" gives channel operator status to " + person->person->nick()));
-                            output.addParam(channel);
-                            output.addParam(person);
-                            emit outputReady(output);
-                        } else {
-                            person->flags &= 0xFFFF - PERSON_FLAG_OP;
-                            IRCOutput output(OUTPUT_CHANPERSONMODE, mask.nick() + tr(" removes channel operator status from " + person->person->nick()));
+                        IRCOutput output(OUTPUT_CHANPERSONMODE, person->setOp(mask.nick(), set));
+                        output.addParam(channel);
+                        output.addParam(person);
+                        emit outputReady(output);
+                    } 
+                    else {
+                        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change with unknown person - Desynchronized?")));
+                    }
+                } 
+                else 
+                    if (temp == "v") {
+                        stream >> temp;
+                        IRCChannelPerson *person = channel->getPerson(temp);
+                        if (person) {
+                            IRCOutput output(OUTPUT_CHANPERSONMODE, person->setVoice(mask.nick(), set));
                             output.addParam(channel);
                             output.addParam(person);
                             emit outputReady(output);
                         }
-                    } else {
-                        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change with unknown person - Desynchronized?")));
-                    }
-                } else if (temp == "v") {
-                    stream >> temp;
-                    IRCChannelPerson *person = channel->getPerson(temp);
-                    if (person) {
-                        if (set) {
-                            person->flags |= PERSON_FLAG_VOICE;
-                            IRCOutput output(OUTPUT_CHANPERSONMODE, mask.nick() + tr(" gives voice to " + person->person->nick()));
-                            output.addParam(channel);
-                            output.addParam(person);
-                            emit outputReady(output);
-                        } else {
-                            person->flags &= 0xFFFF - PERSON_FLAG_VOICE;
-                            IRCOutput output(OUTPUT_CHANPERSONMODE, mask.nick() + tr(" removes voice from " + person->person->nick()));
-                            output.addParam(channel);
-                            output.addParam(person);
-                            emit outputReady(output);
+                        else {
+                            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change with unknown person - Desynchronized?")));
                         }
-                    } else {
-                        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change with unknown person - Desynchronized?")));
+                    } 
+                    else {
+                        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change with unknown flag")));
                     }
-                } else {
-                    emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change with unknown flag")));
                 }
-            }
         } else {
             emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change with unknown kannel - Desynchronized?")));
         }
@@ -513,7 +530,7 @@ void IRCMessageParser::parseLiteralKick(IRCMessage *message) {
     if (channel) {
         IRCChannelPerson *person = channel->getPerson(message->param(1));
         if (person) {
-            if (person->person->nick() == m_session->m_server->nick()) {
+            if (person->nick() == m_session->m_server->nick()) {
                 m_session->removeChannel(channel);
                 IRCOutput output(OUTPUT_SELFKICK, tr("You were kicked from ") + channel->channelname() + tr(" by ") + mask.nick() + " (" + message->param(2) + ")");
                 output.addParam(channel);
@@ -521,7 +538,7 @@ void IRCMessageParser::parseLiteralKick(IRCMessage *message) {
             } else {
               /* someone else got kicked */
                 channel->removePerson(person);
-                IRCOutput output(OUTPUT_OTHERKICK, person->person->nick() + tr(" was kicked from ") + channel->channelname() + tr(" by ") + mask.nick()+ " (" + message->param(2) + ")");
+                IRCOutput output(OUTPUT_OTHERKICK, person->nick() + tr(" was kicked from ") + channel->channelname() + tr(" by ") + mask.nick()+ " (" + message->param(2) + ")");
                 output.addParam(channel);
                 output.addParam(person);
                 emit outputReady(output);
@@ -553,24 +570,23 @@ void IRCMessageParser::parseNumericalNames(IRCMessage *message) {
 
                 nick = temp.right(temp.length()-1);
                 switch (flagch) {
-                    case '@': flag = PERSON_FLAG_OP;     break;
-                    case '+': flag = PERSON_FLAG_VOICE;  break;
-                    case '%': flag = PERSON_FLAG_HALFOP; break;
+                    case '@': flag = IRCChannelPerson::PERSON_FLAG_OP;     break;
+                    case '+': flag = IRCChannelPerson::PERSON_FLAG_VOICE;  break;
+                    case '%': flag = IRCChannelPerson::PERSON_FLAG_HALFOP; break;
                     default : flag = 0; break;
                 }
             } else {
                 nick = temp;
             }
 
-            IRCChannelPerson *chan_person = new IRCChannelPerson();
             IRCPerson *person = m_session->getPerson(nick);
             if (person == 0) {
                 person = new IRCPerson();
                 person->setNick(nick);
                 m_session->addPerson(person);
             }
-            chan_person->person = person;
-            chan_person->flags = flag;
+            IRCChannelPerson *chan_person = new IRCChannelPerson(person);
+            chan_person->setFlags(flag);
             channel->addPerson(chan_person);
         }
     } else {

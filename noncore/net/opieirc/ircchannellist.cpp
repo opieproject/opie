@@ -1,5 +1,7 @@
 #include <qpe/resource.h>
+
 #include "ircchannellist.h"
+#include "ircchannelperson.h"
 
 IRCChannelList::IRCChannelList(IRCChannel *channel, QWidget *parent, const char *name, WFlags f) : QListBox(parent, name, f) {
     m_channel = channel;
@@ -13,14 +15,14 @@ void IRCChannelList::update() {
     clear();
     for (; it.current(); ++it) {
         IRCChannelPerson *person = it.current();
-        if (person->flags & PERSON_FLAG_OP) {
-            insertItem(op, "1" + person->person->nick());
-        } else if (person->flags & PERSON_FLAG_HALFOP) {
-            insertItem(op, "2" + person->person->nick());
-        } else if (person->flags & PERSON_FLAG_VOICE) {
-            insertItem(voice, "3" + person->person->nick());
+        if (person->flags() & IRCChannelPerson::PERSON_FLAG_OP) {
+            insertItem(op, "1" + person->nick());
+        } else if (person->flags() & IRCChannelPerson::PERSON_FLAG_HALFOP) {
+            insertItem(op, "2" + person->nick());
+        } else if (person->flags() & IRCChannelPerson::PERSON_FLAG_VOICE) {
+            insertItem(voice, "3" + person->nick());
         } else {
-            insertItem("4" + person->person->nick());
+            insertItem("4" + person->nick());
         }
     }
     sort();

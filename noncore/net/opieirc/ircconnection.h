@@ -37,7 +37,11 @@ public:
     /* used to send commands to the IRC server */
     void sendLine(QString line);
     /* used to send CTCP commands to the IRC server */
-    void sendCTCP(QString nick, QString line);
+    void sendCTCPReply(const QString &nickname, const QString &type, const QString &args);
+    void sendCTCPRequest(const QString &nickname, const QString &type, const QString &args);
+    void sendCTCPPing(const QString &nickname);
+    void whois(const QString &nickname);
+    void sendCTCPping(const QString &nickname);
     void close();
     bool isConnected();
     bool isLoggedIn();

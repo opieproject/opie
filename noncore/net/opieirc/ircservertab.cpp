@@ -3,6 +3,7 @@
 
 #include "ircservertab.h"
 #include "ircmessageparser.h"
+#include "ircchannelperson.h"
 
 
 bool IRCServerTab::containsPing( const QString& text, IRCServerTab* tab ) {
@@ -311,7 +312,7 @@ void IRCServerTab::display(IRCOutput output) {
             break;
         case OUTPUT_CHANPRIVMSG: {
                 IRCChannelTab *channelTab = getTabForChannel((IRCChannel *)output.getParam(0));
-                channelTab->appendText("<font color=\"" + m_textColor + "\">&lt;</font><font color=\"" + m_otherColor + "\">"+IRCOutput::toHTML(((IRCChannelPerson *)output.getParam(1))->person->nick())+"</font><font color=\"" + m_textColor + "\">&gt; " + output.htmlMessage()+"</font><br>");
+                channelTab->appendText("<font color=\"" + m_textColor + "\">&lt;</font><font color=\"" + m_otherColor + "\">"+IRCOutput::toHTML(((IRCChannelPerson *)output.getParam(1))->nick())+"</font><font color=\"" + m_textColor + "\">&gt; " + output.htmlMessage()+"</font><br>");
             }
             break;
         case OUTPUT_QUERYACTION:

@@ -1,4 +1,5 @@
 #include "ircchannel.h"
+#include "ircchannelperson.h"
 
 IRCChannel::IRCChannel(QString channelname) {
     m_hasPeople = FALSE;
@@ -38,7 +39,7 @@ QListIterator<IRCChannelPerson> IRCChannel::people()  {
 IRCChannelPerson *IRCChannel::getPerson(QString nickname) {
     QListIterator<IRCChannelPerson> it(m_people);
     for (; it.current(); ++it) {
-        if (it.current()->person->nick() == nickname) {
+        if (it.current()->nick() == nickname) {
             return it.current();
         }
     }

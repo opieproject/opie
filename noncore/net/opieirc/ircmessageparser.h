@@ -75,6 +75,7 @@ private:
     void parseLiteralKick(IRCMessage *message);
     void parseLiteralTopic(IRCMessage *message);
     void parseNumerical(IRCMessage *message, int position);
+    void parseCTCP(IRCMessage *message, int position);
     void parseNumericalServerName(IRCMessage *message);
     void parseNumericalServerFeatures(IRCMessage *message);
     void parseNumericalServerProtocol(IRCMessage *message);
@@ -88,6 +89,7 @@ private:
     void parseCTCPPing(IRCMessage *message);
     void parseCTCPVersion(IRCMessage *message);
     void parseCTCPAction(IRCMessage *message);
+    void parseCTCPDCC(IRCMessage *message);
 protected:
     IRCSession *m_session;
     /* Parser tables */

@@ -1,5 +1,9 @@
 #include <unistd.h>
 #include <string.h>
+
+#include <qstringlist.h>
+#include <qdatetime.h>
+
 #include "ircconnection.h"
 
 IRCConnection::IRCConnection(IRCServer *server) {
@@ -28,8 +32,23 @@ void IRCConnection::sendLine(QString line) {
     m_socket->writeBlock(line, line.length());
 }
 
-void IRCConnection::sendCTCP(QString nick, QString line) {
-    sendLine("NOTICE " + nick + " :\001"+line+"\001"); 
+void IRCConnection::sendCTCPReply(const QString &nickname, const QString &type, const QString &args) {
+    sendLine("NOTICE " + nickname + " :\001" + type + " " + args + "\001"); 
+}
+
+void IRCConnection::sendCTCPRequest(const QString &nickname, const QString &type, const QString &args) {
+    sendLine("PRIVMSG " + nickname + " :\001" + type + " " + args + "\001"); 
+}
+
+void IRCConnection::sendCTCPPing(const QString &nickname) {
+    QDateTime tm;
+    tm.setTime_t(0);
+    QString strtime = QString::number(tm.secsTo(QDateTime::currentDateTime()));
+    sendCTCPRequest(nickname, "PING", strtime);
+}
+
+void IRCConnection::whois(const QString &nickname) {
+    sendLine("WHOIS " + nickname);
 }
 
 /*
@@ -100,3 +119,4 @@ void IRCConnection::close() {
         disconnect();
     }
 }
+

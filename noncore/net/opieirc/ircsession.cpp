@@ -1,5 +1,7 @@
+
 #include "ircsession.h"
 #include "ircmessageparser.h"
+#include "ircchannelperson.h"
 #include "ircversion.h"
 
 IRCSession::IRCSession(IRCServer *server) {
@@ -137,7 +139,7 @@ void IRCSession::updateNickname(const QString &oldNickname, const QString &newNi
     for (;it.current(); ++it) {
         IRCChannelPerson *chanperson = it.current()->getPerson(oldNickname);
         it.current()->removePerson(chanperson);
-        chanperson->person->setNick(newNickname);
+        chanperson->setNick(newNickname);
         it.current()->addPerson(chanperson);
     }
 
@@ -193,4 +195,20 @@ void IRCSession::removePerson(IRCPerson *person) {
 
 void IRCSession::handleMessage(IRCMessage *message) {
     m_parser->parse(message);
+}
+
+void IRCSession::whois(const QString &nickname) {
+    m_connection->whois(nickname);
+}
+
+void IRCSession::sendCTCPPing(const QString &nickname) {
+    m_connection->sendCTCPPing(nickname);
+}
+
+void IRCSession::sendCTCPRequest(const QString &nickname, const QString &type, const QString &args) {
+    m_connection->sendCTCPRequest(nickname, type, args);
+}
+
+void IRCSession::sendCTCPReply(const QString &nickname, const QString &type, const QString &args) {
+    m_connection->sendCTCPReply(nickname, type, args);
 }

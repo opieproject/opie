@@ -7,6 +7,7 @@
 #include "ircservertab.h"
 #include "ircmessageparser.h"
 
+#include <opie2/odebug.h>
 QDict<QString> IRCChannelTab::m_queuedMessages (17);
 
 IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainWindow *mainWindow, QWidget *parent, const char *name, WFlags f) : IRCTab(parent, name, f) {
@@ -41,11 +42,13 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     QPEApplication::setStylusOperation(m_list->viewport(), QPEApplication::RightOnHold);
     connect(m_list, SIGNAL(mouseButtonPressed(int,QListBoxItem*,const QPoint&)), this, SLOT(mouseButtonPressed(int,QListBoxItem*,const QPoint&)));
     /* Construct the popup menu */
-    QPopupMenu *ctcpMenu = new QPopupMenu(m_list);
+    //QPopupMenu *ctcpMenu = new QPopupMenu(m_list);
     m_popup->insertItem(Resource::loadPixmap("opieirc/query"), tr("Query"), this, SLOT(popupQuery()));
-    ctcpMenu->insertItem(Resource::loadPixmap("opieirc/ping"), tr("Ping"), this, SLOT(popupPing()));
-    ctcpMenu->insertItem(Resource::loadPixmap("opieirc/version"), tr("Version"), this, SLOT(popupVersion()));
-    ctcpMenu->insertItem(Resource::loadPixmap("opieirc/whois"), tr("Whois"), this, SLOT(popupWhois()));
+    m_popup->insertSeparator();
+    m_popup->insertItem(Resource::loadPixmap("opieirc/ping"), tr("Ping"), this, SLOT(popupPing()));
+    m_popup->insertItem(Resource::loadPixmap("opieirc/version"), tr("Version"), this, SLOT(popupVersion()));
+    m_popup->insertItem(Resource::loadPixmap("opieirc/whois"), tr("Whois"), this, SLOT(popupWhois()));
+    //m_popup->insertItem(ctcpMenu, "CTCP");
     connect(m_mainWindow, SIGNAL(updateScroll()), this, SLOT(scrolling()));
     m_layout->add(hbox);
     hbox->show();
@@ -166,13 +169,18 @@ void IRCChannelTab::popupQuery() {
 }
 
 void IRCChannelTab::popupPing() {
-  //HAHA, no wonder these don't work
+    if(m_list->currentItem() != -1)
+        m_parentTab->session()->sendCTCPPing(m_list->text(m_list->currentItem()));
 }
 
 void IRCChannelTab::popupVersion() {
+    if(m_list->currentItem() != -1)
+        m_parentTab->session()->sendCTCPRequest(m_list->text(m_list->currentItem()), "VERSION", "");
 }
 
 void IRCChannelTab::popupWhois() {
+    if(m_list->currentItem() != -1)
+        m_parentTab->session()->whois(m_list->text(m_list->currentItem()));
 }
 
 QString IRCChannelTab::title() {

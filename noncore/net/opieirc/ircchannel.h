@@ -24,21 +24,10 @@
 #include <qobject.h>
 #include <qlist.h>
 #include <qstring.h>
+
 #include "ircperson.h"
 
-/* Flags which a person can have inside a channel */
-enum IRCChannelPersonFlag {
-    PERSON_FLAG_OP     = 0x01, 
-    PERSON_FLAG_VOICE  = 0x02, 
-    PERSON_FLAG_HALFOP = 0x04
-};
-
-/* This struct encapsulates a IRCPerson and adds
-   channel specific information */
-typedef struct IRCChannelPerson {
-    IRCPerson *person;
-    unsigned int flags;
-};
+class IRCChannelPerson;
 
 /* IRCChannel is the object-oriented representation
    of an IRC channel. It basically acts as a container

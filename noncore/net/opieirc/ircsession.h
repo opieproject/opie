@@ -65,6 +65,10 @@ public:
     void updateNickname(const QString &oldNickname, const QString &newNickname);
     void setValidUsermodes(const QString &modes);
     void setValidChannelmodes(const QString &modes);
+    void whois(const QString &nickname);
+    void sendCTCPPing(const QString &nickname);
+    void sendCTCPRequest(const QString &nickname, const QString &type, const QString &args);
+    void sendCTCPReply(const QString &nickname, const QString &type, const QString &args);
     IRCChannel *getChannel(QString channelname);
     IRCPerson  *getPerson(QString nickname);
 protected:

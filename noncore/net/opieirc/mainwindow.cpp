@@ -1,5 +1,8 @@
 #include <qmenubar.h>
 #include <qpe/resource.h>
+
+#include <opie2/odebug.h>
+
 #include <qwhatsthis.h>
 
 #include "mainwindow.h"
@@ -85,6 +88,7 @@ void MainWindow::killTab(IRCTab *tab, bool imediate) {
 void MainWindow::slotKillTabsLater() {
     for ( QListIterator<IRCTab> it(m_toDelete); it.current(); ++it ) {
         m_tabWidget->removePage( it.current() );
+        odebug << it.current() << oendl;
         m_tabs.remove( it.current() );
     }
 
