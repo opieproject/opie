@@ -65,16 +65,14 @@ namespace OpieTooth {
 
         QFrame *buttonFrame = new QFrame(Frame7, "");
 
-        StartButton = new QPushButton( buttonFrame, "StartButton" );
-        StartButton->setText( tr( "Start scan" ) );
+        StartStopButton = new QPushButton( buttonFrame, "StartButton" );
+        StartStopButton->setText( tr( "Start scan" ) );
 
-        StopButton = new QPushButton( buttonFrame, "StopButton" );
-        StopButton->setText( tr( "Cancel scan" ) );
 
         QHBoxLayout *buttonLayout = new QHBoxLayout(buttonFrame);
 
-        buttonLayout->addWidget(StartButton);
-	buttonLayout->addWidget(StopButton);
+        buttonLayout->addWidget(StartStopButton);
+//	buttonLayout->addWidget(StopButton);
 
         ListView1 = new QListView( privateLayoutWidget, "ListView1" );
 
@@ -88,22 +86,22 @@ namespace OpieTooth {
 
         localDevice = new Manager( "hci0" );
 
-        connect( StartButton, SIGNAL( clicked() ), this, SLOT( startSearch() ) );
-        connect( StopButton, SIGNAL( clicked() ),  this,  SLOT( stopSearch() ) );
+        connect( StartStopButton, SIGNAL( clicked() ), this, SLOT( startSearch() ) );
         connect( localDevice, SIGNAL( foundDevices( const QString& , RemoteDevice::ValueList ) ),
                  this, SLOT(fillList(const QString& , RemoteDevice::ValueList ) ) ) ;
         //     connect( this, SIGNAL( accept() ), this, SLOT( emitToManager() ));
         progressStat = 0;
+        m_search = false;
     }
 
 // hack, make cleaner later
     void ScanDialog::progressTimer() {
 
         progressStat++;
-            if (progressStat++ < 20) {
-                QTimer::singleShot( 2000, this, SLOT(progressTimer() ) );
-            }
+        if (progressStat++ < 20 && m_search ) {
+            QTimer::singleShot( 2000, this, SLOT(progressTimer() ) );
             progress->setProgress(progressStat++);
+        }
 
     }
 
@@ -114,6 +112,11 @@ namespace OpieTooth {
 
 
     void ScanDialog::startSearch() {
+        if ( m_search ) {
+            stopSearch();
+            return;
+        }
+        m_search = true;
         progress->setProgress(0);
         progressStat = 0;
 
@@ -126,16 +129,19 @@ namespace OpieTooth {
         progressTimer();
         // when finished, it emmite foundDevices()
         // checken ob initialisiert , qcop ans applet.
+        StartStopButton->setText( tr("Stop scan"));
+
         localDevice->searchDevices();
 
     }
 
     void ScanDialog::stopSearch() {
-
+        m_search = true;
     }
 
-    void ScanDialog::fillList(const QString& device, RemoteDevice::ValueList deviceList) {
-
+    void ScanDialog::fillList(const QString&, RemoteDevice::ValueList deviceList) {
+        progress->setProgress(0);
+        progressStat = 0;
         qDebug("fill List");
         QCheckListItem * deviceItem;
 
@@ -145,6 +151,8 @@ namespace OpieTooth {
             deviceItem = new QCheckListItem( ListView1, (*it).name(),  QCheckListItem::CheckBox );
             deviceItem->setText(1, (*it).mac() );
         }
+        m_search = false;
+        StartStopButton->setText(tr ("Start scan") );
     }
 
 /*
@@ -175,6 +183,7 @@ namespace OpieTooth {
  * Cleanup
  */
     ScanDialog::~ScanDialog() {
+        qWarning("delete scan dialog");
         delete localDevice;
     }
 

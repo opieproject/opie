@@ -66,7 +66,7 @@ namespace OpieTooth {
 
         QMap<int, QString>::Iterator it;
 
-        it = deviceIcons.find( serviceClass );
+        it = serviceIcons.find( serviceClass );
         iconName = it.data();
 
         if ( iconName.isEmpty() ) {

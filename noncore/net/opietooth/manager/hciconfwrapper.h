@@ -2,6 +2,7 @@
 #define HCICONFWRAPPER_H
 
 #include <qstring.h>
+#include <qstringlist.h>
 
 namespace OpieTooth {
 
@@ -10,6 +11,8 @@ namespace OpieTooth {
     public:
         HciConfWrapper( const QString &fileName );
         ~HciConfWrapper();
+        void load();
+        void save();
 
         void setPinHelper( const QString& app  );
         void setName( const QString& name );
@@ -23,6 +26,7 @@ namespace OpieTooth {
         void setValue(const QString &entry, const  QString &value );
 
         QString m_fileName;
+        QStringList m_file;
     };
 
 }

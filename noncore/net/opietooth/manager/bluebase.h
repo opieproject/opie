@@ -46,6 +46,7 @@ namespace OpieTooth {
         void startScan();
 
     private:
+        bool find( const RemoteDevice& device );
 	void readConfig();
 	void writeConfig();
         void readSavedDevices();

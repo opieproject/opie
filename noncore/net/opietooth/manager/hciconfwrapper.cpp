@@ -66,29 +66,14 @@ namespace OpieTooth {
 
     void HciConfWrapper::setValue(const QString &key, const  QString &value ) {
 
-        QFile f( m_fileName );
-        QFile f2( m_fileName );
-
-        if ( !f.open( IO_ReadOnly) ) {
-            qDebug("Could not open readonly");
+        if (m_file.isEmpty() ) // load first
             return;
-        }
 
-        if ( !f2.open( IO_ReadWrite ) ) {
-            qDebug("Just readonly - not enough");
-            return;
-        }
-
-        QStringList list;
-        qDebug(m_fileName);
-        QTextStream stream ( &f);
-        QTextStream outstream (&f2);
+        QStringList::Iterator it;
 
         QString str;
-        while ( !(str=stream.readLine()).isNull() ) {
-
-
-            //qDebug(str);
+        for (it = m_file.begin(); it != m_file.end(); ++it ) {
+            str = (*it);
             if( (str.contains(key)) > 0 ) {
                 qDebug("Found");
                 // still need to look if its commented out!!!
@@ -100,13 +85,56 @@ namespace OpieTooth {
                     str = str.replace( QRegExp( "\\s*"+key+"\\s+[^\\s][^;]*;" ),  key + " " + value + ";");
                 }
                 qDebug( str );
+                it = m_file.remove( it );
+                it = m_file.insert( it,  str );
+                //return; the regexp is too wide  -zecke // all set
             }
-            outstream << str << endl;
         }
 
-        f.close();
 
-        f2.flush();
-        f2.close();
     }
+
+    /**
+     * This loads the config file and stores it inside
+     * the m_file
+     */
+    void HciConfWrapper::load() {
+        qWarning("loaded");
+        m_file.clear();
+        QFile file( m_fileName );
+        if (!file.open( IO_ReadOnly ) ) {
+            qDebug("Could not open");
+            return;
+        }
+
+            /**
+             * readAll() into a QByteArray
+             * QStringList::split('\n', array )
+             * would this be faster? -zecke
+             */
+            QTextStream stream(&file );
+            QString tmp;
+            while ( !stream.atEnd() ) {
+                tmp = stream.readLine();
+                m_file.append( tmp );
+            }
+    }
+    void HciConfWrapper::save() {
+        qWarning("save");
+        if (m_file.isEmpty() ) // load first
+            return;
+
+        QFile file( m_fileName );
+        if ( !file.open(IO_WriteOnly ) ) {
+            qWarning("could not open %s",  m_fileName.latin1() );
+            return;
+        }
+
+        QTextStream stream(&file );
+        QStringList::Iterator it;
+        for ( it = m_file.begin(); it != m_file.end(); ++it ) {
+            stream << (*it) << endl;
+        }
+        qWarning("saved");
+    };
 }

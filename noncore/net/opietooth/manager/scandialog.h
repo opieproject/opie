@@ -46,13 +46,14 @@ class Device;
         ScanDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
         ~ScanDialog();
 
+    private: // make them private -zecke
         QFrame* Frame7;
         QProgressBar* progress;
-        QPushButton* StartButton;
-        QPushButton* StopButton;
+        QPushButton* StartStopButton;
+//        QPushButton* StopButton;
         QListView* ListView1;
 
-public slots:
+    public slots:
          void accept();
 
     protected:
@@ -65,6 +66,7 @@ public slots:
         void fillList(const QString& device, RemoteDevice::ValueList list);
 
     private:
+        bool m_search:1;
         void emitToManager();
         Manager *localDevice;
         int progressStat;
