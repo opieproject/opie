@@ -278,6 +278,8 @@ void ODevice::initButtons ( )
 	if ( d-> m_buttons )
 		return;
 
+	d-> m_qwsserver = qApp ? ( qApp-> type ( ) == QApplication::GuiServer ) : false;
+
 	// Simulation uses iPAQ 3660 device buttons
 
 	qDebug ( "init Buttons" );
@@ -762,14 +764,17 @@ void iPAQ::init ( )
 
 	m_power_timer = 0;
 
-	if ( d-> m_qwsserver )
-		QWSServer::setKeyboardFilter ( this );
 }
 
 void iPAQ::initButtons ( )
 {
 	if ( d-> m_buttons )
 		return;
+
+	d-> m_qwsserver = qApp ? ( qApp-> type ( ) == QApplication::GuiServer ) : false;
+
+	if ( d-> m_qwsserver )
+		QWSServer::setKeyboardFilter ( this );
 
 	d-> m_buttons = new QValueList <ODeviceButton>;
 
@@ -1148,6 +1153,8 @@ void Zaurus::initButtons ( )
 {
 	if ( d-> m_buttons )
 		return;
+
+	d-> m_qwsserver = qApp ? ( qApp-> type ( ) == QApplication::GuiServer ) : false;
 
 	d-> m_buttons = new QValueList <ODeviceButton>;
 
