@@ -11,7 +11,7 @@ SOURCES   = main.cpp \
             videowidget.cpp audiowidget.cpp playlistwidget.cpp om3u.cpp mediaplayer.cpp inputDialog.cpp \
             frame.cpp lib.cpp nullvideo.c xinevideowidget.cpp volumecontrol.cpp \
 	    playlistwidgetgui.cpp\
-            alphablend.c yuv2rgb.c yuv2rgb_arm.c yuv2rgb_arm4l.S \
+            alphablend.c yuv2rgb.c yuv2rgb_arm2.c yuv2rgb_arm4l.S \
 	    threadutil.cpp mediawidget.cpp playlistview.cpp playlistfileview.cpp \
 	    skin.cpp
 TARGET    = opieplayer2
