@@ -87,7 +87,6 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
     connect( restoreSource, SIGNAL( activated( int ) ), this, SLOT( sourceDirChanged( int ) ) );
     connect( addLocationButton, SIGNAL( clicked() ), this, SLOT( addLocation() ) );
     connect( removeLocationButton, SIGNAL( clicked() ), this, SLOT( removeLocation() ) );
-    connect( saveLocationsButton, SIGNAL( clicked() ), this, SLOT( saveLocations() ) );
     connect( selectLocationButton, SIGNAL( clicked() ), this, SLOT( selectLocation() ) );
 
     //add directorys for backing up
@@ -727,6 +726,7 @@ void BackupAndRestore::addLocation()
     {
         (void) new QListViewItem( locationList, locationEdit->text() );
         locationEdit->setText( "" );
+        saveLocations();
     }
 }
 
@@ -735,6 +735,7 @@ void BackupAndRestore::removeLocation()
     if ( locationList->selectedItem() )
     {
         delete( locationList->selectedItem() );
+        saveLocations();
     }
 }
 
