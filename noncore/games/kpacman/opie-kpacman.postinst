@@ -1,6 +1,7 @@
 #!/bin/sh
 
 if [ ! -f $HOME/Settings/kpacman.conf ]
+    exit 0
 then
     cp /opt/QtPalmtop/share/kpacman/kpacman.conf $HOME/Settings/
 fi

@@ -1,2 +1,6 @@
 #!/bin/sh
-pidof -s qpe >/dev/null && /opt/QtPalmtop/bin/qcop QPE/TaskBar "reloadInputMethods()"
+if pidof -s qpe >/dev/null; then
+  /opt/QtPalmtop/bin/qcop QPE/TaskBar "reloadApplets()"
+else
+  exit 0
+fi
