@@ -271,7 +271,7 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
     connect (kb, SIGNAL(keyPressed(FKey, ushort, ushort, bool)),
              this, SLOT(slotKeyPressed(FKey, ushort, ushort, bool)));
 
-    QGroupBox *dimentions = new QGroupBox(2, Qt::Horizontal, tr("Dimentions"), this);
+    QGroupBox *dimentions = new QGroupBox(2, Qt::Horizontal, tr("Dimensions"), this);
     QLabel *l = new QLabel("Rows", dimentions);
     m_rowBox = new QSpinBox(1, 15, 1, dimentions);
     connect (m_rowBox, SIGNAL(valueChanged(int)), this, SLOT(slotChangeRows(int)));
