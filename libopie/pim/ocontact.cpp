@@ -448,19 +448,15 @@ QString OContact::toRichText() const
 	text += "<b><h3><img src=\"addressbook/AddressBook\"> " + Qtopia::escapeString(value) + "</h3></b>";
     
     if ( !(value = jobTitle()).isEmpty() )
-	text += Qtopia::escapeString(value);
+	text += Qtopia::escapeString(value) + " ";
 
     comp = company();
     if ( !(value = department()).isEmpty() ) {
 	text += Qtopia::escapeString(value);
 	if ( comp )
-	    text += ", ";
-	else
-	    text += "<br>";
-    }
-    if ( !comp.isEmpty() )
-	text += Qtopia::escapeString(comp);
-
+		text += ", " + Qtopia::escapeString(comp);
+    }else if ( comp )
+	    text += "<br>" + Qtopia::escapeString(comp);
     text += "<br><hr>";
 
     // defailt email
