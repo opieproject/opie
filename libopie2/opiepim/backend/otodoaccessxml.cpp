@@ -87,7 +87,7 @@ bool OTodoAccessXML::load() {
     /*
      * UPDATE dict if you change anything!!!
      */
-    QAsciiDict<int> dict(21);
+    QAsciiDict<int> dict(26);
     dict.setAutoDelete( TRUE );
     dict.insert("Categories" ,     new int(OTodo::Category)         );
     dict.insert("Uid" ,            new int(OTodo::Uid)              );

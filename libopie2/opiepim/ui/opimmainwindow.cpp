@@ -44,6 +44,7 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
      */
     QDataStream stream(array, IO_ReadOnly);
     if ( cmd == "create()" ) {
+        raise();
         int uid = create();
         QCopEnvelope e(m_str, "created(int)" );
         e << uid;
@@ -58,10 +59,12 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         stream >> uid;
         beam( uid);
     }else if ( cmd == "show(int)" ) {
+        raise();
         int uid;
         stream >> uid;
         show( uid );
     }else if ( cmd == "edit(int)" ) {
+        raise();
         int uid;
         stream >> uid;
         edit( uid );
@@ -75,6 +78,7 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         add( *m_fallBack );
         delete m_fallBack;
     }else if ( cmd == "alarm(QDateTime,int)" ) {
+        raise();
         QDateTime dt; int uid;
         stream >> dt;
         stream >> uid;
