@@ -75,7 +75,8 @@ public:
 #if defined(HAVE_MMAP)
     void *fdm;
 #endif
-    unsigned char *data;
+    unsigned long fileLength;
+   unsigned char *data;
     unsigned long length;
     int eof;
 };
@@ -453,11 +454,16 @@ bool LibMadPlugin::open( const QString& path ) {
         return FALSE;
     }
 
-#if defined(HAVE_MMAP)
     struct stat stat;
     if (fstat(d->input.fd, &stat) == -1) {
-        //qDebug("error calling fstat"); return FALSE;
+    qDebug("error calling fstat"); return FALSE;
     }
+    if (S_ISREG(stat.st_mode) && stat.st_size > 0)
+  d->input.fileLength = stat.st_size;
+    else
+  d->input.fileLength = 0;
+    
+#if defined(HAVE_MMAP)
     if (S_ISREG(stat.st_mode) && stat.st_size > 0) {
         d->input.length = stat.st_size;
         d->input.fdm = map_file(d->input.fd, &d->input.length);
@@ -555,18 +561,46 @@ int LibMadPlugin::audioFrequency( int ) {
 
 
 int LibMadPlugin::audioSamples( int ) {
-    debugMsg( "LibMadPlugin::audioSamples" );
+   debugMsg( "LibMadPlugin::audioSamples" );
 
-  //   long t; short t1[5]; audioReadSamples( t1, 2, 1, t, 0 );
-//     mad_header_decode( (struct mad_header *)&d->frame.header, &d->stream );
-//     qDebug( "LibMadPlugin::audioSamples: %i*%i", d->frame.header.duration.seconds, d->frame.header.samplerate );
-//     return d->frame.header.duration.seconds * d->frame.header.samplerate;
+   long t; short t1[5]; audioReadSamples( t1, 2, 1, t, 0 );
+   mad_header_decode( (struct mad_header *)&d->frame.header, &d->stream );
+/*
+  qDebug( "LibMadPlugin::audioSamples: %i*%i", d->frame.header.duration.seconds,
+  d->frame.header.samplerate );
+  return d->frame.header.duration.seconds * d->frame.header.samplerate;
+*/
+   if ( d->frame.header.bitrate == 0 )
+      return 0;
+   int samples = (d->input.fileLength / (d->frame.header.bitrate/8)) * d->frame.header.samplerate;
 
-    return 10000000;
+   qDebug( "LibMadPlugin::audioSamples: %i * %i * 8 / %i", (int)d->input.fileLength,
+           (int)d->frame.header.samplerate, (int)d->frame.header.bitrate ); 
+   qDebug( "LibMadPlugin::audioSamples: %i", samples );
+
+   return samples;
+
+//    return 10000000;
 }
 
 
 bool LibMadPlugin::audioSetSample( long, int ) {
+    debugMsg( "LibMadPlugin::audioSetSample" );
+
+//     long totalSamples = audioSamples(0);
+//     if ( totalSamples <= 1 )
+//   return FALSE;
+
+//     // Seek to requested position
+//     qDebug( "seek pos: %i", (int)((double)pos * d->input.fileLength / totalSamples) );
+//     ::lseek( d->input.fd, (long)((double)pos * d->input.fileLength / totalSamples), SEEK_SET );
+//     mad_stream_sync(&d->stream);
+
+//     mad_stream_init(&d->stream);
+//     mad_frame_init(&d->frame);
+//     mad_synth_init(&d->synth);
+
+//     return TRUE;
     debugMsg( "LibMadPlugin::audioSetSample" );
     return FALSE;
 }
