@@ -135,6 +135,7 @@ public:
 
 	virtual bool hasLightSensor ( ) const;
 	virtual int readLightSensor ( );
+	virtual int lightSensorResolution ( ) const;
 
 	//virtual QValueList <int> keyList ( ) const;
 };

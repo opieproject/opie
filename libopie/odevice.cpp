@@ -86,6 +86,7 @@ public:
 
 	virtual bool hasLightSensor ( ) const;
 	virtual int readLightSensor ( );
+	virtual int lightSensorResolution ( ) const;
 	
 	//virtual QValueList <int> keyList ( ) const;
 	
@@ -369,6 +370,10 @@ int ODevice::readLightSensor ( )
 	return -1;
 }
 
+int ODevice::lightSensorResolution ( ) const
+{
+	return 0;
+}
 
 //QValueList <int> ODevice::keyList ( ) const
 //{
@@ -682,8 +687,7 @@ bool iPAQ::hasLightSensor ( ) const
 {
 	return true;
 }
-#include <errno.h>
-#include <string.h>
+
 int iPAQ::readLightSensor ( )
 {
 	int fd;
@@ -707,6 +711,10 @@ int iPAQ::readLightSensor ( )
 	return val;
 }
 
+int iPAQ::lightSensorResolution ( ) const
+{
+	return 256;
+}
 
 /**************************************************
  *
