@@ -438,253 +438,253 @@
     <name>SMTPconfigUI</name>
     <message>
         <source>Configure SMTP</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurēt SMTP</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieslēgums</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietot SSL</translation>
     </message>
     <message>
         <source>Use Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietot Pieslēgšanos</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieslēguma vārds</translation>
     </message>
     <message>
         <source>Name of the SMTP Server</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP server nosaukums</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Parole</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Ports</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveris</translation>
     </message>
     <message>
         <source>Port of the SMTP Server</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP servera ports</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietotājs</translation>
     </message>
 </context>
 <context>
     <name>SelectMailTypeUI</name>
     <message>
         <source>Select Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlēties Tipu</translation>
     </message>
     <message>
         <source>Select Account Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlēties Pieslēguma Tipu</translation>
     </message>
     <message>
         <source>IMAP</source>
-        <translation type="unfinished"></translation>
+        <translation>IMAP</translation>
     </message>
     <message>
         <source>POP3</source>
-        <translation type="unfinished"></translation>
+        <translation>POP3</translation>
     </message>
     <message>
         <source>SMTP</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialogUI</name>
     <message>
         <source>Settings Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādījumu Dialogs</translation>
     </message>
     <message>
         <source>View Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Skatīt Pastu</translation>
     </message>
     <message>
         <source>View mail as Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Skatīt pastu kā Html</translation>
     </message>
     <message>
         <source>Compose Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Veidot Pastu</translation>
     </message>
     <message>
         <source>Send mails later ( enqueue in outbox )</source>
-        <translation type="unfinished"></translation>
+        <translation>Sūtīt pastu vēlāk (ievietot izejošajos)</translation>
     </message>
     <message>
         <source>Taskbar Applet</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzdevumu Aplets</translation>
     </message>
     <message>
         <source>Disable Taskbar Applet</source>
-        <translation type="unfinished"></translation>
+        <translation>Atslēgt Uzdevumu Apletu</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>Check how often</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādīt cik bieži</translation>
     </message>
     <message>
         <source>Blink Led when new mails arrive</source>
-        <translation type="unfinished"></translation>
+        <translation>Mirgot kad pienāk jauns pasts</translation>
     </message>
     <message>
         <source>Play Sound when new mails arrive</source>
-        <translation type="unfinished"></translation>
+        <translation>Atskaņot Melodiju kad pienāk jauns pasts</translation>
     </message>
 </context>
 <context>
     <name>StatusWidgetUI</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Forma1</translation>
     </message>
     <message>
         <source>TextLabel1</source>
-        <translation type="unfinished"></translation>
+        <translation>TekstaLabelis1</translation>
     </message>
 </context>
 <context>
     <name>ViewMail</name>
     <message>
         <source>Show Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt Tekstu</translation>
     </message>
     <message>
         <source>Save Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt Pievienojumu</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Kam</translation>
     </message>
     <message>
         <source>Cc</source>
-        <translation type="unfinished"></translation>
+        <translation>Cc</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datums</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot reply yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Vēstules saturs nav vēl atlādēts, tamdēļ nav iespējams sagatavot atbildi.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot forward yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Vēstules saturs nav vēl atlādēts, tamdēļ nav iespējams pārsūtīt vēstuli.</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst Pastu</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Vai tiešām vēlaties dzēst šo pastu? &lt;br&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
     <name>ViewMailBase</name>
     <message>
         <source>E-Mail by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>E-Pasts no %1</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasts</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Atbildēt</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārsūtīt</translation>
     </message>
     <message>
         <source>Attachments</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienojumi</translation>
     </message>
     <message>
         <source>Show Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt Html</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst Pastu</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Apraksts</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Faila nosaukums</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Izmērs</translation>
     </message>
 </context>
 <context>
     <name>selectstoreui</name>
     <message>
         <source>Select target box</source>
-        <translation type="unfinished"></translation>
+        <translation>Iezīmējat mērķa kasti</translation>
     </message>
     <message>
         <source>&lt;b&gt;Store mail(s) to&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Saglabāt pastu uz&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mape:</translation>
     </message>
     <message>
         <source>Account:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieslēgums:</translation>
     </message>
     <message>
         <source>Create new folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Veidot jaunu folderi</translation>
     </message>
     <message>
         <source>Prefix will prepend, no need to enter it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Prefiks tiks pievienots, nav nepieciešams to ievadīt!</translation>
     </message>
     <message>
         <source>Move mail(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārvietot pastu</translation>
     </message>
 </context>
 </TS>
