@@ -1,6 +1,7 @@
 #include "about.h"
 #include "dialog.h"
 
+#include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
@@ -60,8 +61,7 @@ void AboutApplet::activated()
     if ( qApp->desktop()->width() == 240 )
     {
         d->logo->hide();
-        d->setFixedWidth( qApp->desktop()->width() - 5 );
-        d->setFixedHeight( qApp->desktop()->height() - 50 );
+        d->showMaximized();
     }
     d->exec();
 }
