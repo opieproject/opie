@@ -4,7 +4,7 @@ Priority: required
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Depends: libqpe1, qte-fonts, qpf-bitstream-vera
+Depends: libqpe1, qte-fonts, qpf-bitstream-vera-small
 Replaces: opie-base
 Description: Core opie files
 Version: $QPE_VERSION$EXTRAVERSION
