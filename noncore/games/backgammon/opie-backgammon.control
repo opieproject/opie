@@ -1,4 +1,4 @@
-Package: backgammon
+Package: opie-backgammon
 Files: plugins/application/libbackgammon.so* bin/backgammon apps/Games/backgammon.desktop pics/backgammon help/en/html/backgammon.html
 Priority: optional
 Section: opie/games
