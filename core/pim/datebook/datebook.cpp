@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.30 2004-02-07 23:52:32 ar Exp $
+** $Id: datebook.cpp,v 1.31 2004-02-18 22:11:25 zecke Exp $
 **
 **********************************************************************/
 
@@ -186,7 +186,6 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)), this, SLOT(receive(const QCString&, const QByteArray&)) );
 	channel = new QCopChannel( "QPE/Datebook", this );
 	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)), this, SLOT(receive(const QCString&, const QByteArray&)) );
-	qDebug("olle\n");
 #endif
 #endif
 
@@ -409,7 +408,6 @@ void DateBook::insertEvent( const Event &e )
 
 void DateBook::duplicateEvent( const Event &e )
 {
-	qWarning("Hmmm...");
     // Alot of code duplication, as this is almost like editEvent();
 	if (syncing) {
 		QMessageBox::warning( this, tr("Calendar"), tr( "Can not edit data, currently syncing") );
@@ -508,6 +506,7 @@ void DateBook::removeEvent( const Event &e )
     db->removeEvent( e );
     if ( views->visibleWidget() == dayView && dayView )
         dayView->redraw();
+
 }
 
 void DateBook::addEvent( const Event &e )
@@ -991,8 +990,7 @@ void DateBook::slotDoFind( const QString& txt, const QDate &dt,
     r.setCaseSensitive( caseSensitive );
 
 
-    static Event rev,
-	nonrev;
+    static Event rev, nonrev;
     if ( !inSearch ) {
 	rev.setStart( QDateTime(QDate(1960, 1, 1), QTime(0, 0, 0)) );
 	nonrev.setStart( rev.start() );
@@ -1010,21 +1008,18 @@ void DateBook::slotDoFind( const QString& txt, const QDate &dt,
     QDate start = dt;
     for ( it = repeats.begin(); it != repeats.end(); ++it ) {
 	if ( catComp( (*it).categories(), category ) ) {
-	    while ( nextOccurance( *it, start, next ) ) {
-		if ( next < dtEnd ) {
-		    if ( (*it).match( r ) && !(next <= rev.start()) ) {
-			rev = *it;
-			dtEnd = next;
-			rev.setStart( next );
-			candidtate = true;
-			wrapAround = true;
-			start = dt;
-			break;
-		    } else
-			start = next.date().addDays( 1 );
-		}
-	    }
-	}
+            if ( (*it).match( r ) ) {
+                if ( nextOccurance( *it, start, next ) ) {
+                    if ( next < dtEnd && !(next <= rev.start() ) ) {
+                        rev = *it;
+                        dtEnd = next;
+                        rev.setStart( next );
+                        candidtate = true;
+                        wrapAround = true;
+                    }
+                }
+            }
+        }
     }
 
     // now the for first non repeat...
@@ -1075,8 +1070,6 @@ Event DateBookDBHack::eventByUID(int uid) {
 	if ((*it).uid() == uid) return *it;
     }
 
-    qDebug("Event not found: uid=%d\n", uid);
     Event ev;
     return ev; // return at least
 }
-
