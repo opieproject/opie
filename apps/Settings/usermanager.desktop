@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=User Manager
+Exec=usermanager
+Icon=usermanager/usermanager.png
+Type=Setting
+Name=User Manager
