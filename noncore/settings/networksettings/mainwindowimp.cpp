@@ -240,6 +240,10 @@ void MainWindowImp::informationClicked(){
   } 
  
   Interface *i = interfaceItems[item];
+  if(!i->isAttached()){
+    QMessageBox::information(this, "Error","No information about\na disconnected interface.", QMessageBox::Ok);
+    return;
+  }
   if(i->getModuleOwner()){
     QTabWidget *tabWidget = NULL;
     QWidget *moduleInformation = i->getModuleOwner()->information(&tabWidget);
@@ -269,13 +273,14 @@ void MainWindowImp::getInterfaceList(){
   connect(processAll, SIGNAL(processExited(KProcess *)),
           this, SLOT(jobDone(KProcess *)));
   threads.insert(processAll, TEMP_ALL);
-  processAll->start(KShellProcess::NotifyOnExit);
 
   KShellProcess *process = new KShellProcess();
   *process << "/sbin/ifconfig" << " > " TEMP_UP;
   connect(process, SIGNAL(processExited(KProcess *)),
           this, SLOT(jobDone(KProcess *)));
   threads.insert(process, TEMP_UP);
+  
+  processAll->start(KShellProcess::NotifyOnExit);
   process->start(KShellProcess::NotifyOnExit);
 }
 
@@ -298,10 +303,6 @@ void MainWindowImp::jobDone(KProcess *process){
     if(space > 1){
       // We have found an interface
       QString interfaceName = line.mid(0, space);
-      if(!advancedUserMode){
-        if(interfaceName == "lo")
-		break;
-      }
       Interface *i;
       // See if we already have it
       if(interfaceNames.find(interfaceName) == interfaceNames.end()){
@@ -334,20 +335,24 @@ void MainWindowImp::jobDone(KProcess *process){
   }
   file.close();
   QFile::remove(fileName);
+  
   if(threads.count() == 0){
     Interfaces i;
     QStringList list = i.getInterfaceList();
     QMap<QString, Interface*>::Iterator it;
     for ( QStringList::Iterator ni = list.begin(); ni != list.end(); ++ni ) {
+      bool found = false;
       for( it = interfaceNames.begin(); it != interfaceNames.end(); ++it ){
-        if(it.key() == (*ni)){
-          Interface *i = new Interface(*ni, false);
-	  i->setAttached(false);
-	  i->setHardwareName(QString("Disconnected (%1)").arg(*ni));
-	  i->setInterfaceName(*ni);
-	  interfaceNames.insert(i->getInterfaceName(), i);
-	  updateInterface(i);
-	}
+	if(it.key() == (*ni))
+	  found = true;
+      }
+      if(!found){
+        Interface *i = new Interface(*ni, false);
+	i->setAttached(false);
+	i->setHardwareName(QString("Disconnected (%1)").arg(*ni));
+	i->setInterfaceName(*ni);
+	interfaceNames.insert(i->getInterfaceName(), i);
+	updateInterface(i);
       }
     }
   }
@@ -358,6 +363,11 @@ void MainWindowImp::jobDone(KProcess *process){
  * @param Interface* pointer to the interface that needs to be updated.
  */ 
 void MainWindowImp::updateInterface(Interface *i){
+  if(!advancedUserMode){
+    if(i->getInterfaceName() == "lo")
+      return;
+  }
+  
   QListViewItem *item = NULL;
   
   // Find the interface, making it if needed.
