@@ -59,10 +59,10 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     SpinDaysClip->setMaxValue( 200 );
     QWhatsThis::add( SpinDaysClip , tr( "How many days we should search forward" ) );
 
-    QHBox *box4 = new QHBox( this );
+//     QHBox *box4 = new QHBox( this );
 
-    QLabel* colorLabel = new QLabel( box4, "" );
-    colorLabel->setText( tr( "To activate settings: Restart application !" ) );
+//     QLabel* colorLabel = new QLabel( box4, "" );
+//     colorLabel->setText( tr( "To activate settings: Restart application !" ) );
 
     QHBox *box5 = new QHBox( this );
 
@@ -91,7 +91,7 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     QWhatsThis::add( SpinUrgentClip , tr( "The urgent color will be used if the birthday/anniversary is closer than given days !" ) );
 
 
-    layout->addWidget( box4 );
+//     layout->addWidget( box4 );
     layout->addWidget( box1 );
     layout->addWidget( box2 );
     layout->addWidget( box3 );

@@ -35,6 +35,7 @@ public:
     AddressBookPluginWidget( QWidget *parent,  const char *name );
     ~AddressBookPluginWidget();
 
+    void reinitialize();
 public slots:
     void refresh( const OContactAccess* db ); 
 

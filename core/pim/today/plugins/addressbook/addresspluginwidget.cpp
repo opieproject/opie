@@ -64,6 +64,10 @@ void AddressBookPluginWidget::refresh( const OContactAccess* )
 	getAddress();
 }
 
+void AddressBookPluginWidget::reinitialize() {
+	readConfig();
+	getAddress();
+}
 
 void AddressBookPluginWidget::readConfig() {
     Config cfg( "todayaddressplugin" );

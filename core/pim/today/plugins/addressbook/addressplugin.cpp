@@ -67,3 +67,8 @@ void AddressBookPlugin::refresh()
 {
     m_abWidget->refresh( NULL );
 }
+
+void AddressBookPlugin::reinitialize()
+{
+    m_abWidget->reinitialize();
+}
