@@ -36,6 +36,7 @@ public:
     ~MRUList();
     virtual QSize sizeHint() const;
     static void addTask( const AppLnk *appLnk );
+    static void removeTask(const QString &appName );
     bool quitOldApps();
 
 protected:

@@ -680,9 +680,14 @@ void Launcher::updateLink(const QString& link)
 void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
 {
     QDataStream stream( data, IO_ReadOnly );
-    if ( msg == "linkChanged(QString)" ) {
-  QString link;
-  stream >> link;
+    if ( msg == "closing(QString)" ){
+      QString app;
+      stream >> app;
+      qWarning("app closed %s", app.latin1()  );
+      MRUList::removeTask( app );
+    }else if ( msg == "linkChanged(QString)" ) {
+      QString link;
+      stream >> link;  
   if ( in_lnk_props ) {
       got_lnk_change = TRUE;
       lnk_change = link;

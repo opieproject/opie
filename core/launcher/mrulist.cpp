@@ -63,42 +63,34 @@ QSize MRUList::sizeHint() const
     return QSize( frameWidth(), 16 );
 }
 
+// thanks to John from Trolltech
+void MRUList::removeTask(const QString &appName )
+{
+  qWarning("MRULList::removeTask( %s)", appName.latin1() );
+  if(appName.isEmpty() )
+    return;
+  
+  if(!task ) // at least it should be called once before
+    return;
+  unsigned int i= 0;
+  for ( ; i < task->count(); i++ ) {
+    AppLnk *t = task->at(i);
+    if ( t->exec() == appName )
+      task->remove();
+  }
+  for (unsigned i = 0; i < MRUListWidgets->count(); i++ )
+    MRUListWidgets->at(i)->update();
+}
 
 void MRUList::addTask( const AppLnk *appLnk )
 {
+  qWarning("Add Task" );
     if ( !appLnk )
 	return;
     unsigned int i = 0;
 
     if ( !task )
 	return;
-    // ok we wan't to delete old icons from the taskbar
-    // get the window list and see which windows aren't there any more
-    QList<AppLnk> cleanUp;
-    cleanUp.setAutoDelete( TRUE );
-    const QList<QWSWindow> &list = qwsServer->clientWindows();
-    QWSWindow* w;
-    bool running = false; // to see what we should do
-    for ( ; i < task->count(); i++ ) {
-      AppLnk *t = task->at(i);
-      running = false;
-      for (QListIterator<QWSWindow> it(list); (w=it.current()); ++it) {
-	QString app = w->client()->identity();
-	if( app == t->exec( ) ){
-	  running = true;
-	  break;
-	} 
-      }
-      if(!running ) { // gues what we do now
-	cleanUp.append( t);
-      }
-    }
-    // no do a clean up of these old icons
-    AppLnk *lnk;
-    for( lnk = cleanUp.first(); lnk != 0; lnk = cleanUp.next() ){
-      task->remove( lnk );
-    }    
-    cleanUp.clear(); // should be deleted too
 
     i = 0;
     for ( ; i < task->count(); i++ ) {
