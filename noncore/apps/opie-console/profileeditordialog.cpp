@@ -4,9 +4,10 @@
 #include <qmessagebox.h>
 #include <qstringlist.h>
 #include <qcombobox.h>
+#include <qcheckbox.h>
 
 
-#include "profileeditorplugins.h"
+//#include "profileeditorplugins.h"
 #include "metafactory.h"
 #include "profileeditordialog.h"
 
@@ -78,6 +79,7 @@ void ProfileEditorDialog::initUI()
     QLabel *term = new QLabel(tr("Terminal"), tabprof );
     m_conCmb = new QComboBox( tabprof );
     m_termCmb = new QComboBox( tabprof );
+    m_autoConnect = new QCheckBox(tr("Auto connect after load"), tabprof);
 
     // layouting
     QVBoxLayout *vbox3 = new QVBoxLayout(tabprof, 2);
@@ -87,6 +89,7 @@ void ProfileEditorDialog::initUI()
     vbox3->add(m_conCmb );
     vbox3->add(term );
     vbox3->add(m_termCmb );
+    vbox3->add(m_autoConnect);
     vbox3->addStretch(1);
 
     tabWidget->addTab(tabprof, "", QObject::tr("Profile"));
@@ -112,6 +115,7 @@ void ProfileEditorDialog::initUI()
     slotTermActivated( m_fact->external(m_prof.terminalName() ) );
     setCurrent( m_fact->external(m_prof.ioLayerName() ), m_conCmb );
     setCurrent( m_fact->external(m_prof.terminalName() ), m_termCmb );
+    m_autoConnect->setChecked(m_prof.autoConnect());
 
 
     // signal and slots
@@ -141,6 +145,7 @@ void ProfileEditorDialog::accept()
 	m_prof.setName(profName());
 	m_prof.setIOLayer(      m_fact->internal(m_conCmb ->currentText()  ) );
         m_prof.setTerminalName( m_fact->internal(m_termCmb->currentText()  ) );
+    m_prof.setAutoConnect( m_autoConnect->isChecked() );
 
         if (m_con )
             m_con->save( m_prof );

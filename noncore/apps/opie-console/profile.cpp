@@ -9,7 +9,7 @@ Profile::Profile( const QString& name,
                   int background,
                   int foreground,
                   int terminal )
-    : m_name( name ), m_ioLayer( iolayerName ), m_term( termName),
+    : m_name( name ), m_ioLayer( iolayerName ), m_term( termName), m_autoConnect(0),
       m_back( background ), m_fore( foreground ), m_terminal( terminal )
 {}
 Profile::Profile( const Profile& prof )
@@ -24,6 +24,7 @@ bool Profile::operator==( const Profile& prof ) {
 Profile &Profile::operator=( const Profile& prof ) {
     m_name = prof.m_name;
     m_ioLayer = prof.m_ioLayer;
+    m_autoConnect = prof.m_autoConnect;
     m_back = prof.m_back;
     m_fore = prof.m_fore;
     m_terminal = prof.m_terminal;
@@ -46,6 +47,10 @@ QCString Profile::ioLayerName()const {
 QCString Profile::terminalName( )const {
     return m_term;
 }
+bool Profile::autoConnect()const {
+
+    return m_autoConnect;
+}
 int Profile::foreground()const {
     return m_fore;
 }
@@ -63,6 +68,10 @@ void Profile::setIOLayer( const QCString& name ) {
 }
 void Profile::setTerminalName( const QCString& str ) {
     m_term = str;
+}
+void Profile::setAutoConnect( const bool c) {
+
+    m_autoConnect = c;
 }
 void Profile::setBackground( int back ) {
     m_back = back;

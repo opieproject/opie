@@ -432,7 +432,8 @@ void MainWindow::create( const Profile& prof ) {
 
 
     // is io_layer wants direct connection, then autoconnect
-    if ( ( m_curSession->layer() )->supports()[0] == 1 ) {
+    //if ( ( m_curSession->layer() )->supports()[0] == 1 ) {
+    if (prof.autoConnect()) {
         slotConnect();
     }
 }

@@ -37,6 +37,7 @@ public:
     QString name()const;
     QCString ioLayerName()const;
     QCString terminalName()const;
+    bool autoConnect()const;
     int foreground()const;
     int background()const;
     int terminal()const;
@@ -57,6 +58,7 @@ public:
     void setName( const QString& );
     void setIOLayer( const QCString& );
     void setTerminalName( const QCString& );
+    void setAutoConnect( const bool );
     void setBackground( int back );
     void setForeground( int fore );
     void setTerminal( int term );
@@ -65,6 +67,7 @@ private:
     QMap<QString, QString> m_conf;
     QString m_name;
     QCString m_ioLayer, m_term;
+    bool m_autoConnect;
     int m_back;
     int m_fore;
     int m_terminal;

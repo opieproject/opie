@@ -12,6 +12,7 @@ class QTabWidget;
 class QHBoxLayout;
 class QLineEdit;
 class QComboBox;
+class QCheckBox;
 class QLabel;
 class ProfileDialogWidget;
 
@@ -43,6 +44,7 @@ private:
 
     QLineEdit *m_name;
     QComboBox *m_conCmb, *m_termCmb;
+    QCheckBox *m_autoConnect;
 
     QWidget *m_tabCon, *m_tabTerm;
     ProfileDialogWidget* m_con, *m_term;

@@ -38,6 +38,7 @@ void ProfileManager::load() {
         prof.setName( conf.readEntry("name") );
         prof.setIOLayer( conf.readEntry("iolayer").utf8() );
         prof.setTerminalName( conf.readEntry("term").utf8() );
+        prof.setAutoConnect( conf.readBoolEntry("autoConnect") );
         prof.setBackground( conf.readNumEntry("back") );
         prof.setForeground( conf.readNumEntry("fore") );
         prof.setTerminal( conf.readNumEntry("terminal") );
@@ -114,6 +115,7 @@ void ProfileManager::save(  ) {
 
         conf.writeEntry( "iolayer", str );
         conf.writeEntry( "term", QString::fromUtf8( (*it2).terminalName()  ) );
+        conf.writeEntry( "autoConnect", (*it2).autoConnect());
         conf.writeEntry( "back", (*it2).background() );
         conf.writeEntry( "fore", (*it2).foreground() );
         conf.writeEntry( "terminal", (*it2).terminal() );
