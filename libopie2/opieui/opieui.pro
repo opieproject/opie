@@ -6,40 +6,42 @@ HEADERS     = oclickablelabel.h      \
               ofontselector.h        \
               oimageeffect.h         \
               olistview.h            \
+              omessagebox.h          \
               opixmapeffect.h        \
               opopupmenu.h           \
               opixmapprovider.h      \
+              oresource.h            \
               oselector.h            \
+              oseparator.h           \
               otabinfo.h             \
               otabbar.h              \
               otabwidget.h           \
+              otaskbarapplet.h       \
+              oticker.h              \
               otimepicker.h          \
               oversatileview.h       \
               oversatileviewitem.h   \
-              omessagebox.h          \
-              oresource.h            \
-              otaskbarapplet.h       \
-              oseparator.h           \
-	      owait.h
+              owait.h
 
 SOURCES     = oclickablelabel.cpp    \
+              odialog.cpp            \
               ofontselector.cpp      \
               oimageeffect.cpp       \
               olistview.cpp          \
               opixmapeffect.cpp      \
               opopupmenu.cpp         \
               opixmapprovider.cpp    \
+              oresource.cpp          \
               oselector.cpp          \
+              oseparator.cpp         \
               otabbar.cpp            \
               otabwidget.cpp         \
+              otaskbarapplet.cpp     \
+              oticker.cpp            \
               otimepicker.cpp        \
               oversatileview.cpp     \
               oversatileviewitem.cpp \
-              odialog.cpp            \
-              oresource.cpp          \
-              otaskbarapplet.cpp     \
-              oseparator.cpp         \
-	      owait.cpp
+              owait.cpp
 
 include ( big-screen/big-screen.pro )
 include ( fileselector/fileselector.pro )
