@@ -5,6 +5,6 @@ Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Version: 1.8.2-$SUB_VERSION.2
-Depends: libqpe1, libopiecore2 (1.8.2)
+Depends: libqpe1, libopiecore2 (1.8.2), libsqlite0 | sqlite
 Provides: libopiedb2
 Description: Opie library 2.0 DB
