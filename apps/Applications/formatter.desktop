@@ -1,6 +1,6 @@
 [Desktop Entry]
 Exec=formatter
-Icon=formatter/devices
+Icon=formatter/Formatter
 Type=Application
 Name=Formatter
 Comment=A disk formatting utility
