@@ -1,6 +1,4 @@
 * Settings Class
-* tr() ;)
-* Dialog to display ipkg output live
 * parse "to install" and "to remove" from status
 * install local file dialog
 * qcop
@@ -11,5 +9,4 @@
 * allow reinstalling
 * different types of filters and searches
 	i.e. name, desc, files etc
-* mark packages from doclnk and ipkgfind installed if installed
-* show if different version is installed
+* display new list after update

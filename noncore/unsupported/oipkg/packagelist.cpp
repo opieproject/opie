@@ -8,12 +8,14 @@
 #include "debug.h"
 
 static QDict<Package>  *packageListAll;
+static int packageListAllRefCount = 0;
 
 PackageList::PackageList()
   : packageIter( packageList )
 {
   empty=true;
   if (!packageListAll) packageListAll = new QDict<Package>();
+  packageListAllRefCount++;
   sections << "All";
   subSections.insert("All", new QStringList() );
   QStringList *ss = subSections["All"];
@@ -31,6 +33,7 @@ PackageList::PackageList( PackageManagerSettings* s)
 
 PackageList::~PackageList()
 {
+	if (--packageListAllRefCount < 1 ) delete packageListAll;
 }
 
 /** Inserts a package into the list */
@@ -51,7 +54,7 @@ void PackageList::insertPackage( Package* pack )
 //       	p->setName( pack->name()+"["+p->version()+"]" );
 				if (!packver)
     		{
-    				packver = new QDict<Package>;    	
+    				packver = new QDict<Package>();    	
 		       	packver->insert( pack->name(), p );
           	p->setOtherVersions( packver );
         }
@@ -182,6 +185,7 @@ void PackageList::readFileEntries( QString filename, QString dest )
 	  		packEntry << line;
 			};
     }
+ 	delete statusStream;
   return;
 }
 

@@ -51,7 +51,7 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
 
  	cmd += " -force-defaults ";
 
-  if (installDialog->_force_depends)
+  if (installDialog && installDialog->_force_depends)
   {
 	  if (installDialog->_force_depends->isChecked())
   		 cmd += " -force-depends ";
@@ -87,6 +87,7 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
         if (lineStr!=lineStrOld)
 	        out(lineStr);
         lineStrOld = lineStr;
+			  qApp->processEvents();
      }
      pclose(fp);
   }
@@ -156,6 +157,8 @@ void PmIpkg::processLinkDir( QString file, QString dest )
   QString destFile = file;
 	file = dest+"/"+file;
  	if (file == dest) return;
+//  if (linkOpp==createLink) out( "\ncreating links\n" );
+//  if (linkOpp==removeLink) out( "\nremoving links\n" );  				
   QFileInfo fileInfo( file );
   if ( fileInfo.isDir() )
   {
@@ -265,18 +268,18 @@ void PmIpkg::remove()
       runwindow->progress->setProgress( 1 );
      	linkOpp = removeLink;
     	to_remove.at(i)->processed();
+		  if ( to_remove.at(i)->link() )
+      		processFileList( fileList, to_remove.at(i)->dest() );
      	to_remove.take( i );
           	
-      out("\n\n");
+      out("\n");
  		}else{
      	out(tr("Error while removing")+to_remove.at(i)->name()+"\n");
-    }
-	  if ( to_remove.at(i)->link() )
-    {
-					out( "\nremoving links\n" );
-  				out( "for package "+to_remove.at(i)->name()+" in "+to_remove.at(i)->dest()+"\n" );
+		  if ( to_remove.at(i)->link() )
       		processFileList( fileList, to_remove.at(i)->dest() );
     }
+	  if ( to_remove.at(i)->link() )
+      		processFileList( fileList, to_remove.at(i)->dest() );
 	  if ( to_remove.at(i)->link() )delete fileList;
   }
   to_remove.clear();
@@ -290,21 +293,21 @@ void PmIpkg::install()
 	out(tr("Installing")+"\n"+tr("please wait")+"\n"); 	
   for (uint i=0; i < to_install.count(); i++)
   {
+  	qDebug("install loop %i of %i installing %s",i,to_install.count(),to_install.at(i)->installName().latin1()); //pvDebug
 	  if ( runIpkg("install " + to_install.at(i)->installName(), to_install.at(i)->dest() ))
 		{    	
     	runwindow->progress->setProgress( to_install.at(i)->size().toInt() + runwindow->progress->progress());
      	to_install.at(i)->processed();
+	    linkOpp = createLink;
+		  if ( to_install.at(i)->link() )
+  	  	makeLinks( to_install.at(i) );
       to_install.take( i );
-      out("\n\n");
+      out("\n");
   	}else{
      	out(tr("Error while installing")+to_install.at(i)->name()+"\n");
-    }
-    linkOpp = createLink;
-	  if ( to_install.at(i)->link() )
-    {
-				out( "\ncreating links\n" );
-  			out( "for package "+to_install.at(i)->name()+" in "+to_install.at(i)->dest()+"\n" );
-				makeLinks( to_install.at(i) );
+	    linkOpp = createLink;
+		  if ( to_install.at(i)->link() )
+  	  	makeLinks( to_install.at(i) );
     }
    }
    out("\n");

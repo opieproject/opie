@@ -29,6 +29,7 @@ void PackageListRemote::query(QString s)
 void PackageListRemote::update()
 {
 	pvDebug(2,"PackageListRemote::update");	
+ 	if (searchString.isEmpty()) return;
  	int r=0;
   QString cmd = "wget";
   QString redirect = "/tmp/oipkg.query";

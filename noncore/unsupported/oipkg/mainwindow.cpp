@@ -92,7 +92,8 @@ void MainWindow::makeMenu()
   menuBar->insertItem( tr( "Settings" ), cfgMenu );
   //    menuBar->insertItem( tr( "Sections" ), sectMenu );
 
-  QLabel *spacer = new QLabel( "", toolBar );
+  QLabel *spacer;
+//  spacer = new QLabel( "", toolBar );
 //  spacer->setBackgroundColor( toolBar->backgroundColor() );
 //  toolBar->setStretchableWidget( spacer );
 
