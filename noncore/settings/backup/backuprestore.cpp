@@ -65,14 +65,23 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
 
     scanForApplicationSettings();
 
+    StorageInfo storage;
+
     backupLocations.insert( "Documents", QDir::homeDirPath() + "/Documents" );
-    if (StorageInfo::hasCf())
+    if ( storage.hasCf() )
     {
-        backupLocations.insert("CF", "/mnt/cf");
+        backupLocations.insert( "CF", storage.getCfPath() );
+        qDebug( "Cf Path: " + storage.getCfPath() );
     }
-    if (StorageInfo::hasSd() || StorageInfo::hasMmc())
+    if ( storage.hasSd() )
     {
-        backupLocations.insert("SD", "/mnt/card");
+        backupLocations.insert( "SD", storage.getSdPath() );
+        qDebug( " Sd Path: " + storage.getSdPath() );
+    }
+    if ( storage.hasMmc() )
+    {
+        backupLocations.insert( "MMC", storage.getMmcPath() );
+        qDebug( "Mmc Path: " + storage.getMmcPath() );
     }
 
     Config config("BackupAndRestore");
