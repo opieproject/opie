@@ -14,11 +14,14 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.13 2002-07-28 15:35:22 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.14 2002-07-28 17:41:52 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.13  2002-07-28 15:35:22  eilers
+ * Revision 1.1.2.14  2002-07-28 17:41:52  eilers
+ * oops..
+ *
+ * Revision 1.1.2.13  2002/07/28 15:35:22  eilers
  * Example-By-Query Search interface debugged. It is working now.. :)
  *
  * Revision 1.1.2.12  2002/07/24 07:01:58  eilers
@@ -413,7 +416,7 @@ namespace {
 				while( element ){
 					if( element->tagName() != QString::fromLatin1("Contacts") ){
 						// qWarning ("OContactDefBack::Searching for Tag \"Contacts\"! Found: %s",
-							  element->tagName().latin1());
+						//	  element->tagName().latin1());
 						element = element->nextChild();
 					} else {
 						element = element->firstChild();
@@ -424,7 +427,7 @@ namespace {
 				while( element ){
 					if( element->tagName() != QString::fromLatin1("Contact") ){
 						//qWarning ("OContactDefBack::Searching for Tag \"Contact\"! Found: %s",
-							  element->tagName().latin1());
+						//	  element->tagName().latin1());
 						element = element->nextChild();
 						continue;
 					}
