@@ -31,11 +31,11 @@
     </message>
     <message>
         <source>Alarm Is On</source>
-        <translation>Alarm jest wlaczony</translation>
+        <translation>Alarm jest włączony</translation>
     </message>
     <message>
         <source>Alarm Is Off</source>
-        <translation>Alarm jest wylaczony</translation>
+        <translation>Alarm jest wyłączony</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -43,11 +43,11 @@
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation>Ustaw date i godzine.</translation>
+        <translation>Ustaw datę i godzinę.</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
-        <translation>Zegar: Alarm zostal przegapiony.</translation>
+        <translation>Zegar: Alarm został przeoczony.</translation>
     </message>
     <message>
         <source>Alarm set: %1</source>
@@ -79,7 +79,7 @@
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation>Opoznienie drzemki
+        <translation>Opóźnienie drzemki
 (minuty)</translation>
     </message>
     <message>
