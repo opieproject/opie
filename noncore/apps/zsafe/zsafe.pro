@@ -15,3 +15,17 @@ TARGET       = zsafe
 
 include ( $(OPIEDIR)/include.pro )
 
+QWS {
+message( "Configuring for multi-threaded Qt..." )
+
+}
+
+win32 {
+    TEMPLATE = app
+    DEFINES += DESKTOP QT_DLL QT_THREAD_SUPPORT
+    SOURCES += extra/qsettings.cpp
+    HEADERS += extra/qsettings.h
+    INCLUDEPATH	+= extra
+    DEPENDPATH += extra
+    RC_FILE = zsafe.rc
+}

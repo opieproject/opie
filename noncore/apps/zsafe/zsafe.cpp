@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.23 2004-07-14 08:38:10 llornkcor Exp $
+** $Id: zsafe.cpp,v 1.24 2004-07-21 20:44:12 llornkcor Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -374,7 +374,7 @@ static const char* const general_data[] = {
 #endif
 #else
        conf = new Config (cfgFile, Config::File);
-       conf->setGroup ("zsafe");
+       conf->setGroup ("zsafePrefs");
 #endif
     }
   }
@@ -492,7 +492,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
 #endif
    setCaption( tr( "ZSafe" ) );
    QString zsafeAppDirPath = QDir::homeDirPath() + "/Documents/application/zsafe";
-   QString filename = conf->readEntry(APP_KEY+"document");
+   filename = conf->readEntry(APP_KEY+"document");
    if ( !QFileInfo(filename).exists() || !QDir(zsafeAppDirPath).exists() )
    {
     // check if the directory application exists, if not
@@ -762,8 +762,8 @@ void ZSafe::deletePwd()
 
 void ZSafe::editPwd()
 {
-    if (!selectedItem)
-       return;
+     if (!selectedItem)
+        return;
     if (!isCategory(selectedItem))
     {
        // open the 'New Entry' dialog
@@ -805,7 +805,7 @@ void ZSafe::editPwd()
 #endif
 #ifdef DESKTOP
        int result = dialog->exec();
-//       result = QDialog::Accepted;
+       result = QDialog::Accepted;
 #endif
        if (result == Accepted)
        {
@@ -836,16 +836,16 @@ void ZSafe::editPwd()
 
 void ZSafe::newPwd()
 {
-    if (!selectedItem)
-       return;
-
+     if (!selectedItem)
+        return;
+		qWarning("new item");
     if (!isCategory(selectedItem))
          selectedItem = selectedItem->parent();
 
     if (isCategory(selectedItem))
     {
        QString cat = selectedItem->text(0);
-
+			 qWarning(cat);
        // open the 'New Entry' dialog
        NewDialog *dialog = new NewDialog(this, "new_entry", TRUE);
 #ifdef Q_WS_WIN
@@ -874,7 +874,7 @@ retype:
 #endif
 #ifdef DESKTOP
        int result = dialog->exec();
-//       result = QDialog::Accepted;
+       result = QDialog::Accepted;
 #endif
 
        if (result == Accepted)

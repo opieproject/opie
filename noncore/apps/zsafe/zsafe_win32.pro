@@ -1,7 +1,7 @@
 TEMPLATE	= app
 #CONFIG		= qt warn_on thread debug
 CONFIG		= qt warn_on thread release
-DEFINES		= DESKTOP WIN32 
+DEFINES		= DESKTOP 
 DEFINES += QT_DLL QT_THREAD_SUPPORT
 HEADERS         = zsafe.h krc2.h category.h categorylist.h zlistview.h qsettings.h shadedlistitem.h
 SOURCES         = main.cpp zsafe.cpp krc2.cpp category.cpp \

@@ -1,7 +1,7 @@
 /*
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: main.cpp,v 1.6 2004-07-10 02:46:51 llornkcor Exp $
+** $Id: main.cpp,v 1.7 2004-07-21 20:44:12 llornkcor Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 */
@@ -49,9 +49,9 @@ void resume (int signum)
 
 int main( int argc, char ** argv )
 {
-#ifndef WIN32
+#ifndef Q_WS_WIN
     // install signal handler
-    signal (SIGSTOP, suspend);
+//    signal (SIGSTOP, suspend);
 #endif
 
 #ifdef DESKTOP
@@ -64,7 +64,7 @@ int main( int argc, char ** argv )
 #ifdef DESKTOP
     if (argc >= 3)
     {
-#ifndef WIN32
+#ifndef Q_WS_WIN
        DeskW = atoi(argv[1]);
        DeskH = atoi(argv[2]);
 #else
@@ -84,8 +84,9 @@ int main( int argc, char ** argv )
     DeskW = a.desktop()->width();
     DeskH = a.desktop()->height();
 
+#ifndef NO_OPIE
     owarn << "Width: " << DeskW << " Height: " << DeskH << oendl;
-
+#endif
 #ifdef JPATCH_HDE
     // nothings
 #else
@@ -93,24 +94,28 @@ int main( int argc, char ** argv )
     {
        DeskW -= 20;
        DeskH += 25;
+#ifndef NO_OPIE
        owarn << "Changed width: " << DeskW << " Height: " << DeskH << oendl;
+#endif
     }
 #endif
 
 #endif
 
-    ZSafe mw;
-    zs = &mw;
-
-#ifndef WIN32
-    signal (SIGCONT, resume);
+    ZSafe *mw = new ZSafe( 0, 0, QWidget::WDestructiveClose );
+//    ZSafe mw;
+//    zs = &mw;
+    zs = mw;
+		
+#ifndef Q_WS_WIN
+//    signal (SIGCONT, resume);
 #endif
 #ifdef DESKTOP
-    a.setMainWidget(&mw);
-    mw.show();
+    a.setMainWidget(mw);
+    mw->show();
 #else
     // a.showMainWidget( &mw );
-    a.showMainDocumentWidget( &mw );
+    a.showMainDocumentWidget( mw );
 #endif
     int ret = a.exec();
 
