@@ -222,7 +222,7 @@ Open .desktop file or linked file?</source>
     </message>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Warning</source>
@@ -242,6 +242,10 @@ Open .desktop file or linked file?</source>
     </message>
     <message>
         <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Permissions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

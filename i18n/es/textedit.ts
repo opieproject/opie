@@ -186,7 +186,7 @@ el fichero actual del disco?
     <name>filePermissions</name>
     <message>
         <source>filePermissions</source>
-        <translation>Permisos fichero</translation>
+        <translation type="obsolete">Permisos fichero</translation>
     </message>
     <message>
         <source>Set File Permissions</source>
@@ -247,6 +247,10 @@ el fichero actual del disco?
     <message>
         <source>Error setting mode</source>
         <translation>Error fijando modo</translation>
+    </message>
+    <message>
+        <source>File Permissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

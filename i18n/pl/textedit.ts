@@ -184,7 +184,7 @@ Open .desktop file or linked file?</source>
     <name>filePermissions</name>
     <message>
         <source>filePermissions</source>
-        <translation>UprawnieniaPlikow</translation>
+        <translation type="obsolete">UprawnieniaPlikow</translation>
     </message>
     <message>
         <source>Set File Permissions</source>
@@ -245,6 +245,10 @@ Open .desktop file or linked file?</source>
     <message>
         <source>Error setting mode</source>
         <translation>Blad ustawienia trybu</translation>
+    </message>
+    <message>
+        <source>File Permissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

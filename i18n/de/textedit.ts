@@ -226,7 +226,7 @@ This is irreversable!!</source>
     </message>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Warning</source>
@@ -247,6 +247,10 @@ This is irreversable!!</source>
     <message>
         <source>Error setting mode</source>
         <translation>Fehler beim Setzen des Modus</translation>
+    </message>
+    <message>
+        <source>File Permissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

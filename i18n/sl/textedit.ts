@@ -227,7 +227,7 @@ Odprem .desktop datoteko ali povezano datoteko?</translation>
     </message>
     <message>
         <source>filePermissions</source>
-        <translation>Pravicedatoteke</translation>
+        <translation type="obsolete">Pravicedatoteke</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -248,6 +248,10 @@ Odprem .desktop datoteko ali povezano datoteko?</translation>
     <message>
         <source>Error setting mode</source>
         <translation>Napaka pri nastavitvi načina</translation>
+    </message>
+    <message>
+        <source>File Permissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

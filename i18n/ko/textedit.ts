@@ -228,7 +228,7 @@ Open .desktop file or linked file?</source>
     </message>
     <message>
         <source>filePermissions</source>
-        <translation>파일권한</translation>
+        <translation type="obsolete">파일권한</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -249,6 +249,10 @@ Open .desktop file or linked file?</source>
     <message>
         <source>Error setting mode</source>
         <translation>모드 설정하는데 에러 발생</translation>
+    </message>
+    <message>
+        <source>File Permissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

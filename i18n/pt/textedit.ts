@@ -182,7 +182,7 @@ This is irreversable!!</source>
     <name>filePermissions</name>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Set File Permissions</source>
@@ -242,6 +242,10 @@ This is irreversable!!</source>
     </message>
     <message>
         <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Permissions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
