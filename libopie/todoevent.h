@@ -8,19 +8,46 @@
 class ToDoEvent {
     friend class ToDoDB;
  public:
+    // priorities from Very low to very high
     enum Priority { VERYHIGH=1, HIGH, NORMAL, LOW, VERYLOW };
+    /* Constructs a new ToDoEvent
+       @param completed Is the TodoEvent completed
+       @param priority What is the priority of this ToDoEvent
+       @param category Which category does it belong( uid )
+       @param description What is this ToDoEvent about
+       @param hasDate Does this Event got a deadline
+       @param date what is the deadline?
+       @param uid what is the UUID of this Event
+    **/
     ToDoEvent( bool completed = false, int priority = NORMAL, 
 	       const QStringList &category = QStringList(), 
 	       const QString &description = QString::null , 
 	       bool hasDate = false, QDate date = QDate::currentDate(), int uid = -1 );
+    /* Copy c'tor
+
+    **/
     ToDoEvent(const ToDoEvent & );
+
+    /*
+       Is this event completed?
+    **/
     bool isCompleted() const;
+
+    /*
+       Does this Event have a deadline
+    **/
     bool hasDate() const;
+
+    /*
+      What is the priority?
+    **/
     int priority()const ;
     QStringList allCategories()const;
     QArray<int> categories() const;
     QDate date()const;
     QString description()const;
+
+    QString richText() const;
 
     int uid()const { return m_uid;};
     void setCompleted(bool completed );

@@ -1,8 +1,16 @@
 
 #include <opie/todoevent.h>
+
+
 #include <qpe/palmtopuidgen.h>
 #include <qpe/stringutil.h>
 #include <qpe/palmtoprecord.h>
+
+#include <qpe/stringutil.h>
+#include <qpe/categories.h>
+#include <qpe/categoryselect.h>
+
+#include <qobject.h>
 
 ToDoEvent::ToDoEvent(const ToDoEvent &event )
 {
@@ -111,6 +119,44 @@ bool ToDoEvent::isOverdue( )
 	return QDate::currentDate() > m_date;
     return false;
 }
+
+/*!
+  Returns a richt text string
+*/
+QString ToDoEvent::richText() const
+{
+  QString text;
+  QStringList catlist;
+  
+  // Description of the todo
+  if ( !description().isEmpty() ){
+    text += "<b>" + QObject::tr( "Description:" ) + "</b><br>";
+    text += Qtopia::escapeString(description() ) + "<br>";
+  }
+  text += "<b>" + QObject::tr( "Priority:") +" </b>"
+    +  QString::number( priority() ) + "<br>";
+  if (hasDate() ){
+    text += "<b>" + QObject::tr( "Deadline:") + " </b>";
+    text += date().toString();
+    text += "<br>";
+  }
+  
+  // Open database of all categories and get the list of
+  // the categories this todoevent belongs to.
+  // Then print them...
+  // I am not sure whether there is no better way doing this !?
+  Categories catdb;
+  catdb.load( categoryFileName() );
+  catlist = allCategories();
+  
+  text += "<b>" + QObject::tr( "Category:") + "</b> ";
+  for ( QStringList::Iterator it = catlist.begin(); it != catlist.end(); ++it ) {
+    text += catdb.label ("todo", (*it).toInt());
+  }
+  text += "<br>";
+  return text;
+}
+
 bool ToDoEvent::operator<( const ToDoEvent &toDoEvent )const{
     if( !hasDate() && !toDoEvent.hasDate() ) return true;
     if( !hasDate() && toDoEvent.hasDate() ) return true;
