@@ -460,7 +460,7 @@ void CameraMainWindow::performCapture( const QString& format )
 
 void CameraMainWindow::startVideoCapture()
 {
-    //ODevice::inst()->touchSound();
+    ODevice::inst()->touchSound();
     ODevice::inst()->setLedState( Led_Mail, Led_BlinkSlow );
 
     _capturefd = ::open( CAPTUREFILE, O_WRONLY | O_CREAT | O_TRUNC );
@@ -502,7 +502,7 @@ void CameraMainWindow::timerEvent( QTimerEvent* )
 void CameraMainWindow::stopVideoCapture()
 {
     killTimers();
-    //ODevice::inst()->touchSound();
+    ODevice::inst()->touchSound();
     ODevice::inst()->setLedState( Led_Mail, Led_Off );
     _capturing = false;
     updateCaption();
