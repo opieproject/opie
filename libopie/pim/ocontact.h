@@ -109,9 +109,9 @@ public:
     bool match( const QString &regexp ) const;
     bool match( const QRegExp &regexp ) const;
 
-//     // custom
-//     void setCustomField( const QString &key, const QString &v )
-//         { replace(Custom- + key, v ); }
+     // custom
+     void setCustomField( const QString &key, const QString &v )
+         { replaceCustom ( key, v ); }
 
     // name
     QString fullName() const;
@@ -188,8 +188,8 @@ public:
     QStringList groupList() const;
 
 //     // custom
-//     const QString &customField( const QString &key )
-//         { return find( Custom- + key ); }
+     const QString &customField( const QString &key )
+         { return QString ( findCustom( key ) ); }
 
 
     QString toRichText() const;
@@ -219,6 +219,8 @@ private:
     void insert( int key, const QString &value );
     void replace( int key, const QString &value );
     QString find( int key ) const;
+    void replaceCustom( const QString & key, const QString &value );
+    QString findCustom( const QString & key ) const;
     static QStringList fields();
 
     void save( QString &buf ) const;
@@ -230,6 +232,7 @@ private:
 			    const QString &country ) const;
 
     QMap<int, QString> mMap;
+    QMap<QString, QString> eMap;
     ContactPrivate *d;
 };
 

@@ -52,7 +52,7 @@
   Creates a new, empty contact.
 */
 OContact::OContact()
-    : OPimRecord(), mMap(), d( 0 )
+  : OPimRecord(), mMap(), d( 0 ), eMap()
 {
 }
 
@@ -635,9 +635,29 @@ void OContact::replace( int key, const QString & v )
 /*!
   \internal
 */
+void OContact::replaceCustom( const QString & key, const QString & v )
+{
+    QString value = v.stripWhiteSpace();
+    if ( value.isEmpty() )
+	eMap.remove( key );
+    else
+	eMap.replace( key, value );
+}
+
+/*!
+  \internal
+*/
 QString OContact::find( int key ) const
 {
     return mMap[key];
+}
+
+/*!
+  \internal
+*/
+QString OContact::findCustom( const QString & key ) const
+{
+    return eMap[key];
 }
 
 /*!
@@ -818,7 +838,18 @@ void OContact::save( QString &buf ) const
 	    buf += "=\"" + Qtopia::escapeString(value) + "\" ";
 	}
     }
-    buf += customToXml();
+    // buf += customToXml();
+    for ( QMap<QString, QString>::ConstIterator it = eMap.begin();
+	  it != eMap.end(); ++it ) {
+	const QString &value = it.data();
+	const QString &key = it.key();
+	if ( !value.isEmpty() ) {
+	  qDebug("save custom fields %s -> %s",key.latin1(),value.latin1());
+	    buf += key;
+	    buf += "=\"" + Qtopia::escapeString(value) + "\" ";
+	}
+      
+    }
     if ( categories().count() > 0 )
 	buf += "Categories=\"" + idsToString( categories() ) + "\" ";
     buf += "Uid=\"" + QString::number( uid() ) + "\" ";
@@ -951,9 +982,8 @@ QString OContact::type() const
 // Definition is missing ! (se)
 QMap<QString,QString> OContact::toExtraMap() const
 {
-	qWarning ("Function not implemented: OContact::toExtraMap()");
-	QMap <QString,QString> useless;
-	return useless;
+	QMap <QString,QString> map = eMap;
+	return map;
 }
 
 class QString OContact::recordField( int pos ) const
