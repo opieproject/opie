@@ -118,6 +118,8 @@ CONFIG_ODICT	noncore/apps/odict	odict.pro
 CONFIG_OIPKG	noncore/unsupported/oipkg	oipkg.pro
 CONFIG_OPIEALARM	core/opiealarm
 CONFIG_OPIE-CONSOLE	noncore/apps/opie-console	opie-console.pro
+CONFIG_OPIE_EYE	noncore/graphics/opie-eye	phunk_view.pro
+CONFIG_OPIE_EYE_SLAVE	noncore/graphics/opie-eye/slave	slave.pro
 CONFIG_OPIEFTP	noncore/net/opieftp	opieftp.pro
 CONFIG_OPIEIRC	noncore/net/opieirc	opieirc.pro
 CONFIG_OPIE-LOGIN	core/opie-login	opie-login.pro
