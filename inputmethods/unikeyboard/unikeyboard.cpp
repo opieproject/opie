@@ -21,7 +21,7 @@
 #include "unikeyboard.h"
 
 #include <qpe/fontmanager.h>
-
+#include <qpe/config.h>
 #include <qpainter.h>
 #include <qfontmetrics.h>
 #include <qcombobox.h>
@@ -135,7 +135,15 @@ UniScrollview::UniScrollview(QWidget* parent, const char* name, int f) :
     QScrollView(parent, name, f)
 {
     //    smallFont.setRawName( "-adobe-courier-medium-r-normal--10-100-75-75-m-60-iso8859-1" ); //######
-    smallFont = QFont( "Helvetica", 8 );
+
+    // get the default font
+    Config *config = new Config( "qpe" );
+    config->setGroup( "Appearance" );
+    QString familyStr = config->readEntry( "FontFamily", "Helvetica" );
+    int fontSize = config->readNumEntry( "FontSize", 8 ) - 2;
+    delete config;
+
+    smallFont = QFont( familyStr, fontSize );
     QFontMetrics sfm( smallFont );
     xoff = sfm.width( "AAA" );
     setFont( FontManager::unicodeFont( FontManager::Fixed ) );

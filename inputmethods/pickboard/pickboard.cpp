@@ -22,7 +22,7 @@
 #include "pickboardcfg.h"
 
 #include <qpe/global.h>
-
+#include <qpe/config.h>
 #include <qpainter.h>
 #include <qlist.h>
 #include <qbitmap.h>
@@ -92,10 +92,15 @@ Pickboard::Pickboard(QWidget* parent, const char* name, WFlags f) :
 {
     (new QHBoxLayout(this))->setAutoAdd(TRUE);
     d = new PickboardPrivate(this);
-// under Win32 we may not have smallsmooth font
-#ifndef Q_OS_WIN32
-    setFont( QFont( "smallsmooth", 9 ) );
-#endif
+
+    // get the default font
+    Config *config = new Config( "qpe" );
+    config->setGroup( "Appearance" );
+    QString familyStr = config->readEntry( "FontFamily", "smallsmooth" );
+    int fontSize = config->readNumEntry( "FontSize", 10 );
+    delete config;
+
+    setFont( QFont( familyStr, fontSize ) );
 }
 
 Pickboard::~Pickboard()

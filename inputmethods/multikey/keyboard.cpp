@@ -66,6 +66,7 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     Config *config = new Config( "qpe" );
     config->setGroup( "Appearance" );
     QString familyStr = config->readEntry( "FontFamily", "smallsmooth" );
+    int fontSize = config->readNumEntry( "FontSize", 10 );
     delete config;
 
     config = new Config("multikey");
@@ -74,11 +75,10 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     useRepeat = config->readBoolEntry ("useRepeat", 1);
     delete config;
 
-
-    setFont( QFont( familyStr, 10 ) );
+    setFont( QFont( familyStr, fontSize ) );
 
     picks = new KeyboardPicks( this );
-    picks->setFont( QFont( familyStr, 10 ) );
+    picks->setFont( QFont( familyStr, fontSize ) );
     picks->initialise();
     if (usePicks) {
 

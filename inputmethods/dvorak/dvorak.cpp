@@ -21,7 +21,7 @@
 #include "dvorak.h"
 
 #include <qpe/global.h>
-
+#include <qpe/config.h>
 #include <qwindowsystem_qws.h>
 #include <qpainter.h>
 #include <qfontmetrics.h>
@@ -43,9 +43,16 @@ Keyboard::Keyboard(QWidget* parent, const char* name, WFlags f) :
 //    setPalette(QPalette(QColor(200,200,200))); // Gray
     setPalette(QPalette(QColor(220,220,220))); // Gray
 
+    // get the default font
+    Config *config = new Config( "qpe" );
+    config->setGroup( "Appearance" );
+    QString familyStr = config->readEntry( "FontFamily", "smallsmooth" );
+    int fontSize = config->readNumEntry( "FontSize", 10 );
+    delete config;
+
     picks = new KeyboardPicks( this );
-    picks->setFont( QFont( "smallsmooth", 9 ) );
-    setFont( QFont( "smallsmooth", 9 ) );
+    picks->setFont( QFont( familyStr, fontSize ) );
+    setFont( QFont( familyStr, fontSize ) );
     picks->initialise();
     QObject::connect( picks, SIGNAL(key(ushort,ushort,ushort,bool,bool) ),
             this, SIGNAL(key(ushort,ushort,ushort,bool,bool)) );
