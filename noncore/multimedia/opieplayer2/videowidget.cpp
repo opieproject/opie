@@ -476,15 +476,6 @@ void VideoWidget::keyReleaseEvent( QKeyEvent *e) {
           mediaPlayerState->setPrev();
           break;
       case Key_Escape:
-#if defined(QT_QWS_IPAQ)
-          if( mediaPlayerState->isPaused ) {
-              setToggleButton( i, FALSE );
-              mediaPlayerState->setPaused( FALSE );
-          } else if( !mediaPlayerState->isPaused ) {
-              setToggleButton( i, TRUE );
-              mediaPlayerState->setPaused( TRUE );
-          }
-#endif
           break;
 
     };
