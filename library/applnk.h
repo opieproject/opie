@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -47,7 +47,6 @@ public:
     QString name() const { return mName; }
     const QPixmap& pixmap() const;
     const QPixmap& bigPixmap() const;
-    QString icon() const { return mIconFile; }
     virtual QString exec() const { return mExec; }
     QString type() const;
     QString rotation() const { return mRotation; }
@@ -59,7 +58,6 @@ public:
     const QArray<int> &categories() const;
     int id() const { return mId; }
 
-    bool fileKnown() const { return !mFile.isNull(); }
     bool linkFileKnown() const { return !mLinkFile.isNull(); }
 
     void execute() const;
@@ -79,15 +77,6 @@ public:
 
     void setProperty(const QString& key, const QString& value);
     QString property(const QString& key) const;
-
-#ifdef QTOPIA_INTERNAL_PRELOADACCESS
-    bool isPreloaded() const;
-    void setPreloaded(bool yesNo);
-#endif
-
-#ifdef QTOPIA_INTERNAL_APPLNKASSIGN
-    AppLnk &operator=(const AppLnk &other);
-#endif
 
 protected:
     QString mName;
@@ -121,11 +110,6 @@ public:
     DocLnk( const QString &file, bool may_be_desktopfile );
     virtual ~DocLnk();
 
-
-#ifdef QTOPIA_INTERNAL_APPLNKASSIGN
-    DocLnk &operator=(const DocLnk &other) { AppLnk::operator=(other); return *this; }
-#endif
-
     QString exec() const;
 
 protected:
@@ -152,17 +136,6 @@ public:
 
     void add(AppLnk*);
     bool remove(AppLnk*);
-    void clear() {
-	QListIterator<AppLnk> it( mApps );
-	for ( ; it.current(); ) {
-	    AppLnk* a = *it;
-	    ++it;
-	    a->mId = 0;
-	    delete a;
-	}
-	mApps.clear();
-	typs.clear();
-    }
 
     const QList<AppLnk> &children() const { return mApps; }
     void detachChildren();

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -70,14 +70,14 @@ kas_animations [] =
     { ID_ROCK_MEDIUM,      "rock2/rock2\%1.png",       32 },
     { ID_ROCK_SMALL,       "rock3/rock3\%1.png",       32 },
     { ID_SHIP,             "ship/ship\%1.png",         32 },
-    { ID_MISSILE,          "missile/missile.png",      0 },
+    { ID_MISSILE,          "missile/missile.png",      1 },
     { ID_BIT,              "bits/bits\%1.png",         16 },
-    { ID_EXHAUST,          "exhaust/exhaust.png",      0 },
-    { ID_ENERGY_POWERUP,   "powerups/energy.png",      0 },
+    { ID_EXHAUST,          "exhaust/exhaust.png",      1 },
+    { ID_ENERGY_POWERUP,   "powerups/energy.png",      1 },
 //    { ID_TELEPORT_POWERUP, "powerups/teleport%1.png", 12 },
-    { ID_BRAKE_POWERUP,    "powerups/brake.png",       0 },
-    { ID_SHIELD_POWERUP,   "powerups/shield.png",      0 },
-    { ID_SHOOT_POWERUP,    "powerups/shoot.png",       0 },
+    { ID_BRAKE_POWERUP,    "powerups/brake.png",       1 },
+    { ID_SHIELD_POWERUP,   "powerups/shield.png",      1 },
+    { ID_SHOOT_POWERUP,    "powerups/shoot.png",       1 },
     { ID_SHIELD,           "shield/shield\%1.png",      6 },
     { 0,                   0,                          0 }
 };

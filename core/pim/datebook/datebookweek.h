@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -23,12 +23,9 @@
 #include <qpe/event.h>
 
 #include <qlist.h>
-#include <qvaluelist.h>
-#include <qvector.h>
 #include <qscrollview.h>
 #include <qstring.h>
 #include <qvaluelist.h>
-#include "layoutmanager.h"
 
 class DateBookDB;
 class DateBookWeekHeader;
@@ -38,6 +35,23 @@ class QResizeEvent;
 class QSpinBox;
 class QTimer;
 class QHeader;
+
+class DateBookWeekItem
+{
+public:
+    DateBookWeekItem( const EffectiveEvent e );
+
+    void setGeometry( int x, int y, int w, int h );
+    QRect geometry() const { return r; }
+
+    const QColor &color() const { return c; }
+    const EffectiveEvent event() const { return ev; }
+
+private:
+    const EffectiveEvent ev;
+    QRect r;
+    QColor c;
+};
 
 class DateBookWeekView : public QScrollView
 {
@@ -53,7 +67,7 @@ public:
 
 signals:
     void showDay( int d );
-    void signalShowEvent( QValueList<EffectiveEvent> & );
+    void signalShowEvent( const EffectiveEvent & );
     void signalHideEvent();
 
 protected slots:
@@ -64,14 +78,11 @@ private slots:
     void alterDay( int );
 
 private:
-    void positionItem( LayoutItem *i );
-    LayoutItem *intersects( const LayoutItem * );
+    void positionItem( DateBookWeekItem *i );
+    DateBookWeekItem *intersects( const DateBookWeekItem * );
     void drawContents( QPainter *p, int cx, int cy, int cw, int ch );
-    void drawFrame( QPainter *p);
     void contentsMousePressEvent( QMouseEvent * );
     void contentsMouseReleaseEvent( QMouseEvent * );
-    void mousePressEvent( QMouseEvent * );
-    void mouseReleaseEvent( QMouseEvent * );
     void resizeEvent( QResizeEvent * );
     void initNames();
 
@@ -79,8 +90,7 @@ private:
     bool ampm;
     bool bOnMonday;
     QHeader *header;
-    QVector<LayoutManager> items;
-    QList<LayoutItem> dayItems;
+    QList<DateBookWeekItem> items;
     int rowHeight;
     bool showingEvent;
 };
@@ -117,7 +127,7 @@ protected slots:
 private slots:
     void showDay( int day );
     void dateChanged( int y, int w );
-    void slotShowEvent( QValueList<EffectiveEvent> & );
+    void slotShowEvent( const EffectiveEvent & );
     void slotHideEvent();
     void slotYearChanged( int );
 

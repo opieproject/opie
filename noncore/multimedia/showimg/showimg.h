@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -26,15 +26,14 @@
 #include <qimage.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qvaluelist.h>
+
 
 class QMenuBar;
 class QPopupMenu;
 class QWidgetStack;
 class FileSelector;
 class DocLnk;
-class QTimer;
-class QAction;
+
 
 class ImageWidget : public QWidget
 {
@@ -110,7 +109,6 @@ private:
     void updateStatus();
 
 private slots:
-    void settings();
     void setDocument(const QString& fileref);
     void doDelayedLoad();
     void openFile( const DocLnk &file );
@@ -120,12 +118,8 @@ private slots:
     void vFlip();
     void rot180();
     void rot90();
-    void toggleFullscreen();
     void normalView();
     void fullScreen();
-    void slideShow( bool on );
-    void nextSlide();
-
 
 private:
     QString filename;
@@ -143,13 +137,6 @@ private:
     bool isFullScreen;
     bool bFromDocView; // a flag to indicate whether or not we were 
                           // launched from the document view...
-    QAction *openAction;
-    QAction *slideAction;
-    QValueList<DocLnk> slideList;
-    unsigned int slideIdx;
-    int slideDelay;
-    bool slideRepeat;
-    QTimer *slideTimer;
 };
 
 

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -194,8 +194,6 @@ void TimerReceiverObject::resetTimer()
     int total_written;
     QDateTime nearest = TimeConversion::fromUTC(nearestTimerEvent->UTCtime);
     QDateTime now = QDateTime::currentDateTime();
-    if ( nearest < now )
-	nearest = now;
     int secs = TimeConversion::secsTo( now, nearest );
     if ( secs > maxsecs ) {
 	// too far for millisecond timing
@@ -247,12 +245,10 @@ void TimerReceiverObject::timerEvent( QTimerEvent * )
     if (nearestTimerEvent) {
         if ( nearestTimerEvent->UTCtime
 	     <= TimeConversion::toUTC(QDateTime::currentDateTime()) ) {
-#ifndef QT_NO_COP
 	    QCopEnvelope e( nearestTimerEvent->channel,
 			    nearestTimerEvent->message );
 	    e << TimeConversion::fromUTC( nearestTimerEvent->UTCtime )
 	      << nearestTimerEvent->data;
-#endif
 	    timerEventList.remove( nearestTimerEvent );
 	    needSave = TRUE;
 	}
@@ -266,31 +262,16 @@ void TimerReceiverObject::timerEvent( QTimerEvent * )
 
 /*!
   \class AlarmServer alarmserver.h
-  \brief The AlarmServer class allows alarms to be scheduled and unscheduled.
+  \brief The AlarmServer class provides alarms to be scheduled.
 
-    Applications can schedule alarms with addAlarm() and can
-    unschedule alarms with deleteAlarm(). When the time for an alarm
-    to go off is reached the specified \link qcop.html QCop\endlink
-    message is sent on the specified channel (optionally with
-    additional data).
-
-    Scheduling an alarm using this class is important (rather just using
-    a QTimer) since the machine may be asleep and needs to get woken up using
-    the Linux kernel which implements this at the kernel level to minimize
-    battery usage while asleep.
-
-    \ingroup qtopiaemb
-    \sa QCopEnvelope
+  Applications which wish to be informed when a certain time instant
+  passes use the functions of AlarmServer to request so.
 */
 
 /*!
-  Schedules an alarm to go off at (or soon after) time \a when. When
-  the alarm goes off, the \link qcop.html QCop\endlink \a message will
-  be sent to \a channel, with \a data as a parameter.
-
-  If this function is called with exactly the same data as a previous
-  call the subsequent call is ignored, so there is only ever one alarm
-  with a given set of parameters.
+  Schedules an alarm for \a when. Soon after this time,
+  \a message will be sent to \a channel, with \a data as
+  a parameter. \a message must be of the form "someMessage(int)".
 
   \sa deleteAlarm()
 */
@@ -331,25 +312,19 @@ void AlarmServer::addAlarm ( QDateTime when, const QCString& channel,
 	if ( needSave )
 	    saveState();
     } else {
-#ifndef QT_NO_COP
         QCopEnvelope e( "QPE/System", "addAlarm(QDateTime,QCString,QCString,int)" );
         e << when << channel << message << data;
-#endif
     }
 }
 
 /*!
-  Deletes previously scheduled alarms which match \a when, \a channel,
-  \a message, and \a data.
+  Deletes previously scheduled alarms which match \a when, \a channel, \a message,
+  and \a data.
 
-  Passing null values for \a when, \a channel, or for the \link
-  qcop.html QCop\endlink \a message, acts as a wildcard meaning "any".
-  Similarly, passing -1 for \a data indicates "any".
+  Passing null values for \a when, \a channel, or \a message indicates "any".
+  Passing -1 for \a data indicates "any".
 
-  If there is no matching alarm, nothing happens.
-
-  \sa addAlarm()
-
+  \sa deleteAlarm()
 */
 void AlarmServer::deleteAlarm (QDateTime when, const QCString& channel, const QCString& message, int data)
 {
@@ -384,10 +359,8 @@ void AlarmServer::deleteAlarm (QDateTime when, const QCString& channel, const QC
 	if ( needSave )
 	    saveState();
     } else {
-#ifndef QT_NO_COP
         QCopEnvelope e( "QPE/System", "deleteAlarm(QDateTime,QCString,QCString,int)" );
         e << when << channel << message << data;
-#endif
     }
 }
 

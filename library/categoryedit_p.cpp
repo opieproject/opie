@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2001 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -33,7 +33,6 @@
 #include <sys/stat.h>
 
 #include <stdlib.h>
-#include <unistd.h>
 
 
 using namespace Qtopia;
@@ -58,7 +57,6 @@ CategoryEdit::CategoryEdit( QWidget *parent, const char *name )
     : CategoryEditBase( parent, name )
 {
     d = 0;
-    lvView->setMinimumHeight( 1 );
 }
 
 CategoryEdit::CategoryEdit( const QArray<int> &recCats,
@@ -67,7 +65,6 @@ CategoryEdit::CategoryEdit( const QArray<int> &recCats,
     : CategoryEditBase( parent, name )
 {
     d = 0;
-    lvView->setMinimumHeight( 1 );
     setCategories( recCats, appName, visibleName );
 }
 
@@ -136,10 +133,7 @@ void CategoryEdit::slotAdd()
     while ( !insertOk ) {
 	if ( num++ > 0 )
 	    name = tr("New Category ") + QString::number(num);
-	if ( chkGlobal->isChecked() )
-	    insertOk = d->mCategories.addGlobalCategory( name );
-	else
-	    insertOk = d->mCategories.addCategory( d->mStrApp, name );
+	insertOk = d->mCategories.addCategory( d->mStrApp, name );
     }
     QCheckListItem *chk;
     chk = new QCheckListItem( lvView, name, QCheckListItem::CheckBox );
@@ -150,7 +144,6 @@ void CategoryEdit::slotAdd()
 
     lvView->setSelected( chk, TRUE );
     txtCat->selectAll();
-    txtCat->setFocus();
 }
 
 void CategoryEdit::slotRemove()
@@ -187,13 +180,11 @@ void CategoryEdit::slotSetGlobal( bool isChecked )
 
 void CategoryEdit::slotTextChanged( const QString &strNew )
 {
-    bool success;
     if ( d->editItem ) {
-	if ( chkGlobal->isChecked() ) {
-	    success = d->mCategories.renameGlobalCategory( d->editItem->text(0), strNew );
-	} else {
-	    success = d->mCategories.renameCategory( d->mStrApp, d->editItem->text(0), strNew );
-	}
+	if ( chkGlobal->isChecked() )
+	    d->mCategories.renameGlobalCategory( d->editItem->text(0), strNew );
+	else
+	    d->mCategories.renameCategory( d->mStrApp, d->editItem->text(0), strNew );
 	d->editItem->setText( 0, strNew );
     }
 }
@@ -202,7 +193,6 @@ QArray<int> CategoryEdit::newCategories()
 {
     QArray<int> a;
     if ( d ) {
-	QStringList sl;
 	d->mCategories.save( categoryFileName() );
 	QListViewItemIterator it( lvView );
 	QValueList<int> l;

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,9 +20,7 @@
 
 #include <qpe/resource.h>
 #include <qpe/sound.h>
-#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
-#endif
 
 #include <qsound.h>
 #include <qfile.h>
@@ -123,7 +121,6 @@ private:
 };
 #endif
 
-/*! Opens a wave sound file \a name for playing */
 Sound::Sound(const QString& name)
 {
 #ifndef QT_NO_SOUND
@@ -131,7 +128,6 @@ Sound::Sound(const QString& name)
 #endif
 }
 
-/*! Destroys the sound */
 Sound::~Sound()
 {
 #ifndef QT_NO_SOUND
@@ -139,7 +135,6 @@ Sound::~Sound()
 #endif
 }
 
-/*! Play the sound once */
 void Sound::play()
 {
 #ifndef QT_NO_SOUND
@@ -148,7 +143,6 @@ void Sound::play()
 #endif
 }
 
-/*! Play the sound, repeatedly until stop() is called */
 void Sound::playLoop()
 {
 #ifndef QT_NO_SOUND
@@ -157,7 +151,6 @@ void Sound::playLoop()
 #endif
 }
 
-/*! Do not repeat the sound after it finishes. This will end a playLoop() */
 void Sound::stop()
 {
 #ifndef QT_NO_SOUND
@@ -165,9 +158,7 @@ void Sound::stop()
 #endif
 }
 
-/*! Sounds the audible system alarm. This is used for applications such
-  as Calendar when it needs to alarm the user of an event.
-*/
+
 void Sound::soundAlarm()
 {
 #ifdef QT_QWS_CUSTOM
@@ -178,17 +169,5 @@ void Sound::soundAlarm()
 # ifndef QT_NO_SOUND
     QSound::play(Resource::findSound("alarm"));
 # endif
-#endif
+#endif    
 }
-
-/*! \class Sound
-  \brief Plays WAVE sound files and can invoke the audible alarm.
-
-  The Sound class is constructed with the .wav music file name. The Sound
-  class retrieves the sound file from the shared Resource class. This class
-  ties together QSound and the available sound resources.
-
-  To sound an audible system alarm, call the static method soundAlarm()
-
-  \ingroup qtopiaemb
-*/

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -61,7 +61,7 @@ public:
 
 MimeType::Dict* MimeType::d=0;
 static QMap<QString,QString> *typeFor = 0;
-static QMap<QString,QStringList> *extFor = 0;
+static QMap<QString,QString> *extFor = 0;
 
 MimeType::Dict& MimeType::dict()
 {
@@ -101,11 +101,6 @@ QPixmap MimeType::pixmap() const
 
 QString MimeType::extension() const
 {
-    return extensions().first();
-}
-
-QStringList MimeType::extensions() const
-{
     loadExtensions();
     return *(*extFor).find(i);
 }
@@ -142,7 +137,7 @@ void MimeType::clear()
 void MimeType::loadExtensions()
 {
     if ( !typeFor ) {
-	extFor = new QMap<QString,QStringList>;
+	extFor = new QMap<QString,QString>;
 	typeFor = new QMap<QString,QString>;
 	loadExtensions("/etc/mime.types");
 	loadExtensions(QPEApplication::qpeDir()+"etc/mime.types");
@@ -160,19 +155,13 @@ void MimeType::loadExtensions(const QString& filename)
 	    QStringList::ConstIterator it = tokens.begin();
 	    if ( it != tokens.end() ) {
 		QString id = *it; ++it;
-		// new override old (though left overrides right)
-		QStringList exts = (*extFor)[id];
-		QStringList newexts;
 		if ( it != tokens.end() ) {
-		    exts.remove(*it);
-		    if ( !newexts.contains(*it) )
-			newexts.append(*it);
+		    (*extFor)[id] = *it;
 		    while (it != tokens.end()) {
 			(*typeFor)[*it] = id;
 			++it;
 		    }
 		}
-		(*extFor)[id] = newexts + exts;
 	    }
 	}
     }

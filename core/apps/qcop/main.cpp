@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,9 +18,7 @@
 **
 **********************************************************************/
 
-#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
-#endif
 
 #include <qapplication.h>
 #include <qstringlist.h>
@@ -63,7 +61,6 @@ int main( int argc, char *argv[] )
 	syntax( "command", command );
 
     params.truncate( params.length()-1 );
-#ifndef QT_NO_COP
     QCopEnvelope env(channel.latin1(), command.latin1());
 
     int argIdx = 3;
@@ -81,7 +78,6 @@ int main( int argc, char *argv[] )
 	}
 	argIdx++;
     }
-#endif
 
     QTimer::singleShot( 0, &app, SLOT(quit()) );
     return app.exec();

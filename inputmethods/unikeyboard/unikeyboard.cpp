@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -138,9 +138,7 @@ UniScrollview::UniScrollview(QWidget* parent, const char* name, int f) :
     smallFont = QFont( "Helvetica", 8 );
     QFontMetrics sfm( smallFont );
     xoff = sfm.width( "AAA" );
-#ifdef QWS
     setFont( FontManager::unicodeFont( FontManager::Fixed ) );
-#endif
     QFontMetrics fm( font() );
     cellsize = fm.lineSpacing() + 2;
     resizeContents( cellsize*nw, cellsize*65536/nw );
@@ -159,10 +157,6 @@ void UniScrollview::contentsMousePressEvent(QMouseEvent* e)
     int col = (e->x()-xoff)/cellsize;
     int u = row*nw+col;
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
-    uint code = 0;
-    if ( u >= 'a' && u <= 'z' ) {
-	code = u - 'a' + Key_A;
-    }
     emit key( u, 0, 0, true, false );
     emit key( u, 0, 0, false, false );
 #endif

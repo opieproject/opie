@@ -1,2 +1,2 @@
 #!/bin/sh
-/opt/Qtopia/bin/qcop QPE/TaskBar "reloadInputMethods()"
+/opt/QtPalmtop/bin/qcop QPE/TaskBar "reloadInputMethods()"

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -24,13 +24,13 @@
 #include <qtimer.h>
 #include <qkeycode.h>
 #include <qpainter.h>
-#include <qdrawutil.h>
 
 const int waitAfterLineTime = 500;
 
 QTetrixBoard::QTetrixBoard( QWidget *p, const char *name )
-    : QWidget( p, name )
+    : QFrame( p, name )
 {
+    setFrameStyle( QFrame::Panel | QFrame::Sunken );
     paint = 0;
     timer = new QTimer(this);
     connect( timer, SIGNAL(timeout()), SLOT(timeout()) );
@@ -166,15 +166,13 @@ void QTetrixBoard::timeout()
     }
 }
 
-void QTetrixBoard::paintEvent( QPaintEvent *e )
+void QTetrixBoard::drawContents( QPainter *p )
 {
-    QPainter p( this );
     const char *text = "Press \"Pause\"";
-    QRect r = rect();
-    paint = &p;				// set widget painter
-    qDrawShadePanel( paint, r, colorGroup(), TRUE, 1 );
+    QRect r = contentsRect();
+    paint = p;				// set widget painter
     if ( isPaused ) {
-	p.drawText( r, AlignCenter | AlignVCenter, text );
+	p->drawText( r, AlignCenter | AlignVCenter, text );
         return;
     }
     int x1,y1,x2,y2;
@@ -210,17 +208,11 @@ void QTetrixBoard::paintEvent( QPaintEvent *e )
 void QTetrixBoard::resizeEvent(QResizeEvent *e)
 {
     QSize sz = e->size();
-    blockWidth  = QMAX( 3, (sz.width() - 2)/10 );
-    blockHeight = QMAX( 3, (sz.height() - 2)/22 );
-    
-    //aspect correction
-    blockHeight = QMIN( blockHeight, blockWidth*4/3 );
-    blockWidth = QMIN( blockWidth, blockHeight*5/4 );
-    
+    blockWidth  = (sz.width() - 2)/10;
+    blockHeight = (sz.height() - 2)/22;
     xOffset     = 1;
     //yOffset     = 1;
     yOffset     = (sz.height() - 2) - (blockHeight *22);
-    setMask( QRect( 0, 0, blockWidth*10 + 2, QWidget::height() ) );
 }
 
 void QTetrixBoard::keyPressEvent( QKeyEvent *e )

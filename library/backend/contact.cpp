@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2001 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -34,32 +34,13 @@
 
 #include <stdio.h>
 
-/*!
-  \class Contact contact.h
-  \brief The Contact class holds the data of an address book entry.
-
-  This data includes information the name of the person, contact
-  information, and business information such as deparment and job title.
-
-  \ingroup qtopiaemb
-  \ingroup qtopiadesktop
-*/
-
 Qtopia::UidGen Contact::sUidGen( Qtopia::UidGen::Qtopia );
 
-/*!
-  Creates a new, empty contact.
-*/
 Contact::Contact()
     : Record(), mMap(), d( 0 )
 {
 }
 
-/*!
-  \internal
-  Creates a new contact.  The properties of the contact are
-  set from \a fromMap.
-*/
 Contact::Contact( const QMap<int, QString> &fromMap ) :
     Record(), mMap( fromMap ), d( 0 )
 {
@@ -67,373 +48,16 @@ Contact::Contact( const QMap<int, QString> &fromMap ) :
     if ( !cats.isEmpty() )
 	setCategories( idsFromString( cats ) );
     QString uidStr = find( Qtopia::AddressUid );
-
     if ( uidStr.isEmpty() )
 	setUid( uidGen().generate() );
     else
 	setUid( uidStr.toInt() );
-
-    if ( !uidStr.isEmpty() )
-	setUid( uidStr.toInt() );
 }
 
-/*!
-  Destroys a contact.
-*/
 Contact::~Contact()
 {
 }
 
-/*! \fn void Contact::setTitle( const QString &str )
-  Sets the title of the contact to \a str.
-*/
-
-/*! \fn void Contact::setFirstName( const QString &str )
-  Sets the first name of the contact to \a str.
-*/
-
-/*! \fn void Contact::setMiddleName( const QString &str )
-  Sets the middle name of the contact to \a str.
-*/
-
-/*! \fn void Contact::setLastName( const QString &str )
-  Sets the last name of the contact to \a str.
-*/
-
-/*! \fn void Contact::setSuffix( const QString &str )
-  Sets the suffix of the contact to \a str.
-*/
-
-/*! \fn void Contact::setFileAs( const QString &str )
-  Sets the contact to filed as \a str.
-*/
-
-/*! \fn void Contact::setDefaultEmail( const QString &str )
-  Sets the default email of the contact to \a str.
-*/
-
-/*! \fn void Contact::setHomeStreet( const QString &str )
-  Sets the home street address of the contact to \a str.
-*/
-
-/*! \fn void Contact::setHomeCity( const QString &str )
-  Sets the home city of the contact to \a str.
-*/
-
-/*! \fn void Contact::setHomeState( const QString &str )
-  Sets the home state of the contact to \a str.
-*/
-
-/*! \fn void Contact::setHomeZip( const QString &str )
-  Sets the home zip code of the contact to \a str.
-*/
-
-/*! \fn void Contact::setHomeCountry( const QString &str )
-  Sets the home country of the contact to \a str.
-*/
-
-/*! \fn void Contact::setHomePhone( const QString &str )
-  Sets the home phone number of the contact to \a str.
-*/
-
-/*! \fn void Contact::setHomeFax( const QString &str )
-  Sets the home fax number of the contact to \a str.
-*/
-
-/*! \fn void Contact::setHomeMobile( const QString &str )
-  Sets the home mobile phone number of the contact to \a str.
-*/
-
-/*! \fn void Contact::setHomeWebpage( const QString &str )
-  Sets the home webpage of the contact to \a str.
-*/
-
-/*! \fn void Contact::setCompany( const QString &str )
-  Sets the company for contact to \a str.
-*/
-
-/*! \fn void Contact::setJobTitle( const QString &str )
-  Sets the job title of the contact to \a str.
-*/
-
-/*! \fn void Contact::setDepartment( const QString &str )
-  Sets the department for contact to \a str.
-*/
-
-/*! \fn void Contact::setOffice( const QString &str )
-  Sets the office for contact to \a str.
-*/
-
-/*! \fn void Contact::setBusinessStreet( const QString &str )
-  Sets the business street address of the contact to \a str.
-*/
-
-/*! \fn void Contact::setBusinessCity( const QString &str )
-  Sets the business city of the contact to \a str.
-*/
-
-/*! \fn void Contact::setBusinessState( const QString &str )
-  Sets the business state of the contact to \a str.
-*/
-
-/*! \fn void Contact::setBusinessZip( const QString &str )
-  Sets the business zip code of the contact to \a str.
-*/
-
-/*! \fn void Contact::setBusinessCountry( const QString &str )
-  Sets the business country of the contact to \a str.
-*/
-
-/*! \fn void Contact::setBusinessPhone( const QString &str )
-  Sets the business phone number of the contact to \a str.
-*/
-
-/*! \fn void Contact::setBusinessFax( const QString &str )
-  Sets the business fax number of the contact to \a str.
-*/
-
-/*! \fn void Contact::setBusinessMobile( const QString &str )
-  Sets the business mobile phone number of the contact to \a str.
-*/
-
-/*! \fn void Contact::setBusinessPager( const QString &str )
-  Sets the business pager number of the contact to \a str.
-*/
-
-/*! \fn void Contact::setBusinessWebpage( const QString &str )
-  Sets the business webpage of the contact to \a str.
-*/
-
-/*! \fn void Contact::setProfession( const QString &str )
-  Sets the profession of the contact to \a str.
-*/
-
-/*! \fn void Contact::setAssistant( const QString &str )
-  Sets the assistant of the contact to \a str.
-*/
-
-/*! \fn void Contact::setManager( const QString &str )
-  Sets the manager of the contact to \a str.
-*/
-
-/*! \fn void Contact::setSpouse( const QString &str )
-  Sets the spouse of the contact to \a str.
-*/
-
-/*! \fn void Contact::setGender( const QString &str )
-  Sets the gender of the contact to \a str.
-*/
-
-/*! \fn void Contact::setBirthday( const QString &str )
-  Sets the birthday for the contact to \a str.
-*/
-
-/*! \fn void Contact::setAnniversary( const QString &str )
-  Sets the anniversary of the contact to \a str.
-*/
-
-/*! \fn void Contact::setNickname( const QString &str )
-  Sets the nickname of the contact to \a str.
-*/
-
-/*! \fn void Contact::setNotes( const QString &str )
-  Sets the notes about the contact to \a str.
-*/
-
-/*! \fn QString Contact::title() const
-  Returns the title of the contact.
-*/
-
-/*! \fn QString Contact::firstName() const
-  Returns the first name of the contact.
-*/
-
-/*! \fn QString Contact::middleName() const
-  Returns the middle name of the contact.
-*/
-
-/*! \fn QString Contact::lastName() const
-  Returns the last name of the contact.
-*/
-
-/*! \fn QString Contact::suffix() const
-  Returns the suffix of the contact.
-*/
-
-/*! \fn QString Contact::fileAs() const
-  Returns the string the contact is filed as.
-*/
-
-/*! \fn QString Contact::defaultEmail() const
-  Returns the default email address of the contact.
-*/
-
-/*! \fn QString Contact::emails() const
-  Returns the list of email address for a contact separated by ';'s in a single
-  string.
-*/
-
-/*! \fn QString Contact::homeStreet() const
-  Returns the home street address of the contact.
-*/
-
-/*! \fn QString Contact::homeCity() const
-  Returns the home city of the contact.
-*/
-
-/*! \fn QString Contact::homeState() const
-  Returns the home state of the contact.
-*/
-
-/*! \fn QString Contact::homeZip() const
-  Returns the home zip of the contact.
-*/
-
-/*! \fn QString Contact::homeCountry() const
-  Returns the home country of the contact.
-*/
-
-/*! \fn QString Contact::homePhone() const
-  Returns the home phone number of the contact.
-*/
-
-/*! \fn QString Contact::homeFax() const
-  Returns the home fax number of the contact.
-*/
-
-/*! \fn QString Contact::homeMobile() const
-  Returns the home mobile number of the contact.
-*/
-
-/*! \fn QString Contact::homeWebpage() const
-  Returns the home webpage of the contact.
-*/
-
-/*! \fn QString Contact::company() const
-  Returns the company for the contact.
-*/
-
-/*! \fn QString Contact::department() const
-  Returns the department for the contact.
-*/
-
-/*! \fn QString Contact::office() const
-  Returns the office for the contact.
-*/
-
-/*! \fn QString Contact::jobTitle() const
-  Returns the job title of the contact.
-*/
-
-/*! \fn QString Contact::profession() const
-  Returns the profession of the contact.
-*/
-
-/*! \fn QString Contact::assistant() const
-  Returns the assistant of the contact.
-*/
-
-/*! \fn QString Contact::manager() const
-  Returns the manager of the contact.
-*/
-
-/*! \fn QString Contact::businessStreet() const
-  Returns the business street address of the contact.
-*/
-
-/*! \fn QString Contact::businessCity() const
-  Returns the business city of the contact.
-*/
-
-/*! \fn QString Contact::businessState() const
-  Returns the business state of the contact.
-*/
-
-/*! \fn QString Contact::businessZip() const
-  Returns the business zip of the contact.
-*/
-
-/*! \fn QString Contact::businessCountry() const
-  Returns the business country of the contact.
-*/
-
-/*! \fn QString Contact::businessPhone() const
-  Returns the business phone number of the contact.
-*/
-
-/*! \fn QString Contact::businessFax() const
-  Returns the business fax number of the contact.
-*/
-
-/*! \fn QString Contact::businessMobile() const
-  Returns the business mobile number of the contact.
-*/
-
-/*! \fn QString Contact::businessPager() const
-  Returns the business pager number of the contact.
-*/
-
-/*! \fn QString Contact::businessWebpage() const
-  Returns the business webpage of the contact.
-*/
-
-/*! \fn QString Contact::spouse() const
-  Returns the spouse of the contact.
-*/
-
-/*! \fn QString Contact::gender() const
-  Returns the gender of the contact.
-*/
-
-/*! \fn QString Contact::birthday() const
-  Returns the birthday of the contact.
-*/
-
-/*! \fn QString Contact::anniversary() const
-  Returns the anniversary of the contact.
-*/
-
-/*! \fn QString Contact::nickname() const
-  Returns the nickname of the contact.
-*/
-
-/*! \fn QString Contact::children() const
-  Returns the children of the contact.
-*/
-
-/*! \fn QString Contact::notes() const
-  Returns the notes relating to the the contact.
-*/
-
-/*! \fn QString Contact::groups() const
-  \internal
-  Returns the groups for the contact.
-*/
-
-/*! \fn QStringList Contact::groupList() const
-  \internal
-*/
-
-/*! \fn QString Contact::field(int) const
-  \internal
-*/
-
-/*! \fn void Contact::saveJournal( journal_action, const QString & = QString::null )
-  \internal
-*/
-
-/*! \fn void Contact::setUid( int id )
-  \internal
-  Sets the uid for this record to \a id.
-*/
-
-/*! \enum Contact::journal_action
-  \internal
-*/
-
-/*!
-  \internal
-*/
 QMap<int, QString> Contact::toMap() const
 {
     QMap<int, QString> map = mMap;
@@ -442,7 +66,7 @@ QMap<int, QString> Contact::toMap() const
 }
 
 /*!
-  Returns a rich text formatted QString representing the contents the contact.
+  Returns a rich text formatted QString of the Contact.
 */
 QString Contact::toRichText() const
 {
@@ -607,9 +231,6 @@ QString Contact::toRichText() const
     return text;
 }
 
-/*!
-  \internal
-*/
 void Contact::insert( int key, const QString &v )
 {
     QString value = v.stripWhiteSpace();
@@ -619,9 +240,6 @@ void Contact::insert( int key, const QString &v )
 	mMap.insert( key, value );
 }
 
-/*!
-  \internal
-*/
 void Contact::replace( int key, const QString & v )
 {
     QString value = v.stripWhiteSpace();
@@ -631,17 +249,11 @@ void Contact::replace( int key, const QString & v )
 	mMap.replace( key, value );
 }
 
-/*!
-  \internal
-*/
 QString Contact::find( int key ) const
 {
     return mMap[key];
 }
 
-/*!
-  \internal
-*/
 QString Contact::displayAddress( const QString &street,
 				 const QString &city,
 				 const QString &state,
@@ -664,9 +276,6 @@ QString Contact::displayAddress( const QString &street,
     return s;
 }
 
-/*!
-  \internal
-*/
 QString Contact::displayBusinessAddress() const
 {
     return displayAddress( businessStreet(), businessCity(),
@@ -674,9 +283,6 @@ QString Contact::displayBusinessAddress() const
 			   businessCountry() );
 }
 
-/*!
-  \internal
-*/
 QString Contact::displayHomeAddress() const
 {
     return displayAddress( homeStreet(), homeCity(),
@@ -684,9 +290,6 @@ QString Contact::displayHomeAddress() const
 			   homeCountry() );
 }
 
-/*!
-  Returns the full name of the contact
-*/
 QString Contact::fullName() const
 {
     QString title = find( Qtopia::Title );
@@ -719,62 +322,16 @@ QString Contact::fullName() const
     return name.simplifyWhiteSpace();
 }
 
-/*!
-  Returns a list of the names of the children of the contact.
-*/
 QStringList Contact::childrenList() const
 {
     return QStringList::split( " ", find( Qtopia::Children ) );
 }
 
-/*! \fn void Contact::insertEmail( const QString &email )
-
-  Insert \a email into the email list. Ensures \a email can only be added
-  once. If there is no default email address set, it sets it to the \a email.
-*/
-
-/*! \fn void Contact::removeEmail( const QString &email )
-
-  Removes the \a email from the email list. If the default email was \a email,
-  then the default email address is assigned to the first email in the
-  email list
-*/
-
-/*! \fn void Contact::clearEmails()
-
-  Clears the email list.
- */
-
-/*! \fn void Contact::insertEmails( const QStringList &emailList )
-
-  Appends the \a emailList to the exiting email list
- */
-
-/*!
-  Returns a list of email addresses belonging to the contact, including
-  the default email address.
-*/
 QStringList Contact::emailList() const
 {
-    QString emailStr = emails();
-
-    QStringList r;
-    if ( !emailStr.isEmpty() ) {
-	qDebug(" emailstr ");
-	QStringList l = QStringList::split( emailSeparator(), emailStr );
-	for ( QStringList::ConstIterator it = l.begin();it != l.end();++it )
-	    r += (*it).simplifyWhiteSpace();
-    }
-
-    return r;
+    return QStringList::split( ";", find( Qtopia::Emails ) );
 }
 
-/*!
-  \overload
-
-  Generates the string for the contact to be filed as from the first,
-  middle and last name of the contact.
-*/
 void Contact::setFileAs()
 {
     QString lastName, firstName, middleName, fileas;
@@ -796,10 +353,6 @@ void Contact::setFileAs()
     replace( Qtopia::FileAs, fileas );
 }
 
-/*!
-  \internal
-  Appends the contact information to \a buf.
-*/
 void Contact::save( QString &buf ) const
 {
     static const QStringList SLFIELDS = fields();
@@ -824,10 +377,6 @@ void Contact::save( QString &buf ) const
     // You need to close this yourself
 }
 
-/*!
-  \internal
-  Returns the list of fields belonging to a contact
-*/
 QStringList Contact::fields()
 {
     QStringList list;
@@ -886,10 +435,6 @@ QStringList Contact::fields()
     return list;
 }
 
-/*!
-  \internal
-  Returns a translated list of field names for a contact.
-*/
 QStringList Contact::trfields()
 {
     QStringList list;
@@ -948,29 +493,19 @@ QStringList Contact::trfields()
     return list;
 }
 
-/*!
-  Sets the list of email address for contact to those contained in \a str.
-  Email address should be separated by ';'s.
-*/
-void Contact::setEmails( const QString &str )
+void Contact::setEmails( const QString &v )
 {
-    replace( Qtopia::Emails, str );
-    if ( str.isEmpty() )
+    replace( Qtopia::Emails, v );
+    if ( v.isEmpty() )
         setDefaultEmail( QString::null );
 }
 
-/*!
-  Sets the list of children for the contact to those contained in \a str.
-*/
-void Contact::setChildren( const QString &str )
+void Contact::setChildren( const QString &v )
 {
-    replace( Qtopia::Children, str );
+    replace( Qtopia::Children, v );
 }
 
 // vcard conversion code
-/*!
-  \internal
-*/
 static inline VObject *safeAddPropValue( VObject *o, const char *prop, const QString &value )
 {
     VObject *ret = 0;
@@ -979,9 +514,6 @@ static inline VObject *safeAddPropValue( VObject *o, const char *prop, const QSt
     return ret;
 }
 
-/*!
-  \internal
-*/
 static inline VObject *safeAddProp( VObject *o, const char *prop)
 {
     VObject *ret = 0;
@@ -990,9 +522,6 @@ static inline VObject *safeAddProp( VObject *o, const char *prop)
     return ret;
 }
 
-/*!
-  \internal
-*/
 static VObject *createVObject( const Contact &c )
 {
     VObject *vcard = newVObject( VCCardProp );
@@ -1093,12 +622,11 @@ static VObject *createVObject( const Contact &c )
 }
 
 
-/*!
-  \internal
-*/
 static Contact parseVObject( VObject *obj )
 {
     Contact c;
+
+    bool haveDefaultEmail = FALSE;
 
     VObjectIterator it;
     initPropIterator( &it, obj );
@@ -1239,7 +767,14 @@ static Contact parseVObject( VObject *obj )
 		    valid = FALSE;
 	    }
 	    if ( valid ) {
-		c.insertEmail( email );
+		if ( haveDefaultEmail ) {
+		    QString str = c.emails();
+		    if ( !str.isEmpty() )
+			str += ","+email;
+		    c.setEmails( str );
+		} else {
+		    c.setDefaultEmail( email );
+		}
 	    }
 	}
 	else if ( name == VCURLProp ) {
@@ -1316,9 +851,6 @@ static Contact parseVObject( VObject *obj )
     return c;
 }
 
-/*!
-  Writes the list of \a contacts as a set of VCards to the file \a filename.
-*/
 void Contact::writeVCard( const QString &filename, const QValueList<Contact> &contacts)
 {
 	QFileDirect f( filename.utf8().data() );
@@ -1336,9 +868,6 @@ void Contact::writeVCard( const QString &filename, const QValueList<Contact> &co
     cleanStrTbl();
 }
 
-/*!
-  writes \a contact as a VCard to the file \a filename.
-*/
 void Contact::writeVCard( const QString &filename, const Contact &contact)
 {
 	QFileDirect f( filename.utf8().data() );
@@ -1354,9 +883,7 @@ void Contact::writeVCard( const QString &filename, const Contact &contact)
 	cleanStrTbl();
 }
 
-/*!
-  Returns the set of contacts read as VCards from the file \a filename.
-*/
+
 QValueList<Contact> Contact::readVCard( const QString &filename )
 {
     qDebug("trying to open %s, exists=%d", filename.utf8().data(), QFileInfo( filename.utf8().data() ).size() );
@@ -1377,20 +904,11 @@ QValueList<Contact> Contact::readVCard( const QString &filename )
     return contacts;
 }
 
-/*!
-  Returns TRUE if the contact matches the regular expression \a regexp.
-  Otherwise returns FALSE.
-*/
 bool Contact::match( const QString &regexp ) const
 {
     return match(QRegExp(regexp));
 }
 
-/*!
-  \overload
-  Returns TRUE if the contact matches the regular expression \a regexp.
-  Otherwise returns FALSE.
-*/
 bool Contact::match( const QRegExp &r ) const
 {
     bool match;

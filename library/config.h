@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -25,7 +25,6 @@
 
 #include <qmap.h>
 #include <qstringlist.h>
-#include <qcstring.h>
 
 class ConfigPrivate;
 class Config
@@ -52,21 +51,14 @@ public:
     void writeEntry( const QString &key, bool b );
 #endif
     void writeEntry( const QString &key, const QStringList &lst, const QChar &sep );
-#ifdef QTOPIA_INTERNAL_CONFIG_BYTEARRAY
-    void writeEntry( const QString &key, const QByteArray byteArray);
-#endif
     void removeEntry( const QString &key );
     
-    QString readEntry( const QString &key, const QString &deflt = QString::null ) const;   
+    QString readEntry( const QString &key, const QString &deflt = QString::null ) const;
     QString readEntryCrypt( const QString &key, const QString &deflt = QString::null ) const;
     QString readEntryDirect( const QString &key, const QString &deflt = QString::null ) const;
     int readNumEntry( const QString &key, int deflt = -1 ) const;
     bool readBoolEntry( const QString &key, bool deflt = FALSE ) const;
     QStringList readListEntry( const QString &key, const QChar &sep ) const;
-#ifdef QTOPIA_INTERNAL_CONFIG_BYTEARRAY
-    QByteArray readByteArrayEntry(const QString& key) const;
-    QByteArray readByteArrayEntry(const QString& key, const QByteArray deflt) const;
-#endif
 
     // For compatibility, non-const versions.
     QString readEntry( const QString &key, const QString &deflt );
@@ -75,10 +67,7 @@ public:
     int readNumEntry( const QString &key, int deflt );
     bool readBoolEntry( const QString &key, bool deflt );
     QStringList readListEntry( const QString &key, const QChar &sep );
-#ifdef QTOPIA_INTERNAL_CONFIG_BYTEARRAY
-    QByteArray readByteArrayEntry(const QString& key);
-    QByteArray readByteArrayEntry(const QString& key, const QByteArray deflt);    
-#endif    
+    
     void clearGroup();
     
     void write( const QString &fn = QString::null );
@@ -86,10 +75,7 @@ public:
 protected:
     void read();
     bool parse( const QString &line );
-    QString encodeBase64(const QByteArray origData);
-    QByteArray decodeBase64(const QString& encoded) const;
-    int parse64base(char* src, char* bufOut) const;
-
+    
     QMap< QString, ConfigGroup > groups;
     QMap< QString, ConfigGroup >::Iterator git;
     QString filename;
@@ -112,12 +98,5 @@ inline bool Config::readBoolEntry( const QString &key, bool deflt ) const
 { return ((Config*)this)->readBoolEntry(key,deflt); }
 inline QStringList Config::readListEntry( const QString &key, const QChar &sep ) const
 { return ((Config*)this)->readListEntry(key,sep); }
-
-#ifdef QTOPIA_INTERNAL_CONFIG_BYTEARRAY
-inline QByteArray Config::readByteArrayEntry(const QString& key) const 
-{ return ((Config*)this)->readByteArrayEntry(key); }
-inline QByteArray Config::readByteArrayEntry(const QString& key, const QByteArray deflt) const
-{ return ((Config*)this)->readByteArrayEntry(key, deflt); }
-#endif
 
 #endif

@@ -1,15 +1,16 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
+** GNU General Public License version 2 as published by the Free
+** Software Foundation and appearing in the file LICENSE.GPL included
+** in the packaging of this file.
 **
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING
+** THE WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A
+** PARTICULAR PURPOSE.
 **
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
@@ -84,6 +85,7 @@ private:
     static Qtopia::UidGen sUidGen;
 };
 
+/** Map from application name to categories */
 class QPC_EXPORT Categories : public QObject
 {
     Q_OBJECT
@@ -100,10 +102,27 @@ public:
 
     void clear();
 
+    /** Add the category name as long as it doesn't already exist
+    *  locally or globally.  Return UID if added, 0 if conflicts
+    *  (error).
+    */
     int addCategory( const QString &appname, const QString &catname);
+    /** Add the category name as long as it doesn't already exist
+    *  locally or globally.  Return UID if added, 0 if conflicts
+    *  (error).
+    */
     int addCategory( const QString &appname, const QString &catname, int uid);
+    /** Add the global category just checking that it doesn't
+    *  already exist globally. Return UID if added, 0 if conflicts.
+    */
     int addGlobalCategory( const QString &catname );
+    /** Add the global category just checking that it doesn't
+    *  already exist globally. Return UID if added, 0 if conflicts.
+    */
     int addGlobalCategory( const QString &catname, int uid );
+    /** Removes the category from the application; if it is not found
+    *   in the application, then it removes it from the global list
+    */
     bool removeCategory( const QString &appName, const QString &catName,
 			 bool checkGlobal = TRUE);
     bool removeCategory( const QString &appName, int uid );
@@ -112,24 +131,37 @@ public:
 
     QArray<int> ids( const QString &app, const QStringList &labels) const;
 
+    /** Returns the id associated with the app */
     int id( const QString &app, const QString &cat ) const;
+    /** Returns the label associated with the id */
     QString label( const QString &app, int id ) const;
 
     enum ExtraLabels { NoExtra, AllUnfiled, AllLabel, UnfiledLabel };
+    /** Returns the sorted list of all categories that are
+    *   associated with the app.
+    *   If includeGlobal parameter is TRUE then the returned
+    *   categories will include the global category items.
+    *   If extra = NoExtra, then
+    *   If extra = AllUnfiled, then All and Unfiled will be prepended to
+    *   the list
+    *   If extra = AllLabel, then All is prepended
+    *   If extra = UnfiledLabel, then Unfiled is prepended
+    */
     QStringList labels( const QString &app,
 			bool includeGlobal = TRUE,
 			ExtraLabels extra = NoExtra ) const;
 
-    // inlined to keep 1.5.0 binary compatibility
-    QStringList labels( const QString & app,
-			const QArray<int> &catids ) const {
-	QStringList strs = mGlobalCats.labels( catids );
-	strs += mAppCats[app].labels( catids );
-	return strs;
-    }
-
     enum DisplaySingle { ShowMulti, ShowAll, ShowFirst };
 
+    /** Returns a single string associated with the cat ids for display in
+    *   a combobox or any area that requires one string.  If catids are empty
+    *   then "Unfiled" will be returned.  If multiple categories are assigned
+    *   then the behavior depends on the DisplaySingle type.
+    *   If /a display is set to ShowMulti then  " (multi)" appended to the
+    *   first string. If /a display is set to ShowAll, then a space seperated
+    *   string is returned with all categories.  If ShowFirst is returned,
+    *   the just the first string is returned.
+    */
     QString displaySingle( const QString &app,
 			   const QArray<int> &catids,
 			   DisplaySingle display ) const;
@@ -167,19 +199,16 @@ signals:
     *  or null if global
     *  the third param is the uid of the newly added category
     */
-    void categoryAdded( const Categories &cats,
-			const QString &appname, int uid);
+    void categoryAdded( const Categories &, const QString &, int );
     /** emitted if removed a category
     *  the second param is the application the category was removed from
     *  or null if global
     *  the third param is the uid of the removed category
     */
-    void categoryRemoved( const Categories &cats, const QString &appname,
-			  int uid);
+    void categoryRemoved( const Categories &, const QString &, int );
     /** emitted if a category is renamed; the second param is the uid of
     *   the removed category */
-    void categoryRenamed( const Categories &cats, const QString &appname,
-			  int uid);
+    void categoryRenamed( const Categories &, const QString &, int );
 
 private:
     CategoryGroup mGlobalCats;

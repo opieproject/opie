@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -25,9 +25,7 @@
 #include "qpe/config.h"
 #include "qpe/resource.h"
 #include "qpe/qpeapplication.h"
-#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
-#endif
 #include <qpe/qlibrary.h>
 
 #include <qlistbox.h>
@@ -38,7 +36,6 @@
 
 #include <stdlib.h>
 
-#ifndef QT_NO_COP
 class NetworkEmitter : public QCopChannel {
     Q_OBJECT
 public:
@@ -71,7 +68,6 @@ void Network::start(const QString& choice, const QString& password)
 /*!
   \class Network network.h
   \brief The Network class provides network access functionality.
-  \internal
 */
 
 // copy the proxy settings of the active config over to the Proxies.conf file
@@ -117,7 +113,6 @@ void Network::connectChoiceChange(QObject* receiver, const char* slot)
     QObject::connect(emitter,SIGNAL(changed()),receiver,slot);
 }
 
-#endif	// QT_NO_COP
 /*!
   \internal
 */
@@ -126,7 +121,6 @@ QString Network::settingsDir()
     return Global::applicationFileName("Network", "modules");
 }
 
-#ifndef QT_NO_COP
 /*!
   \internal
 */
@@ -140,7 +134,7 @@ QStringList Network::choices(QListBox* lb, const QString& dir)
     QString adir = dir.isEmpty() ? settingsDir() : dir;
     QDir settingsdir(adir);
     settingsdir.mkdir(adir);
-
+    
     QStringList files = settingsdir.entryList("*.conf");
     for (QStringList::ConstIterator it=files.begin(); it!=files.end(); ++it ) {
 	QString filename = settingsdir.filePath(*it);
@@ -443,4 +437,3 @@ NetworkInterface* Network::loadPlugin(const QString& type)
 }
 
 #include "network.moc"
-#endif	// QT_NO_COP

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -26,7 +26,6 @@
 #include <qpe/filemanager.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
-#include <qpe/qpetoolbar.h>
 
 #include <qapplication.h>
 #include <qmessagebox.h>
@@ -41,13 +40,13 @@
 #include <qpushbutton.h>
 #include <qtextstream.h>
 #include <qtimer.h>
+#include <qpe/qpetoolbar.h>
 #include <qtoolbutton.h>
 #include <qvbox.h>
 #include <qwidgetstack.h>
 #include <qpainter.h>
 #include <qlayout.h>
 #include <qregexp.h>
-#include <qgroupbox.h>
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -119,7 +118,6 @@ const char* sampleWGR=
 WordGame::WordGame( QWidget* parent, const char* name, WFlags fl ) :
     QMainWindow(parent, name, fl)
 {
-    landscape=qApp->desktop()->width() > qApp->desktop()->height();
     if ( qApp->desktop()->width() < 240 ) {
 	tile_smallw = 10;
 	tile_smallh = 10;
@@ -127,10 +125,6 @@ WordGame::WordGame( QWidget* parent, const char* name, WFlags fl ) :
 	tile_bigh = 16;
 	tile_stweak = 0;
 	tile_btweak = 0;
-    } else if ( qApp->desktop()->height() < 320 ) {
-	tile_smallw = 14;
-	tile_smallh = 12;
-	tile_stweak = -1;
     }
 
     setIcon( Resource::loadPixmap( "wordgame" ) );
@@ -141,10 +135,7 @@ WordGame::WordGame( QWidget* parent, const char* name, WFlags fl ) :
 
     setCentralWidget(vbox);
     toolbar = new QPEToolBar(this);
-    toolbar->setBackgroundMode(PaletteBackground);
-    if ( landscape )
-	toolbar->setFixedWidth(qApp->desktop()->width()-16*tile_smallw);
-    addToolBar(toolbar, landscape ? Right : Bottom);
+    addToolBar(toolbar, Bottom);
     reset = new QToolButton(Resource::loadPixmap("back"), tr("Back"), "", this, SLOT(resetTurn()), toolbar);
     done = new QToolButton(Resource::loadPixmap("done"), tr("Done"), "", this, SLOT(endTurn()), toolbar);
     scoreinfo = new ScoreInfo(toolbar);
@@ -243,7 +234,6 @@ void WordGame::openGameSelector(const QStringList& initnames)
     newgame->player0->changeItem(playername,0);
     newgame->player1->setCurrentItem(1);
     newgame->updateRuleSets();
-    newgame->playersbox->setColumnLayout(landscape ? 2 : 1, Horizontal);
     newgame->show();
 
     connect(newgame->buttonOk, SIGNAL(clicked()), this, SLOT(startGame()));
@@ -271,6 +261,7 @@ void WordGame::startGame()
 
 void WordGame::startGame(const QStringList& playerlist)
 {
+    toolbar->show();
     racks = new QWidgetStack(vbox);
     racks->setFixedHeight(TileItem::bigHeight()+2);
     namelist.clear();
@@ -284,7 +275,6 @@ void WordGame::startGame(const QStringList& playerlist)
 	readyRack(player);
     }
 
-    toolbar->show();
     board->show();
     racks->show();
 }
@@ -1027,7 +1017,7 @@ retry:
     showTurn();
     QStringList to_add;
     for (QStringList::Iterator it=words.begin(); it!=words.end(); ++it) {
-	if ( (*it).length() > 1 && !Global::fixedDawg().contains(*it)
+	if ( !Global::fixedDawg().contains(*it)
 		&& !Global::dawg("WordGame").contains(*it) ) {
 	    switch (QMessageBox::warning(this, tr("Unknown word"),
 		tr("<p>The word \"%1\" is not in the dictionary.").arg(*it),
@@ -1095,10 +1085,6 @@ int Board::score(QPoint at, const Tile** tiles, int n, const Tile* blankvalue, c
 	return -1; // preceeding tiles
     }
 
-    if ( !n )
-	return -1;
-
-    int mainlen=0;
     const Tile* t;
     for (int i=0; contains(at) && ((t=tile(at)) || i<n); ) {
 	if ( t ) {
@@ -1152,11 +1138,7 @@ int Board::score(QPoint at, const Tile** tiles, int n, const Tile* blankvalue, c
 	    i++;
 	}
 	at += d;
-	mainlen++;
     }
-
-    if ( mainlen < 2 )
-	total = 0;
 
     if ( words )
 	words->append(mainword);
@@ -1451,6 +1433,7 @@ ScoreInfo::ScoreInfo( QWidget* parent, const char* name, WFlags fl ) :
     score=0;
     msgtimer = new QTimer(this);
     connect(msgtimer, SIGNAL(timeout()), this, SLOT(showScores()));
+    setBackgroundMode( PaletteButton );
 }
 
 ScoreInfo::~ScoreInfo()

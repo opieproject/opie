@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,9 +18,7 @@
 **
 **********************************************************************/
 
-#ifndef QT_NO_COP
 #include "qcopenvelope_qws.h"
-#endif
 #include "global.h"
 #include <qbuffer.h>
 #include <qdatastream.h>
@@ -36,11 +34,10 @@
 
 /*!
   \class QCopEnvelope qcopenvelope_qws.h
-  \brief The QCopEnvelope class encapsulates and sends QCop messages
-  over QCopChannels.
+  \brief The QCopEnvelope class encapsulates QCop message sending.
 
   QCop messages allow applications to communicate with each other.
-  These messages are sent using QCopEnvelope, and received by connecting
+  These messages are send using QCopEnvelope, and received by connecting
   to a QCopChannel.
 
   To send a message, use the following protocol:
@@ -50,23 +47,23 @@
      e << parameter1 << parameter2 << ...;
   \endcode
 
-  For messages without parameters, simply use:
+  For messages without parameters, you can simply use:
 
   \code
-     QCopEnvelope e(channelname, messagename);
+     QCopEnvelope (channelname, messagename);
   \endcode
 
-  (Do not try to simplify this further as it may confuse some
-  compilers.)
+  Do not try to simplify further as some compilers may not do
+  as you expect.
 
-  The \c{channelname} of channels within Qtopia all start with "QPE/".
-  The \c{messagename} is a function identifier followed by a list of types
-  in parentheses. There is no whitespace in the message name.
+  The <tt>channelname</tt> of channels within Qtopia all start with "QPE/".
+  The <tt>messagename</tt> is a function identifier followed by a list of types
+  in parentheses. There are no spaces in the message name.
 
-  To receive a message, you will generally just use your application's
-  predefined QPE/Application/\e{appname} channel
+  To receive a message, you will generally just use your applications
+  predefined QPE/Application/<i>appname</i> channel
   (see QPEApplication::appMessage()), but you can make another channel
-  and connect it to a slot like this:
+  and connect it to a slot with:
 
   \code
       myChannel = new QCopChannel( "QPE/FooBar", this );
@@ -79,8 +76,8 @@
 
 /*!
   Constructs a QCopEnvelope that will write \a message to \a channel.
-  If \a message has parameters, you must then use operator<<() to
-  add these parameters to the envelope.
+  If \a message has parameters, you must then user operator<<() to
+  write the parameters.
 */
 QCopEnvelope::QCopEnvelope( const QCString& channel, const QCString& message ) :
     QDataStream(new QBuffer),
@@ -90,7 +87,7 @@ QCopEnvelope::QCopEnvelope( const QCString& channel, const QCString& message ) :
 }
 
 /*!
-  Writes the message and then destroys the QCopEnvelope.
+  Writes the completed message and destroys the QCopEnvelope.
 */
 QCopEnvelope::~QCopEnvelope()
 {
@@ -114,7 +111,7 @@ QCopEnvelope::~QCopEnvelope()
 	    time_t t;
 	    if (!fstat(qcopfile.handle(), &buf) &&  (time(&t) != (time_t)-1) ) {
 		// success on fstat, lets compare times
-		if (buf.st_ctime + 60 < t) {
+		if (buf.st_mtime + 60 < t) {
 		    qWarning("stale file " + qcopfn + " found.  Truncating");
 		    ftruncate(qcopfile.handle(), 0);
 		    qcopfile.reset();
@@ -132,7 +129,8 @@ QCopEnvelope::~QCopEnvelope()
 
 		if (fsize == 0) {
 		    QString cmd = ch.mid(pref);
-		    Global::execute(cmd);
+		    cmd += " -qcop " + qcopfn;
+		    Global::invoke(cmd);
 		}
 
 		char c;

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -34,7 +34,6 @@
 #include <unistd.h>
 
 #define QTOPIA_INTERNAL_LANGLIST
-#define QTOPIA_INTERNAL_CONFIG_BYTEARRAY
 #include "config.h"
 #include "global.h"
 
@@ -59,13 +58,11 @@ QString Config::configFilename(const QString& name, Domain d)
 
 /*!
   \class Config config.h
-  \brief The Config class provides for saving application configuration state.
+  \brief The Config class provides for saving application cofniguration state.
 
   You should keep a Config in existence only while you do not want others
   to be able to change the state. There is no locking currently, but there
   may be in the future.
-
-  \ingroup qtopiaemb
 */
 
 /*!
@@ -79,19 +76,19 @@ QString Config::configFilename(const QString& name, Domain d)
   \value File
   \value User
 
-  See \l{Config()} for details.
+  See Config for details.
 */
 
 /*!
-  Constructs a configuration object that will load or create a
-  configuration with the given \a name in the given \a domain.
+  Constructs a config that will load or create a configuration with the
+  given \a name in the given \a domain.
 
-  After construction, call setGroup() since almost every other
-  function works in terms of the 'current group'.
+  You must call setGroup() before doing much else with the Config.
 
-  In the default Domain, \e User, the configuration is user-specific,
-  and the \a name should not contain "/". This name should be globally
-  unique.
+  In the default Domain, \e User,
+  the configuration is user-specific. \a name should not contain "/" in
+  this case, and in general should be the name of the C++ class that is
+  primarily responsible for maintaining the configuration.
 
   In the File Domain, \a name is an absolute filename.
 */
@@ -115,8 +112,7 @@ Config::~Config()
 }
 
 /*!
-  Returns TRUE if the current group has an entry called \a key;
-  otherwise returns FALSE.
+  Returns whether the current group has an entry called \a key.
 */
 bool Config::hasKey( const QString &key ) const
 {
@@ -127,16 +123,13 @@ bool Config::hasKey( const QString &key ) const
 }
 
 /*!
-  Sets the current group for subsequent reading and writing of entries
-  to \a gname. Grouping allows the application to partition the
-  namespace.
+  Sets the current group for subsequent reading and writing of
+  entries to \a gname. Grouping allows the application to partition the namespace.
 
-  This function \e must be called prior to any reading or writing of
-  entries.
+  This function must be called prior to any reading or writing
+  of entries.
 
   The \a gname must not be empty.
-
-  \sa writeEntry() readEntry() readListEntry() readNumEntry() readBoolEntry()
 */
 void Config::setGroup( const QString &gname )
 {
@@ -216,13 +209,13 @@ static QString decipher(const QString& cipher)
 }
 
 /*!
-  Writes a weakly encrypted (\a key, \a value) entry to the current group.
+  Writes an encrypted (\a key, \a value) entry to the current group.
 
   Note that the degree of protection offered by the encryption is
   only sufficient to avoid the most casual observation of the configuration
   files.
 
-  \sa readEntryCrypt()
+  \sa readEntry()
 */
 void Config::writeEntryCrypt( const QString &key, const QString &value )
 {
@@ -240,7 +233,7 @@ void Config::writeEntryCrypt( const QString &key, const QString &value )
 /*!
   Writes a (\a key, \a num) entry to the current group.
 
-  \sa readNumEntry() readBoolEntry()
+  \sa readNumEntry()
 */
 void Config::writeEntry( const QString &key, int num )
 {
@@ -265,8 +258,8 @@ void Config::writeEntry( const QString &key, bool b )
 #endif
 
 /*!
-  Writes a (\a key, \a lst) entry to the current group. The list is
-  separated by \a sep, so the strings must not contain that character.
+  Writes a (\a key, \a lst) entry to the current group. The list
+  is separated by \a sep, so the strings must not contain that character.
 
   \sa readListEntry()
 */
@@ -280,18 +273,8 @@ void Config::writeEntry( const QString &key, const QStringList &lst, const QChar
 }
 
 /*!
-  Writes a (\a key, \a byteArray) entry to the current group.  The byteArray is stored as
-  a base64 encoded string.
-*/
-void Config::writeEntry( const QString &key, const QByteArray byteArray) {
-  writeEntry(key, encodeBase64(byteArray));
-}
-
-/*!
   Removes the \a key entry from the current group. Does nothing if
   there is no such entry.
-
-  \sa writeEntry() clearGroup()
 */
 
 void Config::removeEntry( const QString &key )
@@ -307,28 +290,19 @@ void Config::removeEntry( const QString &key )
 /*!
   \fn bool Config::operator == ( const Config & other ) const
 
-  Tests for equality with \a other. Config objects are equal if they
-  refer to the same filename.
-
-  \sa operator!=()
+  Tests for equality with \a other. Config objects are equal if they refer to the same filename.
 */
 
 /*!
   \fn bool Config::operator != ( const Config & other ) const
 
-  Tests for inequality with \a other. Config objects are equal if they
-  refer to the same filename.
-
-  \sa operator==()
+  Tests for inequality with \a other. Config objects are equal if they refer to the same filename.
 */
 
 /*!
   \fn QString Config::readEntry( const QString &key, const QString &deflt ) const
 
-  Returns the string entry for \a key, defaulting to \a deflt if there
-  is no entry for the given \a key.
-
-  \sa writeEntry()
+  Reads a string entry stored with \a key, defaulting to \a deflt if there is no entry.
 */
 
 /*!
@@ -351,11 +325,7 @@ QString Config::readEntry( const QString &key, const QString &deflt )
 /*!
   \fn QString Config::readEntryCrypt( const QString &key, const QString &deflt ) const
 
-  Returns the unencrypted string entry for the encrypted entry stored
-  using \a key, defaulting to \a deflt if there is no entry for the
-  given \a key.
-
-  \sa writeEntryCrypt()
+  Reads an encrypted string entry stored with \a key, defaulting to \a deflt if there is no entry.
 */
 
 /*!
@@ -398,11 +368,7 @@ QString Config::readEntryDirect( const QString &key, const QString &deflt )
 
 /*!
   \fn int Config::readNumEntry( const QString &key, int deflt ) const
-
-  Returns the integer entry stored using \a key, defaulting to \a
-  deflt if there is no entry for the given \a key.
-
-  \sa writeEntry()
+  Reads a numeric entry stored with \a key, defaulting to \a deflt if there is no entry.
 */
 
 /*!
@@ -419,67 +385,8 @@ int Config::readNumEntry( const QString &key, int deflt )
 }
 
 /*!
-  Returns the QByteArray stored using \a key.  Returns an empty array if
-  no matching key is found.
-*/
-QByteArray Config::readByteArrayEntry(const QString& key) {
-  QByteArray empty;
-  return readByteArrayEntry(key, empty);
-}
-
-/*!
-  Returns the QByteArray stored using \a key.  Returns \a dflt if
-  no matching key is found.
-*/
-QByteArray Config::readByteArrayEntry(const QString& key, const QByteArray dflt) {
-  QString s = readEntry(key);
-  if (s.isEmpty())
-    return dflt;
-  return decodeBase64(s);
-}
-
-/*!
-  \internal
-  Decodes base64 encoded \a encoded and returns a QByteArray containing
-  the decoded data.
-*/
-QByteArray Config::decodeBase64( const QString &encoded ) const
-{
-  QByteArray buffer;
-  uint len = encoded.length();
-  buffer.resize( len * 3 / 4 + 2);
-  uint bufCount = 0;
-  uint pos = 0, decodedCount = 0;
-  char src[4];
-  char *destPtr = buffer.data();
-  
-  while (pos < len ) {
-    decodedCount = 4;
-    int x = 0;
-    while ( (x < 4) && (pos < len ) ) {
-      src[x] = encoded[pos];
-      pos++;
-      if (src[x] == '\r' || src[x] == '\n' || src[x] == ' ')
-	x--;
-      x++;
-    }
-    if (x > 1) {
-      decodedCount = parse64base(src, destPtr);
-      destPtr += decodedCount;
-      bufCount += decodedCount;
-    }
-  }
-  
-  return buffer;
-}
-
-/*!
   \fn bool Config::readBoolEntry( const QString &key, bool deflt ) const
-
-  Returns the boolean entry stored (as an integer) using \a key,
-  defaulting to \a deflt if there is no entry for the given \a key.
-
-  \sa writeEntry()
+  Reads a bool entry stored with \a key, defaulting to \a deflt if there is no entry.
 */
 
 /*!
@@ -497,14 +404,7 @@ bool Config::readBoolEntry( const QString &key, bool deflt )
 
 /*!
   \fn QStringList Config::readListEntry( const QString &key, const QChar &sep ) const
-
-  Returns the string list entry stored using \a key and with \a sep as
-  the separator.
-
-  These entries are stored as a single string, with each element
-  separated by \a sep.
-
-  \sa writeEntry()
+  Reads a string list entry stored with \a key, and with \a sep as the separator.
 */
 
 /*!
@@ -522,8 +422,6 @@ QStringList Config::readListEntry( const QString &key, const QChar &sep )
 
 /*!
   Removes all entries from the current group.
-
-  \sa removeEntry()
 */
 void Config::clearGroup()
 {
@@ -553,9 +451,9 @@ void Config::write( const QString &fn )
 	git = groups.end();
 	return;
     }
-
+    
     QString str;
-    QCString cstr;
+    QCString cstr;    
     QMap< QString, ConfigGroup >::Iterator g_it = groups.begin();
 
     for ( ; g_it != groups.end(); ++g_it ) {
@@ -565,7 +463,7 @@ void Config::write( const QString &fn )
  	    str += e_it.key() + " = " + *e_it + "\n";
     }
     cstr = str.utf8();
-
+    
     int total_length;
     total_length = f.writeBlock( cstr.data(), cstr.length() );
     if ( total_length != int(cstr.length()) ) {
@@ -575,19 +473,18 @@ void Config::write( const QString &fn )
 	QFile::remove( strNewFile );
 	return;
     }
-
+    
     f.close();
     // now rename the file...
     if ( rename( strNewFile, filename ) < 0 ) {
-	qWarning( "problem renaming the file %s to %s", strNewFile.latin1(),
+	qWarning( "problem renaming the file %s to %s", strNewFile.latin1(), 
 		  filename.latin1() );
 	QFile::remove( strNewFile );
-    }
+    }	
 }
 
 /*!
-  Returns TRUE if the Config is in a valid state; otherwise returns
-  FALSE.
+  Returns whether the Config is in a valid state.
 */
 bool Config::isValid() const
 {
@@ -654,100 +551,4 @@ bool Config::parse( const QString &l )
 	( *git ).insert( key, value );
     }
     return TRUE;
-}
-
-/*!
- \internal 
- Encodes \a origData using base64 mapping and returns a QString containing the
- encoded form.
-*/
-QString Config::encodeBase64(const QByteArray origData) {
-  // follows simple algorithm from rsync code
-  uchar *in = (uchar*)origData.data();
-  
-  int inbytes = origData.size();
-  int outbytes = ((inbytes * 8) + 5) / 6;
-//   int spacing = (outbytes-1)/76;
-  int padding = 4-outbytes%4; if ( padding == 4 ) padding = 0;
-  
-//   QByteArray outbuf(outbytes+spacing+padding);
-  QByteArray outbuf(outbytes+padding);
-  uchar* out = (uchar*)outbuf.data();
-
-  const char *b64 =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-  
-  for (int i = 0; i < outbytes; i++) {
-//     if ( i && i%76==0 )
-//       *out++ = '\n';
-    int byte = (i * 6) / 8;
-    int bit = (i * 6) % 8;
-    if (bit < 3) {
-      if (byte >= inbytes)
-	abort();
-      *out = (b64[(in[byte] >> (2 - bit)) & 0x3F]);
-    } else {
-      if (byte + 1 == inbytes) {
-	*out = (b64[(in[byte] << (bit - 2)) & 0x3F]);
-      } else {
-	*out = (b64[(in[byte] << (bit - 2) |
-		     in[byte + 1] >> (10 - bit)) & 0x3F]);
-      }
-    }
-    ++out;
-  }
-  ASSERT(out == (uchar*)outbuf.data() + outbuf.size() - padding);
-  while ( padding-- )
-    *out++='=';
-  
-  return QString(outbuf);
-}
-
-/*!
- \internal
-*/
-int Config::parse64base(char *src, char *bufOut) const
-{
-  char c, z;
-  char li[4];
-  int processed;
-
-  //conversion table without table...
-  for (int x = 0; x < 4; x++) {
-    c = src[x];
-
-    if ( (int) c >= 'A' && (int) c <= 'Z')
-      li[x] = (int) c - (int) 'A';
-    if ( (int) c >= 'a' && (int) c <= 'z')
-      li[x] = (int) c - (int) 'a' + 26;
-    if ( (int) c >= '0' && (int) c <= '9')
-      li[x] = (int) c - (int) '0' + 52;
-    if (c == '+')
-      li[x] = 62;
-    if (c == '/')
-      li[x] = 63;
-  }
-
-  processed = 1;
-  bufOut[0] = (char) li[0] & (32+16+8+4+2+1);	//mask out top 2 bits
-  bufOut[0] <<= 2;
-  z = li[1] >> 4;
-  bufOut[0] = bufOut[0] | z;		//first byte retrived
-
-  if (src[2] != '=') {
-    bufOut[1] = (char) li[1] & (8+4+2+1);	//mask out top 4 bits
-    bufOut[1] <<= 4;
-    z = li[2] >> 2;
-    bufOut[1] = bufOut[1] | z;		//second byte retrived
-    processed++;
-
-    if (src[3] != '=') {
-      bufOut[2] = (char) li[2] & (2+1);	//mask out top 6 bits
-      bufOut[2] <<= 6;
-      z = li[3];
-      bufOut[2] = bufOut[2] | z;	//third byte retrieved
-      processed++;
-    }
-  }
-  return processed;
 }

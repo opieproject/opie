@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -17,7 +17,6 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifdef QWS
 #define QTOPIA_INTERNAL_LANGLIST
 #include <qapplication.h>
 #include <qstyle.h>
@@ -639,4 +638,3 @@ QPopupMenu *QPEDecoration::menu(QWSManager*, const QWidget*, const QPoint&)
 
 
 #endif // QT_NO_QWS_QPE_WM_STYLE
-#endif

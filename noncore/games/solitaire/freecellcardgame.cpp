@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -17,8 +17,8 @@
 ** not clear to you.
 **
 **********************************************************************/
+#include <qgfx_qws.h>
 #include "freecellcardgame.h"
-#include "canvascardwindow.h"
 
 
 extern int highestZ;
@@ -30,9 +30,9 @@ FreecellCardGame::FreecellCardGame(QCanvas *c, bool snap, QWidget *parent) : Can
     numberOfFreeCells = 4;
     highestZ = 0;
 
-    int spaceBetweenPiles = ( smallFlag ) ? 21 : 28;
-    int xOrigin = ( smallFlag ) ? 0 : 5;
-    int spacing = ( smallFlag ) ? 0 : 0;
+    int spaceBetweenPiles = ( qt_screen->deviceWidth() < 200 ) ? 21 : 28;
+    int xOrigin = ( qt_screen->deviceWidth() < 200 ) ? 0 : 5;
+    int spacing = ( qt_screen->deviceWidth() < 200 ) ? 0 : 0;
 
     for (int i = 0; i < 4; i++) {
 	freecellPiles[i] = new FreecellFreecellPile( xOrigin + i * spaceBetweenPiles, 10, canvas() );

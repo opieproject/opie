@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -33,77 +33,62 @@ class QDateTime;
 class QMouseEvent;
 class QPaintEvent;
 class QResizeEvent;
-class DateBookDay;
-class DateBookDayView;
-class DayViewLayout;
 
-// Is both the 'all day' and '9-10' view.  depending on how its constructed.
-class DateBookDayView : public QScrollView
+class DateBookDayView : public QTable
 {
     Q_OBJECT
 public:
-    enum Type {
-	AllDay,
-	ScrollingDay,
-	CompressedDay
-    };
-
-    DateBookDayView( Type viewType, bool hourClock,
-	    QWidget *parent = 0, const char *name = 0 );
-
+    DateBookDayView( bool hourClock, QWidget *parent, const char *name );
     bool whichClock() const;
 
-    void addOccurance(EffectiveEvent &);
-    void takeOccurance(EffectiveEvent &);
-    void clearItems();
-
-    void layoutItems();
-
-    int startHour() const { return QMIN(startSel, endSel); }
-    int endHour() const { return QMAX(startSel, endSel) + 1; }
-
 public slots:
-    void startAtTime(int);
-    void moveUp();  // scrolling with keys from DateBookDay
+    void moveUp();
     void moveDown();
 
 signals:
     void sigColWidthChanged();
     void sigCapturedKey( const QString &txt );
-
-    void removeEvent( const Event& );
-    void editEvent( const Event& );
-    void beamEvent( const Event& );
-
 protected slots:
     void slotChangeClock( bool );
-
 protected:
-    void resizeEvent( QResizeEvent *e );
+    virtual void paintCell( QPainter *p, int row, int col, const QRect &cr, bool selected );
+    virtual void paintFocus( QPainter *p, const QRect &cr );
+    virtual void resizeEvent( QResizeEvent *e );
     void keyPressEvent( QKeyEvent *e );
-    void drawContents( QPainter * p, int x, int y, int w, int h );
-
-    void contentsMousePressEvent( QMouseEvent * );
-    void contentsMouseReleaseEvent( QMouseEvent * );
-    void contentsMouseMoveEvent( QMouseEvent * );
-
+    void initHeader();
 private:
-
     bool ampm;
-    Type typ;
-
-    DayViewLayout *itemList;
-    int hourAtPos(int) const;
-    int posOfHour(int) const;
-    //QList<DayItem> itemList;
-    //DateBookDayWidget *intersects( const DateBookDayWidget *item, const QRect &geom );
-
-    int startSel, endSel;
-    bool dragging;
-
-    int start_of_day;
 };
 
+class DateBookDay;
+class DateBookDayWidget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    DateBookDayWidget( const EffectiveEvent &e, DateBookDay *db );
+    ~DateBookDayWidget();
+
+    const QRect &geometry() { return geom; }
+    void setGeometry( const QRect &r );
+
+    const EffectiveEvent &event() const { return ev; }
+
+signals:
+    void deleteMe( const Event &e );
+    void editMe( const Event &e );
+    void beamMe( const Event &e );
+
+protected:
+    void paintEvent( QPaintEvent *e );
+    void mousePressEvent( QMouseEvent *e );
+
+private:
+    const EffectiveEvent ev;
+    DateBookDay *dateBook;
+    QString text;
+    QRect geom;
+};
 
 class DateBookDay : public QVBox
 {
@@ -141,11 +126,12 @@ private slots:
 private:
     void getEvents();
     void relayoutPage( bool fromResize = false );
+    DateBookDayWidget *intersects( const DateBookDayWidget *item, const QRect &geom );
     QDate currDate;
     DateBookDayView *view;
-    DateBookDayView *allView;
     DateBookDayHeader *header;
     DateBookDB *db;
+    QList<DateBookDayWidget> widgetList;
     int startTime;
 };
 

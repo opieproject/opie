@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
-** This file is part of the Qtopia Environment.
+** This file is part of Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,7 +20,6 @@
 
 #include "cardgame.h"
 #include "canvascard.h"
-#include "canvascardwindow.h"
 
 #include <qpe/resource.h>
 
@@ -28,6 +27,7 @@
 #include <qimage.h>
 #include <qpaintdevice.h>
 #include <qbitmap.h>
+#include <qgfx_qws.h> // Needed to get the device's width
 
 #include <math.h>
 
@@ -103,7 +103,7 @@ CanvasCard::CanvasCard( eValue v, eSuit s, bool f, QCanvas *canvas ) :
 	Card(v, s, f), QCanvasRectangle( 0, 0, 1, 1, canvas ), cardBack(1), scaleX(1.0), scaleY(1.0)
 {
     if ( !cardsFaces ) {
-	if ( smallFlag ) {
+	if ( qt_screen->deviceWidth() < 200 ) {
 	    cardsFaces = new QPixmap( Resource::loadPixmap( "cards/card_face_small" ) );
 	    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0001_small" ) );
 	    cardsChars = new QBitmap( Resource::loadBitmap( "cards/card_chars_small" ) );
@@ -134,7 +134,7 @@ void CanvasCard::setCardBack(int b)
 	if ( cardsBacks )
 	    delete cardsBacks;
 
-	if ( smallFlag ) {
+	if ( qt_screen->deviceWidth() < 200 ) {
 	    switch (cardBack) {
 		case 0:
 		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0001_small" ) ); break;
@@ -204,7 +204,7 @@ void CanvasCard::draw(QPainter &painter)
 	else
 	    p->setPen( QColor( 0, 0, 0 ) );
 
-	if ( smallFlag ) {
+	if ( qt_screen->deviceWidth() < 200 ) {
 	    p->drawPixmap( ix +      0, iy +     0, *cardsFaces );
 	    p->drawPixmap( ix +      3, iy +     3, *cardsChars, 5*(getValue()-1), 0, 5, 6 );
 	    p->drawPixmap( ix +     11, iy +     3, *cardsSuits, 5*(getSuit()-1), 0, 5, 6 );
