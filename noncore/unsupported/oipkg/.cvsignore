@@ -1,10 +1,5 @@
+.cvsignore
 Makefile*
 moc_*
-pkfind.cpp
-pkfind.h
-pksettings.cpp
-pksettings.h
-pkdesc.cpp
-pkdesc.h
-packagemanagerbase.cpp
-packagemanagerbase.h
+*~
+*.kdev*

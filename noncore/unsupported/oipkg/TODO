@@ -1,0 +1,8 @@
+* search
+* parse "to install" and "to remove" from status
+* Settings Class
+* Dialog to display ipkg output live
+* install local file
+* make oipkg determine dest of to remove apps
+* error handling
+* manage links
