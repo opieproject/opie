@@ -384,8 +384,9 @@ void DateBookWeek::showDay( int day )
 	QDate d=bdate;
 
 	// Calculate offset to first day of week.
-	int dayoffset=d.dayOfWeek();
-	if(bStartOnMonday) dayoffset--;
+	int dayoffset=d.dayOfWeek() % 7;
+
+             	if(bStartOnMonday) dayoffset--;
 
 	day--;
 	d=d.addDays(day-dayoffset);
