@@ -58,6 +58,7 @@ public:
     QString filterStr;
     QListViewItem * item;
     bool b;
+    QStringList fileSystemTypeList, fsList;
     int currentServerConfig;
 protected slots:
     void showLocalMenu( QListViewItem *);
@@ -102,7 +103,10 @@ protected slots:
 protected:
   QGridLayout *tabLayout, *tabLayout_2, *tabLayout_3;
   QStringList remoteDirPathStringList, localDirPathStringList;
-  void keyReleaseEvent( QKeyEvent *);    
+  void keyReleaseEvent( QKeyEvent *);
+  QString getFileSystemType(const QString &);
+  void parsetab(const QString &fileName);
+  
 protected slots:
   void homeButtonPushed();
   void docButtonPushed();
