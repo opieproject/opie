@@ -147,6 +147,9 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     keyComboBox->insertItem( tr( "Key_Mail" ) );
     SoundSettingsBaseLayout->addMultiCellWidget( keyComboBox , 6, 6, 0, 0 ,1);
 
+    keyLabel=  new QLabel( this, "keyLabel" );
+    SoundSettingsBaseLayout->addMultiCellWidget( keyLabel , 6, 6, 0, 2, 3);
+
     QLabel *timeLimitLabel;
     timeLimitLabel= new QLabel( this, "timeLimitLabel" );
     timeLimitLabel->setText( tr( "Recording Limit in seconds:" ) );
@@ -162,6 +165,13 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
 
     SoundSettingsBaseLayout->addMultiCellWidget(timeLimitComboBox  , 8, 8, 0, 0, 1);
 
+
+    restartCheckBox= new QCheckBox( this, "restartCheck" );
+    restartCheckBox->setText( tr( "Restart Opie if needed" ) );
+
+    SoundSettingsBaseLayout->addMultiCellWidget( restartCheckBox , 9, 9, 0, 0, 1);
+    
+    
     QSpacerItem* spacer4 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
     SoundSettingsBaseLayout->addItem( spacer4, 9, 0 );
 }

@@ -32,16 +32,18 @@ public:
  SoundSettings( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
   
 protected:
+   bool noWarning;
 /*  void accept(); */
 /*  void reject(); */
  void updateStorageCombo();
  void updateLocationCombo();
   
 private slots:
- void setKeyButton(const QString &);
+ void setKeyButton( int);
  void setSizeLimitButton(const QString &);
  void setLocation(const QString &);
- void cleanUp();    
+ void cleanUp();
+ void restartOpie(bool);
 };
 
 

@@ -32,6 +32,7 @@ public:
 
     QLabel* PixmapLabel1_2;
     QLabel* TextLabel1_2;
+    QLabel *keyLabel;
 /*     QLabel* volLabel; */
 /*     QLabel* micLabel; */
 /*     QSlider* volume; */
@@ -48,6 +49,7 @@ public:
     QComboBox* LocationComboBox;
     QComboBox* keyComboBox;
     QComboBox* timeLimitComboBox;
+    QCheckBox *restartCheckBox;
     bool keyReset;
 protected:
     QGridLayout* SoundSettingsBaseLayout;

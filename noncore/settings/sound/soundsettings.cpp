@@ -32,6 +32,7 @@
 #include <qcheckbox.h>
 #include <qlineedit.h>
 #include <qcombobox.h>
+#include <qlabel.h>
 
 #include <sys/utsname.h>
 #include <sys/time.h>
@@ -40,11 +41,12 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
+
 SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
         : SoundSettingsBase( parent, objname, TRUE, fl )
 {
     keyReset=FALSE;
-
+    noWarning=false;
     Config config( "qpe");
     config.setGroup( "Volume" );
     Config cfg("Vmemo");
@@ -64,10 +66,12 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     else if(rate==44100)
         sampleRate->setCurrentItem(4);
 
-    stereoCheckBox->setChecked(cfg.readNumEntry("Stereo", 0));      //TODO hide if zaurus- mono only
+    stereoCheckBox->setChecked(cfg.readNumEntry("Stereo", 0));
+//TODO hide if zaurus- mono only
 
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX) //since ipaq and zaurus have particular
-                                                //devices
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
+//since ipaq and zaurus have particular
+//devices
     bool systemZaurus=FALSE;
     struct utsname name; /* check for embedix kernel running on the zaurus*/
     if (uname(&name) != -1) {// TODO change this here,...
@@ -106,9 +110,14 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     keyComboBox->setCurrentItem(cfg.readNumEntry("toggleKey") );
 
     updateStorageCombo();
-    connect( LocationComboBox,SIGNAL(activated(const QString &)),this,SLOT( setLocation(const QString &)));
-    connect( keyComboBox,SIGNAL(activated(const QString &)),this,SLOT( setKeyButton(const QString &)));
-    connect( timeLimitComboBox,SIGNAL(activated( const QString &)),this,SLOT( setSizeLimitButton(const QString &)));
+    connect( LocationComboBox,SIGNAL(activated(const QString &)), this,
+             SLOT( setLocation(const QString &)));
+    connect( keyComboBox,SIGNAL(activated( int)), this,
+             SLOT( setKeyButton( int)));
+    connect( timeLimitComboBox,SIGNAL(activated( const QString &)), this,
+             SLOT( setSizeLimitButton(const QString &)));
+    connect( restartCheckBox,SIGNAL( toggled( bool)), this,
+             SLOT( restartOpie( bool)));
 //     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 }
 
@@ -134,7 +143,7 @@ void SoundSettings::updateStorageCombo() {
         list << name + ": " +path;
         if( loc.find( path,0,TRUE) != -1)
             set = i;      
-//             if(dit.current()->file().find(path) != -1 ) storage=name;
+//   if(dit.current()->file().find(path) != -1 ) storage=name;
         i++;
     }
 
@@ -160,28 +169,24 @@ void SoundSettings::cleanUp() {
     cfg.writeEntry("Stereo",stereoCheckBox->isChecked());
     cfg.writeEntry("SixteenBit",sixteenBitCheckBox->isChecked());
 
-    if(keyReset) {
-        switch ( QMessageBox::warning(this,tr("Restart"),
-                                      tr("To implement a new key switch\nOpie will have to be restarted./n<B>Restart</B> Opie now?"),
-                                      tr("Yes"),tr("No"),0,1,1) ) {
-          case 0: 
-              QCopEnvelope ("QPE/System", "restart()");
-              break;
-        };
+    if(keyReset && noWarning) {
+        QCopEnvelope ("QPE/System", "restart()");
     }
 }
 
-void SoundSettings::setKeyButton(const QString &name) {
+void SoundSettings::setKeyButton( int index) {
     Config cfg("Vmemo");
     cfg.setGroup("Defaults");
-    cfg.writeEntry( "toggleKey", keyComboBox->currentItem()  );
+    cfg.writeEntry( "toggleKey", index );
     keyReset = TRUE;
-    if(keyComboBox->currentItem() == 1)
+    if( index == 1) {
         cfg.writeEntry( "hideIcon", 0 );
-    else
+        keyLabel->setText(tr("Shows icon"));
+    }
+    else {
         cfg.writeEntry( "hideIcon", 1);
-
-        
+        keyLabel->setText(tr("Hides icon"));
+    }
     cfg.write();
 }
 
@@ -199,3 +204,8 @@ void SoundSettings::setSizeLimitButton(const QString &index) {
         cfg.writeEntry("SizeLimit", index);
     cfg.write();    
 }
+
+void SoundSettings::restartOpie(bool b) {
+    noWarning=b;
+}
+
