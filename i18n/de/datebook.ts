@@ -252,7 +252,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Standart</translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <source>Medium</source>
@@ -264,7 +264,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Jump to current time (dayview)</source>
-        <translation>Zur aktuellen Zeit springen (Tagesansicht)</translation>
+        <translation>Zur akt. Zeit springen (Tagesansicht)</translation>
     </message>
 </context>
 <context>
@@ -465,7 +465,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Description </source>
-        <translation type="unfinished"></translation>
+        <translation>Bescheibung</translation>
     </message>
     <message>
         <source>Start - End </source>
@@ -499,7 +499,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation>Jeden</translation>
+        <translation>Jedes</translation>
     </message>
     <message>
         <source>%1 %2 every </source>

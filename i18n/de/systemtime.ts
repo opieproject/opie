@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Weeks start on</source>
-        <translation>Woche starten am</translation>
+        <translation>Woche startet am</translation>
     </message>
     <message>
         <source>Sunday</source>
@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>D/M hh:mm</source>
-        <translation>T/M ss:mm</translation>
+        <translation>Sonntag</translation>
     </message>
     <message>
         <source>M/D hh:mm</source>

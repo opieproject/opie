@@ -128,7 +128,7 @@ entering data!</source>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie</translation>
     </message>
     <message>
         <source>Small</source>
@@ -144,7 +144,7 @@ entering data!</source>
     </message>
     <message>
         <source>Font</source>
-        <translation>Schriftart</translation>
+        <translation>Schrift</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>

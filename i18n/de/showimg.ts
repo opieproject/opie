@@ -3,18 +3,18 @@
     <name>ControlsDialog</name>
     <message>
         <source>Brightness</source>
-        <translation type="unfinished"></translation>
+        <translation>Helligkeit</translation>
     </message>
 </context>
 <context>
     <name>ImageFileSelector</name>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
 </context>
 <context>
@@ -73,7 +73,7 @@
     </message>
     <message>
         <source> True color</source>
-        <translation type="unfinished"></translation>
+        <translation>Echtfarben</translation>
     </message>
     <message>
         <source>, %1 alpha levels</source>
@@ -89,67 +89,67 @@
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorschau</translation>
     </message>
     <message>
         <source>Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Diashow</translation>
     </message>
     <message>
         <source>Preferences..</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen..</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <source>Image Info ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildinformationen...</translation>
     </message>
     <message>
         <source>Open ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen...</translation>
     </message>
     <message>
         <source>Rotate 270</source>
-        <translation type="unfinished">270° Drehen</translation>
+        <translation>270° Drehen</translation>
     </message>
     <message>
         <source>Brightness ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Helligkeit...</translation>
     </message>
     <message>
         <source>Black And White</source>
-        <translation type="unfinished"></translation>
+        <translation>Schwarzweiß</translation>
     </message>
     <message>
         <source>Scale to Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf Bildschirmgröße vergrößern</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <source>%1 colors</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Farben</translation>
     </message>
     <message>
         <source>%1 alpha levels</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Alphakanäle</translation>
     </message>
     <message>
         <source>8-bit alpha channel</source>
-        <translation type="unfinished"></translation>
+        <translation>8-bit alpha Kanal</translation>
     </message>
 </context>
 </TS>

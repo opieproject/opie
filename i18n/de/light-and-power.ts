@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Suspend after</source>
-        <translation type="unfinished">Ausschalten nach:</translation>
+        <translation>Ausschalten nach</translation>
     </message>
     <message>
         <source>Bright</source>
@@ -47,11 +47,11 @@
     </message>
     <message>
         <source>Only deactivate LCD during Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>LCD nur ausschalten, wenn das Gerät deaktiviert ist</translation>
     </message>
     <message>
         <source>Light and Power Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Helligkeitseinstellungen</translation>
     </message>
 </context>
 </TS>

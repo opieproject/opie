@@ -207,7 +207,7 @@ wirklich löschen?</translation>
     <name>ImportDialog</name>
     <message>
         <source>Automatic preview</source>
-        <translation>automatische Vorschau</translation>
+        <translation>autom. Vorschau</translation>
     </message>
     <message>
         <source>Preview</source>
@@ -215,7 +215,7 @@ wirklich löschen?</translation>
     </message>
     <message>
         <source>DrawPad - Import</source>
-        <translation>Zeichenbrett - Imporieren</translation>
+        <translation>Zeichenbrett - Importieren</translation>
     </message>
 </context>
 <context>
@@ -281,7 +281,7 @@ wirklich löschen?</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Größe:#</translation>
+        <translation type="unfinished">Größe:</translation>
     </message>
     <message>
         <source>Width:</source>

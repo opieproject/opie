@@ -18,23 +18,23 @@
     <name>MemoryInfo</name>
     <message>
         <source>Used (%1 kB)</source>
-        <translation>Genutzt Speicher (% 1 kB)</translation>
+        <translation>Genutzt Speicher (%1 kB)</translation>
     </message>
     <message>
         <source>Buffers (%1 kB)</source>
-        <translation>Gepuffert Speicher (% 1 kB)</translation>
+        <translation>Gepufferter Speicher (%1 kB)</translation>
     </message>
     <message>
         <source>Cached (%1 kB)</source>
-        <translation>Gecached (% 1 kB)</translation>
+        <translation>Gecached (%1 kB)</translation>
     </message>
     <message>
         <source>Free (%1 kB)</source>
-        <translation>Freier Speicher (% 1 kB)</translation>
+        <translation>Freier Speicher (%1 kB)</translation>
     </message>
     <message>
         <source>Total Memory: %1 kB</source>
-        <translation>Gesamter Spicher: % 1 kB</translation>
+        <translation>Gesamter Speicher: %1 kB</translation>
     </message>
 </context>
 <context>
@@ -67,11 +67,11 @@
     <name>MountInfo</name>
     <message>
         <source>Used (%1 kB)</source>
-        <translation>Genutzt (% 1 kB)</translation>
+        <translation>Genutzt (%1 kB)</translation>
     </message>
     <message>
         <source>Available (%1 kB)</source>
-        <translation>Verfügar (% 1 kB)</translation>
+        <translation>Verfügar (%1 kB)</translation>
     </message>
     <message>
         <source> : %1 kB</source>
@@ -89,7 +89,7 @@
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
-        <translation></translation>
+        <translation>PID</translation>
     </message>
     <message>
         <source>Command</source>
@@ -97,7 +97,7 @@
     </message>
     <message>
         <source>Status</source>
-        <translation></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Time</source>
@@ -116,14 +116,14 @@
     </message>
     <message>
         <source>Int. Storage</source>
-        <translation>Interner Speichermedium</translation>
+        <translation>Internes Speichermedium</translation>
     </message>
 </context>
 <context>
     <name>SystemInfo</name>
     <message>
         <source>System Info</source>
-        <translation></translation>
+        <translation>Systeminformationen</translation>
     </message>
     <message>
         <source>Memory</source>
@@ -135,7 +135,7 @@
     </message>
     <message>
         <source>CPU</source>
-        <translation></translation>
+        <translation>CPU</translation>
     </message>
     <message>
         <source>Process</source>
@@ -143,7 +143,7 @@
     </message>
     <message>
         <source>Version</source>
-        <translation></translation>
+        <translation>Version</translation>
     </message>
     <message>
         <source>Modules</source>
@@ -158,7 +158,7 @@
     </message>
     <message>
         <source>Compiled by: </source>
-        <translation>Kompiliert bei:</translation>
+        <translation>Kompiliert von:</translation>
     </message>
     <message>
         <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
