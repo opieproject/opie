@@ -2,7 +2,7 @@ Package: opie-i18n-da
 Files: i18n/da/.directory i18n/da/*.qm
 Priority: optional
 Section: opie/i18n
-Maintainer: Tais M. Hansen <mellen@handhelds.org>
+Maintainer: Niels Andersen <animal@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, opie-language
