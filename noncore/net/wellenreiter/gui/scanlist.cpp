@@ -53,6 +53,11 @@ MScanListView::~MScanListView()
 {
 };
 
+OListViewItem* MScanListView::childFactory()
+{
+    return new MScanListItem( this );
+}
+
 void MScanListView::serializeTo( QDataStream& s) const
 {
     qDebug( "serializing MScanListView" );
@@ -96,7 +101,7 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
         // animate the item
         
         /*
-        
+
         const QPixmap* pixmap = item->pixmap( 0 );
         const QPixmap* nextpixmap = ani2;
         if ( pixmap == ani1 )
@@ -112,12 +117,12 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
         //qDebug( "current pixmap %d, next %d", pixmap, nextpixmap );
 
         // we have already seen this net, check all childs if MAC exists
-        
+
         network = item;
-        
+
         item = static_cast<MScanListItem*> ( item->firstChild() );
         assert( item ); // this shouldn't fail
-        
+
         while ( item && ( item->text( 2 ) != macaddr ) )
         {
             qDebug( "subitemtext: %s", (const char*) item->text( 2 ) );
@@ -198,14 +203,34 @@ MScanListItem::MScanListItem( QListViewItem* parent, QString type, QString essid
     decorateItem( type, essid, macaddr, wep, channel, signal );
 }
 
+OListViewItem* MScanListItem::childFactory()
+{
+    return new MScanListItem( this );
+}
+
 void MScanListItem::serializeTo( QDataStream& s ) const
 {
+    qDebug( "serializing MScanListItem" );
     OListViewItem::serializeTo( s );
+
+    s << _type;
+    s << (Q_UINT8) _wep;
 }
 
 void MScanListItem::serializeFrom( QDataStream& s )
 {
+    qDebug( "serializing MScanListItem" );
     OListViewItem::serializeFrom( s );
+
+    s >> _type;
+    s >> (Q_UINT8) _wep;
+
+    QString name;
+    name.sprintf( "wellenreiter/%s", (const char*) _type );
+    setPixmap( col_type, Resource::loadPixmap( name ) );
+    if ( _wep )
+        setPixmap( col_wep, Resource::loadPixmap( "wellenreiter/cracked" ) ); //FIXME: rename the pixmap!
+    listView()->triggerUpdate();
 }
 
 void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal )

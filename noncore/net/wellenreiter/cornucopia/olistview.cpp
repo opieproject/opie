@@ -123,6 +123,11 @@ void OListView::setColumnSeparator( const QPen& p )
     repaint();
 }
 
+OListViewItem* OListView::childFactory()
+{
+    return new OListViewItem( this );
+}
+
 #ifndef QT_NO_DATASTREAM
 void OListView::serializeTo( QDataStream& s ) const
 {
@@ -180,7 +185,7 @@ void OListView::serializeFrom( QDataStream& s )
 
     for ( int i = 0; i < items; ++i )
     {
-        OListViewItem* item = new OListViewItem( this );
+        OListViewItem* item = childFactory();
         s >> *item;
     }
 
@@ -337,6 +342,11 @@ void OListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column, in
     p->drawLine( width-1, 0, width-1, height() );
 }
 
+OListViewItem* OListViewItem::childFactory()
+{
+    return new OListViewItem( this );
+}
+
 #ifndef QT_NO_DATASTREAM
 void OListViewItem::serializeTo( QDataStream& s ) const
 {
@@ -388,7 +398,7 @@ void OListViewItem::serializeFrom( QDataStream& s )
 
     for ( int i = 0; i < items; ++i )
     {
-        OListViewItem* item = new OListViewItem( this );
+        OListViewItem* item = childFactory();
         s >> (*item);
     }
 

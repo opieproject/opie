@@ -33,6 +33,7 @@ class MScanListView: public OListView
 
     void setManufacturerDB( ManufacturerDB* manufacturerdb );
 
+    virtual OListViewItem* childFactory();
     virtual void serializeTo( QDataStream& s ) const;
     virtual void serializeFrom( QDataStream& s );
 
@@ -50,20 +51,20 @@ class MScanListItem: public OListViewItem
 {
   public:
     MScanListItem::MScanListItem( QListView* parent,
-                                  QString type,
-                                  QString essid,
-                                  QString macaddr,
-                                  bool wep,
-                                  int channel,
-                                  int signal );
+                                  QString type = "unknown",
+                                  QString essid = "unknown",
+                                  QString macaddr = "unknown",
+                                  bool wep = false,
+                                  int channel = 0,
+                                  int signal = 0 );
 
     MScanListItem::MScanListItem( QListViewItem* parent,
-                                  QString type,
-                                  QString essid,
-                                  QString macaddr,
-                                  bool wep,
-                                  int channel,
-                                  int signal );
+                                  QString type = "unknown",
+                                  QString essid = "unknown",
+                                  QString macaddr = "unknown",
+                                  bool wep = false,
+                                  int channel = 0,
+                                  int signal = 0 );
 
 
   protected:
@@ -86,6 +87,7 @@ class MScanListItem: public OListViewItem
 
     void setManufacturer( const QString& manufacturer );
 
+    virtual OListViewItem* childFactory();
     virtual void serializeTo( QDataStream& s ) const;
     virtual void serializeFrom( QDataStream& s );
 

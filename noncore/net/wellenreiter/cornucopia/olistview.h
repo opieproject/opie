@@ -38,7 +38,7 @@
 #include <qpen.h>
 #include <qdatastream.h>
 
-class OListViewFactory;
+class OListViewItem;
 
 /**
  * A @ref QListView variant featuring visual and functional enhancements
@@ -115,6 +115,12 @@ class OListViewFactory;
     */
     const QPen& columnSeparator() const;
 
+   /**
+    * create a list view item as child of this object
+    * @return the new object
+    */
+    virtual OListViewItem* childFactory();
+
     #ifndef QT_NO_DATASTREAM
    /**
     * serialize this object to a @ref QDataStream
@@ -129,22 +135,10 @@ class OListViewFactory;
     virtual void serializeFrom( QDataStream& s );
     #endif
 
-   /**
-    * returns a factory for OListView classes
-    * creates one on the fly if it doesn't exist
-    * @return the XML Factory
-    */
-    #ifndef QT_NO_XML
-    //OListViewFactory* Factory();
-    #endif
-
   private:
     QColor m_alternateBackground;
     bool m_fullWidth;
     QPen m_columnSeparator;
-    #ifndef QT_NO_XML
-    //OListViewFactory* m_Factory;
-    #endif
 };
 
 #ifndef QT_NO_DATASTREAM
@@ -200,6 +194,12 @@ class OListViewItem: public QListViewItem
     bool isAlternate();
     void paintCell( QPainter *p, const QColorGroup &cg, int column, int width, int alignment );
     void init();
+
+   /**
+    * create a list view item as child of this object
+    * @return the new object
+    */
+    virtual OListViewItem* childFactory();
 
     #ifndef QT_NO_DATASTREAM
    /**
