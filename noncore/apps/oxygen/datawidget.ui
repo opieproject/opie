@@ -1,0 +1,85 @@
+<!DOCTYPE UI><UI>
+<class>dataWidget</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>dataWidget</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>249</width>
+            <height>276</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Chemical Data</string>
+    </property>
+    <widget>
+        <class>QComboBox</class>
+        <item>
+            <property>
+                <name>text</name>
+                <string>Helium</string>
+            </property>
+        </item>
+        <item>
+            <property>
+                <name>text</name>
+                <string>Carbon</string>
+            </property>
+        </item>
+        <item>
+            <property>
+                <name>text</name>
+                <string>Oxygen</string>
+            </property>
+        </item>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>ComboBox2</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>10</x>
+                <y>10</y>
+                <width>230</width>
+                <height>50</height>
+            </rect>
+        </property>
+    </widget>
+    <widget>
+        <class>QTable</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>dataTable</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>0</x>
+                <y>80</y>
+                <width>240</width>
+                <height>190</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>numRows</name>
+            <number>6</number>
+        </property>
+        <property stdset="1">
+            <name>numCols</name>
+            <number>2</number>
+        </property>
+        <property stdset="1">
+            <name>showGrid</name>
+            <bool>false</bool>
+        </property>
+    </widget>
+</widget>
+</UI>

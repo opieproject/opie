@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>271</width>
-            <height>357</height>
+            <width>253</width>
+            <height>352</height>
         </rect>
     </property>
     <property stdset="1">
@@ -36,7 +36,7 @@
             <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>270</width>
+                <width>250</width>
                 <height>350</height>
             </rect>
         </property>
@@ -67,8 +67,8 @@
                     <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>260</width>
-                        <height>320</height>
+                        <width>240</width>
+                        <height>310</height>
                     </rect>
                 </property>
                 <property stdset="1">
@@ -90,8 +90,8 @@
                         <rect>
                             <x>0</x>
                             <y>0</y>
-                            <width>260</width>
-                            <height>320</height>
+                            <width>240</width>
+                            <height>310</height>
                         </rect>
                     </property>
                     <vbox>

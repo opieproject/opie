@@ -5,20 +5,16 @@
  * the Free Software Foundation; either version 2 of the License, or       *
  * ( at your option ) any later version.                                   *
  *                                                                         *
- *  ***********************************************************************/
+ **************************************************************************/
 #include "oxygen.h"
 
-#include <qmenubar.h>
-#include <qstatusbar.h>
-#include <qpopupmenu.h>
 #include <qlabel.h>
 #include <qapplication.h>
 #include <qpushbutton.h>
-#include <qfile.h>
-#include <qdir.h>
 #include <qvbox.h>
 #include "calcdlg.h"
 #include "calcdlgui.h"
+#include "datawidgetui.h"
 
 Oxygen::Oxygen()
   : QMainWindow()
@@ -27,6 +23,8 @@ Oxygen::Oxygen()
     vbox = new QVBox( this );
     QPushButton *setButton = new QPushButton( "Settings", vbox );
     connect ( setButton, SIGNAL( clicked() ), this, SLOT( slotSettings() ) );
+    QPushButton *dataButton = new QPushButton( "Data", vbox );
+    connect ( dataButton, SIGNAL( clicked() ), this, SLOT( slotData() ) );
     QPushButton *calcButton = new QPushButton( "Calculations", vbox );
     connect ( calcButton, SIGNAL( clicked() ), this, SLOT( slotCalculations() ) );
     QPushButton *pseButton = new QPushButton( "PSE", vbox );
@@ -46,6 +44,11 @@ void Oxygen::close()
 void Oxygen::slotCalculations(){ 
     calcDlgUI *CalcDlgUI = new calcDlgUI();
     CalcDlgUI->show();
+};
+
+void Oxygen::slotData(){ 
+    dataWidgetUI *DataWidgetUI = new dataWidgetUI();
+    DataWidgetUI->show();
 };
 
 void Oxygen::slotSettings(){ };

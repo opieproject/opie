@@ -1,3 +1,4 @@
+
 /***************************************************************************
  *                                                                         *
  * This program is free software; you can redistribute it and/or modify    *
@@ -6,22 +7,14 @@
  * ( at your option ) any later version.                                   *
  *                                                                         *
  **************************************************************************/
+#include "datawidget.h"
 
-#include <qmainwindow.h>
+class QTable;
 
-class  QVBox;
-
-class Oxygen : public QMainWindow
+class dataWidgetUI : public dataWidget
 {
 	Q_OBJECT
 	
     public:
-		Oxygen();
-        QVBox *vbox;
-	private slots:
-        void slotCalculations();
-        void slotSettings();
-        void slotData();
-        void slotPSE();
-		void close();
+		dataWidgetUI();
 };
