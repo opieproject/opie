@@ -1,6 +1,6 @@
 /*
                =.            This file is part of the OPIE Project
-             .=l.            Copyright (C) Holger Freyther <zecke@handhelds.org>
+             .=l.            Copyright (C) Holger Freyther <freyther@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This library is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
@@ -115,11 +115,6 @@ OFileDialog::OFileDialog(const QString &caption,
             this, SLOT(slotSelectorOk()) ) ;
 
     connect(file, SIGNAL(dirSelected(const QString&) ), this, SLOT(slotDirSelected(const QString&) ) );
-
-#if 0
-    connect(file, SIGNAL(dirSelected(const QString&) ),
-            this, SLOT(slotDirSelected(const QString&) ) );
-#endif
 }
 /**
  * @returns the mimetype of the selected
@@ -251,6 +246,4 @@ void OFileDialog::slotSelectorOk( )
 void OFileDialog::slotDirSelected(const QString &dir )
 {
     setCaption( dir );
-    // if mode
-    //accept();
 }
