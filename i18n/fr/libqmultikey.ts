@@ -1,29 +1,30 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>ConfigDlg</name>
     <message>
         <source>Multikey Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration du &quot;Clavier&quot;</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration générale</translation>
     </message>
     <message>
         <source>Keymap File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier &quot;keymap&quot;</translation>
     </message>
     <message>
         <source>Current Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Langage courant</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Pickboard</source>

@@ -35,18 +35,18 @@
     </message>
     <message>
         <source>Select a reference character from the list.  Practice writing in the area on the right.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez un caractère de référence dans la liste. Exercez-vous à écrire dans la partie droite.</translation>
     </message>
     <message>
         <source>No match</source>
-        <translation type="unfinished"></translation>
+        <translation>Aucune correspondance</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Handwriting</source>
-        <translation type="unfinished"></translation>
+        <translation>Main levée</translation>
     </message>
 </context>
 <context>
@@ -73,18 +73,18 @@
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
 </context>
 <context>
     <name>QIMPenInput</name>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Raccourci</translation>
     </message>
 </context>
 <context>
@@ -95,7 +95,7 @@
     </message>
     <message>
         <source>Character:</source>
-        <translation type="unfinished"></translation>
+        <translation>Caractère:</translation>
     </message>
 </context>
 <context>

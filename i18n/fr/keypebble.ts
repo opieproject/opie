@@ -255,7 +255,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Toggle obscuring the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner/Désélectionner le camouflage du mot de passe</translation>
     </message>
     <message>
         <source>The name of the VNC server</source>
@@ -283,11 +283,11 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Scale the remote display to fit on the PDA (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier la taille de l&apos;écran distant pour l&apos;ajuster à celle du PDA (Lent)</translation>
     </message>
     <message>
         <source>Enable transmiting identical rectangles as references to existing data</source>
-        <translation type="unfinished"></translation>
+        <translation>permettre la transmission de rectangle identique comme référence à des données existantes</translation>
     </message>
 </context>
 </TS>

@@ -59,11 +59,11 @@
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished">Liquid</translation>
+        <translation>Liquid</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
-        <translation type="unfinished">Style &quot;High Performance Liquid&quot; par Mosfet</translation>
+        <translation>Style &quot;High Performance Liquid&quot; par Mosfet</translation>
     </message>
 </context>
 </TS>

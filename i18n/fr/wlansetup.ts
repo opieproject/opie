@@ -1,93 +1,94 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>WLAN</name>
     <message>
         <source>Wireless LAN Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration du réseau sans fils</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Config</translation>
     </message>
     <message>
         <source>ESS ID</source>
-        <translation type="unfinished"></translation>
+        <translation>ESS  ID</translation>
     </message>
     <message>
         <source>Non-Spec ESSID: &quot;ANY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Non-Spec ESSID: &quot;ANY&quot;</translation>
     </message>
     <message>
         <source>Specific ESSID</source>
-        <translation type="unfinished"></translation>
+        <translation>ESSID specifique</translation>
     </message>
     <message>
         <source>Network Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type de réseau</translation>
     </message>
     <message>
         <source>Infrastructure</source>
-        <translation type="unfinished"></translation>
+        <translation>Infrastructure</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Channel/Canal</translation>
     </message>
     <message>
         <source>802.11 Ad-Hoc</source>
-        <translation type="unfinished"></translation>
+        <translation>802.11 Ad-Hoc</translation>
     </message>
     <message>
         <source>Wep</source>
-        <translation type="unfinished"></translation>
+        <translation>Wep</translation>
     </message>
     <message>
         <source>Key Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>définition des clés</translation>
     </message>
     <message>
         <source>Key 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé 1</translation>
     </message>
     <message>
         <source>Key 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé 2</translation>
     </message>
     <message>
         <source>Key 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé 3</translation>
     </message>
     <message>
         <source>Key 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé 4</translation>
     </message>
     <message>
         <source>Key Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Longueur de la clé</translation>
     </message>
     <message>
         <source>40 Bits</source>
-        <translation type="unfinished"></translation>
+        <translation>40 bits</translation>
     </message>
     <message>
         <source>128 Bits</source>
-        <translation type="unfinished"></translation>
+        <translation>128 bits</translation>
     </message>
     <message>
         <source>Authentication Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type d&apos;authentification</translation>
     </message>
     <message>
         <source>Open System</source>
-        <translation type="unfinished"></translation>
+        <translation>System ouvert</translation>
     </message>
     <message>
         <source>Shared Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Clé partagée</translation>
     </message>
     <message>
         <source>Enable Wep</source>
-        <translation type="unfinished"></translation>
+        <translation>permettre le &quot;Wep&quot;</translation>
     </message>
 </context>
 </TS>
