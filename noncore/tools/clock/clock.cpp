@@ -516,6 +516,10 @@ void Clock::timerEvent( QTimerEvent *e )
     }
 }
 
+AnalogClock::AnalogClock(QWidget * parent, const char * name) : QFrame( parent, name ), clear(true)
+{
+  bg = Resource::loadPixmap("clock/bg");
+}
 
 QSizePolicy AnalogClock::sizePolicy() const
 {
@@ -526,6 +530,8 @@ void AnalogClock::drawContents( QPainter *p )
 {
   QRect r = contentsRect();
   QRect fr;
+
+  p->drawPixmap(QPoint(0, 0), bg, r);
 
   if ( r. width ( ) > r. height ( ))
     fr. setRect (( r. width ( ) - r. height ( )) / 2, r. y ( ), r. height ( ), r. height ( ));

@@ -22,6 +22,7 @@
 
 #include <qdatetime.h>
 #include <qvbox.h>
+#include <qpixmap.h>
 
 class QLCDNumber;
 class QLabel;
@@ -35,8 +36,7 @@ class AnalogClock : public QFrame
     Q_OBJECT
 
 public:
-    AnalogClock( QWidget * parent = 0, const char * name = 0 )
-  : QFrame( parent, name ), clear(true) {}
+    AnalogClock( QWidget * parent = 0, const char * name = 0 );
 
     QSizePolicy sizePolicy() const;
 
@@ -47,6 +47,7 @@ protected:
 
 private:
 
+    QPixmap bg;
     QTime currTime;
     QTime prevTime;
     bool clear;
