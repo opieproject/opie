@@ -10,5 +10,7 @@ Name[pt]=Segurança
 Name[es]=Seguridad
 Name[zh_TW]=保密
 Name[ko]=보안
+Name[da]=Sikkerhed
 Comment=Security settings dialog
 Comment[es]=Diálogo de configuración de seguridad
+Comment[da]=Sikkerheds indstillinger
