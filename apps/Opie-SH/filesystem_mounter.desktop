@@ -2,10 +2,12 @@
 Exec=filesystem_mounter.sh
 Icon=opie-sh-scripts/fsmounter
 Type=Application
-Name=Filesystem Mounter
+Name=
 Comment=Frontend to mount/unmount filesystems
 Name[es]=Montador
 Comment[es]=Interfaz para montar/desmontar sistemas de ficheros
+Name[fr]=Filesystem Mounter
+Comment[fr]=Monte les systèmes de fichier
 Name[it]=Mounter
 Comment[it]=Monta/smonta i filesystem
 Name[pt]=Montar Disco

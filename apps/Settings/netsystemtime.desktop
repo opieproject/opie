@@ -10,6 +10,7 @@ Name[de]=Datum
 Name[es]=Hora NTP
 Comment[es]=Fije la hora por el Network Time Protocol (NTP)
 Name[fr]=Date et heure
+Comment[fr]=Configuration de la date et de l'heure système
 Name[it]=Data e Orario
 Comment[it]=Impostazioni data e orario via rete
 Name[pt]=Data e Hora
