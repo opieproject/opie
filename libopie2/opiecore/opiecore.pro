@@ -6,6 +6,7 @@ HEADERS     = oapplication.h            \
               odebug.h                  \
               oglobal.h                 \
               oglobalsettings.h         \
+              oinputsystem.h            \
               okeyconfigmanager.h       \
               okeyfilter.h              \
 	      opluginloader.h           \
@@ -21,6 +22,7 @@ SOURCES     = oapplication.cpp          \
               odebug.cpp                \
               oglobal.cpp               \
               oglobalsettings.cpp       \
+              oinputsystem.cpp          \
               okeyconfigmanager.cpp     \
               okeyfilter.cpp            \
 	      opluginloader.cpp         \
@@ -46,7 +48,7 @@ include( device/device.pro )
 
 INTERFACES  =
 TARGET      = opiecore2
-VERSION     = 1.9.2
+VERSION     = 1.9.3
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 
