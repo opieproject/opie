@@ -43,5 +43,5 @@ INTERFACES	= settings.ui \
 TARGET		= aqpkg
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lqpe -lstdc++
+LIBS        += -lqpe -lopie -lstdc++
 DESTDIR = $(OPIEDIR)/bin
