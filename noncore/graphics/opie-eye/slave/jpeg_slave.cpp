@@ -13,7 +13,7 @@ using namespace Opie::Core;
 #include <qimage.h>
 
 /**
-	exif.h
+    exif.h
 */
 
 #include <stdio.h>
@@ -266,7 +266,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
 
             if (a >= 6){
 
-                owarn << "too many padding bytes" << oendl; 
+                owarn << "too many padding bytes" << oendl;
                 return false;
 
             }
@@ -331,14 +331,14 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
                 return true;
 
             case M_EOI:   // in case it's a tables-only JPEG stream
-                owarn << "No image in jpeg!" << oendl; 
+                owarn << "No image in jpeg!" << oendl;
                 return false;
 
             case M_COM: // Comment section
-		// pieczy 2002-02-12
-		// now the User comment goes to UserComment
-		// so we can store a Comment section also in READ_EXIF mode
-		process_COM(Data, itemlen);
+        // pieczy 2002-02-12
+        // now the User comment goes to UserComment
+        // so we can store a Comment section also in READ_EXIF mode
+        process_COM(Data, itemlen);
                 break;
 
             case M_JFIF:
@@ -547,14 +547,14 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
 
             case TAG_MODEL:
                 ExifData::CameraModel = QString((char*)ValuePtr);
-		break;
+        break;
 
             case TAG_ORIENTATION:
                 Orientation = (int)ConvertAnyFormat(ValuePtr, Format);
                 break;
 
             case TAG_DATETIME_ORIGINAL:
-		DateTime = QString((char*)ValuePtr);
+        DateTime = QString((char*)ValuePtr);
                 break;
 
             case TAG_USERCOMMENT:
@@ -589,7 +589,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
             case TAG_FNUMBER:
                 // Simplest way of expressing aperture, so I trust it the most.
                 // (overwrite previously computd value if there is one)
-		ExifData::ApertureFNumber = (float)ConvertAnyFormat(ValuePtr, Format);
+        ExifData::ApertureFNumber = (float)ConvertAnyFormat(ValuePtr, Format);
                 break;
 
             case TAG_APERTURE:
@@ -666,12 +666,12 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                 // Remaining cases contributed by: Volker C. Schoech (schoech@gmx.de)
 
             case TAG_EXPOSURE_BIAS:
-	    	ExifData::ExposureBias = (float)ConvertAnyFormat(ValuePtr, Format);
-		break;
+            ExifData::ExposureBias = (float)ConvertAnyFormat(ValuePtr, Format);
+        break;
 
             case TAG_WHITEBALANCE:
                  ExifData::Whitebalance = (int)ConvertAnyFormat(ValuePtr, Format);
-		 break;
+         break;
 
             case TAG_METERING_MODE:
                 ExifData::MeteringMode = (int)ConvertAnyFormat(ValuePtr, Format);
@@ -720,17 +720,17 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
 
         if (DIR_ENTRY_ADDR(DirStart, NumDirEntries) + 4 <= OffsetBase+ExifLength){
             Offset = Get32u(DIR_ENTRY_ADDR(DirStart, NumDirEntries));
-	    // There is at least one jpeg from an HP camera having an Offset of almost MAXUINT.
-	    // Adding OffsetBase to it produces an overflow, so compare with ExifLength here.
-	    // See http://bugs.kde.org/show_bug.cgi?id=54542
-	    if (Offset && Offset < ExifLength){
+        // There is at least one jpeg from an HP camera having an Offset of almost MAXUINT.
+        // Adding OffsetBase to it produces an overflow, so compare with ExifLength here.
+        // See http://bugs.kde.org/show_bug.cgi?id=54542
+        if (Offset && Offset < ExifLength){
                 SubdirStart = OffsetBase + Offset;
                 if (SubdirStart > OffsetBase+ExifLength){
                     if (SubdirStart < OffsetBase+ExifLength+20){
                         // Jhead 1.3 or earlier would crop the whole directory!
                         // As Jhead produces this form of format incorrectness,
                         // I'll just let it pass silently
-                        owarn << "Thumbnail removed with Jhead 1.3 or earlier" << oendl; 
+                        owarn << "Thumbnail removed with Jhead 1.3 or earlier" << oendl;
                     }else{
                         return;
                     }
@@ -748,7 +748,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
     if (ThumbnailSize && ThumbnailOffset){
         if (ThumbnailSize + ThumbnailOffset <= ExifLength){
             // The thumbnail pointer appears to be valid.  Store it.
-	    Thumbnail.loadFromData(OffsetBase + ThumbnailOffset, ThumbnailSize, "JPEG");
+        Thumbnail.loadFromData(OffsetBase + ThumbnailOffset, ThumbnailSize, "JPEG");
         }
     }
 }
@@ -917,7 +917,7 @@ bool ExifData::scan(const QString & path)
     ret = ReadJpegSections(f, READ_EXIF);
 
     if (ret == false){
-        owarn << "Not JPEG file!" << oendl; 
+        owarn << "Not JPEG file!" << oendl;
         DiscardData();
         f.close();
         return false;
@@ -1415,11 +1415,19 @@ QString JpegSlave::fullImageInfo( const QString& path) {
 
 QPixmap JpegSlave::pixmap( const QString& path, int wid, int hei) {
     ExifData ImageInfo;
+    /*
+     */
     if ( !ImageInfo.scan( path ) || ImageInfo.isNullThumbnail() ) {
         QImage img;
         QImageIO iio( path, 0l );
-        QString str = QString( "Fast Shrink( 4 ) Scale( %1, %2, ScaleFree)" ).arg( wid ).arg( hei );
-        iio.setParameters( str.latin1() );// will be strdupped anyway
+        if (wid < ImageInfo.getWidth() || hei<ImageInfo.getHeight()) {
+            odebug << "Scaling "<<ImageInfo.getWidth()<<"x"<<ImageInfo.getHeight()
+                << " to "<<wid<<"x"<<hei<< " ("<<path<<")"<<oendl;
+            QString str = QString( "Fast Shrink( 4 ) Scale( %1, %2, ScaleFree)" ).arg( wid ).arg( hei );
+            iio.setParameters( str.latin1() );// will be strdupped anyway
+        } else {
+            odebug << "Not scaling "<<ImageInfo.getWidth()<<"x"<<ImageInfo.getHeight()<< " ("<<path<<")"<<oendl;
+        }
         img = iio.read() ? iio.image() : QImage();
         return ThumbNailTool::scaleImage(  img, wid,hei );
     }else{
