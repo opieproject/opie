@@ -143,6 +143,7 @@ CONFIG_SUSPENDAPPLET	core/applets/suspendapplet	suspendapplet.pro
 CONFIG_SYSINFO	noncore/apps/sysinfo	sysinfo.pro
 CONFIG_TABLEVIEWER	noncore/apps/tableviewer	tableviewer.pro
 CONFIG_TABMANAGER	noncore/settings/tabmanager	tabmanager.pro
+CONFIG_TABOAPP	core/apps/taboapp	taboapp.pro
 CONFIG_TEST	libsql/test	test.pro
 CONFIG_TEST	noncore/apps/opie-console/test	test.pro
 CONFIG_TETRIX	noncore/games/tetrix	tetrix.pro
