@@ -33,7 +33,7 @@ Wände noch Ihren Schwanz berühren.</translation>
     <message>
         <source>GAME OVER!
  Your Score: %1</source>
-        <translation>VERLOREN! 
+        <translation>Erwischt! 
 Ihre Punktezahl: %1</translation>
     </message>
     <message>
