@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nationaldays>
+<description value="Australian holidays"/>
+<entries>
+<entry name="New Year's Day" date="01-01"/>
+<entry name="Christmas" date="12-25"/>
+<entry name="Boxing Day" date="12-26"/>
+<entry name="Australia Day" date="01-26"/>
+<entry name="Anzac Day" date="04-25"/>
+<entry name="Canberra Day" date="03-21"/>
+<entry name="Melbourne Show Day" date="08-22"/>
+<entry name="Adelaide Cup Day" date="05-16"/>
+<entry name="SA - Proclamation Day" date="12-28"/>
+<entry name="TAS - Eight Hours Day" date="03-07"/>
+<entry name="TAS - Bank Holiday" date="04-05"/>
+<entry name="TAS - Recreation Day" date="07-11"/>
+<entry name="WA - Queen's Birthday" date="08-26"/>
+</entries>
+</nationaldays>
