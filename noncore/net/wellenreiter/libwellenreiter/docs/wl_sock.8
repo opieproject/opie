@@ -2,9 +2,9 @@ wl_sock
 
 #include <wellenreiter/wl_sock.hh>
 
-int wl_setupsock(const char *host, int port)
+int wl_setupsock(const char *host, int port, struct sockaddr_in *)
 int wl_send(const char *host, int port, const char *string, ...)
-int wl_recv(int *socket, char *out, int len)
+int wl_recv(int *socket, struct sockaddr_in *, char *out, int len)
 
 
 wl_setupsock() returns the number of the activated udp socket.
@@ -18,7 +18,9 @@ maxlen of len.
 
 wl_setupsock() returns -1 on error and the number of socket on
 success.
-wl_send() returns -1 on error and 0 on success.
+wl_send() returns 0 on error and 1 on success.
 wl_recv() returns -1 on error and the type of the received packet
 on success.
 
+Note: To use this function you have to set a sockaddr_in structure
+and pass it to wl_setupsock and wl_receive.
