@@ -62,7 +62,7 @@ HelpWindow::HelpWindow( QWidget *parent, const char *name, bool modal, WFlags fl
 {
 //    resize( 230, 280 );
 
-    setCaption( "Help for AQPkg" );
+    setCaption( "Help for SFCave" );
 
     QVBoxLayout *layout = new QVBoxLayout( this );
     QString text = HELP_TEXT;;
