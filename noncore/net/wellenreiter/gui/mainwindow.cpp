@@ -135,8 +135,9 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     //id = mb->insertItem( tr( "&View" ), view );
     //mb->setItemEnabled( id, false );
     id = mb->insertItem( tr( "&Sniffer" ), sniffer );
-    //id = mb->insertItem( tr( "&Demo" ), demo );
-    //mb->setItemEnabled( id, true );
+
+    id = mb->insertItem( tr( "&Demo" ), demo );
+    mb->setItemEnabled( id, true );
 
     #ifdef QWS
     mb->insertItem( startButton );
@@ -215,6 +216,8 @@ WellenreiterMainWindow::~WellenreiterMainWindow()
 
 void WellenreiterMainWindow::demoAddStations()
 {
+    mw = 0;
+
     mw->netView()->addNewItem( "managed", "Vanille", "00:00:20:EF:A6:43", true, 6, 80 );
     mw->netView()->addNewItem( "managed", "Vanille", "00:30:6D:EF:A6:23", true, 11, 10 );
     mw->netView()->addNewItem( "adhoc", "ELAN", "00:A0:F8:E7:16:22", false, 3, 10 );
@@ -359,3 +362,5 @@ void WellenreiterMainWindow::closeEvent( QCloseEvent* e )
         QMainWindow::closeEvent( e );
     }
 }
+
+

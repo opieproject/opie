@@ -46,6 +46,7 @@ int main( int argc, char **argv )
     a.showMainWidget( w );
     #else
     a.setMainWidget( w );
+    w->setCaption( "Wellenreiter II" );
     w->show();
     #endif
 
@@ -64,6 +65,8 @@ int main( int argc, char **argv )
 
     // dhcp check - NOT HERE! This really belongs as a static member to OProcess
     // and I want to call it like that: if ( OProcess::isRunning( QString& ) ) ...
+
+    static int killed = false;
 
     QString line;
     QDir d = QDir( "/proc" );
@@ -89,11 +92,23 @@ int main( int argc, char **argv )
         if ( result == QMessageBox::Yes )
         {
             if ( -1 == ::kill( (*it).toInt(), SIGTERM ) )
-                qWarning( "Wellenreiter: can't kill process (%s)", result, strerror( errno ) );
+                qWarning( "Wellenreiter: can't kill process #%d (%s)", result, strerror( errno ) );
+            else
+                killed = true;
         }
     }
 
     a.exec();
+
+    if ( killed )
+    {
+        result = QMessageBox::warning( w, " - Wellenreiter II -  (dhcp)", QObject::tr( "Restart your dhcp client?" ), QMessageBox::Yes, QMessageBox::No );
+        if ( result == QMessageBox::Yes )
+        {
+            system( QString().sprintf( "dhclient &; udhcpcd &; dhcpcd &" ) );
+        }
+    }
+
     delete w;
     return 0;
 }

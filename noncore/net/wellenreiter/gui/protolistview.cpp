@@ -84,7 +84,7 @@ void ProtocolListView::addProtocol( const QString& name )
         #ifdef QWS
         combo->setFixedWidth( 75 );
         #endif
-        combo->insertItem( "Ignore" );
+        combo->insertItem( "Pass" );
         combo->insertItem( "Discard!" );
         combo->insertItem( "TouchSound" );
         combo->insertItem( "AlarmSound" );

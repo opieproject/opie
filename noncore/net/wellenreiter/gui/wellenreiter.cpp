@@ -403,12 +403,19 @@ void Wellenreiter::startClicked()
     }
 
     // configure device
-
     ONetwork* net = ONetwork::instance();
     iface = static_cast<OWirelessNetworkInterface*>(net->interface( interface ));
 
-    // set monitor mode
+    // bring device UP
+    iface->setUp( true );
+    if ( !iface->isUp() )
+    {
+        QMessageBox::warning( this, "Wellenreiter II",
+                            tr( "Can't bring interface '%1' up:\n" ).arg( iface->name() ) + strerror( errno ) );
+        return;
+    }
 
+    // set monitor mode
     bool usePrism = configwindow->usePrismHeader();
 
     switch ( cardtype )
@@ -430,7 +437,7 @@ void Wellenreiter::startClicked()
         if ( !iface->monitorMode() )
         {
             QMessageBox::warning( this, "Wellenreiter II",
-                                  tr( "Can't set device into monitor mode." ) );
+                                  tr( "Can't set interface '%1' into monitor mode:\n" ).arg( iface->name() ) + strerror( errno ) );
             return;
         }
     }
@@ -461,7 +468,7 @@ void Wellenreiter::startClicked()
     if ( !pcap->isOpen() )
     {
         QMessageBox::warning( this, "Wellenreiter II",
-                              tr( "Can't open packet capturer:\n" ) + QString(strerror( errno ) ));
+                              tr( "Can't open packet capturer for '%1':\n" ).arg( iface->name() ) + QString(strerror( errno ) ));
         return;
     }
 
@@ -530,3 +537,4 @@ void Wellenreiter::doAction( const QString& action, const QString& protocol, OPa
         QMessageBox::information ( this, "Notification!",
         QString().sprintf( "Got packet with protocol '%s'", (const char*) protocol ) );
 }
+

@@ -113,6 +113,10 @@
                             <cstring>GroupBox1</cstring>
                         </property>
                         <property stdset="1">
+                            <name>enabled</name>
+                            <bool>false</bool>
+                        </property>
+                        <property stdset="1">
                             <name>title</name>
                             <string>Scan on channel</string>
                         </property>
@@ -457,6 +461,10 @@
                         <property stdset="1">
                             <name>name</name>
                             <cstring>adaptiveHopping</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>enabled</name>
+                            <bool>false</bool>
                         </property>
                         <property stdset="1">
                             <name>text</name>

@@ -48,6 +48,7 @@ class Wellenreiter : public WellenreiterBase {
     MHexWindow* hexWindow() const { return hexwindow; };
     bool isDaemonRunning() const { return sniffing; };
 
+  public:
     bool sniffing;
 
   protected:
