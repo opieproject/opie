@@ -28,6 +28,9 @@
 #include "fileSaver.h"
 
 #include <qpe/filemanager.h>
+#include <qpe/qcopenvelope_qws.h>
+
+#include <opie/ofileselector.h>
 
 #include <qmainwindow.h>
 #include <qmultilineedit.h>
@@ -57,9 +60,10 @@ public:
     QAction *nStart;
     bool edited, edited1;
     void openFile( const QString & );
+        QCopChannel * channel;
 public slots:
     void editorChanged();
-
+void  receive(const QCString&, const QByteArray&);
 protected:
     void closeEvent( QCloseEvent *e );
     void doSearchBar();
@@ -106,7 +110,6 @@ private:
 private:
     fileSaver *fileSaveDlg;
     fileBrowser *browseForFiles;
-
     QpeEditor* editor;
     QToolBar *menu, *editBar, *searchBar;
     QLineEdit *searchEdit;

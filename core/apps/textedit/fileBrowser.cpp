@@ -48,7 +48,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
-        setName( tr("fileBrowser") );
+        setName( "fileBrowser" );
     setCaption(tr( name ) );
 //     mimeType =  mimeFilter;
 //     MimeType mt( mimeType);
@@ -120,7 +120,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     ListView->setSorting( 2, FALSE);
     ListView->addColumn( tr( "Size" ) );
     ListView->setColumnWidth(1,-1);
-    ListView->addColumn( tr("Date"),-1);
+    ListView->addColumn( "Date",-1);
 
     ListView->setColumnWidthMode(0,QListView::Manual);
     ListView->setColumnAlignment(1,QListView::AlignRight);
@@ -134,7 +134,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     connect( ListView, SIGNAL( clicked( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
 
     FileStack->addWidget( ListView, get_unique_id() );
-
+mimeType="text/plain";
     fileSelector = new FileSelector( mimeType, FileStack, "fileselector" , FALSE, FALSE); //buggy
 //    connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( showEditTools() ) );
 //    connect( fileSelector, SIGNAL( newSelected( const DocLnk &) ), this, SLOT( newFile( const DocLnk & ) ) );
@@ -348,14 +348,14 @@ void fileBrowser::docButtonPushed() {
 
 void fileBrowser::selectionChanged( const QString &select )
 {
-    if ( select == tr("Documents"))  {
+    if ( select == "Documents")  {
         FileStack->raiseWidget( fileSelector );
         dirPathCombo->hide();
         cdUpButton->hide();
         docButton->hide();
         homeButton->hide();
     } else {
-        if ( select == tr("All files") )
+        if ( select == "All files" )
             currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::All);
         else
             currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
@@ -412,7 +412,7 @@ void fileBrowser::doCd() {
 
 void fileBrowser::makDir() {
     InputDialog *fileDlg;
-    fileDlg = new InputDialog(this,tr("Make Directory"),TRUE, 0);
+    fileDlg = new InputDialog(this,"Make Directory",TRUE, 0);
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
        QString  filename = fileDlg->LineEdit1->text();
@@ -425,14 +425,14 @@ void fileBrowser::makDir() {
 void fileBrowser::localRename() {
     QString curFile = ListView->currentItem()->text(0);
     InputDialog *fileDlg;
-    fileDlg = new InputDialog(this,tr("Rename"),TRUE, 0);
+    fileDlg = new InputDialog(this,"Rename",TRUE, 0);
     fileDlg->setTextEdit((const QString &) curFile);
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
         QString oldname =  currentDir.canonicalPath() + "/" + curFile;
         QString newName =  currentDir.canonicalPath() + "/" + fileDlg->LineEdit1->text();//+".playlist";
         if( rename(oldname.latin1(), newName.latin1())== -1)
-            QMessageBox::message(tr("Note"),tr("Could not rename"));
+            QMessageBox::message("Note","Could not rename");
     }
     populateList();
 }
@@ -440,8 +440,8 @@ void fileBrowser::localRename() {
 void fileBrowser::localDelete() {
     QString f = ListView->currentItem()->text(0);
     if(QDir(f).exists() ) {
-        switch ( QMessageBox::warning(this,tr("Delete"),tr("Do you really want to delete\n")+f+
-                                      tr(" ?\nIt must be empty"),tr("Yes"),tr("No"),0,0,1) ) {
+        switch ( QMessageBox::warning(this,"Delete","Do you really want to delete\n"+f+
+                                      " ?\nIt must be empty","Yes","No",0,0,1) ) {
           case 0: {
               f=currentDir.canonicalPath()+"/"+f;
               QString cmd="rmdir "+f;
@@ -454,8 +454,8 @@ void fileBrowser::localDelete() {
               break;
         };
     } else {
-        switch ( QMessageBox::warning(this,tr("Delete"),tr("Do you really want to delete\n")+f
-                                      +" ?",tr("Yes"),tr("No"),0,0,1) ) {
+        switch ( QMessageBox::warning(this,"Delete","Do you really want to delete\n"+f
+                                      +" ?","Yes","No",0,0,1) ) {
           case 0: {
               f=currentDir.canonicalPath()+"/"+f;
               QString cmd="rm "+f;
@@ -493,7 +493,7 @@ void fileBrowser::updateMimeTypeMenu() {
 void fileBrowser::showType(const QString &t) {
 
     qDebug(t);
-    if(t.find(tr("All"),0,TRUE) != -1) {
+    if(t.find("All",0,TRUE) != -1) {
         filterStr =  "*";
     } else {
         QStringList list =  mimetypes.grep( t,TRUE);
@@ -605,7 +605,7 @@ InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
-  setName( tr("InputDialog") );
+  setName( "InputDialog" );
     resize( 234, 50 ); 
     setMaximumSize( QSize( 240, 50 ) );
     setCaption( tr(name ) );

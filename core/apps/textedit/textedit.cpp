@@ -35,6 +35,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
+#include <qpe/qcopenvelope_qws.h>
 //#include <qpe/finddialog.h>
 
 #include <qstringlist.h>
@@ -238,6 +239,10 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     setToolBarsMovable( FALSE );
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
+    channel = new QCopChannel( "QPE/Application/textedit", this );
+    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+        this, SLOT(receive(const QCString&, const QByteArray&)) );
+
     setIcon( Resource::loadPixmap( "TextEditor" ) );
 
     QPEToolBar *bar = new QPEToolBar( this );
@@ -397,13 +402,13 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     wa->setOn(wrap);
     updateCaption();
 
-    cfg.setGroup("View");
-    if(cfg.readEntry("startNew","TRUE") == "TRUE") {
-        nStart->setOn(TRUE);
-        fileNew();
-    } else {
-        fileOpen();
-    }
+     cfg.setGroup("View");
+     if(cfg.readEntry("startNew","TRUE") == "TRUE") {
+         nStart->setOn(TRUE);
+         fileNew();
+     } else {
+         fileOpen();
+     }
     viewSelection = cfg.readNumEntry( "FileView", 0 );
 }
 
@@ -485,17 +490,19 @@ void TextEdit::setWordWrap(bool y)
 
 void TextEdit::fileNew()
 {
-    if( !bFromDocView  ) {
-        saveAs();
-    }
+//     if( !bFromDocView  ) {
+//         saveAs();
+//     }
     newFile(DocLnk());
 }
 
 void TextEdit::fileOpen()
 {
-    browseForFiles=new fileBrowser(this,tr("Open File"),TRUE,0, "text/*"); //
+    browseForFiles = new fileBrowser(this,tr("Open File"),TRUE,0, "text/*"); //
     browseForFiles->setFileView( viewSelection );
     browseForFiles->showMaximized();
+//    if( result != -1 )
+
     if( browseForFiles->exec() != -1 ) {
         QString selFile = browseForFiles->selectedFileName;
         QStringList fileList = browseForFiles->fileList;
@@ -618,14 +625,16 @@ void TextEdit::newFile( const DocLnk &f )
     setWState (WState_Reserved1 );
     editor->setFocus();
     doc = new DocLnk(nf);
+    currentFileName = "Unnamed";
     qDebug("newFile "+currentFileName);
-    updateCaption(currentFileName);
+    updateCaption( currentFileName);
+//    editor->setEdited( FALSE);
 }
 
 void TextEdit::openFile( const QString &f )
 {
 
-    bFromDocView = TRUE;
+//    bFromDocView = TRUE;
     DocLnk nf;
     nf.setType("text/plain");
     nf.setFile(f);
@@ -636,39 +645,35 @@ void TextEdit::openFile( const QString &f )
 
     openFile(nf);
     showEditTools();
-    // Show filename in caption
+      // Show filename in caption
     QString name = f;
     int sep = name.findRev( '/' );
     if ( sep > 0 )
-  name = name.mid( sep+1 );
+        name = name.mid( sep+1 );
     updateCaption( name );
 }
 
 void TextEdit::openFile( const DocLnk &f )
 {
 //    clear();
-    bFromDocView = TRUE;
+//    bFromDocView = TRUE;
     FileManager fm;
     QString txt;
     currentFileName=f.name();
     qDebug("openFile doclnk " + currentFileName);
     if ( !fm.loadFile( f, txt ) ) {
-  // ####### could be a new file
+          // ####### could be a new file
         qDebug( "Cannot open file" );
-
-  //return;
     }
-
-    fileNew();
+//    fileNew();
     if ( doc )
-  delete doc;
+        delete doc;
     doc = new DocLnk(f);
     editor->setText(txt);
     editor->setEdited( FALSE);
     edited1=FALSE;
     edited=FALSE;
 
-    qDebug("openFile doclnk "+currentFileName);
     doc->setName(currentFileName);
     updateCaption();
 }
@@ -691,9 +696,9 @@ void TextEdit::showEditTools()
 bool TextEdit::save()
 {
     QString file = doc->file();
-    qDebug(file);
+    qDebug("saver file "+file);
     QString name= doc->name();
-    qDebug(name);
+    qDebug("File named "+name);
     QString rt = editor->text();
     if( !rt.isEmpty() ) {
         if(name.isEmpty()) {
@@ -731,13 +736,12 @@ bool TextEdit::save()
 bool TextEdit::saveAs()
 {
 //        qDebug("saveAsFile "+currentFileName);
-
-      // case of nothing to save... /// there's always something to save
-//          if ( !doc )//|| !bFromDocView)
-//            {
-//                qDebug("no doc");
-//                return true;
-//      }
+ // case of nothing to save... 
+    if ( !doc )//|| !bFromDocView)
+      {
+          qDebug("no doc");
+          return true;
+      }
     if ( !editor->edited() ) {
         delete doc;
         doc = 0;
@@ -747,7 +751,7 @@ bool TextEdit::saveAs()
     QString rt = editor->text();
     qDebug(currentFileName);
     
-    if( currentFileName.isEmpty() || currentFileName == tr("Unnamed")) {
+    if( currentFileName.isEmpty() || currentFileName == tr("Unnamed") || currentFileName == tr("Text Editor")) {
         qDebug("do silly TT filename thing");
         if ( doc->name().isEmpty() ) {
             QString pt = rt.simplifyWhiteSpace();
@@ -814,7 +818,7 @@ bool TextEdit::saveAs()
     if(fileSaveDlg)
         delete fileSaveDlg;
     return true;
-}
+} //end saveAs
 
 void TextEdit::clear()
 {
@@ -835,7 +839,8 @@ void TextEdit::updateCaption( const QString &name )
       s = tr( "Unnamed" );
        currentFileName=s;
   }
-
+  if(s.left(1) == "/")
+      s = s.right(s.length()-1);
   setCaption( s + " - " + tr("Text Editor") );
     }
 }
@@ -843,12 +848,11 @@ void TextEdit::updateCaption( const QString &name )
 void TextEdit::setDocument(const QString& fileref)
 {
     bFromDocView = TRUE;
-    qDebug("setDocument "+fileref);
-    bFromDocView = TRUE;
     if(fileref.find(".desktop",0,TRUE) == -1) {
-    openFile(fileref);
+        openFile(fileref);
     } else {
-      openFile(DocLnk(fileref));
+        qDebug("is desktop file");
+        openFile(DocLnk(fileref));
     }
     editor->setEdited(TRUE);
     edited1=FALSE;
@@ -864,12 +868,9 @@ void TextEdit::closeEvent( QCloseEvent *e )
 
 void TextEdit::accept()
  {
-    QString file = doc->file();
-      if (file.find("_.txt",0,TRUE) ==-1)
-         save();
-      else {
-          QFile(file).remove();
-      }
+       //if(caption() !="Unnamed")
+ if(edited1)
+     saveAs();
     exit(0);
 
 }
@@ -933,4 +934,12 @@ void TextEdit::editorChanged() {
         edited1=TRUE;
     }
     edited=TRUE;
+}
+
+void TextEdit::receive(const QCString&msg, const QByteArray&) {
+    qDebug("QCop "+msg);
+  if ( msg == "setDocument(QString)" ) {
+      qDebug("bugger all");
+  }
+
 }
