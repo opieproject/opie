@@ -296,7 +296,7 @@ void MainWindow :: init()
     
     stack->raiseWidget( networkPkgWindow );
 }
-
+/*
 void MainWindow :: setDocument( const QString &doc )
 {
     // Remove path from package
@@ -326,12 +326,16 @@ void MainWindow :: setDocument( const QString &doc )
         }
     }
 }
-
+*/
 void MainWindow :: displaySettings()
 {
     SettingsImpl *dlg = new SettingsImpl( mgr, this, "Settings", true );
     if ( dlg->showDlg( 0 ) )
+    {
+        stack->raiseWidget( progressWindow );
     	updateData();
+        stack->raiseWidget( networkPkgWindow );
+    }
     delete dlg;
 }
 
@@ -728,8 +732,8 @@ void MainWindow :: searchForPackage( const QString &text )
         // look through package list for text startng at current position
         vector<InstallData> workingPackages;
         QCheckListItem *start = (QCheckListItem *)packagesList->currentItem();
-        if ( start != 0 )
-            start = (QCheckListItem *)start->nextSibling();
+//        if ( start != 0 )
+//            start = (QCheckListItem *)start->nextSibling();
         
         if ( start == 0 )
             start = (QCheckListItem *)packagesList->firstChild();
@@ -767,9 +771,8 @@ void MainWindow :: updateServer()
     InstallDlgImpl dlg( &ipkg, tr( "Refreshing server package lists" ), this, tr( "Upgrade" ), true );
     dlg.showDlg();
 
-    // Reload data
-    mgr->reloadServerData();
-    serverSelected(-1);
+    reloadData();
+    
 //  delete progDlg;
 }
 
@@ -797,9 +800,7 @@ void MainWindow :: upgradePackages()
         InstallDlgImpl dlg( &ipkg, tr( "Upgrading installed packages" ), this, tr( "Upgrade" ), true );
         dlg.showDlg();
 
-        // Reload data
-        mgr->reloadServerData();
-        serverSelected(-1);
+        reloadData();
     }
 }
                                                        void MainWindow :: downloadPackage()
@@ -864,8 +865,7 @@ void MainWindow :: upgradePackages()
 
     if ( doUpdate )
     {
-        mgr->reloadServerData();
-        serverSelected( -1 );
+        reloadData();
     }
 }
 
@@ -940,10 +940,8 @@ void MainWindow :: downloadRemotePackage()
     InstallDlgImpl dlg2( workingPackages, mgr, this, "Install", true );
     dlg2.showDlg();
 
-    // Reload data
-    mgr->reloadServerData();
-    serverSelected(-1);
-
+    reloadData();
+    
 #ifdef QWS
     // Finally let the main system update itself
     QCopEnvelope e("QPE/System", "linkChanged(QString)");
@@ -988,10 +986,8 @@ void MainWindow :: applyChanges()
     InstallDlgImpl dlg( workingPackages, mgr, this, "Install", true );
     dlg.showDlg();
 
-    // Reload data
-    mgr->reloadServerData();
-    serverSelected(-1);
-
+    reloadData();
+    
 #ifdef QWS
     // Finally let the main system update itself
     QCopEnvelope e("QPE/System", "linkChanged(QString)");
@@ -1119,6 +1115,14 @@ InstallData MainWindow :: dealWithItem( QCheckListItem *item )
         // User hit cancel (on dlg - assume remove)
         return item;
     }
+}
+
+void MainWindow :: reloadData()
+{
+    stack->raiseWidget( progressWindow );
+    mgr->reloadServerData();
+    serverSelected( -1, FALSE );
+    stack->raiseWidget( networkPkgWindow );
 }
 
 void MainWindow :: letterPushed( QString t )

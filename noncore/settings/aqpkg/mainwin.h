@@ -91,6 +91,7 @@ private:
     void downloadSelectedPackages();
     void downloadRemotePackage();
     InstallData dealWithItem( QCheckListItem *item );
+    void reloadData();
     
     // Progress widget
     QWidget      *progressWindow;
@@ -100,7 +101,7 @@ private:
     void initProgressWidget();
     
 public slots:
-    void setDocument( const QString &doc );
+//    void setDocument( const QString &doc );
     void displayHelp();
     void displayFindBar();
     void repeatFind();
