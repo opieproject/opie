@@ -150,7 +150,6 @@ namespace ThreadUtil
         bool m_inEventHandler : 1;
         Mutex m_guard;
         WaitCondition m_condition;
-        QGuardedPtr<Channel> m_channel;
     };
 
     class Channel : public QObject
