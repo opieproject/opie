@@ -4,7 +4,8 @@ Information about porting Opie to MacOS-X (eilers)
 Credits:
 --------
 
-Special thanks to xxxx for its patches for qt-X11 (2.3.2), QT/E (2.3.5) and qtopia (1.6.1).
+Special thanks to Andreas Junghans (webmaster@lucid-cake.net) for its patches for qt-X11 (2.3.2), 
+QT/E (2.3.5) and qtopia (1.6.1).
 Without them, I wouldn't be able to provide the port for OPIE to MacOS-X that fast..
 
 Status:
@@ -42,13 +43,13 @@ Before compiling for MacOS-X, you need the following:
 4. Patches for QT-2.3.2 for MacOSX
 5. Patches for QT/E-2.3.7 for MacOSX
 
-Please follow the instructions by xxxx how to create a buildsystem
-for your Mac.
+Please follow the instructions by http://www.lucid-cake.net/osx_qpe/index_de.html
+how to create a buildsystem for your Mac.
 What is different to the previous desciption: 
 You don't need Qtopia ! 
 It is recommended to use QT/E in version 2.3.7 instead of 2.3.5 as described.
 The Patch for QT/E for Opie, including all other opie-patches is available in the
-qt-directory ($OPIEDIR/qt) and is called "qte237-all-macosx.patch"
+qt-directory ($OPIEDIR/qt) and is called "qte237-all-macosx.patch".
 
 If your buildsystem is working correctly, you should be able to build
 opie. You have to enter "make menuconfig" and set 
