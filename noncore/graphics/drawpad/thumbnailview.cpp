@@ -21,21 +21,22 @@
 #include <qpe/resource.h>
 
 #include <qapplication.h>
-#include <qheader.h>
 #include <qimage.h>
 #include <qlayout.h>
 #include <qmessagebox.h>
 #include <qtoolbutton.h>
 
-PageListViewItem::PageListViewItem(Page* page, QListView* parent)
-    : QListViewItem(parent)
+#define THUMBNAIL_SIZE 48
+
+PageListBoxItem::PageListBoxItem(Page* page, QListBox* parent)
+    : QListBoxItem(parent)
 {
     m_pPage = page;
 
     QImage image = m_pPage->convertToImage();
 
-    int previewWidth = 64;
-    int previewHeight = 64;
+    int previewWidth = THUMBNAIL_SIZE;
+    int previewHeight = THUMBNAIL_SIZE;
 
     float widthScale = 1.0;
     float heightScale = 1.0;
@@ -49,49 +50,100 @@ PageListViewItem::PageListViewItem(Page* page, QListView* parent)
     }
 
     float scale = (widthScale < heightScale ? widthScale : heightScale);
-    QImage previewImage = image.smoothScale((int)(image.width() * scale) , (int)(image.height() * scale));
+    QImage thumbnailImage = image.smoothScale((int)(image.width() * scale) , (int)(image.height() * scale));
 
-    QPixmap previewPixmap;
-    previewPixmap.convertFromImage(previewImage);
+    m_thumbnail.convertFromImage(thumbnailImage);
 
-    QPixmap pixmap(64, 64);
+    m_titleText = QObject::tr("Title:") + " -";
+    m_dimensionText = QObject::tr("Dimension:") + " " + QString::number(m_pPage->width())
+                      + "x" + QString::number(m_pPage->height());
+    m_dateTimeText = QObject::tr("Date:") + " -";
 
-    pixmap.fill(listView()->colorGroup().mid());
-    bitBlt(&pixmap, (pixmap.width() - previewPixmap.width()) / 2,
-           (pixmap.height() - previewPixmap.height()) / 2, &previewPixmap);
+    QColor baseColor = parent->colorGroup().base();
+    int h, s, v;
+    baseColor.hsv(&h, &s, &v);
 
-    setPixmap(0, pixmap);
+    if (v > 128) {
+        m_alternateColor = baseColor.dark(106);
+    } else if (baseColor != Qt::black) {
+        m_alternateColor = baseColor.light(110);
+    } else {
+        m_alternateColor = QColor(32, 32, 32);
+    }
 }
 
-PageListViewItem::~PageListViewItem()
+PageListBoxItem::~PageListBoxItem()
 {
 }
 
-Page* PageListViewItem::page() const
+int PageListBoxItem::height(const QListBox*) const
+{
+    return QMAX(THUMBNAIL_SIZE + 4, QApplication::globalStrut().height());
+}
+
+int PageListBoxItem::width(const QListBox* lb) const
+{
+    QFontMetrics fontMetrics = lb->fontMetrics();
+    int maxtextLength = QMAX(fontMetrics.width(m_titleText),
+                             QMAX(fontMetrics.width(m_dimensionText),
+                                  fontMetrics.width(m_dateTimeText)));
+
+    return QMAX(THUMBNAIL_SIZE + maxtextLength + 8, QApplication::globalStrut().width());
+}
+
+void PageListBoxItem::paint(QPainter *painter)
+{
+    QRect itemRect = listBox()->itemRect(this);
+
+    if (!selected() && (listBox()->index(this) % 2)) {
+        painter->fillRect(0, 0, itemRect.width(), itemRect.height(), m_alternateColor);
+    }
+
+    painter->drawPixmap(2 + (THUMBNAIL_SIZE - m_thumbnail.width()) / 2,
+                        2 + (THUMBNAIL_SIZE - m_thumbnail.height()) / 2,
+                        m_thumbnail);
+
+    QFont standardFont = painter->font();
+    QFont boldFont = painter->font();
+    boldFont.setBold(TRUE);
+
+    QFontMetrics fontMetrics = painter->fontMetrics();
+    QRect textRect(THUMBNAIL_SIZE + 6, 2,
+                   itemRect.width() - THUMBNAIL_SIZE - 8,
+                   itemRect.height() - 4);
+
+    painter->setFont(boldFont);
+    painter->drawText(textRect, Qt::AlignLeft | Qt::AlignTop, m_titleText);
+
+    painter->setFont(standardFont);
+    painter->drawText(textRect, Qt::AlignLeft | Qt::AlignVCenter, m_dimensionText);
+    painter->drawText(textRect, Qt::AlignLeft | Qt::AlignBottom, m_dateTimeText);
+
+    if (!selected() && !(listBox()->hasFocus() && listBox()->item(listBox()->currentItem()) == this)) {
+        painter->drawLine(0, itemRect.height() - 1, itemRect.width() - 1, itemRect.height() - 1);
+    }
+}
+
+Page* PageListBoxItem::page() const
 {
     return m_pPage;
 }
 
-PageListView::PageListView(DrawPadCanvas* drawPadCanvas, QWidget* parent, const char* name)
-    : QListView(parent, name)
+PageListBox::PageListBox(DrawPadCanvas* drawPadCanvas, QWidget* parent, const char* name)
+    : QListBox(parent, name)
 {
     m_pDrawPadCanvas = drawPadCanvas;
 
-    header()->hide();
     setVScrollBarMode(QScrollView::AlwaysOn);
-    setAllColumnsShowFocus(true);
-
-    addColumn(tr("Thumbnail"));
-    addColumn(tr("Information"));
 
     updateView();
 }
 
-PageListView::~PageListView()
+PageListBox::~PageListBox()
 {
 }
 
-void PageListView::updateView()
+void PageListBox::updateView()
 {
     clear();
 
@@ -100,44 +152,38 @@ void PageListView::updateView()
         QListIterator<Page> it(pageList);
 
         for (; it.current(); ++it) {
-            new PageListViewItem(it.current(), this);
+            new PageListBoxItem(it.current(), this);
         }
         
-        setSorting(0, false);
         select(m_pDrawPadCanvas->currentPage());
     }
 }
 
-void PageListView::resizeEvent(QResizeEvent* e)
+void PageListBox::select(Page* page)
 {
-    Q_UNUSED(e);
+    uint i = 0;
+    uint itemCount = count();
 
-    setColumnWidth(1, contentsRect().width() - columnWidth(0) - verticalScrollBar()->width());
-}
+    while (i < itemCount) {
+        PageListBoxItem* currentItem = (PageListBoxItem*)item(i);
 
-void PageListView::select(Page* page)
-{
-    PageListViewItem* item = (PageListViewItem*)firstChild();
-
-    while (item) {
-        if (item->page() == page) {
-            setSelected(item, true);
-            ensureItemVisible(item);
+        if (currentItem->page() == page) {
+            setCurrentItem(currentItem);
             break;
         }
 
-        item = (PageListViewItem*)(item->nextSibling());
+        i++;
     }
 }
 
-Page* PageListView::selected() const
+Page* PageListBox::selected() const
 {
     Page* page;
 
-    PageListViewItem* item = (PageListViewItem*)selectedItem();
+    PageListBoxItem* selectedItem = (PageListBoxItem*)item(currentItem());
 
-    if (item) {
-        page = item->page();
+    if (selectedItem) {
+        page = selectedItem->page();
     } else {
         page = NULL;
     }
@@ -180,8 +226,8 @@ ThumbnailView::ThumbnailView(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas, QWi
     m_pMovePageDownButton->setAutoRaise(true);
     connect(m_pMovePageDownButton, SIGNAL(clicked()), this, SLOT(movePageDown()));
 
-    m_pPageListView = new PageListView(m_pDrawPadCanvas, this);
-    connect(m_pPageListView, SIGNAL(selectionChanged()), this, SLOT(changePage()));
+    m_pPageListBox = new PageListBox(m_pDrawPadCanvas, this);
+    connect(m_pPageListBox, SIGNAL(selectionChanged()), this, SLOT(changePage()));
 
     QVBoxLayout* mainLayout = new QVBoxLayout(this, 4, 4);
     QHBoxLayout* buttonLayout = new QHBoxLayout(0);
@@ -194,7 +240,7 @@ ThumbnailView::ThumbnailView(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas, QWi
     buttonLayout->addWidget(m_pMovePageDownButton);
 
     mainLayout->addLayout(buttonLayout);
-    mainLayout->addWidget(m_pPageListView);
+    mainLayout->addWidget(m_pPageListBox);
 
     updateView();
 }
@@ -240,7 +286,7 @@ void ThumbnailView::newPage()
     if (newPageDialog.exec() == QDialog::Accepted) {
         m_pDrawPadCanvas->newPage(newPageDialog.selectedWidth(), newPageDialog.selectedHeight(),
                                   newPageDialog.selectedColor());
-        m_pPageListView->updateView();
+        m_pPageListBox->updateView();
         updateView();
     }
 }
@@ -257,7 +303,7 @@ void ThumbnailView::clearPage()
 
     if (messageBox.exec() == QMessageBox::Yes) {
         m_pDrawPadCanvas->clearPage();
-        m_pPageListView->updateView();
+        m_pPageListBox->updateView();
     }
 }
 
@@ -273,7 +319,7 @@ void ThumbnailView::deletePage()
 
     if (messageBox.exec() == QMessageBox::Yes) {
         m_pDrawPadCanvas->deletePage();
-        m_pPageListView->updateView();
+        m_pPageListBox->updateView();
         updateView();
     }
 }
@@ -281,19 +327,19 @@ void ThumbnailView::deletePage()
 void ThumbnailView::movePageUp()
 {
     m_pDrawPadCanvas->movePageUp();
-    m_pPageListView->updateView();
+    m_pPageListBox->updateView();
     updateView();
 }
 
 void ThumbnailView::movePageDown()
 {
     m_pDrawPadCanvas->movePageDown();
-    m_pPageListView->updateView();
+    m_pPageListBox->updateView();
     updateView();
 }
 
 void ThumbnailView::changePage()
 {
-    m_pDrawPadCanvas->selectPage(m_pPageListView->selected());
+    m_pDrawPadCanvas->selectPage(m_pPageListBox->selected());
     updateView();
 }

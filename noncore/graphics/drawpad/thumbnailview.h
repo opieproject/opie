@@ -14,8 +14,8 @@
 #ifndef THUMBNAILVIEW_H
 #define THUMBNAILVIEW_H
 
+#include <qlistbox.h>
 #include <qwidget.h>
-#include <qlistview.h>
 
 class DrawPad;
 class DrawPadCanvas;
@@ -23,31 +23,40 @@ class Page;
 
 class QToolButton;
 
-class PageListViewItem : public QListViewItem
+class PageListBoxItem : public QListBoxItem
 {
 public:
-    PageListViewItem(Page* page, QListView* parent);
-    ~PageListViewItem();
+    PageListBoxItem(Page* page, QListBox* parent);
+    ~PageListBoxItem();
+
+    int height(const QListBox* lb) const;
+    int width(const QListBox* lb) const;
+    void paint(QPainter *painter);
 
     Page* page() const;
 
 private:
     Page* m_pPage;
+
+    QPixmap m_thumbnail;
+
+    QString m_titleText;
+    QString m_dimensionText;
+    QString m_dateTimeText;
+
+    QColor m_alternateColor;
 };
 
-class PageListView : public QListView
+class PageListBox : public QListBox
 {
 public:
-    PageListView(DrawPadCanvas* drawPadCanvas, QWidget* parent = 0, const char* name = 0);
-    ~PageListView();
+    PageListBox(DrawPadCanvas* drawPadCanvas, QWidget* parent = 0, const char* name = 0);
+    ~PageListBox();
 
     void updateView();
 
     void select(Page* page);
     Page* selected() const;
-
-protected:
-    void resizeEvent(QResizeEvent* e);
 
 private:
     DrawPadCanvas* m_pDrawPadCanvas;
@@ -83,7 +92,7 @@ private:
     QToolButton* m_pMovePageUpButton;
     QToolButton* m_pMovePageDownButton;
 
-    PageListView* m_pPageListView;
+    PageListBox* m_pPageListBox;
 };
 
 #endif // THUMBNAILVIEW_H
