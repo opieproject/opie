@@ -345,8 +345,6 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         QMap<int, QString> list = service->services().classIdList();
         QMap<int, QString>::Iterator it = list.begin();
         QPopupMenu *popup =0l;
-        popup->insertItem( (service->services()).serviceName() );
-        popup->insertSeparator();
         if ( it != list.end() ) {
 	    qWarning("Searching id %d %s", it.key(), it.data().latin1() );
             popup = m_popHelper.find( it.key() /*1*/,
@@ -360,8 +358,7 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
             qWarning("factory returned 0l");
             popup = new QPopupMenu();
         }
-
-        int test1 = popup->insertItem( tr("Test1:"),  0);
+        int test1 = popup->insertItem( tr("Test1:"),  2);
 
         ret = popup->exec( point );
         qWarning("returned from exec() ");
