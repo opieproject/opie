@@ -1,0 +1,13 @@
+#!/bin/sh
+if [ a$OPIEDIR = a ]
+then
+echo OPIEDIR must be set
+exit
+fi
+[ -f $OPIEDIR/pics/tinykate_icon.xpm ] || cp tinykate_icon.xpm $OPIEDIR/pics/
+[ -f $OPIEDIR/apps/tinykate.desktop ] || cp tinykate.desktop $OPIEDIR/apps/
+mv $OPIEDIR/Makefile $OPIEDIR/Makefile.orig
+sed "s/APPS=/&tinykate \\\\ \\
+    /" $OPIEDIR/Makefile.orig >> $OPIEDIR/Makefile
+echo You may wish to move the desktop file in to
+echo an appropriate subdirectory of the menus.
