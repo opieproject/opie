@@ -77,9 +77,11 @@ void PacketView::add( const OPacket* p, int size )
         _packets.append( p );
     }
     else
-    // limited buffer, limit = size
-    if ( _packets.count() < size )
-    {
+    {   // limited buffer, limit = size
+        while ( _packets.count() >= size )
+        {
+            _packets.removeFirst();
+        }
         _packets.append( p );
     }
 
