@@ -42,7 +42,6 @@ WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, W
   else
     qDebug(QString("WLANImp: Can't open file: %1 for reading.").arg(wlanFile).latin1());
   connect(networkType, SIGNAL(activated(int)), this, SLOT(typeChanged(int)));
-
 }
 
 void WLANImp::typeChanged(int mod){
@@ -90,9 +89,13 @@ void WLANImp::parseSettingFile(){
         QString mode = line.mid(line.find("MODE=")+5, line.length());
         if(mode == "Managed"){
           networkType->setCurrentItem(0);
+	  channelLabel->setEnabled(false);
+	  networkChannel->setEnabled(false);
 	}
 	else{
-	  networkType->setCurrentItem(0);
+	  networkType->setCurrentItem(1);
+          networkChannel->setEnabled(true);
+	  channelLabel->setEnabled(true);
 	}
       }
       if(line.contains("KEY0="))
@@ -223,7 +226,7 @@ void WLANImp::accept(){
   // Try to save the interfaces settings.
   if(!interfaceSetup->saveChanges())
     return;
- 
+
   // Restart the device now that the settings have changed
   QString initpath;
   if( QDir("/etc/rc.d/init.d").exists() )
