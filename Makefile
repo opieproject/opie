@@ -25,7 +25,7 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	cardmon \
 	sdmon 
 
-APPS=$(LOCALAPPS) addressbook calculator clock datebook \
+APPS=$(LOCALAPPS) core/addressbook calculator clock datebook \
     filebrowser helpbrowser minesweep mpegplayer \
     settings/light-and-power \
     settings/language \
