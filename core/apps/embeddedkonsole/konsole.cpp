@@ -850,7 +850,7 @@ void Konsole::editCommandListMenuSelected(int iD)
             }
         }
     }
-    if( iD  == -22) {
+    if( iD  == -23) {
         cfg.setGroup("Commands");
 //        qDebug("enableCommandEdit");
         if( !configMenu->isItemChecked(iD) ) {
@@ -866,7 +866,7 @@ void Konsole::editCommandListMenuSelected(int iD)
             te->setFocus();
         }
     }
-    if(iD == -23) {
+    if(iD == -24) {
     // "edit commands"
     CommandEditDialog *m = new CommandEditDialog(this);
     connect(m,SIGNAL(commandsEdited()),this,SLOT(initCommandList()));
