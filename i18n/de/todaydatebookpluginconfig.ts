@@ -19,46 +19,47 @@
     </message>
     <message>
         <source>Check this if the location of an appointment should be shown for each one</source>
-        <translation>Auswählen, wenn dieser Ort eines Termins für jeden einzelnen angezeigt werden soll</translation>
+        <translation>Aktivieren Sie diesen Schalter, wenn Termine mit Ort angezeigt werden sollen.</translation>
     </message>
     <message>
         <source>Show notes</source>
-        <translation>Notizen zeigen</translation>
+        <translation>Notizen anzeigen</translation>
     </message>
     <message>
         <source>Check this if the note attached to an appointment should be shown for each one</source>
-        <translation>Auswählenm wenn die Notiz eines Termins für jeden einzelnen  angezeigt werden soll</translation>
+        <translation>Aktivieren Sie diesen Schalter, wenn Termine mit Notizen angezeigt werden sollen.</translation>
     </message>
     <message>
         <source>Show only later
  appointments</source>
-        <translation>Nur spätere Termine zeigen</translation>
+        <translation>Nur spätere Termine
+zeigen</translation>
     </message>
     <message>
         <source>Check this if only appointments later then current time should be shown</source>
-        <translation>Auswählen, wenn nur aktuelle Termine angezeigt werden sollen</translation>
+        <translation>Aktivieren Sie diesen Schalter, wenn nur zukünftige Termine angezeigt werden sollen.</translation>
     </message>
     <message>
         <source>How many 
 appointment
 should be 
 shown?</source>
-        <translation>Wieviele
-Termine
+        <translation>Wieviele Termine
 sollen angezeigt
-werden ?</translation>
+werden?</translation>
     </message>
     <message>
         <source>How many appointments should be shown maximal. In chronical order</source>
-        <translation>Wieviele Termine sollen maximal in chronologischer Reihenfolge angezeigt werden</translation>
+        <translation>Stellen Sie hier ein, wieviele Termine maximal angezeigt werden.</translation>
     </message>
     <message>
         <source>How many more days</source>
-        <translation>Wie viele weitere Tage</translation>
+        <translation>Wie viele weitere
+Tage?</translation>
     </message>
     <message>
         <source>How many more days should be in the range</source>
-        <translation>Wie viele weitere Tage im Voraus </translation>
+        <translation>Stellen Sie hier ein, wieviele Tage im Voraus angezeigt werden.</translation>
     </message>
     <message>
         <source> day(s)</source>
@@ -73,7 +74,7 @@ werden ?</translation>
     <name>QObject</name>
     <message>
         <source>Datebook plugin</source>
-        <translation>Datebiook plugin</translation>
+        <translation>Datebook plugin</translation>
     </message>
     <message>
         <source>No more appointments today</source>

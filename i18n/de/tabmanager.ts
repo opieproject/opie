@@ -41,7 +41,7 @@ solange sie Programme enthält.</translation>
     </message>
     <message>
         <source>Are you sure you want to delete?</source>
-        <translation>Sind Sie sicher, dass gelöscht werden soll?</translation>
+        <translation>Wirklich löschen?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -53,7 +53,7 @@ solange sie Programme enthält.</translation>
     </message>
     <message>
         <source>Can&apos;t remove.</source>
-        <translation>Kann nicht löschen</translation>
+        <translation>Löschen nicht erfolgreich.</translation>
     </message>
     <message>
         <source>Tab</source>

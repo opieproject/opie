@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Predict</source>
-        <translation>Vorschlag</translation>
+        <translation>Vorhersage</translation>
     </message>
     <message>
         <source>You asked for a delay of </source>
@@ -119,7 +119,7 @@ dem Server: </translation>
     </message>
     <message>
         <source>Could not connect to server </source>
-        <translation>Keine Verbindung zu Server </translation>
+        <translation>Keine Verbindung zum Server </translation>
     </message>
 </context>
 <context>
@@ -134,7 +134,7 @@ dem Server: </translation>
     </message>
     <message>
         <source>Time shift</source>
-        <translation>Zeitverschiebung</translation>
+        <translation>Abweichung</translation>
     </message>
     <message>
         <source>New time</source>
@@ -339,7 +339,7 @@ dem Server: </translation>
     <name>PredictTabWidget</name>
     <message>
         <source>Predicted time drift</source>
-        <translation>Vorhergesagte Abweichung</translation>
+        <translation>Erwartete Abweichung</translation>
     </message>
     <message>
         <source>n/a</source>

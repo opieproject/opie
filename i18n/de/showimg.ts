@@ -26,11 +26,11 @@
     </message>
     <message>
         <source>Horizontal flip</source>
-        <translation>Horizontal drehen</translation>
+        <translation>Horizontal spiegeln</translation>
     </message>
     <message>
         <source>Vertical flip</source>
-        <translation>Vertical drehen</translation>
+        <translation>Vertikal spiegeln</translation>
     </message>
     <message>
         <source>Open</source>
@@ -66,7 +66,7 @@
     </message>
     <message>
         <source>Preferences..</source>
-        <translation>Einstellungen..</translation>
+        <translation>Einstellungen...</translation>
     </message>
     <message>
         <source>Image Info ...</source>
@@ -90,11 +90,11 @@
     </message>
     <message>
         <source>Scale to Screen</source>
-        <translation>Auf Bildschirmgröße vergrößern</translation>
+        <translation>An Bildschirmgröße anpassen</translation>
     </message>
     <message>
         <source>File</source>
-        <translation>Daten</translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>Options</source>
@@ -110,15 +110,15 @@
     </message>
     <message>
         <source>8-bit alpha channel</source>
-        <translation>8-bit alpha Kanal</translation>
+        <translation>8-bit Alpha Kanal</translation>
     </message>
     <message>
         <source>Slide show</source>
-        <translation>Slideshow</translation>
+        <translation>Diashow</translation>
     </message>
     <message>
         <source>Stop Slideshow</source>
-        <translation>Slideshow anhalten</translation>
+        <translation>Diashow anhalten</translation>
     </message>
 </context>
 <context>
@@ -129,11 +129,11 @@
     </message>
     <message>
         <source>Slide Show</source>
-        <translation>Slideshow</translation>
+        <translation>Diashow</translation>
     </message>
     <message>
         <source>Delay between pictures</source>
-        <translation>Verzögerung zwischen Bildern</translation>
+        <translation>Verzögerung zwischen den Bildern</translation>
     </message>
     <message>
         <source>s</source>
@@ -141,7 +141,7 @@
     </message>
     <message>
         <source>Repeat slideshow</source>
-        <translation>Slideshow wiederholen</translation>
+        <translation>Diashow wiederholen</translation>
     </message>
     <message>
         <source>Show pictures in reverse</source>
@@ -153,7 +153,7 @@
     </message>
     <message>
         <source>Fast load pictures</source>
-        <translation>Bilder voraus laden</translation>
+        <translation>Bilder im Voraus laden</translation>
     </message>
 </context>
 </TS>

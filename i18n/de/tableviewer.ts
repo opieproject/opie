@@ -4,7 +4,7 @@
     <name>QObject</name>
     <message>
         <source>KeyList::addKey() Cannot make default value for type %1, Key not added.</source>
-        <translation>KeyList::addKey() KeyList::addKey() Kann Standardwert für den Typ %1 nicht setzen, Schlüssel nicht hinzugefügt.</translation>
+        <translation>KeyList::addKey() Standardwert für den Typ %1 kann nicht gesetzt werden. Schlüssel nicht hinzugefügt.</translation>
     </message>
     <message>
         <source>DataElem::setField(%1, %2) No valid type found</source>
