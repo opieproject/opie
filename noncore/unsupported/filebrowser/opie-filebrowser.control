@@ -1,9 +1,0 @@
-Files: bin/filebrowser apps/Applications/filebrowser.desktop pics/filebrowser/
-Priority: optional
-Section: opie/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Browse the file system
- The filebrowser for the Opie environment.

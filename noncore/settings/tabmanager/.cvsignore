@@ -1,7 +1,0 @@
-*.moc
-Makefile*
-app.cpp
-app.h
-moc_*
-wait.cpp
-wait.h

@@ -1,9 +1,0 @@
-Files: bin/parashoot apps/Games/parashoot.desktop pics/parashoot
-Priority: optional
-Section: opie/games
-Maintainer: Martin Imobersteg <imm@gmx.ch>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Game: shoot the parachutists
- A game for the Opie environment.

@@ -1,4 +1,0 @@
-#  config #MOBILEMSG
-#    boolean "mobilemsg"
-#    default "y"
-#    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

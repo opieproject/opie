@@ -1,4 +1,0 @@
-  config THEME
-    boolean "theme"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

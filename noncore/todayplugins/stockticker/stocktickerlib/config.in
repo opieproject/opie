@@ -1,3 +1,0 @@
-config TODAY_STOCKTICKERLIB
-  boolean
-  default "y" if TODAY_STOCKTICKER

@@ -1,9 +1,0 @@
-*.moc
-Makefile*
-kvncbookmarkdlgbase.cpp
-kvncbookmarkdlgbase.h
-kvncconndlgbase.cpp
-kvncconndlgbase.h
-moc_*
-vncoptionsbase.cpp
-vncoptionsbase.h

@@ -1,9 +1,0 @@
-menu "mail"
-
-  config BEND
-    boolean "mail"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
-  source noncore/mail/bend/config.in
-  source noncore/mail/libmail/config.in
-endmenu

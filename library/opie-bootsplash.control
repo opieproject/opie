@@ -1,7 +1,0 @@
-Files: etc/init.d/bootsplash etc/rcS.d/S01bootsplash pics/bootsplash/bootlogo
-Priority: optinal
-Section: opie/system
-Maintainer:  Project Opie <opie@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION.2
-Description: Splash screen aptempt

@@ -1,9 +1,0 @@
-Files: bin/opieftp pics/opieftp apps/Applications/opieftp.desktop
-Priority: optional
-Section: Communications
-Maintainer: L.J. Potter <ljp@llornkcor.com> 
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: OpieFtp
- The ftp client for the Opie environment.

@@ -1,8 +1,0 @@
-Files: plugins/today/libtodaystocktickerplugin.so* bin/stockticker pics/stockticker/stockticker.png
-Priority: optional
-Section: opie/applications
-Maintainer: ljp <llornkcor@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: qt-embedded (>=$QTE_VERSION), opie-today
-Description: stockticker plugin for today
