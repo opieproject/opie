@@ -81,7 +81,7 @@ QStringList LearnTab::getRemotes()
 											QMessageBox::NoButton,
 											QMessageBox::NoButton);
 		mb->exec();
-		perror("ButtonDialog::GetRemotes");
+		perror("LearnTab::GetRemotes");
 		return NULL;
 	}
 
@@ -94,7 +94,7 @@ QStringList LearnTab::getRemotes()
 											QMessageBox::NoButton,
 											QMessageBox::NoButton);
 		mb->exec();
-		perror("ButtonDialog::GetRemotes");
+		perror("LearnTab::GetRemotes");
 		return NULL;
 	}
 
@@ -124,7 +124,7 @@ QStringList LearnTab::getRemotes()
 											QMessageBox::NoButton,
 											QMessageBox::NoButton);
 		mb->exec();
-		perror("ButtonDialog::GetRemotes");
+		perror("LearnTab::GetRemotes");
 		return NULL;
 	}
 
