@@ -108,7 +108,7 @@ FilterDlg::FilterDlg( QWidget *parent, OPackageManager *pm, const QString &name,
     layout->addWidget( m_destCB );
     layout->addWidget( m_destination );
 
-    showMaximized();
+    //showMaximized();
 }
 
 void FilterDlg::initItem( QComboBox *comboBox, QCheckBox *checkBox, const QString &selection )

@@ -1,20 +1,21 @@
-2004-mm-dd Dan Williams <drw@handhelds.org>
+2004-02-12 Dan Williams <drw@handhelds.org>
 
-	* Package information dialog implemented
-	* What's This app icon enabled
+    * Package information dialog implemented
+    * What's This app icon enabled
+    * Changed all QDialog::exec() occurences to QPEApplication::execDialog()
 
 2004-01-23 Dan Williams <drw@handhelds.org>
 
-	* Added package download functionality
-	* Have Opie update links after install/removal so that apps
-	  will display properly in Launcher
+    * Added package download functionality
+    * Have Opie update links after install/removal so that apps
+      will display properly in Launcher
 
 2004-01-20 Dan Williams <drw@handhelds.org>
 
-	* Released version 0.2.0
-	* Converted to use libipkg in place of spawning ipkg process
+    * Released version 0.2.0
+    * Converted to use libipkg in place of spawning ipkg process
 
 2004-01-13 Dan Williams <drw@handhelds.org>
 
-	* Released version 0.1.0
-	* Initial check-in of new package management client to eventually replace AQPkg
+    * Released version 0.1.0
+    * Initial check-in of new package management client to eventually replace AQPkg

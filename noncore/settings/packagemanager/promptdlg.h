@@ -40,7 +40,7 @@ public:
     PromptDlg( const QString &caption = 0x0, const QString &text = 0x0, const QString &btn1 = 0x0,
                const QString &btn2 = 0x0, QWidget *parent = 0x0 );
 
-    int exec();
+    int display();
     int btnPressed() { return m_btnClicked; }
 
     static int ask( const QString &caption = 0x0, const QString &text = 0x0, const QString &btn1 = 0x0,

@@ -611,7 +611,7 @@ void MainWindow::slotFilterChange()
 {
     FilterDlg dlg( this, &m_packman, m_filterName, m_filterServer, m_filterDest, m_filterStatus,
                    m_filterCategory );
-    if ( dlg.exec() == QDialog::Accepted )
+    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted )
     {
         m_filterName = dlg.name();
         m_filterServer = dlg.server();

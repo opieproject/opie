@@ -83,7 +83,7 @@ OIpkgConfigDlg::OIpkgConfigDlg( OIpkg *ipkg, bool installOptions, QWidget *paren
         m_tabWidget.addTab( m_optionsWidget, "exec", tr( "Options" ) );
     }
 
-    showMaximized();
+    //showMaximized();
 }
 
 void OIpkgConfigDlg::accept()

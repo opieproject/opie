@@ -34,6 +34,8 @@
 #include <qlineedit.h>
 #include <qpushbutton.h>
 
+#include <qpe/qpeapplication.h>
+
 EntryDlg::EntryDlg( const QString &label, QWidget* parent, const char* name, bool modal )
     : QDialog( parent, name, modal )
 {
@@ -68,7 +70,8 @@ QString EntryDlg::getText( const QString &caption, const QString &label, const Q
     dlg->setText( text );
 
     QString result;
-    *ok = ( dlg->exec() == QDialog::Accepted );
+
+    *ok = ( QPEApplication::execDialog( dlg ) == QDialog::Accepted );
     if ( *ok )
         result = dlg->getText();
 

@@ -307,7 +307,7 @@ int OPackageManager::compareVersions( const QString &version1, const QString &ve
 bool OPackageManager::configureDlg( bool installOptions )
 {
     OIpkgConfigDlg dlg( &m_ipkg, installOptions, static_cast<QWidget *>(parent()) );
-    return ( dlg.exec() == QDialog::Accepted );
+    return ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted );
 }
 
 void OPackageManager::saveSettings()

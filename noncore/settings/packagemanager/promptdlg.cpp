@@ -57,7 +57,7 @@ PromptDlg::PromptDlg( const QString &caption, const QString &text, const QString
     connect( btn, SIGNAL(clicked()), this, SLOT(slotBtn2Clicked()) );
 }
 
-int PromptDlg::exec()
+int PromptDlg::display()
 {
     // Determine position of dialog.  Derived from QT's QDialog::show() method.
     QWidget *w = parentWidget();
@@ -122,7 +122,7 @@ int PromptDlg::ask( const QString &caption, const QString &text, const QString &
                     QWidget *parent )
 {
     PromptDlg *dlg = new PromptDlg( caption, text, btn1, btn2, parent );
-    int rc = dlg->exec();
+    int rc = dlg->display();
     delete dlg;
     return rc;
 }
