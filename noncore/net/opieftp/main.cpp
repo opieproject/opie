@@ -11,17 +11,8 @@
  *   (at your option) any later version.                                   *
  ***************************************************************************/
 #include <qpe/qpeapplication.h>
-
-
+#include <opie/oapplicationfactory.h>
 
 #include "opieftp.h"
 
-int main(int argc, char *argv[])
-{
-    QPEApplication a(argc, argv);
-
-    OpieFtp opieftp;
-    a.showMainWidget( &opieftp);
-    return a.exec();
-}
-
+OPIE_EXPORT_APP( OApplicationFactory<OpieFtp> )

@@ -21,15 +21,6 @@
 #include "calculatorimpl.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char ** argv )
-{
-    QPEApplication a( argc, argv );
-
-    CalculatorImpl mw;
-    QPEApplication::setInputMethodHint( &mw, QPEApplication::AlwaysOff );
-    mw.setCaption( CalculatorImpl::tr("Calculator") );
-    a.showMainWidget( &mw );
-
-    return a.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<CalculatorImpl> )

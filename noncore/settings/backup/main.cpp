@@ -1,14 +1,8 @@
 #include "backuprestore.h"
 #include "qnetworkprotocol.h"
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main(int argc, char *argv[]) {
-  QPEApplication a( argc, argv );
-  
-  BackupAndRestore app(0, "mainwindow");
-  a.showMainWidget(&app);
-  return a.exec();
-}
 
-// main.cpp
+OPIE_EXPORT_APP( OApplicationFactory<BackupAndRestore> )
 

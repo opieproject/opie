@@ -73,7 +73,9 @@ class CalculatorImpl : public Calculator
 
 public:
     CalculatorImpl( QWidget * parent = 0, const char * name = 0,
-                WFlags f = 0 );
+		    WFlags f = 0 );
+    static QString appName() { return QString::fromLatin1("calculator"); }
+
 
 public slots:
     void command_buttons(int);
