@@ -12,7 +12,7 @@ permout ()
 }
 
 if [ -e /proc/hal/model ]; then
-	devs=/dev/sound/dsp /dev/sound/mixer /dev/touchscreen/0 \
+	devs=/dev/sound/dsp /dev/sound/mixer /dev/touchscreen/* \
 		/dev/fb/0 /dev/vc/0
 else
 	devs=/dev/dsp /dev/dsp1 /dev/mixer /dev/ts /dev/fb0 \
