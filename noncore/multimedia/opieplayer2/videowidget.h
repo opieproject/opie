@@ -35,6 +35,8 @@
 #define VIDEO_WIDGET_H
 
 #include <qwidget.h>
+#include <qimage.h>
+#include <qpixmap.h>
 #include "xinevideowidget.h"
 
 #include "mediawidget.h"
@@ -95,10 +97,10 @@ protected:
 
 private:
 //    Ticker songInfo;
-    QPixmap *pixBg;
-    QImage  *imgUp;
-    QImage  *imgDn;
-    QImage  *imgButtonMask;
+    QPixmap pixBg;
+    QImage  imgUp;
+    QImage  imgDn;
+    QImage  imgButtonMask;
     QBitmap *masks[7];
     QPixmap *buttonPixUp[7];
     QPixmap *buttonPixDown[7];

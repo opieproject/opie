@@ -97,12 +97,12 @@ MediaWidget( mediaPlayerState, parent, name ), scaledWidth( 0 ), scaledHeight( 0
     skin = cfg.readEntry("Skin","default");
 
     QString skinPath = "opieplayer2/skins/" + skin;
-    pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
-    imgUp = new QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
-    imgDn = new QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
+    pixBg = QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
+    imgUp = QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
+    imgDn = QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
 
-    imgButtonMask = new QImage( imgUp->width(), imgUp->height(), 8, 255 );
-    imgButtonMask->fill( 0 );
+    imgButtonMask = QImage( imgUp.width(), imgUp.height(), 8, 255 );
+    imgButtonMask.fill( 0 );
 
     for ( int i = 0; i < 7; i++ ) {
         QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath + "/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
@@ -110,10 +110,10 @@ MediaWidget( mediaPlayerState, parent, name ), scaledWidth( 0 ), scaledHeight( 0
 
         if ( !masks[i]->isNull() ) {
             QImage imgMask = masks[i]->convertToImage();
-            uchar **dest = imgButtonMask->jumpTable();
-            for ( int y = 0; y < imgUp->height(); y++ ) {
+            uchar **dest = imgButtonMask.jumpTable();
+            for ( int y = 0; y < imgUp.height(); y++ ) {
                 uchar *line = dest[y];
-                for ( int x = 0; x < imgUp->width(); x++ ) {
+                for ( int x = 0; x < imgUp.width(); x++ ) {
                     if ( !qRed( imgMask.pixel( x, y ) ) )
                         line[x] = i + 1;
                 }
@@ -126,7 +126,7 @@ MediaWidget( mediaPlayerState, parent, name ), scaledWidth( 0 ), scaledHeight( 0
         buttonPixDown[i] = NULL;
     }
 
-    setBackgroundPixmap( *pixBg );
+    setBackgroundPixmap( pixBg );
 
     slider = new QSlider( Qt::Horizontal, this );
     slider->setMinValue( 0 );
@@ -150,10 +150,6 @@ VideoWidget::~VideoWidget() {
         delete buttonPixDown[i];
     }
 
-    delete pixBg;
-    delete imgUp;
-    delete imgDn;
-    delete imgButtonMask;
     for ( int i = 0; i < 7; i++ ) {
         delete masks[i];
     }
@@ -184,7 +180,7 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
     slider->setGeometry( QRect( 15, h - 22, w - 90, 20 ) );
     slider->setBackgroundOrigin( QWidget::ParentOrigin );
     slider->setFocusPolicy( QWidget::NoFocus );
-    slider->setBackgroundPixmap( *pixBg );
+    slider->setBackgroundPixmap( pixBg );
 
     xoff = 0;// ( imgUp->width() ) / 2;
     if(w>h)
@@ -193,8 +189,8 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
         yoff = 185;//(( Vh  - imgUp->height() ) / 2) - 10;
     QPoint p( xoff, yoff );
 
-    QPixmap *pixUp = combineVImageWithBackground( *imgUp, *pixBg, p );
-    QPixmap *pixDn = combineVImageWithBackground( *imgDn, *pixBg, p );
+    QPixmap *pixUp = combineVImageWithBackground( imgUp, pixBg, p );
+    QPixmap *pixDn = combineVImageWithBackground( imgDn, pixBg, p );
 
     for ( int i = 0; i < 7; i++ ) {
         if ( !masks[i]->isNull() ) {
@@ -291,9 +287,9 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
             int x = event->pos().x() - xoff;
             int y = event->pos().y() - yoff;
 
-            bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask->width()
-                                && y < imgButtonMask->height()
-                                && imgButtonMask->pixelIndex( x, y ) == i + 1 );
+            bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask.width()
+                                && y < imgButtonMask.height()
+                                && imgButtonMask.pixelIndex( x, y ) == i + 1 );
 
             if ( isOnButton && !videoButtons[i].isHeld ) {
                 videoButtons[i].isHeld = TRUE;
@@ -386,7 +382,7 @@ void VideoWidget::makeVisible() {
     } else {
         showNormal();
         showMaximized();
-        setBackgroundPixmap( *pixBg );
+        setBackgroundPixmap( pixBg );
         QWidget *d = QApplication::desktop();
         int w = d->width();
         int h = d->height();
@@ -431,7 +427,7 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
             QPixmap pix( pe->rect().size() );
             QPainter p( &pix );
             p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
-            p.drawTiledPixmap( pe->rect(), *pixBg, pe->rect().topLeft() );
+            p.drawTiledPixmap( pe->rect(), pixBg, pe->rect().topLeft() );
             for ( int i = 0; i < numVButtons; i++ ) {
                 paintButton( &p, i );
             }
