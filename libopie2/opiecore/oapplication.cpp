@@ -111,7 +111,7 @@ void OApplication::showMainWidget( QWidget* widget, bool nomax )
 }
 
 
-void OApplication::setTitle( QString title ) const
+void OApplication::setTitle( const QString& title ) const
 {
     if ( mainWidget() )
     {

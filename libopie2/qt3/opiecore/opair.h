@@ -1,5 +1,6 @@
 // QPair minus QT_INLINE_TEMPLATE (instead directly using 'inline' directive)
 //FIXME: remove and use qpair.h as soon as we're on Qt3
+// name file qpair -zecke
 
 /****************************************************************************
 **

@@ -47,6 +47,7 @@
 //FIXME: There's still a whole lot of stuff in here which has to be revised
 //FIXME: before public usage... lack of time to do it at once - so it will
 //FIXME: happen step-by-step. ML.
+// we should not habe too much configure options!!!!!! -zecke
 
 /**
  * Access the OPIE global configuration settings.
@@ -99,6 +100,7 @@ class OGlobalSettings
      *
      */
 
+    // we do not support DND at the momemt -zecke
     static int dndEventDelay();
 
     /**
@@ -114,6 +116,7 @@ class OGlobalSettings
     /**
      * Returns whether tear-off handles are inserted in OPopupMenus.
      **/
+    // would clutter the small screen -zecke
     static bool insertTearOffHandle();
 
     /**
@@ -251,6 +254,7 @@ class OGlobalSettings
     /**
      * The path to the desktop directory of the current user.
      */
+     // below handled by Global stuff and QPEApplication
     static QString desktopPath() { initStatic(); return *s_desktopPath; }
 
     /**
@@ -259,8 +263,9 @@ class OGlobalSettings
     static QString autostartPath() { initStatic(); return *s_autostartPath; }
 
     /**
-     * The path to the trash directory of the current user.
+     * The path to the trash directory of the current user.    
      */
+     // we do not have that concept -zecke
     static QString trashPath() { initStatic(); return *s_trashPath; }
 
     /**

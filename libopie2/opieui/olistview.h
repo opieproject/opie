@@ -119,7 +119,7 @@ class OListViewItem;
     */
     virtual OListViewItem* childFactory();
 
-    #ifndef QT_NO_DATASTREAM
+#ifndef QT_NO_DATASTREAM
    /**
     * serialize this object to a @ref QDataStream
     * @param s the stream used to serialize this object.
@@ -131,7 +131,7 @@ class OListViewItem;
     * @param s the stream used to serialize this object.
     */
     virtual void serializeFrom( QDataStream& s );
-    #endif
+#endif
 
   private:
     QColor m_alternateBackground;

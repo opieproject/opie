@@ -1,5 +1,6 @@
 //FIXME: Revise for Opie - do we really need such fancy stuff on PDA's?
 //FIXME: Maybe not on SL5xxx, but surely on C700 :))
+//FIXME: I think we don#t need that -zecke
 
 /* This file is part of the KDE libraries
  Copyright (C) 1998, 1999, 2001, 2002 Daniel M. Duley <mosfet@interaccess.com>
@@ -29,7 +30,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-// $Id: oimageeffect.h,v 1.1 2003-03-28 15:11:52 mickeyl Exp $
+// $Id: oimageeffect.h,v 1.2 2003-04-13 16:25:24 zecke Exp $
 
 #ifndef OIMAGEEFFECT_H
 #define OIMAGEEFFECT_H

@@ -1,3 +1,6 @@
+//FIXME what is ODE? ODE Desktop Environemt? -zecke
+//FIXME do we need titles? space is limited that is only eyecandy? -zecke
+//FIXME keyboard navigation is also not that popular on a PDA might be with a keyboard (tuxphone) -zecke
 /* This file is part of the ODE libraries
    Copyright (C) 2000 Daniel M. Duley <mosfet@kde.org>
 

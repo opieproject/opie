@@ -50,6 +50,7 @@ class OWirelessNetworkInterface;
 class OMacAddress
 {
   public:
+    // QString c'tor? -zecke
     OMacAddress( unsigned char* );
     OMacAddress( const unsigned char* );
     OMacAddress( struct ifreq& );
@@ -59,6 +60,7 @@ class OMacAddress
     QString toString( bool substitute = false ) const;
     const unsigned char* native() const;
 
+    // no c'tor but this one why not make it a c'tor. it could also replace the others or is this the problem?
     static OMacAddress fromString( const QString& );
 
   public:
@@ -102,6 +104,7 @@ class OPrivateIOCTL : public QObject
     int numberSetArgs() const;
     int typeSetArgs() const;
 
+    // FIXME return int? as ::ioctl does? -zecke
     void invoke() const;
     void setParameter( int, u_int32_t );
 

@@ -21,6 +21,7 @@
 class OManufacturerDB
 {
   public:
+    //FIXME make us consistent -zecke I use self(), sandman inst() you use instance() so we need to chose one!
     static OManufacturerDB* instance();
     const QString& lookup( const QString& macaddr ) const;
 

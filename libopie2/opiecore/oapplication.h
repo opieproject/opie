@@ -33,6 +33,9 @@
 
 #define oApp OApplication::oApplication()
 
+// the below stuff will fail with moc because moc does not pre process headers
+// This will make usage of signal and slots hard inside QPEApplication -zecke
+
 #ifdef QWS
  #include <qpe/qpeapplication.h>
  #define OApplicationBaseClass QPEApplication
@@ -46,6 +49,7 @@ class OConfig;
 
 class OApplication: public OApplicationBaseClass
 {
+// Q_OBJECT would fail -zecke 
   public:
 
    /**
@@ -114,7 +118,7 @@ class OApplication: public OApplicationBaseClass
     *
     * @param title the title. If not given, resets caption to appname
     */
-    virtual void setTitle( QString title = QString::null ) const;
+    virtual void setTitle( const QString& title = QString::null ) const;
     //virtual void setTitle() const;
 
   protected:

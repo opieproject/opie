@@ -37,11 +37,12 @@
 static OConfig globalconfig = OConfig( "global" );
 
 //FIXME: Is it wise or even necessary to inherit OGlobal from Global?
+// once we totally skip libqpe it should ideally swallow Global -zecke
 
 class OGlobal : public Global
 {
   public:
-  
+    // do we want to put that into OApplication as in KApplication -zecke
     static OConfig* config();
 };
 

@@ -108,7 +108,7 @@ void ONetwork::synchronize()
 }
 
 
-ONetworkInterface* ONetwork::interface( QString iface ) const
+ONetworkInterface* ONetwork::interface( const QString& iface ) const
 {
     return _interfaces[iface];
 }

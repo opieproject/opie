@@ -51,6 +51,7 @@ class QLayoutItem;
  *
  * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
  */
+ // lets fix up Qt instead! Size does matter. -zecke
 
 class ODialog : public QDialog
 {
@@ -81,8 +82,8 @@ class ODialog : public QDialog
     static int mMarginSize;
     static int mSpacingSize;
 
-    //class ODialogPrivate;
-    //ODialogPrivate *d;
+    class ODialogPrivate;
+    ODialogPrivate *d; // d pointer always needed! -zecke
 
 };
 #endif // ODIALOG_H

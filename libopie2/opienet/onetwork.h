@@ -98,12 +98,14 @@ class ONetwork : public QObject
     /**
      * @returns true, if the @p interface supports the wireless extension protocol.
      */
+     // FIXME QString? -zecke
     bool isWirelessInterface( const char* interface ) const;
     /**
      * @returns a pointer to the @ref ONetworkInterface object for the specified @p interface or 0, if not found
      * @see ONetworkInterface
      */
-    ONetworkInterface* interface( QString interface ) const;
+     // FIXME: const QString& is prefered over QString!!! -zecke
+    ONetworkInterface* interface( const QString& interface ) const;
 
   protected:
     ONetwork();
