@@ -87,7 +87,8 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     uploadButton->setAutoRaise( true );
     #endif
     uploadButton->setIconSet( Resource::loadIconSet( "up" ) );
-    uploadButton->setEnabled( false );
+    //uploadButton->setEnabled( false );
+    uploadButton->setEnabled( true );
     connect( uploadButton, SIGNAL( clicked() ), this, SLOT( uploadSession() ) );
 
     // setup menu bar
@@ -366,10 +367,130 @@ void WellenreiterMainWindow::closeEvent( QCloseEvent* e )
     }
 }
 
+static const char* CAP_hostname = "www.vanille.de";
+
+#include <netdb.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
 
 void WellenreiterMainWindow::uploadSession()
 {
-    QMessageBox::warning( this, "Wellenreiter/Opie",
-                        tr( "This feature is\nunder construction... ;-)" ) );
+    qDebug( "Starting upload..." );
+
+    struct sockaddr_in raddr;
+    struct hostent *rhost_info;
+    int sock = -1;
+    bool ok = false;
+
+    rhost_info = (struct hostent *) ::gethostbyname( CAP_hostname );
+    if ( rhost_info )
+    {
+        if ( !QFile::exists( "/var/log/dump.wellenreiter" ) )
+        {
+            qDebug( "no file to upload!" );
+            return;
+        }
+
+        QFile f( "/var/log/dump.wellenreiter" );
+        if ( !f.open( IO_ReadOnly ) )
+        {
+            qDebug( "can't open file!" );
+            return;
+        }
+
+        int content_length = f.size();
+
+        ::memset( &raddr, 0, sizeof (struct sockaddr_in) );
+        ::memcpy( &raddr. sin_addr, rhost_info-> h_addr, rhost_info-> h_length );
+        raddr.sin_family = rhost_info-> h_addrtype;
+        raddr.sin_port = htons ( 80 );
+
+        sock = ::socket( AF_INET, SOCK_STREAM, 0 );
+
+        if ( sock >= 0 )
+        {
+            if ( ::connect ( sock, (struct sockaddr *) & raddr, sizeof (struct sockaddr)) >= 0 )
+            {
+                QString header;
+                QString content;
+                QString preambel;
+
+                header = ""
+                "POST /projects/capturedump.spy HTTP/1.1\r\n"
+                "Host: www.vanille.de\r\n"
+                "User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.5) Gecko/20031010 Galeon/1.3.10\r\n"
+                "Accept: text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,image/jpeg,image/gif;q=0.2,*/*;q=0.1\r\n"
+                "Accept-Language: en\r\n"
+                "Accept-Encoding: gzip, deflate, compress;q=0.9\r\n"
+                "Accept-Charset: us-ascii,utf-8;q=0.7,*;q=0.7\r\n"
+                "Keep-Alive: 300\r\n"
+                "Connection: keep-alive\r\n"
+                "Referer: http://www.vanille.de/projects/capturedump.spy\r\n"
+                "Content-Type: multipart/form-data; boundary=---------------------------97267758015830030481215568065\r\n"
+                "Content-Length: %1\r\n"
+                "\r\n";
+
+                content = ""
+                "-----------------------------97267758015830030481215568065\r\n"
+                "Content-Disposition: form-data; name=\"Name\"\r\n"
+                "\r\n"
+                "Anonymous Wellenreiter II User\r\n"
+                "-----------------------------97267758015830030481215568065\r\n"
+                "Content-Disposition: form-data; name=\"Location\"\r\n"
+                "\r\n"
+                "Anonymous Wellenreiter II Location\r\n"
+                "-----------------------------97267758015830030481215568065\r\n"
+                "Content-Disposition: form-data; name=\"Comments\"\r\n"
+                "\r\n"
+                "Anonymous Wellenreiter II Comments\r\n"
+                "-----------------------------97267758015830030481215568065\r\n"
+                "Content-Disposition: form-data; name=\"upfile\"; filename=\"/var/log/dump.wellenreiter\"\r\n"
+                "Content-Type: application/octet-stream\r\n"
+                "\r\n";
+
+                preambel = ""
+                "\r\n-----------------------------97267758015830030481215568065--\r\n";
+
+                header = header.arg( QString::number( content.length() + f.size() + preambel.length() ) );
+
+                // write header
+
+                const char* ascii = header.latin1();
+                uint ascii_len = ::strlen( ascii );
+                ::write ( sock, ascii, ascii_len );
+
+                // write fixed content
+
+                ascii = content.latin1();
+                ascii_len = ::strlen( ascii );
+                ::write ( sock, ascii, ascii_len );
+
+                // write variable content
+
+                char ch;
+                while ( !f.atEnd() )
+                {
+                    f.readBlock( &ch, 1 );
+                    ::write ( sock, &ch, 1 );
+                }
+
+                // write preambel
+
+                ascii = preambel.latin1();
+                ascii_len = ::strlen( ascii );
+                ::write ( sock, ascii, ascii_len );
+
+                // done!
+
+                ok = true;
+            }
+        }
+        ::close ( sock );
+    }
+    if ( ok )
+    QMessageBox::information ( 0, tr( "Success" ), QString ( "<p>%1</p>" ). arg( tr( "Capture Dump was uploaded to %1" )).arg ( CAP_hostname ));
+    else
+    QMessageBox::warning ( 0, tr( "Error" ), QString ( "<p>%1</p>" ). arg ( tr( "Connection to %1 failed." )). arg ( CAP_hostname ));
 }
 
