@@ -11,10 +11,10 @@
 #include <qpixmap.h>
 #include <qcopchannel_qws.h>
 
-#include <qtopia/qpeapplication.h>
+#include <opie2/oapplication.h>
 
 int main( int argc,  char* argv[] ) {
-    QPEApplication app( argc, argv );
+    Opie::Core::OApplication app( argc, argv,"opie-eye-slave" );
     SlaveReciever rec( 0 );
 
     QCopChannel chan( "QPE/opie-eye_slave" );
@@ -31,26 +31,26 @@ int main( int argc, char* argv[] ) {
     QString str = QString::fromLatin1(argv[2] );
     QApplication app( argc, argv );
     GifSlave slave;
-    owarn << str +" "+slave.iconViewName(str ) << oendl; 
-    owarn << str+" "+slave.fullImageInfo( str ) << oendl; 
+    owarn << str +" "+slave.iconViewName(str ) << oendl;
+    owarn << str+" "+slave.fullImageInfo( str ) << oendl;
 
     PNGSlave pngslave;
-    owarn << str + " " + pngslave.iconViewName(str) << oendl; 
-    owarn << str + " " + pngslave.fullImageInfo(str) << oendl; 
+    owarn << str + " " + pngslave.iconViewName(str) << oendl;
+    owarn << str + " " + pngslave.fullImageInfo(str) << oendl;
 
 
     JpegSlave jpgslave;
-    owarn << str + " " + jpgslave.iconViewName(str ) << oendl; 
-    owarn << str + " " + jpgslave.fullImageInfo( str ) << oendl; 
+    owarn << str + " " + jpgslave.iconViewName(str ) << oendl;
+    owarn << str + " " + jpgslave.fullImageInfo( str ) << oendl;
 //return app.exec();
     QPixmap pix = ThumbNailTool::getThumb( str, 24, 24 );
     if ( pix.isNull() ) {
-        owarn << "No Thumbnail" << oendl; 
+        owarn << "No Thumbnail" << oendl;
         pix = slave.pixmap(str, 24, 24);
     }
 
     if (!pix.isNull() ) {
-        owarn << "Saving Thumbnail" << oendl; 
+        owarn << "Saving Thumbnail" << oendl;
         ThumbNailTool::putThumb( str, pix, 24, 24 );
     }
 
