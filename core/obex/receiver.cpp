@@ -21,6 +21,8 @@
 
 using namespace OpieObex;
 
+/* TRANSLATOR OpieObex::Receiver */
+
 Receiver::Receiver() {
     m_obex = new Obex(this, "Receiver");
     connect(m_obex, SIGNAL(receivedFile(const QString& ) ),
@@ -73,6 +75,8 @@ int Receiver::checkFile( const QString& file ) {
     qWarning("check it now %d", ret );
     return ret;
 }
+
+/* TRANSLATOR OpieObex::OtherHandler */
 
 OtherHandler::OtherHandler()
     : QVBox()

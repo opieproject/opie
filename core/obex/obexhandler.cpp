@@ -8,6 +8,8 @@
 
 using namespace OpieObex;
 
+/* TRANSLATOR OpieObex::ObexHandler */
+
 ObexHandler::ObexHandler() {
     m_wasRec = false;
     m_sender = 0l;

@@ -11,6 +11,8 @@
 
 using namespace  OpieObex;
 
+/* TRANSLATOR OpieObex::Obex */
+
 Obex::Obex( QObject *parent, const char* name )
   : QObject(parent, name )
 {
