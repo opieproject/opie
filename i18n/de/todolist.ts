@@ -94,7 +94,7 @@ before you enter any data</source>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Neue Aufgabe</translation>
     </message>
     <message>
         <source>Edit</source>
