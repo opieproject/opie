@@ -93,40 +93,52 @@ AdvancedFm::AdvancedFm( )
     menuBar->insertItem( tr( "File" ), fileMenu);
     menuBar->insertItem( tr( "View" ), viewMenu);
 
-    qpeDirButton= new QPushButton(Resource::loadIconSet("launcher/opielogo16x16"),"",this,"QPEButton");
+    qpeDirButton= new QToolButton(this,"QPEButton");
+	qpeDirButton->setPixmap( Resource::loadPixmap("launcher/opielogo16x16"));//,"",this,"QPEButton");
+//    qpeDirButton= new QPushButton(Resource::loadIconSet("launcher/opielogo16x16"),"",this,"QPEButton");
     qpeDirButton ->setFixedSize( QSize( 20, 20 ) );
     connect( qpeDirButton ,SIGNAL(released()),this,SLOT( QPEButtonPushed()) );
-    qpeDirButton->setFlat(TRUE);
+    //qpeDirButton->setFlat(TRUE);
     layout->addMultiCellWidget( qpeDirButton , 0, 0, 2, 2);
 
-    cfButton = new QPushButton(Resource::loadIconSet("cardmon/pcmcia"),"",this,"CFButton");
+    cfButton = new QToolButton( this,"CFButton");
+	cfButton->setPixmap(Resource::loadPixmap("cardmon/pcmcia"));
+//    cfButton = new QPushButton(Resource::loadIconSet("cardmon/pcmcia"),"",this,"CFButton");
     cfButton ->setFixedSize( QSize( 20, 20 ) );
     connect( cfButton ,SIGNAL(released()),this,SLOT( CFButtonPushed()) );
-    cfButton->setFlat(TRUE);
+    //cfButton->setFlat(TRUE);
     layout->addMultiCellWidget( cfButton , 0, 0, 3, 3);
 
-    sdButton = new QPushButton(Resource::loadIconSet("sdmon/sdcard"),"",this,"SDButton");
+    sdButton = new QToolButton( this,"SDButton");
+	sdButton->setPixmap(Resource::loadPixmap("sdmon/sdcard"));
+//    sdButton = new QPushButton(Resource::loadIconSet("sdmon/sdcard"),"",this,"SDButton");
     sdButton->setFixedSize( QSize( 20, 20 ) );
     connect( sdButton ,SIGNAL(released()),this,SLOT( SDButtonPushed()) );
-    sdButton->setFlat(TRUE);
+//    sdButton->setFlat(TRUE);
     layout->addMultiCellWidget( sdButton , 0, 0, 4, 4);
 
-    cdUpButton = new QPushButton(Resource::loadIconSet("up"),"",this,"cdUpButton");
+    cdUpButton = new QToolButton( this,"cdUpButton");
+	cdUpButton->setPixmap(Resource::loadPixmap("up"));
+//    cdUpButton = new QPushButton(Resource::loadIconSet("up"),"",this,"cdUpButton");
     cdUpButton ->setFixedSize( QSize( 20, 20 ) );
     connect( cdUpButton ,SIGNAL(released()),this,SLOT( upDir()) );
-    cdUpButton ->setFlat(TRUE);
+    //cdUpButton ->setFlat(TRUE);
     layout->addMultiCellWidget( cdUpButton , 0, 0, 5, 5);
 
-    docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
+    docButton = new QToolButton( this,"docsButton");
+	docButton->setPixmap(Resource::loadPixmap("DocsIcon"));
+//    docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
     docButton->setFixedSize( QSize( 20, 20 ) );
     connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
-    docButton->setFlat(TRUE);
+//    docButton->setFlat(TRUE);
     layout->addMultiCellWidget( docButton, 0, 0, 6, 6);
 
-    homeButton = new QPushButton( Resource::loadIconSet("home"),"",this,"homeButton");
+    homeButton = new QToolButton( this,"homeButton");
+	homeButton->setPixmap(Resource::loadPixmap("home"));
+//    homeButton = new QPushButton( Resource::loadIconSet("home"),"",this,"homeButton");
     homeButton->setFixedSize( QSize( 20, 20 ) );
     connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
-    homeButton->setFlat(TRUE);
+//    homeButton->setFlat(TRUE);
     layout->addMultiCellWidget( homeButton, 0, 0, 7, 7);
 //     fileMenu->insertItem( tr( "New" ), this,  SLOT( newConnection() ));
 //     fileMenu->insertItem( tr( "Connect" ), this,  SLOT( connector() ));

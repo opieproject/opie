@@ -40,7 +40,8 @@ class QPopupMenu;
 class QFile;
 class QListViewItem;
 class QLineEdit;
-class QPushButton;
+//class QPushButton;
+class QToolButton;
 class Ir;
 
 class AdvancedFm : public QMainWindow
@@ -56,7 +57,8 @@ public:
 
     QLineEdit *currentPathEdit;
     QPopupMenu *fileMenu, *localMenu, *remoteMenu, *viewMenu;
-    QPushButton  *homeButton, *docButton, *cdUpButton, *sdButton, *cfButton, *qpeDirButton;
+    QToolButton  *homeButton, *docButton, *cdUpButton, *sdButton, *cfButton, *qpeDirButton;
+//    QPushButton  *homeButton, *docButton, *cdUpButton, *sdButton, *cfButton, *qpeDirButton;
     QDir currentDir, currentRemoteDir;
     QComboBox *currentPathCombo;
     QString filterStr;
