@@ -289,6 +289,9 @@ void TabManager::editItem( QListViewItem * item){
   }
   if(pixmap != -1)
     application->iconLineEdit->setCurrentItem(pixmap);
+  else if(pixmapText.isEmpty()){
+    application->iconLineEdit->setCurrentItem(0);
+  }
   else{
     QPixmap imageOfFile(Resource::loadPixmap(pixmapText));
     QImage foo = imageOfFile.convertToImage();
