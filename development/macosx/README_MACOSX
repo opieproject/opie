@@ -81,7 +81,7 @@ make
 Now create a link for the uic of qt-2.3.2 into the bin-directory of qt/e 2.3.7 ! 
 Otherwise OPIE will fail to compile !
 
-Compile OPIE:
+Compile OPIE (Please don't forget to read the following "Known Bugs" section!):
 Set your environment
 (You may use the script "set_vars.sh" to set your variables successfully !
 BUT: You have to customize this script for YOUR needs !!)
@@ -113,10 +113,10 @@ As a first (but stupid) solution, I added this linker parameter to the global "i
 which adds them for everything.. Yes, also for libqpe etc.. 
 Therefore this project will not compile out of the box. You have to compile in a two-pass way:
 
-Pass 1: Find the line "LIBS += -lopiedb2 -lqpe" in the file include.pro and comment out it (put a "#" 
-        in front of it)
+Pass 1: Find the line "LIBS += -lopiedb2 -lqpe" or "LIBS += -lqpe" and the line "LIBS += -lopiecore2" in the file include.pro 
+        and comment them out (put a "#" in front of them)
 	Do a "make -k" to compile what is already compileable (some will not compile)
-Pass 2: Remove the comment from Pass1 and do a "make". The rest should compile now successfully.
+Pass 2: Remove the comments from Pass1 and do a "make". The rest should compile successfully.
 
 
 I know, this is a silly solution ! But I don't have anything better without influence the Linux build 

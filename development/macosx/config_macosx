@@ -9,6 +9,7 @@
 CONFIG_TARGET_MACOSX=y
 # CONFIG_TARGET_SHARP is not set
 # CONFIG_TARGET_C700 is not set
+# CONFIG_TARGET_OE is not set
 # CONFIG_TARGET_IPAQ is not set
 # CONFIG_TARGET_RAMSES is not set
 # CONFIG_TARGET_SIMPAD is not set
@@ -21,6 +22,7 @@ CONFIG_QUICK_LAUNCH=y
 CONFIG_QUICKLAUNCH_PATH="/Users/stefan/Developer/opie/bin/quicklauncher"
 CONFIG_SPECFILE="qws/macx-generic-g++"
 CONFIG_EXPERIMENTAL=y
+# CONFIG_USE_CCACHE is not set
 
 #
 # Configuration
@@ -34,6 +36,7 @@ CONFIG_OPIE_SOUND_FRAGMENT_SHIFT="16"
 CONFIG_USE_FILE_NOTIFICATION=y
 # CONFIG_OPIE_NEW_ALLOC is not set
 # CONFIG_OPIE_TASKBAR_LOCK_KEY_STATE is not set
+# CONFIG_LIBQPE_WITHROHFEEDBACK is not set
 # CONFIG_OPIE_NO_SOUND_PCM_READ_BITS is not set
 
 #
@@ -54,7 +57,6 @@ CONFIG_LIBSQLITE_INC_DIR=""
 #
 CONFIG_LIBQPE=y
 # CONFIG_X11 is not set
-CONFIG_LIBOPIE=y
 
 #
 # 
@@ -63,10 +65,10 @@ CONFIG_LIBOPIE2CORE=y
 CONFIG_LIBOPIE2DB=y
 
 #
-# libopie2net needs a libqpe and libopie2core
+# libopie2net needs a libqpe, libopie2core and libpcap dependency
 #
 CONFIG_LIBOPIE2PIM=y
-CONFIG_SQL_PIM_BACKEND=y
+# CONFIG_SQL_PIM_BACKEND is not set
 CONFIG_LIBOPIE2UI=y
 # CONFIG_LIBOPIE2MM is not set
 # CONFIG_LIBOPIE2SECURITY is not set
@@ -100,7 +102,6 @@ CONFIG_CLOCKAPPLET=y
 CONFIG_HOMEAPPLET=y
 # CONFIG_IRDAAPPLET is not set
 # CONFIG_LOGOUTAPPLET is not set
-# CONFIG_OBEX is not set
 # CONFIG_RESTARTAPPLET is not set
 # CONFIG_ROTATEAPPLET is not set
 # CONFIG_SCREENSHOTAPPLET is not set
@@ -108,12 +109,16 @@ CONFIG_HOMEAPPLET=y
 # CONFIG_VMEMO is not set
 # CONFIG_VOLUMEAPPLET is not set
 # CONFIG_VTAPPLET is not set
+# CONFIG_AUTOROTATEAPPLET is not set
+# CONFIG_BRIGHTNESSAPPLET is not set
 # CONFIG_MEMORYAPPLET is not set
 
 #
 # Network applet needs a libqpe and libopie2 (core, ui, net)
 #
 CONFIG_NOTESAPPLET=y
+# CONFIG_PYQUICKLAUNCH is not set
+# CONFIG_ZKBAPPLET is not set
 
 #
 # Apps
@@ -130,11 +135,14 @@ CONFIG_CONFEDIT=y
 # CONFIG_ODICT is not set
 # CONFIG_BARTENDER is not set
 # CONFIG_OPIE-CONSOLE is not set
+
+#
+# gutenbrowser needs a libqpe, ftplib, libopie2core and libopie2ui
+#
 # CONFIG_OPIE-READER is not set
 CONFIG_OPIE-SHEET=y
 CONFIG_OPIE-WRITE=y
 CONFIG_OXYGEN=y
-# CONFIG_QASHMONEY is not set
 CONFIG_TABLEVIEWER=y
 # CONFIG_TINYKATE is not set
 # CONFIG_ZSAFE is not set
@@ -142,13 +150,8 @@ CONFIG_TABLEVIEWER=y
 #
 # Communications and Networking
 #
-# CONFIG_GSMTOOL is not set
 # CONFIG_KEYPEBBLE is not set
 # CONFIG_MOBILEMSG is not set
-
-#
-# Net
-#
 # CONFIG_FTPLIB is not set
 
 #
@@ -160,8 +163,6 @@ CONFIG_TABLEVIEWER=y
 #
 # CONFIG_OPIEIRC is not set
 # CONFIG_OPIE-RDESKTOP is not set
-# CONFIG_OPIETOOTH is not set
-# CONFIG_UBROWSER is not set
 
 #
 # wellenreiter needs a libqpe and libopie2 (core+net+ui)
@@ -189,6 +190,8 @@ CONFIG_TABLEVIEWER=y
 # CONFIG_TETRIX is not set
 # CONFIG_TICTAC is not set
 # CONFIG_WORDGAME is not set
+# CONFIG_ZLINES is not set
+# CONFIG_ZSAME is not set
 
 #
 # Graphics and Multimedia
@@ -197,7 +200,12 @@ CONFIG_TABLEVIEWER=y
 CONFIG_DRAWPAD=y
 # CONFIG_OPIEPLAYER is not set
 # CONFIG_CAMERA is not set
+
+#
+# opieplayer2 requires libopie2core, libopie2ui and libxine
+#
 # CONFIG_OPIEREC is not set
+# CONFIG_POWERCHORD is not set
 # CONFIG_SHOWIMG is not set
 # CONFIG_TONLEITER is not set
 
@@ -225,9 +233,9 @@ CONFIG_UNIKEYBOARD=y
 #
 # Pim
 #
+# CONFIG_OBEX is not set
 CONFIG_ADDRESSBOOK=y
 CONFIG_DATEBOOK=y
-CONFIG_DATEBOOK2=y
 CONFIG_OSEARCH=y
 CONFIG_TODAY=y
 CONFIG_TODO=y
@@ -261,6 +269,7 @@ CONFIG_LANGUAGE=y
 # CONFIG_MEDIUMMOUNT is not set
 # CONFIG_NETSYSTEMTIME is not set
 # CONFIG_INTERFACES is not set
+# CONFIG_NS2CORE is not set
 # CONFIG_SOUND is not set
 # CONFIG_SSHKEYS is not set
 CONFIG_SYSINFO=y
@@ -293,7 +302,9 @@ CONFIG_FLAT=y
 CONFIG_FRESH=y
 CONFIG_LIQUID=y
 CONFIG_METAL=y
+# CONFIG_PHASE is not set
 CONFIG_THEME=y
+# CONFIG_WEBSTYLE is not set
 
 #
 # Tools
@@ -303,7 +314,11 @@ CONFIG_CLOCK=y
 CONFIG_EUROCONV=y
 # CONFIG_FORMATTER is not set
 CONFIG_OPIE-SH=y
-CONFIG_PIMCONVERTER=y
+
+#
+# The pim converter needs libqpe, libopie2core, libopie2pim, libopie2db and SQL Backend for libopie2pim
+#
+# CONFIG_PYQUICKLAUNCHER is not set
 # CONFIG_REMOTE is not set
 
 #
@@ -323,10 +338,6 @@ CONFIG_PIMCONVERTER=y
 #
 # Unsupported / Unmaintained
 #
-# CONFIG_FILEBROWSER is not set
-# CONFIG_MAILIT is not set
-# CONFIG_OIPKG is not set
-# CONFIG_QPDF is not set
 
 #
 # 
