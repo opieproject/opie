@@ -1136,6 +1136,7 @@ void iPAQ::init ( )
 		case Model_iPAQ_H36xx:
 		case Model_iPAQ_H37xx:
 		case Model_iPAQ_H39xx:
+
 		default:
 			d-> m_rotation = Rot270;
 			break;
@@ -1500,7 +1501,7 @@ bool Zaurus::isZaurus()
 		return true;
 	}	
 
-	// On non-embedix kenrnels, we have too look closer.
+	// On non-embedix kernels, we have to look closer.
 	bool is_zaurus = false;
 	QFile f ( "/proc/cpuinfo" );
 	if ( f. open ( IO_ReadOnly ) ) {
@@ -1522,6 +1523,7 @@ bool Zaurus::isZaurus()
 		     || model == "SHARP Corgi"
 		     || model == "SHARP Shepherd" 
 		     || model == "SHARP Poodle" 
+                     || model == "SHARP Husky" )
 		   )
 			is_zaurus = true;
 
@@ -1592,11 +1594,14 @@ void Zaurus::init ( )
 	}
 
 	if ( model == "SHARP Corgi" ) {
-		d-> m_model = Model_Zaurus_SLC700;
+		d-> m_model = Model_Zaurus_SLC7x0;
 		d-> m_modelstr = "Zaurus SL-C700";
 	} else if ( model == "SHARP Shepherd" ) {
-		d-> m_model = Model_Zaurus_SLC700; // Do we need a special type for the C750 ? (eilers)
+		d-> m_model = Model_Zaurus_SLC7x0;
 		d-> m_modelstr = "Zaurus SL-C750";
+	} else if ( model == "SHARP Husky" ) {
+		d-> m_model = Model_Zaurus_SLC7x0;
+		d-> m_modelstr = "Zaurus SL-C760";
 	} else if ( model == "SHARP Poodle" ) {
 		d-> m_model = Model_Zaurus_SLB600;
 		d-> m_modelstr = "Zaurus SL-B500 or SL-5600";
@@ -1613,7 +1618,7 @@ void Zaurus::init ( )
 		case Model_Zaurus_SLA300:
 			d-> m_rotation = Rot0;
 			break;
-		case Model_Zaurus_SLC700:
+		case Model_Zaurus_SLC7x0:
 			// Note: need to 1) set flipstate based on physical screen orientation
 			// and 2) check to see if the user overrode the rotation direction
 			// using appearance, and if so, remove that item from the Config to
@@ -1648,7 +1653,7 @@ void Zaurus::initButtons ( )
 	struct z_button * pz_buttons;
 	int buttoncount;
 	switch ( d-> m_model ) {
-		case Model_Zaurus_SLC700:
+		case Model_Zaurus_SLC7x0:
 			pz_buttons = z_buttons_c700;
 			buttoncount = ARRAY_SIZE(z_buttons_c700);
 			break;
@@ -1752,11 +1757,9 @@ void Zaurus::buzzer ( int sound )
 #ifndef QT_NO_SOUND
 	QString soundname;
 
-	// Not all devices have real sound. But I expect
-	// that Openzaurus now has a sound driver which 
-	// I will use instead the buzzer...		
-	if ( ( d->m_model == Model_Zaurus_SLC700 )
-	     || d->m_system == System_OpenZaurus ){
+	// Not all devices have real sound
+	if ( d->m_model == Model_Zaurus_SLC7x0
+	     || d->m_model == Model_Zaurus_SLB600 ){
 
 		switch ( sound ){
 		case SHARP_BUZ_SCHEDULE_ALARM:
