@@ -1,0 +1,118 @@
+#############################################################################
+
+####### Compiler, tools and options
+
+CXX	=	$(SYSCONF_CXX) $(QT_CXX_MT)
+CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS) $(SYSCONF_CXXFLAGS_LIB)
+CC	=	$(SYSCONF_CC) $(QT_C_MT)
+CFLAGS	=	$(SYSCONF_CFLAGS) $(SYSCONF_CFLAGS_LIB)
+INCPATH =	-I$(OPIEDIR)/include
+LFLAGS	=	$(SYSCONF_LFLAGS_QT) $(SYSCONF_RPATH_QT) $(SYSCONF_LFLAGS) $(QT_LFLAGS_MT)
+LIBS	=	$(SUBLIBS) -lqpe $(SYSCONF_LIBS_QT) $(SYSCONF_LIBS_QTAPP)
+MOC	=	$(SYSCONF_MOC)
+UIC	=	$(SYSCONF_UIC)
+
+####### Target
+
+DESTDIR = ../../plugins/applets/
+VER_MAJ = 1
+VER_MIN = 0
+VER_PATCH = 0
+TARGET	= screenshotapplet
+TARGET1 = lib$(TARGET).so.$(VER_MAJ)
+
+####### Files
+
+HEADERS =	screenshot.h \
+		screenshotappletimpl.h
+SOURCES =	screenshot.cpp \
+		screenshotappletimpl.cpp
+OBJECTS =	opieobj/screenshot.o \
+		opieobj/screenshotappletimpl.o
+INTERFACES =    
+UICDECLS =      
+UICIMPLS =      
+SRCMOC	=	opieobj/moc_screenshot.cpp
+OBJMOC	=	opieobj/moc_screenshot.o
+
+
+####### Implicit rules
+
+.SUFFIXES: .cpp .cxx .cc .C .c
+
+.cpp.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.cxx.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.cc.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.C.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $@ $<
+
+.c.o:
+	$(CC) -c $(CFLAGS) $(INCPATH) -o $@ $<
+
+####### Build rules
+
+
+all: $(DESTDIR)$(SYSCONF_LINK_TARGET)
+
+$(DESTDIR)$(SYSCONF_LINK_TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) $(SUBLIBS)
+	$(SYSCONF_LINK_LIB)
+
+moc: $(SRCMOC)
+
+tmake:
+	tmake screenshotapplet.pro
+
+clean:
+	-rm -f $(OBJECTS) $(OBJMOC) $(SRCMOC) $(UICIMPLS) $(UICDECLS)
+	-rm -f *~ core
+	-rm -f allmoc.cpp
+
+####### Extension Modules
+
+listpromodules:
+	@echo 
+
+listallmodules:
+	@echo 
+
+listaddonpromodules:
+	@echo 
+
+listaddonentmodules:
+	@echo 
+
+
+REQUIRES=
+
+####### Sub-libraries
+
+
+###### Combined headers
+
+
+
+####### Compile
+
+opieobj/screenshot.o: screenshot.cpp \
+		screenshot.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o opieobj/screenshot.o screenshot.cpp
+
+opieobj/screenshotappletimpl.o: screenshotappletimpl.cpp \
+		screenshot.h \
+		screenshotappletimpl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o opieobj/screenshotappletimpl.o screenshotappletimpl.cpp
+
+opieobj/moc_screenshot.o: opieobj/moc_screenshot.cpp \
+		screenshot.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o opieobj/moc_screenshot.o opieobj/moc_screenshot.cpp
+
+opieobj/moc_screenshot.cpp: screenshot.h
+	$(MOC) screenshot.h -o opieobj/moc_screenshot.cpp
+
+
