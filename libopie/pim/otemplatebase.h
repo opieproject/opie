@@ -3,6 +3,9 @@
 
 #include "opimrecord.h"
 
+/**
+ * internal template base
+ */
 template <class T = OPimRecord>
 class OTemplateBase {
 public:

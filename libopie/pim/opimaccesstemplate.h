@@ -9,35 +9,105 @@
 
 #include "otemplatebase.h"
 
+/**
+ * Thats the frontend to our OPIE PIM
+ * Library. Either you want to use it's
+ * interface or you want to implement
+ * your own Access lib
+ * Just create a OPimRecord and inherit from 
+ * the plugins
+ */
+
 template <class T = OPimRecord >
 class OPimAccessTemplate : public OTemplateBase<T> {
 public:
     typedef ORecordList<T> List;
     typedef OPimAccessBackend<T> BackEnd;
+
+    /**
+     * our sort order
+     * should be safe explaining
+     */
+    enum SortOrder { WildCards = 0, IgnoreCase = 1,
+                     RegExp = 2, ExactMatch = 4 };
+
+    /**
+     * c'tor BackEnd
+     */
     OPimAccessTemplate( BackEnd* end);
     virtual ~OPimAccessTemplate();
+    
+    /**
+     * load from the backend
+     */
     virtual void load();
+    
+    /**
+     * reload from the backend
+     */
     virtual void reload();
+    
+    /**
+     * save to the backend 
+     */
     virtual void save();
 
-    /*
-     *do array to Records conversion
-     * QArray<int> ids
+    /**
+     * if the resource was changed externally
+     */
+    bool wasChangedExternally()const;
+    
+    /**
+     * return a List of records
+     * you can iterate over them
      */
     virtual List allRecords()const;
+    
+    /**
+     * queryByExample 
+     */
     virtual List queryByExample( const T& t, int sortOrder );
+    
+    /**
+     * find the OPimRecord uid
+     */
     virtual T find( int uid );
 
     /* invalidate cache here */
+    /**
+     * clears the backend and invalidates the backend
+     */
     virtual void clear() ;
+    
+    /**
+     * add T to the backend
+     */
     virtual bool add( const T& t ) ;
 
     /* only the uid matters */
+    /**
+     * remove T from the backend
+     */
     virtual bool remove( const T& t );
+    
+    /**
+     * remove the OPimRecord with uid
+     */
     virtual bool remove( int uid );
+    
+    /**
+     * replace T from backend
+     */
     virtual bool replace( const T& t) ;
 protected:
+    /**
+     * invalidate the cache
+     */
     void invalidateCache();
+    
+    /**
+     * returns the backend
+     */
     BackEnd* backEnd();
     BackEnd* m_backEnd;
 
@@ -114,5 +184,8 @@ template <class T>
 OPimAccessTemplate<T>::BackEnd* OPimAccessTemplate<T>::backEnd() {
     return m_backEnd;
 }
-
+template <class T>
+bool OPimAccessTemplate<T>::wasChangedExternally()const {
+    return false;
+}
 #endif

@@ -7,16 +7,37 @@
 #include "otemplatebase.h"
 #include "opimrecord.h"
 
-
+/**
+ * Our List Iterator
+ * it behaves like STL or Qt
+ *
+ * for(it = list.begin(); it != list.end(); ++it )
+ *   doSomeCoolStuff( (*it) );
+ */
 template <class T = OPimRecord>
 class ORecordListIterator {
 public:
     typedef OTemplateBase<T> Base;
+    
+    /**
+     * The c'tor used internally from
+     * ORecordList
+     */
     ORecordListIterator( const QArray<int>, const Base* );
+    
+    /**
+     * The standard c'tor
+     */
     ORecordListIterator();
     ~ORecordListIterator();
+    
     ORecordListIterator( const ORecordListIterator& );
     ORecordListIterator &operator=(const ORecordListIterator& );
+    
+    /**
+     * a * operator ;) 
+     * use it like this T = (*it);
+     */
     T &operator*();
     ORecordListIterator &operator++();
     ORecordListIterator &operator--();
@@ -35,16 +56,31 @@ private:
     class IteratorPrivate;
     IteratorPrivate *d;
 };
-
+/**
+ * The recordlist used as a return type
+ * from OPimAccessTemplate
+ */ 
 template <class T = OPimRecord >
 class ORecordList {
 public:
     typedef OTemplateBase<T> Base;
     typedef ORecordListIterator<T> Iterator;
+    
+    /** 
+     * c'tor
+     */
     ORecordList( const QArray<int>& ids,
                  const Base* );
     ~ORecordList();
+    
+    /**
+     * the first iterator
+     */
     Iterator begin();
+    
+    /**
+     * the end
+     */
     Iterator end();
     /*
       ConstIterator begin()const;

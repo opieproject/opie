@@ -7,9 +7,16 @@
 
 #include <qpe/palmtoprecord.h>
 
+
+/**
+ * This is the base class for 
+ * all PIM Records
+ *
+ */
 class OPimRecord : public Qtopia::Record {
 public:
     /**
+     * c'tor
      * uid of 0 isEmpty
      * uid of 1 will be assigned a new one
      */
@@ -44,6 +51,7 @@ public:
 
     /**
      * if a Record isEmpty
+     * it's empty if it's 0
      */
     virtual bool isEmpty()const;
 
@@ -88,19 +96,24 @@ public:
     QArray<int> relations( const QString& app )const;
 
     /**
-     *
+     * clear the relations for all relations
+     * with app
      */
     void clearRelation( const QString& app );
 
     /**
-     *
+     * add a relation
      */
     void addRelation( const QString& app,  int id );
 
     /**
-     *
+     * set the relations for an app
      */
     void setRelations( const QString&, QArray<int> ids );
+    
+    /**
+     * set the uid
+     */
     virtual void setUid( int uid );
 
 protected:
