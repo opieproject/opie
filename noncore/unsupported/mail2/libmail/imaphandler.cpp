@@ -298,11 +298,14 @@ void IMAPHandler::slotDataReceived(const QString &data)
 	}
 
 
-	IMAPResponseParser parser(data);
+	IMAPResponseParser parser;
+//	connect ( &parser, SIGNAL( needMoreData ( QString & )), _ibase, SLOT( tryRead ( QString & )));
+	parser. parse ( data );
 	IMAPResponse response = parser.response();
+//	disconnect ( &parser, SIGNAL( needMoreData ( QString & )), _ibase, SLOT( tryRead ( QString & )));
 	response.setImapHandler(this);
 
-	if (!_loggingin) emit gotResponse(response);
+	if (!_loggingin) { qDebug("Emitting gotResponse!\n" ); emit gotResponse(response); }
 	else {
 		if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 			_loggingin = false;

@@ -53,10 +53,14 @@ void IMAPBase::writeCommands()
 	for (it = _commandQueue.begin(); it != _commandQueue.end(); it++) {
 		if (!(*it).isEmpty() && _writingAllowed) {
 #ifndef QT_NO_DEBUG
-			qDebug("IMAP > " + (*it).stripWhiteSpace());
+			qDebug("IMAP > " + (*it).stripWhiteSpace().local8Bit ());
 #endif
 			_socket->writeBlock((*it).latin1(), (*it).length());
 			_writingAllowed = false;
+			if (( *it ). find ( QRegExp ( "^[a-z][0-9]+ " )) == 0 )
+				_lasttag = (*it).left(2);
+
+			connect(_socket, SIGNAL(readyRead()), SLOT(slotDataAvailiable()));
 			_commandQueue.remove(it);
 			break;
 		}
@@ -93,18 +97,36 @@ void IMAPBase::slotDisconnected()
 	emit disconnected();
 }
 
+#include <unistd.h>
+
 void IMAPBase::slotDataAvailiable()
 {
+	static bool firstline = true;
+
 	while (_socket->canReadLine()) {
-		_data += _socket->readLine();
-		if (_socket->atEnd()) {
-#ifndef QT_NO_DEBUG
-			qDebug("IMAP < " + _data.stripWhiteSpace());
-#endif
+		QString tmp = _socket-> readLine ( );
+	
+		_data += tmp;
+		qDebug ( "New Line [%d]: '%s'\n", _connected ? 1 : 0, tmp.latin1( ));
+		
+		if ( firstline || tmp. left(2) == _lasttag ) {
+			firstline = false;
+					
+//		if ( _socket-> atEnd ( )) 
+			qDebug ( "at end -> emitting\n" );
+		
+			QObject::disconnect(_socket, SIGNAL(readyRead()), this, SLOT(slotDataAvailiable()));
 			emit dataReceived(_data);
+			_data = QString::null;
 			_writingAllowed = true;
-			_data = QString(0);
 		}
 	}
 }
 
+void IMAPBase::tryRead ( QString &data )
+{
+	qDebug ( "Trying to read...\n" );
+
+	while ( _socket-> canReadLine ( ))
+		data += _socket-> readLine ( );
+}

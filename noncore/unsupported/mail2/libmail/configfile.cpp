@@ -102,10 +102,10 @@ QString ConfigFile::rot13(const QString &input)
 	while(l--) {
 		if (i[l] >= QChar('A') && i[l] <= QChar('M') ||
 		    i[l] >= QChar('a') && i[l] <= QChar('m'))
-			i[l] = (char)((int)QChar(l[i])+13);
+			i[l] = QChar(i[l].unicode()+13);
 		else if (i[l] >= QChar('N') && i[l] <= QChar('Z') ||
 			 i[l] >= QChar('n') && i[l] <= QChar('z'))
-			i[l] = (char)((int)QChar(l[i])-13);
+			i[l] = QChar(i[l].unicode()-13);
 	}
 	return i;
 }

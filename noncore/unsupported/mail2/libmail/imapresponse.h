@@ -505,12 +505,13 @@ class IMAPResponseParser : public QObject, public IMAPResponseEnums
 	Q_OBJECT
 
 public:
-	IMAPResponseParser(const QString &data);
+	IMAPResponseParser();
+	void parse ( const QString &data);
 
 	IMAPResponse response();
 
 signals:
-	void needMoreData(const QString &comment);
+	void needMoreData(QString &data);
 
 protected:
 	void parseResponse(const QString &data, bool tagged = false);

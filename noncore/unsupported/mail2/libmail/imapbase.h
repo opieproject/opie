@@ -39,6 +39,7 @@ protected slots:
 	void slotConnected();
 	void slotDisconnected();
 	void slotDataAvailiable();
+	void tryRead ( QString & );
 
 private:
 	Account _account;
@@ -46,7 +47,7 @@ private:
 	QSocket *_socket;
 	QStringList _commandQueue;
 	bool _connected, _writingAllowed;
-
+	QString _lasttag;
 };
 
 #endif

@@ -1,61 +1,92 @@
 #include "imapresponse.h"
 
-static QString _previousData;
-static unsigned int _neededData;
 
-IMAPResponseParser::IMAPResponseParser(const QString &data)
+IMAPResponseParser::IMAPResponseParser()
+{
+}
+
+void IMAPResponseParser::parse ( const QString &_data )
 {	
-	QString _data = data, more;
-	_data.replace((QString)"\r\n", "\n");
+	QString data = _data;
 
-	QStringList lines = QStringList::split('\n', _data);
-	QStringList::Iterator it;
-	for (it = lines.begin(); it != lines.end(); it++) {
-		QString tag, lineData; 
-
-		if (!_previousData.isNull()) {
-			qDebug(QString("IMAPResponseParser: got additional data. (%1/%2)").arg(_previousData.length()).arg(_neededData));
-			_previousData += *it + "\n";
-			if (_previousData.length() >= _neededData) {
-				_previousData += ")";
-				qDebug("IMAPResponseParser: got ALL additional data.");
-				qDebug("Data is: " + _previousData);
-				parseResponse(_previousData);
-				_previousData = QString(0);
-				_neededData = 0;
-			}
-		} else {
-			splitTagData(*it, tag, lineData);
-			if (tag == "*") {
-				int pos;
-				if ((pos = data.find(QRegExp("\\{\\d*\\}"))) != -1) {
-					qDebug("IMAPResponseParser: waiting for additional data...");
-					_previousData = lineData + "\n";
-
-					QString tmp = data.right(data.length() - pos - 1).stripWhiteSpace();
-					tmp.truncate(tmp.length() - 1);
-
-					_neededData = tmp.toUInt();
-					if (_previousData.length() >= _neededData) {
-						qDebug("IMAPResponseParser: got ALL additional data. (1st)");
-						parseResponse(_previousData);
-						_previousData = QString(0);
-						_neededData = 0;
-					} else {
+	int pos = 0;
+	int len = data. length ( );
+	
+	
+	while ( pos < len ) {
+		pos = data. find ( QRegExp ( "[^\\s]" ), pos );
+		
+		if (( pos < 0 ) ||  ( pos >= len ))
+			break;
+	
+		switch ( data [pos]. latin1 ( )) {
+			case '*': {
+				qDebug ( "* ASTERIX\n" );
+			
+				int eol = data. find ( '\n', pos );
+				int bracket = data. findRev ( '{', eol );
+				int rest = data. find ( QRegExp ( "[^\\s]" ), pos + 1 );
+				
+				qDebug ( "pos=%d, rest=%d, bracket=%d, eol=%d\n", pos, rest, bracket, eol );
+				
+				if ( bracket > pos ) {
+					uint needdata = data. mid ( bracket + 1, data. find ( '}', bracket + 1 ) - bracket - 1 ). toUInt ( );
+					
+					if ( needdata ) {
+						qDebug ( "nd=%d - hd=%d\n", needdata, ( len - eol - 1 ));
+					
+						while ( needdata > ( len - eol - 1 )) {
+							qDebug ( "emitting need more...\n" );
+							emit needMoreData ( data );
+							len = data. length ( );
+						}
+						qDebug ( "Got all data...\n" );
+					
+						QString tmp = data. mid ( rest, eol - rest + 1 + needdata );
+						
+						int tail = 0;	
+						
+						while ( data [eol - rest + 1 + needdata + tail] != ')' )
+							tail++;
+						tmp. append ( data. mid ( eol - rest + 1 + needdata, tail + 1 ));
+							
+					
+						qDebug ( "Complete parse = |%s|\n", tmp.latin1());
+					
+						parseResponse ( tmp );
+						
+						pos = rest + needdata + tail + 1;
 						break;
-					}
-				} else {
-					parseResponse(lineData);
+					}									
 				}
-			} else if (tag == "+") {
-				emit needMoreData(_data);
-			} else {
-				_iresponse.setTag(tag);
-				parseResponse(_data, true);
+				
+				parseResponse ( data. mid ( rest, eol - rest + 1 ). stripWhiteSpace ( ));				
+				break;
+			}          
+			case '+': {
+				qDebug ( "+ PLUS\n" );
+				
+				emit needMoreData ( data );
+				len = data. length ( );
+				break;
+			}			          
+			default : {
+				qDebug ( "OTHER: '%s...'\n", data. mid ( pos, 20 ). latin1 ( ));
+			
+				uint rest = data. find ( ' ', pos + 1 );
+				rest = data. find ( QRegExp ( "[^\\s]" ), rest + 1 );
+				_iresponse. setTag ( data. mid ( pos, rest - pos ). stripWhiteSpace ( ));
+				parseResponse ( data. mid ( rest, data. find ( '\n', rest )). stripWhiteSpace ( ), true );
+				break;
 			}
 		}
+
+		// skip to end-of-line
+		while (( pos < len ) && ( data [pos] != '\n' ))
+			pos++;
 	}
 }
+
 
 IMAPResponse IMAPResponseParser::response()
 {
@@ -67,12 +98,16 @@ void IMAPResponseParser::parseResponse(const QString &data, bool tagged)
 	QString response, line;
 	int pos;
 	bool isNum = false;
+
+
+//	qDebug ( "\n\n#### PRD #### : #%s#\n\n", data.latin1());
+
 	if ((pos = data.find(' ')) != -1) {
 		response = data.left(pos).upper();
 		response.toInt(&isNum);
 		line = data.right(data.length() - pos - 1);
 	} else {
-		qWarning("IMAPResponseParser: parseResponse: No response found."); 
+		qWarning("IMAPResponseParser: parseResponse: No response found.");
 		return;
 	}
 
@@ -145,7 +180,7 @@ void IMAPResponseParser::parseResponse(const QString &data, bool tagged)
 			else if (*it == "UIDNEXT") status.setUidnext(*(++it));
 			else if (*it == "UIDVALIDITY") status.setUidvalidity(*(++it));
 			else if (*it == "UNSEEN") status.setUnseen(*(++it));
-			else qWarning("IMAPResponseParser: parseResponse: Unknown status data: " + *(it++) + "|");
+			else qWarning((QString("IMAPResponseParser: parseResponse: Unknown status data: " )+ *(it++) + "|").latin1());
 		}
 		_iresponse.addSTATUS(status);
 	} else if (response == "SEARCH") {
@@ -172,33 +207,44 @@ void IMAPResponseParser::parseResponse(const QString &data, bool tagged)
 			IMAPResponseFETCH fetch;
 			QStringList::Iterator it;
 
+			qDebug ( "Got FETCH\n" );
+
 			QStringList fetchList = splitData(line, true);
 			QStringList list;
+			
+			qDebug ( "fl [0]=%s, fl [1]=%s, fl[2]=%s\n", fetchList[0].latin1(),fetchList[1].latin1(),fetchList[2].latin1());
+			
 			parseParenthesizedList(fetchList[1], list);
 
 			for (it = list.begin(); it != list.end(); it++) {
+				qDebug ( "Checking list[] == %s\n", (*it).latin1());
+			
 				if (*it == "BODY") {
 					qDebug("IMAPResponseParser: responseParser: got FETCH::BODY");
 					// XXX
-				} else if ((*it).find(QRegExp("BODY\\[\\d+\\]")) != -1) {
-					QString bodydata = *(++it);
+				} else if ((*it).find(QRegExp("^BODY\\[\\d+\\]")) != -1) {
 					qDebug("IMAPResponseParser: responseParser: got FETCH::BODY[x]");
 
-					QStringList blist;
-					parseParenthesizedList(bodydata, blist);
+					QString number = ( *it ). mid ( 5, ( *it ). length ( ) - 6 );
+					QString bodydata = *(++it);
+
+//					QStringList blist;
+//					parseParenthesizedList(bodydata, blist);
 
 					IMAPResponseBodyPart bodypart;
-					QString tmp;
-					for (unsigned int i = 2; i < blist.count(); i++) {
-						if (i != 2) tmp += " " + blist[i];
-						else tmp += blist[i];
-					}
-					bodypart.setData(tmp);
+//					QString tmp;
+//					for (unsigned int i = 2; i < blist.count(); i++) {
+//						if (i != 2) tmp += " " + blist[i];
+//						else tmp += blist[i];
+//					}
+					bodypart.setData(bodydata);
 
-					tmp = list[0];
-					tmp.replace(0, 5, "");
-					tmp.truncate(blist[0].length() - 1);
-					bodypart.setPart(tmp);
+//					QString tmp = list[0];
+//					tmp.replace(0, 5, "");
+//					tmp.truncate(blist[0].length() - 1);
+					bodypart.setPart(number);
+
+					qDebug("added bodypart [%s]: '%s'\n\n", number.latin1(), bodydata.latin1());
 
 					fetch.addBodyPart(bodypart);
 				} else if (*it == "BODYSTRUCTURE") {
@@ -337,7 +383,8 @@ void IMAPResponseParser::parseResponse(const QString &data, bool tagged)
 			}
 			_iresponse.addFETCH(fetch);
 		}
-	} else qWarning("IMAPResponseParser: parseResponse: Unknown response: " + response + "|");
+	} else qWarning((QString("IMAPResponseParser: parseResponse: Unknown response: ") + response + "|").latin1());
+	
 }
 
 QStringList IMAPResponseParser::splitData(const QString &data, bool withBrackets)
@@ -347,18 +394,48 @@ QStringList IMAPResponseParser::splitData(const QString &data, bool withBrackets
 	QString temp;
 	QStringList list;
 
+	qDebug ( "sd: '%s'\n", data.latin1());
+
 	for (unsigned int i = 0; i <= data.length(); i++) {
 		if (withBrackets && data[i] == '(' && !a) b++;
 		else if (withBrackets && data[i] == ')' && !a) b--;
 
-		if (data[i] == '"' && !escaped) a = !a;
+		if (data[i] == '{' && !escaped && !a ) {
+			qDebug ( "sd: found a {\n" );
+		
+			int p = data. find ( '}', i + 1 );
+			int eol = data. find ( '\n', i + 1 );
+
+			if ( p > int( i )) {
+				int len = data. mid ( i + 1, p - i - 1 ). toInt ( );
+		
+				qDebug ( "sd: skipping %d bytes\n", len );
+			
+				if ( b == 0 ) {			
+					temp = data. mid ( eol + 1, len );
+					noappend = false;
+					i = eol + len;
+					continue;
+				}
+				else {
+					temp. append ( '{' );
+					temp. append ( QString::number ( len ));
+					temp. append ( "}\r\n" );
+					temp. append ( data. mid ( eol + 1, len ));
+					i = eol + len;
+					continue;
+				}
+			}
+		}
+
+		if (data[i] == '\"' && !escaped) a = !a;
 		else escaped = false;
 
-		if (data[i] == '\\' && data[i + 1] == '"') escaped = true;
+		if (data[i] == '\\' && data[i + 1] == '\"') escaped = true;
 
 		if ((data[i] == ' ' || i == data.length()) && b == 0 && !a) {
 			list.append(temp);
-			temp = QString(0);
+			temp = QString::null;
 			if (data[i] == ' ') noappend = true;
 		}
 
@@ -382,22 +459,23 @@ void IMAPResponseParser::splitTagData(const QString &line, QString &tag, QString
 	if ((pos = line.find(' ')) != -1) {
 		tag = line.left(pos);
 		data = line.right(line.length() - pos - 1);
-	} else qWarning("IMAPResponseParser: splitTagData: tag not found. Line was " + line + "|");
+	} else qWarning((QString("IMAPResponseParser: splitTagData: tag not found. Line was ") + line + "|").latin1());
 }
 
 QString IMAPResponseParser::removeLimiters(QString &string, const QChar &sl, const QChar &el)
 {
 	QString tmpString;
+	string = string. stripWhiteSpace ( );
+	
 	if (string[0] == sl && string[string.length() - 1] == el) {
 		string.truncate(string.length() - 1);
 		string.replace(0, 1, "");
 
 		for (unsigned int i = 1; i <= string.length(); i++) {
-			if (string[i - 1] == '\\' && sl == '"') ++i;
+			if (string[i - 1] == '\\' && sl == '\"') ++i;
 			tmpString += string[i - 1];
 		}
 	}
-
 	return tmpString;
 }
 
@@ -417,7 +495,7 @@ IMAPResponseEnums::IMAPResponseCode IMAPResponseParser::getResponseCode(const QS
 		else if (code.find(QRegExp("[UIDVALIDITY \\d*]")) != -1) return UIDVALIDITY; // XXX
 		else if (code.find(QRegExp("[UNSEEN \\d*]")) != -1) return UNSEEN; // XXX
 		else {
-			qWarning("IMAPResponseParser: getResponseCode: Unknown code: " + code + "|");
+			qWarning((QString("IMAPResponseParser: getResponseCode: Unknown code: ") + code + "|").latin1());
 			return UnknownCode;
 		}
 	}
@@ -441,7 +519,7 @@ QValueList<IMAPResponseEnums::IMAPResponseFlags> IMAPResponseParser::parseFlagLi
 		else if (flag == "\\marked") flags.append(Marked);
 		else if (flag == "\\unmarked") flags.append(Unmarked);
 		else if (flag.isEmpty()) { }
-		else qWarning("IMAPResponseParser: parseFlagList: Unknown flag: " + *it + "|");
+		else qWarning((QString("IMAPResponseParser: parseFlagList: Unknown flag: ") + *it + "|").latin1());
 	}
 	return flags;
 }

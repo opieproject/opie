@@ -183,10 +183,10 @@ void ViewMail::slotIMAPUid(IMAPResponse &response)
 
 	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
 		QValueList<IMAPResponseBodyPart> bodyParts;
-		bodyParts.append(response.FETCH()[0].bodyPart(1));
+		bodyParts.append(response.FETCH()[0].bodyPart(0));
 		_mail.setBodyParts(bodyParts);
 
-		browser->setText(QString(_mailHtml).arg(deHtml(response.FETCH()[0].bodyPart(1).data())));
+		browser->setText(QString(_mailHtml).arg(deHtml(response.FETCH()[0].bodyPart(0).data())));
 
 //		fillList(response.FETCH()[0].bodyStructure());
 
