@@ -108,8 +108,6 @@ private slots:
     void pmViewActivated(int);
     void writem3u();
     void writeCurrentM3u();
-    void scanForAudio();
-    void scanForVideo();
     void openFile();
     void setDocument( const QString& fileref );
     void addToSelection( const DocLnk& ); // Add a media file to the playlist

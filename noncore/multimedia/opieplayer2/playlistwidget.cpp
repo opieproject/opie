@@ -95,9 +95,9 @@ PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* par
                         this,SLOT( openFile() ) );
     pmPlayList->insertSeparator(-1);
     (void)new MenuItem( pmPlayList, tr( "Rescan for Audio Files" ),
-                        this,SLOT( scanForAudio() ) );
+                        audioView, SLOT( scanFiles() ) );
     (void)new MenuItem( pmPlayList, tr( "Rescan for Video Files" ),
-                        this,SLOT( scanForVideo() ) );
+                        videoView, SLOT( scanFiles() ) );
 
     pmView->insertItem(  Resource::loadPixmap("fullscreen") , tr( "Full Screen"),
                          &mediaPlayerState, SLOT( toggleFullscreen() ) );
@@ -615,15 +615,6 @@ void PlayListWidget::deletePlaylist() {
 
 void PlayListWidget::playSelected() {
     btnPlay( TRUE);
-}
-
-
-void PlayListWidget::scanForAudio() {
-  audioView->scanFiles();
-}
-
-void PlayListWidget::scanForVideo() {
-  videoView->scanFiles();
 }
 
 QListView *PlayListWidget::currentFileListView() const
