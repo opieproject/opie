@@ -254,6 +254,66 @@ is provided free !</source>
         <source>Configuration</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Click on tab to select one</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings for the search query style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search widget expects regular expressions if selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search widget just expects simple wildcards</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If selected, search differs between upper and lower chars</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font size for list- and card view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fontsettings for list and card view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Sharp&apos;s mail application if available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use OPIE mail if installed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selected attribute one line up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move selected attribute one line down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List of all available attributes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add selected attribute from list below to the upper list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove the selected attribute from the upper list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ContactEditor</name>
@@ -1213,6 +1273,34 @@ is provided free !</source>
         <source>Vietnam</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Press to enter last- middle and firstname</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The jobtitle..</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Something like &quot;jr.&quot;..</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The working place of the contact</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press to select attribute to change</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press to select how to store the name (and howto show it in the listview)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -1378,10 +1466,6 @@ is provided free !</source>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Groups</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
