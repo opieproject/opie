@@ -308,9 +308,6 @@ void AudioWidget::paintEvent( QPaintEvent * ) {
   paintButton( &p, i );
 }
 
-void AudioWidget::showMe() {
-   show();
-}
 void AudioWidget::keyReleaseEvent( QKeyEvent *e)
 {
     switch ( e->key() ) {
