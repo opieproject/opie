@@ -75,8 +75,8 @@ public:
     /**
      * matches the Records the regular expression?
      */
-    virtual bool match( const QString &regexp ) const {return match(QRegExp(regexp));};
-    virtual bool match( const QRegExp &regexp ) const = 0;
+    virtual bool match( const QString &regexp ) const 
+	{return Qtopia::Record::match(QRegExp(regexp));};
 
     /**
      * converts the internal structure to a map
