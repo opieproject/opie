@@ -176,7 +176,18 @@ public:
             }
 #endif
 
-		QPEApplication::showWidget( mw, nomaximize );
+		if ( mw->layout() && mw->inherits("QDialog") ) {
+			QPEApplication::showDialog((QDialog*)mw, nomaximize);
+		}
+		else {
+#ifdef Q_WS_QWS
+			if ( !nomaximize )
+				mw->showMaximized();
+			else
+#endif
+
+				mw->show();
+		}
 	}
 	static bool setWidgetCaptionFromAppName( QWidget* /*mw*/, const QString& /*appName*/, const QString& /*appsPath*/ )
 	{
