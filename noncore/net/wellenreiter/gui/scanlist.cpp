@@ -22,6 +22,7 @@
 #include <qdatetime.h>
 #include <qtextstream.h>
 #include <qpopupmenu.h>
+#include <qcheckbox.h>
 
 #ifdef QWS
 #include <qpe/qpeapplication.h>
@@ -469,6 +470,12 @@ void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, 
     _channel = channel;
     _beacons = 1;
     _signal = 0;
+
+    if ( WellenreiterConfigWindow::instance()->openTree->isChecked() )
+    {
+        listView()->ensureItemVisible( this );
+    }
+
 }
 
 
