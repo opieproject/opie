@@ -18,6 +18,11 @@
 **
 **********************************************************************/
 
+// TODO. During startup
+// Launcher::typeAdded
+// is called for each new tab and calls then each time the refresh of startmenu
+// suboptimal
+
 #define INCLUDE_MENUITEM_DEF
 
 #include "startmenu.h"
@@ -32,19 +37,23 @@
 
 #include <qdict.h>
 #include <qdir.h>
-#include <qpainter.h>
+//#include <qpainter.h>
 
-#include <stdlib.h>
+//#include <stdlib.h>
+
+
+#define APPLNK_ID_OFFSET 250
+#define NO_ID -1
 
 
 void StartPopupMenu::keyPressEvent( QKeyEvent *e )
 {
     if ( e->key() == Key_F33 || e->key() == Key_Space ) {
-	// "OK" button, little hacky
-	QKeyEvent ke(QEvent::KeyPress, Key_Enter, 13, 0);
-	QPopupMenu::keyPressEvent( &ke );
+    	// "OK" button, little hacky
+	    QKeyEvent ke(QEvent::KeyPress, Key_Enter, 13, 0);
+	    QPopupMenu::keyPressEvent( &ke );
     } else {
-	QPopupMenu::keyPressEvent( e );
+	    QPopupMenu::keyPressEvent( e );
     }
 }
 
@@ -60,6 +69,7 @@ StartMenu::StartMenu(QWidget *parent) : QLabel( parent )
     setPixmap(pm);
     setFocusPolicy( NoFocus );
 
+    useWidePopupMenu = true;
     launchMenu = 0;
     refreshMenu();
 }
@@ -85,119 +95,168 @@ void StartMenu::createMenu()
     loadMenu( launchMenu );
     loadApplets();
 
-    bool result = nother || ntabs || m_applets.count();
+    bool result = currentItem || menuApplets.count();
     if ( result )
-	connect( launchMenu, SIGNAL(activated(int)), SLOT(itemSelected(int)) );
-
+	    connect( launchMenu, SIGNAL(activated(int)), SLOT(itemSelected(int)) );
 }
 
 void StartMenu::refreshMenu()
 {
-    Config cfg("Taskbar");
-    cfg.setGroup("Menu");
-    bool ltabs = cfg.readBoolEntry("LauncherTabs",TRUE);
-    bool lot = cfg.readBoolEntry("LauncherOther",TRUE);
-    bool lt = ltabs || lot;
-    if ( launchMenu && !lt )
-	return; // nothing to do
+    Config cfg( "StartMenu" );
+    cfg.setGroup( "Menu" );
+    bool ltabs = cfg.readBoolEntry( "LauncherTabs", TRUE );
+    bool lot = cfg.readBoolEntry( "LauncherOther", TRUE );
+    useWidePopupMenu = cfg.readBoolEntry(  "LauncherSubPopup",  TRUE );
 
-    if ( launchMenu ) {
-	int i;
-        /* find the first entry we want to remove */
-	for (i=0; i<(int)launchMenu->count(); i++) {
-	    QMenuItem* item = launchMenu->findItem(launchMenu->idAt(i));
-	    if ( item && item->id() >= 0 && item->id() < ntabs ) {
-		break;
-	    }
-	    if ( item && item->isSeparator() ) {
-		i++;
-		break;
-	    }
-	}
-        /* remove them */
-	while (i<(int)launchMenu->count())
-	    launchMenu->removeItemAt(i);
-	loadMenu(launchMenu);
-        addApplets(launchMenu);
-    } else {
+    if ( launchMenu && !(ltabs || lot) ) return; // nothing to do
+
 	createMenu();
-    }
 }
 
 void StartMenu::itemSelected( int id )
 {
-    if ( id >= 0 && id < ntabs ) {
-	emit tabSelected(tabs[id]);
-    } else if ( id >= 20 && id < 20+nother ) {
-	other.at(id-20)->execute();
-    }else {
-        MenuApplet *applet = m_applets.find ( id );
+    if ( id == NO_ID ) return;
+
+    if ( id < 0 ) {
+        MenuApplet *applet = menuApplets.find( id );
         if ( applet ) {
-            qWarning("activated");
-            applet-> iface-> activated();
+            applet->iface->activated();
         }
+    } else if ( id >= APPLNK_ID_OFFSET ) {
+    	AppLnk * appLnk = appLnks.find( id );
+        if ( appLnk ) {
+		    appLnk->execute();
+        }
+    } else {
+    	QString *tabName = tabNames.find( id );
+        if ( tabName ) {
+    		emit tabSelected( *tabName );
+	    }
+    }
+}
+
+void StartMenu::createAppEntry( QPopupMenu *menu, QDir dir, QString file )
+{
+    if ( file.right(8) == ".desktop" ) {
+   		AppLnk* applnk = new AppLnk( dir.path() + "/" + file );
+    	if ( !applnk->isValid() ) {
+            delete applnk;
+            return;
+        }
+
+	    if ( applnk->type() == "Separator" ) { // No tr
+		    menu->insertSeparator();
+    		delete applnk;
+       	} else {
+       	    QPixmap test;
+            test.convertFromImage(
+                Resource::loadImage( applnk->icon() ).smoothScale(
+                    AppLnk::smallIconSize(), AppLnk::smallIconSize() ), 0 );
+
+	    	menu->insertItem( test, applnk->name(),
+                              currentItem + APPLNK_ID_OFFSET );
+            appLnks.insert( currentItem + APPLNK_ID_OFFSET, applnk );
+            currentItem++;
+   		}
+    }
+
+}
+
+void StartMenu::createDirEntry( QPopupMenu *menu, QDir dir, QString file, bool lot )
+{
+    // do some sanity checks and collect information
+
+    if ( file == "." || file == ".." ) return;
+
+    Config cfg( dir.path() + "/" + file + "/.directory", Config::File );
+    if ( !cfg.isValid() ) return;
+
+   	QString name = cfg.readEntry( "Name" );
+    QString icon = cfg.readEntry( "Icon" );
+	if ( !name || !icon ) return;
+
+    QDir subdir = QDir( dir );
+    subdir.cd( file );
+    subdir.setFilter( QDir::Files );
+    subdir.setNameFilter( "*.desktop" );
+    // we don' t show the menu if there are no entries
+    // perhaps one should check if there exist subsubdirs with entries...
+    if ( subdir.entryList().isEmpty() ) return;
+
+    // checks were ok
+
+    QPixmap test;
+    test.convertFromImage( Resource::loadImage( icon ).smoothScale(
+        AppLnk::smallIconSize(), AppLnk::smallIconSize() ), 0 );
+
+	if ( useWidePopupMenu ) {
+        // generate submenu
+        QPopupMenu *submenu = new QPopupMenu( menu );
+        connect( submenu,  SIGNAL(activated(int)), SLOT(itemSelected(int)) );
+        menu->insertItem( test, name, submenu, NO_ID );
+
+        // ltabs is true cause else we wouldn't stuck around..
+        createMenuEntries( submenu, subdir, true, lot );
+    } else {
+        // no submenus - just bring corresponding tab to front
+        menu->insertItem( test, name, currentItem );
+        tabNames.insert( currentItem, new QString( file ) );
+        currentItem++;
+    }
+}
+
+void StartMenu::createMenuEntries( QPopupMenu *menu, QDir dir, bool ltabs, bool lot )
+{
+    if ( lot ) {
+        dir.setFilter( QDir::Files );
+        dir.setNameFilter( "*.desktop" );
+        QStringList files = dir.entryList();
+        files.sort();
+
+        for ( QStringList::Iterator it = files.begin(); it != files.end(); it++ ) {
+            createAppEntry( menu, dir, *it );
+        }
+    }
+    if ( ltabs ) {
+        dir.setNameFilter( "*" );
+        dir.setFilter( QDir::Dirs );
+        QStringList dirs = dir.entryList();
+        dirs.sort();
+
+        for ( QStringList::Iterator it = dirs.begin(); it != dirs.end(); it++ ) {
+            createDirEntry( menu, dir, *it, lot );
+    	}
     }
 }
 
 bool StartMenu::loadMenu( QPopupMenu *menu )
 {
-    Config cfg("Taskbar");
+    Config cfg("StartMenu");
     cfg.setGroup("Menu");
 
-    bool ltabs = cfg.readBoolEntry("LauncherTabs",TRUE);
-    bool lot = cfg.readBoolEntry("LauncherOther",TRUE);
+    bool ltabs = cfg.readBoolEntry("LauncherTabs", TRUE);
+    bool lot = cfg.readBoolEntry("LauncherOther", TRUE);
+    useWidePopupMenu = cfg.readBoolEntry(  "LauncherSubPopup",  TRUE );
     bool sepfirst = !ltabs && !lot;
 
-    tabs.clear();
-    other.setAutoDelete(TRUE);
-    other.clear();
-    ntabs = 0;
-    nother = 0;
+    currentItem = 0;
+	launchMenu->clear();
 
-    bool f=TRUE;
-    if ( ltabs || lot ) {
-	QDir dir( MimeType::appsFolderName(), QString::null, QDir::Name );
-	for (int i=0; i<(int)dir.count(); i++) {
-	    QString d = dir[i];
-	    Config cfg(dir.path()+"/"+d+"/.directory",Config::File);
-	    if ( cfg.isValid() ) {
-		QString nm = cfg.readEntry("Name");
-		QString ic = cfg.readEntry("Icon");
-		if ( !!nm && !!ic ) {
-		    tabs.append(d);
-                    QPixmap test;
-                    test.convertFromImage( Resource::loadImage( ic ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ), 0 );
-		    menu->insertItem( test, nm, ntabs++ );
-		}
-	    } else if ( lot && d.right(8)==".desktop") {
-		AppLnk* applnk = new AppLnk(dir.path()+"/"+d);
-		if ( applnk->isValid() ) {
-		    if ( applnk->type() == "Separator" ) { // No tr
-			if ( lot ) {
-			    menu->insertSeparator();
-			    sepfirst = f && !ltabs;
-			}
-			delete applnk;
-		    } else {
-			f = FALSE;
-			other.append(applnk);
-                        QPixmap test;
-                        test.convertFromImage( Resource::loadImage( applnk->icon() ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ), 0 );
-                        menu->insertItem( test  , applnk->name(), 20+nother++ );
-		    }
-		} else {
-		    delete applnk;
-		}
-	    }
-	}
+    appLnks.setAutoDelete( true );
+    tabNames.setAutoDelete( true );
+    appLnks.clear();
+    tabNames.clear();
+    appLnks.setAutoDelete( false );
+    tabNames.setAutoDelete( false );
 
-	if ( !menu->count() )
-	    sepfirst = TRUE;
-    }
+    QDir dir( MimeType::appsFolderName(), QString::null, QDir::Name );
+    createMenuEntries( menu, dir, ltabs, lot );
 
-    launchMenu->setName(sepfirst ? "accessories" : "accessories_need_sep"); // No tr
+   	if ( !menu->count() ) sepfirst = TRUE;
 
-    return (nother || ntabs );
+    launchMenu->setName( sepfirst ? "accessories" : "accessories_need_sep" ); // No tr
+
+    return currentItem;
 }
 
 
@@ -214,7 +273,7 @@ void StartMenu::launch()
 
 
 
-static int compareAppletPositions(const void *a, const void *b)
+static int compareAppletPositions(const void *b, const void *a)
 {
     const MenuApplet* aa = *(const MenuApplet**)a;
     const MenuApplet* ab = *(const MenuApplet**)b;
@@ -225,21 +284,21 @@ static int compareAppletPositions(const void *a, const void *b)
 
 void StartMenu::clearApplets()
 {
-    if (launchMenu )
+    if ( launchMenu )
         launchMenu-> hide();
 
-    for ( QIntDictIterator<MenuApplet> it ( m_applets ); it. current ( ); ++it ) {
-    	MenuApplet *applet = it. current ( );
+    for ( QIntDictIterator<MenuApplet> it( menuApplets ); it.current(); ++it ) {
+    	MenuApplet *applet = it.current();
     	if ( launchMenu ) {
-    		launchMenu-> removeItem ( applet-> id );
-    		delete applet-> popup;
+    		launchMenu->removeItem( applet-> id );
+    		delete applet->popup;
     	}
 
-        applet-> iface-> release();
-        applet-> library-> unload();
+        applet->iface->release();
+        applet->library->unload();
         delete applet-> library;
     }
-    m_applets.clear();
+    menuApplets.clear();
 }
 
 
@@ -262,7 +321,7 @@ void StartMenu::loadApplets()
     QDir dir( path, "lib*.so" );
     QStringList list = dir.entryList();
     QStringList::Iterator it;
-    int napplets=0;
+    int napplets = 0;
     MenuApplet* *xapplets = new MenuApplet*[list.count()];
     for ( it = list.begin(); it != list.end(); ++it ) {
         if ( exclude.find( *it ) != exclude.end() )
@@ -288,26 +347,21 @@ void StartMenu::loadApplets()
         }
     }
     cfg.writeEntry( "ExcludeApplets", exclude, ',' );
-    qsort(xapplets,napplets,sizeof(m_applets[0]),compareAppletPositions);
+    qsort(xapplets, napplets, sizeof(menuApplets[0]), compareAppletPositions);
 
 
-    int foo = ( launchMenu-> count ( )) ? launchMenu-> insertSeparator ( ) : 0;
-
-    while (napplets--) {
+    while ( napplets-- ) {
         MenuApplet *applet = xapplets[napplets];
 
-        applet-> popup = applet-> iface-> popup ( this );
+        applet->popup = applet->iface->popup( this );
 
-        if ( applet-> popup )
-	    	applet-> id = launchMenu-> insertItem ( applet-> iface-> icon ( ), applet-> iface-> text ( ), applet-> popup );
-        else
-	    	applet-> id = launchMenu-> insertItem ( applet-> iface-> icon ( ), applet-> iface-> text ( ) );
-
-
-        m_applets.insert ( applet-> id, new MenuApplet(*applet));
+        // menuApplets got an id < -1
+        menuApplets.insert( -( currentItem + 2 ), new MenuApplet( *applet ) );
+        currentItem++;
     }
     delete [] xapplets;
 
+    addApplets( launchMenu );
 }
 
 
@@ -319,18 +373,20 @@ void StartMenu::addApplets(QPopupMenu* pop) {
     if( pop-> count ( ))
         pop-> insertSeparator ( );
 
-    for ( QIntDictIterator<MenuApplet> it ( m_applets ); it. current ( ); ++it ) {
-    	MenuApplet *applet = it. current ( );
-        if ( applet-> popup )
-            applet-> id = pop-> insertItem ( applet-> iface-> icon ( ), applet-> iface-> text ( ), applet-> popup );
+    for ( QIntDictIterator<MenuApplet> it( menuApplets ); it.current(); ++it ) {
+    	MenuApplet *applet = it.current();
+        if ( applet->popup )
+            applet->id = pop->insertItem( applet->iface->icon(),
+                                          applet->iface->text(), applet->popup );
         else
-            applet-> id = pop-> insertItem ( applet-> iface-> icon ( ), applet-> iface-> text ( ) );
+            applet->id = pop->insertItem( applet->iface->icon(),
+                                          applet->iface->text() );
 
-        dict.insert( applet->id, new MenuApplet(*applet) );
+        dict.insert( applet->id, new MenuApplet( *applet ) );
     }
     /* need to update the key */
-    m_applets.setAutoDelete( true );
-    m_applets.clear();
-    m_applets.setAutoDelete( false );
-    m_applets = dict;
+    menuApplets.setAutoDelete( true );
+    menuApplets.clear();
+    menuApplets.setAutoDelete( false );
+    menuApplets = dict;
 }

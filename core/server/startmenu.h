@@ -25,6 +25,8 @@
 #include <qintdict.h>
 #include <qstring.h>
 #include <qlist.h>
+#include <qmap.h>
+#include <qdir.h>
 #include <qlabel.h>
 #include <qpopupmenu.h>
 
@@ -32,10 +34,13 @@
 
 class StartPopupMenu : public QPopupMenu
 {
+
 public:
     StartPopupMenu( QWidget *parent ) : QPopupMenu( parent ) {}
+    
 protected:
     void keyPressEvent( QKeyEvent *e );
+
 };
 
 class QLibrary;
@@ -49,7 +54,9 @@ struct MenuApplet {
 };
 
 class StartMenu : public QLabel {
+    
     Q_OBJECT
+        
 public:
     StartMenu( QWidget * );
     ~StartMenu();
@@ -77,6 +84,9 @@ private:
     void clearApplets();
     void addApplets( QPopupMenu* menu );
     bool loadMenu( QPopupMenu *menu );
+    void createMenuEntries( QPopupMenu *menu, QDir dir, bool ltabs, bool lot );
+    void createDirEntry( QPopupMenu *menu, QDir dir, QString file, bool lot );
+    void createAppEntry( QPopupMenu *menu, QDir dir, QString file );
 
 private:
     bool useWidePopupMenu;
@@ -85,11 +95,12 @@ private:
     bool startButtonIsFlat;
     QString startButtonPixmap;
 
-    QStringList tabs;
-    QList<AppLnk> other;
-    QIntDict<MenuApplet> m_applets;
-    int ntabs;
-    int nother;
+    int currentItem;
+
+    QIntDict<AppLnk> appLnks;
+    QIntDict<QString> tabNames;
+    QIntDict<MenuApplet> menuApplets;
+    
 };
 
 #endif // __START_MENU_H__
