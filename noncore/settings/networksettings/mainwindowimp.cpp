@@ -19,7 +19,6 @@
  #include <qpe/qlibrary.h>
  #include <qpe/resource.h>
  #include <qpe/qpeapplication.h>
-// #define QLibrary Library
 #else
  #include <klibloader.h>
  #define QLibrary KLibrary
@@ -382,7 +381,7 @@ void MainWindowImp::configureClicked(){
     }
   }
   
-  InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(this, "InterfaceSetupImp", i, true, Qt::WType_Modal | Qt::WDestructiveClose | Qt::WStyle_Dialog);
+  InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(this, "InterfaceSetupImp", i, true, Qt::WDestructiveClose );
   QString currentProfileText = currentProfileLabel->text();
   if(currentProfileText.upper() == "ALL");
     currentProfileText = "";
@@ -418,7 +417,7 @@ void MainWindowImp::informationClicked(){
       return;
     }
   } 
-  InterfaceInformationImp *information = new InterfaceInformationImp(this, "InterfaceSetupImp", i, Qt::WType_Modal | Qt::WDestructiveClose | Qt::WStyle_Dialog);
+  InterfaceInformationImp *information = new InterfaceInformationImp(this, "InterfaceSetupImp", i, Qt::WType_Modal | Qt::WDestructiveClose | Qt::WType_Dialog);
   information->showMaximized();
 }
 
@@ -585,6 +584,4 @@ void MainWindowImp::changeProfile(){
   }
   // TODO change the profile in the modules
 }
-
-// mainwindowimp.cpp
 

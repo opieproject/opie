@@ -63,7 +63,5 @@ private:
 #endif
 };
 
-#endif
-
-// mainwindowimp.h
+#endif // MAINWINOWIMP_H
 
