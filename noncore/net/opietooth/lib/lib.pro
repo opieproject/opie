@@ -5,7 +5,7 @@ SOURCES		= connection.cpp parser.cc device.cc manager.cc remotedevice.cc service
 TARGET		= opietooth
 INCLUDEPATH += $(OPIEDIR)/include .
 DESTDIR		= $(OPIEDIR)/lib$(PROJMAK)
-LIBS += -lopie
+LIBS += -lopiecore2
 #VERSION = 0.0.0
 
 include ( $(OPIEDIR)/include.pro )
