@@ -80,7 +80,7 @@ class OPacket : public QObject
 
     int caplen() const;
     int len() const;
-    void dump() const;
+    QString dump( int = 32 ) const;
 
   private:
     const packetheaderstruct _hdr;  // pcap packet header

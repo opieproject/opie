@@ -88,17 +88,43 @@ int OPacket::caplen() const
 }
 
 
-void OPacket::dump() const
+QString OPacket::dump( int bpl ) const
 {
-    printf( "OPacket::dump()\n" );
-    printf( "----------------\n" );
+    static int index = 0;
+    index++;
+    int len = _hdr.caplen;
+    QString str;
+    str.sprintf( "\n<----- Packet #%04d Len = 0x%X (%d) ----->\n\n", index, len, len );
+    str.append( "0000: " );
+    QString tmp;
+    QString bytes;
+    QString chars;
 
-    for ( int i = 0; i < _hdr.caplen; ++i )
+    for ( int i = 0; i < len; ++i )
     {
-        printf( "%02x ", _data[i] );
-        if ( !((i+1) % 32) ) printf( "\n" );
+        tmp.sprintf( "%02X ", _data[i] ); bytes.append( tmp );
+        if ( (_data[i] > 31) && (_data[i]<128) ) chars.append( _data[i] );
+        else chars.append( '.' );
+
+        if ( !((i+1) % bpl) )
+        {
+            str.append( bytes );
+            str.append( ' ' );
+            str.append( chars );
+            str.append( '\n' );
+            tmp.sprintf( "%04X: ", i+1 ); str.append( tmp );
+            bytes = "";
+            chars = "";
+        }
+
     }
-    printf( "\n\n" );
+    if ( (len % bpl) )
+    {
+        str.append( bytes.leftJustify( 1 + 3*bpl ) );
+        str.append( chars );
+    }
+    str.append( '\n' );
+    return str;
 }
 
 
