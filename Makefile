@@ -2,7 +2,7 @@ default:  dynamic
 
 all: default docs
 
-LIBS=library
+LIBS=library libopie
 
 COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	inputmethods/pickboard \
