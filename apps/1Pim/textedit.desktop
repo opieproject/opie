@@ -2,6 +2,7 @@
 Comment=A Text Editing Program
 Comment[es]=Un editor de textos
 Comment[da]=Et tekst redigerings program
+Comment[fr]=Un éditeur de texte
 Exec=textedit
 Icon=TextEditor
 Type=Application
@@ -19,3 +20,5 @@ Name[hu]=Szöveg- szerkesztõ
 Name[pt]=Editor Texto
 Name[es]=Editor
 Name[da]=Teksteditor
+Name[fr]=Editeur
+

@@ -2,6 +2,7 @@
 Comment=Today App
 Comment[es]=Aplicación Hoy
 Comment[da]=Viser en oversigt over dagens begivenheder
+Comment[fr]=Application "Aujourd'hui"
 Exec=today
 Icon=today/today_icon
 Type=Application
@@ -14,3 +15,4 @@ Name[it]=Oggi
 Name[zh_TW]=Today
 Name[ko]=오늘
 Name[da]=Idag
+Name[fr]=Aujourd'hui
