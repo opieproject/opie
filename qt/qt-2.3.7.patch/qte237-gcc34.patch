@@ -1,50 +1,6 @@
-diff -ur qt-2.3.7_clean/include/qcstring.h qt-2.3.7/include/qcstring.h
---- qt-2.3.7_clean/include/qcstring.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/include/qcstring.h	2004-06-04 02:24:25.000000000 +0200
-@@ -119,7 +119,7 @@
- //                   We want to keep source compatibility for 2.x
- // ### TODO for 4.0: completely remove these and the cstr* functions
- 
--#if !defined(QT_GENUINE_STR)
-+#if 0
- 
- #undef	strlen
- #define strlen qstrlen
-diff -ur qt-2.3.7_clean/include/qglobal.h qt-2.3.7/include/qglobal.h
---- qt-2.3.7_clean/include/qglobal.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/include/qglobal.h	2004-06-04 02:29:41.000000000 +0200
-@@ -207,8 +207,16 @@
- #if __GNUC__ == 2 && __GNUC_MINOR__ == 96
- #define Q_FP_CCAST_BROKEN
- #endif
-+/* ARM gcc pads structs to 32 bits, even when they contain a single
-+   char, or short.  We tell gcc to pack QChars to 16 bits, to avoid
-+   QString bloat. However, gcc 3.4 doesn't allow us to create references to
-+   members of a packed struct. (Pointers are OK, because then you
-+   supposedly know what you are doing.) */
- #if (defined(__arm__) || defined(__ARMEL__)) && !defined(QT_MOC_CPP)
- #define Q_PACKED __attribute__ ((packed))
-+#    if __GNUC__ == 3 && __GNUC_MINOR__ >= 4
-+#      define Q_NO_PACKED_REFERENCE
-+#    endif
- #endif
- #elif defined(__xlC__)
- #define _CC_XLC_
-diff -ur qt-2.3.7_clean/include/qsortedlist.h qt-2.3.7/include/qsortedlist.h
---- qt-2.3.7_clean/include/qsortedlist.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/include/qsortedlist.h	2004-06-04 02:24:25.000000000 +0200
-@@ -48,7 +48,7 @@
- public:
-     QSortedList() {}
-     QSortedList( const QSortedList<type> &l ) : QList<type>(l) {}
--    ~QSortedList() { clear(); }
-+    ~QSortedList() { this->clear(); }
-     QSortedList<type> &operator=(const QSortedList<type> &l)
-       { return (QSortedList<type>&)QList<type>::operator=(l); }
- 
-diff -ur qt-2.3.7_clean/src/kernel/qgfxtransformed_qws.cpp qt-2.3.7/src/kernel/qgfxtransformed_qws.cpp
---- qt-2.3.7_clean/src/kernel/qgfxtransformed_qws.cpp	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/src/kernel/qgfxtransformed_qws.cpp	2004-06-04 02:24:25.000000000 +0200
+diff -ur qt-2.3.7_old/src/kernel/qgfxtransformed_qws.cpp qt-2.3.7/src/kernel/qgfxtransformed_qws.cpp
+--- qt-2.3.7_old/src/kernel/qgfxtransformed_qws.cpp	2004-09-10 21:08:04.000000000 +0200
++++ qt-2.3.7/src/kernel/qgfxtransformed_qws.cpp	2004-09-10 21:08:42.000000000 +0200
 @@ -671,11 +671,11 @@
      inline int tx( int x, int y ) {
  	switch ( qt_trans_screen->transformation() ) {
@@ -249,9 +205,9 @@ diff -ur qt-2.3.7_clean/src/kernel/qgfxtransformed_qws.cpp qt-2.3.7/src/kernel/q
      inDraw = FALSE;
  }
  
-diff -ur qt-2.3.7_clean/src/kernel/qgfxvfb_qws.cpp qt-2.3.7/src/kernel/qgfxvfb_qws.cpp
---- qt-2.3.7_clean/src/kernel/qgfxvfb_qws.cpp	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/src/kernel/qgfxvfb_qws.cpp	2004-06-04 02:24:25.000000000 +0200
+diff -ur qt-2.3.7_old/src/kernel/qgfxvfb_qws.cpp qt-2.3.7/src/kernel/qgfxvfb_qws.cpp
+--- qt-2.3.7_old/src/kernel/qgfxvfb_qws.cpp	2004-09-10 21:08:04.000000000 +0200
++++ qt-2.3.7/src/kernel/qgfxvfb_qws.cpp	2004-09-10 21:08:42.000000000 +0200
 @@ -31,7 +31,6 @@
  **********************************************************************/
  
@@ -371,9 +327,113 @@ diff -ur qt-2.3.7_clean/src/kernel/qgfxvfb_qws.cpp qt-2.3.7/src/kernel/qgfxvfb_q
      QGfxRaster<depth,type>::tiledBlt( x, y, w, h );
      QWSDisplay::ungrab();
  }
-diff -ur qt-2.3.7_clean/src/tools/qcstring.h qt-2.3.7/src/tools/qcstring.h
---- qt-2.3.7_clean/src/tools/qcstring.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/src/tools/qcstring.h	2004-06-04 02:24:25.000000000 +0200
+diff -ur qt-2.3.7_old/src/kernel/qgfxvnc_qws.cpp qt-2.3.7/src/kernel/qgfxvnc_qws.cpp
+--- qt-2.3.7_old/src/kernel/qgfxvnc_qws.cpp	2004-09-10 21:08:04.000000000 +0200
++++ qt-2.3.7/src/kernel/qgfxvnc_qws.cpp	2004-09-10 21:10:54.000000000 +0200
+@@ -971,7 +971,7 @@
+ void QGfxVNC<depth,type>::drawPoint( int x, int y )
+ {
+     QWSDisplay::grab( TRUE );
+-    qvnc_screen->setDirty( QRect( x+xoffs, y+yoffs, 1, 1 ) & clipbounds );
++    qvnc_screen->setDirty( QRect( x+this->xoffs, y+this->yoffs, 1, 1 ) & this->clipbounds );
+     QGfxRaster<depth,type>::drawPoint( x, y );
+     QWSDisplay::ungrab();
+ }
+@@ -981,8 +981,8 @@
+ {
+     QWSDisplay::grab( TRUE );
+     QRect r = pa.boundingRect();
+-    r.moveBy( xoffs, yoffs );
+-    qvnc_screen->setDirty( r & clipbounds );
++    r.moveBy( this->xoffs, this->yoffs );
++    qvnc_screen->setDirty( r & this->clipbounds );
+     QGfxRaster<depth,type>::drawPoints( pa, x, y );
+     QWSDisplay::ungrab();
+ }
+@@ -992,9 +992,9 @@
+ {
+     QWSDisplay::grab( TRUE );
+     QRect r;
+-    r.setCoords( x1+xoffs, y1+yoffs, x2+xoffs, y2+yoffs );
++    r.setCoords( x1+this->xoffs, y1+this->yoffs, x2+this->xoffs, y2+this->yoffs );
+     r = r.normalize();
+-    qvnc_screen->setDirty( r & clipbounds );
++    qvnc_screen->setDirty( r & this->clipbounds );
+     QGfxRaster<depth,type>::drawLine( x1, y1, x2, y2 );
+     QWSDisplay::ungrab();
+ }
+@@ -1003,7 +1003,7 @@
+ void QGfxVNC<depth,type>::fillRect( int x,int y,int w,int h )
+ {
+     QWSDisplay::grab( TRUE );
+-    qvnc_screen->setDirty( QRect( x+xoffs, y+yoffs, w, h ) & clipbounds );
++    qvnc_screen->setDirty( QRect( x+this->xoffs, y+this->yoffs, w, h ) & this->clipbounds );
+     QGfxRaster<depth,type>::fillRect( x, y, w, h );
+     QWSDisplay::ungrab();
+ }
+@@ -1013,8 +1013,8 @@
+ {
+     QWSDisplay::grab( TRUE );
+     QRect r = pa.boundingRect();
+-    r.moveBy( xoffs, yoffs );
+-    qvnc_screen->setDirty( r & clipbounds );
++    r.moveBy( this->xoffs, this->yoffs );
++    qvnc_screen->setDirty( r & this->clipbounds );
+     QGfxRaster<depth,type>::drawPolyline( pa, x, y );
+     QWSDisplay::ungrab();
+ }
+@@ -1024,8 +1024,8 @@
+ {
+     QWSDisplay::grab( TRUE );
+     QRect r = pa.boundingRect();
+-    r.moveBy( xoffs, yoffs );
+-    qvnc_screen->setDirty( r & clipbounds );
++    r.moveBy( this->xoffs, this->yoffs );
++    qvnc_screen->setDirty( r & this->clipbounds );
+     QGfxRaster<depth,type>::drawPolygon( pa, w, x, y );
+     QWSDisplay::ungrab();
+ }
+@@ -1034,7 +1034,7 @@
+ void QGfxVNC<depth,type>::blt( int x,int y,int w,int h, int sx, int sy )
+ {
+     QWSDisplay::grab( TRUE );
+-    qvnc_screen->setDirty( QRect( x+xoffs, y+yoffs, w, h ) & clipbounds );
++    qvnc_screen->setDirty( QRect( x+this->xoffs, y+this->yoffs, w, h ) & this->clipbounds );
+     QGfxRaster<depth,type>::blt( x, y, w, h, sx, sy );
+     QWSDisplay::ungrab();
+ }
+@@ -1045,8 +1045,8 @@
+     QWSDisplay::grab( TRUE );
+     int dy = sy - y;
+     int dx = sx - x;
+-    qvnc_screen->setDirty( QRect(QMIN(x,sx) + xoffs, QMIN(y,sy) + yoffs,
+-			   w+abs(dx), h+abs(dy)) & clipbounds );
++    qvnc_screen->setDirty( QRect(QMIN(x,sx) + this->xoffs, QMIN(y,sy) + this->yoffs,
++			   w+abs(dx), h+abs(dy)) & this->clipbounds );
+     QGfxRaster<depth,type>::scroll( x, y, w, h, sx, sy );
+     QWSDisplay::ungrab();
+ }
+@@ -1056,7 +1056,7 @@
+ void QGfxVNC<depth,type>::stretchBlt( int x,int y,int w,int h,int sx,int sy )
+ {
+     QWSDisplay::grab( TRUE );
+-    qvnc_screen->setDirty( QRect( x + xoffs, y + yoffs, w, h) & clipbounds );
++    qvnc_screen->setDirty( QRect( x + this->xoffs, y + this->yoffs, w, h) & this->clipbounds );
+     QGfxRaster<depth,type>::stretchBlt( x, y, w, h, sx, sy );
+     QWSDisplay::ungrab();
+ }
+@@ -1066,7 +1066,7 @@
+ void QGfxVNC<depth,type>::tiledBlt( int x,int y,int w,int h )
+ {
+     QWSDisplay::grab( TRUE );
+-    qvnc_screen->setDirty( QRect(x + xoffs, y + yoffs, w, h) & clipbounds );
++    qvnc_screen->setDirty( QRect(x + this->xoffs, y + this->yoffs, w, h) & this->clipbounds );
+     QGfxRaster<depth,type>::tiledBlt( x, y, w, h );
+     QWSDisplay::ungrab();
+ }
+diff -ur qt-2.3.7_old/src/tools/qcstring.h qt-2.3.7/src/tools/qcstring.h
+--- qt-2.3.7_old/src/tools/qcstring.h	2004-09-10 21:08:04.000000000 +0200
++++ qt-2.3.7/src/tools/qcstring.h	2004-09-10 21:08:42.000000000 +0200
 @@ -119,7 +119,7 @@
  //                   We want to keep source compatibility for 2.x
  // ### TODO for 4.0: completely remove these and the cstr* functions
@@ -383,9 +443,9 @@ diff -ur qt-2.3.7_clean/src/tools/qcstring.h qt-2.3.7/src/tools/qcstring.h
  
  #undef	strlen
  #define strlen qstrlen
-diff -ur qt-2.3.7_clean/src/tools/qglobal.h qt-2.3.7/src/tools/qglobal.h
---- qt-2.3.7_clean/src/tools/qglobal.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/src/tools/qglobal.h	2004-06-04 02:29:41.000000000 +0200
+diff -ur qt-2.3.7_old/src/tools/qglobal.h qt-2.3.7/src/tools/qglobal.h
+--- qt-2.3.7_old/src/tools/qglobal.h	2004-09-10 21:08:04.000000000 +0200
++++ qt-2.3.7/src/tools/qglobal.h	2004-09-10 21:08:42.000000000 +0200
 @@ -207,8 +207,16 @@
  #if __GNUC__ == 2 && __GNUC_MINOR__ == 96
  #define Q_FP_CCAST_BROKEN
@@ -403,10 +463,9 @@ diff -ur qt-2.3.7_clean/src/tools/qglobal.h qt-2.3.7/src/tools/qglobal.h
  #endif
  #elif defined(__xlC__)
  #define _CC_XLC_
-Nur in qt-2.3.7/src/tools: qglobal.h~.
-diff -ur qt-2.3.7_clean/src/tools/qsortedlist.h qt-2.3.7/src/tools/qsortedlist.h
---- qt-2.3.7_clean/src/tools/qsortedlist.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/src/tools/qsortedlist.h	2004-06-04 02:24:25.000000000 +0200
+diff -ur qt-2.3.7_old/src/tools/qsortedlist.h qt-2.3.7/src/tools/qsortedlist.h
+--- qt-2.3.7_old/src/tools/qsortedlist.h	2004-09-10 21:08:04.000000000 +0200
++++ qt-2.3.7/src/tools/qsortedlist.h	2004-09-10 21:08:42.000000000 +0200
 @@ -48,7 +48,7 @@
  public:
      QSortedList() {}
@@ -416,9 +475,9 @@ diff -ur qt-2.3.7_clean/src/tools/qsortedlist.h qt-2.3.7/src/tools/qsortedlist.h
      QSortedList<type> &operator=(const QSortedList<type> &l)
        { return (QSortedList<type>&)QList<type>::operator=(l); }
  
-diff -ur qt-2.3.7_clean/src/tools/qstring.h qt-2.3.7/src/tools/qstring.h
---- qt-2.3.7_clean/src/tools/qstring.h	2004-06-04 02:17:53.000000000 +0200
-+++ qt-2.3.7/src/tools/qstring.h	2004-06-04 02:54:16.000000000 +0200
+diff -ur qt-2.3.7_old/src/tools/qstring.h qt-2.3.7/src/tools/qstring.h
+--- qt-2.3.7_old/src/tools/qstring.h	2004-09-10 21:08:04.000000000 +0200
++++ qt-2.3.7/src/tools/qstring.h	2004-09-10 21:08:42.000000000 +0200
 @@ -163,8 +163,16 @@
      bool isLetterOrNumber() const;
      bool isDigit() const;
@@ -437,4 +496,3 @@ diff -ur qt-2.3.7_clean/src/tools/qstring.h qt-2.3.7/src/tools/qstring.h
      uchar cell() const { return cl; }
      uchar row() const { return rw; }
  
-Nur in qt-2.3.7/src/tools: qstring.h~.
