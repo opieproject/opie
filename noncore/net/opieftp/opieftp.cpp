@@ -125,8 +125,8 @@ OpieFtp::OpieFtp( )
     tabMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
     tabMenu->insertItem( tr( "Switch to Remote" ), this, SLOT( switchToRemoteTab() ));
     tabMenu->insertItem( tr( "Switch to Config" ), this, SLOT( switchToConfigTab() ));
-    tabMenu->insertSeparator();
-    tabMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
+//    tabMenu->insertSeparator();
+//    tabMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
     tabMenu->setCheckable(TRUE);
 
 
