@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>276</width>
+            <width>290</width>
             <height>280</height>
         </rect>
     </property>
@@ -36,7 +36,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Automaticly bring up</string>
+                <string>Automatically bring up</string>
             </property>
         </widget>
         <widget>
