@@ -3,54 +3,54 @@
     <name>GoMainWidget</name>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая игра</translation>
     </message>
     <message>
         <source>Pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Передать</translation>
     </message>
     <message>
         <source>Resign</source>
-        <translation type="unfinished"></translation>
+        <translation>Сдаться</translation>
     </message>
     <message>
         <source>Two player option</source>
-        <translation type="unfinished"></translation>
+        <translation>Два игрока</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Игра</translation>
     </message>
 </context>
 <context>
     <name>GoWidget</name>
     <message>
         <source>White %1, Black %2. </source>
-        <translation type="unfinished"></translation>
+        <translation>Белых %1, Черных %2. </translation>
     </message>
     <message>
         <source>White wins.</source>
-        <translation type="unfinished"></translation>
+        <translation>Белые выиграли.</translation>
     </message>
     <message>
         <source>Black wins.</source>
-        <translation type="unfinished"></translation>
+        <translation>Черные выиграли.</translation>
     </message>
     <message>
         <source>A draw.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ничья.</translation>
     </message>
     <message>
         <source>I pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Передаю ход</translation>
     </message>
     <message>
         <source>Prisoners: black %1, white %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Плененных: черных %1, белых %2</translation>
     </message>
     <message>
         <source>Go</source>
-        <translation type="unfinished"></translation>
+        <translation>Го</translation>
     </message>
 </context>
 </TS>

@@ -3,11 +3,11 @@
     <name>VTApplet</name>
     <message>
         <source>VT shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Ссылка на VT</translation>
     </message>
     <message>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Терминал</translation>
     </message>
 </context>
 </TS>
