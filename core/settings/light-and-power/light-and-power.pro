@@ -1,10 +1,10 @@
-CONFIG		+= qt warn_on release quick-app
+CONFIG		+= qt warn_on debug quick-app
 HEADERS		= light.h sensor.h calibration.h
 SOURCES		= light.cpp main.cpp sensor.cpp calibration.cpp
 INTERFACES	= lightsettingsbase.ui sensorbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= ../$(OPIEDIR)/include
-LIBS            += -lqpe -lopie
+LIBS            += -lqpe -lopiecore2
 
 TARGET		= light-and-power
 

@@ -27,6 +27,9 @@
 */
 
 #include "light.h"
+#include "sensor.h"
+
+#include <opie2/odevice.h>
 
 #include <qpe/config.h>
 #include <qpe/power.h>
@@ -43,9 +46,7 @@
 #include <qgroupbox.h>
 #include <qcombobox.h>
 
-#include <opie/odevice.h>
 
-#include "sensor.h"
 
 using namespace Opie;
 

@@ -28,10 +28,10 @@
 #ifndef __LIGHT_H__
 #define __LIGHT_H__
 
+#include "lightsettingsbase.h"
 
 #include <qstringlist.h>
 #include <qlistbox.h>
-#include "lightsettingsbase.h"
 
 class QTimer;
 
