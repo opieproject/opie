@@ -10,7 +10,6 @@
 #include "usermanager.h"
 
 #include <qlayout.h>
-#include <stdio.h>
 
 #include <qmessagebox.h>
 #include <qfile.h>

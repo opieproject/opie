@@ -14,9 +14,6 @@
 #include <qmessagebox.h>
 #include <qfile.h>
 
-#include <stdlib.h>
-
-#include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
@@ -75,7 +72,7 @@ void UserDialog::setupTab1() {
 	picturePushButton->setMaximumSize(48,48);
 	picturePushButton->setPixmap(Resource::loadPixmap("usermanager/usericon"));	// Load default usericon.
 	connect(picturePushButton,SIGNAL(clicked()),this,SLOT(clickedPicture()));	// Clicking the picture should invoke pictureselector.
-	
+
 	// Login
 	QLabel *loginLabel=new QLabel(tabpage,"Login: ");
 	loginLabel->setText("Login: ");
@@ -106,7 +103,7 @@ void UserDialog::setupTab1() {
 	shellComboBox->insertItem("/bin/sh");
 	shellComboBox->insertItem("/bin/ash");
 	shellComboBox->insertItem("/bin/false");
-	
+
 	// Primary Group
 	QLabel *groupLabel=new QLabel(tabpage,"group");
 	groupLabel->setText("Primary group: ");
@@ -119,7 +116,7 @@ void UserDialog::setupTab1() {
 		skelCheckBox=new QCheckBox(tabpage);
 		skelCheckBox->setChecked(true);
 	}
-	
+
 	// Widget layout
 	QHBoxLayout *hlayout=new QHBoxLayout(-1,"hlayout");
 	layout->addWidget(picturePushButton);

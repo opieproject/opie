@@ -13,8 +13,6 @@
 #include <qlayout.h>
 #include <qmessagebox.h>
 
-#include <stdlib.h>
-
 #include "passwd.h"
 
 GroupDialog::GroupDialog(QWidget* parent, const char* name, bool modal, WFlags fl) : QDialog(parent, name, modal, fl) {
