@@ -61,10 +61,10 @@ class ondbgstream;
 
 #define o_lineinfo "[" << __FILE__ << ":" << __LINE__ << "] "
 
-#define owarn odWarning()
-#define oerr odError()
-#define odebug odDebug()
-#define ofatal odFatal()
+#define owarn Opie::Core::odWarning()
+#define oerr Opie::Core::odError()
+#define odebug Opie::Core::odDebug()
+#define ofatal Opie::Core::odFatal()
 #define oendl "\n"
 
 class odbgstreamprivate;
