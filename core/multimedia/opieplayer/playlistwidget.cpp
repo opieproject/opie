@@ -153,12 +153,14 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
     QPopupMenu *pmPlayList = new QPopupMenu( this );
     menu->insertItem( tr( "File" ), pmPlayList );
-    new MenuItem( pmPlayList, tr( "Clear List" ),          this,             SLOT( clearList() ) );
-    new MenuItem( pmPlayList, tr( "Add all audio files" ), this,             SLOT( addAllMusicToList() ) );
-    new MenuItem( pmPlayList, tr( "Add all video files" ), this,             SLOT( addAllVideoToList() ) );
-    new MenuItem( pmPlayList, tr( "Add all files" ),       this,             SLOT( addAllToList() ) );
-    new MenuItem( pmPlayList, tr( "Save PlayList" ),       this,             SLOT( saveList() ) );
-      //   new MenuItem( pmPlayList, tr( "Load PlayList" ),       this,             SLOT( loadList() ) );
+    new MenuItem( pmPlayList, tr( "Clear List" ), this, SLOT( clearList() ) );
+    new MenuItem( pmPlayList, tr( "Add all audio files" ), this, SLOT( addAllMusicToList() ) );
+    new MenuItem( pmPlayList, tr( "Add all video files" ), this, SLOT( addAllVideoToList() ) );
+    new MenuItem( pmPlayList, tr( "Add all files" ), this, SLOT( addAllToList() ) );
+//     pmPlayList->insertSeparator(-1);
+    new MenuItem( pmPlayList, tr( "Save PlayList" ), this, SLOT( saveList() ) );
+    pmPlayList->insertSeparator(-1);
+    new MenuItem( pmPlayList, tr( "Open File or URL" ), this,SLOT( openFile() ) );
 
     QPopupMenu *pmView = new QPopupMenu( this );
     menu->insertItem( tr( "View" ), pmView );
@@ -420,13 +422,25 @@ void PlayListWidget::addAllVideoToList() {
 
 
 void PlayListWidget::setDocument(const QString& fileref) {
+    qDebug(fileref);
     fromSetDocument = TRUE;
     if ( fileref.isNull() ) {
         QMessageBox::critical( 0, tr( "Invalid File" ), tr( "There was a problem in getting the file." ) );
         return;
     }
 //    qDebug("setDocument "+fileref);
-    if(fileref.find("playlist",0,TRUE) == -1) {
+    if(fileref.find("m3u",0,TRUE) != -1) { //is m3u
+        clearList();
+        addToSelection( DocLnk( fileref ) );
+        d->setDocumentUsed = TRUE;
+        d->selectedFiles->first();
+        qApp->processEvents();
+    }
+    else if(fileref.find("playlist",0,TRUE) != -1) {//is playlist
+        clearList();
+        loadList(DocLnk(fileref));
+        d->selectedFiles->first();
+    } else { 
         clearList();
         addToSelection( DocLnk( fileref ) );
         d->setDocumentUsed = TRUE;
@@ -435,11 +449,6 @@ void PlayListWidget::setDocument(const QString& fileref) {
         mediaPlayerState->setPlaying( TRUE );
         qApp->processEvents();
         setCaption(tr("OpiePlayer"));
-
-    } else { //is playlist
-        clearList();
-        loadList(DocLnk(fileref));
-        d->selectedFiles->first();
     }
 }
 
@@ -964,4 +973,33 @@ void PlayListWidget::populateVideoView() {
             newItem->setPixmap(0, Resource::loadPixmap( "mpegplayer/videofile" ));
         }
     }
+}
+
+void PlayListWidget::openFile() {
+    QString filename;
+    InputDialog *fileDlg;
+    fileDlg = new InputDialog(this,tr("Open file or URL"),TRUE, 0);
+    fileDlg->exec();
+    if( fileDlg->result() == 1 ) {
+        filename = fileDlg->LineEdit1->text();
+    }
+    qDebug(filename);
+    DocLnk lnk;
+    QString name =  filename.right(filename.length()-filename.find("http://")-7);
+    lnk.setName( name); //sets file name
+//    lnk.setComment();
+    lnk.setFile(filename); //sets File property
+// problem is, the launcher sees this as a broken link and does not display it :(
+
+    lnk.setType("audio/x-mpegurl");
+    lnk.setExec("opieplayer");
+    lnk.setIcon("opieplayer/MPEGPlayer");
+    QString cmd="touch "+QPEApplication::documentDir()+"audio/x-mpegurl/"+name;
+    system( cmd.latin1());
+//    d->selectedFiles->addToSelection(  **dit );
+
+    if(!lnk.writeLink()) 
+        qDebug("Writing doclink did not work");
+    if(fileDlg)
+    delete fileDlg;
 }

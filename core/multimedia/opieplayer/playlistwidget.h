@@ -76,6 +76,7 @@ private:
     void populateAudioView();
     void populateVideoView();
 private slots:
+    void openFile();
     void setDocument( const QString& fileref );
     void addToSelection( const DocLnk& ); // Add a media file to the playlist
     void addToSelection( QListViewItem* ); // Add a media file to the playlist
