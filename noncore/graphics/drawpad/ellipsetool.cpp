@@ -17,7 +17,6 @@
 #include "drawpadcanvas.h"
 
 #include <qimage.h>
-#include <qpixmap.h>
 
 EllipseTool::EllipseTool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
     : ShapeTool(drawPad, drawPadCanvas)

@@ -23,7 +23,6 @@
 #include <qpe/timestring.h>
 
 #include <qapplication.h>
-#include <qimage.h>
 #include <qlayout.h>
 #include <qmessagebox.h>
 #include <qtoolbutton.h>

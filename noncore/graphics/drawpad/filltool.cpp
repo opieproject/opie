@@ -17,7 +17,6 @@
 #include "drawpadcanvas.h"
 #include "page.h"
 
-#include <qimage.h>
 
 const int FILL_THRESHOLD = 65536;
 

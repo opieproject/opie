@@ -23,9 +23,7 @@
 
 #include <qbuffer.h>
 #include <qimage.h>
-#include <qpainter.h>
 #include <qtextcodec.h>
-#include <qtextstream.h>
 #include <qxml.h>
 
 class DrawPadCanvasXmlHandler: public QXmlDefaultHandler

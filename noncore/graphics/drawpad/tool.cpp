@@ -13,8 +13,6 @@
 
 #include "tool.h"
 
-#include "drawpad.h"
-#include "drawpadcanvas.h"
 
 Tool::Tool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
     : QObject()

@@ -13,7 +13,6 @@
 
 #include "importdialog.h"
 
-#include <qpe/applnk.h>
 #include <opie/ofileselector.h>
 
 #include <qcheckbox.h>

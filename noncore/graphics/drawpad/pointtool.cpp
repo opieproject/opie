@@ -18,7 +18,6 @@
 #include "page.h"
 
 #include <qimage.h>
-#include <qpainter.h>
 
 PointTool::PointTool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
     : Tool(drawPad, drawPadCanvas)

@@ -17,7 +17,6 @@
 #include "drawpadcanvas.h"
 
 #include <qimage.h>
-#include <qpixmap.h>
 
 LineTool::LineTool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
     : ShapeTool(drawPad, drawPadCanvas)

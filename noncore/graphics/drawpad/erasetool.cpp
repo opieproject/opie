@@ -17,7 +17,6 @@
 #include "drawpadcanvas.h"
 #include "page.h"
 
-#include <qpainter.h>
 
 EraseTool::EraseTool(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas)
     : Tool(drawPad, drawPadCanvas)

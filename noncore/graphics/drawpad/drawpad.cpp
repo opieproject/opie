@@ -43,7 +43,6 @@
 #include <qaction.h>
 #include <qfile.h>
 #include <qmessagebox.h>
-#include <qpainter.h>
 #include <qspinbox.h>
 #include <qtoolbutton.h>
 #include <qtooltip.h>

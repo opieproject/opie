@@ -19,7 +19,6 @@
 
 #include <qlayout.h>
 #include <qlineedit.h>
-#include <qpainter.h>
 
 TextToolDialog::TextToolDialog(QWidget* parent, const char* name)
     : QDialog(parent, name, true)

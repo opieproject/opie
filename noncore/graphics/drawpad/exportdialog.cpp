@@ -17,7 +17,6 @@
 
 #include <qbuttongroup.h>
 #include <qcombobox.h>
-#include <qgroupbox.h>
 #include <qimage.h>
 #include <qlabel.h>
 #include <qlayout.h>
