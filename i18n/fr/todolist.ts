@@ -4,11 +4,11 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h1&gt;Réveil à %0&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
@@ -42,11 +42,11 @@
     </message>
     <message>
         <source>silent</source>
-        <translation type="unfinished"></translation>
+        <translation>Silence</translation>
     </message>
     <message>
         <source>loud</source>
-        <translation type="unfinished"></translation>
+        <translation>fort</translation>
     </message>
 </context>
 <context>
@@ -230,27 +230,27 @@ Quitter?</translation>
     </message>
     <message>
         <source>Template Editor</source>
-        <translation type="unfinished">Editeur de Modèle</translation>
+        <translation>Editeur de Modèle</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Ajouter</translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Editer</translation>
+        <translation>Éditer</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Effacer</translation>
+        <translation>Effacer</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>New Template %1</source>
-        <translation type="unfinished">Nouveau Modèle %1</translation>
+        <translation>Nouveau Modèle %1</translation>
     </message>
     <message>
         <source>Click here to set the priority of new task.
@@ -258,7 +258,7 @@ Quitter?</translation>
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished">Cliquer ici pour définir la prioriré de la nouvelle tâche.
+        <translation>Cliquer ici pour définir la prioriré de la nouvelle tâche.
 
 Cette partie est appelé &quot;la barre d&apos;outils&quot;.
 
@@ -270,7 +270,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished">Entrer la description de la nouvelle tâche ici.
+        <translation>Entrer la description de la nouvelle tâche ici.
 
 Cette partie est appelé &quot;la barre d&apos;outils&quot;.
 
@@ -278,7 +278,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished">Plus</translation>
+        <translation>Plus</translation>
     </message>
     <message>
         <source>Click here to enter additional information for new task.
@@ -286,7 +286,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished">Cliquer ici pour entrer des informations supplémentaires pour la nouvelle tâche.
+        <translation>Cliquer ici pour entrer des informations supplémentaires pour la nouvelle tâche.
 
 Cette partie est appelé &quot;la barre d&apos;outils&quot;.
 
@@ -294,7 +294,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Enter</source>
-        <translation type="unfinished">Valider</translation>
+        <translation>Valider</translation>
     </message>
     <message>
         <source>Click here to add new task.
@@ -302,7 +302,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished">Cliquer ici pour ajouter une nouvelle tâche.
+        <translation>Cliquer ici pour ajouter une nouvelle tâche.
 
 Cette partie est appelé &quot;la barre d&apos;outils&quot;.
 
@@ -310,7 +310,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Annuler</translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Click here to reset new task information.
@@ -318,7 +318,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished">Cliquer ici pour réinitialiser les informations de la nouvelle tâche.
+        <translation>Cliquer ici pour réinitialiser les informations de la nouvelle tâche.
 
 Cette partie est appelé &quot;la barre d&apos;outils&quot;.
 
@@ -356,15 +356,15 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Date</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Heure</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type</translation>
     </message>
 </context>
 <context>

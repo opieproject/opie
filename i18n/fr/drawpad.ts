@@ -273,7 +273,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>All Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les images</translation>
     </message>
 </context>
 <context>
@@ -292,7 +292,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>All images</source>
-        <translation type="unfinished"></translation>
+        <translation>Toutes les images</translation>
     </message>
 </context>
 <context>

@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>It&apos;s a draw</source>
-        <translation type="unfinished"></translation>
+        <translation>C&apos;est un dessin</translation>
     </message>
 </context>
 </TS>
