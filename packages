@@ -85,7 +85,8 @@ CONFIG_LAUNCHER-SETTINGS	core/settings/launcher	launcher.pro
 CONFIG_LIBMAD	core/multimedia/opieplayer/libmad	libmad.pro
 CONFIG_LIBMAIL	noncore/mail/libmail	libmail.pro
 CONFIG_LIBMPEG3	core/multimedia/opieplayer/libmpeg3	libmpeg3.pro
-CONFIG_LIBRARY	library	library.pro
+CONFIG_LIBQPE	library	library.pro
+CONFIG_LIBOPIE	libopie	libopie.pro
 CONFIG_LIGHT-AND-POWER	core/settings/light-and-power	light-and-power.pro
 CONFIG_DECO_LIQUID	noncore/decorations/liquid	liquid.pro
 CONFIG_LIQUID	noncore/styles/liquid	liquid.pro
@@ -99,6 +100,7 @@ CONFIG_MODPLUG	core/multimedia/opieplayer/modplug	modplug.pro
 CONFIG_MULTIKEY	inputmethods/multikey	multikey.pro
 CONFIG_NETMONAPPLET	core/applets/netmonapplet	netmonapplet.pro
 CONFIG_NETSYSTEMTIME	noncore/settings/netsystemtime	netsystemtime.pro
+CONFIG_NETWORKSETUP	noncore/net/networksetup	networksetup.pro
 CONFIG_NOTESAPPLET	noncore/applets/notesapplet	notesapplet.pro
 CONFIG_OBEX	core/applets/obex	obex.pro
 CONFIG_OIPKG	core/apps/oipkg	oipkg.pro
