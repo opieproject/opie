@@ -21,43 +21,43 @@
     <name>FilterDlg</name>
     <message>
         <source>All</source>
-        <translation type="unfinished">Visas</translation>
+        <translation>Visas</translation>
     </message>
     <message>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalētās</translation>
     </message>
     <message>
         <source>Not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Neinstalētās</translation>
     </message>
     <message>
         <source>Updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Atjaunotās</translation>
     </message>
     <message>
         <source>Filter packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrēt pakas</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorija:</translation>
     </message>
     <message>
         <source>Names containing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Satur vārdus:</translation>
     </message>
     <message>
         <source>With the status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ar statusu:</translation>
     </message>
     <message>
         <source>Available from the following server:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir pieejamas uz servera:</translation>
     </message>
     <message>
         <source>Installed on device at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalētas iekārtā no:</translation>
     </message>
 </context>
 <context>
@@ -75,76 +75,77 @@
     <name>InstallDlg</name>
     <message>
         <source>Destination</source>
-        <translation type="unfinished">Mērķis</translation>
+        <translation>Mērķis</translation>
     </message>
     <message>
         <source>Space Avail</source>
-        <translation type="unfinished">Pieejamā Vieta</translation>
+        <translation>Pieejamā Vieta</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished">Izvads</translation>
+        <translation>Izvads</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Starts</translation>
+        <translation>Starts</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Opcijas</translation>
+        <translation>Opcijas</translation>
     </message>
     <message>
         <source>Packages to </source>
-        <translation type="unfinished"></translation>
+        <translation>Pakotnes uz</translation>
     </message>
     <message>
         <source>install</source>
-        <translation type="unfinished"></translation>
+        <translation>instalēt</translation>
     </message>
     <message>
         <source>remove</source>
-        <translation type="unfinished"></translation>
+        <translation>izņemt</translation>
     </message>
     <message>
         <source>upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>atjaunot</translation>
     </message>
     <message>
         <source>download</source>
-        <translation type="unfinished"></translation>
+        <translation>lejuplādēt</translation>
     </message>
     <message>
         <source>Press the start button to begin.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nospiediet start pogu lai sāktu.
+</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Nezināms</translation>
+        <translation>Nezināms</translation>
     </message>
     <message>
         <source>%1 Kb</source>
-        <translation type="unfinished">%1 Kb</translation>
+        <translation>%1 Kb</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished">Pārtrauce</translation>
+        <translation>Atlikt</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Aizvērt</translation>
+        <translation>Aizvērt</translation>
     </message>
     <message>
         <source>Save output</source>
-        <translation type="unfinished">Saglabāt izvadu</translation>
+        <translation>Saglabāt izvadu</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished">Visas</translation>
+        <translation>Visas</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Teksts</translation>
+        <translation>Teksts</translation>
     </message>
 </context>
 <context>
@@ -240,133 +241,130 @@
     </message>
 </context>
 <context>
-    <name>Ipkg</name>
-</context>
-<context>
     <name>MainWindow</name>
     <message>
         <source>Type the text to search for here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šeit rakstiet tekstu lai meklētu.</translation>
     </message>
     <message>
         <source>Update lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Atjaunot sarakstus</translation>
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai atjaunotu paku sarakstus no serveriem.</translation>
     </message>
     <message>
         <source>Upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>Atjaunot</translation>
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai atjaunotu visas instalētās pakas uz jaunāko pieejamo versiju.</translation>
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Lejuplādēt</translation>
     </message>
     <message>
         <source>Click here to download the currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai lejuplādētu iezīmētās pakas.</translation>
     </message>
     <message>
         <source>Apply changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzlikt izmaiņas</translation>
     </message>
     <message>
         <source>Click here to install, remove or upgrade currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai instalētu, izņemtu vai atjaunotu iezīmētās pakotnes.</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurēt</translation>
     </message>
     <message>
         <source>Click here to configure this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai konfigurētu šo aplikāciju.</translation>
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Darbības</translation>
     </message>
     <message>
         <source>Show packages not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt neinstalētās pakotnes</translation>
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai rādītu pakotnes kuras vēl nav instalētas.</translation>
     </message>
     <message>
         <source>Show installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt instalētās pakotnes</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai rādītu pakotnes kuras ir instalētas uz šīs iekārtas.</translation>
     </message>
     <message>
         <source>Show updated packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt atjaunotās pakotnes</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device which have a newer version available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai rādītu uz šīs iekārtas instalētās pakotnes kurām ir pieejama jaunāka versija.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt</translation>
     </message>
     <message>
         <source>Click here to search for text in package names.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai  meklētu tekstu pakotnes nosaukumos.</translation>
     </message>
     <message>
         <source>Find next</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt nākamo</translation>
     </message>
     <message>
         <source>Click here to find the next package name containing the text you are searching for.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai meklētu nākamo pakotni kura satur iepriekš meklēto tekstu.</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Skatīt</translation>
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai noslēptu meklēšanas komandrindu.</translation>
     </message>
     <message>
         <source>Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakotnes</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nē</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Jā</translation>
     </message>
     <message>
         <source>Nothing to do</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav ko darīt</translation>
     </message>
     <message>
         <source>No packages selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav iezīmētu pakotņu</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
     <message>
         <source>This is a listing of all packages.
@@ -376,7 +374,13 @@ A blue dot next to the package name indicates that the package is currently inst
 A blue dot with a star indicates that a newer version of the package is available from the server feed.
 
 Click inside the box at the left to select a package.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Šis ir visu pakotņu saraksts.
+
+Zilais punkts blakus pakotnes nosaukumam norāda, ka pakotne ir instalēta.
+
+Zilais punkts ar zvaigzni norāda, ka pakotnei no šīs barotnes ir pieejams jauninājums.
+
+Klikšķiniet uz kvadrāta kreisajā pusē, lai atzīmētu pakotni.</translation>
     </message>
     <message>
         <source>Filter</source>
@@ -595,12 +599,6 @@ Click inside the box at the left to select a package.</source>
         <source>Close</source>
         <translation type="obsolete">Aizvērt</translation>
     </message>
-</context>
-<context>
-    <name>QObject</name>
-</context>
-<context>
-    <name>QuestionDlg</name>
 </context>
 <context>
     <name>SettingsImpl</name>
