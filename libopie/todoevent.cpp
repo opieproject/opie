@@ -84,6 +84,24 @@ ushort ToDoEvent::progress() const
 {
     return m_prog;
 }
+QStringList ToDoEvent::relatedApps() const
+{
+    QStringList list;
+    QMap<QString, QArray<int> >::ConstIterator it;
+    for ( it = m_relations.begin(); it != m_relations.end(); ++it ) {
+        list << it.key();
+    }
+    return list;
+}
+QArray<int> ToDoEvent::relations( const QString& app)const
+{
+    QArray<int> tmp;
+    QMap<QString, QArray<int> >::ConstIterator it;
+    it = m_relations.find( app);
+    if ( it != m_relations.end() )
+        tmp = it.data();
+    return tmp;
+}
 void ToDoEvent::insertCategory(const QString &str )
 {
   m_category.append( str );
@@ -138,6 +156,45 @@ void ToDoEvent::setPriority(int prio )
 void ToDoEvent::setDate( QDate date )
 {
     m_date = date;
+}
+void ToDoEvent::addRelated( const QString &app,  int id )
+{
+    QMap<QString, QArray<int> >::Iterator  it;
+    QArray<int> tmp;
+    it = m_relations.find( app );
+    if ( it == m_relations.end() ) {
+        tmp.resize(1 );
+        tmp[0] = id;
+    }else{
+        tmp = it.data();
+        tmp.resize( tmp.size() + 1 );
+        tmp[tmp.size() - 1] = id;
+    }
+    m_relations.replace( app,  tmp );
+}
+void ToDoEvent::addRelated(const QString& app,  QArray<int> ids )
+{
+    QMap<QString, QArray<int> >::Iterator it;
+    QArray<int> tmp;
+    it = m_relations.find( app);
+    if ( it == m_relations.end() ) { // not there
+        /** tmp.resize( ids.size() ); stupid??
+         */
+        tmp = ids;
+    }else{
+        tmp = it.data();
+        int offset = tmp.size()-1;
+        tmp.resize( tmp.size() + ids.size() );
+        for (uint i = 0; i < ids.size(); i++ ) {
+            tmp[offset+i] = ids[i];
+        }
+
+    }
+    m_relations.replace( app,  tmp );
+}
+void ToDoEvent::clearRelated( const QString& app )
+{
+    m_relations.remove( app );
 }
 bool ToDoEvent::isOverdue( )
 {

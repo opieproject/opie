@@ -2,10 +2,13 @@
 #ifndef todoevent_h
 #define todoevent_h
 
+
+#include <qarray.h>
 #include <qmap.h>
 #include <qregexp.h>
 #include <qstringlist.h>
 #include <qdatetime.h>
+
 
 class ToDoEvent {
     friend class ToDoDB;
@@ -89,6 +92,16 @@ class ToDoEvent {
 
 
     QString extra(const  QString& )const;
+
+    /**
+     * returns a list of apps which have related items
+     */
+    QStringList relatedApps()const;
+
+    /**
+     * returns all relations for one app
+     */
+    QArray<int> relations( const QString& app )const;
     /**
      * Set if this Todo is completed
      */
@@ -125,6 +138,21 @@ class ToDoEvent {
     void setProgress( ushort progress );
 
     /**
+     * add related function it replaces too ;)
+     */
+    void addRelated( const QString& app, int id );
+
+    /**
+     * add related
+     */
+    void addRelated( const QString& app, QArray<int> ids );
+
+    /**
+     * clear relations for one app
+     */
+    void clearRelated(const QString& app);
+
+    /**
      * set the end date
      */
     void setDate( QDate date );
@@ -154,6 +182,7 @@ class ToDoEvent {
     QString m_desc;
     QString m_sum;
     QMap<QString, QString> m_extra;
+    QMap<QString, QArray<int> > m_relations;
     int m_uid;
     ushort m_prog;
 };
