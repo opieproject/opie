@@ -181,14 +181,14 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
   if ((pos = p.find("FROM",':', 0, TRUE)) != -1) {
     pos++;
     if (p.separatorAt(pos) == ' ') {
-      mail->from = p.getString(&pos, '<');
+      mail->from = p.getString(&pos, '<', false);
       mail->from = mail->from.stripWhiteSpace();
       if ( (mail->from.length() > 2) && (mail->from[0] == '"') ) {
         mail->from = mail->from.left(mail->from.length() - 1);
         mail->from = mail->from.right(mail->from.length() - 1);
       }
       pos++;
-      mail->fromMail = p.getString(&pos, '>');
+      mail->fromMail = p.getString(&pos, '>', false);
     } else {
       if ((p.separatorAt(pos) == '<')
           || (p.separatorAt(pos) == ' '))       //No name.. nasty
