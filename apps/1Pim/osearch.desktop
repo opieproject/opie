@@ -2,7 +2,7 @@
 Exec=osearch
 Icon=osearch/OSearch
 Type=Application
-Name=search
+Name=Search
 Comment=Search your data
 Name[da]=Søg
 Comment[da]=Søg i Pim-data
