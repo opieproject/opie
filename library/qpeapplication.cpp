@@ -250,6 +250,7 @@ public:
 
     static bool read_widget_rect(const QString &app, bool &maximized, QPoint &p, QSize &s)
     {
+#ifndef OPIE_NO_WINDOWED
     maximized = TRUE;
     // 350 is the trigger in qwsdefaultdecoration for providing a resize button
     if ( qApp->desktop()->width() <= 350 )
@@ -271,7 +272,7 @@ public:
 
         return TRUE;
     }
-
+#endif
     return FALSE;
     }
 
@@ -320,8 +321,8 @@ public:
     static void store_widget_rect(QWidget *w, QString &app)
     {
     if( !w )
-	return;
-
+    return;
+#ifndef OPIE_NO_WINDOWED
     // 350 is the trigger in qwsdefaultdecoration for providing a resize button
     if ( qApp->desktop()->width() <= 350 )
         return;
@@ -342,6 +343,7 @@ public:
     QString s;
     s.sprintf("%d,%d,%d,%d,%d", r.left() + offsetX, r.top() + offsetY, r.width(), r.height(), w->isMaximized() );
     cfg.writeEntry( app, s );
+#endif
     }
 
     static bool setWidgetCaptionFromAppName( QWidget* /*mw*/, const QString& /*appName*/, const QString& /*appsPath*/ )

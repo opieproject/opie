@@ -52,8 +52,12 @@ void QPEApplication::showWidget( QWidget* wg, bool nomax ) {
         return;
     }
 
+#ifndef OPIE_NO_WINDOWED
+    if ( TRUE ) {
+#else
     if ( !nomax
          && ( qApp->desktop()->width() <= 320 ) ){
+#endif
         wg->showMaximized();
     } else {
 #ifdef Q_WS_QWS
