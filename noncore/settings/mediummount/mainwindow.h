@@ -22,6 +22,7 @@ namespace MediumMountSetting {
     void slotGlobalChanged(int );
     void slotCheckingChanged(int );
     void accept();
+    void done( int );
   private:
     void init();
     QTabWidget *m_tab;

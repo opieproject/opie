@@ -65,6 +65,13 @@ void MainWindow::accept()
     QDialog::accept();
 }
 
+void MainWindow::done ( int r )
+{
+	QDialog::done( r );
+	close ();
+}
+
+
 void MainWindow::slotGlobalChanged(int )
 {
 
