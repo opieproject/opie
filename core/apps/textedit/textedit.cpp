@@ -510,7 +510,7 @@ void TextEdit::fileOpen()
 //         if(cfg.readEntry("useOldFileDialog") == "TRUE")
 //      b=TRUE;
 //      if(!b) {
-        QString str = OFileDialog::getOpenFileName( 1,"/")://,"", "*", this );
+        QString str = OFileDialog::getOpenFileName( 1,"/");//,"", "*", this );
         if(!str.isEmpty() )
             openFile( str );
 //      } else {
