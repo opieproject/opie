@@ -14,28 +14,30 @@
  * for(it = list.begin(); it != list.end(); ++it )
  *   doSomeCoolStuff( (*it) );
  */
+template <class T> class ORecordList;
 template <class T = OPimRecord>
 class ORecordListIterator {
+    friend class ORecordList<T>;
 public:
     typedef OTemplateBase<T> Base;
-    
+
     /**
      * The c'tor used internally from
      * ORecordList
      */
     ORecordListIterator( const QArray<int>, const Base* );
-    
+
     /**
      * The standard c'tor
      */
     ORecordListIterator();
     ~ORecordListIterator();
-    
+
     ORecordListIterator( const ORecordListIterator& );
     ORecordListIterator &operator=(const ORecordListIterator& );
-    
+
     /**
-     * a * operator ;) 
+     * a * operator ;)
      * use it like this T = (*it);
      */
     T &operator*();
@@ -59,25 +61,25 @@ private:
 /**
  * The recordlist used as a return type
  * from OPimAccessTemplate
- */ 
+ */
 template <class T = OPimRecord >
 class ORecordList {
 public:
     typedef OTemplateBase<T> Base;
     typedef ORecordListIterator<T> Iterator;
-    
-    /** 
+
+    /**
      * c'tor
      */
     ORecordList( const QArray<int>& ids,
                  const Base* );
     ~ORecordList();
-    
+
     /**
      * the first iterator
      */
     Iterator begin();
-    
+
     /**
      * the end
      */
@@ -105,6 +107,7 @@ ORecordListIterator<T>::~ORecordListIterator() {
 
 template <class T>
 ORecordListIterator<T>::ORecordListIterator( const ORecordListIterator<T>& it) {
+    qWarning("ORecordListIterator");
     m_uids = it.m_uids;
     m_current = it.m_current;
     m_temp = it.m_temp;
@@ -125,6 +128,7 @@ ORecordListIterator<T> &ORecordListIterator<T>::operator=( const ORecordListIter
 
 template <class T>
 T &ORecordListIterator<T>::operator*() {
+    qWarning("operator* %d %d", m_current,  m_uids[m_current] );
     if (!m_end )
         m_record = m_temp->find( m_uids[m_current] );
     else
@@ -135,7 +139,7 @@ T &ORecordListIterator<T>::operator*() {
 
 template <class T>
 ORecordListIterator<T> &ORecordListIterator<T>::operator++() {
-    if (m_current < m_uids.count() ) {
+    if (m_current < (int)m_uids.count() ) {
         m_end = false;
         ++m_current;
     }else
@@ -189,6 +193,7 @@ ORecordList<T>::~ORecordList() {
 }
 template <class T>
 ORecordList<T>::Iterator ORecordList<T>::begin() {
+    qWarning("ORecordList::begin");
     Iterator it( m_ids, m_acc );
     return it;
 }
@@ -197,5 +202,7 @@ ORecordList<T>::Iterator ORecordList<T>::end() {
     Iterator it( m_ids, m_acc );
     it.m_end = true;
     it.m_current = m_ids.count();
+
+    return it;
 }
 #endif

@@ -13,7 +13,7 @@ public:
     };
     virtual ~OTemplateBase() {
     }
-    virtual T find( int uid ) = 0;
+    virtual T find( int uid )const = 0;
 
 };
 

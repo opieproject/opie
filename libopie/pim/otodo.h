@@ -135,16 +135,6 @@ public:
     QString recordField(int id )const;
 
     /**
-     * returns a list of apps which have related items
-     */
-    QStringList relatedApps()const;
-
-    /**
-     * returns all relations for one app
-     */
-    QArray<int> relations( const QString& app )const;
-
-    /**
      * toMap puts all data into the map. int relates
      * to ToDoEvent RecordFields enum
      */

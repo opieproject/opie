@@ -14,7 +14,7 @@
  * Library. Either you want to use it's
  * interface or you want to implement
  * your own Access lib
- * Just create a OPimRecord and inherit from 
+ * Just create a OPimRecord and inherit from
  * the plugins
  */
 
@@ -36,49 +36,49 @@ public:
      */
     OPimAccessTemplate( BackEnd* end);
     virtual ~OPimAccessTemplate();
-    
+
     /**
      * load from the backend
      */
-    virtual void load();
-    
+    virtual bool load();
+
     /**
      * reload from the backend
      */
-    virtual void reload();
-    
+    virtual bool reload();
+
     /**
-     * save to the backend 
+     * save to the backend
      */
-    virtual void save();
+    virtual bool save();
 
     /**
      * if the resource was changed externally
      */
     bool wasChangedExternally()const;
-    
+
     /**
      * return a List of records
      * you can iterate over them
      */
     virtual List allRecords()const;
-    
+
     /**
-     * queryByExample 
+     * queryByExample
      */
     virtual List queryByExample( const T& t, int sortOrder );
-    
+
     /**
      * find the OPimRecord uid
      */
-    virtual T find( int uid );
+    virtual T find( int uid )const;
 
     /* invalidate cache here */
     /**
      * clears the backend and invalidates the backend
      */
     virtual void clear() ;
-    
+
     /**
      * add T to the backend
      */
@@ -89,12 +89,12 @@ public:
      * remove T from the backend
      */
     virtual bool remove( const T& t );
-    
+
     /**
      * remove the OPimRecord with uid
      */
     virtual bool remove( int uid );
-    
+
     /**
      * replace T from backend
      */
@@ -104,7 +104,8 @@ protected:
      * invalidate the cache
      */
     void invalidateCache();
-    
+
+    void setBackEnd( BackEnd* end );
     /**
      * returns the backend
      */
@@ -125,16 +126,16 @@ OPimAccessTemplate<T>::~OPimAccessTemplate() {
     delete m_backEnd;
 }
 template <class T>
-void OPimAccessTemplate<T>::load() {
-    m_backEnd->load();
+bool OPimAccessTemplate<T>::load() {
+    return m_backEnd->load();
 }
 template <class T>
-void OPimAccessTemplate<T>::reload() {
-    m_backEnd->reload();
+bool OPimAccessTemplate<T>::reload() {
+    return m_backEnd->reload();
 }
 template <class T>
-void OPimAccessTemplate<T>::save() {
-    m_backEnd->save();
+bool OPimAccessTemplate<T>::save() {
+    return m_backEnd->save();
 }
 template <class T>
 OPimAccessTemplate<T>::List OPimAccessTemplate<T>::allRecords()const {
@@ -151,7 +152,7 @@ OPimAccessTemplate<T>::queryByExample( const T& t, int sortOrder ) {
     return lis;
 }
 template <class T>
-T OPimAccessTemplate<T>::find( int uid ) {
+T OPimAccessTemplate<T>::find( int uid ) const{
     T t = m_backEnd->find( uid );
     return t;
 }
@@ -187,5 +188,9 @@ OPimAccessTemplate<T>::BackEnd* OPimAccessTemplate<T>::backEnd() {
 template <class T>
 bool OPimAccessTemplate<T>::wasChangedExternally()const {
     return false;
+}
+template <class T>
+void OPimAccessTemplate<T>::setBackEnd( BackEnd* end ) {
+    m_backEnd = end;
 }
 #endif

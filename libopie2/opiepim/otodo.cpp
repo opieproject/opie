@@ -36,11 +36,12 @@ OTodo::OTodo(const OTodo &event )
     : OPimRecord( event ),  data( event.data )
 {
     data->ref();
-    //qWarning("ref up");
+    qWarning("ref up");
 }
 OTodo::~OTodo() {
+    qWarning("~OTodo " + data->sum );
     if ( data->deref() ) {
-        //qWarning("OTodo::dereffing");
+        qWarning("OTodo::dereffing");
         delete data;
         data = 0l;
     }
@@ -53,9 +54,11 @@ OTodo::OTodo(bool completed, int priority,
                      bool hasDate, QDate date, int uid )
     : OPimRecord(  uid )
 {
-    //qWarning("OTodoData");
+    qWarning("OTodoData " + summary);
     setCategories( category );
+
     data = new OTodoData;
+
     data->date = date;
     data->isCompleted = completed;
     data->hasDate = hasDate;
@@ -74,10 +77,12 @@ OTodo::OTodo(bool completed, int priority,
                      bool hasDate, QDate date, int uid )
     : OPimRecord(  uid )
 {
-    //qWarning("OTodoData");
+    qWarning("OTodoData" + summary);
     setCategories( idsFromString( category.join(";") ) );
+
     data = new OTodoData;
     data->date = date;
+
     data->isCompleted = completed;
     data->hasDate = hasDate;
     data->priority = priority;
@@ -350,7 +355,7 @@ QMap<QString, QString> OTodo::toExtraMap()const {
  */
 void OTodo::changeOrModify() {
     if ( data->count != 1 ) {
-        //qWarning("changeOrModify");
+        qWarning("changeOrModify");
         data->deref();
         OTodoData* d2 = new OTodoData();
         copy(data, d2 );
