@@ -108,14 +108,12 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     buttonMask = QImage( imgUp.width(), imgUp.height(), 8, 255 );
     buttonMask.fill( 0 );
 
-    masks.reserve( buttonCount );
-
-    for ( uint i = 0; i < masks.capacity(); i++ ) {
+    for ( uint i = 0; i < buttons.size(); i++ ) {
         QString filename = QString( QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_" + skinInfo[i].fileName + ".png" );
-        masks.push_back( QBitmap( filename ) );
+        buttons[ i ].mask =QBitmap( filename );
 
-        if ( !masks[i].isNull() ) {
-            QImage imgMask = masks[i].convertToImage();
+        if ( !buttons[i].mask.isNull() ) {
+            QImage imgMask = buttons[i].mask.convertToImage();
             uchar **dest = buttonMask.jumpTable();
             for ( int y = 0; y < imgUp.height(); y++ ) {
                 uchar *line = dest[y];
@@ -126,9 +124,6 @@ AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
         }
 
     }
-
-    buttonPixUp.resize( masks.size(), QPixmap() );
-    buttonPixDown.resize( masks.size(), QPixmap() );
 
     setBackgroundPixmap( pixBg );
 
@@ -215,10 +210,10 @@ void AudioWidget::resizeEvent( QResizeEvent * ) {
     QPixmap pixUp = combineImageWithBackground( imgUp, pixBg, p );
     QPixmap pixDn = combineImageWithBackground( imgDn, pixBg, p );
 
-    for ( uint i = 0; i < masks.size(); i++ ) {
-        if ( !masks[i].isNull() ) {
-            buttonPixUp[i] = maskPixToMask( pixUp, masks[i] );
-            buttonPixDown[i] = maskPixToMask( pixDn, masks[i] );
+    for ( uint i = 0; i < buttons.size(); i++ ) {
+        if ( !buttons[i].mask.isNull() ) {
+            buttons[i].pixUp = maskPixToMask( pixUp, buttons[i].mask );
+            buttons[i].pixDown = maskPixToMask( pixDn, buttons[i].mask );
         }
     }
 }
@@ -322,9 +317,9 @@ void AudioWidget::setToggleButton( int i, bool down ) {
 
 void AudioWidget::paintButton( QPainter &p, int i ) {
     if ( buttons[i].isDown ) {
-        p.drawPixmap( upperLeftOfButtonMask, buttonPixDown[i] );
+        p.drawPixmap( upperLeftOfButtonMask, buttons[i].pixDown );
     } else {
-        p.drawPixmap( upperLeftOfButtonMask, buttonPixUp[i] );
+        p.drawPixmap( upperLeftOfButtonMask, buttons[i].pixUp );
     }
 }
 

@@ -24,6 +24,7 @@
 #define MEDIAWIDGET_H
 
 #include <qwidget.h>
+#include <qmap.h>
 
 #include "mediaplayerstate.h"
 #include "playlistwidget.h"
@@ -44,6 +45,10 @@ public:
         ButtonType type : 1;
         bool isHeld : 1;
         bool isDown : 1;
+
+        QBitmap mask;
+        QPixmap pixUp;
+        QPixmap pixDown;
     };
     typedef std::vector<Button> ButtonVector;
 
@@ -89,10 +94,6 @@ protected:
     ButtonVector buttons;
 
     QImage buttonMask;
-
-    MaskVector masks;
-    PixmapVector buttonPixUp;
-    PixmapVector buttonPixDown;
 
     QPoint upperLeftOfButtonMask;
 };
