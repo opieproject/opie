@@ -3,22 +3,25 @@
     <name>ParaShoot</name>
     <message>
         <source>ParaShoot</source>
-        <translation type="unfinished"></translation>
+        <translation>Paracaidista</translation>
     </message>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuevo juego</translation>
     </message>
     <message>
         <source>     Level: %1       Score: %2   </source>
-        <translation type="unfinished"></translation>
+        <translation>Nivel: %1       Puntos: %2</translation>
     </message>
     <message>
         <source>       GAME OVER!
        Your Score:  %1
  Parachuters Killed: %2
         Accuracy: %3% </source>
-        <translation type="unfinished"></translation>
+        <translation>¡JUEGO TERMINADO!
+    Puntuación:%1
+Paracas muertos:%2
+    Precisión:%3%</translation>
     </message>
 </context>
 </TS>

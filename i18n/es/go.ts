@@ -3,54 +3,54 @@
     <name>GoMainWidget</name>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuevo juego</translation>
     </message>
     <message>
         <source>Pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasar</translation>
     </message>
     <message>
         <source>Resign</source>
-        <translation type="unfinished"></translation>
+        <translation>Rendirse</translation>
     </message>
     <message>
         <source>Two player option</source>
-        <translation type="unfinished"></translation>
+        <translation>Opción 2 jugadores</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Juego</translation>
     </message>
 </context>
 <context>
     <name>GoWidget</name>
     <message>
         <source>White %1, Black %2. </source>
-        <translation type="unfinished"></translation>
+        <translation>Blancas %1, Negras %2.</translation>
     </message>
     <message>
         <source>White wins.</source>
-        <translation type="unfinished"></translation>
+        <translation>Blancas ganan.</translation>
     </message>
     <message>
         <source>Black wins.</source>
-        <translation type="unfinished"></translation>
+        <translation>Negras ganan.</translation>
     </message>
     <message>
         <source>A draw.</source>
-        <translation type="unfinished"></translation>
+        <translation>Empate.</translation>
     </message>
     <message>
         <source>I pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Yo paso</translation>
     </message>
     <message>
         <source>Prisoners: black %1, white %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Prisioneros: blancas %1, negras %2</translation>
     </message>
     <message>
         <source>Go</source>
-        <translation type="unfinished"></translation>
+        <translation>Go</translation>
     </message>
 </context>
 </TS>

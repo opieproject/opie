@@ -3,42 +3,42 @@
     <name>MindBreaker</name>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuevo juego</translation>
     </message>
     <message>
         <source>win avg: %1 turns (%2 games)</source>
-        <translation type="unfinished"></translation>
+        <translation>Promedio: %1 turnos (%2 juegos)</translation>
     </message>
 </context>
 <context>
     <name>MindBreakerBoard</name>
     <message>
         <source>Go%1p%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ir%1p%2</translation>
     </message>
     <message>
         <source>CurrentGo%1</source>
-        <translation type="unfinished"></translation>
+        <translation>ActualIr%1</translation>
     </message>
     <message>
         <source>Answer%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Respuesta%1</translation>
     </message>
     <message>
         <source>Reset Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiniciar estadísticas</translation>
     </message>
     <message>
         <source>Reset the win ratio?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Borrar índice victorias?</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
 </context>
 </TS>

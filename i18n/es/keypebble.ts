@@ -3,198 +3,202 @@
     <name>KRFBConnection</name>
     <message>
         <source>Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectado</translation>
     </message>
     <message>
         <source>Connection Refused</source>
-        <translation type="unfinished"></translation>
+        <translation>Conexión reusada</translation>
     </message>
     <message>
         <source>Host not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Máquina no encontrada</translation>
     </message>
     <message>
         <source>Read Error: QSocket reported an error reading
 data, the remote host has probably dropped the
 connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de lectura: QSocket informó de un error
+leyendo datos. La máquina remota probablemente
+se desconectó.</translation>
     </message>
     <message>
         <source>QSocket reported an invalid error code</source>
-        <translation type="unfinished"></translation>
+        <translation>QSocket devolvió un código de error no válido</translation>
     </message>
 </context>
 <context>
     <name>KRFBDecoder</name>
     <message>
         <source>Waiting for server initialisation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperando inicialización servidor...</translation>
     </message>
     <message>
         <source>Waiting for desktop name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperando nombre escritorio...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectado a %1</translation>
     </message>
     <message>
         <source>Protocol Error: Message Id %1 was found when expecting an update message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de protocolo: Identificador de mensaje %1 cuando esperaba actualización.</translation>
     </message>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Error de protocolo: Codificación desconocida del servidor %1</translation>
     </message>
 </context>
 <context>
     <name>KRFBLogin</name>
     <message>
         <source>Waiting for server version...</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperando versión del servidor...</translation>
     </message>
     <message>
         <source>Error: Invalid server version, %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Error: Versión del servidor no válida, %1</translation>
     </message>
     <message>
         <source>Error: Unsupported server version, %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Error: Versión del servidor no contemplada,%1</translation>
     </message>
     <message>
         <source>Logged in</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesión iniciada</translation>
     </message>
     <message>
         <source>Error: This server requires a password, but none has been specified.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Error: Este servidor requiere clave y no se ha especificado.
+</translation>
     </message>
     <message>
         <source>Error: The password you specified was incorrect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error: La clave especificada era incorrecta.</translation>
     </message>
     <message>
         <source>Error: Too many invalid login attempts have been made
 to this account, please try later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error: Demasiados intentos fallidos.
+Por favor, inténtelo más tarde.</translation>
     </message>
     <message>
         <source>Login Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Indentificación fallida</translation>
     </message>
     <message>
         <source>Too many failures</source>
-        <translation type="unfinished"></translation>
+        <translation>Demasiados fallos</translation>
     </message>
 </context>
 <context>
     <name>KVNC</name>
     <message>
         <source>VNC Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Visor VNC</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantalla completa</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración</translation>
     </message>
     <message>
         <source>Connect...</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar...</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconectar</translation>
     </message>
     <message>
         <source>Stop Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantalla normal</translation>
     </message>
     <message>
         <source>Connected to remote host</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectado a máquina remota</translation>
     </message>
     <message>
         <source>Logged in to remote host</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificado en máquina remota</translation>
     </message>
     <message>
         <source>Connection closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Conexión cerrada</translation>
     </message>
 </context>
 <context>
     <name>KVNCConnectDlg</name>
     <message>
         <source>Connect to VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar a servidor VNC</translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre máquina:</translation>
     </message>
     <message>
         <source>Display Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Número pantalla:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Clave:</translation>
     </message>
 </context>
 <context>
     <name>VncOptionsBase</name>
     <message>
         <source>VNC Viewer Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones visor VNC</translation>
     </message>
     <message>
         <source>Data Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificación datos</translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Comprobar pantalla cada:</translation>
     </message>
     <message>
         <source>Milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Milisegundos</translation>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation type="unfinished"></translation>
+        <translation>Solicitar sesión 8 bits</translation>
     </message>
     <message>
         <source>Raise on bell</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo escucha</translation>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation type="unfinished"></translation>
+        <translation>Solicitar sesión compartida</translation>
     </message>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Conexión</translation>
     </message>
     <message>
         <source>Hextile encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificación Hextile</translation>
     </message>
     <message>
         <source>CoRRE encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificación CoRRE</translation>
     </message>
     <message>
         <source>RRE encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificación RRE</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Codificación copia rectángulo</translation>
     </message>
 </context>
 </TS>
