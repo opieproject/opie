@@ -74,6 +74,7 @@ enum OModel {
     Model_Zaurus_SLA300 = ( Model_Zaurus | 0x000003 ),
     Model_Zaurus_SLB600 = ( Model_Zaurus | 0x000004 ),
     Model_Zaurus_SLC7x0 = ( Model_Zaurus | 0x000005 ),
+    Model_Zaurus_SL6000 = ( Model_Zaurus | 0x000006 ),
 
     Model_SIMpad        = ( 3 << 24 ),
 

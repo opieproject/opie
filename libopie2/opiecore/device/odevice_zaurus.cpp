@@ -174,6 +174,9 @@ void Zaurus::init(const QString& cpu_info)
     } else if ( model == "Sharp-Collie" || model == "Collie" ) {
         d->m_model = Model_Zaurus_SL5500;
         d->m_modelstr = "Zaurus SL-5500 or SL-5000d";
+    } else if ( model == "SHARP Tosa" ) {
+        d->m_model = Model_Zaurus_SL6000;
+        d->m_modelstr = "Zaurus SL-6000";
     } else {
         d->m_model = Model_Zaurus_SL5500;
         d->m_modelstr = "Unkown Zaurus";
@@ -183,6 +186,7 @@ void Zaurus::init(const QString& cpu_info)
 
     bool flipstate = false;
     switch ( d->m_model ) {
+        case Model_Zaurus_SL6000:
         case Model_Zaurus_SLA300:
             d->m_rotation = Rot0;
             break;
