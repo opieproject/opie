@@ -128,11 +128,11 @@ ClipboardApplet::ClipboardApplet( QWidget *parent, const char *name ) : QWidget(
 	connect ( m_timer, SIGNAL( timeout ( )), this, SLOT( newData ( )));
 	connect ( qApp, SIGNAL( aboutToQuit ( )), this, SLOT( shutdown ( )));
 
-	m_timer-> start ( 1500 );
-	
 	m_menu = 0;
 	m_dirty = true;
 	m_lasttext = QString::null;
+	
+	m_timer-> start ( 0, true );
 }
 
 ClipboardApplet::~ClipboardApplet ( )
@@ -228,6 +228,15 @@ void ClipboardApplet::paintEvent ( QPaintEvent* )
 
 void ClipboardApplet::newData ( )
 {
+	static bool excllock = false;
+	
+	if ( excllock )
+		return;
+	else
+		excllock = true;
+	
+	m_timer-> stop ( ); 
+	
 	QCString type = "plain";
 	QString txt = QApplication::clipboard ( )-> text ( type );
 
@@ -239,4 +248,8 @@ void ClipboardApplet::newData ( )
 		
 		m_dirty = true;
 	}
+	
+	m_timer-> start ( 1500, true );
+	
+	excllock = false;
 }
