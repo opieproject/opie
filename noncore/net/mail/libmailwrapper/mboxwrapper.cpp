@@ -248,7 +248,7 @@ void MBOXwrapper::deleteMails(mailmbox_folder*f,QList<RecMail> &target)
 int MBOXwrapper::deleteAllMail(const Folder*tfolder)
 {
     if (!tfolder) return 0;
-    QString p = MBOXPath+tfolder->getDisplayName();
+    QString p = MBOXPath+"/"+tfolder->getDisplayName();
     int res = 1;
     
     mailfolder*folder = 0;
@@ -291,7 +291,7 @@ int MBOXwrapper::deleteAllMail(const Folder*tfolder)
 int MBOXwrapper::deleteMbox(const Folder*tfolder)
 {
     if (!tfolder) return 0;
-    QString p = MBOXPath+tfolder->getDisplayName();
+    QString p = MBOXPath+"/"+tfolder->getDisplayName();
     QFile fi(p);
     if (!fi.exists()) {
         Global::statusMessage(tr("Mailbox doesn't exist."));
