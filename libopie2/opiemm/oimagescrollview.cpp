@@ -444,6 +444,7 @@ void OImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clip
         p->fillRect(clipx,clipy,clipw,cliph, backgroundColor());
         return;
     }
+
     if (w>_pdata.width()) {
         w=_pdata.width();
         x = 0;
@@ -451,6 +452,7 @@ void OImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clip
     } else if (x+w>_pdata.width()){
         x = _pdata.width()-w;
     }
+
     if (h>_pdata.height()) {
         h=_pdata.height();
         y = 0;
@@ -458,10 +460,23 @@ void OImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clip
     } else if (y+h>_pdata.height()){
         y = _pdata.height()-h;
     }
-    if (erase||_original_data.hasAlphaBuffer()) {
+
+    if (erase||_original_data.hasAlphaBuffer()||clipy>_pdata.height()||clipx>_pdata.width()) {
+        odebug << QSize(clipx,clipy) << " # " << QSize(clipw,cliph) << oendl;
         p->fillRect(clipx,clipy,clipw,cliph, backgroundColor());
     }
-    p->drawPixmap(clipx,clipy,_pdata,x,y,w,h);
+    odebug << QSize(x,y) << " - " << QSize(w,h) << oendl;
+    if (clipy<=_pdata.height()&&clipx<=_pdata.width()) {
+#if 0
+        odebug << "painting image content" << oendl;
+#endif
+        p->drawPixmap(clipx,clipy,_pdata,x,y,w,h);
+    } 
+#if 0
+else {
+        odebug << "not painting image content" << oendl;
+    }
+#endif
 }
 
 /* using the real geometry points and not the translated points is wanted! */
