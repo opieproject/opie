@@ -59,6 +59,17 @@ void TableView::initConfig() {
 
 TableView::TableView( MainWindow* window, QWidget* wid )
     : QTable(  wid ), TodoView( window ) {
+    
+    // Load icons
+    // TODO - probably should be done globally somewhere else, see also quickeditimpl.cpp/h
+    m_pic_completed = Resource::loadPixmap( "todo/completed" );
+    QString namestr;
+    for ( unsigned int i = 1; i < 6; i++ ) {
+        namestr = "todo/priority";
+        namestr.append( QString::number( i ) );
+        m_pic_priority[ i - 1 ] = Resource::loadPixmap( namestr );
+    }
+
     setUpdatesEnabled( false );
     viewport()->setUpdatesEnabled( false );
     m_enablePaint = false;
@@ -98,16 +109,6 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     setSortOrder( 0 );
     setAscending( TRUE );
     m_first = true;
-
-    // Load icons
-    // TODO - probably should be done globally somewhere else, see also quickeditimpl.cpp/h
-    m_pic_completed = Resource::loadPixmap( "todo/completed" );
-    QString namestr;
-    for ( unsigned int i = 1; i < 6; i++ ) {
-        namestr = "todo/priority";
-        namestr.append( QString::number( i ) );
-        m_pic_priority[ i - 1 ] = Resource::loadPixmap( namestr );
-    }
 
     /* now let's init the config */
     initConfig();

@@ -1,5 +1,6 @@
 #include <qaction.h>
 #include <qlineedit.h>
+#include <qwhatsthis.h>
 
 #include <qpe/resource.h>
 
@@ -18,28 +19,31 @@ QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
     priority1 = Resource::loadPixmap( "todo/priority1" );
     priority3 = Resource::loadPixmap( "todo/priority3" );
     priority5 = Resource::loadPixmap( "todo/priority5" );
-	
-	
-	// TODO - come up with icons and replace text priority values
+
     m_lbl = new OClickableLabel( this );
-    m_lbl->setMinimumWidth(15);
+    m_lbl->setMinimumWidth( 15 );
     m_lbl->setPixmap( priority3 );
     connect(m_lbl, SIGNAL(clicked() ), this, SLOT(slotPrio()) );
+    QWhatsThis::add( m_lbl, tr( "Click here to set the priority of new task.\n\nThis area is called the quick task bar.\n\nIt allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options->'Show quick task bar' from the menu above." ) );
 
     m_edit = new QLineEdit( this );
     setStretchableWidget( m_edit );
-
+    QWhatsThis::add( m_edit, tr( "Enter description of new task here.\n\nThis area is called the quick task bar.\n\nIt allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options->'Show quick task bar' from the menu above." ) );
+    
     QAction *a = new QAction( tr( "More" ), Resource::loadPixmap( "todo/more" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( slotMore() ) );
     a->addTo( this );
+    a->setWhatsThis( tr( "Click here to enter additional information for new task.\n\nThis area is called the quick task bar.\n\nIt allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options->'Show quick task bar' from the menu above." ) );
 
     a = new QAction( tr( "Enter" ), Resource::loadPixmap( "enter" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( slotEnter() ) );
     a->addTo( this );
+    a->setWhatsThis( tr( "Click here to add new task.\n\nThis area is called the quick task bar.\n\nIt allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options->'Show quick task bar' from the menu above." ) );
 
     a = new QAction( tr( "Cancel" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( slotCancel() ) );
     a->addTo( this );
+    a->setWhatsThis( tr( "Click here to reset new task information.\n\nThis area is called the quick task bar.\n\nIt allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options->'Show quick task bar' from the menu above." ) );
 
     m_visible = visible;
     if ( !m_visible ) {

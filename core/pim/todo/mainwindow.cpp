@@ -27,7 +27,6 @@
 */
 
 #include <unistd.h>
-#include <stdio.h>
 
 #include <qmenubar.h>
 #include <qmessagebox.h>
@@ -38,6 +37,7 @@
 #include <qtimer.h>
 #include <qvbox.h>
 #include <qlineedit.h>
+#include <qwhatsthis.h>
 
 #include <qpe/applnk.h>
 #include <qpe/config.h>
@@ -63,9 +63,8 @@ using namespace Todo;
 
 MainWindow::MainWindow( QWidget* parent,
                         const char* name )
-    : OPimMainWindow("Todolist", parent, name)
+    : OPimMainWindow( "Todolist", parent, name, WType_TopLevel | WStyle_ContextHelp )
 {
-
     m_syncing = false;
     m_counter = 0;
     m_tempManager = new TemplateManager();
@@ -96,6 +95,7 @@ void MainWindow::initActions() {
                               QString::null, 0, this, 0 );
     connect(a, SIGNAL( activated() ),
             this, SLOT( slotNew() ) );
+    a->setWhatsThis( tr( "Click here to create a new task." ) );
     a->addTo(m_tool );
     a->addTo(m_edit );
 
@@ -103,6 +103,7 @@ void MainWindow::initActions() {
                      QString::null, 0, this, 0 );
     connect(a, SIGNAL(activated() ),
             this, SLOT( slotEdit() ) );
+    a->setWhatsThis( tr( "Click here to modify the current task." ) );
     a->addTo( m_tool );
     a->addTo( m_edit );
     m_editAction = a;
@@ -118,6 +119,7 @@ void MainWindow::initActions() {
                      QString::null, 0, this, 0 );
     connect(a, SIGNAL(activated() ),
             this, SLOT(slotDelete() ) );
+    a->setWhatsThis( tr( "Click here to remove the current task." ) );
     a->addTo( m_tool );
     a->addTo( m_edit );
     m_deleteAction = a;
@@ -147,12 +149,11 @@ void MainWindow::initActions() {
     m_edit->insertSeparator();
 
     if ( Ir::supported() ) {
-	a = new QAction( tr( "Beam" ), Resource::loadPixmap( "beam" ),
-			 QString::null, 0, this, 0 );
-	connect( a, SIGNAL( activated() ),
-		 this, SLOT( slotBeam() ) );
-	a->addTo( m_edit );
-	a->addTo( m_tool );
+        a = new QAction( tr( "Beam" ), Resource::loadPixmap( "beam" ), QString::null, 0, this, 0 );
+        connect( a, SIGNAL( activated() ), this, SLOT( slotBeam() ) );
+        a->setWhatsThis( tr( "Click here to send the current task to another device." ) );
+        a->addTo( m_edit );
+        a->addTo( m_tool );
     }
 
     // Options menu
@@ -236,6 +237,7 @@ void MainWindow::initUI() {
 }
 void MainWindow::initViews() {
     TableView* tableView = new TableView( this, m_stack );
+    QWhatsThis::add( tableView, tr( "This is a listing of all current tasks.\n\nThe list displays the following information:\n1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.\n2. Priority - a graphical representation of task priority.  Double-click here to modify.\n3. Description - description of task.  Click here to select the task.\n4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options->'Show task deadlines' from the menu above." ) );
     m_stack->addWidget( tableView,  m_counter++ );
     m_views.append( tableView );
     m_curView = tableView;
