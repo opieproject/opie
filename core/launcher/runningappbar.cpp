@@ -40,6 +40,8 @@
 RunningAppBar::RunningAppBar(QWidget* parent)
   : QFrame(parent), m_AppLnkSet(0L), m_SelectedAppIndex(-1)
 {
+    setBackgroundMode( PaletteBackground );
+
     m_AppLnkSet = new AppLnkSet( QPEApplication::qpeDir() + "apps" );
 
     connect(qwsServer, SIGNAL(newChannel(const QString&)), this, SLOT(newQcopChannel(const QString&)));
@@ -168,7 +170,7 @@ void RunningAppBar::paintEvent( QPaintEvent * )
     int y = (height() - AppLnk::smallIconSize()) / 2;
     int i = 0;
 
-    p.fillRect( 0, 0, width(), height(), colorGroup().background() );
+    //p.fillRect( 0, 0, width(), height(), colorGroup().background() );
 
     QListIterator<AppLnk> it(m_AppList);
 
@@ -178,7 +180,7 @@ void RunningAppBar::paintEvent( QPaintEvent * )
  	if ( (int)i == m_SelectedAppIndex )
  	  p.fillRect( x, y, spacing, curApp->pixmap().height()+1, colorGroup().highlight() );
   	else
-	  p.eraseRect( x, y, spacing, curApp->pixmap().height()+1 );
+            // p.eraseRect( x, y, spacing, curApp->pixmap().height()+1 );
 	p.drawPixmap( x, y, curApp->pixmap() );
 	x += spacing;
       }
