@@ -25,18 +25,14 @@
 
 */
 #include <qpe/version.h>
-#include <qapplication.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
-#include <qframe.h>
 #include <qlineedit.h>
 #include <qtimer.h>
 #include <qcombobox.h>
-#include <qpixmap.h>
 #include <qlabel.h>
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
-#include <qimage.h>
 #if QT_VERSION < 300
 #include <qgfx_qws.h>
 #endif

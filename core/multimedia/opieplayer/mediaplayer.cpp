@@ -18,15 +18,8 @@
 **
 **********************************************************************/
 
-#include <qpe/qpeapplication.h>
-#include <qpe/qlibrary.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
 
-#include <qmainwindow.h>
 #include <qmessagebox.h>
-#include <qwidgetstack.h>
-#include <qfile.h>
 
 #include "mediaplayer.h"
 #include "playlistwidget.h"

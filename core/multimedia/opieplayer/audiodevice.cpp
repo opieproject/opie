@@ -24,7 +24,6 @@
 #include <stdio.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
-#include <qpe/custom.h>
 #include <qmessagebox.h>
 
 #include "audiodevice.h"

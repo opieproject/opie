@@ -23,11 +23,7 @@
 #include <qpe/qpeapplication.h>
 
 #include <qdir.h>
-#include <qwidget.h>
-#include <qpainter.h>
-#include <qpixmap.h>
 #include <qslider.h>
-#include <qdrawutil.h>
 #include "videowidget.h"
 #include "mediaplayerstate.h"
 

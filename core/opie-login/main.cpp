@@ -40,8 +40,6 @@
 #include <getopt.h>
 #include <string.h>
 
-#include <qpe/qpeapplication.h>
-#include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpestyle.h>
 #include <qpe/power.h>
 #include <qpe/config.h>
@@ -49,12 +47,10 @@
 #include <opie/odevice.h>
 
 #include <qwindowsystem_qws.h>
-#include <qwsmouse_qws.h>
 #include <qmessagebox.h>
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qfile.h>
-#include <qtextstream.h>
 
 #include "loginapplication.h"
 #include "loginwindowimpl.h"

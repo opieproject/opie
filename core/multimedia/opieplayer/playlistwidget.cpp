@@ -19,39 +19,14 @@
 **********************************************************************/
 // code added by L. J. Potter Sat 03-02-2002 06:17:54
 #define QTOPIA_INTERNAL_FSLP
-#include <qpe/qcopenvelope_qws.h>
 
-#include <qmenubar.h>
 #include <qtoolbar.h>
 #include <qpe/qpemenubar.h>
-#include <qpe/fileselector.h>
-#include <qpe/qpeapplication.h>
 #include <qpe/lnkproperties.h>
-#include <qpe/storage.h>
 
-#include <qpe/applnk.h>
-#include <qpe/config.h>
-#include <qpe/global.h>
-#include <qpe/resource.h>
 #include <qaction.h>
-#include <qcursor.h>
-#include <qimage.h>
-#include <qfile.h>
-#include <qdir.h>
 #include <qlayout.h>
-#include <qlabel.h>
-#include <qlist.h>
-#include <qlistbox.h>
-#include <qmainwindow.h>
 #include <qmessagebox.h>
-#include <qtoolbutton.h>
-#include <qtabwidget.h>
-#include <qlistview.h>
-#include <qpoint.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
-#include <qregexp.h>
-#include <qtextstream.h>
 
 //#include <qtimer.h>
 
