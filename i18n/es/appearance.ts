@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Tabs w/icons</source>
-        <translation>Eestañas con iconos</translation>
+        <translation>Pestañas con iconos</translation>
     </message>
     <message>
         <source>Drop down list</source>
