@@ -10,7 +10,6 @@
     *   (at your option) any later version.                                   *
     ***************************************************************************/
 #define DEVELOPERS_VERSION
-
 #include "advancedfm.h"
 
 //  #include <opie/ofileselector.h>
@@ -395,7 +394,7 @@ void AdvancedFm::localListPressed( int mouse, QListViewItem *, const QPoint& , i
   case 1:
     break;
   case 2:
-    menuTimer.start( 750, TRUE );
+    menuTimer.start( 500, TRUE );
     qDebug("Start menu timer\n");
     break;
   };
@@ -407,7 +406,7 @@ void AdvancedFm::remoteListPressed( int mouse, QListViewItem*, const QPoint&, in
   case 1:
     break;
   case 2:
-    menuTimer.start( 750, TRUE );
+    menuTimer.start( 500, TRUE );
     qDebug("Start menu timer");
     break;
   };

@@ -12,6 +12,7 @@
 #ifndef ADVANCEDFM_H
 #define ADVANCEDFM_H
 #define QTOPIA_INTERNAL_FSLP // to get access to fileproperties
+#define QT_QWS_OPIE
 
 #include <qpe/ir.h>
 

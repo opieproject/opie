@@ -30,8 +30,10 @@
 
 
 void AdvancedFm::init() {
-    
-  setCaption( tr( "AdvancedFm" ) );
+#if defined(QT_QWS_OPIE)
+    qDebug("<<<<<<<<<<<<<<<<<<<<<<<< OPIE!!!");
+#endif
+    setCaption( tr( "AdvancedFm" ) );
 
   QGridLayout *layout = new QGridLayout( this );
   layout->setSpacing( 2);

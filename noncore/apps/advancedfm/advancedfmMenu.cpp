@@ -343,21 +343,27 @@ void AdvancedFm::filePerms() {
 }
 
 void AdvancedFm::doProperties() {
+#if defined(QT_QWS_OPIE)
+    
   QStringList curFileList = getPath();
+  
   QString filePath;
   if (TabWidget->currentPageIndex() == 0) {
     filePath = currentDir.canonicalPath()+"/";
   } else {
     filePath= currentRemoteDir.canonicalPath()+"/";
   }
-  //    qDebug("%d",curFileList.count());
-  for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+   qDebug("%d",curFileList.count());
+
+   for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
     qDebug((filePath+*it));
     DocLnk lnk( (filePath+*it));
     LnkProperties prop( &lnk );
     prop.showMaximized();
     prop.exec();
   }
+#endif    
+  
 }
 
 void AdvancedFm::upDir() {
