@@ -20,7 +20,7 @@
  #if defined(QT_QWS_IPAQ)
  # ifdef QT_QWS_IPAQ_RAW
 -    if ((mouseFD = open( "/dev/h3600_tsraw", O_RDONLY | O_NDELAY)) < 0) {
-+    if ((mouseFD = open( "/dev/h3600_tsraw", O_RDONLY | O_NONBLOCK /*O_NDELAY*/)) < 0) {
++    if ((mouseFD = open( "/dev/touchscreen/ucb1x00", O_RDONLY | O_NONBLOCK /*O_NDELAY*/)) < 0) {
  # else
      if ((mouseFD = open( "/dev/h3600_ts", O_RDONLY | O_NDELAY)) < 0) {
  # endif
