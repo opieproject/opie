@@ -3,6 +3,8 @@
 
 #include "module.h"
 
+//class WlanInfoImp;
+
 class WLANModule : Module{
 
 signals:
@@ -26,9 +28,12 @@ public:
   virtual void receive(const QCString&, const QByteArray&);
 
 private:
+  QWidget *getInfo(Interface*);
+
   QList<Interface> list;
   QString profile;
-
+  //  WlanInfoImp *info;
+  //  Interface *iface;
 };
 
 extern "C"

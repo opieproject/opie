@@ -8,6 +8,9 @@
 #include <qprogressbar.h>
 #include <qtabwidget.h>
 
+
+
+
 /**
  * Constructor, find all of the possible interfaces
  */
@@ -21,6 +24,7 @@ WLANModule::~WLANModule(){
   Interface *i;
   for ( i=list.first(); i != 0; i=list.next() )
     delete i;
+
 }
 
 /**
@@ -73,10 +77,7 @@ QWidget *WLANModule::information(Interface *i){
   if(!we.doesHaveWirelessExtensions())
     return NULL;
 
-  WlanInfoImp *info = new WlanInfoImp(0, i->getInterfaceName(), Qt::WDestructiveClose);
-  InterfaceInformationImp *information = new InterfaceInformationImp(info->tabWidget, "InterfaceSetupImp", i);
-  info->tabWidget->insertTab(information, "TCP/IP");
-  return info;
+  return getInfo( i );
 }
 
 /**
@@ -128,20 +129,43 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
     stream >> interface;
     stream >> action;
     qDebug("got interface %s and acion %s", interface.latin1(), action.latin1());
+    // find interfaces
+    Interface *ifa=0;
+    for ( Interface *i=list.first(); i != 0; i=list.next() ){
+        if (i->getInterfaceName() == interface){
+            qDebug("found interface %s",interface.latin1());
+            ifa = i;
+        }
+    }
+
+    if (ifa == 0){
+        qFatal("Did not find %s",interface.latin1());
+    }
 
     if (count == 2){
-        // those should call the interface
+        // those should call the interface directly
+        QWidget *info = getInfo( ifa );
+        info->showMaximized();
+
         if ( action.contains("start" ) ){
-            qDebug("starting %s not yet implemented",interface.latin1());
+            ifa->start();
         } else if ( action.contains("restart" ) ){
-            qDebug("restarting %s not yet implemented",interface.latin1());
+            ifa->restart();
         } else if ( action.contains("stop" ) ){
-            qDebug("stopping %s not yet implemented",interface.latin1());
+            ifa->stop();
+        }else if ( action.contains("refresh" ) ){
+            ifa->refresh();
         }
     }else if (count == 3){
         QString value;
         stream >> value;
         qDebug("setting %s of %s to %s", action.latin1(), interface.latin1(), value.latin1() );
+        if ( action.contains("ESSID") ){
+            qDebug("Setting ESSID not yet impl");
+        }else if (action.contains("Channel")){
+            qDebug("Setting Channel not yet impl");
+        }else
+            qDebug("wlan plugin has no clue");
     }
     // if (param.contains("QString,QString,QString")) {
 //         QDataStream stream(arg,IO_ReadOnly);
@@ -151,3 +175,13 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
 //     }
 }
 
+QWidget *WLANModule::getInfo( Interface *i)
+{
+    qDebug("WLANModule::getInfo start");
+    WlanInfoImp *info = new WlanInfoImp(0, i->getInterfaceName(), Qt::WDestructiveClose);
+    InterfaceInformationImp *information = new InterfaceInformationImp(info->tabWidget, "InterfaceSetupImp", i);
+    info->tabWidget->insertTab(information, "TCP/IP", 0);
+
+    qDebug("WLANModule::getInfo return");
+    return info;
+}
