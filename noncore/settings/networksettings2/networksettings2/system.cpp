@@ -44,6 +44,7 @@ static char Dig2Hex[] = {
 #define LN(x)           Dig2Hex[((x)&0x0f)]
 
 System::System( void ) : QObject(), ProbedInterfaces() {
+    ProcDevNet = 0;
 }
 
 System::~System( void ) {
@@ -109,13 +110,13 @@ int System::runAsRoot( QStringList & S, MyProcess * Prc ) {
         if( ! Prc )
           delete P;
         // error starting app
-        return 1;
+        return 0;
       }
       owarn << "Started " << S << oendl;
     }
 
     // all is fine
-    return 0;
+    return 1;
 }
 
 int System::execAsUser( QStringList & SL ) {
@@ -161,7 +162,7 @@ int System::execAsUser( QStringList & SL ) {
         Log(("Could not exec : %d\n", errno ));
       }
 
-      return rv;
+      return ! rv;
 }
 
 void System::SLOT_ProcessExited( MyProcess * P ) {

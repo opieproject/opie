@@ -12,7 +12,7 @@
             <x>0</x>
             <y>0</y>
             <width>274</width>
-            <height>160</height>
+            <height>173</height>
         </rect>
     </property>
     <property stdset="1">
@@ -22,6 +22,9 @@
     <property>
         <name>layoutMargin</name>
     </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
     <vbox>
         <property stdset="1">
             <name>margin</name>
@@ -29,7 +32,7 @@
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>6</number>
+            <number>2</number>
         </property>
         <widget>
             <class>QLayoutWidget</class>
@@ -124,14 +127,10 @@
             </hbox>
         </widget>
         <widget>
-            <class>QListBox</class>
+            <class>QTextView</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Output_LB</cstring>
-            </property>
-            <property stdset="1">
-                <name>selectionMode</name>
-                <enum>NoSelection</enum>
+                <cstring>Output_TV</cstring>
             </property>
         </widget>
         <widget>

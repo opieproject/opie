@@ -4,7 +4,6 @@
 #include <OTIcons.h>
 
 class MyProcess;
-class System;
 
 namespace Opie { 
 
@@ -51,7 +50,6 @@ private :
 
       OTGateway *       OT;
       MyProcess *       HciDump;
-      System *          Sys;
 };
 };
 

@@ -21,7 +21,9 @@ using namespace Opie::Ui;
 #include <qmessagebox.h>
 #include <qprogressbar.h>
 #include <qpushbutton.h>
+#include <qscrollbar.h>
 #include <qtextstream.h>
+#include <qtextview.h>
 
 #include <Opietooth.h>
 #include <OTDriver.h>
@@ -120,23 +122,27 @@ OTSniffing::OTSniffing( QWidget * parent ) : OTSniffGUI( parent ) {
 
       OT = OTGateway::getOTGateway();
       HciDump = 0;
-      Sys = new System();
 }
 
 OTSniffing::~OTSniffing() {
-      printf( "CLOSE \n" );
-      if ( HciDump ) {
-        HciDump->process().kill();
-        delete HciDump;
-      }
-      delete Sys;
+      SLOT_Trace( 0 );
 }
 
-void OTSniffing::SLOT_Trace( bool ) {
+void OTSniffing::SLOT_Trace( bool Run ) {
+
+      if( ! Run ) {
+        if ( HciDump ) {
+          HciDump->process().kill();
+          delete HciDump;
+        }
+        HciDump = 0;
+        return;
+      }
+
       HciDump = new MyProcess();
       QStringList SL;
 
-      SL << "hcidump";
+      SL << "/usr/sbin/hcidump";
       switch( DataFormat_CB->currentItem() ) {
         case 0 : // Hex
           SL << "-x";
@@ -162,7 +168,11 @@ void OTSniffing::SLOT_Trace( bool ) {
                this, 
                SLOT( SLOT_ProcessExited(MyProcess*) ) );
 
-      if( ! Sys->runAsRoot( SL, HciDump ) ) {
+      HciDump->process() << SL;
+
+      if( ! HciDump->process().start( OProcess::DontCare, 
+                                      OProcess::AllOutput )
+        ) {
         QMessageBox::warning(0,
             tr("Run hcidump"),
             tr("Cannot start %1").arg(SL.join(" "))
@@ -175,9 +185,13 @@ void OTSniffing::SLOT_Trace( bool ) {
 
 void OTSniffing::SLOT_Show( const QString & S ) {
       printf( "%s\n", S.latin1() );
-      Output_LB->insertItem( S );
-      Output_LB->setCurrentItem( Output_LB->count()-1 );
-      Output_LB->ensureCurrentVisible();
+      Output_TV->setText( Output_TV->text() + S + "\n" );
+
+      QScrollBar *scroll = Output_TV->verticalScrollBar();
+      scroll->setValue(scroll->maxValue());
+      //Output_LB->insertItem( S );
+      //Output_LB->setCurrentItem( Output_LB->count()-1 );
+      //Output_LB->ensureCurrentVisible();
 }
 
 void OTSniffing::SLOT_ProcessExited( MyProcess * ) {
@@ -228,12 +242,14 @@ void OTSniffing::SLOT_Load( void ) {
         QTextStream TS ( &F );
         SLOT_ClearLog();
         S = TS.read(); 
-        Output_LB->insertStringList( QStringList::split( "\n", S ) );
+        // Output_LB->insertStringList( QStringList::split( "\n", S ) );
+        Output_TV->setText( S );
       }
 }
 
 void OTSniffing::SLOT_ClearLog( void ) {
-      Output_LB->clear();
+      // Output_LB->clear();
+      Output_TV->setText( "" );
 }
 
 //
