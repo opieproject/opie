@@ -9,9 +9,7 @@ HEADERS		=	configfile.h \
 			mailfactory.h \
 			md5.cpp \
 			miscfunctions.h \
-			sharp_char.h \
-			smtphandler.h \
-			zaurusstuff.h
+			smtphandler.h
 SOURCES		=	configfile.cpp \
 			imapbase.cpp \
 			imaphandler.cpp \
@@ -19,8 +17,7 @@ SOURCES		=	configfile.cpp \
 			mailfactory.cpp \
 			md5.h \
 			miscfunctions.cpp \
-			smtphandler.cpp \
-			zaurusstuff.cpp
+			smtphandler.cpp
 INCLUDEPATH	+=	$(OPIEDIR)/include
 LIBS		+=	-L$(OPIEDIR)/lib -lqpe
 TARGET		=	mail
