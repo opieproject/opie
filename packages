@@ -197,7 +197,7 @@ CONFIG_SFCAVE-SDL	noncore/games/sfcave-sdl	sfcave-sdl.pro
 CONFIG_SHOWIMG	noncore/multimedia/showimg	showimg.pro
 CONFIG_SIMPLE_EXAMPLE   examples/simple simple.pro
 CONFIG_SIMPLE_ICON      examples/simple-icon    simple-icon.pro
-CONFIG_SIMPLE_MAIN      examples/simple-main    simple.main.pro
+CONFIG_SIMPLE_MAIN      examples/simple-main    simple-main.pro
 CONFIG_SIMPLE	noncore/tools/calc2/simple	simple.pro
 CONFIG_SIMPLE_PIM       examples/simple-pim     simple-pim.pro
 CONFIG_SINGLE	single	single.pro
