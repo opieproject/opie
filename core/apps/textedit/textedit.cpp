@@ -714,13 +714,20 @@ void TextEdit::openFile( const QString &f ) {
       openDotFile(currentFileName);
       return;
     }
-  else
+  /*
+   * The problem is a file where Config(f).isValid() and it does not
+   * end with .desktop will be treated as desktop file
+   */
+  else if (f.find(".desktop",0,true) != -1 )
     {
       DocLnk sf(f);
       filer = sf.file();
       if(filer.right(1) == "/")
-        filer = f;
+          filer = f;
+
     }
+  else
+      filer = f;
 
       DocLnk nf;
       nf.setType("text/plain");
