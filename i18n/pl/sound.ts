@@ -3,54 +3,54 @@
     <name>SoundSettings</name>
     <message>
         <source>Shows icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokazuje ikone</translation>
     </message>
     <message>
         <source>Hides icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukrywa ikone</translation>
     </message>
 </context>
 <context>
     <name>SoundSettingsBase</name>
     <message>
         <source>11025</source>
-        <translation type="unfinished"></translation>
+        <translation>11025</translation>
     </message>
     <message>
         <source>22050</source>
-        <translation type="unfinished"></translation>
+        <translation>22050</translation>
     </message>
     <message>
         <source>44100</source>
-        <translation type="unfinished"></translation>
+        <translation>44100</translation>
     </message>
     <message>
         <source>Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation>Stereo</translation>
     </message>
     <message>
         <source>16 bit</source>
-        <translation type="unfinished"></translation>
+        <translation>16 bitow</translation>
     </message>
     <message>
         <source>Vmemo Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia Vmemo</translation>
     </message>
     <message>
         <source>8000</source>
-        <translation type="unfinished"></translation>
+        <translation>8000</translation>
     </message>
     <message>
         <source>33075</source>
-        <translation type="unfinished"></translation>
+        <translation>33075</translation>
     </message>
     <message>
         <source>Visual Alerts</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmy Wizualne</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona w pasku zadan</translation>
     </message>
     <message>
         <source>Key_Space</source>
@@ -78,47 +78,47 @@
     </message>
     <message>
         <source>30</source>
-        <translation type="unfinished"></translation>
+        <translation>30</translation>
     </message>
     <message>
         <source>20</source>
-        <translation type="unfinished"></translation>
+        <translation>20</translation>
     </message>
     <message>
         <source>15</source>
-        <translation type="unfinished"></translation>
+        <translation>15</translation>
     </message>
     <message>
         <source>10</source>
-        <translation type="unfinished"></translation>
+        <translation>10</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Probkowanie:</translation>
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Katalog Nagrania:</translation>
     </message>
     <message>
         <source>Recording Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Przycisk Nagrywania:</translation>
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limit Nagrania w sekundach:</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>Nielimitowane</translation>
     </message>
     <message>
         <source>Restart Opie if needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Restartuj Opie w razie potrzeby</translation>
     </message>
     <message>
         <source>Key_Record</source>

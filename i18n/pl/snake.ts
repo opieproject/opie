@@ -17,9 +17,9 @@
         <source>Use the arrow keys to guide the
 snake to eat the mouse. You must not
 crash into the walls, edges or its tail.</source>
-        <translation>Uzywaj klawiszy strzalek do poruszania
-weza i jedzenia myszek. Musisz
-nie wpadac na sciany i przeszkody</translation>
+        <translation>Uzywaj klawiszy strzalek do kierowania
+wezem tak by zjadal myszy. Nie mozesz
+wpadac na sciany, krawedzie i swoj ogon.</translation>
     </message>
     <message>
         <source>Press Any Key To Start</source>
@@ -41,11 +41,11 @@ nie wpadac na sciany i przeszkody</translation>
     </message>
     <message>
         <source>Press any key to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Wcisnij dowolny przycisk by zaczac</translation>
     </message>
     <message>
         <source>Press any key to begin a new game.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wcisnij dowolny przycisk by zaczac nowa gre.</translation>
     </message>
 </context>
 </TS>
