@@ -1127,10 +1127,12 @@ typedef struct sharp_led_status {
 
 void Zaurus::buzzer ( int sound )
 {
-	static int fd = ::open ( "/dev/sharp_buz", O_RDWR|O_NONBLOCK );
+	static int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
   
-	if ( fd >= 0 )
+	if ( fd >= 0 ) {
 		::ioctl ( fd, SHARP_BUZZER_MAKESOUND, sound );
+		::close ( fd );
+	}
 }
 
 
