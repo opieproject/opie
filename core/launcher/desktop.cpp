@@ -242,10 +242,13 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
       if ( press ) emit power();
       return TRUE;
     }
-    if ( ke->simpleData.keycode == Key_SysReq ) {
-      if ( press ) emit power();
-      return TRUE;
-    }
+// This was used for the iPAQ PowerButton 
+// See main.cpp for new KeyboardFilter
+//
+//    if ( ke->simpleData.keycode == Key_SysReq ) {
+//      if ( press ) emit power();
+//      return TRUE;
+//    }
     if ( ke->simpleData.keycode == Key_F35 ) {
       if ( press ) emit backlight();
       return TRUE;

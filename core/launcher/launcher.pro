@@ -109,7 +109,7 @@ DEPENDPATH	+= $(OPIEDIR)/rsync
 
 TARGET		= qpe
 
-LIBS		+= -lqpe -lcrypt
+LIBS		+= -lqpe -lcrypt -lopie
 
 TRANSLATIONS = ../i18n/de/qpe.ts
 TRANSLATIONS += ../i18n/pt_BR/qpe.ts
