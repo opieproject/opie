@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: dateentry.ui,v 1.1 2002-01-25 22:14:29 kergoth Exp $
+** $Id: dateentry.ui,v 1.2 2002-03-09 11:39:21 hakan Exp $
 **
 *********************************************************************</comment>
 <widget>
@@ -94,7 +94,7 @@
             <item>
                 <property>
                     <name>text</name>
-                    <string>(None)</string>
+                    <string></string>
                 </property>
             </item>
             <item>
@@ -161,7 +161,7 @@
             <item>
                 <property>
                     <name>text</name>
-                    <string>(Unknown)</string>
+                    <string></string>
                 </property>
             </item>
             <item>
