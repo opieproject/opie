@@ -1,98 +1,103 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>Today</name>
+    <name>CommandEditDialog</name>
     <message>
-        <source>Today</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;%1&lt;/b&gt; BLAH mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>There are &lt;b&gt; %1&lt;/b&gt; active tasks: &lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No active tasks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
+        <source>Command Selection</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>TodayBase</name>
+    <name>CommandEditDialogBase</name>
     <message>
-        <source>Opiemail not installed</source>
+        <source>Commands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>todayconfig</name>
+    <name>Form1</name>
     <message>
-        <source>Today config</source>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Konsole</name>
+    <message>
+        <source>Terminal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Should the 
-location 
-be shown?</source>
+        <source>Micro</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Should the notes 
-be shown?</source>
+        <source>Small Fixed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show only later
-appointments</source>
+        <source>Medium Fixed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>How many 
-appointment
-should should 
-be shown?</source>
+        <source>Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Calendar</source>
+        <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>How many
-tasks should 
-be shown?</source>
+        <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tasks</source>
+        <source>Enter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Clip after how
-many letters</source>
+        <source>Space</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Should today be
-autostarted on
-resume ? (Opie only)</source>
+        <source>Tab</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Misc</source>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PlayListSelection</name>
+    <message>
+        <source>Command Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>editCommandBase</name>
+    <message>
+        <source>Add command</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter command to add:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
