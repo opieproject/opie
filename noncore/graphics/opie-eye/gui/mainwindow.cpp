@@ -33,7 +33,6 @@
 #include <qframe.h>
 
 
-
 //OPIE_EXPORT_APP_V2( Opie::Core::OApplicationFactory<PMainWindow>,"Opie Eye" )
 OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<PMainWindow>)
 
@@ -43,7 +42,6 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     setCaption( QObject::tr("Opie Eye Caramba" ) );
     m_cfg = new Opie::Core::OConfig("phunkview");
     m_cfg->setGroup("Zecke_view" );
-    tFrame = 0;
 //    qDebug( "Process-wide OApplication object @ %0x", oApp );
     /*
      * Initialize ToolBar and IconView
@@ -146,9 +144,6 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
 }
 
 PMainWindow::~PMainWindow() {
-    odebug << "Shutting down" << oendl;
-    if (tFrame) delete tFrame;
-    odebug << "Shutting down done" << oendl;
 }
 
 void PMainWindow::slotToggleZoomer()
@@ -325,28 +320,21 @@ void PMainWindow::slotToggleFullScreen()
     odebug << "Toggle full " << oendl;
     if (!m_disp) return;
     bool current = !m_disp->fullScreen();
-    m_disp->setFullScreen(current);
     odebug << "Current = " << current << oendl;
     if (current) {
         odebug << "full" << oendl;
         m_disp->setBackgroundColor(black);
-        if (!tFrame) {
-            tFrame = new ImageWidget(0,0,WStyle_Customize|WStyle_NoBorder);
-            tFrame->resize(qApp->desktop()->width(), qApp->desktop()->height());
-            tFrame->setMinimumSize(qApp->desktop()->width(), qApp->desktop()->height());
-        }
-        m_disp->reparent(tFrame,QPoint(0,0));
+        m_disp->reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));
         m_disp->setVScrollBarMode(QScrollView::AlwaysOff);
         m_disp->setHScrollBarMode(QScrollView::AlwaysOff);
         m_disp->resize(qApp->desktop()->width(), qApp->desktop()->height());
-        tFrame->showFullScreen();
+        //m_disp->showFullScreen();
+        //qwsDisplay()->requestFocus( m_disp->winId(), TRUE);
     } else {
         setUpdatesEnabled(false);
         odebug << "window" << oendl;
         m_disp->reparent(0,QPoint(0,0));
         m_disp->showNormal();
-        /* don't forget it! */
-        tFrame->hide();
         m_disp->setBackgroundColor(white);
         m_stack->addWidget(m_disp,ImageDisplay);
         m_disp->setVScrollBarMode(QScrollView::Auto);
@@ -357,6 +345,7 @@ void PMainWindow::slotToggleFullScreen()
         }
         setUpdatesEnabled(true);
     }
+    m_disp->setFullScreen(current);
 }
 
 /**
@@ -398,7 +387,8 @@ void PMainWindow::slotDisplay( const QString& inf ) {
         viewModeButton->hide();
     }
     if (m_disp->fullScreen()) {
-        tFrame->show();//FullScreen();
+        //m_disp->showFullScreen();
+        qwsDisplay()->requestFocus( m_disp->winId(), TRUE);
     } else {
         m_stack->raiseWidget( ImageDisplay );
     }
@@ -439,7 +429,7 @@ void PMainWindow::raiseIconView() {
         viewModeButton->show();
     }
     if (m_disp && m_disp->fullScreen() && m_disp->isVisible()) {
-        tFrame->hide();
+        m_disp->hide();
     }
     m_stack->raiseWidget( IconView );
     setUpdatesEnabled(true);

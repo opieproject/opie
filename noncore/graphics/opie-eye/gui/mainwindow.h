@@ -68,7 +68,6 @@ private:
     bool autoRotate;
     bool autoScale;
     bool zoomerOn;
-    ImageWidget*tFrame;
     QToolButton*rotateButton,*upButton,*fsButton,*viewModeButton;
     QToolButton*nextButton,*prevButton,*zoomButton,*scaleButton;
 

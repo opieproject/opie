@@ -110,7 +110,6 @@ void ImageView::contentsMousePressEvent ( QMouseEvent * e)
     odebug << "Popup " << oendl;
     QPopupMenu *m = new QPopupMenu(0);
     if (!m) return;
-    bool old = fullScreen();
     m->insertItem(tr("Toggle fullscreen"),this, SIGNAL(toggleFullScreen()));
     if (fullScreen()) {
         m->insertSeparator();
@@ -129,6 +128,13 @@ void ImageView::contentsMousePressEvent ( QMouseEvent * e)
 void ImageView::setFullScreen(bool how)
 {
     m_isFullScreen = how;
+    if (how) {
+        m_ignore_next_in = true;
+        setFixedSize(qApp->desktop()->size());
+        showFullScreen();
+    } else {
+	setMinimumSize(10,10);
+    }
 }
 
 void ImageView::focusInEvent(QFocusEvent *)
@@ -140,29 +146,29 @@ void ImageView::focusInEvent(QFocusEvent *)
     if (fullScreen()) enableFullscreen();
 }
 
+void ImageView::hide() 
+{
+    if (fullScreen()) {
+        m_ignore_next_in = true;
+        showNormal();
+    }
+    QWidget::hide();
+}
 void ImageView::enableFullscreen()
 {
-      // This call is needed because showFullScreen won't work
-      // correctly if the widget already considers itself to be fullscreen.
       if (!fullScreen()) return;
       if (m_ignore_next_in) {m_ignore_next_in = false;return;}
 
       setUpdatesEnabled(false);
-      parentWidget()->showNormal();
       // This is needed because showNormal() forcefully changes the window
       // style to WSTyle_TopLevel.
-      parentWidget()->reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));
+      reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));
       // Enable fullscreen.
       /* this is the trick - I don't now why, but after a showFullScreen QTE toggles the focus
        * so we must block it here! */
       m_ignore_next_in = true;
-      parentWidget()->showFullScreen();
+      showFullScreen();
       setUpdatesEnabled(true);
+
 }
 
-ImageWidget::ImageWidget(QWidget * parent, const char * name, WFlags f)
-    : QWidget(parent,name,f)
-{
-    // Make sure size is correct
-    setFixedSize(qApp->desktop()->size());
-}

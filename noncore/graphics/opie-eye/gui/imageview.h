@@ -53,25 +53,13 @@ protected:
     int focus_in_count;
     virtual void focusInEvent ( QFocusEvent * );
 
+public slots:
+    virtual void hide();
 
 protected slots:
     virtual void slotShowImageInfo();
     virtual void keyReleaseEvent(QKeyEvent * e);
     virtual void contentsMousePressEvent ( QMouseEvent * e);
-};
-
-class ImageWidget:public QWidget
-{
-    Q_OBJECT
-public:
-    ImageWidget(QWidget * parent=0, const char * name=0, WFlags f = WStyle_Customize | WStyle_NoBorder);
-    virtual ~ImageWidget(){};
-
-protected:
-
-public slots:
-
-protected slots:
 };
 
 #endif
