@@ -5,7 +5,7 @@
 
 class IOLayer;
 class EmulationLayer;
-class Widget;
+class WidgetLayer;
 /**
  * This is a Session. A session contains
  * a QWidget pointer and a IOLayer
@@ -42,7 +42,7 @@ public:
     IOLayer* layer();
 
     EmulationLayer* emulationLayer();
-    Widget* emulationWidget();
+    WidgetLayer* emulationWidget();
 
     /*
      * connects the data flow from
@@ -58,7 +58,7 @@ public:
 
     void setWidgetStack( QWidgetStack* widget );
     void setEmulationLayer( EmulationLayer* lay );
-    void setEmulationWidget( Widget* lay );
+    void setEmulationWidget( WidgetLayer* lay );
     void setIOLayer( IOLayer*  );
     void setName( const QString& );
 
@@ -67,7 +67,7 @@ private:
     QWidgetStack* m_widget;
     IOLayer* m_layer;
     EmulationLayer* m_emLay;
-    Widget* m_widLay;
+    WidgetLayer* m_widLay;
 
 };
 

@@ -21,6 +21,7 @@
   "currentSession->getEmulation()->sendString()" to
   "currentSession->layer()->send()"
   # this is not right! EmulationLayer should send it...
+  i changed all those to use emulationLayer()->send() instead
  i had to create a QByteArray before...
 
 TODO:
@@ -1230,7 +1231,8 @@ void Widget::dropEvent(QDropEvent* event)
       //currentSession->getEmulation()->sendString(dropText.local8Bit());
       QByteArray tmp;
       // ibot: this should be pretty wrong...
-      currentSession->layer()->send( tmp.setRawData( dropText.local8Bit()));
+      // now it sends to the right layer
+      currentSession-> emulationLayer()->send( tmp.setRawData( dropText.local8Bit()));
     }
     //    kdDebug() << "Drop:" << dropText.local8Bit() << "\n";
   }
@@ -1241,7 +1243,7 @@ void Widget::dropEvent(QDropEvent* event)
     if (currentSession) {
       //currentSession->getEmulation()->sendString(dropText.local8Bit());
       QByteArray tmp;
-      currentSession->layer()->send( tmp.setRawData( dropText.local8Bit()));
+      currentSession->emulationLayer()->send( tmp.setRawData( dropText.local8Bit()));
     }
     // Paste it
   }
@@ -1257,14 +1259,14 @@ void Widget::drop_menu_activated(int item)
   {
     case 0: // paste
       //currentSession->getEmulation()->sendString(dropText.local8Bit());
-      currentSession->layer()->send( tmp.setRawData( dropText.local8Bit()));
+      currentSession->emulationLayer()->send( tmp.setRawData( dropText.local8Bit()));
  
 //    KWM::activate((Window)this->winId());
       break;
     case 1: // cd ...
       //currentSession->getEmulation()->sendString("cd ");
       tmp.setRawData( "cd " );
-      currentSession->layer()->send( tmp );
+      currentSession->emulationLayer()->send( tmp );
       struct stat statbuf;
       if ( ::stat( QFile::encodeName( dropText ), &statbuf ) == 0 )
       {
@@ -1282,7 +1284,7 @@ void Widget::drop_menu_activated(int item)
       tmp.setRawDate( dropText.local8Bit() + "\n" );
       //currentSession->getEmulation()->sendString(dropText.local8Bit());
       //currentSession->getEmulation()->sendString("\n");
-      currentSession->layer()->send( tmp );
+      currentSession->emulationLayer()->send( tmp );
 //    KWM::activate((Window)this->winId());
       break;
   }

@@ -2,7 +2,7 @@
 
 #include "io_layer.h"
 #include "file_layer.h"
-#include "widget.h"
+#include "widget_layer.h"
 #include "emulation_layer.h"
 #include "session.h"
 
@@ -37,7 +37,7 @@ IOLayer* Session::layer() {
 EmulationLayer* Session::emulationLayer() {
     return m_emLay;
 }
-Widget* Session::emulationWidget() {
+WidgetLayer* Session::emulationWidget() {
     return m_widLay;
 }
 void Session::connect() {
@@ -75,7 +75,7 @@ void Session::setEmulationLayer( EmulationLayer* lay ) {
     delete m_emLay;
     m_emLay = lay;
 }
-void Session::setEmulationWidget( Widget* lay ) {
+void Session::setEmulationWidget( WidgetLayer* lay ) {
     delete m_widLay;
     m_widLay = lay;
 }

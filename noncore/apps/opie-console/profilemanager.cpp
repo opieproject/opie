@@ -7,7 +7,8 @@
 
 #include <qpe/config.h>
 
-#include "widget.h"
+#include "widget_layer.h"
+#include "emulation_widget.h"
 #include "metafactory.h"
 #include "profileconfig.h"
 #include "profilemanager.h"
@@ -80,7 +81,7 @@ Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent) {
     QHBoxLayout* lay = new QHBoxLayout(dummy );
     stack->addWidget( dummy, 0 );
     stack->raiseWidget( 0 );
-    Widget* wid = new Widget(dummy );
+    WidgetLayer* wid = new EmulationWidget( prof, dummy );
     lay->addWidget( wid );
 
     session->setEmulationWidget( wid );

@@ -115,7 +115,7 @@ ProfileDialogWidget *MetaFactory::newTerminalPlugin( const QString& str, QWidget
     }
     return wid;
 }
-EmulationLayer* MetaFactory::newEmulationLayer( const QString& str, Widget* wid) {
+EmulationLayer* MetaFactory::newEmulationLayer( const QString& str, WidgetLayer* wid) {
     EmulationLayer* lay = 0l;
 
     QMap<QString, emulationLayer>::Iterator it;

@@ -102,8 +102,9 @@ public:
 
 	/**
 	 * reload configuration
+	 * @param const Profile& config, the config to be used (may be the same as in constructor)
 	 */
-	virtual void reloadConfig() = 0;
+	virtual void reloadConfig( const Profile& config ) = 0;
 
 
 	/**

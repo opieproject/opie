@@ -17,13 +17,13 @@
 #include "profiledialogwidget.h"
 #include "emulation_layer.h"
 
-class Widget;
+class WidgetLayer;
 class MetaFactory {
 public:
     typedef ProfileDialogWidget* (*configWidget)(const QString&, QWidget* parent);
     typedef IOLayer* (*iolayer)(const Profile& );
     typedef FileTransferLayer* (*filelayer)(IOLayer*);
-    typedef EmulationLayer* (*emulationLayer)(Widget* );
+    typedef EmulationLayer* (*emulationLayer)(WidgetLayer* );
 
     MetaFactory();
     ~MetaFactory();
@@ -77,7 +77,7 @@ public:
     IOLayer* newIOLayer( const QString&,const Profile& );
     ProfileDialogWidget *newConnectionPlugin ( const QString&, QWidget* );
     ProfileDialogWidget* newTerminalPlugin( const QString&, QWidget* );
-    EmulationLayer* newEmulationLayer(const QString&, Widget* );
+    EmulationLayer* newEmulationLayer(const QString&, WidgetLayer* );
 
     /*
      * internal takes the maybe translated
