@@ -34,6 +34,8 @@ protected:
     QCheckBox* CheckBoxImage;
     QCheckBox* CheckBoxText;
     QCheckBox* CheckBoxVideo;
+    QCheckBox* CheckBoxAll;
+    QCheckBox* CheckBoxLink;
     QCheckBox* AskBox;
 
 public:
@@ -48,8 +50,8 @@ private:
 private slots:
     void yesPressed();
     void noPressed();
-
-private:
+    void deactivateOthers();
+ private:
     QString mediumPath;
 
     bool checkagain; 
@@ -57,6 +59,7 @@ private:
     bool checkmimeimage;
     bool checkmimetext;
     bool checkmimevideo;
+    bool checkmimeall;
     QString limittodirs;
     QStringList mimeTypeList;
 

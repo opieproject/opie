@@ -46,6 +46,7 @@ void MediumMountGui::readConfig(){
   checkmimeimage = cfg.readBoolEntry("image", true);
   checkmimetext  = cfg.readBoolEntry("text", true);
   checkmimevideo = cfg.readBoolEntry("video", true);
+  checkmimeall   = cfg.readBoolEntry("all", true);
 
   cfg.setGroup("dirs");
   limittodirs = cfg.readEntry("dirs", "");
@@ -68,28 +69,37 @@ void MediumMountGui::writeConfig(bool autocheck) {
   cfg.writeEntry("autocheck", autocheck );  
 
   cfg.setGroup("mimetypes");
+
   cfg.writeEntry("audio", CheckBoxAudio->isChecked() );
   cfg.writeEntry("image",CheckBoxImage->isChecked() );
   cfg.writeEntry("text",CheckBoxImage->isChecked() );
   cfg.writeEntry("video",CheckBoxVideo->isChecked() );
+  cfg.writeEntry("all",CheckBoxAll->isChecked() );
 
   cfg.setGroup("dirs");
   cfg.writeEntry("dirs", ""); 
 
 
-  if (checkmimeaudio) {
-    mimeTypeList += ("audio//*");
+  // if all is checked then add only "null" to the list.
+  if (checkmimeall) {
+    mimeTypeList += ("null");
+  } else {
+    if (checkmimeaudio) {
+      mimeTypeList += ("audio//*");
+    }
+    if (checkmimetext) {
+      mimeTypeList += ("text//*");
+    }
+    if (checkmimevideo) {
+      mimeTypeList += ("video//*");
+    }
+    if (checkmimeimage) {
+      mimeTypeList += ("image//*");
+    }
+    if (checkmimeall) {
+    mimeTypeList << ("null");
+    }
   }
-  if (checkmimetext) {
-    mimeTypeList += ("text//*");
-  }
-  if (checkmimeaudio) {
-    mimeTypeList += ("video//*");
-  }
-  if (checkmimeaudio) {
-    mimeTypeList += ("image//*");
-  }
- 
 }
 
 void MediumMountGui::startGui() {
@@ -106,7 +116,7 @@ void MediumMountGui::startGui() {
   
   // media box
   GroupBox1 = new QGroupBox( this, "GroupBox1" );
-  GroupBox1->setGeometry( QRect( 10, 80, (this->width())-25, 60 ) ); 
+  GroupBox1->setGeometry( QRect( 10, 80, (this->width())-25, 80 ) ); 
   GroupBox1->setTitle( tr( "Which media files" ) );
   
   CheckBoxAudio = new QCheckBox( GroupBox1, "CheckBoxAudio" );
@@ -124,6 +134,20 @@ void MediumMountGui::startGui() {
   CheckBoxVideo = new QCheckBox( GroupBox1, "CheckBoxVideo" );
   CheckBoxVideo->setGeometry( QRect( (GroupBox1->width()/2), 35, (GroupBox1->width()/2)-15, 15 ) ); 
   CheckBoxVideo->setText( tr( "Video" ) );
+
+  CheckBoxAll = new QCheckBox ( GroupBox1);
+  CheckBoxAll->setGeometry( QRect( 10, 55, (GroupBox1->width()/2)-15, 15 ) ); 
+  CheckBoxAll->setText( tr( "All" ) );
+  QObject::connect( (QObject*)CheckBoxAll, SIGNAL( clicked() ), this, SLOT( deactivateOthers()) );
+   
+  
+   
+  CheckBoxLink = new QCheckBox ( GroupBox1);
+  CheckBoxLink->setGeometry( QRect( (GroupBox1->width()/2), 55, (GroupBox1->width()/2)-15, 15 ) ); 
+  CheckBoxLink->setText( tr( "Link apps" ) );
+  // as long as the feature is not supported
+  CheckBoxLink->setEnabled(false);
+
   
   // select dirs
 
@@ -170,6 +194,21 @@ void MediumMountGui::startGui() {
   QObject::connect( (QObject*)quit_2, SIGNAL( clicked() ), this, SLOT(noPressed() ) );
 
 
+}
+
+
+void MediumMountGui::deactivateOthers() {
+  bool mod = !(CheckBoxAll->isChecked());
+
+  //if (!CheckBoxVideo->isChecked()){
+  //  mod = false;
+  //} else {
+  //  mod = true;
+  //}
+  CheckBoxVideo->setEnabled(mod);
+  CheckBoxAudio->setEnabled(mod);
+  CheckBoxText->setEnabled(mod);
+  CheckBoxImage->setEnabled(mod);
 }
 
 void MediumMountGui::yesPressed() {
