@@ -14,7 +14,6 @@ echo
 echo "Status of $foo"
 echo
 
->>>>>>> 1.4
 echo "number of strings: "
 strs=`find $arg -name "*.ts" -exec cat {} \; | grep translation | wc -l`
 echo $strs
