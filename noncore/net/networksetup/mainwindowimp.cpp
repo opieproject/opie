@@ -320,7 +320,6 @@ void MainWindowImp::configureClicked(){
     QWidget *moduleConfigure = i->getModuleOwner()->configure(i);
     if(moduleConfigure != NULL){
       moduleConfigure->showMaximized();
-      moduleConfigure->show();
       return;
     }
   }
@@ -331,7 +330,6 @@ void MainWindowImp::configureClicked(){
     currentProfileText = "";
   configure->setProfile(currentProfileText);
   configure->showMaximized();
-  configure->show();
 }
 
 /**
@@ -356,13 +354,11 @@ void MainWindowImp::informationClicked(){
     QWidget *moduleInformation = i->getModuleOwner()->information(i);
     if(moduleInformation != NULL){
       moduleInformation->showMaximized();
-      moduleInformation->show();
       return;
     }
   }  
-  InterfaceInformationImp *information = new InterfaceInformationImp(0, "InterfaceSetupImp", i, true);
-  information->showMaximized();
-  information->show();
+  InterfaceInformationImp information(0, "InterfaceSetupImp", i);
+  information.showMaximized();
 }
 
 /**
@@ -411,7 +407,7 @@ void MainWindowImp::updateInterface(Interface *i){
   if(i->getModuleOwner() != NULL)
     typeName = i->getModuleOwner()->getPixmapName(i);
   
-  item->setPixmap(1, (Resource::loadPixmap(typeName)));
+  item->setPixmap(1, (Resource::loadPixmap(QString("networksetup/") + typeName)));
   item->setText(2, i->getHardwareName());
   item->setText(3, QString("(%1)").arg(i->getInterfaceName()));
   item->setText(4, (i->getStatus()) ? i->getIp() : QString(""));

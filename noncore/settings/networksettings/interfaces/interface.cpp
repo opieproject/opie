@@ -71,7 +71,7 @@ void Interface::start(){
   int ret = system(QString("%1 %2 up").arg(IFCONFIG).arg(this->name()).latin1());
   // See if it was successfull...
   if(ret != 0){
-    emit (updateMessage("Starting interface failed."));
+    emit (updateMessage("Starting interface failed"));
     return;
   }
 
@@ -92,7 +92,7 @@ void Interface::stop(){
 	  
   int ret = system(QString("%1 %2 down").arg(IFCONFIG).arg(this->name()).latin1());
   if(ret != 0){
-    emit (updateMessage("Stopping interface failed."));
+    emit (updateMessage("Stopping interface failed"));
     return;
   }
 

@@ -99,13 +99,13 @@ void WLANImp::parseSettingFile(){
 	}
       }
       if(line.contains("#KEY0="))
-        keyLineEdit0->setText(line.mid(5, line.length()));
+        keyLineEdit0->setText(line.mid(6, line.length()));
       if(line.contains("#KEY1="))
-        keyLineEdit1->setText(line.mid(5, line.length()));
+        keyLineEdit1->setText(line.mid(6, line.length()));
       if(line.contains("#KEY2="))
-        keyLineEdit2->setText(line.mid(5, line.length()));
+        keyLineEdit2->setText(line.mid(6, line.length()));
       if(line.contains("#KEY3="))
-        keyLineEdit3->setText(line.mid(5, line.length()));
+        keyLineEdit3->setText(line.mid(6, line.length()));
       
       if(line.contains("KEY=")){
         wepEnabled->setChecked(true);
