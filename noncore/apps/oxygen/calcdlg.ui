@@ -11,13 +11,13 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>275</width>
+            <width>271</width>
             <height>357</height>
         </rect>
     </property>
     <property stdset="1">
         <name>caption</name>
-        <string>Network Time</string>
+        <string>Calculations</string>
     </property>
     <property>
         <name>layoutMargin</name>
