@@ -543,7 +543,6 @@ void OIpkgConfigDlg::slotServerUpdate()
         m_serverList->insertItem( newName );
         m_serverList->setCurrentItem( m_serverList->count() );
         m_serverNew = false;
-//        m_serverList->insertItem( newName );
     }
 }
 
