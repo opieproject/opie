@@ -820,11 +820,11 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Kuait</source>
-        <translation>Koweit</translation>
+        <translation type="obsolete">Koweit</translation>
     </message>
     <message>
         <source>Kyrgyztan</source>
-        <translation>Kyrgyztan</translation>
+        <translation type="obsolete">Kyrgyztan</translation>
     </message>
     <message>
         <source>Laos</source>
@@ -1373,6 +1373,14 @@ Quitter ?</translation>
     <message>
         <source>Work Mobile</source>
         <translation>Portable (Bureau)</translation>
+    </message>
+    <message>
+        <source>Kuwait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kyrgystan</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

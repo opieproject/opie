@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;Über</translation>
+        <translation type="obsolete">&amp;Über</translation>
     </message>
     <message>
         <source>&amp;Game</source>

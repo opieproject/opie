@@ -750,11 +750,11 @@ Zakonczyc?</translation>
     </message>
     <message>
         <source>Kuait</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Kyrgyztan</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Laos</source>
@@ -1330,6 +1330,14 @@ Zakonczyc?</translation>
     </message>
     <message>
         <source>Work Mobile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kuwait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kyrgystan</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

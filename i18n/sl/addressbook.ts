@@ -779,11 +779,11 @@ Izhod?</translation>
     </message>
     <message>
         <source>Kuait</source>
-        <translation>Kuvajt</translation>
+        <translation type="obsolete">Kuvajt</translation>
     </message>
     <message>
         <source>Kyrgyztan</source>
-        <translation>Kyrgyztan</translation>
+        <translation type="obsolete">Kyrgyztan</translation>
     </message>
     <message>
         <source>Laos</source>
@@ -1332,6 +1332,14 @@ Izhod?</translation>
     <message>
         <source>Work Mobile</source>
         <translation>Delovni mobitel</translation>
+    </message>
+    <message>
+        <source>Kuwait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kyrgystan</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

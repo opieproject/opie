@@ -779,11 +779,11 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source>Kuait</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Kyrgyztan</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Laos</source>
@@ -1332,6 +1332,14 @@ Sair na mesma?</translation>
     <message>
         <source>Work Mobile</source>
         <translation>Telemóvel (Empresa)</translation>
+    </message>
+    <message>
+        <source>Kuwait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kyrgystan</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
