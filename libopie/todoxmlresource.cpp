@@ -14,8 +14,8 @@ using namespace Opie;
 QValueList<ToDoEvent>  FileToDoResource::load( const QString& name ) {
     QAsciiDict<int> dict(12);
     dict.setAutoDelete( TRUE );
-    dict.insert("Categories" , new int(ToDoEvent::Uid) );
-    dict.insert("Uid" , new int(ToDoEvent::Category) );
+    dict.insert("Categories" , new int(ToDoEvent::Category) );
+    dict.insert("Uid" , new int(ToDoEvent::Uid) );
     dict.insert("HasDate" , new int(ToDoEvent::HasDate) );
     dict.insert("Completed" , new int(ToDoEvent::Completed) );
     dict.insert("Description" , new int(ToDoEvent::Description) );
