@@ -3,11 +3,11 @@
 
 #include <qpe/applnk.h>
 
-class TabAppLnk : public AppLnk {
+class TabAppLnk : public AppLnk { 
 
 public:
   TabAppLnk( const QString & file) :AppLnk(file){ };
-
+ 
   QString pixmapString() { return mIconFile; };
 
 };

@@ -26,14 +26,13 @@ TabManagerBase::TabManagerBase( QWidget* parent,  const char* name, WFlags fl )
     if ( !name )
 	setName( "TabManagerBase" );
     resize( 289, 228 ); 
-    setCaption( tr( "Tab Manger" ) );
+    setCaption( tr( "Tab Manager" ) );
     TabManagerBaseLayout = new QVBoxLayout( this ); 
-    TabManagerBaseLayout->setSpacing( 6 );
-    TabManagerBaseLayout->setMargin( 0 );
+    TabManagerBaseLayout->setSpacing( 4 );
+    TabManagerBaseLayout->setMargin( 4 );
 
     tabList = new TabListView( this, "tabList" );
-    tabList->addColumn( tr( "Groups" ) );
-    tabList->addColumn( tr( "Applications" ) );
+    tabList->addColumn( tr( "Hierarchy" ) );
     tabList->setRootIsDecorated( TRUE );
     TabManagerBaseLayout->addWidget( tabList );
 }
