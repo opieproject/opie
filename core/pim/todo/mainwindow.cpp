@@ -49,7 +49,6 @@
 #include "quickeditimpl.h"
 #include "todotemplatemanager.h"
 #include "templateeditor.h"
-#include "todoentryimpl.h"
 #include "tableview.h"
 
 #include "textviewshow.h"
