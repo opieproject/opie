@@ -313,6 +313,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
             }
 
         } else if (qkeycode == Qt::Key_Control) {
+            need_repaint = TRUE;
 
             if (ctrl) {
 
@@ -328,6 +329,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
             }
 
         } else if (qkeycode == Qt::Key_Alt) {
+            need_repaint = TRUE;
 
             if (alt) {
                 *alt = 0;
