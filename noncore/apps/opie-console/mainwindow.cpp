@@ -30,9 +30,10 @@ using namespace Opie::Ui;
 #include <assert.h>
 
 MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(parent, name, WStyle_ContextHelp)  {
+
 #ifdef FSCKED_DISTRI
-    FixIt fix;
-    fix.fixIt();
+   FixIt fix;
+   fix.fixIt();
 #endif
 
     setCaption(QObject::tr("Opie Console") );
@@ -122,11 +123,12 @@ void MainWindow::initUI() {
 
     m_console->insertSeparator();
 
-
+#ifndef EAST
     m_quickLaunch = new QAction( tr("QuickLaunch"),  Resource::loadPixmap("console/konsole_mini"),  QString::null,  0,  this, 0 );
     m_quickLaunch->addTo( m_icons );
     connect( m_quickLaunch,  SIGNAL( activated() ),
              this,  SLOT( slotQuickLaunch() ) );
+#endif
 
     QWhatsThis::add( m_icons, tr( "The shell button launches the \"default\" profile. If there is none default values are taken" ) );
 
@@ -159,6 +161,13 @@ void MainWindow::initUI() {
              this,  SLOT( slotFullscreen() ) );
 
     m_console->insertSeparator();
+
+	m_recordLog = new QAction();
+	m_recordLog->setText( tr("Start log") );
+	m_recordLog->addTo( m_console );
+	connect(m_recordLog, SIGNAL(activated() ), 
+			this, SLOT( slotSaveLog() ) );
+ 	m_recordingLog = false;
 
     QAction *a = new QAction();
     a->setText( tr("Save history") );
@@ -422,20 +431,19 @@ void MainWindow::slotTerminate() {
 
 
 
-
-
-
 void MainWindow::slotQuickLaunch()  {
-    Profile prof = manager()->profile(  "default"   );
+
+    Profile prof = manager()->profile(  "default" );
     if ( prof.name() == "default"  )  {
         create( prof );
     } else {
+    #ifndef EAST
         Profile newProf =  Profile( "default",  "console", "default" ,  0, 3,  0 );
         newProf.setAutoConnect( true );
         create( newProf );
         slotSaveSession();
+    #endif
     }
-
 }
 
 void MainWindow::slotConfigure() {
@@ -608,6 +616,12 @@ void MainWindow::slotSessionChanged( Session* ses ) {
             m_scripts->setItemEnabled(m_runScript_id, false);
         }
 
+		if ( ( currentSession()->emulationHandler()->isLogging() ) ) {
+			 m_recordLog->setText( tr("Stop log") );
+		} else {
+			 m_recordLog->setText( tr("Start log") );
+		}
+
         if ( ( m_curSession->layer() )->supports()[1] == 0 ) {
             m_transfer->setEnabled( false );
         } else {
@@ -707,6 +721,36 @@ void MainWindow::slotSaveSession() {
     manager()->save();
     populateProfiles();
 }
+
+
+
+void MainWindow::slotSaveLog() {
+
+    if( currentSession()->emulationHandler()->isLogging() ) {
+      DocLnk nf;
+      QString m_logName = currentSession()->emulationHandler()->logFileName();
+      QFileInfo info(m_logName);
+      nf.setType("text/plain");
+      nf.setFile(m_logName);
+      nf.setName(info.fileName());
+      nf.writeLink();
+      m_recordLog->setText( tr("Start log") );
+      m_recordingLog = false;
+	  currentSession()->emulationHandler()->clearLog(); 
+    } else {
+    QMap<QString, QStringList> map;
+    QStringList text;
+    text << "text/plain";
+    map.insert(tr("Log"), text );
+    QString m_logName = OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
+    if (m_logName.isEmpty() ) return;
+
+    m_recordLog->setText( tr("Stop log") ); 
+    m_recordingLog = true;
+    currentSession()->emulationHandler()->startLogging(m_logName); 
+    }
+}
+
 void MainWindow::slotSaveHistory() {
     QMap<QString, QStringList> map;
     QStringList text;

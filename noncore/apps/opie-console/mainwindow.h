@@ -3,6 +3,7 @@
 
 #include <qmainwindow.h>
 #include <qlist.h>
+#include <qfile.h>
 
 #include "session.h"
 
@@ -73,6 +74,7 @@ private slots:
     void slotSessionChanged( Session* );
     void slotKeyReceived(FKey, ushort, ushort, bool);
     void slotSaveHistory();
+    void slotSaveLog();
 
     /* what could these both slot do? */
     void slotCopy();
@@ -126,11 +128,13 @@ private:
     QAction* m_fullscreen;
     QAction* m_wrap;
     QAction* m_closewindow;
+	QAction* m_recordLog;
 
     FunctionKeyboard *m_kb;
     int m_runScript_id;
     bool m_isFullscreen;
     bool m_isWrapped;
+    bool m_recordingLog;
 
     QWidget* savedParentFullscreen;
 };

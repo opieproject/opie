@@ -85,6 +85,7 @@ using namespace Opie::Core;
 #include <sys/ioctl.h>
 #include <sys/wait.h>
 
+
 #ifdef HAVE_OPENPTY
 #include <pty.h>
 #endif

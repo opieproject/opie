@@ -27,9 +27,13 @@ class Profile;
 class QWidget;
 class QPushButton;
 class TEWidget;
+class QFile;
 class TEmulation;
 class QFont;
+class QTextStream;
 class Script;
+class Logger;
+
 class EmulationHandler : public QObject {
     Q_OBJECT
 public:
@@ -55,14 +59,24 @@ public:
     /* Create a new script and record all typed characters */
     void startRecording();
 
+	void startLogging(const QString);
+
     /* Return whether we are currently recording a script */
     bool isRecording();
+
+	/* Return whether we are currently recording a log */
+	bool isLogging();
+	
+	QString logFileName();
 
     /* Return the current script (or NULL) */
     Script *script();
 
     /* Stop recording and remove the current script from memory */
     void clearScript();
+    
+    /* Stop logging and remove the current log from memory */
+    void clearLog();
 
     /* Run a script by forwarding its keys to the EmulationLayer */
     void runScript(const Script *);
@@ -90,6 +104,8 @@ private:
     TEWidget* m_teWid;
     TEmulation* m_teEmu;
     Script * m_script;
+    Logger *m_log;
+    QString m_logFileName;
 };
 
 #endif

@@ -2,9 +2,14 @@
 #include "profile.h"
 #include "emulation_handler.h"
 #include "script.h"
+#include "logger.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
+
+#include <qfile.h>
+#include <qtextstream.h>
+
 using namespace Opie::Core;
 
 EmulationHandler::EmulationHandler( const Profile& prof, QWidget* parent,const char* name )
@@ -16,6 +21,7 @@ EmulationHandler::EmulationHandler( const Profile& prof, QWidget* parent,const c
 	setWrap(prof.readNumEntry("Wrap", 80) ? 0 : 80);
     m_teWid->setMinimumSize(150, 70 );
     m_script = 0;
+    m_log = 0;
     parent->resize( m_teWid->calcSize(80, 24 ) );
     m_teEmu = new TEmuVt102(m_teWid );
 
@@ -38,6 +44,7 @@ EmulationHandler::~EmulationHandler() {
         clearScript();
     delete m_teEmu;
     delete m_teWid;
+    delete m_log;
 }
 
 void EmulationHandler::load( const Profile& prof) {
@@ -68,7 +75,11 @@ void EmulationHandler::load( const Profile& prof) {
 }
 void EmulationHandler::recv( const QByteArray& ar) {
     m_teEmu->onRcvBlock(ar.data(), ar.count() );
+     	if ( isLogging() ) {
+		m_log->append( ar );
+	}
 }
+
 void EmulationHandler::recvEmulation(const char* src, int len ) {
     QByteArray ar(len);
 
@@ -77,6 +88,8 @@ void EmulationHandler::recvEmulation(const char* src, int len ) {
         m_script->append(ar);
     emit send(ar);
 }
+
+
 QWidget* EmulationHandler::widget() {
     return m_teWid;
 }
@@ -184,9 +197,23 @@ bool EmulationHandler::isRecording() {
     return (m_script != 0);
 }
 
+bool EmulationHandler::isLogging() {
+	return (m_log != 0);
+}
+
 void EmulationHandler::startRecording() {
     if (!isRecording())
         m_script = new Script();
+}
+
+void EmulationHandler::startLogging(const QString fileName) {
+	m_logFileName = fileName;
+	if (!isLogging())
+		m_log = new Logger(m_logFileName);
+}
+
+QString EmulationHandler::logFileName() {
+	return m_logFileName;
 }
 
 void EmulationHandler::clearScript() {
@@ -194,6 +221,13 @@ void EmulationHandler::clearScript() {
         delete m_script;
         m_script = 0;
     }
+}
+
+void EmulationHandler::clearLog() {
+	if (isLogging()) {
+		delete m_log;
+		m_log = 0;
+	}
 }
 
 void EmulationHandler::runScript(const Script *script) {
