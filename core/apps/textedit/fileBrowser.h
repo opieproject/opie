@@ -63,13 +63,13 @@ public:
     FileSelector *fileSelector;
     QString mimeType;
 public slots:
-    
+        void setFileView( int );
+
 private:
 //    QDict<void> mimes;
     QRegExp tf;
     QStringList getMimeTypes();
     void fillCombo( const QString&);
-    void setFileView( int );
 
 private slots:
     void populateList();

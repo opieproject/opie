@@ -98,7 +98,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
 
 
     ListView = new QListView( this, "ListView" );
-    ListView->setMinimumSize( QSize( 100, 25 ) );
+//     ListView->setMinimumSize( QSize( 100, 25 ) );
     ListView->addColumn( tr( "Name" ) );
     ListView->setColumnWidth(0,120);
     ListView->setSorting( 2, FALSE);
@@ -527,5 +527,4 @@ void fileBrowser::fillCombo(const QString &currentPath) {
         dirPathStringList.prepend(currentPath );
         dirPathCombo->insertStringList( dirPathStringList,-1);
     }
-
 }
