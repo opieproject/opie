@@ -272,9 +272,9 @@ static int compareAppletPositions(const void *a, const void *b)
 {
     const MenuApplet* aa = *(const MenuApplet**)a;
     const MenuApplet* ab = *(const MenuApplet**)b;
-    int d = ab->iface->position() - aa->iface->position();
+    int d = aa->iface->position() - ab->iface->position();
     if ( d ) return d;
-    return QString::compare(ab->library->library(),aa->library->library());
+    return QString::compare(aa->library->library(),ab->library->library());
 }
 
 void StartMenu::clearApplets()
