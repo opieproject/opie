@@ -85,7 +85,7 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
     edited=false;
     doPopulate=true;
     QVBoxLayout *vbox = new QVBoxLayout( this,0, -1, "Vlayout" );
-    QHBoxLayout *hbox = new QHBoxLayout( this );
+    QHBoxLayout *hbox = new QHBoxLayout( this, 0, -1, "HLayout" );
 
     view = new QMultiLineEdit(this, "OpieNotesView");
 
@@ -108,6 +108,11 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
     newButton= new QPushButton( this, "newButton" );
     newButton->setText(tr("New"));
     hbox->addWidget( newButton);
+
+    deleteButton= new QPushButton( this, "deleteButton" );
+    deleteButton->setText(tr("Delete"));
+    hbox->addWidget( deleteButton);
+
     vbox->addItem(hbox);
 
     connect( box, SIGNAL( mouseButtonPressed( int, QListBoxItem *, const QPoint&)),
@@ -117,6 +122,7 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
 
     connect(view,SIGNAL( textChanged() ), this, SLOT(slotViewEdited() ) );
     connect(newButton, SIGNAL(clicked()), this, SLOT(slotNewButton()));
+    connect(deleteButton, SIGNAL(clicked()), this, SLOT(slotDeleteButton()));
     populateBox();
     load();
     setCaption("Notes");
@@ -124,8 +130,11 @@ NotesControl::NotesControl( QWidget *parent, const char *name )
 }
 
 void NotesControl::slotDeleteButton() {
+
     QString selectedText = box->currentText();
     qDebug("deleting "+selectedText);
+
+    if( !selectedText.isEmpty()) {
     Config cfg("Notes");
     cfg.setGroup("Docs");
     int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
@@ -151,6 +160,7 @@ void NotesControl::slotDeleteButton() {
         }
     }
     populateBox();
+    }
 }
 
 void NotesControl::slotNewButton() {
@@ -247,13 +257,14 @@ void NotesControl::save() {
 
             oldDocName=docname;
             edited=false;
+            qDebug("save");
+            if (doPopulate)
+                populateBox();
         }
-        qDebug("save");
-        if (doPopulate)
-            populateBox();
-    }
     cfg.writeEntry( "LastDoc",oldDocName );
     cfg.write();    
+        
+    }
 }
 
 void NotesControl::populateBox() {
@@ -275,9 +286,9 @@ void NotesControl::populateBox() {
 
 void NotesControl::load() {
 
-    Config cfg("Notes");
-    cfg.setGroup("Docs");
     if(!loaded) {
+        Config cfg("Notes");
+        cfg.setGroup("Docs");
         QString lastDoc=cfg.readEntry( "LastDoc","");
         DocLnk nf;
         nf.setType("text/plain");
@@ -286,9 +297,9 @@ void NotesControl::load() {
         loadDoc(nf);
         loaded=true;
         oldDocName=lastDoc;
-    }    
-    cfg.writeEntry( "LastDoc",oldDocName );
-    cfg.write();
+        cfg.writeEntry( "LastDoc",oldDocName );
+        cfg.write();
+    }
 }
 
 void NotesControl::load(const QString & file) {
@@ -349,6 +360,7 @@ void NotesApplet::mousePressEvent( QMouseEvent *) {
         vc->doPopulate=true;
         vc->populateBox();
         vc->doPopulate=false;
+        vc->loaded=false;
 
         vc->load();
 //        this->setFocus();
