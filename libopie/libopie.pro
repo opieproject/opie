@@ -27,31 +27,33 @@ HEADERS   = ofontmenu.h \
     pim/otodoaccessvcal.h \
     pim/orecur.h \
     pim/opimstate.h \
-    orecurrancewidget.h
+    orecurrancewidget.h \
+    oticker.h 
 #    pim/otodoaccesssql.h \
 
 SOURCES   = ofontmenu.cc  \
         ocolorbutton.cpp \
-	    xmltree.cc \
-	    ofiledialog.cc ofileselector.cc \
+      xmltree.cc \
+      ofiledialog.cc ofileselector.cc \
             ocheckitem.cpp tododb.cpp todoevent.cpp \
-	    todovcalresource.cpp  colordialog.cpp \
-	    colorpopupmenu.cpp oclickablelabel.cpp \
-	    oprocctrl.cpp oprocess.cpp \
-	    odevice.cpp otimepicker.cpp \
-	     otabwidget.cpp otabbar.cpp \
+      todovcalresource.cpp  colordialog.cpp \
+      colorpopupmenu.cpp oclickablelabel.cpp \
+      oprocctrl.cpp oprocess.cpp \
+      odevice.cpp otimepicker.cpp \
+       otabwidget.cpp otabbar.cpp \
              ofontselector.cpp \
              pim/otodo.cpp \
              pim/opimrecord.cpp \
-	     pim/otodoaccess.cpp \
-	     pim/otodoaccessbackend.cpp \
+       pim/otodoaccess.cpp \
+       pim/otodoaccessbackend.cpp \
              pim/otodoaccessxml.cpp \
              pim/ocontact.cpp \
              pim/ocontactaccess.cpp \
-	     pim/otodoaccessvcal.cpp \
-	     pim/orecur.cpp \
-	     pim/opimstate.cpp \
-	     orecurrancewidget.cpp
+       pim/otodoaccessvcal.cpp \
+       pim/orecur.cpp \
+       pim/opimstate.cpp \
+       orecurrancewidget.cpp \
+       oticker.cpp
 #             pim/otodoaccesssql.cpp \
 
 TARGET    = opie
