@@ -87,6 +87,7 @@ audio/x-wav     wav
 audio/x-ogg    ogg
 chemical/x-pdb      xyz
 etext/x-palm-pdb	pdb
+guten/plain gtn
 image/gif     gif
 image/ief     ief
 image/jpeg      jpeg jpg jpe
