@@ -19,7 +19,9 @@
  */
 
 #define __HTTP_C__
+#ifndef __UNIX__
 #define __UNIX__
+#endif
 
 #ifdef __UNIX__
 #include <sys/socket.h>

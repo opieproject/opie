@@ -19,7 +19,9 @@
  */
 
 #define __CSV_C__
+#ifndef __UNIX__
 #define __UNIX__
+#endif
 
 #include <string.h>
 #include <stdlib.h>
