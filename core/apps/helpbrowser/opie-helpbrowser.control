@@ -1,0 +1,10 @@
+Files: bin/helpbrowser apps/Applications/helpbrowser.desktop docs
+Priority: optional
+Section: qpe/applications
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Arch: iPAQ
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Browse HTML help documents
+ The HTML help browser for the Qtopia environment.

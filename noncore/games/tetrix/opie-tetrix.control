@@ -1,0 +1,10 @@
+Files: bin/tetrix apps/Games/tetrix.desktop
+Priority: optional
+Section: opie/games
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Arch: iPAQ
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Game: control falling blocks
+ A game for the Qtopia environment.

@@ -1,9 +1,0 @@
-Files: plugins/applets/libclipboardapplet.so*
-Priority: optional
-Section: qpe/taskbar
-Maintainer: Warwick Allison <warwick@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-3
-Depends: qpe-base ($QPE_VERSION)
-Description: Clipboard applet
- Clipboard applet for the Qtopia environment taskbar.

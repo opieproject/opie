@@ -1,0 +1,10 @@
+Files: EXCLUDED bin/tableviewer apps/Applications/tableviewer.desktop
+Priority: optional
+Section: opie/applications
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Arch: iPAQ
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: XML database browsers
+ A table/database viewer for the Qtopia environment.

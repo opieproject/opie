@@ -1,0 +1,9 @@
+Files: bin/language apps/Settings/Language.desktop
+Priority: optional
+Section: opie/settings
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Language settings dialog
+ For the Qtopia environment.

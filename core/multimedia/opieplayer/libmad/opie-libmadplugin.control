@@ -1,0 +1,9 @@
+Files: plugins/codecs/libmadplugin.so.1.0.0 plugins/codecs/libmadplugin.so.1.0 plugins/codecs/libmadplugin.so.1 plugins/codecs/libmadplugin.so
+Priority: optional
+Section: opie/plugins
+Maintainer: John Ryland <jryland@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: MP3 file plugin using libmad
+ Plugin to play MP3 files with the mediaplayer in the Qtopia environment.

@@ -1,0 +1,10 @@
+Files: bin/showimg apps/Applications/showimg.desktop
+Priority: optional
+Section: opie/applications
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Image Viewer
+ The image viewer for the Qtopia environment. Supports
+ Whichever formats are compiled into Qt/Embedded (eg. PNG).
