@@ -456,6 +456,14 @@ void LauncherTabWidget::launcherMessage( const QCString &msg, const QByteArray &
         int id; stream >> id;
         odebug << "Doctab enabled " << id << oendl;
         reCheckDoctab(id);
+    } else if ( msg == "setStaticBackground(bool)" ) {
+        int set; stream >> set;
+        odebug << "setStaticBackground " << set << oendl;
+        for (int i = 0; i < categoryBar->count(); i++ )
+        {
+            LauncherView* view = static_cast<LauncherTab*>( categoryBar->tab(i) )->view;
+            view->iconView()->setStaticBackgroundPicture( set );
+        }
     }
 }
 

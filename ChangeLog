@@ -2,6 +2,8 @@
 
 	New Features
 	------------
+	* Launcher: Support a static background pixmap (mickeyl)
+	* LauncherSettings: Choose whether to have a static background pixmap (mickeyl)
 
 	Fixed Bugs
 	----------

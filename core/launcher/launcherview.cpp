@@ -294,12 +294,7 @@ LauncherIconView::LauncherIconView( QWidget* parent, const char* name )
     connect(&m_eyeTimer,SIGNAL(timeout()),this,SLOT(stopEyeTimer()));
     Config config( "Launcher" );
     config.setGroup( "GUI" );
-    staticBackground = config.readEntry( "StaticBackground", false );
-    if ( staticBackground )
-    {
-        setStaticBackground( true );
-        verticalScrollBar()->setTracking( false );
-    }
+    setStaticBackgroundPicture( config.readBoolEntry( "StaticBackground", true ) );   
 }
 
 LauncherIconView::~LauncherIconView()
@@ -314,6 +309,21 @@ LauncherIconView::~LauncherIconView()
     }
 #endif
 }
+
+void LauncherIconView::setStaticBackgroundPicture( bool enable )
+{
+    staticBackground = enable;
+    if ( staticBackground )
+    {
+        setStaticBackground( true );
+        verticalScrollBar()->setTracking( false );
+    }
+    else
+    {
+        setStaticBackground( false );
+        verticalScrollBar()->setTracking( true );
+    }    
+}    
 
 int LauncherIconView::compare(const AppLnk* a, const AppLnk* b)
 {
@@ -370,12 +380,12 @@ void LauncherIconView::drawBackground( QPainter *p, const QRect &r )
     {
         if ( staticBackground )
         {
-            p->drawPixmap( r.x(), r.y(), bgPixmap, r.x(), r.y(), r.width(), r.height() );
+            p->drawTiledPixmap( r, bgPixmap, QPoint( r.x() % bgPixmap.width(), r.y() % bgPixmap.height() ) );
         }
         else
         {
-            p->drawTiledPixmap( r, bgPixmap, QPoint( (r.x() + contentsX()) % bgPixmap.width(),
-                                                     (r.y() + contentsY()) % bgPixmap.height() ) );
+        p->drawTiledPixmap( r, bgPixmap, QPoint( (r.x() + contentsX()) % bgPixmap.width(),
+                                                 (r.y() + contentsY()) % bgPixmap.height() ) );
         }
     }
 }

@@ -82,8 +82,8 @@ public:
     void clearViewFont();
 
     void setColNumber( int );
-
     void relayout(void);
+    LauncherIconView* iconView() { return icons; };
 
 signals:
     void clicked( const AppLnk * );
@@ -169,6 +169,7 @@ public:
     void setBigIcons( bool bi );
     void updateCategoriesAndMimeTypes();
     void setBusyIndicatorType ( BusyIndicatorType t );
+    void setStaticBackgroundPicture( bool enable );
     void doAutoScroll()
     {
     // We don't want rubberbanding (yet)

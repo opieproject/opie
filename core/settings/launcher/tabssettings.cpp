@@ -83,6 +83,9 @@ TabsSettings::TabsSettings ( QWidget *parent, const char *name )
 
 	m_busyani = new QCheckBox ( tr( "Enable animated busy indicator" ), this );
 	lay-> addMultiCellWidget ( m_busyani, 6, 6, 0, 1 );
+        
+        m_staticbackground = new QCheckBox( tr( "Enable static background pixmap" ), this );
+        lay->addMultiCellWidget( m_staticbackground, 7, 7, 0, 1 );
 
 	p1-> setEnabled ( false );
 	p3-> setEnabled ( false );
@@ -95,6 +98,7 @@ TabsSettings::TabsSettings ( QWidget *parent, const char *name )
 	QWhatsThis::add ( p3, tr( "Deletes a Tab from the Launcher." ) + QString ( "<center><br><i>not yet implemented</i><br>Please use the tabmanager</center>." ));
         	QWhatsThis::add ( m_bigbusy, tr( "Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar." ));
 	QWhatsThis::add ( m_busyani, tr( "Activate this, if you want an animatedbusy indicator for starting applications in the Launcher." ));
+	QWhatsThis::add ( m_staticbackground, tr( "Activate this, if you want the background pixmap not to scroll with the icons." ));
 }
 
 void TabsSettings::init ( )
@@ -122,6 +126,7 @@ void TabsSettings::init ( )
 	cfg. setGroup ( "GUI" );
 	m_busyani-> setChecked ( cfg. readEntry ( "BusyType" ). lower ( ) == "animated" );
                 m_bigbusy->setChecked(  cfg. readBoolEntry ( "BigBusy" )  );
+        m_staticbackground->setChecked( cfg.readBoolEntry( "StaticBackground", true ) );
 }
 
 
@@ -279,13 +284,17 @@ void TabsSettings::accept ( )
 	cfg. setGroup ( "GUI" );
 	QString busytype = QString ( m_busyani-> isChecked ( ) ? "Animated" : "" );
 	cfg. writeEntry ( "BusyType", busytype );
-
-        	cfg. writeEntry ( "BigBusy", m_bigbusy->isChecked( ) );
+	cfg. writeEntry ( "BigBusy", m_bigbusy->isChecked( ) );
+	cfg. writeEntry ( "StaticBackground", m_staticbackground->isChecked( ) );
 
 	{
 		QCopEnvelope e ( "QPE/Launcher", "setBusyIndicatorType(QString)" );
 		e << busytype;
 	}
+	{
+		QCopEnvelope e ( "QPE/Launcher", "setStaticBackground(bool)" );
+		e << m_staticbackground->isChecked();
+	}        
 }
 
 void TabsSettings::newClicked ( )
