@@ -31,21 +31,11 @@
 
 */
 
-#include <qpe/qpetoolbar.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/storage.h>
-#include <qpe/mimetype.h>
-#include <qpe/global.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
+#include <qtoolbar.h>
 
 #include <opie/ofiledialog.h>
 
-#include <qdatetime.h>
-#include <qdir.h>
 #include <qmessagebox.h>
-#include <qregexp.h>
-#include <qtextstream.h>
 
 #include "playlistselection.h"
 #include "playlistwidget.h"
@@ -55,7 +45,6 @@
 #include "playlistfileview.h"
 
 //only needed for the random play
-#include <stdlib.h>
 #include <assert.h>
 
 PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name )
@@ -667,6 +656,7 @@ void PlayListWidget::openFile() {
     QStringList audio, video, all;
     audio << "audio/*";
     audio << "playlist/plain";
+    audio << "application/ogg";
     audio << "audio/x-mpegurl";
 
     video << "video/*";
@@ -679,27 +669,28 @@ void PlayListWidget::openFile() {
     types.insert("Video", video );
 
     QString str = OFileDialog::getOpenFileName( 1,
-                  cfg.readEntry("LastDirectory",QPEApplication::documentDir()),"",
-                  types, 0 );
-    if(str.left(2) == "//") str=str.right(str.length()-1);
-    cfg.writeEntry("LastDirectory" ,QFileInfo(str).dirPath());
+                                                cfg.readEntry("LastDirectory",QPEApplication::documentDir()),"",
+                                                types, 0 );
 
+    if(str.left(2) == "//")  {
+        str=str.right(str.length()-1);
+    }
+    cfg.writeEntry( "LastDirectory" ,QFileInfo( str ).dirPath() );
 
     if( !str.isEmpty() ) {
+
         qDebug( "Selected filename is " + str );
         filename = str;
         DocLnk lnk;
-        Config cfg( "OpiePlayer" );
-        cfg.setGroup("PlayList");
 
         if( filename.right( 3) == "m3u" ||  filename.right(3) == "pls" ) {
             readListFromFile( filename );
         } else {
             lnk.setName( QFileInfo(filename).baseName() ); //sets name
             lnk.setFile( filename ); //sets file name
-            d->selectedFiles->addToSelection(  lnk);
+            d->selectedFiles->addToSelection(  lnk );
             writeCurrentM3u();
-            d->selectedFiles->setSelectedItem( lnk.name());
+            d->selectedFiles->setSelectedItem( lnk.name() );
         }
     }
 }

@@ -3,6 +3,7 @@ CONFIG		= qt warn_on debug
 DESTDIR		= $(OPIEDIR)/bin
 SUBDIRS		= db ui
 HEADERS		= tableviewer.h \
+		  xmlencodeattr.h \
 		  ui/commonwidgets.h \
 		  ui/tvbrowseview.h \
 		  ui/tvlistview.h \
@@ -17,6 +18,7 @@ HEADERS		= tableviewer.h \
 		  db/csvsource.h
 SOURCES		= main.cpp \
 		  tableviewer.cpp \
+		  xmlencodeattr.cpp \
 		  ui/commonwidgets.cpp \
 		  ui/tvbrowseview.cpp \
 		  ui/tvfilterview.cpp \

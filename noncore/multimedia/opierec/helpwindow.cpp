@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: helpwindow.cpp,v 1.2 2003-05-26 03:13:01 llornkcor Exp $
+** $Id: helpwindow.cpp,v 1.3 2003-08-09 16:51:16 kergoth Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **

@@ -31,20 +31,6 @@
 
 */
 
-#include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
-#include <opie/oticker.h>
-
-#include <qwidget.h>
-#include <qpixmap.h>
-#include <qbutton.h>
-#include <qpainter.h>
-#include <qframe.h>
-#include <qlayout.h>
-#include <qdir.h>
-#include <stdlib.h>
-#include <stdio.h>
 
 #include "audiowidget.h"
 #include "mediaplayerstate.h"
@@ -190,7 +176,7 @@ void AudioWidget::loadSkin()
 
     time.setFocusPolicy( QWidget::NoFocus );
     time.setAlignment( Qt::AlignCenter );
-    
+
 //    time.setFrame(FALSE);
 //    changeTextColor( &time );
 

@@ -31,13 +31,9 @@
 
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <qimage.h>
-#include <qtextstream.h>
-#include <qpe/resource.h>
 
-#include <qfile.h>
+#include <qtextstream.h>
+
 #include <qdir.h>
 
 #include <qgfx_qws.h>
@@ -72,7 +68,7 @@ extern "C" {
 
 using namespace XINE;
 
-Lib::Lib( InitializationMode initMode, XineVideoWidget* widget ) 
+Lib::Lib( InitializationMode initMode, XineVideoWidget* widget )
 {
     m_initialized = false;
     m_duringInitialization = false;
@@ -88,6 +84,16 @@ Lib::Lib( InitializationMode initMode, XineVideoWidget* widget )
         f.open(IO_WriteOnly);
         QTextStream ts( &f );
         ts << "misc.memcpy_method:glibc\n";
+        ts << "# uncomment if you experience double speed audio \n #audio.oss_sync_method:softsync\n";
+        ts << "codec.ffmpeg_pp_quality:3\n";
+        ts << "audio.num_buffers:50\n";
+        ts << "audio.size_buffers:4160\n";
+        ts << "video.num_buffers:20\n";
+        ts << "video.size_buffers:4096\n";
+        ts << "audio.out_num_audio_buf:16\n";
+        ts << "audio.out_size_audio_buf:8096\n";
+        ts << "audio.out_size_zero_buf:1024\n";
+        ts << "audio.passthrough_offset:0\n";
         f.close();
     }
 
@@ -139,7 +145,7 @@ void Lib::initialize()
 
     xine_event_create_listener_thread (m_queue, xine_event_handler, this);
 
-    ::null_preload_decoders( m_stream );
+      ::null_preload_decoders( m_stream );
 
     m_duringInitialization = false;
 }
@@ -191,8 +197,16 @@ int Lib::subVersion() {
 
 int Lib::play( const QString& fileName, int startPos, int start_time ) {
     assert( m_initialized );
+    // FIXME actually a hack imho. Should not be needed to dispose the whole stream
+    // but without we get wrong media length reads from libxine for the second media
+    //xine_dispose ( m_stream );
 
     QString str = fileName.stripWhiteSpace();
+
+    //m_stream = xine_stream_new (m_xine,  m_audioOutput,  m_videoOutput );
+    //m_queue = xine_event_new_queue (m_stream);
+    //xine_event_create_listener_thread (m_queue, xine_event_handler, this);
+
     if ( !xine_open( m_stream, QFile::encodeName(str.utf8() ).data() ) ) {
         return 0;
     }
@@ -243,15 +257,36 @@ int Lib::currentTime() const {
 
     int pos, time, length;
     xine_get_pos_length( m_stream, &pos, &time, &length );
-    return time/1000;
+    if ( time > 0 )  {
+        return time/1000;
+    } else {
+        return 0;
+    }
 }
 
 int Lib::length() const {
       assert( m_initialized );
 
       int pos, time, length;
-      xine_get_pos_length( m_stream, &pos, &time, &length );
-      return length/1000;
+/* dilb: patch to solve the wrong stream length reported to the GUI*/
+      int iRetVal=0, iTestLoop=0;
+      
+      do
+      	{
+	iRetVal = xine_get_pos_length( m_stream, &pos, &time, &length );
+	if (iRetVal)
+	   {/* if the function didn't return 0, then pos, time and length are valid.*/
+	   return length/1000;
+	   }
+	/*don't poll too much*/
+	usleep(100000);
+	iTestLoop++;
+	}
+      while ( iTestLoop < 10 ); /* if after 1s, we still don't have any
+valid stream, then return -1 (this value could be used to make the stream
+unseekable, but it should never occur!! Mr. Murphy ? :) ) */
+
+      return -1;
 }
 
 bool Lib::isSeekable() const {
@@ -366,9 +401,7 @@ void Lib::setScaling( bool scale ) {
 void Lib::setGamma( int value ) {
     assert( m_initialized );
 
-  //qDebug( QString( "%1").arg(value)  );
-  /* int gammaValue = ( 100 + value ); */
-  ::null_set_videoGamma( m_videoOutput, value );
+   ::null_set_videoGamma( m_videoOutput, value );
 }
 
 bool Lib::isScaling() const {

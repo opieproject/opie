@@ -119,7 +119,7 @@ void Server :: readLocalIpks( Server *local )
         QString file = (*it)->file();
 
         // Changed to display the filename (excluding the path)
-        QString packageName = Utils::getFilenameFromIpkFilename( file );
+        QString packageName = Utils::getPackageNameFromIpkFilename( file );      
         QString ver = Utils::getPackageVersionFromIpkFilename( file );
         Package *package = new Package( packageName );
         package->setVersion( ver );
@@ -244,6 +244,9 @@ void Server :: buildLocalPackages( Server *local )
 {
     Package *curr;
     QListIterator<Package> it( packageList );
+    
+    QList<Package> *locallist = &local->getPackageList();
+    
     for ( ; it.current(); ++it )
     {
         curr = it.current();
@@ -259,6 +262,14 @@ void Server :: buildLocalPackages( Server *local )
             curr->setLocalPackage( p );
             if ( p )
             {
+                // Replace local version 
+                if ( curr->getVersion() > p->getVersion() )
+                {
+                    int pos = locallist->at();
+                    locallist->remove( p );
+                    locallist->insert( pos, curr );
+                }
+                
                 // Set some default stuff like size and things
                 if ( p->getInstalledVersion() == curr->getVersion() )
                 {

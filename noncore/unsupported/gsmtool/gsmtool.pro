@@ -7,7 +7,7 @@ SOURCES		= main.cpp gsmtool.cpp
 # This doesn't actually work...
 TMAKE_CXXFLAGS  += -fexceptions
 INCLUDEPATH	+= $(OPIEDIR)/include
-INCLUDEPATH	+= $(GSMLIBDIR)
+#INCLUDEPATH	+= $(GSMLIBDIR)
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -L$(GSMLIBDIR)/gsmlib/.libs -lgsmme
 INTERFACES	= gsmtoolbase.ui

@@ -7,19 +7,13 @@
 
 #include <opie/oprocess.h>
 
-#include <qpe/filemanager.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
 
-#include <qmessagebox.h>
-#include <qstringlist.h>
 #include <qfile.h>
-#include <qcstring.h>
-#include <qlineedit.h>
 #include <qmultilineedit.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
-#include <qvariant.h>
 
 #include <errno.h>
 
@@ -127,13 +121,13 @@ Output::Output( const QStringList commands, QWidget* parent,  const char* name, 
    QStringList cmmds;
 //   cmmds=QStringList::split( " ", commands, false);
    cmmds=commands;
-//   qDebug("count %d", cmmds.count());   
+//   qDebug("count %d", cmmds.count());
    if ( !name )
        setName( tr("Output"));
-    resize( 196, 269 ); 
+    resize( 196, 269 );
     setCaption( name );
 
-    OutputLayout = new QGridLayout( this ); 
+    OutputLayout = new QGridLayout( this );
     OutputLayout->setSpacing( 2);
     OutputLayout->setMargin( 2);
 
@@ -161,7 +155,7 @@ Output::Output( const QStringList commands, QWidget* parent,  const char* name, 
 //     connect( , SIGNAL(received(const QByteArray &)),
 //             this, SLOT(commandStdin(const QByteArray &)));
 
-//    * proc << commands.latin1(); 
+//    * proc << commands.latin1();
       for ( QStringList::Iterator it = cmmds.begin(); it != cmmds.end(); ++it ) {
          qDebug( "%s", (*it).latin1() );
          * proc << (*it).latin1();
@@ -169,10 +163,10 @@ Output::Output( const QStringList commands, QWidget* parent,  const char* name, 
 
      if(!proc->start(OProcess::NotifyOnExit, OProcess::All)) {
 
-         OutputEdit->append("Process could not start");
+         OutputEdit->append(tr("Process could not start") );
          OutputEdit->setCursorPosition( OutputEdit->numLines() + 1,0,FALSE);
          perror("Error: ");
-         QString errorMsg="Error\n"+(QString)strerror(errno);
+         QString errorMsg=tr("Error\n")+(QString)strerror(errno);
          OutputEdit->append( errorMsg);
          OutputEdit->setCursorPosition( OutputEdit->numLines() + 1,0,FALSE);
      }
@@ -187,7 +181,7 @@ void Output::saveOutput() {
     fileDlg = new InputDialog(this,tr("Save output to file (name only)"),TRUE, 0);
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
-      QString  filename = QPEApplication::documentDir(); 
+      QString  filename = QPEApplication::documentDir();
       if(filename.right(1).find('/') == -1)
           filename+="/";
       QString name = fileDlg->LineEdit1->text();
@@ -245,7 +239,7 @@ void Output::commandStderr(OProcess*, char *buffer, int buflen) {
 void Output::processFinished() {
 
     delete proc;
-    OutputEdit->append( "\nFinished\n");
+    OutputEdit->append( tr("\nFinished\n") );
     OutputEdit->setCursorPosition( OutputEdit->numLines() + 1,0,FALSE);
 //    close();
 //     disconnect( layer(), SIGNAL(received(const QByteArray &)),
@@ -259,7 +253,7 @@ InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags
 {
     if ( !name )
         setName( "InputDialog" );
-    resize( 234, 50 ); 
+    resize( 234, 50 );
     setMaximumSize( QSize( 240, 50 ) );
     setCaption( tr(name ) );
 

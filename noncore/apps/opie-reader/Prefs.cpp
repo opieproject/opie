@@ -31,7 +31,7 @@ CLayoutPrefs::CLayoutPrefs( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
     QHBoxLayout* hb = new QHBoxLayout(this);
-    QButtonGroup* bg = new QButtonGroup(2, Qt::Horizontal, "Text", this);
+    QButtonGroup* bg = new QButtonGroup(2, Qt::Horizontal, tr("Text"), this);
     hb->addWidget(bg);
 
     StripCR = new QCheckBox( bg );
@@ -365,7 +365,7 @@ CMiscPrefs::CMiscPrefs( QWidget* parent,  const char* name, WFlags fl )
 
     hl->setMargin( 0 );
 
-    QGroupBox* gb = new QGroupBox(1, Qt::Horizontal, "Select Action", this);
+    QGroupBox* gb = new QGroupBox(1, Qt::Horizontal, tr("Select Action"), this);
     hl->addWidget( gb, 0, 0 );
 
     annotation = new QCheckBox( gb );
@@ -377,7 +377,7 @@ CMiscPrefs::CMiscPrefs( QWidget* parent,  const char* name, WFlags fl )
     clipboard = new QCheckBox( gb );
     clipboard->setText( tr( "Clipboard" ) );
 
-    QButtonGroup* bg = new QButtonGroup(1, Qt::Horizontal, "Plucker", this);
+    QButtonGroup* bg = new QButtonGroup(1, Qt::Horizontal, tr("Plucker"), this);
     hl->addWidget( bg, 0 , 1 );
 
     Depluck = new QCheckBox( bg );
@@ -484,7 +484,7 @@ CInterPrefs::CInterPrefs( QWidget* parent,  const char* name, WFlags fl )
 
     QVBoxLayout* vb = new QVBoxLayout;
 
-    gb = new QGroupBox(1, Qt::Horizontal, "Dictionary", this);
+    gb = new QGroupBox(1, Qt::Horizontal, tr("Dictionary"), this);
 
     TextLabel = new QLabel( gb );
     TextLabel->setText( tr( "Application" ) );
@@ -500,7 +500,7 @@ CInterPrefs::CInterPrefs( QWidget* parent,  const char* name, WFlags fl )
     twotouch->setText( tr( "Two/One\nTouch" ) );
 
     SwapMouse = new QCheckBox( gb );
-    SwapMouse->setText("Swap Tap\nActions");
+    SwapMouse->setText(tr("Swap Tap\nActions") );
 
 
     vb->addWidget(gb);
@@ -523,24 +523,24 @@ void CButtonPrefs::populate(MenuButton *mb)
 #endif
 {
     mb->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-    mb->insertItem("<Nothing>");
-    mb->insertItem("Open file");
-    mb->insertItem("Autoscroll");
-    mb->insertItem("Bookmark");
-    mb->insertItem("Annotate");
-    mb->insertItem("Fullscreen");
+    mb->insertItem(tr("<Nothing>") );
+    mb->insertItem(tr("Open file") );
+    mb->insertItem(tr("Autoscroll") );
+    mb->insertItem(tr("Bookmark") );
+    mb->insertItem(tr("Annotate") );
+    mb->insertItem(tr("Fullscreen") );
 
-    mb->insertItem("Zoom in");
-    mb->insertItem("Zoom out");
-    mb->insertItem("Back");
-    mb->insertItem("Forward");
-    mb->insertItem("Home");
-    mb->insertItem("Page up");
-    mb->insertItem("Page down");
-    mb->insertItem("Line up");
-    mb->insertItem("Line down");
-    mb->insertItem("Beginning");
-    mb->insertItem("End");
+    mb->insertItem(tr("Zoom in") );
+    mb->insertItem(tr("Zoom out") );
+    mb->insertItem(tr("Back") );
+    mb->insertItem(tr("Forward") );
+    mb->insertItem(tr("Home") );
+    mb->insertItem(tr("Page up") );
+    mb->insertItem(tr("Page down") );
+    mb->insertItem(tr("Line up") );
+    mb->insertItem(tr("Line down") );
+    mb->insertItem(tr("Beginning") );
+    mb->insertItem(tr("End") );
 }
 
 CButtonPrefs::CButtonPrefs( QWidget* parent,  const char* name, WFlags fl )
@@ -551,7 +551,7 @@ CButtonPrefs::CButtonPrefs( QWidget* parent,  const char* name, WFlags fl )
 
     hl->setMargin( 0 );
 
-    QLabel* ql = new QLabel("Escape Button", this);
+    QLabel* ql = new QLabel(tr("Escape Button"), this);
     hl->addWidget(ql, 0, 0, Qt::AlignBottom);
 #ifdef USECOMBO
     escapeAction = new QComboBox( this );
@@ -561,7 +561,7 @@ CButtonPrefs::CButtonPrefs( QWidget* parent,  const char* name, WFlags fl )
     populate(escapeAction);
     hl->addWidget(escapeAction, 1, 0, Qt::AlignTop | Qt::AlignLeft);
 
-    ql = new QLabel("Space Button", this);
+    ql = new QLabel(tr("Space Button"), this);
     hl->addWidget(ql, 2, 0, Qt::AlignBottom);
 #ifdef USECOMBO
     spaceAction = new QComboBox( this );
@@ -571,7 +571,7 @@ CButtonPrefs::CButtonPrefs( QWidget* parent,  const char* name, WFlags fl )
     populate(spaceAction);
     hl->addWidget(spaceAction, 3, 0, Qt::AlignTop | Qt::AlignLeft);
 
-    ql = new QLabel("Return Button", this);
+    ql = new QLabel(tr("Return Button"), this);
     hl->addWidget(ql, 2, 1, Qt::AlignBottom);
 #ifdef USECOMBO
     returnAction = new QComboBox( this );
@@ -581,7 +581,7 @@ CButtonPrefs::CButtonPrefs( QWidget* parent,  const char* name, WFlags fl )
     populate(returnAction);
     hl->addWidget(returnAction, 3, 1, Qt::AlignTop | Qt::AlignLeft);
 
-    ql = new QLabel("Left Arrow", this);
+    ql = new QLabel(tr("Left Arrow"), this);
     hl->addWidget(ql, 4, 0, Qt::AlignBottom);
 #ifdef USECOMBO
     leftAction = new QComboBox( this );
@@ -593,7 +593,7 @@ CButtonPrefs::CButtonPrefs( QWidget* parent,  const char* name, WFlags fl )
     leftScroll = new QCheckBox( tr("Scroll Speed"), this );
     hl->addWidget(leftScroll, 6, 0, Qt::AlignTop | Qt::AlignLeft);
 
-    ql = new QLabel("Right Arrow", this);
+    ql = new QLabel(tr("Right Arrow"), this);
     hl->addWidget(ql, 4, 1, Qt::AlignBottom);
 #ifdef USECOMBO
     rightAction = new QComboBox( this );
@@ -605,7 +605,7 @@ CButtonPrefs::CButtonPrefs( QWidget* parent,  const char* name, WFlags fl )
     rightScroll = new QCheckBox( tr("Scroll Speed"), this );
     hl->addWidget(rightScroll, 6, 1, Qt::AlignTop | Qt::AlignLeft);
 
-    ql = new QLabel("Down Arrow", this);
+    ql = new QLabel(tr("Down Arrow"), this);
     hl->addWidget(ql, 7, 0, Qt::AlignBottom);
 #ifdef USECOMBO
     downAction = new QComboBox( this );
@@ -617,7 +617,7 @@ CButtonPrefs::CButtonPrefs( QWidget* parent,  const char* name, WFlags fl )
     downScroll = new QCheckBox( tr("Scroll Speed"), this );
     hl->addWidget(downScroll, 9, 0, Qt::AlignTop | Qt::AlignLeft);
 
-    ql = new QLabel("Up Arrow", this);
+    ql = new QLabel(tr("Up Arrow"), this);
     hl->addWidget(ql, 7, 1, Qt::AlignBottom);
 #ifdef USECOMBO
     upAction = new QComboBox( this );

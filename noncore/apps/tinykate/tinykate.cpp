@@ -8,7 +8,7 @@
 
 /***************************************************************************
  *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
+ *   This program is free softwaSre; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
  *   the Free Software Foundation.                                         *
  *   ONLY VERSION 2 OF THE LICENSE IS APPLICABLE                           *
@@ -17,15 +17,13 @@
 #include <qwidget.h>
 #include <qaction.h>
 #include <qlayout.h>
-#include <qpe/qpetoolbar.h>
-#include <qpe/qpemenubar.h>
+#include <qtoolbutton.h>
+#include <qmenubar.h>
 #include <qpe/resource.h>
 #include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 
 #include <opie/ofiledialog.h>
-
-#include "cgotoline.h"
 
 #include "tinykate.h"
 
@@ -36,21 +34,16 @@
 
 TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     QMainWindow( parent, name, f )
-{ 
+{
+  shutDown=false;
   nextUnnamed=0;
   currentView=0;
   viewCount=0;
-  setCaption("TinyKATE       : line 1      col 1");
+  setCaption(tr("TinyKATE"));
   KGlobal::setAppName("TinyKATE");
 
-  curLine=curCol=1;
-  
-  setToolBarsMovable(FALSE);
-
-        QPEToolBar *bar = new QPEToolBar( this );
-        bar->setHorizontalStretchable( TRUE );
-        QPEMenuBar *mb = new QPEMenuBar( bar );
-        mb->setMargin( 0 );
+  QMenuBar *mb = new QMenuBar( this );
+  mb->setMargin( 0 );
 
   tabwidget=new OTabWidget(this);
   setCentralWidget(tabwidget);
@@ -60,82 +53,88 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
         QPopupMenu *popup = new QPopupMenu( this );
 
   // Action for creating a new document
-        QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ), QString::null, CTRL+Key_N, this, 0 );
+        QAction *a = new QAction( tr( "New" ),  Resource::loadPixmap( "new" ), QString::null, 0, this, 0 );
         a->addTo( popup );
         connect(a, SIGNAL(activated()), this, SLOT(slotNew()));
 
   // Action for opening an exisiting document
-        a = new QAction( tr( "Open" ), Resource::loadPixmap( "fileopen" ), QString::null, CTRL+Key_O, this, 0 );
+        a = new QAction( tr( "Open" ),Resource::loadPixmap( "fileopen" ) , QString::null, 0, this, 0 );
   a->addTo(popup);
         connect(a, SIGNAL(activated()), this, SLOT(slotOpen()));
 
 
   // Action for saving  document
-        a = new QAction( tr( "Save" ), Resource::loadPixmap( "save" ), QString::null, CTRL+Key_S, this, 0 );
+        a = new QAction( tr( "Save" ), Resource::loadPixmap( "save" ) , QString::null, 0, this, 0 );
   a->addTo(popup);
         connect(a, SIGNAL(activated()), this, SLOT(slotSave()));
 
   // Action for saving document to a new name
-        a = new QAction( tr( "Save As" ), Resource::loadPixmap( "save" ), QString::null, 0, this, 0 );
+        a = new QAction( tr( "Save As" ),Resource::loadPixmap( "save" ) , QString::null, 0, this, 0 );
   a->addTo(popup);
         connect(a, SIGNAL(activated()), this, SLOT(slotSaveAs()));
 
   // Action for closing the currently active document
-        a = new QAction( tr( "Close" ), Resource::loadPixmap( "close" ), QString::null, CTRL+Key_W, this, 0 );
+        a = new QAction( tr( "Close" ), Resource::loadPixmap( "quit_icon" ) , QString::null, 0, this, 0 );
   a->addTo(popup);
         connect(a, SIGNAL(activated()), this, SLOT(slotClose()));
-  
+
 
   mb->insertItem(tr("File"),popup);
 
 //EDIT ACTIONS
 
   // Action for cutting text
-        editCut = new QAction( tr( "Cut" ), Resource::loadPixmap( "cut" ), QString::null, CTRL+Key_X, this, 0 );
-        editCut->addTo( bar );
+        editCut = new QToolButton( 0 );
+        editCut->setAutoRaise( true );
+        editCut->setIconSet(  Resource::loadPixmap( "cut" ) );
 
   // Action for Copying text
-        editCopy = new QAction( tr( "Copy" ), Resource::loadPixmap( "copy" ), QString::null, CTRL+Key_C, this, 0 );
-        editCopy->addTo( bar );
+        editCopy = new QToolButton( 0 );
+        editCopy->setAutoRaise( true );
+        editCopy->setIconSet( Resource::loadPixmap( "copy" ) );
 
   // Action for pasting text
-        editPaste = new QAction( tr( "Paste" ), Resource::loadPixmap( "paste" ), QString::null, CTRL+Key_V, this, 0 );
-        editPaste->addTo( bar );
-
+        editPaste =  new QToolButton( 0 );
+        editPaste->setAutoRaise( true );
+        editPaste->setIconSet( Resource::loadPixmap( "paste" ) );
 
   // Action for finding / replacing  text
-        editFindReplace = new QAction( tr( "Replace" ), Resource::loadPixmap("find"), QString::null, CTRL+Key_R, this, 0 );
-        editFind = new QAction( tr( "Find" ), Resource::loadPixmap("find"), QString::null, CTRL+Key_F, this, 0 );
-        editFind->addTo( bar );
+        editFindReplace = new QToolButton( 0 );
+        editFindReplace->setAutoRaise( true );
+        editFindReplace->setIconSet( Resource::loadPixmap("find") );
 
-  // Action for undo
-        editUndo = new QAction( tr( "Undo" ), Resource::loadPixmap( "undo" ), QString::null, CTRL+Key_Z, this, 0 );
-        editUndo->addTo( bar );
+   // Action for undo
+        editUndo = new QToolButton( 0 );
+        editUndo->setAutoRaise( true );
+        editUndo->setIconSet( Resource::loadPixmap( "undo" ) );
 
   // Action for redo
-        editRedo = new QAction( tr( "Redo" ), Resource::loadPixmap( "redo" ), QString::null, CTRL+SHIFT+Key_Z, this, 0 );
-        editRedo->addTo( bar );
-
+        editRedo = new QToolButton( 0 );
+        editRedo->setAutoRaise( true );
+        editRedo->setIconSet( Resource::loadPixmap( "redo" ) );
 
 //VIEW ACITONS
         popup = new QPopupMenu( this );
-  
-  a = new QAction( tr( "Goto" ),  QString::null, CTRL+Key_G, this, 0 );
-        a->addTo( popup );
-        connect(a, SIGNAL(activated()), this, SLOT(slotGoTo()));
-  
+
         viewIncFontSizes = new QAction( tr( "Font +" ), QString::null, 0, this, 0 );
         viewIncFontSizes->addTo( popup );
 
         viewDecFontSizes = new QAction( tr( "Font -" ), QString::null, 0, this, 0 );
         viewDecFontSizes->addTo( popup );
 
-  mb->insertItem(tr("View"),popup);
-
-
+        mb->insertItem(tr("View"),popup);
 
         popup = new QPopupMenu( this );
-  mb->insertItem(tr("Utils"),popup);
+        mb->insertItem(tr("Utils"),popup);
+
+
+        mb->insertItem( editCut );
+        mb->insertItem( editCopy );
+        mb->insertItem( editPaste );
+        mb->insertItem( editFindReplace );
+        mb->insertItem( editUndo );
+        mb->insertItem(  editRedo );
+
 
 //Highlight management
   hlmenu=new QPopupMenu(this);
@@ -150,10 +149,6 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
         utilSettings = new QAction( tr( "Settings" ), QString::null, 0, this, 0 );
         utilSettings->addTo( popup);
 
-  popup->insertSeparator();
-  editFind->addTo(popup);
-  editFindReplace->addTo(popup);
-
   if( qApp->argc() > 1) open(qApp->argv()[1]);
   else slotNew();
 
@@ -162,9 +157,13 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
 TinyKate::~TinyKate( )
 {
   qWarning("TinyKate destructor\n");
-  printf("~TinyKate()\n");
+
+  shutDown=true;
+  while (currentView!=0) {
+	slotClose();
+  }
+
   if( KGlobal::config() != 0 ) {
-  printf("~TinyKate(): delete configs...\n");
     qWarning("deleting KateConfig object..\n");
     delete KGlobal::config();
   }
@@ -193,10 +192,9 @@ void TinyKate::open(const QString & filename)
     viewCount++;
 }
 
-void TinyKate::setDocument(const QString &doc)
+void TinyKate::setDocument(const QString& fileref)
 {
-  printf("tinykate: setDocument(\"%s\")\n",(const char*)doc);
-  open(doc);
+    open( fileref );
 }
 
 void TinyKate::slotCurrentChanged( QWidget * view)
@@ -208,29 +206,24 @@ void TinyKate::slotCurrentChanged( QWidget * view)
     disconnect(editPaste,SIGNAL(activated()),currentView,SLOT(paste()));
     disconnect(editUndo,SIGNAL(activated()),currentView,SLOT(undo()));
     disconnect(editRedo,SIGNAL(activated()),currentView,SLOT(redo()));
-    disconnect(editFindReplace,SIGNAL(activated()),currentView,SLOT(replace()));
-    disconnect(editFind,SIGNAL(activated()),currentView,SLOT(find()));
-        disconnect(viewIncFontSizes,SIGNAL(activated()), currentView,SLOT(slotIncFontSizes()));
-        disconnect(viewDecFontSizes,SIGNAL(activated()), currentView,SLOT(slotDecFontSizes()));
+    disconnect(viewIncFontSizes,SIGNAL(activated()), currentView,SLOT(slotIncFontSizes()));
+    disconnect(viewDecFontSizes,SIGNAL(activated()), currentView,SLOT(slotDecFontSizes()));
     disconnect(hlmenu,SIGNAL(activated(int)), currentView,SLOT(setHl(int)));
     disconnect(utilSettings,SIGNAL(activated()), currentView,SLOT(configDialog()));
-    disconnect(currentView,SIGNAL(newCurPos()),this,SLOT(slotCursorMoved()));
   }
 
   currentView=(KTextEditor::View*)view;
-  
-  connect(editCopy,SIGNAL(activated()),currentView,SLOT(copy()));
-  connect(editCut,SIGNAL(activated()),currentView,SLOT(cut()));
-  connect(editPaste,SIGNAL(activated()),currentView,SLOT(paste()));
-  connect(editUndo,SIGNAL(activated()),currentView,SLOT(undo()));
-  connect(editRedo,SIGNAL(activated()),currentView,SLOT(redo()));
-  connect(editFindReplace,SIGNAL(activated()),currentView,SLOT(replace()));
-  connect(editFind,SIGNAL(activated()),currentView,SLOT(find()));
+
+  connect(editCopy,SIGNAL(clicked()),currentView,SLOT(copy()));
+  connect(editCut,SIGNAL(clicked()),currentView,SLOT(cut()));
+  connect(editPaste,SIGNAL(clicked()),currentView,SLOT(paste()));
+  connect(editUndo,SIGNAL(clicked()),currentView,SLOT(undo()));
+  connect(editRedo,SIGNAL(clicked()),currentView,SLOT(redo()));
   connect(viewIncFontSizes,SIGNAL(activated()), currentView,SLOT(slotIncFontSizes()));
   connect(viewDecFontSizes,SIGNAL(activated()), currentView,SLOT(slotDecFontSizes()));
   connect(hlmenu,SIGNAL(activated(int)), currentView,SLOT(setHl(int)));
   connect(utilSettings,SIGNAL(activated()), currentView,SLOT(configDialog()));
-  connect(currentView,SIGNAL(newCurPos()),this,SLOT(slotCursorMoved()));
+
 }
 
 void TinyKate::slotNew( )
@@ -251,7 +244,7 @@ void TinyKate::slotClose( )
   tabwidget->removePage(dv);
   delete dv->document();
   viewCount--;
-  if (!viewCount) slotNew();
+  if ((!viewCount) && (!shutDown))  slotNew();
 }
 
 void TinyKate::slotSave() {
@@ -287,35 +280,4 @@ void TinyKate::slotSaveAs() {
     // need to change tab label here
   }
 
-}
-
-void TinyKate::slotGoTo()
-{
-  int l,c;
-  if (currentView==0) return;
-  
-  currentView->getCursorPosition(&l,&c);
-
-  CGotoLine g(l);
-  
-  if(g.exec()==QDialog::Accepted)
-  {
-    currentView->setCursorPosition( g.line(), c );
-  }
-}
-
-void TinyKate::slotCursorMoved()
-{
-  char buf[100];
-  int newLine,newCol;
-  currentView->getCursorPosition(&newLine,&newCol);
-  newLine++;
-  newCol++;
-  if((newLine!=curLine)||(newCol!=curCol))
-  {
-    sprintf(buf,"TinyKATE       : line %-6d col %d",newLine,newCol);
-    setCaption(buf);
-    curLine=newLine;
-    curCol=newCol;
-  }
 }

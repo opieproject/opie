@@ -24,6 +24,7 @@ AddressPicker::AddressPicker(QWidget *parent, const char *name, bool modal,
 
 	if (f.open(IO_ReadOnly)) {
 		QTextStream stream(&f);
+		stream.setEncoding( QTextStream::UnicodeUTF8 );
 		QString content;
 		while (!f.atEnd()) content += stream.readLine() + "\n";
 		QStringList lines = QStringList::split(QRegExp("\\n"), content);

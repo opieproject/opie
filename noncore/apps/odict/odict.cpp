@@ -41,7 +41,7 @@ ODict::ODict() : QMainWindow()
 	activated_name = QString::null;
 	
 	vbox = new QVBox( this );
-	setCaption( tr( "OPIE-Dictionary" ) );
+	setCaption( tr( "Opie-Dictionary" ) );
 	setupMenus();
 
 	QHBox *hbox = new QHBox( vbox );
@@ -76,7 +76,6 @@ void ODict::loadConfig()
 	Config cfg ( "odict" );
 	cfg.setGroup( "generalsettings" );
 	casesens = cfg.readEntry( "casesens" ).toInt();
-	regexp = cfg.readEntry( "regexp" ).toInt();
 
 	QString lastDict = cfg.readEntry( "lastdict" );
 	int i = 0, e = 0;
@@ -127,7 +126,6 @@ void ODict::saveConfig()
 	Config cfg ( "odict" );
 	cfg.setGroup( "generalsettings" );
 	cfg.writeEntry( "casesens" , casesens );
-	cfg.writeEntry( "regexp" , regexp );
 	cfg.writeEntry( "lastdict" , query_co->currentText() );
 }
 
@@ -185,13 +183,6 @@ void ODict::slotSetParameter( int count )
 			casesens = true;
 	}
 
- 	if ( count == 1 )
-	{
-		if ( regexp )
-			regexp = false;
-		else
-			regexp = true;
-	}
 	saveConfig();
 }
 
@@ -222,7 +213,6 @@ void ODict::setupMenus()
 	parameter = new QPopupMenu( menu );
 	connect(  parameter, SIGNAL( activated( int ) ), this, SLOT( slotSetParameter( int ) ) );
 	parameter->insertItem( tr( "C&ase sensitive" ), 0 ,0 );
-	parameter->insertItem( tr( "Allow &reg. expressions" ), 2 );
 	parameter->insertSeparator();
 	
 	menu->insertItem( tr( "Settings" ) , settings );

@@ -11,7 +11,6 @@ HEADERS      = io_layer.h io_serial.h io_irda.h io_bt.h io_modem.h \
 	       profile.h \
 	       profileconfig.h \
 	       profilemanager.h  \
-	       configwidget.h \
 	       tabwidget.h \
 	       configdialog.h \
 	       keytrans.h \

@@ -164,9 +164,7 @@ void ProcessInfo::slotSendClicked()
 		return;
 	}
 	
-	QString capstr = tr( "You really want to send\n" );
-	capstr.append( SignalCB->currentText() );
-	capstr.append( "\nto this process?" );
+	QString capstr = tr( "You really want to send %1 to this process?" ).arg( SignalCB->currentText() );
 
 	
 	if ( QMessageBox::warning( this, currprocess->text( 1 ), capstr,

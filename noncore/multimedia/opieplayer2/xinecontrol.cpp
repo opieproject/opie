@@ -36,12 +36,13 @@
 #include <qmessagebox.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
+
 #include "xinecontrol.h"
 #include "mediaplayerstate.h"
 #include "xinevideowidget.h"
 
-XineControl::XineControl( XineVideoWidget *xineWidget, 
-                          MediaPlayerState &_mediaPlayerState, 
+XineControl::XineControl( XineVideoWidget *xineWidget,
+                          MediaPlayerState &_mediaPlayerState,
                           QObject *parent, const char *name )
     : QObject( parent, name ), mediaPlayerState( _mediaPlayerState ), xineVideoWidget( xineWidget )
 {
@@ -50,8 +51,8 @@ XineControl::XineControl( XineVideoWidget *xineWidget,
     init();
 }
 
-XineControl::XineControl( XINE::Lib *xine, XineVideoWidget *xineWidget, 
-                          MediaPlayerState &_mediaPlayerState, 
+XineControl::XineControl( XINE::Lib *xine, XineVideoWidget *xineWidget,
+                          MediaPlayerState &_mediaPlayerState,
                           QObject *parent, const char *name )
     : QObject( parent, name ), libXine( xine ), mediaPlayerState( _mediaPlayerState ), xineVideoWidget( xineWidget )
 {
@@ -88,6 +89,7 @@ XineControl::~XineControl() {
 }
 
 void XineControl::play( const QString& fileName ) {
+
     hasVideoChannel = FALSE;
     hasAudioChannel = FALSE;
     m_fileName = fileName;
@@ -103,7 +105,6 @@ void XineControl::play( const QString& fileName ) {
     mediaPlayerState.setPlaying( true );
 
     MediaPlayerState::DisplayType displayType;
-    // qDebug( QString( "libXine->hasVideo() return : %1 ").arg( libXine->hasVideo() ) );
     if ( !libXine->hasVideo() ) {
         displayType = MediaPlayerState::Audio;
         qDebug("HAS AUDIO");
@@ -197,7 +198,6 @@ long XineControl::position() {
     // needs to be stopped the media is stopped
         QTimer::singleShot( 1000, this, SLOT( position() ) );
     }
-    // qDebug("POSITION : %d", m_position);
     return m_position;
 }
 

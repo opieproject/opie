@@ -507,7 +507,7 @@ void QPdfDlg::openFile ( const DocLnk &f )
 		updateCaption ( );
 	}
 	else
-		QMessageBox::warning ( this, tr( "Error" ), tr( "File does not exist !" ));
+		QMessageBox::warning ( this, tr( "Error" ), tr( "File does not exist!" ));
 }
 
 void QPdfDlg::setDocument ( const QString &f )

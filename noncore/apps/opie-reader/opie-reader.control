@@ -4,7 +4,7 @@ Priority: optional
 Section: applications
 Maintainer: Tim Wentford <timwentford@hotmail.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 License: GPL
 Description: E-Book reader
+Version: $QPE_VERSION$EXTRAVERSION

@@ -21,6 +21,8 @@
 #include <qdict.h>
 #include <stdlib.h>
 #include <qtextstream.h>
+#include "../xmlencodeattr.h"
+
 
 
 DBXml::DBXml(DBStore *d) 
@@ -68,7 +70,7 @@ bool DBXml::saveSource(QIODevice *outDev)
             outstream << "type=\"" 
                       << TVVariant::typeToName(it.current()->type()) 
                       << "\">";
-            outstream << it.current()->name() << "</key>" << endl;
+            outstream << encodeAttr(it.current()->name()) << "</key>" << endl;
         }
         ++it;
     }
@@ -94,7 +96,7 @@ bool DBXml::saveSource(QIODevice *outDev)
                               << date.month() << "/"
                               << date.year();
                 } else {
-                    outstream << elem->toQString(i);
+                    outstream << encodeAttr(elem->toQString(i));
                 }
                 outstream << "</KEYID" << i << ">" << endl;
             }

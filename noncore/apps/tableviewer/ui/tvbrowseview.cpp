@@ -23,6 +23,7 @@
 #include <qtextview.h>
 #include <qtextbrowser.h>
 #include <qlayout.h>
+#include "../xmlencodeattr.h"
 
 /*!
     \class TVBrowseView
@@ -102,12 +103,12 @@ void TVBrowseView::setDisplayText(const DataElem *element)
         if (element->hasValidValue(it.currentKey())) {
             if(it.currentKey() == ts->current_column) {
                 rep += "<A name=\"ckey\"></A><B><FONT COLOR=#FF0000>" 
-                    + it.current()->name()
+                    + encodeAttr(it.current()->name())
                     + ":</FONT></B> ";
             } else {
-                rep += "<B>" + it.current()->name() + ":</B> ";
+                rep += "<B>" + encodeAttr(it.current()->name()) + ":</B> ";
             }
-            rep += element->toQString(it.currentKey()) + "<BR>";
+            rep += encodeAttr(element->toQString(it.currentKey())) + "<BR>";
         }
         ++it;
     }

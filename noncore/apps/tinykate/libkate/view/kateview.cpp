@@ -2196,13 +2196,15 @@ bool KateView::askReplaceEnd() {
     str = i18n("%1 replacement(s) made.\n"
                "End of document reached.\n"
                "Continue from the beginning?").arg(replaces);
-    query = KMessageBox::questionYesNo(this, str, i18n("Continue"), i18n("Stop"));
+    query = KMessageBox::questionYesNo(this, str, i18n("Replace"),
+    i18n("Continue"), i18n("Stop"));
   } else {
     // backward search
     str = i18n("%1 replacement(s) made.\n"
                 "Beginning of document reached.\n"
                 "Continue from the end?").arg(replaces);
-    query = KMessageBox::questionYesNo(this, str, i18n("Continue"), i18n("Stop"));
+    query = KMessageBox::questionYesNo(this, str, i18n("Replace"),
+                i18n("Continue"), i18n("Stop"));
   }
   replaces = 0;
   continueSearch(s);
@@ -2266,7 +2268,6 @@ void KateView::configDialog()
 {
 
 #warning fixme
-	QScrollView *pScroll;
 
 #if 1 
   KDialogBase *kd = new KDialogBase(KDialogBase::IconList,
@@ -2303,9 +2304,8 @@ void KateView::configDialog()
   // edit options
   page=kd->addPage(i18n("Edit"));
   (new QVBoxLayout(page))->setAutoAdd(true);
-  pScroll=new QScrollView(page);
+
   EditConfigTab *editConfig = new EditConfigTab(page, this);
-  pScroll->addChild(editConfig);
 
 
 
@@ -2325,11 +2325,9 @@ void KateView::configDialog()
 
   page=kd->addPage(i18n("Highlighting"));
   (new QVBoxLayout(page))->setAutoAdd(true);
-  pScroll=new QScrollView(page);
-  hlPage = new HighlightDialogPage(hlManager, &defaultStyleList, &hlDataList, 0, pScroll->viewport());
-  pScroll->addChild(hlPage);
 
-  kd->showMaximized(); 
+  hlPage = new HighlightDialogPage(hlManager, &defaultStyleList, &hlDataList, 0, page);
+  kd->showMaximized();
  if (kd->exec()) {
     // color options
     colorConfig->getColors(colors);

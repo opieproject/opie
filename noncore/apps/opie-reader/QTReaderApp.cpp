@@ -2601,7 +2601,7 @@ void QTReaderApp::updateCaption()
 //	QString s = doc->name();
 //	if ( s.isEmpty() )
 //	    s = tr( "Unnamed" );
-	setCaption( reader->m_string + " - " + tr(SHORTPROGNAME) );
+	setCaption( reader->m_string + " - " + tr("Reader") );
 //    }
 }
 

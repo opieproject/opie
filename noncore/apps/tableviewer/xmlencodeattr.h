@@ -1,8 +1,12 @@
+/*
+ * xmlencodeattr.h
+ *
+ * copyright   : (c) 2003 by Joseph Wenninger   		
+ *               except for a small modification it's identical to qdom.cpp:encodeAttr
+ * email       : jowenn@handhelds.org
+ *
+ */
 /***************************************************************************
- *                                                                         *
- *   DrawPad - a drawing program for Opie Environment                      *
- *                                                                         *
- *   (C) 2002 by S. Prud'homme <prudhomme@laposte.net>                     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -11,17 +15,12 @@
  *                                                                         *
  ***************************************************************************/
 
-#include "drawpad.h"
+#ifndef _XML_ENCODE_ATTR_
+#define _XML_ENCODE_ATTR_
 
-#include <qpe/qpeapplication.h>
+#include <qstring.h>
 
-int main(int argc, char **argv)
-{
-    QPEApplication a(argc, argv);
+QString encodeAttr( const QString& str );
 
-    DrawPad mw; // = new DrawPad();;
-    a.showMainWidget(&mw );
-    mw.finishStartup();
-    
-    return a.exec();
-}
+#endif
+

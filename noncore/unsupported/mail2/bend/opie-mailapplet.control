@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Constantin Bergemann <cbergemann@lisa.de>
 Architecture: arm
-Version: 0.0.9-$SUB_VERSION
-Depends: task-opie-minimal libopie1 opie-mail2
+Version: $QPE_VERSION$EXTRAVERSION
+Depends: task-opie-minimal, libopie1, opie-mail2
 Description: A Biff-Like mailchecker
 License: LGPL

@@ -49,7 +49,7 @@ class ODict : public QMainWindow
 		
 		void setupMenus();
 
-		bool casesens, completewords, regexp;
+		bool casesens, completewords;
 		
 		void loadConfig();
 		void saveConfig();

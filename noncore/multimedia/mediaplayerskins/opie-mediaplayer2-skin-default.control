@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/playerskins
 Maintainer: L.J.Potter <ljp@llornkcor.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: Default skin for opie mediaplayer's
+Version: $QPE_VERSION$EXTRAVERSION

@@ -31,16 +31,6 @@
 
 */
 
-#include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
-
-
-#include <qwidget.h>
-#include <qpainter.h>
-#include <qpixmap.h>
-#include <qslider.h>
-#include <qdrawutil.h>
 #include "videowidget.h"
 #include "mediaplayerstate.h"
 #include "playlistwidget.h"
@@ -74,7 +64,7 @@ const uint buttonCount = sizeof( skinInfo ) / sizeof( skinInfo[ 0 ] );
 
 }
 
-VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name ) 
+VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name )
     : MediaWidget( playList, mediaPlayerState, parent, name ), scaledWidth( 0 ), scaledHeight( 0 ), videoSliderBeingMoved( false )
 {
     setCaption( tr("OpiePlayer - Video") );
@@ -95,7 +85,7 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
 }
 
 
-VideoWidget::~VideoWidget() 
+VideoWidget::~VideoWidget()
 {
 }
 

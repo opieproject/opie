@@ -100,7 +100,7 @@ void SnakeGame::welcomescreen()
    instr->move(canvas.width()/2-w/2, canvas.height()/2-20);
    instr->setColor(white);
    instr->show();
-   QCanvasText* cont = new QCanvasText(tr("Press Any Key To Start"), &canvas);
+   QCanvasText* cont = new QCanvasText(tr("Press any key to start"), &canvas);
    w = cont->boundingRect().width();
    cont->move(canvas.width()/2-w/2, canvas.height()-20);
    cont->setColor(yellow);
@@ -196,7 +196,7 @@ void SnakeGame::wait()
 {
    waitover = true;
    pauseTimer->stop();
-   QCanvasText* cont = new QCanvasText(tr("Press Any Key to Begin a New Game."),
+   QCanvasText* cont = new QCanvasText(tr("Press any key to begin a new game."),
                                        &canvas);
    cont->setZ(100);
    cont->setColor(white);

@@ -8,7 +8,6 @@
  **************************************************************************/
 
 class QWidget;
-class OTabWidget;
 class QListView;
 class QPushButton;
 
@@ -22,7 +21,6 @@ class ConfigDlg : public QDialog
 		ConfigDlg(QWidget *parent, const char *name, bool modal=FALSE );
 
 	private:
-		OTabWidget *tab;
 		QWidget *settings_tab, *search_tab;
 		QListView *list;
 		QPushButton *new_button, *change_button, *delete_button;

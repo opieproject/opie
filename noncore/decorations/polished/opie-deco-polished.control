@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/decorations
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION.1
 Depends: task-opie-minimal
 Description: OPIE window decoration style
  Blended window decoration style for OPIE.
+Version: $QPE_VERSION$EXTRAVERSION

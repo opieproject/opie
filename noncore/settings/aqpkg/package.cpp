@@ -116,6 +116,7 @@ void Package :: setLocalPackage( Package *p )
 void Package :: setVersion( const QString &v )
 {
     version = v;
+            differentVersionAvailable = false;
 
     if ( localPackage )
         if ( localPackage->getVersion() < getVersion() && !installed )

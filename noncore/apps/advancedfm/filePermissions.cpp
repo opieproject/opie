@@ -13,20 +13,16 @@
 ****************************************************************************/
 #include "filePermissions.h"
 
-#include <qfile.h>
 #include <qfileinfo.h>
 
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlineedit.h>
-#include <qlayout.h>
-#include <qvariant.h>
-#include <qtooltip.h>
 #include <qmessagebox.h>
 
 #include <unistd.h>
 #include <sys/stat.h>
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <sys/types.h>
 #include <pwd.h>
 #include <grp.h>
@@ -70,23 +66,23 @@ filePermissions::filePermissions( QWidget* parent,  const char* name, bool modal
     connect(CheckBox1_2, SIGNAL(released()),this,SLOT(ownWriteCheck()));
 
     CheckBox1_3 = new QCheckBox( this, "CheckBox1_3" );
-    CheckBox1_3->setGeometry( QRect( 195, 85, 20, 16 ) ); 
+    CheckBox1_3->setGeometry( QRect( 195, 85, 20, 16 ) );
     connect(CheckBox1_3, SIGNAL(released()),this,SLOT(ownExeCheck()));
 
     CheckBox1_4 = new QCheckBox( this, "CheckBox1_4" );
-    CheckBox1_4->setGeometry( QRect( 75, 105, 20, 16 ) ); 
+    CheckBox1_4->setGeometry( QRect( 75, 105, 20, 16 ) );
     connect(CheckBox1_4, SIGNAL(released()),this,SLOT(grpReadCheck()));
 
     CheckBox1_5 = new QCheckBox( this, "CheckBox1_5" );
-    CheckBox1_5->setGeometry( QRect( 135, 105, 20, 16 ) ); 
+    CheckBox1_5->setGeometry( QRect( 135, 105, 20, 16 ) );
     connect(CheckBox1_5, SIGNAL(released()),this,SLOT(grpWriteCheck()));
 
     CheckBox1_6 = new QCheckBox( this, "CheckBox1_6" );
-    CheckBox1_6->setGeometry( QRect( 195, 105, 20, 16 ) ); 
+    CheckBox1_6->setGeometry( QRect( 195, 105, 20, 16 ) );
     connect(CheckBox1_6, SIGNAL(released()),this,SLOT(grpExeCheck()));
 
     CheckBox1_7 = new QCheckBox( this, "CheckBox1_7" );
-    CheckBox1_7->setGeometry( QRect( 75, 125, 16, 16 ) ); 
+    CheckBox1_7->setGeometry( QRect( 75, 125, 16, 16 ) );
     connect(CheckBox1_7, SIGNAL(released()),this,SLOT(wrldReadCheck()));
 
     CheckBox1_8 = new QCheckBox( this, "CheckBox1_8" );
@@ -94,38 +90,38 @@ filePermissions::filePermissions( QWidget* parent,  const char* name, bool modal
     connect(CheckBox1_8, SIGNAL(released()),this,SLOT(wrldWriteCheck()));
 
     CheckBox1_8_2 = new QCheckBox( this, "CheckBox1_8_2" );
-    CheckBox1_8_2->setGeometry( QRect( 195, 125, 20, 16 ) ); 
+    CheckBox1_8_2->setGeometry( QRect( 195, 125, 20, 16 ) );
     connect(CheckBox1_8_2, SIGNAL(released()),this,SLOT(wrldExeCheck()));
 
     GroupLineEdit = new QLineEdit( this, "GroupLineEdit" );
-    GroupLineEdit->setGeometry( QRect( 125, 155, 106, 22 ) ); 
+    GroupLineEdit->setGeometry( QRect( 125, 155, 106, 22 ) );
 
     OwnerLineEdit = new QLineEdit( this, "OwnerLineEdit" );
-    OwnerLineEdit->setGeometry( QRect( 10, 155, 106, 22 ) ); 
+    OwnerLineEdit->setGeometry( QRect( 10, 155, 106, 22 ) );
 
     TextLabel5 = new QLabel( this, "TextLabel5" );
-    TextLabel5->setGeometry( QRect( 45, 180, 40, 16 ) ); 
+    TextLabel5->setGeometry( QRect( 45, 180, 40, 16 ) );
     TextLabel5->setText( tr( "Owner" ) );
 
     TextLabel5_2 = new QLabel( this, "TextLabel5_2" );
-    TextLabel5_2->setGeometry( QRect( 155, 180, 40, 16 ) ); 
+    TextLabel5_2->setGeometry( QRect( 155, 180, 40, 16 ) );
     TextLabel5_2->setText( tr( "Group" ) );
 
     ModeLine = new QLineEdit( this, "TextLabelMode" );
-    ModeLine->setGeometry( QRect( 10, 60, 40, 15 ) ); 
+    ModeLine->setGeometry( QRect( 10, 60, 40, 15 ) );
 
     TextLabel3_2 = new QLabel( this, "TextLabel3_2" );
-    TextLabel3_2->setGeometry( QRect( 60, 55, 50, 20 ) ); 
+    TextLabel3_2->setGeometry( QRect( 60, 55, 50, 20 ) );
     TextLabel3_2->setText( tr( "read" ) );
     TextLabel3_2->setAlignment( int( QLabel::AlignBottom | QLabel::AlignHCenter ) );
 
     TextLabel3_2_2 = new QLabel( this, "TextLabel3_2_2" );
-    TextLabel3_2_2->setGeometry( QRect( 120, 55, 50, 20 ) ); 
+    TextLabel3_2_2->setGeometry( QRect( 120, 55, 50, 20 ) );
     TextLabel3_2_2->setText( tr( "write" ) );
     TextLabel3_2_2->setAlignment( int( QLabel::AlignBottom | QLabel::AlignHCenter ) );
 
     TextLabel3 = new QLabel( this, "TextLabel3" );
-    TextLabel3->setGeometry( QRect( 180, 55, 50, 20 ) ); 
+    TextLabel3->setGeometry( QRect( 180, 55, 50, 20 ) );
     TextLabel3->setText( tr( "execute" ) );
     TextLabel3->setAlignment( int( QLabel::AlignBottom | QLabel::AlignHCenter ) );
 
@@ -149,17 +145,17 @@ filePermissions::filePermissions( QWidget* parent,  const char* name, bool modal
     if( fi.permission( QFileInfo::ReadOther)) { CheckBox1_7->setChecked(true); }
     if( fi.permission( QFileInfo::WriteOther)) { CheckBox1_8->setChecked(true); }
     if( fi.permission( QFileInfo::ExeOther)) { CheckBox1_8_2->setChecked(true); }
-    
+
     stat(file.latin1(), &buf);
     mode = buf.st_mode;
     modeStr.sprintf("%#o", buf.st_mode & ~(S_IFMT) );
     ModeLine->setText(modeStr);
     bool ok;
     i_mode = modeStr.toInt(&ok,10);
-    
+
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 filePermissions::~filePermissions()
@@ -248,25 +244,25 @@ void filePermissions::accept() {
     pwd = getpwnam(OwnerLineEdit->text().latin1() );
     if(pwd == NULL) {
         perror("getpwnam");
-        QMessageBox::warning(this,"Warning","Error- no user");
+        QMessageBox::warning(this,tr("Warning"),tr("Error- no user") );
         return;
     } else {
         grp = getgrnam(GroupLineEdit->text().latin1());
         if(grp==NULL) {
         perror("getgrnam");
-        QMessageBox::warning(this,"Warning","Error- no  group");
+        QMessageBox::warning(this,tr("Warning"),tr("Error- no  group"));
         return;
         }
         if( chown( file.latin1(),  pwd->pw_uid, grp->gr_gid) <0) {
         perror("chown");
-        QMessageBox::warning(this,"Warning","Error setting ownership or group");
+        QMessageBox::warning(this,tr("Warning"),tr("Error setting ownership or group") );
         return;
         }
         bool ok;
         uint moder = modeStr.toUInt(&ok,8);
         if( chmod( file.latin1(), moder) < 0) {
             perror("chmod");
-            QMessageBox::warning(this,"Warning","Error setting mode");
+            QMessageBox::warning(this,tr("Warning"),tr("Error setting mode") );
             return;
         }
     }

@@ -74,15 +74,9 @@ void Om3u::readM3u() {
                     append(s);
 //                    qDebug(s);
                 } else { // is url
-                    s.replace( QRegExp( "%20" )," " );
                     QString name;
-//                     if( name.left( 4 ) == "http" ) {
-//                         name = s.right( s.length() - 7 );
-//                     } else {
-                        name = s;
-//                     }
+                    name = s;
                     append(name);
-//                    qDebug(name);
                 }
         }
     }
@@ -147,7 +141,7 @@ void Om3u::remove(const QString &filePath) { //removes from m3u list
     for ( QStringList::ConstIterator it = begin(); it != end(); ++it ) {
       currentFile=*it;
       //        qDebug(*it);
-        
+
       if( filePath != currentFile)
         list += currentFile+"\n";
     }

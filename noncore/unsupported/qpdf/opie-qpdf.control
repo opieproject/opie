@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/applications
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, gzip
 Description: A PDF viewer for OPIE.
+Version: $QPE_VERSION$EXTRAVERSION

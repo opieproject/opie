@@ -31,30 +31,18 @@
 
 */
 
-#include <qpe/qpemenubar.h>
-#include <qpe/qpetoolbar.h>
-#include <qpe/fileselector.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/storage.h>
-#include <qpe/mimetype.h>
-#include <qpe/config.h>
-#include <qpe/global.h>
-#include <qpe/resource.h>
 
-#include <qpopupmenu.h>
-#include <qaction.h>
-#include <qcursor.h>
-#include <qdir.h>
+#include <qtoolbar.h>
+#include <qpe/qpeapplication.h>
+
 #include <qlayout.h>
+#include <qmenubar.h>
 
 #include "playlistselection.h"
 #include "playlistwidget.h"
 #include "mediaplayerstate.h"
 #include "inputDialog.h"
 #include "playlistfileview.h"
-
-//only needed for the random play
-#include <stdlib.h>
 
 #include "mediaplayerstate.h"
 
@@ -68,14 +56,14 @@ PlayListWidgetGui::PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidg
     setToolBarsMovable( FALSE );
 
     // Create Toolbar
-    QPEToolBar *toolbar = new QPEToolBar( this );
+    QToolBar *toolbar = new QToolBar( this );
     toolbar->setHorizontalStretchable( TRUE );
 
     // Create Menubar
-    QPEMenuBar *menu = new QPEMenuBar( toolbar );
+    QMenuBar *menu = new QMenuBar( toolbar );
     menu->setMargin( 0 );
 
-    bar = new QPEToolBar( this );
+    bar = new QToolBar( this );
     bar->setLabel( tr( "Play Operations" ) );
 
     tbDeletePlaylist = new QPushButton( Resource::loadIconSet( "trash" ), "", bar, "close" );
@@ -148,7 +136,7 @@ PlayListWidgetGui::PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidg
     Alayout->setSpacing( 2 );
     Alayout->setMargin( 2 );
     // no m3u's here please
-    audioView = new PlayListFileView( "audio/mpeg;audio/x-wav;audio/x-ogg", "opieplayer2/musicfile", aTab, "Audioview" );
+    audioView = new PlayListFileView( "audio/mpeg;audio/x-wav;application/ogg", "opieplayer2/musicfile", aTab, "Audioview" );
     Alayout->addMultiCellWidget( audioView, 0, 0, 0, 1 );
     tabWidget->insertTab( aTab, tr( "Audio" ) );
 

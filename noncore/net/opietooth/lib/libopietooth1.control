@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/system
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Replaces: libopietooth
 Depends: libqte2 (>=2.3.4), libopie, task-bluez
 Description: Opie bluetooth library
+Version: $QPE_VERSION$EXTRAVERSION

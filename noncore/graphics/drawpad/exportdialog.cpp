@@ -13,7 +13,7 @@
 
 #include "exportdialog.h"
 
-#include <qpe/fileselector.h>
+#include <opie/ofileselector.h>
 
 #include <qbuttongroup.h>
 #include <qcombobox.h>
@@ -66,9 +66,12 @@ ExportDialog::ExportDialog(uint pageAt, uint pageCount, QWidget* parent, const c
     m_pFormatComboBox = new QComboBox(exportGroupBox);
     m_pFormatComboBox->insertStrList(QImageIO::outputFormats());
 
-    FileSelector* fileSelector = new FileSelector("image/*", this, "fileselector");
-    fileSelector->setNewVisible(false);
-    fileSelector->setCloseVisible(false);
+    MimeTypes types; types.insert( tr("All Images"), "image/*" );
+    OFileSelector* fileSelector = new OFileSelector(this, OFileSelector::FileSelector,
+						   OFileSelector::Normal,
+						   QString::null, QString::null,
+						   types );
+    fileSelector->setNameVisible( false );
 
     QVBoxLayout* mainLayout = new QVBoxLayout(this, 4, 4);
     selectionButtonGroup->layout()->setSpacing(4);

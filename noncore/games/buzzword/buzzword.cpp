@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002 Martin Imobersteg <imm@gmx.ch> 
+ * Copyright (C) 2002 Martin Imobersteg <imm@gmx.ch>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -102,14 +102,14 @@ void BuzzWord::drawGrid()
 	f.close();
 
 	grid = new QGrid(gridVal, this);
-	grid->setFixedSize(240,240);
+//	grid->setFixedSize( 480, 480 );
 
 	for( int c = 0 ; c < gridVal ; c++ )
 	{
 		for( int r = 0 ; r < gridVal ; r++ )
 		{
 			uint pos = rand() % l. count();
-             
+
 			QString word = QStringList::split(" ", l[pos]).join("\n");
 			BuzzItem* bi = new BuzzItem( c, r, word, grid );
 			connect( bi, SIGNAL(clicked(int, int)), this, SLOT(clicked(int,int)) );
@@ -128,7 +128,7 @@ void BuzzWord::clicked(int row, int column)
 		int columnTotal = 0;
 
 		map[column][row] = 1;
-		
+
 		for( int c = 0 ; c < gridVal ; c++ )
 		{
 			for( int r = 0 ; r < gridVal ; r++ )

@@ -290,7 +290,7 @@ bool WordGame::loadRules(const QString &name)
 
     QString title = name;
     title.truncate( title.length() - 6 );
-    setCaption( title );
+    //setCaption( title );
 
     QString shapepixmap;
     ts >> shapepixmap;
@@ -314,7 +314,7 @@ bool WordGame::loadRules(const QString &name)
 	if ( re++ < 10 ) ts >> e;
     }
 
-    QImage shim = Resource::loadImage("wordgame/wordgame_shapes.xpm");
+    QImage shim = Resource::loadImage("wordgame/wordgame_shapes");
     shim = shim.smoothScale((re-1)*TileItem::smallWidth(),TileItem::smallHeight());
     QPixmap bgshapes;
     bgshapes.convertFromImage(shim);
