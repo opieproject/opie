@@ -11,7 +11,7 @@
 const QString strDayTemplate = QObject::tr("Every");
 const QString strYearTemplate = QObject::tr("%1 %2 every ");
 const QString strMonthDateTemplate = QObject::tr("The %1 every ");
-const QString strMonthDayTemplate = QObject::tr("The %1 %1 of every");
+const QString strMonthDayTemplate = QObject::tr("The %1 %2 of every");
 const QString strWeekTemplate = QObject::tr("Every ");
 const QString dayLabel[] = { QObject::tr("Monday"),
                              QObject::tr("Tuesday"),
@@ -368,6 +368,11 @@ void ORecurranceWidget::slotWeekLabel() {
 	}
     }
     str = str.prepend( "on " );
+	
+	//FIXME: this is not translatable for a lot languages (beside
+	//the fact that the "on" is missing a tr(). But I am not sure
+	//if I can simple add it here, thus I let it as it is... (Carsten)
+	
     lblWeekVar->setText( str );
 }
 void ORecurranceWidget::slotMonthLabel(int type) {
@@ -375,10 +380,10 @@ void ORecurranceWidget::slotMonthLabel(int type) {
     if ( currInterval != Month || type > 1 )
 	return;
     if ( type == 1 )
-	str = strMonthDateTemplate.arg( numberPlacing(start.day()) );
+		str = strMonthDateTemplate.arg( numberPlacing(start.day()) );
     else
-	str = strMonthDayTemplate.arg( numberPlacing(week(start)))
-	      .arg( dayLabel[start.dayOfWeek() - 1] );
+		str = strMonthDayTemplate.arg( numberPlacing(week(start)))
+			  .arg( dayLabel[start.dayOfWeek() - 1] );
     lblRepeat->setText( str );
 }
 void ORecurranceWidget::slotChangeStartOfWeek( bool onMonday ) {
