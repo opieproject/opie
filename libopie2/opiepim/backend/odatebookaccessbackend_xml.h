@@ -68,6 +68,8 @@ public:
 
 private:
     bool m_changed :1 ;
+    bool m_noTimeZone : 1;
+
     bool loadFile();
     inline void finalizeRecord( OPimEvent& ev );
     inline void setField( OPimEvent&, int field, const QString& val );

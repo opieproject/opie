@@ -632,16 +632,16 @@ QMap<QString, OPimRecurrence::RepeatType> OPimRecurrence::rTypeValueConvertMap()
 QMap<int, QString> OPimRecurrence::toMap() const
 {
     QMap<int, QString> retMap;
-    
+
     retMap.insert( OPimRecurrence::RType, rTypeString() );
     retMap.insert( OPimRecurrence::RWeekdays, QString::number( static_cast<int>( data->days ) ) );
     retMap.insert( OPimRecurrence::RPosition, QString::number(data->pos ) );
     retMap.insert( OPimRecurrence::RFreq, QString::number( data->freq ) );
     retMap.insert( OPimRecurrence::RHasEndDate, QString::number( static_cast<int>( data->hasEnd ) ) );
     if( data -> hasEnd )
-            retMap.insert( OPimRecurrence::EndDate, QString::number( OPimTimeZone::utc().fromUTCDateTime( QDateTime( data->end, QTime(12,0,0) ) ) ) );
-    retMap.insert( OPimRecurrence::Created, QString::number( OPimTimeZone::utc().fromUTCDateTime( data->create ) ) );
-    
+            retMap.insert( OPimRecurrence::EndDate, QString::number( OPimTimeZone::current().fromUTCDateTime( QDateTime( data->end, QTime(12,0,0) ) ) ) );
+    retMap.insert( OPimRecurrence::Created, QString::number( OPimTimeZone::current().fromUTCDateTime( data->create ) ) );
+
     if ( data->list.isEmpty() ) return retMap;
 
     // save exceptions list here!!
@@ -652,7 +652,7 @@ QMap<int, QString> OPimRecurrence::toMap() const
     for ( it = list.begin(); it != list.end(); ++it ) {
             date = (*it);
             if ( it != list.begin() ) exceptBuf += " ";
-            
+
             exceptBuf += QCString().sprintf("%04d%02d%02d", date.year(), date.month(), date.day() );
     }
 
@@ -663,18 +663,18 @@ QMap<int, QString> OPimRecurrence::toMap() const
 
 void OPimRecurrence::fromMap( const QMap<int, QString>& map )
 {
-    QMap<QString, RepeatType> repTypeMap = rTypeValueConvertMap(); 
+    QMap<QString, RepeatType> repTypeMap = rTypeValueConvertMap();
 
     data -> type  = repTypeMap[ map [OPimRecurrence::RType] ];
     data -> days  = (char) map[ OPimRecurrence::RWeekdays ].toInt();
     data -> pos   = map[ OPimRecurrence::RPosition ].toInt();
     data -> freq = map[ OPimRecurrence::RFreq ].toInt();
     data -> hasEnd= map[ OPimRecurrence::RHasEndDate ].toInt() ? true : false;
-    OPimTimeZone utc = OPimTimeZone::utc();
+    OPimTimeZone cur = OPimTimeZone::current();
     if ( data -> hasEnd ){
-            data -> end = utc.fromUTCDateTime( (time_t) map[ OPimRecurrence::EndDate ].toLong() ).date();
+            data -> end = cur.fromUTCDateTime( (time_t) map[ OPimRecurrence::EndDate ].toLong() ).date();
     }
-    data -> create = utc.fromUTCDateTime( (time_t) map[ OPimRecurrence::Created ].toLong() ).date();
+    data -> create = cur.fromUTCDateTime( (time_t) map[ OPimRecurrence::Created ].toLong() ).date();
 
 #if 0
     // FIXME: Exceptions currently not supported...
@@ -684,8 +684,8 @@ void OPimRecurrence::fromMap( const QMap<int, QString>& map )
     QStringList exceptList = QStringList::split( " ", exceptStr );
     ...
 #endif
-        
-        
+
+
 }
 
 }

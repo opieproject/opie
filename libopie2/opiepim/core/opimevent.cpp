@@ -296,8 +296,10 @@ QDateTime OPimEvent::endDateTime() const
      * if all Day event the end time needs
      * to be on the same day as the start
      */
-    if ( data->isAllDay )
-        return QDateTime( data->start.date(), QTime( 23, 59, 59 ) );
+    if ( data->isAllDay ) {
+        QDate end = data->end.isValid() ? data->end.date() : data->start.date() ;
+        return QDateTime( end, QTime( 23, 59, 59 ) );
+    }
     return data->end;
 }
 
@@ -335,7 +337,6 @@ void OPimEvent::setAllDay( bool allDay )
 {
     changeOrModify();
     data->isAllDay = allDay;
-    if ( allDay ) data->timezone = "UTC";
 }
 
 
@@ -348,7 +349,7 @@ void OPimEvent::setTimeZone( const QString& tz )
 
 QString OPimEvent::timeZone() const
 {
-    if ( data->isAllDay ) return QString::fromLatin1( "UTC" );
+    if ( data->isAllDay ) return QString::fromLatin1( "Europe/London" );
     return data->timezone;
 }
 
@@ -564,9 +565,10 @@ QMap<int, QString> OPimEvent::toMap() const
         retMap.insert( OPimEvent::FSound, ( alarm.sound() == OPimAlarm::Loud ) ? "loud" : "silent" );
     }
 
-    OPimTimeZone zone( timeZone().isEmpty() ? OPimTimeZone::current() : timeZone() );
-    retMap.insert( OPimEvent::FStart, QString::number( zone.fromUTCDateTime( zone.toDateTime( startDateTime(), OPimTimeZone::utc() ) ) ) );
-    retMap.insert( OPimEvent::FEnd, QString::number( zone.fromUTCDateTime( zone.toDateTime( endDateTime(), OPimTimeZone::utc() ) ) ) );
+    /* either use UTC timeZone or current() if there is was a timezone set */
+    OPimTimeZone zone( (timeZone().isEmpty()||isAllDay()) ? OPimTimeZone::utc() : OPimTimeZone::current() );
+    retMap.insert( OPimEvent::FStart, QString::number( zone.fromDateTime( startDateTime())));
+    retMap.insert( OPimEvent::FEnd, QString::number( zone.fromDateTime(   endDateTime() )));
     retMap.insert( OPimEvent::FNote, Qtopia::escapeString( note() ) );
     retMap.insert( OPimEvent::FTimeZone, timeZone().isEmpty() ? QString( "None" ) : timeZone() );
     if ( parent() )
@@ -630,27 +632,21 @@ void OPimEvent::fromMap( const QMap<int, QString>& map )
     }
 
     time_t start = ( time_t ) map[ OPimEvent::FStart ].toLong();
-    time_t end = ( time_t ) map[ OPimEvent::FEnd ].toLong();
+    time_t end = ( time_t )   map[ OPimEvent::FEnd ].toLong();
 
     /* AllDay is always in UTC */
     if ( isAllDay() )
     {
         OPimTimeZone utc = OPimTimeZone::utc();
-        setStartDateTime( utc.fromUTCDateTime( start ) );
-        setEndDateTime ( utc.fromUTCDateTime( end ) );
-        setTimeZone( "UTC" ); // make sure it is really utc
+        setStartDateTime(utc.toDateTime( start ) );
+        setEndDateTime ( utc.toDateTime( end   ) );
     }
-    else
-    {
+    else  {
         /* to current date time */
-        // owarn << " Start is " << start << "" << oendl;
-        OPimTimeZone zone( timeZone().isEmpty() ? OPimTimeZone::current() : timeZone() );
-        QDateTime date = zone.toDateTime( start );
-        owarn << " Start is " << date.toString() << "" << oendl;
-        setStartDateTime( zone.toDateTime( date, OPimTimeZone::current() ) );
+        OPimTimeZone   to_zone( ev.timeZone().isEmpty() ? OPimTimeZone::utc() : OPimTimeZone::current() );
 
-        date = zone.toDateTime( end );
-        setEndDateTime ( zone.toDateTime( date, OPimTimeZone::current() ) );
+        ev.setStartDateTime(to_zone.toDateTime( start));
+        ev.setEndDateTime  (to_zone.toDateTime( end));
     }
 
     int alarmTime = -1;

@@ -48,6 +48,7 @@ QDateTime utcTime( time_t t )
     ret.setTime( QTime( broken->tm_hour, broken->tm_min, broken->tm_sec ) );
     return ret;
 }
+
 QDateTime utcTime( time_t t, const QString& zone )
 {
     QCString org = ::getenv( "TZ" );
@@ -70,6 +71,8 @@ QDateTime utcTime( time_t t, const QString& zone )
 
     return ret;
 }
+
+
 time_t to_Time_t( const QDateTime& utc, const QString& str )
 {
     QDate d = utc.date();
@@ -151,9 +154,8 @@ QDateTime OPimTimeZone::toDateTime( time_t t )
  */
 QDateTime OPimTimeZone::toDateTime( const QDateTime& dt, const OPimTimeZone& zone )
 {
-    time_t utc = to_Time_t( dt, zone.m_name );
-    owarn << "" << utc << " " << zone.m_name << "" << oendl;
-    return utcTime( utc, m_name );
+    time_t utc = to_Time_t( dt, m_name );
+    return utcTime( utc, zone.m_name );
 }
 
 
@@ -165,7 +167,7 @@ time_t OPimTimeZone::fromDateTime( const QDateTime& time )
 
 time_t OPimTimeZone::fromUTCDateTime( const QDateTime& time )
 {
-    return to_Time_t( time, "UTC" );
+    return to_Time_t( time, "Europe/London" );
 }
 
 
@@ -179,7 +181,7 @@ OPimTimeZone OPimTimeZone::current()
 
 OPimTimeZone OPimTimeZone::utc()
 {
-    return OPimTimeZone( "UTC" );
+    return OPimTimeZone( "Europe/London" );
 }
 
 

@@ -88,7 +88,7 @@ char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
 namespace {
     time_t start, end, created, rp_end;
     OPimRecurrence* rec;
-    OPimRecurrence* recur() {
+    static OPimRecurrence* recur() {
         if (!rec)
             rec = new OPimRecurrence;
 
@@ -102,18 +102,18 @@ namespace {
         FCategories,
         FUid,
         FType,
-    FAlarm,
-    FSound,
-    FRType,
-    FRWeekdays,
-    FRPosition,
-    FRFreq,
-    FRHasEndDate,
-    FREndDate,
-    FRStart,
-    FREnd,
-    FNote,
-    FCreated,      // Should't this be called FRCreated ?
+        FAlarm,
+        FSound,
+        FRType,
+        FRWeekdays,
+        FRPosition,
+        FRFreq,
+        FRHasEndDate,
+        FREndDate,
+        FRStart,
+        FREnd,
+        FNote,
+        FCreated,      // Should't this be called FRCreated ?
         FTimeZone,
         FRecParent,
         FRecChildren,
@@ -121,17 +121,19 @@ namespace {
     };
 
     // FIXME: Use OPimEvent::toMap() here !! (eilers)
-    inline void save( const OPimEvent& ev, QString& buf ) {
+    static void save( const OPimEvent& ev, QString& buf ) {
         owarn << "Saving " << ev.uid() << " " << ev.description() << "" << oendl;
         buf += " description=\"" + Qtopia::escapeString(ev.description() ) + "\"";
         if (!ev.location().isEmpty() )
             buf += " location=\"" + Qtopia::escapeString(ev.location() ) + "\"";
 
-        buf += " categories=\""+ Qtopia::escapeString( Qtopia::Record::idsToString( ev.categories() ) ) + "\"";
+        if (!ev.categories().isEmpty() )
+            buf += " categories=\""+ Qtopia::escapeString( Qtopia::Record::idsToString( ev.categories() ) ) + "\"";
+
         buf += " uid=\"" + QString::number( ev.uid() ) + "\"";
 
         if (ev.isAllDay() )
-        buf += " type=\"AllDay\""; // is that all ?? (eilers)
+            buf += " type=\"AllDay\""; // is that all ?? (eilers)
 
         if (ev.hasNotifiers() ) {
             OPimAlarm alarm = ev.notifiers().alarms()[0]; // take only the first
@@ -152,19 +154,26 @@ namespace {
          * the QDateTime to a QDateTime in UTC time
          * and then we'll create a nice time_t
          */
-        OPimTimeZone zone( ev.timeZone().isEmpty() ? OPimTimeZone::current() : ev.timeZone() );
-        buf += " start=\"" + QString::number( zone.fromUTCDateTime( zone.toDateTime( ev.startDateTime(), OPimTimeZone::utc() ) ) )  + "\"";
-        buf += " end=\""   + QString::number( zone.fromUTCDateTime( zone.toDateTime( ev.endDateTime()  , OPimTimeZone::utc() ) ) )   + "\"";
+        OPimTimeZone zone( (ev.timeZone().isEmpty()||ev.isAllDay()) ? OPimTimeZone::utc() : OPimTimeZone::current() );
+        buf += " start=\"" + QString::number( zone.fromDateTime( ev.startDateTime()))  + "\"";
+        buf += " end=\""   + QString::number( zone.fromDateTime( ev.endDateTime()  ))  + "\"";
         if (!ev.note().isEmpty() ) {
             buf += " note=\"" + Qtopia::escapeString( ev.note() ) + "\"";
         }
 
-        buf += " timezone=\"";
-        if ( ev.timeZone().isEmpty() )
-            buf += "None";
-        else
-            buf += ev.timeZone();
-        buf += "\"";
+        /*
+         * Don't save a timezone if AllDay Events
+         * as they're UTC only anyway
+         */
+        if (!ev.isAllDay() ) {
+
+            buf += " timezone=\"";
+            if ( ev.timeZone().isEmpty() )
+                buf += "None";
+            else
+                buf += ev.timeZone();
+            buf += "\"";
+        }
 
         if (ev.parent() != 0 ) {
             buf += " recparent=\""+QString::number(ev.parent() )+"\"";
@@ -183,7 +192,7 @@ namespace {
         // skip custom writing
     }
 
-    inline bool forAll( const QMap<int, OPimEvent>& list, QFile& file ) {
+    static bool saveEachEvent( const QMap<int, OPimEvent>& list, QFile& file ) {
         QMap<int, OPimEvent>::ConstIterator it;
         QString buf;
         QCString str;
@@ -238,12 +247,12 @@ bool ODateBookAccessBackend_XML::save() {
         return false;
     }
 
-    if (!forAll( m_raw, f ) ) {
+    if (!saveEachEvent( m_raw, f ) ) {
         f.close();
         QFile::remove( strFileNew );
         return false;
     }
-    if (!forAll( m_rep, f ) ) {
+    if (!saveEachEvent( m_rep, f ) ) {
         f.close();
         QFile::remove( strFileNew );
         return false;
@@ -406,6 +415,10 @@ bool ODateBookAccessBackend_XML::loadFile() {
     dict.insert( "exceptions", new int(FExceptions) );
     dict.insert( "timezone", new int(FTimeZone) );
 
+
+    // initialiaze db hack
+    m_noTimeZone = true;
+
     char* dt = (char*)map_addr;
     int len = attribute.st_size;
     int i = 0;
@@ -479,6 +492,7 @@ bool ODateBookAccessBackend_XML::loadFile() {
         /* time to finalize */
         finalizeRecord( ev );
         delete rec;
+        m_noTimeZone = true;
     }
     ::munmap(map_addr, attribute.st_size );
     m_changed = false; // changed during add
@@ -488,28 +502,33 @@ bool ODateBookAccessBackend_XML::loadFile() {
 
 // FIXME: Use OPimEvent::fromMap() which makes this obsolete.. (eilers)
 void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
+
+    /*
+     * quirk to import datebook files. They normally don't have a
+     * timeZone attribute and we treat this as to use OPimTimeZone::current()
+     */
+    if (m_noTimeZone )
+        ev.setTimeZone( OPimTimeZone::current().timeZone() );
+
+
+
     /* AllDay is alway in UTC */
     if ( ev.isAllDay() ) {
         OPimTimeZone utc = OPimTimeZone::utc();
-        ev.setStartDateTime( utc.fromUTCDateTime( start ) );
-        ev.setEndDateTime  ( utc.fromUTCDateTime( end   ) );
-        ev.setTimeZone( "UTC"); // make sure it is really utc
+        ev.setStartDateTime( utc.toDateTime( start ) );
+        ev.setEndDateTime  ( utc.toDateTime( end   ) );
     }else {
         /* to current date time */
-        // owarn << " Start is " << start << "" << oendl;
-        OPimTimeZone zone( ev.timeZone().isEmpty() ? OPimTimeZone::current() : ev.timeZone() );
-        QDateTime date = zone.toDateTime( start );
-        owarn << " Start is " << date.toString() << "" << oendl;
-        ev.setStartDateTime( zone.toDateTime( date, OPimTimeZone::current() ) );
+        OPimTimeZone   to_zone( ev.timeZone().isEmpty() ? OPimTimeZone::utc() : OPimTimeZone::current() );
 
-        date = zone.toDateTime( end );
-        ev.setEndDateTime  ( zone.toDateTime( date, OPimTimeZone::current()   ) );
+        ev.setStartDateTime(to_zone.toDateTime( start));
+        ev.setEndDateTime  (to_zone.toDateTime( end));
     }
     if ( rec && rec->doesRecur() ) {
         OPimTimeZone utc = OPimTimeZone::utc();
         OPimRecurrence recu( *rec ); // call copy c'tor;
-        recu.setEndDate ( utc.fromUTCDateTime( rp_end ).date() );
-        recu.setCreatedDateTime( utc.fromUTCDateTime( created ) );
+        recu.setEndDate ( utc.toDateTime( rp_end ).date() );
+        recu.setCreatedDateTime( utc.toDateTime( created ) );
         recu.setStart( ev.startDateTime().date() );
         ev.setRecurrence( recu );
     }
@@ -523,7 +542,7 @@ void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
         owarn << "already contains assign uid" << oendl;
         ev.setUid( 1 );
     }
-    owarn << "addind " << ev.uid() << " " << ev.description() << "" << oendl;
+
     if ( ev.hasRecurrence() )
         m_rep.insert( ev.uid(), ev );
     else
@@ -548,7 +567,6 @@ void ODateBookAccessBackend_XML::setField( OPimEvent& e, int id, const QString& 
     case FType:
         if ( value == "AllDay" ) {
             e.setAllDay( true );
-            e.setTimeZone( "UTC" );
         }
         break;
     case FAlarm:
@@ -622,6 +640,7 @@ void ODateBookAccessBackend_XML::setField( OPimEvent& e, int id, const QString& 
     }
         break;
     case FTimeZone:
+        m_noTimeZone = false;
         if ( value != "None" )
             e.setTimeZone( value );
         break;
