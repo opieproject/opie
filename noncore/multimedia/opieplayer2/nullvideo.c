@@ -39,7 +39,7 @@
 #include <xine.h>
 #include <xine/video_out.h>
 #include <xine/xine_internal.h>
-#include <xine/xineutils.h>
+//#include <xine/xineutils.h>
 #include <xine/vo_scale.h>
 #include <xine/buffer.h>
 
@@ -494,7 +494,7 @@ xine_vo_driver_t* init_video_out_plugin( xine_t *xine,
   vo->frameDis = frameDisplayFunc;
 
   /* return ( vo_driver_t*) vo; */
-  return vo_new_port( xine, ( vo_driver_t* )vo );
+  return vo_new_port( xine, ( vo_driver_t* )vo, 1 );
 }
 
 #if 0
