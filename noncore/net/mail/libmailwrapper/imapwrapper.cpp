@@ -73,9 +73,11 @@ bool IMAPwrapper::start_tls(bool force_tls)
     }
     if (try_tls) {
         err =  mailimap_starttls(m_imap);
-        if (err != MAILIMAP_NO_ERROR && force_tls) {
-            Global::statusMessage(tr("Server has no TLS support!"));
-            odebug << "Server has no TLS support!" << oendl;
+        if (err != MAILIMAP_NO_ERROR) {
+            if (force_tls) {
+                Global::statusMessage(tr("Server has no TLS support!"));
+                odebug << "Server has no TLS support!" << oendl;
+            }
             try_tls = false;
         } else {
             mailstream_low * low;
@@ -185,7 +187,7 @@ void IMAPwrapper::login()
     /* login */
 
     if (ok) {
-        err = mailimap_login_simple( m_imap, (char*)user, (char*)pass );
+        err = mailimap_login( m_imap, (char*)user, (char*)pass );
         if ( err != MAILIMAP_NO_ERROR ) {
             Global::statusMessage(tr("error logging in imap server: %1").arg(m_imap->imap_response));
             ok = false;
