@@ -143,8 +143,10 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
 
 // Display an on-screen display volume
     unsigned int l, r, v; bool m;
-    AudioDevice::getVolume( l, r, m );
-    v = ((l + r) * 11) / (2*0xFFFF);
+
+// TODO FIXME
+//    AudioDevice::getVolume( l, r, m );
+//    v = ((l + r) * 11) / (2*0xFFFF);
 
     if ( drawnOnScreenDisplay && onScreenDisplayVolume == v )
   return;
