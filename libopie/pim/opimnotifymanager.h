@@ -22,7 +22,22 @@ public:
     void replace( const OPimNotify& );
 
     Reminders reminders()const;
+
+    /**
+     * Return 
+     */
     Alarms    alarms()const;
+
+    /**
+     * Return alarm at DateTime "when". If more than one is registered at this
+     * DateTime, the first one is returned.
+     * If none was found, an empty Alarm is returned.
+     * @param when The date and time of the returned alarm
+     * @param found Returns true if anything was found.
+     * @return Returns the found alarm at given DateTime. It is empty if found is false 
+     * (nothing could be found at given date and time)
+     */
+    OPimAlarm alarmAtDateTime( const QDateTime& when, bool& found ) const;
 
     void setAlarms( const Alarms& );
     void setReminders( const Reminders& );

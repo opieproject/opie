@@ -45,6 +45,22 @@ OPimNotifyManager::Reminders OPimNotifyManager::reminders()const {
 OPimNotifyManager::Alarms    OPimNotifyManager::alarms()const {
     return m_al;
 }
+OPimAlarm OPimNotifyManager::alarmAtDateTime( const QDateTime& when, bool& found ) const {
+	Alarms::ConstIterator it;
+	found = true;
+
+	for ( it = m_al.begin(); it != m_al.end(); ++it ){
+		if ( (*it).dateTime() == when )
+			return (*it);
+	}
+
+	// Fall through if nothing could be found
+	found = false;
+	OPimAlarm empty;
+	return empty;
+}
+
+
 void OPimNotifyManager::setAlarms( const Alarms& al) {
     m_al = al;
 }

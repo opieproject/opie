@@ -11,6 +11,11 @@
 #include <qvaluelist.h>
 #include <qmap.h>
 
+
+/**
+ * Class to handle Recurrencies..
+ */
+
 class ORecur {
 public:
     typedef QValueList<QDate> ExceptionList;
