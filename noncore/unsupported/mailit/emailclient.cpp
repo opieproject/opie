@@ -467,7 +467,11 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
     }
   }
   if ((!found)||(fromDisk)) item = new EmailListItem(inboxView, newMail, TRUE);
-    
+  
+  if (item->getMail()->files.count()>0)
+  {
+	item->setPixmap(0, Resource::loadPixmap("mailit/attach"));
+  }  
     /*if (!newMail.downloaded)
       mailDownloadList.sizeInsert(newMail.serverId, newMail.size);*/
   
