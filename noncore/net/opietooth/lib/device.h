@@ -7,7 +7,11 @@
 #include <qvaluelist.h>
 
 namespace OpieTooth {
-
+    /**
+     *  Device takes care of attaching serial 
+     *  devices to the blueZ stack.
+     *  After attaching it hciconfig ups it
+     */
     class Device : public QObject {
     Q_OBJECT
 
@@ -40,7 +44,7 @@ namespace OpieTooth {
         /**
          * Is the device loaded?
          * @return bool, if the device is loaded
-
+	 */
         bool isLoaded()const;
 
         /**
