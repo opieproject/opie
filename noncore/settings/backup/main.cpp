@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
   QPEApplication a( argc, argv );
   
   BackupAndRestore app(0, "mainwindow");
-  app.show();
+  a.showMainWidget(&app);
   return a.exec();
 }
 
