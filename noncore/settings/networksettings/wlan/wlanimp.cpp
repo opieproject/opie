@@ -226,18 +226,12 @@ void WLANImp::accept(){
   if(!interfaceSetup->saveChanges())
     return;
 
-  OProcess insert;
-//  OProcess eject;
-
-  insert << "sh -c \"cardctl insert && cardctl eject\"";
-//  eject << "cardctl eject";
-
-//  if (!eject.start(OProcess::Block, OProcess::NoCommunication) ) {
-//    qWarning("could not start cardctl eject");
-//  }
+  OProcess insert(QString("sh"));
+  insert << "-c";
+  insert << "cardctl eject && cardctl insert";
 
   if (!insert.start(OProcess::DontCare, OProcess::NoCommunication) ) {
-    qWarning("could not start cardctl insert");
+    qWarning("could not start cardctl");
   }
 
   // Close out the dialog
