@@ -147,7 +147,7 @@ void AdvancedFm::doDelete() {
    if( count > 0)  {
       if(count > 1 ) {
          QString msg;
-         msg=tr("Really delete\n%1 files?").arg(count);
+         msg=tr("<p>Really delete %1 files?</p>").arg(count);
          switch ( QMessageBox::warning(this,tr("Delete"),msg
                                        ,tr("Yes"),tr("No"),0,0,1) )
          {
@@ -175,7 +175,7 @@ void AdvancedFm::doDelete() {
             //if file is a directory
 
             switch ( QMessageBox::warning( this, tr("Delete Directory?"),
-                                           tr("Really delete %1\nand all it's contents ?" ).arg( f ) ,
+                                           tr("<p>Really delete %1 and all it's contents?</p>" ).arg( f ) ,
                                            tr("Yes"), tr("No"), 0, 0, 1) ) {
             case 0:
             {
@@ -193,7 +193,7 @@ void AdvancedFm::doDelete() {
          } else {
             if(doMsg) {
                switch ( QMessageBox::warning(this,tr("Delete"),
-                                             tr("Really delete\n%1?").arg( myFile ),
+                                             tr("<p>Really delete %1?</p>").arg( myFile ),
                                              tr("Yes"), tr("No"), 0, 0, 1) ) {
                case 1:
                   return;
@@ -286,7 +286,7 @@ void AdvancedFm::copy() {
    if( count > 0) {
       if(count > 1 ){
          QString msg;
-         msg=tr("Really copy\n%1 files?").arg(count);
+         msg=tr("<p>Really copy %1 files?</p>").arg(count);
          switch ( QMessageBox::warning(this,tr("Copy"),msg
                                        ,tr("Yes"),tr("No"),0,0,1) )
          {
@@ -501,7 +501,7 @@ bool AdvancedFm::moveDirectory( const QString & src, const QString & dest ) {
 				err = -1;
 
 		if(err!=0) {
-				QMessageBox::message(tr("Note"),tr("Could not move\n") + src);
+				QMessageBox::message(tr("Note"),tr("<p>Could not move %1</p>").arg( src));
 				return false;
 		}
 		return true;
@@ -513,7 +513,7 @@ bool AdvancedFm::copyDirectory( const QString & src, const QString & dest ) {
     owarn << cmd << oendl; 
 		int    err = system( (const char *) cmd );
 		if ( err != 0 ) {
-				QMessageBox::message("AdvancedFm", tr( "Could not copy \n%1 \nto \n%2").arg( src ).arg( dest ) );
+				QMessageBox::message("AdvancedFm", tr( "<p>Could not copy %1 to %2</p>").arg( src ).arg( dest ) );
 				return false;
 		}
 

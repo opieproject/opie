@@ -297,7 +297,7 @@ void  AdvancedFm::currentPathComboChanged() {
       CurrentDir()->setPath( currentPathCombo->lineEdit()->text() );
       populateView();
    } else {
-      QMessageBox::message(tr("Note"),tr("That directory does not exist"));
+      QMessageBox::message(tr("Note"),tr("<p>That directory does not exist</p>"));
    }
 }
 
@@ -669,7 +669,7 @@ void AdvancedFm::removeCustomDir() {
 //first remove list
    if(list.grep(dir,true).isEmpty()) {
       QMessageBox::message(tr( "AdvancedFm" ),
-                           tr("Cannot remove current directory\nfrom bookmarks.\nIt is not bookmarked!"));
+                           tr("<p>Cannot remove current directory from bookmarks. It is not bookmarked!</p>"));
    } else {
       for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
          if((*it) != dir) {
