@@ -88,7 +88,7 @@ FileItem::FileItem( QListView * parent, const QFileInfo & fi )
   pm = Resource::loadPixmap("UnknownDocument-14");
    if( fi.isSymLink() ){
 		// overlay link image
-		QPixmap lnk = Resource::loadPixmap( "symlink" );
+		QPixmap lnk = Resource::loadPixmap( "filebrowser/symlink" );
 		QPainter painter( &pm );
 		painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
         pm.setMask( pm.createHeuristicMask( FALSE ) );
