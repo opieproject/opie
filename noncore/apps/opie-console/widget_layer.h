@@ -42,8 +42,11 @@ public:
 
 	/**
 	 * constructor
+	 * @param const Profile &config, the configuration for this widget
+	 * @param QWidget *parent, the parent widget
+	 * @param const char *name, the name of the widget, defaults to ""
 	 */
-	WidgetLayer( QWidget *parent=0, const char *name=0 );
+	WidgetLayer( const Profile &config, QWidget *parent=0, const char *name=0 );
 
 	/**
 	 * destructor
@@ -53,6 +56,9 @@ public:
 public:
 	/**
 	 * sets the image
+	 * @param QArray<Character> const newimg, the new image
+	 * @param int lines, lines count of newimg
+	 * @param int columns, columns count of newimg
 	 */
 	virtual void setImage( QArray<Character> const newimg, int lines, int colums ) = 0;
 
@@ -62,12 +68,12 @@ public:
 	void bell();
 
 	/**
-	 * return the lines count
+	 * @return int m_lines, the lines count
 	 */
 	int lines()	{ return m_lines; }
 
 	/**
-	 * return the columns count
+	 * @return int m_columns, the columns count
 	 */
 	int columns()	{ return m_columns; }
 
@@ -78,10 +84,13 @@ public:
 
 	/**
 	 * insert text
+	 * @param QString text, the text to be inserted
 	 */
 	void insertText( QString text );
+	
 	/**
 	 * set selection (clipboard) to text
+	 * @param const QString &text, the text to be selected
 	 */
 	void setSelection( const QString &text );
 
@@ -100,19 +109,26 @@ signals:
 
 	/**
 	 * whenever Mouse selects something
-	 * 0	left Button
-	 * 3	Button released
+	 * @param int button, the button that us pressed :
+	 * 		0	left Button
+	 * 		3	Button released
+	 * @param int x, x position
+	 * @param int y, y position
+	 *
 	 * // numbering due to layout in old TEWidget
 	 */
 	void mousePressed( int button, int x, int y );
 
 	/**
 	 * size of image changed
+	 * @param int lines, line count of new size
+	 * @param int columns, column count of new size
 	 */
 	void imageSizeChanged( int lines, int columns );
 
 	/**
 	 * cursor in history changed
+	 * @param int value, value of history cursor
 	 */
 	void historyCursorChanged( int value );
 
@@ -123,18 +139,22 @@ signals:
 
 	/**
 	 * selection begin
+	 * @param const int x, x position
+	 * @param const int y, y position
 	 */
 	void selectionBegin( const int x, const int y );
 
 	/**
 	 * selection extended
 	 *  (from begin (s.a.) to x, y)
+	 *  @param const int x, x position
+	 *  @param const int y, y position
 	 */
 	void selectionExtended( const int x, const int y );
 
 	/**
 	 * selection end
-	 *  bool: preserve line breaks in selection
+	 * @param const bool lineBreakPreserve, preserve line breaks in selection
 	 */
 	void selectionEnd( const bool lineBreakPreserve );
 
