@@ -6,6 +6,7 @@ Name=EMail
 Comment=An EMail Client
 Name[da]=E-mail
 Name[de]=EMail
+Comment[de]=Ein EMail Client
 Name[es]=Correo-e
 Comment[es]=Cliente de correo electrónico
 Name[fr]=Opie E-Mail

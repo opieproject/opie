@@ -5,6 +5,7 @@ Type=Application
 Name=VNC Viewer
 Comment=Virtual Network Computing (VNC) Viewer
 Name[de]=VNC Client
+Comment[de]=Virtual Network Computing (VNC) Client
 Name[es]=Visor VNC
 Comment[es]=Visor de Virtual Network Computing (VNC)
 Name[fr]=Client VNC

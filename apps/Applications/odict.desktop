@@ -6,6 +6,7 @@ Name=ODict
 Comment=A dictionary lookup application
 Name[da]=Ordbog
 Name[de]=Wörterbuch
+Comment[de]=Wörterbuch (EN/DE)
 Name[es]=Diccionario
 Comment[es]=Una aplicación de búsqueda en diccionario
 Name[fr]=Dictionnaire

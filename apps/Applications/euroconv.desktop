@@ -5,6 +5,7 @@ Type=Application
 Name=Euroconv
 Comment=An Euro converter
 Name[de]=Euroconv
+Comment[de]=Ein Euro Konverter
 Name[fr]=Euroconv
 Comment[fr]=Un convertisseur Euro
 Name[it]=Euro Convertitore

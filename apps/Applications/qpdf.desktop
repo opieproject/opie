@@ -7,6 +7,7 @@ Name=PDF Viewer
 Comment=PDF Viewer
 Name[da]=PDF Viser
 Name[de]=PDF Betrachter
+Comment[de]=Betrachter fuer PDF Dateien
 Name[es]=Visor PDF
 Comment[es]=Visor de ficheros en Portable Document Format (PDF)
 Name[fr]=Lecteur PDF
@@ -22,4 +23,3 @@ Name[sl]=PDF pregledovalnik
 Comment[sl]=PDF pregledovalnik
 Name[nl]=PDF Lezer
 Comment[nl]=Een proramma om PDF's mee te lezen
-

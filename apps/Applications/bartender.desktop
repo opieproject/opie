@@ -5,3 +5,5 @@ File=bartender
 Icon=bartender/bartender.png
 Name=Opie-Bartender
 Type=Application
+Name[de]=Opie-Bartender
+Comment[de]=Drink Rezepte Datenbank
