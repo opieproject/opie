@@ -166,7 +166,7 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
     else
     {
         s.sprintf( "(i) new network: '%s'", (const char*) essid );
-        network = new MScanListItem( this, "networks", essid, QString::null, 0, 0, 0 );
+        network = new MScanListItem( this, "network", essid, QString::null, 0, 0, 0 );
     }
 
 
@@ -250,7 +250,7 @@ MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QS
                 _channel( channel ), _signal( signal ), _beacons( 1 )
 {
     qDebug( "creating scanlist item" );
-    if ( WellenreiterConfigWindow::instance() && type == "networks" )
+    if ( WellenreiterConfigWindow::instance() && type == "network" )
         playSound( WellenreiterConfigWindow::instance()->soundOnNetwork() );
     decorateItem( type, essid, macaddr, wep, channel, signal );
 }
