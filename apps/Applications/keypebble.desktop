@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=Virtual Network Computing (VNC) Viewer
 Exec=keypebble
-Icon=vnc
+Icon=vnc/vnc
 Type=Application
 Name=VNC Viewer
 Name[pt_BR]=Cliente VNC
