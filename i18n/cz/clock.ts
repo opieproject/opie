@@ -1,287 +1,209 @@
-<!DOCTYPE TS><TS>
-<context>
+<!DOCTYPE TS>
+<TS>
+  <context>
     <name>AlarmDlg</name>
     <message>
-        <source>Clock</source>
-        <translation type="unfinished">Hodiny</translation>
+      <source>Clock</source>
+      <translation>Hodiny</translation>
     </message>
     <message>
-        <source>Snooze</source>
-        <translation type="unfinished">Zdřímnout is</translation>
+      <source>Snooze</source>
+      <translation>Zdřímnout is</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
+      <source>Close</source>
+      <translation>Zavřít</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>AlarmDlgBase</name>
     <message>
-        <source>Form1</source>
-        <translation type="unfinished"></translation>
+      <source>Form1</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>TextLabel1</source>
-        <translation type="unfinished"></translation>
+      <source>TextLabel1</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Snooze</source>
-        <translation type="unfinished">Zdřímnout is</translation>
+      <source>Snooze</source>
+      <translation>Zdřímnout is</translation>
     </message>
     <message>
-        <source> mins</source>
-        <translation type="unfinished"></translation>
+      <source> mins</source>
+      <translation> minut</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
+      <source>Close</source>
+      <translation>Zavřít</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>Clock</name>
     <message>
-        <source>Snooze</source>
-        <translation type="obsolete">Zdřímnout is</translation>
+      <source>Start</source>
+      <translation>Start</translation>
     </message>
     <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
+      <source>Reset</source>
+      <translation>Reset</translation>
     </message>
     <message>
-        <source>Clock</source>
-        <translation type="obsolete">Hodiny</translation>
+      <source>Stop</source>
+      <translation>Stop</translation>
     </message>
     <message>
-        <source>Stopwatch</source>
-        <translation type="obsolete">Stopky</translation>
+      <source>Mon</source>
+      <comment>Monday</comment>
+      <translation>Pon</translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation>Start</translation>
+      <source>Tue</source>
+      <comment>Tuesday</comment>
+      <translation>Úte</translation>
     </message>
     <message>
-        <source>Reset</source>
-        <translation>Reset</translation>
+      <source>Wed</source>
+      <comment>Wednesday</comment>
+      <translation>Stř</translation>
     </message>
     <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Nastavení alarmu</translation>
+      <source>Thu</source>
+      <comment>Thursday</comment>
+      <translation>Čtv</translation>
     </message>
     <message>
-        <source>Set date and time.</source>
-        <translation type="obsolete">Nastavení data a času.</translation>
+      <source>Fri</source>
+      <comment>Friday</comment>
+      <translation>Pát</translation>
     </message>
     <message>
-        <source>Alarm Is On</source>
-        <translation type="obsolete">Alarm je zapnutý</translation>
+      <source>Sat</source>
+      <comment>Saturday</comment>
+      <translation>Sob</translation>
     </message>
     <message>
-        <source>Alarm Is Off</source>
-        <translation type="obsolete">Alarm je vypnutý</translation>
+      <source>Sun</source>
+      <comment>Sunday</comment>
+      <translation>Neď</translation>
     </message>
     <message>
-        <source>Stop</source>
-        <translation>Stop</translation>
+      <source>Lap/Split</source>
+      <translation>Kolo/Split</translation>
     </message>
     <message>
-        <source>Alarm set: %1</source>
-        <translation type="obsolete">Nastavení alarmu: %1</translation>
+      <source>&lt;b>Daily Alarm:&lt;/b>&lt;p></source>
+      <translation>&lt;b>Denní Alarm:&lt;/b>&lt;p></translation>
     </message>
     <message>
-        <source>Clock: Alarm was missed.</source>
-        <translation type="obsolete">Hodiny: Alarm uplynul.</translation>
+      <source>Select Day</source>
+      <translation>Vyberte den</translation>
     </message>
     <message>
-        <source>Mon</source>
-        <comment>Monday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <comment>Friday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lap/Split</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Daily Alarm:&lt;/b&gt;&lt;p&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select Day</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Daily alarm requires at least
+      <source>Daily alarm requires at least
 one day to be selected.</source>
-        <translation type="unfinished"></translation>
+      <translation>Denní alarm vyžaduje vybrat 
+alespoň jeden den.
+</translation>
     </message>
     <message>
-        <source>All</source>
-        <translation type="unfinished">Vše</translation>
+      <source>All</source>
+      <translation>Vše</translation>
     </message>
     <message>
-        <source>Audio</source>
-        <translation type="unfinished">Zvuk</translation>
+      <source>Audio</source>
+      <translation>Zvuk</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>ClockBase</name>
     <message>
-        <source>Clock</source>
-        <translation type="unfinished">Hodiny</translation>
+      <source>Clock</source>
+      <translation>Hodiny</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
+      <source>...</source>
+      <translation>...</translation>
     </message>
     <message>
-        <source>Stopwatch</source>
-        <translation type="unfinished">Stopky</translation>
+      <source>Stopwatch</source>
+      <translation>Stopky</translation>
     </message>
     <message>
-        <source>Split</source>
-        <translation type="unfinished"></translation>
+      <source>Split</source>
+      <translation>Split</translation>
     </message>
     <message>
-        <source>Lap</source>
-        <translation type="unfinished"></translation>
+      <source>Lap</source>
+      <translation>Kolo</translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation type="unfinished">Start</translation>
+      <source>Start</source>
+      <translation>Start</translation>
     </message>
     <message>
-        <source>Starts and stops the stopwatch.</source>
-        <translation type="unfinished"></translation>
+      <source>Starts and stops the stopwatch.</source>
+      <translation>Spustí a zastaví stopky.</translation>
     </message>
     <message>
-        <source>Lap/Split</source>
-        <translation type="unfinished"></translation>
+      <source>Lap/Split</source>
+      <translation>Kolo/Split</translation>
     </message>
     <message>
-        <source>Resets the stopwatch.</source>
-        <translation type="unfinished"></translation>
+      <source>Resets the stopwatch.</source>
+      <translation>Vynuluje stopky.</translation>
     </message>
     <message>
-        <source>Alarm</source>
-        <translation type="unfinished"></translation>
+      <source>Alarm</source>
+      <translation>Alarm</translation>
     </message>
     <message>
-        <source>Daily Alarm</source>
-        <translation type="unfinished"></translation>
+      <source>Daily Alarm</source>
+      <translation>Denní alarm</translation>
     </message>
     <message>
-        <source>Enabled</source>
-        <translation type="unfinished"></translation>
+      <source>Enabled</source>
+      <translation>Zapnutý</translation>
     </message>
     <message>
-        <source>Check to enable the daily alarm</source>
-        <translation type="unfinished"></translation>
+      <source>Check to enable the daily alarm</source>
+      <translation>Zaškrtněte pro aktivaci denního alarmu</translation>
     </message>
     <message>
-        <source>Set the hour the alarm will sound.</source>
-        <translation type="unfinished"></translation>
+      <source>Set the hour the alarm will sound.</source>
+      <translation>Nastavte hodinu spuštění alarmu.</translation>
     </message>
     <message>
-        <source>:</source>
-        <translation type="unfinished"></translation>
+      <source>:</source>
+      <translation>:</translation>
     </message>
     <message>
-        <source>Set the minute the alarm will sound.</source>
-        <translation type="unfinished"></translation>
+      <source>Set the minute the alarm will sound.</source>
+      <translation>Nastavte minutu spuštění alarmu.</translation>
     </message>
     <message>
-        <source>AM</source>
-        <translation type="unfinished">AM</translation>
+      <source>AM</source>
+      <translation>AM</translation>
     </message>
     <message>
-        <source>PM</source>
-        <translation type="unfinished">PM</translation>
+      <source>PM</source>
+      <translation>PM</translation>
     </message>
     <message>
-        <source>Days:</source>
-        <translation type="unfinished"></translation>
+      <source>Days:</source>
+      <translation>Dny:</translation>
     </message>
     <message>
-        <source>Countdown Alarm</source>
-        <translation type="unfinished"></translation>
+      <source>Countdown Alarm</source>
+      <translation>Odečítací alarm</translation>
     </message>
     <message>
-        <source>Play Sound</source>
-        <translation type="unfinished"></translation>
+      <source>Play Sound</source>
+      <translation>Zahrát zvuk</translation>
     </message>
     <message>
-        <source>Play File</source>
-        <translation type="unfinished"></translation>
+      <source>Play File</source>
+      <translation>Zahrát soubor</translation>
     </message>
-</context>
-<context>
-    <name>Set_Alarm</name>
-    <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Nastavení Alarmu</translation>
-    </message>
-    <message>
-        <source>Hour</source>
-        <translation type="obsolete">Hodina</translation>
-    </message>
-    <message>
-        <source>Minute</source>
-        <translation type="obsolete">Minuta</translation>
-    </message>
-    <message>
-        <source>AM</source>
-        <translation type="obsolete">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
-    </message>
-    <message>
-        <source>mp3 alarm</source>
-        <translation type="obsolete">mp3 alarm</translation>
-    </message>
-    <message>
-        <source>Snooze Delay
-(minutes)</source>
-        <translation type="obsolete">Zdřímnutí si
-(minuty)</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Vše</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">Zvuk</translation>
-    </message>
-</context>
+  </context>
 </TS>
