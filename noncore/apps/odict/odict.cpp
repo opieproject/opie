@@ -95,7 +95,15 @@ void ODict::slotDisplayAbout()
 void ODict::slotStartQuery()
 {
 	QString querystring = query_le->text();
-	DingWidget *ding = new DingWidget( vbox , querystring , browser_top, browser_bottom, activated_name);
+	qDebug("opening dict >%s< for >%s<", activated_name.latin1(),querystring.latin1());
+	if (querystring.isEmpty()){
+	  qWarning("emphty querysting");
+	  return;
+	}
+	if (!activated_name || activated_name.isEmpty())
+	  QMessageBox::warning(this,tr("No Dictionary"),tr("Please choose a dictonary") );
+	else
+	  DingWidget *ding = new DingWidget( vbox , querystring , browser_top, browser_bottom, activated_name);
 }
 
 
