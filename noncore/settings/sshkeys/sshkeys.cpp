@@ -21,6 +21,8 @@
 #include "sshkeys.h"
 
 #include <qpe/qpeapplication.h>
+#include <qdir.h>
+#include <qfile.h>
 #include <qmultilineedit.h>
 #include <qpushbutton.h>
 #include <qlistview.h>
@@ -28,6 +30,8 @@
 
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -39,7 +43,15 @@ static char *keynames[] = { "identity", "id_rsa", "id_dsa" };
 SSHKeysApp::SSHKeysApp( QWidget* parent,  const char* name, WFlags fl )
     : SSHKeysBase( parent, name, fl )
 {
-    char *home = getenv("HOME");
+    /* If we had a controlling TTY, detach from it.
+       This is to ensure that SSH uses ssh-askpass */
+    int fd = open("/dev/tty", O_RDONLY);
+    if (fd != -1) {
+        ioctl(fd, TIOCNOTTY, NULL);
+        close(fd);
+    }
+
+    QCString home = QFile::encodeName( QDir::homeDirPath() );
     unsigned i;
 
     connect(AddButton, SIGNAL(clicked()), this, SLOT(doAddButton()));
@@ -61,7 +73,7 @@ SSHKeysApp::SSHKeysApp( QWidget* parent,  const char* name, WFlags fl )
             char thiskeyname[32];
 
             thiskeyname[31] = 0;
-            snprintf(thiskeyname, 31, "%s/.ssh/%s", home, keynames[i]);
+            snprintf(thiskeyname, 31, "%s/.ssh/%s", home.data(), keynames[i]);
             if (!access(thiskeyname, R_OK)) {
                 KeyFileName->insertItem(thiskeyname);
             }

@@ -33,6 +33,7 @@ class SSHKeysApp : public SSHKeysBase
  public:
     SSHKeysApp( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~SSHKeysApp();
+    static QString appName() { return QString::fromLatin1( QUICKAPP_NAME); }
 
  private:
     void log_text(const char *text);
