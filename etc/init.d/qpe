@@ -1,9 +1,13 @@
 #!/bin/sh
 # 
 
+module_id() {
+   cat /proc/hal/model
+}
+
 export LOGNAME=root
 export HOME=/$LOGNAME
-export QWS_DISPLAY=Transformed:Rot270:0
+#export QWS_DISPLAY=Transformed:Rot270:0
 export QTDIR=/opt/QtPalmtop
 export OPIEDIR=/opt/QtPalmtop
 export QPEDIR=/opt/QtPalmtop
@@ -32,6 +36,14 @@ case $1 in
 
 	rm -f /etc/rc2.d/S99x # Can't have both running!
 
+	 case odule_id in 
+        "3100" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
+        "3600" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
+        "3700" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
+        "3800" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
+        *) echo "Unknown processor type -odule_id-!" ;;
+   	 esac
+	
 	$OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
 
 	;;
