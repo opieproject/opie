@@ -170,9 +170,9 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
 # else
       // This is the way this has to be done now I guess, doesn't allow for
       // independant right and left channel setting, or setting for different outputs
-    Config cfg("Sound");
-    cfg.setGroup("System");
-    cfg.writeEntry("Volume",(int)rV);
+    Config cfg("qpe"); // qtopia is "Sound"
+    cfg.setGroup("Volume"); // qtopia is "Settings"
+    cfg.writeEntry("VolumePercent",(int)rV); //qtopia is Volume
 # endif
 
 //#endif
