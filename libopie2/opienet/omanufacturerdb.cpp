@@ -34,9 +34,12 @@
 #include <opie2/odebug.h>
 
 /* QT */
+#include <qapplication.h>
 #include <qstring.h>
 #include <qfile.h>
 #include <qtextstream.h>
+
+#define OPIE_IMPROVE_GUI_LATENCY 1
 
 OManufacturerDB* OManufacturerDB::_instance = 0;
 
@@ -88,6 +91,9 @@ OManufacturerDB::OManufacturerDB()
             manufacturers.insert( addr, manu );
             manufacturersExt.insert( addr, extManu );
             odebug << "OmanufacturerDB: parse '" << addr << "' as '" << manu << "' (" << extManu << ")" << oendl;
+            #ifdef OPIE_IMPROVE_GUI_LATENCY
+            if ( qApp ) qApp->processEvents();
+            #endif
         }
     }
 }
