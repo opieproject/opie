@@ -1,0 +1,9 @@
+Files: bin/tictac apps/Games/tictac.desktop pics/Tictac.png 
+Package: tictac
+Priority: optional
+Section: opie/games
+Maintainer: ljp <ljp@llornkcor.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Tic Tac Toe game.
