@@ -3,435 +3,435 @@
     <name>AccountView</name>
     <message>
         <source>Error creating new Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda veidojot jaunu Folderi</translation>
     </message>
     <message>
         <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Kļūda veidojot&lt;br&gt;jaunu folderi - pārtraucu.&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
     <name>AddressPicker</name>
     <message>
         <source>There are no entries in the addressbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav ierakstu adresu grāmatā.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to select at least one address entry.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Jums jānorāda vismaz viena adrese.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
 </context>
 <context>
     <name>AddressPickerUI</name>
     <message>
         <source>Address Picker</source>
-        <translation type="unfinished"></translation>
+        <translation>Adreses Izvēle</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Atlikt</translation>
     </message>
 </context>
 <context>
     <name>ComposeMail</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Vārds</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Izmērs</translation>
     </message>
     <message>
         <source>Problem</source>
-        <translation type="unfinished"></translation>
+        <translation>Problēma</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please create an SMTP account first.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Lūdzu vispirms izveidojiet SMTP kontu.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select a File.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Lūdzu izvēlaties failu.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>ComposeMailUI</name>
     <message>
         <source>Compose Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Veidot Vēstuli</translation>
     </message>
     <message>
         <source>send later</source>
-        <translation type="unfinished"></translation>
+        <translation>nosūtīt vēlāk</translation>
     </message>
     <message>
         <source>use:</source>
-        <translation type="unfinished"></translation>
+        <translation>lietot:</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasts</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Temats</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Kam</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcijas</translation>
     </message>
     <message>
         <source>Reply-To</source>
-        <translation type="unfinished"></translation>
+        <translation>Atbildēt</translation>
     </message>
     <message>
         <source>BCC</source>
-        <translation type="unfinished"></translation>
+        <translation>BCC</translation>
     </message>
     <message>
         <source>Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Paraksts</translation>
     </message>
     <message>
         <source>CC</source>
-        <translation type="unfinished"></translation>
+        <translation>CC</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>Pielikums</translation>
     </message>
     <message>
         <source>Delete File</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst Failu</translation>
     </message>
     <message>
         <source>Add File</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot Failu</translation>
     </message>
 </context>
 <context>
     <name>EditAccounts</name>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieslēgums</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tips</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Jautājums</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete the selected Account?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Vai tiešām vēlaties dzēst iezīmēto Pieslēgumu?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Jā</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nē</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select an account.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Lūdzu izvēlaties pieslēgumu.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
 </context>
 <context>
     <name>EditAccountsUI</name>
     <message>
         <source>Configure Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurēt Pieslēgumus</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasts</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieslēguma Vārds</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot</translation>
     </message>
     <message>
         <source>News</source>
-        <translation type="unfinished"></translation>
+        <translation>Ziņas</translation>
     </message>
 </context>
 <context>
     <name>IMAPconfigUI</name>
     <message>
         <source>Configure IMAP</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurēt IMAP</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietotājs</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietot SSL</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Parole</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Ports</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveris</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieslēguma Vārds</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieslēgums</translation>
     </message>
     <message>
         <source>Prefix</source>
-        <translation type="unfinished"></translation>
+        <translation>Prefikss</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasts</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādījumi</translation>
     </message>
     <message>
         <source>Compose new mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Veidot jaunu vēstuli</translation>
     </message>
     <message>
         <source>Send queued mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Sūtīt pastu no rindas</translation>
     </message>
     <message>
         <source>Show/Hide folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Slēpt/Rādīt mapes</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst Pastu</translation>
     </message>
     <message>
         <source>Edit settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot uzstādījumus</translation>
     </message>
     <message>
         <source>Configure accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurēt pieslēgumus</translation>
     </message>
     <message>
         <source>Mailbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Pastkaste</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Temats</translation>
     </message>
     <message>
         <source>Sender</source>
-        <translation type="unfinished"></translation>
+        <translation>Sūtītājs</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Izmērs</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datums</translation>
     </message>
 </context>
 <context>
     <name>NNTPconfigUI</name>
     <message>
         <source>Configure NNTP</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurēt NNTP</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Ports</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieslēguma vārds</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieslēgums</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveris</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietot SSL</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietotājs</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Parole</translation>
     </message>
     <message>
         <source>Use Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Pielietot lietotājvārdu</translation>
     </message>
 </context>
 <context>
     <name>Newmdirdlgui</name>
     <message>
         <source>Enter directory name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet direktorija vārdu</translation>
     </message>
     <message>
         <source>Directory name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Direktorija vārds:</translation>
     </message>
     <message>
         <source>Directory contains other subdirs</source>
-        <translation type="unfinished"></translation>
+        <translation>Direktorija satur citus apakšdirektorijus</translation>
     </message>
 </context>
 <context>
     <name>OpieMail</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Mail queue flushed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasta rinda iztukšota</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst Pastu</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Vai tiešām vēlaties dzēst šo pastu? &lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>Read this mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Lasīt šo pastu</translation>
     </message>
     <message>
         <source>Delete this mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst šo pastu</translation>
     </message>
     <message>
         <source>Copy/Move this mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopēt/Pārvietot šo pastu</translation>
     </message>
     <message>
         <source>Error creating new Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda veidojot jaunu Mapi</translation>
     </message>
     <message>
         <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Kļūda veidojot &lt;br&gt;jaunu mapi - pārtraucu.&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
     <name>POP3configUI</name>
     <message>
         <source>Configure POP3</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurēt POP3</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieslēgums</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieslēguma Nosaukums</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveris</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Ports</translation>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietot secure sockets:</translation>
     </message>
     <message>
         <source>ssh $SERVER exec imapd</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietotājs</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Parole</translation>
     </message>
 </context>
 <context>
