@@ -1,5 +1,13 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
 
+	* Added daemonizing capabilities to QWS Server [via Qt/Embedded] (mickeyl)
+	* Integrated the new security framework into libopie2 (zecke)
+	* Converted the launcher to use the new security framework (zecke)
+
+2004-07-06	The Opie Team <opie@handhelds.org>
+
+	* Tagged as Version 1.1.4 (devel)
+
 	New Features
 	------------
 	* Added four themes courtesy Robert Griebl (http://www.softforge.de/zstyle)
@@ -11,6 +19,8 @@
 	Fixed Bugs
 	--------
 	* #1068 - Country Drop Down Box Off Screen
+	* #1291 - Opie tinykate does not open .desktop files (ar)
+	* #1291 - Opie sheet not saving correctly (ar)
 	* #1294 - Opie does not know about British Summer Time
 	* #1314 - Drawpad initialization (mickeyl)
 	* #1317 - Packagemanager crashes on hold-down or install (chicken)
@@ -22,7 +32,7 @@
 	* #1348 - Datebook dependency on libopiedb2 (chicken)
 	+ #1328 - Switched SQLDatabase and VCards char encoding from latin1 to unicode (eilers)
 
-2004-25-04	The Opie Team <opie@handhelds.org>
+2004-04-25	The Opie Team <opie@handhelds.org>
 
 	* Released as Version 1.1.3 (devel)
 	* Introduced first implementation of SQL-Support using SQLite (eilers)
