@@ -1,15 +1,13 @@
 TEMPLATE	= app
 
 CONFIG		+= qtopia warn_on release
-win32:DEFINES   += QTOPIA_DLL
 
-DESTDIR		= $(QPEDIR)/bin
+DESTDIR		= $(OPIEDIR)/bin
 
 HEADERS		+= server.h \
 		  serverinterface.h \
 		  launchertab.h \
 		  documentlist.h \
-		  suspendmonitor.h \
 		  appicons.h \
 		  taskbar.h \
                   runningappbar.h \
@@ -21,39 +19,41 @@ HEADERS		+= server.h \
 		  shutdownimpl.h \
 		  launcher.h \
 		  launcherview.h \
-		  $(QPEDIR)/src/settings/calibrate/calibrate.h \
+		  $(OPIEDIR)/core/apps/calibrate/calibrate.h \
 		  startmenu.h \
 		  transferserver.h \
 		  qcopbridge.h \
 		  packageslave.h \
 		  irserver.h \
 		  firstuse.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/buf.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/checksum.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/command.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/emit.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/job.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/netint.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/protocol.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/prototab.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/rsync.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/search.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/stream.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/sumset.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/trace.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/types.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/util.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/whole.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/config_rsync.h \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/qrsync.h \
+	$(OPIEDIR)/rsync/buf.h \
+	$(OPIEDIR)/rsync/checksum.h \
+	$(OPIEDIR)/rsync/command.h \
+	$(OPIEDIR)/rsync/emit.h \
+	$(OPIEDIR)/rsync/job.h \
+	$(OPIEDIR)/rsync/netint.h \
+	$(OPIEDIR)/rsync/protocol.h \
+	$(OPIEDIR)/rsync/prototab.h \
+	$(OPIEDIR)/rsync/rsync.h \
+	$(OPIEDIR)/rsync/search.h \
+	$(OPIEDIR)/rsync/stream.h \
+	$(OPIEDIR)/rsync/sumset.h \
+	$(OPIEDIR)/rsync/trace.h \
+	$(OPIEDIR)/rsync/types.h \
+	$(OPIEDIR)/rsync/util.h \
+	$(OPIEDIR)/rsync/whole.h \
+	$(OPIEDIR)/rsync/config_rsync.h \
+	$(OPIEDIR)/rsync/qrsync.h \
 		  syncdialog.h \
-		  serverapp.h
+		  serverapp.h \
+		  launcherglobal.h \
+		  qprocess.h \
+		  screensaver.h
 
 SOURCES		+= server.cpp \
 		  serverinterface.cpp \
 		  launchertab.cpp \
 		  documentlist.cpp \
-		  suspendmonitor.cpp \
 		  appicons.cpp \
 		  taskbar.cpp \
                   runningappbar.cpp \
@@ -65,7 +65,7 @@ SOURCES		+= server.cpp \
 		  shutdownimpl.cpp \
 		  launcher.cpp \
 		  launcherview.cpp \
-		  $(QPEDIR)/src/settings/calibrate/calibrate.cpp \
+		  $(OPIEDIR)/core/apps/calibrate/calibrate.cpp \
 		  transferserver.cpp \
 		  packageslave.cpp \
    		  irserver.cpp \
@@ -73,46 +73,48 @@ SOURCES		+= server.cpp \
 		  startmenu.cpp \
 		  main.cpp \
 		  firstuse.cpp \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/base64.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/buf.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/checksum.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/command.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/delta.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/emit.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/hex.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/job.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/mdfour.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/mksum.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/msg.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/netint.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/patch.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/prototab.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/readsums.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/scoop.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/search.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/stats.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/stream.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/sumset.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/trace.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/tube.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/util.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/version.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/whole.c \
-	$(QPEDIR)/src/3rdparty/libraries/rsync/qrsync.cpp \
+	$(OPIEDIR)/rsync/base64.c \
+	$(OPIEDIR)/rsync/buf.c \
+	$(OPIEDIR)/rsync/checksum.c \
+	$(OPIEDIR)/rsync/command.c \
+	$(OPIEDIR)/rsync/delta.c \
+	$(OPIEDIR)/rsync/emit.c \
+	$(OPIEDIR)/rsync/hex.c \
+	$(OPIEDIR)/rsync/job.c \
+	$(OPIEDIR)/rsync/mdfour.c \
+	$(OPIEDIR)/rsync/mksum.c \
+	$(OPIEDIR)/rsync/msg.c \
+	$(OPIEDIR)/rsync/netint.c \
+	$(OPIEDIR)/rsync/patch.c \
+	$(OPIEDIR)/rsync/prototab.c \
+	$(OPIEDIR)/rsync/readsums.c \
+	$(OPIEDIR)/rsync/scoop.c \
+	$(OPIEDIR)/rsync/search.c \
+	$(OPIEDIR)/rsync/stats.c \
+	$(OPIEDIR)/rsync/stream.c \
+	$(OPIEDIR)/rsync/sumset.c \
+	$(OPIEDIR)/rsync/trace.c \
+	$(OPIEDIR)/rsync/tube.c \
+	$(OPIEDIR)/rsync/util.c \
+	$(OPIEDIR)/rsync/version.c \
+	$(OPIEDIR)/rsync/whole.c \
+	$(OPIEDIR)/rsync/qrsync.cpp \
 		  syncdialog.cpp \
-		  serverapp.cpp
+		  serverapp.cpp \
+		  launcherglobal.cpp \
+		  qprocess.cpp \
+		  qprocess_unix.cpp \
+		  screensaver.cpp
 
-INTERFACES	+= shutdown.ui
 
-INCLUDEPATH += $(QPEDIR)/src/settings/calibrate
-DEPENDPATH	+= $(QPEDIR)/src/settings/calibrate
+INCLUDEPATH += $(OPIEDIR)/core/apps/calibrate
+DEPENDPATH	+= $(OPIEDIR)/core/apps/calibrate
 
-INCLUDEPATH += $(QPEDIR)/src/3rdparty/libraries/rsync
-DEPENDPATH	+= $(QPEDIR)/src/3rdparty/libraries/rsync
+INCLUDEPATH += $(OPIEDIR)/include $(OPIEDIR)/rsync
+DEPENDPATH	+= $(OPIEDIR)/rsync
 
 TARGET		= qpe
 
-unix:LIBS	+= -lcrypt -luuid
-win32:LIBS      += 
+LIBS	+= -lcrypt -lqpe -lopie
 
-TRANSLATIONS = qpe-en_GB.ts qpe-de.ts qpe-ja.ts qpe-no.ts
+include ( $(OPIEDIR)/include.pro )
