@@ -293,85 +293,6 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
     QWidget *tab = new QWidget ( parent );
     QVBoxLayout *vertLayout = new QVBoxLayout( tab, 3, 3 );
 
-    QGridLayout *lay = new QGridLayout ( vertLayout, 0, 0, 3, 0 );
-
-    m_force = new QCheckBox ( tr( "Force styling for all applications." ), tab );
-    m_force-> setChecked ( cfg. readBoolEntry ( "ForceStyle" ));
-    lay-> addMultiCellWidget ( m_force, 0, 0, 0, 1 );
-    QWhatsThis::add( m_force, tr( "Click here to allow all applications to use global appearance settings." ) );
-
-    QLabel *l = new QLabel ( tab );
-    l-> setText ( QString ( "<p>%1</p>" ). arg ( tr( "Disable styling for these applications ( <b>*</b> can be used as a wildcard):" )));
-    lay-> addMultiCellWidget ( l, 1, 1, 0, 1 );
-    QWhatsThis::add( l, tr( "If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.\n\nThis area allows you to select an application and which settings you wish to disable." ) );
-
-    m_except = new QListView ( tab );
-    m_except-> addColumn ( Resource::loadIconSet ( "appearance" ), "", 24 );
-    m_except-> addColumn ( Resource::loadIconSet ( "font" ), "", 24 );
-    m_except-> addColumn ( Resource::loadIconSet ( "appearance/deco" ), "", 24 );
-    m_except-> addColumn ( tr( "Binary file(s)" ));
-    m_except-> setColumnAlignment ( 0, AlignCenter );
-    m_except-> setColumnAlignment ( 1, AlignCenter );
-    m_except-> setColumnAlignment ( 2, AlignCenter );
-    m_except-> setAllColumnsShowFocus ( true );
-    m_except-> setMinimumHeight ( 30 );
-    m_except-> header ( )-> setClickEnabled ( false );
-    m_except-> header ( )-> setResizeEnabled ( false );
-    m_except-> header ( )-> setMovingEnabled ( false );
-    m_except-> setSorting ( -1 );
-    lay-> addMultiCellWidget ( m_except, 2, 6, 0, 0 );
-    QWhatsThis::add( m_except, tr( "If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.\n\nThis area allows you to select an application and which settings you wish to disable." ) );
-
-    connect ( m_except, SIGNAL( clicked(QListViewItem*,const QPoint&,int)), this, SLOT( clickedExcept(QListViewItem*,const QPoint&,int)));
-
-    QToolButton *tb = new QToolButton ( tab );
-    tb-> setIconSet ( Resource::loadIconSet ( "appearance/add" ));
-    tb-> setFocusPolicy ( QWidget::StrongFocus );
-    lay-> addWidget ( tb, 2, 1 );
-    connect ( tb, SIGNAL( clicked()), this, SLOT( addExcept()));
-    QWhatsThis::add( tb, tr( "Click here to add an application to the list above." ) );
-
-    tb = new QToolButton ( tab );
-    tb-> setIconSet ( Resource::loadIconSet ( "editdelete" ));
-    tb-> setFocusPolicy ( QWidget::StrongFocus );
-    lay-> addWidget ( tb, 3, 1 );
-    connect ( tb, SIGNAL( clicked()), this, SLOT( delExcept()));
-    QWhatsThis::add( tb, tr( "Click here to delete the currently selected application." ) );
-
-    tb = new QToolButton ( tab );
-    tb-> setIconSet ( Resource::loadIconSet ( "up" ));
-    tb-> setFocusPolicy ( QWidget::StrongFocus );
-    lay-> addWidget ( tb, 4, 1 );
-    connect ( tb, SIGNAL( clicked()), this, SLOT( upExcept()));
-    QWhatsThis::add( tb, tr( "Click here to move the currently selected application up in the list." ) );
-
-    tb = new QToolButton ( tab );
-    tb-> setIconSet ( Resource::loadIconSet ( "down" ));
-    tb-> setFocusPolicy ( QWidget::StrongFocus );
-    lay-> addWidget ( tb, 5, 1 );
-    connect ( tb, SIGNAL( clicked()), this, SLOT( downExcept()));
-    QWhatsThis::add( tb, tr( "Click here to move the currently selected application down in the list." ) );
-
-    lay-> setRowStretch ( 6, 10 );
-    lay-> setColStretch ( 0, 10 );
-
-    QStringList sl = cfg. readListEntry ( "NoStyle", ';' );
-    QListViewItem *lvit = 0;
-    for ( QStringList::Iterator it = sl. begin ( ); it != sl. end ( ); ++it )
-    {
-        int fl = ( *it ). left ( 1 ). toInt ( 0, 32 );
-
-        lvit = new ExceptListItem ( m_except, lvit, ( *it ). mid ( 1 ), fl & 0x01, fl & 0x02, fl & 0x04 );
-    }
-
-
-    vertLayout-> addSpacing ( 3 );
-    QFrame *f = new QFrame ( tab );
-    f-> setFrameStyle ( QFrame::HLine | QFrame::Sunken );
-    vertLayout-> addWidget ( f );
-    vertLayout-> addSpacing ( 3 );
-
-
     QGridLayout* gridLayout = new QGridLayout ( vertLayout, 0, 0, 3, 0 );
 
     int style = cfg. readNumEntry ( "TabStyle", 2 ) - 1;
@@ -455,6 +376,11 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
     m_rotdir_ccw-> setChecked ( rot == CCW );
     m_rotdir_flip-> setChecked ( rot == Flip );
 
+
+    /*
+     * add a spacing
+     */
+    vertLayout->addItem( new QSpacerItem( 1, 1, QSizePolicy::MinimumExpanding,  QSizePolicy::MinimumExpanding ) );
     return tab;
 }
 
@@ -566,23 +492,6 @@ void Appearance::accept ( )
         rot = Flip;
     }
     config. writeEntry ( "rotatedir", (int)rot );
-
-    m_except-> setFocus ( ); // if the focus was on the embedded line-edit, we have to move it away first, so the contents are updated
-
-    QStringList sl;
-    QString exceptstr;
-    for ( ExceptListItem *it = (ExceptListItem *) m_except-> firstChild ( ); it; it = (ExceptListItem *) it-> nextSibling ( ))
-    {
-        int fl = 0;
-        fl |= ( it-> noStyle ( ) ? 0x01 : 0 );
-        fl |= ( it-> noFont ( ) ? 0x02 : 0 );
-        fl |= ( it-> noDeco ( ) ? 0x04 : 0 );
-        exceptstr = QString::number ( fl, 32 );
-        exceptstr.append( it-> pattern ( ));
-        sl << exceptstr;
-    }
-    config. writeEntry ( "NoStyle", sl, ';' );
-    config. writeEntry ( "ForceStyle", m_force-> isChecked ( ));
 
     config. write ( ); // need to flush the config info first
     Global::applyStyle ( );
@@ -781,112 +690,3 @@ void Appearance::deleteSchemeClicked()
         QMessageBox::information( this, tr( "Delete scheme" ), tr( "Unable to delete current scheme." ));
     }
 }
-
-
-void Appearance::addExcept ( )
-{
-    ExceptListItem *it = new ExceptListItem ( m_except, 0, tr( "<new>" ), true, true, true );
-    m_except-> ensureItemVisible ( it );
-    m_except-> setSelected ( it, true );
-}
-
-void Appearance::delExcept ( )
-{
-    if ( m_except-> selectedItem ( ))
-    {
-        m_except-> setFocus ( );
-        delete m_except-> selectedItem ( );
-    }
-}
-
-void Appearance::upExcept ( )
-{
-    ExceptListItem *it = (ExceptListItem *) m_except-> selectedItem ( );
-
-    if ( it && it-> itemAbove ( ))
-        it-> itemAbove ( )-> moveItem ( it );
-}
-
-void Appearance::downExcept ( )
-{
-    ExceptListItem *it = (ExceptListItem *) m_except-> selectedItem ( );
-
-    if ( it && it-> itemBelow ( ))
-        it-> moveItem ( it-> itemBelow ( ));
-}
-
-class ExEdit : public QLineEdit
-{
-public:
-    ExEdit ( ExceptListItem *item )
-            : QLineEdit ( item-> listView ( )-> viewport ( ), "exedit" ), it ( item )
-    {
-        setFrame ( false );
-
-        QRect r = it-> listView ( )-> itemRect ( it );
-
-        int x = it-> listView ( )-> header ( )-> cellPos ( 3 ) - 1;
-        int y = r. y ( );
-        int w = it-> listView ( )-> viewport ( )-> width ( ) - x;
-        int h = r. height ( ); // + 2;
-
-        setText ( it-> pattern ( ));
-        setGeometry ( x, y, w, h );
-
-        odebug << "ExEdit: [" << it->text(2).latin1() << "] at "
-               << x << "," << y << " " << w << "," << h << oendl;
-
-        m_out = true;
-
-        show ( );
-        setFocus ( );
-        selectAll ( );
-        end ( true );
-    }
-
-    virtual void focusOutEvent ( QFocusEvent * )
-    {
-        hide ( );
-        if ( m_out )
-            it-> setPattern ( text ( ));
-        delete this;
-    }
-
-    virtual void keyPressEvent ( QKeyEvent *e )
-    {
-        if ( e-> key ( ) == Key_Return )
-            it-> listView ( )-> setFocus ( );
-        else if ( e-> key ( ) == Key_Escape )
-        {
-            m_out = false;
-            it-> listView ( )-> setFocus ( );
-        }
-        else
-            QLineEdit::keyPressEvent ( e );
-    }
-
-private:
-    ExceptListItem *it;
-    bool m_out;
-};
-
-void Appearance::clickedExcept ( QListViewItem *item, const QPoint &, int c )
-{
-    if ( !item || c < 0 || c > 3 )
-        return;
-
-    ExceptListItem *it = (ExceptListItem *) item;
-
-    if ( c == 0 )
-        it-> setNoStyle ( !it-> noStyle ( ));
-    else if ( c == 1 )
-        it-> setNoFont ( !it-> noFont ( ));
-    else if ( c == 2 )
-        it-> setNoDeco ( !it-> noDeco ( ));
-    else if ( c == 3 )
-    {
-        m_except-> ensureItemVisible ( it );
-        new ExEdit ( it );
-    }
-}
-

@@ -166,11 +166,6 @@ protected:
     void timerEvent( QTimerEvent * );
     bool raiseAppropriateWindow();
     virtual void tryQuit();
-#ifndef OPIE_NO_ERASE_RECT_HACKFIX
-    #if QT_VERSION > 233
-    virtual void polish ( QWidget * ); // this is actually implemented in qt_override.cpp (!)
-    #endif
-#endif
 private:
     void mapToDefaultAction( QWSKeyEvent *ke, int defKey );
     void processQCopFile();

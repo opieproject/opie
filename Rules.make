@@ -54,17 +54,11 @@ ifeq ($(CONFIG_SQL_PIM_BACKEND),y)
 else
 	echo ENABLE_SQL_PIM_BACKEND=n >> $@
 endif
-ifeq ($(CONFIG_OPIE_NO_OVERRIDE_QT),y)
-	echo CONFIG += no-override >> $@
-endif
 ifeq ($(CONFIG_OPIELOGIN_USEPAM),y)
 	echo CONFIG += OPIELOGIN_USEPAM >> $@
 endif
 ifeq ($(CONFIG_LIBQPE_WITHROHFEEDBACK),y)
 	echo CONFIG += LIBQPE_WITHROHFEEDBACK >> $@
-endif
-ifeq ($(CONFIG_OPIE_NO_ERASERECT_FIX),y)
-	echo DEFINES += OPIE_NO_ERASE_RECT_HACKFIX >> $@
 endif
 ifeq ($(CONFIG_OPIE_NO_BUILTIN_SHUTDOWN),y)
 	echo DEFINES += OPIE_NO_BUILTIN_SHUTDOWN >> $@

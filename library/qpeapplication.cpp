@@ -96,7 +96,6 @@
 #ifndef QT_NO_SOUND
 #include <sys/soundcard.h>
 #endif
-#include "qt_override_p.h"
 
 #include <backend/rohfeedback.h>
 
@@ -1352,30 +1351,8 @@ void QPEApplication::applyStyle()
     config.setGroup( "Appearance" );
 
 #if QT_VERSION > 233
-#if !defined(OPIE_NO_OVERRIDE_QT)
-    // don't block ourselves ...
-    Opie::force_appearance = 0;
-
-    static QString appname = Opie::binaryName ( );
-
-    QStringList ex = config. readListEntry ( "NoStyle", ';' );
-    int nostyle = 0;
-    for ( QStringList::Iterator it = ex. begin ( ); it != ex. end ( ); ++it ) {
-        if ( QRegExp (( *it ). mid ( 1 ), false, true ). find ( appname, 0 ) >= 0 ) {
-            nostyle = ( *it ). left ( 1 ). toInt ( 0, 32 );
-            break;
-        }
-    }
-#else
-        int nostyle = 0;
-#endif
-
     // Widget style
     QString style = config.readEntry( "Style", "FlatStyle" );
-
-    // don't set a custom style
-    if ( nostyle & Opie::Force_Style )
-        style = "FlatStyle";
 
     internalSetStyle ( style );
 
@@ -1407,11 +1384,6 @@ void QPEApplication::applyStyle()
     // Window Decoration
     QString dec = config.readEntry( "Decoration", "Flat" );
 
-    // don't set a custom deco
-    if ( nostyle & Opie::Force_Decoration )
-        dec = "";
-
-
     if ( dec != d->decorationName ) {
         qwsSetDecoration( new QPEDecoration( dec ) );
         d->decorationName = dec;
@@ -1421,19 +1393,7 @@ void QPEApplication::applyStyle()
     QString ff = config.readEntry( "FontFamily", font().family() );
     int fs = config.readNumEntry( "FontSize", font().pointSize() );
 
-    // don't set a custom font
-    if ( nostyle & Opie::Force_Font ) {
-        ff = "Vera";
-        fs = 10;
-    }
-
     setFont ( QFont ( ff, fs ), true );
-
-#if !defined(OPIE_NO_OVERRIDE_QT)
-    // revert to global blocking policy ...
-    Opie::force_appearance = config. readBoolEntry ( "ForceStyle", false ) ? Opie::Force_All : Opie::Force_None;
-    Opie::force_appearance &= ~nostyle;
-#endif
 #endif
 }
 

@@ -59,7 +59,6 @@ HEADERS	=   calendar.h \
 	windowdecorationinterface.h \
 	textcodecinterface.h \
 	imagecodecinterface.h \
-	qt_override_p.h \
 	qpeglobal.h
 	
 SOURCES	=   calendar.cpp \
@@ -117,7 +116,6 @@ SOURCES	=   calendar.cpp \
 	findwidget_p.cpp \
 	finddialog.cpp \
 	lnkproperties.cpp \
-	qt_override.cpp   \
 	widget_showing.cpp
 
 
@@ -133,10 +131,6 @@ DESTDIR		= $(OPIEDIR)/lib$(PROJMAK)
 VERSION		= 1.5.0.1
 
 include( $(OPIEDIR)/include.pro )
-
-contains( CONFIG, no-override ){
-    DEFINES += OPIE_NO_OVERRIDE_QT
-}
 
 contains( CONFIG, LIBQPE_WITHROHFEEDBACK ){
     DEFINES += OPIE_WITHROHFEEDBACK

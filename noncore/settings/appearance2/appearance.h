@@ -78,12 +78,6 @@ protected slots:
 
     void tabChanged ( QWidget * );
 
-    void addExcept ( );
-    void delExcept ( );
-    void upExcept ( );
-    void downExcept ( );
-    void clickedExcept ( QListViewItem *, const QPoint &, int );
-
 private:
     void changeText();
 
@@ -125,8 +119,6 @@ private:
     QRadioButton *m_rotdir_flip;
 
     QWidget *     m_advtab;
-    QListView *   m_except;
-    QCheckBox *   m_force;
 };
 
 #endif
