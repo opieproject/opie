@@ -26,11 +26,22 @@ public:
 
 protected:
     void init();
+    void setyear(const QDate&);
+    void calc_easterDate();
+    static int weektonumber(const QString&);
+    static QDate movedateday(const QDate&,int weekday,bool direction);
+    static int monthtonumber(const QString&m);
+    static int dayoftoint(const QString&d);
+
     unsigned int _lastyear;
     tholidaylist _days;
+    tholidaylist _fdays;
+    tentrylist floatingDates;
+
     QStringList files;
     bool init_done:1;
     void load_days();
+    QDate easterDate;
 };
 
 #endif
