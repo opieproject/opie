@@ -39,7 +39,7 @@ void MediumMountGui::readConfig(){
 
   OConfig cfg (mediumPath +"/.opiestorage.cf");
   cfg.setGroup("main");
-  checkagain = cfg.readBoolEntry("check", true);
+  checkagain = cfg.readBoolEntry("check", false);
   
   cfg.setGroup("mimetypes");
   checkmimeaudio = cfg.readBoolEntry("audio", true);
@@ -53,7 +53,7 @@ void MediumMountGui::readConfig(){
 }
 
 bool MediumMountGui::check() {
-  return checkagain;
+  return !checkagain;
 }
 
 QStringList MediumMountGui::dirs() {
