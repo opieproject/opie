@@ -402,11 +402,11 @@ est en train d&apos;éditer les catégories.</translation>
     <name>QMessageBox</name>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Non</translation>
     </message>
 </context>
 <context>
@@ -783,84 +783,85 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>Jan</translation>
     </message>
     <message>
         <source>Feb</source>
-        <translation type="unfinished"></translation>
+        <translation>Fev</translation>
     </message>
     <message>
         <source>Mar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mar</translation>
     </message>
     <message>
         <source>Apr</source>
-        <translation type="unfinished"></translation>
+        <translation>Avr</translation>
     </message>
     <message>
         <source>May</source>
-        <translation type="unfinished"></translation>
+        <translation>Mai</translation>
     </message>
     <message>
         <source>Jun</source>
-        <translation type="unfinished"></translation>
+        <translation>Jun</translation>
     </message>
     <message>
         <source>Jul</source>
-        <translation type="unfinished"></translation>
+        <translation>Jul</translation>
     </message>
     <message>
         <source>Aug</source>
-        <translation type="unfinished"></translation>
+        <translation>Aoû</translation>
     </message>
     <message>
         <source>Sep</source>
-        <translation type="unfinished"></translation>
+        <translation>Sep</translation>
     </message>
     <message>
         <source>Oct</source>
-        <translation type="unfinished"></translation>
+        <translation>Oct</translation>
     </message>
     <message>
         <source>Nov</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov</translation>
     </message>
     <message>
         <source>Dec</source>
-        <translation type="unfinished"></translation>
+        <translation>Déc</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished">Cliquez pour fermer cette fenêtre et abandonner les changements.</translation>
+        <translation>Cliquez pour fermer cette fenêtre et abandonner les modifications.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished">Cliquez pour fermer cette fenêtre.</translation>
+        <translation>Cliquez pour fermer cette fenêtre.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished">Cliquez pour fermer cette fenêtre et appliquer les changements.</translation>
+        <translation>Cliquez pour fermer cette fenêtre et appliquer les modifications.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation type="unfinished">Clqiuez pour rendre cette fenêtre déplaçable.</translation>
+        <translation>Clqiuez pour rendre cette fenêtre déplaçable.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished">Cliquez pour que cette fenêtre remplisse l&apos;écran.</translation>
+        <translation>Cliquez pour que cette fenêtre remplisse l&apos;écran.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="unfinished">&lt;Qt&gt;L&apos;aide globale n&apos;est pas disponible pour cette application, cependant, il existe une aide contectuelle.&lt;p&gt;Pour utiliser l&apos;aide contectuelle:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Cliquez et maintenez la pression sur le bouton d&apos;aide.&lt;li&gt;Lorsque la barre de titre affiche &lt;b&gt;qu&apos;est-ce-que c&apos;est...&lt;/b&gt;, cliquez sur n&apos;importe quel élément.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+        <translation>&lt;Qt&gt;L&apos;aide globale n&apos;est pas disponible pour cette application, cependant, il existe une aide contectuelle.&lt;p&gt;Pour utiliser l&apos;aide contectuelle:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Cliquez et maintenez la pression sur le bouton d&apos;aide.&lt;li&gt;Lorsque la barre de titre affiche &lt;b&gt;qu&apos;est-ce-que c&apos;est...&lt;/b&gt;, cliquez sur n&apos;importe quel élément.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation type="unfinished">Qu&apos;est ce que...</translation>
+        <translation>Qu&apos;est ce que...</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Are you sure you want to delete
  %1?&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Voulez-vous vraiment supprimer
+%1 ?&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>

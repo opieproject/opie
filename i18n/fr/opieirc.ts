@@ -221,43 +221,43 @@
     </message>
     <message>
         <source>Received unhandled numeric command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Commande numérique non supportée reçu : %1</translation>
     </message>
     <message>
         <source>Received unhandled ctcp command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Commande ctcp non supportée reçu : %1</translation>
     </message>
     <message>
         <source>Received unhandled literal command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Commande literale non supportée reçu : %1</translation>
     </message>
     <message>
         <source>%1 joined channel %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 a join le canal %2</translation>
     </message>
     <message>
         <source>You left channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous avez quitté le canal %1</translation>
     </message>
     <message>
         <source>%1 left channel %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 a quitté le canal %2</translation>
     </message>
     <message>
         <source>Channel message with unknown channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Message avec numéro de Canal  %1 inconnu</translation>
     </message>
     <message>
         <source>You are now known as %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous êtes enregistrés en tant que %1</translation>
     </message>
     <message>
         <source>%1 is now known as %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 est maintenant %2</translation>
     </message>
     <message>
         <source>%1 has quit (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 a quitté (%2)</translation>
     </message>
 </context>
 <context>
@@ -504,7 +504,7 @@ par des virgules et commancent par &apos;#&apos; or &apos;+&apos;</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Configurations</translation>
+        <translation>Préférences</translation>
     </message>
 </context>
 <context>

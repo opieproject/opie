@@ -118,70 +118,70 @@ resume?
     </message>
     <message>
         <source>Today Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Config Aujourd&apos;hui</translation>
     </message>
 </context>
 <context>
     <name>TodayConfigMiscBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation type="unfinished">Vérifier si &quot;Aujourd&apos;hui&quot; doit-être lancer automatiquement au démarrage.</translation>
+        <translation>Vérifie si &quot;Aujourd&apos;hui&quot; doit-être lancer automatiquement à l&apos;allumage.</translation>
     </message>
     <message>
         <source>autostart on resume?</source>
-        <translation type="unfinished"></translation>
+        <translation>Démarrage auto à l&apos;allumage ?</translation>
     </message>
     <message>
         <source>tiny banner</source>
-        <translation type="unfinished"></translation>
+        <translation>Petite bannière</translation>
     </message>
     <message>
         <source>Have small banner </source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser une petite bannière</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="unfinished">Après combien de minutes de  veille du PDA la fonction &quot;Démarrage auto&quot; doit-elle être activée ?</translation>
+        <translation>Après combien de minutes de  veille du PDA la fonction &quot;Démarrage auto&quot; doit-elle être activée</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation type="unfinished">minutes inactives</translation>
+        <translation>minutes inactives</translation>
     </message>
     <message>
         <source> pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>pixel</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation type="unfinished">Définir la taille de l&apos;icône en pixel</translation>
+        <translation>Définir la taille de l&apos;icône en pixel</translation>
     </message>
     <message>
         <source>icon size</source>
-        <translation type="unfinished"></translation>
+        <translation>taille icône</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished">sec</translation>
+        <translation>sec</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished">jamais</translation>
+        <translation>jamais</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation type="unfinished">Périodicité des rafraîchissements de &quot;Aujourd&apos;hui&quot;</translation>
+        <translation>Périodicité des rafraîchissements de &quot;Aujourd&apos;hui&quot;</translation>
     </message>
     <message>
         <source>refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>rafraichir</translation>
     </message>
 </context>
 </TS>

@@ -4,47 +4,47 @@
     <name>FileSysInfo</name>
     <message>
         <source>CF</source>
-        <translation type="unfinished">CF</translation>
+        <translation>CF</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation type="unfinished">Ce graphe représente cobien de mémoire est actuellement  utilisée sur cette carte de mémoire CompactFlash.</translation>
+        <translation>Ce graphe représente cobien de mémoire est actuellement  utilisée sur cette carte de mémoire CompactFlash.</translation>
     </message>
     <message>
         <source>Ha</source>
-        <translation type="unfinished">Ha</translation>
+        <translation>Ha</translation>
     </message>
     <message>
         <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation type="unfinished">Ce graphe représente combien de mémoire est actuellement  utilisée sur ce disque.</translation>
+        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur ce disque.</translation>
     </message>
     <message>
         <source>SD</source>
-        <translation type="unfinished">SD</translation>
+        <translation>SD</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation type="unfinished">Ce graphe représente combien de mémoire est actuellement  utilisée sur cette carte de mémoire Secure Digital.</translation>
+        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur cette carte de mémoire Secure Digital.</translation>
     </message>
     <message>
         <source>SC</source>
-        <translation type="unfinished">SC</translation>
+        <translation>SC</translation>
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished">In</translation>
+        <translation>In</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation type="unfinished">Ce graphe représente cobien de mémoire est actuellement  utilisée dans la mémoire centrale (ie  mémoire Flash).</translation>
+        <translation>Ce graphe représente cobien de mémoire est actuellement  utilisée dans la mémoire centrale (ie  mémoire Flash).</translation>
     </message>
     <message>
         <source>RA</source>
-        <translation type="unfinished">RA</translation>
+        <translation>RA</translation>
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation type="unfinished">Ce graphe représente combien de mémoire est actuellement  utilisée sur le dique RAM.</translation>
+        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur le dique RAM.</translation>
     </message>
 </context>
 <context>
@@ -156,11 +156,11 @@ Cliquez et maintenez appuyer pour voir les informations à propos du module ou p
     </message>
     <message>
         <source>Used by</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilisé par</translation>
     </message>
     <message>
         <source>You really want to execute %1 for this module?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous désirez vraiment exécuter %1 pour ce module ?</translation>
     </message>
 </context>
 <context>
@@ -228,7 +228,7 @@ Cliquez et maintenez appuyer pour voir les informations à propos du processus o
     </message>
     <message>
         <source>You really want to send %1 to this process?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous désirez vraiment envoyer %1 à ce processus ?</translation>
     </message>
 </context>
 <context>

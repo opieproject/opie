@@ -88,11 +88,13 @@ par un signal &quot;uncaught
 by an uncaught signal
 (%1)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Opie a été terminé par un
+signal non pris en charge
+(%1)</translation>
     </message>
     <message>
         <source>Could not start Opie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible de démarrer Opie.</translation>
     </message>
 </context>
 </TS>

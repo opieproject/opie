@@ -23,20 +23,19 @@
     <name>TodoPluginConfigBase</name>
     <message>
         <source>Set the maximum number of task that should be shown</source>
-        <translation type="unfinished">Définit le nombre maximum de tâches à afficher</translation>
+        <translation>Définit le nombre maximum de tâches à afficher</translation>
     </message>
     <message>
         <source>tasks shown</source>
-        <translation type="unfinished"></translation>
+        <translation>taches affichées</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="unfinished">Définit le nombre de caractères à afficher par ligne pour chaque tâche</translation>
+        <translation>Définit le nombre de caractères à afficher par ligne pour chaque tâche</translation>
     </message>
     <message>
         <source>Clip line after X chars</source>
-        <translation type="unfinished">Nombre de caractères
-par ligne</translation>
+        <translation>Nombre de caractères par ligne</translation>
     </message>
 </context>
 <context>

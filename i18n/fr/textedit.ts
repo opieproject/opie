@@ -198,12 +198,13 @@ Continuer et sauvegarder ?</translation>
     </message>
     <message>
         <source>%1 - Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - Text Editor</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmez-vous la &lt;BR&gt;&lt;B&gt;suppression&lt;/B&gt; du fichier courant ?
+&lt;B&gt;Cette suppression est irréversible !&lt;/B&gt;</translation>
     </message>
 </context>
 <context>

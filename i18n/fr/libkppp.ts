@@ -280,70 +280,6 @@ some circumstances.</source>
     </message>
 </context>
 <context>
-<<<<<<< libkppp.ts
-    <name>DevicesWidget</name>
-    <message>
-        <source>Allows you to modify the selected account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create a new dialup connection
-to the Internet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Makes a copy of the selected account. All
-settings of the selected account are copied
-to a new account, that you can modify to fit your
-needs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Deletes the selected account
-
-&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No devices selected.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete
-the device &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Confirm</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New Device</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit Device: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Device</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Modem</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Not implemented</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>you&apos;re settings have been SAVED</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-=======
     <name>DevicesWidget</name>
     <message>
         <source>No devices selected.</source>
@@ -401,7 +337,6 @@ needs</source>
     </message>
 </context>
 <context>
->>>>>>> 1.1.2.3
     <name>DialWidget</name>
     <message>
         <source>Connection name:</source>

@@ -72,27 +72,27 @@
     </message>
     <message>
         <source>&amp;Change card backs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Changer l&apos;arrière des cartes</translation>
     </message>
     <message>
         <source>&amp;Snap to position</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Retour auto sur position</translation>
     </message>
     <message>
         <source>Change card backs</source>
-        <translation type="unfinished"></translation>
+        <translation>Changer l&apos;arrière des cartes</translation>
     </message>
     <message>
         <source>Snap to position</source>
-        <translation type="unfinished"></translation>
+        <translation>Retour auto sur position</translation>
     </message>
     <message>
         <source>Turn one card</source>
-        <translation type="unfinished"></translation>
+        <translation>Tourner une carte</translation>
     </message>
     <message>
         <source>Turn three cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Tourner trois cartes</translation>
     </message>
 </context>
 </TS>

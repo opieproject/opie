@@ -4,180 +4,180 @@
     <name>Button</name>
     <message>
         <source>Calendar Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton Agenda</translation>
     </message>
     <message>
         <source>Contacts Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton Contacts</translation>
     </message>
     <message>
         <source>Menu Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton Menu</translation>
     </message>
     <message>
         <source>Mail Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton E-Mail</translation>
     </message>
     <message>
         <source>Home Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton Home</translation>
     </message>
     <message>
         <source>Record Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Bouton Enregistrement</translation>
     </message>
     <message>
         <source>Display Rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotation Ecran</translation>
     </message>
     <message>
         <source>Lower+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Haut</translation>
     </message>
     <message>
         <source>Lower+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Bas</translation>
     </message>
     <message>
         <source>Lower+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Droite</translation>
     </message>
     <message>
         <source>Lower+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Gauche</translation>
     </message>
     <message>
         <source>Upper+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj-Haut</translation>
     </message>
     <message>
         <source>Upper+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj-Bas</translation>
     </message>
     <message>
         <source>Upper+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj-Droite</translation>
     </message>
     <message>
         <source>Upper+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Maj-Gauche</translation>
     </message>
 </context>
 <context>
     <name>OColorDialog</name>
     <message>
         <source>Hue:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuance:</translation>
     </message>
     <message>
         <source>Sat:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sat :</translation>
     </message>
     <message>
         <source>Val:</source>
-        <translation type="unfinished"></translation>
+        <translation>Val :</translation>
     </message>
     <message>
         <source>Red:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rouge :</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vert :</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleue :</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation type="unfinished"></translation>
+        <translation>Canal Apha :</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner Couleur</translation>
     </message>
 </context>
 <context>
     <name>OColorPopupMenu</name>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajouter...</translation>
     </message>
 </context>
 <context>
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélection Fichier</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Ouvrir</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Enregistrer</translation>
     </message>
 </context>
 <context>
     <name>OFileSelector</name>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom :</translation>
     </message>
 </context>
 <context>
     <name>OFileViewFileListView</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Date</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type Mime</translation>
     </message>
 </context>
 <context>
     <name>OFontMenu</name>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Grande</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Moyenne</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Petite</translation>
     </message>
 </context>
 <context>
     <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Style</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished"></translation>
+        <translation>The Quick Brown Fox Jumps Over The Lazy Dog</translation>
     </message>
 </context>
 <context>
@@ -275,124 +275,124 @@
     <name>ORecurranceWidget</name>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished">Sans</translation>
+        <translation>A l&apos;Infini</translation>
     </message>
     <message>
         <source>days</source>
-        <translation type="unfinished"></translation>
+        <translation>jours</translation>
     </message>
     <message>
         <source>day</source>
-        <translation type="unfinished"></translation>
+        <translation>jour</translation>
     </message>
     <message>
         <source>weeks</source>
-        <translation type="unfinished"></translation>
+        <translation>semaines</translation>
     </message>
     <message>
         <source>week</source>
-        <translation type="unfinished"></translation>
+        <translation>semaine</translation>
     </message>
     <message>
         <source>months</source>
-        <translation type="unfinished"></translation>
+        <translation>mois</translation>
     </message>
     <message>
         <source>month</source>
-        <translation type="unfinished"></translation>
+        <translation>mois</translation>
     </message>
     <message>
         <source>years</source>
-        <translation type="unfinished"></translation>
+        <translation>années</translation>
     </message>
     <message>
         <source>year</source>
-        <translation type="unfinished"></translation>
+        <translation>année</translation>
     </message>
     <message>
         <source> and </source>
-        <translation type="unfinished"></translation>
+        <translation>et</translation>
     </message>
     <message>
         <source>,
 and </source>
-        <translation type="unfinished"></translation>
+        <translation>, et</translation>
     </message>
     <message>
         <source>, and </source>
-        <translation type="unfinished"></translation>
+        <translation>, et</translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>activé</translation>
     </message>
     <message>
         <source>No Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de Répétition</translation>
     </message>
     <message>
         <source>day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>jour(s)</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished">Répéter</translation>
+        <translation>Répéter</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Lu</translation>
+        <translation>Lu</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Ma</translation>
+        <translation>Ma</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Me</translation>
+        <translation>Me</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Je</translation>
+        <translation>Je</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Ve</translation>
+        <translation>Ve</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Sa</translation>
+        <translation>Sa</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">Di</translation>
+        <translation>Di</translation>
     </message>
     <message>
         <source>week(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>semaine(s)</translation>
     </message>
     <message>
         <source>Repeat By</source>
-        <translation type="unfinished"></translation>
+        <translation>Type Répétition</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Jour</translation>
+        <translation>Jour</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Date</translation>
     </message>
     <message>
         <source>month(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>mois</translation>
     </message>
     <message>
         <source>year(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>année(s)</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished">Tous</translation>
+        <translation>Tous</translation>
     </message>
 </context>
 <context>
@@ -414,246 +414,246 @@ and </source>
     <name>QObject</name>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Documents</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichiers</translation>
     </message>
     <message>
         <source>All Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les Fichiers</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Notes :</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorité :</translation>
     </message>
     <message>
         <source>Very high</source>
-        <translation type="unfinished"></translation>
+        <translation>Très haute</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Haute</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normale</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Faible</translation>
     </message>
     <message>
         <source>Very low</source>
-        <translation type="unfinished"></translation>
+        <translation>Très Faible</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished"></translation>
+        <translation>Etat :</translation>
     </message>
     <message>
         <source>Deadline:</source>
-        <translation type="unfinished"></translation>
+        <translation>Délai :</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Catégorie :</translation>
     </message>
     <message>
         <source>Default Email: </source>
-        <translation type="unfinished"></translation>
+        <translation>E-Mail par Défaut :</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Adresse (bur):&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Office: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bureau :</translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation type="unfinished"></translation>
+        <translation>Page Web (bur):</translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation type="unfinished"></translation>
+        <translation>Téléphone (bur):</translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fax (bur):</translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation type="unfinished"></translation>
+        <translation>Mobile (bur):</translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation type="unfinished"></translation>
+        <translation>Radiomessage :</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;&lt;b&gt;Adresse (perso):&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation type="unfinished"></translation>
+        <translation>Page Web (bur):</translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation type="unfinished"></translation>
+        <translation>Téléphone (perso):</translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fax (perso):</translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation type="unfinished"></translation>
+        <translation>Mobile (perso):</translation>
     </message>
     <message>
         <source>All Emails: </source>
-        <translation type="unfinished"></translation>
+        <translation>EMail(s) :</translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation type="unfinished"></translation>
+        <translation>Profession :</translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation type="unfinished"></translation>
+        <translation>Assistant(e) :</translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation type="unfinished"></translation>
+        <translation>Responsable :</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Homme</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Femme</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation type="unfinished"></translation>
+        <translation>sexe :</translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation type="unfinished"></translation>
+        <translation>Epouse :</translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation type="unfinished"></translation>
+        <translation>Date de Naissance :</translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation type="unfinished"></translation>
+        <translation>Autre Anniversaire :</translation>
     </message>
     <message>
         <source>Children: </source>
-        <translation type="unfinished"></translation>
+        <translation>Enfant :</translation>
     </message>
     <message>
         <source>Nickname: </source>
-        <translation type="unfinished"></translation>
+        <translation>Surnom :</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lieu :</translation>
     </message>
     <message>
         <source>This is an all day event</source>
-        <translation type="unfinished"></translation>
+        <translation>Cet événement couvre toute la journée</translation>
     </message>
     <message>
         <source>This is a multiple day event</source>
-        <translation type="unfinished"></translation>
+        <translation>Cet événement couvre plusieurs jours</translation>
     </message>
     <message>
         <source>Start:</source>
-        <translation type="unfinished"></translation>
+        <translation>Début :</translation>
     </message>
     <message>
         <source>End:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fin :</translation>
     </message>
     <message>
         <source>Note:</source>
-        <translation type="unfinished"></translation>
+        <translation>Note :</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished">Tous</translation>
+        <translation>Tous</translation>
     </message>
     <message>
         <source>%1 %2 every </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 chaque</translation>
     </message>
     <message>
         <source>The %1 every </source>
-        <translation type="unfinished"></translation>
+        <translation>Le %1 chaque</translation>
     </message>
     <message>
         <source>The %1 %2 of every</source>
-        <translation type="unfinished"></translation>
+        <translation>Le %1 %2 tous les</translation>
     </message>
     <message>
         <source>Every </source>
-        <translation type="unfinished"></translation>
+        <translation>Chaque</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Lundi</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Mardi</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Mercredi</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeudi</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Vendredi</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Samedi</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimanche</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation type="unfinished"></translation>
+        <translation>er</translation>
     </message>
     <message>
         <source>nd</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>rd</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>th</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>
