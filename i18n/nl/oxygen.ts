@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation type="unfinished"></translation>
+        <translation>Elementaire compositie (%):</translation>
     </message>
 </context>
 <context>
@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>%1 K</source>
-        <translation type="unfinished">%1 K</translation>
+        <translation>%1 K</translation>
     </message>
     <message>
         <source>Weight</source>
@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>Electronegativity</source>
-        <translation type="unfinished"></translation>
+        <translation>Elektronegativiteit</translation>
     </message>
     <message>
         <source>Atomic radius</source>
@@ -101,11 +101,11 @@
     </message>
     <message>
         <source>Calculations</source>
-        <translation>Calculaties</translation>
+        <translation>Berekeningen</translation>
     </message>
     <message>
         <source>Hydrogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Waterstof</translation>
     </message>
     <message>
         <source>Helium</source>
@@ -137,7 +137,7 @@
     </message>
     <message>
         <source>Neon</source>
-        <translation type="unfinished"></translation>
+        <translation>Neon</translation>
     </message>
     <message>
         <source>Sodium</source>
@@ -145,11 +145,11 @@
     </message>
     <message>
         <source>Magnesium</source>
-        <translation type="unfinished"></translation>
+        <translation>Magnesium</translation>
     </message>
     <message>
         <source>Aluminum</source>
-        <translation type="unfinished"></translation>
+        <translation>Aluminium</translation>
     </message>
     <message>
         <source>Silicon</source>
@@ -157,11 +157,11 @@
     </message>
     <message>
         <source>Phosphorus</source>
-        <translation type="unfinished"></translation>
+        <translation>Fosfor</translation>
     </message>
     <message>
         <source>Sulfur</source>
-        <translation type="unfinished"></translation>
+        <translation>Zwavel</translation>
     </message>
     <message>
         <source>Chlorine</source>
@@ -173,11 +173,11 @@
     </message>
     <message>
         <source>Potassium</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalium</translation>
     </message>
     <message>
         <source>Calcium</source>
-        <translation type="unfinished"></translation>
+        <translation>Calcium</translation>
     </message>
     <message>
         <source>Scandium</source>
@@ -189,7 +189,7 @@
     </message>
     <message>
         <source>Vanadium</source>
-        <translation type="unfinished">Vanadium</translation>
+        <translation>Vanadium</translation>
     </message>
     <message>
         <source>Chromium</source>
@@ -197,7 +197,7 @@
     </message>
     <message>
         <source>Manganese</source>
-        <translation type="unfinished"></translation>
+        <translation>Mangaan</translation>
     </message>
     <message>
         <source>Iron</source>
@@ -229,7 +229,7 @@
     </message>
     <message>
         <source>Arsenic</source>
-        <translation type="unfinished"></translation>
+        <translation>Arsenicum</translation>
     </message>
     <message>
         <source>Selenium</source>
@@ -249,7 +249,7 @@
     </message>
     <message>
         <source>Strontium</source>
-        <translation type="unfinished"></translation>
+        <translation>Strontium</translation>
     </message>
     <message>
         <source>Yttrium</source>
@@ -393,7 +393,7 @@
     </message>
     <message>
         <source>Tungsten</source>
-        <translation type="unfinished"></translation>
+        <translation>Tungsten</translation>
     </message>
     <message>
         <source>Rhenium</source>
@@ -405,7 +405,7 @@
     </message>
     <message>
         <source>Iridium</source>
-        <translation type="unfinished"></translation>
+        <translation>Iridium</translation>
     </message>
     <message>
         <source>Platinum</source>
