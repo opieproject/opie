@@ -23,11 +23,15 @@ void IMAPwrapper::imap_progress( size_t current, size_t maximum )
 
 void IMAPwrapper::login()
 {
-    logout();
     const char *server, *user, *pass;
     uint16_t port;
     int err = MAILIMAP_NO_ERROR;
 
+    /* we are connected this moment */
+    /* TODO: setup a timer holding the line or if connection closed - delete the value */
+    if (m_imap) {   
+        return;
+    }
     server = account->getServer().latin1();
     port = account->getPort().toUInt();
     user = account->getUser().latin1();
@@ -35,8 +39,7 @@ void IMAPwrapper::login()
 
     m_imap = mailimap_new( 20, &imap_progress );
     /* connect */
-  //  err = mailimap_socket_connect( m_imap, (char*)server, port );
-  if (account->getSSL()) {
+    if (account->getSSL()) {
         err = mailimap_ssl_connect( m_imap, (char*)server, port );
     } else {
         err = mailimap_socket_connect( m_imap, (char*)server, port );
@@ -77,7 +80,7 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
     int err = MAILIMAP_NO_ERROR;
     clist *result;
     clistcell *current;
-    mailimap_fetch_att *fetchAtt,*fetchAttFlags,*fetchAttDate;
+//    mailimap_fetch_att *fetchAtt,*fetchAttFlags,*fetchAttDate,*fetchAttSize;
     mailimap_fetch_type *fetchType;
     mailimap_set *set;
 
@@ -90,7 +93,6 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
     err = mailimap_examine( m_imap, (char*)mb);
     if ( err != MAILIMAP_NO_ERROR ) {
         qDebug("error selecting mailbox: %s",m_imap->imap_response);
-        logout();
         return;
     }
 
@@ -98,35 +100,29 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
 
     if (last == 0) {
         qDebug("mailbox has no mails");
-        logout();
         return;
     }
 
     result = clist_new();
     /* the range has to start at 1!!! not with 0!!!! */
     set = mailimap_set_new_interval( 1, last );
-    fetchAtt = mailimap_fetch_att_new_envelope();
-    fetchAttFlags = mailimap_fetch_att_new_flags();
-    fetchAttDate = mailimap_fetch_att_new_internaldate();
-
-    //fetchType = mailimap_fetch_type_new_fetch_att(fetchAtt);
     fetchType = mailimap_fetch_type_new_fetch_att_list_empty();
-    mailimap_fetch_type_new_fetch_att_list_add(fetchType,fetchAtt);
-    mailimap_fetch_type_new_fetch_att_list_add(fetchType,fetchAttFlags);
-    mailimap_fetch_type_new_fetch_att_list_add(fetchType,fetchAttDate);
+    mailimap_fetch_type_new_fetch_att_list_add(fetchType,mailimap_fetch_att_new_envelope());
+    mailimap_fetch_type_new_fetch_att_list_add(fetchType,mailimap_fetch_att_new_flags());
+    mailimap_fetch_type_new_fetch_att_list_add(fetchType,mailimap_fetch_att_new_internaldate());
+    mailimap_fetch_type_new_fetch_att_list_add(fetchType,mailimap_fetch_att_new_rfc822_size());
 
     err = mailimap_fetch( m_imap, set, fetchType, &result );
     mailimap_set_free( set );
-    /* cleans up the fetch_att's too! */
     mailimap_fetch_type_free( fetchType );
 
     QString date,subject,from;
 
     if ( err == MAILIMAP_NO_ERROR ) {
-        current = clist_begin(result);
+        
         mailimap_msg_att * msg_att;
         int i = 0;
-        while ( current != 0 ) {
+        for (current = clist_begin(result); current != 0; current=clist_next(current)) {
             ++i;
             msg_att = (mailimap_msg_att*)current->data;
             RecMail*m = parse_list_result(msg_att);
@@ -135,13 +131,11 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
                 m->setMbox(mailbox);
                 target.append(m);
             }
-            current = current->next;
         }
     } else {
         qDebug("Error fetching headers: %s",m_imap->imap_response);
     }
-    logout();
-    clist_free(result);
+    mailimap_fetch_list_free(result);
 }
 
 QList<IMAPFolder>* IMAPwrapper::listFolders()
@@ -219,17 +213,17 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
     clistcell *current,*c,*cf;
     mailimap_msg_att_dynamic*flist;
     mailimap_flag_fetch*cflag;
+    int size;
     QBitArray mFlags(7);
     QStringList addresslist;
 
     if (!m_att) {
         return m;
     }
-
-    c = clist_begin(m_att->att_list);
-    while ( c ) {
+    m = new RecMail();
+    for (c = clist_begin(m_att->att_list); c!=NULL;c=clist_next(c) ) {
         current = c;
-        c = c->next;
+        size = 0;
         item = (mailimap_msg_att_item*)current->data;
         if (item->att_type!=MAILIMAP_MSG_ATT_ITEM_STATIC) {
             flist = (mailimap_msg_att_dynamic*)item->att_data.att_dyn;
@@ -237,7 +231,7 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
                 continue;
             }
             cf = flist->att_list->first;
-            while (cf) {
+            for (cf = clist_begin(flist->att_list); cf!=NULL; cf = clist_next(cf)) {
                 cflag = (mailimap_flag_fetch*)cf->data;
                 if (cflag->fl_type==MAILIMAP_FLAG_FETCH_OTHER && cflag->fl_flag!=0) {
                     switch (cflag->fl_flag->fl_type) {
@@ -266,15 +260,11 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
                 } else if (cflag->fl_type==MAILIMAP_FLAG_FETCH_RECENT) {
                     mFlags.setBit(FLAG_RECENT);
                 }
-                cf = cf->next;
             }
             continue;
         }
-        if ( item->att_data.att_static->att_type == MAILIMAP_MSG_ATT_RFC822_HEADER ) {
-            qDebug( "header: \n%s", item->att_data.att_static->att_data.att_rfc822_header );
-        } else if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_ENVELOPE) {
+        if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_ENVELOPE) {
             mailimap_envelope * head = item->att_data.att_static->att_data.att_env;
-            m = new RecMail();
             m->setDate(head->env_date);
             m->setSubject(head->env_subject);
             if (head->env_from!=NULL) {
@@ -307,8 +297,8 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
             QDateTime da(QDate(d->dt_year,d->dt_month,d->dt_day),QTime(d->dt_hour,d->dt_min,d->dt_sec));
             qDebug("%i %i %i - %i %i %i",d->dt_year,d->dt_month,d->dt_day,d->dt_hour,d->dt_min,d->dt_sec);
             qDebug(da.toString());
-        } else {
-            qDebug("Another type");
+        } else if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_RFC822_SIZE) {
+            size = item->att_data.att_static->att_data.att_rfc822_size;
         }
     }
     /* msg is already deleted */
@@ -318,6 +308,7 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
     }
     if (m) {
         m->setFlags(mFlags);
+        m->setMsgsize(size);
     }
     return m;
 }
@@ -344,13 +335,13 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
     err = mailimap_examine( m_imap, (char*)mb);
     if ( err != MAILIMAP_NO_ERROR ) {
         qDebug("error selecting mailbox: %s",m_imap->imap_response);
-        logout();
         return body;
     }
+ 
     result = clist_new();
     /* the range has to start at 1!!! not with 0!!!! */
     set = mailimap_set_new_interval( mail.getNumber(),mail.getNumber() );
-    fetchAtt = mailimap_fetch_att_new_body();
+    fetchAtt = mailimap_fetch_att_new_bodystructure();
     fetchType = mailimap_fetch_type_new_fetch_att(fetchAtt);
     err = mailimap_fetch( m_imap, set, fetchType, &result );
     mailimap_set_free( set );
@@ -363,26 +354,39 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
         body_desc = item->att_data.att_static->att_data.att_body;
         if (body_desc->bd_type==MAILIMAP_BODY_1PART) {
             searchBodyText(mail,body_desc->bd_data.bd_body_1part,body);
-        } else {
+        } else if (body_desc->bd_type==MAILIMAP_BODY_MPART) {
+            qDebug("Mulitpart mail");
+            searchBodyText(mail,body_desc->bd_data.bd_body_mpart,body,0);
         }
-
     } else {
         qDebug("error fetching body: %s",m_imap->imap_response);
     }
-
-    clist_free(result);
-    logout();
+    mailimap_fetch_list_free(result);
     return body;
 }
 
+/* this routine is just called when the mail has only ONE part.
+   for filling the parts of a multi-part-message there are other
+   routines 'cause we can not simply fetch the whole body. */
 void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_1part*mailDescription,RecBody&target_body)
 {
     if (!mailDescription) {
         return;
     }
+    QString sub;
     switch (mailDescription->bd_type) {
+    case MAILIMAP_BODY_TYPE_1PART_MSG:
+        target_body.setType("text");
+        sub = mailDescription->bd_data.bd_type_text->bd_media_text;
+        target_body.setSubtype(sub.lower());
+        fillPlainBody(mail,target_body);
+        break;
     case MAILIMAP_BODY_TYPE_1PART_TEXT:
-            fillPlainBody(mail,target_body,mailDescription->bd_data.bd_type_text);
+        qDebug("Mediatype single: %s",mailDescription->bd_data.bd_type_text->bd_media_text);
+        target_body.setType("text");
+        sub = mailDescription->bd_data.bd_type_text->bd_media_text;
+        target_body.setSubtype(sub.lower());
+        fillPlainBody(mail,target_body);
         break;
     default:
         break;
@@ -390,7 +394,7 @@ void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_1part*mai
     return;
 }
 
-void IMAPwrapper::fillPlainBody(const RecMail&mail,RecBody&target_body, mailimap_body_type_text * bd)
+void IMAPwrapper::fillPlainBody(const RecMail&mail,RecBody&target_body)
 {
     const char *mb;
     QString body="";
@@ -426,10 +430,13 @@ void IMAPwrapper::fillPlainBody(const RecMail&mail,RecBody&target_body, mailimap
             if (msg_att_item->att_type == MAILIMAP_MSG_ATT_ITEM_STATIC) {
                 if (msg_att_item->att_data.att_static->att_type == MAILIMAP_MSG_ATT_BODY_SECTION) {
                     char*text = msg_att_item->att_data.att_static->att_data.att_body_section->sec_body_part;
-                    int length = msg_att_item->att_data.att_static->att_data.att_body_section->sec_length;
                     msg_att_item->att_data.att_static->att_data.att_body_section->sec_body_part = 0L;
-                    body = QString(text);
-                    free(text);
+                    if (text) {
+                        body = QString(text);
+                        free(text);
+                    } else {
+                        body = "";
+                    }
                 }
             }
         }
@@ -437,7 +444,6 @@ void IMAPwrapper::fillPlainBody(const RecMail&mail,RecBody&target_body, mailimap
     } else {
         qDebug("error fetching text: %s",m_imap->imap_response);
     }
-    //clist_free(result);
     mailimap_fetch_list_free(result);
     target_body.setBodytext(body);
     return;
@@ -453,13 +459,11 @@ QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
     if (!list) {
         return l;
     }
-    current = clist_begin(list);
     unsigned int count = 0;
-    while (current!= NULL) {
+    for (current=clist_begin(list);current!= NULL;current=clist_next(current)) {
         from = "";
         named_from = false;
         current_address=(mailimap_address*)current->data;
-        current = current->next;
         if (current_address->ad_personal_name){
             from+=QString(current_address->ad_personal_name);
             from+=" ";
@@ -484,4 +488,118 @@ QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
         }
     }
     return l;
+}
+
+void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_mpart*mailDescription,RecBody&target_body,int current_recursion)
+{
+    /* current_recursion is for avoiding ugly mails which has a to deep body-structure */
+    if (!mailDescription||current_recursion==2) {
+        return;
+    }
+    qDebug("Mediatype: %s",mailDescription->bd_media_subtype);
+    clistcell*current;
+    mailimap_body*current_body;
+    for (current=clist_begin(mailDescription->bd_list);current!=0;current=clist_next(current)) {
+        current_body = (mailimap_body*)current->data;
+        if (current_body->bd_type==MAILIMAP_BODY_MPART) {
+            searchBodyText(mail,current_body->bd_data.bd_body_mpart,target_body,current_recursion+1);
+        } else if (current_body->bd_type==MAILIMAP_BODY_1PART){
+            RecPart currentPart;
+            fillSinglePart(currentPart,current_body->bd_data.bd_body_1part);
+            target_body.addPart(currentPart);
+        }
+    }
+    if (current_recursion==0) {
+        
+    }
+}
+
+void IMAPwrapper::fillSinglePart(RecPart&target_part,mailimap_body_type_1part*Description)
+{
+    if (!Description) {
+        return;
+    }
+    switch (Description->bd_type) {
+        case MAILIMAP_BODY_TYPE_1PART_TEXT:
+            target_part.setType("text");
+            fillSingleTextPart(target_part,Description->bd_data.bd_type_text);
+            break;
+        case MAILIMAP_BODY_TYPE_1PART_BASIC:
+            fillSingleBasicPart(target_part,Description->bd_data.bd_type_basic);
+            break;
+        default:
+            break;
+    }
+}
+
+void IMAPwrapper::fillSingleTextPart(RecPart&target_part,mailimap_body_type_text*which)
+{
+    if (!which) {
+        return;
+    }
+    QString sub;
+    sub = which->bd_media_text;
+    target_part.setSubtype(sub.lower());
+    target_part.setLines(which->bd_lines);
+    fillBodyFields(target_part,which->bd_fields);
+}
+
+void IMAPwrapper::fillSingleBasicPart(RecPart&target_part,mailimap_body_type_basic*which)
+{
+    if (!which) {
+        return;
+    }
+    QString type,sub;
+    switch (which->bd_media_basic->med_type) {
+    case MAILIMAP_MEDIA_BASIC_APPLICATION:
+        type = "application";
+        break;
+    case MAILIMAP_MEDIA_BASIC_AUDIO:
+        type = "audio";
+        break;
+    case MAILIMAP_MEDIA_BASIC_IMAGE:
+        type = "image";
+        break;
+    case MAILIMAP_MEDIA_BASIC_MESSAGE:
+        type = "message";
+        break;
+    case MAILIMAP_MEDIA_BASIC_VIDEO:
+        type = "video";
+        break;
+    case MAILIMAP_MEDIA_BASIC_OTHER:
+    default:
+        if (which->bd_media_basic->med_basic_type) {
+            type = which->bd_media_basic->med_basic_type;
+        } else {
+            type = "";
+        }
+        break;
+    }
+    if (which->bd_media_basic->med_subtype) {
+        sub = which->bd_media_basic->med_subtype;
+    } else {
+        sub = "";
+    }
+    qDebug("Type = %s/%s",type.latin1(),sub.latin1());
+    target_part.setType(type.lower());
+    target_part.setSubtype(sub.lower());
+    fillBodyFields(target_part,which->bd_fields);
+}
+
+void IMAPwrapper::fillBodyFields(RecPart&target_part,mailimap_body_fields*which)
+{
+    if (!which) return;
+    if (which->bd_id) {
+        qDebug("Part ID = %s",which->bd_id);
+        target_part.setIdentifier(which->bd_id);
+    } else {
+        qDebug("ID empty");
+        target_part.setIdentifier("");
+    }
+
+    clistcell*cur;
+    mailimap_single_body_fld_param*param;
+    for (cur = clist_begin(which->bd_parameter->pa_list);cur!=NULL;cur=clist_next(cur)) {
+        param = (mailimap_single_body_fld_param*)cur->data;
+    }
 }

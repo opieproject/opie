@@ -2,7 +2,7 @@
 
 
 RecMail::RecMail()
-    :subject(""),date(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_flags(7)
+    :subject(""),date(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_size(0),msg_flags(7)
 {
     init();
 }
@@ -21,6 +21,7 @@ void RecMail::copy_old(const RecMail&old)
     date = old.date;
     mbox = old.mbox;
     msg_id = old.msg_id;
+    msg_size = old.msg_size;
     msg_number = old.msg_number;
     from = old.from;
     msg_flags = old.msg_flags;
@@ -67,17 +68,27 @@ const QStringList& RecMail::Bcc()const
 }
 
 RecPart::RecPart()
-    : m_type(""),m_subtype(""),m_identifier(""),m_encoding("")
+    : m_type(""),m_subtype(""),m_identifier(""),m_encoding(""),m_lines(0)
 {
 }
 
-RecPart::RecPart(const QString&identifier,const QString&type,const QString&subtype,const QString&encoding)
-    : m_type(type),m_subtype(subtype),m_identifier(identifier),m_encoding(encoding)
+RecPart::RecPart(const QString&identifier,const QString&type,const QString&subtype,const QString&encoding,unsigned int lines)
+    : m_type(type),m_subtype(subtype),m_identifier(identifier),m_encoding(encoding),m_lines(lines)
 {
 }
 
 RecPart::~RecPart()
 {
+}
+
+void RecPart::setLines(unsigned int lines)
+{
+    m_lines = lines;
+}
+    
+const unsigned int RecPart::Lines()const
+{
+    return m_lines;
 }
 
 const QString& RecPart::Type()const
@@ -155,4 +166,24 @@ void RecBody::addPart(const RecPart& part)
 {
     RecPart*p = new RecPart(part);
     m_PartsList.append(p);
+}
+
+void RecBody::setType(const QString&type)
+{
+    m_type = type;
+}
+
+const QString& RecBody::Type()const
+{
+    return m_type;
+}
+
+void RecBody::setSubtype(const QString&type)
+{
+    m_subtype = type;
+}
+
+const QString& RecBody::Subtype()const
+{
+    return m_subtype;
 }

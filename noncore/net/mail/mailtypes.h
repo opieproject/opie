@@ -46,6 +46,8 @@ public:
     const QString&Msgid()const{return msg_id;}
     void setReplyto(const QString&reply){replyto=reply;}
     const QString&Replyto()const{return replyto;}
+    void setMsgsize(int size){msg_size = size;}
+    const int Msgsize()const{return msg_size;}
 
 
     void setTo(const QStringList&list);
@@ -59,7 +61,7 @@ public:
 
 protected:
     QString subject,date,from,mbox,msg_id,replyto;
-    int msg_number;
+    int msg_number,msg_size;
     QBitArray msg_flags;
     QStringList to,cc,bcc;
     void init();
@@ -70,9 +72,10 @@ class RecPart
 {
 protected:
     QString m_type,m_subtype,m_identifier,m_encoding;
+    unsigned int m_lines;
 public:
     RecPart();
-    RecPart(const QString&identifier,const QString&type="",const QString&subtype="",const QString&encoding="BASE64");
+    RecPart(const QString&identifier,const QString&type="",const QString&subtype="",const QString&encoding="BASE64",unsigned int lines=0);
     virtual ~RecPart();
     
     const QString&Type()const;
@@ -83,12 +86,14 @@ public:
     void setIdentifier(const QString&identifier);
     const QString&Encoding()const;
     void setEncoding(const QString&encoding);
+    void setLines(unsigned int lines);
+    const unsigned int Lines()const;
 };
 
 class RecBody
 {
 protected:
-    QString m_BodyText;
+    QString m_BodyText,m_type,m_subtype;
     QList<RecPart> m_PartsList;
 
 public:
@@ -96,6 +101,11 @@ public:
     virtual ~RecBody();
     void setBodytext(const QString&);
     const QString& Bodytext()const;
+    void setType(const QString&);
+    const QString&Type()const;
+    void setSubtype(const QString&);
+    const QString&Subtype()const;
+
     
     void setParts(const QList<RecPart>&parts);
     const QList<RecPart>& Parts()const;
