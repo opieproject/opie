@@ -695,21 +695,35 @@ void PlayListWidget::addSelected() {
     return;
     break;
   case 1: { //audio
-    filename=audioView->currentItem()->text(3);
-    //    d->selectedFiles->next();
+      QListViewItemIterator it( audioView );
+      for ( ; it.current(); ++it ) {
+          if ( it.current()->isSelected() ) {
+              filename = it.current()->text(3);
+              lnk.setName(  QFileInfo(filename).baseName() ); //sets name
+              lnk.setFile( filename ); //sets file name
+              d->selectedFiles->addToSelection(  lnk);
+          }
+      }
+      audioView->clearSelection();
+  //    d->selectedFiles->next();
   }
     break;
     
   case 2: { // video
-    filename=videoView->currentItem()->text(3);
-    //          tabWidget->setCurrentPage(0);
-    
+      QListViewItemIterator it( videoView );
+      for ( ; it.current(); ++it ) {
+          if ( it.current()->isSelected() ) {
+
+              filename = it.current()->text(3);
+              lnk.setName(  QFileInfo(filename).baseName() ); //sets name
+              lnk.setFile( filename ); //sets file name
+              d->selectedFiles->addToSelection(  lnk);
+          }
+      }
+      videoView->clearSelection();
   }
     break;
   };
-  lnk.setName( fullBaseName ( QFileInfo(filename))); //sets name
-  lnk.setFile( filename ); //sets file name
-  d->selectedFiles->addToSelection(  lnk);
   tabWidget->setCurrentPage(0);
   writeCurrentM3u();          
 
