@@ -16,7 +16,10 @@
 	* Added new O-menu icon to lock the PDA immediately: opie-lockapplet (clem)
 	* Opie-Security now hides the plugin-based authentication tabs if no auth. plugin package is installed (clem)
 	* Opie-Security gained a 'test authentication' button (clem)
-	* Opie-Eye got a more unique layout (menubar), a slideshow, user can setup some defaults
+	* Opie-Eye  got a more unique layout (menubar), a slideshow, user can setup some defaults
+	* Opie-Mail improve the handling of POP mail boxes (alwin)
+	* Both Opie-Eye and Opie-Mail were greatly improved due the hard work of Rajko Albrecht(alwin)
+	* Opie IRC - backports of the 'NeIRC fork' (zecke)
 
 	Fixed Bugs
 	----------
@@ -32,6 +35,7 @@
 	* #1445 - Opie-Sheet Has No Icon (CoreDump)
 	* #1448 - Brightness Applet added (mickeyl)
 	* #1450 - ZSame didn't clear the bonus item after winning a game (zecke)
+	* #1482 - Fix OFileSelector to be able to sort by size (zecke)
         * n.a.  - Opie-mail: fixed some crasher, some layout-problems
 	* n.a.  - Converted applications to not hardcode /opt/QtPalmtop but to use QPEApplication::qpeDir (zecke)
 	* n.a.  - Converted usage of qpeDir() not to include a '/' as first charachter of the string (zecke)
