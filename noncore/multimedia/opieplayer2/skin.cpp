@@ -53,10 +53,13 @@ public:
 
 private:
     typedef QCache<SkinData> DataCache;
-    typedef QCache<QPixmap> BackgroundPixmapCache;
+    typedef QCache<QImage> BackgroundImageCache;
+
+    template <class CacheType>
+    void store( const QCache<CacheType> &cache, const QString &key, CacheType *data );
 
     DataCache m_cache;
-    BackgroundPixmapCache m_backgroundPixmapCache;
+    BackgroundImageCache m_backgroundImageCache;
 };
 
 Skin::Skin( const QString &name, const QString &fileNameInfix )
@@ -166,16 +169,44 @@ QImage Skin::loadImage( const QString &fileName )
 
 SkinCache::SkinCache()
 {
+    // let's say we cache two skins (audio+video) at maximum
+    m_cache.setMaxCost( 2 );
+    // ... and one background pixmap
+    m_backgroundImageCache.setMaxCost( 1 );
 }
 
 SkinData *SkinCache::lookupAndTake( const QString &skinPath, const QString &fileNameInfix )
 {
-    return new SkinData;
+    QString key = skinPath + fileNameInfix;
+
+    SkinData *data = m_cache.take( key );
+    if ( !data )
+        data = new SkinData;
+
+    QImage *bgImage = m_backgroundImageCache.find( skinPath );
+    if ( bgImage )
+        data->backgroundImage = *bgImage;
+    else
+        data->backgroundImage = QImage();
+
+    return data;
 }
 
 void SkinCache::store( const QString &skinPath, const QString &fileNameInfix, SkinData *data )
 {
-    delete data;
+    QImage *backgroundImage = new QImage( data->backgroundImage );
+
+    data->backgroundImage = QImage();
+
+    QString key = skinPath + fileNameInfix;
+
+    if ( m_cache.find( key, false /*ref*/ ) != 0 ||
+         !m_cache.insert( key, data ) )
+        delete data;
+
+    if ( m_backgroundImageCache.find( skinPath, false /*ref*/ ) != 0 ||
+         !m_backgroundImageCache.insert( skinPath, backgroundImage ) )
+        delete backgroundImage;
 }
 
 SkinLoader::SkinLoader()
