@@ -1,0 +1,10 @@
+Package: timezones
+Files: root/usr/share/zoneinfo/America
+Priority: optional
+Section: base
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Depends: timezones-common
+Provides: timezones
+Version: 1.0.1-1
+Architecture: all
+Description: American timezone data

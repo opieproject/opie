@@ -1,0 +1,10 @@
+Package: timezones
+Files: root/usr/share/zoneinfo/Europe
+Priority: optional
+Section: base
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Depends: timezones-common
+Provides: timezones
+Version: 1.0.1-1
+Architecture: all
+Description: European timezone data
