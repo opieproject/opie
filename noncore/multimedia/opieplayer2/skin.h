@@ -13,6 +13,8 @@ public:
     QImage buttonUpImage() const;
     QImage buttonDownImage() const;
 
+    QImage buttonMaskImage( const QString &fileName ) const;
+
 private:
     QString m_name;
     QString m_fileNameInfix;

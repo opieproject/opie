@@ -24,5 +24,12 @@ QImage Skin::buttonDownImage() const
     return QImage( Resource::findPixmap( QString( "%1/skin%2_down" ).arg( m_skinPath ).arg( m_fileNameInfix ) ) );
 }
 
+QImage Skin::buttonMaskImage( const QString &fileName ) const
+{
+    QString prefix = m_skinPath + QString::fromLatin1( "/skin%1_mask_" ).arg( m_fileNameInfix );
+    QString path = prefix + fileName + ".png";
+    return QImage( Resource::findPixmap( path ) );
+}
+
 /* vim: et sw=4 ts=4
  */

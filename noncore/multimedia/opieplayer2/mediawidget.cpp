@@ -44,7 +44,7 @@ MediaWidget::~MediaWidget()
 }
 
 void MediaWidget::setupButtons( const SkinButtonInfo *skinInfo, uint buttonCount,
-                                const QString &imagePrefix, const QSize &buttonAreaSize )
+                                const Skin &skin, const QSize &buttonAreaSize )
 {
     buttonMask = QImage( buttonAreaSize, 8, 255 );
     buttonMask.fill( 0 );
@@ -53,40 +53,37 @@ void MediaWidget::setupButtons( const SkinButtonInfo *skinInfo, uint buttonCount
     buttons.reserve( buttonCount );
 
     for ( uint i = 0; i < buttonCount; ++i ) {
-        Button button = setupButton( skinInfo[ i ], imagePrefix );
+        Button button = setupButton( skinInfo[ i ], skin );
         buttons.push_back( button );
     }
 }
 
-MediaWidget::Button MediaWidget::setupButton( const SkinButtonInfo &buttonInfo, const QString &imagePrefix )
+MediaWidget::Button MediaWidget::setupButton( const SkinButtonInfo &buttonInfo, const Skin &skin )
 {
     Button button;
     button.command = buttonInfo.command;
     button.type = buttonInfo.type;
 
-    QString fileName = imagePrefix + buttonInfo.fileName + ".png";
-
-    button.mask = setupButtonMask( button.command, fileName );
+    button.mask = setupButtonMask( button.command, skin.buttonMaskImage( buttonInfo.fileName ) );
 
     return button;
 }
 
-QBitmap MediaWidget::setupButtonMask( const Command &command, const QString &fileName )
+QBitmap MediaWidget::setupButtonMask( const Command &command, const QImage &maskImage )
 {
-    QImage imgMask( Resource::findPixmap( fileName ) );
-    if ( imgMask.isNull() )
+    if ( maskImage.isNull() )
         return QBitmap();
 
     uchar **dest = buttonMask.jumpTable();
     for ( int y = 0; y < buttonMask.height(); y++ ) {
         uchar *line = dest[y];
         for ( int x = 0; x < buttonMask.width(); x++ )
-            if ( !qRed( imgMask.pixel( x, y ) ) )
+            if ( !qRed( maskImage.pixel( x, y ) ) )
                 line[x] = command + 1;
     }
 
     // ### grmbl qt2. use constructor when switching to qt3.
-    QBitmap bm; bm = imgMask;
+    QBitmap bm; bm = maskImage;
     return bm;
 }
 
@@ -108,8 +105,7 @@ void MediaWidget::loadSkin( const SkinButtonInfo *skinInfo, uint buttonCount, co
     buttonUpImage = skin.buttonUpImage();
     buttonDownImage = skin.buttonDownImage();
 
-    setupButtons( skinInfo, buttonCount,
-                  skinPath + QString::fromLatin1( "/skin%1_mask_" ).arg( fileNameInfix ), buttonUpImage.size() );
+    setupButtons( skinInfo, buttonCount, skin, buttonUpImage.size() );
 }
 
 void MediaWidget::closeEvent( QCloseEvent * )
