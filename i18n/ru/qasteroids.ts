@@ -3,37 +3,39 @@
     <name>KAstTopLevel</name>
     <message>
         <source>Asteroids</source>
-        <translation type="unfinished"></translation>
+        <translation>Астероиды</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Очки</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Уровень</translation>
     </message>
     <message>
         <source>Ships</source>
-        <translation type="unfinished"></translation>
+        <translation>Корабли</translation>
     </message>
     <message>
         <source>Fuel</source>
-        <translation type="unfinished"></translation>
+        <translation>Топливо</translation>
     </message>
     <message>
         <source>Press Calendar to start playing</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите &quot;Календарь&quot; чтобы начать игру</translation>
     </message>
     <message>
         <source>Ship Destroyed.
 Press Contacts/Home key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Корабль разрушен.
+Нажмите кнопку &quot;Контакты&quot;/&quot;Домой&quot;.</translation>
     </message>
     <message>
         <source>Game Over.
 Press Calendar for a new game.</source>
-        <translation type="unfinished"></translation>
+        <translation>Игра окончена.
+Нажмите &quot;Календарь&quot; чтобы начать заново.</translation>
     </message>
 </context>
 </TS>

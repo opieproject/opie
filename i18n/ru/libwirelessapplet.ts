@@ -3,27 +3,27 @@
     <name>AdvancedConfigBase</name>
     <message>
         <source>Advanced Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Доп. конфигурация</translation>
     </message>
     <message>
         <source>Renew DHCP on changing</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить DHCP при изменении</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Частоты</translation>
     </message>
     <message>
         <source>MODE</source>
-        <translation type="unfinished"></translation>
+        <translation>Режима</translation>
     </message>
     <message>
         <source>ESSID</source>
-        <translation type="unfinished"></translation>
+        <translation>ESSID</translation>
     </message>
     <message>
         <source>AccessPoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Точки доступа</translation>
     </message>
 </context>
 </TS>

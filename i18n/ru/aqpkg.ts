@@ -327,7 +327,7 @@
     </message>
     <message>
         <source>Click here to change package category to used filter.</source>
-        <translation type="unfinished">Нажмите чтобы сменить категорию пакетов на используемый фильтр.</translation>
+        <translation>Нажмите чтобы сменить категорию пакетов на используемый фильтр.</translation>
     </message>
     <message>
         <source>Find</source>

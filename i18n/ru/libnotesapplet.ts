@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Toggle Maximized</source>
-        <translation type="unfinished">Распахнуть</translation>
+        <translation>Распахнуть на весь экран</translation>
     </message>
 </context>
 </TS>

@@ -3,19 +3,19 @@
     <name>MainView</name>
     <message>
         <source>Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Пульт ДУ</translation>
     </message>
     <message>
         <source>Learn</source>
-        <translation type="unfinished"></translation>
+        <translation>Учить</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Справка</translation>
     </message>
 </context>
 </TS>

@@ -3,42 +3,42 @@
     <name>DocTabSettings</name>
     <message>
         <source>Enable the Documents Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить вкладку Документы</translation>
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Заметьте:&lt;/b&gt; Для того, чтобы эти изменения вступили в силу, может потребоваться перезапустить Opie.</translation>
     </message>
     <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите если хотите чтобы была видна вкладка Документы.</translation>
     </message>
 </context>
 <context>
     <name>InputMethodSettings</name>
     <message>
         <source>Resize application on Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Измеить размер при появлении</translation>
     </message>
     <message>
         <source>Enable floating and resizing</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить изменение размера и положения</translation>
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Заметьте:&lt;/b&gt; Для того, чтобы эти изменения вступили в силу, может потребоваться перезапустить Opie.</translation>
     </message>
     <message>
         <source>Check, if you want the application to be automatically resized if the input method pops up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отметьте если вы хотите чтобы размер окна был автоматически измене при появлении метода ввода.</translation>
     </message>
     <message>
         <source>Check, if you want to move and/or resize input methods</source>
-        <translation type="unfinished"></translation>
+        <translation>Отметьте если вы хотите перемещать и/или изменять размер методов ввода</translation>
     </message>
     <message>
         <source>Specify the percentage of the screen width for the input method</source>
-        <translation type="unfinished"></translation>
+        <translation>Установите процент ширины экрана отводимый для методов ввода</translation>
     </message>
 </context>
 <context>
@@ -61,11 +61,11 @@
     </message>
     <message>
         <source>InputMethods</source>
-        <translation type="unfinished"></translation>
+        <translation>Методы ввода</translation>
     </message>
     <message>
         <source>DocTab</source>
-        <translation type="unfinished"></translation>
+        <translation>ДокВкладка</translation>
     </message>
 </context>
 <context>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Show Applications in subpopups</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать приложения в суб-окнах</translation>
     </message>
 </context>
 <context>
@@ -185,7 +185,7 @@
     </message>
     <message>
         <source>foobar</source>
-        <translation type="unfinished"></translation>
+        <translation>нечто</translation>
     </message>
     <message>
         <source>New</source>
@@ -249,11 +249,11 @@
     </message>
     <message>
         <source>Enable animated busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешить анимацию индикатора загрузки</translation>
     </message>
     <message>
         <source>Activate this, if you want an animatedbusy indicator for starting applications in the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включите если вы хотите анимированный индикатор загрузки приложений.</translation>
     </message>
 </context>
 <context>
