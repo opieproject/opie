@@ -260,8 +260,6 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
     m_view->addColumn(tr("Date"), 60 );
     m_view->addColumn(tr("Mime Type"), -1 );
 
-    QHeader *header = m_view->header();
-    header->hide();
 
     m_view->setSorting( 1 );
     m_view->setAllColumnsShowFocus( TRUE );
