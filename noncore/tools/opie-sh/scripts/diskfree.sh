@@ -26,7 +26,7 @@ OPIE_SH=/opt/QtPalmtop/bin/opie-sh
   echo "<h3>diskfree</h3> how much space is left ?<br>"
   echo "<p><table>"
 
-  df -Ph					\
+  df -h					\
 	| grep -v  "Mounted on"			\
 	| sed 's/  / /g' 			\
 	| sed 's/  / /g' 			\
