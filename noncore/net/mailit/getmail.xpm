@@ -1,0 +1,21 @@
+/* XPM */
+static char*getmail[]={
+"16 13 5 1",
+"# c #040404",
+"a c #c3c3c3",
+"c c #000000",
+". c None",
+"b c #ffffff",
+".........###....",
+"........#...#.#.",
+".............##.",
+"............###.",
+"................",
+"..............aa",
+".bbbbbbbbbbbbbba",
+".bbbcbbcbbbcccba",
+".bbcbccbbbbcbcba",
+".bbbbbbbbbbcccba",
+".bbcbcccbbbbbbba",
+".bbbcbbbbbbbbbba",
+".bbbbbbbbbbbbbba"};

@@ -1,0 +1,83 @@
+Issues regarding Mailit
+-----------------------
+
+Mailit is still in development and is lacking some
+features to make it completely usable.  Listed below are the
+most important issues.
+
+Due to the development status, numerous messages are passed too
+the console during usage of the program.
+No messages are deleted from the POP server after retrival.
+
+Synchronization:
+---------------------
+Works by comparing the last known size of the mailbox on the server
+to the current size.
+Possible problem: If a popserver shuffles the order of the mails
+when it receives a new mail, mailit won't know since it only uses
+the messagecount as a reference.  If this occurs, turn sync off in
+the account settings.
+Haven't encountered this problem on the currently tested servers,
+but if it turns out that several servers do this, it will be resolved.
+
+Mail parsing
+------------
+Parsing of MIME-encoded email works for all currently tested cases.
+BASE64 decoding works.
+Attatchments are saved in the enclosure subdirectory of qtmail
+(in the Documents directory).  You can install the files to the documents
+folder (creates a doclnk)
+Adding enclosures is limited to the preselected directories, and they
+are not really correct at the moment (trivial issue awaiting decision
+of fileplacements in QPE)
+attatched pictures will be displayed (jpg dependant on qte compilation)
+
+
+SMTP
+----
+The SMTP-client now supports attatchments, but it's not completly done.
+Encoding works, but it doesn't examine the file to check what type of
+file you are attatching.  In other words, if it doesn't know that you
+are attatching a picture, the mime setting for content type could be
+wrong.  Mail clients with inline viewing of pictures (like hotmail) could
+have a problem with displaying the mail correctly.
+(Should be fixed soon)
+
+You can now have multiple recipients.
+
+
+POP
+---
+The popclient connects to the all accounts in turn, downloads all headers
+and emails smaller than 2000 bytes.  After its done, it reconnects
+and downloads the mails that were too big (> 2000)
+The to-be-downloaded mails are sorted according to size.  If you view
+a mail, it is shifted to the front of the queue.  Deleting a mail(header)
+while the download is in progress will remove it from the queue of
+mails to download (except if the mail is currently in transfer)
+You may exit mailit during a transfer of mails/headers.  Next time
+you reconnect to the same server it will continue downloading from
+where it left off.
+
+You can now choose between getting mail from only one account or all.
+The get all option is just added and not fully testet yet.  Get from
+a single account should work fine.  The current way of downloading
+does not work well without sync turned on if you keep old mails in
+the inbox.
+
+Experienced some problems with servers reporting mail size less and
+bigger than actual size.  Don't know whats causing this yet, but I
+have added a workaround.  It now scans the mail for endofmail
+definition ("\r\n.\r\n"), disregarding size.
+
+
+Saving/Retrieving mail
+----------------------
+The inbox is saved and retrieved.  Any mail not sent from the outbox
+is not saved (will of course be added)
+
+Miscelaneous issues
+-------------------
+Numerous cosmetic changes, including icons (which are temporary)
+
+Very little error checking is done on usertyped variables.

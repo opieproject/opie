@@ -1,0 +1,9 @@
+Files: bin/mailit apps/Applications/mailit.desktop pics/EMail.png
+Priority: optional
+Section: opie
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $OPIE_VERSION-$SUB_VERSION
+Depends: opie-base
+Description: EMail
+ A simple POP3 email client for the Qt Palmtop environment.
