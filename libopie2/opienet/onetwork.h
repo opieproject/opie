@@ -31,41 +31,28 @@
 #ifndef ONETWORK_H
 #define ONETWORK_H
 
-#if !defined( OPIE_WE_VERSION )
-    #warning No wireless extension specified; autodetecting...
-    #include <linux/version.h>
-    #if LINUX_VERSION_CODE < KERNEL_VERSION(2,4,23)
-        #define OPIE_WE_VERSION 15
-    #else
-        #define OPIE_WE_VERSION 16
-    #endif // LINUX_VERSION_CODE < KERNEL_VERSION(2.4.23)
-#endif // !defined( OPIE_WE_VERSION )
-
-#if OPIE_WE_VERSION == 15
-#include "wireless.15.h"
-#warning Using WE V15
-#endif
-#if OPIE_WE_VERSION == 16
-#include "wireless.16.h"
-#warning Using WE V16
-#endif
-
 /* OPIE */
-
 #include <opie2/onetutils.h>
 #include <opie2/ostation.h>
 
 /* QT */
-
 #include <qvaluelist.h>
 #include <qdict.h>
 #include <qmap.h>
 #include <qobject.h>
 #include <qhostaddress.h>
 
+/* STD */
+// hacky workaround until we have a user space wireless.h
+#include <net/if.h>
+#define _LINUX_IF_H
+#include <linux/wireless.h>
+#ifndef IW_MAX_PRIV_DEF
+#define IW_MAX_PRIV_DEF        128
+#endif
+
 namespace Opie {
 namespace Net  {
-
 class ONetworkInterface;
 class OWirelessNetworkInterface;
 class OChannelHopper;

@@ -148,17 +148,6 @@ config OPIE_NO_SOUND_PCM_READ_BITS
   boolean "There is not a pcm_read_bits io control"
   default y if TARGET_SHARP
   default n if ! TARGET_SHARP
-
-config OPIE_WE_VERSION_OVERRIDE
-  boolean "Override autodetection of wireless extension (WE) version"
-  default n
-
-config OPIE_WE_VERSION
-  depends OPIE_WE_VERSION_OVERRIDE
-  string  "The wireless extension (WE) version to build against"
-  default "15" if ! TARGET_X86
-  default "16" if TARGET_X86
-
 endmenu
 
 menu "Dependencies"
