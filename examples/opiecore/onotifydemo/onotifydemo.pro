@@ -1,6 +1,6 @@
 TEMPLATE        = app
 CONFIG          = qt warn_on
-HEADERS         =
+HEADERS         = onotifydemo.h
 SOURCES         = onotifydemo.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include

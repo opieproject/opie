@@ -1,3 +1,5 @@
+#include "onotifydemo.h"
+
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/oapplication.h>
@@ -16,11 +18,7 @@ using namespace Opie::Ui;
 #include <qmessagebox.h>
 #include <qpushbutton.h>
 
-class DemoApp : public OApplication
-{
-  Q_OBJECT
-public:
-  DemoApp( int argc, char** argv ) : OApplication( argc, argv, "libopie2 notify demo" )
+DemoApp::DemoApp( int argc, char** argv ) : OApplication( argc, argv, "libopie2 notify demo" )
   {
 
     QVBox* vbox = new QVBox();
@@ -70,8 +68,7 @@ public:
     showMainWidget( vbox );
   }
 
-public:
-    void addTrigger( bool multi = false )
+    void DemoApp::addTrigger( bool multi )
     {
         if ( !m )
         {
@@ -100,12 +97,11 @@ public:
         }
     }
 
-public slots:
-    void modifierClicked( int modifier ) { m = static_cast<OFileNotificationType>( (int)m ^ int(modifier) ); };
-    void addSingle() { addTrigger(); };
-    void addMulti() { addTrigger( true ); };
+    void DemoApp::modifierClicked( int modifier ) { m = static_cast<OFileNotificationType>( (int)m ^ int(modifier) ); };
+    void DemoApp::addSingle() { addTrigger(); };
+    void DemoApp::addMulti() { addTrigger( true ); };
 
-    void delTrigger()
+    void DemoApp::delTrigger()
     {
         QListViewItem* item = l->selectedItem();
         if ( !item )
@@ -120,17 +116,10 @@ public slots:
         }
     }
 
-    void trigger()
+    void DemoApp::trigger()
     {
         owarn << "FIRE!" << oendl;
     }
-
-private:
-  OListView* l;
-  QButtonGroup* g1;
-  QButtonGroup* g2;
-  OFileNotificationType m;
-};
 
 int main( int argc, char** argv )
 {
@@ -141,4 +130,3 @@ int main( int argc, char** argv )
 
 }
 
-#include "moc/onotifydemo.moc"
