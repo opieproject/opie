@@ -52,7 +52,8 @@
 #define STYLE_BARS 0
 #define STYLE_ANTENNA 1
 
-#define MDEBUG 0
+//#define MDEBUG 0
+#undef MDEBUG
 
 WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const char *name )
     : QFrame( parent, name, WStyle_StaysOnTop | WType_Popup ), applet( applet )
@@ -223,16 +224,15 @@ void WirelessApplet::checkInterface()
     if ( interface )
     {
 #ifdef MDEBUG
-        qDebug( "WIFIAPPLET: using interface '%s'", (const char*)
+        qDebug( "WIFIAPPLET: using interface '%s'", (const char*) interface->getName() );
 #endif
-                 interface->getName() );
     }
     else
     {
 #ifdef MDEBUG
         qDebug( "WIFIAPPLET: D'oh! No Wireless interface present... :(" );
-        hide();
 #endif
+        hide();
     }   
 }    
 

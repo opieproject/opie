@@ -51,7 +51,8 @@
 #define PROCNETDEV "/proc/net/dev"
 #define PROCNETWIRELESS "/proc/net/wireless"
 
-#define MDEBUG 0
+//#define MDEBUG 0
+#undef MDEBUG
 
 //---------------------------------------------------------------------------
 // class MNetworkInterface
