@@ -12,14 +12,15 @@ ConfigDlg::ConfigDlg( QWidget *parent = 0, const char *name = 0 ):
 {
 	contFields = OContactFields::trfields();
 
-	// We add all Fields into the Listbox and creating
-	// some translation maps between the translated string and the ID in "recordfields.h".
+	// We add all Fields into the Listbox
 	for (uint i=0; i < contFields.count(); i++) {
 		allFieldListBox->insertItem( contFields[i] );
-		m_mapStrToID.insert(contFields[i], i + (Qtopia::CATEGORY_ID + 1));
-		m_mapIDToStr.insert( i + (Qtopia::CATEGORY_ID + 1), contFields[i] );
-		qWarning("Creating map between: %s and %d", contFields[i].latin1(), i + (Qtopia::CATEGORY_ID + 1) );
 	}
+
+	// Get the translation maps between Field ID and translated strings
+	m_mapStrToID = OContactFields::trFieldsToId();
+	m_mapIDToStr = OContactFields::idToTrFields();
+
 	connect ( m_addButton, SIGNAL( clicked() ), this, SLOT( slotItemAdd() ) );
 	connect ( m_removeButton, SIGNAL( clicked() ), this, SLOT( slotItemRemove() ) );
 	connect ( m_upButton, SIGNAL( clicked() ), this, SLOT( slotItemUp() ) );

@@ -3,6 +3,9 @@
 
 class QStringList;
 
+#include <qmap.h>
+#include <qstring.h>
+
 class OContactFields{
 
  public:
@@ -12,6 +15,9 @@ class OContactFields{
     static QStringList untrdetailsfields( bool sorted = true );
     static QStringList trfields( bool sorted = true );
     static QStringList untrfields( bool sorted = true );
+
+    static QMap<int, QString> idToTrFields();
+    static QMap<QString, int> trFieldsToId();
 
 };
 
