@@ -137,8 +137,10 @@ OpieFtp::OpieFtp( )
 
     tabLayout->addWidget( Local_View, 0, 0 );
 
-    connect( Local_View, SIGNAL( doubleClicked( QListViewItem*)),
+    connect( Local_View, SIGNAL( clicked( QListViewItem*)),
              this,SLOT( localListClicked(QListViewItem *)) );
+//     connect( Local_View, SIGNAL( doubleClicked( QListViewItem*)),
+//              this,SLOT( localListClicked(QListViewItem *)) );
     connect( Local_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
 
@@ -162,7 +164,7 @@ OpieFtp::OpieFtp( )
 
     QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
 
-    connect( Remote_View, SIGNAL( doubleClicked( QListViewItem*)),
+    connect( Remote_View, SIGNAL( clicked( QListViewItem*)),
              this,SLOT( remoteListClicked(QListViewItem *)) );
     connect( Remote_View, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( RemoteListPressed(int, QListViewItem *, const QPoint&, int)) );
@@ -440,7 +442,7 @@ void OpieFtp::localUpload()
                 }
                     ProgressBar->reset();
                     nullifyCallBack();
-					it.current()->setSelected(FALSE);
+          it.current()->setSelected(FALSE);
             } //end currentSelected
         }
         TabWidget->setCurrentPage(1);
@@ -494,7 +496,7 @@ void OpieFtp::remoteDownload()
             }
             ProgressBar->reset();
             nullifyCallBack();
-			it.current()->setSelected(FALSE);
+      it.current()->setSelected(FALSE);
         }
     }
     TabWidget->setCurrentPage(0);
@@ -749,7 +751,7 @@ void OpieFtp::localListClicked(QListViewItem *selectedItem)
             } else {
                 strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
                 if( QFile::exists(strItem ) ) {
-                    qDebug("upload "+strItem);
+                      //  qDebug("upload "+strItem);
                 }
             } //end not symlink
             chdir(strItem.latin1());
