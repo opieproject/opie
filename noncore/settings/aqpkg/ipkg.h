@@ -63,6 +63,7 @@ private:
     QList<QString> *dependantPackages;
     
     int executeIpkgCommand( QString &cmd, const QString option );
+    void removeStatusEntry();
     void linkPackage( const QString &packFileName, const QString &dest, const QString &destDir );
     QStringList* getList( const QString &packageFilename, const QString &destDir );
     void processFileList( const QStringList *fileList, const QString &destDir );

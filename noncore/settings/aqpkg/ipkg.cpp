@@ -64,10 +64,14 @@ bool Ipkg :: runIpkg( )
         cmd += " ; ";
     }
     cmd += "ipkg -force-defaults";
-    if ( option != "update" && option != "download" )
-    {
+
+    // only set the destination for an install operation
+    if ( option == "install" )
         cmd += " -dest "+ destination;
 
+
+    if ( option != "update" && option != "download" )
+    {
         if ( flags & FORCE_DEPENDS )
             cmd += " -force-depends";
         if ( flags & FORCE_REINSTALL  )
@@ -156,11 +160,85 @@ bool Ipkg :: runIpkg( )
     }
 
     delete dependantPackages;
+
+    // Finally, if we are removing a package, remove its entry from the <destdir>/usr/lib/ipkg/status file
+    // to workaround an ipkg bug which stops reinstall to a different location
+    if ( option == "remove" )
+        removeStatusEntry();
     
+
 //    emit outputText( QString( "Finished - status=" ) + (ret ? "success" : "failure") );
     emit outputText( "Finished" );
     emit outputText( "" );
     return ret;
+}
+
+void Ipkg :: removeStatusEntry()
+{
+    QString statusFile = destDir;
+    if ( statusFile.right( 1 ) != "/" )
+        statusFile += "/";
+    statusFile += "usr/lib/ipkg/status";
+    QString outStatusFile = statusFile + ".tmp";
+
+    emit outputText( "" );
+    emit outputText( "Removing status entry..." );
+    emit outputText( QString( "status file - " )+ statusFile );
+    emit outputText( QString( "package - " )+ package );
+    
+    ifstream in( statusFile );
+    ofstream out( outStatusFile );
+	if ( !in.is_open() )
+    {
+        emit outputText( QString( "Couldn't open status file - " )+ statusFile );
+        return;
+    }
+
+    if ( !out.is_open() )
+    {
+        emit outputText( QString( "Couldn't create tempory status file - " )+ outStatusFile );
+        return;
+    }
+
+    char line[1001];
+    char k[21];
+    char v[1001];
+    QString key;
+    QString value;
+    do
+    {
+        in.getline( line, 1000 );
+        if ( in.eof() )
+            continue;
+
+        k[0] = '\0';
+        v[0] = '\0';
+
+        sscanf( line, "%[^:]: %[^\n]", k, v );
+        key = k;
+        value = v;
+        key = key.stripWhiteSpace();
+        value = value.stripWhiteSpace();
+        if ( key == "Package" && value == package )
+        {
+            // Ignore all lines up to next empty
+            do
+            {
+                in.getline( line, 1000 );
+                if ( in.eof() || QString( line ).stripWhiteSpace() == "" )
+                    continue;
+            } while ( !in.eof() && QString( line ).stripWhiteSpace() != "" );
+        }
+
+        out << line << endl;
+    } while ( !in.eof() );
+
+    in.close();
+    out.close();
+
+    // Remove old status file and put tmp stats file in its place
+    remove( statusFile );
+    rename( outStatusFile, statusFile );
 }
 
 
