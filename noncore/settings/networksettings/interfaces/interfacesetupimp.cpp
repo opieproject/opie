@@ -183,7 +183,8 @@ void InterfaceSetupImp::setProfile(const QString &profile){
   if(dns.contains(" ")){
     firstDNSLineEdit->setText(dns.mid(0, dns.find(" ")));
     secondDNSLineEdit->setText(dns.mid(dns.find(" ")+1, dns.length()));
-  }
+  }else firstDNSLineEdit->setText(dns);
+
   ipAddressEdit->setText(interfaces->getInterfaceOption("address", error));
   subnetMaskEdit->setText(interfaces->getInterfaceOption("netmask", error));
   gatewayEdit->setText(interfaces->getInterfaceOption("gateway", error));
