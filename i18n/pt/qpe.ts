@@ -62,82 +62,6 @@
     </message>
 </context>
 <context>
-    <name>AppMonitor</name>
-    <message>
-        <source>Application Problem</source>
-        <translation type="obsolete">Problema na Aplicação</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;A aplicação %1 não está a responder.&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Quer forçar o término da aplicação?&lt;/p&gt;</translation>
-    </message>
-</context>
-<context>
-    <name>Calibrate</name>
-    <message>
-        <source>Touch the crosshairs firmly and
-accurately to calibrate your screen.</source>
-        <translation type="obsolete">Toque na cruz com firmeza e 
-precisão para calibrar o ecrâ.</translation>
-    </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Bem-vindo ao Opie</translation>
-    </message>
-</context>
-<context>
-    <name>CategoryTabWidget</name>
-    <message>
-        <source>Documents</source>
-        <translation type="obsolete">Documentos</translation>
-    </message>
-    <message>
-        <source>Icon View</source>
-        <translation type="obsolete">Vista em Icones</translation>
-    </message>
-    <message>
-        <source>List View</source>
-        <translation type="obsolete">Vista em Lista</translation>
-    </message>
-</context>
-<context>
-    <name>DesktopApplication</name>
-    <message>
-        <source>Battery level is critical!
-Keep power off until power restored!</source>
-        <translation type="obsolete">O nível de energia está muito baixo.
-Desligue o dispositivo ou ligue-o à corrente!</translation>
-    </message>
-    <message>
-        <source>Battery is running very low.</source>
-        <translation type="obsolete">O nível de energia está baixo.</translation>
-    </message>
-    <message>
-        <source>The Back-up battery is very low.
-Please charge the back-up battery.</source>
-        <translation type="obsolete">O nível de energia da bateria extra está baixo.
-Deve carregá-la.</translation>
-    </message>
-    <message>
-        <source>business card</source>
-        <translation type="obsolete">Cartão de Visita</translation>
-    </message>
-    <message>
-        <source>Information</source>
-        <translation type="obsolete">Informação</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
-(%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;A data do sistema não parece ser válida.
-(%1)&lt;/p&gt;&lt;p&gt;Deseja acertar o relógio?&lt;/p&gt;</translation>
-    </message>
-</context>
-<context>
     <name>DesktopPowerAlerter</name>
     <message>
         <source>Battery Status</source>
@@ -193,6 +117,10 @@ Deve carregá-la.</translation>
         <translation>Execução</translation>
     </message>
     <message>
+        <source>Documents</source>
+        <translation>Documentos</translation>
+    </message>
+    <message>
         <source> - Launcher</source>
         <translation>- Execução</translation>
     </message>
@@ -203,18 +131,6 @@ Deve carregá-la.</translation>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
         <translation>&lt;p&gt;Não há nenhuma aplicação definida para este tipo de documento.&lt;p&gt;O tipo do documento é %1.</translation>
-    </message>
-    <message>
-        <source>Finding documents</source>
-        <translation type="obsolete">A procurar documentos</translation>
-    </message>
-    <message>
-        <source>Searching documents</source>
-        <translation type="obsolete">A procurar nos documentos</translation>
-    </message>
-    <message>
-        <source>Documents</source>
-        <translation>Documentos</translation>
     </message>
     <message>
         <source>OK</source>
@@ -243,82 +159,12 @@ Deve carregá-la.</translation>
 <context>
     <name>LauncherView</name>
     <message>
-        <source>%1 files</source>
-        <translation type="obsolete">%1 ficheiros</translation>
-    </message>
-    <message>
-        <source>All types of file</source>
-        <translation type="obsolete">Todos os tipos de ficheiros</translation>
+        <source>All types</source>
+        <translation>Todos os tipos</translation>
     </message>
     <message>
         <source>Document View</source>
         <translation>Vista de Documentos</translation>
-    </message>
-    <message>
-        <source>All types</source>
-        <translation>Todos os tipos</translation>
-    </message>
-</context>
-<context>
-    <name>MediumMountGui</name>
-    <message>
-        <source>Medium inserted</source>
-        <translation type="obsolete">Cartão inserido</translation>
-    </message>
-    <message>
-        <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</source>
-        <translation type="obsolete">Foi inserido um cartão. Quer indexar os ficheiros dele?</translation>
-    </message>
-    <message>
-        <source>Which media files</source>
-        <translation type="obsolete">Que tipos de ficheiros</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">Àudio</translation>
-    </message>
-    <message>
-        <source>Image</source>
-        <translation type="obsolete">Imagem</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="obsolete">Texto</translation>
-    </message>
-    <message>
-        <source>Video</source>
-        <translation type="obsolete">Vídeo</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Todos</translation>
-    </message>
-    <message>
-        <source>Link apps</source>
-        <translation type="obsolete">Aplicações</translation>
-    </message>
-    <message>
-        <source>Limit search to dir: (not used yet)</source>
-        <translation type="obsolete">Limitar a procura à directoria: (por implementar)</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation type="obsolete">Adicionar</translation>
-    </message>
-    <message>
-        <source>Your decision will be stored on the medium.</source>
-        <translation type="obsolete">A sua decisão será guardada no cartão.</translation>
-    </message>
-    <message>
-        <source>Do not ask again for this medium</source>
-        <translation type="obsolete">Não perguntar novamente para este cartão</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Battery Status</source>
-        <translation type="obsolete">Estado da Bateria</translation>
     </message>
 </context>
 <context>
@@ -409,6 +255,10 @@ Termine esta aplicação imediatamente.</translation>
 <context>
     <name>ShutdownImpl</name>
     <message>
+        <source>Shutdown...</source>
+        <translation>Desligar</translation>
+    </message>
+    <message>
         <source>Terminate</source>
         <translation>Terminar</translation>
     </message>
@@ -423,10 +273,6 @@ Termine esta aplicação imediatamente.</translation>
     <message>
         <source>Restart Opie</source>
         <translation>Reiniciar Opie</translation>
-    </message>
-    <message>
-        <source>Shutdown</source>
-        <translation>Desligar</translation>
     </message>
     <message>
         <source>&lt;p&gt;
@@ -468,18 +314,6 @@ Estas operações estão disponíveis principalmente para desenvolvimento e test
 </context>
 <context>
     <name>SyncDialog</name>
-    <message>
-        <source>Syncing</source>
-        <translation type="obsolete">A sincronizar</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Contacts&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Contactos&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
     <message>
         <source>Abort</source>
         <translation>Abortar</translation>
