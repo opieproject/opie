@@ -300,7 +300,6 @@ void SetDateTime::updateSystem(int i)
 
 void SetDateTime::tzChange( const QString &tz )
 {
-	qDebug("SetDateTime::tzChange");
     // set the TZ get the time and leave gracefully...
     QString strSave;
     strSave = getenv( "TZ" );
@@ -456,7 +455,6 @@ void SetTime::checkedPM( int c )
 
 void SetTime::slotTzChange( const QString &tz )
 {
-	qDebug("SetTime::slotTzChange");
     // set the TZ get the time and leave gracefully...
     QString strSave;
     strSave = getenv( "TZ" );

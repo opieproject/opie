@@ -23,12 +23,16 @@ protected:
 private:
 		QString _ntpOutput;
    	float _shiftPerSec;
+    int _lookupDiff;
     OProcess *ntpProcess;
     QTimer *ntpTimer;
     QSocket *ntpSock;
 
    	float getTimeShift();
 	  void readLookups();
+	  void ntpOutPut(QString);
+   	bool ntpDelayElapsed();
+    QString getNtpServer();
 private slots:
     void slotRunNtp();
     void getNtpOutput(OProcess *proc, char *buffer, int buflen);

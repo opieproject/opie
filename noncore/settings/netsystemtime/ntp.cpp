@@ -44,7 +44,7 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   ComboNtpSrv->setCurrentItem( cfg.readNumEntry("ntpServer", 0) );
 
   ntpTimer = new QTimer(this);
-	ntpTimer->start(SpinBoxNtpDelay->value()*100);
+	ntpTimer->start(SpinBoxNtpDelay->value()*1000*60);
 
  	ntpProcess = new OProcess( );
   connect( SpinBoxNtpDelay, SIGNAL( valueChanged(int) ),
@@ -85,20 +85,28 @@ Ntp::~Ntp()
  	cfg.writeEntry( "ntpRefreshFreq", SpinBoxNtpDelay->value() );
 }
 
-
-void Ntp::slotRunNtp()
+bool Ntp::ntpDelayElapsed()
 {
 	Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
-  int lookupDiff = TimeConversion::toUTC(QDateTime::currentDateTime()) - cfg.readNumEntry("time",0);
+  _lookupDiff = TimeConversion::toUTC(QDateTime::currentDateTime()) - cfg.readNumEntry("time",0);
+  return (_lookupDiff - (SpinBoxNtpDelay->value()*60)) > -60;
+}
 
-  if ( lookupDiff < SpinBoxNtpDelay->value()*60 )
+QString Ntp::getNtpServer()
+{
+	return ComboNtpSrv->currentText();
+}
+
+void Ntp::slotRunNtp()
+{
+  if ( !ntpDelayElapsed() )
   {
   	switch (
-   	 QMessageBox::warning(this, tr("Run ntp?"),
+   	 QMessageBox::warning(this, tr("Run NTP?"),
      tr("You asked for a delay of ")+SpinBoxNtpDelay->text()+tr(" minutes, but only ")+
-     QString::number(lookupDiff%60)+tr(" minutes elapsed since last loopup.")+
-     "<br>"+tr("Rerun ntp?"),
+     QString::number(_lookupDiff/60)+tr(" minutes elapsed since last loopup.")+
+     "<br>"+tr("Rerun NTP?"),
      QMessageBox::Ok,QMessageBox::Cancel)
    	) {
 	    	case QMessageBox::Ok:     break;
@@ -107,12 +115,13 @@ void Ntp::slotRunNtp()
       }
   }
 	TextLabelStartTime->setText(QDateTime::currentDateTime().toString());
-  MultiLineEditntpOutPut->append( "\n"+tr("Running:")+"\nntpdate "+ ComboNtpSrv->currentText()+"\n");
+  ntpOutPut( tr("Running:")+"\nntpdate "+getNtpServer() );
 	ntpProcess->clearArguments();
-	*ntpProcess << "ntpdate" << ComboNtpSrv->currentText();
+	*ntpProcess << "ntpdate" << getNtpServer();
 	bool ret = ntpProcess->start(OProcess::NotifyOnExit,OProcess::AllOutput);
   if ( !ret ) {
-     qDebug("Error while executing ntp");
+     qDebug("Error while executing ntpdate");
+     ntpOutPut( tr("Error while executing ntpdate"));
   }
 }
 
@@ -123,7 +132,7 @@ void  Ntp::getNtpOutput(OProcess *proc, char *buffer, int buflen)
   lineStr=lineStr.left(buflen);
   if (lineStr!=lineStrOld)
   {
-	        MultiLineEditntpOutPut->append(lineStr);
+	        ntpOutPut(lineStr);
          	_ntpOutput += lineStr;
   }
   lineStrOld = lineStr;
@@ -151,7 +160,6 @@ void  Ntp::ntpFinished(OProcess*)
    	cfg.writeEntry("count",lookupCount);
 	  cfg.setGroup("lookup_"+QString::number(lookupCount));
     _shiftPerSec =  timeShift / secsSinceLast;
-//    float nextCorr = _maxOffset / _shiftPerSec;
    	qDebug("secs since last lookup %i", secsSinceLast);qDebug("timeshift since last lookup %f", timeShift);qDebug("timeshift since per sec %f", _shiftPerSec);
 		cfg.writeEntry("secsSinceLast",secsSinceLast);
 		cfg.writeEntry("timeShift",QString::number(timeShift));
@@ -212,7 +220,6 @@ void Ntp::readLookups()
 
 void Ntp::preditctTime()
 {
-	qDebug("current time: %s",QDateTime::currentDateTime().toString().latin1());
 	Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
  	int lastTime = cfg.readNumEntry("time",0);
@@ -238,11 +245,9 @@ void Ntp::slotCheckNtp(int i)
     TextLabelMainPredTime->hide();
     ButtonSetTime->setText( tr("Get time from network") );
 	  connect( ButtonSetTime, SIGNAL(clicked()), SLOT(slotRunNtp()) );
-		Config cfg("ntp",Config::User);
-  	cfg.setGroup("lookups");
-		int lookupDiff = TimeConversion::toUTC(QDateTime::currentDateTime()) - cfg.readNumEntry("time",0);
-  	if ( lookupDiff > SpinBoxNtpDelay->value()*60 )
+	 	if ( ntpDelayElapsed() )
    	{
+      slotRunNtp();
 	  	disconnect(ntpTimer, SIGNAL( timeout() ), this, SLOT(slotProbeNtpServer()) );
     	connect(ntpTimer, SIGNAL( timeout() ), SLOT(slotRunNtp()) );
 	  }else{
@@ -252,21 +257,26 @@ void Ntp::slotCheckNtp(int i)
   }else{
 	  preditctTime();
 		ButtonSetTime->setText( tr("Set predicted time") );
+  	if (i>0)ntpOutPut(tr("Could not connect to server ")+getNtpServer());
   	connect( ButtonSetTime, SIGNAL(clicked()), SLOT(setPredictTime()) );
 	  connect( ntpTimer, SIGNAL( timeout() ), SLOT(slotProbeNtpServer()) );
   }
+//	ntpTimer->start(SpinBoxNtpDelay->value()*1000*60);
 }
 
 void Ntp::slotProbeNtpServer()
 {
-	Config cfg("ntp",Config::User);
-  cfg.setGroup("lookups");
-	int lookupDiff = TimeConversion::toUTC(QDateTime::currentDateTime()) - cfg.readNumEntry("time",0);
-  if ( lookupDiff > SpinBoxNtpDelay->value()*60 )
-  ntpSock->connectToHost( ComboNtpSrv->currentText() ,123);
+  if ( ntpDelayElapsed() )
+	  ntpSock->connectToHost( getNtpServer() ,123);
 }
 
 void Ntp::slotNtpDelayChanged(int delay)
 {
-  ntpTimer->changeInterval( delay*100 );
+  ntpTimer->changeInterval( delay*1000*60 );
+}
+
+void Ntp::ntpOutPut(QString out)
+{
+	MultiLineEditntpOutPut->append(out);
+  MultiLineEditntpOutPut->setCursorPosition(MultiLineEditntpOutPut->numLines() + 1,0,FALSE);
 }
