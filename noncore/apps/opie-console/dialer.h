@@ -45,8 +45,8 @@ class Dialer : public QDialog
 		QPushButton *cancel;
 		int state;
 		int usercancel;
+                int m_fd;
 		const Profile& m_profile;
-		int m_fd;
 		int cleanshutdown;
 };
 

@@ -11,7 +11,7 @@
 namespace {
     void setCurrent( const QString& str, QComboBox* bo ) {
         uint b = bo->count();
-        for (uint i = 0; i < bo->count(); i++ ) {
+        for (int i = 0; i < bo->count(); i++ ) {
             if ( bo->text(i) == str ) {
                 bo->setCurrentItem( i );
                 return;
@@ -116,6 +116,7 @@ void BTConfigWidget::load( const Profile& prof ) {
  */
 void BTConfigWidget::save( Profile& prof ) {
     int flow, parity, speed;
+    flow = parity = speed = 0;
     prof.writeEntry("Device", m_deviceCmb->currentText() );
 
 
@@ -156,6 +157,7 @@ void BTConfigWidget::save( Profile& prof ) {
     case IOLayerBase::Baud_19200:
         speed = 19200;
         break;
+    default:
     case IOLayerBase::Baud_9600:
         speed = 9600;
         break;

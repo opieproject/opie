@@ -107,7 +107,7 @@ void IOLayerBase::setParity( Parity par ) {
     }
 }
 void IOLayerBase::setSpeed( Speed sp ) {
-    int index;
+    int index = -1;
     switch( sp ) {
     case Baud_115200:
         index = id_baud_115200;
@@ -121,6 +121,7 @@ void IOLayerBase::setSpeed( Speed sp ) {
     case Baud_19200:
         index = id_baud_19200;
         break;
+    default:
     case Baud_9600:
         index = id_baud_9600;
         break;
@@ -160,6 +161,7 @@ IOLayerBase::Speed IOLayerBase::speed()const{
     case id_baud_19200:
         return Baud_19200;
         break;
+    default:
     case id_baud_9600:
         return Baud_9600;
         break;

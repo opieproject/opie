@@ -85,5 +85,7 @@ QString IOModem::name() const {
 
 void IOModem::slotExited(OProcess* proc ){
     close();
+    /* delete it afterwards */
+    delete proc;
 }
 

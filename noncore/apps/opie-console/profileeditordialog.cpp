@@ -92,7 +92,7 @@ void ProfileEditorDialog::initUI()
 
     m_showconntab = 0;
     tabWidget->addTab(tabprof, "", QObject::tr("Profile"));
-    //tabWidget->addTab(m_tabCon, "", QObject::tr("Connection"));
+    tabWidget->addTab(m_tabCon, "", QObject::tr("Connection"));
     tabWidget->addTab(m_tabTerm, "", QObject::tr("Terminal"));
     tabWidget->addTab(m_tabKey, "", QObject::tr("Special Keys"));
     tabWidget->setCurrentTab( tabprof );
@@ -185,7 +185,6 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
     m_con->load( m_prof );
     m_layCon->addWidget( m_con );
 
-    tabWidget->addTab( m_tabCon, "", QObject::tr("Connection") );
     tabWidget->setCurrentTab( tabprof );
 
 }

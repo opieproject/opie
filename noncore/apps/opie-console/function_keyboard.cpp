@@ -1,12 +1,12 @@
 #include "function_keyboard.h"
-#include <qsizepolicy.h> 
+#include <qsizepolicy.h>
 #include <qevent.h>
 #include <qwindowsystem_qws.h>
 #include <qapplication.h>
 #include <qlayout.h>
 
-FunctionKeyboard::FunctionKeyboard(QWidget *parent) : 
-    QFrame(parent), numRows(2), numCols(11), 
+FunctionKeyboard::FunctionKeyboard(QWidget *parent) :
+    QFrame(parent), numRows(2), numCols(11),
     pressedRow(0), pressedCol(0) {
 
     setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed));
@@ -23,7 +23,7 @@ FunctionKeyboard::FunctionKeyboard(QWidget *parent) :
 
             keys.insert(
 
-                 handle, 
+                 handle,
                  FKey (value_list[0], value_list[1].toUShort(), value_list[2].toUShort())
             );
         }
@@ -67,9 +67,9 @@ void FunctionKeyboard::paintEvent(QPaintEvent *e) {
             if (keys.contains(handle)) {
 
                 p.drawText(
-                                c * keyWidth + 1, r * keyHeight + 1, 
-                                keyWidth, keyHeight, 
-                                Qt::AlignHCenter | Qt::AlignVCenter, 
+                                c * keyWidth + 1, r * keyHeight + 1,
+                                keyWidth, keyHeight,
+                                Qt::AlignHCenter | Qt::AlignVCenter,
                                 keys[handle].getL()
                 );
             }
@@ -80,14 +80,14 @@ void FunctionKeyboard::paintEvent(QPaintEvent *e) {
 void FunctionKeyboard::paintKey(int row, int col) {
 
     QPainter p(this);
-    
-    p.fillRect(QRect(QPoint(col * keyWidth + 1, row * keyHeight + 1), 
-                     QPoint((col + 1) * keyWidth - 1, row * keyHeight + keyHeight- 1)), 
+
+    p.fillRect(QRect(QPoint(col * keyWidth + 1, row * keyHeight + 1),
+                     QPoint((col + 1) * keyWidth - 1, row * keyHeight + keyHeight- 1)),
                (pressedRow != -1 && pressedCol != -1 ) ? QColor(97,119,155) : QColor(255,255,255));
     p.drawText(
-                    col * keyWidth + 1, row * keyHeight + 1, 
-                    keyWidth, keyHeight, 
-                    Qt::AlignHCenter | Qt::AlignVCenter, 
+                    col * keyWidth + 1, row * keyHeight + 1,
+                    keyWidth, keyHeight,
+                    Qt::AlignHCenter | Qt::AlignVCenter,
                     keys["r" + QString::number(row) + "c" + QString::number(col)].getL()
     );
 
@@ -138,27 +138,27 @@ QSize FunctionKeyboard::sizeHint() const {
 void FunctionKeyboard::loadDefaults() {
 
     /* what keys should be default? */
-    keys.insert( "r0c0", FKey ("F1", 4144, 0)); 
-    keys.insert( "r0c1", FKey ("F2", 4145, 0)); 
-    keys.insert( "r0c2", FKey ("F3", 4145, 0)); 
-    keys.insert( "r0c3", FKey ("F4", 4146, 0)); 
-    keys.insert( "r0c4", FKey ("F5", 4147, 0)); 
-    keys.insert( "r0c5", FKey ("F6", 4148, 0)); 
-    keys.insert( "r0c6", FKey ("F7", 4149, 0)); 
-    keys.insert( "r0c7", FKey ("F8", 4150, 0)); 
-    keys.insert( "r0c8", FKey ("F9", 4151, 0)); 
-    keys.insert( "r0c9", FKey ("F10", 4152, 0)); 
-    keys.insert( "r0c10", FKey ("F11", 4153, 0)); 
+    keys.insert( "r0c0", FKey ("F1", 4144, 0));
+    keys.insert( "r0c1", FKey ("F2", 4145, 0));
+    keys.insert( "r0c2", FKey ("F3", 4145, 0));
+    keys.insert( "r0c3", FKey ("F4", 4146, 0));
+    keys.insert( "r0c4", FKey ("F5", 4147, 0));
+    keys.insert( "r0c5", FKey ("F6", 4148, 0));
+    keys.insert( "r0c6", FKey ("F7", 4149, 0));
+    keys.insert( "r0c7", FKey ("F8", 4150, 0));
+    keys.insert( "r0c8", FKey ("F9", 4151, 0));
+    keys.insert( "r0c9", FKey ("F10", 4152, 0));
+    keys.insert( "r0c10", FKey ("F11", 4153, 0));
 
-    keys.insert( "r1c7", FKey ("Ho", 4112, 0)); 
-    keys.insert( "r1c8", FKey ("End", 4113, 0)); 
-    keys.insert( "r1c9", FKey ("PU", 4118, 0)); 
-    keys.insert( "r1c10", FKey ("PD", 4119, 0)); 
+    keys.insert( "r1c7", FKey ("Ho", 4112, 0));
+    keys.insert( "r1c8", FKey ("End", 4113, 0));
+    keys.insert( "r1c9", FKey ("PU", 4118, 0));
+    keys.insert( "r1c10", FKey ("PD", 4119, 0));
 
 }
 
 
-FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* parent) : 
+FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* parent) :
     ProfileDialogKeyWidget(name, parent) {
 
 
@@ -174,9 +174,9 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
 FunctionKeyboardConfig::~FunctionKeyboardConfig() {
 
 }
-void FunctionKeyboardConfig::load (const Profile& prof) {
+void FunctionKeyboardConfig::load (const Profile& ) {
 
 }
-void FunctionKeyboardConfig::save (Profile& prof) {
+void FunctionKeyboardConfig::save (Profile& ) {
 
 }

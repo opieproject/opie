@@ -17,7 +17,7 @@
 
 #include "transferdialog.h"
 
-TransferDialog::TransferDialog(QWidget *parent, MainWindow *mainwindow, const char *name)
+TransferDialog::TransferDialog(QWidget *parent, MainWindow *mainwindow, const char *)
 : QDialog(parent, 0l, true), m_win(mainwindow)
 {
     m_lay = 0l;
@@ -181,12 +181,12 @@ void TransferDialog::slotCancel()
 	}
 }
 
-void TransferDialog::slotProgress(const QString& file, int progress, int speed, int hours, int minutes, int seconds)
+void TransferDialog::slotProgress(const QString& , int progress, int , int , int, int )
 {
 	progressbar->setProgress(progress);
 }
 
-void TransferDialog::slotError(int error, const QString& message)
+void TransferDialog::slotError(int error, const QString& )
 {
 	statusbar->setText(QObject::tr("Ready"));
 
@@ -238,7 +238,7 @@ void TransferDialog::slotSent()
 	m_autocleanup = 1;
 }
 
-void TransferDialog::slotReceived(const QString& file)
+void TransferDialog::slotReceived(const QString& )
 {
 	progressbar->setProgress(100);
 	QMessageBox::information(this, QObject::tr("Received"), QObject::tr("File has been received."));

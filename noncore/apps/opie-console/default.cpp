@@ -67,7 +67,7 @@ extern "C" {
     ProfileDialogWidget* newBTWidget( const QString& str, QWidget* wid ) {
         return new BTConfigWidget(str, wid );
     }
-    ProfileDialogWidget* newConsoleWid( const QString& str, QWidget* wid ) {
+    ProfileDialogWidget* newConsoleWid( const QString& , QWidget*  ) {
         return 0l;
     }
 

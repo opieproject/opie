@@ -12,7 +12,7 @@
 namespace {
     void setCurrent( const QString& str, QComboBox* bo ) {
         uint b = bo->count();
-        for (uint i = 0; i < bo->count(); i++ ) {
+        for (int i = 0; i < bo->count(); i++ ) {
             if ( bo->text(i) == str ) {
                 bo->setCurrentItem( i );
                 return;
@@ -126,6 +126,7 @@ void ModemConfigWidget::load( const Profile& prof ) {
  */
 void ModemConfigWidget::save( Profile& prof ) {
     int flow, parity, speed;
+    flow = parity = speed = 0;
     prof.writeEntry( "Device", m_deviceCmb->currentText() );
 
 

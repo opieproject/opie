@@ -17,6 +17,7 @@ ProcCtl* ProcCtl::self() {
     if (!m_self ) {
         m_self = new ProcCtl;
     }
+    return m_self;
 }
 void ProcCtl::add(pid_t pi,  int fd ) {
     ProcContainer * con = new ProcContainer;

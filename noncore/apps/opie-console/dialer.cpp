@@ -192,7 +192,7 @@ void Dialer::trydial(const QString& number)
 			}
 		}
 	}
-	
+
 	if(state != state_cancel)
 	{
 		switchState(state_online);
@@ -225,7 +225,7 @@ QString Dialer::receive()
 	QString buf;
 	char buffer[1024];
 	int ret;
-	int counter;
+	int counter = 0;
 
 	while(1)
 	{
