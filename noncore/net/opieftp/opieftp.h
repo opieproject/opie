@@ -24,7 +24,7 @@ class QHBoxLayout;
 class QGridLayout; 
 class QComboBox;
 class QListView;
-class QListviewItem;
+class QListViewItem;
 class QLabel;
 class QProgressBar;
 class QSpinBox;
@@ -34,11 +34,11 @@ class QPEToolBar;
 class QPEMenuBar;
 class QPopupMenu;
 class QFile;
-class QListViewItem;
 class QLineEdit;
 class QPushButton;
 class QToolButton;
 class QStringList;
+class QListBox;
 
 class OpieFtp : public QMainWindow
 {
@@ -51,6 +51,7 @@ public:
     QTabWidget *TabWidget;
     QWidget *tab, *tab_2, *tab_3;
     QListView *Local_View, *Remote_View;
+    QListBox *serverListView;
 
     QComboBox *UsernameComboBox, *ServerComboBox, *currentPathCombo;
     QLineEdit *PasswordEdit, *remotePath;
@@ -61,7 +62,7 @@ public:
     QString currentRemoteDir;
     QString filterStr;
     QListViewItem * item;
-    QPushButton *connectServerBtn;//
+    QPushButton *connectServerBtn, *newServerButton;//
     QToolButton  *cdUpButton, *homeButton, *docButton;
     bool b;
     int currentServerConfig;
@@ -70,7 +71,11 @@ protected slots:
     void homeButtonPushed();
     void docButtonPushed();
     void doAbout(); 
+
     void serverComboEdited(const QString & );
+    void UsernameComboBoxEdited(const QString & );
+    void PasswordEditEdited(const QString & );
+
     void showLocalMenu( QListViewItem *);
     void showRemoteMenu( QListViewItem *);
     void doLocalCd();
@@ -93,25 +98,36 @@ protected slots:
     void localDelete();
     void remoteMakDir();
     void remoteDelete();
+
     bool remoteDirList(const QString &);
     bool remoteChDir(const QString &);
+
     void tabChanged(QWidget*);
     void cleanUp();
+
     void remoteRename();
     void localRename();
+
     void currentPathComboChanged();
-  void currentPathComboActivated(const QString &);
-  void switchToLocalTab();
-  void switchToRemoteTab();
-  void switchToConfigTab();
-  void fillCombos();
-  void fillRemoteCombo(const QString&);
-  void fillCombo(const QString &);
-  void serverComboSelected(int);
-  void deleteServer();
-  void connectorBtnToggled(bool);  
+    void currentPathComboActivated(const QString &);
+    void switchToLocalTab();
+    void switchToRemoteTab();
+    void switchToConfigTab();
+
+    void fillCombos();
+    void clearCombos();
+    void fillRemoteCombo(const QString&);
+    void fillCombo(const QString &);
+    void serverComboSelected(int);
+    void deleteServer();
+    void connectorBtnToggled(bool);
+    void NewServer();
+    void serverListClicked( const QString &);
+    
 protected:
+    bool fuckeduphack;
   QStringList remoteDirPathStringList, localDirPathStringList;
+  QString newServerName;
     void nullifyCallBack();
     QGridLayout* tabLayout;
     QGridLayout* tabLayout_2;
