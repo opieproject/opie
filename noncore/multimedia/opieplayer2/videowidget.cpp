@@ -59,23 +59,9 @@ namespace
 const int xo = 2; // movable x offset
 const int yo = 0; // movable y offset
 
-/*
-MediaWidget::Button videoButtons[] = {
-    { FALSE, FALSE, FALSE }, // stop
-    { TRUE, FALSE, FALSE }, // play
-    { FALSE, FALSE, FALSE }, // previous
-    { FALSE, FALSE, FALSE }, // next
-    { FALSE, FALSE, FALSE }, // volUp
-    { FALSE, FALSE, FALSE }, // volDown
-    { TRUE, FALSE, FALSE }  // fullscreen
-};
-*/
-
 const char * const skinV_mask_file_names[7] = {
 "stop","play","back","fwd","up","down","full"
 };
-
-//const int numVButtons = (sizeof(videoButtons)/sizeof(MediaWidget::Button));
 
 }
 

@@ -56,26 +56,6 @@ namespace
 const int xo = -2; // movable x offset
 const int yo = 22; // movable y offset
 
-struct MediaButton {
-    bool isToggle, isHeld, isDown;
-};
-
-//Layout information for the audioButtons (and if it is a toggle button or not)
-/*
-MediaWidget::Button audioButtons[] = {
-   { TRUE,  FALSE, FALSE }, // play
-   { FALSE, FALSE, FALSE }, // stop
-   { FALSE, FALSE, FALSE }, // next
-   { FALSE, FALSE, FALSE }, // previous
-   { FALSE, FALSE, FALSE }, // volume up
-   { FALSE, FALSE, FALSE }, // volume down
-   { TRUE,  FALSE, FALSE }, // repeat/loop
-   { FALSE, FALSE, FALSE }, // playlist
-   { FALSE, FALSE, FALSE }, // forward
-   { FALSE, FALSE, FALSE }  // back
-};
-*/
-
 const char * const skin_mask_file_names[10] = {
    "play", "stop", "next", "prev", "up",
    "down", "loop", "playlist", "forward", "back"
@@ -87,8 +67,6 @@ void changeTextColor( QWidget * w) {
    p.setBrush( QColorGroup::Base, QColor( 167, 212, 167 ) );
    w->setPalette( p );
 }
-
-//const int numButtons = (sizeof(audioButtons)/sizeof(MediaWidget::Button));
 
 }
 

@@ -35,9 +35,7 @@ public:
 
     struct Button
     {
-        //Button() : isToggle( false ), isHeld( false ), isDown( false ) {}
-//        Button( bool toggle, bool held, bool down )
-//           : isToggle( toggle ), isHeld( held ), isDown( down ) {}
+        Button() : isToggle( false ), isHeld( false ), isDown( false ) {}
 
         bool isToggle : 1;
         bool isHeld : 1;
