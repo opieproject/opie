@@ -90,11 +90,19 @@ QPopupMenu *RotateApplet::popup ( QWidget * ) const
 void RotateApplet::activated ( )
 {
     int currentRotation = QPEApplication::defaultRotation();
+
     int newRotation;
     if  ( m_native == true )  {
+
         newRotation = currentRotation + 90;
+	if(newRotation >= 360) newRotation = 0;	//ipaqs like the 36xx have the display 
+	//rotated to 270 as default, so 360 does nothing => handle this here
+
     } else {
         newRotation = currentRotation - 90;
+        if (newRotation <=0) newRotation = 270; 
+	//ipaqs like the 36xx have the display rotated
+	// to 270 as default, and -90 is invalid => handle this here
     }
     QCopEnvelope env( "QPE/System", "setCurrentRotation(int)" );
     env << newRotation;
