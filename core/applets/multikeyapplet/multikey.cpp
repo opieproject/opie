@@ -31,6 +31,7 @@ Multikey::Multikey(QWidget *parent) : QLabel(parent), popupMenu(this), current("
 	     this, SLOT(message(const QCString &, const QByteArray &)));
 
     setFont( QFont( "Helvetica", 10, QFont::Normal ) );
+    QPEApplication::setStylusOperation(this, QPEApplication::RightOnHold);
     lang = 0;
     QCopEnvelope e("MultiKey/Keyboard", "getmultikey()");
     setText("EN");
@@ -50,10 +51,17 @@ void Multikey::mousePressEvent(QMouseEvent *ev)
 	if (opt == -1)
 	    return;
 	lang = opt;
-    } else {
-	lang = lang < sw_maps.count()-1 ? lang+1 : 0;
-    }
 
+	QCopEnvelope e("MultiKey/Keyboard", "setmultikey(QString)");
+	e << sw_maps[lang];
+        setText(labels[lang]);
+    }
+    QWidget::mousePressEvent(ev);
+}
+
+void Multikey::mouseReleaseEvent(QMouseEvent *ev)
+{
+    lang = lang < sw_maps.count()-1 ? lang+1 : 0;
     QCopEnvelope e("MultiKey/Keyboard", "setmultikey(QString)");
     //qDebug("Lang=%d, count=%d, lab=%s", lang, sw_maps.count(), labels[lang].ascii());
     e << sw_maps[lang];

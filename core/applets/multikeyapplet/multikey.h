@@ -19,17 +19,20 @@
 #include <qpopupmenu.h>
 #include <qcopchannel_qws.h>
 
-class Multikey : public QLabel
+class Multikey: public QLabel
 {
     Q_OBJECT
 public:
-    Multikey( QWidget *parent );
+    Multikey(QWidget *parent);
+
+protected:
+    void mousePressEvent(QMouseEvent *ev);
+    void mouseReleaseEvent(QMouseEvent *ev);
 
 public slots:
     void message(const QCString &message, const QByteArray &data);
 
 protected:
-    void mousePressEvent( QMouseEvent * );
     QStringList sw_maps;
     QStringList labels;
     QPopupMenu popupMenu;
