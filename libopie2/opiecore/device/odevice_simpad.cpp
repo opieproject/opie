@@ -75,8 +75,8 @@ struct s_button simpad_buttons [] = {
     { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
     Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Lower+Left"),
     "devicebuttons/simpad_lower_left",
-    "mail", "raise()",
-    "mail", "newMail()" },
+    "opiemail", "raise()",
+    "opiemail", "newMail()" },
 
     { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
     Qt::Key_F5, QT_TRANSLATE_NOOP("Button", "Upper+Up"),

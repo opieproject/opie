@@ -160,6 +160,21 @@ enum OHingeStatus {
     CASE_UNKNOWN = 1,
 };
 
+/* default button for qvfb or such 
+ * see odevice.cpp for details.
+ * hint: manage a user defined button for qvfb?
+ * alwin
+ */
+struct default_button {
+    Qt::Key code;
+    char *utext;
+    char *pix;
+    char *fpressedservice;
+    char *fpressedaction;
+    char *fheldservice;
+    char *fheldaction;
+};
+
 /**
  * A singleton which gives informations about device specefic option
  * like the Hardware used, LEDs, the Base Distribution and

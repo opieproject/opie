@@ -62,6 +62,29 @@ const char* PATH_PROC_CPUINFO = "/proc/cpuinfo";
 
 using namespace Opie::Core;
 
+struct default_button default_buttons [] =  {
+    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
+    "devicebuttons/z_calendar",
+    "datebook", "nextView()",
+    "today", "raise()" },
+    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
+    "devicebuttons/z_contact",
+    "addressbook", "raise()",
+    "addressbook", "beamBusinessCard()" },
+    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
+    "devicebuttons/z_home",
+    "QPE/Launcher", "home()",
+    "buttonsettings", "raise()" },
+    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
+    "devicebuttons/z_menu",
+    "QPE/TaskBar", "toggleMenu()",
+    "QPE/TaskBar", "toggleStartMenu()" },
+    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
+    "devicebuttons/z_mail",
+    "opiemail", "raise()",
+    "opiemail", "newMail()" },
+};
+
 ODevice *ODevice::inst()
 {
     static ODevice *dev = 0;
@@ -141,6 +164,16 @@ void ODevice::initButtons()
 
     qDebug ( "init Buttons" );
     d->m_buttons = new QValueList <ODeviceButton>;
+    for ( uint i = 0; i < ( sizeof( default_buttons ) / sizeof( default_button )); i++ ) {
+        default_button *db = default_buttons + i;
+        ODeviceButton b;
+        b. setKeycode ( db->code );
+        b. setUserText ( QObject::tr ( "Button", db->utext ));
+        b. setPixmap ( Resource::loadPixmap ( db->pix ));
+        b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( db->fpressedservice ), db->fpressedaction ));
+        b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( db->fheldservice ), db->fheldaction ));
+        d->m_buttons->append ( b );
+    }
 
     reloadButtonMapping();
 

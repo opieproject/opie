@@ -75,8 +75,8 @@ struct z_button z_buttons [] = {
     "QPE/TaskBar", "toggleStartMenu()" },
     { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
     "devicebuttons/z_mail",
-    "mail", "raise()",
-    "mail", "newMail()" },
+    "opiemail", "raise()",
+    "opiemail", "newMail()" },
 };
 
 struct z_button z_buttons_c700 [] = {
