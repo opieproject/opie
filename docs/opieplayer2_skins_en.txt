@@ -1,0 +1,49 @@
+This document descibes how to make opieplayer2 skins.
+
+First decide on a name for your skin, and make a directory in the opieplayer2 skins
+directory.
+
+mkdir $OPIEDIR/pics/opieplayer2/skins/someCoolSkin
+
+In this example, the name of your skin will be someCoolSkin,
+and will appear in the View menu of the player.
+
+You can copy the files from the default skin to look at and use.
+
+The skins work off of an indexed mode black image mask to position where the button
+should be. The skin_up and skin_down images show how all the buttons 
+are to be drawn when pressed and released.
+
+**** All _mask_ files need to be indexed mode png images with an alpha background ****
+
+You will need _all_ these files:
+
+
+background.png          general background pixmap (rgb)
+skin_down.png           audio button skin for when buttona are pressed (rgb)
+skin_mask_back.png      audio scan back through file button mask (indexed)
+skin_mask_down.png      audio volume lower button mask (indexed)
+skin_mask_forward.png   audio scan forward through file button mask (indexed)
+skin_mask_loop.png      audio loop mode button mask (indexed)
+skin_mask_next.png      audio go to next in playlist button mask (indexed)d
+skin_mask_playlist.png  audio stop audio and show playlist button mask (indexed)
+skin_mask_play.png      audio play button mask (indexed)
+skin_mask_prev.png      audio go to previous file in playlist button mask (indexed)
+skin_mask_stop.png      audio stop button mask (indexed)
+skin_mask_up.png        audio volume louder button mask (indexed)
+skin_up.png             audio button skin for when buttons are released  (indexed)
+skinV_down.png          video button skin for when buttons are pressed (rgb)
+skinV_mask_back.png     video move forward through playlist button mask (indexed)
+skinV_mask_down.png     video volume lower button mask (indexed)
+skinV_mask_full.png     video change to full screen mode button mask (indexed)
+skinV_mask_fwd.png      video move forward through playlist button mask (indexed)
+skinV_mask_play.png     video play button mask (indexed)
+skinV_mask_stop.png     video stop button mask (indexed)
+skinV_mask_up.png       video volume louder button mask (indexed)
+skinV_up.png            video button skin for when buttons are released (rgb)
+
+
+You can position the buttons anywhere using the button mask. The skin_up and skin_down images
+should correspond to the mask positions, otherwise they wont work.
+Video skins do not have much choice in button location.
+
