@@ -100,6 +100,8 @@ private:
     bool ampm;
     void clearClock();
     void clearTimer();
+    void startSWatch();
+    void stopSWatch();
 };
 
 #endif

@@ -265,25 +265,36 @@ void Clock::clearClock( void )
   aclock->display( QTime( 0, 0, 0 ) );
 }
 
+void Clock::startSWatch()
+{
+		swatch_start.start();
+		set->setText( tr( "Stop" ) );
+		t->start( 1000 );
+		swatch_running = TRUE;
+			// disable screensaver while stop watch is running
+		toggleScreenSaver( FALSE );
+}
+
+void Clock::stopSWatch()
+{
+		swatch_totalms += swatch_start.elapsed();
+		set->setText( tr( "Start" ) );
+		t->stop();
+		swatch_running = FALSE;
+		toggleScreenSaver( TRUE );
+		updateClock();
+}
+
+
 void Clock::slotSet()
 {
   if ( t->isActive() )
 		{
-			swatch_totalms += swatch_start.elapsed();
-			set->setText( tr( "Start" ) );
-			t->stop();
-			swatch_running = FALSE;
-			toggleScreenSaver( TRUE );
-			updateClock();
+				startSWatch();
 		}
   else
 		{
-			swatch_start.start();
-			set->setText( tr( "Stop" ) );
-			t->start( 1000 );
-			swatch_running = TRUE;
-				// disable screensaver while stop watch is running
-			toggleScreenSaver( FALSE );
+				stopSWatch();
 		}
 }
 
@@ -601,22 +612,16 @@ void Clock::slotAdjustTime()
 
 void Clock::slotStartTimer()
 {
-  Config cfg( "Clock" );
-  cfg.setGroup( "Mode" );
-	int mode = cfg.readBoolEntry( "clockMode");
   if ( clockRB->isChecked() )
 		setSwatchMode( 1);
-	slotSet();
+	startSWatch();
 }
 
 void Clock::slotStopTimer()
 {
-  Config cfg( "Clock" );
-  cfg.setGroup( "Mode" );
-	int mode = cfg.readBoolEntry( "clockMode");
   if ( clockRB->isChecked() )
 		setSwatchMode( 1);
-slotSet();
+	stopSWatch();
 }
 
 void Clock::slotResetTimer()
@@ -628,7 +633,7 @@ slotReset();
 
 void Clock::setSwatchMode(int mode)
 {
-	qDebug("Clock::setSwatchMode( %d)"), mode;
+	qDebug("Clock::setSwatchMode( %d)", mode);
 	swatchRB->setChecked( mode);
 	clearClock( );
 	modeSelect( mode );
