@@ -30,6 +30,8 @@ MLogWindow::MLogWindow( QWidget * parent, const char * name, WFlags f )
 {
     ledit = new QMultiLineEdit( this );
     ledit->setReadOnly( true );
+    ledit->setUndoEnabled( false );
+
 
     MLogWindow::_instance = this;
 }
@@ -38,13 +40,9 @@ MLogWindow::MLogWindow( QWidget * parent, const char * name, WFlags f )
 void MLogWindow::log( QString text )
 {
     QTime time = QTime::currentTime();
-    QString line;
-    line.sprintf( "[%s] %s\n", (const char*) time.toString(), (const char*) text );
-    int col;
-    int row;
-    ledit->getCursorPosition( &col, &row );
-    ledit->insertAt( line, col, row );
-    odebug << line << oendl; 
+    QString line = QString( "[%1] %2\n" ).arg(time.toString() ).arg( text );
+    ledit->insertLine( line );
+    odebug << line << oendl;
 }
 
 

@@ -72,11 +72,11 @@ ProtocolListView::~ProtocolListView()
 void ProtocolListView::addProtocol( const QString& name )
 {
     QHBox* hbox = new QHBox( vbox );
-    new QCheckBox( name, hbox, (const char*) name );
+    new QCheckBox( name, hbox, name.local8Bit() );
 
     if ( parse )
     {
-        QComboBox* combo = new QComboBox( hbox, (const char*) name );
+        QComboBox* combo = new QComboBox( hbox, name.local8Bit() );
         #ifdef QWS
         combo->setFixedWidth( 75 );
         #endif
@@ -92,7 +92,7 @@ void ProtocolListView::addProtocol( const QString& name )
     }
     else
     {
-        QComboBox* combo = new QComboBox( hbox, (const char*) name );
+        QComboBox* combo = new QComboBox( hbox, name.local8Bit() );
         #ifdef QWS
         combo->setFixedWidth( 75 );
         #endif
@@ -104,14 +104,14 @@ void ProtocolListView::addProtocol( const QString& name )
 
 bool ProtocolListView::isProtocolChecked( const QString& name )
 {
-    QCheckBox* box = (QCheckBox*) child( (const char*) name );
+    QCheckBox* box = (QCheckBox*) child( name.local8Bit() );
     return ( box && box->isOn() );
 }
 
 
 QString ProtocolListView::protocolAction( const QString& name )
 {
-    QComboBox* combo = (QComboBox*) child( (const char*) name, "QComboBox" );
+    QComboBox* combo = (QComboBox*) child( name.local8Bit(), "QComboBox" );
     if ( combo )
         return combo->currentText();
     else

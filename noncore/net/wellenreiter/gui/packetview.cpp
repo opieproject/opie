@@ -71,6 +71,13 @@ PacketView::PacketView( QWidget * parent, const char * name, WFlags f )
 
 void PacketView::add( const OPacket* p, int size )
 {
+    /*
+     * don't scroll away when somebody views packages
+     * while scanning
+     */
+    int  value = _number->value();
+    bool last  = (value == static_cast<int>( _packets.count() ) );
+
     odebug << "PacketView::add() size = " << size << oendl;
     if ( size == -1 ) // unlimited buffer
     {
@@ -78,16 +85,20 @@ void PacketView::add( const OPacket* p, int size )
     }
     else
     {   // limited buffer, limit = size
-        while ( _packets.count() >= size )
+        while ( _packets.count() >= static_cast<uint>( size ) )
         {
             _packets.removeFirst();
+            --value;
         }
+
+        /* check if we lost our packet */
+        last = ( value < 1 );
         _packets.append( p );
     }
 
     _number->setMinValue( 1 );
     _number->setMaxValue( _packets.count() );
-    _number->setValue( _packets.count() );
+    _number->setValue( last ? _packets.count() : value );
 }
 
 void PacketView::showPacket( int number )
@@ -139,6 +150,7 @@ void PacketView::_doHexPacket( const OPacket* p )
 
 const QString PacketView::getLog() const
 {
+    return QString::null;
 }
 
 void PacketView::clear()

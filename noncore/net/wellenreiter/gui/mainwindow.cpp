@@ -31,9 +31,6 @@
 #include <qapplication.h>
 #include <qfiledialog.h>
 #endif
-using namespace Opie::Core;
-using namespace Opie::Net;
-using namespace Opie::Ui;
 
 /* QT */
 #include <qcombobox.h>
@@ -56,6 +53,10 @@ using namespace Opie::Ui;
 
 /* STD */
 #include <unistd.h>
+
+using namespace Opie::Core;
+using namespace Opie::Net;
+using namespace Opie::Ui;
 
 WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * name, WFlags f )
            :QMainWindow( parent, name, f )
@@ -468,7 +469,7 @@ void WellenreiterMainWindow::uploadSession()
             return;
         }
 
-        int content_length = f.size();
+//        int content_length = f.size();
 
         ::memset( &raddr, 0, sizeof (struct sockaddr_in) );
         ::memcpy( &raddr. sin_addr, rhost_info-> h_addr, rhost_info-> h_length );

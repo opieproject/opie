@@ -33,9 +33,6 @@
 #include <opie2/onetwork.h>
 #include <opie2/opcap.h>
 #include <qpe/qcopenvelope_qws.h>
-using namespace Opie::Core;
-using namespace Opie::Net;
-using namespace Opie::Ui;
 
 /* QT */
 #include <qcheckbox.h>
@@ -60,6 +57,11 @@ using namespace Opie::Ui;
 #include <stdlib.h>
 #include <signal.h>
 
+
+using namespace Opie::Core;
+using namespace Opie::Net;
+using namespace Opie::Ui;
+
 Wellenreiter* Wellenreiter::instance = 0;
 
 Wellenreiter::Wellenreiter( QWidget* parent )
@@ -74,8 +76,7 @@ Wellenreiter::Wellenreiter( QWidget* parent )
     //
 
     #ifdef QWS
-    QString sys;
-    sys.sprintf( "(i) Running on '%s'.", (const char*) ODevice::inst()->systemString() );
+    QString sys = QString( "(i) Running on '%1'.").arg( ODevice::inst()->systemString() );
     _system = ODevice::inst()->system();
     logwindow->log( sys );
     #endif
@@ -110,6 +111,7 @@ void Wellenreiter::initialTimer()
 
 void Wellenreiter::signalHandler( int sig )
 {
+    Q_UNUSED( sig )
     oerr << "Aye! Received SIGSEGV or SIGBUS! Trying to exit gracefully..." << oendl;
     if ( Wellenreiter::instance->sniffing )
     {
@@ -176,7 +178,7 @@ void Wellenreiter::handleNotification( OPacket* p )
         if ( configwindow->parsePackets->isProtocolChecked( name ) )
         {
             QString action = configwindow->parsePackets->protocolAction( name );
-            odebug << "parsePacket-action for '" << (const char*) name << "' seems to be '" << action << "'" << oendl;
+            odebug << "parsePacket-action for '" << name << "' seems to be '" << action << "'" << oendl;
             doAction( action, name, p );
         }
         else
@@ -197,12 +199,12 @@ void Wellenreiter::handleManagementFrame( OPacket* p, OWaveLanManagementPacket* 
 }
 
 
-void Wellenreiter::handleManagementFrameProbeRequest( OPacket* p, OWaveLanManagementPacket* request )
+void Wellenreiter::handleManagementFrameProbeRequest( OPacket* p, OWaveLanManagementPacket* /* request */ )
 {
     OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
     QString essid = ssid ? ssid->ID( true /* decloak */ ) : QString("<unknown>");
-    OWaveLanManagementDS* ds = static_cast<OWaveLanManagementDS*>( p->child( "802.11 DS" ) );
-    int channel = ds ? ds->channel() : -1;
+//    OWaveLanManagementDS* ds = static_cast<OWaveLanManagementDS*>( p->child( "802.11 DS" ) );
+//    int channel = ds ? ds->channel() : -1;
     OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
 
     GpsLocation loc( -111, -111 );
@@ -220,12 +222,12 @@ void Wellenreiter::handleManagementFrameProbeRequest( OPacket* p, OWaveLanManage
 }
 
 
-void Wellenreiter::handleManagementFrameProbeResponse( OPacket* p, OWaveLanManagementPacket* response )
+void Wellenreiter::handleManagementFrameProbeResponse( OPacket* /* p */, OWaveLanManagementPacket* /* response */ )
 {
 }
 
 
-void Wellenreiter::handleManagementFrameBeacon( OPacket* p, OWaveLanManagementPacket* beacon )
+void Wellenreiter::handleManagementFrameBeacon( OPacket* p, OWaveLanManagementPacket* beacon  )
 {
     QString type;
     if ( beacon->canIBSS() )
@@ -287,7 +289,7 @@ void Wellenreiter::handleControlFrame( OPacket* p, OWaveLanControlPacket* contro
 }
 
 
-void Wellenreiter::handleWlanData( OPacket* p, OWaveLanDataPacket* data, OMacAddress& from, OMacAddress& to )
+void Wellenreiter::handleWlanData( OPacket* p, OWaveLanDataPacket* /* data */ , OMacAddress& from, OMacAddress& to )
 {
     OWaveLanPacket* wlan = (OWaveLanPacket*) p->child( "802.11" );
     if ( wlan->fromDS() && !wlan->toDS() )
@@ -317,7 +319,7 @@ void Wellenreiter::handleWlanData( OPacket* p, OWaveLanDataPacket* data, OMacAdd
 }
 
 
-void Wellenreiter::handleEthernetData( OPacket* p, OEthernetPacket* data, OMacAddress& from, OMacAddress& to )
+void Wellenreiter::handleEthernetData( OPacket* /* p */, OEthernetPacket* data, OMacAddress& from, OMacAddress& to )
 {
     from = data->sourceAddress();
     to = data->destinationAddress();
@@ -326,7 +328,7 @@ void Wellenreiter::handleEthernetData( OPacket* p, OEthernetPacket* data, OMacAd
 }
 
 
-void Wellenreiter::handleARPData( OPacket* p, OARPPacket*, OMacAddress& source, OMacAddress& dest )
+void Wellenreiter::handleARPData( OPacket* p, OARPPacket*, OMacAddress& /* source */, OMacAddress& /* dest */ )
 {
     OARPPacket* arp = (OARPPacket*) p->child( "ARP" );
     if ( arp )
@@ -345,7 +347,7 @@ void Wellenreiter::handleARPData( OPacket* p, OARPPacket*, OMacAddress& source, 
 }
 
 
-void Wellenreiter::handleIPData( OPacket* p, OIPPacket* ip, OMacAddress& source, OMacAddress& dest )
+void Wellenreiter::handleIPData( OPacket* p, OIPPacket* /* ip */, OMacAddress& source, OMacAddress& /* dest */ )
 {
     //TODO: Implement more IP based protocols
 
@@ -355,13 +357,13 @@ void Wellenreiter::handleIPData( OPacket* p, OIPPacket* ip, OMacAddress& source,
         odebug << "Received DHCP '" << dhcp->type() << "' packet" << oendl;
         if ( dhcp->type() == "OFFER" )
         {
-            odebug << "DHCP: '" << (const char*) source.toString() << "' ('" << dhcp->serverAddress().toString() << "') seems to be a DHCP server." << oendl;
+            odebug << "DHCP: '" << source.toString() << "' ('" << dhcp->serverAddress().toString() << "') seems to be a DHCP server." << oendl;
             netView()->identify( source, dhcp->serverAddress().toString() );
             netView()->addService( "DHCP", source, dhcp->serverAddress().toString() );
         }
         else if ( dhcp->type() == "ACK" )
         {
-            odebug << "DHCP: '" << (const char*) dhcp->clientMacAddress().toString() << "' ('" << dhcp->yourAddress().toString() << "') accepted the offered DHCP address." << oendl;
+            odebug << "DHCP: '" << dhcp->clientMacAddress().toString() << "' ('" << dhcp->yourAddress().toString() << "') accepted the offered DHCP address." << oendl;
             netView()->identify( dhcp->clientMacAddress(), dhcp->yourAddress().toString() );
         }
     }
@@ -395,10 +397,10 @@ bool Wellenreiter::checkDumpPacket( OPacket* p )
         if ( configwindow->capturePackets->isProtocolChecked( name ) )
         {
             QString action = configwindow->capturePackets->protocolAction( name );
-            odebug << "capturePackets-action for '" << (const char*) name << "' seems to be '" << action << "'" << oendl;
+            odebug << "capturePackets-action for '" << name << "' seems to be '" << action << "'" << oendl;
             if ( action == "Discard" )
             {
-                logwindow->log( QString().sprintf( "(i) dump-discarding of '%s' packet requested.", (const char*) name ) );
+                logwindow->log( QString("(i) dump-discarding of '%1' packet requested." ).arg( name ) );
                 return false;
             }
         }
@@ -520,9 +522,7 @@ void Wellenreiter::stopClicked()
         #warning FIXME: setScreenSaverMode is not operational on the X11 build
     #endif
 
-    // print out statistics
-    for( QMap<QString,int>::ConstIterator it = pcap->statistics().begin(); it != pcap->statistics().end(); ++it )
-       statwindow->updateCounter( it.key(), it.data() );
+    updateStatistics();
 }
 
 
@@ -532,7 +532,7 @@ void Wellenreiter::startClicked()
 
     const QString& interface = configwindow->interfaceName->currentText();
     const int cardtype = configwindow->driverType();
-    const int interval = configwindow->hoppingInterval();
+//    const int interval = configwindow->hoppingInterval();
 
     if ( ( interface == "" ) || ( cardtype == 0 ) )
     {
@@ -704,7 +704,7 @@ void Wellenreiter::timerEvent( QTimerEvent* )
 }
 
 
-void Wellenreiter::doAction( const QString& action, const QString& protocol, OPacket* p )
+void Wellenreiter::doAction( const QString& action, const QString& protocol, OPacket* /* p */ )
 {
     #ifdef QWS
     if ( action == "TouchSound" )
@@ -718,10 +718,10 @@ void Wellenreiter::doAction( const QString& action, const QString& protocol, OPa
     else if ( action == "LedOff" )
         ODevice::inst()->setLedState( Led_Mail, Led_Off );
     else if ( action == "LogMessage" )
-        logwindow->log( QString().sprintf( "Got packet with protocol '%s'", (const char*) protocol ) );
+        logwindow->log( QString(tr("Got packet with protocol '%1'","Protocol Name" ) ).arg( protocol ) );
     else if ( action == "MessageBox" )
         QMessageBox::information( this, "Notification!",
-        QString().sprintf( "Got packet with protocol '%s'", (const char*) protocol ) );
+        QString(tr( "Got packet with protocol '%1'", "Protocol Name" ) ).arg( protocol ) );
     #else
     #warning Actions do not work with Qt/X11 yet
     #endif
@@ -742,9 +742,9 @@ void Wellenreiter::joinNetwork(const QString& type, const QString& essid, int ch
         return;
     }
 
-    odebug << "joinNetwork() with Interface " << (const char*) iface->name()
-           << ": " << (const char*) type << ", " << (const char*) essid
-           << ", " << channel << ", " << (const char*) macaddr << oendl;
+    odebug << "joinNetwork() with Interface " << iface->name()
+           << ": " << type << ", " << essid
+           << ", " << channel << ", " << macaddr << oendl;
 
     QCopEnvelope msg( "QPE/Application/networksettings", "wlan(QString,QString,QString)" );
     int count = 3;
@@ -764,3 +764,15 @@ void Wellenreiter::joinNetwork(const QString& type, const QString& essid, int ch
 
 }
 
+void Wellenreiter::updateStatistics()
+{
+    // print out statistics
+    for( QMap<QString,int>::ConstIterator it = pcap->statistics().begin(); it != pcap->statistics().end(); ++it )
+       statwindow->updateCounter( it.key(), it.data() );
+}
+
+void Wellenreiter::slotTabChanged( QWidget* wid )
+{
+    if ( wid == statwindow )
+        updateStatistics();
+}

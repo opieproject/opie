@@ -19,6 +19,33 @@
 #include <qpixmap.h>
 #include <qtimer.h>
 
+/* XPM */
+static char * background[] = {
+"16 16 6 1",
+" 	c None",
+".	c #52676E",
+"+	c #3F545B",
+"@	c #394E56",
+"#	c #2F454C",
+"$	c #364B52",
+".+++++++++++++++",
+"@###############",
+"+$$$$$$$$$$$$$$$",
+"@###############",
+"+$$$$$$$$$$$$$$$",
+"@###############",
+"+$$$$$$$$$$$$$$$",
+"@###############",
+"+$$$$$$$$$$$$$$$",
+"@###############",
+"+$$$$$$$$$$$$$$$",
+"@###############",
+"+$$$$$$$$$$$$$$$",
+"@###############",
+"+$$$$$$$$$$$$$$$",
+"@###############"};
+
+
 MFrequencySpectrum::MFrequencySpectrum( int channels, QWidget* parent, const char* name, WFlags f)
                    :QWidget( parent, name,f ), _channels( channels )
 {
@@ -85,7 +112,7 @@ void MFrequencySpectrum::drawBar( QPainter* p, int x, int y, int width, int heig
 }
 
 
-void MFrequencySpectrum::paintEvent( QPaintEvent* e )
+void MFrequencySpectrum::paintEvent( QPaintEvent*  )
 {
     QPixmap pm( size() );
     QPainter p;
@@ -118,7 +145,6 @@ void MFrequencySpectrum::mousePressEvent( QMouseEvent* e )
     int xmargin = 5;
     int ymargin = 2;
     int y = size().height() - 2 * ymargin;
-    int x = 0;
     int width = ( size().width() - 2 * xmargin ) / _channels;
 
     QPoint pos = e->pos();
@@ -142,8 +168,6 @@ Legende::Legende( int channels, QWidget* parent, const char* name, WFlags f )
 void Legende::drawContents( QPainter* p )
 {
     int xmargin = 5;
-    int ymargin = 2;
-    int x = 0;
     int width = ( contentsRect().width() - 2 * xmargin ) / _channels;
 
     for ( int i = 0; i < _channels; ++i )
@@ -170,7 +194,7 @@ void MGraphWindow::testGraph()
 }
 
 
-void MGraphWindow::timerEvent( QTimerEvent* e )
+void MGraphWindow::timerEvent( QTimerEvent*  )
 {
     for ( int i = 0; i < 14; i++ )
     {

@@ -25,11 +25,11 @@ namespace Resource
 QPixmap loadPixmap( const QString& pix )
 {
     QString filename;
-    filename.sprintf( "%s/%s.png", (const char*) PIXMAPPATH, (const char*) pix );
+    filename.sprintf( "%s/%s.png", PIXMAPPATH, pix.local8Bit() );
     QPixmap pixmap( filename );
     if ( pixmap.isNull() )
     {
-        odebug << "Wellenreiter::Resource: can't find pixmap " + filename << oendl; 
+        odebug << "Wellenreiter::Resource: can't find pixmap " + filename << oendl;
     }
     return pixmap;
 };
@@ -37,11 +37,11 @@ QPixmap loadPixmap( const QString& pix )
 QIconSet loadIconSet( const QString& pix )
 {
     QString filename;
-    filename.sprintf( "%s/%s.png", (const char*) PIXMAPPATH, (const char*) pix );
+    filename.sprintf( "%s/%s.png", PIXMAPPATH, pix.local8Bit() );
     QPixmap pixmap( filename );
     if ( pixmap.isNull() )
     {
-        odebug << "Wellenreiter::Resource: can't find pixmap " + filename << oendl; 
+        odebug << "Wellenreiter::Resource: can't find pixmap " + filename << oendl;
     }
     return QIconSet( pixmap );
 };

@@ -1,4 +1,5 @@
 TEMPLATE        = subdirs
+VERSION         = 1.0.3-cvs
 
 !contains( platform, x11 ) {
   message( Configuring Wellenreiter for build on Opie )

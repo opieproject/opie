@@ -16,6 +16,7 @@
 /* LOCAL */
 #include "configwindow.h"
 #include "mainwindow.h"
+#include "protolistview.h"
 
 /* OPIE */
 #include <opie2/onetwork.h>
@@ -184,7 +185,10 @@ bool WellenreiterConfigWindow::isChannelChecked( int channel ) const
         case 12: return channel12->isOn();
         case 13: return channel13->isOn();
         case 14: return channel14->isOn();
+        default: return false;
     }
+
+
 }
 
 
@@ -217,19 +221,19 @@ void WellenreiterConfigWindow::synchronizeActionsAndScripts()
 }
 
 
-void WellenreiterConfigWindow::changedNetworkAction(int t)
+void WellenreiterConfigWindow::changedNetworkAction(int )
 {
     synchronizeActionsAndScripts();
 }
 
 
-void WellenreiterConfigWindow::changedClientAction(int t)
+void WellenreiterConfigWindow::changedClientAction(int )
 {
     synchronizeActionsAndScripts();
 }
 
 
-void WellenreiterConfigWindow::changedStationAction(int t)
+void WellenreiterConfigWindow::changedStationAction(int )
 {
     synchronizeActionsAndScripts();
 }
@@ -280,7 +284,6 @@ const QString WellenreiterConfigWindow::gpsHost() const
 
 int WellenreiterConfigWindow::gpsPort() const
 {
-    bool ok;
     return useGPS() ? gpsdPort->value() : -1;
 }
 
@@ -290,7 +293,7 @@ void WellenreiterConfigWindow::performAction( const QString& type,
                                               const QString& mac,
                                               bool wep,
                                               int channel,
-                                              int signal
+                                              int /* signal */
                                               /* , const GpsLocation& loc */ )
 {
     int action;
@@ -317,7 +320,7 @@ void WellenreiterConfigWindow::performAction( const QString& type,
         return;
     }
 
-    odebug << "for event '" << (const char*) type << "' I'm going to perform action " << action << " (script='" << script << "')" << oendl;
+    odebug << "for event '" << type << "' I'm going to perform action " << action << " (script='" << script << "')" << oendl;
 
     switch( action )
     {
@@ -404,6 +407,7 @@ void WellenreiterConfigWindow::load()
     writeCaptureFile->setChecked( c->readBoolEntry( "writeCaptureFile", true ) );
     captureFileName->setEnabled( writeCaptureFile->isChecked() );
     getCaptureFileName->setEnabled( writeCaptureFile->isChecked() );
+    parsePackets->setEnabled( writeCaptureFile->isChecked() );
     captureFileName->setText( c->readEntry( "filename", "/tmp/capture" ) );
     hexViewBufferUnlimited->setChecked( c->readBoolEntry( "hexViewBufferUnlimited", true ) );
     hexViewBufferLimited->setChecked( !c->readBoolEntry( "hexViewBufferUnlimited", true ) );

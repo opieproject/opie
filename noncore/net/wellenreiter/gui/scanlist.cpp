@@ -25,9 +25,7 @@
 #else
 #include "resource.h"
 #endif
-using namespace Opie::Core;
-using namespace Opie::Ui;
-using namespace Opie::Net;
+
 
 /* QT */
 #include <qcursor.h>
@@ -37,6 +35,10 @@ using namespace Opie::Net;
 
 /* STD */
 #include <assert.h>
+
+using namespace Opie::Core;
+using namespace Opie::Ui;
+using namespace Opie::Net;
 
 const int col_type = 0;
 const int col_essid = 0;
@@ -50,6 +52,8 @@ const int col_manuf = 7;
 const int col_firstseen = 8;
 const int col_lastseen = 9;
 const int col_location = 10;
+
+#define DEBUG
 
 MScanListView::MScanListView( QWidget* parent, const char* name )
               :OListView( parent, name )
@@ -176,7 +180,7 @@ void MScanListView::addNewItem( const QString& type,
     }
     else
     {
-        s.sprintf( "(i) New network: ESSID '%s'", (const char*) essid );
+        s = QString( "(i) New network: ESSID '%1'" ).arg( essid );
         MLogWindow::logwindow()->log( s );
         network = new MScanListItem( this, "network", essid, QString::null, 0, 0, 0, probe );
     }
@@ -195,11 +199,11 @@ void MScanListView::addNewItem( const QString& type,
 
     if ( type == "managed" )
     {
-        s.sprintf( "(i) New Access Point in '%s' [%d]", (const char*) essid, channel );
+        s = QString( "(i) New Access Point in '%1' [%2]" ).arg( essid ).arg( channel );
     }
     else
     {
-        s.sprintf( "(i) New AdHoc station in '%s' [%d]", (const char*) essid, channel );
+        s = QString( "(i) New AdHoc station in '%1' [%2]" ).arg( essid ).arg( channel );
     }
     MLogWindow::logwindow()->log( s );
 }
@@ -234,11 +238,11 @@ void MScanListView::addIfNotExisting( MScanListItem* network, const OMacAddress&
     QString s;
     if ( type == "station" )
     {
-        s.sprintf( "(i) New Station in '%s' [xx]", (const char*) network->text( col_essid ) );
+        s = QString( "(i) New Station in '%1' [xx]" ).arg( network->text( col_essid ) );
     }
     else
     {
-        s.sprintf( "(i) New Wireless Station in '%s' [xx]", (const char*) network->text( col_essid ) );
+        s = QString( "(i) New Wireless Station in '%1' [xx]" ).arg( network->text( col_essid ) );
     }
     MLogWindow::logwindow()->log( s );
 }
@@ -246,9 +250,9 @@ void MScanListView::addIfNotExisting( MScanListItem* network, const OMacAddress&
 
 void MScanListView::WDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& viaFrom, const OMacAddress& viaTo )
 {
-    odebug << "WDSTraffic: " << (const char*) viaFrom.toString() << " and " << viaTo.toString() << " seem to form a WDS" << oendl;
+    odebug << "WDSTraffic: " << viaFrom.toString() << " and " << viaTo.toString() << " seem to form a WDS" << oendl;
     QString s;
-    MScanListItem* network;
+//    MScanListItem* network;
 
     QListViewItemIterator it( this );
     while ( it.current() &&
@@ -270,10 +274,10 @@ void MScanListView::WDStraffic( const OMacAddress& from, const OMacAddress& to, 
 }
 
 
-void MScanListView::toDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via )
+void MScanListView::toDStraffic( const OMacAddress& from, const OMacAddress& /*to*/, const OMacAddress& via )
 {
     QString s;
-    MScanListItem* network;
+//    MScanListItem* network;
 
     QListViewItemIterator it( this );
     while ( it.current() && it.current()->text( col_ap ) != via.toString(true) ) ++it;
@@ -293,10 +297,10 @@ void MScanListView::toDStraffic( const OMacAddress& from, const OMacAddress& to,
 }
 
 
-void MScanListView::fromDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via )
+void MScanListView::fromDStraffic( const OMacAddress& from, const OMacAddress& /*to*/, const OMacAddress& via )
 {
     QString s;
-    MScanListItem* network;
+//    MScanListItem* network;
 
     QListViewItemIterator it( this );
     while ( it.current() && it.current()->text( col_ap ) != via.toString(true) ) ++it;
@@ -315,7 +319,7 @@ void MScanListView::fromDStraffic( const OMacAddress& from, const OMacAddress& t
 }
 
 
-void MScanListView::IBSStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via )
+void MScanListView::IBSStraffic( const OMacAddress& /*from*/, const OMacAddress& /*to*/, const OMacAddress& /*via*/ )
 {
     owarn << "D'oh! Not yet implemented..." << oendl;
     MLogWindow::logwindow()->log( "WARNING: Unhandled IBSS traffic!" );
@@ -324,7 +328,7 @@ void MScanListView::IBSStraffic( const OMacAddress& from, const OMacAddress& to,
 
 void MScanListView::identify( const OMacAddress& macaddr, const QString& ip )
 {
-    odebug << "identify " << (const char*) macaddr.toString() << " = " << ip << "" << oendl;
+    odebug << "identify " << macaddr.toString() << " = " << ip << "" << oendl;
 
     QListViewItemIterator it( this );
     for ( ; it.current(); ++it )
@@ -336,14 +340,14 @@ void MScanListView::identify( const OMacAddress& macaddr, const QString& ip )
         }
     }
     odebug << "D'oh! Received identification, but item not yet in list... ==> Handle this!" << oendl;
-    MLogWindow::logwindow()->log( QString().sprintf( "WARNING: Unhandled identification %s = %s!",
-                                                     (const char*) macaddr.toString(), (const char*) ip ) );
+    MLogWindow::logwindow()->log( QString( "WARNING: Unhandled identification %1 = %2!" )
+                                  .arg( macaddr.toString() ).arg( ip ) );
 }
 
 
 void MScanListView::addService( const QString& name, const OMacAddress& macaddr, const QString& ip )
 {
-    odebug << "addService '" << (const char*) name << "', Server = " << (const char*) macaddr.toString() << " = " << ip << "" << oendl;
+    odebug << "addService '" << name << "', Server = " << macaddr.toString() << " = " << ip << "" << oendl;
 
     //TODO: Refactor that out, we need it all over the place.
     //      Best to do it in a more comfortable abstraction in OListView
@@ -384,8 +388,8 @@ void MScanListView::addService( const QString& name, const OMacAddress& macaddr,
         }
     }
     odebug << "D'oh! Received identification, but item not yet in list... ==> Handle this!" << oendl;
-    MLogWindow::logwindow()->log( QString().sprintf( "WARNING: Unhandled service addition %s = %s!",
-                                                     (const char*) macaddr.toString(), (const char*) ip ) );
+    MLogWindow::logwindow()->log( QString("WARNING: Unhandled service addition %s = %s!")
+                                                     .arg( macaddr.toString() ).arg( ip ) );
 }
 
 
@@ -395,12 +399,12 @@ void MScanListView::contextMenuRequested( QListViewItem* item, const QPoint&, in
 
     MScanListItem* itm = static_cast<MScanListItem*>( item );
 
-    odebug << "contextMenuRequested on item '" << (const char*) itm->text(0) << "' ("
-           << (const char*) itm->type << ") in column: '" << col << "'" << oendl;
+    odebug << "contextMenuRequested on item '" << itm->text(0) << "' ("
+           << itm->type << ") in column: '" << col << "'" << oendl;
 
     if ( itm->type == "adhoc" || itm->type == "managed" )
     {
-        QString entry = QString().sprintf( "&Join %s Net '%s'...", (const char*) itm->type, (const char*) itm->essid() );
+        QString entry = QString( "&Join %1 Net '%2'..." ).arg( itm->type ).arg( itm->essid() );
 
         QPopupMenu m( this );
         m.insertItem( entry, 37773, 0 );
@@ -479,8 +483,7 @@ void MScanListItem::serializeFrom( QDataStream& s )
     s >> wep;
     _wep = (wep == 'y');
 
-    QString name;
-    name.sprintf( "wellenreiter/%s", (const char*) _type );
+    QString name = QString( "wellenreiter/"+ _type );
     setPixmap( col_type, Resource::loadPixmap( name ) );
     if ( _wep )
         setPixmap( col_wep, Resource::loadPixmap( "wellenreiter/cracked" ) ); //FIXME: rename the pixmap!
@@ -490,14 +493,14 @@ void MScanListItem::serializeFrom( QDataStream& s )
 void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal, bool probed )
 {
     #ifdef DEBUG
-    odebug << "decorating scanlist item " << (const char*) type << " / "
-           << (const char*) essid << " / " << (const char*) macaddr
+    odebug << "decorating scanlist item " << type << " / "
+           << essid << " / " << macaddr
            << "[" << channel << "]" << oendl;
     #endif
 
     // set icon for managed or adhoc mode
     QString name;
-    name.sprintf( "wellenreiter/%s", (const char*) type );
+    name.sprintf( "wellenreiter/"+ type );
     setPixmap( col_type, Resource::loadPixmap( name ) );
 
     // special case for probed networks FIXME: This is ugly at present

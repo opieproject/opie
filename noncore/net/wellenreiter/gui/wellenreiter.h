@@ -93,7 +93,12 @@ class Wellenreiter : public WellenreiterBase {
     bool checkDumpPacket( Opie::Net::OPacket* p );
     void registerSignalHandler();
 
+  private slots:
+    void slotTabChanged( QWidget* );
+
   private:
+    void updateStatistics();
+
     #ifdef QWS
     Opie::Core::OSystem _system;                // Opie Operating System identifier
     #endif

@@ -158,6 +158,8 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     TabWidget->setCurrentTab( tr( "Nets" ) );
 #endif
 
+    connect(TabWidget, SIGNAL(currentChanged(QWidget*)),
+            this, SLOT(slotTabChanged(QWidget*)));
 }
 
 /*
