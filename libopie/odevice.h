@@ -51,6 +51,9 @@ enum OModel {
 	Model_iPAQ_H38xx    = ( Model_iPAQ | 0x000008 ),
 	Model_iPAQ_H39xx    = ( Model_iPAQ | 0x000010 ),
 
+	Model_Jornada       = ( 6 << 24 ),
+	Model_Jornada_56x   = ( Model_Jornada | 0x000001 ),
+
 	Model_Zaurus        = ( 2 << 24 ),
 
 	Model_Zaurus_SL5000 = ( Model_Zaurus | 0x000001 ),

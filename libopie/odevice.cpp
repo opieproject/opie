@@ -106,6 +106,18 @@ protected:
 	OLedState m_leds [2];
 };
 
+class Jornada : public ODevice {
+protected:
+	virtual void init ( );
+	virtual void initButtons ( );
+public:
+	virtual bool setSoftSuspend ( bool soft );
+	virtual bool setDisplayBrightness ( int b );
+	virtual int displayBrightnessResolution ( ) const;
+	static bool isJornada();
+
+};
+
 class Zaurus : public ODevice {
 protected:
 	virtual void init ( );
@@ -433,6 +445,8 @@ ODevice *ODevice::inst ( )
 			dev = new Ramses ( );
 		else if ( Yopy::isYopy() )
 		        dev = new Yopy ( );
+		else if ( Jornada::isJornada() )
+			dev = new Jornada ( );
 		else
 			dev = new ODevice ( );
 		dev-> init ( );
@@ -983,7 +997,7 @@ bool Yopy::isYopy ( )
       if ( line. left ( 8 ) == "Hardware" ) {
 	int loc = line. find ( ":" );
 	if ( loc != -1 ) {
-	  QString model = 
+	  QString model =
 	    line. mid ( loc + 2 ). simplifyWhiteSpace( );
 	  return ( model == "Yopy" );
 	}
@@ -2451,4 +2465,116 @@ bool Ramses::setDisplayContrast(int contr)
 int Ramses::displayContrastResolution() const
 {
 	return 20;
+}
+
+
+/**************************************************
+ *                                                *
+ * Jornada                                        *
+ *                                                *
+ **************************************************/
+
+
+bool Jornada::isJornada ( )
+{
+  QFile f( "/proc/cpuinfo" );
+  if ( f. open ( IO_ReadOnly ) ) {
+    QTextStream ts ( &f );
+    QString line;
+    while( line = ts. readLine ( ) ) {
+      if ( line. left ( 8 ) == "Hardware" ) {
+	int loc = line. find ( ":" );
+	if ( loc != -1 ) {
+	  QString model =
+	    line. mid ( loc + 2 ). simplifyWhiteSpace( );
+	  return ( model == "HP Jornada 56x" );
+	}
+      }
+    }
+  }
+  return false;
+}
+
+void Jornada::init ( )
+{
+	d-> m_vendorstr = "HP";
+	d-> m_vendor = Vendor_HP;
+	d-> m_modelstr = "Jornada 56x";
+	d-> m_model = Model_Jornada_56x;
+	d-> m_systemstr = "Familiar";
+	d-> m_system = System_Familiar;
+	d-> m_rotation = Rot0;
+}
+
+void Jornada::initButtons ( )
+{
+	if ( d-> m_buttons )
+		return;
+
+	// Simulation uses iPAQ 3660 device buttons
+
+	qDebug ( "init Buttons" );
+	d-> m_buttons = new QValueList <ODeviceButton>;
+
+	for ( uint i = 0; i < ( sizeof( ipaq_buttons ) / sizeof( i_button )); i++ ) {
+		i_button *ib = ipaq_buttons + i;
+		ODeviceButton b;
+
+		if (( ib-> model & Model_iPAQ_H36xx ) == Model_iPAQ_H36xx ) {
+			b. setKeycode ( ib-> code );
+			b. setUserText ( QObject::tr ( "Button", ib-> utext ));
+			b. setPixmap ( Resource::loadPixmap ( ib-> pix ));
+			b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib-> fpressedservice ), ib-> fpressedaction ));
+			b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib-> fheldservice ), ib-> fheldaction ));
+			d-> m_buttons-> append ( b );
+		}
+	}
+	reloadButtonMapping ( );
+
+	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
+	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
+}
+
+int Jornada::displayBrightnessResolution ( ) const
+{
+}
+
+bool Jornada::setDisplayBrightness ( int bright )
+{
+	bool res = false;
+	int fd;
+
+	if ( bright > 255 )
+		bright = 255;
+	if ( bright < 0 )
+		bright = 0;
+
+	if (( fd = ::open ( "/dev/touchscreen/0", O_WRONLY )) >= 0 ) {
+		FLITE_IN bl;
+		bl. mode = 1;
+		bl. pwr = bright ? 1 : 0;
+		bl. brightness = ( bright * ( displayBrightnessResolution ( ) - 1 ) + 127 ) / 255;
+		res = ( ::ioctl ( fd, FLITE_ON, &bl ) == 0 );
+		::close ( fd );
+	}
+	return res;
+}
+
+bool Jornada::setSoftSuspend ( bool soft )
+{
+	bool res = false;
+	int fd;
+
+	if (( fd = ::open ( "/proc/sys/ts/suspend_button_mode", O_WRONLY )) >= 0 ) {
+		if ( ::write ( fd, soft ? "1" : "0", 1 ) == 1 )
+			res = true;
+		else
+			::perror ( "write to /proc/sys/ts/suspend_button_mode" );
+
+		::close ( fd );
+	}
+	else
+		::perror ( "/proc/sys/ts/suspend_button_mode" );
+
+	return res;
 }
