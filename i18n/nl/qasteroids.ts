@@ -3,37 +3,39 @@
     <name>KAstTopLevel</name>
     <message>
         <source>Asteroids</source>
-        <translation type="unfinished"></translation>
+        <translation>Asteroids</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Score</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Ronde</translation>
     </message>
     <message>
         <source>Ships</source>
-        <translation type="unfinished"></translation>
+        <translation>Schepen</translation>
     </message>
     <message>
         <source>Fuel</source>
-        <translation type="unfinished"></translation>
+        <translation>Brandstof</translation>
     </message>
     <message>
         <source>Press Calendar to start playing</source>
-        <translation type="unfinished"></translation>
+        <translation>Druk &quot;Kalender&quot; om spel te starten</translation>
     </message>
     <message>
         <source>Ship Destroyed.
 Press Contacts/Home key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Schepen vernietigd.
+Druk &quot;Kontakten/Home&quot;.</translation>
     </message>
     <message>
         <source>Game Over.
 Press Calendar for a new game.</source>
-        <translation type="unfinished"></translation>
+        <translation>Game Over.
+Druk Kalender voor nieuw spel.</translation>
     </message>
 </context>
 </TS>
