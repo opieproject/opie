@@ -21,7 +21,7 @@
 #include "package.h"
 #include "pksettings.h"
 
-//class OipkgPackage;
+class QPopupMenu;
 
 class PackageListItem : public ListViewItemOipkg
 {
@@ -32,6 +32,7 @@ public:
 		  OipkgPackage *pack, 
 		  PackageManagerSettings *s);
   PackageListItem(QListView*, OipkgPackage*, PackageManagerSettings*);
+  ~PackageListItem();
   void paintCell( QPainter*, const QColorGroup&, int, int, int );
   void paintFocus( QPainter*, const QColorGroup&, const QRect&  );
   QPixmap statePixmap() const;
@@ -43,13 +44,20 @@ public:
   void displayDetails();
 
 private:
+  QPopupMenu *popupMenu;
+  QPopupMenu *destsMenu;
   void init(OipkgPackage*, PackageManagerSettings*);
+  virtual QPopupMenu* getPopupMenu();
+  static QPopupMenu *_destsMenu;
 	QCheckListItem *nameItem;
 	QCheckListItem *destItem;
 	QCheckListItem *linkItem;
 	QCheckListItem *statusItem;
   PackageManagerSettings *settings;
   OipkgPackage *package;
+protected slots:
+ // void toggleProcess();
+  virtual void menuAction( int );
 };
 
 

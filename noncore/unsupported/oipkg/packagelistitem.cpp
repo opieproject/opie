@@ -11,6 +11,8 @@
 
 #include <qpe/resource.h>
 #include <qobject.h>
+#include <qpopupmenu.h>
+#include <qaction.h>
 
 #include "debug.h"
 
@@ -40,9 +42,16 @@ PackageListItem::PackageListItem(ListViewItemOipkg *lvi, OipkgPackage *pi, Packa
 {
   init(pi,s);
 }
+PackageListItem::~PackageListItem()
+{
+  delete popupMenu;
+  delete destsMenu;
+}
 
 void PackageListItem::init( OipkgPackage *pi, PackageManagerSettings *s)
 {
+  popupMenu = new QPopupMenu( 0 );
+  destsMenu = new QPopupMenu( 0 );
   package = pi;
   settings = s;
   setExpandable( true );
@@ -178,3 +187,53 @@ void PackageListItem::displayDetails()
   statusItem->setText( 0, QObject::tr("Status: ")+package->status() );
   repaint();
 }
+
+QPopupMenu* PackageListItem::getPopupMenu()
+{
+  popupMenu->clear();
+  destsMenu->clear();
+
+  QAction *popupAction;
+  qDebug("PackageListItem::showPopup ");
+
+  if (!package->installed()){
+    popupMenu->insertItem( QObject::tr("Install to"), destsMenu );
+    QStringList dests = settings->getDestinationNames();
+    QString ad = settings->getDestinationName();
+    for (uint i = 0; i < dests.count(); i++ )
+  	{
+     popupAction = new QAction( dests[i], QString::null, 0, popupMenu, 0 );
+     popupAction->addTo( destsMenu );
+     if ( dests[i] == ad && getPackage()->toInstall() )
+	    {
+	      popupAction->setToggleAction( true );
+	      popupAction->setOn(true);
+	    }
+    }
+  connect( destsMenu, SIGNAL( activated( int ) ),
+	       this, SLOT( menuAction( int ) ) );
+      popupMenu->popup( QCursor::pos() );
+  }else{
+    popupMenu->insertItem( QObject::tr("Remove"));
+  connect( popupMenu, SIGNAL( activated( int ) ),
+	       this, SLOT( menuAction( int ) ) );
+      popupMenu->popup( QCursor::pos() );   
+  }
+  return popupMenu;
+}
+
+void PackageListItem::menuAction( int i )
+{
+  if (package->installed()){
+    package->setDest( destsMenu->text(i) );
+    package->setLink( settings->createLinks() );
+  }
+  package->setOn();
+  displayDetails();
+}
+
+//void PackageListItem::toggleProcess()
+//{
+//  package->toggleProcess() ;
+//  displayDetails();
+//}

@@ -20,8 +20,6 @@ PackageListView::PackageListView(QWidget *p, const char* n, PackageManagerSettin
   : QListView(p,n)
 {
   settings = s;
-  popupMenu = new QPopupMenu( this );	
-  destsMenu = new QPopupMenu( popupMenu );
   popupTimer = new QTimer( this );
   setSelectionMode(QListView::NoSelection);
   addColumn( tr("Package") );
@@ -73,41 +71,6 @@ void PackageListView::showPopup()
   QPopupMenu *popup = activeItem->getPopupMenu();
   if (popup == 0) return;
   popup->popup( QCursor::pos() );
-//  popupMenu->clear();
-//  destsMenu->clear();
-//
-//  QAction *popupAction;
-//  qDebug("PackageListView::showPopup if ");
-//  if ( !activePackage->installed() )
-//    {
-//  qDebug("PackageListView::showPopup if y");
-//      popupMenu->insertItem( tr("Install to"), destsMenu );
-//      QStringList dests = settings->getDestinationNames();
-//      QString ad = settings->getDestinationName();
-//      for (uint i = 0; i < dests.count(); i++ )
-//  	{
-//	  popupAction = new QAction( dests[i], QString::null, 0, this, 0 );
-//	  popupAction->addTo( destsMenu );
-//	  if ( dests[i] == ad && activePackage->toInstall() )
-//	    {
-//	      popupAction->setToggleAction( true );
-//	      popupAction->setOn(true);
-//	    };
-//  	}
-//      connect( destsMenu, SIGNAL( activated( int ) ),
-//	       this, SLOT( changePackageDest( int ) ) );
-//      popupMenu->popup( QCursor::pos() );
-//    }else{
-//      qDebug("PackageListView::showPopup if n");
-//      popupAction = new QAction( tr("Remove"),QString::null,  0, this, 0 );
-//      popupAction->addTo( popupMenu );
-//      connect( popupAction, SIGNAL( activated() ),
-//	       this , SLOT( toggleProcess() ) );
-//      popupAction = new QAction( tr("Reinstall"),QString::null,  0, this, 0 );
-//      popupAction->addTo( popupMenu );
-//      popupAction->setEnabled( false );
-//      popupMenu->popup( QCursor::pos() );
-//    }
   qDebug("PackageListView::showPopup");
 }
 
@@ -116,20 +79,6 @@ void PackageListView::stopTimer( QListViewItem* )
   popupTimer->stop();
 }
 
-
-void PackageListView::changePackageDest( int i )
-{
-//  activePackage->setDest( destsMenu->text(i) );
-//  activePackage->setOn();
-//  activePackage->setLink( settings->createLinks() );
-//  activePackageListItem->displayDetails();
-}
-
-void PackageListView::toggleProcess()
-{
-//  activePackage->toggleProcess() ;
-//  activePackageListItem->displayDetails();
-}
 
 void PackageListView::display()
 {

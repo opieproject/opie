@@ -263,7 +263,6 @@ void OipkgPackage::toggleProcess()
 }
 
 
-
 void OipkgPackage::copyValues( OipkgPackage* pack )
 {
   if (_size.isEmpty()      && !pack->_size.isEmpty()) _size = QString( pack->_size );

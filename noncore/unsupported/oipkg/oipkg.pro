@@ -34,7 +34,7 @@ DEPENDPATH	+= $(OPIEDIR)/ioclude
 LIBS            += -lqpe
 LIBS            += -lopie
 INTERFACES	= runwindow.ui \
-		pksettingsbase.ui
+   		pksettingsbase.ui
 TARGET		= oipkg
 
 TRANSLATIONS = ../../../i18n/de/oipkg.ts \

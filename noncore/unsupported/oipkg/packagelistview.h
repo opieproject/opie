@@ -47,10 +47,8 @@ private:
   QPopupMenu *destsMenu;
 public slots:
   void showPopup();
-  void changePackageDest( int );
   void setCurrent( QListViewItem* );
   void stopTimer( QListViewItem* );
-  void toggleProcess();
   void display();
 };
 
