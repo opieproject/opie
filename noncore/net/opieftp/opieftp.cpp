@@ -125,12 +125,12 @@ OpieFtp::OpieFtp( )
 
 
 
-    cdUpButton = new QPushButton(Resource::loadIconSet("up"),"",this,"cdUpButton");
+    cdUpButton = new QToolButton( this,"cdUpButton");
+    cdUpButton->setPixmap(Resource::loadPixmap("up"));
     cdUpButton ->setFixedSize( QSize( 20, 20 ) );
     connect( cdUpButton ,SIGNAL(released()),this,SLOT( upDir()) );
-    cdUpButton ->setFlat(TRUE);
     layout->addMultiCellWidget( cdUpButton, 0, 0, 3, 3 );
-     cdUpButton->hide();
+    cdUpButton->hide();
 
 //     docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
 //     docButton->setFixedSize( QSize( 20, 20 ) );
@@ -138,10 +138,10 @@ OpieFtp::OpieFtp( )
 //     docButton->setFlat(TRUE);
 //     layout->addMultiCellWidget( docButton, 0, 0, 6, 6 );
 
-    homeButton = new QPushButton( Resource::loadIconSet("home"),"",this,"homeButton");
+    homeButton = new QToolButton(this,"homeButton");
+    homeButton->setPixmap( Resource::loadPixmap("home"));
     homeButton->setFixedSize( QSize( 20, 20 ) );
     connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
-    homeButton->setFlat(TRUE);
     layout->addMultiCellWidget( homeButton, 0, 0, 4, 4);
      homeButton->hide();
 
@@ -231,7 +231,7 @@ OpieFtp::OpieFtp( )
     PasswordEdit = new QLineEdit( "", tab_3, "PasswordComboBox" );
     PasswordEdit->setEchoMode(QLineEdit::Password);
     tabLayout_3->addMultiCellWidget( PasswordEdit, 1, 1, 2, 3 );
-
+//PasswordEdit->setFixedWidth(85);
     TextLabel3 = new QLabel( tab_3, "TextLabel3" );
     TextLabel3->setText( tr( "Remote server" ) );
     tabLayout_3->addMultiCellWidget( TextLabel3, 2, 2, 0, 1 );
@@ -250,7 +250,6 @@ OpieFtp::OpieFtp( )
 
     remotePath = new QLineEdit( "/", tab_3, "remotePath" );
     tabLayout_3->addMultiCellWidget( remotePath, 3, 3, 2, 3 );
-
     TextLabel4 = new QLabel( tab_3, "TextLabel4" );
     TextLabel4->setText( tr( "Port" ) );
     tabLayout_3->addMultiCellWidget( TextLabel4, 4, 4, 0, 1 );
@@ -285,7 +284,7 @@ OpieFtp::OpieFtp( )
 
     currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
     layout->addMultiCellWidget( currentPathCombo, 3, 3, 0, 4);
-
+   currentPathCombo ->setFixedWidth(220);
     currentPathCombo->setEditable(TRUE);
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
 

@@ -37,6 +37,7 @@ class QFile;
 class QListViewItem;
 class QLineEdit;
 class QPushButton;
+class QToolButton;
 class QStringList;
 
 class OpieFtp : public QMainWindow
@@ -60,7 +61,8 @@ public:
     QString currentRemoteDir;
     QString filterStr;
     QListViewItem * item;
-    QPushButton *connectServerBtn, *cdUpButton, *homeButton, *docButton;
+    QPushButton *connectServerBtn;//
+    QToolButton  *cdUpButton, *homeButton, *docButton;
     bool b;
     int currentServerConfig;
 protected slots:
