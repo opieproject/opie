@@ -1,11 +1,29 @@
 <chapter><title>Installation</title>
 <section><title>&ipaq;</title>
 <para>
-To install &opie; on an &ipaq;, you will need a recent Familiar installation (i.e.
-install the Familiar "bootstrap" image, and do not install task-complete or task-x),
-go to http://familiar.handhelds.org to get the latest version, and to get installation
-instructions (again, stop after the initial boot and do not install X, as it is not
-necessary, and will only take up space).
+To install &opie; on an &ipaq;, a recent Familiar installation will be needed. Go to
+the Familiar project homepage (http://familiar.handhelds.org) to download the latest
+version of the "bootstrap" image (do not install the bootstrap-opie or bootstrap-gpe
+images). Follow the instructions on the Familiar website to install the image. Do not
+install the task-complete or task-x packages as they are not needed to run &opie; and
+will unnecessarily occupy space on the &ipaq;.
+</para>
+
+<para>
+A network connection needs to be configured on the &ipaq; in order to download the
+&opie; packages from the feed. The Familiar site provides instructions for connecting
+to the Internet in a variety of ways. 
+</para>
+
+<para>
+&opie; requires the libpng3 package to be installed. Prior to installing &opie;, ensure
+that this package is installed. It is available in the Familiar feed and can be installed
+by running this command:
+<informalexample>
+<literallayout>
+     ipkg install libpng3
+</literallayout>
+</informalexample>
 </para>
 
 <note>
@@ -16,9 +34,8 @@ attempting to install &opie;.
 </para>
 </note>
 <para>
-Once you have Familiar installed, set up a network connection between your &ipaq;
-and the ouside world (again, see the Familiar site for instructions on this),
-and then run this command:
+Once you have Familiar installed (including libpng3), and the network connection
+between the &ipaq; and the outside world, run the following command:
 <informalexample>
 <literallayout>
      echo src opie "http://opie.handhelds.org/feed/ipaq/unstable/" \
@@ -44,16 +61,6 @@ finally, start &opie; with:
 </literallayout>
 </informalexample>
 </para>
-
-<para>
-&opie; should now be running (if you should have to reboot, which is rare, &opie;
-will start automatically). From here, you can use either the "Packages"
-application in the Settings tab, or run ipkg from the command line to install
-other &opie; applications. Check out the various task-opie-* packages to install
-various sets of applications all at once (you can always uninstall individual
-applications individually). You will probably want to install opie-embeddedkonsole
-or opie-console first, so you have access to the command line in &opie;.
-</para>
 </section>
 
 <section><title>&zaurus;</title>
@@ -65,7 +72,7 @@ installed.
 
 <para>
 Another option is to replace the default &zaurus; ROM with the OpenZaurus
-ROM. OpenZaurus is a openly developed Linux distribution designed to run on the
+ROM image. OpenZaurus is a openly developed Linux distribution designed to run on the
 &zaurus;, and uses &opie; as its default user interface. For more information and
 installation instructions, please visit their site, http://www.openzaurus.org/.
 </para>
