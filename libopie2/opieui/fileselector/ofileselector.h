@@ -85,8 +85,9 @@ public:
      * Open = Open A File
      * Save = Save a File
      * FILESELECTOR = As A GUI in a screen to select a file
+     * SelectDir = Select a Directory
      */
-    enum Mode { Open=1, Save=2, FileSelector=4, OPEN=1, SAVE=2, FILESELECTOR=4 };
+    enum Mode { Open = 1, Save = 2, DirectorySelector = 3, FileSelector = 4, OPEN = 1, SAVE = 2, DIRECTORYSELECTOR = 3, FILESELECTOR = 4 };
     //    enum OldMode { OPEN=1, SAVE=2, FILESELECTOR = 4 };
     /**
      * Normal       = The old FileSelector

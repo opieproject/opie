@@ -70,7 +70,10 @@ void saveLastDir( const QString& key, const QString& file )
     Config cfg(  QFileInfo(qApp->argv()[0]).fileName() );
     cfg.setGroup( key );
     QFileInfo inf( file );
-    cfg.writeEntry("LastDir", inf.dirPath( true ) );
+    if ( inf.isFile() )
+        cfg.writeEntry("LastDir", inf.dirPath( true ) );
+    else
+        cfg.writeEntry("LastDir", file );
 }
 };
 
@@ -201,6 +204,36 @@ QString OFileDialog::getSaveFileName(int selector,
         saveLastDir( "FileDialog-SAVE", ret );
     }
 
+    return ret;
+}
+
+/**
+ * This opens up a filedialog in select directory mode
+ *
+ * @param selector the Selector Mode
+ * @param startDir Where to start from
+ * @param wid the parent
+ * @param caption of the dialog if QString::null tr("Open") will be used
+ * @return the directoryName or QString::null
+ */
+QString OFileDialog::getDirectory(int selector,
+                                 const QString &_startDir,
+                                 QWidget *wid,
+                                 const QString &caption )
+{
+    QString ret;
+    QString startDir = _startDir;
+    if ( startDir.isEmpty() )
+        startDir = lastUsedDir( "FileDialog-SELECTDIR" );
+
+    OFileDialog dlg( caption.isEmpty() ? tr( "Select Directory" ) : caption,
+                     wid, OFileSelector::DirectorySelector, selector, startDir );
+    dlg.showMaximized();
+    if ( dlg.exec() )
+    {
+        ret = dlg.fileName();
+        saveLastDir( "FileDialog-SELECTDIR", ret );
+    }
     return ret;
 }
 

@@ -89,6 +89,11 @@ public:
                                    QWidget *wid = 0,
                                    const QString &caption = QString::null );
 
+    static QString getDirectory(int selector,
+                                const QString &startDir = QString::null,
+                                QWidget *wid = 0,
+                                const QString &caption = QString::null );
+
     //let's OFileSelector catch up first
     //static QString getExistingDirectory(const QString& startDir = QString::null,
     //QWidget *parent = 0, const QString& caption = QString::null );

@@ -428,10 +428,13 @@ void OFileViewFileListView::reread( bool all )
 
     dir.setSorting( QDir::Name | QDir::DirsFirst | QDir::Reversed );
     int filter;
-    if (m_all )
-        filter = QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All;
-    else
-        filter = QDir::Files | QDir::Dirs | QDir::All;
+    filter = QDir::Dirs;
+    if ( selector()->mode() != OFileSelector::DIRECTORYSELECTOR )
+        filter = filter | QDir::Files | QDir::All;
+
+    if ( m_all )
+        filter = filter | QDir::Hidden;
+
     dir.setFilter( filter );
 
     // now go through all files
@@ -814,7 +817,7 @@ QWidget* OFileViewFileSystem::widget( QWidget* parent )
 
 void OFileViewFileSystem::activate( const QString& str)
 {
-    m_all = (str != QObject::tr("Files") );
+    m_all = ( str.find( "All" ) != -1 );
 }
 
 
@@ -874,16 +877,31 @@ OFileSelector::OFileSelector( QWidget* parent, int mode, int sel,
     {
     default:
     case Normal:
-        str = QObject::tr("Documents");
+        if ( m_mode == DIRECTORYSELECTOR )
+            str = QObject::tr("Directories");
+        else
+            str = QObject::tr("Documents");
         m_cmbView->setCurrentItem( 0 );
         break;
     case Extended:
-        str = QObject::tr("Files");
-        m_cmbView->setCurrentItem( 1 );
+        if ( m_mode == DIRECTORYSELECTOR )
+        {
+            str = QObject::tr("Directories");
+            m_cmbView->setCurrentItem( 0 );
+        } else {
+            str = QObject::tr("Files");
+            m_cmbView->setCurrentItem( 1 );
+        }
         break;
     case ExtendedAll:
-        str = QObject::tr("All Files");
-        m_cmbView->setCurrentItem( 2 );
+        if ( m_mode == DIRECTORYSELECTOR )
+        {
+            str = QObject::tr("All Directories");
+            m_cmbView->setCurrentItem( 1 );
+        } else {
+            str = QObject::tr("All Files");
+            m_cmbView->setCurrentItem( 2 );
+        }
         break;
     }
     slotViewChange( str );
@@ -985,19 +1003,31 @@ void OFileSelector::initMime()
 
 void OFileSelector::initViews()
 {
-    m_cmbView->insertItem( QObject::tr("Documents") );
-    m_cmbView->insertItem( QObject::tr("Files") );
-    m_cmbView->insertItem( QObject::tr("All Files") );
+    if ( m_mode == OFileSelector::DIRECTORYSELECTOR )
+    {
+        m_cmbView->insertItem( QObject::tr("Directories") );
+        m_cmbView->insertItem( QObject::tr("All Directories") );
+    } else {
+        m_cmbView->insertItem( QObject::tr("Documents") );
+        m_cmbView->insertItem( QObject::tr("Files") );
+        m_cmbView->insertItem( QObject::tr("All Files") );
+    }
+
     connect(m_cmbView, SIGNAL(activated(const QString&) ),
             this, SLOT(slotViewChange(const QString&) ) );
 
-
-    m_views.insert( QObject::tr("Documents"), new ODocumentFileView(this) );
-
     /* see above why add both */
     OFileViewInterface* in = new OFileViewFileSystem( this );
-    m_views.insert( QObject::tr("Files"), in );
-    m_views.insert( QObject::tr("All Files"), in );
+
+    if ( m_mode == OFileSelector::DIRECTORYSELECTOR )
+    {
+        m_views.insert( QObject::tr("Directories"), in );
+        m_views.insert( QObject::tr("All Directories"), in );
+    } else {
+        m_views.insert( QObject::tr("Documents"), new ODocumentFileView(this) );
+        m_views.insert( QObject::tr("Files"), in );
+        m_views.insert( QObject::tr("All Files"), in );
+    }
 }
 
 void OFileSelector::registerView( const Internal::OFileViewInterface* iface ) {
