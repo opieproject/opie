@@ -40,7 +40,7 @@
 
 #include <stdlib.h>
 
-extern QRect qt_maxWindowRect; 
+extern QRect qt_maxWindowRect;
 
 #define WHATSTHIS_MODE
 
@@ -107,7 +107,8 @@ public:
 
 static QImage scaleButton( const QImage &img, int height )
 {
-    if ( img.height() != height ) {
+    qWarning("Height %d %d",  height, img.height() );
+    if ( img.height()!=0 && img.height() != height ) {
 	return img.smoothScale( img.width()*height/img.height(), height );
     } else {
 	return img;
@@ -647,7 +648,7 @@ QRegion QPEDecoration::region(const QWidget *widget, const QRect &rect, QWSDecor
 		region = m & QRect( br.left()+grab, br.top(),
 				    br.width()-2*grab, b );
 	    }
-	    break; 
+	    break;
 	case Left:
 	    if ( !widget->isMaximized() ) {
 		QRegion m = wdiface->mask(&wd);
@@ -656,7 +657,7 @@ QRegion QPEDecoration::region(const QWidget *widget, const QRect &rect, QWSDecor
 		region = m & QRect( br.left(), br.top()+grab,
 				    b, br.height()-2*grab );
 	    }
-	    break; 
+	    break;
 	case Right:
 	    if ( !widget->isMaximized() ) {
 		QRegion m = wdiface->mask(&wd);
@@ -665,7 +666,7 @@ QRegion QPEDecoration::region(const QWidget *widget, const QRect &rect, QWSDecor
 		region = m & QRect( rect.right(), br.top()+grab,
 				    b, br.height()-2*grab );
 	    }
-	    break; 
+	    break;
 	case Bottom:
 	    if ( !widget->isMaximized() ) {
 		QRegion m = wdiface->mask(&wd);
@@ -685,7 +686,7 @@ QRegion QPEDecoration::region(const QWidget *widget, const QRect &rect, QWSDecor
 		crgn |= QRect( br.left(), br.top(), lb, grab );
 		region = m & crgn;
 	    }
-	    break; 
+	    break;
 	case TopRight:
 	    if ( !widget->isMaximized() ) {
 		QRegion m = wdiface->mask(&wd);
@@ -703,7 +704,7 @@ QRegion QPEDecoration::region(const QWidget *widget, const QRect &rect, QWSDecor
 		QRect br = m.boundingRect();
 		region = m & QRect( br.left(), br.bottom()-grab, grab, grab );
 	    }
-	    break; 
+	    break;
 	case BottomRight:
 	    if ( !widget->isMaximized() ) {
 		QRegion m = wdiface->mask(&wd);
@@ -822,11 +823,11 @@ void QPEDecoration::paintButton(QPainter *painter, const QWidget *w,
 
 void QPEDecoration::maximize( QWidget *widget )
 {
-#ifdef QPE_DONT_SHOW_TITLEBAR    
+#ifdef QPE_DONT_SHOW_TITLEBAR
     if ( !widget->inherits( "QDialog" ) ) {
 	widget->setGeometry( qt_maxWindowRect );
-    } else 
-#endif	
+    } else
+#endif
 	{
 	QWSDecoration::maximize( widget );
     }
@@ -853,7 +854,7 @@ void QPEDecoration::minimize( QWidget *widget )
     if ( widget->inherits( "QDialog" ) ) {
         HackDialog *d = (HackDialog *)widget;
         d->acceptIt();
-    } 
+    }
 #endif
     else if ( ((HackWidget *)widget)->needsOk() ) {
 	QSignal s;
