@@ -35,6 +35,7 @@
 #include <opie/tododb.h>
 #include <opie/todoevent.h>
 
+#include "smalltodo.h"
 #include "todoview.h"
 #include "todomanager.h"
 
@@ -49,6 +50,9 @@ using namespace Opie;
 
 namespace Todo {
     typedef TodoView View;
+    class TemplateManager;
+    class Editor;
+    class TodoShow;
     class MainWindow : public QMainWindow {
         Q_OBJECT
     public:
@@ -74,6 +78,9 @@ namespace Todo {
         bool showOverDue()const;
         QString currentCategory()const;
         int currentCatId();
+        TemplateManager* templateManager();
+
+        void updateTodo( const ToDoEvent& );
 private slots:
         void slotReload();
         void slotFlush();
@@ -87,10 +94,16 @@ private slots:
         void initActions();
         void initConfig();
         void initViews();
+        void initEditor();
+        void initShow();
         void populateCategories();
         void raiseCurrentView();
         ViewBase* currentView();
         ViewBase* m_curView;
+        Editor* currentEditor();
+        Editor* m_curEdit;
+        TodoShow* currentShow();
+        TodoShow* m_curShow;
 
         QMenuBar* m_bar;
         QToolBar* m_tool;
@@ -108,7 +121,8 @@ private slots:
         QPopupMenu* m_catMenu,
             *m_edit,
             *m_options,
-            *m_view;
+            *m_view,
+            *m_template;
 
         bool m_syncing:1;
         bool m_deadline:1;
@@ -118,8 +132,14 @@ private slots:
         QString m_curCat;
         QList<ViewBase> m_views;
         uint m_counter;
+        TemplateManager* m_tempManager;
 
      private slots:
+        void slotShow(int);
+        void slotEdit(int);
+private slots:
+        void slotUpdate3( QWidget* );
+        void slotNewFromTemplate(int id );
         void slotNew();
         void slotDuplicate();
         void slotDelete();

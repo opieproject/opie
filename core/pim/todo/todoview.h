@@ -71,8 +71,8 @@ namespace Todo {
     signals:
         void showTodo(int uid );
         void edit(int uid );
-        void update( int uid, const SmallTodo& );
-        void update( int uid, const ToDoEvent& );
+        void update( int uid, const Todo::SmallTodo& );
+        void update( int uid, const Opie::ToDoEvent& );
         /* sorry you need to cast */;
         void update( QWidget* wid );
         void remove( int uid );
@@ -92,7 +92,7 @@ namespace Todo {
         virtual void showOverDue( bool ) = 0;
         virtual void setTodos( ToDoDB::Iterator it,
                                ToDoDB::Iterator end ) = 0;
-        virtual void setTodo(int uid,  const ToDoEvent& ) = 0;
+
         virtual void addEvent( const ToDoEvent& ) = 0;
         virtual void replaceEvent( const ToDoEvent& ) = 0;
         virtual void removeEvent( int uid ) = 0;
@@ -108,6 +108,7 @@ namespace Todo {
         virtual void connectUpdateSmall( QObject*, const char* ) = 0;
         virtual void connectUpdateBig( QObject*, const char* ) = 0;
         virtual void connectUpdateView( QObject*, const char*) = 0;
+        virtual void connectRemove( QObject*, const char* ) = 0;
 
     };
 
@@ -148,6 +149,8 @@ namespace Todo {
                                const char* slot ) ;
         void connectUpdateView( QObject* obj,
                                 const char* slot );
+        void connectRemove( QObject* obj,
+                            const char* slot );
     protected:
         MainWindow* todoWindow();
         ToDoEvent event(int uid );
@@ -162,12 +165,8 @@ namespace Todo {
     protected:
         void showTodo( int uid ) { hack->emitShow(uid); }
         void edit( int uid ) { hack->emitEdit(uid); }
-        void update(int uid, const SmallTodo& to ) {
-            hack->emitUpdate(uid, to );
-        }
-        void update(int uid, const ToDoEvent& ev) {
-            hack->emitUpdate(uid, ev );
-        }
+        void update(int uid, const SmallTodo& to );
+        void update(int uid, const ToDoEvent& ev);
         void remove( int uid ) {
             hack->emitRemove( uid );
         }

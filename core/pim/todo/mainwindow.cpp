@@ -38,10 +38,12 @@
 #include <qpe/resource.h>
 #include <qpe/qpemessagebox.h>
 
-
+#include "todotemplatemanager.h"
 #include "todoentryimpl.h"
 #include "tableview.h"
 
+#include "textviewshow.h"
+#include "todoeditor.h"
 #include "mainwindow.h"
 
 
@@ -52,10 +54,15 @@ MainWindow::MainWindow( QWidget* parent,
 
     m_syncing = false;
     m_counter = 0;
+    m_tempManager = new TemplateManager();
+    m_tempManager->load();
+
     initUI();
     initConfig();
     initViews();
     initActions();
+    initEditor();
+    initShow();
 
     raiseCurrentView();
 }
@@ -84,9 +91,10 @@ void MainWindow::initActions() {
 
     a = new QAction( tr("Delete..."),  Resource::loadIconSet( "trash" ),
                      QString::null, 0, this, 0 );
+    connect(a, SIGNAL(activated() ),
+            this, SLOT(slotDelete() ) );
     a->addTo( m_tool );
     a->addTo( m_edit );
-    a->setEnabled( FALSE );
     m_deleteAction = a;
 
     a = new QAction( QString::null, tr("Delete all..."), 0, this, 0 );
@@ -163,6 +171,9 @@ void MainWindow::initActions() {
 
     m_bar->insertItem( tr("View"), m_view );
 
+    /* templates */
+    m_edit->insertItem(tr("New from template"), m_template,
+                       -1, 0 );
 
 }
 /* m_curCat from Config */
@@ -190,10 +201,15 @@ void MainWindow::initUI() {
     m_options = new QPopupMenu( this );
     m_view = new QPopupMenu( this );
     m_catMenu = new QPopupMenu( this );
+    m_template = new QPopupMenu( this );
+
     m_catMenu->setCheckable( TRUE );
+    m_template->setCheckable( TRUE );
 
     connect(m_catMenu, SIGNAL(activated(int) ),
             this, SLOT(setCategory(int) ) );
+    connect(m_template, SIGNAL(activated(int) ),
+            this, SLOT(slotNewFromTemplate(int) ) );
 }
 void MainWindow::initViews() {
     TableView* tableView = new TableView( this, this );
@@ -201,12 +217,19 @@ void MainWindow::initViews() {
     m_views.append( tableView );
     m_curView = tableView;
     connectBase( tableView );
-    tableView->setTodos( begin(), end() );
+// tableView->setTodos( begin(), end() ); we call populateCategories
 
     /* add QString type + QString configname to
      * the View menu
      * and subdirs for multiple views
      */
+}
+void MainWindow::initEditor() {
+    m_curEdit = new Editor();
+}
+void MainWindow::initShow() {
+    m_curShow = new TextViewShow(this);
+    m_stack->addWidget( m_curShow->widget() , m_counter++ );
 }
 MainWindow::~MainWindow() {
 
@@ -214,9 +237,13 @@ MainWindow::~MainWindow() {
 void MainWindow::connectBase( ViewBase* base) {
     base->connectShow( this, SLOT(slotShow(int) ) );
     base->connectEdit( this, SLOT(slotEdit(int) ) );
-    base->connectUpdateSmall( this, SLOT( slotUpdate(int, const SmallTodo&)  ));
-    base->connectUpdateBig( this, SLOT( slotUpdate(int, const ToDoEvent& ) ) );
-    base->connectUpdateView( this, SLOT(slotUpdate( QWidget* ) ) ) ;
+    base->connectUpdateSmall( this,
+                              SLOT(slotUpate1(int, const Todo::SmallTodo&)  ));
+    base->connectUpdateBig( this,
+                            SLOT(slotUpate2(int, const Opie::ToDoEvent& ) ) );
+    base->connectUpdateView( this, SLOT(slotUpdate3( QWidget* ) ) ) ;
+    base->connectRemove(&m_todoMgr,
+                        SLOT(remove(int)) );
 }
 QPopupMenu* MainWindow::contextMenu( int uid ) {
     QPopupMenu* menu = new QPopupMenu();
@@ -252,18 +279,26 @@ ToDoEvent MainWindow::event( int uid ) {
 bool MainWindow::isSyncing()const {
     return m_syncing;
 }
+TemplateManager* MainWindow::templateManager() {
+    return m_tempManager;
+}
+Editor* MainWindow::currentEditor() {
+    return m_curEdit;
+}
+TodoShow* MainWindow::currentShow() {
+    return m_curShow;
+}
 void MainWindow::slotReload() {
     m_todoMgr.reload();
     currentView()->setTodos( begin(), end() );
     raiseCurrentView();
 }
 void MainWindow::closeEvent( QCloseEvent* e ) {
-    e->accept();
-    /*if (!m_viewVisible ) {
-        mStack->raiseWidget( currentView() );
+    if (m_stack->visibleWidget() == currentShow()->widget() ) {
+        raiseCurrentView();
         e->ignore();
         return;
-        }*/
+    }
     /*
      * we should have flushed and now we're still saving
      * so there is no need to flush
@@ -301,6 +336,9 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
         config.writeEntry( "ShowOverDue", showOverDue() );
     }
 }
+void MainWindow::slotNewFromTemplate( int uid ) {
+
+}
 void MainWindow::slotNew() {
     if(m_syncing) {
 	QMessageBox::warning(this, tr("Todo"),
@@ -309,23 +347,20 @@ void MainWindow::slotNew() {
     }
 
 
-    NewTaskDialog e( currentCatId(), this, 0, TRUE );
+    ToDoEvent todo = currentEditor()->newTodo( currentCatId(),
+                                             this );
 
-
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-    e.showMaximized();
-#endif
-    int ret = e.exec();
-
-    if ( ret == QDialog::Accepted ) {
-        ToDoEvent todo = e.todoEntry();
+    if ( currentEditor()->accepted() ) {
 	//todo.assignUid();
         currentView()->addEvent( todo );
         m_todoMgr.add( todo );
+
+        // I'm afraid we must call this every time now, otherwise
+        // spend expensive time comparing all these strings...
+        // but only call if we changed something -zecke
+        populateCategories();
     }
-    // I'm afraid we must call this every time now, otherwise
-    // spend expensive time comparing all these strings...
-    populateCategories();
+
     raiseCurrentView( );
 }
 void MainWindow::slotDuplicate() {
@@ -338,10 +373,14 @@ void MainWindow::slotDuplicate() {
     /* let's generate a new uid */
     ev.setUid(-1);
     m_todoMgr.add( ev );
+
     currentView()->addEvent( ev );
     raiseCurrentView();
 }
 void MainWindow::slotDelete() {
+    if (!currentView()->current() )
+        return;
+
     if(m_syncing) {
 	QMessageBox::warning(this, tr("Todo"),
 			     tr("Can not edit data, currently syncing"));
@@ -373,45 +412,23 @@ void MainWindow::slotDeleteAll() {
     raiseCurrentView();
 }
 void MainWindow::slotDeleteCompleted() {
-  if(m_syncing) {
-    QMessageBox::warning(this, tr("Todo"),
-			 tr("Can not edit data, currently syncing"));
-    return;
-  }
+    if(m_syncing) {
+        QMessageBox::warning(this, tr("Todo"),
+                             tr("Can not edit data, currently syncing"));
+        return;
+    }
 
-  if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("all completed tasks?") ) )
-    return;
+    if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("all completed tasks?") ) )
+        return;
 
-  m_todoMgr.remove( currentView()->completed() );
+    m_todoMgr.remove( currentView()->completed() );
+    currentView()->setTodos( begin(), end() );
 }
 void MainWindow::slotFind() {
 
 }
 void MainWindow::slotEdit() {
-    if(m_syncing) {
-	QMessageBox::warning(this, tr("Todo"),
-			     tr("Can not edit data, currently syncing"));
-	return;
-    }
-
-    ToDoEvent todo = m_todoMgr.event( currentView()->current() );
-    qWarning("slotEdit" );
-    NewTaskDialog e( todo, this, 0, TRUE );
-    e.setCaption( tr( "Edit Task" ) );
-
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-    e.showMaximized();
-#endif
-    int ret = e.exec();
-
-    if ( ret == QDialog::Accepted ) {
-        qWarning("Replacing now" );
-        todo = e.todoEntry();
-        m_todoMgr.update( todo.uid(), todo );
-	currentView()->replaceEvent( todo );
-    }
-    populateCategories();
-    raiseCurrentView();
+    slotEdit( currentView()->current() );
 }
 /*
  * set the category
@@ -465,7 +482,7 @@ void MainWindow::slotFlush() {
     m_todoMgr.save();
 }
 void MainWindow::slotShowDetails() {
-
+    slotShow( currentView()->current() );
 }
 /*
  * populate the Categories
@@ -513,4 +530,41 @@ void MainWindow::slotShowDue(bool ov) {
     m_overdue = ov;
     currentView()->showOverDue( ov );
     raiseCurrentView();
+}
+void MainWindow::slotShow( int uid ) {
+    qWarning("slotShow");
+    currentShow()->slotShow( event( uid ) );
+    m_stack->raiseWidget( currentShow()->widget() );
+}
+void MainWindow::slotEdit( int uid ) {
+    if(m_syncing) {
+	QMessageBox::warning(this, tr("Todo"),
+			     tr("Can not edit data, currently syncing"));
+	return;
+    }
+
+    ToDoEvent todo = m_todoMgr.event( uid );
+
+    todo = currentEditor()->edit(this, todo );
+
+    /* if completed */
+    if ( currentEditor()->accepted() ) {
+        qWarning("Replacing now" );
+        m_todoMgr.update( todo.uid(), todo );
+	currentView()->replaceEvent( todo );
+        populateCategories();
+    }
+
+    raiseCurrentView();
+}
+/*
+void MainWindow::slotUpdate1( int uid, const SmallTodo& ev) {
+    m_todoMgr.update( uid, ev );
+}
+*/
+void MainWindow::updateTodo(  const ToDoEvent& ev) {
+    m_todoMgr.update( ev.uid() , ev );
+}
+void MainWindow::slotUpdate3( QWidget* ) {
+
 }

@@ -33,6 +33,7 @@
 
 #include <opie/todoevent.h>
 
+using namespace Opie;
 namespace Todo {
     /**
      * TodoShow is the baseclass of
@@ -40,16 +41,13 @@ namespace Todo {
      * The first implementation is a QTextView
      * implementation showing the Todo as richtext
      */
-    template<T = QWidget>
-    class TodoShow : public T{
-        Q_OBJECT
+    class TodoShow {
     public:
-        TodoShow( QWidget* parent ) : T(parent) {}
-        virtual ~TodoShow() {};
+        TodoShow();
+        virtual ~TodoShow();
         virtual QString type()const = 0;
-
-    protected slots:
-        virtual void slotShow( const ToDoEvent& ev ) {};
+        virtual void slotShow( const ToDoEvent& ev ) = 0;
+        virtual QWidget* widget() = 0;
     };
 };
 

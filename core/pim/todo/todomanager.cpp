@@ -98,6 +98,7 @@ QStringList TodoManager::categories() {
 int TodoManager::catId( const QString& cats ) {
     return m_cat.id( "Todo List", cats );
 }
-void TodoManager::remove( const QArray<int>& ) {
-
+void TodoManager::remove( const QArray<int>& ids) {
+    for (uint i=0; i < ids.size(); i++ )
+        remove( ids[i] );
 }
