@@ -49,8 +49,6 @@ class Ir;
 class QVBox;
 class QLineEdit;
 
-using namespace Opie;
-
 namespace Todo {
     typedef TodoView View;
     class TemplateManager;
@@ -59,7 +57,7 @@ namespace Todo {
     class TemplateEditor;
     struct QuickEditBase;
 
-    class MainWindow : public OPimMainWindow {
+    class MainWindow : public Opie::OPimMainWindow {
         Q_OBJECT
         friend class TodoView; // avoid QObject here....
         friend class TodoShow; // avoid QObject
@@ -144,7 +142,7 @@ private slots:
             *m_showOverDueAction,
             *m_showQuickTaskAction,
             *m_effectiveAction;
-        OWidgetStack *m_stack;
+        Opie::OWidgetStack *m_stack;
         QPopupMenu* m_catMenu,
             *m_edit,
             *m_options,
@@ -205,7 +203,7 @@ private slots:
         void beam(int uid);
         void show( int uid );
         void edit( int uid );
-        void add( const OPimRecord& );
+        void add( const Opie::OPimRecord& );
         void doAlarm( const QDateTime& dt, int uid );
     };
 }

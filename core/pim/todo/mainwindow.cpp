@@ -64,7 +64,7 @@ using namespace Todo;
 
 MainWindow::MainWindow( QWidget* parent,
                         const char* name, WFlags )
-    : OPimMainWindow( "Todolist", parent, name, WType_TopLevel | WStyle_ContextHelp )
+    : Opie::OPimMainWindow( "Todolist", parent, name, WType_TopLevel | WStyle_ContextHelp )
 {
     if (!name)
         setName("todo window");
