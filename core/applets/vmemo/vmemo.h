@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.10 2002-06-23 17:17:08 llornkcor Exp $
+ * $Id: vmemo.h,v 1.11 2002-07-02 17:11:46 llornkcor Exp $
  */
 
 #ifndef __VMEMO_H__
@@ -36,7 +36,7 @@ public:
   QString fileName, errorMsg;
   QLabel* msgLabel;
   QTimer *t_timer;
-
+bool usingIcon;
 public slots:
   void record();
   void mousePressEvent( QMouseEvent * );

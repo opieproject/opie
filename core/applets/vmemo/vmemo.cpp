@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.40 2002-06-29 01:12:52 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.41 2002-07-02 17:11:46 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -234,7 +234,10 @@ VMemo::VMemo( QWidget *parent, const char *_name )
       e << QString("QPE/VMemo");
       e << QString("toggleRecord()");
     }
-
+    if(toggleKey == 1)
+        usingIcon=TRUE;
+    else
+        usingIcon=FALSE;
     if( vmCfg.readNumEntry("hideIcon",0) == 1)
       hide();
   }
@@ -267,12 +270,16 @@ void VMemo::paintEvent( QPaintEvent* )
 
 void VMemo::mousePressEvent( QMouseEvent * )
 {
-  startRecording();
+   if(!recording)
+       startRecording();
+   else
+       stopRecording();
 }
 
 void VMemo::mouseReleaseEvent( QMouseEvent * )
 {
-  stopRecording();
+//      if(usingIcon && !recording)
+//          stopRecording();
 }
 
 bool VMemo::startRecording() {
@@ -359,24 +366,26 @@ bool VMemo::startRecording() {
   l.setType("audio/x-wav");
   l.setCategories(cats);
   l.writeLink();
-
   
   record();
-  //  delete msgLabel;
+
   return TRUE;
 }
 
 void VMemo::stopRecording() {
-show();
- qDebug("Stopped recording");
-  recording = FALSE;
-  if(useAlerts)
-    if( msgLabel) delete msgLabel;
-  t_timer->stop();
-  Config cfg("Vmemo");
-  cfg.setGroup("Defaults");
+    show();
+    qDebug("Stopped recording");
+    recording = FALSE;
+    if(useAlerts) {
+        msgLabel->close();
+        msgLabel=0;
+        delete msgLabel;
+    }
+    t_timer->stop();
+    Config cfg("Vmemo");
+    cfg.setGroup("Defaults");
     if( cfg.readNumEntry("hideIcon",0) == 1 )
-      hide();
+        hide();
 }
 
 int VMemo::openDSP()
@@ -480,7 +489,7 @@ void VMemo::record(void)
 
     msg.sprintf("Recording format zaurus");
     qDebug(msg);
-    signed short sound[512], monoBuffer[512];
+    signed short sound[1024], monoBuffer[1024];
   
     if(format==AFMT_S16_LE)  {
 
@@ -488,7 +497,7 @@ void VMemo::record(void)
 
       while(recording)   {
 
-        result = read(dsp, sound, 512); // 8192
+        result = read(dsp, sound, 1024); // 8192
         //        int j=0;
 
         for (int i = 0; i < result; i++) { //since Z is mono do normally
@@ -498,8 +507,7 @@ void VMemo::record(void)
         length+=write(wav, monoBuffer, result);
         if(length<0)
           recording=false;
-
-        //           for (int i = 0; i < result; i+=2) {
+          //           for (int i = 0; i < result; i+=2) {
         //             monoBuffer[j] = sound[i];
         //             //            monoBuffer[j] = (sound[i]+sound[i+1])/2;
 
@@ -512,9 +520,9 @@ void VMemo::record(void)
     
     } else { //AFMT_U8 
       // 8bit unsigned
-      unsigned short sound[512], monoBuffer[512];
+      unsigned short sound[1024], monoBuffer[1024];
       while(recording)   {
-        result = read(dsp, sound, 512); // 8192
+        result = read(dsp, sound, 1024); // 8192
         //        int j=0;
 
         //        if(systemZaurus) {
@@ -544,14 +552,15 @@ void VMemo::record(void)
     msg.sprintf("Recording format other");
     qDebug(msg);
 
-    signed short sound[512];//, monoBuffer[512];
+    signed short sound[1024];//, monoBuffer[512];
 
     while(recording)  {
 
-      result = read(dsp, sound, 512); // 8192
+      result = read(dsp, sound, 1024); // 8192
 
       write(wav, sound, result);
       length += result;
+
       if(length<0) {
 
         recording=false;
@@ -589,7 +598,7 @@ void VMemo::record(void)
   //         QMessageBox::message("Vmemo"," Done1 recording\n"+ fileName);
   qDebug("done recording "+fileName);
 
-  QSound::play(Resource::findSound("vmemoe"));
+//  QSound::play(Resource::findSound("vmemoe"));
 
   Config cfg("qpe");
   cfg.setGroup("Volume");
@@ -637,7 +646,6 @@ int VMemo::setToggleButton(int tog) {
 
 void VMemo::timerBreak() {
   //stop
-  recording=false;
-
+    stopRecording();
   QMessageBox::message("Vmemo","Vmemo recording has \ntimed out");
 }
