@@ -827,19 +827,20 @@ void PlayListWidget::writem3u() {
     if( fileDlg->result() == 1 ) {
         name = fileDlg->text();
 //        qDebug( filename );
-
-        if( name.left( 1) != "/" ) {
+        if( name.find("/",0,true) != -1) {// assume they specify a file path
+            filename = name;
+            name = name.right(name.length()- name.findRev("/",-1,true) - 1 );
+        }
+        else //otherwise dump it somewhere noticable
             filename = QPEApplication::documentDir() + "/" + name;
-        }
 
-        if( name.right( 3 ) != "m3u" ) {
-            filename = QPEApplication::documentDir() + "/" +name+".m3u";
-        }
+        if( filename.right( 3 ) != "m3u" ) //needs filename extension
+            filename += ".m3u";
+        
+        if( d->selectedFiles->first()) { //ramble through playlist view
+            m3uList = new Om3u( filename, IO_ReadWrite);
 
-        if( d->selectedFiles->first()) {
-          m3uList = new Om3u(filename, IO_ReadWrite);
-
-          do {
+            do {
             m3uList->add( d->selectedFiles->current()->file());
           }
           while ( d->selectedFiles->next() );
