@@ -3,7 +3,7 @@
     <name>Styles</name>
     <message>
         <source>Metal</source>
-        <translation type="unfinished"></translation>
+        <translation>Metaal</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>Decoration</name>
     <message>
         <source>Flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Vlak</translation>
     </message>
 </context>
 </TS>
