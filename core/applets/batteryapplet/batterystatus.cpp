@@ -240,7 +240,7 @@ void BatteryStatus::paintEvent( QPaintEvent * ) {
           jacketMsg = tr("No jacket with battery inserted");
       }
 
-      int jackPerc =  ( jackPercent / 100 ) * screenWidth - 47;
+      int jackPerc =  ( jackPercent / 100.0 ) * screenWidth - 47;
 
       qDrawShadePanel( &p,   9, 160, rightEnd1, 39, colorGroup(), TRUE, 1, NULL);
       qDrawShadePanel( &p, rightEnd2, 167,  12, 24, colorGroup(), TRUE, 1, NULL);
