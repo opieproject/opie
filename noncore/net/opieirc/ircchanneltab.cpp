@@ -1,6 +1,4 @@
-#include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
-#include <qcursor.h>
 #include <qwhatsthis.h>
 #include <qhbox.h>
 #include "ircchanneltab.h"

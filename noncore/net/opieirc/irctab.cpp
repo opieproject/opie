@@ -1,5 +1,4 @@
 #include <qpe/resource.h>
-#include <qpixmap.h>
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
 #include "irctab.h"

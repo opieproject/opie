@@ -1,4 +1,3 @@
-#include <qpe/config.h>
 #include <qtextstream.h>
 #include <qwhatsthis.h>
 #include "ircservertab.h"

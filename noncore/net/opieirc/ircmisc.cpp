@@ -1,4 +1,3 @@
-#include <qlayout.h>
 #include <stdio.h>
 #include "ircmisc.h"
 

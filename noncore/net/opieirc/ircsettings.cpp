@@ -1,12 +1,9 @@
 #include <opie/ocolorbutton.h>
 #include <opie/otabwidget.h>
-#include <qlayout.h>
 #include <qvalidator.h>
-#include <qscrollview.h>
 #include <qwhatsthis.h>
 #include "ircsettings.h"
 #include "irctab.h"
-#include "ircmisc.h"
 
 IRCSettings::IRCSettings(QWidget* parent, const char* name, bool modal, WFlags) : QDialog(parent, name, modal, WStyle_ContextHelp) {
     setCaption(tr("Settings") );

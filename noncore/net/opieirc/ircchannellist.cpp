@@ -1,5 +1,4 @@
 #include <qpe/resource.h>
-#include <qpixmap.h>
 #include "ircchannellist.h"
 
 IRCChannelList::IRCChannelList(IRCChannel *channel, QWidget *parent, const char *name, WFlags f) : QListBox(parent, name, f) {

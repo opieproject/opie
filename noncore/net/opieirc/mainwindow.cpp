@@ -1,7 +1,5 @@
 #include <qmenubar.h>
 #include <qpe/resource.h>
-#include <qpe/config.h>
-#include <qpopupmenu.h>
 #include <qwhatsthis.h>
 
 #include "mainwindow.h"

@@ -1,4 +1,3 @@
-#include <qpe/qpeapplication.h>
 #include "mainwindow.h"
 
 #include <opie/oapplicationfactory.h>
