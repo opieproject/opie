@@ -17,8 +17,6 @@
 
 #include "opimrecurrencebase.h"
 
-using namespace Opie;
-
 /**
  * A widget to let the user select rules for recurrences.
  * This widget can take care of weekly, monthly, daily and yearly recurrence
@@ -37,11 +35,11 @@ public:
                        const char* name = 0,  bool modal = TRUE,
                        WFlags fl = 0 );
     OPimRecurrenceWidget( bool startOnMonday,
-                       const OPimRecurrence& rp, const QDate& start,
+                          const Opie::OPimRecurrence& rp, const QDate& start,
                        QWidget* parent = 0, const char* name =0,
                        bool modal = TRUE, WFlags = 0 );
     ~OPimRecurrenceWidget();
-    OPimRecurrence recurrence()const;
+    Opie::OPimRecurrence recurrence()const;
     QDate endDate()const;
 
 public slots:
@@ -55,8 +53,8 @@ public slots:
      */
     void slotNoEnd( bool unused );
     void setStartDate( const QDate& );
-    void setRecurrence( const OPimRecurrence& recur, const QDate& start );
-    void setRecurrence( const OPimRecurrence& recur );
+    void setRecurrence( const Opie::OPimRecurrence& recur, const QDate& start );
+    void setRecurrence( const Opie::OPimRecurrence& recur );
 
 private slots:
     void setupRepeatLabel( const QString& );

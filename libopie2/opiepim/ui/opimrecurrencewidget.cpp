@@ -7,6 +7,8 @@
 
 #include "opimrecurrencewidget.h"
 
+
+using namespace Opie;
 // Global Templates for use in setting up the repeat label...
 // the problem is these strings get initialized before QPEApplication can install the translator -zecke
 namespace {
@@ -83,7 +85,7 @@ OPimRecurrenceWidget::OPimRecurrenceWidget( bool startOnMonday,
  * @param fl The flags for window
  */
 OPimRecurrenceWidget::OPimRecurrenceWidget( bool startOnMonday,
-                                      const OPimRecurrence& rp, const QDate& startDate,
+                                            const Opie::OPimRecurrence& rp, const QDate& startDate,
                                       QWidget* parent, const char* name,
                                       bool modal, WFlags fl)
     : OPimRecurrenceBase( parent, name, modal, fl ),
@@ -112,7 +114,7 @@ void OPimRecurrenceWidget::setStartDate( const QDate& date ) {
  * set the recurrence
  * @param rp  The OPimRecurrence object with the new recurrence rules
  */
-void OPimRecurrenceWidget::setRecurrence( const OPimRecurrence& rp ) {
+void OPimRecurrenceWidget::setRecurrence( const Opie::OPimRecurrence& rp ) {
     setRecurrence( rp, start );
 }
 
@@ -121,7 +123,7 @@ void OPimRecurrenceWidget::setRecurrence( const OPimRecurrence& rp ) {
  * @param rp Recurrence rule
  * @param date The new start date
  */
-void OPimRecurrenceWidget::setRecurrence( const OPimRecurrence& rp, const QDate& date ) {
+void OPimRecurrenceWidget::setRecurrence( const Opie::OPimRecurrence& rp, const QDate& date ) {
     start = date;
     end = rp.endDate();
     switch ( rp.type() ) {
