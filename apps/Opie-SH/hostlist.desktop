@@ -6,3 +6,7 @@ Name=Hostlist
 Comment=hostlist
 Name[es]=Máquinas
 Comment[es]=Listado de hosts
+Name[pt]=Máquinas
+Comment[pt]=Lista de máquinas
+Name[pt_BR]=Máquinas
+Comment[pt_BR]=Lista de máquinas
