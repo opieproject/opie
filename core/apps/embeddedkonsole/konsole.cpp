@@ -259,6 +259,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   colorMenu->insertItem("Cyan on White");
   colorMenu->insertItem("White on Cyan");
   colorMenu->insertItem("Blue on Black");
+  colorMenu->insertItem("Amber on Black");
   configMenu->insertItem("Colors",colorMenu);
 
   connect( fontList, SIGNAL( activated(int) ), this, SLOT( fontChanged(int) ));
@@ -674,6 +675,12 @@ void Konsole::colorMenuSelected(int iD)
             cfg.writeEntry("Schema","16");
             colorMenu->setItemChecked(-16,TRUE);
         }
+        if(iD==-17) {// Black, Gold
+            background.setRgb(0x00,0x00,0x00);
+            foreground.setRgb(255,215,0);
+            cfg.writeEntry("Schema","17");
+            colorMenu->setItemChecked(-17,TRUE);
+        }
 
         for (i = 0; i < TABLE_COLORS; i++)  {
             if(i==0 || i == 10) {
@@ -768,14 +775,13 @@ void Konsole::setColor()
     cfg.setGroup("Colors");
     int scheme = cfg.readNumEntry("Schema",1);
     if(scheme != 1) colorMenuSelected( -scheme);
-
 }
 
 void Konsole::scrollMenuSelected(int index)
 {
     TEWidget* te = getTe();
-Config cfg("Konsole");
- cfg.setGroup("Scrollbar");
+    Config cfg("Konsole");
+    cfg.setGroup("Scrollbar");
     switch( index){
     case -21:
         te->setScrollbarLocation(0);
