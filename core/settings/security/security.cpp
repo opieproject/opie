@@ -61,6 +61,7 @@ Security::Security( QWidget* parent,  const char* name, WFlags fl )
     updateGUI();
 
     dl = new QPEDialogListener(this);
+    showMaximized();
 }
 
 Security::~Security()
@@ -72,7 +73,7 @@ void Security::updateGUI()
 {
     bool empty = passcode.isEmpty();
 
-    changepasscode->setText( empty ? tr("Set passcode" ) 
+    changepasscode->setText( empty ? tr("Set passcode" )
            : tr("Change passcode" )  );
     passcode_poweron->setEnabled( !empty );
     clearpasscode->setEnabled( !empty );
@@ -92,7 +93,7 @@ void Security::show()
     } else {
   QString pc = enterPassCode(tr("Enter passcode"));
   if ( pc != passcode ) {
-      QMessageBox::critical(this, tr("Passcode incorrect"), 
+      QMessageBox::critical(this, tr("Passcode incorrect"),
         tr("The passcode entered is incorrect.\nAccess denied"));
       reject();
       return;
