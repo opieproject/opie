@@ -277,7 +277,7 @@ QString DeviceItem::pixmap()const{
         str ="obex/bt";
         break;
     case DeviceBox::Search:
-        str = "obex/search";
+        str = "mag";
         break;
     case DeviceBox::Error:
         str = "editdelete";
