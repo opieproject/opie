@@ -1,27 +1,27 @@
 /*
-                             This file is part of the Opie Project
-                             Copyright (C) The Opie Team <opie-devel@handhelds.org>
-              =.             Copyright (C) 2003-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
+ Â  Â  Â  Â  Â  Â  Â  Â              This file is part of the Opie Project
+Â  Â  Â  Â  Â  Â  Â                 Copyright (C) 2002,2003,2004 The Opie Team <opie-devel@handhelds.org>
+              =.
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+Â  Â  Â  Â  Â  Â .>+-=
+Â _;:, Â  Â  .> Â  Â :=|.         This program is free software; you can
+.> <`_, Â  > Â . Â  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.-- Â  :           the terms of the GNU Library General Public
+.="- .-=="i, Â  Â  .._         License as published by the Free Software
+Â - . Â  .-<_> Â  Â  .<>         Foundation; either version 2 of the License,
+Â  Â  Â ._= =} Â  Â  Â  :          or (at your option) any later version.
+Â  Â  .%`+i> Â  Â  Â  _;_.
+Â  Â  .i_,=:_. Â  Â  Â -<s.       This program is distributed in the hope that
+Â  Â  Â + Â . Â -:. Â  Â  Â  =       it will be useful,  but WITHOUT ANY WARRANTY;
+Â  Â  : .. Â  Â .:, Â  Â  . . .    without even the implied warranty of
+Â  Â  =_ Â  Â  Â  Â + Â  Â  =;=|`    MERCHANTABILITY or FITNESS FOR A
+Â  _.=:. Â  Â  Â  : Â  Â :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.= Â  Â  Â  = Â  Â  Â  ;      Library General Public License for more
+++= Â  -. Â  Â  .` Â  Â  .:       details.
+Â : Â  Â  = Â ...= . :.=-
+Â -. Â  .:....=;==+<;          You should have received a copy of the GNU
+Â  -_. . . Â  )=. Â =           Library General Public License along with
+Â  Â  -- Â  Â  Â  Â :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -31,6 +31,9 @@
 #define ODEVICE_ZAURUS
 
 #include "odevice_abstractmobiledevice.h"
+
+/* QT */
+#include <qwindowsystem_qws.h>
 
 #ifndef ARRAY_SIZE
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
@@ -84,14 +87,14 @@
 #define SHARP_FL_IOCTL_GET_STEP          102
 
 // Vesa Standard
-#define FB_BLANK_UNBLANK			0
-#define FB_BLANK_POWERDOWN			4
+#define FB_BLANK_UNBLANK            0
+#define FB_BLANK_POWERDOWN          4
 
 namespace Opie {
 namespace Core {
 namespace Internal {
 
-class Zaurus : public OAbstractMobileDevice
+class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
 {
   protected:
     virtual void init(const QString&);
@@ -119,6 +122,7 @@ class Zaurus : public OAbstractMobileDevice
 
   protected:
     virtual void buzzer( int snd );
+    virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
 
     OLedState m_leds[1];
     bool m_embedix;
