@@ -60,10 +60,10 @@ class Device;
     private slots:
         void stopSearch();
         void startSearch();
+          void progressTimer();
         void fillList(const QString& device, RemoteDevices::ValueList list);
 
     private:
-        void progressTimer(int maxSeconds);
         Manager *localDevice;
         int progressStat;
     };

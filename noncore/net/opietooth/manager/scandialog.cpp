@@ -51,26 +51,22 @@ namespace OpieTooth {
         Frame7->setFrameShape( QFrame::StyledPanel );
         Frame7->setFrameShadow( QFrame::Raised );
 
-
         QWidget* privateLayoutWidget = new QWidget( Frame7, "Layout11" );
 	privateLayoutWidget->setGeometry( QRect( 10, 9, 221, 280 ) );
         Layout11 = new QVBoxLayout( privateLayoutWidget );
         Layout11->setSpacing( 6 );
         Layout11->setMargin( 0 );
 
-
         progress = new QProgressBar(privateLayoutWidget,  "progbar");
         progress->setTotalSteps(20);
 
-
-       QFrame *buttonFrame = new QFrame(Frame7, "");
+        QFrame *buttonFrame = new QFrame(Frame7, "");
 
         StartButton = new QPushButton( buttonFrame, "StartButton" );
         StartButton->setText( tr( "Start" ) );
 
         StopButton = new QPushButton( buttonFrame, "StopButton" );
         StopButton->setText( tr( "Cancel" ) );
-
 
         QHBoxLayout *buttonLayout = new QHBoxLayout(buttonFrame);
         buttonLayout->addWidget(StartButton);
@@ -102,6 +98,7 @@ namespace OpieTooth {
             if (progressStat++ < 20) {
                 QTimer::singleShot( 1000, this, SLOT(progressTimer() ) );
             }
+            progress->setProgress(progressStat++);
 
     }
 
