@@ -123,10 +123,10 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     TextLabel1_4_2->setFont( TextLabel1_4_2_font );
     TextLabel1_4_2->setText( tr( "<p align=center>\n"
 "<hr>\n"
+"Michael 'Mickey' Lauer<br><hr>\n"
 "Max Moser<br>\n"
 "Martin J. Muench<br>\n"
-"Michael Lauer<br><hr>\n"
-"<b>www.remote-exploit.org</b>\n"
+"<b>www.wellenreiter.net</b>\n"
 "</p>" ) );
     TextLabel1_4_2->setAlignment( int( QLabel::AlignCenter ) );
 

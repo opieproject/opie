@@ -15,6 +15,9 @@
 
 #include "gps.h"
 #include <unistd.h>
+
+#include <qtextstream.h>
+
 GPS::GPS( QObject* parent, const char * name )
     :QObject( parent, name )
 {
@@ -35,7 +38,7 @@ bool GPS::open( const QString& host, int port )
 }
 
 
-float GPS::latitude() const
+GpsLocation GPS::position() const
 {
     char buf[256];
 
@@ -47,20 +50,20 @@ float GPS::latitude() const
         qDebug( "GPS write succeeded, %d bytes available for reading...", numAvail );
         if ( numAvail )
         {
+            QTextStream stream( _socket );
 
-            int num = _socket->readLine( &buf[0], sizeof buf );
-            if ( num )
-            {
-                qDebug( "GPS got %d bytes ['%s']", num, &buf[0] );
-                return 0.0;
-            }
+            QString str;
+            stream.readRawBytes( &buf[0], 7 );
+            float lat = -111.111;
+            stream >> lat;
+            stream.skipWhiteSpace();
+            float lon = -111.111;
+            stream >> lon;
+            stream.readRawBytes( &buf[0], 200 ); // read and discard the stuff until EOF
+
+            return GpsLocation( lat, lon );
         }
     }
-    return -1.0;
-}
-
-
-float GPS::longitute() const
-{
+    return GpsLocation( -1.0, -1.0 );
 }
 

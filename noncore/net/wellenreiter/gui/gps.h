@@ -19,6 +19,15 @@
 #include <qobject.h>
 #include <qsocket.h>
 
+struct GpsLocation
+{
+    GpsLocation( const float& lat, const float& lon ) : latitude(lat), longitude(lon) {};
+    ~GpsLocation() {};
+    float latitude;
+    float longitude;
+};
+
+
 class GPS : public QObject
 {
   Q_OBJECT
@@ -28,8 +37,7 @@ class GPS : public QObject
     ~GPS();
 
     bool open( const QString& host = "localhost", int port = 2947 );
-    float latitude() const;
-    float longitute() const;
+    GpsLocation position() const;
 
   private:
     QSocket* _socket;

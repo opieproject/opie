@@ -16,6 +16,8 @@
 #ifndef SCANLIST_H
 #define SCANLIST_H
 
+#include "gps.h"
+
 /* OPIE */
 #include <opie2/olistview.h>
 #include <opie2/onetutils.h>
@@ -39,7 +41,8 @@ class MScanListView: public OListView
     virtual void serializeFrom( QDataStream& s );
 
   public slots:
-    void addNewItem( const QString& type, const QString& essid, const OMacAddress& macaddr, bool wep, int channel, int signal );
+    void addNewItem( const QString& type, const QString& essid, const OMacAddress& macaddr, bool wep, int channel, int signal, const GpsLocation& location );
+
     void fromDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via );
     void toDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& via );
     void WDStraffic( const OMacAddress& from, const OMacAddress& to, const OMacAddress& viaFrom, const OMacAddress& viaTo );
@@ -99,6 +102,7 @@ class MScanListItem: public OListViewItem
     void receivedBeacon();
 
     void setManufacturer( const QString& manufacturer );
+    void setLocation( const float& latitude, const float& longitude );
 
     virtual OListViewItem* childFactory();
     virtual void serializeTo( QDataStream& s ) const;

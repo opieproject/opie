@@ -171,14 +171,16 @@ void Wellenreiter::handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon )
 
     OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
 
+    GpsLocation loc( 0, 0 );
     if ( configwindow->enableGPS->isChecked() )
     {
+        // TODO: add check if GPS is working!?
         qDebug( "Wellenreiter::gathering GPS data..." );
-        float lat = gps->latitude();
-        qDebug( "Wellenreiter::GPS data received is ( %f , %f )", lat, 0.0 );
+        loc = gps->position();
+        qDebug( "Wellenreiter::GPS data received is ( %f , %f )", loc.latitude, loc.longitude );
     }
 
-    netView()->addNewItem( type, essid, header->macAddress2(), beacon->canPrivacy(), channel, 0 );
+    netView()->addNewItem( type, essid, header->macAddress2(), beacon->canPrivacy(), channel, 0, loc );
 
     // update graph window
     if ( ds )

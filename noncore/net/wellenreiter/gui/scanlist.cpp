@@ -47,6 +47,7 @@ const int col_ip = 6;
 const int col_manuf = 7;
 const int col_firstseen = 8;
 const int col_lastseen = 9;
+const int col_location = 10;
 
 MScanListView::MScanListView( QWidget* parent, const char* name )
               :OListView( parent, name )
@@ -75,6 +76,8 @@ MScanListView::MScanListView( QWidget* parent, const char* name )
     setColumnAlignment( col_firstseen, AlignCenter );
     addColumn( tr( "Last Seen" ) );
     setColumnAlignment( col_lastseen, AlignCenter );
+    addColumn( tr( "Location" ) );
+    setColumnAlignment( col_location, AlignCenter );
     setRootIsDecorated( true );
     setAllColumnsShowFocus( true );
 
@@ -113,7 +116,13 @@ void MScanListView::serializeFrom( QDataStream& s)
 }
 
 
-void MScanListView::addNewItem( const QString& type, const QString& essid, const OMacAddress& mac, bool wep, int channel, int signal )
+void MScanListView::addNewItem( const QString& type,
+                                const QString& essid,
+                                const OMacAddress& mac,
+                                bool wep,
+                                int channel,
+                                int signal,
+                                const GpsLocation& loc )
 {
     QString macaddr = mac.toString(true);
 
@@ -179,6 +188,7 @@ void MScanListView::addNewItem( const QString& type, const QString& essid, const
 
     MScanListItem* station = new MScanListItem( network, type, "", macaddr, wep, channel, signal );
     station->setManufacturer( mac.manufacturer() );
+    station->setLocation( loc.latitude, loc.longitude );
 
     if ( type == "managed" )
     {
@@ -465,6 +475,15 @@ void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, 
 void MScanListItem::setManufacturer( const QString& manufacturer )
 {
     setText( col_manuf, manufacturer );
+}
+
+
+void MScanListItem::setLocation( const float& latitude, const float& longitude )
+{
+    if ( latitude == 0.0 || longitude == 0.0 )
+        setText( col_location, "N/A" );
+    else
+        setText( col_location, QString().sprintf( "%.2f / %.2f", latitude, longitude ) );
 }
 
 
