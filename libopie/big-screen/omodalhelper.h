@@ -30,16 +30,19 @@
 #define HAZE_OMODAL_HELPER_H
 
 #include <qwidget.h>
+#include <qvaluelist.h>
+#include <qmap.h>
 
-class OModalHelperSignal : public QObject {
-    Q_OBJECT
-public:
-    OModalHelperSignal();
+typedef int TransactionID;
 
-signals:
-    done( int status,  int transaction );
-    accpeted( int transaction );
-    rejected( int transaction );
+class OModalHelperControler;
+class OModalHelperSignal;
+class QDialog;
+
+struct OModalHelperBase  {
+    virtual void done( TransactionID id, QWidget* ) = 0;
+    virtual void next( TransactionID, OModalHelperControler * );
+    virtual void prev( TransactionID, OModalHelperControler * );
 };
 
 /**
@@ -58,15 +61,79 @@ signals:
  * so smart that if only one item is shown that the queue bar is not shown
  * See the example for simple usage.
  *
- * @short helps to live without modaility
+ * @short helps to life without modaility
  * @author hOlgAr
  * @version 0.01
  */
-template<class Dialog, class Record>
-class OModalHelper{
+template<class Dialog, class Record, typename Id = QString>
+class OModalHelper : private OModalHelperBase{
+    friend class OModalHelperSignal;
+    friend class OModalHelperControler;
 public:
-    OModalHelper(QObject* parnet );
+    typedef QValueList<Record> RecordList;
+    typedef QMap<Id, Record> IdMap;
+    typedef QMap<TransactionID, Id> TransactionMap;
+    typedef QMap<QDialog*, TransactionID> DialogMap
+    enum Mode { Queue, New };
+    OModalHelper(enum Mode mode, QObject* parnet );
 
+    bool handles( Id id)const;
+
+    void cancel();
+    void cancel( TransactionID );
+
+    void connect( QObject* rec, const char* slot );
+
+    TransactionID handle( const Record& rec = Record() );
+
+    void edited( TransactionID, int what, const QString& data );
+
+    Record record( TransactionID )const;
+    RecordList done()const;
+private:
 };
+
+
+
+/* ### FIXME use namespace with Qt3 */
+
+/*
+ * A note on flow. The Signal is used for QT Signals when
+ * a record is done.
+ * There is either one controler and this controler slot will
+ * be connected to a dialog signal.
+ * In Queue we get the next and prev signals and call the Helper.
+ * this then changes the Record of the dialog and sets the transactionId
+ * of the controler.
+ * For the new mode
+ *
+ */
+
+class OModalHelperSignal : public QObject {
+    Q_OBJECT
+public:
+    OModalHelperSignal();
+
+signals:
+    done( int status,  TransactionID transaction );
+    accpeted( TransactionID transaction );
+    rejected( TransactionID transaction );
+};
+
+
+class OModalHelperControler : public QObject {
+    Q_OBJECT
+public:
+    OModalHelperControler( TransactionID id );
+    virtual TransactionID transactionID()const;
+    void setTransactionID( TransactionID id );
+    QDialog* dialog()const;
+
+public slots:
+    virtual done(int result );
+private:
+    QDialog *m_dia;
+    TransactionID m_id;
+}
 
 #endif
