@@ -659,8 +659,9 @@ void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink)
   //  if( !compliesMime(info->absFilePath(), mime ) )
   //  return;
   MimeType type( info->absFilePath() );
-  if( mime != tr("All") && type.id() != mime )
-    return;
+  if (!compliesMime( type.id() ) )
+      return;
+
   QPixmap pix = type.pixmap();
   QString dir;
   QString name;
@@ -940,8 +941,59 @@ bool OFileSelector::compliesMime( const QString &path, const QString &mime )
 /*  check if the mimetype in mime
  *  complies with the  one which is current
  */
+/*
+ * We've the mimetype of the file
+ * We need to get the stringlist of the current mimetype
+ *
+ * mime = image/jpeg
+ * QStringList = 'image/*'
+ * or QStringList = image/jpeg;image/png;application/x-ogg
+ * or QStringList = application/x-ogg;image/*;
+ * with all these mime filters it should get acceptes
+ * to do so we need to look if mime is contained inside
+ * the stringlist
+ * if it's contained return true
+ * if not ( I'm no RegExp expert at all ) we'll look if a '/*'
+ * is contained in the mimefilter and then we will
+ * look if both are equal until the '/'
+ */
 bool OFileSelector::compliesMime( const QString& mime ) {
+    qWarning("mimetype is %s", mime.latin1() );
+    QString currentText;
+    if (m_shChooser )
+        currentText = m_mimeCheck->currentText();
 
+    qWarning("current text is %s", currentText.latin1() );
+    QMap<QString, QStringList>::Iterator it;
+    QStringList list;
+    if ( currentText == tr("All") ) return true;
+    else if ( currentText.isEmpty() && !m_mimetypes.isEmpty() ) {
+        it = m_mimetypes.begin();
+        list = it.data();
+    }else if ( currentText.isEmpty() ) return true;
+    else{
+        it = m_mimetypes.find(currentText );
+        if ( it == m_mimetypes.end() ) qWarning("not there"), list << currentText;
+        else qWarning("found"), list = it.data();
+    }
+    // dump it now
+    //for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
+    //    qWarning( "%s", (*it).latin1() );
+    //}
+
+
+    if ( list.contains(mime) ) return true;
+    qWarning("list doesn't contain it ");
+    QStringList::Iterator it2;
+    int pos;
+    int pos2;
+    for ( it2 = list.begin(); it2 != list.end(); ++it2 ) {
+        pos = (*it2).findRev("/*");
+        if ( pos >= 0 ) {
+            if ( mime.contains( (*it2).left(pos) ) ) return true;
+        }
+    }
+    return false;
 }
 void OFileSelector::slotFileSelected( const QString &string )
 {
@@ -1131,7 +1183,7 @@ void OFileSelector::reparse()
 
     if( m_shChooser ){
         currentMimeType = m_mimeCheck->currentText();
-        updateMimeCheck();
+//        updateMimeCheck();
     }
   }
   // now we got our mimetypes we can add the files
