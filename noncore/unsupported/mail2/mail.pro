@@ -3,7 +3,6 @@ CONFIG		= 	qt warn_on debug
 #CONFIG		= 	qt warn_on release
 HEADERS		= 	accounteditor.h \
 		  	addresspicker.h \
-		  	attachdiag.h \
 		  	composer.h \
 		  	composerbase.h \
 		  	configdiag.h \
@@ -19,7 +18,6 @@ HEADERS		= 	accounteditor.h \
 		  	viewmailbase.h
 SOURCES		= 	accounteditor.cpp \
 		  	addresspicker.cpp \
-		  	attachdiag.cpp \
 		  	composer.cpp \
 		  	composerbase.cpp \
 		  	configdiag.cpp \
