@@ -44,6 +44,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpestyle.h>
 #include <qpe/power.h>
+#include <qpe/config.h>
 
 #include <opie/odevice.h>
 
@@ -164,6 +165,15 @@ int main ( int argc, char **argv )
 			}
 		}
 		else {
+			if ( !autolog ) {
+				Config cfg ( "opie-login" );
+				cfg. setGroup ( "General" );
+				QString user = cfg. readEntry ( "AutoLogin" );
+				
+				if ( !user. isEmpty ( ))
+					autolog = ::strdup ( user. latin1 ( ));
+			}
+		
 			if ( autolog ) {
 				LoginApplication::setLoginAs ( autolog );
 
@@ -172,7 +182,7 @@ int main ( int argc, char **argv )
 				else
 					::exit ( 0 );
 			}
-			else
+			else 
 				::exit ( login_main ( argc, argv ));
 		}
 	}
