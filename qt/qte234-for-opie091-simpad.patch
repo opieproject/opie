@@ -24,3 +24,139 @@
  # else
      if ((mouseFD = open( "/dev/h3600_ts", O_RDONLY | O_NDELAY)) < 0) {
  # endif
+--- src/kernel/qkeyboard_qws.cpp.orig	Sat May 24 16:49:38 2003
++++ src/kernel/qkeyboard_qws.cpp	Sat May 24 17:58:22 2003
+@@ -131,6 +131,46 @@
+ 
+ #endif // QNX6
+ 
++/*
++ * SIMpad switches handler
++ * (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
++ */
++
++//TODO: guard this against inclusion with #ifdef QT_QWS_SIMPAD
++
++#include <linux/switches.h>
++#define SIMPAD_SWITCHES_DEVICE "/dev/misc/switches"
++
++// switches from top to down over the SIMpad surface
++
++#define SIMPAD_SWITCH_UPPER 0x10
++
++#define SIMPAD_SWITCH_UP 0x20
++#define SIMPAD_SWITCH_DOWN 0x40
++#define SIMPAD_SWITCH_LEFT 0x80
++#define SIMPAD_SWITCH_RIGHT 0x100
++
++#define SIMPAD_SWITCH_LOWER 0x8
++
++class QWSsimpadButtonsHandler : public QWSKeyboardHandler
++{
++  Q_OBJECT
++
++  public:
++    QWSsimpadButtonsHandler();
++    virtual ~QWSsimpadButtonsHandler();
++
++    bool isOpen() { return fd > 0; }
++
++  private slots:
++    void readSwitchesData();
++
++  private:
++    switches_mask_t switches;
++    int fd;
++    QSocketNotifier *notifier;
++};
++
+ #ifdef QT_QWS_SL5XXX
+ static const QWSServer::KeyMap keyM[] = {
+     {	Qt::Key_unknown,	0xffff  , 0xffff  , 0xffff  }, // 00
+@@ -1440,7 +1480,11 @@
+     } else {
+ 	type = spec;
+     }
+-
++    if ( type == "SIMpad" )
++    {
++        qDebug( "QWSKeyboardHandler: using SIMpad keyboard handler..." );
++        handler = new QWSsimpadButtonsHandler();
++    }
+     if ( type == "Buttons" ) {
+ #if defined(QT_QWS_YOPY)
+ 	handler = new QWSyopyButtonsHandler();
+@@ -1469,6 +1513,72 @@
+     return keyM;
+ }
+ 
+-#endif // QT_NO_QWS_KEYBOARD
+ 
++/*
++ * SIMpad switches handler
++ * (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
++ */
++
++
++QWSsimpadButtonsHandler::QWSsimpadButtonsHandler()
++                        :QWSKeyboardHandler(), fd( -1 )
++{
++    qDebug( "SimpadButtonsHandler()" );
++    fd = ::open( SIMPAD_SWITCHES_DEVICE, O_RDWR | O_NDELAY, 0 );
++    if ( fd < 0 )
++    {
++        qWarning( "SimpadButtonsHandler(): can't open %s", SIMPAD_SWITCHES_DEVICE );
++        return;
++    }
++
++    notifier = new QSocketNotifier( fd, QSocketNotifier::Read, this );
++    connect( notifier, SIGNAL( activated(int) ),this, SLOT( readSwitchesData() ) );
++}
+ 
++
++QWSsimpadButtonsHandler::~QWSsimpadButtonsHandler()
++{
++    qDebug( "~SimpadButtonsHandler()" );
++    if ( fd > 0 )
++    {
++        ::close( fd );
++        fd = -1;
++    }
++}
++
++
++void QWSsimpadButtonsHandler::readSwitchesData()
++{
++    qDebug( "SimpadButtonsHandler() - detected switches action" );
++
++    if ( ::read( fd, &switches, sizeof switches ) < 0 )
++    {
++        qWarning( "SimpadButtonsHandler() - switches read error!" );
++        return;
++    }
++
++    qDebug( "SimpadButtonsHandler() - EVENT = %04xd | %04xd",
++            switches.events[0], switches.states[0] );
++
++    bool press = switches.states[0]; // == switches.event[0];
++    int code = switches.events[0];
++    int k = -1;
++
++    switch(code)
++    {
++        case SIMPAD_SWITCH_UPPER: k = Qt::Key_Escape;   break;
++        case SIMPAD_SWITCH_UP:    k = Qt::Key_Up;       break;
++        case SIMPAD_SWITCH_DOWN:  k = Qt::Key_Down;     break;
++        case SIMPAD_SWITCH_LEFT:  k = Qt::Key_Left;     break;
++        case SIMPAD_SWITCH_RIGHT: k = Qt::Key_Right;    break;
++        case SIMPAD_SWITCH_LOWER: k = Qt::Key_Return;   break;
++        default: k=-1; qWarning( "SimpadButtonsHandler() - unhandled event!" ); break;
++    }
++
++    if ( k >= 0 )
++    {
++        qwsServer->processKeyEvent( 0, k, 0, press, false );
++    }
++}
++
++#endif // QT_NO_QWS_KEYBOARD
