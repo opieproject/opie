@@ -313,10 +313,22 @@ void DateBookWeekView::resizeEvent( QResizeEvent *e )
 {
     const int hourWidth = 20;
     QScrollView::resizeEvent( e );
+
+#warning check the geometry i have choosen BRANCH_1_0 (waspe)
+
+    //HEAD
+    /*
     int avail = visibleWidth();
     header->setGeometry( leftMargin()+frameWidth()+frameRect().left() , frameWidth(),
 			  visibleWidth(), header->sizeHint().height() );
     setMargins( 0, header->sizeHint().height(), 0, 0 );
+    */
+    //BRANCH_1_0
+    int avail = width()-qApp->style().scrollBarExtent().width()-1;
+    header->setGeometry( 0, 0, avail, header->sizeHint().height() );
+    setMargins( 0, header->height(), 0, 0 );
+
+
     header->resizeSection( 0, hourWidth );
     int sw = (avail - hourWidth) / 7;
     for ( int i = 1; i < 7; i++ )
@@ -374,7 +386,7 @@ void DateBookWeek::keyPressEvent(QKeyEvent *e)
 	    view->scrollBy(0, 20);
 	    break;
 	case Key_Left:
-	    setDate(date().addDays(-7));
+   	    setDate(date().addDays(-7));
 	    break;
 	case Key_Right:
 	    setDate(date().addDays(7));
