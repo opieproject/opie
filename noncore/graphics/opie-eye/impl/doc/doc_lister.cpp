@@ -83,6 +83,7 @@ QStringList Doc_DirLister::files()const {
     QStringList out;
     QListIterator<DocLnk> dit(m_ds.children());
     for( ; dit.current(); ++dit) {
+        if (!(*dit)->isValid()) continue;
         if (!matchCat((*dit))) continue;
         QString s = (*dit)->name();
         s+=char(0);
@@ -155,9 +156,12 @@ QWidget* Doc_DirLister::widget(QWidget*parent)
 
 void Doc_DirLister::showCategory(int which)
 {
+    odebug<<"Show cat " << which << oendl;
     m_catFilter = which==-2?0:which;
     setStartPath("");
+    odebug<<"Show cat before emit" << oendl;
     emit sig_reloadDir();
+    odebug<<"Show cat - emit signal finished" << oendl;
 }
 
 void Doc_DirLister::systemMsg(const QCString &msg, const QByteArray &data)
@@ -165,6 +169,8 @@ void Doc_DirLister::systemMsg(const QCString &msg, const QByteArray &data)
     if ( msg != "linkChanged(QString)"||!m_docreads) {
         return;
     }
+#if 0
+    // makes big problems on zaurus!
     QString link;
     QDataStream stream( data, IO_ReadOnly );
     stream >> link;
@@ -198,4 +204,5 @@ void Doc_DirLister::systemMsg(const QCString &msg, const QByteArray &data)
         setStartPath("");
         emit sig_reloadDir();
     }
+#endif
 }
