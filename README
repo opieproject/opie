@@ -19,7 +19,7 @@ or in that directory.
 
 Set QTDIR to point to your qt/embedded source tree, such as:
 
-export QTDIR=/opt/qt
+export QTDIR=/opt/qt-2.3.7
 
 Then you need to do 
 export OPIEDIR=`pwd`
