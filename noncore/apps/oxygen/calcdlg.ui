@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>241</width>
+            <width>237</width>
             <height>318</height>
         </rect>
     </property>
@@ -76,7 +76,7 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>chemical Formula</string>
+                            <string>Chemical Formula</string>
                         </property>
                     </widget>
                     <widget>

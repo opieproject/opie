@@ -43,7 +43,6 @@ OxydataWidget::OxydataWidget(QWidget *parent) : QWidget(parent)
     middle->setFont( bf );
 
     DataTable = new OxydataTable( 9,2, this );
-    //DataTable->setColumnWidth ( 1 , ( parent->width())-10 );
     setTable();
 
     qgrid->addWidget( hbox,0,0 );
@@ -83,7 +82,16 @@ void OxydataWidget::setTable() const
     DataTable->setText( 6,0, tr( "Density" )) ;
     DataTable->setText( 7,0, tr( "Boilingpoint" ) );
     DataTable->setText( 8,0, tr( "Meltingpoint" ) );
+}
 
+void OxydataWidget::setLayout()
+{
+#warning this is not working and I have no idea why!
+//    DataTable->setColumnWidth ( 0 , this->width()/2 );
+//    DataTable->setColumnWidth ( 1 , this->width()/2 );
+
+    DataTable->setColumnWidth ( 0 , 110 );
+    DataTable->setColumnWidth ( 1 , 110 );
 }
 
 OxydataTable::OxydataTable(int numRows, int numCols, QWidget *parent,

@@ -49,6 +49,7 @@ PSEWidget::PSEWidget() : QWidget()
     
     oxyDW = new OxydataWidget(this);
     oxyDW->setElement( 0 );
+    oxyDW->setLayout();
 
     vlay->addLayout( grid );
     vlay->addWidget( oxyDW );

@@ -34,10 +34,11 @@ class OxydataWidget : public QWidget
         OxydataWidget(QWidget *parent=0);
 
         QLabel *left, *middle, *right;
+        void setLayout();
 
     private:
-        OxydataTable *DataTable;
         void setTable() const;
+        OxydataTable *DataTable;
         
     public slots:
         void setElement( int );
