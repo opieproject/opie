@@ -279,7 +279,6 @@ QString PIconView::nextFileName(bool &isDir)const
         return QString::null;
     IconViewItem* it = static_cast<IconViewItem*>( _it );
     isDir = it->isDir();
-    m_view->setCurrentItem(_it);
     return it->path();
 }
 
@@ -293,7 +292,6 @@ QString PIconView::prevFileName(bool &isDir)const{
         return QString::null;
     IconViewItem* it = static_cast<IconViewItem*>( _it );
     isDir = it->isDir();
-    m_view->setCurrentItem(_it);
     return it->path();
 }
 
@@ -479,9 +477,10 @@ void PIconView::slotShowNext()
 {
     bool isDir = false;
     QString name = nextFileName(isDir);
-    if (isDir) return;
     if (name.isEmpty()) return;
-    odebug << "Show next: " << name << oendl;
+    if (isDir) return;
+    /* if we got a name we have a next item */
+    m_view->setCurrentItem(m_view->currentItem()->nextItem());
     slotShowImage(name);
 }
 
@@ -489,8 +488,10 @@ void PIconView::slotShowPrev()
 {
     bool isDir = false;
     QString name = prevFileName(isDir);
-    if (isDir) return;
     if (name.isEmpty()) return;
+    if (isDir) return;
+    /* if we got a name we have a prev item */
+    m_view->setCurrentItem(m_view->currentItem()->prevItem());
     slotShowImage(name);
 }
 

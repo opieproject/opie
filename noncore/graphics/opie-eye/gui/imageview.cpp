@@ -43,6 +43,8 @@ void ImageView::initKeys()
     lst.append( Opie::Core::OKeyPair::downArrowKey() );
     lst.append( Opie::Core::OKeyPair::leftArrowKey() );
     lst.append( Opie::Core::OKeyPair::rightArrowKey() );
+    lst.append( Opie::Core::OKeyPair(Qt::Key_N,0));
+    lst.append( Opie::Core::OKeyPair(Qt::Key_P,0));
 
     m_viewManager = new Opie::Core::OKeyConfigManager(m_cfg, "image_view_keys",
                                                     lst, false,this, "image_view_keys" );

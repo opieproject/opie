@@ -63,8 +63,8 @@ private:
     bool autoRotate;
     bool autoScale;
     bool zoomerOn;
-    QToolButton*rotateButton;
-
+    QToolButton*rotateButton,*upButton,*fsButton,*viewModeButton;
+    QToolButton*nextButton,*prevButton;
 
 private slots:
     void slotConfig();

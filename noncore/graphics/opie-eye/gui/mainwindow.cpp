@@ -64,16 +64,16 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
 
     m_stack->forceMode(Opie::Ui::OWidgetStack::NoForce);
 
-    QToolButton *btn = new QToolButton( bar );
-    btn->setIconSet(  Resource::loadIconSet( "up" ) );
-    connect( btn, SIGNAL(clicked()),
+    upButton = new QToolButton( bar );
+    upButton->setIconSet(  Resource::loadIconSet( "up" ) );
+    connect( upButton, SIGNAL(clicked()),
              m_view, SLOT(slotDirUp()) );
 
-    btn = new PFileSystem( bar );
-    connect( btn, SIGNAL( changeDir( const QString& ) ),
+    fsButton = new PFileSystem( bar );
+    connect( fsButton, SIGNAL( changeDir( const QString& ) ),
              m_view, SLOT(slotChangeDir( const QString& ) ) );
 
-    btn = new QToolButton( bar );
+    QToolButton*btn = new QToolButton( bar );
     btn->setIconSet( Resource::loadIconSet( "edit" ) );
     connect( btn, SIGNAL(clicked()),
              m_view, SLOT(slotRename()) );
@@ -91,14 +91,26 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
              m_view, SLOT(slotTrash() ) );
 
 
-    btn = new ViewModeButton( bar );
-    connect( btn, SIGNAL(changeMode(int)),
+    viewModeButton = new ViewModeButton( bar );
+    connect( viewModeButton, SIGNAL(changeMode(int)),
              m_view, SLOT(slotChangeMode(int)));
 
     btn = new QToolButton( bar );
     btn->setIconSet( Resource::loadIconSet( "SettingsIcon" ) );
     connect( btn, SIGNAL(clicked() ),
              this, SLOT(slotConfig() ) );
+
+
+
+    prevButton = new QToolButton(bar);
+    prevButton->setIconSet( Resource::loadIconSet( "back" ) );
+    connect(prevButton,SIGNAL(clicked()),m_view,SLOT(slotShowPrev()));
+    prevButton->hide();
+
+    nextButton = new QToolButton(bar);
+    nextButton->setIconSet( Resource::loadIconSet( "forward" ) );
+    connect(nextButton,SIGNAL(clicked()),m_view,SLOT(slotShowNext()));
+    nextButton->hide();
 
     rotateButton = new QToolButton(bar);
     rotateButton->setIconSet( Resource::loadIconSet( "rotate" ) );
@@ -284,6 +296,11 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
         initInfo();
     }
     m_info->setPath( inf );
+    prevButton->hide();
+    nextButton->hide();
+    upButton->hide();
+    fsButton->hide();
+    viewModeButton->hide();
     m_stack->raiseWidget( ImageInfo );
 }
 
@@ -292,6 +309,11 @@ void PMainWindow::slotDisplay( const QString& inf ) {
         initDisp();
     }
     m_disp->setImage( inf );
+    prevButton->show();
+    nextButton->show();
+    upButton->hide();
+    fsButton->hide();
+    viewModeButton->hide();
     m_stack->raiseWidget( ImageDisplay );
 }
 
@@ -316,6 +338,11 @@ void PMainWindow::closeEvent( QCloseEvent* ev ) {
 }
 
 void PMainWindow::raiseIconView() {
+    prevButton->hide();
+    nextButton->hide();
+    upButton->show();
+    fsButton->show();
+    viewModeButton->show();
     m_stack->raiseWidget( IconView );
 }
 
