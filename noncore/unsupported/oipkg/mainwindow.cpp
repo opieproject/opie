@@ -405,7 +405,6 @@ void MainWindow::setDocument(const QString &fileName)
   QCopEnvelope e("QPE/System", "linkChanged(QString)");
   QString lf = QString::null;
   e << lf;
- 	exit;
 }
 
 
