@@ -20,6 +20,8 @@
 #ifndef SINGLETON_H
 #define SINGLETON_H
 
+#include "threadutil.h"
+
 template <class Product>
 struct DefaultSingletonCreator
 {
@@ -42,8 +44,11 @@ class Singleton
 public:
     static T &self()
     {
-        if ( !s_self )
-            s_self = Creator<T>::create();
+        if ( !s_self ) {
+            ThreadUtil::AutoLock lock( s_guard );
+            if ( !s_self )
+                s_self = Creator<T>::create();
+        }
         return *s_self;
     }
 
@@ -58,10 +63,14 @@ private:
     Singleton<T, Creator> &operator=( const Singleton<T, Creator> &rhs );
 
     static T *s_self;
+    static ThreadUtil::Mutex s_guard;
 };
 
 template <class T, template <class> class Creator>
 T *Singleton<T, Creator>::s_self = 0;
+
+template <class T, template <class> class Creator>
+ThreadUtil::Mutex Singleton<T, Creator>::s_guard;
 
 #endif // SINGLETON_H
 /* vim: et sw=4 ts=4
