@@ -127,9 +127,9 @@ void MultiauthMainWindow::proceed() {
             {
                 message2->setText( "<center><p>" + tr("Be careful: if this was not a <b>simulation</b>, you would have to go back through all the steps now.") + "</p></center>" );
                 message2->show();
+            }
         }
     }
-}
 }
 
 /** When we don't show explanatory screens and we succeed authentication,
