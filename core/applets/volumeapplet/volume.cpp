@@ -727,7 +727,7 @@ VolumeApplet::VolumeApplet( QWidget *parent, const char *name )
     : QWidget( parent, name )
 {
   setFixedWidth ( AppLnk::smallIconSize()  );
-  setFixedHeight ( AppLnk::smallIconSize() );
+  setFixedHeight ( AppLnk::smallIconSize()+4 );
 
   m_pixmap = new QPixmap ( Resource::loadPixmap ( "volume" ));
   m_dialog = new VolumeControl ( this, true, this, "volumecontrol" );
