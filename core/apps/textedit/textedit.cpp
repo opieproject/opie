@@ -588,7 +588,7 @@ void TextEdit::fileOpen() {
     QString str = OFileDialog::getOpenFileName( 2,
                                                 QPEApplication::documentDir(),
                                                 QString::null, map);
-    if(!str.isEmpty() )
+    if( QFile(str).exists())
         openFile( str );
     else
         updateCaption();
