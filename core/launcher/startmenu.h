@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -23,9 +23,11 @@
 
 #include <qstring.h>
 #include <qlist.h>
+#include <qintdict.h>
 #include <qlabel.h>
 #include <qpopupmenu.h>
 
+#include <qpe/menuappletinterface.h>
 
 class AppLnkSet;
 class AppLnk;
@@ -37,6 +39,19 @@ public:
 protected:
     void keyPressEvent( QKeyEvent *e );
 };
+
+class QLibrary;
+
+struct MenuApplet
+{
+#ifndef QT_NO_COMPONENT
+    QLibrary *library;
+#endif
+    MenuAppletInterface *iface;
+    int id;
+    QPopupMenu *popup;
+};
+            
 
 class StartMenu : public QLabel {
     Q_OBJECT
@@ -53,15 +68,20 @@ public slots:
     void launch( );
     void loadOptions( );
     void createMenu( );
+    void reloadApps( );
+    void reloadApplets( );
 
 protected slots:
     void itemSelected( int id );
 
 protected:
     virtual void mousePressEvent( QMouseEvent * );
+    virtual void timerEvent ( QTimerEvent * );
     
 private:
     bool loadMenu( AppLnkSet *folder, QPopupMenu *menu );
+    void loadApplets( );
+    void clearApplets( );
 
 private:
     bool useWidePopupMenu;
@@ -71,6 +91,13 @@ private:
     QString startButtonPixmap;
 
     AppLnkSet *apps;
+
+	QIntDict<MenuApplet> applets;
+	QIntDict<QPopupMenu> tabdict;
+	
+//    QValueList<MenuApplet> appletList;
+    int safety_tid;
+    int sepId;
 };
 
 #endif // __START_MENU_H__

@@ -191,11 +191,15 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
 
 void TaskBar::setStatusMessage( const QString &text )
 {
-    label->setText( text );
-    stack->raiseWidget( label );
-    if ( sysTray && ( label->fontMetrics().width( text ) > label->width() ) )
-  sysTray->hide();
-    clearer->start( 3000 );
+    if ( !text.isEmpty() ) {
+	label->setText( text );
+	stack->raiseWidget( label );
+	if ( sysTray && ( label->fontMetrics().width( text ) > label->width() ) )
+	    sysTray->hide();
+	clearer->start( 3000, TRUE );
+    } else {
+	clearStatusBar();
+    }
 }
 
 void TaskBar::clearStatusBar()
@@ -212,7 +216,7 @@ void TaskBar::startWait()
     waitTimer->start( 10 * 1000, true );
 }
 
-void TaskBar::stopWait(const QString& app)
+void TaskBar::stopWait(const QString& /*app*/)
 {
     waitTimer->stop();
     //mru->addTask(sm->execToLink(app));
@@ -273,9 +277,12 @@ void TaskBar::receive( const QCString &msg, const QByteArray &data )
 		inputMethods->showInputMethod();
 	} else if ( msg == "reloadInputMethods()" ) {
 		inputMethods->loadInputMethods();
+	} else if ( msg == "reloadApps()" ) {
+		sm->reloadApps();    			
 	} else if ( msg == "reloadApplets()" ) {
 		sysTray->clearApplets();
 		sysTray->addApplets();
+		sm->reloadApplets();
 	} else if ( msg == "soundAlarm()" ) {
 		Desktop::soundAlarm();
 	}

@@ -380,6 +380,9 @@ void DesktopApplication::desktopMessage( const QCString &msg, const QByteArray &
   else if ( msg == "suspend()" ) {
     emit power();
   }
+  else if ( msg == "home()" ) {
+	qpedesktop-> home ( ); 
+  }
 #endif
 }
 
@@ -717,15 +720,20 @@ void Desktop::raiseLauncher()
   QString tempItem;
   tempItem = cfg.readEntry( "Middle", "Home" );
   if ( tempItem == "Home" || tempItem.isEmpty() ) {
-    if ( isVisibleWindow( launcher->winId() ) )
-      launcher->nextView();
-    else
-      launcher->raise();
+  	home ( );
   }
   else {
     QCopEnvelope e( "QPE/System", "execute(QString)" );
     e << tempItem;
   }
+}
+
+void Desktop::home ( )
+{	
+    if ( isVisibleWindow( launcher->winId() ) )
+      launcher->nextView();
+    else
+      launcher->raise();
 }
 
 void Desktop::executeOrModify( const QString& appLnkFile )
@@ -836,6 +844,8 @@ void Desktop::execAutoStart()
 void Desktop::togglePower()
 {
   static bool excllock = false;
+
+  qDebug ( "togglePower (locked == %d)", excllock ? 1 : 0 );
 
   if ( excllock )
     return ;

@@ -118,6 +118,8 @@ public slots:
 	void terminateServers();
 	void rereadVolumes();
 
+	void home ( );
+
 protected:
 	void executeOrModify( const QString& appLnkFile );
 	void styleChange( QStyle & );

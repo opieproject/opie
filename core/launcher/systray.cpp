@@ -102,7 +102,7 @@ void SysTray::addApplets()
 	    continue;
 	TaskbarAppletInterface *iface = 0;
 	QLibrary *lib = new QLibrary( path + "/" + *it );
-	if ( lib->queryInterface( IID_TaskbarApplet, (QUnknownInterface**)&iface ) == QS_OK ) {
+	if (( lib->queryInterface( IID_TaskbarApplet, (QUnknownInterface**)&iface ) == QS_OK ) && iface ) {
 	    TaskbarApplet *applet = new TaskbarApplet;
 	    applets[napplets++] = applet;
 	    applet->library = lib;
