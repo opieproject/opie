@@ -76,7 +76,7 @@ bool DocLnkSearch::searchFile( AppLnk *app )
 
 void DocLnkSearch::insertItem( void *rec )
 {
-	new DocLnkItem( this, (DocLnk*)rec );
+	(void)new DocLnkItem( this, (DocLnk*)rec );
 	_resultCount++;
 }
 

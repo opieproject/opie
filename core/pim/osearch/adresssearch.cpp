@@ -14,7 +14,7 @@
 
 #include <qstring.h>
 #include <qiconset.h>
-#include <qwhatsthis.h>
+//#include <qwhatsthis.h>
 #include <qpe/resource.h>
 #include <opie/ocontactaccess.h>
 
@@ -26,6 +26,7 @@ AdressSearch::AdressSearch(QListView* parent, QString name):
 	_contacts = 0;
 	QIconSet is = Resource::loadIconSet( "addressbook/AddressBook" );
 	setPixmap( 0, is.pixmap( QIconSet::Small, true ) );
+//	QWhatsThis::add( this, QObject::tr("Search the addressbook") );
 /*	QPixmap pix = Resource::loadPixmap( "addressbook/AddressBook" );
 	QImage img = pix.convertToImage();
 	img.smoothScale( 14, 14 );
@@ -48,7 +49,7 @@ int AdressSearch::search()
 {
 	ORecordList<OContact> results = _contacts->matchRegexp(_search);
 	for (uint i = 0; i < results.count(); i++) {
-		new ContactItem( this, new OContact( results[i] ));
+		(void)new ContactItem( this, new OContact( results[i] ));
 	}
 	return results.count();
 }

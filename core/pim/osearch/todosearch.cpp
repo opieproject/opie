@@ -66,7 +66,7 @@ void TodoSearch::insertItem( void *rec )
 	OTodo *todo = (OTodo*)rec;
 	if (!actionShowCompleted->isOn() &&
 		todo->isCompleted() ) return;
-	new TodoItem( this, todo );
+	(void)new TodoItem( this, todo );
 	_resultCount++;
 }
 

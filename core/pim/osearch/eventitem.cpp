@@ -16,6 +16,7 @@
 #include <qpixmap.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
+//#include <qwhatsthis.h>
 #include <opie/oevent.h>
 
 EventItem::EventItem(OListViewItem* parent, OEvent *event)
@@ -62,6 +63,7 @@ void EventItem::setIcon()
 	switch ( _event->lastHitField() ) {
 	case -1:
 		icon = Resource::loadPixmap( "reset" );
+//		QWhatsThis::add( icon, QObject::tr("Enter your search terms here") );
 		break;
 	case Qtopia::DatebookDescription:
 		icon = Resource::loadPixmap( "osearch/summary" );

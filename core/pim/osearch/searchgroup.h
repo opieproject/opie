@@ -40,7 +40,7 @@ protected:
 	QRegExp _search;
 	QRegExp _lastSearch;
 	QString _name;
-	bool loaded;
+	bool loaded : 1;
 	int _resultCount;
 private:
 	int realSearch();

@@ -57,7 +57,7 @@ int AppLnkSearch::search()
 
 void AppLnkSearch::insertItem( void *rec )
 {
-	new AppLnkItem( this, (AppLnk*)rec );
+	(void)new AppLnkItem( this, (AppLnk*)rec );
 	_resultCount++;
 }
 
