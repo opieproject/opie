@@ -21,16 +21,7 @@
 #include "interface.h"
 
 #include <qpe/qpeapplication.h> 
+#include <opie/oapplicationfactory.h>
 
-int main(int argc, char **argv)
-{
-   QPEApplication app(argc,argv);
+OPIE_EXPORT_APP( OApplicationFactory<ParaShoot> )
 
-   QPEApplication::grabKeyboard();
-
-   ParaShoot m;
-   QPEApplication::setInputMethodHint( &m, QPEApplication::AlwaysOff );
-   app.showMainWidget(&m);
- 
-   return app.exec();
-}

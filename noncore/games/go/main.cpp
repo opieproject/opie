@@ -22,14 +22,7 @@
 
 #include <qpe/qpeapplication.h>
 
-#include <stdio.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char ** argv)
-{
-    QPEApplication app( argc, argv );
-    
-    GoMainWidget m;
-    m.setCaption( GoWidget::tr("Go") );
-    app.showMainWidget( &m );
-    return app.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<GoMainWidget> )
+

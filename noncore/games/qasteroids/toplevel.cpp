@@ -69,31 +69,34 @@ SLevel levels[MAX_LEVELS] =
     { 5, 1.0 }
 };
 
-const char *soundEvents[] = 
+const char *soundEvents[] =
 {
     "ShipDestroyed",
     "RockDestroyed",
     0
 };
 
-const char *soundDefaults[] = 
+const char *soundDefaults[] =
 {
     "Explosion.wav",
     "ploop.wav",
     0
 };
 
- 
-KAstTopLevel::KAstTopLevel( QWidget *parent, const char *_name )
-    : QMainWindow( parent, _name )
+
+KAstTopLevel::KAstTopLevel( QWidget *parent, const char *_name, WFlags fl )
+    : QMainWindow( parent, _name, fl )
 {
     setCaption( tr("Asteroids") );
+
+    QPEApplication::grabKeyboard();
+
     QWidget *border = new QWidget( this );
     border->setBackgroundColor( black );
     setCentralWidget( border );
 
     QVBoxLayout *borderLayout = new QVBoxLayout( border );
-    
+
     QWidget *mainWin = new QWidget( border );
     borderLayout->addWidget( mainWin, 2, AlignHCenter );
 
@@ -257,7 +260,7 @@ KAstTopLevel::KAstTopLevel( QWidget *parent, const char *_name )
     actions.insert( Qt::Key_P, Pause );
 
 
-    struct utsname name; /* check for embedix kernel running on the zaurus, if 
+    struct utsname name; /* check for embedix kernel running on the zaurus, if
 			    lineo change string, this break
 			 */
     if (uname(&name) != -1) {
@@ -395,7 +398,7 @@ void KAstTopLevel::keyReleaseEvent( QKeyEvent *event )
                 return;
             }
             break;
-	
+
 	case NewGame:
 	    slotNewGame();
 	    break;

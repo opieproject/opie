@@ -22,12 +22,7 @@
 
 #include <qpe/qpeapplication.h>
 
-int main( int argc, char **argv )
-{
-    QPEApplication a(argc,argv);
+#include <opie/oapplicationfactory.h>
 
-    QTetrix *tetrix = new QTetrix;
-    a.showMainWidget(tetrix);
+OPIE_EXPORT_APP( OApplicationFactory<QTetrix> )
 
-    return a.exec();
-}

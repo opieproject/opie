@@ -1,6 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on release
-DESTDIR		= $(OPIEDIR)/bin
+CONFIG		= qt warn_on release quick-app
 HEADERS		= wordgame.h
 SOURCES		= main.cpp \
 		  wordgame.cpp
@@ -9,5 +7,6 @@ TARGET		= wordgame
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
+
 
 include ( $(OPIEDIR)/include.pro )

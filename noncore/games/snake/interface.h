@@ -18,6 +18,7 @@
 **
 **********************************************************************/
 #include <qmainwindow.h>  
+#include <qpe/qpeapplication.h>
 #include <qcanvas.h>
 #include <qlabel.h>
 
@@ -33,9 +34,11 @@ class SnakeGame : public QMainWindow {
 public:
     SnakeGame(QWidget* parent=0, const char* name=0, WFlags f=0);
     ~SnakeGame();
-
+    
     void clear(); 
     void createTargets();
+
+    static QString appName() { return QString::fromLatin1("snake"); }
 
 protected:
     virtual void keyPressEvent(QKeyEvent*); 

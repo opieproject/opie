@@ -353,7 +353,7 @@ void MineField::setup( int level )
 	minecount = 66 ;
 	break;
     }
-    mines = new (Mine*)[numRows*numCols];
+    mines = new Mine*[numRows*numCols];
     for ( i = 0; i < numCols*numRows; i++ )
 	mines[i] = new Mine( this );
 

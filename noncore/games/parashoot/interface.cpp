@@ -22,6 +22,7 @@
 #include "man.h"
 
 #include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
 
 #include <qlabel.h>
 #include <qmessagebox.h>
@@ -29,13 +30,15 @@
 #include <qstyle.h>
 #include <qpe/qpetoolbar.h>
 #include <qtoolbutton.h>
- 
+
 ParaShoot::ParaShoot(QWidget* parent, const char* name, WFlags f) :
     QMainWindow(parent,name,f),
     canvas(232, 258),
     fanfare("level_up"),
     score(0)
 {
+    QPEApplication::grabKeyboard();
+    QPEApplication::setInputMethodHint(this, QPEApplication::AlwaysOff );
     canvas.setAdvancePeriod(80);
     QPixmap bg = Resource::loadPixmap("parashoot/sky");
     canvas.setBackgroundPixmap(bg);
@@ -59,14 +62,14 @@ ParaShoot::ParaShoot(QWidget* parent, const char* name, WFlags f) :
     levelscore->setAlignment( AlignRight | AlignVCenter | ExpandTabs );
     toolbar->setStretchableWidget( levelscore );
     showScore(0,0);
-    
+
     setCentralWidget(pb);
 
     autoDropTimer = new QTimer(this);
     connect (autoDropTimer, SIGNAL(timeout()), this, SLOT(play()) );
-  
+
     pauseTimer = new QTimer(this);
-    connect(pauseTimer, SIGNAL(timeout()), this, SLOT(wait()) ); 
+    connect(pauseTimer, SIGNAL(timeout()), this, SLOT(wait()) );
 
     setFocusPolicy(StrongFocus);
 
@@ -91,7 +94,7 @@ void ParaShoot::showScore( int score, int level )
 void ParaShoot::newGame()
 {
     clear();
-    if (pauseTimer->isActive()) 
+    if (pauseTimer->isActive())
 	pauseTimer->stop();
     clear();
     Man::setManCount(0);
@@ -119,7 +122,7 @@ void ParaShoot::clear()
 //   QCanvasItem* item;
    QCanvasItemList l = canvas.allItems();
    for (QCanvasItemList::Iterator it=l.begin(); it!=l.end(); ++it) {
-        delete *it; 
+        delete *it;
    }
 }
 
@@ -127,7 +130,7 @@ void ParaShoot::gameOver()
 {
     QCanvasItem* item;
     QCanvasItemList l = canvas.allItems();
-    for (QCanvasItemList::Iterator it=l.begin(); it!=l.end(); ++it) { 
+    for (QCanvasItemList::Iterator it=l.begin(); it!=l.end(); ++it) {
          item = *it;
          if ((item->rtti()==1500) || (item->rtti()==1600) || item->rtti()==1900)
          item->setAnimated(false);
@@ -138,13 +141,13 @@ void ParaShoot::gameOver()
     int shots = Bullet::getShotCount();
 
     int shotsFired = cannon->shotsFired();
-    if ( shotsFired == 0 ) 
+    if ( shotsFired == 0 )
 	shotsFired = 1;
     QCanvasText* gameover = new QCanvasText(
 		     tr( "       GAME OVER!\n"
 			 "       Your Score:  %1\n"
 			 " Parachuters Killed: %2\n"
-			 "        Accuracy: %3% " ).arg(score).arg(shots).arg(shots * 100 / shotsFired ), 
+			 "        Accuracy: %3% " ).arg(score).arg(shots).arg(shots * 100 / shotsFired ),
 		                     &canvas);
     gameover->setColor(red);
     gameover->setFont( QFont("times", 18, QFont::Bold) );
@@ -163,7 +166,7 @@ void ParaShoot::wait()
 }
 
 void ParaShoot::play()
-{   
+{
      if (Man::getManCount() < nomen ) {
           new Man(&canvas);
      }
@@ -177,13 +180,13 @@ void ParaShoot::increaseScore(int x)
 {
     score += x;
     if ( score / 150 != (score-x) / 150 )
-       levelUp(); 
+       levelUp();
     showScore(level,score);
 }
 
 void ParaShoot::levelUp()
 {
-    level++; 
+    level++;
     int stage = level % 3;
     switch(stage) {
       case 0:
@@ -193,11 +196,11 @@ void ParaShoot::levelUp()
 	break;
       case 1:
 	new Helicopter(&canvas);
-	break; 
+	break;
       case 2:
 	moveFaster();
 	fanfare.play();
-	break; 
+	break;
       default: return;
     }
 }
@@ -216,7 +219,7 @@ void ParaShoot::keyPressEvent(QKeyEvent* event)
     if (gamestopped) {
 	if (waitover)
 	    newGame();
-	else 
+	else
 	    return;
     } else {
 	switch(event->key()) {

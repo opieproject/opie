@@ -21,14 +21,8 @@
 #include "wordgame.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char ** argv )
-{
-    QPEApplication a( argc, argv );
 
-    WordGame mw;
-    //QPEApplication::setInputMethodHint( &mw, QPEApplication::AlwaysOff );
-    a.showMainWidget(&mw);
+OPIE_EXPORT_APP( OApplicationFactory<WordGame> )
 
-    return a.exec();
-}

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,14 +20,14 @@
 
 #include "mindbreaker.h"
 
-#include <qpe/qpeapplication.h>
+#include <qtopia/qpeapplication.h>
 
 int main( int argc, char **argv )
 {
     QPEApplication a( argc, argv );
 
-    MindBreaker w(0, "new window");
-    w.setCaption("Mind Breaker");
+    MindBreaker w;
+    w.setCaption(MindBreaker::tr("Mind Breaker"));
     QPEApplication::setInputMethodHint( &w, QPEApplication::AlwaysOff );
     a.showMainWidget(&w);
 

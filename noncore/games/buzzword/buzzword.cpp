@@ -68,7 +68,7 @@ void BuzzItem::flip()
 	emit clicked(_row, _column);
 }
 
-BuzzWord::BuzzWord() : QMainWindow(0)
+BuzzWord::BuzzWord(QWidget* parent, const char* name, WFlags fl ) : QMainWindow( parent,  name, fl )
 {
 	setCaption(tr("buZzword"));
 

@@ -21,16 +21,7 @@
 #include "toplevel.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char *argv[] )
-{
-    QPEApplication app( argc, argv );
 
-    QPEApplication::grabKeyboard();
-
-    KAstTopLevel *mainWidget = new KAstTopLevel();
-    app.showMainWidget( mainWidget );
-
-    app.exec();
-}
-
+OPIE_EXPORT_APP( OApplicationFactory<KAstTopLevel> )

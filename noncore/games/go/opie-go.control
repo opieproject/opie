@@ -1,8 +1,8 @@
 Package: opie-go
-Files: bin/go apps/Games/go.desktop pics/go
+Files: plugins/application/libgo.so* bin/go apps/Games/go.desktop pics/go
 Priority: optional
 Section: opie/games
-Maintainer: Opie Project <opie@handhelds.org>
+Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal
 Description: The game of Go

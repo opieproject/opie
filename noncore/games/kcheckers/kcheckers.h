@@ -29,7 +29,8 @@ class KCheckers:public QMainWindow
 {
   Q_OBJECT
   public:
-    KCheckers();
+    static QString appName() { return QString::fromLatin1("kcheckers"); }
+    KCheckers(QWidget *parent, const char* name, WFlags fl);
 
   protected:
     void closeEvent(QCloseEvent*);

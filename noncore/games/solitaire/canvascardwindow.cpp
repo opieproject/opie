@@ -37,6 +37,7 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     cardGame(NULL)
 {
     setIcon( Resource::loadPixmap( "cards" ) );
+    setCaption(tr("Patience"));
 
     // Create Playing Area for Games
     if ( QPixmap::defaultDepth() < 12 ) {
@@ -45,7 +46,7 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
   canvas.setBackgroundColor(QColor(0x08, 0x98, 0x2D));
     } else {
         QPixmap bg;
-  bg.convertFromImage( Resource::loadImage( "table_pattern" ), ThresholdDither );  
+  bg.convertFromImage( Resource::loadImage( "table_pattern" ), ThresholdDither );
         canvas.setBackgroundPixmap(bg);
     }
 
@@ -66,7 +67,7 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     file->insertItem(tr("Harp"), this, SLOT(initHarp()), CTRL+Key_F);
     file->insertItem(tr("Teeclub"), this, SLOT(initTeeclub()), CTRL+Key_F);
     menu->insertItem(tr("&Game"), file);
-    
+
     menu->insertSeparator();
 
     settings = new QPopupMenu;
@@ -91,7 +92,7 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     file->insertItem(tr("Harp"), this, SLOT(initHarp()));
     file->insertItem(tr("Teeclub"), this, SLOT(initTeeclub()));
     menu->insertItem(tr("Play"), file);
-    
+
     menu->insertSeparator();
 
     settings = new QPopupMenu;
@@ -118,7 +119,7 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
     if ( gameType == 0 ) {
   cardGame = new PatienceCardGame( &canvas, snapOn, this );
   cardGame->setNumberToDraw(drawThree ? 3 : 1);
-  
+
   setCaption(tr("Patience"));
   setCentralWidget(cardGame);
   cardGame->readConfig( cfg );
@@ -186,7 +187,7 @@ void CanvasCardWindow::resizeEvent(QResizeEvent *)
 
 void CanvasCardWindow::initPatience()
 {
-    // Create New Game 
+    // Create New Game
     if ( cardGame )
   delete cardGame;
     cardGame = new PatienceCardGame( &canvas, snapOn, this );
@@ -253,13 +254,13 @@ void CanvasCardWindow::initTeeclub()
         delete cardGame;
     }
     cardGame = new TeeclubCardGame( &canvas, snapOn, this );
-    cardGame->setNumberToDraw(1); 
+    cardGame->setNumberToDraw(1);
     gameType = 4;
     setCaption(tr("Teeclub"));
     setCentralWidget(cardGame);
     cardGame->newGame();
     setCardBacks();
-}   
+}
 
 
 void CanvasCardWindow::snapToggle()

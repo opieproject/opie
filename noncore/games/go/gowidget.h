@@ -31,7 +31,8 @@ class GoMainWidget : public QMainWindow
 {
     Q_OBJECT
 public:
-    GoMainWidget( QWidget *parent=0, const char* name=0);
+    static QString appName() { return QString::fromLatin1("go"); }
+    GoMainWidget( QWidget *parent=0, const char* name=0, WFlags fl = 0);
 protected:
     void resizeEvent( QResizeEvent * );
 private:

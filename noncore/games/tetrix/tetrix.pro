@@ -1,6 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on release
-DESTDIR		= $(OPIEDIR)/bin
+CONFIG		= qt warn_on release quick-app
 HEADERS		= gtetrix.h \
 		    qtetrix.h \
 		    qtetrixb.h \
@@ -17,5 +15,8 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lstdc++
 INTERFACES	= 
 TARGET		= tetrix
+
+
+
 
 include ( $(OPIEDIR)/include.pro )

@@ -21,6 +21,7 @@
 #include "interface.h"
 
 #include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
 
 #include <qpe/qpetoolbar.h>
 #include <qtoolbutton.h>
@@ -33,6 +34,7 @@ SnakeGame::SnakeGame(QWidget* parent, const char* name, WFlags f) :
     canvas(232, 258)
 {
     setCaption( tr("Snake") );
+    QPEApplication::setInputMethodHint(this, QPEApplication::AlwaysOff );
     QPixmap bg = Resource::loadPixmap("snake/grass");
     canvas.setBackgroundPixmap(bg);
     canvas.setUpdatePeriod(100);

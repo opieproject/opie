@@ -1,11 +1,10 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= buzzword.h 
 SOURCES		= buzzword.cpp main.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-DESTDIR     = $(OPIEDIR)/bin
 LIBS        += -lqpe
-TARGET		= buzzword 
+
+TARGET 		= buzzword
 
 include ( $(OPIEDIR)/include.pro )

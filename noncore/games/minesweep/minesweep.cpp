@@ -21,6 +21,7 @@
 #include "minesweep.h"
 #include "minefield.h"
 
+#include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
@@ -155,12 +156,12 @@ static const char * dead_xpm[] = {
 
 class ResultIndicator : private QLabel
 {
-public:   
+public:
     static void showResult( QWidget *ref, bool won );
-private:    
+private:
     ResultIndicator( QWidget *parent, const char *name, WFlags f)
 	:QLabel( parent, name, f ) {}
-    
+
     void timerEvent( QTimerEvent *);
     void center();
     bool twoStage;
@@ -170,7 +171,7 @@ private:
 void ResultIndicator::showResult( QWidget *ref, bool won )
 {
     ResultIndicator *r = new ResultIndicator( ref, 0, WStyle_Customize | WStyle_Tool | WType_TopLevel );
-				
+
     r->setAlignment( AlignCenter );
     r->setFrameStyle( Sunken|StyledPanel );
     if ( won ) {
@@ -195,13 +196,13 @@ void ResultIndicator::center()
 {
     QWidget *w = parentWidget();
 
-    QPoint pp = w->mapToGlobal( QPoint(0,0) ); 
+    QPoint pp = w->mapToGlobal( QPoint(0,0) );
     QSize s = sizeHint()*3;
     pp = QPoint( pp.x() + w->width()/2 - s.width()/2,
 		pp.y() + w->height()/ 2 - s.height()/2 );
 
     setGeometry( QRect(pp, s) );
-    
+
 }
 
 void ResultIndicator::timerEvent( QTimerEvent *te )
@@ -228,7 +229,7 @@ public:
 protected:
     void resizeEvent( QResizeEvent *e ) {
 	field->setAvailableRect( contentsRect());
-	QFrame::resizeEvent(e); 
+	QFrame::resizeEvent(e);
     }
 private:
     MineField *field;
@@ -239,6 +240,7 @@ private:
 MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
 : QMainWindow( parent, name, f )
 {
+    QPEApplication::setInputMethodHint(this, QPEApplication::AlwaysOff );
     srand(::time(0));
     setCaption( tr("Mine Hunt") );
     setIcon( Resource::loadPixmap( "minesweep_icon" ) );
@@ -254,14 +256,14 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     gameMenu->insertItem( tr("Expert"), this, SLOT( expert() ) );
 
     menuBar->insertItem( tr("Game"), gameMenu );
-    
+
     guessLCD = new QLCDNumber( toolBar );
     toolBar->setStretchableWidget( guessLCD );
 
     QPalette lcdPal( red );
     lcdPal.setColor( QColorGroup::Background, QApplication::palette().active().background() );
     lcdPal.setColor( QColorGroup::Button, QApplication::palette().active().button() );
-    
+
 //    guessLCD->setPalette( lcdPal );
     guessLCD->setSegmentStyle( QLCDNumber::Flat );
     guessLCD->setFrameStyle( QFrame::NoFrame );
@@ -271,14 +273,14 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     newGameButton->setPixmap( QPixmap( pix_new ) );
     newGameButton->setFocusPolicy(QWidget::NoFocus);
     connect( newGameButton, SIGNAL(clicked()), this, SLOT(newGame()) );
-    
+
     timeLCD = new QLCDNumber( toolBar );
 //    timeLCD->setPalette( lcdPal );
     timeLCD->setSegmentStyle( QLCDNumber::Flat );
     timeLCD->setFrameStyle( QFrame::NoFrame );
     timeLCD->setNumDigits( 5 ); // "mm:ss"
     timeLCD->setBackgroundMode( PaletteButton );
-    
+
     setToolBarsMovable ( FALSE );
 
     addToolBar( toolBar );
@@ -296,7 +298,7 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     field->setFont( QFont( fnt ) );
     field->setFocus();
     setCentralWidget( mainframe );
-    
+
     connect( field, SIGNAL( gameOver( bool ) ), this, SLOT( gameOver( bool ) ) );
     connect( field, SIGNAL( mineCount( int ) ), this, SLOT( setCounter( int ) ) );
     connect( field, SIGNAL( gameStarted()), this, SLOT( startPlaying() ) );

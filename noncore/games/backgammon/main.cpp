@@ -1,14 +1,8 @@
 #include <qpe/qpeapplication.h>
 #include "backgammon.h"
 
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char** argv )
-{
-	QPEApplication app( argc, argv );
+OPIE_EXPORT_APP( OApplicationFactory<BackGammon> )
 
-	BackGammon* view= new BackGammon();
-	app.showMainWidget(view);
-
-	return app.exec();
-}
 

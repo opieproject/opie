@@ -1,6 +1,4 @@
-DESTDIR		= $(OPIEDIR)/bin
-TEMPLATE	= app
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= amigo.h \
 		  go.h \
 		  goplayutils.h \
@@ -15,5 +13,7 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 TARGET		= go
+
+
 
 include ( $(OPIEDIR)/include.pro )

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -51,15 +51,20 @@ static const int board_width = (panel_width + (bin_margin * 2) + peg_size);
 
 class Peg;
 class QToolButton;
+class QTimer;
 
 class MindBreakerBoard : public QCanvasView // QWidget
 {
     Q_OBJECT
 public:
-    MindBreakerBoard(QCanvas &c, QWidget *parent=0, const char *name=0, int wFlags=0 );
+    MindBreakerBoard(QWidget *parent=0, const char *name=0, int wFlags=0 );
     ~MindBreakerBoard();
 
     void getScore(int *, int *);
+
+    void resizeEvent(QResizeEvent*);
+    void fixSize();
+
 signals:
     void scoreChanged(int, int);
 
@@ -67,13 +72,20 @@ public slots:
     void clear();
     void resetScore();
 
+private slots:
+    void doFixSize();
+
 protected:
     void contentsMousePressEvent(QMouseEvent *);
     void contentsMouseMoveEvent(QMouseEvent *);
     void contentsMouseReleaseEvent(QMouseEvent *);
-    void resizeEvent(QResizeEvent *);
 
 private:
+    QCanvas cnv;
+
+    void readConfig();
+    void writeConfig();
+
     void drawBackground();
     void checkGuess();
     void checkScores();
@@ -100,6 +112,8 @@ private:
 
     int total_turns;
     int total_games;
+
+    QTimer *widthTimer;
 };
 
 class MindBreaker : public QMainWindow // QWidget
@@ -107,9 +121,12 @@ class MindBreaker : public QMainWindow // QWidget
     Q_OBJECT
 public:
     MindBreaker(QWidget *parent=0, const char *name=0, int wFlags=0 );
-
+    static QString appName() { return QString::fromLatin1("mindbreaker"); }
 public slots:
     void setScore(int, int);
+
+protected:
+    void resizeEvent( QResizeEvent * );
 
 private:
     QCanvas canvas;

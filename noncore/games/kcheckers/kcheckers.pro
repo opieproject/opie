@@ -1,5 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= checkers.h \
 		  echeckers.h \
 		  field.h \
@@ -14,7 +13,7 @@ SOURCES		= checkers.cpp \
 INTERFACES	= 
 INCLUDEPATH	+= $(OPIEDIR)/include
 LIBS		+= -lqpe
-DESTDIR		= $(OPIEDIR)/bin
 TARGET		= kcheckers
+
 
 include ( $(OPIEDIR)/include.pro )

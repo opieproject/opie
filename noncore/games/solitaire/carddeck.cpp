@@ -25,7 +25,7 @@
 
 CardDeck::CardDeck(int jokers, int numOfDecks) : numberOfJokers(jokers), numberOfDecks(numOfDecks), deckCreated(FALSE)
 {
-    cards = new (Card *)[getNumberOfCards()];
+    cards = new Card *[getNumberOfCards()];
 }
 
 
