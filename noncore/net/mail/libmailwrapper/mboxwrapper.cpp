@@ -6,8 +6,6 @@
 #include <stdlib.h>
 #include <qpe/global.h>
 
-const MAILLIB::ATYPE MBOXwrapper::wrapperType=MAILLIB::MBOX;
-
 MBOXwrapper::MBOXwrapper(const QString & mbox_dir,const QString&mbox_name)
     : Genericwrapper(),MBOXPath(mbox_dir),MBOXName(mbox_name)
 {
@@ -328,7 +326,7 @@ void MBOXwrapper::statusFolder(folderStat&target_stat,const QString & mailbox)
 
 MAILLIB::ATYPE MBOXwrapper::getType()const
 {
-    return wrapperType;
+    return MAILLIB::A_MBOX;
 }
 
 const QString&MBOXwrapper::getName()const

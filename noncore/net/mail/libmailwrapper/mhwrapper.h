@@ -50,7 +50,6 @@ protected:
     QString buildPath(const QString&p);
     QString MHPath;
     QString MHName;
-    static const MAILLIB::ATYPE wrapperType;
     
     void init_storage();
     void clean_storage();

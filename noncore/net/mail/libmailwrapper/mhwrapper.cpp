@@ -8,8 +8,6 @@
 #include <qpe/global.h>
 #include <opie2/oprocess.h>
 
-const MAILLIB::ATYPE MHwrapper::wrapperType=MAILLIB::A_MH;
-
 MHwrapper::MHwrapper(const QString & mbox_dir,const QString&mbox_name)
     : Genericwrapper(),MHPath(mbox_dir),MHName(mbox_name)
 {
@@ -368,7 +366,7 @@ void MHwrapper::statusFolder(folderStat&target_stat,const QString & mailbox)
 
 MAILLIB::ATYPE MHwrapper::getType()const
 {
-    return wrapperType;
+    return MAILLIB::A_MH;
 }
 
 const QString&MHwrapper::getName()const

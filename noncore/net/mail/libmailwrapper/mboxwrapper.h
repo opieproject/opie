@@ -42,7 +42,6 @@ protected:
     static void deleteMails(mailmbox_folder*f,QList<RecMail> &target);
     QString MBOXPath;
     QString MBOXName;
-    static const MAILLIB::ATYPE wrapperType;
 };
 
 #endif
