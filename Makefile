@@ -38,7 +38,7 @@ APPS=$(LOCALAPPS) addressbook calculator clock datebook \
     todo wordgame embeddedkonsole taskbar sysinfo \
     parashoot snake citytime showimg netsetup tableviewer \
     qipkg mindbreaker go qasteroids qcop fifteen keypebble  today opiemail/converter opiemail \
-    noncore/tictac
+    noncore/tictac noncore/opieftp
 
 DOCS = docs/src/opie-policy
 single: mpegplayer/libmpeg3
