@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.21 2002-09-25 18:15:58 zecke Exp $
+** $Id: qpeapplication.cpp,v 1.22 2002-10-04 00:41:19 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -1219,7 +1219,12 @@ void QPEApplication::internalSetStyle( const QString &style )
 
     else {
         QStyle *sty = 0;
-        QString path = QPEApplication::qpeDir ( ) + "/plugins/styles/lib" + style. lower ( ) + ".so";
+        QString path = QPEApplication::qpeDir ( ) + "/plugins/styles/";
+        
+        if ( style. find ( ".so" ) > 0 )
+	    	path += style;
+	   	else
+	   		path = path + "lib" + style. lower ( ) + ".so"; // compatibility
 
         static QLibrary *lastlib = 0;
         static StyleInterface *lastiface = 0;
@@ -1227,7 +1232,7 @@ void QPEApplication::internalSetStyle( const QString &style )
         QLibrary *lib = new QLibrary ( path );
         StyleInterface *iface = 0;
 
-        if ( lib-> queryInterface ( IID_Style, ( QUnknownInterface ** ) &iface ) == QS_OK )
+        if (( lib-> queryInterface ( IID_Style, ( QUnknownInterface ** ) &iface ) == QS_OK ) && iface )
             sty = iface-> create ( );
 
         if ( sty ) {
