@@ -31,6 +31,11 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 #include <regex.h>
 #include <versekey.h>
 
+void searchCallback( char /*percent*/, void */*userData*/ )
+{
+    qApp->processEvents();
+}
+
 SearchBar::SearchBar( QMainWindow *parent )
     : QToolBar( QString::null, parent, QMainWindow::Top, true )
     , m_currText( 0x0 )
@@ -108,7 +113,8 @@ void SearchBar::slotFind()
 
     // Perform search
     // TODO - implement search callback function to animate wait cursor
-    sword::ListKey results = m_currText->getModule()->Search( m_searchText->text().latin1(), REG_ICASE, 0 );
+    sword::ListKey results = m_currText->getModule()->Search( m_searchText->text().latin1(), 0, REG_ICASE, 0, 0,
+                                                              &searchCallback );
 
     // Process results
     int count = results.Count();

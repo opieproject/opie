@@ -27,10 +27,10 @@ NavBar::NavBar( QMainWindow *parent )
     : QToolBar( QString::null, parent, QMainWindow::Top, true )
 {
     // Initialize UI
-    m_actionPrevChapter = new QAction( tr( "Previous chapter" ), Resource::loadPixmap( "fastback" ),
+    m_actionPrevPage = new QAction( tr( "Previous page" ), Resource::loadPixmap( "fastback" ),
                                        QString::null, 0, this, 0 );
-    m_actionPrevChapter->addTo( this );
-    connect( m_actionPrevChapter, SIGNAL(activated()), this, SIGNAL(prevChapter()) );
+    m_actionPrevPage->addTo( this );
+    connect( m_actionPrevPage, SIGNAL(activated()), this, SIGNAL(prevPage()) );
 
     m_actionPrevVerse = new QAction( tr( "Previous verse" ), Resource::loadPixmap( "back" ),
                                      QString::null, 0, this, 0 );
@@ -46,10 +46,10 @@ NavBar::NavBar( QMainWindow *parent )
     m_actionNextVerse->addTo( this );
     connect( m_actionNextVerse, SIGNAL(activated()), this, SIGNAL(nextVerse()) );
 
-    m_actionNextChapter = new QAction( tr( "Next chapter" ), Resource::loadPixmap( "fastforward" ),
+    m_actionNextPage = new QAction( tr( "Next page" ), Resource::loadPixmap( "fastforward" ),
                                        QString::null, 0, this, 0 );
-    m_actionNextChapter->addTo( this );
-    connect( m_actionNextChapter, SIGNAL(activated()), this, SIGNAL(nextChapter()) );
+    m_actionNextPage->addTo( this );
+    connect( m_actionNextPage, SIGNAL(activated()), this, SIGNAL(nextPage()) );
 
     addSeparator();
 
@@ -72,10 +72,10 @@ NavBar::NavBar( QMainWindow *parent )
 
 void NavBar::navBtnsEnable( bool enabled )
 {
-    m_actionPrevChapter->setEnabled( enabled );
+    m_actionPrevPage->setEnabled( enabled );
     m_actionPrevVerse->setEnabled( enabled );
     m_actionNextVerse->setEnabled( enabled );
-    m_actionNextChapter->setEnabled( enabled );
+    m_actionNextPage->setEnabled( enabled );
     m_scrollRate->setEnabled( enabled );
     m_actionScroll->setEnabled( enabled );
 }

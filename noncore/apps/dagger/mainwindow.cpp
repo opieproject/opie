@@ -73,6 +73,9 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags /*fl*/ )
 
 MainWindow::~MainWindow()
 {
+    // Re-enable screen blanking if it was disabled
+    QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+
     // Save Sword options
     m_config.setGroup( "Sword" );
     m_config.writeEntry( "ModPath", m_modulePath );
@@ -169,11 +172,11 @@ void MainWindow::initUI()
     // Allocate toolbars
     m_navToolbar = new NavBar( this );
     m_navToolbar->navBtnsEnable( false );
-    connect( m_navToolbar, SIGNAL(prevChapter()), this, SLOT(slotNavPrevChapter()) );
+    connect( m_navToolbar, SIGNAL(prevPage()), this, SLOT(slotNavPrevPage()) );
     connect( m_navToolbar, SIGNAL(prevVerse()), this, SLOT(slotNavPrevVerse()) );
     connect( m_navToolbar, SIGNAL(keyChanged(const QString &)), this, SLOT(slotNavKeyChanged(const QString &)) );
     connect( m_navToolbar, SIGNAL(nextVerse()), this, SLOT(slotNavNextVerse()) );
-    connect( m_navToolbar, SIGNAL(nextChapter()), this, SLOT(slotNavNextChapter()) );
+    connect( m_navToolbar, SIGNAL(nextPage()), this, SLOT(slotNavNextPage()) );
     connect( m_navToolbar, SIGNAL(autoScroll(bool)), this, SLOT(slotNavAutoScroll(bool)) );
     connect( m_navToolbar, SIGNAL(scrollRateChanged(int)), this, SLOT(slotNavScrollRateChanged(int)) );
 
@@ -332,7 +335,7 @@ int MainWindow::findBookmark( const QString &bookmark )
 void MainWindow::enableScreenBlanking( bool enable )
 {
     enable ? QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable
-           : QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Disable;
+           : QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::DisableSuspend;
 }
 
 void MainWindow::initConfig()
@@ -597,12 +600,12 @@ void MainWindow::slotViewSearchToolbar( bool enabled )
             : m_searchToolbar->hide();
 }
 
-void MainWindow::slotNavPrevChapter()
+void MainWindow::slotNavPrevPage()
 {
     TextWidget *text = reinterpret_cast<TextWidget *>(m_tabs.currentWidget());
     if ( text )
     {
-        text->prevChapter();
+        text->prevPage();
         setCaption( QString( "%1 - Dagger" ).arg( text->getFullKey() ) );
         m_navToolbar->setKey( text->getAbbrevKey() );
     }
@@ -643,12 +646,12 @@ void MainWindow::slotNavNextVerse()
     }
 }
 
-void MainWindow::slotNavNextChapter()
+void MainWindow::slotNavNextPage()
 {
     TextWidget *text = reinterpret_cast<TextWidget *>(m_tabs.currentWidget());
     if ( text )
     {
-        text->nextChapter();
+        text->nextPage();
         setCaption( QString( "%1 - Dagger" ).arg( text->getFullKey() ) );
         m_navToolbar->setKey( text->getAbbrevKey() );
     }

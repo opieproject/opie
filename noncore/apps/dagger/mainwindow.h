@@ -111,11 +111,11 @@ private slots:
     void slotViewSearchToolbar( bool enabled );
 
     // Navigation toolbar slots
-    void slotNavPrevChapter();
+    void slotNavPrevPage();
     void slotNavPrevVerse();
     void slotNavKeyChanged( const QString &newKey );
     void slotNavNextVerse();
-    void slotNavNextChapter();
+    void slotNavNextPage();
     void slotNavAutoScroll( bool enabled );
     void slotNavScrollRateChanged( int newRate );
 

@@ -42,11 +42,11 @@ public:
 
     bool isBibleText() const { return m_isBibleText; }
 
-    void prevChapter();
+    void prevPage();
     void prevVerse();
     void setKey( const QString &newKey );
     void nextVerse();
-    void nextChapter();
+    void nextPage();
 
 public slots:
     void slotNumVersesChanged( int numVerses );

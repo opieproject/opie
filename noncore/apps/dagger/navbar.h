@@ -37,20 +37,20 @@ public:
     const int autoScrollRate() { return m_scrollRate->value(); }
 
 private:
-    QAction   *m_actionPrevChapter; // Action for going back 1 chapter
+    QAction   *m_actionPrevPage;    // Action for going back 1 page
     QAction   *m_actionPrevVerse;   // Action for going back 1 verse
     QLineEdit *m_key;               // Edit box to enter key to goto
     QAction   *m_actionNextVerse;   // Action for going forward 1 verse
-    QAction   *m_actionNextChapter; // Action for going forward 1 chapter
+    QAction   *m_actionNextPage;    // Action for going forward 1 page
     QSpinBox  *m_scrollRate;        // Spin box to adjust rate of auto-scrolling
     QAction   *m_actionScroll;      // Action to start/stop auto-scrolling
 
 signals:
-    void prevChapter();
+    void prevPage();
     void prevVerse();
     void keyChanged( const QString &newKey );
     void nextVerse();
-    void nextChapter();
+    void nextPage();
     void autoScroll( bool enabled );
     void scrollRateChanged( int newRate );
 };

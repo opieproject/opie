@@ -78,8 +78,10 @@ QString TextWidget::getCurrVerse()
     return ( QString ) m_module->StripText();
 }
 
-void TextWidget::prevChapter()
+void TextWidget::prevPage()
 {
+    (*m_key) -= m_numVerses;
+    setText();
 }
 
 void TextWidget::prevVerse()
@@ -100,8 +102,10 @@ void TextWidget::nextVerse()
     setText();
 }
 
-void TextWidget::nextChapter()
+void TextWidget::nextPage()
 {
+    (*m_key) += m_numVerses;
+    setText();
 }
 
 void TextWidget::slotNumVersesChanged( int numVerses )
