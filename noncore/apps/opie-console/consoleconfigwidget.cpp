@@ -24,7 +24,7 @@ ConsoleConfigWidget::ConsoleConfigWidget( const QString& name, QWidget* parent,
     m_env->addColumn(tr("Name"));
     m_env->addColumn(tr("Value"));
     m_lay->addWidget(m_env);
-    
+
     QHBox *hbox = new QHBox(this);
     label = new QLabel(tr("Name :"), hbox);
     m_name = new QLineEdit(hbox);
@@ -34,7 +34,7 @@ ConsoleConfigWidget::ConsoleConfigWidget( const QString& name, QWidget* parent,
     label = new QLabel(tr("Value :"), hbox);
     m_value = new QLineEdit(hbox);
     m_lay->addWidget(hbox);
-    
+
     hbox = new QHBox(this);
     hbox->setSpacing(10);
     m_remove = new QPushButton(tr("Remove"), hbox);
@@ -64,8 +64,13 @@ ConsoleConfigWidget::~ConsoleConfigWidget() {
 }
 
 void ConsoleConfigWidget::load( const Profile& prof ) {
+    /*
+     * we will use /bin/bash as default
+     * but will fallback in MyPty to /bin/sh
+     * if necessary
+     */
     m_cmd->setText(prof.readEntry("Command", "/bin/bash"));
-    int envcount = prof.readNumEntry("EnvVars", 0); 
+    int envcount = prof.readNumEntry("EnvVars", 0);
     for (int i=0; i<envcount; i++) {
         QString name = prof.readEntry("Env_Name_" + QString::number(i), "");
         QString value = prof.readEntry("Env_Value_" + QString::number(i), "");

@@ -291,7 +291,22 @@ void MyPty::close() {
 }
 void MyPty::reload( const Profile& prof) {
     m_env.clear();
-    m_cmd = prof.readEntry("Command", "/bin/bash");
+    m_cmd = prof.readEntry("Command", "/bin/sh");
+
+    /*
+     * Lets check if m_cmd actually
+     * exists....
+     * we try to use bin/bash and if
+     * this fails we
+     * will fallback to /bin/sh
+     * which should be there 100%
+     */
+    if ( !QFile::exists(QFile::encodeName(m_cmd) ) )
+        if (QFile::exists("/bin/bash") )
+            m_cmd = "/bin/bash";
+        else
+            m_cmd = "/bin/sh";
+
     int envcount = prof.readNumEntry("EnvVars", 0);
     for (int i=0; i<envcount; i++) {
         QString name = prof.readEntry("Env_Name_" + QString::number(i), "");
