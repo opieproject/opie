@@ -199,33 +199,23 @@ bool ODevice::suspend ( )
 	if ( d-> m_model == Model_Unknown ) // better don't suspend in qvfb / on unkown devices
 		return false;
 
-	int fd;
 	bool res = false;
 	
-	if ((( fd = ::open ( "/dev/apm_bios", O_RDWR )) >= 0 ) ||
-	    (( fd = ::open ( "/dev/misc/apm_bios",O_RDWR )) >= 0 )) {	
-		struct timeval tvs, tvn;
-
-//		::signal ( SIGTSTP, SIG_IGN );	// we don't want to be stopped
-		::gettimeofday ( &tvs, 0 );
+	struct timeval tvs, tvn;
+	::gettimeofday ( &tvs, 0 );
 	
-		::sync ( ); // flush fs caches
-	
-		res = ( ::ioctl ( fd, APM_IOC_SUSPEND, 0 ) == 0 ); // tell the kernel to "start" suspending
-		::close ( fd );
+	::sync ( ); // flush fs caches
+	res = ( ::system ( "apm --suspend" ) == 0 );
 
-		if ( res ) {	
-//			::kill ( -::getpid ( ), SIGTSTP ); // stop everthing in our process group
+	// This is needed because the iPAQ apm implementation is asynchronous and we
+	// can not be sure when exactly the device is really suspended
+	// This can be deleted as soon as a stable familiar with a synchronous apm implementation exists.
 
-			do { // wait at most 1.5 sec: either suspend didn't work or the device resumed
-				::usleep ( 200 * 1000 );
-				::gettimeofday ( &tvn, 0 );				
-			} while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < 1500 );
-			
-//			::kill ( -::getpid ( ), SIGCONT ); // continue everything in our process group
-		}	
-		
-//		::signal ( SIGTSTP, SIG_DFL );
+	if ( res ) {	
+		do { // wait at most 1.5 sec: either suspend didn't work or the device resumed
+			::usleep ( 200 * 1000 );
+			::gettimeofday ( &tvn, 0 );				
+		} while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < 1500 );
 	}
 	
 	return res;
