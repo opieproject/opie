@@ -256,7 +256,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     m_pPenColorToolButton->setPixmap(Resource::loadPixmap("drawpad/pencolor"));
     QWhatsThis::add( m_pPenColorToolButton, tr( "Click here to select the color used when drawing." ) );
 
-    ColorPopupMenu* penColorPopupMenu = new ColorPopupMenu(Qt::black, m_pPenColorToolButton);
+    OColorPopupMenu* penColorPopupMenu = new OColorPopupMenu(Qt::black, m_pPenColorToolButton);
     connect(penColorPopupMenu, SIGNAL(colorSelected(const QColor&)), this, SLOT(changePenColor(const QColor&)));
 
     QToolTip::add(m_pPenColorToolButton, tr("Pen Color"));
@@ -269,7 +269,7 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     m_pBrushColorToolButton->setPixmap(Resource::loadPixmap("drawpad/brushcolor"));
     QWhatsThis::add( m_pBrushColorToolButton, tr( "Click here to select the color used when filling in areas." ) );
 
-    ColorPopupMenu* brushColorPopupMenu = new ColorPopupMenu(Qt::white, m_pBrushColorToolButton);
+    OColorPopupMenu* brushColorPopupMenu = new OColorPopupMenu(Qt::white, m_pBrushColorToolButton);
     connect(brushColorPopupMenu, SIGNAL(colorSelected(const QColor&)), this, SLOT(changeBrushColor(const QColor&)));
 
     QToolTip::add(m_pBrushColorToolButton, tr("Fill Color"));
