@@ -18,8 +18,10 @@
 
 /* OPIE */
 #include <opie2/otaskbarapplet.h>
+#include <qpe/applnk.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
+using namespace Opie::Ui;
 
 /* QT */
 #include <qpainter.h>
@@ -37,19 +39,18 @@
 
 //===========================================================================
 
-using namespace Opie::Ui;
 IrdaApplet::IrdaApplet ( QWidget *parent, const char *name )
 		: QWidget ( parent, name )
 {
-	setFixedHeight ( 18 );
-	setFixedWidth ( 14 );
+    setFixedHeight( AppLnk::smallIconSize() );
+    setFixedWidth( AppLnk::smallIconSize() );
 
-	m_sockfd = ::socket ( PF_INET, SOCK_DGRAM, IPPROTO_IP );
+    m_sockfd = ::socket ( PF_INET, SOCK_DGRAM, IPPROTO_IP );
 
-	m_irdaOnPixmap          = Resource::loadPixmap( "irdaapplet/irdaon" );
-	m_irdaOffPixmap         = Resource::loadPixmap( "irdaapplet/irdaoff" );
-	m_irdaDiscoveryOnPixmap = Resource::loadPixmap( "irdaapplet/magglass" );
-	m_receiveActivePixmap   = Resource::loadPixmap( "irdaapplet/receive" );
+    m_irdaOnPixmap = Resource::loadImage( "irdaapplet/irdaon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize());
+    m_irdaOffPixmap = Resource::loadImage( "irdaapplet/irdaoff" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize());
+    m_irdaDiscoveryOnPixmap = Resource::loadImage( "irdaapplet/magglass" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize());
+    m_receiveActivePixmap = Resource::loadImage( "irdaapplet/receive" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize());
 
 	m_irda_active = false;
 	m_irda_discovery_active = false;
@@ -314,15 +315,15 @@ void IrdaApplet::timerEvent ( QTimerEvent * )
 
 void IrdaApplet::paintEvent ( QPaintEvent * )
 {
-	QPainter p ( this );
+	QPainter p( this );
 
-	p. drawPixmap ( 0, 1, m_irda_active ? m_irdaOnPixmap : m_irdaOffPixmap );
+	p.drawPixmap( 0, 1, m_irda_active ? m_irdaOnPixmap : m_irdaOffPixmap );
 
 	if ( m_irda_discovery_active )
-    	        p. drawPixmap( 0, 1, m_irdaDiscoveryOnPixmap );
+    	        p.drawPixmap( 0, 1, m_irdaDiscoveryOnPixmap );
 
 	if ( m_receive_active )
-		p. drawPixmap( 0, 1, m_receiveActivePixmap );
+		p.drawPixmap( 0, 1, m_receiveActivePixmap );
 }
 /*
  * We know 3 calls
