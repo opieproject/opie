@@ -53,7 +53,6 @@ int main(int argc, char* argv[])
   
   putenv((char*)"COLORTERM="); // to trigger mc's color detection
 
-  tmp.insert(0,"-"); // we want a login shell
   Konsole m( "test", shell, tmp, TRUE  );
   m.setCaption( Konsole::tr("Terminal") );
   a.showMainWidget( &m );
