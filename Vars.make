@@ -15,6 +15,22 @@ ifneq ($(wildcard $(TOPDIR)/.config),)
     include $(TOPDIR)/.config
 endif
 
+ifdef CONFIG_TARGET_X86
+    PLATFORM=x86-linux
+endif
+ifdef CONFIG_TARGET_SHARP
+  PLATFORM=sharp-linux
+endif
+ifdef CONFIG_TARGET_IPAQ
+  PLATFORM=ipaq-linux
+endif
+ifdef CONFIG_TARGET_RAMSES
+  PLATFORM=ramses-linux
+endif
+ifdef CONFIG_TARGET_SIMPAD
+  PLATFORM=simpad-linux
+endif
+
 export QMAKE:=$(OPIEDIR)/qmake/qmake
 export QMAKESPECSDIR=$(OPIEDIR)/mkspecs
 
