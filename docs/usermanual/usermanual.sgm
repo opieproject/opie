@@ -18,6 +18,12 @@
 <!ENTITY handwriting SYSTEM "handwriting.sgm">
 <!ENTITY multikey SYSTEM "multikey.sgm">
 <!ENTITY pickboard SYSTEM "pickboard.sgm">
+<!ENTITY calibrate SYSTEM "calibrate.sgm">
+<!ENTITY helpbrowser SYSTEM "helpbrowser.sgm">
+<!ENTITY login SYSTEM "login.sgm">
+<!ENTITY citytime SYSTEM "citytime.sgm">
+<!ENTITY textedit SYSTEM "textedit.sgm">
+<!ENTITY lightpower SYSTEM "lightpower.sgm">
 
 <!--Now the real entities-->
 <!ENTITY opie "OPIE">
@@ -42,9 +48,15 @@
 &filemanager;
 &embeddedkonsole;
 &keypebble;
+&helpbrowser;
+&login;
+&citytime;
+&textedit;
 </part>
 <part><title>Settings</title>
 &software;
+&lightpower;
+&calibrate;
 </part>
 <part><title>Applets</title>
 &irda;

@@ -51,7 +51,7 @@ and press "Ok" to save it ("x" cancels the save).
 
 <section><title>Cut and Paste</title>
 <para>
-For a more detailed description of Cut and Paste in Opie, see <xref linkend=cutpaste>.  To cut or copy text
+For a more detailed description of Cut and Paste in Opie, see (add link to cut and paste here).  To cut or copy text
 to the clipboard, highlight the text and select Edit&arrow;Copy to add it without deleting the original text, or 
 Edit&arrow;Cut to add it to the clipboard and delete the original text.  Then move the cursor to where you want to 
 paste the text and chose Edit&arrow;Paste.  These three menu items do the same thing as those in the Clipboard 
