@@ -1,7 +1,7 @@
 /*
  * Communication protocol
  *
- * $Id: wl_proto.cc,v 1.8 2003-02-07 10:01:23 max Exp $
+ * $Id: wl_proto.cc,v 1.9 2003-02-26 22:28:06 mjm Exp $
  */
 
 #include "wl_types.hh"
@@ -10,7 +10,7 @@
 #include "wl_sock.hh"
 
 /* Adds a field to the buffer */
-int add_field(char *buffer, const char *string, int len)
+unsigned int add_field(char *buffer, const char *string, int len)
 {
   char newlen[5];
   
@@ -26,7 +26,7 @@ int add_field(char *buffer, const char *string, int len)
   return (atoi(newlen) + 3);
 }
 
-int get_field(const char *buffer, char *out, int maxlen)
+unsigned int get_field(const char *buffer, char *out, int maxlen)
 {
   char len[5];
 
@@ -45,6 +45,97 @@ int get_field(const char *buffer, char *out, int maxlen)
   return (atoi(len) + 3);
 }
 
+/* Send ok message */
+int send_ok(const char *guihost, int guiport, int code)
+{
+  unsigned int len = 0;
+  char buffer[128], temp[5];
+
+  memset(buffer, 0, sizeof(buffer));
+
+  memset(temp, 0, sizeof(temp));
+  snprintf(temp, sizeof(temp) - 1, "%.2d", CMD_OK);
+  memcpy(buffer, temp, 2);
+  len += 2;
+
+  memset(temp, 0, sizeof(temp));
+  snprintf(temp, sizeof(temp) - 1, "%.2d", code);
+  len += add_field(buffer + len, temp, 2);
+
+  /* Send prepared buffer to UI */
+#ifdef DEBUG
+  wl_loginfo("Sent ok to UI: '%s'", buffer);
+#endif
+
+  return ((!wl_send(guihost, guiport, buffer)) ? 0 : 1);
+}
+
+/* Send fail message */
+int send_fail(const char *guihost, int guiport,
+	      int code, const char *errstr)
+{
+  unsigned int len = 0;
+  char buffer[128], temp[5];
+
+  memset(buffer, 0, sizeof(buffer));
+
+  memset(temp, 0, sizeof(temp));
+  snprintf(temp, sizeof(temp) - 1, "%.2d", CMD_FAIL);
+  memcpy(buffer, temp, 2);
+  len += 2;
+
+  memset(temp, 0, sizeof(temp));
+  snprintf(temp, sizeof(temp) - 1, "%.2d", code);
+  len += add_field(buffer + len, temp, 2);
+
+  len += add_field(buffer + len, errstr, strlen(errstr));
+
+  /* Send prepared buffer to UI */
+#ifdef DEBUG
+  wl_loginfo("Send CMD_FAIL to UI: '%s'", buffer);
+#endif
+
+  return ((!wl_send(guihost, guiport, buffer)) ? 0 : 1);
+}
+
+int get_ok(const char *buffer)
+{
+  char temp[5];
+  unsigned int len = 0;
+
+  /* packet type already determined, skip check */
+  len += 2;
+
+  /* what is ok for? */
+  memset(temp, 0, sizeof(temp));
+  len += get_field(buffer + len, temp, sizeof(temp));
+
+  return atoi(temp);
+}
+
+/* put failmessage into buffer */
+int get_fail(char *out, const char *buffer, size_t len)
+{
+  char temp[5];
+  int error=0;
+  unsigned int len = 0;
+
+  /* packet type already determined, skip check */
+  len += 2;
+
+  /* what is fail for? */
+  memset(temp, 0, sizeof(temp));
+  len += get_field(buffer + len, temp, sizeof(temp));
+  error=atoi(temp);
+
+  /* get errorstring and fill into buffer */
+  memset(out, 0, len);
+  len += get_field(buffer + len, out, len - 1);
+
+  return error;
+}
+
+
 /* Send found network to UI */
 int send_network_found (const char *guihost, int guiport, void *structure)
 {
@@ -57,23 +148,23 @@ int send_network_found (const char *guihost, int guiport, void *structure)
   memset(buffer,0,sizeof(buffer));
   /* Type = Found new net (without length field) */
   memset(temp, 0, sizeof(temp));
-  snprintf(temp, sizeof(temp), "%.2d", WL_NETFOUND);
+  snprintf(temp, sizeof(temp) - 1, "%.2d", WL_NETFOUND);
   memcpy(buffer, temp, 2);
   len += 2;
 
   /* Set Net-type */
   memset(temp, 0, sizeof(temp));
-  snprintf(temp, sizeof(temp), "%d", ptr->net_type);
+  snprintf(temp, sizeof(temp) - 1, "%d", ptr->net_type);
   len += add_field(buffer + len, temp, 1);
 
   /* Set channel */
   memset(temp, 0, sizeof(temp));
-  snprintf(temp, sizeof(temp), "%.2d", ptr->channel);
+  snprintf(temp, sizeof(temp) - 1, "%.2d", ptr->channel);
   len += add_field(buffer + len, temp, 2); 
 
   /* Set WEP y/n */
   memset(temp, 0, sizeof(temp));
-  snprintf(temp, sizeof(temp), "%d", ptr->wep);
+  snprintf(temp, sizeof(temp) - 1, "%d", ptr->wep);
   len += add_field(buffer + len, temp, 1);
 
   /* Set Mac */
