@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.31 2002-06-23 03:12:26 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.32 2002-06-23 13:30:55 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -477,7 +477,7 @@ void VMemo::record(void)
 
 
           for (int i = 0; i < result; i+=2) {
-/            monoBuffer[j] = sound[i];
+            monoBuffer[j] = sound[i];
             //            monoBuffer[j] = (sound[i]+sound[i+1])/2;
 
             j++;
