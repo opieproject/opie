@@ -197,9 +197,29 @@ void ToDoDB::removeEvent( const ToDoEvent &event )
 {
     m_todos.remove( event );
 }
+void ToDoDB::replaceEvent(const ToDoEvent &event )
+{
+  QValueList<ToDoEvent>::Iterator it;
+  int uid = event.uid();
+  // == is not overloaded as we would like :( so let's search for the uid
+  for(it = m_todos.begin(); it != m_todos.end(); ++it ){
+    if( (*it).uid() == uid ){
+      m_todos.remove( (*it) );
+      break; // should save us the iterate is now borked
+    }
+  }
+  m_todos.append(event);
+}
 void ToDoDB::reload()
 {
     load();
+}
+void ToDoDB::mergeWith(const QValueList<ToDoEvent>& events )
+{
+  QValueList<ToDoEvent>::ConstIterator it;
+  for( it = events.begin(); it != events.end(); ++it ){
+    replaceEvent( (*it) );
+  }
 }
 void ToDoDB::setFileName(const QString &file )
 {

@@ -47,19 +47,25 @@ namespace {
 };
 
 // if i would be on kde this would be a KActionMenu...
+class Config;
 class OFontMenu : public QPopupMenu {
   Q_OBJECT
  public:
   OFontMenu(QWidget *parent, const char* name, const QList<QWidget> &list );
+  void save(Config *cfg );
+  void restore(Config *cfg );
   void setWidgets(const QList<QWidget> &list );
   void addWidget(QWidget *wid );
   void forceSize(QWidget *wid, int size );
   void removeWidget(QWidget *wid );
   const QList<QWidget> &widgets()const;
 
+ signals:
+  void fontChanged(int size );
  private:
   QList<QWidget> m_list;
   QList<WidSize> m_wids;
+  int m_size;
   class OFontMenuPrivate;
   OFontMenuPrivate *d;
  private slots:

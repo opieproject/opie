@@ -1,4 +1,6 @@
 
+
+#include <qpe/config.h>
 #include "ofontmenu.h"
 
 
@@ -7,6 +9,8 @@ OFontMenu::OFontMenu(QWidget *parent, const char *name, const QList<QWidget> &li
   : QPopupMenu( parent, name )
 {
   m_list = list;
+  m_wids.setAutoDelete( TRUE );
+
   insertItem(tr("Large"), this, SLOT(slotLarge() ),
 	     0, 10);
   insertItem(tr("Medium"), this, SLOT(slotMedium() ),
@@ -14,6 +18,34 @@ OFontMenu::OFontMenu(QWidget *parent, const char *name, const QList<QWidget> &li
   insertItem(tr("Small"), this, SLOT(slotSmall() ),
 	     0, 12 );
   setCheckable( true );
+  m_size=10;
+}
+void OFontMenu::save(Config *cfg )
+{
+  cfg->setGroup("OFontMenu" );
+  cfg->writeEntry("size", m_size );
+}
+void OFontMenu::restore(Config *cfg )
+{
+  cfg->setGroup("OFontMeny" );
+  m_size = cfg->readNumEntry("size" );
+  setItemChecked(10, false  );
+  setItemChecked(11, false  );
+  setItemChecked(12, false  );
+  switch( m_size ){
+  case 8:
+    setItemChecked(12, true );
+    break;
+  case 14:
+    setItemChecked(10, true );
+    break;
+  case 10:// fall through
+  default:
+    setItemChecked(11, true );
+    m_size = 10;
+    break;
+  }
+  setFontSize( m_size );
 }
 void OFontMenu::setWidgets(const QList<QWidget> &list )
 {
@@ -61,6 +93,7 @@ void OFontMenu::slotLarge()
 }
 void OFontMenu::setFontSize(int size )
 {
+  m_size = size;
   QWidget *wid;
   for(wid = m_list.first(); wid !=0; wid = m_list.next() ){
     QFont font = wid->font();
@@ -75,4 +108,5 @@ void OFontMenu::setFontSize(int size )
       wids->wid->setFont( font );
     }
   }
+  emit fontChanged(size );
 }

@@ -12,7 +12,6 @@ ToDoEvent::ToDoEvent(const ToDoEvent &event )
 ToDoEvent::ToDoEvent(bool completed, int priority, const QStringList &category, 
 	       const QString &description, bool hasDate, QDate date, int uid )
 {
-    qWarning("todoEvent c'tor" );
     m_date = date;
     m_isCompleted = completed;
     m_hasDate = hasDate;
@@ -70,7 +69,6 @@ void ToDoEvent::clearCategories()
 void ToDoEvent::setCategories(const QStringList &list )
 {
   m_category = list;
-  qWarning("todoevent: %s", list.join(";" ).latin1() );
 }
 QDate ToDoEvent::date()const
 {

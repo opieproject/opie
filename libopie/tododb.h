@@ -23,7 +23,9 @@ class ToDoDB
     void addEvent(const ToDoEvent &event );
     void editEvent(const ToDoEvent &editEvent );
     void removeEvent(const ToDoEvent &event);
-
+    void replaceEvent(const ToDoEvent &event );
+    // QValueList<ToDoEvents will overwrite existing ones no smart code at all ;)
+    void mergeWith(const QValueList<ToDoEvent>& ); 
     void reload();
     void setFileName(const QString & );
     QString fileName()const;
