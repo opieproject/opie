@@ -23,18 +23,22 @@
 #include "zonemap.h"
 #include "citytime.h"
 
+/* OPIE */
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/tzselect.h>
 #if !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
 #endif
+#include <opie2/odebug.h>
 
+/* QT */
 #include <qlabel.h>
 #include <qmessagebox.h>
 #include <qtoolbutton.h>
 #include <qlayout.h>
 
+/* STD */
 #include <stdlib.h>
 
 CityTime::CityTime( QWidget *parent, const char* name,
@@ -46,7 +50,7 @@ CityTime::CityTime( QWidget *parent, const char* name,
     Config config( "qpe" );
     config.setGroup( "Time" );
     bWhichClock = config.readBoolEntry( "AMPM", TRUE );
-    qDebug( QString("%1").arg(bWhichClock) );
+    odebug << QString("%1").arg(bWhichClock) << oendl;
     frmMap->changeClock( bWhichClock );
 
     char *pEnv;
@@ -118,33 +122,33 @@ CityTime::CityTime( QWidget *parent, const char* name,
 CityTime::~CityTime()
 {
     if ( changed ) {
-	Config cfg("CityTime");
-	cfg.setGroup("TimeZones");
-	QListIterator<QToolButton> itCity( listCities );
-	int i;
-	bool realTzWritten = FALSE;
-	for ( i = 0, itCity.toFirst();  i < CITIES; i++, ++itCity ) {
-	    if ( !strCityTz[i].isNull() ) {
-		cfg.writeEntry("Zone"+QString::number(i), strCityTz[i]);
-		cfg.writeEntry("ZoneName"+QString::number(i), itCity.current()->text());
-		if ( strCityTz[i] == strRealTz )
-		    realTzWritten = TRUE;
-	    }
-	}
-	if ( realTzWritten ) {
-	    cfg.removeEntry("Zone"+QString::number(CITIES));
-	    cfg.removeEntry("ZoneName"+QString::number(CITIES));
-	} else {
-	    cfg.writeEntry("Zone"+QString::number(CITIES), strRealTz);
-	    if ( nameRealTz.isEmpty() ) {
-		int i =  strRealTz.find( '/' );
-		nameRealTz = strRealTz.mid( i+1 );
-	    }
-	    cfg.writeEntry("ZoneName"+QString::number(CITIES), nameRealTz);
-	}
-	QCopEnvelope ( "QPE/System", "timeZoneListChange()" );
+    Config cfg("CityTime");
+    cfg.setGroup("TimeZones");
+    QListIterator<QToolButton> itCity( listCities );
+    int i;
+    bool realTzWritten = FALSE;
+    for ( i = 0, itCity.toFirst();  i < CITIES; i++, ++itCity ) {
+        if ( !strCityTz[i].isNull() ) {
+        cfg.writeEntry("Zone"+QString::number(i), strCityTz[i]);
+        cfg.writeEntry("ZoneName"+QString::number(i), itCity.current()->text());
+        if ( strCityTz[i] == strRealTz )
+            realTzWritten = TRUE;
+        }
+    }
+    if ( realTzWritten ) {
+        cfg.removeEntry("Zone"+QString::number(CITIES));
+        cfg.removeEntry("ZoneName"+QString::number(CITIES));
+    } else {
+        cfg.writeEntry("Zone"+QString::number(CITIES), strRealTz);
+        if ( nameRealTz.isEmpty() ) {
+        int i =  strRealTz.find( '/' );
+        nameRealTz = strRealTz.mid( i+1 );
+        }
+        cfg.writeEntry("ZoneName"+QString::number(CITIES), nameRealTz);
+    }
+    QCopEnvelope ( "QPE/System", "timeZoneListChange()" );
 
-	changed = FALSE;
+    changed = FALSE;
     }
     // restore the timezone, just in case we messed with it and
     // are destroyed at an inoppurtune moment
@@ -158,7 +162,7 @@ CityTime::~CityTime()
 void CityTime::timerEvent( QTimerEvent *e )
 {
     if ( e )
-	killTimer( timerId );
+    killTimer( timerId );
     // change the time again!!
     showTime();
     int ms = 1000 - QTime::currentTime().msec();
@@ -180,7 +184,7 @@ void CityTime::showTime( void )
     for ( i = 0, itTime.toFirst(); i < CITIES; i++, ++itTime) {
         if ( !strCityTz[i].isNull() ) {
             if ( setenv( "TZ", strCityTz[i], true ) == 0 ) {
-	      itTime.current()->setText( TimeString::shortTime( bWhichClock ) );
+          itTime.current()->setText( TimeString::shortTime( bWhichClock ) );
             } else {
                 QMessageBox::critical( this, tr( "Time Changing" ),
                 tr( "There was a problem setting timezone %1" )
@@ -223,7 +227,7 @@ void CityTime::slotNewTz( const QString & strNewCountry,
             cmdTmp->toggle();
             // we can actually break, since there is only one button
             // that is ever pressed!
-	    changed = TRUE;
+        changed = TRUE;
             break;
         }
     }
@@ -241,15 +245,15 @@ void CityTime::readInTimes( void )
     nameRealTz = QString::null;
     QString zn;
     for ( ; i < CITIES ; i++ ) {
-	zn = cfg.readEntry("Zone"+QString::number(i), QString::null);
-	if ( zn.isNull() )
-	    break;
-	QString nm = cfg.readEntry("ZoneName"+QString::number(i));
-	strCityTz[i] = zn;
-	itCity.current()->setText(nm);
-	if ( zn == strRealTz )
-	    nameRealTz = nm;
-	++itCity;
+    zn = cfg.readEntry("Zone"+QString::number(i), QString::null);
+    if ( zn.isNull() )
+        break;
+    QString nm = cfg.readEntry("ZoneName"+QString::number(i));
+    strCityTz[i] = zn;
+    itCity.current()->setText(nm);
+    if ( zn == strRealTz )
+        nameRealTz = nm;
+    ++itCity;
     }
     if ( i == 0 ) {
         // write in our own in a shameless self promotion and some humor
@@ -263,12 +267,12 @@ void CityTime::readInTimes( void )
         }
     }
     if ( nameRealTz.isEmpty() ) {
-	//remember the current time zone even if we don't have room
-	//to show it.
-	zn = cfg.readEntry("Zone"+QString::number(CITIES), QString::null);
-	if ( zn == strRealTz )
-	    nameRealTz = cfg.readEntry("ZoneName"+QString::number(CITIES));
-	i++;
+    //remember the current time zone even if we don't have room
+    //to show it.
+    zn = cfg.readEntry("Zone"+QString::number(CITIES), QString::null);
+    if ( zn == strRealTz )
+        nameRealTz = cfg.readEntry("ZoneName"+QString::number(CITIES));
+    i++;
     }
 }
 

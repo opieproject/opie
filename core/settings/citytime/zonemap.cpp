@@ -23,9 +23,12 @@
 #include "sun.h"
 #include "zonemap.h"
 
+/* OPIE */
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
+#include <opie2/odebug.h>
 
+/* QT */
 #include <qfile.h>
 #include <qlabel.h>
 #include <qmessagebox.h>
@@ -37,6 +40,7 @@
 #include <qlistview.h>
 #include <qwhatsthis.h>
 
+/* STD */
 #include <limits.h>
 
 // the map file...
@@ -61,12 +65,12 @@ static void dayNight( QImage *pImage );
 ZoneField::ZoneField( const QString& strLine )
 {
     // make a bunch of RegExp's to match the data from the line
-    QRegExp regCoord( "[-+][0-9]+" );	// the latitude
+    QRegExp regCoord( "[-+][0-9]+" );   // the latitude
     QRegExp regCountry( "[A-Za-z]+/" ); // the country (not good enough)
     QRegExp regCity( "[A-Za-z_-]*" ); // the city
 
     int iStart,
-	iStop,
+    iStop,
         iLen,
         tmp;
     QString strTmp;
@@ -75,65 +79,65 @@ ZoneField::ZoneField( const QString& strLine )
     strCountryCode = strLine.left( 2 );
     iStart = regCoord.match( strLine, 0, &iLen );
     if ( iStart >= 0 ) {
-	strTmp = strLine.mid( iStart, iLen );
-	tmp = strTmp.toInt();
-	// okay, there are two versions of the format, make a decision based on
-	// the size...
-	// Oh BTW, we are storing everything in seconds!
-	if ( iLen < 7 ) {
-	    _y = tmp / 100;
-	    _y *= 60;
-	    _y += tmp % 100;
-	    _y *= 60;
-	} else {
-	    _y = tmp / 10000;
-	    _y *= 60;
-	    tmp %= 10000;
-	    _y += tmp / 100;
-	    _y *= 60;
-	    tmp %= 100;
-	    _y += tmp;
-	}
+    strTmp = strLine.mid( iStart, iLen );
+    tmp = strTmp.toInt();
+    // okay, there are two versions of the format, make a decision based on
+    // the size...
+    // Oh BTW, we are storing everything in seconds!
+    if ( iLen < 7 ) {
+        _y = tmp / 100;
+        _y *= 60;
+        _y += tmp % 100;
+        _y *= 60;
+    } else {
+        _y = tmp / 10000;
+        _y *= 60;
+        tmp %= 10000;
+        _y += tmp / 100;
+        _y *= 60;
+        tmp %= 100;
+        _y += tmp;
+    }
     }
     iStart = regCoord.match( strLine, iStart + iLen, &iLen );
     if ( iStart >= 0 ) {
-	strTmp = strLine.mid( iStart, iLen );
-	tmp = strTmp.toInt();
-	if ( iLen < 8 ) {
-	    _x = tmp / 100;
-	    _x *= 60;
-	    _x += tmp % 100;
-	    _x *= 60;
-	} else {
-	    _x = tmp / 10000;
-	    _x *= 60;
-	    tmp %= 10000;
-	    _x += tmp / 100;
-	    _x *= 60;
-	    tmp %= 100;
-	    _x += tmp;
-	}
+    strTmp = strLine.mid( iStart, iLen );
+    tmp = strTmp.toInt();
+    if ( iLen < 8 ) {
+        _x = tmp / 100;
+        _x *= 60;
+        _x += tmp % 100;
+        _x *= 60;
+    } else {
+        _x = tmp / 10000;
+        _x *= 60;
+        tmp %= 10000;
+        _x += tmp / 100;
+        _x *= 60;
+        tmp %= 100;
+        _x += tmp;
+    }
     }
     iStart = regCountry.match( strLine, 0, &iLen );
     // help with the shortcoming in 2.x regexp...
     iStop = strLine.findRev( '/' );
     if ( iStart >= 0 ) {
-	iLen = (iStop - iStart) + 1;
-	strCountry = strLine.mid( iStart, iLen );
+    iLen = (iStop - iStart) + 1;
+    strCountry = strLine.mid( iStart, iLen );
     }
     // now match the city...
     iStart = regCity.match( strLine, iStart + iLen, &iLen );
     if ( iStart >= 0 ) {
-	strCity = strLine.mid( iStart, iLen );
+    strCity = strLine.mid( iStart, iLen );
     }
 }
 
 void ZoneField::showStructure( void ) const
 {
-    qDebug( "Country: %s", strCountry.latin1() );
-    qDebug( "City: %s", strCity.latin1() );
-    qDebug( "x: %d", _x );
-    qDebug( "y: %d\n", _y );
+    odebug << "Country: " << strCountry << "" << oendl;
+    odebug << "City: " << strCity << "" << oendl;
+    odebug << "x: " << _x << "" << oendl;
+    odebug << "y: " << _y << "\n" << oendl;
 }
 
 ZoneMap::ZoneMap( QWidget *parent, const char* name )
@@ -207,21 +211,21 @@ void ZoneMap::readZones( void )
 {
     QFile fZone( strZONEINFO );
     if ( !fZone.open( IO_ReadOnly ) ) {
-	QMessageBox::warning (this,
-		tr( "Unable to Find Timezone Info" ),
-		tr( "<p>Unable to find any timezone information in %1" )
-		.arg( strZONEINFO ));
-	exit(-1);
+    QMessageBox::warning (this,
+        tr( "Unable to Find Timezone Info" ),
+        tr( "<p>Unable to find any timezone information in %1" )
+        .arg( strZONEINFO ));
+    exit(-1);
     } else {
-	QTextStream tZone( &fZone );
-	while ( !tZone.atEnd() ) {
-	    QString strLine = tZone.readLine();
-	    // only pass on lines that aren't comments
-	    if ( strLine[0] != '#' ) {
-		zones.append( new ZoneField( strLine ) );
-	    }
-	}
-	fZone.close();
+    QTextStream tZone( &fZone );
+    while ( !tZone.atEnd() ) {
+        QString strLine = tZone.readLine();
+        // only pass on lines that aren't comments
+        if ( strLine[0] != '#' ) {
+        zones.append( new ZoneField( strLine ) );
+        }
+    }
+    fZone.close();
     }
 }
 
@@ -245,8 +249,8 @@ void ZoneMap::viewportMouseReleaseEvent( QMouseEvent* )
     // more for "mouse clicks"
     norm.stop();
     if ( pLast != NULL ) {
-	emit signalTz( pLast->country(), pLast->city() );
-	pLast = NULL;
+    emit signalTz( pLast->country(), pLast->city() );
+    pLast = NULL;
     }
     tHide->start( 2000, true );
 }
@@ -254,33 +258,33 @@ void ZoneMap::viewportMouseReleaseEvent( QMouseEvent* )
 void ZoneMap::keyPressEvent( QKeyEvent *ke )
 {
     switch ( ke->key() ) {
-	case Key_Left:
-	case Key_Right:
-	case Key_Up:
-	case Key_Down: {
-		tHide->stop();
-		if ( !cursor )
-		    slotFindCity( QPoint( contentsWidth(), contentsHeight() ) / 2 );
-		ZoneField *city = findCityNear( cursor, ke->key() );
-		if ( city ) {
-		    cursor = city;
-		    int tmpx, tmpy;
-		    zoneToWin( cursor->x(), cursor->y(), tmpx, tmpy );
-		    ensureVisible( tmpx, tmpy );
-		    showCity( cursor );
-		    tHide->start( 3000, true );
-		}
-	    }
-	    break;
+    case Key_Left:
+    case Key_Right:
+    case Key_Up:
+    case Key_Down: {
+        tHide->stop();
+        if ( !cursor )
+            slotFindCity( QPoint( contentsWidth(), contentsHeight() ) / 2 );
+        ZoneField *city = findCityNear( cursor, ke->key() );
+        if ( city ) {
+            cursor = city;
+            int tmpx, tmpy;
+            zoneToWin( cursor->x(), cursor->y(), tmpx, tmpy );
+            ensureVisible( tmpx, tmpy );
+            showCity( cursor );
+            tHide->start( 3000, true );
+        }
+        }
+        break;
 
-	case Key_Space:
-	case Key_Enter:
-	case Key_Return:
-	    if ( cursor ) {
-		emit signalTz( cursor->country(), cursor->city() );
-		tHide->start( 0, true );
-	    }
-	    break;
+    case Key_Space:
+    case Key_Enter:
+    case Key_Return:
+        if ( cursor ) {
+        emit signalTz( cursor->country(), cursor->city() );
+        tHide->start( 0, true );
+        }
+        break;
     }
 }
 
@@ -292,35 +296,35 @@ ZoneField *ZoneMap::findCityNear( ZoneField *city, int key )
 
     QListIterator<ZoneField> it( zones );
     for (; it.current(); ++it) {
-	pZone = it.current();
-	long dx = (pZone->x() - city->x())/100;
-	long dy = (pZone->y() - city->y())/100;
-	switch ( key ) {
-	    case Key_Right:
-	    case Key_Left:
-		if ( key == Key_Left )
-		    dx = -dx;
-		if ( dx > 0 ) {
-		    long dist = QABS(dy)*4 + dx;
-		    if ( dist < ddist ) {
-			ddist = dist;
-			pClosest = pZone;
-		    }
-		}
-		break;
-	    case Key_Down:
-	    case Key_Up:
-		if ( key == Key_Down )
-		    dy = -dy;
-		if ( dy > 0 ) {
-		    long dist = QABS(dx)*4 + dy;
-		    if ( dist < ddist ) {
-			ddist = dist;
-			pClosest = pZone;
-		    }
-		}
-		break;
-	}
+    pZone = it.current();
+    long dx = (pZone->x() - city->x())/100;
+    long dy = (pZone->y() - city->y())/100;
+    switch ( key ) {
+        case Key_Right:
+        case Key_Left:
+        if ( key == Key_Left )
+            dx = -dx;
+        if ( dx > 0 ) {
+            long dist = QABS(dy)*4 + dx;
+            if ( dist < ddist ) {
+            ddist = dist;
+            pClosest = pZone;
+            }
+        }
+        break;
+        case Key_Down:
+        case Key_Up:
+        if ( key == Key_Down )
+            dy = -dy;
+        if ( dy > 0 ) {
+            long dist = QABS(dx)*4 + dy;
+            if ( dist < ddist ) {
+            ddist = dist;
+            pClosest = pZone;
+            }
+        }
+        break;
+    }
     }
 
     return pClosest;
@@ -351,20 +355,20 @@ void ZoneMap::slotFindCity( const QPoint &pos )
     pClosest = 0;
     lClosest = LONG_MAX;
     for (; it.current(); ++it) {
-	pZone = it.current();
-	// use the manhattenLength, a good enough of an appoximation here
-	lDistance = QABS( x - pZone->x() ) + QABS( y - pZone->y() );
-	// first to zero wins!
-	if ( lDistance < lClosest ) {
-	    lClosest = lDistance;
-	    pClosest = pZone;
-	}
+    pZone = it.current();
+    // use the manhattenLength, a good enough of an appoximation here
+    lDistance = QABS( x - pZone->x() ) + QABS( y - pZone->y() );
+    // first to zero wins!
+    if ( lDistance < lClosest ) {
+        lClosest = lDistance;
+        pClosest = pZone;
+    }
     }
 
     // Okay, we found the closest city, but it might still be too far away.
     if ( lClosest <= iTHRESHOLD ) {
-	showCity( pClosest );
-	cursor = pClosest;
+    showCity( pClosest );
+    cursor = pClosest;
     }
 }
 
@@ -381,51 +385,51 @@ void ZoneMap::showCity( ZoneField *city )
     QString strSave;
     char *p = getenv( "TZ" );
     if ( p ) {
-	strSave = p;
+    strSave = p;
     }
     // set the timezone :)
     setenv( "TZ", strCountry + strCity, true );
     lblCity->setText( strCity.replace( QRegExp("_"), " ") + "\n" +
-		      TimeString::shortTime( ampm ) );
+              TimeString::shortTime( ampm ) );
     lblCity->setMinimumSize( lblCity->sizeHint() );
     // undue our damage...
     unsetenv( "TZ" );
     if ( p )
-	setenv( "TZ", strSave, true );
+    setenv( "TZ", strSave, true );
     // Now decide where to move the label, x & y can be reused
     int tmpx, tmpy, x, y;
     zoneToWin( pLast->x(), pLast->y(), tmpx, tmpy );
     contentsToViewport(tmpx, tmpy, x, y);
     if ( lblCity->width() > drawableW - x ) {
-	// oops... try putting it on the right
-	x = x - lblCity->width() - iLABELOFFSET;
+    // oops... try putting it on the right
+    x = x - lblCity->width() - iLABELOFFSET;
     } else {
-	// the default...
-	x += iLABELOFFSET;
+    // the default...
+    x += iLABELOFFSET;
     }
     if ( lblCity->height() > drawableH - y ) {
-	// move it up...
-	y = y - lblCity->height() - iLABELOFFSET;
+    // move it up...
+    y = y - lblCity->height() - iLABELOFFSET;
     } else if ( y < 0 ) {
-	// the city is actually off the screen...
-	// this only happens on the a zoom when you are near the top,
-	// a quick workaround..
-	y = iLABELOFFSET;
+    // the city is actually off the screen...
+    // this only happens on the a zoom when you are near the top,
+    // a quick workaround..
+    y = iLABELOFFSET;
     } else {
-	// the default
-	y += iLABELOFFSET;
+    // the default
+    y += iLABELOFFSET;
     }
 
     // draw in the city and the label
     if ( pRepaint ) {
-	int repx,
-	    repy;
-	zoneToWin( pRepaint->x(), pRepaint->y(), repx, repy );
-	updateContents( repx - iCITYOFFSET, repy - iCITYOFFSET,
-			iCITYSIZE, iCITYSIZE );
+    int repx,
+        repy;
+    zoneToWin( pRepaint->x(), pRepaint->y(), repx, repy );
+    updateContents( repx - iCITYOFFSET, repy - iCITYOFFSET,
+            iCITYSIZE, iCITYSIZE );
     }
     updateContents( tmpx - iCITYOFFSET, tmpy - iCITYOFFSET, iCITYSIZE,
-		    iCITYSIZE );
+            iCITYSIZE );
     pRepaint = pLast;
 
     lblCity->move( x, y );
@@ -439,10 +443,10 @@ void ZoneMap::resizeEvent( QResizeEvent *e )
     cmdZoom->move( _size.width() - cmdZoom->width(),
                    _size.height() - cmdZoom->height() );
     if ( !bZoom ) {
-	drawableW = width() - 2 * frameWidth();
-	drawableH = height() - 2 * frameWidth();
-	makeMap( drawableW, drawableH );
-	resizeContents( drawableW, drawableH );
+    drawableW = width() - 2 * frameWidth();
+    drawableH = height() - 2 * frameWidth();
+    makeMap( drawableW, drawableH );
+    resizeContents( drawableW, drawableH );
     }
 }
 
@@ -451,8 +455,8 @@ void ZoneMap::showZones( void ) const
     // go through the zones in the list and just display the values...
     QListIterator<ZoneField> itZone( zones );
     for ( itZone.toFirst(); itZone.current(); ++itZone ) {
-	ZoneField *pZone = itZone.current();
-	pZone->showStructure();
+    ZoneField *pZone = itZone.current();
+    pZone->showStructure();
     }
 }
 
@@ -471,7 +475,7 @@ QWidget* ZoneMap::selectionWidget( QWidget *parent) {
     QStringList continentList;
     QListIterator<ZoneField> itZone( zones );
     for ( itZone.toFirst(); itZone.current(); ++itZone ) {
-	ZoneField *pZone = itZone.current();
+    ZoneField *pZone = itZone.current();
         if ( continentList.contains( pZone->country() ) == 0 ) {
             QString name;
             QListViewItem *item;
@@ -498,7 +502,7 @@ void ZoneMap::slotGetCities( QListViewItem * contItem) {
     selectedCont = contItem->text( 1 );
     QListIterator<ZoneField> itZone( zones );
     for ( itZone.toFirst(); itZone.current(); ++itZone ) {
-	ZoneField *pZone = itZone.current();
+    ZoneField *pZone = itZone.current();
         if ( pZone->country() == contItem->text( 1 ) ) {
             QListViewItem *item;
             item = new QListViewItem( cityView, pZone->city() );
@@ -522,11 +526,11 @@ void ZoneMap::drawCities( QPainter *p )
     p->setPen( red );
     QListIterator<ZoneField> itZone( zones );
     for ( itZone.toFirst(), j = 0; itZone.current(); ++itZone, j++ ) {
-	ZoneField *pZone = itZone.current();
-	zoneToWin( pZone->x(), pZone->y(), x, y );
-	if ( x > wImg )
-	    x = x - wImg;
-	p->drawRect( x - iCITYOFFSET, y - iCITYOFFSET, iCITYSIZE, iCITYSIZE);
+    ZoneField *pZone = itZone.current();
+    zoneToWin( pZone->x(), pZone->y(), x, y );
+    if ( x > wImg )
+        x = x - wImg;
+    p->drawRect( x - iCITYOFFSET, y - iCITYOFFSET, iCITYSIZE, iCITYSIZE);
     }
 }
 
@@ -563,20 +567,20 @@ static void dayNight(QImage *pImage)
     iMid = ( relw * ( 24*60 - pTm->tm_hour * 60 - pTm->tm_min ) ) / ( 24*60 );
 
     for ( i = 0; i < hImage; i++ ) {
-	if ( wtab[i] > 0 ) {
-	    iStart = iMid - wtab[i];
-	    iStop = iMid + wtab[i];
-	    if ( iStart < 0 ) {
-		darken( pImage, iStop, wImage + iStart, i );
-	    } else if ( iStop > wImage ) {
-		darken( pImage, iStop - wImage, iStart, i );
-	    } else {
-		darken( pImage, 0, iStart, i );
-		darken( pImage, iStop, wImage, i );
-	    }
-	} else {
-	    darken( pImage, 0, wImage, i );
-	}
+    if ( wtab[i] > 0 ) {
+        iStart = iMid - wtab[i];
+        iStop = iMid + wtab[i];
+        if ( iStart < 0 ) {
+        darken( pImage, iStop, wImage + iStart, i );
+        } else if ( iStop > wImage ) {
+        darken( pImage, iStop - wImage, iStart, i );
+        } else {
+        darken( pImage, 0, iStart, i );
+        darken( pImage, iStop, wImage, i );
+        }
+    } else {
+        darken( pImage, 0, wImage, i );
+    }
     }
 }
 
@@ -591,8 +595,8 @@ static inline void darken( QImage *pImage, int start, int stop, int row )
 
     p = pImage->scanLine( row );
     for ( j = start; j <= stop; j++ ) {
-	if ( p[j] < colors )
-	    p[j] += colors;
+    if ( p[j] < colors )
+        p[j] += colors;
     }
 }
 
@@ -600,11 +604,11 @@ void ZoneMap::makeMap( int w, int h )
 {
     QImage imgOrig = Resource::loadImage( strMAP );
     if ( imgOrig.isNull() ) {
-	QMessageBox::warning( this,
-	                      tr( "Couldn't Find Map" ),
-	                      tr( "<p>Couldn't load map: %1, exiting")
+    QMessageBox::warning( this,
+                          tr( "Couldn't Find Map" ),
+                          tr( "<p>Couldn't load map: %1, exiting")
                               .arg( strMAP ) );
-	exit(-1);
+    exit(-1);
     }
 
     // set up the color table for darkening...
@@ -614,15 +618,15 @@ void ZoneMap::makeMap( int w, int h )
     imgOrig.setNumColors( 2 * numColors );
     // darken the new ones...
     for ( int i = 0; i < numColors; i++ ) {
-	QRgb rgb = imgOrig.color( i );
-	imgOrig.setColor ( i + numColors, qRgb(  2 * qRed( rgb ) / 3,
-	                   2 * qGreen( rgb ) / 3, 2 * qBlue( rgb ) / 3 ) );
+    QRgb rgb = imgOrig.color( i );
+    imgOrig.setColor ( i + numColors, qRgb(  2 * qRed( rgb ) / 3,
+                       2 * qGreen( rgb ) / 3, 2 * qBlue( rgb ) / 3 ) );
     }
 
     // else go one with making the map...
     if ( bIllum ) {
-	// do a daylight mask
-	dayNight(&imgOrig);
+    // do a daylight mask
+    dayNight(&imgOrig);
     }
     // redo the width and height
     wImg = w;
@@ -654,7 +658,7 @@ void ZoneMap::drawContents( QPainter *p, int cx, int cy, int cw, int ch )
         pixmapH = pixCurr->height();
     if ( !bZoom &&  ( ( pixmapW != drawableW ) ||
                       ( pixmapH != drawableH) ) ) {
-	makeMap( drawableW, drawableH );
+    makeMap( drawableW, drawableH );
     }
 
     // taken from the scrollview example...
@@ -665,27 +669,27 @@ void ZoneMap::drawContents( QPainter *p, int cx, int cy, int cw, int ch )
     int leftcol= cx / colwidth;
     int rightcol= ( cx + cw + colwidth - 1 ) / colwidth;
     for ( int r = toprow; r <= bottomrow; r++ ) {
-	int py = r * rowheight;
-	for ( int c = leftcol; c <= rightcol; c++ ) {
-	    int px = c * colwidth;
-	    p->drawPixmap( px, py, *pixCurr );
-	}
+    int py = r * rowheight;
+    for ( int c = leftcol; c <= rightcol; c++ ) {
+        int px = c * colwidth;
+        p->drawPixmap( px, py, *pixCurr );
+    }
     }
 
     // Draw that city!
     if ( pLast )
-	drawCity( p, pLast );
+    drawCity( p, pLast );
 }
 
 void ZoneMap::slotZoom( bool setZoom )
 {
     bZoom = setZoom;
     if ( bZoom ) {
-	makeMap( 2 * wImg , 2 * hImg );
-	resizeContents( wImg, hImg );
+    makeMap( 2 * wImg , 2 * hImg );
+    resizeContents( wImg, hImg );
     } else {
-	makeMap( drawableW, drawableH );
-	resizeContents( drawableW, drawableH );
+    makeMap( drawableW, drawableH );
+    resizeContents( drawableW, drawableH );
     }
 }
 
@@ -711,9 +715,9 @@ void ZoneMap::slotRedraw( void )
     int x,
         y;
     if ( pRepaint ) {
-	pLast = 0;
-	zoneToWin(pRepaint->x(), pRepaint->y(), x, y);
-	updateContents( x - iCITYOFFSET, y - iCITYOFFSET, iCITYSIZE, iCITYSIZE);
+    pLast = 0;
+    zoneToWin(pRepaint->x(), pRepaint->y(), x, y);
+    updateContents( x - iCITYOFFSET, y - iCITYOFFSET, iCITYSIZE, iCITYSIZE);
         pRepaint = 0;
     }
 }

@@ -28,13 +28,17 @@
 
 #include "inputmethodsettings.h"
 
+/* OPIE */
 #include <qpe/config.h>
+#include <opie2/odebug.h>
 
+/* QT */
 #include <qspinbox.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>
+
 
 InputMethodSettings::InputMethodSettings( QWidget *parent, const char *name ):QWidget( parent, name )
 {
@@ -73,7 +77,7 @@ void InputMethodSettings::appletChanged()
 
 void InputMethodSettings::accept()
 {
-    qDebug( "InputMethodSettings::accept()" );
+    odebug << "InputMethodSettings::accept()" << oendl;
     Config cfg( "Launcher" );
     cfg.setGroup( "InputMethods" );
     cfg.writeEntry( "Resize", _resize->isChecked() );

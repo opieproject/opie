@@ -3,10 +3,14 @@
 // changes by Maximilian Reiss <harlekin@handhelds.org>
 
 #include "citytimebase.h"
+#include "zonemap.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+
+/* QT */
 #include <qlabel.h>
 #include <qtoolbutton.h>
-#include "zonemap.h"
 #include <qlayout.h>
 #include <qwhatsthis.h>
 
@@ -19,7 +23,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     : QWidget( parent, name, WStyle_ContextHelp )
 {
     if ( !name )
-	setName( "CityTimeBase" );
+    setName( "CityTimeBase" );
     setCaption( tr( "City Time" ) );
     CityTimeBaseLayout = new QVBoxLayout( this );
     CityTimeBaseLayout->setSpacing( 3 );
@@ -341,71 +345,71 @@ bool CityTimeBase::event( QEvent* ev )
 {
     bool ret = QWidget::event( ev );
     if ( ev->type() == QEvent::ApplicationFontChange ) {
-	QFont cmdCity7_font(  cmdCity7->font() );
-	cmdCity7_font.setBold( TRUE );
-	cmdCity7->setFont( cmdCity7_font );
-	QFont lblCTime9_font(  lblCTime9->font() );
-	lblCTime9_font.setPointSize( 10 );
-	lblCTime9->setFont( lblCTime9_font );
-	QFont cmdCity8_font(  cmdCity8->font() );
-	cmdCity8_font.setBold( TRUE );
-	cmdCity8->setFont( cmdCity8_font );
-	QFont cmdCity2_font(  cmdCity2->font() );
-	cmdCity2_font.setBold( TRUE );
-	cmdCity2->setFont( cmdCity2_font );
-	QFont lblCTime6_font(  lblCTime6->font() );
-	lblCTime6_font.setPointSize( 10 );
-	lblCTime6->setFont( lblCTime6_font );
-	QFont cmdCity6_font(  cmdCity6->font() );
-	cmdCity6_font.setBold( TRUE );
-	cmdCity6->setFont( cmdCity6_font );
-	QFont cmdCity4_font(  cmdCity4->font() );
-	cmdCity4_font.setBold( TRUE );
-	cmdCity4->setFont( cmdCity4_font );
-	QFont lblCTime5_font(  lblCTime5->font() );
-	lblCTime5_font.setPointSize( 10 );
-	lblCTime5->setFont( lblCTime5_font );
-	QFont lblCTime2_font(  lblCTime2->font() );
-	lblCTime2_font.setPointSize( 10 );
-	lblCTime2->setFont( lblCTime2_font );
-	QFont lblCTime1_font(  lblCTime1->font() );
-	lblCTime1_font.setPointSize( 10 );
-	lblCTime1->setFont( lblCTime1_font );
-	QFont cmdCity3_font(  cmdCity3->font() );
-	cmdCity3_font.setBold( TRUE );
-	cmdCity3->setFont( cmdCity3_font );
-	QFont lblCTime8_font(  lblCTime8->font() );
-	lblCTime8_font.setPointSize( 10 );
-	lblCTime8->setFont( lblCTime8_font );
-	QFont cmdCity1_font(  cmdCity1->font() );
-	cmdCity1_font.setBold( TRUE );
-	cmdCity1->setFont( cmdCity1_font );
-	QFont lblCTime7_font(  lblCTime7->font() );
-	lblCTime7_font.setPointSize( 10 );
-	lblCTime7->setFont( lblCTime7_font );
-	QFont lblCTime4_font(  lblCTime4->font() );
-	lblCTime4_font.setPointSize( 10 );
-	lblCTime4->setFont( lblCTime4_font );
-	QFont cmdCity5_font(  cmdCity5->font() );
-	cmdCity5_font.setBold( TRUE );
-	cmdCity5->setFont( cmdCity5_font );
-	QFont lblCTime3_font(  lblCTime3->font() );
-	lblCTime3_font.setPointSize( 10 );
-	lblCTime3->setFont( lblCTime3_font );
-	QFont cmdCity9_font(  cmdCity9->font() );
-	cmdCity9_font.setBold( TRUE );
-	cmdCity9->setFont( cmdCity9_font );
+    QFont cmdCity7_font(  cmdCity7->font() );
+    cmdCity7_font.setBold( TRUE );
+    cmdCity7->setFont( cmdCity7_font );
+    QFont lblCTime9_font(  lblCTime9->font() );
+    lblCTime9_font.setPointSize( 10 );
+    lblCTime9->setFont( lblCTime9_font );
+    QFont cmdCity8_font(  cmdCity8->font() );
+    cmdCity8_font.setBold( TRUE );
+    cmdCity8->setFont( cmdCity8_font );
+    QFont cmdCity2_font(  cmdCity2->font() );
+    cmdCity2_font.setBold( TRUE );
+    cmdCity2->setFont( cmdCity2_font );
+    QFont lblCTime6_font(  lblCTime6->font() );
+    lblCTime6_font.setPointSize( 10 );
+    lblCTime6->setFont( lblCTime6_font );
+    QFont cmdCity6_font(  cmdCity6->font() );
+    cmdCity6_font.setBold( TRUE );
+    cmdCity6->setFont( cmdCity6_font );
+    QFont cmdCity4_font(  cmdCity4->font() );
+    cmdCity4_font.setBold( TRUE );
+    cmdCity4->setFont( cmdCity4_font );
+    QFont lblCTime5_font(  lblCTime5->font() );
+    lblCTime5_font.setPointSize( 10 );
+    lblCTime5->setFont( lblCTime5_font );
+    QFont lblCTime2_font(  lblCTime2->font() );
+    lblCTime2_font.setPointSize( 10 );
+    lblCTime2->setFont( lblCTime2_font );
+    QFont lblCTime1_font(  lblCTime1->font() );
+    lblCTime1_font.setPointSize( 10 );
+    lblCTime1->setFont( lblCTime1_font );
+    QFont cmdCity3_font(  cmdCity3->font() );
+    cmdCity3_font.setBold( TRUE );
+    cmdCity3->setFont( cmdCity3_font );
+    QFont lblCTime8_font(  lblCTime8->font() );
+    lblCTime8_font.setPointSize( 10 );
+    lblCTime8->setFont( lblCTime8_font );
+    QFont cmdCity1_font(  cmdCity1->font() );
+    cmdCity1_font.setBold( TRUE );
+    cmdCity1->setFont( cmdCity1_font );
+    QFont lblCTime7_font(  lblCTime7->font() );
+    lblCTime7_font.setPointSize( 10 );
+    lblCTime7->setFont( lblCTime7_font );
+    QFont lblCTime4_font(  lblCTime4->font() );
+    lblCTime4_font.setPointSize( 10 );
+    lblCTime4->setFont( lblCTime4_font );
+    QFont cmdCity5_font(  cmdCity5->font() );
+    cmdCity5_font.setBold( TRUE );
+    cmdCity5->setFont( cmdCity5_font );
+    QFont lblCTime3_font(  lblCTime3->font() );
+    lblCTime3_font.setPointSize( 10 );
+    lblCTime3->setFont( lblCTime3_font );
+    QFont cmdCity9_font(  cmdCity9->font() );
+    cmdCity9_font.setBold( TRUE );
+    cmdCity9->setFont( cmdCity9_font );
     }
     return ret;
 }
 
 void CityTimeBase::beginNewTz()
 {
-    qWarning( "CityTimeBase::beginNewTz(): Not implemented yet!" );
+    owarn << "CityTimeBase::beginNewTz(): Not implemented yet!" << oendl;
 }
 
 void CityTimeBase::slotNewTz(const QString &, const QString &)
 {
-    qWarning( "CityTimeBase::slotNewTz(const QString &, const QString &): Not implemented yet!" );
+    owarn << "CityTimeBase::slotNewTz(const QString &, const QString &): Not implemented yet!" << oendl;
 }
 

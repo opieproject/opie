@@ -28,12 +28,16 @@
 
 #include "doctabsettings.h"
 
+/* OPIE */
 #include <qpe/config.h>
+#include <opie2/odebug.h>
 
+/* QT */
 #include <qcheckbox.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>
+
 
 DocTabSettings::DocTabSettings( QWidget *parent, const char *name ):QWidget( parent, name )
 {
@@ -59,7 +63,7 @@ void DocTabSettings::appletChanged()
 
 void DocTabSettings::accept()
 {
-    qDebug( "DocTabSettings::accept()" );
+    odebug << "DocTabSettings::accept()" << oendl;
     Config cfg( "Launcher" );
     cfg.setGroup( "DocTab" );
     cfg.writeEntry( "Enable", _enable->isChecked() );

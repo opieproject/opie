@@ -19,18 +19,24 @@
  **********************************************************************/
 #include "security.h"
 
+/* OPIE */
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/password.h>
 #include <qpe/qpedialog.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <opie2/odebug.h>
 
+/* QT */
 #include <qcheckbox.h>
 #include <qpushbutton.h>
 #include <qcombobox.h>
 #include <qmessagebox.h>
 #include <qfile.h>
 #include <qtextstream.h>
+
+
+using namespace Opie::Core;
 
     Security::Security( QWidget* parent,  const char* name, WFlags fl )
 : SecurityBase( parent, name, TRUE, WStyle_ContextHelp )
@@ -118,7 +124,7 @@ void Security::restoreDefaults()
 {
     QMessageBox unrecbox(
     tr("Attention"),
-    tr(	"<p>All user-defined net ranges will be lost."),
+    tr( "<p>All user-defined net ranges will be lost."),
     QMessageBox::Warning,
     QMessageBox::Cancel, QMessageBox::Yes, QMessageBox::NoButton,
     0, QString::null, TRUE, WStyle_StaysOnTop);
@@ -170,16 +176,16 @@ void Security::show()
         //if ( passcode.isEmpty() )
         //reject();
     } else {
-		if (!valid) // security passcode was not asked yet, so ask now
-		{
-			QString pc = enterPassCode(tr("Enter passcode"));
-			if ( pc != passcode ) {
-				QMessageBox::critical(this, tr("Passcode incorrect"),
-						tr("The passcode entered is incorrect.\nAccess denied"));
-				reject();
-				return;
-			}
-		}
+        if (!valid) // security passcode was not asked yet, so ask now
+        {
+            QString pc = enterPassCode(tr("Enter passcode"));
+            if ( pc != passcode ) {
+                QMessageBox::critical(this, tr("Passcode incorrect"),
+                        tr("The passcode entered is incorrect.\nAccess denied"));
+                reject();
+                return;
+            }
+        }
     }
     setEnabled(TRUE);
     valid=TRUE;
@@ -216,17 +222,17 @@ void Security::selectNet(int auth_peer,int auth_peer_bits, bool update)
 
     //insert user-defined list of netranges upon start
     if (update) {
-	//User selected/active netrange first
-	syncnet->insertItem( tr( sn ) );
+    //User selected/active netrange first
+    syncnet->insertItem( tr( sn ) );
 
-	Config cfg("Security");
-	cfg.setGroup("Sync");
+    Config cfg("Security");
+    cfg.setGroup("Sync");
 
-	//set up defaults if needed, if someone manually deletes net0 he'll get a suprise hehe
-	QString test = cfg.readEntry("net0","");
-	if (test.isEmpty()) {
+    //set up defaults if needed, if someone manually deletes net0 he'll get a suprise hehe
+    QString test = cfg.readEntry("net0","");
+    if (test.isEmpty()) {
             insertDefaultRanges();
-	} else {
+    } else {
             // 10 ought to be enough for everybody... :)
             // If you need more, don't forget to edit applySecurity() as well
             bool already_there=FALSE;
@@ -257,7 +263,7 @@ void Security::selectNet(int auth_peer,int auth_peer_bits, bool update)
             return;
         }
     }
-    qDebug("No match for \"%s\"",sn.latin1());
+    odebug << "No match for \"" << sn << "\"" << oendl;
 }
 
 void Security::parseNet(const QString& sn,int& auth_peer,int& auth_peer_bits)
@@ -340,12 +346,12 @@ void Security::applySecurity()
         cfg.writeEntry("auth_peer",auth_peer);
         cfg.writeEntry("auth_peer_bits",auth_peer_bits);
 
-	//write back all other net ranges in *cleartext*
-	for (int i=0; i<10; i++) {
-		QString target;
-		target.sprintf("net%d", i);
-        	cfg.writeEntry(target,syncnet->text(i));
-	}
+    //write back all other net ranges in *cleartext*
+    for (int i=0; i<10; i++) {
+        QString target;
+        target.sprintf("net%d", i);
+            cfg.writeEntry(target,syncnet->text(i));
+    }
 
 #ifdef ODP
         #error "Use 0,1,2 and use Launcher"
