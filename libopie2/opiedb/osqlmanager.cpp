@@ -2,7 +2,7 @@
 #include "osqlbackendmanager.h"
 #include "osqlitedriver.h"
 
-
+#include <stdlib.h>
 
 namespace Opie {
 namespace DB {
