@@ -157,21 +157,22 @@ void TableView::setTodos( OTodoAccess::List::Iterator it,
     QTime t;
     t.start();
     for (; it != end; ++it ) {
+        OTodo todo = (*it);
         /* test if the categories match */
         if ( !currentCat.isEmpty() &&
-             !(*it).categories().contains( id ) ) {
+             !todo.categories().contains( id ) ) {
             continue;
         }
         /* the item is completed but we shouldn't show it */
-        if ( !showCompleted && (*it).isCompleted() ) {
+        if ( !showCompleted && todo.isCompleted() ) {
             continue;
         }
         /* the item is not overdue but we should only show overdue */
-        if ( showOverDue && !(*it).isOverdue() ) {
+        if ( showOverDue && !todo.isOverdue() ) {
             continue;
         }
         /* now it's fine to add it */
-        insertTodo( (*it) );
+        insertTodo(  todo );
 
     }
     int elc = time.elapsed();
