@@ -95,4 +95,10 @@ clean : $(TOPDIR)/.config
 
 apidox : doc/generate_apidox 
 
+version:
+	@echo "Opie-Version is computed as $(VERSION_MAJ) (version_maj), \
+                                           $(VERSION_MIN) (version_min), \
+                                           $(VERSION_PAT) (version_pat), \
+                                           $(SUB_VERSION) (subversion)"
+
 include $(TOPDIR)/Rules.make
