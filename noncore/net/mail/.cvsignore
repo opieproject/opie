@@ -26,3 +26,6 @@ newmaildirui.cpp
 newmaildirui.h
 sendmailprogressui.cpp
 sendmailprogressui.h
+selectstoreui.cpp
+selectstoreui.h
+
