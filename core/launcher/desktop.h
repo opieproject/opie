@@ -99,6 +99,7 @@ public slots:
     void raiseMenu();
     void raiseLauncher();
     void raiseEmail();
+    void execAutoStart();
     void togglePower();
     void toggleLight();
     void toggleNumLockState();

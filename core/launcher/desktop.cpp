@@ -52,7 +52,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
 class QCopKeyRegister
 {
 public:
@@ -497,6 +496,17 @@ void Desktop::raiseEmail()
     executeOrModify("Applications/qtmail.desktop");
 }
 
+// autoStarts apps on resume and start
+void Desktop::execAutoStart()
+{
+  QString appName;
+  Config cfg( "autostart" );
+  cfg.setGroup( "AutoStart" );
+  appName = cfg.readEntry("Apps", "");
+  QCopEnvelope e("QPE/System", "execute(QString)");
+  e << QString(appName);
+}
+
 #if defined(QPE_HAVE_TOGGLELIGHT)
 #include <qpe/config.h>
 
@@ -531,22 +541,26 @@ static void darkScreen()
 
 void Desktop::togglePower()
 {
-    bool wasloggedin = loggedin;
-    loggedin=0;
-    darkScreen();
-    if ( wasloggedin )
-	blankScreen();
-    system("apm --suspend");
-    QWSServer::screenSaverActivate( FALSE );
-    {
-	QCopEnvelope("QPE/Card", "mtabChanged()" ); // might have changed while asleep
-	QCopEnvelope e("QPE/System", "setBacklight(int)");
-	e << -3; // Force on
-    }
-    if ( wasloggedin )
-	login(TRUE);
-    //qcopBridge->closeOpenConnections();
-    //qDebug("called togglePower()!!!!!!");
+  bool wasloggedin = loggedin;
+  loggedin=0;
+  darkScreen();
+  if ( wasloggedin )
+    blankScreen();
+  
+  system("apm --suspend");
+  execAutoStart();
+  QWSServer::screenSaverActivate( FALSE );
+  {
+    QCopEnvelope("QPE/Card", "mtabChanged()" ); // might have changed while asleep
+    QCopEnvelope e("QPE/System", "setBacklight(int)");
+    e << -3; // Force on
+  }
+  if ( wasloggedin ) {
+    login(TRUE);
+  }
+  
+  //qcopBridge->closeOpenConnections();
+  //qDebug("called togglePower()!!!!!!");
 }
 
 void Desktop::toggleLight()

@@ -635,9 +635,39 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
 	e << home;
 	int locked = (int) Desktop::screenLocked();
 	e << locked;
+	// register an app for autostart
+	// if clear is send the list is cleared.
+    } else if ( msg == "autoStart(QString)" ) {
+      QString appName;
+      stream >> appName;
+      Config cfg( "autostart" );
+      cfg.setGroup( "AutoStart" );
+      if ( appName.compare("clear") == 0){
+	cfg.writeEntry("Apps", "");
+      }
+    } else if ( msg == "autoStart(QString,QString)" ) {
+      QString modifier, appName;
+      stream >> modifier >> appName;
+      Config cfg( "autostart" );
+      cfg.setGroup( "AutoStart" );
+      if ( modifier.compare("add") == 0 ){
+	// only add it appname is entered
+	if (!appName.isEmpty()) {
+	  cfg.writeEntry("Apps", appName);
+	}
+      } else if (modifier.compare("remove") == 0 ) {
+	// need to change for multiple entries
+	// actually remove is right now simular to clear, but in future there 
+	// should be multiple apps in autostart possible.
+	QString checkName;
+	checkName = cfg.readEntry("Apps", "");
+	if (checkName == appName) {
+	  cfg.writeEntry("Apps", "");
+	}
+      }
     } else if ( msg == "sendCardInfo()" ) {
-	QCopEnvelope e( "QPE/Desktop", "cardInfo(QString)" );
-	const QList<FileSystem> &fs = storage->fileSystems();
+        QCopEnvelope e( "QPE/Desktop", "cardInfo(QString)" );
+        const QList<FileSystem> &fs = storage->fileSystems();
 	QListIterator<FileSystem> it ( fs );
 	QString s;
 	QString homeDir = getenv("HOME");
