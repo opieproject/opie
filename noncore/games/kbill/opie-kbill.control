@@ -1,0 +1,12 @@
+Files: bin/kbill apps/Games/kbill.desktop pics/kbill/*
+Priority: optional
+Section: opie/applications
+Maintainer: Mark WEstcott <mark@houseoffish.org>
+Architecture: arm
+Version: 0.8-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+License: GPL
+Description: the famous hit Bill game
+ Hit Bill as hard as you can before he
+ infects your network with a wannabe 
+ OS.
