@@ -122,7 +122,7 @@ public:
     void showMainDocumentWidget( QWidget*, bool nomax=FALSE );
     static void showDialog( QDialog*, bool nomax=FALSE );
     static int execDialog( QDialog*, bool nomax=FALSE );
-    static int showWidget( QWidget*, bool nomax=FALSE );
+    static void showWidget( QWidget*, bool nomax=FALSE );
     /* Merge setTempScreenSaverMode */
 #ifdef QTOPIA_INTERNAL_INITAPP
     void initApp( int argv, char **argv );
@@ -208,7 +208,7 @@ inline int QPEApplication::execDialog( QDialog* d, bool nomax )
     return d->exec();
 }
 
-inline int QPEApplication::showWidget( QWidget* wg, bool nomax )
+inline void QPEApplication::showWidget( QWidget* wg, bool nomax )
 {
     QSize sh = wg->sizeHint();
     int w = QMAX(sh.width(),wg->width());
