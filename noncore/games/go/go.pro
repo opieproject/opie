@@ -11,7 +11,7 @@ SOURCES		= amigo.c \
 		main.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopiecore2
 TARGET		= go
 
 
