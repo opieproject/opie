@@ -41,4 +41,4 @@ TARGET		= aqpkg
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lstdc++
-
+DESTDIR = $(OPIEDIR)/bin
