@@ -36,6 +36,7 @@ public:
 protected:
     void drawContents( QPainter *p );
     void drawHand( QPainter *p, QPoint, QPoint );
+    void drawPointers ( QPainter *p, const QRect &r, const QColor &c, const QTime &t, const QTime *t2 = 0);
 
 private:
     QPoint rotate( QPoint center, QPoint p, int angle );
