@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.6 2002-11-13 14:14:51 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.7 2002-11-13 15:02:46 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.6  2002-11-13 14:14:51  eilers
+ * Revision 1.7  2002-11-13 15:02:46  eilers
+ * Small Bug in sorted fixed
+ *
+ * Revision 1.6  2002/11/13 14:14:51  eilers
  * Added sorted for Contacts..
  *
  * Revision 1.5  2002/11/01 15:10:42  eilers
@@ -312,12 +315,12 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 			QStringList names;
 			QArray<int> m_currentQuery( m_contactList.count() );
 
-			// First fill map and StringList with all Names ( better LastNames ? )
+			// First fill map and StringList with all Names 
 			// Afterwards sort namelist and use map to fill array to return..
 			QValueListConstIterator<OContact> it;
 			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-				names.append( (*it).lastName() );
-				nameToUid.insert( (*it).lastName(), (*it).uid() );
+				names.append( (*it).fileAs() );
+				nameToUid.insert( (*it).fileAs(), (*it).uid() );
 			}
 			names.sort();
 
