@@ -1,0 +1,6 @@
+logindialogui.cpp
+logindialogui.h
+sendmailprogressui.cpp
+sendmailprogressui.h
+.moc
+Makefile

@@ -17,8 +17,10 @@
 #include "mboxwrapper.h"
 #include "logindialog.h"
 #include "mailtypes.h"
-#include "defines.h"
+//#include "defines.h"
 #include "sendmailprogress.h"
+
+#define USER_AGENT          "OpieMail v0.1"
 
 progressMailSend*SMTPwrapper::sendProgress = 0;
 

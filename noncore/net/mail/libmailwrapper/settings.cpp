@@ -4,7 +4,17 @@
 #include <qpe/config.h>
 
 #include "settings.h"
-#include "defines.h"
+//#include "defines.h"
+
+#define IMAP_PORT           "143"
+#define IMAP_SSL_PORT       "993"
+#define SMTP_PORT           "25"
+#define SMTP_SSL_PORT       "465"
+#define POP3_PORT           "110"
+#define POP3_SSL_PORT       "995"
+#define NNTP_PORT           "119"
+#define NNTP_SSL_PORT       "563"
+
 
 Settings::Settings()
     : QObject()
@@ -62,20 +72,20 @@ void Settings::updateAccounts()
         SMTPaccount *account = new SMTPaccount( (*it).replace(0, 5, "") );
         accounts.append( account );
     }
-    
+
     QStringList nntp = dir.entryList( "nntp-*" );
     for ( it = nntp.begin(); it != nntp.end(); it++ ) {
         qDebug( "Added NNTP account" );
         NNTPaccount *account = new NNTPaccount( (*it).replace(0, 5, "") );
         accounts.append( account );
     }
-    
+
     readAccounts();
 }
 
 void Settings::saveAccounts()
 {
-    checkDirectory(); 
+    checkDirectory();
     Account *it;
 
     for ( it = accounts.first(); it; it = accounts.next() ) {
@@ -85,7 +95,7 @@ void Settings::saveAccounts()
 
 void Settings::readAccounts()
 {
-    checkDirectory(); 
+    checkDirectory();
     Account *it;
 
     for ( it = accounts.first(); it; it = accounts.next() ) {
@@ -130,7 +140,7 @@ QString IMAPaccount::getUniqueFileName()
 {
     int num = 0;
     QString unique;
-    
+
     QDir dir( (QString) getenv( "HOME" ) + "/Applications/opiemail" );
 
     QStringList imap = dir.entryList( "imap-*" );
@@ -164,7 +174,7 @@ void IMAPaccount::save()
 {
     qDebug( "saving " + getFileName() );
     Settings::checkDirectory();
-    
+
     Config *conf = new Config( getFileName(), Config::File );
     conf->setGroup( "IMAP Account" );
     conf->writeEntry( "Account", accountName );
@@ -207,7 +217,7 @@ QString POP3account::getUniqueFileName()
 {
     int num = 0;
     QString unique;
-    
+
     QDir dir( (QString) getenv( "HOME" ) + "/Applications/opiemail" );
 
     QStringList imap = dir.entryList( "pop3-*" );
@@ -234,7 +244,7 @@ void POP3account::save()
 {
     qDebug( "saving " + getFileName() );
     Settings::checkDirectory();
-    
+
     Config *conf = new Config( getFileName(), Config::File );
     conf->setGroup( "POP3 Account" );
     conf->writeEntry( "Account", accountName );
@@ -281,7 +291,7 @@ QString SMTPaccount::getUniqueFileName()
 {
     int num = 0;
     QString unique;
-    
+
     QDir dir( (QString) getenv( "HOME" ) + "/Applications/opiemail" );
 
     QStringList imap = dir.entryList( "smtp-*" );
@@ -309,7 +319,7 @@ void SMTPaccount::save()
 {
     qDebug( "saving " + getFileName() );
     Settings::checkDirectory();
-    
+
     Config *conf = new Config( getFileName(), Config::File );
     conf->setGroup( "SMTP Account" );
     conf->writeEntry( "Account", accountName );
@@ -354,7 +364,7 @@ QString NNTPaccount::getUniqueFileName()
 {
     int num = 0;
     QString unique;
-    
+
     QDir dir( (QString) getenv( "HOME" ) + "/Applications/opiemail" );
 
     QStringList imap = dir.entryList( "nntp-*" );
@@ -382,7 +392,7 @@ void NNTPaccount::save()
 {
     qDebug( "saving " + getFileName() );
     Settings::checkDirectory();
-    
+
     Config *conf = new Config( getFileName(), Config::File );
     conf->setGroup( "NNTP Account" );
     conf->writeEntry( "Account", accountName );

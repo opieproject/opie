@@ -7,8 +7,19 @@
 #include <qdir.h>
 
 #include "mailwrapper.h"
-#include "logindialog.h"
-#include "defines.h"
+//#include "logindialog.h"
+//#include "defines.h"
+
+#define UNDEFINED 64
+#define MAXLINE  76
+#define UTF16MASK       0x03FFUL
+#define UTF16SHIFT      10
+#define UTF16BASE       0x10000UL
+#define UTF16HIGHSTART  0xD800UL
+#define UTF16HIGHEND    0xDBFFUL
+#define UTF16LOSTART    0xDC00UL
+#define UTF16LOEND      0xDFFFUL
+
 
 Attachment::Attachment( DocLnk lnk )
 {

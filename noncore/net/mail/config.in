@@ -1,4 +1,4 @@
  config MAIL3
     boolean "opie-mail3 (a mail client)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBMAILWRAPPER
