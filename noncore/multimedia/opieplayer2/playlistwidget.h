@@ -92,6 +92,8 @@ private:
 
     QListView *currentFileListView() const;
 
+    bool inFileListMode() const;
+
 private slots:
     void populateSkinsMenu();
     void skinsMenuActivated(int);

@@ -534,45 +534,25 @@ void PlayListWidget::setPlaylist( bool shown ) {
 
 
 void PlayListWidget::addSelected() {
-  qDebug("addSelected");
-  DocLnk lnk;
-  QString filename;
-  switch (whichList()) {
+  assert( inFileListMode() );
 
-  case 0: //playlist
-    return;
-    break;
-  case 1: { //audio
-    QListViewItemIterator it( audioView );
-    for ( ; it.current(); ++it ) {
+  QListView *fileListView = currentFileListView();
+  QListViewItemIterator it( fileListView );
+  for ( ; it.current(); ++it )
       if ( it.current()->isSelected() ) {
-        filename=it.current()->text(3);
-        lnk.setName( QFileInfo(filename).baseName() ); //sets name
-        lnk.setFile( filename ); //sets file name
-        d->selectedFiles->addToSelection(  lnk);
-        
+          QString filename = it.current()->text(3);
+
+          DocLnk lnk;
+          lnk.setName( QFileInfo( filename ).baseName() ); //sets name
+          lnk.setFile( filename ); //sets file name
+
+          d->selectedFiles->addToSelection( lnk );
       }
-    }
-    audioView->clearSelection();    
-  }
-    break;
-    
-  case 2: { // video
-    QListViewItemIterator it( videoView );
-    for ( ; it.current(); ++it ) {
-      if ( it.current()->isSelected() ) {
-        filename=it.current()->text(3);
-        lnk.setName( QFileInfo(filename).baseName() ); //sets name
-        lnk.setFile( filename ); //sets file name
-        d->selectedFiles->addToSelection(  lnk);
-      }
-    }
-    videoView->clearSelection();
-  }
-    break;
-  };
-  tabWidget->setCurrentPage(0);
-  writeCurrentM3u();          
+
+  fileListView->clearSelection();
+
+  tabWidget->setCurrentPage( 0 );
+  writeCurrentM3u();
 }
 
 
@@ -797,6 +777,12 @@ QListView *PlayListWidget::currentFileListView() const
         default: assert( false );
     }
     return 0;
+}
+
+bool PlayListWidget::inFileListMode() const
+{
+    TabType tab = currentTab();
+    return tab == AudioFiles || tab == VideoFiles;
 }
 
 void PlayListWidget::openFile() {
