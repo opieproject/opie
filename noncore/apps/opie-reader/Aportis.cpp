@@ -90,7 +90,7 @@ CList<Bkmk>* Aportis::getbkmklist()
   return t;
 }
 
-int Aportis::openfile(const char *src)
+int Aportis::OpenFile(const char *src)
 {
   //  printf("In openfile\n");
   int ret = 0;

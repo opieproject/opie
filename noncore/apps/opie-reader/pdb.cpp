@@ -1,4 +1,7 @@
 #include "pdb.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 size_t Cpdb::recordpos(int n)
 {
@@ -46,10 +49,13 @@ bool Cpdb::openfile(const char *src)
 
     // just holds the first few chars of the file
     //	char buf[0x100];
-    fseek(fin,0,SEEK_END);
-    file_length = ftell(fin);
+    struct stat buf;
+    stat(src, &buf);
+    file_length = buf.st_size;
+//    fseek(fin,0,SEEK_END);
+//    file_length = ftell(fin);
 
-    fseek(fin,0,SEEK_SET);
+//    fseek(fin,0,SEEK_SET);
 
     fread(&head, 1, sizeof(head), fin);
 

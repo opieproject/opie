@@ -13,12 +13,15 @@ class CDrawBuffer;
 //class CBuffer;
 class QPainter;
 class QTimer;
+class QPixmap;
+class statedata;
 
 class QTReader : public QWidget
 {
     Q_OBJECT
 
       friend class QTReaderApp;
+    void suspend() { buffdoc.suspend(); }
     void drawText(QPainter& p, int x, int y, tchar* text);
     int m_delay;
     unsigned int m_overlap;
@@ -37,7 +40,18 @@ public:
     QTReader( QWidget *parent=0, const char *name=0, WFlags f = 0);
     //    QTReader( const QString& filename, QWidget *parent=0, const tchar *name=0, WFlags f = 0);
     ~QTReader();
+    void zoomin();
+    void zoomout();
+    void setSaveData(unsigned char*& data, unsigned short& len, unsigned char* src, unsigned short srclen)
+	{
+	    buffdoc.setSaveData(data, len, src, srclen);
+	}
+    void putSaveData(unsigned char*& src, unsigned short& srclen)
+	{
+	    buffdoc.putSaveData(src, srclen);
+	}
     bool empty();
+    void setContinuous(bool _b);
     void toggle_autoscroll();
     void setautoscroll(bool);
     void disableAutoscroll() { m_autoScroll = false; }
@@ -108,6 +122,18 @@ public:
 	bstripcr = _b;
 	setfilter(getfilter());
       }
+    void setonespace(bool _b)
+      {
+	bonespace = _b;
+	setfilter(getfilter());
+      }
+#ifdef REPALM
+    void setrepalm(bool _b)
+      {
+	brepalm = _b;
+	setfilter(getfilter());
+      }
+#endif
     void setstriphtml(bool _b)
       {
 	bstriphtml = _b;
@@ -190,8 +216,12 @@ public:
     if (bdehyphen) filt->addfilter(new dehyphen);
     if (bunindent) filt->addfilter(new unindent);
     if (brepara) filt->addfilter(new repara);
+    if (bonespace) filt->addfilter(new OnePara);
     if (bindenter) filt->addfilter(new indenter(bindenter));
     if (bdblspce) filt->addfilter(new dblspce);
+#ifdef REPALM
+    if (brepalm) filt->addfilter(new repalm);
+#endif
     if (bremap) filt->addfilter(new remap);
     if (bmakebold) filt->addfilter(new embolden);
     return filt;
@@ -216,9 +246,10 @@ private slots:
   //myoutput stuff
  private:
   bool mouseUpOn;
-  bool getcurrentpos(int x, int y, size_t& start, size_t& offset, size_t& tgt);
+  linkType getcurrentpos(int x, int y, size_t& start, size_t& offset, size_t& tgt);
   bool m_twotouch, m_touchone;
   size_t m_startpos, m_startoffset;
+  void dopageup(unsigned int);
   void dopageup();
   void lineDown();
   void lineUp();
@@ -229,24 +260,31 @@ private slots:
   CBufferFace<CDrawBuffer*> textarray;
   CBufferFace<size_t>   locnarray;
   unsigned int numlines;
-  bool bstripcr, btextfmt, bstriphtml, bdehyphen, bunindent, brepara, bdblspce, btight, bmakebold, bremap, bpeanut, bautofmt;
-  bool m_bpagemode, m_bMonoSpaced;
+  bool bstripcr, btextfmt, bstriphtml, bdehyphen, bunindent, brepara, bdblspce, btight, bmakebold, bremap, bpeanut, bautofmt, bonespace;
+#ifdef REPALM
+  bool brepalm;
+#endif
+  bool m_bpagemode, m_bMonoSpaced, m_continuousDocument;
   unsigned char bindenter;
   QString m_lastfile;
   size_t m_lastposn;
  public:
+  bool bDoUpdates;
+  bool m_navkeys;
+  void NavUp();
+  void NavDown();
   int getch() { return buffdoc.getch(); }
   bool tight;
   bool load_file(const char *newfile, unsigned int lcn=0);
   BuffDoc buffdoc;
   CList<Bkmk>* getbkmklist() { return buffdoc.getbkmklist(); }
   bool locate(unsigned long n);
-  void jumpto(unsigned long n) { buffdoc.locate(n); }
-  unsigned long locate() { return buffdoc.locate(); }
-  unsigned long explocate() { return buffdoc.explocate(); }
+  void jumpto(unsigned long n) { buffdoc.unsuspend(); buffdoc.locate(n); }
+  unsigned long locate() { buffdoc.unsuspend(); return buffdoc.locate(); }
+  unsigned long explocate() { buffdoc.unsuspend(); return buffdoc.explocate(); }
   unsigned long pagelocate() { return locnarray[0]; }
   unsigned long mylastpos;
-  void setfilter(CFilterChain *f) { buffdoc.setfilter(f); locate(pagelocate()); }
+  void setfilter(CFilterChain *f) { buffdoc.unsuspend(); buffdoc.setfilter(f); locate(pagelocate()); }
   void restore() { jumpto(mylastpos); }
   void goUp();
   void refresh() { locate(pagelocate()); }
@@ -256,17 +294,19 @@ private slots:
   void textsize(int ts) { m_textsize = ts; }
   bool fillbuffer(int ru = 0, int ht = 0);
   unsigned int screenlines();
-  void sizes(unsigned long& fs, unsigned long& ts) { buffdoc.sizes(fs,ts); }
+  void sizes(unsigned long& fs, unsigned long& ts) { buffdoc.unsuspend(); buffdoc.sizes(fs,ts); }
   static const char *fonts[];
 //  unsigned int   *fontsizes;
   int m_ascent, m_descent, m_linespacing;
   QFontMetrics* m_fm;
   QString firstword();
+  void setstate(const statedata& sd);
 
  signals:
   void OnRedraw();
   void OnWordSelected(const QString&, size_t, const QString&);
   void OnActionPressed();
+  void OnShowPicture(QPixmap&);
 };
 
 #endif

@@ -7,7 +7,7 @@
 /*
  * Stuff common to both Weasel Reader and makeztxt
  *
- * $Id: ztxt.h,v 1.3 2002/09/14 02:19:09 llornkcor Exp $
+ * $Id: ztxt.h,v 1.3 2002/10/16 21:23:34 tim Exp $
  *
  */
 
@@ -74,32 +74,40 @@ class ztxt : public CExpander, Cpdb
     zTXT_record0 hdr0;
     size_t currentpos;
     void home();
- public:
+public:
+  virtual void suspend()
+      {
+	  CExpander::suspend(fin);
+      }
+  virtual void unsuspend()
+      {
+	  CExpander::unsuspend(fin);
+      }
     virtual void sizes(unsigned long& _file, unsigned long& _text)
-  {
-      _file = file_length;
-      _text = ntohl(hdr0.size);
-  }
+	{
+	    _file = file_length;
+	    _text = ntohl(hdr0.size);
+	}
     virtual bool hasrandomaccess() { return (hdr0.randomAccess != 0); }
     virtual ~ztxt()
-  {
-      if (expandedtextbuffer != NULL) delete [] expandedtextbuffer;
-      if (compressedtextbuffer != NULL) delete [] compressedtextbuffer;
-      if (bInit)
-      {
-    inflateEnd(&zstream);
-      }
-  }
+	{
+	    if (expandedtextbuffer != NULL) delete [] expandedtextbuffer;
+	    if (compressedtextbuffer != NULL) delete [] compressedtextbuffer;
+	    if (bInit)
+	    {
+		inflateEnd(&zstream);
+	    }
+	}
     ztxt();
-    virtual int openfile(const char *src);
+    virtual int OpenFile(const char *src);
     virtual int getch();
     virtual unsigned int locate();
     virtual void locate(unsigned int n);
     virtual CList<Bkmk>* getbkmklist();
     virtual MarkupType PreferredMarkup()
-  {
-      return cTEXT;
-  }
+	{
+	    return cTEXT;
+	}
 };
 
 #endif

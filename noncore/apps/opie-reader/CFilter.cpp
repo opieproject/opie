@@ -532,7 +532,7 @@ void PeanutFormatter::getch(tchar& ch, CStyle& sty)
 		parent->getch(ch, dummy);
 		break;
 	    case 'c':
-		if (currentstyle.getJustify() == CStyle::m_AlignCentre)
+		if (currentstyle.getJustify() == m_AlignCentre)
 		{
 		    currentstyle.setLeftJustify();
 		}
@@ -543,7 +543,7 @@ void PeanutFormatter::getch(tchar& ch, CStyle& sty)
 		parent->getch(ch, dummy);
 		break;
 	    case 'r':
-		if (currentstyle.getJustify() == CStyle::m_AlignRight)
+		if (currentstyle.getJustify() == m_AlignRight)
 		{
 		    currentstyle.setLeftJustify();
 		}
@@ -559,3 +559,126 @@ void PeanutFormatter::getch(tchar& ch, CStyle& sty)
     }
     sty = currentstyle;
 }
+
+void OnePara::getch(tchar& ch, CStyle& sty)
+{
+    parent->getch(ch, sty);
+    if (m_lastchar == 10)
+    {
+	while (ch == 10) parent->getch(ch, sty);
+    }
+    m_lastchar = ch;
+}
+
+#ifdef REPALM
+void repalm::getch(tchar& ch, CStyle& sty)
+{
+    parent->getch(ch, sty);
+    switch (ch)
+    {
+	case 0x80:
+	    ch = 0x20ac;
+	    break;
+	case 0x82:
+	    ch = 0x201a;
+	    break;
+	case 0x83:
+	    ch = 0x0192;
+	    break;
+	case 0x84:
+	    ch = 0x201e;
+	    break;
+	case 0x85:
+	    ch = 0x2026;
+	    break;
+	case 0x86:
+	    ch = 0x2020;
+	    break;
+	case 0x87:
+	    ch = 0x2021;
+	    break;
+	case 0x88:
+	    ch = 0x02c6;
+	    break;
+	case 0x89:
+	    ch = 0x2030;
+	    break;
+	case 0x8a:
+	    ch = 0x0160;
+	    break;
+	case 0x8b:
+	    ch = 0x2039;
+	    break;
+	case 0x8c:
+	    ch = 0x0152;
+	    break;
+/*
+	case 0x8e:
+	    ch = 0x017d;
+	    break;
+*/
+	case 0x91:
+	    ch = 0x2018;
+	    break;
+	case 0x92:
+	    ch = 0x2019;
+	    break;
+	case 0x93:
+	    ch = 0x201c;
+	    break;
+	case 0x94:
+	    ch = 0x201d;
+	    break;
+	case 0x95:
+	    ch = 0x2022;
+	    break;
+	case 0x96:
+	    ch = 0x2013;
+	    break;
+	case 0x97:
+	    ch = 0x2014;
+	    break;
+	case 0x98:
+	    ch = 0x02dc;
+	    break;
+	case 0x99:
+	    ch = 0x2122;
+	    break;
+	case 0x9a:
+	    ch = 0x0161;
+	    break;
+	case 0x9b:
+	    ch = 0x203a;
+	    break;
+	case 0x9c:
+	    ch = 0x0153;
+	    break;
+	case 0x9e:
+	    ch = 0x017e;
+	    break;
+	case 0x9f:
+	    ch = 0x0178;
+	    break;
+	case 0x18:
+	    ch = 0x2026;
+	    break;
+	case 0x19:
+	    ch = 0x2007;
+	    break;
+	case 0x8d:
+	    ch = 0x2662;
+	    break;
+	case 0x8e:
+	    ch = 0x2663;
+	    break;
+	case 0x8f:
+	    ch = 0x2661;
+	    break;
+	case 0x90:
+	    ch = 0x2660;
+	    break;
+	default:
+	    break;
+    }
+}
+#endif

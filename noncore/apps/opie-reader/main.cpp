@@ -9,7 +9,11 @@ QTReaderApp* app = NULL;
 
 void handler(int signum)
 {
-    if (app != NULL) app->saveprefs();
+    if (app != NULL)
+    {
+	app->suspend();
+	app->saveprefs();
+    }
     signal(signum, handler);
 }
 

@@ -3,111 +3,175 @@
 
 typedef unsigned short StyleType;
 
-class CStyle
+#include <stdlib.h>
+#include <qglobal.h>
+class QPixmap;
+
+struct GraphicLink
 {
-// 15     14    13-5     4      3    2   1   0
-//bold  italic  spare  align  align  fs  fs  fs
-    static const StyleType m_Bold = 1 << 15;
-    static const StyleType m_Italic = 1 << 14;
-    static const StyleType m_FontMask = 7;
-    static const StyleType m_FontBase = 3;
-    
-    static const StyleType m_AlignShift = 3;
-    static const StyleType m_AlignMask = 3 << m_AlignShift;
-    static const StyleType m_EveryBit = 0xffff;
+    QPixmap* graphic;
+    bool isLink;
+    unsigned long link;
+    GraphicLink(QPixmap* p, bool isLnk, unsigned long tgt) :
+	graphic(p), isLink(isLnk), link(tgt) {}
+    ~GraphicLink();
+};
 
+struct pmstore
+{
+    unsigned int count;
+    GraphicLink*     graphic;
+    pmstore(QPixmap* p, bool isLnk, unsigned long tgt) : count(1)
+	{
+	    graphic = new GraphicLink(p, isLnk, tgt);
+	}
+    ~pmstore();
+};
 
-    StyleType sty;
+enum EalignmentType
+{
+    m_AlignLeft,
+    m_AlignRight,
+    m_AlignCentre,
+    m_AlignJustify
+};
 
-    void unjustify() { sty &= m_EveryBit ^ m_AlignMask; }
+class CBasicStyle
+{
+    friend class CStyle;
+    bool m_bold,
+	m_italic;
+    int m_fontsize;
+    EalignmentType m_align;
     unsigned char red, green, blue;
     unsigned long data;
     bool isLink;
- public:
-    unsigned char Red() { return red; }
-    unsigned char Green() { return green; }
-    unsigned char Blue() { return blue; }
-    void setColour(unsigned char r, unsigned char g, unsigned char b)
+    bool m_underline;
+    bool m_strikethru;
+    bool m_monospaced;
+    unsigned char m_leftmargin, m_rightmargin;
+    CBasicStyle()
 	{
-	    red = r;
-	    green = g;
-	    blue = b;
+	    unset();
 	}
-    static const StyleType m_AlignLeft = 0;
-    static const StyleType m_AlignRight = 1 << m_AlignShift;
-    static const StyleType m_AlignCentre = 2 << m_AlignShift;
-    static const StyleType m_AlignJustify = 3 << m_AlignShift;
-    CStyle()
-	:
-	sty(m_FontBase),
-	red(0), green(0), blue(0),
-	data(0), isLink(false)
-	{}
-//    CStyle(const int _fs) : sty(m_FontBase+_fs) {}
-
+    bool operator!=(const CBasicStyle& rhs)
+	{
+	    return (memcmp(this, &rhs, sizeof(CBasicStyle)) != 0);
+	}
     void unset()
 	{
-	    sty = m_FontBase;
+	    m_bold = false;
+	    m_italic = false;
+	    m_fontsize = 0;
+	    m_align = m_AlignLeft;
 	    red = green = blue = 0;
 	    data = 0;
 	    isLink = false;
+	    m_underline = false;
+	    m_strikethru = false;
+	    m_leftmargin = 0;
+	    m_rightmargin = 0;
+	    m_monospaced = false;
 	}
+};
 
-    void setBold() { sty |= m_Bold; }
-    void setItalic() { sty |= m_Italic; }
-    void unsetBold() { sty &= m_EveryBit ^ m_Bold; }
-    void unsetItalic() { sty &= m_EveryBit ^ m_Italic; }
-    bool isBold() { return ((sty & m_Bold) != 0); }
-    bool isItalic() { return ((sty & m_Italic) != 0); }
+class CStyle
+{
+    CBasicStyle sty;
+    pmstore* graphic;
+ public:
+    bool getPictureLink()
+	{
+	    return (graphic != NULL && graphic->graphic->isLink);
+	}
+    unsigned long getPictureLinkData()
+	{
+	    return graphic->graphic->link;
+	}
+    void setLeftMargin(unsigned char m) { sty.m_leftmargin = m; }
+    unsigned char getLeftMargin() { return sty.m_leftmargin; }
+    void setRightMargin(unsigned char m) { sty.m_rightmargin = m; }
+    unsigned char getRightMargin() { return sty.m_rightmargin; }
+    unsigned char Red() { return sty.red; }
+    unsigned char Green() { return sty.green; }
+    unsigned char Blue() { return sty.blue; }
+    void setColour(unsigned char r, unsigned char g, unsigned char b)
+	{
+	    sty.red = r;
+	    sty.green = g;
+	    sty.blue = b;
+	}
+    CStyle() : graphic(NULL) {}
+    ~CStyle();
+    CStyle(CStyle&);
+    CStyle(const CStyle&);
+    CStyle& operator=(const CStyle&);
+    void unset();
+    bool isPicture() { return (graphic != NULL); }
+    void clearPicture();
+    void setPicture(QPixmap* _g, bool il=false, unsigned long tgt=0);
+    QPixmap* getPicture()
+	{ 
+	    QPixmap* pm = ((graphic != NULL) ? graphic->graphic->graphic : NULL);
+	    return pm;
+	}
+    void setUnderline() { sty.m_underline = true; }
+    void unsetUnderline() { sty.m_underline = false; }
+    bool isUnderline() { return sty.m_underline; }
+    void setStrikethru() { sty.m_strikethru = true; }
+    void unsetStrikethru() { sty.m_strikethru = false; }
+    bool isStrikethru() { return sty.m_strikethru; }
+    void setBold() { sty.m_bold = true; }
+    void unsetBold() { sty.m_bold = false; }
+    bool isBold() { return sty.m_bold; }
+    void setItalic() { sty.m_italic = true; }
+    void unsetItalic() { sty.m_italic = false; }
+    bool isItalic() { return sty.m_italic; }
+    void setMono() { sty.m_monospaced = true; }
+    void unsetMono() { sty.m_monospaced = false; }
+    bool isMono() { return sty.m_monospaced; }
 
     void setLeftJustify()
 	{
-	    unjustify();
-	    sty |= m_AlignLeft;
+	    sty.m_align = m_AlignLeft;
 	}
     void setRightJustify()
 	{
-	    unjustify();
-	    sty |= m_AlignRight;
+	    sty.m_align = m_AlignRight;
 	}
     void setCentreJustify()
 	{
-	    unjustify();
-	    sty |= m_AlignCentre;
+	    sty.m_align = m_AlignCentre;
 	}
     void setFullJustify()
 	{
-	    unjustify();
-	    sty |= m_AlignJustify;
+	    sty.m_align = m_AlignJustify;
 	}
     StyleType getJustify()
 	{
-	    return sty & m_AlignMask;
+	    return sty.m_align;
 	}
 
     void setFontSize(int _fs)
 	{
-	    sty &= m_EveryBit ^ m_FontMask;
-	    sty |= m_FontBase + _fs;
+	    sty.m_fontsize = _fs;
 	}
     int getFontSize()
 	{
-	    return (sty & m_FontMask) - m_FontBase;
+	    return sty.m_fontsize;
 	}
     bool operator!=(const CStyle& rhs)
 	{
 	    return
-	     (
-		(sty != rhs.sty) || (red != rhs.red) || (green != rhs.green) ||
-		(blue != rhs.blue) ||
-		(data != rhs.data) ||
-		(isLink != rhs.isLink)
-		 );
+		(
+		    (sty != rhs.sty) ||
+		    (graphic != rhs.graphic)
+		    );
 	}
-    void setLink(bool _l) { isLink = _l; }
-    bool getLink() { return isLink; }
-    void setData(unsigned long _d) { data = _d; }
-    unsigned long getData() { return data; }
+    void setLink(bool _l) { sty.isLink = _l; }
+    bool getLink() { return sty.isLink; }
+    void setData(unsigned long _d) { sty.data = _d; }
+    unsigned long getData() { return sty.data; }
 };
 
 #endif

@@ -39,6 +39,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     buttonShowHidden->setOn( false );
 
     dirLabel = new QLabel(this, "DirLabel");
+    dirLabel->setAlignment(AlignLeft | AlignVCenter | ExpandTabs | WordBreak);
     dirLabel->setText(currentDir.canonicalPath());
 
     ListView = new QtrListView( this, "ListView" );
@@ -47,6 +48,8 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     ListView->addColumn( tr( "Size" ) );
     ListView->setSelectionMode(QListView::Single);
     ListView->setAllColumnsShowFocus( TRUE );
+    ListView->setColumnWidthMode(0, QListView::Manual);
+    ListView->setColumnWidthMode(1, QListView::Manual);
 
     // signals and slots connections
     connect( buttonShowHidden, SIGNAL( toggled(bool) ), this, SLOT( setHidden(bool) ) );

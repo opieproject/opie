@@ -266,4 +266,22 @@ class PeanutFormatter : public CFilter
     virtual ~PeanutFormatter() {}
     virtual void getch(tchar& ch, CStyle& sty);
 };
+
+class OnePara : public CFilter
+{
+    tchar m_lastchar;
+ public:
+    OnePara() : m_lastchar(0) {}
+    virtual ~OnePara() {}
+    virtual void getch(tchar& ch, CStyle& sty);
+};
+
+#ifdef REPALM
+class repalm : public CFilter
+{
+ public:
+    virtual ~repalm() {}
+    virtual void getch(tchar& ch, CStyle& sty);
+};
+#endif
 #endif

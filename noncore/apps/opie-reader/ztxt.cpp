@@ -7,7 +7,7 @@
 ztxt::ztxt() : bInit(false), expandedtextbuffer(NULL), compressedtextbuffer(NULL) { /*printf("constructing:%x\n",fin);*/ }
 
 
-int ztxt::openfile(const char *src)
+int ztxt::OpenFile(const char *src)
 {
     if (!Cpdb::openfile(src))
     {

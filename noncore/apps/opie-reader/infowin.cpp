@@ -1,8 +1,9 @@
+#include "name.h"
 #include "infowin.h"
 #include "version.h"
 #include <stdio.h>
 
-infowin::infowin( QWidget *parent, const char *name, WFlags f) :
+infowin::infowin( QWidget *parent=0, const char *name=0, WFlags f = 0) :
     QWidget(parent, name, f)
 {
     grid = new QGridLayout(this, 6, 2);
@@ -33,7 +34,7 @@ infowin::infowin( QWidget *parent, const char *name, WFlags f) :
     read->setAlignment( AlignVCenter | AlignRight );
     grid->addWidget(read, 4, 1);
     char vstr[128];
-    sprintf(vstr, "QT Reader v%u.%u%c (%s)\nA small e-text reader", MAJOR, BKMKTYPE, MINOR, RELEASE_TYPE);
+    sprintf(vstr, PROGNAME " v%u.%u%c (%s)\nA small e-text reader", MAJOR, BKMKTYPE, MINOR, RELEASE_TYPE);
     l = new QLabel(vstr, this);
     grid->addWidget(l, 5, 0);
     QPushButton* exitbutton = new QPushButton("Cancel", this);

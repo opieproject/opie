@@ -18,4 +18,8 @@ const int UEOF = -1;
 
 #include "ustring.h"
 
+#define BORDER 2
+
+//#define _FAST
+
 #endif

@@ -75,6 +75,14 @@ class Aportis : public CExpander, Cpdb {
   unsigned char circbuf[2048];
   char bCompressed;
 public:
+  virtual void suspend()
+      {
+	  CExpander::suspend(fin);
+      }
+  virtual void unsuspend()
+      {
+	  CExpander::unsuspend(fin);
+      }
   virtual void sizes(unsigned long& _file, unsigned long& _text)
     {
       _file = dwLen;
@@ -83,7 +91,7 @@ public:
   virtual bool hasrandomaccess() { return true; }
   virtual ~Aportis() {}
   Aportis();
-  virtual int openfile(const char *src);
+  virtual int OpenFile(const char *src);
   virtual int getch();
   virtual unsigned int locate();
   virtual void locate(unsigned int n);

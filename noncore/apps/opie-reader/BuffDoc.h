@@ -19,6 +19,27 @@ class BuffDoc
     CExpander* exp;
     CFilterChain* filt;
  public:
+    void setSaveData(unsigned char*& data, unsigned short& len, unsigned char* src, unsigned short srclen)
+	{
+	    if (exp == NULL)
+	    {
+		data = NULL;
+		len = 0;
+	    }
+	    else
+	    {
+		exp->setSaveData(data, len, src, srclen);
+	    }
+	}
+    void putSaveData(unsigned char*& src, unsigned short& srclen)
+	{
+	    if (exp != NULL)
+	    {
+		exp->putSaveData(src, srclen);
+	    }
+	}
+    void suspend() { if (exp != NULL) exp->suspend(); }
+    void unsuspend() { if (exp != NULL) exp->unsuspend(); }
     ~BuffDoc()
 	{
 	    delete filt;
@@ -61,10 +82,15 @@ class BuffDoc
 	    else
 		ch = UEOF;
 	}
+    QPixmap* getPicture(unsigned long tgt) { return (exp == NULL) ? NULL : exp->getPicture(tgt); }
+    unsigned int startSection() { return (exp == NULL) ? 0 : exp->startSection(); }
+    unsigned int endSection() { return (exp == NULL) ? 0 : exp->endSection(); }
     unsigned int locate() { return (exp == NULL) ? 0 : laststartline; }
     unsigned int explocate() { return (exp == NULL) ? 0 : exp->locate(); }
+    void setContinuous(bool _b) { if (exp != NULL) exp->setContinuous(_b); }
     MarkupType PreferredMarkup() { return (exp == NULL) ? cTEXT : exp->PreferredMarkup(); }
     bool hyperlink(unsigned int n);
+    size_t getHome() { return ((exp != NULL) ? exp->getHome() : 0); }
     void locate(unsigned int n);
     bool getline(CDrawBuffer* buff, int w);
     bool getline(CDrawBuffer* buff, int w, int cw);
@@ -79,6 +105,10 @@ class BuffDoc
 	    laststartline = exp->locate();
 	    return i;
 	}
+    void saveposn(size_t posn) { exp->saveposn(posn); }
+    bool forward(size_t& loc) { return exp->forward(loc); }
+    bool back(size_t& loc) { return exp->back(loc); }
+    bool hasnavigation() { return exp->hasnavigation(); }
 };
 
 #endif

@@ -25,7 +25,15 @@ class ppm_expander : public CExpander {
   FILE* my_file_in;
   PPM_ReadBuf* my_read_buf;
   ppm_worker ppm;
- public:
+public:
+  virtual void suspend()
+      {
+	  CExpander::suspend(my_file_in);
+      }
+  virtual void unsuspend()
+      {
+	  CExpander::unsuspend(my_file_in);
+      }
   ppm_expander() : needppmend(false), my_file_in(NULL), my_read_buf(NULL)
     {
     bufsize = 1024;
@@ -33,7 +41,7 @@ class ppm_expander : public CExpander {
     buf_out = new UCHAR[bufsize];
     outbytes = 0;
   }
-  virtual int openfile(const char* infile);
+  virtual int OpenFile(const char* infile);
   virtual int getch();
   int locate(unsigned short block, unsigned int n);
   virtual ~ppm_expander();

@@ -7,11 +7,18 @@
 
 class QPainter;
 
+enum linkType
+{
+    eNone,
+    eLink,
+    ePicture
+};
+
 struct textsegment
 {
     int start;
     CStyle style;
-    textsegment(int _start, CStyle _style)
+    textsegment(int _start, const CStyle& _style)
 	:
 	start(_start), style(_style)
 	{}
@@ -24,14 +31,23 @@ class CDrawBuffer : public CBuffer
     CList<textsegment> segs;
     int len;
     FontControl* fc;
-    int m_maxstyle, m_ascent, m_descent, m_lineSpacing;
+    int m_maxstyle, m_ascent, m_descent, m_lineSpacing, m_lineExtraSpacing;
+    bool m_bEof;
+    CDrawBuffer(const CDrawBuffer&);
+    CDrawBuffer& operator=(const tchar*sztmp);
  public:
+    int leftMargin();
+    int rightMargin();
+    void setEof() { m_bEof = true; }
+    bool eof() { return m_bEof; }
+    CDrawBuffer& operator=(CDrawBuffer&);
     CDrawBuffer(FontControl* _fs = NULL)
 	:
 	fc(_fs)
 	{
 	    empty();
 	}
+    ~CDrawBuffer();
 /*
     CDrawBuffer()
 	:
@@ -41,9 +57,8 @@ class CDrawBuffer : public CBuffer
 	}
 */
     int width(int numchars = -1);
+    int offset(int);
     void render(QPainter* _p, int _y, bool _bMono, int _charWidth, int scw);
-    CDrawBuffer& operator=(const tchar*sztmp);
-    CDrawBuffer& operator=(CDrawBuffer&);
     void empty();
     void addch(tchar ch, CStyle _style);
     void truncate(int);
@@ -52,8 +67,10 @@ class CDrawBuffer : public CBuffer
     int ascent() { return m_ascent; }
     int descent() { return m_descent; }
     int lineSpacing() { return m_lineSpacing; }
+    int lineExtraSpacing() { return m_lineExtraSpacing; }
 
 //    void frig();
-    bool isLink(int numchars, size_t& tgt);
+    linkType getLinkType(int numchars, size_t& tgt);
+    void resize();
 };
 #endif

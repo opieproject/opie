@@ -11,10 +11,11 @@ class FontControl
     int m_size;
     QString m_fontname;
     int m_maxsize;
+    bool m_hasCourier;
  public:
     FontControl(QString n = "helvetica", int size = 10)
 	:
-	m_fontsizes(NULL)
+	m_fontsizes(NULL), m_hasCourier(false)
     {
 	ChangeFont(n, size);
     }
@@ -22,11 +23,22 @@ class FontControl
 	{
 	    if (m_fontsizes != NULL) delete [] m_fontsizes;
 	}
+    void hasCourier(bool _b) { m_hasCourier = _b; }
+    bool hasCourier() { return m_hasCourier; }
     QString name() { return m_fontname; }
     int currentsize() { return m_fontsizes[m_size]; }
     int getsize(CStyle size)
 	{
-	    return m_fontsizes[m_size+size.getFontSize()];
+	    int tgt = m_size+size.getFontSize();
+	    if (tgt < 0)
+	    {
+		tgt = 0;
+	    }
+	    if (tgt >= m_maxsize)
+	    {
+		tgt = m_maxsize - 1;
+	    }
+	    return m_fontsizes[tgt];
 	}
     int ascent()
     {
@@ -86,36 +98,7 @@ class FontControl
 	{
 	    return ChangeFont(n, currentsize());
 	}
-    bool ChangeFont(QString& n, int tgt)
-	{
-	    QValueList<int>::Iterator it;
-	    QFontDatabase fdb;
-	    QValueList<int> sizes = fdb.pointSizes(n);
-	    if (sizes.count() == 0)
-	    {
-		return false;
-	    }
-	    else
-	    {
-		m_fontname = n;
-		m_maxsize = sizes.count();
-		if (m_fontsizes != NULL) delete [] m_fontsizes;
-		m_fontsizes = new int[m_maxsize];
-		uint i = 0;
-		uint best = 0;
-		for (it = sizes.begin(); it != sizes.end(); it++)
-		{
-		    m_fontsizes[i] = (*it);
-		    if (abs(tgt-m_fontsizes[i]) < abs(tgt-m_fontsizes[best]))
-		    {
-			best = i;
-		    }
-		    i++;
-		}
-		m_size = best;
-	    }
-	    return true;
-	}
+    bool ChangeFont(QString& n, int tgt);
 };
 
 #endif

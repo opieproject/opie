@@ -9,6 +9,7 @@ class CBkmkSelector : public QWidget
   Q_OBJECT
 
   QListBox* bkmkselector;
+  QPushButton* exitButton;
 
 signals:
   void selected(int i);
@@ -27,7 +28,7 @@ public:
 
     QVBoxLayout* grid = new QVBoxLayout(this);
     bkmkselector = new QListBox(this, "Bookmarks");
-    QPushButton* exitButton = new QPushButton("Cancel", this);
+    exitButton = new QPushButton("Cancel", this);
     connect(bkmkselector, SIGNAL( selected(int) ), this, SLOT( slotSelected(int) ) );
     connect(bkmkselector, SIGNAL( clicked(QListBoxItem*) ), this, SLOT( slotSelected(QListBoxItem*) ) );
     connect(exitButton, SIGNAL( released() ), this, SLOT( slotCancel() ) );
@@ -37,5 +38,6 @@ public:
   void clear() { bkmkselector->clear(); }
   void insertItem(const QString& item) { bkmkselector->insertItem(item); }
   QString text(int index) const { return bkmkselector->text(index); }
+  void setText(const QString& _l) { exitButton->setText(_l); }
 };
 

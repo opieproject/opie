@@ -23,7 +23,7 @@
 //#define __ISEARCH
 
 #define MAX_ENCODING 6
-#define MAX_ACTIONS 3
+#define MAX_ACTIONS 4
 
 #include <qmainwindow.h>
 #include "CExpander.h"
@@ -39,7 +39,7 @@ class QWidgetStack;
 class QToolButton;
 class QPopupMenu;
 class QToolBar;
-class QPEToolBar;
+//class QPEToolBar;
 class CBkmkSelector;
 class QProgressBar;
 class QAction;
@@ -47,12 +47,14 @@ class CAnnoEdit;
 class QFloatBar;
 class CDrawBuffer;
 class QTReader;
+class QPixmap;
 
 enum ActionTypes
 {
     cesOpenFile = 0,
     cesAutoScroll,
-    cesActionMark
+    cesActionMark,
+    cesFullScreen
 };
 
 #ifdef __ISEARCH
@@ -65,6 +67,7 @@ struct searchrecord
 #endif
 
 class infowin;
+class GraphicWin;
 
 class QTReaderApp : public QMainWindow
 {
@@ -76,16 +79,18 @@ class QTReaderApp : public QMainWindow
 	public:
     QTReaderApp( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
     ~QTReaderApp();
-
+    void suspend();
     void openFile( const QString & );
 
     void setScrollState(bool _b);
 
  protected:
     void setfontHelper(const QString& lcn, int size = 0);
-    QAction* m_bkmkAvail;
+    QAction* m_bkmkAvail, *m_actFullscreen;
     CAnnoEdit* m_annoWin;
     Bkmk* m_anno;
+//    void resizeEvent(QResizeEvent* e);
+    void keyPressEvent(QKeyEvent* e);
     void closeEvent( QCloseEvent *e );
 	void readbkmks();
 	void do_mono(const QString&);
@@ -97,10 +102,15 @@ class QTReaderApp : public QMainWindow
     bool m_doAnnotation;
     bool m_doDictionary;
     bool m_doClipboard;
+    bool m_fullscreen;
 
  public:
 	void saveprefs();
 private slots:
+    void zoomin();
+    void zoomout();
+    void setfullscreen(bool sfs);
+    void setcontinuous(bool sfs);
     void setTwoTouch(bool _b);
  void restoreFocus();
  void OnAnnotation(bool _b)
@@ -116,6 +126,7 @@ private slots:
 	    m_doClipboard = _b;
 	}
     void OnWordSelected(const QString&, size_t, const QString&);
+    void showgraphic(QPixmap&);
     void addAnno(const QString&, const QString&, size_t);
     void addAnno(const QString&, const QString&);
     void addanno();
@@ -141,13 +152,12 @@ private slots:
 	//    void oldFile();
 	void showinfo();
     void setDocument(const QString&);
-    void TBD();
-    void TBDzoom();
 
     void indentplus();
     void indentminus();
 
     void fileOpen();
+    void fileClose();
 
     void editCopy();
     void editFind();
@@ -166,10 +176,13 @@ private slots:
     void search();
 #endif
 
-    void openFile( const DocLnk & );
     void showEditTools();
 
     void stripcr(bool);
+    void onespace(bool);
+#ifdef REPALM
+//    void repalm(bool);
+#endif
     void peanut(bool _b);
     void remap(bool);
     void embolden(bool);
@@ -181,6 +194,7 @@ private slots:
     void repara(bool);
     void dblspce(bool);
     void pagemode(bool);
+    void navkeys(bool);
     //  void gotobkmk(const QString& bm);
     void gotobkmk(int);
     void cancelbkmk();
@@ -192,8 +206,18 @@ private slots:
     void OnActionPressed();
 
  private:
+/*
+    void setstate(unsigned char* _sd, unsigned short _sdlen);
+    void getstate(unsigned char*& data, unsigned short& len);
+*/
+    void fileOpen2();
+    void readfilelist();
+    void savefilelist();
+    void updatefileinfo();
+    bool openfrombkmk(Bkmk*);
   QString m_targetapp, m_targetmsg;
-    void listbkmk();
+    void listbkmk(CList<Bkmk>*, const QString& _lab = QString::null);
+    QString usefilebrowser();
     void do_regedit();
     void colorChanged( const QColor &c );
     void clear();
@@ -223,11 +247,11 @@ private slots:
     QWidgetStack *editorStack;
     QTReader* reader;
     QComboBox* m_fontSelector;
-    QPEToolBar /* *menu,*/ *editBar;
+//    QPEToolBar /* *menu,*/ *editBar;
+    QToolBar /* *menu,*/ *editBar;
     QFloatBar *searchBar, *regBar/*, *m_fontBar*/;
     QToolBar /* *searchBar, *regBar,*/ *m_fontBar;
     QLineEdit *searchEdit, *regEdit;
-    DocLnk *doc;
     bool searchVisible;
     bool regVisible;
     bool m_fontVisible, m_twoTouch;
@@ -243,7 +267,9 @@ private slots:
       }
     */
     CList<Bkmk>* pBkmklist;
+    CList<Bkmk>* pOpenlist;
     infowin*  m_infoWin;
+    GraphicWin* m_graphicwin;
     QProgressBar* pbar;
     bool m_fBkmksChanged;
     int m_nRegAction;
@@ -260,4 +286,6 @@ const int cJump = 5;
 const int cMonoSpace = 6;
 const int cOverlap = 7;
 const int cSetTarget = 8;
+const int cOpenFile = 9;
+
 #endif

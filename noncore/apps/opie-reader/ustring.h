@@ -63,6 +63,18 @@ inline QString toQString(tchar *_p, unsigned int len)
     while (*p != 0 && i < len) ret[i++] = *(p++);
     return ret;
 }
+
+inline tchar* fromQString(const QString& qs)
+{
+    int len = qs.length();
+    tchar* ret = new tchar[len+1];
+    for (int i = 0; i < len; i++)
+    {
+	ret[i] = qs[i].unicode();
+    }
+    ret[len] = 0;
+    return ret;
+}
 #else
 
 inline size_t ustrlen(const tchar* _p) { return strlen(_p); }

@@ -35,7 +35,7 @@ ppm_expander::~ppm_expander() {
   if (my_file_in != NULL) fclose(my_file_in);
 }
 
-int ppm_expander::openfile(const char* infile)
+int ppm_expander::OpenFile(const char* infile)
 {
   my_file_in=fopen(infile,"rb");
   my_read_buf = new PPM_ReadBuf(my_file_in);
