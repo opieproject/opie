@@ -476,10 +476,10 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
         return TRUE;
       }
 //       menu key now opens application menu/toolbar
-       if ( ke->simpleData.keycode == Key_F11 ) {
-       if ( press ) emit menu();
-       return TRUE;
-       }
+//         if ( ke->simpleData.keycode == Key_F11 ) {
+//         if ( press ) emit menu();
+//         return TRUE;
+//         }
       
       if ( ke->simpleData.keycode == Key_F12 ) {
         while ( activePopupWidget() )
@@ -1047,3 +1047,18 @@ void Desktop::soundAlarm()
     ODevice::inst ( ) -> alarmSound ( );
 }
 
+bool Desktop::eventFilter( QObject *, QEvent *ev )
+{
+    if ( ev->type() == QEvent::KeyPress ) {
+        QKeyEvent *ke = (QKeyEvent *)ev;
+        if ( ke->key() == Qt::Key_F11 ) { // menu key
+            QWidget *active = qApp->activeWindow();
+            if ( active && active->isPopup() ) {
+                active->close();
+            }
+            raiseMenu();
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
