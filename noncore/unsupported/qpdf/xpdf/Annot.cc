@@ -1,8 +1,8 @@
 //========================================================================
 //
-// FormWidget.cc
+// Annot.cc
 //
-// Copyright 2000 Derek B. Noonburg
+// Copyright 2000-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -14,13 +14,13 @@
 #include "gmem.h"
 #include "Object.h"
 #include "Gfx.h"
-#include "FormWidget.h"
+#include "Annot.h"
 
 //------------------------------------------------------------------------
-// FormWidget
+// Annot
 //------------------------------------------------------------------------
 
-FormWidget::FormWidget(XRef *xrefA, Dict *dict) {
+Annot::Annot(XRef *xrefA, Dict *dict) {
   Object apObj, asObj, obj1, obj2;
   fouble t;
 
@@ -77,49 +77,48 @@ FormWidget::FormWidget(XRef *xrefA, Dict *dict) {
   obj1.free();
 }
 
-FormWidget::~FormWidget() {
+Annot::~Annot() {
   appearance.free();
 }
 
-void FormWidget::draw(Gfx *gfx) {
+void Annot::draw(Gfx *gfx) {
   Object obj;
 
   if (appearance.fetch(xref, &obj)->isStream()) {
-    gfx->doWidgetForm(&obj, xMin, yMin, xMax, yMax);
+    gfx->doAnnot(&obj, xMin, yMin, xMax, yMax);
   }
   obj.free();
 }
 
 //------------------------------------------------------------------------
-// FormWidgets
+// Annots
 //------------------------------------------------------------------------
 
-FormWidgets::FormWidgets(XRef *xref, Object *annots) {
-  FormWidget *widget;
+Annots::Annots(XRef *xref, Object *annotsObj) {
+  Annot *annot;
   Object obj1, obj2;
   int size;
   int i;
 
-  widgets = NULL;
+  annots = NULL;
   size = 0;
-  nWidgets = 0;
+  nAnnots = 0;
 
-  if (annots->isArray()) {
-    for (i = 0; i < annots->arrayGetLength(); ++i) {
-      if (annots->arrayGet(i, &obj1)->isDict()) {
+  if (annotsObj->isArray()) {
+    for (i = 0; i < annotsObj->arrayGetLength(); ++i) {
+      if (annotsObj->arrayGet(i, &obj1)->isDict()) {
 	obj1.dictLookup("Subtype", &obj2);
 	if (obj2.isName("Widget") ||
 	    obj2.isName("Stamp")) {
-	  widget = new FormWidget(xref, obj1.getDict());
-	  if (widget->isOk()) {
-	    if (nWidgets >= size) {
+	  annot = new Annot(xref, obj1.getDict());
+	  if (annot->isOk()) {
+	    if (nAnnots >= size) {
 	      size += 16;
-	      widgets = (FormWidget **)grealloc(widgets,
-						size * sizeof(FormWidget *));
+	      annots = (Annot **)grealloc(annots, size * sizeof(Annot *));
 	    }
-	    widgets[nWidgets++] = widget;
+	    annots[nAnnots++] = annot;
 	  } else {
-	    delete widget;
+	    delete annot;
 	  }
 	}
 	obj2.free();
@@ -129,11 +128,11 @@ FormWidgets::FormWidgets(XRef *xref, Object *annots) {
   }
 }
 
-FormWidgets::~FormWidgets() {
+Annots::~Annots() {
   int i;
 
-  for (i = 0; i < nWidgets; ++i) {
-    delete widgets[i];
+  for (i = 0; i < nAnnots; ++i) {
+    delete annots[i];
   }
-  gfree(widgets);
+  gfree(annots);
 }

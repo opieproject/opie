@@ -22,3 +22,17 @@ static int mapUTF8 ( Unicode u, char *buf, int bufSize )
 	else
 		return 0;
 }
+
+static int mapUCS2 ( Unicode u, char *buf, int bufSize) 
+{
+	if (u <= 0xffff) {
+		if (bufSize < 2)
+			return 0;
+
+		buf[0] = (char)((u >> 8) & 0xff);
+		buf[1] = (char)(u & 0xff);
+		return 2;
+	} 
+	else 
+		return 0;
+}

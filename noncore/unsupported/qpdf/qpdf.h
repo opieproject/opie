@@ -5,12 +5,14 @@
 
 #include <qmainwindow.h>
 
+#define QPDF_QPE_ONLY 1 // ofileselector does not work right currently
 
 class QPEOutputDev;
 class PDFDoc;
 
 class DocLnk;
 class FileSelector;
+class OFileSelector;
 class QWidgetStack;
 class QLineEdit;
 
@@ -68,7 +70,12 @@ protected:
 private:
 	QWidgetStack *m_stack;
 	QPEOutputDev *m_outdev;	
+
+#ifdef QPDF_QPE_ONLY
 	FileSelector *m_filesel;
+#else
+	OFileSelector *m_filesel;
+#endif
 	
 	QToolBar *m_tb_menu, *m_tb_tool, *m_tb_find;
 	QLineEdit *m_findedit;

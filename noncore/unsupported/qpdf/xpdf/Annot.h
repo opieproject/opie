@@ -1,30 +1,32 @@
 //========================================================================
 //
-// FormWidget.h
+// Annot.h
 //
-// Copyright 2000 Derek B. Noonburg
+// Copyright 2000-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
-#ifndef FORMWIDGET_H
-#define FORMWIDGET_H
+#ifndef ANNOT_H
+#define ANNOT_H
 
 #ifdef __GNUC__
 #pragma interface
 #endif
 
+#include <aconf.h>
+
 class XRef;
 class Gfx;
 
 //------------------------------------------------------------------------
-// FormWidget
+// Annot
 //------------------------------------------------------------------------
 
-class FormWidget {
+class Annot {
 public:
 
-  FormWidget(XRef *xrefA, Dict *dict);
-  ~FormWidget();
+  Annot(XRef *xrefA, Dict *dict);
+  ~Annot();
   GBool isOk() { return ok; }
 
   void draw(Gfx *gfx);
@@ -37,31 +39,31 @@ private:
   XRef *xref;			// the xref table for this PDF file
   Object appearance;		// a reference to the Form XObject stream
 				//   for the normal appearance
-  fouble xMin, yMin,		// widget rectangle
+  fouble xMin, yMin,		// annotation rectangle
          xMax, yMax;
   GBool ok;
 };
 
 //------------------------------------------------------------------------
-// FormWidgets
+// Annots
 //------------------------------------------------------------------------
 
-class FormWidgets {
+class Annots {
 public:
 
-  // Extract widgets from array of annotations.
-  FormWidgets(XRef *xref, Object *annots);
+  // Extract non-link annotations from array of annotations.
+  Annots(XRef *xref, Object *annotsObj);
 
-  ~FormWidgets();
+  ~Annots();
 
-  // Iterate through list of widgets.
-  int getNumWidgets() { return nWidgets; }
-  FormWidget *getWidget(int i) { return widgets[i]; }
+  // Iterate through list of annotations.
+  int getNumAnnots() { return nAnnots; }
+  Annot *getAnnot(int i) { return annots[i]; }
 
 private:
 
-  FormWidget **widgets;
-  int nWidgets;
+  Annot **annots;
+  int nAnnots;
 };
 
 #endif

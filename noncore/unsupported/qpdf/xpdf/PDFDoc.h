@@ -2,7 +2,7 @@
 //
 // PDFDoc.h
 //
-// Copyright 1996 Derek B. Noonburg
+// Copyright 1996-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -41,6 +41,9 @@ public:
 
   // Was PDF document successfully opened?
   GBool isOk() { return ok; }
+
+  // Get the error code (if isOk() returns false).
+  int getErrorCode() { return errCode; }
 
   // Get file name.
   GString *getFileName() { return fileName; }
@@ -137,6 +140,7 @@ private:
   GBool printCommands;
 
   GBool ok;
+  int errCode;
 };
 
 #endif

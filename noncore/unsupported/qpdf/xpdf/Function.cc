@@ -2,7 +2,7 @@
 //
 // Function.cc
 //
-// Copyright 2001 Derek B. Noonburg
+// Copyright 2001-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -415,7 +415,6 @@ ExponentialFunction::ExponentialFunction(Object *funcObj, Dict *dict) {
   int i;
 
   ok = gFalse;
-  hasN = gFalse;
 
   //----- initialize the generic stuff
   if (!init(dict)) {
@@ -425,6 +424,7 @@ ExponentialFunction::ExponentialFunction(Object *funcObj, Dict *dict) {
     error(-1, "Exponential function with more than one input");
     goto err1;
   }
+  hasN = hasRange;
 
   //----- default values
   for (i = 0; i < funcMaxOutputs; ++i) {
@@ -436,6 +436,7 @@ ExponentialFunction::ExponentialFunction(Object *funcObj, Dict *dict) {
   if (dict->lookup("C0", &obj1)->isArray()) {
     if (!hasN) {
       n = obj1.arrayGetLength();
+      hasN = gTrue;
     } else if (obj1.arrayGetLength() != n) {
       error(-1, "Function's C0 array is wrong length");
       goto err2;
@@ -456,6 +457,7 @@ ExponentialFunction::ExponentialFunction(Object *funcObj, Dict *dict) {
   if (dict->lookup("C1", &obj1)->isArray()) {
     if (!hasN) {
       n = obj1.arrayGetLength();
+      hasN = gTrue;
     } else if (obj1.arrayGetLength() != n) {
       error(-1, "Function's C1 array is wrong length");
       goto err2;
@@ -479,6 +481,13 @@ ExponentialFunction::ExponentialFunction(Object *funcObj, Dict *dict) {
   }
   e = obj1.getNum();
   obj1.free();
+
+  // this isn't supposed to happen, but I've run into (broken) PDF
+  // files where it does
+  if (!hasN) {
+    error(-1, "Exponential function does not define number of output values");
+    n = 1;
+  }
 
   ok = gTrue;
   return;

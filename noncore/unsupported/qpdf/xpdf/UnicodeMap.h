@@ -4,7 +4,7 @@
 //
 // Mapping from Unicode to an encoding.
 //
-// Copyright 2001 Derek B. Noonburg
+// Copyright 2001-2002 Glyph & Cog, LLC
 //
 //========================================================================
 

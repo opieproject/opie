@@ -2,7 +2,7 @@
 //
 // Gfx.h
 //
-// Copyright 1996 Derek B. Noonburg
+// Copyright 1996-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -27,6 +27,7 @@ class GfxFont;
 class GfxPattern;
 class GfxShading;
 class GfxAxialShading;
+class GfxRadialShading;
 class GfxState;
 class Gfx;
 struct PDFRectangle;
@@ -97,21 +98,31 @@ public:
       PDFRectangle *box, GBool crop, PDFRectangle *cropBox, int rotate,
       GBool printCommandsA);
 
-  // Destructor.
+  // Constructor for a sub-page object.
+  Gfx(XRef *xrefA, OutputDev *outA, Dict *resDict,
+      PDFRectangle *box, GBool crop, PDFRectangle *cropBox);
+
   ~Gfx();
 
   // Interpret a stream or array of streams.
   void display(Object *obj, GBool topLevel = gTrue);
 
-  void doWidgetForm(Object *str, fouble xMin, fouble yMin,
-		    fouble xMax, fouble yMax);
+  // Display an annotation, given its appearance (a Form XObject) and
+  // bounding box (in default user space).
+  void doAnnot(Object *str, fouble xMin, fouble yMin,
+	       fouble xMax, fouble yMax);
+
+  void pushResources(Dict *resDict);
+  void popResources();
 
 private:
 
   XRef *xref;			// the xref table for this PDF file
   OutputDev *out;		// output device
+  GBool subPage;		// is this a sub-page object?
   GBool printCommands;		// print the drawing commands (for debugging)
   GfxResources *res;		// resource stack
+  int updateLevel;
 
   GfxState *state;		// current graphics state
   GBool fontChanged;		// set if font or text matrix has changed
@@ -179,6 +190,7 @@ private:
   void doPatternFill(GBool eoFill);
   void opShFill(Object args[], int numArgs);
   void doAxialShFill(GfxAxialShading *shading);
+  void doRadialShFill(GfxRadialShading *shading);
   void doEndPath();
 
   // path clipping operators

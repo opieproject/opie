@@ -1,7 +1,7 @@
 
 QPDF - a PDF viewer for the Qtopia environment
 
-This tool is based on xpdf (currently 1.00). It uses the (mostly unmodified -
+This tool is based on xpdf (currently 1.01). It uses the (mostly unmodified -
 see below) xpdf PDF rendering engine. The Qtopia adaption was done with a new 
 OutputDev which renders directly to a QPixmap via QPainter calls.
 
@@ -20,11 +20,18 @@ Changes in 20020408:
  - Problems with type 3 fonts (not fully supported by XPDF) solved
  - Heavy optimizations in the image rendering code
 
-Changed in 20020413:
+Changes in 20020413:
  - Fixed crash in find routine
  - Stylus selection reworked
  - Cursor-key navigation added
  - Various crashes related to recursive calling of XPDF fixed 
+
+Changes in 20020417:
+ - Fixed crash in XPDF regarding 0-length strings.
+ - Fast sqrt, rint and fabs functions added. 
+
+Changes in 20020524:
+ - Ported to xpdf 1.01
 
 
 Changes to xpdf:
@@ -52,36 +59,20 @@ ToDo:
 
  
 Install:
- - xpdf-1.00
-   Get the tarball for xpdf, version 1.0, untar it and ./configure it.
-   (No special flags are needed for ./configure - it simply has to run)
-   
- - qpdf
-   Make sure your QPEDIR / TMAKEPATH variables are correctly !
- 
-   cd into the xpdf directory (xpdf-1.00) and untar the qpdf tarball. This 
-   should create a subdirectory qpdf.
-   cd into this directory and start the script "./setup-qpdf". This 
-   incorporates the above mentioned patches into xpdf.
-   
-   Now do a make.
-   
-   Copy the files qpdf, qpdf_icon.png and qpdf.desktop to the appropriate
-   directories on your iPaq or:
-   If you want a ipk, just run ./mkipkg
+ - Qpdf is now fully integrated into Opie. For compilation and installation
+   instructions see http://opie.handhelds.org.
 
  - compress / uncompress
-   If you run a normal familiar installation, it the standard gzip (I tested
-   1.2.4-33 ipkg)  can handle the compression format used in PDF files, when 
+   If you run a normal familiar installation, the standard gzip (I tested
+   1.2.4-33 ipkg) can handle the compression format used in PDF files, when 
    called as uncompress. The BusyBox version of gzip can _not_ handle this 
    old format.
    
-   If you do not have a working uncompress installed on your iPaq, you can 
-   simply use the one in the contrib directory of the tarball (make uncompress 
-   a link to compress).
-   [I could not find an official tarball for compress -- this is the SuSE
-   version cross-compiled for ARM]
-   
+   If you do not have a working uncompress installed on your iPaq, you could 
+   simply use the old compress package.
+   (I could not find an official tarball for compress -- I used the SuSE
+   version cross-compiled for ARM for myself, but I will make an ipk soon)
+       
    
 Have fun ;)
 

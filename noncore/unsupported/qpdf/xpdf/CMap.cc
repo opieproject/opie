@@ -2,7 +2,7 @@
 //
 // CMap.cc
 //
-// Copyright 2001 Derek B. Noonburg
+// Copyright 2001-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -20,6 +20,7 @@
 #include "GString.h"
 #include "Error.h"
 #include "GlobalParams.h"
+#include "PSTokenizer.h"
 #include "CMap.h"
 
 //------------------------------------------------------------------------
@@ -34,15 +35,20 @@ struct CMapVectorEntry {
 
 //------------------------------------------------------------------------
 
+static int getCharFromFile(void *data) {
+  return fgetc((FILE *)data);
+}
+
+//------------------------------------------------------------------------
+
 CMap *CMap::parse(CMapCache *cache, GString *collectionA,
 		  GString *cMapNameA) {
   FILE *f;
   CMap *cmap;
-  char buf[256];
-  GBool inCodeSpace, inCIDRange;
-  char *tok1, *tok2, *tok3;
+  PSTokenizer *pst;
+  char tok1[256], tok2[256], tok3[256];
+  int n1, n2, n3;
   Guint start, end;
-  Guint n;
 
   if (!(f = globalParams->findCMapFile(collectionA, cMapNameA))) {
 
@@ -61,50 +67,64 @@ CMap *CMap::parse(CMapCache *cache, GString *collectionA,
 
   cmap = new CMap(collectionA->copy(), cMapNameA->copy());
 
-  inCodeSpace = inCIDRange = gFalse;
-  while (getLine(buf, sizeof(buf), f)) {
-    tok1 = strtok(buf, " \t\r\n");
-    if (!tok1 || tok1[0] == '%') {
-      continue;
-    }
-    tok2 = strtok(NULL, " \t\r\n");
-    tok3 = strtok(NULL, " \t\r\n");
-    if (inCodeSpace) {
-      if (!strcmp(tok1, "endcodespacerange")) {
-	inCodeSpace = gFalse;
-      } else if (tok2 && tok1[0] == '<' && tok2[0] == '<' &&
-		 (n = strlen(tok1)) == strlen(tok2) &&
-		 n >= 4 && (n & 1) == 0) {
-	tok1[n - 1] = tok2[n - 1] = '\0';
-	sscanf(tok1 + 1, "%x", &start);
-	sscanf(tok2 + 1, "%x", &end);
-	n = (n - 2) / 2;
-	cmap->addCodeSpace(cmap->vector, start, end, n);
-      }
-    } else if (inCIDRange) {
-      if (!strcmp(tok1, "endcidrange")) {
-	inCIDRange = gFalse;
-      } else if (tok2 && tok3 && tok1[0] == '<' && tok2[0] == '<' &&
-		 (n = strlen(tok1)) == strlen(tok2) &&
-		 n >= 4 && (n & 1) == 0) {
-	tok1[n - 1] = tok2[n - 1] = '\0';
-	sscanf(tok1 + 1, "%x", &start);
-	sscanf(tok2 + 1, "%x", &end);
-	n = (n - 2) / 2;
-	cmap->addCIDs(start, end, n, (CID)atoi(tok3));
-      }
-    } else if (tok2 && !strcmp(tok2, "usecmap")) {
+  pst = new PSTokenizer(&getCharFromFile, f);
+  pst->getToken(tok1, sizeof(tok1), &n1);
+  while (pst->getToken(tok2, sizeof(tok2), &n2)) {
+    if (!strcmp(tok2, "usecmap")) {
       if (tok1[0] == '/') {
 	cmap->useCMap(cache, tok1 + 1);
       }
+      pst->getToken(tok1, sizeof(tok1), &n1);
     } else if (!strcmp(tok1, "/WMode")) {
       cmap->wMode = atoi(tok2);
-    } else if (tok2 && !strcmp(tok2, "begincodespacerange")) {
-      inCodeSpace = gTrue;
-    } else if (tok2 && !strcmp(tok2, "begincidrange")) {
-      inCIDRange = gTrue;
+      pst->getToken(tok1, sizeof(tok1), &n1);
+    } else if (!strcmp(tok2, "begincodespacerange")) {
+      while (pst->getToken(tok1, sizeof(tok1), &n1)) {
+	if (!strcmp(tok1, "endcodespacerange")) {
+	  break;
+	}
+	if (!pst->getToken(tok2, sizeof(tok2), &n2) ||
+	    !strcmp(tok2, "endcodespacerange")) {
+	  error(-1, "Illegal entry in codespacerange block in CMap");
+	  break;
+	}
+	if (tok1[0] == '<' && tok2[0] == '<' &&
+	    n1 == n2 && n1 >= 4 && (n1 & 1) == 0) {
+	  tok1[n1 - 1] = tok2[n1 - 1] = '\0';
+	  sscanf(tok1 + 1, "%x", &start);
+	  sscanf(tok2 + 1, "%x", &end);
+	  n1 = (n1 - 2) / 2;
+	  cmap->addCodeSpace(cmap->vector, start, end, n1);
+	}
+      }
+      pst->getToken(tok1, sizeof(tok1), &n1);
+    } else if (!strcmp(tok2, "begincidrange")) {
+      while (pst->getToken(tok1, sizeof(tok1), &n1)) {
+	if (!strcmp(tok1, "endcidrange")) {
+	  break;
+	}
+	if (!pst->getToken(tok2, sizeof(tok2), &n2) ||
+	    !strcmp(tok2, "endcidrange") ||
+	    !pst->getToken(tok3, sizeof(tok3), &n3) ||
+	    !strcmp(tok3, "endcidrange")) {
+	  error(-1, "Illegal entry in cidrange block in CMap");
+	  break;
+	}
+	if (tok1[0] == '<' && tok2[0] == '<' &&
+	    n1 == n2 && n1 >= 4 && (n1 & 1) == 0) {
+	  tok1[n1 - 1] = tok2[n1 - 1] = '\0';
+	  sscanf(tok1 + 1, "%x", &start);
+	  sscanf(tok2 + 1, "%x", &end);
+	  n1 = (n1 - 2) / 2;
+	  cmap->addCIDs(start, end, n1, (CID)atoi(tok3));
+	}
+      }
+      pst->getToken(tok1, sizeof(tok1), &n1);
+    } else {
+      strcpy(tok1, tok2);
     }
   }
+  delete pst;
 
   fclose(f);
 

@@ -2,7 +2,7 @@
 //
 // TextOutputDev.cc
 //
-// Copyright 1997 Derek B. Noonburg
+// Copyright 1997-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -47,6 +47,12 @@ TextString::TextString(GfxState *state, fouble fontSize) {
     // which should never happen
     yMin = y - 0.95 * fontSize;
     yMax = y + 0.35 * fontSize;
+  }
+  if (yMin == yMax) {
+    // this is a sanity check for a case that shouldn't happen -- but
+    // if it does happen, we want to avoid dividing by zero later
+    yMin = y;
+    yMax = y + 1;
   }
   col = 0;
   text = NULL;
@@ -99,6 +105,7 @@ void TextPage::updateFont(GfxState *state) {
   fouble *fm;
   char *name;
   int code;
+  fouble w;
 
   // adjust the font size
   fontSize = state->getTransformedFontSize();
@@ -116,8 +123,11 @@ void TextPage::updateFont(GfxState *state) {
       }
     }
     if (code < 256) {
-      // 600 is a generic average 'm' width -- yes, this is a hack
-      fontSize *= ((Gfx8BitFont *)font)->getWidth(code) / 0.6;
+      w = ((Gfx8BitFont *)font)->getWidth(code);
+      if (w != 0) {
+	// 600 is a generic average 'm' width -- yes, this is a hack
+	fontSize *= w / 0.6;
+      }
     }
     fm = font->getFontMatrix();
     if (fm[0] != 0) {
@@ -154,8 +164,10 @@ void TextPage::addChar(GfxState *state, fouble x, fouble y,
   dx -= dx2;
   dy -= dy2;
   state->transformDelta(dx, dy, &w1, &h1);
-  w1 /= uLen;
-  h1 /= uLen;
+  if (uLen != 0) {
+    w1 /= uLen;
+    h1 /= uLen;
+  }
   for (i = 0; i < uLen; ++i) {
     curStr->addChar(state, x1 + i*w1, y1 + i*h1, w1, h1, u[i]);
   }
@@ -429,7 +441,7 @@ GString *TextPage::getText(fouble xMin, fouble yMin,
   return s;
 }
 
-void TextPage::dump(FILE *f) {
+void TextPage::dump(void *outputStream, TextOutputFunc outputFunc) {
   UnicodeMap *uMap;
   char space[8], eol[16], eop[8], buf[8];
   int spaceLen, eolLen, eopLen, n;
@@ -498,9 +510,9 @@ void TextPage::dump(FILE *f) {
   }
 
 #if 0 //~ for debugging
-  fprintf(f, "~~~~~~~~~~\n");
+  fprintf((FILE *)outputStream, "~~~~~~~~~~\n");
   for (str1 = yxStrings; str1; str1 = str1->yxNext) {
-    fprintf(f, "(%4d,%4d) - (%4d,%4d) [%3d] '",
+    fprintf((FILE *)outputStream, "(%4d,%4d) - (%4d,%4d) [%3d] '",
 	    (int)str1->xMin, (int)str1->yMin,
 	    (int)str1->xMax, (int)str1->yMax, str1->col);
     for (i = 0; i < str1->len; ++i) {
@@ -508,7 +520,7 @@ void TextPage::dump(FILE *f) {
     }
     printf("'\n");
   }
-  fprintf(f, "~~~~~~~~~~\n");
+  fprintf((FILE *)outputStream, "~~~~~~~~~~\n");
 #endif
 
   // output
@@ -521,14 +533,14 @@ void TextPage::dump(FILE *f) {
       col1 = str1->col;
     } else {
       for (; col1 < str1->col; ++col1) {
-	fwrite(space, 1, spaceLen, f);
+	(*outputFunc)(outputStream, space, spaceLen);
       }
     }
 
     // print the string
     for (i = 0; i < str1->len; ++i) {
       if ((n = uMap->mapUnicode(str1->text[i], buf, sizeof(buf))) > 0) {
-	fwrite(buf, 1, n, f);
+	(*outputFunc)(outputStream, buf, n);
       }
     }
 
@@ -547,7 +559,7 @@ void TextPage::dump(FILE *f) {
 	  str1->yxNext->xMin >= str1->xMax)) {
 
       // print a return
-      fwrite(eol, 1, eolLen, f);
+      (*outputFunc)(outputStream, eol, eolLen);
 
       // print extra vertical space if necessary
       if (str1->yxNext) {
@@ -573,7 +585,7 @@ void TextPage::dump(FILE *f) {
 	  d = 5;
 	}
 	for (; d > 0; --d) {
-	  fwrite(eol, 1, eolLen, f);
+	  (*outputFunc)(outputStream, eol, eolLen);
 	}
       }
 
@@ -584,9 +596,9 @@ void TextPage::dump(FILE *f) {
   }
 
   // end of page
-  fwrite(eol, 1, eolLen, f);
-  fwrite(eop, 1, eopLen, f);
-  fwrite(eol, 1, eolLen, f);
+  (*outputFunc)(outputStream, eol, eolLen);
+  (*outputFunc)(outputStream, eop, eopLen);
+  (*outputFunc)(outputStream, eol, eolLen);
 
   uMap->decRefCnt();
 }
@@ -611,6 +623,10 @@ void TextPage::clear() {
 // TextOutputDev
 //------------------------------------------------------------------------
 
+static void outputToFile(void *stream, char *text, int len) {
+  fwrite(text, 1, len, (FILE *)stream);
+}
+
 TextOutputDev::TextOutputDev(char *fileName, GBool rawOrderA, GBool append) {
   text = NULL;
   rawOrder = rawOrderA;
@@ -620,28 +636,39 @@ TextOutputDev::TextOutputDev(char *fileName, GBool rawOrderA, GBool append) {
   needClose = gFalse;
   if (fileName) {
     if (!strcmp(fileName, "-")) {
-      f = stdout;
-    } else if ((f = fopen(fileName, append ? "a" : "w"))) {
+      outputStream = stdout;
+    } else if ((outputStream = fopen(fileName, append ? "ab" : "wb"))) {
       needClose = gTrue;
     } else {
       error(-1, "Couldn't open text file '%s'", fileName);
       ok = gFalse;
       return;
     }
+    outputFunc = &outputToFile;
   } else {
-    f = NULL;
+    outputStream = NULL;
   }
 
   // set up text object
   text = new TextPage(rawOrder);
 }
 
+TextOutputDev::TextOutputDev(TextOutputFunc func, void *stream,
+			     GBool rawOrderA) {
+  outputFunc = func;
+  outputStream = stream;
+  needClose = gFalse;
+  rawOrder = rawOrderA;
+  text = new TextPage(rawOrder);
+  ok = gTrue;
+}
+
 TextOutputDev::~TextOutputDev() {
   if (needClose) {
 #ifdef MACOS
-    ICS_MapRefNumAndAssign((short)f->handle);
+    ICS_MapRefNumAndAssign((short)((FILE *)outputStream)->handle);
 #endif
-    fclose(f);
+    fclose((FILE *)outputStream);
   }
   if (text) {
     delete text;
@@ -654,8 +681,8 @@ void TextOutputDev::startPage(int pageNum, GfxState *state) {
 
 void TextOutputDev::endPage() {
   text->coalesce();
-  if (f) {
-    text->dump(f);
+  if (outputStream) {
+    text->dump(outputStream, outputFunc);
   }
 }
 

@@ -2,7 +2,7 @@
 //
 // GfxFont.cc
 //
-// Copyright 1996-2001 Derek B. Noonburg
+// Copyright 1996-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -454,12 +454,23 @@ Gfx8BitFont::Gfx8BitFont(XRef *xref, char *tagA, Ref idA, GString *nameA,
   }
   obj1.free();
 
-  // get Type3 font definition
+  // get Type 3 bounding box, font definition, and resources
   if (type == fontType3) {
-    fontDict->lookup("CharProcs", &charProcs);
-    if (!charProcs.isDict()) {
+    if (fontDict->lookup("FontBBox", &obj1)->isArray()) {
+      for (i = 0; i < 4 && i < obj1.arrayGetLength(); ++i) {
+	if (obj1.arrayGet(i, &obj2)->isNum()) {
+	  fontBBox[i] = obj2.getNum();
+	}
+	obj2.free();
+      }
+    }
+    obj1.free();
+    if (!fontDict->lookup("CharProcs", &charProcs)->isDict()) {
       error(-1, "Missing or invalid CharProcs dictionary in Type 3 font");
       charProcs.free();
+    }
+    if (!fontDict->lookup("Resources", &resources)->isDict()) {
+      resources.free();
     }
   }
 
@@ -513,9 +524,11 @@ Gfx8BitFont::Gfx8BitFont(XRef *xref, char *tagA, Ref idA, GString *nameA,
   }
 
   // check embedded or external font file for base encoding
+  // (only for Type 1 fonts - trying to get an encoding out of a
+  // TrueType font is a losing proposition)
   fontFile = NULL;
   buf = NULL;
-  if ((type == fontType1 || type == fontType1C || type == fontTrueType) &&
+  if ((type == fontType1 || type == fontType1C) &&
       (extFontFile || embFontID.num >= 0)) {
     if (extFontFile) {
       buf = readExtFontFile(&len);
@@ -524,12 +537,15 @@ Gfx8BitFont::Gfx8BitFont(XRef *xref, char *tagA, Ref idA, GString *nameA,
     }
     if (buf) {
 #if 0
+      if (type == fontType1C && !strncmp(buf, "%!", 2)) {
+	// various tools (including Adobe's) occasionally embed Type 1
+	// fonts but label them Type 1C
+	type = fontType1;
+      }
       if (type == fontType1) {
 	fontFile = new Type1FontFile(buf, len);
-      } else if (type == fontType1C) {
-	fontFile = new Type1CFontFile(buf, len);
       } else {
-	fontFile = new TrueTypeFontFile(buf, len);
+	fontFile = new Type1CFontFile(buf, len);
       }
       if (fontFile->getName()) {
 	if (embFontName) {
@@ -569,6 +585,7 @@ Gfx8BitFont::Gfx8BitFont(XRef *xref, char *tagA, Ref idA, GString *nameA,
   if (obj1.isDict()) {
     obj1.dictLookup("Differences", &obj2);
     if (obj2.isArray()) {
+      hasEncoding = gTrue;
       code = 0;
       for (i = 0; i < obj2.arrayGetLength(); ++i) {
 	obj2.arrayGet(i, &obj3);
@@ -636,8 +653,9 @@ Gfx8BitFont::Gfx8BitFont(XRef *xref, char *tagA, Ref idA, GString *nameA,
     }
 
     // pass 2: try to fill in the missing chars, looking for names of
-    // the form 'Axx', 'xx', 'Ann', or 'nn', where 'A' is any letter,
-    // 'xx' is two hex digits, and 'nn' is 2-4 decimal digits
+    // the form 'Axx', 'xx', 'Ann', 'ABnn', or 'nn', where 'A' and 'B'
+    // are any letters, 'xx' is two hex digits, and 'nn' is 2-4
+    // decimal digits
     if (missing && globalParams->getMapNumericCharNames()) {
       for (code = 0; code < 256; ++code) {
 	if ((charName = enc[code]) && !toUnicode[code] &&
@@ -656,6 +674,9 @@ Gfx8BitFont::Gfx8BitFont(XRef *xref, char *tagA, Ref idA, GString *nameA,
 	  } else if (n >= 3 && n <= 5 &&
 		     isdigit(charName[1]) && isdigit(charName[2])) {
 	    code2 = atoi(charName+1);
+	  } else if (n >= 4 && n <= 6 &&
+		     isdigit(charName[2]) && isdigit(charName[3])) {
+	    code2 = atoi(charName+2);
 	  }
 	  if (code2 >= 0 && code2 <= 0xff) {
 	    toUnicode[code] = (Unicode)code2;
@@ -684,10 +705,14 @@ Gfx8BitFont::Gfx8BitFont(XRef *xref, char *tagA, Ref idA, GString *nameA,
   mul = (type == fontType3) ? fontMat[0] : fouble(0.001);
   fontDict->lookup("Widths", &obj1);
   if (obj1.isArray()) {
+    flags |= fontFixedWidth;
     for (code = firstChar; code <= lastChar; ++code) {
       obj1.arrayGet(code - firstChar, &obj2);
       if (obj2.isNum()) {
 	widths[code] = obj2.getNum() * mul;
+	if (widths[code] != widths[firstChar]) {
+	  flags &= ~fontFixedWidth;
+	}
       }
       obj2.free();
     }
@@ -752,6 +777,9 @@ Gfx8BitFont::~Gfx8BitFont() {
   if (charProcs.isDict()) {
     charProcs.free();
   }
+  if (resources.isDict()) {
+    resources.free();
+  }
 }
 
 int Gfx8BitFont::getNextChar(char *s, int len, CharCode *code,
@@ -771,6 +799,10 @@ CharCodeToUnicode *Gfx8BitFont::getToUnicode() {
   return ctu;
 }
 
+Dict *Gfx8BitFont::getCharProcs() {
+  return charProcs.isDict() ? charProcs.getDict() : (Dict *)NULL;
+}
+
 Object *Gfx8BitFont::getCharProc(int code, Object *proc) {
   if (charProcs.isDict()) {
     charProcs.dictLookup(enc[code], proc);
@@ -778,6 +810,10 @@ Object *Gfx8BitFont::getCharProc(int code, Object *proc) {
     proc->initNull();
   }
   return proc;
+}
+
+Dict *Gfx8BitFont::getResources() {
+  return resources.isDict() ? resources.getDict() : (Dict *)NULL;
 }
 
 //------------------------------------------------------------------------
@@ -1186,6 +1222,10 @@ int GfxCIDFont::getNextChar(char *s, int len, CharCode *code,
   return n;
 }
 
+int GfxCIDFont::getWMode() {
+  return cMap ? cMap->getWMode() : 0;
+}
+
 CharCodeToUnicode *GfxCIDFont::getToUnicode() {
   ctu->incRefCnt();
   return ctu;
@@ -1216,7 +1256,7 @@ GfxFontDict::GfxFontDict(XRef *xref, Dict *fontDict) {
 	fonts[i] = NULL;
       }
     } else {
-      error(-1, "font resource is not a dictionary");
+      error(-1, "font resource is not a dictionary reference");
       fonts[i] = NULL;
     }
     obj1.free();
