@@ -25,6 +25,10 @@
 
 #define PROCNETDEV "/proc/net/dev"
 
+#ifndef ARPHRD_IEEE80211
+#define ARPHRD_IEEE80211 801
+#endif
+
 static char Dig2Hex[] = { 
   '0', '1', '2', '3', 
   '4', '5', '6', '7', 
