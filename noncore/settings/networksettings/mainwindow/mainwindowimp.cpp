@@ -26,6 +26,7 @@
 #include <qtabwidget.h> // in order to disable the profiles tab
 #include <qmessagebox.h>
 #include <qtextstream.h>
+#include <qregexp.h>
 
 
 #if QT_VERSION < 0x030000
@@ -726,28 +727,43 @@ void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
 
 void MainWindowImp::setHostname()
 {
+    static QRegExp filter("[^A-Za-z0-9_\\-\\.]");
+    if (filter.match(m_Nameinput->text())!=-1) {
+        odebug << "Wrong hostname" << oendl;
+        QMessageBox::critical(0, tr("Sorry"), tr("This is a wrong name.<br>Please use A-Z, a-z, _, - or a single dot."));
+        return;
+    }
+
+    OProcess h;
+    _procTemp="";
+    h << "hostname" << m_Nameinput->text();
+    connect(&h,SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),this,SLOT(slotHostname(Opie::Core::OProcess*,char*,int)));
+    h.start(OProcess::Block,OProcess::Stderr);
+    odebug << "Got " << _procTemp << " - " << h.exitStatus() << oendl;
+    if (h.exitStatus()!=0) {
+        QMessageBox::critical(0, tr("Sorry"), QString(tr("Could not set name.\n%1")).arg(_procTemp.stripWhiteSpace()));
+        return;
+    }
+    _procTemp="";
+
     QFile f(_HOSTFILE);
-
-    OProcess*h = new OProcess;
-    _procTemp="";
-    *h << "hostname" << m_Nameinput->text();
-    connect(h,SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),this,SLOT(slotHostname(Opie::Core::OProcess*,char*,int)));
-    h->start(OProcess::Block,OProcess::Stderr);
-    odebug << "Got " << _procTemp << " - " << h->exitStatus() << oendl;
-    _procTemp="";
-    delete h;
-
     if (f.open(IO_Truncate|IO_WriteOnly))
     {
         QTextStream s(&f);
         s << m_Nameinput->text();
+    } else {
+        QMessageBox::critical(0, tr("Sorry"), tr("Could not save name."));
+        return;
     }
+
     f.close();
     f.setName(_IRDANAME);
     if (f.open(IO_WriteOnly))
     {
         QTextStream s(&f);
         s << m_Nameinput->text();
+    } else {
+        QMessageBox::critical(0, tr("Sorry"), tr("Could not set infrared name."));
     }
 }
 
@@ -760,7 +776,7 @@ void MainWindowImp::initHostname()
     connect(&h,SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),this,SLOT(slotHostname(Opie::Core::OProcess*,char*,int)));
     h.start(OProcess::Block,OProcess::AllOutput);
     odebug << "Got " << _procTemp <<oendl;
-    m_Nameinput->setText(_procTemp);
+    m_Nameinput->setText(_procTemp.stripWhiteSpace());
     _procTemp="";
 }
 
