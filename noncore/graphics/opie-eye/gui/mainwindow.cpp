@@ -265,7 +265,7 @@ void PMainWindow::initDisp() {
 //        if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
             //m_disp->setMinimumSize(QApplication::desktop()->size()/2);
 //        }
-        m_disp->setMenuActions(m_hGroup,m_gPrevNext,m_gDisplayType);
+        m_disp->setMenuActions(m_hGroup,m_gPrevNext,m_gDisplayType,m_hBright);
         m_disp->setAutoScale(!m_aUnscaled->isOn());
         m_disp->setAutoRotate(m_aAutoRotate->isOn());
         m_disp->setShowZoomer(m_aZoomer->isOn());
@@ -279,6 +279,8 @@ void PMainWindow::initDisp() {
         connect(m_disp,SIGNAL(toggleAutoscale()),this,SLOT(slotToggleAutoscale()));
         connect(m_disp,SIGNAL(toggleAutorotate()),this,SLOT(slotToggleAutorotate()));
         connect(m_view,SIGNAL(sig_startslide(int)),m_disp,SLOT(startSlide(int)));
+        connect(m_IncBrightness,SIGNAL(activated()),m_disp,SLOT(slotIncBrightness()));
+        connect(m_DecBrightness,SIGNAL(activated()),m_disp,SLOT(slotDecBrightness()));
         slotFullScreenToggled(m_aFullScreen->isOn());
     }
 }
@@ -380,6 +382,7 @@ void PMainWindow::slotDisplay( const QString& inf ) {
         initDisp();
         m_disp->setIntensity(m_Intensity);
         m_setCurrentBrightness->setEnabled(true);
+        m_hBright->setEnabled(true);
     }
     m_disp->setImage( inf );
     if (m_SmallWindow) {
@@ -643,6 +646,11 @@ void PMainWindow::setupActions()
     }
     m_setCurrentBrightness = new QAction(tr("Display brightness..."), 0, 0, this, 0, false);
     connect(m_setCurrentBrightness,SIGNAL(activated()),this,SLOT(setupBrightness()));
+    m_IncBrightness = new QAction(tr("Increase brightness by 5"),Resource::loadIconSet( "up" ),0, 0, this, 0, false);
+    m_DecBrightness = new QAction(tr("Decrease brightness by 5"),Resource::loadIconSet( "down" ),0, 0, this, 0, false);
+    m_hBright = new QActionGroup(this,"actioncollection",false),
+    m_hBright->insert(m_IncBrightness);
+    m_hBright->insert(m_DecBrightness);
 }
 
 void PMainWindow::setupBrightness()
@@ -651,7 +659,7 @@ void PMainWindow::setupBrightness()
         return;
     }
     int lb = m_disp->Intensity();
-    if (Valuebox(0,-255,255,lb,lb)) {
+    if (Valuebox(0,-100,100,lb,lb)) {
         m_disp->setIntensity(lb,true);
     }
 }
@@ -724,6 +732,10 @@ void PMainWindow::setupMenu()
     m_gPrevNext->addTo(dispMenu);
     m_setCurrentBrightness->addTo(dispMenu);
     m_setCurrentBrightness->setEnabled(false);
+    dispMenu->insertSeparator();
+    m_hBright->addTo(dispMenu);
+    m_hBright->setEnabled(false);
+
     if (m_aForceSmall) {
         dispMenu->insertSeparator();
         m_aForceSmall->addTo(dispMenu);

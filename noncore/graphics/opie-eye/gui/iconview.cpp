@@ -36,6 +36,10 @@
 
 using Opie::Core::OKeyConfigItem;
 
+const int PIconView::sMAX_ICON_SIZE = 128;
+const int PIconView::sMIN_ICON_SIZE = 12;
+const int PIconView::sDEF_ICON_SIZE = 64;
+
 /*
  * The Icons, Request Cache and IconViewItem for the IconView
  */
@@ -222,8 +226,8 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
         m_view->setResizeMode(QIconView::Fixed);
     }
     m_iconsize = m_cfg->readNumEntry("iconsize", 32);
-    if (m_iconsize<12)m_iconsize = 12;
-    if (m_iconsize>64)m_iconsize = 64;
+    if (m_iconsize<sMIN_ICON_SIZE)m_iconsize = sMIN_ICON_SIZE;
+    if (m_iconsize>sMAX_ICON_SIZE)m_iconsize = sMAX_ICON_SIZE;
 
     calculateGrid();
     initKeys();
@@ -408,8 +412,8 @@ void PIconView::resetView() {
     if (m_mode>1) {
         int osize = m_iconsize;
         m_iconsize = m_cfg->readNumEntry("iconsize", 32);
-        if (m_iconsize<12)m_iconsize = 12;
-        if (m_iconsize>64)m_iconsize = 64;
+        if (m_iconsize<sMIN_ICON_SIZE)m_iconsize = sMIN_ICON_SIZE;
+        if (m_iconsize>sMAX_ICON_SIZE)m_iconsize = sMAX_ICON_SIZE;
         if (osize != m_iconsize) {
             if (_dirPix){
                 delete _dirPix;
@@ -422,7 +426,7 @@ void PIconView::resetView() {
             calculateGrid();
         }
     } else {
-        m_iconsize = 64;
+        m_iconsize = sDEF_ICON_SIZE;
     }
     slotViewChanged(m_views->currentItem());
     m_internalReset = false;
@@ -833,11 +837,11 @@ void PIconView::slotChangeMode( int mode ) {
             m_view->setResizeMode(QIconView::Fixed);
         }
         if (m_mode==1) {
-            m_iconsize = 64;
+            m_iconsize = sDEF_ICON_SIZE;
         } else {
             m_iconsize = m_cfg->readNumEntry("iconsize", 32);
-            if (m_iconsize<12)m_iconsize = 12;
-            if (m_iconsize>64)m_iconsize = 64;
+            if (m_iconsize<sMIN_ICON_SIZE)m_iconsize = sMIN_ICON_SIZE;
+            if (m_iconsize>sMAX_ICON_SIZE)m_iconsize = sMAX_ICON_SIZE;
         }
         if (_dirPix){
             delete _dirPix;
@@ -888,7 +892,7 @@ void PIconView::calculateGrid(QResizeEvent* re)
             m_view->setSpacing(2);
             m_view->setGridX(m_iconsize);
             m_view->setGridY(-1);
-            cache = (int)((double)64/(double)m_iconsize*40.0);
+            cache = (int)((double)sDEF_ICON_SIZE/(double)m_iconsize*80.0);
             odebug << "cache size: " << cache << oendl;
             PPixmapCache::self()->setMaxImages(cache);
             break;

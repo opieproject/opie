@@ -91,9 +91,10 @@ private:
     QPopupMenu *fileMenu,*dispMenu,*fsMenu,*listviewMenu,*settingsMenu;
     QAction*m_aShowInfo,*m_aBeam,*m_aTrash,*m_aViewfile,*m_aDirUp,*m_aStartSlide;
     QAction*m_aHideToolbar,*m_aSetup,*m_aDirName,*m_aDirShort,*m_aDirLong;
-    QActionGroup *m_gListViewMode,*m_gDisplayType,*m_gPrevNext,*m_hGroup;
+    QActionGroup *m_gListViewMode,*m_gDisplayType,*m_gPrevNext,*m_hGroup,*m_hBright;
     QAction *m_aNext,*m_aPrevious,*m_aFullScreen;
     QAction *m_aAutoRotate,*m_aUnscaled,*m_aZoomer,*m_aForceSmall,*m_setCurrentBrightness;
+    QAction *m_IncBrightness,*m_DecBrightness;
 
     /* init funs */
     void readConfig();

@@ -37,6 +37,10 @@ public:
 
     void setDoccalled(bool);
 
+    static const int sMAX_ICON_SIZE;
+    static const int sMIN_ICON_SIZE;
+    static const int sDEF_ICON_SIZE;
+
 signals:
     void sig_showInfo( const QString& );
     void sig_display(const QString&);

@@ -29,6 +29,7 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
     m_gDisplayType = 0;
     m_gPrevNext = 0;
     m_hGroup = 0;
+    m_gBright = 0;
     m_Rotated = false;
     closeIfHide = false;
     int min = QApplication::desktop()->size().width()>QApplication::desktop()->size().height()?
@@ -39,9 +40,26 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
     } else {
         setMinimumSize(10,10);
     }
+    connect(this,SIGNAL(incBrightness()),this,SLOT(slotIncBrightness()));
+    connect(this,SIGNAL(decBrightness()),this,SLOT(slotDecBrightness()));
+
     m_sysChannel = new QCopChannel( "QPE/System", this );
     connect( m_sysChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
         this, SLOT( systemMessage(const QCString&,const QByteArray&) ) );
+}
+
+void ImageView::slotIncBrightness()
+{
+    int lb = Intensity()+5;
+    if (lb>100) lb=100;
+    setIntensity(lb,true);
+}
+
+void ImageView::slotDecBrightness()
+{
+    int lb = Intensity()-5;
+    if (lb<-100) lb=-100;
+    setIntensity(lb,true);
 }
 
 void ImageView::systemMessage( const QCString& msg, const QByteArray& data )
@@ -60,11 +78,12 @@ void ImageView::systemMessage( const QCString& msg, const QByteArray& data )
     }
 }
 
-void ImageView::setMenuActions(QActionGroup*hGroup,QActionGroup*nextprevGroup, QActionGroup*disptypeGroup)
+void ImageView::setMenuActions(QActionGroup*hGroup,QActionGroup*nextprevGroup, QActionGroup*disptypeGroup,QActionGroup*brightGroup)
 {
     m_gDisplayType = disptypeGroup;
     m_gPrevNext = nextprevGroup;
     m_hGroup = hGroup;
+    m_gBright = brightGroup;
 }
 
 ImageView::~ImageView()
@@ -174,6 +193,15 @@ void ImageView::initKeys()
                                                 Resource::loadPixmap("mag"), Zoomer,
                                                 Opie::Core::OKeyPair(Qt::Key_T,0),
                                                 this, SIGNAL(toggleZoomer())));
+
+    m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Increase brightness"), "incbrightness",
+                                                Resource::loadPixmap("up"), Incbrightness,
+                                                Opie::Core::OKeyPair(Qt::Key_B,0),
+                                                this, SIGNAL(incBrightness())));
+    m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Decrease brightness"), "decbrightness",
+                                                Resource::loadPixmap("down"), Decbrightness,
+                                                Opie::Core::OKeyPair(Qt::Key_D,0),
+                                                this, SIGNAL(decBrightness())));
     m_viewManager->handleWidget( this );
     m_viewManager->load();
 }
@@ -223,6 +251,10 @@ void ImageView::contentsMousePressEvent ( QMouseEvent * e)
             m->insertSeparator();
             m_gDisplayType->addTo(m);
         }
+        if (m_gBright) {
+            m->insertSeparator();
+            m_gBright->addTo(m);
+        }
     }
     m->setFocus();
     m->exec( QPoint( QCursor::pos().x(), QCursor::pos().y()) );
@@ -234,6 +266,9 @@ void ImageView::contentsMousePressEvent ( QMouseEvent * e)
     }
     if (m_gDisplayType) {
         m_gDisplayType->removeFrom(m);
+    }
+    if (m_gBright) {
+        m_gBright->removeFrom(m);
     }
     delete m;
 }

@@ -29,7 +29,9 @@ class ImageView:public Opie::MM::OImageScrollView
         ShowPrevious,
         Zoomer,
         Autorotate,
-        Autoscale
+        Autoscale,
+        Incbrightness,
+        Decbrightness
     };
 
 public:
@@ -40,7 +42,7 @@ public:
     bool fullScreen(){return m_isFullScreen;}
     virtual void enableFullscreen();
     void stopSlide();
-    void setMenuActions(QActionGroup*hGroup,QActionGroup*nextprevGroup, QActionGroup*disptypeGroup);
+    void setMenuActions(QActionGroup*hGroup,QActionGroup*nextprevGroup, QActionGroup*disptypeGroup,QActionGroup*brightGroup);
     void setCloseIfHide(bool);
 
 signals:
@@ -52,6 +54,8 @@ signals:
     void toggleZoomer();
     void toggleAutoscale();
     void toggleAutorotate();
+    void incBrightness();
+    void decBrightness();
 
 protected:
     Opie::Core::OConfig * m_cfg;
@@ -65,7 +69,7 @@ protected:
     QTimer*m_slideTimer;
     int m_slideValue;
     virtual void focusInEvent ( QFocusEvent * );
-    QActionGroup *m_gDisplayType,*m_gPrevNext,*m_hGroup;
+    QActionGroup *m_gDisplayType,*m_gPrevNext,*m_hGroup,*m_gBright;
     bool closeIfHide:1;
     QCopChannel* m_sysChannel;
     int m_rotation;
@@ -75,6 +79,8 @@ public slots:
     virtual void startSlide(int);
     virtual void nextSlide();
     virtual void systemMessage( const QCString&, const QByteArray& );
+    virtual void slotIncBrightness();
+    virtual void slotDecBrightness();
 
 protected slots:
     virtual void slotShowImageInfo();

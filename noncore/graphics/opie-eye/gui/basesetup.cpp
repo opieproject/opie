@@ -47,8 +47,8 @@ BaseSetup::BaseSetup(Opie::Core::OConfig *a_cfg,QWidget * parent, const char * n
     m_Intensity = new QSpinBox( this, "m_Intensity" );
     m_Intensity->setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::Fixed));
     m_Intensity->setButtonSymbols( QSpinBox::PlusMinus );
-    m_Intensity->setMaxValue( 255 );
-    m_Intensity->setMinValue(-255);
+    m_Intensity->setMaxValue( 100 );
+    m_Intensity->setMinValue(-100);
     m_Intensity->setValue( 0 );
     m_IntensityLayout->addWidget( m_Intensity, 0, 1 );
     m_IntensityLabel = new QLabel( this, "m_IntensityLabel" );
@@ -74,12 +74,13 @@ BaseSetup::BaseSetup(Opie::Core::OConfig *a_cfg,QWidget * parent, const char * n
     m_SlideShowTime->setValue(stime);
     m_SaveStateAuto->setChecked(m_cfg->readBoolEntry("savestatus",true));
     stime = m_cfg->readNumEntry("iconsize", 32);
+    /* must equal to s(MAX/MIN_ICONSIZE) in iconview.cpp! */
     if (stime<12)stime = 12;
-    if (stime>64)stime = 64;
+    if (stime>128)stime = 128;
     m_Iconsize->setValue(stime);
     stime = m_cfg->readNumEntry("intensity",0);
-    if (stime<-255) stime = -255;
-    if (stime>255) stime = 255;
+    if (stime<-100) stime = -100;
+    if (stime>100) stime = 100;
     m_Intensity->setValue(stime);
 }
 
