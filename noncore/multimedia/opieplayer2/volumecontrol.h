@@ -35,6 +35,7 @@ public slots:
      */
     void setVolume( int volumePerc );
 
+    void setMute(bool); 
 
 
 private:

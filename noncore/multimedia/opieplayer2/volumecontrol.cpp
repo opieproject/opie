@@ -29,7 +29,8 @@ void VolumeControl::setVolume( int volumePerc ) {
 
     m_volumePerc = volumePerc;
     cfg.writeEntry("VolumePercent", volumePerc );
-    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << false;
+//    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << false;
+    QCopEnvelope( "QPE/System", "setVolume(int,int)" ) << 0, volumePerc;
 }
 
 
@@ -52,7 +53,9 @@ VolumeControl::~VolumeControl() {
     QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << false;
 }
 
-
+void VolumeControl::setMute(bool on) {
+   QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << on;
+}
 
 
 
