@@ -211,7 +211,7 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 
 	// Events
 	while ( (*it).date().dayOfWeek() == dayOrder[i] && it!=ev.end() ) {
-		if(!((*it).end().hour()==(*it).start().hour() && (*it).end().minute()==(*it).start().minute())) {	// Skip effective events with no duration. (i.e ending at 00:00)
+		if(!(((*it).end().hour()==0) && ((*it).end().minute()==0) && ((*it).startDate()!=(*it).date()))) {	// Skip events ending at 00:00 starting at another day.
 			DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,this);
 			layout->addWidget(l);
 			connect (l, SIGNAL(editEvent(const Event &)),

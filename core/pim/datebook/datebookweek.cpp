@@ -139,7 +139,7 @@ void DateBookWeekView::showEvents( QValueList<EffectiveEvent> &ev )
 	QValueListIterator<EffectiveEvent> it;
 	for ( it = ev.begin(); it != ev.end(); ++it ) {
 		DateBookWeekItem *i = new DateBookWeekItem( *it );
-		if(!(i->event().end().hour()==i->event().start().hour() && i->event().end().minute()==i->event().start().minute())) {	// Skip effective events with no duration. (i.e ending at 00:00)
+		if(!((i->event().end().hour()==0) && (i->event().end().minute()==0) && (i->event().startDate()!=i->event().date()))) {	// Skip events ending at 00:00 starting at another day.
 			positionItem( i );
 			items.append( i );
 		}

@@ -309,7 +309,7 @@ void DateBookDay::getEvents()
 	QValueListIterator<EffectiveEvent> it;
 	for ( it = eventList.begin(); it != eventList.end(); ++it ) {
 		EffectiveEvent ev=*it;
-		if(!(ev.end().hour()==ev.start().hour() && ev.end().minute()==ev.start().minute())) {	// Skip effective events with no duration. (i.e ending at 00:00)
+		if(!((ev.end().hour()==0) && (ev.end().minute()==0) && (ev.startDate()!=ev.date()))) {	// Skip events ending at 00:00 starting at another day.
 			DateBookDayWidget* w = new DateBookDayWidget( *it, this );
 			connect( w, SIGNAL( deleteMe( const Event & ) ),
 						this, SIGNAL( removeEvent( const Event & ) ) );
