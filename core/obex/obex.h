@@ -22,7 +22,7 @@ namespace OpieObex {
 
       /**
        *  Starting listening to irda after enabled by the applet
-       * a  signal gets emitted when recieved a file
+       * a  signal gets emitted when received a file
        */
       void receive();
       void send( const QString& );
@@ -31,7 +31,7 @@ namespace OpieObex {
 
       /**
        * a signal
-       * @param path The path to the recieved file
+       * @param path The path to the received file
        */
       void receivedFile( const QString& path);
       /**
