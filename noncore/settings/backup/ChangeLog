@@ -1,0 +1,17 @@
+2004-03-18  Andreas Richter  <ar@oszine.de>
+
+	* read old backup files from opie 1.0.x
+	* use ~/Application/backup/exclude for exclude files from backup. Default is *.bck
+
+2004-01-10  Andreas Richter  <ar@oszine.de>
+
+	* detect inserted cards for backup / restore location
+
+2003-12-22  Andreas Richter  <ar@oszine.de>
+
+	* remember to last backup / restore location
+	* BugFix: information for successfull restore
+
+2003-12-15  Andreas Richter  <ar@oszine.de>
+
+	* backup and restore now works with relative path (user a can restore backup from user b in ther own home dir)
