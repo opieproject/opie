@@ -1,0 +1,4 @@
+  config TODAY_ADDRESSBOOK
+    boolean "addressbook
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,0 +1,8 @@
+Files: plugins/today/libtodayaddressbookplugin.so*
+Priority: optional
+Section: opie/applications
+Maintainer: Stefan Eilers <eilers.stefan@epost.de>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: qt-embedded (>=$QTE_VERSION), opie-today
+Description: Addressbook plugin for today shows Birthdays and Anniversaries
