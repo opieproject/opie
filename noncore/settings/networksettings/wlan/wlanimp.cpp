@@ -14,7 +14,8 @@
 #include <qcombobox.h>
 
 /* system() */
-#include <stdlib.h>
+//#include <stdlib.h>
+#include <opie/oprocess.h>
 
 #define WIRELESS_OPTS "/etc/pcmcia/wireless.opts"
 
@@ -225,19 +226,19 @@ void WLANImp::accept(){
   if(!interfaceSetup->saveChanges())
     return;
 
-  // Restart the device now that the settings have changed
-  QString initpath;
-  if( QDir("/etc/rc.d/init.d").exists() )
-    initpath = "/etc/rc.d/init.d";
-  else if( QDir("/etc/init.d").exists() )
-    initpath = "/etc/init.d";
+  OProcess insert;
+//  OProcess eject;
 
-  // It would be kinda cool if we didn't have to do this and could just to ifup/down
-  
-  if( initpath )
-    system(QString("%1/pcmcia stop").arg(initpath));
-  if( initpath )
-    system(QString("%1/pcmcia start").arg(initpath));
+  insert << "sh -c \"cardctl insert && cardctl eject\"";
+//  eject << "cardctl eject";
+
+//  if (!eject.start(OProcess::Block, OProcess::NoCommunication) ) {
+//    qWarning("could not start cardctl eject");
+//  }
+
+  if (!insert.start(OProcess::DontCare, OProcess::NoCommunication) ) {
+    qWarning("could not start cardctl insert");
+  }
 
   // Close out the dialog
   QDialog::accept();
