@@ -42,14 +42,23 @@ public:
     static QStringList allSounds();
 };
 
+extern bool qpe_fast_findPixmap;
 // Inline for compatibility with SHARP ROMs
-inline QIconSet Resource::loadIconSet( const QString &pix ) 
+inline QIconSet Resource::loadIconSet( const QString &pix )
 {
+    /*
+     * disable the slow load
+     */
+    bool oldMode = qpe_fast_findPixmap;
+    qpe_fast_findPixmap = true;
+
     QPixmap dpm = loadPixmap( pix + "_disabled" );
     QPixmap pm = loadPixmap( pix );
     QIconSet is( pm );
     if ( !dpm.isNull() )
 	is.setPixmap( dpm, pm.width() <= 22 ? QIconSet::Small : QIconSet::Large, QIconSet::Disabled );
+
+    qpe_fast_findPixmap = oldMode;
     return is;
 }
 

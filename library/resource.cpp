@@ -25,6 +25,12 @@
 #include <qdir.h>
 #include <qpixmapcache.h>
 
+/*
+ * enable or disable the search for the icon without .png or .xpm
+ * suffix. We would use MimeType to lookup possible extensions...
+ */
+bool qpe_fast_findPixmap = false; // visible in libqpe
+
 // this namespace is just a workaround for a gcc bug
 // gcc exports inline functions in the generated file
 // inlinepics_p.h
@@ -65,13 +71,15 @@ QPixmap Resource::loadPixmap( const QString &pix )
     QPixmap pm; // null pixmap
     QString key="QPE_"+pix;
     if ( !QPixmapCache::find(key,pm) ) {
-	QImage I = loadImage(pix);
-	if( I.isNull() ) {
+        QImage I = loadImage(pix);
+        if( I.isNull() ) {
           qWarning( "Could not load %s", pix.latin1() );
 	} else {
           pm.convertFromImage(I);
           QPixmapCache::insert(key,pm);
         }
+    }else {
+        qWarning("In Cache for %s pixmap %s", qApp->argv()[0], pix.local8Bit().data() );
     }
     return pm;
 }
@@ -140,17 +148,20 @@ QString Resource::findPixmap( const QString &pix )
     if ( QFile( f ).exists() )
 	return f;
 
-    // All formats...
-    QStringList exts = opie_imageExtensions();
-    for ( QStringList::ConstIterator it = exts.begin(); it!=exts.end(); ++it ) {
-        QString f = picsPath + pix + "." + *it;
-        if ( QFile(f).exists() )
-            return f;
-    }
+    if ( !qpe_fast_findPixmap ) {
+	printf("Doing slow search for %s %s\n", qApp->argv()[0], pix.local8Bit().data() );
+        // All formats...
+        QStringList exts = opie_imageExtensions();
+        for ( QStringList::ConstIterator it = exts.begin(); it!=exts.end(); ++it ) {
+            QString f = picsPath + pix + "." + *it;
+            if ( QFile(f).exists() )
+                return f;
+        }
 
-    // Finally, no (or existing) extension...
-    if ( QFile( picsPath + pix ).exists() )
-	return picsPath + pix;
+        // Finally, no (or existing) extension...
+        if ( QFile( picsPath + pix ).exists() )
+            return picsPath + pix;
+    }
 
     //qDebug("Cannot find pixmap: %s", pix.latin1());
     return QString();
