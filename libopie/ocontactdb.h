@@ -14,11 +14,20 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.17 2002-08-27 20:11:30 zecke Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.18 2002-08-31 20:22:59 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.17  2002-08-27 20:11:30  zecke
+ * Revision 1.1.2.18  2002-08-31 20:22:59  zecke
+ * libopie renamed to libopie-two for now
+ * toMap added to ToDoEvent
+ * renamed date -> dueDate
+ * hasDueDate()
+ * setDueDate.....
+ * (Re)Implement the XML Todo
+ * Iterator fixes
+ *
+ * Revision 1.1.2.17  2002/08/27 20:11:30  zecke
  * So nice to be able to commit again..
  *
  * Revision 1.1.2.16  2002/08/10 15:00:30  eilers
@@ -37,9 +46,8 @@
 #define _OCONTACTDB_H
 
 #include <qobject.h>
-#include <qcopchannel_qws.h>
 
-// #include <qpe/categories.h>
+#include <qpe/qcopenvelope_qws.h>
 #include <qpe/contact.h>
 
 #include <qvaluelist.h>

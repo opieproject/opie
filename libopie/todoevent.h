@@ -66,7 +66,7 @@ public:
     /**
      * Does this Event have a deadline
      */
-    bool hasDate() const;
+    bool hasDueDate() const;
 
     /**
      * Does this Event has an alarm time ?
@@ -94,9 +94,9 @@ public:
     QArray<int> categories() const;
 
     /**
-     * The end Date
+     * The due Date
      */
-    QDate date()const;
+    QDate dueDate()const;
 
     /**
      * Alarm Date and Time
@@ -136,6 +136,13 @@ public:
      * returns all relations for one app
      */
     QArray<int> relations( const QString& app )const;
+
+    /**
+     * toMap puts all data into the map. int relates
+     * to ToDoEvent RecordFields enum
+     */
+    QMap<int, QString> toMap()const;
+
     /**
      * Set if this Todo is completed
      */
@@ -144,7 +151,7 @@ public:
     /**
      * set if this todo got an end data
      */
-    void setHasDate( bool hasDate );
+    void setHasDueDate( bool hasDate );
 
     /**
      * set if this todo has an alarm time and date
@@ -195,7 +202,7 @@ public:
     /**
      * set the end date
      */
-    void setDate( QDate date );
+    void setDueDate( QDate date );
 
     /**
      * set the alarm time
@@ -219,6 +226,7 @@ public:
     ToDoEvent &operator=(const ToDoEvent &toDoEvent );
 
  private:
+    QString crossToString()const;
     class ToDoEventPrivate;
     ToDoEventPrivate *d;
     QDate m_date;
@@ -234,7 +242,7 @@ public:
     ushort m_prog;
 
     /** Alarm Time stuff */
-    bool m_hasAlarmDateTime;
+    bool m_hasAlarmDateTime : 1;
     QDateTime m_alarmDateTime;
 };
 };

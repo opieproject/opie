@@ -14,11 +14,20 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.17 2002-08-27 20:11:30 zecke Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.18 2002-08-31 20:22:59 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.17  2002-08-27 20:11:30  zecke
+ * Revision 1.1.2.18  2002-08-31 20:22:59  zecke
+ * libopie renamed to libopie-two for now
+ * toMap added to ToDoEvent
+ * renamed date -> dueDate
+ * hasDueDate()
+ * setDueDate.....
+ * (Re)Implement the XML Todo
+ * Iterator fixes
+ *
+ * Revision 1.1.2.17  2002/08/27 20:11:30  zecke
  * So nice to be able to commit again..
  *
  * Revision 1.1.2.16  2002/08/10 15:00:30  eilers
@@ -36,9 +45,10 @@
 #include <qdatetime.h>
 #include <qfile.h>
 #include <qregexp.h>
-#include <qlist.h> 
+#include <qlist.h>
+#include <qcopchannel_qws.h>
 
-#include <qpe/qcopenvelope_qws.h>
+//#include <qpe/qcopenvelope_qws.h>
 #include <qpe/global.h>
 #include <opie/xmltree.h>
 
@@ -78,7 +88,7 @@ namespace {
 			QFile f( strNewFile );
 			if ( !f.open( IO_WriteOnly|IO_Raw ) )
 				return false;
-			
+
 			int total_written;
 			QString out;
 			out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE Addressbook ><AddressBook>\n"
@@ -101,7 +111,7 @@ namespace {
 				out = "";
 			}
 			out += " </Contacts>\n</AddressBook>\n";
-			
+
 			QCString cstr = out.utf8();
 			total_written = f.writeBlock( cstr.data(), cstr.length() );
 			if ( total_written != int( cstr.length() ) ) {
@@ -110,7 +120,7 @@ namespace {
 				return false;
 			}
 			f.close();
-			
+
 			// move the file over, I'm just going to use the system call
 			// because, I don't feel like using QDir.
 			if ( ::rename( strNewFile.latin1(), m_fileName.latin1() ) < 0 ) {
@@ -119,15 +129,15 @@ namespace {
 				// remove the tmp file...
 				QFile::remove( strNewFile );
 			}
-			
+
 			/* The journalfile should be removed now... */
 			removeJournal();
 			return true;
 		}
-		
+
 		bool load () {
 			m_queryValid = false;
-			m_contactList.clear();	
+			m_contactList.clear();
 
 			/* Load XML-File and journal if it exists */
 			if ( !load ( m_fileName, false ) )
@@ -146,9 +156,9 @@ namespace {
 		bool isChangedExternally()
 		{
 			QFileInfo fi( m_fileName );
-	
+
 			QDateTime lastmod = fi.lastModified ();
-	
+
 			return (lastmod != m_readtime);
 		}
 
@@ -173,7 +183,7 @@ namespace {
 
 			return ( false );
 		}
-		
+
 		bool queryByExample ( const Contact &query, const uint settings ){
 
 			m_currentQuery.clear();
@@ -182,7 +192,7 @@ namespace {
 
 			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
 				/* Search all fields and compare them with query object. Store them into list
-				 * if all fields matches. 
+				 * if all fields matches.
 				 */
 				bool allcorrect = true;
 				for ( int i = 0; i < Qtopia::rid; i++ ) {
@@ -190,16 +200,16 @@ namespace {
 					if ( !query.field(i).isEmpty() ){
 						switch ( settings & ~OContactDB::query_IgnoreCase ){
 						case OContactDB::query_RegExp:{
-							QRegExp expr ( query.field(i), 
-								       !(settings & OContactDB::query_IgnoreCase), 
+							QRegExp expr ( query.field(i),
+								       !(settings & OContactDB::query_IgnoreCase),
 								       false );
 							if ( expr.find ( (*it).field(i), 0 ) == -1 )
 								allcorrect = false;
 						}
 							break;
 						case OContactDB::query_WildCards:{
-							QRegExp expr ( query.field(i), 
-								       !(settings & OContactDB::query_IgnoreCase), 
+							QRegExp expr ( query.field(i),
+								       !(settings & OContactDB::query_IgnoreCase),
 								       true );
 							if ( expr.find ( (*it).field(i), 0 ) == -1 )
 								allcorrect = false;
@@ -207,7 +217,7 @@ namespace {
 							break;
 						case OContactDB::query_ExactMatch:{
 							if (settings & OContactDB::query_IgnoreCase){
-								if ( query.field(i).upper() != 
+								if ( query.field(i).upper() !=
 								     (*it).field(i).upper() )
 									allcorrect = false;
 							}else{
@@ -224,7 +234,7 @@ namespace {
 					m_currentQuery.append( (*it) );
 				}
 			}
-			
+
 			/* Move to the top of the list and set this query valid */
 			m_queryIndex = 0;
 
@@ -250,15 +260,15 @@ namespace {
 
 		const uint querySettings()
 		{
-			return ( OContactDB::query_WildCards 
-				 & OContactDB::query_IgnoreCase 
-				 & OContactDB::query_RegExp 
+			return ( OContactDB::query_WildCards
+				 & OContactDB::query_IgnoreCase
+				 & OContactDB::query_RegExp
 				 & OContactDB::query_ExactMatch );
 		}
 
-		bool hasQuerySettings (uint querySettings) const 
+		bool hasQuerySettings (uint querySettings) const
 		{
-			/* OContactDB::query_IgnoreCase may be added with one 
+			/* OContactDB::query_IgnoreCase may be added with one
 			 * of the other settings, but never used alone.
 			 * The other settings are just valid alone...
 			 */
@@ -317,7 +327,7 @@ namespace {
 			} else
 				return false;
 		}
-		
+
 		void reload(){
 			/* Reload is the same as load in this implementation */
 			m_queryValid = false;
@@ -338,7 +348,7 @@ namespace {
 
 			const int JOURNALACTION = Qtopia::Notes + 1;
 			const int JOURNALROW = JOURNALACTION + 1;
-			
+
 			bool foundAction = false;
 			Contact::journal_action action = Contact::ACTION_ADD;
 			int journalKey = 0;
@@ -346,7 +356,7 @@ namespace {
 			QMap<QString, QString> customMap;
 			QMap<QString, QString>::Iterator customIt;
 			QAsciiDict<int> dict( 47 );
-			
+
 			dict.setAutoDelete( TRUE );
 			dict.insert( "Uid", new int(Qtopia::AddressUid) );
 			dict.insert( "Title", new int(Qtopia::Title) );
@@ -393,9 +403,9 @@ namespace {
 			dict.insert( "Notes", new int(Qtopia::Notes) );
 			dict.insert( "action", new int(JOURNALACTION) );
 			dict.insert( "actionrow", new int(JOURNALROW) );
-			
+
 			qWarning( "OContactDefaultBackEnd::loading %s", m_fileName.latin1() );
-						
+
 			XMLElement *root = XMLElement::load( filename );
 			if(root != 0l ){ // start parsing
 				/* Parse all XML-Elements and put the data into the
@@ -404,7 +414,7 @@ namespace {
 				XMLElement *element = root->firstChild();
 				// qWarning("OContactDB::load tagName(): %s", root->tagName().latin1() );
 				element = element->firstChild();
-				
+
 				/* Search Tag "Contacts" which is the parent of all Contacts */
 				while( element ){
 					if( element->tagName() != QString::fromLatin1("Contacts") ){
@@ -427,18 +437,18 @@ namespace {
 					/* Found alement with tagname "contact", now parse and store all
 					 * attributes contained
 					 */
-					//qWarning("OContactDefBack::load element tagName() : %s", 
+					//qWarning("OContactDefBack::load element tagName() : %s",
 					//	 element->tagName().latin1() );
 					QString dummy;
 					foundAction = false;
-					
+
 					XMLElement::AttributeMap aMap = element->attributes();
 					XMLElement::AttributeMap::Iterator it;
 					contactMap.clear();
 					customMap.clear();
 					for( it = aMap.begin(); it != aMap.end(); ++it ){
 						// qWarning ("Read Attribute: %s=%s", it.key().latin1(),it.data().latin1());
-						
+
 						int *find = dict[ it.key() ];
 						/* Unknown attributes will be stored as "Custom" elements */
 						if ( !find ) {
@@ -447,7 +457,7 @@ namespace {
 							customMap.insert( it.key(),  it.data() );
 							continue;
 						}
-						
+
 						/* Check if special conversion is needed and add attribute
 						 * into Contact class
 						 */
@@ -474,11 +484,11 @@ namespace {
 					}
 					/* now generate the Contact contact */
 					Contact contact( contactMap );
-					
+
 					for (customIt = customMap.begin(); customIt != customMap.end(); ++customIt ) {
 						contact.setCustomField( customIt.key(),  customIt.data() );
 					}
-					
+
 					if (foundAction){
 						foundAction = false;
 						switch ( action ) {
@@ -499,7 +509,7 @@ namespace {
 						/* Add contact to list */
 						addContact (contact);
 					}
-					
+
 					/* Move to next element */
 					element = element->nextChild();
 				}
@@ -510,7 +520,7 @@ namespace {
 			qWarning("returning from loading" );
 			return true;
 		}
-		
+
 
 		void updateJournal( const Contact& cnt,
 				    Contact::journal_action action ) {
@@ -526,7 +536,7 @@ namespace {
 			QCString cstr = buf.utf8();
 			f.writeBlock( cstr.data(), cstr.length() );
 		}
-		
+
 		void removeJournal()
 		{
 			QFile f ( m_journalName );
@@ -567,12 +577,12 @@ OContactDB::OContactDB ( const QString appname, const QString filename,
 			 this, SLOT(copMessage( const QCString &, const QByteArray &)) );
 	}
 
-	
+
 }
 OContactDB::~OContactDB ()
 {
 	/* The user may forget to save the changed database, therefore try to
-	 * do it for him..	 
+	 * do it for him..
 	 */
 	save();
 	delete m_backEnd;
@@ -586,13 +596,13 @@ bool OContactDB::save ()
 	 */
 	if ( m_backEnd->isChangedExternally() )
 		reload();
-	
+
 	/* We just want to store data if we have something to store */
 	if ( m_changed ) {
 		bool status = m_backEnd->save();
 		if ( !status ) return false;
-	
-		/* Now tell everyone that new data is available. 
+
+		/* Now tell everyone that new data is available.
 		 */
 		QCopEnvelope e( "QPE/PIM", "addressbookUpdated()" );
 
@@ -606,7 +616,7 @@ bool OContactDB::findContact(Contact &foundContact, int uid )
 {
 	return ( m_backEnd->findContact(foundContact, uid) );
 }
-	
+
 QValueList<Contact> OContactDB::allContacts() const
 {
 	return ( m_backEnd->allContacts() );
@@ -622,14 +632,14 @@ const uint OContactDB::querySettings()
 	return ( m_backEnd->querySettings() );
 }
 
-bool OContactDB::hasQuerySettings ( Query querySettings ) const 
+bool OContactDB::hasQuerySettings ( Query querySettings ) const
 {
 	return ( m_backEnd->hasQuerySettings ( querySettings ) );
 }
 
 bool OContactDB::nextFound ( Contact& next)
 {
-	return ( m_backEnd->nextFound ( next ) ); 
+	return ( m_backEnd->nextFound ( next ) );
 }
 
 const QValueList<Contact> OContactDB::allFound()

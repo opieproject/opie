@@ -3,7 +3,7 @@ CONFIG          += qte warn_on release
 HEADERS 	= ofontmenu.h ofileselector.h \
     ofiledialog.h ofileview.h \
     tododb.h todoevent.h \
-    todoresource.h \
+    todoresource.h todoxmlresource.h \
     xmltree.h  colordialog.h \
     colorpopupmenu.h oclickablelabel.h \
     oprocctrl.h oprocess.h \
@@ -13,13 +13,14 @@ HEADERS 	= ofontmenu.h ofileselector.h \
 SOURCES		= ofontmenu.cc ofileselector.cc \
     ofiledialog.cc xmltree.cc \
     tododb.cpp todoevent.cpp \
+    todoresource.cpp todoxmlresource.cpp \
     colordialog.cpp colorpopupmenu.cpp \ 
     oclickablelabel.cpp oprocctrl.cpp \ 
     oprocess.cpp odevice.cpp \
     ocheckitem.cpp ocontactdb.cpp \
     ocontactselector.cpp
      
-TARGET		= opie
+TARGET		= opie-two
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR         = $(QTDIR)/lib$(PROJMAK)
 #VERSION = 1.0.0

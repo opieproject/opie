@@ -64,7 +64,7 @@ bool ToDoEvent::isCompleted() const
 {
     return m_isCompleted;
 }
-bool ToDoEvent::hasDate() const
+bool ToDoEvent::hasDueDate() const
 {
     return m_hasDate;
 }
@@ -122,7 +122,7 @@ void ToDoEvent::setCategories(const QStringList &list )
 {
   m_category = list;
 }
-QDate ToDoEvent::date()const
+QDate ToDoEvent::dueDate()const
 {
     return m_date;
 }
@@ -140,7 +140,7 @@ void ToDoEvent::setCompleted( bool completed )
 {
     m_isCompleted = completed;
 }
-void ToDoEvent::setHasDate( bool hasDate )
+void ToDoEvent::setHasDueDate( bool hasDate )
 {
     m_hasDate = hasDate;
 }
@@ -170,7 +170,7 @@ void ToDoEvent::setPriority(int prio )
 {
     m_priority = prio;
 }
-void ToDoEvent::setDate( QDate date )
+void ToDoEvent::setDueDate( QDate date )
 {
     m_date = date;
 }
@@ -250,9 +250,9 @@ QString ToDoEvent::richText() const
     +  QString::number( priority() ) + " <br>";
   text += "<b>" + QObject::tr( "Progress:") + " </b>"
           + QString::number( progress() ) + " %<br>";
-  if (hasDate() ){
+  if (hasDueDate() ){
     text += "<b>" + QObject::tr( "Deadline:") + " </b>";
-    text += date().toString();
+    text += dueDate().toString();
     text += "<br>";
   }
   if (hasAlarmDateTime() ){
@@ -283,52 +283,52 @@ QString ToDoEvent::richText() const
 }
 
 bool ToDoEvent::operator<( const ToDoEvent &toDoEvent )const{
-    if( !hasDate() && !toDoEvent.hasDate() ) return true;
-    if( !hasDate() && toDoEvent.hasDate() ) return false;
-    if( hasDate() && toDoEvent.hasDate() ){
-	if( date() == toDoEvent.date() ){ // let's the priority decide
+    if( !hasDueDate() && !toDoEvent.hasDueDate() ) return true;
+    if( !hasDueDate() && toDoEvent.hasDueDate() ) return false;
+    if( hasDueDate() && toDoEvent.hasDueDate() ){
+	if( dueDate() == toDoEvent.dueDate() ){ // let's the priority decide
 	    return priority() < toDoEvent.priority();
 	}else{
-	    return date() < toDoEvent.date();
+	    return dueDate() < toDoEvent.dueDate();
 	}
     }
     return false;
 }
 bool ToDoEvent::operator<=(const ToDoEvent &toDoEvent )const
 {
-    if( !hasDate() && !toDoEvent.hasDate() ) return true;
-    if( !hasDate() && toDoEvent.hasDate() ) return true;
-    if( hasDate() && toDoEvent.hasDate() ){
-	if( date() == toDoEvent.date() ){ // let's the priority decide
+    if( !hasDueDate() && !toDoEvent.hasDueDate() ) return true;
+    if( !hasDueDate() && toDoEvent.hasDueDate() ) return true;
+    if( hasDueDate() && toDoEvent.hasDueDate() ){
+	if( dueDate() == toDoEvent.dueDate() ){ // let's the priority decide
 	    return priority() <= toDoEvent.priority();
 	}else{
-	    return date() <= toDoEvent.date();
+	    return dueDate() <= toDoEvent.dueDate();
 	}
     }
     return true;
 }
 bool ToDoEvent::operator>(const ToDoEvent &toDoEvent )const
 {
-    if( !hasDate() && !toDoEvent.hasDate() ) return false;
-    if( !hasDate() && toDoEvent.hasDate() ) return false;
-    if( hasDate() && toDoEvent.hasDate() ){
-	if( date() == toDoEvent.date() ){ // let's the priority decide
+    if( !hasDueDate() && !toDoEvent.hasDueDate() ) return false;
+    if( !hasDueDate() &&  toDoEvent.hasDueDate() ) return false;
+    if( hasDueDate()  &&  toDoEvent.hasDueDate() ){
+	if( dueDate() == toDoEvent.dueDate() ){ // let's the priority decide
 	    return priority() > toDoEvent.priority();
 	}else{
-	    return date() > toDoEvent.date();
+	    return dueDate() > toDoEvent.dueDate();
 	}
     }
     return false;
 }
 bool ToDoEvent::operator>=(const ToDoEvent &toDoEvent )const
 {
-    if( !hasDate() && !toDoEvent.hasDate() ) return true;
-    if( !hasDate() && toDoEvent.hasDate() ) return false;
-    if( hasDate() && toDoEvent.hasDate() ){
-	if( date() == toDoEvent.date() ){ // let's the priority decide
+    if( !hasDueDate() && !toDoEvent.hasDueDate() ) return true;
+    if( !hasDueDate() &&  toDoEvent.hasDueDate() ) return false;
+    if( hasDueDate() && toDoEvent.hasDueDate() ){
+	if( dueDate() == toDoEvent.dueDate() ){ // let's the priority decide
 	    return priority() > toDoEvent.priority();
 	}else{
-	    return date() > toDoEvent.date();
+	    return dueDate() > toDoEvent.dueDate();
 	}
     }
     return true;
@@ -367,9 +367,42 @@ ToDoEvent &ToDoEvent::operator=(const ToDoEvent &item )
     return *this;
 }
 
+QMap<int, QString> ToDoEvent::toMap() const {
+    QMap<int, QString> map;
+
+    map.insert( Uid, QString::number( m_uid ) );
+    map.insert( Category,  m_category.join(";") );
+    map.insert( HasDate, QString::number( m_hasDate ) );
+    map.insert( Completed, QString::number( m_isCompleted ) );
+    map.insert( Description, m_desc );
+    map.insert( Summary, m_sum );
+    map.insert( Priority, QString::number( m_priority ) );
+    map.insert( DateDay,  QString::number( m_date.day() ) );
+    map.insert( DateMonth, QString::number( m_date.month() ) );
+    map.insert( DateYear, QString::number( m_date.year() ) );
+    map.insert( Progress, QString::number( m_prog ) );
+    map.insert( CrossReference, crossToString() );
+    map.insert( HasAlarmDateTime,  QString::number( m_hasAlarmDateTime ) );
+    map.insert( AlarmDateTime, m_alarmDateTime.toString() );
+
+    return map;
+}
 
 
+QString ToDoEvent::crossToString()const {
+    QString str;
+    QMap<QString, QArray<int> >::ConstIterator it;
+    for (it = m_relations.begin(); it != m_relations.end(); ++it ) {
+        QArray<int> id = it.data();
+        for ( uint i = 0; i < id.size(); ++i ) {
+            str += it.key() + "," + QString::number( i ) + ";";
+        }
+    }
+    str = str.remove( str.length()-1, 1); // strip the ;
+    qWarning("IDS " + str );
 
+    return str;
+}
 
 
 
