@@ -75,6 +75,7 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
 #endif
 #endif
   
+  db = NULL;
   setOwnerField();
   todo = new ToDoDB;
   getTodo();
@@ -209,7 +210,7 @@ void Today::init() {
   // should only later appointments be shown or all for the current day.
   ONLY_LATER = cfg.readNumEntry("onlylater",1);
 
-  db = new DateBookDB;
+  //db = new DateBookDB;
 }
 
 /*
@@ -274,7 +275,12 @@ void Today::getDates() {
   if (AllDateBookEvents) delete AllDateBookEvents;
   AllDateBookEvents = new QWidget( );
   QVBoxLayout* layoutDates = new QVBoxLayout(AllDateBookEvents);
-  
+
+  if (db) {
+   delete db;
+  }
+  db = new DateBookDB;  
+
   QValueList<EffectiveEvent> list = db->getEffectiveEvents(date, date);
 
   qBubbleSort(list);
