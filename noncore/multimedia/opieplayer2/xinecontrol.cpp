@@ -144,11 +144,7 @@ void XineControl::stop( bool isSet ) {
  * @isSet
  */
 void XineControl::pause( bool isSet) {
-    if ( isSet ) {
-        libXine->pause();
-    } else {
-        libXine->play( m_fileName, 0, m_currentTime );
-    }
+    libXine->pause( isSet );
 }
 
 

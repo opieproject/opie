@@ -171,8 +171,8 @@ void Lib::stop() {
     xine_stop( m_stream );
 }
 
-void Lib::pause() {
-    xine_set_param( m_stream, XINE_PARAM_SPEED,  XINE_SPEED_PAUSE );
+void Lib::pause( bool toggle ) {
+    xine_set_param( m_stream, XINE_PARAM_SPEED, toggle ? XINE_SPEED_PAUSE : XINE_SPEED_NORMAL );
 }
 
 int Lib::speed() const {

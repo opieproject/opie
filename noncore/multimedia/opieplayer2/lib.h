@@ -71,7 +71,7 @@ namespace XINE {
                   int startPos = 0,
                   int start_time = 0 );
         void stop();
-        void pause();
+        void pause( bool toggle );
 
         int speed() const;
 
