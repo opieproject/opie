@@ -1,0 +1,290 @@
+[ArrowDown]
+Border = 0
+Pixmap = ixpe/arrow_down.png
+[ArrowLeft]
+Border = 0
+Pixmap = ixpe/arrow_left.png
+[ArrowRight]
+Border = 0
+Pixmap = ixpe/arrow_right.png
+[ArrowUp]
+Border = 0
+Pixmap = ixpe/arrow_up.png
+[Background]
+Background = 236,232,215
+Foreground = 32,32,30
+Pixmap = ixpe/background.png
+[Bevel]
+Background = 245,242,237
+Border = 0
+Foreground = 32,32,30
+Gradient = Diagonal
+GradientHigh = 208,207,192
+GradientLow = 236,231,215
+PixmapBWidth = 1
+PixmapBorder = ixpe/bevel.png
+XShift = 0
+YShift = 0
+[BevelDown]
+Background = 245,242,237
+Border = 0
+Foreground = 32,32,30
+Gradient = Vertical
+GradientHigh = 236,231,215
+GradientLow = 208,207,192
+Highlight = 4
+PixmapBWidth = 1
+PixmapBorder = ixpe/bevel.png
+XShift = 0
+YShift = 0
+[CheckBox]
+Pixmap = ixpe/check_off.png
+[CheckBoxDown]
+Pixmap = ixpe/check_on.png
+[CheckMark]
+Pixmap = ixpe/checkmark.png
+[ComboBox]
+Background = 255,255,255
+Border = 0
+Foreground = 32,32,32
+Highlight = 0
+PixmapBWidth = 1
+PixmapBorder = ixpe/btn.png
+[ComboDeco]
+Pixmap = ixpe/combo_deco.png
+[ComboDecoDown]
+Pixmap = ixpe/combo_deco_d.png
+[DisableArrowDown]
+[DisableArrowLeft]
+[DisableArrowRight]
+[DisableArrowUp]
+[General]
+[HBarHandle]
+Border = 0
+Highlight = 0
+Pixmap = ixpe/bhandle_h.png
+[HSBarSlider]
+CopyWidget = VSBarSlider
+[HSBarSliderDown]
+CopyWidget = VSBarSliderDown
+[HScrollDeco]
+Pixmap = ixpe/deco.png
+[HScrollDecoDown]
+Pixmap = ixpe/deco_down.png
+[HScrollGroove]
+Border = 0
+Highlight = 0
+Pixmap = ixpe/scroll_groove-.png
+PixmapScale = Tile
+[KDE]
+contrast = 4
+widgetStyle = basicstyle.la
+[MenuBar]
+Background = 18,73,174
+Border = 0
+Foreground = 0,0,0
+Gradient = Vertical
+GradientHigh = 18,73,174
+GradientLow = 64,144,223
+PixmapBWidth = 2
+PixmapBorder = ixpe/menu.png
+[MenuBarItem]
+Background = 12,73,198
+Border = 0
+Foreground = 179,219,255
+Gradient = Vertical
+GradientHigh = 10,69,225
+GradientLow = 12,73,198
+PixmapBWidth = 1
+PixmapBorder = ixpe/menu_bar.png
+[MenuItem]
+Background = 12,73,198
+Border = 0
+Foreground = 179,219,255
+Gradient = Pyramid
+GradientHigh = 10,69,225
+GradientLow = 12,73,198
+Highlight = 0
+[MenuItemDown]
+Background = 12,73,198
+Border = 0
+Foreground = 255,255,255
+Gradient = Vertical
+GradientHigh = 45,167,250
+GradientLow = 21,137,248
+Highlight = 0
+PixmapBWidth = 1
+PixmapBorder = ixpe/menu_item2.png
+[Misc]
+3DFOffset = 1
+3DFrect = true
+Comment = ixPerienced Style
+FrameWidth = 2
+Name = iXPe
+ScrollBarExtent = 14
+ShadeStyle = Windows
+[ProgressBackground]
+Background = 218,216,203
+Border = 0
+Highlight = 0
+[ProgressBar]
+Background = 236,232,215
+Border = 0
+Foreground = 32,32,30
+Gradient = Vertical
+GradientHigh = 123,201,249
+GradientLow = 36,87,214
+Highlight = 0
+Pixmap = ixpe/progress.png
+[PushButton]
+Background = 245,242,237
+Border = 0
+Foreground = 32,32,30
+Gradient = Vertical
+GradientHigh = 248,247,247
+GradientLow = 224,219,204
+PixmapBWidth = 2
+PixmapBorder = ixpe/btn.png
+Round = true
+XShift = 0
+YShift = 0
+[PushButtonDown]
+Background = 245,242,237
+Border = 2
+Foreground = 66,99,229
+Gradient = Rectangle
+GradientHigh = 191,208,216
+GradientLow = 244,250,250
+PixmapBWidth = 2
+PixmapBorder = ixpe/btn_down.png
+XShift = 0
+YShift = 0
+[Radio]
+Pixmap = ixpe/radio_off.png
+[RadioDown]
+Pixmap = ixpe/radio_on.png
+[ScrollButton]
+Background = 181,203,253
+Border = 0
+Foreground = 232,239,255
+Gradient = Diagonal
+GradientHigh = 181,203,253
+GradientLow = 232,239,255
+Pixmap = ixpe/btn_scroll_back.png
+PixmapBWidth = 2
+PixmapBorder = ixpe/btn.png
+XShift = 0
+YShift = 0
+[ScrollButtonDown]
+Background = 181,203,253
+Border = 1
+Foreground = 232,239,255
+Gradient = Diagonal
+GradientHigh = 181,203,253
+GradientLow = 232,239,255
+Pixmap = ixpe/btn_scroll_back_down.png
+PixmapBWidth = 2
+PixmapBorder = ixpe/btn_down.png
+XShift = 0
+YShift = 0
+[Slider]
+Pixmap = ixpe/slider.png
+[SliderGroove]
+SmallGroove = true
+[Splitter]
+CopyWidget = ToolBar
+[SunkenArrowDown]
+Border = 0
+Pixmap = ixpe/arrow_down_s.png
+[SunkenArrowLeft]
+Border = 0
+Pixmap = ixpe/arrow_left_s.png
+[SunkenArrowRight]
+Border = 0
+Pixmap = ixpe/arrow_right_s.png
+[SunkenArrowUp]
+Border = 0
+Pixmap = ixpe/arrow_up_s.png
+[Tab]
+Background = 245,242,237
+Border = 0
+BottomLine = true
+Foreground = 139,137,135
+Gradient = Vertical
+GradientHigh = 248,247,247
+GradientLow = 236,231,215
+PixmapBWidth = 1
+PixmapBorder = ixpe/btn.png
+XShift = 0
+YShift = 0
+[TabDown]
+Background = 245,242,237
+Border = 2
+BottomLine = false
+Foreground = 101,127,144
+Gradient = Vertical
+GradientHigh = 195,224,183
+GradientLow = 236,231,215
+Highlight = 0
+[ToolBar]
+Background = 240,232,213
+Border = 0
+Foreground = 32,32,32
+Gradient = Diagonal
+GradientHigh = 242,243,238
+GradientLow = 240,232,213
+PixmapBWidth = 1
+PixmapBorder = ixpe/bevel.png
+[ToolButton]
+Background = 240,232,213
+Border = 0
+Foreground = 32,32,32
+Gradient = Diagonal
+GradientHigh = 242,243,238
+GradientLow = 228,220,202
+PixmapBWidth = 1
+PixmapBorder = ixpe/bevel_blank.png
+XShift = 0
+YShift = 0
+[ToolButtonDown]
+Background = 240,232,213
+Border = 0
+Foreground = 32,32,32
+Gradient = Rectangle
+GradientHigh = 250,250,250
+GradientLow = 250,240,230
+PixmapBWidth = 1
+PixmapBorder = ixpe/btn.png
+XShift = 0
+YShift = 0
+[VBarHandle]
+Border = 0
+Highlight = 0
+Pixmap = ixpe/bhandle_v.png
+[VSBarSlider]
+Background = 174,202,252
+Border = 0
+Gradient = Diagonal
+GradientHigh = 230,230,250
+GradientLow = 174,202,252
+Highlight = 0
+PixmapBWidth = 1
+PixmapBorder = ixpe/btn.png
+[VSBarSliderDown]
+Background = 174,202,252
+Border = 0
+Gradient = Horizontal
+GradientHigh = 195,224,183
+GradientLow = 147,186,133
+Highlight = 0
+PixmapBWidth = 1
+PixmapBorder = ixpe/btn.png
+[VScrollDeco]
+CopyWidget = HScrollDeco
+[VScrollDecoDown]
+CopyWidget = HScrollDecoDown
+[VScrollGroove]
+Border = 0
+Highlight = 0
+Pixmap = ixpe/scroll_groove.png
+PixmapScale = Tile

@@ -1,0 +1,178 @@
+[ArrowDown]
+Pixmap = GradE8/arrowdown.png
+[ArrowLeft]
+Pixmap = GradE8/arrowleft.png
+[ArrowRight]
+Pixmap = GradE8/arrowright.png
+[ArrowUp]
+Pixmap = GradE8/arrowup.png
+[Background]
+Border = 0
+Highlight = 0
+Pixmap = GradE8/background.png
+[Bevel]
+3DFRect = true
+Border = 0
+Gradient = Vertical
+GradientHigh = 219,219,219
+GradientLow = 255,255,255
+Highlight = 0
+PixmapBWidth = 2
+PixmapBorder = GradE8/pushbutton_border.png
+Scale = Vertical
+[BevelDown]
+3DFRect = true
+Background = 239,239,239
+Border = 0
+Highlight = 0
+PixmapBWidth = 6
+PixmapBorder = GradE8/pushbuttondown_border.png
+[CheckBox]
+Pixmap = GradE8/checkbox.png
+[CheckBoxDown]
+Pixmap = GradE8/checkboxdown.png
+[CheckMark]
+Pixmap = GradE8/checkboxdown.png
+[ComboBox]
+CopyWidget = PushButton
+[ComboDeco]
+Pixmap = GradE8/slider.png
+[DisableArrowDown]
+[DisableArrowLeft]
+[DisableArrowRight]
+[DisableArrowUp]
+[General]
+activeBackground = 255,255,255
+activeBlend = 200,200,200
+activeForeground = 0,0,0
+activeTitleBtnBg = 152,167,201
+background = 255,255,255
+buttonBackground = 219,219,219
+buttonForeground = 0,0,0
+foreground = 0,0,0
+inactiveBackground = 152,167,201
+inactiveBlend = 97,112,146
+inactiveForeground = 0,0,0
+inactiveTitleBtnBg = 255,255,255
+selectBackground = 219,219,219
+selectForeground = 0,0,0
+windowBackground = 255,255,255
+windowForeground = 0,0,0
+[HBarHandle]
+CopyWidget = PushButton
+[HSBarSlider]
+3DFRect = true
+Border = 0
+Gradient = Vertical
+GradientHigh = 219,219,219
+GradientLow = 255,255,255
+Highlight = 0
+PixmapBWidth = 6
+PixmapBorder = GradE8/pushbutton_border.png
+[HScrollDeco]
+[HScrollGroove]
+Border = 0
+Highlight = 0
+Pixmap = GradE8/hscrollgroove.png
+Scale = Full
+[KDE]
+widgetStyle = basicstyle.la
+[MenuBar]
+CopyWidget = PushButton
+[MenuBarItem]
+CopyWidget = PushButtonDown
+[MenuItem]
+Border = 0
+Highlight = 0
+[MenuItemDown]
+Border = 0
+Highlight = 0
+Pixmap = GradE8/menuitemdown.png
+[Misc]
+Comment = Grey Gradient Style
+Name = GradE8
+ScrollBarExtent = 16
+[ProgressBackground]
+[ProgressBar]
+CopyWidget = BevelDown
+[PushButton]
+3DFRect = true
+Border = 0
+Gradient = Vertical
+GradientHigh = 219,219,219
+GradientLow = 255,255,255
+Highlight = 0
+PixmapBWidth = 6
+PixmapBorder = GradE8/pushbutton_border.png
+[PushButtonDown]
+3DFRect = true
+Background = 239,239,239
+Border = 0
+Highlight = 0
+PixmapBWidth = 6
+PixmapBorder = GradE8/pushbuttondown_border.png
+[Radio]
+Pixmap = GradE8/radio.png
+[RadioDown]
+Pixmap = GradE8/radiodown.png
+[ScrollButton]
+Border = 0
+Highlight = 0
+Pixmap = GradE8/bevel.png
+PixmapBWidth = 1
+PixmapBorder = GradE8/scrollbutton_border.png
+Scale = Vertical
+[ScrollButtonDown]
+Border = 0
+Highlight = 0
+Pixmap = GradE8/beveldown.png
+PixmapBWidth = 1
+PixmapBorder = GradE8/scrollbutton_border.png
+Scale = Vertical
+[Slider]
+Pixmap = GradE8/slider.png
+[SliderGroove]
+SmallGroove = true
+[Splitter]
+CopyWidget = PushButton
+[SunkenArrowDown]
+Pixmap = GradE8/sunkenarrowdown.png
+[SunkenArrowLeft]
+Pixmap = GradE8/sunkenarrowleft.png
+[SunkenArrowRight]
+Pixmap = GradE8/sunkenarrowright.png
+[SunkenArrowUp]
+Pixmap = GradE8/sunkenarrowup.png
+[Tab]
+Border = 0
+Highlight = 0
+Pixmap = GradE8/tab.png
+Scale = Full
+[TabDown]
+Border = 0
+Highlight = 0
+Pixmap = GradE8/tabdown.png
+Scale = Full
+[ToolBar]
+CopyWidget = Background
+[ToolButton]
+CopyWidget = PushButton
+[ToolButtonDown]
+CopyWidget = PushButtonDown
+[VBarHandle]
+CopyWidget = PushButton
+[VSBarSlider]
+3DFRect = true
+Border = 0
+Gradient = Vertical
+GradientHigh = 219,219,219
+GradientLow = 255,255,255
+Highlight = 0
+PixmapBWidth = 6
+PixmapBorder = GradE8/pushbutton_border.png
+[VScrollDeco]
+[VScrollGroove]
+Border = 0
+Highlight = 0
+Pixmap = GradE8/vscrollgroove.png
+Scale = Full
