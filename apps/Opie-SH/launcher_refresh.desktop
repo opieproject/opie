@@ -1,9 +1,0 @@
-[Desktop Entry]
-Comment=launcher_refresh
-Exec=launcher_refresh.sh
-Icon=opie-sh-scripts/launcher_refresh
-Type=Application
-Name=Launcher Refresh
-Name[es]=Refresca Lanzador
-Comment=Refresh the launcher so that new installed applications appear
-Comment[es]=Refresca el lanzador (aparecen aplicaciones recién instaladas)

@@ -1,7 +1,0 @@
-Files: root/etc/hosts ipaq/etc/inittab ipaq/etc/ppp
-Priority: optional
-Section: opie/system
-Maintainer: Trenton Schulz <twschulz@trolltech.com>
-Architecture: arm
-Version: 1.0
-Description: PPP configuration file needed for Windows 2000 and syncing

@@ -1,5 +1,0 @@
-  config X11
-    boolean "Qpe Library (Qt/X11 version)"
-
-  source x11/libqpe-x11/config.in
-  source x11/ipc/server/config.in

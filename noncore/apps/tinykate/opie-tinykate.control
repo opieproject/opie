@@ -1,8 +1,0 @@
-Files: bin/tinykate apps/Applications/tinykate.desktop pics/tinykate $OPIEDIR/lib/libtinykate.so.1.0.0 $OPIEDIR/lib/libtinykate.so.1.0 $OPIEDIR/lib/libtinykate.so.1
-Priority: optional
-Section: opie/applications
-Maintainer: Opie Team <opie@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base
-Description: Kate for opie

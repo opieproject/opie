@@ -1,8 +1,0 @@
-[Desktop Entry]
-Comment=rsync helper
-Comment[es]=Asistente del sincronizador remoto (rsync)
-Exec=rsyncme.sh
-Icon=opie-sh-scripts/rsyncme
-Type=Application
-Name=RSYNC Helper
-Name[es]=Rsync

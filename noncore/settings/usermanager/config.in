@@ -1,4 +1,0 @@
-  config USERMANAGER
-    boolean "usermanager"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,8 +1,0 @@
-Files: bin/qpe apps/Settings/Calibrate.desktop pics/launcher pics/devicebuttons/*.png plugins/applets/libsuspendapplet.so* plugins/applets/libhomeapplet.so* plugins/applets/liblogoutapplet.so* root/etc/init.d/opie
-Priority: required
-Section: opie/system
-Maintainer: Project Opie <opie@handhelds.org>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION.3
-Depends: libqt2-emb (>=$QTE_VERSION), opie-common, libqpe1, libopie1, opie-qcop, opie-sounds, apmd, opie-pics, timezones
-Description: Launcher for Opie

@@ -1,4 +1,0 @@
-#  config #BINARY
-#    boolean "binary"
-#    default "y"
-#    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,0 @@
-  config CLIPBOARDAPPLET
-    boolean "Clipboard (copy/cut/paste applet)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

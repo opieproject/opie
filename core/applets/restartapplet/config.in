@@ -1,4 +1,0 @@
-  config RESTARTAPPLET
-    boolean "Restart"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,5 +1,0 @@
-*.moc
-Makefile*
-loginwindow.cpp
-loginwindow.h
-moc_*

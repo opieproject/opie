@@ -1,5 +1,0 @@
-  config SFCAVE-SDL
-    boolean "sfcave-sdl"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
-    string "sfcave-sdl (warning: requires libsdl)"
