@@ -1,12 +1,12 @@
 config NETWORKSETUP
   boolean "opie-networksettings (TCP/IP network settings)"
   default "y"
-  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2NET
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2NET && INTERFACES
 
 config NETWORKSETUP-CORE
   boolean
   default "y" if NETWORKSETUP
-  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && NETWORKSETUP  && INTERFACES
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && NETWORKSETUP
 
   source noncore/settings/networksettings/ppp/config.in
   source noncore/settings/networksettings/wlan/config.in
