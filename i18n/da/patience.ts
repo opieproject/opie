@@ -3,23 +3,23 @@
     <name>CanvasCardWindow</name>
     <message>
         <source>Patience</source>
-        <translation>Kabale</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Freecell</source>
-        <translation>Freecell</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Chicane</source>
-        <translation>Chicane</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Harp</source>
-        <translation>Harp</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Teeclub</source>
-        <translation>Teeclub</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Game</source>

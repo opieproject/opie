@@ -234,7 +234,7 @@ For at sortere efter en kolonne, klik på kolonnens navn.</translation>
     </message>
     <message>
         <source>Enter your local currency symbol here.</source>
-        <translation>Skriv symbolet for den lokale valuta her (fx. Kr).</translation>
+        <translation>Skriv symbolet for den lokale valuta her (fx. kr).</translation>
     </message>
     <message>
         <source>Show whether checkbook is password
