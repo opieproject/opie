@@ -1,0 +1,13 @@
+#!/bin/sh
+cd $OPIEDIR
+
+for file in `make showcomponents`
+do if [ -d $file/pics ]
+then ln -sf $OPIEDIR/$file/pics $OPIEDIR/pics/$file
+fi
+done
+
+
+
+
+exit 0
