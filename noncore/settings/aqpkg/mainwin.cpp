@@ -15,6 +15,7 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <linux/limits.h>
 #include <unistd.h>
 
 #include <qpe/qcopenvelope_qws.h>
