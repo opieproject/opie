@@ -112,7 +112,7 @@ QMyDialog::QMyDialog(QWidget* parent) : QDialog(parent, "Settings", true)
   connect(ListBox, SIGNAL(selected(int)), this, SLOT(ListBoxSelected(int)));
   // server
   Label1 = new QLabel(this);
-  Label1->setText("Server Desc");
+  Label1->setText( tr("Server Desc") );
   Label1->move(10, 120);
   Label1->resize(100, 20);
   ServerNameEdit = new QLineEdit(this);
@@ -120,7 +120,7 @@ QMyDialog::QMyDialog(QWidget* parent) : QDialog(parent, "Settings", true)
   ServerNameEdit->resize(100, 20);
   // username
   Label2 = new QLabel(this);
-  Label2->setText("User Name");
+  Label2->setText( tr("User Name") );
   Label2->move(10, 150);
   Label2->resize(100, 20);
   UserNameEdit = new QLineEdit(this);
@@ -128,7 +128,7 @@ QMyDialog::QMyDialog(QWidget* parent) : QDialog(parent, "Settings", true)
   UserNameEdit->resize(100, 20);
   // ip
   Label3 = new QLabel(this);
-  Label3->setText("Server IP");
+  Label3->setText( tr("Server Address") );
   Label3->move(10, 180);
   Label3->resize(100, 20);
   IPEdit = new QLineEdit(this);
@@ -155,29 +155,29 @@ QMyDialog::QMyDialog(QWidget* parent) : QDialog(parent, "Settings", true)
   AddButton = new QPushButton(this);
   AddButton->move(180, 120);
   AddButton->resize(50, 20);
-  AddButton->setText("Add");
+  AddButton->setText(tr("Add", "Add Connection"));
   connect(AddButton, SIGNAL(clicked()), this, SLOT(AddClicked()));
   // change list item button
   EditButton = new QPushButton(this);
   EditButton->move(180, 140);
   EditButton->resize(50, 20);
-  EditButton->setText("Edit");
+  EditButton->setText(tr("Edit"));
   connect(EditButton, SIGNAL(clicked()), this, SLOT(EditClicked()));
   // save to file button
   SaveButton = new QPushButton(this);
   SaveButton->move(180, 160);
   SaveButton->resize(50, 20);
-  SaveButton->setText("Save");
+  SaveButton->setText(tr("Save"));
   connect(SaveButton, SIGNAL(clicked()), this, SLOT(SaveClicked()));
   // remove an item button
   RemoveButton = new QPushButton(this);
   RemoveButton->move(180, 180);
   RemoveButton->resize(50, 20);
-  RemoveButton->setText("Remove");
+  RemoveButton->setText(tr("Remove"));
   connect(RemoveButton, SIGNAL(clicked()), this, SLOT(RemoveClicked()));
   // full screen check box
   FullScreenCheckBox = new QCheckBox(this, "Full Screen");
-  FullScreenCheckBox->setText("Full Screen");
+  FullScreenCheckBox->setText(tr("Full Screen"));
   FullScreenCheckBox->move(10, 230);
   // ok button
 
