@@ -206,7 +206,7 @@ void BackupAndRestore::backupPressed(){
      return;   
    }
    else{
-     QMessageBox::critical(this, "Message", "Backup Successfull.",QString("Ok") );
+     QMessageBox::information(this, "Message", "Backup Successfull.",QString("Ok") );
      
    }
    setCaption(tr("Backup and Restore"));
