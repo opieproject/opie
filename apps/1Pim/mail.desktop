@@ -1,6 +1,6 @@
 [Desktop Entry]
 Exec=opiemail
-Icon=opiemail/desktopicon
+Icon=mail/desktopicon
 Type=Application
 Name=E-Mail
 Name[es]=Correo-e
