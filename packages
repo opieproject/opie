@@ -111,6 +111,10 @@ CONFIG_MINDBREAKER	noncore/games/mindbreaker	mindbreaker.pro
 CONFIG_MINESWEEP	noncore/games/minesweep	minesweep.pro
 CONFIG_MOBILEMSG	noncore/comm/mobilemsg	mobilemsg.pro
 CONFIG_MODPLUG	core/multimedia/opieplayer/modplug	modplug.pro
+CONFIG_MULTIAUTH_DUMMY  noncore/securityplugins/dummy   dummyplugin.pro
+CONFIG_MULTIAUTH_PIN    noncore/securityplugins/pin     pinplugin.pro
+CONFIG_MULTIAUTH_BLUEPING     noncore/securityplugins/blueping        bluepingplugin.pro
+CONFIG_MULTIAUTH_NOTICE noncore/securityplugins/notice  noticeplugin.pro
 CONFIG_MULTIKEYAPPLET core/applets/multikeyapplet	multikeyapplet.pro
 CONFIG_MULTIKEY	inputmethods/multikey	multikey.pro
 CONFIG_NETSYSTEMTIME	noncore/settings/netsystemtime	netsystemtime.pro

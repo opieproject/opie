@@ -224,6 +224,7 @@ endmenu
 menu "Settings"
   source core/settings/config.in
   source noncore/settings/config.in
+  source noncore/securityplugins/config.in
 endmenu
 
 menu "Theming"
