@@ -13,6 +13,7 @@ INPUTCOMPONENTS= inputmethods/keyboard inputmethods/pickboard \
 APPLETS= core/applets/batteryapplet core/applets/batteryapplet-ipaq \
 	core/applets/irdaapplet core/applets/volumeapplet \
 	core/applets/clockapplet core/applets/netmonapplet \
+	core/applets/homeapplet core/applets/suspendapplet \
 	core/applets/screenshotapplet core/applets/clipboardapplet \
 	core/applets/cardmon core/applets/obex \
 	core/applets/vmemo noncore/net/netsetup/dialup \
