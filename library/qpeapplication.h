@@ -122,6 +122,9 @@ protected:
     virtual void polish ( QWidget * ); // this is actually implemented in qt_override.cpp (!)
 
 private:
+#ifndef QT_NO_TRANSLATION
+    void installTranslation( const QString& baseName );
+#endif
     void mapToDefaultAction( QWSKeyEvent *ke, int defKey );
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)

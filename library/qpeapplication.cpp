@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.47 2003-04-26 15:26:36 kergoth Exp $
+** $Id: qpeapplication.cpp,v 1.48 2003-05-12 13:07:37 zecke Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -603,22 +603,10 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 	for ( QStringList::ConstIterator it = langs.begin(); it != langs.end(); ++it ) {
 		QString lang = *it;
 
-		QTranslator * trans;
-		QString tfn;
+                installTranslation( lang + "/libopie.qm");
+		installTranslation( lang + "/libqpe.qm" );
+		installTranslation( lang + "/" + d->appName + ".qm" );
 
-		trans = new QTranslator( this );
-		tfn = qpeDir() + "/i18n/" + lang + "/libqpe.qm";
-		if ( trans->load( tfn ) )
-			installTranslator( trans );
-		else
-			delete trans;
-
-		trans = new QTranslator( this );
-		tfn = qpeDir() + "/i18n/" + lang + "/" + d->appName + ".qm";
-		if ( trans->load( tfn ) )
-			installTranslator( trans );
-		else
-			delete trans;
 
 		//###language/font hack; should look it up somewhere
 #ifdef QWS
@@ -1723,6 +1711,18 @@ void QPEApplication::tryQuit()
 	processEvents();
 
 	quit();
+}
+
+/*!
+  \internal
+*/
+void QPEApplication::installTranslation( const QString& baseName ) {
+    QTranslator* trans = new QTranslator(this);
+    QString tfn = qpeDir() + "/i18n/"+baseName;
+    if ( trans->load( tfn ) )
+        installTranslator( trans );
+    else
+        delete trans;
 }
 
 /*!
