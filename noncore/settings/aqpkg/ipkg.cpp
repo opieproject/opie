@@ -17,6 +17,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <vector>
 using namespace std;
 
 #include <stdio.h>
@@ -81,6 +82,8 @@ bool Ipkg :: runIpkg( )
             cmd += " -force-removal-of-essential-packages";
         if ( flags & FORCE_OVERWRITE )
             cmd += " -force-overwrite";
+        if ( flags & VERBOSE_WGET )
+            cmd += " -verbose_wget";
 
         // Handle make links
         // Rules - If make links is switched on, create links to root
@@ -189,7 +192,7 @@ void Ipkg :: removeStatusEntry()
     
     ifstream in( statusFile );
     ofstream out( outStatusFile );
-	if ( !in.is_open() )
+    if ( !in.is_open() )
     {
         emit outputText( QString( "Couldn't open status file - " )+ statusFile );
         return;
@@ -206,6 +209,7 @@ void Ipkg :: removeStatusEntry()
     char v[1001];
     QString key;
     QString value;
+    vector<QString> lines;
     do
     {
         in.getline( line, 1000 );
@@ -231,9 +235,18 @@ void Ipkg :: removeStatusEntry()
             } while ( !in.eof() && QString( line ).stripWhiteSpace() != "" );
         }
 
-        out << line << endl;
+        lines.push_back( QString( line ) );
+//        out << line << endl;
     } while ( !in.eof() );
 
+    // Write lines out
+    vector<QString>::iterator it;
+    for ( it = lines.begin() ; it != lines.end() ; ++it )
+    {
+        cout << "Writing " << (const char *)(*it) << endl;
+        out << (const char *)(*it) << endl;
+    }
+    
     in.close();
     out.close();
 
@@ -406,7 +419,7 @@ void Ipkg :: processLinkDir( const QString &file, const QString &destDir, const 
                 d.mkdir( linkFile, true );
             }
             else
-                emit outputText( QString( "Directory " ) + linkFile + " exists" );
+                emit outputText( QString( "Directory " ) + linkFile + " already exists" );
             
         }
         else

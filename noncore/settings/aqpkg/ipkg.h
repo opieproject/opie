@@ -32,6 +32,7 @@
 #define FORCE_REINSTALL                         0x0004
 #define FORCE_OVERWRITE                         0x0008
 #define MAKE_LINKS                              0x0010
+#define VERBOSE_WGET                            0x0020
   
 class Ipkg : public QObject
 {
