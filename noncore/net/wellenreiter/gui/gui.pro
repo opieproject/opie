@@ -7,5 +7,5 @@ SOURCES         = main.cpp wellenreiterbase.cpp wellenreiter.cpp scanlistitem.cp
 INCLUDEPATH     += $(OPIEDIR)/include ../daemon
 DEPENDPATH      += $(OPIEDIR)/include ../daemon
 LIBS            += -lqpe -lopie -lwellenreiter
-INTERFACES      = wellenreitertemplate.ui
+INTERFACES      = configbase.ui
 TARGET          = wellenreiter

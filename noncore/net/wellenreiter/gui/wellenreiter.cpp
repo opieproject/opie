@@ -20,7 +20,9 @@
 // Standard
 
 #include <assert.h>
+#include <errno.h>
 #include <unistd.h>
+#include <string.h>
 #include <sys/types.h>
 
 // Local
@@ -131,23 +133,31 @@ bool Wellenreiter::hasMessage()
     tv.tv_sec = 0;
     tv.tv_usec = 10;
     int result = select( daemon_fd+1, &rfds, NULL, NULL, &tv );
-    return FD_ISSET( daemon_fd, &rfds );
+    
+    if ( result == 0 )
+    {
+        return false;
+    }
+    else if ( result == -1 )
+    {
+        qDebug( "selected returned: %s", strerror( errno ) );
+        return false;
+    }
+    else
+        return true; //FD_ISSET( daemon_fd, &rfds ); gibbet 'eh nur einen Deskriptor
 }
 
 void Wellenreiter::timerEvent( QTimerEvent* e )
 {
     qDebug( "checking for message..." );
-
-    int result = hasMessage();
-    qDebug( "hasMessage() returned %d", result );
-    
-    if ( result )
+    if ( hasMessage() )
     {
+        qDebug( "got message" );
         handleMessage();
     }
     else
     {
-        qDebug( "no message :(" );
+        qDebug( "no message..." );
     }
 }
 

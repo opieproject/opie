@@ -1,0 +1,37 @@
+/*************************************************************************/
+/*                W e l l e n r e i t e r   I I                          */
+/*               ===============================                         */
+/*                                                                       */
+/*                                                  Version: Opie-ALPHA  */
+/*************************************************************************/
+
+Release Notes for Opie-ALPHA Version December 2002
+--------------------------------------------------
+
+= Supported Devices =
+
+* low-level orinoco_cs-based (including prism2 and spectrum_cs)
+
+= Build =
+
+To compile Wellenreiter within the Opie build environment, add the
+following directories to $OPIEDIR/Makefile, e.g. to 'NONAPPS='
+
+noncore/net/wellenreiter/libwellenreiter \
+noncore/net/wellenreiter/daemon \
+noncore/net/wellenreiter/contrib/orinoco_hopper \
+noncore/net/wellenreiter/gui
+
+./configure and rebuild.
+
+= Run =
+
+1. Place card in monitor mode: iwpriv <interface> 2 1
+2. Start $OPIEDIR/bin/orinoco_hopper <interface>
+3. Start Wellenreiter
+
+= Credits =
+
+Sniffer: Max Moser <max@remote-exploit.org>
+Communication and Protocol: Martin J. Muench <mjm@remote-exploit.org>
+GUI: Michael Lauer <mickeyl@handhelds.org>

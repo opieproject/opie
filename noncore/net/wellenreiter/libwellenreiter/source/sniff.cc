@@ -1,7 +1,7 @@
 /* 
  *  rfmon mode sniffer
  *
- *  $Id: sniff.cc,v 1.5 2002-12-09 21:19:42 max Exp $
+ *  $Id: sniff.cc,v 1.6 2002-12-10 01:24:42 mickeyl Exp $
  */
 
 #include "sniff.hh"
@@ -94,7 +94,8 @@ void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *pack
 		  return;
 	      }
 
-
+          printf( "cap_ESS is %d, cap_IBSS is %d\n", pinfoptr->cap_ESS, pinfoptr->cap_IBSS );
+          
 	      /* Here should be the infos to the gui issued */
 	      if (pinfoptr->cap_ESS == 1 &&pinfoptr->cap_IBSS ==0)
 		{
