@@ -32,7 +32,7 @@ TemplateDialog::TemplateDialog( QWidget* widget )
     connect(m_edit, SIGNAL(clicked() ),
             this,   SLOT(slotEdit() ) );
     connect(m_rem,  SIGNAL(clicked() ),
-            this,   SLOT(slotEdit() ) );
+            this,   SLOT(slotRemove() ) );
     connect(m_lne, SIGNAL(returnPressed() ),
             this,   SLOT(slotReturn() ) );
 
