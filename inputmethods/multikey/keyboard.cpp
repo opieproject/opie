@@ -358,7 +358,13 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
     modifiers = (ctrl ? Qt::ControlButton : 0) | (alt ? Qt::AltButton : 0);
 
-    emit key(unicode, qkeycode, modifiers, true, false); 
+    if ('A' <= unicode && unicode <= 'z' && modifiers) {
+
+        qkeycode = QChar(unicode).upper();
+        unicode = qkeycode - '@';
+    }
+
+    QWSServer::sendKeyEvent(unicode, qkeycode, modifiers, true, false); 
 
     // pickboard stuff
     if (usePicks) {
