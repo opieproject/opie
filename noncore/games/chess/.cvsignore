@@ -1,4 +1,5 @@
 Makefile
+Makefile.in
 mainwindow.cpp
 mainwindow.h
 moc*
