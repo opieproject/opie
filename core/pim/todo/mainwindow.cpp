@@ -677,3 +677,7 @@ void MainWindow::slotUpdate3( QWidget* ) {
 void MainWindow::updateList() {
     m_todoMgr.updateList();
 }
+void MainWindow::setReadAhead( uint count ) {
+    if (m_todoMgr.todoDB() )
+        m_todoMgr.todoDB()->setReadAhead( count );
+}

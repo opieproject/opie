@@ -126,6 +126,13 @@ void TableView::showOverDue( bool ) {
 }
 
 void TableView::updateView( ) {
+    m_row = false;
+    startTimer( 2000 );
+    /* FIXME we want one page to be read!
+     *
+     * Calculate that screensize
+     */
+    todoWindow()->setReadAhead( 4 );
     sort();
     OTodoAccess::List::Iterator it, end;
     it = sorted().begin();
@@ -160,7 +167,8 @@ void TableView::setTodo( int, const OTodo&) {
 void TableView::addEvent( const OTodo&) {
     sort();
 
-    QTable::update();
+    /* fix problems of not showing the 'Haken' */
+    QTable::repaint();
 }
 /*
  * find the event
@@ -353,7 +361,21 @@ void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool 
 	    {
 		QString text;
 		if (task.hasDueDate()) {
-		    text = "HAS";
+		    int off = QDate::currentDate().daysTo( task.dueDate() );
+                    text = QString::number(off) + tr(" day(s)");
+                    /*
+                     * set color if not completed
+                     */
+                    if (!task.isCompleted() ) {
+                        QColor color = Qt::black;
+                        if ( off < 0 )
+                            color = Qt::red;
+                        else if ( off == 0 )
+                            color = Qt::yellow;
+                        else if ( off > 0 )
+                            color = Qt::green;
+                        p->setPen(color  );
+                    }
 		} else {
 		    text = tr("None");
 		}
@@ -397,4 +419,32 @@ void TableView::setCellContentFromEditor(int row, int col ) {
 }
 void TableView::slotPriority() {
     setCellContentFromEditor( currentRow(), currentColumn() );
+}
+/*
+ * We'll use the TimerEvent to read ahead or to keep the cahce always
+ * filled enough.
+ * We will try to read ahead 4 items in both ways
+ * up and down. On odd or even we will currentRow()+-4 or +-9
+ *
+ */
+void TableView::timerEvent( QTimerEvent* ev ) {
+    int row = currentRow();
+    qWarning("TimerEvent %d", row);
+    if ( m_row ) {
+        int ro = row-4;
+        if (ro < 0 ) ro = 0;
+        sorted()[ro];
+
+        ro = row+4;
+        sorted()[ro];
+    } else {
+        int ro = row + 8;
+        sorted()[ro];
+
+        ro = row-8;
+        if (ro < 0 ) ro = 0;
+        sorted()[ro];
+    }
+
+    m_row = !m_row;
 }

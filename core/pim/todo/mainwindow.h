@@ -87,6 +87,7 @@ namespace Todo {
         void updateTodo( const OTodo& );
         void populateTemplates();
         Editor* currentEditor();
+        void setReadAhead(uint count );
 private slots:
         void populateCategories();
         void slotReload();
