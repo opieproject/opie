@@ -168,7 +168,7 @@
     </message>
     <message>
         <source>Embolden</source>
-        <translation>Envahir</translation>
+        <translation>Etaller</translation>
     </message>
     <message>
         <source>Zoom In</source>

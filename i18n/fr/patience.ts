@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation>&amp;Snap Sur Position</translation>
+        <translation>&amp;Forcer Position</translation>
     </message>
     <message>
         <source>&amp;Settings</source>

@@ -32,47 +32,47 @@ par des espaces.</translation>
     </message>
     <message>
         <source>Toggles Time of current price field</source>
-        <translation>Marquer l&apos;heure du champ du prix courant</translation>
+        <translation>Champ Heure du Prix Courant</translation>
     </message>
     <message>
         <source>Toggles date field</source>
-        <translation>Marquer le champ date</translation>
+        <translation>Champ Date</translation>
     </message>
     <message>
         <source>Toggles Symbol field</source>
-        <translation>Marquer le champ Symbole</translation>
+        <translation>Champ Symbole</translation>
     </message>
     <message>
         <source>Toggles Name of symbols owner field</source>
-        <translation>Marquer le Nom du champ propriétaire des symboles </translation>
+        <translation>Nom du champ propriétaire des Symboles </translation>
     </message>
     <message>
         <source>Toggles current Price field</source>
-        <translation>Marquer le champ Prix courant</translation>
+        <translation>Champ Prix Courant</translation>
     </message>
     <message>
         <source>Toggles last price field</source>
-        <translation>Marquer le dernier champ prix</translation>
+        <translation>Champ Dernier Prix</translation>
     </message>
     <message>
         <source>Toggles opening price field</source>
-        <translation>Marquer l&apos;ouverture du champ prix</translation>
+        <translation>Champ Ouverture Prix</translation>
     </message>
     <message>
         <source>Toggles minimum daily price field</source>
-        <translation>Marquer le champ prix minimum journalier</translation>
+        <translation>Champ Prix Minimum Journalier</translation>
     </message>
     <message>
         <source>Toggles maximum daily price field</source>
-        <translation>Marquer le champ prix maximum journalier</translation>
+        <translation>Champ Prix Maximum Journalier</translation>
     </message>
     <message>
         <source>Toggles daily variation of price field</source>
-        <translation>Marquer la variation journalière du champ prix</translation>
+        <translation>Champ Variation Journalière du Prix</translation>
     </message>
     <message>
         <source>Toggles volume of trading field</source>
-        <translation>Marquer le champ de volume d&apos;échange</translation>
+        <translation>Champ Volume d&apos;Echange</translation>
     </message>
     <message>
         <source>How often stocks prices should be looked up. In minutes</source>
