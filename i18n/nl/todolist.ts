@@ -146,7 +146,13 @@ The list displays the following information:
 2. Priority - a graphical representation of task priority.  Double-click here to modify.
 3. Description - description of task.  Click here to select the task.
 4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is een lijst van alle huidige taken.
+
+De lijst geeft de volgende info door:
+1. Gedaan - Een groen vinkje geeft aan dat de taak is afgemaakt. Klik hier om een taak af te maken.
+2. Prioriteit - Een grafische weergave vaan de taakprioriteit. Dubbelklik om te wijzigen.
+3. Omschrijving - Omschrijving van de taak. Klik hier om de taak te selecteren.
+4. Streefdatum - Laat streefdatum voor taak zien. Deze kolom kan worden verborgen/weergegeven door Opties-&gt;&apos;Laat taak streefdata zien&apos; uit het menu hierboven te kiezen.</translation>
     </message>
     <message>
         <source>All Categories</source>
@@ -167,7 +173,12 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Todo kon uw wijzigingen
+niet opslaan.
+Maak plaats en probeer
+het nog eens.
+
+Toch stoppen?</translation>
     </message>
     <message>
         <source>Todo</source>
@@ -187,7 +198,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 nieuwe taken aangekomen.&lt;p&gt;Wilt u ze aan de todolijst toevoegen?</translation>
     </message>
     <message>
         <source>New Tasks</source>
@@ -243,7 +254,11 @@ Quit Anyway?</source>
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer de prioriteit van de nieuwe taak hier in.
+
+Dit vlak wordt de sneltaakbalk genoemd.
+
+Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak kan worden verborgen of getoond door Opties-&gt;&apos;Laat Sneltaakbalk zien&apos; te kiezen in het bovenstaande menu.</translation>
     </message>
     <message>
         <source>Enter description of new task here.
@@ -251,7 +266,11 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer de omschrijving van de nieuwe taak hier in.
+
+Dit vlak wordt de sneltaakbalk genoemd.
+
+Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak kan worden verborgen of getoond door Opties-&gt;&apos;Laat Sneltaakbalk zien&apos; te kiezen in het bovenstaande menu.</translation>
     </message>
     <message>
         <source>More</source>
@@ -263,7 +282,11 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer de extra info van de nieuwe taak hier in.
+
+Dit vlak wordt de sneltaakbalk genoemd.
+
+Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak kan worden verborgen of getoond door Opties-&gt;&apos;Laat Sneltaakbalk zien&apos; te kiezen in het bovenstaande menu.</translation>
     </message>
     <message>
         <source>Enter</source>
@@ -275,7 +298,11 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om een nieuwe taak toe te voegen.
+
+Dit vlak wordt de sneltaakbalk genoemd.
+
+Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak kan worden verborgen of getoond door Opties-&gt;&apos;Laat Sneltaakbalk zien&apos; te kiezen in het bovenstaande menu.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -287,7 +314,11 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om nieuwe taakinfo te schonen.
+
+Dit vlak wordt de sneltaakbalk genoemd.
+
+Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak kan worden verborgen of getoond door Opties-&gt;&apos;Laat Sneltaakbalk zien&apos; te kiezen in het bovenstaande menu.</translation>
     </message>
     <message>
         <source>Priority:</source>

@@ -3,23 +3,23 @@
     <name>CalcDlg</name>
     <message>
         <source>Molecular Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Moleculair gewicht</translation>
     </message>
     <message>
         <source>Chemical Formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemishe formule</translation>
     </message>
     <message>
         <source>Calculate</source>
-        <translation type="unfinished"></translation>
+        <translation>Bereken</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Schoon</translation>
     </message>
     <message>
         <source>Molecular Weight (u):</source>
-        <translation type="unfinished"></translation>
+        <translation>Moleculair gewicht (u):</translation>
     </message>
     <message>
         <source>Elemental Composition (%):</source>
@@ -30,27 +30,27 @@
     <name>OxydataWidget</name>
     <message>
         <source>%1 u</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 u</translation>
     </message>
     <message>
         <source>%1 pm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 pm</translation>
     </message>
     <message>
         <source>%1 J</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 J</translation>
     </message>
     <message>
         <source>%1 g/cm^3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 g/cm^3</translation>
     </message>
     <message>
         <source>%1 K</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">%1 K</translation>
     </message>
     <message>
         <source>Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Gewicht</translation>
     </message>
     <message>
         <source>Block</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Groep</translation>
     </message>
     <message>
         <source>Electronegativity</source>
@@ -70,38 +70,38 @@
     </message>
     <message>
         <source>Ionizationenergie</source>
-        <translation type="unfinished"></translation>
+        <translation>Ionisatieenergie</translation>
     </message>
     <message>
         <source>Density</source>
-        <translation type="unfinished"></translation>
+        <translation>Dichtheid</translation>
     </message>
     <message>
         <source>Boilingpoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Kookpunt</translation>
     </message>
     <message>
         <source>Meltingpoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Smeltpunt</translation>
     </message>
 </context>
 <context>
     <name>Oxygen</name>
     <message>
         <source>Oxygen</source>
-        <translation type="unfinished"></translation>
+        <translation>Oxygen</translation>
     </message>
     <message>
         <source>PSE</source>
-        <translation type="unfinished"></translation>
+        <translation>PSE</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Calculations</source>
-        <translation type="unfinished"></translation>
+        <translation>Calculaties</translation>
     </message>
     <message>
         <source>Hydrogen</source>
@@ -109,11 +109,11 @@
     </message>
     <message>
         <source>Helium</source>
-        <translation type="unfinished"></translation>
+        <translation>Helium</translation>
     </message>
     <message>
         <source>Lithium</source>
-        <translation type="unfinished"></translation>
+        <translation>Lithium</translation>
     </message>
     <message>
         <source>Beryllium</source>
@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>Carbon</source>
-        <translation type="unfinished"></translation>
+        <translation>Carbon</translation>
     </message>
     <message>
         <source>Nitrogen</source>
@@ -169,7 +169,7 @@
     </message>
     <message>
         <source>Argon</source>
-        <translation type="unfinished"></translation>
+        <translation>Argon</translation>
     </message>
     <message>
         <source>Potassium</source>
@@ -185,11 +185,11 @@
     </message>
     <message>
         <source>Titanium</source>
-        <translation type="unfinished"></translation>
+        <translation>Titanium</translation>
     </message>
     <message>
         <source>Vanadium</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vanadium</translation>
     </message>
     <message>
         <source>Chromium</source>
@@ -201,7 +201,7 @@
     </message>
     <message>
         <source>Iron</source>
-        <translation type="unfinished"></translation>
+        <translation>IJzer</translation>
     </message>
     <message>
         <source>Cobalt</source>
@@ -209,15 +209,15 @@
     </message>
     <message>
         <source>Nickel</source>
-        <translation type="unfinished"></translation>
+        <translation>Nikkel</translation>
     </message>
     <message>
         <source>Copper</source>
-        <translation type="unfinished"></translation>
+        <translation>Koper</translation>
     </message>
     <message>
         <source>Zinc</source>
-        <translation type="unfinished"></translation>
+        <translation>Zink</translation>
     </message>
     <message>
         <source>Gallium</source>
@@ -285,11 +285,11 @@
     </message>
     <message>
         <source>Silver</source>
-        <translation type="unfinished"></translation>
+        <translation>Zilver</translation>
     </message>
     <message>
         <source>Cadmium</source>
-        <translation type="unfinished"></translation>
+        <translation>Cadmium</translation>
     </message>
     <message>
         <source>Indium</source>
@@ -297,7 +297,7 @@
     </message>
     <message>
         <source>Tin</source>
-        <translation type="unfinished"></translation>
+        <translation>Tin</translation>
     </message>
     <message>
         <source>Antimony</source>
@@ -409,11 +409,11 @@
     </message>
     <message>
         <source>Platinum</source>
-        <translation type="unfinished"></translation>
+        <translation>Platina</translation>
     </message>
     <message>
         <source>Gold</source>
-        <translation type="unfinished"></translation>
+        <translation>Goud</translation>
     </message>
     <message>
         <source>Mercury</source>
@@ -425,7 +425,7 @@
     </message>
     <message>
         <source>Lead</source>
-        <translation type="unfinished"></translation>
+        <translation>Lood</translation>
     </message>
     <message>
         <source>Bismuth</source>
@@ -540,7 +540,7 @@
     <name>PSEWidget</name>
     <message>
         <source>Periodic System</source>
-        <translation type="unfinished"></translation>
+        <translation>Periodiek Systeem</translation>
     </message>
 </context>
 <context>
@@ -548,14 +548,15 @@
     <message>
         <source>ERROR: 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>FOUT:
+</translation>
     </message>
 </context>
 <context>
     <name>dataWidgetUI</name>
     <message>
         <source>Chemical Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Chemishe gegevens</translation>
     </message>
 </context>
 </TS>

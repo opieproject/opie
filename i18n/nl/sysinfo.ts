@@ -75,7 +75,13 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze pagina geeft weer hoeveel geheugen (dwz RAM) in gebruik is op uw hanheld.
+Gehugen wordt als volgt onderverdeeld:
+
+1. Gebruikt - Geheugen dat in gebruik is door Opie en lopende programma&apos;s.
+2. Buffers - Tijdelijke opslag tbv verbetering snelheid.
+3. Cache - Recent gebruikte informatie, die nog niet vrijgegeven is.
+4. Vrij - Geheugen dat momenteel niet in gebruik is door Opie of lopende programma&apos;s.</translation>
     </message>
     <message>
         <source>Used (%1 kB)</source>
@@ -120,11 +126,13 @@ Memory is categorized as follows:
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is een lijst van alle kernelmodules die momenteel geladen zijn op deze handheld.
+
+Druk een tijd op een module om meer informatie over de module te zien, of hem te beeindigen.</translation>
     </message>
     <message>
         <source>Select a command here and then click the Send button to the right to send the command to module selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer hier een commando en klik op de Zend knop (rechts in beeld) om het commando naar de module te sturen.</translation>
     </message>
     <message>
         <source>Send</source>
@@ -132,11 +140,11 @@ Click and hold on a module to see additional information about the module, or to
     </message>
     <message>
         <source>Click here to send the selected command to the module selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om het commando naar de module te sturen.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this module.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit vlak geeft gedetailleerde informatie over deze module weer.</translation>
     </message>
     <message>
         <source>You really want to execute
@@ -182,11 +190,13 @@ Click and hold on a module to see additional information about the module, or to
         <source>This is a list of all the processes on this handheld device.
 
 Click and hold on a process to see additional information about the process, or to send a signal to it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit is een lijst van alle processen die momenteel geladen zijn op deze handheld.
+
+Druk een tijd op een module om meer informatie over de module te zien, of een signaal te sturen.</translation>
     </message>
     <message>
         <source>Select a signal here and then click the Send button to the right to send to this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer hier een signaal en klik op de Zend knop (rechts in beeld) om hetnaar dit proces te sturen.</translation>
     </message>
     <message>
         <source>Send</source>
@@ -194,11 +204,11 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>Click here to send the selected signal to this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klik hier om het signaal naar dit proces te sturen.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dit vlak laat gedetailleerde info over dit proces zien.</translation>
     </message>
     <message>
         <source>You really want to send
@@ -270,7 +280,7 @@ Click and hold on a process to see additional information about the process, or 
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Deze pagina geeft de huidige versies van Opie, de Linux kernel en de distributie van deze handheld weer.</translation>
     </message>
 </context>
 </TS>
