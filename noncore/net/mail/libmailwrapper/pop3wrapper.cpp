@@ -25,7 +25,7 @@ void POP3wrapper::listMessages( QList<RecMail> &target )
     char *header;
     size_t length;
     carray *messages;
-    
+
     login();
     mailpop3_list( m_pop3, &messages );
 
@@ -73,9 +73,14 @@ void POP3wrapper::login()
     m_pop3 = mailpop3_new( 200, &pop3_progress );
 
     // connect
-    err = mailpop3_socket_connect( m_pop3, (char *) server, port );
+    if (account->getSSL()) {
+        err = mailpop3_ssl_connect( m_pop3, (char*)server, port );
+    } else {
+        err = mailpop3_socket_connect( m_pop3, (char*)server, port );
+    }
+
     if ( err != MAILPOP3_NO_ERROR ) {
-        qDebug( "pop3: error connecting to %s\n reason: %s", server, 
+        qDebug( "pop3: error connecting to %s\n reason: %s", server,
                 m_pop3->response );
         mailpop3_free( m_pop3 );
         m_pop3 = NULL;
