@@ -56,19 +56,19 @@ $hExt       = "(h|H|hh|hxx|hpp|h\\+\\+)";
 # list of compat headers. scroll down ... much of boring stuff here..
 %compatmap = (
  'qapp.h'        =>  "qapplication.h",
- 'qarray.h'      =>  "qmemarray.h",
- 'qbitarry.h'    =>  "qbitarray.h",
+ #'qarray.h'      =>  "qmemarray.h",
+ #'qbitarry.h'    =>  "qbitarray.h",
  'qbttngrp.h'    =>  "qbuttongroup.h",
- 'qchkbox.h'     =>  "qcheckbox.h",
+ #'qchkbox.h'     =>  "qcheckbox.h",
  'qclipbrd.h'    =>  "qclipboard.h",
- 'qcollect.h'    =>  "qptrcollection.h",
- 'qcollection.h' =>  "qptrcollection.h",
+ #'qcollect.h'    =>  "qptrcollection.h",
+ #'qcollection.h' =>  "qptrcollection.h",
  'qcombo.h'      =>  "qcombobox.h",
  'qconnect.h'    =>  "qconnection.h",
  'qdatetm.h'     =>  "qdatetime.h",
  'qdrawutl.h'    =>  "qdrawutil.h",
  'qdstream.h'    =>  "qdatastream.h",
- 'qfiledef.h'    =>  "private/qfiledefs_p.h",
+ #'qfiledef.h'    =>  "private/qfiledefs_p.h",
  'qfiledlg.h'    =>  "qfiledialog.h",
  'qfileinf.h'    =>  "qfileinfo.h",
  'qfontdta.h'    =>  "qfontdata.h",
@@ -79,7 +79,7 @@ $hExt       = "(h|H|hh|hxx|hpp|h\\+\\+)";
  'qiodev.h'      =>  "qiodevice.h",
  'qlcdnum.h'     =>  "qlcdnumber.h",
  'qlined.h'      =>  "qlineedit.h",
- 'qlist.h'       =>  "qptrlist.h",
+ #'qlist.h'       =>  "qptrlist.h",
  'qmenudta.h'    =>  "qmenudata.h",
  'qmetaobj.h'    =>  "qmetaobject.h",
  'qmlined.h'     =>  "qtmultilineedit.h",
@@ -103,21 +103,21 @@ $hExt       = "(h|H|hh|hxx|hpp|h\\+\\+)";
  'qrangect.h'    =>  "qrangecontrol.h",
  'qscrbar.h'     =>  "qscrollbar.h",
  'qsocknot.h'    =>  "qsocketnotifier.h",
- 'qstack.h'      =>  "qptrstack.h",
+# 'qstack.h'      =>  "qptrstack.h",
  'qtabdlg.h'     =>  "qtabdialog.h",
  'qtstream.h'    =>  "qtextstream.h",
- 'qvector.h'     =>  "qptrvector.h",
+# 'qvector.h'     =>  "qptrvector.h",
  'qwidcoll.h'    =>  "qwidgetlist.h\n\#include <qwidgetintdict.h",
  'qwindefs.h'    =>  "qwindowdefs.h",
 
 # and now the KDE specific compat includes
- 'kapp.h'        =>  "kapplication.h",
- 'kstddirs.h'    =>  "kstandarddirs.h",
- 'kuniqueapp.h'  =>  "kuniqueapplication.h",
- 'ktmainwindow.h'=>  "kmainwindow.h",
- 'kcolorbtn.h'   =>  "kcolorbutton.h",
- 'kcolordlg.h'   =>  "kcolordialog.h",
- 'kxmlgui.h'     =>  "kxmlguifactory.h",
+# 'kapp.h'        =>  "kapplication.h",
+# 'kstddirs.h'    =>  "kstandarddirs.h",
+# 'kuniqueapp.h'  =>  "kuniqueapplication.h",
+# 'ktmainwindow.h'=>  "kmainwindow.h",
+# 'kcolorbtn.h'   =>  "kcolorbutton.h",
+# 'kcolordlg.h'   =>  "kcolordialog.h",
+# 'kxmlgui.h'     =>  "kxmlguifactory.h",
 );
 
 
@@ -462,7 +462,7 @@ sub fix_unnecessary($)
     # check if it is its own header file
     my $blankhdr = $include;
     $blankhdr =~ s/(.*)\.[^\.]+/$1/;
-    next if ($blankhdr eq $blanksrc);	
+    next if ($blankhdr eq $blanksrc); 
     
     chdir($srcdir);
 
