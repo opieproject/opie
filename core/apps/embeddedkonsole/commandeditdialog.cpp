@@ -63,31 +63,31 @@ CommandEditDialog::CommandEditDialog(QWidget *parent, const char* name, WFlags f
 
 
 
-  ToolButton1->setTextLabel("new");
+  ToolButton1->setTextLabel(tr("new"));
   ToolButton1->setPixmap(Resource::loadPixmap("new"));
   ToolButton1->setAutoRaise(TRUE);
   ToolButton1->setFocusPolicy(QWidget::NoFocus);
   connect(ToolButton1,SIGNAL(clicked()),this,SLOT(showAddDialog()));
 
-  ToolButton2->setTextLabel("edit");
+  ToolButton2->setTextLabel(tr("edit"));
   ToolButton2->setPixmap(Resource::loadPixmap("edit"));
   ToolButton2->setAutoRaise(TRUE);
   ToolButton2->setFocusPolicy(QWidget::NoFocus);
   connect(ToolButton2,SIGNAL(clicked()),this,SLOT(showEditDialog()));
 
-  ToolButton3->setTextLabel("delete");
+  ToolButton3->setTextLabel(tr("delete"));
   ToolButton3->setPixmap(Resource::loadPixmap("editdelete"));
   ToolButton3->setAutoRaise(TRUE);
   ToolButton3->setFocusPolicy(QWidget::NoFocus);
   connect(ToolButton3,SIGNAL(clicked()),m_PlayListSelection,SLOT(removeSelected()));
 
-  ToolButton4->setTextLabel("up");
+  ToolButton4->setTextLabel(tr("up"));
   ToolButton4->setPixmap(Resource::loadPixmap("up"));
   ToolButton4->setAutoRaise(TRUE);
   ToolButton4->setFocusPolicy(QWidget::NoFocus);
   connect(ToolButton4,SIGNAL(clicked()),m_PlayListSelection,SLOT(moveSelectedUp()));
 
-  ToolButton5->setTextLabel("down");
+  ToolButton5->setTextLabel(tr("down"));
   ToolButton5->setPixmap(Resource::loadPixmap("down"));
   ToolButton5->setAutoRaise(TRUE);
   ToolButton5->setFocusPolicy(QWidget::NoFocus);
