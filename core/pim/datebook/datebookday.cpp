@@ -730,6 +730,28 @@ void DateBookDayWidget::paintEvent( QPaintEvent *e )
 	rt.draw( &p, 7, 0, e->region(), colorGroup() );
 }
 
+/*
+ * we need to find the real start date for a uid
+ * we need to check from one day to another...
+ */
+static QDate findRealStart( int uid, const QDate& isIncluded ,  DateBookDB* db) {
+    QDate dt( isIncluded );
+    QDate fnd = dt;
+
+    bool doAgain = true;
+    do{
+        dt = dt.addDays( -1 );
+        QValueList<EffectiveEvent> events = db->getEffectiveEvents( dt, dt );
+        for (QValueList<EffectiveEvent>::Iterator it = events.begin(); it != events.end(); ++it ) {
+            EffectiveEvent ev = (*it);
+            if ( uid == ev.event().uid() && ev.start() != QTime(0, 0, 0 ) )
+                return ev.date();
+        }
+    }while (doAgain );
+
+    return fnd;
+}
+
 void DateBookDayWidget::mousePressEvent( QMouseEvent *e )
 {
 	DateBookDayWidget *item;
@@ -747,6 +769,7 @@ void DateBookDayWidget::mousePressEvent( QMouseEvent *e )
 	m.insertItem( tr( "Duplicate" ), 4 );
 	m.insertItem( tr( "Delete" ), 2 );
 	if(Ir::supported()) m.insertItem( tr( "Beam" ), 3 );
+        if(Ir::supported() && ev.event().doRepeat() ) m.insertItem( tr( "Beam this occurence"), 5 );
 	int r = m.exec( e->globalPos() );
 	if ( r == 1 ) {
 		emit editMe( ev.event() );
@@ -756,7 +779,64 @@ void DateBookDayWidget::mousePressEvent( QMouseEvent *e )
 		emit beamMe( ev.event() );
 	} else if ( r == 4 ) {
 		emit duplicateMe( ev.event() );
-	}
+	} else if ( r == 5 ) {
+            // create an Event and beam it...
+            /*
+             * Start with the easy stuff. If start and  end date is the same we can just use
+             * the values of effective events
+             * If it is a multi day event we need to find the real start and end date...
+             */
+            if ( ev.event().start().date() == ev.event().end().date() ) {
+                Event event( ev.event() );
+
+                QDateTime dt( ev.date(), ev.start() );
+                event.setStart( dt );
+
+                dt.setTime( ev.end() );
+                event.setEnd( dt );
+                emit beamMe( event );
+            }else {
+                /*
+                 * at least the the Times are right now
+                 */
+                QDateTime start( ev.event().start() );
+                QDateTime end  ( ev.event().end  () );
+
+
+                /*
+                 * ok we know the start date or we need to find it
+                 */
+                if ( ev.start() != QTime( 0, 0, 0 ) ) {
+                    start.setDate( ev.date() );
+                }else {
+                    QDate dt = findRealStart( ev.event().uid(), ev.date(), dateBook->db );
+                    start.setDate( dt );
+                }
+
+
+                /*
+                 * ok we know now the end date...
+                 * else
+                 *   get to know the offset btw the real start and real end
+                 *   and then add it to the new start date...
+                 */
+                if ( ev.end() != QTime(23, 59, 59 ) ) {
+                    end.setDate( ev.date() );
+                }else{
+                    int days = ev.event().start().date().daysTo( ev.event().end().date() );
+                    end.setDate( start.date().addDays( days ) );
+                }
+
+
+
+                Event event( ev.event() );
+                event.setStart( start );
+                event.setEnd  ( end   );
+
+
+                emit beamMe( event );
+            }
+        }
 }
 
 void DateBookDayWidget::setGeometry( const QRect &r )

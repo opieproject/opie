@@ -176,6 +176,7 @@ class DateBookDay : public QVBox
 {
     Q_OBJECT
 
+    friend class DateBookDayWidget;
 public:
     DateBookDay( bool ampm, bool startOnMonday, DateBookDB *newDb,
 		 QWidget *parent, const char *name );
