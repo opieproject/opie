@@ -21,6 +21,7 @@
 
 #include "datebookday.h"
 #include "datebookdayheaderimpl.h"
+#include "datebookdayallday.h"
 
 #include <qpe/datebookdb.h>
 #include <qpe/resource.h>
@@ -231,6 +232,10 @@ DateBookDay::DateBookDay( bool ampm, bool startOnMonday, DateBookDB *newDb, QWid
 	widgetList.setAutoDelete( true );
 	header = new DateBookDayHeader( startOnMonday, this, "day header" );
 	header->setDate( currDate.year(), currDate.month(), currDate.day() );
+
+        m_allDays = new DatebookdayAllday(newDb, this, "all day event list" );
+        m_allDays->hide();
+
 	view = new DateBookDayView( ampm, this, "day view" );
 
 	connect( header, SIGNAL( dateChanged( int, int, int ) ), this, SLOT( dateChanged( int, int, int ) ) );
@@ -348,17 +353,31 @@ void DateBookDay::getEvents()
 {
 	widgetList.clear();
 
+        /* clear the AllDay List */
+        m_allDays->hide(); // just in case
+        m_allDays->removeAllEvents();
+
 	QValueList<EffectiveEvent> eventList = db->getEffectiveEvents( currDate, currDate );
 	QValueListIterator<EffectiveEvent> it;
+        QObject* object = 0;
 	for ( it = eventList.begin(); it != eventList.end(); ++it ) {
 		EffectiveEvent ev=*it;
 		if(!((ev.end().hour()==0) && (ev.end().minute()==0) && (ev.startDate()!=ev.date()))) {	// Skip events ending at 00:00 starting at another day.
+                    if (ev.event().type() == Event::AllDay ) {
+                        object = m_allDays->addEvent( ev );
+                        if (!object)
+                            continue;
+                    }else {
 			DateBookDayWidget* w = new DateBookDayWidget( *it, this );
-			connect( w, SIGNAL( deleteMe( const Event & ) ), this, SIGNAL( removeEvent( const Event & ) ) );
-			connect( w, SIGNAL( duplicateMe( const Event & ) ), this, SIGNAL( duplicateEvent( const Event & ) ) );
-			connect( w, SIGNAL( editMe( const Event & ) ), this, SIGNAL( editEvent( const Event & ) ) );
-			connect( w, SIGNAL( beamMe( const Event & ) ), this, SIGNAL( beamEvent( const Event & ) ) );
-			widgetList.append( w );
+                        widgetList.append( w );
+                        object = w;
+                    }
+
+                    connect( object, SIGNAL( deleteMe( const Event & ) ), this, SIGNAL( removeEvent( const Event & ) ) );
+                    connect( object, SIGNAL( duplicateMe( const Event & ) ), this, SIGNAL( duplicateEvent( const Event & ) ) );
+                    connect( object, SIGNAL( editMe( const Event & ) ), this, SIGNAL( editEvent( const Event & ) ) );
+                    connect( object, SIGNAL( beamMe( const Event & ) ), this, SIGNAL( beamEvent( const Event & ) ) );
+
 		}
 	}
 }
@@ -401,8 +420,15 @@ static int place( const DateBookDayWidget *item, bool *used, int maxn )
 void DateBookDay::relayoutPage( bool fromResize )
 {
 	setUpdatesEnabled( FALSE );
-	if ( !fromResize )
+	if ( !fromResize ) {
 		getEvents();    // no need we already have them!
+
+                if (m_allDays->items() > 0 )
+                    m_allDays->show();
+                /*
+                 * else if ( m_allDays->items() ==  0 ) already hide in getEvents
+                 */
+        }
 
 	widgetList.sort();
 	//sorts the widgetList by the heights of the widget so that the tallest widgets are at the beginning
@@ -739,7 +765,7 @@ void DateBookDayWidget::paintEvent( QPaintEvent *e )
  * we need to find the real start date for a uid
  * we need to check from one day to another...
  */
-static QDate findRealStart( int uid, const QDate& isIncluded ,  DateBookDB* db) {
+QDate DateBookDay::findRealStart( int uid, const QDate& isIncluded ,  DateBookDB* db) {
     QDate dt( isIncluded );
     QDate fnd = dt;
 
@@ -814,7 +840,7 @@ void DateBookDayWidget::mousePressEvent( QMouseEvent *e )
                 if ( ev.start() != QTime( 0, 0, 0 ) ) {
                     start.setDate( ev.date() );
                 }else {
-                    QDate dt = findRealStart( ev.event().uid(), ev.date(), dateBook->db );
+                    QDate dt = DateBookDay::findRealStart( ev.event().uid(), ev.date(), dateBook->db );
                     start.setDate( dt );
                 }
 

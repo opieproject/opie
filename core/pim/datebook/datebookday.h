@@ -32,6 +32,7 @@
 
 class DateBookDayHeader;
 class DateBookDB;
+class DatebookdayAllday;
 class QDateTime;
 class QMouseEvent;
 class QPaintEvent;
@@ -177,7 +178,7 @@ class DateBookDay : public QVBox
 {
     Q_OBJECT
 
-    friend class DateBookDayWidget;
+    friend class DateBookDayWidget; // for beam this occurence and access to DateBookDB
 public:
     DateBookDay( bool ampm, bool startOnMonday, DateBookDB *newDb,
 		 QWidget *parent, const char *name );
@@ -190,6 +191,8 @@ public:
     DateBookDayWidget * getSelectedWidget( void );
     void setJumpToCurTime( bool bJump );
     void setRowStyle( int style );
+    static QDate findRealStart( int uid, const QDate& isIncluded,
+                                DateBookDB* );
 
 public slots:
     void setDate( int y, int m, int d );
@@ -220,6 +223,7 @@ private:
     QDate currDate;
     DateBookDayView *view;
     DateBookDayHeader *header;
+    DatebookdayAllday *m_allDays;
     DateBookDB *db;
     WidgetListClass widgetList;	//reimplemented QList for sorting widgets by height
     int startTime;
