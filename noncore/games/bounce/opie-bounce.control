@@ -1,14 +1,4 @@
-Files: bin/bounce apps/Games/bounce.desktop pics/bounce/bounce.png \
- pics/bounce/arrow0000.png pics/bounce/ball0008.png pics/bounce/ball0018.png \
- pics/bounce/arrow0001.png pics/bounce/ball0009.png pics/bounce/ball0019.png \
- pics/bounce/ball0000.png pics/bounce/ball0010.png pics/bounce/ball0020.png \
- pics/bounce/ball0001.png pics/bounce/ball0011.png pics/bounce/ball0021.png \
- pics/bounce/ball0002.png pics/bounce/ball0012.png pics/bounce/ball0022.png \
- pics/bounce/ball0003.png pics/bounce/ball0013.png pics/bounce/ball0023.png \
- pics/bounce/ball0004.png pics/bounce/ball0014.png pics/bounce/ball0024.png \
- pics/bounce/ball0005.png pics/bounce/ball0015.png pics/bounce/tiles.png \
- pics/bounce/ball0006.png pics/bounce/ball0016.png \
- pics/bounce/ball0007.png pics/bounce/ball0017.png
+Files: bin/bounce apps/Games/bounce.desktop pics/bounce/*.png
 Version: 0.6-$SUB_VERSION 
 Depends: opie-base ($QPE_VERSION)
 Priority: optional
