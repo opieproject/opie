@@ -17,6 +17,7 @@
 
 #include "bluebase.h"
 #include "scandialog.h"
+#include "hciconfwrapper.h"
 
 #include <qframe.h>
 #include <qlabel.h>
@@ -30,7 +31,6 @@
 #include <qscrollview.h>
 #include <qvbox.h>
 #include <qmessagebox.h>
-#include <qapplication.h>
 #include <qcheckbox.h>
 #include <qlineedit.h>
 #include <qlistview.h>
@@ -58,8 +58,9 @@ namespace OpieTooth {
         //                  this, SLOT( addServicesToDevice( QListViewItem * ) ) );
         connect( ListView2, SIGNAL( clicked( QListViewItem* )),
                           this, SLOT( startServiceActionClicked( QListViewItem* ) ) );
+        // hehe, cast right later
         connect( ListView2, SIGNAL( rightButtonClicked( QListViewItem *, const QPoint &, int ) ),
-                 this,  SLOT(startServiceActionHold( BTListItem *, const QPoint &, int) ) );
+                 this,  SLOT(startServiceActionHold( QListViewItem *, const QPoint &, int) ) );
         connect( localDevice , SIGNAL( foundServices( const QString& , Services::ValueList ) ),
                  this, SLOT( addServicesToDevice( const QString& , Services::ValueList ) ) );
         connect( localDevice, SIGNAL( available( const QString&, bool ) ),
@@ -90,6 +91,7 @@ namespace OpieTooth {
         topLV2->setPixmap( 1, onPix );
         (void) new BTListItem( topLV2, "Serial" ,"", "service" );
         (void) new BTListItem( topLV2, "BlueNiC" , "", "service" );
+        writeToHciConfig();
     }
 
 
@@ -126,7 +128,45 @@ namespace OpieTooth {
         cfg.writeEntry( "enableAuthentification" , enableAuthentification );
         cfg.writeEntry( "enablePagescan" , enablePagescan );
         cfg.writeEntry( "enableInquiryscan" , enableInquiryscan );
-}
+
+        writeToHciConfig();
+    }
+
+    void BlueBase::writeToHciConfig() {
+
+        HciConfWrapper *hciconf = new HciConfWrapper( "/tmp/hcid.conf" );
+        hciconf->setPinHelper( "/bin/QtPalmtop/bin/blue-pin" );
+
+
+        //    hciconf->setPinHelper( "/bin/QtPalmtop/bin/blue-pin" );
+
+        hciconf->setName( deviceName );
+
+        if ( useEncryption == 1) {
+            hciconf->setEncrypt( true );
+        } else {
+            hciconf->setEncrypt( false );
+        }
+
+
+        if ( enableAuthentification == 1) {
+            hciconf->setAuth( true );
+        } else {
+            hciconf->setAuth( false );
+        }
+
+        if ( enablePagescan  == 1) {
+            hciconf->setPscan( true );
+        } else {
+            hciconf->setPscan( false );
+        }
+
+        if ( enableInquiryscan  == 1) {
+            hciconf->setIscan( true );
+        } else {
+            hciconf->setIscan( false );
+        }
+    }
 
 
     /**
@@ -225,6 +265,7 @@ namespace OpieTooth {
 
         writeConfig();
 
+
         QMessageBox*  box = new QMessageBox( this, "Test" );
         box->setText( tr( "Changes applied" ) );
         box->show();
@@ -274,15 +315,16 @@ namespace OpieTooth {
     /**
      * Action that are toggled on hold (mostly QPopups i guess)
      */
-    void BlueBase::startServiceActionHold( BTListItem * item, const QPoint & point, int column ) {
+    void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & point, int column ) {
 
           QPopupMenu *menu = new QPopupMenu();
 
           int ret=0;
 
+
           //QSize s = menu->sizeHint ( );
 
-          if ( item->type() == "device") {
+          if ( ((BTListItem*)item)->type() == "device") {
 
               QPopupMenu *groups = new QPopupMenu();
 
@@ -305,7 +347,7 @@ namespace OpieTooth {
               }
               delete groups;
 
-          } else if ( item->type() == "service") {
+          } else if ( ((BTListItem*)item)->type() == "service") {
               menu->insertItem( tr("Test1:"),  0);
               menu->insertItem( tr("connect"), 1);
               menu->insertItem( tr("delete"),  2);

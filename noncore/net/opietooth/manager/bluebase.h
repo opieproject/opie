@@ -45,6 +45,7 @@ namespace OpieTooth {
 	void writeConfig();
         void readSavedDevices();
         void writeSavedDevices();
+        void writeToHciConfig();
 	QString getStatus();
 	void initGui();
         void setInfo();
@@ -69,7 +70,7 @@ namespace OpieTooth {
         void addServicesToDevice( const QString& device, Services::ValueList );
         void addConnectedDevices();
         void startServiceActionClicked( QListViewItem *item );
-        void startServiceActionHold( BTListItem *, const QPoint &, int );
+        void startServiceActionHold( QListViewItem *, const QPoint &, int );
         void deviceActive( const QString& mac, bool connected  );
         void applyConfigChanges();
 
