@@ -95,9 +95,7 @@ CONFIG_NETWORKSETUP	noncore/settings/networksettings	networksettings.pro
 CONFIG_NOTESAPPLET	noncore/applets/notesapplet	notesapplet.pro
 CONFIG_OAPP	core/apps/oapp	oapp.pro
 CONFIG_OBEX	core/applets/obex2	obex.pro
-CONFIG_OCOPSERVER	x11/ipc/server	ocopserver.pro
 CONFIG_ODICT	noncore/apps/odict	odict.pro
-CONFIG_OFILESELECTOR	libopie/ofileselector	ofileselector.pro
 CONFIG_OIPKG	core/apps/oipkg	oipkg.pro
 CONFIG_OPIE-CONSOLE	noncore/apps/opie-console	opie-console.pro
 CONFIG_OPIE-LOGIN	core/opie-login	opie-login.pro

@@ -1,4 +1,5 @@
-.PHONY: FORCE
+.phony: force
+force:
 
 $(configs) :
 	$(call makecfg,$@)
@@ -57,13 +58,11 @@ $(OPIEDIR)/stamp-headers :
 	mkdir -p $(TOPDIR)/include/qpe \
                  $(TOPDIR)/include/qtopia \
 		 $(TOPDIR)/include/opie \
-                 $(TOPDIR)/include/qtopia/private \
-                 $(TOPDIR)/include/opie2
+                 $(TOPDIR)/include/qtopia/private 
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
 	( cd include/qtopia && rm -f *.h; ln -sf ../../library/*.h .; )
 	( cd include/qtopia/private && rm -f *.h; ln -sf ../../../library/backend/*.h .; )
 	( cd include/opie &&  rm -f *.h; ln -sf ../../libopie/*.h .; rm -f *_p.h; )
-	( cd include/opie &&  ln -sf ../../libsql/*.h .; )
 	( cd include/opie &&  ln -sf ../../libopie/pim/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiecore/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiemm/*.h .; )
@@ -98,25 +97,62 @@ $(TOPDIR)/library/custom.h : $(TOPDIR)/.config
 		ln -sf $(patsubst "%",%,$(CONFIG_CUSTOMFILE)) $@)
 	@touch $@
 
-$(TOPDIR)/scripts/lxdialog/lxdialog $(TOPDIR)/scripts/kconfig/conf scripts/kconfig/conf $(TOPDIR)/scripts/kconfig/mconf scripts/kconfig/mconf $(TOPDIR)/scripts/kconfig/qconf scripts/kconfig/qconf $(TOPDIR)/qmake/qmake :
-	$(call descend,$(shell dirname $@),$(shell basename $@))
+$(TOPDIR)/scripts/lxdialog/lxdialog $(TOPDIR)/scripts/kconfig/mconf $(TOPDIR)/scripts/kconfig/conf $(TOPDIR)/scripts/kconfig/qconf $(TOPDIR)/scripts/kconfig/libkconfig.so $(TOPDIR)/scripts/kconfig/gconf $(TOPDIR)/qmake/qmake:
+	@$(call descend,$(shell dirname $@),$(shell basename $@))
+
+menuconfig: $(TOPDIR)/scripts/lxdialog/lxdialog $(TOPDIR)/scripts/kconfig/mconf ./config.in
+	$(TOPDIR)/scripts/kconfig/mconf ./config.in
+	@touch ./.config.stamp
+
+xconfig: $(TOPDIR)/scripts/kconfig/qconf $(TOPDIR)/scripts/kconfig/libkconfig.so ./config.in
+	$(TOPDIR)/scripts/kconfig/qconf ./config.in
+	@touch .config.stamp
+
+gconfig: $(TOPDIR)/scripts/kconfig/gconf $(TOPDIR)/scripts/kconfig/libkconfig.so ./config.in
+	$(TOPDIR)/scripts/kconfig/gconf ./config.in
+	@touch .config.stamp
+
+config: $(TOPDIR)/scripts/kconfig/conf ./config.in
+	$(TOPDIR)/scripts/kconfig/conf ./config.in
+	@touch .config.stamp
+ 
+oldconfig: $(TOPDIR)/scripts/kconfig/conf ./config.in
+	$(TOPDIR)/scripts/kconfig/conf -o ./config.in
+	@touch .config.stamp
+ 
+randconfig: $(TOPDIR)/scripts/kconfig/conf ./config.in
+	$(TOPDIR)/scripts/kconfig/conf -r ./config.in
+	@touch .config.stamp
+ 
+allyesconfig: $(TOPDIR)/scripts/kconfig/conf ./config.in
+	$(TOPDIR)/scripts/kconfig/conf -y ./config.in
+	@touch .config.stamp
+ 
+allnoconfig: $(TOPDIR)/scripts/kconfig/conf ./config.in
+	$(TOPDIR)/scripts/kconfig/conf -n ./config.in
+	@touch .config.stamp
+ 
+defconfig: $(TOPDIR)/scripts/kconfig/conf ./config.in
+	$(TOPDIR)/scripts/kconfig/conf -d ./config.in
+	@touch .config.stamp
 
 $(TOPDIR)/qmake/qmake : $(TOPDIR)/mkspecs/default
 
 $(TOPDIR)/mkspecs/default :
 	ln -sf linux-g++ $@
 
-$(TOPDIR)/scripts/subst : FORCE
+$(TOPDIR)/scripts/subst : force
 	@( \
 		echo 's,\$$QPE_VERSION,$(QPE_VERSION),g'; \
 		echo 's,\$$OPIE_VERSION,$(OPIE_VERSION),g'; \
 		echo 's,\$$QTE_VERSION,$(QTE_VERSION),g'; \
 		echo 's,\$$QTE_REVISION,$(QTE_REVISION),g'; \
 		echo 's,\$$SUB_VERSION,$(SUB_VERSION),g'; \
+		echo 's,\$$EXTRAVERSION,$(EXTRAVERSION),g'; \
 		echo 's,\$$QTE_BASEVERSION,$(QTE_BASEVERSION),g'; \
 	) > $@ || ( rm -f $@; exit 1 )
 
-$(TOPDIR)/scripts/filesubst : FORCE
+$(TOPDIR)/scripts/filesubst : force
 	@( \
 		echo 's,\$$OPIEDIR/root/,/,g'; \
 		echo 's,$(OPIEDIR)/root/,/,g'; \
@@ -134,6 +170,8 @@ $(TOPDIR)/scripts/filesubst : FORCE
 		echo 's,^\(\./\)*plugins/,$(prefix)/plugins/,g'; \
 		echo 's,^\(\./\)*apps/,$(prefix)/apps/,g'; \
 		echo 's,^\(\./\)*share/,$(prefix)/share/,g'; \
+		echo 's,^\(\./\)*i18n/,$(prefix)/i18n/,g'; \
+		echo 's,^\(\./\)*help/,$(prefix)/help/,g'; \
 	) > $@ || ( rm -f $@; exit 1 )
 
 ## general rules ##

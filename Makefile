@@ -12,7 +12,7 @@ noconfig_targets := xconfig menuconfig config oldconfig randconfig \
 		    clean-configs $(TOPDIR)/scripts/subst $(TOPDIR)/scripts/filesubst \
 		    ipks
 
-configs += $(TOPDIR)/core/applets/config.in $(TOPDIR)/core/apps/config.in $(TOPDIR)/core/multimedia/config.in $(TOPDIR)/core/pim/config.in $(TOPDIR)/core/pim/today/plugins/config.in $(TOPDIR)/core/settings/config.in $(TOPDIR)/development/config.in $(TOPDIR)/inputmethods/config.in $(TOPDIR)/libopie/ofileselector/config.in $(TOPDIR)/libopie/pim/config.in $(TOPDIR)/libsql/config.in $(TOPDIR)/noncore/applets/config.in $(TOPDIR)/noncore/apps/opie-console/test/config.in $(TOPDIR)/noncore/apps/config.in $(TOPDIR)/noncore/comm/config.in $(TOPDIR)/noncore/decorations/config.in $(TOPDIR)/noncore/games/config.in $(TOPDIR)/noncore/graphics/config.in $(TOPDIR)/noncore/multimedia/config.in $(TOPDIR)/noncore/net/config.in $(TOPDIR)/noncore/net/opietooth/config.in $(TOPDIR)/noncore/settings/config.in $(TOPDIR)/noncore/styles/config.in $(TOPDIR)/noncore/tools/calc2/config.in $(TOPDIR)/noncore/tools/config.in $(TOPDIR)/noncore/todayplugins/config.in
+configs += $(TOPDIR)/core/applets/config.in $(TOPDIR)/core/apps/config.in $(TOPDIR)/core/multimedia/config.in $(TOPDIR)/core/pim/config.in $(TOPDIR)/core/pim/today/plugins/config.in $(TOPDIR)/core/settings/config.in $(TOPDIR)/development/config.in $(TOPDIR)/inputmethods/config.in  $(TOPDIR)/libopie/pim/config.in $(TOPDIR)/noncore/applets/config.in $(TOPDIR)/noncore/apps/opie-console/test/config.in $(TOPDIR)/noncore/apps/config.in $(TOPDIR)/noncore/comm/config.in $(TOPDIR)/noncore/decorations/config.in $(TOPDIR)/noncore/games/config.in $(TOPDIR)/noncore/graphics/config.in $(TOPDIR)/noncore/multimedia/config.in $(TOPDIR)/noncore/net/config.in $(TOPDIR)/noncore/net/opietooth/config.in $(TOPDIR)/noncore/settings/config.in $(TOPDIR)/noncore/styles/config.in $(TOPDIR)/noncore/tools/calc2/config.in $(TOPDIR)/noncore/tools/config.in $(TOPDIR)/noncore/todayplugins/config.in
 
 # $(TOPDIR)/.config depends on .depends.cfgs, as it depends on $(configs)
 # in order to have a full set of config.in files.
@@ -62,44 +62,6 @@ $(TOPDIR)/.config: $(TOPDIR)/.depends.cfgs $(configs)
 	@$(MAKE) -C scripts/kconfig conf
 	./scripts/kconfig/conf -s ./config.in
 
-# config rules must have the $(configs) var defined
-# at the time that they run. we must ensure that .depends.cfgs
-# is built and included by the time we reach this point.
-
-xconfig :
-	$(call descend,scripts/kconfig,qconf)
-	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(TOPDIR)/scripts/kconfig \
-		./scripts/kconfig/qconf ./config.in
-
-menuconfig : $(TOPDIR)/scripts/lxdialog/lxdialog
-	$(call descend,scripts/kconfig,mconf)
-	./scripts/kconfig/mconf ./config.in
-
-config :
-	$(call descend,scripts/kconfig,conf)
-	./scripts/kconfig/conf ./config.in
- 
-oldconfig :
-	$(call descend,scripts/kconfig,conf)
-	./scripts/kconfig/conf -o ./config.in
- 
-randconfig :
-	$(call descend,scripts/kconfig,conf)
-	./scripts/kconfig/conf -r ./config.in
- 
-allyesconfig :
-	$(call descend,scripts/kconfig,conf)
-	./scripts/kconfig/conf -y ./config.in
- 
-allnoconfig :
-	$(call descend,scripts/kconfig,conf)
-	./scripts/kconfig/conf -n ./config.in
- 
-defconfig :
-	$(call descend,scripts/kconfig,conf)
-	./scripts/kconfig/conf -d ./config.in
-
-
 export
 
 ifeq ($(filter $(noconfig_targets),$(MAKECMDGOALS)),)
@@ -119,8 +81,19 @@ all clean install ipk: $(SUBDIRS)
 lupdate lrelease:
 	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done
 
-opie-lupdate opie-lrelease:
-	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done
+opie-lupdate opie-lrelease messages:
+	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done;
+
+# from kde 
+qtmessages:
+	cd $(QTDIR)/src ; \
+	sed -e "s,#define,," xml/qxml.cpp > qxml_clean.cpp ;\
+	find . -name "*.cpp" | grep -v moc_ > list ;\
+	for file in qfiledialog qcolordialog qprintdialog \
+		qurloperator qftp qhttp qlocal qerrormessage; do \
+		grep -v $$file list > list.new && mv list.new list ;\
+	done ;\
+	xgettext -C -ktr -kQT_TRANSLATE_NOOP -n `cat list` -o $(OPIEDIR)/qt-messages.pot 
 
 $(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers $(OPIEDIR)/stamp-headers) \
 	$(if $(CONFIG_LIBQPE-X11),$(QTDIR)/stamp-headers-x11 $(OPIEDIR)/stamp-headers-x11 ) \
