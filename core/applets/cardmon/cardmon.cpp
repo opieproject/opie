@@ -48,8 +48,9 @@ using namespace Opie::Ui;
 #include <mntent.h>
 #endif
 
-CardMonitor::CardMonitor( QWidget * parent ) : QWidget( parent ),
-pm( Resource::loadPixmap( "cardmon/pcmcia" ) ) {
+CardMonitor::CardMonitor( QWidget * parent ) : QWidget( parent )
+{
+    pm = Resource::loadImage( "cardmon/pcmcia").smoothScale(AppLnk::smallIconSize(), AppLnk::smallIconSize());
 
     QCopChannel * pcmciaChannel = new QCopChannel( "QPE/Card", this );
     connect( pcmciaChannel,
