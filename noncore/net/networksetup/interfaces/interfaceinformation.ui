@@ -293,7 +293,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>View &amp;Advanced Information</string>
+                        <string>&amp;View Advanced Information</string>
                     </property>
                 </widget>
             </hbox>

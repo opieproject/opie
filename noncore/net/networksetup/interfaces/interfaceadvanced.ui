@@ -12,7 +12,7 @@
             <x>0</x>
             <y>0</y>
             <width>214</width>
-            <height>286</height>
+            <height>290</height>
         </rect>
     </property>
     <property stdset="1">
@@ -35,17 +35,6 @@
             <name>spacing</name>
             <number>6</number>
         </property>
-        <widget row="1"  column="0" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>TextLabel1</cstring>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>MAC Address</string>
-            </property>
-        </widget>
         <widget row="0"  column="1" >
             <class>QLabel</class>
             <property stdset="1">
@@ -65,7 +54,7 @@
                 <string>eth0</string>
             </property>
         </widget>
-        <widget row="2"  column="0" >
+        <widget row="1"  column="0" >
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
@@ -74,25 +63,6 @@
             <property stdset="1">
                 <name>text</name>
                 <string>IP Address</string>
-            </property>
-        </widget>
-        <widget row="1"  column="1" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>macAddressLabel</cstring>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Panel</enum>
-            </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Sunken</enum>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>00:00:00:00:00:00</string>
             </property>
         </widget>
         <widget row="0"  column="0" >
@@ -106,7 +76,7 @@
                 <string>Interface</string>
             </property>
         </widget>
-        <widget row="4"  column="0" >
+        <widget row="2"  column="0" >
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
@@ -121,7 +91,7 @@
                 <string>Subnet Mask</string>
             </property>
         </widget>
-        <widget row="2"  column="1" >
+        <widget row="1"  column="1" >
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
@@ -140,7 +110,7 @@
                 <string>0.0.0.0</string>
             </property>
         </widget>
-        <widget row="4"  column="1" >
+        <widget row="2"  column="1" >
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
@@ -159,32 +129,27 @@
                 <string>0.0.0.0</string>
             </property>
         </widget>
-        <widget row="3"  column="0" >
-            <class>QLabel</class>
-            <property stdset="1">
+        <spacer row="6"  column="1" >
+            <property>
                 <name>name</name>
-                <cstring>TextLabel2</cstring>
+                <cstring>Spacer2</cstring>
             </property>
             <property stdset="1">
-                <name>text</name>
-                <string>Broadcast</string>
-            </property>
-        </widget>
-        <widget row="3"  column="1" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>broadcastLabel</cstring>
+                <name>orientation</name>
+                <enum>Vertical</enum>
             </property>
             <property stdset="1">
-                <name>frameShape</name>
-                <enum>Panel</enum>
+                <name>sizeType</name>
+                <enum>Expanding</enum>
             </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Sunken</enum>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
             </property>
-        </widget>
+        </spacer>
         <widget row="5"  column="0"  rowspan="1"  colspan="2" >
             <class>QGroupBox</class>
             <property stdset="1">
@@ -296,27 +261,62 @@
                 </widget>
             </grid>
         </widget>
-        <spacer row="6"  column="1" >
-            <property>
+        <widget row="4"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
                 <name>name</name>
-                <cstring>Spacer2</cstring>
+                <cstring>TextLabel2</cstring>
             </property>
             <property stdset="1">
-                <name>orientation</name>
-                <enum>Vertical</enum>
+                <name>text</name>
+                <string>Broadcast</string>
+            </property>
+        </widget>
+        <widget row="4"  column="1" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>broadcastLabel</cstring>
             </property>
             <property stdset="1">
-                <name>sizeType</name>
-                <enum>Expanding</enum>
+                <name>frameShape</name>
+                <enum>Panel</enum>
             </property>
-            <property>
-                <name>sizeHint</name>
-                <size>
-                    <width>20</width>
-                    <height>20</height>
-                </size>
+            <property stdset="1">
+                <name>frameShadow</name>
+                <enum>Sunken</enum>
             </property>
-        </spacer>
+        </widget>
+        <widget row="3"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel1</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>MAC Address</string>
+            </property>
+        </widget>
+        <widget row="3"  column="1" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>macAddressLabel</cstring>
+            </property>
+            <property stdset="1">
+                <name>frameShape</name>
+                <enum>Panel</enum>
+            </property>
+            <property stdset="1">
+                <name>frameShadow</name>
+                <enum>Sunken</enum>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>00:00:00:00:00:00</string>
+            </property>
+        </widget>
     </grid>
 </widget>
 <customwidgets>
