@@ -105,7 +105,7 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>No rellenada</translation>
+        <translation>En blanco</translation>
     </message>
     <message>
         <source>All</source>
@@ -200,7 +200,7 @@ de introducir algún dato</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>No rellenada</translation>
+        <translation>En blanco</translation>
     </message>
     <message>
         <source>Out of space</source>

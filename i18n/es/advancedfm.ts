@@ -3,7 +3,7 @@
     <name>AdvancedFm</name>
     <message>
         <source>AdvancedFm</source>
-        <translation>Explorador Avanzado</translation>
+        <translation>Gestor de Ficheros Avanzado</translation>
     </message>
     <message>
         <source>File</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation>Mostrar ficheros escondidos</translation>
+        <translation>Mostrar ficheros ocultos</translation>
     </message>
     <message>
         <source>Make Directory</source>
@@ -68,7 +68,7 @@
     <message>
         <source>Do you really want to delete
 </source>
-        <translation>Seguro que quieres borrar
+        <translation>Seguro que quiere borrar
 </translation>
     </message>
     <message>
@@ -97,7 +97,7 @@
     </message>
     <message>
         <source>AdvancedFm Output</source>
-        <translation>Salida del Explorador Avanzado</translation>
+        <translation>Salida Gestor de Ficheros Avanzado</translation>
     </message>
     <message>
         <source>command failed!</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation>Emisión Explorador Avanzado</translation>
+        <translation>Emisión del Gestor de Ficheros Avanzado</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -186,7 +186,7 @@ Do you really want to delete it?</source>
     <name>Output</name>
     <message>
         <source>Save output to file (name only)</source>
-        <translation>Salvar salida en fichero (sólo nombre)</translation>
+        <translation>Salvar salida en fichero(sólo nombre)</translation>
     </message>
 </context>
 <context>

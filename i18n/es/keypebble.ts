@@ -147,14 +147,14 @@ Por favor, inténtelo más tarde.</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Clave:</translation>
+        <translation>Contraseña:</translation>
     </message>
 </context>
 <context>
     <name>VncOptionsBase</name>
     <message>
         <source>VNC Viewer Options</source>
-        <translation>Opciones visor VNC</translation>
+        <translation>Opciones Visor VNC</translation>
     </message>
     <message>
         <source>Data Encoding</source>
@@ -198,7 +198,7 @@ Por favor, inténtelo más tarde.</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation>Codificación copia rectángulo</translation>
+        <translation>Codificación copiar rectángulo</translation>
     </message>
 </context>
 </TS>

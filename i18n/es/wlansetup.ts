@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Open System</source>
-        <translation>Abrir sistema</translation>
+        <translation>Sistema abierto</translation>
     </message>
     <message>
         <source>Shared Key</source>

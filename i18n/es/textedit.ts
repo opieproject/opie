@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Font Dialog</source>
-        <translation>Diálogo de letra</translation>
+        <translation>Diálogo de Letra</translation>
     </message>
     <message>
         <source>Size</source>
@@ -82,19 +82,19 @@
     </message>
     <message>
         <source>Font</source>
-        <translation>Letras</translation>
+        <translation>Letra</translation>
     </message>
     <message>
         <source>Start with new file</source>
-        <translation>Empezar nuevo fichero</translation>
+        <translation>Empezar con Nuevo</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Sobre</translation>
+        <translation>Acerca de</translation>
     </message>
     <message>
         <source>File</source>
-        <translation>Fiechero</translation>
+        <translation>Fichero</translation>
     </message>
     <message>
         <source>Edit</source>

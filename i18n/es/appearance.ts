@@ -56,7 +56,7 @@
     <message>
         <source>Do you really want to delete
 </source>
-        <translation>Realmente quieres borrar
+        <translation>Realmente quiere borrar
 </translation>
     </message>
     <message>

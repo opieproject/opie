@@ -23,11 +23,11 @@
     </message>
     <message>
         <source>To remove</source>
-        <translation>Para borrar</translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>To install</source>
-        <translation>Para instalar</translation>
+        <translation>Instalar</translation>
     </message>
 </context>
 <context>
@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>Package</source>
-        <translation>Paquete</translation>
+        <translation>Paquetes</translation>
     </message>
     <message>
         <source>View</source>
@@ -54,7 +54,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation>Configuración</translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>Help</source>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Setups</source>
-        <translation>Configuraciones</translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>Servers</source>
@@ -138,7 +138,7 @@
     </message>
     <message>
         <source>Package Actions</source>
-        <translation>Acciones paquetes</translation>
+        <translation>Acciones sobre paquetes</translation>
     </message>
     <message>
         <source>Install</source>
@@ -150,7 +150,7 @@
     </message>
     <message>
         <source>Package Status</source>
-        <translation>Estado paquetes</translation>
+        <translation>Estado de paquetes</translation>
     </message>
     <message>
         <source>New version, installed</source>
@@ -223,7 +223,7 @@
     <name>PackageManagerSettingsBase</name>
     <message>
         <source>Package Servers</source>
-        <translation>Servidores paquetes</translation>
+        <translation>Servidores de Paquetes</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -331,7 +331,7 @@ Todo hecho.</translation>
     </message>
     <message>
         <source>other</source>
-        <translation>otro</translation>
+        <translation>otros</translation>
     </message>
     <message>
         <source>Install Name: </source>
@@ -339,7 +339,7 @@ Todo hecho.</translation>
     </message>
     <message>
         <source> on </source>
-        <translation>en</translation>
+        <translation>en </translation>
     </message>
     <message>
         <source>Name: </source>
@@ -370,7 +370,7 @@ Todo hecho.</translation>
     <name>RunWindow</name>
     <message>
         <source>running...</source>
-        <translation>ejecutando...</translation>
+        <translation>procesando...</translation>
     </message>
 </context>
 </TS>

@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation>Configuración</translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>New</source>
@@ -119,7 +119,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>W</source>
-        <translation>X</translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>F</source>
@@ -189,7 +189,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>This is an all day event.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta cita dura todo el día.</translation>
     </message>
 </context>
 <context>
@@ -223,7 +223,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Start viewing events</source>
-        <translation>Empezar a ver citas</translation>
+        <translation>Comienzo de las citas</translation>
     </message>
     <message>
         <source>Start Time:</source>
@@ -235,7 +235,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Alarm Settings</source>
-        <translation>Configurar alarma</translation>
+        <translation>Configuración de la alarma</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
@@ -243,38 +243,38 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source> minutes</source>
-        <translation>minutos</translation>
+        <translation> minutos</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Miscelánea</translation>
     </message>
     <message>
         <source>Row style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo filas:</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Por omisión</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Medianas</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Grandes</translation>
     </message>
     <message>
         <source>Jump to current time (dayview)</source>
-        <translation type="unfinished"></translation>
+        <translation>Saltar a la hora actual (vista día)</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeek</name>
     <message>
         <source>This is an all day event.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta cita dura todo el día.</translation>
     </message>
 </context>
 <context>
@@ -285,11 +285,11 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Y: </source>
-        <translation>A:</translation>
+        <translation>A: </translation>
     </message>
     <message>
         <source>W: </source>
-        <translation>S:</translation>
+        <translation>S: </translation>
     </message>
     <message>
         <source>00. Jan-00. Jan</source>
@@ -337,7 +337,7 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>W</source>
         <comment>Wednesday</comment>
-        <translation>X</translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>T</source>
@@ -407,7 +407,7 @@ Libere espacio y vuelva a intentarlo.
     <name>DateEntryBase</name>
     <message>
         <source>New Event</source>
-        <translation>Nueva cita</translation>
+        <translation>Nueva Cita</translation>
     </message>
     <message>
         <source>Location</source>
@@ -471,15 +471,15 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source> minutes</source>
-        <translation>minutos</translation>
+        <translation> minutos</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation>Muda</translation>
+        <translation>Silenciosa</translation>
     </message>
     <message>
         <source>Loud</source>
-        <translation>Sonora</translation>
+        <translation>Audible</translation>
     </message>
     <message>
         <source>Repeat</source>
@@ -506,7 +506,7 @@ Libere espacio y vuelva a intentarlo.
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
-        <translation>Editar nota</translation>
+        <translation>Editar Nota</translation>
     </message>
     <message>
         <source>&lt;b&gt;1/10&lt;/b&gt; Lunch</source>
@@ -651,23 +651,24 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source> and </source>
-        <translation>y</translation>
+        <translation>y </translation>
     </message>
     <message>
         <source>,
 and </source>
-        <translation>, y</translation>
+        <translation>,
+y </translation>
     </message>
     <message>
         <source>, and </source>
-        <translation>, y</translation>
+        <translation>, y </translation>
     </message>
 </context>
 <context>
     <name>RepeatEntryBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation>Cita periódica</translation>
+        <translation>Cita Periódica</translation>
     </message>
     <message>
         <source>None</source>

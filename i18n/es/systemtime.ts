@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Weeks start on</source>
-        <translation>Semana empieza el</translation>
+        <translation>Inicio semana</translation>
     </message>
     <message>
         <source>Sunday</source>
@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Date format</source>
-        <translation>Fromato fecha</translation>
+        <translation>Formato fecha</translation>
     </message>
     <message>
         <source>Applet format</source>

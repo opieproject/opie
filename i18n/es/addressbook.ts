@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>Reordenar campos</translation>
+        <translation>Reordenar Campos</translation>
     </message>
     <message>
         <source>Out of Space</source>
@@ -140,7 +140,7 @@ introducir más datos!</translation>
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Editar dirección</translation>
+        <translation>Editar Dirección</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -204,7 +204,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>No rellenado</translation>
+        <translation>Vacío</translation>
     </message>
     <message>
         <source>Font</source>
@@ -411,7 +411,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Enter Note</source>
-        <translation>Introducir nota</translation>
+        <translation>Introducir Nota</translation>
     </message>
     <message>
         <source>Edit Name</source>

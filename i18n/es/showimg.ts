@@ -3,7 +3,7 @@
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation>Visor de imágenes</translation>
+        <translation>Visor de Imágenes</translation>
     </message>
     <message>
         <source>Horizontal flip</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Rotate 90</source>
-        <translation>Rotat 90º</translation>
+        <translation>Rotar 90º</translation>
     </message>
     <message>
         <source>Fullscreen</source>
@@ -31,7 +31,7 @@
     </message>
     <message>
         <source> - Image Viewer</source>
-        <translation>- Visor de imágenes</translation>
+        <translation> - Visor de imágenes</translation>
     </message>
     <message>
         <source>Loading image...</source>

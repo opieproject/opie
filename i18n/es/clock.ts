@@ -11,11 +11,11 @@
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation>Parar reloj</translation>
+        <translation>Cronómetro</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation>Inicio</translation>
+        <translation>Empezar</translation>
     </message>
     <message>
         <source>Reset</source>
@@ -58,7 +58,7 @@
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation>Fijar alarma</translation>
+        <translation>Fijar Alarma</translation>
     </message>
     <message>
         <source>Hour</source>
@@ -79,7 +79,7 @@
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation>Duración cabezadita
+        <translation>Cabezadita
 (minutos)</translation>
     </message>
     <message>

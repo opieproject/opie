@@ -60,7 +60,7 @@ aún en el grupo.</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Yes</translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -111,7 +111,7 @@ aún en el grupo.</translation>
     </message>
     <message>
         <source>Tab Manager</source>
-        <translation>Gestor Fichas</translation>
+        <translation>Gestor Etiquetas</translation>
     </message>
     <message>
         <source>Hierarchy</source>

@@ -279,7 +279,7 @@ página actual?</translation>
     <name>NewPageDialog</name>
     <message>
         <source>New Page</source>
-        <translation>Nueva página</translation>
+        <translation>Nueva Página</translation>
     </message>
     <message>
         <source>Page Size</source>
@@ -315,7 +315,7 @@ página actual?</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation>Color lápiz</translation>
+        <translation>Color del lápiz</translation>
     </message>
     <message>
         <source>Brush Color</source>
@@ -323,7 +323,7 @@ página actual?</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation>Color relleno</translation>
+        <translation>Color de relleno</translation>
     </message>
     <message>
         <source>General</source>

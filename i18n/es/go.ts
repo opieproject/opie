@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>Prisoners: black %1, white %2</source>
-        <translation>Prisioneros: blancas %1, negras %2</translation>
+        <translation>Prisioneras: blancas %1, negras %2</translation>
     </message>
     <message>
         <source>Go</source>

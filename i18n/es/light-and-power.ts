@@ -3,7 +3,7 @@
     <name>LightSettingsBase</name>
     <message>
         <source>Light Settings</source>
-        <translation>Configuración luz</translation>
+        <translation>Configurar Iluminación</translation>
     </message>
     <message>
         <source>Adjust to environment</source>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source> seconds</source>
-        <translation>segundos</translation>
+        <translation> segundos</translation>
     </message>
     <message>
         <source>Dim light after</source>
@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Bright</source>
-        <translation>Brillo</translation>
+        <translation>Brillante</translation>
     </message>
     <message>
         <source>&lt;blockquote&gt;The brighter the screen light, the more battery power is used.&lt;/blockquote&gt;</source>
@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Off</source>
-        <translation>Apagado</translation>
+        <translation>Apagada</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>LiquidSet</name>
     <message>
         <source>Liquid Style</source>
-        <translation>Estilo de Liquid</translation>
+        <translation>Estilo Líquido</translation>
     </message>
     <message>
         <source>No translucency</source>

@@ -3,11 +3,11 @@
     <name>LanguageSettingsBase</name>
     <message>
         <source>Language</source>
-        <translation>Lenguaje</translation>
+        <translation>Idioma</translation>
     </message>
     <message>
         <source>Select language</source>
-        <translation>Seleccionar lenguaje</translation>
+        <translation>Seleccione idioma</translation>
     </message>
 </context>
 </TS>

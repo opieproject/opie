@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Freecell</source>
-        <translation>Celda libre</translation>
+        <translation>Casilla libre</translation>
     </message>
     <message>
         <source>&amp;Game</source>

@@ -36,7 +36,7 @@ Acceso denegado</translation>
     <name>SecurityBase</name>
     <message>
         <source>Security Settings</source>
-        <translation>Configuración de seguridad</translation>
+        <translation>Configuración de Seguridad</translation>
     </message>
     <message>
         <source>Change passcode</source>
@@ -88,7 +88,7 @@ Acceso denegado</translation>
     </message>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
-        <translation>&lt;P&gt;Elegir un código proporciona un mínimo nivel de protección contra accesos esporádicos al dispositivo.</translation>
+        <translation>&lt;P&gt;Elegir un código proporciona un mínimo nivel de protección contra accesos ocasionales al dispositivo.</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>AppsKeyApp</name>
     <message>
         <source>Set Application Key</source>
-        <translation>Fijar tecla aplicación</translation>
+        <translation>Teclas de Aplicación</translation>
     </message>
     <message>
         <source>Calender</source>

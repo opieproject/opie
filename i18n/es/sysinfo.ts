@@ -3,7 +3,7 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation>Uso de CPU por aplicación (%)</translation>
+        <translation>Uso de CPU por la aplicación (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Type: </source>
-        <translation>Tipo:</translation>
+        <translation>Tipo: </translation>
     </message>
 </context>
 <context>
@@ -56,7 +56,7 @@
     </message>
     <message>
         <source>Use#</source>
-        <translation>Usa#</translation>
+        <translation>Uso#</translation>
     </message>
     <message>
         <source>Used By</source>
@@ -116,14 +116,14 @@
     </message>
     <message>
         <source>Int. Storage</source>
-        <translation>Flash ROM</translation>
+        <translation>Alm. interno</translation>
     </message>
 </context>
 <context>
     <name>SystemInfo</name>
     <message>
         <source>System Info</source>
-        <translation>Información del sistema</translation>
+        <translation>Información del Sistema</translation>
     </message>
     <message>
         <source>Memory</source>
@@ -143,7 +143,7 @@
     </message>
     <message>
         <source>Version</source>
-        <translation>Vesión</translation>
+        <translation>Versión</translation>
     </message>
     <message>
         <source>Modules</source>
@@ -154,19 +154,19 @@
     <name>VersionInfo</name>
     <message>
         <source>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation>&lt;b&gt;Kernel Linux&lt;/b&gt;&lt;p&gt;Versión:</translation>
+        <translation>&lt;b&gt;Kernel Linux&lt;/b&gt;&lt;p&gt;Versión: </translation>
     </message>
     <message>
         <source>Compiled by: </source>
-        <translation>Compilado por:</translation>
+        <translation>Compilado por: </translation>
     </message>
     <message>
         <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Versión:</translation>
+        <translation>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Versión: </translation>
     </message>
     <message>
         <source>Built on: </source>
-        <translation>Fecha compilación:</translation>
+        <translation>Fecha compilación: </translation>
     </message>
 </context>
 </TS>

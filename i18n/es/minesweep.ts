@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Game</source>
-        <translation>Juego</translation>
+        <translation>Nivel</translation>
     </message>
 </context>
 </TS>

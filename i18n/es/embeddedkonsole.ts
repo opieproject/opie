@@ -14,11 +14,11 @@
     </message>
     <message>
         <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
-        <translation>&lt;B&gt;Commandos&lt;/B&gt;:</translation>
+        <translation>&lt;B&gt;Lista de comandos&lt;/B&gt;:</translation>
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
-        <translation>&lt;B&gt;Commandos sugeridos&lt;/B&gt;:</translation>
+        <translation>&lt;B&gt;Comandos sugeridos&lt;/B&gt;:</translation>
     </message>
 </context>
 <context>
@@ -104,11 +104,11 @@
     </message>
     <message>
         <source>White on Black</source>
-        <translation>Balnco sobre negro</translation>
+        <translation>Blanco sobre negro</translation>
     </message>
     <message>
         <source>Black on Transparent</source>
-        <translation>Blando sobre transparente</translation>
+        <translation>Blanco sobre transparente</translation>
     </message>
     <message>
         <source>Black on Red</source>
@@ -132,11 +132,11 @@
     </message>
     <message>
         <source>Cyan on White</source>
-        <translation>Cián sobre blanco</translation>
+        <translation>Cian sobre blanco</translation>
     </message>
     <message>
         <source>White on Cyan</source>
-        <translation>Blanco sobre cián</translation>
+        <translation>Blanco sobre cian</translation>
     </message>
     <message>
         <source>Blue on Black</source>
@@ -152,7 +152,7 @@
     </message>
     <message>
         <source>Quick Edit</source>
-        <translation>Editar ya</translation>
+        <translation>Editar rápido</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -160,7 +160,7 @@
     </message>
     <message>
         <source>None</source>
-        <translation>ninguna</translation>
+        <translation>Ninguna</translation>
     </message>
     <message>
         <source>Left</source>
@@ -184,7 +184,7 @@
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizado</translation>
     </message>
 </context>
 <context>
