@@ -25,7 +25,7 @@ $(TOPDIR)/.config : $(TOPDIR)/.depends.cfgs
 
 all menuconfig xconfig oldconfig config randconfig allyesconfig allnoconfig defconfig : $(TOPDIR)/.depends.cfgs
 
-clean-configs : $(TOPDIR)/.depends.cfgs
+clean-configs :
 	@echo "Wiping generated config.in files..."
 	@-rm -f $(configs)
 
