@@ -171,36 +171,6 @@ QStringList CategoryGroup::labels(const QArray<int> &catids ) const
     return labels;
 }
 
-QArray<int> CategoryGroup::ids( const QStringList &cats ) const
-{
-    QArray<int> results;
-
-    for ( QStringList::ConstIterator catIt = cats.begin();
-	  catIt != cats.end(); ++catIt ) {
-	if ( *catIt == QObject::tr("All") || *catIt == QObject::tr("Unfiled") )
-	    continue;
-	int value = id( *catIt );
-	if ( value != 0 ) {
-	    int tmp = results.size();
-	    results.resize( tmp + 1 );
-	    results[ tmp ] = value;
-	}
-    }
-
-    return results;
-}
-
-QArray<int> CategoryGroup::ids() const
-{
-    QArray<int> results( mIdLabelMap.count() );
-    int i = 0;
-    for ( QMap<int, QString>::ConstIterator it = mIdLabelMap.begin();
-	  it != mIdLabelMap.end(); ++it )
-	results[i++] = it.key();
-
-    return results;
-}
-
 /***********************************************************
  *
  * Categories
@@ -343,6 +313,14 @@ QStringList Categories::labels( const QString &app,
     QMap< QString, CategoryGroup >::ConstIterator
 	appIt = mAppCats.find( app );
     QStringList cats;
+
+    if ( appIt != mAppCats.end() )
+	cats += (*appIt).labels();
+    else qDebug("Categories::labels didn't find app %s", app.latin1() );
+    if ( includeGlobal )
+	cats += mGlobalCats.labels();
+
+    cats.sort();
     switch ( extra ) {
     case NoExtra: break;
     case AllUnfiled:
@@ -356,14 +334,7 @@ QStringList Categories::labels( const QString &app,
 	cats.append( tr("Unfiled") );
 	break;
     }
-    if ( appIt != mAppCats.end() )
-	cats += (*appIt).labels();
-    else qDebug("Categories::labels didn't find app %s", app.latin1() );
-    if ( includeGlobal )
-	cats += mGlobalCats.labels();
-    // I don't think a sorted list is useful, the user might find prefer
-    // it in the original order.
-//     cats.sort();
+
     return cats;
 }
 
@@ -376,14 +347,6 @@ QString Categories::label( const QString &app, int id ) const
     if ( appIt == mAppCats.end() )
 	return QString::null;
     return (*appIt).label( id );
-}
-
-QStringList Categories::labels( const QString & app,
-				const QArray<int> &catids ) const
-{
-    QStringList strs = mGlobalCats.labels( catids );
-    strs += mAppCats[app].labels( catids );
-    return strs;
 }
 
 /** Returns a single string associated with the cat ids for display in
@@ -417,33 +380,21 @@ QString Categories::displaySingle( const QString &app,
     return r;
 }
 
-QArray<int> Categories::ids( const QString &app ) const
+QArray<int> Categories::ids( const QString &app, const QStringList &labels) const
 {
-    QArray<int> allIds = mGlobalCats.ids();
-    QArray<int> appIds = mAppCats[app].ids();
-
-    // we should make the guarentee that the ids are in the
-    // same order as the labels, (i.e. app cats then global)
-    // otherwise there is no point in having these two separate functions.
-    uint appSize = appIds.size();
-    appIds.resize( appSize + allIds.size() );
-    for ( uint i = appSize; i < appIds.size(); ++i )
-	appIds[int(i)] = allIds[int(i - appSize)];
-
-    return appIds;
-}
-
-QArray<int> Categories::ids( const QString &app, const QStringList &cats ) const
-{
-    QArray<int> allIds = mGlobalCats.ids( cats );
-    QArray<int> appIds = mAppCats[app].ids( cats );
-
-    uint appSize = appIds.size();
-    appIds.resize( appSize + allIds.size() );
-    for ( uint i = appSize; i < appIds.size(); ++i )
-	appIds[int(i)] = allIds[int(i - appSize)];
-
-    return appIds;
+  QArray<int> results;
+  QStringList::ConstIterator it;
+  int i;
+  
+  for ( i=0, it=labels.begin(); it!=labels.end(); i++, ++it ) {
+    int value = id( app, *it );
+    if ( value != 0 ) {
+      int tmp = results.size();
+      results.resize( tmp + 1 );
+      results[ tmp ] = value;
+    }
+  }
+  return results;
 }
 
 int Categories::id( const QString &app, const QString &cat ) const
@@ -539,23 +490,28 @@ bool Categories::exists( const QString &appname,
     return (*appIt).contains( catname );
 }
 
+
 bool Categories::save( const QString &fname ) const
 {
-    QFile file( fname );
-    if ( !file.open( IO_WriteOnly ) ) {
+    QString strNewFile = fname + ".new";
+    QFile f( strNewFile );
+    QString out;
+    int total_written;
+
+    if ( !f.open( IO_WriteOnly|IO_Raw ) ) {
 	qWarning("Unable to write to %s", fname.latin1());
 	return FALSE;
     }
 
-    QTextStream ts( &file );
-    ts << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
-    ts << "<!DOCTYPE CategoryList>" << endl;
+    out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+    out += "<!DOCTYPE CategoryList>\n";
 
-    ts << "<Categories>" << endl;
+    out += "<Categories>\n";
+
     for ( QMap<int, QString>::ConstIterator git = mGlobalCats.idMap().begin();
 	  git != mGlobalCats.idMap().end(); ++git )
-	ts << "<Category id=\"" << git.key() << "\""
-	   << " name=\"" << escapeString(*git) << "\" />" << endl;
+	out += "<Category id=\"" + QString::number(git.key()) + "\"" +
+	  " name=\"" + escapeString(*git) + "\" />\n";
 
     for ( QMap<QString, CategoryGroup>::ConstIterator appsIt=mAppCats.begin();
 	  appsIt != mAppCats.end(); ++appsIt ) {
@@ -563,13 +519,28 @@ bool Categories::save( const QString &fname ) const
 	const QMap<int, QString> &appcats = (*appsIt).idMap();
 	for ( QMap<int, QString>::ConstIterator appcatit = appcats.begin();
 	      appcatit != appcats.end(); ++appcatit )
-	    ts << "<Category id=\"" << appcatit.key() << "\""
-	       << " app=\"" << escapeString(app) << "\""
-	       << " name=\"" << escapeString(*appcatit) << "\" />" << endl;
+	    out += "<Category id=\"" + QString::number(appcatit.key()) + "\"" +
+	      " app=\"" + escapeString(app) + "\"" +
+	      " name=\"" + escapeString(*appcatit) + "\" />\n";
     }
-    ts << "</Categories>" << endl;
+    out += "</Categories>\n";
 
-    file.close();
+    QCString cstr = out.utf8();
+    total_written = f.writeBlock( cstr.data(), cstr.length() );
+    if ( total_written != int(cstr.length()) ) {
+	f.close();
+ 	QFile::remove( strNewFile );
+ 	return FALSE;
+    }
+    f.close();
+
+    if ( ::rename( strNewFile.latin1(), fname.latin1() ) < 0 ) {
+	qWarning( "problem renaming file %s to %s",
+		  strNewFile.latin1(), fname.latin1());
+	// remove the tmp file...
+	QFile::remove( strNewFile );
+    }
+
     return TRUE;
 }
 
@@ -578,6 +549,11 @@ bool Categories::load( const QString &fname )
     QFile file( fname );
     if ( !file.open( IO_ReadOnly ) ) {
 	qWarning("Unable to open %s", fname.latin1());
+
+	addGlobalCategory(tr("Business"));
+	addGlobalCategory(tr("Personal"));
+	save(fname);
+
 	return FALSE;
     }
 

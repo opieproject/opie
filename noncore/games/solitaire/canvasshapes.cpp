@@ -19,11 +19,12 @@
 **********************************************************************/
 #include <qpainter.h>
 #include <qcanvas.h>
+#include <qgfx_qws.h>
 #include "canvasshapes.h"
 
 
 CanvasRoundRect::CanvasRoundRect(int x, int y, QCanvas *canvas) :
-	QCanvasRectangle( x, y, 23, 36, canvas)
+	QCanvasRectangle( x, y, ( qt_screen->deviceWidth() < 200 ) ? 20 : 23, ( qt_screen->deviceWidth() < 200 ) ? 27 : 36, canvas)
 {
     setZ(0);
     show();
@@ -39,7 +40,10 @@ void CanvasRoundRect::redraw()
 
 void CanvasRoundRect::drawShape(QPainter &p)
 {
-    p.drawRoundRect( (int)x(), (int)y(), 23, 36);
+    if ( qt_screen->deviceWidth() < 200 )
+	p.drawRoundRect( (int)x() + 1, (int)y() + 1, 18, 25);
+    else
+	p.drawRoundRect( (int)x(), (int)y(), 23, 36);
 }
 
 
@@ -73,20 +77,38 @@ void CanvasCircleOrCross::setCross()
 
 void CanvasCircleOrCross::drawShape(QPainter &p)
 {
-    int x1 = (int)x(), y1 = (int)y();
-    // Green circle
-    if (circleShape == TRUE) {
-	p.setPen( QPen( QColor(0x10, 0xE0, 0x10), 1 ) );
-	p.drawEllipse( x1 - 1, y1 - 1, 21, 21);
-	p.drawEllipse( x1 - 1, y1 - 0, 21, 19);
-	p.drawEllipse( x1 + 0, y1 + 0, 19, 19);
-	p.drawEllipse( x1 + 1, y1 + 0, 17, 19);
-	p.drawEllipse( x1 + 1, y1 + 1, 17, 17);
-    // Red cross
+    if ( qt_screen->deviceWidth() < 200 ) {
+	int x1 = (int)x(), y1 = (int)y();
+	// Green circle
+	if (circleShape == TRUE) {
+	    p.setPen( QPen( QColor(0x10, 0xE0, 0x10), 1 ) );
+	    p.drawEllipse( x1 - 1, y1 - 1, 17, 17);
+	    p.drawEllipse( x1 - 1, y1 - 0, 17, 15);
+	    p.drawEllipse( x1 + 0, y1 + 0, 15, 15);
+	    p.drawEllipse( x1 + 1, y1 + 0, 13, 15);
+	    p.drawEllipse( x1 + 1, y1 + 1, 13, 13);
+	// Red cross
+	} else {
+	    p.setPen( QPen( QColor(0xE0, 0x10, 0x10), 4 ) );
+	    p.drawLine( x1, y1, x1 + 14, y1 + 14);
+	    p.drawLine( x1 + 14, y1, x1, y1 + 14);
+	}
     } else {
-	p.setPen( QPen( QColor(0xE0, 0x10, 0x10), 5 ) );
-	p.drawLine( x1, y1, x1 + 20, y1 + 20);
-	p.drawLine( x1 + 20, y1, x1, y1 + 20);
+	int x1 = (int)x(), y1 = (int)y();
+	// Green circle
+	if (circleShape == TRUE) {
+	    p.setPen( QPen( QColor(0x10, 0xE0, 0x10), 1 ) );
+	    p.drawEllipse( x1 - 1, y1 - 1, 21, 21);
+	    p.drawEllipse( x1 - 1, y1 - 0, 21, 19);
+	    p.drawEllipse( x1 + 0, y1 + 0, 19, 19);
+	    p.drawEllipse( x1 + 1, y1 + 0, 17, 19);
+	    p.drawEllipse( x1 + 1, y1 + 1, 17, 17);
+	// Red cross
+	} else {
+	    p.setPen( QPen( QColor(0xE0, 0x10, 0x10), 5 ) );
+	    p.drawLine( x1, y1, x1 + 20, y1 + 20);
+	    p.drawLine( x1 + 20, y1, x1, y1 + 20);
+	}
     }
 }
 

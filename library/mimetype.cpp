@@ -18,6 +18,7 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_MIMEEXT
 #include "mimetype.h"
 #include "applnk.h"
 #include "resource.h"
@@ -46,6 +47,7 @@ public:
 	}
     }
     QString id;
+    QString extension;
     QString desc;
     QPixmap regIcon;
     QPixmap bigIcon;
@@ -59,6 +61,7 @@ public:
 
 MimeType::Dict* MimeType::d=0;
 static QMap<QString,QString> *typeFor = 0;
+static QMap<QString,QString> *extFor = 0;
 
 MimeType::Dict& MimeType::dict()
 {
@@ -96,6 +99,12 @@ QPixmap MimeType::pixmap() const
     return d ? d->regIcon : QPixmap();
 }
 
+QString MimeType::extension() const
+{
+    loadExtensions();
+    return *(*extFor).find(i);
+}
+
 QPixmap MimeType::bigPixmap() const
 {
     MimeTypeData* d = data(i);
@@ -128,6 +137,7 @@ void MimeType::clear()
 void MimeType::loadExtensions()
 {
     if ( !typeFor ) {
+	extFor = new QMap<QString,QString>;
 	typeFor = new QMap<QString,QString>;
 	loadExtensions("/etc/mime.types");
 	loadExtensions(QPEApplication::qpeDir()+"etc/mime.types");
@@ -145,9 +155,12 @@ void MimeType::loadExtensions(const QString& filename)
 	    QStringList::ConstIterator it = tokens.begin();
 	    if ( it != tokens.end() ) {
 		QString id = *it; ++it;
-		while (it != tokens.end()) {
-		    (*typeFor)[*it] = id;
-		    ++it;
+		if ( it != tokens.end() ) {
+		    (*extFor)[id] = *it;
+		    while (it != tokens.end()) {
+			(*typeFor)[*it] = id;
+			++it;
+		    }
 		}
 	    }
 	}

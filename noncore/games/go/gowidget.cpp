@@ -49,6 +49,8 @@ static QPixmap *newBlackStone;
 static QPixmap *blackStone;
 static QPixmap *whiteStone;
 
+static bool smallStones = FALSE;
+
 GoMainWidget::GoMainWidget( QWidget *parent, const char* name) :
 	QMainWindow( parent, name ) 
 {
@@ -197,6 +199,19 @@ void GoWidget::resizeEvent( QResizeEvent * )
     //    int r = (d/2-1);
     bx = (width() - 18*d)/2 ;
     by = (height() - 18*d)/2 ;
+
+    if ( d < 10 && !smallStones ) {
+	blackStone->convertFromImage( blackStone->convertToImage().smoothScale(8,8) );
+	whiteStone->convertFromImage( whiteStone->convertToImage().smoothScale(8,8) );
+	newBlackStone->convertFromImage( newBlackStone->convertToImage().smoothScale(8,8) );
+	
+	smallStones = TRUE;
+    } else if ( d >= 10 && smallStones ) {
+	blackStone = new QPixmap(Resource::loadPixmap( "Go-black" ));
+	whiteStone = new QPixmap(Resource::loadPixmap( "Go-white" ));
+	newBlackStone = new QPixmap(Resource::loadPixmap( "Go-black-highlight" ));
+	smallStones = FALSE;
+    }
 }
 
 void GoWidget::init()

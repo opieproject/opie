@@ -16,9 +16,11 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.1 2002-01-25 22:14:28 kergoth Exp $
+** $Id: datebook.cpp,v 1.1.1.2 2002-01-31 17:03:39 kergoth Exp $
 **
 **********************************************************************/
+
+#define QTOPIA_INTERNAL_FD
 
 #include "datebook.h"
 #include "datebookday.h"

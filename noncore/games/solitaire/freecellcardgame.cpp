@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+#include <qgfx_qws.h>
 #include "freecellcardgame.h"
 
 
@@ -29,16 +30,20 @@ FreecellCardGame::FreecellCardGame(QCanvas *c, bool snap, QWidget *parent) : Can
     numberOfFreeCells = 4;
     highestZ = 0;
 
+    int spaceBetweenPiles = ( qt_screen->deviceWidth() < 200 ) ? 21 : 28;
+    int xOrigin = ( qt_screen->deviceWidth() < 200 ) ? 0 : 5;
+    int spacing = ( qt_screen->deviceWidth() < 200 ) ? 0 : 0;
+
     for (int i = 0; i < 4; i++) {
-	freecellPiles[i] = new FreecellFreecellPile( 5 + i * 28, 10, canvas() );
+	freecellPiles[i] = new FreecellFreecellPile( xOrigin + i * spaceBetweenPiles, 10, canvas() );
 	addCardPile(freecellPiles[i]);
     }
     for (int i = 0; i < 4; i++) {
-	discardPiles[i] = new FreecellDiscardPile( 125 + i * 28, 10, canvas() );
+	discardPiles[i] = new FreecellDiscardPile( xOrigin + spacing + 6 + (i + 4) * spaceBetweenPiles, 10, canvas() );
 	addCardPile(discardPiles[i]);
     }
     for (int i = 0; i < 8; i++) {
-	workingPiles[i] = new FreecellWorkingPile( 10 + i * 28, 50, canvas() );
+	workingPiles[i] = new FreecellWorkingPile( xOrigin + spacing + 2 + i * spaceBetweenPiles, 50, canvas() );
 	addCardPile(workingPiles[i]);
     }
 }

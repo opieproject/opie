@@ -68,6 +68,7 @@ private:
     QComboBox *month;
     QSpinBox *year;
     DateBookMonthHeaderPrivate *d;
+    int focus;
 };
 
 class DayItemMonthPrivate;

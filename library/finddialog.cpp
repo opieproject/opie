@@ -18,6 +18,10 @@
 **
 **********************************************************************/
 
+// WARNING: Do *NOT* define this yourself. The SL5xxx from SHARP does NOT
+//      have this class.
+#define QTOPIA_INTERNAL_FD
+
 #include "finddialog.h"
 #include "findwidget_p.h"
 

@@ -40,6 +40,11 @@ public:
     QPixmap pixmap() const;
     QPixmap bigPixmap() const;
 
+// DON'T define this yourself!
+#ifdef QTOPIA_INTERNAL_MIMEEXT
+    QString extension() const;
+#endif
+
     const AppLnk* application() const;
 
     static QString appsFolderName();

@@ -17,6 +17,14 @@
 ** not clear to you.
 **
 **********************************************************************/
+
+
+//
+//   DO NOT ATTEMPT TO USE THIS CLASS
+//
+
+
+
 #ifndef LNKPROPERTIES_H
 #define LNKPROPERTIES_H
 #include <qstringlist.h>
@@ -33,8 +41,12 @@ class LnkProperties : public QDialog
     Q_OBJECT
 
 public:
+// WARNING: Do *NOT* define this yourself. The SL5xxx from SHARP does NOT
+//      have this class.
+#ifdef QTOPIA_INTERNAL_FSLP
     LnkProperties( AppLnk* lnk, QWidget* parent = 0 );
     ~LnkProperties();
+#endif
 
     void done(int);
 private slots:

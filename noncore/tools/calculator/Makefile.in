@@ -114,7 +114,7 @@ main.o: main.cpp \
 		$(QPEDIR)/include/qpe/qpeapplication.h
 
 calculator.h: calculator.ui
-	$(UIC) calculator.ui -o calculator.h
+	$(UIC) calculator.ui -o $(INTERFACE_DECL_PATH)/calculator.h
 
 calculator.cpp: calculator.ui
 	$(UIC) calculator.ui -i calculator.h -o calculator.cpp

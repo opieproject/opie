@@ -19,7 +19,7 @@ application/oda			oda
 application/pdf			pdf
 application/pgp			pgp
 application/pgp-signature	pgp
-application/postscript		ai eps ps
+application/postscript		ps ai eps
 application/powerpoint		ppt
 application/remote-printing
 application/rtf			rtf
@@ -35,9 +35,9 @@ application/x-compress		z Z
 application/x-cpio		cpio
 application/x-csh		csh
 application/x-debian-package	deb
-application/x-director		dcr dir dxr
+application/x-director		dir dcr dxr
 application/x-dvi		dvi
-application/x-gtar		gtar tgz
+application/x-gtar		tgz gtar
 application/x-gunzip		gz
 application/x-gzip		gz
 application/x-hdf		hdf
@@ -70,13 +70,13 @@ application/zip			zip
 audio/prs.sid			sid psid
 audio/basic			au snd
 audio/midi			mid midi kar
-audio/mpeg			mpga mp2 mp3
+audio/mpeg			mp3 mpga mp2
 audio/x-aiff			aif aifc aiff
 audio/x-pn-realaudio		ra ram
 audio/x-pn-realaudio-plugin
 audio/x-realaudio		ra
 audio/x-wav			wav
-chemical/x-pdb			pdb xyz
+chemical/x-pdb			xyz
 image/gif			gif
 image/ief			ief
 image/jpeg			jpeg jpg jpe
@@ -98,7 +98,7 @@ message/partial
 message/rfc822
 model/iges			igs iges
 model/mesh			msh mesh silo
-model/vrml			wrl vrml
+model/vrml			vrml wrl
 multipart/alternative
 multipart/appledouble
 multipart/digest
@@ -106,7 +106,7 @@ multipart/mixed
 multipart/parallel
 text/css			css
 text/html			html htm
-text/plain			asc txt c cc h hh cpp hpp
+text/plain			txt asc c cc h hh cpp hpp
 text/richtext			rtx
 text/tab-separated-values	tsv
 text/x-setext			etx
@@ -118,8 +118,8 @@ text/xml			xml dtd
 video/dl			dl
 video/fli			fli
 video/gl			gl
-video/mpeg			mp2 mpe mpeg mpg
-video/quicktime			qt mov
+video/mpeg			mpeg mp2 mpe mpg
+video/quicktime			mov qt
 video/x-msvideo			avi
 video/x-sgi-movie		movie
 x-conference/x-cooltalk		ice

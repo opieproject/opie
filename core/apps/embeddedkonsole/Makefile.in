@@ -190,6 +190,7 @@ konsole.o: konsole.cpp \
 		$(QPEDIR)/include/qpe/resource.h \
 		$(QPEDIR)/include/qpe/qpetoolbar.h \
 		$(QPEDIR)/include/qpe/qpemenubar.h \
+		$(QPEDIR)/include/qpe/config.h \
 		konsole.h \
 		MyPty.h \
 		TEWidget.h \

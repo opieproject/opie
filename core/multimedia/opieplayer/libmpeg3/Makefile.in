@@ -3,9 +3,9 @@
 ####### Compiler, tools and options
 
 CXX	=	$(SYSCONF_CXX) $(QT_CXX_MT)
-CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS) $(SYSCONF_CXXFLAGS_LIB) -DQCONFIG=\"qpe\"
+CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS) $(SYSCONF_CXXFLAGS_LIB)
 CC	=	$(SYSCONF_CC) $(QT_C_MT)
-CFLAGS	=	$(SYSCONF_CFLAGS) $(SYSCONF_CFLAGS_LIB) -DQCONFIG=\"qpe\"
+CFLAGS	=	$(SYSCONF_CFLAGS) $(SYSCONF_CFLAGS_LIB)
 INCPATH =	-I$(QPEDIR)/include -I..
 LFLAGS	=	$(SYSCONF_LFLAGS_QT) $(SYSCONF_RPATH_QT) $(SYSCONF_LFLAGS) $(QT_LFLAGS_MT)
 LIBS	=	$(SUBLIBS) -lqpe -lpthread -lm $(SYSCONF_LIBS_QT) $(SYSCONF_LIBS_QTAPP)
@@ -176,8 +176,7 @@ libmpeg3plugin.o: libmpeg3plugin.cpp \
 		audio/mpeg3audio.h \
 		mpeg3vtrack.h \
 		video/mpeg3video.h \
-		mpeg3protos.h \
-		../mediaplayerplugininterface.h
+		mpeg3protos.h
 
 libmpeg3pluginimpl.o: libmpeg3pluginimpl.cpp \
 		libmpeg3plugin.h \
@@ -193,9 +192,7 @@ libmpeg3pluginimpl.o: libmpeg3pluginimpl.cpp \
 		mpeg3vtrack.h \
 		video/mpeg3video.h \
 		mpeg3protos.h \
-		../mediaplayerplugininterface.h \
-		libmpeg3pluginimpl.h \
-		../mediaplayerplugininterface.h
+		libmpeg3pluginimpl.h
 
 bitstream.o: bitstream.c \
 		mpeg3private.h \

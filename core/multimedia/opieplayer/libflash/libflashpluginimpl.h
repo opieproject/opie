@@ -21,7 +21,7 @@
 #define LIBFLASH_PLUGIN_IMPL_H
 
 
-#include "../mediaplayerplugininterface.h"
+#include <qpe/mediaplayerplugininterface.h>
 
 
 class LibFlashPlugin;

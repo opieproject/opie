@@ -22,14 +22,15 @@
 
 #include <qhbox.h>
 #include <qvbox.h>
-#include <qlistview.h>
 #include <qtoolbutton.h>
+#include <qlistview.h>
 
 #include "filemanager.h"
 #include "applnk.h"
 
 class QPopupMenu;
 class QPushButton;
+class FileSelectorView;
 
 class FileSelectorItem : public QListViewItem
 {
@@ -43,34 +44,6 @@ private:
     DocLnk fl;
 };
 
-class CategoryMenu;
-class FileSelectorViewPrivate;
-class FileSelectorView : public QListView
-{
-    Q_OBJECT
-
-public:
-    FileSelectorView( const QString &mimefilter, QWidget *parent, const char *name );
-    ~FileSelectorView();
-    void reread();
-    int fileCount() { return count; }
-
-    void setCategoryFilter(CategoryMenu *);
-protected:
-    void keyPressEvent( QKeyEvent *e );
-
-protected slots:
-    void cardMessage( const QCString &, const QByteArray &);
-
-    void categoryChanged();
-    
-private:
-    QString filter;
-    FileManager *fileManager;
-    int count;
-    FileSelectorViewPrivate *d;
-};
-
 class FileSelectorPrivate;
 class FileSelector : public QVBox
 {
@@ -81,7 +54,6 @@ public:
     ~FileSelector();
     void setNewVisible( bool b );
     void setCloseVisible( bool b );
-    void setCategoriesVisible( bool b );
     void reread();
     int fileCount();
     const DocLnk *selected();

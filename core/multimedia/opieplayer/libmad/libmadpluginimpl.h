@@ -21,7 +21,7 @@
 #define LIBMAD_PLUGIN_IMPL_H
 
 
-#include "../mediaplayerplugininterface.h"
+#include <qpe/mediaplayerplugininterface.h>
 
 
 class LibMadPlugin;

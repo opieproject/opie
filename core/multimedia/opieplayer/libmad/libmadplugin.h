@@ -22,7 +22,10 @@
 
 
 #include <qstring.h>
-#include "mediaplayerplugininterface.h"
+#include <qpe/mediaplayerplugininterface.h>
+
+
+// #define OLD_MEDIAPLAYER_API
 
 
 class LibMadPluginData;
@@ -51,11 +54,14 @@ public:
     int audioSamples( int stream );
     bool audioSetSample( long sample, int stream );
     long audioGetSample( int stream );
-//    bool audioReadMonoSamples( short *output, long samples, long& samplesRead, int stream );
-//    bool audioReadStereoSamples( short *output, long samples, long& samplesRead, int stream );
+#ifdef OLD_MEDIAPLAYER_API
+    bool audioReadMonoSamples( short *output, long samples, long& samplesRead, int stream );
+    bool audioReadStereoSamples( short *output, long samples, long& samplesRead, int stream );
+    bool audioReadSamples( short *output, int channel, long samples, int stream );
+    bool audioReReadSamples( short *output, int channel, long samples, int stream );
+#else
     bool audioReadSamples( short *output, int channels, long samples, long& samplesRead, int stream );
-//    bool audioReadSamples( short *output, int channel, long samples, int stream );
-//    bool audioReReadSamples( short *output, int channel, long samples, int stream );
+#endif
 
 
     bool read();
@@ -90,6 +96,8 @@ public:
     bool supportsSMP() { return FALSE; }
     bool supportsStereo() { return TRUE; }
     bool supportsScaling() { return FALSE; }
+
+    long getPlayTime() { return -1; }
 
 private:
     LibMadPluginData *d;

@@ -137,9 +137,9 @@ mainwindow.o: mainwindow.cpp \
 todotable.o: todotable.cpp \
 		todotable.h \
 		$(QPEDIR)/include/qpe/categories.h \
+		$(QPEDIR)/include/qpe/stringutil.h \
 		$(QPEDIR)/include/qpe/task.h \
 		$(QPEDIR)/include/qpe/palmtoprecord.h \
-		$(QPEDIR)/include/qpe/stringutil.h \
 		$(QPEDIR)/include/qpe/categoryselect.h \
 		$(QPEDIR)/include/qpe/xmlreader.h
 
@@ -152,6 +152,8 @@ todoentryimpl.o: todoentryimpl.cpp \
 		$(QPEDIR)/include/qpe/categoryselect.h \
 		$(QPEDIR)/include/qpe/datebookmonth.h \
 		$(QPEDIR)/include/qpe/event.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h \
 		$(QPEDIR)/include/qpe/global.h \
 		$(QPEDIR)/include/qpe/imageedit.h \
 		$(QPEDIR)/include/qpe/timestring.h
@@ -172,9 +174,9 @@ moc_mainwindow.o: moc_mainwindow.cpp \
 moc_todotable.o: moc_todotable.cpp \
 		todotable.h \
 		$(QPEDIR)/include/qpe/categories.h \
+		$(QPEDIR)/include/qpe/stringutil.h \
 		$(QPEDIR)/include/qpe/task.h \
-		$(QPEDIR)/include/qpe/palmtoprecord.h \
-		$(QPEDIR)/include/qpe/stringutil.h
+		$(QPEDIR)/include/qpe/palmtoprecord.h
 
 moc_todoentryimpl.o: moc_todoentryimpl.cpp \
 		todoentryimpl.h \

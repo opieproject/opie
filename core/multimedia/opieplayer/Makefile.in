@@ -3,9 +3,9 @@
 ####### Compiler, tools and options
 
 CXX	=	$(SYSCONF_CXX) $(QT_CXX_MT)
-CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS) -DQCONFIG=\"qpe\"
+CXXFLAGS=	$(SYSCONF_CXXFLAGS_QT) $(SYSCONF_CXXFLAGS)
 CC	=	$(SYSCONF_CC) $(QT_C_MT)
-CFLAGS	=	$(SYSCONF_CFLAGS) -DQCONFIG=\"qpe\"
+CFLAGS	=	$(SYSCONF_CFLAGS)
 INCPATH =	-I$(QPEDIR)/include
 LFLAGS	=	$(SYSCONF_LFLAGS_QT) $(SYSCONF_RPATH_QT) $(SYSCONF_LFLAGS) $(QT_LFLAGS_MT)
 LIBS	=	$(SUBLIBS) -lqpe -lpthread $(SYSCONF_LIBS_QT) $(SYSCONF_LIBS) $(SYSCONF_LIBS_QTAPP)
@@ -145,8 +145,7 @@ main.o: main.cpp \
 		mediaplayer.h \
 		$(QPEDIR)/include/qpe/qlibrary.h \
 		$(QPEDIR)/include/qpe/qcom.h \
-		$(QPEDIR)/include/qpe/quuid.h \
-		mediaplayerplugininterface.h
+		$(QPEDIR)/include/qpe/quuid.h
 
 loopcontrol.o: loopcontrol.cpp \
 		$(QPEDIR)/include/qpe/qpeapplication.h \
@@ -154,9 +153,6 @@ loopcontrol.o: loopcontrol.cpp \
 		loopcontrol.h \
 		videowidget.h \
 		audiodevice.h \
-		mediaplayerplugininterface.h \
-		$(QPEDIR)/include/qpe/qcom.h \
-		$(QPEDIR)/include/qpe/quuid.h \
 		mediaplayerstate.h
 
 playlistselection.o: playlistselection.cpp \
@@ -170,7 +166,6 @@ mediaplayerstate.o: mediaplayerstate.cpp \
 		$(QPEDIR)/include/qpe/qcom.h \
 		$(QPEDIR)/include/qpe/quuid.h \
 		$(QPEDIR)/include/qpe/config.h \
-		mediaplayerplugininterface.h \
 		mediaplayerstate.h \
 		libmad/libmadpluginimpl.h \
 		libmpeg3/libmpeg3pluginimpl.h \
@@ -179,9 +174,6 @@ mediaplayerstate.o: mediaplayerstate.cpp \
 videowidget.o: videowidget.cpp \
 		$(QPEDIR)/include/qpe/resource.h \
 		videowidget.h \
-		mediaplayerplugininterface.h \
-		$(QPEDIR)/include/qpe/qcom.h \
-		$(QPEDIR)/include/qpe/quuid.h \
 		mediaplayerstate.h
 
 audiowidget.o: audiowidget.cpp \
@@ -209,7 +201,6 @@ mediaplayer.o: mediaplayer.cpp \
 		$(QPEDIR)/include/qpe/resource.h \
 		$(QPEDIR)/include/qpe/config.h \
 		mediaplayer.h \
-		mediaplayerplugininterface.h \
 		playlistwidget.h \
 		$(QPEDIR)/include/qpe/applnk.h \
 		audiowidget.h \
@@ -247,8 +238,7 @@ moc_mediaplayer.o: moc_mediaplayer.cpp \
 		mediaplayer.h \
 		$(QPEDIR)/include/qpe/qlibrary.h \
 		$(QPEDIR)/include/qpe/qcom.h \
-		$(QPEDIR)/include/qpe/quuid.h \
-		mediaplayerplugininterface.h
+		$(QPEDIR)/include/qpe/quuid.h
 
 moc_audiodevice.o: moc_audiodevice.cpp \
 		audiodevice.h

@@ -140,7 +140,12 @@ private:
     SoundTypeChoice aSound;
     RepeatPattern pattern;
     QString note;
+    // ADDITION
+    int mRid;	// Recode ID
+    int mRinfo;	// Recode Info
+    //
     EventPrivate *d;
+
 };
 
 // Since an event spans multiple day, it is better to have this

@@ -27,6 +27,7 @@
 #include <qimage.h>
 #include <qpaintdevice.h>
 #include <qbitmap.h>
+#include <qgfx_qws.h> // Needed to get the device's width
 
 #include <math.h>
 
@@ -102,10 +103,17 @@ CanvasCard::CanvasCard( eValue v, eSuit s, bool f, QCanvas *canvas ) :
 	Card(v, s, f), QCanvasRectangle( 0, 0, 1, 1, canvas ), cardBack(1), scaleX(1.0), scaleY(1.0)
 {
     if ( !cardsFaces ) {
-	cardsFaces = new QPixmap( Resource::loadPixmap( "cards/card_face" ) );
-	cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0001" ) );
-	cardsChars = new QBitmap( Resource::loadBitmap( "cards/card_chars" ) );
-	cardsSuits = new QBitmap( Resource::loadBitmap( "cards/card_suits" ) );
+	if ( qt_screen->deviceWidth() < 200 ) {
+	    cardsFaces = new QPixmap( Resource::loadPixmap( "cards/card_face_small" ) );
+	    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0001_small" ) );
+	    cardsChars = new QBitmap( Resource::loadBitmap( "cards/card_chars_small" ) );
+	    cardsSuits = new QBitmap( Resource::loadBitmap( "cards/card_suits_small" ) );
+	} else {
+	    cardsFaces = new QPixmap( Resource::loadPixmap( "cards/card_face" ) );
+	    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0001" ) );
+	    cardsChars = new QBitmap( Resource::loadBitmap( "cards/card_chars" ) );
+	    cardsSuits = new QBitmap( Resource::loadBitmap( "cards/card_suits" ) );
+	}
 	cardsCharsUpsideDown = Create180RotatedBitmap( cardsChars );
 	cardsSuitsUpsideDown = Create180RotatedBitmap( cardsSuits );
     }
@@ -126,17 +134,32 @@ void CanvasCard::setCardBack(int b)
 	if ( cardsBacks )
 	    delete cardsBacks;
 
-	switch (cardBack) {
-	    case 0:
-		cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0001" ) ); break;
-	    case 1:
-		cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0002" ) ); break;
-	    case 2:
-		cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0003" ) ); break;
-	    case 3:
-		cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0004" ) ); break;
-	    case 4:
-		cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0005" ) ); break;
+	if ( qt_screen->deviceWidth() < 200 ) {
+	    switch (cardBack) {
+		case 0:
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0001_small" ) ); break;
+		case 1:
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0002_small" ) ); break;
+		case 2:
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0003_small" ) ); break;
+		case 3:
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0004_small" ) ); break;
+		case 4:
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0005_small" ) ); break;
+	    }
+	} else {
+	    switch (cardBack) {
+		case 0:
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0001" ) ); break;
+		case 1:
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0002" ) ); break;
+		case 2:
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0003" ) ); break;
+		case 3:
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0004" ) ); break;
+		case 4:
+		    cardsBacks = new QPixmap( Resource::loadPixmap( "cards/card_back0005" ) ); break;
+	    }
 	}
 
         if ( !isFacing() )
@@ -181,11 +204,19 @@ void CanvasCard::draw(QPainter &painter)
 	else
 	    p->setPen( QColor( 0, 0, 0 ) );
 
-	p->drawPixmap( ix +      0, iy +     0, *cardsFaces );
-	p->drawPixmap( ix +      4, iy +     4, *cardsChars, 7*(getValue()-1), 0, 7, 7 );
-	p->drawPixmap( ix +     12, iy +     4, *cardsSuits, 7*(getSuit()-1), 0, 7, 8 );
-	p->drawPixmap( ix +  w-4-7, iy + h-4-7, *cardsCharsUpsideDown, 7*(12-getValue()+1), 0, 7, 7 );
-	p->drawPixmap( ix + w-12-7, iy + h-5-7, *cardsSuitsUpsideDown, 7*(3-getSuit()+1), 0, 7, 8 );
+	if ( qt_screen->deviceWidth() < 200 ) {
+	    p->drawPixmap( ix +      0, iy +     0, *cardsFaces );
+	    p->drawPixmap( ix +      3, iy +     3, *cardsChars, 5*(getValue()-1), 0, 5, 6 );
+	    p->drawPixmap( ix +     11, iy +     3, *cardsSuits, 5*(getSuit()-1), 0, 5, 6 );
+	    p->drawPixmap( ix +  w-3-5, iy + h-3-6, *cardsCharsUpsideDown, 5*(12-getValue()+1), 0, 5, 6 );
+	    p->drawPixmap( ix + w-11-5, iy + h-3-6, *cardsSuitsUpsideDown, 5*(3-getSuit()+1), 0, 5, 6 );
+	} else {
+	    p->drawPixmap( ix +      0, iy +     0, *cardsFaces );
+	    p->drawPixmap( ix +      4, iy +     4, *cardsChars, 7*(getValue()-1), 0, 7, 7 );
+	    p->drawPixmap( ix +     12, iy +     4, *cardsSuits, 7*(getSuit()-1), 0, 7, 8 );
+	    p->drawPixmap( ix +  w-4-7, iy + h-4-7, *cardsCharsUpsideDown, 7*(12-getValue()+1), 0, 7, 7 );
+	    p->drawPixmap( ix + w-12-7, iy + h-5-7, *cardsSuitsUpsideDown, 7*(3-getSuit()+1), 0, 7, 8 );
+	}
 
     } else {
 	

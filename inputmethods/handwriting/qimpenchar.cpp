@@ -429,7 +429,7 @@ QIMPenCharMatchList QIMPenCharSet::match( QIMPenChar *ch )
 	    err = ch->match( tmplChar );
 	    if ( err <= QIMPEN_MATCH_THRESHOLD ) {
 		if (tmplChar->penStrokes().count() != ch->penStrokes().count())
-		    err = QIMPEN_MATCH_THRESHOLD;
+		    err = QMIN(err*3, QIMPEN_MATCH_THRESHOLD);
 		QIMPenCharMatchList::Iterator it;
 		for ( it = matches.begin(); it != matches.end(); ++it ) {
 		    if ( (*it).penChar->character() == tmplChar->character() &&

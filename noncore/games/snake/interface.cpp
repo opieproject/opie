@@ -63,7 +63,7 @@ SnakeGame::SnakeGame(QWidget* parent, const char* name, WFlags f) :
 
     setCentralWidget(cv);
 
-    welcomescreen();
+    QTimer::singleShot( 16, this, SLOT(welcomescreen()) ); 
     gamestopped = true; 
     waitover = true;
 }
@@ -102,7 +102,7 @@ void SnakeGame::welcomescreen()
    instr->show();
    QCanvasText* cont = new QCanvasText(tr("Press Any Key To Start"), &canvas);
    w = cont->boundingRect().width();
-   cont->move(canvas.width()/2-w/2, canvas.height()/2+80);
+   cont->move(canvas.width()/2-w/2, canvas.height()-20);
    cont->setColor(yellow);
    cont->show(); 
 
@@ -124,12 +124,9 @@ void SnakeGame::newGame()
     showScore(0);
     gamestopped = false;
     waitover = true;
-    int x = canvas.width()/2 - 70;
-    x = x - x % 16;
     int y = canvas.height()-50;
-    y = y - y % 16;
-    (void)new Obstacle(&canvas, x, 32);
-    (void)new Obstacle(&canvas, x, y);
+    (void)new Obstacle(&canvas, 32);
+    (void)new Obstacle(&canvas, y);
     createTargets();
 }
 
@@ -192,7 +189,7 @@ void SnakeGame::gameOver()
    gameover->show();
    gamestopped = true;
    waitover = false;
-   pauseTimer->start(2500);
+   pauseTimer->start(1500);
 }
 
 void SnakeGame::wait()

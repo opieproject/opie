@@ -19,11 +19,11 @@
 **********************************************************************/
 #include <qpe/qpeapplication.h>
 #include <qpe/qlibrary.h>
+#include <qpe/mediaplayerplugininterface.h>
 #include <qpe/config.h>
 #include <qvaluelist.h>
 #include <qobject.h>
 #include <qdir.h>
-#include "mediaplayerplugininterface.h"
 #include "mediaplayerstate.h"
 
 #ifdef QT_NO_COMPONENT
@@ -34,8 +34,8 @@
 #endif
 
 
-//#define MediaPlayerDebug(x)	qDebug x
-#define MediaPlayerDebug(x)
+#define MediaPlayerDebug(x)	qDebug x
+//#define MediaPlayerDebug(x)
 
 
 MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )

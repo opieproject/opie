@@ -163,12 +163,16 @@ main.o: main.cpp \
 		$(QPEDIR)/include/qpe/datebookdb.h \
 		$(QPEDIR)/include/qpe/event.h \
 		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h \
 		$(QPEDIR)/include/qpe/qpeapplication.h
 
 datebookday.o: datebookday.cpp \
 		datebookday.h \
 		$(QPEDIR)/include/qpe/event.h \
 		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h \
 		datebookdayheaderimpl.h \
 		datebookdayheader.h \
 		$(QPEDIR)/include/qpe/datebookdb.h \
@@ -182,6 +186,8 @@ datebook.o: datebook.cpp \
 		$(QPEDIR)/include/qpe/datebookdb.h \
 		$(QPEDIR)/include/qpe/event.h \
 		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h \
 		datebookday.h \
 		datebooksettings.h \
 		datebooksettingsbase.h \
@@ -208,13 +214,14 @@ dateentryimpl.o: dateentryimpl.cpp \
 		dateentry.h \
 		$(QPEDIR)/include/qpe/event.h \
 		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h \
 		repeatentry.h \
 		repeatentrybase.h \
 		$(QPEDIR)/include/qpe/qpeapplication.h \
 		$(QPEDIR)/include/qpe/categoryselect.h \
 		$(QPEDIR)/include/qpe/datebookmonth.h \
 		$(QPEDIR)/include/qpe/global.h \
-		$(QPEDIR)/include/qpe/timeconversion.h \
 		$(QPEDIR)/include/qpe/timestring.h \
 		$(QPEDIR)/include/qpe/tzselect.h
 
@@ -224,6 +231,8 @@ datebookdayheaderimpl.o: datebookdayheaderimpl.cpp \
 		$(QPEDIR)/include/qpe/datebookmonth.h \
 		$(QPEDIR)/include/qpe/event.h \
 		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h \
 		$(QPEDIR)/include/qpe/timestring.h
 
 datebooksettings.o: datebooksettings.cpp \
@@ -235,6 +244,8 @@ datebookweek.o: datebookweek.cpp \
 		datebookweek.h \
 		$(QPEDIR)/include/qpe/event.h \
 		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h \
 		datebookweekheaderimpl.h \
 		datebookweekheader.h \
 		$(QPEDIR)/include/qpe/calendar.h \
@@ -251,6 +262,8 @@ repeatentry.o: repeatentry.cpp \
 		repeatentrybase.h \
 		$(QPEDIR)/include/qpe/event.h \
 		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h \
 		$(QPEDIR)/include/qpe/datebookmonth.h \
 		$(QPEDIR)/include/qpe/qpeapplication.h \
 		$(QPEDIR)/include/qpe/timestring.h
@@ -298,19 +311,25 @@ repeatentrybase.o: repeatentrybase.cpp
 moc_datebookday.o: moc_datebookday.cpp \
 		datebookday.h \
 		$(QPEDIR)/include/qpe/event.h \
-		$(QPEDIR)/include/qpe/palmtoprecord.h
+		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h
 
 moc_datebook.o: moc_datebook.cpp \
 		datebook.h \
 		$(QPEDIR)/include/qpe/datebookdb.h \
 		$(QPEDIR)/include/qpe/event.h \
-		$(QPEDIR)/include/qpe/palmtoprecord.h
+		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h
 
 moc_dateentryimpl.o: moc_dateentryimpl.cpp \
 		dateentryimpl.h \
 		dateentry.h \
 		$(QPEDIR)/include/qpe/event.h \
-		$(QPEDIR)/include/qpe/palmtoprecord.h
+		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h
 
 moc_datebookdayheaderimpl.o: moc_datebookdayheaderimpl.cpp \
 		datebookdayheaderimpl.h \
@@ -319,7 +338,9 @@ moc_datebookdayheaderimpl.o: moc_datebookdayheaderimpl.cpp \
 moc_datebookweek.o: moc_datebookweek.cpp \
 		datebookweek.h \
 		$(QPEDIR)/include/qpe/event.h \
-		$(QPEDIR)/include/qpe/palmtoprecord.h
+		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h
 
 moc_datebookweekheaderimpl.o: moc_datebookweekheaderimpl.cpp \
 		datebookweekheaderimpl.h \
@@ -329,7 +350,9 @@ moc_repeatentry.o: moc_repeatentry.cpp \
 		repeatentry.h \
 		repeatentrybase.h \
 		$(QPEDIR)/include/qpe/event.h \
-		$(QPEDIR)/include/qpe/palmtoprecord.h
+		$(QPEDIR)/include/qpe/palmtoprecord.h \
+		$(QPEDIR)/include/qpe/timeconversion.h \
+		$(QPEDIR)/include/qpe/qpcglobal.h
 
 moc_dateentry.o: moc_dateentry.cpp \
 		dateentry.h

@@ -296,7 +296,10 @@ long WavPlugin::audioGetSample( int ) {
     return 0;
 }
 
-/*
+
+#ifdef OLD_MEDIAPLAYER_API
+
+
 bool WavPlugin::audioReadSamples( short *, int, long, int ) {
     debugMsg( "WavPlugin::audioReadSamples" );
     return FALSE;
@@ -319,12 +322,19 @@ bool WavPlugin::audioReadStereoSamples( short *output, long samples, long& sampl
     debugMsg( "WavPlugin::audioReadStereoSamples" );
     return !d->add( output, samples, samplesMade, TRUE );
 }
-*/
+
+
+#else
+
 
 bool WavPlugin::audioReadSamples( short *output, int channels, long samples, long& samplesMade, int ) {
     debugMsg( "WavPlugin::audioReadSamples" );
     return !d->add( output, samples, samplesMade, channels != 1 );
 }
+
+
+#endif
+
 
 double WavPlugin::getTime() {
     debugMsg( "WavPlugin::getTime" );

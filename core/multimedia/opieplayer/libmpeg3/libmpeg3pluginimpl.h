@@ -21,7 +21,7 @@
 #define LIBMPEG3_PLUGIN_IMPL_H
 
 
-#include "../mediaplayerplugininterface.h"
+#include <qpe/mediaplayerplugininterface.h>
 
 
 class LibMpeg3Plugin;

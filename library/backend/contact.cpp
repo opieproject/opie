@@ -18,6 +18,8 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_CONTACT_MRE
+
 #include "contact.h"
 #include "vobject_p.h"
 #include "qfiledirect_p.h"
@@ -892,6 +894,11 @@ QValueList<Contact> Contact::readVCard( const QString &filename )
     }
 
     return contacts;
+}
+
+bool Contact::match( const QString &regexp ) const
+{
+    return match(QRegExp(regexp));
 }
 
 bool Contact::match( const QRegExp &r ) const

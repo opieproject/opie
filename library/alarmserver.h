@@ -28,6 +28,9 @@ class AlarmServer
 public:
     static void addAlarm ( QDateTime when, const QCString& channel, const QCString& msg, int data=0);
     static void deleteAlarm (QDateTime when, const QCString& channel, const QCString& msg, int data=0);
+
+private:
+    friend int initApplication(int, char **);
     static void initialize();
 };
 

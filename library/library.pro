@@ -8,12 +8,12 @@ HEADERS	=   calendar.h \
 	    menubutton.h \
 	    network.h \
 	    networkinterface.h \
-	    proxies.h \
 	    filemanager.h \
 	    fontmanager.h \
 	    qdawg.h \
 	    datebookmonth.h \
 	    fileselector.h \
+	    fileselector_p.h \
 	    imageedit.h \
 	    qcopenvelope_qws.h \
 	    qpedecoration_qws.h \
@@ -64,7 +64,6 @@ SOURCES	=   calendar.cpp \
 	    menubutton.cpp \
 	    network.cpp \
 	    networkinterface.cpp \
-	    proxies.cpp \
 	    filemanager.cpp \
 	    fontmanager.cpp \
 	    qdawg.cpp \
@@ -115,14 +114,13 @@ SOURCES	=   calendar.cpp \
 	lnkproperties.cpp
 
 # Qt 3 compatibility
-qt2:HEADERS += quuid.h qcom.h qlibrary.h qlibrary_p.h qprocess.h
-qt2:SOURCES += quuid.cpp qlibrary.cpp qlibrary_unix.cpp qprocess.cpp \
-	       qprocess_unix.cpp
+qt2:HEADERS += quuid.h qcom.h qlibrary.h qlibrary_p.h
+qt2:SOURCES += quuid.cpp qlibrary.cpp qlibrary_unix.cpp
 
 INCLUDEPATH += $(QPEDIR)/include backend
 LIBS		+= -ldl -lcrypt -lm
 
-INTERFACES = passwordbase_p.ui proxiesbase_p.ui categoryeditbase_p.ui findwidgetbase_p.ui lnkpropertiesbase_p.ui
+INTERFACES = passwordbase_p.ui categoryeditbase_p.ui findwidgetbase_p.ui lnkpropertiesbase_p.ui
 
 TARGET		= qpe
 DESTDIR		= $(QTDIR)/lib$(PROJMAK)

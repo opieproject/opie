@@ -101,7 +101,12 @@ public:
     // other
     void setNotes( const QString &v ) { replace( Qtopia::Notes, v); }
 
-    bool match( const QRegExp &r ) const;
+    bool match( const QString &regexp ) const;
+
+// DON'T ATTEMPT TO USE THIS
+#ifdef QTOPIA_INTERNAL_CONTACT_MRE
+    bool match( const QRegExp &regexp ) const;
+#endif
 
 //     // custom
 //     void setCustomField( const QString &key, const QString &v )

@@ -23,8 +23,8 @@ class Obstacle : public QCanvasSprite
 {
 
 public:
-   Obstacle(QCanvas*, int x, int y);
+   Obstacle(QCanvas*, int y);
    ~Obstacle();
-   void newObstacle(int x, int y);
+   void newObstacle(int y);
    int rtti() const;
 };

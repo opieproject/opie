@@ -5,7 +5,7 @@
 # Copyright 1999-2000 Trolltech AS.  All rights reserved.
 #
 
-PLATFORM=linux-generic-g++
+PLATFORM=generic
 SHARING=shared
 DEBUG=
 QCONFIGARG=
@@ -29,12 +29,9 @@ then
 fi
 rm .test.qpe.
 
-mkdir -p include/qpe
-( cd include/qpe &&  rm -f *.h; ln -s ../../library/*.h .; ln -s ../../library/backend/*.h .; rm -f *_p.h; )
-
-VERSION_MAJ=$(sed -n -e 's/.*QPE_VERSION "\([0-9]*\)\.[0-9]*\.[0-9]*.*".*/\1/p' <include/qpe/version.h)
-VERSION_MIN=$(sed -n -e 's/.*QPE_VERSION "[0-9]*\.\([0-9]\)\.[0-9]*.*".*/\1/p' <include/qpe/version.h)
-VERSION_PAT=$(sed -n -e 's/.*QPE_VERSION "[0-9]*\.[0-9]*\.\([0-9]*\).*".*/\1/p' <include/qpe/version.h)
+VERSION_MAJ=$(sed -n -e 's/.*QPE_VERSION "\([0-9]*\)\.[0-9]*\.[0-9]*.*".*/\1/p' <library/version.h)
+VERSION_MIN=$(sed -n -e 's/.*QPE_VERSION "[0-9]*\.\([0-9]\)\.[0-9]*.*".*/\1/p' <library/version.h)
+VERSION_PAT=$(sed -n -e 's/.*QPE_VERSION "[0-9]*\.[0-9]*\.\([0-9]*\).*".*/\1/p' <library/version.h)
 
 TOMAKE=
 
@@ -117,6 +114,14 @@ EOF
    exit 0;
 fi
 
+if [ -f library/custom-$PLATFORM.h ]
+then
+    rm -f library/custom.h
+    ln -s custom-$PLATFORM.h library/custom.h
+fi
+
+mkdir -p include/qpe
+( cd include/qpe &&  rm -f *.h; ln -s ../../library/*.h .; ln -s ../../library/backend/*.h .; rm -f *_p.h; )
 
 echo Creating makefiles...
 
