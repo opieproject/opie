@@ -44,6 +44,8 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     QScrollView *sv = new QScrollView( this );
     tmpvb->addWidget( sv, 0, 0 );
     sv->setResizePolicy( QScrollView::AutoOneFit );
+    sv->setHScrollBarMode( QScrollView::AlwaysOff );
+    sv->setVScrollBarMode( QScrollView::AlwaysOff );
     sv->setFrameStyle( QFrame::NoFrame );
     QWidget *container = new QWidget( sv->viewport() );
     sv->addChild( container );
