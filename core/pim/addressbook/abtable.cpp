@@ -185,7 +185,6 @@ bool AbTable::selectContact( int UID )
 {
 	odebug << "AbTable::selectContact( " << UID << " )" << oendl;
 	int rows = numRows();
-	Opie::OPimContact* foundContact = 0l;
 	bool found = false;
 
 	setPaintingEnabled( FALSE );
@@ -355,7 +354,7 @@ void AbTable::keyPressEvent( QKeyEvent *e )
 
 }
 
-void AbTable::moveTo( char c )
+void AbTable::moveTo( char /*c*/ )
 {
 	odebug << "void AbTable::moveTo( char c ) NOT IMPLEMENTED !!" << oendl;
 

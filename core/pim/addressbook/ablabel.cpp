@@ -68,7 +68,7 @@ Opie::OPimContact AbLabel::currentEntry()
 bool AbLabel::selectContact( int UID )
 {
 
-	for ( int r = 0; r < m_viewList.count(); ++r ) {
+	for ( uint r = 0; r < m_viewList.count(); ++r ) {
 		if ( m_viewList.uidAt( r ) == UID ){
 			m_itCurContact.setCurrent( r );
 			break;
