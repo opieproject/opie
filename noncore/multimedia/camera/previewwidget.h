@@ -34,6 +34,10 @@ class PreviewWidget: public QLabel
   protected:
     virtual void timerEvent( QTimerEvent* );
     virtual void resizeEvent( QResizeEvent* );
+    virtual void mousePressEvent( QMouseEvent* );
+
+  signals:
+    void contextMenuRequested();
 
   private:
     QPixmap p;

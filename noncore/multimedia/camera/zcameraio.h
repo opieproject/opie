@@ -16,10 +16,15 @@
 #ifndef ZCAMERAIO_H
 #define ZCAMERAIO_H
 
-class QImage;
+#include <qobject.h>
 
-class ZCameraIO
+class QImage;
+class QTime;
+
+class ZCameraIO : public QObject
 {
+  Q_OBJECT
+
   public:
     virtual ~ZCameraIO();
 
@@ -31,18 +36,24 @@ class ZCameraIO
         YNOFLIP = 0, YFLIP = 8
     };
 
+    // low level interface
+
     bool setCaptureFrame( int w, int h, int zoom = 256, bool rot = true );
+    bool setZoom( int zoom = 0 );
     void setReadMode( int = IMAGE | XFLIP | YFLIP );
 
     bool isShutterPressed(); // not const, because it calls clearShutterLatch
     bool isAvailable() const;
     bool isCapturing() const;
     bool isFinderReversed() const;
-    bool isOpen() const;
 
-    bool snapshot( QImage* );
     bool snapshot( unsigned char* );
+    bool snapshot( QImage* );
+
+    // high level interface
+    bool isOpen() const;
     static ZCameraIO* instance();
+    void captureFrame( int w, int h, int zoom, QImage* image );
 
   protected:
     ZCameraIO();
@@ -50,6 +61,9 @@ class ZCameraIO
     void init();
     bool read( char*, int );
     bool write( char*, int = 0 );
+
+  signals:
+    void shutterClicked();
 
   private:
     int _driver;
@@ -60,6 +74,8 @@ class ZCameraIO
     int _zoom;
     bool _rot;
     int _readlen;
+
+    QTime* _timer;
 };
 
 #endif

@@ -21,6 +21,8 @@
 #include <qimage.h>
 #include <qpixmap.h>
 
+class QAction;
+class QActionGroup;
 class QIconSet;
 class QToolButton;
 class QLabel;
@@ -39,15 +41,33 @@ class CameraMainWindow: public QMainWindow
   public slots:
     void changeZoom( int );
     void systemMessage( const QCString&, const QByteArray& );
-
     void showContextMenu();
+    void resoMenuItemClicked( QAction* );
+    void qualityMenuItemClicked( QAction* );
+    void zoomMenuItemClicked( QAction* );
+    void outputMenuItemClicked( QAction* );
+    void shutterClicked();
 
   protected:
+    void init();
 
   private:
     PreviewWidget* preview;
     int _rotation;
     QCopChannel* _sysChannel;
+
+    QActionGroup* resog;
+    QActionGroup* qualityg;
+    QActionGroup* zoomg;
+    QActionGroup* outputg;
+
+    int quality;
+    int zoom;
+    int captureX;
+    int captureY;
+    QString captureFormat;
+
+    int _pics;
 };
 
 #endif

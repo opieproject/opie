@@ -18,6 +18,8 @@
 
 #include <opie2/odebug.h>
 
+#include <assert.h>
+
 PreviewWidget::PreviewWidget( QWidget * parent, const char * name, WFlags f )
            :QLabel( parent, name, f )
 {
@@ -27,9 +29,11 @@ PreviewWidget::PreviewWidget( QWidget * parent, const char * name, WFlags f )
     setBackgroundMode( NoBackground );
     #endif
 
-
-    startTimer( 150 );
-    //startTimer( 2000 );
+    #ifndef QT_NO_DEBUG
+    if ( ZCameraIO::instance()->isOpen() ) startTimer( 1500 );
+    #else
+    if ( ZCameraIO::instance()->isOpen() ) startTimer( 200 );
+    #endif
 };
 
 
@@ -60,5 +64,11 @@ void PreviewWidget::timerEvent( QTimerEvent*  )
         p.convertFromImage( i );
         setPixmap( p );
     }
+}
+
+
+void PreviewWidget::mousePressEvent( QMouseEvent* )
+{
+    emit contextMenuRequested();
 }
 

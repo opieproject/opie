@@ -15,7 +15,7 @@ SOURCES         = zcameraio.cpp \
 
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lqpe -lopiecore2
+LIBS            += -lqpe -lopie -lopiecore2
 INTERFACES      =
 TARGET          = opiecam
 

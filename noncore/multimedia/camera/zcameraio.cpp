@@ -60,6 +60,7 @@ void ZCameraIO::init()
         ofatal << "Don't create more than one ZCameraIO instances." << oendl;
     else
     {
+        _timer = new QTime();
         setReadMode( STATUS );
     }
 }
@@ -83,8 +84,18 @@ bool ZCameraIO::isOpen() const
 
 bool ZCameraIO::isShutterPressed()
 {
-    return _status[0] == 'S';
-    clearShutterLatch();
+    if ( _timer->elapsed() < 1000 ) //TODO: make this customizable?
+    {
+        clearShutterLatch();
+        return false;
+    }
+    if ( _status[0] == 'S' )
+    {
+        _timer->restart();
+        clearShutterLatch();
+        return true;
+    }
+    else return false;
 }
 
 
@@ -124,20 +135,28 @@ bool ZCameraIO::setCaptureFrame( int width, int height, int zoom, bool rot )
 }
 
 
+bool ZCameraIO::setZoom( int zoom )
+{
+    return setCaptureFrame( _width, _height, zoom*256, _rot );
+}
+
+
 void ZCameraIO::setReadMode( int mode )
 {
     char b[10];
     sprintf( b, "M=%d", mode );
     write( b, mode <= 9 ? 3 : 4 );
-    if ( mode & 1 ) // STATUS bit is set
+    if ( mode & STATUS ) // STATUS bit is set
+    {
         read( _status, 4 );
+        if ( isShutterPressed() ) emit shutterClicked();
+    }
 }
 
 
 void ZCameraIO::clearShutterLatch()
 {
-    char b = 'B';
-    write( &b, 1 );
+    write( "B", 1 );
 }
 
 
@@ -212,6 +231,7 @@ bool ZCameraIO::snapshot( QImage* image )
     return true;
 }
 
+
 bool ZCameraIO::snapshot( unsigned char* buf )
 {
     setReadMode( IMAGE | XFLIP | YFLIP );
@@ -227,4 +247,18 @@ bool ZCameraIO::snapshot( unsigned char* buf )
 
     return true;
 }
+
+
+void ZCameraIO::captureFrame( int w, int h, int zoom, QImage* image )
+{
+    int pw = _width;
+    int ph = _height;
+    if ( _rot )
+        setCaptureFrame( h, w, zoom*256, true );
+    else
+        setCaptureFrame( w, h, zoom*256, false );
+    snapshot( image );
+    setCaptureFrame( pw, ph, _zoom, _rot );
+}
+
 
