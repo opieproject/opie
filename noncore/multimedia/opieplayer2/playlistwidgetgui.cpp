@@ -56,8 +56,6 @@
 //only needed for the random play
 #include <stdlib.h>
 
-#include "audiowidget.h"
-#include "videowidget.h"
 #include "mediaplayerstate.h"
 
 PlayListWidgetGui::PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidget* parent, const char* name )
