@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.2 2002-11-23 20:33:08 max Exp $ */
+/* $Id: cardmode.hh,v 1.3 2002-11-23 21:42:41 mjm Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -12,8 +12,6 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <net/bpf.h>
-
-#endif /* CARDMODE_HH */
 
 /* Defines, used for the card setup */
 #define   DEFAULT_PATH       "/proc/driver/aironet/%s/Config"
@@ -33,4 +31,4 @@
 int card_into_monitormode (char * device, int cardtype);
 int card_set_promisc_up (char * device);
 
-
+#endif /* CARDMODE_HH */

@@ -3,7 +3,7 @@
  *  This works only with cisco wireless cards with an rfmon
  *  able driver and not with wifi stuff.
  *
- *  $Id: sniffer.cc,v 1.4 2002-11-23 20:48:21 max Exp $
+ *  $Id: sniffer.cc,v 1.5 2002-11-23 21:42:41 mjm Exp $
  */
 
 #include "config.hh"
@@ -11,45 +11,6 @@
 #include "sniffer.hh"
 #include "ieee802_11.hh"
 #include "extract.hh"
-
-int main(void)
-{	
-	if(card_into_monitormode (SNIFFER_DEVICE, CARD_TYPE_NG) < 0)
-		return 0;
-	start_sniffing (SNIFFER_DEVICE);	
-
-  return 1;
-}
-
-int start_sniffing (char * device)
-{
- 
-	pcap_t *handletopcap;		  /* The handle to the libpcap */
-	char errbuf[PCAP_ERRBUF_SIZE]; /* The errorbuffer of libpacap */
-	struct pcap_pkthdr header;     /* The packet header from pcap*/
-    const u_char *packet;          /* The actual packet content*/
-
-	/* opening the pcap for sniffing */
-	handletopcap = pcap_open_live(device, BUFSIZ, 1, 1000, errbuf);
-
-	#ifdef HAVE_PCAP_NONBLOCK
-    	pcap_setnonblock(handletopcap, 1, errstr);
-	#endif
-	/*start scanning */
-//	pcap_loop(handletopcap,-1,process_packets,NULL);
-	/* Loope endless */
-	while(1)
-	{
-		/* Grab one single packet */
- 	   packet = pcap_next(handletopcap, &header);
-
-		/* process the packet */
-		process_packets(NULL,&header,*&packet);		
-	}
-
-	printf("\nDone processing packets... wheew!\n");
-	return 1;
-}
 
 void process_packets(u_char *useless,const struct pcap_pkthdr* pkthdr,const u_char* packet)
 {
@@ -298,7 +259,7 @@ int handle_beacon(u_int16_t fc, const u_char *p,struct packetinfo *ppinfo)
 } /* End of handle_beacon */
 
 
-static int GetHeaderLength(u_int16_t fc)
+int GetHeaderLength(u_int16_t fc)
 {
 	int iLength=0;
 

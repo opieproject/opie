@@ -1,5 +1,6 @@
-/* $Id: cardmode.cc,v 1.3 2002-11-23 21:20:13 max Exp $ */
+/* $Id: cardmode.cc,v 1.4 2002-11-23 21:42:41 mjm Exp $ */
 
+#include "config.hh"
 #include "cardmode.hh"
 
 int card_into_monitormode (char *device, int cardtype)
@@ -16,7 +17,7 @@ int card_into_monitormode (char *device, int cardtype)
 	{
 		printf ("Fatal error i did not have any interfaces to sniff on\n");
 		return 0;
-    }
+	}
 
 	/* Setting the prmiscous and up flag to the interface */
 	if (card_set_promisc_up (device) == 0)

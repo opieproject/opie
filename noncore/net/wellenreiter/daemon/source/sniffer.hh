@@ -1,4 +1,4 @@
-/* $Id: sniffer.hh,v 1.2 2002-11-23 20:12:57 max Exp $ */
+/* $Id: sniffer.hh,v 1.3 2002-11-23 21:42:41 mjm Exp $ */
 
 #ifndef SNIFFER_HH
 #define SNIFFER_HH
@@ -13,9 +13,7 @@
 #include <arpa/inet.h>
 #include <net/bpf.h>
 
-
 #define   NONBROADCASTING "non-broadcasting"
-
 
 /* holds all the interresting data */
 struct packetinfo
@@ -36,16 +34,12 @@ struct packetinfo
 	int ssid_len;
 };
 
-
-/* Prototypes */
-int sniffer(void);
-int start_sniffing (char * device);
 void process_packets(u_char *useless,const struct pcap_pkthdr* pkthdr,const u_char* packet);
 int decode_80211b_hdr(const u_char *p,struct packetinfo *ppinfo);
 void etheraddr_string(register const u_char *ep,char * text);
 int handle_beacon(u_int16_t fc, const u_char *p,struct packetinfo *ppinfo);
 
-static int GetHeaderLength(u_int16_t fc);
+int GetHeaderLength(u_int16_t fc);
 
 /*
  * True if  "l" bytes of "var" were captured.
