@@ -31,90 +31,96 @@
 
 */
 
-#ifndef PLAY_LIST_WIDGET_H
-#define PLAY_LIST_WIDGET_H
+#ifndef PLAY_LIST_WIDGET_GUI_H
+#define PLAY_LIST_WIDGET_GUI_H
 
 #include <qmainwindow.h>
 #include <qpe/applnk.h>
+#include <qpe/resource.h>
+#include <qpe/qpemenubar.h>
+
 #include <qtabwidget.h>
 #include <qpe/fileselector.h>
 #include <qpushbutton.h>
 #include <qpopupmenu.h>
+#include <qaction.h>
 
-#include "playlistwidgetgui.h"
 
+class PlayListWidgetPrivate;
+class PlayListSelection;
 
-//class PlayListWidgetPrivate;
 class Config;
+class QPEToolBar;
 class QListViewItem;
 class QListView;
 class QPoint;
 class QAction;
 class QLabel;
 
-class PlayListWidget : public PlayListWidgetGui {
+class PlayListWidgetPrivate {
+public:
+    QToolButton *tbPlay, *tbFull, *tbLoop,  *tbShuffle, *tbAddToList,  *tbRemoveFromList, *tbMoveUp, *tbMoveDown, *tbRemove;
+    QFrame *playListFrame;
+    FileSelector *files;
+    PlayListSelection *selectedFiles;
+    bool setDocumentUsed;
+    DocLnk *current;
+};
+
+
+class ToolButton : public QToolButton {
+public:
+    ToolButton( QWidget *parent, const char *name, const QString& icon, QObject *handler, const QString& slot, bool t = FALSE )
+        : QToolButton( parent, name ) {
+        setTextLabel( name );
+        setPixmap( Resource::loadPixmap( icon ) );
+        setAutoRaise( TRUE );
+        setFocusPolicy( QWidget::NoFocus );
+        setToggleButton( t );
+        connect( this, t ? SIGNAL( toggled(bool) ) : SIGNAL( clicked() ), handler, slot );
+        QPEMenuToolFocusManager::manager()->addWidget( this );
+    }
+};
+
+
+class MenuItem : public QAction {
+
+public:
+    MenuItem( QWidget *parent, const QString& text, QObject *handler, const QString& slot )
+        : QAction( text, QString::null, 0, 0 ) {
+        connect( this, SIGNAL( activated() ), handler, slot );
+        addTo( parent );
+    }
+};
+
+class PlayListWidgetGui : public QMainWindow {
     Q_OBJECT
 public:
-    PlayListWidget( QWidget* parent=0, const char* name=0, WFlags fl=0 );
-    ~PlayListWidget();
-    DocLnkSet files;
-    DocLnkSet vFiles;
+    PlayListWidgetGui( QWidget* parent=0, const char* name=0, WFlags fl=0 );
+    ~PlayListWidgetGui();
+
+protected:
+    QTabWidget * tabWidget;
+    QListView *audioView, *videoView, *playlistView;
+    QLabel *libString;
+    QPopupMenu *pmView ;
     bool fromSetDocument;
     bool insanityBool;
     QString setDocFileRef;
     // retrieve the current playlist entry (media file link)
-    const DocLnk *current();
-    void useSelectedDocument();
+    QPushButton *tbDeletePlaylist;
     int selected;
+    QPopupMenu *pmPlayList;
+    FileSelector*  playLists;
+    QPopupMenu *skinsMenu;
+    PlayListWidgetPrivate *d; // Private implementation data
+    QVBox *vbox1;
+    QVBox *vbox5;
+    QPEToolBar *bar;
+    void setActiveWindow(); // need to handle this to show the right view
+    void setView( char );
 
-public slots:
-    bool first();
-    bool last();
-    bool next();
-    bool prev();
-    void writeConfig( Config& cfg ) const;
-
-protected:
-    void keyReleaseEvent( QKeyEvent *e);
-
-private:
-    int defaultSkinIndex;
-    bool audioScan, videoScan;
-    void readm3u(const QString &);
-    void readPls(const QString &);
-    void initializeStates();
-    void readConfig( Config& cfg );
-    void populateAudioView();
-    void populateVideoView();
-
-private slots:
-    void populateSkinsMenu();
-    void skinsMenuActivated(int);
-    void pmViewActivated(int);
-    void writem3u();
-    void scanForAudio();
-    void scanForVideo();
-    void openFile();
-    void setDocument( const QString& fileref );
-    void addToSelection( const DocLnk& ); // Add a media file to the playlist
-    void addToSelection( QListViewItem* ); // Add a media file to the playlist
-    void setPlaylist( bool ); // Show/Hide the playlist
-    void clearList();
-    void addAllToList();
-    void addAllMusicToList();
-    void addAllVideoToList();
-    void saveList();  // Save the playlist
-    void loadList( const DocLnk &);  // Load a playlist
-    void playIt( QListViewItem *);
-    void btnPlay(bool);
-    void deletePlaylist();
-    void addSelected();
-    void removeSelected();
-    void tabChanged(QWidget*);
-    void viewPressed( int, QListViewItem *, const QPoint&, int);
-    void playlistViewPressed( int, QListViewItem *, const QPoint&, int);
-    void playSelected();
 };
 
-#endif // PLAY_LIST_WIDGET_H
+#endif
 

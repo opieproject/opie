@@ -1,309 +1,132 @@
+/*
+                            This file is part of the Opie Project
 
-#define QTOPIA_INTERNAL_FSLP
-#include <qpe/qpemenubar.h>
+                             Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
+                             Copyright (c)  2002 L. Potter <ljp@llornkcor.com>
+                             Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+
+*/
+
 #include <qpe/qpetoolbar.h>
-#include <qpe/fileselector.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/lnkproperties.h>
 #include <qpe/storage.h>
 #include <qpe/mimetype.h>
-
-#include <qpe/applnk.h>
-#include <qpopupmenu.h>
-#include <qpe/config.h>
 #include <qpe/global.h>
 #include <qpe/resource.h>
-#include <qaction.h>
-#include <qcursor.h>
-#include <qimage.h>
-#include <qfile.h>
+
 #include <qdir.h>
-#include <qlayout.h>
-#include <qlabel.h>
-#include <qlist.h>
-#include <qlistbox.h>
-#include <qmainwindow.h>
 #include <qmessagebox.h>
-#include <qtoolbutton.h>
-#include <qtabwidget.h>
-#include <qlistview.h>
-#include <qpoint.h>
-#include <qlineedit.h>
-#include <qpushbutton.h>
 #include <qregexp.h>
 #include <qtextstream.h>
-
 
 #include "playlistselection.h"
 #include "playlistwidget.h"
 #include "mediaplayerstate.h"
-
 #include "inputDialog.h"
 
+//only needed for the random play
 #include <stdlib.h>
+
 #include "audiowidget.h"
 #include "videowidget.h"
-
-#define BUTTONS_ON_TOOLBAR
-#define SIDE_BUTTONS
-#define CAN_SAVE_LOAD_PLAYLISTS
 
 extern MediaPlayerState *mediaPlayerState;
 
 
-class PlayListWidgetPrivate {
-public:
-  QToolButton *tbPlay, *tbFull, *tbLoop, *tbScale, *tbShuffle, *tbAddToList,  *tbRemoveFromList, *tbMoveUp, *tbMoveDown, *tbRemove;
-  QFrame *playListFrame;
-  FileSelector *files;
-  PlayListSelection *selectedFiles;
-  bool setDocumentUsed;
-  DocLnk *current;
-};
-
-
-class ToolButton : public QToolButton {
-public:
-  ToolButton( QWidget *parent, const char *name, const QString& icon, QObject *handler, const QString& slot, bool t = FALSE )
-    : QToolButton( parent, name ) {
-    setTextLabel( name );
-    setPixmap( Resource::loadPixmap( icon ) );
-    setAutoRaise( TRUE );
-    setFocusPolicy( QWidget::NoFocus );
-    setToggleButton( t );
-    connect( this, t ? SIGNAL( toggled(bool) ) : SIGNAL( clicked() ), handler, slot );
-    QPEMenuToolFocusManager::manager()->addWidget( this );
-  }
-};
-
-
-class MenuItem : public QAction {
-public:
-  MenuItem( QWidget *parent, const QString& text, QObject *handler, const QString& slot )
-    : QAction( text, QString::null, 0, 0 ) {
-    connect( this, SIGNAL( activated() ), handler, slot );
-    addTo( parent );
-  }
-};
-
-
 PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
-  : QMainWindow( parent, name, fl ) {
+    : PlayListWidgetGui( parent, name, fl ) {
 
-  d = new PlayListWidgetPrivate;
-  d->setDocumentUsed = FALSE;
-  d->current = NULL;
-  fromSetDocument = FALSE;
-  insanityBool=FALSE;
-  audioScan = FALSE;
-  videoScan = FALSE;
+    d->tbAddToList =  new ToolButton( bar, tr( "Add to Playlist" ), "opieplayer2/add_to_playlist",
+                                      this , SLOT(addSelected() ) );
+    d->tbRemoveFromList = new ToolButton( bar, tr( "Remove from Playlist" ), "opieplayer2/remove_from_playlist",
+                                          this , SLOT(removeSelected() ) );
+    d->tbPlay    = new ToolButton( bar, tr( "Play" ), "opieplayer2/play",
+                                   this , SLOT( btnPlay( bool) ), TRUE );
+    d->tbShuffle = new ToolButton( bar, tr( "Randomize" ),"opieplayer2/shuffle",
+                                   mediaPlayerState, SLOT( setShuffled( bool ) ), TRUE );
+    d->tbLoop    = new ToolButton( bar, tr( "Loop" ), "opieplayer2/loop",
+                                   mediaPlayerState, SLOT( setLooping( bool ) ), TRUE );
 
-  setBackgroundMode( PaletteButton );
+    (void)new MenuItem( pmPlayList, tr( "Clear List" ), this, SLOT( clearList() ) );
+    (void)new MenuItem( pmPlayList, tr( "Add all audio files" ), this, SLOT( addAllMusicToList() ) );
+    (void)new MenuItem( pmPlayList, tr( "Add all video files" ), this, SLOT( addAllVideoToList() ) );
+    (void)new MenuItem( pmPlayList, tr( "Add all files" ), this, SLOT( addAllToList() ) );
+    pmPlayList->insertSeparator(-1);
+    (void)new MenuItem( pmPlayList, tr( "Save PlayList" ), this, SLOT( saveList() ) );
+    (void)new MenuItem( pmPlayList, tr( "Export playlist to m3u" ), this, SLOT(writem3u() ) );
+    pmPlayList->insertSeparator(-1);
+    (void)new MenuItem( pmPlayList, tr( "Open File or URL" ), this,SLOT( openFile() ) );
+    pmPlayList->insertSeparator(-1);
+    (void)new MenuItem( pmPlayList, tr( "Rescan for Audio Files" ), this,SLOT( scanForAudio() ) );
+    (void)new MenuItem( pmPlayList, tr( "Rescan for Video Files" ), this,SLOT( scanForVideo() ) );
 
-//  setCaption( tr("OpiePlayer") );
-//  setIcon( Resource::loadPixmap( "opieplayer2/MPEGPlayer" ) );
+    pmView->insertItem(  Resource::loadPixmap("fullscreen") , tr( "Full Screen"), mediaPlayerState, SLOT( toggleFullscreen() ) );
 
-  setToolBarsMovable( FALSE );
+    Config cfg( "OpiePlayer" );
+    bool b= cfg.readBoolEntry("FullScreen", 0);
+    mediaPlayerState->setFullscreen(  b );
+    pmView->setItemChecked( -16, b );
 
-  // Create Toolbar
-  QPEToolBar *toolbar = new QPEToolBar( this );
-  toolbar->setHorizontalStretchable( TRUE );
+    (void)new ToolButton( vbox1, tr( "Move Up" ),   "opieplayer2/up",   d->selectedFiles, SLOT(moveSelectedUp() ) );
+    (void)new ToolButton( vbox1, tr( "Remove" ),    "opieplayer2/cut",  d->selectedFiles, SLOT(removeSelected() ) );
+    (void)new ToolButton( vbox1, tr( "Move Down" ), "opieplayer2/down", d->selectedFiles, SLOT(moveSelectedDown() ) );
+    QVBox *stretch2 = new QVBox( vbox1 );
 
-  // Create Menubar
-  QPEMenuBar *menu = new QPEMenuBar( toolbar );
-  menu->setMargin( 0 );
+    connect( tbDeletePlaylist, ( SIGNAL( released() ) ), SLOT( deletePlaylist() ) );
+    connect( pmView, SIGNAL( activated( int ) ), this, SLOT( pmViewActivated( int ) ) );
+    connect( skinsMenu, SIGNAL( activated( int ) ) , this, SLOT( skinsMenuActivated( int ) ) );
+    connect( d->selectedFiles, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int) ),
+             this,SLOT( playlistViewPressed( int, QListViewItem *, const QPoint&, int ) ) );
+    connect( audioView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int ) ),
+             this,SLOT( viewPressed( int, QListViewItem *, const QPoint&, int ) ) );
+    connect( audioView, SIGNAL( returnPressed( QListViewItem *) ),
+             this,SLOT( playIt( QListViewItem *) ) );
+    connect( audioView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
+    connect( videoView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int) ),
+             this,SLOT( viewPressed( int, QListViewItem *, const QPoint&, int) ) );
+    connect( videoView, SIGNAL( returnPressed( QListViewItem *) ),
+             this,SLOT( playIt( QListViewItem *) ) );
+    connect( videoView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
+    connect( playLists, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( loadList( const DocLnk & ) ) );
+    connect( tabWidget, SIGNAL ( currentChanged(QWidget*) ), this, SLOT( tabChanged( QWidget* ) ) );
+    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), d->tbPlay,  SLOT( setOn( bool ) ) );
+    connect( mediaPlayerState, SIGNAL( loopingToggled( bool ) ), d->tbLoop, SLOT( setOn( bool ) ) );
+    connect( mediaPlayerState, SIGNAL( shuffledToggled( bool ) ), d->tbShuffle, SLOT( setOn( bool ) ) );
+    connect( mediaPlayerState, SIGNAL( playlistToggled( bool ) ), this, SLOT( setPlaylist( bool ) ) );
+    connect( d->selectedFiles, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( playIt( QListViewItem *) ) );
 
-  QPEToolBar *bar = new QPEToolBar( this );
-  bar->setLabel( tr( "Play Operations" ) );
+    readConfig( cfg );
+    QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "" );
+    loadList(DocLnk( currentPlaylist ) );
+    setCaption( tr( "OpiePlayer: " ) + currentPlaylist );
 
-  tbDeletePlaylist = new QPushButton( Resource::loadIconSet("trash"),"",bar,"close");
-  tbDeletePlaylist->setFlat(TRUE);
-  tbDeletePlaylist->setFixedSize(20,20);
-
-  d->tbAddToList =  new ToolButton( bar, tr( "Add to Playlist" ), "opieplayer2/add_to_playlist",
-                                    this , SLOT(addSelected()) );
-  d->tbRemoveFromList = new ToolButton( bar, tr( "Remove from Playlist" ), "opieplayer2/remove_from_playlist",
-                                        this , SLOT(removeSelected()) );
-  d->tbPlay    = new ToolButton( bar, tr( "Play" ), "opieplayer2/play",
-                                 this , SLOT( btnPlay(bool) ), TRUE );
-  d->tbShuffle = new ToolButton( bar, tr( "Randomize" ),"opieplayer2/shuffle",
-                                 mediaPlayerState, SLOT(setShuffled(bool)), TRUE );
-  d->tbLoop    = new ToolButton( bar, tr( "Loop" ),"opieplayer2/loop",
-                                 mediaPlayerState, SLOT(setLooping(bool)), TRUE );
-  tbDeletePlaylist->hide();
-
-  QPopupMenu *pmPlayList = new QPopupMenu( this );
-  menu->insertItem( tr( "File" ), pmPlayList );
-  (void)new MenuItem( pmPlayList, tr( "Clear List" ), this, SLOT( clearList() ) );
-  (void)new MenuItem( pmPlayList, tr( "Add all audio files" ), this, SLOT( addAllMusicToList() ) );
-  (void)new MenuItem( pmPlayList, tr( "Add all video files" ), this, SLOT( addAllVideoToList() ) );
-  (void)new MenuItem( pmPlayList, tr( "Add all files" ), this, SLOT( addAllToList() ) );
-  pmPlayList->insertSeparator(-1);
-  (void)new MenuItem( pmPlayList, tr( "Save PlayList" ), this, SLOT( saveList() ) );
-  (void)new MenuItem( pmPlayList, tr( "Export playlist to m3u" ), this, SLOT(writem3u() ) );
-  pmPlayList->insertSeparator(-1);
-  (void)new MenuItem( pmPlayList, tr( "Open File or URL" ), this,SLOT( openFile() ) );
-  pmPlayList->insertSeparator(-1);
-  (void)new MenuItem( pmPlayList, tr( "Rescan for Audio Files" ), this,SLOT( scanForAudio() ) );
-  (void)new MenuItem( pmPlayList, tr( "Rescan for Video Files" ), this,SLOT( scanForVideo() ) );
-
-  pmView = new QPopupMenu( this );
-  menu->insertItem( tr( "View" ), pmView );
-  pmView->isCheckable();
-
-  pmView->insertItem(  Resource::loadPixmap("fullscreen") , tr( "Full Screen"), mediaPlayerState, SLOT( toggleFullscreen() ) );
-
-  Config cfg( "OpiePlayer" );
-  bool b= cfg.readBoolEntry("FullScreen", 0);
-  mediaPlayerState->setFullscreen(  b );
-  pmView->setItemChecked( -16, b );
-
-  //    pmView->insertItem(  Resource::loadPixmap("opieplayer/scale") , tr( "Scale"), mediaPlayerState, SLOT(toggleScaled() ) );
-
-  pmView->insertSeparator(-1);
-
-  skinsMenu = new QPopupMenu( this );
-  pmView->insertItem( tr( "Skins" ), skinsMenu );
-  skinsMenu->isCheckable();
-  populateSkinsMenu();
-
-  QVBox *vbox5 = new QVBox( this ); vbox5->setBackgroundMode( PaletteButton );
-  QVBox *vbox4 = new QVBox( vbox5 ); vbox4->setBackgroundMode( PaletteButton );
-
-  QHBox *hbox6 = new QHBox( vbox4 ); hbox6->setBackgroundMode( PaletteButton );
-
-  tabWidget = new QTabWidget( hbox6, "tabWidget" );
-  //    tabWidget->setTabShape(QTabWidget::Triangular);
-
-  QWidget *pTab;
-  pTab = new QWidget( tabWidget, "pTab" );
-  tabWidget->insertTab( pTab,"Playlist");
-
-
-  QGridLayout *Playout = new QGridLayout( pTab );
-  Playout->setSpacing( 2);
-  Playout->setMargin( 2);
-
-  // Add the playlist area
-
-  QVBox *vbox3 = new QVBox( pTab ); vbox3->setBackgroundMode( PaletteButton );
-  d->playListFrame = vbox3;
-
-  QHBox *hbox2 = new QHBox( vbox3 ); hbox2->setBackgroundMode( PaletteButton );
-
-  d->selectedFiles = new PlayListSelection( hbox2);
-  QVBox *vbox1 = new QVBox( hbox2 ); vbox1->setBackgroundMode( PaletteButton );
-
-  QPEApplication::setStylusOperation( d->selectedFiles->viewport(),QPEApplication::RightOnHold);
-
-  QVBox *stretch1 = new QVBox( vbox1 ); stretch1->setBackgroundMode( PaletteButton ); // add stretch
-  (void)new ToolButton( vbox1, tr( "Move Up" ),   "opieplayer2/up",   d->selectedFiles, SLOT(moveSelectedUp()) );
-  (void)new ToolButton( vbox1, tr( "Remove" ),    "opieplayer2/cut",  d->selectedFiles, SLOT(removeSelected()) );
-  (void)new ToolButton( vbox1, tr( "Move Down" ), "opieplayer2/down", d->selectedFiles, SLOT(moveSelectedDown()) );
-  QVBox *stretch2 = new QVBox( vbox1 ); stretch2->setBackgroundMode( PaletteButton ); // add stretch
-
-
-  Playout->addMultiCellWidget( vbox3, 0, 0, 0, 1 );
-
-  QWidget *aTab;
-  aTab = new QWidget( tabWidget, "aTab" );
-
-  QGridLayout *Alayout = new QGridLayout( aTab );
-  Alayout->setSpacing( 2);
-  Alayout->setMargin( 2);
-
-  audioView = new QListView( aTab, "Audioview" );
-  audioView->addColumn( tr("Title"),140);
-  audioView->addColumn(tr("Size"), -1);
-  audioView->addColumn(tr("Media"),-1);
-  audioView->setColumnAlignment(1, Qt::AlignRight);
-  audioView->setColumnAlignment(2, Qt::AlignRight);
-  audioView->setAllColumnsShowFocus(TRUE);
-  audioView->setSorting(0,TRUE);
-
-  audioView->setMultiSelection( TRUE );
-  audioView->setSelectionMode( QListView::Extended);
-
-  Alayout->addMultiCellWidget( audioView, 0, 0, 0, 1 );
-
-  tabWidget->insertTab(aTab,tr("Audio"));
-
-  QPEApplication::setStylusOperation( audioView->viewport(),QPEApplication::RightOnHold);
-
-  QWidget *vTab;
-  vTab = new QWidget( tabWidget, "vTab" );
-
-  QGridLayout *Vlayout = new QGridLayout( vTab );
-  Vlayout->setSpacing( 2);
-  Vlayout->setMargin( 2);
-
-  videoView = new QListView( vTab, "Videoview" );
-
-  videoView->addColumn(tr("Title"),140);
-  videoView->addColumn(tr("Size"),-1);
-  videoView->addColumn(tr("Media"),-1);
-  videoView->setColumnAlignment(1, Qt::AlignRight);
-  videoView->setColumnAlignment(2, Qt::AlignRight);
-  videoView->setAllColumnsShowFocus(TRUE);
-  videoView->setSorting(0,TRUE);
-
-  videoView->setMultiSelection( TRUE );
-  videoView->setSelectionMode( QListView::Extended);
-
-  Vlayout->addMultiCellWidget( videoView, 0, 0, 0, 1 );
-
-  QPEApplication::setStylusOperation( videoView->viewport(),QPEApplication::RightOnHold);
-
-  tabWidget->insertTab( vTab,tr("Video"));
-
-  //playlists list
-  QWidget *LTab;
-  LTab = new QWidget( tabWidget, "LTab" );
-  QGridLayout *Llayout = new QGridLayout( LTab );
-  Llayout->setSpacing( 2);
-  Llayout->setMargin( 2);
-
-  playLists = new FileSelector( "playlist/plain", LTab, "fileselector" , FALSE, FALSE); //buggy
-  Llayout->addMultiCellWidget( playLists, 0, 0, 0, 1 );
-
-  tabWidget->insertTab(LTab,tr("Lists"));
-
-  connect(tbDeletePlaylist,(SIGNAL(released())),SLOT( deletePlaylist()));
-
-  connect( pmView, SIGNAL( activated(int)), this, SLOT( pmViewActivated(int) ) );
-
-  connect( skinsMenu, SIGNAL( activated(int)), this, SLOT(skinsMenuActivated(int) ) );
-
-  //    connect( scaleButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleScaled() ) );
-
-  connect( d->selectedFiles, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-           this,SLOT( playlistViewPressed(int, QListViewItem *, const QPoint&, int)) );
-  connect( audioView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-           this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
-  connect( audioView, SIGNAL( returnPressed( QListViewItem *)),
-           this,SLOT( playIt( QListViewItem *)) );
-  connect( audioView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
-  connect( videoView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-           this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
-  connect( videoView, SIGNAL( returnPressed( QListViewItem *)),
-           this,SLOT( playIt( QListViewItem *)) );
-  connect( videoView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
-  connect( playLists, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( loadList( const DocLnk & ) ) );
-  connect( tabWidget, SIGNAL (currentChanged(QWidget*)),this,SLOT(tabChanged(QWidget*)));
-  connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ),    d->tbPlay,    SLOT( setOn( bool ) ) );
-  connect( mediaPlayerState, SIGNAL( loopingToggled( bool ) ),    d->tbLoop,    SLOT( setOn( bool ) ) );
-  connect( mediaPlayerState, SIGNAL( shuffledToggled( bool ) ),   d->tbShuffle, SLOT( setOn( bool ) ) );
-  connect( mediaPlayerState, SIGNAL( playlistToggled( bool ) ),   this,         SLOT( setPlaylist( bool ) ) );
-  connect( d->selectedFiles, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( playIt( QListViewItem *) ) );
-
-  setCentralWidget( vbox5 );
-
-  readConfig( cfg );
-  QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
-  loadList(DocLnk( currentPlaylist));
-  setCaption(tr("OpiePlayer: ")+ currentPlaylist );
-
-  initializeStates();
+    // see which skins are installed
+    populateSkinsMenu();
+    initializeStates();
 }
 
 
@@ -311,479 +134,504 @@ PlayListWidget::~PlayListWidget() {
 /* fixing symptoms and not sources is entirely stupid - zecke */
 //  Config cfg( "OpiePlayer" );
 //  writeConfig( cfg );
-
-  if ( d->current ) {
-    delete d->current;
-  }
-  delete d;
+    if ( d->current ) {
+        delete d->current;
+    }
+    delete d;
 }
 
 
 void PlayListWidget::initializeStates() {
-
-  d->tbPlay->setOn( mediaPlayerState->playing() );
-  d->tbLoop->setOn( mediaPlayerState->looping() );
-  d->tbShuffle->setOn( mediaPlayerState->shuffled() );
-  setPlaylist( true);
+    d->tbPlay->setOn( mediaPlayerState->playing() );
+    d->tbLoop->setOn( mediaPlayerState->looping() );
+    d->tbShuffle->setOn( mediaPlayerState->shuffled() );
+    setPlaylist( true );
 }
 
 
 void PlayListWidget::readConfig( Config& cfg ) {
-  cfg.setGroup("PlayList");
-  QString currentString = cfg.readEntry("current", "" );
-  int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
-  for ( int i = 0; i < noOfFiles; i++ ) {
-    QString entryName;
-    entryName.sprintf( "File%i", i + 1 );
-    QString linkFile = cfg.readEntry( entryName );
-    if(QFileInfo( linkFile).exists() ) {
-      DocLnk lnk( linkFile );
-      if ( QFileInfo( lnk.file()).exists() || linkFile.find("http",0,TRUE) != -1) {
-        d->selectedFiles->addToSelection( lnk );
-      }
+    cfg.setGroup( "PlayList" );
+    QString currentString = cfg.readEntry( "current", "" );
+    int noOfFiles = cfg.readNumEntry( "NumberOfFiles", 0 );
+    for ( int i = 0; i < noOfFiles; i++ ) {
+        QString entryName;
+        entryName.sprintf( "File%i", i + 1 );
+        QString linkFile = cfg.readEntry( entryName );
+        if( QFileInfo( linkFile ).exists() ) {
+            DocLnk lnk( linkFile );
+            if ( QFileInfo( lnk.file() ).exists() || linkFile.find( "http" , 0, TRUE) != -1) {
+                d->selectedFiles->addToSelection( lnk );
+            }
+        }
     }
-  }
-  d->selectedFiles->setSelectedItem( currentString);
+    d->selectedFiles->setSelectedItem( currentString );
 }
 
 
 void PlayListWidget::writeConfig( Config& cfg ) const {
-
-  d->selectedFiles->writeCurrent( cfg);
-  cfg.setGroup("PlayList");
-  int noOfFiles = 0;
-  d->selectedFiles->first();
-  do {
-    const DocLnk *lnk = d->selectedFiles->current();
-    if ( lnk ) {
-      QString entryName;
-      entryName.sprintf( "File%i", noOfFiles + 1 );
-      cfg.writeEntry( entryName, lnk->linkFile() );
-      // if this link does exist, add it so we have the file
-      // next time...
-      if ( !QFile::exists( lnk->linkFile() ) ) {
-        // the way writing lnks doesn't really check for out
-        // of disk space, but check it anyway.
-        if ( !lnk->writeLink() ) {
-          QMessageBox::critical( 0, tr("Out of space"),
-                                 tr( "There was a problem saving "
-                                     "the playlist.\n"
-                                     "Your playlist "
-                                     "may be missing some entries\n"
-                                     "the next time you start it." )
-                                 );
+    d->selectedFiles->writeCurrent( cfg );
+    cfg.setGroup( "PlayList" );
+    int noOfFiles = 0;
+    d->selectedFiles->first();
+    do {
+        const DocLnk *lnk = d->selectedFiles->current();
+        if ( lnk ) {
+            QString entryName;
+            entryName.sprintf( "File%i", noOfFiles + 1 );
+            cfg.writeEntry( entryName, lnk->linkFile() );
+            // if this link does exist, add it so we have the file
+            // next time...
+            if ( !QFile::exists( lnk->linkFile() ) ) {
+                // the way writing lnks doesn't really check for out
+                // of disk space, but check it anyway.
+                if ( !lnk->writeLink() ) {
+                    QMessageBox::critical( 0, tr("Out of space"),
+                                           tr( "There was a problem saving "
+                                               "the playlist.\n"
+                                               "Your playlist "
+                                               "may be missing some entries\n"
+                                               "the next time you start it." )
+                        );
+                }
+            }
+            noOfFiles++;
         }
-      }
-      noOfFiles++;
     }
-  }
-  while ( d->selectedFiles->next() );
-  cfg.writeEntry("NumberOfFiles", noOfFiles );
+    while ( d->selectedFiles->next() );
+    cfg.writeEntry("NumberOfFiles", noOfFiles );
 }
 
 
 void PlayListWidget::addToSelection( const DocLnk& lnk ) {
-  d->setDocumentUsed = FALSE;
-  if ( mediaPlayerState->playlist() ) {
-    if(QFileInfo(lnk.file()).exists() || lnk.file().left(4) == "http" )
-      d->selectedFiles->addToSelection( lnk );
-  }
-  else
-    mediaPlayerState->setPlaying( TRUE );
+    d->setDocumentUsed = FALSE;
+    if ( mediaPlayerState->playlist() ) {
+        if( QFileInfo( lnk.file() ).exists() || lnk.file().left(4) == "http" )
+            d->selectedFiles->addToSelection( lnk );
+    }
+    else
+        mediaPlayerState->setPlaying( TRUE );
 }
 
 
 void PlayListWidget::clearList() {
-  while ( first() ) {
-    d->selectedFiles->removeSelected();
-  }
+    while ( first() ) {
+        d->selectedFiles->removeSelected();
+    }
+}
+
+
+void PlayListWidget::viewPressed( int mouse, QListViewItem *, const QPoint& , int) {
+    switch (mouse) {
+    case 1:
+        break;
+    case 2:
+    {
+        QPopupMenu  m;
+        m.insertItem( tr( "Play" ), this, SLOT( playSelected() ));
+        m.insertItem( tr( "Add to Playlist" ), this, SLOT( addSelected() ));
+        m.exec( QCursor::pos() );
+    }
+        break;
+    }
+}
+
+
+void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *, const QPoint& , int ) {
+    switch (mouse) {
+    case 1:
+        break;
+    case 2:
+    {
+        QPopupMenu  m;
+        m.insertItem( tr( "Play Selected" ), this, SLOT( playSelected() ));
+        m.insertItem( tr( "Remove" ), this, SLOT( removeSelected() ));
+        m.exec( QCursor::pos() );
+    }
+    break;
+    }
 }
 
 
 void PlayListWidget::addAllToList() {
-  DocLnkSet filesAll;
-  Global::findDocuments(&filesAll, "video/*;audio/*");
-  QListIterator<DocLnk> Adit( filesAll.children() );
-  for ( ; Adit.current(); ++Adit ) {
-    if(QFileInfo(Adit.current()->file()).exists()) {
-      d->selectedFiles->addToSelection( **Adit );
+    DocLnkSet filesAll;
+    Global::findDocuments(&filesAll, "video/*;audio/*");
+    QListIterator<DocLnk> Adit( filesAll.children() );
+    for ( ; Adit.current(); ++Adit ) {
+        if( QFileInfo( Adit.current()->file() ).exists() ) {
+            d->selectedFiles->addToSelection( **Adit );
+        }
     }
-  }
 }
 
 
 void PlayListWidget::addAllMusicToList() {
-  QListIterator<DocLnk> dit( files.children() );
-  for ( ; dit.current(); ++dit ) {
-    if(QFileInfo(dit.current()->file()).exists()) {
-      d->selectedFiles->addToSelection( **dit );
+    QListIterator<DocLnk> dit( files.children() );
+    for ( ; dit.current(); ++dit ) {
+        if( QFileInfo(dit.current()->file() ).exists() ) {
+            d->selectedFiles->addToSelection( **dit );
+        }
     }
-  }
 }
 
 
 void PlayListWidget::addAllVideoToList() {
-  QListIterator<DocLnk> dit( vFiles.children() );
-  for ( ; dit.current(); ++dit )
-    if(QFileInfo( dit.current()->file()).exists())
-      d->selectedFiles->addToSelection( **dit );
+    QListIterator<DocLnk> dit( vFiles.children() );
+    for ( ; dit.current(); ++dit ) {
+        if( QFileInfo( dit.current()->file() ).exists() ) {
+            d->selectedFiles->addToSelection( **dit );
+        }
+    }
 }
 
 
-void PlayListWidget::setDocument(const QString& fileref) {
-  qDebug(fileref);
-  fromSetDocument = TRUE;
-  if ( fileref.isNull() ) {
-    QMessageBox::critical( 0, tr( "Invalid File" ), tr( "There was a problem in getting the file." ) );
-    return;
-  }
+void PlayListWidget::setDocument( const QString& fileref ) {
+    //qDebug( fileref );
+    fromSetDocument = TRUE;
+    if ( fileref.isNull() ) {
+        QMessageBox::critical( 0, tr( "Invalid File" ), tr( "There was a problem in getting the file." ) );
+        return;
+    }
 
-  if(fileref.find("m3u",0,TRUE) != -1) { //is m3u
-    readm3u( fileref);
-  } else if(fileref.find("pls",0,TRUE) != -1) { //is pls
-    readPls( fileref);
-  } else if(fileref.find("playlist",0,TRUE) != -1) {//is playlist
-    clearList();
-    loadList(DocLnk(fileref));
-    d->selectedFiles->first();
-  } else {
-    clearList();
-    addToSelection( DocLnk( fileref ) );
-    d->setDocumentUsed = TRUE;
-    mediaPlayerState->setPlaying( FALSE );
-    qApp->processEvents();
-    mediaPlayerState->setPlaying( TRUE );
-    qApp->processEvents();
-    setCaption(tr("OpiePlayer"));
-  }
-}
-
-
-void PlayListWidget::setActiveWindow() {
-//  qDebug("SETTING active window");
-  // When we get raised we need to ensure that it switches views
-  char origView = mediaPlayerState->view();
-  mediaPlayerState->setView( 'l' ); // invalidate
-  mediaPlayerState->setView( origView ); // now switch back
+    if( fileref.find( "m3u", 0, TRUE) != -1 ) { //is m3u
+        readm3u( fileref );
+    } else if( fileref.find( "pls", 0, TRUE) != -1 ) { //is pls
+        readPls( fileref );
+    } else if( fileref.find( "playlist", 0, TRUE) != -1 ) {//is playlist
+        clearList();
+        loadList( DocLnk( fileref ) );
+        d->selectedFiles->first();
+    } else {
+        clearList();
+        addToSelection( DocLnk( fileref ) );
+        d->setDocumentUsed = TRUE;
+        mediaPlayerState->setPlaying( FALSE );
+        qApp->processEvents();
+        mediaPlayerState->setPlaying( TRUE );
+        qApp->processEvents();
+        setCaption( tr("OpiePlayer") );
+    }
 }
 
 
 void PlayListWidget::useSelectedDocument() {
-  d->setDocumentUsed = FALSE;
+    d->setDocumentUsed = FALSE;
 }
 
 
 const DocLnk *PlayListWidget::current() { // this is fugly
-
-  switch (tabWidget->currentPageIndex()) {
-  case 0: //playlist
+    switch ( tabWidget->currentPageIndex() ) {
+    case 0: //playlist
     {
 //      qDebug("playlist");
-      if ( mediaPlayerState->playlist() ) {
-        return d->selectedFiles->current();
-      } else if ( d->setDocumentUsed && d->current ) {
-        return d->current;
-      } else {
-        return d->files->selected();
-      }
+        if ( mediaPlayerState->playlist() ) {
+            return d->selectedFiles->current();
+        } else if ( d->setDocumentUsed && d->current ) {
+            return d->current;
+        } else {
+            return d->files->selected();
+        }
     }
     break;
-  case 1://audio
+    case 1://audio
     {
 //      qDebug("audioView");
-      QListIterator<DocLnk> dit( files.children() );
-      for ( ; dit.current(); ++dit ) {
-        if( dit.current()->name() == audioView->currentItem()->text(0) && !insanityBool) {
-          insanityBool=TRUE;
-          return dit;
+        QListIterator<DocLnk> dit( files.children() );
+        for ( ; dit.current(); ++dit ) {
+            if( dit.current()->name() == audioView->currentItem()->text( 0 ) && !insanityBool ) {
+                insanityBool = TRUE;
+                return dit;
+            }
         }
-      }
     }
     break;
-  case 2: // video
+    case 2: // video
     {
 //      qDebug("videoView");
-      QListIterator<DocLnk> Vdit( vFiles.children() );
-      for ( ; Vdit.current(); ++Vdit ) {
-        if( Vdit.current()->name() == videoView->currentItem()->text(0) && !insanityBool) {
-          insanityBool=TRUE;
-          return Vdit;
+        QListIterator<DocLnk> Vdit( vFiles.children() );
+        for ( ; Vdit.current(); ++Vdit ) {
+            if( Vdit.current()->name() == videoView->currentItem()->text( 0 ) && !insanityBool) {
+                insanityBool = TRUE;
+                return Vdit;
+            }
         }
-      }
     }
     break;
-  };
-  return 0;
+    };
+    return 0;
 }
 
+
 bool PlayListWidget::prev() {
-  if ( mediaPlayerState->playlist() ) {
-    if ( mediaPlayerState->shuffled() ) {
-      const DocLnk *cur = current();
-      int j = 1 + (int)(97.0 * rand() / (RAND_MAX + 1.0));
-      for ( int i = 0; i < j; i++ ) {
-        if ( !d->selectedFiles->next() )
-          d->selectedFiles->first();
-      }
-      if ( cur == current() )
-        if ( !d->selectedFiles->next() )
-          d->selectedFiles->first();
-      return TRUE;
-    } else {
-      if ( !d->selectedFiles->prev() ) {
-        if ( mediaPlayerState->looping() ) {
-          return d->selectedFiles->last();
+    if ( mediaPlayerState->playlist() ) {
+        if ( mediaPlayerState->shuffled() ) {
+            const DocLnk *cur = current();
+            int j = 1 + (int)(97.0 * rand() / (RAND_MAX + 1.0));
+            for ( int i = 0; i < j; i++ ) {
+                if ( !d->selectedFiles->next() )
+                    d->selectedFiles->first();
+            }
+            if ( cur == current() )
+                if ( !d->selectedFiles->next() ) {
+                    d->selectedFiles->first();
+                }
+            return TRUE;
         } else {
-          return FALSE;
+            if ( !d->selectedFiles->prev() ) {
+                if ( mediaPlayerState->looping() ) {
+                    return d->selectedFiles->last();
+                } else {
+                    return FALSE;
+                }
+            }
+            return TRUE;
         }
-      }
-      return TRUE;
-    }
-  } else {
-    return mediaPlayerState->looping();
+    } else {
+        return mediaPlayerState->looping();
   }
 }
 
 
 bool PlayListWidget::next() {
-  if ( mediaPlayerState->playlist() ) {
-    if ( mediaPlayerState->shuffled() ) {
-      return prev();
-    } else {
-      if ( !d->selectedFiles->next() ) {
-        if ( mediaPlayerState->looping() ) {
-          return d->selectedFiles->first();
+    if ( mediaPlayerState->playlist() ) {
+        if ( mediaPlayerState->shuffled() ) {
+            return prev();
         } else {
-          return FALSE;
+            if ( !d->selectedFiles->next() ) {
+                if ( mediaPlayerState->looping() ) {
+                    return d->selectedFiles->first();
+                } else {
+                    return FALSE;
+                }
+            }
+            return TRUE;
         }
-      }
-      return TRUE;
+    } else {
+        return mediaPlayerState->looping();
     }
-  } else {
-    return mediaPlayerState->looping();
-  }
 }
 
 
 bool PlayListWidget::first() {
-  if ( mediaPlayerState->playlist() )
-    return d->selectedFiles->first();
-  else
-    return mediaPlayerState->looping();
+    if ( mediaPlayerState->playlist() )
+        return d->selectedFiles->first();
+    else
+        return mediaPlayerState->looping();
 }
 
 
 bool PlayListWidget::last() {
-  if ( mediaPlayerState->playlist() )
-    return d->selectedFiles->last();
-  else
-    return mediaPlayerState->looping();
+    if ( mediaPlayerState->playlist() )
+        return d->selectedFiles->last();
+    else
+        return mediaPlayerState->looping();
 }
 
 
 void PlayListWidget::saveList() {
 
-  QString filename;
-  InputDialog *fileDlg = 0l;
-  fileDlg = new InputDialog(this,tr("Save Playlist"),TRUE, 0);
-  fileDlg->exec();
-  if( fileDlg->result() == 1 ) {
-    if ( d->current )
-      delete d->current;
-    filename = fileDlg->text();//+".playlist";
-    //         qDebug("saving playlist "+filename+".playlist");
-    Config cfg( filename +".playlist");
-    writeConfig( cfg );
+    QString filename;
+    InputDialog *fileDlg = 0l;
+    fileDlg = new InputDialog(this,tr("Save Playlist"),TRUE, 0);
+    fileDlg->exec();
+    if( fileDlg->result() == 1 ) {
+        if ( d->current )
+            delete d->current;
+        filename = fileDlg->text();//+".playlist";
+        //         qDebug("saving playlist "+filename+".playlist");
+        Config cfg( filename +".playlist");
+        writeConfig( cfg );
 
-    DocLnk lnk;
-    lnk.setFile(QDir::homeDirPath()+"/Settings/"+filename+".playlist.conf"); //sets File property
-    lnk.setType("playlist/plain");// hey is this a REGISTERED mime type?!?!? ;D
-    lnk.setIcon("opieplayer2/playlist2");
-    lnk.setName( filename); //sets file name
-    // qDebug(filename);
-    if(!lnk.writeLink()) {
-      qDebug("Writing doclink did not work");
+        DocLnk lnk;
+        lnk.setFile(QDir::homeDirPath()+"/Settings/"+filename+".playlist.conf"); //sets File property
+        lnk.setType("playlist/plain");// hey is this a REGISTERED mime type?!?!? ;D
+        lnk.setIcon("opieplayer2/playlist2");
+        lnk.setName( filename); //sets file name
+        // qDebug(filename);
+        if(!lnk.writeLink()) {
+            qDebug("Writing doclink did not work");
+        }
     }
-  }
-  Config config( "OpiePlayer" );
-  config.writeEntry("CurrentPlaylist",filename);
-  setCaption(tr("OpiePlayer: ")+filename);
-  d->selectedFiles->first();
-  if(fileDlg) {
-    delete fileDlg;
-  }
+    Config config( "OpiePlayer" );
+    config.writeEntry("CurrentPlaylist",filename);
+    setCaption(tr("OpiePlayer: ")+filename);
+    d->selectedFiles->first();
+    if(fileDlg) {
+        delete fileDlg;
+    }
 }
 
 void PlayListWidget::loadList( const DocLnk & lnk) {
-  QString name= lnk.name();
-  // qDebug("currentList is "+name);
-  if( name.length()>1) {
-    setCaption("OpiePlayer: "+name);
-    // qDebug("load list "+ name+".playlist");
-    clearList();
-    Config cfg( name+".playlist");
-    readConfig(cfg);
+    QString name= lnk.name();
+    // qDebug("currentList is "+name);
+    if( name.length()>1) {
+        setCaption("OpiePlayer: "+name);
+        // qDebug("load list "+ name+".playlist");
+        clearList();
+        Config cfg( name+".playlist");
+        readConfig(cfg);
 
-    tabWidget->setCurrentPage(0);
+        tabWidget->setCurrentPage(0);
 
-    Config config( "OpiePlayer" );
-    config.writeEntry("CurrentPlaylist", name);
-    //        d->selectedFiles->first();
-  }
-
+        Config config( "OpiePlayer" );
+        config.writeEntry("CurrentPlaylist", name);
+        //        d->selectedFiles->first();
+    }
 }
+
 
 void PlayListWidget::setPlaylist( bool shown ) {
-  if ( shown ) {
-    d->playListFrame->show();
-  } else {
-    d->playListFrame->hide();
-  }
+    if ( shown ) {
+        d->playListFrame->show();
+    } else {
+        d->playListFrame->hide();
+    }
 }
 
-void PlayListWidget::setView( char view ) {
-  if ( view == 'l' )
-    showMaximized();
-  else
-    hide();
-}
 
 void PlayListWidget::addSelected() {
 
-  Config cfg( "OpiePlayer" );
-  cfg.setGroup("PlayList");
-  QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
-  //    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
+    Config cfg( "OpiePlayer" );
+    cfg.setGroup("PlayList");
+    QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
+    //    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
 
-  switch (tabWidget->currentPageIndex()) {
-  case 0: //playlist
-    break;
-  case 1: { //audio
-    QListViewItemIterator it(  audioView  );
-    // iterate through all items of the listview
-    for ( ; it.current(); ++it ) {
-      if ( it.current()->isSelected() ) {
-        QListIterator<DocLnk> dit( files.children() );
-        for ( ; dit.current(); ++dit ) {
-          if( dit.current()->name() == it.current()->text(0) ) {
-            if(QFileInfo( dit.current()->file()).exists())
-              d->selectedFiles->addToSelection(  **dit );
-          }
+    switch (tabWidget->currentPageIndex()) {
+    case 0: //playlist
+        break;
+    case 1: { //audio
+        QListViewItemIterator it(  audioView  );
+        // iterate through all items of the listview
+        for ( ; it.current(); ++it ) {
+            if ( it.current()->isSelected() ) {
+                QListIterator<DocLnk> dit( files.children() );
+                for ( ; dit.current(); ++dit ) {
+                    if( dit.current()->name() == it.current()->text(0) ) {
+                        if(QFileInfo( dit.current()->file()).exists())
+                            d->selectedFiles->addToSelection(  **dit );
+                    }
+                }
+                audioView->setSelected( it.current(),FALSE);
+            }
         }
-        audioView->setSelected( it.current(),FALSE);
-      }
+        tabWidget->setCurrentPage(0);
     }
-    tabWidget->setCurrentPage(0);
-  }
-    break;
-  case 2: { // video
-    QListViewItemIterator it(  videoView  );
+        break;
+    case 2: { // video
+        QListViewItemIterator it(  videoView  );
     // iterate through all items of the listview
-    for ( ; it.current(); ++it ) {
-      if ( it.current()->isSelected() ) {
-        QListIterator<DocLnk> dit( vFiles.children() );
-        for ( ; dit.current(); ++dit ) {
-          if( dit.current()->name() == it.current()->text(0) ) {
-            if(QFileInfo( dit.current()->file()).exists())
-              d->selectedFiles->addToSelection(  **dit );
-          }
-        }
+        for ( ; it.current(); ++it ) {
+            if ( it.current()->isSelected() ) {
+                QListIterator<DocLnk> dit( vFiles.children() );
+                for ( ; dit.current(); ++dit ) {
+                    if( dit.current()->name() == it.current()->text(0) ) {
+                        if(QFileInfo( dit.current()->file()).exists())
+                            d->selectedFiles->addToSelection(  **dit );
+                    }
+                }
         videoView->setSelected( it.current(),FALSE);
-      }
+            }
+        }
+        tabWidget->setCurrentPage(0);
     }
-    tabWidget->setCurrentPage(0);
-  }
     break;
-  };
+    };
 }
+
 
 void PlayListWidget::removeSelected() {
-  d->selectedFiles->removeSelected( );
+    d->selectedFiles->removeSelected( );
 }
+
 
 void PlayListWidget::playIt( QListViewItem *it) {
-  if(!it) return;
-  mediaPlayerState->setPlaying(FALSE);
-  mediaPlayerState->setPlaying(TRUE);
-  d->selectedFiles->unSelect();
+    if(!it) return;
+    mediaPlayerState->setPlaying(FALSE);
+    mediaPlayerState->setPlaying(TRUE);
+    d->selectedFiles->unSelect();
 }
+
 
 void PlayListWidget::addToSelection( QListViewItem *it) {
-  d->setDocumentUsed = FALSE;
+    d->setDocumentUsed = FALSE;
 
-  if(it) {
-    switch (tabWidget->currentPageIndex()) {
-    case 1: {
-      QListIterator<DocLnk> dit( files.children() );
-      for ( ; dit.current(); ++dit ) {
-        if( dit.current()->name() == it->text(0)) {
-          if(QFileInfo( dit.current()->file()).exists())
-            d->selectedFiles->addToSelection(  **dit );
-        }
+    if(it) {
+        switch (tabWidget->currentPageIndex()) {
+        case 1: {
+            QListIterator<DocLnk> dit( files.children() );
+            for ( ; dit.current(); ++dit ) {
+                if( dit.current()->name() == it->text(0)) {
+                    if(QFileInfo( dit.current()->file()).exists())
+                        d->selectedFiles->addToSelection(  **dit );
+                }
       }
-    }
-      break;
-    case 2: {
-      QListIterator<DocLnk> dit( vFiles.children() );
-      for ( ; dit.current(); ++dit ) {
-        if( dit.current()->name() == it->text(0)) {
-          if(QFileInfo( dit.current()->file()).exists())
-            d->selectedFiles->addToSelection(  **dit );
         }
-      }
+            break;
+        case 2: {
+            QListIterator<DocLnk> dit( vFiles.children() );
+            for ( ; dit.current(); ++dit ) {
+                if( dit.current()->name() == it->text(0)) {
+                    if(QFileInfo( dit.current()->file()).exists())
+                        d->selectedFiles->addToSelection(  **dit );
+                }
+            }
+        }
+            break;
+        case 0:
+            break;
+        };
+        tabWidget->setCurrentPage(0);
     }
-      break;
-    case 0:
-      break;
-    };
-    tabWidget->setCurrentPage(0);
-  }
 }
+
 
 void PlayListWidget::tabChanged(QWidget *) {
 
-  switch ( tabWidget->currentPageIndex()) {
-  case 0:
+    switch ( tabWidget->currentPageIndex()) {
+    case 0:
     {
-      if( !tbDeletePlaylist->isHidden())
-        tbDeletePlaylist->hide();
-      d->tbRemoveFromList->setEnabled(TRUE);
-      d->tbAddToList->setEnabled(FALSE);
+        if( !tbDeletePlaylist->isHidden() )  {
+            tbDeletePlaylist->hide();
+        }
+        d->tbRemoveFromList->setEnabled(TRUE);
+        d->tbAddToList->setEnabled(FALSE);
     }
     break;
-  case 1:
+    case 1:
     {
-      audioView->clear();
-      populateAudioView();
+        audioView->clear();
+        populateAudioView();
 
-      if( !tbDeletePlaylist->isHidden())
-        tbDeletePlaylist->hide();
-      d->tbRemoveFromList->setEnabled(FALSE);
-      d->tbAddToList->setEnabled(TRUE);
+        if( !tbDeletePlaylist->isHidden() ) {
+            tbDeletePlaylist->hide();
+        }
+        d->tbRemoveFromList->setEnabled(FALSE);
+        d->tbAddToList->setEnabled(TRUE);
     }
     break;
-  case 2:
+    case 2:
     {
-      videoView->clear();
-      populateVideoView();
-      if( !tbDeletePlaylist->isHidden())
-        tbDeletePlaylist->hide();
-      d->tbRemoveFromList->setEnabled(FALSE);
-      d->tbAddToList->setEnabled(TRUE);
+        videoView->clear();
+        populateVideoView();
+        if( !tbDeletePlaylist->isHidden() ) {
+            tbDeletePlaylist->hide();
+        }
+        d->tbRemoveFromList->setEnabled(FALSE);
+        d->tbAddToList->setEnabled(TRUE);
     }
     break;
-  case 3:
+    case 3:
     {
-      if( tbDeletePlaylist->isHidden())
-        tbDeletePlaylist->show();
-      playLists->reread();
+        if( tbDeletePlaylist->isHidden() ) {
+            tbDeletePlaylist->show();
+        }
+        playLists->reread();
     }
     break;
-  };
+    };
 }
 
-void PlayListWidget::btnPlay(bool b) {
 
+void PlayListWidget::btnPlay(bool b) {
   //    mediaPlayerState->setPlaying(b);
   switch ( tabWidget->currentPageIndex()) {
   case 0:
@@ -830,38 +678,9 @@ void PlayListWidget::deletePlaylist() {
   };
 }
 
-void PlayListWidget::viewPressed( int mouse, QListViewItem *, const QPoint& , int) {
-  switch (mouse) {
-  case 1:
-    break;
-  case 2:{
-    QPopupMenu  m;
-    m.insertItem( tr( "Play" ), this, SLOT( playSelected() ));
-    m.insertItem( tr( "Add to Playlist" ), this, SLOT( addSelected() ));
-    m.exec( QCursor::pos() );
-  }
-    break;
-  };
-}
 
 void PlayListWidget::playSelected() {
-  btnPlay( TRUE);
-}
-
-void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *, const QPoint& , int ) {
-  switch (mouse) {
-  case 1:
-
-    break;
-  case 2:
-    {
-      QPopupMenu  m;
-      m.insertItem( tr( "Play Selected" ), this, SLOT( playSelected() ));
-      m.insertItem( tr( "Remove" ), this, SLOT( removeSelected() ));
-      m.exec( QCursor::pos() );
-    }
-    break;
-  };
+    btnPlay( TRUE);
 }
 
 
@@ -888,98 +707,104 @@ void PlayListWidget::scanForVideo() {
 }
 
 void PlayListWidget::populateAudioView() {
-
-  audioView->clear();
-  StorageInfo storageInfo;
-  const QList<FileSystem> &fs = storageInfo.fileSystems();
-  if(!audioScan) scanForAudio();
-
-  QListIterator<DocLnk> dit( files.children() );
-  QListIterator<FileSystem> it ( fs );
-
-  QString storage;
-  for ( ; dit.current(); ++dit ) {
-    for( ; it.current(); ++it ){
-      const QString name = (*it)->name();
-      const QString path = (*it)->path();
-      if(dit.current()->file().find(path) != -1 ) storage=name;
+    audioView->clear();
+    StorageInfo storageInfo;
+    const QList<FileSystem> &fs = storageInfo.fileSystems();
+    if(!audioScan) {
+        scanForAudio();
     }
 
-    QListViewItem * newItem;
-    if ( QFile( dit.current()->file()).exists()  ) {
-      // qDebug(dit.current()->name());
-      newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(),
-                                             QString::number( QFile( dit.current()->file()).size() ), storage);
-      newItem->setPixmap(0, Resource::loadPixmap( "opieplayer2/musicfile" ));
-    }
-  }
+    QListIterator<DocLnk> dit( files.children() );
+    QListIterator<FileSystem> it ( fs );
 
+    QString storage;
+    for ( ; dit.current(); ++dit ) {
+        for( ; it.current(); ++it ){
+            const QString name = (*it)->name();
+            const QString path = (*it)->path();
+            if(dit.current()->file().find(path) != -1 ) {
+                storage = name;
+            }
+        }
+
+        QListViewItem * newItem;
+        if ( QFile( dit.current()->file()).exists()  ) {
+            // qDebug(dit.current()->name());
+            newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(),
+                                                   QString::number( QFile( dit.current()->file()).size() ), storage);
+            newItem->setPixmap( 0, Resource::loadPixmap( "opieplayer2/musicfile" ) );
+        }
+    }
 }
+
 
 void PlayListWidget::populateVideoView() {
-  videoView->clear();
-  StorageInfo storageInfo;
-  const QList<FileSystem> &fs = storageInfo.fileSystems();
+    videoView->clear();
+    StorageInfo storageInfo;
+    const QList<FileSystem> &fs = storageInfo.fileSystems();
 
-  if(!videoScan ) scanForVideo();
-
-  QListIterator<DocLnk> Vdit( vFiles.children() );
-  QListIterator<FileSystem> it ( fs );
-  videoView->clear();
-  QString storage;
-  for ( ; Vdit.current(); ++Vdit ) {
-    for( ; it.current(); ++it ){
-      const QString name = (*it)->name();
-      const QString path = (*it)->path();
-      if( Vdit.current()->file().find(path) != -1 ) storage=name;
+    if(!videoScan ) {
+        scanForVideo();
     }
 
-    QListViewItem * newItem;
-    if ( QFile( Vdit.current()->file()).exists() ) {
-      newItem= /*(void)*/ new QListViewItem( videoView, Vdit.current()->name(),
-                                             QString::number( QFile( Vdit.current()->file()).size() ), storage);
-      newItem->setPixmap(0, Resource::loadPixmap( "opieplayer2/videofile" ));
+    QListIterator<DocLnk> Vdit( vFiles.children() );
+    QListIterator<FileSystem> it ( fs );
+    videoView->clear();
+    QString storage;
+    for ( ; Vdit.current(); ++Vdit ) {
+        for( ; it.current(); ++it ) {
+            const QString name = (*it)->name();
+            const QString path = (*it)->path();
+            if( Vdit.current()->file().find(path) != -1 ) {
+                storage=name;
+            }
+        }
+
+        QListViewItem * newItem;
+        if ( QFile( Vdit.current()->file() ).exists() ) {
+            newItem= /*(void)*/ new QListViewItem( videoView, Vdit.current()->name(),
+                                                   QString::number( QFile( Vdit.current()->file() ).size() ), storage );
+            newItem->setPixmap(0, Resource::loadPixmap( "opieplayer2/videofile" ) );
+        }
     }
-  }
 }
+
 
 void PlayListWidget::openFile() {
-  QString filename, name;
-  InputDialog *fileDlg;
-  fileDlg = new InputDialog(this,tr("Open file or URL"),TRUE, 0);
-  fileDlg->exec();
-  if( fileDlg->result() == 1 ) {
-    filename = fileDlg->text();
+    QString filename, name;
+    InputDialog *fileDlg;
+    fileDlg = new InputDialog(this,tr("Open file or URL"),TRUE, 0);
+    fileDlg->exec();
+    if( fileDlg->result() == 1 ) {
+        filename = fileDlg->text();
 
-    qDebug("Selected filename is "+filename);
-    if(filename.right(3) == "m3u") {
-      readm3u( filename );
-    } else if(filename.right(3) == "pls") {
-      readPls( filename );
-    } else {
-      /* FIXME ....... AUDIO/X-MPEGURL is bad*/ 
-      DocLnk lnk;
+        qDebug( "Selected filename is " + filename );
+        if( filename.right( 3 ) == "m3u" ) {
+            readm3u( filename );
+        } else if( filename.right(3) == "pls" ) {
+            readPls( filename );
+        } else {
+            /* FIXME ....... AUDIO/X-MPEGURL is bad*/
+            DocLnk lnk;
+            lnk.setName( filename ); //sets file name
+            lnk.setFile( filename ); //sets File property
+            //qWarning( "Mimetype: " + MimeType( QFile::encodeName(filename) ).id() );
+            lnk.setType( MimeType( QFile::encodeName(filename) ).id() );
+            lnk.setExec( "opieplayer" );
+            lnk.setIcon( "opieplayer2/MPEGPlayer" );
 
-      lnk.setName(filename); //sets file name
-      lnk.setFile(filename); //sets File property
-      //qWarning( "Mimetype: " + MimeType( QFile::encodeName(filename) ).id() );
-      lnk.setType( MimeType( QFile::encodeName(filename) ).id() );
-      lnk.setExec("opieplayer");
-      lnk.setIcon("opieplayer2/MPEGPlayer");
-
-      if(!lnk.writeLink()) {
-        qDebug("Writing doclink did not work");
-      }
-      d->selectedFiles->addToSelection(  lnk);
+            if( !lnk.writeLink() ) {
+                qDebug( "Writing doclink did not work" );
+            }
+            d->selectedFiles->addToSelection(  lnk );
+        }
     }
-  }
-  if(fileDlg) {
-    delete fileDlg;
-  }
+    if( fileDlg ) {
+        delete fileDlg;
+    }
 }
 
-void PlayListWidget::keyReleaseEvent( QKeyEvent *e)
-{
+void PlayListWidget::keyReleaseEvent( QKeyEvent *e ) {
   switch ( e->key() ) {
     ////////////////////////////// Zaurus keys
   case Key_F9: //activity
@@ -1012,16 +837,16 @@ void PlayListWidget::keyReleaseEvent( QKeyEvent *e)
     //          playSelected(); puh
     break;
   case Key_1:
-    tabWidget->setCurrentPage(0);
+    tabWidget->setCurrentPage( 0 );
     break;
   case Key_2:
-    tabWidget->setCurrentPage(1);
+    tabWidget->setCurrentPage( 1 );
     break;
   case Key_3:
-    tabWidget->setCurrentPage(2);
+    tabWidget->setCurrentPage( 2 );
     break;
   case Key_4:
-    tabWidget->setCurrentPage(3);
+    tabWidget->setCurrentPage( 3 );
     break;
   case Key_Down:
     if ( !d->selectedFiles->next() )
@@ -1037,218 +862,196 @@ void PlayListWidget::keyReleaseEvent( QKeyEvent *e)
   }
 }
 
-void PlayListWidget::keyPressEvent( QKeyEvent *)
-{
-  //    qDebug("Key press");
-  //     switch ( e->key() ) {
-  // ////////////////////////////// Zaurus keys
-  //       case Key_A: //add to playlist
-  //           qDebug("Add");
-  //           addSelected();
-  //           break;
-  //       case Key_R: //remove from playlist
-  //           removeSelected();
-  //           break;
-  //       case Key_P: //play
-  //           qDebug("Play");
-  //           playSelected();
-  //           break;
-  //       case Key_Space:
-  //           qDebug("Play");
-  //           playSelected();
-  //           break;
-  //     }
-}
+void PlayListWidget::readm3u( const QString &filename ) {
+    qDebug( "m3u filename is " + filename );
+    QFile f( filename );
 
+    if( f.open( IO_ReadOnly ) ) {
+        QTextStream t(&f);
+        QString s;//, first, second;
+        int i=0;
+        while ( !t.atEnd() ) {
+            s=t.readLine();
 
-
-void PlayListWidget::readm3u(const QString &filename) {
-
-  qDebug("m3u filename is "+filename);
-  QFile f(filename);
-
-  if(f.open(IO_ReadOnly)) {
-    QTextStream t(&f);
-    QString s;//, first, second;
-    int i=0;
-    while ( !t.atEnd()) {
-      s=t.readLine();
-
-      if(s.find("#",0,TRUE) == -1) {
-        if(s.find(" ",0,TRUE) == -1)  { // not sure if this is neede since cf uses vfat
-          if(s.left(2) == "E:" || s.left(2) == "P:") {
-            s=s.right(s.length()-2);
-            //                         if(QFile(s).exists()) {
-            DocLnk lnk( s );
-            QFileInfo f(s);
-            QString name = f.baseName();
-            name = name.right( name.length()-name.findRev( "\\",-1,TRUE ) -1 );
-            lnk.setName( name );
-            s=s.replace( QRegExp("\\"),"/");
-            lnk.setFile( s );
-            lnk.writeLink();
-            qDebug("add "+name);
-            d->selectedFiles->addToSelection( lnk);
-            //                         }
-          } else { // is url
-            s.replace(QRegExp("%20")," ");
-            DocLnk lnk( s );
-            QString name;
-            if(name.left(4)=="http") {
-              name = s.right( s.length() - 7);
-            } else {
-              name = s;
+            if( s.find( "#", 0, TRUE) == -1 ) {
+                if( s.find( " ",  0, TRUE) == -1 )  { // not sure if this is neede since cf uses vfat
+                    if( s.left(2) == "E:" || s.left(2) == "P:" ) {
+                        s = s.right( s.length() -2 );
+                        DocLnk lnk( s );
+                        QFileInfo f( s );
+                        QString name = f.baseName();
+                        name = name.right( name.length() - name.findRev( "\\", -1, TRUE )  -1 );
+                        lnk.setName( name );
+                        s=s.replace( QRegExp( "\\" ), "/" );
+                        lnk.setFile( s );
+                        lnk.writeLink();
+                        qDebug( "add " + name);
+                        d->selectedFiles->addToSelection( lnk );
+                    } else { // is url
+                        s.replace( QRegExp( "%20" )," " );
+                        DocLnk lnk( s );
+                        QString name;
+                        if( name.left( 4 ) == "http" ) {
+                            name = s.right( s.length() - 7 );
+                        } else {
+                            name = s;
+                        }
+                        lnk.setName( name );
+                        if( s.at( s.length() - 4) == '.' ) {
+                            lnk.setFile( s );
+                        } else {
+                            lnk.setFile( s + "/" );
+                        }
+                        lnk.setType( "audio/x-mpegurl" );
+                        lnk.writeLink();
+                        d->selectedFiles->addToSelection( lnk );
+                    }
+                    i++;
+                }
             }
-            lnk.setName(name);
-            if(s.at(s.length()-4) == '.') {
-              lnk.setFile( s);
-            } else {
-              lnk.setFile( s+"/");
-            }
-            lnk.setType("audio/x-mpegurl");
-            lnk.writeLink();
-            d->selectedFiles->addToSelection( lnk);
-          }
-          i++;
         }
-      }
     }
-  }
-  f.close();
+    f.close();
 }
 
 void PlayListWidget::writem3u() {
+    InputDialog *fileDlg;
+    fileDlg = new InputDialog( this, tr( "Save m3u Playlist " ), TRUE, 0);
+    fileDlg->exec();
+    QString filename, list;
+    if( fileDlg->result() == 1 ) {
+        filename = fileDlg->text();
+        qDebug( filename );
+        int noOfFiles = 0;
+        d->selectedFiles->first();
+        do {
+            // we dont check for existance because of url's
+            //         qDebug(d->selectedFiles->current()->file());
 
-  InputDialog *fileDlg;
-  fileDlg = new InputDialog(this,tr("Save m3u Playlist "),TRUE, 0);
-  fileDlg->exec();
-  QString filename,list;
-  if( fileDlg->result() == 1 ) {
-    filename = fileDlg->text();
-    qDebug(filename);
-    int noOfFiles = 0;
-    d->selectedFiles->first();
-    do {
-      // we dont check for existance because of url's
-      //         qDebug(d->selectedFiles->current()->file());
-      list += d->selectedFiles->current()->file()+"\n";
-      noOfFiles++;
+            // so maybe we should do some net checking to ,-)
+            list += d->selectedFiles->current()->file() + "\n";
+            noOfFiles++;
+        }
+        while ( d->selectedFiles->next() );
+        qDebug( list );
+        if( filename.left( 1) != "/" ) {
+            filename=QPEApplication::documentDir() + "/" + filename;
+        }
+        if( filename.right( 3 ) != "m3u" ) {
+            filename=filename+".m3u";
+        }
+        QFile f( filename );
+        f.open( IO_WriteOnly );
+        f.writeBlock( list, list.length() );
+        f.close();
     }
-    while ( d->selectedFiles->next() );
-    qDebug(list);
-    if(filename.left(1) != "/")
-      filename=QPEApplication::documentDir()+"/"+filename;
-    if(filename.right(3) != "m3u")
-      filename=filename+".m3u";
-
-    QFile f(filename);
-    f.open(IO_WriteOnly);
-    f.writeBlock(list, list.length());
-    f.close();
-  }
-  if(fileDlg) delete fileDlg;
+    if( fileDlg ) {
+        delete fileDlg;
+    }
 }
 
-void PlayListWidget::readPls(const QString &filename) {
+void PlayListWidget::readPls( const QString &filename ) {
 
-  qDebug("pls filename is "+filename);
-  QFile f(filename);
+    qDebug( "pls filename is " + filename );
+    QFile f( filename );
 
-  if(f.open(IO_ReadOnly)) {
-    QTextStream t(&f);
-    QString s;//, first, second;
-    int i=0;
-    while ( !t.atEnd()) {
-      s=t.readLine();
-      if(s.left(4) == "File") {
-        s=s.right(s.length() - 6);
-        s.replace(QRegExp("%20")," ");
-        qDebug("adding "+s+" to playlist");
-        // numberofentries=2
-        // File1=http
-        // Title
-        // Length
-        // Version
-        // File2=http
-        s=s.replace( QRegExp("\\"),"/");
-        DocLnk lnk( s );
-        QFileInfo f(s);
-        QString name = f.baseName();
-        if(name.left(4)=="http")
-          name = s.right( s.length() - 7);
-        else
-          name=s;
-        name = name.right(name.length()-name.findRev("\\",-1,TRUE)-1);
-        lnk.setName( name);
-        if(s.at(s.length()-4) == '.') // if this is probably a file
-          lnk.setFile( s);
-        else { //if its a url
-          if( name.right(1).find('/') == -1)
-            s+="/";
-          lnk.setFile( s);
+    if( f.open( IO_ReadOnly ) ) {
+        QTextStream t( &f );
+        QString s;//, first, second;
+        int i = 0;
+        while ( !t.atEnd() ) {
+            s = t.readLine();
+            if( s.left(4)  == "File" ) {
+                s = s.right( s.length() - 6 );
+                s.replace( QRegExp( "%20" )," ");
+                qDebug( "adding " + s + " to playlist" );
+                // numberofentries=2
+                // File1=http
+                // Title
+                // Length
+                // Version
+                // File2=http
+                s = s.replace( QRegExp( "\\" ), "/" );
+                DocLnk lnk( s );
+                QFileInfo f( s );
+                QString name = f.baseName();
+                if( name.left( 4 ) == "http" ) {
+                    name = s.right( s.length() - 7);
+                }  else {
+                    name = s;
+                }
+                name = name.right( name.length() - name.findRev( "\\", -1, TRUE) - 1 );
+                lnk.setName( name );
+                if( s.at( s.length() - 4) == '.') // if this is probably a file
+                    lnk.setFile( s );
+                else { //if its a url
+                    if( name.right( 1 ).find( '/' ) == -1) {
+                        s += "/";
+                    }
+                    lnk.setFile( s );
+                }
+                lnk.setType( "audio/x-mpegurl" );
+
+                //qDebug("DocLnk add "+name);
+                d->selectedFiles->addToSelection( lnk );
+            }
         }
-        lnk.setType("audio/x-mpegurl");
-
-        qDebug("DocLnk add "+name);
-        d->selectedFiles->addToSelection( lnk);
-      }
+        i++;
     }
-    i++;
-  }
 }
 
 void PlayListWidget::pmViewActivated(int index) {
 //  qDebug("%d", index);
-  switch(index) {
-  case -16:
+    switch(index) {
+    case -16:
     {
-
-      mediaPlayerState->toggleFullscreen();
-      bool b=mediaPlayerState->fullscreen();
-      pmView->setItemChecked( index,b);
-      Config cfg( "OpiePlayer" );
-      cfg.writeEntry("FullScreen", b);
-
+        mediaPlayerState->toggleFullscreen();
+        bool b=mediaPlayerState->fullscreen();
+        pmView->setItemChecked( index, b);
+        Config cfg( "OpiePlayer" );
+        cfg.writeEntry( "FullScreen", b );
     }
     break;
-  };
+    };
 }
 
 void PlayListWidget::populateSkinsMenu() {
-  int item=0;
-  defaultSkinIndex=0;
-  QString skinName;
-  Config cfg( "OpiePlayer" );
-  cfg.setGroup("Options");
-  QString skin = cfg.readEntry("Skin","default");
+    int item = 0;
+    defaultSkinIndex = 0;
+    QString skinName;
+    Config cfg( "OpiePlayer" );
+    cfg.setGroup("Options" );
+    QString skin = cfg.readEntry( "Skin", "default" );
 
-  QDir skinsDir(QPEApplication::qpeDir()+"/pics/opieplayer2/skins");
-  skinsDir.setFilter( QDir::Dirs);
-  skinsDir.setSorting(QDir::Name);
-  const QFileInfoList *skinslist = skinsDir.entryInfoList();
-  QFileInfoListIterator it( *skinslist );
-  QFileInfo *fi;
-  while ( (fi=it.current()) ) {
-    skinName =  fi->fileName();
-    qDebug(  fi->fileName());
-    if( skinName != "." &&  skinName != ".." && skinName !="CVS")
-      item = skinsMenu->insertItem( fi->fileName());
-    if( skinName == "default")
-      defaultSkinIndex = item;
-    if( skinName == skin)
-      skinsMenu->setItemChecked( item, TRUE);
-
-    ++it;
-  }
+    QDir skinsDir( QPEApplication::qpeDir() + "/pics/opieplayer2/skins" );
+    skinsDir.setFilter( QDir::Dirs );
+    skinsDir.setSorting(QDir::Name );
+    const QFileInfoList *skinslist = skinsDir.entryInfoList();
+    QFileInfoListIterator it( *skinslist );
+    QFileInfo *fi;
+    while ( ( fi = it.current() ) ) {
+        skinName =  fi->fileName();
+        qDebug(  fi->fileName() );
+        if( skinName != "." &&  skinName != ".." && skinName !="CVS" )  {
+            item = skinsMenu->insertItem( fi->fileName() ) ;
+        }
+        if( skinName == "default" ) {
+            defaultSkinIndex = item;
+        }
+        if( skinName == skin ) {
+            skinsMenu->setItemChecked( item, TRUE );
+        }
+        ++it;
+    }
 }
 
-void PlayListWidget::skinsMenuActivated(int item) {
-  for(uint i = defaultSkinIndex; i > defaultSkinIndex - skinsMenu->count(); i--) {
-    skinsMenu->setItemChecked( i, FALSE);
-  }
-  skinsMenu->setItemChecked( item, TRUE);
+void PlayListWidget::skinsMenuActivated( int item ) {
+    for( uint i = defaultSkinIndex; i > defaultSkinIndex - skinsMenu->count(); i-- ) {
+        skinsMenu->setItemChecked( i, FALSE );
+    }
+    skinsMenu->setItemChecked( item, TRUE );
 
-  Config cfg( "OpiePlayer" );
-  cfg.setGroup("Options");
-  cfg.writeEntry("Skin", skinsMenu->text( item));
+    Config cfg( "OpiePlayer" );
+    cfg.setGroup("Options");
+    cfg.writeEntry("Skin", skinsMenu->text( item ) );
 }
