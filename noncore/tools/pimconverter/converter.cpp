@@ -6,6 +6,7 @@
 #include <opie2/oapplicationfactory.h>
 #include <opie2/odebug.h>
 #include <opie2/opimglobal.h>
+#include <qpe/global.h>
 // Include SQL related header files
 #define __USE_SQL
 #include <opie2/opimaccessfactory.h>
@@ -61,10 +62,9 @@ void Converter::start_conversion(){
     odebug << "DestFormat: " << m_selectedDestFormat << oendl;
     if ( m_selectedSourceFormat == m_selectedDestFormat ){
 
-	    QMessageBox::warning( this, "PimConverter",
-				  tr( "It is not a good idea to use\n" )
-				  +tr( "the same source and destformat !" ),
-				  tr( "Ok" ) );
+	    QMessageBox::warning( this, tr("PimConverter"),
+				  tr( "<qt>It is not a good idea to use"
+				      "the same source and destformat !</qt>"));
 	    return;
     }
 
@@ -227,15 +227,48 @@ void Converter::closeEvent( QCloseEvent *e )
 	e->accept();
 }
 
+bool Converter::sqliteCopyAndConvert(const QString& src, const QString &dest, QString &cmd)
+{
+    if (!QFile::exists( src ) ) {
+        cmd = tr("No SQLite2 database exists");
+        return false;
+    }
+
+    if( QFile::exists( dest ) ) {
+        cmd = tr("A copy of the SQLite2 exists");
+        return false;
+    }
+
+    /*
+     * Copy it over
+     */
+    cmd = "cp " + Global::shellQuote(src) + " " + Global::shellQuote(dest);
+    if( ::system( cmd ) != 0 )
+	return false;
+
+    /*
+     * Delete it to make place for the new file
+     */
+    cmd = "rm " + Global::shellQuote(src);
+    if( ::system( cmd ) != 0 )
+	return false;
+
+    /*
+     * Convert it
+     */
+    cmd = "sqlite " + Global::shellQuote(dest) + " .dump | sqlite3 " + Global::shellQuote(src);
+    return ::system( cmd ) == 0;
+}
+
 
 
 void Converter::start_upgrade()
 {
 	odebug << "Start upgrading" << oendl;
-	switch( QMessageBox::warning( this, "Pim-Converter",
-				      "Are you really sure that you\n"
-				      "want to convert your database from\n"
-				      "sqlite V2 to sqlite V3?",
+	switch( QMessageBox::warning( this, tr("Pim-Converter"),
+				      tr("<qt>Are you really sure that you "
+				      "want to convert your database from "
+				      "sqlite V2 to sqlite V3?</qt>"),
 				      QMessageBox::Ok | QMessageBox::Default,
 				      QMessageBox::Abort | QMessageBox::Escape )) {
 
@@ -246,68 +279,56 @@ void Converter::start_upgrade()
 	}
 	odebug << "Checking whether sqlite is installed" << oendl;
 	if ( system( "which sqlite" ) != 0 ){
-		QMessageBox::critical( this, "Pim-Converter",
-				       QString("An internal error occurred:\n") +
-				       "sqlite was not accessible!\n"+
-				       "Please correct the PATH or install \n" + 
-				       "this packages!" );
+		QMessageBox::critical( this, tr("Pim-Converter"),
+				       tr("<qt>An internal error occurred: "
+				       "sqlite was not accessible! "
+				       "Please correct the PATH or install "
+				       "this packages!</qt>") );
 		return;
 	}
 	if ( system( "which sqlite3" ) != 0 ){
-		QMessageBox::critical( this, "Pim-Converter",
-				       QString("An internal error occurred:\n") +
-				       "sqlite3 was not accessible!\n"+
-				       "Please correct the PATH or install \n" + 
-				       "this packages!" );
+                QMessageBox::critical( this, tr("Pim-Converter"),
+                                       tr("<qt>An internal error occurred: "
+                                          "sqlite3 was not accessible! "
+                                          "Please correct the PATH or install "
+                                          "this packages!</qt>") );
+		return;
+        }
+
+        QString src, dest, cmd;
+        src  = Global::applicationFileName("addressbook", "addressbook.db"    );
+        dest = Global::applicationFileName("addressbook", "addressbook.db_v2" );
+
+	if(!sqliteCopyAndConvert(src, dest, cmd)) {
+		QMessageBox::critical( this, tr("Pim-Converter"),
+                                       tr("<qt>An internal error occurred: "
+                                          "Converting the addressbook command was impossible! "
+                                          "Executed the following command: %1</qt>").arg(cmd) );
 		return;
 	}
-	if ( QFile::exists( "~/Applications/addressbook/addressbook.db" ) 
-	     && !QFile::exists( "~/Applications/addressbook/addressbook.db_v2" ) ){ 
-		odebug << "Executing conversion commands" << oendl;
-		QString addr_convert_string = "cd ~/Applications/addressbook/;cp addressbook.db addressbook.db_v2;sqlite addressbook.db_v2 .dump | sqlite3 addressbook.db";
-		odebug << "1. Addressbook Command:" << addr_convert_string << oendl;
-		if ( system( addr_convert_string ) != 0 ){
-			QMessageBox::critical( this, "Pim-Converter",
-					       QString("An internal error occurred:\n") +
-					       "Converting the addressbook command was impossible!\n"+
-					       "Executed the following command:\n" + 
-					       addr_convert_string );
-			return;
-		}
-	}
-	if ( QFile::exists( "~/Applications/datebook/datebook.db" ) 
-	     && !QFile::exists( "~/Applications/datebook/datebook.db_v2" ) ){ 
-		QString dateb_convert_string = "cd ~/Applications/datebook/;cp datebook.db datebook.db_v2;sqlite datebook.db_v2 .dump | sqlite3 datebook.db";
-		odebug << "2. Datebook Command" << dateb_convert_string << oendl;
-		if ( system( dateb_convert_string ) != 0 ){
-			QMessageBox::critical( this, "Pim-Converter",
-					       QString("An internal error occurred:\n") +
-					       "Converting the datebook command was impossible!\n"+
-					       "Executed the following command:\n" + 
-					       dateb_convert_string );
-			return;
-		}
+
+        src  = Global::applicationFileName("datebook", "datebook.db"    );
+        dest = Global::applicationFileName("datebook", "datebook.db_v2" );
+	if(!sqliteCopyAndConvert(src, dest, cmd)) {
+		QMessageBox::critical( this, tr("Pim-Converter"),
+				       tr("<qt>An internal error occurred: "
+				       "Converting the datebook command was impossible! "
+				       "Executed the following command: '%1' </qt>").arg(cmd)
+				      );
+		return;
 	}
 
-	if ( QFile::exists( "~/Applications/todolist/todolist.db" ) 
-	     && !QFile::exists( "~/Applications/todolist/todolist.db_v2" ) ){ 
-		QString todo_convert_string = "cd ~/Applications/todolist/;cp todolist.db todolist.db_v2;sqlite todolist.db_v2 .dump | sqlite3 todolist.db";
-		odebug << "3. Todolist Command:" << todo_convert_string << oendl;
-		if ( system( todo_convert_string ) != 0 ){
-			QMessageBox::critical( this, "Pim-Converter",
-					       QString("An internal error occurred:\n") +
-					       "Converting the todolist command was impossible!\n"+
-					       "Executed the following command:\n" + 
-					       todo_convert_string );
-			return;
-		}
+        src  = Global::applicationFileName("todolist", "todolist.db"    );
+        dest = Global::applicationFileName("todolist", "todolist.db_v2" );
+	if(!sqliteCopyAndConvert(src, dest, cmd)) {
+		QMessageBox::critical( this, tr("Pim-Converter"),
+				       tr("<qt>An internal error occurred: "
+                                          "Converting the todolist command was impossible! "
+                                          "Executed the following command: '%1' </qt>").arg(cmd) );
+		return;
 	}
 
-	QMessageBox::information( this, "Pim-Converter",
-				  "Conversion is finished!",
-				  "&OK", NULL, NULL,
-				  0,      // Enter == button 0
-				  0 );
-	
-	
+	QMessageBox::information( this, tr("Pim-Converter"),
+				  tr("Conversion is finished!"),
+				  QMessageBox::Ok );
 }

@@ -40,6 +40,9 @@ private:
 	int m_selectedDestFormat;
 	bool m_criticalState;
 
+
+private:
+	static bool sqliteCopyAndConvert( const QString &src, const QString &destination, QString &lastCommand );
 };
 
 
