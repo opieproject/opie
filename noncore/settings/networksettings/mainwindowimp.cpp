@@ -13,6 +13,7 @@
 #include <qlabel.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qtabwidget.h> // in order to disable the profiles tab
+#include <qpe/qpeapplication.h>
 
 #include <qmessagebox.h>
 
@@ -652,7 +653,7 @@ void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
 {
     bool found = false;
     qDebug("MainWindowImp::receive QCop msg >"+msg+"<");
-
+    QPEApplication::setKeepRunning();
     if (msg == "raise") {
         raise();
         return;
