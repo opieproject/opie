@@ -75,6 +75,7 @@ OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPositi
     tabBarStack->addWidget( tabList, 1 );
     connect( tabList, SIGNAL( activated( int ) ), this, SLOT( slotTabListSelected( int ) ) );
 
+    tabBarPosition = p;
     setTabStyle( s );
     setTabPosition( p );
 
