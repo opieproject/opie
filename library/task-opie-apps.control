@@ -4,6 +4,6 @@ Section: opie/applications
 Maintainer: Maximilian Reiss <max.reiss@gmx.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: task-opie, task-opie-pim, opie-appskey, advancedfm, konqueror, opie-calculator, opie-citytime, opie-clock, opie-embeddedkonsole, opie-filebrowser, opie-libmadplugin, opie-libmpeg3plugin, opie-mail, opie-mediaplayer, opie-qpdf, opie-showimg, opie-sounds, opie-spreadsheet, opie-sysinfo, opie-systemtime, opie-tableviewer,opie-textedit, opie-wavplugin, tabmanager, timezones
+Depends: task-opie, task-opie-pim, opie-appskey, opie-advancedfm, konqueror, opie-calculator, opie-citytime, opie-clock, opie-embeddedkonsole, opie-filebrowser, opie-libmadplugin, opie-libmpeg3plugin, opie-mail, opie-mediaplayer, opie-qpdf, opie-showimg, opie-sounds, opie-spreadsheet, opie-sysinfo, opie-systemtime, opie-tableviewer,opie-textedit, opie-wavplugin, tabmanager, timezones
 Description: Opie apps
  Most applications.
