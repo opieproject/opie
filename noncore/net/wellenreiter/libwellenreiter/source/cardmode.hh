@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.18 2003-02-18 09:31:47 max Exp $ */
+/* $Id: cardmode.hh,v 1.19 2003-02-19 10:40:55 mickeyl Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -14,12 +14,23 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <linux/if.h>
+
+/* Following typedefs are needed here, because linux/wireless.h
+   includes linux/ethertool.h which is using them */
+typedef signed char s8;
+typedef unsigned char u8;
+typedef signed short s16;
+typedef unsigned short u16;
+typedef signed int s32;
+typedef unsigned int u32;
+typedef signed long long s64;
+typedef unsigned long long u64;
+
 #include <linux/wireless.h>
 
 #ifndef SIOCIWFIRSTPRIV
 #define SIOCIWFIRSTPRIV SIOCDEVPRIVATE
 #endif
-
 
 extern "C"
 {
@@ -30,10 +41,10 @@ extern "C"
 /* Defines, used for the card setup */
 #define   DEFAULT_PATH       "/proc/driver/aironet/%s/Config"
 #define   CISCO_STATUS       "/proc/driver/aironet/%s/Status"
-#define   CARD_TYPE_CISCO	 1
-#define   CARD_TYPE_NG	    2
-#define   CARD_TYPE_HOSTAP	3
-#define   CARD_TYPE_ORINOCCO  4
+#define   CARD_TYPE_CISCO       1
+#define   CARD_TYPE_NG          2
+#define   CARD_TYPE_HOSTAP      3
+#define   CARD_TYPE_ORINOCCO    4
 
 /* Some usefull constants for frequencies */
 #define KILO    1e3

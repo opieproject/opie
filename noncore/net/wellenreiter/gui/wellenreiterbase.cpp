@@ -48,10 +48,10 @@
 WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
-    ani1 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot0" ) );
-    ani2 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot90" ) );
-    ani3 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot180" ) );
-    ani4 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot270" ) );
+    //ani1 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot0" ) );
+    //ani2 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot90" ) );
+    //ani3 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot180" ) );
+    //ani4 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot270" ) );
     
     if ( !name )
         setName( "WellenreiterBase" );

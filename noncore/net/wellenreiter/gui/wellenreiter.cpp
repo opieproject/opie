@@ -229,7 +229,7 @@ void Wellenreiter::buttonClicked()
 
         logwindow->log( "(i) Daemon has been stopped." );
         button->setText( tr( "Start Scanning" ) );
-        setCaption( tr( "Scanning in progress..." ) );
+        setCaption( tr( "Wellenreiter/Opie" ) );
 
         // Stop daemon - ugly for now... later better
 
@@ -242,7 +242,7 @@ void Wellenreiter::buttonClicked()
         // reset the interface trying to get it into a usable state again
 
         QString cmdline;
-        cmdline.sprintf( "ifdown %s; ifup %s", (const char*) interface, (const char*) interface );
+        cmdline.sprintf( "iwpriv %s monitor 0; ifdown %s; ifup %s", (const char*) interface, (const char*) interface, (const char*) interface );
         system( cmdline );
 
         // message the user
@@ -277,7 +277,7 @@ void Wellenreiter::buttonClicked()
         logwindow->log( "(i) Daemon has been started." );
         daemonRunning = true;
         button->setText( tr( "Stop Scanning" ) );
-        setCaption( tr( "Wellenreiter/Opie" ) );
+        setCaption( tr( "Scanning ..." ) );
 
     }
 }

@@ -15,7 +15,7 @@
 
 #include "resource.h"
 
-#define PIXMAPPATH "/home/mickey/work/opie/pics"
+#define PIXMAPPATH "/usr/share/wellenreiter/pics/"
 
 namespace Resource
 {
