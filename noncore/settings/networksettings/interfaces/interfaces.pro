@@ -6,11 +6,9 @@ HEADERS		= interface.h  interfaceinformationimp.h  interfaces.h  interfacesetupi
 SOURCES		= interface.cpp interfaces.cpp interfaceinformationimp.cpp  interfacesetupimp.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include ../
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 INTERFACES	= interfaceadvanced.ui  interfaceinformation.ui  interfacesetup.ui
 TARGET		= interfaces
 VERSION		= 1.0.0
-
-
 
 include ( $(OPIEDIR)/include.pro )
