@@ -1,0 +1,10 @@
+TEMPLATE  = app
+CONFIG    = qt warn_on release
+HEADERS   = inputDialog.h
+SOURCES   = inputDialog.cpp main.cpp
+INTERFACES  = 
+TARGET    = stockticker
+INCLUDEPATH     += $(OPIEDIR)/include 
+DEPENDPATH      += $(OPIEDIR)/include
+LIBS+= -lqpe
+DESTDIR = $(OPIEDIR)/bin
