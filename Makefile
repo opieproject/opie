@@ -91,7 +91,7 @@ export include-config := 1
 
 endif
 
--include $(TOPDIR)/..config.cmd
+-include $(TOPDIR)/.config.cmd
 
 SUBDIRS = $(subdir-y)
 
