@@ -109,6 +109,13 @@ signals:
 	 */
 	void selectionEnd( const bool lineBreakPreserve );
 
+slots:
+	
+	/**
+	 * clear selection
+	 */
+	onClearSelection();
+
 };
 
 
