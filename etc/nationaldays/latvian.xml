@@ -3,15 +3,16 @@
 <description value="Latvian holidays"/>
 <entries>
 <entry name="Jaungada diena" date="01-01"/>
-<entry name="Lielā piektdiena" date="25-03"/>
-<entry name="Pirmās Lieldienas" date="27-03"/>
-<entry name="Latvijas Republikas Neatkarības deklarācijas pasludināšanas diena" date="04-05"/>
-<entry name="Līgo diena" date="23-06"/>
-<entry name="Jāņu diena" date="24-06"/>
-<entry name="Latvijas Republikas proklamēšanas diena" date="18-11"/>
-<entry name="Ziemassvētku vakars" date="24-12"/>
-<entry name="Ziemassvētki" date="25-12"/>
-<entry name="Ziemassvētki" date="26-12"/>
-<entry name="Vecgada diena" date="31-12"/>
+<entry name="Lielā piektdiena" date="03-25"/>
+<entry name="Pirmās Lieldienas" date="03-27"/>
+<entry name="Lieldienas" date="03-28"/>
+<entry name="Latvijas Republikas Neatkarības deklarācijas pasludināšanas diena" date="05-04"/>
+<entry name="Līgo diena" date="06-23"/>
+<entry name="Jāņu diena" date="06-24"/>
+<entry name="Latvijas Republikas proklamēšanas diena" date="11-18"/>
+<entry name="Ziemassvētku vakars" date="12-24"/>
+<entry name="Ziemassvētki" date="12-25"/>
+<entry name="Ziemassvētki" date="12-26"/>
+<entry name="Vecgada diena" date="12-31"/>
 </entries>
 </nationaldays>
