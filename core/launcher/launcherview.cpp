@@ -445,6 +445,8 @@ void LauncherItem::paintAnimatedIcon( QPainter *p )
     p2.drawPixmap( x1, y1 + bounceY, *pixmap() );
 #ifdef USE_ANIMATED_BUSY_ICON_OVERLAY
     p2.drawPixmap( x1, y1 + bounceY, liv->busyPixmap(), w * pic, 0, w, h );
+#else
+    Q_UNUSED( pic )
 #endif
     p->drawPixmap( x1, y1, dblBuf );
 }

@@ -196,30 +196,6 @@ Server::~Server()
 #endif
 }
 
-static bool hasVisibleWindow(const QString& clientname, bool partial)
-{
-#ifdef QWS
-    const QList<QWSWindow> &list = qwsServer->clientWindows();
-    QWSWindow* w;
-    for (QListIterator<QWSWindow> it(list); (w=it.current()); ++it) {
-    if ( w->client()->identity() == clientname ) {
-        if ( partial && !w->isFullyObscured() )
-        return TRUE;
-        if ( !partial && !w->isFullyObscured() && !w->isPartiallyObscured() ) {
-# if QT_VERSION < 0x030000
-        QRect mwr = qt_screen->mapToDevice(qt_maxWindowRect,
-            QSize(qt_screen->width(),qt_screen->height()) );
-# else
-        QRect mwr = qt_maxWindowRect;
-# endif
-        if ( mwr.contains(w->requested().boundingRect()) )
-            return TRUE;
-        }
-    }
-    }
-#endif
-    return FALSE;
-}
 
 void Server::activate(const ODeviceButton* button, bool held)
 {
@@ -698,6 +674,8 @@ void Server::applicationTerminated(int pid, const QString &app)
     serverGui->applicationStateChanged( app, ServerInterface::Terminated );
 #if 0
     tsmMonitor->applicationTerminated( pid );
+#else
+    Q_UNUSED( pid )
 #endif
 }
 

@@ -357,8 +357,8 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
     apmTimeout();
     grabKeyboard();
 
-    /* make sure the event filter is installed */
-    const ODeviceButton* but = ODevice::inst()->buttonForKeycode( -1 );
+    /* make sure the event filter is installed */  /* std::limits<short>::max() when you've stdc++ */
+    const ODeviceButton* but = ODevice::inst()->buttonForKeycode( SHRT_MAX );
     Q_CONST_UNUSED( but )
 }
 
