@@ -367,13 +367,7 @@ void OFileSelector::slotCancel()
 /* switch the views */
 void OFileSelector::slotViewCheck(const QString &sel)
 {
-  if( sel == tr("Documents" ) ){
-      initializeOldSelector();
-      m_selector = Normal;
-
-  }else {
-;
-  }
+    setView( sel );
 }
 
 QString OFileSelector::currentMimeType() const{
@@ -474,7 +468,6 @@ void OFileSelector::init()
   initToolbar();
 
   /* initialize the file lister */
-  initLister();
   if( m_selector == Normal ){
       QString mime;
       if (!m_autoMime) {
@@ -648,6 +641,7 @@ void OFileSelector::initializeChooser()
 
 
     updateMimeCheck();
+    fillList();
 
     connect( m_viewCheck, SIGNAL( activated(const QString & ) ),
 	     this, SLOT( slotViewCheck(const QString & ) ) );
@@ -722,10 +716,6 @@ void OFileSelector::initToolbar() {
 
     m_mainView->setToolbar( m_pseudo );
     m_lay->addWidget( m_mainView,  100 );
-}
-/* initialize the OLocalLister */
-void OFileSelector::initLister() {
-    m_lister = new OLocalLister(this);
 }
 /* put default locations into the bar */
 void OFileSelector::initLocations () {
@@ -939,7 +929,54 @@ void OFileSelector::reparse()
   }
   // reenable painting and updates
 }
+/* switch lister to  @param lister */
+void OFileSelector::setLister(const QString& lister) {
+    QStringList listerList = factory()->lister();
 
+    if (listerList.contains(lister) ) {
+        delete (OLister*) m_lister;
+        m_lister = factory()->lister( lister, this );
+    }else if (!m_lister ) {
+        /*
+         * if we do not have a lister
+         * we need to take the default one
+         */
+        m_lister = new OLocalLister(this);
+    }
+    m_listerName = lister;
+}
+void OFileSelector::setView( const QString& lis ) {
+    qWarning("setView ");
+    fillList();
+    if ( lis == tr("Documents") ) {
+        m_selector = Normal;
+        delete m_lister;
+        delete m_fileView;
+        m_lister = 0l;
+        m_fileView = 0l;
+        initializeOldSelector();
+    }else {
+        QString list;
+
+        delete m_lister;
+        delete m_fileView;
+        delete m_select;
+        m_lister =0l;
+        m_fileView = 0l;
+        m_select = 0l;
+        if ( lis.startsWith("All") ) {
+            m_selector = ExtendedAll;
+            list = lis.mid(4 ).stripWhiteSpace();
+        } else{
+            list = lis;
+            m_selector = Extended;
+        }
+        setLister(m_listerName);
+        m_fileView = factory()->view( list, this, m_mainView );
+        m_mainView->setWidget( m_fileView->widget() );
+        reparse();
+    }
+}
 /*
  * the factory
  */
@@ -949,6 +986,27 @@ void OFileSelector::initFactory() {
     m_fileFactory->addView(tr("List View"), newFileListView );
     /* the factory is just a dummy */
     m_fileFactory->addView(tr("Documents"), newFileListView );
+}
+void OFileSelector::fillList() {
+    qWarning("fill list");
+    if (!m_viewCheck )
+        return;
+
+    m_viewCheck->clear();
+    QStringList list = factory()->views();
+    qWarning("views: " + list.join(";") );
+    for (QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
+        qWarning( (*it) );
+        if ( (*it) == tr("Documents") ) {
+            m_viewCheck->insertItem( (*it) );
+        }else{
+            m_viewCheck->insertItem( (*it) );
+            m_viewCheck->insertItem( tr("All ") + (*it) );
+        }
+    }
+}
+OFileFactory* OFileSelector::factory() {
+    return m_fileFactory;
 }
 
 
@@ -1022,3 +1080,21 @@ void OFileSelector::initializeOldSelector() {
     //connect to close me and other signals as well
     m_mainView->setWidget( m_select );
 }
+/*
+ * initialize the listview
+ * we will call fillList
+ * setLister
+ * with QString::null to get the default
+ * setView with either Files or All Files
+ * depending on Extended
+ */
+void OFileSelector::initializeView() {
+    setLister(QString::null);
+    fillList();
+    if (m_selector == Extended ) {
+        setView( tr("Files") );
+    }else{
+        setView( tr("All Files") );
+    }
+}
+

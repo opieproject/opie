@@ -37,6 +37,7 @@
 #include <qpe/fileselector.h>
 
 #include <qdir.h>
+#include <qguardedptr.h>
 #include <qwidget.h>
 #include <qstring.h>
 #include <qpixmap.h>
@@ -231,6 +232,8 @@ class OFileSelector : public QWidget {
    */
   void setMode( int );
 
+  void setLister( const QString& name );
+  void setView( const QString& all );
   /**
    * whether or not to show dirs
    */
@@ -377,6 +380,7 @@ class OFileSelector : public QWidget {
     OFileFactory* m_fileFactory;
     OFileSelectorMain* m_mainView;
     OLister* m_lister;
+    QString m_listerName;
     OFileView* m_fileView;
     FileSelector* m_select;
     int m_mode, m_selector;
@@ -446,10 +450,10 @@ class OFileSelector : public QWidget {
     void updateMimeCheck();
 
     void initializeOldSelector();
-    void initLister();
     void initToolbar();
     void initLocations();
-    void initializeView() {}; // FIXME
+    void initializeView(); // FIXME
+    void fillList();
     void initFactory();
     /**
      * Returns the current mimetype
