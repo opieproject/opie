@@ -64,6 +64,10 @@ public:
       XMLElement *element = root->firstChild();
       element = element->firstChild();
       while( element ){
+	if( element->tagName() != QString::fromLatin1("Task") ){
+	  element = element->nextChild();
+	  continue;
+	}
 	qWarning("ToDoDB::load element tagName() : %s", element->tagName().latin1() );
 	QString dummy;
 	ToDoEvent event;
