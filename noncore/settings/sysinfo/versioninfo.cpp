@@ -50,41 +50,41 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     sv->setFrameStyle( QFrame::NoFrame );
     QWidget *container = new QWidget( sv->viewport() );
     sv->addChild( container );
-    
+
     QVBoxLayout *vb = new QVBoxLayout( container, 4 );
 
     QString kernelVersionString;
     QFile file( "/proc/version" );
-    if ( file.open( IO_ReadOnly ) ) {
-  QTextStream t( &file );
-  QString v;
-  t >> v; t >> v; t >> v;
-  v = v.left( 20 );
-  kernelVersionString = "<qt>"+tr( "<b>Linux Kernel</b><p>Version: " );
-  kernelVersionString.append( v );
-  kernelVersionString.append( "<p>" );
-  t >> v;
-  kernelVersionString.append( tr( "Compiled by: " ) );
-  kernelVersionString.append( v );
-  kernelVersionString.append("</qt>");
-  file.close();
+    if ( file.open( IO_ReadOnly ) )
+    {
+        QTextStream t( &file );
+        QString v;
+        t >> v; t >> v; t >> v;
+        v = v.left( 20 );
+        kernelVersionString = "<qt>" + tr( "<b>Linux Kernel</b><p>Version: " );
+        kernelVersionString.append( v );
+        kernelVersionString.append( "<br>" );
+        t >> v;
+        kernelVersionString.append( tr( "Compiled by: " ) );
+        kernelVersionString.append( v );
+        kernelVersionString.append("</qt>");
+        file.close();
     }
 
-    QString palmtopVersionString = tr( "<b>Opie</b><p>Version: " );
+    QString palmtopVersionString = "<qt>" + tr( "<b>Opie</b><p>Version: " );
     palmtopVersionString.append( QPE_VERSION );
-    palmtopVersionString.append( "<p>" );
+    palmtopVersionString.append( "<br>" );
 #ifdef QPE_VENDOR
     QString builder = QPE_VENDOR;
 #else
     QString builder = "Unknown";
 #endif
-    palmtopVersionString.append( "<qt>"+ tr( "Compiled by: " ) );
+    palmtopVersionString.append( tr( "Compiled by: " ) );
     palmtopVersionString.append(  builder );
-    palmtopVersionString.append( "<p>" );
+    palmtopVersionString.append( "<br>" );
     palmtopVersionString.append( tr( "Built on: " ) );
     palmtopVersionString.append( __DATE__  );
     palmtopVersionString.append( "</qt>" );
-    
 
     QHBoxLayout *hb1 = new QHBoxLayout( vb );
     hb1->setSpacing( 2 );
@@ -124,12 +124,31 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     hb3->setSpacing( 2 );
 
     QLabel *palmtopLogo3 = new QLabel( container );
-    QImage logo3 = Resource::loadImage( "sysinfo/pda" );
-    logo3 = logo3.smoothScale( 50, 55 );
+
+    OModel model = ODevice::inst()->model();
+    QString modelPixmap = "sysinfo/";
+    if ( model == Model_Zaurus_SLC7x0 )
+        modelPixmap += "zaurusc700";
+    else if ( model >= Model_Zaurus_SLC7x0 && model <= Model_Zaurus_SLC7x0 )
+        modelPixmap += "zaurus5500";
+    else if ( model >= Model_iPAQ_H31xx && model <= Model_iPAQ_H5xxx )
+        modelPixmap += "ipaq3600";
+    else if ( model >= Model_SIMpad_CL4 && model <= Model_SIMpad_TSinus )
+        modelPixmap += "simpad";
+    else
+        modelPixmap += "pda";
+
+    QImage logo3 = Resource::loadImage( modelPixmap );
+
+    int width = logo3.width();
+    int height = logo3.height();
+    float aspect = float( height ) / width;
+    logo3 = logo3.smoothScale( 50, 50.0 * aspect );
+
     QPixmap logo3Pixmap;
     logo3Pixmap.convertFromImage( logo3 );
     palmtopLogo3->setPixmap( logo3Pixmap );
-    palmtopLogo3->setFixedSize( 60, 60 );
+    palmtopLogo3->setFixedSize( 60, 100 );
     hb3->addWidget( palmtopLogo3, 0, Qt::AlignTop + Qt::AlignLeft );
 
     QString systemString = "<qt><b>";
@@ -137,9 +156,9 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     systemString.append( "</b>" );
     systemString.append( tr( "<p>Version: " ) );
     systemString.append( ODevice::inst()->systemVersionString() );
-    systemString.append( tr( "<p>Model: " ) );
+    systemString.append( tr( "<br>Model: " ) );
     systemString.append( ODevice::inst()->modelString() );
-    systemString.append( tr( "<p>Vendor: " ) );
+    systemString.append( tr( "<br>Vendor: " ) );
     systemString.append( ODevice::inst()->vendorString() );
     systemString.append("</qt>");
 
