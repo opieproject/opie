@@ -56,8 +56,8 @@
 // ML: Yeah, I hate to include kernel headers, but it's necessary here
 // ML: Here comes an ugly hack to prevent <linux/wireless.h> including <linux/if.h>
 // ML: which conflicts with the user header <net/if.h>
-// ML: We really a user header for the Wireless Extensions, something like <net/wireless.h>
-// ML: I will drop Jean an mail on that subject
+// ML: We really need a user header for the Wireless Extensions, something like <net/wireless.h>
+// ML: I will drop Jean a mail on that subject
 
 #include <net/if.h>
 #define _LINUX_IF_H
@@ -73,9 +73,9 @@ class OMonitoringInterface;
  *======================================================================================*/
 
 /**
- * @brief A container class for all network devices.
+ * @brief A container class for all network interfaces
  *
- * This class provides access to all available network devices of your computer.
+ * This class provides access to all available network interfaces of your computer.
  * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
  */
 class ONetwork : public QObject
@@ -87,6 +87,10 @@ class ONetwork : public QObject
     typedef QDictIterator<ONetworkInterface> InterfaceIterator;
 
   public:
+    /**
+     * @returns the number of available interfaces
+     */
+    int count() const;
     /**
      * @returns a pointer to the (one and only) @ref ONetwork instance.
      */
@@ -106,10 +110,15 @@ class ONetwork : public QObject
      */
      // FIXME: const QString& is prefered over QString!!! -zecke
     ONetworkInterface* interface( const QString& interface ) const;
+    /**
+     * @internal Rebuild the internal interface database
+     * @note Sometimes it might be useful to call this from client code,
+     * e.g. after cardctl insert
+     */
+    void synchronize();
 
   protected:
     ONetwork();
-    void synchronize();
 
   private:
     static ONetwork* _instance;
@@ -174,30 +183,42 @@ class ONetworkInterface : public QObject
      * @returns true if the interface is up.
      */
     bool isUp() const;
-    /*
+    /**
      * @returns true if the interface is a loopback interface.
      */
     bool isLoopback() const;
-    /*
+    /**
      * @returns true if the interface is featuring supports the wireless extension protocol.
      */
     bool isWireless() const;
-    /*
-     * @returns the IPv4 address associated with this interface.
+    /**
+     * Associate the IP address @ addr with the interface.
+     */
+    void setIPV4Address( const QHostAddress& addr );
+    /**
+     * @returns the IPv4 address associated with the interface.
      */
     QString ipV4Address() const;
-    /*
+    /**
      * Associate the MAC address @a addr with the interface.
      * @note It can be necessary to shut down the interface prior to calling this method.
      * @warning This is not supported by all drivers.
      */
     void setMacAddress( const OMacAddress& addr );
-    /*
-     * @returns the MAC address associated with this interface.
+    /**
+     * @returns the MAC address associated with the interface.
      */
     OMacAddress macAddress() const;
-    /*
-     * @returns the data link type currently associated with this interface.
+    /**
+     * Associate the IPv4 @a netmask with the interface.
+     */
+    void setIPV4Netmask( const QHostAddress& netmask );
+    /**
+     * @returns the IPv4 netmask associated with the interface.
+     */
+    QString ipV4Netmask() const;
+    /**
+     * @returns the data link type currently associated with the interface.
      * @see #include <net/if_arp.h> for possible values.
      */
     int dataLinkType() const;

@@ -108,6 +108,12 @@ void ONetwork::synchronize()
 }
 
 
+int ONetwork::count() const
+{
+    return _interfaces.count();
+}
+
+
 ONetworkInterface* ONetwork::interface( const QString& iface ) const
 {
     return _interfaces[iface];
@@ -211,11 +217,21 @@ bool ONetworkInterface::isUp() const
 }
 
 
+void ONetworkInterface::setIPV4Address( const QHostAddress& addr )
+{
+    struct sockaddr_in *sa = (struct sockaddr_in *) &_ifr.ifr_addr;
+    sa->sin_family = AF_INET;
+    sa->sin_port = 0;
+    sa->sin_addr.s_addr = htonl( addr.ip4Addr() );
+    ioctl( SIOCSIFADDR );
+}
+
+
 QString ONetworkInterface::ipV4Address() const
 {
     if ( ioctl( SIOCGIFADDR ) )
     {
-        struct sockaddr_in *sa = (struct sockaddr_in *) &_ifr.ifr_addr;
+        struct sockaddr_in* sa = (struct sockaddr_in *) &_ifr.ifr_addr;
         //FIXME: Use QHostAddress here
         return QString( inet_ntoa( sa->sin_addr ) );
     }
@@ -242,6 +258,29 @@ OMacAddress ONetworkInterface::macAddress() const
     {
         return OMacAddress::unknown;
     }
+}
+
+
+void ONetworkInterface::setIPV4Netmask( const QHostAddress& addr )
+{
+    struct sockaddr_in *sa = (struct sockaddr_in *) &_ifr.ifr_addr;
+    sa->sin_family = AF_INET;
+    sa->sin_port = 0;
+    sa->sin_addr.s_addr = htonl( addr.ip4Addr() );
+    ioctl( SIOCSIFNETMASK );
+}
+
+
+QString ONetworkInterface::ipV4Netmask() const
+{
+    if ( ioctl( SIOCGIFNETMASK ) )
+    {
+        struct sockaddr_in* sa = (struct sockaddr_in *) &_ifr.ifr_addr;
+        //FIXME: Use QHostAddress here
+        return QString( inet_ntoa( sa->sin_addr ) );
+    }
+    else
+        return "<unknown>";
 }
 
 
