@@ -23,6 +23,7 @@ class Tool;
 
 class QAction;
 class QColor;
+class QSpinBox;
 class QToolButton;
 class QWidgetStack;
 
@@ -70,6 +71,9 @@ private slots:
     void pageInformation();
 
 private:
+    void loadConfig();
+    void saveConfig();
+
     DrawPadCanvas* m_pDrawPadCanvas;
 
     Tool* m_pTool;
@@ -101,6 +105,8 @@ private:
     QToolButton* m_pEllipseToolButton;
     QToolButton* m_pPenColorToolButton;
     QToolButton* m_pBrushColorToolButton;
+
+    QSpinBox* m_pPenWidthSpinBox;
 };
 
 #endif // DRAWPAD_H

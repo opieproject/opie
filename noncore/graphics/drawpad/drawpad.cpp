@@ -34,6 +34,7 @@
 #include <opie/colorpopupmenu.h>
 
 #include <qpe/applnk.h>
+#include <qpe/config.h>
 #include <qpe/global.h>
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
@@ -228,12 +229,12 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
 
     QPEToolBar* drawParametersToolBar = new QPEToolBar(this);
 
-    QSpinBox* penWidthSpinBox = new QSpinBox(1, 9, 1, drawParametersToolBar);
-    connect(penWidthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(changePenWidth(int)));
+    m_pPenWidthSpinBox = new QSpinBox(1, 9, 1, drawParametersToolBar);
+    connect(m_pPenWidthSpinBox, SIGNAL(valueChanged(int)), this, SLOT(changePenWidth(int)));
 
-    QToolTip::add(penWidthSpinBox, tr("Pen Width"));
-    penWidthSpinBox->setValue(1);
-    penWidthSpinBox->setFocusPolicy(QWidget::NoFocus);
+    QToolTip::add(m_pPenWidthSpinBox, tr("Pen Width"));
+    m_pPenWidthSpinBox->setValue(1);
+    m_pPenWidthSpinBox->setFocusPolicy(QWidget::NoFocus);
 
     m_pPenColorToolButton = new QToolButton(drawParametersToolBar);
     m_pPenColorToolButton->setPixmap(Resource::loadPixmap("drawpad/pencolor.png"));
@@ -269,10 +270,14 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     } else {
         m_pDrawPadCanvas->initialPage();
     }
+
+    loadConfig();
 }
 
 DrawPad::~DrawPad()
 {
+    saveConfig();
+
     QFile file(Global::applicationFileName("drawpad", "drawpad.xml"));
 
     if (file.open(IO_WriteOnly)) {
@@ -618,4 +623,28 @@ void DrawPad::pageInformation()
     if (pageInformationDialog.exec() == QDialog::Accepted) {
         m_pDrawPadCanvas->currentPage()->setTitle(pageInformationDialog.selectedTitle());
     }
+}
+
+void DrawPad::loadConfig()
+{
+    Config config("drawpad");
+    config.setGroup("General");
+
+    m_pAntiAliasingAction->setOn(config.readBoolEntry("AntiAliasing", false));
+    m_pPenWidthSpinBox->setValue(config.readNumEntry("PenWidth", 1));
+    changePenColor(QColor(config.readEntry("PenColor", Qt::black.name())));
+    changeBrushColor(QColor(config.readEntry("BrushColor", Qt::white.name())));
+    m_pDrawPadCanvas->selectPage(config.readNumEntry("PagePosition", 1));
+}
+
+void DrawPad::saveConfig()
+{
+    Config config("drawpad");
+    config.setGroup("General");
+
+    config.writeEntry("PagePosition", (int)m_pDrawPadCanvas->pagePosition());
+    config.writeEntry("AntiAliasing", antiAliasing());
+    config.writeEntry("PenWidth", (int)m_pen.width());
+    config.writeEntry("PenColor", m_pen.color().name());
+    config.writeEntry("BrushColor", m_brush.color().name());
 }

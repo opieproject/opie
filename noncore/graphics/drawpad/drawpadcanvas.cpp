@@ -346,6 +346,19 @@ void DrawPadCanvas::selectPage(Page* page)
     emit pageBackupsChanged();
 }
 
+void DrawPadCanvas::selectPage(uint pagePosition)
+{
+    m_pages.at(pagePosition - 1);
+    m_pageBackups.clear();
+    m_pageBackups.append(new Page(*(m_pages.current())));
+
+    resizeContents(m_pages.current()->width(), m_pages.current()->height());
+    viewport()->update();
+
+    emit pagesChanged();
+    emit pageBackupsChanged();
+}
+
 void DrawPadCanvas::backupPage()
 {
     m_pages.current()->setLastModified(QDateTime::currentDateTime());
