@@ -1,0 +1,9 @@
+Files: bin/oxygen apps/Applications/oxygencheckbook.desktop pics/oxygen/oxygen.png
+Priority: optional
+Section: applications
+Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Periodic System of the Elements 
+ The chemistry application for the Opie-environment
