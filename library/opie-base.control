@@ -3,7 +3,7 @@ Priority: required
 Section: opie/system
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
+Version: $QPE_VERSION-$SUB_VERSION.1
 Depends: qt-embedded (>=$QTE_VERSION), opie-qcop, opie-taskbar, opie-pics, opie-sounds, apmd
 Description: Base Qtopia environment
  A complete GUI environment for handhelds.
