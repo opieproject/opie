@@ -1,10 +1,10 @@
 Files: 
 Priority: required
 Section: opie/system
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-qipkg opie-base
+Depends: opie-oipkg opie-base
 Description: Bootstrap Qtopia environment
  A complete GUI environment for handhelds.
  You will probably want to install one of the opie-i18n-* packages.
