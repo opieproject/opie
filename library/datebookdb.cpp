@@ -390,6 +390,9 @@ DateBookDB::~DateBookDB()
     save();
     eventList.clear();
     repeatEvents.clear();
+
+    delete d;
+    d=0;
 }
 
 
