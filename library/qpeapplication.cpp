@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.32 2002-12-08 22:34:56 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.33 2002-12-10 23:11:22 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -92,24 +92,27 @@
 class QPEApplicationData
 {
 public:
-	QPEApplicationData() : presstimer( 0 ), presswidget( 0 ), rightpressed( FALSE ),
-			kbgrabber( 0 ), kbregrab( FALSE ), notbusysent( FALSE ), preloaded( FALSE ),
-			forceshow( FALSE ), nomaximize( FALSE ), qpe_main_widget( 0 ),
-			keep_running( TRUE )
+	QPEApplicationData() : presstimer( 0 ), presswidget( 0 ), kbgrabber( 0 ),
+			rightpressed( FALSE ),  kbregrab( FALSE ), notbusysent( FALSE ), preloaded( FALSE ),
+			forceshow( FALSE ), nomaximize( FALSE ), keep_running( TRUE ), qpe_main_widget( 0 )
+			
 	{
 		qcopq.setAutoDelete( TRUE );
 	}
 
 	int presstimer;
 	QWidget* presswidget;
-	QPoint presspos;
-bool rightpressed :
-	1; // AEH why not use uint foobar :1; if it's tt style -zecke
 	int kbgrabber;
-bool kbregrab :
-	1;
-bool notbusysent :
-	1;
+	QPoint presspos;
+
+	bool rightpressed : 1;
+	bool kbregrab     : 1;
+	bool notbusysent  : 1;
+	bool preloaded    : 1;
+	bool forceshow    : 1;
+	bool nomaximize   : 1;
+	bool keep_running : 1;
+
 	QString appName;
 	struct QCopRec
 	{
@@ -122,17 +125,9 @@ bool notbusysent :
 		QCString message;
 		QByteArray data;
 	};
-bool preloaded :
-	1;
-bool forceshow :
-	1;
-bool nomaximize :
-	1;
 	QWidget* qpe_main_widget;
-bool keep_running :
-	1;
 	QList<QCopRec> qcopq;
-
+	
 	void enqueueQCop( const QCString &ch, const QCString &msg,
 	                  const QByteArray &data )
 	{
@@ -211,7 +206,9 @@ bool keep_running :
 	{
 		QString path = QPEApplication::qpeDir() + "/plugins/textcodecs";
 		QDir dir( path, "lib*.so" );
-		QStringList list = dir.entryList();
+		QStringList list;
+		if ( dir. exists ( ))
+		    list = dir.entryList();
 		QStringList::Iterator it;
 		for ( it = list.begin(); it != list.end(); ++it ) {
 			TextCodecInterface *iface = 0;
@@ -234,7 +231,9 @@ bool keep_running :
 	{
 		QString path = QPEApplication::qpeDir() + "/plugins/imagecodecs";
 		QDir dir( path, "lib*.so" );
-		QStringList list = dir.entryList();
+		QStringList list;
+		if ( dir. exists ( ))
+		    list = dir.entryList();
 		QStringList::Iterator it;
 		for ( it = list.begin(); it != list.end(); ++it ) {
 			ImageCodecInterface *iface = 0;
