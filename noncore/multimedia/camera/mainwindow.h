@@ -57,10 +57,15 @@ class CameraMainWindow: public QMainWindow
     void init();
     void startVideoCapture();
     void stopVideoCapture();
-    void postProcessVideo();
+    void postProcessVideo( const QString&, const QString& );
     void performCapture( const QString& );
 
     virtual void timerEvent( QTimerEvent* );
+
+  protected slots:
+    #ifndef QT_NO_DEBUG
+    void doSomething();     // solely for debugging purposes
+    #endif
 
   private:
     PreviewWidget* preview;
@@ -82,10 +87,12 @@ class CameraMainWindow: public QMainWindow
 
     bool _capturing;
     int _pics;
+    int _videos;
 
     QTime _time;
     int _videopics;
     int _capturefd;
+    int _framerate;
     unsigned char* _capturebuf;
 };
 

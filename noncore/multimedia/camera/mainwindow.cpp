@@ -17,6 +17,7 @@
 #include "previewwidget.h"
 #include "zcameraio.h"
 #include "imageio.h"
+#include "avi.h"
 
 #include <qapplication.h>
 #include <qaction.h>
@@ -50,9 +51,13 @@ using namespace Opie;
 #include <unistd.h>
 
 #define CAPTUREFILE "/tmp/capture.dat"
+#define OUTPUTFILE  "/tmp/output.avi"
 
 CameraMainWindow::CameraMainWindow( QWidget * parent, const char * name, WFlags f )
-           :QMainWindow( parent, name, f ), _capturing( false ), _pics( 0 )
+           :QMainWindow( parent, name, f ),
+           _rotation( 270 ), // FIXME: get this from current settings (ODevice?)
+           _capturing( false ),
+           _pics( 0 ), _videos( 0 )
 {
     #ifdef QT_NO_DEBUG
     if ( !ZCameraIO::instance()->isOpen() )
@@ -105,8 +110,8 @@ void CameraMainWindow::init()
     flip = 'A'; // auto
     quality = 50;
     zoom = 1;
-    captureX = 640;
-    captureY = 480;
+    captureX = 480;
+    captureY = 640;
     captureFormat = "JPEG";
 
     resog = new QActionGroup( 0, "reso", true );
@@ -161,14 +166,16 @@ void CameraMainWindow::init()
 
 void CameraMainWindow::systemMessage( const QCString& msg, const QByteArray& data )
 {
+    int _newrotation;
+
     QDataStream stream( data, IO_ReadOnly );
     odebug << "received system message: " << msg << oendl;
     if ( msg == "setCurrentRotation(int)" )
     {
-        stream >> _rotation;
-        odebug << "received setCurrentRotation(" << _rotation << ")" << oendl;
+        stream >> _newrotation;
+        odebug << "received setCurrentRotation(" << _newrotation << ")" << oendl;
 
-        switch ( _rotation )
+        switch ( _newrotation )
         {
             case 270: preview->resize( QSize( 240, 288 ) ); break;
             case 180: preview->resize( QSize( 320, 208 ) ); break;
@@ -176,6 +183,17 @@ void CameraMainWindow::systemMessage( const QCString& msg, const QByteArray& dat
                 "This rotation is not supported.\n"
                 "Supported are 180° and 270°" );
         }
+
+        if ( _newrotation != _rotation )
+        {
+            int tmp = captureX;
+            captureX = captureY;
+            captureY = tmp;
+            _rotation = _newrotation;
+        }
+
+        updateCaption();
+
     }
 }
 
@@ -223,14 +241,31 @@ void CameraMainWindow::showContextMenu()
     m.insertItem( "&Flip", &flip );
     m.insertItem( "&Quality", &quality );
     m.insertItem( "&Output As", &output );
+
+    #ifndef QT_NO_DEBUG
+    m.insertItem( "&Debug!", this, SLOT( doSomething() ) );
+    #endif
+
     m.exec( QCursor::pos() );
 }
 
 
 void CameraMainWindow::resoMenuItemClicked( QAction* a )
 {
-    captureX = a->text().left(3).toInt();
-    captureY = a->text().right(3).toInt();
+    switch ( _rotation )
+    {
+        case 270:
+            captureY = a->text().left(3).toInt();
+            captureX = a->text().right(3).toInt();
+            break;
+        case 180:
+            captureX = a->text().left(3).toInt();
+            captureY = a->text().right(3).toInt();
+            break;
+        default: QMessageBox::warning( this, "opie-camera",
+            "This rotation is not supported.\n"
+            "Supported are 180° and 270°" );
+    }
     odebug << "Capture Resolution now: " << captureX << ", " << captureY << oendl;
     updateCaption();
 }
@@ -325,7 +360,7 @@ void CameraMainWindow::startVideoCapture()
     //ODevice::inst()->touchSound();
     ODevice::inst()->setLedState( Led_Mail, Led_BlinkSlow );
 
-    _capturefd = ::open( CAPTUREFILE, O_WRONLY | O_CREAT );
+    _capturefd = ::open( CAPTUREFILE, O_WRONLY | O_CREAT | O_TRUNC );
     if ( _capturefd == -1 )
     {
         owarn << "can't open capture file: " << strerror(errno) << oendl;
@@ -335,6 +370,7 @@ void CameraMainWindow::startVideoCapture()
     _capturebuf = new unsigned char[captureX*captureY*2];
     _capturing = true;
     _videopics = 0;
+    _framerate = 0;
     updateCaption();
     _time.start();
     preview->setRefreshingRate( 1000 );
@@ -346,9 +382,11 @@ void CameraMainWindow::timerEvent( QTimerEvent* )
 {
     if ( !_capturing )
     {
-        owarn << "timer event in CameraMainWindow without capturing video ?" << oendl;
+        odebug << "timer event in CameraMainWindow without capturing video ?" << oendl;
         return;
     }
+
+    odebug << "timer event during video - now capturing frame #" << _videopics+1 << oendl;
 
     ZCameraIO::instance()->captureFrame( captureX, captureY, zoom, _capturebuf );
     _videopics++;
@@ -366,8 +404,9 @@ void CameraMainWindow::stopVideoCapture()
     _capturing = false;
     updateCaption();
     ::close( _capturefd );
+    _framerate = 1000.0 / (_time.elapsed()/_videopics);
 
-    //postProcessVideo();
+    postProcessVideo( CAPTUREFILE, QString().sprintf( "/tmp/video-%d_%d_%d_q%d-%dfps.avi", _videos++, captureX, captureY, quality, _framerate ) );
 
     #ifndef QT_NO_DEBUG
     preview->setRefreshingRate( 1500 );
@@ -378,13 +417,25 @@ void CameraMainWindow::stopVideoCapture()
     //delete[] _capturebuf; //FIXME: close memory leak
 }
 
-void CameraMainWindow::postProcessVideo()
+void CameraMainWindow::postProcessVideo( const QString& infile, const QString& outfile )
 {
     preview->setRefreshingRate( 0 );
 
     /*
+    unsigned char buf[153600];
 
-    QDialog* fr = new QDialog( this, "splash" ); //, false, QWidget::WStyle_NoBorder | QWidget::WStyle_Customize );
+    int fd = ::open( "/var/compile/opie/noncore/multimedia/camera/capture-320x240.dat", O_RDONLY );
+    ::read( fd, &buf, 153600 );
+    QImage i;
+    bufferToImage( 240, 320, (unsigned char*) &buf, &i );
+    QPixmap p;
+    p.convertFromImage( i );
+    preview->setPixmap( p );
+    imageToFile( &i, "/tmp/tmpfile", "JPEG", 100 );
+    return;
+    */
+
+    QDialog* fr = new QDialog( this, "splash", false, QWidget::WStyle_StaysOnTop ); //, false, QWidget::WStyle_NoBorder | QWidget::WStyle_Customize );
     fr->setCaption( "Please wait..." );
     QVBoxLayout* box = new QVBoxLayout( fr, 2, 2 );
     QProgressBar* bar = new QProgressBar( fr );
@@ -394,35 +445,88 @@ void CameraMainWindow::postProcessVideo()
     box->addWidget( bar );
     box->addWidget( label );
     fr->show();
+    label->show();
+    bar->show();
+    fr->repaint();
     qApp->processEvents();
 
-    for ( int i = 0; i < _videopics; ++i )
-    {
-        label->setText( QString().sprintf( "Post processing frame %d / %d", i+1, _videopics ) );
-        bar->setProgress( i );
-        qApp->processEvents();
-    }
+    // open files
 
-    */
-
-    int infd = ::open( CAPTUREFILE, O_RDONLY );
+    int infd = ::open( (const char*) infile, O_RDONLY );
     if ( infd == -1 )
     {
         owarn << "couldn't open capture file: " << strerror(errno) << oendl;
         return;
     }
 
-    int outfd = ::open( "/tmp/output.avi", O_WRONLY );
+    int outfd = ::open( (const char*) outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644 );
     if ( outfd == -1 )
     {
         owarn << "couldn't open output file: " << strerror(errno) << oendl;
         return;
     }
 
+    int framesize = captureX*captureY*2;
 
+    unsigned char* inbuffer = new unsigned char[ framesize ];
+    QImage image;
 
+    avi_start( outfd, _videopics ); // write preambel
+
+    // post process
+
+    for ( int i = 0; i < _videopics; ++i )
+    {
+        odebug << "processing frame " << i << oendl;
+
+        // <gui>
+        label->setText( QString().sprintf( "Post processing frame %d / %d", i+1, _videopics ) );
+        bar->setProgress( i );
+        bar->repaint();
+        qApp->processEvents();
+        // </gui>
+
+        int read = ::read( infd, inbuffer, framesize );
+        odebug << "read " << read << " bytes" << oendl;
+        bufferToImage( captureX, captureY, inbuffer, &image );
+
+        QPixmap p;
+        p.convertFromImage( image );
+        preview->setPixmap( p );
+        preview->repaint();
+        qApp->processEvents();
+
+        QString tmpfilename( "/tmp/tempfile" );
+        //tmpfilename.sprintf( "/tmp/test/%d.jpg", i );
+
+        imageToFile( &image, tmpfilename, "JPEG", quality );
+
+        QFile framefile( tmpfilename );
+        if ( !framefile.open( IO_ReadOnly ) )
+        {
+            oerr << "can't process file: %s" << strerror(errno) << oendl;
+            return; // TODO: clean up temp ressources
+        }
+
+        int filesize = framefile.size();
+        odebug << "filesize for frame " << i << " = " << filesize << oendl;
+
+        unsigned char* tempbuffer = new unsigned char[ filesize ];
+        framefile.readBlock( (char*) tempbuffer, filesize );
+        avi_add( outfd, tempbuffer, filesize );
+        delete tempbuffer;
+        framefile.close();
+    }
+
+    avi_end( outfd, captureX, captureY, _framerate );
+
+    fr->hide();
+    delete fr;
+
+    updateCaption();
 
 }
+
 
 void CameraMainWindow::updateCaption()
 {
@@ -432,4 +536,16 @@ void CameraMainWindow::updateCaption()
         setCaption( "Opie-Camera: => CAPTURING <=" );
 }
 
+
+#ifndef QT_NO_DEBUG
+void CameraMainWindow::doSomething()
+{
+    captureX = 240;
+    captureY = 320;
+    _videopics = 176;
+    _framerate = 5;
+    postProcessVideo( "/var/compile/opie/noncore/multimedia/camera/capture-320x240.dat",
+    "/tmp/output.avi" );
+}
+#endif
 

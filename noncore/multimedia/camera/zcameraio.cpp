@@ -293,10 +293,7 @@ void ZCameraIO::captureFrame( int w, int h, int zoom, QImage* image )
 {
     int pw = _width;
     int ph = _height;
-    if ( _rot )
-        setCaptureFrame( h, w, zoom*256, true );
-    else
-        setCaptureFrame( w, h, zoom*256, false );
+    setCaptureFrame( w, h, zoom*256, _rot );
     snapshot( image );
     setCaptureFrame( pw, ph, _zoom, _rot );
 }
@@ -307,11 +304,7 @@ void ZCameraIO::captureFrame( int w, int h, int zoom, unsigned char* buf )
     //FIXME: this is too slow
     int pw = _width;
     int ph = _height;
-    if ( _rot )
-        setCaptureFrame( h, w, zoom*256, true );
-    else
-        setCaptureFrame( w, h, zoom*256, false );
-
+    setCaptureFrame( w, h, zoom*256, _rot );
     snapshot( buf );
     setCaptureFrame( pw, ph, _zoom, _rot );
 }
