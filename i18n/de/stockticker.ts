@@ -1,21 +1,22 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>HelpWindow</name>
     <message>
         <source>&amp;Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei &amp;Oeffnen</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;chließen</translation>
     </message>
     <message>
         <source>&amp;Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rückwärts</translation>
     </message>
     <message>
         <source>&amp;Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vorwärts</translation>
     </message>
     <message>
         <source>&amp;Home</source>
@@ -23,11 +24,11 @@
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesezeichen hinzufügen</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Datei</translation>
     </message>
     <message>
         <source>&amp;Go</source>
@@ -39,15 +40,15 @@
     </message>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesezeichen</translation>
     </message>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückwärts</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorwärts</translation>
     </message>
     <message>
         <source>Home</source>
@@ -58,11 +59,11 @@
     <name>InputDialog</name>
     <message>
         <source>Symbol Lookup</source>
-        <translation type="unfinished"></translation>
+        <translation>Symbol Suche</translation>
     </message>
     <message>
         <source>Enter something to lookup / search.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie etwas zum nachschlagen / suchen ein.</translation>
     </message>
 </context>
 </TS>

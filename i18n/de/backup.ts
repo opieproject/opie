@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>BackupAndRestore</name>
     <message>
@@ -12,47 +13,48 @@
     <message>
         <source>Error from System:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler vom System:
+</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Nachricht</translation>
     </message>
     <message>
         <source>Backup Failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sicherung fehlgeschlagen!</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Details</translation>
     </message>
     <message>
         <source>Backup and Restore.. Failed !!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichern und Wiederherstellen... Fehlgeschlagen!!</translation>
     </message>
     <message>
         <source>Backup Successfull.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichern erfolgreich.</translation>
     </message>
     <message>
         <source>Please select something to restore.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte wählen Sie etwas zum wiederherstellen.</translation>
     </message>
     <message>
         <source>Restore Failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellung fehlgeschlagen.</translation>
     </message>
     <message>
         <source>Unable to open File: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Folgende Datei konnte nicht geöffnet werden: %1</translation>
     </message>
     <message>
         <source>Restore Successfull.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederherstellung erfolgreich.</translation>
     </message>
 </context>
 <context>
@@ -95,22 +97,22 @@
     </message>
     <message>
         <source>Update Filelist</source>
-        <translation type="unfinished"></translation>
+        <translation>Erneuere Dateiliste</translation>
     </message>
 </context>
 <context>
     <name>ErrorDialog</name>
     <message>
         <source>Error Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler Information</translation>
     </message>
     <message>
         <source>Error Message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler Meldung:</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;OK</translation>
     </message>
 </context>
 </TS>

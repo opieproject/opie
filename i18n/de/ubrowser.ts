@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>MainView</name>
     <message>
@@ -18,19 +19,19 @@
     <name>QObject</name>
     <message>
         <source>Error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler!</translation>
     </message>
     <message>
         <source>IP-Address not found</source>
-        <translation type="unfinished"></translation>
+        <translation>IP-Adresse nicht gefunden</translation>
     </message>
     <message>
         <source>Error creating socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Erstellen des Sockets</translation>
     </message>
     <message>
         <source>Error connecting to socket</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Verbindungsaufbau zum Socket</translation>
     </message>
 </context>
 </TS>

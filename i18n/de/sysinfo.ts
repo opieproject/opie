@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>FileSysInfo</name>
     <message>
@@ -152,11 +153,11 @@ Click and hold on a module to see additional information about the module, or to
     </message>
     <message>
         <source>Used by</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutzt von</translation>
     </message>
     <message>
         <source>You really want to execute %1 for this module?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie wollen wirklich %1 für dieses Modul ausführen?</translation>
     </message>
 </context>
 <context>
@@ -223,7 +224,7 @@ Klicken Sie und halten Sie den Stylus um weitere Prozessinformationen angezeigt 
     </message>
     <message>
         <source>You really want to send %1 to this process?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie wollen wirklich %1 an diesen Prozess schicken?</translation>
     </message>
 </context>
 <context>

@@ -457,7 +457,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Yearly...</source>
-        <translation>Jählich...</translation>
+        <translation>Jährlich...</translation>
     </message>
     <message>
         <source>No Repeat...</source>

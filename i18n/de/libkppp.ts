@@ -453,7 +453,7 @@ neues Gerät kopiert, das modifiziert werden kann</translation>
     </message>
     <message>
         <source>You must enter a unique device name</source>
-        <translation type="unfinished">Sie müssen einen eindeutigen Gerätnamen angeben</translation>
+        <translation>Sie müssen einen eindeutigen Gerätnamen angeben</translation>
     </message>
 </context>
 <context>
@@ -735,7 +735,7 @@ Bitte Passwort eingeben</translation>
     <name>ModemTransfer</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
 </context>
 <context>
@@ -927,23 +927,23 @@ you setup the modem</source>
     <name>PPPConfigWidget</name>
     <message>
         <source>Configure Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem konfigurieren</translation>
     </message>
     <message>
         <source>Modem failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem Fehler</translation>
     </message>
     <message>
         <source>A critical failure appeard while testing the modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein kritischer Fehler trat beim Modemtest auf</translation>
     </message>
     <message>
         <source>&amp;Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Konten</translation>
     </message>
     <message>
         <source>&amp;Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Geräte</translation>
     </message>
 </context>
 <context>
@@ -954,7 +954,7 @@ you setup the modem</source>
     </message>
     <message>
         <source>Argument:</source>
-        <translation type="unfinished"></translation>
+        <translation>Parameter:</translation>
     </message>
     <message>
         <source>Add</source>
@@ -966,7 +966,7 @@ you setup the modem</source>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardwerte</translation>
     </message>
 </context>
 <context>
@@ -984,11 +984,11 @@ you setup the modem</source>
     <name>QObject</name>
     <message>
         <source>PPP</source>
-        <translation type="unfinished"></translation>
+        <translation>PPP</translation>
     </message>
     <message>
         <source>generic ppp device</source>
-        <translation type="unfinished"></translation>
+        <translation>generisches PPP-Gerät</translation>
     </message>
     <message>
         <source>Unable to open modem.</source>
@@ -1000,32 +1000,33 @@ you setup the modem</source>
     </message>
     <message>
         <source>The modem is not ready.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Modem ist nicht bereit.</translation>
     </message>
     <message>
         <source>The modem is busy.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Modem ist besetzt.</translation>
     </message>
     <message>
         <source>Modem Ready.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem bereit.</translation>
     </message>
     <message>
         <source>Can&apos;t restore tty settings: tcsetattr()
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Kann tty Einstellungen nicht wieder herstellen: tcsetattr()
+</translation>
     </message>
     <message>
         <source>The modem does not respond.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Modem antwortet nicht.</translation>
     </message>
     <message>
         <source>Unknown speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannte Geschwindigkeit</translation>
     </message>
     <message>
         <source>ATI Query</source>
-        <translation type="unfinished"></translation>
+        <translation>ATI Abfrage</translation>
     </message>
     <message>
         <source>Unable to create modem lock file.</source>
@@ -1033,65 +1034,71 @@ you setup the modem</source>
     </message>
     <message>
         <source>Looking for modem...</source>
-        <translation type="unfinished"></translation>
+        <translation>Schaue nach Modem...</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbruch</translation>
     </message>
     <message>
         <source>Modem Query timed out.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitüberschreitung bei Modemabfrage.</translation>
     </message>
     <message>
         <source>Modem device is locked.</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem Gerät ist gesperrt.</translation>
     </message>
     <message>
         <source>Modem Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem bereit</translation>
     </message>
     <message>
         <source>One moment please...</source>
-        <translation type="unfinished"></translation>
+        <translation>Einen Moment bitte...</translation>
     </message>
     <message>
         <source>Modem Query Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Ergebnis der Modemabfrage</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>You&apos;re not allowed to dial out with kppp.
 Contact your system administrator.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie sind nicht befugt mit kppp zu wählen.
+Bitte kontaktieren Sie ihren Systemadministrator.</translation>
     </message>
     <message>
         <source>Cannot find the PPP daemon!
 Make sure that pppd is installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kann den PPP dämon nicht finden!
+Stellen Sie sicher, dass pppd installiert ist.</translation>
     </message>
     <message>
         <source>You do not have the permission to start pppd!
 Contact your system administrator and ask to get access to pppd.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben keine Berechtigung pppd zu starten!
+Fragen Sie Ihren Systemadministrator nach Zugriffsrechten auf pppd.</translation>
     </message>
     <message>
         <source>You don&apos;t have sufficient permission to run
 %1
 Please make sure that kppp is owned by root and has the SUID bit set.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben nicht ausreichend Erlaubnis, um
+%1 auszuführen.
+Stellen Sie sicher, dass kppp root gehört und das SUID bit gesetzt ist.</translation>
     </message>
     <message>
         <source>%1 is missing or can&apos;t be read!
 Ask your system administrator to create this file (can be empty) with appropriate read and write permissions.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 fehlt oder kann nicht gelesen werden!
+Bitten Sie Ihren Systemadministrator diese Datei (sie kann leer sein) mit passenden Lese- und Schreibrechten zu erzeugen .</translation>
     </message>
     <message>
         <source>Edit Modem Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Modemkommandos bearbeiten</translation>
     </message>
     <message>
         <source>Pre-init delay (sec/100):</source>
@@ -1183,15 +1190,15 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Volume:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lautstärke:</translation>
     </message>
     <message>
         <source>Session Bill:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sitzungsrechnung:</translation>
     </message>
     <message>
         <source>Total Bill:</source>
-        <translation type="unfinished"></translation>
+        <translation>Komplette Abrechnung:</translation>
     </message>
     <message>
         <source>Disconnect</source>
@@ -1215,7 +1222,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Connecting to: </source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinde mit:</translation>
     </message>
     <message>
         <source>Online</source>
@@ -1231,7 +1238,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Connecting to: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinde mit: %1</translation>
     </message>
     <message>
         <source>Running pre-startup command...</source>
@@ -1239,7 +1246,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Initializing modem...</source>
-        <translation type="unfinished"></translation>
+        <translation>Initialisiere Modem...</translation>
     </message>
     <message>
         <source>Setting </source>
@@ -1247,7 +1254,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Setting speaker volume...</source>
-        <translation type="unfinished"></translation>
+        <translation>Setze Lautsprecher-Lautstärke...</translation>
     </message>
     <message>
         <source>Turning off dial tone waiting...</source>
@@ -1255,19 +1262,19 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Dialing %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle %1</translation>
     </message>
     <message>
         <source>Line busy. Hanging up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Leitung besetzt, lege auf...</translation>
     </message>
     <message>
         <source>Line busy. Waiting: %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Leitung besetzt, warte %1 Sekunden</translation>
     </message>
     <message>
         <source>No Dialtone</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Wählton</translation>
     </message>
     <message>
         <source>No Carrier</source>
@@ -1279,19 +1286,19 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Saving %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichere %1</translation>
     </message>
     <message>
         <source>Sending %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sende %1</translation>
     </message>
     <message>
         <source>Expecting %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erwarte %1</translation>
     </message>
     <message>
         <source>Pause %1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausiere %1 Sekunden</translation>
     </message>
     <message>
         <source>Timeout %1 seconds</source>
@@ -1303,7 +1310,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Answer</source>
-        <translation type="unfinished"></translation>
+        <translation>Antwort</translation>
     </message>
     <message>
         <source>ID %1</source>
@@ -1311,7 +1318,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Password %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort %1</translation>
     </message>
     <message>
         <source>Prompting %1</source>
@@ -1343,7 +1350,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Starting pppd...</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte pppd...</translation>
     </message>
     <message>
         <source>Scan Var: %1</source>
@@ -1351,7 +1358,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fand: %1</translation>
     </message>
     <message>
         <source>Looping: %1</source>
@@ -1367,7 +1374,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Expecting: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erwarte %1</translation>
     </message>
     <message>
         <source>Logging on to network...</source>
@@ -1379,7 +1386,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Fertig</translation>
     </message>
     <message>
         <source>pppd command + command-line arguments exceed 2024 characters in length.</source>
@@ -1409,7 +1416,7 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>You must specify a telephone number!</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie müssen eine Telefonnummer angeben!</translation>
     </message>
 </context>
 <context>

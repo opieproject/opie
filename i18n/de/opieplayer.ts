@@ -142,7 +142,7 @@ Der Player wird beendet.</translation>
     </message>
     <message>
         <source>Open File or URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei oder URL öffnen</translation>
     </message>
     <message>
         <source>Rescan for Audio Files</source>
@@ -158,7 +158,7 @@ Der Player wird beendet.</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Vollbild</translation>
     </message>
     <message>
         <source>Scale</source>
@@ -170,7 +170,7 @@ Der Player wird beendet.</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
     <message>
         <source>Move Down</source>
@@ -178,11 +178,11 @@ Der Player wird beendet.</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Media</source>
