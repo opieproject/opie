@@ -488,8 +488,9 @@ void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const 
             mail->setBcc( parseAddressList( single_fields.fld_bcc->bcc_addr_list ) );
         if (single_fields.fld_orig_date)
             mail->setDate( parseDateTime( single_fields.fld_orig_date->dt_date_time ) );
-        if (single_fields.fld_message_id->mid_value)
-            mail->setMsgid(QString(single_fields.fld_message_id->mid_value));
+		// crashes when accessing pop3 account
+		//        if (single_fields.fld_message_id->mid_value)
+        //    mail->setMsgid(QString(single_fields.fld_message_id->mid_value));
         refs = single_fields.fld_references;
         if (refs && refs->mid_list && clist_count(refs->mid_list)) {
             char * text = (char*)refs->mid_list->first->data;
