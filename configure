@@ -125,10 +125,12 @@ EOF
    exit 0;
 fi
 
-if [ -f library/custom-$PLATFORM.h ]
+CUSTOM=`echo $PLATFORM | sed -n -e "s/.*-\(.*\)-.*/\1/p"`
+
+if [ -f library/custom-$CUSTOM.h ]
 then
     rm -f library/custom.h
-    ln -s custom-$PLATFORM.h library/custom.h
+    ln -s custom-$CUSTOM.h library/custom.h
 fi
 
 mkdir -p include/qpe
