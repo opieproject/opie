@@ -86,7 +86,7 @@ LIBS            += -lqpe -lopie
 TARGET		= tinykate
 
 INCLUDEPATH += $(OPIEDIR)/include
-DESTDIR      = $(QTDIR)/lib$(PROJMAK)
+DESTDIR      = $(OPIEDIR)/lib$(PROJMAK)
 
 
 

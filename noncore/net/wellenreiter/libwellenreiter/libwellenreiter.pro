@@ -7,7 +7,7 @@ SOURCES = source/cardmode.cc source/wl_log.cc source/wl_proto.cc source/sniff.cc
 LIBS =
 TMAKE_CFLAGS += -D__UNIX__
 
-DESTDIR = $(QTDIR)/lib
+DESTDIR = $(OPIEDIR)/lib
 TARGET = wellenreiter
 
 

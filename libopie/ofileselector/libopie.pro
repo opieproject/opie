@@ -74,7 +74,7 @@ SOURCES   = ofontmenu.cc  \
 
 TARGET    = opie
 INCLUDEPATH += $(OPIEDIR)/include
-DESTDIR      = $(QTDIR)/lib$(PROJMAK)
+DESTDIR      = $(OPIEDIR)/lib$(PROJMAK)
 #VERSION = 1.0.0
 
 # LIBS            += -lopiesql

@@ -21,7 +21,7 @@ SOURCES		=	configfile.cpp \
 INCLUDEPATH	+=	$(OPIEDIR)/include
 LIBS		+=	-L$(OPIEDIR)/lib -lqpe
 TARGET		=	mail
-DESTDIR		=	$(QTDIR)/lib
+DESTDIR      = $(OPIEDIR)/lib
 
 TRANSLATIONS = ../../../i18n/de/libmail.ts \
 	 ../../../i18n/da/libmail.ts \

@@ -1,4 +1,4 @@
-Files: $QTDIR/lib/libftplib.*
+Files: $OPIEDIR/lib/libftplib.*
 Priority: optional
 Section: Communications
 Maintainer: L.J. Potter <ljp@llornkcor.com> 

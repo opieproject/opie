@@ -21,7 +21,7 @@ SOURCES		= osqlbackend.cpp \
 
 TARGET		= opiesql
 INCLUDEPATH += $(OPIEDIR)/include
-DESTDIR         = $(QTDIR)/lib$(PROJMAK)
+DESTDIR      = $(OPIEDIR)/lib$(PROJMAK)
 LIBS += -lsqlite
 #VERSION = 1.0.0
 
