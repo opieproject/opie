@@ -200,11 +200,13 @@ QList<Folder>* IMAPwrapper::listFolders()
             temp = list->mb_name;
             if (temp.lower()=="inbox")
                 continue;
+            if (temp.lower()==account->getPrefix().lower())
+                continue;
             if ( (bflags = list->mb_flag) ) {
                 selectable = !(bflags->mbf_type==MAILIMAP_MBX_LIST_FLAGS_SFLAG&&
                             bflags->mbf_sflag==MAILIMAP_MBX_LIST_SFLAG_NOSELECT);
             }
-            folders->append(new IMAPFolder(temp,selectable));
+            folders->append(new IMAPFolder(temp,selectable,account->getPrefix()));
         }
     } else {
         qDebug("error fetching folders %s",m_imap->imap_response);

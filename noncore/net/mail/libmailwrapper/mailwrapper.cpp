@@ -34,8 +34,18 @@ Folder::Folder(const QString&tmp_name )
             nameDisplay = nameDisplay.replace( pos, end - pos + 1, "oe" );
         }
     }
-
     qDebug( "folder " + name + " - displayed as " + nameDisplay );
+}
+
+
+IMAPFolder::IMAPFolder(const QString&name,bool select,const QString&prefix )
+    : Folder( name ),m_MaySelect(select)
+{
+    if (prefix.length()>0) {
+        if (nameDisplay.startsWith(prefix) && nameDisplay.length()>prefix.length()) {
+            nameDisplay=nameDisplay.right(nameDisplay.length()-prefix.length());
+        }
+    }
 }
 
 MailWrapper::MailWrapper( Settings *s )

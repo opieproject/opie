@@ -76,7 +76,7 @@ public:
     const QString&getName()const { return name; }
     virtual bool may_select()const{return true;};    
 
-private:
+protected:
     QString nameDisplay, name;
     
 };
@@ -84,7 +84,7 @@ private:
 class IMAPFolder : public Folder
 {
     public:
-        IMAPFolder( QString name,bool select=true ) : Folder( name ),m_MaySelect(select) {}
+        IMAPFolder(const QString&name,bool select=true,const QString&prefix="" );
         virtual bool may_select()const{return m_MaySelect;}
     private:
         bool m_MaySelect;
