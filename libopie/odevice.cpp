@@ -647,7 +647,8 @@ bool iPAQ::setDisplayBrightness ( int bright )
 
 	// 128 is the maximum if you want a decent lifetime for the LCD
 	
-	bright = (int) (( ::pow ( 2, double( bright ) / 255.0 ) - 1 ) * 128.0 ); // logarithmic
+	if ( bright > 1 ) 
+		bright = (int) ( 0.5 + ( ::pow ( 2, double( bright ) / 255.0 ) - 1 ) * 128.0 ); // logarithmic
 //	bright = ( bright + 1 ) / 2;
 	
 	if ((( fd = ::open ( "/dev/ts", O_WRONLY )) >= 0 ) ||
