@@ -315,6 +315,7 @@ public:
   void setInterval ( int interval )
   {
     setIntervals ( -1, -1, interval );
+    setIntervalsAC ( -1, -1, interval );
   }
 
   void setMode ( int mode )
