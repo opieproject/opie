@@ -23,7 +23,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
-using namespace Opie::Core;
+#include <opie2/oapplication.h>
 
 /* QT */
 #include <qpainter.h>
@@ -189,7 +189,7 @@ private:
 
 int main( int argc, char** argv )
 {
-    app = new QPEApplication( argc, argv );
+    app = new Opie::Core::OApplication( argc, argv );
 
     loader = new PluginLoader( "application" );
 
