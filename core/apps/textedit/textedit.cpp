@@ -416,35 +416,38 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 }
 
 TextEdit::~TextEdit() {
-    owarn << "textedit d'tor" << oendl;
+    if( edited1 && !promptExit) {
+				switch( savePrompt() ) {
+					case 1: {
+							saveAs();
+					}
+							break;
+				};
+		}
+
     delete editor;
 }
 
 void TextEdit::closeEvent(QCloseEvent *) {
-    if( edited1 && promptExit)
-      {
-          switch( savePrompt() )
-            {
-              case 1:
-              {
-                  saveAs();
-                  qApp->quit();
-              }
-              break;
+    if(  promptExit) {
+				switch( savePrompt() ) {
+					case 1: {
+							saveAs();
+							qApp->quit();
+					}
+							break;
 
-              case 2:
-              {
-                  qApp->quit();
-              }
-              break;
+					case 2: {
+							qApp->quit();
+					}
+							break;
 
-              case -1:
-                  break;
-            };
-      }
+					case -1:
+							break;
+				};
+		}
     else
         qApp->quit();
-
 }
 
 void TextEdit::cleanUp() {
