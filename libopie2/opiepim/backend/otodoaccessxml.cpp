@@ -15,6 +15,7 @@
 #include <qpe/stringutil.h>
 #include <qpe/timeconversion.h>
 
+#include "oconversion.h"
 #include "otimezone.h"
 #include "orecur.h"
 #include "otodoaccessxml.h"
@@ -98,19 +99,20 @@ bool OTodoAccessXML::load() {
     dict.insert("DateYear" ,       new int(OTodo::DateYear)         );
     dict.insert("Progress" ,       new int(OTodo::Progress)         );
     dict.insert("CompletedDate",   new int(OTodo::CompletedDate)    );
+    dict.insert("StartDate",       new int(OTodo::StartDate)        );
     dict.insert("CrossReference",  new int(OTodo::CrossReference)   );
     dict.insert("State",           new int(OTodo::State)            );
     dict.insert("Alarms",          new int(OTodo::Alarms)           );
     dict.insert("Reminders",       new int(OTodo::Reminders)        );
     dict.insert("Notifiers",       new int(OTodo::Notifiers)        );
     dict.insert("Maintainer",      new int(OTodo::Maintainer)       );
-    dict.insert("rtype", new int(FRType) );
-    dict.insert("rweekdays", new int(FRWeekdays) );
-    dict.insert("rposition", new int(FRPosition) );
-    dict.insert("rfreq", new int(FRFreq) );
-    dict.insert("start", new int(FRStart) );
-    dict.insert("rhasenddate", new int(FRHasEndDate) );
-    dict.insert("enddt", new int(FREndDate) );
+    dict.insert("rtype",           new int(FRType)                  );
+    dict.insert("rweekdays",       new int(FRWeekdays)              );
+    dict.insert("rposition",       new int(FRPosition)              );
+    dict.insert("rfreq",           new int(FRFreq)                  );
+    dict.insert("start",           new int(FRStart)                 );
+    dict.insert("rhasenddate",     new int(FRHasEndDate)            );
+    dict.insert("enddt",           new int(FREndDate)               );
 
     // here the custom XML parser from TT it's GPL
     // but we want to push OpiePIM... to TT.....
@@ -414,6 +416,12 @@ void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
     case OTodo::Progress:
         ev.setProgress( val.toInt() );
         break;
+    case OTodo::CompletedDate:
+        ev.setCompletedDate( OConversion::dateFromString( val ) );
+        break;
+    case OTodo::StartDate:
+        ev.setStartDate( OConversion::dateFromString( val ) );
+        break;
     case OTodo::CrossReference:
     {
         /*
@@ -503,6 +511,11 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
     if ( ev.hasRecurrence() ) {
         str += ev.recurrence().toString();
     }
+    if ( ev.hasStartDate() )
+        str += "StartDate=\""+ OConversion::dateToString( ev.startDate() ) +"\" ";
+    if ( ev.hasCompletedDate() )
+        str += "CompletedDate=\""+ OConversion::dateToString( ev.completedDate() ) +"\" ";
+
 
     return str;
 }
