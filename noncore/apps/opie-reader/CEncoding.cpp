@@ -3,14 +3,13 @@
 
 void CUtf8::getch(tchar& ch, CStyle& sty)
 {
-    int iret;
-    parent->getch(iret, sty);
-    if (iret == EOF)
+    tchar ret;
+    parent->getch(ret, sty);
+    if (ret == UEOF)
     {
 	ch = UEOF;
 	return;
     }
-    tchar ret = iret;
     int count = 0;
     if (ret & (1 << 7))
     {
@@ -18,6 +17,7 @@ void CUtf8::getch(tchar& ch, CStyle& sty)
 	while ((flags & (1 << 7)) != 0)
 	{
 	    ret <<= 6;
+	    tchar iret;
 	    parent->getch(iret, sty);
 	    ret += iret & 0x3f;
 	    flags <<= 1;
@@ -45,9 +45,9 @@ void CUtf8::getch(tchar& ch, CStyle& sty)
 
 void CUcs16be::getch(tchar& ch, CStyle& sty)
 {
-    int iret;
+    tchar iret;
     parent->getch(iret, sty);
-    if (iret == EOF)
+    if (iret == UEOF)
     {
 	ch = UEOF;
 	return;
@@ -59,9 +59,9 @@ void CUcs16be::getch(tchar& ch, CStyle& sty)
 
 void CUcs16le::getch(tchar& ch, CStyle& sty)
 {
-    int iret;
+    tchar iret;
     parent->getch(iret, sty);
-    if (iret == EOF)
+    if (iret == UEOF)
     {
 	ch = UEOF;
 	return;
@@ -73,12 +73,12 @@ void CUcs16le::getch(tchar& ch, CStyle& sty)
 
 void Ccp1252::getch(tchar& ch, CStyle& sty)
 {
-    int iret;
+    tchar iret;
     parent->getch(iret, sty);
     ch = iret;
     switch (ch)
     {
-	case EOF:
+	case UEOF:
 	    ch = UEOF;
 	    break;
 	case 0x80:
@@ -197,9 +197,9 @@ void CPalm::getch(tchar& ch, CStyle& sty)
 
 void CAscii::getch(tchar& ch, CStyle& sty)
 {
-    int iret;
+    tchar iret;
     parent->getch(iret, sty);
-    if (iret == EOF)
+    if (iret == UEOF)
     {
 	ch = UEOF;
     }

@@ -3,17 +3,19 @@
 
 typedef unsigned short StyleType;
 
-#include <stdlib.h>
+#ifdef _WINDOWS
 #include <string.h>
+#endif
+#include <stdlib.h>
 #include <qglobal.h>
-class QPixmap;
+class QImage;
 
 struct GraphicLink
 {
-    QPixmap* graphic;
+    QImage* graphic;
     bool isLink;
     unsigned long link;
-    GraphicLink(QPixmap* p, bool isLnk, unsigned long tgt) :
+    GraphicLink(QImage* p, bool isLnk, unsigned long tgt) :
 	graphic(p), isLink(isLnk), link(tgt) {}
     ~GraphicLink();
 };
@@ -21,8 +23,9 @@ struct GraphicLink
 struct pmstore
 {
     unsigned int count;
+    bool m_isScaleable;
     GraphicLink*     graphic;
-    pmstore(QPixmap* p, bool isLnk, unsigned long tgt) : count(1)
+    pmstore(bool _canScale, QImage* p, bool isLnk, unsigned long tgt) : count(1), m_isScaleable(_canScale)
 	{
 	    graphic = new GraphicLink(p, isLnk, tgt);
 	}
@@ -51,6 +54,8 @@ class CBasicStyle
     bool m_strikethru;
     bool m_monospaced;
     unsigned char m_leftmargin, m_rightmargin;
+    signed char m_extraspace;
+    signed char m_voffset;
     CBasicStyle()
 	{
 	    unset();
@@ -73,6 +78,8 @@ class CBasicStyle
 	    m_leftmargin = 0;
 	    m_rightmargin = 0;
 	    m_monospaced = false;
+	    m_extraspace = 0;
+	    m_voffset = 0;
 	}
 };
 
@@ -81,6 +88,10 @@ class CStyle
     CBasicStyle sty;
     pmstore* graphic;
  public:
+    signed char getVOffset() { return sty.m_voffset; }
+    void setVOffset(signed char sp) { sty.m_voffset = sp; }
+    signed char getExtraSpace() { return sty.m_extraspace; }
+    void setExtraSpace(signed char sp) { sty.m_extraspace = sp; }
     bool getPictureLink()
 	{
 	    return (graphic != NULL && graphic->graphic->isLink);
@@ -104,16 +115,17 @@ class CStyle
 	}
     CStyle() : graphic(NULL) {}
     ~CStyle();
-    CStyle(CStyle&);
+//    CStyle(CStyle&);
     CStyle(const CStyle&);
     CStyle& operator=(const CStyle&);
     void unset();
     bool isPicture() { return (graphic != NULL); }
+    bool canScale() { return graphic->m_isScaleable; }
     void clearPicture();
-    void setPicture(QPixmap* _g, bool il=false, unsigned long tgt=0);
-    QPixmap* getPicture()
+    void setPicture(bool canScale, QImage* _g, bool il=false, unsigned long tgt=0);
+    QImage* getPicture()
 	{ 
-	    QPixmap* pm = ((graphic != NULL) ? graphic->graphic->graphic : NULL);
+	    QImage* pm = ((graphic != NULL) ? graphic->graphic->graphic : NULL);
 	    return pm;
 	}
     void setUnderline() { sty.m_underline = true; }
@@ -157,7 +169,7 @@ class CStyle
 	{
 	    sty.m_fontsize = _fs;
 	}
-    int getFontSize()
+    int getFontSize() const
 	{
 	    return sty.m_fontsize;
 	}

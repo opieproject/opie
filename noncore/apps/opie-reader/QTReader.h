@@ -1,6 +1,8 @@
 #ifndef __QTREADER_H
 #define __QTREADER_H
 
+//#define _SCROLLPIPE
+
 #include <qwidget.h>
 //#include <qpainter.h>
 #include "my_list.h"
@@ -14,28 +16,42 @@ class CDrawBuffer;
 class QPainter;
 class QTimer;
 class QPixmap;
-class statedata;
 
 class QTReader : public QWidget
 {
     Q_OBJECT
 
+	static tchar pluckernextpart[];
+	static tchar jplucknextpart[];
       friend class QTReaderApp;
-    void suspend() { buffdoc.suspend(); }
+    void suspend();
+    void increaseScroll();
+    void reduceScroll();
     void drawText(QPainter& p, int x, int y, tchar* text);
     int m_delay;
     unsigned int m_overlap;
-    bool m_autoScroll;
+    bool m_autoScroll, m_swapmouse;
     void autoscroll();
     QTimer* timer;
-    int m_scrolldy1, m_scrolldy2, m_encd;
+    int m_scrolldy1, m_scrolldy2, m_encd, m_scrollpart;
     void focusInEvent(QFocusEvent*);
     void focusOutEvent(QFocusEvent*);
+    void processmousepositionevent( QMouseEvent* _e );
+    void processmousewordevent(size_t startpos, size_t startoffset, QMouseEvent* _e, int lineno);
     bool ChangeFont(int);
     bool getline(CDrawBuffer*);
     int m_charWidth;
     int m_charpc;
+    unsigned char m_border;
     FontControl m_fontControl;
+    void setBaseSize(unsigned char _s) { m_fontControl.setBaseSize(_s); }
+    unsigned char getBaseSize() { return m_fontControl.getBaseSize(); }
+#ifdef _SCROLLPIPE
+    FILE* m_pipeout;
+    QString m_pipetarget;
+    bool m_isPaused;
+    bool m_pauseAfterEachPara;
+#endif
 public:
     QTReader( QWidget *parent=0, const char *name=0, WFlags f = 0);
     //    QTReader( const QString& filename, QWidget *parent=0, const tchar *name=0, WFlags f = 0);
@@ -86,89 +102,22 @@ public:
 	  }
       };
     */
-    void setpeanut(bool _b)
-      {
-	bpeanut = _b;
-	setfilter(getfilter());
-      }
-    void setremap(bool _b)
-      {
-	bremap = _b;
-	setfilter(getfilter());
-      }
-    void setmakebold(bool _b)
-      {
-	bmakebold = _b;
-	setfilter(getfilter());
-      }
-    void setautofmt(bool _b)
-      {
-	bautofmt = _b;
-	if (bautofmt)
+    void setlead(int _lead)
 	{
-	    btextfmt = false;
-	    bstriphtml = false;;
-	    bpeanut = false;
+	    m_fontControl.setlead(_lead);
 	}
-	setfilter(getfilter());
-      }
-    void settextfmt(bool _b)
-      {
-	btextfmt = _b;
-	setfilter(getfilter());
-      }
-    void setstripcr(bool _b)
-      {
-	bstripcr = _b;
-	setfilter(getfilter());
-      }
-    void setonespace(bool _b)
-      {
-	bonespace = _b;
-	setfilter(getfilter());
-      }
-#ifdef REPALM
-    void setrepalm(bool _b)
-      {
-	brepalm = _b;
-	setfilter(getfilter());
-      }
-#endif
-    void setstriphtml(bool _b)
-      {
-	bstriphtml = _b;
-	setfilter(getfilter());
-      }
-    void setdehyphen(bool _b)
-      {
-	bdehyphen = _b;
-	setfilter(getfilter());
-      }
-    void setunindent(bool _b)
-      {
-	bunindent = _b;
-	setfilter(getfilter());
-      }
-    void setrepara(bool _b)
-      {
-	brepara = _b;
-	setfilter(getfilter());
-      }
-    void setdblspce(bool _b)
-      {
-	bdblspce = _b;
-	setfilter(getfilter());
-      }
-    void indentplus()
-      {
-	if (bindenter < 15) bindenter += 2;
-	setfilter(getfilter());
-      }
-    void indentminus()
-      {
-	if (bindenter > 1) bindenter -= 2;
-	setfilter(getfilter());
-      }
+    int getlead()
+	{
+	    return m_fontControl.getlead();
+	}
+    void setextraspace(int _lead)
+	{
+	    m_fontControl.setextraspace(_lead);
+	}
+    int getextraspace()
+	{
+	    return m_fontControl.getextraspace();
+	}
     void setpagemode(bool _b)
       {
 	m_bpagemode = _b;
@@ -187,21 +136,26 @@ public:
     MarkupType PreferredMarkup();
     CEncoding* getencoding()
 	{
+//	    qDebug("m_encd:%d", m_encd);
 	    switch (m_encd)
 	    {
-		case 5:
-		    return new Ccp1252;
 		case 4:
+//		    qDebug("palm");
 		    return new CPalm;
 		case 1:
+//		    qDebug("utf8");
 		    return new CUtf8;
 		case 2:
+//		    qDebug("ucs16be");
 		    return new CUcs16be;
 		case 3:
+//		    qDebug("ucs16le");
 		    return new CUcs16le;
 		case 0:
-		default:
+//		    qDebug("ascii");
 		    return new CAscii;
+		default:
+		    return new CGeneral8Bit(m_encd-MAX_ENCODING+1);
 	    }
 	}
   CFilterChain* getfilter()
@@ -223,12 +177,18 @@ public:
     if (brepalm) filt->addfilter(new repalm);
 #endif
     if (bremap) filt->addfilter(new remap);
+    if (bdepluck) filt->addfilter(new DePluck(pluckernextpart));
+    if (bdejpluck) filt->addfilter(new DePluck(jplucknextpart));
     if (bmakebold) filt->addfilter(new embolden);
+    if (bfulljust) filt->addfilter(new FullJust);
     return filt;
   }
 
 
 private slots:
+    void goHome();
+    void goBack();
+    void goForward();
 	void doscroll();
     void   drawIt( QPainter * );
     void   paintEvent( QPaintEvent * );
@@ -260,7 +220,8 @@ private slots:
   CBufferFace<CDrawBuffer*> textarray;
   CBufferFace<size_t>   locnarray;
   unsigned int numlines;
-  bool bstripcr, btextfmt, bstriphtml, bdehyphen, bunindent, brepara, bdblspce, btight, bmakebold, bremap, bpeanut, bautofmt, bonespace;
+//  bool m_showlast;
+  bool bstripcr, btextfmt, bstriphtml, bdehyphen, bdepluck, bdejpluck, bunindent, brepara, bdblspce, btight, bmakebold, bremap, bpeanut, bautofmt, bonespace, bfulljust;
 #ifdef REPALM
   bool brepalm;
 #endif
@@ -270,10 +231,10 @@ private slots:
   size_t m_lastposn;
  public:
   bool bDoUpdates;
-  bool m_navkeys;
   void NavUp();
   void NavDown();
-  int getch() { return buffdoc.getch(); }
+  tchar getch() { return buffdoc.getch(); }
+  bool synch(size_t, size_t);
   bool tight;
   bool load_file(const char *newfile, unsigned int lcn=0);
   BuffDoc buffdoc;
@@ -292,7 +253,7 @@ private slots:
   //  bool bold;
   int textsize() { return m_textsize; }
   void textsize(int ts) { m_textsize = ts; }
-  bool fillbuffer(int ru = 0, int ht = 0);
+  bool fillbuffer(int ru = 0, int ht = 0, int newht = -1);
   unsigned int screenlines();
   void sizes(unsigned long& fs, unsigned long& ts) { buffdoc.unsuspend(); buffdoc.sizes(fs,ts); }
   static const char *fonts[];
@@ -300,13 +261,12 @@ private slots:
   int m_ascent, m_descent, m_linespacing;
   QFontMetrics* m_fm;
   QString firstword();
-  void setstate(const statedata& sd);
 
  signals:
   void OnRedraw();
   void OnWordSelected(const QString&, size_t, const QString&);
-  void OnActionPressed();
-  void OnShowPicture(QPixmap&);
+  void OnShowPicture(QImage&);
+  void OnURLSelected(const QString&);
 };
 
 #endif

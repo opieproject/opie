@@ -9,6 +9,7 @@ struct statedata
     bool bstriphtml/*:1*/;
     bool bpeanut/*:1*/;
     bool bdehyphen/*:1*/;
+    bool bdepluck/*:1*/;
     bool bonespace/*:1*/;
     bool bunindent/*:1*/;
     bool brepara/*:1*/;

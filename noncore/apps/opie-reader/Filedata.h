@@ -26,11 +26,11 @@ class CFiledata
 	    if (m_own && data != NULL)
 		{
 		    delete [] data;
-		qDebug("~Filedata: deleting");
+//		qDebug("~Filedata: deleting");
 		}
 	    else
 	    {
-		qDebug("~Filedata: not deleting");
+//		qDebug("~Filedata: not deleting");
 	    }
 	}
     tchar* name() const { return (tchar*)(data+sizeof(time_t)); }

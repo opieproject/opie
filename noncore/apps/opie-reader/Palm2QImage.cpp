@@ -1,8 +1,9 @@
 /* -*- mode: c; indent-tabs-mode: nil; -*- */
+#include "useqpe.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#ifndef WINDOWS
+#ifndef _WINDOWS
 #include <unistd.h>     /* for link */
 #endif
 #include <sys/types.h>
@@ -202,7 +203,7 @@ QImage* Palm2QImage
     return NULL;
   }
 
-#ifdef WINDOWS
+#ifndef USEQPE
   QImage* qimage = new QImage(width, height, 32);
 #else
       QImage* qimage = new QImage(width, height, 16);

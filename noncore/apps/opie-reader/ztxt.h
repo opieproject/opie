@@ -1,13 +1,18 @@
 #ifndef __ztxt_h
 #define __ztxt_h
 
+#include "useqpe.h"
 #include "CExpander.h"
-#include "zlib/zlib.h"
+#include <zlib.h>
 #include "pdb.h"
+#ifdef _WINDOWS
+#include <winsock.h>
+#endif
+
 /*
  * Stuff common to both Weasel Reader and makeztxt
  *
- * $Id: ztxt.h,v 1.3 2002/10/16 21:23:34 tim Exp $
+ * $Id: ztxt.h,v 1.4 2003/01/29 14:06:06 tim Exp $
  *
  */
 
@@ -75,20 +80,22 @@ class ztxt : public CExpander, Cpdb
     size_t currentpos;
     void home();
 public:
-  virtual void suspend()
+#ifdef USEQPE
+	void suspend()
       {
 	  CExpander::suspend(fin);
       }
-  virtual void unsuspend()
+  void unsuspend()
       {
 	  CExpander::unsuspend(fin);
       }
-    virtual void sizes(unsigned long& _file, unsigned long& _text)
+#endif
+    void sizes(unsigned long& _file, unsigned long& _text)
 	{
 	    _file = file_length;
 	    _text = ntohl(hdr0.size);
 	}
-    virtual bool hasrandomaccess() { return (hdr0.randomAccess != 0); }
+    bool hasrandomaccess() { return (hdr0.randomAccess != 0); }
     virtual ~ztxt()
 	{
 	    if (expandedtextbuffer != NULL) delete [] expandedtextbuffer;
@@ -99,12 +106,12 @@ public:
 	    }
 	}
     ztxt();
-    virtual int OpenFile(const char *src);
-    virtual int getch();
-    virtual unsigned int locate();
-    virtual void locate(unsigned int n);
-    virtual CList<Bkmk>* getbkmklist();
-    virtual MarkupType PreferredMarkup()
+    int OpenFile(const char *src);
+    int getch();
+    unsigned int locate();
+    void locate(unsigned int n);
+    CList<Bkmk>* getbkmklist();
+    MarkupType PreferredMarkup()
 	{
 	    return cTEXT;
 	}

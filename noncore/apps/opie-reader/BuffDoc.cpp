@@ -1,44 +1,60 @@
-#include "name.h"
+#include "names.h"
+
+#define NEWLINEBREAK
 
 #include "BuffDoc.h"
 //#include <FL/fl_draw.h>
 #include "config.h"
 #include "CDrawBuffer.h"
 #include "plucker.h"
+#include "usenef.h"
+#ifdef USENEF
+#include "nef.h"
+#include "arrierego.h"
+#endif
 
-
-bool BuffDoc::hyperlink(unsigned int n)
+linkType BuffDoc::hyperlink(unsigned int n, QString& wrd)
 {
-    bool bRet = false;
-    lastword.empty();
-    lastsizes[0] = laststartline = n;
-    lastispara = false;
+    linkType bRet = eNone;
     if (exp != NULL)
     {
-	bRet = exp->hyperlink(n);
-	lastsizes[0] = laststartline = exp->locate();
+	bRet = exp->hyperlink(n, wrd);
+	if (bRet == eLink)
+	{
+	    lastword.empty();
+	    lastsizes[0] = laststartline = n;
+#ifdef NEWLINEBREAK
+	    lastispara = true;
+#else
+	    lastispara = false;
+#endif
+	    lastsizes[0] = laststartline = exp->locate();
+	}
     }
     return bRet;
 }
 
 void BuffDoc::locate(unsigned int n)
 {
-  //  qDebug("BuffDoc:locating:%u",n);
+  //  //qDebug("BuffDoc:locating:%u",n);
     lastword.empty();
   lastsizes[0] = laststartline = n;
-  lastispara = false;
+#ifdef NEWLINEBREAK
+    lastispara = true;
+#else
+    lastispara = false;
+#endif
   //    tchar linebuf[1024];
   if (exp != NULL) exp->locate(n);
-  //  qDebug("BuffDoc:Located");
+  //  //qDebug("BuffDoc:Located");
 }
 
-#define NEWLINEBREAK
 #ifdef NEWLINEBREAK
-bool BuffDoc::getline(CDrawBuffer* buff, int wth)
+bool BuffDoc::getline(CDrawBuffer* buff, int wth, unsigned char _border)
 {
     bool moreleft = true;
     bool margindone = false;
-    int w = wth-2*BORDER;
+    int w = wth-2*_border;
     tchar ch = 32;
     CStyle cs;
     buff->empty();
@@ -60,14 +76,18 @@ bool BuffDoc::getline(CDrawBuffer* buff, int wth)
     else buff->empty();
     lastword.empty();
     unsigned int slen = buff->width(len);
-    lastispara = false;
+    if (lastispara) buff->setstartpara();
     while (1)
     {
 	lastsizes[len] = exp->locate();
 	getch(ch, cs);
+	if (ch == 10 && len == 0 && !lastispara)
+	{
+	    lastsizes[len] = exp->locate();
+	    getch(ch, cs);
+	}
 	if (ch == UEOF)
 	{
-	    lastword.empty();
 	    if (len == 0)
 	    {
 		buff->setEof();
@@ -78,11 +98,12 @@ bool BuffDoc::getline(CDrawBuffer* buff, int wth)
 	}
 	if (ch == 10)
 	{
-	    lastword.empty();
+	    buff->setendpara();
 	    lastispara = true;
 	    laststartline = exp->locate();
 	    break;
 	}
+	lastispara = false;
 	buff->addch(ch, cs);
 	len++;
 	if (!margindone)
@@ -94,13 +115,13 @@ bool BuffDoc::getline(CDrawBuffer* buff, int wth)
 	{
 	    if (ch == ' ' || len == 1)
 	    {
-		lastword.empty();
+		if (ch == ' ') buff->truncate(len-1);
 		laststartline = exp->locate();
 		break;
 	    }
 	    else // should do a backward search for spaces, first.
 	    {
-		for (int i = len-1; i > 0; i--)
+		for (int i = len-2; i > 0; i--)
 		{
 		    if ((*buff)[i] == ' ')
 		    {
@@ -116,8 +137,23 @@ bool BuffDoc::getline(CDrawBuffer* buff, int wth)
 			}
 			return true;
 		    }
+		    if ((*buff)[i] == '-' && !(((*buff)[i-1] == '-') || ((*buff)[i+1] == '-')))
+		    {
+			(*buff)[len] = 0;
+			lastword.setright(*buff, i+1);
+			buff->truncate(i+1);
+			(*buff)[i+1] = '\0';
+			laststartline = lastsizes[i+1];
+			buff->resize();
+			for (int j = 0; j < lastword.length(); j++)
+			{
+			    lastsizes[j] = lastsizes[j+i+1];
+			}
+			return true;
+		    }
 		}
 		laststartline = lastsizes[len-1];
+		(*buff)[len] = 0;
 		lastword.setright(*buff, len - 1);
 		buff->truncate(len-1);
 		buff->addch('-', cs);
@@ -134,10 +170,10 @@ bool BuffDoc::getline(CDrawBuffer* buff, int wth)
     return moreleft;
 }
 #else
-bool BuffDoc::getline(CDrawBuffer* buff, int wth)
+bool BuffDoc::getline(CDrawBuffer* buff, int wth, unsigned char _border)
 {
     bool margindone = false;
-    int w = wth-2*BORDER;
+    int w = wth-2*_border;
     tchar ch = 32;
     CStyle cs;
     buff->empty();
@@ -156,7 +192,7 @@ bool BuffDoc::getline(CDrawBuffer* buff, int wth)
       margindone = true;
   }
   else buff->empty();
-//  qDebug("Buff:%s Lastword:%s", (const char*)toQString(buff->data()), (const char*)toQString(lastword.data()));
+//  //qDebug("Buff:%s Lastword:%s", (const char*)toQString(buff->data()), (const char*)toQString(lastword.data()));
   lastcheck = len = buff->length();
   unsigned int slen = buff->width(len);
   if (slen > w)
@@ -231,7 +267,7 @@ bool BuffDoc::getline(CDrawBuffer* buff, int wth)
   }
   (*buff)[len] = '\0';
 //  lastword = buff->data()+lastcheck;
-#ifdef WINDOWS
+#ifdef _WINDOWS
   lastword.setright(*buff, (lastcheck > 0) ? lastcheck : 1);
   {
 	  int i;
@@ -264,9 +300,9 @@ bool BuffDoc::getline(CDrawBuffer* buff, int wth)
 }
 #endif
 
-bool BuffDoc::getline(CDrawBuffer* buff, int wth, int cw)
+bool BuffDoc::getline(CDrawBuffer* buff, int wth, int cw, unsigned char _border)
 {
-    int w = wth-2*BORDER;
+    int w = wth-2*_border;
     buff->empty();
     if (exp == NULL)
     {
@@ -274,8 +310,8 @@ bool BuffDoc::getline(CDrawBuffer* buff, int wth, int cw)
     }
     tchar ch;
     CStyle cs;
-    int i = 0;
-    while (i*cw < w)
+    int i = 1;
+    while (i*cw < w-buff->offset(w,0))
     {
 	getch(ch, cs);
 	if (ch == '\12' || ch == UEOF) break;
@@ -290,12 +326,16 @@ bool BuffDoc::getline(CDrawBuffer* buff, int wth, int cw)
 
 int BuffDoc::openfile(QWidget* _parent, const char *src)
 {
-    //    qDebug("BuffDoc:Openfile:%s", src);
-    //    qDebug("Trying aportis %x",exp);
+    //    //qDebug("BuffDoc:Openfile:%s", src);
+    //    //qDebug("Trying aportis %x",exp);
     if (exp != NULL) delete exp;
     lastword.empty();
     lastsizes[0] = laststartline = 0;
+#ifdef NEWLINEBREAK
+    lastispara = true;
+#else
     lastispara = false;
+#endif
     /*
       exp = new Text;
       int ret = exp->openfile(src);
@@ -316,6 +356,22 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
 	exp = new ztxt;
 	ret = exp->openfile(src);
     }
+#ifdef USENEF
+    if (ret != 0)
+    {
+
+	delete exp;
+	exp = new CArriere;
+	ret = exp->openfile(src);
+    }
+    if (ret != 0)
+    {
+
+	delete exp;
+	exp = new CNEF;
+	ret = exp->openfile(src);
+    }
+#endif
     if (ret != 0)
     {
 
@@ -326,7 +382,7 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
     if (ret != 0)
     {
 	delete exp;
-	qDebug("Trying ppms");
+	//qDebug("Trying ppms");
 	exp = new ppm_expander;
 	ret = exp->openfile(src);
     }
@@ -334,7 +390,7 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
     {
 	delete exp;
 	exp = new Text;
-//		qDebug("Trying text");
+//		//qDebug("Trying text");
 	ret = exp->openfile(src);
     }
 
@@ -344,13 +400,17 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
 	QMessageBox::information(_parent, PROGNAME, "Unknown file compression type","Try another file");
 	return ret;
     }
-    //        qDebug("Doing final open:%x:%x",exp,filt);
+    //        //qDebug("Doing final open:%x:%x",exp,filt);
 
     lastword.empty();
     lastsizes[0] = laststartline = 0;
+#ifdef NEWLINEBREAK
+    lastispara = true;
+#else
     lastispara = false;
+#endif
     exp->locate(0);
     filt->setsource(exp);
-    //        qDebug("BuffDoc:file opened");
+    //        //qDebug("BuffDoc:file opened");
     return 0;
 }

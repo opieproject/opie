@@ -1,5 +1,28 @@
 #include "opie.h"
+#include "useqpe.h"
 #include "FontControl.h"
+
+int FontControl::gzoom()
+{
+    int ret;
+    if (m_size == g_size)
+    {
+	ret = m_fontsizes[m_size]*m_basesize;
+    }
+    else if (g_size < 0)
+    {
+	int f = -g_size;
+	ret = (m_fontsizes[0]*m_basesize) >> (f/2);
+	if (f%2) ret = (2*ret/3);
+    }
+    else
+    {
+	int f = g_size - m_maxsize + 1;
+	ret = (m_fontsizes[m_maxsize-1]*m_basesize) << (f/2);
+	if (f%2) ret = (3*ret/2);
+    }
+    return ret;
+}
 
 bool FontControl::ChangeFont(QString& n, int tgt)
 {
@@ -20,7 +43,7 @@ bool FontControl::ChangeFont(QString& n, int tgt)
 	uint best = 0;
 	for (it = sizes.begin(); it != sizes.end(); it++)
 	{
-#ifdef OPIE
+#if defined(OPIE) || !defined(USEQPE)
 	    m_fontsizes[i] = (*it);
 #else
 	    m_fontsizes[i] = (*it)/10;
@@ -31,7 +54,7 @@ bool FontControl::ChangeFont(QString& n, int tgt)
 	    }
 	    i++;
 	}
-	m_size = best;
+	g_size = m_size = best;
     }
     return true;
 }

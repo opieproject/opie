@@ -1,4 +1,3 @@
-#include "name.h"
 #include <qmessagebox.h>
 
 #include "Bkmks.h"
@@ -7,6 +6,7 @@
 #include "Markups.h"
 #include "my_list.h"
 #include "version.h"
+#include "names.h"
 
 const unsigned long BkmkFile::magic = ((unsigned long)'q' << 24) | ((unsigned long)'t' << 16) | ((unsigned long)'r' << 8) | ((unsigned long)BKMKTYPE);
 
@@ -219,15 +219,15 @@ CList<Bkmk>* BkmkFile::readall()
 		case 6:
 		    isUpgraded = false;
 		    bl = readall00(read06);
-		    qDebug("Correct version!");
+//		    qDebug("Correct version!");
 		    break;
 		case 5:
 		    isUpgraded = true;
 		    bl = readall00(read05);
-		    qDebug("Known version!");
+//		    qDebug("Known version!");
 		    break;
 		default:
-		    qDebug("Unknown version!");
+//		    qDebug("Unknown version!");
 		    isUpgraded = true;
 		    bl = readall00(read05);
 	    }

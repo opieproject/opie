@@ -3,11 +3,14 @@
 
 #include "CExpander.h"
 
+#define MAX_ENCODING 6
+
 class CEncoding : public CCharacterSource
 {
   friend class CFilterChain;
  protected:
   CExpander* parent;
+  linkType hyperlink(unsigned int n, QString& t) { return parent->hyperlink(n,t); }
 public:
   CEncoding() : parent(NULL) {}
   void setparent(CExpander* p) { parent = p; }
@@ -48,6 +51,24 @@ class CAscii : public CEncoding
 {
 public:
     void getch(tchar& ch, CStyle& sty);
+};
+
+#include "CEncoding_tables.h"
+
+class CGeneral8Bit : public CEncoding
+{
+    int m_index;
+ public:
+    CGeneral8Bit(int _i) : m_index(_i)
+	{
+//	    qDebug("8Bit:%d", _i);
+//	    qDebug("%s", unicodetable::iterator(_i)->mime);
+	}
+    void getch(tchar& ch, CStyle& sty)
+	{
+	    parent->getch(ch, sty);
+	    ch = unicodetable::unicodevalue(m_index, ch);
+	}
 };
 
 #endif

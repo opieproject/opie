@@ -32,6 +32,7 @@ class CAnnoEdit : public QWidget
 	    QVBoxLayout* grid = new QVBoxLayout(this);
 	    m_name = new QLineEdit(this, "Name");
 	    m_anno = new QMultiLineEdit(this, "Annotation");
+	    m_anno->setWordWrap(QMultiLineEdit::WidgetWidth);
 	    QPushButton* exitButton = new QPushButton("Okay", this);
 	    connect(exitButton, SIGNAL( released() ), this, SLOT( slotOkay() ) );
 	    QPushButton* cancelButton = new QPushButton("Cancel", this);

@@ -1,62 +1,80 @@
-#include "Navigation.h"
-
+#ifdef _WINDOWS
 #include <string.h>
+#endif
+#include "Navigation.h"
+//#include <stdio.h>
 
+/*
+    void saveposn(size_t posn)
+    save/push position to history buffer for future use of back() function
+*/
 void CNavigation::saveposn(size_t posn)
 {
-//    qDebug("Saved:%u [%u,%u,%u]", posn, historystart, historycurrent, historyend);
-    historycurrent = historyend = (historycurrent+1)%NAVIGATION_HISTORY_SIZE;
+    //printf("saving position %u, depth %u\n",posn,historycurrent);
     history[historycurrent] = posn;
-    if (historystart == historyend) historystart = (historystart+1)%NAVIGATION_HISTORY_SIZE;
-//    qDebug("Saved:%u [%u,%u,%u]", posn, historystart, historycurrent, historyend);
+    historycurrent=(historycurrent+1)%NAVIGATION_HISTORY_SIZE;
+    if (historycurrent==historystart)
+        // circular buffer full, forget oldest record
+        historystart=(historystart+1)%NAVIGATION_HISTORY_SIZE;
+    // no forward possible after saveposn
+    historyend = historycurrent;
 }
 
-bool CNavigation::forward(size_t& loc)
+/*
+    void writeposn(size_t posn)
+    overwrite current (unused) position
+    useful for saving current position before using back button
+*/
+void CNavigation::writeposn(size_t posn)
 {
-    if (historycurrent != historyend)
-    {
-	historycurrent = (historycurrent + 1)%NAVIGATION_HISTORY_SIZE;
-	loc = history[historycurrent];
-//	qDebug("Forward:%u [%u,%u,%u]", loc, historystart, historycurrent, historyend);
-	return true;
-    }
-    else
-    {
-	return false;
-    }
+    //printf("witing position %u, depth %u\n",posn,historycurrent);
+    history[historycurrent] = posn;
 }
 
-bool CNavigation::back(size_t& loc)
+/*
+    bool back(size_t& posn)
+    go back in history
+    restore last position saved with saveposn() and return true
+    return false if there is nothing saved in history
+*/
+bool CNavigation::back(size_t& posn)
 {
-    if (historyend != historystart)
-    {
-//	qDebug("Back:%u [%u,%u,%u]", loc, historystart, historycurrent, historyend);
-	if (historycurrent == historyend && history[historycurrent] != loc)
-	{
-	    historyend = (historyend+1) % NAVIGATION_HISTORY_SIZE;
-	    history[historyend] = loc;
-	}
-	else
-	{
-	    size_t sv = historycurrent;
-	    historycurrent = (historycurrent + NAVIGATION_HISTORY_SIZE - 1) % NAVIGATION_HISTORY_SIZE;
-	    if (historycurrent == historystart)
-	    {
-		historycurrent = sv;
-		return false;
-	    }
-	}
-	loc = history[historycurrent];
-//	qDebug("Back:%u [%u,%u,%u]", loc, historystart, historycurrent, historyend);
-	return true;
-    }
-    else
-    {
-	return false;
+    if (historycurrent!=historystart) {
+        // buffer is not empty
+        if (historycurrent==0)
+            historycurrent=NAVIGATION_HISTORY_SIZE-1;
+        else
+            historycurrent--;
+        posn=history[historycurrent];
+        //printf("back(): going back to %u depth %u\n",posn,historycurrent);
+        return true;
+
+    } else {
+        // circular buffer empty
+        //printf("back(): empty history\n");
+        return false;
     }
 }
 
-#include <stdio.h>
+/*
+    bool forward(size_t& posn)
+    go forward in history, if possible
+    undo calling of back()
+*/
+bool CNavigation::forward(size_t& posn)
+{
+    if (historycurrent!=historyend) {
+        // [historycurrent] = current position
+        // [historycurrent+1] = position we need
+        historycurrent=(historycurrent+1)%NAVIGATION_HISTORY_SIZE;
+        posn = history[historycurrent];
+        //printf("forward(): going to position %d\n",posn);
+        return true;
+    } else {
+        //printf("forward(): there is no future :)\n");
+        return false;
+    }
+}
 
 void CNavigation::setSaveData(unsigned char*& data, unsigned short& len, unsigned char* src, unsigned short srclen)
 {
@@ -72,10 +90,12 @@ void CNavigation::setSaveData(unsigned char*& data, unsigned short& len, unsigne
     memcpy(p, &historycurrent, sizeof(size_t));
     p += sizeof(size_t);
     memcpy(p, history, sizeof(size_t)*NAVIGATION_HISTORY_SIZE);
+/*
     printf("<%u,%u,%u>\n", historystart, historyend, historycurrent);
     for (int i = historystart; i <= historyend; i++)
 	printf("<%u> ", history[i]);
     printf("\n");
+*/
 }
 
 void CNavigation::putSaveData(unsigned char*& src, unsigned short& srclen)
@@ -93,8 +113,10 @@ void CNavigation::putSaveData(unsigned char*& src, unsigned short& srclen)
 	src = p + sizeof(size_t)*NAVIGATION_HISTORY_SIZE;
 	srclen -= sizeof(size_t)*(3+NAVIGATION_HISTORY_SIZE);
     }
+/*
     printf("<%u,%u,%u>\n", historystart, historyend, historycurrent);
     for (int i = historystart; i <= historyend; i++)
 	printf("<%u> ", history[i]);
     printf("\n");
+*/
 }

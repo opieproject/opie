@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: QTReader.cpp,v 1.7 2003-01-23 13:26:21 mickeyl Exp $
+** $Id: QTReader.cpp,v 1.9 2003-05-07 14:10:02 groucho Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -8,21 +8,27 @@
 **
 *****************************************************************************/
 
+#include "useqpe.h"
 #include <qpainter.h>
+#include <qimage.h>
+#include <qtimer.h>
 #include "config.h"
 #include "QTReader.h"
 #include "QTReaderApp.h"
 #include "CDrawBuffer.h"
+#ifdef USEQPE
 #include <qpe/qpeapplication.h>
+#endif
 #include <math.h>
 #include <ctype.h>
 #include <stdio.h> //for sprintf
+#ifdef USEQPE
 #include <qpe/config.h>
 #include <qpe/applnk.h>
-#include <qfontdatabase.h>
 #include <qpe/global.h>
 #include <qpe/qcopenvelope_qws.h>
-#include "StateData.h"
+#endif
+#include <qfontdatabase.h>
 
 #ifdef _UNICODE
 const char *QTReader::fonts[] = { "unifont", "Courier", "Times", 0 };
@@ -35,6 +41,10 @@ const char *QTReader::fonts[] = { "Helvetica", "Courier", "Times", 0 };
 //const int   QTReader::fontsizes[] = {10,16,17,22,0};
 //const tchar *QTReader::fonts[] = { "verdana", "Courier", "Times", 0 };
 //const int   QTReader::fontsizes[] = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,0};
+
+tchar QTReader::pluckernextpart[] = { 'C','l','i','c','k',' ','h','e','r','e',' ','f','o','r',' ','t','h','e',' ','n','e','x','t',' ','p','a','r','t',0 };
+tchar QTReader::jplucknextpart[] = { 'N','e','x','t',' ','P','a','r','t',' ','>','>',0 };
+//tchar QTReader::jplucknextpart[] = { 10,'#',10,'N','e','x','t',' ','P','a','r','t',' ','>','>',0 };
 
 QTReader::QTReader( QWidget *parent, const char *name, WFlags f) :
   QWidget(parent, name, f),
@@ -51,13 +61,18 @@ QTReader::QTReader( QWidget *parent, const char *name, WFlags f) :
   m_twotouch(true),
   m_touchone(true),
   bDoUpdates(false),
-  m_navkeys(true)
+#ifdef _SCROLLPIPE
+  m_pipeout(NULL),
+#endif
+  m_border(2)
 {
     m_overlap = 1;
+    setKeyCompression ( true );
 //  init();
 }
+
 /*
-QTReader::QTReader( const QString& filename, QWidget *parent, const tchar *name, WFlags f ) :
+QTReader::QTReader( const QString& filename, QWidget *parent=0, const tchar *name=0, WFlags f = 0) :
   QWidget(parent, name, f),
   m_textfont(0),
   m_textsize(1),
@@ -72,11 +87,20 @@ QTReader::QTReader( const QString& filename, QWidget *parent, const tchar *name,
   m_fm(NULL)
 {
   init();
-  //  qDebug("Load_file(1)");
+//  //  qDebug("Load_file(1)");
   load_file((const tchar*)filename);
 }
 */
 
+/*
+void QTReader::mouseMoveEvent(QMouseEvent* _e)
+{
+
+    mouseUpOn = !(_e->pos().x() == -1);
+
+    qDebug("MouseMove:[%d, %d]", _e->pos().x(), _e->pos().y());
+}
+*/
 long QTReader::real_delay()
 {
     return ( 8976 + m_delay ) / ( m_linespacing * m_linespacing );
@@ -87,52 +111,101 @@ void QTReader::mousePressEvent( QMouseEvent* _e )
     buffdoc.unsuspend();
     if (_e->button() == RightButton)
     {
+//	qDebug("MousePress");
 	mouseUpOn = false;
-	if (buffdoc.hasnavigation())
+	if (m_swapmouse)
 	{
-	    if (_e->y() > (2*height())/3)
-	    {
-		goDown();
-	    }
-	    else if (_e->y() < height()/3)
-	    {
-		goUp();
-	    }
-	    else
-	    {
-		if (_e->x() < width()/3)
+		int lineno = 0;
+		int ht = textarray[0]->lineSpacing();
+		while ((ht < _e->y()) && (lineno < numlines))
 		{
-		    size_t target = pagelocate();
-		    if (buffdoc.back(target))
-		    {
-			locate(target);
-		    }
+		    ht += textarray[++lineno]->lineSpacing();
 		}
-		else if (_e->x() > (2*width())/3)
-		{
-		    size_t target = pagelocate();
-		    if (buffdoc.forward(target))
-		    {
-			locate(target);
-		    }
-		}
-		else
-		{
-		    buffdoc.saveposn(pagelocate());
-		    locate(buffdoc.getHome());
-		}
-	    }
+		size_t startpos, startoffset, tgt;
+		getcurrentpos(_e->x(), _e->y(), startpos, startoffset, tgt);
+		processmousewordevent(startpos, startoffset, _e, lineno);
+	}
+	else
+	    processmousepositionevent(_e);
+    }
+}
+
+void QTReader::processmousepositionevent( QMouseEvent* _e )
+{
+    if (buffdoc.hasnavigation())
+    {
+	if (_e->y() > (2*height())/3)
+	{
+	    goDown();
+	}
+	else if (_e->y() < height()/3)
+	{
+	    goUp();
 	}
 	else
 	{
-	    if (_e->y() > height()/2)
+	    if (_e->x() < width()/3)
 	    {
-		goDown();
+		goBack();
+	    }
+	    else if (_e->x() > (2*width())/3)
+	    {
+		goForward();
 	    }
 	    else
 	    {
-		goUp();
+		goHome();
 	    }
+	}
+    }
+    else
+    {
+	if (_e->y() > height()/2)
+	{
+	    goDown();
+	}
+	else
+	{
+	    goUp();
+	}
+    }
+}
+
+void QTReader::goHome()
+{
+    if (buffdoc.hasnavigation())
+    {
+ 	size_t current=pagelocate();
+ 	size_t home=buffdoc.getHome();
+ 	if (current!=home)
+	{
+	    buffdoc.saveposn(current);
+	    locate(home);
+ 	}
+    }
+}
+
+void QTReader::goBack()
+{
+    if (buffdoc.hasnavigation())
+    {
+	size_t target = pagelocate();
+	buffdoc.writeposn(target);
+	if (buffdoc.back(target))
+	{
+	    locate(target);
+	}
+    }
+}
+
+void QTReader::goForward()
+{
+    if (buffdoc.hasnavigation())
+    {
+	size_t target = pagelocate();
+	if (buffdoc.forward(target))
+	{
+	    locate(target);
 	}
     }
 }
@@ -148,17 +221,26 @@ linkType QTReader::getcurrentpos(int x, int y, size_t& start, size_t& offset, si
     start = locnarray[lineno];
     if (m_bMonoSpaced)
     {
-	offset = x/m_charWidth;
+	offset = (x - textarray[lineno]->offset(width(), m_border))/m_charWidth;
     }
     else
     {
 	int i;
 	CDrawBuffer* t = textarray[lineno];
-	x = x - t->offset(width());
-	for (i = t->length(); i >= 0 && t->width(i) > x; i--);
+	x = x - t->offset(width(), m_border);
+	for (i = t->length(); i >= 0 && t->width(i, true, width(), m_border) > x; i--);
 	offset = i;
     }
     return textarray[lineno]->getLinkType(offset, tgt);
+}
+
+void QTReader::suspend()
+{
+#ifdef OPIE
+    if (memcmp("/mnt/", m_lastfile.latin1(), 5) == 0) buffdoc.suspend();
+#else
+    if (memcmp("/usr/mnt.rom/", m_lastfile.latin1(), 13) == 0) buffdoc.suspend();
+#endif
 }
 
 void QTReader::setTwoTouch(bool _b)
@@ -173,6 +255,90 @@ void QTReader::setContinuous(bool _b)
     buffdoc.setContinuous(m_continuousDocument = _b);
 }
 
+void QTReader::processmousewordevent(size_t startpos, size_t startoffset, QMouseEvent* _e, int lineno)
+{
+    QString wrd;
+    if (m_twotouch)
+    {
+	if (m_touchone)
+	{
+	    m_touchone = false;
+	    m_startpos = startpos;
+	    m_startoffset = startoffset;
+	    setBackgroundColor( lightGray );
+	}
+	else
+	{
+	    m_touchone = true;
+	    setBackgroundColor( white );
+	    size_t endpos, endoffset;
+	    endpos = startpos;
+	    endoffset = startoffset;
+	    size_t currentpos = locate();
+	    if (endpos >= m_startpos)
+	    {
+		jumpto(m_startpos);
+		for (int i = 0; i < m_startoffset; i++)
+		{
+		    getch();
+		}
+		if (m_startpos == endpos)
+		{
+		    for (int i = m_startoffset; i <= endoffset; i++)
+		    {
+			wrd += QChar(getch());
+		    }
+		}
+		else
+		{
+		    while (buffdoc.explocate() <= endpos)
+		    {
+			wrd += QChar(getch());
+		    }
+		    for (int i = 0; i < endoffset; i++)
+		    {
+			wrd += QChar(getch());
+		    }
+		}
+		jumpto(currentpos);
+	    }
+	}
+    }
+    else if (m_bMonoSpaced)
+    {
+	int chno = (_e->x()-textarray[lineno]->offset(width(), m_border))/m_charWidth;
+	if (chno < ustrlen(textarray[lineno]->data()))
+	{
+	    wrd[0] = textarray[lineno]->data()[chno];
+	}
+    }
+    else
+    {
+	CDrawBuffer* t = textarray[lineno];
+	int first = 0;
+	int tgt = _e->x() - t->offset(width(), m_border);
+	while (1)
+	{
+	    int i = first+1;
+	    while (QChar((*t)[i]).isLetter() && (*t)[i] != 0) i++;
+	    if (t->width(i, true, width(), m_border) > tgt)
+	    {
+		wrd = toQString(t->data()+first, i - first);
+//			    qDebug("Got %s", (const char *)wrd);
+		break;
+	    }
+	    while (!QChar((*t)[i]).isLetter() && (*t)[i] != 0) i++;
+	    if ((*t)[i] == 0) break;
+	    first = i;
+	}		
+    }
+    if (!wrd.isEmpty())
+    {
+//	qDebug("Selected:%s", (const char*)wrd);
+	emit OnWordSelected(wrd, locnarray[lineno], (m_twotouch) ? wrd : toQString(textarray[lineno]->data()));
+    }
+}
+
 void QTReader::mouseReleaseEvent( QMouseEvent* _e )
 {
     buffdoc.unsuspend();
@@ -180,9 +346,15 @@ void QTReader::mouseReleaseEvent( QMouseEvent* _e )
     {
 	if (mouseUpOn)
 	{
+//	    qDebug("MouseRelease");
+	    if (_e->x() > width() - m_border)
+	    {
+		locate(buffdoc.startSection()+((buffdoc.endSection()-buffdoc.startSection())*_e->y()+height()/2)/height());
+		return;
+	    }
 	    if (textarray[0] != NULL)
 	    {
-		QString wrd, line;
+		QString line;
 //		int lineno = _e->y()/m_linespacing;
 		int lineno = 0;
 		int ht = textarray[0]->lineSpacing();
@@ -196,7 +368,9 @@ void QTReader::mouseReleaseEvent( QMouseEvent* _e )
 		    case eLink:
 		    {
 			size_t saveposn = pagelocate();
-			if (buffdoc.hyperlink(tgt))
+			QString href;
+			linkType lt = buffdoc.hyperlink(tgt, href);
+			if (lt == eLink)
 			{
 			    buffdoc.saveposn(saveposn);
 			    fillbuffer();
@@ -204,14 +378,31 @@ void QTReader::mouseReleaseEvent( QMouseEvent* _e )
 			}
 			else
 			{
+			    if (lt == ePicture)
+			    {
+				QImage* pm = buffdoc.getPicture(tgt);
+				if (pm != NULL)
+				{
+				    emit OnShowPicture(*pm);
+				    delete pm;
+				}
+			    }
+			    else
+			    {
+//				QString anchortext = textarray[lineno]->getanchortext(startoffset);
+				if (!href.isEmpty())
+				{
+				    emit OnURLSelected(href);
+				}
+			    }
 			    locate(pagelocate());
 			}
 			return;
 		    }
 		    case ePicture:
 		    {
-			qDebug("Picture:%x", tgt);
-			QPixmap* pm = buffdoc.getPicture(tgt);
+//			qDebug("Picture:%x", tgt);
+			QImage* pm = buffdoc.getPicture(tgt);
 			if (pm != NULL)
 			{
 			    emit OnShowPicture(*pm);
@@ -226,86 +417,13 @@ void QTReader::mouseReleaseEvent( QMouseEvent* _e )
 		    case eNone:
 			break;
 		    default:
-			qDebug("Unknown linktype");
+//			qDebug("Unknown linktype");
 			return;
 		}
-		if (m_twotouch)
-		{
-		    if (m_touchone)
-		    {
-			m_touchone = false;
-			m_startpos = startpos;
-			m_startoffset = startoffset;
-			setBackgroundColor( lightGray );
-		    }
-		    else
-		    {
-			m_touchone = true;
-			setBackgroundColor( white );
-			size_t endpos, endoffset;
-			endpos = startpos;
-			endoffset = startoffset;
-			size_t currentpos = locate();
-			if (endpos >= m_startpos)
-			{
-			    jumpto(m_startpos);
-			    for (int i = 0; i < m_startoffset; i++)
-			    {
-				getch();
-			    }
-			    if (m_startpos == endpos)
-			    {
-				for (int i = m_startoffset; i <= endoffset; i++)
-				{
-				    wrd += QChar(getch());
-				}
-			    }
-			    else
-			    {
-				while (buffdoc.explocate() <= endpos)
-				{
-				    wrd += QChar(getch());
-				}
-				for (int i = 0; i < endoffset; i++)
-				{
-				    wrd += QChar(getch());
-				}
-			    }
-			    jumpto(currentpos);
-			}
-		    }
-		}
-		else if (m_bMonoSpaced)
-		{
-		    int chno = _e->x()/m_charWidth;
-		    if (chno < ustrlen(textarray[lineno]->data()))
-		    {
-			wrd[0] = textarray[lineno]->data()[chno];
-		    }
-		}
+		if (m_swapmouse)
+		    processmousepositionevent(_e);
 		else
-		{
-		    CDrawBuffer* t = textarray[lineno];
-		    int first = 0;
-		    int tgt = _e->x() - t->offset(width());
-		    while (1)
-		    {
-			int i = first+1;
-			while (QChar((*t)[i]).isLetter() && (*t)[i] != 0) i++;
-			if (t->width(i) > tgt)
-			{
-			    wrd = toQString(t->data()+first, i - first);
-			    break;
-			}
-			while (!QChar((*t)[i]).isLetter() && (*t)[i] != 0) i++;
-			if ((*t)[i] == 0) break;
-			first = i;
-		    }		
-		}
-		if (!wrd.isEmpty())
-		{
-		    emit OnWordSelected(wrd, locnarray[lineno], (m_twotouch) ? wrd : toQString(textarray[lineno]->data()));
-		}
+		    processmousewordevent(startpos, startoffset, _e, lineno);
 	    }
 	}
 	else
@@ -326,13 +444,15 @@ void QTReader::focusOutEvent(QFocusEvent* e)
     if (m_autoScroll)
     {
 	timer->stop();
-	m_scrolldy1 = m_scrolldy2 = 0;
+//	m_scrolldy1 = m_scrolldy2 = 0;
     }
 }
 
 #include <qapplication.h>
 #include <qdrawutil.h>
+#ifndef _WINDOWS
 #include <unistd.h>
+#endif
 
 void QTReader::goDown()
 {
@@ -426,9 +546,62 @@ void QTReader::zoomout()
     }
 }
 
+void QTReader::reduceScroll()
+{
+    if (m_delay < 59049)
+    {
+	m_delay = (3*m_delay)/2;
+	timer->changeInterval(real_delay());
+    }
+    else
+    {
+	m_delay = 59049;
+    }
+}
+
+void QTReader::increaseScroll()
+{
+    if (m_delay > 1024)
+    {
+	m_delay = (2*m_delay)/3;
+	timer->changeInterval(real_delay());
+    }
+    else
+    {
+	m_delay = 1024;
+    }
+}
+
 void QTReader::keyPressEvent(QKeyEvent* e)
 {
     buffdoc.unsuspend();
+    ((QTReaderApp*)parent()->parent())->handlekey(e);
+//    e->ignore();
+    return;
+#ifdef _SCROLLPIPE
+    if (m_isPaused)
+    {
+	m_isPaused = false;
+	if (e->key() != Key_Space)
+	{
+	    m_autoScroll = false;
+	    if (m_pipeout != NULL)
+	    {
+		pclose(m_pipeout);
+		m_pipeout = NULL;
+	    }
+	    ((QTReaderApp*)parent()->parent())->setScrollState(m_autoScroll);
+	    QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+	}
+	else
+	{
+	    timer->start(real_delay(), false);
+	}
+	e->accept();
+	return;
+    }
+#endif
+/*
   switch (e->key())
     {
       case Key_Down:
@@ -473,35 +646,6 @@ void QTReader::keyPressEvent(QKeyEvent* e)
 	  }
 	}
       break;
-      /*
-      case Key_Left:
-	{
-	  e->accept();
-	  if (m_textfont > 0)
-	    {
-	      m_textfont--;
-	      setfont(NULL);
-	      locate(pagelocate());
-	      update();
-	    }
-	}
-      break;
-      case Key_Right:
-	{
-	  e->accept();
-	  if (fonts[++m_textfont] == 0)
-	    {
-	      m_textfont--;
-	    }
-	  else
-	    {
-	      setfont(NULL);
-	      locate(pagelocate());
-	      update();
-	    }
-	}
-      break;
-      */
 	case Key_Right:
 	{
 	    e->accept();
@@ -530,16 +674,10 @@ void QTReader::keyPressEvent(QKeyEvent* e)
 	    else zoomout();
 	}
 	break;
-	case Key_Space:
-	case Key_Return:
-	{
-	  e->accept();
-	  emit OnActionPressed();
-	}
-	break;
 	default:
 	    e->ignore();
     }
+*/
 }
 
 void QTReader::setautoscroll(bool _sc)
@@ -548,15 +686,34 @@ void QTReader::setautoscroll(bool _sc)
     if (m_autoScroll)
     {
 	m_autoScroll = false;
+#ifdef USEQPE
 	QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+#endif
+#ifdef _SCROLLPIPE
+	if (m_pipeout != NULL)
+	{
+	    pclose(m_pipeout);
+	    m_pipeout = NULL;
+	}
+#endif
      }
     else
     {
 	CDrawBuffer* reusebuffer = textarray[numlines];
 	if (reusebuffer == NULL || reusebuffer->eof()) return;
 	m_autoScroll = true;
+#ifdef _SCROLLPIPE
+	if (!m_pipetarget.isEmpty())
+	{
+//	    qDebug("Opening pipe to %s", (const char*)m_pipetarget);
+	    m_pipeout = popen((const char*)m_pipetarget, "w");
+	    m_isPaused = false;
+	}
+#endif
 	autoscroll();
+#ifdef USEQPE
 	QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Disable; // light is even not dimmed
+#endif
     }
 }
 
@@ -565,11 +722,11 @@ bool QTReader::getline(CDrawBuffer *buff)
     buffdoc.unsuspend();
     if (m_bMonoSpaced)
     {
-	return buffdoc.getline(buff ,width(), m_charWidth);
+	return buffdoc.getline(buff ,width(), m_charWidth, m_border);
     }
     else
     {
-	return buffdoc.getline(buff, width());
+	return buffdoc.getline(buff, width(), m_border);
     }
 }
 
@@ -588,6 +745,25 @@ void QTReader::doscroll()
 
     if (++m_scrolldy1 == textarray[0]->lineSpacing())
     {
+#ifdef _SCROLLPIPE
+	if (m_pipeout != NULL)
+	{
+	    QString outstr = toQString(textarray[0]->data());
+	    if (!outstr.isEmpty())
+	    {
+		fprintf(m_pipeout, "%s\n", (const char*)outstr);
+		fflush(m_pipeout);
+	    }
+	    else if (m_pauseAfterEachPara)
+	    {
+		m_isPaused = true;
+		timer->stop();
+	    }
+//	    write(m_pipeout, (const char*)outstr, outstr.length());
+//	    write(m_pipeout, "\n", 1);
+//	    fputc(10, m_pipeout);
+	}
+#endif
 	CDrawBuffer* buff = textarray[0];
 	for (int i = 1; i <= numlines; i++)
 	{
@@ -609,12 +785,29 @@ void QTReader::doscroll()
 	}
 	locnarray[numlines] = locate();
 	int ch = getline(textarray[numlines]);
-	textarray[numlines-1]->render(&p, height() - textarray[numlines-1]->descent() - 2, m_bMonoSpaced, m_charWidth, width());
+	textarray[numlines-1]->render(&p, height() - textarray[numlines-1]->descent() - 2, m_bMonoSpaced, m_charWidth, width(), m_border);
 	mylastpos = locate();
 	if (!ch)
 	{
 	    m_autoScroll = false;
+#ifdef _SCROLLPIPE
+	    for (int i = 0; i < numlines; i++)
+	    {
+		if (m_pipeout != NULL)
+		{
+		    QString outstr = toQString(textarray[i]->data());
+		    if (!outstr.isEmpty())
+		    {
+			fprintf(m_pipeout, "%s\n", (const char*)outstr);
+			fflush(m_pipeout);
+		    }
+		}
+	    }
+#endif
 	    ((QTReaderApp*)parent()->parent())->setScrollState(m_autoScroll);
+#ifdef USEQPE
+	    QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+#endif
 	}
 	emit OnRedraw();
     }
@@ -639,68 +832,83 @@ void QTReader::drawFonts( QPainter *p )
 {
     if (bDoUpdates)
     {
-	qDebug("How refreshing...");
+//	qDebug("How refreshing...");
 	if (buffdoc.empty()) return;
 	setfont();
 	if (m_lastwidth != width())
 	{
-	    qDebug("Not Optimised %d", m_lastwidth);
+//	    qDebug("Not Optimised %d", m_lastwidth);
 	    m_lastwidth = width();
 	    m_lastheight = height();
+	    buffdoc.setwidth(m_lastwidth-2*m_border);
 	    locate(pagelocate());
-	    qDebug("Not Optimised %d", m_lastwidth);
+//	    qDebug("Not Optimised %d", m_lastwidth);
 	}
 	else 
 	{
-	    if (m_lastheight > height())
+	    int newht = height();
+	    if (m_lastheight > newht)
 	    {
-		qDebug("Optimised < %d", numlines);
+//		qDebug("Optimised < %d %d %d", numlines, m_lastheight, newht);
 		int ypos = 0;
 		for (int i = 0; i < numlines; i++)
 		{
-		    if ((ypos += textarray[i]->lineSpacing()) > height())
+		    if ((ypos += textarray[i]->lineSpacing()) > newht)
 		    {
 			numlines = i;
-			jumpto(locnarray[i+1]);
+			jumpto(mylastpos = locnarray[i+1]);
 			break;
 		    }
 		}
-		qDebug("Optimised < %d", numlines);
-		m_lastheight = height();
+//		qDebug("Optimised < %d", numlines);
+		m_lastheight = newht;
 	    }
-	    else if (m_lastheight < height())
+	    else if (m_lastheight < newht)
 	    {
-		qDebug("Optimised > %d", numlines);
+//		qDebug("Optimised > %d", numlines);
 		int ypos = 0;
 		for (int i = 0; i <= numlines; i++)
 		{
 		    ypos += textarray[i]->lineSpacing();
 		}
-		fillbuffer(numlines+1, ypos);
-		qDebug("Optimised > %d", numlines);
-		m_lastheight = height();
+		fillbuffer(numlines+1, ypos, newht);
+//		qDebug("Optimised > %d", numlines);
 	    }
 	    if (numlines > 0)
 	    {
 		int ypos = textarray[0]->ascent();
-		textarray[0]->render( p, ypos, m_bMonoSpaced, m_charWidth, width());
+		textarray[0]->render( p, ypos, m_bMonoSpaced, m_charWidth, width(), m_border);
+//		int last = (m_showlast) ? numlines : numlines-1;
+//		for (int i = 1; i <= last; i++)
 		for (int i = 1; i < numlines; i++)
 		{
 //	  ypos += (textarray[i-1]->lineSpacing() + textarray[i]->lineSpacing())/2;
 		    ypos += (textarray[i-1]->descent() + textarray[i]->ascent())+
 			(textarray[i-1]->lineExtraSpacing() + textarray[i]->lineExtraSpacing())/2;
-		    textarray[i]->render( p, ypos, m_bMonoSpaced, m_charWidth, width());
+		    textarray[i]->render( p, ypos, m_bMonoSpaced, m_charWidth, width(), m_border);
 		}
 //      mylastpos = locate();
 	    }
 	}
-	m_scrolldy1 = m_scrolldy2 = 0;
+
+	m_scrolldy1 = m_scrolldy2 = m_scrollpart;
+	if (m_border > 5 && !buffdoc.empty())
+	{
+	    p->fillRect(width()-2, 0, 2, height(), cyan);
+	    int sectionsize = (buffdoc.endSection()-buffdoc.startSection());
+	    int mid = (height()*(locnarray[numlines]+locnarray[0]-2*buffdoc.startSection())+sectionsize)/(2*sectionsize);
+	    p->fillRect(width()-2, mid-5, 2, 10, yellow);
+	    p->fillRect(width()-2, (height()*(locnarray[0]-buffdoc.startSection())+sectionsize/2)/sectionsize, 2, ((locnarray[numlines]-locnarray[0])*height()+sectionsize/2)/sectionsize, magenta);
+	}
+
 	emit OnRedraw();
     }
+/*
     else
     {
 	qDebug("Not so refreshing...");
     }
+*/
 }
 
 QString QTReader::firstword()
@@ -742,6 +950,7 @@ bool QTReader::ChangeFont(int tgt)
 
 void QTReader::init()
 {
+//    m_showlast = true;
   //    setCaption( "Qt Draw Demo Application" );
 
     buffdoc.unsuspend();
@@ -771,6 +980,18 @@ void QTReader::init()
 //
 QTReader::~QTReader()
 {
+#ifdef USEQPE
+    if (m_autoScroll)
+    {
+	QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+    }
+#endif
+#ifdef _SCROLLPIPE
+    if (m_pipeout != NULL)
+    {
+	fclose(m_pipeout);
+    }
+#endif
 }
 
 //
@@ -816,7 +1037,7 @@ void QTReader::paintEvent( QPaintEvent * )
 /*
 void QTReader::resizeEvent( QResizeEvent * )
 {
-  //  qDebug("resize:(%u,%u)", width(), height());
+//  //  qDebug("resize:(%u,%u)", width(), height());
   //    bgroup->move( width()-bgroup->width(), 0 );
 }
 */
@@ -841,11 +1062,11 @@ bool QTReader::locate(unsigned long n) {
   //printf("Locate\n");
     buffdoc.unsuspend();
   buffdoc.locate(n);
-  //  qDebug("&buffdoc.located");
+//  //  qDebug("&buffdoc.located");
   fillbuffer();
-  //  qDebug("&Buffer filled");
+//  //  qDebug("&Buffer filled");
   update();
-  //  qDebug("&Located");
+//  //  qDebug("&Located");
   return true;
 }
 
@@ -856,18 +1077,22 @@ unsigned int QTReader::screenlines()
   return (height()-2)/(m_linespacing);
 };
 
-bool QTReader::fillbuffer(int reuse, int ht)
+bool QTReader::fillbuffer(int reuse, int ht, int newht)
 {
     buffdoc.unsuspend();
     if (buffdoc.empty()) return false;
-    m_scrolldy1 = m_scrolldy2 = 0;
+    if (newht < 0)
+	m_lastheight = height();
+    else
+	m_lastheight = newht;
     int ch;
     bool ret = false;
     unsigned int oldpagepos = locnarray[reuse];
-    int ypos = ht;
+    int lastypos = ht, ypos = ht;
     numlines = reuse;
-    while (ypos < height() || numlines < 2)
+    while (ypos < m_lastheight || numlines < 2)
     {
+	lastypos = ypos;
 	if (textarray[numlines] == NULL)
 	{
 	    textarray[numlines] = new CDrawBuffer(&m_fontControl);
@@ -894,18 +1119,19 @@ bool QTReader::fillbuffer(int reuse, int ht)
     
     --numlines;
     mylastpos = locate();
+    m_scrolldy1 = m_scrolldy2 = m_scrollpart = m_lastheight - lastypos;
     
     return true;
 }
 
-
 void QTReader::dopagedn()
 {
+//    qDebug("HEIGHT(2):%d", m_lastheight);
     buffdoc.unsuspend();
     int skip = 0, ypos = 0;
     if (locate() != mylastpos)
     {
-//	qDebug("Jumping to %u", mylastpos);
+////	qDebug("Jumping to %u", mylastpos);
 	jumpto(mylastpos);
     }
     CDrawBuffer* reusebuffer = textarray[numlines];
@@ -938,20 +1164,31 @@ void QTReader::dopageup()
   dopageup(locnarray[(m_overlap < numlines) ? m_overlap : numlines/2]);
 }
 
+bool QTReader::synch(size_t start, size_t end)
+{
+    jumpto(start);
+    while (start++ < end)
+    {
+	tchar ch = getch();
+	if (ch == 10) return true;
+	if (ch == UEOF) return false;
+    }
+    return false;
+}
+
 void QTReader::dopageup(unsigned int target)
 {
     buffdoc.unsuspend();
     CBufferFace<CDrawBuffer*> buff;
     CBufferFace<size_t> loc;
 
-  size_t delta, guess = 2048;
+  size_t delta, guess = 2*(locate()-pagelocate()), lastdelta = 0;
   bool ch = true;
   int nbfl, ypos = 0;
-
+  if (guess < 128) guess = 128;
   while (1)
   {
       ch = true;
-      nbfl = 0;
       if (target < guess)
       {
 	  delta = 0; // 0 is a flag to say don't guess any more
@@ -965,22 +1202,24 @@ void QTReader::dopageup(unsigned int target)
       else
       {
 	  delta = guess;
-	  
-	  jumpto(target - delta);
-	  
-	  buff[0] = new CDrawBuffer(&m_fontControl);
-	  
-	  do
+	  if (!synch(target-delta, target-lastdelta))
 	  {
-	      
-	      if (!getline(buff[0])) break;
-	      
-	      if (locate() > target) break;
+	      lastdelta = delta;
+	      if (guess < 4000)
+	      {
+		  guess <<= 1;
+		  continue;
+	      }
+	      else
+	      {
+		  jumpto(target-delta);
+	      }
 	  }
-	  while (!buffdoc.iseol());
       }
       
+      nbfl = 0;
       ypos = 0;
+
       while (locate() < target) 
       {
 	  if (buff[nbfl] == NULL) buff[nbfl] = new CDrawBuffer(&m_fontControl);
@@ -990,7 +1229,7 @@ void QTReader::dopageup(unsigned int target)
 	  nbfl++;
 	  if (!ch) break;
       }
-      if (ypos < height() && (delta != 0))
+      if (guess < 4000 && ypos < height() && (delta != 0))
       {
 	  for (int i = 0; i < nbfl; i++)
 	  {
@@ -1009,6 +1248,7 @@ void QTReader::dopageup(unsigned int target)
       int ch = getline(buff[nbfl]);
       nbfl++;
   }
+/*
   ypos = 0;
   numlines = 0;
   while (ypos < height() && numlines <= nbfl-1)
@@ -1017,6 +1257,18 @@ void QTReader::dopageup(unsigned int target)
       numlines++;
   }
   --numlines;
+*/
+
+  ypos = 0;
+  numlines = 0;
+  while (ypos < height() && numlines+2 <= nbfl)
+  {
+      ypos += buff[nbfl - numlines - 2]->lineSpacing();
+      numlines++;
+  }
+  if (numlines > 0) --numlines;
+  if (numlines == 0 && nbfl > 1) numlines = 1;
+
   int offset = nbfl-1;
   offset -= numlines;
   ypos = 0;
@@ -1027,7 +1279,11 @@ void QTReader::dopageup(unsigned int target)
       locnarray[i] = loc[offset + i];
       ypos += textarray[i]->lineSpacing();
   }
+#ifdef _WINDOWS
+  for (i = 0; i < nbfl - numlines - 1; i++)
+#else
   for (int i = 0; i < nbfl - numlines - 1; i++)
+#endif
   {
       delete buff[i];
   }
@@ -1057,21 +1313,22 @@ bool QTReader::load_file(const char *newfile, unsigned int _lcn)
     {
       lcn = m_lastposn;
     }
-  m_lastfile = newfile;
   //  QMessageBox::information(0, "Opening...", newfile);
   m_lastwidth = width();
   m_lastheight = height();
   if (buffdoc.openfile(this,newfile) == 0)
-    {
+  {
+      m_lastfile = newfile;
+      buffdoc.setwidth(m_lastwidth-2*m_border);
       bRC = true;
       buffdoc.setContinuous(m_continuousDocument);
-      //  qDebug("buffdoc.openfile done");
+//      //  qDebug("buffdoc.openfile done");
       locate(lcn);
-      //  qDebug("buffdoc.locate done");
+//      //  qDebug("buffdoc.locate done");
     }
   setfilter(getfilter());
   update();
-  //  qDebug("Updated");
+//  //  qDebug("Updated");
   return bRC;
 }
 
@@ -1089,7 +1346,11 @@ void QTReader::lineDown()
 	}
     }
     offset = numlines - offset;
+#ifdef _WINDOWS
+    for (i = offset; i <= numlines; i++)
+#else
     for (int i = offset; i <= numlines; i++)
+#endif
     {
 	CDrawBuffer* buff = textarray[i-offset];
 	textarray[i-offset] = textarray[i];
@@ -1259,7 +1520,11 @@ void QTReader::lineUp()
   locnarray[0] = loc;
   int start = numlines;
   int ypos = 0;
-  for (int i = 0; i <= numlines; i++)
+#ifdef _WINDOWS
+  for (i = 0; i <= numlines; i++)
+#else
+	for (int i = 0; i <= numlines; i++)
+#endif
   {
       ypos += textarray[i]->lineSpacing();
       if (ypos > height())
@@ -1295,33 +1560,4 @@ MarkupType QTReader::PreferredMarkup()
 	}
     }
     return m;
-}
-
-void QTReader::setstate(const statedata& sd)
-{
-    bstripcr = sd.bstripcr;
-    btextfmt = sd.btextfmt;
-    bautofmt = sd.bautofmt;
-    bstriphtml = sd.bstriphtml;
-    bpeanut = sd.bpeanut;
-    bdehyphen = sd.bdehyphen;
-    bonespace = sd.bonespace;
-    bunindent = sd.bunindent;
-    brepara = sd.brepara;
-    bdblspce = sd.bdblspce;
-    m_bpagemode = sd.m_bpagemode;
-    m_navkeys = sd.m_navkeys;
-    m_bMonoSpaced = sd.m_bMonoSpaced;
-    bremap = sd.bremap;
-    bmakebold = sd.bmakebold;
-    m_continuousDocument = sd.Continuous;
-#ifdef REPALM
-    brepalm = sd.brepalm;
-#endif
-    bindenter = sd.bindenter;
-    m_encd = sd.m_charpc;
-    m_fontname = sd.m_fontname;
-    setContinuous(sd.Continuous);
-    ChangeFont(sd.m_textsize);
-    refresh();
 }

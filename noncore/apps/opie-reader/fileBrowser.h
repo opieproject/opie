@@ -29,6 +29,7 @@ class QGridLayout;
 class QtrListView;
 class QListViewItem;
 class QPushButton;
+class QLineEdit;
 
 class fileBrowser : public QDialog
 { 
@@ -36,7 +37,7 @@ class fileBrowser : public QDialog
 
 public:
   void populateList();
-    fileBrowser( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 ,const QString filter=0, const QString iPath=0);
+    fileBrowser( bool allownew, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 ,const QString filter=0, const QString iPath=0);
     ~fileBrowser();
 
     QPushButton* buttonOk;
@@ -47,7 +48,8 @@ public:
     QString selectedFileName, filterStr;
     QDir currentDir;
     QFile file;
-    QStringList fileList;
+    QString getCurrentFile();
+    QLineEdit* m_filename;
     int filterspec;
 //    QDir::FilterSpec filterspec;
  
@@ -55,7 +57,7 @@ public:
 public slots:
 
 private:
-
+ QString filename; 
 private slots: 
         void upDir();
         void listDoubleClicked(QListViewItem *);
@@ -63,6 +65,7 @@ private slots:
 	void OnRoot();
 	void OnCancel();
 	void setHidden(bool);
+	void onReturn();
 
 protected slots: 
 

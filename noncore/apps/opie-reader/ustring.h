@@ -60,7 +60,17 @@ inline QString toQString(tchar *_p, unsigned int len)
     unsigned int i = 0;
     tchar *p = _p;
     QString ret;
+#ifdef _WINDOWS
+//	ret.fill(' ', len);
+	for (i = 0; i < len; i++)
+	{
+		if (p[i] == 0) break;
+		ret.at((uint)i) = p[i];
+	}
+//    while (*p != 0 && i < len) ret.at((uint)i++) = (tchar)(*(p++));
+#else
     while (*p != 0 && i < len) ret[i++] = *(p++);
+#endif
     return ret;
 }
 

@@ -1,6 +1,7 @@
 #ifndef __ppm_expander_h
 #define __ppm_expander_h
 
+#include "useqpe.h"
 #include "CExpander.h"
 #include <sys/stat.h>
 
@@ -26,14 +27,16 @@ class ppm_expander : public CExpander {
   PPM_ReadBuf* my_read_buf;
   ppm_worker ppm;
 public:
-  virtual void suspend()
+#ifdef USEQPE
+	void suspend()
       {
 	  CExpander::suspend(my_file_in);
       }
-  virtual void unsuspend()
+  void unsuspend()
       {
 	  CExpander::unsuspend(my_file_in);
       }
+#endif
   ppm_expander() : needppmend(false), my_file_in(NULL), my_read_buf(NULL)
     {
     bufsize = 1024;
@@ -41,15 +44,15 @@ public:
     buf_out = new UCHAR[bufsize];
     outbytes = 0;
   }
-  virtual int OpenFile(const char* infile);
-  virtual int getch();
+  int OpenFile(const char* infile);
+  int getch();
   int locate(unsigned short block, unsigned int n);
   virtual ~ppm_expander();
-  virtual unsigned int locate() { return outbytes; }
-  virtual void locate(unsigned int n);
-  virtual bool hasrandomaccess() { return (numblocks > 1); }
-  virtual void sizes(unsigned long& file, unsigned long& text);
-  virtual MarkupType PreferredMarkup()
+  unsigned int locate() { return outbytes; }
+  void locate(unsigned int n);
+  bool hasrandomaccess() { return (numblocks > 1); }
+  void sizes(unsigned long& file, unsigned long& text);
+  MarkupType PreferredMarkup()
       {
 	  return cTEXT;
       }

@@ -1,12 +1,12 @@
 
-#include <qpixmap.h>
+#include <qimage.h>
 #include "StyleConsts.h"
 
 GraphicLink::~GraphicLink() { delete graphic; }
 
 pmstore::~pmstore()
 { 
-//    qDebug("Deleting image");
+////    qDebug("Deleting image");
     delete graphic;
 }
 
@@ -19,11 +19,6 @@ CStyle::~CStyle()
 	    delete graphic;
 	}
     }
-}
-
-CStyle::CStyle(CStyle& rhs) : graphic(NULL)
-{
-    *this = rhs;
 }
 
 CStyle::CStyle(const CStyle& rhs) : graphic(NULL)
@@ -85,7 +80,7 @@ void CStyle::unset()
     }
 }
 
-void CStyle::setPicture(QPixmap* _g, bool il, unsigned long tgt)
+void CStyle::setPicture(bool canScale, QImage* _g, bool il, unsigned long tgt)
 {
     if (graphic != NULL)
     {
@@ -95,5 +90,5 @@ void CStyle::setPicture(QPixmap* _g, bool il, unsigned long tgt)
 	}
 	graphic = NULL;
     }
-    if (_g != NULL) graphic = new pmstore(_g, il, tgt);
+    if (_g != NULL) graphic = new pmstore(canScale, _g, il, tgt);
 }

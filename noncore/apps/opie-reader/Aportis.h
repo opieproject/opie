@@ -4,7 +4,7 @@
 
 #ifndef __Aportis_h
 #define __Aportis_h
-
+#include "useqpe.h"
 #include "CExpander.h"
 #include "pdb.h"
 
@@ -75,28 +75,30 @@ class Aportis : public CExpander, Cpdb {
   unsigned char circbuf[2048];
   char bCompressed;
 public:
-  virtual void suspend()
+#ifdef USEQPE
+	void suspend()
       {
 	  CExpander::suspend(fin);
       }
-  virtual void unsuspend()
+  void unsuspend()
       {
 	  CExpander::unsuspend(fin);
       }
-  virtual void sizes(unsigned long& _file, unsigned long& _text)
+#endif
+  void sizes(unsigned long& _file, unsigned long& _text)
     {
       _file = dwLen;
       _text = dwTLen;
     }
-  virtual bool hasrandomaccess() { return true; }
+  bool hasrandomaccess() { return true; }
   virtual ~Aportis() {}
   Aportis();
-  virtual int OpenFile(const char *src);
-  virtual int getch();
-  virtual unsigned int locate();
-  virtual void locate(unsigned int n);
-  virtual CList<Bkmk>* getbkmklist();
-  virtual MarkupType PreferredMarkup()
+  int OpenFile(const char *src);
+  int getch();
+  unsigned int locate();
+  void locate(unsigned int n);
+  CList<Bkmk>* getbkmklist();
+  MarkupType PreferredMarkup()
       {
 	  return (peanutfile) ? cPML : cTEXT;
       }

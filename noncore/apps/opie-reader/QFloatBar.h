@@ -2,6 +2,7 @@
 #define __QFLOATBAR_H
 
 #include <qtoolbar.h>
+#include <qmainwindow.h>
 
 class QFloatBar : public QToolBar
 {

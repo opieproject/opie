@@ -10,19 +10,40 @@ Extensive modification by Tim Wentford to allow it to work in rotated mode
 #include "fileBrowser.h"
 
 #include "QtrListView.h"
+#include <qlineedit.h>
 #include <qpushbutton.h>
 #include <qfile.h>
 #include <qmessagebox.h>
+#ifndef _WINDOWS
 #include <unistd.h>
+#endif
 #include <qlayout.h>
+#ifdef _WINDOWS
+#include <direct.h>
+#endif
 
-fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags fl , const QString filter, const QString iPath )
-    : QDialog( parent, name, modal, fl ), filterspec(QDir::All)
+#include "opie.h"
+
+fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, bool modal, WFlags fl , const QString filter, const QString iPath )
+    : QDialog( parent, name, true,
+	       fl/* | WStyle_Customize | WStyle_Tool*/),
+      filterspec(QDir::All)
 {
 //    showMaximized();
     if ( !name )
 	setName( "fileBrowser" );
-    if (parent != NULL) resize( parent->width(), parent->height() );
+/*
+    if (parent != NULL)
+    {
+#ifdef OPIE
+	move(0,0);
+	resize( parent->width(), parent->height() );
+#else
+	setGeometry(parent->x(), parent->y(), parent->width(), parent->height() );
+#endif
+    }
+*/
+//    showFullScreen();
     setCaption(tr( "Browse for file" ) );
     filterStr=filter;
 
@@ -66,11 +87,25 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     hgrid->addWidget(buttonShowHidden);
     hgrid->addWidget(buttonOk);
     grid->addWidget(ListView,1);
+    if (allownew)
+    {
+	m_filename = new QLineEdit(this);
+	grid->addWidget(m_filename);
+	connect( m_filename, SIGNAL( returnPressed() ), this, SLOT( onReturn() ));
+    }
+    else
+    {
+	m_filename = NULL;
+    }
 
     if (QFileInfo(iPath).exists())
     {
 	currentDir.setPath(iPath);
+#ifdef _WINDOWS
+	_chdir(iPath.latin1());
+#else
 	chdir(iPath.latin1());
+#endif
     }
     else
     {
@@ -79,6 +114,8 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     }
 
     populateList();
+
+    if (modal) showMaximized();
 }
 
 void fileBrowser::resizeEvent(QResizeEvent* e)
@@ -95,7 +132,7 @@ fileBrowser::~fileBrowser()
 void fileBrowser::populateList()
 {
     ListView->clear();
-//qDebug(currentDir.canonicalPath());
+////qDebug(currentDir.canonicalPath());
 //    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::NoSymLinks );
     currentDir.setFilter( filterspec );
     currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
@@ -119,7 +156,7 @@ void fileBrowser::populateList()
 	    } 
 	    else 
 	    {
-//        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
+////        qDebug("Not a dir: "+currentDir.canonicalPath()+fileL);
 	    }
 	    new QListViewItem( ListView,fileL,fileS );
 	}
@@ -132,7 +169,7 @@ void fileBrowser::populateList()
 
 void fileBrowser::upDir()
 {
-//    qDebug(currentDir.canonicalPath());
+////    qDebug(currentDir.canonicalPath());
 }
 
 void fileBrowser::listClicked(QListViewItem *selectedItem)
@@ -140,7 +177,7 @@ void fileBrowser::listClicked(QListViewItem *selectedItem)
     if (selectedItem == NULL) return;
     QString strItem=selectedItem->text(0);
 
-//    qDebug("%s", (const char*)strItem);
+////    qDebug("%s", (const char*)strItem);
     
 
     QString strSize=selectedItem->text(1);
@@ -161,7 +198,18 @@ void fileBrowser::listClicked(QListViewItem *selectedItem)
 	    populateList();
 	}
     } else
+    {
+	QListViewItem *selectedItem = ListView->selectedItem();
+	if (selectedItem == NULL)
+	{
+	    filename = "";
+	}
+	else
+	{
+	    filename = QDir::cleanDirPath(currentDir.canonicalPath()+"/"+selectedItem->text(0));
+	}
         OnOK();
+    }
     chdir(strItem.latin1());
 //
 
@@ -172,16 +220,13 @@ void fileBrowser::listDoubleClicked(QListViewItem *selectedItem)
 {
 }
 
-void fileBrowser::OnOK() {
+QString fileBrowser::getCurrentFile()
+{
+    return filename;
+}
 
-    QListViewItemIterator it1( ListView);
-    for ( ; it1.current(); ++it1 ) {
-	if ( it1.current()->isSelected() ) {
-	    selectedFileName=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+it1.current()->text(0));
-//	    qDebug("selected filename is "+selectedFileName);
-	    fileList.append( selectedFileName );
-	}
-    }
+void fileBrowser::OnOK()
+{
     accept();
 }
 
@@ -204,4 +249,18 @@ void fileBrowser::setHidden(bool _hidden)
     else
 	filterspec = QDir::All;
     populateList();
+}
+
+void fileBrowser::onReturn()
+{
+    QListViewItem *selectedItem = ListView->selectedItem();
+    if (selectedItem == NULL)
+    {
+	filename = m_filename->text();
+    }
+    else
+    {
+	filename = QDir::cleanDirPath(currentDir.canonicalPath()+"/"+m_filename->text());
+    }
+    OnOK();
 }

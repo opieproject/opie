@@ -7,14 +7,18 @@ HEADERS		= Aportis.h \
                   CBuffer.h \
                   CDrawBuffer.h \
                   CEncoding.h \
+		  CEncoding_tables.h \
                   CExpander.h \
                   CFilter.h \
+		  CloseDialog.h \
                   Filedata.h \
+		  FixedFont.h \
                   FontControl.h \
                   GraphicWin.h \
                   Markups.h \
                   Navigation.h \
                   Palm2QImage.h \
+		  Prefs.h \
                   QFloatBar.h \
                   QTReader.h \
                   QTReaderApp.h \
@@ -22,20 +26,27 @@ HEADERS		= Aportis.h \
                   Queue.h \
                   StateData.h \
                   StyleConsts.h \
+		  ToolbarPrefs.h \
+		  URLDialog.h \
                   ZText.h \
                   arith.h \
                   cbkmkselector.h \
                   config.h \
                   fileBrowser.h \
                   infowin.h \
+		  linktype.h \
                   my_list.h \
                   name.h \
+		  names.h \
                   opie.h \
                   pdb.h \
                   plucker.h \
+		  plucker_base.h \
                   ppm.h \
                   ppm_expander.h \
                   ustring.h \
+		  usenef.h \
+		  useqpe.h \
                   utypes.h \
                   version.h \
                   ztxt.h
@@ -46,22 +57,29 @@ SOURCES		= Aportis.cpp \
                   CBuffer.cpp \
                   CDrawBuffer.cpp \
                   CEncoding.cpp \
+		  CEncoding_tables.cpp \
                   CFilter.cpp \
+		  CloseDialog.cpp \
                   FontControl.cpp \
                   Navigation.cpp \
                   Palm2QImage.cpp \
+		  Prefs.cpp \
                   QTReader.cpp \
                   QTReaderApp.cpp \
                   QtrListView.cpp \
                   StyleConsts.cpp \
+		  ToolbarPrefs.cpp \
+		  URLDialog.cpp \
                   arith_d.cpp \
                   fileBrowser.cpp \
                   infowin.cpp \
                   main.cpp \
                   pdb.cpp \
                   plucker.cpp \
+		  plucker_base.cpp \
                   ppm.cpp \
                   ppm_expander.cpp \
+		  version.cpp \
                   ztxt.cpp
 
 INTERFACES	= 

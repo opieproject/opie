@@ -1,25 +1,28 @@
 #ifndef __Text_h
 #define __Text_h
 #include <stdio.h>
-#include "zlib/zlib.h"
+#include <zlib.h>
 #include <sys/stat.h>
-
+#include "useqpe.h"
 #include "CExpander.h"
 
 class Text: public CExpander {
   gzFile file;
   unsigned long fsize;
 public:
-  virtual void suspend()
+  void suspend()
       {
+#ifdef USEQPE
 	  bSuspended = true;
 	  suspos = gztell(file);
 	  gzclose(file);
 	  file = NULL;
 	  sustime = time(NULL);
+#endif
       }
-  virtual void unsuspend()
+  void unsuspend()
       {
+#ifdef USEQPE
 	  if (bSuspended)
 	  {
 	      bSuspended = false;
@@ -38,13 +41,14 @@ public:
 	      }
 	      suspos = gzseek(file, suspos, SEEK_SET);
 	  }
+#endif
       }
   Text() : file(NULL) {};
   virtual ~Text()
     {
       if (file != NULL) gzclose(file);
     }
-  virtual int OpenFile(const char *src)
+  int OpenFile(const char *src)
     {
        if (file != NULL) gzclose(file);
       struct stat _stat;
@@ -52,15 +56,28 @@ public:
       fsize = _stat.st_size;
       return ((file = gzopen(src,"rb")) == NULL);
     }
-  virtual int getch() { return gzgetc(file); }
-  virtual unsigned int locate() { return gztell(file); }
-  virtual void locate(unsigned int n) { gzseek(file,n,SEEK_SET); }
-  virtual bool hasrandomaccess() { return true; }
-  virtual void sizes(unsigned long& _file, unsigned long& _text)
+  int getch() { return gzgetc(file); }
+  unsigned int locate() { return gztell(file); }
+  void locate(unsigned int n) { gzseek(file,n,SEEK_SET); }
+  bool hasrandomaccess() { return true; }
+  void sizes(unsigned long& _file, unsigned long& _text)
     {
       _text = _file = fsize;
+      FILE* f = fopen(fname, "rb");
+      if (f != NULL)
+      {
+	  unsigned char mn[2];
+	  fread(mn, 1, 2, f);
+	  if ((mn[0] == 31) && (mn[1] == 139))
+	  {
+		  int tmp = sizeof(_text);
+	      fseek(f,-tmp,SEEK_END);
+	      fread(&_text, sizeof(_text), 1, f);
+	  }
+	  fclose(f);
+      }
     }
-  virtual MarkupType PreferredMarkup()
+  MarkupType PreferredMarkup()
       {
 	  return cTEXT;
       }

@@ -1,9 +1,9 @@
-#include "name.h"
 #include "infowin.h"
 #include "version.h"
 #include <stdio.h>
+#include "names.h"
 
-infowin::infowin( QWidget *parent, const char *name, WFlags f ) :
+infowin::infowin( QWidget *parent, const char *name, WFlags f) :
     QWidget(parent, name, f)
 {
     grid = new QGridLayout(this, 6, 2);

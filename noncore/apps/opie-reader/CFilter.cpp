@@ -682,3 +682,61 @@ void repalm::getch(tchar& ch, CStyle& sty)
     }
 }
 #endif
+
+//static tchar nextpart[] = { 'C','l','i','c','k',' ','h','e','r','e',' ','f','o','r',' ','t','h','e',' ','n','e','x','t',' ','p','a','r','t',0 };
+//static tchar prevpart[] = { 'C','l','i','c','k',' ','h','e','r','e',' ','f','o','r',' ','t','h','e',' ','p','r','e','v','i','o','u','s',' ','p','a','r','t',0 };
+
+void DePluck::getch(tchar& ch, CStyle& sty)
+{
+    if (m_buffed > 0)
+    {
+	sty = m_laststyle;
+	ch = nextpart[m_current++];
+	if (m_current == m_buffed)
+	{
+	    m_current = m_buffed = 0;
+	}
+    }
+    else
+    {
+	if (m_buffer != 0)
+	{
+	    ch = m_buffer;
+	    m_buffer = 0;
+	    return;
+	}
+	unsigned long lnk;
+	do
+	{
+	    if (nextpart[m_buffed] == 0) break;
+	    parent->getch(ch, sty);
+	    m_laststyle = sty;
+	    if (sty.getLink()) lnk = sty.getData();
+	} while (ch == nextpart[m_buffed] && sty.getLink() && ++m_buffed);
+	m_current = 0;
+	if (nextpart[m_buffed] == 0)
+	{
+	    m_buffed = 0;
+	    QString dmy;
+	    parent->hyperlink(lnk, dmy);
+	    do
+	    {
+		parent->getch(ch, sty);
+	    }
+	    while (ch != 10);
+	    parent->getch(ch, sty);
+	}
+	else if (m_buffed > 0)
+	{
+	    m_buffer = ch;
+	    ch = nextpart[0];
+	    if (m_buffed == 1)
+	    {
+		m_buffed = 0;
+	    }
+	    else m_current = 1;
+	}
+    }
+
+    return;
+}

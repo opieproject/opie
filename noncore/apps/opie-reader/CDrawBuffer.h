@@ -4,15 +4,9 @@
 #include "StyleConsts.h"
 #include "CBuffer.h"
 #include "my_list.h"
+#include "linktype.h"
 
 class QPainter;
-
-enum linkType
-{
-    eNone,
-    eLink,
-    ePicture
-};
 
 struct textsegment
 {
@@ -33,9 +27,12 @@ class CDrawBuffer : public CBuffer
     FontControl* fc;
     int m_maxstyle, m_ascent, m_descent, m_lineSpacing, m_lineExtraSpacing;
     bool m_bEof;
+    bool m_bSop, m_bEop;
     CDrawBuffer(const CDrawBuffer&);
     CDrawBuffer& operator=(const tchar*sztmp);
  public:
+    void setstartpara() { m_bSop = true; }
+    void setendpara() { m_bEop = true; }
     int leftMargin();
     int rightMargin();
     void setEof() { m_bEof = true; }
@@ -56,9 +53,9 @@ class CDrawBuffer : public CBuffer
 	    empty();
 	}
 */
-    int width(int numchars = -1);
-    int offset(int);
-    void render(QPainter* _p, int _y, bool _bMono, int _charWidth, int scw);
+    int width(int numchars = -1, bool onscreen = false, int scwidth = 0, unsigned char _border = 0);
+    int offset(int, unsigned char);
+    void render(QPainter* _p, int _y, bool _bMono, int _charWidth, int scw, unsigned char);
     void empty();
     void addch(tchar ch, CStyle _style);
     void truncate(int);

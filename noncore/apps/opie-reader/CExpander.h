@@ -1,16 +1,20 @@
 #ifndef __CExpander_h
 #define __CExpander_h
 
+#ifndef _WINDOWS
 #include <unistd.h>
+#endif
 #include <stdio.h>
 #include <time.h>
 #include <qmessagebox.h>
+#include "useqpe.h"
 #include "config.h"
 #include "StyleConsts.h"
 #include "Markups.h"
-#include "name.h"
+#include "names.h"
+#include "linktype.h"
 
-class QPixmap;
+class QImage;
 class Bkmk;
 
 template<class T>
@@ -20,6 +24,7 @@ class CCharacterSource
 {
  public:
     virtual void getch(tchar&, CStyle&) = 0;
+    virtual linkType hyperlink(unsigned int n, QString&) = 0;
 };
 
 class CExpander
@@ -31,11 +36,15 @@ class CExpander
     bool bSuspended;
     size_t suspos;
     time_t sustime;
+    int m_scrWidth;
+    unsigned long m_currentstart, m_currentend;
  public:
-    virtual void suspend() = 0;
+#ifdef USEQPE
+	 virtual void suspend() = 0;
     virtual void unsuspend() = 0;
+#endif
     size_t getHome() { return m_homepos; }
-    CExpander() : m_homepos(0), fname(NULL) {};
+    CExpander() : m_homepos(0), fname(NULL), m_scrWidth(240), m_currentstart(1), m_currentend(0) {};
     virtual ~CExpander() { if (fname != NULL) delete [] fname; };
     int openfile(const char *src)
 	{
@@ -49,35 +58,51 @@ class CExpander
     virtual bool hasrandomaccess() = 0;
     virtual void sizes(unsigned long& file, unsigned long& text) = 0;
     virtual CList<Bkmk>* getbkmklist() { return NULL; }
-    virtual void getch(int& ch, CStyle& sty)
+    virtual void getch(tchar& ch, CStyle& sty)
 	{
-	    ch = getch();
+	    int ich = getch();
+	    ch = (ich == EOF) ? UEOF : ich;
 	    sty.unset();
 	}
     virtual int getch() = 0;
-    virtual bool hyperlink(unsigned int n)
+    virtual linkType hyperlink(unsigned int n, QString& wrd)
 	{
 	    locate(n);
-	    return true;
+	    return eLink;
 	}
     virtual MarkupType PreferredMarkup() = 0;
     virtual void saveposn(size_t posn) {}
-    virtual bool forward(size_t& loc) {}
-    virtual bool back(size_t& loc) {}
+    virtual void writeposn(size_t posn) {}
+    virtual bool forward(size_t& loc) { return false; }
+    virtual bool back(size_t& loc) { return false; }
     virtual bool hasnavigation() { return false; }
-    virtual unsigned long startSection()
+    unsigned long startSection()
 	{
-	    return 0;
+	    unsigned long current = locate();
+	    if (m_currentstart > current || current > m_currentend)
+	    {
+		start2endSection();
+	    }
+	    return m_currentstart;
 	}
-    virtual unsigned long endSection()
+    unsigned long endSection()
 	{
-	    unsigned long file, text;
-	    sizes(file, text);
-	    return text;
+	    unsigned long current = locate();
+	    if (m_currentstart > current || current > m_currentend)
+	    {
+		start2endSection();
+	    }
+	    return m_currentend;
 	}
-    virtual QPixmap* getPicture(unsigned long tgt) { return NULL; }
+    virtual void start2endSection()
+	{
+	    m_currentstart = 0;
+	    unsigned long file;
+	    sizes(file, m_currentend);
+	}
+    virtual QImage* getPicture(unsigned long tgt) { return NULL; }
     void setContinuous(bool _b) { m_continuous = _b; }
-
+#ifdef USEQPE
     virtual void suspend(FILE*& fin)
       {
 	  bSuspended = true;
@@ -107,6 +132,7 @@ class CExpander
 	      suspos = fseek(fin, suspos, SEEK_SET);
 	  }
       }
+#endif
     virtual void setSaveData(unsigned char*& data, unsigned short& len, unsigned char* src, unsigned short srclen)
 	{
 	    len = srclen;
@@ -120,5 +146,6 @@ class CExpander
 		qDebug("Don't know what to do with non-zero save data");
 	    }
 	}
+    void setwidth(int w) { m_scrWidth = w; }
 };
 #endif

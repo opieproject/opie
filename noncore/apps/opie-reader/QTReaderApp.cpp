@@ -17,15 +17,20 @@
 ** not clear to you.
 **
 **********************************************************************/
-
+#include "useqpe.h"
+#include <qregexp.h>
 #include <qclipboard.h>
 #include <qwidgetstack.h>
+#ifdef USEQPE
 #include <qpe/qpemenubar.h>
-//#include <qpe/qpetoolbar.h>
+#include <qpe/qpetoolbar.h>
+#endif
 #include <qmenubar.h>
 #include <qtoolbar.h>
+#ifdef USEQPE
 #include <qpe/menubutton.h>
 #include <qpe/fontdatabase.h>
+#endif
 #include <qcombobox.h>
 #include <qpopupmenu.h>
 #include <qaction.h>
@@ -34,55 +39,119 @@
 #include <qtoolbutton.h>
 #include <qspinbox.h>
 #include <qobjectlist.h>
+#ifdef USEQPE
 #include <qpe/global.h>
 #include <qpe/applnk.h>
+#endif
 #include <qfileinfo.h>
 #include <stdlib.h> //getenv
 #include <qprogressbar.h>
+#ifdef USEQPE
 #include <qpe/config.h>
+#endif
 #include <qbuttongroup.h>
 #include <qradiobutton.h>
+#ifdef USEQPE
 #include <qpe/qcopenvelope_qws.h>
-
+#endif
 #include "QTReader.h"
 #include "GraphicWin.h"
 #include "Bkmks.h"
 #include "cbkmkselector.h"
 #include "infowin.h"
+#include "ToolbarPrefs.h"
+#include "Prefs.h"
 #include "CAnnoEdit.h"
 #include "QFloatBar.h"
+#include "FixedFont.h"
+#include "URLDialog.h"
 //#include <qpe/fontdatabase.h>
 
+#ifdef USEQPE
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
+#include "fileBrowser.h"
+#else
+#include "qfiledialog.h"
+#endif
 
 #include "QTReaderApp.h"
-#include "fileBrowser.h"
 #include "CDrawBuffer.h"
 #include "Filedata.h"
 #include "opie.h"
-#include "name.h"
-#include "StateData.h"
+#include "useqpe.h"
+#include "names.h"
+#include "CEncoding_tables.h"
+#include "CloseDialog.h"
 
-#ifdef OPIE
+bool CheckVersion(int&, int&, char&);
+
+#ifdef _WINDOWS
+#define PICDIR "c:\\uqtreader\\pics\\"
+#else
+#ifdef USEQPE
 #define PICDIR "opie-reader/"
 #else
-#define PICDIR
+#define PICDIR "/home/tim/uqtreader/pics/"
 #endif
-
+#endif
 
 unsigned long QTReaderApp::m_uid = 0;
 
 void QTReaderApp::setScrollState(bool _b) { m_scrollButton->setOn(_b); }
 
+#ifdef USEQPE
+#define geticon(iconname) Resource::loadPixmap( iconname )
+#define getmyicon(iconname) Resource::loadPixmap( PICDIR iconname )
+#else
+#define geticon(iconname) QPixmap(PICDIR iconname ".png")
+#define getmyicon(iconname) geticon(iconname)
+//#define geticon(iconname) QIconSet( QPixmap(PICDIR iconname) )
+#endif
+
+#ifndef _WINDOWS
 #include <unistd.h>
+#endif
 #include <stddef.h>
+#ifndef _WINDOWS
 #include <dirent.h>
+#endif
 
 void QTReaderApp::listBkmkFiles()
 {
     bkmkselector->clear();
     bkmkselector->setText("Cancel");
+#ifndef USEQPE
+    int cnt = 0;
+
+    QDir d = QDir::home();                      // "/"
+    if ( !d.cd(APPDIR) ) {                       // "/tmp"
+        qWarning( "Cannot find the \"~/" APPDIR "\" directory" );
+		d = QDir::home();
+		d.mkdir(APPDIR);
+		d.cd(APPDIR);
+    }
+
+
+  
+		
+        d.setFilter( QDir::Files | QDir::NoSymLinks );
+//        d.setSorting( QDir::Size | QDir::Reversed );
+
+        const QFileInfoList *list = d.entryInfoList();
+        QFileInfoListIterator it( *list );      // create list iterator
+        QFileInfo *fi;                          // pointer for traversing
+
+        while ( (fi=it.current()) ) {           // for each file...
+  
+		    bkmkselector->insertItem(fi->fileName());
+		    cnt++;
+			
+			//qDebug( "%10li %s", fi->size(), fi->fileName().data() );
+            ++it;                               // goto next list element
+        }
+ 
+#else /* USEQPE */
     int cnt = 0;
     DIR *d;
     d = opendir((const char *)Global::applicationFileName(APPDIR,""));
@@ -102,35 +171,55 @@ void QTReaderApp::listBkmkFiles()
     }
 
     closedir(d);
-
+#endif
     if (cnt > 0)
       {
 //tjw        menu->hide();
-        editBar->hide();
-        if (m_fontVisible) m_fontBar->hide();
-        if (regVisible)
-	{
-	    Global::hideInputMethod();
-	    regBar->hide();
-	}
-        if (searchVisible)
-	{
-	    Global::hideInputMethod();
-	    searchBar->hide();
-	}
-	m_nRegAction = cRmBkmkFile;
         editorStack->raiseWidget( bkmkselector );
+        hidetoolbars();
+	m_nBkmkAction = cRmBkmkFile;
       }
     else
       QMessageBox::information(this, PROGNAME, "No bookmark files");
 }
 
-QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
-    : QMainWindow( parent, name, f ), bFromDocView( FALSE ), m_dontSave(false)
+void QTReaderApp::hidetoolbars()
 {
-//  qDebug("Application directory = %s", (const tchar *)QPEApplication::documentDir());
-//  qDebug("Application directory = %s", (const tchar *)Global::applicationFileName("uqtreader","bkmks.xml"));
+    menubar->hide();
+    if (fileBar != NULL) fileBar->hide();
+    if (viewBar != NULL) viewBar->hide();
+    if (navBar != NULL) navBar->hide();
+    if (markBar != NULL) markBar->hide();
+    if (m_fontVisible) m_fontBar->hide();
+    if (regVisible)
+    {
+#ifdef USEQPE
+		Global::hideInputMethod();
+#endif
+	regBar->hide();
+    }
+    if (searchVisible)
+    {
+#ifdef USEQPE
+		Global::hideInputMethod();
+#endif
+	searchBar->hide();
+    }
+}
 
+QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
+    : QMainWindow( parent, name, f ), bFromDocView( FALSE ), m_dontSave(false),
+      fileBar(NULL), navBar(NULL), viewBar(NULL), markBar(NULL)
+{
+	m_url_clipboard = false;
+	m_url_localfile = false;
+	m_url_globalfile = false;
+		ftime(&m_lastkeytime);
+////  qDebug("Application directory = %s", (const tchar *)QPEApplication::documentDir());
+////  qDebug("Application directory = %s", (const tchar *)Global::applicationFileName("uqtreader","bkmks.xml"));
+
+    m_bcloseDisabled = true;
+    m_disableesckey = false;
     pBkmklist = NULL;
     pOpenlist = NULL;
 //    doc = 0;
@@ -138,26 +227,92 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 	m_fBkmksChanged = false;
     
   QString lang = getenv( "LANG" );
+  QString rot = getenv( "QWS_DISPLAY" );
 
-	m_autogenstr = "^ *[A-Z].*[a-z] *$";
-    setToolBarsMovable( FALSE );
+/*
+  int m_rot = 0;
+  if (rot.contains("Rot90"))
+  {
+      m_rot = 90;
+  }
+  else if (rot.contains("Rot180"))
+  {
+      m_rot = 180;
+  }
+  else if (rot.contains("Rot270"))
+  {
+      m_rot = 270;
+  }
 
-    setIcon( Resource::loadPixmap( "uqtreader" ) );
+//  qDebug("Initial Rotation(%d):%s", m_rot, (const char*)rot);
+*/
+  m_autogenstr = "^ *[A-Z].*[a-z] *$";
+
+#ifdef USEQPE
+    setIcon( Resource::loadPixmap( PICDIR  "uqtreader") );
+#else
+    setIcon( QPixmap (PICDIR  "uqtreader.png") );
+#endif /* USEQPE */
 
 //    QPEToolBar *bar = new QPEToolBar( this );
-    QToolBar *bar = new QToolBar( this );
-    bar->setHorizontalStretchable( TRUE );
-    addToolBar(bar, "tool",QMainWindow::Top, true);
-//tjw    menu = bar;
+//    menubar = new QPEToolBar( this );
+#ifdef USEQPE
+  Config config( APPDIR );
+#else
+    QDir d = QDir::home();                      // "/"
+    if ( !d.cd(APPDIR) ) {                       // "/tmp"
+        qWarning( "Cannot find the \"~/" APPDIR "\" directory" );
+		d = QDir::home();
+		d.mkdir(APPDIR);
+		d.cd(APPDIR);
+    }
+    QFileInfo fi(d, INIFILE);
+//    qDebug("Path:%s", (const char*)fi.absFilePath());
+    Config config(fi.absFilePath());
+#endif
+    config.setGroup("Toolbar");
+    m_tbmovesave = m_tbmove = config.readBoolEntry("Movable", false);
+    m_tbpolsave = m_tbpol = (ToolbarPolicy)config.readNumEntry("Policy", 1);
+    m_tbposition = (ToolBarDock)config.readNumEntry("Position", 2);
+    menubar = new QToolBar("Menus", this, m_tbposition);
 
-    QPEMenuBar *mb = new QPEMenuBar( bar );
-//    QMenuBar *mb = new QMenuBar( bar );
-    QPopupMenu *file = new QPopupMenu( this );
-    QPopupMenu *format = new QPopupMenu( this );
+//    fileBar = new QToolBar("File", this);
+//    QToolBar* viewBar = new QToolBar("File", this);
+//    QToolBar* navBar = new QToolBar("File", this);
+//    QToolBar* markBar = new QToolBar("File", this);
+
+#ifdef USEQPE
+    mb = new QPEMenuBar( menubar );
+#else
+    mb = new QMenuBar( menubar );
+#endif
+
+//#ifdef USEQPE
+    QPopupMenu* tmp = new QPopupMenu(mb);
+    mb->insertItem( geticon( "AppsIcon" ), tmp );
+//#else
+//    QMenuBar* tmp = mb;
+//#endif
+
+    QPopupMenu *file = new QPopupMenu( mb );
+    tmp->insertItem( tr( "File" ), file );
+
+    QPopupMenu *navigation = new QPopupMenu(mb);
+    tmp->insertItem( tr( "Navigation" ), navigation );
+
+    QPopupMenu *view = new QPopupMenu( mb );
+    tmp->insertItem( tr( "View" ), view );
+
+    QPopupMenu *marks = new QPopupMenu( this );
+    tmp->insertItem( tr( "Marks" ), marks );
+
+    QPopupMenu *settings = new QPopupMenu( this );
+    tmp->insertItem( tr( "Settings" ), settings );
+
+//    addToolBar(menubar, "Menus",QMainWindow::Top);
+//    addToolBar(fileBar, "Toolbar",QMainWindow::Top);
+
     //    QPopupMenu *edit = new QPopupMenu( this );
-
-//    bar = new QToolBar( this );
-    editBar = bar;
 
     /*
     QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ), QString::null, 0, this, 0 );
@@ -172,9 +327,6 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
     searchVisible = FALSE;
     regVisible = FALSE;
     m_fontVisible = false;
-
-    pbar = new QProgressBar(this);
-    pbar->hide();
 
     m_annoWin = new CAnnoEdit(editorStack);
     editorStack->addWidget(m_annoWin, get_unique_id());
@@ -205,25 +357,37 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
     // don't need the close visible, it is redundant...
     importSelector->setCloseVisible( FALSE );
 */    
-    qDebug("Reading file list");
+//    qDebug("Reading file list");
     readfilelist();
 
     reader = new QTReader( editorStack );
 
     reader->bDoUpdates = false;
 
+#ifdef USEQPE
     ((QPEApplication*)qApp)->setStylusOperation(reader, QPEApplication::RightOnHold);
+#endif
 
-    qDebug("Reading config");
-  Config config( APPDIR );
+//    qDebug("Reading config");
+//  Config config( APPDIR );
   config.setGroup( "View" );
-
+  m_debounce = config.readNumEntry("Debounce", 0);
+#ifdef USEQPE
+  m_bFloatingDialog = config.readBoolEntry("FloatDialogs", false);
+#else
+  m_bFloatingDialog = config.readBoolEntry("FloatDialogs", true);
+#endif
   reader->bstripcr = config.readBoolEntry( "StripCr", true );
+  reader->bfulljust = config.readBoolEntry( "FullJust", false );
+  reader->setextraspace(config.readNumEntry( "ExtraSpace", 0 ));
+  reader->setlead(config.readNumEntry( "ExtraLead", 0 ));
   reader->btextfmt = config.readBoolEntry( "TextFmt", false );
   reader->bautofmt = config.readBoolEntry( "AutoFmt", true );
   reader->bstriphtml = config.readBoolEntry( "StripHtml", false );
   reader->bpeanut = config.readBoolEntry( "Peanut", false );
   reader->bdehyphen = config.readBoolEntry( "Dehyphen", false );
+  reader->bdepluck = config.readBoolEntry( "Depluck", false );
+  reader->bdejpluck = config.readBoolEntry( "Dejpluck", false );
   reader->bonespace = config.readBoolEntry( "OneSpace", false );
   reader->bunindent = config.readBoolEntry( "Unindent", false );
   reader->brepara = config.readBoolEntry( "Repara", false );
@@ -234,12 +398,13 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
   reader->m_lastfile = config.readEntry( "LastFile", QString::null );
   reader->m_lastposn = config.readNumEntry( "LastPosn", 0 );
   reader->m_bpagemode = config.readBoolEntry( "PageMode", true );
-  reader->m_navkeys = config.readBoolEntry( "CursorNavigation", false );
   reader->m_bMonoSpaced = config.readBoolEntry( "MonoSpaced", false);
+  reader->m_swapmouse = config.readBoolEntry( "SwapMouse", false);
   reader->m_fontname = config.readEntry( "Fontname", "helvetica" );
   reader->m_encd = config.readNumEntry( "Encoding", 0 );
   reader->m_charpc = config.readNumEntry( "CharSpacing", 100 );
   reader->m_overlap = config.readNumEntry( "Overlap", 0 );
+  reader->m_border = config.readNumEntry( "Margin", 6 );
 #ifdef REPALM
   reader->brepalm = config.readBoolEntry( "Repalm", true );
 #endif
@@ -248,90 +413,156 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
   reader->setContinuous(config.readBoolEntry( "Continuous", true ));
   m_targetapp = config.readEntry( "TargetApp", QString::null );
   m_targetmsg = config.readEntry( "TargetMsg", QString::null );
+#ifdef _SCROLLPIPE
+  reader->m_pipetarget = config.readEntry( "PipeTarget", QString::null );
+  reader->m_pauseAfterEachPara = config.readBoolEntry( "PauseAfterPara", true );
+#endif
   m_twoTouch = config.readBoolEntry( "TwoTouch", false);
   m_doAnnotation = config.readBoolEntry( "Annotation", false);
   m_doDictionary = config.readBoolEntry( "Dictionary", false);
   m_doClipboard = config.readBoolEntry( "Clipboard", false);
   m_spaceTarget = (ActionTypes)config.readNumEntry("SpaceTarget", cesAutoScroll);
+  m_escapeTarget = (ActionTypes)config.readNumEntry("EscapeTarget", cesNone);
+  m_returnTarget = (ActionTypes)config.readNumEntry("ReturnTarget", cesFullScreen);
+  m_leftTarget = (ActionTypes)config.readNumEntry("LeftTarget", cesZoomOut);
+  m_rightTarget = (ActionTypes)config.readNumEntry("RightTarget", cesZoomIn);
+  m_upTarget = (ActionTypes)config.readNumEntry("UpTarget", cesPageUp);
+  m_downTarget = (ActionTypes)config.readNumEntry("DownTarget", cesPageDown);
+
+  m_leftScroll = config.readBoolEntry("LeftScroll", false);
+  m_rightScroll = config.readBoolEntry("RightScroll", false);
+  m_upScroll = config.readBoolEntry("UpScroll", true);
+  m_downScroll = config.readBoolEntry("DownScroll", true);
+
+  m_propogatefontchange = config.readBoolEntry( "RequestorFontChange", false);
+  reader->setBaseSize(config.readNumEntry( "Basesize", 10 ));
+
+#ifndef USEQPE
+	config.setGroup( "Geometry" );
+	setGeometry(0,0,
+	config.readNumEntry( "width", QApplication::desktop()->width()/2 ),
+	config.readNumEntry( "height", QApplication::desktop()->height()/2 ));
+	move(
+	config.readNumEntry( "x", 20 ),
+	config.readNumEntry( "y", 20 ));
+#endif
+
+
+
   setTwoTouch(m_twoTouch);
 
-
-    connect( reader, SIGNAL( OnShowPicture(QPixmap&) ), this, SLOT( showgraphic(QPixmap&) ) );
+    connect( reader, SIGNAL( OnShowPicture(QImage&) ), this, SLOT( showgraphic(QImage&) ) );
 
     connect( reader, SIGNAL( OnRedraw() ), this, SLOT( OnRedraw() ) );
-    connect( reader, SIGNAL( OnActionPressed() ), this, SLOT( OnActionPressed() ) );
     connect( reader, SIGNAL( OnWordSelected(const QString&, size_t, const QString&) ), this, SLOT( OnWordSelected(const QString&, size_t, const QString&) ) );
+    connect( reader, SIGNAL( OnURLSelected(const QString&) ), this, SLOT( OnURLSelected(const QString&) ) );
     editorStack->addWidget( reader, get_unique_id() );
 
-    QAction *a = new QAction( tr( "Open" ), Resource::loadPixmap( "fileopen" ), QString::null, 0, this, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( fileOpen() ) );
-    a->addTo( bar );
-    a->addTo( file );
+    m_preferences_action = new QAction( tr( "Configuration" ), geticon( "SettingsIcon" ), QString::null, 0, this, NULL);
+    connect( m_preferences_action, SIGNAL( activated() ), this, SLOT( showprefs() ) );
+    m_preferences_action->addTo( settings );
 
-    a = new QAction( tr( "Close" ), Resource::loadPixmap( "fileclose" ), QString::null, 0, this, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( fileClose() ) );
-//    a->addTo( bar );
-    a->addTo( file );
+    m_saveconfig_action = new QAction( tr( "Save Config" ), QString::null, 0, this, NULL);
+    connect( m_saveconfig_action, SIGNAL( activated() ), this, SLOT( SaveConfig() ) );
+    m_saveconfig_action->addTo( settings );
 
+    m_loadconfig_action = new QAction( tr( "Load Config" ), QString::null, 0, this, NULL);
+    connect( m_loadconfig_action, SIGNAL( activated() ), this, SLOT( LoadConfig() ) );
+    m_loadconfig_action->addTo( settings );
+
+    m_tidyconfig_action = new QAction( tr( "Delete Config" ), QString::null, 0, this, NULL);
+    connect( m_tidyconfig_action, SIGNAL( activated() ), this, SLOT( TidyConfig() ) );
+    m_tidyconfig_action->addTo( settings );
+
+    settings->insertSeparator();
+    m_toolbarprefs_action = new QAction( tr( "Toolbars" ), QString::null, 0, this, NULL);
+    connect( m_toolbarprefs_action, SIGNAL( activated() ), this, SLOT( showtoolbarprefs() ) );
+    m_toolbarprefs_action->addTo( settings );
+
+    m_open_action = new QAction( tr( "Open" ), geticon( "fileopen" ), QString::null, 0, this, 0 );
+    connect( m_open_action, SIGNAL( activated() ), this, SLOT( fileOpen() ) );
+    m_open_action->addTo( file );
+
+    m_close_action = new QAction( tr( "Close" ), geticon( "close" ), QString::null, 0, this, 0 );
+    connect( m_close_action, SIGNAL( activated() ), this, SLOT( fileClose() ) );
+    m_close_action->addTo( file );
+
+#ifdef _SCRIPT
+    a = new QAction( tr( "Run Script" ), QString::null, 0, this, NULL);
+    connect( a, SIGNAL( activated() ), this, SLOT( RunScript() ) );
+    a->addTo( file );
+#endif
     /*
-    a = new QAction( tr( "Revert" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Revert" ), geticon( "close" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( fileRevert() ) );
     a->addTo( file );
 
-    a = new QAction( tr( "Cut" ), Resource::loadPixmap( "cut" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Cut" ), geticon( "cut" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editCut() ) );
-    a->addTo( editBar );
+    a->addTo( filebar() );
     a->addTo( edit );
     */
 
-    a = new QAction( tr( "Info" ), QString::null, 0, this, NULL);
-    connect( a, SIGNAL( activated() ), this, SLOT( showinfo() ) );
-    a->addTo( file );
+    m_info_action = new QAction( tr( "Info" ), geticon( "UtilsIcon" ), QString::null, 0, this, NULL);
+    connect( m_info_action, SIGNAL( activated() ), this, SLOT( showinfo() ) );
+    m_info_action->addTo( file );
 
-    QActionGroup* ag = new QActionGroup(this);
-    QPopupMenu *spacemenu = new QPopupMenu(this);
-    file->insertItem( tr( "On Action..." ), spacemenu );
+    m_touch_action = new QAction( tr( "Two/One Touch" ), geticon( "1to1" ), QString::null, 0, this, NULL, true );
+    connect( m_touch_action, SIGNAL( toggled(bool) ), this, SLOT( setTwoTouch(bool) ) );
+    m_touch_action->setOn(m_twoTouch);
+    m_touch_action->addTo( file );
 
-    m_buttonAction[0] = new QAction( tr( "Open File" ), QString::null, 0, ag, NULL, true );
+    m_find_action = new QAction( tr( "Find..." ), geticon( "find" ), QString::null, 0, this, NULL);
+     connect( m_find_action, SIGNAL( activated() ), this, SLOT( editFind() ) );
+     file->insertSeparator();
+//     a->addTo( bar );
+     m_find_action->addTo( file );
 
-    m_buttonAction[1] = new QAction( tr( "Autoscroll" ), QString::null, 0, ag, NULL, true );
+    m_exportlinks_action = new QAction( tr( "Export Links" ), QString::null, 0, this, NULL);
+    connect( m_exportlinks_action, SIGNAL( activated() ), this, SLOT( ExportLinks() ) );
+    m_exportlinks_action->addTo( file );
 
-    m_buttonAction[2] = new QAction( tr( "Mark" ), QString::null, 0, ag, NULL, true );
+    m_scrollButton = new QAction( tr( "Scroll" ), getmyicon( "panel-arrow-down" ), QString::null, 0, this, 0, true );
+    connect( m_scrollButton, SIGNAL( toggled(bool) ), this, SLOT( autoScroll(bool) ) );
+    m_scrollButton->addTo(navigation);
+    m_scrollButton->setOn(false);
 
-    m_buttonAction[3] = new QAction( tr( "Fullscreen" ), QString::null, 0, ag, NULL, true );
+    m_start_action = new QAction( tr( "Goto Start" ), geticon( "start" ), QString::null, 0, this, NULL);
+    connect( m_start_action, SIGNAL( activated() ), this, SLOT( gotoStart() ) );
+    m_start_action->addTo(navigation);
 
-    ag->addTo(spacemenu);
+    m_end_action = new QAction( tr( "Goto End" ), geticon( "finish" ), QString::null, 0, this, NULL);
+    connect( m_end_action, SIGNAL( activated() ), this, SLOT( gotoEnd() ) );
+    m_end_action->addTo(navigation);
 
-    connect(ag, SIGNAL( selected(QAction*) ), this, SLOT( buttonActionSelected(QAction*) ) );
+    m_jump_action = new QAction( tr( "Jump" ), geticon( "rotate" ), QString::null, 0, this, NULL);
+    connect( m_jump_action, SIGNAL( activated() ), this, SLOT( jump() ) );
+    m_jump_action->addTo(navigation);
 
-    file->insertSeparator();
+    m_pageline_action = new QAction( tr( "Page/Line Scroll" ), geticon( "pass" ), QString::null, 0, this, NULL, true );
+    connect( m_pageline_action, SIGNAL( toggled(bool) ), this, SLOT( pagemode(bool) ) );
+    m_pageline_action->addTo(navigation);
+    m_pageline_action->setOn(reader->m_bpagemode);
 
-    ag = new QActionGroup(this);
-    ag->setExclusive(false);
-    QPopupMenu *encoding = new QPopupMenu(this);
-    file->insertItem( tr( "Navigation" ), encoding );
+    m_pageup_action = new QAction( tr( "Up" ), geticon( "up" ), QString::null, 0, this, 0 );
+    connect( m_pageup_action, SIGNAL( activated() ), this, SLOT( pageup() ) );
+    m_pageup_action->addTo( navigation );
+    
+    m_pagedn_action = new QAction( tr( "Down" ), geticon( "down" ), QString::null, 0, this, 0 );
+    connect( m_pagedn_action, SIGNAL( activated() ), this, SLOT( pagedn() ) );
+    m_pagedn_action->addTo( navigation );
 
-    a = m_scrollButton = new QAction( tr( "Scroll" ), Resource::loadPixmap( PICDIR "panel-arrow-down" ), QString::null, 0, ag, 0, true );
+    m_back_action = new QAction( tr( "Back" ), geticon( "back" ), QString::null, 0, this, 0 );
+    connect( m_back_action, SIGNAL( activated() ), reader, SLOT( goBack() ) );
+    m_back_action->addTo( navigation );
 
-    a->setOn(false);
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( autoScroll(bool) ) );
-    a->addTo( bar );
+    m_home_action = new QAction( tr( "Home" ), geticon( "home" ), QString::null, 0, this, 0 );
+    connect( m_home_action, SIGNAL( activated() ), reader, SLOT( goHome() ) );
+    m_home_action->addTo( navigation );
 
-    a = new QAction( tr( "Jump" ), QString::null, 0, ag, NULL);
-    connect( a, SIGNAL( activated() ), this, SLOT( jump() ) );
-
-    a = new QAction( tr( "Page/Line Scroll" ), QString::null, 0, ag, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( pagemode(bool) ) );
-    a->setOn(reader->m_bpagemode);
-
-    a = new QAction( tr( "Set Overlap" ), QString::null, 0, ag, NULL);
-    connect( a, SIGNAL( activated() ), this, SLOT( setoverlap() ) );
-
-    a = new QAction( tr( "Use Cursor" ), QString::null, 0, ag, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( navkeys(bool) ) );
-    a->setOn(reader->m_navkeys);
-
-    ag->addTo(encoding);
+    m_forward_action = new QAction( tr( "Forward" ), geticon( "forward" ), QString::null, 0, this, 0 );
+    connect( m_forward_action, SIGNAL( activated() ), reader, SLOT( goForward() ) );
+    m_forward_action->addTo( navigation );
 
     /*
     a = new QAction( tr( "Find" ), QString::null, 0, this, NULL, true );
@@ -343,266 +574,145 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
     a->addTo( file );
     */
 
-    file->insertSeparator();
+//    file->insertSeparator();
 
-    a = new QAction( tr( "Set Dictionary" ), QString::null, 0, this, NULL);
-    connect( a, SIGNAL( activated() ), this, SLOT( settarget() ) );
-    a->addTo( file );
+#ifdef _SCROLLPIPE
 
-    a = new QAction( tr( "Two/One Touch" ), QString::null, 0, this, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( setTwoTouch(bool) ) );
-    a->setOn(m_twoTouch);
-    a->addTo( file );
-
-    ag = new QActionGroup(this);
+    QActionGroup* ag = new QActionGroup(this);
     ag->setExclusive(false);
-    encoding = new QPopupMenu(this);
-    file->insertItem( tr( "Target" ), encoding );
+    spacemenu = new QPopupMenu(this);
+    file->insertItem( tr( "Scrolling" ), spacemenu );
 
-    a = new QAction( tr( "Annotation" ), QString::null, 0, ag, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( OnAnnotation(bool) ) );
-    a->setOn(m_doAnnotation);
+    a = new QAction( tr( "Set Target" ), QString::null, 0, ag, NULL);
+    connect( a, SIGNAL( activated() ), this, SLOT( setpipetarget() ) );
 
-    a = new QAction( tr( "Dictionary" ), QString::null, 0, ag, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( OnDictionary(bool) ) );
-    a->setOn(m_doDictionary);
+    a = new QAction( tr( "Pause Paras" ), QString::null, 0, ag, NULL, true );
+    connect( a, SIGNAL( toggled(bool) ), this, SLOT( setpause(bool) ) );
+    a->setOn(reader->m_pauseAfterEachPara);
 
-    a = new QAction( tr( "Clipboard" ), QString::null, 0, ag, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( OnClipboard(bool) ) );
-    a->setOn(m_doClipboard);
+    ag->addTo(spacemenu);
+//    file->insertSeparator();
 
-    ag->addTo(encoding);
-
+#endif
 
 /*
     a = new QAction( tr( "Import" ), QString::null, 0, this, NULL );
     connect( a, SIGNAL( activated() ), this, SLOT( importFiles() ) );
     a->addTo( file );
 */
-    
-    a = new QAction( tr( "Up" ), Resource::loadPixmap( "up" ), QString::null, 0, this, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( pageup() ) );
-    a->addTo( editBar );
-
-    a = new QAction( tr( "Down" ), Resource::loadPixmap( "down" ), QString::null, 0, this, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( pagedn() ) );
-    a->addTo( editBar );
 
     /*
-    a = new QAction( tr( "Paste" ), Resource::loadPixmap( "paste" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Paste" ), geticon( "paste" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editPaste() ) );
-    a->addTo( editBar );
+    a->addTo( fileBar );
     a->addTo( edit );
     */
 
-//     a = new QAction( tr( "Find..." ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
-     a = new QAction( tr( "Find..." ), QString::null, 0, this, NULL);
-     connect( a, SIGNAL( activated() ), this, SLOT( editFind() ) );
-     file->insertSeparator();
-//     a->addTo( bar );
-     a->addTo( file );
-
+//     a = new QAction( tr( "Find..." ), geticon( "find" ), QString::null, 0, this, 0 );
 
      m_fullscreen = false;
-    a = m_actFullscreen = new QAction( tr( "Fullscreen" ), QString::null, 0, this, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( setfullscreen(bool) ) );
-    a->setOn(m_fullscreen);
-    a->addTo( file );
+    m_actFullscreen = new QAction( tr( "Fullscreen" ), geticon( "fullscreen" ), QString::null, 0, this, NULL, true );
+    connect( m_actFullscreen, SIGNAL( toggled(bool) ), this, SLOT( setfullscreen(bool) ) );
+    m_actFullscreen->setOn(m_fullscreen);
+    m_actFullscreen->addTo( view );
 
-    a = new QAction( tr( "Continuous" ), QString::null, 0, ag, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( setcontinuous(bool) ) );
-    a->setOn(reader->m_continuousDocument);
-    a->addTo( file );
+    view->insertSeparator();
 
-     a = m_bkmkAvail = new QAction( tr( "Annotation" ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
-     connect( a, SIGNAL( activated() ), this, SLOT( showAnnotation() ) );
-     a->addTo( bar );
+    m_zoomin_action = new QAction( tr( "Zoom In" ), geticon( "zoom" ), QString::null, 0, this);
+    connect( m_zoomin_action, SIGNAL( activated() ), this, SLOT( zoomin() ) );
+    m_zoomin_action->addTo( view );
 
-     m_bkmkAvail->setEnabled(false);
+    m_zoomout_action = new QAction( tr( "Zoom Out" ), geticon( "mag" ), QString::null, 0, this);
+    connect( m_zoomout_action, SIGNAL( activated() ), this, SLOT( zoomout() ) );
+    m_zoomout_action->addTo( view );
 
+    view->insertSeparator();
+    m_setfont_action = new QAction( tr( "Set Font" ), getmyicon( "font" ), QString::null, 0, this);
+    connect( m_setfont_action, SIGNAL( activated() ), this, SLOT( setfont() ) );
+    m_setfont_action->addTo( view );
 
-    ag = new QActionGroup(this);
-//    ag->setExclusive(false);
-    encoding = new QPopupMenu(this);
-    format->insertItem( tr( "Markup" ), encoding );
+    view->insertSeparator();
+    m_setenc_action = new QAction( tr( "Set Encoding" ), getmyicon( "charset" ), QString::null, 0, this);
+    connect( m_setenc_action, SIGNAL( activated() ), this, SLOT( chooseencoding() ) );
+    m_setenc_action->addTo( view );
 
-    a = new QAction( tr( "Auto" ), QString::null, 0, ag, NULL, true );
-    a->setOn(reader->bautofmt);
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( autofmt(bool) ) );
+    m_setmono_action = new QAction( tr( "Ideogram" ), getmyicon( "ideogram" ), QString::null, 0, this, NULL, true);
+    connect( m_setmono_action, SIGNAL( toggled(bool) ), this, SLOT( monospace(bool) ) );
+    m_setmono_action->addTo( view );
+    m_setmono_action->setOn(reader->m_bMonoSpaced);
 
-    a = new QAction( tr( "None" ), QString::null, 0, ag, NULL, true );
-    a->setOn(!reader->bautofmt && !(reader->btextfmt || reader->bstriphtml || reader->bpeanut));
-//    connect( a, SIGNAL( toggled(bool) ), this, SLOT( textfmt(bool) ) );
-
-    a = new QAction( tr( "Text" ), QString::null, 0, ag, NULL, true );
-    a->setOn(reader->btextfmt);
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( textfmt(bool) ) );
-
-    a = new QAction( tr( "HTML" ), QString::null, 0, ag, NULL, true );
-    a->setOn(reader->bstriphtml);
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( striphtml(bool) ) );
-
-    a = new QAction( tr( "Peanut/PML" ), QString::null, 0, ag, NULL, true );
-    a->setOn(reader->bpeanut);
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( peanut(bool) ) );
-
-    ag->addTo(encoding);
-
-
-
-    ag = new QActionGroup(this);
-    ag->setExclusive(false);
-    encoding = new QPopupMenu(this);
-    format->insertItem( tr( "Layout" ), encoding );
-
-    a = new QAction( tr( "Strip CR" ), QString::null, 0, ag, NULL, true );
-    a->setOn(reader->bstripcr);
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( stripcr(bool) ) );
-
-    a = new QAction( tr( "Dehyphen" ), QString::null, 0, ag, NULL, true );
-    a->setOn(reader->bdehyphen);
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( dehyphen(bool) ) );
-//    a->addTo( format );
-
-    a = new QAction( tr( "Single Space" ), QString::null, 0, ag, NULL, true );
-    a->setOn(reader->bonespace);
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( onespace(bool) ) );
-
-    a = new QAction( tr( "Unindent" ), QString::null, 0, ag, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( unindent(bool) ) );
-    a->setOn(reader->bunindent);
-//    a->addTo( format );
-
-    a = new QAction( tr( "Re-paragraph" ), QString::null, 0, ag, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( repara(bool) ) );
-    a->setOn(reader->brepara);
-//    a->addTo( format );
-
-    a = new QAction( tr( "Double Space" ), QString::null, 0, ag, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( dblspce(bool) ) );
-    a->setOn(reader->bdblspce);
-//    a->addTo( format );
-
-    a = new QAction( tr( "Indent+" ), QString::null, 0, ag, NULL );
-    connect( a, SIGNAL( activated() ), this, SLOT( indentplus() ) );
-//    a->addTo( format );
-
-    a = new QAction( tr( "Indent-" ), QString::null, 0, ag, NULL );
-    connect( a, SIGNAL( activated() ), this, SLOT( indentminus() ) );
-#ifdef REPALM
-    a = new QAction( tr( "Repalm" ), QString::null, 0, ag, NULL, true );
-    a->setOn(reader->brepalm);
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( repalm(bool) ) );
-#endif
-    a = new QAction( tr( "Remap" ), QString::null, 0, ag, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( remap(bool) ) );
-    a->setOn(reader->bremap);
-
-    a = new QAction( tr( "Embolden" ), QString::null, 0, ag, NULL, true );
-    connect( a, SIGNAL( toggled(bool) ), this, SLOT( embolden(bool) ) );
-    a->setOn(reader->bmakebold);
-
-    ag->addTo(encoding);
 
     //    a = new QAction( tr( "Zoom" ), QString::null, 0, this, NULL, true );
-    //    a = new QAction( tr( "Zoom" ), Resource::loadPixmap( "mag" ), QString::null, 0, this, 0 );
-     format->insertSeparator();
-    a = new QAction( tr( "Zoom In" ), QString::null, 0, this);
-    connect( a, SIGNAL( activated() ), this, SLOT( zoomin() ) );
-    a->addTo( format );
-    a = new QAction( tr( "Zoom Out" ), QString::null, 0, this);
-    connect( a, SIGNAL( activated() ), this, SLOT( zoomout() ) );
-    a->addTo( format );
-    //    a->addTo( editBar );
-     format->insertSeparator();
+    //    a = new QAction( tr( "Zoom" ), geticon( "mag" ), QString::null, 0, this, 0 );
 
 
+
+    //    a->addTo( filebar() );
+//     view->insertSeparator();
+
+/*
     a = new QAction( tr( "Ideogram/Word" ), QString::null, 0, this, NULL, true );
     connect( a, SIGNAL( toggled(bool) ), this, SLOT( monospace(bool) ) );
     a->setOn(reader->m_bMonoSpaced);
-    a->addTo( format );
-
-    a = new QAction( tr( "Set width" ), QString::null, 0, this, NULL);
+    a->addTo( view );
+*/
+/*
+    a = new QAction( tr( "Set Width" ), QString::null, 0, this, NULL);
     connect( a, SIGNAL( activated() ), this, SLOT( setspacing() ) );
-    a->addTo( format );
+    a->addTo( view );
+*/
 
-    encoding = new QPopupMenu(this);
-//     format->insertSeparator();
-    format->insertItem( tr( "Encoding" ), encoding );
+    m_mark_action = new QAction( tr( "Bookmark" ), getmyicon( "bookmark" ), QString::null, 0, this, NULL);
+    connect( m_mark_action, SIGNAL( activated() ), this, SLOT( addbkmk() ) );
+    m_mark_action->addTo( marks );
 
-    ag = new QActionGroup(this);
+    m_annotate_action = new QAction( tr( "Annotate" ), getmyicon( "annotate" ), QString::null, 0, this, NULL);
+    connect( m_annotate_action, SIGNAL( activated() ), this, SLOT( addanno() ) );
+    m_annotate_action->addTo( marks );
 
-    m_EncodingAction[0] = new QAction( tr( "Ascii" ), QString::null, 0, ag, NULL, true );
+    m_goto_action = new QAction( tr( "Goto" ), getmyicon( "bookmark_goto" ), QString::null, 0, this, NULL, false );
+    connect( m_goto_action, SIGNAL( activated() ), this, SLOT( do_gotomark() ) );
+    m_goto_action->addTo( marks );
 
-    m_EncodingAction[1] = new QAction( tr( "UTF-8" ), QString::null, 0, ag, NULL, true );
+    m_delete_action = new QAction( tr( "Delete" ), getmyicon( "bookmark_delete" ), QString::null, 0, this, NULL);
+    connect( m_delete_action, SIGNAL( activated() ), this, SLOT( do_delmark() ) );
+    m_delete_action->addTo( marks );
 
-    m_EncodingAction[2] = new QAction( tr( "UCS-2(BE)" ), QString::null, 0, ag, NULL, true );
-
-    m_EncodingAction[3] = new QAction( tr( "USC-2(LE)" ), QString::null, 0, ag, NULL, true );
-
-    m_EncodingAction[4] = new QAction( tr( "Palm" ), QString::null, 0, ag, NULL, true );
-
-    m_EncodingAction[5] = new QAction( tr( "Windows(1252)" ), QString::null, 0, ag, NULL, true );
-
-    ag->addTo(encoding);
-
-    connect(ag, SIGNAL( selected(QAction*) ), this, SLOT( encodingSelected(QAction*) ) );
-
-    a = new QAction( tr( "Set Font" ), QString::null, 0, this);
-    connect( a, SIGNAL( activated() ), this, SLOT( setfont() ) );
-     format->insertSeparator();
-    a->addTo( format );
-
-    QPopupMenu *marks = new QPopupMenu( this );
-
-    a = new QAction( tr( "Mark" ), QString::null, 0, this, NULL);
-    connect( a, SIGNAL( activated() ), this, SLOT( addbkmk() ) );
-    a->addTo( marks );
-
-    a = new QAction( tr( "Annotate" ), QString::null, 0, this, NULL);
-    connect( a, SIGNAL( activated() ), this, SLOT( addanno() ) );
-    a->addTo( marks );
-
-    a = new QAction( tr( "Goto" ), QString::null, 0, this, NULL, false );
-    connect( a, SIGNAL( activated() ), this, SLOT( do_gotomark() ) );
-    a->addTo( marks );
-
-    a = new QAction( tr( "Delete" ), QString::null, 0, this, NULL);
-    connect( a, SIGNAL( activated() ), this, SLOT( do_delmark() ) );
-    a->addTo( marks );
-
-    a = new QAction( tr( "Autogen" ), QString::null, 0, this, NULL, false );
-    connect( a, SIGNAL( activated() ), this, SLOT( do_autogen() ) );
+    m_autogen_action = new QAction( tr( "Autogen" ), geticon( "exec" ), QString::null, 0, this, NULL, false );
+    connect( m_autogen_action, SIGNAL( activated() ), this, SLOT( do_autogen() ) );
      marks->insertSeparator();
-    a->addTo( marks );
+    m_autogen_action->addTo( marks );
 
-    a = new QAction( tr( "Clear" ), QString::null, 0, this, NULL);
-    connect( a, SIGNAL( activated() ), this, SLOT( clearBkmkList() ) );
-    a->addTo( marks );
+    m_clear_action = new QAction( tr( "Clear" ), getmyicon( "bookmark_clear" ), QString::null, 0, this, NULL);
+    connect( m_clear_action, SIGNAL( activated() ), this, SLOT( clearBkmkList() ) );
+    m_clear_action->addTo( marks );
 
-    a = new QAction( tr( "Save" ), QString::null, 0, this, NULL );
-    connect( a, SIGNAL( activated() ), this, SLOT( savebkmks() ) );
-    a->addTo( marks );
+    m_save_action = new QAction( tr( "Save" ), getmyicon( "bookmark_save" ), QString::null, 0, this, NULL );
+    connect( m_save_action, SIGNAL( activated() ), this, SLOT( savebkmks() ) );
+    m_save_action->addTo( marks );
 
-    a = new QAction( tr( "Tidy" ), QString::null, 0, this, NULL);
-    connect( a, SIGNAL( activated() ), this, SLOT( listBkmkFiles() ) );
+    m_tidy_action = new QAction( tr( "Tidy" ), getmyicon( "bookmark_tidy" ), QString::null, 0, this, NULL);
+    connect( m_tidy_action, SIGNAL( activated() ), this, SLOT( listBkmkFiles() ) );
      marks->insertSeparator();
-    a->addTo( marks );
+    m_tidy_action->addTo( marks );
 
-    a = new QAction( tr( "Start Block" ), QString::null, 0, this, NULL);
-    connect( a, SIGNAL( activated() ), this, SLOT( editMark() ) );
+    m_startBlock_action = new QAction( tr( "Start Block" ), geticon( "new" ), QString::null, 0, this, NULL);
+    connect( m_startBlock_action, SIGNAL( activated() ), this, SLOT( editMark() ) );
     marks->insertSeparator();
-    a->addTo( marks );
+    m_startBlock_action->addTo( marks );
 
-    a = new QAction( tr( "Copy Block" ), QString::null, 0, this, NULL);
-    connect( a, SIGNAL( activated() ), this, SLOT( editCopy() ) );
-    a->addTo( marks );
+    m_endBlock_action = new QAction( tr( "Copy Block" ), geticon( "copy" ), QString::null, 0, this, NULL);
+    connect( m_endBlock_action, SIGNAL( activated() ), this, SLOT( editCopy() ) );
+    m_endBlock_action->addTo( marks );
+
+    m_bkmkAvail = NULL;
 
 
-    mb->insertItem( tr( "File" ), file );
-    //    mb->insertItem( tr( "Edit" ), edit );
-    mb->insertItem( tr( "Format" ), format );
-    mb->insertItem( tr( "Marks" ), marks );
+    setToolBarsMovable(m_tbmove);
+    addtoolbars(&config);
+
+    pbar = new QProgressBar(this);
+    pbar->hide();
 
     searchBar = new QFloatBar( "Search", this, QMainWindow::Top, TRUE );
 
@@ -615,6 +725,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 //      searchEdit->setFont( f );
     searchBar->setStretchableWidget( searchEdit );
 
+
 #ifdef __ISEARCH
     connect( searchEdit, SIGNAL( textChanged( const QString & ) ),
 	     this, SLOT( search( const QString& ) ) );
@@ -622,11 +733,11 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
     connect( searchEdit, SIGNAL( returnPressed( ) ),
 	     this, SLOT( search( ) ) );
 #endif
-     a = new QAction( tr( "Find Next" ), Resource::loadPixmap( "next" ), QString::null, 0, this, 0 );
+     QAction*a = new QAction( tr( "Find Next" ), geticon( "next" ), QString::null, 0, this, 0 );
      connect( a, SIGNAL( activated() ), this, SLOT( findNext() ) );
      a->addTo( searchBar );
 
-    a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Close Find" ), geticon( "close" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( findClose() ) );
     a->addTo( searchBar );
 
@@ -645,11 +756,11 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
     connect( regEdit, SIGNAL( returnPressed( ) ),
 	     this, SLOT( do_regaction() ) );
 
-    a = new QAction( tr( "Do Reg" ), Resource::loadPixmap( "enter" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Do Reg" ), geticon( "enter" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( do_regaction() ) );
     a->addTo( regBar );
 
-    a = new QAction( tr( "Close Edit" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Close Edit" ), geticon( "close" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( regClose() ) );
     a->addTo( regBar );
 
@@ -659,14 +770,16 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 
     m_fontBar->setHorizontalStretchable( TRUE );
 
-    qDebug("Font selector");
+//    qDebug("Font selector");
     m_fontSelector = new QComboBox(false, m_fontBar);
     m_fontBar->setStretchableWidget( m_fontSelector );
     {
+#ifndef USEQPE
+	QFontDatabase f;
+#else
 	FontDatabase f;
+#endif
 	QStringList flist = f.families();
-	m_fontSelector->insertStringList(flist);
-
 	bool realfont = false;
 	for (QStringList::Iterator nm = flist.begin(); nm != flist.end(); nm++)
 	{
@@ -674,32 +787,32 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 	    {
 		realfont = true;
 	    }
-	    if (*nm == "courier") reader->m_fontControl.hasCourier(true);
+	    if ((*nm).contains(FIXEDFONT,false)) reader->m_fontControl.hasCourier(true, *nm);
 	}
 	if (!realfont) reader->m_fontname = flist[0];
     } // delete the FontDatabase!!!
-
     connect( m_fontSelector, SIGNAL( activated(const QString& ) ),
 	     this, SLOT( do_setfont(const QString&) ) );
+    connect( m_fontSelector, SIGNAL( activated(int ) ),
+	     this, SLOT( do_setencoding(int) ) );
 
     m_fontBar->hide();
     m_fontVisible = false;
-
+#ifdef USEMSGS
     connect(qApp, SIGNAL( appMessage(const QCString&, const QByteArray& ) ),
 	     this, SLOT( msgHandler(const QCString&, const QByteArray&) ) );
-
-    qDebug("Initing");
+#endif
+//    qDebug("Initing");
   reader->init();
-    qDebug("Inited");
-    m_EncodingAction[reader->m_encd]->setOn(true);
-    m_buttonAction[m_spaceTarget]->setOn(true);
-    qDebug("fonting");
+//    qDebug("Inited");
+//    m_buttonAction[m_spaceTarget]->setOn(true);
+//    qDebug("fonting");
     do_setfont(reader->m_fontname);
     if (!reader->m_lastfile.isEmpty())
     {
-	qDebug("doclnk");
+//	qDebug("doclnk");
 //	doc = new DocLnk(reader->m_lastfile);
-	qDebug("doclnk done");
+//	qDebug("doclnk done");
 	if (pOpenlist != NULL)
 	{
 
@@ -719,40 +832,303 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 		{
 		    break;
 		}
-		qDebug("Item:%s", (const char*)toQString(CFiledata(p->anno()).name()));
+//		qDebug("Item:%s", (const char*)toQString(CFiledata(p->anno()).name()));
 		p = NULL;
 	    }
 	    if (p != NULL)
 	    {
-	qDebug("openfrombkmk");
-		openfrombkmk(p);
+//	qDebug("openfrombkmk");
+		if (!openfrombkmk(p))
+		    showEditTools();
 	    }
 	    else
 	    {
-	qDebug("openfile");
+//	qDebug("openfile");
 		openFile( reader->m_lastfile );
 	    }
 	}
 	else
 	{
-	    qDebug("Openfile 2");
-	    if (!reader->m_lastfile.isNull())
+//	    qDebug("Openfile 2");
+	    if (!reader->m_lastfile.isEmpty())
 		openFile( reader->m_lastfile );
 	}
     }
-    qApp->processEvents();
+    else
+    {
+      showEditTools();
+    }
+//    qApp->processEvents();
     reader->bDoUpdates = true;
     reader->update();
-    qDebug("finished update");
+    config.setGroup("Version");
+    int major = config.readNumEntry("Major", 0);
+    int bkmktype = config.readNumEntry("BkmkType", 0);
+    char minor = config.readNumEntry("Minor", 0);
+    if (CheckVersion(major, bkmktype, minor))
+    {
+	config.writeEntry("Major", major);
+	config.writeEntry("BkmkType", bkmktype);
+	config.writeEntry("Minor", (int)minor);
+    }
+//    qDebug("finished update");
+}
+
+void QTReaderApp::addtoolbars(Config* config)
+{
+    config->setGroup("Toolbar");
+
+    if (fileBar != NULL)
+    {
+	if (fileBar != menubar)
+	{
+	    fileBar->clear();
+	}
+	else
+	{
+	    m_preferences_action->removeFrom( filebar() );
+	    m_open_action->removeFrom( filebar() );
+	    m_close_action->removeFrom( filebar() );
+	    m_info_action->removeFrom( filebar() );
+	    m_touch_action->removeFrom( filebar() );
+	    m_find_action->removeFrom( filebar() );
+	}
+    }
+
+    m_preferences_action->addTo( filebar() );
+    addfilebar(config, "Open", m_open_action);
+    addfilebar(config, "Close", m_close_action);
+    addfilebar(config, "Info", m_info_action);
+    addfilebar(config, "Two/One Touch", m_touch_action);
+    addfilebar(config, "Find", m_find_action);
+
+    if (navBar != NULL)
+    {
+	if ((navBar == fileBar) && (fileBar == menubar))
+	{
+	    m_scrollButton->removeFrom( navbar() );
+	    m_start_action->removeFrom( navbar() );
+	    m_end_action->removeFrom( navbar() );
+	    m_jump_action->removeFrom( navbar() );
+	    m_pageline_action->removeFrom( navbar() );
+	    m_pageup_action->removeFrom( navbar() );
+	    m_pagedn_action->removeFrom( navbar() );
+	    m_back_action->removeFrom( navbar() );
+	    m_home_action->removeFrom( navbar() );
+	    m_forward_action->removeFrom( navbar() );
+	}
+	else if (navBar != fileBar)
+	{
+	    navBar->clear();
+	}
+    }
+
+    addnavbar(config, "Scroll", m_scrollButton);
+    addnavbar(config, "Goto Start", m_start_action);
+    addnavbar(config, "Goto End", m_end_action);
+
+    addnavbar(config, "Jump", m_jump_action);
+    addnavbar(config, "Page/Line Scroll", m_pageline_action);
+
+    addnavbar(config, "Page Up", m_pageup_action);
+    addnavbar(config, "Page Down", m_pagedn_action);
+
+    addnavbar(config, "Back", m_back_action);
+    addnavbar(config, "Home", m_home_action);
+    addnavbar(config, "Forward", m_forward_action);
+
+    if (viewBar != NULL)
+    {
+	if ((viewBar == fileBar) && (fileBar == menubar))
+	{
+	    m_actFullscreen->removeFrom( filebar() );
+	    m_zoomin_action->removeFrom( viewbar() );
+	    m_zoomout_action->removeFrom( viewbar() );
+	    m_setfont_action->removeFrom( viewbar() );
+	    m_setenc_action->removeFrom( viewbar() );
+	    m_setmono_action->removeFrom( viewbar() );
+	}
+	else if (viewBar != fileBar)
+	{
+	    viewBar->clear();
+	}
+    }
+
+    addviewbar(config, "Fullscreen", m_actFullscreen);
+    addviewbar(config, "Zoom In", m_zoomin_action);
+    addviewbar(config, "Zoom Out", m_zoomout_action);
+    addviewbar(config, "Set Font", m_setfont_action);
+    addviewbar(config, "Encoding Select", m_setenc_action);
+    addviewbar(config, "Ideogram Mode", m_setmono_action);
+
+    if (markBar != NULL)
+    {
+	if ((markBar == fileBar) && (fileBar == menubar))
+	{
+	    m_mark_action->removeFrom( markbar() );
+	    m_annotate_action->removeFrom( markbar());
+	    m_goto_action->removeFrom( markbar() );
+	    m_delete_action->removeFrom( markbar() );
+	    m_autogen_action->removeFrom( markbar() );
+	    m_clear_action->removeFrom( markbar() );
+	    m_save_action->removeFrom( markbar() );
+	    m_tidy_action->removeFrom( markbar() );
+	    m_startBlock_action->removeFrom( markbar() );
+	    m_endBlock_action->removeFrom( markbar() );
+	}
+	else if (markBar != fileBar)
+	{
+	    markBar->clear();
+	}
+    }
+    addmarkbar(config, "Mark", m_mark_action);
+    addmarkbar(config, "Annotate", m_annotate_action);
+    addmarkbar(config, "Goto", m_goto_action);
+    addmarkbar(config, "Delete", m_delete_action);
+    addmarkbar(config, "Autogen", m_autogen_action);
+    addmarkbar(config, "Clear", m_clear_action);
+    addmarkbar(config, "Save", m_save_action);
+    addmarkbar(config, "Tidy", m_tidy_action);
+    addmarkbar(config, "Start Block", m_startBlock_action);
+    addmarkbar(config, "Copy Block", m_endBlock_action);
+    if (checkbar(config, "Annotation indicator"))
+    {
+	if (m_bkmkAvail == NULL)
+	{
+	    m_bkmkAvail = new QAction( tr( "Annotation" ), geticon( "find" ), QString::null, 0, this, 0 );
+	    connect( m_bkmkAvail, SIGNAL( activated() ), this, SLOT( showAnnotation() ) );
+	
+	    m_bkmkAvail->setEnabled(false);
+	}
+	QLabel *spacer = new QLabel(markBar, "");
+	markbar()->setStretchableWidget(spacer);
+	m_bkmkAvail->removeFrom( markbar() );
+	m_bkmkAvail->addTo( markbar() );
+    }
+    else
+    {
+	if (m_bkmkAvail != NULL)
+	{
+	    m_bkmkAvail->removeFrom( markbar() );
+	    delete m_bkmkAvail;
+	    m_bkmkAvail = NULL;
+	}
+    }
+}
+
+bool QTReaderApp::checkbar(Config* _config, const QString& key)
+{
+    return _config->readBoolEntry(key, false);
+}
+
+
+QToolBar* QTReaderApp::filebar()
+{
+    if (fileBar == NULL)
+    {
+	switch (m_tbpol)
+	{
+	    case cesSingle:
+//		qDebug("Setting filebar to menubar");
+		fileBar = menubar;
+		break;
+	    default:
+		qDebug("Incorrect toolbar policy set");
+	    case cesMenuTool:
+	    case cesMultiple:
+//		qDebug("Creating new file bar");
+		fileBar = new QToolBar("File", this, m_tbposition);
+		break;
+	}
+//	fileBar->setHorizontalStretchable( true );
+    }
+    return fileBar;
+}
+QToolBar* QTReaderApp::viewbar()
+{
+    if (viewBar == NULL)
+    {
+	switch (m_tbpol)
+	{
+	    case cesMultiple:
+		viewBar = new QToolBar("View", this, m_tbposition);
+		break;
+	    default:
+		qDebug("Incorrect toolbar policy set");
+	    case cesSingle:
+	    case cesMenuTool:
+		viewBar = fileBar;
+		break;
+	}
+    }
+    return viewBar;
+}
+QToolBar* QTReaderApp::navbar()
+{
+    if (navBar == NULL)
+    {
+	switch (m_tbpol)
+	{
+	    case cesMultiple:
+//		qDebug("Creating new nav bar");
+		navBar = new QToolBar("Navigation", this, m_tbposition);
+		break;
+	    default:
+		qDebug("Incorrect toolbar policy set");
+	    case cesSingle:
+	    case cesMenuTool:
+		navBar = fileBar;
+//		qDebug("Setting navbar to filebar");
+		break;
+	}
+    }
+    return navBar;
+}
+QToolBar* QTReaderApp::markbar()
+{
+    if (markBar == NULL)
+    {
+	switch (m_tbpol)
+	{
+	    case cesMultiple:
+		markBar = new QToolBar("Marks", this, m_tbposition);
+		break;
+	    default:
+		qDebug("Incorrect toolbar policy set");
+	    case cesSingle:
+	    case cesMenuTool:
+		markBar = fileBar;
+		break;
+	}
+    }
+    return markBar;
+}
+
+void QTReaderApp::addfilebar(Config* _config, const QString& key, QAction* a)
+{
+    if (_config->readBoolEntry(key, false)) a->addTo( filebar() );
+}
+void QTReaderApp::addnavbar(Config* _config, const QString& key, QAction* a)
+{
+    if (_config->readBoolEntry(key, false)) a->addTo( navbar() );
+}
+void QTReaderApp::addmarkbar(Config* _config, const QString& key, QAction* a)
+{
+    if (_config->readBoolEntry(key, false)) a->addTo( markbar() );
+}
+void QTReaderApp::addviewbar(Config* _config, const QString& key, QAction* a)
+{
+    if (_config->readBoolEntry(key, false)) a->addTo( viewbar() );
 }
 
 void QTReaderApp::suspend() { reader->suspend(); }
 
+#ifdef USEMSGS
 void QTReaderApp::msgHandler(const QCString& _msg, const QByteArray& _data)
 {
     QString msg = QString::fromUtf8(_msg);
 
-//    qDebug("Received:%s", (const char*)msg);
+////    qDebug("Received:%s", (const char*)msg);
 
     QDataStream stream( _data, IO_ReadOnly );
     if ( msg == "info(QString)" )
@@ -761,14 +1137,26 @@ void QTReaderApp::msgHandler(const QCString& _msg, const QByteArray& _data)
 	stream >> info;
 	QMessageBox::information(this, PROGNAME, info);
     }
+    else if ( msg == "Update(int)" )
+    {
+	int info;
+	stream >> info;
+	if (info)
+	{
+	    reader->bDoUpdates = true;
+	    reader->refresh();
+	}
+	else
+	{
+	    reader->bDoUpdates = false;
+	}
+    }
     else if ( msg == "warn(QString)" )
     {
 	QString info;
 	stream >> info;
 	QMessageBox::warning(this, PROGNAME, info);
     }
-
-
     else if ( msg == "exit()" )
     {
 	m_dontSave = true;
@@ -794,6 +1182,18 @@ void QTReaderApp::msgHandler(const QCString& _msg, const QByteArray& _data)
     {
 	showEditTools();
     }
+    else if ( msg == "home()" )
+    {
+	reader->goHome();
+    }
+    else if ( msg == "back()" )
+    {
+	reader->goBack();
+    }
+    else if ( msg == "forward()" )
+    {
+	reader->goForward();
+    }
     else if ( msg == "File/Open(QString)" )
     {
 	QString info;
@@ -804,45 +1204,66 @@ void QTReaderApp::msgHandler(const QCString& _msg, const QByteArray& _data)
     {
 	showinfo();
     }
-    else if ( msg == "File/Start Block()" )
+    else if ( msg == "File/Action(QString)" )
     {
-	editMark();
+	QString info;
+	stream >> info;
+	m_spaceTarget = ActNameToInt(info);
     }
-    else if ( msg == "File/Copy Block()" )
-    {
-	editCopy();
-    }
-    else if ( msg == "File/Scroll(int)" )
+    else if ( msg == "Navigation/Scroll(int)" )
     {
 	int info;
 	stream >> info;
 	autoScroll(info);
     }
-    else if ( msg == "File/Jump(int)" )
+
+    else if ( msg == "Navigation/GotoStart()" )
+    {
+	gotoStart();
+    }
+    else if ( msg == "Navigation/GotoEnd()" )
+    {
+	gotoEnd();
+    }
+    else if ( msg == "Navigation/Jump(int)" )
     {
 	int info;
 	stream >> info;
 	reader->locate(info);
     }
-    else if ( msg == "File/Page/Line Scroll(int)" )
+    else if ( msg == "Navigation/Page/LineScroll(int)" )
     {
 	int info;
 	stream >> info;
 	pagemode(info);
     }
-    else if ( msg == "File/Set Overlap(int)" )
+    else if ( msg == "Navigation/SetOverlap(int)" )
     {
 	int info;
 	stream >> info;
 	reader->m_overlap = info;
     }
-    else if ( msg == "File/Set Dictionary(QString)" )
+    else if ( msg == "Navigation/SetMargin(int)" )
+    {
+	int info;
+	stream >> info;
+	do_margin(info);
+    }
+    else if ( msg == "File/SetDictionary(QString)" )
     {
 	QString info;
 	stream >> info;
 	do_settarget(info);
     }
-    else if ( msg == "File/Two/One Touch(int)" )
+#ifdef _SCROLLPIPE
+    else if ( msg == "File/SetScrollTarget(QString)" )
+    {
+	QString info;
+	stream >> info;
+	reader->m_pipetarget = info;
+    }
+#endif
+    else if ( msg == "File/Two/OneTouch(int)" )
     {
 	int info;
 	stream >> info;
@@ -874,11 +1295,11 @@ void QTReaderApp::msgHandler(const QCString& _msg, const QByteArray& _data)
 	size_t pos = reader->pagelocate();
 	size_t start = pos;
 	CDrawBuffer test(&(reader->m_fontControl));
-	reader->buffdoc.getline(&test,reader->width());
+	reader->getline(&test);
 	while (arg.match(toQString(test.data())) == -1)
 	{
 	    pos = reader->locate();
-	    if (!reader->buffdoc.getline(&test,reader->width()))
+	    if (!reader->getline(&test))
 	    {
 		QMessageBox::information(this, PROGNAME, QString("Can't find\n")+info);
 		pos = start;
@@ -887,13 +1308,71 @@ void QTReaderApp::msgHandler(const QCString& _msg, const QByteArray& _data)
 	}
 	reader->locate(pos);
     }
-    else if ( msg == "Layout/Strip CR(int)" )
+    else if ( msg == "File/Fullscreen(int)" )
+    {
+	int info;
+	stream >> info;
+	setfullscreen(info);
+    }
+    else if ( msg == "File/Continuous(int)" )
+    {
+	int info;
+	stream >> info;
+	setcontinuous(info);
+    }
+    else if ( msg == "Markup(QString)" )
+    {
+	QString info;
+	stream >> info;
+	if (info == "Auto")
+	{
+	    autofmt(true);
+	}
+	if (info == "None")
+	{
+	    autofmt(false);
+	    textfmt(false);
+	    striphtml(false);
+	    peanut(false);
+	}
+	if (info == "Text")
+	{
+	    textfmt(true);
+	}
+	if (info == "HTML")
+	{
+	    striphtml(true);
+	}
+	if (info == "Peanut/PML")
+	{
+	    peanut(true);
+	}
+    }
+    else if ( msg == "Layout/StripCR(int)" )
     {
 	int info;
 	stream >> info;
 	stripcr(info);
     }
-    else if ( msg == "Layout/Single Space" )
+    else if ( msg == "Layout/Dehyphen(int)" )
+    {
+	int info;
+	stream >> info;
+	dehyphen(info);
+    }
+    else if ( msg == "Layout/Depluck(int)" )
+    {
+	int info;
+	stream >> info;
+	depluck(info);
+    }
+    else if ( msg == "Layout/Dejpluck(int)" )
+    {
+	int info;
+	stream >> info;
+	dejpluck(info);
+    }
+    else if ( msg == "Layout/SingleSpace(int)" )
     {
 	int info;
 	stream >> info;
@@ -907,36 +1386,6 @@ void QTReaderApp::msgHandler(const QCString& _msg, const QByteArray& _data)
 	repalm(info);
     }
 #endif
-    else if ( msg == "Markup/Auto(int)" )
-    {
-	int info;
-	stream >> info;
-	autofmt(info);
-    }
-    else if ( msg == "Markup/Text(int)" )
-    {
-	int info;
-	stream >> info;
-	textfmt(info);
-    }
-    else if ( msg == "Markup/HTML(int)" )
-    {
-	int info;
-	stream >> info;
-	striphtml(info);
-    }
-    else if ( msg == "Markup/Peanut(int)" )
-    {
-	int info;
-	stream >> info;
-	peanut(info);
-    }
-    else if ( msg == "Layout/Dehyphen(int)" )
-    {
-	int info;
-	stream >> info;
-	dehyphen(info);
-    }
     else if ( msg == "Layout/Unindent(int)" )
     {
 	int info;
@@ -949,7 +1398,7 @@ void QTReaderApp::msgHandler(const QCString& _msg, const QByteArray& _data)
 	stream >> info;
 	repara(info);
     }
-    else if ( msg == "Layout/Double Space(int)" )
+    else if ( msg == "Layout/DoubleSpace(int)" )
     {
 	int info;
 	stream >> info;
@@ -980,7 +1429,7 @@ void QTReaderApp::msgHandler(const QCString& _msg, const QByteArray& _data)
 	stream >> info;
 	monospace(info);
     }
-    else if ( msg == "Format/Set width(int)" )
+    else if ( msg == "Format/SetWidth(int)" )
     {
 	int info;
 	stream >> info;
@@ -988,13 +1437,7 @@ void QTReaderApp::msgHandler(const QCString& _msg, const QByteArray& _data)
 	reader->setfont();
 	reader->refresh();
     }
-    else if ( msg == "Format/Encoding(QString)" )
-    {
-	QString info;
-	stream >> info;
-	reader->setencoding(EncNameToInt(info));
-    }
-    else if ( msg == "Format/Set Font(QString,int)" )
+    else if ( msg == "Format/SetFont(QString,int)" )
     {
 	QString fontname;
 	int size;
@@ -1008,8 +1451,16 @@ void QTReaderApp::msgHandler(const QCString& _msg, const QByteArray& _data)
 	stream >> info;
 	do_autogen(info);
     }
+    else if ( msg == "File/StartBlock()" )
+    {
+	editMark();
+    }
+    else if ( msg == "File/CopyBlock()" )
+    {
+	editCopy();
+    }
 }
-
+#endif
 ActionTypes QTReaderApp::ActNameToInt(const QString& _enc)
 {
     for (int i = 0; i < MAX_ACTIONS; i++)
@@ -1024,41 +1475,14 @@ void QTReaderApp::setfullscreen(bool sfs)
     reader->bDoUpdates = false;
     m_fullscreen = sfs;
     showEditTools();
-    qApp->processEvents();
+//    qApp->processEvents();
     reader->bDoUpdates = true;
     reader->update();
 }
 
-void QTReaderApp::setcontinuous(bool sfs)
-{
-    reader->setContinuous(sfs);
-    reader->refresh();
-}
-
-int QTReaderApp::EncNameToInt(const QString& _enc)
-{
-    for (int i = 0; i < MAX_ENCODING; i++)
-    {
-	if (m_EncodingAction[i]->text() == _enc) return i;
-    }
-    return 0;
-/*
-    if (_enc == "Ascii") return 0;
-    if (_enc == "UTF-8") return 1;
-    if (_enc == "UCS-2(BE)") return 2;
-    if (_enc == "USC-2(LE)") return 3;
-*/
-}
-
-void QTReaderApp::encodingSelected(QAction* _a)
-{
-//    qDebug("es:%x : %s", _a, (const char *)(_a->text()));
-    reader->setencoding(EncNameToInt(_a->text()));
-}
-
 void QTReaderApp::buttonActionSelected(QAction* _a)
 {
-//    qDebug("es:%x : %s (%u)", _a, (const char *)(_a->text()), ActNameToInt(_a->text()));
+////    qDebug("es:%x : %s (%u)", _a, (const char *)(_a->text()), ActNameToInt(_a->text()));
     m_spaceTarget = ActNameToInt(_a->text());
 }
 
@@ -1091,37 +1515,56 @@ void QTReaderApp::clearBkmkList()
 
 void QTReaderApp::fileClose()
 {
-    if (pOpenlist != NULL)
+    CCloseDialog* cd = new CCloseDialog(reader->m_string, false, this);
+    if (cd->exec())
     {
-	int ind = 0;
-	Bkmk* p = (*pOpenlist)[ind];
-	while (p != NULL && toQString(CFiledata(p->anno()).name()) != reader->m_lastfile)
+	if (pOpenlist != NULL)
 	{
-	    p = (*pOpenlist)[++ind];
-	}
-	if (p != NULL) pOpenlist->erase(ind);
-	switch (QMessageBox::information ( this , PROGNAME, "What do you want to delete?", "Nothing", "Marks", "Marks\nFile", 1, 0 ))
-	{
-	    case 0:
-	    default:
-		break;
-	    case 2:
+	    int ind = 0;
+	    Bkmk* p = (*pOpenlist)[ind];
+	    while (p != NULL && toQString(CFiledata(p->anno()).name()) != reader->m_lastfile)
+	    {
+		p = (*pOpenlist)[++ind];
+	    }
+	    if (p != NULL) pOpenlist->erase(ind);
+	    if (cd->delFile())
+	    {
 		unlink((const char*)reader->m_lastfile);
-	    case 1:
-		unlink((const char *)Global::applicationFileName(APPDIR, reader->m_string));
+	    }
+	    if (cd->delMarks())
+	    {
+#ifndef USEQPE
+	    QDir d = QDir::home();                      // "/"
+		d.cd(APPDIR);
+		d.remove(reader->m_string);
+#else /* USEQPE */
+		unlink((const char *)Global::applicationFileName(APPDIR,reader->m_string));
+#endif /* USEQPE */
+	    }
+	    if (cd->delConfig())
+	    {
+#ifndef USEQPE
+	    QDir d = QDir::home();                      // "/"
+		d.cd(APPDIR "/configs");
+		d.remove(reader->m_string);
+#else /* USEQPE */
+		unlink((const char *)Global::applicationFileName(APPDIR "/configs",reader->m_string));
+#endif /* USEQPE */
+	    }
 	}
-    }
     
-    fileOpen2();
+	fileOpen2();
+    }
+    delete cd;
 }
 
 void QTReaderApp::updatefileinfo()
 {
-    if (reader->m_string.isNull()) return;
-    if (reader->m_lastfile.isNull()) return;
+    if (reader->m_string.isEmpty()) return;
+    if (reader->m_lastfile.isEmpty()) return;
     tchar* nm = fromQString(reader->m_string);
     tchar* fl = fromQString(reader->m_lastfile);
-    qDebug("Lastfile:%x", fl);
+//    qDebug("Lastfile:%x", fl);
     bool notadded = true;
     if (pOpenlist == NULL) pOpenlist = new CList<Bkmk>;
     else
@@ -1135,7 +1578,7 @@ void QTReaderApp::updatefileinfo()
 		unsigned char* data;
 		CFiledata fd(iter->anno());
 		reader->setSaveData(data, dlen, fd.content(), fd.length());
-		qDebug("Filedata(1):%u, %u", fd.length(), dlen);
+//		qDebug("Filedata(1):%u, %u", fd.length(), dlen);
 //		getstate(data, dlen);
 		iter->setAnno(data, dlen);
 		notadded = false;
@@ -1144,7 +1587,7 @@ void QTReaderApp::updatefileinfo()
 	    }
 	}
     }
-    qDebug("Added?:%x", notadded);
+//    qDebug("Added?:%x", notadded);
     if (notadded)
     {
 	struct stat fnstat;
@@ -1154,7 +1597,7 @@ void QTReaderApp::updatefileinfo()
 	unsigned char* data;
 	reader->setSaveData(data, dlen, fd.content(), fd.length());
 	pOpenlist->push_front(Bkmk(nm, data, dlen, reader->pagelocate()));
-	qDebug("Filedata(2):%u, %u", fd.length(), dlen);
+//	qDebug("Filedata(2):%u, %u", fd.length(), dlen);
 	delete [] data;
     }
     delete [] nm;
@@ -1165,11 +1608,11 @@ void QTReaderApp::fileOpen()
 {
 /*
     menu->hide();
-    editBar->hide();
+    fileBar->hide();
     if (regVisible) regBar->hide();
     if (searchVisible) searchBar->hide();
 */
-    qDebug("fileOpen");
+//    qDebug("fileOpen");
 //    if (!reader->m_lastfile.isEmpty())
     updatefileinfo();
     fileOpen2();
@@ -1193,25 +1636,33 @@ void QTReaderApp::fileOpen2()
     editorStack->raiseWidget( fileSelector );
     fileSelector->reread();
 */
+    bool usebrowser = true;
     if (pOpenlist != NULL)
     {
-	m_nRegAction = cOpenFile;
-	listbkmk(pOpenlist, "Browse");
+	m_nBkmkAction = cOpenFile;
+	if (listbkmk(pOpenlist, "Browse")) usebrowser = false;
     }
-    else
+    if (usebrowser)
     {
 	QString fn = usefilebrowser();
+//	qApp->processEvents();
 	if (!fn.isEmpty() && QFileInfo(fn).isFile())
 	{
 	    openFile(fn);
 	}
 	reader->setFocus();
     }
+//    reader->refresh();
+//    qDebug("HEIGHT:%d", reader->m_lastheight);
 }
 
 QString QTReaderApp::usefilebrowser()
 {
-    fileBrowser* fb = new fileBrowser(this,"QTReader",TRUE,
+#ifndef USEQPE
+    QString s( QFileDialog::getOpenFileName( reader->m_lastfile, QString::null, this ) );
+    return s;
+#else
+    fileBrowser* fb = new fileBrowser(false, this,"OpieReader",!m_bFloatingDialog,
 				      0,
 //				      WStyle_Customize | WStyle_NoBorderEx,
 				      "*", QFileInfo(reader->m_lastfile).dirPath(true));
@@ -1220,18 +1671,250 @@ QString QTReaderApp::usefilebrowser()
     QString fn;
     if (fb->exec())
     {
-	fn = fb->fileList[0];
+	fn = fb->getCurrentFile();
     }
-    qDebug("Selected %s", (const char*)fn);
+//    qDebug("Selected %s", (const char*)fn);
     delete fb;
+    showEditTools();
     return fn;
+#endif
 }
 
-void QTReaderApp::showgraphic(QPixmap& pm)
+void QTReaderApp::showgraphic(QImage& pm)
 {
-    m_graphicwin->setPixmap(pm);
+    QPixmap pc;
+    pc.convertFromImage(pm);
+    m_graphicwin->setPixmap(pc);
     editorStack->raiseWidget( m_graphicwin );
     m_graphicwin->setFocus();
+}
+
+
+void QTReaderApp::showprefs()
+{
+    CPrefs* prefwin = new CPrefs(!m_bFloatingDialog, this);
+
+    prefwin->twotouch(m_twoTouch); 
+    prefwin->propfontchange(m_propogatefontchange);
+    prefwin->StripCR(reader->bstripcr);
+    prefwin->Dehyphen(reader->bdehyphen);
+    prefwin->SingleSpace(reader->bonespace);
+    prefwin->Unindent(reader->bunindent);
+    prefwin->Reparagraph(reader->brepara);
+    prefwin->DoubleSpace(reader->bdblspce);
+    prefwin->Remap(reader->bremap);
+    prefwin->Embolden(reader->bmakebold);
+    prefwin->FullJustify(reader->bfulljust);
+    prefwin->ParaLead(reader->getextraspace());
+    prefwin->LineLead(reader->getlead());
+    prefwin->Margin(reader->m_border);
+    prefwin->Indent(reader->bindenter);
+    if (reader->bautofmt)
+    {
+	prefwin->Markup(0);
+    }
+    else if (reader->btextfmt)
+    {
+	prefwin->Markup(2);
+    }
+    else if (reader->bstriphtml)
+    {
+	prefwin->Markup(3);
+    }
+    else if (reader->bpeanut)
+    {
+	prefwin->Markup(4);
+    }
+    else
+    {
+	prefwin->Markup(1);
+    }
+    prefwin->Depluck(reader->bdepluck);
+    prefwin->Dejpluck(reader->bdejpluck);
+    prefwin->Continuous(reader->m_continuousDocument);
+
+    prefwin->dictApplication(m_targetapp);
+    prefwin->dictMessage(m_targetmsg);
+
+    prefwin->spaceAction(m_spaceTarget);
+    prefwin->escapeAction(m_escapeTarget);
+    prefwin->returnAction(m_returnTarget);
+    prefwin->leftAction(m_leftTarget);
+    prefwin->rightAction(m_rightTarget);
+    prefwin->upAction(m_upTarget);
+    prefwin->downAction(m_downTarget);
+
+    prefwin->leftScroll(m_leftScroll);
+    prefwin->rightScroll(m_rightScroll);
+    prefwin->upScroll(m_upScroll);
+    prefwin->downScroll(m_downScroll);
+
+    prefwin->miscannotation(m_doAnnotation);
+    prefwin->miscdictionary(m_doDictionary);
+    prefwin->miscclipboard(m_doClipboard);
+
+    prefwin->SwapMouse(reader->m_swapmouse);
+
+    prefwin->Font(reader->m_fontname);
+
+    prefwin->gfxsize(reader->getBaseSize());
+
+    prefwin->pageoverlap(reader->m_overlap);
+
+    prefwin->ideogram(reader->m_bMonoSpaced);
+
+    prefwin->encoding(reader->m_encd);
+
+    prefwin->ideogramwidth(reader->m_charpc);
+
+    if (prefwin->exec())
+    {
+	m_twoTouch = prefwin->twotouch();
+	reader->setTwoTouch(m_twoTouch);
+	m_touch_action->setOn(m_twoTouch);
+
+	reader->bstripcr = prefwin->StripCR();
+	reader->bdehyphen = prefwin->Dehyphen();
+	reader->bonespace = prefwin->SingleSpace();
+	reader->bunindent = prefwin->Unindent();
+	reader->brepara = prefwin->Reparagraph();
+	reader->bdblspce = prefwin->DoubleSpace();
+	reader->bremap = prefwin->Remap();
+	reader->bmakebold = prefwin->Embolden();
+	reader->bfulljust = prefwin->FullJustify();
+	reader->setextraspace(prefwin->ParaLead());
+	reader->setlead(prefwin->LineLead());
+	reader->m_border = prefwin->Margin();
+	reader->bindenter = prefwin->Indent();
+	reader->bautofmt = reader->btextfmt = reader->bstriphtml = reader->bpeanut = false;
+	switch (prefwin->Markup())
+	{
+	    case 0:
+		reader->bautofmt = true;
+		break;
+	    case 1:
+		break;
+	    case 2:
+		reader->btextfmt = true;
+		break;
+	    case 3:
+		reader->bstriphtml = true;
+		break;
+	    case 4:
+		reader->bpeanut = true;
+		break;
+	    default:
+		qDebug("Format out of range");
+	}
+	reader->bdepluck = prefwin->Depluck();
+	reader->bdejpluck = prefwin->Dejpluck();
+	reader->setContinuous(prefwin->Continuous());
+
+	m_spaceTarget = (ActionTypes)prefwin->spaceAction();
+	m_escapeTarget = (ActionTypes)prefwin->escapeAction();
+	m_returnTarget = (ActionTypes)prefwin->returnAction();
+	m_leftTarget = (ActionTypes)prefwin->leftAction();
+	m_rightTarget = (ActionTypes)prefwin->rightAction();
+	m_upTarget = (ActionTypes)prefwin->upAction();
+	m_downTarget = (ActionTypes)prefwin->downAction();
+	m_leftScroll = prefwin->leftScroll();
+	m_rightScroll = prefwin->rightScroll();
+	m_upScroll = prefwin->upScroll();
+	m_downScroll = prefwin->downScroll();
+
+	m_targetapp = prefwin->dictApplication();
+	m_targetmsg = prefwin->dictMessage();
+
+	m_doAnnotation = prefwin->miscannotation();
+	m_doDictionary = prefwin->miscdictionary();
+	m_doClipboard = prefwin->miscclipboard();
+	reader->m_swapmouse = prefwin->SwapMouse();
+	reader->setBaseSize(prefwin->gfxsize());
+	reader->m_overlap = prefwin->pageoverlap();
+	reader->m_bMonoSpaced = prefwin->ideogram();
+	m_setmono_action->setOn(reader->m_bMonoSpaced);
+	reader->m_encd = prefwin->encoding();
+	reader->m_charpc = prefwin->ideogramwidth();
+
+	if (
+	    reader->m_fontname != prefwin->Font()
+	    ||
+	    m_propogatefontchange != prefwin->propfontchange())
+	{
+	    m_propogatefontchange = prefwin->propfontchange();
+	    setfontHelper(prefwin->Font());
+	}
+	delete prefwin;
+	reader->setfilter(reader->getfilter());
+	reader->refresh();
+
+    }
+    else
+    {
+	delete prefwin;
+    }
+}
+
+void QTReaderApp::showtoolbarprefs()
+{
+#ifdef USEQPE
+    CBarPrefs* prefwin = new CBarPrefs(APPDIR, !m_bFloatingDialog, this);
+#else
+	QFileInfo fi;
+    QDir d = QDir::home();                      // "/"
+	if ( !d.cd(APPDIR) )
+	{                       // "/tmp"
+		qWarning( "Cannot find the \"~/%s\" directory", APPDIR );
+		d = QDir::home();
+		d.mkdir(APPDIR);
+		d.cd(APPDIR);
+	}
+	fi.setFile(d, INIFILE);
+    CBarPrefs* prefwin = new CBarPrefs(fi.absFilePath(), !m_bFloatingDialog, this);
+#endif
+    prefwin->tbpolicy(m_tbpolsave);
+    prefwin->tbposition(m_tbposition-2);
+    prefwin->tbmovable(m_tbmovesave);
+    prefwin->floating(m_bFloatingDialog);
+    if (prefwin->exec())
+    {
+	m_bFloatingDialog = prefwin->floating();
+	if (
+	    m_tbpolsave != (ToolbarPolicy)prefwin->tbpolicy()
+	    ||
+	    m_tbposition != (ToolBarDock)(prefwin->tbposition()+2)
+	    ||
+	    m_tbmovesave != prefwin->tbmovable()
+	    )
+	{
+	    QMessageBox::warning(this, PROGNAME, "Some changes won't take effect\nuntil the next time the\napplication is started");
+	}
+	m_tbpolsave = (ToolbarPolicy)prefwin->tbpolicy();
+	m_tbposition = (ToolBarDock)(prefwin->tbposition()+2);
+	m_tbmovesave = prefwin->tbmovable();
+	bool isChanged = prefwin->isChanged();
+	delete prefwin;
+#ifdef USEQPE
+	Config config( APPDIR );
+#else
+	QFileInfo fi;
+    QDir d = QDir::home();                      // "/"
+	if ( !d.cd(APPDIR) )
+	{                       // "/tmp"
+		qWarning( "Cannot find the \"~/%s\" directory", APPDIR );
+		d = QDir::home();
+		d.mkdir(APPDIR);
+		d.cd(APPDIR);
+	}
+	fi.setFile(d, INIFILE);
+	Config config( fi.absFilePath() );
+#endif
+	if (isChanged) addtoolbars(&config);
+    }
+    else
+    {
+	delete prefwin;
+    }
 }
 
 void QTReaderApp::showinfo()
@@ -1352,7 +2035,9 @@ void QTReaderApp::addanno()
 	m_annoWin->setPosn(reader->pagelocate());
 	m_annoIsEditing = true;
 	editorStack->raiseWidget( m_annoWin );
+#ifdef USEQPE
 	Global::showInputMethod();
+#endif
 	m_annoWin->setFocus();
     }
 }
@@ -1388,6 +2073,10 @@ void QTReaderApp::editCopy()
 	int ch;
 	unsigned long currentpos = reader->pagelocate();
 	unsigned long endpos = reader->locate();
+	if (m_savedpos == 0xffffffff)
+	{
+	    m_savedpos = currentpos;
+	}
 	reader->jumpto(m_savedpos);
 	while (reader->explocate() < endpos && (ch = reader->getch()) != UEOF)
 	{
@@ -1395,6 +2084,17 @@ void QTReaderApp::editCopy()
 	}
 	cb->setText(text);
 	reader->locate(currentpos);
+	m_savedpos = 0xffffffff;
+}
+
+void QTReaderApp::gotoStart()
+{
+    reader->locate(reader->buffdoc.startSection());
+}
+
+void QTReaderApp::gotoEnd()
+{
+    reader->dopageup(reader->buffdoc.endSection());
 }
 
 void QTReaderApp::pageup()
@@ -1407,73 +2107,12 @@ void QTReaderApp::pagedn()
     reader->NavDown();
 }
 
-void QTReaderApp::stripcr(bool _b)
-{
-    reader->setstripcr(_b);
-}
-void QTReaderApp::onespace(bool _b)
-{
-    reader->setonespace(_b);
-}
-#ifdef REPALM
-void QTReaderApp::repalm(bool _b)
-{
-    reader->setrepalm(_b);
-}
-#endif
-void QTReaderApp::remap(bool _b)
-{
-    reader->setremap(_b);
-}
-void QTReaderApp::peanut(bool _b)
-{
-    reader->setpeanut(_b);
-}
-void QTReaderApp::embolden(bool _b)
-{
-    reader->setmakebold(_b);
-}
-void QTReaderApp::autofmt(bool _b)
-{
-    reader->setautofmt(_b);
-}
-void QTReaderApp::textfmt(bool _b)
-{
-    reader->settextfmt(_b);
-}
-void QTReaderApp::striphtml(bool _b)
-{
-    reader->setstriphtml(_b);
-}
-void QTReaderApp::dehyphen(bool _b)
-{
-    reader->setdehyphen(_b);
-}
-void QTReaderApp::unindent(bool _b)
-{
-    reader->setunindent(_b);
-}
-void QTReaderApp::repara(bool _b)
-{
-    reader->setrepara(_b);
-}
-void QTReaderApp::dblspce(bool _b)
-{
-    reader->setdblspce(_b);
-}
 void QTReaderApp::pagemode(bool _b)
 {
     reader->setpagemode(_b);
 }
-void QTReaderApp::navkeys(bool _b)
-{
-    reader->m_navkeys = _b;
-}
-void QTReaderApp::monospace(bool _b)
-{
-    reader->setmono(_b);
-}
 
+/*
 void QTReaderApp::setspacing()
 {
     m_nRegAction = cMonoSpace;
@@ -1482,16 +2121,7 @@ void QTReaderApp::setspacing()
     regEdit->setText(lcn);
     do_regedit();
 }
-
-void QTReaderApp::setoverlap()
-{
-    m_nRegAction = cOverlap;
-    char lcn[20];
-    sprintf(lcn, "%lu", reader->m_overlap);
-    regEdit->setText(lcn);
-    do_regedit();
-}
-
+*/
 void QTReaderApp::settarget()
 {
     m_nRegAction = cSetTarget;
@@ -1502,18 +2132,7 @@ void QTReaderApp::settarget()
     do_regedit();
 }
 
-void QTReaderApp::do_overlap(const QString& lcn)
-{
-    bool ok;
-    unsigned long ulcn = lcn.toULong(&ok);
-    if (ok)
-    {
-	reader->m_overlap = ulcn;
-    }
-    else
-	QMessageBox::information(this, PROGNAME, "Must be a number");
-}
-
+/*
 void QTReaderApp::do_mono(const QString& lcn)
 {
     bool ok;
@@ -1528,7 +2147,7 @@ void QTReaderApp::do_mono(const QString& lcn)
     else
 	QMessageBox::information(this, PROGNAME, "Must be a number");
 }
-
+*/
 /*
 void QTReaderApp::editPaste()
 {
@@ -1544,7 +2163,9 @@ void QTReaderApp::editFind()
 #ifdef __ISEARCH
   searchStack = new QStack<searchrecord>;
 #endif
+#ifdef USEQPE
   Global::showInputMethod();
+#endif
   searchBar->show();
   searchVisible = TRUE;
   searchEdit->setFocus();
@@ -1555,7 +2176,7 @@ void QTReaderApp::editFind()
 
 void QTReaderApp::findNext()
 {
-  //  qDebug("findNext called\n");
+//  //  qDebug("findNext called\n");
 #ifdef __ISEARCH
   QString arg = searchEdit->text();
 #else
@@ -1564,7 +2185,7 @@ void QTReaderApp::findNext()
   CDrawBuffer test(&(reader->m_fontControl));
   size_t start = reader->pagelocate();
   reader->jumpto(start);
-  reader->buffdoc.getline(&test,reader->width());
+  reader->getline(&test);
   dosearch(start, test, arg);
 }
 
@@ -1572,7 +2193,9 @@ void QTReaderApp::findClose()
 {
   searchVisible = FALSE;
   searchEdit->setText("");
+#ifdef USEQPE
   Global::hideInputMethod();
+#endif
   searchBar->hide();
 #ifdef __ISEARCH
 //  searchStack = new QStack<searchrecord>;
@@ -1590,7 +2213,9 @@ void QTReaderApp::regClose()
   regVisible = FALSE;
   regEdit->setText("");
   regBar->hide();
+#ifdef USEQPE
   Global::hideInputMethod();
+#endif
   reader->setFocus();
 }
 
@@ -1604,48 +2229,66 @@ bool QTReaderApp::dosearch(size_t start, CDrawBuffer& test, const QRegExp& arg)
     unsigned long fs, ts;
     reader->sizes(fs,ts);
   size_t pos = reader->locate();
-  reader->buffdoc.getline(&test,reader->width());
+  pbar->setGeometry(searchBar->x(),searchBar->y(),searchBar->width(), searchBar->height());
   pbar->show();
-  pbar->resize(width(), editBar->height());
+  pbar->raise();
   pbar->reset();
+  int offset;
   int lastpc = (100*pos)/ts;
   pbar->setProgress(lastpc);
-  qApp->processEvents();
-  reader->setFocus();
+//  qApp->processEvents();
+  if (reader->buffdoc.getpara(test) >= 0)
+  {
+      reader->setFocus();
 #ifdef __ISEARCH
-  while (strstr(test.data(),(const tchar*)arg) == NULL)
+      while (strstr(test.data(),(const tchar*)arg) == NULL)
 #else
 #ifdef _UNICODE
-  while (arg.match(toQString(test.data())) == -1)
+      while ((offset = arg.match(toQString(test.data()))) == -1)
 #else
-  while (arg.match(test.data()) == -1)
+      while (arg.match(test.data()) == -1)
 #endif
 #endif
-    {
-      pos = reader->locate();
-      unsigned int lcn = reader->locate();
-      int pc = (100*pos)/ts;
-      if (pc != lastpc)
       {
-        pbar->setProgress(pc);
-	qApp->processEvents();
-	reader->setFocus();
-        lastpc = pc;
+	  pos = reader->locate();
+	  int pc = (100*pos)/ts;
+	  if (pc != lastpc)
+	  {
+	      pbar->setProgress(pc);
+	      qApp->processEvents();
+	      reader->setFocus();
+	      lastpc = pc;
+	  }
+	  
+	  if (reader->buffdoc.getpara(test) < 0)
+	  {
+	      if (QMessageBox::warning(this, "Can't find", searchEdit->text(), 1, 2) == 2)
+		  pos = searchStart;
+	      else
+		  pos = start;
+	      findClose();
+	      pbar->hide();
+	      reader->locate(pos);
+	      return false;
+	  }
       }
-
-      if (!reader->buffdoc.getline(&test,reader->width()))
-	{
-	  if (QMessageBox::warning(this, "Can't find", searchEdit->text(), 1, 2) == 2)
-	    pos = searchStart;
-	  else
-	    pos = start;
-	  ret = false;
-	  findClose();
-	  break;
-	}
-    }
-  pbar->hide();
-  reader->locate(pos);
+//      qDebug("Found it at %u:%u", pos, offset);
+      pbar->hide();
+//      qDebug("Hid");
+      reader->locate(pos+offset);
+//      qDebug("Loacted");
+//      qDebug("page up");
+      ret = true;
+  }
+  else
+  {
+	      if (QMessageBox::warning(this, "Can't find", searchEdit->text(), 1, 2) == 2)
+		  pos = searchStart;
+	      else
+		  pos = start;
+	      ret = false;
+	      findClose();
+  }
   return ret;
 }
 
@@ -1691,7 +2334,7 @@ void QTReaderApp::search()
 
 void QTReaderApp::openFile( const QString &f )
 {
-    qDebug("File:%s", (const char*)f);
+//    qDebug("File:%s", (const char*)f);
 //    openFile(DocLnk(f));
 //}
 //
@@ -1702,7 +2345,7 @@ void QTReaderApp::openFile( const QString &f )
   if ( fm.exists() )
     {
 //      QMessageBox::information(0, "Progress", "Calling fileNew()");
-
+#ifdef USEQPE
 	if (fm.extension( FALSE ) == "desktop")
 	{
 	    DocLnk d(f);
@@ -1710,16 +2353,19 @@ void QTReaderApp::openFile( const QString &f )
 	    fm = fnew;
 	    if (!fm.exists()) return;
 	}
-
+#endif
       clear();
 
       reader->setText(fm.baseName(), fm.absFilePath());
+      m_loadedconfig = readconfig(reader->m_string, false);
       showEditTools();
       readbkmks();
+      m_savedpos = 0xffffffff;
     }
   else
     {
       QMessageBox::information(this, PROGNAME, "File does not exist");
+      reader->m_lastfile = QString::null;
     }
 	
 }
@@ -1733,36 +2379,109 @@ void QTReaderApp::resizeEvent(QResizeEvent* e)
     }
 }
 */
-void QTReaderApp::keyPressEvent(QKeyEvent* e)
+void QTReaderApp::handlekey(QKeyEvent* e)
 {
-    if (m_fullscreen)
+//    qDebug("Keypress event");
+    timeb now;
+    ftime(&now);
+    unsigned long etime = (1000*(now.time - m_lastkeytime.time) + now.millitm)-m_lastkeytime.millitm;
+    if (etime < m_debounce)
     {
-	switch(e->key())
-	{
-	    case Key_Escape:
-		m_actFullscreen->setOn(false);
+	return;
+    }
+    m_lastkeytime = now;
+    switch(e->key())
+    {
+	case Key_Escape:
+//	    qDebug("escape event");
+	    if (m_disableesckey)
+	    {
+		m_disableesckey = false;
+	    }
+	    else
+	    {
+		m_bcloseDisabled = true;
 		if (m_fullscreen)
 		{
-		    qDebug("Fullscreen already set - remove this!");
+		    m_actFullscreen->setOn(false);
+		    e->accept();
 		}
 		else
 		{
-		    m_fullscreen = false;
-		    reader->bDoUpdates = false;
-		    showEditTools();
-		    qApp->processEvents();
-		    reader->bDoUpdates = true;
-		    reader->update();
+//		qDebug("escape action");
+		    doAction(m_escapeTarget, e);
 		}
-		e->accept();
-		break;
-	    default:
-		e->ignore();
+	    }
+	    break;
+	case Key_Space:
+	{
+	    doAction(m_spaceTarget, e);
 	}
-    }
-    else
-    {
-	e->ignore();
+	break;
+	case Key_Return:
+	{
+	    doAction(m_returnTarget, e);
+	}
+	break;
+	case Key_Left:
+	{
+	    if (reader->m_autoScroll && m_leftScroll)
+	    {
+		reader->reduceScroll();
+	    }
+	    else
+	    {
+		doAction(m_leftTarget, e);
+	    }
+	}
+	break;
+	case Key_Right:
+	{
+	    if (reader->m_autoScroll && m_rightScroll)
+	    {
+		reader->increaseScroll();
+	    }
+	    else
+	    {
+		doAction(m_rightTarget, e);
+	    }
+	}
+	break;
+	case Key_Up:
+	{
+	    if (reader->m_autoScroll && m_upScroll)
+	    {
+		reader->increaseScroll();
+	    }
+	    else
+	    {
+		doAction(m_upTarget, e);
+	    }
+	}
+	break;
+	case Key_Down:
+	{
+	    if (reader->m_autoScroll && m_downScroll)
+	    {
+		reader->reduceScroll();
+	    }
+	    else
+	    {
+		doAction(m_downTarget, e);
+	    }
+	}
+	break;
+	default:
+	{
+	    e->ignore();
+	}
+	
+/*
+	QString msg("Key press was:");
+	QString key;
+	msg += key.setNum(e->key());
+	QMessageBox::information(this, PROGNAME, msg);
+*/
     }
 }
 
@@ -1772,44 +2491,64 @@ void QTReaderApp::showEditTools()
 //	close();
     if (m_fullscreen)
     {
-	editBar->hide();
+	if (menubar != NULL) menubar->hide();
+	if (fileBar != NULL) fileBar->hide();
+	if (viewBar != NULL) viewBar->hide();
+	if (navBar != NULL) navBar->hide();
+	if (markBar != NULL) markBar->hide();
 	searchBar->hide();
 	regBar->hide();
+#ifdef USEQPE
 	Global::hideInputMethod();
+#endif
 	m_fontBar->hide();
 //	showNormal();
 	showFullScreen();
     }
     else
     {
-	qDebug("him");
+//	qDebug("him");
+#ifdef USEQPE
 	Global::hideInputMethod();
-	qDebug("eb");
-	editBar->show();
+#endif
+//	qDebug("eb");
+	menubar->show();
+	if (fileBar != NULL) fileBar->show();
+	if (viewBar != NULL) viewBar->show();
+	if (navBar != NULL) navBar->show();
+	if (markBar != NULL) markBar->show();
+	mb->show();
 	if ( searchVisible )
 	{
+#ifdef USEQPE
 	    Global::showInputMethod();
-	    searchBar->show();
+#endif
+		searchBar->show();
 	}
 	if ( regVisible )
 	{
+#ifdef USEQPE
 	    Global::showInputMethod();
-	    regBar->show();
+#endif
+		regBar->show();
 	}
 	if (m_fontVisible) m_fontBar->show();
-	qDebug("sn");
+//	qDebug("sn");
 	showNormal();
-	qDebug("sm");
+//	qDebug("sm");
+#ifdef USEQPE
 	showMaximized();
+#endif
 //	setCentralWidget(reader);
     }
 
-    qDebug("uc");
+//    qDebug("uc");
     updateCaption();
-    qDebug("rw");
+//    qDebug("rw");
     editorStack->raiseWidget( reader );
-    qDebug("sf");
+//    qDebug("sf");
     reader->setFocus();
+    reader->refresh();
 }
 /*
 void QTReaderApp::save()
@@ -1876,6 +2615,7 @@ void QTReaderApp::setDocument(const QString& fileref)
 
 void QTReaderApp::closeEvent( QCloseEvent *e )
 {
+//    qDebug("Close event");
     if (m_fullscreen)
     {
 	m_fullscreen = false;
@@ -1890,61 +2630,77 @@ void QTReaderApp::closeEvent( QCloseEvent *e )
     {
 	if (editorStack->visibleWidget() == reader)
 	{
-	    if (m_fontVisible)
+	    if ((m_escapeTarget != cesNone) && m_bcloseDisabled)
 	    {
-		m_fontBar->hide();
-		m_fontVisible = false;
+//	qDebug("Close disabled");
+		m_bcloseDisabled = false;
+		e->ignore();
 	    }
-	    if (regVisible)
+	    else
 	    {
-		regBar->hide();
-		Global::hideInputMethod();
-		regVisible = false;
-		return;
+		if (m_fontVisible)
+		{
+		    m_fontBar->hide();
+		    m_fontVisible = false;
+		}
+		if (regVisible)
+		{
+		    regBar->hide();
+#ifdef USEQPE
+		    Global::hideInputMethod();
+#endif
+		    regVisible = false;
+		    return;
+		}
+		if (searchVisible)
+		{
+		    searchBar->hide();
+#ifdef USEQPE
+		    Global::hideInputMethod();
+#endif
+		    searchVisible = false;
+		    return;
+		}
+		if (m_fBkmksChanged && pBkmklist != NULL)
+		{
+		    if (QMessageBox::warning(this, PROGNAME, "Save bookmarks?", "Save", "Don't bother") == 0)
+			savebkmks();
+		    delete pBkmklist;
+		    pBkmklist = NULL;
+		    m_fBkmksChanged = false;
+		}
+		bFromDocView = FALSE;
+		updatefileinfo();
+		saveprefs();
+		e->accept();
 	    }
-	    if (searchVisible)
-	    {
-		searchBar->hide();
-		Global::hideInputMethod();
-		searchVisible = false;
-		return;
-	    }
-	    if (m_fBkmksChanged && pBkmklist != NULL)
-	    {
-		if (QMessageBox::warning(this, PROGNAME, "Save bookmarks?", "Save", "Don't bother") == 0)
-		    savebkmks();
-		delete pBkmklist;
-		pBkmklist = NULL;
-		m_fBkmksChanged = false;
-	    }
-	    bFromDocView = FALSE;
-	    updatefileinfo();
-	    saveprefs();
-	    e->accept();
 	}
 	else
 	{
 	    showEditTools();
+	    m_disableesckey = true;
 	}
     }
 }
 
 void QTReaderApp::do_gotomark()
 {
-    m_nRegAction = cGotoBkmk;
-    listbkmk(pBkmklist);
+    m_nBkmkAction = cGotoBkmk;
+    if (!listbkmk(pBkmklist))
+	QMessageBox::information(this, PROGNAME, "No bookmarks in memory");
 }
 
 void QTReaderApp::do_delmark()
 {
-    m_nRegAction = cDelBkmk;
-    listbkmk(pBkmklist);
+    m_nBkmkAction = cDelBkmk;
+    if (!listbkmk(pBkmklist))
+	QMessageBox::information(this, PROGNAME, "No bookmarks in memory");
 }
 
-void QTReaderApp::listbkmk(CList<Bkmk>* plist, const QString& _lab)
+bool QTReaderApp::listbkmk(CList<Bkmk>* plist, const QString& _lab)
 {
     bkmkselector->clear();
-    if (_lab.isNull())
+    if (_lab.isEmpty())
 	bkmkselector->setText("Cancel");
     else
 	bkmkselector->setText(_lab);
@@ -1954,7 +2710,7 @@ void QTReaderApp::listbkmk(CList<Bkmk>* plist, const QString& _lab)
 	for (CList<Bkmk>::iterator i = plist->begin(); i != plist->end(); i++)
 	  {
 #ifdef _UNICODE
-	      qDebug("Item:%s", (const char*)toQString(i->name()));
+//	      qDebug("Item:%s", (const char*)toQString(i->name()));
 	    bkmkselector->insertItem(toQString(i->name()));
 #else
 	    bkmkselector->insertItem(i->name());
@@ -1964,23 +2720,12 @@ void QTReaderApp::listbkmk(CList<Bkmk>* plist, const QString& _lab)
       }
     if (cnt > 0)
       {
-//tjw        menu->hide();
-        editBar->hide();
-        if (m_fontVisible) m_fontBar->hide();
-        if (regVisible)
-	{
-	    Global::hideInputMethod();
-	    regBar->hide();
-	}
-        if (searchVisible)
-	{
-	    Global::hideInputMethod();
-	    searchBar->hide();
-	}
+	  hidetoolbars();
         editorStack->raiseWidget( bkmkselector );
+	return true;
       }
     else
-      QMessageBox::information(this, PROGNAME, "No bookmarks in memory");
+	return false;
 }
 
 void QTReaderApp::do_autogen()
@@ -1992,15 +2737,17 @@ void QTReaderApp::do_autogen()
 
 void QTReaderApp::do_regedit()
 {
-//    editBar->hide();
+//    fileBar->hide();
     reader->bDoUpdates = false;
-    qDebug("Showing regbar");
+//    qDebug("Showing regbar");
   regBar->show();
-    qDebug("Showing kbd");
+//    qDebug("Showing kbd");
+#ifdef USEQPE
   Global::showInputMethod();
+#endif
   regVisible = true;
   regEdit->setFocus();
-  qApp->processEvents();
+//  qApp->processEvents();
     reader->bDoUpdates = true;
     reader->update();
 }
@@ -2010,10 +2757,10 @@ bool QTReaderApp::openfrombkmk(Bkmk* bk)
     QString fn = toQString(
 	CFiledata(bk->anno()).name()
 	);
-	qDebug("fileinfo");
+//	qDebug("fileinfo");
     if (!fn.isEmpty() && QFileInfo(fn).isFile())
     {
-	qDebug("Opening");
+//	qDebug("Opening");
 	openFile(fn);
 	struct stat fnstat;
 	stat((const char *)reader->m_lastfile, &fnstat);
@@ -2035,7 +2782,8 @@ bool QTReaderApp::openfrombkmk(Bkmk* bk)
 	    {
 		QMessageBox::warning(this, PROGNAME, "Not all file data used\nNew version?");
 	    }
-	    qDebug("updating");
+//	    qDebug("updating");
+//	    showEditTools();
 	    reader->locate(bk->value());
 	}
 	return true;
@@ -2048,10 +2796,12 @@ bool QTReaderApp::openfrombkmk(Bkmk* bk)
 
 void QTReaderApp::gotobkmk(int ind)
 {
-    switch (m_nRegAction)
+    showEditTools();
+    switch (m_nBkmkAction)
     {
 	case cOpenFile:
 	{
+//	    qApp->processEvents();
 	    if (!openfrombkmk((*pOpenlist)[ind]))
 	    {
 		pOpenlist->erase(ind);
@@ -2063,21 +2813,144 @@ void QTReaderApp::gotobkmk(int ind)
 	    reader->locate((*pBkmklist)[ind]->value());
 	    break;
 	case cDelBkmk:
-//	    qDebug("Deleting:%s\n",(*pBkmklist)[ind]->name());
+////	    qDebug("Deleting:%s\n",(*pBkmklist)[ind]->name());
 	    pBkmklist->erase(ind);
 	    m_fBkmksChanged = true;
 //	    pBkmklist->sort();
 	    break;
 	case cRmBkmkFile:
-	    unlink((const char *)Global::applicationFileName(APPDIR,bkmkselector->text(ind)));
+		{
+#ifndef USEQPE
+	    QDir d = QDir::home();                      // "/"
+		d.cd(APPDIR);
+		d.remove(bkmkselector->text(ind));
+#else /* USEQPE */
+		unlink((const char *)Global::applicationFileName(APPDIR,bkmkselector->text(ind)));
+#endif /* USEQPE */
+		}
 	    break;
+	case cLdConfig:
+	    readconfig(bkmkselector->text(ind), false);
+	    break;
+	case cRmConfig:
+		{
+#ifndef USEQPE
+	    QDir d = QDir::home();                      // "/"
+		d.cd(APPDIR "/configs");
+		d.remove(bkmkselector->text(ind));
+#else /* USEQPE */
+		unlink((const char *)Global::applicationFileName(APPDIR "/configs",bkmkselector->text(ind)));
+#endif /* USEQPE */
+		}
+	    break;
+	case cExportLinks:
+	{
+#ifndef USEQPE
+	    QDir d = QDir::home();                      // "/"
+	    d.cd(APPDIR "/urls");
+	    QFileInfo fi(d, bkmkselector->text(ind));
+	    if (fi.exists())
+	    {
+		QString outfile( QFileDialog::getSaveFileName( QString::null, QString::null, this ) );
+		if (!outfile.isEmpty())
+		{
+		    FILE* fout = fopen((const char *)outfile, "w");
+		    if (fout != NULL)
+		    {
+			FILE* fin = fopen((const char *)fi.absFilePath(), "r");
+			if (fin != NULL)
+			{
+			    fprintf(fout, "<html><body>\n");
+			    int ch = 0;
+			    while ((ch = fgetc(fin)) != EOF)
+			    {
+				fputc(ch, fout);
+			    }
+			    fclose(fin);
+			    fprintf(fout, "</html></body>\n");
+			    d.remove(bkmkselector->text(ind));
+			}
+			fclose(fout);
+		    }
+		    else
+			QMessageBox::information(this, PROGNAME, "Couldn't open output");
+		}
+	    }
+#else /* USEQPE */
+	    FILE* fin = fopen((const char *)Global::applicationFileName(APPDIR "/urls",bkmkselector->text(ind)), "r");
+	    if (fin != NULL)
+	    {
+		bool allok = false;
+		fileBrowser* fb = new fileBrowser(true, this,"OpieReader",!m_bFloatingDialog, 0, "*", QString::null);
+		if (fb->exec())
+		{
+		    QString outfile = fb->getCurrentFile();
+		    FILE* fout = fopen((const char *)outfile, "w");
+		    if (fout != NULL)
+		    {
+			fprintf(fout, "<html><body>\n");
+			int ch = 0;
+			while ((ch = fgetc(fin)) != EOF)
+			{
+			    fputc(ch, fout);
+			}
+			fprintf(fout, "</html></body>\n");
+			fclose(fout);
+			allok = true;
+		    }
+		    else
+			QMessageBox::information(this, PROGNAME, "Couldn't open output");
+		}
+		delete fb;
+		fclose(fin);
+		if (allok) unlink((const char *)Global::applicationFileName(APPDIR "/urls",bkmkselector->text(ind)));
+	    }
+	    else
+	    {
+		QMessageBox::information(this, PROGNAME, "Couldn't open input");
+	    }
+
+/*
+	    CFileSelector *f = new CFileSelector("text/html", this, NULL, !m_bFloatingDialog, TRUE, TRUE );
+	    int ret = f->exec();
+	    qDebug("Return:%d", ret);
+	    DocLnk* doc = f->getDoc();
+	    if (doc != NULL)
+	    {
+		FILE* fin = fopen((const char *)Global::applicationFileName(APPDIR "/urls",bkmkselector->text(ind)), "r");
+		QString rt;
+		rt = "<html><body>\n";
+		int ch = 0;
+		while ((ch = fgetc(fin)) != EOF)
+		{
+		    rt += (char)ch;
+		}
+		fclose(fin);
+		rt += "</html></body>\n";
+		if ( doc->name().isEmpty() )
+		{
+		    doc->setName(bkmkselector->text(ind));
+		}
+		FileManager fm;
+		fm.saveFile( *doc, rt );
+		qDebug("YES");
+	    }
+	    else
+	    {
+		qDebug("NO");
+	    }
+	    delete f;
+*/
+
+#endif /* USEQPE */
+	}
+	break;
     }
-  showEditTools();
 }
 
 void QTReaderApp::cancelbkmk()
 {
-    if (m_nRegAction == cOpenFile)
+    if (m_nBkmkAction == cOpenFile)
     {
 	QString fn = usefilebrowser();
 	if (!fn.isEmpty() && QFileInfo(fn).isFile()) openFile(fn);
@@ -2108,7 +2981,9 @@ void QTReaderApp::do_regaction()
 {
     reader->bDoUpdates = false;
   regBar->hide();
+#ifdef USEQPE
   Global::hideInputMethod();
+#endif
   regVisible = false;
   switch(m_nRegAction)
   {
@@ -2121,20 +2996,28 @@ void QTReaderApp::do_regaction()
       case cJump:
 	  do_jump(regEdit->text());
 	  break;
+/*
       case cMonoSpace:
 	  do_mono(regEdit->text());
 	  break;
-      case cOverlap:
-	  do_overlap(regEdit->text());
-	  break;
+*/
       case cSetTarget:
 	  do_settarget(regEdit->text());
 	  break;
+#ifdef _SCROLLPIPE
+      case cSetPipeTarget:
+	  do_setpipetarget(regEdit->text());
+	  break;
+#endif
+      case cSetConfigName:
+//	  qDebug("Saving config");
+	  do_saveconfig(regEdit->text(), false);
+	  break;
   }
-  reader->restore();
-//    editBar->show();
+//  reader->restore();
+//    fileBar->show();
   reader->setFocus();
-    qApp->processEvents();
+//    qApp->processEvents();
     reader->bDoUpdates = true;
     reader->update();
 }
@@ -2155,8 +3038,37 @@ void QTReaderApp::do_settarget(const QString& _txt)
     }
 }
 
+void QTReaderApp::chooseencoding()
+{
+    m_fontSelector->clear();
+    m_fontSelector->insertItem("Ascii");
+    m_fontSelector->insertItem("UTF-8");
+    m_fontSelector->insertItem("UCS-2(BE)");
+    m_fontSelector->insertItem("USC-2(LE)");
+    m_fontSelector->insertItem("Palm");
+    for (unicodetable::iterator iter = unicodetable::begin(); iter != unicodetable::end(); iter++)
+    {
+	m_fontSelector->insertItem(iter->mime);
+    } // delete the FontDatabase!!!
+    m_fontSelector->setCurrentItem (reader->m_encd);
+    m_fontAction = cChooseEncoding;
+    m_fontBar->show();
+    m_fontVisible = true;
+}
+
 void QTReaderApp::setfont()
 {
+    m_fontSelector->clear();
+    {
+#ifdef USEQPE
+	FontDatabase f;
+#else
+	QFontDatabase f;
+#endif
+	QStringList flist = f.families();
+	m_fontSelector->insertStringList(flist);
+    } // delete the FontDatabase!!!
+
     for (int i = 1; i <= m_fontSelector->count(); i++)
     {
 	if (m_fontSelector->text(i) == reader->m_fontname)
@@ -2165,6 +3077,7 @@ void QTReaderApp::setfont()
 	    break;
 	}
     }
+    m_fontAction = cChooseFont;
     m_fontBar->show();
     m_fontVisible = true;
 }
@@ -2172,50 +3085,68 @@ void QTReaderApp::setfont()
 void QTReaderApp::setfontHelper(const QString& lcn, int size)
 {
     if (size == 0) size = reader->m_fontControl.currentsize();
-    QFont f(lcn, 10 /*, QFont::Bold*/);
-    qDebug("bs");
-    bkmkselector->setFont( f );
-    qDebug("re");
-    regEdit->setFont( f );
-    qDebug("se");
-    searchEdit->setFont( f );
-    qDebug("aw");
-    m_annoWin->setFont( f );
+    if (m_propogatefontchange)
+    {
+	QFont f(lcn, 10);
+	bkmkselector->setFont( f );
+	regEdit->setFont( f );
+	searchEdit->setFont( f );
+	m_annoWin->setFont( f );
+    }
     reader->m_fontname = lcn;
-    qDebug("cf1");
     if (!reader->ChangeFont(size))
     {
-    qDebug("cf2");
 	reader->ChangeFont(size);
     }
-    qDebug("ref");
+}
+
+void QTReaderApp::do_setencoding(int i)
+{
+//    qDebug("setencoding:%d", i);
+    if (m_fontAction == cChooseEncoding)
+    {
+	reader->setencoding(i);
+    }
     reader->refresh();
     m_fontBar->hide();
     m_fontVisible = false;
-    qDebug("showedit");
+//    qDebug("showedit");
     if (reader->isVisible()) showEditTools();
-    qDebug("showeditdone");
+//    qDebug("showeditdone");
 }
 
 void QTReaderApp::do_setfont(const QString& lcn)
 {
-    setfontHelper(lcn);
+    if (m_fontAction == cChooseFont)
+    {
+	setfontHelper(lcn);
+    }
+    reader->refresh();
+    m_fontBar->hide();
+    m_fontVisible = false;
+//    qDebug("showedit");
+    //if (reader->isVisible())
+    showEditTools();
+//    qDebug("showeditdone");
 }
 
 void QTReaderApp::do_autogen(const QString& regText)
 {
     unsigned long fs, ts;
     reader->sizes(fs,ts);
-  //  qDebug("Reg:%s\n", (const tchar*)(regEdit->text()));
+//  //  qDebug("Reg:%s\n", (const tchar*)(regEdit->text()));
   m_autogenstr = regText;
   QRegExp re(regText);
   CBuffer buff;
   if (pBkmklist != NULL) delete pBkmklist;
   pBkmklist = new CList<Bkmk>;
   m_fBkmksChanged = true;
+
+  pbar->setGeometry(regBar->x(),regBar->y(),regBar->width(), regBar->height());
   pbar->show();
-pbar->resize(width(), editBar->height());
+  pbar->raise();
   pbar->reset();
+  reader->update();
   qApp->processEvents();
   reader->setFocus();
   reader->jumpto(0);
@@ -2245,21 +3176,30 @@ pbar->resize(width(), editBar->height());
   pbar->setProgress(100);
   qApp->processEvents();
   pbar->hide();
+  reader->refresh();
 }
 
 void QTReaderApp::saveprefs()
 {
+//    qDebug("saveprefs");
 //  reader->saveprefs("uqtreader");
+//    if (!m_loadedconfig)
+	do_saveconfig( APPDIR, true );
+
+/*    
     Config config( APPDIR );
     config.setGroup( "View" );
     
     reader->m_lastposn = reader->pagelocate();
     
+    config.writeEntry("FloatDialogs", m_bFloatingDialog);
     config.writeEntry( "StripCr", reader->bstripcr );
     config.writeEntry( "AutoFmt", reader->bautofmt );
     config.writeEntry( "TextFmt", reader->btextfmt );
     config.writeEntry( "StripHtml", reader->bstriphtml );
     config.writeEntry( "Dehyphen", reader->bdehyphen );
+    config.writeEntry( "Depluck", reader->bdepluck );
+    config.writeEntry( "Dejpluck", reader->bdejpluck );
     config.writeEntry( "OneSpace", reader->bonespace );
     config.writeEntry( "Unindent", reader->bunindent );
     config.writeEntry( "Repara", reader->brepara );
@@ -2270,19 +3210,34 @@ void QTReaderApp::saveprefs()
     config.writeEntry( "LastFile", reader->m_lastfile );
     config.writeEntry( "LastPosn", (int)(reader->pagelocate()) );
     config.writeEntry( "PageMode", reader->m_bpagemode );
-    config.writeEntry( "CursorNavigation", reader->m_navkeys );
     config.writeEntry( "MonoSpaced", reader->m_bMonoSpaced );
+    config.writeEntry( "SwapMouse", reader->m_swapmouse);
     config.writeEntry( "Fontname", reader->m_fontname );
     config.writeEntry( "Encoding", reader->m_encd );
     config.writeEntry( "CharSpacing", reader->m_charpc );
     config.writeEntry( "Overlap", (int)(reader->m_overlap) );
+    config.writeEntry( "Margin", (int)reader->m_border );
     config.writeEntry( "TargetApp", m_targetapp );
     config.writeEntry( "TargetMsg", m_targetmsg );
+#ifdef _SCROLLPIPE
+    config.writeEntry( "PipeTarget", reader->m_pipetarget );
+    config.writeEntry( "PauseAfterPara", reader->m_pauseAfterEachPara );
+#endif
     config.writeEntry( "TwoTouch", m_twoTouch );
     config.writeEntry( "Annotation", m_doAnnotation);
     config.writeEntry( "Dictionary", m_doDictionary);
     config.writeEntry( "Clipboard", m_doClipboard);
     config.writeEntry( "SpaceTarget", m_spaceTarget);
+    config.writeEntry( "EscapeTarget", m_escapeTarget);
+    config.writeEntry( "ReturnTarget", m_returnTarget);
+    config.writeEntry( "LeftTarget", m_leftTarget);
+    config.writeEntry( "RightTarget", m_rightTarget);
+    config.writeEntry( "UpTarget", m_upTarget);
+    config.writeEntry( "DownTarget", m_downTarget);
+    config.writeEntry("LeftScroll", m_leftScroll);
+    config.writeEntry("RightScroll", m_rightScroll);
+    config.writeEntry("UpScroll", m_upScroll);
+    config.writeEntry("DownScroll", m_downScroll);
 #ifdef REPALM
     config.writeEntry( "Repalm", reader->brepalm );
 #endif
@@ -2290,28 +3245,28 @@ void QTReaderApp::saveprefs()
     config.writeEntry( "Peanut", reader->bpeanut );
     config.writeEntry( "MakeBold", reader->bmakebold );
     config.writeEntry( "Continuous", reader->m_continuousDocument );
+    config.writeEntry( "FullJust", reader->bfulljust );
+    config.writeEntry( "ExtraSpace", reader->getextraspace() );
+    config.writeEntry( "ExtraLead", reader->getlead() );
+    config.writeEntry( "Basesize",  (int)reader->getBaseSize());
+    config.writeEntry( "RequestorFontChange", m_propogatefontchange);
 
+    config.setGroup( "Toolbar" );
+    config.writeEntry("Movable", m_tbmovesave);
+    config.writeEntry("Policy", m_tbpolsave);
+    config.writeEntry("Position", m_tbposition);
+*/
     savefilelist();
-}
-
-void QTReaderApp::indentplus()
-{
-  reader->indentplus();
-}
-
-void QTReaderApp::indentminus()
-{
-  reader->indentminus();
 }
 
 /*
 void QTReaderApp::oldFile()
 {
-  qDebug("oldFile called");
+//  qDebug("oldFile called");
   reader->setText(true);
-  qDebug("settext called");
+//  qDebug("settext called");
   showEditTools();
-  qDebug("showedit called");
+//  qDebug("showedit called");
 }
 */
 
@@ -2364,7 +3319,14 @@ void QTReaderApp::savebkmks()
 {
     if (pBkmklist != NULL)
     {
-	BkmkFile bf((const char *)Global::applicationFileName(APPDIR, reader->m_string), true);
+#ifndef USEQPE
+	    QDir d = QDir::home();                      // "/"
+		d.cd(APPDIR);
+		QFileInfo fi(d, reader->m_string);
+	BkmkFile bf((const char *)fi.absFilePath(), true);
+#else /* USEQPE */
+	BkmkFile bf((const char *)Global::applicationFileName(APPDIR,reader->m_string), true);
+#endif /* USEQPE */
 	bf.write(*pBkmklist);
     }
 	m_fBkmksChanged = false;
@@ -2372,19 +3334,33 @@ void QTReaderApp::savebkmks()
 
 void QTReaderApp::readfilelist()
 {
-    BkmkFile bf((const char *)Global::applicationFileName(APPDIR, ".openfiles"));
-    qDebug("Reading open files");
+#ifndef USEQPE
+	    QDir d = QDir::home();                      // "/"
+		d.cd(APPDIR);
+		QFileInfo fi(d, ".openfiles");
+    BkmkFile bf((const char *)fi.absFilePath());
+#else /* USEQPE */
+    BkmkFile bf((const char *)Global::applicationFileName(APPDIR,".openfiles"));
+#endif /* USEQPE */
+//    qDebug("Reading open files");
     pOpenlist = bf.readall();
-    if (pOpenlist != NULL) qDebug("...with success");
-    else qDebug("...without success!");
+//    if (pOpenlist != NULL) qDebug("...with success");
+//    else qDebug("...without success!");
 }
 
 void QTReaderApp::savefilelist()
 {
     if (pOpenlist != NULL)
     {
-	BkmkFile bf((const char *)Global::applicationFileName(APPDIR, ".openfiles"), true);
-	qDebug("Writing open files");
+#ifndef USEQPE
+	    QDir d = QDir::home();                      // "/"
+		d.cd(APPDIR);
+		QFileInfo fi(d, ".openfiles");
+	BkmkFile bf((const char *)fi.absFilePath(), true);
+#else /* USEQPE */
+	BkmkFile bf((const char *)Global::applicationFileName(APPDIR,".openfiles"), true);
+#endif /* USEQPE */
+//	qDebug("Writing open files");
 	bf.write(*pOpenlist);
     }
 }
@@ -2397,19 +3373,36 @@ void QTReaderApp::readbkmks()
     }
     struct stat fnstat;
     struct stat bkstat;
+#ifndef USEQPE
+	    QDir d = QDir::home();                      // "/"
+		d.cd(APPDIR);
+		QFileInfo fi(d, reader->m_string);
+#endif /* ! USEQPE */
     if (
 	stat((const char *)reader->m_lastfile, &fnstat) == 0
 	&&
-	stat((const char *)Global::applicationFileName(APPDIR, reader->m_string), &bkstat) == 0
+#ifndef USEQPE
+	stat((const char *)fi.absFilePath(), &bkstat) == 0
+#else /* USEQPE */
+	stat((const char *)Global::applicationFileName(APPDIR,reader->m_string), &bkstat) == 0
+#endif /* USEQPE */
 	)
     {
 	if (bkstat.st_mtime < fnstat.st_mtime)
 	{
-	    unlink((const char *)Global::applicationFileName(APPDIR, reader->m_string));
+#ifndef USEQPE
+	    unlink((const char *)fi.absFilePath());
+#else /* USEQPE */
+	    unlink((const char *)Global::applicationFileName(APPDIR,reader->m_string));
+#endif /* USEQPE */
 	}
     }
 
-    BkmkFile bf((const char *)Global::applicationFileName(APPDIR, reader->m_string));
+#ifndef USEQPE
+    BkmkFile bf((const char *)fi.absFilePath());
+#else /* USEQPE */
+    BkmkFile bf((const char *)Global::applicationFileName(APPDIR,reader->m_string));
+#endif /* USEQPE */
 
     pBkmklist = bf.readall();
     m_fBkmksChanged = bf.upgraded();
@@ -2456,7 +3449,7 @@ void QTReaderApp::do_addbkmk(const QString& text)
 
 void QTReaderApp::OnRedraw()
 {
-    if (pBkmklist != NULL)
+    if ((pBkmklist != NULL) && (m_bkmkAvail != NULL))
     {
 	bool found = findNextBookmark(reader->pagelocate());
 	m_bkmkAvail->setEnabled(found);
@@ -2468,19 +3461,22 @@ void QTReaderApp::showAnnotation()
     m_annoWin->setName(toQString(m_anno->name()));
     m_annoWin->setAnno(toQString(m_anno->anno()));
     m_annoIsEditing = false;
+#ifdef USEQPE
     Global::showInputMethod();
+#endif
     editorStack->raiseWidget( m_annoWin );
     m_annoWin->setFocus();
 }
 
 void QTReaderApp::OnWordSelected(const QString& wrd, size_t posn, const QString& line)
 {
-//    qDebug("OnWordSelected(%u):%s", posn, (const char*)wrd);
+////    qDebug("OnWordSelected(%u):%s", posn, (const char*)wrd);
 
     if (m_doClipboard)
     {
 	QClipboard* cb = QApplication::clipboard();
 	cb->setText(wrd);
+#ifdef USEQPE
 	if (wrd.length() > 10)
 	{
 	    Global::statusMessage(wrd.left(8) + "..");
@@ -2489,6 +3485,7 @@ void QTReaderApp::OnWordSelected(const QString& wrd, size_t posn, const QString&
 	{
 	    Global::statusMessage(wrd);
 	}
+#endif
     }
     if (m_doAnnotation)
     {
@@ -2497,9 +3494,12 @@ void QTReaderApp::OnWordSelected(const QString& wrd, size_t posn, const QString&
 	m_annoWin->setAnno("");
 	m_annoWin->setPosn(posn);
 	m_annoIsEditing = true;
+#ifdef USEQPE
 	Global::showInputMethod();
+#endif
 	editorStack->raiseWidget( m_annoWin );
     }
+#ifdef USEQPE
     if (m_doDictionary)
     {
 	if (!m_targetapp.isEmpty() && !m_targetmsg.isEmpty())
@@ -2508,43 +3508,236 @@ void QTReaderApp::OnWordSelected(const QString& wrd, size_t posn, const QString&
 	    e << wrd;
 	}
     }
+#endif
 }
 
-void QTReaderApp::OnActionPressed()
+void QTReaderApp::doAction(ActionTypes a, QKeyEvent* e)
 {
-    switch (m_spaceTarget)
+    if (a == 0)
     {
-	case cesOpenFile:
+	e->ignore();
+    }
+    else
+    {
+	e->accept();
+//	qDebug("Accepted");
+	switch (a)
 	{
-	    fileOpen();
+	    case cesOpenFile:
+	    {
+		fileOpen();
+	    }
+	    break;
+	    case cesAutoScroll:
+	    {
+		reader->setautoscroll(!reader->m_autoScroll);
+		setScrollState(reader->m_autoScroll);
+	    }
+	    break;
+	    case cesActionMark:
+	    {
+		addbkmk();
+	    }
+	    break;
+	    case cesFullScreen:
+	    {
+		m_actFullscreen->setOn(!m_fullscreen);
+	    }
+	    break;
+	    case cesActionAnno:
+	    {
+		addanno();
+	    }
+	    break;
+	    case cesZoomIn:
+		zoomin();
+		break;
+	    case cesZoomOut:
+		zoomout();
+		break;
+	    case cesBack:
+		reader->goBack();
+		break;
+	    case cesForward:
+		reader->goForward();
+		break;
+	    case cesHome:
+		reader->goHome();
+		break;
+	    case cesPageUp:
+		reader->dopageup();
+		break;
+	    case cesPageDown:
+		reader->dopagedn();
+		break;
+	    case cesLineUp:
+		reader->lineUp();
+		break;
+	    case cesLineDown:
+		reader->lineDown();
+		break;
+	    case cesStartDoc:
+		gotoStart();
+		break;
+	    case cesEndDoc:
+		gotoEnd();
+		break;
+	    default:
+		qDebug("Unknown ActionType:%u", a);
+		break;
 	}
-	break;
-	case cesAutoScroll:
-	{
-	    reader->setautoscroll(!reader->m_autoScroll);
-	    setScrollState(reader->m_autoScroll);
-	}
-	break;
-	case cesActionMark:
-	{
-	    addbkmk();
-	}
-	break;
-	case cesFullScreen:
-	{
-	    m_actFullscreen->setOn(true);
-	}
-	break;
-	default:
-	{
-	    qDebug("Unknown ActionType:%u", m_spaceTarget);
-	}
-	break;
     }
 }
 
 void QTReaderApp::setTwoTouch(bool _b) { reader->setTwoTouch(_b); }
 void QTReaderApp::restoreFocus() { reader->setFocus(); } 
+
+void QTReaderApp::SaveConfig()
+{
+    m_nRegAction = cSetConfigName;
+    regEdit->setText(reader->m_string);
+    do_regedit();
+}
+
+void QTReaderApp::do_saveconfig(const QString& _txt, bool full)
+{
+//    qDebug("do_saveconfig:%s", (const char*)_txt);
+#ifdef USEQPE
+    QString configname;
+    Config::Domain dom;
+
+    if (full)
+    {
+	configname = _txt;
+	dom = Config::User;
+    }
+    else
+    {
+	configname = Global::applicationFileName(APPDIR "/configs", _txt);
+	dom = Config::File;
+    }
+
+    Config config(configname, dom);
+    config.setGroup( "View" );
+
+#else
+	QFileInfo fi;
+	if (full)
+	{
+//	    qDebug("full:%s", (const char*)_txt);
+	    QDir d = QDir::home();                      // "/"
+		if ( !d.cd(_txt) )
+		{                       // "/tmp"
+			qWarning( "Cannot find the \"~/%s\" directory", (const char*)_txt );
+			d = QDir::home();
+			d.mkdir(_txt);
+			d.cd(_txt);
+		}
+		fi.setFile(d, INIFILE);
+	}
+	else
+	{
+	    QDir d = QDir::home();                      // "/"
+		if ( !d.cd(APPDIR) )
+		{                       // "/tmp"
+			qWarning( "Cannot find the \"~/" APPDIR "\" directory" );
+			d = QDir::home();
+			d.mkdir(APPDIR);
+			d.cd(APPDIR);
+		}
+		if ( !d.cd("configs") )
+		{                       // "/tmp"
+			qWarning( "Cannot find the \"~/" APPDIR "/configs\" directory" );
+			d = QDir::home();
+			d.cd(APPDIR);
+			d.mkdir("configs");
+			d.cd("configs");
+		}
+		fi.setFile(d, _txt);
+	}
+//	qDebug("Path:%s", (const char*)fi.absFilePath());
+	Config config(fi.absFilePath());
+#endif
+
+
+    config.writeEntry( "StripCr", reader->bstripcr );
+    config.writeEntry( "AutoFmt", reader->bautofmt );
+    config.writeEntry( "TextFmt", reader->btextfmt );
+    config.writeEntry( "StripHtml", reader->bstriphtml );
+    config.writeEntry( "Dehyphen", reader->bdehyphen );
+    config.writeEntry( "Depluck", reader->bdepluck );
+    config.writeEntry( "Dejpluck", reader->bdejpluck );
+    config.writeEntry( "OneSpace", reader->bonespace );
+    config.writeEntry( "Unindent", reader->bunindent );
+    config.writeEntry( "Repara", reader->brepara );
+    config.writeEntry( "DoubleSpace", reader->bdblspce );
+    config.writeEntry( "Indent", reader->bindenter );
+    config.writeEntry( "FontSize", (int)(reader->m_fontControl.currentsize()) );
+    config.writeEntry( "ScrollDelay", reader->m_delay);
+    if (full)
+    {
+	config.writeEntry("Debounce", m_debounce);
+	config.writeEntry("FloatDialogs", m_bFloatingDialog);
+	reader->m_lastposn = reader->pagelocate();
+	config.writeEntry( "LastFile", reader->m_lastfile );
+	config.writeEntry( "LastPosn", (int)(reader->pagelocate()) );
+    }
+    config.writeEntry( "PageMode", reader->m_bpagemode );
+    config.writeEntry( "MonoSpaced", reader->m_bMonoSpaced );
+    config.writeEntry( "SwapMouse", reader->m_swapmouse);
+    config.writeEntry( "Fontname", reader->m_fontname );
+    config.writeEntry( "Encoding", reader->m_encd );
+    config.writeEntry( "CharSpacing", reader->m_charpc );
+    config.writeEntry( "Overlap", (int)(reader->m_overlap) );
+    config.writeEntry( "Margin", (int)reader->m_border );
+    config.writeEntry( "TargetApp", m_targetapp );
+    config.writeEntry( "TargetMsg", m_targetmsg );
+#ifdef _SCROLLPIPE
+    config.writeEntry( "PipeTarget", reader->m_pipetarget );
+    config.writeEntry( "PauseAfterPara", reader->m_pauseAfterEachPara );
+#endif
+    config.writeEntry( "TwoTouch", m_twoTouch );
+    config.writeEntry( "Annotation", m_doAnnotation);
+    config.writeEntry( "Dictionary", m_doDictionary);
+    config.writeEntry( "Clipboard", m_doClipboard);
+    config.writeEntry( "SpaceTarget", m_spaceTarget);
+    config.writeEntry( "EscapeTarget", m_escapeTarget);
+    config.writeEntry( "ReturnTarget", m_returnTarget);
+    config.writeEntry( "LeftTarget", m_leftTarget);
+    config.writeEntry( "RightTarget", m_rightTarget);
+    config.writeEntry( "UpTarget", m_upTarget);
+    config.writeEntry( "DownTarget", m_downTarget);
+    config.writeEntry("LeftScroll", m_leftScroll);
+    config.writeEntry("RightScroll", m_rightScroll);
+    config.writeEntry("UpScroll", m_upScroll);
+    config.writeEntry("DownScroll", m_downScroll);
+#ifdef REPALM
+    config.writeEntry( "Repalm", reader->brepalm );
+#endif
+    config.writeEntry( "Remap", reader->bremap );
+    config.writeEntry( "Peanut", reader->bpeanut );
+    config.writeEntry( "MakeBold", reader->bmakebold );
+    config.writeEntry( "Continuous", reader->m_continuousDocument );
+    config.writeEntry( "FullJust", reader->bfulljust );
+    config.writeEntry( "ExtraSpace", reader->getextraspace() );
+    config.writeEntry( "ExtraLead", reader->getlead() );
+    config.writeEntry( "Basesize",  (int)reader->getBaseSize());
+    config.writeEntry( "RequestorFontChange", m_propogatefontchange);
+    if (full)
+    {
+	config.setGroup( "Toolbar" );
+	config.writeEntry("Movable", m_tbmovesave);
+	config.writeEntry("Policy", m_tbpolsave);
+	config.writeEntry("Position", m_tbposition);
+#ifndef USEQPE
+	config.setGroup( "Geometry" );
+	config.writeEntry( "x", x() );
+	config.writeEntry( "y", y() );
+	config.writeEntry( "width", width() );
+	config.writeEntry( "height", height() );
+#endif
+    }
+}
 
 /*
 void QTReaderApp::setstate(unsigned char* _sd, unsigned short _sdlen)
@@ -2584,12 +3777,13 @@ void QTReaderApp::getstate(unsigned char*& data, unsigned short& len)
     sd->bstriphtml = reader->bstriphtml;
     sd->bpeanut = reader->bpeanut;
     sd->bdehyphen = reader->bdehyphen;
+    sd->bdepluck = reader->bdepluck;
+    sd->bdejpluck = reader->bdejpluck;
     sd->bonespace = reader->bonespace;
     sd->bunindent = reader->bunindent;
     sd->brepara = reader->brepara;
     sd->bdblspce = reader->bdblspce;
     sd->m_bpagemode = reader->m_bpagemode;
-    sd->m_navkeys = reader->m_navkeys;
     sd->m_bMonoSpaced = reader->m_bMonoSpaced;
     sd->bremap = reader->bremap;
     sd->bmakebold = reader->bmakebold;
@@ -2604,3 +3798,425 @@ void QTReaderApp::getstate(unsigned char*& data, unsigned short& len)
     strcpy(sd->m_fontname, reader->m_fontname.latin1());
 }
 */
+#ifdef _SCRIPT
+void QTReaderApp::RunScript()
+{
+    fileBrowser* fb = new fileBrowser(this,"OpieReader",!m_bFloatingDialog,
+				      0,
+//				      WStyle_Customize | WStyle_NoBorderEx,
+				      "*", Global::applicationFileName(APPDIR "/scripts", ""));
+
+    QString fn;
+    if (fb->exec())
+    {
+	fn = fb->fileList[0];
+    }
+    delete fb;
+    if ( !fn.isEmpty() && fork() == 0 )
+    {
+	execlp((const char *)fn,(const char *)fn,NULL);
+    }
+}
+
+void QTReaderApp::SaveScript(const char* sname)
+{
+    FILE* f = fopen(sname,"w");
+    if (f != NULL)
+    {
+#ifdef OPIE
+	fprintf(f, "#!/bin/sh\nmsg() {\n\tqcop QPE/Application/reader \"$1\" \"$2\" \"$3\"\n}\n");
+#else
+	fprintf(f, "#!/bin/bash\nmsg() {\n\tqcop QPE/Application/uqtreader \"$1\" \"$2\" \"$3\"\n}\n");
+#endif
+	fprintf(f, "msg \"Update(int)\" 0\n");
+	fprintf(f, "msg \"Layout/StripCR(int)\" %d\n", (reader->bstripcr) ? 1:0);
+	if (reader->btextfmt) fprintf(f, "msg \"Markup(QString)\" \"Text\"\n");
+	else if (reader->bautofmt) fprintf(f, "msg \"Markup(QString)\" \"Auto\"\n");
+	else if (reader->bstriphtml) fprintf(f, "msg \"Markup(QString)\" \"HTML\"\n");
+	else if (reader->bpeanut) fprintf(f, "msg \"Markup(QString)\" \"Peanut/PML\"\n");
+	else fprintf(f, "msg \"Markup(QString)\" \"None\"\n");
+	fprintf(f, "msg \"Layout/Dehyphen(int)\" %d\n", (reader->bdehyphen) ? 1:0);
+	fprintf(f, "msg \"Layout/Depluck(int)\" %d\n", (reader->bdepluck) ? 1:0);
+	fprintf(f, "msg \"Layout/Dejpluck(int)\" %d\n", (reader->bdejpluck) ? 1:0);
+	fprintf(f, "msg \"Layout/SingleSpace(int)\" %d\n", (reader->bonespace) ? 1:0);
+	fprintf(f, "msg \"Layout/Unindent(int)\" %d\n", (reader->bunindent) ? 1:0);
+	fprintf(f, "msg \"Layout/Re-paragraph(int)\" %d\n", (reader->brepara) ? 1:0);
+	fprintf(f, "msg \"Layout/DoubleSpace(int)\" %d\n", (reader->bdblspce) ? 1:0);
+	fprintf(f, "msg \"Layout/Indent(int)\" %d\n", reader->bindenter);
+	fprintf(f, "msg \"Format/SetFont(QString,int)\" \"%s\" %d\n", (const char*)reader->m_fontname, reader->m_textsize);
+	fprintf(f, "msg \"Navigation/Page/LineScroll(int)\" %d\n", (reader->m_bpagemode) ? 1:0);
+	fprintf(f, "msg \"Format/Ideogram/Word(int)\" %d\n", (reader->m_bMonoSpaced) ? 1:0);
+	fprintf(f, "msg \"Format/Encoding(QString)\" \"%s\"\n", (const char*)m_EncodingAction[reader->m_encd]->text());
+	fprintf(f, "msg \"Format/SetWidth(int)\" %d\n", reader->m_charpc);
+	fprintf(f, "msg \"Navigation/SetOverlap(int)\" %d\n", reader->m_overlap);
+	fprintf(f, "msg \"Layout/Remap(int)\" %d\n", (reader->bremap) ? 1:0);
+	fprintf(f, "msg \"Layout/Embolden(int)\" %d\n", (reader->bmakebold) ? 1:0);
+	fprintf(f, "msg \"File/Continuous(int)\" %d\n", (reader->m_continuousDocument) ? 1:0);
+	fprintf(f, "msg \"File/SetDictionary(QString)\" \"%s/%s\"\n", (const char *)m_targetapp, (const char *)m_targetmsg);
+#ifdef _SCROLLPIPE
+	fprintf(f, "msg \"File/SetScrollTarget(QString)\" \"%s\"\n", (const char *)reader->m_pipetarget);
+#endif
+	fprintf(f, "msg \"File/Two/OneTouch(int)\" %d\n", (m_twoTouch) ? 1:0);
+	fprintf(f, "msg \"Target/Annotation(int)\" %d\n", (m_doAnnotation) ? 1:0);
+	fprintf(f, "msg \"Target/Dictionary(int)\" %d\n", (m_doDictionary) ? 1:0);
+	fprintf(f, "msg \"Target/Clipboard(int)\" %d\n", (m_doClipboard) ? 1:0);
+	fprintf(f, "msg \"File/Action(QString)\" \"%s\"\n", (const char *)m_buttonAction[m_spaceTarget]->text());
+	fprintf(f, "msg \"Update(int)\" 1\n");
+	fprintf(f, "msg \"info(QString)\" \"All Done\"\n");
+	fclose(f);
+	chmod(sname, S_IXUSR | S_IXGRP | S_IXOTH);
+    }
+}
+
+void QTReaderApp::SaveConfig()
+{
+    m_nRegAction = cSetConfigName;
+    regEdit->setText("");
+    do_regedit();
+}
+
+void QTReaderApp::do_saveconfig(const QString& _txt)
+{
+    SaveScript(Global::applicationFileName(APPDIR "/scripts", _txt));
+}
+#endif
+
+#ifdef _SCROLLPIPE
+void QTReaderApp::setpipetarget()
+{
+    m_nRegAction = cSetPipeTarget;
+    QString text = (reader->m_pipetarget.isEmpty()) ? QString("") : reader->m_pipetarget;
+    regEdit->setText(text);
+    do_regedit();
+}
+
+void QTReaderApp::do_setpipetarget(const QString& _txt)
+{
+    reader->m_pipetarget = _txt;
+}
+
+void QTReaderApp::setpause(bool sfs)
+{
+    reader->m_pauseAfterEachPara = sfs;
+}
+#endif
+
+void QTReaderApp::monospace(bool _b)
+{
+    reader->setmono(_b);
+}
+
+bool QTReaderApp::readconfig(const QString& _txt, bool full=false)
+{
+#ifdef USEQPE
+    QString configname;
+    Config::Domain dom;
+
+    if (full)
+    {
+	configname = _txt;
+	dom = Config::User;
+    }
+    else
+    {
+	configname = Global::applicationFileName(APPDIR "/configs", _txt);
+	QFileInfo fm(configname);
+	if ( !fm.exists() ) return false;
+	dom = Config::File;
+    }
+
+    Config config(configname, dom);
+    config.setGroup( "View" );
+
+#else
+	QFileInfo fi;
+	if (full)
+	{
+	    QDir d = QDir::home();                      // "/"
+		if ( !d.cd(_txt) )
+		{                       // "/tmp"
+			qWarning( "Cannot find the \"~/%s\" directory", (const char*)_txt );
+			d = QDir::home();
+			d.mkdir(_txt);
+			d.cd(_txt);
+		}
+		fi.setFile(d, INIFILE);
+	}
+	else
+	{
+	    QDir d = QDir::home();                      // "/"
+		if ( !d.cd(APPDIR) )
+		{                       // "/tmp"
+			qWarning( "Cannot find the \"~/" APPDIR "\" directory" );
+			d = QDir::home();
+			d.mkdir(APPDIR);
+			d.cd(APPDIR);
+		}
+		if ( !d.cd("configs") )
+		{                       // "/tmp"
+			qWarning( "Cannot find the \"~/" APPDIR "/configs\" directory" );
+			d = QDir::home();
+			d.mkdir("configs");
+			d.cd("configs");
+		}
+		fi.setFile(d, _txt);
+	}
+#ifdef _WINDOWS
+	struct stat fnstat;
+    if (stat((const char *)reader->m_lastfile, &fnstat) == 0) return false; // get round fileinfo bug on windows
+#else
+	if (!fi.exists()) return false;
+#endif
+	Config config(fi.absFilePath());
+#endif
+    if (full)
+    {
+	config.setGroup("Toolbar");
+	m_tbmovesave = m_tbmove = config.readBoolEntry("Movable", false);
+	m_tbpolsave = m_tbpol = (ToolbarPolicy)config.readNumEntry("Policy", 1);
+	m_tbposition = (ToolBarDock)config.readNumEntry("Position", 2);
+    }
+    config.setGroup( "View" );
+    m_bFloatingDialog = config.readBoolEntry("FloatDialogs", false);
+    reader->bstripcr = config.readBoolEntry( "StripCr", true );
+    reader->bfulljust = config.readBoolEntry( "FullJust", false );
+    reader->setextraspace(config.readNumEntry( "ExtraSpace", 0 ));
+    reader->setlead(config.readNumEntry( "ExtraLead", 0 ));
+    reader->btextfmt = config.readBoolEntry( "TextFmt", false );
+    reader->bautofmt = config.readBoolEntry( "AutoFmt", true );
+    reader->bstriphtml = config.readBoolEntry( "StripHtml", false );
+    reader->bpeanut = config.readBoolEntry( "Peanut", false );
+    reader->bdehyphen = config.readBoolEntry( "Dehyphen", false );
+    reader->bdepluck = config.readBoolEntry( "Depluck", false );
+    reader->bdejpluck = config.readBoolEntry( "Dejpluck", false );
+    reader->bonespace = config.readBoolEntry( "OneSpace", false );
+    reader->bunindent = config.readBoolEntry( "Unindent", false );
+    reader->brepara = config.readBoolEntry( "Repara", false );
+    reader->bdblspce = config.readBoolEntry( "DoubleSpace", false );
+    reader->bindenter = config.readNumEntry( "Indent", 0 );
+    reader->m_textsize = config.readNumEntry( "FontSize", 12 );
+    reader->m_delay = config.readNumEntry( "ScrollDelay", 5184);
+    if (full)
+    {
+	reader->m_lastfile = config.readEntry( "LastFile", QString::null );
+	reader->m_lastposn = config.readNumEntry( "LastPosn", 0 );
+    }
+    reader->m_bpagemode = config.readBoolEntry( "PageMode", true );
+    reader->m_bMonoSpaced = config.readBoolEntry( "MonoSpaced", false);
+    reader->m_swapmouse = config.readBoolEntry( "SwapMouse", false);
+     reader->m_fontname = config.readEntry( "Fontname", "helvetica" );
+    reader->m_encd = config.readNumEntry( "Encoding", 0 );
+    reader->m_charpc = config.readNumEntry( "CharSpacing", 100 );
+    reader->m_overlap = config.readNumEntry( "Overlap", 0 );
+    reader->m_border = config.readNumEntry( "Margin", 6 );
+#ifdef REPALM
+    reader->brepalm = config.readBoolEntry( "Repalm", true );
+#endif
+    reader->bremap = config.readBoolEntry( "Remap", true );
+    reader->bmakebold = config.readBoolEntry( "MakeBold", false );
+    reader->setContinuous(config.readBoolEntry( "Continuous", true ));
+    m_targetapp = config.readEntry( "TargetApp", QString::null );
+    m_targetmsg = config.readEntry( "TargetMsg", QString::null );
+#ifdef _SCROLLPIPE
+    reader->m_pipetarget = config.readEntry( "PipeTarget", QString::null );
+    reader->m_pauseAfterEachPara = config.readBoolEntry( "PauseAfterPara", true );
+#endif
+    m_twoTouch = config.readBoolEntry( "TwoTouch", false);
+    m_doAnnotation = config.readBoolEntry( "Annotation", false);
+    m_doDictionary = config.readBoolEntry( "Dictionary", false);
+    m_doClipboard = config.readBoolEntry( "Clipboard", false);
+    m_spaceTarget = (ActionTypes)config.readNumEntry("SpaceTarget", cesAutoScroll);
+    m_escapeTarget = (ActionTypes)config.readNumEntry("EscapeTarget", cesNone);
+    m_returnTarget = (ActionTypes)config.readNumEntry("ReturnTarget", cesFullScreen);
+    m_leftTarget = (ActionTypes)config.readNumEntry("LeftTarget", cesZoomOut);
+    m_rightTarget = (ActionTypes)config.readNumEntry("RightTarget", cesZoomIn);
+    m_upTarget = (ActionTypes)config.readNumEntry("UpTarget", cesPageUp);
+    m_downTarget = (ActionTypes)config.readNumEntry("DownTarget", cesPageDown);
+
+    m_leftScroll = config.readBoolEntry("LeftScroll", false);
+    m_rightScroll = config.readBoolEntry("RightScroll", false);
+    m_upScroll = config.readBoolEntry("UpScroll", true);
+    m_downScroll = config.readBoolEntry("DownScroll", true);
+    m_propogatefontchange = config.readBoolEntry( "RequestorFontChange", false);
+    reader->setBaseSize(config.readNumEntry( "Basesize", 10 ));
+    reader->setTwoTouch(m_twoTouch);
+
+    m_touch_action->setOn(m_twoTouch);
+    m_setmono_action->setOn(reader->m_bMonoSpaced);
+    setfontHelper(reader->m_fontname);
+    if (full)
+    {
+	addtoolbars(&config);
+    }
+    reader->setfilter(reader->getfilter());
+    reader->refresh();
+    return true;
+}
+
+bool QTReaderApp::PopulateConfig(const char* tgtdir)
+{
+    bkmkselector->clear();
+    bkmkselector->setText("Cancel");
+#ifndef USEQPE
+    int cnt = 0;
+
+    QDir d = QDir::home();                      // "/"
+    if ( !d.cd(APPDIR) ) {                       // "/tmp"
+        qWarning( "Cannot find the \"~/" APPDIR "\" directory" );
+	d = QDir::home();
+	d.mkdir(APPDIR);
+	d.cd(APPDIR);
+    }
+    if ( !d.cd(tgtdir) ) {                       // "/tmp"
+        qWarning( "Cannot find the \"~/" APPDIR "/%s\" directory", tgtdir );
+	d = QDir::home();
+	d.mkdir(tgtdir);
+	d.cd(tgtdir);
+    }
+    d.setFilter( QDir::Files | QDir::NoSymLinks );
+//        d.setSorting( QDir::Size | QDir::Reversed );
+
+    const QFileInfoList *list = d.entryInfoList();
+    QFileInfoListIterator it( *list );      // create list iterator
+    QFileInfo *fi;                          // pointer for traversing
+
+    while ( (fi=it.current()) ) {           // for each file...
+  
+	bkmkselector->insertItem(fi->fileName());
+	cnt++;
+			
+	//qDebug( "%10li %s", fi->size(), fi->fileName().data() );
+	++it;                               // goto next list element
+    }
+ 
+#else /* USEQPE */
+    int cnt = 0;
+    DIR *d;
+    char* finaldir;
+    finaldir = new char[strlen(APPDIR)+1+strlen(tgtdir)+1];
+    strcpy(finaldir, APPDIR);
+    strcat(finaldir, "/");
+    strcat(finaldir, tgtdir);
+    d = opendir((const char *)Global::applicationFileName(finaldir,""));
+
+    while(1)
+    {
+	struct dirent* de;
+	struct stat buf;
+	de = readdir(d);
+	if (de == NULL) break;
+
+	if (lstat((const char *)Global::applicationFileName(finaldir,de->d_name),&buf) == 0 && S_ISREG(buf.st_mode))
+	{
+	    bkmkselector->insertItem(de->d_name);
+	    cnt++;
+	}
+    }
+    delete [] finaldir;
+    closedir(d);
+#endif
+    return (cnt > 0);
+}
+
+void QTReaderApp::LoadConfig()
+{
+    if (PopulateConfig("configs"))
+      {
+        editorStack->raiseWidget( bkmkselector );
+        hidetoolbars();
+	m_nBkmkAction = cLdConfig;
+      }
+    else
+      QMessageBox::information(this, PROGNAME, "No config files");
+}
+
+void QTReaderApp::TidyConfig()
+{
+    if (PopulateConfig("configs"))
+      {
+        editorStack->raiseWidget( bkmkselector );
+        hidetoolbars();
+	m_nBkmkAction = cRmConfig;
+      }
+    else
+      QMessageBox::information(this, PROGNAME, "No config files");
+}
+
+void QTReaderApp::ExportLinks()
+{
+    if (PopulateConfig("urls"))
+      {
+        editorStack->raiseWidget( bkmkselector );
+        hidetoolbars();
+	m_nBkmkAction = cExportLinks;
+      }
+    else
+      QMessageBox::information(this, PROGNAME, "No url files");
+}
+
+void QTReaderApp::OnURLSelected(const QString& href)
+{
+    CURLDialog* urld = new CURLDialog(href, false, this);
+    urld->clipboard(m_url_clipboard);
+    urld->localfile(m_url_localfile);
+    urld->globalfile(m_url_globalfile);
+    if (urld->exec())
+    {
+	m_url_clipboard = urld->clipboard();
+	m_url_localfile = urld->localfile();
+	m_url_globalfile = urld->globalfile();
+	if (m_url_clipboard)
+	{
+	    QClipboard* cb = QApplication::clipboard();
+	    cb->setText(href);
+	    qDebug("<a href=\"%s\">%s</a>", (const char*)href, (const char*)href);
+	}
+	if (m_url_localfile)
+	{
+	    writeUrl(reader->m_string, href);
+	}
+	if (m_url_globalfile)
+	{
+	    writeUrl("GlobalURLFile", href);
+	}
+    }
+    delete urld;
+}
+
+void QTReaderApp::writeUrl(const QString& file, const QString& href)
+{
+    QString filename;
+#ifdef USEQPE
+    filename = Global::applicationFileName(APPDIR "/urls", file);
+#else
+    QFileInfo fi;
+    QDir d = QDir::home();                      // "/"
+    if ( !d.cd(APPDIR) )
+    {                       // "/tmp"
+	qWarning( "Cannot find the \"~/" APPDIR "\" directory" );
+	d = QDir::home();
+	d.mkdir(APPDIR);
+	d.cd(APPDIR);
+    }
+    if ( !d.cd("urls") )
+    {                       // "/tmp"
+	qWarning( "Cannot find the \"~/" APPDIR "/urls\" directory" );
+	d = QDir::home();
+	d.cd(APPDIR);
+	d.mkdir("urls");
+	d.cd("urls");
+    }
+    fi.setFile(d, file);
+    filename = fi.absFilePath();
+#endif
+    FILE* fout = fopen(filename, "a");
+    if (fout != NULL)
+    {
+	fprintf(fout, "<p><a href=\"%s\">%s</a>\n", (const char*)href, (const char*)href);
+	fclose(fout);
+    }
+    else
+    {
+	QMessageBox::warning(this, PROGNAME, "Problem with writing URL");
+    }
+}

@@ -7,14 +7,14 @@ CBufferBase& CBufferBase::assign(const void* sztmp, size_t ms)
 	delete [] buffer;
 	buffer = new unsigned char[len = ms*membersize];
     }
-    memcpy(buffer, sztmp, ms*membersize);
+    memcpy(buffer, sztmp, len);
     return *this;
 }
 
-CBufferBase::CBufferBase(size_t ms, size_t n) : len(n), membersize(ms)
+CBufferBase::CBufferBase(size_t ms, size_t n) : len(n*ms), membersize(ms)
 {
-    buffer = new unsigned char[len*membersize];
-    memset(buffer, 0, len*membersize);
+    buffer = new unsigned char[len];
+    memset(buffer, 0, len);
 }
 
 void* CBufferBase::operator[](int i)

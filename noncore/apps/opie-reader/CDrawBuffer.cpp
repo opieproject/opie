@@ -3,6 +3,8 @@
 #include <qfontmetrics.h>
 #include <qpainter.h>
 #include <qpixmap.h>
+#include <qimage.h>
+#include "useqpe.h"
 #include "opie.h"
 
 CDrawBuffer::~CDrawBuffer()
@@ -42,7 +44,7 @@ void CDrawBuffer::setright(CDrawBuffer& rhs, int f)
 CDrawBuffer& CDrawBuffer::operator=(CDrawBuffer& rhs)
 {
   int i;
-//  qDebug("Trying 2");
+//  //qDebug("Trying 2");
   len = rhs.len;
   m_maxstyle = rhs.m_maxstyle;
   m_ascent = rhs.m_ascent;
@@ -60,7 +62,7 @@ CDrawBuffer& CDrawBuffer::operator=(CDrawBuffer& rhs)
   for (i = 0; rhs[i] != '\0'; i++) (*this)[i] = rhs[i];
   (*this)[i] = '\0';
   len = i;
-//  qDebug("Tried 2");
+//  //qDebug("Tried 2");
   return *this;
 }
 
@@ -80,6 +82,8 @@ CDrawBuffer& CDrawBuffer::operator=(const tchar*sztmp)
 
 void CDrawBuffer::empty()
 {
+    m_bSop = false;
+    m_bEop = false;
     len = 0;
     (*this)[0] = 0;
     while (!segs.isEmpty())
@@ -111,16 +115,54 @@ void CDrawBuffer::truncate(int n)
     (*this)[n] = 0;
 }
 
-int CDrawBuffer::width(int numchars)
+int CDrawBuffer::width(int numchars, bool onscreen, int scwidth, unsigned char _border)
 {
+    int gzoom = fc->gzoom();
     int currentx = 0, end = 0;
-    QString text = toQString(data());
+    QString text = (numchars < 0) ? toQString(data()) : toQString(data(), numchars);
     CList<textsegment>::iterator textstart = segs.begin();
+    int extraspace = 0;
+    bool just = (onscreen && !m_bEop && textstart->style.getJustify() == m_AlignJustify);
+    int spaces = 0;
+    int spacesofar = 0;
+    int spacenumber = 0;
+    int nonspace = 0;
+    if (just)
+    {
+	for (int i = 0; i < len; i++)
+	{
+	    if ((*this)[i] != ' ')
+	    {
+		nonspace = i;
+		break;
+	    }
+	}
+#ifdef _WINDOWS
+	for (i = nonspace; i < len; i++)
+#else
+	for (int i = nonspace; i < len; i++)
+#endif
+	{
+	    if ((*this)[i] == ' ')
+	    {
+		spaces++;
+	    }
+	}
+	if (spaces == 0)
+	{
+	    just = false;
+	}
+	else
+	{
+	    extraspace = (scwidth - 2*_border - rightMargin() - leftMargin() - width());
+	    if (extraspace == 0) just = false;
+	}
+    }
     CList<textsegment>::iterator textend = textstart;
     do
     {
 	textend++;
-	end = (textend != segs.end()) ? textend->start : length();
+	end = (textend != segs.end()) ? textend->start : len;
 	if (numchars >= 0 && end > numchars)
 	{
 	    end = numchars;
@@ -128,7 +170,14 @@ int CDrawBuffer::width(int numchars)
 	CStyle currentstyle = textstart->style;
 	if (currentstyle.isPicture())
 	{
-	    currentx += currentstyle.getPicture()->width();
+	    if (currentstyle.canScale())
+	    {
+		currentx += (gzoom*currentstyle.getPicture()->width())/100;
+	    }
+	    else
+	    {
+		currentx += currentstyle.getPicture()->width();
+	    }
 	}
 	else
 	{
@@ -139,37 +188,70 @@ int CDrawBuffer::width(int numchars)
 	    }
 	    else
 	    {
-		QFont f(currentstyle.isMono() ? QString("courier") : fc->name(), fc->getsize(currentstyle), (currentstyle.isBold()) ? QFont::Bold : QFont::Normal, (currentstyle.isItalic()) );
+		QFont f(currentstyle.isMono() ? QString(fc->fixedfontname()) : fc->name(), fc->getsize(currentstyle), (currentstyle.isBold()) ? QFont::Bold : QFont::Normal, (currentstyle.isItalic()) );
 //	    f.setUnderline(currentstyle.isUnderline());
 		QString str = text.mid(textstart->start, end-textstart->start);
 		QFontMetrics fm(f);
-		currentx += fm.width(str);
+		if (just)
+		{
+		    int lastspace = -1;
+		    int nsp = 0;
+		    int cx = currentx;
+		    while ((nsp = str.find(" ", lastspace+1)) >= 0)
+		    {
+			if (nsp > nonspace)
+			{
+			    spacenumber++;
+			    int nexttoadd = (extraspace*spacenumber+spaces/2)/spaces - spacesofar;
+			    QString nstr = str.mid(lastspace+1, nsp-lastspace);
+			    int lw = fm.width(nstr);
+			    cx += lw+nexttoadd;
+			    spacesofar += nexttoadd;
+			    lastspace = nsp;
+			}
+			else
+			{
+			    QString nstr = str.mid(lastspace+1, nsp-lastspace);
+//			    qDebug("str:%s: last:%d new:%d nstr:%s:", (const char*)str, lastspace, nsp, (const char*)nstr);
+			    int lw = fm.width(nstr);
+			    cx += lw;
+			    lastspace = nsp;
+			}
+		    }
+		    QString nstr = str.right(str.length()-1-lastspace);
+		    cx += fm.width(nstr);
+		    currentx = cx;
+		}
+		else
+		{
+		    currentx += fm.width(str);
+		}
 	    }
 	}
 	textstart = textend;
     }
-    while (textend != segs.end() && end != numchars);
+    while (textend != segs.end() && end != numchars && textstart->start < len);
     return currentx;
 }
 
 int CDrawBuffer::leftMargin()
 {
-    return (segs.begin()->style.getLeftMargin()*fc->getsize(segs.begin()->style))/6;
+    return (segs.begin()->style.getLeftMargin()*fc->getsize(segs.begin()->style)+3)/6;
 }
 
 int CDrawBuffer::rightMargin()
 {
-    return (segs.begin()->style.getRightMargin()*fc->getsize(segs.begin()->style))/6;
+    return (segs.begin()->style.getRightMargin()*fc->getsize(segs.begin()->style)+3)/6;
 }
 
-int CDrawBuffer::offset(int scwidth)
+int CDrawBuffer::offset(int scwidth, unsigned char _border)
 {
-    int currentx = BORDER;
+    int currentx = _border;
     switch(segs.begin()->style.getJustify())
     {
 	case m_AlignRight:
 	{
-	    currentx = scwidth - BORDER - rightMargin() - width();
+	    currentx = scwidth - _border - rightMargin() - width();
 	}
 	break;
 	case m_AlignCentre:
@@ -182,66 +264,86 @@ int CDrawBuffer::offset(int scwidth)
 	break;
 	case m_AlignJustify:
 	case m_AlignLeft:
-	    currentx = BORDER + leftMargin();
+	    currentx = _border + leftMargin();
 	    break;
     }
     return currentx;
 }
 
-void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int scwidth)
+void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int scwidth, unsigned char _border)
 {
-    int currentx = offset(scwidth);
+    int gzoom = fc->gzoom();
+    int currentx = offset(scwidth, _border);
     QString text = toQString(data());
     CList<textsegment>::iterator textstart = segs.begin();
-/*
-    StyleType align = textstart->style.getJustify();
-    switch (align)
+    int extraspace = 0;
+    bool just = (!m_bEop && textstart->style.getJustify() == m_AlignJustify);
+    int spaces = 0;
+    int spacesofar = 0;
+    int spacenumber = 0;
+    int nonspace = 0;
+    if (just)
     {
-	case CStyle::m_AlignRight:
+	for (int i = 0; i < len; i++)
 	{
-	    currentx = scwidth - width() - 2*BORDER;
+	    if ((*this)[i] != ' ')
+	    {
+		nonspace = i;
+		break;
+	    }
 	}
-	break;
-	case CStyle::m_AlignCentre:
+#ifdef _WINDOWS
+	for (i = nonspace; i < len; i++)
+#else
+	for (int i = nonspace; i < len; i++)
+#endif
 	{
-	    currentx = (scwidth - width())/2 - BORDER;
+	    if ((*this)[i] == ' ')
+	    {
+		spaces++;
+	    }
 	}
-	break;
-	case CStyle::m_AlignJustify:
-	case CStyle::m_AlignLeft:
-	    break;
+	if (spaces == 0)
+	{
+	    just = false;
+	}
+	else
+	{
+	    extraspace = (scwidth - 2*_border - rightMargin() - leftMargin() - width());
+	    if (extraspace == 0) just = false;
+	}
     }
-*/
     CList<textsegment>::iterator textend = textstart;
     do
     {
 	textend++;
-	int end = (textend != segs.end()) ? textend->start : length();
+	int end = (textend != segs.end()) ? textend->start : len;
 	CStyle currentstyle = textstart->style;
-	QFont f((currentstyle.isMono() && fc->hasCourier()) ? QString("courier") : fc->name(), fc->getsize(currentstyle), (currentstyle.isBold()) ? QFont::Bold : QFont::Normal, (currentstyle.isItalic()) );
+	QFont f((currentstyle.isMono() && fc->hasCourier()) ? fc->fixedfontname() : fc->name(), fc->getsize(currentstyle), (currentstyle.isBold()) ? QFont::Bold : QFont::Normal, (currentstyle.isItalic()) );
 //	f.setUnderline(currentstyle.isUnderline());
 //	if (currentstyle.isUnderline()) qDebug("UNDERLINE");
 	_p->setFont(f);
 	QString str = text.mid(textstart->start, end-textstart->start);
-#ifdef OPIE
+#if defined(OPIE) || !defined(USEQPE)
 	_p->setPen(QPen(QColor(currentstyle.Red(), currentstyle.Green(), currentstyle.Blue()), fc->getsize(currentstyle)/100));
 #else
 	_p->setPen(QPen(QColor(currentstyle.Red(), currentstyle.Green(), currentstyle.Blue()), fc->getsize(currentstyle)/10));
 #endif
+	int voffset = currentstyle.getVOffset()*fc->getsize(currentstyle)/2;
 	if (_bMono)
 	{
 	    if (currentstyle.isUnderline())
 	    {
-		_p->drawLine( currentx, _y, currentx + str.length()*_charWidth, _y);
+		_p->drawLine( currentx, _y+voffset, currentx + str.length()*_charWidth, _y+voffset);
 	    }
 	    if (currentstyle.isStrikethru())
 	    {
 		int ascent = fc->ascent(currentstyle)/3;
-		_p->drawLine( currentx, _y-ascent, currentx + str.length()*_charWidth, _y-ascent);
+		_p->drawLine( currentx, _y-ascent+voffset, currentx + str.length()*_charWidth, _y-ascent+voffset);
 	    }
 	    for (int i = 0; i < str.length(); i++)
 	    {
-		_p->drawText( currentx + i*_charWidth, _y, QString(str[i]));
+		_p->drawText( currentx + i*_charWidth, _y+voffset, QString(str[i]));
 	    }
 	    currentx += str.length()*_charWidth;
 	}
@@ -249,10 +351,23 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 	{
 	    if (currentstyle.isPicture())
 	    {
+		int ht = (gzoom*currentstyle.getPicture()->height())/100;
+		int wt = (gzoom*currentstyle.getPicture()->width())/100;
 		int ascent = fc->ascent(currentstyle)/2;
-		int yoffset = currentstyle.getPicture()->height()/2 + ascent;
-		_p->drawPixmap( currentx, _y-yoffset, *(currentstyle.getPicture()));
-		currentx += currentstyle.getPicture()->width();
+		int yoffset = ht/2 + ascent;
+
+		QPixmap pc;
+		if (gzoom != 100 && currentstyle.canScale())
+		{
+		    QImage im = currentstyle.getPicture()->smoothScale(wt,ht);
+		    pc.convertFromImage(im);
+		}
+		else
+		{
+		    pc.convertFromImage(*currentstyle.getPicture());
+		}
+		_p->drawPixmap( currentx, _y-yoffset, pc );
+		currentx += wt;
 	    }
 	    else
 	    {
@@ -262,42 +377,84 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 		    int w = cw*(end-textstart->start);
 		    if (currentstyle.isUnderline())
 		    {
-			_p->drawLine( currentx, _y, currentx + w, _y);
+			_p->drawLine( currentx, _y+voffset, currentx + w, _y+voffset);
 		    }
 		    if (currentstyle.isStrikethru())
 		    {
 			int ascent = fc->ascent(currentstyle)/3;
-			_p->drawLine( currentx, _y-ascent, currentx + w, _y-ascent);
+			_p->drawLine( currentx, _y-ascent+voffset, currentx + w, _y-ascent+voffset);
 		    }
 		    QString str = text.mid(textstart->start, end-textstart->start);
 
-		    for (int i = 0; i < str.length(); i++)
+		    for (unsigned int i = 0; i < str.length(); i++)
 		    {
-			_p->drawText( currentx, _y, QString(str[i]));
+#ifdef _WINDOWS
+			_p->drawText( currentx, _y+voffset, QString(str.at(i)));
+#else
+			_p->drawText( currentx, _y+voffset, QString(str[i]));
+#endif
 			currentx += cw;
 		    }
 		}
 		else
 		{
 		    QFontMetrics fm(f);
-		    int w = fm.width(str);
+		    int w;
+		    if (just)
+		    {
+			int lastspace = -1;
+			int nsp = 0;
+			int cx = currentx;
+			while ((nsp = str.find(" ", lastspace+1)) >= 0)
+			{
+			    if (nsp+textstart->start >= nonspace)
+			    {
+				spacenumber++;
+				int nexttoadd = (extraspace*spacenumber+spaces/2)/spaces - spacesofar;
+				QString nstr = str.mid(lastspace+1, nsp-lastspace);
+//			    qDebug("str:%s: last:%d new:%d nstr:%s:", (const char*)str, lastspace, nsp, (const char*)nstr);
+				int lw = fm.width(nstr);
+				_p->drawText( cx, _y+voffset, nstr);
+				cx += lw+nexttoadd;
+				spacesofar += nexttoadd;
+				lastspace = nsp;
+			    }
+			    else
+			    {
+				QString nstr = str.mid(lastspace+1, nsp-lastspace);
+//			    qDebug("str:%s: last:%d new:%d nstr:%s:", (const char*)str, lastspace, nsp, (const char*)nstr);
+				int lw = fm.width(nstr);
+				_p->drawText( cx, _y+voffset, nstr);
+				cx += lw;
+				lastspace = nsp;
+			    }
+			}
+			QString nstr = str.right(str.length()-1-lastspace);
+			_p->drawText( cx, _y+voffset, nstr);
+			cx += fm.width(nstr);
+			w = cx - currentx;
+		    }
+		    else
+		    {
+			_p->drawText( currentx, _y+voffset, str);
+			w = fm.width(str);
+		    }
 		    if (currentstyle.isUnderline())
 		    {
-			_p->drawLine( currentx, _y, currentx + w, _y);
+			_p->drawLine( currentx, _y+voffset, currentx + w, _y+voffset);
 		    }
 		    if (currentstyle.isStrikethru())
 		    {
 			int ascent = fc->ascent(currentstyle)/3;
-			_p->drawLine( currentx, _y-ascent, currentx + w, _y-ascent);
+			_p->drawLine( currentx, _y-ascent+voffset, currentx + w, _y-ascent+voffset);
 		    }
-		    _p->drawText( currentx, _y, str);
 		    currentx += w;
 		}
 	    }
 	}
 	textstart = textend;
     }
-    while (textend != segs.end() && textstart->start < length()-1);
+    while (textend != segs.end() && textstart->start < len);
 }
 
 CStyle CDrawBuffer::laststyle()
@@ -314,12 +471,12 @@ linkType CDrawBuffer::getLinkType(int numchars, size_t& tgt)
     do
     {
 	textend++;
-	end = (textend != segs.end()) ? textend->start : length();
+	end = (textend != segs.end()) ? textend->start : len;
 	currentstyle = textstart->style;
 /*
 	if (currentstyle.isPicture()) qDebug("Passed thru picture");
 	if (currentstyle.getLink()) qDebug("Passed thru link");
-	qDebug("islink:%d - %d", numchars, end);
+	//qDebug("islink:%d - %d", numchars, end);
 */
 	textstart = textend;
     }
@@ -340,9 +497,9 @@ linkType CDrawBuffer::getLinkType(int numchars, size_t& tgt)
 
 void CDrawBuffer::resize()
 {
-    int i;
+    int gzoom = fc->gzoom();
     m_maxstyle = m_ascent = m_descent = m_lineSpacing = m_lineExtraSpacing = 0;
-    for (CList<textsegment>::iterator iter = segs.begin(); iter != segs.end() && iter->start <= length(); )
+    for (CList<textsegment>::iterator iter = segs.begin(); iter != segs.end() && iter->start <= len; )
     {
 	CList<textsegment>::iterator next = iter;
 	iter++;
@@ -357,10 +514,10 @@ void CDrawBuffer::resize()
 	descent = fc->descent(_style);
 	linespacing = fc->lineSpacing(_style);
 	extra = linespacing - ascent - descent;
-	if (_style.isPicture())
+	if (_style.isPicture() && _style.canScale())
 	{
-	    descent = (_style.getPicture()->height()-ascent)/2;
-	    ascent = (_style.getPicture()->height()+ascent)/2;
+	    descent = ((gzoom*_style.getPicture()->height())/100-ascent)/2;
+	    ascent = ((gzoom*_style.getPicture()->height())/100+ascent)/2;
 	}
 /*
 	else if (fc != NULL)
@@ -375,5 +532,19 @@ void CDrawBuffer::resize()
 	if (descent > m_descent) m_descent = descent;
 	if (extra > m_lineExtraSpacing) m_lineExtraSpacing = extra;
 	m_lineSpacing = m_ascent+m_descent+m_lineExtraSpacing;
+    }
+    int lead = fc->getlead();
+    if (lead != 0)
+    {
+	int xt = (lead*m_lineSpacing+5)/10;
+	m_descent += xt;
+	m_lineSpacing += xt;
+    }
+    if (m_bSop)
+    {
+	int xt = ((segs.begin()->style.getExtraSpace()+fc->getextraspace())*fc->getsize(segs.begin()->style)+5)/10;
+//	qDebug("ExtraSpace:%d", xt);
+	m_ascent += xt;
+	m_lineSpacing += xt;
     }
 }

@@ -1,6 +1,7 @@
 #ifndef __BuffDoc_h
 #define __BuffDoc_h
 
+#include "useqpe.h"
 #include "ZText.h"
 #include "Aportis.h"
 #include "ztxt.h"
@@ -38,8 +39,13 @@ class BuffDoc
 		exp->putSaveData(src, srclen);
 	    }
 	}
+#ifdef USEQPE
     void suspend() { if (exp != NULL) exp->suspend(); }
     void unsuspend() { if (exp != NULL) exp->unsuspend(); }
+#else
+    void suspend() {}
+    void unsuspend() {}
+#endif
     ~BuffDoc()
 	{
 	    delete filt;
@@ -50,7 +56,7 @@ class BuffDoc
 	    exp = NULL;
 	    filt = NULL;
 	    lastword.empty();
-	    //    qDebug("Buffdoc created");
+//	    //    qDebug("Buffdoc created");
 	}
     bool empty() { return (exp == NULL); }
     void setfilter(CFilterChain* _f)
@@ -82,18 +88,19 @@ class BuffDoc
 	    else
 		ch = UEOF;
 	}
-    QPixmap* getPicture(unsigned long tgt) { return (exp == NULL) ? NULL : exp->getPicture(tgt); }
+    void setwidth(int w) { if (exp != NULL) exp->setwidth(w); }
+    QImage* getPicture(unsigned long tgt) { return (exp == NULL) ? NULL : exp->getPicture(tgt); }
     unsigned int startSection() { return (exp == NULL) ? 0 : exp->startSection(); }
     unsigned int endSection() { return (exp == NULL) ? 0 : exp->endSection(); }
     unsigned int locate() { return (exp == NULL) ? 0 : laststartline; }
     unsigned int explocate() { return (exp == NULL) ? 0 : exp->locate(); }
     void setContinuous(bool _b) { if (exp != NULL) exp->setContinuous(_b); }
     MarkupType PreferredMarkup() { return (exp == NULL) ? cTEXT : exp->PreferredMarkup(); }
-    bool hyperlink(unsigned int n);
+    linkType hyperlink(unsigned int n, QString& wrd);
     size_t getHome() { return ((exp != NULL) ? exp->getHome() : 0); }
     void locate(unsigned int n);
-    bool getline(CDrawBuffer* buff, int w);
-    bool getline(CDrawBuffer* buff, int w, int cw);
+    bool getline(CDrawBuffer* buff, int w, unsigned char _border);
+    bool getline(CDrawBuffer* buff, int w, int cw, unsigned char _border);
     void sizes(unsigned long& fs, unsigned long& ts) { exp->sizes(fs,ts); }
     int getpara(CBuffer& buff)
 	{
@@ -106,6 +113,7 @@ class BuffDoc
 	    return i;
 	}
     void saveposn(size_t posn) { exp->saveposn(posn); }
+    void writeposn(size_t posn) { exp->writeposn(posn); }
     bool forward(size_t& loc) { return exp->forward(loc); }
     bool back(size_t& loc) { return exp->back(loc); }
     bool hasnavigation() { return exp->hasnavigation(); }

@@ -4,14 +4,16 @@
  * Palm SDK.  However, I don't want to require the presense of the SDK for a
  * small utility since most Palm owners won't have it.
  *
- * $Id: pdb.h,v 1.3 2002-12-20 01:35:01 llornkcor Exp $
+ * $Id: pdb.h,v 1.5 2003-05-07 14:10:02 groucho Exp $
  *
  */
 
 #ifndef __PDB_H__
 #define __PDB_H__
 
+#ifndef _WINDOWS
 #include <netinet/in.h>
+#endif
 #include <stdio.h>
 
 /* Normal Palm typedefs */

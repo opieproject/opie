@@ -28,14 +28,14 @@ CList<Bkmk>* Aportis::getbkmklist()
 	    {
 		char name[17];
 		name[16] = '\0';
-		qDebug("Record:%d, Length:%u",i,recordlength(i));
+//		qDebug("Record:%d, Length:%u",i,recordlength(i));
 		gotorecordnumber(i);
 		fread(name,1,16,fin);
 		unsigned long lcn;
 		fread(&lcn,sizeof(lcn),1,fin);
 		lcn ^= 0xa5a5a5a5;
 		lcn = SwapLong(lcn);
-		qDebug("Bookmark:%s:%u", name,lcn);
+//		qDebug("Bookmark:%s:%u", name,lcn);
 		tchar tname[17];
 		memset(tname, 0, sizeof(tname));
 		for (int i = 0; name[i] != 0; i++)
@@ -121,7 +121,7 @@ int Aportis::OpenFile(const char *src)
       PeanutHeader hdr0;
       gotorecordnumber(0);
       fread(&hdr0, sizeof(hdr0), 1, fin);
-      qDebug("Version:%x", ntohs(hdr0.Version));
+//      qDebug("Version:%x", ntohs(hdr0.Version));
       if (hdr0.Version && 0x0200)
       {
 	  bCompressed = 2;
@@ -182,7 +182,7 @@ int Aportis::OpenFile(const char *src)
   cbptr = 0;
   outptr = 0;
   refreshbuffer();
-  qDebug("Number of records:[%u,%u]", nRecs, nRecs2);
+//  qDebug("Number of records:[%u,%u]", nRecs, nRecs2);
   return ret;
 }
 

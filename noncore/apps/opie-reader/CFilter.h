@@ -9,6 +9,10 @@ class CFilter : public CCharacterSource
     friend class CFilterChain;
  protected:
     CCharacterSource* parent;
+    linkType hyperlink(unsigned int n, QString& w)
+	{
+	    return parent->hyperlink(n,w);
+	}
  public:
     CFilter() : parent(NULL) {}
     void setparent(CCharacterSource* p) { parent = p; }
@@ -69,8 +73,8 @@ class stripcr : public CFilter
 {
  public:
     stripcr() {}
-    virtual ~stripcr() {}
-    virtual void getch(tchar& ch, CStyle& sty)
+    ~stripcr() {}
+    void getch(tchar& ch, CStyle& sty)
 	{
 	    do
 	    {
@@ -87,8 +91,8 @@ class dehyphen : public CFilter
     CStyle m_nextSty;
  public:
     dehyphen() : m_bCharWaiting(false) {}
-    virtual ~dehyphen() {}
-    virtual void getch(tchar& ch, CStyle& sty)
+    ~dehyphen() {}
+    void getch(tchar& ch, CStyle& sty)
 	{
 	    if (m_bCharWaiting)
 	    {
@@ -119,8 +123,8 @@ class striphtml : public CFilter
     void mygetch(tchar& ch, CStyle& sty);
  public:
     striphtml() {}
-    virtual ~striphtml() {}
-    virtual void getch(tchar& ch, CStyle& sty);
+    ~striphtml() {}
+    void getch(tchar& ch, CStyle& sty);
 };
 
 class unindent : public CFilter
@@ -128,8 +132,8 @@ class unindent : public CFilter
     tchar lc;
  public:
     unindent() : lc(0) {}
-    virtual ~unindent() {}
-    virtual void getch(tchar& ch, CStyle& sty)
+    ~unindent() {}
+    void getch(tchar& ch, CStyle& sty)
 	{
 	    if (lc == 10)
 	    {
@@ -150,8 +154,8 @@ class repara : public CFilter
     tchar tch;
  public:
     repara() : tch(0) {}
-    virtual ~repara() {}
-    virtual void getch(tchar& ch, CStyle& sty)
+    ~repara() {}
+    void getch(tchar& ch, CStyle& sty)
 	{
 	    parent->getch(ch, sty);
 	    if (ch == 10)
@@ -179,8 +183,8 @@ class indenter : public CFilter
     CStyle lsty;
  public:
     indenter(int _a=5) : amnt(_a), indent(0) {}
-    virtual ~indenter() {}
-    virtual void getch(tchar& ch, CStyle& sty)
+    ~indenter() {}
+    void getch(tchar& ch, CStyle& sty)
 	{
 	    if (indent > 0)
 	    {
@@ -205,8 +209,8 @@ class dblspce : public CFilter
     CStyle lsty;
  public:
     dblspce() : lastlf(false) {}
-    virtual ~dblspce() {}
-    virtual void getch(tchar& ch, CStyle& sty)
+    ~dblspce() {}
+    void getch(tchar& ch, CStyle& sty)
 	{
 	    if (lastlf)
 	    {
@@ -232,16 +236,16 @@ class textfmt : public CFilter
     void mygetch(tchar&, CStyle&);
  public:
     textfmt() : lastchar(0), uselast(false) {}
-    virtual ~textfmt() {}
-    virtual void getch(tchar& ch, CStyle& sty);
+    ~textfmt() {}
+    void getch(tchar& ch, CStyle& sty);
 };
 
 class embolden : public CFilter
 {
  public:
     embolden() {}
-    virtual ~embolden() {}
-    virtual void getch(tchar& ch, CStyle& sty)
+    ~embolden() {}
+    void getch(tchar& ch, CStyle& sty)
 	{
 	    parent->getch(ch, sty);
 	    sty.setBold();
@@ -255,16 +259,16 @@ class remap : public CFilter
     CStyle currentstyle;
  public:
     remap() : offset(0) { q[0] = 0; }
-    virtual ~remap() {}
-    virtual void getch(tchar& ch, CStyle& sty);
+    ~remap() {}
+    void getch(tchar& ch, CStyle& sty);
 };
 
 class PeanutFormatter : public CFilter
 {
     CStyle currentstyle;
  public:
-    virtual ~PeanutFormatter() {}
-    virtual void getch(tchar& ch, CStyle& sty);
+    ~PeanutFormatter() {}
+    void getch(tchar& ch, CStyle& sty);
 };
 
 class OnePara : public CFilter
@@ -272,16 +276,53 @@ class OnePara : public CFilter
     tchar m_lastchar;
  public:
     OnePara() : m_lastchar(0) {}
-    virtual ~OnePara() {}
-    virtual void getch(tchar& ch, CStyle& sty);
+    ~OnePara() {}
+    void getch(tchar& ch, CStyle& sty);
+};
+
+class DePluck : public CFilter
+{
+    tchar* nextpart;
+    tchar m_buffer;
+    int m_buffed;
+    int m_current;
+    bool m_debuff;
+    CStyle m_laststyle;
+ public:
+    DePluck(tchar* t) : nextpart(t), m_buffer(0), m_buffed(0), m_current(0), m_debuff(false) {}
+    ~DePluck() {}
+    void getch(tchar& ch, CStyle& sty);
 };
 
 #ifdef REPALM
 class repalm : public CFilter
 {
  public:
-    virtual ~repalm() {}
-    virtual void getch(tchar& ch, CStyle& sty);
+    ~repalm() {}
+    void getch(tchar& ch, CStyle& sty);
 };
 #endif
+
+class FullJust : public CFilter
+{
+ public:
+    void getch(tchar& ch, CStyle& sty)
+	{
+	    parent->getch(ch, sty);
+	    if (sty.getJustify() == m_AlignLeft) sty.setFullJustify();
+	}
+};
+/*
+class AddSpace : public CFilter
+{
+    unsigned char m_espc;
+ public:
+    AddSpace(unsigned char s) : m_espc(s) {}
+    void getch(tchar& ch, CStyle& sty)
+	{
+	    parent->getch(ch, sty);
+	    sty.setExtraSpace(m_espc);
+	}
+};
+*/
 #endif
