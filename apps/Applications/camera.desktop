@@ -1,6 +1,6 @@
 [Desktop Entry]
-Exec=opiecam
-File=opiecam
+Exec=camera
+File=camera
 Icon=camera/cam
 Type=Application
 Name=OpieCam
