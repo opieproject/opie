@@ -24,6 +24,7 @@ public:
     char* m_file;
 };
 
+#ifdef FSCKED_DISTRI
 FixIt::FixIt() {
     /* the new inittab */
     m_file = "#\n# /etc/inittab"
@@ -84,5 +85,6 @@ void FixIt::fixIt() {
     ::kill( SIGHUP, 1 );
 }
 
+#endif
 
 #endif
