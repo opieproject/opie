@@ -120,6 +120,7 @@ void Composer::slotSendMail()
 
 	QString header, message;
 	MailFactory::genMail(header, message, smail, this);
+	if (header.isNull() || message.isNull()) return;	// Aborted.
 
 	abort->setEnabled(true);
 
