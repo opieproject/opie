@@ -591,9 +591,9 @@ void InputMethods::showKbd( bool on )
             cfg.writeEntry( "absWidth", siz.width() );
             cfg.writeEntry( "absHeight", siz.height() );
             cfg.write();
-            mkeyboard->widget->hide();
             mkeyboard->widget->removeEventFilter( this );
         }
+        mkeyboard->widget->hide();
     }
 
     emit inputToggled( on );
