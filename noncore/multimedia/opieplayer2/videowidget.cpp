@@ -134,7 +134,6 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     connect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
     connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
-    connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
 
     setLength( mediaPlayerState->length() );
@@ -354,7 +353,6 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 }
 
                 case VideoStop:       mediaPlayerState->setPlaying( FALSE ); return;
-//                  case VideoPause:      mediaPlayerState->setPaused(videoButtons[i].isDown); return;
                 case VideoNext:       mediaPlayerState->setNext(); return;
                 case VideoPrevious:   mediaPlayerState->setPrev(); return;
                 case VideoVolUp:      emit moreReleased(); return;
@@ -375,7 +373,7 @@ void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
         mediaPlayerState->setFullscreen( FALSE );
         makeVisible();
     }
-        mouseMoveEvent( event );
+    mouseMoveEvent( event );
 }
 
 void VideoWidget::showEvent( QShowEvent* ) {
@@ -407,13 +405,7 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
     if ( mediaPlayerState->fullscreen() ) {
         // Clear the background
         p.setBrush( QBrush( Qt::black ) );
-        //      videoFrame->setGeometry( QRect( 0, 0 , 240 ,320  ) );
-
     } else {
-
-        //     videoFrame->setGeometry( QRect( 0, 15 , 240 ,170  ) );
-        // draw the buttons
-
         if ( !pe->erased() ) {
             // Combine with background and double buffer
             QPixmap pix( pe->rect().size() );
@@ -430,10 +422,6 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
             for ( int i = 0; i < numVButtons; i++ )
                 paintButton( &p, i );
         }
-        //          for ( int i = 0; i < numButtons; i++ ) {
-        //              paintButton( &p, i );
-        //          }
-        // draw the slider
         slider->repaint( TRUE );
       }
 }
@@ -502,9 +490,6 @@ void VideoWidget::setFullscreen ( bool b ) {
   setToggleButton( VideoFullscreen, b );
 }
 
-void VideoWidget::setPaused( bool b) {
-// setToggleButton( VideoPause, b );
-}
 
 void VideoWidget::setPlaying( bool b) {
       setToggleButton( VideoPlay, b );
