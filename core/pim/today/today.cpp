@@ -55,8 +55,7 @@ int ONLY_LATER;
  *  name 'name' and widget flags set to 'f' 
  */
 Today::Today( QWidget* parent,  const char* name, WFlags fl )
-  : TodayBase( parent, name, fl )
-{
+  : TodayBase( parent, name, fl ) {
   QObject::connect( (QObject*)PushButton1, SIGNAL( clicked() ), this, SLOT(startConfig() ) );
   QObject::connect( (QObject*)TodoButton, SIGNAL( clicked() ), this, SLOT(startTodo() ) );
   QObject::connect( (QObject*)DatesButton, SIGNAL( clicked() ), this, SLOT(startDatebook() ) );
@@ -66,19 +65,16 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
 }
 
 
-void Today::draw()
-{
+void Today::draw() {
   init();
   getDates();
   getMail();
   getTodo(); 
   // how often refresh
   QTimer::singleShot( 5*1000, this, SLOT(draw()) );
-
 }
 
-void Today::init()
-{
+void Today::init() {
   QDate date = QDate::currentDate();
   QString time = (date.toString());
   
@@ -103,8 +99,7 @@ void Today::init()
 
 }
 
-void Today::startConfig() 
-{
+void Today::startConfig() {
   conf = new todayconfig ( this, "", true );
   
   
@@ -153,8 +148,7 @@ void Today::startConfig()
 /*
  *  Get all events that are in the datebook xml file for today
  */
-void Today::getDates()
-{
+void Today::getDates() {
   QDate date = QDate::currentDate();
   QTime time = QTime::currentTime();
   QValueList<EffectiveEvent> list = db->getEffectiveEvents(date, date);
@@ -173,82 +167,65 @@ void Today::getDates()
       
       count++;
       
-      if ( count <= MAX_LINES_MEET ) 
-	{
-	  //cout << time.toString() << endl;
-	  //cout << TimeString::dateString((*it).event().end()) << endl;
+      if ( count <= MAX_LINES_MEET ) {
+	//cout << time.toString() << endl;
+	//cout << TimeString::dateString((*it).event().end()) << endl;
+	
+	// decide if to get all day or only later appointments
+	if (!ONLY_LATER) {
+	  msg += "<B>" + (*it).description() + "</B>";
+	  if ( (*it).event().hasAlarm() ) {
+	    msg += " <b>[with alarm]</b>";
+	  }
+	  // include location or not
+	  if (SHOW_LOCATION == 1) {
+	    msg += "<BR><i>" + (*it).location();
+	    msg += "</i>";
+	  }
 	  
-	  // decide if to get all day or only later appointments
-	  if (!ONLY_LATER)
-	    {
-	      msg += "<B>" + (*it).description() + "</B>";
-	      if ( (*it).event().hasAlarm() )
-		{
-		  msg += " <b>[with alarm]</b>";
-		}
-	      // include location or not
-	      if (SHOW_LOCATION == 1) 
-		{
-		  msg += "<BR><i>" + (*it).location();
-		  msg += "</i>";
-		}
-	      
-		if ( (TimeString::timeString(QTime((*it).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((*it).event().end().time()) ) == "23:59") )
-		  {
-		    msg += "<br>All day";
-		  }
-		else 
-		  {
-		    // start time of event
-		    msg += "<br>" + TimeString::timeString(QTime((*it).event().start().time()) )
-		      // end time of event
-		      + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) );
-		      }
-	      msg += "<BR>";
-	      // include possible note or not
-	      if (SHOW_NOTES == 1)
-		{
-		  msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
-		}
-	    }
-	  else if ((time.toString() <= TimeString::dateString((*it).event().end())) )
-	    {
-	      msg += "<B>" + (*it).description() + "</B>";
-	      if ( (*it).event().hasAlarm() )
-		{
-		  msg += " <b>[with alarm]</b>";
-		}
-	      // include location or not
-	      if (SHOW_LOCATION == 1) 
-		{
-		  msg+= "<BR><i>" + (*it).location();
-		  msg += "</i>";
-		}
-	  		
-	      if ( (TimeString::timeString(QTime((*it).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((*it).event().end().time()) ) == "23:59") )
-		  {
-		    msg += "<br>All day";
-		  }
-	      else 
-		{
-		    // start time of event
-		  msg += "<br>" + TimeString::timeString(QTime((*it).event().start().time()) )
-		    // end time of event
-		    + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) );
-		}
-	      msg += "<BR>";
-	      // include possible note or not
-	      if (SHOW_NOTES == 1)
-		{
-		  msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
-		}
-	    }
+	  if ( (TimeString::timeString(QTime((*it).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((*it).event().end().time()) ) == "23:59") ) {
+	    msg += "<br>All day";
+	  }  else {
+	    // start time of event
+	    msg += "<br>" + TimeString::timeString(QTime((*it).event().start().time()) )
+	      // end time of event
+	      + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) );
+	  }
+	  msg += "<BR>";
+	  // include possible note or not
+	  if (SHOW_NOTES == 1) {
+	    msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
+	  }
+	} else if ((time.toString() <= TimeString::dateString((*it).event().end())) ) {
+	  msg += "<B>" + (*it).description() + "</B>";
+	  if ( (*it).event().hasAlarm() ) {
+	    msg += " <b>[with alarm]</b>";
+	  }
+	  // include location or not
+	  if (SHOW_LOCATION == 1) {
+	    msg+= "<BR><i>" + (*it).location();
+	    msg += "</i>";
+	  }
+	  
+	  if ( (TimeString::timeString(QTime((*it).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((*it).event().end().time()) ) == "23:59") ) {
+	    msg += "<br>All day";
+	  } else {
+	    // start time of event
+	    msg += "<br>" + TimeString::timeString(QTime((*it).event().start().time()) )
+	      // end time of event
+	      + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) );
+	  }
+	  msg += "<BR>";
+	  // include possible note or not
+	  if (SHOW_NOTES == 1) {
+	    msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
+	  }
 	}
-    }
-    if (msg.isEmpty())
-      {
-	msg = "No more appointments today";
       }
+    }
+    if (msg.isEmpty()) {
+      msg = "No more appointments today";
+    }
     DatesField->setText(msg);
   }
 }
@@ -256,8 +233,7 @@ void Today::getDates()
 /*
  * Parse in the todolist.xml
  */
-QList<TodoItem> Today::loadTodo(const char *filename)
-{
+QList<TodoItem> Today::loadTodo(const char *filename) {
   DOM *todo;
   ELE *tasks;
   ELE **tasklist;
@@ -273,62 +249,53 @@ QList<TodoItem> Today::loadTodo(const char *filename)
   
   tasks = todo->el;
   tasks = tasks->el[0]; /*!DOCTYPE-quickhack*/
-  if(tasks)
-    {
-      tasklist = tasks->el;
-      i = 0;
-      while((tasklist) && (tasklist[i]))
-	{
-	  attlist = tasklist[i]->at;
-	  j = 0;
-	  description = NULL;
-	  priority = -1;
-	  completed = -1;
-	  while((attlist) && (attlist[j]))
- 	    {
-	      // SEGFAULT HERE WITH MORE THAN 7 ENTRIES
-	      if(!attlist[j]->name) continue;
-	      if(!strcmp(attlist[j]->name, "Description"))
-		{
-		  description = attlist[j]->value;
-		}
-	      // get Completed tag (0 or 1)
-	      if(!strcmp(attlist[j]->name, "Completed"))
-		{
-		  QString s = attlist[j]->name;
-		  if(s == "Completed")
-		    {
-		      completed = QString(attlist[j]->value).toInt();
-		    }
-		}
-	      // get Priority (1 to 5)
-	      if(!strcmp(attlist[j]->name, "Priority")) 
-		{
-		  QString s = attlist[j]->name;
-		  if(s == "Priority")
-		    {
-		      priority = QString(attlist[j]->value).toInt(); 
-		    }
-		}
-	      j++;
-	    }
-	  if(description)
-	    {
-	      tmp = new TodoItem(description, completed, priority);
-	      loadtodolist.append(tmp);
-	    }
-	  i++;
+  if(tasks) {
+    tasklist = tasks->el;
+    i = 0;
+    while((tasklist) && (tasklist[i])) {
+      attlist = tasklist[i]->at;
+      j = 0;
+      description = NULL;
+      priority = -1;
+      completed = -1;
+      while((attlist) && (attlist[j])) {
+	if(!attlist[j]->name) {
+	  continue;
 	}
+	if(!strcmp(attlist[j]->name, "Description")) {
+	  description = attlist[j]->value;
+	}
+	// get Completed tag (0 or 1)
+	if(!strcmp(attlist[j]->name, "Completed")) {
+	  QString s = attlist[j]->name;
+	  if(s == "Completed") {
+	    completed = QString(attlist[j]->value).toInt();
+	  }
+	}
+	// get Priority (1 to 5)
+	if(!strcmp(attlist[j]->name, "Priority")) {
+	  QString s = attlist[j]->name;
+	  if(s == "Priority") {
+	    priority = QString(attlist[j]->value).toInt(); 
+	  }
+	}
+	j++;
+      }
+      if(description) {
+	tmp = new TodoItem(description, completed, priority);
+	loadtodolist.append(tmp);
+      }
+      i++;
     }
-  
+  }
+
   minidom_free(todo);
   
   return loadtodolist;
 }
 
 
-void Today::getMail()
-{
+void Today::getMail() {
   Config cfg("opiemail");
   cfg.setGroup("today"); 
   
@@ -336,7 +303,8 @@ void Today::getMail()
   int NEW_MAILS = cfg.readNumEntry("newmails",0);
   int OUTGOING = cfg.readNumEntry("outgoing",0);
   
-  QString output = tr("<b>%1</b> new mails, <b>%2</b> outgoing").arg(NEW_MAILS).arg(OUTGOING);
+
+  QString output = tr("<b>%1</b> new mail(s), <b>%2</b> outgoing").arg(NEW_MAILS).arg(OUTGOING);
   
 
   MailField->setText(output);
@@ -347,8 +315,7 @@ void Today::getMail()
  * Get the todos
  *
  */
-void Today::getTodo()
-{
+void Today::getTodo() {
   QString output;
   QString tmpout;
   int count = 0;
@@ -357,33 +324,30 @@ void Today::getTodo()
   QString homedir = dir.homeDirPath (); 
   // see if todolist.xml does exist.
   QFile f(homedir +"/Applications/todolist/todolist.xml");
-  if ( f.exists() )
-    {
-      QList<TodoItem> todolist = loadTodo(homedir +"/Applications/todolist/todolist.xml");
-      
-      TodoItem *item;
-      for( item = todolist.first(); item; item = todolist.next())
-	{
-	  if (!(item->getCompleted() == 1) )
-	    {
-	      count++;
-	      if (count <= MAX_LINES_TASK)
-		{
-		  tmpout += "<b>- </b>" + QString(((item)->getDescription().mid(0, MAX_CHAR_CLIP) + ("<br>")));
-		}
-	    }
+  if ( f.exists() ) {
+    QList<TodoItem> todolist = loadTodo(homedir +"/Applications/todolist/todolist.xml");
+    
+    TodoItem *item;
+    for( item = todolist.first(); item; item = todolist.next()) {
+      if (!(item->getCompleted() == 1) ) {
+	count++;
+	if (count <= MAX_LINES_TASK) {
+	  tmpout += "<b>- </b>" + QString(((item)->getDescription().mid(0, MAX_CHAR_CLIP) + ("<br>")));
 	}
+      }
     }
+  }
   
-  if (count > 0) 
-    {
+  if (count > 0) {
+    if( count == 1 ) {
+      output = QString("There is <b> 1</b> active task:  <br>" );
+    } else {
       output = QString("There are <b> %1</b> active tasks: <br>").arg(count);
-      output += tmpout;
     }
-  else 
-    {
-      output = ("No active tasks");
-    }
+    output += tmpout;
+  } else {
+    output = ("No active tasks");
+  }
   
   TodoField->setText(output);
 }
@@ -391,8 +355,7 @@ void Today::getTodo()
 /*
  * launches datebook
  */
-void Today::startDatebook()
-{ 
+void Today::startDatebook() { 
   QCopEnvelope e("QPE/System", "execute(QString)");
   e << QString("datebook");
 }
@@ -400,8 +363,7 @@ void Today::startDatebook()
 /*
  * launches todolist
  */ 
-void Today::startTodo()
-{
+void Today::startTodo() {
   QCopEnvelope e("QPE/System", "execute(QString)");
   e << QString("todolist");
 }
@@ -409,8 +371,7 @@ void Today::startTodo()
 /*
  * launch opiemail
  */
-void Today::startMail()
-{
+void Today::startMail() {
   QCopEnvelope e("QPE/System", "execute(QString)");
   e << QString("opiemail");
 }
@@ -418,7 +379,6 @@ void Today::startMail()
 /*  
  *  Destroys the object and frees any allocated resources
  */
-Today::~Today()
-{
+Today::~Today() {
   // no need to delete child widgets, Qt does it all for us
 }
