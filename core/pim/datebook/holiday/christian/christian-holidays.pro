@@ -12,7 +12,7 @@ INCLUDEPATH     += $(OPIEDIR)/include \
 DEPENDPATH      += $(OPIEDIR)/include \
 		../ ../library
 
-LIBS+= -lqpe -lopiecore2 -lopieui2
+LIBS+= -lqpe -lopiecore2 -lopieui2 -opiepim2
 
 DESTDIR = $(OPIEDIR)/plugins/holidays
 TARGET = chrisholidayplugin
