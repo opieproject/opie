@@ -27,8 +27,11 @@
 
 #include <qstringlist.h>
 
-OxydataWidget::OxydataWidget(QWidget *parent, const char *name, QStringList *list ) : QWidget( parent,name )
+OxydataWidget::OxydataWidget(QWidget *parent, const char *name, const QStringList &list ) : QWidget( parent,name )
 {
+	names = list;
+	QStringList::ConstIterator it = names.at(10);
+	qDebug( *it );
     QGridLayout *qgrid = new QGridLayout( this, 2,1 );
 
     QHBox *hbox = new QHBox( this );
@@ -53,12 +56,14 @@ OxydataWidget::OxydataWidget(QWidget *parent, const char *name, QStringList *lis
 
 void OxydataWidget::setElement( int el )
 {
+	QStringList::ConstIterator it = names.at(el+1);
+	qDebug( *it );
     Config configobj( QPEApplication::qpeDir() +"share/oxygen/oxygendata", Config::File );
 
     configobj.setGroup( QString::number( el+1 ));
 
     left->setText( configobj.readEntry( "Symbol" ) );
-    middle->setText( configobj.readEntry( "Name" ) );
+    middle->setText( *it  );
     right->setText( QString::number( el+1 ) );
 
 

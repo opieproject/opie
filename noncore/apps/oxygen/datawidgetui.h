@@ -34,7 +34,7 @@ class dataWidgetUI : public QWidget
 	
     public:
 		dataWidgetUI();
-		QStringList *names;
+		QStringList names;
 
     private:
         OxydataTable *DataTable;
