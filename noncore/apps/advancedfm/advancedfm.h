@@ -12,14 +12,16 @@
 #ifndef ADVANCEDFM_H
 #define ADVANCEDFM_H
 
+#include <qpe/ir.h>
+
 #include <qvariant.h>
 #include <qdialog.h>
 #include <qmainwindow.h>
+#include <qstringlist.h>
 #include <qdir.h>
 #include <qstring.h>
 #include <qpoint.h>
-#include <qstringlist.h>
-#include <qpe/ir.h>
+#include <qtimer.h>
 
 class QVBoxLayout;
 class QHBoxLayout;
@@ -39,6 +41,7 @@ class QFile;
 class QListViewItem;
 class QLineEdit;
 class QPushButton;
+class Ir;
 
 class AdvancedFm : public QMainWindow
 {
@@ -62,8 +65,6 @@ public:
     QStringList fileSystemTypeList, fsList;
     int currentServerConfig;
 protected slots:
-    void showLocalMenu( QListViewItem *);
-    void showRemoteMenu( QListViewItem *);
     void doLocalCd();
     void doRemoteCd();
 //    void copy();
@@ -104,11 +105,14 @@ protected slots:
 protected:
   QGridLayout *tabLayout, *tabLayout_2, *tabLayout_3;
   QStringList remoteDirPathStringList, localDirPathStringList;
+
   void keyReleaseEvent( QKeyEvent *);
   QString getFileSystemType(const QString &);
   void parsetab(const QString &fileName);
   
 protected slots:
+  void showFileMenu();
+  void cancelMenuTimer();
   void homeButtonPushed();
   void docButtonPushed();
   void SDButtonPushed();
@@ -125,7 +129,9 @@ protected slots:
   void fileStatus();
   void doAbout();
   void doBeam();
-  void fileBeamFinished( Ir *ir);
+  void fileBeamFinished( Ir *);
+private:
+      QTimer menuTimer;
 };
 
 #endif // ADVANCEDFM_H
