@@ -66,6 +66,8 @@ extern "C" {
     void null_set_mode( const xine_vo_driver_t* self, int depth,  int rgb  );
     void null_set_videoGamma( const  xine_vo_driver_t* self , int value );
     void null_display_handler( const xine_vo_driver_t* self, display_xine_frame_t t, void* user_data );
+
+    void null_preload_decoders( xine_stream_t *stream );
 }
 
 using namespace XINE;
@@ -136,6 +138,9 @@ void Lib::initialize()
     m_queue = xine_event_new_queue (m_stream);
 
     xine_event_create_listener_thread (m_queue, xine_event_handler, this);
+
+    ::null_preload_decoders( m_stream );
+
     m_duringInitialization = false;
 }
 

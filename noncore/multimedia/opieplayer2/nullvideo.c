@@ -41,6 +41,7 @@
 #include <xine/xine_internal.h>
 #include <xine/xineutils.h>
 #include <xine/vo_scale.h>
+#include <xine/buffer.h>
 
 #include <pthread.h>
 #include "alphablend.h"
@@ -610,5 +611,25 @@ void null_display_handler( xine_vo_driver_t* self, display_xine_frame_t t,
   null_driver_t* this = (null_driver_t*) self->driver;
   this->caller = user_data;
   this->frameDis = t;
+}
+
+void null_preload_decoders( xine_stream_t *stream )
+{
+    static const uint32_t preloadedAudioDecoders[] = { BUF_AUDIO_MPEG, BUF_AUDIO_VORBIS };
+    static const uint8_t preloadedAudioDecoderCount = sizeof( preloadedAudioDecoders ) / sizeof( preloadedAudioDecoders[ 0 ] );
+    static const uint32_t preloadedVideoDecoders[] = { BUF_VIDEO_MPEG, BUF_VIDEO_MPEG4, BUF_VIDEO_DIVX5 };
+    static const uint8_t preloadedVideoDecoderCount = sizeof( preloadedVideoDecoders ) / sizeof( preloadedVideoDecoders[ 0 ] );
+
+    uint8_t i;
+
+    for ( i = 0; i < preloadedAudioDecoderCount; ++i ) {
+        audio_decoder_t *decoder = get_audio_decoder( stream, ( preloadedAudioDecoders[ i ] >> 16 ) & 0xff );
+        free_audio_decoder( stream, decoder );
+    }
+
+    for ( i = 0; i < preloadedVideoDecoderCount; ++i ) {
+         video_decoder_t *decoder = get_video_decoder( stream, ( preloadedVideoDecoders[ i ] >> 16 ) & 0xff );
+         free_video_decoder( stream, decoder );
+    }
 }
 
