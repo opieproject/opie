@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>415</width>
+            <width>411</width>
             <height>532</height>
         </rect>
     </property>
@@ -693,6 +693,17 @@
                                     <string>Deactivate LCD only (does not suspend)</string>
                                 </property>
                             </widget>
+                            <widget>
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>noApmAC</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>No power saving features</string>
+                                </property>
+                            </widget>
                         </vbox>
                     </widget>
                     <widget>
@@ -1341,6 +1352,48 @@ warning at</string>
         <signal>toggled(bool)</signal>
         <receiver>interval_lightoff</receiver>
         <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>noApmAC</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>screensaver_dim_ac_3</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>noApmAC</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>interval_dim_ac_3</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>noApmAC</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>screensaver_lightoff_ac_3</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>noApmAC</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>interval_lightoff_ac_3</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>noApmAC</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>interval_suspend_ac_3</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>noApmAC</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>LcdOffOnly_2_3</receiver>
+        <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>noApmAC</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>TextLabel1_2_2_3</receiver>
+        <slot>setDisabled(bool)</slot>
     </connection>
 </connections>
 <tabstops>

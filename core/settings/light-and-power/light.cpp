@@ -115,6 +115,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     screensaver_dim_ac_3->setChecked( config.readNumEntry("DimAC",1) != 0 );
     screensaver_lightoff_ac_3->setChecked( config.readNumEntry("LightOffAC",1) != 0 );
     LcdOffOnly_2_3->setChecked( config.readNumEntry("LcdOffOnlyAC",0) != 0 );
+    noApmAC->setChecked( config.readNumEntry("NoApmAC",0) != 0 );
     int maxbright_ac = ODevice::inst ( )-> displayBrightnessResolution ( );
     initbright_ac = config.readNumEntry("BrightnessAC",255);
     brightness_ac_3->setMaxValue( maxbright_ac );
@@ -125,7 +126,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
 
 
     // ipaq sensor
-    config.setGroup( "Ipaq_light_sensor" );
+    config.setGroup( "Ipaqlightsensor" );
     auto_brightness->setChecked( config.readNumEntry("LightSensor",1) != 0 );
     auto_brightness_ac_3->setChecked( config.readNumEntry("LightSensorAC",1) != 0 );
     LightStepSpin->setValue( config.readNumEntry("Steps", 10 ) );
@@ -206,6 +207,7 @@ void LightSettings::accept()
     config.writeEntry( "DimAC", (int)screensaver_dim_ac_3->isChecked() );
     config.writeEntry( "LightOffAC", (int)screensaver_lightoff_ac_3->isChecked() );
     config.writeEntry( "LcdOffOnlyAC", (int)LcdOffOnly_2_3->isChecked() );
+    config.writeEntry( "NoAPmAC", (int)noApmAC->isChecked() );
     config.writeEntry( "Interval_DimAC", interval_dim_ac_3->value() );
     config.writeEntry( "Interval_LightOffAC", interval_lightoff_ac_3->value() );
     config.writeEntry( "IntervalAC", interval_suspend_ac_3->value() );
@@ -220,7 +222,7 @@ void LightSettings::accept()
          ODevice::inst()->model() ==  Model_iPAQ_H38xx ) {
 
         // ipaq sensor
-        config.setGroup( "Ipaq_light_sensor" );
+        config.setGroup( "Ipaqlightsensor" );
 
         config.writeEntry( "LightSensor", (int)auto_brightness->isChecked() );
         config.writeEntry( "LightSensorAC", (int)auto_brightness_ac_3->isChecked() );
@@ -239,7 +241,6 @@ void LightSettings::accept()
     conf.writeEntry( "power_critical", criticalSpinBox->value() );
     QCopEnvelope e_warn("QPE/System", "reloadPowerWarnSettings()");
     conf.write();
-
 
     QDialog::accept();
 }
