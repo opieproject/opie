@@ -8,6 +8,7 @@
 using namespace Opie::Core;
 
 #include <opie2/ofiledialog.h>
+#include <opie2/owait.h>
 using namespace Opie::Ui;
 
 #include <qpe/qpeapplication.h>
@@ -251,7 +252,11 @@ void BackupAndRestore::backup()
         return;
     }
 
-    setCaption(tr("Backup and Restore... working..."));
+    OWait *owait = new OWait();
+    Global::statusMessage( tr( "Backing up..." ) );
+    owait->show();
+    qApp->processEvents();
+    
     QString outputFile = backupLocations[storeToLocation->currentText()];
 
     QDateTime datetime = QDateTime::currentDateTime();
@@ -284,6 +289,10 @@ void BackupAndRestore::backup()
 
     int r = system( commandLine );
 
+    owait->hide();
+    delete owait;
+    
+    //Error-Handling
     if(r != 0)
     {
         perror("Error: ");
@@ -434,7 +443,11 @@ void BackupAndRestore::restore()
                               tr( "Please select something to restore." ),QString( tr( "Ok") ) );
         return;
     }
-    setCaption(tr("Backup and Restore... working..."));
+    
+    OWait *owait = new OWait();
+    Global::statusMessage( tr( "Restore Backup..." ) );
+    owait->show();
+    qApp->processEvents();
 
     QString restoreFile = backupLocations[restoreSource->currentText()];
 
@@ -467,6 +480,9 @@ void BackupAndRestore::restore()
 
     r = system( commandLine );
 
+    owait->hide();
+    delete owait;
+    
     //error handling
     if(r != 0)
     {
