@@ -3,93 +3,93 @@
     <name>CalcDlg</name>
     <message>
         <source>Calculate</source>
-        <translation type="unfinished"></translation>
+        <translation>Вычислить</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить</translation>
     </message>
     <message>
         <source>Molecular Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Молекулярный вес</translation>
     </message>
     <message>
         <source>Chemical Formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Химическая формула</translation>
     </message>
     <message>
         <source>Molecular Weight (u):</source>
-        <translation type="unfinished"></translation>
+        <translation>Молекулярный вес (u):</translation>
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation type="unfinished"></translation>
+        <translation>Состав элементов (%):</translation>
     </message>
 </context>
 <context>
     <name>OxydataWidget</name>
     <message>
         <source>Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Блок</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Группа</translation>
     </message>
     <message>
         <source>Electronegativity</source>
-        <translation type="unfinished"></translation>
+        <translation>Электронегативность</translation>
     </message>
     <message>
         <source>Atomic radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Радиус атома</translation>
     </message>
     <message>
         <source>Ionizationenergie</source>
-        <translation type="unfinished"></translation>
+        <translation>Энергия ионизации</translation>
     </message>
     <message>
         <source>Density</source>
-        <translation type="unfinished"></translation>
+        <translation>Плотность</translation>
     </message>
     <message>
         <source>Boilingpoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка кипения</translation>
     </message>
     <message>
         <source>Meltingpoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка плавления</translation>
     </message>
     <message>
         <source>%1 u</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 u</translation>
     </message>
     <message>
         <source>%1 J</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Дж</translation>
     </message>
     <message>
         <source>%1 K</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 К</translation>
     </message>
     <message>
         <source>%1 pm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 пм</translation>
     </message>
     <message>
         <source>%1 g/cm^3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 г/см^3</translation>
     </message>
     <message>
         <source>Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Вес</translation>
     </message>
 </context>
 <context>
     <name>Oxygen</name>
     <message>
         <source>Oxygen</source>
-        <translation type="unfinished"></translation>
+        <translation>Кислород</translation>
     </message>
     <message>
         <source>PSE</source>
@@ -97,450 +97,450 @@
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные</translation>
     </message>
     <message>
         <source>Calculations</source>
-        <translation type="unfinished"></translation>
+        <translation>Вычисления</translation>
     </message>
     <message>
         <source>Hydrogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Водород</translation>
     </message>
     <message>
         <source>Helium</source>
-        <translation type="unfinished"></translation>
+        <translation>Гелий</translation>
     </message>
     <message>
         <source>Lithium</source>
-        <translation type="unfinished"></translation>
+        <translation>Литий</translation>
     </message>
     <message>
         <source>Beryllium</source>
-        <translation type="unfinished"></translation>
+        <translation>Бериллий</translation>
     </message>
     <message>
         <source>Boron</source>
-        <translation type="unfinished"></translation>
+        <translation>Бор</translation>
     </message>
     <message>
         <source>Carbon</source>
-        <translation type="unfinished"></translation>
+        <translation>Углерод</translation>
     </message>
     <message>
         <source>Nitrogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Азот</translation>
     </message>
     <message>
         <source>Fluorine</source>
-        <translation type="unfinished"></translation>
+        <translation>Фтор</translation>
     </message>
     <message>
         <source>Neon</source>
-        <translation type="unfinished"></translation>
+        <translation>Неон</translation>
     </message>
     <message>
         <source>Sodium</source>
-        <translation type="unfinished"></translation>
+        <translation>Натрий</translation>
     </message>
     <message>
         <source>Magnesium</source>
-        <translation type="unfinished"></translation>
+        <translation>Магний</translation>
     </message>
     <message>
         <source>Aluminum</source>
-        <translation type="unfinished"></translation>
+        <translation>Алюминий</translation>
     </message>
     <message>
         <source>Silicon</source>
-        <translation type="unfinished"></translation>
+        <translation>Силикон</translation>
     </message>
     <message>
         <source>Phosphorus</source>
-        <translation type="unfinished"></translation>
+        <translation>Фосфор</translation>
     </message>
     <message>
         <source>Sulfur</source>
-        <translation type="unfinished"></translation>
+        <translation>Сера</translation>
     </message>
     <message>
         <source>Chlorine</source>
-        <translation type="unfinished"></translation>
+        <translation>Хлор</translation>
     </message>
     <message>
         <source>Argon</source>
-        <translation type="unfinished"></translation>
+        <translation>Аргон</translation>
     </message>
     <message>
         <source>Potassium</source>
-        <translation type="unfinished"></translation>
+        <translation>Калий</translation>
     </message>
     <message>
         <source>Calcium</source>
-        <translation type="unfinished"></translation>
+        <translation>Кальций</translation>
     </message>
     <message>
         <source>Scandium</source>
-        <translation type="unfinished"></translation>
+        <translation>Скандий</translation>
     </message>
     <message>
         <source>Titanium</source>
-        <translation type="unfinished"></translation>
+        <translation>Титаний</translation>
     </message>
     <message>
         <source>Vanadium</source>
-        <translation type="unfinished"></translation>
+        <translation>Ванадий</translation>
     </message>
     <message>
         <source>Chromium</source>
-        <translation type="unfinished"></translation>
+        <translation>Хром</translation>
     </message>
     <message>
         <source>Manganese</source>
-        <translation type="unfinished"></translation>
+        <translation>Марганец</translation>
     </message>
     <message>
         <source>Iron</source>
-        <translation type="unfinished"></translation>
+        <translation>Железо</translation>
     </message>
     <message>
         <source>Cobalt</source>
-        <translation type="unfinished"></translation>
+        <translation>Кобальт</translation>
     </message>
     <message>
         <source>Nickel</source>
-        <translation type="unfinished"></translation>
+        <translation>Никель</translation>
     </message>
     <message>
         <source>Copper</source>
-        <translation type="unfinished"></translation>
+        <translation>Медь</translation>
     </message>
     <message>
         <source>Zinc</source>
-        <translation type="unfinished"></translation>
+        <translation>Цинк</translation>
     </message>
     <message>
         <source>Gallium</source>
-        <translation type="unfinished"></translation>
+        <translation>Галлий</translation>
     </message>
     <message>
         <source>Germanium</source>
-        <translation type="unfinished"></translation>
+        <translation>Германий</translation>
     </message>
     <message>
         <source>Arsenic</source>
-        <translation type="unfinished"></translation>
+        <translation>Мышьяк</translation>
     </message>
     <message>
         <source>Selenium</source>
-        <translation type="unfinished"></translation>
+        <translation>Селений</translation>
     </message>
     <message>
         <source>Bromine</source>
-        <translation type="unfinished"></translation>
+        <translation>Бром</translation>
     </message>
     <message>
         <source>Krypton</source>
-        <translation type="unfinished"></translation>
+        <translation>Криптон</translation>
     </message>
     <message>
         <source>Rubidium</source>
-        <translation type="unfinished"></translation>
+        <translation>Рубидий</translation>
     </message>
     <message>
         <source>Strontium</source>
-        <translation type="unfinished"></translation>
+        <translation>Стронций</translation>
     </message>
     <message>
         <source>Yttrium</source>
-        <translation type="unfinished"></translation>
+        <translation>Иттрий</translation>
     </message>
     <message>
         <source>Zirconium</source>
-        <translation type="unfinished"></translation>
+        <translation>Цирконий</translation>
     </message>
     <message>
         <source>Niobium</source>
-        <translation type="unfinished"></translation>
+        <translation>Ниобий</translation>
     </message>
     <message>
         <source>Molybdenum</source>
-        <translation type="unfinished"></translation>
+        <translation>Молибден</translation>
     </message>
     <message>
         <source>Technetium</source>
-        <translation type="unfinished"></translation>
+        <translation>Технеций</translation>
     </message>
     <message>
         <source>Ruthenium</source>
-        <translation type="unfinished"></translation>
+        <translation>Рутений</translation>
     </message>
     <message>
         <source>Rhodium</source>
-        <translation type="unfinished"></translation>
+        <translation>Родий</translation>
     </message>
     <message>
         <source>Palladium</source>
-        <translation type="unfinished"></translation>
+        <translation>Палладий</translation>
     </message>
     <message>
         <source>Silver</source>
-        <translation type="unfinished"></translation>
+        <translation>Серебро</translation>
     </message>
     <message>
         <source>Cadmium</source>
-        <translation type="unfinished"></translation>
+        <translation>Кадмий</translation>
     </message>
     <message>
         <source>Indium</source>
-        <translation type="unfinished"></translation>
+        <translation>Индий</translation>
     </message>
     <message>
         <source>Tin</source>
-        <translation type="unfinished"></translation>
+        <translation>Олово</translation>
     </message>
     <message>
         <source>Antimony</source>
-        <translation type="unfinished"></translation>
+        <translation>Сурьма</translation>
     </message>
     <message>
         <source>Tellurium</source>
-        <translation type="unfinished"></translation>
+        <translation>Теллурий</translation>
     </message>
     <message>
         <source>Iodine</source>
-        <translation type="unfinished"></translation>
+        <translation>Йод</translation>
     </message>
     <message>
         <source>Xenon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ксенон</translation>
     </message>
     <message>
         <source>Cesium</source>
-        <translation type="unfinished"></translation>
+        <translation>Цезий</translation>
     </message>
     <message>
         <source>Barium</source>
-        <translation type="unfinished"></translation>
+        <translation>Барий</translation>
     </message>
     <message>
         <source>Lanthanum</source>
-        <translation type="unfinished"></translation>
+        <translation>Лантан</translation>
     </message>
     <message>
         <source>Cerium</source>
-        <translation type="unfinished"></translation>
+        <translation>Церий</translation>
     </message>
     <message>
         <source>Praseodymium</source>
-        <translation type="unfinished"></translation>
+        <translation>Празеодим</translation>
     </message>
     <message>
         <source>Neodymium</source>
-        <translation type="unfinished"></translation>
+        <translation>Неодим</translation>
     </message>
     <message>
         <source>Promethium</source>
-        <translation type="unfinished"></translation>
+        <translation>Прометий</translation>
     </message>
     <message>
         <source>Samarium</source>
-        <translation type="unfinished"></translation>
+        <translation>Самарий</translation>
     </message>
     <message>
         <source>Europium</source>
-        <translation type="unfinished"></translation>
+        <translation>Европий</translation>
     </message>
     <message>
         <source>Gadolinium</source>
-        <translation type="unfinished"></translation>
+        <translation>Гадолиний</translation>
     </message>
     <message>
         <source>Terbium</source>
-        <translation type="unfinished"></translation>
+        <translation>Тербий</translation>
     </message>
     <message>
         <source>Dysprosium</source>
-        <translation type="unfinished"></translation>
+        <translation>Диспрозий</translation>
     </message>
     <message>
         <source>Holmium</source>
-        <translation type="unfinished"></translation>
+        <translation>Гольмий</translation>
     </message>
     <message>
         <source>Erbium</source>
-        <translation type="unfinished"></translation>
+        <translation>Эрбий</translation>
     </message>
     <message>
         <source>Thulium</source>
-        <translation type="unfinished"></translation>
+        <translation>Тулий</translation>
     </message>
     <message>
         <source>Ytterbium</source>
-        <translation type="unfinished"></translation>
+        <translation>Иттербий</translation>
     </message>
     <message>
         <source>Lutetium</source>
-        <translation type="unfinished"></translation>
+        <translation>Лютеций</translation>
     </message>
     <message>
         <source>Hafnium</source>
-        <translation type="unfinished"></translation>
+        <translation>Гафний</translation>
     </message>
     <message>
         <source>Tantalum</source>
-        <translation type="unfinished"></translation>
+        <translation>Тантал</translation>
     </message>
     <message>
         <source>Tungsten</source>
-        <translation type="unfinished"></translation>
+        <translation>Вольфрам</translation>
     </message>
     <message>
         <source>Rhenium</source>
-        <translation type="unfinished"></translation>
+        <translation>Рений</translation>
     </message>
     <message>
         <source>Osmium</source>
-        <translation type="unfinished"></translation>
+        <translation>Осмий</translation>
     </message>
     <message>
         <source>Iridium</source>
-        <translation type="unfinished"></translation>
+        <translation>Иридий</translation>
     </message>
     <message>
         <source>Platinum</source>
-        <translation type="unfinished"></translation>
+        <translation>Платина</translation>
     </message>
     <message>
         <source>Gold</source>
-        <translation type="unfinished"></translation>
+        <translation>Золото</translation>
     </message>
     <message>
         <source>Mercury</source>
-        <translation type="unfinished"></translation>
+        <translation>Ртуть</translation>
     </message>
     <message>
         <source>Thallium</source>
-        <translation type="unfinished"></translation>
+        <translation>Таллий</translation>
     </message>
     <message>
         <source>Lead</source>
-        <translation type="unfinished"></translation>
+        <translation>Свинец</translation>
     </message>
     <message>
         <source>Bismuth</source>
-        <translation type="unfinished"></translation>
+        <translation>Висмут</translation>
     </message>
     <message>
         <source>Polonium</source>
-        <translation type="unfinished"></translation>
+        <translation>Полоний</translation>
     </message>
     <message>
         <source>Astatine</source>
-        <translation type="unfinished"></translation>
+        <translation>Астатин</translation>
     </message>
     <message>
         <source>Radon</source>
-        <translation type="unfinished"></translation>
+        <translation>Радон</translation>
     </message>
     <message>
         <source>Francium</source>
-        <translation type="unfinished"></translation>
+        <translation>Франций</translation>
     </message>
     <message>
         <source>Radium</source>
-        <translation type="unfinished"></translation>
+        <translation>Радий</translation>
     </message>
     <message>
         <source>Actinium</source>
-        <translation type="unfinished"></translation>
+        <translation>Актиний</translation>
     </message>
     <message>
         <source>Thorium</source>
-        <translation type="unfinished"></translation>
+        <translation>Торий</translation>
     </message>
     <message>
         <source>Protactinium</source>
-        <translation type="unfinished"></translation>
+        <translation>Протактиний</translation>
     </message>
     <message>
         <source>Uranium</source>
-        <translation type="unfinished"></translation>
+        <translation>Уран</translation>
     </message>
     <message>
         <source>Neptunium</source>
-        <translation type="unfinished"></translation>
+        <translation>Нептуний</translation>
     </message>
     <message>
         <source>Plutonium</source>
-        <translation type="unfinished"></translation>
+        <translation>Плутоний</translation>
     </message>
     <message>
         <source>Americium</source>
-        <translation type="unfinished"></translation>
+        <translation>Америций</translation>
     </message>
     <message>
         <source>Curium</source>
-        <translation type="unfinished"></translation>
+        <translation>Кюрий</translation>
     </message>
     <message>
         <source>Berkelium</source>
-        <translation type="unfinished"></translation>
+        <translation>Берклий</translation>
     </message>
     <message>
         <source>Californium</source>
-        <translation type="unfinished"></translation>
+        <translation>Калифорний</translation>
     </message>
     <message>
         <source>Einsteinium</source>
-        <translation type="unfinished"></translation>
+        <translation>Эйнштейний</translation>
     </message>
     <message>
         <source>Fermium</source>
-        <translation type="unfinished"></translation>
+        <translation>Фермий</translation>
     </message>
     <message>
         <source>Mendelevium</source>
-        <translation type="unfinished"></translation>
+        <translation>Менделевий</translation>
     </message>
     <message>
         <source>Nobelium</source>
-        <translation type="unfinished"></translation>
+        <translation>Нобелий</translation>
     </message>
     <message>
         <source>Lawrencium</source>
-        <translation type="unfinished"></translation>
+        <translation>Лауренсий</translation>
     </message>
     <message>
         <source>Rutherfordium</source>
-        <translation type="unfinished"></translation>
+        <translation>Резерфордий</translation>
     </message>
     <message>
         <source>Dubnium</source>
-        <translation type="unfinished"></translation>
+        <translation>Дубний</translation>
     </message>
     <message>
         <source>Seaborgium</source>
-        <translation type="unfinished"></translation>
+        <translation>Сиборгий</translation>
     </message>
     <message>
         <source>Bohrium</source>
-        <translation type="unfinished"></translation>
+        <translation>Борий</translation>
     </message>
     <message>
         <source>Hassium</source>
-        <translation type="unfinished"></translation>
+        <translation>Хассий</translation>
     </message>
     <message>
         <source>Meitnerium</source>
-        <translation type="unfinished"></translation>
+        <translation>Мейтнерий</translation>
     </message>
 </context>
 <context>
     <name>PSEWidget</name>
     <message>
         <source>Periodic System</source>
-        <translation type="unfinished"></translation>
+        <translation>Периодическая система</translation>
     </message>
 </context>
 <context>
@@ -548,14 +548,15 @@
     <message>
         <source>ERROR: 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ОШИБКА: 
+</translation>
     </message>
 </context>
 <context>
     <name>dataWidgetUI</name>
     <message>
         <source>Chemical Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Химические данные</translation>
     </message>
 </context>
 </TS>
