@@ -75,6 +75,8 @@ void AddressBookPluginWidget::readConfig() {
     m_entryColor    = cfg.readEntry("entrycolor", Qt::black.name() );
     m_headlineColor = cfg.readEntry( "headlinecolor", Qt::black.name() );
     m_urgentColor   = cfg.readEntry( "urgentcolor", Qt::red.name() );
+    m_showBirthdays = cfg.readBoolEntry( "showBirthdays", true );
+    m_showAnniversaries = cfg.readBoolEntry( "showAnniversaries", true );
 }
 
 
@@ -96,51 +98,73 @@ void AddressBookPluginWidget::getAddress() {
 	QString output;
 
 	// Check whether the database provide the search option..
-	if ( ! m_contactdb->hasQuerySettings( OContactAccess::DateDiff ) ){
-
-		// Define the query for birthdays and start search..
-		QDate lookAheadDate = QDate::currentDate().addDays( m_daysLookAhead );
-		qWarning("Searching from now (%s) until %s ! ", QDate::currentDate().toString().latin1(), 
+	// The following if-statement was replaced due to a bug in some
+	// implementations of libopie. The replacement should work everywhere..(eilers)
+	// if ( !m_contactdb->hasQuerySettings( OContactAccess::DateDiff ) ){
+ 	if ( !( m_contactdb->querySettings() & OContactAccess::DateDiff ) ){
+		// Libopie seems to be old..
+		output = QObject::tr( "Database does not provide this search query ! Please upgrade libOpie !<br>" );
+		addressLabel->setText( output );
+		return;
+	}
+	
+	// Define the query for birthdays and start search..
+	QDate lookAheadDate = QDate::currentDate().addDays( m_daysLookAhead );
+	int ammount = 0;
+	if ( m_showBirthdays ){
+		qWarning("Searching from now (%s) until %s ! ", 
+			 QDate::currentDate().toString().latin1(), 
 			 lookAheadDate.toString().latin1() );
 		OContact querybirthdays;
 		querybirthdays.setBirthday( lookAheadDate );
-
-		int ammount = 0;
 		
-		m_list = m_contactdb->queryByExample( querybirthdays, OContactAccess::DateDiff );
+		
+		m_list = m_contactdb->queryByExample( querybirthdays, 
+						      OContactAccess::DateDiff );
 		if ( m_list.count() > 0 ){
 			output = "<font color=" + m_headlineColor + ">"
-				+ QObject::tr( "Next birthdays in <b> %1 </b> days:" ).arg( m_daysLookAhead )
+				+ QObject::tr( "Next birthdays in <b> %1 </b> days:" )
+				.arg( m_daysLookAhead )
 				+ "</font> <br>";
 			for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
 				if ( ammount++ < m_maxLinesTask ){
-					// Now we want to calculate how many days until birthday. We have to set 
+					// Now we want to calculate how many days 
+					//until birthday. We have to set 
 					// the correct year to calculate the day diff...
 					QDate destdate = (*m_it).birthday();
-					destdate.setYMD( QDate::currentDate().year(), destdate.month(), destdate.day() );
+					destdate.setYMD( QDate::currentDate().year(), 
+							 destdate.month(), destdate.day() );
 					if ( QDate::currentDate().daysTo(destdate) < 0 )
-						destdate.setYMD( QDate::currentDate().year()+1, destdate.month(), destdate.day() );
+						destdate.setYMD( QDate::currentDate().year()+1, 
+								 destdate.month(), destdate.day() );
 
 					
 					if ( QDate::currentDate().daysTo(destdate) < m_urgentDays )
-						output += "<font color=" + m_urgentColor + "><b>-" + (*m_it).fullName() 
+						output += "<font color=" + m_urgentColor + "><b>-" 
+							+ (*m_it).fullName() 
 							+ " (" 
-							+ QString::number(QDate::currentDate().daysTo(destdate)) 
+							+ QString::number(QDate::currentDate()
+									  .daysTo(destdate)) 
 							+ " Days) </b></font><br>";
 					
 					else
-						output += "<font color=" + m_entryColor + "><b>-" + (*m_it).fullName() 
+						output += "<font color=" + m_entryColor + "><b>-" 
+							+ (*m_it).fullName() 
 							+ " (" 
-							+ QString::number(QDate::currentDate().daysTo(destdate)) 
+							+ QString::number(QDate::currentDate()
+									  .daysTo(destdate)) 
 							+ " Days) </b></font><br>";
 				}
 			}
 		} else {
 			output = "<font color=" + m_headlineColor + ">"
-				+ QObject::tr( "No birthdays in <b> %1 </b> days!" ).arg( m_daysLookAhead )
+				+ QObject::tr( "No birthdays in <b> %1 </b> days!" )
+				.arg( m_daysLookAhead )
 				+ "</font> <br>";
 		}
+	}
 		
+	if ( m_showAnniversaries ){
 		// Define the query for anniversaries and start search..
 		OContact queryanniversaries;
 		queryanniversaries.setAnniversary( lookAheadDate );
@@ -150,41 +174,44 @@ void AddressBookPluginWidget::getAddress() {
 		ammount = 0;
 		if ( m_list.count() > 0 ){
 			output += "<font color=" + m_headlineColor + ">"
-				+ QObject::tr( "Next anniversaries in <b> %1 </b> days:" ).arg( m_daysLookAhead )
+				+ QObject::tr( "Next anniversaries in <b> %1 </b> days:" )
+				.arg( m_daysLookAhead )
 				+ "</font> <br>";
 			for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
 				if ( ammount++ < m_maxLinesTask ){
-					// Now we want to calculate how many days until anniversary. We have to set 
-					// the correct year to calculate the day diff...
+					// Now we want to calculate how many days until anniversary. 
+					// We have to set the correct year to calculate the day diff...
 					QDate destdate = (*m_it).anniversary();
-					destdate.setYMD( QDate::currentDate().year(), destdate.month(), destdate.day() );
+					destdate.setYMD( QDate::currentDate().year(), destdate.month(), 
+							 destdate.day() );
 					if ( QDate::currentDate().daysTo(destdate) < 0 )
-						destdate.setYMD( QDate::currentDate().year()+1, destdate.month(), destdate.day() );
+						destdate.setYMD( QDate::currentDate().year()+1, 
+								 destdate.month(), destdate.day() );
 
 					if ( QDate::currentDate().daysTo(destdate) < m_urgentDays )
-						output += "<font color=" + m_urgentColor + "><b>-" + (*m_it).fullName() 
+						output += "<font color=" + m_urgentColor + "><b>-" 
+							+ (*m_it).fullName() 
 							+ " (" 
-							+ QString::number(QDate::currentDate().daysTo( destdate ) ) 
+							+ QString::number(QDate::currentDate()
+									  .daysTo( destdate ) ) 
 							+ " Days) </b></font><br>";
 					else
-						output += "<font color=" + m_entryColor + "><b>-" + (*m_it).fullName() 
+						output += "<font color=" + m_entryColor + "><b>-" 
+							+ (*m_it).fullName() 
 							+ " (" 
-							+ QString::number(QDate::currentDate().daysTo( destdate ) ) 
+							+ QString::number(QDate::currentDate()
+									  .daysTo( destdate ) ) 
 							+ " Days) </b></font><br>";
 				}
 			}
 		} else {
 			output += "<font color=" + m_headlineColor + ">" 
-				+ QObject::tr( "No anniversaries in <b> %1 </b> days!" ).arg( m_daysLookAhead )
+				+ QObject::tr( "No anniversaries in <b> %1 </b> days!" )
+				.arg( m_daysLookAhead )
 				+ "</font> <br>";
 		}
-
-
-	}else{
-		// Libopie seems to be old..
-		output = QObject::tr( "Database does not provide this search query ! Please upgrade libOpie !<br>" );
 	}
-	
+
 	addressLabel->setText( output );
 }
 

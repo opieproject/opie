@@ -21,6 +21,7 @@
 
 #include <qwidget.h>
 #include <qspinbox.h>
+#include <qradiobutton.h>
 
 #include <opie/todayconfigwidget.h>
 #include <opie/ocolorbutton.h>
@@ -48,6 +49,8 @@ private:
     OColorButton* entryColor;
     OColorButton* headlineColor;
     OColorButton* urgentColor;
+    QRadioButton* m_showBirthdayButton;
+    QRadioButton* m_showAnniversaryButton;
 
     // how many lines should be showed in the AddressBook section
     int m_max_lines_task;

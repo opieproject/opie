@@ -58,6 +58,8 @@ private:
     QString m_entryColor;
     QString m_headlineColor;
     QString m_urgentColor;
+    bool m_showBirthdays;
+    bool m_showAnniversaries;
 };
 
 #endif
