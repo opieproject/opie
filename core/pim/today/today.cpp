@@ -106,9 +106,9 @@ void Today::setOwnerField() {
   if (QFile::exists(file)) {
     Contact cont = Contact::readVCard(file)[0];
     QString returnString = cont.fullName();
-    OwnerField->setText( tr ("<b>Owned by " + returnString + "</b>"));
+    OwnerField->setText( "<b>" +tr ("Owned by ") + returnString + "</b>");
   } else {
-    OwnerField->setText( tr ("<b>Please fill out the business card </b>"));
+    OwnerField->setText( "<b>" + tr ("Please fill out the business card")+" </b>");
   }
 }
 
