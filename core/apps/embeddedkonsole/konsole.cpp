@@ -52,6 +52,7 @@
 #include "konsole.h"
 #include "keytrans.h"
 
+
 class EKNumTabBar : public QTabBar {
 public:
     void numberTabs()
@@ -120,6 +121,7 @@ static const char *commonCmds[] =
     "mv ",
     "nc localhost 7776",
     "nc localhost 7777",
+    "netstat ",
     "nslookup ",
     "ping ",
     "ps aux",
@@ -701,7 +703,7 @@ void Konsole::configMenuSelected(int iD)
             configMenu->setItemEnabled(-20 ,TRUE);
 
             if(cfg.readEntry("EditEnabled","FALSE")=="TRUE") {
-                configMenu->setItemChecked(-16,TRUE);
+                configMenu->setItemChecked(-20,TRUE);
                 commonCombo->setEditable( TRUE );
             } else {
                 configMenu->setItemChecked(-20,FALSE);
