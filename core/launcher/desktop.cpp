@@ -200,7 +200,6 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
       when user presses key, unless keyboard has been requested from app.
       will not send multiple repeats if user holds key
       i.e. one shot
-
      */
     if (!keyRegisterList.isEmpty())  {
       KeyRegisterList::Iterator it;
@@ -531,7 +530,7 @@ void Desktop::raiseMenu()
     QString tempItem;
     tempItem = cfg.readEntry( "Right2nd" , "Popup Menu" );
     if ( tempItem == "Popup Menu" || tempItem.isEmpty() ) {
-        Global::terminateBuiltin("calibrate");
+        Global::terminateBuiltin( "calibrate" );
         tb->startMenu()->launch();
     } else {
         QCopEnvelope e("QPE/System","execute(QString)");
@@ -541,7 +540,7 @@ void Desktop::raiseMenu()
 
 void Desktop::raiseEmail()
 {
-    Config cfg( "qpe" ); //F13, 'Mail'
+    Config cfg( "qpe" ); //F13, 'Mail' // only in zaurus, on ipaq mail key is F11
     cfg.setGroup( "AppsKey" );
     QString tempItem;
     tempItem = cfg.readEntry( "RightEnd", "Mail" );
@@ -553,7 +552,8 @@ void Desktop::raiseEmail()
 }
 
 // autoStarts apps on resume and start
-void Desktop::execAutoStart() {
+void Desktop::execAutoStart()
+{
     QString appName;
     int delay;
     QDateTime now = QDateTime::currentDateTime();
@@ -764,43 +764,49 @@ void Desktop::rereadVolumes()
     touchclick = cfg.readBoolEntry("TouchSound");
     keyclick = cfg.readBoolEntry("KeySound");
     alarmsound = cfg.readBoolEntry("AlarmSound");
-//     Config cfg("Sound");
-//     cfg.setGroup("System");
-//     touchclick = cfg.readBoolEntry("Touch");
-//     keyclick = cfg.readBoolEntry("Key");
 }
 
 void Desktop::keyClick()
 {
-  if ( keyclick )
-      ODevice::inst ( )-> keySound ( );
+    if ( keyclick )
+        ODevice::inst ( )-> keySound ( );
 }
 
 void Desktop::screenClick()
 {
-  if ( touchclick )
-      ODevice::inst ( )-> touchSound ( );
+    if ( touchclick )
+        ODevice::inst ( )-> touchSound ( );
 }
 
 void Desktop::soundAlarm()
 {
-  if ( qpedesktop-> alarmsound )
-    ODevice::inst ( )-> alarmSound ( );
+    if ( qpedesktop-> alarmsound )
+        ODevice::inst ( )-> alarmSound ( );
 }
 
 bool Desktop::eventFilter( QObject *, QEvent *ev )
 {
-  if ( ev-> type ( ) == QEvent::KeyPress ) {
-    QKeyEvent *ke = (QKeyEvent *) ev;
-    if ( ke-> key ( ) == Qt::Key_F11 ) { // menu key
-      QWidget *active = qApp-> activeWindow ( );
+    if ( ev-> type ( ) == QEvent::KeyPress ) {
+        QKeyEvent *ke = (QKeyEvent *) ev;
+        if ( ke-> key ( ) == Qt::Key_F11 ) { // menu key
+            QWidget *active = qApp-> activeWindow ( );
 
-      if ( active && active-> isPopup ( ))
-        active->close();
+            if ( active && active-> isPopup ( ))
+                active->close();
 
-      raiseMenu ( );
-      return true;
+            /*
+             * On iPAQ 38xx that key is not the "menu key" but the mail key
+             * To not confuse the users, make it launch the mail app on 38xx
+             */
+            if (ODevice::inst()->model() == OMODEL_iPAQ_H38xx ) {
+                QCopEnvelope e( "QPE/System", "execute(QString)" );
+                e << QString( "mail" );
+                return true;
+            } else {
+                raiseMenu ( );
+                return true;
+            }
+        }
     }
-  }
-  return false;
+    return false;
 }
