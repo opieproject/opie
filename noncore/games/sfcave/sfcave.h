@@ -8,15 +8,10 @@
 
 
 #define MAPSIZE 52
-#define BLOCKSIZE 5
+#define BLOCKSIZE 6
 #define TRAILSIZE 30
 
-#define STATE_BOSS 0
-#define STATE_RUNNING 1
-#define STATE_CRASHED 2
-#define STATE_NEWGAME 3
-
-class Main : public QMainWindow
+class SFCave : public QMainWindow
 {
 Q_OBJECT
 
@@ -27,22 +22,37 @@ public:
 
 	int blockWidth;
 	int blockHeight;
+    int gapHeight;
 	int state;
 	int prevState;
 	int speed;
     int crashLineLength;
 
+    int gateDistance;
+    int nextGate;
+    int lastGateBottomY;
+    
+    static QString menuOptions[2][5];
+    int currentMenuNr;
+    int nrMenuOptions[2];
+    int currentMenuOption[2];
+
+    static QString dificultyOption[3];
+    static QString gameTypes[3];
+    int currentGameType;
+    int currentGameDifficulty;
+
 	QPixmap *offscreen;
 	QTimer *gameTimer;
 
 	int score;
-	int highestScore;
+	int highestScore[3];
 
-	int mapTop[52];
-	int mapBottom[52];
-	QRect blocks[5];
+	int mapTop[MAPSIZE];
+	int mapBottom[MAPSIZE];
+	QRect blocks[BLOCKSIZE];
 	QRect user;
-	QPoint trail[30];
+	QPoint trail[TRAILSIZE];
 
 	int offset;
 	int maxHeight;
@@ -55,18 +65,22 @@ public:
 	double thrust;
 	bool running;
 
-	Main( int speed = 3, QWidget *p = 0, char *name = 0 );
-	~Main();
+	SFCave( int speed = 3, QWidget *p = 0, char *name = 0 );
+	~SFCave();
 	void start();
 	int nextInt( int range );
 	void setUp();
 	bool checkCollision();
 	void moveLandscape();
 	void addBlock();
+	void addGate();
 	void setPoint( int point );
 	void drawBoss();
 	void draw();
 	void handleKeys();
+
+    void displayMenu();
+    void dealWithMenuSelection();
 
 	void keyPressEvent( QKeyEvent *e );
 	void keyReleaseEvent( QKeyEvent *e );
