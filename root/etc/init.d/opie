@@ -39,6 +39,7 @@ case $1 in
     		"3600" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
     		"3700" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
     		"3800" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
+    		"3900" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
     		*) echo "Unknown processor type -`module_id`-!" ;;
    	    esac
 	 else
