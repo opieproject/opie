@@ -20,14 +20,16 @@ title = German
     "........."
     "........."
 
-1 0         0x60    2  # but not after xpm images... k?
-0x60        0x7e       # shifted
+1 0         0x5e    2  # but not after xpm images... k?
+0x5e        0xb0       # shifted
 1 0         0x31    2
 0x31        0x21       # shifted
 1 0         0x32    2
 0x32        0x22       # shi....
+m 0x32      0xb2       # the ^2
 1 0         0x33    2
 0x33        0xa7 
+m 0x33      0xb3       # the ^3
 1 0         0x34    2
 0x34        0x24  
 1 0         0x35    2
@@ -39,8 +41,10 @@ title = German
 m 0x37      0x7b      # the { 
 1 0         0x38    2
 0x38        0x28  
+m 0x38      0x5b      # the [  
 1 0         0x39    2
 0x39        0x29  
+m 0x39      0x5d      # the ]  
 1 0         0x30    2
 0x30        0x3d  
 m 0x30      0x7d      # the } 
