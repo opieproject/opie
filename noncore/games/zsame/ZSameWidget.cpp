@@ -109,14 +109,14 @@ ZSameWidget::~ZSameWidget() {
 
 }
 
-void ZSameWidget::readProperties(Config *conf) {
+void ZSameWidget::readProperties(Config *) {
 /*
   Q_ASSERT(conf);
   stone->readProperties(conf);
 */
 }
 
-void ZSameWidget::saveProperties(Config *conf) {
+void ZSameWidget::saveProperties(Config *) {
 /*
   Q_ASSERT(conf);
   stone->saveProperties(conf);
@@ -189,15 +189,15 @@ void ZSameWidget::m_tglboard() {
 }
 
 
-void ZSameWidget::setColors(int colors) {
+void ZSameWidget::setColors(int ) {
 //	status->changeItem(i18n("%1 Colors").arg(colors),1);
 }
 
-void ZSameWidget::setBoard(int board) {
+void ZSameWidget::setBoard(int ) {
 //	status->changeItem(i18n("Board: %1").arg(board, 6), 2);
 }
 
-void ZSameWidget::setMarked(int m) {
+void ZSameWidget::setMarked(int ) {
 //  status->changeItem(i18n("Marked: %1").arg(m, 6),3);
 }
 
@@ -206,7 +206,7 @@ void ZSameWidget::stonesRemoved(int,int) {
 //	   i18n("%1 stones removed.").arg(stone->marked()));
 }
 
-void ZSameWidget::setScore(int score) {
+void ZSameWidget::setScore(int ) {
 //  status->changeItem(i18n("Score: %1").arg(score, 6),4);
 //  undo->setEnabled(stone->undoPossible());
 //  restart->setEnabled(!stone->isOriginalBoard());

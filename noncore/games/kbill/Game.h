@@ -4,7 +4,7 @@
 #include "objects.h"
 
 class Game {
-	unsigned state;
+	int state;
 	int efficiency;
 public:
 	unsigned score, level, iteration;

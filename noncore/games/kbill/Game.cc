@@ -58,7 +58,7 @@ void Game::update_info() {
 	ui.draw_str(str, 5, scrheight-5);
 	efficiency += ((100*net.base-10*net.win)/net.units);
 }
-  
+
 void Game::update_score (int action) {
 	switch (action){
 		case ENDLEVEL: score+=(level*efficiency/iteration); break;
@@ -72,7 +72,7 @@ void Game::warp_to_level (unsigned int lev) {
 		setup_level(lev);
 	}
 	else {
-		if (lev<=0) return;
+		if (lev <=0) return;
 		start(lev);
 	}
 }
@@ -99,7 +99,7 @@ void Game::button_press(int x, int y) {
 		else if (bill.list[i].state != bill.list[i].STRAY &&
 			bill.list[i].clicked(x, y))
 		{
-			if (bill.list[i].state == bill.list[i].AT) 
+			if (bill.list[i].state == bill.list[i].AT)
 				net.computers[bill.list[i].target_c].busy=0;
 			bill.list[i].index = -1;
 			bill.list[i].cels = bill.dcels;
@@ -131,10 +131,10 @@ void Game::button_release(int x, int y) {
 			&&
 			net.computers[i].compatible (bill.list[grabbed].cargo)
 			&&
-			(net.computers[i].os == OS.WINGDOWS || 
+			(net.computers[i].os == OS.WINGDOWS ||
 			 net.computers[i].os == OS.OFF))
 		{
-			net.base++; 
+			net.base++;
 			if (net.computers[i].os == OS.WINGDOWS)
 				net.win--;
 			else
@@ -145,12 +145,12 @@ void Game::button_release(int x, int y) {
 			return;
 		}
 	grabbed = EMPTY;
-}	
+}
 
 void Game::update() {
 	switch (state) {
 	case PLAYING:
-		ui.clear(); 
+		ui.clear();
 		bucket.draw();
 		net.update();
 		net.draw();

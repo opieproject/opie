@@ -28,27 +28,29 @@
 
 class KBill : public QMainWindow
 {
-  Q_OBJECT 
-  public:
+  Q_OBJECT
+public:
     KBill();
-    ~KBill();
-		Field* getField();
-	private:
-		QMenuBar *menu;
-		QPopupMenu *file, *help;
-  	Field *field;
-		int pauseid;
-	protected slots:
-  	void Quit();
-  	void About();
-  	void NewGame();
-	  void Pause();
-	  void WarpTo();
-		void Story();
-		void Rules();
-		void ViewHighScores();
+   ~KBill();
+    Field* getField();
+private:
+    QMenuBar *menu;
+    QPopupMenu *file, *help;
+    Field *field;
+    int pauseid;
 
-	friend class UI;
+protected slots:
+    void Quit();
+    void About();
+    void NewGame();
+    void Pause();
+    void WarpTo();
+    void Story();
+    void Rules();
+    void ViewHighScores();
+
+protected:
+    friend class UI;
 };
 
 #endif

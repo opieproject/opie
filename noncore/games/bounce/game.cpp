@@ -30,7 +30,7 @@ using namespace Opie::Core;
 /* STD */
 #include <stdlib.h>
 
-#define TILE_SIZE 9 
+#define TILE_SIZE 9
 
 #define TILE_FIRST ((FIELD_WIDTH-2)*(FIELD_HEIGHT-2))
 #define TILE_FREE (TILE_FIRST + 0)
@@ -67,7 +67,7 @@ void Arrow::changeDirection()
 	m_vertical = ! m_vertical;
 	update();
 }
-	
+
 
 Ball::Ball(QCanvasPixmapArray* array, QCanvas* canvas)
     : QCanvasSprite( array, canvas ), m_animDelay( 0 ), m_soundDelay( MS2TICKS(BALL_ANIM_DELAY)/2 )
@@ -100,7 +100,7 @@ void Ball::advance(int stage)
 
    // emit collision
    QRect r = boundingRect();
-   r.moveBy( xVelocity(), yVelocity() );
+   r.moveBy( static_cast<int>(xVelocity()), static_cast<int>( yVelocity() ) );
    JezzField* field = (JezzField *)canvas();
 
    int ul = field->tile( r.left() / TILE_SIZE, r.top() / TILE_SIZE );
@@ -125,7 +125,7 @@ void Ball::advance(int stage)
 bool Ball::collide( double dx, double dy )
 {
    QRect r = boundingRect();
-   r.moveBy( dx, dy );
+   r.moveBy( static_cast<int>( dx ), static_cast<int>( dy ) );
    JezzField* field = (JezzField *)canvas();
 
    int ul = field->tile( r.left() / TILE_SIZE, r.top() / TILE_SIZE );
@@ -299,7 +299,7 @@ JezzGame::JezzGame( int ballNum, QWidget *parent, const char *name )
     : QWidget( parent, name ), m_wall1( 0 ), m_wall2( 0 ),
       m_text( 0 ), m_running( false ), m_percent( 0 ), m_pictured( false )
 {
-   QString path = QPEApplication::qpeDir()+"pics/bounce/"; 
+   QString path = QPEApplication::qpeDir()+"pics/bounce/";
 
    // load gfx
    m_ballPixmaps = new QCanvasPixmapArray( path + "ball%1.png", 25 );
@@ -347,7 +347,7 @@ JezzGame::JezzGame( int ballNum, QWidget *parent, const char *name )
                   4*TILE_SIZE + rand() % ( (FIELD_HEIGHT-8)*TILE_SIZE ) );
       ball->show();
    }
-   
+
    // create arrow
    arrow = new Arrow( m_arrowPixmaps, m_field );
    arrow->show();
@@ -374,7 +374,7 @@ JezzGame::~JezzGame()
 
 void JezzGame::display( QString text, int size )
 {
-    odebug << "This function \"display\" shouldn't be called!!!" << oendl; 
+    odebug << "This function \"display\" shouldn't be called!!!" << oendl;
     if ( !text.isEmpty() )
     {
         QFont font( "Helvetica", size, QFont::Bold );
@@ -413,7 +413,8 @@ void JezzGame::makeBlack()
 
    // fill areas that contains a ball
    for ( Ball *ball=m_balls.first(); ball!=0; ball=m_balls.next() )
-      fill( ball->x()/TILE_SIZE, ball->y()/TILE_SIZE );
+      fill( static_cast<int>( ball->x()/TILE_SIZE ),
+            static_cast<int>( ball->y()/TILE_SIZE ) );
 
    // areas still free can be blacked now
    for ( int y=0; y<FIELD_HEIGHT; y++ )

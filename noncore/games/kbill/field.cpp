@@ -80,4 +80,4 @@ void Field::Timer(){
 
 void Field::paintEvent(QPaintEvent *) {
 	bitBlt(this, 0, 0, pix);
-}			
+}
