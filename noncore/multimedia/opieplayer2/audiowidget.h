@@ -59,13 +59,13 @@ public slots:
     void updateSlider( long, long );
     void sliderPressed( );
     void sliderReleased( );
-    void setLooping( bool b) { setToggleButton( buttons[ Loop ], b ); }
+    void setLooping( bool b) { setToggleButton( Loop, b ); }
     void setPosition( long );
     void setSeekable( bool );
 
 public:
     virtual void setLength( long );
-    virtual void setPlaying( bool b) { setToggleButton( buttons[ Play ], b ); }
+    virtual void setPlaying( bool b) { setToggleButton( Play, b ); }
     virtual void setDisplayType( MediaPlayerState::DisplayType displayType );
 
 signals:

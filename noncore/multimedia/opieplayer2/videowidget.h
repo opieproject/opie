@@ -44,17 +44,6 @@
 class QPixmap;
 class QSlider;
 
-enum VideoButtons {
-    VideoPlay = 0,
-    VideoStop,
-//    VideoPause,
-    VideoNext,
-    VideoPrevious,
-    VideoVolUp,
-    VideoVolDown,
-    VideoFullscreen
-};
-
 class VideoWidget : public MediaWidget {
     Q_OBJECT
 public:
