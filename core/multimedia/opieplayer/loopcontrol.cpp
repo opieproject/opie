@@ -100,7 +100,7 @@ LoopControl::LoopControl( QObject *parent, const char *name )
         : QObject( parent, name ) {
     isMuted = FALSE;
     connect( qApp, SIGNAL( volumeChanged(bool) ), this, SLOT( setMute(bool) ) );
-qDebug("starting loopcontrol");
+    //qDebug("starting loopcontrol");
     audioMutex = new Mutex;
 
     pthread_attr_init(&audio_attr);
@@ -112,12 +112,12 @@ qDebug("starting loopcontrol");
         params.sched_priority = 50;
         pthread_attr_setschedparam(&audio_attr,&params);
     } else {
-        qDebug( "Error setting up a realtime thread, reverting to using a normal thread." );
+       //        qDebug( "Error setting up a realtime thread, reverting to using a normal thread." );
         pthread_attr_destroy(&audio_attr);
         pthread_attr_init(&audio_attr);
     }
 #endif
-qDebug("create audio thread");
+    //qDebug("create audio thread");
     pthread_create(&audio_tid, &audio_attr, (void * (*)(void *))startAudioThread, this);
 }
 
@@ -227,8 +227,8 @@ void LoopControl::startAudio() {
 
             currentSample = audioSampleCounter + 1;
 
-            if ( currentSample != audioSampleCounter + 1 )
-                qDebug("out of sync with decoder %i %i", currentSample, audioSampleCounter);
+//              if ( currentSample != audioSampleCounter + 1 )
+//                  qDebug("out of sync with decoder %i %i", currentSample, audioSampleCounter);
 
             long samplesRead = 0;
             bool readOk=mediaPlayerState->curDecoder()->audioReadSamples( (short*)audioBuffer, channels, 1024, samplesRead, stream );
@@ -241,7 +241,7 @@ void LoopControl::startAudio() {
          usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
            }
          else if ( sampleWaitTime <= -5000 ) {
-        qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
+            //        qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
  //       //mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
         currentSample = sampleWeShouldBeAt;
           }
@@ -361,7 +361,7 @@ bool LoopControl::init( const QString& filename ) {
     stream = 0; // only play stream 0 for now
     current_frame = total_video_frames = total_audio_samples = 0;
     
-    qDebug( "Using the %s decoder", mediaPlayerState->curDecoder()->pluginName() );
+    //    qDebug( "Using the %s decoder", mediaPlayerState->curDecoder()->pluginName() );
    
       // ### Hack to use libmpeg3plugin to get the number of audio samples if we are using the libmad plugin
 //     if ( mediaPlayerState->curDecoder()->pluginName() == QString("LibMadPlugin") ) {
@@ -387,23 +387,23 @@ bool LoopControl::init( const QString& filename ) {
         else
             channels = mediaPlayerState->curDecoder()->audioChannels( astream );
 
-        qDebug( "LC- channels = %d", channels );
+        //        qDebug( "LC- channels = %d", channels );
   
 //        if ( !total_audio_samples )
             total_audio_samples = mediaPlayerState->curDecoder()->audioSamples( astream );
 
         total_audio_samples += 1000;
-        qDebug("total samples %d", total_audio_samples);
+        //        qDebug("total samples %d", total_audio_samples);
         mediaPlayerState->setLength( total_audio_samples );
   
         freq = mediaPlayerState->curDecoder()->audioFrequency( astream );
-        qDebug( "LC- frequency = %d", freq );
+        //        qDebug( "LC- frequency = %d", freq );
 
         audioSampleCounter = 0;
         int bits_per_sample;
         if ( mediaPlayerState->curDecoder()->pluginName() == QString("LibWavPlugin") ) {
             bits_per_sample =(int) mediaPlayerState->curDecoder()->getTime();
-            qDebug("using stupid hack");
+            //            qDebug("using stupid hack");
         } else {
             bits_per_sample=0;
         }
@@ -451,7 +451,7 @@ bool LoopControl::init( const QString& filename ) {
 
 
 void LoopControl::play() {
-    qDebug("LC- play");
+   //    qDebug("LC- play");
     mediaPlayerState->setPosition( 0); //uglyhack
     
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)

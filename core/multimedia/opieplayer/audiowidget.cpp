@@ -76,7 +76,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     QWidget( parent, name, f ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this )
 {
     setCaption( tr("OpiePlayer") );
-    qDebug("<<<<<audioWidget");
+    //    qDebug("<<<<<audioWidget");
     
     Config cfg("OpiePlayer");
     cfg.setGroup("Options");
@@ -90,7 +90,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     if(!QDir(QString(getenv("OPIEDIR")) +"/pics/"+skinPath).exists())
        skinPath = "opieplayer2/skins/default";
        
-    qDebug("skin path " + skinPath);
+    //    qDebug("skin path " + skinPath);
     
     pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
     imgUp = new QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
@@ -160,7 +160,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     setLooping( mediaPlayerState->fullscreen() );
 //    setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
-
+this->setFocus();
 }
 
 
@@ -280,6 +280,7 @@ void AudioWidget::setView( char view ) {
         killTimers();
         hide();
     }
+
 }
 
 
@@ -291,7 +292,8 @@ static QString timeAsString( long length ) {
 }
 
 void AudioWidget::updateSlider( long i, long max ) {
-    time.setText( timeAsString( i ) + " / " + timeAsString( max ) );
+this->setFocus();
+ time.setText( timeAsString( i ) + " / " + timeAsString( max ) );
     
     if ( max == 0 )
   return;
@@ -358,19 +360,19 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
             bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask->width()
                                 && y < imgButtonMask->height() && imgButtonMask->pixelIndex( x, y ) == i + 1 );
 
-            if ( isOnButton && i == AudioVolumeUp ) 
-                qDebug("on up");
+//              if ( isOnButton && i == AudioVolumeUp ) 
+//                  qDebug("on up");
 
             if ( isOnButton && !audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = TRUE;
                 toggleButton(i);
                 switch (i) {
                   case AudioVolumeUp:   
-                      qDebug("more clicked");
+                     //                      qDebug("more clicked");
                       emit moreClicked(); 
                       return;
                   case AudioVolumeDown:
-                      qDebug("less clicked");
+                     //                      qDebug("less clicked");
                       emit lessClicked();
                       return;
                 case AudioForward:

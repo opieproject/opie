@@ -147,18 +147,18 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
 
 
 AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
-    qDebug("creating new audio device");
+   //    qDebug("creating new audio device");
 //     QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; 
     d = new AudioDevicePrivate;
     d->frequency = f;
     d->channels = chs;
     d->bytesPerSample = bps;
-    qDebug("%d",bps);
+    //    qDebug("%d",bps);
     int format=0;
     if( bps == 8)  format  = AFMT_U8;
     else if( bps <= 0) format = AFMT_S16_LE;
     else format = AFMT_S16_LE;
-    qDebug("AD- freq %d, channels %d, b/sample %d, bitrate %d",f,chs,bps,format);
+    //    qDebug("AD- freq %d, channels %d, b/sample %d, bitrate %d",f,chs,bps,format);
     connect( qApp, SIGNAL( volumeChanged(bool) ), this, SLOT( volumeChanged(bool) ) );
 
     int fragments = 0x10000 * 8 + sound_fragment_shift;
@@ -191,10 +191,10 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
         perror("ioctl(\"SNDCTL_DSP_SETFRAGMENT\")");
     if(ioctl( d->handle, SNDCTL_DSP_SETFMT, & format )==-1)
         perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
-    qDebug("freq %d", d->frequency);
+    //    qDebug("freq %d", d->frequency);
     if(ioctl( d->handle, SNDCTL_DSP_SPEED, &d->frequency )==-1)
         perror("ioctl(\"SNDCTL_DSP_SPEED\")");
-    qDebug("channels %d",d->channels);
+    //    qDebug("channels %d",d->channels);
     if ( ioctl( d->handle, SNDCTL_DSP_CHANNELS, &d->channels ) == -1 ) {
         d->channels = ( d->channels == 1 ) ? 2 : d->channels;
         if(ioctl( d->handle, SNDCTL_DSP_CHANNELS, &d->channels )==-1)
@@ -218,7 +218,7 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
     
 
 AudioDevice::~AudioDevice() {
-    qDebug("destryo audiodevice");
+   //    qDebug("destryo audiodevice");
 //    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE;
     
 # ifndef KEEP_DEVICE_OPEN 
@@ -242,7 +242,7 @@ void AudioDevice::write( char *buffer, unsigned int length )
     int t = ::write( d->handle, buffer, length );
     if ( t<0 ) t = 0;
     if ( t != (int)length) {
-        qDebug("Ahhh!! memcpys 1");
+       //        qDebug("Ahhh!! memcpys 1");
         memcpy(d->unwrittenBuffer,buffer+t,length-t);
         d->unwritten = length-t;
     }
@@ -305,7 +305,7 @@ unsigned int AudioDevice::canWrite() const
 int AudioDevice::bytesWritten() {
     int buffered = 0;
     if ( ioctl( d->handle, SNDCTL_DSP_GETODELAY, &buffered ) ) {
-        qDebug( "failed to get audio device position" );
+       //        qDebug( "failed to get audio device position" );
         return -1;
     }
     return buffered;

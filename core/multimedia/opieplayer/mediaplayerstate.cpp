@@ -20,6 +20,8 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/qlibrary.h>
 #include <qpe/config.h>
+#include <qvaluelist.h>
+#include <qobject.h>
 #include <qdir.h>
 #include <qpe/mediaplayerplugininterface.h>
 #include "mediaplayerstate.h"
@@ -125,7 +127,7 @@ MediaPlayerDecoder *MediaPlayerState::libMpeg3Decoder() {
 // }
 
 void MediaPlayerState::loadPlugins() {
-    qDebug("load plugins");
+   //    qDebug("load plugins");
 #ifndef QT_NO_COMPONENT
     QValueList<MediaPlayerPlugin>::Iterator mit;
     for ( mit = pluginList.begin(); mit != pluginList.end(); ++mit ) {
