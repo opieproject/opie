@@ -6,6 +6,7 @@
 
 struct mailimap;
 struct mailimap_body_type_1part;
+struct mailimap_body_type_text;
 class RecMail;
 class RecBody;
 
@@ -25,8 +26,9 @@ protected:
     RecMail*parse_list_result(mailimap_msg_att*);
     void login();
     void logout();
-    QString searchBodyText(const RecMail&mail,mailimap_body_type_1part*mailDescription);
-    QString getPlainBody(const RecMail&mail);
+    void searchBodyText(const RecMail&mail,mailimap_body_type_1part*mailDescription,RecBody&target_body);
+    void fillPlainBody(const RecMail&mail,RecBody&target_body, mailimap_body_type_text * text_body);
+    QStringList address_list_to_stringlist(clist*list);
 
 private:
     IMAPaccount *account;

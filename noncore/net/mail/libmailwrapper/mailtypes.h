@@ -29,6 +29,7 @@ class RecMail
 {
 public:
     RecMail();
+    RecMail(const RecMail&old);
     virtual ~RecMail(){}
 
     const int getNumber()const{return msg_number;}
@@ -41,22 +42,25 @@ public:
     void setSubject( const QString&s ) { subject = s; }
     const QString&getMbox()const{return mbox;}
     void setMbox(const QString&box){mbox = box;}
-    
+    void setMsgid(const QString&id){msg_id=id;}
+    const QString&Msgid()const{return msg_id;}
+
     void setTo(const QStringList&list);
     const QStringList&To()const;
     void setCC(const QStringList&list);
     const QStringList&CC()const;
     void setBcc(const QStringList&list);
     const QStringList&Bcc()const;
-
     const QBitArray&getFlags()const{return msg_flags;}
     void setFlags(const QBitArray&flags){msg_flags = flags;}
 
 protected:
-    QString subject,date,from,mbox;
+    QString subject,date,from,mbox,msg_id;
     int msg_number;
     QBitArray msg_flags;
     QStringList to,cc,bcc;
+    void init();
+    void copy_old(const RecMail&old);
 };
 
 class RecPart

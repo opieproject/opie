@@ -217,15 +217,12 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
     mailimap_msg_att_dynamic*flist;
     mailimap_flag_fetch*cflag;
     QBitArray mFlags(7);
+    QStringList addresslist;
     
     if (!m_att) {
         return m;
     }
 
-#if 0
-   MAILIMAP_FLAG_KEYWORD,   /* keyword flag */
-   MAILIMAP_FLAG_EXTENSION, /* \extension flag */
-#endif
     c = clist_begin(m_att->list);
     while ( c ) {
         current = c;
@@ -276,39 +273,32 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
             mailimap_envelope * head = item->msg_att_static->env;
             date = head->date;
             subject = head->subject;
-            if (head->from!=NULL)
-                current_from = head->from->list->first;
-            while (current_from != NULL) {
-                from = "";
-                named_from = false;
-                current_address=(mailimap_address*)current_from->data;
-                current_from = current_from->next;
-                if (current_address->personal_name){
-                    from+=QString(current_address->personal_name);
-                    from+=" ";
-                    named_from = true;
-                }
-                if (named_from && (current_address->mailbox_name || current_address->host_name)) {
-                    from+="<";
-                }
-                if (current_address->mailbox_name) {
-                    from+=QString(current_address->mailbox_name);
-                    from+="@";
-                }
-                if (current_address->host_name) {
-                    from+=QString(current_address->host_name);
-                }
-                if (named_from && (current_address->mailbox_name || current_address->host_name)) {
-                    from+=">";
+            m = new RecMail();
+            if (head->from!=NULL) {
+                addresslist = address_list_to_stringlist(head->from->list);
+                if (addresslist.count()) {
+                    from = addresslist.first();
                 }
             }
-            qDebug("header: \nFrom: %s\nSubject: %s\nDate: %s",
-                   from.latin1(),
-                   subject.latin1(),date.latin1());
-            m = new RecMail();
+            if (head->to!=NULL) {
+                addresslist = address_list_to_stringlist(head->to->list);
+                m->setTo(addresslist);
+            }
+            if (head->cc!=NULL) {
+                addresslist = address_list_to_stringlist(head->cc->list);
+                m->setCC(addresslist);
+            }
+            if (head->bcc!=NULL) {
+                addresslist = address_list_to_stringlist(head->bcc->list);
+                m->setBcc(addresslist);
+            }
             m->setSubject(subject);
             m->setFrom(from);
             m->setDate(date);
+            m->setMsgid(QString(head->message_id));
+            qDebug("header: \nFrom: %s\nSubject: %s\nDate: %s\nMsgid: %s",
+                   from.latin1(),
+                   subject.latin1(),date.latin1(),m->Msgid().latin1());
         } else if (item->msg_att_static->type==MAILIMAP_MSG_ATT_INTERNALDATE) {
             mailimap_date_time*d = item->msg_att_static->internal_date;
             QDateTime da(QDate(d->year,d->month,d->day),QTime(d->hour,d->min,d->sec));
@@ -329,64 +319,9 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
     return m;
 }
 
-#if 1
 RecBody IMAPwrapper::fetchBody(const RecMail&mail)
 {
     RecBody body;
-    QString body_text;
-
-    const char *mb;
-    int err = MAILIMAP_NO_ERROR;
-    clist *result;
-    clistcell *current;
-    mailimap_fetch_att *fetchAtt;
-    mailimap_fetch_type *fetchType;
-    mailimap_set *set;
-    
-    mb = mail.getMbox().latin1();
-    
-    login();
-    if (!m_imap) {
-        return body;
-    }
-    /* select mailbox READONLY for operations */
-    err = mailimap_examine( m_imap, (char*)mb);
-    if ( err != MAILIMAP_NO_ERROR ) {
-        qDebug("error selecting mailbox: %s",m_imap->response);
-        logout();
-        return body;
-    }
-    result = clist_new();  
-    /* the range has to start at 1!!! not with 0!!!! */
-    set = mailimap_set_new_interval( mail.getNumber(),mail.getNumber() );
-    fetchAtt = mailimap_fetch_att_new_rfc822_text();
-    fetchType = mailimap_fetch_type_new_fetch_att(fetchAtt);
-    err = mailimap_fetch( m_imap, set, fetchType, &result );
-    mailimap_set_free( set );
-    mailimap_fetch_type_free( fetchType );
-    
-    if (err == MAILIMAP_NO_ERROR && (current=clist_begin(result)) ) {
-        mailimap_msg_att * msg_att;
-        msg_att = (mailimap_msg_att*)current->data;
-        mailimap_msg_att_item*item = (mailimap_msg_att_item*)msg_att->list->first->data;
-
-        if (item->msg_att_static && item->msg_att_static->rfc822_text) {
-            body_text = item->msg_att_static->rfc822_text;
-            body.setBodytext(body_text);
-        }
-    } else {
-        qDebug("error fetching text: %s",m_imap->response);
-    }
-    
-    clist_free(result);
-    logout();
-    return body;
-}
-
-#else
-QString IMAPwrapper::fetchBody(const RecMail&mail)
-{
-    QString body = "";
     const char *mb;
     int err = MAILIMAP_NO_ERROR;
     clist *result;
@@ -424,7 +359,7 @@ QString IMAPwrapper::fetchBody(const RecMail&mail)
         mailimap_msg_att_item*item = (mailimap_msg_att_item*)msg_att->list->first->data;
         body_desc = item->msg_att_static->body;
         if (body_desc->type==MAILIMAP_BODY_1PART) {
-            body = searchBodyText(mail,body_desc->body_1part);
+            searchBodyText(mail,body_desc->body_1part,body);
         } else {
         }
     
@@ -436,28 +371,26 @@ QString IMAPwrapper::fetchBody(const RecMail&mail)
     logout(); 
     return body;
 }
-#endif
 
-QString IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_1part*mailDescription)
+void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_1part*mailDescription,RecBody&target_body)
 {
-    QString Body="";
     if (!mailDescription) {
-        return Body;
+        return;
     }
     switch (mailDescription->type) {
     case MAILIMAP_BODY_TYPE_1PART_TEXT:
-        return getPlainBody(mail);
+            fillPlainBody(mail,target_body,mailDescription->body_type_text);
         break;
     default:
         break;
     }
-    return Body;
+    return;
 }
 
-QString IMAPwrapper::getPlainBody(const RecMail&mail)
+void IMAPwrapper::fillPlainBody(const RecMail&mail,RecBody&target_body, mailimap_body_type_text * text_body)
 {
-    QString body = "";
     const char *mb;
+    QString body="";
     int err = MAILIMAP_NO_ERROR;
     clist *result;
     clistcell *current;
@@ -468,8 +401,9 @@ QString IMAPwrapper::getPlainBody(const RecMail&mail)
     mb = mail.getMbox().latin1();
     
     if (!m_imap) {
-        return body;
+        return;
     }
+
     result = clist_new();  
     /* the range has to start at 1!!! not with 0!!!! */
     set = mailimap_set_new_interval( mail.getNumber(),mail.getNumber() );
@@ -490,5 +424,45 @@ QString IMAPwrapper::getPlainBody(const RecMail&mail)
         qDebug("error fetching text: %s",m_imap->response);
     }
     clist_free(result);
-    return body;
+    target_body.setBodytext(body);
+    return;
+}
+
+QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
+{
+    QStringList l;
+    QString from;
+    bool named_from;
+    clistcell *current = NULL;
+    mailimap_address * current_address=NULL;
+    if (!list) {
+        return l;
+    }
+    current = clist_begin(list);
+    while (current!= NULL) {
+        from = "";
+        named_from = false;
+        current_address=(mailimap_address*)current->data;
+        current = current->next;
+        if (current_address->personal_name){
+            from+=QString(current_address->personal_name);
+            from+=" ";
+            named_from = true;
+        }
+        if (named_from && (current_address->mailbox_name || current_address->host_name)) {
+            from+="<";
+        }
+        if (current_address->mailbox_name) {
+            from+=QString(current_address->mailbox_name);
+            from+="@";
+        }
+        if (current_address->host_name) {
+             from+=QString(current_address->host_name);
+        }
+        if (named_from && (current_address->mailbox_name || current_address->host_name)) {
+           from+=">";
+        }
+        l.append(QString(from));
+    }
+    return l;
 }

@@ -2,8 +2,38 @@
 
 
 RecMail::RecMail()
-    :subject(""),date(""),mbox(""),msg_number(0),msg_flags(7)
+    :subject(""),date(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_flags(7)
 {
+    init();
+}
+
+RecMail::RecMail(const RecMail&old)
+    :subject(""),date(""),from(""),mbox(""),msg_id(""),msg_number(0),msg_flags(7)
+{
+    init();
+    copy_old(old);
+    qDebug("Copy constructor RecMail");
+}
+
+void RecMail::copy_old(const RecMail&old)
+{
+    subject = old.subject;
+    date = old.date;
+    mbox = old.mbox;
+    msg_id = old.msg_id;
+    msg_number = old.msg_number;
+    from = old.from;
+    msg_flags = old.msg_flags;
+    to = old.to;
+    cc = old.cc;
+    bcc = old.bcc;
+}
+
+void RecMail::init()
+{
+    to.clear();
+    cc.clear();
+    bcc.clear();
 }
 
 void RecMail::setTo(const QStringList&list)
@@ -35,7 +65,6 @@ const QStringList& RecMail::Bcc()const
 {
     return bcc;
 }
-
 
 RecPart::RecPart()
     : m_type(""),m_subtype(""),m_identifier(""),m_encoding("")
