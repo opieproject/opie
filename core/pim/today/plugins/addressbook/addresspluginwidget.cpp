@@ -30,11 +30,6 @@ AddressBookPluginWidget::AddressBookPluginWidget( QWidget *parent,  const char* 
     m_contactdb = 0l;
     layoutTodo = 0l;
 
-    // Hä ? Nonsense ! (se)
-    if ( m_contactdb ) {
-        delete m_contactdb;
-    }
-
     m_contactdb = new Opie::OPimContactAccess("addressplugin");
 
     connect( m_contactdb, SIGNAL( signalChanged(const Opie::OPimContactAccess*) ),

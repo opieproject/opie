@@ -31,14 +31,7 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     : TodayConfigWidget(parent,  name ) {
 
     QVBoxLayout * layout = new QVBoxLayout( this );
-    layout->setMargin( 20 );
-
-#if 0
-    // Informational stuff
-    QHBox *box4 = new QHBox( this );
-    QLabel* colorLabel = new QLabel( box4, "" );
-    colorLabel->setText( tr( "To activate settings: Restart application !" ) );
-#endif
+    layout->setMargin( 5 );
 
     // Buttongroup to enable/disable shown stuff
     QVGroupBox* b_group = new QVGroupBox( this, "name" );
@@ -59,16 +52,6 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     SpinBox2->setMaxValue( 40 );
     QWhatsThis::add( SpinBox2 , tr( "Set the maximum number of lines that should be shown for each anniversaries/birthdays" ) );
 
-#if 0
-    // Clip settings (currently not used)
-    QHBox *box2 = new QHBox( this );
-    QLabel* clipLabel = new QLabel( box2, "" );
-    clipLabel->setText( tr( "Clip line after X chars: " ) );
-    SpinBoxClip = new QSpinBox( box2, "SpinClip" );
-    SpinBoxClip->setMaxValue( 200 );
-    QWhatsThis::add( SpinBoxClip , tr( "After how many chars should be the info about the task be cut off" ) );
-#endif
-
     // Look ahead settings
     QHBox *box3 = new QHBox( this );
     QLabel* daysLabel = new QLabel( box3, "" );
@@ -76,11 +59,6 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     SpinDaysClip = new QSpinBox( box3, "SpinDays" );
     SpinDaysClip->setMaxValue( 200 );
     QWhatsThis::add( SpinDaysClip , tr( "How many days we should search forward" ) );
-
-//     QHBox *box4 = new QHBox( this );
-
-//     QLabel* colorLabel = new QLabel( box4, "" );
-//     colorLabel->setText( tr( "To activate settings: Restart application !" ) );
 
 
     QHBox *box5 = new QHBox( this );
@@ -109,13 +87,19 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     QWhatsThis::add( SpinUrgentClip , tr( "The urgent color will be used if the birthday/anniversary is closer than given days !" ) );
 
 
-    //layout->addWidget( box4 );
+    layout->addWidget( b_group );
     layout->addWidget( box1 );
-    //layout->addWidget( box2 );
     layout->addWidget( box3 );
     layout->addWidget( box5 );
     layout->addWidget( box6 );
     layout->addWidget( box7 );
+    
+    /*
+     * pack the widgets together
+     */
+    QSpacerItem *item = new QSpacerItem( 1, 2, QSizePolicy::Minimum,
+    					  QSizePolicy::MinimumExpanding );
+    layout->addItem( item );
 
     readConfig();
 

@@ -28,7 +28,6 @@
 
 
 class AddressBookPluginWidget : public QWidget {
-
     Q_OBJECT
 
 public:
