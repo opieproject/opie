@@ -288,16 +288,16 @@ void VideoWidget::paintEvent( QPaintEvent * ) {
 
     if ( mediaPlayerState->fullscreen() ) {
         // Clear the background
-        p.setBrush( QBrush( Qt::black ) );
-        p.drawRect( rect() );
+//        p.setBrush( QBrush( Qt::black ) );
+        //p.drawRect( rect() );
 
     } else {
         // draw border
         qDrawShadePanel( &p, 4, 15, 230, 170, colorGroup(), TRUE, 5, NULL );
 
         // Clear the movie screen first
-        p.setBrush( QBrush( Qt::black ) );
-        p.drawRect( 9, 20, 220, 160 );
+//        p.setBrush( QBrush( Qt::black ) );
+//        p.drawRect( 9, 20, 220, 160 );
 
         // draw current frame (centrally positioned from scaling to maintain aspect ratio)
         //p.drawImage( 9 + (220 - scaledWidth) / 2, 20 + (160 - scaledHeight) / 2, *currentFrame, 0, 0, scaledWidth, scaledHeight );
@@ -309,6 +309,7 @@ void VideoWidget::paintEvent( QPaintEvent * ) {
 
         // draw the slider
         slider->repaint( TRUE );
+//	videoFrame->repaint( TRUE );
     }
 }
 
@@ -381,4 +382,7 @@ void VideoWidget::keyReleaseEvent( QKeyEvent *e)
           break;
 
     };
+}
+XineVideoWidget* VideoWidget::vidWidget() {
+    return videoFrame;
 }

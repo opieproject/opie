@@ -57,7 +57,7 @@ public:
     ~VideoWidget();
 
     bool playVideo();
-
+    XineVideoWidget* vidWidget();
 public slots:
     void updateSlider( long, long );
     void sliderPressed( );

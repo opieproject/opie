@@ -35,13 +35,13 @@
 #include <qtimer.h>
 #include "xinecontrol.h"
 #include "mediaplayerstate.h"
-
+#include "videowidget.h"
 
 extern MediaPlayerState *mediaPlayerState;
-
+extern VideoWidget *videoUI;
 XineControl::XineControl( QObject *parent, const char *name )
     : QObject( parent, name ) {
-    libXine = new XINE::Lib();
+    libXine = new XINE::Lib(videoUI->vidWidget() );
 
     connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( pause(bool) ) );
     connect( this, SIGNAL( positionChanged( int position ) ),  mediaPlayerState, SLOT( updatePosition( long p ) ) );
