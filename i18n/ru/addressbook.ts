@@ -370,7 +370,7 @@ Opie-Mail - свободная программа!</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>File As</translation>
+        <translation>Показать как</translation>
     </message>
     <message>
         <source>Category</source>
@@ -1318,7 +1318,7 @@ Opie-Mail - свободная программа!</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
-        <translation type="unfinished">Введите полное имя напрямую ! Если у вас фамилия из нескольких слов (например &quot;de la Guerra&quot;), пожалуйста введите &lt;lastname&gt;,&lt;firstnames&gt; таким образом:&quot;de la Guerra, Carlos Pedro&quot; </translation>
+        <translation>Введите полное имя ! Если у вас фамилия из нескольких слов (например &quot;de la Guerra&quot;), пожалуйста введите &lt;lastname&gt;,&lt;firstnames&gt; таким образом:&quot;de la Guerra, Carlos Pedro&quot; </translation>
     </message>
     <message>
         <source>The jobtitle..</source>
