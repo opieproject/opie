@@ -87,20 +87,21 @@
     </message>
     <message>
         <source>Remaining Power: %1%</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbývající energie: %1%</translation>
     </message>
     <message>
         <source>Remaining Time: %1m %2s</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbývající čas: %1m %2s</translation>
     </message>
     <message>
         <source>Remaing Power: %1 %2
 Remaining Time: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbývající energie: %1 %2
+Zbývající čas: %3</translation>
     </message>
     <message>
         <source>Ipaq  %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ipaq  %1</translation>
     </message>
 </context>
 </TS>

@@ -3,11 +3,11 @@
     <name>QObject</name>
     <message>
         <source>VPN PPTP</source>
-        <translation type="unfinished"></translation>
+        <translation>VPN PPTP</translation>
     </message>
     <message>
         <source>Add new Point to Point Tunnel Protocol connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat nové připojení typu PPTP</translation>
     </message>
 </context>
 </TS>
