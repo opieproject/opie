@@ -32,8 +32,7 @@
 #include <qstring.h>
 #include <qwidget.h>
 
-#include <unistd.h>
-
+class OProcess;
 class QLabel;
 class QTimer;
 
@@ -56,7 +55,7 @@ class WeatherPluginWidget : public QWidget {
 
 		QLabel *weatherLabel;
 		QLabel *weatherIcon;
-		
+
 		void timerEvent( QTimerEvent * );
 		void retreiveData();
 		void displayWeather();
@@ -64,6 +63,9 @@ class WeatherPluginWidget : public QWidget {
 		void getWind( const QString & );
 		void getPressure( const QString & );
 		void getIcon( const QString & );
+
+	private slots:
+		void dataRetrieved( OProcess * );
 };
 
 #endif

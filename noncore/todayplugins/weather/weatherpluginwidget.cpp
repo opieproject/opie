@@ -25,7 +25,6 @@
                              Boston, MA 02111-1307, USA.
 
 */
-#include <stdio.h>
 
 #include <qfile.h>
 #include <qimage.h>
@@ -33,6 +32,8 @@
 #include <qlayout.h>
 #include <qpixmap.h>
 #include <qtextstream.h>
+
+#include <opie/oprocess.h>
 
 #include <qpe/config.h>
 #include <qpe/resource.h>
@@ -42,21 +43,6 @@
 WeatherPluginWidget::WeatherPluginWidget( QWidget *parent,  const char* name )
 	: QWidget( parent,  name )
 {
-	Config config( "todayweatherplugin");
-	config.setGroup( "Config" );
-
-	location = config.readEntry( "Location", "" );
-	useMetric = config.readBoolEntry( "Metric", TRUE );
-	frequency = config.readNumEntry( "Frequency", 5 );
-
-	localFile = "/tmp/";
-	localFile.append( location );
-	localFile.append( ".TXT" );
-
-	remoteFile = "http://weather.noaa.gov/pub/data/observations/metar/stations/";
-	remoteFile.append( location );
-	remoteFile.append( ".TXT" );
-
 	QHBoxLayout *layout = new QHBoxLayout( this );
 	layout->setAutoAdd( TRUE );
 	layout->setSpacing( 2 );
@@ -72,7 +58,6 @@ WeatherPluginWidget::WeatherPluginWidget( QWidget *parent,  const char* name )
 	weatherLabel->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Preferred ) );
 
 	startTimer(1000);
-	//retreiveData();
 }
 
 WeatherPluginWidget::~WeatherPluginWidget()
@@ -96,26 +81,32 @@ void WeatherPluginWidget::retreiveData()
 {
 	startTimer( frequency * 60000 );
 
+	Config config( "todayweatherplugin");
+	config.setGroup( "Config" );
+
+	location = config.readEntry( "Location", "" );
+	useMetric = config.readBoolEntry( "Metric", TRUE );
+	frequency = config.readNumEntry( "Frequency", 5 );
+
+	localFile = "/tmp/";
+	localFile.append( location );
+	localFile.append( ".TXT" );
+
+	remoteFile = "http://weather.noaa.gov/pub/data/observations/metar/stations/";
+	remoteFile.append( location );
+	remoteFile.append( ".TXT" );
+
 	QFile file( localFile );
 	if ( file.exists() )
 	{
 		file.remove();
 	}
 
-	QString command = "wget -q ";
-	command.append( remoteFile );
-	command.append( " -O " );
-	command.append( localFile );
-	FILE *get = popen( command.latin1(), "r" );
-	if ( get )
-	{
-		pclose( get );
-		displayWeather();
-	}
-	else
-	{
-		weatherLabel->setText( tr( "Current weather data not available.\nTry looking out the window." ) );
-	}
+	OProcess *proc = new OProcess;
+
+	*proc << "wget" << "-q" << remoteFile << "-O" << localFile;
+	connect( proc, SIGNAL( processExited( OProcess * ) ), this, SLOT( dataRetrieved( OProcess * ) ) );
+	proc->start();
 }
 
 void WeatherPluginWidget::displayWeather()
@@ -317,5 +308,17 @@ void WeatherPluginWidget::getIcon(const QString &data )
 			  data.find( "IC ", 20 ) > -1 )
 	{
 		dataStr = "sleet";
+	}
+}
+
+void WeatherPluginWidget::dataRetrieved( OProcess *process )
+{
+	if ( process->normalExit() )
+	{
+		displayWeather();
+	}
+	else
+	{
+		weatherLabel->setText( tr( "Current weather data not available.\nTry looking out the window." ) );
 	}
 }
