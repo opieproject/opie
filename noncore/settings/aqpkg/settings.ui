@@ -17,7 +17,7 @@
     </property>
     <property stdset="1">
         <name>caption</name>
-        <string>Package Servers</string>
+        <string>Configuration</string>
     </property>
     <property>
         <name>layoutMargin</name>
@@ -505,7 +505,7 @@
                 </property>
                 <attribute>
                     <name>title</name>
-                    <string>Proxys</string>
+                    <string>Proxies</string>
                 </attribute>
                 <widget>
                     <class>QLabel</class>
