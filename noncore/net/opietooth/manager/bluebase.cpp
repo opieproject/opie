@@ -18,6 +18,11 @@
 #include "bluebase.h"
 #include "scandialog.h"
 #include "hciconfwrapper.h"
+#include "devicehandler.h"
+#include "btconnectionitem.h"
+
+#include <remotedevice.h>
+#include <services.h>
 
 #include <stdlib.h>
 
@@ -26,7 +31,6 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qvariant.h>
-#include <qwhatsthis.h>
 #include <qimage.h>
 #include <qpixmap.h>
 #include <qtabwidget.h>
@@ -40,14 +44,10 @@
 #include <qpopupmenu.h>
 #include <qtimer.h>
 
+#include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
-#include <remotedevice.h>
-#include <services.h>
-
-#include "devicehandler.h"
-#include "btconnectionitem.h"
 
 using namespace OpieTooth;
 
@@ -71,6 +71,11 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
              this, SLOT( deviceActive( const QString& , bool ) ) );
     connect( m_localDevice, SIGNAL( connections( ConnectionState::ValueList ) ),
              this, SLOT( addConnectedDevices( ConnectionState::ValueList ) ) );
+
+
+    // let hold be rightButtonClicked()
+    QPEApplication::setStylusOperation( ListView2->viewport(), QPEApplication::RightOnHold);
+    QPEApplication::setStylusOperation( ListView4->viewport(), QPEApplication::RightOnHold);
 
     //Load all icons needed
     m_offPix = Resource::loadPixmap( "editdelete" );
@@ -162,7 +167,6 @@ void BlueBase::writeToHciConfig() {
 
 /**
  * Read the list of allready known devices
- *
  */
 void BlueBase::readSavedDevices() {
 
@@ -176,7 +180,6 @@ void BlueBase::readSavedDevices() {
 
 /**
  * Write the list of allready known devices
- *
  */
 void BlueBase::writeSavedDevices() {
     QListViewItemIterator it( ListView2 );
