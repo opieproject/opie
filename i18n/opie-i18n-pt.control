@@ -1,4 +1,4 @@
-Files: i18n/pt/.directory i18n/pt/*.qm etc/dict/dawg.pt
+Files: i18n/pt/.directory i18n/pt/*.qm
 Priority: optional
 Section: opie/i18n
 Maintainer: Carsten Niehaus <cniehaus@handhelds.org>

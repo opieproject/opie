@@ -1,4 +1,4 @@
-Files: i18n/sl/.directory i18n/sl/*.qm etc/dict/dawg.sl
+Files: i18n/sl/.directory i18n/sl/*.qm
 Priority: optional
 Section: opie/i18n
 Maintainer: Matej Dakol <matej.dakol@gvskupina.si>
