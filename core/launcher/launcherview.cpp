@@ -129,9 +129,8 @@ public:
     {
   Config config("qpe");
   config.setGroup("Appearance");
-  QString backgroundImage = config.readEntry("BackgroundImage");
-
-  if (backgroundImage.isNull()) backgroundImage="launcher/opie-background";
+  QString backgroundImage = config.readEntry("BackgroundImage","launcher/opie-background");
+    //  if (backgroundImage.isNull()) backgroundImage="launcher/opie-background";
   int backgroundMode = QPixmap::defaultDepth() >= 12 ? 1 : 0;
   //int backgroundMode = 2;
 
