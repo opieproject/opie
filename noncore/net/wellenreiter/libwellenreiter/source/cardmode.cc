@@ -1,7 +1,7 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.2 2002-11-27 22:54:39 mjm Exp $
+ * $Id: cardmode.cc,v 1.3 2002-11-27 22:58:36 mjm Exp $
  */
 
 #include "cardmode.hh"
@@ -96,7 +96,7 @@ int card_set_promisc_up (const char *device)
   snprintf(ifconfigcmd, sizeof(ifconfigcmd), SBIN_PATH, device);
   retval = system(ifconfigcmd);
 
-  if(retval < 0 || retval == 0)
+  if(retval < 0 || retval == 1)
     return 0;
   
 return 1;
