@@ -1,4 +1,4 @@
-  config MINESWEEP
+2  config MINESWEEP
     boolean "opie-minesweep (find the mines)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

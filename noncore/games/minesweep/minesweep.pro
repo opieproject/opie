@@ -6,8 +6,8 @@ SOURCES		= main.cpp \
 		  minesweep.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
-INTERFACES	= 
+LIBS            += -lqpe -lopiecore2
+INTERFACES	=
 TARGET		= minesweep
 
 include ( $(OPIEDIR)/include.pro )
