@@ -10,9 +10,7 @@
 #include "dataTable.h"
 #include <qdialog.h>
 
-class QTable;
 class QComboBox;
-class QLabel;
 
 class dataWidgetUI : public QDialog
 {
@@ -20,12 +18,11 @@ class dataWidgetUI : public QDialog
 	
     public:
 		dataWidgetUI();
+        OxydataWidget *oxyDW;
 
     private:
-        void createTableLayout();
         OxydataTable *DataTable;
         QComboBox *dataCombo;
-        QLabel *left, *middle, *right;
 
     private slots:
         void slotShowData(int);

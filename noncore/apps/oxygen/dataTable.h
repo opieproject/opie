@@ -11,7 +11,36 @@
 #ifndef _DATATABLE_H
 #define _DATATABLE_H
 
+#include <qwidget.h>
 #include <qtable.h>
+
+class QLabel;
+class OxydataTable;
+
+class OxydataWidget : public QWidget
+{
+    Q_OBJECT
+
+    public:
+        OxydataWidget(QWidget *parent=0);
+
+        QLabel *left, *middle, *right;
+
+    private:
+        OxydataTable *DataTable;
+        void setTable();
+        
+    public slots:
+        void setElement( int );
+};
+
+/*
+ * A OxydataTable is derived from QTable. I recoded the paintCell to have 
+ * different colors in the backgound. Furthermore this widget never has a
+ * grid, thus I removed that code in paintCell.
+ *
+ * Author: Carsten Niehaus <cniehaus@handhelds.org>
+ */
 
 class OxydataTable : public QTable
 {
@@ -26,7 +55,7 @@ class OxydataTable : public QTable
          * This method is reimplemented form QTable. It implements the colourisation
          * of every second row.
          */
-        virtual void paintCell(  QPainter *p, int row, int col, const QRect &cr, bool selected );
+        virtual void paintCell( QPainter *p, int row, int col, const QRect &cr, bool selected );
 };
 
 #endif
