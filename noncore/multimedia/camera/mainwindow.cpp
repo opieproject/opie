@@ -25,9 +25,11 @@
 #include <qcombobox.h>
 #include <qcursor.h>
 #include <qdatastream.h>
+#include <qdir.h>
 #include <qfile.h>
 #include <qimage.h>
 #include <qlabel.h>
+#include <qlineedit.h>
 #include <qpopupmenu.h>
 #include <qprogressbar.h>
 #include <qpushbutton.h>
@@ -53,11 +55,14 @@ using namespace Opie;
 #define CAPTUREFILE "/tmp/capture.dat"
 #define OUTPUTFILE  "/tmp/output.avi"
 
+#define OUTPUT_TO_CUSTOM 250
+#define OUTPUT_TO_DOCFOLDER 251
+
 CameraMainWindow::CameraMainWindow( QWidget * parent, const char * name, WFlags f )
            :QMainWindow( parent, name, f ),
            _rotation( 270 ), // FIXME: get this from current settings (ODevice?)
            _capturing( false ),
-           _pics( 0 ), _videos( 0 )
+           _pics( 1 ), _videos( 1 )
 {
     #ifdef QT_NO_DEBUG
     if ( !ZCameraIO::instance()->isOpen() )
@@ -113,6 +118,9 @@ void CameraMainWindow::init()
     captureX = 480;
     captureY = 640;
     captureFormat = "JPEG";
+    outputTo = "Documents Folder";
+    prefix = "Untitled";
+    appendSettings = true;
 
     resog = new QActionGroup( 0, "reso", true );
     resog->setToggleAction( true );
@@ -129,11 +137,11 @@ void CameraMainWindow::init()
 
     qualityg = new QActionGroup( 0, "quality", true );
     qualityg->setToggleAction( true );
-    new QAction( "  0 (minimal)", 0, 0, qualityg, 0, true );
-    new QAction( " 25 (low)", 0, 0, qualityg, 0, true );
-    ( new QAction( " 50 (good)", 0, 0, qualityg, 0, true ) )->setOn( true );
-    new QAction( " 75 (better)", 0, 0, qualityg, 0, true );
-    new QAction( "100 (best)", 0, 0, qualityg, 0, true );
+    new QAction( "  0 (&minimal)", 0, 0, qualityg, 0, true );
+    new QAction( " 25 (&low)", 0, 0, qualityg, 0, true );
+    ( new QAction( " 50 (&good)", 0, 0, qualityg, 0, true ) )->setOn( true );
+    new QAction( " 75 (&better)", 0, 0, qualityg, 0, true );
+    new QAction( "100 (bes&t)", 0, 0, qualityg, 0, true );
 
     zoomg = new QActionGroup( 0, "zoom", true );
     zoomg->setToggleAction( true );
@@ -148,6 +156,15 @@ void CameraMainWindow::init()
     new QAction( "Y (always vertical)", 0, 0, flipg, 0, true );
     new QAction( "* (always both)", 0, 0, flipg, 0, true );
 
+    outputTog = new QActionGroup( 0, "output", true );
+    outputTog->setToggleAction( true );
+    new QAction( "/tmp", 0, 0, outputTog, 0, true );
+    new QAction( "/mnt/card/", 0, 0, outputTog, 0, true );
+    new QAction( "/mnt/sd/", 0, 0, outputTog, 0, true );
+    docfolder = new QAction( "Documents Folder", 0, 0, outputTog, 0, true );
+    docfolder->setOn( true );
+    custom = new QAction( "&Custom...", 0, 0, outputTog, 0, true );
+
     outputg = new QActionGroup( 0, "output", true );
     outputg->setToggleAction( true );
     ( new QAction( "JPEG", 0, 0, outputg, 0, true ) )->setOn( true );
@@ -159,6 +176,7 @@ void CameraMainWindow::init()
     connect( qualityg, SIGNAL( selected(QAction*) ), this, SLOT( qualityMenuItemClicked(QAction*) ) );
     connect( zoomg, SIGNAL( selected(QAction*) ), this, SLOT( zoomMenuItemClicked(QAction*) ) );
     connect( flipg, SIGNAL( selected(QAction*) ), this, SLOT( flipMenuItemClicked(QAction*) ) );
+    connect( outputTog, SIGNAL( selected(QAction*) ), this, SLOT( outputToMenuItemClicked(QAction*) ) );
     connect( outputg, SIGNAL( selected(QAction*) ), this, SLOT( outputMenuItemClicked(QAction*) ) );
 
 }
@@ -231,6 +249,15 @@ void CameraMainWindow::showContextMenu()
     zoom.setCheckable( true );
     zoomg->addTo( &zoom );
 
+    QPopupMenu prefix;
+    prefix.insertItem( "&Choose...", this, SLOT( prefixItemChoosen() ) );
+    int id = prefix.insertItem( "&Append Settings", this, SLOT( appendSettingsChoosen() ) );
+    prefix.setItemChecked( id, appendSettings );
+
+    QPopupMenu outputTo;
+    outputTo.setCheckable( true );
+    outputTog->addTo( &outputTo );
+
     QPopupMenu output;
     output.setCheckable( true );
     outputg->addTo( &output );
@@ -240,6 +267,9 @@ void CameraMainWindow::showContextMenu()
     m.insertItem( "&Zoom", &zoom );
     m.insertItem( "&Flip", &flip );
     m.insertItem( "&Quality", &quality );
+    m.insertSeparator();
+    m.insertItem( "&Prefix", &prefix );
+    m.insertItem( "Output &To", &outputTo );
     m.insertItem( "&Output As", &output );
 
     #ifndef QT_NO_DEBUG
@@ -307,11 +337,64 @@ void CameraMainWindow::flipMenuItemClicked( QAction* a )
 }
 
 
+void CameraMainWindow::outputToMenuItemClicked( QAction* a )
+{
+    if ( a->text() == "&Custom..." )
+    {
+        QMap<QString, QStringList> map;
+        map.insert( tr("All"), QStringList() );
+        QStringList text;
+        text << "text/*";
+        map.insert(tr("Text"), text );
+        text << "*";
+        map.insert(tr("All"), text );
+
+        QString str;
+        str = OFileDialog::getSaveFileName( 2, "/", QString::null, map );
+        if ( str.isEmpty() || !QFileInfo(str).isDir() )
+        {
+            docfolder->setOn( true );
+            outputTo = "Documents Folder";
+        }
+        else
+        {
+            outputTo = str;
+        }
+    }
+    else
+    {
+        outputTo = a->text();
+    }
+    odebug << "Output to now: " << outputTo << oendl;
+}
+
+
 void CameraMainWindow::outputMenuItemClicked( QAction* a )
 {
     captureFormat = a->text();
     odebug << "Output format now: " << captureFormat << oendl;
     updateCaption();
+}
+
+
+void CameraMainWindow::prefixItemChoosen()
+{
+    QDialog* d = new QDialog( this, "dialog", true );
+    d->setCaption( "Enter Prefix..." );
+    QVBoxLayout* v = new QVBoxLayout( d );
+    QLineEdit* le = new QLineEdit( prefix, d );
+    v->addWidget( le );
+    le->setFixedWidth( 150 ); //FIXME: 'tis a bit dirty
+    if ( d->exec() == QDialog::Accepted )
+        prefix = le->text();
+    odebug << "Prefix now: " << prefix << oendl;
+}
+
+
+void CameraMainWindow::appendSettingsChoosen()
+{
+    appendSettings = !appendSettings;
+    odebug << "appendSettings now: " << appendSettings << oendl;
 }
 
 
@@ -337,7 +420,19 @@ void CameraMainWindow::shutterClicked()
 void CameraMainWindow::performCapture( const QString& format )
 {
     QString name;
-    name.sprintf( "/tmp/image-%d_%d_%d_q%d.%s", _pics++, captureX, captureY, quality, (const char*) captureFormat.lower() );
+
+    if ( outputTo == "Documents Folder" )
+        name.sprintf( "%s/Documents/image/%s/", (const char*) QDir::homeDirPath(), (const char*) captureFormat.lower() );
+    else
+        name = outputTo;
+
+    name.append( prefix );
+    if ( appendSettings )
+    {
+        name.append( QString().sprintf( "_%d_%d_q%d", captureX, captureY, quality ) );
+    }
+    name.append( QString().sprintf( "-%d.%s", _pics++, (const char*) captureFormat.lower() ) );
+
     QImage i;
     ZCameraIO::instance()->captureFrame( captureX, captureY, zoom, &i );
     QImage im = i.convertDepth( 32 );
@@ -406,7 +501,12 @@ void CameraMainWindow::stopVideoCapture()
     ::close( _capturefd );
     _framerate = 1000.0 / (_time.elapsed()/_videopics);
 
-    postProcessVideo( CAPTUREFILE, QString().sprintf( "/tmp/video-%d_%d_%d_q%d-%dfps.avi", _videos++, captureX, captureY, quality, _framerate ) );
+    QString name( outputTo );
+    name.append( "/prefix" );
+    if ( appendSettings )
+        name.append( QString().sprintf( "_%d_%d_q%d_%dfps", captureX, captureY, quality, _framerate ) );
+    name.append( QString().sprintf( "-%d.%s", _videos++, (const char*) captureFormat.lower() ) );
+    postProcessVideo( CAPTUREFILE, name );
 
     #ifndef QT_NO_DEBUG
     preview->setRefreshingRate( 1500 );
@@ -520,9 +620,14 @@ void CameraMainWindow::postProcessVideo( const QString& infile, const QString& o
         avi_add( outfd, tempbuffer, filesize );
         delete tempbuffer;
         framefile.close();
+
+        odebug << "deleting temporary capturefile " << infile << oendl;
+        ::close( infd );
+        QFile::remove( infile );
     }
 
     avi_end( outfd, captureX, captureY, _framerate );
+    ::close( outfd );
 
     fr->hide();
     delete fr;
@@ -550,6 +655,10 @@ void CameraMainWindow::doSomething()
     _framerate = 5;
     postProcessVideo( "/var/compile/opie/noncore/multimedia/camera/capture.dat",
     "/tmp/output.avi" );
+}
+#else
+void CameraMainWindow::doSomething()
+{
 }
 #endif
 

@@ -48,7 +48,10 @@ class CameraMainWindow: public QMainWindow
     void qualityMenuItemClicked( QAction* );
     void zoomMenuItemClicked( QAction* );
     void flipMenuItemClicked( QAction* );
+    void outputToMenuItemClicked( QAction* );
     void outputMenuItemClicked( QAction* );
+    void prefixItemChoosen();
+    void appendSettingsChoosen();
     void shutterClicked();
 
     void updateCaption();
@@ -63,9 +66,7 @@ class CameraMainWindow: public QMainWindow
     virtual void timerEvent( QTimerEvent* );
 
   protected slots:
-    #ifndef QT_NO_DEBUG
-    //void doSomething();     // solely for debugging purposes
-    #endif
+    void doSomething();     // solely for debugging purposes
 
   private:
     PreviewWidget* preview;
@@ -76,6 +77,9 @@ class CameraMainWindow: public QMainWindow
     QActionGroup* qualityg;
     QActionGroup* zoomg;
     QActionGroup* flipg;
+    QActionGroup* outputTog;
+    QAction* custom;
+    QAction* docfolder;
     QActionGroup* outputg;
 
     QString flip;
@@ -84,6 +88,10 @@ class CameraMainWindow: public QMainWindow
     int captureX;
     int captureY;
     QString captureFormat;
+
+    QString outputTo;
+    QString prefix;
+    bool appendSettings;
 
     bool _capturing;
     int _pics;
