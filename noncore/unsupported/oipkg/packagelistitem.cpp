@@ -112,7 +112,6 @@ QPixmap PackageListItem::statePixmap() const
 {
   bool installed = package->installed();
   bool old = package->isOld();
-  bool versions = package->hasVersions();
   bool verinstalled = package->otherInstalled();
   if ( !package->toProcess() ) {
     if ( !installed )

@@ -30,7 +30,7 @@ public slots:
   void readInstallationSettings();
   void writeCurrentInstallationSetting();
   void readInstallationSetting(int);
-  void installationSettingSetName(const QString &);
+//  void installationSettingSetName(const QString &);
 	void removeLinksToDest();
 	void createLinksToDest();
   void newServer();
@@ -44,10 +44,10 @@ public slots:
   void serverUrlChanged(const QString&);
   void destNameChanged(const QString&);
   void destUrlChanged(const QString&);
-  void installationSettingChange(int);
-  void newInstallationSetting();
-  void removeInstallationSetting();
-  void renameInstallationSetting();
+//  void installationSettingChange(int);
+//  void newInstallationSetting();
+//  void removeInstallationSetting();
+//  void renameInstallationSetting();
   void activeServerChanged();
   void activeDestinationChange(int);
 signals:

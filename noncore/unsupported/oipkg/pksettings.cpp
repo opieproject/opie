@@ -45,11 +45,11 @@ PackageManagerSettings::PackageManagerSettings( QWidget* parent,  const char* na
   //   connect( CheckBoxLink, SIGNAL(toggled(bool)),
   //    				 activeLinkDestination, SLOT(setEnabled(bool)) );
 
-  connect( settingName, SIGNAL(activated(int)), this, SLOT(installationSettingChange(int)) );
-  connect( settingName, SIGNAL(textChanged(const QString &)), this, SLOT(installationSettingSetName(const QString &)) );
-  connect( newsetting, SIGNAL(clicked()), this, SLOT(newInstallationSetting()) );
-  connect( renamesetting, SIGNAL(clicked()), this, SLOT(renameInstallationSetting()) );
-  connect( removesetting, SIGNAL(clicked()), this, SLOT(removeInstallationSetting()) );
+//  connect( settingName, SIGNAL(activated(int)), this, SLOT(installationSettingChange(int)) );
+//  connect( settingName, SIGNAL(textChanged(const QString &)), this, SLOT(installationSettingSetName(const QString &)) );
+//  connect( newsetting, SIGNAL(clicked()), this, SLOT(newInstallationSetting()) );
+//  connect( renamesetting, SIGNAL(clicked()), this, SLOT(renameInstallationSetting()) );
+ // connect( removesetting, SIGNAL(clicked()), this, SLOT(removeInstallationSetting()) );
   servername->setEnabled(FALSE);
   serverurl->setEnabled(FALSE);
   serverurlDic.setAutoDelete(TRUE);
@@ -62,10 +62,10 @@ PackageManagerSettings::PackageManagerSettings( QWidget* parent,  const char* na
 
   // get rid of setups
 //  Settings->hide();
-  settingName->hide();
-  newsetting->hide();
-  renamesetting->hide();
-  removesetting->hide();
+//  settingName->hide();
+//  newsetting->hide();
+//  renamesetting->hide();
+//  removesetting->hide();
 }
 
 PackageManagerSettings::~PackageManagerSettings()
@@ -252,49 +252,49 @@ void PackageManagerSettings::readInstallationSettings()
   installationSettingsCount = cfg.readNumEntry( "count", -1 );
   currentSetting  = cfg.readNumEntry( "current", 0 );// o should be -1
 
-  for (int i = 0; i < installationSettingsCount; i++)
-    {
-      cfg.setGroup( "Setting_" + QString::number(i) );
-      settingName->insertItem( cfg.readEntry( "name", "???" ), i );
-    };
+//  for (int i = 0; i < installationSettingsCount; i++)
+//    {
+//      cfg.setGroup( "Setting_" + QString::number(i) );
+//      settingName->insertItem( cfg.readEntry( "name", "???" ), i );
+//    };
   readInstallationSetting( currentSetting );
 }
 
 
 
-/**
- *  remove from conf file
- */
-void PackageManagerSettings::removeInstallationSetting()
-{
-  settingName->removeItem( settingName->currentItem() );
-  Config cfg( "oipkg", Config::User );
-  cfg.setGroup( "Setting_" + QString::number( installationSettingsCount ) );
-  cfg.clearGroup();
-  installationSettingsCount--;
-  changed = true;
-  settingName->setEditable( false );
-}
+///**
+// *  remove from conf file
+// */
+//void PackageManagerSettings::removeInstallationSetting()
+//{
+//  settingName->removeItem( settingName->currentItem() );
+//  Config cfg( "oipkg", Config::User );
+//  cfg.setGroup( "Setting_" + QString::number( installationSettingsCount ) );
+//  cfg.clearGroup();
+//  installationSettingsCount--;
+//  changed = true;
+//  settingName->setEditable( false );
+//}
 
-/**
- *  write to confgile
- */
-void PackageManagerSettings::newInstallationSetting()
-{
-  installationSettingsCount++;
-  settingName->insertItem( "New", installationSettingsCount );
-  settingName->setCurrentItem( installationSettingsCount );
-  settingName->setEditable( true );
-  changed = true;
-}
+///**
+// *  write to confgile
+// */
+//void PackageManagerSettings::newInstallationSetting()
+//{
+//  installationSettingsCount++;
+//  settingName->insertItem( "New", installationSettingsCount );
+//  settingName->setCurrentItem( installationSettingsCount );
+//  settingName->setEditable( true );
+//  changed = true;
+//}
 
-void PackageManagerSettings::installationSettingChange(int cs)
-{
-  writeCurrentInstallationSetting();
-  currentSetting = cs;
-  readInstallationSetting( cs );
-  changed = true;
-}
+//void PackageManagerSettings::installationSettingChange(int cs)
+//{
+//  writeCurrentInstallationSetting();
+//  currentSetting = cs;
+//  readInstallationSetting( cs );
+//  changed = true;
+//}
 
 void PackageManagerSettings::writeInstallationSettings()
 {
@@ -342,17 +342,17 @@ void PackageManagerSettings::writeCurrentInstallationSetting()
   cfg.writeEntry( "server_count", srvc );
 }
 
-void PackageManagerSettings::renameInstallationSetting()
-{
-  settingName->setEditable( true );
-  changed = true;
-}
+//void PackageManagerSettings::renameInstallationSetting()
+//{
+//  settingName->setEditable( true );
+//  changed = true;
+//}
 
-void PackageManagerSettings::installationSettingSetName(const QString &name)
-{
-  settingName->changeItem( name,  settingName->currentItem() );
-  changed = true;
-}
+//void PackageManagerSettings::installationSettingSetName(const QString &name)
+//{
+//  settingName->changeItem( name,  settingName->currentItem() );
+//  changed = true;
+//}
 
 
 bool PackageManagerSettings::readIpkgConfig(const QString& conffile)

@@ -96,7 +96,7 @@ void MainWindow::makeMenu()
   menuBar->insertItem( tr( "Settings" ), cfgMenu );
   menuBar->insertItem( tr( "Help" ), helpMenu );
 
-  QLabel *spacer;
+//  QLabel *spacer;
 //  spacer = new QLabel( "", toolBar );
 //  spacer->setBackgroundColor( toolBar->backgroundColor() );
 //  toolBar->setStretchableWidget( spacer );
@@ -224,8 +224,7 @@ void MainWindow::makeMenu()
   setComboName(destination,settings->getDestinationName());
   connect( destination, SIGNAL(activated(int)),
   			 settings, SLOT(activeDestinationChange(int)) );
-//  spacer = new QLabel( " ", destBar );
-//  spacer->setBackgroundMode( PaletteForeground );
+//  space->setBackgroundMode( PaletteForeground );
   CheckBoxLink = new QCheckBox( tr("Link"), destBar);
 //  CheckBoxLink->setBackgroundMode( PaletteForeground );
   CheckBoxLink->setChecked( settings->createLinks() );
