@@ -406,6 +406,23 @@ void Today::reinitialize()  {
 
     }
 
+    cfg.setGroup( "General" );
+    m_iconSize = cfg.readNumEntry( "IconSize", 18 );
+    m_hideBanner = cfg.readNumEntry( "HideBanner", 0 );
+    setRefreshTimer( cfg.readNumEntry( "checkinterval", 15000 ) );
+
+    // set the date in top label
+    QDate date = QDate::currentDate();
+    DateLabel->setText( QString( "<font color=#FFFFFF>" +  TimeString::longDateString( date )  + "</font>" ) );
+
+    if ( m_hideBanner )  {
+        Opiezilla->hide();
+        TodayLabel->hide();
+    } else {
+        Opiezilla->show();
+        TodayLabel->show();
+    }
+
     delete m_bblayout;
     m_bblayout = new QVBoxLayout( m_big_box );
     TodayPlugin tempPlugin;
