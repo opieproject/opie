@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applets
 Maintainer: Rajko Albrecht <alwin@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal, keyz-cfg
+Depends: task-opie-minimal
 Description: ZKB Applet and configuration program
 Obsoletes: keyz-cfg
 Version: 0.6.0$EXTRAVERSION
