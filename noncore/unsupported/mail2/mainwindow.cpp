@@ -1,5 +1,6 @@
 #include <qprogressbar.h>
 #include <qmessagebox.h>
+#include <qtoolbutton.h>
 #include <qaction.h>
 #include <qlabel.h>
 
@@ -15,7 +16,7 @@
 MainWindow::MainWindow(QWidget *parent, const char *name, WFlags fl)
 	: MainWindowBase(parent, name, fl)
 {
-	stop->setEnabled(false);
+	stopButton->setEnabled(false);
 
 	connect(folderView, SIGNAL(status(const QString &)), statusLabel, SLOT(setText(const QString &)));
 	connect(folderView, SIGNAL(folderSelected(Folder)), mailView, SLOT(setFolder(Folder)));
@@ -25,9 +26,9 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags fl)
 	connect(mailView, SIGNAL(totalSteps(int)), statusProgress, SLOT(setTotalSteps(int)));
 	connect(mailView, SIGNAL(progress(int)), statusProgress, SLOT(setProgress(int)));
 	connect(mailView, SIGNAL(resetProgress()), statusProgress, SLOT(reset()));
-	connect(mailView, SIGNAL(stopEnabled(bool)), stop, SLOT(setEnabled(bool)));
+	connect(mailView, SIGNAL(stopEnabled(bool)), stopButton, SLOT(setEnabled(bool)));
 
-	connect(stop, SIGNAL(activated()), mailView, SLOT(stop()));
+	connect(stopButton, SIGNAL(clicked()), mailView, SLOT(stop()));
 
 	connect(compose, SIGNAL(activated()), SLOT(slotCompose()));
 	connect(sendQueue, SIGNAL(activated()), SLOT(slotSendQueued()));

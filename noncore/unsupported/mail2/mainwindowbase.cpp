@@ -21,11 +21,11 @@ MainWindowBase::MainWindowBase(QWidget *parent, const char *name, WFlags fl)
 	setToolBarsMovable(false);
 
 	toolbar = new QPEToolBar(this);
-  menubar = new QPEMenuBar( toolbar );
-  mailmenu = new QPopupMenu( menubar );
-  servermenu = new QPopupMenu( menubar );
-  menubar->insertItem( tr( "Mail" ), mailmenu );
-  menubar->insertItem( tr( "Servers" ), servermenu );
+	menubar = new QPEMenuBar( toolbar );
+	mailmenu = new QPopupMenu( menubar );
+	servermenu = new QPopupMenu( menubar );
+	menubar->insertItem( tr( "Mail" ), mailmenu );
+	menubar->insertItem( tr( "Servers" ), servermenu );
 
 	addToolBar(toolbar);
 	toolbar->setHorizontalStretchable(true);
@@ -39,8 +39,8 @@ MainWindowBase::MainWindowBase(QWidget *parent, const char *name, WFlags fl)
 	compose->addTo(mailmenu);
 
  	sendQueue = new QAction(tr("Send queued mails"), QIconSet(Resource::loadPixmap("mail/sendqueue")), 0, 0, this);
-  sendQueue->addTo(toolbar);
-  sendQueue->addTo(mailmenu);
+	sendQueue->addTo(toolbar);
+	sendQueue->addTo(mailmenu);
 
 	folders = new QAction(tr("Show/hide folders"), QIconSet(Resource::loadPixmap("mail/folder")), 0, 0, this, 0, true);
 	folders->addTo(toolbar);
@@ -52,11 +52,7 @@ MainWindowBase::MainWindowBase(QWidget *parent, const char *name, WFlags fl)
 	findmails->addTo(mailmenu);
 
 	configure = new QAction(tr("Configuration"), QIconSet(Resource::loadPixmap("mail/configure")), 0, 0, this);
-	configure->addTo(toolbar);
 	configure->addTo(servermenu);
-
-	stop = new QAction(tr("Abort"), QIconSet(Resource::loadPixmap("mail/abort")), 0, 0, this);
-	stop->addTo(toolbar);
 
 	QVBox *view = new QVBox(this);
 	setCentralWidget(view);
@@ -75,6 +71,11 @@ MainWindowBase::MainWindowBase(QWidget *parent, const char *name, WFlags fl)
 	QFont tmpFont = statusLabel->font();
 	tmpFont.setPixelSize(8);
 	statusLabel->setFont(tmpFont);
+
+	stopButton = new QToolButton(status);
+	stopButton->setText(" X ");
+	stopButton->setMaximumHeight(15);
+	stopButton->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 
 	statusProgress = new QProgressBar(status);
 	statusProgress->setCenterIndicator(true);
