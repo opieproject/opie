@@ -82,7 +82,9 @@ void ODict::loadConfig()
 		QString name;
 		cfg.setGroup( *it );
 		name = cfg.readEntry( "Name" );
-		query_co->insertItem( name );
+		if ( name != QString::null ) {
+			query_co->insertItem( name );
+		}
 
 		/*
 		 * this check is to look up what dictionary has been used the
