@@ -39,18 +39,19 @@ public:
     fileBrowser( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 ,const QString filter=0);
     ~fileBrowser();
 
-    QPushButton* buttonOk;
+    QPushButton *buttonOk, *buttonCancel, *homeButton, *docButton, *hideButton;
     QListView* ListView;
-    QPushButton* buttonCancel;
+
     QLabel *dirLabel;
     QString selectedFileName, filterStr;
     QDir currentDir;
     QFile file;
     QStringList fileList;
- 
-QListViewItem * item;
+    QListViewItem * item;
 public slots:
-void homeButtonPushed();
+    void homeButtonPushed();
+    void docButtonPushed(); 
+    void hideButtonPushed(bool); 
 private:
 
 private slots: 

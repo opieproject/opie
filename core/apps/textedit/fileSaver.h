@@ -43,9 +43,8 @@ public:
     ~fileSaver();
     QLineEdit *fileEdit;
 
-    QPushButton* buttonOk;
+    QPushButton *buttonOk, *buttonCancel, *homeButton, *docButton, *hideButton;
     QListView* ListView;
-    QPushButton* buttonCancel;
     QLabel *dirLabel;
     QString selectedFileName, filterStr;
     QDir currentDir;
@@ -55,7 +54,9 @@ public:
  
 QListViewItem * item;
 public slots:
-void homeButtonPushed();
+    void homeButtonPushed();
+    void docButtonPushed(); 
+    void hideButtonPushed(bool); 
 private:
 
 private slots:

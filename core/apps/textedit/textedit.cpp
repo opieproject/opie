@@ -561,7 +561,8 @@ void TextEdit::newFileOpen()
     editor->setEdited( FALSE);
     edited1=FALSE;
     edited=FALSE;
-    setCaption(caption().right(caption().length()-1));
+    if(caption().left(1)=="*")
+        setCaption(caption().right(caption().length()-1));
 }
 
 #if 0
@@ -692,7 +693,6 @@ void TextEdit::openFile( const DocLnk &f )
     editor->setEdited( FALSE);
     edited1=FALSE;
     edited=FALSE;
-    setCaption(caption().right(caption().length()-1));
 
     qDebug("openFile doclnk "+currentFileName);
     doc->setName(currentFileName);

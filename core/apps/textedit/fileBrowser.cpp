@@ -14,12 +14,15 @@
 #include "fileBrowser.h"
 #include <qpe/config.h>
 #include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
 
 #include <qlistview.h>
 #include <qpushbutton.h>
 #include <qfile.h>
 #include <qmessagebox.h>
 #include <unistd.h>
+
+
 
 fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags fl , const QString filter )
     : QDialog( parent, name, modal, fl )
@@ -34,11 +37,22 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     dirLabel->setText(currentDir.canonicalPath());
     dirLabel->setGeometry(10,20,230,15);
 
-    QPushButton *homeButton;
-    homeButton = new QPushButton(Resource::loadIconSet("home"),"",this,"homeButton");
+    homeButton = new QPushButton( Resource::loadIconSet("home"),"",this,"homeButton");
     homeButton->setGeometry(200,4,25,25);
     connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
+    homeButton->setFlat(TRUE);
 
+    docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",this,"docsButton");
+    docButton->setGeometry(170,4,25,25);
+    connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
+    docButton->setFlat(TRUE);
+
+    hideButton = new QPushButton( Resource::loadIconSet("s_hidden"),"",this,"hideButton");
+    hideButton->setGeometry(140,4,25,25);
+    connect( hideButton,SIGNAL(toggled(bool)),this,SLOT( hideButtonPushed(bool)) );
+    hideButton->setToggleButton(TRUE);
+    hideButton->setFlat(TRUE);
+    
     ListView = new QListView( this, "ListView" );
     ListView->addColumn( tr( "Name" ) );
     ListView->setColumnWidth(0,140);
@@ -58,6 +72,8 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     connect( ListView, SIGNAL(doubleClicked( QListViewItem*)), SLOT(listDoubleClicked(QListViewItem *)) );
     connect( ListView, SIGNAL(pressed( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
     currentDir.setPath(QDir::currentDirPath());
+    currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden */| QDir::All);
+
     populateList();
     move(0,15); 
 }
@@ -71,7 +87,6 @@ void fileBrowser::populateList()
 {
     ListView->clear();
 //qDebug(currentDir.canonicalPath());
-    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
     currentDir.setMatchAllDirs(TRUE);
 
@@ -177,4 +192,25 @@ void fileBrowser::homeButtonPushed() {
         currentDir.cd(  QDir::homeDirPath(), TRUE);
         populateList();
         update();
+}
+
+void fileBrowser::docButtonPushed() {
+        chdir( QString(QPEApplication::documentDir()+"/text").latin1() );
+        currentDir.cd( QPEApplication::documentDir()+"/text", TRUE);
+        populateList();
+        update();
+
+}
+
+void fileBrowser::hideButtonPushed(bool b) {
+    if (b)
+    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+    else
+    currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+        
+//          chdir( QString(QPEApplication::documentDir()+"/text").latin1() );
+//          currentDir.cd( QPEApplication::documentDir()+"/text", TRUE);
+          populateList();
+          update();
+
 }
