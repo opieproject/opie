@@ -192,7 +192,7 @@ void OEditListBox::typedSomething(const QString& text)
         }
         else
         {
-            #if QT_VERSION > 290
+            #if QT_VERSION >= 0x030000
             StringComparisonMode mode = (StringComparisonMode) (ExactMatch | CaseSensitive );
             bool enable = (m_listBox->findItem( text, mode ) == 0L);
             #else
@@ -267,7 +267,7 @@ void OEditListBox::addItem()
             alreadyInList = true;
         else
         {
-            #if QT_VERSION > 290
+            #if QT_VERSION >= 0x030000
             StringComparisonMode mode = (StringComparisonMode) (ExactMatch | CaseSensitive );
             alreadyInList =(m_listBox->findItem(currentTextLE, mode) != 0);
             #else
@@ -300,7 +300,7 @@ void OEditListBox::addItem()
 int OEditListBox::currentItem() const 
 {
     int nr = m_listBox->currentItem();
-    #if QT_VERSION > 290
+    #if QT_VERSION >= 0x030000
     if(nr >= 0 && !m_listBox->item(nr)->isSelected()) return -1;
     #else
     if(nr >= 0 && !m_listBox->isSelected(m_listBox->item(nr))) return -1;

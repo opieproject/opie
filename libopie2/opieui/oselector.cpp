@@ -139,7 +139,7 @@ void OXYSelector::mouseMoveEvent( QMouseEvent *e )
 
 void OXYSelector::wheelEvent( QWheelEvent *e )
 {
-    #if QT_VERSION > 290
+    #if QT_VERSION >= 0x030000
     if ( e->orientation() == Qt::Horizontal )
         setValues( xValue() + e->delta()/120, yValue() );
     else

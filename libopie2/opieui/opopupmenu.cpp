@@ -85,7 +85,7 @@ void OPopupTitle::paintEvent(QPaintEvent *)
 {
     QRect r(rect());
     QPainter p(this);
-    #if QT_VERSION > 290
+    #if QT_VERSION >= 0x030000
     qApp->style().drawPrimitive(QStyle::PE_HeaderSection, &p, r, palette().active());
     #else
     #warning OPopupMenu is not fully functional on Qt2
@@ -549,7 +549,7 @@ bool OPopupMenu::eventFilter(QObject* obj, QEvent* event)
                 return true;
             }
         }
-        #if QT_VERSION > 290
+        #if QT_VERSION >= 0x030000
         else if (event->type() == QEvent::ContextMenu)
         #else
         else if ( (event->type() == QEvent::MouseButtonPress) &&

@@ -318,7 +318,7 @@ void OComboBox::create( WId id, bool initializeWindow, bool destroyOldWindow )
 
 void OComboBox::setLineEdit( OLineEdit *edit )
 {
-    #if QT_VERSION > 290
+    #if QT_VERSION >= 0x030000
     QComboBox::setLineEdit( edit );
     if ( !edit->inherits( "OLineEdit" ) )
         d->olineEdit = 0;
@@ -352,7 +352,7 @@ void OComboBox::setLineEdit( OLineEdit *edit )
 void OComboBox::deleteWordForward()
 {
     lineEdit()->cursorWordForward(TRUE);
-    #if QT_VERSION > 290
+    #if QT_VERSION >= 0x030000
     if ( lineEdit()->hasSelectedText() )
     #else
     if ( lineEdit()->hasMarkedText() )
@@ -365,7 +365,7 @@ void OComboBox::deleteWordForward()
 void OComboBox::deleteWordBack()
 {
     lineEdit()->cursorWordBackward(TRUE);
-    #if QT_VERSION > 290
+    #if QT_VERSION >= 0x030000
     if ( lineEdit()->hasSelectedText() )
     #else
     if ( lineEdit()->hasMarkedText() )

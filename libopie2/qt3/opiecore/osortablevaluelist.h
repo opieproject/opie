@@ -31,7 +31,7 @@
 #ifndef OSORTABLEVALUELIST_H
 #define OSORTABLEVALUELIST_H
 
-#if QT_VERSION > 290
+#if QT_VERSION >= 0x030000
 #include <qtl.h>
 #include <qpair.h>
 #else

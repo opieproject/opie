@@ -63,7 +63,7 @@ OListView::~OListView()
 void OListView::setFullWidth( bool fullWidth )
 {
     m_fullWidth = fullWidth;
-    #if QT_VERSION > 290
+    #if QT_VERSION >= 0x030000
     header()->setStretchEnabled( fullWidth, columns()-1 );
     #endif
 }
@@ -76,7 +76,7 @@ bool OListView::fullWidth() const
 int OListView::addColumn( const QString& label, int width )
 {
     int result = QListView::addColumn( label, width );
-    #if QT_VERSION > 290
+    #if QT_VERSION >= 0x030000
     if (m_fullWidth) {
         header()->setStretchEnabled( false, columns()-2 );
         header()->setStretchEnabled( true, columns()-1  );
@@ -88,7 +88,7 @@ int OListView::addColumn( const QString& label, int width )
 int OListView::addColumn( const QIconSet& iconset, const QString& label, int width )
 {
     int result = QListView::addColumn( iconset, label, width );
-    #if QT_VERSION > 290
+    #if QT_VERSION >= 0x030000
     if (m_fullWidth) {
         header()->setStretchEnabled( false, columns()-2 );
         header()->setStretchEnabled( true, columns()-1 );
@@ -100,7 +100,7 @@ int OListView::addColumn( const QIconSet& iconset, const QString& label, int wid
 void OListView::removeColumn( int index )
 {
     QListView::removeColumn(index);
-    #if QT_VERSION > 290
+    #if QT_VERSION >= 0x030000
     if ( m_fullWidth && index == columns() )
     {
         header()->setStretchEnabled( true, columns()-1 );

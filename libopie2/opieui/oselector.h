@@ -208,7 +208,7 @@ public:
   /**
    * Sets the min value.
    */
-  #if ( QT_VERSION > 290 )
+  #if ( QT_VERSION >= 0x030000 )
   void setMinValue(int value) { QRangeControl::setMinValue(value); }
   #else
   void setMinValue(int value) { QRangeControl::setRange(value,QRangeControl::maxValue()); }
@@ -223,7 +223,7 @@ public:
   /**
    * Sets the max value.
    */
-  #if ( QT_VERSION > 290 )
+  #if ( QT_VERSION >= 0x030000 )
   void setMaxValue(int value) { QRangeControl::setMaxValue(value); }
   #else
   void setMaxValue(int value) { QRangeControl::setRange(QRangeControl::minValue(),value); }
@@ -387,7 +387,7 @@ private:
  *
  * @see OXYSelector, OValueSelector, OColorDialog
  * @author Martin Jones (mjones@kde.org)
- * @version $Id: oselector.h,v 1.2 2004-03-13 19:51:50 zecke Exp $
+ * @version $Id: oselector.h,v 1.3 2005-01-21 20:19:01 ar Exp $
 */
 class OHSSelector : public OXYSelector
 {
@@ -432,7 +432,7 @@ class OValueSelectorPrivate;
  *
  * @see OHSSelector, OColorDialog
  * @author Martin Jones (mjones@kde.org)
- * @version $Id: oselector.h,v 1.2 2004-03-13 19:51:50 zecke Exp $
+ * @version $Id: oselector.h,v 1.3 2005-01-21 20:19:01 ar Exp $
  */
 class OValueSelector : public OSelector
 {

@@ -145,7 +145,7 @@ void OLineEdit::rotateText( OCompletionBase::KeyBindingType type )
        // Skip rotation if previous/next match is null or the same text
        if ( input.isNull() || input == displayText() )
             return;
-       #if QT_VERSION > 290
+       #if QT_VERSION >= 0x030000
        setCompletedText( input, hasSelectedText() );
        #else
        setCompletedText( input, hasMarkedText() );
@@ -271,7 +271,7 @@ void OLineEdit::keyPressEvent( QKeyEvent *e )
                 QLineEdit::keyPressEvent ( e );
                 QString txt = text();
                 int len = txt.length();
-                #if QT_VERSION > 290
+                #if QT_VERSION >= 0x030000
                 if ( !hasSelectedText() && len && cursorPosition() == len )
                 #else
                 if ( !hasMarkedText() && len && cursorPosition() == len )
@@ -436,7 +436,7 @@ QPopupMenu *OLineEdit::createPopupMenu()
     if ( !m_bEnableMenu )
         return 0;
 
-    #if QT_VERSION > 290
+    #if QT_VERSION >= 0x030000
     QPopupMenu *popup = QLineEdit::createPopupMenu();
     #else
     QPopupMenu *popup = new QPopupMenu();
