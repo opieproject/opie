@@ -74,6 +74,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   qDebug("connect");
 	connect( settingList, SIGNAL( clicked( QListViewItem* ) ),
 					   this, SLOT( stopTimer( QListViewItem* ) ) );	
+ 	setCurrent(0);
 }
 
 void MainWindow::makeMenu()
@@ -119,18 +120,19 @@ MainWindow::~MainWindow()
 
 void MainWindow::setCurrent(QListViewItem *item)
 {
+  editor->hide();
 	if (!item) return;
  	_item = (ListViewItemConf*) item;
   if (!_item) return;
   popupTimer->start( 750, true );
   if (_item->getType() == ListViewItemConf::File)
   {
-  	editor->hide();
    	updateGeometry();
     _currentItem=0;
     _fileItem = (ListViewItemConfFile*)item;
    	return;
-  }else editor->show();
+  }
+  editor->show();
   _fileItem = 0;
  	_currentItem = (ListViewItemConfigEntry*)item;
   if (!_currentItem) return;
