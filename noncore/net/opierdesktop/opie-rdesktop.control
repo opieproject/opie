@@ -1,0 +1,9 @@
+Package: opie-rdesktop
+Files: bin/ordesktop pics/opierdesktop apps/Applications/opierdesktop.desktop
+Priority: optional
+Section: opie/applications
+Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org> 
+Architecture: arm
+Version: 1.2.0-$SUB_VERSION
+Depends: task-opie-minimal
+Description: Remote Desktop Protocol (RDP) Client
