@@ -4,11 +4,12 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse sobre las cruces firmemente y con
+pecisión para calibrar la pantalla.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Bienvenido a Opie</translation>
     </message>
 </context>
 </TS>
