@@ -23,7 +23,7 @@ Interfaces::Interfaces(QString useInterfacesFile){
   interfacesFile = useInterfacesFile;
   QFile file(interfacesFile);
   if (!file.open(IO_ReadOnly)){
-    qDebug(QString("Interfaces: Can't open file: %1 for reading.").arg(interfacesFile).latin1());
+    qDebug("Interfaces: Can't open file: %s for reading.", interfacesFile.latin1() );
     currentIface = interfaces.end();
     currentMapping = interfaces.end();
     return;
@@ -67,7 +67,7 @@ QStringList Interfaces::getInterfaceList(){
 
 /**
  * Find out if interface is in an "auto" group or not.
- *  Report any duplicates such as eth0 being in two differnt auto's 
+ * Report any duplicates such as eth0 being in two differnt auto's 
  * @param interface interface to check to see if it is on or not.
  * @return true is interface is in auto
  */ 
@@ -76,9 +76,7 @@ bool Interfaces::isAuto(const QString &interface) const {
   QStringList awi = autoLines.grep(QRegExp(interface));
   if(awi.count() > 1)
     qDebug(QString("Interfaces: Found more then auto group with interface: %1.").arg(interface).latin1());
-  if(awi.count() < 1)
-    return false;
-  return true;
+  return awi.count() > 0;
 }
 
 /**
