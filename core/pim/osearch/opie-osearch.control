@@ -1,10 +1,9 @@
 Package: opie-osearch
-Files: bin/osearch apps/1Pim/osearch.desktop pics/osearch/*.png
+Files: plugins/application/libosearch.so* bin/osearch apps/1Pim/osearch.desktop pics/osearch/*.png
 Priority: optional
-Section: opie/
+Section: opie/applications
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
-Description: search...
-
+Description: Search through all PIM data
 Version: $QPE_VERSION$EXTRAVERSION

@@ -1,5 +1,5 @@
 Package: opie-mindbreaker
-Files: bin/mindbreaker apps/Games/mindbreaker.desktop pics/mindbreaker
+Files: plugins/application/libmindbreaker.so* bin/mindbreaker apps/Games/mindbreaker.desktop pics/mindbreaker
 Priority: optional
 Section: opie/games
 Maintainer: Martin Imobersteg <imm@gmx.ch> 

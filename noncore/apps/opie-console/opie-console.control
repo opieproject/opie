@@ -1,5 +1,5 @@
 Package: opie-console
-Files: bin/opie-console apps/Applications/opie-console.desktop pics/console/* 
+Files: plugins/application/libopie-console.so* bin/opie-console apps/Applications/opie-console.desktop pics/console/* 
 Priority: optional
 Section: opie/applications
 Maintainer: Opie team <opie@handhelds.org>

@@ -1,5 +1,5 @@
 Package: opie-button-settings
-Files: bin/buttonsettings apps/Settings/Button.desktop pics/buttonsettings/*.png
+Files: plugins/application/libbuttonsettings.so* bin/buttonsettings apps/Settings/Button.desktop pics/buttonsettings/*.png
 Priority: optional
 Section: opie/settings
 Maintainer: Robert Griebl <sandman@handhelds.org>

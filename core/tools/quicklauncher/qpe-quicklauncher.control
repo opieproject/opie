@@ -4,7 +4,7 @@ Section: qpe/system
 Maintainer: Trolltech (www.trolltech.com)
 Architecture: $CPU_ARCH
 Arch: $DEVICE_ARCH
-Version: $QPE_VERSION-12
-Depends: qpe-libqtopia qpe-pim
+Version: $QPE_VERSION$EXTRAVERSION
+Depends:
 Description: Quick launcher stub
  Launcher stub for quick launch enabled applications.

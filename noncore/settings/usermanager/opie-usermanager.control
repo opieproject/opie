@@ -1,5 +1,5 @@
 Package: opie-usermanager
-Files: bin/usermanager apps/Settings/usermanager.desktop pics/usermanager/*
+Files: plugins/application/libusermanager.so* bin/usermanager apps/Settings/usermanager.desktop pics/usermanager/*
 Priority: optional
 Section: opie/settings
 Depends: task-opie-minimal

@@ -1,5 +1,5 @@
 Package: opie-wellenreiter
-Files: bin/wellenreiter pics/wellenreiter apps/Applications/wellenreiter.desktop
+Files: plugins/application/libwellenreiter.so* bin/wellenreiter pics/wellenreiter apps/Applications/wellenreiter.desktop
 Priority: optional
 Section: opie/applications
 Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org> 

@@ -1,5 +1,5 @@
 Package: opie-tableviewer
-Files: bin/tableviewer apps/Applications/tableviewer.desktop
+Files: plugins/application/libtableviewer.so* bin/tableviewer apps/Applications/tableviewer.desktop
 Priority: optional
 Section: opie/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>

@@ -1,5 +1,5 @@
 Package: opie-today
-Files: bin/today apps/1Pim/today.desktop pics/today/*
+Files: plugins/application/libtoday.so* bin/today apps/1Pim/today.desktop pics/today/*
 Priority: optional
 Section: opie/applications
 Maintainer: Maximilian Reiﬂ <harlekin@handhelds.org>

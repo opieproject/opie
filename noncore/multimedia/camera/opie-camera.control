@@ -1,5 +1,5 @@
 Package: opie-camera
-Files: lib/libopiecam.* bin/opiecam bin/capture pics/camera apps/Applications/camera.desktop
+Files: plugins/application/libopiecam.so* lib/libopiecam.* bin/opiecam bin/capture pics/camera apps/Applications/camera.desktop
 Priority: optional
 Section: opie/applications
 Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org> 

@@ -1,5 +1,5 @@
 Package: opie-reader
-Files: bin/reader apps/Applications/opie-reader.desktop pics/opie-reader/*
+Files: plugins/application/libreader.so* bin/reader apps/Applications/opie-reader.desktop pics/opie-reader/*
 Priority: optional
 Section: applications
 Maintainer: Tim Wentford <timwentford@hotmail.com>

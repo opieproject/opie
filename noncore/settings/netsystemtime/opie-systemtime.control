@@ -1,5 +1,5 @@
 Package: opie-systemtime
-Files: bin/systemtime apps/Settings/netsystemtime.desktop etc/ntpservers pics/netsystemtime 
+Files: plugins/application/libsystemtime.so* bin/systemtime apps/Settings/netsystemtime.desktop etc/ntpservers pics/netsystemtime 
 Priority: optional
 Section: opie/settings
 Provides: opie-netsystemtime

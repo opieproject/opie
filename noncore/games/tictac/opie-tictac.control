@@ -1,5 +1,5 @@
 Package: opie-tictac
-Files: bin/tictac apps/Games/tictac.desktop pics/tictac
+Files: plugins/application/libtictac.so* bin/tictac apps/Games/tictac.desktop pics/tictac
 Priority: optional
 Section: opie/games
 Maintainer: ljp <ljp@llornkcor.com>

@@ -1,4 +1,4 @@
-Files: bin/sfcave-sdl apps/Games/sfcave-sdl.desktop pics/sfcave-sdl sounds/sfcave-sdl
+Files: plugins/application/libsfcave-sdl.so* bin/sfcave-sdl apps/Games/sfcave-sdl.desktop pics/sfcave-sdl sounds/sfcave-sdl
 Package: sfcave-sdl
 Priority: optional
 Section: Games
