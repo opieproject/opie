@@ -1,7 +1,9 @@
 TEMPLATE    = lib
 CONFIG      += qt warn_on debug
 DESTDIR     = $(OPIEDIR)/lib
-HEADERS     = omanufacturerdb.cpp \
+HEADERS     = 802_11_user.h       \
+              dhcp.h              \
+              omanufacturerdb.cpp \
               onetutils.cpp       \
               onetwork.h          \
               opcap.h

@@ -55,7 +55,10 @@ extern "C"  // work around a bpf/pcap conflict in recent headers
 
 /* OPIE */
 #include <opie2/onetutils.h>
+
+/* Custom Network Includes */
 #include "802_11_user.h"
+#include "dhcp.h"
 
 /* TYPEDEFS */
 typedef struct timeval timevalstruct;
@@ -477,9 +480,27 @@ class OUDPPacket : public QObject
 
     int fromPort() const;
     int toPort() const;
+    int length() const;
+    int checksum() const;
 
   private:
     const struct udphdr* _udphdr;
+};
+
+/*======================================================================================
+ * ODHCPPacket
+ *======================================================================================*/
+
+class ODHCPPacket : public QObject
+{
+  Q_OBJECT
+
+  public:
+    ODHCPPacket( const unsigned char*, const struct dhcp_packet*, QObject* parent = 0 );
+    virtual ~ODHCPPacket();
+
+  private:
+    const struct dhcp_packet* _dhcphdr;
 };
 
 /*======================================================================================
@@ -496,6 +517,10 @@ class OTCPPacket : public QObject
 
     int fromPort() const;
     int toPort() const;
+    int seq() const;
+    int ack() const;
+    int window() const;
+    int checksum() const;
 
   private:
     const struct tcphdr* _tcphdr;
@@ -510,7 +535,8 @@ class OTCPPacket : public QObject
  * @brief A class based wrapper for network packet capturing.
  *
  * This class is the base of a high-level interface to the well known packet capturing
- * library libpcap. ...
+ * library libpcap.
+ * @see http://tcpdump.org
  */
 class OPacketCapturer : public QObject
 {

@@ -356,7 +356,50 @@ OUDPPacket::OUDPPacket( const unsigned char* end, const struct udphdr* data, QOb
     qDebug( "OUDPPacket::OUDPPacket(): decoding UDP header..." );
 }
 
+
 OUDPPacket::~OUDPPacket()
+{
+}
+
+
+int OUDPPacket::fromPort() const
+{
+    return _udphdr->source;
+}
+
+
+int OUDPPacket::toPort() const
+{
+    return _udphdr->dest;
+}
+
+
+int OUDPPacket::length() const
+{
+    return _udphdr->len;
+}
+
+
+int OUDPPacket::checksum() const
+{
+    return _udphdr->check;
+}
+
+
+/*======================================================================================
+ * ODHCPPacket
+ *======================================================================================*/
+
+
+ODHCPPacket::ODHCPPacket( const unsigned char* end, const struct dhcp_packet* data, QObject* parent )
+           :QObject( parent, "DHCP" ), _dhcphdr( data )
+
+{
+    qDebug( "ODHCPPacket::ODHCPPacket(): decoding DHCP information..." );
+}
+
+
+ODHCPPacket::~ODHCPPacket()
 {
 }
 
@@ -373,10 +416,46 @@ OTCPPacket::OTCPPacket( const unsigned char* end, const struct tcphdr* data, QOb
     qDebug( "OTCPPacket::OTCPPacket(): decoding TCP header..." );
 }
 
+
 OTCPPacket::~OTCPPacket()
 {
 }
 
+
+int OTCPPacket::fromPort() const
+{
+    return _tcphdr->source;
+}
+
+
+int OTCPPacket::toPort() const
+{
+    return _tcphdr->dest;
+}
+
+
+int OTCPPacket::seq() const
+{
+    return _tcphdr->seq;
+}
+
+
+int OTCPPacket::ack() const
+{
+    return _tcphdr->ack_seq;
+}
+
+
+int OTCPPacket::window() const
+{
+    return _tcphdr->window;
+}
+
+
+int OTCPPacket::checksum() const
+{
+    return _tcphdr->check;
+}
 
 /*======================================================================================
  * OPrismHeaderPacket
