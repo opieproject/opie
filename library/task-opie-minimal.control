@@ -6,6 +6,7 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: libqt2-emb (>=$QTE_VERSION), libqt2-emb-fonts (>=$QTE_VERSION), opie-common, libqpe1, libopie1, opie-qcop, opie-sounds, apmd, opie-pics, timezones, opie-aqpkg, opie-taskbar, opie-opiealarm
 Provides: opie-base, qpe-base
+Replaces: opie-base, qpe-base
 Description: Bootstrap Opie environment(minimal)
  A complete GUI environment for handhelds. This is the _minimal_ version.
  You will probably want to install one of the opie-i18n-* packages.
