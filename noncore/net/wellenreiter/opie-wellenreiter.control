@@ -1,4 +1,4 @@
-Files: bin/wellenreiter bin/wellenreiterd pics/wellenreiter
+Files: bin/wellenreiter bin/wellenreiterd pics/wellenreiter $QTDIR/lib/libwellenreiter.*
 Priority: optional
 Section: opie/applications
 Maintainer: Michael Lauer <mickeyl@handhelds.org> 
