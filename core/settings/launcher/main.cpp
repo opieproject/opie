@@ -36,6 +36,7 @@ int main ( int argc, char** argv )
 
 	LauncherSettings dlg;
 	a. showMainWidget ( &dlg );
+	dlg. showMaximized ( );
 
 	return a. exec ( );
 }
