@@ -277,7 +277,7 @@ Tenere premuto sul nome di un processo per vedere ulteriori informazioni, o per 
     </message>
     <message>
         <source>Built on: </source>
-        <translation>Compilato il:</translation>
+        <translation>Compilato il: </translation>
     </message>
     <message>
         <source>&lt;p&gt;Version: </source>

@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>&lt;P&gt;Score: </source>
-        <translation>&lt;P&gt;Punteggio: </translation>
+        <translation>&lt;P&gt;Punti: </translation>
     </message>
 </context>
 <context>

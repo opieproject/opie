@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>     Level: %1       Score: %2   </source>
-        <translation>     Livello: %1       Punteggio: %2   </translation>
+        <translation>     Livello: %1       Punti: %2   </translation>
     </message>
     <message>
         <source>       GAME OVER!
@@ -20,7 +20,7 @@
  Parachuters Killed: %2
         Accuracy: %3% </source>
         <translation> PARTITA TERMINATA!
-       Punteggio:  %1
+       Punti:  %1
  Paracadutisti Uccisi: %2
        Precisione: %3% </translation>
     </message>

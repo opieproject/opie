@@ -292,7 +292,7 @@
     </message>
     <message>
         <source>Show packages not installed</source>
-        <translation>Mostra i pacchetti non installati</translation>
+        <translation>Mostra pacchetti non installati</translation>
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
@@ -300,7 +300,7 @@
     </message>
     <message>
         <source>Show installed packages</source>
-        <translation>Mostra i pacchetti installati</translation>
+        <translation>Mostra pacchetti installati</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device.</source>
@@ -308,7 +308,7 @@
     </message>
     <message>
         <source>Show updated packages</source>
-        <translation>Mostra i pacchetti aggiornati</translation>
+        <translation>Mostra pacchetti aggiornati</translation>
     </message>
     <message>
         <source>Click here to show packages currently installed on this device which have a newer version available.</source>
@@ -348,7 +348,7 @@
     </message>
     <message>
         <source>Quick Jump keypad</source>
-        <translation>Tastiera &quot;Quick Jump&quot;</translation>
+        <translation>Tastiera Quick Jump</translation>
     </message>
     <message>
         <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
@@ -672,7 +672,7 @@ Sei sicuro?
     </message>
     <message>
         <source>Link to root</source>
-        <translation>Link alla root</translation>
+        <translation>Link a /</translation>
     </message>
     <message>
         <source>HTTP Proxy</source>

@@ -80,7 +80,7 @@ Premi qui per selezionare uno schema disponibile.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation>Disabilita lo stile per queste applicazioni ( può essere utilizzato &lt;b&gt;*&lt;/b&gt; come una wildcard):</translation>
+        <translation>Disabilita lo stile per queste applicazioni (&lt;b&gt;*&lt;/b&gt; può essere utilizzato come una wildcard):</translation>
     </message>
     <message>
         <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
@@ -146,7 +146,7 @@ Quest&apos;area permette di selezionare un&apos;applicazione e quali impostazion
     </message>
     <message>
         <source>Top</source>
-        <translation>Cima</translation>
+        <translation>In Alto</translation>
     </message>
     <message>
         <source>Click here so that tabs appear at the top of the window.</source>
@@ -154,7 +154,7 @@ Quest&apos;area permette di selezionare un&apos;applicazione e quali impostazion
     </message>
     <message>
         <source>Bottom</source>
-        <translation>Fondo</translation>
+        <translation>In Basso</translation>
     </message>
     <message>
         <source>Click here so that tabs appear at the bottom of the window.</source>

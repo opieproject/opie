@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Score: 00</source>
-        <translation>Punteggio: 00</translation>
+        <translation>Punti: 00</translation>
     </message>
     <message>
         <source>Lives: 0%</source>
@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Score: %1</source>
-        <translation>Punteggio: %1</translation>
+        <translation>Punti: %1</translation>
     </message>
     <message>
         <source>Game paused.
@@ -56,7 +56,7 @@ Premi P per continuare!</translation>
         <source>Game Over!
 Score: %1</source>
         <translation>Partita Terminata!
-Punteggio: %1</translation>
+Punti: %1</translation>
     </message>
     <message>
         <source>Time: %1</source>
@@ -121,12 +121,13 @@ the terms of the GPL v2.</source>
         <translation>Scritto da: Stefan Schimanski
 Modificato da: Martin Imobersteg
 
-Premi per creare i muri.
-Premi spazio per cambiare la direzione dei muri.
-Tenta di ridurre lo spazio totale del 75%.
+Premi per creare i muri. Premi spazio
+per cambiare la direzione dei muri.
+Tenta di ridurre lo spazio totale del
+75%.
 
-Questo programma è distribuito nei
-termini della GPL v2.</translation>
+Questo programma è distribuito
+sotto licenza GPL v2.</translation>
     </message>
 </context>
 </TS>

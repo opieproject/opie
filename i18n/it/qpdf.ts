@@ -4,7 +4,7 @@
     <name>QPdfDlg</name>
     <message>
         <source>QPdf</source>
-        <translation>QPdf</translation>
+        <translation>Lettore PDF</translation>
     </message>
     <message>
         <source>Zoom</source>

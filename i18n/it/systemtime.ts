@@ -215,7 +215,7 @@ ntpdate </translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation>Minuto</translation>
+        <translation>Minuti</translation>
     </message>
     <message>
         <source>AM</source>

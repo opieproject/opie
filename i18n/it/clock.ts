@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Minute</source>
-        <translation>Minuto</translation>
+        <translation>Minuti</translation>
     </message>
     <message>
         <source>AM</source>
@@ -84,7 +84,8 @@
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation>Ritardo Snooze
+        <translation>Ritardo
+Snooze
 (minuti)</translation>
     </message>
     <message>

@@ -28,13 +28,13 @@ scontrarsi con i muri, gli angoli o la propria coda.</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
-        <translation>     Punteggio :    %1   </translation>
+        <translation>     Punti :    %1   </translation>
     </message>
     <message>
         <source>GAME OVER!
  Your Score: %1</source>
         <translation>FINE PARTITA!
- Punteggio: %1</translation>
+ Punti: %1</translation>
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>

@@ -5,8 +5,8 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation>Premi le crocette fermamente ed
-accuratamente per calibrare lo schermo.</translation>
+        <translation>Tocca le crocette accuratamente e
+con decisione per calibrare lo schermo.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>

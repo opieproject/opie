@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Score</source>
-        <translation>Punteggio</translation>
+        <translation>Punti</translation>
     </message>
     <message>
         <source>Level</source>

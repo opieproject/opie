@@ -4,7 +4,7 @@
     <name>MediumMountSetting::MainWindow</name>
     <message>
         <source>Medium Mount Settings</source>
-        <translation>Impostazioni Inserimento Supporto</translation>
+        <translation>Gestione Supporti</translation>
     </message>
     <message>
         <source>Global</source>
@@ -54,7 +54,7 @@
     <name>MediumMountSetting::MediumMountWidget</name>
     <message>
         <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
-        <translation>Configura questo supporto.  Le modifiche avranno effetto dopo la chiusura dell&apos;applicazione. Per aggiornare il Tab Documenti devi rimuovere ed inserire il supporto.</translation>
+        <translation>Configura questo supporto.  Le modifiche avranno effetto solo dopo la chiusura dell&apos;applicazione. Per aggiornare il Tab Documenti devi rimuovere ed reinserire il supporto.</translation>
     </message>
     <message>
         <source>Which media files</source>
