@@ -4,7 +4,7 @@ DESTDIR     = $(OPIEDIR)/lib
 
 INTERFACES  =
 TARGET      = opiepim2
-VERSION     = 1.8.6
+VERSION     = 1.9.1
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lopiecore2
