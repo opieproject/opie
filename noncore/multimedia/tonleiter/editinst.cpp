@@ -3,6 +3,8 @@
 #include <qlabel.h>
 #include <qpushbutton.h>
 
+#include <qpe/qpeapplication.h>
+
 Menu::InstEditDialog::InstEditDialog(TonleiterData* data,QWidget* parent,const char* name)
 :QDialog(parent,name,true,0),data(data)
 {
@@ -54,7 +56,7 @@ Menu::InstEditDialog::InstEditDialog(TonleiterData* data,QWidget* parent,const c
     masterlayout->addWidget(addlowButton);
 
     //make dialog fit the screen
-    showMaximized();
+    QPEApplication::showDialog( this );
 }
 //****************************************************************************
 Menu::InstEditDialog::~InstEditDialog()

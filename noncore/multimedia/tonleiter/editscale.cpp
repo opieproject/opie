@@ -3,6 +3,8 @@
 #include <qlayout.h>
 #include <qpushbutton.h>
 
+#include <qpe/qpeapplication.h>
+
 Menu::ScaleEditDialog::ScaleEditDialog(TonleiterData* data,QWidget* parent,const char* name)
 :QDialog(parent,name,true,0),data(data)
 {
@@ -36,7 +38,7 @@ Menu::ScaleEditDialog::ScaleEditDialog(TonleiterData* data,QWidget* parent,const
     masterlayout->addWidget(pianoscale);
     
     //make dialog fit the screen
-    showMaximized();
+    QPEApplication::showDialog( this );
 }
 //****************************************************************************
 Menu::ScaleEditDialog::~ScaleEditDialog()

@@ -36,6 +36,8 @@
 #include "mediaplayerstate.h"
 #include "playlistwidget.h"
 
+#include <qpe/qpeapplication.h>
+
 namespace
 {
 
@@ -145,7 +147,7 @@ void AudioWidget::setLength( long max ) {
 void AudioWidget::setDisplayType( MediaPlayerState::DisplayType mediaType ) {
     if ( mediaType == MediaPlayerState::Audio ) {
         // startTimer( 150 );
-        showMaximized();
+        QPEApplication::showDialog( this );
         return;
     }
 
