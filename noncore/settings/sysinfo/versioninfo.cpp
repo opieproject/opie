@@ -50,8 +50,10 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     sv->setFrameStyle( QFrame::NoFrame );
     QWidget *container = new QWidget( sv->viewport() );
     sv->addChild( container );
-    
+
+
     QVBoxLayout *vb = new QVBoxLayout( container, 4 );
+    vb->setSpacing( 3 );
 
     QString kernelVersionString;
     QFile file( "/proc/version" );
@@ -145,7 +147,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
 
     QLabel *systemVersion = new QLabel( container );
     systemVersion->setText( systemString );
-    hb3->addWidget( systemVersion, 1, Qt::AlignTop + Qt::AlignLeft );
+    hb3->addWidget( systemVersion, 1,Qt::AlignLeft );
 
     QWhatsThis::add( this, tr( "This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device." ) );
 }
