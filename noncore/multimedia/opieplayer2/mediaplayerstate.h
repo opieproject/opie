@@ -102,7 +102,6 @@ signals:
     void scaledToggled( bool );
     void loopingToggled( bool );
     void shuffledToggled( bool );
-    void playlistToggled( bool );
     void pausedToggled( bool );
     void playingToggled( bool );
     void stopToggled( bool );

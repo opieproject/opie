@@ -147,8 +147,6 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
              d->tbLoop, SLOT( setOn( bool ) ) );
     connect( mediaPlayerState, SIGNAL( shuffledToggled( bool ) ),
              d->tbShuffle, SLOT( setOn( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( playlistToggled( bool ) ),
-             this, SLOT( setPlaylist( bool ) ) );
     connect( d->selectedFiles, SIGNAL( doubleClicked( QListViewItem *) ),
              this, SLOT( playIt( QListViewItem *) ) );
     connect ( gammaSlider,  SIGNAL( valueChanged( int ) ),
@@ -177,7 +175,7 @@ void PlayListWidget::initializeStates() {
     d->tbPlay->setOn( mediaPlayerState->isPlaying() );
     d->tbLoop->setOn( mediaPlayerState->isLooping() );
     d->tbShuffle->setOn( mediaPlayerState->isShuffled() );
-    setPlaylist( true );
+    d->playListFrame->show();
 }
 
 void PlayListWidget::writeDefaultPlaylist() {
@@ -516,16 +514,6 @@ void PlayListWidget::loadList( const DocLnk & lnk) {
         tabWidget->setCurrentPage(0);
     }
 }
-
-
-void PlayListWidget::setPlaylist( bool shown ) {
-    if ( shown ) {
-        d->playListFrame->show();
-    } else {
-        d->playListFrame->hide();
-    }
-}
-
 
 void PlayListWidget::addSelected() {
   assert( inFileListMode() );

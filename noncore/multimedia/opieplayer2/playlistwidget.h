@@ -119,7 +119,6 @@ private slots:
     void setDocument( const QString& fileref );
     void addToSelection( const DocLnk& ); // Add a media file to the playlist
     void addToSelection( QListViewItem* ); // Add a media file to the playlist
-    void setPlaylist( bool ); // Show/Hide the playlist
     void clearList();
     void addAllToList();
     void addAllMusicToList();
