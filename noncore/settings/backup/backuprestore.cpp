@@ -157,8 +157,10 @@ void BackupAndRestore::scanForApplicationSettings(){
   QFileInfo *fi;
   while ( (fi=it.current()) ) {
     // qDebug((d.path()+fi->fileName()).latin1());
-    QListViewItem *newItem = new QListViewItem(applicationSettings, fi->fileName());
-    selectItem(newItem);
+	  if ( ( fi->fileName() != "." ) && ( fi->fileName() != ".." ) ) {
+	       QListViewItem *newItem = new QListViewItem(applicationSettings, fi->fileName());
+	       selectItem(newItem);
+	  }
     ++it;
   }
 }
