@@ -338,51 +338,51 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <name>MediumMountSetting::MediumMountWidget</name>
     <message>
         <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configure le média. Les modifications prendront effet lorsque vous quitterez cette application. Pour mettre à jour l&apos;onglet Document, vous devrez enlever et réinsérer le média.</translation>
     </message>
     <message>
         <source>Which media files</source>
-        <translation type="unfinished">Quels fichiers</translation>
+        <translation>Quels fichiers</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished">Audio</translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished">Tous</translation>
+        <translation>Tous</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished">Image</translation>
+        <translation>Image</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Texte</translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished">Vidéo</translation>
+        <translation>Vidéo</translation>
     </message>
     <message>
         <source>Limit search to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Limiter la recherche à : </translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished">Ajouter</translation>
+        <translation>Ajouter</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Scan whole media</source>
-        <translation type="unfinished"></translation>
+        <translation>Scanner tout le média</translation>
     </message>
     <message>
         <source>Always check this medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Toujours vérifier ce média</translation>
     </message>
 </context>
 <context>

@@ -235,7 +235,7 @@
     </message>
     <message>
         <source>Context switch:</source>
-        <translation type="unfinished">Contexte de changement :</translation>
+        <translation>Contexte de changement :</translation>
     </message>
     <message>
         <source>Delete this item</source>
@@ -289,11 +289,11 @@
     <name>IndentConfigTab</name>
     <message>
         <source>&amp;Auto Indent</source>
-        <translation type="unfinished">Indentation &amp;auto</translation>
+        <translation>Indentation &amp;auto</translation>
     </message>
     <message>
         <source>Indent With &amp;Spaces</source>
-        <translation type="unfinished">Indenter avec des &amp;espaces</translation>
+        <translation>Indenter avec des &amp;espaces</translation>
     </message>
     <message>
         <source>&amp;Backspace Key Indents</source>
@@ -632,7 +632,7 @@ If you cancel you will lose these changes next time you save this file</source>
     </message>
     <message>
         <source>Toggle &amp;Bookmark</source>
-        <translation type="unfinished">Ajouter au &amp;favoris</translation>
+        <translation>Ajouter au &amp;favoris</translation>
     </message>
     <message>
         <source>Clear Bookmarks</source>

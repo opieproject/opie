@@ -51,7 +51,7 @@ connection.</translation>
     </message>
     <message>
         <source>Waiting for server initialization...</source>
-        <translation type="unfinished"></translation>
+        <translation>Attente de l&apos;initialisation du serveur...</translation>
     </message>
 </context>
 <context>

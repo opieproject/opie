@@ -4,67 +4,67 @@
     <name>BenchmarkInfo</name>
     <message>
         <source>This area shows the available tests, the results for which the tests have been performed, and comparison values for one selected device. Use the checkboxes to define which tests you want to perform.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette zone affiche les tests disponibles, les résultats pour chaque tests et les comparaisons de leurs valeurs avec l&apos;appareil témoin sélectionné. Utilisez les cases à cocher pour définir le test que vous voulez réaliser.</translation>
     </message>
     <message>
         <source>Tests</source>
-        <translation type="unfinished"></translation>
+        <translation>Tests</translation>
     </message>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Résultats</translation>
     </message>
     <message>
         <source>Comparison</source>
-        <translation type="unfinished"></translation>
+        <translation>Comparaison</translation>
     </message>
     <message>
         <source>1. Integer Arithmetic  </source>
-        <translation type="unfinished"></translation>
+        <translation>1. Calcul sur entier</translation>
     </message>
     <message>
         <source>2. Floating Point Unit  </source>
-        <translation type="unfinished"></translation>
+        <translation>2. Calcul en virgule flottante</translation>
     </message>
     <message>
         <source>3. Text Rendering  </source>
-        <translation type="unfinished"></translation>
+        <translation>3. Affichage de texte</translation>
     </message>
     <message>
         <source>4. Gfx Rendering  </source>
-        <translation type="unfinished"></translation>
+        <translation>4. Affichage d&apos;image</translation>
     </message>
     <message>
         <source>5. RAM Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation>5. Performance de la ram</translation>
     </message>
     <message>
         <source>6. SD Card Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation>6. Performance carte SD</translation>
     </message>
     <message>
         <source>7. CF Card Performance  </source>
-        <translation type="unfinished"></translation>
+        <translation>7. Performance carte CF</translation>
     </message>
     <message>
         <source>&amp;Start Tests!</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Démarrer les tests !</translation>
     </message>
     <message>
         <source>Click here to perform the selected tests.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquez ici pour démarrer les tests sélectionnés.</translation>
     </message>
     <message>
         <source>Choose a model to compare your results with.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez un modèle d&apos;appareil pour réaliser les comparaisons.</translation>
     </message>
     <message>
         <source>Compare To:</source>
-        <translation type="unfinished"></translation>
+        <translation>Comparer avec : </translation>
     </message>
     <message>
         <source>error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur</translation>
     </message>
 </context>
 <context>
@@ -254,7 +254,8 @@ Cliquez et maintenez appuyer pour voir les informations à propos du module ou p
     <message>
         <source>You really want to execute
 %1 for this module?</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmez vous l&apos;execution de
+%1 pour ce module ?</translation>
     </message>
 </context>
 <context>
@@ -438,7 +439,7 @@ to this process?</source>
     </message>
     <message>
         <source>Benchmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Performance</translation>
     </message>
 </context>
 <context>

@@ -33,7 +33,10 @@ Documents (ce qui peut être vraiment très long...)</translation>
 (Note that such a tab scans &lt;i&gt;all&lt;/i&gt; documents
 on &lt;i&gt;all&lt;/i&gt; external media, which can be quite
 slow and annoying...)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Voulez-vous activer l&apos;onglet Documents?&lt;/b&gt;&lt;p&gt;
+Notez que le système recherche &lt;i&gt;tous&lt;/i&gt; les documents sur
+&lt;i&gt;tous&lt;/i&gt; les supports externes, de façon à remplir
+Documents (ce qui peut être vraiment très long...)</translation>
     </message>
 </context>
 </TS>

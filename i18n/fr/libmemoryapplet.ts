@@ -160,7 +160,7 @@ La mémoire (i.e RAM) est divisée en catégories comme suit :
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

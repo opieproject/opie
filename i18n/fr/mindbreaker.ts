@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Mind Breaker</source>
-        <translation type="unfinished"></translation>
+        <translation>Master Mind</translation>
     </message>
 </context>
 <context>

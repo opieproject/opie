@@ -128,7 +128,7 @@
     </message>
     <message>
         <source>KCheckers</source>
-        <translation type="unfinished"></translation>
+        <translation>KCheckers</translation>
     </message>
 </context>
 </TS>
