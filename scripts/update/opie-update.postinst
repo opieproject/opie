@@ -1,0 +1,52 @@
+#!/bin/bash
+#
+#  script to remove and reinstall opie
+#
+# it's free so do not sell it
+# (c) patrick s. vogtp <tille@handhelds.org>
+
+IPKG_REMOVE="ipkg remove"
+IPKG_INSTALL="ipkg install"
+echo "Upating opie"
+pack=`ipkg status | grep Package | grep -i opie | sed  "s/Package://"`
+
+
+echo "Stopping Opie"
+`/etc/init.d/qpe stop`
+
+
+for p in  $pack; do
+cmd="$IPKG_REMOVE $p"
+echo "$cmd"
+$cmd
+done
+
+#to be sure
+pack2=`ipkg status | grep Package | grep -i opie | sed  "s/Package://"`
+while [ $pack2 != "" ]
+do
+for p in  $pack2; do
+cmd="$IPKG_REMOVE $p"
+echo "$cmd"
+$cmd
+done
+pack2=`ipkg status | grep Package | grep -i opie | sed  "s/Package://"`
+done;
+
+#might help
+sync
+
+
+echo "Updateing"
+`ipkg update`
+
+for p in  $pack; do
+cmd="$IPKG_INSTALL $p"
+echo "$cmd"
+$cmd
+done
+
+ipkg remove opie-update
+
+echo "Starting Opie"
+`/etc/init.d/qpe start`
