@@ -153,8 +153,7 @@ void CardMonitor::mousePressEvent( QMouseEvent * )
         err = system( ( const char * ) cmd );
         if ( err != 0 )
         {
-            qDebug( "Could not execute `/sbin/cardctl eject 0'! err=%d",
-                    err );
+            odebug << "Could not execute `/sbin/cardctl eject 0'! err=" << err << oendl;
             popUp( tr( "CF/PCMCIA card eject failed!" ) );
         }
     }
@@ -180,8 +179,7 @@ void CardMonitor::mousePressEvent( QMouseEvent * )
         err = system( ( const char * ) cmd );
         if ( err != 0 )
         {
-            qDebug( "Could not execute `/sbin/cardctl eject 1'! err=%d",
-                    err );
+            odebug << "Could not execute `/sbin/cardctl eject 1'! err=" << err << oendl;
             popUp( tr( "CF/PCMCIA card eject failed!" ) );
         }
     }
