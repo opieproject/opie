@@ -38,6 +38,7 @@ namespace {
         QString path()const { return m_path; }
         bool isDir()const { return m_isDir; }
         void setText( const QString& );
+        void reCalc();
     private:
         mutable QPixmap* m_pix;
         QString m_path;
@@ -86,6 +87,11 @@ namespace {
         m_noInfo = true;
         QIconViewItem::setText( text );
     }
+
+    inline void IconViewItem::reCalc()
+    {
+        calcRect();
+    }
 }
 
 
@@ -111,7 +117,7 @@ PIconView::PIconView( QWidget* wid, Config* cfg )
 
     m_view->setArrangement( QIconView::LeftToRight );
     m_view->setItemTextPos( QIconView::Right );
-
+    m_view->setResizeMode(QIconView::Adjust);
 
     int dw = QApplication::desktop()->width();
     int viewerWidth = dw-style().scrollBarExtent().width();
@@ -258,7 +264,9 @@ void PIconView::slotClicked(QIconViewItem* _it) {
 void PIconView::slotThumbInfo( const QString& _path, const QString& str ) {
     if ( g_stringInf.contains( _path ) ) {
         IconViewItem* item = g_stringInf[_path];
-        item->setText( str );
+        /* if set the view shows nonsens!
+           I dont know how to fix the format of displayed text :(*/
+        //item->setText( str );
         item->repaint();
         g_stringInf.remove( _path );
     }
@@ -266,7 +274,14 @@ void PIconView::slotThumbInfo( const QString& _path, const QString& str ) {
 void PIconView::slotThumbNail(const QString& _path, const QPixmap &pix) {
     if ( g_stringPix.contains( _path ) ) {
         IconViewItem* item = g_stringPix[_path];
-        PPixmapCache::self()->insertImage( _path, pix, 64, 64 );
+
+        if (pix.width()>0) {
+            PPixmapCache::self()->insertImage( _path, pix, 64, 64 );
+            /* required for a recalculated rectangle. otherwise the view show nonsense! */
+            item->reCalc();
+        } else {
+            PPixmapCache::self()->insertImage(_path,Resource::loadPixmap( "UnknownDocument" ),64,64 );
+        }
         item->repaint();
         g_stringPix.remove( _path );
     }
