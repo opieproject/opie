@@ -14,7 +14,6 @@ HEADERS      = io_layer.h io_serial.h io_irda.h \
 	       tabwidget.h \
 	       configdialog.h \
                emulation_layer.h \
-               widget.h \
                vt102emulation.h \
                common.h \
                history.h \
@@ -28,6 +27,7 @@ HEADERS      = io_layer.h io_serial.h io_irda.h \
 	       terminalwidget.h \
 	       iolayerbase.h \
 	       serialconfigwidget.h irdaconfigwidget.h btconfigwidget.h \
+	       emulation_widget.h
 
 
 SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp \
@@ -42,7 +42,6 @@ SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp \
 	       tabwidget.cpp \
 	       configdialog.cpp \
 	       emulation_layer.cpp \
-	       widget.cpp \
 	       vt102emulation.cpp \
 	       history.cpp \
 	       screen.cpp \
@@ -55,6 +54,7 @@ SOURCES      = io_layer.cpp io_serial.cpp io_irda.cpp \
 	       terminalwidget.cpp \
 	       iolayerbase.cpp \
 	       serialconfigwidget.cpp irdaconfigwidget.cpp btconfigwidget.cpp \
+	       emulation_widget.cpp
    
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
