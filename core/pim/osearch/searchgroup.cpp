@@ -12,6 +12,7 @@
 //
 #include "searchgroup.h"
 
+#include <opie2/odebug.h>
 #include <opie2/owait.h>
 
 #include <qapplication.h>
@@ -72,7 +73,7 @@ int SearchGroup::realSearch()
 	wait->show();
 	qApp->processEvents();
 #else
-	qDebug("********** NEW_OWAIT *************");
+	Opie:Core::odebug << "********** NEW_OWAIT *************" << oendl;
 	OWait( "searching" );
 #endif
 	if (!loaded) load();

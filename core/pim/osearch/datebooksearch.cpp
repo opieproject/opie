@@ -13,9 +13,9 @@
 #include "datebooksearch.h"
 #include "eventitem.h"
 
+#include <opie2/odebug.h>
 #include <opie2/opimevent.h>
 #include <opie2/opimrecurrence.h>
-
 
 #include <qpe/resource.h>
 #include <qpe/config.h>
@@ -40,7 +40,7 @@ DatebookSearch::DatebookSearch(QListView* parent, QString name)
 
 DatebookSearch::~DatebookSearch()
 {
-	qDebug("SAVE DATEBOOK SEARCH CONFIG");
+	Opie::Core::odebug << "SAVE DATEBOOK SEARCH CONFIG" << oendl;
 	Config cfg( "osearch", Config::User );
    	cfg.setGroup( "datebook_settings" );
    	cfg.writeEntry( "show_past_events", actionShowPastEvents->isOn() );

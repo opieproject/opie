@@ -12,9 +12,10 @@
 //
 #include "applnkitem.h"
 
+#include <opie2/odebug.h>
+
 #include <qpe/applnk.h>
 #include <qpe/qcopenvelope_qws.h>
-
 
 AppLnkItem::AppLnkItem(OListViewItem* parent, AppLnk *app)
 	: ResultItem(parent)
@@ -43,7 +44,7 @@ QString AppLnkItem::toRichText()
 
 void AppLnkItem::action( int act )
 {
-	if (!_app->isValid()) qDebug("INVALID");
+	if (!_app->isValid()) Opie::Core::odebug << "INVALID" << oendl;
 	if (act == 0) _app->execute();
 	else if (act == 1){
  		QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");

@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/pim
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2, libopieui2, libopiepim2
 Description: Search through all PIM data
 Version: $QPE_VERSION$EXTRAVERSION

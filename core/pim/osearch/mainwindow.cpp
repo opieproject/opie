@@ -20,6 +20,7 @@
 #include "doclnksearch.h"
 #include "mainwindow.h"
 
+#include <opie2/odebug.h>
 #include <opie2/owait.h>
 
 #include <qpe/qpemessagebox.h>
@@ -229,7 +230,7 @@ void MainWindow::setCurrent(QListViewItem *item)
 		for (uint i = 0; i < acts.count(); i++){
 			button = buttonMap[i];
 			if (!button) {
-			    qWarning(" no button for %s", (*acts[i]).latin1() );
+				Opie::Core::owarn << " no button for " << *acts[i] << oendl;
 			    button = new QPushButton( buttonBox );
 			    buttonMap.insert( i,  button );
                             signalMapper->setMapping(button, i );
@@ -283,7 +284,7 @@ void MainWindow::searchStringChanged()
 	//ss = Global::stringQuote( _searchString );
 //	if (actionWholeWordsOnly->isOn())
 //		ss = "\\s"+_searchString+"\\s";
-//	qDebug(" set searchString >%s<",ss.latin1());
+//	Opie:Core::odebug << " set searchString >" << ss << "<" << oendl;
 	QRegExp re( ss );
 	re.setCaseSensitive( actionCaseSensitiv->isOn() );
 	re.setWildcard( actionWildcards->isOn() );
