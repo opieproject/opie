@@ -77,7 +77,7 @@ void SSHKeysApp::doRefreshListButton()
 	sshadd_process << "ssh-add" << "-l";
 	bool ret = sshadd_process.start(OProcess::Block, OProcess::AllOutput);
 	if (!ret) {
-		log_text("Error running ssh-add");
+		log_text(tr("Error running ssh-add"));
 		return;
 	}
 
@@ -167,7 +167,7 @@ void SSHKeysApp::ssh_add_exited(OProcess *proc)
 	setEnabled(TRUE);
 	if (proc->exitStatus()) {
 		
-		log_text(QString("ssh-add failed"));
+		log_text(QString(tr("ssh-add failed")));
 	}
 }
 
@@ -191,14 +191,14 @@ void SSHKeysApp::doAddButton()
 
 	if (KeyFileName->currentText().length()) {
 		addprocess << "ssh-add" << "--" << KeyFileName->currentText();
-		log_text(QString("Running ssh-add -- ") + KeyFileName->currentText());
+		log_text(QString(tr("Running ssh-add -- ")) + KeyFileName->currentText());
 	} else {
 		addprocess << "ssh-add";
-		log_text("Running ssh-add");
+		log_text(tr("Running ssh-add"));
 	}
 	bool ret = addprocess.start(OProcess::NotifyOnExit, OProcess::AllOutput);
 	if (!ret) {
-		log_text("Error running ssh-add");
+		log_text(tr("Error running ssh-add"));
 		doRefreshListButton();
 		setEnabled(TRUE);
 	}
@@ -217,11 +217,11 @@ void SSHKeysApp::doRemoveAllButton()
 	connect(&sshadd_process, SIGNAL(receivedStdout(OProcess*,char*,int)),
 		this, SLOT(log_sshadd_output(OProcess*,char*,int)));
 
-	log_text("Running ssh-add -D");
+	log_text(tr("Running ssh-add -D"));
 	sshadd_process << "ssh-add" << "-D";
 	bool ret = sshadd_process.start(OProcess::Block, OProcess::AllOutput);
 	if (!ret) {
-		log_text("Error running ssh-add");
+		log_text(tr("Error running ssh-add"));
 	}
 	doRefreshListButton();
 }
