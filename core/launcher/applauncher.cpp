@@ -656,7 +656,14 @@ void AppLauncher::createQuickLauncher()
 	    ::close( fd );
 	::setpgid( ::getpid(), ::getppid() );
 	// Try bindir first, so that foo/bar works too
-	setenv( "LD_BIND_NOW", "1", 1 );
+        /*
+         * LD_BIND_NOW will change the behaviour of ld.so and dlopen
+         * RTLD_LAZY will be made RTLD_NOW which leads to problem
+         * with miscompiled libraries... if LD_BIND_NOW is set.. there
+         * is no way back.. We will wait for numbers from TT to see
+         * if using LD_BIND_NOW is worth it - zecke
+         */
+//	setenv( "LD_BIND_NOW", "1", 1 );
 	::execv( QPEApplication::qpeDir()+"bin/quicklauncher", args );
 	::execvp( "quicklauncher", args );
         delete []args;
