@@ -1,12 +1,13 @@
-2003-??-??	Michael Lauer		<mickey@Vanille.de>
+2003-12-18	Michael Lauer		<mickey@Vanille.de>
 
+	* Released as Version 1.0.1 (Stable)
 	* Added persistant configuration settings
 	* Refactored the camera API into a library
 	* Added a command line capturing application (e.g. for web-cam)
 
 2003-04-25	Michael Lauer		<mickey@Vanille.de>
 	
-        * Released as Version 1.0
+        * Released as Version 1.0 (Stable)
 	* Added video capturing
 
 2003-04-08	Michael Lauer		<mickey@Vanille.de>
