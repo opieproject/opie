@@ -58,9 +58,9 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     config.setGroup( "Screensaver" );
 
     int interval;
-    interval = config.readNumEntry( "Interval_Dim", 30 );
+    interval = config.readNumEntry( "Interval_Dim", 20 );
     interval_dim->setValue( interval );
-    interval = config.readNumEntry( "Interval_LightOff", 20 );
+    interval = config.readNumEntry( "Interval_LightOff", 30 );
     interval_lightoff->setValue( interval );
     interval = config.readNumEntry( "Interval", 60 );
     if ( interval > 3600 ) interval /= 1000; // compatibility (was millisecs)
@@ -100,7 +100,7 @@ void LightSettings::reject()
 void LightSettings::accept()
 {
     if ( qApp->focusWidget() )
-	qApp->focusWidget()->clearFocus();
+  qApp->focusWidget()->clearFocus();
 
     applyBrightness();
 
@@ -119,7 +119,7 @@ void LightSettings::accept()
     config.writeEntry( "Interval_LightOff", interval_lightoff->value() );
     config.writeEntry( "Interval", interval_suspend->value() );
     config.writeEntry( "Brightness",
-		(brightness->maxValue()-brightness->value())*255/brightness->maxValue() );
+    (brightness->maxValue()-brightness->value())*255/brightness->maxValue() );
     config.write();
 
     QDialog::accept();
@@ -128,13 +128,13 @@ void LightSettings::accept()
 void LightSettings::applyBrightness()
 {
     int bright = (brightness->maxValue()-brightness->value())*255
-			/ brightness->maxValue();
+      / brightness->maxValue();
     set_fl(bright);
 }
 
 
 void LightSettings::done(int r)
 {
-	QDialog::done(r);
-	close ( );
+  QDialog::done(r);
+  close ( );
 }
