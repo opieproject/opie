@@ -23,7 +23,14 @@
 
 #include <qmessagebox.h>
 
-static void never_called_tr_function_um_libqpe_ts_etwas_unter_zu_jubeln() {
+#ifdef Q_OS_MACX
+   #define ATTRIBUTE_UNUSED
+#else
+   #define ATTRIBUTE_UNUSED __attribute__((unused))
+#endif
+
+static void never_called_tr_function_um_libqpe_ts_etwas_unter_zu_jubeln() ATTRIBUTE_UNUSED;
+static void never_called_tr_function_um_libqpe_ts_etwas_unter_zu_jubeln()  {
 (void)QMessageBox::tr("Yes");
 (void)QMessageBox::tr("No");
 }
