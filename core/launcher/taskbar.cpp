@@ -286,8 +286,6 @@ void TaskBar::resizeEvent( QResizeEvent *e )
 
     if ( sysTray )
         sysTray->show();
-
-    owarn << "TaskBar::resize event" << oendl;
 }
 
 void TaskBar::styleChange( QStyle &s )
