@@ -292,12 +292,12 @@ Um ein Paket auszuwählen klicken Sie in das Rechtecke auf der linken Seite.</tr
         <source>Building server list:
 <byte value="x9"/>%1</source>
         <translation>Serverlistenerstellung: 
-<byte value="x9"/>%1</source>
+<byte value="x9"/>%1
 </translation>
     </message>
     <message>
         <source>Building package list for:
-<byte value="x9"/>%1</translation>
+<byte value="x9"/>%1</source>
         <translation>Paketlistenerstellung für:
 <byte value="x9"/>%1</translation>
     </message>
