@@ -46,10 +46,6 @@
         <translation>Pasar a remoto</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation>Acerca de</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Tamaño</translation>
     </message>
@@ -176,17 +172,6 @@
 </translation>
     </message>
     <message>
-        <source>Advanced FileManager
-is copyright 2002 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation>Advanced FileManager
-is copyright 2002 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL
-</translation>
-    </message>
-    <message>
         <source>Add To Documents</source>
         <translation>Añadir a Documentos</translation>
     </message>
@@ -213,10 +198,6 @@ de los ficheros %1?</translation>
 </source>
         <translation>Confirme borrado
 </translation>
-    </message>
-    <message>
-        <source>Delete Directory</source>
-        <translation>Borrar directorio</translation>
     </message>
     <message>
         <source>Really copy
@@ -247,6 +228,35 @@ Do you really want to delete it?</source>
     <message>
         <source>Could not copy %1 to %2</source>
         <translation>No pude copiar %1 a %2</translation>
+    </message>
+    <message>
+        <source>Advanced FileManager
+is copyright 2002-2003 by
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+and is licensed by the GPL</source>
+        <translation type="unfinished">Advanced FileManager
+is copyright 2002-2003 by
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+and is licensed by the GPL
+</translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bookmark Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove Current Directory from Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

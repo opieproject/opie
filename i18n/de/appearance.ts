@@ -222,6 +222,10 @@ Dieser Bereich erlaubt anwendungsspezifische Eigenschaften auszuschalten.</trans
         <source>Appearance Settings</source>
         <translation>Erscheinungsbild-Einstellungen</translation>
     </message>
+    <message>
+        <source>Rotation direction:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditScheme</name>

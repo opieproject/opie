@@ -172,6 +172,18 @@ hinzufügen?</translation>
         <source>&amp;All Yes</source>
         <translation>&amp;Ja, alle</translation>
     </message>
+    <message>
+        <source>Export vCard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have to select a contact !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You have to set a filename !</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ConfigDlg_Base</name>
@@ -323,6 +335,26 @@ ist frei erhältlich !</translation>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
         <translation>Reihenfolge (von oben nach unten) definiert den primären Kontakt der in der rechten Spalte angezeigt wird</translation>
+    </message>
+    <message>
+        <source>Tool-/Menubar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fixed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to fixed menu-/toolbars after restarting application !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Movable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Switch to moveable menu-/toolbars after restarting application !</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

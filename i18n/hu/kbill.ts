@@ -1,8 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>HelpDialog</name>
-</context>
-<context>
     <name>KBill</name>
     <message>
         <source>kBill</source>

@@ -42,14 +42,6 @@
         <translation>Najdi</translation>
     </message>
     <message>
-        <source>Alarm and Start Time...</source>
-        <translation>Alarm in začetni čas...</translation>
-    </message>
-    <message>
-        <source>Default View</source>
-        <translation>Privzet pogled</translation>
-    </message>
-    <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
         <translation>Dogodek je potencialno daljsi,
@@ -106,6 +98,10 @@ Izhod?</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -280,8 +276,48 @@ Izhod?</translation>
         <translation>Velik</translation>
     </message>
     <message>
-        <source>Jump to current time (dayview)</source>
-        <translation>Skoči na trenuten čas</translation>
+        <source>Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default view:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Dan</translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished">Teden</translation>
+    </message>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished">Mesec</translation>
+    </message>
+    <message>
+        <source>Jump to current time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Brez</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Začetek</translation>
+    </message>
+    <message>
+        <source>Start-End</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -289,6 +325,13 @@ Izhod?</translation>
     <message>
         <source>This is an all day event.</source>
         <translation>To je celodnevni dogodek.</translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekHeader</name>
+    <message>
+        <source>week</source>
+        <translation type="unfinished">teden</translation>
     </message>
 </context>
 <context>

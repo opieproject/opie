@@ -46,10 +46,6 @@
         <translation>Fernansicht</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation>Über</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Größe</translation>
     </message>
@@ -176,16 +172,6 @@
 </translation>
     </message>
     <message>
-        <source>Advanced FileManager
-is copyright 2002 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation>Dateimanager
-Copyright 2002 von
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-unter der GPL</translation>
-    </message>
-    <message>
         <source>Add To Documents</source>
         <translation>Zu den Dokumenten hinzufügen</translation>
     </message>
@@ -212,10 +198,6 @@ unter der GPL</translation>
         <translation>Wirklich löschen
 
 </translation>
-    </message>
-    <message>
-        <source>Delete Directory</source>
-        <translation>Verzeichnis löschen</translation>
     </message>
     <message>
         <source>Really copy
@@ -245,6 +227,34 @@ Soll wirklich gelöscht werden?</translation>
     <message>
         <source>Could not copy %1 to %2</source>
         <translation>%1 konnte nicht zu %2 kopiert werden</translation>
+    </message>
+    <message>
+        <source>Advanced FileManager
+is copyright 2002-2003 by
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+and is licensed by the GPL</source>
+        <translation type="unfinished">Dateimanager
+Copyright 2002-2003 von
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+unter der GPL</translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bookmark Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove Current Directory from Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -47,10 +47,6 @@
         <translation>Basculer vers &quot;Remote&quot;</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation>A propos</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Taille</translation>
     </message>
@@ -175,16 +171,6 @@
         <translation>Impossible de déplacer</translation>
     </message>
     <message>
-        <source>Advanced FileManager
-is copyright 2002 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation>Advanced FileManager(new line)
-is copyright 2002 by(new line)
-L.J.Potter&lt;llornkcor@handhelds.org&gt;(new line)
-and is licensed by the GPL</translation>
-    </message>
-    <message>
         <source>Add To Documents</source>
         <translation>Ajouter aux Documents</translation>
     </message>
@@ -211,10 +197,6 @@ le fichier %1?</translation>
 </source>
         <translation>Vraiment effacer
 </translation>
-    </message>
-    <message>
-        <source>Delete Directory</source>
-        <translation>Effacer le répertoire</translation>
     </message>
     <message>
         <source>Really copy
@@ -245,6 +227,34 @@ Voulez-vous vraiment l&apos;effacer?</translation>
     <message>
         <source>Could not copy %1 to %2</source>
         <translation>Impossible de copier %1 vers %2</translation>
+    </message>
+    <message>
+        <source>Advanced FileManager
+is copyright 2002-2003 by
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+and is licensed by the GPL</source>
+        <translation type="unfinished">Advanced FileManager(new line)
+is copyright 2002-2003 by(new line)
+L.J.Potter&lt;llornkcor@handhelds.org&gt;(new line)
+and is licensed by the GPL</translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bookmark Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove Current Directory from Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -3,10 +3,6 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Battery status for Ipaq</source>
-        <translation>Batteriestatus für den iPAQ</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Fehler</translation>
     </message>
@@ -81,6 +77,10 @@
     <message>
         <source>Close</source>
         <translation>Schließen</translation>
+    </message>
+    <message>
+        <source>Battery status</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

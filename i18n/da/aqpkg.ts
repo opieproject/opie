@@ -1,21 +1,13 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>CategoryFilterDlg</name>
+    <name>CategoryFilterImpl</name>
     <message>
         <source>Category Filter</source>
-        <translation>Kategori filter</translation>
+        <translation type="unfinished">Kategori filter</translation>
     </message>
     <message>
-        <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Afbryd</translation>
-    </message>
-    <message>
-        <source>Select groups to show</source>
-        <translation>Vælg hvilke grupper der skal vises</translation>
+        <source>Select one or more groups</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -37,68 +29,125 @@
     </message>
 </context>
 <context>
-    <name>InstallDlg</name>
-    <message>
-        <source>Install</source>
-        <translation>Installér</translation>
-    </message>
-    <message>
-        <source>Start</source>
-        <translation>Start</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation>Indstillinger</translation>
-    </message>
-    <message>
-        <source>Output</source>
-        <translation>Output</translation>
-    </message>
-    <message>
-        <source>Destination</source>
-        <translation>Destination</translation>
-    </message>
-    <message>
-        <source>Space Avail</source>
-        <translation>Ledig plads</translation>
-    </message>
-</context>
-<context>
     <name>InstallDlgImpl</name>
     <message>
         <source>Close</source>
         <translation>Luk</translation>
     </message>
-</context>
-<context>
-    <name>InstallOptionsDlg</name>
+    <message>
+        <source>Remove
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upgrade
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(ReInstall)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(Upgrade)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation type="unfinished">Destination</translation>
+    </message>
+    <message>
+        <source>Space Avail</source>
+        <translation type="unfinished">Ledig plads</translation>
+    </message>
+    <message>
+        <source>Output</source>
+        <translation type="unfinished">Output</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Start</translation>
+    </message>
     <message>
         <source>Options</source>
-        <translation>Valgmuligheder</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+**** User Clicked ABORT ***</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>**** Process Aborted ****</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InstallOptionsDlgImpl</name>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Force Depends</source>
-        <translation>--force-depends</translation>
+        <translation type="unfinished">--force-depends</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
-        <translation>--force-reinstall</translation>
+        <translation type="unfinished">--force-reinstall</translation>
     </message>
     <message>
         <source>Force Remove</source>
-        <translation>--force-removal</translation>
+        <translation type="unfinished">--force-removal</translation>
     </message>
     <message>
         <source>Force Overwrite</source>
-        <translation>--force-overwrite</translation>
+        <translation type="unfinished">--force-overwrite</translation>
     </message>
     <message>
-        <source>Verbose WGet</source>
-        <translation>--verbose-wget</translation>
+        <source>Information Level</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>OK</source>
-        <translation>OK</translation>
+        <source>Errors only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Informative messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Troubleshooting output</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -228,26 +277,6 @@
         <translation>Klik her for at konfigurere dette program.</translation>
     </message>
     <message>
-        <source>Help</source>
-        <translation>Hjælp</translation>
-    </message>
-    <message>
-        <source>Click here for help.</source>
-        <translation>Klik her for hjælp.</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation>Om</translation>
-    </message>
-    <message>
-        <source>Click here for software version information.</source>
-        <translation>Klik her for information omkring softwaren.</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation>Valgmuligheder</translation>
-    </message>
-    <message>
         <source>Click here to hide the find toolbar.</source>
         <translation>Klik her for at skjule søge værktøjslinien.</translation>
     </message>
@@ -278,10 +307,6 @@ En blå prik ved siden af pakke navnet indikerer at pakken allerede er installer
 En blå prik med en stjerne indikerer at en nyere version af pakken er tilgængelig fra det valgte server feed.
 
 Klik inde i boksen til venstre for at vælge en pakke.</translation>
-    </message>
-    <message>
-        <source>About AQPkg</source>
-        <translation>Om AQPkg</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -435,88 +460,88 @@ Er du sikker?
         <source>U</source>
         <translation>U</translation>
     </message>
+    <message>
+        <source>Updating Launcher...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>SettingsBase</name>
+    <name>SettingsImpl</name>
     <message>
         <source>Configuration</source>
-        <translation>Konfiguration</translation>
+        <translation type="unfinished">Konfiguration</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation>Servere</translation>
-    </message>
-    <message>
-        <source>Active Server</source>
-        <translation>Aktive servere</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation>Navn:</translation>
-    </message>
-    <message>
-        <source>URL:</source>
-        <translation>URL:</translation>
-    </message>
-    <message>
-        <source>Change</source>
-        <translation>Ændre</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Fjern</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation>Ny</translation>
+        <translation type="unfinished">Servere</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation>Destinationer</translation>
-    </message>
-    <message>
-        <source>Link To Root</source>
-        <translation>Link til rod</translation>
+        <translation type="unfinished">Destinationer</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation>Proxyer</translation>
+        <translation type="unfinished">Proxyer</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished">Ny</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished">Navn:</translation>
+    </message>
+    <message>
+        <source>Address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active Server</source>
+        <translation type="unfinished">Aktive servere</translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation type="unfinished">Destination</translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link to root</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>HTTP Proxy</source>
-        <translation>HTTP Proxy</translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation>Kodeord</translation>
+        <translation type="unfinished">HTTP Proxy</translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation>Aktiveret</translation>
+        <translation type="unfinished">Aktiveret</translation>
     </message>
     <message>
         <source>FTP Proxy</source>
-        <translation>FTP Proxy</translation>
+        <translation type="unfinished">FTP Proxy</translation>
     </message>
     <message>
-        <source>Username</source>
-        <translation>Brugernavn</translation>
+        <source>Username:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Apply</source>
-        <translation>&amp;Anvend</translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation>Generelt</translation>
-    </message>
-    <message>
-        <source>(Will take effect on restart)</source>
-        <translation>(Aktiveres ved genstart)</translation>
-    </message>
-    <message>
-        <source>Show Jump To Letters</source>
-        <translation>Vis hop-til-bogstaver</translation>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

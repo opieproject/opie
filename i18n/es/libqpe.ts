@@ -349,10 +349,6 @@ editando las categorías.</translation>
 <context>
     <name>PasswordBase</name>
     <message>
-        <source>Form1</source>
-        <translation>Impreso1</translation>
-    </message>
-    <message>
         <source>1</source>
         <translation>1</translation>
     </message>

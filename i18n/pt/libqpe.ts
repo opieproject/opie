@@ -349,10 +349,6 @@ as categorias.</translation>
 <context>
     <name>PasswordBase</name>
     <message>
-        <source>Form1</source>
-        <translation>Form1</translation>
-    </message>
-    <message>
         <source>1</source>
         <translation>1</translation>
     </message>

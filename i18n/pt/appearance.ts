@@ -212,6 +212,10 @@ This area allows you to select an application and which settings you wish to dis
         <source>Appearance Settings</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Rotation direction:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditScheme</name>

@@ -106,14 +106,6 @@
         <translation>Couleur de remplissage</translation>
     </message>
     <message>
-        <source>DrawPad</source>
-        <translation>DrawPad</translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation>Page</translation>
-    </message>
-    <message>
         <source>Insert Text</source>
         <translation>Insérer un texte</translation>
     </message>
@@ -162,6 +154,82 @@ toutes les pages ?</translation>
     <message>
         <source>Anti-Aliasing</source>
         <translation>Anti-crénelage</translation>
+    </message>
+    <message>
+        <source>Click here to add a new sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to erase the current sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to remove the current sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to undo the last action.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to re-perform the last action.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to view the first page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to view the previous page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to view the next page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to view the last page.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select one of the available tools to draw lines.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select one of the available tools to draw rectangles.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select one of the available tools to draw ellipses.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the text drawing tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the fill tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the eraser tool.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the width of the drawing pen.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the color used when drawing.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select the color used when filling in areas.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DrawPad - Page %1/%2</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -295,16 +363,16 @@ toutes les pages ?</translation>
 <context>
     <name>QObject</name>
     <message>
-        <source>Title:</source>
-        <translation>Titre :</translation>
+        <source>Title: %1</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dimension:</source>
-        <translation>Dimensions :</translation>
+        <source>Dimension: %1x%2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Date:</source>
-        <translation>Date :</translation>
+        <source>Date: %1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -347,6 +415,26 @@ la page sélectionnée ?</translation>
 the selected page?</source>
         <translation>Voulez-vous supprimer
 la page sélectionnée ?</translation>
+    </message>
+    <message>
+        <source>Click here to add a new sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to erase the current sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to remove the current sheet.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to move the current sheet up one position in the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to move the current sheet down one position in the list.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

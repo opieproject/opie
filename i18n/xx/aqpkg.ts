@@ -1,20 +1,12 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>CategoryFilterDlg</name>
+    <name>CategoryFilterImpl</name>
     <message>
         <source>Category Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select groups to show</source>
+        <source>Select one or more groups</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -37,9 +29,44 @@
     </message>
 </context>
 <context>
-    <name>InstallDlg</name>
+    <name>InstallDlgImpl</name>
     <message>
-        <source>Install</source>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upgrade
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(ReInstall)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(Upgrade)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Space Avail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Output</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -51,27 +78,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Output</source>
+        <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Destination</source>
+        <source>Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Space Avail</source>
+        <source>Abort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+**** User Clicked ABORT ***</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>**** Process Aborted ****</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save output</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>InstallDlgImpl</name>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>InstallOptionsDlg</name>
+    <name>InstallOptionsDlgImpl</name>
     <message>
         <source>Options</source>
         <translation type="unfinished"></translation>
@@ -93,11 +130,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Verbose WGet</source>
+        <source>Information Level</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>OK</source>
+        <source>Errors only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Normal messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Informative messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Troubleshooting output</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -228,26 +277,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here for help.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here for software version information.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Click here to hide the find toolbar.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -271,10 +300,6 @@ A blue dot next to the package name indicates that the package is currently inst
 A blue dot with a star indicates that a newer version of the package is available from the server feed.
 
 Click inside the box at the left to select a package.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>About AQPkg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -419,9 +444,13 @@ Are you sure?
         <source>U</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Updating Launcher...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
-    <name>SettingsBase</name>
+    <name>SettingsImpl</name>
     <message>
         <source>Configuration</source>
         <translation type="unfinished"></translation>
@@ -431,35 +460,7 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Active Server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>URL:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Destinations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Link To Root</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -467,11 +468,47 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>HTTP Proxy</source>
+        <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Password</source>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Active Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link to root</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTTP Proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -483,23 +520,11 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Username</source>
+        <source>Username:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>General</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(Will take effect on restart)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show Jump To Letters</source>
+        <source>Password:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

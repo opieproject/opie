@@ -349,10 +349,6 @@ edytuje kategorie.</translation>
 <context>
     <name>PasswordBase</name>
     <message>
-        <source>Form1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>

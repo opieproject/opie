@@ -2,10 +2,6 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Battery Status</source>
-        <translation>Status baterije</translation>
-    </message>
-    <message>
         <source>Charging</source>
         <translation>Polnim</translation>
     </message>
@@ -56,6 +52,34 @@
     <message>
         <source>Close</source>
         <translation>Zapri</translation>
+    </message>
+    <message>
+        <source>Battery status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>could not open file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Charging both devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Percentage battery remaining: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Battery time remaining: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No jacket with battery inserted</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -227,6 +227,10 @@ Esta área le permite seleccionar un aplicación y qué funciones desea deshabil
         <source>Appearance Settings</source>
         <translation>Configuración de Apariencia</translation>
     </message>
+    <message>
+        <source>Rotation direction:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditScheme</name>

@@ -93,19 +93,15 @@ longa que o intervalo entre repetições.</translation>
         <translation>Sem espaço</translation>
     </message>
     <message>
-        <source>Alarm and Start Time...</source>
-        <translation>Alarme e Horário de Inicio...</translation>
-    </message>
-    <message>
         <source>WeekLst</source>
         <translation>ListaSem</translation>
     </message>
     <message>
-        <source>Default View</source>
-        <translation>Visualiz. Padrão</translation>
+        <source>Duplicate Event</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Duplicate Event</source>
+        <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -280,7 +276,47 @@ longa que o intervalo entre repetições.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Jump to current time (dayview)</source>
+        <source>Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default view:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Dia</translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished">Semana</translation>
+    </message>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished">Mês</translation>
+    </message>
+    <message>
+        <source>Jump to current time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Início</translation>
+    </message>
+    <message>
+        <source>Start-End</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -289,6 +325,13 @@ longa que o intervalo entre repetições.</translation>
     <message>
         <source>This is an all day event.</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekHeader</name>
+    <message>
+        <source>week</source>
+        <translation type="unfinished">semana</translation>
     </message>
 </context>
 <context>

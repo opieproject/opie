@@ -43,14 +43,6 @@
         <translation>Suchen</translation>
     </message>
     <message>
-        <source>Alarm and Start Time...</source>
-        <translation>Alarm- und Startzeit...</translation>
-    </message>
-    <message>
-        <source>Default View</source>
-        <translation>Voreinstellung</translation>
-    </message>
-    <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
         <translation>Der Termin dauert unter Umständen
@@ -107,6 +99,10 @@ Trozdem beenden?</translation>
     <message>
         <source>Duplicate Event</source>
         <translation>Termin duplizieren</translation>
+    </message>
+    <message>
+        <source>Edit...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -280,8 +276,48 @@ Trozdem beenden?</translation>
         <translation>Groß</translation>
     </message>
     <message>
-        <source>Jump to current time (dayview)</source>
-        <translation>Zur akt. Zeit springen (Tagesansicht)</translation>
+        <source>Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default view:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Tag</translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished">Woche</translation>
+    </message>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished">Monat</translation>
+    </message>
+    <message>
+        <source>Jump to current time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Nie</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Beginn</translation>
+    </message>
+    <message>
+        <source>Start-End</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -289,6 +325,13 @@ Trozdem beenden?</translation>
     <message>
         <source>This is an all day event.</source>
         <translation>Dieser Termin ist ganztägig.</translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekHeader</name>
+    <message>
+        <source>week</source>
+        <translation type="unfinished">Woche</translation>
     </message>
 </context>
 <context>

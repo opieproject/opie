@@ -46,10 +46,6 @@
         <translation>Preklopi na oddaljen</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation>O</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Velikost</translation>
     </message>
@@ -175,16 +171,6 @@
 </translation>
     </message>
     <message>
-        <source>Advanced FileManager
-is copyright 2002 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation>Advanced FileManager
-pravice pridržane 2002
-LJ.Potter&lt;llornkcor@handhelds.org&gt;
-in je licencirano pod GPL</translation>
-    </message>
-    <message>
         <source>Add To Documents</source>
         <translation>Dodaj med dokumente</translation>
     </message>
@@ -210,10 +196,6 @@ in je licencirano pod GPL</translation>
         <source>Really delete
 </source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Delete Directory</source>
-        <translation>Izbriši imenik</translation>
     </message>
     <message>
         <source>Really copy
@@ -244,6 +226,34 @@ Ali jo res želite izbrisati?</translation>
     <message>
         <source>Could not copy %1 to %2</source>
         <translation>Ne morem skopirati %1 v %2</translation>
+    </message>
+    <message>
+        <source>Advanced FileManager
+is copyright 2002-2003 by
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+and is licensed by the GPL</source>
+        <translation type="unfinished">Advanced FileManager
+pravice pridržane 2002-2003
+LJ.Potter&lt;llornkcor@handhelds.org&gt;
+in je licencirano pod GPL</translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bookmark Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove Current Directory from Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

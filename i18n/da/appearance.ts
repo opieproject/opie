@@ -227,6 +227,10 @@ Dette område lader dig vælge et program og hvilke indstillinger to vil slå fr
         <source>Appearance Settings</source>
         <translation>Udseende indstillinger</translation>
     </message>
+    <message>
+        <source>Rotation direction:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditScheme</name>

@@ -358,10 +358,6 @@ editando as categorias.</translation>
         <translation type="unfinished">Entre a senha</translation>
     </message>
     <message>
-        <source>Form1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>1</source>
         <translation type="unfinished"></translation>
     </message>

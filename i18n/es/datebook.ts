@@ -42,14 +42,6 @@
         <translation>Buscar</translation>
     </message>
     <message>
-        <source>Alarm and Start Time...</source>
-        <translation>Alarma y hora comienzo...</translation>
-    </message>
-    <message>
-        <source>Default View</source>
-        <translation>Vista por omisión</translation>
-    </message>
-    <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
         <translation>Duración de la cita más larga
@@ -104,6 +96,10 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Duplicate Event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -278,8 +274,48 @@ Libere espacio y vuelva a intentarlo.
         <translation>Grandes</translation>
     </message>
     <message>
-        <source>Jump to current time (dayview)</source>
-        <translation>Saltar a la hora actual (vista día)</translation>
+        <source>Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default view:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Día</translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished">Semana</translation>
+    </message>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished">Mes</translation>
+    </message>
+    <message>
+        <source>Jump to current time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Nada</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Inicio</translation>
+    </message>
+    <message>
+        <source>Start-End</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -287,6 +323,13 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>This is an all day event.</source>
         <translation>Esta cita dura todo el día.</translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekHeader</name>
+    <message>
+        <source>week</source>
+        <translation type="unfinished">semana</translation>
     </message>
 </context>
 <context>

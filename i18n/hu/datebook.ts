@@ -42,14 +42,6 @@
         <translation>Keresés</translation>
     </message>
     <message>
-        <source>Alarm and Start Time...</source>
-        <translation>Ébresztő és kezdő idő...</translation>
-    </message>
-    <message>
-        <source>Default View</source>
-        <translation>Alapértelmezett nézet</translation>
-    </message>
-    <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
         <translation>Az esemény hossza potenciálisan hosszabb
@@ -105,6 +97,10 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -279,8 +275,48 @@ Mégis kilép?</translation>
         <translation>Nagy</translation>
     </message>
     <message>
-        <source>Jump to current time (dayview)</source>
-        <translation>Jelenlegi időre ugrás (napinézet)</translation>
+        <source>Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default view:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Nap</translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished">Hét</translation>
+    </message>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished">Hónap</translation>
+    </message>
+    <message>
+        <source>Jump to current time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Nem</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Kezdet</translation>
+    </message>
+    <message>
+        <source>Start-End</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -288,6 +324,13 @@ Mégis kilép?</translation>
     <message>
         <source>This is an all day event.</source>
         <translation>Ez egy egész napos esemény.</translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekHeader</name>
+    <message>
+        <source>week</source>
+        <translation type="unfinished">hét</translation>
     </message>
 </context>
 <context>

@@ -42,14 +42,6 @@
         <translation>Find</translation>
     </message>
     <message>
-        <source>Alarm and Start Time...</source>
-        <translation>Alarm og start tid...</translation>
-    </message>
-    <message>
-        <source>Default View</source>
-        <translation>Standard visning</translation>
-    </message>
-    <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
         <translation>Begivenhedens varighed er
@@ -106,6 +98,10 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -280,8 +276,48 @@ Afslut alligevel?</translation>
         <translation>Stor</translation>
     </message>
     <message>
-        <source>Jump to current time (dayview)</source>
-        <translation>Hop til nuværende tidspunkt (dagsvis.)</translation>
+        <source>Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default view:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Dag</translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished">Uge</translation>
+    </message>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished">Måned</translation>
+    </message>
+    <message>
+        <source>Jump to current time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Ingen</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Start</translation>
+    </message>
+    <message>
+        <source>Start-End</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -289,6 +325,13 @@ Afslut alligevel?</translation>
     <message>
         <source>This is an all day event.</source>
         <translation>Denne begivenhed varer hele dagen.</translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekHeader</name>
+    <message>
+        <source>week</source>
+        <translation type="unfinished">uge</translation>
     </message>
 </context>
 <context>

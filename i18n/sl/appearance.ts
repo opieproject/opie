@@ -227,6 +227,10 @@ Ta prostor vam omogoča, da izberete program in katere nastavitve želite onemog
         <source>Appearance Settings</source>
         <translation>Nastavitve izgleda</translation>
     </message>
+    <message>
+        <source>Rotation direction:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditScheme</name>

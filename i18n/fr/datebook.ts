@@ -43,14 +43,6 @@
         <translation>Trouver</translation>
     </message>
     <message>
-        <source>Alarm and Start Time...</source>
-        <translation>Préférences...</translation>
-    </message>
-    <message>
-        <source>Default View</source>
-        <translation>Vue par défaut</translation>
-    </message>
-    <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
         <translation>La durée de l&apos;événement est peut-être plus longue
@@ -107,6 +99,10 @@ Quitter ?</translation>
     <message>
         <source>Duplicate Event</source>
         <translation>Dupliquer évènement</translation>
+    </message>
+    <message>
+        <source>Edit...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -280,8 +276,48 @@ Quitter ?</translation>
         <translation>Grand</translation>
     </message>
     <message>
-        <source>Jump to current time (dayview)</source>
-        <translation>Afficher aujourd&apos;hui (vue du jour)</translation>
+        <source>Views</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default view:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished">Jour</translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished">Semaine</translation>
+    </message>
+    <message>
+        <source>Week List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished">Mois</translation>
+    </message>
+    <message>
+        <source>Jump to current time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time display</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished">Aucun</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Début</translation>
+    </message>
+    <message>
+        <source>Start-End</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -289,6 +325,13 @@ Quitter ?</translation>
     <message>
         <source>This is an all day event.</source>
         <translation>C&apos;est un événement qui dure toute la journée.</translation>
+    </message>
+</context>
+<context>
+    <name>DateBookWeekHeader</name>
+    <message>
+        <source>week</source>
+        <translation type="unfinished">semaine</translation>
     </message>
 </context>
 <context>
