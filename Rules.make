@@ -24,8 +24,8 @@ $(TOPDIR)/.depends.cfgs:
 	@cat dirs | ( for i in `cat`; do if [ "`cat dirs|grep $$i 2>/dev/null|wc -l`" -ne "1" ]; then deps=`cat dirs|grep $$i| grep -v "^$$i$$"|for i in \`cat|sed -e's,^$(TOPDIR)/,$$(TOPDIR)/,g'\`; do echo $$i/config.in; done`; echo `echo $$i/config.in|sed -e 's,^$(TOPDIR)/,$$(TOPDIR)/,'` : $$deps; fi; done ) >> $@
 	@-rm -f dirs
 
-$(TOPDIR)/stamp-headers :
-	@-rm -f $(TOPDIR)/stamp-headers*
+$(QTDIR)/stamp-headers :
+	@-rm -f $@*
 	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
 		$(TOPDIR)/include/opie $(TOPDIR)/include/qtopia/private
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
@@ -43,8 +43,8 @@ $(TOPDIR)/stamp-headers :
 		qfontmanager_qws.h qwsdefaultdecoration_qws.h))
 	touch $@
 	
-$(TOPDIR)/stamp-headers-x11 :
-	@-rm -f $(TOPDIR)/stamp-headers*
+$(QTDIR)/stamp-headers-x11 :
+	@-rm -f $@*
 	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
 		$(TOPDIR)/include/opie $(TOPDIR)/include/qtopia/private
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )

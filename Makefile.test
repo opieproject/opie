@@ -101,8 +101,8 @@ endif
 
 all clean: $(subdir-y)
 
-$(subdir-y) : $(if $(CONFIG_LIBQPE),$(TOPDIR)/stamp-headers) \
-	$(if $(CONFIG_LIBQPE-X11),$(TOPDIR)/stamp-headers-x11) \
+$(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers) \
+	$(if $(CONFIG_LIBQPE-X11),$(QTDIR)/stamp-headers-x11) \
 	$(TOPDIR)/library/custom.h
 
 clean : $(TOPDIR)/.config
