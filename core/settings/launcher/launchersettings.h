@@ -32,6 +32,7 @@
 
 class TabsSettings;
 class TaskbarSettings;
+class GuiSettings;
 
 class LauncherSettings : public QDialog {
 	Q_OBJECT
@@ -45,6 +46,7 @@ public:
 private:
 	TabsSettings *m_tabs;
 	TaskbarSettings *m_taskbar;
+	GuiSettings *m_gui;
 };
 
 #endif

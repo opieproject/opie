@@ -52,9 +52,6 @@ protected:
 
 private:
 	QListView *m_list;
-	QCheckBox *m_omenu;
-	QCheckBox *m_omenu_tabs;
-
 	QMap <QString, QCheckListItem *> m_applets;
 	bool m_applets_changed;
 };

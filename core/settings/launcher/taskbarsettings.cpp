@@ -61,21 +61,9 @@ TaskbarSettings::TaskbarSettings ( QWidget *parent, const char *name )
 
 	lay-> addWidget ( m_list );
 
-	m_omenu = new QCheckBox ( tr( "Show O-Menu" ), this );
-	lay-> addWidget ( m_omenu );
-
-	m_omenu_tabs = new QCheckBox ( tr( "Show Launcher tabs in O-Menu" ), this );
-	lay-> addWidget ( m_omenu_tabs );
-
 	QWhatsThis::add ( m_list, tr( "Check the applets that you want displayed in the Taskbar." ));
-	QWhatsThis::add(  m_omenu_tabs, tr( "Adds the contents of the Launcher as menus in the O-Menu." ));
-	QWhatsThis::add(  m_omenu, tr( "Check if you want the O-Menu in the taskbar." ));
 
 	connect ( m_list, SIGNAL( clicked ( QListViewItem * )), this, SLOT( appletChanged ( )));
-	connect ( m_omenu, SIGNAL( toggled ( bool )), m_omenu_tabs, SLOT( setEnabled ( bool )));
-
-	// This option does not make sense ! (sandman)
-	m_omenu_tabs-> hide ( );
 
 	init ( );
 }
@@ -128,13 +116,6 @@ void TaskbarSettings::init ( )
 		item-> setOn ( exclude. find ( *it ) == exclude. end ( ));
 		m_applets [*it] = item;
 	}
-
-	cfg. setGroup ( "Menu" );
-
-	m_omenu_tabs-> setChecked ( cfg. readBoolEntry ( "LauncherTabs", true ));
-	m_omenu-> setChecked ( cfg. readBoolEntry ( "ShowMenu", true ));
-
-	m_omenu_tabs-> setEnabled ( m_omenu-> isChecked ( ));
 }
 
 void TaskbarSettings::appletChanged()
@@ -156,18 +137,6 @@ void TaskbarSettings::accept ( )
 		cfg. writeEntry ( "ExcludeApplets", exclude, ',' );
 	}
 	cfg. writeEntry ( "SafeMode", false );
-
-	cfg. setGroup ( "Menu" );
-
-	if ( m_omenu_tabs-> isChecked ( ) != cfg. readBoolEntry ( "LauncherTabs", true )) {
-		m_applets_changed = true;
-		cfg. writeEntry ( "LauncherTabs", m_omenu_tabs-> isChecked ( ));
-	}
-
-	if ( m_omenu-> isChecked ( ) != cfg. readBoolEntry ( "ShowMenu", true )) {
-		m_applets_changed = true;
-		cfg. writeEntry ( "ShowMenu", m_omenu-> isChecked ( ));
-	}
 	cfg. write ( );
 
 	if ( m_applets_changed ) {

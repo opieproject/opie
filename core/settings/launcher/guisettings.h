@@ -25,47 +25,41 @@
 
 */
 
-#include <qlayout.h>
+#ifndef __GUI_SETTINGS_H__
+#define __GUI_SETTINGS_H__
 
-#include <opie/otabwidget.h>
+#include <qwidget.h>
+#include <qmap.h>
 
-#include "launchersettings.h"
-#include "tabssettings.h"
-#include "taskbarsettings.h"
-#include "guisettings.h"
+class QListView;
+class QCheckListItem;
+class QCheckBox;
 
 
-LauncherSettings::LauncherSettings ( ) : QDialog ( 0, "LauncherSettings", false )
-{
-	setCaption ( tr( "Launcher Settings" ));
+class GuiSettings : public QWidget {
+	Q_OBJECT
 
-	QVBoxLayout *lay = new QVBoxLayout ( this, 4, 4 );
+public:
+	GuiSettings ( QWidget *parent = 0, const char *name = 0 );
 
-	OTabWidget *tw = new OTabWidget ( this, "otab" );
-	lay-> addWidget ( tw );
+	void accept ( );
 
-	m_tabs = new TabsSettings ( tw );
-	m_taskbar = new TaskbarSettings ( tw );
-	m_gui = new GuiSettings ( tw );
+protected slots:
+	void menuChanged ( );
+	void busyChanged ( );
 
-	tw-> addTab ( m_taskbar, "launchersettings/taskbartab.png", tr( "Taskbar" ));
-	tw-> addTab ( m_tabs, "launchersettings/tabstab.png", tr( "Tabs" ));
-	tw-> addTab ( m_gui, "launchersettings/guitab.png", tr( "GUI" ));
-	
-	tw-> setCurrentTab ( m_taskbar );
-}
+protected:
+	void init ( );
 
-void LauncherSettings::accept ( )
-{
-	m_taskbar-> accept ( );
-	m_tabs-> accept ( );
-	m_gui-> accept ( );
+private:
+	QCheckBox *m_omenu;
+	QCheckBox *m_omenu_tabs;
+	QCheckBox *m_omenu_home;
+	QCheckBox *m_omenu_suspend;
+	QCheckBox *m_busy;
 
-	QDialog::accept ( );
-}
+	bool m_menu_changed;
+	bool m_busy_changed;
+};
 
-void LauncherSettings::done ( int r )
-{
-	QDialog::done ( r );
-	close ( );
-}
+#endif
