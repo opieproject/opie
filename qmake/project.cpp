@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: project.cpp,v 1.2 2002-11-01 16:20:04 kergoth Exp $
+** $Id: project.cpp,v 1.3 2002-11-05 16:40:27 kergoth Exp $
 **
 ** Definition of ________ class.
 **
@@ -448,7 +448,7 @@ QMakeProject::read(QString project, QString)
 	}
 	mkspec_roots << qInstallPathData();
 
-	if (getenv("QMAKESPECSDIR")){
+	if (Option::mkfile::qmakespec.isEmpty() && getenv("QMAKESPECSDIR")){
 		QString mkspec = QString(getenv("QMAKESPECSDIR")) + QDir::separator() +
 				 QDir::separator() + "default";
 		if(QFile::exists(mkspec))
