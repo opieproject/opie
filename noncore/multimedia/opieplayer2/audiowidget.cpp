@@ -189,9 +189,6 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
     resizeEvent( NULL );
 
-    connect( &slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
-    connect( &slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
-
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
     connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
     connect( mediaPlayerState, SIGNAL( loopingToggled(bool) ), this, SLOT( setLooping(bool) ) );
@@ -319,13 +316,15 @@ if ( view == 'a' ) {
 
 void AudioWidget::setSeekable( bool isSeekable ) {
 
-    if ( isSeekable ) {
+    if ( !isSeekable ) {
         qDebug("<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>");
         if( !slider.isHidden()) {
             slider.hide();
         }
         disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+        disconnect( &slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
+        disconnect( &slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
     } else {
         // this stops the slider from being moved, thus
         // does not stop stream when it reaches the end
@@ -333,6 +332,8 @@ void AudioWidget::setSeekable( bool isSeekable ) {
         qDebug( " CONNECT SET POSTION " );
         connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+        connect( &slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
+        connect( &slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
     }
 }
 

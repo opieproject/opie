@@ -99,7 +99,7 @@ void XineControl::play( const QString& fileName ) {
         hasVideoChannel = TRUE;
     }
     // determine if slider is shown
-    mediaPlayerState->setIsSeekable( !libXine->isSeekable() );
+    mediaPlayerState->setIsSeekable( libXine->isSeekable() );
 
     // which gui (video / audio)
     mediaPlayerState->setView( whichGui );

@@ -138,11 +138,10 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
 
     resizeEvent( NULL );
 
-    connect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
-    connect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
     connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
+    connect( mediaPlayerState, SIGNAL( isSeekableToggled( bool ) ), this, SLOT( setSeekable( bool ) ) );
 
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );
@@ -388,15 +387,6 @@ void VideoWidget::makeVisible() {
         showNormal();
         showMaximized();
         setBackgroundPixmap( *pixBg );
-        if ( mediaPlayerState->seekable() ) {
-            slider->hide();
-            disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-            disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-        } else {
-            slider->show();
-            connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-            connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-        }
         QWidget *d = QApplication::desktop();
         int w = d->width();
         int h = d->height();
@@ -404,10 +394,30 @@ void VideoWidget::makeVisible() {
         if(w>h) {
             int newW=(w/2)-(246/2); //this will only work with 320x240
             videoFrame->setGeometry( QRect( newW, 4, 240, 170  ) );
-        } else
+        } else {
             videoFrame->setGeometry( QRect( 0, 30, 240, 170  ) );
+        }
+    }
+}
 
-//        qApp->processEvents();
+
+void VideoWidget::setSeekable( bool isSeekable ) {
+
+    if ( !isSeekable || mediaPlayerState->fullscreen() ) {
+        qDebug("<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>");
+        if( !slider->isHidden()) {
+            slider->hide();
+        }
+        disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+        disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+        disconnect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
+        disconnect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
+    } else {
+        slider->show();
+        connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+        connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+        connect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
+        connect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
     }
 }
 
