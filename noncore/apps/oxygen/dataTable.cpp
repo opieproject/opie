@@ -46,24 +46,15 @@ void OxydataWidget::setElement( int el )
     middle->setText( configobj.readEntry( "Name" ) );
     right->setText( QString::number( el+1 ) );
 
-    QString weight = configobj.readEntry( "Weight" );
-    DataTable->setText( 0,1,weight ); 
-    QString block = configobj.readEntry( "Block" );
-    DataTable->setText( 1,1,block ); 
-    QString grp = configobj.readEntry( "Group" );
-    DataTable->setText( 2,1,grp ); 
-    QString en = configobj.readEntry( "EN" );
-    DataTable->setText( 3,1,en ); 
-    QString ar = configobj.readEntry( "AR" );
-    DataTable->setText( 4,1,ar ) ; 
-    QString ion = configobj.readEntry( "IE" );
-    DataTable->setText( 5,1,ion ); 
-    QString dens = configobj.readEntry( "Density" );
-    DataTable->setText( 6,1,dens ); 
-    QString bp = configobj.readEntry( "BP" );
-    DataTable->setText( 7,1,bp ); 
-    QString mp = configobj.readEntry( "MP" );
-    DataTable->setText( 8,1,mp ); 
+    DataTable->setText( 0,1,configobj.readEntry( "Weight" ) ); 
+    DataTable->setText( 1,1,configobj.readEntry( "Block" ) ); 
+    DataTable->setText( 2,1,configobj.readEntry( "Group" ) ); 
+    DataTable->setText( 3,1,configobj.readEntry( "EN" ) ); 
+    DataTable->setText( 4,1,configobj.readEntry( "AR" ) ) ; 
+    DataTable->setText( 5,1,configobj.readEntry( "IE" ) ); 
+    DataTable->setText( 6,1,configobj.readEntry( "Density" ) ); 
+    DataTable->setText( 7,1,configobj.readEntry( "BP" ) ); 
+    DataTable->setText( 8,1,configobj.readEntry( "MP" ) ); 
 }
 
 void OxydataWidget::setTable()
