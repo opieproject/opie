@@ -7,6 +7,7 @@ class QVBoxLayout;
 class QLabel;
 class QComboBox;
 class QLineEdit;
+class QRadioButton;
 class IOLayerBase;
 class BTConfigWidget : public ProfileDialogConnectionWidget {
 
@@ -24,7 +25,12 @@ private:
     QComboBox* m_deviceCmb;
     IOLayerBase* m_base;
     QLineEdit* m_mac;
+    QRadioButton *m_macRadio;
+    QRadioButton *m_devRadio;
 
+private slots:
+    void slotMacRadio( bool on );
+    void slotDevRadio( bool on );
 };
 
 

@@ -2,6 +2,8 @@
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qcombobox.h>
+#include <qhbox.h>
+#include <qradiobutton.h>
 
 #include "iolayerbase.h"
 #include "btconfigwidget.h"
@@ -25,21 +27,28 @@ BTConfigWidget::BTConfigWidget( const QString& name,
                                 const char* na )
     : ProfileDialogConnectionWidget( name, parent, na ) {
 
-    m_lay = new QVBoxLayout(this );
-    m_device = new QLabel(tr("Device"), this );
-    m_deviceCmb = new QComboBox(this );
+    m_lay = new QVBoxLayout( this );
+
+    m_device = new QLabel( tr( "Device" ), this );
+    QHBox *deviceBox = new QHBox( this );
+    m_devRadio = new QRadioButton( deviceBox );
+    connect( m_devRadio, SIGNAL( toggled( bool ) ), this, SLOT( slotDevRadio( bool ) ) );
+    m_deviceCmb = new QComboBox( deviceBox );
     m_deviceCmb->setEditable( TRUE );
 
     QLabel *macLabel = new QLabel( this );
-    macLabel->setText( tr("Enter peer mac address here:") );
-    m_mac = new QLineEdit( this );
+    macLabel->setText( tr( "Or peer mac address" ) );
+    QHBox *macBox = new QHBox( this );
+    m_macRadio = new QRadioButton( macBox );
+    connect( m_macRadio, SIGNAL( toggled( bool ) ), this, SLOT( slotMacRadio( bool ) ) );
+    m_mac = new QLineEdit( macBox );
 
     m_base = new IOLayerBase(this, "base");
 
     m_lay->addWidget( m_device );
-    m_lay->addWidget( m_deviceCmb );
+    m_lay->addWidget( deviceBox );
     m_lay->addWidget( macLabel );
-    m_lay->addWidget( m_mac );
+    m_lay->addWidget( macBox );
     m_lay->addWidget( m_base );
 
     m_deviceCmb->insertItem( "/dev/ttyU0" );
@@ -57,6 +66,8 @@ void BTConfigWidget::load( const Profile& prof ) {
 
     if (!mac.isEmpty() ) {
         m_mac->setText( mac );
+    } else {
+        m_devRadio->setChecked( true );
     }
 
     if (rad_flow == 1) {
@@ -154,4 +165,24 @@ void BTConfigWidget::save( Profile& prof ) {
     prof.writeEntry("Parity", parity);
     prof.writeEntry("Speed",  speed);
     prof.writeEntry("Mac", m_mac->text() );
+}
+
+void BTConfigWidget::slotMacRadio( bool on  ) {
+    if ( on ) {
+        m_devRadio->setChecked( false );
+        m_deviceCmb->setEnabled( false );
+        m_mac->setEnabled( true );
+    } else {
+        m_devRadio->setChecked( true );
+    }
+}
+
+void BTConfigWidget::slotDevRadio( bool on  ) {
+    if ( on ) {
+        m_macRadio->setChecked( false );
+        m_deviceCmb->setEnabled( true );
+        m_mac->setEnabled( false );
+    } else {
+        m_macRadio->setChecked( true );
+    }
 }

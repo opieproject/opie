@@ -17,26 +17,40 @@ void IOBt::close() {
 
     IOSerial::close();
     // still need error handling
-    delete m_attach;
+    if ( m_attach ) {
+        delete m_attach;
+        m_attach = 0;
+    }
 }
 
 bool IOBt::open() {
 
-    // hciattach here
-    m_attach = new OProcess();
-    *m_attach << "hciattach /dev/ttyS2 any 57600";
+    // only set up bt stuff if mac address was set, otherwise use the device set
+    if ( !m_mac.isEmpty() ) {
 
-    // then start hcid, then rcfomm handling (m_mac)
+        // now it should also be checked, if there is a connection to the device with that mac allready
 
-    connect( m_attach, SIGNAL( processExited( OProcess* ) ),
-            this, SLOT( slotExited( OProcess* ) ) );
+        // hciattach here
+        m_attach = new OProcess();
+        *m_attach << "hciattach /dev/ttyS2 any 57600";
 
-    if ( m_attach->start() ) {
-        IOSerial::open();
+        // then start hcid, then rcfomm handling (m_mac)
+
+        connect( m_attach, SIGNAL( processExited( OProcess* ) ),
+                 this, SLOT( slotExited( OProcess* ) ) );
+
+        if ( m_attach->start() ) {
+            IOSerial::open();
+        } else {
+            qWarning("could not attach to device");
+            delete m_attach;
+            m_attach = 0;
+        }
     } else {
-        qWarning("could not attach to device");
-        delete m_attach;
-	m_attach = 0;
+        // directly to the normal serial
+        // TODO: look first if the connection really exists. ( is set up )
+
+        IOSerial::open();
     }
 }
 
