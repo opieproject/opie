@@ -22,7 +22,7 @@
 #include "mimetype.h"
 #include "applnk.h"
 #include "resource.h"
-#include "qpeapplication.h"
+#include <qpe/qpeapplication.h>
 #include "config.h"
 
 #include <qfile.h>

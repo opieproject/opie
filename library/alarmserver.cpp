@@ -24,12 +24,12 @@
 #include <qtextstream.h>
 
 
-#include "qpeapplication.h"
+#include <qpe/qpeapplication.h>
 #include "global.h"
 #include "resource.h"
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
-#include "qcopenvelope_qws.h"
+#include <qpe/qcopenvelope_qws.h>
 #endif
 #include "alarmserver.h"
 #include <qpe/timeconversion.h>

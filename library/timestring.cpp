@@ -20,7 +20,7 @@
 
 #include "timestring.h"
 #include <qobject.h>
-#include "qpeapplication.h" //for qApp
+#include <qpe/qpeapplication.h> //for qApp
 #include "config.h"
 
 
@@ -49,7 +49,7 @@ private:
 	Config config("qpe");
 	config.setGroup( "Date" );
 	format = DateFormat(QChar(config.readEntry("Separator", "/")[0]),
-		(DateFormat::Order)config .readNumEntry("ShortOrder", DateFormat::DayMonthYear), 
+		(DateFormat::Order)config .readNumEntry("ShortOrder", DateFormat::DayMonthYear),
 		(DateFormat::Order)config.readNumEntry("LongOrder", DateFormat::DayMonthYear));
 
 	connect( qApp, SIGNAL( dateFormatChanged(DateFormat) ),
@@ -65,7 +65,7 @@ QString DateFormat::toNumberString() const
     // for each part of the order
     for (int i = 0; i < 3; i++) {
 	// switch on the relavent 3 bits.
-	switch((_shortOrder >> (i * 3)) & 0x0007) { 
+	switch((_shortOrder >> (i * 3)) & 0x0007) {
 	    case 0x0001:
 		buf += QObject::tr( "D" );
 		break;
@@ -88,24 +88,24 @@ QString DateFormat::toWordString() const
     // for each part of the order
     for (int i = 0; i < 3; i++) {
 	// switch on the relavent 3 bits.
-	switch((_longOrder >> (i * 3)) & 0x0007) { 
+	switch((_longOrder >> (i * 3)) & 0x0007) {
 	    case 0x0001:
 		buf += QObject::tr( "day" );
-		if (i < 2) { 
+		if (i < 2) {
 		    if ((_shortOrder << ((i+1) * 3)) & 0x0007)
 			buf += ", ";
-		    else 
+		    else
 			buf += " ";
 		}
 		break;
 	    case 0x0002:
 		buf += QObject::tr( "month" );
-		if (i < 2) 
+		if (i < 2)
 		    buf += " ";
 		break;
 	    case 0x0004:
 		buf += QObject::tr( "year" );
-		if (i < 2) 
+		if (i < 2)
 		    buf += ", ";
 		break;
 	}
@@ -122,7 +122,7 @@ QString DateFormat::numberDate(const QDate &d, int v) const
     // for each part of the order
     for (int i = 0; i < 3; i++) {
 	// switch on the relavent 3 bits.
-	switch((_shortOrder >> (i * 3)) & 0x0007) { 
+	switch((_shortOrder >> (i * 3)) & 0x0007) {
 	    case 0x0001:
 	      if (pad==2) buf += QString().sprintf("%02d",d.day());
 	      else buf += QString().sprintf("%d",d.day());
@@ -161,21 +161,21 @@ QString DateFormat::wordDate(const QDate &d, int v) const
 	buf += weekDay;
 	if ((_longOrder & 0x0007) == 0x0002)
 	    buf += ' ';
-	else 
+	else
 	    buf += ", ";
     }
 
     for (int i = 0; i < 3; i++) {
 	// switch on the relavent 3 bits.
-	switch((_longOrder >> (i * 3)) & 0x0007) { 
+	switch((_longOrder >> (i * 3)) & 0x0007) {
 	    case 0x0001:
 	      if (i==1) {
 		buf += QString().sprintf("%02d, ",d.day());
 	      } else {
 		buf += QString().sprintf("%2d",d.day());
-		if (separator()=='.') // 2002/1/11 
+		if (separator()=='.') // 2002/1/11
 		  buf += ". ";
-		    else 
+		    else
 			buf += " ";
 		}
 		break;
@@ -187,7 +187,7 @@ QString DateFormat::wordDate(const QDate &d, int v) const
 		    }
 		    buf += monthName;
 		}
-		if (i < 2) 
+		if (i < 2)
 		    buf += " ";
 		break;
 	    case 0x0004:
@@ -201,7 +201,7 @@ QString DateFormat::wordDate(const QDate &d, int v) const
 
 		    buf += QString::number(year);
 		}
-		if (i < 2) 
+		if (i < 2)
 		    buf += ", ";
 		break;
 	}
@@ -219,7 +219,7 @@ void DateFormat::save(QDataStream &d) const
     d << v;
 }
 
-void DateFormat::load(QDataStream &d) 
+void DateFormat::load(QDataStream &d)
 {
     ushort value;
     d >> value;
@@ -257,7 +257,7 @@ QString TimeString::dateString( const QDate &d, DateFormat dtf )
 
 QString TimeString::longDateString( const QDate &d, DateFormat dtf )
 {
-    return dtf.wordDate(d, DateFormat::showWeekDay | DateFormat::longNumber 
+    return dtf.wordDate(d, DateFormat::showWeekDay | DateFormat::longNumber
 	    | DateFormat::longWord);
 }
 

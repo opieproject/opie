@@ -19,7 +19,7 @@
 **********************************************************************/
 
 #include "qpestyle.h"
-#include "qpeapplication.h"
+#include <qpe/qpeapplication.h>
 #include <qpushbutton.h>
 
 #include <qpainter.h>
@@ -224,7 +224,7 @@ void QPEStyle::drawControl( ControlElement ce, QPainter *p,
 			    cg.brush( QColorGroup::Button ));
 
 		    //do shading; will not work for pixmap brushes
-		    QColor bg = cg.button(); 
+		    QColor bg = cg.button();
 		    //	    int h,s,v;
 		    //	    bg.hsv( &h, &s, &v );
 		    int n = r2.height()/2;
@@ -533,8 +533,8 @@ QRect QPEStyle::comboButtonRect( int x, int y, int w, int h)
 {
     return QRect(x+1, y+1, w-2-14, h-2);
 }
-      
-       
+
+
 QRect QPEStyle::comboButtonFocusRect( int x, int y, int w, int h)
 {
     return QRect(x+2, y+2, w-4-14, h-4);
@@ -918,7 +918,7 @@ void QPEStyle::drawTab( QPainter *p, const QTabBar *tb, QTab *t, bool selected )
 			 tb->colorGroup().brush( QColorGroup::Button ));
 
 	    //do shading; will not work for pixmap brushes
-	    QColor bg = tb->colorGroup().button(); 
+	    QColor bg = tb->colorGroup().button();
 	    //	    int h,s,v;
 	    //	    bg.hsv( &h, &s, &v );
 	    int n = r.height()/2;
@@ -1028,7 +1028,7 @@ int QPEStyle::extraPopupMenuItemWidth( bool checkable, int maxpmw, QMenuItem* mi
 */
 int QPEStyle::popupMenuItemHeight( bool /*checkable*/, QMenuItem* mi, const QFontMetrics& fm )
 {
-#ifndef QT_NO_MENUDATA    
+#ifndef QT_NO_MENUDATA
     int h = 0;
     if ( mi->isSeparator() )			// separator height
 	h = motifSepHeight;
@@ -1050,7 +1050,7 @@ void QPEStyle::drawPopupMenuItem( QPainter* p, bool checkable, int maxpmw, int t
 				       const QPalette& pal,
 				       bool act, bool enabled, int x, int y, int w, int h)
 {
-#ifndef QT_NO_MENUDATA    
+#ifndef QT_NO_MENUDATA
     const QColorGroup & g = pal.active();
     bool dis	  = !enabled;
     QColorGroup itemg = dis ? pal.disabled() : pal.active();

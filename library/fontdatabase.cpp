@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 
-#include "qpeapplication.h"
+#include <qpe/qpeapplication.h>
 #include "fontfactoryinterface.h"
 #include "fontdatabase.h"
 

@@ -1,44 +1,44 @@
 /***************************************************************************
-(C) Copyright 1996 Apple Computer, Inc., AT&T Corp., International             
-Business Machines Corporation and Siemens Rolm Communications Inc.             
-                                                                               
-For purposes of this license notice, the term Licensors shall mean,            
-collectively, Apple Computer, Inc., AT&T Corp., International                  
-Business Machines Corporation and Siemens Rolm Communications Inc.             
-The term Licensor shall mean any of the Licensors.                             
-                                                                               
-Subject to acceptance of the following conditions, permission is hereby        
-granted by Licensors without the need for written agreement and without        
-license or royalty fees, to use, copy, modify and distribute this              
-software for any purpose.                                                      
-                                                                               
-The above copyright notice and the following four paragraphs must be           
-reproduced in all copies of this software and any software including           
-this software.                                                                 
-                                                                               
-THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS AND NO LICENSOR SHALL HAVE       
-ANY OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS OR       
-MODIFICATIONS.                                                                 
-                                                                               
-IN NO EVENT SHALL ANY LICENSOR BE LIABLE TO ANY PARTY FOR DIRECT,              
-INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES OR LOST PROFITS ARISING OUT         
-OF THE USE OF THIS SOFTWARE EVEN IF ADVISED OF THE POSSIBILITY OF SUCH         
-DAMAGE.                                                                        
-                                                                               
-EACH LICENSOR SPECIFICALLY DISCLAIMS ANY WARRANTIES, EXPRESS OR IMPLIED,       
-INCLUDING BUT NOT LIMITED TO ANY WARRANTY OF NONINFRINGEMENT OR THE            
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR             
-PURPOSE.                                                                       
+(C) Copyright 1996 Apple Computer, Inc., AT&T Corp., International
+Business Machines Corporation and Siemens Rolm Communications Inc.
 
-The software is provided with RESTRICTED RIGHTS.  Use, duplication, or         
-disclosure by the government are subject to restrictions set forth in          
-DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.                         
+For purposes of this license notice, the term Licensors shall mean,
+collectively, Apple Computer, Inc., AT&T Corp., International
+Business Machines Corporation and Siemens Rolm Communications Inc.
+The term Licensor shall mean any of the Licensors.
+
+Subject to acceptance of the following conditions, permission is hereby
+granted by Licensors without the need for written agreement and without
+license or royalty fees, to use, copy, modify and distribute this
+software for any purpose.
+
+The above copyright notice and the following four paragraphs must be
+reproduced in all copies of this software and any software including
+this software.
+
+THIS SOFTWARE IS PROVIDED ON AN "AS IS" BASIS AND NO LICENSOR SHALL HAVE
+ANY OBLIGATION TO PROVIDE MAINTENANCE, SUPPORT, UPDATES, ENHANCEMENTS OR
+MODIFICATIONS.
+
+IN NO EVENT SHALL ANY LICENSOR BE LIABLE TO ANY PARTY FOR DIRECT,
+INDIRECT, SPECIAL OR CONSEQUENTIAL DAMAGES OR LOST PROFITS ARISING OUT
+OF THE USE OF THIS SOFTWARE EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGE.
+
+EACH LICENSOR SPECIFICALLY DISCLAIMS ANY WARRANTIES, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO ANY WARRANTY OF NONINFRINGEMENT OR THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE.
+
+The software is provided with RESTRICTED RIGHTS.  Use, duplication, or
+disclosure by the government are subject to restrictions set forth in
+DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.
 
 ***************************************************************************/
 
 /*
  * src: vobject.c
- * doc: vobject and APIs to construct vobject, APIs pretty print 
+ * doc: vobject and APIs to construct vobject, APIs pretty print
  * vobject, and convert a vobject into its textual representation.
  */
 
@@ -46,8 +46,8 @@ DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.
 #include <malloc.h>
 #endif
 
-#include "vobject_p.h"
-#include "qfiledirect_p.h"
+#include <qtopia/private/vobject_p.h>
+#include <qtopia/private/qfiledirect_p.h>
 #include <string.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -327,18 +327,18 @@ DLLEXPORT(VObject*) setValueWithSize(VObject *prop, void *val, unsigned int size
 
 DLLEXPORT(void) initPropIterator(VObjectIterator *i, VObject *o)
 {
-    i->start = o->prop; 
+    i->start = o->prop;
     i->next = 0;
 }
 
 DLLEXPORT(void) initVObjectIterator(VObjectIterator *i, VObject *o)
 {
-    i->start = o->next; 
+    i->start = o->next;
     i->next = 0;
 }
 
 DLLEXPORT(int) moreIteration(VObjectIterator *i)
-{ 
+{
     return (i->start && (i->next==0 || i->next!=i->start));
 }
 
@@ -403,7 +403,7 @@ DLLEXPORT(VObject*) addGroup(VObject *o, const char *g)
 	    t = addProp(t,VCGroupingProp);
 	    setVObjectStringZValue(t,lookupProp_(n));
 	    } while (n != gs);
-	deleteStr(gs);	
+	deleteStr(gs);
 	return p;
 	}
     else
@@ -799,12 +799,12 @@ static struct PreDefProp* lookupPropInfo(const char* str)
 {
     /* brute force for now, could use a hash table here. */
     int i;
-	
+
     for (i = 0; propNames[i].name; i++)
 	if (qstricmp(str, propNames[i].name) == 0) {
 	    return &propNames[i];
 	    }
-    
+
     return 0;
 }
 
@@ -812,7 +812,7 @@ static struct PreDefProp* lookupPropInfo(const char* str)
 DLLEXPORT(const char*) lookupProp_(const char* str)
 {
     int i;
-	
+
     for (i = 0; propNames[i].name; i++)
 	if (qstricmp(str, propNames[i].name) == 0) {
 	    const char* s;
@@ -826,7 +826,7 @@ DLLEXPORT(const char*) lookupProp_(const char* str)
 DLLEXPORT(const char*) lookupProp(const char* str)
 {
     int i;
-	
+
     for (i = 0; propNames[i].name; i++)
 	if (qstricmp(str, propNames[i].name) == 0) {
 	    const char *s;
@@ -1005,27 +1005,27 @@ static int writeBase64(OFile *fp, unsigned char *s, long len)
     return 1;
 }
 
-static const char *replaceChar(unsigned char c) 
+static const char *replaceChar(unsigned char c)
 {
     if (c == '\n') {
 	return "=0A=\n";
     } else if (
-	    (c >= 'A' && c <= 'Z') 
+	    (c >= 'A' && c <= 'Z')
 	    ||
-	    (c >= 'a' && c <= 'z') 
+	    (c >= 'a' && c <= 'z')
 	    ||
-	    (c >= '0' && c <= '9') 
+	    (c >= '0' && c <= '9')
 	    ||
-	    (c >= '\'' && c <= ')') 
+	    (c >= '\'' && c <= ')')
 	    ||
-	    (c >= '+' && c <= '-') 
+	    (c >= '+' && c <= '-')
 	    ||
 	    (c == '/')
 	    ||
-	    (c == '?') 
+	    (c == '?')
 	    ||
-	    (c == ' ')) 
-    { 
+	    (c == ' '))
+    {
 	return 0;
     }
 
@@ -1051,7 +1051,7 @@ static const char *replaceChar(unsigned char c)
 static void writeQPString(OFile *fp, const char *s)
 {
     /*
-	only A-Z, 0-9 and 
+	only A-Z, 0-9 and
        "'"  (ASCII code 39)
        "("  (ASCII code 40)
        ")"  (ASCII code 41)
@@ -1060,7 +1060,7 @@ static void writeQPString(OFile *fp, const char *s)
        "-"  (ASCII code 45)
        "/"  (ASCII code 47)
        "?"  (ASCII code 63)
-       
+
        should remain un-encoded.
        '=' needs to be encoded as it is the escape character.
        ';' needs to be as it is a field separator.
@@ -1093,7 +1093,7 @@ static bool includesUnprintable(VObject *o)
     }
     return FALSE;
 }
-	    
+
 static void writeVObject_(OFile *fp, VObject *o);
 
 static void writeValue(OFile *fp, VObject *o, unsigned long size)
@@ -1229,7 +1229,7 @@ static void writeProp(OFile *fp, VObject *o)
 	    }
 	}
 
-	
+
     if (VALUE_TYPE(o)) {
 	    if ( includesUnprintable(o) ) {
 	    appendsOFile(fp, ";" VCEncodingProp "=" VCQuotedPrintableProp);

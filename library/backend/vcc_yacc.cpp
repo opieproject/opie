@@ -1,6 +1,6 @@
 #ifndef lint
 /*static char yysccsid[] = "from: @(#)yaccpar	1.9 (Berkeley) 02/21/93";*/
-static char yyrcsid[] = "$Id: vcc_yacc.cpp,v 1.2 2002-09-10 12:09:51 zecke Exp $";
+static char yyrcsid[] = "$Id: vcc_yacc.cpp,v 1.3 2002-10-15 21:42:20 zecke Exp $";
 #endif
 #define YYBYACC 1
 #define YYMAJOR 1
@@ -158,7 +158,7 @@ DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.
 /*#ifdef PALMTOPCENTER*/
 /*#include <qpe/vobject_p.h>*/
 /*#else*/
-#include "vobject_p.h"
+#include <qtopia/private/vobject_p.h>
 /*#endif*/
 
 /****  Types, Constants  ****/

@@ -36,6 +36,7 @@ struct FontFactory
     QFontFactory *factory;
 };
 
+#undef QT_NO_FONTDATABASE
 class FontDatabase
 #ifndef QT_NO_FONTDATABASE
     : public QFontDatabase

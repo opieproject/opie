@@ -31,15 +31,15 @@
 #include "storage.h"
 #include "qpemenubar.h"
 #ifdef QWS
-#include "qcopchannel_qws.h"
+#include <qcopchannel_qws.h>
 #endif
 #include "lnkproperties.h"
 #include "applnk.h"
-#include "qpeapplication.h"
+#include <qpe/qpeapplication.h>
 #include "categorymenu.h"
 #include "categoryselect.h"
 #include "mimetype.h"
-#include "categories.h"
+#include <qpe/categories.h>
 
 #include <stdlib.h>
 

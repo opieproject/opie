@@ -122,7 +122,7 @@ DFARS 252.227-7013 or 48 CFR 52.227-19, as applicable.
 //#ifdef PALMTOPCENTER
 //#include <qpe/vobject_p.h>
 //#else
-#include "vobject_p.h"
+#include <qtopia/private/vobject_p.h>
 //#endif
 
 /****  Types, Constants  ****/

@@ -22,7 +22,7 @@
 #include "datebookdb.h"
 #include <qtopia/private/event.h>
 #include "resource.h"
-#include "qpeapplication.h"
+#include <qpe/qpeapplication.h>
 #include "timestring.h"
 
 #include <qtoolbutton.h>
@@ -554,10 +554,10 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
 	int w = cr.width();
 	Event ev = (*itDays).event();
 
-	int f = (*itDays).start().hour(); // assume Effective event 
+	int f = (*itDays).start().hour(); // assume Effective event
 	int t = (*itDays).end().hour(); 	 // is truncated.
 
-	if (ev.isAllDay()) { 
+	if (ev.isAllDay()) {
 	    if (!ev.hasRepeat())
 		normalAllDay = TRUE;
 	    else
@@ -615,9 +615,9 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
 		p->fillRect( 0, 0, cr.width(), cr.height(),
 			colorRepeatLight );
     } else {
-	p->fillRect( 0, 0, cr.width(), 
-		cr.height(), selected 
-		?  g.brush( QColorGroup::Highlight ) 
+	p->fillRect( 0, 0, cr.width(),
+		cr.height(), selected
+		?  g.brush( QColorGroup::Highlight )
 		: g.brush( QColorGroup::Base ) );
     }
 
@@ -733,7 +733,7 @@ void DateButton::setDate( QDate d )
 {
     currDate = d;
     setText( longFormat ? TimeString::longDateString( d, df ) :
-	     TimeString::shortDate( d, df ) ); 
+	     TimeString::shortDate( d, df ) );
 
 }
 

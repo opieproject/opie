@@ -23,7 +23,7 @@
 #undef protected
 
 #include "qpedialog.h"
-#include "qpeapplication.h"
+#include <qpe/qpeapplication.h>
 
 QPEDialogListener::QPEDialogListener(QDialog *di ) : QObject(di)
 {
@@ -36,7 +36,7 @@ QPEDialogListener::~QPEDialogListener() {}
 
 void QPEDialogListener::appMessage( const QCString &msg, const QByteArray & )
 {
-    if (!dialog) 
+    if (!dialog)
 	return;
     if (msg == "accept()") {
 	dialog->accept();

@@ -19,7 +19,7 @@
 **********************************************************************/
 
 #define QTOPIA_INTERNAL_MIMEEXT
-#include "qpeapplication.h"
+#include <qpe/qpeapplication.h>
 #include "resource.h"
 #include "mimetype.h"
 #include <qdir.h>
