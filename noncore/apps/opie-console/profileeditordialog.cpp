@@ -149,6 +149,11 @@ void ProfileEditorDialog::accept()
         qWarning("Term %s %s", m_fact->internal(m_termCmb->currentText() ).data(),
                  m_termCmb->currentText().latin1() );
 
+        if (m_con )
+            m_con->save( m_prof );
+        if (m_term )
+            m_term->save( m_prof );
+
 	QDialog::accept();
 }
 
@@ -181,10 +186,12 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
  */
 void ProfileEditorDialog::slotTermActivated( const QString& str ) {
     delete m_term;
-    m_term = m_fact->newTerminalPlugin( str, 0l );
+    m_term = m_fact->newTerminalPlugin( str, m_tabTerm );
     qWarning("past");
 
-    if (m_term)
+    if (m_term) {
+        m_term->load(m_prof );
         m_layTerm->addWidget( m_term );
+    }
 }
 

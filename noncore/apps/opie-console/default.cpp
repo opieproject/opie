@@ -1,5 +1,6 @@
 #include "io_serial.h"
 #include "sz_transfer.h"
+#include "terminalwidget.h"
 
 #include "default.h"
 
@@ -38,8 +39,8 @@ extern "C" {
     }
 
     // Terminal Widget(s)
-    ProfileDialogWidget* newTerminalWidget(const QString&, QWidget* ) {
-        return 0l;
+    ProfileDialogWidget* newTerminalWidget(const QString& na, QWidget* wid) {
+        return new TerminalWidget(na, wid,0 );
     }
 
 };

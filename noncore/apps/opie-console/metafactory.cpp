@@ -96,7 +96,7 @@ ProfileDialogWidget *MetaFactory::newTerminalPlugin( const QString& str, QWidget
 
     QMap<QString, configWidget>::Iterator it;
     it = m_termFact.find( str );
-    if ( it != m_conFact.end() ) {
+    if ( it != m_termFact.end() ) {
         wid = (*(it.data() ) )(str,parent);
     }
     return wid;

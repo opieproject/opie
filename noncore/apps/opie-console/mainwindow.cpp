@@ -120,6 +120,7 @@ void MainWindow::populateProfiles() {
 }
 MainWindow::~MainWindow() {
     delete m_factory;
+    manager()->save();
 }
 
 MetaFactory* MainWindow::factory() {
