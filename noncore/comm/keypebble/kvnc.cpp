@@ -73,7 +73,7 @@ KVNC::KVNC( const char *name ) : QMainWindow( 0, name ,WStyle_ContextHelp)
     setCentralWidget( stack );
 
 
-    connect( bookmarkSelector->bookmarkList, SIGNAL(doubleClicked(QListBoxItem *)),
+    connect( bookmarkSelector->bookmarkList, SIGNAL(clicked(QListBoxItem *)),
 	    this, SLOT(openConnection(QListBoxItem *)) );
     connect( canvas->connection(), SIGNAL(statusChanged(const QString &)),
 	    this, SLOT(statusMessage(const QString &)) );
