@@ -73,27 +73,20 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     palmtopLogo->setPixmap( logo1Pixmap );
     palmtopLogo->setFixedSize( 60, 60 );
     hb1->addWidget( palmtopLogo, 0, Qt::AlignTop + Qt::AlignLeft );
-    
+
     QLabel *palmtopVersion = new QLabel( this );
     palmtopVersion->setText( palmtopVersionString  );
     hb1->addWidget( palmtopVersion, 1, Qt::AlignTop + Qt::AlignLeft );
 
-    
+
     QHBoxLayout *hb2 = new QHBoxLayout( vb );
     hb1->setSpacing( 2 );
-    
-    QLabel *linuxLogo = new QLabel( this );
 
-    // Need to do this extra qpainter code with this image becuase for some
-    // reason it doesn't alpha belnd if directly converted to a pixmap
-    QPixmap logo2Pixmap( 60, 60 );
-    QColor bgColor = colorGroup().background();
-    QPainter painter( &logo2Pixmap );
-    painter.fillRect( QRect( 0, 0, 60, 60 ), QBrush( bgColor ) );
+    QLabel *linuxLogo = new QLabel( this );
     QImage logo2 = Resource::loadImage( "tux-logo" );
-    logo2 = logo2.smoothScale( 40, 47 );
-    painter.drawImage( 0, 0, logo2 );
-    painter.end();
+    logo2 = logo2.smoothScale( 55, 60 );
+    QPixmap logo2Pixmap;
+    logo2Pixmap.convertFromImage( logo2 );
     linuxLogo->setPixmap( logo2Pixmap );
     linuxLogo->setFixedSize( 60, 60 );
     hb2->addWidget( linuxLogo, 0, Qt::AlignTop + Qt::AlignLeft );
