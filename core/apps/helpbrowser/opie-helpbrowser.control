@@ -1,11 +1,11 @@
 Package: opie-helpbrowser
-Files: bin/helpbrowser apps/Applications/helpbrowser.desktop docs pics/helpbrowser
+Files: plugins/application/libhelpbrowser.so* bin/helpbrowser apps/Applications/helpbrowser.desktop docs pics/helpbrowser
 Priority: optional
 Section: opie/applications
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Arch: iPAQ
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 Description: Browse HTML help documents
  The HTML help browser for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION
