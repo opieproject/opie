@@ -79,7 +79,6 @@
 #include <sys/ioctl.h>
 #include <sys/wait.h>
 
-#undef HAVE_OPENPTY
 #ifdef HAVE_OPENPTY
 #include <pty.h>
 #endif
@@ -260,12 +259,12 @@ void MyPty::send_bytes(const char* s, int len)
   printf("\n");
 #endif
 
-  ::write(fd, s, len);  
+  ::write(fd, s, len);
 }
 
 /*! indicates that a block of data is received */
 void MyPty::readPty()
-{ 
+{
   char buf[4096];
 
   int len = ::read( fd, buf, 4096 );
@@ -277,7 +276,7 @@ void MyPty::readPty()
      return;
 
   emit block_in(buf,len);
-  
+
 #ifdef VERBOSE_DEBUG
   // verbose debug
   printf("read bytes:\n");

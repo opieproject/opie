@@ -68,7 +68,7 @@ public slots:
 signals:
 
   void done(TEWidget*, int);
-  void changeTitle(TEWidget*, QString);
+  void changeTitle(TEWidget*, const QString&);
 
 private:
 

@@ -21,7 +21,6 @@
 /* -------------------------------------------------------------------------- */
 // enhancements added by L.J. Potter <ljp@llornkcor.com>
 // enhancements added by Phillip Kuhn
-//#define QT_QWS_OPIE
 
 #include <stdlib.h>
 
@@ -369,8 +368,8 @@ void Konsole::init(const char* _pgm, QStrList & _args)
     fromMenu = FALSE;
     fullscreen = false;
 
-    setCaption( "Konsole" );
-    setIcon( Resource::loadPixmap( "qkonsole/qkonsole" ) );
+    setCaption( tr( "Konsole" ) );
+    setIcon( Resource::loadPixmap( "konsole/Terminal" ) );
 
     Config cfg( "Konsole" );
     cfg.setGroup("Font");
@@ -577,7 +576,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
     configMenu->insertItem(tr( "Colors") ,colorMenu);
 
     sessionList = new QPopupMenu(this);
-    sessionList-> insertItem ( Resource::loadPixmap ( "qkonsole/qkonsole" ), tr( "new session" ),  this,
+    sessionList-> insertItem ( Resource::loadPixmap ( "konsole/Terminal" ), tr( "new session" ),  this,
                                SLOT(newSession()) );
 
     //  connect( fontList, SIGNAL( activated(int) ), this, SLOT( fontChanged(int) ));
@@ -879,7 +878,7 @@ void Konsole::changeFontSize(int delta)
     }
 }
 
-int Konsole::findFont(QString name, int size, bool exactMatch)
+int Konsole::findFont(const QString& name, int size, bool exactMatch)
 {
     for(uint i = 0; i < fonts.count(); i++)
     {
@@ -1159,11 +1158,11 @@ void Konsole::doneSession(TEWidget* te, int )
     }
 }
 
-void Konsole::changeTitle(TEWidget* te, QString newTitle )
+void Konsole::changeTitle(TEWidget* te, const QString& newTitle )
 {
     if (te == getTe())
     {
-        setCaption(newTitle + " - QKonsole");
+        setCaption( newTitle + " - " + tr( "Konsole " ) );
     }
 }
 
@@ -1200,8 +1199,8 @@ void Konsole::newSession()
         TESession* se = new TESession(this, te, se_pgm, se_args, "xterm");
         te->currentSession = se;
         connect( se, SIGNAL(done(TEWidget*,int)), this, SLOT(doneSession(TEWidget*,int)) );
-        connect( se, SIGNAL(changeTitle(TEWidget*,QString)), this,
-                 SLOT(changeTitle(TEWidget*,QString)) );
+        connect( se, SIGNAL(changeTitle(TEWidget*,const QString&)), this,
+                 SLOT(changeTitle(TEWidget*,const QString&)) );
         connect(te, SIGNAL(changeFontSize(int)), this, SLOT(changeFontSize(int)));
         connect(te, SIGNAL(changeSession(int)), this, SLOT(changeSession(int)));
         connect(te, SIGNAL(newSession()), this, SLOT(newSession()));
@@ -1309,11 +1308,11 @@ void Konsole::switchSession(QWidget* w)
     }
     if (! te->currentSession->Title().isEmpty() )
     {
-        setCaption(te->currentSession->Title() + " - QKonsole");
+        setCaption( te->currentSession->Title() + " - " + tr( "Konsole" ) );
     }
     else
     {
-        setCaption( "Konsole" );
+        setCaption( tr( "Konsole" ) );
     }
     //  colorMenuSelected(te->color_menu_item);
 }

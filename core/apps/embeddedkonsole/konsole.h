@@ -73,7 +73,7 @@ public slots:
 private slots:
     void setDocument(const QString &);
     void doneSession(TEWidget*,int);
-    void changeTitle(TEWidget*,QString);
+    void changeTitle(TEWidget*, const QString&);
     void changeColumns(int);
     void setFont(int);
     //  void fontChanged(int);
@@ -110,7 +110,7 @@ private:
     void setColorPixmaps();
     void setHistory(bool);
     void setColors(QColor foreground, QColor background);
-    int findFont(QString name, int size, bool exact = false);
+    int findFont(const QString& name, int size, bool exact = false);
     QSize calcSize(int columns, int lines);
     TEWidget* getTe();
     QStringList commands;
@@ -124,7 +124,7 @@ private:
     class VTFont
     {
     public:
-        VTFont(QString name, QFont& font, QString family, int familyNum, int size)
+        VTFont(const QString& name, QFont& font, const QString& family, int familyNum, int size)
         {
             this->name = name;
             this->font = font;
