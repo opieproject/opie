@@ -3,7 +3,7 @@
 
 #define MAINVERSION  "0"
 #define SUBVERSION   "9"
-#define PATCHVERSION "4"
+#define PATCHVERSION "5"
 
 #define APPNAME "OPIE_ADDRESSBOOK"
 

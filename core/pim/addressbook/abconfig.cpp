@@ -12,6 +12,7 @@ AbConfig::AbConfig( ):
 	m_fontSize( 1 ),
 	m_barPos( QMainWindow::Top ),
 	m_fixedBars( true ),
+	m_lpSearchMode( LastName ),
 	m_changed( false )
 {
 }
@@ -58,6 +59,11 @@ QMainWindow::ToolBarDock AbConfig::getToolBarPos() const
 bool AbConfig::fixedBars() const
 {
 	return m_fixedBars;
+}
+
+AbConfig::LPSearchMode AbConfig::letterPickerSearch() const
+{
+	return ( AbConfig::LPSearchMode ) m_lpSearchMode;
 }
 
 void AbConfig::setUseRegExp( bool v )
@@ -109,6 +115,12 @@ void AbConfig::setFixedBars( const bool fixed )
 	m_changed = true;
 }
 
+void AbConfig::setLetterPickerSearch( const AbConfig::LPSearchMode mode )
+{
+	m_lpSearchMode = mode;
+	m_changed = true;
+}
+
 void AbConfig::load()
 {
 	// Read Config settings
@@ -118,8 +130,9 @@ void AbConfig::load()
 	m_fontSize = cfg.readNumEntry( "fontSize", 1 );
 
 	cfg.setGroup("Search");
-	m_useRegExp = cfg.readBoolEntry( "useRegExp" );
-	m_beCaseSensitive = cfg.readBoolEntry( "caseSensitive" );
+	m_useRegExp = cfg.readBoolEntry( "useRegExp", false );
+	m_beCaseSensitive = cfg.readBoolEntry( "caseSensitive", false );
+	m_lpSearchMode = cfg.readNumEntry( "lpSearchMode", FullName );
 
 	cfg.setGroup("Mail");
 	m_useQtMail = cfg.readBoolEntry( "useQtMail", true );
@@ -159,6 +172,7 @@ void AbConfig::save()
 		cfg.setGroup("Search");
 		cfg.writeEntry("useRegExp", m_useRegExp);
 		cfg.writeEntry("caseSensitive", m_beCaseSensitive);
+		cfg.writeEntry("lpSearchMode", m_lpSearchMode );
 
 		cfg.setGroup("Mail");
 		cfg.writeEntry( "useQtMail", m_useQtMail );
@@ -194,5 +208,6 @@ void AbConfig::operator= ( const AbConfig& cnf )
 	m_ordered = cnf.m_ordered;
 	m_barPos = cnf.m_barPos;
 	m_fixedBars = cnf.m_fixedBars;
+	m_lpSearchMode = cnf.m_lpSearchMode;
 }
 

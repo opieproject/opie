@@ -7,6 +7,14 @@
 class AbConfig
 {
 public:
+	enum LPSearchMode{
+		LastName = 0,
+		FullName,
+		LASTELEMENT
+	};
+
+
+
     AbConfig();
     ~AbConfig();
     
@@ -20,6 +28,7 @@ public:
     QValueList<int> orderList() const;
     QMainWindow::ToolBarDock getToolBarPos() const;
     bool fixedBars() const;
+    LPSearchMode letterPickerSearch() const;
     
     void setUseRegExp( bool v );
     void setUseWildCards( bool v );
@@ -30,6 +39,7 @@ public:
     void setOrderList( const QValueList<int>& list );
     void setToolBarDock( const QMainWindow::ToolBarDock v );
     void setFixedBars( const bool fixed );
+    void setLetterPickerSearch( const LPSearchMode mode );
 
     void operator= ( const AbConfig& cnf );
 
@@ -50,6 +60,7 @@ protected:
     QValueList<int> m_ordered;
     int m_barPos;
     bool m_fixedBars;
+    int m_lpSearchMode;
 
     bool m_changed;
 };

@@ -11,7 +11,6 @@ Feature requests:
 - Implementing additional Views (Phonebook, ...)
 - Birthday & Anniversary Reminder
 - Beaming of multiple contacts (current list/ by search or by category)
-- Configure the letter-picker: lastname/fullname search 
 - Optionally put scrollbars left.
 
 Known Bugs:
@@ -26,17 +25,18 @@ Urgent:
 Important:
 ----------
 
-- "What's this" should be added (Deleyed after Feature Freeze)
+- Configure the letter-picker: lastname/fullname search 
+	-> Currently just behind the scenes ..
+- Implement a correct handling of Organizations. They are currently
+  handled as normal persons.. :(
 
 Less important:
 ---------------
 - Reload if contacts were changed externally
 - The picker (alphabetical sort widget) should be
    placed verticaly or horizontally (configurable)
-- Find a smart solution for activating/deactivating the "send email" event
-- If new contact is added (contacteditor closed): focus (table, card) to
-  this entry !
 - After search (Started with Return): KeyFocus should be on Tabelle
+- Find a smart solution for activating/deactivating the "send email" event
 
 ContactEditor:
 - Redesign of Contacteditor
@@ -110,3 +110,6 @@ Fixed/Ready:
 - Cursor-UP/Down: Should additionally scroll cardview if it is too large 
   (behaviour should be selectable by configuration)
 - User center of the joypad to switch back from card to listview !
+- If new contact is added (contacteditor closed): focus (table, card) to
+  this entry !
+- Typo: Mov_e_able in Config-Dlg

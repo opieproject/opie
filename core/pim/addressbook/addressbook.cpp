@@ -752,6 +752,7 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 			OContact insertEntry = abEditor->entry();
 			insertEntry.assignUid();
 			m_abView -> addEntry( insertEntry );
+			m_abView -> setCurrentUid( insertEntry.uid() );
 		} else {
 			OContact replEntry = abEditor->entry();
 
@@ -1011,7 +1012,7 @@ void AddressbookWindow::slotCardView()
 
 void AddressbookWindow::slotSetLetter( char c ) {
 
- 	m_abView->setShowByLetter( c );
+ 	m_abView->setShowByLetter( c, m_config.letterPickerSearch() );
 
 }
 

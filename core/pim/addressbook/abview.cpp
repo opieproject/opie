@@ -22,6 +22,8 @@
 
 #include <opie/ocontactaccessbackend_vcard.h>
 
+#include <assert.h>
+
 
 // Is defined in LibQPE
 extern QString categoryFileName();
@@ -160,7 +162,7 @@ void AbView::load()
 		clearForCategory();
 	}
 
-	//	qWarning ("Number of contacts: %d", m_list.count());
+	qWarning ("Number of contacts: %d", m_list.count());
 
 	updateView( true );
 
@@ -218,9 +220,12 @@ void AbView::setShowToView( Views view )
 
 }
 
-void AbView::setShowByLetter( char c )
+void AbView::setShowByLetter( char c, AbConfig::LPSearchMode mode )
 {
-	//	qWarning("void AbView::setShowByLetter( %c )", c );
+	qWarning("void AbView::setShowByLetter( %c, %d )", c, mode );
+
+	assert( mode < AbConfig::LASTELEMENT );
+
 	OContact query;
 	if ( c == 0 ){
 		load();
@@ -232,7 +237,18 @@ void AbView::setShowByLetter( char c )
 			return;
 		}
 
-		query.setLastName( QString("%1*").arg(c) );
+		switch( mode ){
+		case AbConfig::LastName:
+			query.setLastName( QString("%1*").arg(c) );
+			break;
+		case AbConfig::FullName:
+			query.setFileAs( QString("%1*").arg(c) );
+			break;
+		default:
+			qWarning( "Unknown Searchmode for AbView::setShowByLetter ! -> %d", mode );
+			qWarning( "I will ignore it.." );
+			return;
+		}
 		m_list = m_contactdb->queryByExample( query, OContactAccess::WildCards | OContactAccess::IgnoreCase );
 		clearForCategory();
 		m_curr_Contact = 0;

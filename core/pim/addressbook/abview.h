@@ -11,6 +11,7 @@
 #include "contacteditor.h"
 #include "abtable.h"
 #include "ablabel.h"
+#include "abconfig.h"
 
 class AbView: public QWidget
 {
@@ -32,7 +33,7 @@ public:
     void setCurrentUid( int uid );
     void setShowByCategory( const QString& cat );
     void setShowToView( Views view );
-    void setShowByLetter( char c );
+    void setShowByLetter( char c, AbConfig::LPSearchMode mode = AbConfig::LastName );
     void setListOrder( const QValueList<int>& ordered );
 
     // Add Entry and put to current

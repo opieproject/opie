@@ -656,10 +656,12 @@ void ContactEditor::init() {
 
 	connect( btnFullName, SIGNAL(clicked()), this, SLOT(slotName()) );
 
-	connect( txtFullName, SIGNAL(textChanged(const QString &)), this, SLOT(slotFullNameChange(const QString &)) );
-
-	connect( txtSuffix, SIGNAL(textChanged(const QString &)), this, SLOT(slotSuffixChange(const QString &)) );
-
+	connect( txtFullName, SIGNAL(textChanged(const QString &)), 
+		 this, SLOT(slotFullNameChange(const QString &)) );
+	connect( txtSuffix, SIGNAL(textChanged(const QString &)), 
+		 this, SLOT(slotSuffixChange(const QString &)) );
+ 	connect( txtOrganization, SIGNAL(textChanged(const QString &)), 
+ 		 this, SLOT(slotOrganizationChange(const QString &)) );
 	connect( txtChooserField1, SIGNAL(textChanged(const QString &)),
                  this, SLOT(slotChooser1Change(const QString &)) );
 	connect( txtChooserField2, SIGNAL(textChanged(const QString &)),
@@ -1055,6 +1057,16 @@ void ContactEditor::slotFullNameChange( const QString &textChanged ) {
 void ContactEditor::slotSuffixChange( const QString& ) {
 	// Just want to update the FileAs combo if the suffix was changed..
 	slotFullNameChange( txtFullName->text() );
+}
+
+void ContactEditor::slotOrganizationChange( const QString &textChanged ){
+	qWarning( "ContactEditor::slotOrganizationChange( %s )", textChanged.latin1() );
+	// Special handling for storing Companies: 
+	// If no Fullname is given, we store the Company-Name as lastname
+	// to handle it like a person..
+	if ( txtFullName->text() == txtOrganization->text().left( txtFullName->text().length() ) )
+		txtFullName->setText( textChanged );
+	
 }
 
 void ContactEditor::accept() {
