@@ -96,6 +96,7 @@ private slots:
         void closeEvent( QCloseEvent* e );
 
     private:
+        void receiveFile( const QString& filename );
         void connectBase( ViewBase* );
         void initUI();
         void initActions();

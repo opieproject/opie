@@ -26,6 +26,8 @@
 
 */
 
+#include <unistd.h>
+
 #include <qmenubar.h>
 #include <qmessagebox.h>
 #include <qtoolbar.h>
@@ -34,11 +36,13 @@
 #include <qaction.h>
 #include <qtimer.h>
 
+#include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/ir.h>
 #include <qpe/resource.h>
 #include <qpe/qpemessagebox.h>
 
+#include <opie/otodoaccessvcal.h>
 
 #include "todotemplatemanager.h"
 #include "templateeditor.h"
@@ -528,14 +532,50 @@ void MainWindow::slotShowCompleted( bool show) {
 bool MainWindow::showOverDue()const {
     return m_overdue;
 }
-void MainWindow::setDocument( const QString& ) {
-
+void MainWindow::setDocument( const QString& fi) {
+    DocLnk doc(fi);
+    if (doc.isValid() )
+        receiveFile(doc.file() );
+    else
+        receiveFile(fi );
 }
+
+static const char *beamfile = "/tmp/opie-todo.vcs";
 void MainWindow::slotBeam() {
+    ::unlink( beamfile );
+    OTodo todo = event( currentView()->current() );
+    OTodoAccessVCal* cal = new OTodoAccessVCal(QString::fromLatin1(beamfile) );
+    OTodoAccess acc( cal );
+    acc.load();
+    acc.add( todo );
+    acc.save();
+    Ir* ir = new Ir(this );
+    connect(ir, SIGNAL(done(Ir*) ),
+            this, SLOT(beamDone(Ir*) ) );
+    ir->send( beamfile, todo.summary(), "text/x-vCalendar" );
 
 }
-void MainWindow::beamDone( Ir* ) {
+void MainWindow::beamDone( Ir* ir) {
+    delete ir;
+    ::unlink( beamfile );
+}
+void MainWindow::receiveFile( const QString& filename ) {
+    OTodoAccessVCal* cal = new OTodoAccessVCal(filename );
+    OTodoAccess acc( cal );
+    acc.load();
+    OTodoAccess::List list = acc.allRecords();
 
+    QString message = tr("<P>%1 new tasks arrived.<p>Would you like to add them to your Todolist?").arg(list.count() );
+
+    if ( QMessageBox::information(this, tr("New Tasks"),
+                                  message, QMessageBox::Ok,
+                                  QMessageBox::Cancel ) == QMessageBox::Ok ) {
+        OTodoAccess::List::Iterator it;
+        for ( it = list.begin(); it != list.end(); ++it )
+            m_todoMgr.add( (*it) );
+
+        currentView()->updateView();
+    }
 }
 
 void MainWindow::slotFlush() {
