@@ -120,6 +120,13 @@ Lib::Lib( XineVideoWidget* widget ) {
 
 Lib::~Lib() {
 //    free( m_config );
+
+    xine_close( m_stream );
+
+    xine_event_dispose_queue( m_queue );
+
+    xine_dispose( m_stream );
+
     xine_exit( m_xine );
     /* FIXME either free or delete but valgrind bitches against both */
     //free( m_videoOutput );
