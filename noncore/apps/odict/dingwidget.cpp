@@ -35,10 +35,10 @@ DingWidget::DingWidget(QString word, QTextBrowser *browser_top, QTextBrowser *br
 	methodname = activated_name;
 	queryword = word;
 	trenner = QString::null;
+	lines = 0L;
 	loadValues();
   	QString opie_dir = getenv("OPIEDIR");
 	QFile file( opie_dir+"/noncore/apps/odict/eng_ita.dic" );
-	QStringList lines;
 	
 	if(  file.open(  IO_ReadOnly ) )
 	{
@@ -52,10 +52,18 @@ DingWidget::DingWidget(QString word, QTextBrowser *browser_top, QTextBrowser *br
 
 	lines = lines.grep( queryword );
 
+	topbrowser = browser_top;
+	bottombrowser = browser_bottom;
+}
+
+void DingWidget::setText()
+{
 	QString top, bottom;
-	parseInfo( lines, top , bottom );
-	browser_top->setText( top );
-	browser_bottom->setText( bottom );
+	QStringList test = lines;
+	parseInfo( test, top , bottom );
+	
+	topbrowser->setText( top );
+	bottombrowser->setText( bottom );
 }
 
 void DingWidget::loadValues()
@@ -76,10 +84,8 @@ void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
 	QString html_table_left  = "<tr><td width='50'>";
 	QString html_table_sep   = "</td><td>";
 	QString html_table_right = "</td></tr>";
-	QRegExp reg_div( "\\" );
-	//QRegExp reg_div( trenner );
+	QRegExp reg_div( trenner );
 	QRegExp reg_word( queryword );
-	//QString substitute = "<font color=red>"+queryword+"</font>";
 	QString substitute = "<a href=''>"+queryword+"</a>";
 	QStringList toplist, bottomlist;
 	for( QStringList::Iterator it = lines.begin() ; it != lines.end() ; ++it )

@@ -11,6 +11,8 @@ class QString;
 class QTextBrowser;
 class QStringList;
 
+#include <qstringlist.h>
+
 #include <qstring.h>
 
 class DingWidget
@@ -18,6 +20,8 @@ class DingWidget
     public:
 		DingWidget(QString word = 0, QTextBrowser* = 0, QTextBrowser* =0, QString activated_name=0);
 
+		void setText();
+		QStringList lines;
 	private:
 		QString search_word;
 		void parseInfo( QStringList& , QString&, QString& );
@@ -25,4 +29,6 @@ class DingWidget
 		void loadValues();
 		QString methodname;
 		QString trenner;
+		
+		QTextBrowser *topbrowser, *bottombrowser;
 };

@@ -98,13 +98,14 @@ void ODict::slotStartQuery()
 	QString querystring = query_le->text();
 	qDebug("opening dict >%s< for >%s<", activated_name.latin1(),querystring.latin1());
 	if (querystring.isEmpty()){
-	  qWarning("empty querystring");
-	  return;
+		qWarning("empty querystring");
+		return;
 	}
 	if (!activated_name || activated_name.isEmpty())
-	  QMessageBox::warning(this,tr("No Dictionary"),tr("Please choose a dictonary") );
+		QMessageBox::warning(this,tr("No Dictionary"),tr("Please choose a dictonary") );
 	else
-	  DingWidget *ding = new DingWidget( querystring , browser_top, browser_bottom, activated_name );
+		DingWidget *ding = new DingWidget( querystring , browser_top, browser_bottom, activated_name );
+		ding->setText();
 }
 
 
