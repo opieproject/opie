@@ -31,7 +31,7 @@
 #include "serverapp.h"
 #include <qtopia/custom.h>
 #if defined(QPE_NEED_CALIBRATION)
-#include "../settings/calibrate/calibrate.h"
+#include "calibrate.h"
 #endif
 #include "documentlist.h"
 
