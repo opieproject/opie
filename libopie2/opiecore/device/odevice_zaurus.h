@@ -110,7 +110,7 @@ class Zaurus : public ODevice
     virtual bool setLedState( OLed led, OLedState st );
 
     virtual bool hasHingeSensor() const;
-    virtual OHingeStatus readHingeSensor();
+    virtual OHingeStatus readHingeSensor() const;
 
     virtual bool suspend();
     virtual Transformation rotation() const;

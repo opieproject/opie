@@ -546,18 +546,10 @@ Transformation Zaurus::rotation() const
     switch ( d->m_model ) {
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC7x0:
-            handle = ::open("/dev/apm_bios", O_RDWR|O_NONBLOCK);
-            if (handle == -1) {
-                return Rot270;
-            } else {
-                retval = ::ioctl(handle, SHARP_IOCTL_GET_ROTATION);
-                ::close (handle);
-
-                if (retval == 2 )
-                    rot = Rot0;
-                else
-                    rot = Rot270;
-            }
+            OHingeStatus hs = readHingeSensor();
+            if ( hs == CASE_PORTRAIT ) rot = Rot0;
+            else if ( hs == CASE_UNKNOWN ) rot = Rot0;
+            else rot = Rot270;
             break;
         case Model_Zaurus_SL6000:
         case Model_Zaurus_SLB600:
@@ -579,17 +571,10 @@ ODirection Zaurus::direction() const
     switch ( d->m_model ) {
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC7x0:
-            handle = ::open( "/dev/apm_bios", O_RDWR|O_NONBLOCK );
-            if (handle == -1) {
-                dir = CW;
-            } else {
-                retval = ::ioctl( handle, SHARP_IOCTL_GET_ROTATION );
-                ::close (handle);
-                if (retval == 2 )
-                    dir = CCW;
-                else
-                    dir = CW;
-            }
+            OHingeStatus hs = readHingeSensor();
+            if ( hs == CASE_PORTRAIT ) dir = CCW;
+            else if ( hs == CASE_UNKNOWN ) dir = CCW;
+            else dir = CW;        
             break;
         case Model_Zaurus_SL6000:
         case Model_Zaurus_SLA300:
@@ -608,7 +593,7 @@ bool Zaurus::hasHingeSensor() const
     return d->m_model == Model_Zaurus_SLC7x0 || d->m_model == Model_Zaurus_SLC3000;
 }
 
-OHingeStatus Zaurus::readHingeSensor()
+OHingeStatus Zaurus::readHingeSensor() const
 {
     if (m_embedix)
     {
