@@ -1,5 +1,4 @@
-TEMPLATE  = app
-CONFIG    = qt warn_on release
+CONFIG    = qt warn_on release quick-app
 HEADERS   = mainwindow.h \
       cbinfo.h        \
       traninfo.h      \
@@ -23,7 +22,6 @@ INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS    += -lqpe -lopie
 TARGET    = checkbook
-DESTDIR   = $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/checkbook.ts \
 	 ../../../i18n/nl/checkbook.ts \

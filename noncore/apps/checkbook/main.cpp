@@ -29,14 +29,7 @@
 #include "mainwindow.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main(int argc, char **argv)
-{
-	QPEApplication app(argc, argv);
 
-	MainWindow *cb = new MainWindow();
-	app.setMainWidget(cb);
-	cb->showMaximized();
-
-	return app.exec();
-}
+OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )

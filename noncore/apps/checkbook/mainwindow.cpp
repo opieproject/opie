@@ -46,8 +46,8 @@
 #include <qlineedit.h>
 #include <qwhatsthis.h>
 
-MainWindow::MainWindow()
-	: QMainWindow( 0x0, 0x0, WStyle_ContextHelp )
+MainWindow::MainWindow( QWidget* parent, const char* name, WFlags fl )
+	: QMainWindow( parent, name, WStyle_ContextHelp )
 {
 	setCaption( tr( "Checkbook" ) );
 
