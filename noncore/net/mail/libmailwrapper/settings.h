@@ -126,9 +126,13 @@ public:
     void setLogin( bool b ) { login = b; }
     bool getLogin() { return login; }
 
+    void setGroups( QStringList list )  { subscribedGroups = list; }
+    QStringList getGroups()  { return subscribedGroups; } 
+
 private:
     QString file;
     bool login;
+    QStringList subscribedGroups;
 
 };
 

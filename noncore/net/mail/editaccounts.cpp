@@ -7,6 +7,7 @@
 
 /* QT */
 #include <qt.h>
+#include <qstringlist.h>
 
 #include <libmailwrapper/nntpwrapper.h>
 
@@ -511,10 +512,13 @@ void NNTPconfig::slotGetNG() {
     current = list->first;
      for ( current=clist_begin(list);current!=NULL;current=clist_next(current) ) {
                group = (  newsnntp_group_description* ) current->data;
-              qDebug(  group->grp_name );
+             // qDebug(  group->grp_name );
 
-	QCheckListItem *item;
-    	item = new QCheckListItem( ListViewGroups, ( QString )group->grp_name, QCheckListItem::CheckBox );
+       	   QCheckListItem *item;
+    	   item = new QCheckListItem( ListViewGroups, ( QString )group->grp_name, QCheckListItem::CheckBox );
+                 if ( subscribedGroups.contains( ( QString )group->grp_name ) >= 1 ) {
+                      item->setSelected( true );
+                }
        }
 }
 
@@ -539,6 +543,7 @@ void NNTPconfig::fillValues()
     loginBox->setChecked( data->getLogin() );
     userLine->setText( data->getUser() );
     passLine->setText( data->getPassword() );
+    subscribedGroups = data->getGroups();
 }
 
 void NNTPconfig::save()
@@ -553,9 +558,12 @@ void NNTPconfig::save()
 
    QListViewItemIterator list_it( ListViewGroups );
    for ( ; list_it.current(); ++list_it ) {
+       QStringList groupList;
        if ( list_it.current()->isSelected() ) {
-          qDebug( list_it.current()->text(0) );
+          qDebug(list_it.current()->text(0) );
+          groupList.append(  list_it.current()->text(0) );
       }
+      data->setGroups( groupList );
   }
 }
 

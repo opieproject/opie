@@ -410,6 +410,7 @@ void NNTPaccount::read()
     login = conf->readBoolEntry( "Login" );
     user = conf->readEntry( "User" );
     password = conf->readEntryCrypt( "Password" );
+    subscribedGroups = conf->readListEntry( "Subscribed", ',' );
     delete conf;
 }
 
@@ -427,6 +428,7 @@ void NNTPaccount::save()
     conf->writeEntry( "Login", login );
     conf->writeEntry( "User", user );
     conf->writeEntryCrypt( "Password", password );
+    conf->writeEntry( "Subscribed" , subscribedGroups, ',' );
     conf->write();
     delete conf;
 }

@@ -143,6 +143,7 @@ protected slots:
     void slotGetNG();
 
 private:
+    QStringList subscribedGroups;
     void save();
     NNTPaccount *data;
     clist* list;
