@@ -667,7 +667,10 @@ void ContactEditor::chooserChange( const QString &textChanged, int index, QLineE
 	qDebug("ContactEditor::chooserChange( type=>%s<, textChanged=>%s< index=%i, widgetPos=%i",type.latin1(),textChanged.latin1(), index,  widgetPos );
         if ( type == "Default Email"){         
 	  defaultEmail = textChanged;
-	  if (cmbDefaultEmail) delete cmbDefaultEmail;
+	  if (cmbDefaultEmail){  
+		  delete cmbDefaultEmail;
+		  cmbDefaultEmail = 0l;
+	  }
 	  cmbDefaultEmail = new QComboBox(inputWid->parentWidget());	   
 	  cmbDefaultEmail->setGeometry(inputWid->frameGeometry()); 
 	  cmbDefaultEmail->show();
@@ -684,7 +687,8 @@ void ContactEditor::chooserChange( const QString &textChanged, int index, QLineE
 	  QString de;
 	  emails = QStringList::split (",", textChanged );
 
-	  populateDefaultEmailCmb();
+	  if ( cmbDefaultEmail )
+		  populateDefaultEmailCmb();
 	}
 	
 
