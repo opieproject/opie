@@ -67,7 +67,7 @@ Cerrando reproductor.</translation>
     </message>
     <message>
         <source> File: </source>
-        <translation>Fichero: </translation>
+        <translation> Fichero: </translation>
     </message>
     <message>
         <source>, Length: </source>
@@ -75,7 +75,7 @@ Cerrando reproductor.</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Volumen</translation>
     </message>
 </context>
 <context>
@@ -141,7 +141,7 @@ Cerrando reproductor.</translation>
     </message>
     <message>
         <source>Export playlist to m3u</source>
-        <translation type="obsolete">Exportar lista a m3u</translation>
+        <translation type="obsolete">Exportar lista a m3u </translation>
     </message>
     <message>
         <source>Open File or URL</source>
@@ -263,15 +263,15 @@ borrar esta lista?</translation>
     </message>
     <message>
         <source>Save m3u Playlist </source>
-        <translation>Guardar lista m3u</translation>
+        <translation>Guardar lista m3u </translation>
     </message>
     <message>
         <source>Skins</source>
-        <translation type="unfinished"></translation>
+        <translation>Carátulas</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta</translation>
     </message>
 </context>
 <context>

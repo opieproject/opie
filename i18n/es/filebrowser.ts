@@ -15,19 +15,19 @@
     </message>
     <message>
         <source>by Name </source>
-        <translation>por nombre</translation>
+        <translation>por nombre </translation>
     </message>
     <message>
         <source>by Size </source>
-        <translation>por tamaño</translation>
+        <translation>por tamaño </translation>
     </message>
     <message>
         <source>by Date </source>
-        <translation>por fecha</translation>
+        <translation>por fecha </translation>
     </message>
     <message>
         <source>by Type </source>
-        <translation>por tipo</translation>
+        <translation>por tipo </translation>
     </message>
     <message>
         <source>Ascending</source>

@@ -162,16 +162,16 @@
     <message>
         <source> already exists
 Do you really want to delete it?</source>
-        <translation>ya existe
+        <translation> ya existe
 ¿seguro que quiere borrarlo?</translation>
     </message>
     <message>
         <source>Copy </source>
-        <translation>Copiar</translation>
+        <translation>Copiar </translation>
     </message>
     <message>
         <source> As</source>
-        <translation>Como</translation>
+        <translation> Como</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
@@ -216,39 +216,43 @@ and is licensed by the GPL
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar todo</translation>
     </message>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Confirma el borrado
+de los ficheros %1?</translation>
     </message>
     <message>
         <source>Delete Directory?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Borrar directorio?</translation>
     </message>
     <message>
         <source>Really delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Confirme borrado
+</translation>
     </message>
     <message>
         <source>Delete Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar directorio</translation>
     </message>
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Confirma la copia
+de los ficheros %1?</translation>
     </message>
     <message>
         <source>File Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡El fichero existe!</translation>
     </message>
     <message>
         <source>
 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>
+existe. ¿Lo sobrescribo?</translation>
     </message>
 </context>
 <context>
@@ -259,7 +263,7 @@ exists. Ok to overwrite?</source>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Salida</translation>
     </message>
 </context>
 <context>

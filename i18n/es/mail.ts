@@ -179,11 +179,11 @@
     </message>
     <message>
         <source>&lt;p&gt;The mail was queued successfully.&lt;/p&gt;&lt;p&gt;The queue contains </source>
-        <translation>&lt;p&gt;El correo fue puesto con éxito en la cola.&lt;/p&gt;&lt;p&gt;La cola contiene</translation>
+        <translation>&lt;p&gt;El correo fue puesto con éxito en la cola.&lt;/p&gt;&lt;p&gt;La cola contiene </translation>
     </message>
     <message>
         <source> mails.&lt;/p&gt;</source>
-        <translation>correos.&lt;/p&gt;</translation>
+        <translation> correos.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;font color=#ff0000&gt;Error occoured during sending.&lt;/font&gt;</source>
@@ -203,7 +203,7 @@
     </message>
     <message>
         <source> of </source>
-        <translation>de </translation>
+        <translation> de </translation>
     </message>
 </context>
 <context>

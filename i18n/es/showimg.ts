@@ -53,7 +53,7 @@
     </message>
     <message>
         <source> True color</source>
-        <translation>Color verdadero</translation>
+        <translation> Color verdadero</translation>
     </message>
     <message>
         <source>View</source>
@@ -121,46 +121,46 @@
     </message>
     <message>
         <source>Slide show</source>
-        <translation type="unfinished"></translation>
+        <translation>Secuencia</translation>
     </message>
     <message>
         <source>Stop Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Fin secuencia</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialogBase</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferencias</translation>
     </message>
     <message>
         <source>Slide Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Secuencia</translation>
     </message>
     <message>
         <source>Delay between pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Lapso entre imágenes</translation>
     </message>
     <message>
         <source>s</source>
-        <translation type="unfinished"></translation>
+        <translation>s</translation>
     </message>
     <message>
         <source>Repeat slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetir secuencia</translation>
     </message>
     <message>
         <source>Show pictures in reverse</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar imágenes al revés</translation>
     </message>
     <message>
         <source>Load pictures rotated 90 degrees</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar imágenes rotadas 90º</translation>
     </message>
     <message>
         <source>Fast load pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Carga rápida de imágenes</translation>
     </message>
 </context>
 </TS>

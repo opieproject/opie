@@ -15,11 +15,11 @@
     </message>
     <message>
         <source> minutes, but only </source>
-        <translation>minutos, pero sólo </translation>
+        <translation> minutos, pero sólo </translation>
     </message>
     <message>
         <source> minutes elapsed since last loopup.</source>
-        <translation>minutos transcurrieron desde el último ajuste.</translation>
+        <translation> minutos transcurrieron desde el último ajuste.</translation>
     </message>
     <message>
         <source>Rerun NTP?</source>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source> seconds</source>
-        <translation>segundos</translation>
+        <translation> segundos</translation>
     </message>
     <message>
         <source>last [h]</source>
@@ -51,7 +51,7 @@
     </message>
     <message>
         <source> s/h</source>
-        <translation>s/h</translation>
+        <translation> s/h</translation>
     </message>
     <message>
         <source>Predicted time:</source>
@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Could not connect to server </source>
-        <translation>No pude conectar con el servidor</translation>
+        <translation>No pude conectar con el servidor </translation>
     </message>
 </context>
 <context>
@@ -166,7 +166,7 @@
     </message>
     <message>
         <source>Manual</source>
-        <translation>Mnaual</translation>
+        <translation>Manual</translation>
     </message>
     <message>
         <source>Set time</source>

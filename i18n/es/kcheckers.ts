@@ -95,15 +95,15 @@
     </message>
     <message>
         <source> New Game </source>
-        <translation>Nuevo juego</translation>
+        <translation> Nuevo juego </translation>
     </message>
     <message>
         <source> Undo Move </source>
-        <translation>Deshacer mov</translation>
+        <translation> Deshacer movimiento </translation>
     </message>
     <message>
         <source> Rules of Play </source>
-        <translation>Reglas del juego</translation>
+        <translation> Reglas del juego </translation>
     </message>
     <message>
         <source>Go!</source>

@@ -163,91 +163,91 @@
     <name>ORecurranceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished"></translation>
+        <translation>Cita repetitiva </translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguno</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Día</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Semana</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Mes</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Año</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Cada:</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Frecuencia</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation type="unfinished"></translation>
+        <translation>Finalizar el:</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin fecha final</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished"></translation>
+        <translation>Repetir el</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>Lun</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>Mar</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>Mie</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Jue</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>Vie</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>Sáb</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>Dom</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Cada</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished"></translation>
+        <translation>Var1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Var 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished"></translation>
+        <translation>VarSemana</translation>
     </message>
 </context>
 <context>
@@ -329,7 +329,7 @@
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation type="obsolete">Web negocio: </translation>
+        <translation type="obsolete">Web trabajo: </translation>
     </message>
     <message>
         <source>Office: </source>
@@ -337,19 +337,19 @@
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation type="obsolete">Teléfono negocio: </translation>
+        <translation type="obsolete">Teléfono trabajo: </translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation type="obsolete">Fax negocio: </translation>
+        <translation type="obsolete">Fax trabajo: </translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation type="obsolete">Móvil negocio: </translation>
+        <translation type="obsolete">Móvil trabajo: </translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation type="obsolete">Busca negocio: </translation>
+        <translation type="obsolete">Busca trabajo: </translation>
     </message>
     <message>
         <source>Profession: </source>
@@ -429,15 +429,15 @@
     </message>
     <message>
         <source>Business Phone</source>
-        <translation type="obsolete">Teléfono negocio</translation>
+        <translation type="obsolete">Teléfono trabajo</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="obsolete">Fax negocio</translation>
+        <translation type="obsolete">Fax trabajo</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="obsolete">Móvil negocio</translation>
+        <translation type="obsolete">Móvil trabajo</translation>
     </message>
     <message>
         <source>Default Email</source>
@@ -461,31 +461,31 @@
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="obsolete">Calle negocio</translation>
+        <translation type="obsolete">Calle trabajo</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="obsolete">Ciudad negocio</translation>
+        <translation type="obsolete">Ciudad trabajo</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="obsolete">Provincia negocio</translation>
+        <translation type="obsolete">Provincia trabajo</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="obsolete">Cód.postal negocio</translation>
+        <translation type="obsolete">Cód.postal trabajo</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="obsolete">País negocio</translation>
+        <translation type="obsolete">País trabajo</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation type="obsolete">Busca negocio</translation>
+        <translation type="obsolete">Busca trabajo</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation type="obsolete">Web negocio</translation>
+        <translation type="obsolete">Web trabajo</translation>
     </message>
     <message>
         <source>Office</source>

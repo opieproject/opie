@@ -11,11 +11,11 @@
     </message>
     <message>
         <source> (multi.)</source>
-        <translation>(multi.)</translation>
+        <translation> (multi.)</translation>
     </message>
     <message>
         <source>Business</source>
-        <translation>Negocios</translation>
+        <translation>Trabajo</translation>
     </message>
     <message>
         <source>Personal</source>
@@ -26,7 +26,7 @@
     <name>CategoryCombo</name>
     <message>
         <source> (Multi.)</source>
-        <translation>(Multi.)</translation>
+        <translation> (Multi.)</translation>
     </message>
 </context>
 <context>
@@ -41,7 +41,7 @@
     </message>
     <message>
         <source>New Category </source>
-        <translation>Nueva categoría</translation>
+        <translation>Nueva categoría </translation>
     </message>
 </context>
 <context>
@@ -269,7 +269,7 @@ editando las categorías.</translation>
     </message>
     <message>
         <source>Copy of </source>
-        <translation>Copiar de</translation>
+        <translation>Copiar de </translation>
     </message>
     <message>
         <source>Duplicate</source>
@@ -368,7 +368,7 @@ editando las categorías.</translation>
     </message>
     <message>
         <source>Use custom rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar rotación personal</translation>
     </message>
 </context>
 <context>
@@ -571,7 +571,7 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation>Web negocio: </translation>
+        <translation>Web trabajo: </translation>
     </message>
     <message>
         <source>Office: </source>
@@ -579,19 +579,19 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation>Teléfono negocio: </translation>
+        <translation>Teléfono trabajo: </translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation>Fax negocio: </translation>
+        <translation>Fax trabajo: </translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation>Móvil negocio: </translation>
+        <translation>Móvil trabajo: </translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation>Busca negocio: </translation>
+        <translation>Busca trabajo: </translation>
     </message>
     <message>
         <source>Profession: </source>
@@ -671,15 +671,15 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation>Teléfono negocio</translation>
+        <translation>Teléfono trabajo</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Fax negocio</translation>
+        <translation>Fax trabajo</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Móvil negocio</translation>
+        <translation>Móvil trabajo</translation>
     </message>
     <message>
         <source>Default Email</source>
@@ -703,31 +703,31 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Calle negocio</translation>
+        <translation>Calle trabajo</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Ciudad negocio</translation>
+        <translation>Ciudad trabajo</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Provincia negocio</translation>
+        <translation>Provincia trabajo</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>CP negocio</translation>
+        <translation>CP trabajo</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>País negocio</translation>
+        <translation>País trabajo</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Busca negocio</translation>
+        <translation>Busca trabajo</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Web negocio</translation>
+        <translation>Web trabajo</translation>
     </message>
     <message>
         <source>Office</source>
@@ -875,7 +875,7 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>MMC Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarjeta MMC</translation>
     </message>
 </context>
 <context>
@@ -889,12 +889,13 @@ Libere memoria e intételo de nuevo.</translation>
     <name>TimeZoneSelector</name>
     <message>
         <source>citytime executable not found</source>
-        <translation type="unfinished"></translation>
+        <translation>no encontré el ejecutable Reloj Mundial</translation>
     </message>
     <message>
         <source>In order to choose the time zones,
 please install citytime.</source>
-        <translation type="unfinished"></translation>
+        <translation>Para elegir las zonas horarias, por favor
+instale el Reloj Mundial (citytime).</translation>
     </message>
 </context>
 <context>

@@ -3,7 +3,7 @@
     <name>Calibration</name>
     <message>
         <source>%1 Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 pasos</translation>
     </message>
 </context>
 <context>
@@ -58,118 +58,118 @@
     </message>
     <message>
         <source>on Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>en batería</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración General</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation> seg</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished"></translation>
+        <translation>nunca</translation>
     </message>
     <message>
         <source>Deactivate LCD only (does not suspend)</source>
-        <translation type="unfinished"></translation>
+        <translation>Sólo desactivar LCD (no suspender)</translation>
     </message>
     <message>
         <source>Backlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Retroiluminación</translation>
     </message>
     <message>
         <source>set a fix value for backlight</source>
-        <translation type="unfinished"></translation>
+        <translation>fije un valor de iluminación</translation>
     </message>
     <message>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Completa</translation>
     </message>
     <message>
         <source>Use Light Sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar sensor de luz</translation>
     </message>
     <message>
         <source>Calibrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Calibrar</translation>
     </message>
     <message>
         <source>Advanced settings for light sensor handling</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración avanzada del sensor de luz</translation>
     </message>
     <message>
         <source>on AC</source>
-        <translation type="unfinished"></translation>
+        <translation>enchufada</translation>
     </message>
     <message>
         <source>Warnings</source>
-        <translation type="unfinished"></translation>
+        <translation>Avisos</translation>
     </message>
     <message>
         <source>Low power warning interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Intervalo de aviso</translation>
     </message>
     <message>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <source>At what battery level should the low power warning pop up</source>
-        <translation type="unfinished"></translation>
+        <translation>A qué nivel de batería debe saltar el aviso de baja energía</translation>
     </message>
     <message>
         <source>how often should be checked for low power. This determines the rate popups occure in low power situations</source>
-        <translation type="unfinished"></translation>
+        <translation>con qué frecuencia debe ser verificada la energía. Esto determina el ritmo al que aparecerán los avisos</translation>
     </message>
     <message>
         <source>At what battery level should the critical power warning pop up</source>
-        <translation type="unfinished"></translation>
+        <translation>A qué nivel de batería debe saltar el aviso de nivel crítico</translation>
     </message>
     <message>
         <source>very low battery warning at</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso de batería muy baja al</translation>
     </message>
     <message>
         <source>critical power warning at</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviso de nivel crítico al</translation>
     </message>
 </context>
 <context>
     <name>SensorBase</name>
     <message>
         <source>Sensor Calibration</source>
-        <translation type="unfinished"></translation>
+        <translation>Calibración del Sensor</translation>
     </message>
     <message>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Completa</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished">Apagada</translation>
+        <translation>Apagada</translation>
     </message>
     <message>
         <source>Dark</source>
-        <translation type="unfinished"></translation>
+        <translation>Oscuro</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Claro</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasos</translation>
     </message>
     <message>
         <source>Check interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Verificar intervalo</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation> seg</translation>
     </message>
 </context>
 </TS>

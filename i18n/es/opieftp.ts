@@ -196,7 +196,7 @@
     <message>
         <source> ?
 It must be empty</source>
-        <translation>?
+        <translation> ?
 Debaría estar vacío</translation>
     </message>
     <message>

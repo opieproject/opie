@@ -27,7 +27,7 @@ contra muros, orillas o su cola.</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
-        <translation>Puntuación:  %1</translation>
+        <translation>   Puntuación:  %1   </translation>
     </message>
     <message>
         <source>GAME OVER!

@@ -121,7 +121,7 @@ e inténtelo de nuevo.
     </message>
     <message>
         <source>Show only over due</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar sólo fuera de plazo</translation>
     </message>
 </context>
 <context>
@@ -214,31 +214,31 @@ e inténtelo de nuevo.
     <name>OTaskEditor</name>
     <message>
         <source>Overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Vistazo</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Descripción</translation>
+        <translation>Descripción</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avanzado</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmas</translation>
     </message>
     <message>
         <source>Reminders</source>
-        <translation type="unfinished"></translation>
+        <translation>Recordatorios</translation>
     </message>
     <message>
         <source>X-Ref</source>
-        <translation type="unfinished"></translation>
+        <translation>Ref.cruzadas</translation>
     </message>
     <message>
         <source>Recurrance</source>
-        <translation type="unfinished"></translation>
+        <translation>Recurrencia</translation>
     </message>
 </context>
 <context>
@@ -249,7 +249,7 @@ e inténtelo de nuevo.
     </message>
     <message>
         <source>Enter Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Introducir Tarea</translation>
     </message>
 </context>
 <context>
@@ -287,220 +287,220 @@ e inténtelo de nuevo.
     <name>TaskEditorAdvanced</name>
     <message>
         <source>Form2</source>
-        <translation type="unfinished"></translation>
+        <translation>Form2</translation>
     </message>
     <message>
         <source>State:</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado:</translation>
     </message>
     <message>
         <source>Started</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciado</translation>
     </message>
     <message>
         <source>Postponed</source>
-        <translation type="unfinished"></translation>
+        <translation>Pospuesto</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Finalizado</translation>
     </message>
     <message>
         <source>Not started</source>
-        <translation type="unfinished"></translation>
+        <translation>No iniciado</translation>
     </message>
     <message>
         <source>Maintainer</source>
-        <translation type="unfinished"></translation>
+        <translation>Mantenedor</translation>
     </message>
     <message>
         <source>test</source>
-        <translation type="unfinished"></translation>
+        <translation>test</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Maintain Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo mantenimiento:</translation>
     </message>
     <message>
         <source>Responsible</source>
-        <translation type="unfinished"></translation>
+        <translation>Responsable</translation>
     </message>
     <message>
         <source>Done By</source>
-        <translation type="unfinished"></translation>
+        <translation>Hecho por</translation>
     </message>
     <message>
         <source>Coordinating</source>
-        <translation type="unfinished"></translation>
+        <translation>Coordinador</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorAlarms</name>
     <message>
         <source>Form3</source>
-        <translation type="unfinished"></translation>
+        <translation>Form3</translation>
     </message>
     <message>
         <source>empty</source>
-        <translation type="unfinished"></translation>
+        <translation>vacío</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Añadir</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Editar</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Borrar</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorOverView</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Prioridad</translation>
     </message>
     <message>
         <source>1 - Very High</source>
-        <translation type="unfinished">1 - Muy alta</translation>
+        <translation>1 - Muy alta</translation>
     </message>
     <message>
         <source>2 - High</source>
-        <translation type="unfinished">2 - Alta</translation>
+        <translation>2 - Alta</translation>
     </message>
     <message>
         <source>3 - Normal</source>
-        <translation type="unfinished">3 - Normal</translation>
+        <translation>3 - Normal</translation>
     </message>
     <message>
         <source>4 - Low</source>
-        <translation type="unfinished">4 - Baja</translation>
+        <translation>4 - Baja</translation>
     </message>
     <message>
         <source>5 - Very Low</source>
-        <translation type="unfinished">5 - Muy baja</translation>
+        <translation>5 - Muy baja</translation>
     </message>
     <message>
         <source>Progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Progreso</translation>
     </message>
     <message>
         <source>0 %</source>
-        <translation type="unfinished"></translation>
+        <translation>0 %</translation>
     </message>
     <message>
         <source>20 %</source>
-        <translation type="unfinished"></translation>
+        <translation>20 %</translation>
     </message>
     <message>
         <source>40 %</source>
-        <translation type="unfinished"></translation>
+        <translation>40 %</translation>
     </message>
     <message>
         <source>60 %</source>
-        <translation type="unfinished"></translation>
+        <translation>60 %</translation>
     </message>
     <message>
         <source>80 %</source>
-        <translation type="unfinished"></translation>
+        <translation>80 %</translation>
     </message>
     <message>
         <source>100 %</source>
-        <translation type="unfinished"></translation>
+        <translation>100 %</translation>
     </message>
     <message>
         <source>Due Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha límite:</translation>
     </message>
     <message>
         <source>1 Januar 2002</source>
-        <translation type="unfinished"></translation>
+        <translation>1 enero 2002</translation>
     </message>
     <message>
         <source>Start Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha inicio:</translation>
     </message>
     <message>
         <source>1 Januar 2001</source>
-        <translation type="unfinished"></translation>
+        <translation>1 enero 2002</translation>
     </message>
     <message>
         <source>Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Sumario</translation>
     </message>
     <message>
         <source>Complete</source>
-        <translation type="unfinished"></translation>
+        <translation>Completar</translation>
     </message>
     <message>
         <source>work on</source>
-        <translation type="unfinished"></translation>
+        <translation>trabajar en</translation>
     </message>
     <message>
         <source>buy</source>
-        <translation type="unfinished"></translation>
+        <translation>comprar</translation>
     </message>
     <message>
         <source>organize</source>
-        <translation type="unfinished"></translation>
+        <translation>organizar</translation>
     </message>
     <message>
         <source>get</source>
-        <translation type="unfinished"></translation>
+        <translation>conseguir</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <source>Create</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear</translation>
     </message>
     <message>
         <source>Plan</source>
-        <translation type="unfinished"></translation>
+        <translation>Planear</translation>
     </message>
     <message>
         <source>Call</source>
-        <translation type="unfinished"></translation>
+        <translation>Llamar</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Correo a</translation>
     </message>
     <message>
         <source>Completed Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha completado</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Completado</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoría</translation>
     </message>
     <message>
         <source>Enable Recurrance</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar recurrencia</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorOverViewImpl</name>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished">Lista tareas</translation>
+        <translation>Lista Tareas</translation>
     </message>
 </context>
 <context>

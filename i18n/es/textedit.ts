@@ -263,23 +263,23 @@ del dico?&lt;BR&gt;¡Es &lt;B&gt;irreversible!&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Advanced Features</source>
-        <translation type="unfinished">Opciones avanzadas</translation>
+        <translation>Opciones avanzadas</translation>
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation type="unfinished">Preguntar al salir</translation>
+        <translation>Preguntar al salir</translation>
     </message>
     <message>
         <source>Always open linked file</source>
-        <translation type="unfinished">Abrir siempre fichero enlazado</translation>
+        <translation>Abrir siempre fichero enlazado</translation>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation type="unfinished">Permisos fichero</translation>
+        <translation>Permisos fichero</translation>
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Barra de búsqueda abierta</translation>
     </message>
 </context>
 <context>

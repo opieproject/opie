@@ -65,7 +65,7 @@ que el intervalo de repetición.</translation>
     </message>
     <message>
         <source> minutes)</source>
-        <translation>minutos)</translation>
+        <translation> minutos)</translation>
     </message>
     <message>
         <source>OK</source>
@@ -464,11 +464,11 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Description </source>
-        <translation>Descripción</translation>
+        <translation>Descripción </translation>
     </message>
     <message>
         <source>Start - End </source>
-        <translation>Inicio - Fin</translation>
+        <translation>Inicio - Fin </translation>
     </message>
     <message>
         <source>Note...</source>
@@ -502,11 +502,11 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>%1 %2 every </source>
-        <translation>%1 %2 cada</translation>
+        <translation>%1 %2 cada </translation>
     </message>
     <message>
         <source>The %1 every </source>
-        <translation>El %1 cada</translation>
+        <translation>El %1 cada </translation>
     </message>
     <message>
         <source>The %1 %1 of every</source>
@@ -514,7 +514,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source>Every </source>
-        <translation>Cada</translation>
+        <translation>Cada </translation>
     </message>
     <message>
         <source>Monday</source>
@@ -624,7 +624,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source> and </source>
-        <translation>y </translation>
+        <translation> y </translation>
     </message>
     <message>
         <source>,
@@ -641,7 +641,7 @@ y </translation>
     <name>RepeatEntryBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation>Cita Periódica</translation>
+        <translation>Cita Periódica </translation>
     </message>
     <message>
         <source>None</source>

@@ -193,15 +193,15 @@ o está en un formato desconocido.</translation>
     <name>Score</name>
     <message>
         <source>  1UP </source>
-        <translation>1UP</translation>
+        <translation> 1UP </translation>
     </message>
     <message>
         <source> HIGH SCORE </source>
-        <translation>PUTUACIÓN MAX</translation>
+        <translation> PUTUACIÓN MAX </translation>
     </message>
     <message>
         <source>  2UP </source>
-        <translation>2UP</translation>
+        <translation>  2UP </translation>
     </message>
     <message>
         <source>     CONGRATULATIONS      </source>
@@ -264,7 +264,7 @@ Para usar un directorio o archivo diferente para las puntuaciones, especifíquel
     </message>
     <message>
         <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation>                          </translation>
     </message>
 </context>
 <context>

@@ -192,11 +192,11 @@
     </message>
     <message>
         <source>Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar línea</translation>
     </message>
     <message>
         <source>Use Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>Timbre</translation>
     </message>
 </context>
 <context>

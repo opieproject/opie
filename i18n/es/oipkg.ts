@@ -292,7 +292,7 @@ Todo hecho.</translation>
     </message>
     <message>
         <source>Error while removing </source>
-        <translation>Error al eliminar</translation>
+        <translation>Error al eliminar </translation>
     </message>
     <message>
         <source>Installing</source>
@@ -323,7 +323,7 @@ Todo hecho.</translation>
     </message>
     <message>
         <source> on </source>
-        <translation>en </translation>
+        <translation> en </translation>
     </message>
     <message>
         <source>Name: </source>
@@ -351,11 +351,11 @@ Todo hecho.</translation>
     </message>
     <message>
         <source>Install to</source>
-        <translation type="unfinished">Instalar en</translation>
+        <translation>Instalar en</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Borrar</translation>
+        <translation>Borrar</translation>
     </message>
 </context>
 <context>

@@ -34,7 +34,7 @@
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation>no puede ser abierto.</translation>
+        <translation> no puede ser abierto.</translation>
     </message>
 </context>
 <context>
@@ -49,7 +49,7 @@
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation>no puedo ser abierto.</translation>
+        <translation> no puedo ser abierto.</translation>
     </message>
     <message>
         <source>no group</source>

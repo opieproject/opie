@@ -3,7 +3,7 @@
     <name>DialupBase</name>
     <message>
         <source>Dial-up </source>
-        <translation>Marcación</translation>
+        <translation>Marcación </translation>
     </message>
     <message>
         <source>Account</source>
@@ -99,7 +99,7 @@
     </message>
     <message>
         <source> seconds</source>
-        <translation>segundos</translation>
+        <translation> segundos</translation>
     </message>
     <message>
         <source>Idle timeout:</source>

@@ -18,7 +18,7 @@ uno diferente.</translation>
     <name>LanBase</name>
     <message>
         <source>LAN </source>
-        <translation>LAN</translation>
+        <translation>LAN </translation>
     </message>
     <message>
         <source>Account</source>

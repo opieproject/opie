@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;Sobre</translation>
+        <translation>&amp;Acerca de</translation>
     </message>
     <message>
         <source>&amp;Game</source>

@@ -77,12 +77,13 @@ Por favor cárguela.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Información</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;La fecha del sistema parece no ser válida.
+(%1)&lt;/p&gt;&lt;p&gt;¿Quiere poner en hora el reloj?&lt;/p&gt;</translation>
     </message>
 </context>
 <context>

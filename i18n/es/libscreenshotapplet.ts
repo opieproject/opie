@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Name of screenshot </source>
-        <translation>Nombre del pantallazo</translation>
+        <translation>Nombre del pantallazo </translation>
     </message>
 </context>
 </TS>

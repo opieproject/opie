@@ -254,7 +254,7 @@ Su correos se borrarán.</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation>minutos</translation>
+        <translation> minutos</translation>
     </message>
     <message>
         <source>&amp;Delete mail from server when deleted local.</source>

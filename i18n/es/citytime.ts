@@ -22,7 +22,7 @@
     <name>CityTimeBase</name>
     <message>
         <source>City Time</source>
-        <translation>Hora Mundial</translation>
+        <translation>Reloj Mundial</translation>
     </message>
     <message>
         <source>Click on one of the set cities to replace it</source>

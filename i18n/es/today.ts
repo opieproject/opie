@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoy por Maximilian Reiß</translation>
     </message>
 </context>
 <context>
@@ -139,23 +139,25 @@ encender?
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Arrancar
+al encender?
+(sólo Opie)</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation type="unfinished"></translation>
+        <translation>Con qué frecuencia debe Hoy actualizarse</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation> seg</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished"></translation>
+        <translation>nunca</translation>
     </message>
 </context>
 <context>

@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Configure this medium. The changes will go into effect when the application get&apos;s closed. To update the Document Tab you need to removeand insert this medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configure este medio. Los cambios tendrán efecto cuando la aplicación se cierre. Para actualizar la pestaña de Documentos, necesita extraer e insertar este medio.</translation>
     </message>
 </context>
 </TS>
