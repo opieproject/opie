@@ -38,9 +38,14 @@ public:
      * the session list
      */
     QList<Session> sessions();
-protected slots:
+
+private slots:
     void slotNew();
     void slotConnect();
+    void slotDisconnect();
+    void slotTerminate();
+    void slotConfigure();
+
 private:
     void initUI();
     /**
@@ -62,11 +67,11 @@ private:
     QMenuBar* m_bar;
     QPopupMenu* m_console;
     QPopupMenu* m_settings;
-    QPopupMenu* m_newsession;
+    QPopupMenu* m_sessionsPop;
     QAction* m_connect;
     QAction* m_disconnect;
     QAction* m_terminate;
-    QAction* m_set;
+    QAction* m_setProfiles;
 
 };
 

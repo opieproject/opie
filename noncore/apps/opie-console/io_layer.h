@@ -4,12 +4,13 @@
 #include <qobject.h>
 #include <qpe/config.h>
 
+#include "profile.h"
+
 /**
  * This is the base class for IO Layers
  * It will used to sent and recv data( QByteArray )
  * it
  */
-class Config;
 class IOLayer : public QObject {
     Q_OBJECT
 public:
@@ -32,7 +33,7 @@ public:
      * the currently set group stores the profile/session
      * information
      */
-    IOLayer( const Config& );
+    IOLayer( const Profile& );
 
     /**
      * destructor

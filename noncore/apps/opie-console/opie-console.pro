@@ -5,12 +5,21 @@ HEADERS      = io_layer.h io_serial.h \
 	       file_layer.h \
 	       metafactory.h \
 	       session.h \
-	       mainwindow.h
+	       mainwindow.h \
+	       profile.h \
+	       profileconfig.h \
+	       profilemanager.h  \
+	       configwidget.h \
+	       tabwidget.h
 SOURCES      = io_layer.cpp io_serial.cpp \
 	       file_layer.cpp main.cpp \
 	       metafactory.cpp \
 	       session.cpp \
-	       mainwindow.cpp
+	       mainwindow.cpp \
+	       profile.cpp \
+	       profileconfig.cpp \
+	       profilemanager.cpp  \
+	       tabwidget.cpp
 INTERFACES   = 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include

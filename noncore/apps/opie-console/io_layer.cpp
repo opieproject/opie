@@ -5,7 +5,7 @@ IOLayer::IOLayer()
 {
 }
 
-IOLayer::IOLayer(const Config &)
+IOLayer::IOLayer(const Profile &)
     : QObject()
 {
 }

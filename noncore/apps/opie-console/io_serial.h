@@ -29,10 +29,10 @@ public:
         FlowHW = 0x01,
         FlowSW = 0x02
     };
-        
-    IOSerial(const Config &);
+
+    IOSerial(const Profile &);
     ~IOSerial();
-    
+
     QString identifier() const;
     QString name() const;
 signals:
@@ -42,9 +42,9 @@ public slots:
     void send(const QByteArray &);
     bool open();
     void close();
-    void reload(const Config &);
+    void reload(const Profile &);
 protected:
-    int getBaud(int baud) const;
+    int baud(int baud) const;
 protected slots:
     void dataArrived();
     void errorOccured();

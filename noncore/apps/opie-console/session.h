@@ -16,8 +16,14 @@ public:
      * c'tor with widget and layer
      * ownership get's transfered
      */
-    Session( QWidget* widget, IOLayer* );
+    Session();
+    Session( const QString&, QWidget* widget, IOLayer* );
     ~Session();
+
+    /**
+     * return the name of the session
+     */
+    QString name()const;
 
     /**
      * return the widget
@@ -30,10 +36,13 @@ public:
     IOLayer* layer();
     void setWidget( QWidget* widget );
     void setIOLayer( IOLayer*  );
+    void setName( const QString& );
 
 private:
+    QString m_name;
     QWidget* m_widget;
     IOLayer* m_layer;
+
 };
 
 #endif

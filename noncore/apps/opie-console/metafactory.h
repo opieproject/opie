@@ -13,14 +13,14 @@
 
 #include "io_layer.h"
 #include "file_layer.h"
-
+#include "profile.h"
 
 class MetaFactory {
 public:
     typedef QWidget* (*configWidget)(QWidget* parent);
-    typedef IOLayer* (*iolayer)(const Config& );
+    typedef IOLayer* (*iolayer)(const Profile& );
     typedef FileTransferLayer* (*filelayer)(IOLayer*);
-    
+
     MetaFactory();
     ~MetaFactory();
 
@@ -33,6 +33,8 @@ public:
     QStringList ioLayers()const;
     QStringList configWidgets()const;
     QStringList fileTransferLayers()const;
+    IOLayer* newIOLayer( const QString&,const Profile& );
+
 private:
     QMap<QString, configWidget> m_confFact;
     QMap<QString, iolayer> m_layerFact;

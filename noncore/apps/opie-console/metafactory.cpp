@@ -1,4 +1,4 @@
-
+#include <qpe/config.h>
 #include "metafactory.h"
 
 MetaFactory::MetaFactory() {
@@ -41,4 +41,18 @@ QStringList MetaFactory::fileTransferLayers()const {
         list << it.key();
     }
     return list;
+}
+IOLayer* MetaFactory::newIOLayer( const QString& str,const Profile& prof ) {
+    IOLayer* lay = 0l;
+
+    QMap<QString, iolayer>::Iterator it;
+    it = m_layerFact.find( str );
+    if ( it != m_layerFact.end() ) {
+        lay = (*(it.data()))(prof);
+        /*
+        iolayer laye = it.data();
+        lay = (*laye )(conf);*/
+    }
+
+    return lay;
 }

@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include "io_serial.h"
 
-IOSerial::IOSerial(const Config &config) : IOLayer(config) {
+IOSerial::IOSerial(const Profile &config) : IOLayer(config) {
     m_fd = 0;
     reload(config);
 }
@@ -46,7 +46,7 @@ bool IOSerial::open() {
         tcgetattr(m_fd, &tty);
 
         /* Baud rate */
-        int speed = getBaud(m_baud);
+        int speed = baud(m_baud);
         if (speed == -1) {
             emit error(Refuse, tr("Invalid baud rate"));
         }
@@ -57,15 +57,16 @@ bool IOSerial::open() {
         if (m_dbits == 7 && (m_parity == ParitySpace || m_parity == ParityMark)) {
             m_dbits = 8;
         }
-        
+
         /* Data bits */
         switch (m_dbits) {
             case 5: tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS5; break;
             case 6: tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS6; break;
             case 7: tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS7; break;
             case 8: tty.c_cflag = (tty.c_cflag & ~CSIZE) | CS8; break;
+	    default: break;
         }
-        
+
         /* Raw, no echo mode */
         tty.c_iflag =  IGNBRK;
         tty.c_lflag = 0;
@@ -78,7 +79,7 @@ bool IOSerial::open() {
         } else {
             tty.c_cflag &= ~CSTOPB;
         }
-        
+
         tty.c_cc[VMIN] = 1;
         tty.c_cc[VTIME] = 5;
 
@@ -87,19 +88,19 @@ bool IOSerial::open() {
             tty.c_iflag |= IXON | IXOFF;
         else
             tty.c_iflag &= ~(IXON|IXOFF|IXANY);
-        
+
         if (m_flow & FlowHW)
             tty.c_cflag |= CRTSCTS;
         else
             tty.c_cflag &= ~CRTSCTS;
-        
+
         /* Parity */
         tty.c_cflag &= ~(PARENB | PARODD);
         if (m_parity & ParityEven)
             tty.c_cflag |= PARENB;
         else if (m_parity & ParityOdd)
             tty.c_cflag |= (PARENB | PARODD);
-        
+
         /* Set the changes */
         tcsetattr(m_fd, TCSANOW, &tty);
 
@@ -115,7 +116,7 @@ bool IOSerial::open() {
     }
 }
 
-void IOSerial::reload(const Config &config) {
+void IOSerial::reload(const Profile &config) {
     m_device = config.readEntry("Device", SERIAL_DEFAULT_DEVICE);
     m_baud = config.readNumEntry("Baud", SERIAL_DEFAULT_BAUD);
     m_parity = config.readNumEntry("Parity", SERIAL_DEFAULT_PARITY);
@@ -124,7 +125,7 @@ void IOSerial::reload(const Config &config) {
     m_flow = config.readNumEntry("Flow", SERIAL_DEFAULT_FLOW);
 }
 
-int IOSerial::getBaud(int baud) const {
+int IOSerial::baud(int baud) const {
     switch (baud) {
         case 300:    return B300;    break;
         case 600:    return B600;    break;
