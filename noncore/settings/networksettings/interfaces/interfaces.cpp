@@ -1,5 +1,6 @@
 #include "interfaces.h"
 
+#include <qcheckbox.h>
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qregexp.h>
