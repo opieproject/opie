@@ -1,0 +1,8 @@
+Makefile*
+opimrecurrencebase.cpp
+opimrecurrencebase.h
+obj
+moc*
+*moc
+*.o
+~*
