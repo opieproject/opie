@@ -4,7 +4,7 @@ Section: opie/applications
 Maintainer: David Woodhouse <dwmw2@infradead.org>
 Architecture: arm
 Version: 1.0.0
-Depends: qpe-base ($QPE_VERSION)
+Depends: qpe-base ($QPE_VERSION), gsmlib
 License: Public Domain
 Description: GSMTool program
  An GSM phone utility program for the Opie environment.
