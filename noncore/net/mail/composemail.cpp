@@ -204,7 +204,7 @@ void ComposeMail::accept()
         mail->setTo( toLine->text() );
     } else {
         QMessageBox::warning(0,tr("Sending mail"),
-            tr("No Receiver spezified" ) );
+            tr("No Receiver specified" ) );
         return;
     }
     mail->setName(senderNameEdit->text());

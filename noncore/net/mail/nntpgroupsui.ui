@@ -95,7 +95,7 @@
                         <name>whatsThis</name>
                         <string>Enter a filter string here.
 Then hit "get newsgroup list" again and only groups starting 
-with that filter will be listet.</string>
+with that filter will be listed.</string>
                     </property>
                 </widget>
             </hbox>
