@@ -768,7 +768,7 @@ bool TextEdit::save() {
 /*!
   prompted save */
 bool TextEdit::saveAs() {
-    qDebug("saveAsFile "+currentFileName);
+    qDebug("saveAsFile " + currentFileName);
       // case of nothing to save... 
     if ( !doc ) {
 //|| !bFromDocView)
@@ -784,7 +784,9 @@ bool TextEdit::saveAs() {
     QString rt = editor->text();
     qDebug(currentFileName);
     
-    if( currentFileName.isEmpty() || currentFileName == tr("Unnamed") || currentFileName == tr("Text Editor")) {
+    if( currentFileName.isEmpty()
+        || currentFileName == tr("Unnamed")
+        || currentFileName == tr("Text Editor")) {
 //        qDebug("do silly TT filename thing");
         if ( doc->name().isEmpty() ) {
             QString pt = rt.simplifyWhiteSpace();
@@ -796,7 +798,8 @@ bool TextEdit::saveAs() {
             while( docname.startsWith( "." ) )
                 docname = docname.mid( 1 );
             docname.replace( QRegExp("/"), "_" );
-              // cut the length. filenames longer than that don't make sense and something goes wrong when they get too long.
+              // cut the length. filenames longer than that
+              //don't make sense and something goes wrong when they get too long.
             if ( docname.length() > 40 )
                 docname = docname.left(40);
             if ( docname.isEmpty() )
@@ -813,8 +816,10 @@ bool TextEdit::saveAs() {
     map.insert(tr("Text"), text );
     text << "*";
     map.insert(tr("All"), text );
-
-    QString str = OFileDialog::getSaveFileName( 2,QPEApplication::documentDir(), QString::null, map);
+//    if(currentFileName
+    QString str = OFileDialog::getSaveFileName( 2,
+                  QPEApplication::documentDir(),
+                  currentFileName, map);
 
     if(!str.isEmpty() ) {
         QString fileNm=str;
@@ -842,7 +847,9 @@ bool TextEdit::saveAs() {
 
             if( filePerms ) {
                 filePermissions *filePerm;
-                filePerm = new filePermissions(this, tr("Permissions"),true,0,(const QString &)fileNm);
+                filePerm = new filePermissions(this,
+                                               tr("Permissions"),true,
+                                               0,(const QString &)fileNm);
                 filePerm->showMaximized();
                 filePerm->exec();
 
