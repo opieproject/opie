@@ -1,0 +1,20 @@
+Files: bin/zbounce apps/Games/zbounce.desktop pics/zbounce/zbounce.png \
+pics/zbounce/arrow0000.png  pics/zbounce/ball0008.png  pics/zbounce/ball0018.png \
+pics/zbounce/arrow0001.png  pics/zbounce/ball0009.png  pics/zbounce/ball0019.png \
+pics/zbounce/ball0000.png   pics/zbounce/ball0010.png  pics/zbounce/ball0020.png \
+pics/zbounce/ball0001.png   pics/zbounce/ball0011.png  pics/zbounce/ball0021.png \
+pics/zbounce/ball0002.png   pics/zbounce/ball0012.png  pics/zbounce/ball0022.png \
+pics/zbounce/ball0003.png   pics/zbounce/ball0013.png  pics/zbounce/ball0023.png \
+pics/zbounce/ball0004.png   pics/zbounce/ball0014.png  pics/zbounce/ball0024.png \
+pics/zbounce/ball0005.png   pics/zbounce/ball0015.png  pics/zbounce/tiles.png \
+pics/zbounce/ball0006.png   pics/zbounce/ball0016.png \
+pics/zbounce/ball0007.png   pics/zbounce/ball0017.png \
+Version: 0.6 
+Depends: opie-base ($QPE_VERSION)
+Priority: optional
+Section: opie/games
+Maintainer: Martin Imobersteg <imm@gmx.ch> 
+Architecture: arm
+License: GPL
+Description: ZBounce 
+ A JezzGame like game for Qtopia.

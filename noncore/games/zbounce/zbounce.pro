@@ -1,0 +1,10 @@
+TEMPLATE	= app
+#CONFIG		= qt warn_on debug
+CONFIG		= qt warn_on release
+HEADERS		= game.h kbounce.h 
+SOURCES		= game.cpp kbounce.cpp main.cpp
+INCLUDEPATH	+= $(QPEDIR)/include
+DEPENDPATH	+= $(QPEDIR)/include
+LIBS        += -lqpe
+DESTDIR     = $(OPIEDIR)/bin
+TARGET		= zbounce 
