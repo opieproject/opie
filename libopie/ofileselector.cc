@@ -747,6 +747,9 @@ void OFileSelector::initializeListView()
       const QString path = (*it)->path();
       m_location->insertItem(path+ "<-"+disk );
     }
+    int count = m_location->count();
+    m_location->insertItem(m_currentDir );
+    m_location->setCurrentItem( count );
   };
   m_View = new QListView(m_pseudo, "Extended view" );
   m_stack->addWidget( m_pseudo, EXTENDED );
@@ -1002,6 +1005,11 @@ bool OFileSelector::cd(const QString &str )
   if(dir.exists() ){
     m_currentDir = str;
     reparse();
+    if(m_shTool ){
+      int count = m_location->count();
+      m_location->insertItem(str );
+      m_location->setCurrentItem( count );
+    }
     return true;
   }
   return false;
@@ -1053,7 +1061,20 @@ void OFileSelector::cdUP()
   if(dir.exists() ){
     m_currentDir = dir.absPath();
     reparse();
+    int count = m_location->count();
+    m_location->insertItem(m_currentDir );
+    m_location->setCurrentItem( count );
   }
 }
+void OFileSelector::slotHome()
+{
+  cd(QDir::homeDirPath() );
+}
+void OFileSelector::slotDoc()
+{
+  cd(QDir::homeDirPath() + "/Documents" );
+}
+void OFileSelector::slotNavigate()
+{
 
-
+}

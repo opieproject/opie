@@ -267,7 +267,9 @@ private slots:
    virtual void slotRename();
    virtual void slotDelete();
    virtual void cdUP();
-
+   virtual void slotHome();
+   virtual void slotDoc();
+   virtual void slotNavigate( );
 };
 
 
