@@ -1,4 +1,4 @@
   config JUMPX
     boolean "opie-jumpx (keyboard optimized for single finger/stylus input)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) 

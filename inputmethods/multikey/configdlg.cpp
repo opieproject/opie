@@ -26,13 +26,15 @@
 #include <qlistbox.h>
 #include <qstringlist.h>
 #include <qtoolbutton.h>
-#include <opie/ofiledialog.h>
-#include <opie/colordialog.h>
+#include <opie2/ofiledialog.h>
+#include <opie2/qcolordialog.h>
 #include <qdir.h>
 #include <qfileinfo.h>
 #include "configdlg.h"
 #include "keyboard.h"
 
+using namespace Opie;
+using namespace Opie::Ui;
 // ConfigDlg::ConfigDlg() {{{1
 ConfigDlg::ConfigDlg () : QDialog ()
 {
@@ -435,7 +437,7 @@ void ConfigDlg::keyColorClicked() {
 
     QStringList color = config.readListEntry("keycolor", QChar(','));
 
-    QColor newcolor = OColorDialog::getColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+    QColor newcolor = QColorDialog::getColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
 
     color[0].setNum(newcolor.red());
     color[1].setNum(newcolor.green());
@@ -454,7 +456,7 @@ void ConfigDlg::keyColorPressedClicked() {
 
     QStringList color = config.readListEntry("keycolor_pressed", QChar(','));
 
-    QColor newcolor = OColorDialog::getColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+    QColor newcolor = QColorDialog::getColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
 
     color[0].setNum(newcolor.red());
     color[1].setNum(newcolor.green());
@@ -473,7 +475,7 @@ void ConfigDlg::keyColorLinesClicked() {
 
     QStringList color = config.readListEntry("keycolor_lines", QChar(','));
 
-    QColor newcolor = OColorDialog::getColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+    QColor newcolor = QColorDialog::getColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
 
     color[0].setNum(newcolor.red());
     color[1].setNum(newcolor.green());
@@ -492,7 +494,7 @@ void ConfigDlg::textColorClicked() {
 
     QStringList color = config.readListEntry("textcolor", QChar(','));
 
-    QColor newcolor = OColorDialog::getColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+    QColor newcolor = QColorDialog::getColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
 
     color[0].setNum(newcolor.red());
     color[1].setNum(newcolor.green());
