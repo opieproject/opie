@@ -189,7 +189,7 @@ void MScanListView::addNewItem( const QString& type,
 
     MScanListItem* station = new MScanListItem( network, type, "", macaddr, wep, channel, signal );
     station->setManufacturer( mac.manufacturer() );
-    station->setLocation( loc.latitude, loc.longitude );
+    station->setLocation( loc.dmsPosition() );
 
     if ( type == "managed" )
     {
@@ -533,12 +533,9 @@ void MScanListItem::setManufacturer( const QString& manufacturer )
 }
 
 
-void MScanListItem::setLocation( const float& latitude, const float& longitude )
+void MScanListItem::setLocation( const QString& location )
 {
-    if ( latitude == 0.0 || longitude == 0.0 )
-        setText( col_location, "N/A" );
-    else
-        setText( col_location, QString().sprintf( "%.2f / %.2f", latitude, longitude ) );
+    setText( col_location, location );
 }
 
 

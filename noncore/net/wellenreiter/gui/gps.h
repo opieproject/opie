@@ -19,12 +19,17 @@
 #include <qobject.h>
 #include <qsocket.h>
 
-struct GpsLocation
+class GpsLocation
 {
-    GpsLocation( const float& lat, const float& lon ) : latitude(lat), longitude(lon) {};
+  public:
+    GpsLocation( const float& lat, const float& lon ) : _latitude(lat), _longitude(lon) {};
     ~GpsLocation() {};
-    float latitude;
-    float longitude;
+    float latitude() const { return _latitude; };
+    float longitude() const { return _longitude; };
+    QString dmsPosition() const;
+  private:
+    float _latitude;
+    float _longitude;
 };
 
 

@@ -103,7 +103,7 @@ class MScanListItem: public OListViewItem
     void receivedBeacon();
 
     void setManufacturer( const QString& manufacturer );
-    void setLocation( const float& latitude, const float& longitude );
+    void setLocation( const QString& location );
 
     virtual OListViewItem* childFactory();
     virtual void serializeTo( QDataStream& s ) const;

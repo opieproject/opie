@@ -189,7 +189,7 @@ void Wellenreiter::handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon )
         // TODO: add check if GPS is working!?
         qDebug( "Wellenreiter::gathering GPS data..." );
         loc = gps->position();
-        qDebug( "Wellenreiter::GPS data received is ( %f , %f )", loc.latitude, loc.longitude );
+        qDebug( "Wellenreiter::GPS data received is ( %f , %f ) - dms string = '%s'", loc.latitude(), loc.longitude(), loc.dmsPosition().latin1() );
     }
 
     netView()->addNewItem( type, essid, header->macAddress2(), beacon->canPrivacy(), channel, 0, loc );

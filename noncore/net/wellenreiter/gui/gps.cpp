@@ -14,9 +14,13 @@
 **********************************************************************/
 
 #include "gps.h"
-#include <unistd.h>
 
+/* QT */
 #include <qtextstream.h>
+
+/* STD */
+#include <stdlib.h>
+#include <unistd.h>
 
 GPS::GPS( QObject* parent, const char * name )
     :QObject( parent, name )
@@ -64,6 +68,64 @@ GpsLocation GPS::position() const
             return GpsLocation( lat, lon );
         }
     }
-    return GpsLocation( -1.0, -1.0 );
+    return GpsLocation( -111.111, -111.111 );
 }
+
+
+QString GpsLocation::dmsPosition() const
+{
+    if ( _latitude == -111.111 || _longitude == -111.11 )
+        return "N/A";
+    if ( _latitude == 0.0 && _longitude == 0.0 )
+        return "NULL";
+
+    /* compute latitude */
+
+    QString dms = "N";
+    if ( _latitude >= 0 ) dms.append( "+" );
+
+    int trunc = int( _latitude );
+    float rest = _latitude - trunc;
+
+    float minf = rest * 60;
+    int minutes = int( minf );
+
+    rest = minf - minutes;
+    int seconds = int( rest * 60 );
+
+    dms.append( QString::number( trunc ) );
+    dms.append( "° " );
+    dms.append( QString::number( ::abs( minutes ) ) );
+    dms.append( "' " );
+    dms.append( QString::number( ::abs( seconds ) ) );
+    dms.append( "'' " );
+
+    /* compute longitude */
+
+    dms.append( " | W" );
+    if ( _longitude > 0 ) dms.append( "+" );
+
+    trunc = int( _longitude );
+    rest = _longitude - trunc;
+
+    minf = rest * 60;
+    minutes = int( minf );
+
+    rest = minf - minutes;
+    seconds = int( rest * 60 );
+
+    dms.append( QString::number( trunc ) );
+    dms.append( "° " );
+    dms.append( QString::number( ::abs( minutes ) ) );
+    dms.append( "' " );
+    dms.append( QString::number( ::abs( seconds ) ) );
+    dms.append( "'' " );
+
+    return dms;
+}
+
+
+
+
+
 
