@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/settings
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Architecture: arm
-Depends: opie-networksettings, libopie2net
+Depends: opie-networksettings, libopienet2
 Description: Network settings wavelan plugin.
 
 Version: $QPE_VERSION$EXTRAVERSION
