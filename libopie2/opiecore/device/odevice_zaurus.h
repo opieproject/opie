@@ -60,9 +60,9 @@ class Zaurus : public ODevice
     virtual bool setDisplayBrightness ( int b );
     virtual int displayBrightnessResolution() const;
 
-    virtual void alarmSound();
-    virtual void keySound();
-    virtual void touchSound();
+    virtual void playAlarmSound();
+    virtual void playKeySound();
+    virtual void playTouchSound();
 
     virtual QValueList <OLed> ledList() const;
     virtual QValueList <OLedState> ledStateList ( OLed led ) const;

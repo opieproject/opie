@@ -354,9 +354,9 @@ ODirection ODevice::direction() const
 }
 
 /**
-* This plays an alarmSound
+* This plays an alarm sound
 */
-void ODevice::alarmSound()
+void ODevice::playAlarmSound()
 {
 #ifndef QT_NO_SOUND
     static Sound snd ( "alarm" );
@@ -369,7 +369,7 @@ void ODevice::alarmSound()
 /**
 * This plays a key sound
 */
-void ODevice::keySound()
+void ODevice::playKeySound()
 {
 #ifndef QT_NO_SOUND
     static Sound snd ( "keysound" );
@@ -382,7 +382,7 @@ void ODevice::keySound()
 /**
 * This plays a touch sound
 */
-void ODevice::touchSound()
+void ODevice::playTouchSound()
 {
 #ifndef QT_NO_SOUND
     static Sound snd ( "touchsound" );

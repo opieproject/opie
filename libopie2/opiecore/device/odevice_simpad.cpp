@@ -281,7 +281,7 @@ void SIMpad::timerEvent ( QTimerEvent * )
 }
 
 
-void SIMpad::alarmSound()
+void SIMpad::playAlarmSound()
 {
 #ifndef QT_NO_SOUND
     static Sound snd ( "alarm" );

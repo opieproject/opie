@@ -225,10 +225,9 @@ public:
     // which is defined below
 
     // input / output
-    //FIXME playAlarmSound and al might be better -zecke
-    virtual void alarmSound();
-    virtual void keySound();
-    virtual void touchSound();
+    virtual void playAlarmSound();
+    virtual void playKeySound();
+    virtual void playTouchSound();
 
     virtual QValueList <OLed> ledList() const;
     virtual QValueList <OLedState> ledStateList ( OLed led ) const;
@@ -250,8 +249,11 @@ public:
      * of buttons will vary depending on the device.  Button numbers will be assigned
      * by the device manufacturer and will be from most preferred button to least preffered
      * button.  Note that this list only contains "user mappable" buttons.
+     * 
+     * @todo Make method const and take care of calling initButtons or make that const too
+     *
      */
-    const QValueList<ODeviceButton> &buttons() /* ### make const */;
+    const QValueList<ODeviceButton> &buttons();
 
     /**
      * Returns the DeviceButton for the \a keyCode.  If \a keyCode is not found, it

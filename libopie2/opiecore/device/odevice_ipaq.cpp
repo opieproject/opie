@@ -342,7 +342,7 @@ void iPAQ::timerEvent ( QTimerEvent * )
 }
 
 
-void iPAQ::alarmSound()
+void iPAQ::playAlarmSound()
 {
 #ifndef QT_NO_SOUND
     static Sound snd ( "alarm" );

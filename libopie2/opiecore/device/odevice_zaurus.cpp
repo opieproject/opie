@@ -399,17 +399,17 @@ void Zaurus::buzzer ( int sound )
 }
 
 
-void Zaurus::alarmSound()
+void Zaurus::playAlarmSound()
 {
     buzzer ( SHARP_BUZ_SCHEDULE_ALARM );
 }
 
-void Zaurus::touchSound()
+void Zaurus::playTouchSound()
 {
     buzzer ( SHARP_BUZ_TOUCHSOUND );
 }
 
-void Zaurus::keySound()
+void Zaurus::playKeySound()
 {
     buzzer ( SHARP_BUZ_KEYSOUND );
 }
