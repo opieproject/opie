@@ -34,6 +34,10 @@
 
 #include <opie2/odebug.h>
 
+#if defined(__UCLIBC__)
+#define OPIE_NO_BACKTRACE
+#endif
+
 #ifdef OPIE_NO_DEBUG
 #undef odDebug
 #undef odBacktrace
