@@ -3,23 +3,23 @@
     <name>@default</name>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Título</translation>
     </message>
     <message>
         <source>Author</source>
-        <translation type="unfinished"></translation>
+        <translation>Autor</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>DescripciŽon</translation>
     </message>
     <message>
         <source>Copyright</source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright</translation>
     </message>
     <message>
         <source>Creation Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha de Creaciçon</translation>
     </message>
     <message>
         <source>Software</source>
@@ -39,31 +39,31 @@
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Comentario</translation>
     </message>
     <message>
         <source>Grayscale</source>
-        <translation type="unfinished"></translation>
+        <translation>Escala de Grises</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconocido</translation>
     </message>
     <message>
         <source>RGB</source>
-        <translation type="unfinished"></translation>
+        <translation>RGB</translation>
     </message>
     <message>
         <source>Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Paleta</translation>
     </message>
     <message>
         <source>Grayscale/Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Escala de Grises/Alfa</translation>
     </message>
     <message>
         <source>RGB/Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>RGB/Alfa</translation>
     </message>
     <message>
         <source>Deflate</source>
@@ -82,17 +82,19 @@
     <name>QObject</name>
     <message>
         <source>Not a GIF file</source>
-        <translation type="unfinished"></translation>
+        <translation>No es un Fichero GIF</translation>
     </message>
     <message>
         <source>Dimensions: %1x%2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensiones: %1x%2
+</translation>
     </message>
     <message>
         <source>Depth: %1 bits
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Profundidad: %1 bits
+</translation>
     </message>
     <message>
         <source>Sort Flag: %1
@@ -117,131 +119,153 @@
     <message>
         <source>Comment: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Comentario: %1
+</translation>
     </message>
     <message>
         <source>Depth: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Profundidad: %1
+</translation>
     </message>
     <message>
         <source>ColorMode: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Modo de Color: %1
+</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconocido</translation>
     </message>
     <message>
         <source>Compression: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Compresión: %1
+</translation>
     </message>
     <message>
         <source>InterlaceMode: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Entrelazado: %1
+</translation>
     </message>
     <message>
         <source>Date/Time: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha/Hora: %1
+</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Comment: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Comentario: %1
+</translation>
     </message>
     <message>
         <source>Manufacturer: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Manufacturador: %1
+</translation>
     </message>
     <message>
         <source>Model: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Modelo: %1
+</translation>
     </message>
     <message>
         <source>Orientation: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Orientación: %1
+</translation>
     </message>
     <message>
         <source>Flash used
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Flash usado
+</translation>
     </message>
     <message>
         <source>Focal length: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Distancia Focal: %1
+</translation>
     </message>
     <message>
         <source>35mm equivalent: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Equivalente 35mm : %1
+</translation>
     </message>
     <message>
         <source>CCD width: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Amplitud CCD: %1
+</translation>
     </message>
     <message>
         <source>Exposure time: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo de Exposición: %1
+</translation>
     </message>
     <message>
         <source>Aperture: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Apertura: %1</translation>
     </message>
     <message>
         <source>Distance: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Distancia: %1
+</translation>
     </message>
     <message>
         <source>Infinite</source>
-        <translation type="unfinished"></translation>
+        <translation>Infinito</translation>
     </message>
     <message>
         <source>ISO equivalent: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Equivalente ISO: %1
+</translation>
     </message>
     <message>
         <source>EXIF comment: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Comentario EXIF: %1
+</translation>
     </message>
     <message>
         <source>&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Dimensions: %1 x %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensiones: %1 x %2
+</translation>
     </message>
     <message>
         <source>Size: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño: %1
+</translation>
     </message>
     <message>
         <source>Compressed size: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño comprimido: %1</translation>
     </message>
     <message>
         <source>used colors: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Colores usados: %1
+</translation>
     </message>
     <message>
         <source>Resolution: %1 x %2
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Resolución: %1 x %2
+</translation>
     </message>
 </context>
 </TS>

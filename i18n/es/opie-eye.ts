@@ -3,97 +3,97 @@
     <name>BaseSetup</name>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> segundos</translation>
     </message>
     <message>
         <source>Slideshow timeout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo por diapositiva:</translation>
     </message>
     <message>
         <source> pixel</source>
-        <translation type="unfinished"></translation>
+        <translation> pixel</translation>
     </message>
     <message>
         <source>Size of thumbnails:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño de las miniaturas:</translation>
     </message>
     <message>
         <source>Show toolbar on startup</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Barra de Herramientas al Iniciar</translation>
     </message>
     <message>
         <source>Save status of fullscreen/autorotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar el estado de pantalla completa/autorrotación</translation>
     </message>
 </context>
 <context>
     <name>ImageView</name>
     <message>
         <source>View Image Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver Información de la Imagen</translation>
     </message>
     <message>
         <source>Toggle autorotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar Autorrotación</translation>
     </message>
     <message>
         <source>Toggle autoscale</source>
-        <translation type="unfinished"></translation>
+        <translation>Activar Autoescalado</translation>
     </message>
     <message>
         <source>Switch to next image</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasar a la Siguiente Imagen</translation>
     </message>
     <message>
         <source>Switch to previous image</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasar a la Imagen Anterior</translation>
     </message>
     <message>
         <source>Toggle fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasar a Pantalla Completa</translation>
     </message>
     <message>
         <source>Toggle thumbnail</source>
-        <translation type="unfinished"></translation>
+        <translation>Pasar a Miniatura</translation>
     </message>
 </context>
 <context>
     <name>PIconView</name>
     <message>
         <source>View as</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver como</translation>
     </message>
     <message>
         <source>Beam Current Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Emitir Elemento Actual</translation>
     </message>
     <message>
         <source>Delete Current Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar Elemento Actual</translation>
     </message>
     <message>
         <source>View Current Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver Elemento Actual</translation>
     </message>
     <message>
         <source>Show Image Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Información de la Imagen</translation>
     </message>
     <message>
         <source>Delete Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar Imagen</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Imagen</translation>
     </message>
     <message>
         <source>Start slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Comenzar Presentación</translation>
     </message>
     <message>
         <source>the Image</source>
-        <translation type="unfinished"></translation>
+        <translation>la Imagen</translation>
     </message>
 </context>
 <context>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Opie Eye - Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Eye - Configuración</translation>
     </message>
     <message>
         <source>Imageinfo Keyboard Actions</source>
@@ -120,67 +120,67 @@
     </message>
     <message>
         <source>Go dir up</source>
-        <translation type="unfinished"></translation>
+        <translation>Subir un Nivel</translation>
     </message>
     <message>
         <source>Beam file</source>
-        <translation type="unfinished"></translation>
+        <translation>Emitir Fichero</translation>
     </message>
     <message>
         <source>Show imageinfo</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Información</translation>
     </message>
     <message>
         <source>Delete file</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar Fichero</translation>
     </message>
     <message>
         <source>Display image</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Imagen</translation>
     </message>
     <message>
         <source>Start slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Comenzar Presentación</translation>
     </message>
     <message>
         <source>Show toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar Barra de Herramientas</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración</translation>
     </message>
     <message>
         <source>Thumbnail and Imageinfo</source>
-        <translation type="unfinished"></translation>
+        <translation>Miniatura e Información de la Imagen</translation>
     </message>
     <message>
         <source>Thumbnail and name</source>
-        <translation type="unfinished"></translation>
+        <translation>Miniatura y Nombre</translation>
     </message>
     <message>
         <source>Name only</source>
-        <translation type="unfinished"></translation>
+        <translation>Sólo Nombre</translation>
     </message>
     <message>
         <source>Next image</source>
-        <translation type="unfinished"></translation>
+        <translation>Imagen Siguiente</translation>
     </message>
     <message>
         <source>Previous image</source>
-        <translation type="unfinished"></translation>
+        <translation>Imagen Anterior</translation>
     </message>
     <message>
         <source>Show images fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar las Imágenes a Pantalla Completa</translation>
     </message>
     <message>
         <source>Auto rotate images</source>
-        <translation type="unfinished"></translation>
+        <translation>Autorrotar las Imágenes</translation>
     </message>
     <message>
         <source>Show images unscaled</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mostrar las Imágenes </translation>
     </message>
     <message>
         <source>Show zoomer window when unscaled</source>
@@ -188,15 +188,15 @@
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar</translation>
     </message>
     <message>
         <source>Select filesystem</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar Sistema de Ficheros</translation>
     </message>
     <message>
         <source>Listview mode</source>
@@ -216,11 +216,11 @@
     </message>
     <message>
         <source>Show all files</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar todos los ficheros</translation>
     </message>
     <message>
         <source>Opie Eye</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Eye</translation>
     </message>
     <message>
         <source>DocView</source>
@@ -236,15 +236,15 @@
     </message>
     <message>
         <source>Show files recursive</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar ficheros recursivamente</translation>
     </message>
     <message>
         <source>Recursion depth:</source>
-        <translation type="unfinished"></translation>
+        <translation>Profundidad de la Recursión:</translation>
     </message>
     <message>
         <source> directories</source>
-        <translation type="unfinished"></translation>
+        <translation> directorios</translation>
     </message>
     <message>
         <source>Digital Camera View</source>
@@ -260,33 +260,33 @@
     </message>
     <message>
         <source>Confirm Deletion</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmar Borrado</translation>
     </message>
 </context>
 <context>
     <name>ViewModeButton</name>
     <message>
         <source>Thumbnail and Imageinfo</source>
-        <translation type="unfinished"></translation>
+        <translation>Miniatura e Información de la Imagen</translation>
     </message>
     <message>
         <source>Thumbnail and Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Miniatura y Nombre</translation>
     </message>
     <message>
         <source>Name Only</source>
-        <translation type="unfinished"></translation>
+        <translation>Sólo Nombre</translation>
     </message>
 </context>
 <context>
     <name>imageinfo</name>
     <message>
         <source>View Full Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver Imagen Completa</translation>
     </message>
     <message>
         <source>Image info</source>
-        <translation type="unfinished"></translation>
+        <translation>Información de Imagen</translation>
     </message>
     <message>
         <source>Displays an thumbnail of the image</source>
