@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Tools</source>
-        <translation>Инстр.</translation>
+        <translation>Инструменты</translation>
     </message>
     <message>
         <source>New Page</source>
@@ -51,11 +51,11 @@
     </message>
     <message>
         <source>Previous Page</source>
-        <translation>Предыд. страница</translation>
+        <translation>Предыдущая страница</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation>След. страница</translation>
+        <translation>Следующая страница</translation>
     </message>
     <message>
         <source>Last Page</source>
@@ -71,11 +71,11 @@
     </message>
     <message>
         <source>Draw Rectangle</source>
-        <translation>Рисовать прямоуг.</translation>
+        <translation>Рисовать прямоугольники</translation>
     </message>
     <message>
         <source>Draw Filled Rectangle</source>
-        <translation>Рисовать заполненные прямоуг.</translation>
+        <translation>Рисовать закрашенные прямоугольники</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
@@ -83,11 +83,11 @@
     </message>
     <message>
         <source>Draw Filled Ellipse</source>
-        <translation>Рисовать заполненные овалы</translation>
+        <translation>Рисовать закрашенные овалы</translation>
     </message>
     <message>
         <source>Fill Region</source>
-        <translation>Заполнить регион</translation>
+        <translation>Закрасить область</translation>
     </message>
     <message>
         <source>Erase Point</source>
@@ -111,19 +111,19 @@
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation>Просм. пиктограмм</translation>
+        <translation>Просмотр пиктограмм</translation>
     </message>
     <message>
         <source>Thumbnail View...</source>
-        <translation>Просм. пиктограмм...</translation>
+        <translation>Просмотр пиктограмм...</translation>
     </message>
     <message>
         <source>Page Information</source>
-        <translation>Инф. о странице</translation>
+        <translation>Информация о странице</translation>
     </message>
     <message>
         <source>Page Information...</source>
-        <translation>Инф. о странице...</translation>
+        <translation>Информация о странице...</translation>
     </message>
     <message>
         <source>Do you want to clear
@@ -213,7 +213,7 @@ all the pages?</source>
     </message>
     <message>
         <source>Click here to select the eraser tool.</source>
-        <translation>Нажмите чтобы выбрать инструм. ластик.</translation>
+        <translation>Нажмите чтобы выбрать ластик.</translation>
     </message>
     <message>
         <source>Click here to select the width of the drawing pen.</source>
@@ -256,7 +256,7 @@ all the pages?</source>
     </message>
     <message>
         <source>Export As</source>
-        <translation>Экспорт как</translation>
+        <translation>Экспорт</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -341,7 +341,7 @@ all the pages?</source>
     <name>PageInformationDialog</name>
     <message>
         <source>Page Information</source>
-        <translation>Инф. о странице</translation>
+        <translation>Информация о странице</translation>
     </message>
     <message>
         <source>General</source>
