@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: project.cpp,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: project.cpp,v 1.2 2002-11-01 16:20:04 kergoth Exp $
 **
 ** Definition of ________ class.
 **
@@ -441,14 +441,20 @@ QMakeProject::read(QString project, QString)
 	/* parse mkspec */
 	QStringList mkspec_roots;
 	/* prefer $QTDIR if it is set */
-	/* minor hack here, prefer QMAKESPECDIR -cl */
+	/* prefer QMAKESPECSDIR -cl */
 	
-	if (getenv("QMAKESPECDIR")){
-	    mkspec_roots << getenv("QMAKESPECDIR");
-	} else if (getenv("QTDIR")) {
+	if (getenv("QTDIR")) {
 	    mkspec_roots << getenv("QTDIR");
 	}
 	mkspec_roots << qInstallPathData();
+
+	if (getenv("QMAKESPECSDIR")){
+		QString mkspec = QString(getenv("QMAKESPECSDIR")) + QDir::separator() +
+				 QDir::separator() + "default";
+		if(QFile::exists(mkspec))
+		    Option::mkfile::qmakespec = mkspec;
+	}
+
 	if(Option::mkfile::qmakespec.isEmpty()) {
 	    for(QStringList::Iterator it = mkspec_roots.begin(); it != mkspec_roots.end(); ++it) {
 		QString mkspec = (*it) + QDir::separator() + QString("mkspecs") +
@@ -458,10 +464,11 @@ QMakeProject::read(QString project, QString)
 		    break;
 		}
 	    }
-	    if(Option::mkfile::qmakespec.isEmpty()) {
-		fprintf(stderr, "QMAKESPEC has not been set, so configuration cannot be deduced.\n");
-		return FALSE;
-	    }
+	}
+
+	if(Option::mkfile::qmakespec.isEmpty()) {
+	    fprintf(stderr, "QMAKESPEC has not been set, so configuration cannot be deduced.\n");
+	    return FALSE;
 	}
 
 	if(QDir::isRelativePath(Option::mkfile::qmakespec)) {
