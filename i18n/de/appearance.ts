@@ -77,11 +77,12 @@
     <message>
         <source>Do you want to apply your changes?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Sollen Ihre Änderungen übernommen werden?
+</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffne Datei</translation>
     </message>
 </context>
 <context>
@@ -186,20 +187,21 @@
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Notiz</translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte nicht umbenennen</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation type="unfinished">Wollen Sie wirklich löschen?</translation>
+        <translation>Wollen Sie wirklich löschen?
+</translation>
     </message>
     <message>
         <source> ?
@@ -208,11 +210,11 @@ It must be empty</source>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Ja</translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Nein</translation>
+        <translation>Nein</translation>
     </message>
 </context>
 </TS>

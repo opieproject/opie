@@ -202,6 +202,18 @@ Quit anyway?</source>
         <source>Font</source>
         <translation>Schrift</translation>
     </message>
+    <message>
+        <source>Small</source>
+        <translation>Klein</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation>Normal</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Groß</translation>
+    </message>
 </context>
 <context>
     <name>ContactEditor</name>
@@ -239,7 +251,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Anrede</translation>
     </message>
     <message>
         <source>First Name</source>

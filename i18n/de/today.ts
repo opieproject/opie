@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
-        <translation>&lt;b&gt;Bitte füllen Sie die Visitenkarte aus&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Bitte füllen Sie die Visitenkarte aus&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
@@ -32,6 +32,14 @@
     <message>
         <source>No appointments today</source>
         <translation>Heute keine Termine</translation>
+    </message>
+    <message>
+        <source>Owned by </source>
+        <translation>Dieses Gerät gehört</translation>
+    </message>
+    <message>
+        <source>Please fill out the business card</source>
+        <translation>Bitte füller Sie die Visitenkarte aus</translation>
     </message>
 </context>
 <context>
@@ -72,7 +80,7 @@ anzeigen</translation>
 appointment
 should should 
 be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Calendar</source>
@@ -100,11 +108,29 @@ wievielen Buchstaben?</translation>
         <source>Should today be
 autostarted on
 resume ? (Opie only)</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Misc</source>
         <translation>Verschiedenes</translation>
+    </message>
+    <message>
+        <source>How many 
+appointment
+should
+be shown?</source>
+        <translation>Wieviele Termine
+sollen angezeigt
+werden?</translation>
+    </message>
+    <message>
+        <source>Should today be
+autostarted on
+resume? (Opie only)</source>
+        <translation>Solle &apos;Heute&apos;
+automatisch
+gestartet werden?
+(Nur in Opie)</translation>
     </message>
 </context>
 </TS>

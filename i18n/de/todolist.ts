@@ -75,6 +75,10 @@
         <source>All</source>
         <translation>Alle</translation>
     </message>
+    <message>
+        <source>Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TodoWindow</name>
@@ -120,7 +124,7 @@ bevor Sie Daten eingeben.</translation>
     </message>
     <message>
         <source>Task</source>
-        <translation>Aufgaben</translation>
+        <translation type="obsolete">Aufgaben</translation>
     </message>
     <message>
         <source>View</source>
@@ -158,6 +162,18 @@ Lage, Ihre Änderungen zu
 speichern. Bitte schaffen 
 Sie freien Speicherplatz. 
 Trozdem beenden?</translation>
+    </message>
+    <message>
+        <source>Show Deadline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fonts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
