@@ -1,0 +1,9 @@
+Package: tonleiter
+Files: bin/tonlieter pics/tonleiter apps/Applications/tonleiter.desktop
+Priority: optional
+Section: multimedia/applications
+Maintainer: Ralf Waspe <rwaspe@web.de>
+Architecture: arm
+Depends: task-opie-minimal
+Description: music scales for sting instruments
+Version: $QPE_VERSION$EXTRAVERSION
