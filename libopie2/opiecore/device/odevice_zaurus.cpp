@@ -1,27 +1,27 @@
 /*
-                             This file is part of the Opie Project
-                             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+                     This file is part of the Opie Project
+                      Copyright (C) The Opie Team <opie-devel@handhelds.org>
               =.             Copyright (C) 2003-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           Library General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -506,11 +506,12 @@ Transformation Zaurus::rotation() const
     
     switch ( d->m_model ) {
         case Model_Zaurus_SLC3000: // fallthrough
-        case Model_Zaurus_SLC7x0:
-            OHingeStatus hs = readHingeSensor();
-            if ( hs == CASE_PORTRAIT ) rot = Rot0;
-            else if ( hs == CASE_UNKNOWN ) rot = Rot0;
-            else rot = Rot270;
+        case Model_Zaurus_SLC7x0: {
+                OHingeStatus hs = readHingeSensor();
+                if ( hs == CASE_PORTRAIT ) rot = Rot0;
+                else if ( hs == CASE_UNKNOWN ) rot = Rot0;
+                else rot = Rot270;
+            }
             break;
         case Model_Zaurus_SL6000:
         case Model_Zaurus_SLB600:
@@ -530,11 +531,12 @@ ODirection Zaurus::direction() const
     
     switch ( d->m_model ) {
         case Model_Zaurus_SLC3000: // fallthrough
-        case Model_Zaurus_SLC7x0:
-            OHingeStatus hs = readHingeSensor();
-            if ( hs == CASE_PORTRAIT ) dir = CCW;
-            else if ( hs == CASE_UNKNOWN ) dir = CCW;
-            else dir = CW;        
+        case Model_Zaurus_SLC7x0: {
+                OHingeStatus hs = readHingeSensor();
+                if ( hs == CASE_PORTRAIT ) dir = CCW;
+                else if ( hs == CASE_UNKNOWN ) dir = CCW;
+                else dir = CW;
+            }
             break;
         case Model_Zaurus_SL6000:
         case Model_Zaurus_SLA300:
