@@ -199,7 +199,7 @@ bool Jornada::setDisplayStatus ( bool on )
 {
     bool res = false;
 
-    QString cmdline = QString( "echo %1 > /sys/class/lcd/sa1100fb/power; echo %2 > /sys/class/backlight/sa1100fb/power").arg( on ? "4" : "0" ).arg( on ? "4" : "0" );
+    QString cmdline = QString( "echo %1 > /sys/class/lcd/sa1100fb/power; echo %2 > /sys/class/backlight/sa1100fb/power").arg( on ? "0" : "4" ).arg( on ? "0" : "4" );
 
     res = ( ::system( (const char*) cmdline ) == 0 );
 
