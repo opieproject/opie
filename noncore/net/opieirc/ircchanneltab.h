@@ -21,6 +21,7 @@
 #ifndef __IRCCHANNELTAB_H
 #define __IRCCHANNELTAB_H
 
+#include <qpopupmenu.h>
 #include <qpushbutton.h>
 #include "irctab.h"
 #include "ircsession.h"
@@ -44,8 +45,16 @@ public:
     void appendText(QString text);
 public slots:
     void remove();
+    void settingsChanged();
+protected slots:
     void processCommand();
     void toggleList();
+    void mouseButtonPressed(int mouse, QListBoxItem *item, const QPoint &point);
+    /* Popup slots */
+    void popupQuery();
+    void popupPing();
+    void popupVersion();
+    void popupWhois();
 protected:
     IRCServerTab   *m_parentTab;
     IRCChannel     *m_channel;
@@ -54,6 +63,7 @@ protected:
     MainWindow     *m_mainWindow;
     QTextView      *m_textview;
     QLineEdit      *m_field;
+    QPopupMenu     *m_popup;
     bool            m_listVisible;
 };
 

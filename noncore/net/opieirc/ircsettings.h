@@ -18,35 +18,29 @@
 
 */
 
-#ifndef __IRCQUERYTAB_H
-#define __IRCQUERYTAB_H
+#ifndef __IRCSETTINGS_H
+#define __IRCSETTINGS_H
 
-#include "ircsession.h"
-#include "mainwindow.h"
+#include <qpe/config.h>
+#include <qdialog.h>
 
-class IRCServerTab;
-class IRCQueryTab : public IRCTab {
+class IRCSettings : public QDialog {
     Q_OBJECT
 public:
-    /* IRCTab implementation */
-    IRCQueryTab(IRCPerson *person, IRCServerTab *parentTab, MainWindow *mainWindow, QWidget *parent = 0, const char *name = 0, WFlags f = 0);
-    ~IRCQueryTab();
-    QString title();
-    IRCSession *session();
-    IRCPerson *person();
-    void appendText(QString text);
-public slots:
-    void remove();
-    void processCommand();
-    void display(IRCOutput output);
-    void settingsChanged();
+    IRCSettings(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags f = 0);
+    QString getColorString(QWidget *widget);
+    ~IRCSettings();
+protected slots:
+    void accept();
 protected:
-    bool                  m_close;
-    MainWindow           *m_mainWindow;
-    IRCServerTab         *m_parentTab;
-    IRCPerson            *m_person;
-    QTextView            *m_textview;
-    QLineEdit            *m_field;
+    Config  *m_config;
+    QWidget *m_background;
+    QWidget *m_text;
+    QWidget *m_error;
+    QWidget *m_self;
+    QWidget *m_server;
+    QWidget *m_other;
+    QWidget *m_notification;
 };
 
-#endif /* __IRCQUERYTAB_H */
+#endif /* __IRCSETTINGS_H */

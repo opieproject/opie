@@ -42,16 +42,19 @@ public:
     /* Remove tabs from the internal tab lists */
     void removeChannelTab(IRCChannelTab *tab);
     void removeQueryTab(IRCQueryTab *tab);
-
-    /* Execute a user command such as /join */
+    /* Return tabs from the internal tab lists */
+    IRCChannelTab *getTabForChannel(IRCChannel *channel);
+    IRCQueryTab *getTabForQuery(IRCPerson *person);
+    /* Add tabs to the internal tab lists */
+    void addQueryTab(IRCQueryTab *tab);
+    /* Execute a user command such as /join, /msg etc */
     void executeCommand(IRCTab *tab, QString line);
 protected:
     void appendText(QString text);
-    IRCChannelTab *getTabForChannel(IRCChannel *channel);
-    IRCQueryTab *getTabForQuery(IRCPerson *person);
 public slots:
     void remove();
     void processCommand();
+    void settingsChanged();
 protected slots:
     void display(IRCOutput output);
 protected:

@@ -33,6 +33,7 @@ IRCServerEditor::IRCServerEditor(IRCServer server, QWidget* parent, const char* 
     m_channels = new QLineEdit(server.channels(), this);
     layout->addWidget(label, 6, 0);
     layout->addWidget(m_channels, 6, 1);
+    setCaption(tr("Edit server information"));
     showMaximized();
 }
 

@@ -1,3 +1,6 @@
+#include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
+#include <qcursor.h>
 #include <qhbox.h>
 #include "ircchanneltab.h"
 #include "ircservertab.h"
@@ -20,12 +23,24 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     m_list->update();
     m_list->setMaximumWidth(LISTWIDTH);
     m_field = new QLineEdit(this);
+    m_popup = new QPopupMenu(m_list);
+    /* Required so that embedded-style "right" clicks work */
+    QPEApplication::setStylusOperation(m_list->viewport(), QPEApplication::RightOnHold);
+    connect(m_list, SIGNAL(mouseButtonPressed(int, QListBoxItem *, const QPoint&)), this, SLOT(mouseButtonPressed(int, QListBoxItem *, const QPoint &)));
+    /* Construct the popup menu */
+    QPopupMenu *ctcpMenu = new QPopupMenu(m_list);
+    m_popup->insertItem(Resource::loadPixmap("opieirc/ctcp"), tr("CTCP"), ctcpMenu);
+    m_popup->insertItem(Resource::loadPixmap("opieirc/query"), tr("Query"), this, SLOT(popupQuery()));
+    ctcpMenu->insertItem(Resource::loadPixmap("opieirc/ping"), tr("Ping"), this, SLOT(popupPing()));
+    ctcpMenu->insertItem(Resource::loadPixmap("opieirc/version"), tr("Version"), this, SLOT(popupVersion()));
+    ctcpMenu->insertItem(Resource::loadPixmap("opieirc/whois"), tr("Whois"), this, SLOT(popupWhois()));
+    
     m_layout->add(hbox);
     hbox->show();
     m_layout->add(m_field);
     m_field->setFocus();
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
-
+    settingsChanged();
 }
 
 void IRCChannelTab::appendText(QString text) {
@@ -49,13 +64,17 @@ void IRCChannelTab::processCommand() {
                 if (text.startsWith("//"))
                     text = text.right(text.length()-1);
                 session()->sendMessage(m_channel, m_field->text());
-                appendText("&lt;<font color=\"#dd0000\">"+m_parentTab->server()->nick()+"</font>&gt; "+IRCOutput::toHTML(m_field->text())+"<br>");
+                appendText("<font color=\"" + m_textColor + "\">&lt;</font><font color=\"" + m_selfColor + "\">"+m_parentTab->server()->nick()+"</font><font color=\"" + m_textColor + "\">&gt; "+IRCOutput::toHTML(m_field->text())+"</font><br>");
             }
         } else {
-            appendText("<font color=\"#ff0000\">"+tr("Disconnected")+"</font><br>");
+            appendText("<font color=\"" + m_errorColor + "\">"+tr("Disconnected")+"</font><br>");
         }
     }
     m_field->clear();
+}
+
+void IRCChannelTab::settingsChanged() {
+    m_textview->setText("<qt bgcolor=\"" + m_backgroundColor + "\"/>");
 }
 
 void IRCChannelTab::toggleList() {
@@ -67,6 +86,39 @@ void IRCChannelTab::toggleList() {
         m_listButton->setText(">");
     }
     m_listVisible = !m_listVisible;
+}
+
+void IRCChannelTab::mouseButtonPressed(int mouse, QListBoxItem *, const QPoint &point) {
+    switch (mouse) {
+        case 1:
+            break;
+        case 2:
+            m_popup->popup(point);
+            break;
+    };
+}
+
+void IRCChannelTab::popupQuery() {
+    if (m_list->currentItem() != -1) {
+        IRCPerson *person = session()->getPerson(m_list->item(m_list->currentItem())->text());
+        if (person) {
+            IRCQueryTab *tab = m_parentTab->getTabForQuery(person);
+            if (!tab) {
+                tab = new IRCQueryTab(person, m_parentTab, m_mainWindow, (QWidget *)parent()); 
+                m_parentTab->addQueryTab(tab);
+                m_mainWindow->addTab(tab);
+            }
+        }
+    }
+}
+
+void IRCChannelTab::popupPing() {
+}
+
+void IRCChannelTab::popupVersion() {
+}
+
+void IRCChannelTab::popupWhois() {
 }
 
 QString IRCChannelTab::title() {

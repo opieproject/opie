@@ -18,31 +18,27 @@
 
 */
 
-#ifndef __MAINWINDOW_H
-#define __MAINWINDOW_H
+#ifndef __IRCMISC_H
+#define __IRCMISC_H
 
-#include <qmainwindow.h>
-#include <qaction.h>
-#include <qlist.h>
-#include <qtabwidget.h>
-#include "mainwindow.h"
-#include "irctab.h"
+#include <qlabel.h>
+#include <qcolor.h>
 
-class MainWindow : public QMainWindow {
-    Q_OBJECT
-public:
-    MainWindow(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
-
-    void addTab(IRCTab *tab);
-    void killTab(IRCTab *tab);
-protected slots:
-    void newConnection();
-    void settings();
-protected:
-    void loadSettings();
-protected:
-    QTabWidget *m_tabWidget;
-    QList<IRCTab> m_tabs;
+class IRCColorLabel : public QLabel {
+    public:
+        IRCColorLabel(QColor color, QWidget *parent = 0, const char *name = 0, WFlags f = 0);
+        QColor color();
+        void mousePressEvent(QMouseEvent *event); 
+    protected:
+        QColor m_color;
 };
 
-#endif /* __MAINWINDOW_H */
+class IRCFramedColorLabel : public QWidget {
+    public:
+        IRCFramedColorLabel(QColor color, QWidget *parent = 0, const char *name = 0, WFlags f = 0); 
+        QColor color();
+    protected:
+        IRCColorLabel *m_label;
+};
+
+#endif /* __IRCMISC_H */

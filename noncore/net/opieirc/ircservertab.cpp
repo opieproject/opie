@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <qpe/config.h>
 #include <qtextstream.h>
 #include "ircservertab.h"
 
@@ -18,6 +18,7 @@ IRCServerTab::IRCServerTab(IRCServer server, MainWindow *mainWindow, QWidget *pa
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
     m_field->setFocus();
     connect(m_session, SIGNAL(outputReady(IRCOutput)), this, SLOT(display(IRCOutput)));
+    settingsChanged();
 }
 
 void IRCServerTab::appendText(QString text) {
@@ -38,6 +39,10 @@ void IRCServerTab::removeQueryTab(IRCQueryTab *tab) {
     m_queryTabs.remove(tab);
 }
 
+void IRCServerTab::addQueryTab(IRCQueryTab *tab) {
+    m_queryTabs.append(tab);
+}
+
 QString IRCServerTab::title() {
     return "Server";
 }
@@ -48,6 +53,10 @@ IRCSession *IRCServerTab::session() {
 
 IRCServer *IRCServerTab::server() {
     return &m_server;
+}
+
+void IRCServerTab::settingsChanged() {
+    m_textview->setText("<qt bgcolor=\"" + m_backgroundColor + "\"/>");
 }
 
 void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
@@ -62,19 +71,19 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
         if (channel.length() > 0 && channel.startsWith("#")) {
             m_session->join(channel);
         } else {
-            tab->appendText("<font color=\"#ff0000\">Unknown channel format!</font><br>"); 
+            tab->appendText("<font color=\"" + m_errorColor + "\">Unknown channel format!</font><br>"); 
         }
     } else if (command == "ME") {
         QString text = line.right(line.length()-4);
         if (text.length() > 0) {
             if (tab->isA("IRCChannelTab")) {
-                tab->appendText("<font color=\"#cc0000\">*" + IRCOutput::toHTML(m_server.nick()) + " " + IRCOutput::toHTML(text) + "</font><br>");
+                tab->appendText("<font color=\"" + m_selfColor + "\">*" + IRCOutput::toHTML(m_server.nick()) + " " + IRCOutput::toHTML(text) + "</font><br>");
                 m_session->sendAction(((IRCChannelTab *)tab)->channel(), text);
             } else if (tab->isA("IRCQueryTab")) {
-                tab->appendText("<font color=\"#cc0000\">*" + IRCOutput::toHTML(m_server.nick()) + " " + IRCOutput::toHTML(text) + "</font><br>");
+                tab->appendText("<font color=\"" + m_selfColor + "\">*" + IRCOutput::toHTML(m_server.nick()) + " " + IRCOutput::toHTML(text) + "</font><br>");
                 m_session->sendAction(((IRCQueryTab *)tab)->person(), text);
             } else {
-                tab->appendText("<font color=\"#ff0000\">Invalid tab for this command</font><br>"); 
+                tab->appendText("<font color=\"" + m_errorColor + "\">Invalid tab for this command</font><br>"); 
             }
         }
     } else if (command == "MSG") {
@@ -85,12 +94,12 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
                 QString text = line.right(line.length()-nickname.length()-6);
                 IRCPerson person;
                 person.setNick(nickname);
-                tab->appendText("&gt;<font color=\"#0000dd\">"+IRCOutput::toHTML(nickname)+"</font>&lt; "+IRCOutput::toHTML(text)+"<br>");
+                tab->appendText("<font color=\"" + m_textColor + "\">&gt;</font><font color=\"" + m_otherColor + "\">"+IRCOutput::toHTML(nickname)+"</font><font color=\"" + m_textColor + "\">&lt; "+IRCOutput::toHTML(text)+"</font><br>");
                 m_session->sendMessage(&person, text);
             }
         }    
     } else {
-        tab->appendText("<font color=\"#ff0000\">Unknown command</font><br>"); 
+        tab->appendText("<font color=\"" + m_errorColor + "\">Unknown command</font><br>"); 
     }
 }
 
@@ -163,10 +172,10 @@ void IRCServerTab::display(IRCOutput output) {
                 }
                 m_mainWindow->killTab(this);
             } else {
-                appendText("<font color=\"#0000dd\">" + output.htmlMessage() +"</font><br>");
+                appendText("<font color=\"" + m_errorColor + "\">" + output.htmlMessage() +"</font><br>");
                 QListIterator<IRCChannelTab> it(m_channelTabs);
                 for (; it.current(); ++it) {
-                    it.current()->appendText("<font color=\"#0000dd\">" + output.htmlMessage() +"</font><br>");
+                    it.current()->appendText("<font color=\"" + m_serverColor + "\">" + output.htmlMessage() +"</font><br>");
                 }
             }
             break;
@@ -178,7 +187,7 @@ void IRCServerTab::display(IRCOutput output) {
             break;
         case OUTPUT_CHANPRIVMSG: {
                 IRCChannelTab *channelTab = getTabForChannel((IRCChannel *)output.getParam(0));
-                channelTab->appendText("&lt;<font color=\"#0000dd\">"+IRCOutput::toHTML(((IRCChannelPerson *)output.getParam(1))->person->nick())+"</font>&gt; "+output.htmlMessage()+"<br>");
+                channelTab->appendText("<font color=\"" + m_textColor + "\">&lt;</font><font color=\"" + m_otherColor + "\">"+IRCOutput::toHTML(((IRCChannelPerson *)output.getParam(1))->person->nick())+"</font><font color=\"" + m_textColor + "\">&gt; " + output.htmlMessage()+"</font><br>");
             }
             break;
         case OUTPUT_QUERYACTION:
@@ -199,7 +208,7 @@ void IRCServerTab::display(IRCOutput output) {
             }
             break;
         case OUTPUT_SELFKICK: {
-                appendText("<font color=\"#ff0000\">" + output.htmlMessage() + "</font><br>");
+                appendText("<font color=\"" + m_errorColor + "\">" + output.htmlMessage() + "</font><br>");
                 IRCChannelTab *channelTab = getTabForChannel((IRCChannel *)output.getParam(0));
                 if (channelTab)
                     m_mainWindow->killTab(channelTab);
@@ -207,7 +216,7 @@ void IRCServerTab::display(IRCOutput output) {
             break;
         case OUTPUT_CHANACTION: {
                 IRCChannelTab *channelTab = getTabForChannel((IRCChannel *)output.getParam(0));
-                channelTab->appendText("<font color=\"#cc0000\">"+output.htmlMessage()+"</font><br>");
+                channelTab->appendText("<font color=\"" + m_otherColor + "\">"+output.htmlMessage()+"</font><br>");
             }
             break;
         case OUTPUT_QUIT: {
@@ -215,7 +224,7 @@ void IRCServerTab::display(IRCOutput output) {
                 QListIterator<IRCChannelTab> it(m_channelTabs);
                 for (; it.current(); ++it) {
                     if (it.current()->list()->hasPerson(nick)) {
-                        it.current()->appendText("<font color=\"#aa3e00\">"+output.htmlMessage()+"</font><br>");
+                        it.current()->appendText("<font color=\"" + m_notificationColor + "\">"+output.htmlMessage()+"</font><br>");
                         it.current()->list()->update();
                     }
                 }
@@ -226,18 +235,18 @@ void IRCServerTab::display(IRCOutput output) {
         case OUTPUT_CHANPERSONMODE:
         case OUTPUT_OTHERPART: {
                 IRCChannelTab *channelTab = getTabForChannel((IRCChannel *)output.getParam(0));
-                channelTab->appendText("<font color=\"#aa3e00\">"+output.htmlMessage()+"</font><br>");
+                channelTab->appendText("<font color=\"" + m_notificationColor + "\">"+output.htmlMessage()+"</font><br>");
                 channelTab->list()->update();
             }
             break;
         case OUTPUT_CTCP:
-            appendText("<font color=\"#00bb00\">" + output.htmlMessage() + "</font><br>");
+            appendText("<font color=\"" + m_notificationColor + "\">" + output.htmlMessage() + "</font><br>");
             break;
         case OUTPUT_ERROR:
-            appendText("<font color=\"#ff0000\">" + output.htmlMessage() + "</font><br>");
+            appendText("<font color=\"" + m_errorColor + "\">" + output.htmlMessage() + "</font><br>");
             break;
         default:
-            appendText("<font color=\"#0000dd\">" + output.htmlMessage() + "</font><br>");
+            appendText("<font color=\"" + m_serverColor + "\">" + output.htmlMessage() + "</font><br>");
             break;
     }
 }

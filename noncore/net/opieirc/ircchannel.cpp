@@ -1,5 +1,4 @@
 #include "ircchannel.h"
-#include <stdio.h>
 
 IRCChannel::IRCChannel(QString channelname) {
     m_hasPeople = FALSE;

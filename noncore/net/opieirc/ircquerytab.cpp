@@ -18,7 +18,7 @@ IRCQueryTab::IRCQueryTab(IRCPerson *person, IRCServerTab *parentTab, MainWindow 
     m_layout->add(m_field);
     m_field->setFocus();
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
-
+    settingsChanged();
 }
 
 void IRCQueryTab::appendText(QString text) {
@@ -43,10 +43,10 @@ void IRCQueryTab::processCommand() {
                 if (text.startsWith("//"))
                     text = text.right(text.length()-1);
                 session()->sendMessage(m_person, m_field->text());
-                appendText("&lt;<font color=\"#dd0000\">"+m_parentTab->server()->nick()+"</font>&gt; "+IRCOutput::toHTML(m_field->text())+"<br>");
+                appendText("<font color=\"" + m_textColor + "\">&lt;</font><font color=\"" + m_selfColor + "\">"+m_parentTab->server()->nick()+"</font><font color=\"" + m_textColor + "\">&gt; "+IRCOutput::toHTML(m_field->text())+"</font><br>");
             }
         } else {
-            appendText("<font color=\"#ff0000\">"+tr("Disconnected")+"</font><br>");
+            appendText("<font color=\"" + m_errorColor + "\">"+tr("Disconnected")+"</font><br>");
         }
     }
     m_field->clear();
@@ -54,10 +54,14 @@ void IRCQueryTab::processCommand() {
 
 void IRCQueryTab::display(IRCOutput output) {
     if (output.type() == OUTPUT_QUERYPRIVMSG) {
-        appendText("&lt;<font color=\"#0000dd\">"+m_person->nick()+"</font>&gt; " + output.htmlMessage() + "<br>");
+        appendText("<font color=\"" + m_textColor + "\">&lt;</font><font color=\"" + m_otherColor + "\">"+m_person->nick()+"</font><font color=\"" + m_textColor + "\">&gt; " + output.htmlMessage() + "</font><br>");
     } else if (output.type() == OUTPUT_QUERYACTION) {
-        appendText("<font color=\"#0000dd\">" + output.htmlMessage() + "<br>");
+        appendText("<font color=\"" + m_otherColor + "\">" + output.htmlMessage() + "<br>");
     }
+}
+
+void IRCQueryTab::settingsChanged() {
+    m_textview->setText("<qt bgcolor=\"" + m_backgroundColor + "\"/>");
 }
 
 QString IRCQueryTab::title() {

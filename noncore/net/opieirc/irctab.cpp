@@ -3,6 +3,15 @@
 #include <qpushbutton.h>
 #include "irctab.h"
 
+QString IRCTab::m_errorColor;
+QString IRCTab::m_serverColor;
+QString IRCTab::m_textColor;
+QString IRCTab::m_backgroundColor;
+QString IRCTab::m_selfColor;
+QString IRCTab::m_otherColor;
+QString IRCTab::m_notificationColor;
+
+
 IRCTab::IRCTab(QWidget *parent, const char *name, WFlags f) : QWidget(parent, name, f) {
     m_layout = new QVBoxLayout(this);
     QHBoxLayout *descLayout = new QHBoxLayout(m_layout);

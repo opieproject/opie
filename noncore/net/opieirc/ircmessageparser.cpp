@@ -1,7 +1,6 @@
 #include <qtextstream.h>
 #include "ircmessageparser.h"
 #include "ircversion.h"
-#include <stdio.h>
 
 /* Lookup table for literal commands */
 IRCLiteralMessageParserStruct IRCMessageParser::literalParserProcTable[] = { 

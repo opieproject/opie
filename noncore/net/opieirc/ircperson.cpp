@@ -1,5 +1,4 @@
 #include "ircperson.h"
-#include <stdio.h>
 
 IRCPerson::IRCPerson() {
     m_nick = "";

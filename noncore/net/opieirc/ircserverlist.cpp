@@ -1,11 +1,9 @@
-#include <stdio.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qhbox.h>
 #include <qpushbutton.h>
 #include "ircserverlist.h"
 #include "ircservereditor.h"
-#include <stdio.h>
 
 class IRCListBoxServer : public QListBoxText {
 public:
@@ -102,7 +100,6 @@ int IRCServerList::exec() {
     int returncode = QDialog::exec();
     /* Now save the changes */
     m_config->setGroup("OpieIRC");
-    m_config->clearGroup();
     m_config->writeEntry("ServerCount", QString::number(m_list->count()));
     for (unsigned int i=0; i<m_list->count(); i++) {
         IRCServer server = ((IRCListBoxServer *)m_list->item(i))->server();

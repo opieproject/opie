@@ -40,9 +40,19 @@ public:
     virtual void appendText(QString text) = 0;
 public slots:
     virtual void remove() = 0;
+    virtual void settingsChanged() = 0;
 protected:
     QLabel      *m_description;
     QVBoxLayout *m_layout;
+public:
+    /* Configuration shared accross all instances - contains HTML style colors (#rrggbb) */ 
+    static QString m_errorColor;
+    static QString m_serverColor;
+    static QString m_textColor;
+    static QString m_backgroundColor;
+    static QString m_selfColor;
+    static QString m_otherColor;
+    static QString m_notificationColor;
 };
 
 #endif /* __IRCTAB_H */
