@@ -39,28 +39,103 @@
 #include <qslider.h>
 #include <qlabel.h>
 #include <qframe.h>
-#include <qlineedit.h>
 #include <qcolor.h>
-
+/*!
+ * @class OTicker
+ * @brief The OTicker class provides a QLabel widget that scroll its contents
+ *
+*/
 class OTicker : public QLabel {
 //class OTicker : public QFrame {
     Q_OBJECT
 
 public:
+
+/*!
+ * @fn OTicker( QWidget* parent = 0 )
+ * @brief Object constructor.
+ *
+ * @param parent Pointer to parent of this control.
+
+ * Constructs a new OTicker control with parent
+ */
     OTicker( QWidget* parent=0 );
+/*!
+ * @fn ~OTicker()
+ * @brief Object destructor.
+ */
     ~OTicker();
+/*!
+ * @fn setText()
+ * @brief sets text to be displayed
+ * @param text QString text to be displayed.
+ *
+ */
     void setText( const QString& text ) ;
-    void setBackgroundColor(QColor color); //sets background 
-    void setForegroundColor(QColor color); //sets text color
-    void setFrame(int); //sets frame style
-    void setUpdateTime(int); //sets timeout for redraws default is 50 ms
-    void setScrollLength(int); //sets amount of scrolling default is 1
+/*!
+ * @fn setBackgroundColor(QColor color)
+ * @brief sets color of the ticker's background
+ * @param color QColor color to be set.
+ *
+ */
+    void setBackgroundColor(QColor color);
+/*!
+ * @fn setForegroundColor(QColor color)
+ * @brief sets color of text
+ * @param color QColor color of text
+ *
+ */
+    void setForegroundColor(QColor color);
+/*!
+ * @fn setFrame(int style)
+ * @brief sets frame style
+ * @param style int Frame style to be see. See Qt::WidgetFlags.
+ *
+ */
+    void setFrame(int style); 
+/*!
+ * @fn setUpdateTime(int timeout)
+ * @brief sets time of update
+ * @param timeout int time in milliseconds between updates.
+ *
+ */
+    void setUpdateTime(int timeout);
+/*!
+ * @fn setScrollLength(int length)
+ * @brief sets amount of scrolling default is 1
+ * @param length int scroll length.
+ *
+ */
+    void setScrollLength(int length); 
 signals:
-    void mousePressed(); // for mouse press events
+/*!
+ * @fn mousePressed()
+ * @brief signal mouse press event
+ *
+ */
+    void mousePressed();
 protected:
-    void timerEvent( QTimerEvent * );
+/*!
+ * @fn timerEvent( QTimerEvent * e)
+ * @brief timer timeout event
+ * @param e QEvent see QEvent.
+ *
+ */
+    void timerEvent( QTimerEvent * e);
+/*!
+ * @fn drawContents( QPainter *p )
+ * @brief draws widget contents
+ * @param p QPainter. see QPainter
+ *
+ */
     void drawContents( QPainter *p );
-    void mouseReleaseEvent ( QMouseEvent *);
+/*!
+ * @fn mouseReleaseEvent( QMouseEvent *e)
+ * @brief mouse release event
+ * @param e QMouseEvent. see QMouseEvent.
+ *
+ */
+    void mouseReleaseEvent( QMouseEvent *e);
 private:
     QColor backgroundcolor, foregroundcolor;
     QString scrollText;
