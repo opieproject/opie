@@ -1104,16 +1104,12 @@ bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
             if(btn->isEnabled()){
                 highlightWidget = btn;
                 btn->repaint(false);
-                
-	        	qDebug ( "TB FOCUS IN [%p]", btn );
             }
         }
         else if(ev->type() == QEvent::FocusOut ){
             if(btn == highlightWidget){
                 highlightWidget = NULL;
                 btn->repaint(false);
-                
-                qDebug ( "TB FOCUS OUT [%p]", btn );
             }
         }
         else if(ev->type() == QEvent::Paint) {
@@ -1247,11 +1243,8 @@ void LiquidStyle::drawToolButton(QPainter *p, int x, int y, int w, int h,
         }
 
         p->drawTiledPixmap(x+2, y+2, w-4, h-4, *pix);
-        qDebug ( "DRAW TOOLBUTTON IN PIXMAP" );
     }
     else{
-    	qDebug ( "DRAW TOOLBUTTON sunken=%d/high=%p/device=%p", sunken, highlightWidget,p->device() );
-    
         drawClearBevel(p, x, y, w, h, sunken ? g.button() :
                        highlightWidget == p->device() ? g.button().light(110) :
                        g.background(), g.background());

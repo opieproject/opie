@@ -3,7 +3,7 @@ Features:
  - Qt-only
  - works with Qt/E on QPE/OPIE
  
---- -	2002-11-21 20:45:47.000000000 +0100
+--- -	2002-11-29 12:30:34.000000000 +0100
 +++ liquid.h	2002-11-18 03:32:40.000000000 +0100
 @@ -2,7 +2,7 @@
  #define LIQUID_STYLE_H
@@ -141,8 +141,8 @@ Features:
      QPixmap *vsbSliderFillPix;
      TransMenuHandler *menuHandler;
      QPixmap *pixmaps[BITMAP_ITEMS];
---- -	2002-11-21 20:45:47.000000000 +0100
-+++ liquid.cpp	2002-11-21 20:27:48.000000000 +0100
+--- -	2002-11-29 12:30:34.000000000 +0100
++++ liquid.cpp	2002-11-29 12:30:24.000000000 +0100
 @@ -2,6 +2,9 @@
   * Copyright (C)QPL 2001 Daniel M. Duley. All rights reserved.
   */
@@ -271,7 +271,7 @@ Features:
                                             r.width(), r.height());
              }
              else{ // tear off menu
-@@ -121,82 +126,61 @@
+@@ -121,82 +126,62 @@
                  stripePixmap(*pix, p->colorGroup().button());
              }
              else{
@@ -341,10 +341,9 @@ Features:
 -                ++it;
 -                if(w->inherits("QMenuBar")){
 -                    w->repaint();
+-                }
+-            }
 +				wid-> setBackgroundMode( QWidget::PaletteBackground );
-                 }
-+			delete ol;
-             }
          }
 -    }
 -    else if(id == MOSFET_BUTTON_CHANGE){
@@ -365,8 +364,9 @@ Features:
 -            ++it;
 -            if(w->inherits("QPushButton")){
 -                ((LiquidStyle*)parent())->applyCustomAttributes((QPushButton *)w);
--            }
--        }
++			delete ol;
+             }
+         }
 +    return(false);
 +}
  
@@ -387,11 +387,12 @@ Features:
 +
 +	oldqte = ( qt_version ( ) < 234 );
 +	flatTBButtons = false;
++	currentHeader = 0;
 +
      btnMaskBmp = QBitmap(37, 26, buttonmask_bits, true);
      btnMaskBmp.setMask(btnMaskBmp);
      htmlBtnMaskBmp = QBitmap(37, 26, htmlbuttonmask_bits, true);
-@@ -207,12 +191,8 @@
+@@ -207,12 +192,8 @@
      btnDict.setAutoDelete(true);
      bevelFillDict.setAutoDelete(true);
      smallBevelFillDict.setAutoDelete(true);
@@ -404,7 +405,7 @@ Features:
      btnBorderPix = new QPixmap;
      btnBorderPix->convertFromImage(qembed_findImage("buttonfill"));
      btnBlendPix = new QPixmap;
-@@ -572,131 +552,119 @@
+@@ -572,131 +553,119 @@
      case HTMLBtnBorderDown:
          pixmaps[HTMLBtnBorderDown] = processEmbedded("htmlbtnborder", btnHoverH, btnHoverS, btnHoverV);
          break;
@@ -494,10 +495,10 @@ Features:
 -        pixmaps[HSlider] = processEmbedded("sliderarrow", btnH, btnS, btnV, true);
 +    case CBDown:
 +        pixmaps[CBDown] = processEmbedded("checkboxdown", btnH, btnS, btnV /*, true*/);
-+        break;
+         break;
 +    case CBDownHover:
 +        pixmaps[CBDownHover] = processEmbedded("checkboxdown", btnHoverH, btnHoverS, btnHoverV /*, true*/);
-         break;
++        break;
 +
      case VSlider:
 -        pixmaps[VSlider] = processEmbedded("sliderarrow", btnH, btnS, btnV, true);
@@ -599,7 +600,7 @@ Features:
          *pixmaps[HSBSliderBtmBg] = pixmaps[HSBSliderBtmBg]->xForm(rMatrix);
          break;
      case HSBSliderMidBg:
-@@ -711,7 +679,6 @@
+@@ -711,7 +680,6 @@
  
  void LiquidStyle::polish(QPalette &appPal)
  {
@@ -607,7 +608,7 @@ Features:
      int i;
      for(i=0; i < BITMAP_ITEMS; ++i){
          if(pixmaps[i]){
-@@ -719,31 +686,28 @@
+@@ -719,31 +687,28 @@
              pixmaps[i] = NULL;
          }
      }
@@ -654,7 +655,7 @@ Features:
          // force button color to be different from background
          QBrush btnBrush(QColor(200, 202, 228));
          appPal.setBrush(QColorGroup::Button, btnBrush);
-@@ -778,8 +742,8 @@
+@@ -778,8 +743,8 @@
          adjustHSV(*pix, h, s, v);
          smallBevelFillDict.insert(c.rgb(), pix);
      }
@@ -665,7 +666,7 @@ Features:
  
      c = c.dark(120);
      pix = smallBevelFillDict.find(c.rgb()); // better be NULL ;-)
-@@ -790,19 +754,13 @@
+@@ -790,19 +755,13 @@
          adjustHSV(*pix, h, s, v);
          smallBevelFillDict.insert(c.rgb(), pix);
      }
@@ -690,7 +691,7 @@ Features:
      c.hsv(&bH, &bS, &bV);
      c.light(120).hsv(&bHoverH, &bHoverS, &bHoverV);
  
-@@ -817,101 +775,50 @@
+@@ -817,101 +776,50 @@
      wallPaper.fill(c.rgb());
      painter.begin(&wallPaper);
      for(i=0; i < 32; i+=4){
@@ -813,7 +814,7 @@ Features:
      }
  
      bool isViewport = qstrcmp(w->name(), "qt_viewport") == 0 ||
-@@ -942,11 +849,20 @@
+@@ -942,11 +850,20 @@
          w->setMouseTracking(true);
          w->installEventFilter(this);
      }
@@ -836,7 +837,7 @@ Features:
  
      if(w->parent() && w->parent()->isWidgetType() && !((QWidget*)w->parent())->
         palette().active().brush(QColorGroup::Background).pixmap()){
-@@ -954,16 +870,21 @@
+@@ -954,16 +871,21 @@
          return;
      }
      if(!isViewport && !isViewportChild && !w->testWFlags(WType_Popup) &&
@@ -864,7 +865,7 @@ Features:
      }
  }
  
-@@ -977,6 +898,11 @@
+@@ -977,6 +899,11 @@
  
      if(w->inherits("QPopupMenu"))
          w->setBackgroundMode(QWidget::PaletteButton);
@@ -876,7 +877,7 @@ Features:
  
      if(w->isTopLevel())
          return;
-@@ -986,7 +912,7 @@
+@@ -986,7 +913,7 @@
          ((qstrcmp(w->parent()->name(), "qt_viewport") == 0) ||
           (qstrcmp(w->parent()->name(), "qt_clipped_viewport") == 0));
  
@@ -885,7 +886,7 @@ Features:
      if(w->backgroundMode() == QWidget::X11ParentRelative || isViewportChild){
          if(w->inherits("QPushButton"))
              w->setBackgroundMode(QWidget::PaletteButton);
-@@ -997,16 +923,12 @@
+@@ -997,16 +924,12 @@
      if(isViewportChild)
          w->setAutoMask(false);
  
@@ -907,7 +908,7 @@ Features:
          w->removeEventFilter(this);
      }
      if(w->inherits("QButton") || w->inherits("QComboBox")){
-@@ -1014,9 +936,12 @@
+@@ -1014,9 +937,12 @@
              w->setAutoMask(false);
          }
      }
@@ -922,7 +923,7 @@ Features:
          return;
      }
      if(w->inherits("QHeader")){
-@@ -1028,22 +953,118 @@
+@@ -1028,22 +954,118 @@
  void LiquidStyle::polish(QApplication *app)
  {
  
@@ -1043,7 +1044,7 @@ Features:
  /*
   * This is a fun method ;-) Here's an overview. KToolBar grabs resize to
   * force everything to erase and repaint on resize. This is going away, I'm
-@@ -1063,7 +1084,7 @@
+@@ -1063,7 +1085,7 @@
   */
  bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
  {
@@ -1052,7 +1053,7 @@ Features:
          if(ev->type() == QEvent::Resize){
              const QObjectList *tbChildList = obj->children();
              QObjectListIt it(*tbChildList);
-@@ -1076,116 +1097,27 @@
+@@ -1076,116 +1098,23 @@
  
          }
      }
@@ -1121,8 +1122,6 @@ Features:
              if(btn->isEnabled()){
                  highlightWidget = btn;
                  btn->repaint(false);
-+                
-+	        	qDebug ( "TB FOCUS IN [%p]", btn );
              }
          }
 -        else if(ev->type() == QEvent::Leave){
@@ -1131,8 +1130,6 @@ Features:
              if(btn == highlightWidget){
                  highlightWidget = NULL;
                  btn->repaint(false);
-+                
-+                qDebug ( "TB FOCUS OUT [%p]", btn );
              }
          }
 -        else
@@ -1180,7 +1177,7 @@ Features:
          }
      }
      else if(obj->inherits("QRadioButton") || obj->inherits("QCheckBox")){
-@@ -1201,6 +1133,7 @@
+@@ -1201,6 +1130,7 @@
              QSize sz = isRadio ? exclusiveIndicatorSize()
                  : indicatorSize();
  
@@ -1188,7 +1185,7 @@ Features:
              if(btn->hasFocus()){
                  QRect r = QRect(0, 0, btn->width(), btn->height());
                  p.setPen(btn->colorGroup().button().dark(140));
-@@ -1209,6 +1142,7 @@
+@@ -1209,6 +1139,7 @@
                  p.drawLine(r.right(), r.y()+1, r.right(), r.bottom()-1);
                  p.drawLine(r.x()+1, r.bottom(), r.right()-1, r.bottom());
              }
@@ -1196,7 +1193,7 @@ Features:
              int x = 0;
              int y = (btn->height()-lsz.height()+fm.height()-sz.height())/2;
              if(isRadio)
-@@ -1228,36 +1162,6 @@
+@@ -1228,36 +1159,6 @@
              p.end();
              return(true);
          }
@@ -1233,7 +1230,7 @@ Features:
      }
      else if(obj->inherits("QHeader")){
          QHeader *hw = (QHeader *)obj;
-@@ -1290,7 +1194,24 @@
+@@ -1290,7 +1191,24 @@
              }
          }
      }
@@ -1259,19 +1256,7 @@ Features:
  }
  
  void LiquidStyle::drawButton(QPainter *p, int x, int y, int w, int h,
-@@ -1325,8 +1246,11 @@
-         }
- 
-         p->drawTiledPixmap(x+2, y+2, w-4, h-4, *pix);
-+        qDebug ( "DRAW TOOLBUTTON IN PIXMAP" );
-     }
-     else{
-+    	qDebug ( "DRAW TOOLBUTTON sunken=%d/high=%p/device=%p", sunken, highlightWidget,p->device() );
-+    
-         drawClearBevel(p, x, y, w, h, sunken ? g.button() :
-                        highlightWidget == p->device() ? g.button().light(110) :
-                        g.background(), g.background());
-@@ -1340,11 +1264,6 @@
+@@ -1340,11 +1258,6 @@
      QColorGroup g = btn->colorGroup();
  
  
@@ -1283,7 +1268,7 @@ Features:
      //int dw = buttonDefaultIndicatorWidth();
      if(btn->hasFocus() || btn->isDefault()){
          QColor c = btn->hasFocus() ? g.button().light(110) : g.background();
-@@ -1488,7 +1407,20 @@
+@@ -1488,7 +1401,20 @@
                                   const QColorGroup &g, bool sunken,
                                   bool edit, bool, const QBrush *)
  {
@@ -1305,7 +1290,7 @@ Features:
      bool isMasked = false;
      if(painter->device()->devType() == QInternal::Widget)
          isMasked = ((QWidget*)painter->device())->autoMask();
-@@ -1498,7 +1430,7 @@
+@@ -1498,7 +1424,7 @@
  
      drawRoundButton(&p, g.button(), g.background(), 0, 0, w, h, false,
                      sunken, false, isMasked);
@@ -1314,7 +1299,7 @@ Features:
          p.setClipRect(0, 0, w-17, h);
          drawRoundButton(&p, g.background(), g.background(), 0, 0, w, h, false,
                          sunken, false, isMasked);
-@@ -1550,16 +1482,17 @@
+@@ -1550,16 +1476,17 @@
      return(QRect(x+9, y+3, w - (h / 3) - 20, h-6));
  }
  
@@ -1335,7 +1320,7 @@ Features:
      int sliderMin, sliderMax, sliderLength, buttonDim;
      scrollBarMetrics( sb, sliderMin, sliderMax, sliderLength, buttonDim );
  
-@@ -1596,7 +1529,7 @@
+@@ -1596,7 +1523,7 @@
          if(sbBuffer.size() != sb->size())
              sbBuffer.resize(sb->size());
      }
@@ -1344,7 +1329,7 @@ Features:
      addB.setRect( addX,addY,buttonDim,buttonDim );
      if(horiz)
          subHC.setRect(addX-buttonDim,addY,buttonDim,buttonDim );
-@@ -1624,7 +1557,7 @@
+@@ -1624,7 +1551,7 @@
      QPainter painter;
      if(!horiz){
          painter.begin(&sbBuffer);
@@ -1353,7 +1338,7 @@ Features:
          if(sliderR.height() >= 8){
              painter.drawPixmap(bgR.x()+1, bgR.y(), *vsbSliderFillPix, 0, 0,
                            13, 8);
-@@ -1648,25 +1581,15 @@
+@@ -1648,25 +1575,15 @@
          }
          if(controls & Slider){
              if(sliderR.height() >= 16){
@@ -1384,7 +1369,7 @@ Features:
              }
              else{
                  painter.setPen(g.button().dark(210));
-@@ -1674,7 +1597,6 @@
+@@ -1674,7 +1591,6 @@
                                13, sliderR.height());
                  painter.drawTiledPixmap(sliderR.x()+2, sliderR.y()+1,
                                          11, sliderR.height()-2,
@@ -1392,7 +1377,7 @@ Features:
                                          *getPixmap(VSBSliderMid), 1, 0);
              }
          }
-@@ -1690,7 +1612,7 @@
+@@ -1690,7 +1606,7 @@
      }
      else{
          painter.begin(&sbBuffer);
@@ -1401,7 +1386,7 @@ Features:
          if(sliderR.width() >= 8){
              painter.drawPixmap(bgR.x(), bgR.y()+1, *vsbSliderFillPix, 0, 0,
                                 8, 13);
-@@ -1715,22 +1637,17 @@
+@@ -1715,22 +1631,17 @@
          if(controls & Slider){
              if(sliderR.width() >= 16){
                  painter.drawPixmap(sliderR.x(), sliderR.y()+1,
@@ -1427,7 +1412,7 @@ Features:
                                     *getPixmap(HSBSliderBtm), 8-m, 0, m, 13);
              }
              else{
-@@ -1738,8 +1655,7 @@
+@@ -1738,8 +1649,7 @@
                  drawRoundRect(&painter, sliderR.x(), sliderR.y()+1,
                                sliderR.width(), 13);
                  painter.drawTiledPixmap(sliderR.x()+1, sliderR.y()+2,
@@ -1437,7 +1422,7 @@ Features:
                                          *getPixmap(HSBSliderMid), 0, 1);
              }
          }
-@@ -1761,10 +1677,10 @@
+@@ -1761,10 +1671,10 @@
                     addB.width()-8, addB.height()-8, g, !maxed);
      }
      if ( controls & SubLine ) {
@@ -1452,7 +1437,7 @@ Features:
          drawSBButton(p, subHC, g, activeControl == SubLine);
          drawArrow( p, horiz ? LeftArrow : UpArrow,
                     false, subHC.x()+4, subHC.y()+4,
-@@ -1865,8 +1781,8 @@
+@@ -1865,8 +1775,8 @@
      else
  	buttonDim = ( length - b*2 )/2 - 1;
  
@@ -1463,7 +1448,7 @@ Features:
  
      if ( sb->maxValue() == sb->minValue() ) {
  	sliderLength = maxLength;
-@@ -1914,31 +1830,31 @@
+@@ -1914,31 +1824,31 @@
      return(QSize(16, 16));
  }
  
@@ -1502,7 +1487,7 @@ Features:
                            *getPixmap(RadioOff));
      }
  }
-@@ -1957,25 +1873,25 @@
+@@ -1957,25 +1867,25 @@
      return(QSize(20, 22));
  }
  
@@ -1534,7 +1519,7 @@ Features:
                            *getPixmap(CBDown));
              /*  Todo - tristate
               if(state == QButton::On){
-@@ -1992,12 +1908,12 @@
+@@ -1992,12 +1902,12 @@
               }*/
          }
          else
@@ -1550,7 +1535,7 @@ Features:
  {
      // needed for some reason by KHtml, even tho it's all filled ;P
      p->drawPixmap(x, y, *getPixmap(HTMLCB)->mask());
-@@ -2005,18 +1921,17 @@
+@@ -2005,18 +1915,17 @@
  }
  
  void LiquidStyle::drawSlider(QPainter *p, int x, int y, int w, int h,
@@ -1572,7 +1557,7 @@ Features:
                               Orientation orient, bool, bool)
  {
      p->drawPixmap(x, y, orient == Qt::Horizontal ? *getPixmap(HSlider)->mask() :
-@@ -2065,243 +1980,76 @@
+@@ -2065,243 +1974,76 @@
      p->drawLineSegments(a);
  }
  
@@ -1633,9 +1618,9 @@ Features:
 -        qDrawShadePanel(p, x, y, w, h, g, false, 1,
 -                        &g.brush(QColorGroup::Background));
 -    }
- 
--}
 -
+-}
+ 
 -void LiquidStyle::drawKToolBar(QPainter *p, int x, int y, int w, int h,
 -                           const QColorGroup &g, KToolBarPos, QBrush *)
 +void LiquidStyle::drawMenuBarItem(QPainter *p, int x, int y, int w, int h,
@@ -1845,7 +1830,7 @@ Features:
  {
      QColor c;
      switch(menuHandler->transType()){
-@@ -2336,8 +2084,6 @@
+@@ -2336,8 +2078,6 @@
  
      maxpmw = QMAX( maxpmw, 20 );
  
@@ -1854,7 +1839,7 @@ Features:
  
      bool dis = !enabled;
      QColorGroup itemg = dis ? pal.disabled() : pal.active();
-@@ -2363,7 +2109,7 @@
+@@ -2363,7 +2103,7 @@
              p->fillRect(x, y, w, h, menuBrush);
          }
          else{
@@ -1863,7 +1848,7 @@ Features:
              if(pix)
                  p->drawPixmap(x, y, *pix, x, y, w, h);
          }
-@@ -2508,25 +2254,6 @@
+@@ -2508,25 +2248,6 @@
      return h;
  }
  
@@ -1889,7 +1874,7 @@ Features:
  
  void LiquidStyle::drawFocusRect(QPainter *p, const QRect &r,
                              const QColorGroup &g, const QColor *c,
-@@ -2536,29 +2263,29 @@
+@@ -2536,29 +2257,29 @@
      if(p->device()->devType() == QInternal::Widget){
          // if so does it use a special focus rectangle?
          QWidget *w = (QWidget *)p->device();
@@ -1924,7 +1909,7 @@ Features:
          return;
      }
      QPixmap tilePix;
-@@ -2671,7 +2398,7 @@
+@@ -2671,7 +2392,7 @@
          vFrame = 8; // was 10
      }
      else
@@ -1933,7 +1918,7 @@ Features:
  }
  
  
-@@ -2699,7 +2426,7 @@
+@@ -2699,7 +2420,7 @@
          p->drawLine(x+1, y+1, x+1, y2-1);
      }
      else if(lineWidth != 2 || !sunken)
@@ -1942,7 +1927,7 @@ Features:
      else{
          QPen oldPen = p->pen();
          int x2 = x+w-1;
-@@ -2726,105 +2453,6 @@
+@@ -2726,105 +2447,6 @@
      }
  }
  
@@ -2048,7 +2033,7 @@ Features:
  
  void LiquidStyle::adjustHSV(QPixmap &pix, int h, int s, int v)
  {
-@@ -2988,110 +2616,5 @@
+@@ -2988,110 +2610,5 @@
      }
  }
  
@@ -2159,7 +2144,7 @@ Features:
 -
  
  /* vim: set noet sw=8 ts=8: */
---- -	2002-11-21 20:45:47.000000000 +0100
+--- -	2002-11-29 12:30:35.000000000 +0100
 +++ plugin.cpp	2002-11-18 18:11:41.000000000 +0100
 @@ -1,29 +1,84 @@
 +#include <qapplication.h>
