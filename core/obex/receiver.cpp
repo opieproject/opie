@@ -60,6 +60,7 @@ void Receiver::handleOther( const QString& other ) {
     hand->handle( other );
 }
 int Receiver::checkFile( const QString& file ) {
+    qWarning("check file!! %s", file.latin1() );
     int ret;
     if (file.right(4) == ".vcs" ) {
         ret = Datebook;
@@ -68,6 +69,8 @@ int Receiver::checkFile( const QString& file ) {
     }else
         ret = Other;
 
+
+    qWarning("check it now %d", ret );
     return ret;
 }
 
@@ -106,6 +109,7 @@ void OtherHandler::handle( const QString& file ) {
     m_file = file;
     m_na->setText(file);
     DocLnk lnk(file);
+    qWarning(" %s %s", lnk.type().latin1(), lnk.icon().latin1() );
 
     QString str = tr("<p>You received a file of type %1 (<img src=\"%2\"> )What do you want to do?").arg(lnk.type() ).arg(lnk.icon() );
     m_view->setText( str );

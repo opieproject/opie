@@ -17,7 +17,7 @@ Obex::Obex( QObject *parent, const char* name )
     m_receive = false;
     connect( this, SIGNAL(error(int) ), // for recovering to receive
              SLOT(slotError() ) );
-    connect( this, SIGNAL(sent() ),
+    connect( this, SIGNAL(sent(bool) ),
              SLOT(slotError() ) );
 };
 Obex::~Obex() {
@@ -106,8 +106,8 @@ void Obex::slotExited(OProcess* proc ){
 }
 void Obex::slotStdOut(OProcess* proc, char* buf, int len){
     if ( proc == m_rec ) { // only receive
-        QCString cstring( buf,  len );
-        m_outp.append( cstring.data() );
+        QString str = QString::fromUtf8( buf,  len );
+        m_outp.append( str );
     }
 }
 
@@ -115,7 +115,7 @@ void Obex::received() {
   if (m_rec->normalExit() ) {
       if ( m_rec->exitStatus() == 0 ) { // we got one
           QString filename = parseOut();
-          qWarning("ACHTUNG");
+          qWarning("ACHTUNG %s", filename.latin1() );
           emit receivedFile( filename );
       }
   }else{
