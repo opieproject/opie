@@ -1,0 +1,36 @@
+Index: tools/mailstream_socket.c
+===================================================================
+RCS file: /cvsroot/libetpan/libetpan/tools/mailstream_socket.c,v
+retrieving revision 1.13
+diff -u -d -r1.13 mailstream_socket.c
+--- tools/mailstream_socket.c	2 Mar 2004 23:54:17 -0000	1.13
++++ tools/mailstream_socket.c	11 Mar 2004 12:30:02 -0000
+@@ -44,6 +44,7 @@
+ */
+ #include <sys/time.h>
+ #include <sys/types.h>
++#include <sys/socket.h>
+ #include <unistd.h>
+ #include <sys/select.h>
+ 
+@@ -176,8 +177,8 @@
+     if (!FD_ISSET(socket_data->fd, &fds_read))
+       return 0;
+   }
+-  
+-  return read(socket_data->fd, buf, count);
++ 
++  return recv(socket_data->fd,buf,count,MSG_NOSIGNAL);
+ }
+ 
+ static ssize_t mailstream_low_socket_write(mailstream_low * s,
+@@ -207,8 +208,7 @@
+     if (!FD_ISSET(socket_data->fd, &fds_write))
+       return 0;
+   }
+-  
+-  return write(socket_data->fd, buf, count);
++  return send(socket_data->fd,buf,count,MSG_NOSIGNAL);
+ }
+ 
+ 
