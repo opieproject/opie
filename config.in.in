@@ -1,2 +1,54 @@
 mainmenu "Opie Configuration"
+menu "Build Parameters"
+
+#choice
+# prompt "Build Processor family"
+#  default BUILD_X86
+#  help
+#    Please select the architecture of the machine you will be
+#    building the OpenZaurus buildroot on.
+#
+#  config BUILD_X86
+#    boolean "X86 Architecture"
+#
+#endchoice
+
+choice
+  prompt "Target Machine"
+  default TARGET_X86
+  help
+    Please select the architecture of the machine you will be
+    building the OpenZaurus buildroot for.
+
+  config TARGET_X86
+    boolean "Intel X86"
+
+  config TARGET_SHARP
+    boolean "Sharp Zaurus SL-5x00 - stock"
+
+#  config TARGET_OZ
+#    boolean "Sharp Zaurus SL-5x00 - OpenZaurus"
+
+  config TARGET_IPAQ
+    boolean "Ipaq"
+
+endchoice
+
+config SPECFILE
+  string
+  default "linux-generic-g++" if TARGET_X86
+  default "linux-sharp-g++" if TARGET_SHARP
+#  default "linux-oz-g++" if TARGET_OZ
+  default "linux-ipaq-g++" if TARGET_IPAQ
+
+#config CROSS
+#  string "Crosscompilation prefix"
+#  default "arm-linux-"
+#  help
+#    Crosscompilation prefix is the prefix which will be prepended
+#    to all compilation commands. For example, a crosscompilation prefix
+#    of arm-linux-, results in the build calling arm-linux-gcc as its CC.
+
+endmenu
+
 @sources@
