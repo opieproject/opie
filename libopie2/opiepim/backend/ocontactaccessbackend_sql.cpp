@@ -599,20 +599,45 @@ QArray<int> OPimContactAccessBackend_SQL::queryByExample ( const OPimContact &qu
 	return list;		
 }
 
-QArray<int> OPimContactAccessBackend_SQL::matchRegexp(  const QRegExp &r ) const
+QArray<int> OPimContactAccessBackend_SQL::matchRegexp( const QRegExp &r ) const
 {
+#if 1
 	QArray<int> nix(0);
 	return nix;
+
+#else
+	QString qu = "SELECT uid FROM addressbook WHERE (";
+	QString searchlist;
+
+	QStringList fieldList = OPimContactFields::untrfields( false );
+	// QMap<QString, int> translate = OPimContactFields::untrFieldsToId();
+	for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
+		if ( !searchlist.isEmpty() )
+			searchlist += " OR ";
+		searchlist += "\"" + *it + "\" rlike(\"" + r.pattern() + "\") ";
+	}
+		
+	qu = qu + searchlist + ")";
+
+	qDebug( "query: %s", qu.latin1() );
+
+	OSQLRawQuery raw( qu );
+	OSQLResult res = m_driver->query( &raw );
+
+	return extractUids( res );
+
+
+#endif
 }
 
 const uint OPimContactAccessBackend_SQL::querySettings()
 {
 	return OPimContactAccess::IgnoreCase 
-		|| OPimContactAccess::WildCards
-		|| OPimContactAccess::DateDiff
-		|| OPimContactAccess::DateYear
-		|| OPimContactAccess::DateMonth
-		|| OPimContactAccess::DateDay
+		| OPimContactAccess::WildCards
+		| OPimContactAccess::DateDiff
+		| OPimContactAccess::DateYear
+		| OPimContactAccess::DateMonth
+		| OPimContactAccess::DateDay
 		;
 }
 

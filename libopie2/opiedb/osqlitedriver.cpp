@@ -34,15 +34,15 @@
 #include <opie2/odebug.h>
 
 #include <stdlib.h>
-#include <regex.h>
 #include <stdio.h>
 
 // fromLocal8Bit() does not work as expected. Thus it
 // is replaced by fromLatin1() (eilers)
 #define __BUGGY_LOCAL8BIT_
 
-using namespace Opie::DB;
-using namespace Opie::DB::Internal;
+namespace Opie { 
+namespace DB { 
+namespace Internal {
 
 namespace {
     struct Query {
@@ -229,3 +229,5 @@ int OSQLiteDriver::call_back( void* voi, int argc,
 
 
 }
+
+}}} // namespace OPIE::DB::Internal
