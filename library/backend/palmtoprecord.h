@@ -52,6 +52,9 @@ class QPC_EXPORT Record
 public:
     Record() : mUid(0), mCats() { }
     Record( const Record &c ) :	mUid( c.mUid ), mCats ( c.mCats ), customMap(c.customMap) { }
+    /**
+     * @todo make non inline in regard to KDE BC guide
+     */
     virtual ~Record() { }
 
     Record &operator=( const Record &c );
