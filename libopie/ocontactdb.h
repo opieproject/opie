@@ -13,11 +13,14 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.11 2002-07-21 15:21:26 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.12 2002-07-28 15:35:22 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.11  2002-07-21 15:21:26  eilers
+ * Revision 1.1.2.12  2002-07-28 15:35:22  eilers
+ * Example-By-Query Search interface debugged. It is working now.. :)
+ *
+ * Revision 1.1.2.11  2002/07/21 15:21:26  eilers
  * Some interface changes and minor bugfixes...
  * The search interface is able to use wildcards, regular expressions and
  * ignore cases... I love the Trolltech cClasslibrary ! :)
@@ -181,14 +184,6 @@ class OContactBackend {
 	 */
 	virtual bool removeContact (int uid, const Contact &contact) = 0;
 	
-	/** Constants for query.
-	 * Use this constants to set the query parameters.
-	 * @see queryByExample()
-	 */
-	static const uint query_WildCards  = 0x0001;
-	static const uint query_IgnoreCase = 0x0002;
-	static const uint query_RegExp     = 0x0004;
-	static const uint query_ExactMatch = 0x0008;
 };
 
 /** Class to access the contacts database.
@@ -284,6 +279,15 @@ class OContactDB: public QObject
 	 */
 	bool save();
 
+	/** Constants for query.
+	 * Use this constants to set the query parameters.
+	 * Note: <i>query_IgnoreCase</i> just make sense with one of the other attributes !
+	 * @see queryByExample()
+	 */
+	static const uint query_WildCards  = 0x0001;
+	static const uint query_IgnoreCase = 0x0002;
+	static const uint query_RegExp     = 0x0004;
+	static const uint query_ExactMatch = 0x0008;
 
  signals:
 	/* Signal is emitted if the database was changed. Therefore

@@ -14,11 +14,14 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.12 2002-07-24 07:01:58 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.13 2002-07-28 15:35:22 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.12  2002-07-24 07:01:58  eilers
+ * Revision 1.1.2.13  2002-07-28 15:35:22  eilers
+ * Example-By-Query Search interface debugged. It is working now.. :)
+ *
+ * Revision 1.1.2.12  2002/07/24 07:01:58  eilers
  * Some minor changes. Fixed search query bug
  *
  * Revision 1.1.2.11  2002/07/21 15:21:26  eilers
@@ -224,31 +227,34 @@ namespace {
 				 */
 				bool allcorrect = true;
 				for ( int i = 0; i < Qtopia::rid; i++ ) {
-					/* Achtung abchecken:
-					 * Möglicherweise werden einige Felder im Constructor
-					 * von Contact nicht leer vorbelegt ! Das würde hier
-					 * zu falsche Suchanfragen führen !
-					 */
 					/* Just compare fields which are not empty in the query object */
 					if ( !query.field(i).isEmpty() ){
-						switch ( settings & ~query_IgnoreCase ){
-						case query_RegExp:{
+						switch ( settings & ~OContactDB::query_IgnoreCase ){
+						case OContactDB::query_RegExp:{
 							QRegExp expr ( query.field(i), 
-								       !(settings & query_IgnoreCase), false );
+								       !(settings & OContactDB::query_IgnoreCase), 
+								       false );
 							if ( expr.find ( (*it).field(i), 0 ) == -1 )
 								allcorrect = false;
 						}
 							break;
-						case query_WildCards:{
+						case OContactDB::query_WildCards:{
 							QRegExp expr ( query.field(i), 
-								       !(settings & query_IgnoreCase), true );
+								       !(settings & OContactDB::query_IgnoreCase), 
+								       true );
 							if ( expr.find ( (*it).field(i), 0 ) == -1 )
 								allcorrect = false;
 						}
 							break;
-						case query_ExactMatch:{
-							if ( query.field(i) != (*it).field(i) )
-								allcorrect = false;
+						case OContactDB::query_ExactMatch:{
+							if (settings & OContactDB::query_IgnoreCase){
+								if ( query.field(i).upper() != 
+								     (*it).field(i).upper() )
+									allcorrect = false;
+							}else{
+								if ( query.field(i) != (*it).field(i) )
+									allcorrect = false;
+							}
 						}
 							break;
 						}
@@ -406,7 +412,7 @@ namespace {
 				/* Search Tag "Contacts" which is the parent of all Contacts */
 				while( element ){
 					if( element->tagName() != QString::fromLatin1("Contacts") ){
-						qWarning ("OContactDefBack::Searching for Tag \"Contacts\"! Found: %s",
+						// qWarning ("OContactDefBack::Searching for Tag \"Contacts\"! Found: %s",
 							  element->tagName().latin1());
 						element = element->nextChild();
 					} else {
@@ -417,7 +423,7 @@ namespace {
 				/* Parse all Contacts and ignore unknown tags */
 				while( element ){
 					if( element->tagName() != QString::fromLatin1("Contact") ){
-						qWarning ("OContactDefBack::Searching for Tag \"Contact\"! Found: %s",
+						//qWarning ("OContactDefBack::Searching for Tag \"Contact\"! Found: %s",
 							  element->tagName().latin1());
 						element = element->nextChild();
 						continue;
@@ -425,8 +431,8 @@ namespace {
 					/* Found alement with tagname "contact", now parse and store all
 					 * attributes contained
 					 */
-					qWarning("OContactDefBack::load element tagName() : %s", 
-						 element->tagName().latin1() );
+					//qWarning("OContactDefBack::load element tagName() : %s", 
+					//	 element->tagName().latin1() );
 					QString dummy;
 					foundAction = false;
 					
