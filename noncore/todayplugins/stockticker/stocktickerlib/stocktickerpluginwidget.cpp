@@ -14,22 +14,9 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qsocket.h>
-#include <qvaluelist.h>
-#include <qtl.h>
-#include <qstring.h>
-#include <qstringlist.h>
-#include <qobject.h>
 #include <qlayout.h>
-#include <qlineedit.h>
-#include <qregexp.h>
-#include <qtimer.h>
-#include <qmessagebox.h>
 
 #include <qpe/config.h>
-#include <qpe/timestring.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/network.h>
 
 #include <opie/oticker.h>
 

@@ -3,9 +3,7 @@
 #include <qapplication.h>
 
 #include <qcheckbox.h>
-#include <qlayout.h>
 #include <qlineedit.h>
-#include <qlayout.h>
 #include <qvariant.h>
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
