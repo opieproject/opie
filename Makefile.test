@@ -20,7 +20,7 @@ all : $(TOPDIR)/.config
 
 $(TOPDIR)/.config : $(TOPDIR)/.depends.cfgs
 
-all menuconfig xconfig oldconfig config randconfig allyesconfig allnoconfig defconfig : $(TOPDIR)/.depends
+all menuconfig xconfig oldconfig config randconfig allyesconfig allnoconfig defconfig : $(TOPDIR)/.depends.cfgs
 
 clean-configs : $(TOPDIR)/.depends.cfgs
 	@echo "Wiping generated config.in files..."
@@ -78,9 +78,11 @@ defconfig :
 
 export
 
+ifneq ($(filter-out config menuconfig xconfig randconfig allyesconfig allnoconfig defconfig,$(MAKECMDGOALS)),)
 -include $(TOPDIR)/.config
 -include $(TOPDIR)/..config.cmd
 -include $(TOPDIR)/.depends
+endif
 
 export QMAKESPEC=$(QMAKESPECSDIR)/qws/$(patsubst "%",%,$(CONFIG_SPECFILE))
 
