@@ -690,10 +690,12 @@ QString AbTable::findContactContact( const OContact &entry, int /* row */ )
 			value = entry.gender();
 			break;
 		case Qtopia::Birthday:
-			value = TimeString::numberDateString( entry.birthday() );
+			if ( ! entry.birthday().isNull() )
+				value = TimeString::numberDateString( entry.birthday() );
 			break;
 		case Qtopia::Anniversary:
-			value = TimeString::numberDateString( entry.anniversary() );
+			if ( ! entry.anniversary().isNull() )
+				value = TimeString::numberDateString( entry.anniversary() );
 			break;
 		case Qtopia::Nickname:
 			value = entry.nickname();
