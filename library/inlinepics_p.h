@@ -5576,7 +5576,7 @@ static int cmpEmbedImage(const void *a, const void *b)
     const EmbedImage* eb = (const EmbedImage*)b;
     return strcmp(ea->name,eb->name);
 }
-inline const QImage& qembed_findImage(const char* name)
+inline static const QImage& qembed_findImage(const char* name)
 {
     EmbedImage key; key.name = name;
     EmbedImage* r = (EmbedImage*)bsearch( &key, embed_image_vec,
