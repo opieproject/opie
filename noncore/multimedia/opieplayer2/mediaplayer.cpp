@@ -35,7 +35,7 @@ extern MediaPlayerState *mediaPlayerState;
 MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL ) {
 
-    playList->setCaption(tr("OpiePlayer: Initializating"));
+    playList->setCaption( tr( "OpiePlayer: Initializating" ) );
 
     qApp->processEvents();
     //    QPEApplication::grabKeyboard(); // EVIL

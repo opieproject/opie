@@ -91,7 +91,7 @@ struct yuv2rgb_s {
 
   uint8_t          *cmap;
   scale_line_func_t scale_line;
-  
+
 } ;
 
 /*
@@ -102,17 +102,17 @@ struct yuv2rgb_factory_s {
 
   yuv2rgb_t* (*create_converter) (yuv2rgb_factory_t *this);
 
-  /* 
-   * adjust gamma (-100 to 100 looks fine) 
+  /*
+   * adjust gamma (-100 to 100 looks fine)
    * for all converters produced by this factory
    */
   void (*set_gamma) (yuv2rgb_factory_t *this, int gamma);
 
-  /* 
-   * get gamma value 
+  /*
+   * get gamma value
    */
   int (*get_gamma) (yuv2rgb_factory_t *this);
-                   
+
   /* private data */
 
   int      mode;
@@ -138,7 +138,7 @@ struct yuv2rgb_factory_s {
 
 yuv2rgb_factory_t *yuv2rgb_factory_init (int mode, int swapped, uint8_t *colormap);
 
-                   
+
 /*
  * internal stuff below this line
  */
@@ -147,5 +147,6 @@ void mmx_yuv2rgb_set_gamma(int gamma);
 void yuv2rgb_init_mmxext (yuv2rgb_factory_t *this);
 void yuv2rgb_init_mmx (yuv2rgb_factory_t *this);
 void yuv2rgb_init_mlib (yuv2rgb_factory_t *this);
+void yuv2rgb_init_arm (yuv2rgb_factory_t *this);
 
 #endif

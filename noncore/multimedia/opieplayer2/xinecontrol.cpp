@@ -45,9 +45,9 @@ extern VideoWidget *videoUI;
 XineControl::XineControl( QObject *parent, const char *name )
     : QObject( parent, name ) {
 
-    libXine = new XINE::Lib(videoUI->vidWidget() );
+    libXine = new XINE::Lib( videoUI->vidWidget() );
 
-    connect ( videoUI, SIGNAL( videoResized ( const QSize & )), this, SLOT( videoResized ( const QSize & ) ) );
+    connect ( videoUI, SIGNAL( videoResized( const QSize & )), this, SLOT( videoResized ( const QSize & ) ) );
     connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pause( bool ) ) );
     connect( this, SIGNAL( positionChanged( long ) ), mediaPlayerState, SLOT( updatePosition( long ) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );

@@ -134,7 +134,7 @@ QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     slider->setMinValue( 0 );
     slider->setMaxValue( 1 );
     slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
-    slider->setFocusPolicy( QWidget::NoFocus );
+    //slider->setFocusPolicy( QWidget::NoFocus );
 
     resizeEvent( NULL );
 
@@ -436,8 +436,8 @@ void VideoWidget::paintEvent( QPaintEvent * pe) {
             for ( int i = 0; i < numVButtons; i++ )
                 paintButton( &p, i );
         }
-        slider->repaint( TRUE );
-      }
+        //slider->repaint( TRUE );
+        }
 }
 
 

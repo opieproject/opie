@@ -103,10 +103,10 @@ PlayListWidgetGui::PlayListWidgetGui( QWidget* parent, const char* name, WFlags 
     pmView->insertItem( tr( "Gamma (Video)" ),  gammaMenu );
 
     gammaSlider = new QSlider( QSlider::Vertical,  gammaMenu );
-    gammaSlider->setRange( -100, 100 );
+    gammaSlider->setRange( -40, 40 );
     gammaSlider->setTickmarks( QSlider::Left );
     gammaSlider->setTickInterval( 20 );
-    gammaSlider->setFocusPolicy( QWidget::NoFocus );
+    //gammaSlider->setFocusPolicy( QWidget::NoFocus );
     gammaSlider->setValue( 0 );
     gammaSlider->setMinimumHeight( 50 );
 

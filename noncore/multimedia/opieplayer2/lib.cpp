@@ -259,6 +259,7 @@ void Lib::setScaling( bool scale ) {
 
 void Lib::setGamma( int value ) {
     //qDebug( QString( "%1").arg(value)  );
+    int gammaValue = ( 100 + value );
     ::null_set_videoGamma( m_videoOutput, value );
 }
 
