@@ -57,7 +57,8 @@ IrdaApplet::IrdaApplet ( QWidget *parent, const char *name )
 	m_receive_active = false;
 	m_receive_state_changed = false;
 	m_popup = 0;
-        m_wasOn = false;
+                m_wasOn = false;
+                m_wasDiscover = false;
 
         QCopChannel* chan = new QCopChannel("QPE/IrDaApplet", this );
         connect(chan, SIGNAL(received(const QCString&,const QByteArray&) ),
@@ -288,8 +289,8 @@ void IrdaApplet::mousePressEvent ( QMouseEvent * )
 
 void IrdaApplet::timerEvent ( QTimerEvent * )
 {
-	bool oldactive     = m_irda_active;
-	bool olddiscovery  = m_irda_discovery_active;
+	bool oldactive = m_irda_active;
+	bool olddiscovery = m_irda_discovery_active;
 	bool receiveUpdate = false;
 
 	if ( m_receive_state_changed ) {
@@ -297,7 +298,7 @@ void IrdaApplet::timerEvent ( QTimerEvent * )
 		m_receive_state_changed = false;
 	}
 
-	m_irda_active           = checkIrdaStatus ( );
+	m_irda_active = checkIrdaStatus ( );
 	m_irda_discovery_active = checkIrdaDiscoveryStatus ( );
 
 	if ( m_irda_discovery_active )
@@ -314,7 +315,7 @@ void IrdaApplet::paintEvent ( QPaintEvent * )
 	p. drawPixmap ( 0, 1, m_irda_active ? m_irdaOnPixmap : m_irdaOffPixmap );
 
 	if ( m_irda_discovery_active )
-		p. drawPixmap( 0, 1, m_irdaDiscoveryOnPixmap );
+                                p. drawPixmap( 0, 1, m_irdaDiscoveryOnPixmap );
 
 	if ( m_receive_active )
 		p. drawPixmap( 0, 1, m_receiveActivePixmap );
@@ -329,12 +330,21 @@ void IrdaApplet::paintEvent ( QPaintEvent * )
 void IrdaApplet::slotMessage( const QCString& str, const QByteArray& ar ) {
     if ( str == "enableIrda()") {
         m_wasOn = checkIrdaStatus();
-        if (!m_wasOn)
+        m_wasDiscover = checkIrdaDiscoveryStatus();
+        if (!m_wasOn)  {
             setIrdaStatus( true );
-    }else if ( str == "disableIrda()") {
-        if (!m_wasOn)
+        }
+        if ( !m_wasDiscover ) {
+            setIrdaDiscoveryStatus ( true );
+        }
+    } else if ( str == "disableIrda()") {
+        if (!m_wasOn)  {
             setIrdaStatus( false );
-    }else if ( str == "listDevices()") {
+        }
+        if ( !m_wasDiscover ) {
+            setIrdaDiscoveryStatus ( false );
+        }
+    } else if ( str == "listDevices()") {
         QCopEnvelope e("QPE/IrDaAppletBack", "devices(QStringList)");
 
         QStringList list;

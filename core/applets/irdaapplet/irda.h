@@ -68,7 +68,8 @@ private:
 
 	QMap <QString, QString> m_devices;
 
-        bool m_wasOn; // if IrDa was enabled
+                bool m_wasOn; // if IrDa was enabled
+	bool m_wasDiscover;
 };
 
 
