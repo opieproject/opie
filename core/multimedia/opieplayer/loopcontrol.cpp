@@ -236,14 +236,16 @@ void LoopControl::startAudio() {
             long sampleWaitTime = currentSample - sampleWeShouldBeAt;
 
 // this causes drop outs not sure why its even here
-//           if ( ( sampleWaitTime > 2000 ) && ( sampleWaitTime < 20000 ) ) {
-//         usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
-//           }
-//         else if ( sampleWaitTime <= -5000 ) {
-//        qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
-// //       //mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
-//        currentSample = sampleWeShouldBeAt;
-//          }
+         if ( hasVideoChannel ) {
+           if ( ( sampleWaitTime > 2000 ) && ( sampleWaitTime < 20000 ) ) {
+         usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
+           }
+         else if ( sampleWaitTime <= -5000 ) {
+        qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
+ //       //mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
+        currentSample = sampleWeShouldBeAt;
+          }
+}
 
             audioDevice->write( audioBuffer, samplesRead * 2 * channels );
 
