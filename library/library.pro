@@ -42,7 +42,6 @@ HEADERS	=   calendar.h \
 	    qpetoolbar.h \
 	    backend/categories.h \
 	    backend/stringutil.h \
-	    backend/palmtopuid.h \
 	    backend/palmtoprecord.h \
             backend/task.h \
 	    backend/event.h \
@@ -135,4 +134,5 @@ TRANSLATIONS = ../i18n/de/libqpe.ts \
 	 ../i18n/pt_BR/libqpe.ts \
 	 ../i18n/sl/libqpe.ts \
 	 ../i18n/zh_CN/libqpe.ts \
+	 ../i18n/it/libqpe.ts \
 	 ../i18n/zh_TW/libqpe.ts
