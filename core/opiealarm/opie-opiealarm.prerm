@@ -1,4 +1,5 @@
 #/bin/sh
 
 /etc/init.d/opieatd stop
+find /etc -name [SK][0-9][0-9]opieatd | xargs rm -f
 exit 0
