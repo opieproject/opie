@@ -1,22 +1,67 @@
 #!/usr/bin/make -f
+export OPIEDIR:=$(shell pwd)
+export TOPDIR:=$(OPIEDIR)
+
 export QMAKESPECSDIR=$(OPIEDIR)/mkspecs
 export QMAKESPEC=$(QMAKESPECSDIR)/qws/linux-generic-g++
 
 # The following are config.in's which are generated, to avoid numerous manual edits when
 # adding packages to the build.
+#
+# NOTE: There currently exists a bug regarding this, the toplevel config.in -must- be created
+# -after- the lower level config.ins, as makecfg.pl does a find for config.in files!
+#
+#  solution: generate this list and stuff into .depends, and also
+#  generate config.in interdependencies (i.e. topdir config.in depends on
+#    config.ins within dirs below it. dependencies are solely dir structure
+#    driven)
 
-configs += $(TOPDIR)/x11/ipc/server/config.in $(TOPDIR)/x11/ipc/config.in $(TOPDIR)/x11/config.in $(TOPDIR)/noncore/unsupported/opiemail/ifaces/config.in $(TOPDIR)/noncore/unsupported/config.in $(TOPDIR)/noncore/tools/config.in $(TOPDIR)/noncore/tools/calc2/config.in $(TOPDIR)/noncore/todayplugins/config.in $(TOPDIR)/noncore/styles/config.in $(TOPDIR)/noncore/settings/config.in $(TOPDIR)/noncore/net/opietooth/config.in $(TOPDIR)/noncore/net/config.in $(TOPDIR)/noncore/multimedia/config.in $(TOPDIR)/noncore/graphics/config.in $(TOPDIR)/noncore/games/config.in $(TOPDIR)/noncore/decorations/config.in $(TOPDIR)/noncore/config.in $(TOPDIR)/noncore/comm/config.in $(TOPDIR)/noncore/apps/config.in $(TOPDIR)/noncore/applets/config.in $(TOPDIR)/libsql/config.in $(TOPDIR)/libopie/pim/config.in $(TOPDIR)/libopie/ofileselector/config.in $(TOPDIR)/inputmethods/config.in $(TOPDIR)/development/config.in $(TOPDIR)/core/settings/config.in $(TOPDIR)/core/pim/today/plugins/config.in $(TOPDIR)/core/pim/config.in $(TOPDIR)/core/multimedia/config.in $(TOPDIR)/core/config.in $(TOPDIR)/core/apps/config.in $(TOPDIR)/core/applets/restartapplet2/config.in $(TOPDIR)/core/applets/config.in $(TOPDIR)/config.in
-
-export OPIEDIR:=$(shell pwd)
-export TOPDIR:=$(OPIEDIR)
+configs = $(TOPDIR)/x11/ipc/server/config.in $(TOPDIR)/x11/ipc/config.in $(TOPDIR)/x11/config.in $(TOPDIR)/noncore/unsupported/opiemail/ifaces/config.in $(TOPDIR)/noncore/unsupported/config.in $(TOPDIR)/noncore/tools/config.in $(TOPDIR)/noncore/tools/calc2/config.in $(TOPDIR)/noncore/todayplugins/config.in $(TOPDIR)/noncore/styles/config.in $(TOPDIR)/noncore/settings/config.in $(TOPDIR)/noncore/net/opietooth/config.in $(TOPDIR)/noncore/net/config.in $(TOPDIR)/noncore/multimedia/config.in $(TOPDIR)/noncore/graphics/config.in $(TOPDIR)/noncore/games/config.in $(TOPDIR)/noncore/decorations/config.in $(TOPDIR)/noncore/config.in $(TOPDIR)/noncore/comm/config.in $(TOPDIR)/noncore/apps/config.in $(TOPDIR)/noncore/applets/config.in $(TOPDIR)/libsql/config.in $(TOPDIR)/libopie/pim/config.in $(TOPDIR)/libopie/ofileselector/config.in $(TOPDIR)/inputmethods/config.in $(TOPDIR)/development/config.in $(TOPDIR)/core/settings/config.in $(TOPDIR)/core/pim/today/plugins/config.in $(TOPDIR)/core/pim/config.in $(TOPDIR)/core/multimedia/config.in $(TOPDIR)/core/config.in $(TOPDIR)/core/apps/config.in $(TOPDIR)/core/applets/restartapplet2/config.in $(TOPDIR)/core/applets/config.in $(TOPDIR)/config.in
 
 all : configs
 
-configs : $(configs)
+configs : $(shell echo $(configs) | sort -r)
 
 clean-configs :
 	@echo "Wiping generated config.in files..."
 	@-rm -f $(configs)
+
+./.config:
+	$(call descend,scripts/kconfig,conf)
+	@$(MAKE) -C scripts/kconfig conf
+	./scripts/kconfig/conf -s ./config.in
+
+xconfig:
+	$(call descend,scripts/kconfig,qconf)
+	./scripts/kconfig/qconf ./config.in
+
+menuconfig: scripts/lxdialog/lxdialog
+	$(call descend,scripts/kconfig,mconf)
+	./scripts/kconfig/mconf ./config.in
+
+config:
+	$(call descend,scripts/kconfig,conf)
+	./scripts/kconfig/conf ./config.in
+ 
+oldconfig:
+	$(call descend,scripts/kconfig,conf)
+	./scripts/kconfig/conf -o ./config.in
+ 
+randconfig:
+	$(call descend,scripts/kconfig,conf)
+	./scripts/kconfig/conf -r ./config.in
+ 
+allyesconfig:
+	$(call descend,scripts/kconfig,conf)
+	./scripts/kconfig/conf -y ./config.in
+ 
+allnoconfig:
+	$(call descend,scripts/kconfig,conf)
+	./scripts/kconfig/conf -n ./config.in
+ 
+defconfig:
+	$(call descend,scripts/kconfig,conf)
+	./scripts/kconfig/conf -d ./config.in
 
 -include $(TOPDIR)/.config
 -include $(TOPDIR)/..config.cmd
