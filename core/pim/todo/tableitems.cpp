@@ -30,6 +30,8 @@
 #include "tableitems.h"
 #include <string.h>
 
+#include <qobject.h>
+
 using namespace Todo;
 
 CheckItem::CheckItem( QTable* t,
@@ -155,7 +157,7 @@ void DueTextItem::setToDoEvent( const OTodo& ev ) {
     if( ev.hasDueDate() ){
         QDate today = QDate::currentDate();
         m_off = today.daysTo(ev.dueDate() );
-        setText( tr( "%1 day(s)" ).arg( QString::number(m_off) ) );
+        setText( QObject::tr( "%1 day(s)" ).arg( QString::number(m_off) ) );
     }else{
         setText("n.d." );
         m_off = 0;
