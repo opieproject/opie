@@ -18,6 +18,8 @@
 
 #include "wellenreiterbase.h"
 
+class QTimerEvent;
+
 class Wellenreiter : public WellenreiterBase {
     Q_OBJECT
 
@@ -27,12 +29,17 @@ public:
     ~Wellenreiter();
 
 protected:
-
+    virtual void timerEvent( QTimerEvent* );
 
 public slots:
     void buttonClicked();
 
 private:
+    int daemon_fd;             // socket filedescriptor for udp communication socket
+
+    bool hasMessage();
+    void handleMessage();
+
     //void readConfig();
     //void writeConfig();
 };

@@ -13,10 +13,22 @@
 **
 ***********************************************************************/
 
+// Qt
+
+#include <qpushbutton.h>
+
+// Standard
+
+#include <unistd.h>
+#include <sys/types.h>
+
+// Local
+
 #include "wellenreiter.h"
 #include "scanlistitem.h"
 
-#include <qpushbutton.h>
+#include "../libwellenreiter/source/sock.hh"    // <--- ugly path, FIX THIS!
+#include "../daemon/source/config.hh"           // <--- ugly path, FIX THIS!
 
 Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     : WellenreiterBase( parent, name, fl )
@@ -24,11 +36,54 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
 
     connect( button, SIGNAL( clicked() ), this, SLOT( buttonClicked() ) );
 
+    //
+    // setup socket for daemon communication and start poller
+    //
+
+    daemon_fd = commsock( DAEMONADDR, DAEMONPORT );
+    if ( daemon_fd == -1 )
+        qDebug( "D'oh! Could not get file descriptor for daemon socket." );
+    else
+        startTimer( 700 );
+
 }
 
 Wellenreiter::~Wellenreiter()
 {
     // no need to delete child widgets, Qt does it all for us
+}
+
+void Wellenreiter::handleMessage()
+{
+    // FIXME: receive message and handle it
+
+    qDebug( "received message from daemon." );
+}
+
+
+bool Wellenreiter::hasMessage()
+{
+    fd_set rfds;
+    FD_ZERO( &rfds );
+    FD_SET( daemon_fd, &rfds );
+    struct timeval tv;
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+    return select( 1, &rfds, NULL, NULL, &tv );
+}
+
+void Wellenreiter::timerEvent( QTimerEvent* e )
+{
+    // qDebug( "checking for message..." );
+
+    if ( hasMessage() )
+    {
+        handleMessage();
+    }
+    else
+    {
+        // qDebug( "no message :(" );
+    }
 }
 
 void Wellenreiter::buttonClicked()

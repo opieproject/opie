@@ -6,6 +6,6 @@ HEADERS         = gui/mainwindowbase.h gui/wellenreiter.h gui/scanlistitem.h
 SOURCES         = gui/main.cpp gui/wellenreiter.cpp gui/scanlistitem.cpp
 INCLUDEPATH     += $(OPIEDIR)/include gui daemon
 DEPENDPATH      += $(OPIEDIR)/include gui daemon
-LIBS            += -lqpe
+LIBS            += -lqpe -Llibwellenreiter/source -lwellenreiter
 INTERFACES      = gui/wellenreiterbase.ui
 TARGET          = wellenreiter
