@@ -1,6 +1,6 @@
 #!/bin/sh
 
-QTE_VERSION=2.3.3
+QTE_VERSION=2.3.4
 DEB_VERSION=2.0
 
 # Have to do this here, since CVS can't store symlinks
