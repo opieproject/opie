@@ -533,7 +533,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Bouvet Island</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyspa Bouvet</translation>
     </message>
     <message>
         <source>Brazil</source>
@@ -565,7 +565,7 @@ dostepny za darmo!</translation>
     </message>
     <message>
         <source>Cape Verde</source>
-        <translation type="unfinished">Cape Verde</translation>
+        <translation>Cape Verde</translation>
     </message>
     <message>
         <source>Cayman Islands</source>

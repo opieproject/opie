@@ -163,7 +163,7 @@
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>Prawa autorskie do Text Edit posiada&lt;BR&gt;2000 Trolltech AS, i&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;Program na licencji GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
