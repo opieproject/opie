@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.11 2002-06-24 22:38:00 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.12 2002-06-27 01:39:00 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -48,7 +48,18 @@
 #include <qevent.h>
 #include <qtooltip.h>
 #include <qsignal.h>
-#include <linux/fb.h>
+
+
+//#include <linux/fb.h> better not rely on kernel headers in userspace ...
+
+/* VESA Blanking Levels */
+#define VESA_NO_BLANKING      0
+#define VESA_VSYNC_SUSPEND    1
+#define VESA_HSYNC_SUSPEND    2
+#define VESA_POWERDOWN        3
+
+#define FBIOBLANK             0x4611 
+
 
 #include <qsignal.h>
 #include "qpeapplication.h"
