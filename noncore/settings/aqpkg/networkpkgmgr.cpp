@@ -135,7 +135,7 @@ void NetworkPackageManager :: initGui()
                 text[0] = 'A' + i;
                 LetterPushButton *b = new LetterPushButton( text, this );
                 connect( b, SIGNAL( released( QString ) ), this, SLOT( letterPushed( QString ) ) );
-                if ( i < 16 )
+                if ( i < 13 )
                 hbox3->addWidget( b );
                 else
                 hbox4->addWidget( b );
