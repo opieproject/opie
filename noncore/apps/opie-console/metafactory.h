@@ -35,6 +35,7 @@ public:
     QStringList configWidgets()const;
     QStringList fileTransferLayers()const;
     IOLayer* newIOLayer( const QString&,const Profile& );
+    QWidget *newConfigWidget ( const QString&, QWidget* );
 
     QString name( const QString& );
 

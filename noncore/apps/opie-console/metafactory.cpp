@@ -44,6 +44,7 @@ QStringList MetaFactory::fileTransferLayers()const {
     }
     return list;
 }
+
 IOLayer* MetaFactory::newIOLayer( const QString& str,const Profile& prof ) {
     IOLayer* lay = 0l;
 
@@ -57,6 +58,16 @@ IOLayer* MetaFactory::newIOLayer( const QString& str,const Profile& prof ) {
     }
 
     return lay;
+}
+
+QWidget *MetaFactory::newConfigWidget ( const QString& str, QWidget* parent) {
+    QWidget *w = NULL;
+    configWidget c;
+
+    c = m_confFact[str];
+    if(c) w = c(parent);
+
+    return w;
 }
 
 QString MetaFactory::name( const QString& str ) {

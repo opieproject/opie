@@ -19,12 +19,42 @@ static QWidget *factory_serial(QWidget *parent)
 	device_frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 
 	QLabel *frame_device = new QLabel(QObject::tr("Device"), device_frame);
+
+	QLineEdit *frame_device_line = new QLineEdit("/dev/ttyS0", device_frame);
+
+	QVBoxLayout *vbox_frame = new QVBoxLayout(device_frame, 2);
+	vbox_frame->add(frame_device);
+	vbox_frame->add(frame_device_line);
+
+	return device_frame;
+}
+
+static QWidget *factory_irda(QWidget *parent)
+{
+	QFrame *device_frame = new QFrame(parent);
+	device_frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+
+	QLabel *frame_device = new QLabel(QObject::tr("Device"), device_frame);
+
+	QLineEdit *frame_device_line = new QLineEdit("/dev/ircomm0", device_frame);
+
+	QVBoxLayout *vbox_frame = new QVBoxLayout(device_frame, 2);
+	vbox_frame->add(frame_device);
+	vbox_frame->add(frame_device_line);
+
+	return device_frame;
+}
+
+static QWidget *factory_modem(QWidget *parent)
+{
+	QFrame *device_frame = new QFrame(parent);
+	device_frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+
+	QLabel *frame_device = new QLabel(QObject::tr("Device"), device_frame);
 	QLabel *frame_number = new QLabel(QObject::tr("Phone number"), device_frame);
-	frame_number->hide();
 
 	QLineEdit *frame_device_line = new QLineEdit("/dev/ttyS0", device_frame);
 	QLineEdit *frame_number_line = new QLineEdit(device_frame);
-	frame_number_line->hide();
 
 	QVBoxLayout *vbox_frame = new QVBoxLayout(device_frame, 2);
 	vbox_frame->add(frame_device);
@@ -33,16 +63,6 @@ static QWidget *factory_serial(QWidget *parent)
 	vbox_frame->add(frame_number_line);
 
 	return device_frame;
-}
-
-static QWidget *factory_irda(QWidget *parent)
-{
-	return NULL;
-}
-
-static QWidget *factory_modem(QWidget *parent)
-{
-	return NULL;
 }
 
 ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact,
@@ -86,7 +106,11 @@ ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
 		device_box->insertItem(m_fact->name((*it)));
 
 	// connection tab, factory part
-	QFrame *device_frame = static_cast<QFrame*>(factory_serial(tabconn));
+	plugin_base = new QWidget(tabconn);
+	plugin_layout = new QHBoxLayout(plugin_base, 0);
+
+	plugin_plugin = m_fact->newConfigWidget("serial", plugin_base);
+	plugin_layout->add(plugin_plugin);
 
 	// connection tab, general part
 
@@ -160,7 +184,7 @@ ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
 	QVBoxLayout *vbox = new QVBoxLayout(tabconn, 2);
 	vbox->add(device);
 	vbox->add(device_box);
-	vbox->add(device_frame);
+	vbox->add(plugin_base);
 	vbox->add(speed);
 	vbox->add(speed_box);
 	vbox->add(flow);
@@ -214,12 +238,12 @@ ProfileEditorDialog::~ProfileEditorDialog() {
 
 void ProfileEditorDialog::slotDevice(int id)
 {
-	MetaFactory::configWidget c;
+	delete plugin_plugin;
 
-	//c = m_fact->;
-	c = factory_serial;
+	plugin_plugin = m_fact->newConfigWidget(prof_type(), plugin_base);
+	plugin_layout->add(plugin_plugin);
 
-	QFrame *device_frame = static_cast<QFrame*>(c(NULL));
+	plugin_plugin->show();
 }
 
 void ProfileEditorDialog::slotOk()
