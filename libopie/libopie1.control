@@ -5,7 +5,7 @@ Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: libqte2 (>=$QTE_VERSION), libqpe1
+Depends: libqte2 (>=$QTE_VERSION), libqpe1, opie-pics
 Provides: libopie
 Replaces: libopie
 Description: Opie library
