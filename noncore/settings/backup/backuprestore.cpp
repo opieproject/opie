@@ -51,6 +51,9 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
   applicationSettings = new QListViewItem(backupList, "Application Settings", "",
                                           QDir::homeDirPath() + "/Settings/");
   selectItem(applicationSettings);
+  applicationSettings = new QListViewItem(backupList, "Application Data", "",
+                                          QDir::homeDirPath() + "/Applications/");
+  selectItem(applicationSettings);
   documents= new QListViewItem(backupList, "Documents", "",
                                QDir::homeDirPath() + "/Documents/");
   selectItem(documents);
