@@ -33,13 +33,13 @@ public:
 	~FortunePluginWidget();
 
 private:
-	OTicker *fortune;
-	OProcess *fortuneProcess;
+	Opie::Ui::OTicker *fortune;
+	Opie::Core::OProcess *fortuneProcess;
 
 	void getFortune();
 
 private slots:
-	void slotStdOut( OProcess*, char*, int );
+	void slotStdOut( Opie::Core::OProcess*, char*, int );
 };
 
 #endif

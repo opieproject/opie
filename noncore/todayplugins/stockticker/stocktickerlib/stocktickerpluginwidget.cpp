@@ -20,6 +20,8 @@
 
   #include <qlayout.h>
 
+using namespace Opie::Ui;
+using namespace Opie::Ui;
 extern "C" {
   #include "libstocks/stocks.h"
   }

@@ -32,7 +32,7 @@
 #include <qstring.h>
 #include <qwidget.h>
 
-class OProcess;
+namespace Opie {namespace Core {class Opie::Core::OProcess;}}
 class QLabel;
 class QTimer;
 
@@ -65,7 +65,7 @@ class WeatherPluginWidget : public QWidget {
 		void getIcon( const QString & );
 
 	private slots:
-		void dataRetrieved( OProcess * );
+		void dataRetrieved( Opie::Core::OProcess * );
 };
 
 #endif

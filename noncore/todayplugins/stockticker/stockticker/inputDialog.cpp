@@ -11,6 +11,8 @@
 #include <qlayout.h>
 #include <qpe/config.h>
 #include <qstringlist.h>
+using namespace Opie::Core;
+using namespace Opie::Core;
 #include <qmainwindow.h>
 #include "helpwindow.h"
 
@@ -60,7 +62,7 @@ void InputDialog::doLookup() {
       proc << "/usr/bin/wget";
       proc<<"-O"<< tempHtml<< url;
 
-      connect( &proc, SIGNAL( processExited(OProcess*)),this, SLOT( showBrowser(OProcess*)));
+      connect( &proc, SIGNAL( processExited(Opie::Core::OProcess*)),this, SLOT( showBrowser(Opie::Core::OProcess*)));
       proc.start( OProcess::NotifyOnExit);
 */
      system(cmd.latin1());

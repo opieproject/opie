@@ -23,8 +23,8 @@
 #include <qwidget.h>
 #include <qlineedit.h>
 
-#include <opie/oclickablelabel.h>
-#include <opie/oticker.h>
+#include <opie2/oclickablelabel.h>
+#include <opie2/oticker.h>
 
 #include <sys/types.h>
 #include <sys/uio.h>

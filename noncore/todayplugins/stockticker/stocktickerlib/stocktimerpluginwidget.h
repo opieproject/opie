@@ -21,7 +21,7 @@
 #include <qstring.h>
 #include <qwidget.h>
 
-#include <opie/oclickablelabel.h>
+#include <opie2/oclickablelabel.h>
 
 class MailPluginWidget : public QWidget {
 
@@ -36,7 +36,7 @@ protected slots:
     void startMail();
 
 private:
-    OClickableLabel *mailLabel;
+    Opie::Ui::OClickableLabel *mailLabel;
     void readConfig();
     void getInfo();
 };

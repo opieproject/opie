@@ -40,6 +40,7 @@
 
 #include "weatherpluginwidget.h"
 
+using namespace Opie::Core;
 WeatherPluginWidget::WeatherPluginWidget( QWidget *parent,  const char* name )
 	: QWidget( parent,  name )
 {
@@ -105,7 +106,7 @@ void WeatherPluginWidget::retreiveData()
 	OProcess *proc = new OProcess;
 
 	*proc << "wget" << "-q" << remoteFile << "-O" << localFile;
-	connect( proc, SIGNAL( processExited(OProcess*) ), this, SLOT( dataRetrieved(OProcess*) ) );
+	connect( proc, SIGNAL( processExited(Opie::Core::OProcess*) ), this, SLOT( dataRetrieved(Opie::Core::OProcess*) ) );
 	proc->start();
 }
 

@@ -22,7 +22,7 @@ private:
     QLineEdit* LineEdit1;
 private slots:
     void doLookup();
-    void showBrowser(OProcess*);
+    void showBrowser(Opie::Core::OProcess*);
 protected slots:
 
 };

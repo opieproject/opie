@@ -26,6 +26,8 @@
 #include <qobject.h>
 #include <qlayout.h>
 
+using namespace Opie::Core;
+using namespace Opie::Ui;
 FortunePluginWidget::FortunePluginWidget( QWidget *parent,  const char* name )
 	: QWidget( parent, name )
 {
@@ -61,8 +63,8 @@ void FortunePluginWidget::getFortune() {
 	fortuneProcess = new OProcess();
 	*fortuneProcess << "fortune";
 
-	connect(fortuneProcess,  SIGNAL(receivedStdout(OProcess*,char*,int) ),
-		this,  SLOT(slotStdOut(OProcess*,char*,int) ) );
+	connect(fortuneProcess,  SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int) ),
+		this,  SLOT(slotStdOut(Opie::Core::OProcess*,char*,int) ) );
 
 	if(!fortuneProcess->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
 		qWarning("could not start :(");
