@@ -23,7 +23,7 @@
 #include <qobject.h>
 #include <qlist.h>
 
-struct Contact
+struct AContact
 {
   QString email;
   QString name;
@@ -41,7 +41,7 @@ public:
   bool containsName(const QString &name);
   QString getNameByEmail(const QString &email);
   QString getEmailByName(const QString &name);
-  QList<Contact>* getContactList();
+  QList<AContact>* getContactList();
 
 private:
   int getEmailRef(const QString &email);
@@ -50,7 +50,7 @@ private:
   void read();
 
 private:
-  QList<Contact> addresses;
+  QList<AContact> addresses;
   QString filename;
   bool dirty;
 };

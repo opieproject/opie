@@ -43,7 +43,7 @@ void AddressList::addContact(const QString &email, const QString &name)
     return;
     
   if ( ! containsEmail(email) ) {
-    Contact *in = new Contact;
+    AContact *in = new AContact;
     in->email = email;
     in->name = name;
     addresses.append(in);
@@ -65,28 +65,28 @@ QString AddressList::getNameByEmail(const QString &email)
 {
   int pos = getEmailRef(email);
   if (pos != -1) {
-    Contact *ptr = addresses.at(pos);
+    AContact *ptr = addresses.at(pos);
     return ptr->name;
   }
   
-  return NULL;
+  return QString::null;
 }
 
 QString AddressList::getEmailByName(const QString &name)
 {
   int pos = getNameRef(name);
   if (pos != -1) {
-    Contact *ptr = addresses.at(pos);
+    AContact *ptr = addresses.at(pos);
     return ptr->email;
   }
   
-  return NULL;
+  return QString::null;
 }
 
 int AddressList::getEmailRef(const QString &email)
 {
   int pos = 0;
-  Contact *ptr;
+  AContact *ptr;
   
   for (ptr = addresses.first(); ptr != 0; ptr = addresses.next() ) {
     if (ptr->email == email)
@@ -99,7 +99,7 @@ int AddressList::getEmailRef(const QString &email)
 int AddressList::getNameRef(const QString &name)
 {
   int pos = 0;
-  Contact *ptr;
+  AContact *ptr;
   
   for (ptr = addresses.first(); ptr != 0; ptr = addresses.next() ) {
     if (ptr->name == name)
@@ -109,7 +109,7 @@ int AddressList::getNameRef(const QString &name)
   return -1;
 }
 
-QList<Contact>* AddressList::getContactList()
+QList<AContact>* AddressList::getContactList()
 {
   return &addresses;
 }

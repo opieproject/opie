@@ -37,12 +37,12 @@ WriteMail::~WriteMail()
 
 void WriteMail::setAddressList(AddressList *list)
 {
-	Contact *cPtr;
+	AContact *cPtr;
 	
 	addressList = list;
 	
 	addressView->clear();
-	QList<Contact> *cListPtr = addressList->getContactList();
+	QList<AContact> *cListPtr = addressList->getContactList();
 	QListViewItem *item;
 	for (cPtr = cListPtr->first(); cPtr != 0; cPtr = cListPtr->next() ) {
 		item = new QListViewItem(addressView, cPtr->name, cPtr->email);
