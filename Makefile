@@ -14,7 +14,7 @@ APPLETS= core/applets/batteryapplet core/applets/batteryapplet-ipaq \
 	core/applets/irdaapplet core/applets/volumeapplet \
 	core/applets/clockapplet \
 	core/applets/homeapplet core/applets/suspendapplet \
-	core/applets/logoutapplet core/applets/runapplet \
+	core/applets/logoutapplet \
 	core/applets/screenshotapplet core/applets/clipboardapplet \
 	core/applets/cardmon core/applets/obex \
 	core/applets/vmemo \
