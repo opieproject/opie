@@ -132,6 +132,7 @@ private:
 #endif
     void mapToDefaultAction( QWSKeyEvent *ke, int defKey );
     void processQCopFile();
+    QWidget *nextWidget( QWidgetList*, QWidget* );
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     QCopChannel *sysChannel;

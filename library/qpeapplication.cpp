@@ -22,6 +22,7 @@
 #include <unistd.h>
 #include <linux/limits.h> // needed for some toolchains (PATH_MAX)
 #include <qfile.h>
+#include <qqueue.h>
 #ifdef Q_WS_QWS
 #ifndef QT_NO_COP
 #if QT_VERSION <= 231
@@ -97,10 +98,9 @@ public:
 	QPEApplicationData ( )
 		: presstimer( 0 ), presswidget( 0 ), rightpressed( false ), kbgrabbed( false ),
 		  notbusysent( false ), preloaded( false ), forceshow( false ), nomaximize( false ),
-		  keep_running( true ), qpe_main_widget( 0 )
+		  keep_running( true ), qcopQok( false ), qpe_main_widget( 0 )
 
 	{
-		qcopq.setAutoDelete( TRUE );
 	}
 
 	int presstimer;
@@ -114,6 +114,7 @@ public:
 	bool forceshow    : 1;
 	bool nomaximize   : 1;
 	bool keep_running : 1;
+	bool qcopQok      : 1;
 
 	QString appName;
         QStringList langs;
@@ -129,23 +130,27 @@ public:
 		QByteArray data;
 	};
 	QWidget* qpe_main_widget;
-	QList<QCopRec> qcopq;
+	QQueue<QCopRec> qcopq;
 
 	void enqueueQCop( const QCString &ch, const QCString &msg,
 	                  const QByteArray &data )
 	{
-		qcopq.append( new QCopRec( ch, msg, data ) );
+		qcopq.enqueue( new QCopRec( ch, msg, data ) );
 	}
 	void sendQCopQ()
 	{
+		if (!qcopQok )
+			return;
 		QCopRec * r;
 #ifndef QT_NO_COP
-
-		for ( QListIterator<QCopRec> it( qcopq ); ( r = it.current() ); ++it )
+		while((r=qcopq.dequeue())) {
+			// remove from queue before sending...
+			// event loop can come around again before getting
+			// back from sendLocally
 			QCopChannel::sendLocally( r->channel, r->message, r->data );
 #endif
-
-		qcopq.clear();
+		    delete r;
+		}
 	}
 	static void show_mx(QWidget* mw, bool nomaximize)
 	{
@@ -1798,6 +1803,7 @@ void QPEApplication::grabKeyboard()
 */
 int QPEApplication::exec()
 {
+	d->qcopQok = true;
 #ifndef QT_NO_COP
 	d->sendQCopQ();
 #endif
