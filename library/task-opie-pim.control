@@ -4,6 +4,6 @@ Section: opie/applications
 Maintainer: Maximilian Reiss <max.reiss@gmx.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-datebook, opie-todo, opie-addressbook, task-opie-today, opie-drawpad, opie-keyboard
+Depends: opie-datebook, opie-todo, opie-addressbook, task-opie-today, opie-drawpad, opie-multikey
 Description: Opie pim applications
  Base pack of opie pim applications. Also includes keyboard input.
