@@ -1,5 +1,5 @@
 [Desktop Entry]
-Exec=networksetup
+Exec=networksettings
 Icon=Network/PPPConnect
 Type=Application
 Name=Network
@@ -11,6 +11,4 @@ Name[es]=Red
 Name[zh_TW]=網絡
 Name[ko]=네트워크 설정
 Name[da]=Netværk
-Comment=Network setup tool
-Comment[es]=Herramienta de configuración de la red
-Comment[da]=Netværksindstillinger
+Comment=Configure The Network settings using this tool.
