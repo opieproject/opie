@@ -52,7 +52,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   listViewPackages =  new PackageListView( this,"listViewPackages",settings );
   setCentralWidget( listViewPackages );
   listViewPackages->addList( tr("feeds"), &packageListServers );
-  listViewPackages->addList( tr("ipkgfind"), &packageListSearch );
+  listViewPackages->addList( tr("ipkgfind&killefiz"), &packageListSearch );
   listViewPackages->addList( tr("documents"), &packageListDocLnk );
   ipkg = new PmIpkg( settings, this );
   packageListServers.setSettings( settings );
@@ -192,7 +192,7 @@ void MainWindow::makeMenu()
   //SEARCH
   searchBar = new QPEToolBar(this);
   addToolBar( searchBar,  "Search", QMainWindow::Top, TRUE );
-  label = new QLabel( tr("ipkgfind: "), searchBar );
+  label = new QLabel( tr("Search: "), searchBar );
 //  label->setBackgroundMode( PaletteForeground );
   searchBar->setHorizontalStretchable( TRUE );
   searchEdit = new QLineEdit( searchBar, "seachEdit" );

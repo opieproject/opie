@@ -38,7 +38,6 @@ public:
   void commit();
   void update();
   void show();
-  /** No descriptions */
   void clearLists();
 
 public slots:
@@ -54,6 +53,7 @@ public slots:
 	void getIpkgOutput(OProcess *proc, char *buffer, int buflen);
 
 private:
+	bool shellWarning;
 	OProcess *ipkgProcess;
   PackageManagerSettings* settings;
   RunWindow *runwindow;

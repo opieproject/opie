@@ -25,7 +25,7 @@
 #include <qcheckbox.h>
 #include <qtextstream.h>
 #include <qtextview.h>
-
+#include <qmessagebox.h>
 #include <qprogressbar.h>
 #include <qpushbutton.h>
 #include <qlayout.h>
@@ -39,7 +39,7 @@
 //#define OPROCESS
 
 PmIpkg::PmIpkg( PackageManagerSettings* s, QWidget* p,  const char * name, WFlags f )
-  	: QObject ( p )
+  	: QObject ( p ),  shellWarning(true)
 {
   settings = s;
  	runwindow = new RunWindow( p, name, true, f );
@@ -156,6 +156,12 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
      }
   }
   pclose(fp);
+  if (!ret && shellWarning)
+	{
+		shellWarning = false;
+		QMessageBox::critical( runwindow, tr("install failure"),
+  			tr("<p>Did you start me from the command line?</p>"));				
+	}
 #endif
   //out( "Finished!");
   pvDebug(2,QString(ret?"success\n":"failure\n"));
