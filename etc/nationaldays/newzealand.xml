@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nationaldays>
+<description value="New Zealand holidays"/>
+<entries>
+<entry name="New Year's Day" date="01-01"/>
+<entry name="Christmas" date="12-25"/>
+<entry name="Boxing Day" date="12-26"/>
+<entry name="Anzac Day" date="04-25"/>
+<entry name="Waitangi Day" date="02-06"/>
+<entry name="Auckland Anniversary Day" date="01-29"/>
+<entry name="Taranaki Anniversary Day" date="03-31"/>
+<entry name="Hawke's Bay Anniversary Day" date="11-01"/>
+<entry name="Wellington Anniversary Day" date="01-22"/>
+<entry name="Marlborough Anniversary Day" date="11-01"/>
+<entry name="Nelson Anniversary Day" date="02-01"/>
+<entry name="Canterbury Anniversary Day" date="12-16"/>
+<entry name="Canterbury (South) Anniversary Day" date="12-16"/>
+<entry name="Westland Anniversary Day" date="12-01"/>
+<entry name="Otago Anniversary Day" date="03-23"/>
+<entry name="Southland Anniversary Day" date="01-17"/>
+<entry name="Chatham Islands Anniversary Day" date="11-30"/>
+</entries>
+</nationaldays>
