@@ -307,7 +307,7 @@ MBOXviewItem::MBOXviewItem( const QString&aPath, QListView *parent )
 {
     m_Path = aPath;
     wrapper = AbstractMail::getWrapper( m_Path );
-    setPixmap( 0, PIXMAP_POP3FOLDER );
+    setPixmap( 0, PIXMAP_LOCALFOLDER );
     setText( 0, " Local Folders" );
     setOpen( true );
 }
@@ -358,11 +358,13 @@ MBOXfolderItem::MBOXfolderItem( Folder *folderInit, MBOXviewItem *parent , QList
 {
     folder = folderInit;
     mbox = parent;
-    if (folder->getDisplayName().lower()!="inbox") {
-        setPixmap( 0, PIXMAP_POP3FOLDER );
-    } else {
+    if (folder->getDisplayName().lower() == "outgoing") {
+        setPixmap( 0, PIXMAP_OUTBOXFOLDER );
+    } else if (folder->getDisplayName().lower() == "inbox") {
         setPixmap( 0, PIXMAP_INBOXFOLDER);
-    }
+    } else {
+        setPixmap( 0, PIXMAP_MBOXFOLDER );	
+	}
     setText( 0, folder->getDisplayName() );
 }
 

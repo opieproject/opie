@@ -13,8 +13,11 @@
 #define PIC_EDITACCOUNTS    "mail/editaccounts"
 #define PIC_SYNC            "mail/sync"
 #define PIC_IMAPFOLDER      "mail/imapfolder"
+#define PIC_MBOXFOLDER      "mail/mboxfolder"
 #define PIC_POP3FOLDER      "mail/pop3folder"
 #define PIC_INBOXFOLDER     "mail/inbox"
+#define PIC_OUTBOXFOLDER    "mail/outbox"
+#define PIC_LOCALFOLDER     "mail/localfolder"
 
 #define ICON_COMPOSEMAIL    QIconSet( Resource::loadPixmap( PIC_COMPOSEMAIL ) ) 
 #define ICON_SENDQUEUED     QIconSet( Resource::loadPixmap( PIC_SENDQUEUED ) ) 
@@ -27,6 +30,9 @@
 #define PIXMAP_IMAPFOLDER   QPixmap( Resource::loadPixmap( PIC_IMAPFOLDER ) )
 #define PIXMAP_POP3FOLDER   QPixmap( Resource::loadPixmap( PIC_POP3FOLDER ) )
 #define PIXMAP_INBOXFOLDER  QPixmap( Resource::loadPixmap( PIC_INBOXFOLDER) )
+#define PIXMAP_MBOXFOLDER   QPixmap( Resource::loadPixmap( PIC_MBOXFOLDER ) )
+#define PIXMAP_OUTBOXFOLDER QPixmap( Resource::loadPixmap( PIC_OUTBOXFOLDER) )
+#define PIXMAP_LOCALFOLDER  QPixmap( Resource::loadPixmap( PIC_LOCALFOLDER) )
 
 #define IMAP_PORT           "143"
 #define IMAP_SSL_PORT       "993"
