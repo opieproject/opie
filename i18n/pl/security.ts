@@ -3,51 +3,52 @@
     <name>Security</name>
     <message>
         <source>Set passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw haslo</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmien haslo</translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Podaj haslo</translation>
     </message>
     <message>
         <source>Passcode incorrect</source>
-        <translation type="unfinished"></translation>
+        <translation>Haslo bledne</translation>
     </message>
     <message>
         <source>The passcode entered is incorrect.
 Access denied</source>
-        <translation type="unfinished"></translation>
+        <translation>Haslo nieprawidlowe.
+Dostep zabroniony</translation>
     </message>
     <message>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Kazdy</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak</translation>
     </message>
 </context>
 <context>
     <name>SecurityBase</name>
     <message>
         <source>Security Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia bezpieczenstwa</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmien haslo</translation>
     </message>
     <message>
         <source>Clear passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyczysc haslo</translation>
     </message>
     <message>
         <source>Require pass code at power-on</source>
-        <translation type="unfinished"></translation>
+        <translation>Wymaj hasla po uruchomieniu</translation>
     </message>
     <message>
         <source>Sync</source>
@@ -55,7 +56,7 @@ Access denied</source>
     </message>
     <message>
         <source>Accept sync from network:</source>
-        <translation type="unfinished"></translation>
+        <translation>Akceptuj synchronizacje z sieci:</translation>
     </message>
     <message>
         <source>192.168.1.0/24 (default)</source>
@@ -75,15 +76,15 @@ Access denied</source>
     </message>
     <message>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Kazdy</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak</translation>
     </message>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Haslo zabezpieczajace pozwala na minimalny poziom zabezpieczen do tego urzadzenia.</translation>
     </message>
 </context>
 </TS>

@@ -3,15 +3,15 @@
     <name>KRFBConnection</name>
     <message>
         <source>Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Polaczony</translation>
     </message>
     <message>
         <source>Connection Refused</source>
-        <translation type="unfinished"></translation>
+        <translation>Polaczenie odrzucone</translation>
     </message>
     <message>
         <source>Host not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie znaleziono serwera</translation>
     </message>
     <message>
         <source>Read Error: QSocket reported an error reading
@@ -28,15 +28,15 @@ connection.</source>
     <name>KRFBDecoder</name>
     <message>
         <source>Waiting for server initialisation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Oczekiwanie na inicjalizacje serwera...</translation>
     </message>
     <message>
         <source>Waiting for desktop name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Oczekiwanie na nazwe pulpitu...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Polaczony do %1</translation>
     </message>
     <message>
         <source>Protocol Error: Message Id %1 was found when expecting an update message.</source>
@@ -51,7 +51,7 @@ connection.</source>
     <name>KRFBLogin</name>
     <message>
         <source>Waiting for server version...</source>
-        <translation type="unfinished"></translation>
+        <translation>Oczekiwanie na wersje serwera...</translation>
     </message>
     <message>
         <source>Error: Invalid server version, %1</source>
@@ -63,7 +63,7 @@ connection.</source>
     </message>
     <message>
         <source>Logged in</source>
-        <translation type="unfinished"></translation>
+        <translation>Zalogowany</translation>
     </message>
     <message>
         <source>Error: This server requires a password, but none has been specified.
@@ -81,92 +81,92 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>Login Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad logowania</translation>
     </message>
     <message>
         <source>Too many failures</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbyt duzo bledow</translation>
     </message>
 </context>
 <context>
     <name>KVNC</name>
     <message>
         <source>VNC Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Klient VNC</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Caly ekran</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia</translation>
     </message>
     <message>
         <source>Connect...</source>
-        <translation type="unfinished"></translation>
+        <translation>Lacze...</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozlaczono</translation>
     </message>
     <message>
         <source>Stop Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Do okna</translation>
     </message>
     <message>
         <source>Connected to remote host</source>
-        <translation type="unfinished"></translation>
+        <translation>Polaczono do zdalnego serwera</translation>
     </message>
     <message>
         <source>Logged in to remote host</source>
-        <translation type="unfinished"></translation>
+        <translation>Zalogowano na zdalnym serwerze</translation>
     </message>
     <message>
         <source>Connection closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Polaczenie zamkniete</translation>
     </message>
 </context>
 <context>
     <name>KVNCConnectDlg</name>
     <message>
         <source>Connect to VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Polacz do serwera VNC</translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa serwera:</translation>
     </message>
     <message>
         <source>Display Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Numer pulpitu:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Haslo:</translation>
     </message>
 </context>
 <context>
     <name>VncOptionsBase</name>
     <message>
         <source>VNC Viewer Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje klienta VNC</translation>
     </message>
     <message>
         <source>Data Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Dekodowanie danych</translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprawdz zmiany na pulpicie co:</translation>
     </message>
     <message>
         <source>Milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Milisekund</translation>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation type="unfinished"></translation>
+        <translation>Zarzadaj 8-bit sesji</translation>
     </message>
     <message>
         <source>Raise on bell</source>
@@ -174,11 +174,11 @@ to this account, please try later.</source>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation type="unfinished"></translation>
+        <translation>Zarzadaj wspoldzielonej sesji</translation>
     </message>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Polaczenie</translation>
     </message>
     <message>
         <source>Hextile encoding</source>

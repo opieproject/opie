@@ -3,67 +3,67 @@
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Przegladarka obrazow</translation>
     </message>
     <message>
         <source>Horizontal flip</source>
-        <translation type="unfinished"></translation>
+        <translation>Odbicie oiziome</translation>
     </message>
     <message>
         <source>Vertical flip</source>
-        <translation type="unfinished"></translation>
+        <translation>Odbicie pionowe</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Otworz</translation>
     </message>
     <message>
         <source>Rotate 180</source>
-        <translation type="unfinished"></translation>
+        <translation>Obroc o 180</translation>
     </message>
     <message>
         <source>Rotate 90</source>
-        <translation type="unfinished"></translation>
+        <translation>Obroc o 90</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelny ekran</translation>
     </message>
     <message>
         <source> - Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation> - Przegladarka obrazow</translation>
     </message>
     <message>
         <source>Loading image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Laduje obraz</translation>
     </message>
     <message>
         <source>Could not load image</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge zaladowac obrazu</translation>
     </message>
     <message>
         <source>No image - select Open from File menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak obrazu - wybierz Otworz z menu Plik</translation>
     </message>
     <message>
         <source>, %1/%2 colors</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1/%2 kolorow</translation>
     </message>
     <message>
         <source>, %1 colors</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1 kolorow</translation>
     </message>
     <message>
         <source> True color</source>
-        <translation type="unfinished"></translation>
+        <translation> Pelny kolor</translation>
     </message>
     <message>
         <source>, %1 alpha levels</source>
-        <translation type="unfinished"></translation>
+        <translation> %1 poziomow alfa</translation>
     </message>
     <message>
         <source>, 8-bit alpha channel</source>
-        <translation type="unfinished"></translation>
+        <translation> 8-bit kanal alfa</translation>
     </message>
 </context>
 </TS>

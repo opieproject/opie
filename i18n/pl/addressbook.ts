@@ -209,6 +209,18 @@ Zakonczyc?</translation>
         <source>Unfiled</source>
         <translation>nieprzydzielony</translation>
     </message>
+    <message>
+        <source>Small</source>
+        <translation>Maly</translation>
+    </message>
+    <message>
+        <source>Normal</source>
+        <translation>Normalny</translation>
+    </message>
+    <message>
+        <source>Large</source>
+        <translation>Duzy</translation>
+    </message>
 </context>
 <context>
     <name>ContactEditor</name>
@@ -274,7 +286,7 @@ Zakonczyc?</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Temat pracy</translation>
     </message>
     <message>
         <source>Company</source>

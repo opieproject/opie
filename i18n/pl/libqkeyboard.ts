@@ -3,7 +3,7 @@
     <name>InputMethods</name>
     <message>
         <source>Keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Klawiatura</translation>
     </message>
 </context>
 </TS>

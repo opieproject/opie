@@ -3,22 +3,22 @@
     <name>CommandEditDialog</name>
     <message>
         <source>Command Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybor komenty</translation>
     </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
     <message>
         <source>Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Komendy</translation>
     </message>
     <message>
         <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;B&gt;Komendy&lt;/B&gt;:</translation>
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;B&gt;Sugerowane&lt;/B&gt;:</translation>
     </message>
 </context>
 <context>
@@ -32,7 +32,7 @@
     <name>Konsole</name>
     <message>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal</translation>
     </message>
     <message>
         <source>Micro</source>
@@ -40,165 +40,165 @@
     </message>
     <message>
         <source>Small Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Male</translation>
     </message>
     <message>
         <source>Medium Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Srednie</translation>
     </message>
     <message>
         <source>Show command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyswietl liste komend</translation>
     </message>
     <message>
         <source>Hide command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukryj liste komend</translation>
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakladki na dole</translation>
     </message>
     <message>
         <source>Green on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Zielone na czarnym</translation>
     </message>
     <message>
         <source>Black on White</source>
-        <translation type="unfinished"></translation>
+        <translation>Czarne na bialym</translation>
     </message>
     <message>
         <source>White on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Biale na czarnym</translation>
     </message>
     <message>
         <source>Black on Transparent</source>
-        <translation type="unfinished"></translation>
+        <translation>Biale na przezroczystym</translation>
     </message>
     <message>
         <source>Black on Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Czarne na czerwonym</translation>
     </message>
     <message>
         <source>Red on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Czerwone na czarnym</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Zielone na zoltym</translation>
     </message>
     <message>
         <source>Blue on Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Niebieskie na magneta</translation>
     </message>
     <message>
         <source>Magenta on Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Magneta na Niebieskim</translation>
     </message>
     <message>
         <source>Cyan on White</source>
-        <translation type="unfinished"></translation>
+        <translation>Cyan na bialym</translation>
     </message>
     <message>
         <source>White on Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Biale na cyanie</translation>
     </message>
     <message>
         <source>Blue on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Niebieskie na czarnym</translation>
     </message>
     <message>
         <source>Amber on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Amber na czarnym</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolory</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Czcionka</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy</translation>
     </message>
     <message>
         <source>Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Wprowadz</translation>
     </message>
     <message>
         <source>Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Spacja</translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulator</translation>
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Gora</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Dol</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Wklej</translation>
     </message>
     <message>
         <source>Quick Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Szybka edycja</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Edycja</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Lewo</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Prawo</translation>
     </message>
     <message>
         <source>ScrollBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Przewijanie</translation>
     </message>
     <message>
         <source>Show Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyswietl liste komend</translation>
     </message>
     <message>
         <source>Hide Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukryj liste komend</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Command Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybor komendy</translation>
     </message>
 </context>
 <context>
     <name>editCommandBase</name>
     <message>
         <source>Add command</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj komende</translation>
     </message>
     <message>
         <source>Enter command to add:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wprowadz komende do dodania:</translation>
     </message>
 </context>
 </TS>

@@ -3,60 +3,60 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplikacje CPU (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>System CPU (%)</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation type="unfinished"></translation>
+        <translation>Typ:</translation>
     </message>
 </context>
 <context>
     <name>MemoryInfo</name>
     <message>
         <source>Used (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzywane (%1 kB)</translation>
     </message>
     <message>
         <source>Buffers (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Bufory (%1 kB)</translation>
     </message>
     <message>
         <source>Cached (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Podreczna (%1 kB)</translation>
     </message>
     <message>
         <source>Free (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Wolne (%1 kB)</translation>
     </message>
     <message>
         <source>Total Memory: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>Calkowita: %1 kB</translation>
     </message>
 </context>
 <context>
     <name>MountInfo</name>
     <message>
         <source> total: %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation> razem: %1 kB</translation>
     </message>
     <message>
         <source>Used (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzywane (%1 kB)</translation>
     </message>
     <message>
         <source>Available (%1 kB)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dostepne (%1 kB)</translation>
     </message>
 </context>
 <context>
     <name>ProcessDetail</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyslane</translation>
     </message>
 </context>
 <context>
@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Komenda</translation>
     </message>
     <message>
         <source>Status</source>
@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas</translation>
     </message>
 </context>
 <context>
@@ -98,22 +98,22 @@
     </message>
     <message>
         <source>Internal Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Wewnetrzna pamiec</translation>
     </message>
 </context>
 <context>
     <name>SystemInfo</name>
     <message>
         <source>System Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacja o systemie</translation>
     </message>
     <message>
         <source>Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Pamiec</translation>
     </message>
     <message>
         <source>Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Dyski</translation>
     </message>
     <message>
         <source>CPU</source>
@@ -121,30 +121,30 @@
     </message>
     <message>
         <source>Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Procesy</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Versja</translation>
     </message>
 </context>
 <context>
     <name>VersionInfo</name>
     <message>
         <source>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Linux Kernel&lt;/b&gt;&lt;p&gt;Wersja: </translation>
     </message>
     <message>
         <source>Compiled by: </source>
-        <translation type="unfinished"></translation>
+        <translation>Kompilowana przez: </translation>
     </message>
     <message>
         <source>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Version: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Opie&lt;/b&gt;&lt;p&gt;Wersja: </translation>
     </message>
     <message>
         <source>Built on: </source>
-        <translation type="unfinished"></translation>
+        <translation>Utworzona: </translation>
     </message>
 </context>
 </TS>

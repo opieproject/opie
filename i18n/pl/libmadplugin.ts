@@ -3,31 +3,31 @@
     <name>LibMadPlugin</name>
     <message>
         <source>No Song Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak otwartych piosenek</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Tytul</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Wykonawca</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Plyta</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Rok</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentarz</translation>
     </message>
     <message>
         <source>, Track: </source>
-        <translation type="unfinished"></translation>
+        <translation>, Sciezka: </translation>
     </message>
 </context>
 </TS>

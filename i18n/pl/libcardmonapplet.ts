@@ -3,15 +3,15 @@
     <name>CardMonitor</name>
     <message>
         <source>Eject card</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyjmij karte</translation>
     </message>
     <message>
         <source>CardMonitor</source>
-        <translation type="unfinished"></translation>
+        <translation>MonitorKart</translation>
     </message>
     <message>
         <source>Card eject failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyjmowanie karty nie powiodlo sie!</translation>
     </message>
     <message>
         <source>&amp;OK</source>

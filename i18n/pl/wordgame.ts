@@ -3,7 +3,7 @@
     <name>Board</name>
     <message>
         <source>Blanks: </source>
-        <translation type="unfinished"></translation>
+        <translation>Puste:</translation>
     </message>
     <message>
         <source>OK</source>
@@ -11,23 +11,23 @@
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Wroc</translation>
     </message>
     <message>
         <source>Unknown word</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieznane slowo</translation>
     </message>
     <message>
         <source>&lt;p&gt;The word &quot;%1&quot; is not in the dictionary.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Slowo &quot;%1&quot; nie wystepuje w slowniku.</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignoruj</translation>
     </message>
 </context>
 <context>
@@ -38,15 +38,15 @@
     </message>
     <message>
         <source>Players</source>
-        <translation type="unfinished"></translation>
+        <translation>Gracze</translation>
     </message>
     <message>
         <source>AI3: Smart AI player</source>
-        <translation type="unfinished"></translation>
+        <translation>AI3: Wysoka AI gracza</translation>
     </message>
     <message>
         <source>Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Reguly</translation>
     </message>
     <message>
         <source>&amp;Start</source>
@@ -57,27 +57,27 @@
     <name>RulesBase</name>
     <message>
         <source>Game Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Reguly gry</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa:</translation>
     </message>
     <message>
         <source>Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Plansza</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiar:</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Edycja...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -85,53 +85,53 @@
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Wroc</translation>
     </message>
 </context>
 <context>
     <name>ScoreInfo</name>
     <message>
         <source>&lt;P&gt;Invalid move</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Bledny ruch</translation>
     </message>
     <message>
         <source>&lt;P&gt;Score: </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Wynik: </translation>
     </message>
 </context>
 <context>
     <name>WordGame</name>
     <message>
         <source>Word Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Gra slow</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Wroc</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrobione</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamknij</translation>
     </message>
     <message>
         <source>End game</source>
-        <translation type="unfinished"></translation>
+        <translation>Koniec gry</translation>
     </message>
     <message>
         <source>Do you want to end the game early?</source>
-        <translation type="unfinished"></translation>
+        <translation>Chcesz zakonczyc gre?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie</translation>
     </message>
 </context>
 </TS>

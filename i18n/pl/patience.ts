@@ -11,51 +11,51 @@
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gra</translation>
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zmien Rewers Kart</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Skocz do pozycji></translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ustawienia</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;O</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pomoc</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Graj</translation>
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmien Rewers Kart</translation>
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Skocz do pozycji</translation>
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Obroc jedna karte</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia</translation>
     </message>
     <message>
         <source>Turn Three Cards</source>
-        <translation type="unfinished"></translation>
+        <translation>Obroc trzy karty</translation>
     </message>
 </context>
 </TS>

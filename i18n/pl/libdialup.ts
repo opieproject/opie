@@ -7,23 +7,23 @@
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Konto</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa uzytkownika:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Haslo:</translation>
     </message>
     <message>
         <source>Phone:</source>
-        <translation type="unfinished"></translation>
+        <translation>Telefon:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa:</translation>
     </message>
     <message>
         <source>Modem</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Speed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Predkosc:</translation>
     </message>
     <message>
         <source>4800</source>
@@ -71,7 +71,7 @@
     </message>
     <message>
         <source>Wait time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas oczekiwania:</translation>
     </message>
     <message>
         <source>1</source>
@@ -83,137 +83,137 @@
     </message>
     <message>
         <source>Flow control:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontrola przeplywu:</translation>
     </message>
     <message>
         <source>Hardware flow control</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprzetowa</translation>
     </message>
     <message>
         <source>Demand Dialing</source>
-        <translation type="unfinished"></translation>
+        <translation>Na zadanie</translation>
     </message>
     <message>
         <source>Manual connect and disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Reczne</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation> sekund</translation>
     </message>
     <message>
         <source>Idle timeout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas bezczynnosci</translation>
     </message>
     <message>
         <source>Automatic connect and disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatyczne</translation>
     </message>
     <message>
         <source>Manual connect, automatic disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Reczne dzwonienie, automatyczne rozlaczanie</translation>
     </message>
     <message>
         <source>Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Siec</translation>
     </message>
     <message>
         <source>Auto-detect name servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozpoznaj serwery nazw</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Brama</translation>
     </message>
     <message>
         <source>Auto-detect routing</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozpoznaj routing</translation>
     </message>
     <message>
         <source>First DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Podstawowy DNS</translation>
     </message>
     <message>
         <source>Second DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomocniczy DNS</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Proxy</translation>
     </message>
 </context>
 <context>
     <name>PppMon</name>
     <message>
         <source>Waiting for activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Oczekiwanie na aktywacje</translation>
     </message>
     <message>
         <source>Initializing modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicjalizacja modemu</translation>
     </message>
     <message>
         <source>Connecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Laczenie</translation>
     </message>
     <message>
         <source>Authenticating</source>
-        <translation type="unfinished"></translation>
+        <translation>Autoryzacja</translation>
     </message>
     <message>
         <source>No dialtone</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak sygnalu wybierania</translation>
     </message>
     <message>
         <source>No carrier</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak nosnej</translation>
     </message>
     <message>
         <source>Number is busy</source>
-        <translation type="unfinished"></translation>
+        <translation>Numer zajety</translation>
     </message>
     <message>
         <source>Timed out</source>
-        <translation type="unfinished"></translation>
+        <translation>Czas zakonczony</translation>
     </message>
     <message>
         <source>Connection failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Polaczenie nie powiodlo sie</translation>
     </message>
     <message>
         <source>Authentication Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad autoryzacji</translation>
     </message>
     <message>
         <source>Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Polaczony</translation>
     </message>
 </context>
 <context>
     <name>ProxiesPageBase</name>
     <message>
         <source>Proxy Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustwienia proxy</translation>
     </message>
     <message>
         <source>No proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Bez proxy</translation>
     </message>
     <message>
         <source>Auto configure proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatyczna konfiguracja proxy</translation>
     </message>
     <message>
         <source>Set proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw proxy</translation>
     </message>
     <message>
         <source>Config:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustwienia:</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Port:</translation>
     </message>
     <message>
         <source>HTTP:</source>
@@ -229,7 +229,7 @@
     </message>
     <message>
         <source>No proxies for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bezposrednio dla:</translation>
     </message>
 </context>
 </TS>

@@ -7,19 +7,19 @@
     </message>
     <message>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastepny</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Wynik</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Poziom</translation>
     </message>
     <message>
         <source>Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Usunietych</translation>
     </message>
     <message>
         <source>Start</source>

@@ -3,46 +3,46 @@
     <name>NewTaskDialog</name>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista ZrobTo</translation>
     </message>
 </context>
 <context>
     <name>NewTaskDialogBase</name>
     <message>
         <source>New Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy proces</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorytet:</translation>
     </message>
     <message>
         <source>1 - Very High</source>
-        <translation type="unfinished"></translation>
+        <translation>1 - Bardzo wysoki</translation>
     </message>
     <message>
         <source>2 - High</source>
-        <translation type="unfinished"></translation>
+        <translation>2 - Wysoki</translation>
     </message>
     <message>
         <source>3 - Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>3 - Normalny</translation>
     </message>
     <message>
         <source>4 - Low</source>
-        <translation type="unfinished"></translation>
+        <translation>4 - Niski</translation>
     </message>
     <message>
         <source>5 - Very Low</source>
-        <translation type="unfinished"></translation>
+        <translation>5 - Bardzo niski</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategoria:</translation>
     </message>
     <message>
         <source>&amp;Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kompletny</translation>
     </message>
     <message>
         <source>D&amp;ue</source>
@@ -65,15 +65,15 @@
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieprzypisany</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystkie</translation>
     </message>
     <message>
         <source>Deadline</source>
@@ -84,11 +84,11 @@
     <name>TodoWindow</name>
     <message>
         <source>Todo</source>
-        <translation type="unfinished"></translation>
+        <translation>ZrobTo</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak pamieci</translation>
     </message>
     <message>
         <source>Unable to create startup files
@@ -98,15 +98,15 @@ before you enter any data</source>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy proces</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Edycja</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -114,19 +114,19 @@ before you enter any data</source>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Znajdz</translation>
     </message>
     <message>
         <source>Completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Zakonczonych procesow</translation>
     </message>
     <message>
         <source>Task</source>
-        <translation type="obsolete"></translation>
+        <translation>Proces</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Widok</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -134,19 +134,19 @@ before you enter any data</source>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Edycja procesu</translation>
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystkie kategorie</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieprzypisany</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak pamieci</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -159,7 +159,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Show Deadline</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyswietl Deadline</translation>
     </message>
     <message>
         <source>Data</source>
@@ -167,7 +167,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Czcionka</translation>
     </message>
 </context>
 </TS>

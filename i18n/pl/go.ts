@@ -3,7 +3,7 @@
     <name>GoMainWidget</name>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowa gra</translation>
     </message>
     <message>
         <source>Pass</source>
@@ -15,26 +15,26 @@
     </message>
     <message>
         <source>Two player option</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje dla 2 graczy</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Gra</translation>
     </message>
 </context>
 <context>
     <name>GoWidget</name>
     <message>
         <source>White %1, Black %2. </source>
-        <translation type="unfinished"></translation>
+        <translation>Biale %1, Czarne %2.</translation>
     </message>
     <message>
         <source>White wins.</source>
-        <translation type="unfinished"></translation>
+        <translation>Biale wygraly.</translation>
     </message>
     <message>
         <source>Black wins.</source>
-        <translation type="unfinished"></translation>
+        <translation>Czarne wygraly.</translation>
     </message>
     <message>
         <source>A draw.</source>
@@ -46,11 +46,11 @@
     </message>
     <message>
         <source>Prisoners: black %1, white %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiezniowie: czarni %1, biali %2</translation>
     </message>
     <message>
         <source>Go</source>
-        <translation type="unfinished"></translation>
+        <translation>Go</translation>
     </message>
 </context>
 </TS>

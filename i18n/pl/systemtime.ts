@@ -3,66 +3,66 @@
     <name>SetDateTime</name>
     <message>
         <source>Set System Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw czas systemowy</translation>
     </message>
     <message>
         <source>Time Zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Strefa czasowa</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Time format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format czasu</translation>
     </message>
     <message>
         <source>24 hour</source>
-        <translation type="unfinished"></translation>
+        <translation>24 godziny</translation>
     </message>
     <message>
         <source>12 hour</source>
-        <translation type="unfinished"></translation>
+        <translation>12 godzin</translation>
     </message>
     <message>
         <source>Weeks start on</source>
-        <translation type="unfinished"></translation>
+        <translation>Tydzien zaczyna sie w</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Niedziele</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Poniedzialek</translation>
     </message>
     <message>
         <source>Date format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format daty</translation>
     </message>
     <message>
         <source>Applet format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format apletu</translation>
     </message>
     <message>
         <source>hh:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>gg:mm</translation>
     </message>
     <message>
         <source>D/M hh:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>D/M gg:mm</translation>
     </message>
 </context>
 <context>
     <name>SetTime</name>
     <message>
         <source>Hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Godzin</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuta</translation>
     </message>
     <message>
         <source>AM</source>

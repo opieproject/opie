@@ -10,50 +10,50 @@
     <name>MediaPlayer</name>
     <message>
         <source>No file</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak pliku</translation>
     </message>
     <message>
         <source>Error: There is no file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad: nie wybrano pliku</translation>
     </message>
     <message>
         <source>File not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Plik nieznaleziony</translation>
     </message>
     <message>
         <source>The following file was not found: &lt;i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastepujacy plik nie zostal znaleziony: &lt;i&gt;</translation>
     </message>
     <message>
         <source>No decoder found</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak dekodera</translation>
     </message>
     <message>
         <source>Sorry, no appropriate decoders found for this file: &lt;i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak dekodara dla tego pliku: &lt;i&gt;</translation>
     </message>
     <message>
         <source>Error opening file</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad otwarcia pliku</translation>
     </message>
     <message>
         <source>Sorry, an error occured trying to play the file: &lt;i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad podczas proby odtwarzania pliku: &lt;i&gt;</translation>
     </message>
     <message>
         <source> File: </source>
-        <translation type="unfinished"></translation>
+        <translation> Plik: </translation>
     </message>
     <message>
         <source>, Length: </source>
-        <translation type="unfinished"></translation>
+        <translation>, Dlugosc: </translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Playlist Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybor listy odtwarzania</translation>
     </message>
 </context>
 <context>
@@ -64,83 +64,83 @@
     </message>
     <message>
         <source>Play Operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Operacje odtwarzania</translation>
     </message>
     <message>
         <source>Add to Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj do listy odtwarzania</translation>
     </message>
     <message>
         <source>Remove from Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun z listy odtwarzania</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Graj</translation>
     </message>
     <message>
         <source>Randomize</source>
-        <translation type="unfinished"></translation>
+        <translation>Losowo</translation>
     </message>
     <message>
         <source>Loop</source>
-        <translation type="unfinished"></translation>
+        <translation>Petla</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Plik</translation>
     </message>
     <message>
         <source>Clear List</source>
-        <translation type="unfinished"></translation>
+        <translation>Czysc liste</translation>
     </message>
     <message>
         <source>Add all audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj wszystkie pliki dzwiekowe</translation>
     </message>
     <message>
         <source>Add all video files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj wszystkie pliki filmowe</translation>
     </message>
     <message>
         <source>Add all files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj wszystkie pliki</translation>
     </message>
     <message>
         <source>Save PlayList</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz liste odtwarzania</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Widok</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pelen ekran</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>W gore</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>W dol</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Tytul</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <source>Media</source>
@@ -164,55 +164,59 @@
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Brak pamieci</translation>
     </message>
     <message>
         <source>There was a problem saving the playlist.
 Your playlist may be missing some entries
 the next time you start it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Jest problem z zapisaniem listy.
+Twoja playliste moze byc niekompletan
+po nastepnym odczycie.</translation>
     </message>
     <message>
         <source>Invalid File</source>
-        <translation type="unfinished"></translation>
+        <translation>Bledny plik</translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Napotkalem problem w pobieraniu pliku.</translation>
     </message>
     <message>
         <source>Save Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz liste</translation>
     </message>
     <message>
         <source>This is all ready in your playlist.
 Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>To juz jest w twojej liscie.
+Kontynuowac?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>NIe</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun liste?</translation>
     </message>
     <message>
         <source>You really want to delete
 this playlist?</source>
-        <translation type="unfinished"></translation>
+        <translation>Naprawde chcesz usunac
+liste?</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Wlasciwosci</translation>
     </message>
     <message>
         <source>Play Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Odtwarzaj wybrane</translation>
     </message>
 </context>
 <context>

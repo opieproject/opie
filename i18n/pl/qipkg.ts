@@ -3,83 +3,86 @@
     <name>PackageDetails</name>
     <message>
         <source>(pkgname)</source>
-        <translation type="unfinished"></translation>
+        <translation>(nazwa pakietu)</translation>
     </message>
     <message>
         <source>Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Instaluj</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignoruj</translation>
     </message>
 </context>
 <context>
     <name>PackageManager</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystkie</translation>
     </message>
     <message>
         <source>Install Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Zainstaluj pakiet</translation>
     </message>
     <message>
         <source>Are you sure you want to
 install package
 
 %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Jestes pewien ze chcesz
+zainstalowac pakiet
+
+%1</translation>
     </message>
 </context>
 <context>
     <name>PackageManagerBase</name>
     <message>
         <source>Package Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Instalator pakietow</translation>
     </message>
     <message>
         <source>Section:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekcja:</translation>
     </message>
     <message>
         <source>Upgrade all</source>
-        <translation type="unfinished"></translation>
+        <translation>Uaktualnij wszystko</translation>
     </message>
     <message>
         <source>Do it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Zrob to!</translation>
     </message>
     <message>
         <source>Package</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakiet</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiar</translation>
     </message>
 </context>
 <context>
     <name>PackageManagerSettings</name>
     <message>
         <source>Package Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Serwery pakietow</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa:</translation>
     </message>
     <message>
         <source>URL:</source>
@@ -87,26 +90,26 @@ install package
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Serwery</translation>
     </message>
 </context>
 <context>
     <name>Search</name>
     <message>
         <source>Search Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Szukaj pakietu</translation>
     </message>
     <message>
         <source>Find:</source>
-        <translation type="unfinished"></translation>
+        <translation>Znajdz:</translation>
     </message>
 </context>
 </TS>

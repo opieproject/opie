@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Polaczenia</translation>
     </message>
     <message>
         <source>Local</source>
@@ -15,43 +15,43 @@
     </message>
     <message>
         <source>Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdalne</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Widok</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Polacz</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozlacz</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokaz ukryte pliki</translation>
     </message>
     <message>
         <source>Upload</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaladuj</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy katalog</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmien nazwe</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun</translation>
     </message>
     <message>
         <source>Download</source>
@@ -59,47 +59,47 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Przelacz na lokalny</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Przelacz na zdalny</translation>
     </message>
     <message>
         <source>Switch to Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Przelacz na konfiguracje</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Plik</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Katalog</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation>Username</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Haslo</translation>
     </message>
     <message>
         <source>Remote server</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdalny serwer</translation>
     </message>
     <message>
         <source>Remote path</source>
-        <translation type="unfinished"></translation>
+        <translation>Zdalna sciezka</translation>
     </message>
     <message>
         <source>Port</source>
@@ -107,7 +107,7 @@
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia</translation>
     </message>
     <message>
         <source>Ftp</source>
@@ -115,7 +115,7 @@
     </message>
     <message>
         <source>Please set the server info</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosze ustawic informacje o serwerze</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -123,101 +123,115 @@
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Notatka</translation>
     </message>
     <message>
         <source>Unable to connect to
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge polaczyc do
+</translation>
     </message>
     <message>
         <source>Unable to log in
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge sie zalogowac w
+</translation>
     </message>
     <message>
         <source>Unable to upload
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge zaladowac
+</translation>
     </message>
     <message>
         <source>Cannot upload directories</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge zaladowac katalogow</translation>
     </message>
     <message>
         <source>Unable to download 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge sciagnac
+</translation>
     </message>
     <message>
         <source>Unable to list the directory
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge wylistowac katalogu
+</translation>
     </message>
     <message>
         <source>Unable to change directories
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge zmienic katalogow
+</translation>
     </message>
     <message>
         <source>Unable to cd up
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge zmienic katalogu w gore
+</translation>
     </message>
     <message>
         <source>Unable to get working dir
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge pobrac katalogu
+</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmien katalog</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Naprawde chcesz skasowac
+</translation>
     </message>
     <message>
         <source> ?
 It must be empty</source>
-        <translation type="unfinished"></translation>
+        <translation> ?
+To musi byc puste</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <source>Unable to make directory
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge utworzyc katalogu
+</translation>
     </message>
     <message>
         <source>Unable to remove directory
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge usunac katalogu
+</translation>
     </message>
     <message>
         <source>Unable to delete file
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge usunac pliku
+</translation>
     </message>
     <message>
         <source>Unable to rename file
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge zmienic nazwy
+</translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie moge zmienic nazwy</translation>
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Ten katalog nie istnieje</translation>
     </message>
 </context>
 </TS>

@@ -3,27 +3,27 @@
     <name>KCheckers</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowa</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyjdz</translation>
     </message>
     <message>
         <source>Beginner</source>
-        <translation type="unfinished"></translation>
+        <translation>Poczatkujacy</translation>
     </message>
     <message>
         <source>Novice</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowicjusz</translation>
     </message>
     <message>
         <source>Average</source>
-        <translation type="unfinished"></translation>
+        <translation>Przecietny</translation>
     </message>
     <message>
         <source>Good</source>
-        <translation type="unfinished"></translation>
+        <translation>Dobry</translation>
     </message>
     <message>
         <source>Expert</source>
@@ -31,51 +31,51 @@
     </message>
     <message>
         <source>Master</source>
-        <translation type="unfinished"></translation>
+        <translation>Wladca</translation>
     </message>
     <message>
         <source>English Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Reguly angielskie</translation>
     </message>
     <message>
         <source>Russian Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Reguly rosyjskie</translation>
     </message>
     <message>
         <source>Marble Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Marmurowa</translation>
     </message>
     <message>
         <source>Wooden Board</source>
-        <translation type="unfinished"></translation>
+        <translation>Drewniana</translation>
     </message>
     <message>
         <source>What&apos;s This</source>
-        <translation type="unfinished"></translation>
+        <translation>Co to jest</translation>
     </message>
     <message>
         <source>About KCheckers</source>
-        <translation type="unfinished"></translation>
+        <translation>O warcabach</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>O &amp;Qt</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Gra</translation>
     </message>
     <message>
         <source>Skill</source>
-        <translation type="unfinished"></translation>
+        <translation>Poziom</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcje</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomoc</translation>
     </message>
     <message>
         <source>Go!</source>
@@ -83,19 +83,19 @@
     </message>
     <message>
         <source>Congratulation! You have won!</source>
-        <translation type="unfinished"></translation>
+        <translation>Gratulacje! Wygrales!</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosze czekac...</translation>
     </message>
     <message>
         <source>You have lost. Game over.</source>
-        <translation type="unfinished"></translation>
+        <translation>Przegrales. Koniec gry</translation>
     </message>
     <message>
         <source>Incorrect course.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bledny ruch</translation>
     </message>
 </context>
 </TS>

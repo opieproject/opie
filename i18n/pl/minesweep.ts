@@ -3,23 +3,23 @@
     <name>MineSweep</name>
     <message>
         <source>You won!</source>
-        <translation type="unfinished"></translation>
+        <translation>Wygrales!</translation>
     </message>
     <message>
         <source>You exploded!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ekspodowales!</translation>
     </message>
     <message>
         <source>Mine Hunt</source>
-        <translation type="unfinished"></translation>
+        <translation>Saper</translation>
     </message>
     <message>
         <source>Beginner</source>
-        <translation type="unfinished"></translation>
+        <translation>Poczatkujacy</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaawansowany</translation>
     </message>
     <message>
         <source>Expert</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Gra</translation>
     </message>
 </context>
 </TS>

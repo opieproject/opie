@@ -3,7 +3,7 @@
     <name>SoundSettingsBase</name>
     <message>
         <source>Sound Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustawienia dzwieku</translation>
     </message>
     <message>
         <source>Vmemo</source>
@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Czestotliwosc probek</translation>
     </message>
     <message>
         <source>11025</source>
@@ -39,31 +39,31 @@
     </message>
     <message>
         <source>Screen sounds</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzwieki z ekranu</translation>
     </message>
     <message>
         <source>Keyboard sounds</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzwieki z klawiatury</translation>
     </message>
     <message>
         <source>Levels</source>
-        <translation type="unfinished"></translation>
+        <translation>Poziomy</translation>
     </message>
     <message>
         <source>Loud</source>
-        <translation type="unfinished"></translation>
+        <translation>Glosno</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Wyjscie</translation>
     </message>
     <message>
         <source>Mic</source>
-        <translation type="unfinished"></translation>
+        <translation>Mikrofon</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation type="unfinished"></translation>
+        <translation>Cicho</translation>
     </message>
 </context>
 </TS>

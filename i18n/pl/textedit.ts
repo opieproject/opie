@@ -3,15 +3,15 @@
     <name>FontDialog</name>
     <message>
         <source>FontDialog</source>
-        <translation type="unfinished"></translation>
+        <translation>WyborCzcionki</translation>
     </message>
     <message>
         <source>Font Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Wybor czcionki</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <source>Font</source>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Font Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Styl</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
@@ -30,55 +30,55 @@
     <name>TextEdit</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Otworz</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz jako</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Wytnij</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiuj</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Wklej</translation>
     </message>
     <message>
         <source>Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>Znajdz...</translation>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>Powieksz</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>Pomniejsz</translation>
     </message>
     <message>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogrobiona</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Pochyla</translation>
     </message>
     <message>
         <source>Wrap lines</source>
-        <translation type="unfinished"></translation>
+        <translation>Zawijal linie</translation>
     </message>
     <message>
         <source>Font</source>
@@ -86,101 +86,103 @@
     </message>
     <message>
         <source>Start with new file</source>
-        <translation type="unfinished"></translation>
+        <translation>Zacznij w nowym pliku</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Plik</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Edycja</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Widok</translation>
     </message>
     <message>
         <source>Find Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Znajdz nastepny</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamknij wyszukiwanie</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun</translation>
     </message>
     <message>
         <source>Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Edytor tekstu</translation>
     </message>
     <message>
         <source>Unnamed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nienazwany</translation>
     </message>
     <message>
         <source>Save File As?</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapisz plik jako</translation>
     </message>
     <message>
         <source>Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Uprawnienia</translation>
     </message>
     <message>
         <source>FontDialog</source>
-        <translation type="unfinished"></translation>
+        <translation>WyborCzcionki</translation>
     </message>
     <message>
         <source>Do you really want
 to delete the current file
 from the disk?
 This is irreversable!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Czy naprawde
+chcesz usunac ten plikz dysku?
+To jest nieodwracalne!</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Tak</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie</translation>
     </message>
 </context>
 <context>
     <name>fileBrowser</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumenty</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystkie pliki</translation>
     </message>
     <message>
         <source>Hidden files</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukryte pliki</translation>
     </message>
     <message>
         <source>Type: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ: %1</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmiana katalogu</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Nowy katalog</translation>
     </message>
     <message>
         <source>Rescan</source>
@@ -188,82 +190,82 @@ This is irreversable!!</source>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmien nazwe</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Usun</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Wszystkie</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation>UprawnieniaPlikow</translation>
     </message>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw uprawnienia</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw uprawnienia dla:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>wlasciciel</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>grupa</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>inni</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Wlasciciel</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupa</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation>odczyt</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation>zapis</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>wykonywanie</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Uwaga</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad- nie ma uzytkownika</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad- brak grupy</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad ustawiania uprawnien</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad ustawienia trybu</translation>
     </message>
 </context>
 <context>
@@ -274,19 +276,19 @@ This is irreversable!!</source>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nazwa</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Rozmiar</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>set file permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>ustaw uprawnienia do pliku</translation>
     </message>
 </context>
 </TS>
