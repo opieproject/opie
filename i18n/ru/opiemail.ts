@@ -3,552 +3,552 @@
     <name>AccountView</name>
     <message>
         <source>Error creating new Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка создания новой папки</translation>
     </message>
     <message>
         <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Ошибка во время создания&lt;br&gt;новой папки - останавливаю.&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
     <name>AddressPicker</name>
     <message>
         <source>There are no entries in the addressbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>В адресной книге нет записей.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to select at least one address entry.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Вы должны выбрать хотя бы один адрес.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
 </context>
 <context>
     <name>AddressPickerUI</name>
     <message>
         <source>Address Picker</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбор адреса</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
 </context>
 <context>
     <name>ComposeMail</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Problem</source>
-        <translation type="unfinished"></translation>
+        <translation>Проблема</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please create an SMTP account first.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Пожалуйста сначала создайте SMTP запись.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select a File.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Пожалуйста выберите файл.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>ComposeMailUI</name>
     <message>
         <source>Compose Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Написать письмо</translation>
     </message>
     <message>
         <source>send later</source>
-        <translation type="unfinished"></translation>
+        <translation>отправить позже</translation>
     </message>
     <message>
         <source>use:</source>
-        <translation type="unfinished"></translation>
+        <translation>использовать:</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Почта</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Тема</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>От</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Кому</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>Reply-To</source>
-        <translation type="unfinished"></translation>
+        <translation>Обр. адрес</translation>
     </message>
     <message>
         <source>BCC</source>
-        <translation type="unfinished"></translation>
+        <translation>BCC</translation>
     </message>
     <message>
         <source>Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Подпись</translation>
     </message>
     <message>
         <source>CC</source>
-        <translation type="unfinished"></translation>
+        <translation>CC</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>Вложение</translation>
     </message>
     <message>
         <source>Delete File</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить файл</translation>
     </message>
     <message>
         <source>Add File</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить файл</translation>
     </message>
 </context>
 <context>
     <name>EditAccounts</name>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Учетная запись</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Вопрос</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete the selected Account?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Вы действительно хотите удалить выбранную учетную запись?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select an account.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Пожалуйста выберите учетную запись.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
 </context>
 <context>
     <name>EditAccountsUI</name>
     <message>
         <source>Configure Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить учетные записи</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Почта</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Новый</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя учетной записи</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Правка</translation>
     </message>
     <message>
         <source>News</source>
-        <translation type="unfinished"></translation>
+        <translation>Новости</translation>
     </message>
 </context>
 <context>
     <name>IMAPconfigUI</name>
     <message>
         <source>Configure IMAP</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить IMAP</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Исп. SSL</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервер</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя учетной записи</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Учетная запись</translation>
     </message>
     <message>
         <source>Prefix</source>
-        <translation type="unfinished"></translation>
+        <translation>Префикс</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Почта</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <source>Compose new mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать новое сообщение</translation>
     </message>
     <message>
         <source>Send queued mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Отослать письма из очереди</translation>
     </message>
     <message>
         <source>Show/Hide folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать/скрыть папки</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить сообщение</translation>
     </message>
     <message>
         <source>Edit settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить настройки</translation>
     </message>
     <message>
         <source>Configure accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить учетные записи</translation>
     </message>
     <message>
         <source>Mailbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Почтовый ящик</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Тема</translation>
     </message>
     <message>
         <source>Sender</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправитель</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата</translation>
     </message>
 </context>
 <context>
     <name>NNTPconfigUI</name>
     <message>
         <source>Configure NNTP</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить NNTP</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя учетной записи</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Учетная запись</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервер</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Исп. SSL</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <source>Use Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Исп. регистрацию</translation>
     </message>
 </context>
 <context>
     <name>Newmdirdlgui</name>
     <message>
         <source>Enter directory name</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите имя папки</translation>
     </message>
     <message>
         <source>Directory name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя папки:</translation>
     </message>
     <message>
         <source>Directory contains other subdirs</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка содержит другие подпапки</translation>
     </message>
 </context>
 <context>
     <name>OpieMail</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация</translation>
     </message>
     <message>
         <source>Mail queue flushed</source>
-        <translation type="unfinished"></translation>
+        <translation>Вся очередь писем отправлена</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить сообщение</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Вы действительно хотите удалить это сообщение? &lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>Read this mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочитать это сообщение</translation>
     </message>
     <message>
         <source>Delete this mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить это сообщение</translation>
     </message>
     <message>
         <source>Copy/Move this mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Скопировать/переместить это сообщение</translation>
     </message>
     <message>
         <source>Error creating new Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка создания новой папки</translation>
     </message>
     <message>
         <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Ошибка во время создания&lt;br&gt;новой папки - останавливаю.&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
     <name>POP3configUI</name>
     <message>
         <source>Configure POP3</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить POP3</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Учетная запись</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя учетной записи</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервер</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать защищенные сокеты:</translation>
     </message>
     <message>
         <source>ssh $SERVER exec imapd</source>
-        <translation type="unfinished"></translation>
+        <translation>ssh $SERVER exec imapd</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль</translation>
     </message>
 </context>
 <context>
     <name>SMTPconfigUI</name>
     <message>
         <source>Configure SMTP</source>
-        <translation type="unfinished"></translation>
+        <translation>Настроить SMTP</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Учетная запись</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Исп. SSL</translation>
     </message>
     <message>
         <source>Use Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Исп. регистрацию</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя учетной записи</translation>
     </message>
     <message>
         <source>Name of the SMTP Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя SMTP сервера</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервер</translation>
     </message>
     <message>
         <source>Port of the SMTP Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Порт SMTP сервера</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь</translation>
     </message>
 </context>
 <context>
     <name>SelectMailTypeUI</name>
     <message>
         <source>Select Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите тип</translation>
     </message>
     <message>
         <source>Select Account Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите тип учетной записи</translation>
     </message>
     <message>
         <source>IMAP</source>
-        <translation type="unfinished"></translation>
+        <translation>IMAP</translation>
     </message>
     <message>
         <source>POP3</source>
-        <translation type="unfinished"></translation>
+        <translation>POP3</translation>
     </message>
     <message>
         <source>SMTP</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialogUI</name>
     <message>
         <source>Settings Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалог настроек</translation>
     </message>
     <message>
         <source>View Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотреть почту</translation>
     </message>
     <message>
         <source>View mail as Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотреть почту как HTML</translation>
     </message>
     <message>
         <source>Compose Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать сообщение</translation>
     </message>
     <message>
         <source>Send mails later ( enqueue in outbox )</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить почту позже ( очередь в папке &quot;исходящие&quot; )</translation>
     </message>
     <message>
         <source>Taskbar Applet</source>
-        <translation type="unfinished"></translation>
+        <translation>Апплет на панели</translation>
     </message>
     <message>
         <source>Disable Taskbar Applet</source>
-        <translation type="unfinished"></translation>
+        <translation>Запретить апплет на панели</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>мин</translation>
     </message>
     <message>
         <source>Check how often</source>
-        <translation type="unfinished"></translation>
+        <translation>Как часто проверять</translation>
     </message>
     <message>
         <source>Blink Led when new mails arrive</source>
-        <translation type="unfinished"></translation>
+        <translation>Зажигать светодиод когда есть новая почта</translation>
     </message>
     <message>
         <source>Play Sound when new mails arrive</source>
-        <translation type="unfinished"></translation>
+        <translation>Проигрывать звук когда есть новая почта</translation>
     </message>
 </context>
 <context>
@@ -566,125 +566,125 @@
     <name>ViewMail</name>
     <message>
         <source>Show Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать текст</translation>
     </message>
     <message>
         <source>Save Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить вложение</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>От</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Кому</translation>
     </message>
     <message>
         <source>Cc</source>
-        <translation type="unfinished"></translation>
+        <translation>Cc</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot reply yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Тело сообщения еще не скачано, так что вы еще не можете ответить.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot forward yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Тело сообщения еще не скачано, так что вы еще не можете переслать.</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить сообщение</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Вы действительно хотите удалить это сообщение? &lt;br&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
     <name>ViewMailBase</name>
     <message>
         <source>E-Mail by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>E-Mail от %1</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Почта</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Ответить</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Переслать</translation>
     </message>
     <message>
         <source>Attachments</source>
-        <translation type="unfinished"></translation>
+        <translation>Вложения</translation>
     </message>
     <message>
         <source>Show Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать HTML</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить сообщение</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Описание</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя файла</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер</translation>
     </message>
 </context>
 <context>
     <name>selectstoreui</name>
     <message>
         <source>Select target box</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите целевой ящик</translation>
     </message>
     <message>
         <source>&lt;b&gt;Store mail(s) to&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Хранить почту в&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка:</translation>
     </message>
     <message>
         <source>Account:</source>
-        <translation type="unfinished"></translation>
+        <translation>Учетная запись:</translation>
     </message>
     <message>
         <source>Create new folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать новую папку</translation>
     </message>
     <message>
         <source>Prefix will prepend, no need to enter it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Префикс будет добавлен, не нужно его вводить!</translation>
     </message>
     <message>
         <source>Move mail(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить почту</translation>
     </message>
 </context>
 </TS>
