@@ -4,6 +4,8 @@
 #include <qlabel.h>
 #include <qpopupmenu.h>
 #include <qtoolbar.h>
+#include <qpe/resource.h>
+
 
 #include "profileeditordialog.h"
 #include "configdialog.h"
@@ -14,6 +16,7 @@
 #include "mainwindow.h"
 #include "tabwidget.h"
 #include "transferdialog.h"
+#include "function_keyboard.h"
 
 MainWindow::MainWindow() {
     m_factory = new MetaFactory();
@@ -29,6 +32,7 @@ MainWindow::MainWindow() {
 void MainWindow::initUI() {
     setToolBarsMovable( FALSE  );
 
+    /* tool bar for the menu */
     m_tool = new QToolBar( this );
     m_tool->setHorizontalStretchable( TRUE );
 
@@ -36,6 +40,10 @@ void MainWindow::initUI() {
     m_console = new QPopupMenu( this );
     m_sessionsPop= new QPopupMenu( this );
     m_settings = new QPopupMenu( this );
+
+    /* add a toolbar for icons */
+    m_icons = new QToolBar(this);
+    m_icons->setHorizontalStretchable( TRUE );
 
     /*
      * new Action for new sessions
@@ -94,6 +102,20 @@ void MainWindow::initUI() {
     connect( m_setProfiles, SIGNAL(activated() ),
              this, SLOT(slotConfigure() ) );
 
+    /*
+     * action that open/closes the keyboard
+     */
+    m_openKeys = new QAction ("Keyboard...", 
+                             Resource::loadPixmap( "down" ), 
+                             QString::null, 0, this, 0);
+
+    m_openKeys->setToggleAction(true);
+
+    connect (m_openKeys, SIGNAL(toggled(bool)), 
+             this, SLOT(slotOpenKeb(bool)));
+    m_openKeys->addTo(m_icons);
+    
+
     /* insert the submenu */
     m_console->insertItem(tr("New from Profile"), m_sessionsPop,
                           -1, 0);
@@ -104,6 +126,14 @@ void MainWindow::initUI() {
     /* the settings menu */
     m_bar->insertItem( tr("Settings"), m_settings );
 
+    /* and the keyboard */
+    m_keyBar = new QToolBar(this);
+    addToolBar( m_keyBar,  "Keyboard", QMainWindow::Top, TRUE );
+    m_keyBar->setHorizontalStretchable( TRUE );
+    m_keyBar->hide();
+
+    m_kb = new FunctionKeyboard(m_keyBar);
+             
     /*
      * connect to the menu activation
      */
@@ -233,3 +263,10 @@ void MainWindow::slotTransfer()
     }
 }
 
+
+void MainWindow::slotOpenKeb(bool state) {
+
+    if (state) m_keyBar->show();
+    else m_keyBar->hide();
+
+}

@@ -12,12 +12,14 @@
  * actions supported by the gui
  */
 class QToolBar;
+class QToolButton;
 class QMenuBar;
 class QAction;
 class MetaFactory;
 class TabWidget;
 class ProfileManager;
 class Profile;
+class FunctionKeyboard;
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
@@ -56,6 +58,7 @@ private slots:
     void slotClose();
     void slotProfile(int);
 	void slotTransfer();
+    void slotOpenKeb(bool);
 
 private:
     void initUI();
@@ -79,6 +82,8 @@ private:
 
     TabWidget* m_consoleWindow;
     QToolBar* m_tool;
+    QToolBar* m_icons;
+    QToolBar* m_keyBar;
     QMenuBar* m_bar;
     QPopupMenu* m_console;
     QPopupMenu* m_settings;
@@ -88,7 +93,9 @@ private:
     QAction* m_terminate;
 	QAction* m_transfer;
     QAction* m_setProfiles;
+    QAction* m_openKeys;
 
+    FunctionKeyboard *m_kb;
 };
 
 
