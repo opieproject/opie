@@ -1349,15 +1349,15 @@ gratuitement!</translation>
     <name>QObject</name>
     <message>
         <source>Business Phone</source>
-        <translation>Tél. (Bureau)</translation>
+        <translation>Tél. (Bur.)</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Fax (Bureau)</translation>
+        <translation>Fax (Bur.)</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Port. (Bureau)</translation>
+        <translation>Port. (Bur.)</translation>
     </message>
     <message>
         <source>Default Email</source>
@@ -1369,15 +1369,15 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Tél. (Domicile)</translation>
+        <translation>Tél. (Dom.)</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Fax (Domicile)</translation>
+        <translation>Fax (Dom.)</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Port. (Domicile)</translation>
+        <translation>Port. (Dom.)</translation>
     </message>
     <message>
         <source>Office</source>
