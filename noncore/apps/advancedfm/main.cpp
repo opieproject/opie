@@ -16,6 +16,7 @@
 
 #include "advancedfm.h"
 
+#ifdef NOQUICKLAUNCH
 int main(int argc, char *argv[])
 {
     QPEApplication a(argc, argv);
@@ -24,4 +25,9 @@ int main(int argc, char *argv[])
     a.showMainWidget( &advencedFm);
     return a.exec();
 }
+#else
+#include <opie/oapplicationfactory.h>
 
+OPIE_EXPORT_APP( OApplicationFactory<AdvancedFm> )
+
+#endif

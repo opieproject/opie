@@ -49,7 +49,11 @@
 #include <sys/vfs.h>
 #include <mntent.h>
 
+#ifdef NOQUICKLAUNCH
 AdvancedFm::AdvancedFm( )
+#else
+AdvancedFm::AdvancedFm(QWidget *,const char*, WFlags )
+#endif
    : QMainWindow( ) {
    init();
    renameBox = 0;
@@ -103,13 +107,13 @@ void AdvancedFm::tabChanged(QWidget *) {
 
 void AdvancedFm::populateView() {
 
-qWarning("PopulateView");
+// qWarning("PopulateView");
 		QPixmap pm;
 		QListView *thisView = CurrentView();
 		QDir *thisDir = CurrentDir();
 		QString path = thisDir->canonicalPath();
 
-qWarning("path is "+path);
+//qWarning("path is "+path);
 		thisView->clear();
 		thisDir->setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
 		thisDir->setMatchAllDirs(TRUE);
@@ -813,7 +817,7 @@ QListView * AdvancedFm::OtherView() {
 }
 
 void AdvancedFm::setOtherTabCurrent() {
-   qWarning("setOtherTabCurrent() %d", whichTab);
+//   qWarning("setOtherTabCurrent() %d", whichTab);
    if ( whichTab == 1) {
       TabWidget->setCurrentWidget(1);
    } else {
