@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=Tab Managing Tool
+Exec=tabmanager
+Icon=tabmanager/tabmanager
+Type=Settings
+Name=Tab Manager

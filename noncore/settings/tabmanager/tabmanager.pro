@@ -1,0 +1,11 @@
+TEMPLATE	= app
+#CONFIG		= qt warn_on debug
+CONFIG		= qt warn_on release
+HEADERS		= tabmanager.h tabmainwindow.h app.h tablistview.h tabmanagerbase.h tabapplnk.h
+SOURCES		= main.cpp tabmanager.cpp app.cpp tabmanagerbase.cpp
+INCLUDEPATH	+= $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
+LIBS            += -lqpe
+#INTERFACES	= tabmanagerbase.ui
+TARGET		= tabmanager
+DESTDIR 	= $(OPIEDIR)/bin

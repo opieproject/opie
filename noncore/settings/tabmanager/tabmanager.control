@@ -1,0 +1,9 @@
+File: bin/tabmanager apps/Settings/tabmanager.desktop pics/tabmanager/tabmanager.png
+Package: tabmanager
+Priority: optional
+Version: 1.0
+Architecture: arm
+Maintainer: Benjamin Meyer <meyerb@sharpsec.com>
+Section: Settings
+Description: Tab Manager
+	Helps to manage the Applications tab
