@@ -1,7 +1,7 @@
-Files: bin/textedit apps/Applications/textedit.desktop pics/textedit
+Files: bin/textedit apps/1Pim/textedit.desktop pics/textedit
 Priority: optional
 Section: opie/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: L. J. Potter <llornkcor@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION)
