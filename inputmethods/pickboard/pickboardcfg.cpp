@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -34,7 +34,9 @@
 #include <qhbuttongroup.h>
 #include <qpushbutton.h>
 #include <qmessagebox.h>
+#ifdef QWS
 #include <qwindowsystem_qws.h>
+#endif
 
 static const char * pickboard_help =
     "<h1>The Pickboard</h1>"
@@ -76,8 +78,12 @@ void PickboardConfig::generateText(const QString& s)
 {
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
     for (int i=0; i<(int)s.length(); i++) {
-	parent->emitKey(s[i].unicode(), 0, 0, true, false);
-	parent->emitKey(s[i].unicode(), 0, 0, false, false);
+	uint code = 0;
+	if ( s[i].unicode() >= 'a' && s[i].unicode() <= 'z' ) {
+	    code = s[i].unicode() - 'a' + Key_A;
+	}
+	parent->emitKey(s[i].unicode(), code, 0, true, false);
+	parent->emitKey(s[i].unicode(), code, 0, false, false);
     }
 #endif   
 }

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -85,8 +85,10 @@ LightSettings::~LightSettings()
 
 static void set_fl(int bright)
 {
+#ifndef QT_NO_COP
     QCopEnvelope e("QPE/System", "setBacklight(int)" );
     e << bright;
+#endif
 }
 
 void LightSettings::reject()
@@ -106,8 +108,10 @@ void LightSettings::accept()
     int i_dim =      (screensaver_dim->isChecked() ? interval_dim->value() : 0);
     int i_lightoff = (screensaver_lightoff->isChecked() ? interval_lightoff->value() : 0);
     int i_suspend =  interval_suspend->value();
+#ifndef QT_NO_COP
     QCopEnvelope e("QPE/System", "setScreenSaverIntervals(int,int,int)" );
     e << i_dim << i_lightoff << i_suspend;
+#endif
 
     Config config( "qpe" );
     config.setGroup( "Screensaver" );
@@ -121,6 +125,11 @@ void LightSettings::accept()
     config.write();
 
     QDialog::accept();
+}
+
+void LightSettings::done(int r) { 
+  QDialog::done(r);
+  close();
 }
 
 void LightSettings::applyBrightness()

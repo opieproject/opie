@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -15,8 +15,6 @@
 **
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
-**
-** $Id: datebook.cpp,v 1.1.1.2 2002-01-31 17:03:39 kergoth Exp $
 **
 **********************************************************************/
 
@@ -45,7 +43,9 @@
 #include <qpe/xmlreader.h>
 
 #include <qaction.h>
+#ifdef QWS
 #include <qcopchannel_qws.h>
+#endif
 #include <qdatetime.h>
 #include <qdialog.h>
 #include <qfile.h>
@@ -58,7 +58,9 @@
 #include <qtextstream.h>
 #include <qtl.h>
 #include <qwidgetstack.h>
+#ifdef QWS
 #include <qwindowsystem_qws.h>
+#endif
 
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -88,6 +90,8 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     setCaption( tr("Calendar") );
     setIcon( Resource::loadPixmap( "datebook_icon" ) );
 
+    bool thinScreen = QApplication::desktop()->width() < 200;
+
     setToolBarsMovable( FALSE );
 
     QPEToolBar *bar = new QPEToolBar( this );
@@ -98,46 +102,62 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 
     QPEToolBar *sub_bar = new QPEToolBar(this);
 
+    QPopupMenu *eventMenu = new QPopupMenu( this );
     QPopupMenu *view = new QPopupMenu( this );
     QPopupMenu *settings = new QPopupMenu( this );
 
+    mb->insertItem( tr( "Event" ), eventMenu );
     mb->insertItem( tr( "View" ), view );
-    mb->insertItem( tr( "Settings" ), settings );
+    mb->insertItem( tr( "Options" ), settings );
 
     QActionGroup *g = new QActionGroup( this );
     g->setExclusive( TRUE );
 
-    QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ),
+    QAction *a = new QAction( tr( "New Event" ), Resource::loadPixmap( "new" ),
                               QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( fileNew() ) );
     a->addTo( sub_bar );
+    a->addTo( eventMenu );
+
+    /*
+    a = new QAction( tr( "Delete Events" ), Resource::loadPixmap( "trash" ),
+                            QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( fileNew() ) );
+    a->addTo( sub_bar );
+    a->addTo( eventMenu );
+    */
 
     a = new QAction( tr( "Day" ), Resource::loadPixmap( "day" ), QString::null, 0, g, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( viewDay() ) );
-    a->addTo( sub_bar );
+    if (!thinScreen)
+	a->addTo( sub_bar );
     a->addTo( view );
     a->setToggleAction( TRUE );
     a->setOn( TRUE );
     dayAction = a;
     a = new QAction( tr( "Week" ), Resource::loadPixmap( "week" ), QString::null, 0, g, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( viewWeek() ) );
-    a->addTo( sub_bar );
+    if (!thinScreen)
+	a->addTo( sub_bar );
     a->addTo( view );
     a->setToggleAction( TRUE );
     weekAction = a;
     a = new QAction( tr( "Month" ), Resource::loadPixmap( "month" ), QString::null, 0, g, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( viewMonth() ) );
-    a->addTo( sub_bar );
+    if (!thinScreen)
+	a->addTo( sub_bar );
     a->addTo( view );
     a->setToggleAction( TRUE );
     monthAction = a;
 
-    a = new QAction( tr( "Find" ), Resource::loadPixmap( "mag" ), QString::null, 0, g, 0 );
+    a = new QAction( tr( "Find Event" ), Resource::loadPixmap( "mag" ), QString::null, 0, g, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(slotFind()) );
-    a->addTo( sub_bar );
+    //a->addTo( sub_bar );
+    a->addTo( eventMenu );
 
-    a = new QAction( tr( "Today" ), QString::null, 0, 0 );
+    a = new QAction( tr( "Today" ), Resource::loadPixmap( "today" ), QString::null, 0, g, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( slotToday() ) );
+    a->addTo( sub_bar );
     a->addTo( view );
 
     a = new QAction( tr( "Alarm and Start Time..." ), QString::null, 0, 0 );
@@ -277,6 +297,7 @@ void DateBook::viewDay()
     QDate d = currentDate();
     dayView->setDate( d );
     views->raiseWidget( dayView );
+    dayView->setFocus();
     dayView->redraw();
 }
 
@@ -602,7 +623,13 @@ void DateBook::slotToday()
 {
     // we need to view today
     QDate dt = QDate::currentDate();
-    showDay( dt.year(), dt.month(), dt.day() );
+    if ( views->visibleWidget() == dayView ) {
+	showDay( dt.year(), dt.month(), dt.day() );
+    } else if (views->visibleWidget() == weekView) {
+	weekView->setDate( dt.year(), dt.month(), dt.day() );
+    } else if (views->visibleWidget() == monthView){
+	monthView->setDate( dt.year(), dt.month(), dt.day() );
+    }
 }
 
 void DateBook::closeEvent( QCloseEvent *e )
@@ -675,7 +702,7 @@ void DateBook::slotNewEventFromKey( const QString &str )
     Event ev;
     ev.setDescription(  str );
     // When the new gui comes in, change this...
-    ev.setLocation( tr("(Unknown)") );
+    ev.setLocation( "" );
     ev.setStart( start );
     ev.setEnd( end );
 

@@ -139,9 +139,11 @@ rulesbase.h: rulesbase.ui
 rulesbase.cpp: rulesbase.ui
 	$(UIC) rulesbase.ui -i rulesbase.h -o rulesbase.cpp
 
-newgamebase.o: newgamebase.cpp
+newgamebase.o: newgamebase.cpp \
+		newgamebase.h
 
-rulesbase.o: rulesbase.cpp
+rulesbase.o: rulesbase.cpp \
+		rulesbase.h
 
 moc_wordgame.o: moc_wordgame.cpp \
 		wordgame.h \

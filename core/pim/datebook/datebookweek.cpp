@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -36,27 +36,7 @@
 #include <qspinbox.h>
 #include <qstyle.h>
 
-//-----------------------------------------------------------------
-
-
-DateBookWeekItem::DateBookWeekItem( const EffectiveEvent e )
-    : ev( e )
-{
-    // with the current implementation change the color for all day events
-    if ( ev.event().type() == Event::AllDay && !ev.event().hasAlarm() ) {
-        c = Qt::green;
-    } else {
-        c = ev.event().hasAlarm() ? Qt::red : Qt::blue;
-    }
-}
-
-void DateBookWeekItem::setGeometry( int x, int y, int w, int h )
-{
-    r.setRect( x, y, w, h );
-}
-
-
-//------------------=---------------------------------------------
+static const int allDayHeight = 8;
 
 DateBookWeekView::DateBookWeekView( bool ap, bool startOnMonday,
 				    QWidget *parent, const char *name )
@@ -64,6 +44,7 @@ DateBookWeekView::DateBookWeekView( bool ap, bool startOnMonday,
       showingEvent( false )
 {
     items.setAutoDelete( true );
+    dayItems.setAutoDelete( true );
 
     viewport()->setBackgroundMode( PaletteBase );
 
@@ -136,13 +117,41 @@ void DateBookWeekView::initNames()
 void DateBookWeekView::showEvents( QValueList<EffectiveEvent> &ev )
 {
     items.clear();
+    items.resize(7);
+    for (int i = 0; i < 7; i++)
+	items.insert(i, new LayoutManager(header->sectionSize(i+1), rowHeight*24));
+    dayItems.clear();
+
     QValueListIterator<EffectiveEvent> it;
     for ( it = ev.begin(); it != ev.end(); ++it ) {
-	DateBookWeekItem *i = new DateBookWeekItem( *it );
-	positionItem( i );
-	items.append( i );
+	if ((*it).event().isAllDay()) {
+	    LayoutItem *i = new LayoutItem(*it);
+	    positionItem(i);
+	    dayItems.append(i);
+	} else {
+	    int dow = (*it).date().dayOfWeek();
+	    if ( !bOnMonday ) {
+		if ( dow == 7 )
+		    dow = 1;
+		else 
+		    dow++;
+	    }
+	    items.at(dow - 1)->addOccurance( *it );
+	}
     }
+
+    int mWidth = contentsWidth();
+    for (int i = 0; i < 7; i++) {
+	items.at(i)->layoutItems(FALSE);
+	mWidth = QMIN(mWidth, items.at(i)->maximumColumnWidth());
+    }
+    for (int i = 0; i < 7; i++) {
+	items.at(i)->setMaximumColumnWidth(mWidth);
+	items.at(i)->layoutItems(FALSE);
+    }
+
     viewport()->update();
+    update();
 }
 
 void DateBookWeekView::moveToHour( int h )
@@ -182,10 +191,10 @@ void DateBookWeekView::alterDay( int day )
     emit showDay( day );
 }
 
-void DateBookWeekView::positionItem( DateBookWeekItem *i )
+void DateBookWeekView::positionItem( LayoutItem *i )
 {
     const int Width = 8;
-    const EffectiveEvent ev = i->event();
+    const EffectiveEvent ev = i->occurance();
 
     // 30 minute intervals
     int y = ev.start().hour() * 2;
@@ -212,17 +221,32 @@ void DateBookWeekView::positionItem( DateBookWeekItem *i )
 	else
 	    dow++;
     }
-    int x = header->sectionPos( dow ) - 1;
-    int xlim = header->sectionPos( dow ) + header->sectionSize( dow );
-    DateBookWeekItem *isect = 0;
-    do {
-	i->setGeometry( x, y, Width, h );
-	isect = intersects( i );
-	x += Width - 1;
-    } while ( isect && x < xlim );
+    int x = header->sectionPos( dow );
+    int hwidth = header->sectionSize( dow );
+    int xlim = header->sectionPos( dow ) + hwidth;
+    LayoutItem *inter = 0;
+    if (ev.event().type() != Event::AllDay) {
+	do {
+	    i->setGeometry( x, y, Width, h );
+	    inter = intersects( i );
+	    x += Width;
+	} while ( inter && x < xlim );
+    } else {
+	i->setGeometry(x, header->height(), hwidth, allDayHeight * 2);
+	inter = intersects( i );
+	if (inter) {
+	    // need to change geom of both;
+	    i->setGeometry( x, header->height() + 
+		    (ev.event().hasRepeat() ? allDayHeight : 0), 
+		    hwidth , allDayHeight);
+	    inter->setGeometry( x, header->height() +
+		    (inter->event().hasRepeat() ? allDayHeight : 0), 
+		    hwidth, allDayHeight);
+	}
+    }
 }
 
-DateBookWeekItem *DateBookWeekView::intersects( const DateBookWeekItem *item )
+LayoutItem *DateBookWeekView::intersects( const LayoutItem *item )
 {
     QRect geom = item->geometry();
 
@@ -230,13 +254,15 @@ DateBookWeekItem *DateBookWeekView::intersects( const DateBookWeekItem *item )
     geom.moveBy( 1, 1 );
     geom.setSize( geom.size()-QSize(2,2) );
 
-    QListIterator<DateBookWeekItem> it(items);
+    const Event itemEvent = item->event();
+
+    QListIterator<LayoutItem> it(dayItems);
     for ( ; it.current(); ++it ) {
-	DateBookWeekItem *i = it.current();
-	if ( i != item ) {
-	    if ( i->geometry().intersects( geom ) ) {
+	LayoutItem *i = it.current();
+	const Event iEvent = i->event();
+	if (i != item && iEvent.hasRepeat() != itemEvent.hasRepeat()) {
+	    if (i->geometry().intersects( geom ) )
 		return i;
-	    }
 	}
     }
 
@@ -245,15 +271,23 @@ DateBookWeekItem *DateBookWeekView::intersects( const DateBookWeekItem *item )
 
 void DateBookWeekView::contentsMousePressEvent( QMouseEvent *e )
 {
-    QListIterator<DateBookWeekItem> it(items);
-    for ( ; it.current(); ++it ) {
-	DateBookWeekItem *i = it.current();
-	if ( i->geometry().contains( e->pos() ) ) {
-	    showingEvent = true;
-	    emit signalShowEvent( i->event() );
-	    break;
+    QValueList<EffectiveEvent> list;
+    for (int j = 0; j < 7; j++) {
+	QVector<LayoutItem> v = items.at(j)->items();
+	int x = header->sectionPos(j+1)-2;
+	for ( uint k = 0; k < v.size(); k++) {
+	    LayoutItem *i = v.at(k);
+	    // Change to
+	    QRect geo = i->geometry();
+	    geo.moveBy(x,0);
+	    if ( geo.contains( e->pos() ) ) {
+		showingEvent = true;
+		list.append(i->occurance());
+	    }
 	}
     }
+    if (list.count())
+	emit signalShowEvent( list );
 }
 
 void DateBookWeekView::contentsMouseReleaseEvent( QMouseEvent *e )
@@ -271,10 +305,78 @@ void DateBookWeekView::contentsMouseReleaseEvent( QMouseEvent *e )
     }
 }
 
+void DateBookWeekView::mousePressEvent( QMouseEvent *e )
+{
+    QValueList<EffectiveEvent> list;
+    QListIterator<LayoutItem> it(dayItems);
+    for ( ; it.current(); ++it ) {
+	LayoutItem *i = it.current();
+	if ( i->geometry().contains( e->pos() ) ) {
+	    showingEvent = true;
+	    list.append(i->occurance());
+	}
+    }
+    if (list.count())
+	emit signalShowEvent( list );
+}
+
+void DateBookWeekView::mouseReleaseEvent( QMouseEvent *e )
+{
+    if ( showingEvent ) {
+	showingEvent = false;
+	emit signalHideEvent();
+    } else {
+	int d = header->sectionAt( e->pos().x() );
+	if ( d > 0 ) {
+// 	    if ( !bOnMonday )
+// 		d--;
+	    emit showDay( d );
+	}
+    }
+}
+
+
+void DateBookWeekView::drawFrame( QPainter *p ) 
+{
+    // May or may not be needed. (I don't actually think it is needed though.
+    //QScrollView::drawFrame(p);
+
+    p->fillRect(0, header->height(), header->width(), allDayHeight * 2, 
+	    white);
+	    //palette().color(QPalette::Normal , QColorGroup::Dark ));
+
+    // draw day events.  
+    QListIterator<LayoutItem> it(dayItems);
+    for ( ; it.current(); ++it ) {
+	LayoutItem *i = it.current();
+	if ( i->event().isAllDay() ) {
+	    p->fillRect( i->geometry(), 
+		   i->event().hasRepeat() 
+		   ? colorRepeatLight : colorNormalLight);
+	}
+    }
+
+    QPen pen = p->pen();
+    p->setPen( lightGray );
+
+    // header->sectionPos(i)-1 because we want the end of the last header,
+    // not the start of this one.
+    for ( int i = 1; i <= 7; i++ )
+	p->drawLine( header->sectionPos(i)-1, header->height(), 
+		header->sectionPos(i)-1, header->height() + 2 * allDayHeight );
+
+    p->drawLine( 0, header->height() + 2 * allDayHeight, 
+	    header->width(), header->height() + 2 * allDayHeight );
+    p->setPen(pen);
+}
+
 void DateBookWeekView::drawContents( QPainter *p, int cx, int cy, int cw, int ch )
 {
     QRect ur( cx, cy, cw, ch );
     p->setPen( lightGray );
+
+    // -2 because end of last header, not this, and because contents are over by
+    // one any way.
     for ( int i = 1; i <= 7; i++ )
 	p->drawLine( header->sectionPos(i)-2, cy, header->sectionPos(i)-2, cy+ch );
 
@@ -310,12 +412,19 @@ void DateBookWeekView::drawContents( QPainter *p, int cx, int cy, int cw, int ch
 	}
     }
 
-    QListIterator<DateBookWeekItem> it(items);
-    for ( ; it.current(); ++it ) {
-	DateBookWeekItem *i = it.current();
-	if ( i->geometry().intersects( ur ) ) {
-	    p->setBrush( i->color() );
-	    p->drawRect( i->geometry() );
+    for (int j = 0; j < 7; j++) {
+	QVector<LayoutItem> v = items.at(j)->items();
+	int x = header->sectionPos(j+1)-1; // 1 for end of last, 1 for contenst shift.
+	for ( uint k = 0; k < v.size(); k++) {
+	    LayoutItem *i = v.at(k);
+	    // Change to
+	    QRect geo = i->geometry();
+	    geo.moveBy(x-1,-1); // up and to the left
+	    geo.setSize(geo.size() + QSize(1,1));
+	    if ( geo.intersects( ur ) ) {
+		p->setBrush( i->event().hasRepeat() ? colorRepeat : colorNormal );
+		p->drawRect( geo );
+	    }
 	}
     }
 }
@@ -324,9 +433,9 @@ void DateBookWeekView::resizeEvent( QResizeEvent *e )
 {
     const int hourWidth = 20;
     QScrollView::resizeEvent( e );
-    int avail = width()-qApp->style().scrollBarExtent().width()-1;
+    int avail = width()-qApp->style().scrollBarExtent().width();
     header->setGeometry( 0, 0, avail, header->sizeHint().height() );
-    setMargins( 0, header->height(), 0, 0 );
+    setMargins( 0, header->height() + allDayHeight * 2, 0, 0 );
     header->resizeSection( 0, hourWidth );
     int sw = (avail - hourWidth) / 7;
     for ( int i = 1; i < 7; i++ )
@@ -366,8 +475,8 @@ DateBookWeek::DateBookWeek( bool ap, bool startOnMonday, DateBookDB *newDB,
 
     connect( view, SIGNAL( showDay( int ) ),
              this, SLOT( showDay( int ) ) );
-    connect( view, SIGNAL(signalShowEvent(const EffectiveEvent&)),
-	     this, SLOT(slotShowEvent(const EffectiveEvent&)) );
+    connect( view, SIGNAL(signalShowEvent(QValueList<EffectiveEvent>&)),
+	     this, SLOT(slotShowEvent(QValueList<EffectiveEvent>&)) );
     connect( view, SIGNAL(signalHideEvent()),
 	     this, SLOT(slotHideEvent()) );
     connect( header, SIGNAL( dateChanged( int, int ) ),
@@ -461,61 +570,67 @@ void DateBookWeek::getEvents()
     view->moveToHour( startTime );
 }
 
-void DateBookWeek::slotShowEvent( const EffectiveEvent &ev )
+void DateBookWeek::slotShowEvent( QValueList<EffectiveEvent> &events )
 {
     if ( tHide->isActive() )
         tHide->stop();
 
+    QString str = "";
+
     // why would someone use "<"?  Oh well, fix it up...
     // I wonder what other things may be messed up...
-    QString strDesc = ev.description();
-    int where = strDesc.find( "<" );
-    while ( where != -1 ) {
-	strDesc.remove( where, 1 );
-	strDesc.insert( where, "&#60;" );
-	where = strDesc.find( "<", where );
-    }
+    QValueListIterator<EffectiveEvent> it;
+    for(it = events.begin(); it != events.end(); ++it) {
+	EffectiveEvent ev = (*it);
+	QString strDesc = ev.description();
+	int where = strDesc.find( "<" );
+	while ( where != -1 ) {
+	    strDesc.remove( where, 1 );
+	    strDesc.insert( where, "&#60;" );
+	    where = strDesc.find( "<", where );
+	}
 
-    QString strCat;
-    // ### FIX later...
-//     QString strCat = ev.category();
-//     where = strCat.find( "<" );
-//     while ( where != -1 ) {
-// 	strCat.remove( where, 1 );
-// 	strCat.insert( where, "&#60;" );
-// 	where = strCat.find( "<", where );
-//     }
+	QString strCat;
+	// ### FIX later...
+	//     QString strCat = ev.category();
+	//     where = strCat.find( "<" );
+	//     while ( where != -1 ) {
+	// 	strCat.remove( where, 1 );
+	// 	strCat.insert( where, "&#60;" );
+	// 	where = strCat.find( "<", where );
+	//     }
 
-    QString strNote = ev.notes();
-    where = strNote.find( "<" );
-    while ( where != -1 ) {
-	strNote.remove( where, 1 );
-	strNote.insert( where, "&#60;" );
-	where = strNote.find( "<", where );
-    }
+	QString strNote = ev.notes();
+	where = strNote.find( "<" );
+	while ( where != -1 ) {
+	    strNote.remove( where, 1 );
+	    strNote.insert( where, "&#60;" );
+	    where = strNote.find( "<", where );
+	}
 
-    QString str = "<b>" + strDesc + "</b><br>" + "<i>"
-            + strCat + "</i>"
+	str += "<b>" + strDesc + "</b><br>" + "<i>"
+	    + strCat + "</i>"
 	    + "<br>" + TimeString::longDateString( ev.date() )
 	    + "<br><b>" + QObject::tr("Start") + "</b>: ";
 
-    if ( ev.startDate() != ev.date() ) {
-	// multi-day event.  Show start date
-	str += TimeString::longDateString( ev.startDate() );
-    } else {
-	// Show start time.
-	str += TimeString::timeString(ev.start(), ampm, FALSE );
-    }
+	if ( ev.startDate() != ev.date() ) {
+	    // multi-day event.  Show start date
+	    str += TimeString::longDateString( ev.startDate() );
+	} else {
+	    // Show start time.
+	    str += TimeString::timeString(ev.start(), ampm, FALSE );
+	}
 
-    str += "<br><b>" + QObject::tr("End") + "</b>: ";
-    if ( ev.endDate() != ev.date() ) {
-	// multi-day event.  Show end date
-	str += TimeString::longDateString( ev.endDate() );
-    } else {
-	// Show end time.
-	str += TimeString::timeString( ev.end(), ampm, FALSE );
+	str += "<br><b>" + QObject::tr("End") + "</b>: ";
+	if ( ev.endDate() != ev.date() ) {
+	    // multi-day event.  Show end date
+	    str += TimeString::longDateString( ev.endDate() );
+	} else {
+	    // Show end time.
+	    str += TimeString::timeString( ev.end(), ampm, FALSE );
+	}
+	str += "<br><br>" + strNote;
     }
-    str += "<br><br>" + strNote;
 
     lblDesc->setText( str );
     lblDesc->resize( lblDesc->sizeHint() );

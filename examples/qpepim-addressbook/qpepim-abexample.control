@@ -1,0 +1,9 @@
+Files: bin/abexample apps/Applications/abexample.desktop
+Priority: optional
+Section: qpe/applications
+Maintainer: Warwick Allison <warwick@trolltech.com>
+Architecture: arm
+Version: $QPE_VERSION-1
+Depends: qpe-pim, qpe-base ($QPE_VERSION)
+Description: Example Addressbook reader
+ Simple example for using the QPEPIM access library.

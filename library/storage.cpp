@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -24,7 +24,9 @@
 #endif
 
 #include <qtimer.h>
+#ifdef QWS
 #include <qcopchannel_qws.h>
+#endif
 
 #include <stdio.h>
 
@@ -59,20 +61,39 @@ static bool isCF(const QString& m)
     return FALSE;
 }
 
+/*! \class StorageInfo storage.h
+  \brief Describes the disks mounted on the file system.
+
+  This class provides access to the mount information for the Linux
+  filesystem. Each mount point is represented by the FileSystem class.
+  To ensure this class has the most up to date size information, call
+  the update() method. Note that this will automatically be signaled
+  by the operating system when a disk has been mounted or unmounted.
+
+  \ingroup qtopiaemb
+*/
+
+/*! Constructor that determines the current mount points of the filesystem.
+ */
 StorageInfo::StorageInfo( QObject *parent )
     : QObject( parent )
 {
     mFileSystems.setAutoDelete( TRUE );
+#ifndef QT_NO_COP
     channel = new QCopChannel( "QPE/Card", this );
     connect( channel, SIGNAL(received(const QCString &, const QByteArray &)),
 	     this, SLOT(cardMessage( const QCString &, const QByteArray &)) );
+#endif
     update();
 }
 
-const FileSystem *StorageInfo::fileSystemOf( const QString &filename )
+/*! Returns the first FileSystem that starts with \a mountpoint as a mount
+  point
+*/
+const FileSystem *StorageInfo::fileSystemOf( const QString &mountpoint )
 {
     for (QListIterator<FileSystem> i(mFileSystems); i.current(); ++i) {
-	if ( filename.startsWith( (*i)->path() ) )
+	if ( mountpoint.startsWith( (*i)->path() ) )
 	     return (*i);
     }
     return 0;
@@ -85,6 +106,10 @@ void StorageInfo::cardMessage( const QCString& msg, const QByteArray& )
 	update();
 }
 
+/*! Updates the mount and free space available information for each mount
+  point. This method is automatically called when a disk is mounted or
+  unmounted.
+*/
 void StorageInfo::update()
 {
     //qDebug("StorageInfo::updating");
@@ -162,6 +187,17 @@ void StorageInfo::update()
 #endif
 }
 
+/*! \fn const QList<FileSystem> &StorageInfo::fileSystems() const
+  Returns a list of all available mounted file systems.
+
+  \warning This may change in Qtopia 3.x to return only relevent Qtopia file systems (and ignore mount points such as /tmp)
+*/
+
+/*! \fn void StorageInfo::disksChanged()
+  Gets emitted when a disk has been mounted or unmounted, such as when
+  a CF card has been inserted.
+*/
+
 //---------------------------------------------------------------------------
 
 FileSystem::FileSystem( const QString &disk, const QString &path, const QString &name, bool rem, const QString &o )
@@ -186,3 +222,49 @@ void FileSystem::update()
 #endif
 }
 
+/*! \class FileSystem storage.h
+  \brief StorageInfo helper class to describe a single mount point
+
+  This class simply returns information about a mount point, including
+  file system name, mount point, human readable name, size information
+  and mount options information.
+  \ingroup qtopiaemb
+*/
+
+/*! \fn const QString &FileSystem::disk() const
+  Returns the file system name, such as /dev/hda3
+*/
+
+/*! \fn const QString &FileSystem::path() const
+  Returns the mount path, such as /home
+*/
+
+/*! \fn const QString &FileSystem::name() const
+  Returns the translated, human readable name for the mount directory.
+*/
+
+/*! \fn const QString &FileSystem::options() const
+  Returns the mount options
+*/
+
+/*! \fn long FileSystem::blockSize() const
+  Returns the size of each block on the file system.
+*/
+
+/*! \fn long FileSystem::totalBlocks() const
+  Returns the total number of blocks on the file system
+*/
+
+/*! \fn long FileSystem::availBlocks() const
+  Returns the number of available blocks on the file system
+ */
+
+/*! \fn bool FileSystem::isRemovable() const
+  Returns flag whether the file system can be removed, such as a CF card
+  would be removable, but the internal memory wouldn't
+*/
+
+/*! \fn bool FileSystem::isWritable() const
+  Returns flag whether the file system is mounted as writable or read-only.
+  Returns FALSE if read-only, TRUE if read and write.
+*/

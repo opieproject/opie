@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -15,8 +15,6 @@
 **
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
-**
-** $Id: qpeapplication.cpp,v 1.1.1.2 2002-02-04 22:05:35 kergoth Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -66,7 +64,9 @@
 #endif
 #include "config.h"
 #include "network.h"
+#ifdef QWS
 #include "fontmanager.h"
+#endif
 #include "power.h"
 #include "alarmserver.h"
 #include "applnk.h"
@@ -128,8 +128,10 @@ public:
     void sendQCopQ()
     {
 	QCopRec* r;
+#ifndef QT_NO_COP
 	for (QListIterator<QCopRec> it(qcopq); (r=it.current()); ++it)
 	    QCopChannel::sendLocally(r->channel,r->message,r->data);
+#endif
 	qcopq.clear();
     }
 };
@@ -303,9 +305,12 @@ static bool powerOnline()
 
 static bool networkOnline()
 {
+#ifdef QWS
     return Network::networkOnline();
+#endif
 }
 
+#ifdef QWS
 class QPEScreenSaver : public QWSScreenSaver
 {
 
@@ -343,6 +348,7 @@ public:
 	return FALSE;
     }
 };
+#endif
 
 static int ssi(int interval, Config &config, const QString &enable, const QString& value, int def)
 {
@@ -374,10 +380,12 @@ static void setScreenSaverIntervals(int i1, int i2, int i3)
     v[3] = 0;
     dim_on = ( (i1 != 0) ? config.readNumEntry("Dim",1) : FALSE );
     lightoff_on = ( (i2 != 0 ) ? config.readNumEntry("LightOff",1) : FALSE );
+#ifdef QWS
     if ( !i1 && !i2 && !i3 )
 	QWSServer::setScreenSaverInterval(0);
     else
 	QWSServer::setScreenSaverIntervals(v);
+#endif
 }
 
 static void setScreenSaverInterval(int interval)
@@ -391,11 +399,55 @@ static void setScreenSaverInterval(int interval)
   \brief The QPEApplication class implements various system services
     that are available to all Qtopia applications.
 
-  Simply by using QPEApplication instead of QApplication, a plain Qt
+  Simply by using QPEApplication instead of QApplication, a standard Qt
   application becomes a Qtopia application. It automatically follows
   style changes, quits and raises, and in the
   case of \link docwidget.html document-oriented\endlink applications,
-  changes the current displayed document in response to the environment.
+  changes the currently displayed document in response to the environment.
+
+  To create a \link docwidget.html document-oriented\endlink
+  application use showMainDocumentWidget(); to create a
+  non-document-oriented application use showMainWidget(). The
+  keepRunning() function indicates whether the application will
+  continue running after it's processed the last \link qcop.html
+  QCop\endlink message. This can be changed using setKeepRunning().
+
+  A variety of signals are emitted when certain events occur, for
+  example, timeChanged(), clockChanged(), weekChanged(),
+  dateFormatChanged() and volumeChanged(). If the application receives
+  a \link qcop.html QCop\endlink message on the application's
+  QPE/Application/\e{appname} channel, the appMessage() signal is
+  emitted. There are also flush() and reload() signals, which
+  are emitted when synching begins and ends respectively - upon these
+  signals, the application should save and reload any data
+  files that are involved in synching. Most of these signals will initially
+  be received and unfiltered through the appMessage() signal.
+
+  This class also provides a set of useful static functions. The
+  qpeDir() and documentDir() functions return the respective paths.
+  The grabKeyboard() and ungrabKeyboard() functions are used to
+  control whether the application takes control of the device's
+  physical buttons (e.g. application launch keys). The stylus' mode of
+  operation is set with setStylusOperation() and retrieved with
+  stylusOperation(). There are also setInputMethodHint() and
+  inputMethodHint() functions.
+
+  \ingroup qtopiaemb
+*/
+
+/*!
+    \enum QPEApplication::screenSaverHint
+
+    \value Disable the screen should never blank
+    \value DisableLightOff the screen should never blank and the
+    backlight should never switch off
+    \value DisableSuspend the screen should blank when the device goes
+    into suspend mode
+    \value Enable screen blanking and switching off the backlight are
+    both enabled
+
+    Currently, this is only used internally.
+
 */
 
 /*!
@@ -407,23 +459,58 @@ static void setScreenSaverInterval(int interval)
 /*!
   \fn void QPEApplication::timeChanged();
 
-  This signal is emitted when the time jumps forward or backwards
-  by more than the normal passage of time.
+  This signal is emitted when the time changes outside the normal
+  passage of time, i.e. if the time is set backwards or forwards.
 */
 
 /*!
   \fn void QPEApplication::clockChanged( bool ampm );
 
-  This signal is emitted when the user changes the style
-  of clock. If \a ampm is TRUE, the user wants a 12-hour
-  AM/PM close, otherwise, they want a 24-hour clock.
+  This signal is emitted when the user changes the clock's style. If
+  \a ampm is TRUE, the user wants a 12-hour AM/PM clock, otherwise,
+  they want a 24-hour clock.
+*/
+
+/*!
+    \fn void QPEApplication::volumeChanged( bool muted )
+
+    This signal is emitted whenever the mute state is changed. If \a
+    muted is TRUE, then sound output has been muted.
+*/
+
+/*!
+    \fn void QPEApplication::weekChanged( bool startOnMonday )
+
+    This signal is emitted if the week start day is changed. If \a
+    startOnMonday is TRUE then the first day of the week is Monday; if
+    \a startOnMonday is FALSE then the first day of the week is
+    Sunday.
+*/
+
+/*!
+    \fn void QPEApplication::dateFormatChanged()
+
+    This signal is emitted whenever the date format is changed.
+*/
+
+/*!
+    \fn void QPEApplication::flush()
+
+    ###
+*/
+
+/*!
+    \fn void QPEApplication::reload()
+
+    ###
 */
 
 /*!
   \fn void QPEApplication::appMessage( const QCString& msg, const QByteArray& data )
 
-  This signal is emitted when a message is received on the
-  QPE/Application/<i>appname</i> QCop channel for this application.
+  This signal is emitted when a message is received on this
+  application's QPE/Application/<i>appname</i> \link qcop.html
+  QCop\endlink channel.
 
   The slot to which you connect this signal uses \a msg and \a data
   in the following way:
@@ -442,12 +529,16 @@ static void setScreenSaverInterval(int interval)
     }
 \endcode
 
-  \sa qcop.html
+   Note that messages received here may be processed by qpe application
+   and emitted as signals, such as flush() and reload().
 */
 
 /*!
   Constructs a QPEApplication just as you would construct
   a QApplication, passing \a argc, \a argv, and \a t.
+
+  For applications, \a t should be the default, GuiClient. Only
+  the Qtopia server passes GuiServer.
 */
 QPEApplication::QPEApplication( int& argc, char **argv, Type t )
     : QApplication( hack(argc), argv, t )
@@ -457,6 +548,10 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
 	setFont( QFont( "helvetica", 8 ) );
 	AppLnk::setSmallIconSize(10);
 	AppLnk::setBigIconSize(28);
+    } else if ( dw > 400 ) {
+	setFont( QFont( "helvetica", 12 ) );
+	AppLnk::setSmallIconSize(16);
+	AppLnk::setBigIconSize(32);	
     }
 
     d = new QPEApplicationData;
@@ -520,7 +615,9 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
 
 #endif
 
+#ifdef QWS
     qwsSetDecoration( new QPEDecoration() );
+#endif
 
 #ifndef QT_NO_TRANSLATION
     QStringList langs = Global::languageList();
@@ -545,10 +642,12 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
 	    delete trans;
 
 	//###language/font hack; should look it up somewhere
+#ifdef QWS
 	if ( lang == "ja" || lang == "zh_CN" || lang == "zh_TW" || lang == "ko" ) {
 	    QFont fn = FontManager::unicodeFont( FontManager::Proportional );
 	    setFont( fn );
 	}
+#endif
     }
 #endif
 
@@ -557,9 +656,10 @@ QPEApplication::QPEApplication( int& argc, char **argv, Type t )
     if ( type() == GuiServer ) {
 	setScreenSaverInterval(-1);
 	setVolume();
+#ifdef QWS
 	QWSServer::setScreenSaver(new QPEScreenSaver);
+#endif
     }
-
     installEventFilter( this );
 
     QPEMenuToolFocusManager::initialize();
@@ -579,9 +679,9 @@ static void createInputMethodDict()
 
 /*!
   Returns the currently set hint to the system as to whether
-  \a w has any use for text input methods.
+  widget \a w has any use for text input methods.
 
-  \sa setInputMethodHint()
+  \sa setInputMethodHint() InputMethodHint
 */
 QPEApplication::InputMethodHint QPEApplication::inputMethodHint( QWidget* w )
 {
@@ -596,13 +696,15 @@ QPEApplication::InputMethodHint QPEApplication::inputMethodHint( QWidget* w )
     \value Normal the application sometimes needs text input (the default).
     \value AlwaysOff the application never needs text input.
     \value AlwaysOn the application always needs text input.
+
+    \sa inputMethodHint() setInputMethodHint()
 */
 
 /*!
-  Hints to the system that \a w has use for text input methods
+  Hints to the system that widget \a w has use for text input methods
   as specified by \a mode.
 
-  \sa inputMethodHint()
+  \sa inputMethodHint() InputMethodHint
 */
 void QPEApplication::setInputMethodHint( QWidget* w, InputMethodHint mode )
 {
@@ -634,7 +736,9 @@ void QPEApplication::mapToDefaultAction( QWSKeyEvent *ke, int key )
     if ( activePopupWidget() && activePopupWidget()->inherits( "QPopupMenu" ) )
 	key = Qt::Key_Return;
 
+#ifdef QWS
     ke->simpleData.keycode = key;
+#endif
 }
 
 class HackWidget : public QWidget
@@ -647,6 +751,7 @@ public:
 /*!
   \internal
 */
+#ifdef QWS
 bool QPEApplication::qwsEventFilter( QWSEvent *e )
 {
     if ( !d->notbusysent && e->type == QWSEvent::Focus ) {
@@ -697,11 +802,11 @@ bool QPEApplication::qwsEventFilter( QWSEvent *e )
 	} else if ( ke->simpleData.keycode == Qt::Key_F30 ) {
 	    // Use special "select" key to do whatever default action a widget has
 	    mapToDefaultAction( ke, Qt::Key_Space );
-	} else if ( ke->simpleData.keycode == Qt::Key_Escape && 
+	} else if ( ke->simpleData.keycode == Qt::Key_Escape &&
 		    ke->simpleData.is_press ) {
 	    // Escape key closes app if focus on toplevel
 	    QWidget *active = activeWindow();
-	    if ( active && active->testWFlags( WType_TopLevel ) && 
+	    if ( active && active->testWFlags( WType_TopLevel ) &&
 		 (int)active->winId() == ke->simpleData.window &&
 		 !active->testWFlags( WStyle_Dialog|WStyle_Customize|WType_Popup|WType_Desktop )) {
 		if ( active->inherits( "QDialog" ) ) {
@@ -755,6 +860,7 @@ bool QPEApplication::qwsEventFilter( QWSEvent *e )
     }
     return QApplication::qwsEventFilter( e );
 }
+#endif
 
 /*!
   Destroys the QPEApplication.
@@ -772,7 +878,7 @@ QPEApplication::~QPEApplication()
 }
 
 /*!
-  Returns <tt>$QPEDIR/</tt>.
+  Returns \c{$QPEDIR/}.
 */
 QString QPEApplication::qpeDir()
 {
@@ -826,7 +932,9 @@ void QPEApplication::setDefaultRotation(int r)
 	deforient = r;
 	setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(r).latin1(), 1);
     } else {
+#ifndef QT_NO_COP
 	QCopEnvelope("QPE/System", "setDefaultRotation(int)") << r;
+#endif
     }
 }
 
@@ -902,7 +1010,7 @@ void QPEApplication::systemMessage( const QCString &msg, const QByteArray &data)
 	    tryQuit();
     } else if ( msg == "forceQuit()" ) {
 	if ( type() != GuiServer )
-	    quit(); 
+	    quit();
     } else if ( msg == "restart()" ) {
 	if ( type() == GuiServer )
 	    restart();
@@ -1011,6 +1119,12 @@ bool QPEApplication::raiseAppropriateWindow()
     if ( top && d->keep_running ) {
 	if ( top->isVisible() )
 	    r = TRUE;
+	else if (d->preloaded) {
+	  // We are preloaded and not visible.. pretend we just started..
+ 	  QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
+ 	  e << d->appName;
+	}
+	
 #ifdef Q_WS_QWS
 	if ( !d->nomaximize )
 	    top->showMaximized();
@@ -1025,6 +1139,11 @@ bool QPEApplication::raiseAppropriateWindow()
 	topm->show();
 	topm->raise();
 	topm->setActiveWindow();
+	// If we haven't already handled the fastAppShowing message
+	if (!top && d->preloaded) {
+ 	  QCopEnvelope e("QPE/System", "fastAppShowing(QString)");
+ 	  e << d->appName;
+	}	
 	r = FALSE;
     }
     return r;
@@ -1046,6 +1165,7 @@ void QPEApplication::pidMessage( const QCString &msg, const QByteArray & data)
 	d->keep_running = TRUE;
 	/* so that quit will quit */
     } else if ( msg == "enablePreload()" ) {
+      if (d->qpe_main_widget)
 	d->preloaded = TRUE;
 	d->keep_running = TRUE;
 	/* so next quit won't quit */
@@ -1053,6 +1173,9 @@ void QPEApplication::pidMessage( const QCString &msg, const QByteArray & data)
 	d->keep_running = TRUE;
 	d->notbusysent = FALSE;
 	raiseAppropriateWindow();
+	// Tell the system we're still chugging along...
+	QCopEnvelope e("QPE/System", "appRaised(QString)");
+	e << d->appName;
     } else if ( msg == "flush()" ) {
 	emit flush();
 	// we need to tell the desktop
@@ -1105,7 +1228,7 @@ static bool setWidgetCaptionFromAppName( QWidget* /*mw*/, const QString& /*appNa
 
 
 /*!
-  Sets \a mw as the mainWidget() and shows it. For small windows,
+  Sets widget \a mw as the mainWidget() and shows it. For small windows,
   consider passing TRUE for \a nomaximize rather than the default FALSE.
 
   \sa showMainDocumentWidget()
@@ -1116,7 +1239,9 @@ void QPEApplication::showMainWidget( QWidget* mw, bool nomaximize )
 
     d->nomaximize = nomaximize;
     d->qpe_main_widget = mw;
+#ifndef QT_NO_COP
     d->sendQCopQ();
+#endif
     if ( d->preloaded ) {
 	if(d->forceshow) {
 #ifdef Q_WS_QWS
@@ -1137,13 +1262,13 @@ void QPEApplication::showMainWidget( QWidget* mw, bool nomaximize )
 }
 
 /*!
-  Sets \a mw as the mainWidget() and shows it. For small windows,
+  Sets widget \a mw as the mainWidget() and shows it. For small windows,
   consider passing TRUE for \a nomaximize rather than the default FALSE.
 
   This calls designates the application as
   a \link docwidget.html document-oriented\endlink application.
 
-  The \a mw widget must have a slot: setDocument(const QString&).
+  The \a mw widget \e must have this slot: setDocument(const QString&).
 
   \sa showMainWidget()
 */
@@ -1155,7 +1280,9 @@ void QPEApplication::showMainDocumentWidget( QWidget* mw, bool nomaximize )
 	Global::setDocument( mw, QString::fromUtf8(argv()[1]) );
     d->nomaximize = nomaximize;
     d->qpe_main_widget = mw;
+#ifndef QT_NO_COP
     d->sendQCopQ();
+#endif
     if ( d->preloaded ) {
 	if(d->forceshow) {
 #ifdef Q_WS_QWS
@@ -1177,11 +1304,12 @@ void QPEApplication::showMainDocumentWidget( QWidget* mw, bool nomaximize )
 
 
 /*!
-  Sets that the application should continue running after processing
-  qcop messages.  Normally if an application is started via a qcop message,
-  the application will process the qcop message and then quit.  If while
-  processing the qcop message it calls this function, then the application
-  will show and start proper once it has finished processing qcop messages.
+    If an application is started via a \link qcop.html QCop\endlink
+    message, the application will process the \link qcop.html
+    QCop\endlink message and then quit. If the application calls this
+    function while processing a \link qcop.html QCop\endlink message,
+    after processing its outstanding \link qcop.html QCop\endlink
+    messages the application will start 'properly' and show itself.
 
   \sa keepRunning()
 */
@@ -1194,8 +1322,8 @@ void QPEApplication::setKeepRunning()
 }
 
 /*!
-  Returns whether the application will quit after processing the current
-  list of qcop messages.  
+  Returns TRUE if the application will quit after processing the
+  current list of qcop messages; otherwise returns FALSE.
 
   \sa setKeepRunning()
 */
@@ -1261,7 +1389,9 @@ void QPEApplication::prepareForTermination(bool willrestart)
 	lblWait->showMaximized();
     }
 #ifndef SINGLE_APP
+#ifndef QT_NO_COP
     { QCopEnvelope envelope("QPE/System", "forceQuit()"); }
+#endif
     processEvents(); // ensure the message goes out.
     sleep(1); // You have 1 second to comply.
 #endif
@@ -1291,9 +1421,9 @@ static void createDict()
 }
 
 /*!
-  Returns the current StylusMode for \a w.
+  Returns the current StylusMode for widget \a w.
 
-  \sa setStylusOperation()
+  \sa setStylusOperation() StylusMode
 */
 QPEApplication::StylusMode QPEApplication::stylusOperation( QWidget* w )
 {
@@ -1310,13 +1440,14 @@ QPEApplication::StylusMode QPEApplication::stylusOperation( QWidget* w )
     \value RightOnHold the stylus generates RightButton events
 			if the user uses the press-and-hold gesture.
 
-    See setStylusOperation().
+    \sa setStylusOperation() stylusOperation()
 */
 
 /*!
-  Causes \a w to receive mouse events according to \a mode.
+  Causes widget \a w to receive mouse events according to the stylus
+  \a mode.
 
-  \sa stylusOperation()
+  \sa stylusOperation() StylusMode
 */
 void QPEApplication::setStylusOperation( QWidget* w, StylusMode mode )
 {
@@ -1433,17 +1564,21 @@ void QPEApplication::ungrabKeyboard()
 {
     QPEApplicationData* d = ((QPEApplication*)qApp)->d;
     if ( d->kbgrabber == 2 ) {
+#ifndef QT_NO_COP
 	QCopEnvelope e("QPE/System", "grabKeyboard(QString)" );
 	e << QString::null;
+#endif
 	d->kbregrab = FALSE;
 	d->kbgrabber = 0;
     }
 }
 
 /*!
-  Grabs the keyboard such that the system's application launching
-  keys no longer work, and instead they are receivable by this
-  application.
+  Grabs the physical keyboard keys, e.g. the application's launching
+  keys. Instead of launching applications when these keys are pressed
+  the signals emitted are sent to this application instead. Some games
+  programs take over the launch keys in this way to make interaction
+  easier.
 
   \sa ungrabKeyboard()
 */
@@ -1453,8 +1588,10 @@ void QPEApplication::grabKeyboard()
     if ( qApp->type() == QApplication::GuiServer )
 	d->kbgrabber = 0;
     else {
+#ifndef QT_NO_COP
 	QCopEnvelope e("QPE/System", "grabKeyboard(QString)" );
 	e << d->appName;
+#endif
 	d->kbgrabber = 2; // me
     }
 }
@@ -1464,15 +1601,19 @@ void QPEApplication::grabKeyboard()
 */
 int QPEApplication::exec()
 {
+#ifndef QT_NO_COP
     d->sendQCopQ();
+#endif
     if ( d->keep_running)
 	//|| d->qpe_main_widget && d->qpe_main_widget->isVisible() )
 	return QApplication::exec();
 
+#ifndef QT_NO_COP
     {
     QCopEnvelope e("QPE/System", "closing(QString)" );
     e << d->appName;
     }
+#endif
     processEvents();
     return 0;
 }
@@ -1486,10 +1627,12 @@ void QPEApplication::tryQuit()
 {
     if ( activeModalWidget() || strcmp( argv()[0], "embeddedkonsole") == 0 )
 	return; // Inside modal loop or konsole. Too hard to save state.
+#ifndef QT_NO_COP
     {
        QCopEnvelope e("QPE/System", "closing(QString)" );
        e << d->appName;
     }
+#endif
     processEvents();
 
     quit();
@@ -1503,14 +1646,18 @@ void QPEApplication::tryQuit()
 */
 void QPEApplication::hideOrQuit()
 {
-    // notify of our demise :)
-    {
-       QCopEnvelope e("QPE/System", "closing(QString)" );
-       e << d->appName;
-    }
     processEvents();
+
+    // If we are a preloaded application we don't actually quit, so emit
+    // a System message indicating we're quasi-closing.
     if ( d->preloaded && d->qpe_main_widget )
+#ifndef QT_NO_COP
+      {
+	QCopEnvelope e("QPE/System", "fastAppHiding(QString)" );
+	e << d->appName;
 	d->qpe_main_widget->hide();
+      }
+#endif
     else
 	quit();
 }
@@ -1556,6 +1703,7 @@ void operator delete(void* p, size_t /*size*/)
 
 #if ( QT_VERSION <= 230 ) && !defined(SINGLE_APP)
 #include <qwidgetlist.h>
+#ifdef QWS
 #include <qgfx_qws.h>
 extern QRect qt_maxWindowRect;
 void qt_setMaxWindowRect(const QRect& r)
@@ -1576,4 +1724,5 @@ void qt_setMaxWindowRect(const QRect& r)
         delete l;
     }
 }
+#endif
 #endif

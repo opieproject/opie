@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -26,7 +26,9 @@
 #include <qpe/mimetype.h>
 #include <qpe/applnk.h>
 
+#ifdef QWS
 #include <qcopchannel_qws.h>
+#endif
 #include <qmessagebox.h>
 #include <qdir.h>
 #include <qregexp.h>
@@ -746,9 +748,11 @@ void FileBrowser::init(const QString & dir)
     connect( fileView, SIGNAL( dirChanged() ), SLOT( updateDirMenu() ) );
     updateDirMenu();
 
+#ifndef QT_NO_COP
     QCopChannel* pcmciaChannel = new QCopChannel( "QPE/Card", this );
     connect( pcmciaChannel, SIGNAL(received(const QCString &, const QByteArray &)),
 	 this, SLOT(pcmciaMessage( const QCString &, const QByteArray &)) );
+#endif
 }
 
 void FileBrowser::pcmciaMessage( const QCString &msg, const QByteArray &)

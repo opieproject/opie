@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -64,10 +64,10 @@ ShowNextPiece::ShowNextPiece( QWidget *parent, const char *name )
 void ShowNextPiece::resizeEvent( QResizeEvent *e )
 {
     QSize sz = e->size();
-    blockWidth  = (sz.width()  - 3)/5;
-    blockHeight = (sz.height() - 3)/6;
-    xOffset     = (sz.width()  - 3)/5;
-    yOffset     = (sz.height() - 3)/6;
+    blockWidth  = QMAX( 3, QMIN( (sz.width()  - 3)/5 , (sz.height() - 3)/6 ) );
+    blockHeight = blockWidth;
+    xOffset     = (sz.width() - 3*blockWidth ) / 2;
+    yOffset     = (sz.height() - 4*blockHeight ) / 2;
 }
 
 
@@ -106,8 +106,10 @@ QTetrix::QTetrix( QWidget *parent, const char *name, WFlags f )
     QWidget *gameArea = new QWidget( this );
     setCentralWidget( gameArea );
 
-    QGridLayout *gl = new QGridLayout( gameArea, 5, 3, 8 );
-
+    QHBoxLayout *hb = new QHBoxLayout( gameArea, 8 );
+    
+    QGridLayout *gl = new QGridLayout( hb, 5 );
+    
     QLabel *l;
     l = new QLabel( tr("Next"), gameArea );
     gl->addWidget( l, 0, 0 );
@@ -119,22 +121,29 @@ QTetrix::QTetrix( QWidget *parent, const char *name, WFlags f )
     gl->addWidget( l, 1, 0 );
     showScore   = new QLabel(gameArea);
     gl->addWidget( showScore, 1, 1 );
+
     l = new QLabel( tr("Level"), gameArea );
     gl->addWidget( l, 2, 0 );
+
     showLevel   = new QLabel(gameArea);
     gl->addWidget( showLevel, 2, 1 );
+
     l = new QLabel( tr("Removed"), gameArea );
     gl->addWidget( l, 3, 0 );
+
     showLines   = new QLabel(gameArea);
     gl->addWidget( showLines, 3, 1 );
 
+
     board = new QTetrixBoard(gameArea);
     board->setBackgroundColor(QColor(0,0,0));
-    board->setFixedWidth( 124 );
-    gl->addMultiCellWidget( board, 0, 4, 2, 2 );
-    gl->addColSpacing( 2, 100 );
-    gl->addColSpacing( 1, 35 );
-    gl->addRowSpacing( 0, 35 );
+    hb->addWidget( board );
+
+    //board->setFixedWidth( 124 );
+    //    gl->addMultiCellWidget( board, 0, 4, 2, 2 );
+    //gl->addColSpacing( 2, 100 );
+    //gl->addColSpacing( 1, 35 );
+    //gl->addRowSpacing( 0, 35 );
 
     QPushButton *pb = new QPushButton( tr("Start"), gameArea );
     pb->setFocusPolicy( NoFocus );

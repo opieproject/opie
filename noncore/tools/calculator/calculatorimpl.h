@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -107,11 +107,13 @@ private:
     QString fake;
     
     // useful values for conversion stuff
-    int current_mode, max_mode, conversion_mode_count, last_conversion;
+    int current_mode, max_mode, conversion_mode_count, last_conversion,
+	last_temp_conversion;
 
     // make adding new modes easier for ourselves
-    static const int pre_conv_modes_count = 1;
+    static const int pre_conv_modes_count = 2;
     static const int post_conv_modes_count = 0;
+    static const int buttons_to_hide_in_temp_mode = 7;
 
     // an array of pointers to the func buttons
     static const int func_button_count = 12;
@@ -130,6 +132,8 @@ private:
     QPixmap oneoverx;
 
     void display_pixmap_faces(void);
+    void setupTemperatureMode(void);
+    double doTempConversion(double,int,int);
 };
 
 #endif

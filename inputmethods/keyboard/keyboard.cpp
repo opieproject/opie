@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -22,7 +22,9 @@
 
 #include <qpe/global.h>
 
+#ifdef QWS
 #include <qwindowsystem_qws.h>
+#endif
 #include <qpainter.h>
 #include <qfontmetrics.h>
 #include <qtimer.h>
@@ -91,8 +93,12 @@ void  KeyboardConfig::generateText(const QString &s)
 	parent->emitKey( 0, Qt::Key_Backspace, 0, false, false );
     }
     for (int i=0; i<(int)s.length(); i++) {
-	parent->emitKey( s[i].unicode(), 0, 0, true, false );
-	parent->emitKey( s[i].unicode(), 0, 0, false, false );
+	uint code = 0;
+	if ( s[i].unicode() >= 'a' && s[i].unicode() <= 'z' ) {
+	    code = s[i].unicode() - 'a' + Key_A;
+	}
+	parent->emitKey( s[i].unicode(), code, 0, true, false );
+	parent->emitKey( s[i].unicode(), code, 0, false, false );
     }
     parent->emitKey( 0, Qt::Key_Space, 0, true, false );
     parent->emitKey( 0, Qt::Key_Space, 0, false, false );
@@ -694,6 +700,10 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 #endif
     }
     if  ( unicode != -1 ) {
+	if ( unicode >= 'a' && unicode <= 'z' ) {
+	    qkeycode = unicode - 'a' + Key_A;
+	    if ( ctrl ) unicode = unicode - 'a'+1;
+	}
 	modifiers = (shift ? Qt::ShiftButton : 0) | (ctrl ? Qt::ControlButton : 0) |
 		  (alt ? Qt::AltButton : 0);
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)

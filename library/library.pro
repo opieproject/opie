@@ -16,6 +16,7 @@ HEADERS	=   calendar.h \
 	    fileselector_p.h \
 	    imageedit.h \
 	    qcopenvelope_qws.h \
+ 	    qcopmessage_qws.h \
 	    qpedecoration_qws.h \
 	    qpeapplication.h \
 	    qpestyle.h \

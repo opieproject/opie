@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -32,17 +32,24 @@
 /*!
   \class FileManager
   \brief The FileManager class assists with AppLnk input/output.
+
+  The FileManager class is used to \l{loadFile()}s and
+  \l{saveFile()}s. It also provides a copyFile() function and a
+  function to test for a file's existence, exists(). It also provides
+  openFile() that provides an IO device for reading.
+
+  \ingroup qtopiaemb
 */
 
 /*!
-  Constructs a FileManager.
+  Constructs a FileManager object.
 */
 FileManager::FileManager()
 {
 }
 
 /*!
-  Destroys a FileManager.
+  Destroys the FileManager object.
 */
 FileManager::~FileManager()
 {
@@ -50,9 +57,10 @@ FileManager::~FileManager()
 }
 
 /*!
+  \overload
   Saves \a data as the document specified by \a f.
 
-  Returns whether the operation succeeded.
+  Returns TRUE if the operation succeeded; otherwise returns FALSE.
 */
 bool FileManager::saveFile( const DocLnk &f, const QByteArray &data )
 {
@@ -82,7 +90,7 @@ bool FileManager::saveFile( const DocLnk &f, const QByteArray &data )
 
   The text is saved in UTF8 format.
 
-  Returns whether the operation succeeded.
+  Returns TRUE if the operation succeeded; otherwise returns FALSE.
 */
 bool FileManager::saveFile( const DocLnk &f, const QString &text )
 {
@@ -114,11 +122,12 @@ bool FileManager::saveFile( const DocLnk &f, const QString &text )
 
 
 /*!
+  \overload
   Loads \a text from the document specified by \a f.
 
-  The text is required to be in UTF8 format.
+  The text must be in UTF8 format.
 
-  Returns whether the operation succeeded.
+  Returns TRUE if the operation succeeded; otherwise returns FALSE.
 */
 bool FileManager::loadFile( const DocLnk &f, QString &text )
 {
@@ -142,7 +151,7 @@ bool FileManager::loadFile( const DocLnk &f, QString &text )
 /*!
   Loads \a ba from the document specified by \a f.
 
-  Returns whether the operation succeeded.
+  Returns TRUE if the operation succeeded; otherwise returns FALSE.
 */
 bool FileManager::loadFile( const DocLnk &f, QByteArray &ba )
 {
@@ -161,7 +170,7 @@ bool FileManager::loadFile( const DocLnk &f, QByteArray &ba )
   Copies the document specified by \a src to the document specified
   by \a dest.
 
-  Returns whether the operation succeeded.
+  Returns TRUE if the operation succeeded; otherwise returns FALSE.
 */
 bool FileManager::copyFile( const AppLnk &src, const AppLnk &dest )
 {
@@ -191,10 +200,10 @@ bool FileManager::copyFile( const AppLnk &src, const AppLnk &dest )
 		bytesRead -= bytesWritten;
 	}
     }
-    
+
     if ( ok )
 	ok = dest.writeLink();
-    
+
     if ( ok ) {
 	// okay now rename the file...
 	if ( ::rename( fn.latin1(), dest.file().latin1() ) < 0 ) {
@@ -228,6 +237,7 @@ QIODevice* FileManager::openFile( const DocLnk& f )
 }
 
 /*!
+  \overload
   Opens the document specified by \a f as a writable QIODevice.
   The caller must delete the return value.
 
@@ -248,8 +258,8 @@ QIODevice* FileManager::saveFile( const DocLnk& f )
 }
 
 /*!
-  Returns whether the document specified by \a f current exists
-  as a file on disk.
+  Returns TRUE if the document specified by \a f current exists
+  as a file on disk; otherwise returns FALSE.
 */
 bool FileManager::exists( const DocLnk &f )
 {
@@ -259,7 +269,8 @@ bool FileManager::exists( const DocLnk &f )
 
 /*!
   Ensures that the path \a fn exists, by creating required directories.
-  Returns TRUE if successful.
+
+  Returns TRUE if it succeededs; otherwise returns FALSE.
 */
 bool FileManager::ensurePathExists( const QString &fn )
 {

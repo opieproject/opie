@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>256</width>
-            <height>316</height>
+            <width>196</width>
+            <height>348</height>
         </rect>
     </property>
     <property stdset="1">
@@ -53,6 +53,14 @@
                 <cstring>GroupBox3</cstring>
             </property>
             <property stdset="1">
+                <name>frameShape</name>
+                <enum>Box</enum>
+            </property>
+            <property stdset="1">
+                <name>frameShadow</name>
+                <enum>Sunken</enum>
+            </property>
+            <property stdset="1">
                 <name>title</name>
                 <string>Power saving</string>
             </property>
@@ -76,6 +84,13 @@
                     <property stdset="1">
                         <name>name</name>
                         <cstring>interval_lightoff</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>5</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
                     </property>
                     <property stdset="1">
                         <name>suffix</name>
@@ -103,6 +118,13 @@
                     <property stdset="1">
                         <name>name</name>
                         <cstring>interval_suspend</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>5</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
                     </property>
                     <property stdset="1">
                         <name>suffix</name>
@@ -174,6 +196,13 @@
                     <property stdset="1">
                         <name>name</name>
                         <cstring>interval_dim</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>5</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
                     </property>
                     <property stdset="1">
                         <name>suffix</name>
@@ -355,7 +384,14 @@
                             </property>
                             <property stdset="1">
                                 <name>text</name>
-                                <string>&lt;blockquote&gt;The brighter the screen light, the more battery power is used.&lt;/blockquote&gt;</string>
+                                <string>&lt;p&gt;The brighter the screen light, the more battery power is used.</string>
+                            </property>
+                            <property stdset="1">
+                                <name>alignment</name>
+                                <set>AlignCenter</set>
+                            </property>
+                            <property>
+                                <name>hAlign</name>
                             </property>
                         </widget>
                         <widget>

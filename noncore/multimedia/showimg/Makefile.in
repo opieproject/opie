@@ -23,16 +23,24 @@ TARGET1 = lib$(TARGET).so.$(VER_MAJ)
 
 ####### Files
 
-HEADERS =	showimg.h
+HEADERS =	showimg.h \
+		settingsdialog.h
 SOURCES =	main.cpp \
+		settingsdialog.cpp \
 		showimg.cpp
 OBJECTS =	main.o \
-		showimg.o
-INTERFACES =    
-UICDECLS =      
-UICIMPLS =      
-SRCMOC	=	moc_showimg.cpp
-OBJMOC	=	moc_showimg.o
+		settingsdialog.o \
+		showimg.o \
+		settingsdialogbase.o
+INTERFACES =    settingsdialogbase.ui
+UICDECLS =      settingsdialogbase.h
+UICIMPLS =      settingsdialogbase.cpp
+SRCMOC	=	moc_showimg.cpp \
+		moc_settingsdialog.cpp \
+		moc_settingsdialogbase.cpp
+OBJMOC	=	moc_showimg.o \
+		moc_settingsdialog.o \
+		moc_settingsdialogbase.o
 
 
 ####### Implicit rules
@@ -102,18 +110,48 @@ main.o: main.cpp \
 		showimg.h \
 		$(QPEDIR)/include/qpe/qpeapplication.h
 
+settingsdialog.o: settingsdialog.cpp \
+		settingsdialog.h \
+		settingsdialogbase.h
+
 showimg.o: showimg.cpp \
 		showimg.h \
+		settingsdialog.h \
+		settingsdialogbase.h \
 		$(QPEDIR)/include/qpe/resource.h \
 		$(QPEDIR)/include/qpe/fileselector.h \
 		$(QPEDIR)/include/qpe/applnk.h \
 		$(QPEDIR)/include/qpe/qpemenubar.h \
-		$(QPEDIR)/include/qpe/qpetoolbar.h
+		$(QPEDIR)/include/qpe/qpetoolbar.h \
+		$(QPEDIR)/include/qpe/config.h
+
+settingsdialogbase.h: settingsdialogbase.ui
+	$(UIC) settingsdialogbase.ui -o $(INTERFACE_DECL_PATH)/settingsdialogbase.h
+
+settingsdialogbase.cpp: settingsdialogbase.ui
+	$(UIC) settingsdialogbase.ui -i settingsdialogbase.h -o settingsdialogbase.cpp
+
+settingsdialogbase.o: settingsdialogbase.cpp \
+		settingsdialogbase.h \
+		settingsdialogbase.ui
 
 moc_showimg.o: moc_showimg.cpp \
 		showimg.h
 
+moc_settingsdialog.o: moc_settingsdialog.cpp \
+		settingsdialog.h \
+		settingsdialogbase.h
+
+moc_settingsdialogbase.o: moc_settingsdialogbase.cpp \
+		settingsdialogbase.h
+
 moc_showimg.cpp: showimg.h
 	$(MOC) showimg.h -o moc_showimg.cpp
+
+moc_settingsdialog.cpp: settingsdialog.h
+	$(MOC) settingsdialog.h -o moc_settingsdialog.cpp
+
+moc_settingsdialogbase.cpp: settingsdialogbase.h
+	$(MOC) settingsdialogbase.h -o moc_settingsdialogbase.cpp
 
 

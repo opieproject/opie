@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2001 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -51,10 +51,16 @@ public:
     { mDesc = Qtopia::simplifyMultiLineSpace(description); }
     const QString &description() const { return mDesc; }
 
+    // Use THESE functions
+    void setDueDate( const QDate &date);
+    void clearDueDate();
+   
+    // Instead of these functions.
     void setDueDate( const QDate& date, bool hasDue ) { mDueDate = date; mDue = hasDue; }
+    void setHasDueDate( bool b ) { mDue = b; }
+
     const QDate &dueDate() const { return mDueDate; }
     bool hasDueDate() const { return mDue; }
-    void setHasDueDate( bool b ) { mDue = b; }
     
     void setCompleted( bool b ) { mCompleted = b; }
     bool isCompleted() const { return mCompleted; }
@@ -78,4 +84,7 @@ private:
     //
 };
 
+// MUST be inline.  (forwards compatability).
+inline void Task::setDueDate( const QDate &date) { setDueDate(date, TRUE); }
+inline void Task::clearDueDate() { setHasDueDate( FALSE ); }
 #endif

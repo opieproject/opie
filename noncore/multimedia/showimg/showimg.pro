@@ -3,10 +3,13 @@ TEMPLATE        = app
 CONFIG          += qt warn_on release
 DESTDIR         = $(QPEDIR)/bin
 
-HEADERS		= showimg.h
+HEADERS		= showimg.h \
+		  settingsdialog.h
 
 SOURCES		= main.cpp \
+		  settingsdialog.cpp \
 		  showimg.cpp
+INTERFACES	= settingsdialogbase.ui
 
 TARGET          = showimg
 

@@ -387,9 +387,9 @@ datebookmonth.o: datebookmonth.cpp \
 
 fileselector.o: fileselector.cpp \
 		fileselector.h \
-		fileselector_p.h \
 		filemanager.h \
 		applnk.h \
+		fileselector_p.h \
 		global.h \
 		resource.h \
 		config.h \
@@ -456,7 +456,8 @@ lightstyle.o: lightstyle.cpp \
 		lightstyle.h
 
 config.o: config.cpp \
-		config.h
+		config.h \
+		global.h
 
 applnk.o: applnk.cpp \
 		applnk.h
@@ -514,7 +515,8 @@ fontdatabase.o: fontdatabase.cpp \
 		fontdatabase.h
 
 power.o: power.cpp \
-		power.h
+		power.h \
+		custom.h
 
 storage.o: storage.cpp
 
@@ -646,17 +648,13 @@ lnkpropertiesbase_p.h: lnkpropertiesbase_p.ui
 lnkpropertiesbase_p.cpp: lnkpropertiesbase_p.ui
 	$(UIC) lnkpropertiesbase_p.ui -i lnkpropertiesbase_p.h -o lnkpropertiesbase_p.cpp
 
-passwordbase_p.o: passwordbase_p.cpp \
-		passwordbase_p.h
+passwordbase_p.o: passwordbase_p.cpp
 
-categoryeditbase_p.o: categoryeditbase_p.cpp \
-		categoryeditbase_p.h
+categoryeditbase_p.o: categoryeditbase_p.cpp
 
-findwidgetbase_p.o: findwidgetbase_p.cpp \
-		findwidgetbase_p.h
+findwidgetbase_p.o: findwidgetbase_p.cpp
 
-lnkpropertiesbase_p.o: lnkpropertiesbase_p.cpp \
-		lnkpropertiesbase_p.h
+lnkpropertiesbase_p.o: lnkpropertiesbase_p.cpp
 
 moc_menubutton.o: moc_menubutton.cpp \
 		menubutton.h
@@ -668,7 +666,6 @@ moc_datebookmonth.o: moc_datebookmonth.cpp \
 
 moc_fileselector.o: moc_fileselector.cpp \
 		fileselector.h \
-		fileselector_p.h \
 		filemanager.h \
 		applnk.h
 

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2001 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -90,9 +90,6 @@ void CategoryCombo::initCombo( const QArray<int> &recCats,
     clear();
     QStringList slApp;
 
-    QObject::disconnect( this, SIGNAL(activated(int)),
-		      this, SLOT(slotValueChanged(int)) );
-
     QObject::connect( this, SIGNAL(activated(int)),
 		      this, SLOT(slotValueChanged(int)) );
     bool loadOk = d->mCat.load( categoryFileName() );
@@ -136,10 +133,10 @@ void CategoryCombo::initCombo( const QArray<int> &recCats,
 		break;
 	    }
 	}
-    } else
-    {
+    } else {
 	setCurrentItem( slApp.count()-1 );  // unfiled
     }
+
 }
 
 // this is a new function by SHARP instead of initCombo()
@@ -249,7 +246,7 @@ int CategoryCombo::currentCategory() const
 {
     int returnMe;
     returnMe = currentItem();
-    
+
     if ( returnMe == (int)d->mAppCats.count() )
 	returnMe = -1;
     else if ( returnMe > (int)d->mAppCats.count() )  // only happen on "All"
@@ -261,10 +258,16 @@ int CategoryCombo::currentCategory() const
 
 void CategoryCombo::setCurrentCategory( int newCatUid )
 {
-    int i;
-    for ( i = 0; i < int(d->mAppCats.size()); i++ ) {
-	if ( d->mAppCats[i] == newCatUid )
-	    setCurrentItem( i );
+    if ( newCatUid == -1 ) {
+	setCurrentItem( d->mAppCats.count() );
+    } else if ( newCatUid == -2 ) {
+	setCurrentItem( d->mAppCats.count()+1 );
+    } else {
+	int i;
+	for ( i = 0; i < int(d->mAppCats.size()); i++ ) {
+	    if ( d->mAppCats[i] == newCatUid )
+		setCurrentItem( i );
+	}
     }
 }
 
@@ -350,7 +353,7 @@ void CategorySelect::slotDialog()
 
     if ( editDlg.exec() ) {
 	d->mRec = ce.newCategories();
-	cmbCat->initCombo( d->mRec, mStrAppName );
+	cmbCat->initCombo( d->mRec, mStrAppName, d->mVisibleName );
     }
 
     f.close();

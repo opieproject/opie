@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -27,7 +27,7 @@
 
 class QTimer;
 
-class QTetrixBoard : public QFrame, public GenericTetrix
+class QTetrixBoard : public QWidget, public GenericTetrix
 {
     Q_OBJECT
 public:
@@ -50,12 +50,13 @@ signals:
     void      updateScoreSignal(int score);
     void      updateLevelSignal(int level);
 
-public:       // until we have keyboard focus, should be protected
+public: // until we have keyboard focus, should be protected
     void      keyPressEvent( QKeyEvent * );
-
-private:
-    void      drawContents( QPainter * );
+    
+protected:
+    void      paintEvent( QPaintEvent * );
     void      resizeEvent( QResizeEvent * );
+private:
     void      drawSquare(int x,int y,int value);
     void      drawNextSquare(int x,int y,int value);
     void      updateRemoved(int noOfLines);

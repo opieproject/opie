@@ -9,6 +9,7 @@ HEADERS	= datebookday.h \
 		  datebooksettings.h \
 		  datebookweek.h \
 		  datebookweekheaderimpl.h \
+		  layoutmanager.h \
 		  repeatentry.h
 
 SOURCES	= main.cpp \
@@ -19,6 +20,7 @@ SOURCES	= main.cpp \
 		  datebooksettings.cpp \
 		  datebookweek.cpp \
 		  datebookweekheaderimpl.cpp \
+		  layoutmanager.cpp \
 		  repeatentry.cpp
 
 INTERFACES	= dateentry.ui \

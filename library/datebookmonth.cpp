@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -31,6 +31,7 @@
 #include <qdatetime.h>
 #include <qpainter.h>
 #include <qpopupmenu.h>
+#include <qvaluestack.h>
 
 
 DateBookMonthHeader::DateBookMonthHeader( QWidget *parent, const char *name )
@@ -525,103 +526,129 @@ void DayItemMonth::clearEffEvents()
 void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
                           const QRect &cr, bool selected )
 {
+    p->save();
+
     QColorGroup g( cg );
     g.setBrush( QColorGroup::Base, back );
     g.setColor( QColorGroup::Text, forg );
-    p->fillRect( 0, 0, cr.width(), cr.height(), selected ? g.brush( QColorGroup::Highlight ) : g.brush( QColorGroup::Base ) );
-
     if ( selected )
 	p->setPen( g.highlightedText() );
     else
 	p->setPen( g.text() );
 
-    p->save();
+    QValueStack<int> normalLine;
+    QValueStack<int> repeatLine;
+    QValueStack<int> travelLine;
+
+    bool normalAllDay = FALSE;
+    bool repeatAllDay = FALSE;
+    bool travelAllDay = FALSE;
+
+    QValueListIterator<EffectiveEvent> itDays = d->mDayEvents.begin();
+
+    for ( ; itDays != d->mDayEvents.end(); ++itDays ) {
+	int w = cr.width();
+	Event ev = (*itDays).event();
+
+	int f = (*itDays).start().hour(); // assume Effective event 
+	int t = (*itDays).end().hour(); 	 // is truncated.
+
+	if (ev.isAllDay()) { 
+	    if (!ev.hasRepeat())
+		normalAllDay = TRUE;
+	    else
+		repeatAllDay = TRUE;
+	} else {
+	    int sLine, eLine;
+	    if (f == 0)
+		sLine = 0;
+	    else if (f < 8 )
+		sLine = 1;
+	    else if (f >= 17)
+		sLine = w - 4;
+	    else {
+		sLine = (f - 8) * (w - 8);
+		if (sLine)
+		    sLine /= 8;
+		sLine += 4;
+	    }
+	    if (t == 23)
+		eLine = w;
+	    else if (t < 8)
+		eLine = 4;
+	    else if (t >= 17)
+		eLine = w - 1;
+	    else {
+		eLine = (t - 8) * (w - 8);
+		if (eLine)
+		    eLine /= 8;
+		eLine += 4;
+	    }
+	    if (!ev.hasRepeat()) {
+		normalLine.push(sLine);
+		normalLine.push(eLine);
+	    } else {
+		repeatLine.push(sLine);
+		repeatLine.push(eLine);
+	    }
+	}
+    }
+
+    // draw the background
+    if (normalAllDay || repeatAllDay || travelAllDay) {
+	p->save();
+
+	if (normalAllDay)
+	    if (repeatAllDay) {
+		p->fillRect( 0, 0, cr.width(), cr.height() / 2,
+			colorNormalLight );
+		p->fillRect( 0, cr.height() / 2, cr.width(), cr.height() / 2,
+			colorRepeatLight );
+	    } else
+		p->fillRect( 0, 0, cr.width(), cr.height(),
+			colorNormalLight );
+	    else if (repeatAllDay)
+		p->fillRect( 0, 0, cr.width(), cr.height(),
+			colorRepeatLight );
+    } else {
+	p->fillRect( 0, 0, cr.width(), 
+		cr.height(), selected 
+		?  g.brush( QColorGroup::Highlight ) 
+		: g.brush( QColorGroup::Base ) );
+    }
+
+    // The lines
+    // now for the lines.
+    int h = 5;
+    int y = cr.height() / 2 - h;
+
+    while(normalLine.count() >= 2) {
+	int x2 = normalLine.pop();
+	int x1 = normalLine.pop();
+	if (x2 < x1 + 2)
+	    x2 = x1 + 2;
+	p->fillRect(x1, y, x2 - x1, h, colorNormal);
+    }
+
+    y += h;
+
+    while(repeatLine.count() >= 2) {
+	int x2 = repeatLine.pop();
+	int x1 = repeatLine.pop();
+	if (x2 < x1 + 2)
+	    x2 = x1 + 2;
+	p->fillRect(x1, y, x2 - x1, h, colorRepeat);
+    }
+
+
+    // Finally, draw the number.
     QFont f = p->font();
     f.setPointSize( ( f.pointSize() / 3 ) * 2 );
     p->setFont( f );
     QFontMetrics fm( f );
     p->drawText( 1, 1 + fm.ascent(), QString::number( day() ) );
+
     p->restore();
-    // Put indicators for something like this, (similar to PalmOS)
-    // Before noon: item at top of the day
-    // At noon: put a small item at the middle
-    // After noon: put an indicator at the bottom of the day
-    // an all day event: mark with a circle in the middle (a la DateBook+)
-    bool beforeNoon = false;
-    bool atNoon = false;
-    bool afterNoon = false;
-    bool bAllDay = false;
-    bool bRepeatAfter = false;
-    bool bRepeatBefore = false;
-    bool bRepeatNoon = false;
-    bool straddleAfter = false;
-    bool straddleBefore = false;
-    QValueListIterator<EffectiveEvent> itDays = d->mDayEvents.begin();
-    for ( ; itDays != d->mDayEvents.end(); ++itDays ) {
-	if ( (*itDays).event().type() == Event::AllDay )
-	    bAllDay = TRUE;
-	else if ( (*itDays).start().hour() < 12 ) {
-	    beforeNoon = TRUE;
-	    if ( (*itDays).end().hour() > 12 ) {
-		atNoon = TRUE;
-		straddleBefore = TRUE;
-	    }
-	    if ( (*itDays).end().hour() > 14 ||
-		 (*itDays).end().hour() == 14 && (*itDays).end().minute() > 0 ) {
-		afterNoon = TRUE;
-		straddleAfter = TRUE;
-	    }
-	    if ( (*itDays).event().hasRepeat() )
-		bRepeatBefore = TRUE;
-	} else if ( (*itDays).start().hour() == 12 ) {
-	    if ( !atNoon )
-		atNoon = TRUE;
-	    if ( (*itDays).event().hasRepeat() )
-		bRepeatNoon = TRUE;
-	    if ( (*itDays).end().hour() > 14 ||
-		 (*itDays).end().hour() == 14 && (*itDays).end().minute() > 0 ) {
-		afterNoon = TRUE;
-		straddleAfter = TRUE;
-	    }
-	} else if ( (*itDays).start().hour() > 12 ) {
-	    afterNoon = TRUE;
-	    if ( (*itDays).event().hasRepeat() )
-		bRepeatAfter = TRUE;
-	}
-    }
-    int x = cr.width() - 13;
-    if ( beforeNoon ) {
-	p->setBrush( blue );
-	p->drawRect( x, 2,  10, 10 );
-	if ( bRepeatBefore )
-	    p->fillRect( x + 5, 4,  3, 3, white );
-    }
-    if ( atNoon ) {
-	p->setBrush( blue );
-	p->drawRect( x, 14, 10, 5 );
-	if ( bRepeatNoon )
-	    p->fillRect( x + 5, 16,  3, 2, white );
-    }
-    if ( straddleBefore ) {
-	p->drawLine( x, 11, x, 14 );
-	p->fillRect( x + 1, 11, 8, 4, blue );
-	p->drawLine( x + 9, 11, x + 9, 14 );
-    }
-    if ( afterNoon ) {
-	p->setBrush( blue );
-	p->drawRect( x, 21, 10, 10 );
-	if ( bRepeatAfter )
-	    p->fillRect( x + 5, 23,  3, 3, white );
-    }
-    if ( straddleAfter ) {
-	p->drawLine( x, 18, x, 21 );
-	p->fillRect( x + 1, 18, 8, 4, blue );
-	p->drawLine( x + 9, 18, x + 9, 21 );
-    }
-    if ( bAllDay ) {
-	p->setBrush( green );
-	p->drawEllipse( cr.width() / 2 - 7, cr.height() / 2 - 5, 10, 10 );
-    }
 }
 
 

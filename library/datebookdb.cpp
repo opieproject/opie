@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -717,6 +717,8 @@ void DateBookDB::loadFile( const QString &strFile )
     
     QByteArray ba = f.readAll();
     char* dt = ba.data();
+    if ( !dt )
+	return;
     int len = ba.size();
     int currentAction,
 	journalKey,
@@ -906,7 +908,6 @@ void DateBookDB::loadFile( const QString &strFile )
 	    break;
 	}
     }
-    f.close();
 }
 
 void DateBookDB::init()

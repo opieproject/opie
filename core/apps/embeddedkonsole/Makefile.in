@@ -184,8 +184,6 @@ session.o: session.cpp \
 keytrans.o: keytrans.cpp \
 		keytrans.h \
 		$(QPEDIR)/include/qpe/qpeapplication.h \
-		$(QPEDIR)/include/qpedecoration_qws.h \
-		$(QPEDIR)/include/timestring.h \
 		default.keytab.h
 
 konsole.o: konsole.cpp \
@@ -216,9 +214,7 @@ main.o: main.cpp \
 		TEmulation.h \
 		keytrans.h \
 		session.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h \
-		$(QPEDIR)/include/qpedecoration_qws.h \
-		$(QPEDIR)/include/timestring.h
+		$(QPEDIR)/include/qpe/qpeapplication.h
 
 MyPty.o: MyPty.cpp \
 		MyPty.h

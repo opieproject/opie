@@ -8,6 +8,7 @@
 PLATFORM=generic
 SHARING=shared
 DEBUG=
+X11=
 QCONFIGARG=
 
 touch .test.qpe.
@@ -58,6 +59,9 @@ while [ -n "$1" ]; do
    -shared)
        SHARING=shared
 	;;
+   -x11)
+       X11=x11
+	;;
    -static)
        SHARING=static
 	;;
@@ -77,13 +81,14 @@ while [ -n "$1" ]; do
    shift
 done
 
-TARGET=configs/$PLATFORM-$SHARING$DEBUG
+TARGET=configs/$PLATFORM-$SHARING$X11$DEBUG
 
 if [ '!' -f $TARGET ]
 then
-    if [ -f configs/linux-$PLATFORM-g++-$SHARING$DEBUG ]
+    if [ -f configs/linux-$PLATFORM-g++-$SHARING$X11$DEBUG ]
     then
-	TARGET=configs/linux-$PLATFORM-g++-$SHARING$DEBUG
+	PLATFORM=linux-$PLATFORM-g++
+	TARGET=configs/$PLATFORM-$SHARING$X11$DEBUG
     else
 	echo
 	echo '    The specified platform/compiler not supported: ' $TARGET
@@ -114,19 +119,26 @@ EOF
    exit 0;
 fi
 
+rm -f library/custom.h
 if [ -f library/custom-$PLATFORM.h ]
 then
-    rm -f library/custom.h
     ln -s custom-$PLATFORM.h library/custom.h
+else
+    touch library/custom.h
 fi
 
 mkdir -p include/qpe
 ( cd include/qpe &&  rm -f *.h; ln -s ../../library/*.h .; ln -s ../../library/backend/*.h .; rm -f *_p.h; )
+mkdir -p include/qpe/pim
+( cd include/qpe/pim && rm -f *.h; ln -s ../../../qpepim/*.h .; rm -f *_p.h; )
 
 echo Creating makefiles...
 
 sed -e 's/^\(VERSION.*= \).*/\1'$VERSION_MAJ.$VERSION_MIN.$VERSION_PAT/ <library/library.pro >library/library.pro-v
 mv library/library.pro-v library/library.pro
+
+sed -e 's/^\(VERSION.*= \).*/\1'$VERSION_MAJ.$VERSION_MIN.$VERSION_PAT/ <qpepim/qpepim.pro >qpepim/qpepim.pro-v
+mv qpepim/qpepim.pro-v qpepim/qpepim.pro
 
 if [ "$QT3" = yes ]
 then
@@ -237,6 +249,12 @@ EOF
 		PLATFORM_CFLAGS="-DFPM_ARM"
 		SED="$SED /SOURCES.*=/s/=/= idmt_arm.S /;"
 	esac
+    elif [ "$X11" = x11 -a "$f" = library ]
+    then
+	        SED='s/\$(MOC) qpedecoration_qws.h -o/touch/'
+    elif [ "$X11" = x11 -a "$f" = taskbar ]
+    then
+	        SED='s/\$(MOC) ..\/calibrate\/calibrate.h -o/touch/'
     fi
     if [ -n "$PLATFORM_CFLAGS" ]
     then

@@ -115,7 +115,7 @@ do
 		;;	*.control)
 		    continue
 		;; $QTDIR/*)
-		    BASE=$(dirname /usr/${ff#$QTDIR/})
+		    BASE=/opt/Qtopia/$(dirname ${ff#$QTDIR/})
 		;; etc/*.d/*)
 		    BASE=$(dirname /$ff)
 		;; ipaq/*)
@@ -185,7 +185,7 @@ do
 	    echo "Installed-Size: $size" >>$CTRLDIR/control
 	    echo "Filename: ./$package.ipk" >>$CTRLDIR/control
 	    echo "Version: $version" >>$CTRLDIR/control
-	    echo "Depends: $depends" >>$CTRLDIR/control
+	    if [ -n "$depends" ]; then echo "Depends: $depends" >>$CTRLDIR/control; fi
 	    egrep -v "^(Files|Version|Depends):" >>$CTRLDIR/control $i
 	    echo "$DEB_VERSION" >$TDIR/debian-binary
 	    base=${i%.control}

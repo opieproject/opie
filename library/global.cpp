@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -45,7 +45,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#ifdef QWS
 #include <qwindowsystem_qws.h> // for qwsServer
+#endif
 #include <qdatetime.h>
 
 //#include "quickexec_p.h"
@@ -86,10 +88,12 @@ StartingAppList* StartingAppList::appl = 0;
 StartingAppList::StartingAppList( QObject *parent, const char* name )
     :QObject( parent, name )
 {
+#ifdef QWS
 #if QT_VERSION >= 232 && !defined(QT_NO_COP)
     connect( qwsServer, SIGNAL( newChannel(const QString&)),
 	     this, SLOT( handleNewChannel(const QString&)) );
     dict.setAutoDelete( TRUE );
+#endif
 #endif
 }
 
@@ -125,7 +129,8 @@ bool StartingAppList::isStarting( const QString name )
 void StartingAppList::handleNewChannel( const QString & name )
 {
 #if QT_VERSION >= 232  && !defined(QT_NO_COP)
-    dict.remove( name );
+//   qDebug("Removing application %s from starting list.", name.latin1());
+  dict.remove( name );
 #endif
 }
 
@@ -147,7 +152,55 @@ static QString dictDir()
 
 /*!
   \class Global global.h
-  \brief The Global class collects application-wide global functions.
+  \brief The Global class provides application-wide global functions.
+
+  The Global functions are grouped as follows:
+  \tableofcontents
+
+  \section1 User Interface
+
+  The statusMessage() function provides short-duration messages to the
+  user. The showInputMethod() function shows the current input method,
+  and hideInputMethod() hides the input method.
+
+  \section1 Document related
+
+  The findDocuments() function creates a set of \link doclnk.html
+  DocLnk\endlink objects in a particular folder.
+
+  \section1 Filesystem related
+
+  Global provides an applicationFileName() function that returns the
+  full path of an application-specific file.
+
+  The execute() function runs an application.
+
+  \section1 Word list related
+
+  A list of words relevant to the current locale is maintained by the
+  system. The list is held in a \link qdawg.html DAWG\endlink
+  (implemented by the QDawg class). This list is used, for example, by
+  the pickboard input method.
+
+  The global QDawg is returned by fixedDawg(); this cannot be updated.
+  An updatable copy of the global QDawg is returned by addedDawg().
+  Applications may have their own word lists stored in \l{QDawg}s
+  which are returned by dawg(). Use addWords() to add words to the
+  updateable copy of the global QDawg or to named application
+  \l{QDawg}s.
+
+  \section1 Quoting
+
+  The shellQuote() function quotes a string suitable for passing to a
+  shell. The stringQuote() function backslash escapes '\' and '"'
+  characters.
+
+  \section1 Hardware
+
+  The writeHWClock() function sets the hardware clock to the system
+  clock's date and time.
+
+  \ingroup qtopiaemb
 */
 
 /*!
@@ -230,7 +283,7 @@ const QDawg& Global::dawg(const QString& name)
     if ( !r ) {
 	r = new QDawg;
 	named_dawg->insert(name,r);
-	QString dawgfilename = dictDir() + "/" + name + ".dawg";
+	QString dawgfilename = applicationFileName("Dictionary", name) + ".dawg";
 	QFile dawgfile(dawgfilename);
 	if ( dawgfile.open(IO_ReadOnly) )
 	    r->readFile(dawgfilename);
@@ -239,7 +292,12 @@ const QDawg& Global::dawg(const QString& name)
 }
 
 /*!
+  \overload
   Adds \a wordlist to the addedDawg().
+
+  Note that the addition of words persists between program executions
+  (they are saved in the dictionary files), so you should confirm the
+  words with the user before adding them.
 */
 void Global::addWords(const QStringList& wordlist)
 {
@@ -248,6 +306,10 @@ void Global::addWords(const QStringList& wordlist)
 
 /*!
   Adds \a wordlist to the dawg() named \a dictname.
+
+  Note that the addition of words persists between program executions
+  (they are saved in the dictionary files), so you should confirm the
+  words with the user before adding them.
 */
 void Global::addWords(const QString& dictname, const QStringList& wordlist)
 {
@@ -255,7 +317,7 @@ void Global::addWords(const QString& dictname, const QStringList& wordlist)
     QStringList all = d.allWords() + wordlist;
     d.createFromWords(all);
 
-    QString dawgfilename = dictDir() + "/" + dictname + ".dawg";
+    QString dawgfilename = applicationFileName("Dictionary", dictname) + ".dawg";
     QFile dawgfile(dawgfilename);
     if ( dawgfile.open(IO_WriteOnly) ) {
 	d.write(&dawgfile);
@@ -269,11 +331,11 @@ void Global::addWords(const QString& dictname, const QStringList& wordlist)
 
 
 /*!
-  Returns a full path for the application named \a appname, with the
-  given \a filename or QString::null if there was a problem creating
-  the directory tree for \a appname.  
-  If \a filename contains "/", it is the caller's responsibility to 
-  ensure those directories exist.
+  Returns the full path for the application called \a appname, with the
+  given \a filename. Returns QString::null if there was a problem creating
+  the directory tree for \a appname.
+  If \a filename contains "/", it is the caller's responsibility to
+  ensure that those directories exist.
 */
 QString Global::applicationFileName(const QString& appname, const QString& filename)
 {
@@ -304,8 +366,8 @@ void Global::createDocDir()
 
 
 /*!
-  Displays a status \a message to the user. This generally appears
-  in the taskbar for some amount of time, then disappears.
+  Displays a status \a message to the user. This usually appears
+  in the taskbar for a short amount of time, then disappears.
 */
 void Global::statusMessage(const QString& message)
 {
@@ -351,6 +413,13 @@ QWidget *Global::restart( bool )
 
 /*!
   Explicitly show the current input method.
+
+  Input methods are indicated in the taskbar by a small icon. If the
+  input method is activated (shown) then it takes up some proportion
+  of the bottom of the screen, to allow the user to interact (input
+  characters) with it.
+
+  \sa hideInputMethod()
 */
 void Global::showInputMethod()
 {
@@ -361,6 +430,11 @@ void Global::showInputMethod()
 
 /*!
   Explicitly hide the current input method.
+
+  The current input method is still indicated in the taskbar, but no
+  longer takes up screen space, and can no longer be interacted with.
+
+  \sa showInputMethod()
 */
 void Global::hideInputMethod()
 {
@@ -443,16 +517,22 @@ void Global::terminate( const AppLnk* app )
 {
     //if ( terminateBuiltin(app->exec()) ) return; // maybe? haven't tried this
 
+#ifndef QT_NO_COP
     QCString channel = "QPE/Application/" + app->exec().utf8();
     if ( QCopChannel::isRegistered(channel) ) {
 	QCopEnvelope e(channel, "quit()");
     }
+#endif
 }
 
 /*!
-  Low-level function to run command \a c. Not recommended.
+  Low-level function to run command \a c.
+
+  \warning Do not use this function. Use execute instead.
+
+  \sa execute()
 */
-void Global::invoke(const QString &c) 
+void Global::invoke(const QString &c)
 {
     // Convert the command line in to a list of arguments
     QStringList list = QStringList::split(QRegExp("  *"),c);
@@ -460,15 +540,19 @@ void Global::invoke(const QString &c)
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     QString ap=list[0];
     // see if the application is already running
-    // XXX should lock file /tmp/qcop-msg-ap 
+    // XXX should lock file /tmp/qcop-msg-ap
     if ( QCopChannel::isRegistered( ("QPE/Application/" + ap).latin1() ) ) {
+//       qDebug("QCop channel %s is registered.", ap.latin1());
+      // If the channel is already register, the app is already running, so show it.
+      { QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" ); }
 	QCopEnvelope e("QPE/System", "notBusy(QString)" );
 	e << ap;
 	return;
     }
-    // XXX should unlock file /tmp/qcop-msg-ap 
+    // XXX should unlock file /tmp/qcop-msg-ap
     //see if it is being started
     if ( StartingAppList::isStarting( ap ) ) {
+//       qDebug("App %s is starting.", ap.latin1());
 	QCopEnvelope e("QPE/System", "notBusy(QString)" );
 	e << ap;
 	return;
@@ -502,7 +586,7 @@ void Global::invoke(const QString &c)
     if ( QFile::exists( libexe ) ) {
 	qDebug("calling quickexec %s", libexe.latin1() );
 	quickexecv( libexe.utf8().data(), (const char **)args );
-    } else 
+    } else
 #endif
     {
 	if ( !::vfork() ) {
@@ -520,14 +604,16 @@ void Global::invoke(const QString &c)
 }
 
 /*!
-  Executes application identfied by \a c, passing \a document.
+  Executes the application identfied by \a c, passing \a
+  document if it isn't null.
 
-  Note that you might be better off sending a QCop message to
-  the application's QPE/Application/<i>appname</i> channel.
+  Note that a better approach might be to send a QCop message to the
+  application's QPE/Application/\e{appname} channel.
 */
 void Global::execute( const QString &c, const QString& document )
 {
     if ( qApp->type() != QApplication::GuiServer ) {
+//       qDebug("Global: Asking the server to execute %s", c.latin1());
 	// ask the server to do the work
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
 	if ( document.isNull() ) {
@@ -555,8 +641,10 @@ void Global::execute( const QString &c, const QString& document )
 		} else {
 		    running[i] = builtin[i].func( builtin[i].maximized );
 		}
+#ifndef QT_NO_COP
 		QCopEnvelope e("QPE/System", "notBusy(QString)" );
 		e << c; // that was quick ;-)
+#endif
 		return;
 	    }
 	}
@@ -570,15 +658,16 @@ void Global::execute( const QString &c, const QString& document )
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     QString ap=list[0];
 
-    qDebug("executing %s", ap.latin1() );
+//     qDebug("executing %s", ap.latin1() );
     if ( ap == "suspend" ) {
-	QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );	
+	QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
 	return;
     }
 
-    /* if need be, sending a qcop message will result in an invoke, see 
+    /* if need be, sending a qcop message will result in an invoke, see
        preceeding function */
-    { QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" ); }
+    invoke(ap);
+//     { QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" ); }
     if ( !document.isEmpty() ) {
 	QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "setDocument(QString)" );
 	env << document;
@@ -587,8 +676,10 @@ void Global::execute( const QString &c, const QString& document )
 }
 
 /*!
-  Returns the string \a s with the characters backslash, ", and $
-  quoted by a preceeding backslash.
+  Returns the string \a s with the characters '\', '"', and '$' quoted
+  by a preceeding '\'.
+
+  \sa stringQuote()
 */
 QString Global::shellQuote(const QString& s)
 {
@@ -606,8 +697,10 @@ QString Global::shellQuote(const QString& s)
 }
 
 /*!
-  Returns the string \a s with the characters backslash and "
-  quoted by a preceeding backslash.
+  Returns the string \a s with the characters '\' and '"' quoted by a
+  preceeding '\'.
+
+  \sa shellQuote()
 */
 QString Global::stringQuote(const QString& s)
 {
@@ -625,9 +718,9 @@ QString Global::stringQuote(const QString& s)
 }
 
 /*!
-  Finds all documents on the system's document directories which
-  match the filter \a mimefilter, and appends the resulting DocLnk
-  objects to \a folder.
+  Finds all documents in the system's document directories which
+  match the filter \a mimefilter, and appends the resulting \link
+  doclnk.html DocLnk\endlink objects to \a folder.
 */
 void Global::findDocuments(DocLnkSet* folder, const QString &mimefilter)
 {
@@ -670,16 +763,8 @@ QStringList Global::helpPath()
 	    path += QPEApplication::qpeDir() + "/help/" + lang + "/html";
     }
     path += QPEApplication::qpeDir() + "/pics";
-    path += QPEApplication::qpeDir() + "/help/en/html";
+    path += QPEApplication::qpeDir() + "/help/html";
     path += QPEApplication::qpeDir() + "/docs";
-    QString dir = QDir::current().canonicalPath();
-    if ( dir == "/" )
-	dir += "/docs";
-    else {
-	path += dir + "/../pics";
-	dir += "/../docs";
-	path += dir;
-    }
     return path;
 }
 

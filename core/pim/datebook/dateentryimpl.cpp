@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -38,6 +38,7 @@
 #include <qscrollview.h>
 #include <qspinbox.h>
 #include <qtoolbutton.h>
+#include <qlabel.h>
 
 #include <stdlib.h>
 
@@ -143,6 +144,47 @@ void DateEntry::setDates( const QDateTime& s, const QDateTime& e )
 
 void DateEntry::init()
 {
+    if (QApplication::desktop()->width() < 200) {
+	setMaximumWidth(QApplication::desktop()->width() 
+		- style().scrollBarExtent().width());
+	delete DateEntryBaseLayout;
+	DateEntryBaseLayout = new QGridLayout(this);
+	DateEntryBaseLayout->setSpacing(1);
+	DateEntryBaseLayout->setMargin(3);
+
+	DateEntryBaseLayout->addMultiCellWidget(TextLabel1, 0,0, 0, 1);
+	DateEntryBaseLayout->addMultiCellWidget(comboDescription, 1,1, 0,1);
+
+	DateEntryBaseLayout->addMultiCellWidget(TextLabel2, 2,2, 0,1);
+	DateEntryBaseLayout->addMultiCellWidget(comboLocation, 3,3, 0,1);
+
+	DateEntryBaseLayout->addMultiCellWidget(TextLabel2_2, 4,4, 0,1);
+	DateEntryBaseLayout->addMultiCellWidget(comboCategory, 5,5, 0,1);
+
+	DateEntryBaseLayout->addMultiCellWidget(TextLabel3, 6,6, 0,1);
+	DateEntryBaseLayout->addMultiCellWidget(buttonStart, 7,7, 0,0);
+	DateEntryBaseLayout->addMultiCellWidget(comboStart, 7,7, 1,1);
+
+	DateEntryBaseLayout->addMultiCellWidget(TextLabel3_2, 8,8, 0,1);
+	DateEntryBaseLayout->addMultiCellWidget(buttonEnd, 9,9, 0,0);
+	DateEntryBaseLayout->addMultiCellWidget(comboEnd, 9,9, 1,1);
+
+
+	DateEntryBaseLayout->addMultiCellWidget(checkAllDay, 10,10, 0,1);
+
+	DateEntryBaseLayout->addMultiCellWidget(TextLabel3_2_2, 11,11, 0,1);
+	DateEntryBaseLayout->addMultiCellWidget(timezone, 12,12, 0,1);
+
+	DateEntryBaseLayout->addMultiCellWidget(checkAlarm, 13,13, 0,1);
+	DateEntryBaseLayout->addMultiCellWidget(spinAlarm, 14,14, 0,0);
+	DateEntryBaseLayout->addMultiCellWidget(comboSound, 14,14, 1,1);
+
+	DateEntryBaseLayout->addMultiCellWidget(lblRepeat, 15,15, 0,1);
+	DateEntryBaseLayout->addMultiCellWidget(cmdRepeat, 16,16, 0,1);
+
+	DateEntryBaseLayout->addMultiCellWidget(editNote, 17,17, 0,1);
+    }
+
     comboDescription->setInsertionPolicy(QComboBox::AtCurrent);
     comboLocation->setInsertionPolicy(QComboBox::AtCurrent);
 

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -29,7 +29,9 @@
 #include <qpe/applnk.h>
 #include <qpe/global.h>
 #include <qpe/categorywidget.h>
+#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
+#endif
 #include <qpe/filemanager.h>
 #include <qpe/config.h>
 #include <qpe/storage.h>
@@ -149,7 +151,7 @@ void LnkProperties::setupLocations()
     currentLocation = -1;
     for ( ; it.current(); ++it ) {
 	// we add 10k to the file size so we are sure we can also save the desktop file
-	if ( (*it)->availBlocks() * (*it)->blockSize() > fileSize + 10000 ) {
+	if ( (ulong)(*it)->availBlocks() * (ulong)(*it)->blockSize() > (ulong)fileSize + 10000 ) {
 	    if ( (*it)->isRemovable() ||
 		 (*it)->disk() == "/dev/mtdblock1" ||
 		 (*it)->disk() == "/dev/mtdblock/1" ) {
@@ -277,12 +279,16 @@ void LnkProperties::done(int ok)
 	    if ( apps.contains(exe) != d->preload->isChecked() ) {
 		if ( d->preload->isChecked() ) {
 		    apps.append(exe);
+#ifndef QT_NO_COP
 		    QCopEnvelope e("QPE/Application/"+exe.local8Bit(),
 				   "enablePreload()");
+#endif
 		} else {
 		    apps.remove(exe);
+#ifndef QT_NO_COP
 		    QCopEnvelope e("QPE/Application/"+exe.local8Bit(),
 				   "quitIfInvisible()");
+#endif
 		}
 		cfg.writeEntry("Apps",apps,',');
 	    }

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -27,6 +27,7 @@
 #include <qpushbutton.h>
 #include <qcombobox.h>
 #include <qmessagebox.h>
+#include <qhostaddress.h>
 
 Security::Security( QWidget* parent,  const char* name, WFlags fl )
     : SecurityBase( parent, name, TRUE, fl )
@@ -37,7 +38,9 @@ Security::Security( QWidget* parent,  const char* name, WFlags fl )
     passcode = cfg.readEntry("passcode");
     passcode_poweron->setChecked(cfg.readBoolEntry("passcode_poweron",FALSE));
     cfg.setGroup("Sync");
-    int auth_peer = cfg.readNumEntry("auth_peer",0xc0a80100);
+    QHostAddress allowed;
+    allowed.setAddress(cfg.readEntry("auth_peer","192.168.1.0"));
+    uint auth_peer = allowed.ip4Addr();
     int auth_peer_bits = cfg.readNumEntry("auth_peer_bits",24);
     selectNet(auth_peer,auth_peer_bits);
     connect(syncnet, SIGNAL(textChanged(const QString&)),
@@ -89,7 +92,8 @@ void Security::show()
 	//changePassCode();
 	//if ( passcode.isEmpty() )
 	    //reject();
-    } else {
+    } else if ( timeout.isNull() || timeout.elapsed() > 2000 ) {
+	// Insist on re-entry of passcode if more than 2 seconds have elapsed.
 	QString pc = enterPassCode(tr("Enter passcode"));
 	if ( pc != passcode ) {
 	    QMessageBox::critical(this, tr("Passcode incorrect"), 
@@ -97,6 +101,7 @@ void Security::show()
 	    reject();
 	    return;
 	}
+	timeout.start();
     }
     setEnabled(TRUE);
     valid=TRUE;
@@ -130,40 +135,50 @@ void Security::selectNet(int auth_peer,int auth_peer_bits)
 	    + QString::number(auth_peer_bits);
     }
     for (int i=0; i<syncnet->count(); i++) {
-	if ( syncnet->text(i).left(sn.length()) == sn ) {
+	if ( sn == syncnet->text(i) || syncnet->text(i).left(sn.length()+1) == sn+" " )
+	{
 	    syncnet->setCurrentItem(i);
 	    return;
 	}
     }
-    qDebug("No match for \"%s\"",sn.latin1());
+    syncnet->insertItem(sn);
+    syncnet->setCurrentItem(syncnet->count()-1);
 }
 
-void Security::parseNet(const QString& sn,int& auth_peer,int& auth_peer_bits)
+bool Security::parseNet(const QString& sn,int& auth_peer,int& auth_peer_bits)
 {
     auth_peer=0;
     if ( sn == tr("Any") ) {
 	auth_peer = 0;
 	auth_peer_bits = 0;
+	return TRUE;
     } else if ( sn == tr("None") ) {
 	auth_peer = 0;
 	auth_peer_bits = 32;
+	return TRUE;
     } else {
+	bool ok;
 	int x=0;
 	for (int i=0; i<4; i++) {
 	    int nx = sn.find(QChar(i==3 ? '/' : '.'),x);
-	    auth_peer = (auth_peer<<8)|sn.mid(x,nx-x).toInt();
+	    if ( nx < 0 )
+		return FALSE;
+	    auth_peer = (auth_peer<<8)|sn.mid(x,nx-x).toInt(&ok);
+	    if ( !ok )
+		return FALSE;
 	    x = nx+1;
 	}
 	uint n = (uint)sn.find(' ',x)-x;
-	auth_peer_bits = sn.mid(x,n).toInt();
+	auth_peer_bits = sn.mid(x,n).toInt(&ok);
+	return ok && auth_peer_bits>0;
     }
 }
 
 void Security::setSyncNet(const QString& sn)
 {
     int auth_peer,auth_peer_bits;
-    parseNet(sn,auth_peer,auth_peer_bits);
-    selectNet(auth_peer,auth_peer_bits);
+    if ( parseNet(sn,auth_peer,auth_peer_bits) )
+	selectNet(auth_peer,auth_peer_bits);
 }
 
 void Security::applySecurity()
@@ -178,7 +193,9 @@ void Security::applySecurity()
 	int auth_peer_bits;
 	QString sn = syncnet->currentText();
 	parseNet(sn,auth_peer,auth_peer_bits);
-	cfg.writeEntry("auth_peer",auth_peer);
+	
+	QHostAddress allowed((Q_UINT32)auth_peer);
+	cfg.writeEntry("auth_peer",allowed.toString());
 	cfg.writeEntry("auth_peer_bits",auth_peer_bits);
 	/*
 	cfg.setGroup("Remote");

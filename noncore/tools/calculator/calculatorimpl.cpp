@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -17,7 +17,6 @@
 ** not clear to you.
 **
 **********************************************************************/
-
 #include "calculatorimpl.h"
 
 #include <qpe/resource.h>
@@ -35,10 +34,27 @@
 #include <qmessagebox.h>
 #include <math.h>
 
+// Abandon all hope, ye who enter here
+
+// temperature mode is the first post_conversion mode
+#define TEMPERATURE_MODE (pre_conv_modes_count - 1)
+#define TEMP_K 6
+#define TEMP_F 7
+#define TEMP_C 8
+
 CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
 				WFlags f )
     : Calculator( parent, name, f )
 {
+ CalculatorLayout->setStretchFactor( LCD, 1 );
+ // top func buttons
+ CalculatorLayout->setStretchFactor( Layout10, 1 );
+ // command buttons
+ CalculatorLayout->setStretchFactor( Layout4, 1 );
+ // hiding buttons
+ CalculatorLayout->setStretchFactor( Layout11, 1 );
+ CalculatorLayout->setStretchFactor( Layout5, 1 );
+
     xtopowerofy = Resource::loadPixmap("xtopowerofy");
     ythrootofx = Resource::loadPixmap("ythrootofx");
     oneoverx = Resource::loadPixmap("oneoverx");
@@ -53,7 +69,7 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
     PushButtonMR->setEnabled( FALSE );
 
     current_mode = max_mode = conversion_mode_count = 0;
-    last_conversion = -1;
+    last_conversion = last_temp_conversion = -1;
 
 //bgr_command.insert( PushButtonFunction);
     bgr_command.insert( PushButtonMPlus);
@@ -83,7 +99,7 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
     bgr_std.insert(PushButtonTimes);
     connect( &bgr_std, SIGNAL(clicked(int) ), this, SLOT(std_buttons(int)));
 
-// change the / to a proper division signal
+// change the / to a proper division symbol
     PushButtonDivide->setText(QChar(0xF7));
 
     func_buttons[0] = PushButtonF1;
@@ -112,8 +128,14 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
     captions.append("Standard");
     ComboBoxFunction->insertItem(captions.last());
 
+    // SUPER FINAL HACK II alpha edition, aka temperature mode
+    captions << "Temperature";
+    ComboBoxFunction->insertItem(captions.last());
+    for ( int x = 0 ; x < TEMP_K ; x++)
+        faces << "im b0rkt";
+    faces << "Kelvin" << "Fahrenheit" << "Celsius" << "" << "" << "";
+ 
     // now add in the conversion modes
-    // when the menu gets done, these should be in a submenu
     QString tmp = QPEApplication::qpeDir();
     tmp += "/etc/unit_conversion.dat";
     QFile myfile(tmp);
@@ -160,7 +182,9 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
         }
     }
     myfile.close();
+
     clear();
+   
     max_mode = pre_conv_modes_count + conversion_mode_count + post_conv_modes_count - 1;
     display_pixmap_faces();
 
@@ -214,12 +238,17 @@ bool CalculatorImpl::eventFilter( QObject *o, QEvent *e )
 }
 
 void CalculatorImpl::do_convert(int button) {
-    if ( state == sError )
+    if ( state == sError ) {
 	return;
+    }
     if ( current_mode >= pre_conv_modes_count && current_mode <= (max_mode - post_conv_modes_count) &&
 	button < changeable_func_button_count ) {
+	if ( last_conversion == button ) { // stop toggles from activating the conversion
+	    last_conversion = -1;
+	    return;
+	}
         if ( last_conversion > -1 ) {
-            if( state == sNewNumber ){
+            if ( state == sNewNumber ) {
                 acc = num
                     / (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + last_conversion])
                     * (entry_list[(current_mode - pre_conv_modes_count) * func_button_count + button]) ;
@@ -234,40 +263,72 @@ void CalculatorImpl::do_convert(int button) {
                 acc = num;
             }
         }
+	flPoint = FALSE;
+	numDecimals = 0;
+
         last_conversion = button;
     }
 }
 
+void CalculatorImpl::setupTemperatureMode() {
+    QPushButton *tmpbutton;
+    int counter = 0;
+    for ( ; counter < 6; counter++) {
+        tmpbutton = func_buttons[counter];
+	tmpbutton->hide();
+    }
+    tmpbutton = func_buttons[counter+3];
+    tmpbutton->hide();
+
+ CalculatorLayout->setStretchFactor( Layout11, 0 );
+}
 
 void CalculatorImpl::function_button(int mode){
+    if ( mode == TEMPERATURE_MODE ) {
+	setupTemperatureMode();
+    }
+
     if ( state == sError ) 
 	clear();
     // dont need the next line when using a popup menu
     current_mode = mode;
 
     // reset the last conv
-    last_conversion = -1;
+    last_conversion = last_temp_conversion = -1;
 
     // set the caption
     this->setCaption( captions[current_mode] );
 
     reset_conv();
 
-    for ( int x = 0 ; x < changeable_func_button_count ; x++ ) {
-        QPushButton* tmpbutton = func_buttons[x];
+    QPushButton *tmpbutton;
+    for ( int x = 0; x < changeable_func_button_count ; x++ ) {
+        tmpbutton = func_buttons[x];
+	if ( x < buttons_to_hide_in_temp_mode && !tmpbutton->isVisible() &&
+		current_mode != TEMPERATURE_MODE )
+	    tmpbutton->show(); // temperature mode may have hidden the buttons
 
          // if its a conversion , make it a toggle button
-        if ( current_mode >= pre_conv_modes_count && current_mode <= (max_mode - post_conv_modes_count) ) {
+        if ( current_mode >= pre_conv_modes_count && current_mode <= (max_mode - post_conv_modes_count) ||
+		current_mode == TEMPERATURE_MODE) {
             tmpbutton->setToggleButton(TRUE);
         } else {
             tmpbutton->setToggleButton(FALSE);
         }
         tmpbutton->setText( faces[current_mode * func_button_count + x] );
     }
+    tmpbutton = func_buttons[9];
+    if ( current_mode != TEMPERATURE_MODE && !tmpbutton->isVisible() ) {
+	tmpbutton->show();
+    }
+
+    if (current_mode != TEMPERATURE_MODE)
+	CalculatorLayout->setStretchFactor( Layout11, 1 );
 
     if ( current_mode == 0 ) display_pixmap_faces();
 
-    if ( current_mode >= pre_conv_modes_count && current_mode <= (max_mode - post_conv_modes_count) ) {
+    if ( current_mode >= pre_conv_modes_count && current_mode <= (max_mode - post_conv_modes_count) ||
+	    current_mode == TEMPERATURE_MODE ) {
             bgr_function.setExclusive(TRUE);
     } else {
             bgr_function.setExclusive(FALSE);
@@ -304,11 +365,11 @@ void CalculatorImpl::reset_conv() {
 
         // dont carry any selections into the next mode
         if ( tmpbutton->state() == QPushButton::On ) {
-           tmpbutton->toggle();
+	    tmpbutton->setOn(FALSE);
         }
     }
 
-    last_conversion = -1;
+    last_conversion = last_temp_conversion = -1;
 }
 
 void CalculatorImpl::std_buttons(int button)
@@ -322,16 +383,66 @@ void CalculatorImpl::std_funcs(int button) {
     if ( state == sError )
 	return;
     if ( current_mode <  pre_conv_modes_count ||
-	button > changeable_func_button_count-1 ) {
+	    button > changeable_func_button_count-1 ) {
 	Operation op;
-	if ( button < 10 )
-	    op = (Operation)(button + oSin);
-	else if ( button == 10 )
+	if ( button == 10 )
 	    op = oOpenBrace;
-	else 
+	else if ( button == 11 )
 	    op = oCloseBrace;
-        execOp( op );
+	else if ( current_mode == TEMPERATURE_MODE ) {
+	    // DO TEMP CONVERSION HERE
+	    if (last_temp_conversion > -1 && last_temp_conversion != button) {
+		if( state == sNewNumber ) {
+		    acc = doTempConversion(num, last_temp_conversion, button);
+		    num = acc;
+		    LCD->display( acc );
+		} else {
+		    state = sNewNumber;
+		    num = doTempConversion(num, last_temp_conversion, button);
+		    LCD->display( num );
+		    acc = num;
+		}
+		state = sNewNumber;
+		flPoint = FALSE;
+		numDecimals = 0;
+	    } else if (last_temp_conversion == button) {
+		last_temp_conversion = -1;
+		return;
+	    }
+	    last_temp_conversion = button;
+	    return;
+	} else 
+	    op = (Operation)(button + oSin);
+	execOp( op );
     }
+}
+
+static const double kelvin_conversion_factor = -273.15;
+
+double CalculatorImpl::doTempConversion(double number, int from, int to) {
+    double result = number;
+    // this may be in the wrong place, check normal conversion
+    if (last_temp_conversion > -1) {
+	switch (to) {
+	    case TEMP_K: 
+		if (from == TEMP_F)
+		    result = doTempConversion(result, TEMP_F, TEMP_C);
+		result = result - kelvin_conversion_factor;
+		break;
+	    case TEMP_C:
+		if (from == TEMP_K)
+		    result = result + kelvin_conversion_factor;
+		else
+		    result = (result - 32) * 5 / 9;
+		break;
+	    case TEMP_F:
+		if (from == TEMP_K)
+		    result = doTempConversion(result, TEMP_K, TEMP_C);
+		result = result * 9 / 5 + 32;
+		break;
+	}
+    }
+    return result;
 }
 
 void CalculatorImpl::execOp( Operation i )
@@ -592,6 +703,7 @@ void CalculatorImpl::command_buttons(int i) {
 	    LCD->display( 0 );
 	    fake = QString::null;
 	    numDecimals = 0;
+	    reset_conv();
 	} else {
 	    clear();
 	}

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -356,12 +356,12 @@ MindBreakerBoard::~MindBreakerBoard()
     /* write the board */
     for (i = 0; i < current_go; i++) {
         for(j = 0; j < 4; j++)
-            c.writeEntry(tr("Go%1p%2").arg(i).arg(j), past_guesses[4*i+j]);
+            c.writeEntry(QString("Go%1p%2").arg(i).arg(j), past_guesses[4*i+j]);
     }
     for(j = 0; j < 4; j++) 
-        c.writeEntry(tr("CurrentGo%1").arg(j), current_guess[j]);
+        c.writeEntry(QString("CurrentGo%1").arg(j), current_guess[j]);
     for(j = 0; j < 4; j++) 
-        c.writeEntry(tr("Answer%1").arg(j), answer[j]);
+        c.writeEntry(QString("Answer%1").arg(j), answer[j]);
 
     c.setGroup("Score");
     /* write the score */

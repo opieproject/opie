@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -24,7 +24,9 @@
 
 #include <qpe/qlibrary.h>
 
+#ifdef QWS
 #include <qfontmanager_qws.h>
+#endif
 #include <qdir.h>
 #include <qdict.h>
 #include <stdio.h>
@@ -58,24 +60,22 @@ QValueList<FontFactory> *FontDatabase::factoryList = 0;
   \class FontDatabase fontdatabase.h
   \brief The FontDatabase class provides information about available fonts.
 
-  Provides information about available fonts. 
+  Most often you will simply want to query the database for the
+  available font families().
 
-  FontDatabase provides information about the available fonts of the
-  underlying window system. 
+  Use FontDatabase rather than QFontDatabase when you may need access
+  to fonts that are not normally available. For example, if the
+  freetype library and the Qtopia freetype plugin are installed,
+  TrueType fonts will be available to your application. Font renderer
+  plugins have greater resource requirements than system fonts so they
+  should be used only when necessary. You can force the loading of
+  font renderer plugins with loadRenderers().
 
-  Most often you will simply want to query the database for all font
-  families(), and their respective pointSizes(), styles() and charSets().
-
-  Use FontDatabase rather than QFontDatabase when you may need access to
-  fonts not normally available.  For example, if the freetype library and
-  Qtopia freetype plugin are installed TrueType fonts will be available
-  to your application.  Font renderer plugins have greater resource
-  requirements than the system fonts so they should be used only when
-  necessary.
+  \ingroup qtopiaemb
 */
 
 /*!
-  Constructs the FontDatabase class.
+  Constructs a FontDatabase object.
 */
 FontDatabase::FontDatabase()
 #ifndef QT_NO_FONTDATABASE
@@ -87,7 +87,7 @@ FontDatabase::FontDatabase()
 }
 
 /*!
-  Returns a list of names of all available font families.
+  Returns a list of names of all the available font families.
 */
 QStringList FontDatabase::families() const
 {
@@ -141,12 +141,13 @@ QValueList<int> FontDatabase::standardSizes()
 #endif
 
 /*!
-  Load any font renderer plugins that are available and make fonts that
-  the plugins can read available.
+  Load any font renderer plugins that are available and make the fonts
+  that the plugins can read available.
 */
 void FontDatabase::loadRenderers()
 {
 #ifndef QT_NO_COMPONENT
+#ifdef QT_NO_FONTDATABASE
     if ( !factoryList )
 	factoryList = new QValueList<FontFactory>;
 
@@ -180,6 +181,7 @@ void FontDatabase::loadRenderers()
 	    delete lib;
 	}
     }
+#endif	// QT_NO_FONTDATABASE
 #endif
 }
 
@@ -188,6 +190,7 @@ void FontDatabase::loadRenderers()
 */
 void FontDatabase::readFonts( QFontFactory *factory )
 {
+#ifdef QT_NO_FONTDATABASE
 
     // Load in font definition file
     QString fn = fontDir() + "fontdir";
@@ -231,5 +234,6 @@ void FontDatabase::readFonts( QFontFactory *factory )
 	fgets(buf,200,fontdef);
     }
     fclose(fontdef);
+#endif	
 }
 

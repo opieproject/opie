@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -23,14 +23,15 @@
 //
 
 #include "showimg.h"
+#include "settingsdialog.h"
 
 #include <qpe/resource.h>
 #include <qpe/fileselector.h>
 #include <qpe/applnk.h>
-
 #include <qpe/qpemenubar.h>
-#include <qwidgetstack.h>
 #include <qpe/qpetoolbar.h>
+#include <qpe/config.h>
+#include <qwidgetstack.h>
 #include <qaction.h>
 #include <qfiledialog.h>
 #include <qmessagebox.h>
@@ -129,22 +130,12 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     menubar = new QPEMenuBar( toolBar );
 
     QStrList fmt = QImage::outputFormats();
-
-    QPopupMenu *edit = new QPopupMenu( menubar );
-    QPopupMenu *view = new QPopupMenu( menubar );
-
-    menubar->insertItem( "Edit", edit );
-    menubar->insertItem( "View", view );
-
-    edit->insertItem(tr("Horizontal flip"), this, SLOT(hFlip()), 0);
-    edit->insertItem(tr("Vertical flip"), this, SLOT(vFlip()), 0);
-
     stack = new QWidgetStack( this );
     stack->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding ) );
     setCentralWidget( stack );
 
     imagePanel = new ImagePane( stack );
-    connect(imagePanel, SIGNAL(clicked()), this, SLOT(normalView()));
+    connect(imagePanel, SIGNAL(clicked()), this, SLOT(toggleFullscreen()));
 
     fileSelector = new FileSelector("image/*", stack, "fs");
     fileSelector->setNewVisible(FALSE);
@@ -152,14 +143,24 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( closeFileSelector() ) );
     connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( openFile( const DocLnk & ) ) );
 
+    QPopupMenu *edit = new QPopupMenu( menubar );
+    QPopupMenu *view = new QPopupMenu( menubar );
+
+    menubar->insertItem( "Image", edit );
+    menubar->insertItem( "View", view );
+
     toolBar = new QPEToolBar( this );
 
+    openAction = new QAction( tr( "Open" ), Resource::loadIconSet( "fileopen" ), QString::null, 0, this, 0 );
+    connect( openAction, SIGNAL( activated() ), this, SLOT( open() ) );
+    openAction->addTo( toolBar );
+    openAction->addTo( edit );
+
+    edit->insertSeparator();
+    edit->insertItem(tr("Horizontal flip"), this, SLOT(hFlip()), 0);
+    edit->insertItem(tr("Vertical flip"), this, SLOT(vFlip()), 0);
+
     QAction *a;
-
-    a = new QAction( tr( "Open" ), Resource::loadPixmap( "fileopen" ), QString::null, 0, this, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( open() ) );
-    a->addTo( toolBar );
-
     a = new QAction( tr( "Rotate 180" ), Resource::loadPixmap( "repeat" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( rot180() ) );
     a->addTo( toolBar );
@@ -175,14 +176,47 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     a->addTo( toolBar );
     a->addTo( view);
 
+    slideAction = new QAction( tr( "Slide show" ), Resource::loadPixmap( "slideshow" ), QString::null, 0, this, 0 );
+    slideAction->setToggleAction( TRUE );
+    connect( slideAction, SIGNAL( toggled(bool) ), this, SLOT( slideShow(bool) ) );
+    slideAction->addTo( view);
+    slideAction->addTo( toolBar );
+
+    view->insertSeparator();
+    view->insertItem(tr("Settings..."), this, SLOT(settings()), 0);
+
     stack->raiseWidget( fileSelector );
+    openAction->setEnabled( FALSE );
 
     setMouseTracking( TRUE );
+    slideTimer = new QTimer( this );
+    connect( slideTimer, SIGNAL(timeout()), this, SLOT(nextSlide()) );
+
+    Config config( "ImageViewer" );
+    config.setGroup( "SlideShow" );
+    slideDelay = config.readNumEntry( "Delay", 5 );
+    slideRepeat = config.readBoolEntry( "Repeat", FALSE );
 }
 
 ImageViewer::~ImageViewer()
 {
     delete imagePanel; // in case it is fullscreen
+}
+
+void ImageViewer::settings()
+{
+    SettingsDialog dlg( this, 0, TRUE );
+    dlg.showMaximized();
+    dlg.setDelay( slideDelay );
+    dlg.setRepeat( slideRepeat );
+    if ( dlg.exec() == QDialog::Accepted ) {
+	slideDelay = dlg.delay();
+	slideRepeat = dlg.repeat();
+	Config config( "ImageViewer" );
+	config.setGroup( "SlideShow" );
+	config.writeEntry( "Delay", slideDelay );
+	config.writeEntry( "Repeat", slideRepeat );
+    }
 }
 
 void ImageViewer::setDocument(const QString& fileref)
@@ -227,12 +261,15 @@ void ImageViewer::openFile( const DocLnk &file )
 
 void ImageViewer::open()
 {
+    slideAction->setOn( FALSE );
     stack->raiseWidget(fileSelector);
+    openAction->setEnabled( FALSE );
 }
 
 void ImageViewer::closeFileSelector()
 {
     stack->raiseWidget(imagePanel);
+    openAction->setEnabled( TRUE );
 }
 
 void ImageViewer::updateCaption( QString name )
@@ -442,7 +479,13 @@ void ImageViewer::rot90()
     }
 }
 
-
+void ImageViewer::toggleFullscreen()
+{
+    if ( isFullScreen )
+	normalView();
+    else
+	fullScreen();
+}
 
 void ImageViewer::normalView()
 {
@@ -486,6 +529,34 @@ void ImageViewer::setImage(const QImage& newimage)
     reconvertImage();
     imagePanel->setPixmap( pmScaled );
     updateStatus();
+}
+
+void ImageViewer::slideShow( bool on )
+{
+    if ( on ) {
+	slideList = fileSelector->fileList();
+	slideIdx = 0;
+	if ( !slideList.isEmpty() ) {
+	    slideTimer->start( slideDelay*1000, TRUE );
+	    openFile( slideList[0] );
+	}
+    } else {
+	slideTimer->stop();
+    }
+}
+
+void ImageViewer::nextSlide()
+{
+    slideIdx++;
+    bool atEnd = slideIdx == slideList.count()-1;
+    if ( slideIdx >= slideList.count() )
+	slideIdx = 0;
+    openFile( slideList[slideIdx] );
+    if ( !atEnd || slideRepeat ) {
+	slideTimer->start(slideDelay*1000, TRUE);
+    } else {
+	slideAction->setOn(FALSE);
+    }
 }
 
 void ImageViewer::updateStatus()

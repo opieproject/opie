@@ -517,7 +517,7 @@ static int lexWithinMode(enum LexMode mode) {
     return 0;
     }
 
-static char lexGetc_()
+static int lexGetc_()
     {
     /* get next char from input, no buffering. */
     if (lexBuf.curPos == lexBuf.inputLen)
@@ -931,7 +931,7 @@ static int match_begin_end_name(int end) {
 
 static char* lexGetQuotedPrintable()
     {
-    char cur;
+    int cur;
 
     lexClearToken();
     do {
@@ -973,13 +973,13 @@ static char* lexGetQuotedPrintable()
 		lexPushLookaheadc('\n');
 		goto EndString;
 		}
-	    case (char)EOF:
+	    case (int)EOF:
 		break;
 	    default:
 		lexAppendc(cur);
 		break;
 	    } /* switch */
-	} while (cur != (char)EOF);
+	} while (cur != (int)EOF);
 
 EndString:
     lexAppendc(0);

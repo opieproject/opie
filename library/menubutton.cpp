@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -25,25 +25,44 @@
   \class MenuButton menubutton.h
   \brief The MenuButton class is a pushbutton with a menu.
 
-  Similar in function to a QComboBox.
+  When the user presses the menubutton's pushbutton, the menu pops up.
+  A menu is composed of menu items each of which has a string label,
+  and optionally an icon.
+
+  The index of the item that the user's input device (e.g. stylus) is
+  pointing at is the currentItem(), whose text is available using
+  currentText().
+
+  Menu items are inserted with the \link MenuButton::MenuButton()
+  constructor\endlink, insertItem() or insertItems(). Separators are
+  inserted with insertSeparator(). All the items in the menu can be
+  removed by calling clear().
+
+  Items can be selected programmatically using select(). When a menu
+  item is selected (programmatically or by the user), the selected()
+  signal is emitted.
+
+  \ingroup qtopiaemb
 */
 
 /*!
-  \fn void MenuButton::selected(int index)
+  \overload void MenuButton::selected(int index)
 
-  This signal is emitted when the item at \a index is selected.
+  This signal is emitted when the item at position \a index is selected.
 */
 
 /*!
   \fn void MenuButton::selected(const QString& text)
 
-  This signal is emitted when the item with the given \a text is selected.
+  This signal is emitted when the item with the label \a text is selected.
 */
 
 
 /*!
-  Constructs a MenuButton with the given \a items added (see insertItems()).
-  The standard \a parent an \a name arguments are passed to the base class.
+  Constructs a MenuButton. A menu item is created (see insertItem()
+  and insertItems()) for each string in the \a items string list. The
+  standard \a parent an \a name arguments are passed to the base
+  class.
 */
 MenuButton::MenuButton( const QStringList& items, QWidget* parent, const char* name) :
     QPushButton(parent,name)
@@ -56,7 +75,7 @@ MenuButton::MenuButton( const QStringList& items, QWidget* parent, const char* n
   Constructs an empty MenuButton.
   The standard \a parent an \a name arguments are passed to the base class.
 
-  \sa insertItems()
+  \sa insertItem() insertItems()
 */
 MenuButton::MenuButton( QWidget* parent, const char* name) :
     QPushButton(parent,name)
@@ -75,7 +94,7 @@ void MenuButton::init()
 }
 
 /*!
-  Removes all items from the button and menu.
+  Removes all the menu items from the button and menu.
 */
 void MenuButton::clear()
 {
@@ -84,8 +103,9 @@ void MenuButton::clear()
 }
 
 /*!
-  Inserts string \a items into the menu. The string "--" represents
-  a separator.
+  A menu item is created (see insertItem()) for each string in the \a
+  items string list. If any string is "--" a separator (see
+  insertSeparator()) is inserted in its place.
 */
 void MenuButton::insertItems( const QStringList& items )
 {
@@ -99,7 +119,10 @@ void MenuButton::insertItems( const QStringList& items )
 }
 
 /*!
-  Inserts an \a icon and \a text into the menu.
+  Inserts a menu item with the icon \a icon and label \a text into
+  the menu.
+
+  \sa insertItems()
 */
 void MenuButton::insertItem( const QIconSet& icon, const QString& text=QString::null )
 {
@@ -108,7 +131,10 @@ void MenuButton::insertItem( const QIconSet& icon, const QString& text=QString::
 }
 
 /*!
-  Inserts \a text into the menu.
+  \overload
+  Inserts a menu item with the label \a text into the menu.
+
+  \sa insertItems()
 */
 void MenuButton::insertItem( const QString& text )
 {
@@ -117,7 +143,9 @@ void MenuButton::insertItem( const QString& text )
 }
 
 /*!
-  Inserts a visual separator into the menu.
+  Inserts a separator into the menu.
+
+  \sa insertItems()
 */
 void MenuButton::insertSeparator()
 {
@@ -125,7 +153,7 @@ void MenuButton::insertSeparator()
 }
 
 /*!
-  Selects the items with text \a s.
+  Selects the items with label text \a s.
 */
 void MenuButton::select(const QString& s)
 {
@@ -138,7 +166,8 @@ void MenuButton::select(const QString& s)
 }
 
 /*!
-  Selects the item at index \a s.
+  \overload
+  Selects the item at index position \a s.
 */
 void MenuButton::select(int s)
 {
@@ -151,7 +180,7 @@ void MenuButton::select(int s)
 }
 
 /*!
-  Returns the index of the current item.
+  Returns the index position of the current item.
 */
 int MenuButton::currentItem() const
 {
@@ -159,7 +188,7 @@ int MenuButton::currentItem() const
 }
 
 /*!
-  Returns the text of the current item.
+  Returns the label text of the current item.
 */
 QString MenuButton::currentText() const
 {
@@ -167,7 +196,7 @@ QString MenuButton::currentText() const
 }
 
 /*!
-  Sets the label. If \a label is empty, the
+  Sets the menubutton's label. If \a label is empty, the
   current item text is displayed, otherwise \a label should contain
   "%1", which will be replaced by the current item text.
 */

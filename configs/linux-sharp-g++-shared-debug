@@ -32,7 +32,7 @@ SYSCONF_LIBS_OPENGL	=
 SYSCONF_LIBS_YACC	= 
 
 # Linking applications
-SYSCONF_LINK		= arm-linux-g++
+SYSCONF_LINK		= arm-linux-gcc
 SYSCONF_LFLAGS		= 
 SYSCONF_LIBS		= 
 
@@ -56,7 +56,7 @@ SYSCONF_UIC		= $(QTDIR)/bin/uic
 #   - Place target in $(DESTDIR) - which has a trailing /
 #   - Usually needs to incorporate $(VER_MAJ), $(VER_MIN) and $(VER_PATCH)
 #
-SYSCONF_LINK_SHLIB	= arm-linux-g++
+SYSCONF_LINK_SHLIB	= arm-linux-gcc
 SYSCONF_LINK_TARGET_SHARED	= lib$(TARGET).so.$(VER_MAJ).$(VER_MIN).$(VER_PATCH)
 SYSCONF_LINK_LIB_SHARED	=  $(SYSCONF_LINK_SHLIB) -shared -Wl,-soname,lib$(TARGET).so.$(VER_MAJ) \
 				     $(LFLAGS) -o $(SYSCONF_LINK_TARGET_SHARED) \

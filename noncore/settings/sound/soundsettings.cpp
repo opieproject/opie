@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,7 +20,9 @@
 #include "soundsettings.h"
 
 #include <qpe/config.h>
+#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
+#endif
 
 #include <qslider.h>
 #include <qcheckbox.h>
@@ -58,7 +60,14 @@ void SoundSettings::accept()
     QDialog::accept();
 }
 
+void SoundSettings::done(int r) { 
+  QDialog::done(r);
+  close();
+}
+
 void SoundSettings::setVolume(int v)
 {
+#ifndef QT_NO_COP
     QCopEnvelope( "QPE/System", "setVolume(int,int)" ) << 0 << 100-v;
+#endif
 }

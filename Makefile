@@ -1,6 +1,6 @@
 default:  dynamic
 
-LIBS=library
+LIBS=library qpepim
 
 COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	inputmethods/pickboard \

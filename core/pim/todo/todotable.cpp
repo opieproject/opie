@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -166,6 +166,7 @@ TodoTable::TodoTable( QWidget *parent, const char *name )
     : QTable( 0, 3, parent, name ),
 // #endif
       showComp( true ),
+      showCat(-2),
       enablePainting( true ),
       mCat( 0 ),
       currFindRow( -2 )
@@ -377,7 +378,6 @@ void TodoTable::updateVisible()
 //     qDebug("--> updateVisible!");
 
     int visible = 0;
-    int id = mCat.id( "Todo List", showCat );
     for ( int row = 0; row < numRows(); row++ ) {
 	CheckItem *ci = (CheckItem *)item( row, 0 );
 	Task *t = todoList[ci];
@@ -385,19 +385,17 @@ void TodoTable::updateVisible()
 	bool hide = false;
 	if ( !showComp && ci->isChecked() )
 	    hide = true;
-	if ( !showCat.isEmpty() ) {
-	    if ( showCat == tr( "Unfiled" ) ) {
-		if ( vlCats.count() > 0 )
-		    hide = true;
-	    } else {
-		// do some comparing, we have to reverse our idea here...
-		if ( !hide ) {
-		    hide = true;
-		    for ( uint it = 0; it < vlCats.count(); ++it ) {
-			if ( vlCats[it] == id ) {
-			    hide = false;
-			    break;
-			}
+	if ( showCat == -1 ) { // unfiled
+	    if ( vlCats.count() > 0 )
+		hide = true;
+	} else if ( showCat != -2 ) {
+	    // do some comparing, we have to reverse our idea here...
+	    if ( !hide ) {
+		hide = true;
+		for ( uint it = 0; it < vlCats.count(); ++it ) {
+		    if ( vlCats[it] == showCat ) {
+			hide = false;
+			break;
 		    }
 		}
 	    }
@@ -742,13 +740,16 @@ void TodoTable::keyPressEvent( QKeyEvent *e )
     }
 }
 
-QStringList TodoTable::categories()
+QString TodoTable::categoryLabel( int id )
 {
     // This is called seldom, so calling a load in here
     // should be fine.
     mCat.load( categoryFileName() );
-    QStringList categoryList = mCat.labels( "Todo List" );
-    return categoryList;
+    if ( id == -1 )
+	return tr( "Unfiled" );
+    else if ( id == -2 )
+	return tr( "All" );
+    return mCat.label( "Todo List", id );
 }
 
 void TodoTable::slotDoFind( const QString &findString, bool caseSensitive,
@@ -802,16 +803,6 @@ void TodoTable::slotDoFind( const QString &findString, bool caseSensitive,
 	// so don't give confusing not found message...
 	wrapAround = true;
     }
-}
-
-int TodoTable::showCategoryId() const
-{
-    int id;
-    id = -1;
-    // if allcategories are selected, you get unfiled...
-    if ( showCat != tr( "Unfiled" ) && showCat != tr( "All" ) )
-	id = mCat.id( "Todo List", showCat );
-    return id;
 }
 
 static bool taskCompare( const Task &task, const QRegExp &r, int category )

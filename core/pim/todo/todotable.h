@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -92,14 +92,13 @@ public:
     Task currentEntry() const;
     void replaceCurrentEntry( const Task &todo, bool fromTableItem = false );
 
-    QStringList categories();
+    QString categoryLabel( int id );
 
     void setShowCompleted( bool sc ) { showComp = sc; updateVisible(); }
     bool showCompleted() const { return showComp; }
 
-    void setShowCategory( const QString &c ) { showCat = c; updateVisible(); }
-    const QString &showCategory() const { return showCat; }
-    int showCategoryId() const;
+    void setShowCategory( int c ) { showCat = c; updateVisible(); }
+    int showCategory() const { return showCat; }
 
     bool save( const QString &fn );
     void load( const QString &fn );
@@ -153,7 +152,7 @@ private:
     QMap<CheckItem*, Task *> todoList;
     QStringList categoryList;
     bool showComp;
-    QString showCat;
+    int showCat;
     QTimer *menuTimer;
     bool enablePainting;
     Categories mCat;

@@ -1,4 +1,4 @@
-Files: bin/showimg apps/Applications/showimg.desktop
+Files: bin/showimg apps/Applications/showimg.desktop pics/slideshow.png
 Priority: optional
 Section: qpe/applications
 Maintainer: Warwick Allison <warwick@trolltech.com>

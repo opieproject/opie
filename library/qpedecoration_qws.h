@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -21,6 +21,7 @@
 #define QPE_DECORATION_QWS_H__
 
 
+#ifdef QWS
 #include <qwsdefaultdecoration_qws.h>
 #include <qimage.h>
 #include <qdatetime.h>
@@ -99,3 +100,4 @@ protected:
 
 
 #endif // QPE_DECORATION_QWS_H__
+#endif // QWS
