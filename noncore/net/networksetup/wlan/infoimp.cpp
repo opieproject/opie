@@ -37,7 +37,7 @@ void WlanInfoImp::update(){
   apLabel->setText(wExtensions->ap());
   stationLabel->setText(wExtensions->station());
   modeLabel->setText(wExtensions->mode());
-  freqLabel->setText(QString("%1 GHz").arg(wExtensions->frequency()));
+  channelLabel->setText(QString("%1").arg(wExtensions->channel()));
   int signal = 0;
   int noise = 0;
   int quality = 0;

@@ -16,6 +16,7 @@ public:
   QString essid();
   QString mode();
   double frequency();
+  int channel();
   double rate();
   QString ap();
   bool stats( int &signal, int &noise, int &quality);

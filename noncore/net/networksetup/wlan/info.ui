@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>242</width>
+            <width>238</width>
             <height>316</height>
         </rect>
     </property>
@@ -61,7 +61,7 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>Frequency</string>
+                            <string>Channel</string>
                         </property>
                     </widget>
                     <widget row="2"  column="0" >
@@ -172,7 +172,7 @@
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>freqLabel</cstring>
+                            <cstring>channelLabel</cstring>
                         </property>
                         <property stdset="1">
                             <name>frameShape</name>

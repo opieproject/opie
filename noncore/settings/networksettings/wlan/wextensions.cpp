@@ -91,8 +91,31 @@ double WExtensions::frequency(){
   return 0;
 }
 
+/**
+ * Get the channel that the interface is running at.
+ * @return int the channel that the interfacae is running at.
+ */ 
+int WExtensions::channel(){
+  if(!hasWirelessExtensions)
+    return 0;
+  if ( 0 != ioctl( fd, SIOCGIWFREQ, &iwr ))
+    return 0;
+  double num = (double( iwr.u.freq.m ) * pow( 10, iwr.u.freq.e ) / 1000000000);
+  double left = 2.401;
+  double right = 2.416;
+  for(int channel = 1;  channel<= 15; channel++){
+    if( num >= left && num <= right )
+      return channel;
+    left += 0.005;
+    right += 0.005;
+  }
+  qDebug(QString("Unknown frequency: %1, returning -1 for the channel.").arg(num).latin1());
+  return -1;
+}
+
 /***
  * Get the current rate that the card is transmiting at.
+ * @return double the rate, 0 if error.
  */ 
 double WExtensions::rate(){
   if(!hasWirelessExtensions)
