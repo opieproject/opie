@@ -42,6 +42,7 @@ public:
     QString appName() const;
     bool excludeFromRefresh() const;
     void refresh();
+    void reinitialize();
 
  private:
     AddressBookPluginWidget* m_abWidget; 

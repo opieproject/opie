@@ -78,7 +78,6 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     SpinDaysClip->setMaxValue( 200 );
     QWhatsThis::add( SpinDaysClip , tr( "How many days we should search forward" ) );
 
-    // Headline color settings
     QHBox *box5 = new QHBox( this );
     QLabel* colorLabel2 = new QLabel( box5, "" );
     colorLabel2->setText( tr( "Set Headline Color: " ) );
@@ -106,7 +105,6 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
 
 
     layout->addWidget( b_group );
-    //    layout->addWidget( box4 );
     layout->addWidget( box1 );
     //    layout->addWidget( box2 );
     layout->addWidget( box3 );

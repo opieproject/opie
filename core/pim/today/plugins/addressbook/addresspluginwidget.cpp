@@ -64,6 +64,10 @@ void AddressBookPluginWidget::refresh( const OContactAccess* )
 	getAddress();
 }
 
+void AddressBookPluginWidget::reinitialize() {
+	readConfig();
+	getAddress();
+}
 
 void AddressBookPluginWidget::readConfig() {
     Config cfg( "todayaddressplugin" );
@@ -98,10 +102,7 @@ void AddressBookPluginWidget::getAddress() {
 	QString output;
 
 	// Check whether the database provide the search option..
-	// The following if-statement was replaced due to a bug in some
-	// implementations of libopie. The replacement should work everywhere..(eilers)
-	// if ( !m_contactdb->hasQuerySettings( OContactAccess::DateDiff ) ){
- 	if ( !( m_contactdb->querySettings() & OContactAccess::DateDiff ) ){
+	if ( !m_contactdb->hasQuerySettings( OContactAccess::DateDiff ) ){
 		// Libopie seems to be old..
 		output = QObject::tr( "Database does not provide this search query ! Please upgrade libOpie !<br>" );
 		addressLabel->setText( output );
@@ -115,9 +116,9 @@ void AddressBookPluginWidget::getAddress() {
 		qWarning("Searching from now (%s) until %s ! ", 
 			 QDate::currentDate().toString().latin1(), 
 			 lookAheadDate.toString().latin1() );
+
 		OContact querybirthdays;
 		querybirthdays.setBirthday( lookAheadDate );
-		
 		
 		m_list = m_contactdb->queryByExample( querybirthdays, 
 						      OContactAccess::DateDiff );
