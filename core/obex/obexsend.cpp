@@ -166,6 +166,10 @@ void SendWidget::slotStartIrda() {
     m_devBox->setStatus( m_irDaIt.key(), tr("Start sending") );
     m_obex->send( m_file );
 }
+void SendWidget::closeEvent( QCloseEvent* e) {
+    e->accept(); // make sure
+    QTimer::singleShot(0, this, SLOT(slotDone() ) );
+}
 void SendWidget::slotDone() {
     QCopEnvelope e0("QPE/IrDaApplet", "disableIrda()");
     QCopEnvelope e1("QPE/Bluetooth", "disableBluetooth()");

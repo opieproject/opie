@@ -39,6 +39,9 @@ namespace OpieObex {
 
         QString file()const;
 
+    protected:
+        void closeEvent( QCloseEvent* );
+
     public slots:
         void send( const QString& file, const QString& desc );
 
