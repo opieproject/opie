@@ -160,7 +160,7 @@ void Wellenreiter::startStopClicked()
         // switch off promisc flag
         iface->setPromiscuousMode( false );
 
-        system( "cardctl reset; sleep 1; dhclient; udhcpc" ); //FIXME: Use OProcess
+        system( "cardctl reset; sleep 1" ); //FIXME: Use OProcess
 
         // message the user
         QMessageBox::information( this, "Wellenreiter II", "Your wireless card\nshould now be usable again." );
