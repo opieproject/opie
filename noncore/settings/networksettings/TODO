@@ -1,6 +1,11 @@
-Write a class that parses /proc and not ifconfig
 WLAN needs to be re-written to not use Config
-remove WLAN Config item
+-remove WLAN Config item
+-sub class out the wlan info
+-check if an interface supports wireless extensions before config.
 
-[ ] Wlanmodule needs to check if an interface supports wireless
-    extensions.
+PPP module needs to be written
+
+Write a class that parses /proc and not ifconfig
+
+Possible other modules: ipsec, bluetooth
+

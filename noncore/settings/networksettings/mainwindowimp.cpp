@@ -191,7 +191,7 @@ void MainWindowImp::addClicked(){
 void MainWindowImp::removeClicked(){
   QListViewItem *item = connectionList->currentItem();
   if(!item) {
-    QMessageBox::information(this, "Error","Please select an interface.", "Ok");
+    QMessageBox::information(this, "Sorry","Please select an interface First.", "Ok");
     return; 
   }
   
@@ -219,7 +219,7 @@ void MainWindowImp::removeClicked(){
 void MainWindowImp::configureClicked(){
   QListViewItem *item = connectionList->currentItem();
   if(!item){
-    QMessageBox::information(this, "Error","Please select an interface.", QMessageBox::Ok);
+    QMessageBox::information(this, "Sorry","Please select an interface first.", QMessageBox::Ok);
     return;
   } 
 
@@ -261,13 +261,13 @@ void MainWindowImp::configureClicked(){
 void MainWindowImp::informationClicked(){
   QListViewItem *item = connectionList->currentItem();
   if(!item){
-    QMessageBox::information(this, "Error","Please select an interface.", QMessageBox::Ok);
+    QMessageBox::information(this, "Sorry","Please select an interface First.", QMessageBox::Ok);
     return;
   } 
  
   Interface *i = interfaceItems[item];
   if(!i->isAttached()){
-    QMessageBox::information(this, "Error","No information about\na disconnected interface.", QMessageBox::Ok);
+    QMessageBox::information(this, "Sorry","No information about\na disconnected interface.", QMessageBox::Ok);
     return;
   }
 
