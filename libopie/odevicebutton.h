@@ -51,7 +51,7 @@ private:
 
 	OQCopMessageData *d;
 	class Private;
-	Private* data;
+	Private* m_data;
 };
 
 
