@@ -542,7 +542,7 @@ class OPacketCapturer : public QObject
      */
     int dataLink() const;
     /**
-     * @returns the filedescriptor of the packet capturer. This is only useful, if
+     * @returns the file descriptor of the packet capturer. This is only useful, if
      * not using the socket notifier, e.g. without an application object.
      */
     int fileno() const;
@@ -564,7 +564,23 @@ class OPacketCapturer : public QObject
      * @returns true if the packet capturer is open
      */
     bool isOpen() const;
-
+    /**
+     * @returns the snapshot length of this packet capturer
+     */
+    int snapShot() const;
+    /**
+     * @returns true if the input capture file has a different byte-order
+     * than the byte-order of the running system.
+     */
+    bool swapped() const;
+    /**
+     * @returns the libpcap version string used to write the input capture file.
+     */
+    QString version() const;
+    /**
+     * @returns the packet statistic database.
+     * @see QMap
+     */
     const QMap<QString,int>& statistics() const;
 
   signals:

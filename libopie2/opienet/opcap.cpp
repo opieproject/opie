@@ -1055,3 +1055,22 @@ const QMap<QString,int>& OPacketCapturer::statistics() const
     return _stats;
 }
 
+
+int OPacketCapturer::snapShot() const
+{
+    return pcap_snapshot( _pch );
+}
+
+
+bool OPacketCapturer::swapped() const
+{
+    return pcap_is_swapped( _pch );
+}
+
+
+QString OPacketCapturer::version() const
+{
+    return QString().sprintf( "%s.%s", pcap_major_version( _pch ), pcap_minor_version( _pch ) );
+}
+
+
