@@ -6,6 +6,9 @@
 #include <qstring.h>
 #include <qvaluelist.h>
 
+#include "remotedevice.h"
+#include "services.h"
+
 namespace OpieTooth {
   class Device;
   /** Manager manages a blueZ device (hci0 for example)

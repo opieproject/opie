@@ -14,7 +14,7 @@ namespace OpieTooth {
     /** The profile descriptor
      *
      */
-    class ProfileDesriptor{
+    class ProfileDescriptor{
     public:
       /** typedef */
       typedef QValueList<ProfileDescriptor> ValueList;
@@ -59,11 +59,15 @@ namespace OpieTooth {
       /**
        * copy operator
        */
-      ProfileDescriptor &operator=( const ProfileDescriptor );
+      ProfileDescriptor &operator=( const ProfileDescriptor& );
       /**
        * operator==
        */
       friend bool operator==(const ProfileDescriptor&, const ProfileDescriptor& );
+    private:
+      QString m_id;
+      uint m_idInt;
+      uint m_version;
     };
     /**
      * Protocol Descriptor
@@ -81,7 +85,7 @@ namespace OpieTooth {
        * channel/port
        */
       ProtocolDescriptor(const QString&, uint, uint channel ); // Q_UINT8 ?
-      ProtocolDescriptot(const ProtocolDescriptor& );
+      ProtocolDescriptor(const ProtocolDescriptor& );
       ~ProtocolDescriptor();
       QString name()const;
       void setName(const QString& );
@@ -90,8 +94,12 @@ namespace OpieTooth {
       uint port()const;
       void setPort(uint );
       ProtocolDescriptor &operator=( const ProtocolDescriptor& );
-      friend bool operator==( const ProtocolDescription&,
-			      const ProtocolDescription& );
+      friend bool operator==( const ProtocolDescriptor&,
+			      const ProtocolDescriptor& );
+    private:
+      QString m_name;
+      uint m_number;
+      uint m_channel;
     };
 
   public:

@@ -78,6 +78,7 @@ namespace OpieTooth {
 	QString m_devId;
 	QString m_mode;
 	pid_t pid;
+	QCString m_output;
     };
 };
 

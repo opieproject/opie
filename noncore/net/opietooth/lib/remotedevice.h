@@ -13,11 +13,15 @@ namespace OpieTooth{
     RemoteDevices(const QString &mac, const QString &name );
     ~RemoteDevices();
     friend bool operator==(const RemoteDevices&, const RemoteDevices&);
-    RemoteDevies &operator=(const RemoteDevices& );
+    RemoteDevices &operator=(const RemoteDevices& );
+    bool isEmpty()const;
     QString mac()const;
     void setMac(const QString& mac );
     QString name()const;
     void setName( const QString& name );
+  private:
+    QString m_name;
+    QString m_mac;
   };
 };
 
