@@ -6,13 +6,14 @@
 
 #include "profile.h"
 #include "emulation_handler.h"
-
+#include "script.h"
 
 EmulationHandler::EmulationHandler( const Profile& prof, QWidget* parent,const char* name )
     : QObject(0, name )
 {
     m_teWid = new TEWidget( parent, "TerminalMain");
     m_teWid->setMinimumSize(150, 70 );
+    m_script = 0;
     parent->resize( m_teWid->calcSize(80, 24 ) );
     m_teEmu = new TEmuVt102(m_teWid );
 
@@ -28,9 +29,12 @@ EmulationHandler::EmulationHandler( const Profile& prof, QWidget* parent,const c
 
 }
 EmulationHandler::~EmulationHandler() {
+    if (isRecording())
+        clearScript();
     delete m_teEmu;
     delete m_teWid;
 }
+
 void EmulationHandler::load( const Profile& prof) {
     m_teWid->setVTFont( font( prof.readNumEntry("Font")  )  );
     int num = prof.readNumEntry("Color");
@@ -45,6 +49,8 @@ void EmulationHandler::recvEmulation(const char* src, int len ) {
 
     memcpy(ar.data(), src, sizeof(char) * len );
 
+    if (isRecording())
+        m_script->append(ar);
     emit send(ar);
 }
 QWidget* EmulationHandler::widget() {
@@ -145,3 +151,29 @@ QColor EmulationHandler::backColor(int col ) {
 QPushButton*  EmulationHandler::cornerButton() {
     return m_teWid->cornerButton();
 }
+
+
+Script *EmulationHandler::script() {
+    return m_script;
+}
+
+bool EmulationHandler::isRecording() {
+    return (m_script != 0);
+}
+
+void EmulationHandler::startRecording() {
+    if (!isRecording())
+        m_script = new Script();
+}
+
+void EmulationHandler::clearScript() {
+    if (isRecording()) {
+        delete m_script;
+        m_script = 0;
+    }
+}
+
+void EmulationHandler::runScript(const Script *script) {
+    emit send(script->script());
+}
+

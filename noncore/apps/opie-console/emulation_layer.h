@@ -32,7 +32,6 @@
 #include <stdio.h>
 #include <qtextcodec.h>
 #include "keytrans.h"
-#include "script.h"
 
 class EmulationLayer : public QObject
 { Q_OBJECT
@@ -105,22 +104,6 @@ public:
   void setKeytrans(int no);
   void setKeytrans(const char * no);
 
-  /* Scripts */
-
-  /* Create a new script and record all typed characters */
-  void startRecording();
-
-  /* Return whether we are currently recording a script */
-  bool isRecording();
-
-  /* Return the current script (or NULL) */
-  Script *script();
-
-  /* Stop recording and remove the current script from memory */
-  void clearScript();
-
-  /* Run a script by forwarding its keys to the EmulationLayer */
-  void runScript(const Script *);
 protected:
 
   WidgetLayer* gui;
@@ -156,7 +139,6 @@ private:
   int    bulk_nlcnt;   // bulk newline counter
   char*  SelectedText;
   int    bulk_incnt;   // bulk counter
-  Script *m_script;
 
 };
 

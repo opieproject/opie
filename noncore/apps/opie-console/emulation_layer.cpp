@@ -107,7 +107,6 @@ EmulationLayer::EmulationLayer( WidgetLayer* gui )
   bulk_nlcnt = 0; // reset bulk newline counter
   bulk_incnt = 0; // reset bulk counter
   connected  = FALSE;
-  m_script = 0;
 
   QObject::connect(&bulk_timer, SIGNAL( timeout() ), this, SLOT( showBulk() ) );
   QObject::connect(gui,SIGNAL( imageSizeChanged( int, int ) ),
@@ -133,8 +132,6 @@ EmulationLayer::~EmulationLayer()
 {
   delete screen[0];
   delete screen[1];
-  if (isRecording())
-    clearScript();
   bulk_timer.stop();
 }
 
@@ -232,9 +229,6 @@ void EmulationLayer::onKeyPress( QKeyEvent* ev )
     c.at( 0 ) = ev->ascii();
     // ibot: qbytearray is emited not char*
     
-    /* Are we currently recording a script? If so, store the typed character */
-    if (isRecording())
-        m_script->appendString(ev->text());
     emit sndBlock( (QByteArray) c );
   }
 }
@@ -259,35 +253,6 @@ void EmulationLayer::onRcvBlock(const QByteArray &s )
     if (s[i] == '\n') bulkNewline();
   }
   bulkEnd();
-}
-
-// Scripts ----------------------------------------------------------------- --
-
-
-Script *EmulationLayer::script() {
-    return m_script;
-}
-
-bool EmulationLayer::isRecording() {
-    return (m_script != 0);
-}
-
-void EmulationLayer::startRecording() {
-    if (!isRecording())
-        m_script = new Script();
-}
-
-void EmulationLayer::clearScript() {
-    if (isRecording()) {
-        
-    }
-}
-
-void EmulationLayer::runScript(const Script *script) {
-    QByteArray a = QByteArray();
-    QString str = script->script();
-    a.setRawData(str.ascii(), str.length());
-    emit sndBlock(a);
 }
 
 // Selection --------------------------------------------------------------- --
@@ -406,3 +371,4 @@ void EmulationLayer::setColumns(int columns)
   //       Can we put this straight or explain it at least?
   emit changeColumns(columns);
 }
+

@@ -286,29 +286,26 @@ void MainWindow::slotNew() {
 }
 
 void MainWindow::slotRecordScript() {
-/*    if (currentSession()) {
-        currentSession()->emulationLayer()->startRecording();
+    if (currentSession()) {
+        currentSession()->emulationHandler()->startRecording();
     }
-    */
 }
 
 void MainWindow::slotSaveScript() {
-/*    if (currentSession() && currentSession()->emulationLayer()->isRecording()) {
+    if (currentSession() && currentSession()->emulationHandler()->isRecording()) {
         MimeTypes types;
         QStringList script;
         script << "text/plain";
         types.insert("Script", script);
         QString filename = OFileDialog::getSaveFileName(2, "/", QString::null, types);
         if (!filename.isEmpty()) {
-            currentSession()->emulationLayer()->script()->saveTo(filename);
-            currentSession()->emulationLayer()->clearScript();
+            currentSession()->emulationHandler()->script()->saveTo(filename);
+            currentSession()->emulationHandler()->clearScript();
         }
     }
-    */
 }
 
 void MainWindow::slotRunScript() {
-/*
     if (currentSession()) {
         MimeTypes types;
         QStringList script;
@@ -317,10 +314,9 @@ void MainWindow::slotRunScript() {
         QString filename = OFileDialog::getOpenFileName(2, "/", QString::null, types);
         if (!filename.isEmpty()) {
             Script script(DocLnk(filename).file());
-            currentSession()->emulationLayer()->runScript(&script);
+            currentSession()->emulationHandler()->runScript(&script);
         }
     }
-    */
 }
 
 void MainWindow::slotConnect() {

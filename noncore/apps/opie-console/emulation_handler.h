@@ -29,6 +29,7 @@ class QPushButton;
 class TEWidget;
 class TEmulation;
 class QFont;
+class Script;
 class EmulationHandler : public QObject {
     Q_OBJECT
 public:
@@ -48,6 +49,22 @@ public:
     QWidget* widget();
     void setColor( const QColor& fore, const QColor& back );
     QPushButton* cornerButton();
+  
+    /* Scripts */
+    /* Create a new script and record all typed characters */
+    void startRecording();
+
+    /* Return whether we are currently recording a script */
+    bool isRecording();
+
+    /* Return the current script (or NULL) */
+    Script *script();
+
+    /* Stop recording and remove the current script from memory */
+    void clearScript();
+
+    /* Run a script by forwarding its keys to the EmulationLayer */
+    void runScript(const Script *);
 
 signals:
     void send( const QByteArray& );
@@ -67,7 +84,7 @@ private:
 private:
     TEWidget* m_teWid;
     TEmulation* m_teEmu;
-
+    Script * m_script;
 };
 
 #endif

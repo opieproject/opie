@@ -7,24 +7,23 @@ Script::Script() {
 
 Script::Script(const QString fileName) {
     QFile file(fileName);
-    QTextStream stream(&file);
-    while (!stream.atEnd()) {
-        appendString(stream.readLine());
-    }
+    m_script = file.readAll();
 }
 
 void Script::saveTo(const QString fileName) const {
     QFile file(fileName);
     file.open(IO_WriteOnly);
-    file.writeBlock(m_script.ascii(), m_script.length());
+    file.writeBlock(m_script);
     file.close();
 }
 
 
-void Script::appendString(const QString string) {
-    m_script += string;
+void Script::append(const QByteArray &data) {
+    int size = m_script.size();
+    m_script.resize(size + data.size());
+    memcpy(m_script.data() + size, data.data(), data.size());
 }
 
-QString Script::script() const {
+QByteArray Script::script() const {
     return m_script;
 }

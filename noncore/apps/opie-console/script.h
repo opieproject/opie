@@ -15,15 +15,15 @@ public:
     Script(const QString fileName);
 
     /* Append a line to the script */
-    void appendString(const QString string);
+    void append(const QByteArray &data);
 
     /* Save this script to a file */
     void saveTo(const QString fileName) const;
 
     /* Return the script's content */
-    QString script() const;
+    QByteArray script() const;
 protected:
-    QString m_script;
+    QByteArray m_script;
 };
 
 
