@@ -59,7 +59,7 @@ bool InterfaceSetupImp::saveSettings(){
   }
   
   if(!dhcpCheckBox->isChecked() && (ipAddressEdit->text().isEmpty() || subnetMaskEdit->text().isEmpty())){
-   QMessageBox::information(this, "Empy Fields.", "Please fill in address, subnet,\n and gateway entries.", "Ok");
+   QMessageBox::information(this, "Not Saved.", "Please fill in address, subnet,\n and gateway entries.", "Ok");
    return false;
   }	
   interfaces->removeAllInterfaceOptions();
@@ -136,7 +136,7 @@ void InterfaceSetupImp::setProfile(const QString &profile){
 
   // IP Information
   autoStart->setChecked(interfaces->isAuto(interface->getInterfaceName()));
-  QString dns = interfaces->getInterfaceOption("up interfacednsscript -a", error);
+  QString dns = interfaces->getInterfaceOption("up "DNSSCRIPT" -a", error);
   if(dns.contains(" ")){
     firstDNSLineEdit->setText(dns.mid(0, dns.find(" ")));
     secondDNSLineEdit->setText(dns.mid(dns.find(" ")+1, dns.length())); 
