@@ -34,6 +34,7 @@
 #include "launchersettings.h"
 #include "tabssettings.h"
 #include "menusettings.h"
+#include "doctabsettings.h"
 #include "taskbarsettings.h"
 
 
@@ -50,11 +51,12 @@ LauncherSettings::LauncherSettings (QWidget*,const char*, WFlags)
 	m_tabs = new TabsSettings ( tw );
 	m_taskbar = new TaskbarSettings ( tw );
 	m_menu = new MenuSettings ( tw );
+        m_doctab = new DocTabSettings ( tw );
 
 	tw-> addTab ( m_taskbar, "wait", tr( "Taskbar" ));
 	tw-> addTab ( m_menu, "go", tr( "O-Menu" ));
 	tw-> addTab ( m_tabs, "launchersettings/tabstab.png", tr( "Tabs" ));
-
+        tw-> addTab ( m_doctab, "DocsIcon", tr( "DocTab" ));
 	tw-> setCurrentTab ( m_taskbar );
 }
 
@@ -63,6 +65,7 @@ void LauncherSettings::accept ( )
 	m_taskbar-> accept ( );
 	m_menu-> accept ( );
 	m_tabs-> accept ( );
+	m_doctab ->accept ( );
 
 	QDialog::accept ( );
 }
