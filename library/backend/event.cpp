@@ -595,7 +595,7 @@ QDateTime Event::start() const {
 */
 QDateTime Event::start( bool actual ) const
 {
-    QDateTime dt = (startUTC > 0) ? TimeConversion::fromUTC( startUTC ) : QDateTime::currentDateTime();
+    QDateTime dt = TimeConversion::fromUTC( startUTC );
 
     if ( actual && typ == AllDay ) {
 	QTime t = dt.time();
@@ -614,7 +614,7 @@ QDateTime Event::end() const {
 */
 QDateTime Event::end( bool actual ) const
 {
-    QDateTime dt = (endUTC > 0) ? TimeConversion::fromUTC( endUTC ) : QDateTime::currentDateTime();
+    QDateTime dt = TimeConversion::fromUTC( endUTC );
 
     if ( actual && typ == AllDay ) {
 	QTime t = dt.time();
