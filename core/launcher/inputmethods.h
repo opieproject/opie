@@ -21,7 +21,7 @@
 #ifndef __INPUT_METHODS_H__
 #define __INPUT_METHODS_H__
 
-
+#include <qtopia/qlibrary.h>
 #include <qtopia/inputmethodinterface.h>
 
 #include <qwidget.h>
@@ -29,20 +29,27 @@
 
 class QToolButton;
 class QWidgetStack;
-class PluginLoader;
 
 struct InputMethod
 {
+#ifndef QT_NO_COMPONENT
+    QLibrary *library;
+#endif
     QWidget *widget;
     QString libName;
     bool newIM;
-    union { 
+    union {
 	InputMethodInterface *interface;
 	ExtInputMethodInterface *extInterface;
     };
 
-    inline QString name() const { return newIM ? extInterface->name() : interface->name(); } 
-    inline QPixmap *icon() const { return newIM ? extInterface->icon() : interface->icon(); } 
+    inline void releaseInterface() {
+        newIM ? (void)extInterface->release() : (void)interface->release();
+        library->unload();
+        delete library; library = 0l;
+    }
+    inline QString name() const { return newIM ? extInterface->name() : interface->name(); }
+    inline QPixmap *icon() const { return newIM ? extInterface->icon() : interface->icon(); }
     inline QUnknownInterface *iface() { return newIM ? (QUnknownInterface *)extInterface : (QUnknownInterface *)interface; }
     inline void resetState() { if ( !newIM ) interface->resetState(); }
 
@@ -57,7 +64,7 @@ class InputMethods : public QWidget
 public:
     InputMethods( QWidget * );
     ~InputMethods();
-    
+
     QRect inputRect() const;
     bool shown() const;
     QString currentShown() const; // name of interface
@@ -79,6 +86,10 @@ private slots:
     void qcopReceive( const QCString &msg, const QByteArray &data );
 
 private:
+    void setPreferedHandlers();
+    /*static */QStringList plugins()const;
+    /*static */void installTranslator( const QString& );
+    void unloadMethod( QValueList<InputMethod>& );
     void chooseMethod(InputMethod* im);
     void chooseKeyboard(InputMethod* im);
     void updateKeyboards(InputMethod *im);
@@ -92,8 +103,6 @@ private:
     InputMethod *imethod;
     QValueList<InputMethod> inputMethodList;
     QValueList<InputMethod> inputModifierList;
-    QValueList<QUnknownInterface*> ifaceList;
-    PluginLoader *loader;
 };
 
 
