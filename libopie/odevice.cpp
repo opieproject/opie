@@ -514,48 +514,46 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
 {
 	int newkeycode = keycode;
 
-	
-	// simple susbstitutions
-	switch ( d-> m_model ) {
-		case Model_iPAQ_H38xx:
-			// H38xx has no "Q" key anymore - this is now the Mail key
-			if ( keycode == HardKey_Menu )
+	switch ( keycode ) {
+		// H38xx/H39xx have no "Q" key anymore - this is now the Mail key
+		case HardKey_Menu: {
+			if (( d-> m_model == Model_iPAQ_H38xx ) ||
+			    ( d-> m_model == Model_iPAQ_H39xx )) {			    
 				newkeycode = HardKey_Mail;
-			//nobreak
-						
-		case Model_iPAQ_H31xx: 
-			// Rotate cursor keys 180°
-			switch ( keycode ) {
-				case Key_Left : newkeycode = Key_Right; break;
-				case Key_Right: newkeycode = Key_Left; break;
-				case Key_Up   : newkeycode = Key_Down; break;
-				case Key_Down : newkeycode = Key_Up; break;
 			}
-			//nobreak;
-
-		case Model_iPAQ_H36xx: 
-		case Model_iPAQ_H37xx: 
-			// map Power Button short/long press to F34/F35
-			if ( keycode == Key_SysReq ) {
-				if ( isPress ) {
-					if ( m_power_timer )
-						killTimer ( m_power_timer );
-					m_power_timer = startTimer ( 500 );
-				}
-				else if ( m_power_timer ) {
-					killTimer ( m_power_timer );
-					m_power_timer = 0;
-					QWSServer::sendKeyEvent ( -1, HardKey_Suspend, 0, true, false );
-					QWSServer::sendKeyEvent ( -1, HardKey_Suspend, 0, false, false );
-				}
-				newkeycode = Key_unknown;			
-			}
-			//nobreak;
-		
-		default: 
 			break;
-	}				
+		}
+				
+		// Rotate cursor keys 180°
+		case Key_Left : 
+		case Key_Right: 
+		case Key_Up   : 
+		case Key_Down : {
+			if (( d-> m_model == Model_iPAQ_H31xx ) ||
+			    ( d-> m_model == Model_iPAQ_H38xx )) {			    
+				newkeycode = Key_Left + ( keycode - Key_Left + 2 ) % 4;
+			}
+			break;
+		}
 
+		// map Power Button short/long press to F34/F35
+		case Key_SysReq: {
+			if ( isPress ) {
+				if ( m_power_timer )
+					killTimer ( m_power_timer );
+				m_power_timer = startTimer ( 500 );
+			}
+			else if ( m_power_timer ) {
+				killTimer ( m_power_timer );
+				m_power_timer = 0;
+				QWSServer::sendKeyEvent ( -1, HardKey_Suspend, 0, true, false );
+				QWSServer::sendKeyEvent ( -1, HardKey_Suspend, 0, false, false );
+			}
+			newkeycode = Key_unknown;	
+			break;	
+		}
+	}
+			
 	if ( newkeycode != keycode ) {
 		if ( newkeycode != Key_unknown )
 			QWSServer::sendKeyEvent ( -1, newkeycode, modifiers, isPress, autoRepeat );
