@@ -116,7 +116,7 @@ void XineControl::stop( bool isSet ) {
     if ( !isSet) {
         libXine->stop( );
         mediaPlayerState->setList();
-        //mediaPlayerState->setPlaying( false );
+        //        mediaPlayerState->setPlaying( false );
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
         if ( disabledSuspendScreenSaver ) {

@@ -48,7 +48,7 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     connect( videoUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
     connect( videoUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
     connect( videoUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
-    
+
     volControl = new VolumeControl;
 
 }
@@ -71,7 +71,7 @@ void MediaPlayer::play() {
 
 void MediaPlayer::setPlaying( bool play ) {
     if ( !play ) {
-        mediaPlayerState->setPaused( FALSE );
+        //mediaPlayerState->setPaused( TRUE );
         return;
     }
 

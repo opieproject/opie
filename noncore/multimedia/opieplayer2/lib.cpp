@@ -171,6 +171,7 @@ int Lib::play( const QString& fileName,
                startPos, start_time);
 }
 void Lib::stop() {
+    qDebug("<<<<<<<< STOP IN LIB TRIGGERED >>>>>>>");
     xine_stop(m_xine );
 }
 void Lib::pause(){

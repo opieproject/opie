@@ -685,7 +685,7 @@ void PlayListWidget::removeSelected() {
 }
 
 void PlayListWidget::playIt( QListViewItem *it) {
-    if(it==NULL) return;
+    // if(it==NULL) return;
     qDebug("playIt");
     mediaPlayerState->setPlaying(FALSE);
     mediaPlayerState->setPlaying(TRUE);
@@ -1233,13 +1233,13 @@ qDebug("%d", index);
 switch(index) {
   case -16:
   {
-     
+
       mediaPlayerState->toggleFullscreen();
       bool b=mediaPlayerState->fullscreen();
       pmView->setItemChecked( index,b);
       Config cfg( "OpiePlayer" );
       cfg.writeEntry("FullScreen", b);
-        
+
   }
   break;
 };
@@ -1268,7 +1268,7 @@ void PlayListWidget::populateSkinsMenu() {
             defaultSkinIndex = item;
         if( skinName == skin)
             skinsMenu->setItemChecked( item, TRUE);
-                
+
         ++it;
     }
 }
