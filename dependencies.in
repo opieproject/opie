@@ -35,7 +35,7 @@
     depends LIBSQLITE_DEP
 
   config LIBXINE_DEP
-    boolean "have libxine 1.0 beta11"
+    boolean "Have libxine 1.0 beta11"
     default "n"
 
   config LIBXINE_LIB_DIR
@@ -47,7 +47,7 @@
     depends LIBXINE_DEP
 
   config LIBIPK_DEP
-    boolean "have libipkg v109 or greater"
+    boolean "Have libipkg v109 or greater"
     default "n"
 
   config LIBIPK_LIB_DIR
@@ -59,7 +59,7 @@
     depends LIBIPK_DEP
 
   config LIBSDL_DEP
-    boolean "have libsdl12 and sdlimage"
+    boolean "Have libsdl12 and sdlimage"
     default "n"
   
   config LIBSDL_LIB_DIR
