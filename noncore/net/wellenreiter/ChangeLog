@@ -1,0 +1,66 @@
+2003-??-??	Michael Lauer		<mickey@Vanille.de>
+
+	* Add automatic uploading of capture files to "The Capture Dump" site at
+	  http://www.Vanille.de/projects/capturedump.spy
+	* Initial reading of the manufacturer database happens now in background
+	* Remove deprecated setMonitorMode() API ==> Use setMode( "monitor" ) now.
+	  The monitor mode now tries to use the standard IW_MODE_MONITOR first. If that
+	  doesn't work, it falls back to using the proprietary iwpriv commands
+
+2003-11-30	Michael Lauer		<mickey@Vanille.de>
+
+	* Released as Version 1.0.1
+	* Fixed ARP decoding for wired networks.
+          Interestingly, 802.11 encapsulates these in IP packets, while wired ethernet just tags the type_of_protocol.
+	* Added reading GPS data from a gps daemon.
+	* Started preparations for utilizing Wellenreiter II in wired networks.
+	* Implemented persistant configuration interface and retriggerable auto detection.
+	* Added QCOP interface for talking to opie-networksettings.
+	* Added parsing of DHCP packets and detecting DHCP servers.
+        * Overhauled the configuration window and started with the customizable event system.
+	* Added disabling the screensaver.
+	* Added automatic opening and scrolling to the network tree if a new station appears.
+
+2003-05-10	Michael Lauer		<mickey@Vanille.de>
+
+	* Released as Version 1.0
+	* Added restarting the dhcp client if having killed it before.
+	* Decouple dump files from live capture to shift control over 'what' is dumped to applications.
+
+2003-05-05	Michael Lauer		<mickey@Vanille.de>
+
+	* Released as Version 1.0-RC1 (Release Candidate)
+	* Fixed rare segfaults while sniffing and operating the GUI simultaenously.
+	* Parse more data packets and detect more participating stations.
+	* Added live graph window showing the signal strength on all channels.
+	* Added parsing ARP packets and identifying IP addresses of participating stations.
+	* Added parsing with optionally enabled PRISM headers (signal strength).
+
+2003-04-12	Michael Lauer		<mickey@Vanille.de>
+	
+	* Released as Version 1.0 (Beta)
+	* GUI enhancements in the Menubar and the Toolbar.
+	* Improved keyboard handling.
+	* Added sanity checks for running Wellenreiter II as non-root or with dhcp clients in the background.
+	* Add writing and replaying of libpcap compatible capture files.
+
+2003-04-08	Michael Lauer		<mickey@Vanille.de>
+
+	* Released as Version 0.2 (Alpha)
+	* Closed memory leak in packet capturer.
+	* Fixed client stations appearing under essid as access points.
+	* Fixed false WEP reporting in some cases.
+	* Started with inspecting data packages.
+	* Add detecting associated client stations in infrastructural networks (if they transmit data).
+	* Worked around buggy hostap drivers writing past fixed-length-structures on arm.
+	* Added dynamic checking of available private ioctls.
+	* Added a saveable hex window for packet dissection.
+
+2003-03-30	Michael Lauer 		<mickey@Vanille.de>
+
+	* Released as Version 0.1 (Alpha)
+
+2003-03-25	Michael Lauer		<mickey@Vanille.de>
+
+	* Rewrote Wellenreiter II from scratch - including the sniffing engine.
+	* Beacon inspection works and finds ad-hoc networks and managed networks.
