@@ -2,7 +2,9 @@
 #include <qvbox.h>
 #include <qheader.h>
 #include <qtimer.h>
+#include <qlayout.h>
 
+#include <qpe/qpeapplication.h>
 
 #include "defines.h"
 #include "mainwindow.h"
@@ -64,23 +66,37 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
                                 0, 0, this );
     editAccounts->addTo( settingsMenu );
 
-    QVBox *view = new QVBox( this );
+    QWidget *view = new QWidget(  this );
     setCentralWidget( view );
+
+
+    QWidget *d = QApplication::desktop();
+    QBoxLayout *layout;
+
+    if ( d->width() < d->height() ) {
+    layout = new QVBoxLayout( view );
+    } else {
+    layout = new QHBoxLayout( view );
+    }
 
     folderView = new AccountView( view );
     folderView->header()->hide();
-    folderView->setMinimumHeight( 90 );
-    folderView->setMaximumHeight( 90 );
     folderView->addColumn( tr( "Mailbox" ) );
     folderView->hide();
 
+    layout->addWidget( folderView );
+
     mailView = new QListView( view );
-    mailView->setMinimumHeight( 50 );
     mailView->addColumn( tr( "Subject" ),QListView::Manual );
     mailView->addColumn( tr( "Sender" ),QListView::Manual );
     mailView->addColumn( tr( "Date" ));
     mailView->setAllColumnsShowFocus(true);
     mailView->setSorting(-1);
+
+    layout->addWidget( mailView );
+    layout->setStretchFactor( folderView, 1 );
+    layout->setStretchFactor( mailView, 2 );
+
     connect( mailView, SIGNAL( clicked( QListViewItem * ) ),this,
              SLOT( displayMail( QListViewItem * ) ) );
 
