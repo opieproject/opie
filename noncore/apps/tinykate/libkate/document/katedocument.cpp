@@ -300,7 +300,7 @@ void KateDocument::openURL(const QString &filename)
   if (!fileInfo->exists() || !fileInfo->isReadable())
   {
     qDebug("File doesn't exit or couldn't be read");
-    return false;
+    return ;
   }
 
   buffer->clear();
@@ -323,7 +323,7 @@ void KateDocument::openURL(const QString &filename)
 
   emit fileNameChanged();
   
-  return true;
+  return ;
 }
 
 bool KateDocument::saveFile()
@@ -393,7 +393,7 @@ void KateDocument::insertLine( const QString &str, int l ) {
 
 void KateDocument::insert_Line(const QString& s,int line, bool update)
 {
-  kdDebug(13020)<<"KateDocument::insertLine "<<s<<QString("	%1").arg(line)<<endl;
+  kdDebug(13020)<<"KateDocument::insertLine "<<s<<QString(" %1").arg(line)<<endl;
   TextLine::Ptr TL=new TextLine();
   TL->append(s.unicode(),s.length());
   buffer->insertLine(line,TL);
