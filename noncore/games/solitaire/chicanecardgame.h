@@ -16,6 +16,15 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
+**  
+** created on base of patiencecardgame by cam (C.A.Mader) 2002
+** Rules for this game:
+**      use 2 decks = 104 cards
+**      deal 8 rows with 3 hidden cards and one open card
+**      append red to black and vice versa
+**      each card can be layed on a free place
+**      deal 8 cards at once
+**
 **********************************************************************/
 #ifndef CHICANE_CARD_GAME_H
 #define CHICANE_CARD_GAME_H 
@@ -50,8 +59,8 @@ public:
 
     virtual bool isAllowedOnTop(Card *card) {
 	if ( card->isFacing() &&
-//	     ( ( ( cardOnTop() == NULL ) && (card->getValue() == king) ) ||		// diese Zeile sorgt dafür dass nur Kings auf leere Plätze dürfen
-	     ( (cardOnTop() == NULL) ||							// auf einen Freiplatz darf alles!
+//	     ( ( ( cardOnTop() == NULL ) && (card->getValue() == king) ) ||		// only kings are allowed on empty places
+	     ( (cardOnTop() == NULL) ||							// each card can use an empty place
 	       ( (cardOnTop() != NULL) &&
  	         ((int)card->getValue() + 1 == (int)cardOnTop()->getValue()) &&
 	         (card->isRed() != cardOnTop()->isRed()) ) ) )
@@ -92,7 +101,7 @@ public:
 		int offsetDown = ( qt_screen->deviceWidth() < 200 ) ? 9 : 13;
 		// correct the position taking in to account the card is not
     		// yet flipped, but will become flipped
-    		top = QPoint( top.x(), top.y() - 3 );		// Keine Verschiebung!
+    		top = QPoint( top.x(), top.y() - 3 );		// no moving to the side
 		newTopCard->flipTo( top.x(), top.y() );
 		top = QPoint( top.x(), top.y() + offsetDown );
 	    }
@@ -108,7 +117,7 @@ public:
 		int offsetDown = ( qt_screen->deviceWidth() < 200 ) ? 9 : 13;
 		y += offsetDown; 
 	    } else {
-		x += 0;   					// Keine Verschiebung! 
+		x += 0;   					// no moving to the side
 		y += 3;
 	    }
 	    card = cardInfront(card); 

@@ -17,7 +17,15 @@
 ** not clear to you.
 **
 **
-** Modified by C.A.Mader 2002
+** created on base of patiencecardgame by cam (C.A.Mader) 2002
+** Rules for this game:
+**      use 2 decks = 104 cards
+**      deal 9 rows with 5 open cards each
+**      append one card to each other card which is one step higher
+**      move only columns of cards which are equal in suit
+**      each card can be layed on a free place
+**      deal 1 card at once on the first pile
+**
 **
 **********************************************************************/
 #include <qgfx_qws.h>
@@ -84,7 +92,7 @@ void TeeclubCardGame::resizePiles()
     beginDealing();
     for (int i = 0; i < 9; i++) {    
         while ((workingPiles[i]->getCardPos(NULL).y() > 230) && (workingPiles[i]->getOffsetDown()>1)) {
-            // Resizen des Stapels
+            // resize the pile
             workingPiles[i]->setOffsetDown(workingPiles[i]->getOffsetDown()-1);
             Card *card = workingPiles[i]->cardOnBottom();
             int p=0;

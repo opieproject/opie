@@ -17,7 +17,15 @@
 ** not clear to you.
 **
 **
-** Modified by C.A.Mader 2002
+** created on base of patiencecardgame by cam (C.A.Mader) 2002
+** Rules for this game:
+**      use 2 decks = 104 cards
+**      deal 8 rows with one open card in the first place
+**      one hidden and one open in the second place and so on
+**      append red to black and vice versa
+**      each card can be layed on a free place
+**      deal 8 cards at once
+**
 **
 **********************************************************************/
 #include <qgfx_qws.h>
