@@ -61,7 +61,7 @@
     </message>
 </context>
 <context>
-    <name>OFileDialog</name>
+    <name>Opie::Ui::OFileDialog</name>
     <message>
         <source>Open</source>
         <translation type="obsolete">Åbn</translation>
@@ -109,7 +109,7 @@
     </message>
 </context>
 <context>
-    <name>OFontSelector</name>
+    <name>Opie::Ui::OFontSelector</name>
     <message>
         <source>Style</source>
         <translation type="obsolete">Stil</translation>
