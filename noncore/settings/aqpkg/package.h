@@ -44,14 +44,18 @@ public:
     void setInstalledToRoot( bool root )        { installedToRoot = root; }
     void setInstalledTo( Destination *d )       { installedTo = d; }
     void setDependancies( QString &deps )       { dependancies = deps; }
+    void setPackageSize( QString size )         { packageSize = size; }
+    void setSection( QString sect)              { section = sect; }
 
     Package *getLocalPackage()      { return localPackage; }
     QString getPackageName()        { return packageName; }
     QString getVersion()            { return version; }
     QString getStatus()             { return status; }
     QString getDescription()        { return description; }
-    QString getFilename()			{ return filename; }
+    QString getFilename()           { return filename; }
     QString getDependancies()       { return dependancies; }
+    QString getPackageSize()        { return packageSize; }
+    QString getSection()            { return section; }
 
     bool isInstalled();
 	bool isPackageStoredLocally()	{ return packageStoredLocally; }
@@ -76,6 +80,8 @@ private:
     bool installed;
     bool differentVersionAvailable;
     QString dependancies;
+    QString packageSize;
+    QString section;
 
     Destination *installedTo;
 };

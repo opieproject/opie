@@ -59,6 +59,7 @@ private:
   QString packageFile;
   bool active;
 
+
   vector<Package> packageList;
 };
 

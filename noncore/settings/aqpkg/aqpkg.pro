@@ -15,7 +15,8 @@ HEADERS		= global.h \
 		  server.h \
 		  helpwindow.h \
 		  letterpushbutton.h \
-		  inputdlg.h
+		  inputdlg.h \
+		  categoryfilterimpl.h
 SOURCES		= mainwin.cpp \
 		  datamgr.cpp \
 		  mem.cpp \
@@ -33,10 +34,12 @@ SOURCES		= mainwin.cpp \
 		  helpwindow.cpp \
 		  letterpushbutton.cpp \
 		  inputdlg.cpp \
-		  version.cpp
+		  version.cpp \
+		  categoryfilterimpl.cpp
 INTERFACES	= settings.ui \
 		  install.ui \
-		  instoptions.ui
+		  instoptions.ui \
+		  categoryfilter.ui
 TARGET		= aqpkg
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include

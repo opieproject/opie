@@ -48,6 +48,8 @@ private:
     int mnuShowUninstalledPkgsId;
     int mnuShowInstalledPkgsId;
     int mnuShowUpgradedPkgsId;
+    int mnuFilterByCategory;
+    int mnuSetFilterCategory;
 
 public slots:
     void setDocument( const QString &doc );
@@ -59,5 +61,8 @@ public slots:
     void filterUninstalledPackages();
     void filterInstalledPackages();
     void filterUpgradedPackages();
+    void filterCategory();
+    void setFilterCategory();
+
 };
 #endif

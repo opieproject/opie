@@ -28,9 +28,11 @@ using namespace std;
 #include "global.h"
 
 
+QString DataManager::availableCategories = "";
 DataManager::DataManager()
 {
-	activeServer = "";
+    activeServer = "";
+    availableCategories = "#";
 }
 
 DataManager::~DataManager()
@@ -206,4 +208,12 @@ void DataManager :: writeOutIpkgConf()
     }
 
     out.close();
+}
+
+
+void DataManager :: setAvailableCategories( QString section )
+{
+    section = section.lower();
+    if ( availableCategories.find( "#" + section + "#" ) == -1 )
+        availableCategories += section + "#";
 }

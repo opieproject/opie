@@ -44,6 +44,8 @@ public:
     void showOnlyUninstalledPackages( bool val );
     void showOnlyInstalledPackages( bool val );
     void showUpgradedPackages( bool val );
+    bool filterByCategory( bool val );
+    bool setFilterCategory();
     
 private:
     DataManager *dataMgr;
@@ -58,7 +60,9 @@ private:
     ProgressDlg *progressDlg;
     QString currentlySelectedServer;
     QString lastSearchText;
+    QString categoryFilter;
 
+    bool categoryFilterEnabled;
     bool showJumpTo;
     bool showUninstalledPkgs;
     bool showInstalledPkgs;

@@ -40,6 +40,7 @@ using namespace std;
 #include "ipkg.h"
 #include "inputdlg.h"
 #include "letterpushbutton.h"
+#include "categoryfilterimpl.h"
 
 #include "global.h"
 
@@ -62,7 +63,7 @@ NetworkPackageManager::NetworkPackageManager( DataManager *dataManager, QWidget 
     showUninstalledPkgs = false;
     showInstalledPkgs = false;
     showUpgradedPkgs = false;
-    
+    categoryFilterEnabled = false;
 
     initGui();
     setupConnections();
@@ -239,6 +240,13 @@ void NetworkPackageManager :: serverSelected( int )
                 continue;
         }
 
+        // Apply the section filter
+        if ( categoryFilterEnabled && categoryFilter != "" )
+        {
+            if ( it->getSection() == "" || categoryFilter.find( it->getSection().lower() ) == -1 )
+                continue;
+        }
+
         // If the local server, only display installed packages
         if ( serverName == LOCAL_SERVER && !it->isInstalled() )
             continue;
@@ -295,6 +303,9 @@ void NetworkPackageManager :: serverSelected( int )
 	            	new QCheckListItem( item, QString( "V. Installed - " ) + it->getInstalledVersion() );
 			}
 		}
+
+        new QCheckListItem( item, QString( "Size - " ) + it->getPackageSize() );
+        new QCheckListItem( item, QString( "Section - " ) + it->getSection() );
         packagesList->insertItem( item );
     }
 
@@ -325,10 +336,6 @@ void NetworkPackageManager :: updateServer()
 
     // Update the current server
     // Display dialog
-//  ProgressDlg *progDlg = new ProgressDlg( this );
-//  QString status = "Updating package lists...";
-//  progDlg->show();
-//  progDlg->setText( status );
 
     // Disable buttons to stop silly people clicking lots on them :)
 
@@ -686,7 +693,7 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
                                     msgtext, "Remove", secondButton ) )
                 {
                     case 0: // Try again or Enter
-						// option 0 = Remove
+                        // option 0 = Remove
                         item.option = "D";
                         break;
                     case 1: // Quit or Escape
@@ -743,7 +750,7 @@ void NetworkPackageManager :: letterPushed( QString t )
             packagesList->setSelected( item, true );
             packagesList->ensureItemVisible( item );
             break;
-		}
+        }
 
         item = (QCheckListItem *)item->nextSibling();
         if ( !item )
@@ -803,4 +810,46 @@ void NetworkPackageManager :: showUpgradedPackages( bool val )
 {
     showUpgradedPkgs = val;
     serverSelected( -1 );
+}
+
+bool NetworkPackageManager :: filterByCategory( bool val )
+{
+    if ( val )
+    {
+        if ( categoryFilter == "" )
+        {
+            if ( !setFilterCategory() )
+                return false;
+        }
+            
+        categoryFilterEnabled = true;
+        serverSelected( -1 );
+        return true;
+    }
+    else
+    {
+        // Turn off filter
+        categoryFilterEnabled = false;
+        serverSelected( -1 );
+        return false;
+    }
+}
+
+bool NetworkPackageManager :: setFilterCategory( )
+{
+    // Get categories;
+    CategoryFilterImpl dlg( DataManager::getAvailableCategories(), categoryFilter, this );
+    if ( dlg.exec() == QDialog::Accepted )
+    {
+        categoryFilter = dlg.getSelectedFilter();
+
+        if ( categoryFilter == "" )
+            return false;
+            
+        categoryFilterEnabled = true;
+        serverSelected( -1 );
+        return true;
+    }
+
+    return false;
 }

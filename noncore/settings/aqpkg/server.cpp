@@ -28,6 +28,7 @@
 using namespace std;
 
 #include "server.h"
+#include "datamgr.h"
 
 #ifdef QWS
 #include <qpe/global.h>
@@ -210,7 +211,19 @@ void Server :: readPackageFile( Server *local, bool clearAll, bool installingToR
         {
             if ( currPackage )
                 currPackage->setFilename( value );
-		}
+        }
+        else if ( key == "Size" )
+        {
+            if ( currPackage )
+                currPackage->setPackageSize( value );
+        }
+        else if ( key == "Section" )
+        {
+            if ( currPackage )
+                currPackage->setSection( value );
+
+            DataManager::setAvailableCategories( value );
+        }
         else if ( key == "" )
         {
             newPackage = true;
@@ -270,7 +283,13 @@ QString Server :: toString()
 
 
     return ret;
+}                     /*
+void addAvailableSection( QString section )
+{
+  if ( DataManager::availableCategories.find( value ) == -1 )
+//                DataManager::availableCategories += "#" + value;
 }
+*/
 
 vector<Package> &Server::getPackageList()
 {

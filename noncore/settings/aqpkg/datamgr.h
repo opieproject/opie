@@ -21,6 +21,8 @@
 #include <map>
 using namespace std;
 
+#include <qstring.h>
+
 #include "server.h"
 #include "destination.h"
 
@@ -53,8 +55,11 @@ public:
 
     void writeOutIpkgConf();
 
+    static QString getAvailableCategories() { return availableCategories; }
+    static void setAvailableCategories( QString section );
 
 private:
+    static QString availableCategories;
     QString activeServer;
 
     vector<Server> serverList;

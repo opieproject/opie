@@ -40,7 +40,7 @@ MainWindow :: MainWindow( QWidget *p, char *name )
 
     // Create our menu
     help = new QPopupMenu( this );
-	help->insertItem( "&General", this, SLOT(displayHelp()), Qt::CTRL+Qt::Key_G );
+    help->insertItem( "&General", this, SLOT(displayHelp()), Qt::CTRL+Qt::Key_G );
 	help->insertItem( "&About", this, SLOT(displayAbout()), Qt::CTRL+Qt::Key_A );
 
     settings = new QPopupMenu( this );
@@ -54,7 +54,10 @@ MainWindow :: MainWindow( QWidget *p, char *name )
 	mnuShowUninstalledPkgsId = filter->insertItem( "Show &Uninstalled Packages", this, SLOT(filterUninstalledPackages()), Qt::CTRL+Qt::Key_U );
 	mnuShowInstalledPkgsId = filter->insertItem( "Show In&stalled Packages", this, SLOT(filterInstalledPackages()), Qt::CTRL+Qt::Key_S );
 	mnuShowUpgradedPkgsId = filter->insertItem( "Show U&pdated Packages", this, SLOT(filterUpgradedPackages()), Qt::CTRL+Qt::Key_P );
-    
+    filter->insertSeparator();
+    mnuFilterByCategory = filter->insertItem( "Filter By &Category", this, SLOT(filterCategory()), Qt::CTRL+Qt::Key_C );
+    mnuSetFilterCategory = filter->insertItem( "Set Filter C&ategory", this, SLOT(setFilterCategory()), Qt::CTRL+Qt::Key_A );
+
 	// Create the main menu
 	menu = menuBar();  //new QMenuBar( this );
 	menu->insertItem( "&Settings", settings );
@@ -99,7 +102,7 @@ void MainWindow :: displayHelp()
 {
     HelpWindow *dlg = new HelpWindow( this );
     dlg->exec();
-    delete dlg;    
+    delete dlg;
 }
 
 void MainWindow :: searchForPackage()
@@ -136,9 +139,9 @@ void MainWindow :: filterUninstalledPackages()
     networkPkgWindow->showOnlyInstalledPackages( false );
     filter->setItemChecked( mnuShowUpgradedPkgsId, false );
     networkPkgWindow->showUpgradedPackages( false );
-    
+
     networkPkgWindow->showOnlyUninstalledPackages( val );
-    
+
 }
 
 void MainWindow :: filterInstalledPackages()
@@ -159,7 +162,7 @@ void MainWindow :: filterInstalledPackages()
     networkPkgWindow->showOnlyUninstalledPackages( false );
     filter->setItemChecked( mnuShowUpgradedPkgsId, false );
     networkPkgWindow->showUpgradedPackages( false );
-   
+
     networkPkgWindow->showOnlyInstalledPackages( val );
 }
 
@@ -183,4 +186,24 @@ void MainWindow :: filterUpgradedPackages()
     networkPkgWindow->showOnlyInstalledPackages( false );
 
     networkPkgWindow->showUpgradedPackages( val );
+}
+
+void MainWindow :: setFilterCategory()
+{
+    if ( networkPkgWindow->setFilterCategory( ) )
+        filter->setItemChecked( mnuFilterByCategory, true );
+}
+
+void MainWindow :: filterCategory()
+{
+    if ( filter->isItemChecked( mnuFilterByCategory ) )
+    {
+        networkPkgWindow->filterByCategory( false );
+        filter->setItemChecked( mnuFilterByCategory, false );
+    }
+    else
+    {
+        if ( networkPkgWindow->filterByCategory( true ) )
+            filter->setItemChecked( mnuFilterByCategory, true );
+    }
 }
