@@ -497,6 +497,10 @@
                             <name>enabled</name>
                             <bool>false</bool>
                         </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>/tmp/capture</string>
+                        </property>
                     </widget>
                     <widget row="0"  column="2" >
                         <class>QToolButton</class>
@@ -847,6 +851,18 @@
         <sender>enableActiveScanning</sender>
         <signal>toggled(bool)</signal>
         <receiver>GroupBox4</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>writeCaptureFile</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>getCaptureFileName</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>writeCaptureFile</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>captureFileName</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>

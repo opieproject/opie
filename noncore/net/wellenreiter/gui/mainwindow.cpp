@@ -241,7 +241,7 @@ QString WellenreiterMainWindow::getFileName( bool save )
         #else
         str = QFileDialog::getSaveFileName();
         #endif
-        if ( str.isEmpty() || QFileInfo(str).isDir() )
+        if ( str.isEmpty() /*|| QFileInfo(str).isDir()*/ )
             return "";
     }
     else
