@@ -355,7 +355,7 @@ bool SIMpad::setDisplayBrightness ( int bright )
         value = value << 8;
         value += mask;
         char writeCommand[100];
-        const int count = sprintf( writeCommand, "0x%x\n", value );
+        const int count = snprintf( writeCommand, sizeof(writeCommand), "0x%x\n", value );
         res = ( ::write ( fd, writeCommand, count ) != -1 );
         ::close ( fd );
     }
