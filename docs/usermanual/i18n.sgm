@@ -137,7 +137,7 @@
 		<filename class='extension'>pro</filename>
 		Every application has a .pro-file from which the Makefiles are generated.  As a translator
 		you need to check if in every .pro-file is a line for the language you want to translate to.  
-		This line should look like::
+		This line should look like:
 
 		<programlisting>
 			 ../../../i18n/de/today.ts \
