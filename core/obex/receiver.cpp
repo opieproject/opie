@@ -1,6 +1,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
+#include <stdlib.h> // int system
 #include <unistd.h>
 
 #include <fcntl.h>
@@ -15,6 +16,7 @@
 #include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/global.h>
 
 #include "obex.h"
 #include "receiver.h"
@@ -33,7 +35,8 @@ Receiver::~Receiver() {
     m_obex->setReceiveEnabled( false );
     delete m_obex;
 }
-void Receiver::slotReceived( const QString& file ) {
+void Receiver::slotReceived( const QString& _file ) {
+    QString file = _file;
     int check = checkFile(file);
     if ( check == AddressBook )
         handleAddr( file );
@@ -61,9 +64,37 @@ void Receiver::handleOther( const QString& other ) {
     OtherHandler* hand =  new OtherHandler();
     hand->handle( other );
 }
-int Receiver::checkFile( const QString& file ) {
+void Receiver::tidyUp( QString& _file ) {
+    /* libversit fails on BASE64 encoding we try to sed it away */
+    QString file = _file;
+    char foo[] = "/tmp/opie-XXXXXX";
+    int fd = ::mkstemp(foo);
+
+    if ( fd == -1 )
+        return;
+
+    _file = QString::fromUtf8( foo );
+    QString cmd = QString("sed -e \"s/^\\(X-MICROSOFT-BODYINK\\)\\;/\\1:/;\" < %2 > %2 ").arg( Global::shellQuote(file)).arg( Global::shellQuote(_file) );
+    qWarning("Executing: %s", cmd.utf8().data() );
+    (void)::system( cmd.utf8().data() );
+
+    cmd = QString("rm %1").arg( Global::shellQuote(file) );
+    (void)::system( cmd.utf8().data() );
+}
+int Receiver::checkFile( QString& file ) {
     qWarning("check file!! %s", file.latin1() );
     int ret;
+
+    /**
+     * currently the parser is broken in regard of BASE64 encoding
+     * and M$ likes to send that. So we will executed a small
+     * tidy up system sed script
+     * At this point we can also remove umlaute from the filename
+     */
+    if (file.right(4) == QString::fromLatin1(".vcs") ||
+        file.right(4) == QString::fromLatin1(".vcf") )
+        tidyUp( file );
+
     if (file.right(4) == ".vcs" ) {
         ret = Datebook;
     }else if ( file.right(4) == ".vcf") {

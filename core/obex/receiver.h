@@ -21,9 +21,12 @@ namespace OpieObex {
         void handleAddr(const QString& );
         void handleDateTodo(const QString& );
         void handleOther(const QString& );
-        int checkFile( const QString& file );
+        /* will alter the file name */
+        int checkFile( QString& file );
         bool testDateTodo(const QString& file);
         bool testAddressbook(const QString& file);
+        /* called by checkFile */
+        void tidyUp( QString& file );
 
     private slots:
         void slotReceived( const QString& );
