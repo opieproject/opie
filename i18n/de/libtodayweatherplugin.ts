@@ -116,7 +116,7 @@ Druck:</translation>
     </message>
     <message>
         <source> kPa</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

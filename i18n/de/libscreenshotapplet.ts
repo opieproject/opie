@@ -48,11 +48,11 @@
     </message>
     <message>
         <source>Opie drawpad</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Schmierzettel</translation>
     </message>
     <message>
         <source>Please set &lt;b&gt;QWS_DISPLAY&lt;/b&gt; environmental variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte die &lt;b&gt;QWS_DISPLAY&lt;/b&gt; Umgebungsvariable setzen.</translation>
     </message>
 </context>
 </TS>

@@ -175,7 +175,12 @@ Memory is categorized as follows:
 2. Buffers - temporary storage used to improve performance
 3. Cached - information that has recently been used, but has not been freed yet.
 4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Diese Seite zeigt wieviel Speicher (z.B. RAM) auf dem Gerät momentan belegt ist.
+Speicher wird wie folgt unterteilt:
+1. Belegt - Speicher, der von Opie und laufenden Anwendungen belegt wird.
+2. Puffer - Temporärer Speicher um die Performanz zu steigern
+3. Gecached - Information die seit kurzem nicht mehr benutzt wird, aber noch nicht freigegeben wurde.
+4. Frei - Speicher, der nicht durch Opie oder Anwendungen belegt wird. </translation>
     </message>
     <message>
         <source>Total Swap: %1 kB</source>
