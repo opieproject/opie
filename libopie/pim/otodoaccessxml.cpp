@@ -497,9 +497,31 @@ void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
         break;
     }
     default:
+        ev.setCustomField( attr, val );
         break;
     }
 }
+
+// from PalmtopRecord... GPL ### FIXME
+namespace {
+QString customToXml(const QMap<QString, QString>& customMap )
+{
+    //qWarning(QString("writing custom %1").arg(customMap.count()));
+    QString buf(" ");
+    for ( QMap<QString, QString>::ConstIterator cit = customMap.begin();
+	    cit != customMap.end(); ++cit) {
+// 	qWarning(".ITEM.");
+	buf += cit.key();
+	buf += "=\"";
+	buf += Qtopia::escapeString(cit.data());
+	buf += "\" ";
+    }
+    return buf;
+}
+
+
+}
+
 QString OTodoAccessXML::toString( const OTodo& ev )const {
     QString str;
 
@@ -581,6 +603,7 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
             str += "Reminders=\""+ records.join(";") +"\" ";
         }
     }
+    str += customToXml( ev.toExtraMap() );
 
 
     return str;

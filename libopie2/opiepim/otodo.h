@@ -193,7 +193,6 @@ public:
      */
     QString type()const;
     QString toShortText()const;
-    QMap<QString, QString> toExtraMap()const;
     QString recordField(int id )const;
 
     /**

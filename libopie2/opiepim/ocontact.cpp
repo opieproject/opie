@@ -441,7 +441,7 @@ QString OContact::toRichText() const
     // name, jobtitle and company
     if ( !(value = fullName()).isEmpty() )
 	text += "<b><h3><img src=\"addressbook/AddressBook\">" + Qtopia::escapeString(value) + "</h3></b>";
-    
+
     if ( !(value = jobTitle()).isEmpty() )
 	text += Qtopia::escapeString(value) + "<br>";
 
@@ -982,13 +982,7 @@ QString OContact::type() const
 	return QString::fromLatin1( "OContact" );
 }
 
-// Definition is missing ! (se)
-QMap<QString,QString> OContact::toExtraMap() const
-{
-	qWarning ("Function not implemented: OContact::toExtraMap()");
-	QMap <QString,QString> useless;
-	return useless;
-}
+
 
 class QString OContact::recordField( int pos ) const
 {

@@ -6,7 +6,12 @@
 #include <qstring.h>
 #include <qstringlist.h>
 
+/*
+ * we need to get customMap which is private...
+ */
+#define private protected
 #include <qpe/palmtoprecord.h>
+#undef private
 
 #include <opie/opimxrefmanager.h>
 
@@ -94,7 +99,8 @@ public:
     /**
      * key value representation of extra items
      */
-    virtual QMap<QString, QString> toExtraMap()const = 0;
+    QMap<QString, QString> toExtraMap()const;
+    void setExtraMap( const QMap<QString, QString>& );
 
     /**
      * the name for a recordField

@@ -174,3 +174,9 @@ void OPimRecord::setLastHitField( int lastHit )const {
 int OPimRecord::lastHitField()const{
     return m_lastHit;
 }
+QMap<QString, QString> OPimRecord::toExtraMap()const {
+    return customMap;
+}
+void OPimRecord::setExtraMap( const QMap<QString, QString>& map) {
+    customMap = map;
+}
