@@ -43,6 +43,7 @@
 /* QT */
 #include <qaction.h>
 #include <qapplication.h>
+#include <qcombobox.h>
 #include <qcopchannel_qws.h>
 #include <qdatetime.h>
 #include <qmenubar.h>
@@ -239,8 +240,6 @@ void OPimMainWindow::insertViewMenuItems( QActionGroup *items ) {
     if ( items ) {
         // Rebuild Item menu
         m_viewMenu->clear();
-        m_viewMenuCategories->addTo( m_viewMenu );
-        m_viewMenu->insertSeparator();
         m_viewMenuGroup->addTo( m_viewMenu );
         m_viewMenu->insertSeparator();
         m_viewMenuAppGroup = items;
@@ -248,85 +247,40 @@ void OPimMainWindow::insertViewMenuItems( QActionGroup *items ) {
     }
 }
 
-void OPimMainWindow::slotViewCategory( QAction *category ) {
+void OPimMainWindow::slotViewCategory( const QString &category ) {
     // Set application caption
     QString caption = m_appName;
-    if ( category->text() != tr( "All" ) )
-        caption.append( QString( " - %1" ).arg( category->text() ) );
+    if ( category != tr( "All" ) )
+        caption.append( QString( " - %1" ).arg( category ) );
     setCaption( caption );
 
     // Notify application
-    emit categorySelected( category->text() );
+    emit categorySelected( category );
 }
 
 void OPimMainWindow::setViewCategory( const QString &category ) {
-        // Find category in menu
-        QObjectListIt kidIt( *(m_viewMenuCategories->children()) );
-        QObject *obj;
-        while ( (obj=kidIt.current()) != 0 ) {
-            QAction *currAction = reinterpret_cast<QAction*>(obj);
-            if ( currAction->text() == category ) {
-                // Category was found, enable it
-                currAction->setOn( true );
-                return;
-            }
-            ++kidIt;
+    // Find category in list
+    for ( int i = 0; i < m_catSelect->count(); i++ ) {
+        if ( m_catSelect->text( i ) == category ) {
+            m_catSelect->setCurrentItem( i );
+            slotViewCategory( category );
+            return;
         }
+    }
 }
 
 void OPimMainWindow::reloadCategories() {
-    QString selected;
+    QString selected = m_catSelect->currentText();
 
-    // Remove old categories from View menu
-    if ( m_viewMenuCategories ) {
-        QObjectListIt kidIt( *(m_viewMenuCategories->children()) );
-        QObject *obj;
-        while ( (obj=kidIt.current()) != 0 ) {
-            QAction *currAction = reinterpret_cast<QAction*>(obj);
-            if ( currAction->isOn() )
-                selected = currAction->text();
-            ++kidIt;
-            delete currAction;
-        }
-    }
-    else {
-        m_viewMenuCategories = new QActionGroup( this );
-        connect( m_viewMenuCategories, SIGNAL(selected(QAction*)), this, SLOT(slotViewCategory(QAction*)) );
+    // Remove old categories from list
+    m_catSelect->clear();
 
-        selected = tr( "All" );
-    }
-
-    m_viewMenu->clear();
-    
-    // Add categories to View menu
-    QAction *a = new QAction( tr( "All" ), QString::null, 0, m_viewMenuCategories, QString::null, true );
-    a->setWhatsThis( tr( "Click here to view all items." ) );
-    a->setOn( selected == tr( "All" ) );
-
+    // Add categories to list
     Categories cats;
     cats.load( categoryFileName() );
-    QStringList catList = cats.labels( m_catGroupName );
-    for ( QStringList::Iterator it = catList.begin(); it != catList.end(); ++it ) {
-        a = new QAction( tr( (*it) ), QString::null, 0, m_viewMenuCategories, QString::null, true );
-        a->setWhatsThis( tr( "Click here to view items belonging to %1." ).arg( (*it) ) );
-        a->setOn( selected == (*it) );
-    }
-    
-    a = new QAction( tr( "Unfiled" ), QString::null, 0, m_viewMenuCategories, QString::null, true );
-    a->setWhatsThis( tr( "Click here to view all unfiled items." ) );
-    a->setOn( selected == tr( "Unfiled" ) );
-    
-    m_viewMenuCategories->addTo( m_viewMenu );
-
-    // Add default items to View menu
-    m_viewMenu->insertSeparator();
-    m_viewMenuGroup->addTo( m_viewMenu );
-
-    // Insert application-specific items (if any)
-    if ( m_viewMenuAppGroup ) {
-        m_viewMenu->insertSeparator();
-        m_viewMenuAppGroup->addTo( m_viewMenu );
-    }
+    m_catSelect->insertItem( tr( "All" ) );
+    m_catSelect->insertStringList( cats.labels( m_catGroupName ) );
+    m_catSelect->insertItem( tr( "Unfiled" ) );
 }
 
 void OPimMainWindow::initBars( const QString &itemName ) {
@@ -342,7 +296,7 @@ void OPimMainWindow::initBars( const QString &itemName ) {
 
     // Create application menu bar
     QToolBar *toolbar = new QToolBar( this );
-    
+
     // Create sub-menus
     m_itemMenu = new QPopupMenu( this );
     m_itemMenu->setCheckable( true );
@@ -351,12 +305,11 @@ void OPimMainWindow::initBars( const QString &itemName ) {
     m_viewMenu->setCheckable( true );
     menubar->insertItem( tr( "View" ), m_viewMenu );
 
-    m_viewMenuCategories = 0l;
     m_viewMenuAppGroup = 0l;
-    
+
     // Item menu
     m_itemMenuGroup1 = new QActionGroup( this, QString::null, false );
-    
+
     QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ),
                               QString::null, 0, m_itemMenuGroup1, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(slotItemNew()) );
@@ -373,7 +326,7 @@ void OPimMainWindow::initBars( const QString &itemName ) {
                                          QString::null, 0, m_itemMenuGroup1, 0 );
     connect( m_itemDuplicateAction, SIGNAL(activated()), this, SLOT(slotItemDuplicate()) );
     m_itemDuplicateAction->setWhatsThis( tr( "Click here to duplicate the selected item." ) );
-    
+
     m_itemDeleteAction = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ),
                                       QString::null, 0, m_itemMenuGroup1, 0 );
     connect( m_itemDeleteAction, SIGNAL(activated()), this, SLOT(slotItemDelete()) );
@@ -395,11 +348,11 @@ void OPimMainWindow::initBars( const QString &itemName ) {
 
     m_itemMenuGroup2 = new QActionGroup( this, QString::null, false );
 
-    a = new QAction( tr( "Find" ), Resource::loadPixmap( "find" ),
-                     QString::null, 0, m_itemMenuGroup2, 0 );
-    connect( a, SIGNAL(activated()), this, SLOT(slotItemFind()) );
-    a->setWhatsThis( tr( "Click here to search for an item." ) );
-    a->addTo( toolbar );
+//     a = new QAction( tr( "Find" ), Resource::loadPixmap( "find" ),
+//                      QString::null, 0, m_itemMenuGroup2, 0 );
+//     connect( a, SIGNAL(activated()), this, SLOT(slotItemFind()) );
+//     a->setWhatsThis( tr( "Click here to search for an item." ) );
+//     a->addTo( toolbar );
 
     a = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ),
                      QString::null, 0, m_itemMenuGroup2, 0 );
@@ -407,18 +360,24 @@ void OPimMainWindow::initBars( const QString &itemName ) {
     a->setWhatsThis( tr( "Click here to set your preferences for this application." ) );
 
     m_itemMenuGroup2->addTo( m_itemMenu );
-    
+
     // View menu
     m_viewMenuGroup = new QActionGroup( this, QString::null, false );
-    
+
     a = new QAction( tr( "Filter" ), QString::null, 0, m_viewMenuGroup, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(slotViewFilter()) );
     a->setWhatsThis( tr( "Click here to filter the items displayed." ) );
-    
+
     a = new QAction( tr( "Filter Settings" ), QString::null, 0, m_viewMenuGroup, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(slotViewFilterSettings()) );
     a->setWhatsThis( tr( "Click here to modify the current filter settings." ) );
 
+    // Create view toolbar
+    toolbar = new QToolBar( this );
+    m_catSelect = new QComboBox( toolbar );
+    connect( m_catSelect, SIGNAL(activated(const QString&)), this, SLOT(slotViewCategory(const QString&)) );
+
+    // Do initial load of categories
     reloadCategories();
 }
 

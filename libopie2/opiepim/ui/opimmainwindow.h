@@ -38,6 +38,7 @@
 
 class QAction;
 class QActionGroup;
+class QComboBox;
 class QCopChannel;
 class QDateTime;
 class QPopupMenu;
@@ -107,7 +108,7 @@ protected slots:
     virtual void slotItemDuplicate() = 0;
     virtual void slotItemDelete() = 0;
     virtual void slotItemBeam() = 0;
-    virtual void slotItemFind() = 0;
+    //virtual void slotItemFind() = 0;
     virtual void slotConfigure() = 0;
 
 protected:
@@ -121,20 +122,20 @@ protected:
 
     /** UI-related functions */
     QPopupMenu *itemContextMenu();
-    
+
     void insertItemMenuItems( QActionGroup *items );
     void insertViewMenuItems( QActionGroup *items );
 
     void setViewCategory( const QString &category );
     void reloadCategories();
-    
+
 private slots:
     void appMessage( const QCString&, const QByteArray& );
     void setDocument( const QString& );
 
     /** UI-related slots */
-    void slotViewCategory( QAction *category );
-    
+    void slotViewCategory( const QString &category );
+
 private:
     class Private;
     Private* d;
@@ -160,10 +161,11 @@ private:
     QActionGroup *m_itemMenuGroup2;      // Action group containing default items in Item menu
     QActionGroup *m_viewMenuAppGroup;    // Action group containing application items in View menu
     QActionGroup *m_viewMenuGroup;       // Action group containing default items in View menu
-    QActionGroup *m_viewMenuCategories;  // Pointer to action group containing categories in View menu
     QAction      *m_itemEditAction;      // Edit current item action
     QAction      *m_itemDuplicateAction; // Duplicate current item action
     QAction      *m_itemDeleteAction;    // Delete current item action
+
+    QComboBox    *m_catSelect;           // Category selection combo box
 
     /* I would love to do this as a template
      * but can't think of a right way
