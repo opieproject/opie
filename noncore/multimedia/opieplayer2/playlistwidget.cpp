@@ -789,6 +789,15 @@ void PlayListWidget::populateVideoView() {
     videoPopulated=true;
 }
 
+QListView *PlayListWidget::currentFileListView() const
+{
+    switch ( currentTab() ) {
+        case AudioFiles: return audioView;
+        case VideoFiles: return videoView;
+        default: assert( false );
+    }
+    return 0;
+}
 
 void PlayListWidget::openFile() {
                 // http://66.28.164.33:2080
@@ -1153,12 +1162,5 @@ PlayListWidget::TabType PlayListWidget::currentTab() const
 }
 
 QString PlayListWidget::currentFileListPathName() const {
-    switch (currentTab()) {
-      case AudioFiles:
-          return audioView->currentItem()->text(3);
-      case VideoFiles:
-          return videoView->currentItem()->text(3);
-      default: assert( false );
-    };
-    return QString::null;
+    return currentFileListView()->currentItem()->text( 3 );
 }

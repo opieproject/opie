@@ -90,6 +90,8 @@ private:
     void populateAudioView();
     void populateVideoView();
 
+    QListView *currentFileListView() const;
+
 private slots:
     void populateSkinsMenu();
     void skinsMenuActivated(int);
