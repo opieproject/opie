@@ -139,27 +139,28 @@ zu wollen ?</translation>
     <name>AuthWidget</name>
     <message>
         <source>Authentication: </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Authentisierung</translation>
     </message>
     <message>
         <source>Script-based</source>
-        <translation type="unfinished"></translation>
+        <translation>Script basiter</translation>
     </message>
     <message>
         <source>PAP</source>
-        <translation type="unfinished"></translation>
+        <translation>PAP</translation>
     </message>
     <message>
         <source>Terminal-based</source>
-        <translation type="unfinished"></translation>
+        <translation>
+Terminal basiert</translation>
     </message>
     <message>
         <source>CHAP</source>
-        <translation type="unfinished"></translation>
+        <translation>CHAP</translation>
     </message>
     <message>
         <source>PAP/CHAP</source>
-        <translation type="unfinished"></translation>
+        <translation>PAP/CHAP</translation>
     </message>
     <message>
         <source>&lt;p&gt;Specifies the method used to identify yourself to
@@ -171,23 +172,31 @@ unsure, contact your ISP.
 If you can choose between PAP and CHAP,
 choose CHAP, because it&apos;s much safer. If you don&apos;t know
 whether PAP or CHAP is right, choose PAP/CHAP.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Spezifiziert die Methode die benutzt wird um Sie am
+PPP-Server zu identifizieren. Die meisten Hochschulen nutzen
+nach wie vor &lt;b&gt;Terminal&lt;/b&gt; oder &lt;b&gt;Script&lt;/b&gt; basierte 
+Authentisierung während die meisten ISPs &lt;b&gt;PAP&lt;/b&gt; oder &lt;b&gt;CHAP&lt;/b&gt; 
+verwenden. Wenn Sie unsicher sind fragen Sie Ihren ISP.
+
+Wenn Sie zwischen PAP oder CHAP wählen können nehmen Sie CHAP- 
+es ist sicherer. Wenn Sie nicht wissen ob PAP oder CHAP notwendig ist 
+wählen Sie PAP/CHAP.</translation>
     </message>
     <message>
         <source>Username: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nutzername: </translation>
     </message>
     <message>
         <source>Enter your username here...</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie Ihren Nutzernamen hier ein...</translation>
     </message>
     <message>
         <source>Password: </source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort: </translation>
     </message>
     <message>
         <source>Enter your password here</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie Ihr Passwort hier ein</translation>
     </message>
     <message>
         <source>Store password</source>
@@ -202,15 +211,23 @@ you do not need to type it in every time.
 plain text in the config file, which is
 readable only to you. Make sure nobody
 gains access to this file!</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ist diese Option aktiviert wird Ihr ISP
+Passwort in der Konfiguration gespeichert, so
+dass Sie es nicht mehrmals einbgeben müssen.
+
+&lt;b&gt;&lt;font color=&quot;red&quot;&gt;Warnung:&lt;/font&gt; )Ihr Passwort 
+wird im Klartext in einer Datei gespeichert, welche
+nur von Ihnen lesbar ist. Stellen Sie sicher, dass 
+niemand anders Zugang dazu erhält !
+</translation>
     </message>
     <message>
         <source>error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Login script has unbalanced loop Start/End&lt;qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Login script hat eine asynchrone Start/Stop-Schleife&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>
