@@ -21,17 +21,7 @@
 
 #include "konsole.h"
 
-#include <qpe/qpeapplication.h>
-#include <opie/oapplicationfactory.h>
-
-#include <qfile.h>
-
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <pwd.h>
-#include <sys/types.h>
+#include <opie2/oapplicationfactory.h>
 
 
 /* --| main |------------------------------------------------------ */

@@ -27,12 +27,12 @@ SOURCES   = TEScreen.cpp \
       commandeditwidget.cpp \
       playlistselection.cpp \
       MyPty.cpp \
-      main.cpp 
+      main.cpp
 INTERFACES =  commandeditdialogbase.ui smallcommandeditdialogbase.ui
 TARGET    = embeddedkonsole
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lopie
+LIBS            += -lqpe -lopiecore2 -lqtaux2
 TMAKE_CXXFLAGS += -DQT_QWS_OPIE -DHAVE_OPENPTY
 
 include ( $(OPIEDIR)/include.pro )

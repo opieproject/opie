@@ -24,6 +24,10 @@
 
 #include <stdlib.h>
 
+#ifdef  QT_QWS_OPIE
+#include <opie2/ocolorpopupmenu.h>
+#endif
+
 #include <qpe/resource.h>
 
 #include <qdir.h>
@@ -62,10 +66,6 @@
 #include "konsole.h"
 #include "keytrans.h"
 #include "commandeditdialog.h"
-
-#ifdef  QT_QWS_OPIE
-#include <opie/colorpopupmenu.h>
-#endif
 
 class EKNumTabBar : public QTabBar
 {
@@ -1527,7 +1527,7 @@ void Konsole::colorMenuSelected(int iD)
         qDebug("do custom");
         if(fromMenu)
         {
-            OColorPopupMenu* penColorPopupMenu = new OColorPopupMenu(Qt::black, this, "foreground color");
+            Opie::OColorPopupMenu* penColorPopupMenu = new Opie::OColorPopupMenu(Qt::black, this, "foreground color");
             connect(penColorPopupMenu, SIGNAL(colorSelected(const QColor&)), this,
                     SLOT(changeForegroundColor(const QColor&)));
             penColorPopupMenu->exec();
@@ -1878,7 +1878,7 @@ void Konsole::changeForegroundColor(const QColor &color)
     qDebug("do other dialog");
 #ifdef QT_QWS_OPIE
 
-    OColorPopupMenu* penColorPopupMenu2 = new OColorPopupMenu(Qt::black, this,"background color");
+    Opie::OColorPopupMenu* penColorPopupMenu2 = new Opie::OColorPopupMenu(Qt::black, this,"background color");
     connect(penColorPopupMenu2, SIGNAL(colorSelected(const QColor&)), this,
             SLOT(changeBackgroundColor(const QColor&)));
     penColorPopupMenu2->exec();
