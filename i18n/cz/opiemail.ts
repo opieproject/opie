@@ -1,809 +1,804 @@
-<!DOCTYPE TS><TS>
-<context>
+<!DOCTYPE TS>
+<TS>
+  <context>
     <name>AccountView</name>
     <message>
-        <source>Error creating new Folder</source>
-        <translation>Nelze vytvořit novou složku</translation>
+      <source>Error creating new Folder</source>
+      <translation>Nelze vytvořit novou složku</translation>
     </message>
     <message>
-        <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Chyba během vytváření&lt;br&gt;nové složky - přerušení.&lt;/center&gt;</translation>
+      <source>&lt;center>Error while creating&lt;br>new folder - breaking.&lt;/center></source>
+      <translation>&lt;center>Chyba během vytváření&lt;br>nové složky - přerušení.&lt;/center></translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>AddressPicker</name>
     <message>
-        <source>There are no entries in the addressbook.</source>
-        <translation>V adresáři nejsou žádné položky.</translation>
+      <source>There are no entries in the addressbook.</source>
+      <translation>V adresáři nejsou žádné položky.</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation>Chyba</translation>
+      <source>Error</source>
+      <translation>Chyba</translation>
     </message>
     <message>
-        <source>&lt;p&gt;You have to select at least one address entry.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Vyberte alespoň jednu položku adresáře.&lt;/p&gt;</translation>
+      <source>&lt;p>You have to select at least one address entry.&lt;/p></source>
+      <translation>&lt;p>Vyberte alespoň jednu položku adresáře.&lt;/p></translation>
     </message>
     <message>
-        <source>Ok</source>
-        <translation>Ok</translation>
+      <source>Ok</source>
+      <translation>Ok</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>AddressPickerUI</name>
     <message>
-        <source>Address Picker</source>
-        <translation>Sběrač adres</translation>
+      <source>Address Picker</source>
+      <translation>Sběrač adres</translation>
     </message>
     <message>
-        <source>Ok</source>
-        <translation>Ok</translation>
+      <source>Ok</source>
+      <translation>Ok</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>Storno</translation>
+      <source>Cancel</source>
+      <translation>Storno</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>ComposeMail</name>
     <message>
-        <source>Name</source>
-        <translation>Jméno</translation>
+      <source>Name</source>
+      <translation>Jméno</translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation>Velikost</translation>
+      <source>Size</source>
+      <translation>Velikost</translation>
     </message>
     <message>
-        <source>Problem</source>
-        <translation>Problém</translation>
+      <source>Problem</source>
+      <translation>Problém</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Please create an SMTP account first.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Prosím vytvořte nejdříve SMTP účet.&lt;/p&gt;</translation>
+      <source>&lt;p>Please create an SMTP account first.&lt;/p></source>
+      <translation>&lt;p>Prosím vytvořte nejdříve SMTP účet.&lt;/p></translation>
     </message>
     <message>
-        <source>Ok</source>
-        <translation>Ok</translation>
+      <source>Ok</source>
+      <translation>Ok</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation>Chyba</translation>
+      <source>Error</source>
+      <translation>Chyba</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Please select a File.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Prosím vyberte soubor.&lt;/p&gt;</translation>
+      <source>&lt;p>Please select a File.&lt;/p></source>
+      <translation>&lt;p>Prosím vyberte soubor.&lt;/p></translation>
     </message>
     <message>
-        <source>Sending mail</source>
-        <translation type="unfinished"></translation>
+      <source>Sending mail</source>
+      <translation>Odesílám zprávu</translation>
     </message>
     <message>
-        <source>No Receiver spezified</source>
-        <translation type="unfinished"></translation>
+      <source>No Receiver spezified</source>
+      <translation>Nebyl specifikován příjemce</translation>
     </message>
     <message>
-        <source>Store message</source>
-        <translation type="unfinished"></translation>
+      <source>Store message</source>
+      <translation>Uložit zprávu</translation>
     </message>
     <message>
-        <source>Store message into drafts?</source>
-        <translation type="unfinished"></translation>
+      <source>Store message into drafts?</source>
+      <translation>Uložit zprávu do konceptů?</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation type="unfinished">Ano</translation>
+      <source>Yes</source>
+      <translation>Ano</translation>
     </message>
     <message>
-        <source>No</source>
-        <translation type="unfinished">Ne</translation>
+      <source>No</source>
+      <translation>Ne</translation>
     </message>
     <message>
-        <source>&lt;center&gt;Attachments will not be stored in &quot;Draft&quot; folder&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+      <source>&lt;center>Attachments will not be stored in &quot;Draft&quot; folder&lt;/center></source>
+      <translation>&lt;center>Přílohy nebudou uloženy do složky&quot;Koncepty&quot;&lt;/center></translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>ComposeMailUI</name>
     <message>
-        <source>Compose Message</source>
-        <translation>Napsat zprávu</translation>
+      <source>Compose Message</source>
+      <translation>Napsat zprávu</translation>
     </message>
     <message>
-        <source>send later</source>
-        <translation>odeslat později</translation>
+      <source>send later</source>
+      <translation>odeslat později</translation>
     </message>
     <message>
-        <source>use:</source>
-        <translation>použít:</translation>
+      <source>use:</source>
+      <translation>použít:</translation>
     </message>
     <message>
-        <source>Mail</source>
-        <translation>Mail</translation>
+      <source>Mail</source>
+      <translation>Mail</translation>
     </message>
     <message>
-        <source>Subject</source>
-        <translation>Předmět</translation>
+      <source>Subject</source>
+      <translation>Předmět</translation>
     </message>
     <message>
-        <source>From</source>
-        <translation>Od</translation>
+      <source>From</source>
+      <translation>Od</translation>
     </message>
     <message>
-        <source>To</source>
-        <translation>Komu</translation>
+      <source>To</source>
+      <translation>Komu</translation>
     </message>
     <message>
-        <source>Options</source>
-        <translation>Možnosti</translation>
+      <source>Options</source>
+      <translation>Možnosti</translation>
     </message>
     <message>
-        <source>Reply-To</source>
-        <translation>Odpovědět</translation>
+      <source>Reply-To</source>
+      <translation>Odpovědět</translation>
     </message>
     <message>
-        <source>BCC</source>
-        <translation>Slepá kopie</translation>
+      <source>BCC</source>
+      <translation>Slepá kopie</translation>
     </message>
     <message>
-        <source>Signature</source>
-        <translation>Podpis</translation>
+      <source>Signature</source>
+      <translation>Podpis</translation>
     </message>
     <message>
-        <source>CC</source>
-        <translation>Kopie</translation>
+      <source>CC</source>
+      <translation>Kopie</translation>
     </message>
     <message>
-        <source>Attachment</source>
-        <translation>Příloha</translation>
+      <source>Attachment</source>
+      <translation>Příloha</translation>
     </message>
     <message>
-        <source>Delete File</source>
-        <translation>Smazat soubor</translation>
+      <source>Delete File</source>
+      <translation>Smazat soubor</translation>
     </message>
     <message>
-        <source>Add File</source>
-        <translation>Přidat soubor</translation>
+      <source>Add File</source>
+      <translation>Přidat soubor</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>EditAccounts</name>
     <message>
-        <source>Account</source>
-        <translation>Účet</translation>
+      <source>Account</source>
+      <translation>Účet</translation>
     </message>
     <message>
-        <source>Type</source>
-        <translation>Typ</translation>
+      <source>Type</source>
+      <translation>Typ</translation>
     </message>
     <message>
-        <source>Question</source>
-        <translation>Otázka</translation>
+      <source>Question</source>
+      <translation>Otázka</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Do you really want to delete the selected Account?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Opravdu chcete smazat vybraný účet?&lt;/p&gt;</translation>
+      <source>&lt;p>Do you really want to delete the selected Account?&lt;/p></source>
+      <translation>&lt;p>Opravdu chcete smazat vybraný účet?&lt;/p></translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation>Ano</translation>
+      <source>Yes</source>
+      <translation>Ano</translation>
     </message>
     <message>
-        <source>No</source>
-        <translation>Ne</translation>
+      <source>No</source>
+      <translation>Ne</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation>Chyba</translation>
+      <source>Error</source>
+      <translation>Chyba</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Please select an account.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Prosím vyberte účet.&lt;/p&gt;</translation>
+      <source>&lt;p>Please select an account.&lt;/p></source>
+      <translation>&lt;p>Prosím vyberte účet.&lt;/p></translation>
     </message>
     <message>
-        <source>Ok</source>
-        <translation>Ok</translation>
+      <source>Ok</source>
+      <translation>Ok</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>EditAccountsUI</name>
     <message>
-        <source>Configure Accounts</source>
-        <translation>Konfigurovat účty</translation>
+      <source>Configure Accounts</source>
+      <translation>Konfigurovat účty</translation>
     </message>
     <message>
-        <source>Mail</source>
-        <translation>Mail</translation>
+      <source>Mail</source>
+      <translation>Mail</translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation>Smazat</translation>
+      <source>Delete</source>
+      <translation>Smazat</translation>
     </message>
     <message>
-        <source>New</source>
-        <translation>Nový</translation>
+      <source>New</source>
+      <translation>Nový</translation>
     </message>
     <message>
-        <source>Name of the Account</source>
-        <translation>Název účtu</translation>
+      <source>Name of the Account</source>
+      <translation>Název účtu</translation>
     </message>
     <message>
-        <source>Edit</source>
-        <translation>Upravit</translation>
+      <source>Edit</source>
+      <translation>Upravit</translation>
     </message>
     <message>
-        <source>News</source>
-        <translation>Novinky</translation>
+      <source>News</source>
+      <translation>Novinky</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>IMAPconfigUI</name>
     <message>
-        <source>Configure IMAP</source>
-        <translation>Konfigurovat IMAP</translation>
+      <source>Configure IMAP</source>
+      <translation>Konfigurovat IMAP</translation>
     </message>
     <message>
-        <source>User</source>
-        <translation>Uživatel</translation>
+      <source>User</source>
+      <translation>Uživatel</translation>
     </message>
     <message>
-        <source>Use SSL</source>
-        <translation type="obsolete">Používat SSL</translation>
+      <source>Password</source>
+      <translation>Heslo</translation>
     </message>
     <message>
-        <source>Password</source>
-        <translation>Heslo</translation>
+      <source>Port</source>
+      <translation>Port</translation>
     </message>
     <message>
-        <source>Port</source>
-        <translation>Port</translation>
+      <source>Server</source>
+      <translation>Server</translation>
     </message>
     <message>
-        <source>Server</source>
-        <translation>Server</translation>
+      <source>Name of the Account</source>
+      <translation>Název účtu</translation>
     </message>
     <message>
-        <source>Name of the Account</source>
-        <translation>Název účtu</translation>
+      <source>Account</source>
+      <translation>Účet</translation>
     </message>
     <message>
-        <source>Account</source>
-        <translation>Účet</translation>
+      <source>Prefix</source>
+      <translation>Prefix</translation>
     </message>
     <message>
-        <source>Prefix</source>
-        <translation>Prefix</translation>
+      <source>ssh $SERVER exec</source>
+      <translation>ssh $SERVER exec</translation>
     </message>
     <message>
-        <source>ssh $SERVER exec</source>
-        <translation type="unfinished"></translation>
+      <source>Use secure sockets:</source>
+      <translation>Použít zabezpečení:</translation>
     </message>
-    <message>
-        <source>Use secure sockets:</source>
-        <translation type="unfinished">Použít zabezpečení:</translation>
-    </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>MainWindow</name>
     <message>
-        <source>Mail</source>
-        <translation>Mail</translation>
+      <source>Mail</source>
+      <translation>Mail</translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation>Nastavení</translation>
+      <source>Settings</source>
+      <translation>Nastavení</translation>
     </message>
     <message>
-        <source>Compose new mail</source>
-        <translation>Napsat novou zprávu</translation>
+      <source>Compose new mail</source>
+      <translation>Napsat novou zprávu</translation>
     </message>
     <message>
-        <source>Send queued mails</source>
-        <translation>Odeslat zprávy ve frontě</translation>
+      <source>Send queued mails</source>
+      <translation>Odeslat zprávy ve frontě</translation>
     </message>
     <message>
-        <source>Show/Hide folders</source>
-        <translation>Ukázat/skrýt složky</translation>
+      <source>Show/Hide folders</source>
+      <translation>Ukázat/skrýt složky</translation>
     </message>
     <message>
-        <source>Delete Mail</source>
-        <translation>Smazat zprávu</translation>
+      <source>Delete Mail</source>
+      <translation>Smazat zprávu</translation>
     </message>
     <message>
-        <source>Edit settings</source>
-        <translation>Upravit nastavení</translation>
+      <source>Edit settings</source>
+      <translation>Upravit nastavení</translation>
     </message>
     <message>
-        <source>Configure accounts</source>
-        <translation>Konfigurovat účty</translation>
+      <source>Configure accounts</source>
+      <translation>Konfigurovat účty</translation>
     </message>
     <message>
-        <source>Mailbox</source>
-        <translation>Schránka</translation>
+      <source>Mailbox</source>
+      <translation>Schránka</translation>
     </message>
     <message>
-        <source>Subject</source>
-        <translation>Předmět</translation>
+      <source>Subject</source>
+      <translation>Předmět</translation>
     </message>
     <message>
-        <source>Sender</source>
-        <translation>Odesílatel</translation>
+      <source>Sender</source>
+      <translation>Odesílatel</translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation>Velikost</translation>
+      <source>Size</source>
+      <translation>Velikost</translation>
     </message>
     <message>
-        <source>Date</source>
-        <translation>Datum</translation>
+      <source>Date</source>
+      <translation>Datum</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>NNTPGroupsDlg</name>
     <message>
-        <source>Subscribed newsgroups</source>
-        <translation type="unfinished"></translation>
+      <source>Subscribed newsgroups</source>
+      <translation>Přihlášené novinky</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>NNTPGroupsUI</name>
     <message>
-        <source>newsgroupslist</source>
-        <translation type="unfinished"></translation>
+      <source>newsgroupslist</source>
+      <translation>Seznam novinek</translation>
     </message>
     <message>
-        <source>Newsgroups</source>
-        <translation type="unfinished"></translation>
+      <source>Newsgroups</source>
+      <translation>Novinky</translation>
     </message>
     <message>
-        <source>List of groups from the server. On start, only subscribed groups are listed.</source>
-        <translation type="unfinished"></translation>
+      <source>List of groups from the server. On start, only subscribed groups are listed.</source>
+      <translation>Seznam skupin ze serveru. Na začátku budou zobrazeny pouze přihlášené skupiny.</translation>
     </message>
     <message>
-        <source>Groupfilter:</source>
-        <translation type="unfinished"></translation>
+      <source>Groupfilter:</source>
+      <translation>Filtr skupin:</translation>
     </message>
     <message>
-        <source>Enter a filter string here.
+      <source>Enter a filter string here.
 Then hit &quot;get newsgroup list&quot; again and only groups starting 
 with that filter will be listet.</source>
-        <translation type="unfinished"></translation>
+      <translation>Sem zadejte filtrovací řetězec.
+Potom klikněte na &quot;stáhnout seznam skupin&quot; znovu a zobrazí se vám 
+pouze skupiny začínající filtrem.</translation>
     </message>
     <message>
-        <source>Get newsgroup list from server</source>
-        <translation type="unfinished"></translation>
+      <source>Get newsgroup list from server</source>
+      <translation>Stáhnout seznam skupin ze serveru</translation>
     </message>
     <message>
-        <source>Retrieve the list of groups from server</source>
-        <translation type="unfinished"></translation>
+      <source>Retrieve the list of groups from server</source>
+      <translation>Přetáhnout seznam skupin ze serveru</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>NNTPconfigUI</name>
     <message>
-        <source>Configure NNTP</source>
-        <translation>Konfigurovat NNTP</translation>
+      <source>Configure NNTP</source>
+      <translation>Konfigurovat NNTP</translation>
     </message>
     <message>
-        <source>Port</source>
-        <translation>Port</translation>
+      <source>Port</source>
+      <translation>Port</translation>
     </message>
     <message>
-        <source>Name of the Account</source>
-        <translation>Název účtu</translation>
+      <source>Name of the Account</source>
+      <translation>Název účtu</translation>
     </message>
     <message>
-        <source>Account</source>
-        <translation>Účet</translation>
+      <source>Account</source>
+      <translation>Účet</translation>
     </message>
     <message>
-        <source>Server</source>
-        <translation>Server</translation>
+      <source>Server</source>
+      <translation>Server</translation>
     </message>
     <message>
-        <source>Use SSL</source>
-        <translation>Používat SSL</translation>
+      <source>Use SSL</source>
+      <translation>Používat SSL</translation>
     </message>
     <message>
-        <source>User</source>
-        <translation>Uživatel</translation>
+      <source>User</source>
+      <translation>Uživatel</translation>
     </message>
     <message>
-        <source>Password</source>
-        <translation>Heslo</translation>
+      <source>Password</source>
+      <translation>Heslo</translation>
     </message>
     <message>
-        <source>Use Login</source>
-        <translation>Používat přihlašování</translation>
+      <source>Use Login</source>
+      <translation>Používat přihlašování</translation>
     </message>
     <message>
-        <source>Groups</source>
-        <translation type="unfinished"></translation>
+      <source>Groups</source>
+      <translation>Skupiny</translation>
     </message>
     <message>
-        <source>Newsgroup</source>
-        <translation type="unfinished"></translation>
+      <source>Newsgroup</source>
+      <translation>Skupina novinek</translation>
     </message>
     <message>
-        <source>Get newsgroup list from server</source>
-        <translation type="unfinished"></translation>
+      <source>Get newsgroup list from server</source>
+      <translation>Stáhnout seznam skupin ze serveru</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>Newmdirdlgui</name>
     <message>
-        <source>Enter directory name</source>
-        <translation>Zadejte název adresáře</translation>
+      <source>Enter directory name</source>
+      <translation>Zadejte název adresáře</translation>
     </message>
     <message>
-        <source>Directory name:</source>
-        <translation>Název adresáře:</translation>
+      <source>Directory name:</source>
+      <translation>Název adresáře:</translation>
     </message>
     <message>
-        <source>Directory contains other subdirs</source>
-        <translation>Adresář obsahuje podadresáře</translation>
+      <source>Directory contains other subdirs</source>
+      <translation>Adresář obsahuje podadresáře</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>OpieMail</name>
     <message>
-        <source>Info</source>
-        <translation>Info</translation>
+      <source>Info</source>
+      <translation>Info</translation>
     </message>
     <message>
-        <source>Mail queue flushed</source>
-        <translation>Fronta vyprázdněna</translation>
+      <source>Mail queue flushed</source>
+      <translation>Fronta vyprázdněna</translation>
     </message>
     <message>
-        <source>Delete Mail</source>
-        <translation>Smazat zprávu</translation>
+      <source>Delete Mail</source>
+      <translation>Smazat zprávu</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
-        <translation>&lt;p&gt;Opravdu chcete smazat tuto zprávu? &lt;br&gt;&lt;br&gt;</translation>
+      <source>&lt;p>Do you really want to delete this mail? &lt;br>&lt;br></source>
+      <translation>&lt;p>Opravdu chcete smazat tuto zprávu? &lt;br>&lt;br></translation>
     </message>
     <message>
-        <source>Read this mail</source>
-        <translation>Přečíst tuto zprávu</translation>
+      <source>Read this mail</source>
+      <translation>Přečíst tuto zprávu</translation>
     </message>
     <message>
-        <source>Delete this mail</source>
-        <translation>Smazat tuto zprávu</translation>
+      <source>Delete this mail</source>
+      <translation>Smazat tuto zprávu</translation>
     </message>
     <message>
-        <source>Copy/Move this mail</source>
-        <translation>Kopírovat/Přesunout zprávu</translation>
+      <source>Copy/Move this mail</source>
+      <translation>Kopírovat/Přesunout zprávu</translation>
     </message>
     <message>
-        <source>Error creating new Folder</source>
-        <translation>Nelze vytvořit nová složka</translation>
+      <source>Error creating new Folder</source>
+      <translation>Nelze vytvořit nová složka</translation>
     </message>
     <message>
-        <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Chyba během vytváření&lt;br&gt;nové složky - přerušení.&lt;/center&gt;</translation>
+      <source>&lt;center>Error while creating&lt;br>new folder - breaking.&lt;/center></source>
+      <translation>&lt;center>Chyba během vytváření&lt;br>nové složky - přerušení.&lt;/center></translation>
     </message>
     <message>
-        <source>Define a smtp account first</source>
-        <translation type="unfinished"></translation>
+      <source>Define a smtp account first</source>
+      <translation>Nejdříve vytvořte smtp účet</translation>
     </message>
     <message>
-        <source>Read this posting</source>
-        <translation type="unfinished"></translation>
+      <source>Read this posting</source>
+      <translation>Číst tuto zprávu</translation>
     </message>
     <message>
-        <source>Edit this mail</source>
-        <translation type="unfinished"></translation>
+      <source>Edit this mail</source>
+      <translation>Upravit tuto zprávu</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>POP3configUI</name>
     <message>
-        <source>Configure POP3</source>
-        <translation>Konfigurace POP3</translation>
+      <source>Configure POP3</source>
+      <translation>Konfigurace POP3</translation>
     </message>
     <message>
-        <source>Account</source>
-        <translation>Účet</translation>
+      <source>Account</source>
+      <translation>Účet</translation>
     </message>
     <message>
-        <source>Name of the Account</source>
-        <translation>Název účtu</translation>
+      <source>Name of the Account</source>
+      <translation>Název účtu</translation>
     </message>
     <message>
-        <source>Server</source>
-        <translation>Server</translation>
+      <source>Server</source>
+      <translation>Server</translation>
     </message>
     <message>
-        <source>Port</source>
-        <translation>Port</translation>
+      <source>Port</source>
+      <translation>Port</translation>
     </message>
     <message>
-        <source>Use secure sockets:</source>
-        <translation>Použít zabezpečení:</translation>
+      <source>Use secure sockets:</source>
+      <translation>Použít zabezpečení:</translation>
     </message>
     <message>
-        <source>ssh $SERVER exec imapd</source>
-        <translation>ssh $SERVER exec imapd</translation>
+      <source>ssh $SERVER exec imapd</source>
+      <translation>ssh $SERVER exec imapd</translation>
     </message>
     <message>
-        <source>User</source>
-        <translation>Uživatel</translation>
+      <source>User</source>
+      <translation>Uživatel</translation>
     </message>
     <message>
-        <source>Password</source>
-        <translation>Heslo</translation>
+      <source>Password</source>
+      <translation>Heslo</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>SMTPconfigUI</name>
     <message>
-        <source>Configure SMTP</source>
-        <translation>Konfigurovat SMTP</translation>
+      <source>Configure SMTP</source>
+      <translation>Konfigurovat SMTP</translation>
     </message>
     <message>
-        <source>Account</source>
-        <translation>Účet</translation>
+      <source>Account</source>
+      <translation>Účet</translation>
     </message>
     <message>
-        <source>Use SSL</source>
-        <translation type="obsolete">Používat SSL</translation>
+      <source>Use Login</source>
+      <translation>Používat přihlašování</translation>
     </message>
     <message>
-        <source>Use Login</source>
-        <translation>Používat přihlašování</translation>
+      <source>Name of the Account</source>
+      <translation>Název účtu</translation>
     </message>
     <message>
-        <source>Name of the Account</source>
-        <translation>Název účtu</translation>
+      <source>Name of the SMTP Server</source>
+      <translation>Název SMTP serveru</translation>
     </message>
     <message>
-        <source>Name of the SMTP Server</source>
-        <translation>Název SMTP serveru</translation>
+      <source>Password</source>
+      <translation>Heslo</translation>
     </message>
     <message>
-        <source>Password</source>
-        <translation>Heslo</translation>
+      <source>Port</source>
+      <translation>Port</translation>
     </message>
     <message>
-        <source>Port</source>
-        <translation>Port</translation>
+      <source>Server</source>
+      <translation>Server</translation>
     </message>
     <message>
-        <source>Server</source>
-        <translation>Server</translation>
+      <source>Port of the SMTP Server</source>
+      <translation>Port SMTP serveru</translation>
     </message>
     <message>
-        <source>Port of the SMTP Server</source>
-        <translation>Port SMTP serveru</translation>
+      <source>User</source>
+      <translation>Uživatel</translation>
     </message>
     <message>
-        <source>User</source>
-        <translation>Uživatel</translation>
+      <source>Use secure sockets:</source>
+      <translation>Použít zabezpečení:</translation>
     </message>
     <message>
-        <source>Use secure sockets:</source>
-        <translation type="unfinished">Použít zabezpečení:</translation>
+      <source>ssh $SERVER exec</source>
+      <translation>ssh $SERVER exec</translation>
     </message>
-    <message>
-        <source>ssh $SERVER exec</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>SelectMailTypeUI</name>
     <message>
-        <source>Select Type</source>
-        <translation>Vyberte typ</translation>
+      <source>Select Type</source>
+      <translation>Vyberte typ</translation>
     </message>
     <message>
-        <source>Select Account Type</source>
-        <translation>Vyberte typ účtu</translation>
+      <source>Select Account Type</source>
+      <translation>Vyberte typ účtu</translation>
     </message>
     <message>
-        <source>IMAP</source>
-        <translation>IMAP</translation>
+      <source>IMAP</source>
+      <translation>IMAP</translation>
     </message>
     <message>
-        <source>POP3</source>
-        <translation>POP3</translation>
+      <source>POP3</source>
+      <translation>POP3</translation>
     </message>
     <message>
-        <source>SMTP</source>
-        <translation>SMTP</translation>
+      <source>SMTP</source>
+      <translation>SMTP</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>SettingsDialogUI</name>
     <message>
-        <source>Settings Dialog</source>
-        <translation>Okno nastavení</translation>
+      <source>Settings Dialog</source>
+      <translation>Okno nastavení</translation>
     </message>
     <message>
-        <source>View Mail</source>
-        <translation>Zobrazit zprávu</translation>
+      <source>View Mail</source>
+      <translation>Zobrazit zprávu</translation>
     </message>
     <message>
-        <source>View mail as Html</source>
-        <translation>Zobrazit jako Html</translation>
+      <source>View mail as Html</source>
+      <translation>Zobrazit jako Html</translation>
     </message>
     <message>
-        <source>Compose Mail</source>
-        <translation>Napsat zprávu</translation>
+      <source>Compose Mail</source>
+      <translation>Napsat zprávu</translation>
     </message>
     <message>
-        <source>Send mails later ( enqueue in outbox )</source>
-        <translation>Odeslat zprávy později (zůstanou v outboxu)</translation>
+      <source>Send mails later ( enqueue in outbox )</source>
+      <translation>Odeslat zprávy později (zůstanou v outboxu)</translation>
     </message>
     <message>
-        <source>Taskbar Applet</source>
-        <translation>Applet na lištu</translation>
+      <source>Taskbar Applet</source>
+      <translation>Applet na lištu</translation>
     </message>
     <message>
-        <source>Disable Taskbar Applet</source>
-        <translation>Vypnout applet na liště</translation>
+      <source>Disable Taskbar Applet</source>
+      <translation>Vypnout applet na liště</translation>
     </message>
     <message>
-        <source> min</source>
-        <translation>min</translation>
+      <source> min</source>
+      <translation>min</translation>
     </message>
     <message>
-        <source>Check how often</source>
-        <translation>Jak často zkoušet</translation>
+      <source>Check how often</source>
+      <translation>Jak často zkoušet</translation>
     </message>
     <message>
-        <source>Blink Led when new mails arrive</source>
-        <translation>Blikat LED při příchodu nové zprávy</translation>
+      <source>Blink Led when new mails arrive</source>
+      <translation>Blikat LED při příchodu nové zprávy</translation>
     </message>
     <message>
-        <source>Play Sound when new mails arrive</source>
-        <translation>Zahrát zvuk při příchodu nové zprávy</translation>
+      <source>Play Sound when new mails arrive</source>
+      <translation>Zahrát zvuk při příchodu nové zprávy</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>StatusWidgetUI</name>
     <message>
-        <source>Form1</source>
-        <translation>Form1</translation>
+      <source>Form1</source>
+      <translation>Form1</translation>
     </message>
     <message>
-        <source>TextLabel1</source>
-        <translation>TextLabel1</translation>
+      <source>TextLabel1</source>
+      <translation>TextLabel1</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>ViewMail</name>
     <message>
-        <source>Show Text</source>
-        <translation>Zobrazit Text</translation>
+      <source>Show Text</source>
+      <translation>Zobrazit Text</translation>
     </message>
     <message>
-        <source>Save Attachment</source>
-        <translation>Uložit přílohu</translation>
+      <source>Save Attachment</source>
+      <translation>Uložit přílohu</translation>
     </message>
     <message>
-        <source>From</source>
-        <translation>Od</translation>
+      <source>From</source>
+      <translation>Od</translation>
     </message>
     <message>
-        <source>To</source>
-        <translation>Komu</translation>
+      <source>To</source>
+      <translation>Komu</translation>
     </message>
     <message>
-        <source>Cc</source>
-        <translation>Kopie</translation>
+      <source>Cc</source>
+      <translation>Kopie</translation>
     </message>
     <message>
-        <source>Date</source>
-        <translation>Datum</translation>
+      <source>Date</source>
+      <translation>Datum</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation>Chyba</translation>
+      <source>Error</source>
+      <translation>Chyba</translation>
     </message>
     <message>
-        <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot reply yet.</source>
-        <translation>&lt;p&gt;Tělo zprávy ještě nebylo staženo, nemůžete zatím odpovídat.</translation>
+      <source>&lt;p>The mail body is not yet downloaded, so you cannot reply yet.</source>
+      <translation>&lt;p>Tělo zprávy ještě nebylo staženo, nemůžete zatím odpovídat.</translation>
     </message>
     <message>
-        <source>Ok</source>
-        <translation>Ok</translation>
+      <source>Ok</source>
+      <translation>Ok</translation>
     </message>
     <message>
-        <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot forward yet.</source>
-        <translation>&lt;p&gt;Tělo zprávy ještě nebylo staženo, nemůžete zatím přesměrovávat.</translation>
+      <source>&lt;p>The mail body is not yet downloaded, so you cannot forward yet.</source>
+      <translation>&lt;p>Tělo zprávy ještě nebylo staženo, nemůžete zatím přesměrovávat.</translation>
     </message>
     <message>
-        <source>Delete Mail</source>
-        <translation>Smazat zprávu</translation>
+      <source>Delete Mail</source>
+      <translation>Smazat zprávu</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
-        <translation>&lt;p&gt;Opravdu chcete smazat tuto zprávu? &lt;br&gt;&lt;br&gt;</translation>
+      <source>&lt;p>Do you really want to delete this mail? &lt;br>&lt;br></source>
+      <translation>&lt;p>Opravdu chcete smazat tuto zprávu? &lt;br>&lt;br></translation>
     </message>
     <message>
-        <source>Display image preview</source>
-        <translation type="unfinished"></translation>
+      <source>Display image preview</source>
+      <translation>Zobrazit náhled obrázku</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>ViewMailBase</name>
     <message>
-        <source>E-Mail by %1</source>
-        <translation>E-Mail podle %1</translation>
+      <source>E-Mail by %1</source>
+      <translation>E-Mail podle %1</translation>
     </message>
     <message>
-        <source>Mail</source>
-        <translation>Zpráva</translation>
+      <source>Mail</source>
+      <translation>Zpráva</translation>
     </message>
     <message>
-        <source>Reply</source>
-        <translation>Odpověď</translation>
+      <source>Reply</source>
+      <translation>Odpověď</translation>
     </message>
     <message>
-        <source>Forward</source>
-        <translation>Přesměrování</translation>
+      <source>Forward</source>
+      <translation>Přesměrování</translation>
     </message>
     <message>
-        <source>Attachments</source>
-        <translation>Přílohy</translation>
+      <source>Attachments</source>
+      <translation>Přílohy</translation>
     </message>
     <message>
-        <source>Show Html</source>
-        <translation>Ukázat Html</translation>
+      <source>Show Html</source>
+      <translation>Ukázat Html</translation>
     </message>
     <message>
-        <source>Delete Mail</source>
-        <translation>Smazat zprávu</translation>
+      <source>Delete Mail</source>
+      <translation>Smazat zprávu</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation>Popis</translation>
+      <source>Description</source>
+      <translation>Popis</translation>
     </message>
     <message>
-        <source>Filename</source>
-        <translation>Název souboru</translation>
+      <source>Filename</source>
+      <translation>Název souboru</translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation>Velikost</translation>
+      <source>Size</source>
+      <translation>Velikost</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>selectsmtp</name>
     <message>
-        <source>Select SMTP Account</source>
-        <translation type="unfinished"></translation>
+      <source>Select SMTP Account</source>
+      <translation>Vyberte SMTP účet</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>selectstoreui</name>
     <message>
-        <source>Select target box</source>
-        <translation>Okno výběru cíle</translation>
+      <source>Select target box</source>
+      <translation>Okno výběru cíle</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Store mail(s) to&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Uložit zprávy do&lt;/b&gt;</translation>
+      <source>&lt;b>Store mail(s) to&lt;/b></source>
+      <translation>&lt;b>Uložit zprávy do&lt;/b></translation>
     </message>
     <message>
-        <source>Folder:</source>
-        <translation>Složka:</translation>
+      <source>Folder:</source>
+      <translation>Složka:</translation>
     </message>
     <message>
-        <source>Account:</source>
-        <translation>Účet:</translation>
+      <source>Account:</source>
+      <translation>Účet:</translation>
     </message>
     <message>
-        <source>Create new folder</source>
-        <translation>Vytvořit novou složku</translation>
+      <source>Create new folder</source>
+      <translation>Vytvořit novou složku</translation>
     </message>
     <message>
-        <source>Prefix will prepend, no need to enter it!</source>
-        <translation>Prefix se objeví sám, není třeba ho zadávat!</translation>
+      <source>Prefix will prepend, no need to enter it!</source>
+      <translation>Prefix se objeví sám, není třeba ho zadávat!</translation>
     </message>
     <message>
-        <source>Move mail(s)</source>
-        <translation>Přesunout zprávy</translation>
+      <source>Move mail(s)</source>
+      <translation>Přesunout zprávy</translation>
     </message>
-</context>
+  </context>
 </TS>
