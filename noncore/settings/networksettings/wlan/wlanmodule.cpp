@@ -75,7 +75,7 @@ bool WLANModule::isOwner(Interface *i){
  * @return QWidget* pointer to this modules configure.
  */
 QWidget *WLANModule::configure(Interface *i){
-  WLANImp *wlanconfig = new WLANImp(0, "WlanConfig", i, true,  Qt::WDestructiveClose);
+  WLANImp *wlanconfig = new WLANImp(0, "WlanConfig", i, true,  ::Qt::WDestructiveClose);
   wlanconfig->setProfile(profile);
   return wlanconfig;
 }
@@ -94,7 +94,7 @@ QWidget *WLANModule::information(Interface *i){
 
 /**
  * Get all active (up or down) interfaces
- * @return QList<Interface> A list of interfaces that exsist that havn't
+ * @return QList<Interface> A list of interfaces that exist that havn't
  * been called by isOwner()
  */
 QList<Interface> WLANModule::getInterfaces(){
@@ -243,7 +243,7 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
 QWidget *WLANModule::getInfo( Interface *i)
 {
     odebug << "WLANModule::getInfo start" << oendl; 
-    WlanInfoImp *info = new WlanInfoImp(0, i->getInterfaceName(), Qt::WDestructiveClose);
+    WlanInfoImp *info = new WlanInfoImp(0, i->getInterfaceName(), ::Qt::WDestructiveClose);
     InterfaceInformationImp *information = new InterfaceInformationImp(info->tabWidget, "InterfaceSetupImp", i);
     info->tabWidget->insertTab(information, "TCP/IP", 0);
     info->tabWidget->setCurrentPage( 0 );
