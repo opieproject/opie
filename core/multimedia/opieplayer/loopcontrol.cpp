@@ -100,7 +100,7 @@ LoopControl::LoopControl( QObject *parent, const char *name )
         : QObject( parent, name ) {
     isMuted = FALSE;
     connect( qApp, SIGNAL( volumeChanged(bool) ), this, SLOT( setMute(bool) ) );
-//qDebug("starting loopcontrol");
+qDebug("starting loopcontrol");
     audioMutex = new Mutex;
 
     pthread_attr_init(&audio_attr);
@@ -117,7 +117,7 @@ LoopControl::LoopControl( QObject *parent, const char *name )
         pthread_attr_init(&audio_attr);
     }
 #endif
-//qDebug("create audio thread");
+qDebug("create audio thread");
     pthread_create(&audio_tid, &audio_attr, (void * (*)(void *))startAudioThread, this);
 }
 
@@ -364,12 +364,12 @@ bool LoopControl::init( const QString& filename ) {
     qDebug( "Using the %s decoder", mediaPlayerState->curDecoder()->pluginName() );
    
       // ### Hack to use libmpeg3plugin to get the number of audio samples if we are using the libmad plugin
-    if ( mediaPlayerState->curDecoder()->pluginName() == QString("LibMadPlugin") ) {
-        if ( mediaPlayerState->libMpeg3Decoder() && mediaPlayerState->libMpeg3Decoder()->open( filename )) {
-            total_audio_samples = mediaPlayerState->libMpeg3Decoder()->audioSamples( 0 );
-            mediaPlayerState->libMpeg3Decoder()->close();
-        }
-    }
+//     if ( mediaPlayerState->curDecoder()->pluginName() == QString("LibMadPlugin") ) {
+//         if ( mediaPlayerState->libMpeg3Decoder() && mediaPlayerState->libMpeg3Decoder()->open( filename )) {
+//             total_audio_samples = mediaPlayerState->libMpeg3Decoder()->audioSamples( 0 );
+//             mediaPlayerState->libMpeg3Decoder()->close();
+//         }
+//     }
     
     if ( !mediaPlayerState->curDecoder()|| !mediaPlayerState->curDecoder()->open( filename ) ) {
         audioMutex->unlock();
@@ -389,11 +389,11 @@ bool LoopControl::init( const QString& filename ) {
 
         qDebug( "LC- channels = %d", channels );
   
-        if ( !total_audio_samples )
+//        if ( !total_audio_samples )
             total_audio_samples = mediaPlayerState->curDecoder()->audioSamples( astream );
 
         total_audio_samples += 1000;
-
+        qDebug("total samples %d", total_audio_samples);
         mediaPlayerState->setLength( total_audio_samples );
   
         freq = mediaPlayerState->curDecoder()->audioFrequency( astream );

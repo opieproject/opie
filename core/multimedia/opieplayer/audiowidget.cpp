@@ -27,7 +27,7 @@
 #include <qpainter.h>
 #include <qframe.h>
 #include <qlayout.h>
-
+#include <qdir.h>
 #include "audiowidget.h"
 #include "mediaplayerstate.h"
 
@@ -81,12 +81,16 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     Config cfg("OpiePlayer");
     cfg.setGroup("Options");
     skin = cfg.readEntry("Skin","default");
-      //skin = "scaleTest";
+    //skin = "scaleTest";
 // color of background, frame, degree of transparency
 
 //    QString skinPath = "opieplayer/skins/" + skin;
-    QString skinPath = "opieplayer2/skins/" + skin;
-    qDebug("skin path "+skinPath);
+    QString skinPath;
+    skinPath = "opieplayer2/skins/" + skin;
+    if(!QDir(skinPath).exists())
+       skinPath = "opieplayer2/skins/default";
+       
+    qDebug("skin path " + skinPath);
     
     pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
     imgUp = new QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
