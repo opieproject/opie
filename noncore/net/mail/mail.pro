@@ -14,7 +14,9 @@ HEADERS         = defines.h \
                statuswidget.h \
                newmaildir.h \
                selectstore.h \
-               selectsmtp.h
+               selectsmtp.h \
+               nntpgroups.h \
+               nntpgroupsdlg.h
                
 SOURCES         = main.cpp \
                opiemail.cpp \
@@ -31,7 +33,9 @@ SOURCES         = main.cpp \
                statuswidget.cpp \
                newmaildir.cpp \
                selectstore.cpp \
-               selectsmtp.cpp
+               selectsmtp.cpp \
+               nntpgroups.cpp \
+               nntpgroupsdlg.cpp
                
 INTERFACES     = editaccountsui.ui \
                selectmailtypeui.ui \
@@ -44,7 +48,8 @@ INTERFACES     = editaccountsui.ui \
                settingsdialogui.ui \
                statuswidgetui.ui \
                newmaildirui.ui \
-               selectstoreui.ui
+               selectstoreui.ui \
+               nntpgroupsui.ui
 	
 
 INCLUDEPATH += $(OPIEDIR)/include

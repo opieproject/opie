@@ -28,4 +28,5 @@ sendmailprogressui.cpp
 sendmailprogressui.h
 selectstoreui.cpp
 selectstoreui.h
-
+nntpgroupsui.cpp
+nntpgroupsui.h

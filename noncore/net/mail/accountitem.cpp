@@ -2,6 +2,7 @@
 #include "accountitem.h"
 #include "accountview.h"
 #include "newmaildir.h"
+#include "nntpgroupsdlg.h"
 #include "defines.h"
 
 /* OPIE */
@@ -284,6 +285,7 @@ QPopupMenu * NNTPviewItem::getContextMenu()
         {
             m->insertItem(QObject::tr("Disconnect",contextName),0);
             m->insertItem(QObject::tr("Set offline",contextName),1);
+            m->insertItem(QObject::tr("(Un-)Subscribe groups",contextName),2);
         }
         else
         {
@@ -291,6 +293,14 @@ QPopupMenu * NNTPviewItem::getContextMenu()
         }
     }
     return m;
+}
+
+void NNTPviewItem::subscribeGroups()
+{
+    NNTPGroupsDlg dlg(account);
+    if (QPEApplication::execDialog(&dlg)== QDialog::Accepted ){
+        refresh();
+    }
 }
 
 void NNTPviewItem::disconnect()
@@ -327,6 +337,9 @@ void NNTPviewItem::contextMenuSelected(int which)
         break;
     case 1:
         setOnOffline();
+        break;
+    case 2:
+        subscribeGroups();
         break;
     }
 }
@@ -367,7 +380,7 @@ QPopupMenu * NNTPfolderItem::getContextMenu()
     if (m)
     {
         m->insertItem(QObject::tr("Refresh header list",contextName),0);
-        m->insertItem(QObject::tr("Move/Copie all mails",contextName),1);
+        m->insertItem(QObject::tr("Copy all postings",contextName),1);
     }
     return m;
 }

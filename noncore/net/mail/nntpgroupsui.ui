@@ -1,0 +1,88 @@
+<!DOCTYPE UI><UI>
+<class>NNTPGroupsUI</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>NNTPGroupsUI</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>356</width>
+            <height>406</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>newsgroupslist</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>2</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>2</number>
+        </property>
+        <widget>
+            <class>QListView</class>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Newsgroups</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>true</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>true</bool>
+                </property>
+            </column>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>GroupListView</cstring>
+            </property>
+            <property>
+                <name>whatsThis</name>
+                <string>List of groups from the server. On start, only subscribed groups are listed.</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>GetNGButton</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Get newsgroup list from server</string>
+            </property>
+            <property>
+                <name>whatsThis</name>
+                <string>Retrieve the list of groups from server</string>
+            </property>
+        </widget>
+    </vbox>
+</widget>
+<connections>
+    <connection>
+        <sender>GetNGButton</sender>
+        <signal>clicked()</signal>
+        <receiver>NNTPGroupsUI</receiver>
+        <slot>slotGetNG()</slot>
+    </connection>
+    <slot access="protected">slotGetNG()</slot>
+</connections>
+</UI>

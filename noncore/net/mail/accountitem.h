@@ -96,6 +96,7 @@ protected:
     AbstractMail *wrapper;
     void disconnect();
     void setOnOffline();
+    void subscribeGroups();
 };
 
 class NNTPfolderItem : public AccountViewItem
