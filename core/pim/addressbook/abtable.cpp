@@ -130,7 +130,7 @@ AbTable::AbTable( const QValueList<int> *order, QWidget *parent, const char *nam
 		 intFields( order ),
 		 currFindRow( -2 ),
 		 mCat( 0 ),
-		 m_contactdb ("addressbook")
+		 m_contactdb ("addressbook", 0l, 0l, false) // Handle syncing myself.. !
 {
 	mCat.load( categoryFileName() );
 	setSelectionMode( NoSelection );

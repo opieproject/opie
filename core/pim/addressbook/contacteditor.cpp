@@ -340,7 +340,6 @@ void ContactEditor::init() {
 				continue;
 			}
 
-
 			slDynamicEntries.append( *it );
 		}
 	}
@@ -708,15 +707,18 @@ void ContactEditor::init() {
 
 	gl = new QGridLayout( container, 1, 2, 2, 4 );
 
+	// Create Labels and lineedit fields for every dynamic entry
 	QStringList::ConstIterator it = slDynamicEntries.begin();
 	for (i = 0; it != slDynamicEntries.end(); i++, ++it) {
-		l = new QLabel( *it, container );
+		l = new QLabel( QString::null , container );
 		listName.append( l );
 		gl->addWidget( l, i, 0 );
 		QLineEdit *e = new QLineEdit( container );
 		listValue.append( e );
 		gl->addWidget( e, i, 1);
 	}
+	// Fill labels with names..
+	loadFields();
 
 	l = new QLabel( tr("Gender"), container );
 	gl->addWidget( l, slDynamicEntries.count(), 0 );
@@ -1012,7 +1014,39 @@ void ContactEditor::loadFields() {
 	QStringList::ConstIterator it;
 	QListIterator<QLabel> lit( listName );
 	for ( it = slDynamicEntries.begin(); *lit; ++lit, ++it) {
-		(*lit)->setText( *it );
+
+		if ( *it ==  "Department"  )
+			(*lit)->setText( tr( "Department" ) );
+
+		if ( *it ==  "Company" )
+			(*lit)->setText( tr( "Company" ) );
+
+		if ( *it ==  "Office" )
+			(*lit)->setText( tr( "Office" ) );
+
+		if ( *it == "Profession" )
+			(*lit)->setText( tr( "Profession" ) );
+
+		if ( *it ==  "Assistant" )
+			(*lit)->setText( tr( "Assistant" ) );
+
+		if ( *it == "Manager" )
+			(*lit)->setText( tr( "Manager" ) );
+
+		if ( *it == "Spouse" )
+			(*lit)->setText( tr( "Spouse" ) );
+
+		if ( *it == "Birthday" )
+			(*lit)->setText( tr( "Birthday" ) );
+
+		if ( *it == "Anniversary" )
+			(*lit)->setText( tr( "Anniversary" ) );
+
+		if ( *it == "Nickname" )
+			(*lit)->setText( tr( "Nickname" ) );
+
+		if ( *it == "Children" )
+			(*lit)->setText( tr( "Children" ) );
 	}
 }
 
@@ -1374,37 +1408,37 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	QStringList::ConstIterator it;
 	QListIterator<QLineEdit> itLE( listValue );
 	for ( it = slDynamicEntries.begin(); it != slDynamicEntries.end(); ++it, ++itLE) {
-		if ( *it == tr( "Department" ) )
+		if ( *it ==  "Department"  )
 			(*itLE)->setText( ent.department() );
 
-		if ( *it ==  tr( "Company" ) )
+		if ( *it == "Company" )
 			(*itLE)->setText( ent.company() );
 
-		if ( *it ==  tr( "Office" ) )
+		if ( *it ==  "Office" )
 			(*itLE)->setText( ent.office() );
 
-		if ( *it == tr( "Profession" ) )
+		if ( *it ==  "Profession" )
 			(*itLE)->setText( ent.profession() );
 
-		if ( *it == tr( "Assistant" ) )
+		if ( *it == "Assistant" )
 			(*itLE)->setText( ent.assistant() );
 
-		if ( *it == tr( "Manager" ) )
+		if ( *it == "Manager" )
 			(*itLE)->setText( ent.manager() );
 
-		if ( *it == tr( "Spouse" ) )
+		if ( *it == "Spouse" )
 			(*itLE)->setText( ent.spouse() );
 
-		if ( *it == tr( "Birthday" ) )
+		if ( *it == "Birthday" )
 			(*itLE)->setText( ent.birthday() );
 
-		if ( *it == tr( "Anniversary" ) )
+		if ( *it == "Anniversary" )
 			(*itLE)->setText( ent.anniversary() );
 
-		if ( *it == tr( "Nickname" ) )
+		if ( *it == "Nickname" )
 			(*itLE)->setText( ent.nickname() );
 
-		if ( *it == tr( "Children" ) )
+		if ( *it == "Children" )
 			(*itLE)->setText( ent.children() );
 
 	}
@@ -1572,37 +1606,37 @@ void ContactEditor::saveEntry() {
 	QStringList::ConstIterator it;
 	QListIterator<QLineEdit> itLE( listValue );
 	for ( it = slDynamicEntries.begin(); it != slDynamicEntries.end(); ++it, ++itLE) {
-		if ( *it == tr( "Department" ) )
+		if ( *it == "Department" )
 			ent.setDepartment( (*itLE)->text() );
 
-		if ( *it == tr( "Company" ) )
+		if ( *it == "Company" )
 			ent.setCompany( (*itLE)->text() );
 
-		if ( *it == tr( "Office" ) )
+		if ( *it == "Office" )
 			ent.setOffice( (*itLE)->text() );
 
-		if ( *it == tr( "Profession" ) )
+		if ( *it == "Profession" )
 			ent.setProfession( (*itLE)->text() );
 
-		if ( *it == tr( "Assistant" ) )
+		if ( *it == "Assistant" )
 			ent.setAssistant( (*itLE)->text() );
 
-		if ( *it == tr( "Manager" ) )
+		if ( *it == "Manager" )
 			ent.setManager( (*itLE)->text() );
 
-		if ( *it == tr( "Spouse" ) )
+		if ( *it == "Spouse" )
 			ent.setSpouse( (*itLE)->text() );
 
-		if ( *it == tr( "Birthday" ) )
+		if ( *it == "Birthday" )
 			ent.setBirthday( (*itLE)->text() );
 
-		if ( *it == tr( "Anniversary" ) )
+		if ( *it == "Anniversary" )
 			ent.setAnniversary( (*itLE)->text() );
 
-		if ( *it == tr( "Nickname" ) )
+		if ( *it == "Nickname" )
 			ent.setNickname( (*itLE)->text() );
 
-		if ( *it == tr( "Children" ) )
+		if ( *it == "Children" )
 			ent.setChildren( (*itLE)->text() );
 
 	}
