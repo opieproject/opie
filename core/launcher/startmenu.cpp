@@ -76,12 +76,12 @@ void StartMenu::loadOptions()
     QString tmpBoolString2 = config.readEntry( "StartButtonIsFlat", "TRUE" );
     startButtonIsFlat = ( tmpBoolString2 == "TRUE" ) ? TRUE : FALSE;
     QString tmpBoolString3 = config.readEntry( "UseMRUList", "TRUE" );
-    popupMenuSidePixmap = config.readEntry( "PopupMenuSidePixmap", "sidebar" );
+    popupMenuSidePixmap = config.readEntry( "PopupMenuSidePixmap", "launcher/sidebar" );
     startButtonPixmap = config.readEntry( "StartButtonPixmap", "go" );
 #else
     // Basically just #include the .qpe_menu.conf file settings
     useWidePopupMenu = FALSE;
-    popupMenuSidePixmap = "go";
+    popupMenuSidePixmap = "lauchner/sidebar";
     startButtonIsFlat = TRUE;
     startButtonPixmap = "launcher/start_button";
 #endif
@@ -147,7 +147,7 @@ void StartMenu::launch()
 {
     int y = mapToGlobal( QPoint() ).y() - launchMenu->sizeHint().height();
 
-    if ( launchMenu->isVisible() ) 
+    if ( launchMenu->isVisible() )
         launchMenu->hide();
     else
         launchMenu->popup( QPoint( 1, y ) );
