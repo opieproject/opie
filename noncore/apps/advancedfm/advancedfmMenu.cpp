@@ -865,7 +865,8 @@ void AdvancedFm::okRename() {
 		QListViewItem *item = view->currentItem();
 		view->takeItem( item );
 		delete item;
-		rePopulate();
+		populateView();
+		
 }
 
 void AdvancedFm::openSearch() {

@@ -357,7 +357,8 @@ void AdvancedFm::keyPressEvent( QKeyEvent *e) {
 void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
 //     if( CurrentView()->hasFocus() )
 //        e->ignore();
-		if( currentPathCombo->lineEdit()->hasFocus()) {
+
+	if( currentPathCombo->lineEdit()->hasFocus()) {
 //				qDebug("shout!");
 		}
 
@@ -369,42 +370,9 @@ void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
 				setOtherTabCurrent();
 		else if( e->key() == Key_Delete )
 				del();
-		else if( e->key() ==  Key_A)
-				copyAs();
-		else if( e->key() ==  Key_C)
-				copy();
-		else if( e->key() ==  Key_E)
-				runThis();
-		else if( e->key() ==  Key_G)
-				currentPathCombo->lineEdit()->setFocus();
-		else if( e->key() == Key_H )
-				showHidden();
-		else if( e->key() == Key_I)
-				fileStatus();
-		else if( e->key() == Key_M)
-				move();
-		else if( e->key() == Key_N )
-				mkDir();
-		else if( e->key() ==  Key_P)
-				filePerms();
-		else if( e->key() ==  Key_R )
-				rn();
-		else if( e->key() ==  Key_U )
-				upDir();
-		else if( e->key() ==  Key_1)
-				switchToLocalTab();
-		else if( e->key() == Key_2)
-				switchToRemoteTab();
-		else if( e->key() ==  Key_3)
-				CFButtonPushed();
-		else if( e->key() == Key_4)
-				SDButtonPushed();
-		else if( e->key() == Key_5 )
-				homeButtonPushed();
-		else if( e->key() ==  Key_6 )
-				docButtonPushed();
 		else
 				e->accept();
+
 }
 
 
