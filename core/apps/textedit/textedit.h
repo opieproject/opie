@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+// additions made by L.J. Potter Sun 02-17-2002 22:27:46
 
 #ifndef TEXTEDIT_H
 #define TEXTEDIT_H
@@ -54,10 +55,12 @@ protected:
 
 private slots:
     void setDocument(const QString&);
-
+ void changeFont();
     void fileNew();
     void fileRevert();
     void fileOpen();
+    void newFileOpen();
+    bool save();
 
     void editCut();
     void editCopy();
@@ -82,7 +85,6 @@ private slots:
 
 private:
     void colorChanged( const QColor &c );
-    bool save();
     void clear();
     void updateCaption( const QString &name=QString::null );
     void setFontSize(int sz, bool round_down_not_up);
@@ -97,6 +99,7 @@ private:
     bool searchVisible;
     bool bFromDocView;
     QAction *zin, *zout;
+    QString currentFileName;
 };
 
 #endif

@@ -101,17 +101,23 @@ REQUIRES=
 main.o: main.cpp \
 		textedit.h \
 		$(OPIEDIR)/include/qpe/filemanager.h \
-		$(OPIEDIR)/include/qpe/qpeapplication.h
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h
 
 textedit.o: textedit.cpp \
 		textedit.h \
 		$(OPIEDIR)/include/qpe/filemanager.h \
 		$(OPIEDIR)/include/qpe/global.h \
 		$(OPIEDIR)/include/qpe/fileselector.h \
+		$(OPIEDIR)/include/filemanager.h \
+		$(OPIEDIR)/include/applnk.h \
 		$(OPIEDIR)/include/qpe/applnk.h \
 		$(OPIEDIR)/include/qpe/resource.h \
 		$(OPIEDIR)/include/qpe/config.h \
 		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h \
 		$(OPIEDIR)/include/qpe/qpemenubar.h \
 		$(OPIEDIR)/include/qpe/qpetoolbar.h
 
