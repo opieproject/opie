@@ -1,28 +1,28 @@
 /*
-                            This file is part of the Opie Project
+                    This file is part of the Opie Project
 
-                             Copyright (c)  2003 Dan Williams <drw@handhelds.org>
+                      Copyright (c)  2003 Dan Williams <drw@handhelds.org>
               =.
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           Library General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -227,9 +227,9 @@ OPackageList *OPackageManager::filterPackages( const QString &name,const QString
     return pl;
 }
 
-QStringList *OPackageManager::servers()
+QStringList OPackageManager::servers()
 {
-    QStringList *sl = new QStringList();
+    QStringList sl;
 
     OConfItemList *serverList = m_ipkg.servers();
     if ( serverList )
@@ -240,16 +240,16 @@ QStringList *OPackageManager::servers()
 
             // Add only active servers
             if ( server->active() )
-                *sl << server->name();
+                sl << server->name();
         }
     }
 
     return sl;
 }
 
-QStringList *OPackageManager::destinations()
+QStringList OPackageManager::destinations()
 {
-    QStringList *dl = new QStringList();
+    QStringList dl;
 
     OConfItemList *destList = m_ipkg.destinations();
     if ( destList )
@@ -260,7 +260,7 @@ QStringList *OPackageManager::destinations()
 
             // Add only active destinations
             if ( destination->active() )
-                *dl << destination->name();
+                dl << destination->name();
         }
     }
 
@@ -330,7 +330,7 @@ void OPackageManager::saveSettings()
     m_ipkg.saveSettings();
 }
 
-bool OPackageManager::executeCommand( OPackage::Command command, QStringList *packages,
+bool OPackageManager::executeCommand( OPackage::Command command, const QStringList &packages,
                                       const QString &destination, const QObject *receiver,
                                       const char *slotOutput, bool rawOutput )
 {

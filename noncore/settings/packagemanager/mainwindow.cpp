@@ -313,7 +313,7 @@ void MainWindow::installLocalPackage( const QString &ipkFile )
 {
     // Install selected file
     InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Install local package" ), true,
-                                        OPackage::Install, new QStringList( ipkFile ) );
+                                        OPackage::Install, ipkFile );
     connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseDlg()) );
 
     // Display widget
@@ -410,17 +410,17 @@ void MainWindow::slotUpgrade()
 void MainWindow::slotDownload()
 {
     // Retrieve list of packages selected for download (if any)
-    QStringList *workingPackages = new QStringList();
+    QStringList workingPackages;
 
     for ( QCheckListItem *item = static_cast<QCheckListItem *>(m_packageList.firstChild());
           item != 0 ;
           item = static_cast<QCheckListItem *>(item->nextSibling()) )
     {
         if ( item->isOn() )
-            workingPackages->append( item->text() );
+            workingPackages.append( item->text() );
     }
 
-    if ( workingPackages->isEmpty() )
+    if ( workingPackages.isEmpty() )
     {
         QMessageBox::information( this, tr( "Nothing to do" ), tr( "No packages selected" ), tr( "OK" ) );
         return;
@@ -457,9 +457,9 @@ void MainWindow::slotDownload()
 
 void MainWindow::slotApply()
 {
-    QStringList *removeList = 0x0;
-    QStringList *installList = 0x0;
-    QStringList *upgradeList = 0x0;
+    QStringList removeList;
+    QStringList installList;
+    QStringList upgradeList;
 
     for ( QCheckListItem *item = static_cast<QCheckListItem *>(m_packageList.firstChild());
           item != 0 ;
@@ -480,15 +480,11 @@ void MainWindow::slotApply()
                                       tr( "Remove" ), tr( "Upgrade" ), this );
                         if ( answer == 1 )  // Remove
                         {
-                            if ( !removeList )
-                                removeList = new QStringList();
-                            removeList->append( item->text() );
+                            removeList.append( item->text() );
                         }
                         else if ( answer == 2 )  // Upgrade
                         {
-                            if ( !upgradeList )
-                                upgradeList = new QStringList();
-                            upgradeList->append( item->text() );
+                            upgradeList.append( item->text() );
                         }
                     }
                     else
@@ -499,31 +495,25 @@ void MainWindow::slotApply()
                                       tr( "Remove" ), tr( "Reinstall" ), this );
                         if ( answer == 1 )  // Remove
                         {
-                            if ( !removeList )
-                                removeList = new QStringList();
-                            removeList->append( item->text() );
+                            removeList.append( item->text() );
                         }
                         else if ( answer == 2 )  // Reinstall
                         {
-                            if ( !installList )
-                                installList = new QStringList();
-                            installList->append( item->text() );
+                            installList.append( item->text() );
                         }
                     }
                 }
                 else
                 {
                     // Install package
-                    if ( !installList )
-                        installList = new QStringList();
-                    installList->append( item->text() );
+                    installList.append( item->text() );
                 }
             }
         }
     }
 
     // If nothing is selected, display message and exit
-    if ( !removeList && !installList && !upgradeList )
+    if ( removeList.isEmpty() && installList.isEmpty() && upgradeList.isEmpty() )
     {
         QMessageBox::information( this, tr( "Nothing to do" ), tr( "No packages selected" ), tr( "OK" ) );
         return;
@@ -531,13 +521,13 @@ void MainWindow::slotApply()
 
     // Send command only if there are packages to process
     OPackage::Command removeCmd = OPackage::NotDefined;
-    if ( removeList && !removeList->isEmpty() )
+    if ( !removeList.isEmpty() )
         removeCmd = OPackage::Remove;
     OPackage::Command installCmd = OPackage::NotDefined;
-    if ( installList && !installList->isEmpty() )
+    if ( !installList.isEmpty() )
         installCmd = OPackage::Install;
     OPackage::Command upgradeCmd = OPackage::NotDefined;
-    if ( upgradeList && !upgradeList->isEmpty() )
+    if ( !upgradeList.isEmpty() )
         upgradeCmd = OPackage::Upgrade;
 
     // Create package manager output widget

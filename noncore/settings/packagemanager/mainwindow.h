@@ -51,7 +51,7 @@ class MainWindow :public  QMainWindow
 
 public:
     MainWindow( QWidget *parent = 0x0, const char *name = 0x0, WFlags fl = 0 );
-    static QString appName() { return QString::fromLatin1( "packagemanager" ); };
+    static QString appName() { return QString::fromLatin1( QUICKAPP_NAME ); };
 
 protected:
     void closeEvent( QCloseEvent *event );

@@ -1,28 +1,28 @@
 /*
-                            This file is part of the Opie Project
+                    This file is part of the Opie Project
 
-                             Copyright (c)  2003 Dan Williams <drw@handhelds.org>
+                      Copyright (c)  2003 Dan Williams <drw@handhelds.org>
               =.
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           Library General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -77,9 +77,12 @@ public:
     OPackageList *installedPackages( const QString &destName = QString::null,
                                      const QString &destPath = QString::null );
 
-    bool executeCommand( OPackage::Command command = OPackage::NotDefined, QStringList *parameters = 0x0,
-                         const QString &destination = QString::null, const QObject *receiver = 0x0,
-                         const char *slotOutput = 0x0, bool rawOutput = true );
+    bool executeCommand( OPackage::Command command = OPackage::NotDefined,
+                         const QStringList &parameters = QStringList(),
+                         const QString &destination = QString::null,
+                         const QObject *receiver = 0x0,
+                         const char *slotOutput = 0x0,
+                         bool rawOutput = true );
     void abortCommand();
 
     void ipkgMessage( char *msg );

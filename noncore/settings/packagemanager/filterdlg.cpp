@@ -104,7 +104,7 @@ FilterDlg::FilterDlg( QWidget *parent, OPackageManager *pm, const QString &name,
     connect( m_serverCB, SIGNAL(toggled(bool)), this, SLOT(slotServerSelected(bool)) );
     m_server = new QComboBox( container );
     QWhatsThis::add( m_server, tr( "Select the source server to filter by here." ) );
-    m_server->insertStringList( *(pm->servers()) );
+    m_server->insertStringList( pm->servers() );
     initItem( m_server, m_serverCB, server );
     layout->addWidget( m_serverCB );
     layout->addWidget( m_server );
@@ -115,7 +115,7 @@ FilterDlg::FilterDlg( QWidget *parent, OPackageManager *pm, const QString &name,
     connect( m_destCB, SIGNAL(toggled(bool)), this, SLOT(slotDestSelected(bool)) );
     m_destination = new QComboBox( container );
     QWhatsThis::add( m_destination, tr( "Select the destination location to filter by here." ) );
-    m_destination->insertStringList( *(pm->destinations()) );
+    m_destination->insertStringList( pm->destinations() );
     initItem( m_destination, m_destCB, destination );
     layout->addWidget( m_destCB );
     layout->addWidget( m_destination );
