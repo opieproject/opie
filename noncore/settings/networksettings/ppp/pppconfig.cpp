@@ -36,7 +36,7 @@ PPPConfigWidget::PPPConfigWidget( InterfacePPP* iface, QWidget *parent,
   tabWindow = new QTabWidget( this, "tabWidget" );
   layout->addWidget( tabWindow );
 
-  accounts = new AccountWidget( interface->data(), tabWindow, "accounts" );
+  accounts = new AccountWidget( interface->data(), tabWindow, "accounts", true, Qt::WStyle_ContextHelp  );
   tabWindow->addTab( accounts, tr("&Accounts") );
   modem1 = new ModemWidget( interface, tabWindow, "modem1" );
   tabWindow->addTab( modem1, tr("&Device") );

@@ -1,7 +1,7 @@
 /* -*- C++ -*-
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.h,v 1.4.2.1 2003-07-15 15:29:08 tille Exp $
+ * $Id: accounts.h,v 1.4.2.2 2003-07-30 15:05:58 harlekin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -27,7 +27,6 @@
 #ifndef _ACCOUNTS_H_
 #define _ACCOUNTS_H_
 
-#include <qwidget.h>
 #include <qdialog.h>
 #include <qpushbutton.h>
 #include <qlistbox.h>
@@ -44,10 +43,10 @@ class DNSWidget;
 class GatewayWidget;
 class PPPData;
 
-class AccountWidget : public QWidget {
+class AccountWidget : public QDialog {
   Q_OBJECT
 public:
-  AccountWidget( PPPData *pd, QWidget *parent=0, const char *name=0 );
+  AccountWidget( PPPData *pd, QWidget *parent=0, const char *name=0, bool modal=0, WFlags f=0 );
   ~AccountWidget() {}
 
 private slots:

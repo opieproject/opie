@@ -50,7 +50,7 @@
 #define DEFAULT_SCHEME "/var/lib/pcmcia/scheme"
 #define _PROCNETDEV "/proc/net/dev"
 
-MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name), advancedUserMode(true), scheme(DEFAULT_SCHEME){
+MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name, Qt::WStyle_ContextHelp), advancedUserMode(true), scheme(DEFAULT_SCHEME){
   connect(addConnectionButton, SIGNAL(clicked()), this, SLOT(addClicked()));
   connect(removeConnectionButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
   connect(informationConnectionButton, SIGNAL(clicked()), this, SLOT(informationClicked()));
@@ -440,7 +440,7 @@ void MainWindowImp::configureClicked(){
     }
   }
 
-  InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(this, "InterfaceSetupImp", i, true, Qt::WDestructiveClose );
+  InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(this, "InterfaceSetupImp", i, true, Qt::WDestructiveClose  | Qt::WStyle_ContextHelp );
   configure->setProfile(currentProfileText);
   configure->showMaximized();
 }
@@ -473,7 +473,7 @@ void MainWindowImp::informationClicked(){
       return;
     }
   }
-  InterfaceInformationImp *information = new InterfaceInformationImp(this, "InterfaceSetupImp", i, Qt::WType_Modal | Qt::WDestructiveClose | Qt::WStyle_Dialog);
+  InterfaceInformationImp *information = new InterfaceInformationImp(this, "InterfaceSetupImp", i, Qt::WType_Modal | Qt::WDestructiveClose | Qt::WStyle_Dialog  | Qt::WStyle_ContextHelp);
   information->showMaximized();
 }
 

@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.9.2.4 2003-07-30 03:55:02 tille Exp $
+ * $Id: accounts.cpp,v 1.9.2.5 2003-07-30 15:05:58 harlekin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -44,8 +44,8 @@
 
 void parseargs(char* buf, char** args);
 
-AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
-    : QWidget( parent, name )//, _pppdata(pd)
+AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name, bool modal, WFlags f )
+    : QDialog( parent, name, modal, f )//, _pppdata(pd)
 {
     _pppdata = pd;
   QVBoxLayout *l1 = new QVBoxLayout(this, 10, 10);
@@ -92,7 +92,7 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
 
   accountlist_l->insertStringList(_pppdata->getAccountList());
 
-  for (int i = 0; i < accountlist_l->count(); i++){
+  for (int i = 0; i < (int)accountlist_l->count(); i++){
       if ( accountlist_l->text(i) == _pppdata->accname() )
           accountlist_l->setCurrentItem( i );
   }

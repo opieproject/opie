@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.4.2.3 2003-07-27 01:09:12 harlekin Exp $
+ * $Id: general.cpp,v 1.4.2.4 2003-07-30 15:05:58 harlekin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -443,7 +443,7 @@ ModemWidget2::ModemWidget2( InterfacePPP* ifp, QWidget *parent,
 
 
 void ModemWidget2::modemcmdsbutton() {
-  ModemCommands mc(_ifaceppp->data(), this);
+  ModemCommands mc(_ifaceppp->data(), this, "commands" , true, Qt::WStyle_ContextHelp);
   mc.showMaximized();
   mc.exec();
 }

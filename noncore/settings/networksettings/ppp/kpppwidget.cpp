@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: kpppwidget.cpp,v 1.5.2.1 2003-07-15 15:29:08 tille Exp $
+ * $Id: kpppwidget.cpp,v 1.5.2.2 2003-07-30 15:05:58 harlekin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -78,7 +78,7 @@
 KPPPWidget *p_kppp = 0;
 
 KPPPWidget::KPPPWidget(PPPData*pd, Interface *i, QWidget *parent, const char *name, bool modal, WFlags fl )
-    : QDialog(parent, name, modal, fl), _pppdata(pd)
+    : QDialog(parent, name, modal, Qt::WStyle_ContextHelp ), _pppdata(pd)
 {
 //  tabWindow = 0;
   p_kppp = this;
