@@ -242,7 +242,7 @@ int main( int argc, char** argv )
         // Each of the following force internal structures/internal
         // initialization to be performed.  This may mean allocating
         // memory that is not needed by all applications.
-        Resource::loadIconSet("new"); // do internal init
+        Resource::loadPixmap("new"); // do internal init
 
         /* make sure libopie gets lined in */
         {
