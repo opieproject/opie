@@ -45,6 +45,8 @@ public slots:
     bool first();
     bool last();
 
+    bool isEmpty() const { return childCount() == 0; }
+
 protected:
     virtual void contentsMouseMoveEvent(QMouseEvent *);
 /* #ifdef USE_PLAYLIST_BACKGROUND */

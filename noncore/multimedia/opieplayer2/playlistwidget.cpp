@@ -418,7 +418,13 @@ void PlayListWidget::useSelectedDocument() {
 const DocLnk *PlayListWidget::current() const { // this is fugly
     assert( currentTab() == CurrentPlayList );
 
-    return d->selectedFiles->current();
+    const DocLnk *lnk = d->selectedFiles->current();
+    if ( !lnk ) {
+        d->selectedFiles->first();
+        lnk = d->selectedFiles->current();
+    }
+    assert( lnk );
+    return lnk;
 }
 
 
@@ -564,6 +570,8 @@ void PlayListWidget::tabChanged(QWidget *) {
         }
         d->tbRemoveFromList->setEnabled(TRUE);
         d->tbAddToList->setEnabled(FALSE);
+
+        d->tbPlay->setEnabled( !d->selectedFiles->isEmpty() );
     }
     break;
     case AudioFiles:
