@@ -42,7 +42,7 @@ DateBookDayView::DateBookDayView( bool whichClock, QWidget *parent, const char *
 	setColumnStretchable( 0, TRUE );
 	setHScrollBarMode( QScrollView::AlwaysOff );
 	verticalHeader()->setPalette(white);
-	verticalHeader()->setResizeEnabled(FALSE);
+ 	verticalHeader()->setResizeEnabled(FALSE);
 	setSelectionMode( Single );
 
 	// get rid of being able to edit things...
@@ -61,6 +61,7 @@ DateBookDayView::DateBookDayView( bool whichClock, QWidget *parent, const char *
 void DateBookDayView::initHeader()
 {
 	QString strTmp;
+	int preferredWidth = 0;
 	for ( int i = 0; i < 24; ++i ) {
 		if ( ampm ) {
 			if ( i == 0 )
@@ -79,8 +80,18 @@ void DateBookDayView::initHeader()
 		}
 		strTmp = strTmp.rightJustify( 6, ' ' );
 		verticalHeader()->setLabel( i, strTmp );
+
+		// Compute correct width for current Font (Add some space right)
+		int actWidth = QFontMetrics( QFont::defaultFont() ).width( strTmp + QString("  ") );
+		if ( preferredWidth < actWidth )
+			preferredWidth = actWidth;
 		setRowStretchable( i, FALSE );
 	}
+
+	// It seems as if the header has a bug. It does not resize
+	// correct horizontally if it is used vertical..
+	// Thus, we do it manually..
+	verticalHeader()->setMinimumWidth( preferredWidth );
 }
 
 void DateBookDayView::slotDateChanged( int y, int m, int d )
@@ -162,7 +173,7 @@ void DateBookDayView::setRowStyle( int style )
 		setRowHeight(i, style*10+20);
 }
 
-void DateBookDayView::contentsMouseReleaseEvent( QMouseEvent *e )
+void DateBookDayView::contentsMouseReleaseEvent( QMouseEvent* /* e */ )
 {
 	int sh=99,eh=-1;
 
@@ -208,7 +219,7 @@ void DateBookDayViewQuickLineEdit::finallyCallClose() {
     close(true); // also deletes this widget...
 }
 
-void DateBookDayViewQuickLineEdit::focusOutEvent ( QFocusEvent * e )
+void DateBookDayViewQuickLineEdit::focusOutEvent ( QFocusEvent* /* e */)
 {
 	slotReturnPressed(); // Reuse code to add event and close this widget.
 }
