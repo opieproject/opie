@@ -99,7 +99,7 @@ QPdfDlg::QPdfDlg ( ) : QMainWindow ( )
 	m_tb_menu = new QToolBar ( this );
 	m_tb_menu-> setHorizontalStretchable ( true );
 
-	QMenuBar *mb = new QPEMenuBar ( m_tb_menu );
+	QMenuBar *mb = new QMenuBar ( m_tb_menu );
 
 	m_pm_zoom = new QPopupMenu ( mb );
 	m_pm_zoom-> setCheckable ( true );
@@ -118,7 +118,7 @@ QPdfDlg::QPdfDlg ( ) : QMainWindow ( )
 	
 	connect ( m_pm_zoom, SIGNAL( activated ( int )), this, SLOT( setZoom ( int )));
 
-	m_tb_tool = new QPEToolBar ( this );
+	m_tb_tool = new QToolBar ( this );
 		
 	new QToolButton ( Resource::loadIconSet ( "fileopen" ),    tr( "Open..." ),       QString::null, this, SLOT( openFile ( )),  m_tb_tool, "open" );
 	m_tb_tool-> addSeparator ( );
@@ -134,7 +134,7 @@ QPdfDlg::QPdfDlg ( ) : QMainWindow ( )
 	new QToolButton ( Resource::loadIconSet ( "forward" ),     tr( "Next page" ),     QString::null, this, SLOT( nextPage ( )),  m_tb_tool, "next" );
 	new QToolButton ( Resource::loadIconSet ( "fastforward" ), tr( "Last page" ),     QString::null, this, SLOT( lastPage ( )),  m_tb_tool, "last" );
 
-	m_tb_find = new QPEToolBar ( this );
+	m_tb_find = new QToolBar ( this );
 	addToolBar ( m_tb_find, "Search", QMainWindow::Top, true );
 	m_tb_find-> setHorizontalStretchable ( true );
 	m_tb_find-> hide ( );
