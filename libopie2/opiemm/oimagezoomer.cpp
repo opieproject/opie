@@ -198,7 +198,7 @@ void OImageZoomer::drawContents( QPainter* p ) {
     p->drawRect( x, y, w, h );
 }
 
-void OImageZoomer::mousePressEvent( QMouseEvent*ev) {
+void OImageZoomer::mousePressEvent( QMouseEvent*) {
     m_mouseX = m_mouseY = -1;
     m_mevent = true;
 }
