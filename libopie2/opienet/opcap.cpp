@@ -110,14 +110,13 @@ void OPacket::updateStats( QMap<QString,int>& stats, QObjectList* l )
 }
 
 
-void OPacket::dumpStructure( QObjectList* l )
+QString OPacket::dumpStructure() const
 {
-    QString packetString( "[ |" + _dumpStructure( l ) + " ]" );
-    odebug << "OPacket::dumpStructure: " << packetString << oendl;
+    return "[ |" + _dumpStructure(  const_cast<QObjectList*>( this->children() ) ) + " ]";
 }
 
 
-QString OPacket::_dumpStructure( QObjectList* l )
+QString OPacket::_dumpStructure( QObjectList* l ) const
 {
     if (!l) return QString::null;
     QObject* o = l->first();
@@ -176,6 +175,12 @@ QString OPacket::dump( int bpl ) const
 int OPacket::len() const
 {
     return _hdr.len;
+}
+
+
+QTextStream& operator<<( QTextStream& s, const OPacket& p )
+{
+    s << p.dumpStructure();
 }
 
 
@@ -729,7 +734,7 @@ OWaveLanManagementPacket::OWaveLanManagementPacket( const unsigned char* end, co
     // Other management frames don't - which is why we have to inspect the subtype here.
 
     const unsigned char* ptr = managementType() == "Beacon" ?  (const unsigned char*) (_body+1) : (const unsigned char*) (_header+1);
-    
+
     while (ptr < end)
     {
         switch ( *ptr )
@@ -1188,9 +1193,7 @@ OPacket* OPacketCapturer::next()
         // by emit() [ see below ]
         //TODO: make gathering statistics optional, because it takes time
         p->updateStats( _stats, const_cast<QObjectList*>( p->children() ) );
-        #ifndef NODEBUG
-        p->dumpStructure( const_cast<QObjectList*>( p->children() ) );
-        #endif
+        odebug << "OPacket::dumpStructure: " << p->dumpStructure() << oendl;
         return p;
     }
     else
@@ -1338,7 +1341,7 @@ bool OPacketCapturer::swapped() const
 
 QString OPacketCapturer::version() const
 {
-    return QString().sprintf( "%s.%s", pcap_major_version( _pch ), pcap_minor_version( _pch ) );
+    return QString().sprintf( "%d.%d", pcap_major_version( _pch ), pcap_minor_version( _pch ) );
 }
 
 

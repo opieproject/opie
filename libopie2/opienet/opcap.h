@@ -31,7 +31,19 @@
 #ifndef OPCAP_H
 #define OPCAP_H
 
-/* LINUX */
+/* OPIE */
+#include <opie2/onetutils.h>
+
+/* QT */
+#include <qevent.h>
+#include <qfile.h>
+#include <qhostaddress.h>
+#include <qobject.h>
+#include <qstring.h>
+#include <qtextstream.h>
+#include <qmap.h>
+
+/* STD */
 extern "C"  // work around a bpf/pcap conflict in recent headers
 {
     #include <pcap.h>
@@ -42,20 +54,10 @@ extern "C"  // work around a bpf/pcap conflict in recent headers
 #include <netinet/tcp.h>
 #include <time.h>
 
-/* QT */
-#include <qevent.h>
-#include <qfile.h>
-#include <qhostaddress.h>
-#include <qobject.h>
-#include <qstring.h>
-#include <qmap.h>
-
-/* OPIE */
-#include <opie2/onetutils.h>
-
-/* Custom Network Includes */
+/* Custom Network Includes (must go here, don't reorder!) */
 #include "802_11_user.h"
 #include "dhcp.h"
+
 
 /* TYPEDEFS */
 typedef struct timeval timevalstruct;
@@ -116,6 +118,7 @@ class OPacket : public QObject
   Q_OBJECT
 
   friend class OPacketCapturer;
+  friend QTextStream& operator<<( QTextStream& s, const OPacket& p );
 
   public:
     OPacket( int datalink, packetheaderstruct, const unsigned char*, QObject* parent );
@@ -131,14 +134,16 @@ class OPacket : public QObject
 
   private:
 
-    void dumpStructure( QObjectList* );
-    QString _dumpStructure( QObjectList* );
+    QString dumpStructure() const;
+    QString _dumpStructure( QObjectList* ) const;
 
   private:
     const packetheaderstruct _hdr;  // pcap packet header
     const unsigned char* _data;     // pcap packet data
     const unsigned char* _end;      // end of pcap packet data
 };
+
+QTextStream& operator<<( QTextStream& s, const OPacket& p );
 
 /*======================================================================================
  * OEthernetPacket - DLT_EN10MB frame
