@@ -170,11 +170,11 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Click here to undo the last action.</source>
-        <translation>CLiquez ici pour annuler la dernière action.</translation>
+        <translation>Cliquez ici pour annuler la dernière action.</translation>
     </message>
     <message>
         <source>Click here to re-perform the last action.</source>
-        <translation>CLiquez ici pour refaire la dernière action.</translation>
+        <translation>Cliquez ici pour refaire la dernière action.</translation>
     </message>
     <message>
         <source>Click here to view the first page.</source>
@@ -303,7 +303,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation>Couleur du Pinceau</translation>
+        <translation>Couleur de Pinceau</translation>
     </message>
     <message>
         <source>Fill Color</source>

@@ -150,23 +150,24 @@
     </message>
     <message>
         <source>File cannot be saved!</source>
-        <translation>Impossible de sauver le fichier!</translation>
+        <translation>Impossible de sauver le fichier !</translation>
     </message>
     <message>
         <source>File cannot be opened!</source>
-        <translation>Impossible d&apos;ouvrir le fichier!</translation>
+        <translation>Impossible d&apos;ouvrir le fichier !</translation>
     </message>
     <message>
         <source>Invalid file format!</source>
-        <translation>Format de fichier non valide!</translation>
+        <translation>Format de fichier non valide 
+!</translation>
     </message>
     <message>
         <source>Save File</source>
-        <translation>Sauver le fichier</translation>
+        <translation>Sauver Fichier</translation>
     </message>
     <message>
         <source>Do you want to save the current file?</source>
-        <translation>Voulez-vous sauvegarder le fichier courant?</translation>
+        <translation>Voulez-vous sauvegarder le fichier actuel ?</translation>
     </message>
     <message>
         <source>&amp;File Name:</source>
@@ -178,7 +179,7 @@
     </message>
     <message>
         <source>New File</source>
-        <translation>Nouveau fichier</translation>
+        <translation>Nouveau Fichier</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -186,7 +187,7 @@
     </message>
     <message>
         <source>Open File</source>
-        <translation>Ouvrir un fichier</translation>
+        <translation>Ouvrir Fichier</translation>
     </message>
     <message>
         <source>&amp;Open</source>
@@ -198,15 +199,15 @@
     </message>
     <message>
         <source>Save File As</source>
-        <translation>Sauvegarder  le fichier sous</translation>
+        <translation>Sauver Fichier Sous</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation>S&amp;auvegarder sous</translation>
+        <translation>S&amp;auver Sous</translation>
     </message>
     <message>
         <source>About Opie Sheet</source>
-        <translation>A propos du tableur Opie</translation>
+        <translation>A propos</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -234,7 +235,7 @@
     </message>
     <message>
         <source>Cut Cells</source>
-        <translation>Couper les cellules</translation>
+        <translation>Couper Cellules</translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
@@ -242,7 +243,7 @@
     </message>
     <message>
         <source>Copy Cells</source>
-        <translation>Copier les cellules</translation>
+        <translation>Copier Cellules</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -250,7 +251,7 @@
     </message>
     <message>
         <source>Paste Cells</source>
-        <translation>Coller les cellules</translation>
+        <translation>Coller Cellules</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
@@ -258,15 +259,15 @@
     </message>
     <message>
         <source>Paste Contents</source>
-        <translation>Coller le contenu</translation>
+        <translation>Coller Contenu</translation>
     </message>
     <message>
         <source>Paste Cont&amp;ents</source>
-        <translation>Coller le cont&amp;enu</translation>
+        <translation>Coller Cont&amp;enu</translation>
     </message>
     <message>
         <source>Clear Cells</source>
-        <translation>Vider les cellules</translation>
+        <translation>Vider les Cellules</translation>
     </message>
     <message>
         <source>C&amp;lear</source>
@@ -274,7 +275,7 @@
     </message>
     <message>
         <source>Insert Cells</source>
-        <translation>Insérer des cellules</translation>
+        <translation>Insérer des Cellules</translation>
     </message>
     <message>
         <source>C&amp;ells</source>
@@ -282,15 +283,15 @@
     </message>
     <message>
         <source>Insert Rows</source>
-        <translation>Insérer des rangés</translation>
+        <translation>Insérer des Lignes</translation>
     </message>
     <message>
         <source>&amp;Rows</source>
-        <translation>&amp;Rangés</translation>
+        <translation>&amp;Lignes</translation>
     </message>
     <message>
         <source>Insert Columns</source>
-        <translation>Insérér des colonnes</translation>
+        <translation>Insérér des Colonnes</translation>
     </message>
     <message>
         <source>&amp;Columns</source>
@@ -298,7 +299,7 @@
     </message>
     <message>
         <source>Add Sheets</source>
-        <translation>Ajouter une/des feuille</translation>
+        <translation>Ajouter une/des feuilles</translation>
     </message>
     <message>
         <source>&amp;Sheets</source>
@@ -314,7 +315,7 @@
     </message>
     <message>
         <source>Row Height</source>
-        <translation>Hauteur de la rangé</translation>
+        <translation>Hauteur de Ligne</translation>
     </message>
     <message>
         <source>H&amp;eight</source>
@@ -322,7 +323,7 @@
     </message>
     <message>
         <source>Adjust Row</source>
-        <translation>Ajuster la rangé</translation>
+        <translation>Ajuster la Ligne</translation>
     </message>
     <message>
         <source>&amp;Adjust</source>
@@ -729,11 +730,11 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>Syntax error!</source>
-        <translation>Erreur de syntaxe!</translation>
+        <translation>Erreur de syntaxe !</translation>
     </message>
     <message>
         <source>Search key not found!</source>
-        <translation>Clé de recherche non trouvé!</translation>
+        <translation>Recherche non trouvé !</translation>
     </message>
 </context>
 <context>
@@ -768,11 +769,11 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>&amp;Top to bottom (rows)</source>
-        <translation>De &amp;haut en bas (rangés)</translation>
+        <translation>De &amp;haut en bas (lignes)</translation>
     </message>
     <message>
         <source>&amp;Left to right (columns)</source>
-        <translation>De &amp;gauche à droite (colonne)</translation>
+        <translation>De &amp;gauche à droite (colonnes)</translation>
     </message>
     <message>
         <source>Sort</source>
@@ -792,7 +793,7 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>One cell cannot be sorted!</source>
-        <translation>1 cellule seule ne peut être triée!</translation>
+        <translation>1 cellule seule ne peut être triée !</translation>
     </message>
 </context>
 </TS>

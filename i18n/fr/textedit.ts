@@ -60,7 +60,7 @@
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Find Next</source>
@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Text Editor</source>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation>Avertir en quittant</translation>
+        <translation>Demandé avant de Quitter</translation>
     </message>
     <message>
         <source>Always open linked file</source>
@@ -116,11 +116,11 @@
     </message>
     <message>
         <source>File Permissions</source>
-        <translation>Permissions de fichier</translation>
+        <translation>Droits du Fichier</translation>
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation>Barre de recherche affichée</translation>
+        <translation>Barre de Recherche Ouverte</translation>
     </message>
     <message>
         <source>Goto Line...</source>
@@ -144,11 +144,11 @@
     </message>
     <message>
         <source>Unnamed</source>
-        <translation>Sansnom</translation>
+        <translation>Sans Nom</translation>
     </message>
     <message>
         <source>Permissions</source>
-        <translation>Persmissions</translation>
+        <translation>Droits</translation>
     </message>
     <message>
         <source>Choose font</source>
@@ -157,8 +157,8 @@
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation>Voulez-vous réellement &lt;B&gt;effacer&lt;/b&gt; le fichier courant
-du disque?&lt;br&gt; C&apos;est &lt;b&gt;irréversible!!&lt;/b&gt;</translation>
+        <translation>Voulez-vous réellement &lt;B&gt;supprimer&lt;/b&gt; le fichier courant
+du disque ?&lt;br&gt; C&apos;est &lt;b&gt;irréversible !!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -170,7 +170,7 @@ du disque?&lt;br&gt; C&apos;est &lt;b&gt;irréversible!!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation>Text Edit est copyrighté&lt;br&gt;2000 Trolltech AS, et &lt;BR&gt;2002 par &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt; et est sous license GPL</translation>
+        <translation>Text Edit est sous copyrigth&lt;br&gt;2000 Trolltech AS, et &lt;BR&gt;2002 par &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt; et est sous license GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
@@ -181,12 +181,12 @@ du disque?&lt;br&gt; C&apos;est &lt;b&gt;irréversible!!&lt;/b&gt;</translation>
 you have unsaved changes
 Go ahead and save?
 </source>
-        <translation>Vous n&apos;avez pas sauvegardé les changements
-continuer et sauvegarder?</translation>
+        <translation>Vous n&apos;avez pas sauvegardé les changements.
+Continuer et sauvegarder ?</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation>Ne pas sauver</translation>
+        <translation>Ne pas Sauvegarder</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -201,11 +201,11 @@ continuer et sauvegarder?</translation>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation>Fixer les permissions du fichier</translation>
+        <translation>Fixer les Droits du Fichier</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation>Fixer les permissions du fichier pour:</translation>
+        <translation>Fixer les droits du fichier pour :</translation>
     </message>
     <message>
         <source>owner</source>
@@ -241,7 +241,7 @@ continuer et sauvegarder?</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Attention</translation>
+        <translation>Avertissement</translation>
     </message>
     <message>
         <source>Error- no user</source>
@@ -253,15 +253,15 @@ continuer et sauvegarder?</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation>Erreur dans la définition du propriétatire ou du groupe</translation>
+        <translation>Erreur lors de la définition du propriétatire ou du groupe</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation>Erreur dans la défintiion du mode</translation>
+        <translation>Erreur lors de la défintion du mode</translation>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation>Permissions du fichier</translation>
+        <translation>Droits du Fichier</translation>
     </message>
 </context>
 </TS>

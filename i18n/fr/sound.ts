@@ -55,27 +55,27 @@
     </message>
     <message>
         <source>Key_Space</source>
-        <translation>Touche_Espace</translation>
+        <translation>Key_Space</translation>
     </message>
     <message>
         <source>Key_Home</source>
-        <translation>Touche_Home</translation>
+        <translation>Key_Home</translation>
     </message>
     <message>
         <source>Key_Calender</source>
-        <translation>Touche_Calendrier</translation>
+        <translation>Key_Calender</translation>
     </message>
     <message>
         <source>Key_Contacts</source>
-        <translation>Touche_Contacts</translation>
+        <translation>Key_Contacts</translation>
     </message>
     <message>
         <source>Key_Menu</source>
-        <translation>Touche_Menu</translation>
+        <translation>Key_Menu</translation>
     </message>
     <message>
         <source>Key_Mail</source>
-        <translation>Touche_Mail</translation>
+        <translation>Key_Mail</translation>
     </message>
     <message>
         <source>30</source>
@@ -99,19 +99,19 @@
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation>Taux d&apos;échantillonage:</translation>
+        <translation>Taux d&apos;échantillonage :</translation>
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation>Répertoire d&apos;enregistrement:</translation>
+        <translation>Répertoire d&apos;enregistrement :</translation>
     </message>
     <message>
         <source>Recording Key:</source>
-        <translation>Touche d&apos;enregistrement:</translation>
+        <translation>Touche d&apos;enregistrement :</translation>
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation>Temps d&apos;enregistrement max en secondes:</translation>
+        <translation>Temps d&apos;enreg. max en secondes :</translation>
     </message>
     <message>
         <source>Unlimited</source>
@@ -123,7 +123,7 @@
     </message>
     <message>
         <source>Key_Record</source>
-        <translation>Touche_Enregistrement</translation>
+        <translation>Key_Record</translation>
     </message>
 </context>
 </TS>

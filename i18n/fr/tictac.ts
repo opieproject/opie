@@ -4,15 +4,15 @@
     <name>TicTacToe</name>
     <message>
         <source>Computer starts</source>
-        <translation>L&apos;ordinateur démarre</translation>
+        <translation>L&apos;ordinateur commence</translation>
     </message>
     <message>
         <source>Human starts</source>
-        <translation>Vous commencez</translation>
+        <translation>L&apos;humain commence ;)</translation>
     </message>
     <message>
         <source>Play!</source>
-        <translation>Joué!</translation>
+        <translation>Joué !</translation>
     </message>
     <message>
         <source>Quit</source>
@@ -20,19 +20,19 @@
     </message>
     <message>
         <source>Click Play to start</source>
-        <translation>Cliquez &quot;joué&quot; pour démarrer</translation>
+        <translation>Cliquez sur Joué pour démarrer</translation>
     </message>
     <message>
         <source>Make your move</source>
-        <translation>Votre tour</translation>
+        <translation>A vous de jouer</translation>
     </message>
     <message>
         <source>You won!</source>
-        <translation>Vous avez gagné!</translation>
+        <translation>Vous avez gagné !</translation>
     </message>
     <message>
         <source>Computer won!</source>
-        <translation>L&apos;ordinateur a gagné!</translation>
+        <translation>L&apos;ordinateur a gagné !</translation>
     </message>
     <message>
         <source>It&apos;s a draw</source>

@@ -274,7 +274,7 @@ Ce n&apos;en est pas un!!</translation>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation>Définir les droits</translation>
+        <translation>Définir les Droits</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>

@@ -28,11 +28,11 @@
     </message>
     <message>
         <source>Toggle Menu</source>
-        <translation>Sélectionner le Menu</translation>
+        <translation>Menu</translation>
     </message>
     <message>
         <source>Toggle O-Menu</source>
-        <translation>Sélectionner le O-Menu</translation>
+        <translation>O-Menu</translation>
     </message>
     <message>
         <source>Show Desktop</source>

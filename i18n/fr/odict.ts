@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Until Hit</source>
-        <translation>Jusqu&apos;au succès</translation>
+        <translation>Jusqu&apos;au bout</translation>
     </message>
     <message>
         <source>&amp;Error tolerance</source>
@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>Decollator</source>
-        <translation>Déliassé</translation>
+        <translation>Decollator</translation>
     </message>
     <message>
         <source>Language 2</source>

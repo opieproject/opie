@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Total Memory: %1 kB</source>
-        <translation>Mémoire totale: %1 ko</translation>
+        <translation>Mémoire Totale: %1 ko</translation>
     </message>
     <message>
         <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
@@ -52,7 +52,10 @@ Memory is categorized as follows:
         <translation>Cette page montre l&apos;utilisation de la mémoire par votre PDA.
 La mémoire est divisée en catégories comme suit:
 
-1. Utilisée - Mémoire utilisée par Opie et toute autre applications en cours d&apos;exécution.</translation>
+1. Utilisée - Mémoire utilisée par Opie et toutes autres applications en cours d&apos;exécution.
+2. Buffers - Mémoire temporaire utilisée pour accroître les performances
+3. Cache - Espace utilisé récemment et non encore libéré.
+4. Libre - Mémoire disponible non encore utilisée par Opie ou par les applications en cours.</translation>
     </message>
 </context>
 <context>

@@ -19,10 +19,10 @@
        Your Score:  %1
  Parachuters Killed: %2
         Accuracy: %3% </source>
-        <translation>Fin de partie!
-Votre score: %1
-Parachutistes tués: %2
-Précision: %3%</translation>
+        <translation>Fin de partie !
+Votre score : %1
+Parachutistes tués : %2
+Précision : %3%</translation>
     </message>
 </context>
 </TS>

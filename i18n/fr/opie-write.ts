@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation>Sélectionner tout</translation>
+        <translation>Sélectionner Tout</translation>
     </message>
 </context>
 </TS>

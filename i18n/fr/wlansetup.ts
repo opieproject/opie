@@ -4,7 +4,7 @@
     <name>WLAN</name>
     <message>
         <source>Wireless LAN Setting</source>
-        <translation>Configuration du réseau sans fils</translation>
+        <translation>Configuration réseau sans fils (LAN)</translation>
     </message>
     <message>
         <source>Config</source>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Channel</source>
-        <translation>Channel/Canal</translation>
+        <translation>Canal</translation>
     </message>
     <message>
         <source>802.11 Ad-Hoc</source>
@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Key Setting</source>
-        <translation>définition des clés</translation>
+        <translation>Définition des clés</translation>
     </message>
     <message>
         <source>Key 1</source>
@@ -64,7 +64,7 @@
     </message>
     <message>
         <source>Key Length</source>
-        <translation>Longueur de la clé</translation>
+        <translation>Longueur de la Clé</translation>
     </message>
     <message>
         <source>40 Bits</source>

@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation>&amp;Changer le dos des cartes</translation>
+        <translation>&amp;Changer le Dos des Cartes</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation>&amp;Forcer Position</translation>
+        <translation>&amp;Aider Positionnement</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
@@ -40,15 +40,15 @@
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation>Changer le dos des cartes</translation>
+        <translation>Changer le Dos des Cartes</translation>
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation>Snap Sur Position</translation>
+        <translation>Aider Positionnement</translation>
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation>Retourner une carte</translation>
+        <translation>Retourner Une Carte</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -56,7 +56,7 @@
     </message>
     <message>
         <source>Turn Three Cards</source>
-        <translation>Retourner 3 cartes</translation>
+        <translation>Retourner Trois Cartes</translation>
     </message>
     <message>
         <source>Chicane</source>

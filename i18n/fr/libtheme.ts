@@ -15,11 +15,11 @@
     <name>ThemeSettings</name>
     <message>
         <source>Theme Style</source>
-        <translation>Style de thème</translation>
+        <translation>Style Thème</translation>
     </message>
     <message>
         <source>Select the theme to be used</source>
-        <translation>Sélectionnez le thème à utiliser</translation>
+        <translation>Sélectionne le thème à utiliser</translation>
     </message>
     <message>
         <source>Name</source>

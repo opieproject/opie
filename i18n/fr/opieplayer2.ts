@@ -4,26 +4,26 @@
     <name>AudioWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation>Lecteur Opie</translation>
+        <translation>OpiePlayer</translation>
     </message>
 </context>
 <context>
     <name>MediaPlayer</name>
     <message>
         <source>OpiePlayer: Initializating</source>
-        <translation>Lecteur Opie: Initialisation</translation>
+        <translation>OpiePlayer : Initialisation</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation>Lecteur Opie:</translation>
+        <translation>Lecteur Opie :</translation>
     </message>
     <message>
         <source> File: </source>
-        <translation>Fichier:</translation>
+        <translation>Fichier :</translation>
     </message>
     <message>
         <source>, Length: </source>
-        <translation>, durée:</translation>
+        <translation>, durée :</translation>
     </message>
     <message>
         <source>Volume</source>
@@ -53,7 +53,7 @@
     <name>PlayListSelection</name>
     <message>
         <source>Playlist Selection</source>
-        <translation>Sélection d&apos;une liste</translation>
+        <translation>Sélection Liste</translation>
     </message>
 </context>
 <context>
@@ -64,7 +64,7 @@
     </message>
     <message>
         <source>Remove from Playlist</source>
-        <translation>Enlever de la liste</translation>
+        <translation>Supprimer de la Liste</translation>
     </message>
     <message>
         <source>Play</source>
@@ -104,11 +104,11 @@
     </message>
     <message>
         <source>Rescan for Audio Files</source>
-        <translation>Rafraîchir la liste des fichiers audio</translation>
+        <translation>Rechercher les fichiers audio</translation>
     </message>
     <message>
         <source>Rescan for Video Files</source>
-        <translation>Rafraîchir la liste des fchiers video</translation>
+        <translation>Rechercher les fichiers video</translation>
     </message>
     <message>
         <source>Full Screen</source>
@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>Remove</source>
-        <translation>Enlever</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Move Down</source>
@@ -128,25 +128,25 @@
     </message>
     <message>
         <source>Play Selected</source>
-        <translation>Lire la sélection</translation>
+        <translation>Lire la Sélection</translation>
     </message>
     <message>
         <source>Invalid File</source>
-        <translation>Fichier non valide</translation>
+        <translation>Fichier Non Valide</translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
-        <translation>Il y a eu un problème dans l&apos;obtention du fichier.</translation>
+        <translation>Erreur lors de l&apos;obtention du fichier.</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
-        <translation>Effacer la liste?</translation>
+        <translation>Supprimer la Liste ?</translation>
     </message>
     <message>
         <source>You really want to delete
 this playlist?</source>
-        <translation>Voulez-vous réellement effacer
-la liste?</translation>
+        <translation>Voulez-vous réellement supprimer
+la liste ?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -162,7 +162,7 @@ la liste?</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation>Lecteur Opie:</translation>
+        <translation>OpiePlayer:</translation>
     </message>
     <message>
         <source>Save m3u Playlist </source>
@@ -173,7 +173,7 @@ la liste?</translation>
     <name>PlayListWidgetGui</name>
     <message>
         <source>Play Operations</source>
-        <translation>Opérations de lecture</translation>
+        <translation>Opérations de Lecture</translation>
     </message>
     <message>
         <source>File</source>
@@ -181,7 +181,7 @@ la liste?</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Skins</source>
@@ -208,30 +208,30 @@ la liste?</translation>
     <name>VideoWidget</name>
     <message>
         <source>OpiePlayer - Video</source>
-        <translation>Lecteur Opie - Video</translation>
+        <translation>OpiePlayer - Video</translation>
     </message>
 </context>
 <context>
     <name>XineControl</name>
     <message>
         <source>Failure</source>
-        <translation>Problème</translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>No input plugin found for this media type</source>
-        <translation>Pas de greffon (plugin) trouvé pour ce type de média</translation>
+        <translation>Pas de plugin trouvé pour ce type de média</translation>
     </message>
     <message>
         <source>No demux plugin found for this media type</source>
-        <translation>Pas de greffon (plugin) demux trouvé pour ce type de média</translation>
+        <translation>Pas de plugin &quot;demux&quot; trouvé pour ce type de média</translation>
     </message>
     <message>
         <source>Demuxing failed for this media type</source>
-        <translation>problème dans le &quot;demuxing&quot; pour ce type de média</translation>
+        <translation>problème de &quot;demuxing&quot; pour ce type de média</translation>
     </message>
     <message>
         <source>Malformed MRL</source>
-        <translation>MRL malformée</translation>
+        <translation>MRL mal-formée</translation>
     </message>
     <message>
         <source>Some other error</source>

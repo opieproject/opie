@@ -5,7 +5,7 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation>Pressez la croix fermement et précisement pour calibrer votre écran.</translation>
+        <translation>Cliquez et gardez la pression sur croix pour calibrer votre écran.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
@@ -16,7 +16,7 @@ accurately to calibrate your screen.</source>
     <name>LoginWindow</name>
     <message>
         <source>Login</source>
-        <translation>Login</translation>
+        <translation>Connexion</translation>
     </message>
     <message>
         <source>&lt;center&gt;Welcome to OPIE&lt;/center&gt;</source>

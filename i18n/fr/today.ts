@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Click here to launch the associated app</source>
-        <translation>Cliquer ici pour lancer l&apos;application associée</translation>
+        <translation>Cliquez ici pour lancer l&apos;application associée</translation>
     </message>
 </context>
 <context>
@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Load which plugins in what order:</source>
-        <translation>Chargement et Ordre des modules :</translation>
+        <translation>Chargement et ordre des modules :</translation>
     </message>
     <message>
         <source>Move Up</source>
@@ -68,8 +68,8 @@
         <source>autostart on 
 resume?
  (Opie only)</source>
-        <translation>Démarrage automatique
-à la reprise?
+        <translation>Afficher automatique
+à l&apos;allumage ?
 (Opie seulement)</translation>
     </message>
     <message>
@@ -90,11 +90,11 @@ resume?
     </message>
     <message>
         <source>Icon size</source>
-        <translation>Taille de l&apos;icone</translation>
+        <translation>Taille de l&apos;icône</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation>Définir la taille de l&apos;icone en pixel</translation>
+        <translation>Définir la taille de l&apos;icône en pixel</translation>
     </message>
     <message>
         <source>Refresh</source>
@@ -102,7 +102,7 @@ resume?
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation>Périodicité des rafraîchisssments de &quot;Aujourd&apos;hui&quot;</translation>
+        <translation>Périodicité des rafraîchissements de &quot;Aujourd&apos;hui&quot;</translation>
     </message>
     <message>
         <source> sec</source>
@@ -114,7 +114,7 @@ resume?
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation>Sélectionner une case à cocher pour activer/désactiver un module ou utiliser les flèches de droite pour changer l&apos;ordre d&apos;apparition</translation>
+        <translation>Sélectionnez une case à cocher pour activer/désactiver un module ou utiliser les flèches de droite pour changer l&apos;ordre d&apos;apparition</translation>
     </message>
 </context>
 </TS>

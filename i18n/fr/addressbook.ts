@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>

@@ -159,7 +159,7 @@ shows the list of dirs and files</source>
     <name>ScQtFileEditDlg</name>
     <message>
         <source>dir</source>
-        <translation type="unfinished">Verz.</translation>
+        <translation>dir</translation>
     </message>
     <message>
         <source>file</source>
@@ -523,7 +523,7 @@ sichern</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.0&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>ZSafe version 2.1.0&lt;br&gt;</translation>
     </message>
 </context>
 </TS>

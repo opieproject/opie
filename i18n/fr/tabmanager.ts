@@ -8,19 +8,19 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom:</translation>
+        <translation>Nom :</translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation>Icône:</translation>
+        <translation>Icône :</translation>
     </message>
     <message>
         <source>Exec:</source>
-        <translation>Executable:</translation>
+        <translation>Exec :</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Commentaire:</translation>
+        <translation>Commentaire :</translation>
     </message>
 </context>
 <context>
@@ -41,7 +41,7 @@ qui contient encore des applications.</translation>
     </message>
     <message>
         <source>Are you sure you want to delete?</source>
-        <translation>Etes-vous sûr de vouloir effacer?</translation>
+        <translation>Etes-vous sûr de vouloir effacer ?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -61,7 +61,7 @@ qui contient encore des applications.</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation>Rassemble les icônes ...</translation>
+        <translation>Rassemble les icônes...</translation>
     </message>
     <message>
         <source>Application</source>
@@ -83,7 +83,7 @@ qui contient encore des applications.</translation>
     <name>Wait</name>
     <message>
         <source>Please Wait...</source>
-        <translation>Attendez SVP...</translation>
+        <translation>Veuillez patienter...</translation>
     </message>
 </context>
 </TS>

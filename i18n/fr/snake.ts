@@ -8,11 +8,11 @@
     </message>
     <message>
         <source>New Game</source>
-        <translation>Nouveau jeux</translation>
+        <translation>Nouveau Jeu</translation>
     </message>
     <message>
         <source>SNAKE!</source>
-        <translation>SERPENT!</translation>
+        <translation>SERPENT !</translation>
     </message>
     <message>
         <source>Use the arrow keys to guide the
@@ -24,7 +24,7 @@ sans rentrer dans les murs ni se modre la queue.</translation>
     </message>
     <message>
         <source>Press Any Key To Start</source>
-        <translation>Appuyer sur n&apos;importe quelle touche pour commencer</translation>
+        <translation>Appuyez sur n&apos;importe quelle touche pour commencer</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
@@ -33,7 +33,7 @@ sans rentrer dans les murs ni se modre la queue.</translation>
     <message>
         <source>GAME OVER!
  Your Score: %1</source>
-        <translation>GAME OVER!
+        <translation>GAME OVER !
 Votre score : %1</translation>
     </message>
     <message>

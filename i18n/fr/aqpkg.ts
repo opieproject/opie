@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;Ok</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -29,7 +29,7 @@
     <name>InputDialog</name>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;Ok</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -217,7 +217,7 @@
     </message>
     <message>
         <source>View</source>
-        <translation>Vues</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Configure</source>
@@ -345,13 +345,13 @@ Are you sure?
 </source>
         <translation>ATTENTION : La mise à jour
 lorsque Opie/Qtopia fonctionne
-n&apos;est PAS recommandée.
+n&apos;est PAS recommandée !
 
 Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Attention</translation>
+        <translation>Avertissement</translation>
     </message>
     <message>
         <source>Upgrading installed packages</source>

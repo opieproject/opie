@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>attach...</source>
-        <translation>attachement...</translation>
+        <translation>attache...</translation>
     </message>
 </context>
 <context>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Your name</source>
-        <translation>Votre nom</translation>
+        <translation>Votre Nom</translation>
     </message>
     <message>
         <source>Email</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>POP username</source>
-        <translation>Login POP</translation>
+        <translation>Nom Utilisateur POP</translation>
     </message>
     <message>
         <source>POP password</source>
@@ -63,7 +63,7 @@
     </message>
     <message>
         <source>Mail Size (k)</source>
-        <translation>Taille messages (k)</translation>
+        <translation>Taille Messages (k)</translation>
     </message>
 </context>
 <context>
@@ -118,7 +118,7 @@
     </message>
     <message>
         <source>Inbox</source>
-        <translation>Boîte de réception</translation>
+        <translation>Réception</translation>
     </message>
     <message>
         <source>To</source>
@@ -126,7 +126,7 @@
     </message>
     <message>
         <source>Outbox</source>
-        <translation>Messages envoyés</translation>
+        <translation>Envoi</translation>
     </message>
     <message>
         <source>No account selected</source>
@@ -203,7 +203,7 @@ Mail has NOT been sent</source>
     </message>
     <message>
         <source>Examine mail</source>
-        <translation>Lire un message</translation>
+        <translation>Lire message</translation>
     </message>
     <message>
         <source>Central view area</source>
@@ -226,7 +226,7 @@ Voulez-vous le faire maintenant ?</translation>
     <name>PopClient</name>
     <message>
         <source>Connection established</source>
-        <translation>Connection établie</translation>
+        <translation>Connexion établie</translation>
     </message>
     <message>
         <source>Error Occured</source>
@@ -250,7 +250,7 @@ Voulez-vous le faire maintenant ?</translation>
     </message>
     <message>
         <source>No new messages</source>
-        <translation>Pas de nouveaux messages</translation>
+        <translation>Pas de nouveau message</translation>
     </message>
 </context>
 <context>
@@ -277,7 +277,7 @@ Voulez-vous le faire maintenant ?</translation>
     </message>
     <message>
         <source>Queue your mail by clicking here</source>
-        <translation>Enregistrer votre message dans la file d&apos;attente ici</translation>
+        <translation>Enregistrez votre message dans la file d&apos;attente en cliquant ici</translation>
     </message>
     <message>
         <source>This is an overview about all attachments in the mail</source>
@@ -331,7 +331,7 @@ Ces messages peuvent être ouvert par double click avant l&apos;envoie.</transla
     </message>
     <message>
         <source>Text Format</source>
-        <translation>Format de texte</translation>
+        <translation>Format texte</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -468,7 +468,7 @@ Cliquez et garder la pression pour plus d&apos;options.</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation>Attacher</translation>
+        <translation>Attachement</translation>
     </message>
     <message>
         <source>Click here to attach files to your mail</source>

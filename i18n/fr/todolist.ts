@@ -31,7 +31,7 @@
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
-        <translation>Entrer la Tâche</translation>
+        <translation>Entrer une Tâche</translation>
     </message>
     <message>
         <source>Edit Task</source>
@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation>Cliquer ici pour créer une nouvelle tâche.</translation>
+        <translation>Cliquez ici pour créer une nouvelle tâche.</translation>
     </message>
     <message>
         <source>Edit Task</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation>Cliquer ici pour modifier la tâche courante.</translation>
+        <translation>Cliquez ici pour modifier la tâche courante.</translation>
     </message>
     <message>
         <source>View Task</source>
@@ -66,19 +66,19 @@
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Effacer...</translation>
+        <translation>Supprimer...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation>Cliquer  ici pour effacer la tâche courante.</translation>
+        <translation>Cliquez  ici pour effacer la tâche courante.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Effacer Tout...</translation>
+        <translation>Supprimer Tout...</translation>
     </message>
     <message>
         <source>Delete completed</source>
-        <translation>Effacement Terminé</translation>
+        <translation>Suppression Terminé</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -86,7 +86,7 @@
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation>Cliquer ici pour transmettre la tâche courante à un autre périphérique.</translation>
+        <translation>Cliquez ici pour transmettre la tâche courante à un autre dispositif.</translation>
     </message>
     <message>
         <source>Find</source>
@@ -94,7 +94,7 @@
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation>Montrer les tâches terminées</translation>
+        <translation>Afficher les tâches terminées</translation>
     </message>
     <message>
         <source>Show only over-due tasks</source>
@@ -102,11 +102,11 @@
     </message>
     <message>
         <source>Show task deadlines</source>
-        <translation>Montrer les échéances</translation>
+        <translation>Afficher les échéances</translation>
     </message>
     <message>
         <source>Show quick task bar</source>
-        <translation>Montrer la barre d&apos;outils</translation>
+        <translation>Afficher la barre d&apos;outils</translation>
     </message>
     <message>
         <source>Data</source>
@@ -167,15 +167,15 @@ Quitter?</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Impossible d&apos;éditer les données, Synchronization en cours</translation>
+        <translation>Impossible d&apos;éditer les données, synchronization en cours</translation>
     </message>
     <message>
         <source>all tasks?</source>
-        <translation>Toutes les Tâches?</translation>
+        <translation>toutes les tâches ?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
-        <translation>Toutes les tâches effectuées?</translation>
+        <translation>toutes les tâches effectuées ?</translation>
     </message>
     <message>
         <source>Unfiled</source>
@@ -183,7 +183,7 @@ Quitter?</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
-        <translation>&lt;P&gt;%1 Il y  une nouvelle tâches.&lt;p&gt; Voulez-vous l&apos;ajouter à votre liste?</translation>
+        <translation>&lt;P&gt;%1 nouvelle(s) tâche(s) arrivée(s).&lt;p&gt; Ajouter à votre liste ?</translation>
     </message>
     <message>
         <source>New Tasks</source>
@@ -211,11 +211,11 @@ Quitter?</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation>Configurer les modèles</translation>
+        <translation>Configurer les Modèles</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation>Priorité:</translation>
+        <translation>Priorité :</translation>
     </message>
 </context>
 <context>
@@ -245,14 +245,14 @@ Quitter?</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorOverView</name>
     <message>
         <source>Description:</source>
-        <translation>Description:</translation>
+        <translation>Description :</translation>
     </message>
     <message>
         <source>Enter brief description of the task here.</source>
@@ -324,7 +324,7 @@ Quitter?</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation>Catégorie:</translation>
+        <translation>Catégorie :</translation>
     </message>
     <message>
         <source>Select category to organize this task with.</source>
@@ -340,7 +340,7 @@ Quitter?</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Notes:</translation>
+        <translation>Notes :</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
@@ -355,11 +355,11 @@ Quitter?</translation>
     <name>TaskEditorStatus</name>
     <message>
         <source>Status:</source>
-        <translation>Etat:</translation>
+        <translation>Etat :</translation>
     </message>
     <message>
         <source>Click here to set the current status of this task.</source>
-        <translation>Cliquer ici pour définir l&apos;état courant de la tâche.</translation>
+        <translation>Cliquez ici pour définir l&apos;état courant de la tâche.</translation>
     </message>
     <message>
         <source>Started</source>
@@ -379,11 +379,11 @@ Quitter?</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation>Avancement:</translation>
+        <translation>Avancement :</translation>
     </message>
     <message>
         <source>Select progress made on this task here.</source>
-        <translation>Selectionner l&apos;avancement de la tâche ici.</translation>
+        <translation>Selectionnez l&apos;avancement de la tâche ici.</translation>
     </message>
     <message>
         <source>0 %</source>
@@ -411,39 +411,39 @@ Quitter?</translation>
     </message>
     <message>
         <source>Start Date:</source>
-        <translation>Date de début:</translation>
+        <translation>Date de début :</translation>
     </message>
     <message>
         <source>Click here to set the date this task was started.</source>
-        <translation>Cliquer ici pour définir la date de début de la tâche.</translation>
+        <translation>Cliquez ici pour définir la date de début de la tâche.</translation>
     </message>
     <message>
         <source>Due Date:</source>
-        <translation>Date d&apos;écheance:</translation>
+        <translation>Date d&apos;écheance :</translation>
     </message>
     <message>
         <source>Click here to set the date this task needs to be completed by.</source>
-        <translation>Cliquer ici pour définir la date à laquelle la tâche doit-être terminée.</translation>
+        <translation>Cliquez ici pour définir la date à laquelle la tâche doit-être terminée.</translation>
     </message>
     <message>
         <source>Completed:</source>
-        <translation>Terminée:</translation>
+        <translation>Terminée :</translation>
     </message>
     <message>
         <source>Click here to mark this task as completed.</source>
-        <translation>Cliquer ici pour définir la tâche comme &quot;Terminée&quot;.</translation>
+        <translation>Cliquez ici pour définir la tâche comme &quot;Terminée&quot;.</translation>
     </message>
     <message>
         <source>Click here to set the date this task was completed.</source>
-        <translation>Cliquer ici pour définir la date à laquelle la tâche a été terminée.</translation>
+        <translation>Cliquez ici pour définir la date à laquelle la tâche a été terminée.</translation>
     </message>
     <message>
         <source>Maintainer Mode:</source>
-        <translation>Mode Maintenance:</translation>
+        <translation>Mode Maintenance :</translation>
     </message>
     <message>
         <source>Click here to set the maintainer&apos;s role.</source>
-        <translation>Click here to set the maintainer&apos;s role.</translation>
+        <translation>Cliquez ici pour fixer le rôle du mainteneur.</translation>
     </message>
     <message>
         <source>Nothing</source>
@@ -463,7 +463,7 @@ Quitter?</translation>
     </message>
     <message>
         <source>Maintainer:</source>
-        <translation>Mainteneur:</translation>
+        <translation>Mainteneur :</translation>
     </message>
     <message>
         <source>This is the name of the current task maintainer.</source>
@@ -475,7 +475,7 @@ Quitter?</translation>
     </message>
     <message>
         <source>Click here to select the task maintainer.</source>
-        <translation>Cliquer ici pour selectionner le mainteneur de la tâche.</translation>
+        <translation>Cliquez ici pour selectionner le mainteneur de la tâche.</translation>
     </message>
 </context>
 <context>

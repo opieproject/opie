@@ -132,7 +132,7 @@
     </message>
     <message>
         <source>Dehyphen</source>
-        <translation>Trait d&apos;union</translation>
+        <translation>Espace Insécable</translation>
     </message>
     <message>
         <source>Single Space</source>
@@ -168,7 +168,7 @@
     </message>
     <message>
         <source>Embolden</source>
-        <translation>Etaller</translation>
+        <translation>Mettre en Gras</translation>
     </message>
     <message>
         <source>Zoom In</source>
@@ -276,7 +276,7 @@
     </message>
     <message>
         <source>Do Reg</source>
-        <translation>Faire Reg</translation>
+        <translation>EnregisterEnregister</translation>
     </message>
     <message>
         <source>Close Edit</source>

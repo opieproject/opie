@@ -44,7 +44,7 @@ par des espaces.</translation>
     </message>
     <message>
         <source>Toggles Name of symbols owner field</source>
-        <translation>Nom du champ propriétaire des Symboles </translation>
+        <translation>Champ Nom du Propriétaire des Symboles </translation>
     </message>
     <message>
         <source>Toggles current Price field</source>
@@ -84,7 +84,7 @@ par des espaces.</translation>
     </message>
     <message>
         <source>Speed of scrolling action, in milliseconds</source>
-        <translation>Vitesse de défilement des actions, en millisecondes</translation>
+        <translation>Vitesse de Défilement des Actions, en millisecondes</translation>
     </message>
     <message>
         <source>Scroll Speed, in milliseconds</source>

@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Card eject failed!</source>
-        <translation>L&apos;éjection de la carte a échoué!</translation>
+        <translation>L&apos;éjection de la carte a échoué !</translation>
     </message>
     <message>
         <source>&amp;OK</source>

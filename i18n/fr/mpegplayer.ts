@@ -4,7 +4,7 @@
     <name>AudioWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation>Lecteur Opie</translation>
+        <translation>OpiePlayer</translation>
     </message>
 </context>
 <context>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Error: There is no file selected</source>
-        <translation>Erreur: il n&apos;y a pas de fichier sélectionné</translation>
+        <translation>Erreur: auncun fichier sélectionné</translation>
     </message>
     <message>
         <source>File not found</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>The following file was not found: &lt;i&gt;</source>
-        <translation>Le fichier suivant n&apos;a pas été trouvé: &lt;i&gt;</translation>
+        <translation>Le fichier suivant n&apos;a pas été trouvé : &lt;i&gt;</translation>
     </message>
     <message>
         <source>No decoder found</source>
@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Sorry, no appropriate decoders found for this file: &lt;i&gt;</source>
-        <translation>Désolé, impossible de trouver un décodeur approprié pour ce fichier: &lt;i&gt;</translation>
+        <translation>Désolé, impossible de trouver un décodeur pour ce fichier: &lt;i&gt;</translation>
     </message>
     <message>
         <source>Error opening file</source>
@@ -39,22 +39,22 @@
     </message>
     <message>
         <source>Sorry, an error occured trying to play the file: &lt;i&gt;</source>
-        <translation>Désolé, une erreur est survenue lors de la lecture dur fichier: &lt;i&gt;</translation>
+        <translation>Désolé, une erreur est survenue lors de la lecture du fichier : &lt;i&gt;</translation>
     </message>
     <message>
         <source> File: </source>
-        <translation>Fichier:</translation>
+        <translation>Fichier :</translation>
     </message>
     <message>
         <source>, Length: </source>
-        <translation>, Longueur:</translation>
+        <translation>, Longueur :</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Playlist Selection</source>
-        <translation>Sélection du liste</translation>
+        <translation>Sélection Liste</translation>
     </message>
 </context>
 <context>
@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>Remove from Playlist</source>
-        <translation>Effacer de la liste</translation>
+        <translation>Supprimer de la liste</translation>
     </message>
     <message>
         <source>Play</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Save PlayList</source>
-        <translation>Sauver la liste</translation>
+        <translation>Sauver Liste</translation>
     </message>
     <message>
         <source>View</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source>Remove</source>
-        <translation>Enlever</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Move Down</source>
@@ -149,7 +149,7 @@ lors du prochain démarrage.</translation>
     </message>
     <message>
         <source>Invalid File</source>
-        <translation>Fichier non valide</translation>
+        <translation>Fichier Non Valide</translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
@@ -158,7 +158,7 @@ lors du prochain démarrage.</translation>
     <message>
         <source>This is all ready in your playlist.
 Continue?</source>
-        <translation>Ceci est déjà présent dans votre liste de lecture.
+        <translation>Déjà présent dans votre liste de lecture.
 Continuer ?</translation>
     </message>
     <message>
@@ -171,13 +171,13 @@ Continuer ?</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
-        <translation>Enlever la liste?</translation>
+        <translation>Supprimer la Liste ?</translation>
     </message>
     <message>
         <source>You really want to delete
 this playlist?</source>
-        <translation>Voulez-vous réellement effacer
-cette liste?</translation>
+        <translation>Voulez-vous réellement supprimer
+cette liste ?</translation>
     </message>
     <message>
         <source>Play Selected</source>
@@ -201,7 +201,7 @@ cette liste?</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>video</translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Lists</source>
@@ -213,7 +213,7 @@ cette liste?</translation>
     </message>
     <message>
         <source>Save Playlist</source>
-        <translation>Sauver la liste</translation>
+        <translation>Sauver Liste</translation>
     </message>
     <message>
         <source>Properties</source>

@@ -12,11 +12,11 @@
     </message>
     <message>
         <source>Form1</source>
-        <translation></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>Molecular Weight</source>
-        <translation>Masse molaire</translation>
+        <translation>Masse Molaire</translation>
     </message>
     <message>
         <source>Chemical Formula</source>
@@ -24,18 +24,18 @@
     </message>
     <message>
         <source>Molecular Weight (u):</source>
-        <translation>Masse molaire (u):</translation>
+        <translation>Masse Molaire (u):</translation>
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation>Composition élementaire (%) :</translation>
+        <translation>Composition Elementaire (%) :</translation>
     </message>
 </context>
 <context>
     <name>OxydataWidget</name>
     <message>
         <source>Weight:</source>
-        <translation>Masse:</translation>
+        <translation>Masse :</translation>
     </message>
     <message>
         <source>Block</source>
@@ -129,7 +129,7 @@
     <name>dataWidgetUI</name>
     <message>
         <source>Chemical Data</source>
-        <translation>Données chimiques</translation>
+        <translation>Données Chimiques</translation>
     </message>
     <message>
         <source>Hydrogen</source>

@@ -54,11 +54,11 @@
     </message>
     <message>
         <source>Backlight</source>
-        <translation>Retro-éclairage</translation>
+        <translation>Rétro-éclairage</translation>
     </message>
     <message>
         <source>set a fix value for backlight</source>
-        <translation>régler le niveau du rétroéclairage</translation>
+        <translation>régler le niveau du rétro-éclairage</translation>
     </message>
     <message>
         <source>Full</source>
@@ -117,7 +117,7 @@
     <name>SensorBase</name>
     <message>
         <source>Sensor Calibration</source>
-        <translation>Calibration du capteur</translation>
+        <translation>Calibrage du Capteur</translation>
     </message>
     <message>
         <source>Full</source>

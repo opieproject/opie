@@ -277,7 +277,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation>Vue par défaut:</translation>
+        <translation>Vue par défaut :</translation>
     </message>
     <message>
         <source>Day</source>
@@ -333,7 +333,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation>Catégorie:</translation>
+        <translation>Catégorie :</translation>
     </message>
 </context>
 <context>

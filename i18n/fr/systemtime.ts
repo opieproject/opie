@@ -137,11 +137,11 @@ ntpdate</translation>
     </message>
     <message>
         <source>New time</source>
-        <translation>Nouvell heure</translation>
+        <translation>Nouvelle heure</translation>
     </message>
     <message>
         <source>Get time from the network</source>
-        <translation>Récupérer l&apos;heure d&apos;un serveur NTP</translation>
+        <translation>Récupérer l&apos;heure sur serveur NMP</translation>
     </message>
 </context>
 <context>
@@ -339,7 +339,7 @@ ntpdate</translation>
     <name>PredictTabWidget</name>
     <message>
         <source>Predicted time drift</source>
-        <translation>dérive de l&apos;heure prévu</translation>
+        <translation>dérive de l&apos;heure prévue</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -359,7 +359,7 @@ ntpdate</translation>
     </message>
     <message>
         <source>Last [h]</source>
-        <translation>Dernière[h]</translation>
+        <translation>Dernière [h]</translation>
     </message>
     <message>
         <source>Offset [s]</source>
@@ -367,11 +367,11 @@ ntpdate</translation>
     </message>
     <message>
         <source>Predict time</source>
-        <translation>Heure prévu</translation>
+        <translation>Heure prévue</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation>Fixer la prévision de l&apos;heure</translation>
+        <translation>Fixer prévision de l&apos;heure</translation>
     </message>
     <message>
         <source> s/h</source>
@@ -480,7 +480,7 @@ ntpdate</translation>
     </message>
     <message>
         <source>Display time prediction information</source>
-        <translation>minutes entre 2 </translation>
+        <translation>Afficher les infos de prediction de l&apos;heure</translation>
     </message>
 </context>
 <context>
@@ -495,11 +495,11 @@ ntpdate</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation>am</translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>pm</translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Date</source>

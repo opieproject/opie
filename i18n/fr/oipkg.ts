@@ -3,7 +3,7 @@
     <name>InstallDialog</name>
     <message>
         <source>Install</source>
-        <translation>Installer</translation>
+        <translation>Install</translation>
     </message>
     <message>
         <source>Ipkg options</source>
@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Settings</source>

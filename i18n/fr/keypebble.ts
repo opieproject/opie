@@ -255,7 +255,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Toggle obscuring the password</source>
-        <translation>Sélectionner/Désélectionner le camouflage du mot de passe</translation>
+        <translation>Camoufler le mot de passe</translation>
     </message>
     <message>
         <source>The name of the VNC server</source>

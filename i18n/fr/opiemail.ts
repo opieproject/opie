@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Détruire</translation>
+        <translation>Supprimer</translation>
     </message>
 </context>
 <context>
@@ -57,7 +57,7 @@
     <name>MailviewerApp</name>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Compose</source>
@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>Mailboxes</source>
-        <translation>Boîte aux Lettres</translation>
+        <translation>Boîtes aux Lettres</translation>
     </message>
     <message>
         <source>Configure OpieMail</source>
@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;Détruire</translation>
+        <translation>&amp;Supprimer</translation>
     </message>
     <message>
         <source>Folder name</source>
@@ -147,13 +147,13 @@
     <name>OpieMailConfigImpl</name>
     <message>
         <source>Delete mailbox</source>
-        <translation>Detruire Boîte aux lettres</translation>
+        <translation>Supprimer boîte aux lettres</translation>
     </message>
     <message>
         <source>Delete the mailbox?
 All mails will be deleted.</source>
-        <translation>Détruire la boîte aux lettres ?
-Tous les messages seront supprimés.</translation>
+        <translation>Supprimer la boîte aux lettres ?
+Tous les messages seront détruits.</translation>
     </message>
 </context>
 <context>
@@ -195,7 +195,7 @@ Tous les messages seront supprimés.</translation>
     </message>
     <message>
         <source>EMail:</source>
-        <translation>Email :</translation>
+        <translation>E-Mail :</translation>
     </message>
     <message>
         <source>Reply To</source>
@@ -258,7 +258,7 @@ Tous les messages seront supprimés.</translation>
     </message>
     <message>
         <source>&amp;Delete mail from server when deleted local.</source>
-        <translation>&amp;Détruire sur le serveur les messages détruits en local.</translation>
+        <translation>&amp;Détruire sur le serveur les messages supprimés en local.</translation>
     </message>
     <message>
         <source>&amp;Keep Mail on Server</source>
@@ -332,7 +332,7 @@ Tous les messages seront supprimés.</translation>
     </message>
     <message>
         <source>Move To</source>
-        <translation>Déplacer Dans</translation>
+        <translation>Déplacer Vers</translation>
     </message>
 </context>
 <context>

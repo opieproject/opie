@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Medium Mount Settings</source>
-        <translation>Options Montage de Support</translation>
+        <translation>Options Montage Support</translation>
     </message>
 </context>
 <context>

@@ -7,9 +7,9 @@
 your sound device.
 open(&quot;/dev/dsp&quot;)
 </source>
-        <translation>Il y a un problème
-avec le périphérique son.
-open(&quot;/dev/dsp&quot;);</translation>
+        <translation>Un problème est survenu
+lors de l&apos;accès au périphérique
+de son. open(&quot;/dev/dsp&quot;);</translation>
     </message>
     <message>
         <source>
@@ -28,7 +28,7 @@ Fermeture du lecteur en cours.</translation>
     <name>AudioWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation>Lecteur OPIE</translation>
+        <translation>OpiePayer</translation>
     </message>
 </context>
 <context>
@@ -39,7 +39,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Error: There is no file selected</source>
-        <translation>Erreur: Il n&apos;y a pas de fichier sélectionné</translation>
+        <translation>Erreur : pas de fichier sélectionné</translation>
     </message>
     <message>
         <source>File not found</source>
@@ -55,7 +55,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Sorry, no appropriate decoders found for this file: &lt;i&gt;</source>
-        <translation>Désolé, impossible de trouvé un décodeur approprié pour le fichier: &lt;i&gt;</translation>
+        <translation>Désolé, impossible de trouvé un décodeur approprié pour ce fichier: &lt;i&gt;</translation>
     </message>
     <message>
         <source>Error opening file</source>
@@ -89,19 +89,19 @@ Fermeture du lecteur en cours.</translation>
     <name>PlayListWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation>Lecteur OPIE</translation>
+        <translation>OpiePlayer</translation>
     </message>
     <message>
         <source>Play Operations</source>
-        <translation>Opérations de lecture</translation>
+        <translation>Opérations de Lecture</translation>
     </message>
     <message>
         <source>Add to Playlist</source>
-        <translation>Ajouter à la liste</translation>
+        <translation>Ajouter à la Liste</translation>
     </message>
     <message>
         <source>Remove from Playlist</source>
-        <translation>Enlever de la liste</translation>
+        <translation>Supprimer de la Liste</translation>
     </message>
     <message>
         <source>Play</source>
@@ -121,7 +121,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Clear List</source>
-        <translation>Vider la liste</translation>
+        <translation>Vider la Liste</translation>
     </message>
     <message>
         <source>Add all audio files</source>
@@ -137,7 +137,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Save PlayList</source>
-        <translation>Sauvegarder la liste</translation>
+        <translation>Sauvegarder Liste</translation>
     </message>
     <message>
         <source>Open File or URL</source>
@@ -153,7 +153,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Full Screen</source>
@@ -161,7 +161,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation>échelle</translation>
+        <translation>Echelle</translation>
     </message>
     <message>
         <source>Move Up</source>
@@ -169,7 +169,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Move Down</source>
@@ -201,19 +201,19 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation>Lecteur Opie:</translation>
+        <translation>OpiePlayer :</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Plus de place</translation>
+        <translation>Plus de mémoire</translation>
     </message>
     <message>
         <source>There was a problem saving the playlist.
 Your playlist may be missing some entries
 the next time you start it.</source>
-        <translation>Il y a eu un problème lors de la sauvegarde de la liste.
-Votre liste sera peut-être incomplète lors
-du prochain chargement.</translation>
+        <translation>Un problème est survenu lors de la sauvegarde
+de la liste. Votre liste sera peut-être incomplète
+lors du prochain chargement.</translation>
     </message>
     <message>
         <source>Invalid File</source>
@@ -221,16 +221,16 @@ du prochain chargement.</translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
-        <translation>Il y a eu un problème lors du chargement du fichier.</translation>
+        <translation>Un problème est survenu lors du chargement du fichier.</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
-        <translation>Effacer la liste?</translation>
+        <translation>Supprimer la liste ?</translation>
     </message>
     <message>
         <source>You really want to delete
 this playlist?</source>
-        <translation>Voulez-vous réellement détruire
+        <translation>Voulez-vous vraiment détruire
 cette liste?</translation>
     </message>
     <message>
@@ -247,19 +247,19 @@ cette liste?</translation>
     </message>
     <message>
         <source>Play Selected</source>
-        <translation>Lire la sélection</translation>
+        <translation>Lire la Sélection</translation>
     </message>
     <message>
         <source>Open file or URL</source>
-        <translation>Ouvrir un fichier ou une URL</translation>
+        <translation>Ouvrir fichier ou URL</translation>
     </message>
     <message>
         <source>Save m3u Playlist </source>
-        <translation>Sauver la liste m3u</translation>
+        <translation>Sauver Liste m3u</translation>
     </message>
     <message>
         <source>Skins</source>
-        <translation>&quot;Skins&quot;</translation>
+        <translation>Skins</translation>
     </message>
     <message>
         <source>Path</source>
@@ -270,7 +270,7 @@ cette liste?</translation>
     <name>VideoWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation>Lecteur Opie</translation>
+        <translation>OpiePlayer</translation>
     </message>
 </context>
 </TS>

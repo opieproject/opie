@@ -4,7 +4,7 @@
     <name>AddNetworkSettingBase</name>
     <message>
         <source>Add Network Service</source>
-        <translation>Ajouter un service réseau</translation>
+        <translation>Ajouter Service Réseau</translation>
     </message>
     <message>
         <source>&lt;P&gt;These are the network services available to be added.</source>
@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>Remove</source>
-        <translation>Enlever</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Properties</source>

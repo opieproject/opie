@@ -40,11 +40,11 @@
     </message>
     <message>
         <source>Symlinks</source>
-        <translation>Lien Symboliques</translation>
+        <translation>Liens Symboliques</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Vue</translation>
+        <translation>Affichage</translation>
     </message>
     <message>
         <source>Previous dir</source>

@@ -96,7 +96,7 @@
     </message>
     <message>
         <source>File does not exist !</source>
-        <translation>Le fichier n&apos;existe pas!</translation>
+        <translation>Le fichier n&apos;existe pas !</translation>
     </message>
 </context>
 </TS>

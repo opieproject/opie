@@ -3,7 +3,7 @@
     <name>PIMSpreadsheetWindow</name>
     <message>
         <source>Spreadsheet</source>
-        <translation>Tableur</translation>
+        <translation>Spreadsheet</translation>
     </message>
     <message>
         <source>New</source>
@@ -38,7 +38,7 @@
     <name>SpreadsheetWidget</name>
     <message>
         <source>SpreadsheetWidget</source>
-        <translation></translation>
+        <translation>SpreadsheetWidget</translation>
     </message>
 </context>
 </TS>

@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>No active tasks</source>
-        <translation>Pas de tâches actives</translation>
+        <translation>Pas de tâche active</translation>
     </message>
 </context>
 <context>

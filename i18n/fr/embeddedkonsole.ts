@@ -186,15 +186,15 @@
     </message>
     <message>
         <source>Wrap</source>
-        <translation>Wrap</translation>
+        <translation>Retour</translation>
     </message>
     <message>
         <source>Use Beep</source>
-        <translation>Utiliser les bip</translation>
+        <translation>Utiliser les bips</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation>tableau par dessus</translation>
+        <translation>Onglets au dessus</translation>
     </message>
 </context>
 <context>

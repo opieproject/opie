@@ -22,11 +22,11 @@
     <name>UserDialog</name>
     <message>
         <source>Add User</source>
-        <translation>Ajouter un utilisateur</translation>
+        <translation>Ajouter un Utilisateur</translation>
     </message>
     <message>
         <source>Edit User</source>
-        <translation>Editer un utilisateur</translation>
+        <translation>Editer un Utilisateur</translation>
     </message>
 </context>
 </TS>
