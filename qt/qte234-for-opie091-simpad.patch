@@ -1,12 +1,12 @@
---- src/kernel/qkeyboard_qws.cpp.orig	Fri May 30 16:05:20 2003
-+++ src/kernel/qkeyboard_qws.cpp	Fri May 30 16:03:41 2003
+--- qt-2.3.5/src/kernel/qkeyboard_qws.cpp~qte234-for-opie091-simpad	2003-06-13 16:59:33.000000000 +0200
++++ qt-2.3.5/src/kernel/qkeyboard_qws.cpp	2003-06-13 16:59:33.000000000 +0200
 @@ -37,6 +37,7 @@
  #include <qapplication.h>
  #include <qsocketnotifier.h>
  #include <qnamespace.h>
 +#include <qdatetime.h>
  #include <qtimer.h>
-
+ 
  #include <stdlib.h>
 @@ -131,6 +132,59 @@
  
@@ -68,7 +68,7 @@
  #ifdef QT_QWS_SL5XXX
  static const QWSServer::KeyMap keyM[] = {
      {	Qt::Key_unknown,	0xffff  , 0xffff  , 0xffff  }, // 00
-@@ -1440,7 +1494,11 @@
+@@ -1444,7 +1498,11 @@
      } else {
  	type = spec;
      }
@@ -81,17 +81,17 @@
      if ( type == "Buttons" ) {
  #if defined(QT_QWS_YOPY)
  	handler = new QWSyopyButtonsHandler();
-@@ -1469,6 +1527,217 @@
+@@ -1473,6 +1531,217 @@
      return keyM;
  }
-
+ 
 -#endif // QT_NO_QWS_KEYBOARD
-
+ 
 +/*
 + * SIMpad switches handler
 + * (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
 + */
-+
+ 
 +
 +QWSsimpadButtonsHandler::QWSsimpadButtonsHandler()
 +                        :QWSKeyboardHandler(), fd( -1 ),
@@ -106,7 +106,7 @@
 +        qWarning( "SimpadButtonsHandler(): can't open %s", SIMPAD_SWITCHES_DEVICE );
 +        return;
 +    }
-
++
 +    notifier = new QSocketNotifier( fd, QSocketNotifier::Read, this );
 +    connect( notifier, SIGNAL( activated(int) ),this, SLOT( readSwitchesData() ) );
 +
@@ -300,3 +300,68 @@
 +
 +
 +#endif // QT_NO_QWS_KEYBOARD
+--- qt-2.3.5/src/kernel/qwsmouse_qws.cpp~qte234-for-opie091-simpad	2003-04-02 03:26:52.000000000 +0200
++++ qt-2.3.5/src/kernel/qwsmouse_qws.cpp	2003-06-13 16:59:33.000000000 +0200
+@@ -47,6 +47,7 @@
+ #include <stdlib.h>
+ #include <stdio.h>
+ #include <sys/ioctl.h>
++#include <sys/time.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
+@@ -67,6 +68,7 @@
+         unsigned short x;
+         unsigned short y;
+         unsigned short pad;
++        struct timeval stamp;
+ } TS_EVENT;
+ #elif defined(QT_QWS_SL5XXX)
+ #define QT_QWS_SL5XXX_RAW
+@@ -1238,29 +1240,11 @@
+     : samples(QT_QWS_TP_SAMPLE_SIZE), currSample(0), lastSample(0), 
+     numSamples(0), skipCount(0)
+ {
+-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
+-#if defined(QT_QWS_IPAQ)
+-# ifdef QT_QWS_IPAQ_RAW
+-    if ((mouseFD = open( "/dev/h3600_tsraw", O_RDONLY | O_NDELAY)) < 0) {
+-# else
+-    if ((mouseFD = open( "/dev/h3600_ts", O_RDONLY | O_NDELAY)) < 0) {
+-# endif
+-        qWarning( "Cannot open /dev/h3600_ts (%s)", strerror(errno));
++#ifdef QT_QWS_SIMPAD
++    if ((mouseFD = open( "/dev/touchscreen/ucb1x00", O_RDONLY | O_NONBLOCK )) < 0) {
++        qWarning( "Cannot open /dev/touchscreen/ucb1x00 (%s)", strerror(errno));
+ 	return;
+     }
+-#elif defined(QT_QWS_SL5XXX)
+-//# ifdef QT_QWS_SL5XXX_TSRAW
+-# if 0
+-    if ((mouseFD = open( "/dev/tsraw", O_RDONLY | O_NDELAY)) < 0) {
+-        qWarning( "Cannot open /dev/tsraw (%s)", strerror(errno));
+-       return;
+-    }
+-# else
+-    if ((mouseFD = open( "/dev/ts", O_RDONLY | O_NDELAY)) < 0) {
+-        qWarning( "Cannot open /dev/ts (%s)", strerror(errno));
+-        return;
+-     }
+-# endif
+ #endif
+ 
+     QSocketNotifier *mouseNotifier;
+@@ -1269,12 +1253,11 @@
+     connect(mouseNotifier, SIGNAL(activated(int)),this, SLOT(readMouseData()));
+     waspressed=FALSE;
+     mouseIdx = 0;
+-#endif
+ }
+ 
+ QTPanelHandlerPrivate::~QTPanelHandlerPrivate()
+ {
+-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX)
++#if defined(QT_QWS_IPAQ) || defined(QT_QWS_SL5XXX) || defined(QT_QWS_SIMPAD)
+     if (mouseFD >= 0)
+ 	close(mouseFD);
+ #endif
