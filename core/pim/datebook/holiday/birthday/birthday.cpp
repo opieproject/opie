@@ -23,11 +23,26 @@ QStringList Birthday::entries(const QDate&aDate)
 {
     QStringList ret;
     if ( m_contactdb->hasQuerySettings( Opie::OPimContactAccess::DateDay ) ){
-        Opie::OPimContact querybirthdays;
+        Opie::OPimContact querybirthdays,queryanniversary;
+        QString pre;
         querybirthdays.setBirthday(aDate);
+        queryanniversary.setAnniversary(aDate);
         m_list = m_contactdb->queryByExample( querybirthdays,Opie::OPimContactAccess::DateDay| Opie::OPimContactAccess::DateMonth);
         if ( m_list.count() > 0 ){
-            QString pre = QObject::tr("Birthday","holidays")+" ";
+            pre = QObject::tr("Birthday","holidays")+" ";
+            int z = 0;
+            for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
+                if (z) {
+                    pre+=", ";
+                }
+                pre+=((*m_it).fullName());
+                ++z;
+            }
+            ret.append(pre);
+        }
+        m_list = m_contactdb->queryByExample( queryanniversary,Opie::OPimContactAccess::DateDay| Opie::OPimContactAccess::DateMonth);
+        if ( m_list.count() > 0 ){
+            pre = QObject::tr("Anniversary","holidays")+" ";
             int z = 0;
             for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
                 if (z) {
