@@ -1,11 +1,5 @@
 Stuff todo until OPIE 1.0 :
 
-----> This main branch ist currently stable enough for
-----> snapshots.. To avoid corrupted snapshots, we currently
-----> working on a different branch..
-----> YOU FIND THE CURRENT WORK IN THE BRANCH "GO_FOR_OPIE_1_0"
-
-
 Pending bugfixes from previous work:
 
 Urgent:
@@ -13,8 +7,10 @@ Urgent:
 
 Important:
 
-- Name order selected in "contacteditor" not used in list view.
+- Redesign of the structure of abtable into abview, abtableview, ... 
+- Redesign of Contacteditor
 
+- Name order selected in "contacteditor" not used in list view.
 - Overview window cleanup needed..
 - Cursor keys should work in detail-view (ablabel)
   -> Ablabel should be removed and Abtable should be increased with
