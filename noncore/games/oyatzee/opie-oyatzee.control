@@ -1,5 +1,5 @@
 Package: opie-oyatzee
-Files: bin/oyatzee apps/Games/oyatzee.desktop pics/oyatzee
+Files: plugins/applications/liboyatzee.so* bin/oyatzee apps/Games/oyatzee.desktop pics/oyatzee
 Priority: optional
 Section: opie/games
 Maintainer: Carsten Niehaus <cniehaus@handhelds.org>

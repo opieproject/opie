@@ -30,6 +30,7 @@ class OYatzee : public QMainWindow {
 	public:
 		OYatzee( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
 		~OYatzee();
+		static QString appName() { return QString::fromLatin1("oyatzee"); }
 
 		Game *g();
 		DiceWidget *dw;

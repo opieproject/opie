@@ -1,6 +1,4 @@
-TEMPLATE	= app
-CONFIG		= qt warn_on 
-DESTDIR		= $(OPIEDIR)/bin
+CONFIG		= qt quick-app
 HEADERS		= oyatzee.h
 SOURCES		= main.cpp oyatzee.cpp
 TARGET		= oyatzee
