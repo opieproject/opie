@@ -55,19 +55,19 @@ void AdvancedFm::showMenuHidden()
 {
   if (b)
 		{
-    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
-    currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
-    fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
+			CurrentDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+			OtherDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+			fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
 //    b=FALSE;
 
-  }
+		}
 	else
 		{
-    currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
-    currentRemoteDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
-    fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
+			CurrentDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+			OtherDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+			fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
 //    b=TRUE;
-  }
+		}
   populateView();
 //  populateRemoteView();
 //    if(b) qDebug("<<<<<<<<<<<<<<<<<<<<<<<<<<<< true");
@@ -79,6 +79,7 @@ void AdvancedFm::showHidden()
   if (b)
 		{
 			CurrentDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+			OtherDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
 //     fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
 //    b=FALSE;
 
@@ -86,6 +87,7 @@ void AdvancedFm::showHidden()
 	else
 		{
 			CurrentDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+s			OtherDir()->setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
 //     fileMenu->setItemChecked( fileMenu->idAt(0),FALSE);
 //    b=TRUE;
 		}

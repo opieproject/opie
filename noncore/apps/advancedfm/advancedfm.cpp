@@ -286,7 +286,6 @@ void AdvancedFm::ListPressed( int mouse, QListViewItem *, const QPoint& , int ) 
 			{
         cancelRename();
 			}
-
   }
 	break;
   case 2:
@@ -367,17 +366,17 @@ QStringList AdvancedFm::getPath()
 {
   QStringList strList;
 	QListView *thisView=CurrentView();
-    QList<QListViewItem> * getSelectedItems( QListView * thisView );
-    QListViewItemIterator it( thisView );
-    for ( ; it.current(); ++it )
-			{
-				if ( it.current()->isSelected() )
-					{
-						strList <<  it.current()->text(0);
+	QList<QListViewItem> * getSelectedItems( QListView * thisView );
+	QListViewItemIterator it( thisView );
+	for ( ; it.current(); ++it )
+		{
+			if ( it.current()->isSelected() )
+				{
+					strList <<  it.current()->text(0);
 //        qDebug(it.current()->text(0));
-					}
-			}
-    return strList;
+				}
+		}
+	return strList;
 }
 
 void AdvancedFm::homeButtonPushed()
@@ -393,9 +392,8 @@ void AdvancedFm::docButtonPushed()
 {
   QString current = QPEApplication::documentDir();
   chdir( current.latin1() );
-
-    CurrentDir()->cd( current, TRUE);
-    populateView();
+	CurrentDir()->cd( current, TRUE);
+	populateView();
   update();
 }
 
@@ -403,8 +401,8 @@ void AdvancedFm::SDButtonPushed()
 {
 	QString current = "/mnt/card";// this can change so fix
   chdir( current.latin1() );
-    CurrentDir()->cd( current, TRUE);
-    populateView();
+	CurrentDir()->cd( current, TRUE);
+	populateView();
   update();
 }
 
@@ -415,7 +413,6 @@ void AdvancedFm::CFButtonPushed()
 		current= "/mnt/cf"; //zaurus
 	else
 		current = "/mnt/hda"; //ipaq
-
 	chdir( current.latin1() );
 	CurrentDir()->cd( current, TRUE);
 	populateView();
@@ -787,7 +784,8 @@ void AdvancedFm::removeCustomDir()
 //first remove list
   if(list.grep(dir,true).isEmpty())
     {
-			QMessageBox::message("AdvancedFm",tr("Cannot remove current directory\nfrom bookmarks.\nIt is not bookmarked!!"));
+			QMessageBox::message("AdvancedFm",
+													 tr("Cannot remove current directory\nfrom bookmarks.\nIt is not bookmarked!!"));
     }
   else
     {
