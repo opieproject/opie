@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.h,v 1.4.2.3 2003-07-24 13:15:37 harlekin Exp $
+ * $Id: modem.h,v 1.4.2.4 2003-07-30 20:31:12 tille Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -48,6 +48,8 @@ public:
 
   const QString getDevice() {return device;};
   void setDevice(const QString dev) {device = dev;};
+
+  void save();
 
   bool opentty();
   bool closetty();

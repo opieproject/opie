@@ -23,7 +23,7 @@ PPPData* InterfacePPP::data()const
     if (!_dataPtr){
         qDebug("creating new Data obj");
         _dataPtr = new PPPData();
-        _dataPtr->setModemDevice( getInterfaceName() );
+        _dataPtr->setDevice( getInterfaceName() );
         _dataPtr->setAccount( getHardwareName() );
     }
     return _dataPtr;

@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.11.2.6 2003-07-30 03:55:02 tille Exp $
+ * $Id: pppdata.cpp,v 1.11.2.7 2003-07-30 20:31:12 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -42,19 +42,23 @@
 #define SEP QString("%1SEPARATOR%1")
 
 PPPData::PPPData()
-    : //modemDeviceGroup(-1),
-      passwd(""),
+    : passwd(""),
+      _modemName(""),
       highcount(-1),        // start out with no entries
+      highcountdev(-1),        // start out with no entries
 //      caccount(-1),         // set the current account index also
       suidprocessid(-1),    // process ID of setuid child
       pppdisrunning(false),
       pppderror(0)
 {
   highcount = readNumConfig(GENERAL_GRP, NUMACCOUNTS_KEY, 0) - 1;
-
+  highcountdev = readNumConfig(GENERAL_GRP, NUMDEVICES_KEY, 0) - 1;
   Config cfg = config();
   cfg.setGroup(GENERAL_GRP);
   accountList = cfg.readListEntry(ACCOUNT_LIST, ',' );
+  deviceList = cfg.readListEntry(DEVICESNAMES_LIST, ',' );
+  qDebug("PPPData::PPPData has a accountList %s", accountList.join("---").latin1());
+  qDebug("PPPData::PPPData has a deviceList %s", deviceList.join("---").latin1());
 
 //   if (highcount > MAX_ACCOUNTS)
 //     highcount = MAX_ACCOUNTS;
@@ -85,11 +89,13 @@ void PPPData::save()
 {
     qDebug("PPPData saving data");
     writeConfig(GENERAL_GRP, NUMACCOUNTS_KEY, count());
+    writeConfig(GENERAL_GRP, NUMDEVICES_KEY, highcountdev + 1);
     QString key;
     QStringList keys;
     Config cfg = config();
     cfg.setGroup(GENERAL_GRP);
     cfg.writeEntry(ACCOUNT_LIST, accountList, ',' );
+    cfg.writeEntry(DEVICESNAMES_LIST, deviceList, ',' );
 
     for( QMap<QString,QString>::Iterator it = stringEntries.begin();
          it != stringEntries.end(); ++it ){
@@ -354,11 +360,29 @@ const QString PPPData::modemDevice() {
 }
 
 
+// const QString PPPData::modemName()
+// {
+//     return readConfig(modemGroup(), MODEMNAME_KEY);
+// }
+
+// bool PPPData::setModemName(const QString &n) {
+//     qDebug("Setting modem name to >%s<", n.latin1());
+//     _modemName = n;
+//     writeConfig(cgroup, MODEMNAME_KEY, n);
+//     return true; //FIXME
+// }
+
+// bool PPPData::changeModemName(const QString &n) {
+//     qDebug("Setting modem name to >%s<", n.latin1());
+//     _modemName = n;
+//     writeConfig(modemGroup(), MODEMNAME_KEY, n);
+//     return true; //FIXME
+// }
+
 bool PPPData::setModemDevice(const QString &n) {
     qDebug("Setting modem dev to >%s<", n.latin1());
-    deviceName = n;
     writeConfig(modemGroup(), MODEMDEV_KEY, n);
-    return true;
+    return true; //FIXME
 }
 
 
@@ -803,7 +827,7 @@ bool PPPData::deleteAccount() {
         }
     }
 
-    return false;
+    return true;
 }
 
 
@@ -833,7 +857,7 @@ int PPPData::newaccount() {
   return highcount;
 }
 
-int PPPData::copyaccount(int i) {
+int PPPData::copyaccount(const QString&) {
 // FIXME: PPPData::copyaccount
 //  if(highcount >= MAX_ACCOUNTS)
     return -1;
@@ -870,6 +894,7 @@ void PPPData::setAccname(const QString &n) {
     if (def)
       setDefaultAccount(n);
   }
+  writeConfig(cgroup, NAME_KEY, n);
 }
 
 
@@ -1254,9 +1279,9 @@ void PPPData::setpppdError(int err) {
 
 QString PPPData::modemGroup()
 {
-    QString g = deviceName;
-    g.replace( QRegExp("/"),"_");
-    return QString("%1_%1").arg(MODEM_GRP).arg(g);
+    if (_modemName.isEmpty())
+        _modemName = deviceList[0];
+   return _modemName;
 }
 
 
@@ -1306,6 +1331,13 @@ QString PPPData::encodeWord(const QString &s) {
     return r;
 }
 
+QStringList PPPData::getDevicesList()
+{
+     Config cfg("NetworkSetupPPP");
+     cfg.setGroup("Devices_General");
+     return cfg.readListEntry(DEVICES_LIST,DEVICES_LIST_SEP);
+}
+
 QStringList PPPData::getAccountList()
 {
     QStringList list;
@@ -1316,5 +1348,134 @@ QStringList PPPData::getAccountList()
         list << accname();
     }
     cgroup = save_cgroup;
+    return list;
+};
+
+
+const QString PPPData::devname()
+{
+    QString tmp = readConfig(modemGroup(), MODEMNAME_KEY );
+    qDebug("PPPData::devname() of %s is %s", modemGroup().latin1(), tmp.latin1());
+    return tmp;
+}
+
+void PPPData::setDevname(const QString &n) {
+  // if(!cgroup.isNull()) {
+//     // are we manipulating the default account's name ? then change it, too.
+//     bool def = accname() == defaultAccount();
+//     writeConfig(cgroup, NAME_KEY, n);
+//     if (def)
+//       setDefaultAccount(n);
+//   }
+    writeConfig(modemGroup(), MODEMNAME_KEY, n );
+}
+
+
+bool PPPData::setDevice(const QString &dev )
+{
+    qDebug("setting device to >%s<", dev.latin1());
+    QString save_mName = _modemName;
+    for ( QStringList::Iterator it = deviceList.begin(); it != deviceList.end(); ++it ) {
+        _modemName = *it;
+        qDebug("PPPData::setDevice %s is named %s", _modemName.latin1(), devname().latin1() );
+        qDebug( "iterator %s", (*it).latin1() );
+        if(devname() == dev) {
+            qDebug("SUCCESS");
+            return true;
+        }
+
+    }
+    _modemName = save_mName;
+    qDebug("FAILURE");
+    return false;
+}
+
+bool PPPData::deleteDevice()
+{
+    // FIXME: check if this account exists in a config...
+    Config cfg = PPPData::config();
+    cfg.setGroup(modemGroup());
+    cfg.clearGroup();
+    accountList.remove(modemGroup());
+
+    QString key;
+    QStringList keys;
+    for( QMap<QString,QString>::Iterator it = stringEntries.begin();
+         it != stringEntries.end(); ++it ){
+        QString val = it.data();
+        key = it.key();
+        keys = QStringList::split( "SEPARATOR", key );
+        if(keys[0]==modemGroup()){
+            stringEntries.remove( it );
+            qDebug("deleting >%s< key >%s< value >%s<", keys[0].latin1(), keys[1].latin1(), val.latin1() );
+        }
+    }
+    for( QMap<QString,int>::Iterator it = intEntries.begin();
+         it != intEntries.end(); ++it ){
+        int val = it.data();
+        key = it.key();
+        keys = QStringList::split( "SEPARATOR", key );
+        if(keys[0]==modemGroup()){
+            intEntries.remove( it );
+            qDebug("deleting >%s< key >%s< value >%i<", keys[0].latin1(), keys[1].latin1(), val );
+        }
+    }
+    for( QMap<QString,QStringList>::Iterator it = listEntries.begin();
+         it != listEntries.end(); ++it ){
+        QStringList val = it.data();
+        key = it.key();
+        if(keys[0]==modemGroup()){
+            listEntries.remove( it );
+            sepEntries.remove( key );
+            qDebug("deleting >%s< key >%s< value >%s<", keys[0].latin1(), keys[1].latin1(), val.join("").latin1() );
+        }
+    }
+
+    return true;
+
+}
+
+bool PPPData::deleteDevice(const QString &dev)
+{
+  if(!setDevice(dev))
+    return false;
+
+  deleteDevice();
+
+  return true;
+
+}
+
+int PPPData::newdevice()
+{
+
+    qDebug("PPPData::newdevice highcount %i",highcountdev);
+
+
+  QString tmp;
+  tmp.sprintf("%s%i", MODEM_GRP, ++highcountdev);
+  _modemName = QString(tmp);
+  deviceList << tmp;
+  qDebug("PPPData::newdevice() Group: >%s<",cgroup.latin1());
+  return highcountdev;
+}
+
+int PPPData::copydevice(const QString&)
+{
+    return false;
+}
+
+
+QStringList PPPData::getDevicesNamesList()
+{
+    QStringList list;
+    QString save_mName = _modemName;
+    qDebug("PPPData::getDevicesNamesList has  %s", deviceList.join("---").latin1());
+    for ( QStringList::Iterator it = deviceList.begin(); it != deviceList.end(); ++it ) {
+        _modemName = *it;
+        qDebug("PPPData::getDevicesNamesList adding %s as %s",_modemName.latin1(), devname().latin1());
+        list << devname();
+    }
+    _modemName = save_mName;
     return list;
 };
