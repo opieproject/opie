@@ -51,7 +51,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     QWidget *container = new QWidget( sv->viewport() );
     sv->addChild( container );
 
-    QVBoxLayout *vb = new QVBoxLayout( container, 4 );
+    QVBoxLayout *vb = new QVBoxLayout( container, 3 );
 
     QString kernelVersionString;
     QFile file( "/proc/version" );
