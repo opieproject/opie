@@ -88,6 +88,19 @@ public:
      */
     virtual void setAutoScale(bool how);
     /**
+     * set if the image should be scaled to the size of the viewport if larger(!)
+     * and/or rotate to best fit. You avoid double repainting when you want to switch
+     * booth values.
+     *
+     * if autoscaling is set when loading a jpeg image, it will use a feature of
+     * jpeg lib to load the image scaled to display size. If switch of later the
+     * image will reloaded.
+     *
+     * @param scale true - display image scaled down otherwise not
+     * @param rotate true - the image will rotate for best fit
+     */
+    virtual void setAutoScaleRotate(bool scale, bool rotate);
+    /**
      * set if there should be displayed a small zoomer widget at the right bottom of
      * the view when the image is larger than the viewport.
      *

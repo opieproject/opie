@@ -7,7 +7,6 @@
 
 #include <qimage.h>
 #include <qlayout.h>
-#include <qpe/qcopenvelope_qws.h>
 
 /* for usage with the bitset */
 #define AUTO_SCALE 0
@@ -110,14 +109,7 @@ void OImageScrollView::loadJpeg(bool interncall)
         setImageScaledLoaded(false);
     }
     if (real_load) {
-        {
-            QCopEnvelope( "QPE/System", "busy()" );
-        }
         _original_data = iio.read() ? iio.image() : QImage();
-        {
-            QCopEnvelope env( "QPE/System", "notBusy(QString)" );
-            env << "Image loaded";
-        }
     }
 }
 
@@ -132,17 +124,10 @@ void OImageScrollView::setImage( const QString& path ) {
         setImageIsJpeg(true);
         loadJpeg();
     } else {
-        {
-            QCopEnvelope( "QPE/System", "busy()" );
-        }
         setImageIsJpeg(false);
         _original_data.load(path);
         _original_data.convertDepth(QPixmap::defaultDepth());
         _original_data.setAlphaBuffer(false);
-        {
-            QCopEnvelope env( "QPE/System", "notBusy(QString)" );
-            env << "Image loaded";
-        }
     }
     _image_data = QImage();
     if (FirstResizeDone()) {
@@ -200,12 +185,15 @@ bool OImageScrollView::AutoRotate()const
     return m_states.testBit(AUTO_ROTATE);
 }
 
+void OImageScrollView::setAutoScaleRotate(bool scale, bool rotate)
+{
+    m_states.setBit(AUTO_ROTATE,rotate);
+    setAutoScale(scale);
+}
+
 void OImageScrollView::setAutoScale(bool how)
 {
     m_states.setBit(AUTO_SCALE,how);
-    if (!how) {
-        setAutoRotate(false);
-    }
     _image_data = QImage();
     if (ImageIsJpeg() && how == false && ImageScaledLoaded()==true) {
         loadJpeg(true);
@@ -358,9 +346,6 @@ void OImageScrollView::generateImage()
         if (_zoomer) _zoomer->setImage( _image_data );
         return;
     }
-    {
-        QCopEnvelope( "QPE/System", "busy()" );
-    }
     if (width()>height()&&_original_data.width()<_original_data.height() ||
         width()<height()&&_original_data.width()>_original_data.height()) {
         if (AutoRotate()) r = Rotate90;
@@ -408,10 +393,6 @@ void OImageScrollView::generateImage()
      * invalidate
      */
     _image_data=QImage();
-    {
-        QCopEnvelope env( "QPE/System", "notBusy(QString)" );
-        env << "Image generated";
-    }
 }
 
 void OImageScrollView::resizeEvent(QResizeEvent * e)
