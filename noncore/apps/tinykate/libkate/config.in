@@ -1,0 +1,4 @@
+  config LIBKATE
+    boolean "libkate"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && TINYKATE
