@@ -3,148 +3,148 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Labi</translation>
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h1&gt;Brīdinājums uz %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
     <name>OTaskEditor</name>
     <message>
         <source>Task Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzdevumu Redaktors</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informācija</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Statuss</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>Brīdinājumi</translation>
     </message>
     <message>
         <source>Recurrence</source>
-        <translation type="unfinished"></translation>
+        <translation>Atkārtošanās</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Opie Todolist</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Uzdevumi</translation>
     </message>
     <message>
         <source>Enter Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Ievadiet Darbu</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Darbu</translation>
     </message>
     <message>
         <source>silent</source>
-        <translation type="unfinished"></translation>
+        <translation>klusi</translation>
     </message>
     <message>
         <source>loud</source>
-        <translation type="unfinished"></translation>
+        <translation>skaļi</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns no sagataves</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns Uzdevums</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai izveidotu jaunu uzdevumu.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Uzdevumu</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai labotu tekošo uzdevumu.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Skatīt Uzdevumu</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai dzēstu tekošo uzdevumu.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst visu...</translation>
     </message>
     <message>
         <source>Delete completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēšana pabeigta</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Pavairot</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Bīmot</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai nosūtītu uzdevumu uz citu iekārtu.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt pabeigtus uzdevumus</translation>
     </message>
     <message>
         <source>Show only over-due tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt tikai kavētos darbus</translation>
     </message>
     <message>
         <source>Show task deadlines</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt uzdevumu termiņus</translation>
     </message>
     <message>
         <source>Show quick task bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt ātro uzdevumu joslu</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Dati</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorija</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opcijas</translation>
     </message>
     <message>
         <source>QuickEdit</source>
-        <translation type="unfinished"></translation>
+        <translation>ĀtrāLabošana</translation>
     </message>
     <message>
         <source>This is a listing of all current tasks.
@@ -154,7 +154,13 @@ The list displays the following information:
 2. Priority - a graphical representation of task priority.  Double-click here to modify.
 3. Description - description of task.  Click here to select the task.
 4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šeit ir visu tekošo uzdevumu saraksts.
+
+Saraksts attēlo sekojošu informāciju:
+1. Pabeigts - Zaļš ķeksis norāda kad uzdevums ir pabeigts. Klikšķiniet lai uzdevumu pabeigtu.
+2. Prioritāte - prioritātes grafiskais atainojums.  Dubultklikšķis šeit, lai labotu.
+3. Apraksts - uzdevuma apraksts.  Klikškiniet šeit lai izvēlētos uzdevumu.
+4. Termiņš - tiek rādīts tikai tad ja darbam ir līdz termiņš.  Šo kolonnu var rādīt/paslēpt izvēloties Opcijas-&gt;&apos;Rādīt uzdevumu termiņus&apos; no izvēlnes zemāk.</translation>
     </message>
     <message>
         <source>All Categories</source>
