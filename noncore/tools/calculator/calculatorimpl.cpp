@@ -44,9 +44,9 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
 				WFlags f )
     : Calculator( parent, name, f )
 {
-    xtopowerofy = Resource::loadPixmap("xtopowerofy");
-    ythrootofx = Resource::loadPixmap("ythrootofx");
-    oneoverx = Resource::loadPixmap("oneoverx");
+    xtopowerofy = Resource::loadPixmap("calculator/xtopowerofy");
+    ythrootofx = Resource::loadPixmap("calculator/ythrootofx");
+    oneoverx = Resource::loadPixmap("calculator/oneoverx");
 
     memMark = new QLabel( "m", LCD );
     memMark->setFont( QFont( "helvetica", 12, QFont::Bold, TRUE ) );
