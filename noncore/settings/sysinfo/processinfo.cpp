@@ -34,7 +34,7 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     ProcessView = new QListView( this, "ProcessView" );
     int colnum = ProcessView->addColumn( tr( "PID" ) );
     ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
-    colnum = ProcessView->addColumn( tr( "Command" ),90 );
+    colnum = ProcessView->addColumn( tr( "Command" ),96 );
     ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     colnum = ProcessView->addColumn( tr( "Status" ) );
     ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
