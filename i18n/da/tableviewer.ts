@@ -3,67 +3,67 @@
     <name>QObject</name>
     <message>
         <source>KeyList::addKey() Cannot make default value for type %1, Key not added.</source>
-        <translation type="unfinished"></translation>
+        <translation>KeyList::addKey() Kunne ikke lave en standard værdi for typen %1, Nøglen blev ikke tilføjet.</translation>
     </message>
     <message>
         <source>DataElem::setField(%1, %2) No valid type found</source>
-        <translation type="unfinished"></translation>
+        <translation>DataElem::setField(%1, %2) Ingen brugbar type fundet</translation>
     </message>
 </context>
 <context>
     <name>TVBrowseKeyEntry</name>
     <message>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Nulstil</translation>
     </message>
     <message>
         <source>key</source>
-        <translation type="unfinished"></translation>
+        <translation>nøgle</translation>
     </message>
 </context>
 <context>
     <name>TVKeyEdit_gen</name>
     <message>
         <source>TableViewer - Edit Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabel viser - Redigér nøgler</translation>
     </message>
     <message>
         <source>Key Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nøgle navn</translation>
     </message>
     <message>
         <source>Key Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Nøgle type</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Ny</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Slet</translation>
     </message>
     <message>
         <source>Clear All</source>
-        <translation type="unfinished"></translation>
+        <translation>Slet alt</translation>
     </message>
 </context>
 <context>
     <name>TVListView</name>
     <message>
         <source>List View</source>
-        <translation type="unfinished"></translation>
+        <translation>Liste visning</translation>
     </message>
 </context>
 <context>
     <name>TableViewerWindow</name>
     <message>
         <source>Table Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabel viser</translation>
     </message>
     <message>
         <source>could not load Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke hente dokumentet</translation>
     </message>
 </context>
 </TS>
