@@ -1,5 +1,4 @@
-#CONFIG += qt warn_on release
-CONFIG += qt warn_on debug
+CONFIG += qt warn_on release
 TEMPLATE = app
 DESTDIR         = $(OPIEDIR)/bin
 #INTERFACES = citytimebase.ui
