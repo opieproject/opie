@@ -109,7 +109,7 @@ OpieMail::OpieMail( QWidget *parent, const char *name, WFlags  )
     settings = new Settings();
 
     folderView->populate( settings->getAccounts() );
-#if 1
+#if 0
     tvaluelist s = ValueExplode("a=1&b=holladiewaldfee&c=3&d=&e=3450");
     for (int i = 0; i < s.count();++i) {
         odebug<<"Key: " << s[i].key << " Value: " << s[i].data << oendl;
