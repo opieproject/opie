@@ -287,7 +287,7 @@ int suspend ( int fix_rtc )
 }
 
 
-static int onac ( void )
+int onac ( void )
 {
 	FILE *fp;
 	int on = 0;
