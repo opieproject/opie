@@ -3,6 +3,7 @@ Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Section: opie/system
 Priority: optional
 Version: 0.9.1
+Architecture: all
 Description: Reinstall opie.  Dummy package that reinstalls opie, by removing 
  everything and reinstalling it.
 Files:
