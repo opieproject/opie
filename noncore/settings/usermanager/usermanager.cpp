@@ -36,15 +36,15 @@ UserConfig::UserConfig(QWidget* parent, const char* name, WFlags fl) : QMainWind
 	// Create the toolbar.
 	QPEToolBar *toolbar = new QPEToolBar(this,"Toolbar");
 	toolbar->setHorizontalStretchable(1); // Is there any other way to get the toolbar to stretch of the full screen!?
-	adduserToolButton = new QToolButton(Resource::loadPixmap("userconfig/adduser"),"Add User",0,this,SLOT(addUser()),toolbar,"Add User");
-	edituserToolButton = new QToolButton(Resource::loadPixmap("userconfig/edituser"),"Edit User",0,this,SLOT(editUser()),toolbar,"Edit User");
-	deleteuserToolButton = new QToolButton(Resource::loadPixmap("userconfig/deleteuser"),"Delete User",0,this,SLOT(delUser()),toolbar,"Delete User");
+	adduserToolButton = new QToolButton(Resource::loadPixmap("usermanager/adduser"),"Add User",0,this,SLOT(addUser()),toolbar,"Add User");
+	edituserToolButton = new QToolButton(Resource::loadPixmap("usermanager/edituser"),"Edit User",0,this,SLOT(editUser()),toolbar,"Edit User");
+	deleteuserToolButton = new QToolButton(Resource::loadPixmap("usermanager/deleteuser"),"Delete User",0,this,SLOT(delUser()),toolbar,"Delete User");
 	QToolButton *userstext = new QToolButton(0,"User",0,0,0,toolbar,"User");
 	userstext->setUsesTextLabel(true);
 	toolbar->addSeparator();
-	addgroupToolButton = new QToolButton(Resource::loadPixmap("userconfig/addgroup"),"Add Group",0,this,SLOT(addGroup()),toolbar,"Add Group");
-	editgroupToolButton = new QToolButton(Resource::loadPixmap("userconfig/editgroup"),"Edit Group",0,this,SLOT(editGroup()),toolbar,"Edit Group");
-	deletegroupToolButton = new QToolButton(Resource::loadPixmap("userconfig/deletegroup"),"Delete Group",0,this,SLOT(delGroup()),toolbar,"Delete Group");
+	addgroupToolButton = new QToolButton(Resource::loadPixmap("usermanager/addgroup"),"Add Group",0,this,SLOT(addGroup()),toolbar,"Add Group");
+	editgroupToolButton = new QToolButton(Resource::loadPixmap("usermanager/editgroup"),"Edit Group",0,this,SLOT(editGroup()),toolbar,"Edit Group");
+	deletegroupToolButton = new QToolButton(Resource::loadPixmap("usermanager/deletegroup"),"Delete Group",0,this,SLOT(delGroup()),toolbar,"Delete Group");
 	QToolButton *groupstext = new QToolButton(0,"Group",0,0,0,toolbar,"Group");
 	groupstext->setUsesTextLabel(true);
 	addToolBar(toolbar,"myToolBar");
@@ -125,7 +125,7 @@ void UserConfig::getUsers() {
 			mytext=QString(accounts->pw_name)+" - ("+QString(accounts->pw_gecos)+")"; // The string displayed next to the icon.
 			mypixmap=Resource::loadPixmap(QString("users/"+accounts->pw_name));	// Is there an icon for this user?
 			if(mypixmap.isNull()) {
-				mypixmap=Resource::loadPixmap(QString("userconfig/usericon"));	// If this user has no icon, load the default icon.
+				mypixmap=Resource::loadPixmap(QString("usermanager/usericon"));	// If this user has no icon, load the default icon.
 			}
 			new QIconViewItem(usersIconView,mytext,mypixmap);	// Add the icon+text to the qiconview.
 		}
