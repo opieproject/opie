@@ -18,6 +18,8 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_FD
+
 #include "mainwindow.h"
 #include "todoentryimpl.h"
 #include "todotable.h"
