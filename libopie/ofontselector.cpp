@@ -38,17 +38,18 @@
 #include "ofontselector.h"
 
 class OFontSelectorPrivate {
-public: 
+public:
 	QListBox *      m_font_family_list;
 	QComboBox *     m_font_style_list;
 	QComboBox *     m_font_size_list;
 	QMultiLineEdit *m_preview;
 
-	bool            m_pointbug;
+	bool            m_pointbug : 1;
 
 	FontDatabase    m_fdb;
 };
 
+namespace {
 
 class FontListItem : public QListBoxText {
 public:
@@ -57,7 +58,7 @@ public:
 		m_name = t;
 		m_styles = styles;
 		m_sizes = sizes;
-		
+
 		QString str = t;
 		str [0] = str [0]. upper ( );
 		setText ( str );
@@ -67,17 +68,17 @@ public:
 	{
 		return m_name;
 	}
-	
+
 	const QStringList &styles ( ) const
 	{
 		return m_styles;
 	}
-	
+
 	const QValueList<int> &sizes ( ) const
 	{
 		return m_sizes;
 	}
-	
+
 private:
 	QStringList m_styles;
 	QValueList<int> m_sizes;
@@ -94,7 +95,8 @@ static int findItemCB ( QComboBox *box, const QString &str )
 	return -1;
 }
 
-
+}
+/* static same as anon. namespace */
 static int qt_version ( )
 {
 	const char *qver = qVersion ( );
@@ -102,7 +104,13 @@ static int qt_version ( )
 	return ( qver [0] - '0' ) * 100 + ( qver [2] - '0' ) * 10 + ( qver [4] - '0' );
 }
 
-
+/**
+ * Constructs the Selector object
+ * @param withpreview If a font preview should be given
+ * @param parent The parent of the Font Selector
+ * @param name The name of the object
+ * @param fl WidgetFlags
+ */
 OFontSelector::OFontSelector ( bool withpreview, QWidget *parent, const char *name, WFlags fl ) : QWidget ( parent, name, fl )
 {
 	d = new OFontSelectorPrivate ( );
@@ -135,7 +143,7 @@ OFontSelector::OFontSelector ( bool withpreview, QWidget *parent, const char *na
 		d-> m_preview = new QMultiLineEdit ( this, "Preview" );
 		d-> m_preview-> setAlignment ( AlignCenter );
 		d-> m_preview-> setWordWrap ( QMultiLineEdit::WidgetWidth );
-		d-> m_preview-> setMargin ( 3 ); 
+		d-> m_preview-> setMargin ( 3 );
 		d-> m_preview-> setText ( tr( "The Quick Brown Fox Jumps Over The Lazy Dog" ));
 		gridLayout-> addRowSpacing ( 5, 4 );
 		gridLayout-> addMultiCellWidget ( d-> m_preview, 6, 6, 0, 1 );
@@ -152,12 +160,25 @@ OFontSelector::~OFontSelector ( )
 	delete d;
 }
 
+/**
+ * This methods tries to set the font
+ * @param f The wishes font
+ * @return success or failure
+ */
 bool OFontSelector::setSelectedFont ( const QFont &f )
 {
 	return setSelectedFont ( f. family ( ), d-> m_fdb. styleString ( f ), f. pointSize ( ), QFont::encodingName ( f. charSet ( )));
 }
 
-bool OFontSelector::setSelectedFont ( const QString &familyStr, const QString &styleStr, int sizeVal, const QString & /*charset*/ )
+
+/**
+ * This is an overloaded method @see setSelectedFont
+ * @param familyStr The family of the font
+ * @param styleStr The style of the font
+ * @param sizeVal The size of font
+ * @param charset The charset to be used. Will be deprecated by QT3
+ */
+bool OFontSelector::setSelectedFont ( const QString &familyStr, const QString &styleStr, int sizeVal, const QString & charset )
 {
 	QString sizeStr = QString::number ( sizeVal );
 
@@ -166,7 +187,7 @@ bool OFontSelector::setSelectedFont ( const QString &familyStr, const QString &s
 		family = d-> m_font_family_list-> findItem ( "Helvetica" );
 	if ( !family )
 		family = d-> m_font_family_list-> firstItem ( );
-   	 d-> m_font_family_list-> setCurrentItem ( family );	
+   	 d-> m_font_family_list-> setCurrentItem ( family );
 	fontFamilyClicked ( d-> m_font_family_list-> index ( family ));
 
 	int style = findItemCB ( d-> m_font_style_list, styleStr );
@@ -184,10 +205,18 @@ bool OFontSelector::setSelectedFont ( const QString &familyStr, const QString &s
 		size = 0;
 	d-> m_font_size_list-> setCurrentItem ( size );
 	fontSizeClicked ( size );
-	
+
 	return (( family ) && ( style >= 0 ) && ( size >= 0 ));
 }
 
+/**
+ * This method returns the name, style and size of the currently selected
+ * font or false if no font is selected
+ * @param family The font family will be written there
+ * @param style The style will be written there
+ * @param size The size will be written there
+ * @return success or failure
+ */
 bool OFontSelector::selectedFont ( QString &family, QString &style, int &size )
 {
 	QString dummy;
@@ -195,29 +224,44 @@ bool OFontSelector::selectedFont ( QString &family, QString &style, int &size )
 }
 
 
+/**
+ * This method does return the font family or QString::null if there is
+ * no font item selected
+ * @return the font family
+ */
 QString OFontSelector::fontFamily ( ) const
 {
 	FontListItem *fli = (FontListItem *) d-> m_font_family_list-> item ( d-> m_font_family_list-> currentItem ( ));
-	
+
 	return fli ? fli-> family ( ) : QString::null;
 }
 
+/**
+ * This method will return the style of the font or QString::null
+ * @return the style of the font
+ */
 QString OFontSelector::fontStyle ( ) const
 {
 	FontListItem *fli = (FontListItem *) d-> m_font_family_list-> item ( d-> m_font_family_list-> currentItem ( ));
-	int fst = d-> m_font_style_list-> currentItem ( ); 
+	int fst = d-> m_font_style_list-> currentItem ( );
 
 	return ( fli && fst >= 0 ) ? fli-> styles ( ) [fst] : QString::null;
 }
 
+/**
+ * This method will return the font size or 10 if no font size is available
+ */
 int OFontSelector::fontSize ( ) const
 {
 	FontListItem *fli = (FontListItem *) d-> m_font_family_list-> item ( d-> m_font_family_list-> currentItem ( ));
-	int fsi = d-> m_font_size_list-> currentItem ( ); 
+	int fsi = d-> m_font_size_list-> currentItem ( );
 
 	return ( fli && fsi >= 0 ) ? fli-> sizes ( ) [fsi] : 10;
 }
 
+/**
+ * returns the charset of the font or QString::null
+ */
 QString OFontSelector::fontCharSet ( ) const
 {
 	FontListItem *fli = (FontListItem *) d-> m_font_family_list-> item ( d-> m_font_family_list-> currentItem ( ));
@@ -225,14 +269,18 @@ QString OFontSelector::fontCharSet ( ) const
 	return fli ? d-> m_fdb. charSets ( fli-> family ( )) [0] : QString::null;
 }
 
+/**
+ * Overloaded member function see above
+ * @see selectedFont
+ */
 bool OFontSelector::selectedFont ( QString &family, QString &style, int &size, QString &charset )
 {
 	int ffa = d-> m_font_family_list-> currentItem ( );
-	int fst = d-> m_font_style_list-> currentItem ( ); 
+	int fst = d-> m_font_style_list-> currentItem ( );
 	int fsi = d-> m_font_size_list-> currentItem ( );
-	
+
 	FontListItem *fli = (FontListItem *) d-> m_font_family_list-> item ( ffa );
-	
+
 	if ( fli ) {
 		family = fli-> family ( );
 		style = fst >= 0 ? fli-> styles ( ) [fst] : QString::null;
@@ -246,20 +294,20 @@ bool OFontSelector::selectedFont ( QString &family, QString &style, int &size, Q
 }
 
 
-			
+
 
 void OFontSelector::loadFonts ( QListBox *list )
 {
 	QStringList f = d-> m_fdb. families ( );
-	
+
 	for ( QStringList::ConstIterator it = f. begin ( ); it != f. end ( ); ++it ) {
 		QValueList <int> ps = d-> m_fdb. pointSizes ( *it );
-		
+
 		if ( d-> m_pointbug ) {
 			for ( QValueList <int>::Iterator it = ps. begin ( ); it != ps. end ( ); it++ )
 				*it /= 10;
 		}
-	
+
 		list-> insertItem ( new FontListItem ( *it, d-> m_fdb. styles ( *it ), ps ));
 	}
 }
@@ -268,30 +316,30 @@ void OFontSelector::fontFamilyClicked ( int index )
 {
 	QString oldstyle = d-> m_font_style_list-> currentText ( );
 	QString oldsize  = d-> m_font_size_list-> currentText ( );
-	
+
 	FontListItem *fli = (FontListItem *) d-> m_font_family_list-> item ( index );
-	
-	d-> m_font_style_list-> clear ( );	
+
+	d-> m_font_style_list-> clear ( );
 	d-> m_font_style_list-> insertStringList ( fli-> styles ( ));
 	d-> m_font_style_list-> setEnabled ( !fli-> styles ( ). isEmpty ( ));
 
 	int i;
-		
+
 	i = findItemCB ( d-> m_font_style_list, oldstyle );
 	if ( i < 0 )
 		i = findItemCB ( d-> m_font_style_list, "Regular" );
 	if (( i < 0 ) && ( d-> m_font_style_list-> count ( ) > 0 ))
 		i = 0;
-		
+
 	if ( i >= 0 ) {
-		d-> m_font_style_list-> setCurrentItem ( i );		
+		d-> m_font_style_list-> setCurrentItem ( i );
 		fontStyleClicked ( i );
 	}
-	
+
 	d-> m_font_size_list-> clear ( );
 	QValueList<int> sl = fli-> sizes ( );
-	
-	for ( QValueList<int>::Iterator it = sl. begin ( ); it != sl. end ( ); ++it ) 
+
+	for ( QValueList<int>::Iterator it = sl. begin ( ); it != sl. end ( ); ++it )
 		d-> m_font_size_list-> insertItem ( QString::number ( *it ));
 
 	i = findItemCB ( d-> m_font_size_list, oldsize );
@@ -299,17 +347,17 @@ void OFontSelector::fontFamilyClicked ( int index )
 		i = findItemCB ( d-> m_font_size_list, "10" );
 	if (( i < 0 ) && ( d-> m_font_size_list-> count ( ) > 0 ))
 		i = 0;
-		
+
 	if ( i >= 0 ) {
-		d-> m_font_size_list-> setCurrentItem ( i );									
+		d-> m_font_size_list-> setCurrentItem ( i );
 		fontSizeClicked ( i );
 	}
-	changeFont ( );	
+	changeFont ( );
 }
 
 void OFontSelector::fontStyleClicked ( int /*index*/ )
 {
-	changeFont ( );	
+	changeFont ( );
 }
 
 void OFontSelector::fontSizeClicked ( int /*index*/ )
@@ -327,15 +375,17 @@ void OFontSelector::changeFont ( )
 	emit fontSelected ( f );
 }
 
-
+/**
+ * Return the selected font
+ */
 QFont OFontSelector::selectedFont ( )
 {
 	int ffa = d-> m_font_family_list-> currentItem ( );
-	int fst = d-> m_font_style_list-> currentItem ( ); 
+	int fst = d-> m_font_style_list-> currentItem ( );
 	int fsi = d-> m_font_size_list-> currentItem ( );
-	
+
 	FontListItem *fli = (FontListItem *) d-> m_font_family_list-> item ( ffa );
-	
+
 	if ( fli ) {
 		return d-> m_fdb. font ( fli-> family ( ), \
 		                         fst >= 0 ? fli-> styles ( ) [fst] : QString::null, \
@@ -355,8 +405,8 @@ void OFontSelector::resizeEvent ( QResizeEvent *re )
 	}
 
 	QWidget::resizeEvent ( re );
-	
+
 	if ( d-> m_preview )
 		d-> m_preview-> setFixedHeight ( d-> m_preview-> height ( ));
-		
+
 }

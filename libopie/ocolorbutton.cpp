@@ -34,18 +34,26 @@
 
 #include <qpe/resource.h>
 
-class OColorButtonPrivate {
-public:
-	QPopupMenu *m_menu;
-	QColor m_color;
+struct OColorButtonPrivate {
+    QPopupMenu *m_menu;
+    QColor m_color;
 };
 
+
+/**
+ * This concstructs a Color Button with @param color as the start color
+ * It'll use a OColorPopupMenu internally
+ *
+ * @param parent The parent of the Color Button
+ * @param color The color from where to start on
+ * @param name @see QObject
+ */
 OColorButton::OColorButton ( QWidget *parent, const QColor &color, const char *name )
 	: QPushButton ( parent, name )
 {
 	d = new OColorButtonPrivate;
 
-	d-> m_menu = new ColorPopupMenu ( color, 0, 0 );
+	d-> m_menu = new OColorPopupMenu ( color, 0, 0 );
 	setPopup ( d-> m_menu );
 //	setPopupDelay ( 0 );
 	connect ( d-> m_menu, SIGNAL( colorSelected ( const QColor & )), this, SLOT( updateColor ( const QColor & )));
@@ -57,37 +65,50 @@ OColorButton::OColorButton ( QWidget *parent, const QColor &color, const char *n
 	setMaximumSize ( s. width ( ) * 2, s. height ( ));
 }
 
+/**
+ * This destructs the object
+ */
 OColorButton::~OColorButton ( )
 {
 	delete d;
 }
 
+/**
+ * @return Returns the current color of the button
+ */
 QColor OColorButton::color ( ) const
 {
 	return d-> m_color;
 }
 
+/**
+ * This method sets the color of the button
+ * @param c The color to be set.
+ */
 void OColorButton::setColor ( const QColor &c )
 {
 	updateColor ( c );
 }
 
+/**
+ * @internal
+ */
 void OColorButton::updateColor ( const QColor &c )
 {
 	d-> m_color = c;
-	
+
 	QImage img ( 16, 16, 32 );
 	img. fill ( 0 );
-	
+
 	int r, g, b;
 	c. rgb ( &r, &g, &b );
-	
+
 	int w = img. width ( );
 	int h = img. height ( );
-	
+
 	int dx = w * 20 / 100; // 15%
 	int dy = h * 20 / 100;
-	
+
 	for ( int y = 0; y < h; y++ ) {
 		for ( int x = 0; x < w; x++ ) {
 			double alpha = 1.0;
@@ -100,7 +121,7 @@ void OColorButton::updateColor ( const QColor &c )
 				alpha *= ( double ( y + 1 ) / dy );
 			else if ( y >= h - dy )
 				alpha *= ( double ( h - y ) / dy );
-				
+
 			int a = int ( alpha * 255.0 );
 			if ( a < 0 )
 				a = 0;
@@ -114,7 +135,7 @@ void OColorButton::updateColor ( const QColor &c )
 
 	QPixmap pix;
 	pix. convertFromImage ( img );
-	setPixmap ( pix );	
+	setPixmap ( pix );
 
 	emit colorSelected ( c );
 }

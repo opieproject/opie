@@ -1,8 +1,15 @@
 #include "oclickablelabel.h"
 #include <stdio.h>
 
-OClickableLabel::OClickableLabel(QWidget* parent, 
-			       const char* name, 
+/**
+ * This constructs the clickable ButtonLabel
+ *
+ * @param parent The parent of this label
+ * @param name A name of this label @see QObject
+ * @param fl The windowing flags
+ */
+OClickableLabel::OClickableLabel(QWidget* parent,
+			       const char* name,
 			       WFlags fl) :
   QLabel(parent,name,fl)
 {
@@ -13,10 +20,18 @@ OClickableLabel::OClickableLabel(QWidget* parent,
     setFrameShadow(Sunken);
 }
 
+/**
+ * This method makes the label behave as a toggle button
+ *
+ * @param t Whether or not to behave like a toggle button
+ */
 void OClickableLabel::setToggleButton(bool t) {
     isToggle=t;
 }
 
+/**
+ * @internal
+ */
 void OClickableLabel::mousePressEvent( QMouseEvent * /*e*/ ) {
     if (isToggle && isDown) {
 	showState(false);
@@ -25,6 +40,9 @@ void OClickableLabel::mousePressEvent( QMouseEvent * /*e*/ ) {
     }
 }
 
+/**
+ * @internal
+ */
 void OClickableLabel::mouseReleaseEvent( QMouseEvent *e ) {
     if (rect().contains(e->pos()) && isToggle) isDown=!isDown;
 
@@ -42,6 +60,9 @@ void OClickableLabel::mouseReleaseEvent( QMouseEvent *e ) {
     }
 }
 
+/**
+ * @internal
+ */
 void OClickableLabel::mouseMoveEvent( QMouseEvent *e ) {
     if (rect().contains(e->pos())) {
 	if (isToggle && isDown) {
@@ -58,6 +79,11 @@ void OClickableLabel::mouseMoveEvent( QMouseEvent *e ) {
     }
 }
 
+/**
+ * this toggles the label and inverts the color of
+ * the label
+ * @param on
+ */
 void OClickableLabel::showState(bool on) {
   if (on) {
     //setFrameShape(Panel);
@@ -82,6 +108,9 @@ void OClickableLabel::setInverted(bool on) {
     }
 }
 
+/**
+ * @param on if the Label is down or up
+ */
 void OClickableLabel::setOn(bool on) {
   isDown=on;
   showState(isDown);

@@ -58,6 +58,10 @@ private:
  * have n "user programmable" buttons, which are number 1..n.  The location
  * and number of buttons will vary from device to device.  userText() and pixmap()
  * may be used to describe this button to the user in help documentation.
+ *
+ * @version 1.0
+ * @author Trolltech
+ * @short A representation of buttons
  */
 
 class ODeviceButton

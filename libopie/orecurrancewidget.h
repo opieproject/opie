@@ -17,6 +17,18 @@
 #include <opie/orecur.h>
 
 // FIXME spelling!!!! -zecke
+// FIXME spelling filenames
+
+/**
+ * A widget to let the user select rules for recurrences.
+ * This widget can take care of weekly, monthly, daily and yearly recurrence
+ * It is used inside todolist and datebook.
+ *
+ *
+ * @short Widget of selecting Recurrance
+ * @author Trolltech, Holger Freyther
+ * @version 0.9
+ */
 class ORecurranceWidget : public ORecurranceBase {
     Q_OBJECT
 public:

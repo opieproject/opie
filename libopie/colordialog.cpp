@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: colordialog.cpp,v 1.2 2002-04-30 01:09:14 drw Exp $
+** $Id: colordialog.cpp,v 1.3 2003-04-13 16:57:28 zecke Exp $
 **
 ** Implementation of OColorDialog class
 **
@@ -56,6 +56,11 @@ static inline void rgb2hsv( QRgb rgb, int&h, int&s, int&v )
     c.setRgb( rgb );
     c.getHsv(h,s,v);
 }
+
+/*
+ * avoid clashes with the original Qt
+ */
+namespace {
 
 class QColorPicker : public QFrame
 {
@@ -607,13 +612,15 @@ void QColorShower::setHsv( int h, int s, int v )
     showCurrentColor();
 }
 
+}
+
 class OColorDialogPrivate : public QObject
 {
 Q_OBJECT
 public:
     OColorDialogPrivate( OColorDialog *p );
     QRgb currentColor() const { return cs->currentColor(); }
-    void setCurrentColor( QRgb rgb );
+    void setCurrentColor( const QRgb& rgb );
 
     int currentAlpha() const { return cs->currentAlpha(); }
     void setCurrentAlpha( int a ) { cs->setCurrentAlpha( a ); }
@@ -637,7 +644,7 @@ void OColorDialogPrivate::newHsv( int h, int s, int v )
 }
 
 //sets all widgets to display rgb
-void OColorDialogPrivate::setCurrentColor( QRgb rgb )
+void OColorDialogPrivate::setCurrentColor( const QRgb& rgb )
 {
     cs->setRgb( rgb );
     newColorTypedIn( rgb );
@@ -726,7 +733,7 @@ OColorDialog::OColorDialog(QWidget* parent, const char* name, bool modal) :
   before this function returns.
 */
 
-QColor OColorDialog::getColor( QColor initial, QWidget *parent,
+QColor OColorDialog::getColor( const QColor& initial, QWidget *parent,
 			       const char *name )
 {
     int allocContext = QColor::enterAllocContext();
@@ -763,7 +770,7 @@ QColor OColorDialog::getColor( QColor initial, QWidget *parent,
   If the user clicks Cancel the \a initial value is returned.
 */
 
-QRgb OColorDialog::getRgba( QRgb initial, bool *ok,
+QRgb OColorDialog::getRgba( const QRgb& initial, bool *ok,
 			    QWidget *parent, const char* name )
 {
     int allocContext = QColor::enterAllocContext();
@@ -819,7 +826,7 @@ OColorDialog::~OColorDialog()
   \sa color()
 */
 
-void OColorDialog::setColor( QColor c )
+void OColorDialog::setColor( const QColor& c )
 {
     d->setCurrentColor( c.rgb() );
 }

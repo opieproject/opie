@@ -53,7 +53,7 @@ using namespace Opie;
 
 class ODeviceData {
 public:
-	bool m_qwsserver;
+	bool m_qwsserver : 1;
 
 	QString m_vendorstr;
 	OVendor m_vendor;
@@ -270,6 +270,9 @@ void ODevice::init ( )
 {
 }
 
+/**
+ * This method initialises the  button mapping
+ */
 void ODevice::initButtons ( )
 {
 	if ( d-> m_buttons )
@@ -313,7 +316,17 @@ bool ODevice::setSoftSuspend ( bool /*soft*/ )
 
 #define APM_IOC_SUSPEND          OD_IO( 'A', 2 )
 
-
+/**
+ * This method will try to suspend the device
+ * It only works if the user is the QWS Server and the apm application
+ * is installed.
+ * It tries to suspend and then waits some time cause some distributions
+ * do have asynchronus apm implementations.
+ * This method will either fail and return false or it'll suspend the
+ * device and return once the device got woken up
+ *
+ * @return if the device got suspended
+ */
 bool ODevice::suspend ( )
 {
 	if ( !d-> m_qwsserver ) // only qwsserver is allowed to suspend
@@ -354,7 +367,9 @@ bool ODevice::suspend ( )
 #define VESA_HSYNC_SUSPEND    2
 #define VESA_POWERDOWN        3
 
-
+/**
+ * This sets the display on or off
+ */
 bool ODevice::setDisplayStatus ( bool on )
 {
 	if ( d-> m_model == Model_Unknown )
@@ -370,8 +385,13 @@ bool ODevice::setDisplayStatus ( bool on )
 	return res;
 }
 
-bool ODevice::setDisplayBrightness ( int )
+/**
+ * This sets the display brightness
+ * @return success or failure
+ */
+bool ODevice::setDisplayBrightness ( int p)
 {
+        Q_UNUSED( p )
 	return false;
 }
 
@@ -380,46 +400,76 @@ int ODevice::displayBrightnessResolution ( ) const
 	return 16;
 }
 
+/**
+ * This returns the vendor as string
+ * @return Vendor as QString
+ */
 QString ODevice::vendorString ( ) const
 {
 	return d-> m_vendorstr;
 }
 
+/**
+ * This returns the vendor as one of the values of OVendor
+ * @return OVendor
+ */
 OVendor ODevice::vendor ( ) const
 {
 	return d-> m_vendor;
 }
 
+/**
+ * This returns the model as a string
+ * @return A string representing the model
+ */
 QString ODevice::modelString ( ) const
 {
 	return d-> m_modelstr;
 }
 
+/**
+ * This does return the OModel used
+ */
 OModel ODevice::model ( ) const
 {
 	return d-> m_model;
 }
 
+/**
+ * This does return the systen name
+ */
 QString ODevice::systemString ( ) const
 {
 	return d-> m_systemstr;
 }
 
+/**
+ * Return System as OSystem value
+ */
 OSystem ODevice::system ( ) const
 {
 	return d-> m_system;
 }
 
+/**
+ * @return the version string of the base system
+ */
 QString ODevice::systemVersionString ( ) const
 {
 	return d-> m_sysverstr;
 }
 
+/**
+ *  @return the current Transformation
+ */
 Transformation ODevice::rotation ( ) const
 {
 	return d-> m_rotation;
 }
 
+/**
+ * This plays an alarmSound
+ */
 void ODevice::alarmSound ( )
 {
 #ifndef QT_NO_SOUND
@@ -430,6 +480,9 @@ void ODevice::alarmSound ( )
 #endif
 }
 
+/**
+ * This plays a key sound
+ */
 void ODevice::keySound ( )
 {
 #ifndef QT_NO_SOUND
@@ -440,6 +493,9 @@ void ODevice::keySound ( )
 #endif
 }
 
+/**
+ * This plays a touch sound
+ */
 void ODevice::touchSound ( )
 {
 
@@ -451,42 +507,72 @@ void ODevice::touchSound ( )
 #endif
 }
 
-
+/**
+ * This method will return a list of leds
+ * available on this device
+ * @return a list of LEDs.
+ */
 QValueList <OLed> ODevice::ledList ( ) const
 {
 	return QValueList <OLed> ( );
 }
 
+/**
+ * This does return the state of the LEDs
+ */
 QValueList <OLedState> ODevice::ledStateList ( OLed /*which*/ ) const
 {
 	return QValueList <OLedState> ( );
 }
 
+/**
+ * @return the state for a given OLed
+ */
 OLedState ODevice::ledState ( OLed /*which*/ ) const
 {
 	return Led_Off;
 }
 
-bool ODevice::setLedState ( OLed /*which*/, OLedState /*st*/ )
+/**
+ * Set the state for a LED
+ * @param which Which OLed to use
+ * @param st The state to set
+ * @return success or failure
+ */
+bool ODevice::setLedState ( OLed which, OLedState st )
 {
+        Q_UNUSED( which )
+        Q_UNUSED( st    )
 	return false;
 }
 
+/**
+ * @return if the device has a light sensor
+ */
 bool ODevice::hasLightSensor ( ) const
 {
 	return false;
 }
 
+/**
+ * @return a value from the light senso
+ */
 int ODevice::readLightSensor ( )
 {
 	return -1;
 }
 
+/**
+ * @return the light sensor resolution whatever that is ;)
+ */
 int ODevice::lightSensorResolution ( ) const
 {
 	return 0;
 }
 
+/**
+ * @return a list of hardware buttons
+ */
 const QValueList <ODeviceButton> &ODevice::buttons ( )
 {
 	initButtons ( );
@@ -494,11 +580,21 @@ const QValueList <ODeviceButton> &ODevice::buttons ( )
 	return *d-> m_buttons;
 }
 
+/**
+ * @return The amount of time that would count as a hold
+ */
 uint ODevice::buttonHoldTime ( ) const
 {
 	return d-> m_holdtime;
 }
 
+/**
+ * This method return a ODeviceButton for a key code
+ * or 0 if no special hardware button is available for the device
+ *
+ * @return The devicebutton or 0l
+ * @see ODeviceButton
+ */
 const ODeviceButton *ODevice::buttonForKeycode ( ushort code )
 {
 	initButtons ( );

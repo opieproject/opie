@@ -99,6 +99,7 @@ public:
  * Constructs a new OTabWidget control with parent and name.  The style and position parameters
  * determine how the widget selection control will be displayed.
  */
+ // FIXME WFlags? -zecke
     OTabWidget( QWidget * = 0, const char * = 0, TabStyle = Global, TabPosition = Top );
 
 /**
@@ -197,6 +198,7 @@ public:
  * @fn getCurrentTab( )
  * @brief returns current tab id.
  */
+ //FIXME TT coding style currentTab() -zecke
     int getCurrentTab();
 
 

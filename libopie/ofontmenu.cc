@@ -4,7 +4,13 @@
 #include "ofontmenu.h"
 
 
-
+/**
+ * Constructs the FontMenu.
+ *
+ * @param parent The parent widget
+ * @param name A name for this widget
+ * @param list The list of widgets to be controlled
+ */
 OFontMenu::OFontMenu(QWidget *parent, const char *name, const QList<QWidget> &list )
   : QPopupMenu( parent, name )
 {
@@ -20,11 +26,24 @@ OFontMenu::OFontMenu(QWidget *parent, const char *name, const QList<QWidget> &li
   setCheckable( true );
   m_size=10;
 }
+
+/**
+ * This method saves the font size
+ * into a Config object
+ * OFontMenu will be used as group and size as key
+ * @param cfg The Config object to be used
+ */
 void OFontMenu::save(Config *cfg )
 {
   cfg->setGroup("OFontMenu" );
   cfg->writeEntry("size", m_size );
 }
+
+/**
+ * This method restores the font size from a Config object
+ * it'll apply the sizes to the widgets and will also set the
+ * menu appropriate
+ */
 void OFontMenu::restore(Config *cfg )
 {
   cfg->setGroup("OFontMeny" );
@@ -47,22 +66,47 @@ void OFontMenu::restore(Config *cfg )
   }
   setFontSize( m_size );
 }
+
+/**
+ * set the list of widgets
+ * @param list the widget list
+ */
 void OFontMenu::setWidgets(const QList<QWidget> &list )
 {
   m_list = list;
 }
+
+/**
+ * add a widget to the list
+ * @param wid The widget to be added
+ */
 void OFontMenu::addWidget( QWidget *wid )
 {
   m_list.append(wid );
 }
+
+/**
+ * removes the widget from the list of controlled objects
+ * @param wid the to be removed widget
+ */
 void OFontMenu::removeWidget( QWidget *wid )
 {
   m_list.remove( wid );
 }
+
+/**
+ * The list of controlled widgets
+ */
 const QList<QWidget> &OFontMenu::widgets()const
 {
   return m_list;
 }
+
+/**
+ * Forces a size on a widget
+ * @param wid The widget
+ * @param size The font size forced onto the widget
+ */
 void OFontMenu::forceSize(QWidget *wid, int size )
 {
   WidSize *widz = new WidSize;

@@ -37,7 +37,7 @@
 #include <qlayout.h>
 #include <qpainter.h>
 
-ColorPanelButton::ColorPanelButton( const QColor& color, QWidget* parent, const char* name )
+OColorPanelButton::OColorPanelButton( const QColor& color, QWidget* parent, const char* name )
     : QFrame( parent, name )
 {
     m_color = color;
@@ -46,11 +46,11 @@ ColorPanelButton::ColorPanelButton( const QColor& color, QWidget* parent, const 
     setActive( FALSE );
 }
 
-ColorPanelButton::~ColorPanelButton()
+OColorPanelButton::~OColorPanelButton()
 {
 }
 
-void ColorPanelButton::setActive( bool active )
+void OColorPanelButton::setActive( bool active )
 {
     m_active = active;
 
@@ -61,25 +61,21 @@ void ColorPanelButton::setActive( bool active )
     }
 }
 
-void ColorPanelButton::enterEvent( QEvent* e )
+void OColorPanelButton::enterEvent( QEvent*  )
 {
-    Q_UNUSED( e )
-
     if ( !m_active ) {
         setFrameStyle( Panel | Sunken );
     }
 }
 
-void ColorPanelButton::leaveEvent( QEvent* e )
+void OColorPanelButton::leaveEvent( QEvent*  )
 {
-    Q_UNUSED( e )
-
     if ( !m_active ) {
         setFrameStyle( NoFrame );
     }
 }
 
-void ColorPanelButton::paintEvent( QPaintEvent* e )
+void OColorPanelButton::paintEvent( QPaintEvent* e )
 {
     QFrame::paintEvent( e );
 
@@ -91,14 +87,12 @@ void ColorPanelButton::paintEvent( QPaintEvent* e )
     painter.end();
 }
 
-void ColorPanelButton::mouseReleaseEvent( QMouseEvent* e )
+void OColorPanelButton::mouseReleaseEvent( QMouseEvent*   )
 {
-    Q_UNUSED( e )
-
     emit selected( m_color );
 }
 
-ColorPopupMenu::ColorPopupMenu( const QColor& color, QWidget* parent, const char* name )
+OColorPopupMenu::OColorPopupMenu( const QColor& color, QWidget* parent, const char* name )
     : QPopupMenu( parent, name )
 {
     m_color = color;
@@ -149,25 +143,25 @@ ColorPopupMenu::ColorPopupMenu( const QColor& color, QWidget* parent, const char
     activateItemAt( 0 );
 }
 
-ColorPopupMenu::~ColorPopupMenu()
+OColorPopupMenu::~OColorPopupMenu()
 {
 }
 
-void ColorPopupMenu::addColor( const QColor& color, int row, int col )
+void OColorPopupMenu::addColor( const QColor& color, int row, int col )
 {
-    ColorPanelButton* panelButton = new ColorPanelButton( color, colorPanel );
+    OColorPanelButton* panelButton = new OColorPanelButton( color, colorPanel );
     connect( panelButton, SIGNAL( selected( const QColor& ) ), this, SLOT( buttonSelected( const QColor& ) ) );
     colorLayout->addWidget( panelButton, row, col );
 }
 
-void ColorPopupMenu::buttonSelected( const QColor& color )
+void OColorPopupMenu::buttonSelected( const QColor& color )
 {
     m_color = color;
     emit colorSelected( color );
     hide();
 }
 
-void ColorPopupMenu::moreColorClicked()
+void OColorPopupMenu::moreColorClicked()
 {
     QColor color = OColorDialog::getColor( m_color );
     m_color = color;

@@ -29,8 +29,18 @@
 
 static int frame = 0;
 
+/**
+ * This will construct a modal dialog.
+ *
+ * The default timer length is 10.
+ *
+ * @param parent The parent of the widget
+ * @param msg The name of the object
+ * @param dispIcon Display Icon?
+ */
 OWait::OWait(QWidget *parent, const char* msg, bool dispIcon )
-  :QDialog(parent, QObject::tr("Wait"), TRUE,WStyle_Customize) {
+  :QDialog(parent, msg, TRUE,WStyle_Customize) {
+
 
     QHBoxLayout *hbox  = new QHBoxLayout( this );
 

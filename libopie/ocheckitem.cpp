@@ -14,32 +14,63 @@
 
 #include "ocheckitem.h"
 
+/**
+ * Constructs an CheckItem with a QTable as parent
+ * and a sort key for.
+ * The sort key will be used by QTable to sort the table later
+ * @param t The parent QTable where the check item belongs
+ * @param key A sort key
+ */
 OCheckItem::OCheckItem( QTable *t, const QString &key )
     : QTableItem( t, Never, "" ), m_checked( FALSE ), m_sortKey( key )
 {
 }
 
+/**
+ * reimplemted for internal reasons
+ * @return Returns the sort key of the Item
+ * @see QTableItem
+ */
 QString OCheckItem::key() const
 {
     return m_sortKey;
 }
 
+/**
+ * This method can check or uncheck the item. It will
+ * call QTable to update the cell.
+ *
+ * @param b Whether to check or uncheck the item
+ */
 void OCheckItem::setChecked( bool b )
 {
     m_checked = b;
     table()->updateCell( row(), col() );
 }
 
+/**
+ * This will toggle the item. If it is checked it'll get
+ * unchecked by this method or vice versa.
+ */
 void OCheckItem::toggle()
 {
     m_checked = !m_checked;
 }
 
+/**
+ * This will return the state of the item.
+ *
+ * @return Returns true if the item is checked
+ */
 bool OCheckItem::isChecked() const
 {
     return m_checked;
 }
 
+/**
+ * @internal
+ * This paints the item
+ */
 void OCheckItem::paint( QPainter *p, const QColorGroup &cg, const QRect &cr,
 		       bool )
 {

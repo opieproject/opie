@@ -29,15 +29,19 @@
 
 /**
  * This class displays a animated waiting icon in the middle of the screen.
+ *
+ * @short modal hour glass dialog
+ * @see QDialog
+ * @author Maximilian Reiﬂ
  */
 class OWait : public QDialog {
 
     Q_OBJECT
 
 public:
-    OWait(QWidget *parent=0,const char* msg=0,bool dispIcon=TRUE);
+    OWait(QWidget *parent=0,const char* name=0, bool dispIcon=TRUE);
     ~OWait();
-    
+
     /**
      * reimplemented for control reasons
      */
@@ -45,9 +49,10 @@ public:
 
     /**
      * Set the time before the icon will be automaticly hidden
+     * The timer will be started once the widget will be shown.
      * @param length - time in seconds
      */
-    void setTimerLength( int length ); 
+    void setTimerLength( int length );
 
     public slots:
     /**
@@ -57,7 +62,7 @@ public:
 
  private:
     void timerEvent( QTimerEvent * ) ;
-    void paintEvent( QPaintEvent * );  
+    void paintEvent( QPaintEvent * );
 
     QPixmap m_pix;
     QLabel *m_lb;

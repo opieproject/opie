@@ -121,6 +121,8 @@ class OFileSelector : public QWidget {
   ~OFileSelector();
 
   // currently only for the FILESELECTOR Mode
+  /**
+   */
   void setNewVisible( bool /*b*/ );
   void setCloseVisible(bool /*b*/ );
 

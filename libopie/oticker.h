@@ -40,13 +40,13 @@
 #include <qlabel.h>
 #include <qframe.h>
 #include <qcolor.h>
-/*!
+
+/**
  * @class OTicker
  * @brief The OTicker class provides a QLabel widget that scroll its contents
  *
-*/
+ */
 class OTicker : public QLabel {
-//class OTicker : public QFrame {
     Q_OBJECT
 
 public:
@@ -92,7 +92,7 @@ public:
  * @param style int Frame style to be see. See Qt::WidgetFlags.
  *
  */
-    void setFrame(int style); 
+    void setFrame(int style);
 /*!
  * @fn setUpdateTime(int timeout)
  * @brief sets time of update
@@ -106,7 +106,7 @@ public:
  * @param length int scroll length.
  *
  */
-    void setScrollLength(int length); 
+    void setScrollLength(int length);
 signals:
 /*!
  * @fn mousePressed()

@@ -40,23 +40,23 @@ class QWidget;
 class QGridLayout;
 
 /**
- * @class ColorPanelButton
- * @brief The ColorPanelButton class provides a button for color selection.
+ * @class OColorPanelButton
+ * @brief The OColorPanelButton class provides a button for color selection.
  *
- * @see ColorPopupMenu
+ * @see OColorPopupMenu
  *
- * The ColorPanelButton class provides a button for color selection.  The button
+ * The OColorPanelButton class provides a button for color selection.  The button
  * is drawn with the desired color and no border.  This class is used internally
- * by the ColorPopupMenu class to displaying colors in its menu.
+ * by the OColorPopupMenu class to displaying colors in its menu.
  */
-class ColorPanelButton : public QFrame
+class OColorPanelButton : public QFrame
 {
     Q_OBJECT
 
 public:
 
 /**
- * @fn ColorPanelButton( const QColor& color, QWidget* parent = 0, const char* name = 0 )
+ * @fn OColorPanelButton( const QColor& color, QWidget* parent = 0, const char* name = 0 )
  * @brief Object constructor.
  *
  * @param color Desired color.
@@ -65,13 +65,13 @@ public:
  *
  * Constructs a new ColorPanelButton control with parent, name and desired color.
  */
-    ColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
+    OColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
 
 /**
  * @fn ~ColorPanelButton()
  * @brief Object destructor.
  */
-    ~ColorPanelButton();
+    ~OColorPanelButton();
 
 /**
  * @fn setActive( bool active )
@@ -150,11 +150,11 @@ private:
 };
 
 /**
- * @class ColorPopupMenu
- * @brief The ColorPopupMenu class provides a small color selection
+ * @class OColorPopupMenu
+ * @brief The OColorPopupMenu class provides a small color selection
  *        popup menu.
  *
- * ColorPopupMenu is a derivation of TrollTech's QPopupMenu and provides
+ * OColorPopupMenu is a derivation of TrollTech's QPopupMenu and provides
  * a small color selection popup menu which can be attached to another control
  * such as a toolbar button of menu item.
  *
@@ -162,29 +162,29 @@ private:
  * includes an option at the bottom to display a color selection dialog box for
  * finer color control.
  */
-class ColorPopupMenu : public QPopupMenu
+class OColorPopupMenu : public QPopupMenu
 {
     Q_OBJECT
 
 public:
 
 /**
- * @fn ColorPopupMenu( const QColor& color, QWidget* parent = 0, const char* name = 0 )
+ * @fn OColorPopupMenu( const QColor& color, QWidget* parent = 0, const char* name = 0 )
  * @brief Object constructor.
  *
  * @param color Initial color selected in menu.
  * @param parent Pointer to parent of this control.
  * @param name Name of control.
  *
- * Constructs a new ColorPopupMenu control with parent, name and initial color selected.
+ * Constructs a new OColorPopupMenu control with parent, name and initial color selected.
  */
-    ColorPopupMenu( const QColor& color, QWidget* parent = 0, const char* name = 0 );
+    OColorPopupMenu( const QColor& color, QWidget* parent = 0, const char* name = 0 );
 
 /**
- * @fn ~ColorPopupMenu()
+ * @fn ~OColorPopupMenu()
  * @brief Object destructor.
  */
-    ~ColorPopupMenu();
+    ~OColorPopupMenu();
 
 private:
     class ColorPopupMenuPrivate;

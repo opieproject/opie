@@ -26,15 +26,25 @@
 
 */
 
-#ifndef __OPIE_FONTSELECTOR_H__
-#define __OPIE_FONTSELECTOR_H__
+#ifndef OPIE_FONTSELECTOR_H__
+#define OPIE_FONTSELECTOR_H__
 
 #include <qwidget.h>
 
 class QListBox;
 class OFontSelectorPrivate;
 
-
+/**
+ * This class lets you chose a Font out of a list of Fonts.
+ * It can show a preview too. This selector will use all available
+ * fonts
+ *
+ *
+ * @short A widget to select a font
+ * @see QWidget
+ * @see QFont
+ * @author Rober Griebl
+ */
 class OFontSelector : public QWidget
 {
     Q_OBJECT
@@ -45,7 +55,7 @@ public:
 
 	bool selectedFont ( QString &family, QString &style, int &size );
 	bool selectedFont ( QString &family, QString &style, int &size, QString &charset );
-	
+
 	QFont selectedFont ( );
 
 	bool setSelectedFont ( const QFont & );
@@ -57,6 +67,9 @@ public:
 	QString fontCharSet ( ) const;
 
 signals:
+        /**
+         * This signal gets emitted when a font got chosen
+         */
 	void fontSelected ( const QFont & );
 
 protected slots:
@@ -71,7 +84,7 @@ private:
 	void loadFonts ( QListBox * );
 
     void changeFont ( );
-	
+
 private:
 	OFontSelectorPrivate *d;
 };

@@ -33,6 +33,17 @@
 
 #include "ofiledialog.h"
 
+/**
+ * This constructs a modal dialog
+ *
+ * @param caption The caption of the dialog
+ * @param wid The parent widget
+ * @param mode The mode of the OFileSelector @see OFileSelector
+ * @param selector The selector of the OFileSelector
+ * @param dirName the dir or resource to start from
+ * @param fileName  a proposed or existing filename
+ * @param mimetypes The mimeTypes
+ */
 OFileDialog::OFileDialog(const QString &caption,
 			 QWidget *wid, int mode, int selector,
 			 const QString &dirName,
@@ -60,18 +71,42 @@ OFileDialog::OFileDialog(const QString &caption,
 
   file->setYesCancelVisible( false );  // relayout
 }
+/**
+ * @returns the mimetype of the selected
+ * currently it return QString::null
+ */
 QString OFileDialog::mimetype()const
 {
   return QString::null;
 }
+
+/**
+ * @return the fileName
+ */
 QString OFileDialog::fileName()const
 {
   return file->selectedName();
 }
+
+/**
+ * return a DocLnk to the current file
+ */
 DocLnk OFileDialog::selectedDocument()const
 {
   return file->selectedDocument();
 }
+
+/**
+ * This opens up a filedialog in Open mode
+ *
+ * @param selector the Selector Mode
+ * @param startDir Where to start from
+ * @param file A proposed filename
+ * @param mimes A list of MimeTypes
+ * @param wid the parent
+ * @param caption of the dialog if QString::null tr("Open") will be used
+ * @return the fileName or QString::null
+ */
 QString OFileDialog::getOpenFileName(int selector,
 				     const QString &startDir,
 				     const QString &file,
@@ -88,6 +123,11 @@ QString OFileDialog::getOpenFileName(int selector,
 
   return ret;
 }
+
+/**
+ * This opens up a file dialog in save mode
+ * @see getOpenFileName
+ */
 QString OFileDialog::getSaveFileName(int selector,
 				  const QString &startDir,
 				  const QString &file,

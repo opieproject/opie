@@ -34,6 +34,13 @@
 class OColorButtonPrivate;
 class QColor;
 
+/**
+ *
+ * @short A Button which will show a OColorPopupMenu
+ * @author Robert Griebl ( sandman@handhelds.org )
+ * @version 1.0
+ * @see QPushButton
+ */
 class OColorButton : public QPushButton {
 	Q_OBJECT
 public:
@@ -47,13 +54,13 @@ signals:
 
 public slots:
 	virtual void setColor ( const QColor & );
-	
-protected slots:	
+
+protected slots:
 	virtual void updateColor ( const QColor & );
-	
+
 private:
 	OColorButtonPrivate *d;
-};	
+};
 
 #endif
 

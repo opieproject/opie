@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: colordialog.h,v 1.3 2002-08-27 01:36:02 llornkcor Exp $
+** $Id: colordialog.h,v 1.4 2003-04-13 16:57:28 zecke Exp $
 **
 ** Definition of OColorDialog class
 **
@@ -61,15 +61,15 @@ class Q_EXPORT OColorDialog : public QDialog
     Q_OBJECT
 
 public:
-    static QColor getColor( QColor, QWidget *parent=0, const char* name=0 ); // ### 3.0: make const QColor&
-    static QRgb getRgba( QRgb, bool* ok = 0,
+    static QColor getColor( const QColor&, QWidget *parent=0, const char* name=0 ); 
+    static QRgb getRgba( const QRgb&, bool* ok = 0,
 			 QWidget *parent=0, const char* name=0 );
 
 private:
     ~OColorDialog();
 
     OColorDialog( QWidget* parent=0, const char* name=0, bool modal=FALSE );
-    void setColor( QColor ); // ### 3.0: make const QColor&
+    void setColor( const QColor& );
     QColor color() const;
 
 private:

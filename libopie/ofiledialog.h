@@ -34,6 +34,29 @@
 
 #include <opie/ofileselector.h>
 
+/**
+ * This class places a OFileSelector inside a QDialog.
+ * It provides static method for letting a user chose
+ * a file for either opening or saving.
+ * Most of the time  the c'tor will not be used instead using
+ * the static member functions is prefered.
+ *
+ * <pre>
+ * QMap<QString, QStringList> mimeTypes;
+ * QStringList types;
+ * types << "text/* ";
+ * mimeTypes.insert( tr("Text"), types );
+ * mimeTypes.insert( tr("All"), " * / * " ); // remove the spaces in the 2nd comment
+ * QString fileName= OFileDialog::getOpenFileName( OFileSelector::EXTENDED_ALL,
+ *                                                 "foo","bar", mimeTypes);
+ * </pre>
+ *
+ * @short A small QDialog swalloing a FileSelector
+ * @see QDialog
+ * @see OFileSelector
+ * @version 0.1-unfinished
+ * @author Holger Freyther ( zecke@handhelds.org )
+ */
 class OFileDialog : public QDialog {
   Q_OBJECT
  public:

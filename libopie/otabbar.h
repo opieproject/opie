@@ -57,6 +57,7 @@ public:
  *
  * Constructs a new OTabBar control with parent and name.
  */
+ // FIXME Allow WFlags? -zecke
     OTabBar( QWidget * = 0, const char * = 0 );
 
 protected:

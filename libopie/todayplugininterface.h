@@ -14,7 +14,12 @@ class QWidget;
 
 /**
  *
+ * A TodayPluginObject is the base for all Today Plugins.
+ * A plugin author needs to inherit this class and implement
+ * the pure virtual methods
  *
+ * @short base class for today plugins
+ * @author Maximilian Reiss
  *
  */
 class TodayPluginObject {
@@ -25,21 +30,28 @@ public:
 
     /**
      * The name if the plugin
+     * @return The plugin should return its name here
      */
     virtual QString pluginName() const = 0;
 
     /**
      * Version numbering
+     * @return The plugin should return the version number
      */
     virtual double versionNumber() const = 0;
 
 
+    /**
+     * @return the pixmap name widget?! -- FIXME
+     */
     virtual  QString pixmapNameWidget() const = 0;
 
-    /**    widget for the today view
+    /**
+     * widget for the today view
      * It _needs_ a parent here.
+     * Plugin authors need to take parent as parent!
      */
-    virtual QWidget* widget( QWidget * ) = 0;
+    virtual QWidget* widget( QWidget *parent ) = 0;
 
     /**
      * Pixmap used in the config widget
@@ -49,11 +61,14 @@ public:
     /**
      * Config plugin widget - optional
      * If the plugin has a config widget, it  _needs_  a parent here.
+     * may return 0 if no config widget is needed
      */
     virtual TodayConfigWidget* configWidget( QWidget * ) = 0;
 
     /**
      * The application that should be assigned to the button (pixmap)
+     * Today will show the plugin icon. On click it tries to execute the
+     * plugin related application.
      */
     virtual QString appName() const = 0;
 
@@ -81,7 +96,9 @@ public:
 
 };
 
-
+/**
+ * This is part of the QCOM works. See example plugins how to do it right
+ */
 struct TodayPluginInterface : public QUnknownInterface {
     virtual TodayPluginObject *guiPart() = 0;
 };

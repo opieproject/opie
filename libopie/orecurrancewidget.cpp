@@ -26,7 +26,15 @@ static QString numberPlacing( int x );	// return the proper word format for
                                         // x (1st, 2nd, etc)
 static int week( const QDate &dt );    // what week in the month is dt?
 
-
+/**
+ * Constructs the Widget
+ * @param startOnMonday Does the week start on monday
+ * @param newStart The start date of the recurrence
+ * @param parent The parent widget
+ * @param name the name of object
+ * @param modal if the dialog should be modal
+ * @param fl Additional window flags
+ */
 ORecurranceWidget::ORecurranceWidget( bool startOnMonday,
                                       const QDate& newStart,
                                       QWidget* parent,
@@ -43,6 +51,17 @@ ORecurranceWidget::ORecurranceWidget( bool startOnMonday,
     chkNoEnd->setChecked( TRUE );
     setupNone();
 }
+
+/**
+ * Different constructor
+ * @param startOnMonday Does the week start on monday?
+ * @param rp Already set ORecur object
+ * @param startDate The start date
+ * @param parent The parent widget
+ * @param name The name of the object
+ * @param modal
+ * @param fl The flags for window
+ */
 ORecurranceWidget::ORecurranceWidget( bool startOnMonday,
                                       const ORecur& rp, const QDate& startDate,
                                       QWidget* parent, const char* name,
@@ -59,13 +78,28 @@ ORecurranceWidget::ORecurranceWidget( bool startOnMonday,
 
 ORecurranceWidget::~ORecurranceWidget() {
 }
+
+/**
+ * set the start date
+ * @param date the new start date
+ */
 void ORecurranceWidget::setStartDate( const QDate& date ) {
     qWarning("ORecurranceWidget::setStartDate");
     setRecurrence( recurrence(), date );
 }
+/**
+ * set the recurrence
+ * @param rp  The ORecur object with the new recurrence rules
+ */
 void ORecurranceWidget::setRecurrence( const ORecur& rp ) {
     setRecurrence( rp, start );
 }
+
+/**
+ * overloaded method taking ORecur and a new start date
+ * @param rp Recurrence rule
+ * @param date The new start date
+ */
 void ORecurranceWidget::setRecurrence( const ORecur& rp, const QDate& date ) {
     start = date;
     end = rp.endDate();
@@ -123,6 +157,11 @@ void ORecurranceWidget::setRecurrence( const ORecur& rp, const QDate& date ) {
     } else
 	cmdEnd->setText( TimeString::shortDate( end ) );
 }
+
+/**
+ * the user selected recurrence rule.
+ * @return The recurrence rule.
+ */
 ORecur ORecurranceWidget::recurrence()const {
     QListIterator<QToolButton> it( listRTypeButtons );
     QListIterator<QToolButton> itExtra( listExtra );
@@ -180,6 +219,11 @@ ORecur ORecurranceWidget::recurrence()const {
 //    rpTmp.setCreateTime(  ); current DateTime is already set -zecke
     return rpTmp;
 }
+
+/**
+ * Return the end date of the recurrence. This is only
+ * valid if the recurrence rule does contain an enddate
+ */
 QDate ORecurranceWidget::endDate()const {
     return end;
 }
