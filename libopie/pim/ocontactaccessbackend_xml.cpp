@@ -11,11 +11,14 @@
  * =====================================================================
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.9 2003-09-22 14:31:16 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.10 2004-03-01 15:44:36 chicken Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.cpp,v $
- * Revision 1.9  2003-09-22 14:31:16  eilers
+ * Revision 1.10  2004-03-01 15:44:36  chicken
+ * fix includes
+ *
+ * Revision 1.9  2003/09/22 14:31:16  eilers
  * Added first experimental incarnation of sql-backend for addressbook.
  * Some modifications to be able to compile the todo sql-backend.
  * A lot of changes fill follow...
@@ -104,13 +107,11 @@
 #include "ocontactaccessbackend_xml.h"
 
 #include <qasciidict.h>
-#include <qdatetime.h>
 #include <qfile.h>
 #include <qfileinfo.h>
 #include <qregexp.h>
 #include <qarray.h>
 #include <qmap.h>
-#include <qdatetime.h>
 
 #include <qpe/global.h>
 

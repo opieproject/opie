@@ -1,9 +1,6 @@
 #include "otimepicker.h"
 
-#include <qbuttongroup.h>
-#include <qtoolbutton.h>
 #include <qlayout.h>
-#include <qstring.h>
 #include <stdio.h>
 #include <qlineedit.h>
 

@@ -39,7 +39,6 @@
 #include <assert.h>
 
 #include <qsocketnotifier.h>
-#include "oprocess.h"
 #include "oprocctrl.h"
 
 OProcessController *OProcessController::theOProcessController = 0;

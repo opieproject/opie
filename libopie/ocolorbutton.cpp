@@ -28,9 +28,6 @@
 
 #include <opie/colorpopupmenu.h>
 #include <opie/ocolorbutton.h>
-#include <qcolor.h>
-#include <qpixmap.h>
-#include <qimage.h>
 
 #include <qpe/resource.h>
 

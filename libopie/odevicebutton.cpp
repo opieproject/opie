@@ -18,8 +18,6 @@
 **
 **********************************************************************/
 
-#include <qpixmap.h>
-#include <qstring.h>
 
 #include <qpe/qcopenvelope_qws.h>
 #include <opie/odevicebutton.h>

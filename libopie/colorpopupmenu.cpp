@@ -33,7 +33,6 @@
 #include "colorpopupmenu.h"
 #include "colordialog.h"
 
-#include <qaction.h>
 #include <qlayout.h>
 #include <qpainter.h>
 

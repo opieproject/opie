@@ -5,11 +5,10 @@
 
 
 #include <qpe/palmtopuidgen.h>
-#include <qpe/stringutil.h>
 #include <qpe/palmtoprecord.h>
-#include <qpe/stringutil.h>
 #include <qpe/categories.h>
 #include <qpe/categoryselect.h>
+#include <qpe/stringutil.h>
 
 
 #include "opimstate.h"

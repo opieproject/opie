@@ -1,15 +1,10 @@
 #include <qcombobox.h>
 #include <qdir.h>
-#include <qhbox.h>
-#include <qheader.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qlineedit.h>
-#include <qlistview.h>
 #include <qpopupmenu.h>
 #include <qwidgetstack.h>
-#include <qregexp.h>
-#include <qobjectlist.h>
 
 /* hacky but we need to get FileSelector::filter */
 #define private public

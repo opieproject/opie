@@ -1,9 +1,7 @@
 #include <qapplication.h>
 #include <qlabel.h>
-#include <qpopupmenu.h>
 #include <qspinbox.h>
 
-#include <qpe/timestring.h>
 
 #include "orecurrancewidget.h"
 

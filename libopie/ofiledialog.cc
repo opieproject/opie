@@ -26,13 +26,10 @@
 
 */
 
-#include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 
 #include <qfileinfo.h>
-#include <qstring.h>
-#include <qapplication.h>
 #include <qlayout.h>
 
 

@@ -30,7 +30,6 @@
 #include <qlistbox.h>
 #include <qcombobox.h>
 #include <qlabel.h>
-#include <qfont.h>
 #include <qmultilineedit.h>
 
 #include <qpe/fontdatabase.h>

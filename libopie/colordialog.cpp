@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: colordialog.cpp,v 1.4 2003-04-16 10:59:24 zecke Exp $
+** $Id: colordialog.cpp,v 1.5 2004-03-01 15:44:36 chicken Exp $
 **
 ** Implementation of OColorDialog class
 **
@@ -46,9 +46,7 @@
 #include "qpixmap.h"
 #include "qdrawutil.h"
 #include "qvalidator.h"
-#include "qdragobject.h"
 #include "qapplication.h"
-#include "qdragobject.h"
 
 static inline void rgb2hsv( QRgb rgb, int&h, int&s, int&v )
 {
