@@ -1,0 +1,71 @@
+<!DOCTYPE UI><UI>
+<class>StatusWidgetUI</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>StatusWidgetUI</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>596</width>
+            <height>480</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Form1</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <hbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>3</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>3</number>
+        </property>
+        <widget>
+            <class>QProgressBar</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>statusProgress</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+        </widget>
+        <widget>
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>statusText</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>5</hsizetype>
+                    <vsizetype>1</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>TextLabel1</string>
+            </property>
+        </widget>
+    </hbox>
+</widget>
+</UI>
