@@ -35,6 +35,9 @@ choice
   config TARGET_RAMSES
     boolean "Ramses"
 
+  config TARGET_SIMPAD
+    boolean "SIMpad"
+
 endchoice
 
 config OPTIMIZE
@@ -61,12 +64,15 @@ config SPECFILE
   default "linux-g++" if TARGET_IPAQ && X11
   default "qws/linux-ramses-g++" if TARGET_RAMSES && (! X11)
   default "linux-g++" if TARGET_RAMSES && X11
+  default "qws/linux-simpad-g++" if TARGET_SIMPAD && (! X11)
+  default "linux-g++" if TARGET_SIMPAD && X11
 
 config CUSTOMFILE
   string
   default "custom-ipaq.h" if TARGET_IPAQ
   default "custom-sharp.h" if TARGET_SHARP
   default "custom-ramses.h" if TARGET_RAMSES
+  default "custom-ipaq.h" if TARGET_SIMPAD
   
 
 config OPTIMIZATIONS
@@ -75,6 +81,7 @@ config OPTIMIZATIONS
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_IPAQ
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_SHARP
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_RAMSES
+  default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_SIMPAD
 
 #config CROSS
 #  string "Crosscompilation prefix"
