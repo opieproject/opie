@@ -1,7 +1,7 @@
 Files: bin/light-and-power apps/Settings/Light.desktop pics/lightandpower
 Priority: optional
 Section: opie/settings
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Maximilian Reiss <harlekin@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)

@@ -21,13 +21,13 @@
 #define SETTINGS_H
 
 
-#include <qstrlist.h> 
+#include <qstrlist.h>
 #include <qasciidict.h>
 #include "lightsettingsbase.h"
 
 
 class LightSettings : public LightSettingsBase
-{ 
+{
     Q_OBJECT
 
 public:
@@ -37,14 +37,16 @@ public:
 protected:
     void accept();
     void reject();
-    
+
     void done ( int r );
 
 private slots:
     void applyBrightness();
+    void slotSliderTicks( int steps );
 
 private:
     int initbright;
+    int initbright_ac;
 };
 
 
