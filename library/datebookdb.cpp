@@ -93,11 +93,14 @@ bool nextOccurance(const Event &e, const QDate &from, QDateTime &next)
 	       for this round */
 	    // firstOfWeek = 0; this is already done at decl.
 	    while(!((1 << firstOfWeek) & e.repeatPattern().days))
-		firstOfWeek++;
+                firstOfWeek++;
+
+
 
 	    /* there is at least one 'day', or there would be no event */
 	    while(!((1 << (dayOfWeek % 7)) & e.repeatPattern().days))
-		dayOfWeek++;
+                dayOfWeek++;
+
 
 	    dayOfWeek = dayOfWeek % 7; /* the actual day of week */
 	    dayOfWeek -= e.start().date().dayOfWeek() -1;
@@ -843,10 +846,10 @@ void DateBookDB::loadFile( const QString &strFile )
 	    case FRWeekdays:
 		    // QtopiaDesktop 1.6 sometimes creates 'rweekdays="0"'
 		    // when it goes mad. This causes datebook to crash.. (se)
-		    if ( value.toInt() != 0 )
-			    rp.days = value.toInt();
-		    else
-			    rp.days = 1;
+                    // Not that easy. Qtopia1.6.2 PIM at least ignores rweekdays = 0
+                    // and handles recurrence as if it would only repeat on the start
+                    // day (ze) bug 1169
+                rp.days = value.toInt();
 		break;
 	    case FRPosition:
 		rp.position = value.toInt();
@@ -891,6 +894,13 @@ void DateBookDB::loadFile( const QString &strFile )
 #endif
 	}
 	// "post processing" (dates, times, alarm, recurrence)
+
+        // other half of 1169 fixlet without getting into regression
+        // if rp.days == 0 and rp.type == Event::Weekly
+        if ( rp.type == Event::Weekly && rp.days == 0 )
+            rp.days = Event::day( e.start().date().dayOfWeek() );
+
+
 	// start date/time
 	e.setRepeat( rp.type != Event::NoRepeat, rp );
 
