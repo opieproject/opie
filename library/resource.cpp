@@ -87,6 +87,40 @@ QBitmap Resource::loadBitmap( const QString &pix )
     return bm;
 }
 
+/*
+ * @internal
+ * Parse the extensions only once. If the MimeType mapping
+ * changes we will still use the old extensions, applications
+ * will need to be restarted to be aware of new extensions...
+ * For now it seems ok to have that limitation, if that is a wrong
+ * assumption we will need to invalidate this list
+ */
+QStringList *opie_image_extension_List = 0;
+static void clean_opie_image_extension_List() {
+    delete opie_image_extension_List;
+    opie_image_extension_List = 0;
+}
+
+QStringList opie_imageExtensions() {
+    /*
+     * File extensions (e.g jpeg JPG jpg) are not
+     * parsed yet
+     */
+    if ( !opie_image_extension_List ) {
+        opie_image_extension_List = new QStringList();
+        qAddPostRoutine( clean_opie_image_extension_List );
+
+        QStrList fileFormats = QImageIO::inputFormats();
+        QString ff = fileFormats.first();
+        while ( fileFormats.current() ) {
+            *opie_image_extension_List += MimeType("image/"+ff.lower()).extensions();
+            ff = fileFormats.next();
+        }
+    }
+
+    return *opie_image_extension_List; // QShared so it should be efficient
+}
+
 /*!
   Returns the filename of a pixmap called \a pix. You should avoid including
   any filename type extension (e.g. .png, .xpm).
@@ -107,16 +141,11 @@ QString Resource::findPixmap( const QString &pix )
 	return f;
 
     // All formats...
-    QStrList fileFormats = QImageIO::inputFormats();
-    QString ff = fileFormats.first();
-    while ( fileFormats.current() ) {
-	QStringList exts = MimeType("image/"+ff.lower()).extensions();
-	for ( QStringList::ConstIterator it = exts.begin(); it!=exts.end(); ++it ) {
-	    QString f = picsPath + pix + "." + *it;
-	    if ( QFile(f).exists() )
-		return f;
-	}
-	ff = fileFormats.next();
+    QStringList exts = opie_imageExtensions();
+    for ( QStringList::ConstIterator it = exts.begin(); it!=exts.end(); ++it ) {
+        QString f = picsPath + pix + "." + *it;
+        if ( QFile(f).exists() )
+            return f;
     }
 
     // Finally, no (or existing) extension...
