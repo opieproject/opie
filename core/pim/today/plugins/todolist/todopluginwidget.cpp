@@ -30,15 +30,29 @@
 TodolistPluginWidget::TodolistPluginWidget( QWidget *parent,  const char* name )
     : QWidget( parent, name ) {
 
-    todoLabel = 0l;
     todo = 0l;
+    layoutTodo = 0l;
+    todoLabel = 0l;
 
     if ( todo ) {
         delete todo;
     }
-
     todo = new OTodoAccess();
     todo->load();
+
+    if ( layoutTodo ) {
+        delete layoutTodo;
+    }
+    layoutTodo = new QVBoxLayout( this );
+    layoutTodo->setAutoAdd( true );
+
+
+    if ( todoLabel )  {
+        delete todoLabel;
+    }
+    todoLabel = new OClickableLabel( this );
+
+    connect( todoLabel, SIGNAL( clicked() ), this, SLOT( startTodolist() ) );
 
     readConfig();
     getTodo();
@@ -46,6 +60,8 @@ TodolistPluginWidget::TodolistPluginWidget( QWidget *parent,  const char* name )
 
 TodolistPluginWidget::~TodolistPluginWidget() {
     delete todo;
+    delete todoLabel;
+    delete layoutTodo;
 }
 
 
@@ -56,20 +72,15 @@ void TodolistPluginWidget::readConfig() {
     m_maxCharClip =  cfg.readNumEntry( "maxcharclip", 38 );
 }
 
+void TodolistPluginWidget:: refresh()  {
+    getTodo();
+}
 
 /**
  * Get the todos
  */
 void TodolistPluginWidget::getTodo() {
 
-    QVBoxLayout* layoutTodo = new QVBoxLayout( this );
-
-    if ( todoLabel ) {
-        delete todoLabel;
-    }
-
-    todoLabel = new OClickableLabel( this );
-    connect( todoLabel, SIGNAL( clicked() ), this, SLOT( startTodolist() ) );
 
     QString output;
     QString tmpout;
@@ -86,7 +97,7 @@ void TodolistPluginWidget::getTodo() {
                 desc = (*m_it).description();
             }
             tmpout += "<font color=#e00000><b>-" + desc.mid( 0, m_maxCharClip ) + "</b></font><br>";
-            ammount++;
+            ammount++ ;
         }
     }
 
@@ -118,7 +129,6 @@ void TodolistPluginWidget::getTodo() {
         output = QObject::tr( "No active tasks" );
     }
     todoLabel->setText( output );
-    layoutTodo->addWidget( todoLabel );
 }
 
 /**

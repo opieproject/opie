@@ -19,6 +19,7 @@
 
 #include <qstring.h>
 #include <qwidget.h>
+#include <qlayout.h>
 
 #include <opie/otodo.h>
 #include <opie/otodoaccess.h>
@@ -33,11 +34,14 @@ public:
     TodolistPluginWidget( QWidget *parent,  const char *name );
     ~TodolistPluginWidget();
 
+    void refresh();
+
 protected slots:
     void  startTodolist();
 
 private:
     OClickableLabel *todoLabel;
+    QVBoxLayout* layoutTodo;
 
     OTodoAccess *todo;
     OTodoAccess::List m_list;

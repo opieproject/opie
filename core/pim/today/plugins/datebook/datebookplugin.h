@@ -23,6 +23,8 @@
 #include <opie/oclickablelabel.h>
 #include <opie/todayplugininterface.h>
 
+#include "datebookpluginwidget.h"
+
 class DatebookPlugin : public TodayPluginObject {
 
 public:
@@ -37,6 +39,10 @@ public:
     TodayConfigWidget* configWidget( QWidget *);
     QString appName() const;
     bool excludeFromRefresh() const;
+    void refresh();
+
+ private:
+    DatebookPluginWidget *m_widget;
 };
 
 

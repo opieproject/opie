@@ -16,13 +16,13 @@
 
 
 #include "mailplugin.h"
-#include "mailpluginwidget.h"
-
 
 MailPlugin::MailPlugin() {
+    m_widget = 0l;
 }
 
 MailPlugin::~MailPlugin() {
+    delete m_widget;
 }
 
 QString MailPlugin::pluginName() const {
@@ -38,14 +38,18 @@ QString MailPlugin::pixmapNameWidget() const {
 }
 
 QWidget* MailPlugin::widget( QWidget * wid ) {
-    return new MailPluginWidget( wid, "Mail" );
+    if(!m_widget) {
+        m_widget = new MailPluginWidget( wid,  "Datebook" );
+    }
+    return m_widget;
 }
+
 
 QString MailPlugin::pixmapNameConfig() const {
     return 0l;
 }
 
-TodayConfigWidget* MailPlugin::configWidget( QWidget* wid ) {
+TodayConfigWidget* MailPlugin::configWidget( QWidget* ) {
     return 0l;
 }
 
@@ -58,3 +62,8 @@ bool MailPlugin::excludeFromRefresh() const {
     return false;
 }
 
+void MailPlugin::refresh()  {
+    if ( m_widget )  {
+        m_widget->refresh();
+    }
+}

@@ -20,6 +20,7 @@
 
 #include <qstring.h>
 #include <qwidget.h>
+#include <qlayout.h>
 
 #include <opie/tododb.h>
 #include <opie/oclickablelabel.h>
@@ -32,12 +33,15 @@ class MailPluginWidget : public QWidget {
 public:
     MailPluginWidget( QWidget *parent,  const char *name );
     ~MailPluginWidget();
+    
+    void refresh();
 
 protected slots:
     void startMail();
 
 private:
-    OClickableLabel *mailLabel;
+    OClickableLabel* m_mailLabel;
+    QHBoxLayout* m_layout;
     void readConfig();
     void getInfo();
 };

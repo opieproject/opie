@@ -19,14 +19,15 @@
 
 #include "datebookevent.h"
 #include "datebookplugin.h"
-#include "datebookpluginwidget.h"
 #include "datebookpluginconfig.h"
 
 
 DatebookPlugin::DatebookPlugin()  {
+    m_widget = 0;
 }
 
 DatebookPlugin::~DatebookPlugin() {
+    delete m_widget;
 }
 
 QString DatebookPlugin::pluginName() const {
@@ -42,7 +43,10 @@ QString DatebookPlugin::pixmapNameWidget() const {
 }
 
 QWidget* DatebookPlugin::widget( QWidget* wid ) {
-    return new DatebookPluginWidget( wid,  "Datebook" );
+    if(!m_widget) {
+        m_widget = new DatebookPluginWidget( wid,  "Datebook" );
+    }
+    return m_widget;
 }
 
 QString DatebookPlugin::pixmapNameConfig() const {
@@ -59,4 +63,10 @@ QString DatebookPlugin::appName()  const {
 
 bool DatebookPlugin::excludeFromRefresh() const {
     return false;
+}
+
+void DatebookPlugin::refresh() {
+    if ( m_widget )  {
+        m_widget->refresh();
+    }
 }

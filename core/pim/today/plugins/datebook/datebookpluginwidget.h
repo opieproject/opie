@@ -19,10 +19,13 @@
 
 #include <qstring.h>
 #include <qwidget.h>
+#include <qlayout.h>
+#include <qlist.h>
 
 #include <qpe/datebookdb.h>
 #include <opie/oclickablelabel.h>
 
+#include "datebookevent.h"
 
 class DatebookPluginWidget :  public QWidget {
 
@@ -31,13 +34,16 @@ class DatebookPluginWidget :  public QWidget {
 public:
     DatebookPluginWidget( QWidget *parent,  const char *name );
     ~DatebookPluginWidget();
-
+    void refresh();
 
 private:
     DateBookDB* db;
+    QVBoxLayout* m_layoutDates;
+    QList<DateBookEvent> m_eventsList;
     void readConfig();
     void getDates();
 
+    
     // how many lines should be showed in the datebook section
     int m_max_lines_meet;
     // If location is to be showed too, 1 to activate it.

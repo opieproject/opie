@@ -24,12 +24,14 @@
 #include <opie/oclickablelabel.h>
 #include <opie/todayplugininterface.h>
 
+#include "todopluginwidget.h"
+
 class TodolistPlugin : public TodayPluginObject {
 
 public:
     TodolistPlugin();
     ~TodolistPlugin();
-
+    
     QString pluginName()  const;
     double versionNumber() const;
     QString pixmapNameWidget() const;
@@ -38,6 +40,10 @@ public:
     TodayConfigWidget* configWidget(QWidget *);
     QString appName() const;
     bool excludeFromRefresh() const;
+    void refresh();
+
+ private:
+    TodolistPluginWidget *m_widget;
 };
 
 #endif

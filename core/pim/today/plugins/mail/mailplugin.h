@@ -27,6 +27,8 @@
 #include <opie/todayplugininterface.h>
 #include <opie/todayconfigwidget.h>
 
+#include "mailpluginwidget.h"
+
 class MailPlugin : public TodayPluginObject {
 
 public:
@@ -41,6 +43,10 @@ public:
     TodayConfigWidget* configWidget(QWidget *);
     QString appName() const;
     bool excludeFromRefresh() const;
+    void refresh();
+
+ private:
+    MailPluginWidget *m_widget;
 };
 
 #endif

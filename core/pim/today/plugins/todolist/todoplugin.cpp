@@ -18,13 +18,14 @@
 
 #include "todoplugin.h"
 #include "todopluginconfig.h"
-#include "todopluginwidget.h"
 
 
 TodolistPlugin::TodolistPlugin() {
+    m_widget = 0l;
 }
 
 TodolistPlugin::~TodolistPlugin() {
+    delete m_widget;
 }
 
 QString TodolistPlugin::pluginName() const {
@@ -32,7 +33,7 @@ QString TodolistPlugin::pluginName() const {
 }
 
 double TodolistPlugin::versionNumber() const {
-    return 0.8;
+    return 0.9;
 }
 
 QString TodolistPlugin::pixmapNameWidget() const {
@@ -40,7 +41,10 @@ QString TodolistPlugin::pixmapNameWidget() const {
 }
 
 QWidget* TodolistPlugin::widget( QWidget *wid ) {
-    return new TodolistPluginWidget( wid, "Todolist" );
+       if(!m_widget) {
+        m_widget = new TodolistPluginWidget( wid, "Todolist" );
+       }
+    return m_widget;
 }
 
 QString TodolistPlugin::pixmapNameConfig() const {
@@ -58,4 +62,10 @@ QString TodolistPlugin::appName() const {
 
 bool TodolistPlugin::excludeFromRefresh() const {
     return false;
+}
+
+void TodolistPlugin::refresh()  {
+    if ( m_widget )  {
+        m_widget->refresh();
+    }
 }

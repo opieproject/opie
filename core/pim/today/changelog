@@ -1,6 +1,7 @@
 0.6.1 
 
 * datebook plugin now can now also show following days
++ changed refresh 
 * fixed one mem leak
 
 0.6

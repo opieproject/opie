@@ -70,7 +70,8 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
     m_refreshTimer = new QTimer( this );
     connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
     m_refreshTimer->start( 15000 );
-    refresh();
+    init();
+    loadPlugins();
     showMaximized();
 }
 
@@ -136,6 +137,21 @@ void Today::init() {
     cfg.setGroup( "General" );
     m_iconSize = cfg.readNumEntry( "IconSize", 18 );
     setRefreshTimer(  cfg.readNumEntry( "checkinterval", 15000 ) );
+
+
+    // qDebug(" refresh ");
+    // set the date in top label
+    QDate date = QDate::currentDate();
+    QString time = ( tr( date.toString() ) );
+    
+    DateLabel->setText( QString( "<font color=#FFFFFF>" + time + "</font>" ) );
+    
+    if ( layout ) {
+      delete layout;
+    }
+    layout = new QVBoxLayout( this );
+    layout->addWidget( Frame );
+    layout->addWidget( OwnerField );
 }
 
 
@@ -266,6 +282,7 @@ void Today::loadPlugins() {
             }
         }
     }
+    draw();
 }
 
 
@@ -340,7 +357,7 @@ void Today::startConfig() {
               confWidget = configWidgetList.next() ) {
             confWidget->writeConfig();
         }
-        refresh();
+        loadPlugins();
     } else {
         // since refresh is not called in that case , reconnect the signal
         connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
@@ -355,22 +372,13 @@ void Today::startConfig() {
 void Today::refresh() {
     init();
 
-    // qDebug(" refresh ");
-    // set the date in top label
-    QDate date = QDate::currentDate();
-    QString time = ( tr( date.toString() ) );
-
-    DateLabel->setText( QString( "<font color=#FFFFFF>" + time + "</font>" ) );
-
-    if ( layout ) {
-        delete layout;
+    QValueList<TodayPlugin>::Iterator it;
+    for ( it = pluginList.begin(); it != pluginList.end(); ++it ) {
+      if ( !(*it).excludeRefresh ) {
+	(*it).guiPart->refresh();
+	qDebug( "refresh" );
+      }    
     }
-    layout = new QVBoxLayout( this );
-    layout->addWidget( Frame );
-    layout->addWidget( OwnerField );
-
-    loadPlugins();
-    draw();
 }
 
 void Today::startApplication() {

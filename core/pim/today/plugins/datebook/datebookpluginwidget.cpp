@@ -1,4 +1,4 @@
-/*
+ /*
  * datebookpluginwidget.cpp
  *
  * copyright   : (c) 2002 by Maximilian Reiﬂ
@@ -16,7 +16,6 @@
 
 
 #include "datebookpluginwidget.h"
-#include "datebookevent.h"
 
 #include <qpe/timestring.h>
 #include <qpe/config.h>
@@ -30,13 +29,28 @@
 
 DatebookPluginWidget::DatebookPluginWidget( QWidget *parent,  const char* name)
     : QWidget(parent,  name ) {
+
     db = 0l;
+    m_layoutDates = 0l;
+
+    if ( db ) {
+        delete db;
+    }
+    db = new DateBookDB;
+
+    if ( m_layoutDates )  {
+        delete m_layoutDates;
+    }
+    m_layoutDates = new QVBoxLayout( this );
+    m_layoutDates->setAutoAdd( true );
+
     readConfig();
     getDates();
 }
 
 DatebookPluginWidget::~DatebookPluginWidget() {
     delete db;
+    delete m_layoutDates;
 }
 
 
@@ -50,36 +64,29 @@ void DatebookPluginWidget::readConfig() {
     m_moreDays = cfg.readNumEntry( "moredays", 0 );
 }
 
+void DatebookPluginWidget::refresh()  {
+    DateBookEvent* ev;
+    for ( ev = m_eventsList.first(); ev != 0; ev = m_eventsList.next() )  {
+        delete ev;
+    }
+    getDates();
+}
 
 /**
  *  Get all events that are in the datebook xml file for today
  */
 void DatebookPluginWidget::getDates() {
 
-
     QDate date = QDate::currentDate();
 
-     QVBoxLayout* layoutDates = new QVBoxLayout( this );
-     layoutDates->setSpacing( 1 );
-     layoutDates->setMargin( 1 );
-
-    if ( db ) {
-        delete db;
-    }
-
-    db = new DateBookDB;
-
     QValueList<EffectiveEvent> list = db->getEffectiveEvents( date, date.addDays( m_moreDays )  );
-
     qBubbleSort( list );
-
-    Config config( "qpe" );
-
+    //Config config( "qpe" );
     int count=0;
 
     if ( list.count() > 0 ) {
 
-        for ( QValueList<EffectiveEvent>::ConstIterator it=list.begin(); it!=list.end(); ++it ) {
+        for ( QValueList<EffectiveEvent>::ConstIterator it = list.begin(); it != list.end(); ++it ) {
 
             if ( count <= m_max_lines_meet ) {
                 QTime time = QTime::currentTime();
@@ -87,26 +94,24 @@ void DatebookPluginWidget::getDates() {
                 if ( !m_onlyLater ) {
                     count++;
                     DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
-                    layoutDates->addWidget( l );
-                    QObject::connect ( l, SIGNAL( editEvent( const Event &) ), l, SLOT( editEventSlot( const Event &) ) );
+                    m_eventsList.append( l );
+                    QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
                 } else if ( ( time.toString() <= TimeString::dateString( (*it).event().end() ) ) ) {
                     count++;
                     // show only later appointments
                     DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
-                    layoutDates->addWidget( l );
-                    QObject::connect ( l, SIGNAL( editEvent( const Event &) ), l, SLOT( editEventSlot( const Event &) ) );
+                    m_eventsList.append( l );
+                    QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
                 }
             }
         }
         if ( m_onlyLater && count == 0 ) {
             QLabel* noMoreEvents = new QLabel( this );
             noMoreEvents->setText( QObject::tr( "No more appointments today" ) );
-            layoutDates->addWidget( noMoreEvents );
         }
     } else {
         QLabel* noEvents = new QLabel( this );
         noEvents->setText( QObject::tr( "No appointments today" ) );
-        layoutDates->addWidget( noEvents );
     }
 }
 

@@ -30,11 +30,29 @@
 MailPluginWidget::MailPluginWidget( QWidget *parent,  const char* name)
     : QWidget(parent,  name ) {
 
+    m_mailLabel = 0l;
+    m_layout = 0l;
+
+    if ( m_mailLabel )  {
+        delete m_mailLabel;
+    }
+    m_mailLabel = new OClickableLabel( this );
+    m_mailLabel->setMaximumHeight( 15 );
+    connect( m_mailLabel, SIGNAL( clicked() ), this, SLOT( startMail() ) );
+
+    if ( m_layout )  {
+        delete m_layout;
+    }
+    m_layout = new QHBoxLayout( this );
+    m_layout->setAutoAdd( true );
+
     readConfig();
     getInfo();
 }
 
 MailPluginWidget::~MailPluginWidget() {
+    delete m_mailLabel;
+    delete m_layout;
 }
 
 
@@ -44,13 +62,11 @@ void MailPluginWidget::readConfig() {
 }
 
 
+void MailPluginWidget::refresh()  {
+    getInfo();
+}
+
 void MailPluginWidget::getInfo() {
-
-    QHBoxLayout* layout = new QHBoxLayout( this );
-
-    mailLabel = new OClickableLabel( this );
-    mailLabel->setMaximumHeight( 15 );
-    connect( mailLabel, SIGNAL( clicked() ), this, SLOT( startMail() ) );
 
     Config cfg( "opiemail" );
     cfg.setGroup( "today" );
@@ -58,10 +74,9 @@ void MailPluginWidget::getInfo() {
     int NEW_MAILS = cfg.readNumEntry( "newmails", 0 );
     int OUTGOING = cfg.readNumEntry( "outgoing", 0 );
 
-    QString output = QObject::tr( "<b>%1</b> new mail(s), <b>%2</b> outgoing" ).arg( NEW_MAILS ).arg( OUTGOING );
+    //QString output = QObject::tr( "<b>%1</b> new mail(s), <b>%2</b> outgoing" ).arg( NEW_MAILS ).arg( OUTGOING );
 
-    mailLabel->setText( output );
-    layout->addWidget( mailLabel );
+    m_mailLabel->setText(  QObject::tr( "<b>%1</b> new mail(s), <b>%2</b> outgoing" ).arg( NEW_MAILS ).arg( OUTGOING ) );
 }
 
 /**
