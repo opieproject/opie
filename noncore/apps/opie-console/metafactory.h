@@ -78,6 +78,7 @@ public:
     ProfileDialogWidget *newConnectionPlugin ( const QString&, QWidget* );
     ProfileDialogWidget* newTerminalPlugin( const QString&, QWidget* );
     EmulationLayer* newEmulationLayer(const QString&, WidgetLayer* );
+    FileTransferLayer* newFileTransfer(const QString&, IOLayer* );
 
     /*
      * internal takes the maybe translated

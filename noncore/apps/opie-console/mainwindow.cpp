@@ -226,8 +226,10 @@ void MainWindow::create( const Profile& prof ) {
 
 void MainWindow::slotTransfer()
 {
+    if ( currentSession() ) {
 	TransferDialog dlg(this);
 	dlg.showMaximized();
 	dlg.exec();
+    }
 }
 

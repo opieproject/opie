@@ -191,6 +191,8 @@ void FileTransfer::slotRead() {
  * find the progress
  */
 void FileTransfer::slotProgress( const QStringList& list ) {
+    if ( m_type != SZ )
+        return;
     bool complete = true;
     int min, sec;
     int bps;
@@ -242,6 +244,7 @@ void FileTransfer::slotExec() {
     ::read(m_term[0], buf, 1 );
     delete m_proc;
     delete m_not;
+    m_proc = m_not = 0l;
     close( m_term[0] );
     close( m_term[1] );
     close( m_comm[0] );

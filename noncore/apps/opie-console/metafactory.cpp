@@ -126,6 +126,15 @@ EmulationLayer* MetaFactory::newEmulationLayer( const QString& str, WidgetLayer*
 
     return lay;
 }
+FileTransferLayer* MetaFactory::newFileTransfer(const QString& str, IOLayer* lay ) {
+    FileTransferLayer* file = 0l;
+    QMap<QString, filelayer>::Iterator it;
+    it = m_fileFact.find( str );
+    if ( it != m_fileFact.end() ) {
+        file = (*(it.data() ) )(lay);
+    }
+    return file;
+}
 QCString MetaFactory::internal( const QString& str )const {
     return m_strings[str];
 }

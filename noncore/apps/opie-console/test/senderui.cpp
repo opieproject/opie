@@ -40,7 +40,7 @@ SenderUI::~SenderUI() {
 }
 void SenderUI::slotSendFile() {
 
-    sz = new FileTransfer(FileTransfer::SZ, ser);
+    sz = new FileTransfer(FileTransfer::SY, ser);
     sz->sendFile("/home/ich/bootopie-v06-13.jffs2");
 
     connect (sz, SIGNAL(sent()),

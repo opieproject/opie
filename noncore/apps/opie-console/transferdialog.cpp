@@ -1,27 +1,35 @@
-#include "transferdialog.h"
+#include <qlayout.h>
+#include <qcombobox.h>
+#include <qlabel.h>
+#include <qlineedit.h>
+#include <qpushbutton.h>
+#include <qmessagebox.h>
+#include <qprogressbar.h>
+
+#include <opie/ofiledialog.h>
 
 #include "filetransfer.h"
 #include "io_serial.h"
+#include "metafactory.h"
+#include "mainwindow.h"
 
-#include "qlayout.h"
-#include "qcombobox.h"
-#include "qlabel.h"
-#include "qlineedit.h"
-#include "qpushbutton.h"
-#include "qmessagebox.h"
-#include "qprogressbar.h"
+#include "transferdialog.h"
 
-#include "opie/ofiledialog.h"
 
-TransferDialog::TransferDialog(QWidget *parent, const char *name)
-: QDialog(/*parent, name*/NULL, NULL, true)
+
+
+
+
+
+TransferDialog::TransferDialog(MainWindow *parent, const char *name)
+: QDialog(/*parent, name*/0l, 0l, true), m_win(parent)
 {
+        m_lay = 0l;
 	QVBoxLayout *vbox;
 	QHBoxLayout *hbox, *hbox2;
 	QLabel *file, *mode, *progress, *status;
 	QPushButton *selector;
 
-	transfer = NULL;
 
 	file = new QLabel(QObject::tr("Send file"), this);
 	mode = new QLabel(QObject::tr("Transfer mode"), this);
@@ -32,9 +40,14 @@ TransferDialog::TransferDialog(QWidget *parent, const char *name)
 	statusbar->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 
 	protocol = new QComboBox(this);
-	protocol->insertItem("XModem");
-	protocol->insertItem("YModem");
-	protocol->insertItem("ZModem");
+        /* use the fscking MetaFactory
+         * because we invented it for that fscking reason
+         * I'm really getting UPSET!!!!
+         */
+        QStringList list = m_win->factory()->fileTransferLayers();
+        for (QStringList::Iterator it =list.begin(); it != list.end(); ++it ) {
+            protocol->insertItem( (*it) );
+        }
 
 	filename = new QLineEdit(this);
 
@@ -76,7 +89,7 @@ TransferDialog::~TransferDialog()
 void TransferDialog::slotFilename()
 {
 	QString f;
-	
+
 	f = OFileDialog::getOpenFileName(0);
 	if(!f.isNull()) filename->setText(f);
 }
@@ -95,29 +108,24 @@ void TransferDialog::slotTransfer()
 
 	statusbar->setText(QObject::tr("Sending..."));
 
-	FileTransfer::Type transfermode = FileTransfer::SX;
-	if(protocol->currentText() == "YModem") transfermode == FileTransfer::SY;
-	if(protocol->currentText() == "ZModem") transfermode == FileTransfer::SZ;
+	m_lay = m_win->factory()->newFileTransfer( protocol->currentText(),
+                                                   m_win->currentSession()->layer() );
+	m_lay->sendFile(filename->text());
 
-	// dummy profile
-	Profile profile("Dummy", "serial", "vt102", Profile::White, Profile::Black, Profile::VT102);
-
-	transfer = new FileTransfer(transfermode, new IOSerial(profile));
-	transfer->sendFile(filename->text());
-	connect(transfer, SIGNAL(progress(const QString&, int, int, int, int, int)), SLOT(slotProgress(const QString&, int, int, int, int, int)));
-	connect(transfer, SIGNAL(error(int, const QString&)), SLOT(slotError(int, const QString&)));
-	connect(transfer, SIGNAL(sent()), SLOT(slotSent()));
+ 	connect(m_lay, SIGNAL(progress(const QString&, int, int, int, int, int)), SLOT(slotProgress(const QString&, int, int, int, int, int)));
+	connect(m_lay, SIGNAL(error(int, const QString&)), SLOT(slotError(int, const QString&)));
+	connect(m_lay, SIGNAL(sent()), SLOT(slotSent()));
 }
 
 void TransferDialog::slotCancel()
 {
 	ok->setEnabled(true);
 
-	if(transfer)
+	if(m_lay)
 	{
-		transfer->cancel();
-		delete transfer;
-		transfer = NULL;
+		m_lay->cancel();
+		delete  m_lay;
+		m_lay = 0l;
 		QMessageBox::information(this,
 			QObject::tr("Cancelled"),
 			QObject::tr("The file transfer has been cancelled."));

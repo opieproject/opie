@@ -8,13 +8,14 @@ class QComboBox;
 class QProgressBar;
 class QLabel;
 class QPushButton;
-class FileTransfer;
+class MainWindow;
+class FileTransferLayer;
 
 class TransferDialog : public QDialog
 {
 	Q_OBJECT
 	public:
-		TransferDialog(QWidget *parent = NULL, const char *name = NULL);
+		TransferDialog(MainWindow *parent = 0l, const char *name = 0l);
 		~TransferDialog();
 
 	public slots:
@@ -31,7 +32,8 @@ class TransferDialog : public QDialog
 		QProgressBar *progressbar;
 		QLabel *statusbar;
 		QPushButton *ok, *cancel;
-		FileTransfer *transfer;
+                MainWindow* m_win;
+                FileTransferLayer* m_lay;
 };
 
 #endif
