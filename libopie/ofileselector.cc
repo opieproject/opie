@@ -572,6 +572,7 @@ void OFileSelector::init()
     // and initializeListview will take care of those
     // toolbar get's generade in initializeListView
     initializeListView( ); // will raise the widget as well
+    m_stack->raiseWidget( EXTENDED );
   }
   m_lay->addWidget( m_stack, 100 ); // add to the layout 10 = stretch
 
@@ -586,6 +587,9 @@ void OFileSelector::init()
 
   if( m_shYesNo ) // the Yes No button row
     initializeYes( );
+
+  if (m_selector != NORMAL )
+      reparse();
 }
 void OFileSelector::updateMimes()
 {
@@ -801,7 +805,9 @@ void OFileSelector::initializeChooser()
 }
 void OFileSelector::initializeListView()
 {
+    qWarning("initializeListView");
   if( m_pseudo == 0 ){
+      qWarning("init");
     m_pseudo = new QWidget( m_stack, "Pseudo Widget");
     m_pseudoLayout = new QVBoxLayout( m_pseudo );
     // toolbar
