@@ -2,6 +2,7 @@
 #ifndef CONFIG_WIDGET_H
 #define CONFIG_WIDGET_H
 
+#include <qwidget.h>
 
 /**
  * A base class for all Today Config Widgets.
