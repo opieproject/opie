@@ -205,7 +205,7 @@ EOF
     if [ "$f" = "embeddedkonsole" ]
     then
 	case $PLATFORM in
-	    *x86*|*generic*|*ipaq*)
+	    *x86*|*generic*|*ipaq*|*sharp*)
 		SED="$SED /^LIBS.*=/s/\$/ -lutil/;"
 		PLATFORM_CFLAGS="-DHAVE_OPENPTY"
 	    ;; *)
@@ -227,7 +227,7 @@ EOF
 	    ;; *generic*)
 		PLATFORM_CFLAGS=""
 	    # For the ipaq use fixed point maths, don't compile the mmx or css code
-	    ;; *ipaq*)
+	    ;; *ipaq*|*sharp*)
 		PLATFORM_CFLAGS="-DUSE_FIXED_POINT"
 	    ;; *)
 		# For 'other platforms', turn off optimizations and use fixed point
@@ -242,7 +242,7 @@ EOF
 	    *x86*)
 		PLATFORM_CFLAGS="-DFPM_INTEL"
 	    # For the ipaq use ARM asm optimizations
-	    ;; *ipaq*)
+	    ;; *ipaq*|*sharp*)
 		PLATFORM_CFLAGS="-DFPM_ARM"
 		SED="$SED /SOURCES.*=/s/=/= idmt_arm.S /;"
 	    # For generic platforms use the C 64-bit implementation
