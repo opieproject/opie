@@ -200,7 +200,7 @@
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetas arriba</translation>
     </message>
 </context>
 <context>

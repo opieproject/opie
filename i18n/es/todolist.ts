@@ -241,14 +241,14 @@ e inténtelo de nuevo.
     </message>
     <message>
         <source>Nothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Nada</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorAdvancedImpl</name>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Descripción</translation>
+        <translation>Descripción</translation>
     </message>
 </context>
 <context>

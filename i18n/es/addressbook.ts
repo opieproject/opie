@@ -151,26 +151,30 @@ inténtelo de nuevo.
     <message>
         <source>Unable to find a contact for this 
  search pattern!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Incapaz de encontrar un contacto
+para este patrón de búsqueda!</translation>
     </message>
     <message>
         <source>The selected file 
  does not end with &quot;.vcf&quot;.
  Do you really want to open it?</source>
-        <translation type="unfinished"></translation>
+        <translation>El fichero seleccionado
+no termina en &quot;.vcf&quot;.
+¿Seguro que quiere abrirlo?</translation>
     </message>
     <message>
         <source>Add Contact?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Añadir contacto?</translation>
     </message>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Seguro que quiere añadir el contacto para 
+%1?</translation>
     </message>
     <message>
         <source>&amp;All Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sí a &amp;todo</translation>
     </message>
 </context>
 <context>
@@ -263,7 +267,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración</translation>
     </message>
 </context>
 <context>

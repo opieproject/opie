@@ -191,67 +191,68 @@ Para ordenar las entradas por un campo específico, pulse el nombre de la column
     </message>
     <message>
         <source>Password protect</source>
-        <translation type="unfinished"></translation>
+        <translation>Proteger con clave</translation>
     </message>
     <message>
         <source>Click here to enable/disable password protection of this checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para des/habilitar protección con clave de esta chequera.</translation>
     </message>
     <message>
         <source>Num</source>
-        <translation type="unfinished"></translation>
+        <translation>Num</translation>
     </message>
     <message>
         <source>Enter password</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca clave</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, introduzca su clave:</translation>
     </message>
     <message>
         <source>Confirm password</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirme clave</translation>
     </message>
     <message>
         <source>Please confirm your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, confirme su clave:</translation>
     </message>
     <message>
         <source>Please enter your password to confirm removal of password protection:</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, introduzca su clave para deshabilitar la protección con clave:</translation>
     </message>
 </context>
 <context>
     <name>Configuration</name>
     <message>
         <source>Configure Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar Chequera</translation>
     </message>
     <message>
         <source>Enter currency symbol:</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca símbolo de la moneda:</translation>
     </message>
     <message>
         <source>Enter your local currency symbol here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca aquí su símbolo de moneda local.</translation>
     </message>
     <message>
         <source>Show whether checkbook is password
 protected</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar si la chequera está
+protegida con clave</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display that the checkbook is protected with a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para seleccionar si la ventana principal debe mostrar que la chequera está protegida con clave.</translation>
     </message>
     <message>
         <source>Show checkbook balances</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar balances chequera</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para seleccionar si la ventana principal debe mostrar el balance actual para cada chequera.</translation>
     </message>
 </context>
 <context>
@@ -306,27 +307,27 @@ Puede también seleccionar Borrar del menú.</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>Click here to configure this app.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulse aquí para configurar esta aplicación.</translation>
     </message>
     <message>
         <source>Checkbook Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nobre de la chequera</translation>
     </message>
     <message>
         <source>Balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Balance</translation>
     </message>
     <message>
         <source>Enter password</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca clave</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, introduzca su clave:</translation>
     </message>
 </context>
 <context>

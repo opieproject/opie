@@ -3,7 +3,7 @@
     <name>ObexDlg</name>
     <message>
         <source>OBEX Sending</source>
-        <translation>OBEX enviando</translation>
+        <translation>OBEX Enviando</translation>
     </message>
     <message>
         <source>Sending:</source>
@@ -22,7 +22,7 @@
     <name>ObexInc</name>
     <message>
         <source>OBEX Receiving</source>
-        <translation>OBEX reciviendo</translation>
+        <translation>OBEX Reciviendo</translation>
     </message>
     <message>
         <source>TextLabel1</source>
@@ -35,8 +35,8 @@
     <message>
         <source>A file was beamed 
 to you.</source>
-        <translation>Se emitió un
-fichero para ti.</translation>
+        <translation>Se emitió un fichero
+para usted.</translation>
     </message>
     <message>
         <source>Insert</source>

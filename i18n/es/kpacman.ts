@@ -138,7 +138,7 @@ o está en un formato desconocido.</translation>
     </message>
     <message>
         <source>CHARACTER</source>
-        <translation>CARACTER</translation>
+        <translation>CARÁCTER</translation>
     </message>
     <message>
         <source>/</source>
@@ -186,18 +186,18 @@ o está en un formato desconocido.</translation>
     </message>
     <message>
         <source>PRESS CURSOR TO START</source>
-        <translation>PULSE CURSOR PARA EMPEZAR</translation>
+        <translation>PULSE EL CURSOR PARA EMPEZAR</translation>
     </message>
 </context>
 <context>
     <name>Score</name>
     <message>
         <source>  1UP </source>
-        <translation> 1UP </translation>
+        <translation>  1UP </translation>
     </message>
     <message>
         <source> HIGH SCORE </source>
-        <translation> PUTUACIÓN MAX </translation>
+        <translation> PUNTUACIÓN MAX </translation>
     </message>
     <message>
         <source>  2UP </source>
@@ -217,7 +217,7 @@ o está en un formato desconocido.</translation>
     </message>
     <message>
         <source>RNK   SCORE  NAME   DATE</source>
-        <translation>CLAS   PUNTOS NOMBRE FECHA</translation>
+        <translation>CLAS   PTS   NOMBRE FECHA</translation>
     </message>
     <message>
         <source>PAUSED</source>
@@ -229,7 +229,7 @@ o está en un formato desconocido.</translation>
     </message>
     <message>
         <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation>                          </translation>
     </message>
 </context>
 <context>

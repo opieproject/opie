@@ -48,7 +48,7 @@
     <name>CategoryEditBase</name>
     <message>
         <source>Category Edit</source>
-        <translation>Editar categoría</translation>
+        <translation>Editar Categoría</translation>
     </message>
     <message>
         <source>Categories</source>
@@ -116,7 +116,7 @@ editando las categorías.</translation>
     </message>
     <message>
         <source>Edit Categories</source>
-        <translation>Editar categorías</translation>
+        <translation>Editar Categorías</translation>
     </message>
     <message>
         <source>All</source>

@@ -292,7 +292,7 @@ Libere espacio y vuelva a intentarlo.
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>W: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>S: %1</translation>
     </message>
 </context>
 <context>
