@@ -12,7 +12,7 @@ contains( CONFIG, quick-app-lib ) {
     !contains( TARGET, launcher ) {
         message( Linking $$TARGET to quicklauncher )
 	system( rm -f $$(OPIEDIR)/bin/$$TARGET )
-        system( ln -s quicklauncher $$(OPIEDIR)/bin/$$TARGET )
+        system( ln -sf $$QUICKLAUNCH_PATH $$(OPIEDIR)/bin/$$TARGET )
     }
 }
 
