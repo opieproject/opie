@@ -106,7 +106,7 @@ void Settings::readAccounts()
 Account::Account()
 {
     accountName = "changeMe";
-    type = "changeMe";
+    type = MAILLIB::A_UNDEFINED;
     ssl = false;
     connectionType = 1;
     offline = false;
@@ -125,7 +125,7 @@ IMAPaccount::IMAPaccount()
     accountName = "New IMAP Account";
     ssl = false;
     connectionType = 1;
-    type = "IMAP";
+    type = MAILLIB::A_IMAP;
     port = IMAP_PORT;
 }
 
@@ -136,7 +136,7 @@ IMAPaccount::IMAPaccount( QString filename )
     accountName = "New IMAP Account";
     ssl = false;
     connectionType = 1;
-    type = "IMAP";
+    type = MAILLIB::A_IMAP;
     port = IMAP_PORT;
 }
 
@@ -210,7 +210,7 @@ POP3account::POP3account()
     accountName = "New POP3 Account";
     ssl = false;
     connectionType = 1;
-    type = "POP3";
+    type = MAILLIB::A_POP3;
     port = POP3_PORT;
 }
 
@@ -221,7 +221,7 @@ POP3account::POP3account( QString filename )
     accountName = "New POP3 Account";
     ssl = false;
     connectionType = 1;
-    type = "POP3";
+    type = MAILLIB::A_POP3;
     port = POP3_PORT;
 }
 
@@ -291,7 +291,7 @@ SMTPaccount::SMTPaccount()
     useCC = false;
     useBCC = false;
     useReply = false;
-    type = "SMTP";
+    type = MAILLIB::A_SMTP;
     port = SMTP_PORT;
 }
 
@@ -303,7 +303,7 @@ SMTPaccount::SMTPaccount( QString filename )
     ssl = false;
     connectionType = 1;
     login = false;
-    type = "SMTP";
+    type = MAILLIB::A_SMTP;
     port = SMTP_PORT;
 }
 
@@ -369,7 +369,7 @@ NNTPaccount::NNTPaccount()
     accountName = "New NNTP Account";
     ssl = false;
     login = false;
-    type = "NNTP";
+    type = MAILLIB::A_NNTP;
     port = NNTP_PORT;
 }
 
@@ -380,7 +380,7 @@ NNTPaccount::NNTPaccount( QString filename )
     accountName = "New NNTP Account";
     ssl = false;
     login = false;
-    type = "NNTP";
+    type = MAILLIB::A_NNTP;
     port = NNTP_PORT;
 }
 

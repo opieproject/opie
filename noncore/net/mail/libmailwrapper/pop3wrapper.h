@@ -29,7 +29,7 @@ public:
     virtual RecBody fetchBody( const RecMail &mail );
     virtual encodedString* fetchRawBody(const RecMail&mail);
     virtual void logout();
-    virtual const QString&getType()const;
+    virtual MAILLIB::ATYPE getType()const;
     virtual const QString&getName()const;
     static void pop3_progress( size_t current, size_t maximum );
 

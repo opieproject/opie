@@ -46,7 +46,7 @@ ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool m
 
     Account *it;
     for ( it = accounts.first(); it; it = accounts.next() ) {
-        if ( it->getType().compare( "SMTP" ) == 0 ) {
+        if ( it->getType()==MAILLIB::A_SMTP ) {
            SMTPaccount *smtp = static_cast<SMTPaccount *>(it);
            smtpAccountBox->insertItem( smtp->getAccountName() );
            smtpAccounts.append( smtp );

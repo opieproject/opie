@@ -16,7 +16,25 @@ AccountListItem::AccountListItem( QListView *parent, Account *a)
 {
     account = a;
     setText( 0, account->getAccountName() );
-    setText( 1, account->getType() );
+    QString ttext = "";
+    switch (account->getType()) {
+        case MAILLIB::A_NNTP:
+            ttext="NNTP";
+            break;
+        case MAILLIB::A_POP3:
+            ttext = "POP3";
+            break;
+        case MAILLIB::A_IMAP:
+            ttext = "IMAP";
+            break;
+        case MAILLIB::A_SMTP:
+            ttext = "SMTP";
+            break;
+        default:
+            ttext = "UNKNOWN";
+            break;
+    }
+    setText( 1, ttext);
 }
 
 EditAccounts::EditAccounts( Settings *s, QWidget *parent, const char *name, bool modal, WFlags flags )
@@ -49,7 +67,7 @@ void EditAccounts::slotFillLists()
     Account *it;
     for ( it = accounts.first(); it; it = accounts.next() )
     {
-        if ( it->getType().compare( "NNTP" ) == 0 )
+        if ( it->getType()==MAILLIB::A_NNTP )
         {
             (void) new AccountListItem( newsList, it );
         }
@@ -143,7 +161,7 @@ void EditAccounts::slotNewAccount( const QString &type )
 
 void EditAccounts::slotEditAccount( Account *account )
 {
-    if ( account->getType().compare( "IMAP" ) == 0 )
+    if ( account->getType() == MAILLIB::A_IMAP )
     {
         IMAPaccount *imapAcc = static_cast<IMAPaccount *>(account);
         IMAPconfig imap( imapAcc, this, 0, true, WStyle_ContextHelp );
@@ -152,7 +170,7 @@ void EditAccounts::slotEditAccount( Account *account )
             slotFillLists();
         }
     }
-    else if ( account->getType().compare( "POP3" ) == 0 )
+    else if ( account->getType()==MAILLIB::A_POP3 )
     {
         POP3account *pop3Acc = static_cast<POP3account *>(account);
         POP3config pop3( pop3Acc, this, 0, true, WStyle_ContextHelp );
@@ -161,7 +179,7 @@ void EditAccounts::slotEditAccount( Account *account )
             slotFillLists();
         }
     }
-    else if ( account->getType().compare( "SMTP" ) == 0 )
+    else if ( account->getType()==MAILLIB::A_SMTP )
     {
         SMTPaccount *smtpAcc = static_cast<SMTPaccount *>(account);
         SMTPconfig smtp( smtpAcc, this, 0, true, WStyle_ContextHelp );
@@ -170,7 +188,7 @@ void EditAccounts::slotEditAccount( Account *account )
             slotFillLists();
         }
     }
-    else if ( account->getType().compare( "NNTP" ) == 0 )
+    else if ( account->getType()==MAILLIB::A_NNTP)
     {
         NNTPaccount *nntpAcc = static_cast<NNTPaccount *>(account);
         NNTPconfig nntp( nntpAcc, this, 0, true, WStyle_ContextHelp );

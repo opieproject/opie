@@ -35,14 +35,14 @@ public:
     virtual encodedString* fetchRawBody(const RecMail&mail);
     virtual void deleteMails(const QString & FolderName,QList<RecMail> &target);
     virtual int deleteAllMail(const Folder*);
-    virtual const QString&getType()const;
+    virtual MAILLIB::ATYPE getType()const;
     virtual const QString&getName()const;
 
 protected:
     static void deleteMails(mailmbox_folder*f,QList<RecMail> &target);
     QString MBOXPath;
     QString MBOXName;
-    static const QString wrapperType;
+    static const MAILLIB::ATYPE wrapperType;
 };
 
 #endif

@@ -26,7 +26,7 @@ void StatusMail::initAccounts(QList<Account>&accounts)
     currentPop3Stat.message_recent=0;
     currentPop3Stat.message_unseen=0;
     for ( it = accounts.first(); it; it = accounts.next() ) {
-        if ( it->getType().compare( "IMAP" ) == 0 && !it->getOffline() ) {
+        if ( it->getType()==MAILLIB::A_IMAP && !it->getOffline() ) {
             IMAPaccount*ima = static_cast<IMAPaccount *>(it);
             current = AbstractMail::getWrapper(ima);
             connectionList.append(current);
@@ -34,7 +34,7 @@ void StatusMail::initAccounts(QList<Account>&accounts)
             currentImapStat.message_count+=currentStat.message_unseen;
             currentImapStat.message_count+=currentStat.message_recent;
             currentImapStat.message_count+=currentStat.message_count;
-        } else if ( it->getType().compare( "POP3" ) == 0 && !it->getOffline() ) {
+        } else if ( it->getType() == MAILLIB::A_POP3 && !it->getOffline() ) {
             POP3account *pop3 = static_cast<POP3account *>(it);
             current = AbstractMail::getWrapper(pop3);
             connectionList.append(current);
@@ -66,11 +66,11 @@ void StatusMail::check_current_stat(folderStat&targetStat)
     for ( it = connectionList.first(); it; it = connectionList.next() ) {
         it->statusFolder(currentStat);
         it->logout();
-        if (it->getType().lower()=="imap") {
+        if (it->getType() == MAILLIB::A_IMAP) {
             currentImapStat.message_unseen+=currentStat.message_unseen;
             currentImapStat.message_recent+=currentStat.message_recent;
             currentImapStat.message_count+=currentStat.message_count;
-        } else if (it->getType().lower()=="pop3") {
+        } else if (it->getType() == MAILLIB::A_POP3) {
             currentPop3Stat.message_count+=currentStat.message_count;
             qDebug("Pop3 count: %i",currentPop3Stat.message_count);
         }

@@ -54,7 +54,7 @@ protected:
     static void fillSingleBody(RecPart&target,mailmessage*message,mailmime*mime);
     static void fillParameters(RecPart&target,clist*parameters);
     static QString getencoding(mailmime_mechanism*aEnc);
-    virtual void parseList(QList<RecMail> &target,mailsession*session,const QString&mailbox);
+    virtual void parseList(QList<RecMail> &target,mailsession*session,const QString&mailbox,bool mbox_as_to=false);
 
     QString msgTempName;
     unsigned int last_msg_id;

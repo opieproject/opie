@@ -1,6 +1,8 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include "maildefines.h"
+
 #include <qobject.h>
 #include <qlist.h>
 
@@ -14,7 +16,7 @@ public:
     void remove();
     void setAccountName( QString name ) { accountName = name; }
     const QString&getAccountName()const{ return accountName; }
-    const QString&getType()const{ return type; }
+    MAILLIB::ATYPE getType()const{ return type; }
     
     void setServer(const QString&str){ server = str; }
     const QString&getServer()const{ return server; }
@@ -41,12 +43,13 @@ public:
     virtual QString getFileName() { return accountName; }
     virtual void read() { qDebug( "base reading..." ); }
     virtual void save() { qDebug( "base saving..." ); }
-
+    
 protected:
-    QString accountName, type, server, port, user, password;
+    QString accountName, server, port, user, password;
     bool ssl;
     int connectionType;
     bool offline;
+    MAILLIB::ATYPE type;
 };
 
 class IMAPaccount : public Account

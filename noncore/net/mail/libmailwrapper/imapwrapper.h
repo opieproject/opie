@@ -46,7 +46,7 @@ public:
     static void imap_progress( size_t current, size_t maximum );
     
     virtual void logout();
-    virtual const QString&getType()const;
+    virtual MAILLIB::ATYPE getType()const;
     virtual const QString&getName()const;
 
 protected:

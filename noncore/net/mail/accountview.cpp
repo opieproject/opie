@@ -62,20 +62,20 @@ void AccountView::populate( QList<Account> list )
     Account *it;
     for ( it = list.first(); it; it = list.next() )
     {
-        if ( it->getType().compare( "IMAP" ) == 0 )
+        if ( it->getType() == MAILLIB::A_IMAP )
         {
             IMAPaccount *imap = static_cast<IMAPaccount *>(it);
             qDebug( "added IMAP " + imap->getAccountName() );
             imapAccounts.append(new IMAPviewItem( imap, this ));
         }
-        else if ( it->getType().compare( "POP3" ) == 0 )
+        else if ( it->getType() == MAILLIB::A_POP3 )
         {
             POP3account *pop3 = static_cast<POP3account *>(it);
             qDebug( "added POP3 " + pop3->getAccountName() );
             /* must not be hold 'cause it isn't required */
             (void) new POP3viewItem( pop3, this );
         }
-         else if ( it->getType().compare( "NNTP" ) == 0 )
+         else if ( it->getType() == MAILLIB::A_NNTP )
         {
             NNTPaccount *nntp = static_cast<NNTPaccount *>(it);
             qDebug( "added NNTP " + nntp->getAccountName() );

@@ -1,6 +1,8 @@
 #ifndef __abstract_mail_
 #define __abstract_mail_
 
+#include "maildefines.h"
+
 #include <qobject.h>
 #include "settings.h"
 
@@ -55,7 +57,7 @@ public:
 
     static QString defaultLocalfolder();
     
-    virtual const QString&getType()const=0;
+    virtual MAILLIB::ATYPE getType()const=0;
     virtual const QString&getName()const=0;
 
 protected:

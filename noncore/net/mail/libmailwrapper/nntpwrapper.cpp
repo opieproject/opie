@@ -103,7 +103,7 @@ void NNTPwrapper::listMessages(const QString & which, QList<RecMail> &target )
         return;
     uint32_t res_messages,res_recent,res_unseen;
     mailsession_status_folder(m_nntp->sto_session,(char*)which.latin1(),&res_messages,&res_recent,&res_unseen);
-    parseList(target,m_nntp->sto_session,which);
+    parseList(target,m_nntp->sto_session,which,true);
 }
 
 void NNTPwrapper::login()
@@ -269,7 +269,7 @@ encodedString* NNTPwrapper::fetchRawBody(const RecMail&mail) {
     return res;
 }
 
-const QString&NNTPwrapper::getType()const {
+MAILLIB::ATYPE NNTPwrapper::getType()const {
     return account->getType();
 }
 
@@ -277,7 +277,7 @@ const QString&NNTPwrapper::getName()const{
     return account->getAccountName();
 }
 
-void NNTPwrapper::deleteMail(const RecMail&mail) {
+void NNTPwrapper::deleteMail(const RecMail&) {
 }
 
 int NNTPwrapper::deleteAllMail(const Folder*) {

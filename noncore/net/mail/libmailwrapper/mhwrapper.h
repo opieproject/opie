@@ -1,6 +1,8 @@
 #ifndef __MH_WRAPPER_H
 #define __MH_WRAPPER_H
 
+#include "maildefines.h"
+
 #include "genericwrapper.h"
 #include <qstring.h>
 
@@ -37,7 +39,7 @@ public:
     virtual encodedString* fetchRawBody(const RecMail&mail);
     virtual void deleteMails(const QString & FolderName,QList<RecMail> &target);
     virtual int deleteAllMail(const Folder*);
-    virtual const QString&getType()const;
+    virtual MAILLIB::ATYPE getType()const;
     virtual const QString&getName()const;
 
 public slots:
@@ -48,7 +50,7 @@ protected:
     QString buildPath(const QString&p);
     QString MHPath;
     QString MHName;
-    static const QString wrapperType;
+    static const MAILLIB::ATYPE wrapperType;
     
     void init_storage();
     void clean_storage();

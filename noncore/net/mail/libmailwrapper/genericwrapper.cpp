@@ -444,7 +444,7 @@ void Genericwrapper::cleanMimeCache()
     qDebug("Genericwrapper: cache cleaned");
 }
 
-void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const QString&mailbox)
+void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const QString&mailbox,bool mbox_as_to)
 {
     int r;
     mailmessage_list * env_list = 0;
@@ -488,8 +488,12 @@ void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const 
             mail->setSubject( convert_String(single_fields.fld_subject->sbj_value));
         if (single_fields.fld_from)
             mail->setFrom(parseMailboxList(single_fields.fld_from->frm_mb_list));
-        if (single_fields.fld_to)
-            mail->setTo( parseAddressList( single_fields.fld_to->to_addr_list ) );
+        if (!mbox_as_to) {
+            if (single_fields.fld_to)
+                mail->setTo( parseAddressList( single_fields.fld_to->to_addr_list ) );
+        } else {
+            mail->setTo(mailbox);
+        }
         if (single_fields.fld_cc)
             mail->setCC( parseAddressList( single_fields.fld_cc->cc_addr_list ) );
         if (single_fields.fld_bcc)

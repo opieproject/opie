@@ -1090,7 +1090,7 @@ void IMAPwrapper::storeMessage(const char*msg,size_t length, const QString&folde
     }
 }
 
-const QString&IMAPwrapper::getType()const
+MAILLIB::ATYPE IMAPwrapper::getType()const
 {
     return account->getType();
 }

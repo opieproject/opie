@@ -246,7 +246,7 @@ encodedString* POP3wrapper::fetchRawBody(const RecMail&mail) {
     return res;
 }
 
-const QString&POP3wrapper::getType()const {
+MAILLIB::ATYPE POP3wrapper::getType()const {
     return account->getType();
 }
 

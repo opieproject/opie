@@ -82,7 +82,7 @@ void OpieMail::slotSendQueued()
     Account *it;
     for ( it = list.first(); it; it = list.next() )
     {
-        if ( it->getType().compare( "SMTP" ) == 0 )
+        if ( it->getType() == MAILLIB::A_SMTP )
         {
             smtp = static_cast<SMTPaccount *>(it);
             smtpList.append(smtp);
