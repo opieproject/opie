@@ -94,7 +94,11 @@ class DueTextItem : public QTableItem
 
 enum journal_action { ACTION_ADD=0, ACTION_REMOVE, ACTION_REPLACE };
 
+namespace Opie
+{
 class XMLElement;
+};
+
 class TodoTable : public QTable
 {
     Q_OBJECT

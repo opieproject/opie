@@ -45,6 +45,8 @@
 #include <stdio.h>
 #include <iostream>
 
+using namespace Opie;
+
 namespace {
 
   static bool taskCompare( const ToDoEvent &task, const QRegExp &r, int category );
