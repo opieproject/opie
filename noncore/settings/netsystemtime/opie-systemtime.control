@@ -1,4 +1,4 @@
-Packagename: opie-systemtime
+Package: opie-systemtime
 Files: bin/systemtime apps/Settings/netsystemtime.desktop etc/ntpservers pics/netsystemtime 
 Priority: optional
 Section: opie/settings
