@@ -94,6 +94,8 @@ private:
     int scaledWidth;
     int scaledHeight;
     XineVideoWidget* videoFrame;
+
+    bool videoSliderBeingMoved;
 };
 
 #endif // VIDEO_WIDGET_H

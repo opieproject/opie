@@ -75,7 +75,7 @@ const uint buttonCount = sizeof( skinInfo ) / sizeof( skinInfo[ 0 ] );
 }
 
 VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name ) 
-    : MediaWidget( playList, mediaPlayerState, parent, name ), scaledWidth( 0 ), scaledHeight( 0 ) 
+    : MediaWidget( playList, mediaPlayerState, parent, name ), scaledWidth( 0 ), scaledHeight( 0 ), videoSliderBeingMoved( false )
 {
     setCaption( tr("OpiePlayer - Video") );
 
@@ -188,8 +188,6 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
     delete pixUp;
     delete pixDn;
 }
-
-static bool videoSliderBeingMoved = FALSE;
 
 void VideoWidget::sliderPressed() {
     videoSliderBeingMoved = TRUE;
