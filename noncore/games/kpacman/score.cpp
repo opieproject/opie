@@ -478,34 +478,6 @@ void Score::read()
 
 void Score::write()
 {
-#ifndef QWS
-    if (!highscoreFile.exists() && highscoreFile.name() == systemHighscoreFileInfo.filePath())
-        KMessageBox::information(0,
-                                 tr("You're going to create the highscore-file\n"
-                                 "'%1'\n"
-																 "for your maschine, that should be used systemwide.\n"
-																 "\n"
-                                 "To grant access to the other users, set the appropriate rights (a+w)\n"
-                                 "on that file or ask your systemadministator for that favor.\n"
-                                 "\n"
-                                 "To use a different directory or filename for the highscores,"
-                                 "specify them in the configfile (kpacmanrc:highscoreFilePath)."
-                                 ).arg(systemHighscoreFileInfo.filePath()));
-
-    if (highscoreFile.name() == privateHighscoreFileInfo.filePath())
-        KMessageBox::information(0,
-                                 tr("You're using a private highscore-file, that's mostly because of\n"
-                                 "missing write-access to the systemwide file\n"
-                                 "'%1' .\n"
-                                 "\n"
-                                 "Ask your systemadministrator for granting you access to that file,\n"
-                                 "by setting the appropriate rights (a+w) on it.\n"
-                                 "\n"
-                                 "To use a different directory or filename for the highscores,"
-                                 "specify them in the configfile (kpacmanrc:highscoreFilePath)."
-                                 ).arg(systemHighscoreFileInfo.filePath()),
-                                 QString::null, "PrivateHighscore");
-#endif
     if (highscoreFile.open(IO_WriteOnly)) {
         QDataStream s(&highscoreFile);
         for (int i = 0; i < 10; i++)
@@ -605,38 +577,5 @@ int Score::y(float row)
  */
 QFileInfo Score::locateHighscoreFilePath()
 {
-#ifndef QWS
-    QFileInfo systemHighscoreDirPath;
-    QStringList systemHighscoreDirs;
-
-    // Schreibfähige "private" highscore-Datei ermitteln für den fallback.
-    privateHighscoreFileInfo.setFile(KGlobal::dirs()->saveLocation("appdata")+highscoreName);
-
-    // FilePath aus der Konfigurationsdatei benutzen
-    systemHighscoreFileInfo.setFile(cfg->readEntry("HighscoreFilePath"));
-
-    // Kein Wert aus der Konfiguration erhalten, dann die "system"-Datei suchen.
-    if (systemHighscoreFileInfo.filePath().isEmpty())
-        systemHighscoreDirs = KGlobal::dirs()->resourceDirs("appdata");
-    else
-        systemHighscoreDirs = QStringList(systemHighscoreFileInfo.filePath());
-
-    for (QStringList::Iterator i = systemHighscoreDirs.begin(); i != systemHighscoreDirs.end(); ++i) {
-
-         systemHighscoreFileInfo.setFile(*i);
-         if (systemHighscoreFileInfo.fileName().isEmpty())
-             systemHighscoreFileInfo.setFile(systemHighscoreFileInfo.dirPath()+"/"+highscoreName);
-
-         // privateHighscoreFileInfo für die "system" Suche ignorieren
-         if (systemHighscoreFileInfo.filePath() != privateHighscoreFileInfo.filePath())
-         		 if (!systemHighscoreFileInfo.exists()) {
-					       systemHighscoreDirPath.setFile(systemHighscoreFileInfo.dirPath());
-						     if (systemHighscoreDirPath.exists() && systemHighscoreDirPath.isWritable())
-         		         return systemHighscoreFileInfo;
-         		 } else
-         		     if (systemHighscoreFileInfo.isWritable())
-         		         return systemHighscoreFileInfo;
-    }
-#endif
     return privateHighscoreFileInfo;
 }

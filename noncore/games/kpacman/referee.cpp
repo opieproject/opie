@@ -731,10 +731,10 @@ void Referee::keyPressEvent( QKeyEvent *k )
     if ( key == Key_F33 || key == Key_F2 || key == Key_Enter )
         play();
     else if ( !gameState.testBit(Playing) &&
-						key == Key_Up ||
+						( key == Key_Up ||
             			key == Key_Down ||
             			key == Key_Right ||
-            			key == Key_Left ) 
+            			key == Key_Left )) 
         play();
     // "Space" => pause
     //else if ( key == Key_Space || key == Key_F3 )

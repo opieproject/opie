@@ -26,13 +26,15 @@ Kpacman::Kpacman(QWidget *parent, const char *name)
 
     menu();
 
-    view = new KpacmanWidget( this, QString(name)+"widget");
+	m_view = new QWidget( this, "m_view" );
+    m_view->setBackgroundColor( black );
+	m_layout = new QGridLayout( m_view );
+	m_layout->setMargin( 7 );
 
-#ifndef QWS
-    setFixedSize(view->width(), view->height());
-#else
-    setCaption( "Kpacman" );
-#endif
+	view = new KpacmanWidget( this, QString(name)+"widget");
+	m_layout->addWidget( view, 0, 0 );
+
+    setCaption( "KPacman" );
 
     view->referee->setFocus();
 
@@ -63,14 +65,7 @@ Kpacman::Kpacman(QWidget *parent, const char *name)
     toggleFocusInContinue();
     toggleHideMouseCursor();
 
-#ifndef QWS
-    menuBar->show();
-    view->show();
-    setMenu(menuBar);
-    setView(view);
-#else
-    setCentralWidget( view );
-#endif
+    setCentralWidget( m_view );
 }
 
 Kpacman::~Kpacman()

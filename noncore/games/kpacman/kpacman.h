@@ -7,16 +7,8 @@
 
 #include "portable.h"
 
-#if defined( KDE2_PORT )
-#include <kapp.h>
-#include <klocale.h>
-#include <ktmainwindow.h>
-#include <kmenubar.h>
-#elif defined( QPE_PORT )
 #include <qmainwindow.h>
 class QMenuBar;
-#endif
-
 #include <qregexp.h>
 
 #include "kpacmanwidget.h"
@@ -25,18 +17,12 @@ class QMenuBar;
 
 #include <qlist.h>
 #include <qfileinf.h>
+#include <qlayout.h>
 
-#if defined( KDE2_PORT )
-#include <referee.h>
-#include <status.h>
-#include <score.h>
-#include <keys.h>
-#elif defined( QPE_PORT )
 #include "referee.h"
 #include "status.h"
 #include "score.h"
 #include "keys.h"
-#endif
 
 class Kpacman : public KTMainWindow
 {
@@ -71,6 +57,8 @@ private:
 
     int lookupSchemes();
 
+	QGridLayout *m_layout;
+	QWidget *m_view;
     KMenuBar *_menuBar;
     QPopupMenu *gamePopup;
     QPopupMenu *optionsPopup;

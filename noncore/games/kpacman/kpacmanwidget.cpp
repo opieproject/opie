@@ -33,11 +33,7 @@ KpacmanWidget::KpacmanWidget( QWidget *parent, const char *name)
     referee = new Referee( this, name, scheme, mode, bitfont);
     status = new Status(this, name, scheme, mode);
 
-#ifndef QWS
-    setFixedSize(referee->width(), bitfont->height()*3 + referee->height() + status->height());
-#else
     setBackgroundColor( black );
-#endif
 }
 
 KpacmanWidget::~KpacmanWidget()
@@ -137,11 +133,6 @@ void KpacmanWidget::setScheme(int Scheme, int Mode)
     score->setScheme(Scheme, Mode, bitfont);
     referee->setScheme(Scheme, Mode, bitfont);
     status->setScheme(Scheme, Mode);
-
-#ifndef QWS
-    setFixedSize(referee->width(),
-                 bitfont->height()*3 + referee->height() + status->height());
-#endif
 
     score->repaint(FALSE);
     referee->repaint(FALSE);
