@@ -113,8 +113,10 @@ void DateEntry::setDates( const QDateTime& s, const QDateTime& e )
     endDate = e.date();
     startTime = s.time();
     endTime = e.time();
+
     startDateChanged( s.date().year(), s.date().month(), s.date().day() );
     endDateChanged( e.date().year(), e.date().month(), e.date().day() );
+
     updateTimeEdit(true,true);
 }
 

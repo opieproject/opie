@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.5 2002-03-26 19:05:31 hakan Exp $
+** $Id: datebook.cpp,v 1.6 2002-03-29 16:33:34 hakan Exp $
 **
 **********************************************************************/
 
@@ -210,6 +210,7 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
     channel = new QCopChannel( "QPE/Datebook", this );
     connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
 	     this, SLOT(receive(const QCString&, const QByteArray&)) );
+    qDebug("olle\n"); 
 #endif
 #endif
     
@@ -230,12 +231,10 @@ void DateBook::receive( const QCString &msg, const QByteArray &data )
 	    viewMonth();
     }
     else if (msg == "editEvent(int)") {
-      /* Not yet working...
-      int uid;
-      stream >> uid;
-      Event e=db->getEvent(uid);
-      editEvent(e);
-      */
+	int uid;
+	stream >> uid;
+	Event e=db->getEvent(uid);
+	editEvent(e);
     }
 }
 
@@ -401,6 +400,7 @@ void DateBook::editEvent( const Event &e )
 #endif
     while (editDlg.exec() ) {
 	Event newEv = entry->event();
+	newEv.setUid(e.uid()); // FIXME: Hack not to clear uid
 	QString error = checkEvent(newEv);
 	if (!error.isNull()) {
 	    if (QMessageBox::warning(this, "error box",
