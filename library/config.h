@@ -35,7 +35,7 @@ public:
     enum Domain { File, User };
     Config( const QString &name, Domain domain=User );
     ~Config();
-
+    
     bool operator == ( const Config & other ) const { return (filename == other.filename); }
     bool operator != ( const Config & other ) const { return (filename != other.filename); }
     
@@ -84,6 +84,9 @@ protected:
     bool changed;
     ConfigPrivate *d;
     static QString configFilename(const QString& name, Domain);
+
+private: // Sharp ROM compatibility
+    Config( const QString &name, bool what );
 };
 
 inline QString Config::readEntry( const QString &key, const QString &deflt ) const

@@ -28,6 +28,7 @@
 #include <qvaluelist.h>
 #include <qtable.h>
 #include <qpushbutton.h>
+#include <qpopupmenu.h>
 
 #include "calendar.h"
 #include "timestring.h"
@@ -209,5 +210,19 @@ private:
     DateFormat df;
 };
 
+// this class is only here for Sharp ROM compatibility
+// I have reverse engineered this class and it seems to
+// work (only qtmail seems to use it)   - sandman
+// DO NOT USE IT IN NEW CODE !!
+
+class DateBookMonthPopup : public QPopupMenu 
+{
+	Q_OBJECT
+public:
+	DateBookMonthPopup ( QWidget *w );
+
+private:
+	DateBookMonth *m_dbm;
+};
 
 #endif

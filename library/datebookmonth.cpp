@@ -748,3 +748,15 @@ bool DateButton::customWhatsThis() const
     return TRUE;
 }
 
+
+// this class is only here for Sharp ROM compatibility
+// I have reverse engineered this class and it seems to
+// work (only qtmail seems to use it)   - sandman
+// DO NOT USE IT IN NEW CODE !!
+
+DateBookMonthPopup::DateBookMonthPopup ( QWidget *w )
+	: QPopupMenu ( w )
+{
+	m_dbm = new DateBookMonth( this, 0, TRUE );
+	insertItem( m_dbm );
+}

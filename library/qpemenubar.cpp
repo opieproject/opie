@@ -44,6 +44,15 @@ public:
 };
 
 
+// Sharp ROM compatibility
+void QPEMenuToolFocusManager::setMenukeyEnabled ( bool )
+{
+}
+int QPEMenuBar::getOldFocus ( )
+{
+	return 0;
+}
+
 QPEMenuToolFocusManager *QPEMenuToolFocusManager::me = 0;
 
 QPEMenuToolFocusManager::QPEMenuToolFocusManager() : QObject()

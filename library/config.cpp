@@ -102,6 +102,18 @@ Config::Config( const QString &name, Domain domain )
     glang = l[1];
 }
 
+
+// Sharp ROM compatibility
+Config::Config ( const QString &name, bool what )
+	: filename( configFilename(name,what ? User : File) )
+{
+    git = groups.end();
+    read();
+    QStringList l = Global::languageList();
+    lang = l[0];
+    glang = l[1];
+}
+
 /*!
   Writes any changes to disk and destroys the in-memory object.
 */
