@@ -53,3 +53,11 @@ void AppLnkSearch::insertItem( void *rec )
 {
 	new AppLnkItem( this, (AppLnk*)rec );
 }
+
+void AppLnkSearch::setSearch(QRegExp re)
+{
+	expanded = false;
+	setOpen( false );
+	SearchGroup::setSearch( re );
+}
+

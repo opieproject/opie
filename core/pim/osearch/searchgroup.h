@@ -39,7 +39,6 @@ protected:
 	virtual void load() = 0;
 	virtual int search() = 0;
 	virtual void insertItem( void* ) = 0;
-private:
 	void clearList();
 	QString _name;
 	bool expanded;

@@ -27,7 +27,7 @@ public:
 
     ~AppLnkSearch();
 
-protected:
+	virtual void setSearch(QRegExp);
 	virtual void load();
 	virtual int search();
 	virtual void insertItem( void* );
