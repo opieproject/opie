@@ -46,6 +46,7 @@ TODAYPLUGINS = core/pim/today/plugins/datebook \
 COREAPPS = core/apps/filebrowser core/apps/helpbrowser \
 	core/apps/textedit core/apps/embeddedkonsole \
 	core/launcher  \
+	core/launcher/libpreload \
 	core/opie-login \
 	core/apps/oipkg core/apps/qcop
 
