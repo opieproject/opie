@@ -21,6 +21,7 @@
 #include <qmap.h>
 #include "../pickboard/pickboardcfg.h"
 #include "../pickboard/pickboardpicks.h"
+#include "configdlg.h"
 
 class QTimer;
 
@@ -106,6 +107,7 @@ signals:
 
 private slots:
     void repeat();
+    void togglePickboard(bool on_off);
     
 private:
     int getKey( int &w, int j = -1 );
@@ -143,6 +145,8 @@ private:
     ushort constoe(const ushort c);
 
     QTimer *repeatTimer;
+
+    ConfigDlg *configdlg;
 };
 
 

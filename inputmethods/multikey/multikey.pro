@@ -1,10 +1,12 @@
 TEMPLATE	= lib
 CONFIG		+= qt warn_on release
 HEADERS	=   keyboard.h \
+            configdlg.h \
 	    ../pickboard/pickboardcfg.h \
 	    ../pickboard/pickboardpicks.h \
 	    keyboardimpl.h 
 SOURCES	=   keyboard.cpp \
+            configdlg.cpp \
 	    ../pickboard/pickboardcfg.cpp \
 	    ../pickboard/pickboardpicks.cpp \
 	    keyboardimpl.cpp

@@ -19,8 +19,10 @@
 **********************************************************************/
 
 #include "keyboard.h"
+#include "configdlg.h"
 
 #include <qpe/global.h>
+#include <qpe/qcopenvelope_qws.h>
 
 #include <qwindowsystem_qws.h>
 #include <qpainter.h>
@@ -41,12 +43,18 @@
 Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     QFrame(parent, _name, f),  shift(0), lock(0), ctrl(0),
     alt(0), useLargeKeys(TRUE), usePicks(0), pressedKeyRow(-1), pressedKeyCol(-1),
-    unicode(-1), qkeycode(0), modifiers(0), LANG("ko"), schar(0), mchar(0), echar(0)
+    unicode(-1), qkeycode(0), modifiers(0), LANG("ko"), schar(0), mchar(0), echar(0),
+    configdlg(0)
+
 {
     // get the default font
     Config qpeConfig( "qpe" );
     qpeConfig.setGroup( "Appearance" );
     QString familyStr = qpeConfig.readEntry( "FontFamily", "fixed" );
+
+    Config multiConfig ("multikey");
+    multiConfig.setGroup ("pickboard");
+    usePicks = multiConfig.readBoolEntry ("open", "0"); // default closed
 
     setFont( QFont( familyStr, 8 ) );
 
@@ -262,27 +270,19 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
         if (qkeycode == Qt::Key_F1) { // toggle the pickboard
 
-            usePicks = !usePicks;
-            if (usePicks) {
-                picks->show();
-                move(x(), y() - picks->height());
-                adjustSize();
-                QObject::connect( picks, SIGNAL(key(ushort,ushort,ushort,bool,bool) ),
-                    this, SIGNAL(key(ushort,ushort,ushort,bool,bool)) );
-            } else {
-
-                picks->hide();
-                picks->resetState();
-                move(x(), y() + picks->height());
-                adjustSize();
-                QObject::disconnect( picks, SIGNAL(key(ushort,ushort,ushort,bool,bool) ),
-                    this, SIGNAL(key(ushort,ushort,ushort,bool,bool)) );
-
+            if ( configdlg ) { 
+                delete (ConfigDlg *) configdlg; 
+                configdlg = 0;
+            }
+            else {
+               configdlg = new ConfigDlg ();
+               connect(configdlg, SIGNAL(pickboardToggled(bool)), 
+                       this, SLOT(togglePickboard(bool)));
+               configdlg->showMaximized();
+               configdlg->show();
+               configdlg->raise();
             }
 
-            keys.setPressed(row, col, usePicks);
-            need_repaint = TRUE;
-            qkeycode = 0; // don't need to emit Key_F1
         } else if (qkeycode == Qt::Key_Control) {
             ctrl = keys.pressedPtr(row, col);
             need_repaint = TRUE;
@@ -460,6 +460,33 @@ void Keyboard::resetState()
 {
     schar = mchar = echar = 0;
     picks->resetState();
+}
+
+/* Keyboard::togglePickboard {{{1 */
+void Keyboard::togglePickboard(bool on_off)
+{
+    usePicks = on_off;
+    if (usePicks) {
+        picks->show();
+        //move(x(), y() - picks->height()); // not required anymore because QCopChannel::send
+        //adjustSize();
+        QObject::connect( picks, SIGNAL(key(ushort,ushort,ushort,bool,bool) ),
+            this, SIGNAL(key(ushort,ushort,ushort,bool,bool)) );
+    } else {
+
+        picks->hide();
+        picks->resetState();
+        //move(x(), y() + picks->height());
+        //adjustSize();
+        QObject::disconnect( picks, SIGNAL(key(ushort,ushort,ushort,bool,bool) ),
+            this, SIGNAL(key(ushort,ushort,ushort,bool,bool)) );
+
+    }
+    /*
+     * this closes && opens the input method
+     */
+    QCopChannel::send ("QPE/TaskBar", "hideInputMethod()");
+    QCopChannel::send ("QPE/TaskBar", "showInputMethod()");
 }
 
 /* korean input functions {{{1 
