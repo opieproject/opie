@@ -11,7 +11,7 @@ echo "Upating opie"
 pack=`ipkg status | grep Package | grep -i opie | grep -v update | sed  "s/Package://"`
 
 echo "Stopping Opie"
-/etc/init.d/opie stop
+/etc/init.d/opie stop || /etc/init.d/qpe stop
 
 echo "start" > /tmp/update.log
 
@@ -35,4 +35,4 @@ done
 ipkg remove opie-update
 
 echo "Starting Opie"
-/etc/init.d/opie start
+/etc/init.d/opie start ||  /etc/init.d/qpe start
