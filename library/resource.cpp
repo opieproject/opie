@@ -35,8 +35,6 @@ namespace {
 }
 #endif
 
-static bool g_notUseSet = ::getenv("OVERWRITE_ICON_SET");
-
 /*!
   \class Resource resource.h
   \brief The Resource class provides access to named resources.
@@ -166,37 +164,24 @@ static QImage load_image(const QString &name)
 {
     QImage img;
 
-    if (g_notUseSet ) {
-        // try file
+#ifndef LIBQPE_NO_INLINE_IMAGES
+    img = qembed_findImage(name.latin1());
+#else
+    QString f = Resource::findPixmap( "/inline/" + name );
+    if ( !f.isEmpty() )
+    {
+        img.load(f);
+        return img;
+    }
+#endif
+    if ( img.isNull() )
+    {
+    // No inlined image, try file
         QString f = Resource::findPixmap(name);
         if ( !f.isEmpty() )
             img.load(f);
-#ifndef LIBQPE_NO_INLINE_IMAGES
-        if (img.isNull() )
-            img = qembed_findImage(name.latin1() );
-#endif
-        return img;
     }
-    else{
-#ifndef LIBQPE_NO_INLINE_IMAGES
-        img = qembed_findImage(name.latin1());
-#else
-        QString f = Resource::findPixmap( "/inline/" + name );
-        if ( !f.isEmpty() )
-        {
-            img.load(f);
-            return img;
-        }
-#endif
-        if ( img.isNull() )
-        {
-            // No inlined image, try file
-            QString f = Resource::findPixmap(name);
-            if ( !f.isEmpty() )
-                img.load(f);
-        }
-        return img;
-    }
+    return img;
 }
 
 /*!
