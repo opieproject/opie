@@ -1,0 +1,3 @@
+  config LIBQTAUX
+    boolean "Qt/Embedded Auxilliary Library"
+    default "n"

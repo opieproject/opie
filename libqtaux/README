@@ -1,0 +1,12 @@
+This library contains auxilliary stuff from Qt/Embedded 2.3.x which
+is very useful but has been left out from qconfig-qpe.h.
+
+Note: We can't just enable the said classes in our qconfig, because that
+      would mean we no longer could link to a sharp rom libqpe.
+
+Also note: We don't ship that embedded in libopie2
+           (nor do we use it from libopie2), because we want to keep
+           libopie2 LGPL - hence Opie stuff using these classes is also here.
+
+It could be useful to eventually have some original classes
+providing similar functionality.
