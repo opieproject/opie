@@ -48,7 +48,7 @@ void IMAPwrapper::imap_progress( size_t current, size_t maximum )
 bool IMAPwrapper::start_tls(bool force_tls)
 {
     int err;
-    bool try_tls;
+    bool try_tls=false;
     mailimap_capability_data * cap_data = 0;
 
     err = mailimap_capability(m_imap,&cap_data);
