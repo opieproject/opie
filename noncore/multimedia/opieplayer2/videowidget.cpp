@@ -53,10 +53,11 @@
 #endif
 
 
+namespace
+{
 
-
-static const int xo = 2; // movable x offset
-static const int yo = 0; // movable y offset
+const int xo = 2; // movable x offset
+const int yo = 0; // movable y offset
 
 
 struct MediaButton {
@@ -73,12 +74,13 @@ MediaButton videoButtons[] = {
     { TRUE, FALSE, FALSE }  // fullscreen
 };
 
-const char *skinV_mask_file_names[7] = {
+const char * const skinV_mask_file_names[7] = {
 "stop","play","back","fwd","up","down","full"
 };
 
-static const int numVButtons = (sizeof(videoButtons)/sizeof(MediaButton));
+const int numVButtons = (sizeof(videoButtons)/sizeof(MediaButton));
 
+}
 
 VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name ) 
     : MediaWidget( playList, mediaPlayerState, parent, name ), scaledWidth( 0 ), scaledHeight( 0 ) 

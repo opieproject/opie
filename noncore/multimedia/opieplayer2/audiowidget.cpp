@@ -50,8 +50,11 @@
 #include "mediaplayerstate.h"
 #include "playlistwidget.h"
 
-static const int xo = -2; // movable x offset
-static const int yo = 22; // movable y offset
+namespace
+{
+
+const int xo = -2; // movable x offset
+const int yo = 22; // movable y offset
 
 struct MediaButton {
     bool isToggle, isHeld, isDown;
@@ -76,16 +79,16 @@ const char * const skin_mask_file_names[10] = {
    "down", "loop", "playlist", "forward", "back"
 };
 
-
-static void changeTextColor( QWidget * w) {
+void changeTextColor( QWidget * w) {
    QPalette p = w->palette();
    p.setBrush( QColorGroup::Background, QColor( 167, 212, 167 ) );
    p.setBrush( QColorGroup::Base, QColor( 167, 212, 167 ) );
    w->setPalette( p );
 }
 
-static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
+const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 
+}
 
 AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name) :
 
