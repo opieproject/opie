@@ -8,6 +8,7 @@
 	Fixed Bugs
 	----------
 	* #1501 - Fixed bug in todo sql backend (eilers)
+	* #1505 - Added more Swap sizes in memoryapplet (mickeyl)
 	* #1525 - Hopefully fixed double alarms and not removing alarms set with the Clock application (zecke)
 	* #1533 - Security Owner Dialog (shown in case of unsuccessfull authentiacation) wasn't able to display information in non latin1 encoding (zecke)
 	* n.a. - Removed hard coded font sizes in a couple of inputmethods (mickeyl)

@@ -90,7 +90,7 @@ Swapfile::Swapfile( QWidget *parent, const char *name, WFlags f )
 	QHBox *hb3 = new QHBox(box1);
 	hb3->setSpacing(5);
 	swapSize = new QComboBox(hb3);
-	swapSize->insertStringList(QStringList::split(",", tr("2 Mb,4 Mb,6 Mb,8 Mb")));
+	swapSize->insertStringList(QStringList::split(",", tr("2 Mb,4 Mb,6 Mb,8 Mb,16 Mb,32 Mb,64 Mb")));
 
 	mkswapProgress = new QProgressBar(3, hb3);
 	mkswapProgress->setCenterIndicator(true);
@@ -343,6 +343,13 @@ void Swapfile::makeswapfile()
 		break;
 		case 3: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=8192").arg(swapPath1->text()));
 		break;
+        case 4: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=16384").arg(swapPath1->text()));
+        break;
+        case 5: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=32768").arg(swapPath1->text()));
+        break;
+        case 6: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=65536").arg(swapPath1->text()));
+        break;
+
 	}
 	if (rc != 0) {
 		   setStatusMessage(tr("Failed to create swapfile."), true);
@@ -431,6 +438,12 @@ void Swapfile::status()
 		break;
 		case 8: swapSize->setCurrentItem(3);
 		break;
+        case 16: swapSize->setCurrentItem(4);
+        break;
+        case 32: swapSize->setCurrentItem(5);
+        break;
+        case 64: swapSize->setCurrentItem(6);
+        break;
 	}
 
 
