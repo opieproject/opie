@@ -1,4 +1,4 @@
-Files: bin/mailit apps/Applications/mailit.desktop pics/EMail.png
+Files: bin/mailit apps/1Pim/mailit.desktop pics/mailit/desktopicon.png
 Priority: optional
 Section: opie
 Maintainer: L.J. Potter <llornkcor@handhelds.org>
