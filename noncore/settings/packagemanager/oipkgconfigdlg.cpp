@@ -33,6 +33,7 @@ _;:,   .>  :=|.         This program is free software; you can
 
 #include <opie2/ofiledialog.h>
 
+#include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 
 #include <qcheckbox.h>
@@ -48,7 +49,7 @@ _;:,   .>  :=|.         This program is free software; you can
 OIpkgConfigDlg::OIpkgConfigDlg( OIpkg *ipkg, bool installOptions, QWidget *parent )
     : QDialog( parent, QString::null, true, WStyle_ContextHelp )
     , m_ipkg( ipkg )
-    , m_configs( 0x0 )
+    , m_configs( 0l )
     , m_installOptions( installOptions )
     , m_serverNew( false )
     , m_serverCurrent( -1 )
@@ -166,12 +167,12 @@ void OIpkgConfigDlg::initServerWidget()
     sv->setFrameStyle( QFrame::NoFrame );
     QWidget *container = new QWidget( sv->viewport() );
     sv->addChild( container );
-    QGridLayout *layout = new QGridLayout( container, 3, 2, 2, 4 );
+    QGridLayout *layout = new QGridLayout( container, 2, 3, 2, 4 );
 
     m_serverList = new QListBox( container );
     QWhatsThis::add( m_serverList, tr( "This is a list of all servers configured.  Select one here to edit or delete, or add a new one below." ) );
     m_serverList->setSizePolicy( QSizePolicy( QSizePolicy::Preferred, QSizePolicy::Preferred ) );
-    connect( m_serverList, SIGNAL(highlighted(int)), this, SLOT(slotServerEdit(int)) );
+    connect( m_serverList, SIGNAL(highlighted(int)), this, SLOT(slotServerSelected(int)) );
     layout->addMultiCellWidget( m_serverList, 0, 0, 0, 1 );
 
     QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
@@ -179,40 +180,17 @@ void OIpkgConfigDlg::initServerWidget()
     connect( btn, SIGNAL(clicked()), this, SLOT(slotServerNew()) );
     layout->addWidget( btn, 1, 0 );
 
-    btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
-    QWhatsThis::add( btn, tr( "Tap here to delete the entry selected above." ) );
-    connect( btn, SIGNAL(clicked()), this, SLOT(slotServerDelete()) );
-    layout->addWidget( btn, 1, 1 );
-
-    QGroupBox *grpbox = new QGroupBox( 0, Qt::Vertical, tr( "Server" ), container );
-    grpbox->layout()->setSpacing( 2 );
-    grpbox->layout()->setMargin( 4 );
-    layout->addMultiCellWidget( grpbox, 2, 2, 0, 1 );
-
-    QGridLayout *grplayout = new QGridLayout( grpbox->layout() );
-
-    QLabel *label = new QLabel( tr( "Name:" ), grpbox );
-    QWhatsThis::add( label, tr( "Enter the name of this entry here." ) );
-    grplayout->addWidget( label, 0, 0 );
-    m_serverName = new QLineEdit( grpbox );
-    QWhatsThis::add( m_serverName, tr( "Enter the name of this entry here." ) );
-    grplayout->addWidget( m_serverName, 0, 1 );
-
-    label = new QLabel( tr( "Address:" ), grpbox );
-    QWhatsThis::add( label, tr( "Enter the URL address of this entry here." ) );
-    grplayout->addWidget( label, 1, 0 );
-    m_serverLocation = new QLineEdit( grpbox );
-    QWhatsThis::add( m_serverLocation, tr( "Enter the URL address of this entry here." ) );
-    grplayout->addWidget( m_serverLocation, 1, 1 );
-
-    m_serverActive = new QCheckBox( tr( "Active" ), grpbox );
-    QWhatsThis::add( m_serverActive, tr( "Tap here to indicate whether this entry is active or not." ) );
-    grplayout->addMultiCellWidget( m_serverActive, 2, 2, 0, 1 );
-
-    btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), grpbox );
-    QWhatsThis::add( btn, tr( "Tap here to update the entry's information." ) );
-    connect( btn, SIGNAL(clicked()), this, SLOT(slotServerUpdate()) );
-    grplayout->addMultiCellWidget( btn, 3, 3, 0, 1 );
+    m_serverEditBtn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Edit" ), container );
+    m_serverEditBtn->setEnabled( false );
+    QWhatsThis::add( m_serverEditBtn, tr( "Tap here to edit the entry selected above." ) );
+    connect( m_serverEditBtn, SIGNAL(clicked()), this, SLOT(slotServerEdit()) );
+    layout->addWidget( m_serverEditBtn, 1, 1 );
+    
+    m_serverDeleteBtn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
+    m_serverDeleteBtn->setEnabled( false );
+    QWhatsThis::add( m_serverDeleteBtn, tr( "Tap here to delete the entry selected above." ) );
+    connect( m_serverDeleteBtn, SIGNAL(clicked()), this, SLOT(slotServerDelete()) );
+    layout->addWidget( m_serverDeleteBtn, 1, 2 );
 }
 
 void OIpkgConfigDlg::initDestinationWidget()
@@ -449,7 +427,7 @@ OConfItem *OIpkgConfigDlg::findConfItem( OConfItem::Type type, const QString &na
 {
     // Find selected server in list
     OConfItemListIterator configIt( *m_configs );
-    OConfItem *config = 0x0;
+    OConfItem *config = 0l;
     for ( ; configIt.current(); ++configIt )
     {
         config = configIt.current();
@@ -460,36 +438,54 @@ OConfItem *OIpkgConfigDlg::findConfItem( OConfItem::Type type, const QString &na
     if ( config && config->type() == type && config->name() == name )
         return config;
 
-    return 0x0;
+    return 0l;
 }
 
-void OIpkgConfigDlg::slotServerEdit( int index )
+void OIpkgConfigDlg::slotServerSelected( int index )
 {
-    m_serverNew = false;
     m_serverCurrent = index;
-
-    // Find selected server in list
-    OConfItem *server = findConfItem( OConfItem::Source, m_serverList->currentText() );
-
-    // Display server details
-    if ( server )
-    {
-        m_serverCurrName = server->name();
-        m_serverName->setText( server->name() );
-        m_serverLocation->setText( server->value() );
-        m_serverActive->setChecked( server->active() );
-        m_serverName->setFocus();
-    }
+    
+    // Enable Edit and Delete buttons
+    m_serverEditBtn->setEnabled( true );
+    m_serverDeleteBtn->setEnabled( true );
 }
 
 void OIpkgConfigDlg::slotServerNew()
 {
-    m_serverNew = true;
+    OConfItem *server = new OConfItem( OConfItem::Source );
+    
+    OIpkgServerDlg dlg( server, this );
+    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted )
+    {
+        // Add to configuration option list
+        m_configs->append( server );
+        m_configs->sort();
 
-    m_serverName->setText( QString::null );
-    m_serverLocation->setText( QString::null );
-    m_serverActive->setChecked( true );
-    m_serverName->setFocus();
+        // Add to server list
+        m_serverList->insertItem( server->name() );
+        m_serverList->setCurrentItem( m_serverList->count() );
+    }
+    else
+        delete server;
+}
+
+void OIpkgConfigDlg::slotServerEdit()
+{
+    // Find selected server in list
+    OConfItem *server = findConfItem( OConfItem::Source, m_serverList->currentText() );
+
+    // Delete server
+    if ( server )
+    {
+        QString origName = server->name();
+        OIpkgServerDlg dlg( server, this );
+        if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted )
+        {
+            // Check to see if name has changed, if so update the server list
+            if ( server->name() != origName )
+                m_serverList->changeItem( server->name(), m_serverCurrent );
+        }
+    }
 }
 
 void OIpkgConfigDlg::slotServerDelete()
@@ -502,50 +498,6 @@ void OIpkgConfigDlg::slotServerDelete()
     {
         m_configs->removeRef( server );
         m_serverList->removeItem( m_serverCurrent );
-    }
-}
-
-void OIpkgConfigDlg::slotServerUpdate()
-{
-    QString newName = m_serverName->text();
-
-    // Convert any spaces to underscores
-    newName.replace( QRegExp( " " ), "_" );
-
-    if ( !m_serverNew )
-    {
-        // Find selected server in list
-        OConfItem *server = findConfItem( OConfItem::Source, m_serverCurrName );
-
-        // Delete server
-        if ( server )
-        {
-            // Update url
-            server->setValue( m_serverLocation->text() );
-            server->setActive( m_serverActive->isChecked() );
-
-            // Check if server name has changed, if it has then we need to replace the key in the map
-            if ( m_serverCurrName != newName )
-            {
-                // Update server name
-                server->setName( newName );
-
-                // Update list box
-                m_serverList->changeItem( newName, m_serverCurrent );
-            }
-        }
-    }
-    else
-    {
-        // Add new server to configuration list
-        // TODO - support src/gz
-        m_configs->append( new OConfItem( OConfItem::Source, newName, m_serverLocation->text(),
-                           QString::null, m_serverActive->isChecked() ) );
-        m_configs->sort();
-
-        m_serverList->insertItem( newName );
-        m_serverList->setCurrentItem( m_serverList->count() );
-        m_serverNew = false;
     }
 }
 
@@ -640,4 +592,63 @@ void OIpkgConfigDlg::slotDestUpdate()
         m_destList->setCurrentItem( m_destList->count() );
         m_destNew = false;
     }
+}
+
+OIpkgServerDlg::OIpkgServerDlg( OConfItem *server, QWidget *parent )
+    : QDialog( parent, QString::null, true, WStyle_ContextHelp )
+    , m_server( server )
+{
+    setCaption( tr( "Edit server" ) );
+
+    // Initialize UI    
+    QVBoxLayout *layout = new QVBoxLayout( this, 2, 4 );
+
+    m_active = new QCheckBox( tr( "Active" ), this );
+    QWhatsThis::add( m_active, tr( "Tap here to indicate whether this entry is active or not." ) );
+    layout->addWidget( m_active );
+
+    layout->addStretch();
+    
+    QLabel *label = new QLabel( tr( "Name:" ), this );
+    QWhatsThis::add( label, tr( "Enter the name of this entry here." ) );
+    layout->addWidget( label );
+    m_name = new QLineEdit( this );
+    QWhatsThis::add( m_name, tr( "Enter the name of this entry here." ) );
+    layout->addWidget( m_name );
+
+    layout->addStretch();
+    
+    label = new QLabel( tr( "Address:" ), this );
+    QWhatsThis::add( label, tr( "Enter the URL address of this entry here." ) );
+    layout->addWidget( label );
+    m_location = new QLineEdit( this );
+    QWhatsThis::add( m_location, tr( "Enter the URL address of this entry here." ) );
+    layout->addWidget( m_location );
+
+    layout->addStretch();
+
+    m_compressed = new QCheckBox( tr( "Compressed server feed" ), this );
+    QWhatsThis::add( m_compressed, tr( "Tap here to indicate whether the server support compressed archives or not." ) );
+    layout->addWidget( m_compressed );
+        
+    // Populate initial information
+    if ( m_server )
+    {
+        m_name->setText( m_server->name() );
+        m_location->setText( m_server->value() );
+        m_compressed->setChecked( m_server->features().contains( "Compressed" ) );
+        m_active->setChecked( m_server->active() );
+    }
+}
+
+void OIpkgServerDlg::accept()
+{
+    // Save information entered
+    m_server->setName( m_name->text() );
+    m_server->setValue( m_location->text() );
+    m_compressed->isChecked() ? m_server->setFeatures( "Compressed" )
+                              : m_server->setFeatures( QString::null );
+    m_server->setActive( m_active->isChecked() );
+
+    QDialog::accept();
 }

@@ -44,13 +44,14 @@ class QCheckBox;
 class QComboBox;
 class QLineEdit;
 class QListBox;
+class QPushButton;
 
 class OIpkgConfigDlg : public QDialog
 {
     Q_OBJECT
 
 public:
-    OIpkgConfigDlg( OIpkg *ipkg = 0x0, bool installOptions = false, QWidget *parent = 0x0 );
+    OIpkgConfigDlg( OIpkg *ipkg = 0l, bool installOptions = false, QWidget *parent = 0l );
 
 protected slots:
     void accept();
@@ -81,10 +82,9 @@ private:
     QWidget              *m_optionsWidget; // Widget containing ipkg execution configuration controls
 
     // Server configuration UI controls
-    QListBox   *m_serverList;     // Server list selection
-    QLineEdit  *m_serverName;     // Server name edit box
-    QLineEdit  *m_serverLocation; // Server location URL edit box
-    QCheckBox  *m_serverActive;   // Activate server check box
+    QListBox    *m_serverList;      // Server list selection
+    QPushButton *m_serverEditBtn;   // Server edit button
+    QPushButton *m_serverDeleteBtn; // Server edit button
 
     // Destination configuration UI controls
     QListBox   *m_destList;     // Destination list selection
@@ -114,19 +114,41 @@ private:
 
     void initData();
 
-    OConfItem *findConfItem( OConfItem::Type type = OConfItem::NotDefined, const QString &name = 0x0 );
+    OConfItem *findConfItem( OConfItem::Type type = OConfItem::NotDefined,
+                             const QString &name = QString::null );
 
 private slots:
-    void slotServerEdit( int index );
+    void slotServerSelected( int index );
     void slotServerNew();
+    void slotServerEdit();
     void slotServerDelete();
-    void slotServerUpdate();
+//    void slotServerUpdate();
 
     void slotDestEdit( int index );
     void slotDestNew();
     void slotDestDelete();
     void slotDestSelectPath();
     void slotDestUpdate();
+};
+
+class OIpkgServerDlg : public QDialog
+{
+    Q_OBJECT
+
+public:
+    OIpkgServerDlg( OConfItem *server = 0l, QWidget *parent = 0l );
+
+protected slots:
+    void accept();
+    
+private:
+    OConfItem *m_server;
+
+    // UI controls
+    QLineEdit *m_name;       // Server name edit box
+    QLineEdit *m_location;   // Server location URL edit box
+    QCheckBox *m_compressed; // Indicates whether the server is a 'src/gz' feed
+    QCheckBox *m_active;     // Indicates whether the server is activated
 };
 
 #endif
