@@ -75,7 +75,6 @@ private:
     void doBlank();
     void doUnblank();
     void readm3u(const QString &);
-    void writem3u(const QString &);
     void readPls(const QString &);
 
     
@@ -86,6 +85,7 @@ private:
     void populateAudioView();
     void populateVideoView();
 private slots:
+    void writem3u();
     void scanForAudio();
     void scanForVideo(); 
     void openFile();
