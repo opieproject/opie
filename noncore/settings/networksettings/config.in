@@ -8,5 +8,5 @@ config NETWORKSETUP-CORE
   default "y" if NETWORKSETUP
   depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && NETWORKSETUP && INTERFACES
 
-  source noncore/net/networksetttings/wlan/config.in
-  source noncore/net/networksetttings/interfaces/config.in
+  source noncore/net/networksettings/wlan/config.in
+  source noncore/net/networksettings/interfaces/config.in
