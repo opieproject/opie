@@ -25,6 +25,9 @@ EmulationWidget::EmulationWidget( const Profile& config, QWidget *parent, const 
 	f_height = fm.height();
 	f_width = fm.maxWidth();
 	f_ascent = fm.ascent();
+
+	// give reasonable defaults to m_columns, m_lines
+	calcGeometry();
 	
 	// initialize scrollbar related vars
 	m_scrollbar = new QScrollBar( this );

@@ -26,6 +26,8 @@
 #include "session.h"
 #include "common.h"
 #include "profile.h"
+
+
 /*
  * given a pseudo location ( column, line ),
  * returns the actual index, in the QArray<Character>
