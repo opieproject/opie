@@ -30,8 +30,12 @@ public:
 
 private:
     void fillLine(int x, int y);
+    void fillMaskLine(int x, int y);
+    void setInterpolatedPixel(int x, int y);
+    int rgbDistance(QRgb rgb1, QRgb rgb2);
 
     QImage m_image;
+    QImage m_mask;
     QRgb m_fillRgb;
     QRgb m_oldRgb;
 };
