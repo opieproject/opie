@@ -156,7 +156,6 @@ public:
     int smallIconSize;
     int bigIconSize;
 
-  QStringList langs;
     QString appName;
     struct QCopRec
     {
@@ -758,6 +757,29 @@ void QPEApplication::processQCopFile()
   and emitted as signals, such as flush() and reload().
 */
 
+#ifndef QT_NO_TRANSLATION
+static void qtopia_loadTranslations( const QStringList& qms )
+{
+    QStringList langs = Global::languageList();
+
+    for (QStringList::ConstIterator it = langs.begin(); it!=langs.end(); ++it) {
+        QString lang = *it;
+
+        QTranslator * trans;
+        QString tfn;
+
+        for (QStringList::ConstIterator qmit = qms.begin(); qmit!=qms.end(); ++qmit) {
+            trans = new QTranslator(qApp);
+            tfn = QPEApplication::qpeDir() + "i18n/" + lang + "/" + *qmit + ".qm";
+            if ( trans->load( tfn ))
+                qApp->installTranslator( trans );
+            else
+                delete trans;
+        }
+    }
+}
+#endif
+
 /*!
   Constructs a QPEApplication just as you would construct
   a QApplication, passing \a argc, \a argv, and \a t.
@@ -845,32 +867,19 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 
 #endif
 #else
-        initApp( argc, argv );
+    initApp( argc, argv );
 #endif
 #ifdef Q_WS_QWS
     /* load the font renderer factories */
     FontDatabase::loadRenderers();
 #endif
 #ifndef QT_NO_TRANSLATION
+    QStringList qms;
+    qms << "libqpe";
+    qms << "libopie";
+    qms << d->appName;
 
-    d->langs = Global::languageList();
-    for ( QStringList::ConstIterator it = d->langs.begin(); it != d->langs.end(); ++it ) {
-        QString lang = *it;
-
-                installTranslation( lang + "/libopie.qm");
-        installTranslation( lang + "/libqpe.qm" );
-        installTranslation( lang + "/" + d->appName + ".qm" );
-
-
-        //###language/font hack; should look it up somewhere
-#ifdef QWS
-
-                if ( lang == "ja" || lang == "zh_CN" || lang == "zh_TW" || lang == "ko" ) {
-                    QFont fn = FontManager::unicodeFont( FontManager::Proportional );
-                    setFont( fn );
-                }
-#endif
-        }
+    qtopia_loadTranslations(qms);
 #endif
 
     applyStyle();
@@ -903,6 +912,10 @@ void QPEApplication::initApp( int argc, char **argv )
     channel.replace(QRegExp(".*/"),"");
     d->appName = channel;
 
+#ifndef QT_NO_TRANSLATION
+    qtopia_loadTranslations( QStringList()<<channel );
+#endif
+
     #if QT_VERSION > 235
     qt_fbdpy->setIdentity( channel ); // In Qt/E 2.3.6
     #endif
@@ -934,10 +947,6 @@ void QPEApplication::initApp( int argc, char **argv )
 
     /* overide stored arguments */
     setArgs(argc, argv);
-
-    /* install translation here */
-    for ( QStringList::ConstIterator it = d->langs.begin(); it != d->langs.end(); ++it )
-        installTranslation( (*it) + "/" + d->appName + ".qm" );
 }
 #endif
 
@@ -2179,17 +2188,6 @@ void QPEApplication::tryQuit()
     quit();
 }
 
-/*!
-  \internal
-*/
-void QPEApplication::installTranslation( const QString& baseName ) {
-    QTranslator* trans = new QTranslator(this);
-    QString tfn = qpeDir() + "/i18n/"+baseName;
-    if ( trans->load( tfn ) )
-        installTranslator( trans );
-    else
-        delete trans;
-}
 
 /*!
   \internal
