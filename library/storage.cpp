@@ -204,9 +204,10 @@ void StorageInfo::update()
             }
             else if ( disk.left(7) == "/dev/hd" )
                 humanname = tr("Hard Disk") + " " + disk;
-            else if ( disk.left(7) == "/dev/sd" )
+            else if ( disk.left(7) == "/dev/sd" ) {
                 humanname = tr("SCSI Hard Disk") + " " + disk;
-            else if ( disk.left(14) == "/dev/mtdblock6" ) //openzaurus ramfs
+                removable = TRUE;
+            } else if ( disk.left(14) == "/dev/mtdblock6" ) //openzaurus ramfs
                 humanname = tr("Internal Memory");
             else if ( disk == "/dev/mtdblock1" || humanname == "/dev/mtdblock/1" )
                 humanname = tr("Internal Storage");
