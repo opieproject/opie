@@ -109,14 +109,14 @@ static void setStyleRecursive ( QWidget *w, QStyle *s )
 }
                                                     
                                                     
-void SampleWindow::setStyle2 ( QStyle *sty )
+void SampleWindow::setStyle2 ( QStyle *sty, const QPalette &pal )
 {
 	typedef void (QStyle::*QDrawMenuBarItemImpl) (QPainter *, int, int, int, int, QMenuItem *, QColorGroup &, bool, bool);
 
 	extern QDrawMenuBarItemImpl qt_set_draw_menu_bar_impl(QDrawMenuBarItemImpl);
 
 	QPixmapCache::clear ( );
-	QPalette p = palette ( );
+	QPalette p = pal; // ette ( );
 	sty-> polish ( p );
 	qt_set_draw_menu_bar_impl ( 0 );
 	setStyleRecursive ( this, sty );

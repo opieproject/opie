@@ -47,7 +47,7 @@ public:
 
     virtual void setFont( const QFont &f );
 
-	void setStyle2 ( QStyle *sty );
+	void setStyle2 ( QStyle *sty, const QPalette &p );
     void setDecoration( WindowDecorationInterface *i );
     void setPalette ( const QPalette & );
 

@@ -420,12 +420,14 @@ Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
 
     OTabWidget* tw = new OTabWidget ( this, "tabwidget", OTabWidget::Global, OTabWidget::Bottom );
 	QWidget *styletab;
-
- 	tw-> addTab ( styletab = createStyleTab ( tw, config ), "appearance/style.png", tr( "Style" ));
-    tw-> addTab ( createFontTab ( tw, config ), "appearance/font.png", tr( "Font" ));
-    tw-> addTab ( createColorTab ( tw, config ), "appearance/color.png", tr( "Colors" ) );
-    tw-> addTab ( createDecoTab ( tw, config ), "appearance/deco.png", tr( "Windows" ) );
-	tw-> addTab ( m_advtab = createAdvancedTab ( tw, config ), "appearance/advanced.png", tr( "Advanced" ) );
+	
+	m_color_list = 0;
+	
+ 	tw-> addTab ( styletab = createStyleTab ( tw, config ), "appearance/style", tr( "Style" ));
+    tw-> addTab ( createFontTab ( tw, config ), "appearance/font", tr( "Font" ));
+    tw-> addTab ( createColorTab ( tw, config ), "appearance/color", tr( "Colors" ) );
+    tw-> addTab ( createDecoTab ( tw, config ), "appearance/deco", tr( "Windows" ) );
+	tw-> addTab ( m_advtab = createAdvancedTab ( tw, config ), "appearance/advanced", tr( "Advanced" ) );
 
 	top-> addWidget ( tw, 10 );
 	top-> addWidget ( m_sample, 1 );
@@ -528,10 +530,13 @@ void Appearance::styleClicked ( int index )
 {
     StyleListItem *sli = (StyleListItem *) m_style_list-> item ( index );
 	m_style_settings-> setEnabled ( sli ? sli-> hasSettings ( ) : false );
-
-	if ( m_sample && sli && sli-> style ( ))
-		m_sample-> setStyle2 ( sli-> style ( ));
-
+	
+	if ( m_sample && sli && sli-> style ( )) {
+		int ci = m_color_list ? m_color_list-> currentItem ( ) : -1;
+	
+		m_sample-> setStyle2 ( sli-> style ( ), ci < 0 ? palette ( ) : ((ColorListItem *) m_color_list-> item ( ci ))-> palette ( ));	
+	}
+		
 	m_style_changed |= ( index != m_original_style );
 }
 
