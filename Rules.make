@@ -69,9 +69,6 @@ endif
 ifeq ($(CONFIG_QT_QWS_ALLOW_CLOCK),y)
 	echo DEFINES += QT_QWS_ALLOW_OVERCLOCK >> $@
 endif
-ifeq ($(CONFIG_OPIE_HIGH_RES_SMALL_PHY),y)
-	echo DEFINES += OPIE_HIGH_RES_SMALL_PHY >> $@
-endif
 ifeq ($(CONFIG_OPIE_NEW_ALLOC),y)
 	echo DEFINES += OPIE_NEW_MALLOC >> $@
 endif

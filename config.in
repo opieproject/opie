@@ -138,11 +138,6 @@ config QT_QWS_ALLOW_OVERCLOCK
   depends TARGET_RAMSES
   default n
 
-config OPIE_HIGH_RES_SMALL_PHY
-  boolean "Resolution is bigger than physical screen"
-  default y if TARGET_C700
-  default n if ! TARGET_C700
-
 config USE_FILE_NOTIFICATION
   boolean "Substitute (some) polling interfaces with OFileNotifier"
   default y
