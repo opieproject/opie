@@ -47,11 +47,11 @@ SSHKeysApp::SSHKeysApp( QWidget* parent,  const char* name, WFlags fl )
     connect(RemoveAllButton, SIGNAL(clicked()), this, SLOT(doRemoveAllButton()));
 
     connect(&addprocess, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
-        this, SLOT(log_sshadd_output(OProcess*,char*,int)));
+            this, SLOT(log_sshadd_output(Opie::Core::OProcess*,char*,int)));
     connect(&addprocess, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),
-        this, SLOT(log_sshadd_stderr(OProcess*,char*,int)));
+            this, SLOT(log_sshadd_stderr(Opie::Core::OProcess*,char*,int)));
     connect(&addprocess, SIGNAL(processExited(Opie::Core::OProcess*)),
-        this, SLOT(ssh_add_exited(OProcess*)));
+            this, SLOT(ssh_add_exited(Opie::Core::OProcess*)));
 
     connect(KeyFileName, SIGNAL(textChanged(const QString&)),
         this, SLOT(add_text_changed(const QString&)));
@@ -88,9 +88,9 @@ void SSHKeysApp::doRefreshListButton()
     }
 
     connect(&sshadd_process, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
-        this, SLOT(get_list_keys_output(OProcess*,char*,int)));
+            this, SLOT(get_list_keys_output(Opie::Core::OProcess*,char*,int)));
     connect(&sshadd_process, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),
-        this, SLOT(log_sshadd_stderr(OProcess*,char*,int)));
+            this, SLOT(log_sshadd_stderr(Opie::Core::OProcess*,char*,int)));
 
     keystate = KeySize;
     incoming_keyname="";
@@ -279,9 +279,9 @@ void SSHKeysApp::doRemoveAllButton()
     OProcess sshadd_process;
 
     connect(&sshadd_process, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
-        this, SLOT(log_sshadd_output(OProcess*,char*,int)));
+            this, SLOT(log_sshadd_output(Opie::Core::OProcess*,char*,int)));
     connect(&sshadd_process, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),
-        this, SLOT(log_sshadd_stderr(OProcess*,char*,int)));
+            this, SLOT(log_sshadd_stderr(Opie::Core::OProcess*,char*,int)));
 
 //    log_text(tr("Running ssh-add -D"));
     sshadd_process << "ssh-add" << "-D";

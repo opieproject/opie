@@ -293,10 +293,10 @@ int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString /*option*/ )
             this, SLOT( processFinished()));
 
     connect(proc, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
-            this, SLOT(commandStdout(OProcess*,char*,int)));
+            this, SLOT(commandStdout(Opie::Core::OProcess*,char*,int)));
 
     connect(proc, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),
-            this, SLOT(commandStderr(OProcess*,char*,int)));
+            this, SLOT(commandStderr(Opie::Core::OProcess*,char*,int)));
 
     for ( QStringList::Iterator it = cmd.begin(); it != cmd.end(); ++it )
     {

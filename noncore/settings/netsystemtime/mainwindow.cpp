@@ -191,9 +191,9 @@ void MainWindow::runNTP()
     {
         ntpProcess = new OProcess();
         connect( ntpProcess, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
-                 this, SLOT(slotNtpOutput(OProcess*,char*,int)) );
+                 this, SLOT(slotNtpOutput(Opie::Core::OProcess*,char*,int)) );
         connect( ntpProcess, SIGNAL(processExited(Opie::Core::OProcess*)),
-                 this, SLOT(slotNtpFinished(OProcess*)) );
+                 this, SLOT(slotNtpFinished(Opie::Core::OProcess*)) );
     }
 
     else
