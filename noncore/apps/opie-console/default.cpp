@@ -9,7 +9,7 @@
 #include "btconfigwidget.h"
 #include "modemconfigwidget.h"
 #include "terminalwidget.h"
-#include "vt102emulation.h"
+#include "MyPty.h"
 
 #include "default.h"
 
@@ -49,6 +49,9 @@ extern "C" {
     IOLayer* newModemLayer( const Profile& prof ) {
         return new IOModem( prof );
     }
+    IOLayer* newConsole( const Profile& prof ) {
+        return new MyPty(prof );
+    }
 
     // Connection Widgets
     ProfileDialogWidget* newSerialWidget( const QString& str, QWidget* wid ) {
@@ -63,13 +66,16 @@ extern "C" {
     ProfileDialogWidget* newBTWidget( const QString& str, QWidget* wid ) {
         return new BTConfigWidget(str, wid );
     }
+    ProfileDialogWidget* newConsoleWid( const QString& str, QWidget* wid ) {
+        return 0l;
+    }
 
 
     // Terminal Widget(s)
-/*    ProfileDialogWidget* newTerminalWidget(const QString& na, QWidget* wid) {
+    ProfileDialogWidget* newTerminalWidget(const QString& na, QWidget* wid) {
         return new TerminalWidget(na, wid,0 );
     }
-*/
+
 /*    // VT Emulations
     EmulationLayer* newVT102( WidgetLayer* wid ) {
         return new Vt102Emulation( wid );
@@ -90,13 +96,15 @@ Default::Default( MetaFactory* fact ) {
     fact->addIOLayerFactory( "irda", QObject::tr("Infrared"), newIrDaLayer   );
     fact->addIOLayerFactory( "bt", QObject::tr("Bluetooth"),  newBTLayer     );
     fact->addIOLayerFactory( "modem", QObject::tr("Modem"),   newModemLayer  );
+    fact->addIOLayerFactory( "console", QObject::tr("Console"), newConsole   );
 
     fact->addConnectionWidgetFactory( "serial", QObject::tr("Serial"), newSerialWidget );
     fact->addConnectionWidgetFactory( "irda", QObject::tr("Infrared"), newIrDaWidget );
     fact->addConnectionWidgetFactory( "modem", QObject::tr("Modem"), newModemWidget );
     fact->addConnectionWidgetFactory( "bt", QObject::tr("Bluetooth"), newBTWidget );
+    fact->addConnectionWidgetFactory( "console", QObject::tr("Console"), newConsoleWid );
 
-//    fact->addTerminalWidgetFactory( "default", QObject::tr("Default Terminal"),  newTerminalWidget );
+    fact->addTerminalWidgetFactory( "default", QObject::tr("Default Terminal"),  newTerminalWidget );
 
 //    fact->addEmulationLayer( "default", QObject::tr("Default Terminal"), newVT102 );
 }

@@ -2,6 +2,7 @@
 #define OPIE_EMULATION_HANDLER_H
 
 #include <qobject.h>
+#include <qcolor.h>
 #include <qcstring.h>
 
 /*
@@ -26,6 +27,7 @@ class Profile;
 class QWidget;
 class TEWidget;
 class TEmulation;
+class QFont;
 class EmulationHandler : public QObject {
     Q_OBJECT
 public:
@@ -43,15 +45,21 @@ public:
 
     void load( const Profile& );
     QWidget* widget();
+    void setColor( const QColor& fore, const QColor& back );
 signals:
     void send( const QByteArray& );
     void changeSize(int rows, int cols );
+
 
 public slots:
     void recv( const QByteArray& );
 
 private slots:
     void recvEmulation( const char*,  int len );
+private:
+    QFont font( int );
+    QColor foreColor(int );
+    QColor backColor(int );
 
 private:
     TEWidget* m_teWid;

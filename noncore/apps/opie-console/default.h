@@ -17,12 +17,14 @@ extern "C" {
     IOLayer* newSerialLayer(const Profile&);
     IOLayer* newBTLayer(const Profile& );
     IOLayer* newIrDaLayer(const Profile& );
+    IOLayer* newConsole(const Profile& );
 
     ProfileDialogWidget* newSerialWidget(const QString&, QWidget* );
     ProfileDialogWidget* newIrDaWidget  (const QString&, QWidget* );
     ProfileDialogWidget* newBTWidget    (const QString&, QWidget* );
+    ProfileDialogWidget* newConsoleWid     (const QString&, QWidget* );
 
-//    ProfileDialogWidget* newTerminalWidget(const QString&, QWidget* );
+    ProfileDialogWidget* newTerminalWidget(const QString&, QWidget* );
 
 //    EmulationLayer* newVT102( WidgetLayer* );
 };

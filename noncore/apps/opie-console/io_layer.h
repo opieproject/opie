@@ -70,14 +70,14 @@ signals:
     /**
      * received input as QCString
      */
-    virtual void received( const QByteArray& ) = 0;
+    virtual void received( const QByteArray& );
 
     /**
      * an error occured
      * int for the error number
      * and QString for a text
      */
-    virtual void error( int, const QString& ) = 0;
+    virtual void error( int, const QString& );
 
 public slots:
     /**
