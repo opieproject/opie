@@ -76,7 +76,8 @@ QString OStorageInfo::mmcPath()const
 
     for (QListIterator<FileSystem> i( fileSystems() ); i.current(); ++i)
     {
-        if ( (*i)->disk().left( 14 ) == "/dev/mmc/part1" )
+        if ( (*i)->disk().left( 14 ) == "/dev/mmc/part1"||
+             (*i)->disk().left(11) == "/dev/mmcblk" )
         {
             r = (*i)->path();
             break;
