@@ -955,12 +955,7 @@ void PlayListWidget::openFile() {
             DocLnk lnk;
 
             lnk.setName(filename); //sets file name
-            // probably not needed anymore either
-            if(filename.right(1) != "/" && filename.right(3) != "mp3" && filename.right(3) != "MP3") {
-                filename += "/";
-            }
             lnk.setFile(filename); //sets File property
-
             lnk.setType("audio/x-mpegurl");
             lnk.setExec("opieplayer");
             lnk.setIcon("opieplayer/MPEGPlayer");
