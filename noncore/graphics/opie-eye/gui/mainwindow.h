@@ -25,6 +25,11 @@ class ImageView;
 class ImageWidget;
 class PIconView;
 class imageinfo;
+class QMenuBar;
+class QToolBar;
+class QPopupMenu;
+class QAction;
+class StorageInfo;
 
 class PMainWindow : public QMainWindow {
     Q_OBJECT
@@ -36,6 +41,7 @@ public:
 
 signals:
     void configChanged();
+    void changeDir( const QString& );
 
 public slots:
     void slotShowInfo( const QString& inf );
@@ -53,6 +59,7 @@ public slots:
 protected slots:
     void raiseIconView();
     void closeEvent( QCloseEvent* );
+    void showToolbar(bool);
 
 private:
     template<class T>  void initT( const char* name, T**, int );
@@ -68,11 +75,22 @@ private:
     bool autoRotate;
     bool autoScale;
     bool zoomerOn;
-    QToolButton*rotateButton,*upButton,*fsButton,*viewModeButton;
+    QToolButton*rotateButton,*fsButton,*viewModeButton;
     QToolButton*nextButton,*prevButton,*zoomButton,*scaleButton;
+    QMenuBar *menuBar;
+    QToolBar *toolBar;
+    QPopupMenu *fileMenu,*dispMenu,*fsMenu;
+    QAction*m_aShowInfo,*m_aBeam,*m_aTrash,*m_aViewfile,*m_aDirUp,*m_aStartSlide;
+    QAction*m_aHideToolbar;
+
+    /* for the device submenu - ToDo: Merge with the special button */
+    StorageInfo *m_storage;
+    QMap<QString, QString> m_dev;
 
 private slots:
     void slotConfig();
+    void slotSelectDir(int);
+    void dirChanged();
 };
 
 #endif

@@ -22,6 +22,7 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/ir.h>
+#include <qpe/storage.h>
 #include <qpe/applnk.h>
 
 #include <qtoolbar.h>
@@ -31,7 +32,8 @@
 #include <qmap.h>
 #include <qtimer.h>
 #include <qframe.h>
-
+#include <qmenubar.h>
+#include <qaction.h>
 
 //OPIE_EXPORT_APP_V2( Opie::Core::OApplicationFactory<PMainWindow>,"Opie Eye" )
 OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<PMainWindow>)
@@ -42,12 +44,24 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     setCaption( QObject::tr("Opie Eye Caramba" ) );
     m_cfg = new Opie::Core::OConfig("phunkview");
     m_cfg->setGroup("Zecke_view" );
+
+    m_storage = new StorageInfo();
+    connect(m_storage, SIGNAL(disksChanged() ),
+            this, SLOT( dirChanged() ) );
+
     /*
      * Initialize ToolBar and IconView
      * And Connect Them
      */
-    QToolBar *bar = new QToolBar( this );
-    bar->setHorizontalStretchable( true );
+    toolBar = new QToolBar( this );
+    menuBar = new QMenuBar( this );
+    fileMenu = new QPopupMenu( menuBar );
+    menuBar->insertItem( tr( "File" ), fileMenu );
+    dispMenu = new QPopupMenu( menuBar );
+    menuBar->insertItem( tr( "Show" ), dispMenu );
+
+    addToolBar(toolBar);
+    toolBar->setHorizontalStretchable( true );
     setToolBarsMovable( false );
 
     m_stack = new Opie::Ui::OWidgetStack( this );
@@ -56,6 +70,7 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     m_view = new PIconView( m_stack, m_cfg );
     m_stack->addWidget( m_view, IconView );
     m_stack->raiseWidget( IconView );
+
     connect(m_view, SIGNAL(sig_display(const QString&)),
             this, SLOT(slotDisplay(const QString&)));
     connect(m_view, SIGNAL(sig_showInfo(const QString&)),
@@ -63,58 +78,95 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
 
     m_stack->forceMode(Opie::Ui::OWidgetStack::NoForce);
 
-    upButton = new QToolButton( bar );
-    upButton->setIconSet(  Resource::loadIconSet( "up" ) );
-    connect( upButton, SIGNAL(clicked()),
-             m_view, SLOT(slotDirUp()) );
+    m_aDirUp = new QAction( tr( "Go dir up" ), Resource::loadIconSet( "up" ),
+                               0, 0, this, 0, true );
+    m_aDirUp->setToggleAction(false);
+    connect(m_aDirUp,SIGNAL(activated()),m_view,SLOT(slotDirUp()));
+    m_aDirUp->addTo( toolBar );
 
-    fsButton = new PFileSystem( bar );
+    QToolButton*btn;
+
+    fsButton = new PFileSystem( toolBar );
     connect( fsButton, SIGNAL( changeDir( const QString& ) ),
              m_view, SLOT(slotChangeDir( const QString& ) ) );
+    connect( this, SIGNAL( changeDir( const QString& ) ),
+             m_view, SLOT(slotChangeDir( const QString& ) ) );
 
-    QToolButton*btn = new QToolButton( bar );
-    btn->setIconSet( Resource::loadIconSet( "edit" ) );
-    connect( btn, SIGNAL(clicked()),
-             m_view, SLOT(slotImageInfo()) );
+    m_aShowInfo = new QAction( tr( "Show imageinfo" ), Resource::loadIconSet( "edit" ),
+                               0, 0, this, 0, true );
+    m_aShowInfo->setToggleAction(false);
+    connect(m_aShowInfo,SIGNAL(activated()),m_view,SLOT(slotImageInfo()));
+    m_aShowInfo->addTo( toolBar );
 
     if ( Ir::supported() ) {
-        btn = new QToolButton( bar );
-        btn->setIconSet( Resource::loadIconSet( "beam" ) );
-        connect( btn, SIGNAL(clicked()),
-                 m_view, SLOT(slotBeam()) );
+        m_aBeam = new QAction( tr( "Beam file" ), Resource::loadIconSet( "beam" ),
+                               0, 0, this, 0, true );
+        m_aBeam->setToggleAction(false);
+        connect(m_aBeam,SIGNAL(activated()),m_view,SLOT(slotBeam()));
+        m_aBeam->addTo( toolBar );
     }
+    m_aTrash = new QAction( tr( "Delete file" ), Resource::loadIconSet( "trash" ),
+                               0, 0, this, 0, true );
+    m_aTrash->setToggleAction(false);
+    connect(m_aTrash,SIGNAL(activated()),m_view,SLOT(slotTrash()));
+    m_aTrash->addTo( toolBar );
 
-    btn = new QToolButton( bar );
-    btn->setIconSet( Resource::loadIconSet( "trash" ) );
-    connect( btn, SIGNAL(clicked() ),
-             m_view, SLOT(slotTrash() ) );
+    m_aViewfile = new QAction( tr( "Display image" ), Resource::loadIconSet( "mag" ),
+                               0, 0, this, 0, true );
+    m_aViewfile->setToggleAction(false);
+    connect(m_aViewfile,SIGNAL(activated()),m_view,SLOT(slotShowImage()));
+
+    m_aStartSlide = new QAction( tr( "Start slideshow" ), Resource::loadIconSet( "play" ),
+                               0, 0, this, 0, true );
+    m_aStartSlide->setToggleAction(false);
+
+    connect(m_aStartSlide,SIGNAL(activated()),m_view,SLOT(slotStartSlide()));
 
 
     int mode = m_cfg->readNumEntry("ListViewMode", 1);
     if (mode < 1 || mode>3) mode = 1;
-    viewModeButton = new ViewModeButton( bar,mode );
+    viewModeButton = new ViewModeButton( toolBar,mode );
     connect( viewModeButton, SIGNAL(changeMode(int)),
              m_view, SLOT(slotChangeMode(int)));
 
-    btn = new QToolButton( bar );
+    btn = new QToolButton( toolBar );
     btn->setIconSet( Resource::loadIconSet( "SettingsIcon" ) );
     connect( btn, SIGNAL(clicked() ),
              this, SLOT(slotConfig() ) );
 
-
-
-    prevButton = new QToolButton(bar);
+    prevButton = new QToolButton(toolBar);
     prevButton->setIconSet( Resource::loadIconSet( "back" ) );
     connect(prevButton,SIGNAL(clicked()),m_view,SLOT(slotShowPrev()));
 
-    nextButton = new QToolButton(bar);
+    nextButton = new QToolButton(toolBar);
     nextButton->setIconSet( Resource::loadIconSet( "forward" ) );
     connect(nextButton,SIGNAL(clicked()),m_view,SLOT(slotShowNext()));
 
-    rotateButton = new QToolButton(bar);
+/* filemenu start */
+    m_aViewfile->addTo(fileMenu);
+    m_aShowInfo->addTo(fileMenu);
+    m_aStartSlide->addTo(fileMenu);
+
+    fileMenu->insertSeparator();
+    m_aDirUp->addTo( fileMenu );
+
+    fsMenu = new QPopupMenu(fileMenu);
+    fileMenu->insertItem(Resource::loadIconSet( "cardmon/pcmcia" ),tr("Select filesystem"),fsMenu);
+    connect( fsMenu, SIGNAL( activated( int ) ),
+             this, SLOT(slotSelectDir( int ) ) );
+    dirChanged();
+
+    fileMenu->insertSeparator();
+    if ( Ir::supported() ) {
+        m_aBeam->addTo( fileMenu );
+    }
+    fileMenu->insertSeparator();
+    m_aTrash->addTo( fileMenu );
+/* filemenu end */
+
+    rotateButton = new QToolButton(toolBar);
     rotateButton->setIconSet( Resource::loadIconSet( "rotate" ) );
     rotateButton->setToggleButton(true);
-
     if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
         rotateButton->setOn(true);
         autoRotate = true;
@@ -124,22 +176,30 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
         rotateButton->setOn(false);
         autoRotate = false;
     }
-
     connect(rotateButton,SIGNAL(toggled(bool)),this,SLOT(slotRotateToggled(bool)));
 
-    scaleButton = new QToolButton(bar);
+    scaleButton = new QToolButton(toolBar);
     scaleButton->setIconSet( Resource::loadIconSet( "1to1" ) );
     scaleButton->setToggleButton(true);
     scaleButton->setOn(false);
     connect(scaleButton,SIGNAL(toggled(bool)),this,SLOT(slotScaleToggled(bool)));
     autoScale = true;
 
-    zoomButton = new QToolButton(bar);
+    zoomButton = new QToolButton(toolBar);
     zoomButton->setIconSet( Resource::loadIconSet( "mag" ) );
     zoomButton->setToggleButton(true);
     zoomButton->setOn(true);
     connect(zoomButton,SIGNAL(toggled(bool)),this,SLOT(slotZoomerToggled(bool)));
     zoomerOn = true;
+
+/* showmenu */
+    m_aHideToolbar = new QAction( tr( "Show toolbar" ), Resource::loadIconSet( "UtilsIcon" ),
+            0, 0, this, 0, true );
+    m_aHideToolbar->setOn (true);
+    m_aHideToolbar->addTo(dispMenu);
+    connect(m_aHideToolbar,SIGNAL(toggled(bool)),this,SLOT(showToolbar(bool)));
+/* showmenu end*/
+
 }
 
 PMainWindow::~PMainWindow() {
@@ -177,9 +237,10 @@ void PMainWindow::slotToggleAutoscale()
 
 void PMainWindow::slotRotateToggled(bool how)
 {
+    odebug << "Autorotate: " << how << oendl;
     autoRotate = how;
     if (m_disp) {
-        m_disp->setAutoRotate(how);
+        m_disp->setAutoScaleRotate(autoScale,autoRotate);
     }
 }
 
@@ -367,7 +428,10 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
     if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
         prevButton->hide();
         nextButton->hide();
-        upButton->hide();
+        m_aDirUp->setEnabled(false);
+        m_aShowInfo->setEnabled(false);
+        m_aViewfile->setEnabled(true);
+        m_aStartSlide->setEnabled(false);
         fsButton->hide();
         viewModeButton->hide();
     }
@@ -375,6 +439,7 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
 }
 
 void PMainWindow::slotDisplay( const QString& inf ) {
+    odebug << "slotDisplay: " << inf << oendl;
     if ( !m_disp ) {
         initDisp();
     }
@@ -382,7 +447,10 @@ void PMainWindow::slotDisplay( const QString& inf ) {
     if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
         prevButton->show();
         nextButton->show();
-        upButton->hide();
+        m_aDirUp->setEnabled(false);
+        m_aShowInfo->setEnabled(true);
+        m_aViewfile->setEnabled(false);
+        m_aStartSlide->setEnabled(false);
         fsButton->hide();
         viewModeButton->hide();
     }
@@ -424,7 +492,10 @@ void PMainWindow::raiseIconView() {
     if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
         prevButton->hide();
         nextButton->hide();
-        upButton->show();
+        m_aDirUp->setEnabled(true);
+        m_aShowInfo->setEnabled(true);
+        m_aViewfile->setEnabled(true);
+        m_aStartSlide->setEnabled(true);
         fsButton->show();
         viewModeButton->show();
     }
@@ -443,4 +514,36 @@ void PMainWindow::setDocument( const QString& showImg ) {
         file = lnk.file();
 
     slotDisplay( file );
+}
+
+void PMainWindow::slotSelectDir(int id)
+{
+    emit changeDir( m_dev[fsMenu->text(id )] );
+}
+
+void PMainWindow::dirChanged()
+{
+    fsMenu->clear();
+    m_dev.clear();
+
+    /* home dir, too */
+    QString f = getenv( "HOME" );
+    if (!f.isEmpty()) {
+        m_dev.insert("Home directory",f);
+        fsMenu->insertItem("Home directory");
+    }
+    const QList<FileSystem> &fs = m_storage->fileSystems();
+    QListIterator<FileSystem> it(fs );
+    for ( ; it.current(); ++it ) {
+        const QString disk = (*it)->name();
+        const QString path = (*it)->path();
+        m_dev.insert( disk, path );
+        fsMenu->insertItem( disk );
+    }
+}
+
+void PMainWindow::showToolbar(bool how)
+{
+    if (!how) toolBar->hide();
+    else toolBar->show();
 }

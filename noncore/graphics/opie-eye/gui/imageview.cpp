@@ -203,4 +203,3 @@ void ImageView::enableFullscreen()
       setUpdatesEnabled(true);
 
 }
-

@@ -673,7 +673,7 @@ void PIconView::slotShowImage()
 void PIconView::slotShowImage( const QString& name) {
     PDirLister *lister = currentView()->dirLister();
     QString r_name = lister->nameToFname(name);
-    emit sig_display( r_name );
+    emit sig_display(r_name);
 }
 
 void PIconView::slotStartSlide() {
@@ -692,7 +692,6 @@ void PIconView::slotImageInfo() {
     bool isDir = false;
     QString name = currentFileName(isDir);
     if (isDir) return;
-
     slotImageInfo( name );
 }
 

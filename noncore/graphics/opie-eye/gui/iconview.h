@@ -37,7 +37,7 @@ public:
 
 signals:
     void sig_showInfo( const QString& );
-    void sig_display( const QString& );
+    void sig_display(const QString&);
     void sig_startslide(int timeout);
 
 public slots:
