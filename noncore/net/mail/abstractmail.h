@@ -23,9 +23,9 @@ public:
     virtual QString fetchPart(const RecMail&mail,const RecPart&part)=0;
     virtual void deleteMail(const RecMail&mail)=0;
     virtual void answeredMail(const RecMail&mail)=0;
-    
+
     static AbstractMail* getWrapper(IMAPaccount *a);
     static AbstractMail* getWrapper(POP3account *a);
+    static QString decode_quoted_printable(const char*text);
 };
-
 #endif

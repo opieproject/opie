@@ -392,6 +392,9 @@ void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_1part*mai
     case MAILIMAP_BODY_TYPE_1PART_MSG:
         path.append(1);
         body_text = fetchPart(mail,path,true);
+        if (singlePart.Encoding()=="quoted-printable") {
+            body_text = decode_quoted_printable(body_text.latin1());
+        }
         target_body.setBodytext(body_text);
         target_body.setDescription(singlePart);
         break;
@@ -399,6 +402,9 @@ void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_1part*mai
         qDebug("Mediatype single: %s",mailDescription->bd_data.bd_type_text->bd_media_text);
         path.append(1);
         body_text = fetchPart(mail,path,true);
+        if (singlePart.Encoding()=="quoted-printable") {
+            body_text = decode_quoted_printable(body_text.latin1());
+        }
         target_body.setBodytext(body_text);
         target_body.setDescription(singlePart);
         break;
@@ -455,7 +461,7 @@ QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
     return l;
 }
 
-QString IMAPwrapper::fetchPart(const RecMail&mail,const QValueList<int>&path,bool internal_call)
+QString IMAPwrapper::fetchPart(const RecMail&mail,const QValueList<int>&path,bool internal_call,const QString&enc)
 {
     QString body("");
     const char*mb;
@@ -507,7 +513,11 @@ QString IMAPwrapper::fetchPart(const RecMail&mail,const QValueList<int>&path,boo
                     char*text = msg_att_item->att_data.att_static->att_data.att_body_section->sec_body_part;
                     msg_att_item->att_data.att_static->att_data.att_body_section->sec_body_part = 0L;
                     if (text) {
-                        body = QString(text);
+                        if (enc=="quoted-printable") {
+                            body = decode_quoted_printable(text);
+                        } else {
+                            body = QString(text);
+                        }
                         free(text);
                     } else {
                         body = "";
@@ -547,7 +557,7 @@ void IMAPwrapper::searchBodyText(const RecMail&mail,mailimap_body_type_mpart*mai
             clist.append(count);
             /* important: Check for is NULL 'cause a body can be empty! */
             if (currentPart.Type()=="text" && target_body.Bodytext().isNull() ) {
-                QString body_text = fetchPart(mail,clist,true);
+                QString body_text = fetchPart(mail,clist,true,currentPart.Encoding());
                 target_body.setDescription(currentPart);
                 target_body.setBodytext(body_text);
             } else {
@@ -705,7 +715,7 @@ void IMAPwrapper::fillBodyFields(RecPart&target_part,mailimap_body_fields*which)
 
 QString IMAPwrapper::fetchPart(const RecMail&mail,const RecPart&part)
 {
-    return fetchPart(mail,part.Positionlist(),false);
+    return fetchPart(mail,part.Positionlist(),false,part.Encoding());
 }
 
 void IMAPwrapper::deleteMail(const RecMail&mail)

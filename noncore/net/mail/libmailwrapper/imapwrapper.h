@@ -34,7 +34,7 @@ protected:
     void login();
     void logout();
 
-    virtual QString fetchPart(const RecMail&mail,const QValueList<int>&path,bool internal_call=false);
+    virtual QString fetchPart(const RecMail&mail,const QValueList<int>&path,bool internal_call=false,const QString&enc="");
     
     void searchBodyText(const RecMail&mail,mailimap_body_type_1part*mailDescription,RecBody&target_body);
     void searchBodyText(const RecMail&mail,mailimap_body_type_mpart*mailDescription,RecBody&target_body,int current_recursion=0,QValueList<int>recList=QValueList<int>());
@@ -48,7 +48,7 @@ protected:
     static void fillBodyFields(RecPart&target_part,mailimap_body_fields*which);
     static QStringList address_list_to_stringlist(clist*list);
 
-private:
+
     IMAPaccount *account;
     mailimap *m_imap;
 };
