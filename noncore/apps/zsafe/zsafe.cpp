@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.9 2004-02-08 19:14:56 ar Exp $
+** $Id: zsafe.cpp,v 1.10 2004-02-23 17:12:28 drw Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -28,7 +28,10 @@
 
 #ifndef DESKTOP
 #ifndef NO_OPIE
-#include <opie/ofiledialog.h>
+#include <opie2/ofiledialog.h>
+
+using Opie::OFileDialog;
+using Opie::OFileSelector;
 #else
 #include "scqtfileedit.h"
 #endif
@@ -134,7 +137,7 @@ const QString APP_KEY="";
 #include "pics/zsafe/import.xpm"
 #include "pics/zsafe/zsafe.xpm"
 
-static const char* const bank_cards_data[] = { 
+static const char* const bank_cards_data[] = {
 "14 14 16 1",
 ". c None",
 "# c #000000",
@@ -168,7 +171,7 @@ static const char* const bank_cards_data[] = {
 ".............."};
 
 
-static const char* const passwords_data[] = { 
+static const char* const passwords_data[] = {
 "16 16 20 1",
 ". c None",
 "# c #000000",
@@ -207,7 +210,7 @@ static const char* const passwords_data[] = {
 "#oopqpprprr#....",
 "############...."};
 
-static const char* const software_data[] = { 
+static const char* const software_data[] = {
 "16 16 5 1",
 ". c None",
 "# c #000000",
@@ -231,7 +234,7 @@ static const char* const software_data[] = {
 ".##############.",
 "................"};
 
-static const char* const general_data[] = { 
+static const char* const general_data[] = {
 "14 14 98 2",
 "Qt c None",
 ".k c #000000",
@@ -379,15 +382,15 @@ static const char* const general_data[] = {
   }
 
 
-/* 
- *  Constructs a ZSafe which is a child of 'parent', with the 
- *  name 'name' and widget flags set to 'f' 
+/*
+ *  Constructs a ZSafe which is a child of 'parent', with the
+ *  name 'name' and widget flags set to 'f'
  *
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  TRUE to construct a modal dialog.
  */
 ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl ),  
+    : QDialog( parent, name, modal, fl ),
       Edit(0l), Delete(0l), Find(0l), New(0l), ListView(0l)
 {
     IsCut = false;
@@ -409,7 +412,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
 #else
     if (qpedir.isEmpty())
        iconPath = "/home/QtPalmtop/pics/";
-    else 
+    else
        iconPath = qpedir + "/pics/";
 #endif
 
@@ -458,13 +461,13 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     QPixmap software( ( const char** ) software_data );
     QPixmap general( ( const char** ) general_data );
     if ( !name )
-	setName( "ZSafe" );
+    setName( "ZSafe" );
 
 #ifdef DESKTOP
 #ifdef WIN32
-    setGeometry(100, 150, DeskW, DeskH-30 ); 
+    setGeometry(100, 150, DeskW, DeskH-30 );
 #else
-    resize( DeskW, DeskH-30 ); 
+    resize( DeskW, DeskH-30 );
 #endif
 
 #else
@@ -498,7 +501,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
 // #ifndef WIN32
     // QString d1("Documents/application");
 // #else
-	QString d1(QDir::homeDirPath() + "/Documents/application");
+    QString d1(QDir::homeDirPath() + "/Documents/application");
 // #endif
     QDir pd1(d1);
     if (!pd1.exists())
@@ -515,7 +518,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
           exitZs (1);
        }
     }
-	 QString d2(QDir::homeDirPath() + "/Documents/application/zsafe");
+     QString d2(QDir::homeDirPath() + "/Documents/application/zsafe");
     QDir pd2(d2);
     if (!pd2.exists())
     {
@@ -531,7 +534,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
           exitZs (1);
        }
     }
-    
+
 
     // set the default filename
     filename=d2 + "/passwords.zsf";
@@ -576,14 +579,14 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
 // #endif
 
     file->insertItem( save_img, tr("&Save document"),  this, SLOT(saveDocumentWithoutPwd()) );
-    file->insertItem( save_img, tr("S&ave document with new Password"),  this, 
+    file->insertItem( save_img, tr("S&ave document with new Password"),  this,
                       SLOT(saveDocumentWithPwd()) );
     file->insertSeparator();
     file->insertItem( export_img, tr("&Export text file"),  this, SLOT(writeAllEntries()) );
     file->insertItem( import_img, tr("&Import text file"),  this, SLOT(readAllEntries()) );
     file->insertItem( trash_img, tr("&Remove text file"),  this, SLOT(removeAsciiFile()) );
     file->insertSeparator();
-    file->insertItem( expand_img, tr("&Open entries expanded"), this, 
+    file->insertItem( expand_img, tr("&Open entries expanded"), this,
                       SLOT(setExpandFlag()), 0, 'o');
     file->setItemChecked('o', expandTree);
     file->insertSeparator();
@@ -614,26 +617,26 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     // toolbar icons
 
     New = new QToolButton( menu, "New" );
-    New->setGeometry( QRect( DeskW-84, 2, 20, 20 ) ); 
+    New->setGeometry( QRect( DeskW-84, 2, 20, 20 ) );
     New->setMouseTracking( TRUE );
     New->setText( tr( "" ) );
     New->setPixmap( new_img );
     QToolTip::add(  New, tr( "New entry" ) );
 
     Edit = new QToolButton( menu, "Edit" );
-    Edit->setGeometry( QRect( DeskW-64, 2, 20, 20 ) ); 
+    Edit->setGeometry( QRect( DeskW-64, 2, 20, 20 ) );
     Edit->setText( tr( "" ) );
     Edit->setPixmap( edit_img );
     QToolTip::add(  Edit, tr( "Edit category or entry" ) );
 
     Delete = new QToolButton( menu, "Delete" );
-    Delete->setGeometry( QRect( DeskW-44, 2, 20, 20 ) ); 
+    Delete->setGeometry( QRect( DeskW-44, 2, 20, 20 ) );
     Delete->setText( tr( "" ) );
     Delete->setPixmap( trash_img );
     QToolTip::add(  Delete, tr( "Delete category or entry" ) );
 
     Find = new QToolButton( menu, "Find" );
-    Find->setGeometry( QRect( DeskW-24, 2, 20, 20 ) ); 
+    Find->setGeometry( QRect( DeskW-24, 2, 20, 20 ) );
     Find->setText( tr( "" ) );
     Find->setPixmap( find_img );
     QToolTip::add(  Find, tr( "Find entry" ) );
@@ -658,11 +661,11 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
 
 #ifdef DESKTOP
     ListView->setResizePolicy(QScrollView::AutoOneFit);
-    // ListView->setGeometry( QRect( 0, 22, this->width(), this->height() - 30 ) ); 
+    // ListView->setGeometry( QRect( 0, 22, this->width(), this->height() - 30 ) );
 #else
     ListView->setResizePolicy(QScrollView::AutoOneFit);
-    // ListView->setGeometry( QRect( 0, 22, 
-                           // this->width(), this->height() - 30 ) ); 
+    // ListView->setGeometry( QRect( 0, 22,
+                           // this->width(), this->height() - 30 ) );
     // ListView->setMaximumSize( QSize( 440, 290 ) );
 #endif
     ListView->setVScrollBarMode( QListView::Auto );
@@ -701,7 +704,7 @@ const QColor *ZSafe::evenRowColor = &Qt::white;
 // const QColor *ZSafe::oddRowColor = &Qt::lightGray;
 const QColor *ZSafe::oddRowColor = new QColor(216,240,255);
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 ZSafe::~ZSafe()
@@ -725,7 +728,7 @@ void ZSafe::deletePwd()
     {
        switch( QMessageBox::information( this, tr("ZSafe"),
                                       tr("Do you want to delete?"),
-                                      tr("&Delete"), tr("D&on't Delete"), 
+                                      tr("&Delete"), tr("D&on't Delete"),
                                       0      // Enter == button 0
                                       ) ) { // Escape == button 2
        case 0: // Delete clicked, Alt-S or Enter pressed.
@@ -754,9 +757,9 @@ void ZSafe::editPwd()
        NewDialog *dialog = new NewDialog(this, tr("Edit Entry"), TRUE);
 #ifdef WIN32
        dialog->setCaption ("Qt " + tr("Edit Entry"));
-       dialog->setGeometry(200, 250, 220, 310 ); 
+       dialog->setGeometry(200, 250, 220, 310 );
 #endif
-    
+
        // set the labels
        dialog->Name->setText(getFieldLabel (selectedItem,     "1", tr("Name")));
        dialog->Username->setText(getFieldLabel (selectedItem, "2", tr("Username")));
@@ -785,24 +788,24 @@ void ZSafe::editPwd()
        {
           modified = true;
           // edit the selected item
-          QString name = dialog->NameField->text(); 
+          QString name = dialog->NameField->text();
           selectedItem->setText (0, tr (name));
-          QString user = dialog->UsernameField->text(); 
+          QString user = dialog->UsernameField->text();
           selectedItem->setText (1, tr (user));
-          QString pwd = dialog->PasswordField->text(); 
+          QString pwd = dialog->PasswordField->text();
           selectedItem->setText (2, tr (pwd));
-          QString comment = dialog->CommentField->text(); 
+          QString comment = dialog->CommentField->text();
           comment.replace (QRegExp("\n"), "<br>");
           selectedItem->setText (3, tr (comment));
-          QString f5 = dialog->Field5->text(); 
+          QString f5 = dialog->Field5->text();
           selectedItem->setText (4, tr (f5));
-          QString f6 = dialog->Field6->text(); 
+          QString f6 = dialog->Field6->text();
           selectedItem->setText (5, tr (f6));
        }
 
        delete dialog;
     }
-    else 
+    else
     {
        editCategory();
     }
@@ -824,7 +827,7 @@ void ZSafe::newPwd()
        NewDialog *dialog = new NewDialog(this, tr("New Entry"), TRUE);
 #ifdef WIN32
        dialog->setCaption ("Qt " + tr("New Entry"));
-       dialog->setGeometry(200, 250, 220, 310 ); 
+       dialog->setGeometry(200, 250, 220, 310 );
 #endif
        // set the labels
        dialog->Name->setText(getFieldLabel (selectedItem,     "1", tr("Name")));
@@ -843,7 +846,7 @@ retype:
        if (result == Accepted)
        {
 
-          QString name = dialog->NameField->text(); 
+          QString name = dialog->NameField->text();
           if (cat == name)
           {
              QMessageBox::critical( 0, tr("ZSafe"),
@@ -857,16 +860,16 @@ retype:
           i->setOpen (TRUE);
 
           i->setText (0, tr (name));
-          QString user = dialog->UsernameField->text(); 
+          QString user = dialog->UsernameField->text();
           i->setText (1, tr (user));
-          QString pwd = dialog->PasswordField->text(); 
+          QString pwd = dialog->PasswordField->text();
           i->setText (2, tr (pwd));
-          QString comment = dialog->CommentField->text(); 
+          QString comment = dialog->CommentField->text();
           comment.replace (QRegExp("\n"), "<br>");
           i->setText (3, tr (comment));
-          QString f5 = dialog->Field5->text(); 
+          QString f5 = dialog->Field5->text();
           i->setText (4, tr (f5));
-          QString f6 = dialog->Field6->text(); 
+          QString f6 = dialog->Field6->text();
           i->setText (5, tr (f6));
        }
 
@@ -952,7 +955,7 @@ void ZSafe::findPwd()
        i = lastSearchedCategory;
      else
        i = ListView->firstChild();
-    for (; 
+    for (;
          i != NULL;
          i = i->nextSibling())
     {
@@ -965,7 +968,7 @@ void ZSafe::findPwd()
           si = lastSearchedItem;
        else
           si = i->firstChild();
-       // for (si = i->firstChild(); 
+       // for (si = i->firstChild();
        for (;
             si != NULL;
             si = si->nextSibling())
@@ -1018,9 +1021,9 @@ void ZSafe::findPwd()
     lastSearchedItem = NULL;
     delete dialog;
     update();
-    QMessageBox::information( this, tr("ZSafe"), 
+    QMessageBox::information( this, tr("ZSafe"),
                              tr("Entry not found"), tr("&OK"), 0);
-        
+
 }
 
 QString ZSafe::getFieldLabel (QListViewItem *_item, QString field, QString def)
@@ -1076,7 +1079,7 @@ QString ZSafe::getFieldLabel (QString category, QString field, QString def)
 #endif
 #endif
 // #ifndef WIN32
-   QString label = conf->readEntry(app_key+category+"-field"+field, 
+   QString label = conf->readEntry(app_key+category+"-field"+field,
                                    def);
 // #else
    // QString label(def);
@@ -1093,7 +1096,7 @@ void ZSafe::showInfo( QListViewItem *_item)
       return;
    if (selectedItem != NULL)
       selectedItem->setSelected(FALSE);
-   
+
    selectedItem = _item;
    selectedItem->setSelected(TRUE);
 
@@ -1238,14 +1241,14 @@ void ZSafe::removeAsciiFile()
                        this,
                        tr ("Remove text file"));
 #else
-  QString fn = ScQtFileEdit::getOpenFileName(this, 
+  QString fn = ScQtFileEdit::getOpenFileName(this,
                        tr ("Remove text file"),
                        QDir::homeDirPath() + "/Documents/application/zsafe",
                        "*.txt");
 #endif
 #else
   QString fn = QFileDialog::getOpenFileName(
-	            QDir::homeDirPath() + "/Documents/application/zsafe",
+                QDir::homeDirPath() + "/Documents/application/zsafe",
                     "ZSafe (*.txt)",
                     this,
                     "ZSafe File Dialog"
@@ -1255,7 +1258,7 @@ void ZSafe::removeAsciiFile()
   if (fn && fn.length() > 0 )
   {
     QFile f( fn );
-    if ( !f.remove() ) 
+    if ( !f.remove() )
     {
         qWarning( QString("Could not remove file %1").arg(fn),
                       2000 );
@@ -1288,14 +1291,14 @@ void ZSafe::writeAllEntries()
                        this,
                        tr ("Export text file"));
 #else
-   QString fn = ScQtFileEdit::getSaveAsFileName(this, 
+   QString fn = ScQtFileEdit::getSaveAsFileName(this,
                        tr ("Export text file"),
                        QDir::homeDirPath() + "/Documents/application/zsafe",
                        "*.txt");
 #endif
 #else
    QString fn = QFileDialog::getSaveFileName(
-	            QDir::homeDirPath() + "/Documents/application/zsafe",
+                QDir::homeDirPath() + "/Documents/application/zsafe",
                     "ZSafe (*.txt)",
                     this,
                     "ZSafe File Dialog"
@@ -1317,13 +1320,13 @@ void ZSafe::writeAllEntries()
 
     QListViewItem *i;
     // step through all categories
-    for (i = ListView->firstChild(); 
+    for (i = ListView->firstChild();
          i != NULL;
          i = i->nextSibling())
     {
        // step through all subitems
        QListViewItem *si;
-       for (si = i->firstChild(); 
+       for (si = i->firstChild();
             si != NULL;
             si = si->nextSibling())
        {
@@ -1383,14 +1386,14 @@ void ZSafe::readAllEntries()
                        this,
                        tr ("Import text file"));
 #else
-  QString fn = ScQtFileEdit::getOpenFileName(this, 
+  QString fn = ScQtFileEdit::getOpenFileName(this,
                        tr ("Import text file"),
                        QDir::homeDirPath() + "/Documents/application/zsafe",
                        "*.txt");
 #endif
 #else
   QString fn = QFileDialog::getOpenFileName(
-	            QDir::homeDirPath() + "/Documents/application/zsafe",
+                QDir::homeDirPath() + "/Documents/application/zsafe",
                     "ZSafe (*.txt)",
                     this,
                     "ZSafe File Dialog"
@@ -1435,20 +1438,20 @@ void ZSafe::readAllEntries()
    qWarning ("ReadAllEntries(): ");
 
    QTextStream t(&f);
-   while ( !t.eof() ) 
+   while ( !t.eof() )
    {
       QString s = t.readLine();
       s.replace (QRegExp("\";\""), "\"|\"");
       // char buffer[1024];
 #ifndef WIN32
-	  char buffer[s.length()+1];
+      char buffer[s.length()+1];
 #else
-	  char buffer[4048];
+      char buffer[4048];
 #endif
 
 
       /* modify QString -> QCString::utf8 */
-      
+
       strcpy (buffer, s.utf8());
 
       QString name;
@@ -1499,7 +1502,7 @@ void ZSafe::readAllEntries()
                field6.truncate(field6.length() -1);
                break;
          }
-         idx++; 
+         idx++;
       }
 
       Category *cat= categories.find (category);
@@ -1593,13 +1596,13 @@ void ZSafe::writeAllEntries()
 
     QListViewItem *i;
     // step through all categories
-    for (i = ListView->firstChild(); 
+    for (i = ListView->firstChild();
          i != NULL;
          i = i->nextSibling())
     {
        // step through all subitems
        QListViewItem *si;
-       for (si = i->firstChild(); 
+       for (si = i->firstChild();
             si != NULL;
             si = si->nextSibling())
        {
@@ -1670,14 +1673,14 @@ void ZSafe::readAllEntries()
    qWarning ("ReadAllEntries(): ");
 
    QTextStream t(&f);
-   while ( !t.eof() ) 
+   while ( !t.eof() )
    {
       QString s = t.readLine();
       s.replace (QRegExp("\";\""), "\"|\"");
       // char buffer[1024];
-	  int len=s.length()+1;
+      int len=s.length()+1;
 #ifdef WIN32
-	  char buffer[512];
+      char buffer[512];
 #else
       char buffer[len];
 #endif
@@ -1719,7 +1722,7 @@ void ZSafe::readAllEntries()
                comment.truncate(comment.length() -1);
                break;
          }
-         idx++; 
+         idx++;
       }
 
       Category *cat= categories.find (category);
@@ -1832,7 +1835,7 @@ bool ZSafe::openDocument(const char* _filename, const char* )
 // #ifndef WIN32
      int validationFlag = conf->readNumEntry(APP_KEY+"valzsafe", 1);
 // #else
-	 // int validationFlag = 1;
+     // int validationFlag = 1;
 // #endif
 
      int pwdOk = 0;
@@ -1843,9 +1846,9 @@ bool ZSafe::openDocument(const char* _filename, const char* )
         if (f.exists())
         {
            // ask with a dialog for the password
-	   if (m_password.isEmpty())
-	      getDocPassword(tr("Enter Password"));
-	   if (m_password.isEmpty() && validationFlag == 0)
+       if (m_password.isEmpty())
+          getDocPassword(tr("Enter Password"));
+       if (m_password.isEmpty() && validationFlag == 0)
            {
               qWarning ("Wrong password");
               QMessageBox::critical( 0, tr("ZSafe"),
@@ -1853,12 +1856,12 @@ bool ZSafe::openDocument(const char* _filename, const char* )
               exitZs (1);
            }
 
-	   retval = loadInit(_filename, m_password);
-	   if (retval != PWERR_GOOD) 
+       retval = loadInit(_filename, m_password);
+       if (retval != PWERR_GOOD)
            {
                 qWarning ("Error loading Document");
-		return false;
-	   }
+        return false;
+       }
         }
         else
         {
@@ -1879,7 +1882,7 @@ bool ZSafe::openDocument(const char* _filename, const char* )
             break;
         }
 
-	retval = loadEntry(entry);
+    retval = loadEntry(entry);
         if (retval == 1 &&
             !strcmp (entry[0], "ZSAFECATEGORY") &&
             !strcmp (entry[1], "name") &&
@@ -1887,23 +1890,23 @@ bool ZSafe::openDocument(const char* _filename, const char* )
             !strcmp (entry[3], "password") &&
             !strcmp (entry[4], "comment") )
         {
-	    for (int count = 0; count < FIELD_SIZE; count++) free(entry[count]);
+        for (int count = 0; count < FIELD_SIZE; count++) free(entry[count]);
             pwdOk = 1;
             break;
         }
         else
-	   // for (int count = 0; count < FIELD_SIZE; count++) free(entry[count]);
-	fclose (fd);
+       // for (int count = 0; count < FIELD_SIZE; count++) free(entry[count]);
+    fclose (fd);
         m_password = "";
 
         if (i < numberOfTries - 1)
         {
            switch( QMessageBox::warning( this, tr("ZSafe"),
                     tr("Wrong password.\nEnter again?"),
-                    tr("&Yes"), tr("&No."), 
-                    0      
-                    ) ) 
-           { 
+                    tr("&Yes"), tr("&No."),
+                    0
+                    ) )
+           {
            case 1: // No
                  exitZs (1);
                  break;
@@ -1923,10 +1926,10 @@ bool ZSafe::openDocument(const char* _filename, const char* )
      }
 
 
-	retval = loadEntry(entry);
-        
+    retval = loadEntry(entry);
+
         int numberOfEntries=0;
-	while (retval == 1) {
+    while (retval == 1) {
 
                 QString category( QString::fromUtf8(entry[0]) );
                 QString name( QString::fromUtf8(entry[1]) );
@@ -2008,157 +2011,157 @@ bool ZSafe::openDocument(const char* _filename, const char* )
                    numberOfEntries++;
                 }
 
-		for (int count = 0; count < FIELD_SIZE; count++) {
-			free(entry[count]);
-		}
-		retval = loadEntry(entry);
-		if (retval == 2) {
-			// m_parent->slotStatusHelpMsg("Last entry loaded");
-		}
-	} // end while
+        for (int count = 0; count < FIELD_SIZE; count++) {
+            free(entry[count]);
+        }
+        retval = loadEntry(entry);
+        if (retval == 2) {
+            // m_parent->slotStatusHelpMsg("Last entry loaded");
+        }
+    } // end while
 
         if (numberOfEntries == 0)
         {
-    
+
            switch( QMessageBox::warning( this, tr("ZSafe"),
                  tr("Empty document or\nwrong password.\nContinue?"),
-                 tr("&No"), tr("&Yes."), 
-                 0      
-                 ) ) { 
+                 tr("&No"), tr("&Yes."),
+                 0
+                 ) ) {
            case 0: // No
-	      retval = loadFinalize();
+          retval = loadFinalize();
               exitZs (1);
               break;
            case 1:  // Yes
               break;
            }
-	}
+    }
 
-	retval = loadFinalize();
+    retval = loadFinalize();
 
-	return true;
+    return true;
 }
 
 int ZSafe::loadInit(const char* _filename, const char *password)
 {
-	unsigned int j = 0;
-	unsigned int keylength=0;
-	int count=0, count2=0, count3=0;
-	unsigned char charbuf[8];
-	unsigned short ciphertext[4];
-	char key[128];
-	Krc2* krc2 = new Krc2();
+    unsigned int j = 0;
+    unsigned int keylength=0;
+    int count=0, count2=0, count3=0;
+    unsigned char charbuf[8];
+    unsigned short ciphertext[4];
+    char key[128];
+    Krc2* krc2 = new Krc2();
 
-	fd = fopen (_filename, "rb");
+    fd = fopen (_filename, "rb");
 
         QFileInfo f (_filename);
         load_buffer_length = f.size();
         load_buffer_length = ((load_buffer_length / 1024)+1) * 1024 * 2;
 
-	if (fd == NULL)
-		return PWERR_OPEN;
+    if (fd == NULL)
+        return PWERR_OPEN;
 
-	buffer = (char *)malloc(load_buffer_length);
-	for (j = 0; password[j] != '\0'; j++) {
-		key[j] = password[j];
-	}
-	keylength = j;
-	krc2->rc2_expandkey (key, keylength, 128);
+    buffer = (char *)malloc(load_buffer_length);
+    for (j = 0; password[j] != '\0'; j++) {
+        key[j] = password[j];
+    }
+    keylength = j;
+    krc2->rc2_expandkey (key, keylength, 128);
 
 #ifndef WIN32
-	size = read(fileno (fd), (unsigned char *) (charbuf + count), 8);
+    size = read(fileno (fd), (unsigned char *) (charbuf + count), 8);
 #else
-	printf ("LoadInit() read1");
+    printf ("LoadInit() read1");
     size = fread ((unsigned char *) (charbuf + count), sizeof(unsigned char), 8, fd);
 #endif
 
-	if (size < 8)
-		return PWERR_DATA;
+    if (size < 8)
+        return PWERR_DATA;
 
-	for (count = 0; count < 4; count++) {
-		count2 = count << 1;
-		iv[count] = charbuf[count2] << 8;
-		iv[count] += charbuf[count2 + 1];
-	}
+    for (count = 0; count < 4; count++) {
+        count2 = count << 1;
+        iv[count] = charbuf[count2] << 8;
+        iv[count] += charbuf[count2 + 1];
+    }
 
-	size = 0;
-	bufferIndex = 0;
+    size = 0;
+    bufferIndex = 0;
 #ifndef WIN32
-	while ((count = read (fileno (fd), (unsigned char *) charbuf, 8)) > 0) {
-		while (count < 8) {
-			count2 = read (fileno (fd), (unsigned char *) (charbuf + count), 8);
+    while ((count = read (fileno (fd), (unsigned char *) charbuf, 8)) > 0) {
+        while (count < 8) {
+            count2 = read (fileno (fd), (unsigned char *) (charbuf + count), 8);
 #else
-	printf ("LoadInit() read2");
+    printf ("LoadInit() read2");
     while ((count = fread ((unsigned char *) (charbuf), sizeof(unsigned char), 8, fd)) > 0) {
-		while (count < 8) {
-			count2 = fread ((unsigned char *) (charbuf + count), sizeof(unsigned char), 8, fd);
+        while (count < 8) {
+            count2 = fread ((unsigned char *) (charbuf + count), sizeof(unsigned char), 8, fd);
 #endif
-			if (count2 == 0) {
-				return PWERR_DATA;
-			}
-			count += count2;
-		} /* while (count < 8) */
+            if (count2 == 0) {
+                return PWERR_DATA;
+            }
+            count += count2;
+        } /* while (count < 8) */
 
-		size += 8;
-		for (count2 = 0; count2 < 8; count2 += 2) {
-			count3 = count2 >> 1;
-			ciphertext[count3] = charbuf[count2] << 8;
-			ciphertext[count3] += charbuf[count2 + 1];
+        size += 8;
+        for (count2 = 0; count2 < 8; count2 += 2) {
+            count3 = count2 >> 1;
+            ciphertext[count3] = charbuf[count2] << 8;
+            ciphertext[count3] += charbuf[count2 + 1];
 
-			plaintext[count3] = ciphertext[count3] ^ iv[count3];
-			iv[count3] = plaintext[count3];
-		} /* for (count2) */
+            plaintext[count3] = ciphertext[count3] ^ iv[count3];
+            iv[count3] = plaintext[count3];
+        } /* for (count2) */
 
-		krc2->rc2_decrypt (plaintext);
-		memcpy ((unsigned char *) (buffer + bufferIndex), plaintext, 8);
-		bufferIndex += 8;
-		buffer[bufferIndex + 1] = '\0';
-	} /* while ((count = read (fileno (fd), (unsigned char *) charbuf, 8)) > 0) */
-	size -= buffer[size - 1];
-	lastcount = 0;
+        krc2->rc2_decrypt (plaintext);
+        memcpy ((unsigned char *) (buffer + bufferIndex), plaintext, 8);
+        bufferIndex += 8;
+        buffer[bufferIndex + 1] = '\0';
+    } /* while ((count = read (fileno (fd), (unsigned char *) charbuf, 8)) > 0) */
+    size -= buffer[size - 1];
+    lastcount = 0;
 
-	/* This will point to the starting index */
-	bufferIndex = 0;
-	return PWERR_GOOD;
+    /* This will point to the starting index */
+    bufferIndex = 0;
+    return PWERR_GOOD;
 }
 
 int ZSafe::loadEntry(char *entry[FIELD_SIZE])
 {
-	/* Strip off PKCS 5 padding
-	 * Should check to make sure it's good here
-	 */
-	int count, count1=0;
+    /* Strip off PKCS 5 padding
+     * Should check to make sure it's good here
+     */
+    int count, count1=0;
 
-	for (count = lastcount; count < size; count++) {
-		if ((unsigned char) (buffer[count]) == 255) {
-			if (buffer[bufferIndex] == '\0') {
-				bufferIndex++;
-			}
-			entry[count1] = (char *) malloc (count - bufferIndex + 1);
-			memcpy (entry[count1], (unsigned char *) (buffer + bufferIndex), count - bufferIndex);
-			entry[count1][count - bufferIndex] = '\0';
-			count++;
-			bufferIndex = count;
-			count1++;
-			if (count1 == FIELD_SIZE) {
-				lastcount = count;
-				return 1;
-			}
-		} /* if ((unsigned char) (buffer[count]) == 255) */
-	} /* for (count = 0; count < size; count++) */
+    for (count = lastcount; count < size; count++) {
+        if ((unsigned char) (buffer[count]) == 255) {
+            if (buffer[bufferIndex] == '\0') {
+                bufferIndex++;
+            }
+            entry[count1] = (char *) malloc (count - bufferIndex + 1);
+            memcpy (entry[count1], (unsigned char *) (buffer + bufferIndex), count - bufferIndex);
+            entry[count1][count - bufferIndex] = '\0';
+            count++;
+            bufferIndex = count;
+            count1++;
+            if (count1 == FIELD_SIZE) {
+                lastcount = count;
+                return 1;
+            }
+        } /* if ((unsigned char) (buffer[count]) == 255) */
+    } /* for (count = 0; count < size; count++) */
 
-	return 2;
+    return 2;
 }
 
 int ZSafe::loadFinalize(void)
 {
-	fclose (fd);
+    fclose (fd);
         if (buffer) free(buffer);
-	return PWERR_GOOD;
+    return PWERR_GOOD;
 }
 
-bool ZSafe::saveDocument(const char* _filename, 
-                         bool withPwd, 
+bool ZSafe::saveDocument(const char* _filename,
+                         bool withPwd,
                          const char* )
 {
     if (filename.isEmpty())
@@ -2175,45 +2178,45 @@ bool ZSafe::saveDocument(const char* _filename,
         bool pwdOk = FALSE;
         while (!pwdOk)
         {
-	   getDocPassword(tr("Enter Password"));
-	   if (m_password.isEmpty())
+       getDocPassword(tr("Enter Password"));
+       if (m_password.isEmpty())
            {
-              
-              QMessageBox::critical( 0, tr("ZSafe"), 
+
+              QMessageBox::critical( 0, tr("ZSafe"),
                       tr("Password is empty.\nPlease enter again."));
               continue;
            }
-        	
+
            QString firstPasswd = m_password;
-   
-	   getDocPassword(tr("Reenter Password"));
-	   if (m_password.isEmpty())
+
+       getDocPassword(tr("Reenter Password"));
+       if (m_password.isEmpty())
            {
-              QMessageBox::critical( 0, tr("ZSafe"), 
+              QMessageBox::critical( 0, tr("ZSafe"),
                       tr("Password is empty.\nPlease enter again."));
               continue;
            }
            if (firstPasswd != m_password)
            {
-              
-              QMessageBox::critical( 0, tr("ZSafe"), 
+
+              QMessageBox::critical( 0, tr("ZSafe"),
                       tr("Passwords must be identical.\nPlease enter again."));
               continue;
            }
-           pwdOk = TRUE; 
+           pwdOk = TRUE;
            modified = false;
         }
-     } 
+     }
      else if (modified)
      {
       QString fns(_filename);
       fns = fns.right (fns.length() - fns.findRev ('/') - 1);
       switch( QMessageBox::information( this, tr("ZSafe"),
           tr("Do you want to save ") + fns + tr("\nbefore continuing?"),
-          tr("&Save"), 
-          tr("&Don't Save"), 
+          tr("&Save"),
+          tr("&Don't Save"),
           0      // Enter == button 0
-          ) ) 
+          ) )
       { // Escape == button 2
       case 0: // Save clicked, Alt-S or Enter pressed.
         modified = false;
@@ -2224,38 +2227,38 @@ bool ZSafe::saveDocument(const char* _filename,
       }
      }
      modified = false;
-	
+
      if (m_password.isEmpty())
         return false;
 
      int retval = saveInit(_filename, m_password);
-	// int retval = saveInit(_filename, "test");
-	if (retval != PWERR_GOOD) {
-		return false;
+    // int retval = saveInit(_filename, "test");
+    if (retval != PWERR_GOOD) {
+        return false;
      }
-	
-	char* entry[FIELD_SIZE];
+
+    char* entry[FIELD_SIZE];
 
         // save the validation entry
         {
            int i=0;
-	   entry[i] = (char*)malloc(strlen("ZSAFECATEGORY")+1);
-	   strcpy(entry[i++], "ZSAFECATEGORY");
-	   entry[i] = (char*)malloc(strlen("name")+1);
-	   strcpy(entry[i++], "name");
-	   entry[i] = (char*)malloc(strlen("username")+1);
-	   strcpy(entry[i++], "username");
-	   entry[i] = (char*)malloc(strlen("password")+1);
-	   strcpy(entry[i++], "password");
-	   entry[i] = (char*)malloc(strlen("comment")+1);
-	   strcpy(entry[i++], "comment");
+       entry[i] = (char*)malloc(strlen("ZSAFECATEGORY")+1);
+       strcpy(entry[i++], "ZSAFECATEGORY");
+       entry[i] = (char*)malloc(strlen("name")+1);
+       strcpy(entry[i++], "name");
+       entry[i] = (char*)malloc(strlen("username")+1);
+       strcpy(entry[i++], "username");
+       entry[i] = (char*)malloc(strlen("password")+1);
+       strcpy(entry[i++], "password");
+       entry[i] = (char*)malloc(strlen("comment")+1);
+       strcpy(entry[i++], "comment");
 
-	   entry[i] = (char*)malloc(strlen("field5")+1);
-	   strcpy(entry[i++], "field5");
-	   entry[i] = (char*)malloc(strlen("field6")+1);
-	   strcpy(entry[i++], "field6");
+       entry[i] = (char*)malloc(strlen("field5")+1);
+       strcpy(entry[i++], "field5");
+       entry[i] = (char*)malloc(strlen("field6")+1);
+       strcpy(entry[i++], "field6");
 
-	   retval = saveEntry(entry);
+       retval = saveEntry(entry);
            for (int z=0; z<i; z++) free(entry[z]);
            if (retval == PWERR_DATA) {
               qWarning("1: Error writing file, contents not saved");
@@ -2296,7 +2299,7 @@ bool ZSafe::saveDocument(const char* _filename,
          entry[j] = (char*)malloc(strlen(si->text(5).utf8())+1);
          strcpy(entry[j++], si->text(5).utf8());
 
-	      retval = saveEntry(entry);
+          retval = saveEntry(entry);
               for (int z=0; z<j; z++)
               {
                   free(entry[z]);
@@ -2310,16 +2313,16 @@ bool ZSafe::saveDocument(const char* _filename,
            }
         }
 
-	if (saveFinalize() == PWERR_DATA) {
+    if (saveFinalize() == PWERR_DATA) {
                 qWarning("2: Error writing file, contents not saved");
-		return false;
-	} else {
+        return false;
+    } else {
 #ifndef DESKTOP
                 Global::statusMessage (tr("Password file saved."));
 #endif
                 modified = false;
-		return true;
-	}
+        return true;
+    }
 }
 
 PasswordForm *newPwdDialog;
@@ -2370,143 +2373,143 @@ qWarning ("getDocPassword");
 
 int ZSafe::saveInit(const char *_filename, const char *password)
 {
-	char key[128];
-	unsigned int j = 0;
-	unsigned int keylength;
-	// int val;
-	int count2;
-	Krc2* krc2 = new Krc2();
+    char key[128];
+    unsigned int j = 0;
+    unsigned int keylength;
+    // int val;
+    int count2;
+    Krc2* krc2 = new Krc2();
 
-	/* first we should check the permissions of the filename */
+    /* first we should check the permissions of the filename */
 /*
-	if (QFile::exists(_filename)) {
-		val = checkFile(_filename);
-		if (val != PWERR_GOOD)
-			return val;
-	} else 
+    if (QFile::exists(_filename)) {
+        val = checkFile(_filename);
+        if (val != PWERR_GOOD)
+            return val;
+    } else
         {
-		val = creat (_filename, (S_IRUSR | S_IWUSR));
-		if (val == -1)
-			return PWERR_OPEN;
-		else
-			close(val);
-	}
+        val = creat (_filename, (S_IRUSR | S_IWUSR));
+        if (val == -1)
+            return PWERR_OPEN;
+        else
+            close(val);
+    }
 */
         QFileInfo f (_filename);
         save_buffer_length = f.size();
         save_buffer_length = ((save_buffer_length / 1024)+1) * 1024;
 
-	fd = fopen (_filename, "wb");
-	if (fd == NULL)
-		return PWERR_OPEN;
-	
-	buffer = (char*)malloc(save_buffer_length);
+    fd = fopen (_filename, "wb");
+    if (fd == NULL)
+        return PWERR_OPEN;
 
-	/* make the key ready */
-	for (j = 0; password[j] != '\0'; j++) {
-		key[j] = password[j];
-	}
-	keylength = j;
-	krc2->rc2_expandkey (key, keylength, 128);
+    buffer = (char*)malloc(save_buffer_length);
 
-	/* First, we make the IV */
-	for (count2 = 0; count2 < 4; count2++) {
-		iv[count2] = rand ();
-		putc ((unsigned char) (iv[count2] >> 8), fd);
-		putc ((unsigned char) (iv[count2] & 0xff), fd);
-	}
+    /* make the key ready */
+    for (j = 0; password[j] != '\0'; j++) {
+        key[j] = password[j];
+    }
+    keylength = j;
+    krc2->rc2_expandkey (key, keylength, 128);
 
-	bufferIndex = 0;
-	return PWERR_GOOD;
+    /* First, we make the IV */
+    for (count2 = 0; count2 < 4; count2++) {
+        iv[count2] = rand ();
+        putc ((unsigned char) (iv[count2] >> 8), fd);
+        putc ((unsigned char) (iv[count2] & 0xff), fd);
+    }
+
+    bufferIndex = 0;
+    return PWERR_GOOD;
 }
 
 
 int ZSafe::saveEntry(char *entry[FIELD_SIZE])
 {
-	char *text1;
-	int count2, count3;
-	unsigned short ciphertext[4];
-	Krc2* krc2 = new Krc2();
+    char *text1;
+    int count2, count3;
+    unsigned short ciphertext[4];
+    Krc2* krc2 = new Krc2();
 
-	buffer = (char*)memset(buffer, '\0', save_buffer_length);
+    buffer = (char*)memset(buffer, '\0', save_buffer_length);
 
-	for (count2 = 0; count2 < FIELD_SIZE; count2++) {
-		text1 = entry[count2];
-		if (strlen (text1) == 0) {
-			strncat(buffer, " ", strlen(" "));
-		} else {
-			strncat(buffer, text1, strlen(text1));
-		}
-		/* Use 255 as the marker.  \n is too tough to test for */
-		buffer[strlen (buffer)] = 255;
-	} /*for (count2 = 0; count2 < 5; count2++)*/
-	count2 = 0;
-	/* I'm using CBC mode and encrypting the data straight from top down.
-	 * At the bottom, encrypted, I will append an MD5 hash of the file, eventually.
-	 * PKCS 5 padding (explained at the code section
-	 */
-	while (count2 < (int)strlen (buffer)) {
+    for (count2 = 0; count2 < FIELD_SIZE; count2++) {
+        text1 = entry[count2];
+        if (strlen (text1) == 0) {
+            strncat(buffer, " ", strlen(" "));
+        } else {
+            strncat(buffer, text1, strlen(text1));
+        }
+        /* Use 255 as the marker.  \n is too tough to test for */
+        buffer[strlen (buffer)] = 255;
+    } /*for (count2 = 0; count2 < 5; count2++)*/
+    count2 = 0;
+    /* I'm using CBC mode and encrypting the data straight from top down.
+     * At the bottom, encrypted, I will append an MD5 hash of the file, eventually.
+     * PKCS 5 padding (explained at the code section
+     */
+    while (count2 < (int)strlen (buffer)) {
 #ifndef WORDS_BIGENDIAN
-		plaintext[bufferIndex] = buffer[count2 + 1] << 8;
-		plaintext[bufferIndex] += buffer[count2] & 0xff;
+        plaintext[bufferIndex] = buffer[count2 + 1] << 8;
+        plaintext[bufferIndex] += buffer[count2] & 0xff;
 #endif
 #ifdef WORDS_BIGENDIAN
-		plaintext[bufferIndex] = buffer[count2] << 8;
-		plaintext[bufferIndex] += buffer[count2 + 1] & 0xff;
+        plaintext[bufferIndex] = buffer[count2] << 8;
+        plaintext[bufferIndex] += buffer[count2 + 1] & 0xff;
 #endif
-		bufferIndex++;
-		if (bufferIndex == 4) {
-			krc2->rc2_encrypt (plaintext);
+        bufferIndex++;
+        if (bufferIndex == 4) {
+            krc2->rc2_encrypt (plaintext);
 
-			for (count3 = 0; count3 < 4; count3++) {
-				ciphertext[count3] = iv[count3] ^ plaintext[count3];
+            for (count3 = 0; count3 < 4; count3++) {
+                ciphertext[count3] = iv[count3] ^ plaintext[count3];
 
-				/* Now store the ciphertext as the iv */
-				iv[count3] = plaintext[count3];
+                /* Now store the ciphertext as the iv */
+                iv[count3] = plaintext[count3];
 
-				/* reset the buffer index */
-				bufferIndex = 0;
-				if (putc ((unsigned char) (ciphertext[count3] >> 8), fd) == EOF) return PWERR_DATA;
-				if (putc ((unsigned char) (ciphertext[count3] & 0xff), fd) == EOF) return PWERR_DATA;
-			} /*for (count3 = 0; count3 < 5; count3++)*/
-		} /*if (bufferIndex == 5)*/
-		/* increment a short, not a byte */
-		count2 += 2;
-	} /*while (count2 < strlen (buffer))*/
+                /* reset the buffer index */
+                bufferIndex = 0;
+                if (putc ((unsigned char) (ciphertext[count3] >> 8), fd) == EOF) return PWERR_DATA;
+                if (putc ((unsigned char) (ciphertext[count3] & 0xff), fd) == EOF) return PWERR_DATA;
+            } /*for (count3 = 0; count3 < 5; count3++)*/
+        } /*if (bufferIndex == 5)*/
+        /* increment a short, not a byte */
+        count2 += 2;
+    } /*while (count2 < strlen (buffer))*/
         int ret = PWERR_GOOD;
-	return ret;
+    return ret;
 }
 
 int ZSafe::saveFinalize(void)
 {
-	int count1, retval = PWERR_GOOD;
-	unsigned short ciphertext[4];
-	Krc2* krc2 = new Krc2();
+    int count1, retval = PWERR_GOOD;
+    unsigned short ciphertext[4];
+    Krc2* krc2 = new Krc2();
 
-	/* Tack on the PKCS 5 padding
-	 * How it works is we fill up the last n bytes with the value n
-	 *
-	 * So, if we have, say, 13 bytes, 8 of which are used, we have 5 left
-	 * over, leaving us 3 short, so we fill it in with 3's.
-	 *
-	 * If we come out even, we fill it with 8 8s
-	 *
-	 * um, except that in this instance we are using 4 shorts instead of 8 bytes.
-	 * so, half everything
-	 */
-	for (count1 = bufferIndex; count1 < 4; count1++) {
-		plaintext[count1] = (4 - bufferIndex);
-	}
-	krc2->rc2_encrypt (plaintext);
-	for (count1 = 0; count1 < 4; count1++) {
-		ciphertext[count1] = iv[count1] ^ plaintext[count1];
-		if (putc ((unsigned char) (ciphertext[count1] >> 8), fd) == EOF) retval = PWERR_DATA;
-		if (putc ((unsigned char) (ciphertext[count1] & 0xff), fd) == EOF) retval = PWERR_DATA;
-	}
+    /* Tack on the PKCS 5 padding
+     * How it works is we fill up the last n bytes with the value n
+     *
+     * So, if we have, say, 13 bytes, 8 of which are used, we have 5 left
+     * over, leaving us 3 short, so we fill it in with 3's.
+     *
+     * If we come out even, we fill it with 8 8s
+     *
+     * um, except that in this instance we are using 4 shorts instead of 8 bytes.
+     * so, half everything
+     */
+    for (count1 = bufferIndex; count1 < 4; count1++) {
+        plaintext[count1] = (4 - bufferIndex);
+    }
+    krc2->rc2_encrypt (plaintext);
+    for (count1 = 0; count1 < 4; count1++) {
+        ciphertext[count1] = iv[count1] ^ plaintext[count1];
+        if (putc ((unsigned char) (ciphertext[count1] >> 8), fd) == EOF) retval = PWERR_DATA;
+        if (putc ((unsigned char) (ciphertext[count1] & 0xff), fd) == EOF) retval = PWERR_DATA;
+    }
 
-	fclose (fd);
-	free(buffer);
-	return retval;
+    fclose (fd);
+    free(buffer);
+    return retval;
 }
 
 void ZSafe::quitMe ()
@@ -2517,11 +2520,11 @@ void ZSafe::quitMe ()
     {
       switch( QMessageBox::information( this, tr("ZSafe"),
                                       tr("Do you want to save\nbefore exiting?"),
-                                      tr("&Save"), 
+                                      tr("&Save"),
                                       tr("S&ave with\nnew\npassword"),
-                                      tr("&Don't Save"), 
+                                      tr("&Don't Save"),
                                       0      // Enter == button 0
-                                      ) ) 
+                                      ) )
       { // Escape == button 2
       case 0: // Save clicked, Alt-S or Enter pressed.
         // save
@@ -2529,7 +2532,7 @@ void ZSafe::quitMe ()
         saveDocument(filename, FALSE);
         exitZs (1);
         break;
-      case 1: // 
+      case 1: //
         // Save with new password
         modified = false;
         saveDocument(filename, TRUE);
@@ -2576,7 +2579,7 @@ void ZSafe::addCategory()
            categoryDialog->setCaption ("Qt " + tr("Category"));
 #endif
            dialog = categoryDialog;
-           connect( dialog->CategoryField, 
+           connect( dialog->CategoryField,
                     SIGNAL( activated ( const QString &)),
                     this, SLOT( categoryFieldActivated( const QString & ) ) );
            initIcons = true;
@@ -2601,7 +2604,7 @@ void ZSafe::addCategory()
            f.close();
         }
 #endif
-#else           
+#else
         // read all categories from the config file and store
         // into a list
         QFile f (cfgFile);
@@ -2620,17 +2623,17 @@ void ZSafe::addCategory()
         QString categ;
         QString firstCategory;
         dialog->CategoryField->clear(); // remove all items
-        while( it != list.end() ) 
+        while( it != list.end() )
         {
            QString *cat = new QString (*it);
            if (cat->contains("-field1", FALSE))
-           { 
+           {
 #ifdef DESKTOP
 #ifndef WIN32
               categ = cat->section ("-field1", 0, 0);
 #else
               int pos = cat->find ("-field1");
-			  categ = cat->left (pos);
+              categ = cat->left (pos);
 #endif
 #else
               int pos = cat->find ("-field1");
@@ -2657,43 +2660,43 @@ void ZSafe::addCategory()
 
            if (initIcons)
            {
-		Wait waitDialog(this, tr("Wait dialog"));
-		waitDialog.waitLabel->setText(tr("Gathering icons..."));
-		waitDialog.show();
-		qApp->processEvents();
+        Wait waitDialog(this, tr("Wait dialog"));
+        waitDialog.waitLabel->setText(tr("Gathering icons..."));
+        waitDialog.show();
+        qApp->processEvents();
 
 #ifdef DESKTOP
-		QDir d(iconPath);
+        QDir d(iconPath);
 #else
-		QDir d(QPEApplication::qpeDir() + "/pics/");
+        QDir d(QPEApplication::qpeDir() + "/pics/");
 #endif
-		d.setFilter( QDir::Files);
+        d.setFilter( QDir::Files);
 
-		const QFileInfoList *list = d.entryInfoList();
-		QFileInfoListIterator it( *list );      // create list iterator
-		QFileInfo *fi;                          // pointer for traversing
+        const QFileInfoList *list = d.entryInfoList();
+        QFileInfoListIterator it( *list );      // create list iterator
+        QFileInfo *fi;                          // pointer for traversing
 
-		dialog->IconField->insertItem("predefined");
-		while ( (fi=it.current()) ) {           // for each file...
-			QString fileName = fi->fileName();
-			if(fileName.right(4) == ".png"){
-				fileName = fileName.mid(0,fileName.length()-4);
+        dialog->IconField->insertItem("predefined");
+        while ( (fi=it.current()) ) {           // for each file...
+            QString fileName = fi->fileName();
+            if(fileName.right(4) == ".png"){
+                fileName = fileName.mid(0,fileName.length()-4);
 #ifdef DESKTOP
-				QPixmap imageOfFile;
+                QPixmap imageOfFile;
                                 imageOfFile.load(iconPath + fi->fileName());
 #else
-				QPixmap imageOfFile(Resource::loadPixmap(fileName));
+                QPixmap imageOfFile(Resource::loadPixmap(fileName));
 #endif
-				QImage foo = imageOfFile.convertToImage();
-				foo = foo.smoothScale(16,16);
-				imageOfFile.convertFromImage(foo);
-				dialog->IconField->insertItem(imageOfFile,fileName);
-			}
-			++it;
-		}
-		waitDialog.hide();
+                QImage foo = imageOfFile.convertToImage();
+                foo = foo.smoothScale(16,16);
+                imageOfFile.convertFromImage(foo);
+                dialog->IconField->insertItem(imageOfFile,fileName);
+            }
+            ++it;
+        }
+        waitDialog.hide();
            }
-	
+
 #ifndef WIN32
         dialog->show();
 #endif
@@ -2727,7 +2730,7 @@ void ZSafe::addCategory()
                // build the full path
                fullIconPath = iconPath + icon;
                pix = new QPixmap (fullIconPath);
-               // pix->resize(14, 14); 
+               // pix->resize(14, 14);
                if (pix)
                {
                   // save the full pixmap name into the config file
@@ -2776,7 +2779,7 @@ void ZSafe::delCategory()
     {
        switch( QMessageBox::information( this, tr("ZSafe"),
                                       tr("Do you want to delete?"),
-                                      tr("&Delete"), tr("D&on't Delete"), 
+                                      tr("&Delete"), tr("D&on't Delete"),
                                       0      // Enter == button 0
                                       ) ) { // Escape == button 2
        case 0: // Delete clicked, Alt-S or Enter pressed.
@@ -2817,7 +2820,7 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog)
       return;
 
    QString icon;
-   if (selectedItem) 
+   if (selectedItem)
    {
       dialog->Field1->setText(getFieldLabel (selectedItem, "1", tr("Name")));
       dialog->Field2->setText(getFieldLabel (selectedItem, "2", tr("Username")));
@@ -2845,39 +2848,39 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog)
    }
 
 #ifdef DESKTOP
-	QDir d(iconPath);
+    QDir d(iconPath);
 #else
-	QDir d(QPEApplication::qpeDir() + "/pics/");
+    QDir d(QPEApplication::qpeDir() + "/pics/");
 #endif
-	d.setFilter( QDir::Files);
+    d.setFilter( QDir::Files);
 
-	const QFileInfoList *list = d.entryInfoList();
-	int i=0;
-	QFileInfoListIterator it( *list );      // create list iterator
-	QFileInfo *fi;                          // pointer for traversing
+    const QFileInfoList *list = d.entryInfoList();
+    int i=0;
+    QFileInfoListIterator it( *list );      // create list iterator
+    QFileInfo *fi;                          // pointer for traversing
    if (icon.isEmpty() || icon.isNull())
    {
       dialog->IconField->setCurrentItem(0);
    }
    else
    {
-		while ( (fi=it.current()) ) 
+        while ( (fi=it.current()) )
       { // for each file...
-			QString fileName = fi->fileName();
-			if(fileName.right(4) == ".png")
+            QString fileName = fi->fileName();
+            if(fileName.right(4) == ".png")
                         {
-			fileName = fileName.mid(0,fileName.length()-4);
+            fileName = fileName.mid(0,fileName.length()-4);
 
-			if(fileName+".png"==icon) 
+            if(fileName+".png"==icon)
          {
             dialog->IconField->setCurrentItem(i+1);
             break;
          }
-			   ++i;
-			}
-			++it;
-		}
-	}
+               ++i;
+            }
+            ++it;
+        }
+    }
 }
 
 void ZSafe::setCategoryDialogFields(CategoryDialog *dialog, QString category)
@@ -2902,39 +2905,39 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog, QString category)
       icon = conf->readEntry(APP_KEY+category);
 
 #ifdef DESKTOP
-	QDir d(iconPath);
+    QDir d(iconPath);
 #else
-	QDir d(QPEApplication::qpeDir() + "/pics/");
+    QDir d(QPEApplication::qpeDir() + "/pics/");
 #endif
-	d.setFilter( QDir::Files);
+    d.setFilter( QDir::Files);
 
-	const QFileInfoList *list = d.entryInfoList();
-	int i=0;
-	QFileInfoListIterator it( *list );      // create list iterator
-	QFileInfo *fi;                          // pointer for traversing
+    const QFileInfoList *list = d.entryInfoList();
+    int i=0;
+    QFileInfoListIterator it( *list );      // create list iterator
+    QFileInfo *fi;                          // pointer for traversing
    if (icon.isEmpty() || icon.isNull())
    {
       dialog->IconField->setCurrentItem(0);
    }
    else
    {
-		while ( (fi=it.current()) ) 
+        while ( (fi=it.current()) )
       { // for each file...
-			QString fileName = fi->fileName();
-			if(fileName.right(4) == ".png")
+            QString fileName = fi->fileName();
+            if(fileName.right(4) == ".png")
                         {
-			fileName = fileName.mid(0,fileName.length()-4);
+            fileName = fileName.mid(0,fileName.length()-4);
 
-			if(fileName+".png"==icon) 
+            if(fileName+".png"==icon)
          {
             dialog->IconField->setCurrentItem(i+1);
             break;
          }
-			   ++i;
-			}
-			++it;
-		}
-	}
+               ++i;
+            }
+            ++it;
+        }
+    }
 }
 
 void ZSafe::saveCategoryDialogFields(CategoryDialog *dialog)
@@ -2983,7 +2986,7 @@ void ZSafe::editCategory()
            categoryDialog->setCaption ("Qt " + tr("Category"));
 #endif
            dialog = categoryDialog;
-           connect( dialog->CategoryField, 
+           connect( dialog->CategoryField,
                     SIGNAL( activated ( const QString &)),
                     this, SLOT( categoryFieldActivated( const QString & ) ) );
            initIcons = true;
@@ -3029,17 +3032,17 @@ void ZSafe::editCategory()
         dialog->CategoryField->clear(); // remove all items
         int i=0;
         bool foundCategory = false;
-        while( it != list.end() ) 
+        while( it != list.end() )
         {
            QString *cat = new QString (*it);
            if (cat->contains("-field1", FALSE))
-           { 
+           {
 #ifdef DESKTOP
 #ifndef WIN32
               categ = cat->section ("-field1", 0, 0);
 #else
-	          int pos = cat->find ("-field1");
-			  categ = cat->left (pos);
+              int pos = cat->find ("-field1");
+              categ = cat->left (pos);
 #endif
 #else
               int pos = cat->find ("-field1");
@@ -3075,65 +3078,65 @@ void ZSafe::editCategory()
            if (initIcons)
            {
 
-		Wait waitDialog(this, tr("Wait dialog"));
-		waitDialog.waitLabel->setText(tr("Gathering icons..."));
-		waitDialog.show();
-		qApp->processEvents();
+        Wait waitDialog(this, tr("Wait dialog"));
+        waitDialog.waitLabel->setText(tr("Gathering icons..."));
+        waitDialog.show();
+        qApp->processEvents();
 
 #ifdef DESKTOP
-		QDir d(iconPath);
+        QDir d(iconPath);
 #else
-		QDir d(QPEApplication::qpeDir() + "/pics/");
+        QDir d(QPEApplication::qpeDir() + "/pics/");
 #endif
-		d.setFilter( QDir::Files);
+        d.setFilter( QDir::Files);
 
-		const QFileInfoList *list = d.entryInfoList();
-		int i=0;
-		QFileInfoListIterator it( *list );      // create list iterator
-		QFileInfo *fi;                          // pointer for traversing
+        const QFileInfoList *list = d.entryInfoList();
+        int i=0;
+        QFileInfoListIterator it( *list );      // create list iterator
+        QFileInfo *fi;                          // pointer for traversing
                 if (icon.isEmpty() || icon.isNull())
                 {
                    dialog->IconField->setCurrentItem(0);
                 }
 
-		dialog->IconField->insertItem("predefined");
-		while ( (fi=it.current()) ) {           // for each file...
-			QString fileName = fi->fileName();
-			if(fileName.right(4) == ".png")
+        dialog->IconField->insertItem("predefined");
+        while ( (fi=it.current()) ) {           // for each file...
+            QString fileName = fi->fileName();
+            if(fileName.right(4) == ".png")
                         {
-				fileName = fileName.mid(0,fileName.length()-4);
+                fileName = fileName.mid(0,fileName.length()-4);
 #ifdef DESKTOP
-				QPixmap imageOfFile;
+                QPixmap imageOfFile;
                                 imageOfFile.load(iconPath + fi->fileName());
 #else
-				QPixmap imageOfFile(Resource::loadPixmap(fileName));
+                QPixmap imageOfFile(Resource::loadPixmap(fileName));
 #endif
-				QImage foo = imageOfFile.convertToImage();
-				foo = foo.smoothScale(16,16);
-				imageOfFile.convertFromImage(foo);
-				dialog->IconField->insertItem(imageOfFile,fileName);
-				if(fileName+".png"==icon) 
+                QImage foo = imageOfFile.convertToImage();
+                foo = foo.smoothScale(16,16);
+                imageOfFile.convertFromImage(foo);
+                dialog->IconField->insertItem(imageOfFile,fileName);
+                if(fileName+".png"==icon)
                                    dialog->IconField->setCurrentItem(i+1);
-			        ++i;
-			}
-			++it;
-		}
-		waitDialog.hide();
+                    ++i;
+            }
+            ++it;
+        }
+        waitDialog.hide();
            }
            else
            {
 #ifdef DESKTOP
-		// QDir d(QDir::homeDirPath() + "/pics/");
-		QDir d(iconPath);
+        // QDir d(QDir::homeDirPath() + "/pics/");
+        QDir d(iconPath);
 #else
-		QDir d(QPEApplication::qpeDir() + "/pics/");
+        QDir d(QPEApplication::qpeDir() + "/pics/");
 #endif
-		d.setFilter( QDir::Files);
+        d.setFilter( QDir::Files);
 
-		const QFileInfoList *list = d.entryInfoList();
-		int i=0;
-		QFileInfoListIterator it( *list );      // create list iterator
-		QFileInfo *fi;                          // pointer for traversing
+        const QFileInfoList *list = d.entryInfoList();
+        int i=0;
+        QFileInfoListIterator it( *list );      // create list iterator
+        QFileInfo *fi;                          // pointer for traversing
                 if (icon.isEmpty() || icon.isNull())
                 {
                    dialog->IconField->setCurrentItem(0);
@@ -3141,24 +3144,24 @@ void ZSafe::editCategory()
                 else
                 {
 
-		  while ( (fi=it.current()) ) 
+          while ( (fi=it.current()) )
                   { // for each file...
-			QString fileName = fi->fileName();
-			if(fileName.right(4) == ".png")
+            QString fileName = fi->fileName();
+            if(fileName.right(4) == ".png")
                         {
-				fileName = fileName.mid(0,fileName.length()-4);
+                fileName = fileName.mid(0,fileName.length()-4);
 
 
-				if(fileName+".png"==icon) 
+                if(fileName+".png"==icon)
                                 {
                                    dialog->IconField->setCurrentItem(i+1);
                                    break;
                                 }
-			        ++i;
-			}
-			++it;
-		  }
-		}
+                    ++i;
+            }
+            ++it;
+          }
+        }
            }
 
         // dialog->show();
@@ -3330,14 +3333,14 @@ void ZSafe::newDocument()
                        this,
                        tr ("Create new ZSafe document"));
 #else
-   QString newFile = ScQtFileEdit::getSaveAsFileName(this, 
+   QString newFile = ScQtFileEdit::getSaveAsFileName(this,
                        tr ("Create new ZSafe document"),
                        QDir::homeDirPath() + "/Documents/application/zsafe",
                        "*.zsf");
 #endif
 #else
     QString newFile = QFileDialog::getSaveFileName(
-	            QDir::homeDirPath() + "/Documents/application/zsafe",
+                QDir::homeDirPath() + "/Documents/application/zsafe",
                     "ZSafe (*.zsf)",
                     this,
                     "ZSafe File Dialog"
@@ -3395,7 +3398,7 @@ void ZSafe::newDocument()
 
        // openDocument(filename);
 
-       QMessageBox::information( this, tr("ZSafe"), 
+       QMessageBox::information( this, tr("ZSafe"),
        tr("Now you have to enter\na password twice for your\nnewly created document."),       tr("&OK"), 0);
 
        saveDocumentWithPwd();
@@ -3418,14 +3421,14 @@ void ZSafe::loadDocument()
                        this,
                        tr ("Open ZSafe document"));
 #else
-   QString newFile = ScQtFileEdit::getOpenFileName(this, 
+   QString newFile = ScQtFileEdit::getOpenFileName(this,
                        tr ("Open ZSafe document"),
                        QDir::homeDirPath() + "/Documents/application/zsafe",
                        "*.zsf");
 #endif
 #else
     QString newFile = QFileDialog::getOpenFileName(
-	            QDir::homeDirPath() + "/Documents/application/zsafe",
+                QDir::homeDirPath() + "/Documents/application/zsafe",
                     "ZSafe (*.zsf)",
                     this,
                     "ZSafe File Dialog"
@@ -3496,7 +3499,7 @@ void ZSafe::saveDocumentAs()
                        this,
                        tr ("Save ZSafe document as.."));
 #else
-   QString newFile = ScQtFileEdit::getSaveAsFileName(this, 
+   QString newFile = ScQtFileEdit::getSaveAsFileName(this,
                        tr ("Save ZSafe document as.."),
                        QDir::homeDirPath() + "/Documents/application/zsafe",
                        "*.zsf");
@@ -3504,7 +3507,7 @@ void ZSafe::saveDocumentAs()
 #else
     // open the file dialog
     QString newFile = QFileDialog::getSaveFileName(
-	            QDir::homeDirPath() + "/Documents/application/zsafe",
+                QDir::homeDirPath() + "/Documents/application/zsafe",
                     "ZSafe (*.zsf)",
                     this,
                     "ZSafe File Dialog"
@@ -3531,7 +3534,7 @@ void ZSafe::saveDocumentAs()
        this->setCaption("ZSafe: " + ti);
 #endif
 
-       QMessageBox::information( this, tr("ZSafe"), 
+       QMessageBox::information( this, tr("ZSafe"),
        tr("Now you have to enter\na password twice for your\nnewly created document."),       tr("&OK"), 0);
 
        saveDocumentWithPwd();
@@ -3622,7 +3625,7 @@ void ZSafe::paintEvent( QPaintEvent * )
    }
 }
 
-void ZSafe::resizeEvent ( QResizeEvent * ) 
+void ZSafe::resizeEvent ( QResizeEvent * )
 {
    // qWarning ("resizeEvent");
 #ifndef DESKTOP
@@ -3634,13 +3637,13 @@ void ZSafe::resizeEvent ( QResizeEvent * )
 #endif
 
    if (New)
-      New->setGeometry   ( QRect( DeskW-84, 2, 20, 20 ) ); 
+      New->setGeometry   ( QRect( DeskW-84, 2, 20, 20 ) );
    if (Edit)
-      Edit->setGeometry  ( QRect( DeskW-64, 2, 20, 20 ) ); 
+      Edit->setGeometry  ( QRect( DeskW-64, 2, 20, 20 ) );
    if (Delete)
-      Delete->setGeometry( QRect( DeskW-44, 2, 20, 20 ) ); 
+      Delete->setGeometry( QRect( DeskW-44, 2, 20, 20 ) );
    if (Find)
-      Find->setGeometry  ( QRect( DeskW-24, 2, 20, 20 ) ); 
+      Find->setGeometry  ( QRect( DeskW-24, 2, 20, 20 ) );
 }
 
 void ZSafe::slotRaiseTimer()
@@ -3722,7 +3725,7 @@ void ZSafe::setDocument(const QString& fileref)
 
      m_password = "";
      selectedItem = NULL;
-     
+
      openDocument(filename);
 #endif
 }

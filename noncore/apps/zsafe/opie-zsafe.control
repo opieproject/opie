@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/applications
 Version: $QPE_VERSION$EXTRAVERSION
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopieui2
 Maintainer: Carsten Schneider <zcarsten@gmx.net>
 Description: This is a password manager program for Opie.
