@@ -1,7 +1,7 @@
 Files: bin/mailit apps/Applications/mailit.desktop pics/EMail.png
 Priority: optional
 Section: opie
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: L.J. Potter <llornkcor@handhelds.org>
 Architecture: arm
 Version: $OPIE_VERSION-$SUB_VERSION
 Depends: opie-base
