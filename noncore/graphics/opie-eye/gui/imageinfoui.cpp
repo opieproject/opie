@@ -29,9 +29,9 @@ imageinfo::imageinfo(const QString&_path, QWidget* parent,  const char* name, WF
     }
     if ( !name )
 	setName( "imageinfo" );
-    resize( 289, 335 ); 
+    resize( 289, 335 );
     setCaption( tr( "Image info" ) );
-    imageinfoLayout = new QVBoxLayout( this ); 
+    imageinfoLayout = new QVBoxLayout( this );
     imageinfoLayout->setSpacing(2);
     imageinfoLayout->setMargin(4);
 
@@ -47,7 +47,7 @@ imageinfo::imageinfo(const QString&_path, QWidget* parent,  const char* name, WF
 
     fnameLabel = new QLabel( this, "FnameLabel" );
     imageinfoLayout->addWidget( fnameLabel);
-    
+
     TextView1 = new QTextView( this, "TextView1" );
     TextView1->setFrameShadow( QTextView::Sunken );
     TextView1->setResizePolicy( QTextView::AutoOneFit );
@@ -56,7 +56,7 @@ imageinfo::imageinfo(const QString&_path, QWidget* parent,  const char* name, WF
 //    TextView1->setVScrollBarMode(QScrollView::AlwaysOn);
     QWhatsThis::add(  TextView1, tr("Displays info of selected image") );
     imageinfoLayout->addWidget( TextView1 );
-    
+
     SlaveMaster* master = SlaveMaster::self();
     connect( master, SIGNAL(sig_fullInfo(const QString&, const QString&)),
              this, SLOT(slot_fullInfo(const QString&, const QString&)) );
@@ -71,7 +71,7 @@ void imageinfo::slotChangeName(const QString&_path)
     QFileInfo fi(_path);
     fnameLabel->setText("<qt><center><b>"+fi.fileName()+"</b></center></qt>");
     SlaveMaster::self()->imageInfo( currentFile );
-    
+
     QPixmap*m_pix = PPixmapCache::self()->cachedImage( _path, THUMBSIZE,THUMBSIZE );
     if (!m_pix) {
         PixmapLabel1->setPixmap(QPixmap( Resource::loadPixmap( "UnknownDocument" )));
