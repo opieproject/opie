@@ -217,8 +217,8 @@ void PlayListWidget::readConfig( Config& cfg ) {
 
 void PlayListWidget::writeConfig( Config& cfg ) const {
 
-//     Config config( "OpiePlayer" );
-//     config.setGroup( "PlayList" );
+     Config config( "OpiePlayer" );
+     config.setGroup( "PlayList" );
 
 //     if(config.readBoolEntry("newPlaylist")) {
 // new for testing
@@ -249,7 +249,7 @@ void PlayListWidget::writeConfig( Config& cfg ) const {
 
         qDebug("writing default playlist "+filename);
 
-        config.writeEntry("CurrentPlaylist", filename);
+    config.writeEntry("CurrentPlaylist", filename);
 //    currentPlayList=filename;
 
         if(!lnk.writeLink()) {
