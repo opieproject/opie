@@ -10,8 +10,12 @@ open(FILE, "<./packages");
 while(<FILE>){$packages.=$_;}
 close(FILE);
 
-my ($dirname,$dir,$cfg,$filename,$tagname,$name,$caps,$pre,$post,$sources,@dupecheck);
-$cfg = shift || die;
+my ($dirname,$dir,$file,@files,$filename,$tagname,$name,$caps,$pre,$post,$sources,@dupecheck);
+$file = shift || die;
+push(@files, $file);
+
+foreach(@files){
+my $cfg=$_;
 ($dirname=$cfg)=~s,(.*)/(.*),$1,;
 ($filename=$cfg)=~s,(.*/)(.*),$2,;
 ($tagname=$dirname)=~s,.*/,,;
@@ -45,7 +49,7 @@ File::Find::find({wanted => \&wanted}, $dirname);
 print $post;
 select(STDOUT);
 close(CFG);
-
+}
 exit;
 
 open(FILE,">$dir/config.in");
@@ -82,7 +86,7 @@ use vars qw/*name *dir *prune/;
 *prune  = *File::Find::prune;
 	
 sub wanted {
-	if( /config.in/s ) {
+	if( /config.in$/s ) {
 		if(grep(/^$File::Find::dir\/config.in$/, @dupecheck)){
 			return;
 		}
