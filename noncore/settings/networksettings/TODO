@@ -1,0 +1,5 @@
+[ ] Wlanmodule needs to check if an interface supports wireless
+    extensions.
+[ ] When you set options in wlanmodule, hit OK, it exits all of
+    networksetup, doesnt bring you back to the main screen.
+[ ] Wlanmodule isnt writing out wireless.opts
