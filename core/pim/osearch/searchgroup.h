@@ -16,7 +16,6 @@
 #include "olistviewitem.h"
 
 #include <qregexp.h>
-#define LIPBOPIE_SEARCH
 
 /**
 @author Patrick S. Vogt

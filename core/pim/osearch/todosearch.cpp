@@ -14,14 +14,12 @@
 
 #include <opie/otodoaccess.h>
 #include <opie/otodo.h>
-#include <qdir.h>
 
 #include "todoitem.h"
 
 TodoSearch::TodoSearch(QListView* parent, QString name)
 : SearchGroup(parent, name)
 {
-	//_fileName = QDir::homeDirPath()+"/Applications/todolist/todolist.xml";
 	_todos = 0;
 }
 
@@ -42,24 +40,11 @@ void TodoSearch::expand()
 	 _todos->load();
 	 }
 
-#ifdef LIPBOPIE_SEARCH
 	ORecordList<OTodo> results = _todos->matchRegexp(_search);
 	setText(0, text(0) + " (" + QString::number( results.count() ) + ")");
 	for (uint i = 0; i < results.count(); i++) {
 		new TodoItem( this, new OTodo( results[i] ));
 	}
-#else
-	ORecordList<OTodo> list = _todos->allRecords();
-       QArray<int> m_currentQuery( list.count() );
-       for( uint i=0; i<list.count(); i++ ){
-     //  	qDebug("todo: %s",list[i].summary().latin1() );
-                 if ( list[i].match( _search ) ){
-	//	 	qDebug("FOUND");
-			new TodoItem( this, new OTodo( list[i] ) );
-                 }
-
-        }
-#endif
 
 }
 

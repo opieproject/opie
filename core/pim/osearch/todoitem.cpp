@@ -42,13 +42,13 @@ QString TodoItem::toRichText()
 void TodoItem::showItem()
 {
 //	QCopEnvelope e("QPE/Todolist", "show(int)");
-	qDebug("calling todolist for %i",_todo->uid());
-	QCopEnvelope e("QPE/Todolist", "show(int)");
+	QCopEnvelope e("QPE/Application/todolist", "show(int)");
 	e << _todo->uid();
 }
 
 void TodoItem::editItem()
 {
-	QCopEnvelope e("QPE/Todolist", "edit(int)");
+//	QCopEnvelope e("QPE/Todolist", "edit(int)");
+	QCopEnvelope e("QPE/Application/todolist", "edit(int)");
 	e << _todo->uid();
 }
