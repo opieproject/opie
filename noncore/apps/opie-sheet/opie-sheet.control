@@ -5,7 +5,7 @@ Section: opie/applications
 Maintainer: Serdar Ozler <sozler@sitebest.com>
 Architecture: arm
 Version: $QPE_VERSION$EXTRAVERSION
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 License: Public Domain
 Description: Opie Sheet
  Spreadsheet software for Opie.
