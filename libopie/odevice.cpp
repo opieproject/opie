@@ -1155,7 +1155,7 @@ void Zaurus::init ( )
 		}
 		int loc = line. find ( ":" );
 		if ( loc != -1 )
-			model = line. mid ( loc + 2 ). simplifyWhitespace( );
+			model = line. mid ( loc + 2 ). simplifyWhiteSpace( );
 	}
 
 	if ( model == "SHARP Corgi" ) {
