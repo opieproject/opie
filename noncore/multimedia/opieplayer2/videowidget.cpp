@@ -185,16 +185,7 @@ void VideoWidget::setDisplayType( MediaPlayerState::DisplayType displayType )
 
 void VideoWidget::loadSkin()
 {
-    Config cfg("OpiePlayer");
-    cfg.setGroup("Options");
-    QString skin = cfg.readEntry("Skin","default");
-
-    QString skinPath = "opieplayer2/skins/" + skin;
-    backgroundPixmap = QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
-    buttonUpImage = QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
-    buttonDownImage = QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
-
-    setupButtons( skinInfo, buttonCount, QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skinV_mask_", buttonUpImage.size() );
+    loadDefaultSkin( skinInfo, buttonCount, "V" );
 
     setBackgroundPixmap( backgroundPixmap );
 

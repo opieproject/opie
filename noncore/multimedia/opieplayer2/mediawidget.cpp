@@ -24,6 +24,9 @@
 #include "mediawidget.h"
 #include "playlistwidget.h"
 
+#include <qpe/config.h>
+#include <qpe/qpeapplication.h>
+
 MediaWidget::MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent, const char *name )
     : QWidget( parent, name ), mediaPlayerState( _mediaPlayerState ), playList( _playList )
 {
@@ -83,6 +86,26 @@ QBitmap MediaWidget::setupButtonMask( const Command &command, const QString &fil
     }
 
     return mask;
+}
+
+void MediaWidget::loadDefaultSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const QString &fileNameInfix )
+{
+    Config cfg( "OpiePlayer" );
+    cfg.setGroup( "Options" );
+    QString skin = cfg.readEntry( "Skin","default" );
+
+    loadSkin( skinInfo, buttonCount, skin, fileNameInfix );
+}
+
+void MediaWidget::loadSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const QString &name, const QString &fileNameInfix )
+{
+    QString skinPath = "opieplayer2/skins/" + name;
+    backgroundPixmap = QPixmap( Resource::loadPixmap( QString( "%1/background" ).arg( skinPath ) ) );
+    buttonUpImage = QImage( Resource::loadImage( QString( "%1/skin%2_up" ).arg( skinPath ).arg( fileNameInfix ) ) );
+    buttonDownImage = QImage( Resource::loadImage( QString( "%1/skin%2_down" ).arg( skinPath ).arg( fileNameInfix ) ) );
+
+    setupButtons( skinInfo, buttonCount,
+                  QPEApplication::qpeDir()  + "/pics/" + skinPath + QString::fromLatin1( "/skin%1_mask_" ).arg( fileNameInfix ), buttonUpImage.size() );
 }
 
 void MediaWidget::closeEvent( QCloseEvent * )

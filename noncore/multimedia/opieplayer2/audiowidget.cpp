@@ -192,18 +192,7 @@ void AudioWidget::setDisplayType( MediaPlayerState::DisplayType mediaType ) {
 
 void AudioWidget::loadSkin()
 {
-    Config cfg("OpiePlayer");
-    cfg.setGroup("Options");
-    skin = cfg.readEntry("Skin","default");
-    //skin = "scaleTest";
-    // color of background, frame, degree of transparency
-
-    QString skinPath = "opieplayer2/skins/" + skin;
-    backgroundPixmap = QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
-    buttonUpImage = QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
-    buttonDownImage = QImage( Resource::loadImage( QString("%1/skin_down").arg(skinPath) ) );
-
-    setupButtons( skinInfo, buttonCount, QPEApplication::qpeDir()  + "/pics/" + skinPath + "/skin_mask_", buttonUpImage.size() );
+    loadDefaultSkin( skinInfo, buttonCount );
 
     setBackgroundPixmap( backgroundPixmap );
 

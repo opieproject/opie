@@ -104,6 +104,9 @@ protected:
     Button setupButton( const SkinButtonInfo &buttonInfo, const QString &imagePrefix );
     QBitmap setupButtonMask( const Command &command, const QString &fileName );
 
+    void loadDefaultSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const QString &fileNameInfix = QString::null );
+    void loadSkin( const SkinButtonInfo *skinInfo, uint buttonCount, const QString &name, const QString &fileNameInfix );
+
     virtual void closeEvent( QCloseEvent * );
 
     virtual void paintEvent( QPaintEvent *pe );
