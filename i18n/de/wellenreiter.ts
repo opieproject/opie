@@ -740,7 +740,7 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Send probe requests</source>
-        <translation type="unfinished"></translation>
+        <translation>Probe senden</translation>
     </message>
 </context>
 <context>

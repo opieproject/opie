@@ -83,10 +83,6 @@
         <translation>Suchen nach:</translation>
     </message>
     <message>
-        <source></source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Case sensitive</source>
         <translation>Groß-/Kleinschreibung beachten</translation>
     </message>
@@ -154,19 +150,19 @@
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Erledigte Aufgaben anzeigen</translation>
     </message>
     <message>
         <source>Show past events</source>
-        <translation type="unfinished"></translation>
+        <translation>Vergangene Ereignisse anzeigen</translation>
     </message>
     <message>
         <source>Search in dates</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"> </translation>
     </message>
     <message>
         <source>Search content</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhalt durchsuchen</translation>
     </message>
 </context>
 </TS>
