@@ -376,6 +376,7 @@ void OCopServer::call( const OCOPPacket& p, int fd ) {
     OCOPHead head = p.head();
     for (it = cli.begin(); it != cli.end(); ++it ) {
         write( (*it), &head, sizeof(head ) );
+        /* expl. shared! */
         write( (*it), p.channel().data(), p.channel().size() );
         write( (*it), p.header().data(), p.header().size() );
         write( (*it), p.content().data(), p.content().size() );
