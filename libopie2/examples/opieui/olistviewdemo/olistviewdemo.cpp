@@ -31,8 +31,12 @@
 */
 
 #include "olistviewdemo.h"
-#include <opie2/olistview.h>
 
+/* OPIE */
+#include <opie2/olistview.h>
+#include <opie2/odebug.h>
+
+/* QT */
 #include <qstring.h>
 #include <qpixmap.h>
 #include <qlistview.h>
@@ -65,14 +69,14 @@ OListViewDemo::OListViewDemo( QWidget* parent, const char* name, WFlags f )
     item = new ONamedListViewItem( item, QStringList::split( ' ', "Text1 Text2 Text3 Mickey" ) );
 
     if ( lv->find( 3, "Mickey", 3 ) )
-        qDebug( "found Mickey :-)" );
+        odebug << "found Mickey :-)" << oendl;
     else
-        qDebug( "did not found Mickey :-(" );
+        odebug << "did not found Mickey :-(" << oendl;
 
     if ( lv->find( 3, "Minni", 0 ) )
-        qDebug( "found Minni :-)" );
+        odebug << "found Minni :-)" << oendl;
     else
-        qDebug( "did not found Minni :-(" );
+        odebug << "did not found Minni :-(" << oendl;
 
 }
 

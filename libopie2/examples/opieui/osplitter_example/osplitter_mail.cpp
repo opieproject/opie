@@ -74,7 +74,7 @@ bool ListViews::eventFilter( QObject* obj, QEvent* ev ) {
     if (!obj->isWidgetType() )
         return false;
     if ( ev->type() == QEvent::MouseButtonRelease ) {
-        qWarning(" name %s, class %s", obj->name(), obj->className() );
+        owarn << " name " << obj->name() << ", class " << obj->className() << "" << oendl; 
     }
 
     return false;
