@@ -241,6 +241,7 @@ void PmIpkg::commit()
   	runwindow->show();
   }
  	installDialog->close();
+  delete installDialog;
   out(tr("\nAll done."));
 }
 
@@ -268,15 +269,15 @@ void PmIpkg::remove()
       runwindow->progress->setProgress( 1 );
      	linkOpp = removeLink;
     	to_remove.at(i)->processed();
-     	pvDebug(4,"link "+QString::number(i));
+     	pvDebug(3,"link "+QString::number(i));
 		  if ( to_remove.at(i)->link() )
       		processFileList( fileList, to_remove.at(i)->dest() );
-     	pvDebug(4,"take "+QString::number(i));
-     	to_remove.take( i );
+     	//pvDebug(3,"take "+QString::number(i)+" of "+QString::number(to_remove.count()));
+     	//if ( to_remove.at(i) ) to_remove.take( i );
           	
       out("\n");
  		}else{
-     	out(tr("Error while removing")+to_remove.at(i)->name()+"\n");
+     	out(tr("Error while removing ")+to_remove.at(i)->name()+"\n");
 		  if ( to_remove.at(i)->link() )
       		processFileList( fileList, to_remove.at(i)->dest() );
     }
@@ -303,7 +304,7 @@ void PmIpkg::install()
 	    linkOpp = createLink;
 		  if ( to_install.at(i)->link() )
   	  	makeLinks( to_install.at(i) );
-      to_install.take( i );
+   //   to_install.take( i );
       out("\n");
   	}else{
      	out(tr("Error while installing")+to_install.at(i)->name()+"\n");
@@ -360,11 +361,6 @@ void PmIpkg::show()
 	  runwindow->show();
   }
   runwindow->outPut->setText("");
-//	showButtons(b);
-//	if ( !b )
-// 		runwindow->progress->hide();
-//  else
-// 		runwindow->progress->show();
 }
 
 void PmIpkg::installFile(const QString &fileName, const QString &dest)
@@ -393,3 +389,9 @@ void PmIpkg::removeFile(const QString &fileName, const QString &dest)
  	delete p;
 }
 
+
+void PmIpkg::clearLists()
+{
+	to_remove.clear();
+ 	to_install.clear();
+}

@@ -28,6 +28,8 @@ public:
   void commit();
   void update();
   void show();
+  /** No descriptions */
+  void clearLists();
 
 public slots:
 	void doIt();

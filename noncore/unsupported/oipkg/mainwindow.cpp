@@ -258,6 +258,7 @@ void MainWindow::runIpkg()
   ipkg->loadList( &packageListDocLnk );
   ipkg->loadList( &packageListServers );
   ipkg->commit();
+  ipkg->clearLists();
   // ##### If we looked in the list of files, we could send out accurate
   // ##### messages. But we don't bother yet, and just do an "all".
   QCopEnvelope e("QPE/System", "linkChanged(QString)");
@@ -420,28 +421,14 @@ void MainWindow::rotateUpdateIcon()
 
 void MainWindow::setDocument(const QString &fileName)
 {
-  installFile(fileName);
-  // ##### If we looked in the list of files, we could send out accurate
-  // ##### messages. But we don't bother yet, and just do an "all".
+ 	if ( !QFile::exists( fileName ) ) return;
+	ipkg->installFile( fileName );
   QCopEnvelope e("QPE/System", "linkChanged(QString)");
   QString lf = QString::null;
   e << lf;
- // displayList();
  	exit;
 }
 
-void MainWindow::installFile(const QString &fileName)
-{
-	pvDebug(3, "MainWindow::installFile "+fileName);
- 	if ( !QFile::exists( fileName ) ) return;
-	ipkg->installFile( fileName );
-  // ##### If we looked in the list of files, we could send out accurate
-  // ##### messages. But we don't bother yet, and just do an "all".
-  QCopEnvelope e("QPE/System", "linkChanged(QString)");
-  QString lf = QString::null;
-  e << lf;
-  displayList();
-}
 
 void MainWindow::makeChannel()
 {   	

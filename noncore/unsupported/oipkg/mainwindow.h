@@ -64,7 +64,6 @@ private:
   void makeMenu();
   void setSections();
   void setSubSections();
-	void installFile(const QString &);
   bool updateIcon;
 
   PmIpkg* ipkg;
