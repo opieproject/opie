@@ -62,35 +62,10 @@ static bool g_notUseSet = ::getenv("OVERWRITE_ICON_SET");
 QPixmap Resource::loadPixmap( const QString &pix )
 {
     QPixmap pm;
-
-    // Give the pixmaps some kind of namespace in the pixmapcache
-    int index = pix.find('/');
-    QString appName1 = qApp->argv()[0];
-    appName1 = appName1.replace(QRegExp(".*/"),"");
-    QString appName2 = pix.left(index);
-
-    if ( appName2 == "" || appName2 == pix || appName2 == "icons" )
-        appName2 = "Global";
-
-    QString appKey1 = "_QPE_" + appName1 + "_" + pix;
-    QString appKey2 = "_QPE_" + appName2 + "_" + pix.mid(index+1);
-
-    if ( !QPixmapCache::find(appKey1, pm) ) {
-        if ( !QPixmapCache::find(appKey2, pm) ) {
-            QImage img;
-            QString f = findPixmap( pix );
-            if ( !f.isEmpty() ) {
-                img.load(f);
-                if ( !img.isNull() ) {
-                    pm.convertFromImage(img);
-                    if ( f.contains(appName1) ) {
-                        QPixmapCache::insert( appKey1, pm);
-                    } else {
-                        QPixmapCache::insert( appKey2, pm);
-                    }
-                }
-            }
-        }
+    QString key="QPE_"+pix;
+    if ( !QPixmapCache::find(key,pm) ) {
+	pm.convertFromImage(loadImage(pix));
+	QPixmapCache::insert(key,pm);
     }
     return pm;
 }
