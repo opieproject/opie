@@ -1,0 +1,42 @@
+#!/bin/sh
+
+arg0="`basename $0`"	# base portion of our filename
+arg1="$1"
+tmpfile="/tmp/resolv.conf.$$"
+
+usage ( ) {
+	echo "usage: $arg0 -a|-r {ip} [{ip}...]"
+	rm -f $tmpfile
+	exit 1
+}
+
+
+[ "$#" -le 1 ] && usage
+
+shift
+
+cp /etc/resolv.conf $tmpfile
+
+case "$arg1" in
+	"-a")
+		for ip in "$@"; do
+		    echo $ip
+			grep -sq "^nameserver $ip\$" $tmpfile || echo "nameserver $ip" >>$tmpfile
+		done
+	;;
+	"-r")
+		for ip in "$@"; do
+			grep -v "^nameserver $ip\$" $tmpfile >$tmpfile.2
+			mv $tmpfile.2 $tmpfile
+		done
+	;;
+	*)
+		usage
+	;;
+esac
+
+[ -f $tmpfile ] && cp $tmpfile /etc/resolv.conf
+rm -f $tmpfile
+
+exit 0
+
