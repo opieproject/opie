@@ -73,7 +73,7 @@ void RotateApplet::channelReceived( const QCString &msg, const QByteArray & data
         struct timespec interval;
         struct timespec remain;
         interval.tv_sec = 0;
-        interval.tv_nsec = 600;
+        interval.tv_nsec = 600000;
         ::nanosleep( &interval, &remain );
         OHingeStatus status = ODevice::inst()->readHingeSensor();
         qDebug( "RotateApplet::readHingeSensor = %d", (int) status );
