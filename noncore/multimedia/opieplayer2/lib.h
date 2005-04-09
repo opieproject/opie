@@ -31,8 +31,8 @@
 
 */
 
-#ifndef ZECKEXINELIB_H
-#define ZECKEXINELIB_H
+#ifndef XINE_VIDEO_LIB_H
+#define XINE_VIDEO_LIB_H
 
 #include <xine.h>
 
@@ -49,7 +49,6 @@ namespace XINE {
      * It supports playing, pausing, info,
      * stooping, seeking.
      */
-    class Frame;
     class Lib : public ThreadUtil::Channel, private ThreadUtil::Thread
     {
         Q_OBJECT
@@ -157,11 +156,6 @@ namespace XINE {
          * @param int the value between -100 and 100, 0 is original
          */
         void setGamma( int );
-
-        /**
-         * test
-         */
-        Frame currentFrame() const;
 
         /**
          * Returns the error code

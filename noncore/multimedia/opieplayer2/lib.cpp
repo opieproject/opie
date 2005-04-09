@@ -32,7 +32,6 @@
 */
 
 #include "xinevideowidget.h"
-#include "frame.h"
 #include "lib.h"
 
 /* OPIE */
@@ -306,13 +305,6 @@ void Lib::seekTo( int time ) {
         
 }
 
-
-Frame Lib::currentFrame() const {
-    assert( m_initialized );
-
-    Frame frame;
-    return frame;
-};
 
 QString Lib::metaInfo( int number) const {
     assert( m_initialized );
