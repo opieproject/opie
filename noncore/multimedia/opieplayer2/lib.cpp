@@ -154,6 +154,8 @@ Lib::~Lib() {
     xine_close( m_stream );
     xine_event_dispose_queue( m_queue );
     xine_dispose( m_stream );
+    xine_close_audio_driver(m_xine,m_audioOutput);
+    xine_close_video_driver(m_xine,m_videoOutput);
     xine_exit( m_xine );
 
     /* FIXME either free or delete but valgrind bitches against both */
