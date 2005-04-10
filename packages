@@ -160,6 +160,7 @@ CONFIG_OPIEIRC	noncore/net/opieirc	opieirc.pro
 CONFIG_OPIE-LOGIN	core/opie-login	opie-login.pro
 CONFIG_OPIEMAIL2	noncore/unsupported/mail2 mail.pro
 CONFIG_OPIEPLAYER2	noncore/multimedia/opieplayer2	opieplayer2.pro
+CONFIG_OPIEPLAYER3	noncore/multimedia/opieplayer3	opieplayer3.pro
 CONFIG_OPIEPLAYER	core/multimedia/opieplayer	opieplayer.pro
 CONFIG_OPIE-RDESKTOP	noncore/net/opierdesktop	opierdesktop.pro
 CONFIG_OPIE-READER	noncore/apps/opie-reader	opie-reader.pro
