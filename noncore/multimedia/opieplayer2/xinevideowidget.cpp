@@ -1,4 +1,3 @@
-
 /*
                             This file is part of the Opie Project
 
@@ -215,23 +214,28 @@ void XineVideoWidget::paintEvent2 ( QPaintEvent * )
             int middle_w = _vw/2;
             int middle_h = _vh/2;
             m_thisframe.setRect(width()/2-middle_w,height()/2-middle_h,_vw,_vh);
-            QRect topFill,rightFill,leftFill,downFill;
-            topFill. setRect(0,0                   ,width(),m_thisframe.top());
-            downFill.setCoords(0,m_thisframe.bottom(),width(),height());
-            rightFill.setCoords(m_thisframe.right(),0,width(),height());
-            leftFill.setCoords(0,0,m_thisframe.left(),height());
 
-            if (topFill.isValid()) {
-                p.fillRect(topFill,black);
-            }
-            if (downFill.isValid()) {
-                p.fillRect(downFill,black);
-            }
-            if (rightFill.isValid()) {
-                p.fillRect(rightFill,black);
-            }
-            if (leftFill.isValid()) {
-                p.fillRect(leftFill,black);
+            {
+            // is this stuff realy needed? it seems working without, too.
+                QRect topFill,rightFill,leftFill,downFill;
+                topFill. setRect(0,0                   ,width(),m_thisframe.top());
+                downFill.setCoords(0,m_thisframe.bottom(),width(),height());
+                rightFill.setCoords(m_thisframe.right(),0,width(),height());
+                leftFill.setCoords(0,0,m_thisframe.left(),height());
+
+                if (topFill.isValid()) {
+                    p.fillRect(topFill,black);
+                }
+                if (downFill.isValid()) {
+                    p.fillRect(downFill,black);
+                }
+                if (rightFill.isValid()) {
+                    p.fillRect(rightFill,black);
+                }
+                if (leftFill.isValid()) {
+                    p.fillRect(leftFill,black);
+                }
+
             }
             uchar *fb = dp. frameBuffer ( );
             uchar *frame = m_buff;
@@ -266,13 +270,6 @@ void XineVideoWidget::paintEvent2 ( QPaintEvent * )
                 }
                 dst += m_bytes_per_line_fb;
             }
-        }
-
-
-        {
-            // QVFB hack by Martin Jones
-            // We need to "touch" all affected clip rects with a normal QPainter in addition to the QDirectPainter
-            p.fillRect(QRect(mapFromGlobal (m_thisframe. topLeft ( )), m_thisframe.size ()),QBrush(NoBrush));
         }
     }
 }
@@ -311,9 +308,6 @@ void XineVideoWidget::setVideoFrame ( uchar* img, int w, int h, int bpl )
             } else {
                 m_buff = 0;
             }
-        } else if (l==0){
-            delete[] m_buff;
-            m_buff = 0;
         }
         m_lastsize = l;
         m_framesize = QSize(w,h);
@@ -323,7 +317,7 @@ void XineVideoWidget::setVideoFrame ( uchar* img, int w, int h, int bpl )
         m_bytes_per_line_frame = bpl;
     } // Release Mutex
 
-    paintEvent2(0);
+    if (m_buff) paintEvent2(0);
 }
 
 void XineVideoWidget::resizeEvent ( QResizeEvent * )
