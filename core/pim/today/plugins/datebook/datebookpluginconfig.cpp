@@ -48,6 +48,8 @@ void DatebookPluginConfig::readConfig() {
     m_gui->CheckBox3->setChecked( m_only_later );
     m_more_days = cfg.readNumEntry( "moredays", 0 );
     m_gui->SpinBox2->setValue( m_more_days );
+    m_maxCharClip = cfg.readNumEntry( "maxcharclip" , 38 );
+    m_gui->SpinBox3->setValue( m_maxCharClip );
 }
 
 
@@ -66,6 +68,8 @@ void DatebookPluginConfig::writeConfig() {
     cfg.writeEntry( "onlylater", m_only_later );
     m_more_days = m_gui->SpinBox2->value();
     cfg.writeEntry( "moredays", m_more_days );
+    m_maxCharClip = m_gui->SpinBox3->value();
+    cfg.writeEntry( "maxcharclip", m_maxCharClip );
     cfg.write();
 }
 

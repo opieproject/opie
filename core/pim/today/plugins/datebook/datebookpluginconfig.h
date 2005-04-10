@@ -56,6 +56,7 @@ private:
     // should only later appointments be shown or all for the current day.
     int m_only_later;
     int m_more_days;
+    int m_maxCharClip;
 
 };
 

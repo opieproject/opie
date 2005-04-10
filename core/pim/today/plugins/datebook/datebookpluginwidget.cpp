@@ -54,6 +54,7 @@ void DatebookPluginWidget::readConfig() {
     m_onlyLater = cfg.readNumEntry( "onlylater", 1 );
     m_moreDays = cfg.readNumEntry( "moredays", 0 );
     m_timeExtraLine = cfg.readNumEntry( "timeextraline",  1 );
+    m_maxCharClip = cfg.readNumEntry( "maxcharclip", 38 );
 }
 
 void DatebookPluginWidget::reinitialize()  {
@@ -96,7 +97,7 @@ void DatebookPluginWidget::getDates() {
             if ( count < m_max_lines_meet ) {
                 if ( !m_onlyLater ) {
                     count++;
-                    DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes, m_timeExtraLine );
+                    DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes, m_timeExtraLine, m_maxCharClip );
                     m_eventsList.append( l );
                     l->show();
                     QObject::connect ( l, SIGNAL( editEvent(const Event&) ), l, SLOT( editEventSlot(const Event&) ) );

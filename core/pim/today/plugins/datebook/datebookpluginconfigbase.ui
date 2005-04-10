@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>228</width>
+            <width>224</width>
             <height>267</height>
         </rect>
     </property>
@@ -23,7 +23,7 @@
         <name>whatsThis</name>
         <string></string>
     </property>
-    <vbox>
+    <grid>
         <property stdset="1">
             <name>margin</name>
             <number>11</number>
@@ -32,7 +32,7 @@
             <name>spacing</name>
             <number>6</number>
         </property>
-        <widget>
+        <widget row="0"  column="0" >
             <class>QCheckBox</class>
             <property stdset="1">
                 <name>name</name>
@@ -47,7 +47,7 @@
                 <string>Check this if the location of an appointment should be shown for each one</string>
             </property>
         </widget>
-        <widget>
+        <widget row="1"  column="0" >
             <class>QCheckBox</class>
             <property stdset="1">
                 <name>name</name>
@@ -62,7 +62,7 @@
                 <string>Check this if the note attached to an appointment should be shown for each one</string>
             </property>
         </widget>
-        <widget>
+        <widget row="2"  column="0" >
             <class>QCheckBox</class>
             <property stdset="1">
                 <name>name</name>
@@ -77,7 +77,7 @@
                 <string>Check this if only appointments later then current time should be shown</string>
             </property>
         </widget>
-        <widget>
+        <widget row="3"  column="0" >
             <class>QCheckBox</class>
             <property stdset="1">
                 <name>name</name>
@@ -88,7 +88,7 @@
                 <string>Show time in extra line</string>
             </property>
         </widget>
-        <widget>
+        <widget row="4"  column="0" >
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
@@ -138,7 +138,7 @@
                 </widget>
             </hbox>
         </widget>
-        <widget>
+        <widget row="5"  column="0" >
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
@@ -192,7 +192,42 @@
                 </widget>
             </hbox>
         </widget>
-        <spacer>
+        <widget row="6"  column="0" >
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout6</cstring>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QSpinBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>SpinBox3</cstring>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel1_2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Clip line after X chars</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <spacer row="7"  column="0" >
             <property>
                 <name>name</name>
                 <cstring>Spacer2</cstring>
@@ -213,6 +248,6 @@
                 </size>
             </property>
         </spacer>
-    </vbox>
+    </grid>
 </widget>
 </UI>

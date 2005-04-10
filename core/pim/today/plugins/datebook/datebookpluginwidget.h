@@ -57,6 +57,8 @@ private:
     int m_moreDays;
     // true if time of an appointment should be an extra line
     bool m_timeExtraLine;
+    //max characters displayed in notes
+    int m_maxCharClip;
 };
 
 #endif
