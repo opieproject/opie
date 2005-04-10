@@ -1,30 +1,30 @@
 /*
-                            This file is part of the Opie Project
+                    This file is part of the Opie Project
 
-                             Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
+                      Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
                              Copyright (c)  2002 LJP <>
                              Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
               =.
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           Library General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -48,7 +48,7 @@
 #include <unistd.h>
 
 typedef void (*display_xine_frame_t) (void *user_data, uint8_t* frame,
-				      int  width, int height,int bytes );
+                      int  width, int height,int bytes );
 
 extern "C" {
     xine_vo_driver_t* init_video_out_plugin( xine_t *xine, void* video, display_xine_frame_t, void * );
@@ -189,6 +189,17 @@ int Lib::subVersion() {
      return sub;
 }
 
+int Lib::setfile(const QString& fileName)
+{
+    QString str = fileName.stripWhiteSpace();
+
+
+    if ( !xine_open( m_stream, str.utf8().data() ) ) {
+         return 0;
+    }
+    return 1;
+}
+
 int Lib::play( const QString& fileName, int startPos, int start_time ) {
     assert( m_initialized );
 
@@ -214,7 +225,7 @@ void Lib::pause( bool toggle ) {
         xine_set_param( m_stream, XINE_PARAM_SPEED, XINE_SPEED_PAUSE );
         xine_set_param( m_stream, XINE_PARAM_AUDIO_CLOSE_DEVICE, 1);
     }
-    
+
     else {
         xine_set_param( m_stream, XINE_PARAM_SPEED, XINE_SPEED_NORMAL );
     }
@@ -266,16 +277,16 @@ int Lib::length() const {
       int iRetVal=0, iTestLoop=0;
 
       do
-      	{
-	iRetVal = xine_get_pos_length( m_stream, &pos, &time, &length );
-	if (iRetVal)
-	   {/* if the function didn't return 0, then pos, time and length are valid.*/
-	   return length/1000;
-	   }
-	/*don't poll too much*/
-	usleep(100000);
-	iTestLoop++;
-	}
+        {
+    iRetVal = xine_get_pos_length( m_stream, &pos, &time, &length );
+    if (iRetVal)
+       {/* if the function didn't return 0, then pos, time and length are valid.*/
+       return length/1000;
+       }
+    /*don't poll too much*/
+    usleep(100000);
+    iTestLoop++;
+    }
       while ( iTestLoop < 10 ); /* if after 1s, we still don't have any
 valid stream, then return -1 (this value could be used to make the stream
 unseekable, but it should never occur!! Mr. Murphy ? :) ) */
@@ -302,7 +313,7 @@ void Lib::seekTo( int time ) {
         xine_play( m_stream, 0, time*1000 );
         xine_set_param( m_stream, XINE_PARAM_SPEED, XINE_SPEED_PAUSE );
     }
-        
+
 }
 
 
@@ -331,9 +342,10 @@ void Lib::ensureInitialized()
 void Lib::setWidget( XineVideoWidget *widget )
 {
     m_wid = widget;
-    resize ( m_wid-> size ( ) );
-    ::null_set_mode( m_videoOutput, qt_screen->depth(), qt_screen->pixelType() );
-    m_wid->repaint();
+    if (m_wid) {
+        resize ( m_wid-> size ( ) );
+        ::null_set_mode( m_videoOutput, qt_screen->depth(), qt_screen->pixelType() );
+    }
 }
 
 void Lib::receiveMessage( ThreadUtil::ChannelMessage *msg, SendType sendType )
@@ -431,7 +443,7 @@ void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
         return;
     }
 
-    assert( m_wid );
+//    assert( m_wid );
 
-    m_wid-> setVideoFrame ( frame, width, height, bytes );
+    if (m_wid) m_wid-> setVideoFrame ( frame, width, height, bytes );
 }

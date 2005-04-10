@@ -73,6 +73,7 @@ private:
     int     m_bytes_per_line_frame;
     int     m_bytes_per_pixel;
     int     m_lastsize;
+    QSize   m_framesize;
     QImage *m_logo;
     mutable int     m_rotation;
     ThreadUtil::Mutex m_bufmutex;

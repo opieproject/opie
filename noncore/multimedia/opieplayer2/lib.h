@@ -1,30 +1,30 @@
 /*
-                            This file is part of the Opie Project
+                    This file is part of the Opie Project
 
-                             Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
+                      Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
                              Copyright (c)  2002 LJP <>
                              Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
               =.
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           Library General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -65,6 +65,7 @@ namespace XINE {
 
         void resize ( const QSize &s );
 
+        int setfile(const QString& fileName);
         int play( const QString& fileName,
                   int startPos = 0,
                   int start_time = 0 );
@@ -190,14 +191,14 @@ namespace XINE {
         bool m_video:1;
         XineVideoWidget *m_wid;
         xine_t *m_xine;
-	xine_stream_t *m_stream;
+    xine_stream_t *m_stream;
         xine_cfg_entry_t *m_config;
         xine_vo_driver_t *m_videoOutput;
         xine_ao_driver_t* m_audioOutput;
-	xine_event_queue_t *m_queue;
+    xine_event_queue_t *m_queue;
 
         void handleXineEvent( const xine_event_t* t );
-	void handleXineEvent( int type, int data, const char* name );
+    void handleXineEvent( int type, int data, const char* name );
         void drawFrame( uint8_t* frame, int width, int height, int bytes );
         // C -> C++ bridge for the event system
         static void xine_event_handler( void* user_data, const xine_event_t* t);
