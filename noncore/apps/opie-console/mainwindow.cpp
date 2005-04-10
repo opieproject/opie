@@ -512,6 +512,11 @@ void MainWindow::slotProfile( int id) {
 
 
 void MainWindow::create( const Profile& prof ) {
+    char *homeDir = getenv("HOME");
+
+    if ( homeDir )
+        ::chdir( homeDir );
+    
     if(m_curSession)
         if(m_curSession->transferDialog()) m_curSession->transferDialog()->hide();
 
