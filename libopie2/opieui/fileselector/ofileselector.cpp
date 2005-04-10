@@ -320,6 +320,7 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
     m_all = false;
     QVBoxLayout* lay = new QVBoxLayout( this );
     m_currentDir = startDir;
+    bool bigicons = qApp->desktop()->size().width()>330;
 
     /*
      * now we add a special bar
@@ -336,38 +337,38 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
     box->setSpacing( 0 );
 
     QToolButton *btn = new QToolButton( box );
-    btn->setUsesBigPixmap( true );
+    btn->setUsesBigPixmap(bigicons);
     btn->setPixmap( Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ) );
     connect(btn, SIGNAL(clicked() ),
             this, SLOT( cdUP() ) );
 
     btn = new QToolButton( box );
-    btn->setUsesBigPixmap( true );
+    btn->setUsesBigPixmap(bigicons);
     btn->setPixmap( Opie::Core::OResource::loadPixmap( "home", Opie::Core::OResource::SmallIcon ) );
     connect(btn, SIGNAL(clicked() ),
             this, SLOT( cdHome() ) );
 
     btn = new QToolButton( box );
-    btn->setUsesBigPixmap( true );
+    btn->setUsesBigPixmap(bigicons);
     btn->setPixmap( Opie::Core::OResource::loadPixmap( "DocsIcon", Opie::Core::OResource::SmallIcon ) );
     connect(btn, SIGNAL(clicked() ),
             this, SLOT(cdDoc() ) );
 
     m_btnNew = new QToolButton( box );
-    m_btnNew->setUsesBigPixmap( true );
+    m_btnNew->setUsesBigPixmap(bigicons);
     m_btnNew->setPixmap( Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ) );
     connect(m_btnNew, SIGNAL(clicked() ),
             this, SLOT(slotNew() ) );
 
 
     m_btnClose = new QToolButton( box );
-    m_btnClose->setUsesBigPixmap( true );
+    m_btnClose->setUsesBigPixmap(bigicons);
     m_btnClose->setPixmap( Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ) );
     connect(m_btnClose, SIGNAL(clicked() ),
             selector(), SIGNAL(closeMe() ) );
 
     btn = new QToolButton( box );
-    btn->setUsesBigPixmap( true );
+    btn->setUsesBigPixmap(bigicons);
     btn->setPixmap( Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon ) );
 
     m_fsButton = btn;
