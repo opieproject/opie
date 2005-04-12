@@ -171,6 +171,10 @@ namespace XINE {
 
         void setWidget( XineVideoWidget *widget );
 
+        QSize videoSize()const;
+        int audioBitrate()const;
+        int videoBitrate()const;
+
     signals:
 
         void stopped();

@@ -294,11 +294,39 @@ unseekable, but it should never occur!! Mr. Murphy ? :) ) */
       return -1;
 }
 
+/* info about current stream */
+QSize Lib::videoSize()const
+{
+    if (!m_initialized||!hasVideo()) return QSize(0,0);
+    int width = xine_get_stream_info(m_stream,XINE_STREAM_INFO_VIDEO_WIDTH);
+    int height = xine_get_stream_info(m_stream,XINE_STREAM_INFO_VIDEO_HEIGHT);
+    return QSize(width,height);
+}
+
+
 bool Lib::isSeekable() const {
     assert( m_initialized );
 
     return xine_get_stream_info( m_stream, XINE_STREAM_INFO_SEEKABLE );
 }
+
+bool Lib::hasVideo() const {
+    assert( m_initialized );
+
+    return  xine_get_stream_info( m_stream, XINE_STREAM_INFO_HAS_VIDEO);
+}
+
+int Lib::audioBitrate()const
+{
+    if (!m_initialized) return 0;
+    return  xine_get_stream_info( m_stream, XINE_STREAM_INFO_AUDIO_BITRATE);
+}
+int Lib::videoBitrate()const
+{
+    if (!m_initialized||!hasVideo()) return 0;
+    return  xine_get_stream_info( m_stream, XINE_STREAM_INFO_VIDEO_BITRATE);
+}
+/* end info block */
 
 void Lib::seekTo( int time ) {
     assert( m_initialized );
@@ -389,12 +417,6 @@ bool Lib::isShowingVideo() const {
     assert( m_initialized );
 
     return ::null_is_showing_video( m_videoOutput );
-}
-
-bool Lib::hasVideo() const {
-    assert( m_initialized );
-
-    return  xine_get_stream_info( m_stream, 18 );
 }
 
 void Lib::showVideoFullScreen( bool fullScreen ) {
