@@ -17,6 +17,7 @@ AudioWidget::AudioWidget( QWidget * parent, const char * name, WFlags f)
     m_MainLayout = new QVBoxLayout(this);
     m_MainLayout->setAutoAdd(true);
     m_InfoBox = new QTextView(this);
+#if 0
     m_PosSlider = new QSlider(QSlider::Horizontal,this);
     m_PosSlider->setTickInterval(60);
     connect(m_PosSlider,SIGNAL(valueChanged(int)),this,SLOT(slotNewPos(int)));
@@ -25,27 +26,34 @@ AudioWidget::AudioWidget( QWidget * parent, const char * name, WFlags f)
     connect(m_PosSlider,SIGNAL(sliderReleased()),this,SLOT(sliderReleased()));
     m_pressed = false;
     m_uppos=0;
+#endif
 }
 
 AudioWidget::~AudioWidget()
 {
 }
 
-void AudioWidget::slotNewPos(int pos)
+void AudioWidget::slotNewPos(int /* pos*/)
 {
     if (!m_xineLib) return;
+#if 0
     if (m_uppos==pos) return;
     m_xineLib->seekTo(pos);
+#endif
 }
 
 void AudioWidget::sliderPressed()
 {
+#if 0
     m_pressed = true;
+#endif
 }
 
 void AudioWidget::sliderReleased()
 {
+#if 0
     m_pressed = false;
+#endif
 }
 
 void AudioWidget::closeEvent(QCloseEvent*e)
@@ -57,20 +65,25 @@ void AudioWidget::closeEvent(QCloseEvent*e)
     QWidget::closeEvent(e);
 }
 
-void AudioWidget::playFile(const DocLnk&aLnk,XINE::Lib*aLib)
+int AudioWidget::playFile(const DocLnk&aLnk,XINE::Lib*aLib)
 {
     m_current = aLnk;
     if (m_xineLib != aLib) {
-        disconnect(m_xineLib);
+        if (m_xineLib) disconnect(m_xineLib);
         m_xineLib = aLib;
     }
     if (!m_xineLib) {
-        return;
+        return -1;
     }
+#if 0
     m_uppos=0;
     m_PosSlider->setValue(0);
+#endif
     m_xineLib->setShowVideo(false);
-    m_xineLib->play(m_current.file());
+    int res = m_xineLib->play(m_current.file());
+    if (res != 1) {
+        return -2;
+    }
     // title
     QString title = m_xineLib->metaInfo(0);
     // artist
@@ -79,7 +92,10 @@ void AudioWidget::playFile(const DocLnk&aLnk,XINE::Lib*aLib)
     QString album = m_xineLib->metaInfo(4);
 
     int l = m_xineLib->length();
+    int tmp = l;
+#if 0
     m_PosSlider->setRange(0,l);
+#endif
     QString laenge="";
     int h = l/3600;
     l-=h*3600;
@@ -102,12 +118,15 @@ void AudioWidget::playFile(const DocLnk&aLnk,XINE::Lib*aLib)
     }
     if (title.length()) {
         text+="<H2><center>"+title+"</center></h2>";
+    } else {
+        text+="<H2><center>"+m_current.name()+"</center></h2>";
     }
     if (album.length()) {
         text+="<H2><center>"+album+"</center></h2>";
     }
     text+="<h3><center>"+laenge+"</center></h3>";
     m_InfoBox->setText(text);
+    return tmp;
 }
 
 void AudioWidget::stopPlaying()
@@ -117,9 +136,11 @@ void AudioWidget::stopPlaying()
     }
 }
 
-void AudioWidget::updatePos(int val)
+void AudioWidget::updatePos(int /* val */)
 {
+#if 0
     if (m_pressed) return;
     m_uppos = val;
     m_PosSlider->setValue(val);
+#endif
 }

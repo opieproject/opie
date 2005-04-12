@@ -50,6 +50,8 @@
 #include <qpopupmenu.h>
 #include <qmenubar.h>
 #include <qtimer.h>
+#include <qslider.h>
+#include <qlayout.h>
 
 OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<PMainWindow>)
 
@@ -59,16 +61,21 @@ PMainWindow::PMainWindow(QWidget*w, const char*name, WFlags f)
     : QMainWindow(w,name,f)
 {
     setCaption( QObject::tr("Opie Mediaplayer 3" ) );
-    setupActions();
-    setupToolBar();
-    setupMenu();
 
-    m_stack = new OWidgetStack(this);
+    m_MainBox = new QWidget(this);
+
+    QVBoxLayout*m_l = new QVBoxLayout(m_MainBox);
+
+    m_stack = new OWidgetStack(m_MainBox);
     m_stack->forceMode(Opie::Ui::OWidgetStack::SmallScreen);
-    setCentralWidget(m_stack );
+    m_l->addWidget(m_stack);
+    m_scrollBar = new QSlider(QSlider::Horizontal,m_MainBox);
+    m_l->addWidget(m_scrollBar);
+    m_scrollBar->setEnabled(false);
+
     m_playList = new PlaylistView(m_stack,"playlist");
     m_stack->addWidget(m_playList,stack_list);
-
+    connect(m_playList,SIGNAL(contentChanged(int)),this,SLOT(slotListChanged(int)));
     m_sfl = new OFileSelector("video/*;audio/*",m_stack);
     m_stack->addWidget(m_sfl,stack_file);
     connect(m_sfl, SIGNAL(fileSelected(const DocLnk &)), m_playList, SLOT(slotAddFile(const DocLnk &)));
@@ -83,6 +90,28 @@ PMainWindow::PMainWindow(QWidget*w, const char*name, WFlags f)
     m_stack->raiseWidget(stack_list);
     m_PlayLib = 0;
     m_LastItem = 0;
+    setupActions();
+    setupToolBar();
+    setupMenu();
+
+    setCentralWidget(m_MainBox );
+}
+
+void PMainWindow::slotListChanged(int count)
+{
+    if (!m_playList->isVisible()) {
+        return;
+    }
+    a_removeFiles->setEnabled(count>0);
+}
+
+void PMainWindow::mediaWindowraised()
+{
+    playlistOnly->setEnabled(false);
+    a_appendFiles->setEnabled(true);
+    a_loadPlaylist->setEnabled(true);
+    a_showPlaylist->setEnabled(true);
+    a_ShowMedia->setEnabled(false);
 }
 
 void PMainWindow::checkLib()
@@ -109,14 +138,34 @@ void PMainWindow::fileSelected(const DocLnk&)
 void PMainWindow::slotAppendFiles()
 {
     m_stack->raiseWidget(m_sfl);
+    playlistOnly->setEnabled(false);
+
+    a_showPlaylist->setEnabled(true);
+    if (m_PlayLib && m_playing) {
+        a_ShowMedia->setEnabled(true);
+    } else {
+        a_ShowMedia->setEnabled(false);
+    }
 }
 
 void PMainWindow::slotShowList()
 {
     m_stack->raiseWidget(m_playList);
+    playlistOnly->setEnabled(true);
+    a_showPlaylist->setEnabled(false);
+    if (m_playList->childCount()) {
+        a_removeFiles->setEnabled(true);
+    } else {
+        a_removeFiles->setEnabled(false);
+    }
+    if (m_PlayLib && m_playing) {
+        a_ShowMedia->setEnabled(true);
+    } else {
+        a_ShowMedia->setEnabled(false);
+    }
 }
 
-void PMainWindow::slotPlayList()
+void PMainWindow::slotShowMediaWindow()
 {
     if (m_playing && m_LastItem && m_PlayLib) {
         if (!m_LastItem->isVideo()) {
@@ -124,6 +173,15 @@ void PMainWindow::slotPlayList()
         } else {
             m_stack->raiseWidget(stack_video);
         }
+        mediaWindowraised();
+        return;
+    }
+}
+
+void PMainWindow::slotPlayList()
+{
+    if (m_playing && m_LastItem && m_PlayLib) {
+        slotShowMediaWindow();
         return;
     }
 
@@ -136,10 +194,35 @@ void PMainWindow::slotPlayList()
     slotPlayCurrent();
 }
 
+void PMainWindow::slotUserStop()
+{
+    if (!m_playing || !m_PlayLib) return;
+    m_playing = false;
+    m_PlayLib->stop();
+    m_scrollBar->setEnabled(false);
+    hideVideo();
+    slotShowList();
+}
+
+void PMainWindow::slotTogglePlay(bool how)
+{
+    if (how == m_playing) {
+        if (how) {
+            slotShowMediaWindow();
+        }
+        return;
+    }
+    if (how) {
+        slotPlayList();
+    } else {
+        slotUserStop();
+    }
+}
+
 void PMainWindow::hideVideo()
 {
     if (m_VideoPlayer->isVisible() && a_ShowFull->isOn()) {
-        m_VideoPlayer->showNormal();
+        //m_VideoPlayer->showNormal();
         m_VideoPlayer->hide();
     }
 }
@@ -148,26 +231,37 @@ void PMainWindow::slotPlayCurrent()
 {
     if (!m_LastItem) {
         if (m_PlayLib) m_PlayLib->stop();
+        m_scrollBar->setEnabled(false);
+        a_playAction->setOn(false);
         hideVideo();
-        m_stack->raiseWidget(stack_list);
+        slotShowList();
         return;
     }
     checkLib();
     m_CurrentPos = 0;
     m_playList->setCurrentItem(m_LastItem);
     odebug << "Pos: " << m_PlayLib->currentTime() << oendl;
+    int result = 0;
     if (!m_LastItem->isVideo()) {
         hideVideo();
         m_playing = true;
-        QTimer::singleShot( 500, this, SLOT( slotCheckPos() ) );
         m_stack->raiseWidget(stack_audio);
-        m_AudioPlayer->playFile(m_LastItem->Lnk(),m_PlayLib);
+        result = m_AudioPlayer->playFile(m_LastItem->Lnk(),m_PlayLib);
     } else {
         m_playing = true;
-        QTimer::singleShot( 500, this, SLOT( slotCheckPos() ) );
         setupVideo(a_ShowFull->isOn());
-        m_VideoPlayer->playFile(m_LastItem->Lnk(),m_PlayLib);
+        result = m_VideoPlayer->playFile(m_LastItem->Lnk(),m_PlayLib);
     }
+    if (result<0) {
+        // fehler
+        return;
+    }
+    mediaWindowraised();
+    odebug << "Range: " << result << oendl;
+    m_scrollBar->setRange(0,result);
+    m_scrollBar->setValue(0);
+    m_scrollBar->setEnabled(true);
+    QTimer::singleShot( 500, this, SLOT( slotCheckPos() ) );
 }
 
 void PMainWindow::slotPlayNext()
@@ -192,15 +286,6 @@ void PMainWindow::slotPlayPrevious()
     slotPlayCurrent();
 }
 
-void PMainWindow::slotUserStop()
-{
-    if (!m_playing || !m_PlayLib) return;
-    m_playing = false;
-    m_PlayLib->stop();
-    hideVideo();
-    m_stack->raiseWidget(stack_list);
-}
-
 void PMainWindow::slotStopped()
 {
     if (!m_playing) return;
@@ -211,45 +296,65 @@ void PMainWindow::slotStopped()
 void PMainWindow::slotCheckPos()
 {
     if (!m_playing) return;
-    emit sigPos(m_PlayLib->currentTime());
+    //emit sigPos(m_PlayLib->currentTime());
+    m_scrollBar->setValue(m_PlayLib->currentTime());
     QTimer::singleShot( 1000, this, SLOT( slotCheckPos() ) );
 }
 
 void PMainWindow::slotRemoveFiles()
 {
-    slotUserStop();
+    if (m_playing||!m_playList->isVisible()) return;
     PlaylistItem* Item = m_playList->currentItem();
-    m_stack->raiseWidget(stack_list);
+    slotShowList();
     m_playList->removeFromList(Item);
 }
 
 void PMainWindow::setupActions()
 {
-    a_appendFiles = new QAction(tr("Open file(s)"),Resource::loadIconSet( "opieplayer2/add_to_playlist" ), 0, 0, this, 0, false );
+    a_appendFiles = new QAction(tr("Append file(s)"),Resource::loadIconSet( "opieplayer2/add_to_playlist" ), 0, 0, this, 0, false );
     connect(a_appendFiles,SIGNAL(activated()),this,SLOT(slotAppendFiles()));
+    a_addDir = new QAction(tr("Add directory"),Resource::loadIconSet("folder_open"),0,0,this,0,false);
+    connect(a_addDir,SIGNAL(activated()),m_playList,SLOT(slotAppendDir()));
+    a_loadPlaylist = new QAction(tr("Append .m3u playlist"),Resource::loadIconSet("opieplayer2/add_to_playlist"),0,0,this,0,false);
+    connect(a_loadPlaylist,SIGNAL(activated()),m_playList,SLOT(slotOpenM3u()));
+    a_savePlaylist = new QAction(tr("Save .m3u playlist"),Resource::loadIconSet("save"),0,0,this,0,false);
+    connect(a_savePlaylist,SIGNAL(activated()),m_playList,SLOT(slotSaveAsM3u()));
+
+    playlistOnly = new QActionGroup(this,"playlistgroup",false);
+    playlistOnly->insert(a_appendFiles);
+    playlistOnly->insert(a_addDir);
+    playlistOnly->insert(a_loadPlaylist);
+    playlistOnly->insert(a_savePlaylist);
+
     a_showPlaylist = new QAction(tr("Show playlist"),Resource::loadIconSet( "txt" ), 0, 0, this, 0, false );
     connect(a_showPlaylist,SIGNAL(activated()),this,SLOT(slotShowList()));
+    a_ShowMedia = new QAction(tr("Show media window"),Resource::loadIconSet("opieplayer2/musicfile"), 0, 0, this, 0, false );
+    connect(a_ShowMedia,SIGNAL(activated()),this,SLOT(slotShowMediaWindow()));
+
     a_removeFiles = new QAction(tr("Remove file"),Resource::loadIconSet( "opieplayer2/remove_from_playlist" ), 0, 0, this, 0, false );
     connect(a_removeFiles,SIGNAL(activated()),this,SLOT(slotRemoveFiles()));
 
     playersGroup = new QActionGroup(this,"playgroup",false);
 
-    a_playAction = new QAction(tr("Play list"),Resource::loadIconSet( "opieplayer2/play" ), 0, 0, this, 0, false );
-    connect(a_playAction,SIGNAL(activated()),this,SLOT(slotPlayList()));
+    a_playAction = new QAction(tr("Play list"),Resource::loadIconSet( "opieplayer2/play" ), 0, 0, this, 0, true);
+    a_playAction->setOn(false);
+    connect(a_playAction,SIGNAL(toggled(bool)),this,SLOT(slotTogglePlay(bool)));
+
     a_playNext = new QAction(tr("Play next in list"),Resource::loadIconSet( "fastforward" ), 0, 0, this, 0, false );
     connect(a_playNext,SIGNAL(activated()),this,SLOT(slotPlayNext()));
     a_playPrevious = new QAction(tr("Play previous in list"),Resource::loadIconSet( "fastback" ), 0, 0, this, 0, false );
     connect(a_playPrevious,SIGNAL(activated()),this,SLOT(slotPlayPrevious()));
     a_ShowFull = new QAction(tr("Show videos fullscreen"),Resource::loadIconSet( "fullscreen" ), 0, 0, this, 0, true );
     connect(a_ShowFull,SIGNAL(toggled(bool)),this,SLOT(slotToggleFull(bool)));
-    a_stopPlay = new QAction(tr("Show videos fullscreen"),Resource::loadIconSet( "stop" ), 0, 0, this, 0, false );
-    connect(a_stopPlay,SIGNAL(activated()),this,SLOT(slotUserStop()));
 
     playersGroup->insert(a_playPrevious);
     playersGroup->insert(a_playAction);
-    playersGroup->insert(a_stopPlay);
     playersGroup->insert(a_playNext);
-    //playersGroup->insert(a_ShowFull);
+
+    /* initial states of actions */
+    a_showPlaylist->setEnabled(false);
+    a_removeFiles->setEnabled(false);
+    a_ShowMedia->setEnabled(false);
 }
 
 void PMainWindow::setupToolBar()
@@ -263,6 +368,7 @@ void PMainWindow::setupToolBar()
     a_appendFiles->addTo(m_toolBar);
     a_removeFiles->addTo(m_toolBar);
     a_showPlaylist->addTo(m_toolBar);
+    a_ShowMedia->addTo(m_toolBar);
     a_ShowFull->addTo(m_toolBar);
     playersGroup->addTo(m_toolBar);
 }
@@ -274,14 +380,15 @@ void PMainWindow::setupVideo(bool full)
         m_VideoPlayer->reparent(0, WStyle_Customize | WStyle_NoBorderEx, QPoint(0,0));
         m_VideoPlayer->setGeometry(0,0,qApp->desktop()->size().width(),qApp->desktop()->size().height());
         m_VideoPlayer->showFullScreen();
+        connect(m_VideoPlayer,SIGNAL(videoclicked()),this,SLOT(slotVideoclicked()));
     } else {
         m_VideoPlayer->hide();
+        m_VideoPlayer->disconnect(this);
         m_stack->addWidget(m_VideoPlayer,stack_video);
         m_stack->raiseWidget(stack_video);
     }
+    mediaWindowraised();
     m_VideoPlayer->fullScreen(full);
-    m_VideoPlayer->disconnect(this);
-    connect(m_VideoPlayer,SIGNAL(videoclicked()),this,SLOT(slotVideoclicked()));
 }
 
 void PMainWindow::slotVideoclicked()
@@ -308,10 +415,15 @@ void PMainWindow::setupMenu()
     m_menuBar->insertItem( tr( "Playlist" ), fileMenu );
     a_appendFiles->addTo(fileMenu);
     a_removeFiles->addTo(fileMenu);
+    a_addDir->addTo(fileMenu);
+    fileMenu->insertSeparator();
+    a_loadPlaylist->addTo(fileMenu);
+    a_savePlaylist->addTo(fileMenu);
 
     dispMenu = new QPopupMenu( m_menuBar );
     m_menuBar->insertItem( tr( "Show" ), dispMenu );
     a_showPlaylist->addTo(dispMenu);
+    a_ShowMedia->addTo(dispMenu);
     a_ShowFull->addTo(dispMenu);
     playMenu = new QPopupMenu(m_menuBar);
     m_menuBar->insertItem(tr("Playing"),playMenu);

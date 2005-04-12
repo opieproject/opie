@@ -58,6 +58,7 @@ class QMenuBar;
 class AudioWidget;
 class VideoWidget;
 class PlaylistItem;
+class QSlider;
 
 class PMainWindow : public QMainWindow {
     Q_OBJECT
@@ -69,6 +70,8 @@ public:
 public slots:
     virtual void slotVideoclicked();
 protected:
+
+    /* GUI parts */
     static const int stack_list = 0;
     static const int stack_file = 1;
     static const int stack_audio = 2;
@@ -78,10 +81,13 @@ protected:
     PlaylistView*m_playList;
     AudioWidget*m_AudioPlayer;
     VideoWidget*m_VideoPlayer;
+    QWidget*m_MainBox;
+    QSlider*m_scrollBar;
 
-    QAction*a_appendFiles,*a_removeFiles,*a_showPlaylist,*a_playAction,*a_deleteItem,*a_stopAction;
-    QAction*a_playNext,*a_playPrevious,*a_ShowFull,*a_stopPlay;
-    QActionGroup*playersGroup;
+    QAction*a_appendFiles,*a_removeFiles,*a_showPlaylist,*a_playAction,*a_stopAction;
+    QAction*a_playNext,*a_playPrevious,*a_ShowFull,*a_stopPlay,*a_ShowMedia;
+    QAction*a_addDir,*a_loadPlaylist,*a_savePlaylist;
+    QActionGroup*playersGroup,*playlistOnly;
     QToolBar*m_toolBar;
     QPopupMenu *fileMenu,*dispMenu,*playMenu;
     QMenuBar*m_menuBar;
@@ -97,6 +103,7 @@ protected:
     bool m_playing:1;
     int m_CurrentPos;
     PlaylistItem*m_LastItem;
+    void mediaWindowraised();
 
 protected slots:
     virtual void fileSelected(const DocLnk&);
@@ -112,6 +119,9 @@ protected slots:
     virtual void slotToggleFull(bool);
     virtual void slotUserStop();
     virtual void slotGoNext();
+    virtual void slotTogglePlay(bool);
+    virtual void slotShowMediaWindow();
+    virtual void slotListChanged(int);
 
 signals:
     void sigPos(int);

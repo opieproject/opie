@@ -21,7 +21,7 @@ public:
     AudioWidget( QWidget * parent=0, const char * name=0, WFlags f=0 );
     virtual ~AudioWidget();
 
-    void playFile(const DocLnk&,XINE::Lib*);
+    int playFile(const DocLnk&,XINE::Lib*);
 
 public slots:
     virtual void stopPlaying();
@@ -32,9 +32,11 @@ protected:
     DocLnk m_current;
     QVBoxLayout*m_MainLayout;
     QTextView*m_InfoBox;
+#if 0
     QSlider*m_PosSlider;
     bool m_pressed;
     int m_uppos;
+#endif
 
 protected slots:
     virtual void closeEvent(QCloseEvent*e);

@@ -86,8 +86,15 @@ public:
         COL_TYPE=6,
         COL_SIZE=7
     };
+    void addFile(const QString&aFile,const QString&aName="");
+signals:
+    void contentChanged(int);
+
 public slots:
     virtual void slotAddFile(const DocLnk&);
+    virtual void slotAppendDir();
+    virtual void slotOpenM3u();
+    virtual void slotSaveAsM3u();
 
 protected:
     void checkLib();
@@ -95,6 +102,7 @@ protected:
     XINE::Lib*m_Infolib;
     PlaylistItem*m_lastItem;
     t_itemlist m_items;
+    QString m_lastDir;
 };
 
 #endif

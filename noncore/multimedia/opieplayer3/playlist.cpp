@@ -32,13 +32,20 @@
 */
 #include "playlist.h"
 #include "../opieplayer2/lib.h"
+#include "../opieplayer2/om3u.h"
 
 #include <opie2/odebug.h>
 #include <opie2/oresource.h>
+#include <opie2/ofiledialog.h>
 
 #include <qpe/resource.h>
 
 #include <qfileinfo.h>
+#include <qmessagebox.h>
+#include <qdir.h>
+
+//#define DEFAULT_FILE_TYPES  "*.mp3;*.ogg;*.ogm;*.wma;*.wav;*.asf;*.au;*.avi;*.mpeg;*.mpg;*.mv1;*.mov;*.wmv;*.pls;*.m3u;*.mp4;*.m4a"
+#define DEFAULT_FILE_TYPES  "*.mp3;*.ogg;*.ogm;*.wma;*.wav;*.asf;*.au;*.avi;*.mpeg;*.mpg;*.mv1;*.mov;*.wmv;*.mp4;*.m4a"
 
 PlaylistItem::PlaylistItem(const DocLnk& aLink,PlaylistView*parent)
     :QListViewItem(parent),m_Content(aLink),m_video(false)
@@ -85,6 +92,7 @@ PlaylistView::PlaylistView(QWidget *parent, const char *name)
     setSelectionMode(Single);
     setSorting(-1);
     m_lastItem = 0;
+    m_lastDir = QDir::homeDirPath();
 }
 
 PlaylistView::~PlaylistView()
@@ -102,24 +110,56 @@ void PlaylistView::checkLib()
 
 void PlaylistView::slotAddFile(const DocLnk&aLink)
 {
-    QFileInfo fileInfo(aLink.file());
+    addFile(aLink.file(),aLink.name());
+    emit contentChanged(childCount());
+}
+
+void PlaylistView::addFile(const QString&aFile,const QString&aName)
+{
+    QFileInfo fileInfo(aFile);
     if (!fileInfo.exists()) return;
     checkLib();
-
     m_Infolib->stop();
 
-    if (m_lastItem) {
-        m_lastItem = new PlaylistItem(aLink,this,m_lastItem);
-    } else {
-        m_lastItem = new PlaylistItem(aLink,this);
+    QString name = aName;
+    if (name.isEmpty()) {
+        name = fileInfo.fileName();
     }
-    m_lastItem->setExpandable(false);
-    m_lastItem->setText(1,aLink.name());
-    int i = m_Infolib->setfile(aLink.file());
-    odebug << "File set: " << i << oendl;
+    int i = m_Infolib->setfile(aFile.utf8().data());
+    odebug << "File set: " << i << " ("<<aFile.utf8().data()<<")"<<oendl;
     if (i<1) {
+        i = m_Infolib->error();
+        odebug << "Errorcode: " << i << oendl;
+        QString msg;
+        msg = QString(tr("Error open file %1: ")).arg(name);
+        switch (i) {
+            case 1:
+                msg += tr("No input plugin");
+                break;
+            case 2:
+                msg += tr("No demuxer plugin");
+                break;
+            case 3:
+                msg += tr("Demuxer failed");
+                break;
+            case 4:
+                msg+=tr("Malformed mrl");
+                break;
+            default:
+                msg += tr("Unknown error");
+                break;
+        }
+        QMessageBox::warning(0,tr("Error reading fileheader"),msg);
         return;
     }
+    m_lastItem = m_items.last();
+    if (m_lastItem) {
+        m_lastItem = new PlaylistItem(aFile,this,m_lastItem);
+    } else {
+        m_lastItem = new PlaylistItem(aFile,this);
+    }
+    m_lastItem->setExpandable(false);
+    m_lastItem->setText(1,name);
 
     QString codec = m_Infolib->metaInfo(6);
     if (codec.isEmpty()) {
@@ -154,17 +194,86 @@ void PlaylistView::slotAddFile(const DocLnk&aLink)
     m_lastItem->setText(COL_TIME,codec);
     m_lastItem->Video(m_Infolib->hasVideo());
     m_items.append(m_lastItem);
+    setSelected(m_lastItem,true);
+}
+
+void PlaylistView::slotAppendDir()
+{
+    QString _dir = Opie::Ui::OFileDialog::getDirectory(Opie::Ui::OFileSelector::Extended,m_lastDir,0,m_lastDir);
+    if (_dir.isEmpty()) return;
+    m_lastDir = _dir;
+    QDir sDir(_dir);
+    QStringList list = sDir.entryList(DEFAULT_FILE_TYPES,QDir::Files,QDir::Name | QDir::IgnoreCase);
+    for (unsigned i = 0; i < list.count();++i) {
+        addFile(_dir+QString("/")+list[i]);
+    }
+    emit contentChanged(childCount());
+}
+
+void PlaylistView::slotOpenM3u()
+{
+    QStringList types;
+    QMap<QString, QStringList> mimeTypes;
+    types << "audio/x-mpegurl";
+    mimeTypes.insert("Playlists",types);
+    mimeTypes.insert("All",types);
+    QString fileName= Opie::Ui::OFileDialog::getOpenFileName(Opie::Ui::OFileSelector::EXTENDED,
+                                                 m_lastDir,"playlist.m3u", mimeTypes);
+    if (fileName.isEmpty()) {
+        return;
+    }
+    QFileInfo f(fileName);
+
+    Om3u _om3u(fileName, IO_ReadOnly);
+    if (f.extension(FALSE).lower()=="m3u") {
+        _om3u.readM3u();
+    } else if (f.extension(FALSE).lower()=="pls") {
+        _om3u.readPls();
+    }
+    for (unsigned int j=0; j<_om3u.count();++j) {
+        addFile(_om3u[j]);
+    }
+    emit contentChanged(childCount());
+}
+
+void PlaylistView::slotSaveAsM3u()
+{
+    QStringList types;
+    QMap<QString, QStringList> mimeTypes;
+    types << "audio/x-mpegurl";
+    mimeTypes.insert("Playlists",types);
+    mimeTypes.insert("All",types);
+    QString fileName= Opie::Ui::OFileDialog::getSaveFileName(Opie::Ui::OFileSelector::EXTENDED,
+                                                 m_lastDir,"playlist.m3u", mimeTypes);
+    if (fileName.isEmpty()) {
+        return;
+    }
+    Om3u _om3u(fileName, IO_ReadWrite | IO_Truncate);
+    for (unsigned j=0; j<m_items.count();++j) {
+        _om3u.add(m_items[j]->Lnk().file());
+    }
+    _om3u.write();
 }
 
 void PlaylistView::removeFromList(PlaylistItem*Item)
 {
     if (!Item)return;
-    t_itemlist::Iterator iter;
+    t_itemlist::Iterator iter,it2;
     iter = m_items.find(Item);
+    it2 = m_items.end();
     if (iter!=m_items.end()) {
+        it2 = iter;
+        ++it2;
         m_items.remove(iter);
     }
     delete Item;
+    if (it2!=m_items.end()) {
+        setSelected((*it2),true);
+    } else if (m_items.count()) {
+        QListViewItem * it = m_items.last();
+        setSelected(it,true);
+    }
+    emit contentChanged(childCount());
 }
 
 XINE::Lib*PlaylistView::getXine()
