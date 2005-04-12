@@ -68,6 +68,7 @@ the function optimised for the arm target should be used.*/
 			this->yuv2rgb_fun = arm_rgb16_2;
 			break;
 		default:
+            break;
 		}
 	}
 
