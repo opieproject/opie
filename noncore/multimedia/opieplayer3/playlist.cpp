@@ -104,13 +104,24 @@ void PlaylistView::checkLib()
 {
     if (!m_Infolib) {
         m_Infolib = new XINE::Lib(XINE::Lib::InitializeImmediately);
+        connect(m_Infolib,SIGNAL(stopped()),this,SLOT(slotDummyStop()));
         m_Infolib->ensureInitialized();
     }
 }
 
+void PlaylistView::slotDummyStop()
+{
+    odebug << "void PlaylistView::slotDummyStop()" << oendl;
+}
+
 void PlaylistView::slotAddFile(const DocLnk&aLink)
 {
-    addFile(aLink.file(),aLink.name());
+    QFileInfo f(aLink.file());
+    if (f.extension(FALSE).lower()=="m3u"||f.extension(FALSE).lower()=="pls") {
+        readPlayList(aLink.file());
+    } else {
+        addFile(aLink.file(),aLink.name());
+    }
     emit contentChanged(childCount());
 }
 
@@ -119,13 +130,13 @@ void PlaylistView::addFile(const QString&aFile,const QString&aName)
     QFileInfo fileInfo(aFile);
     if (!fileInfo.exists()) return;
     checkLib();
-    m_Infolib->stop();
-
     QString name = aName;
     if (name.isEmpty()) {
         name = fileInfo.fileName();
     }
     int i = m_Infolib->setfile(aFile.utf8().data());
+    /* realy! otherwise we get an "stopped" signal when playing! - I don't know why */
+    m_Infolib->stop();
     odebug << "File set: " << i << " ("<<aFile.utf8().data()<<")"<<oendl;
     if (i<1) {
         i = m_Infolib->error();
@@ -180,15 +191,9 @@ void PlaylistView::addFile(const QString&aFile,const QString&aName)
     l-=m*60;
     codec = "";
     if (h>0) {
-        codec+=QString("%1 h").arg(h);
-    }
-    if (m>0) {
-        if (!codec.isEmpty()) codec+=" ";
-        codec+=QString("%1 m").arg(m);
-    }
-    if (l>0) {
-        if (!codec.isEmpty()) codec+=" ";
-        codec+=QString("%1 s").arg(l);
+        codec.sprintf("%2i:%2i:%2i h",h,m,l);
+    } else {
+        codec.sprintf("%02i:%02i m",m,l);
     }
     // time
     m_lastItem->setText(COL_TIME,codec);
@@ -216,12 +221,18 @@ void PlaylistView::slotOpenM3u()
     QMap<QString, QStringList> mimeTypes;
     types << "audio/x-mpegurl";
     mimeTypes.insert("Playlists",types);
-    mimeTypes.insert("All",types);
+//    mimeTypes.insert("All",types);
     QString fileName= Opie::Ui::OFileDialog::getOpenFileName(Opie::Ui::OFileSelector::EXTENDED,
                                                  m_lastDir,"playlist.m3u", mimeTypes);
     if (fileName.isEmpty()) {
         return;
     }
+    readPlayList(fileName);
+    emit contentChanged(childCount());
+}
+
+void PlaylistView::readPlayList(const QString&fileName)
+{
     QFileInfo f(fileName);
 
     Om3u _om3u(fileName, IO_ReadOnly);
@@ -233,7 +244,6 @@ void PlaylistView::slotOpenM3u()
     for (unsigned int j=0; j<_om3u.count();++j) {
         addFile(_om3u[j]);
     }
-    emit contentChanged(childCount());
 }
 
 void PlaylistView::slotSaveAsM3u()
@@ -242,9 +252,9 @@ void PlaylistView::slotSaveAsM3u()
     QMap<QString, QStringList> mimeTypes;
     types << "audio/x-mpegurl";
     mimeTypes.insert("Playlists",types);
-    mimeTypes.insert("All",types);
     QString fileName= Opie::Ui::OFileDialog::getSaveFileName(Opie::Ui::OFileSelector::EXTENDED,
                                                  m_lastDir,"playlist.m3u", mimeTypes);
+    odebug << "Save as " << fileName << oendl;
     if (fileName.isEmpty()) {
         return;
     }

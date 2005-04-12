@@ -22,6 +22,7 @@ public:
 
     int playFile(const DocLnk&,XINE::Lib*);
     void fullScreen(bool how);
+    void scaleUp(bool how);
 
 signals:
     void videoclicked();
@@ -36,17 +37,11 @@ protected:
     QVBoxLayout*m_MainLayout;
     XineVideoWidget*m_Videodisplay;
     QWidget * m_holder;
-#if 0
-    QSlider*m_PosSlider;
-    bool m_pressed:1;
-    int m_uppos;
-#endif
+    QSize vSize;
+    bool m_scaleUp:1;
 
 protected slots:
     virtual void closeEvent(QCloseEvent*e);
-    virtual void slotNewPos(int pos);
-    virtual void sliderPressed();
-    virtual void sliderReleased();
     virtual void slot_Videoresized(const QSize&);
     virtual void slotStopped();
     virtual void slotClicked();

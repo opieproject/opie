@@ -32,17 +32,9 @@ protected:
     DocLnk m_current;
     QVBoxLayout*m_MainLayout;
     QTextView*m_InfoBox;
-#if 0
-    QSlider*m_PosSlider;
-    bool m_pressed;
-    int m_uppos;
-#endif
 
+    static QString secToString(int sec);
 protected slots:
-    virtual void closeEvent(QCloseEvent*e);
-    virtual void slotNewPos(int pos);
-    virtual void sliderPressed();
-    virtual void sliderReleased();
 };
 
 #endif

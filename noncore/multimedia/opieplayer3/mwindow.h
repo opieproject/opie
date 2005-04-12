@@ -82,14 +82,15 @@ protected:
     AudioWidget*m_AudioPlayer;
     VideoWidget*m_VideoPlayer;
     QWidget*m_MainBox;
-    QSlider*m_scrollBar;
+    QSlider*m_PosSlider;
 
     QAction*a_appendFiles,*a_removeFiles,*a_showPlaylist,*a_playAction,*a_stopAction;
     QAction*a_playNext,*a_playPrevious,*a_ShowFull,*a_stopPlay,*a_ShowMedia;
     QAction*a_addDir,*a_loadPlaylist,*a_savePlaylist;
-    QActionGroup*playersGroup,*playlistOnly;
+    QAction*a_Scaleup;
+    QActionGroup*playersGroup,*playlistOnly,*settingsGroup;
     QToolBar*m_toolBar;
-    QPopupMenu *fileMenu,*dispMenu,*playMenu;
+    QPopupMenu *fileMenu,*dispMenu,*playMenu,*configMenu;
     QMenuBar*m_menuBar;
     XINE::Lib*m_PlayLib;
 
@@ -99,8 +100,10 @@ protected:
     void checkLib();
     void setupVideo(bool full);
     void hideVideo();
-
     bool m_playing:1;
+    bool m_pressed:1;
+    int m_uppos;
+
     int m_CurrentPos;
     PlaylistItem*m_LastItem;
     void mediaWindowraised();
@@ -122,6 +125,11 @@ protected slots:
     virtual void slotTogglePlay(bool);
     virtual void slotShowMediaWindow();
     virtual void slotListChanged(int);
+    virtual void slotNewPos(int pos);
+    virtual void sliderPressed();
+    virtual void sliderReleased();
+    virtual void slot_scaleupToggled(bool);
+
 
 signals:
     void sigPos(int);

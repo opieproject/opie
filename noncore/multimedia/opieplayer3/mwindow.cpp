@@ -60,6 +60,7 @@ using namespace Opie::Ui;
 PMainWindow::PMainWindow(QWidget*w, const char*name, WFlags f)
     : QMainWindow(w,name,f)
 {
+    checkLib();
     setCaption( QObject::tr("Opie Mediaplayer 3" ) );
 
     m_MainBox = new QWidget(this);
@@ -69,9 +70,9 @@ PMainWindow::PMainWindow(QWidget*w, const char*name, WFlags f)
     m_stack = new OWidgetStack(m_MainBox);
     m_stack->forceMode(Opie::Ui::OWidgetStack::SmallScreen);
     m_l->addWidget(m_stack);
-    m_scrollBar = new QSlider(QSlider::Horizontal,m_MainBox);
-    m_l->addWidget(m_scrollBar);
-    m_scrollBar->setEnabled(false);
+    m_PosSlider = new QSlider(QSlider::Horizontal,m_MainBox);
+    m_l->addWidget(m_PosSlider);
+    m_PosSlider->setEnabled(false);
 
     m_playList = new PlaylistView(m_stack,"playlist");
     m_stack->addWidget(m_playList,stack_list);
@@ -87,8 +88,14 @@ PMainWindow::PMainWindow(QWidget*w, const char*name, WFlags f)
     connect(this,SIGNAL(sigPos(int)),m_VideoPlayer,SLOT(updatePos(int)));
     connect(m_VideoPlayer,SIGNAL(videoclicked()),this,SLOT(slotVideoclicked()));
 
+    connect(m_PosSlider,SIGNAL(valueChanged(int)),this,SLOT(slotNewPos(int)));
+    connect(m_PosSlider,SIGNAL(sliderMoved(int)),this,SLOT(slotNewPos(int)));
+    connect(m_PosSlider,SIGNAL(sliderPressed()),this,SLOT(sliderPressed()));
+    connect(m_PosSlider,SIGNAL(sliderReleased()),this,SLOT(sliderReleased()));
+    m_pressed = false;
+    m_uppos=0;
+
     m_stack->raiseWidget(stack_list);
-    m_PlayLib = 0;
     m_LastItem = 0;
     setupActions();
     setupToolBar();
@@ -99,6 +106,7 @@ PMainWindow::PMainWindow(QWidget*w, const char*name, WFlags f)
 
 void PMainWindow::slotListChanged(int count)
 {
+    playersGroup->setEnabled(count>0);
     if (!m_playList->isVisible()) {
         return;
     }
@@ -117,8 +125,9 @@ void PMainWindow::mediaWindowraised()
 void PMainWindow::checkLib()
 {
     if (m_PlayLib == 0) {
-        m_PlayLib = new XINE::Lib(XINE::Lib::InitializeImmediately);
-        m_PlayLib->ensureInitialized();
+        m_PlayLib = new XINE::Lib(XINE::Lib::InitializeInThread);
+        qApp->processEvents();
+//        m_PlayLib->ensureInitialized();
         connect(m_PlayLib,SIGNAL(stopped()),this,SLOT(slotStopped()));
     }
 }
@@ -199,7 +208,7 @@ void PMainWindow::slotUserStop()
     if (!m_playing || !m_PlayLib) return;
     m_playing = false;
     m_PlayLib->stop();
-    m_scrollBar->setEnabled(false);
+    m_PosSlider->setEnabled(false);
     hideVideo();
     slotShowList();
 }
@@ -231,16 +240,16 @@ void PMainWindow::slotPlayCurrent()
 {
     if (!m_LastItem) {
         if (m_PlayLib) m_PlayLib->stop();
-        m_scrollBar->setEnabled(false);
+        m_PosSlider->setEnabled(false);
         a_playAction->setOn(false);
         hideVideo();
         slotShowList();
         return;
     }
-    checkLib();
     m_CurrentPos = 0;
     m_playList->setCurrentItem(m_LastItem);
-    odebug << "Pos: " << m_PlayLib->currentTime() << oendl;
+    m_uppos = 0;
+    m_PosSlider->setValue(0);
     int result = 0;
     if (!m_LastItem->isVideo()) {
         hideVideo();
@@ -258,9 +267,9 @@ void PMainWindow::slotPlayCurrent()
     }
     mediaWindowraised();
     odebug << "Range: " << result << oendl;
-    m_scrollBar->setRange(0,result);
-    m_scrollBar->setValue(0);
-    m_scrollBar->setEnabled(true);
+    m_PosSlider->setEnabled(true);
+    m_PosSlider->setRange(0,m_PlayLib->length());
+    m_PosSlider->setValue(m_PlayLib->currentTime());
     QTimer::singleShot( 500, this, SLOT( slotCheckPos() ) );
 }
 
@@ -289,6 +298,7 @@ void PMainWindow::slotPlayPrevious()
 void PMainWindow::slotStopped()
 {
     if (!m_playing) return;
+    odebug << "Slot stopped" << oendl;
     m_playing = false;
     slotGoNext();
 }
@@ -296,8 +306,11 @@ void PMainWindow::slotStopped()
 void PMainWindow::slotCheckPos()
 {
     if (!m_playing) return;
-    //emit sigPos(m_PlayLib->currentTime());
-    m_scrollBar->setValue(m_PlayLib->currentTime());
+    if (!m_pressed) {
+        m_uppos = m_PlayLib->currentTime();
+        emit sigPos(m_uppos);
+        m_PosSlider->setValue(m_PlayLib->currentTime());
+    }
     QTimer::singleShot( 1000, this, SLOT( slotCheckPos() ) );
 }
 
@@ -315,9 +328,9 @@ void PMainWindow::setupActions()
     connect(a_appendFiles,SIGNAL(activated()),this,SLOT(slotAppendFiles()));
     a_addDir = new QAction(tr("Add directory"),Resource::loadIconSet("folder_open"),0,0,this,0,false);
     connect(a_addDir,SIGNAL(activated()),m_playList,SLOT(slotAppendDir()));
-    a_loadPlaylist = new QAction(tr("Append .m3u playlist"),Resource::loadIconSet("opieplayer2/add_to_playlist"),0,0,this,0,false);
+    a_loadPlaylist = new QAction(tr("Append playlist"),Resource::loadIconSet("opieplayer2/add_to_playlist"),0,0,this,0,false);
     connect(a_loadPlaylist,SIGNAL(activated()),m_playList,SLOT(slotOpenM3u()));
-    a_savePlaylist = new QAction(tr("Save .m3u playlist"),Resource::loadIconSet("save"),0,0,this,0,false);
+    a_savePlaylist = new QAction(tr("Save playlist"),Resource::loadIconSet("save"),0,0,this,0,false);
     connect(a_savePlaylist,SIGNAL(activated()),m_playList,SLOT(slotSaveAsM3u()));
 
     playlistOnly = new QActionGroup(this,"playlistgroup",false);
@@ -351,10 +364,18 @@ void PMainWindow::setupActions()
     playersGroup->insert(a_playAction);
     playersGroup->insert(a_playNext);
 
+
     /* initial states of actions */
     a_showPlaylist->setEnabled(false);
     a_removeFiles->setEnabled(false);
     a_ShowMedia->setEnabled(false);
+    playersGroup->setEnabled(false);
+
+    settingsGroup = new QActionGroup(this,"configgroup",false);
+
+    a_Scaleup = new QAction(tr("Scale videos larger"),Resource::loadIconSet( "fullscreen" ), 0, 0, this, 0, true );
+    connect(a_Scaleup,SIGNAL(toggled(bool)),this,SLOT(slot_scaleupToggled(bool)));
+    settingsGroup->insert(a_Scaleup);
 }
 
 void PMainWindow::setupToolBar()
@@ -427,6 +448,30 @@ void PMainWindow::setupMenu()
     a_ShowFull->addTo(dispMenu);
     playMenu = new QPopupMenu(m_menuBar);
     m_menuBar->insertItem(tr("Playing"),playMenu);
-
     playersGroup->addTo(playMenu);
+    configMenu = new QPopupMenu(m_menuBar);
+    m_menuBar->insertItem(tr("Config"),configMenu);
+    settingsGroup->addTo(configMenu);
+}
+
+void PMainWindow::slotNewPos(int pos)
+{
+    if (!m_PlayLib) return;
+    if (m_uppos==pos) return;
+    m_PlayLib->seekTo(pos);
+}
+
+void PMainWindow::sliderPressed()
+{
+    m_pressed = true;
+}
+
+void PMainWindow::sliderReleased()
+{
+    m_pressed = false;
+}
+
+void PMainWindow::slot_scaleupToggled(bool how)
+{
+    m_VideoPlayer->scaleUp(how);
 }

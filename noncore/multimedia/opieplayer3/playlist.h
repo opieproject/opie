@@ -95,9 +95,11 @@ public slots:
     virtual void slotAppendDir();
     virtual void slotOpenM3u();
     virtual void slotSaveAsM3u();
+    virtual void slotDummyStop();
 
 protected:
     void checkLib();
+    void readPlayList(const QString&);
     QStringList columnLabels;
     XINE::Lib*m_Infolib;
     PlaylistItem*m_lastItem;
