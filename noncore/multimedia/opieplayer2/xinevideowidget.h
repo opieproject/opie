@@ -34,6 +34,7 @@
 
 
 #include <qwidget.h>
+#include <qrect.h>
 
 #include "lib.h"
 
@@ -57,6 +58,8 @@ protected:
     void paintEvent2( QPaintEvent *p );
     virtual void paintEvent(QPaintEvent*);
     virtual void resizeEvent ( QResizeEvent *r );
+    QRect old_framerect;
+    QSize old_size;
 
     void mouseReleaseEvent ( QMouseEvent *e );
 

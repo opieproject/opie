@@ -116,7 +116,7 @@ static inline void memcpy_step_rev ( void *_dst, void *_src, size_t len, size_t 
 
 
 XineVideoWidget::XineVideoWidget ( QWidget* parent, const char* name )
-    : QWidget ( parent, name, WRepaintNoErase | WResizeNoErase )
+    : QWidget ( parent, name, WRepaintNoErase | WResizeNoErase ),old_framerect(0,0,0,0),old_size(0,0)
 {
     setBackgroundMode ( NoBackground );
 
@@ -131,12 +131,13 @@ XineVideoWidget::XineVideoWidget ( QWidget* parent, const char* name )
 
 XineVideoWidget::~XineVideoWidget ( )
 {
-    ThreadUtil::AutoLock a(m_bufmutex);
+#if 0
     if (m_buff) {
         delete[]m_buff;
         m_lastsize=0;
         m_buff = 0;
     }
+#endif
     if (m_logo) {
         delete m_logo;
     }
@@ -144,12 +145,14 @@ XineVideoWidget::~XineVideoWidget ( )
 
 void XineVideoWidget::clear ( )
 {
+#if 0
     ThreadUtil::AutoLock a(m_bufmutex);
     if (m_buff) {
         delete[]m_buff;
         m_lastsize=0;
         m_buff = 0;
     }
+#endif
     repaint ( false );
 }
 
@@ -210,6 +213,18 @@ void XineVideoWidget::paintEvent2 ( QPaintEvent * )
             uchar * src = frame;
             uchar * dst = fb+framerect.y()*m_bytes_per_line_fb+framerect.x()*m_bytes_per_pixel;
 
+            /* clean up the fb screen when shrinking the image only! */
+            if (old_framerect.isValid() && old_size.width()==width()&&old_size.height()==height() &&
+                (old_framerect.width()>framerect.width() || old_framerect.height()>framerect.height())) {
+                uchar*_dst = fb+old_framerect.y()*m_bytes_per_line_fb+old_framerect.x()*m_bytes_per_pixel;
+                for (int z=0;z<old_framerect.height();++z) {
+                    memset(_dst,0,m_bytes_per_line_fb);
+                    _dst+=m_bytes_per_line_fb;
+                }
+            }
+            old_framerect=framerect;
+            old_size = size();
+
             if (framerect.height()!=m_framesize.height()) {
                 odebug << "Hoehm: " << framerect.height() << " <-> " << m_framesize.height() << oendl;
             }
@@ -265,6 +280,7 @@ void XineVideoWidget::setVideoFrame ( uchar* img, int w, int h, int bpl )
         }
         bool rot90 = (( -m_rotation ) & 1 );
         int l = h*bpl;
+#if 0
         if (l!=m_lastsize) {
             if (m_buff) {
                 delete[]m_buff;
@@ -277,11 +293,15 @@ void XineVideoWidget::setVideoFrame ( uchar* img, int w, int h, int bpl )
                 m_buff = 0;
             }
         }
+#endif
         m_lastsize = l;
         m_framesize = QSize(w,h);
+#if 0
         if (m_buff && m_lastsize) {
             memcpy(m_buff,img,m_lastsize);
         }
+#endif
+        m_buff = img;
         m_bytes_per_line_frame = bpl;
         if (m_buff) paintEvent2(0);
     } // Release Mutex
