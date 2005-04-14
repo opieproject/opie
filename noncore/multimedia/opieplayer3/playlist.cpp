@@ -163,7 +163,11 @@ void PlaylistView::addFile(const QString&aFile,const QString&aName)
         QMessageBox::warning(0,tr("Error reading fileheader"),msg);
         return;
     }
-    m_lastItem = m_items.last();
+    if (m_items.count()>0) {
+        m_lastItem = m_items.last();
+    } else {
+        m_lastItem = 0;
+    }
     PlaylistItem*_it = currentItem();
 
     if (m_lastItem) {
