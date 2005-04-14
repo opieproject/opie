@@ -1,13 +1,41 @@
-All patches (necessary) for x86 builds. Special support for devices
-like Beagle, iPAQ, SIMpad, Zaurus can be found at the OpenEmbedded
-package database
-
-
-
-Index: qt-2.3.10/src/iconview/qiconview.cpp
-===================================================================
---- qt-2.3.10.orig/src/iconview/qiconview.cpp	2005-02-24 21:09:53.059676113 +0100
-+++ qt-2.3.10/src/iconview/qiconview.cpp	2005-02-24 21:10:04.601020103 +0100
+diff -urN qt-2.3.10-orig/include/qcstring.h qt-2.3.10-new/include/qcstring.h
+--- qt-2.3.10-orig/include/qcstring.h	2005-02-27 18:07:41.000000000 -0600
++++ qt-2.3.10-new/include/qcstring.h	2005-04-14 13:03:02.584481232 -0500
+@@ -119,7 +119,7 @@
+ //                   We want to keep source compatibility for 2.x
+ // ### TODO for 4.0: completely remove these and the cstr* functions
+ 
+-#if !defined(QT_GENUINE_STR)
++#if 0
+ 
+ #undef	strlen
+ #define strlen qstrlen
+diff -urN qt-2.3.10-orig/include/qiconview.h qt-2.3.10-new/include/qiconview.h
+--- qt-2.3.10-orig/include/qiconview.h	2005-02-27 18:07:42.000000000 -0600
++++ qt-2.3.10-new/include/qiconview.h	2005-04-14 13:03:02.576482448 -0500
+@@ -444,6 +444,7 @@
+     virtual void contentsDropEvent( QDropEvent *e );
+ #endif
+ 
++    void bufferedPaintEvent( QPaintEvent* );
+     virtual void resizeEvent( QResizeEvent* e );
+     virtual void keyPressEvent( QKeyEvent *e );
+     virtual void focusInEvent( QFocusEvent *e );
+diff -urN qt-2.3.10-orig/include/qwsdecoration_qws.h qt-2.3.10-new/include/qwsdecoration_qws.h
+--- qt-2.3.10-orig/include/qwsdecoration_qws.h	2005-02-27 18:07:42.000000000 -0600
++++ qt-2.3.10-new/include/qwsdecoration_qws.h	2005-04-14 13:03:02.583481384 -0500
+@@ -50,7 +50,7 @@
+     enum Region { None=0, All=1, Title=2, Top=3, Bottom=4, Left=5, Right=6,
+ 		TopLeft=7, TopRight=8, BottomLeft=9, BottomRight=10,
+ 		Close=11, Minimize=12, Maximize=13, Normalize=14,
+-		Menu=15, LastRegion=Menu };
++		Menu=15, LastRegion=Menu, UserDefined = 100 };
+ 
+     virtual QRegion region(const QWidget *, const QRect &rect, Region r=All) = 0;
+     virtual void close( QWidget * );
+diff -urN qt-2.3.10-orig/src/iconview/qiconview.cpp qt-2.3.10-new/src/iconview/qiconview.cpp
+--- qt-2.3.10-orig/src/iconview/qiconview.cpp	2005-02-27 18:07:42.000000000 -0600
++++ qt-2.3.10-new/src/iconview/qiconview.cpp	2005-04-14 13:03:02.575482600 -0500
 @@ -225,6 +225,7 @@
      QIconView::SelectionMode selectionMode;
      QIconViewItem *currentItem, *tmpCurrentItem, *highlightedItem, *startDragItem, *pressedItem, *selectAnchor;
@@ -35,7 +63,7 @@ Index: qt-2.3.10/src/iconview/qiconview.cpp
  #ifndef QT_NO_TOOLTIP
 @@ -2882,6 +2886,48 @@
  }
-
+ 
  /*!
 +    This function grabs all paintevents that otherwise would have been
 +    processed by the QScrollView::viewportPaintEvent(). Here we use a
@@ -81,7 +109,7 @@ Index: qt-2.3.10/src/iconview/qiconview.cpp
 +
    \reimp
  */
-
+ 
 @@ -4939,7 +4985,7 @@
  		if ( !d->rubber )
  		    drawDragShapes( d->oldDragPos );
@@ -93,7 +121,7 @@ Index: qt-2.3.10/src/iconview/qiconview.cpp
  		    drawDragShapes( d->oldDragPos );
 @@ -5377,11 +5423,19 @@
  	return;
-
+ 
      if ( item->d->container1 && d->firstContainer ) {
 -	item->d->container1->items.removeRef( item );
 +       //Special-case checking of the last item, since this may be
@@ -112,27 +140,25 @@ Index: qt-2.3.10/src/iconview/qiconview.cpp
 +            item->d->container2->items.removeRef( item );
      }
      item->d->container2 = 0;
-
-Index: qt-2.3.10/src/iconview/qiconview.h
-===================================================================
---- qt-2.3.10.orig/src/iconview/qiconview.h	2005-02-24 21:09:53.060675971 +0100
-+++ qt-2.3.10/src/iconview/qiconview.h	2005-02-24 21:10:04.602019959 +0100
+ 
+diff -urN qt-2.3.10-orig/src/iconview/qiconview.h qt-2.3.10-new/src/iconview/qiconview.h
+--- qt-2.3.10-orig/src/iconview/qiconview.h	2005-02-27 18:07:42.000000000 -0600
++++ qt-2.3.10-new/src/iconview/qiconview.h	2005-04-14 13:03:02.576482448 -0500
 @@ -444,6 +444,7 @@
      virtual void contentsDropEvent( QDropEvent *e );
  #endif
-
+ 
 +    void bufferedPaintEvent( QPaintEvent* );
      virtual void resizeEvent( QResizeEvent* e );
      virtual void keyPressEvent( QKeyEvent *e );
      virtual void focusInEvent( QFocusEvent *e );
-Index: qt-2.3.10/src/kernel/qgfxraster_qws.cpp
-===================================================================
---- qt-2.3.10.orig/src/kernel/qgfxraster_qws.cpp	2005-02-24 21:09:54.817425663 +0100
-+++ qt-2.3.10/src/kernel/qgfxraster_qws.cpp	2005-02-24 21:10:02.521320506 +0100
+diff -urN qt-2.3.10-orig/src/kernel/qgfxraster_qws.cpp qt-2.3.10-new/src/kernel/qgfxraster_qws.cpp
+--- qt-2.3.10-orig/src/kernel/qgfxraster_qws.cpp	2005-02-27 18:07:42.000000000 -0600
++++ qt-2.3.10-new/src/kernel/qgfxraster_qws.cpp	2005-04-14 13:03:02.580481840 -0500
 @@ -4037,13 +4037,14 @@
  	for( loopc2=0;loopc2<frontadd;loopc2++ )
  	    *(alphaptr++)=get_value_32(16,(unsigned char **)&temppos);
-
+ 
 -	PackType temp2;
 -	unsigned char * cp;
 +	volatile PackType temp2;
@@ -149,15 +175,14 @@ Index: qt-2.3.10/src/kernel/qgfxraster_qws.cpp
 +           *(alphaptr++)=qt_conv16ToRgb(*cp);
  	    temppos += 2;
  	}
-
-Index: qt-2.3.10/src/kernel/qwindowsystem_qws.cpp
-===================================================================
---- qt-2.3.10.orig/src/kernel/qwindowsystem_qws.cpp	2005-02-24 21:09:53.891557664 +0100
-+++ qt-2.3.10/src/kernel/qwindowsystem_qws.cpp	2005-02-24 21:10:03.511177634 +0100
+ 
+diff -urN qt-2.3.10-orig/src/kernel/qwindowsystem_qws.cpp qt-2.3.10-new/src/kernel/qwindowsystem_qws.cpp
+--- qt-2.3.10-orig/src/kernel/qwindowsystem_qws.cpp	2005-02-27 18:07:42.000000000 -0600
++++ qt-2.3.10-new/src/kernel/qwindowsystem_qws.cpp	2005-04-14 13:03:02.582481536 -0500
 @@ -918,6 +918,18 @@
  {
  }
-
+ 
 +static void catchSegvSignal( int )
 +{
 +#ifndef QT_NO_QWS_KEYBOARD
@@ -175,42 +200,39 @@ Index: qt-2.3.10/src/kernel/qwindowsystem_qws.cpp
    \brief Server-specific functionality in Qt/Embedded
 @@ -1043,6 +1055,7 @@
      }
-
+ 
      signal(SIGPIPE, ignoreSignal); //we get it when we read
 +    signal(SIGSEGV, catchSegvSignal); //recover the keyboard on crash
  #endif
      focusw = 0;
      mouseGrabber = 0;
-Index: qt-2.3.10/src/kernel/qwsdecoration_qws.h
-===================================================================
---- qt-2.3.10.orig/src/kernel/qwsdecoration_qws.h	2005-02-24 21:09:54.355491532 +0100
-+++ qt-2.3.10/src/kernel/qwsdecoration_qws.h	2005-02-24 21:10:03.040245652 +0100
+diff -urN qt-2.3.10-orig/src/kernel/qwsdecoration_qws.h qt-2.3.10-new/src/kernel/qwsdecoration_qws.h
+--- qt-2.3.10-orig/src/kernel/qwsdecoration_qws.h	2005-02-27 18:07:42.000000000 -0600
++++ qt-2.3.10-new/src/kernel/qwsdecoration_qws.h	2005-04-14 13:03:02.583481384 -0500
 @@ -50,7 +50,7 @@
      enum Region { None=0, All=1, Title=2, Top=3, Bottom=4, Left=5, Right=6,
  		TopLeft=7, TopRight=8, BottomLeft=9, BottomRight=10,
  		Close=11, Minimize=12, Maximize=13, Normalize=14,
 -		Menu=15, LastRegion=Menu };
 +		Menu=15, LastRegion=Menu, UserDefined = 100 };
-
+ 
      virtual QRegion region(const QWidget *, const QRect &rect, Region r=All) = 0;
      virtual void close( QWidget * );
-Index: qt-2.3.10/src/tools/qcstring.h
-===================================================================
---- qt-2.3.10.orig/src/tools/qcstring.h	2005-02-24 21:09:54.354491675 +0100
-+++ qt-2.3.10/src/tools/qcstring.h	2005-02-24 21:10:03.026247674 +0100
+diff -urN qt-2.3.10-orig/src/tools/qcstring.h qt-2.3.10-new/src/tools/qcstring.h
+--- qt-2.3.10-orig/src/tools/qcstring.h	2005-02-27 18:07:41.000000000 -0600
++++ qt-2.3.10-new/src/tools/qcstring.h	2005-04-14 13:03:02.584481232 -0500
 @@ -119,7 +119,7 @@
  //                   We want to keep source compatibility for 2.x
  // ### TODO for 4.0: completely remove these and the cstr* functions
-
+ 
 -#if !defined(QT_GENUINE_STR)
 +#if 0
-
+ 
  #undef	strlen
  #define strlen qstrlen
-Index: qt-2.3.10/src/tools/qstring.cpp
-===================================================================
---- qt-2.3.10.orig/src/tools/qstring.cpp	2005-02-24 21:09:55.291358022 +0100
-+++ qt-2.3.10/src/tools/qstring.cpp	2005-02-24 21:10:01.748431931 +0100
+diff -urN qt-2.3.10-orig/src/tools/qstring.cpp qt-2.3.10-new/src/tools/qstring.cpp
+--- qt-2.3.10-orig/src/tools/qstring.cpp	2005-02-27 18:07:42.000000000 -0600
++++ qt-2.3.10-new/src/tools/qstring.cpp	2005-04-14 13:03:02.593479864 -0500
 @@ -14469,7 +14469,11 @@
      return qt_winQString2MB( *this );
  #endif
@@ -238,10 +260,9 @@ Index: qt-2.3.10/src/tools/qstring.cpp
  #endif
  #endif // QT_NO_TEXTCODEC
  }
-Index: qt-2.3.10/src/widgets/qcommonstyle.cpp
-===================================================================
---- qt-2.3.10.orig/src/widgets/qcommonstyle.cpp	2005-02-24 21:09:53.864561508 +0100
-+++ qt-2.3.10/src/widgets/qcommonstyle.cpp	2005-02-24 21:10:03.484181533 +0100
+diff -urN qt-2.3.10-orig/src/widgets/qcommonstyle.cpp qt-2.3.10-new/src/widgets/qcommonstyle.cpp
+--- qt-2.3.10-orig/src/widgets/qcommonstyle.cpp	2005-02-27 18:07:41.000000000 -0600
++++ qt-2.3.10-new/src/widgets/qcommonstyle.cpp	2005-04-14 13:03:02.595479560 -0500
 @@ -572,7 +572,7 @@
  				    bool enabled, bool active )
  {
@@ -251,13 +272,12 @@ Index: qt-2.3.10/src/widgets/qcommonstyle.cpp
      if (draw_menu_bar_impl != 0) {
  	QDrawMenuBarItemImpl impl = draw_menu_bar_impl;
  	(this->*impl)(p, x, y, w, h, mi, g, enabled, active);
-Index: qt-2.3.10/src/widgets/qlistview.cpp
-===================================================================
---- qt-2.3.10.orig/src/widgets/qlistview.cpp	2005-02-24 21:09:53.868560939 +0100
-+++ qt-2.3.10/src/widgets/qlistview.cpp	2005-02-24 21:10:03.500179222 +0100
+diff -urN qt-2.3.10-orig/src/widgets/qlistview.cpp qt-2.3.10-new/src/widgets/qlistview.cpp
+--- qt-2.3.10-orig/src/widgets/qlistview.cpp	2005-02-27 18:07:41.000000000 -0600
++++ qt-2.3.10-new/src/widgets/qlistview.cpp	2005-04-14 13:03:02.599478952 -0500
 @@ -5051,9 +5051,9 @@
  	l = l->childItem ? l->childItem : l->siblingItem;
-
+ 
      if ( l && l->height() )
 -	s.setHeight( s.height() + 10 * l->height() );
 -    else
@@ -265,13 +285,116 @@ Index: qt-2.3.10/src/widgets/qlistview.cpp
 +	s.setHeight( s.height() + 4 /*10*/ * l->height() );
 +    else                      // ^v much too big for handhelds
 +	s.setHeight( s.height() + 30 /*140*/ );
-
+ 
      if ( s.width() > s.height() * 3 )
  	s.setHeight( s.width() / 3 );
-Index: qt-2.3.10/src/widgets/qtoolbutton.cpp
-===================================================================
---- qt-2.3.10.orig/src/widgets/qtoolbutton.cpp	2005-02-24 21:09:53.868560939 +0100
-+++ qt-2.3.10/src/widgets/qtoolbutton.cpp	2005-02-24 21:10:03.524175756 +0100
+diff -urN qt-2.3.10-orig/src/widgets/qpopupmenu.cpp qt-2.3.10-new/src/widgets/qpopupmenu.cpp
+--- qt-2.3.10-orig/src/widgets/qpopupmenu.cpp	2005-02-27 18:07:41.000000000 -0600
++++ qt-2.3.10-new/src/widgets/qpopupmenu.cpp	2005-04-14 13:02:10.440408336 -0500
+@@ -820,7 +820,7 @@
+ 	    mi->custom()->setFont( font() );
+ 	if ( mi->iconSet() != 0)
+ 	    maxPMWidth = QMAX( maxPMWidth,
+-			       mi->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).width() + 4 );
++			       mi->iconSet()->pixmap().width() + 4 );
+     }
+ 
+     int dh = QApplication::desktop()->height();
+diff -urN qt-2.3.10-orig/src/widgets/qtabbar.cpp qt-2.3.10-new/src/widgets/qtabbar.cpp
+--- qt-2.3.10-orig/src/widgets/qtabbar.cpp	2005-02-27 18:07:41.000000000 -0600
++++ qt-2.3.10-new/src/widgets/qtabbar.cpp	2005-04-14 13:03:02.601478648 -0500
+@@ -260,7 +260,6 @@
+ 	lstatic->insert( index, newTab );
+ 
+     layoutTabs();
+-    updateArrowButtons();
+     makeVisible( tab( currentTab() ) );
+ 
+ #ifndef QT_NO_ACCEL
+@@ -282,7 +281,6 @@
+     l->remove( t );
+     lstatic->remove( t );
+     layoutTabs();
+-    updateArrowButtons();
+     makeVisible( tab( currentTab() ) );
+     update();
+ }
+@@ -414,8 +412,8 @@
+     int iw = 0;
+     int ih = 0;
+     if ( t->iconset != 0 ) {
+-	iw = t->iconset->pixmap( QIconSet::Small, QIconSet::Normal ).width();
+-	ih = t->iconset->pixmap( QIconSet::Small, QIconSet::Normal ).height();
++	iw = t->iconset->pixmap().width();
++	ih = t->iconset->pixmap().height();
+ 	if (!t->label.isEmpty())
+ 	   iw +=2; 
+     }
+@@ -442,7 +440,11 @@
+ 	    ? QIconSet::Normal : QIconSet::Disabled;
+ 	if ( mode == QIconSet::Normal && has_focus )
+ 	    mode = QIconSet::Active;
+-	QPixmap pixmap = t->iconset->pixmap( QIconSet::Small, mode );
++	QPixmap pixmap;
++	if ( mode == QIconSet::Disabled )
++		pixmap = t->iconset->pixmap( QIconSet::Automatic, QIconSet::Disabled );
++	else
++		pixmap = t->iconset->pixmap();
+ 	int pixw = pixmap.width();
+ 	int pixh = pixmap.height();
+ 	r.setLeft( r.left() + pixw + 2 );
+@@ -871,8 +873,8 @@
+ 	int iw = 0;
+ 	int ih = 0;
+ 	if ( t->iconset != 0 ) {
+-	    iw = t->iconset->pixmap( QIconSet::Small, QIconSet::Normal ).width();
+-	    ih = t->iconset->pixmap( QIconSet::Small, QIconSet::Normal ).height();
++	    iw = t->iconset->pixmap().width();
++	    ih = t->iconset->pixmap().height();
+ 	    if (!t->label.isNull())
+ 		iw +=2;
+ 	}
+@@ -887,6 +889,7 @@
+     }
+     for ( t = lstatic->first(); t; t = lstatic->next() )
+ 	t->r.setHeight( r.height() );
++    updateArrowButtons();
+ }
+ 
+ /*!
+@@ -915,8 +918,8 @@
+ 	    int iw = 0;
+ 	    int ih = 0;
+ 	    if ( t->iconset != 0 ) {
+-		iw = t->iconset->pixmap( QIconSet::Small, QIconSet::Normal ).width();
+-		ih = t->iconset->pixmap( QIconSet::Small, QIconSet::Normal ).height();
++		iw = t->iconset->pixmap().width();
++		ih = t->iconset->pixmap().height();
+ 		if (!t->label.isEmpty())
+ 		    iw +=2; 
+ 	    }
+@@ -947,8 +950,8 @@
+ 	    int iw = 0;
+ 	    int ih = 0;
+ 	    if ( t->iconset != 0 ) {
+-		iw = t->iconset->pixmap( QIconSet::Small, QIconSet::Normal ).width();
+-		ih = t->iconset->pixmap( QIconSet::Small, QIconSet::Normal ).height();
++		iw = t->iconset->pixmap().width();
++		ih = t->iconset->pixmap().height();
+ 		if (!t->label.isEmpty())
+ 		    iw +=2; 
+ 	    }
+@@ -977,7 +980,6 @@
+     d->leftB->setGeometry( width() - 2*arrowWidth, 0, arrowWidth, height() );
+ #endif
+     layoutTabs();
+-    updateArrowButtons();
+     makeVisible( tab( currentTab() ));
+ }
+ 
+diff -urN qt-2.3.10-orig/src/widgets/qtoolbutton.cpp qt-2.3.10-new/src/widgets/qtoolbutton.cpp
+--- qt-2.3.10-orig/src/widgets/qtoolbutton.cpp	2005-02-27 18:07:41.000000000 -0600
++++ qt-2.3.10-new/src/widgets/qtoolbutton.cpp	2005-04-14 13:03:02.600478800 -0500
 @@ -332,12 +332,12 @@
  	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Large, QIconSet::Normal);
  	w = pm.width();
@@ -290,38 +413,28 @@ Index: qt-2.3.10/src/widgets/qtoolbutton.cpp
  	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Small, QIconSet::Normal);
  	w = pm.width();
  	h = pm.height();
-Index: qt-2.3.10/src/widgets/qtabbar.cpp
-===================================================================
---- qt-2.3.10.orig/src/widgets/qtabbar.cpp	2005-02-27 18:07:41.000000000 -0600
-+++ qt-2.3.10/src/widgets/qtabbar.cpp	2005-02-28 11:16:56.444377440 -0600
-@@ -260,7 +260,6 @@
- 	lstatic->insert( index, newTab );
-
-     layoutTabs();
--    updateArrowButtons();
-     makeVisible( tab( currentTab() ) );
-
- #ifndef QT_NO_ACCEL
-@@ -282,7 +281,6 @@
-     l->remove( t );
-     lstatic->remove( t );
-     layoutTabs();
--    updateArrowButtons();
-     makeVisible( tab( currentTab() ) );
-     update();
- }
-@@ -887,6 +885,7 @@
+diff -urN qt-2.3.10-orig/src/widgets/qwindowsstyle.cpp qt-2.3.10-new/src/widgets/qwindowsstyle.cpp
+--- qt-2.3.10-orig/src/widgets/qwindowsstyle.cpp	2005-02-27 18:07:41.000000000 -0600
++++ qt-2.3.10-new/src/widgets/qwindowsstyle.cpp	2005-04-14 13:02:10.442408032 -0500
+@@ -1182,7 +1182,7 @@
+ 	h = fm.height() + 2*motifItemVMargin + 2*motifItemFrame;
+ 
+     if ( !mi->isSeparator() && mi->iconSet() != 0 ) {
+-	h = QMAX( h, mi->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).height() + 2*motifItemFrame );
++	h = QMAX( h, mi->iconSet()->pixmap().height() + 2*motifItemFrame );
      }
-     for ( t = lstatic->first(); t; t = lstatic->next() )
- 	t->r.setHeight( r.height() );
-+    updateArrowButtons();
- }
-
- /*!
-@@ -977,7 +976,6 @@
-     d->leftB->setGeometry( width() - 2*arrowWidth, 0, arrowWidth, height() );
- #endif
-     layoutTabs();
--    updateArrowButtons();
-     makeVisible( tab( currentTab() ));
- }
+     if ( mi->custom() )
+ 	h = QMAX( h, mi->custom()->sizeHint().height() + 2*motifItemVMargin + 2*motifItemFrame );
+@@ -1246,7 +1246,11 @@
+ 	QIconSet::Mode mode = dis ? QIconSet::Disabled : QIconSet::Normal;
+ 	if (act && !dis )
+ 	    mode = QIconSet::Active;
+-	QPixmap pixmap = mi->iconSet()->pixmap( QIconSet::Small, mode );
++	QPixmap pixmap;
++	if ( mode == QIconSet::Disabled )
++		pixmap = mi->iconSet()->pixmap( QIconSet::Automatic, QIconSet::Disabled );
++	else
++		pixmap = mi->iconSet()->pixmap();
+ 	int pixw = pixmap.width();
+ 	int pixh = pixmap.height();
+ 	if ( act && !dis ) {
