@@ -389,10 +389,6 @@
                                     <name>text</name>
                                     <string>Prefer QT-Mail </string>
                                 </property>
-                                <property stdset="1">
-                                    <name>checked</name>
-                                    <bool>true</bool>
-                                </property>
                                 <property>
                                     <name>whatsThis</name>
                                     <string>Use Sharp's mail application if available</string>
@@ -407,6 +403,10 @@
                                 <property stdset="1">
                                     <name>text</name>
                                     <string>Prefer Opie-Mail</string>
+                                </property>
+                                <property stdset="1">
+                                    <name>checked</name>
+                                    <bool>true</bool>
                                 </property>
                                 <property>
                                     <name>whatsThis</name>

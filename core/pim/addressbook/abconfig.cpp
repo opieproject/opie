@@ -5,8 +5,8 @@
 #include <qpe/recordfields.h>
 
 AbConfig::AbConfig( ):
-	m_useQtMail( true ),
-	m_useOpieMail( false ),
+	m_useQtMail( false ),
+	m_useOpieMail( true ),
 	m_useRegExp( false ),
 	m_beCaseSensitive( false ),
 	m_fontSize( 1 ),
@@ -148,8 +148,8 @@ void AbConfig::load()
 	m_lpSearchMode = cfg.readNumEntry( "lpSearchMode", FileAs );
 
 	cfg.setGroup("Mail");
-	m_useQtMail = cfg.readBoolEntry( "useQtMail", true );
-	m_useOpieMail=cfg.readBoolEntry( "useOpieMail" );
+	m_useQtMail = cfg.readBoolEntry( "useQtMail", false );
+	m_useOpieMail = cfg.readBoolEntry( "useOpieMail", true );
 
 	cfg.setGroup("ContactOrder");
 	int ID = 0;
