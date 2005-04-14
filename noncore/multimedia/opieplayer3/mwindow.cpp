@@ -43,6 +43,7 @@
 #include <opie2/odebug.h>
 
 #include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
 
 #include <qfileinfo.h>
 #include <qfile.h>
@@ -61,7 +62,7 @@ PMainWindow::PMainWindow(QWidget*w, const char*name, WFlags f)
     : QMainWindow(w,name,f)
 {
     checkLib();
-    setCaption( QObject::tr("Opie Mediaplayer 3" ) );
+    setCaption(appTitle());
 
     m_MainBox = new QWidget(this);
 
@@ -211,6 +212,7 @@ void PMainWindow::slotUserStop()
     m_PosSlider->setEnabled(false);
     hideVideo();
     slotShowList();
+    setCaption(appTitle());
 }
 
 void PMainWindow::slotTogglePlay(bool how)
@@ -244,6 +246,7 @@ void PMainWindow::slotPlayCurrent()
         a_playAction->setOn(false);
         hideVideo();
         slotShowList();
+        setCaption(appTitle());
         return;
     }
     m_CurrentPos = 0;
@@ -266,6 +269,7 @@ void PMainWindow::slotPlayCurrent()
         return;
     }
     mediaWindowraised();
+    setCaption(appTitle()+" - "+m_LastItem->Lnk().name());
     odebug << "Range: " << result << oendl;
     m_PosSlider->setEnabled(true);
     m_PosSlider->setRange(0,m_PlayLib->length());
@@ -311,7 +315,8 @@ void PMainWindow::slotCheckPos()
         emit sigPos(m_uppos);
         m_PosSlider->setValue(m_PlayLib->currentTime());
     }
-    QTimer::singleShot( 1000, this, SLOT( slotCheckPos() ) );
+    qApp->processEvents(100);
+    QTimer::singleShot( 900, this, SLOT( slotCheckPos() ) );
 }
 
 void PMainWindow::slotRemoveFiles()

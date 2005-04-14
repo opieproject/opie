@@ -64,6 +64,7 @@ class PMainWindow : public QMainWindow {
     Q_OBJECT
 public:
     static QString appName() { return QString::fromLatin1("opie-mediaplayer3" ); }
+    static QString appTitle() {return QString::fromLatin1("Opie Mediaplayer 3" ); }
     PMainWindow(QWidget*, const char*, WFlags );
     virtual ~PMainWindow();
 

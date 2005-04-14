@@ -57,6 +57,7 @@ int VideoWidget::playFile(const DocLnk&aLnk,XINE::Lib*aLib)
     m_xineLib->setShowVideo(true);
     int res = m_xineLib->play(m_current.file());
     vSize = m_xineLib->videoSize();
+
     slot_Videoresized(m_Videodisplay->size());
     odebug << "Xine play: " << res << oendl;
     if (res != 1) {

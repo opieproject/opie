@@ -164,6 +164,8 @@ void PlaylistView::addFile(const QString&aFile,const QString&aName)
         return;
     }
     m_lastItem = m_items.last();
+    PlaylistItem*_it = currentItem();
+
     if (m_lastItem) {
         m_lastItem = new PlaylistItem(aFile,this,m_lastItem);
     } else {
@@ -199,7 +201,9 @@ void PlaylistView::addFile(const QString&aFile,const QString&aName)
     m_lastItem->setText(COL_TIME,codec);
     m_lastItem->Video(m_Infolib->hasVideo());
     m_items.append(m_lastItem);
-    setSelected(m_lastItem,true);
+    if (_it==NULL) {
+        setSelected(m_lastItem,true);
+    }
 }
 
 void PlaylistView::slotAppendDir()
