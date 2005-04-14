@@ -3,7 +3,7 @@
  */
 
 //
-// (c) 2002 Robert 'sandman' Griebl 
+// (c) 2002 Robert 'sandman' Griebl
 //
 
 
@@ -12,7 +12,7 @@
 #endif
 
 #include "liquid.h"
-#include "effects.h" 
+#include "effects.h"
 #include "htmlmasks.h"
 #include "embeddata.h"
 
@@ -99,7 +99,7 @@ void TransMenuHandler::reloadSettings()
     	opacity = 20;
     else if ( opacity > 20 )
     	opacity = 20;
-    
+
     shadowText = config. readBoolEntry("ShadowText", true);
 }
 
@@ -137,16 +137,16 @@ bool TransMenuHandler::eventFilter(QObject *obj, QEvent *ev)
             }
 
             pixDict.insert(p->winId(), pix);
-            
-            if ( !p->inherits("QPopupMenu")) 
+
+            if ( !p->inherits("QPopupMenu"))
             	p->setBackgroundPixmap(*pix);
-            	
+
             QObjectList *ol = p-> queryList("QWidget");
 			for ( QObjectListIt it( *ol ); it. current ( ); ++it ) {
 				QWidget *wid = (QWidget *) it.current ( );
-					
+
 				wid-> setBackgroundPixmap(*pix);
-			   	wid-> setBackgroundOrigin(QWidget::ParentOrigin);					
+			   	wid-> setBackgroundOrigin(QWidget::ParentOrigin);
             }
 			delete ol;
         }
@@ -154,16 +154,16 @@ bool TransMenuHandler::eventFilter(QObject *obj, QEvent *ev)
     else if(ev->type() == QEvent::Hide){
         if(type == TransStippleBg || type == TransStippleBtn ||
            type == Custom){
-//            owarn << "Deleting menu pixmap, width " << pixDict.find(p->winId())->width() << "" << oendl; 
+//            owarn << "Deleting menu pixmap, width " << pixDict.find(p->winId())->width() << "" << oendl;
 
             pixDict.remove(p->winId());
-            if ( !p->inherits("QPopupMenu")) 
+            if ( !p->inherits("QPopupMenu"))
                 p->setBackgroundMode(QWidget::PaletteBackground);
 
           	QObjectList *ol = p-> queryList("QWidget");
 			for ( QObjectListIt it( *ol ); it. current ( ); ++it ) {
 				QWidget *wid = (QWidget *) it.current ( );
-				
+
 				wid-> setBackgroundMode( QWidget::PaletteBackground );
             }
 			delete ol;
@@ -173,7 +173,7 @@ bool TransMenuHandler::eventFilter(QObject *obj, QEvent *ev)
 }
 
 
-        
+
 
 LiquidStyle::LiquidStyle()
     :QWindowsStyle()
@@ -499,7 +499,7 @@ QPixmap* LiquidStyle::processEmbedded(const char *label, int h, int s, int v,
     QImage img(qembed_findImage(label));
     img.detach();
     if(img.isNull()){ // shouldn't happen, been tested
-        owarn << "Invalid embedded label " << label << "" << oendl; 
+        owarn << "Invalid embedded label " << label << "" << oendl;
         return(NULL);
     }
     if(img.depth() != 32)
@@ -599,10 +599,10 @@ QPixmap* LiquidStyle::getPixmap(BitmapData item)
         break;
     case TabDown:
         pixmaps[TabDown] = processEmbedded("tab", btnH, btnS, btnV /*, true*/);
-        break;    
+        break;
     case TabFocus:
         pixmaps[TabFocus] = processEmbedded("tab", btnHoverH, btnHoverS, btnHoverV /*, true*/);
-        break;    
+        break;
 
 	case CB:
         pixmaps[CB] = processEmbedded("checkbox", bH, bS, bV /*, true*/);
@@ -801,16 +801,16 @@ void LiquidStyle::polish(QWidget *w)
     }
     if(w->inherits("QPopupMenu"))
         w->setBackgroundMode(QWidget::NoBackground);
-    else if(w-> testWFlags(Qt::WType_Popup) && 
-            !w->inherits("QListBox") && 
+    else if(w-> testWFlags(Qt::WType_Popup) &&
+            !w->inherits("QListBox") &&
             ( qstrcmp ( w-> name(), "automatic what's this? widget" ) != 0 )) {
     	w->installEventFilter(menuHandler);
     }
-    
+
     if(w->isTopLevel()){
         return;
     }
-   
+
     if(w->inherits("QRadioButton") || w->inherits("QCheckBox") || w->inherits("QProgressBar")) {
         w->installEventFilter(this);
     }
@@ -865,7 +865,7 @@ void LiquidStyle::polish(QWidget *w)
 
     if(w->parent() && w->parent()->isWidgetType() && !((QWidget*)w->parent())->
        palette().active().brush(QColorGroup::Background).pixmap()){
-        owarn << "No parent pixmap for child widget " << w->className() << "" << oendl; 
+        owarn << "No parent pixmap for child widget " << w->className() << "" << oendl;
         return;
     }
     if(!isViewport && !isViewportChild && !w->testWFlags(WType_Popup) &&
@@ -878,7 +878,7 @@ void LiquidStyle::polish(QWidget *w)
         }
     }
     if ( !w-> inherits("QFrame") || (((QFrame*) w)-> frameShape () == QFrame::NoFrame ))
-	    w-> setBackgroundOrigin ( QWidget::ParentOrigin );	    
+	    w-> setBackgroundOrigin ( QWidget::ParentOrigin );
 	else if ( w-> inherits("QFrame") )
 	    w->setBackgroundOrigin ( QWidget::WidgetOrigin );
 
@@ -897,7 +897,7 @@ void LiquidStyle::unPolish(QWidget *w)
 
     if(w->inherits("QPopupMenu"))
         w->setBackgroundMode(QWidget::PaletteButton);
-    else if(w-> testWFlags(Qt::WType_Popup) && 
+    else if(w-> testWFlags(Qt::WType_Popup) &&
             !w->inherits("QListBox") &&
             ( qstrcmp ( w-> name(), "automatic what's this? widget" ) != 0 )) {
     	w->removeEventFilter(menuHandler);
@@ -959,15 +959,15 @@ void LiquidStyle::polish(QApplication *app)
         app->setEffectEnabled(UI_AnimateMenu, false);
     if(menuFade)
         app->setEffectEnabled(UI_FadeMenu, false);
-	
+
     qt_set_draw_menu_bar_impl((QDrawMenuBarItemImpl) &LiquidStyle::drawMenuBarItem);
-    
+
     Config config ( "qpe" );
     config. setGroup ( "Liquid-Style" );
-    
-//    if ( config. readBoolEntry ( "WinDecoration", true ))	
+
+//    if ( config. readBoolEntry ( "WinDecoration", true ))
 //	    QApplication::qwsSetDecoration ( new LiquidDecoration ( ));
-	    
+
 	flatTBButtons = config. readBoolEntry ( "FlatToolButtons", false );
 }
 
@@ -978,26 +978,26 @@ void LiquidStyle::unPolish(QApplication *app)
     app->setEffectEnabled(UI_FadeMenu, menuFade);
 
     qt_set_draw_menu_bar_impl ( 0 );
-    
+
 //    QApplication::qwsSetDecoration ( new QPEDecoration ( ));
 }
 
 
 /* !! HACK !! Beware
- * 
+ *
  * TT forgot to make the QProgressBar widget styleable in Qt 2.x
- * So the only way to customize the drawing, is to intercept the 
+ * So the only way to customize the drawing, is to intercept the
  * paint event - since we have to use protected functions, we need
  * to derive a "hack" class from QProgressBar and do the painting
  * in there.
- * 
+ *
  * - sandman
  */
 
 class HackProgressBar : public QProgressBar {
 public:
 	HackProgressBar ( );
-	
+
 	void paint ( QPaintEvent *event, const QColorGroup &g, QPixmap *pix )
 	{
 		QPainter p( this );
@@ -1031,8 +1031,8 @@ public:
 
 			if(bw >= 4 && h >= 4 && pix)
 				p.drawTiledPixmap(x+2, y+2, bw-4, h-4, *pix);
-			
-			if ( progress ( )>= 0 && totalSteps ( ) > 0 ) {			
+
+			if ( progress ( )>= 0 && totalSteps ( ) > 0 ) {
 				QString pstr;
 				pstr. sprintf ( "%d%%", 100 * progress()/totalSteps ());
 				p. setPen ( g.text());//g.highlightedText ( ));
@@ -1054,7 +1054,7 @@ public:
 class HackToolButton : public QToolButton {
 public:
 	HackToolButton ( );
-	
+
 	void paint ( QPaintEvent *ev )
 	{
 		erase ( ev-> region ( ));
@@ -1098,7 +1098,7 @@ bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
     }
     else if(obj->inherits("QToolButton")){
         QToolButton *btn = (QToolButton *)obj;
-        if(ev->type() == QEvent::FocusIn ){ // && !btn-> autoRaise () 
+        if(ev->type() == QEvent::FocusIn ){ // && !btn-> autoRaise ()
             if(btn->isEnabled()){
                 highlightWidget = btn;
                 btn->repaint(false);
@@ -1138,7 +1138,7 @@ bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
                 p.drawLine(r.x()+1, r.bottom(), r.right()-1, r.bottom());
             }
 */
-            int x = 0;            
+            int x = 0;
             int y = (btn->height()-lsz.height()+fm.height()-sz.height())/2;
             if(isRadio)
                 drawExclusiveIndicator(&p, x, y, sz.width(), sz.height(),
@@ -1193,7 +1193,7 @@ bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
     	if ( ev->type() == QEvent::Paint ) {
     		HackProgressBar *p = (HackProgressBar *) obj;
     		const QColorGroup &g = p-> colorGroup ( );
-    		
+
 			QPixmap *pix = bevelFillDict.find(g.button().dark(120).rgb());
 			if(!pix){
 				int h, s, v;
@@ -1203,9 +1203,9 @@ bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
 				bevelFillDict.insert(g.button().dark(120).rgb(), pix);
 			}
     		p-> paint ((QPaintEvent *) ev, g, pix );
-    		return true;    		
+    		return true;
     	}
-	}    		
+	}
 	return false ;
 }
 
@@ -1303,7 +1303,11 @@ void LiquidStyle::drawPushButtonLabel(QPushButton *btn, QPainter *p)
 			      ? QIconSet::Normal : QIconSet::Disabled;
 	if ( mode == QIconSet::Normal && btn->hasFocus() )
 	    mode = QIconSet::Active;
-	QPixmap pixmap = btn->iconSet()->pixmap( QIconSet::Small, mode );
+    QPixmap pixmap;
+    if ( mode == QIconSet::Disabled )
+        pixmap = btn->iconSet()->pixmap( QIconSet::Automatic, mode );
+    else
+        pixmap = btn->iconSet()->pixmap();
 	int pixw = pixmap.width();
 	int pixh = pixmap.height();
 
@@ -1311,7 +1315,7 @@ void LiquidStyle::drawPushButtonLabel(QPushButton *btn, QPainter *p)
 	x1 += pixw + 8;
 	w -= pixw + 8;
     }
-    
+
     if(act){
         QFont font = btn->font();
         font.setBold(true);
@@ -1405,7 +1409,7 @@ void LiquidStyle::drawComboButton(QPainter *painter, int x, int y, int w, int h,
          ( qApp-> focusWidget ( ) == painter-> device ( )) ||
          (
           edit &&
-          ((QWidget *) painter-> device ( ))-> inherits ( "QComboBox" ) && 
+          ((QWidget *) painter-> device ( ))-> inherits ( "QComboBox" ) &&
           ( qApp-> focusWidget ( ) == ((QComboBox *) painter->device())->lineEdit ( ) ||
             qApp-> focusWidget ( ) == ((QComboBox *) painter->device())->listBox ( ))
          )
@@ -1413,11 +1417,11 @@ void LiquidStyle::drawComboButton(QPainter *painter, int x, int y, int w, int h,
       ) {
     	isActive = true;
     }
-    	
+
     bool isMasked = false;
     if(painter->device()->devType() == QInternal::Widget)
         isMasked = ((QWidget*)painter->device())->autoMask();
-    // TODO: Do custom code, don't just call drawRoundButton into a pixmap    
+    // TODO: Do custom code, don't just call drawRoundButton into a pixmap
     QPixmap tmpPix(w, h);
     QPainter p(&tmpPix);
 
@@ -1478,7 +1482,7 @@ QRect LiquidStyle::comboButtonRect(int x, int y, int w, int h)
 QRect LiquidStyle::comboButtonFocusRect(int /*x*/, int /*y*/, int /*w*/, int /*h*/)
 {
 	return QRect ( );
-	
+
 //    return(QRect(x+5, y+3, w-(h/3)-13, h-5));
 }
 
@@ -1633,14 +1637,14 @@ void LiquidStyle::drawScrollBarControls(QPainter *p, const QScrollBar *sb,
                                    *getPixmap(HSBSliderTop));
                 painter.drawTiledPixmap(sliderR.x()+8, sliderR.y()+1, sliderR.width()-16,
                                         13, *getPixmap(HSBSliderMid));
-                painter.drawPixmap(sliderR.right()-8, sliderR.y()+1, 
+                painter.drawPixmap(sliderR.right()-8, sliderR.y()+1,
                                    *getPixmap(HSBSliderBtm));
             }
             else if(sliderR.width() >= 8){
                 int m = sliderR.width()/2;
                 painter.drawPixmap(sliderR.x(), sliderR.y()+1,
                                    *getPixmap(HSBSliderTop), 0, 0, m, 13);
-                painter.drawPixmap(sliderR.right()-8, sliderR.y()+1, 
+                painter.drawPixmap(sliderR.right()-8, sliderR.y()+1,
                                    *getPixmap(HSBSliderBtm), 8-m, 0, m, 13);
             }
             else{
@@ -1648,7 +1652,7 @@ void LiquidStyle::drawScrollBarControls(QPainter *p, const QScrollBar *sb,
                 drawRoundRect(&painter, sliderR.x(), sliderR.y()+1,
                               sliderR.width(), 13);
                 painter.drawTiledPixmap(sliderR.x()+1, sliderR.y()+2,
-                                        sliderR.width()-2, 11, 
+                                        sliderR.width()-2, 11,
                                         *getPixmap(HSBSliderMid), 0, 1);
             }
         }
@@ -1976,18 +1980,18 @@ void LiquidStyle::drawArrow(QPainter *p, Qt::ArrowType type, bool on, int x,
 
 void LiquidStyle::drawMenuBarItem(QPainter *p, int x, int y, int w, int h,
                             QMenuItem *mi, QColorGroup &g, bool /*enabled*/, bool active )
-{	
+{
     if(active){
-        x -= 2; // Bug in Qt/E 
+        x -= 2; // Bug in Qt/E
         y -= 2;
         w += 2;
         h += 2;
     }
-    
+
     QWidget *parent = (QWidget *)p->device();
     p->setBrushOrigin(parent->pos());
     parent->erase(x, y, w, h);
-   
+
     if(menuHandler->useShadowText()){
         QColor shadow;
         if(p->device() && p->device()->devType() == QInternal::Widget &&
@@ -1999,7 +2003,7 @@ void LiquidStyle::drawMenuBarItem(QPainter *p, int x, int y, int w, int h,
             shadow = g.background().dark(130);
 
 		QPixmap *dummy = 0;
-		
+
 		if ( mi-> pixmap ( ) && !mi-> pixmap ( )-> isNull ( )) {
 			dummy = new QPixmap ( mi-> pixmap ( )-> size ( ));
 			QBitmap dummy_mask ( dummy-> size ( ));
@@ -2155,7 +2159,11 @@ static const int windowsRightBorder     = 12;
         QIconSet::Mode mode = dis? QIconSet::Disabled : QIconSet::Normal;
         if (!dis)
             mode = QIconSet::Active;
-        QPixmap pixmap = mi->iconSet()->pixmap(QIconSet::Small, mode);
+        QPixmap pixmap;
+        if ( mode == QIconSet::Disabled )
+            pixmap = mi->iconSet()->pixmap( QIconSet::Automatic, mode );
+        else
+            pixmap = mi->iconSet()->pixmap();
         int pixw = pixmap.width();
         int pixh = pixmap.height();
         QRect cr(x, y, checkcol, h);
@@ -2236,8 +2244,7 @@ int LiquidStyle::popupMenuItemHeight(bool /*checkable*/, QMenuItem *mi,
         h = mi->pixmap()->height();
 
     if (mi->iconSet())
-        h = QMAX(mi->iconSet()->
-                 pixmap(QIconSet::Small, QIconSet::Normal).height(), h);
+        h = QMAX(mi->iconSet()->pixmap().height(), h);
 
     h = QMAX(fm.height() + 4, h);
 
@@ -2430,7 +2437,7 @@ void LiquidStyle::drawPanel(QPainter *p, int x, int y, int w, int h,
         p->setPen(g.mid());
         p->drawLine(x, y, x2, y);
         p->drawLine(x, y, x, y2);
- 
+
         p->setPen(g.midlight());
         p->drawLine(x+1, y2-1, x2-1, y2-1);
         p->drawLine(x2-1, y+1, x2-1, y2-1);
@@ -2488,11 +2495,11 @@ void LiquidStyle::intensity(QPixmap &pix, float percent)
         image.numColors();
     unsigned int *data = image.depth() > 8 ? (unsigned int *)image.bits() :
         (unsigned int *)image.colorTable();
- 
+
     bool brighten = (percent >= 0);
     if(percent < 0)
         percent = -percent;
- 
+
     if(brighten){ // keep overflow check out of loops
         for(i=0; i < segColors; ++i){
             tmp = (int)(i*percent);
@@ -2509,7 +2516,7 @@ void LiquidStyle::intensity(QPixmap &pix, float percent)
             segTbl[i] = tmp;
         }
     }
- 
+
     if(brighten){ // same here
         for(i=0; i < pixels; ++i){
             r = qRed(data[i]);

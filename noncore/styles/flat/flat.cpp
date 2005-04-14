@@ -373,7 +373,7 @@ void FlatStyle::drawPushButtonLabel( QPushButton *btn, QPainter *p )
 	    ? QIconSet::Normal : QIconSet::Disabled;
 	if ( mode == QIconSet::Normal && btn->hasFocus() )
 	    mode = QIconSet::Active;
-	QPixmap pixmap = btn->iconSet()->pixmap( QIconSet::Small, mode );
+	QPixmap pixmap = btn->iconSet()->pixmap( QIconSet::Automatic, mode );
 	int pixw = pixmap.width();
 	int pixh = pixmap.height();
 	p->drawPixmap( x+2, y+h/2-pixh/2, pixmap );
@@ -391,8 +391,8 @@ QRect FlatStyle::comboButtonRect( int x, int y, int w, int h)
 {
     return QRect(x+2, y+2, w-4-13, h-4);
 }
-      
-       
+
+
 QRect FlatStyle::comboButtonFocusRect( int x, int y, int w, int h)
 {
     return QRect(x+2, y+2, w-4-14, h-4);
@@ -892,7 +892,7 @@ int FlatStyle::extraPopupMenuItemWidth( bool checkable, int maxpmw, QMenuItem* m
 */
 int FlatStyle::popupMenuItemHeight( bool /*checkable*/, QMenuItem* mi, const QFontMetrics& fm )
 {
-#ifndef QT_NO_MENUDATA    
+#ifndef QT_NO_MENUDATA
     int h = 0;
     if ( mi->isSeparator() )			// separator height
 	h = motifSepHeight;
@@ -902,7 +902,7 @@ int FlatStyle::popupMenuItemHeight( bool /*checkable*/, QMenuItem* mi, const QFo
 	h = fm.height() + 2*motifItemVMargin + 2*motifItemFrame - 1;
 
     if ( !mi->isSeparator() && mi->iconSet() != 0 ) {
-	h = QMAX( h, mi->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).height() + 2*motifItemFrame );
+	h = QMAX( h, mi->iconSet()->pixmap().height() + 2*motifItemFrame );
     }
     if ( mi->custom() )
 	h = QMAX( h, mi->custom()->sizeHint().height() + 2*motifItemVMargin + 2*motifItemFrame ) - 1;
@@ -914,7 +914,7 @@ void FlatStyle::drawPopupMenuItem( QPainter* p, bool checkable, int maxpmw, int 
 				       const QPalette& pal,
 				       bool act, bool enabled, int x, int y, int w, int h)
 {
-#ifndef QT_NO_MENUDATA    
+#ifndef QT_NO_MENUDATA
     const QColorGroup & g = pal.active();
     bool dis	  = !enabled;
     QColorGroup itemg = dis ? pal.disabled() : pal.active();
@@ -954,7 +954,11 @@ void FlatStyle::drawPopupMenuItem( QPainter* p, bool checkable, int maxpmw, int 
 	QIconSet::Mode mode = dis ? QIconSet::Disabled : QIconSet::Normal;
 	if (act && !dis )
 	    mode = QIconSet::Active;
-	QPixmap pixmap = mi->iconSet()->pixmap( QIconSet::Small, mode );
+    QPixmap pixmap;
+    if ( mode == QIconSet::Disabled )
+        pixmap = mi->iconSet()->pixmap( QIconSet::Automatic, mode );
+    else
+        pixmap = mi->iconSet()->pixmap();
 	int pixw = pixmap.width();
 	int pixh = pixmap.height();
 	if ( act && !dis ) {

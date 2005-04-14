@@ -390,7 +390,10 @@ void PhaseStyle::drawPushButtonLabel (QPushButton *button, QPainter *painter) {
         }
 #endif
 
-        pixmap = button->iconSet()->pixmap(QIconSet::Small, mode);
+        if ( mode == QIconSet::Disabled )
+            pixmap = button->iconSet()->pixmap( QIconSet::Automatic, mode );
+        else
+            pixmap = button->iconSet()->pixmap();
         if (button->text().isEmpty() && !button->pixmap()) {
             painter->drawPixmap(x+w/2 - pixmap.width()/2,
                                 y+h/2 - pixmap.height()/2, pixmap);
@@ -569,8 +572,7 @@ int PhaseStyle::popupMenuItemHeight ( bool ,
                      + ITEMVMARGIN*2 + ITEMFRAME*2 );
         }
         if ( mi->iconSet() )
-            h = QMAX(h, mi->iconSet()->
-                     pixmap(QIconSet::Small, QIconSet::Normal ).height()
+            h = QMAX(h, mi->iconSet()->pixmap().height()
                      + ITEMFRAME*2 );
     }
 
@@ -661,7 +663,11 @@ void PhaseStyle::drawPopupMenuItem ( QPainter * p, bool checkable,
             mode = enabled ? QIconSet::Active : QIconSet::Disabled;
         else
             mode = enabled ? QIconSet::Normal : QIconSet::Disabled;
-        QPixmap pixmap = mi->iconSet()->pixmap(QIconSet::Small, mode );
+        QPixmap pixmap;
+        if ( mode == QIconSet::Disabled )
+            pixmap = mi->iconSet()->pixmap( QIconSet::Automatic, mode );
+        else
+            pixmap = mi->iconSet()->pixmap();
         QRect pmrect(0, 0, pixmap.width(), pixmap.height() );
         QRect cr(x, y, maxpmw, h );
         pmrect.moveCenter( cr.center() );

@@ -97,10 +97,10 @@ void LauncherTabBar::layoutTabs()
 	if ( t != current ) {
 	    available -= hiddenTabWidth + hframe - overlap;
 	    if ( t->iconSet() != 0 )
-		available -= t->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).width();
+		available -= t->iconSet()->pixmap().width();
 	}
 	if ( t->iconSet() != 0 )
-	    iw += t->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).width();
+	    iw += t->iconSet()->pixmap().width();
 	required += iw;
 	// As space gets tight, packed looks better than even. "10" must be at least 0.
 	if ( iw >= eventabwidth-10 )
@@ -116,8 +116,8 @@ void LauncherTabBar::layoutTabs()
 	    int w = fm.width( t->text() );
 	    int ih = 0;
 	    if ( t->iconSet() != 0 ) {
-		w += t->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).width();
-		ih = t->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).height();
+		w += t->iconSet()->pixmap().width();
+		ih = t->iconSet()->pixmap().height();
 	    }
 	    int h = QMAX( fm.height(), ih );
 	    h = QMAX( h, QApplication::globalStrut().height() );
@@ -134,8 +134,8 @@ void LauncherTabBar::layoutTabs()
 	    int w = hiddenTabWidth;
 	    int ih = 0;
 	    if ( t->iconSet() != 0 ) {
-		w += t->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).width();
-		ih = t->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).height();
+		w += t->iconSet()->pixmap().width();
+		ih = t->iconSet()->pixmap().height();
 	    }
 	    int h = QMAX( fm.height(), ih );
 	    h = QMAX( h, QApplication::globalStrut().height() );
@@ -149,7 +149,7 @@ void LauncherTabBar::layoutTabs()
 	} else {
 	    int ih = 0;
 	    if ( t->iconSet() != 0 ) {
-		ih = t->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).height();
+		ih = t->iconSet()->pixmap().height();
 	    }
 	    int h = QMAX( fm.height(), ih );
 	    h = QMAX( h, QApplication::globalStrut().height() );
@@ -220,8 +220,8 @@ void LauncherTabBar::paint( QPainter * p, QTab * t, bool selected ) const
     int iw = 0;
     int ih = 0;
     if ( t->iconSet() != 0 ) {
-	iw = t->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).width() + 2;
-	ih = t->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).height();
+	iw = t->iconSet()->pixmap().width() + 2;
+	ih = t->iconSet()->pixmap().height();
     }
     int w = iw + p->fontMetrics().width( t->text() ) + 4;
     int h = QMAX(p->fontMetrics().height() + 4, ih );
@@ -251,7 +251,11 @@ void LauncherTabBar::paintLabel( QPainter* p, const QRect&,
 	QIconSet::Mode mode = (t->isEnabled() && isEnabled()) ? QIconSet::Normal : QIconSet::Disabled;
 	if ( mode == QIconSet::Normal && has_focus )
 	    mode = QIconSet::Active;
-	QPixmap pixmap = t->iconSet()->pixmap( QIconSet::Small, mode );
+    QPixmap pixmap;
+    if ( mode == QIconSet::Disabled )
+        pixmap = t->iconSet()->pixmap( QIconSet::Automatic, mode );
+    else
+        pixmap = t->iconSet()->pixmap();
 	int pixw = pixmap.width();
 	int pixh = pixmap.height();
 	p->drawPixmap( r.left() + 6, r.center().y() - pixh / 2 + 1, pixmap );

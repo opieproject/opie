@@ -43,6 +43,15 @@ static int        _savedFrameLineWidth;
 static int        _savedFrameMidLineWidth;
 static ulong      _savedFrameStyle;
 
+static const int ITEMFRAME       = 1; // menu stuff
+static const int ITEMHMARGIN     = 3;
+static const int ITEMVMARGIN     = 0;
+
+static const int ARROWMARGIN     = 6;
+static const int RIGHTBORDER     = 10;
+static const int MINICONSIZE     = 12;
+
+
 static QColor contrastingForeground(const QColor & fg, const QColor & bg)
 {
   int h, s, vbg, vfg;
@@ -969,7 +978,7 @@ WebStyle::drawPopupMenuItem
  QPainter * p,
  bool checkable,
  int maxpmw,
- int tab,
+ int tabwidth,
  QMenuItem * mi,
  const QPalette & pal,
  bool act,
@@ -981,7 +990,118 @@ WebStyle::drawPopupMenuItem
 )
 {
   // TODO
-  QWindowsStyle::drawPopupMenuItem(p, checkable, maxpmw, tab, mi, pal, act, enabled, x, y, w, h);
+  //QWindowsStyle::drawPopupMenuItem(p, checkable, maxpmw, tab, mi, pal, act, enabled, x, y, w, h);
+    if ( !mi )
+        return;
+
+    QRect rect(x, y, w, h );
+    int x2, y2;
+    x2 = rect.right();
+    y2 = rect.bottom();
+    const QColorGroup& g = pal.active();
+    QColorGroup itemg    = !enabled ? pal.disabled() : pal.active();
+
+    if ( checkable || maxpmw ) maxpmw = QMAX(maxpmw, 20);
+
+    if (act && enabled )
+        p->fillRect(x, y, w, h, g.highlight() );
+    else
+        p->fillRect(x, y, w, h, g.background() );
+
+    // draw seperator
+    if (mi->isSeparator() ) {
+    p->setPen( g.dark() );
+    p->drawLine( x+8, y+1, x+w-8, y+1 );
+
+        p->setPen( g.mid() );
+        p->drawLine( x+8,   y, x+w-8, y );
+        p->drawPoint(x+w,y+1);
+
+    p->setPen( g.midlight() );
+    p->drawLine( x+8, y-1, x+w-8, y-1 );
+        p->drawPoint(x+8, y );
+        return;
+    }
+
+    // draw icon
+    QIconSet::Mode mode;
+    if ( mi->iconSet() && !mi->isChecked() ) {
+        if ( act )
+            mode = enabled ? QIconSet::Active : QIconSet::Disabled;
+        else
+            mode = enabled ? QIconSet::Normal : QIconSet::Disabled;
+        QPixmap pixmap;
+        if ( mode == QIconSet::Disabled )
+            pixmap = mi->iconSet()->pixmap( QIconSet::Automatic, mode );
+        else
+            pixmap = mi->iconSet()->pixmap();
+        QRect pmrect(0, 0, pixmap.width(), pixmap.height() );
+        QRect cr(x, y, maxpmw, h );
+        pmrect.moveCenter( cr.center() );
+        p->drawPixmap(pmrect.topLeft(), pixmap);
+    }
+
+    // draw check
+    if(mi->isChecked() ) {
+        drawCheckMark(p, x, y, maxpmw, h, itemg, act, !enabled );
+    }
+
+
+    // draw text
+    int xm = maxpmw + 2;
+    int xp = x + xm;
+    int tw = w -xm - 2;
+
+    p->setPen( enabled ? ( act ? g.highlightedText() : g.buttonText() ) :
+                         g.mid() );
+
+
+    if ( mi->custom() ) {
+        p->save();
+        mi->custom()->paint(p, g, act, enabled,
+                              xp, y+1, tw, h-2 );
+        p->restore();
+    }else { // draw label
+        QString text = mi->text();
+        if (!text.isNull() ) {
+            int t = text.find('\t');
+            const int tflags = AlignVCenter | DontClip |
+                               ShowPrefix |  SingleLine |
+                               AlignLeft;
+
+            if (t >= 0) {
+                int tabx = x + w - tabwidth - RIGHTBORDER -
+                           ITEMHMARGIN - ITEMFRAME;
+                p->drawText(tabx, y+ITEMVMARGIN, tabwidth,
+                            h-2*ITEMVMARGIN, tflags,
+                            text.mid(t+1) );
+                text = text.left(t );
+            }
+
+            // draw left label
+             p->drawText(xp, y+ITEMVMARGIN,
+                         tw, h-2*ITEMVMARGIN,
+                         tflags, text, t);
+        }else if ( mi->pixmap() ) { // pixmap as label
+            QPixmap pixmap = *mi->pixmap();
+            if ( pixmap.depth() == 1 )
+                p->setBackgroundMode( OpaqueMode );
+
+            int dx = ((w-pixmap.width() )  /2 ) +
+                 ((w - pixmap.width()) %2 );
+            p->drawPixmap(x+dx, y+ITEMFRAME, pixmap );
+
+            if ( pixmap.depth() == 1 )
+                p->setBackgroundMode( TransparentMode );
+        }
+    }
+
+    if ( mi->popup() ) { // draw submenu arrow
+        int dim = (h-2*ITEMFRAME) / 2;
+        drawArrow( p, RightArrow, false,
+                   x+w-ARROWMARGIN-ITEMFRAME-dim,
+                   y+h/2-dim/2, dim, dim, g, enabled );
+    }
 }
 
   void
@@ -1168,7 +1288,7 @@ WebStyle::popupMenuItemHeight(bool, QMenuItem * i, const QFontMetrics & fm)
   {
     h = QMAX
       (
-       i->iconSet()->pixmap(QIconSet::Small, QIconSet::Normal).height(),
+       i->iconSet()->pixmap().height(),
        h
       );
   }

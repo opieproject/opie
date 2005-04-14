@@ -215,7 +215,7 @@ class WebStyle : public QWindowsStyle {
        QPainter *,
        bool checkable,
        int maxpmw,
-       int tab,
+       int tabwidth,
        QMenuItem *,
        const QPalette &,
        bool act,

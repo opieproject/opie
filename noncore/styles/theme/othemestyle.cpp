@@ -37,20 +37,20 @@ QDrawMenuBarItemImpl qt_set_draw_menu_bar_impl(QDrawMenuBarItemImpl impl);
 
 
 /* !! HACK !! Beware
- * 
+ *
  * TT forgot to make the QProgressBar widget styleable in Qt 2.x
- * So the only way to customize the drawing, is to intercept the 
+ * So the only way to customize the drawing, is to intercept the
  * paint event - since we have to use protected functions, we need
  * to derive a "hack" class from QProgressBar and do the painting
  * in there.
- * 
+ *
  * - sandman
  */
 
 class HackProgressBar : public QProgressBar {
 public:
 	HackProgressBar ( );
-	
+
 	void paint ( QPaintEvent *event, OThemeStyle *style )
 	{
 		QPainter p( this );
@@ -75,9 +75,9 @@ public:
 				total = 1;
 			int perc = prog * 100 / total;
 
-			style-> drawProgressBar ( &p, x, y, w, h, colorGroup ( ), perc );	
+			style-> drawProgressBar ( &p, x, y, w, h, colorGroup ( ), perc );
 
-			if ( progress ( ) >= 0 && totalSteps ( ) > 0 ) {			
+			if ( progress ( ) >= 0 && totalSteps ( ) > 0 ) {
 				QString pstr;
 				pstr. sprintf ( "%d%%", 100 * progress()/totalSteps ());
 				p. setPen ( colorGroup().text());//g.highlightedText ( ));
@@ -109,13 +109,13 @@ void OThemeStyle::polish( QApplication * /*app*/ )
 void OThemeStyle::polish( QPalette &p )
 {
 	oldPalette = p;
-	
+
 	QColor bg = oldPalette. color ( QPalette::Normal, QColorGroup::Background );
 
 	if ( bgcolor. isValid ( ))
 		bg = bgcolor;
 
-	if ( isColor ( Background )) 
+	if ( isColor ( Background ))
 		bg = colorGroup ( oldPalette. active ( ), Background )-> background ( );
 
 	p = QPalette ( bg, bg );
@@ -124,18 +124,18 @@ void OThemeStyle::polish( QPalette &p )
 		p. setBrush ( QColorGroup::Background, QBrush ( bg, *uncached ( Background )));
 
 	if ( fgcolor. isValid ( )) {
-		p. setColor ( QColorGroup::Foreground, fgcolor );	
+		p. setColor ( QColorGroup::Foreground, fgcolor );
 		p. setColor ( QColorGroup::ButtonText, fgcolor );
 	}
 	if ( selfgcolor. isValid ( ))
-		p. setColor ( QColorGroup::HighlightedText, selfgcolor );	
+		p. setColor ( QColorGroup::HighlightedText, selfgcolor );
 	if ( selbgcolor. isValid ( ))
-		p. setColor ( QColorGroup::Highlight, selbgcolor );	
-	if ( winfgcolor. isValid ( )) 
-		p. setColor ( QColorGroup::Text, winfgcolor );	
+		p. setColor ( QColorGroup::Highlight, selbgcolor );
+	if ( winfgcolor. isValid ( ))
+		p. setColor ( QColorGroup::Text, winfgcolor );
 	if ( winbgcolor. isValid ( ))
-		p. setColor ( QColorGroup::Base, winbgcolor );	
-	
+		p. setColor ( QColorGroup::Base, winbgcolor );
+
 }
 
 
@@ -1183,7 +1183,7 @@ void OThemeStyle::drawPushButtonLabel( QPushButton *btn, QPainter *p )
 		                      ? QIconSet::Normal : QIconSet::Disabled;
 		if ( mode == QIconSet::Normal && btn->hasFocus() )
 			mode = QIconSet::Active;
-		QPixmap pixmap = btn->iconSet() ->pixmap( QIconSet::Small, mode );
+		QPixmap pixmap = btn->iconSet() ->pixmap( QIconSet::Automatic, mode );
 		int pixw = pixmap.width();
 		int pixh = pixmap.height();
 
@@ -1246,8 +1246,7 @@ int OThemeStyle::popupMenuItemHeight( bool /*checkable*/, QMenuItem *mi,
 		h = h2 > h ? h2 : h;
 	}
 	if ( mi->iconSet() ) {
-		h2 = mi->iconSet() ->
-		     pixmap( QIconSet::Small, QIconSet::Normal ).height() + offset;
+		h2 = mi->iconSet() ->pixmap().height() + offset;
 		h = h2 > h ? h2 : h;
 	}
 	h2 = fm.height() + offset;
@@ -1325,7 +1324,11 @@ void OThemeStyle::drawPopupMenuItem( QPainter* p, bool checkable, int maxpmw,
 		QIconSet::Mode mode = dis ? QIconSet::Disabled : QIconSet::Normal;
 		if ( act && !dis )
 			mode = QIconSet::Active;
-		QPixmap pixmap = mi->iconSet() ->pixmap( QIconSet::Small, mode );
+        QPixmap pixmap;
+        if ( mode == QIconSet::Disabled )
+            pixmap = mi->iconSet()->pixmap( QIconSet::Automatic, mode );
+        else
+            pixmap = mi->iconSet()->pixmap();
 		int pixw = pixmap.width();
 		int pixh = pixmap.height();
 		QRect cr( x, y, checkcol, h );
@@ -1434,11 +1437,11 @@ void OThemeStyle::drawKMenuBar( QPainter *p, int x, int y, int w, int h,
 #endif
 
 void OThemeStyle::drawMenuBarItem( QPainter *p, int x, int y, int w, int h,
-                                 QMenuItem *mi, const QColorGroup &g, 
+                                 QMenuItem *mi, const QColorGroup &g,
                                  bool /*enabled*/, bool active )
 {
     if(active){
-        x -= 2; // Bug in Qt/E 
+        x -= 2; // Bug in Qt/E
         y -= 2;
         w += 2;
         h += 2;
@@ -1464,11 +1467,11 @@ void OThemeStyle::drawProgressBar ( QPainter *p, int x, int y, int w, int h, con
 	bg.setColor( cg->color( QColorGroup::Background ) );
 	if ( isPixmap( ProgressBg ) )
 		bg.setPixmap( *uncached( ProgressBg ) );
-	
+
 	int pw = w * percent / 100;
-		
-	p-> fillRect ( x + pw, y, w - pw, h, bg ); // ### TODO	
-	
+
+	p-> fillRect ( x + pw, y, w - pw, h, bg ); // ### TODO
+
 	drawBaseButton( p, x, y, pw, h, *cg, false, false, ProgressBar );
 }
 

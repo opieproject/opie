@@ -34,7 +34,6 @@
 #include <opie2/oresource.h>
 #include <opie2/otabbar.h>
 
-#include <qpe/applnk.h>
 #include <qpe/config.h>
 
 /* QT */
