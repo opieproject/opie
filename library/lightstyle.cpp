@@ -567,7 +567,7 @@ void LightStyle::drawTab( QPainter *p, const QTabBar *tb, QTab *t, bool selected
 	QFont f = tb->font();
 	f.setBold( selected );
 	p->setFont( f );
-#endif    
+#endif
     QRect r( t->rect() );
     if ( tb->shape()  == QTabBar::RoundedAbove ) {
 	p->setPen( tb->colorGroup().light() );
@@ -593,7 +593,7 @@ void LightStyle::drawTab( QPainter *p, const QTabBar *tb, QTab *t, bool selected
 	    p->fillRect( QRect( r.left()+1, r.top()+2, r.width()-2, r.height()-3),
 			 tb->colorGroup().brush( QColorGroup::Button ));
 	    //do shading; will not work for pixmap brushes
-	    QColor bg = tb->colorGroup().button(); 
+	    QColor bg = tb->colorGroup().button();
 	    //	    int h,s,v;
 	    //	    bg.hsv( &h, &s, &v );
 	    int n = r.height()/2;
@@ -606,7 +606,7 @@ void LightStyle::drawTab( QPainter *p, const QTabBar *tb, QTab *t, bool selected
 		int x2 = r.right()-1;
 		p->drawLine( x1, y, x2, y );
 	    }
-	    
+
 	}
 
 	p->setPen( tb->colorGroup().light() );
@@ -686,7 +686,7 @@ void LightStyle::drawTab(QPainter *p, const QTabBar *tabbar, QTab *tab,
     QRegion trir(cliptri);
     p->setClipRegion(tabr - trir);
 
-    p->setPen( NoPen ); 
+    p->setPen( NoPen );
     p->setBrush(g.brush(selected ? QColorGroup::Background : QColorGroup::Mid));
 
     fr.setWidth(fr.width() - 1);
@@ -882,9 +882,9 @@ void LightStyle::drawScrollBarControls( QPainter* p, const QScrollBar* scrollbar
     int extent =  ((scrollbar->orientation() == Horizontal) ?
 		   scrollbar->height() : scrollbar->width());
 
-    
+
     int fudge = 3; //####disgusting hack
-    
+
     if (scrollbar->orientation() == Horizontal) {
 	subR.setRect(0, defaultFrameWidth(),
 		     buttonDim + fudge, buttonDim);
@@ -968,13 +968,13 @@ void LightStyle::drawScrollBarControls( QPainter* p, const QScrollBar* scrollbar
         if ( sliderR.isValid() ) {
 	    p->fillRect( sliderR.x(), sliderR.y(), 2, 2,
 		      g.brush( QColorGroup::Mid ));
-	    p->fillRect( sliderR.x() + sliderR.width() - 2, 
+	    p->fillRect( sliderR.x() + sliderR.width() - 2,
 		    sliderR.y(), 2, 2,
 		      g.brush( QColorGroup::Mid ));
-	    p->fillRect( sliderR.x() + sliderR.width() - 2, 
+	    p->fillRect( sliderR.x() + sliderR.width() - 2,
 		    sliderR.y() + sliderR.height() - 2, 2, 2,
 		      g.brush( QColorGroup::Mid ));
-	    p->fillRect( sliderR.x(), 
+	    p->fillRect( sliderR.x(),
 		    sliderR.y() + sliderR.height() - 2, 2, 2,
 		      g.brush( QColorGroup::Mid ));
 
@@ -1118,7 +1118,7 @@ int LightStyle::extraPopupMenuItemWidth( bool checkable, int maxpmw, QMenuItem* 
 */
 int LightStyle::popupMenuItemHeight( bool /*checkable*/, QMenuItem* mi, const QFontMetrics& fm )
 {
-#ifndef QT_NO_MENUDATA    
+#ifndef QT_NO_MENUDATA
     int h = 0;
     if ( mi->isSeparator() )			// separator height
 	h = motifSepHeight;
@@ -1128,7 +1128,7 @@ int LightStyle::popupMenuItemHeight( bool /*checkable*/, QMenuItem* mi, const QF
 	h = fm.height() + 2*motifItemVMargin + 2*motifItemFrame;
 
     if ( !mi->isSeparator() && mi->iconSet() != 0 ) {
-	h = QMAX( h, mi->iconSet()->pixmap( QIconSet::Small, QIconSet::Normal ).height() + 2*motifItemFrame );
+	h = QMAX( h, mi->iconSet()->pixmap().height() + 2*motifItemFrame );
     }
     if ( mi->custom() )
 	h = QMAX( h, mi->custom()->sizeHint().height() + 2*motifItemVMargin + 2*motifItemFrame ) - 1;
@@ -1140,7 +1140,7 @@ void LightStyle::drawPopupMenuItem( QPainter* p, bool checkable, int maxpmw, int
 				       const QPalette& pal,
 				       bool act, bool enabled, int x, int y, int w, int h)
 {
-#ifndef QT_NO_MENUDATA    
+#ifndef QT_NO_MENUDATA
     const QColorGroup & g = pal.active();
     bool dis	  = !enabled;
     QColorGroup itemg = dis ? pal.disabled() : pal.active();
@@ -1182,7 +1182,11 @@ void LightStyle::drawPopupMenuItem( QPainter* p, bool checkable, int maxpmw, int
 	QIconSet::Mode mode = dis ? QIconSet::Disabled : QIconSet::Normal;
 	if (act && !dis )
 	    mode = QIconSet::Active;
-	QPixmap pixmap = mi->iconSet()->pixmap( QIconSet::Small, mode );
+    QPixmap pixmap;
+    if ( mode == QIconSet::Disabled )
+        pixmap = mi->iconSet()->pixmap( QIconSet::Automatic, mode );
+    else
+        pixmap = mi->iconSet()->pixmap();
 	int pixw = pixmap.width();
 	int pixh = pixmap.height();
 	if ( act && !dis ) {
