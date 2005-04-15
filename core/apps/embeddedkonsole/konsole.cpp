@@ -30,10 +30,10 @@
 #ifdef  QT_QWS_OPIE
 #include <opie2/ocolorpopupmenu.h>
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
+
 using namespace Opie;
 #endif
-
-#include <qpe/resource.h>
 
 #include <qmenubar.h>
 #include <qtabbar.h>
@@ -376,7 +376,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
     fullscreen = false;
 
     setCaption( tr( "Konsole" ) );
-    setIcon( Resource::loadPixmap( "konsole/Terminal" ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "konsole/Terminal", Opie::Core::OResource::SmallIcon ) );
 
     Config cfg( "Konsole" );
     cfg.setGroup("Font");
@@ -570,8 +570,8 @@ void Konsole::init(const char* _pgm, QStrList & _args)
     configMenu->insertItem(tr( "Colors") ,colorMenu);
 
     sessionList = new QPopupMenu(this);
-    sessionList-> insertItem ( Resource::loadPixmap ( "konsole/Terminal" ), tr( "new session" ),  this,
-                               SLOT(newSession()) );
+    sessionList-> insertItem ( Opie::Core::OResource::loadPixmap( "konsole/Terminal", Opie::Core::OResource::SmallIcon ),
+                               tr( "new session" ), this, SLOT(newSession()) );
 
     //  connect( fontList, SIGNAL( activated(int) ), this, SLOT( fontChanged(int) ));
     connect( configMenu, SIGNAL( activated(int) ), this, SLOT( configMenuSelected(int) ));
@@ -590,31 +590,40 @@ void Konsole::init(const char* _pgm, QStrList & _args)
     QAction *a;
 
     // Button Commands
-    a = new QAction( tr("New"), Resource::loadPixmap( "konsole/konsole" ), QString::null, 0, this, 0 );
+    a = new QAction( tr("New"), Opie::Core::OResource::loadPixmap( "konsole/konsole", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( newSession() ) );
     a->addTo( toolBar );
 
-    a = new QAction( tr("Full Screen"), Resource::loadPixmap( "fullscreen" ), QString::null, 0, this, 0 );
+    a = new QAction( tr("Full Screen"), Opie::Core::OResource::loadPixmap( "fullscreen", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( toggleFullScreen() ) );
     a->addTo( toolBar );
 
-    a = new QAction( tr("Zoom"), Resource::loadPixmap( "zoom" ), QString::null, 0, this, 0 );
+    a = new QAction( tr("Zoom"), Opie::Core::OResource::loadPixmap( "zoom", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( cycleZoom() ) );
     a->addTo( toolBar );
 
 
-    a = new QAction( tr("Enter"), Resource::loadPixmap( "konsole/enter" ), QString::null, 0, this, 0 );
+    a = new QAction( tr("Enter"), Opie::Core::OResource::loadPixmap( "konsole/enter", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitEnter() ) ); a->addTo( toolBar );
-    a = new QAction( tr("Space"), Resource::loadPixmap( "konsole/space" ), QString::null, 0, this, 0 );
+    a = new QAction( tr("Space"), Opie::Core::OResource::loadPixmap( "konsole/space", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitSpace() ) ); a->addTo( toolBar );
-    a = new QAction( tr("Tab"), Resource::loadPixmap( "konsole/tab" ), QString::null, 0, this, 0 );
+    a = new QAction( tr("Tab"), Opie::Core::OResource::loadPixmap( "konsole/tab", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitTab() ) ); a->addTo( toolBar );
-    a = new QAction( tr("Up"), Resource::loadPixmap( "konsole/up" ), QString::null, 0, this, 0 );
+    a = new QAction( tr("Up"), Opie::Core::OResource::loadPixmap( "konsole/up", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitUp() ) ); a->addTo( toolBar );
-    a = new QAction( tr("Down"), Resource::loadPixmap( "konsole/down" ), QString::null, 0, this, 0 );
+    a = new QAction( tr("Down"), Opie::Core::OResource::loadPixmap( "konsole/down", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitDown() ) ); a->addTo( toolBar );
 
-    a = new QAction( tr("Paste"), Resource::loadPixmap( "paste" ), QString::null, 0, this, 0 );
+    a = new QAction( tr("Paste"), Opie::Core::OResource::loadPixmap( "paste", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitPaste() ) );
     a->addTo( toolBar );
 

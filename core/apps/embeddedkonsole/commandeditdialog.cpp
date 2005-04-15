@@ -2,8 +2,12 @@
 
 #include "commandeditdialog.h"
 #include "playlistselection.h"
+
+#include <opie2/oresource.h>
+
 #include <qpe/config.h>
-#include <qpe/resource.h>
+
+#include <qapplication.h>
 #include <qtoolbutton.h>
 #include <qlineedit.h>
 #include <qheader.h>
@@ -53,34 +57,39 @@ CommandEditDialog::CommandEditDialog(QWidget *parent, const char* name, WFlags f
 
   connect( m_SuggestedCommandList, SIGNAL( clicked(QListViewItem*) ), m_PlayListSelection, SLOT( addToSelection(QListViewItem*) ) );
 
-
+  bool bigPixmaps = qApp->desktop()->size().width()>330;
 
   ToolButton1->setTextLabel("new");
-  ToolButton1->setPixmap(Resource::loadPixmap("new"));
+  ToolButton1->setUsesBigPixmap( bigPixmaps );
+  ToolButton1->setPixmap( Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ) );
   ToolButton1->setAutoRaise(TRUE);
   ToolButton1->setFocusPolicy(QWidget::NoFocus);
   connect(ToolButton1,SIGNAL(clicked()),this,SLOT(showAddDialog()));
 
   ToolButton2->setTextLabel("edit");
-  ToolButton2->setPixmap(Resource::loadPixmap("edit"));
+  ToolButton2->setUsesBigPixmap( bigPixmaps );
+  ToolButton2->setPixmap( Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ) );
   ToolButton2->setAutoRaise(TRUE);
   ToolButton2->setFocusPolicy(QWidget::NoFocus);
   connect(ToolButton2,SIGNAL(clicked()),this,SLOT(showEditDialog()));
 
   ToolButton3->setTextLabel("delete");
-  ToolButton3->setPixmap(Resource::loadPixmap("editdelete"));
+  ToolButton3->setUsesBigPixmap( bigPixmaps );
+  ToolButton3->setPixmap( Opie::Core::OResource::loadPixmap( "editdelete", Opie::Core::OResource::SmallIcon ) );
   ToolButton3->setAutoRaise(TRUE);
   ToolButton3->setFocusPolicy(QWidget::NoFocus);
   connect(ToolButton3,SIGNAL(clicked()),m_PlayListSelection,SLOT(removeSelected()));
 
   ToolButton4->setTextLabel("up");
-  ToolButton4->setPixmap(Resource::loadPixmap("up"));
+  ToolButton4->setUsesBigPixmap( bigPixmaps );
+  ToolButton4->setPixmap( Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ) );
   ToolButton4->setAutoRaise(TRUE);
   ToolButton4->setFocusPolicy(QWidget::NoFocus);
   connect(ToolButton4,SIGNAL(clicked()),m_PlayListSelection,SLOT(moveSelectedUp()));
 
   ToolButton5->setTextLabel("down");
-  ToolButton5->setPixmap(Resource::loadPixmap("down"));
+  ToolButton5->setUsesBigPixmap( bigPixmaps );
+  ToolButton5->setPixmap( Opie::Core::OResource::loadPixmap( "down", Opie::Core::OResource::SmallIcon ) );
   ToolButton5->setAutoRaise(TRUE);
   ToolButton5->setFocusPolicy(QWidget::NoFocus);
 
