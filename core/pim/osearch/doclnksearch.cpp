@@ -15,11 +15,11 @@
 #include "doclnkitem.h"
 #include "doclnksearch.h"
 
+#include <opie2/oresource.h>
 #include <opie2/owait.h>
 
 #include <qpe/applnk.h>
 #include <qpe/config.h>
-#include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 
 #include <qaction.h>
@@ -31,8 +31,7 @@
 DocLnkSearch::DocLnkSearch(QListView* parent, QString name)
 : AppLnkSearch(parent, name), _popupMenu(0)
 {
-        QIconSet is = Resource::loadIconSet( "osearch/documents" );
-	setPixmap( 0, is.pixmap( QIconSet::Large, true ) );
+    setPixmap( 0, Opie::Core::OResource::loadPixmap( "osearch/documents", Opie::Core::OResource::SmallIcon ) );
 
 	actionSearchInFiles = new QAction( QObject::tr("Search content"),QString::null,  0, 0, 0, true );
 	Config cfg( "osearch", Config::User );

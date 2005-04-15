@@ -13,7 +13,7 @@
 #include "adresssearch.h"
 #include "contactitem.h"
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 //#include <qwhatsthis.h>
 
@@ -22,8 +22,7 @@ AdressSearch::AdressSearch(QListView* parent, QString name):
 	SearchGroup(parent, name)
 {
 	_contacts = 0;
-        QIconSet is = Resource::loadIconSet( "addressbook/AddressBook" );
-	setPixmap( 0, is.pixmap( QIconSet::Large, true ) );
+    setPixmap( 0, Opie::Core::OResource::loadPixmap( "addressbook/AddressBook", Opie::Core::OResource::SmallIcon ) );
 
 
 //	QWhatsThis::add( this, QObject::tr("Search the addressbook") );

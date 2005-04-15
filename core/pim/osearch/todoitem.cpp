@@ -12,11 +12,9 @@
 //
 #include "todoitem.h"
 
+#include <opie2/oresource.h>
 
-#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
-
-
 
 using namespace Opie;
 TodoItem::TodoItem(OListViewItem* parent, OPimTodo *todo)
@@ -61,22 +59,22 @@ void TodoItem::setIcon()
 	QPixmap icon;
 	switch ( _todo->lastHitField() ) {
 	case -1:
-		icon = Resource::loadPixmap( "reset" );
+        icon = Opie::Core::OResource::loadPixmap( "reset", Opie::Core::OResource::SmallIcon );
 		break;
 	case OPimTodo::Description:
-		icon = Resource::loadPixmap( "txt" );
+        icon = Opie::Core::OResource::loadPixmap( "txt", Opie::Core::OResource::SmallIcon );
 		break;
  	case OPimTodo::Summary:
-		icon = Resource::loadPixmap( "osearch/summary" );
+        icon = Opie::Core::OResource::loadPixmap( "osearch/summary", Opie::Core::OResource::SmallIcon );
  		break;
 	case OPimTodo::Priority:
-		icon = Resource::loadPixmap( "todo/priority1" );
+        icon = Opie::Core::OResource::loadPixmap( "todo/priority1", Opie::Core::OResource::SmallIcon );
  		break;
  	case OPimTodo::HasDate:
-		icon = Resource::loadPixmap( "osearch/clock" );
+        icon = Opie::Core::OResource::loadPixmap( "osearch/clock", Opie::Core::OResource::SmallIcon );
  		break;
 	default:
-		icon = Resource::loadPixmap( "DocsIcon" );
+        icon = Opie::Core::OResource::loadPixmap( "DocsIcon", Opie::Core::OResource::SmallIcon );
 		break;
 	}
 	setPixmap( 0, icon );

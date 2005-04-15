@@ -13,17 +13,16 @@
 #include "applnksearch.h"
 #include "applnkitem.h"
 
+#include <opie2/oresource.h>
+
 #include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 
 
 AppLnkSearch::AppLnkSearch(QListView* parent, QString name): SearchGroup(parent, name)
 {
 	_apps = 0;
-        QIconSet is = Resource::loadIconSet( "osearch/applications" );
-	//QIconSet is = Resource::loadIconSet( "AppsIcon" );
-	setPixmap( 0, is.pixmap( QIconSet::Large, true ) );
+    setPixmap( 0, Opie::Core::OResource::loadPixmap( "osearch/applications", Opie::Core::OResource::SmallIcon ) );
 }
 
 

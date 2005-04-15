@@ -12,7 +12,8 @@
 //
 #include "contactitem.h"
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
+
 #include <qpe/qcopenvelope_qws.h>
 
 
@@ -30,35 +31,35 @@ void ContactItem::setIcon()
 	QPixmap icon;
 	switch ( _contact->lastHitField() ) {
 	case -1:
-		icon = Resource::loadPixmap( "reset" );
+		icon = Opie::Core::OResource::loadPixmap( "reset", Opie::Core::OResource::SmallIcon );
 		break;
 	case Qtopia::BusinessPhone:
-		icon = Resource::loadPixmap( "addressbook/phonework" );
+        icon = Opie::Core::OResource::loadPixmap( "addressbook/phonework", Opie::Core::OResource::SmallIcon );
 		break;
 	case Qtopia::BusinessFax:
-		icon = Resource::loadPixmap( "addressbook/faxwork" );
+        icon = Opie::Core::OResource::loadPixmap( "addressbook/faxwork", Opie::Core::OResource::SmallIcon );
 		break;
 	case Qtopia::BusinessMobile:
-		icon = Resource::loadPixmap( "addressbook/mobilework" );
+        icon = Opie::Core::OResource::loadPixmap( "addressbook/mobilework", Opie::Core::OResource::SmallIcon );
 		break;
 	case Qtopia::DefaultEmail:
 	case Qtopia::Emails:
-		icon = Resource::loadPixmap( "addressbook/email" );
+        icon = Opie::Core::OResource::loadPixmap( "addressbook/email", Opie::Core::OResource::SmallIcon );
 		break;
 	case Qtopia::HomePhone:
-		icon = Resource::loadPixmap( "addressbook/phonehome" );
+        icon = Opie::Core::OResource::loadPixmap( "addressbook/phonehome", Opie::Core::OResource::SmallIcon );
 		break;
 	case Qtopia::HomeFax:
-		icon = Resource::loadPixmap( "addressbook/faxhome" );
+        icon = Opie::Core::OResource::loadPixmap( "addressbook/faxhome", Opie::Core::OResource::SmallIcon );
 		break;
 	case Qtopia::HomeMobile:
-		icon = Resource::loadPixmap( "addressbook/mobilehome" );
+        icon = Opie::Core::OResource::loadPixmap( "addressbook/mobilehome", Opie::Core::OResource::SmallIcon );
 		break;
 	case Qtopia::HomeWebPage:
-		icon = Resource::loadPixmap( "addressbook/webpagehome" );
+        icon = Opie::Core::OResource::loadPixmap( "addressbook/webpagehome", Opie::Core::OResource::SmallIcon );
 		break;
 	case Qtopia::BusinessWebPage:
-		icon = Resource::loadPixmap( "addressbook/webpagework" );
+        icon = Opie::Core::OResource::loadPixmap( "addressbook/webpagework", Opie::Core::OResource::SmallIcon );
 		break;
 	case Qtopia::Title:
  	case Qtopia::JobTitle:
@@ -68,14 +69,14 @@ void ContactItem::setIcon()
 	case Qtopia::Suffix:
 	case Qtopia::Nickname:
  	case Qtopia::FileAs:
-		icon = Resource::loadPixmap( "addressbook/identity" );
+        icon = Opie::Core::OResource::loadPixmap( "addressbook/identity", Opie::Core::OResource::SmallIcon );
  		break;
  	case Qtopia::HomeStreet:
  	case Qtopia::HomeCity:
  	case Qtopia::HomeState:
  	case Qtopia::HomeZip:
  	case Qtopia::HomeCountry:
-		icon = Resource::loadPixmap( "osearch/addresshome" );
+        icon = Opie::Core::OResource::loadPixmap( "osearch/addresshome", Opie::Core::OResource::SmallIcon );
  		break;
  	case Qtopia::Company:
  	case Qtopia::BusinessCity:
@@ -87,22 +88,22 @@ void ContactItem::setIcon()
  	case Qtopia::Manager:
  	case Qtopia::BusinessPager:
  	case Qtopia::Profession:
-		icon = Resource::loadPixmap( "osearch/addresshome" );
+        icon = Opie::Core::OResource::loadPixmap( "osearch/addresshome", Opie::Core::OResource::SmallIcon );
  		break;
  	case Qtopia::Assistant:
 	case Qtopia::Spouse:
  	case Qtopia::Children:
-		icon = Resource::loadPixmap( "osearch/personal" );
+        icon = Opie::Core::OResource::loadPixmap( "osearch/personal", Opie::Core::OResource::SmallIcon );
  		break;
  	case Qtopia::Birthday:
  	case Qtopia::Anniversary:
-		icon = Resource::loadPixmap( "osearch/clock" );
+        icon = Opie::Core::OResource::loadPixmap( "osearch/clock", Opie::Core::OResource::SmallIcon );
  		break;
  	case Qtopia::Notes:
-		icon = Resource::loadPixmap( "txt" );
+        icon = Opie::Core::OResource::loadPixmap( "txt", Opie::Core::OResource::SmallIcon );
  		break;
 	default:
-		icon = Resource::loadPixmap( "DocsIcon" );
+        icon = Opie::Core::OResource::loadPixmap( "DocsIcon", Opie::Core::OResource::SmallIcon );
 		break;
 	}
 	setPixmap( 0, icon );

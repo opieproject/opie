@@ -13,7 +13,8 @@
 #include "todosearch.h"
 #include "todoitem.h"
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
+
 #include <qpe/config.h>
 
 #include <qaction.h>
@@ -25,8 +26,8 @@ TodoSearch::TodoSearch(QListView* parent, QString name)
 {
 //	AppLnkSet als(QPEApplication::qpeDir());
 //	setPixmap( 0, als.findExec("todolist")->pixmap() );
-        QIconSet is = Resource::loadIconSet( "todo/TodoList" );
-	setPixmap( 0, is.pixmap( QIconSet::Large, true ) );
+    setPixmap( 0, Opie::Core::OResource::loadPixmap( "todo/TodoList", Opie::Core::OResource::SmallIcon ) );
+
 	actionShowCompleted = new QAction( QObject::tr("Show completed tasks"),QString::null,  0, 0, 0, true );
 	Config cfg( "osearch", Config::User );
    	cfg.setGroup( "todo_settings" );

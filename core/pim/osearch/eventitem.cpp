@@ -12,8 +12,8 @@
 //
 #include "eventitem.h"
 
+#include <opie2/oresource.h>
 
-#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
 
@@ -61,24 +61,24 @@ void EventItem::setIcon()
 	QPixmap icon;
 	switch ( _event->lastHitField() ) {
 	case -1:
-		icon = Resource::loadPixmap( "reset" );
+        icon = Opie::Core::OResource::loadPixmap( "reset", Opie::Core::OResource::SmallIcon );
 //		QWhatsThis::add( icon, QObject::tr("Enter your search terms here") );
 		break;
 	case Qtopia::DatebookDescription:
-		icon = Resource::loadPixmap( "osearch/summary" );
+        icon = Opie::Core::OResource::loadPixmap( "osearch/summary", Opie::Core::OResource::SmallIcon );
  		break;
  	case Qtopia::Notes:
-		icon = Resource::loadPixmap( "txt" );
+        icon = Opie::Core::OResource::loadPixmap( "txt", Opie::Core::OResource::SmallIcon );
  		break;
 	case Qtopia::Location:
-		icon = Resource::loadPixmap( "home" );
+        icon = Opie::Core::OResource::loadPixmap( "home", Opie::Core::OResource::SmallIcon );
  		break;
  	case Qtopia::StartDateTime:
  	case Qtopia::EndDateTime:
-		icon = Resource::loadPixmap( "osearch/clock" );
+        icon = Opie::Core::OResource::loadPixmap( "osearch/clock", Opie::Core::OResource::SmallIcon );
  		break;
 	default:
-		icon = Resource::loadPixmap( "DocsIcon" );
+        icon = Opie::Core::OResource::loadPixmap( "DocsIcon", Opie::Core::OResource::SmallIcon );
 		break;
 	}
 	setPixmap( 0, icon );

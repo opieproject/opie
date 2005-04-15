@@ -21,12 +21,11 @@
 #include "mainwindow.h"
 
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <opie2/owait.h>
 
 #include <qpe/qpemessagebox.h>
-#include <qpe/resource.h>
 #include <qpe/config.h>
-
 
 #include <qpe/qpeapplication.h>
 #include <qpe/global.h>
@@ -165,7 +164,7 @@ void MainWindow::makeMenu()
 
   //SEARCH
   SearchAllAction = new QAction( tr("Search all"),QString::null,  0, this, 0 );
-  SearchAllAction->setIconSet( Resource::loadIconSet( "find" ) );
+  SearchAllAction->setIconSet( Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ) );
  // QWhatsThis::add( SearchAllAction, tr("Search everything...") );
   connect( SearchAllAction, SIGNAL(activated()), this, SLOT(searchAll()) );
   SearchAllAction->addTo( searchMenu );

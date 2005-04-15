@@ -16,8 +16,8 @@
 #include <opie2/odebug.h>
 #include <opie2/opimevent.h>
 #include <opie2/opimrecurrence.h>
+#include <opie2/oresource.h>
 
-#include <qpe/resource.h>
 #include <qpe/config.h>
 
 #include <qaction.h>
@@ -28,8 +28,8 @@
 DatebookSearch::DatebookSearch(QListView* parent, QString name)
 : SearchGroup(parent, name), _dates(0), _popupMenu(0)
 {
-	QIconSet is = Resource::loadIconSet( "datebook/DateBook" );
-	setPixmap( 0, is.pixmap( QIconSet::Large, true ) );
+    setPixmap( 0, Opie::Core::OResource::loadPixmap( "datebook/DateBook", Opie::Core::OResource::SmallIcon ) );
+
 	actionShowPastEvents = new QAction( QObject::tr("Show past events"),QString::null,  0, 0, 0, true );
 	actionSearchInDates = new QAction( QObject::tr("Search in dates"),QString::null,  0, 0, 0, true );
 	Config cfg( "osearch", Config::User );
