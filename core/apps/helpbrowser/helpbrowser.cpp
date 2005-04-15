@@ -25,8 +25,10 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
+
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
+
 using namespace Opie::Core;
 
 /* QT */
@@ -47,7 +49,7 @@ HelpBrowser::HelpBrowser( QWidget* parent, const char *name, WFlags f )
 
 void HelpBrowser::init( const QString& _home )
 {
-    setIcon( Resource::loadPixmap( "HelpBrowser" ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "HelpBrowser", Opie::Core::OResource::SmallIcon ) );
     setBackgroundMode( PaletteButton );
 
     browser = new MagicTextBrowser( this );
@@ -69,7 +71,8 @@ void HelpBrowser::init( const QString& _home )
     // addToolBar( toolbar, "Toolbar");
 
     QPopupMenu* go = new QPopupMenu( this );
-    backAction = new QAction( tr( "Backward" ), Resource::loadIconSet( "back" ), QString::null, 0, this, 0 );
+    backAction = new QAction( tr( "Backward" ), Opie::Core::OResource::loadPixmap( "back", Opie::Core::OResource::SmallIcon ),
+                              QString::null, 0, this, 0 );
     connect( backAction, SIGNAL( activated() ), browser, SLOT( backward() ) );
     connect( browser, SIGNAL( backwardAvailable(bool) ),
          backAction, SLOT( setEnabled(bool) ) );
@@ -77,7 +80,8 @@ void HelpBrowser::init( const QString& _home )
     backAction->addTo( toolbar );
     backAction->setEnabled( FALSE );
 
-    forwardAction = new QAction( tr( "Forward" ), Resource::loadIconSet( "forward" ), QString::null, 0, this, 0 );
+    forwardAction = new QAction( tr( "Forward" ), Opie::Core::OResource::loadPixmap( "forward", Opie::Core::OResource::SmallIcon ),
+                                 QString::null, 0, this, 0 );
     connect( forwardAction, SIGNAL( activated() ), browser, SLOT( forward() ) );
     connect( browser, SIGNAL( forwardAvailable(bool) ),
          forwardAction, SLOT( setEnabled(bool) ) );
@@ -85,7 +89,8 @@ void HelpBrowser::init( const QString& _home )
     forwardAction->addTo( toolbar );
     forwardAction->setEnabled( FALSE );
 
-    QAction *a = new QAction( tr( "Home" ), Resource::loadIconSet( "home" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( tr( "Home" ), Opie::Core::OResource::loadPixmap( "home", Opie::Core::OResource::SmallIcon ),
+                              QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), browser, SLOT( home() ) );
     a->addTo( go );
     a->addTo( toolbar );

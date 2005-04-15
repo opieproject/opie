@@ -20,7 +20,8 @@
 #include <opie2/ofileselector.h>
 #include <opie2/ofiledialog.h>
 #include <opie2/ofontselector.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
+
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 
@@ -169,7 +170,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
         this, SLOT(receive(const QCString&,const QByteArray&)) );
 
-    setIcon( Resource::loadPixmap( "textedit/TextEditor" ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "textedit/TextEditor", Opie::Core::OResource::SmallIcon ) );
 
     QToolBar *bar = new QToolBar( this );
     bar->setHorizontalStretchable( true );
@@ -185,43 +186,43 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     bar = new QToolBar( this );
     editBar = bar;
 
-    QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ),
+    QAction *a = new QAction( tr( "New" ), Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
                               QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( fileNew() ) );
 //    a->addTo( bar );
     a->addTo( file );
 
-    a = new QAction( tr( "Open" ), Resource::loadPixmap( "fileopen" ),
+    a = new QAction( tr( "Open" ), Opie::Core::OResource::loadPixmap( "fileopen", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( fileOpen() ) );
     a->addTo( bar );
     a->addTo( file );
 
-    a = new QAction( tr( "Save" ), Resource::loadPixmap("save") ,
+    a = new QAction( tr( "Save" ), Opie::Core::OResource::loadPixmap( "save", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( save() ) );
     file->insertSeparator();
     a->addTo( bar );
     a->addTo( file );
 
-    a = new QAction( tr( "Save As" ),  Resource::loadPixmap("save") ,
+    a = new QAction( tr( "Save As" ),  Opie::Core::OResource::loadPixmap( "save", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( saveAs() ) );
     a->addTo( file );
 
-    a = new QAction( tr( "Cut" ), Resource::loadPixmap( "cut" ),
+    a = new QAction( tr( "Cut" ), Opie::Core::OResource::loadPixmap( "cut", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editCut() ) );
     a->addTo( editBar );
     a->addTo( edit );
 
-    a = new QAction( tr( "Copy" ), Resource::loadPixmap( "copy" ),
+    a = new QAction( tr( "Copy" ), Opie::Core::OResource::loadPixmap( "copy", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editCopy() ) );
     a->addTo( editBar );
     a->addTo( edit );
 
-    a = new QAction( tr( "Paste" ), Resource::loadPixmap( "paste" ),
+    a = new QAction( tr( "Paste" ), Opie::Core::OResource::loadPixmap( "paste", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editPaste() ) );
     a->addTo( editBar );
@@ -229,19 +230,19 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
 
 #ifndef QT_NO_CLIPBOARD
-    a = new QAction( tr( "Insert Time and Date" ), Resource::loadPixmap( "paste" ),
+    a = new QAction( tr( "Insert Time and Date" ), Opie::Core::OResource::loadPixmap( "paste", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editPasteTimeDate() ) );
     a->addTo( edit );
 #endif
 
-       a = new QAction( tr( "Goto Line..." ), Resource::loadPixmap( "find" ),
+       a = new QAction( tr( "Goto Line..." ), Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ),
                     QString::null, 0, this, 0 );
    connect( a, SIGNAL( activated() ), this, SLOT( gotoLine() ) );
     edit->insertSeparator();
    a->addTo( edit );
 
-    a = new QAction( tr( "Find..." ), Resource::loadPixmap( "find" ),
+    a = new QAction( tr( "Find..." ), Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editFind() ) );
     a->addTo( bar );
@@ -331,19 +332,19 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     connect( searchEdit, SIGNAL( textChanged(const QString&) ),
        this, SLOT( search() ) );
 
-    a = new QAction( tr( "Find Next" ), Resource::loadPixmap( "next" ),
+    a = new QAction( tr( "Find Next" ), Opie::Core::OResource::loadPixmap( "next", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( findNext() ) );
     a->addTo( searchBar );
     a->addTo( edit );
 
-    a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ),
+    a = new QAction( tr( "Close Find" ), Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( findClose() ) );
     a->addTo( searchBar );
 
     edit->insertSeparator();
-    a = new QAction( tr( "Delete" ), Resource::loadPixmap( "close" ),
+    a = new QAction( tr( "Delete" ), Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editDelete() ) );
     a->addTo( edit );
