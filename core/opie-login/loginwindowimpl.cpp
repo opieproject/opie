@@ -1,25 +1,25 @@
 /*
-               =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
-           .>+-=
- _;:,     .>    :=|.         This file is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This file is distributed in the hope that
-     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
-..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:
- :     =  ...= . :.=-        You should have received a copy of the GNU
- -.   .:....=;==+<;          General Public License along with this file;
-  -_. . .   )=.  =           see the file COPYING. If not, write to the
-    --        :-=`           Free Software Foundation, Inc.,
+       =.            This file is part of the OPIE Project
+      .=l.            Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
+     .>+-=
+_;:,   .>  :=|.         This file is free software; you can
+.> <`_,  > .  <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This file is distributed in the hope that
+  + . -:.    =       it will be useful, but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=    =    ;      Public License for more details.
+++=  -.   .`   .:
+:   = ...= . :.=-        You should have received a copy of the GNU
+-.  .:....=;==+<;          General Public License along with this file;
+ -_. . .  )=. =           see the file COPYING. If not, write to the
+  --    :-=`           Free Software Foundation, Inc.,
                              59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
@@ -38,11 +38,11 @@
 #endif
 #include <qwindowsystem_qws.h>
 
-#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 
 #include <opie2/odevice.h>
+#include <opie2/oresource.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -197,10 +197,7 @@ class WaitLogo : public QLabel {
 public:
 	WaitLogo ( ) : QLabel ( 0, "wait hack!", WStyle_Customize | WStyle_NoBorder | WStyle_Tool )
 	{
-		QImage img = Resource::loadImage ( "launcher/new_wait" );
-		QPixmap pix;
-		pix. convertFromImage ( img );
-		setPixmap ( pix );
+		setPixmap( Opie::Core::OResource::loadPixmap( "launcher/new_wait" ) );
 		setAlignment ( AlignCenter );
 		move ( 0, 0 );
 		resize ( qApp-> desktop ( )-> width ( ), qApp-> desktop ( )-> height ( ));
