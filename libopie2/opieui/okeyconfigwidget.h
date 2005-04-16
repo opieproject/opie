@@ -10,6 +10,7 @@
 #include <opie2/okeyconfigmanager.h>
 
 #include <qhbox.h>
+#include <qdialog.h>
 
 
 class QKeyEvent;
