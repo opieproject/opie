@@ -204,18 +204,48 @@ $(OPIEDIR)/stamp-headers :
 
 $(OPIEDIR)/stamp-headers-x11 :
 	@-rm -f $(OPIEDIR)/stamp-headers*
-	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
-		$(TOPDIR)/include/opie $(TOPDIR)/include/qtopia/private
+	mkdir -p $(TOPDIR)/include/qpe    \
+		 $(TOPDIR)/include/qtopia \
+		 $(TOPDIR)/include/qtopia/private \
+		 $(TOPDIR)/include/opie   \
+		 $(TOPDIR)/include/opie2  \
+		 $(TOPDIR)/include/opie2/private \
+		 $(TOPDIR)/include/sl
+
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
 	( cd include/qtopia && rm -f *.h; ln -sf ../../library/*.h .; )
 	( cd include/qtopia/private && rm -f *.h; ln -sf ../../../library/backend/*.h .; )
-	( cd include/opie &&  rm -f *.h; ln -sf ../../libopie/*.h .; rm -f *_p.h; )
-	( cd include/opie &&  ln -sf ../../libsql/*.h .; )
-	( cd include/opie &&  ln -sf ../../libopie/pim/*.h .; )
-	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
-	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
+	# libopie2
+	( cd include/opie2 && ln -sf ../../libopie2/opiecore/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiecore/device/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiemm/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiedb/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opienet/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiepim/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiepim/core/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiepim/backend/*.h .; )
+	( cd include/opie2/private && ln -sf ../../../libopie2/opiepim/private/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiepim/ui/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opieui/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opieui/fileselector/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opieui/big-screen/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiesecurity/*.h .; )
+	# auxilliary libraries
+	( cd include/opie2 && ln -sf ../../libqtaux/*.h .; )
+	( cd include/sl && ln -sf ../../libslcompat/*.h .; )
+	( cd include/ && ln -sf ../noncore/net/ftplib/*.h .; )
+	( cd include/ && ln -sf ../inputmethods/pickboard/pickboardcfg.h .; )
+	( cd include/ && ln -sf ../inputmethods/pickboard/pickboardpicks.h .; )
+	# all
+	( cd include/opie2; for generatedHeader in `cd ../../libopie2/opieui; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
+	ln -sf ../../libopie2/opieui/$$generatedHeader $$generatedHeader; done )
+	( cd include/opie2; for generatedHeader in `cd ../../libopie2/opiepim/ui; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
+	ln -sf ../../libopie2/opiepim/ui/$$generatedHeader $$generatedHeader; done )
 	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h
+
+	# Qtopia
 	( cd include/qpe; ln -sf ../../x11/libqpe-x11/qpe/*.h .; )
+	( cd include/qtopia; ln -sf ../../x11/libqpe-x11/qpe/*.h .; )
 	touch $@
 
 $(TOPDIR)/library/custom.h : $(TOPDIR)/.config
