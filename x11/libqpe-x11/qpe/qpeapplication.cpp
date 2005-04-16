@@ -415,7 +415,7 @@ void QPEApplication::applyStyle() {
 int QPEApplication::defaultRotation() {
     return 0;
 }
-void QPEApplication::setDefaultRotation(int r ) {
+void QPEApplication::setDefaultRotation(int) {
 
 }
 void QPEApplication::grabKeyboard() {
@@ -449,6 +449,14 @@ void QPEApplication::showMainDocumentWidget( QWidget* mw, bool m) {
     d->show(mw, m );
 }
 void QPEApplication::showDialog( QDialog* d, bool nomax ) {
+    showWidget( d, nomax );
+}
+int QPEApplication::execDialog( QDialog* d, bool nomax) {
+    showDialog(d,nomax);
+    return d->exec();
+}
+
+void QPEApplication::showWidget( QWidget* d,  bool nomax ) {
     QSize sh = d->sizeHint();
     int w = QMAX(sh.width(),d->width());
     int h = QMAX(sh.height(),d->height());
@@ -456,16 +464,13 @@ void QPEApplication::showDialog( QDialog* d, bool nomax ) {
          && ( w > qApp->desktop()->width()*3/4
               || h > qApp->desktop()->height()*3/4 ) )
     {
-	d->showMaximized();
+        d->showMaximized();
     } else {
-	d->resize(w,h);
-	d->show();
+        d->resize(w,h);
+        d->show();
     }
 }
-int QPEApplication::execDialog( QDialog* d, bool nomax) {
-    showDialog(d,nomax);
-    return d->exec();
-}
+
 void QPEApplication::setKeepRunning() {
     if ( qApp && qApp->inherits( "QPEApplication" ) ) {
         QPEApplication * qpeApp = ( QPEApplication* ) qApp;
@@ -757,6 +762,7 @@ int QPEApplication::x11ClientMessage(QWidget* w, XEvent* event, bool b ) {
 #define KeyRelease XKeyRelease
 
 #if defined(OPIE_NEW_MALLOC)
+#define likely(x) x
 
 // The libraries with the skiff package (and possibly others) have
 // completely useless implementations of builtin new and delete that
@@ -775,21 +781,25 @@ void* operator new( size_t size )
 
 void operator delete[]( void* p )
 {
+    if ( likely(p) )
 	free( p );
 }
 
 void operator delete[]( void* p, size_t /*size*/ )
 {
+    if ( likely(p) )
 	free( p );
 }
 
 void operator delete( void* p )
 {
+    if ( likely(p) )
 	free( p );
 }
 
 void operator delete( void* p, size_t /*size*/ )
 {
+    if ( likely(p) )
 	free( p );
 }
 

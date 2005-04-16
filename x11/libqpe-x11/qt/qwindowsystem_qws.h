@@ -10,6 +10,9 @@ QWSServer(){}
 ~QWSServer(){}
     static void sendKeyEvent(int, int, int, bool, bool ) { }
    struct KeyboardFilter {
+       bool filter(int,int,int,bool,bool) {
+	   return false;
+       }
    };
     static void setKeyboardFilter( KeyboardFilter* ) {
 

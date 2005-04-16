@@ -7,8 +7,9 @@
 
 #include <qapplication.h>
 #include <qevent.h>
-
-#include <qpe/timestring.h>
+#include <qtopia/timestring.h>
+#include <unistd.h>
+#include <stdlib.h>
 
 class QCopChannel;
 class QPEApplication : public QApplication {
@@ -46,7 +47,8 @@ public:
     void showMainDocumentWidget( QWidget*, bool nomax = FALSE );
 
     static void showDialog( QDialog*, bool nomax = FALSE );
-    static int execDialog( QDialog*, bool nomax = FALSE );
+    static int execDialog ( QDialog*, bool nomax = FALSE );
+    static void showWidget( QWidget*, bool nomax = FALSE );
 
     static void setKeepRunning();
     bool keepRunning()const;
