@@ -36,7 +36,7 @@
 #define QTOPIA_INTERNAL_LANGLIST
 #include "config.h"
 #include "global.h"
-#include "qpeapplication.h"
+#include <qtopia/qpeapplication.h>
 
 
 /*

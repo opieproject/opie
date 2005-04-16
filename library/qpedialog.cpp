@@ -22,7 +22,7 @@
 
 #include <qdialog.h>
 
-#include <qpeapplication.h>
+#include <qtopia/qpeapplication.h>
 
 
 // Allow access to nornally protected accept and reject functions
