@@ -187,27 +187,31 @@ namespace XINE {
         virtual void run();
 
     private:
-        void initialize();
+	void initialize();
 
-        int m_bytes_per_pixel;
-        bool m_initialized:1;
-        bool m_duringInitialization:1;
-        bool m_video:1;
-        XineVideoWidget *m_wid;
-        xine_t *m_xine;
-    xine_stream_t *m_stream;
-        xine_cfg_entry_t *m_config;
-        xine_vo_driver_t *m_videoOutput;
-        xine_ao_driver_t* m_audioOutput;
-    xine_event_queue_t *m_queue;
+	int m_bytes_per_pixel;
+	bool m_initialized:1;
+	bool m_duringInitialization:1;
+	bool m_video:1;
+	XineVideoWidget *m_wid;
+	QSize m_videoSize;
+	xine_t *m_xine;
+	xine_stream_t *m_stream;
+	xine_cfg_entry_t *m_config;
+	xine_vo_driver_t *m_videoOutput;
+	xine_ao_driver_t* m_audioOutput;
+	xine_event_queue_t *m_queue;
 
-        void handleXineEvent( const xine_event_t* t );
-    void handleXineEvent( int type, int data, const char* name );
-        void drawFrame( uint8_t* frame, int width, int height, int bytes );
+	void handleXineEvent( const xine_event_t* t );
+	void handleXineEvent( int type, int data, const char* name );
+	void drawFrame( uint8_t* frame, int width, int height, int bytes );
         // C -> C++ bridge for the event system
         static void xine_event_handler( void* user_data, const xine_event_t* t);
         static void xine_display_frame( void* user_data, uint8_t* frame ,
-                                        int width, int height, int bytes );
+					int width, int height, int bytes );
+	static void xine_vo_scale_cb(void *, int, int, double,
+				     int*,int*,int*,int*,double*,int*,int*);
+	static void xine_dest_cb(void*,int,int,double,int*,int*,double*);
     };
 };
 

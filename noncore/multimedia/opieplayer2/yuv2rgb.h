@@ -2,6 +2,10 @@
 #ifndef HAVE_YUV2RGB_H
 #define HAVE_YUV2RGB_h
 
+#ifdef HAVE_MLIB
+#include <mlib_video.h>
+#endif
+
 #include <inttypes.h>
 
 typedef struct yuv2rgb_s yuv2rgb_t;
@@ -22,7 +26,6 @@ typedef void (*yuy22rgb_fun_t) (yuv2rgb_t *this, uint8_t * image, uint8_t * p);
 
 typedef uint32_t (*yuv2rgb_single_pixel_fun_t) (yuv2rgb_t *this, uint8_t y, uint8_t u, uint8_t v);
 
-
 /*
  * modes supported - feel free to implement yours
  */
@@ -41,7 +44,6 @@ typedef uint32_t (*yuv2rgb_single_pixel_fun_t) (yuv2rgb_t *this, uint8_t y, uint
 #define MODE_PALETTE 12
 
 struct yuv2rgb_s {
-
   /*
    * configure converter for scaling factors
    */
@@ -50,6 +52,16 @@ struct yuv2rgb_s {
 		    int y_stride, int uv_stride,
 		    int dest_width, int dest_height,
 		    int rgb_stride);
+
+  /*
+   * start a new field or frame if dest is NULL
+   */
+  int (*next_slice) (yuv2rgb_t *this, uint8_t **dest);
+
+  /*
+   * free resources
+   */
+  void (*dispose) (yuv2rgb_t *this);
 
   /*
    * this is the function to call for the yuv2rgb and scaling process
@@ -74,8 +86,9 @@ struct yuv2rgb_s {
   int               y_stride, uv_stride;
   int               dest_width, dest_height;
   int               rgb_stride;
+  int               slice_height, slice_offset;
   int               step_dx, step_dy;
-  int               do_scale;
+  int               do_scale, swapped;
 
   uint8_t          *y_buffer;
   uint8_t          *u_buffer;
@@ -84,14 +97,22 @@ struct yuv2rgb_s {
   void	           *u_chunk;
   void	           *v_chunk;
 
+#ifdef HAVE_MLIB
+  uint8_t          *mlib_buffer;
+  uint8_t          *mlib_resize_buffer;
+  void	           *mlib_chunk;
+  void	           *mlib_resize_chunk;
+  mlib_filter      mlib_filter_type;
+#endif
+
   void            **table_rV;
   void            **table_gU;
   int              *table_gV;
   void            **table_bU;
+  void             *table_mmx;
 
   uint8_t          *cmap;
-  scale_line_func_t scale_line;
-
+  scale_line_func_t scale_line;  
 } ;
 
 /*
@@ -99,19 +120,19 @@ struct yuv2rgb_s {
  */
 
 struct yuv2rgb_factory_s {
-
   yuv2rgb_t* (*create_converter) (yuv2rgb_factory_t *this);
 
-  /*
-   * adjust gamma (-100 to 100 looks fine)
+  /* 
+   * set color space conversion levels
    * for all converters produced by this factory
    */
-  void (*set_gamma) (yuv2rgb_factory_t *this, int gamma);
+  void (*set_csc_levels) (yuv2rgb_factory_t *this,
+			  int brightness, int contrast, int saturation);
 
   /*
-   * get gamma value
+   * free resources
    */
-  int (*get_gamma) (yuv2rgb_factory_t *this);
+  void (*dispose) (yuv2rgb_factory_t *this);
 
   /* private data */
 
@@ -119,34 +140,33 @@ struct yuv2rgb_factory_s {
   int      swapped;
   uint8_t *cmap;
 
-  int      gamma;
-  int      entry_size;
-
   uint32_t matrix_coefficients;
 
+  void    *table_base;
   void    *table_rV[256];
   void    *table_gU[256];
   int      table_gV[256];
   void    *table_bU[256];
+  void    *table_mmx_base;
+  void    *table_mmx;
 
   /* preselected functions for mode/swap/hardware */
   yuv2rgb_fun_t               yuv2rgb_fun;
   yuy22rgb_fun_t              yuy22rgb_fun;
   yuv2rgb_single_pixel_fun_t  yuv2rgb_single_pixel_fun;
-
 };
 
 yuv2rgb_factory_t *yuv2rgb_factory_init (int mode, int swapped, uint8_t *colormap);
 
-
+                   
 /*
  * internal stuff below this line
  */
 
-void mmx_yuv2rgb_set_gamma(int gamma);
+void mmx_yuv2rgb_set_csc_levels(yuv2rgb_factory_t *this,
+				int brightness, int contrast, int saturation);
 void yuv2rgb_init_mmxext (yuv2rgb_factory_t *this);
 void yuv2rgb_init_mmx (yuv2rgb_factory_t *this);
 void yuv2rgb_init_mlib (yuv2rgb_factory_t *this);
-void yuv2rgb_init_arm (yuv2rgb_factory_t *this);
 
 #endif

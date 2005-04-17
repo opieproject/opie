@@ -49,22 +49,17 @@ _;:,   .>  :=|.         This program is free software; you can
 
 typedef void (*display_xine_frame_t) (void *user_data, uint8_t* frame,
                       int  width, int height,int bytes );
+typedef void (*vo_scale_cb) (void*, int, int, double,
+                             int*, int*, int*, int*, double*, int*, int* );
+typedef void (*dest_size_cb) (void*, int, int, double, int*, int*, double*);
+
 
 extern "C" {
-    xine_vo_driver_t* init_video_out_plugin( xine_t *xine, void* video, display_xine_frame_t, void * );
+    xine_vo_driver_t* init_video_out_plugin( xine_t *xine, void* video, display_xine_frame_t, void *, vo_scale_cb,  dest_size_cb );
     int null_is_showing_video( const xine_vo_driver_t* self );
     void null_set_show_video( const xine_vo_driver_t* self, int show );
-    int null_is_fullscreen( const xine_vo_driver_t* self );
-    void null_set_fullscreen( const xine_vo_driver_t* self, int screen );
-    int null_is_scaling( const xine_vo_driver_t* self );
-    void null_set_scaling( const xine_vo_driver_t* self, int scale );
-    void null_set_gui_width( const xine_vo_driver_t* self, int width );
-    void null_set_gui_height( const xine_vo_driver_t* self, int height );
     void null_set_mode( const xine_vo_driver_t* self, int depth,  int rgb  );
-    void null_set_videoGamma( const  xine_vo_driver_t* self , int value );
     void null_display_handler( const xine_vo_driver_t* self, display_xine_frame_t t, void* user_data );
-
-    void null_preload_decoders( xine_stream_t *stream );
 }
 
 using namespace XINE;
@@ -127,7 +122,10 @@ void Lib::initialize()
     // allocate oss for sound
     // and fb for framebuffer
     m_audioOutput = xine_open_audio_driver( m_xine,  "oss", NULL );
-    m_videoOutput = ::init_video_out_plugin( m_xine, NULL, xine_display_frame, this );
+    m_videoOutput = ::init_video_out_plugin( m_xine, NULL,
+                                             xine_display_frame, this,
+                                             xine_vo_scale_cb,
+                                             xine_dest_cb );
 
     m_stream = xine_stream_new (m_xine,  m_audioOutput,  m_videoOutput );
     xine_set_param( m_stream, XINE_PARAM_AUDIO_CLOSE_DEVICE, 1);
@@ -138,8 +136,6 @@ void Lib::initialize()
 
     m_queue = xine_event_new_queue (m_stream);
     xine_event_create_listener_thread (m_queue, xine_event_handler, this);
-
-    ::null_preload_decoders( m_stream );
 
     m_duringInitialization = false;
 }
@@ -165,10 +161,8 @@ Lib::~Lib() {
 void Lib::resize ( const QSize &s ) {
     assert( m_initialized || m_duringInitialization );
 
-    if ( s. width ( ) && s. height ( ) ) {
-        ::null_set_gui_width( m_videoOutput,  s. width() );
-        ::null_set_gui_height( m_videoOutput,  s. height() );
-    }
+    if ( s. width ( ) && s. height ( ) )
+        m_videoSize = s;
 }
 
 int Lib::majorVersion() {
@@ -422,31 +416,33 @@ bool Lib::isShowingVideo() const {
 void Lib::showVideoFullScreen( bool fullScreen ) {
     assert( m_initialized );
 
-    ::null_set_fullscreen( m_videoOutput, fullScreen );
+    #warning use xine
 }
 
 bool Lib::isVideoFullScreen() const {
     assert( m_initialized );
 
-    return ::null_is_fullscreen( m_videoOutput );
+    #warning use xine
+    return false;
 }
 
 void Lib::setScaling( bool scale ) {
     assert( m_initialized );
 
-    ::null_set_scaling( m_videoOutput, scale );
+    xine_set_param( m_stream, XINE_PARAM_VO_ASPECT_RATIO,
+                    scale ? XINE_VO_ASPECT_AUTO : XINE_VO_ASPECT_SQUARE );
 }
 
 void Lib::setGamma( int value ) {
     assert( m_initialized );
-
-   ::null_set_videoGamma( m_videoOutput, value );
+    xine_set_param( m_stream, XINE_PARAM_VO_BRIGHTNESS, value );
 }
 
 bool Lib::isScaling() const {
     assert( m_initialized );
 
-    return ::null_is_scaling( m_videoOutput );
+    int aratio = xine_get_param( m_stream, XINE_PARAM_VO_ASPECT_RATIO );
+    return aratio == XINE_VO_ASPECT_AUTO;
 }
 
 void Lib::xine_event_handler( void* user_data, const xine_event_t* t ) {
@@ -458,14 +454,38 @@ void Lib::xine_display_frame( void* user_data, uint8_t *frame,
     ( (Lib*)user_data)->drawFrame( frame, width, height, bytes );
 }
 
+void Lib::xine_vo_scale_cb( void *user_data, int video_with, int video_height,
+                            double video_pixel_aspect,
+                            int *dest_x, int *dest_y, int *dest_width,
+                            int *dest_height, double *dest_pixel_aspect,
+                            int *win_x, int *win_y ) {
+    QSize size = ((Lib*)user_data)->m_videoSize;
+    if (!size.isValid())
+        return;
+
+    *dest_x      = 0;
+    *dest_y      = 0;
+    *dest_width  = size.width();
+    *dest_height = size.height();
+    *win_x       = 0;
+    *win_y       = 0;
+}
+
+void Lib::xine_dest_cb( void* user_data, int, int, double,
+                        int *dest_width, int* dest_height, double* ) {
+    QSize size = ((Lib*)user_data)->m_videoSize;
+    if ( !size.isValid() )
+        return;
+
+    *dest_width  = size.width();
+    *dest_height = size.height();
+}
+
 void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
     assert( m_initialized );
 
-    if ( !m_video ) {
+    if ( !m_video )
         return;
-    }
-
-//    assert( m_wid );
 
     if (m_wid) m_wid-> setVideoFrame ( frame, width, height, bytes );
 }

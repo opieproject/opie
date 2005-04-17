@@ -1,7 +1,8 @@
 /*
  * yuv2rgb.c
  *
- * This file is part of xine, a unix video player.
+ * Copyright (C) 2003-2004 the xine project
+ * This file is part of xine, a free video player.
  *
  * based on work from mpeg2dec:
  * Copyright (C) 1999-2001 Aaron Holtzman <aholtzma@ess.engr.uvic.ca>
@@ -22,7 +23,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: yuv2rgb.c,v 1.4 2002-12-19 21:41:50 harlekin Exp $
+ * $Id: yuv2rgb.c,v 1.5 2005-04-17 13:56:34 zecke Exp $
  */
 
 #include <stdio.h>
@@ -31,8 +32,14 @@
 #include <inttypes.h>
 
 #include "yuv2rgb.h"
-#include <xine/xineutils.h>
 
+#define LOG_MODULE "yuv2rgb"
+#define LOG_VERBOSE
+/*
+#define LOG
+*/
+
+#include <xine/xineutils.h>
 
 static int prof_scale_line = -1;
 
@@ -51,30 +58,67 @@ const int32_t Inverse_Table_6_9[8][4] = {
 };
 
 
-static void *my_malloc_aligned (size_t alignment, size_t size, void **chunk) {
-
+static void *my_malloc_aligned (size_t alignment, size_t size, void **chunk)
+{
   char *pMem;
 
   pMem = xine_xmalloc (size+alignment);
 
   *chunk = pMem;
 
-  while ((int) pMem % alignment)
+  while ((uintptr_t) pMem % alignment)
     pMem++;
 
   return pMem;
 }
 
 
+static int yuv2rgb_next_slice (yuv2rgb_t *this, uint8_t **dest)
+{
+  int y0, y1;
+
+  if (dest == NULL) {
+    this->slice_offset = 0;
+    this->slice_height = 16;
+    return 0;
+  }
+  if (this->slice_height == this->source_height) {
+    return this->dest_height;
+  }
+
+  y0 = (this->slice_offset * this->dest_height) / this->source_height;
+  y1 = ((this->slice_offset + this->slice_height) * this->dest_height) / this->source_height;
+  *dest += (this->rgb_stride * y0);
+
+  if ((this->slice_offset + this->slice_height) >= this->source_height) {
+    this->slice_offset = 0;
+    return (this->dest_height - y0);
+  } else {
+    this->slice_offset += this->slice_height;
+    return (y1 - y0);
+  }
+}
+
+static void yuv2rgb_dispose (yuv2rgb_t *this)
+{
+  free (this->y_chunk);
+  free (this->u_chunk);
+  free (this->v_chunk);
+#ifdef HAVE_MLIB
+  free (this->mlib_chunk);
+#endif
+  free (this);
+}
+
 static int yuv2rgb_configure (yuv2rgb_t *this, 
 			      int source_width, int source_height,
 			      int y_stride, int uv_stride,
 			      int dest_width, int dest_height,
 			      int rgb_stride) {
-  /*
+/*  
   printf ("yuv2rgb setup (%d x %d => %d x %d)\n", source_width, source_height,
 	  dest_width, dest_height);
-	  */
+*/	  
   if (prof_scale_line == -1)
     prof_scale_line = xine_profiler_allocate_slot("xshm scale line");
 
@@ -85,7 +129,9 @@ static int yuv2rgb_configure (yuv2rgb_t *this,
   this->dest_width    = dest_width;
   this->dest_height   = dest_height;
   this->rgb_stride    = rgb_stride;
-  
+  this->slice_height  = source_height;
+  this->slice_offset  = 0;
+
   if (this->y_chunk) {
     free (this->y_chunk);
     this->y_buffer = this->y_chunk = NULL;
@@ -99,10 +145,23 @@ static int yuv2rgb_configure (yuv2rgb_t *this,
     this->v_buffer = this->v_chunk = NULL;
   }
 
-  
+#ifdef HAVE_MLIB
+  if (this->mlib_chunk) {
+    free (this->mlib_chunk);
+    this->mlib_buffer = this->mlib_chunk = NULL;
+  }
+  if (this->mlib_resize_chunk) {
+    free (this->mlib_resize_chunk);
+    this->mlib_resize_buffer = this->mlib_resize_chunk = NULL;
+  }
+#endif
+
   this->step_dx = source_width  * 32768 / dest_width;
   this->step_dy = source_height * 32768 / dest_height;
-    
+/*
+  printf("yuv2rgb config: src_ht=%i, dst_ht=%i\n",source_height, dest_height);
+  printf("yuv2rgb config: step_dy=%i %f\n",this->step_dy, (float)this->step_dy / 32768.0);
+*/    
   this->scale_line = find_scale_line_func(this->step_dx);
 
   if ((source_width == dest_width) && (source_height == dest_height)) {
@@ -138,10 +197,22 @@ static int yuv2rgb_configure (yuv2rgb_t *this,
     this->v_buffer = my_malloc_aligned (16, (dest_width+1)/2, &this->v_chunk);
     if (!this->v_buffer)
       return 0;
+
+#if HAVE_MLIB
+    /* Only need these if we are resizing and in mlib code */
+    this->mlib_buffer = my_malloc_aligned (16, source_width*source_height*4, &this->mlib_chunk);
+    if (!this->mlib_buffer)
+      return 0;
+    /* Only need this one if we are 24 bit */
+    if((rgb_stride / dest_width) == 3) {
+      this->mlib_resize_buffer = my_malloc_aligned (16, dest_width*dest_height*4, &this->mlib_resize_chunk);
+      if (!this->mlib_resize_buffer)
+      return 0;
+    }
+#endif	
   }
   return 1;
 }
-
 
 static void scale_line_gen (uint8_t *source, uint8_t *dest,
 			    int width, int step) {
@@ -1204,16 +1275,29 @@ static scale_line_func_t find_scale_line_func(int step) {
     {  1,  1, scale_line_1_1,   "non-scaled" },
   };
   int i;
+#ifdef	LOG
+  /* to filter out multiple messages about the scale_line variant we're using */
+  static int reported_for_step;
+#endif
 
   for (i = 0; i < sizeof(scale_line)/sizeof(scale_line[0]); i++) {
     if (step == scale_line[i].src_step*32768/scale_line[i].dest_step) {
-	//printf("yuv2rgb: using %s optimized scale_line\n", scale_line[i].desc);
+#ifdef	LOG
+      if (step != reported_for_step)
+	printf("yuv2rgb: using %s optimized scale_line\n", scale_line[i].desc);
+      reported_for_step = step;
+#endif
       return scale_line[i].func;
     }
   }
-  //printf("yuv2rgb: using generic scale_line with interpolation\n");
-  return scale_line_gen;
 
+#ifdef	LOG
+  if (step != reported_for_step)
+    printf("yuv2rgb: using generic scale_line with interpolation\n");
+  reported_for_step = step;
+#endif
+
+  return scale_line_gen;
 }
 
 
@@ -1272,7 +1356,7 @@ static void scale_line_4 (uint8_t *source, uint8_t *dest,
 }
 
 
-#define RGB(i)							\
+#define X_RGB(i)							\
 	U = pu[i];						\
 	V = pv[i];						\
 	r = this->table_rV[V];					\
@@ -1348,7 +1432,7 @@ static void yuv2rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst,
 		this->dest_width, this->step_dx);
 
     dy = 0;
-    dst_height = this->dest_height;
+    dst_height = this->next_slice (this, &_dst);
 
     for (height = 0;; ) {
       dst_1 = (uint32_t*)_dst;
@@ -1359,16 +1443,16 @@ static void yuv2rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst,
       width = this->dest_width >> 3;
 
       do {
-	  RGB(0);
+	  X_RGB(0);
 	  DST1(0);
 
-	  RGB(1);
+	  X_RGB(1);
 	  DST1(1);
       
-	  RGB(2);
+	  X_RGB(2);
 	  DST1(2);
 
-	  RGB(3);
+	  X_RGB(3);
 	  DST1(3);
 
 	  pu += 4;
@@ -1412,7 +1496,7 @@ static void yuv2rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst,
       } while( dy>=32768);
     }
   } else {
-    height = this->source_height >> 1;
+    height = this->next_slice (this, &_dst) >> 1;
     do {
       dst_1 = (uint32_t*)_dst;
       dst_2 = (void*)( (uint8_t *)_dst + this->rgb_stride );
@@ -1423,19 +1507,19 @@ static void yuv2rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst,
 
       width = this->source_width >> 3;
       do {
-	RGB(0);
+	X_RGB(0);
 	DST1(0);
 	DST2(0);
 
-	RGB(1);
+	X_RGB(1);
 	DST2(1);
 	DST1(1);
 
-	RGB(2);
+	X_RGB(2);
 	DST1(2);
 	DST2(2);
 
-	RGB(3);
+	X_RGB(3);
 	DST2(3);
 	DST1(3);
       
@@ -1479,7 +1563,7 @@ static void yuv2rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst,
 		this->dest_width, this->step_dx);
 
     dy = 0;
-    dst_height = this->dest_height;
+    dst_height = this->next_slice (this, &_dst);
 
     for (height = 0;; ) {
       dst_1 = _dst;
@@ -1490,16 +1574,16 @@ static void yuv2rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst,
       width = this->dest_width >> 3;
 
       do {
-	  RGB(0);
+	  X_RGB(0);
 	  DST1RGB(0);
 
-	  RGB(1);
+	  X_RGB(1);
 	  DST1RGB(1);
       
-	  RGB(2);
+	  X_RGB(2);
 	  DST1RGB(2);
 
-	  RGB(3);
+	  X_RGB(3);
 	  DST1RGB(3);
 
 	  pu += 4;
@@ -1543,7 +1627,7 @@ static void yuv2rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst,
       } while (dy>=32768);
     }
   } else {
-    height = this->source_height >> 1;
+    height = this->next_slice (this, &_dst) >> 1;
     do {
       dst_1 = _dst;
       dst_2 = (void*)( (uint8_t *)_dst + this->rgb_stride );
@@ -1554,19 +1638,19 @@ static void yuv2rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst,
 
       width = this->source_width >> 3;
       do {
-	RGB(0);
+	X_RGB(0);
 	DST1RGB(0);
 	DST2RGB(0);
 
-	RGB(1);
+	X_RGB(1);
 	DST2RGB(1);
 	DST1RGB(1);
 
-	RGB(2);
+	X_RGB(2);
 	DST1RGB(2);
 	DST2RGB(2);
 
-	RGB(3);
+	X_RGB(3);
 	DST2RGB(3);
 	DST1RGB(3);
 
@@ -1610,7 +1694,7 @@ static void yuv2rgb_c_24_bgr (yuv2rgb_t *this, uint8_t * _dst,
 		this->dest_width, this->step_dx);
 
     dy = 0;
-    dst_height = this->dest_height;
+    dst_height = this->next_slice (this, &_dst);
 
     for (height = 0;; ) {
       dst_1 = _dst;
@@ -1621,16 +1705,16 @@ static void yuv2rgb_c_24_bgr (yuv2rgb_t *this, uint8_t * _dst,
       width = this->dest_width >> 3;
 
       do {
-	  RGB(0);
+	  X_RGB(0);
 	  DST1BGR(0);
 
-	  RGB(1);
+	  X_RGB(1);
 	  DST1BGR(1);
       
-	  RGB(2);
+	  X_RGB(2);
 	  DST1BGR(2);
 
-	  RGB(3);
+	  X_RGB(3);
 	  DST1BGR(3);
 
 	  pu += 4;
@@ -1675,7 +1759,7 @@ static void yuv2rgb_c_24_bgr (yuv2rgb_t *this, uint8_t * _dst,
     }
 
   } else {
-    height = this->source_height >> 1;
+    height = this->next_slice (this, &_dst) >> 1;
     do {
       dst_1 = _dst;
       dst_2 = (void*)( (uint8_t *)_dst + this->rgb_stride );
@@ -1685,19 +1769,19 @@ static void yuv2rgb_c_24_bgr (yuv2rgb_t *this, uint8_t * _dst,
       pv   = _pv;
       width = this->source_width >> 3;
       do {
-	RGB(0);
+	X_RGB(0);
 	DST1BGR(0);
 	DST2BGR(0);
 
-	RGB(1);
+	X_RGB(1);
 	DST2BGR(1);
 	DST1BGR(1);
 
-	RGB(2);
+	X_RGB(2);
 	DST1BGR(2);
 	DST2BGR(2);
 
-	RGB(3);
+	X_RGB(3);
 	DST2BGR(3);
 	DST1BGR(3);
 
@@ -1741,7 +1825,7 @@ static void yuv2rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst,
 		this->dest_width, this->step_dx);
 
     dy = 0;
-    dst_height = this->dest_height;
+    dst_height = this->next_slice (this, &_dst);
 
     for (height = 0;; ) {
       dst_1 = (uint16_t*)_dst;
@@ -1752,16 +1836,16 @@ static void yuv2rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst,
       width = this->dest_width >> 3;
 
       do {
-	  RGB(0);
+	  X_RGB(0);
 	  DST1(0);
 
-	  RGB(1);
+	  X_RGB(1);
 	  DST1(1);
       
-	  RGB(2);
+	  X_RGB(2);
 	  DST1(2);
 
-	  RGB(3);
+	  X_RGB(3);
 	  DST1(3);
 
 	  pu += 4;
@@ -1805,7 +1889,7 @@ static void yuv2rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst,
       } while( dy>=32768);
     }
   } else {
-    height = this->source_height >> 1;
+    height = this->next_slice (this, &_dst) >> 1;
     do {
       dst_1 = (uint16_t*)_dst;
       dst_2 = (void*)( (uint8_t *)_dst + this->rgb_stride );
@@ -1815,19 +1899,19 @@ static void yuv2rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst,
       pv   = _pv;
       width = this->source_width >> 3;
       do {
-	RGB(0);
+	X_RGB(0);
 	DST1(0);
 	DST2(0);
 
-	RGB(1);
+	X_RGB(1);
 	DST2(1);
 	DST1(1);
 
-	RGB(2);
+	X_RGB(2);
 	DST1(2);
 	DST2(2);
 
-	RGB(3);
+	X_RGB(3);
 	DST2(3);
 	DST1(3);
 
@@ -1871,7 +1955,7 @@ static void yuv2rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst,
 		this->dest_width, this->step_dx);
 
     dy = 0;
-    dst_height = this->dest_height;
+    dst_height = this->next_slice (this, &_dst);
 
     for (height = 0;; ) {
       dst_1 = (uint8_t*)_dst;
@@ -1882,16 +1966,16 @@ static void yuv2rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst,
       width = this->dest_width >> 3;
 
       do {
-	  RGB(0);
+	  X_RGB(0);
 	  DST1(0);
 
-	  RGB(1);
+	  X_RGB(1);
 	  DST1(1);
       
-	  RGB(2);
+	  X_RGB(2);
 	  DST1(2);
 
-	  RGB(3);
+	  X_RGB(3);
 	  DST1(3);
 
 	  pu += 4;
@@ -1935,7 +2019,7 @@ static void yuv2rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst,
       } while( dy>=32768 );
     }
   } else {
-    height = this->source_height >> 1;
+    height = this->next_slice (this, &_dst) >> 1;
     do {
       dst_1 = (uint8_t*)_dst;
       dst_2 = (void*)( (uint8_t *)_dst + this->rgb_stride );
@@ -1946,19 +2030,19 @@ static void yuv2rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst,
 
       width = this->source_width >> 3;
       do {
-	RGB(0);
+	X_RGB(0);
 	DST1(0);
 	DST2(0);
 
-	RGB(1);
+	X_RGB(1);
 	DST2(1);
 	DST1(1);
 
-	RGB(2);
+	X_RGB(2);
 	DST1(2);
 	DST2(2);
 
-	RGB(3);
+	X_RGB(3);
 	DST2(3);
 	DST1(3);
       
@@ -1990,7 +2074,7 @@ static void yuv2rgb_c_gray (yuv2rgb_t *this, uint8_t * _dst,
     scale_line_func_t scale_line = this->scale_line;
 
     dy = 0;
-    dst_height = this->dest_height;
+    dst_height = this->next_slice (this, &_dst);
 
     for (;;) {
       scale_line (_py, _dst, this->dest_width, this->step_dx);
@@ -2016,7 +2100,7 @@ static void yuv2rgb_c_gray (yuv2rgb_t *this, uint8_t * _dst,
       */
     }
   } else {
-    for (height = this->source_height; --height >= 0; ) {
+    for (height = this->next_slice (this, &_dst); --height >= 0; ) {
       xine_fast_memcpy(_dst, _py, this->dest_width);
       _dst += this->rgb_stride;
       _py += this->y_stride;
@@ -2046,7 +2130,7 @@ static void yuv2rgb_c_palette (yuv2rgb_t *this, uint8_t * _dst,
 		this->dest_width, this->step_dx);
 
     dy = 0;
-    dst_height = this->dest_height;
+    dst_height = this->next_slice (this, &_dst);
 
     for (height = 0;; ) {
       dst_1 = _dst;
@@ -2057,16 +2141,16 @@ static void yuv2rgb_c_palette (yuv2rgb_t *this, uint8_t * _dst,
       width = this->dest_width >> 3;
 
       do {
-	  RGB(0);
+	  X_RGB(0);
 	  DST1CMAP(0);
 
-	  RGB(1);
+	  X_RGB(1);
 	  DST1CMAP(1);
       
-	  RGB(2);
+	  X_RGB(2);
 	  DST1CMAP(2);
 
-	  RGB(3);
+	  X_RGB(3);
 	  DST1CMAP(3);
 
 	  pu += 4;
@@ -2110,7 +2194,7 @@ static void yuv2rgb_c_palette (yuv2rgb_t *this, uint8_t * _dst,
       } while( dy>=32768 );
     }
   } else {
-    height = this->source_height >> 1;
+    height = this->next_slice (this, &_dst) >> 1;
     do {
       dst_1 = _dst;
       dst_2 = _dst + this->rgb_stride;
@@ -2120,19 +2204,19 @@ static void yuv2rgb_c_palette (yuv2rgb_t *this, uint8_t * _dst,
       pv   = _pv;
       width = this->source_width >> 3;
       do {
-	RGB(0);
+	X_RGB(0);
 	DST1CMAP(0);
 	DST2CMAP(0);
 
-	RGB(1);
+	X_RGB(1);
 	DST2CMAP(1);
 	DST1CMAP(1);
 
-	RGB(2);
+	X_RGB(2);
 	DST1CMAP(2);
 	DST2CMAP(2);
 
-	RGB(3);
+	X_RGB(3);
 	DST2CMAP(3);
 	DST1CMAP(3);
 
@@ -2161,7 +2245,8 @@ static int div_round (int dividend, int divisor)
     return -((-dividend + (divisor>>1)) / divisor);
 }
 
-static void yuv2rgb_setup_tables (yuv2rgb_factory_t *this, int mode, int swapped) 
+static void yuv2rgb_set_csc_levels (yuv2rgb_factory_t *this,
+				    int brightness, int contrast, int saturation)
 {
   int i;
   uint8_t table_Y[1024];
@@ -2177,10 +2262,13 @@ static void yuv2rgb_setup_tables (yuv2rgb_factory_t *this, int mode, int swapped
   int cgu = -Inverse_Table_6_9[this->matrix_coefficients][2];
   int cgv = -Inverse_Table_6_9[this->matrix_coefficients][3];
 
+  int mode = this->mode;
+  int swapped = this->swapped;
+
   for (i = 0; i < 1024; i++) {
     int j;
 
-    j = (76309 * (i - 384 - 16) + 32768) >> 16;
+    j = (76309 * (i - 384 - 16 + brightness) + 32768) >> 16;
     j = (j < 0) ? 0 : ((j > 255) ? 255 : j);
     table_Y[i] = j;
   }
@@ -2188,7 +2276,10 @@ static void yuv2rgb_setup_tables (yuv2rgb_factory_t *this, int mode, int swapped
   switch (mode) {
   case MODE_32_RGB:
   case MODE_32_BGR:
-    table_32 = malloc ((197 + 2*682 + 256 + 132) * sizeof (uint32_t));
+    if (this->table_base == NULL) {
+      this->table_base = malloc ((197 + 2*682 + 256 + 132) * sizeof (uint32_t));
+    }
+    table_32 = this->table_base;
 
     entry_size = sizeof (uint32_t);
     table_r = table_32 + 197;
@@ -2217,7 +2308,10 @@ static void yuv2rgb_setup_tables (yuv2rgb_factory_t *this, int mode, int swapped
 
   case MODE_24_RGB:
   case MODE_24_BGR:
-    table_8 = malloc ((256 + 2*232) * sizeof (uint8_t));
+    if (this->table_base == NULL) {
+      this->table_base = malloc ((256 + 2*232) * sizeof (uint8_t));
+    }
+    table_8 = this->table_base;
 
     entry_size = sizeof (uint8_t);
     table_r = table_g = table_b = table_8 + 232;
@@ -2230,7 +2324,10 @@ static void yuv2rgb_setup_tables (yuv2rgb_factory_t *this, int mode, int swapped
   case MODE_16_BGR:
   case MODE_15_RGB:
   case MODE_16_RGB:
-    table_16 = malloc ((197 + 2*682 + 256 + 132) * sizeof (uint16_t));
+    if (this->table_base == NULL) {
+      this->table_base = malloc ((197 + 2*682 + 256 + 132) * sizeof (uint16_t));
+    }
+    table_16 = this->table_base;
 
     entry_size = sizeof (uint16_t);
     table_r = table_16 + 197;
@@ -2270,7 +2367,10 @@ static void yuv2rgb_setup_tables (yuv2rgb_factory_t *this, int mode, int swapped
 
   case MODE_8_RGB:
   case MODE_8_BGR:
-    table_8 = malloc ((197 + 2*682 + 256 + 132) * sizeof (uint8_t));
+    if (this->table_base == NULL) {
+      this->table_base = malloc ((197 + 2*682 + 256 + 132) * sizeof (uint8_t));
+    }
+    table_8 = this->table_base;
 
     entry_size = sizeof (uint8_t);
     table_r = table_8 + 197;
@@ -2294,7 +2394,10 @@ static void yuv2rgb_setup_tables (yuv2rgb_factory_t *this, int mode, int swapped
     return;
 
   case MODE_PALETTE:
-    table_16 = malloc ((197 + 2*682 + 256 + 132) * sizeof (uint16_t));
+    if (this->table_base == NULL) {
+      this->table_base = malloc ((197 + 2*682 + 256 + 132) * sizeof (uint16_t));
+    }
+    table_16 = this->table_base;
 
     entry_size = sizeof (uint16_t);
     table_r = table_16 + 197;
@@ -2318,8 +2421,8 @@ static void yuv2rgb_setup_tables (yuv2rgb_factory_t *this, int mode, int swapped
 
 
   default:
-    fprintf (stderr, "mode %d not supported by yuv2rgb\n", mode);
-    abort();
+    lprintf ("mode %d not supported by yuv2rgb\n", mode);
+    _x_abort();
   }
   
   for (i = 0; i < 256; i++) {
@@ -2331,8 +2434,10 @@ static void yuv2rgb_setup_tables (yuv2rgb_factory_t *this, int mode, int swapped
     this->table_bU[i] = (((uint8_t *)table_b) +
 			 entry_size * div_round (cbu * (i-128), 76309));
   }
-  this->gamma = 0;
-  this->entry_size = entry_size;
+
+#if defined(ARCH_X86) || defined(ARCH_X86_64)
+  mmx_yuv2rgb_set_csc_levels (this, brightness, contrast, saturation);
+#endif  
 }
 
 static uint32_t yuv2rgb_single_pixel_32 (yuv2rgb_t *this, uint8_t y, uint8_t u, uint8_t v)
@@ -2448,8 +2553,8 @@ static void yuv2rgb_c_init (yuv2rgb_factory_t *this)
     break;
 
   default:
-    printf ("yuv2rgb: mode %d not supported by yuv2rgb\n", this->mode);
-    abort();
+    lprintf ("mode %d not supported by yuv2rgb\n", this->mode);
+    _x_abort();
   }
 
 }
@@ -2491,8 +2596,8 @@ static void yuv2rgb_single_pixel_init (yuv2rgb_factory_t *this) {
     break;
 
   default:
-    printf ("yuv2rgb: mode %d not supported by yuv2rgb\n", this->mode);
-    abort();
+    lprintf ("mode %d not supported by yuv2rgb\n", this->mode);
+    _x_abort();
   }
 }
 
@@ -2520,7 +2625,7 @@ static void yuy22rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 		this->dest_width, this->step_dx);
   
   dy = 0;
-  height = this->dest_height;
+  height = this->next_slice (this, &_dst);
   
   for (;;) {
     dst_1 = (uint32_t*)_dst;
@@ -2532,16 +2637,16 @@ static void yuy22rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 
     do {
 
-      RGB(0);
+      X_RGB(0);
       DST1(0);
 
-      RGB(1);
+      X_RGB(1);
       DST1(1);
       
-      RGB(2);
+      X_RGB(2);
       DST1(2);
       
-      RGB(3);
+      X_RGB(3);
       DST1(3);
 
       pu += 4;
@@ -2564,7 +2669,7 @@ static void yuy22rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
     if (height <= 0)
       break;
 
-    _p += this->y_stride*2*(dy>>15);
+    _p += this->y_stride*(dy>>15);
     dy &= 32767;
     /*
       dy -= 32768;
@@ -2599,7 +2704,7 @@ static void yuy22rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 		this->dest_width, this->step_dx);
 
   dy = 0;
-  height = this->dest_height;
+  height = this->next_slice (this, &_dst);
   
   for (;;) {
     dst_1 = _dst;
@@ -2610,16 +2715,16 @@ static void yuy22rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
     width = this->dest_width >> 3;
     
     do {
-      RGB(0);
+      X_RGB(0);
       DST1RGB(0);
       
-      RGB(1);
+      X_RGB(1);
       DST1RGB(1);
       
-      RGB(2);
+      X_RGB(2);
       DST1RGB(2);
       
-      RGB(3);
+      X_RGB(3);
       DST1RGB(3);
 
       pu += 4;
@@ -2642,7 +2747,7 @@ static void yuy22rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
     if (height <= 0)
       break;
 
-    _p += this->y_stride*2*(dy>>15);
+    _p += this->y_stride*(dy>>15);
     dy &= 32767;
     /*
       dy -= 32768;
@@ -2677,7 +2782,7 @@ static void yuy22rgb_c_24_bgr (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 		this->dest_width, this->step_dx);
 
   dy = 0;
-  height = this->dest_height;
+  height = this->next_slice (this, &_dst);
   
   for (;;) {
     dst_1 = _dst;
@@ -2688,16 +2793,16 @@ static void yuy22rgb_c_24_bgr (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
     width = this->dest_width >> 3;
     
     do {
-      RGB(0);
+      X_RGB(0);
       DST1BGR(0);
       
-      RGB(1);
+      X_RGB(1);
       DST1BGR(1);
       
-      RGB(2);
+      X_RGB(2);
       DST1BGR(2);
 
-      RGB(3);
+      X_RGB(3);
       DST1BGR(3);
       
       pu += 4;
@@ -2720,7 +2825,7 @@ static void yuy22rgb_c_24_bgr (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
     if (height <= 0)
       break;
 
-    _p += this->y_stride*2*(dy>>15);
+    _p += this->y_stride*(dy>>15);
     dy &= 32767;
 
     scale_line_4 (_p+1, this->u_buffer,
@@ -2751,7 +2856,7 @@ static void yuy22rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 		this->dest_width, this->step_dx);
   
   dy = 0;
-  height = this->dest_height;
+  height = this->next_slice (this, &_dst);
 
   for (;;) {
     dst_1 = (uint16_t*)_dst;
@@ -2762,16 +2867,16 @@ static void yuy22rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
     width = this->dest_width >> 3;
     
     do {
-      RGB(0);
+      X_RGB(0);
       DST1(0);
 
-      RGB(1);
+      X_RGB(1);
       DST1(1);
       
-      RGB(2);
+      X_RGB(2);
       DST1(2);
       
-      RGB(3);
+      X_RGB(3);
       DST1(3);
 
       pu += 4;
@@ -2794,7 +2899,7 @@ static void yuy22rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
     if (height <= 0)
       break;
 
-    _p += this->y_stride*2*(dy>>15);
+    _p += this->y_stride*(dy>>15);
     dy &= 32767;
     
     scale_line_4 (_p+1, this->u_buffer,
@@ -2825,7 +2930,7 @@ static void yuy22rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 		this->dest_width, this->step_dx);
   
   dy = 0;
-  height = this->dest_height;
+  height = this->next_slice (this, &_dst);
   
   for (;;) {
     dst_1 = _dst;
@@ -2836,16 +2941,16 @@ static void yuy22rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
     width = this->dest_width >> 3;
     
     do {
-      RGB(0);
+      X_RGB(0);
       DST1(0);
       
-      RGB(1);
+      X_RGB(1);
       DST1(1);
 
-      RGB(2);
+      X_RGB(2);
       DST1(2);
       
-      RGB(3);
+      X_RGB(3);
       DST1(3);
 
       pu += 4;
@@ -2868,7 +2973,7 @@ static void yuy22rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
     if (height <= 0)
       break;
 
-    _p += this->y_stride*2*(dy>>15);
+    _p += this->y_stride*(dy>>15);
     dy &= 32767;
     
     scale_line_4 (_p+1, this->u_buffer,
@@ -2889,7 +2994,7 @@ static void yuy22rgb_c_gray (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 
   if (this->do_scale) {
     dy = 0;
-    height = this->dest_height;
+    height = this->next_slice (this, &_dst);
   
     for (;;) {
       scale_line_2 (_p, _dst, this->dest_width, this->step_dx);
@@ -2908,11 +3013,11 @@ static void yuy22rgb_c_gray (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
       if (height <= 0)
 	break;
 
-      _p += this->y_stride*2*(dy>>15);
+      _p += this->y_stride*(dy>>15);
       dy &= 32767;
     }
   } else {
-    for (height = this->source_height; --height >= 0; ) { 
+    for (height = this->next_slice (this, &_dst); --height >= 0; ) { 
       dst = _dst;
       y = _p;
       for (width = this->source_width; --width >= 0; ) {
@@ -2920,7 +3025,7 @@ static void yuy22rgb_c_gray (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 	y += 2;
       }
       _dst += this->rgb_stride;
-      _p += this->y_stride*2;
+      _p += this->y_stride;
     }
   }
 }
@@ -2942,7 +3047,7 @@ static void yuy22rgb_c_palette (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 		this->dest_width, this->step_dx);
     
   dy = 0;
-  height = this->dest_height;
+  height = this->next_slice (this, &_dst);
   
   for (;;) {
     dst_1 = _dst;
@@ -2953,16 +3058,16 @@ static void yuy22rgb_c_palette (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
     width = this->dest_width >> 3;
     
     do {
-      RGB(0);
+      X_RGB(0);
       DST1CMAP(0);
 
-      RGB(1);
+      X_RGB(1);
       DST1CMAP(1);
 
-      RGB(2);
+      X_RGB(2);
       DST1CMAP(2);
 
-      RGB(3);
+      X_RGB(3);
       DST1CMAP(3);
 
       pu += 4;
@@ -2985,7 +3090,7 @@ static void yuy22rgb_c_palette (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
     if (height <= 0)
       break;
 
-    _p += this->y_stride*2*(dy>>15);
+    _p += this->y_stride*(dy>>15);
     dy &= 32767;
 
     scale_line_4 (_p+1, this->u_buffer,
@@ -3033,64 +3138,59 @@ static void yuy22rgb_c_init (yuv2rgb_factory_t *this)
     break;
 
   default:
-    printf ("yuv2rgb: mode %d not supported for yuy2\n", this->mode);
+    lprintf ("mode %d not supported for yuy2\n", this->mode);
   }
 }
 
-yuv2rgb_t *yuv2rgb_create_converter (yuv2rgb_factory_t *factory) {
+static yuv2rgb_t *yuv2rgb_create_converter (yuv2rgb_factory_t *factory) {
 
   yuv2rgb_t *this = xine_xmalloc (sizeof (yuv2rgb_t));
-  
+
+  this->swapped			 = factory->swapped;
   this->cmap                     = factory->cmap;
 
   this->y_chunk = this->y_buffer = NULL;
   this->u_chunk = this->u_buffer = NULL;
   this->v_chunk = this->v_buffer = NULL;
 
+#ifdef HAVE_MLIB
+  this->mlib_chunk = this->mlib_buffer = NULL;
+  this->mlib_resize_chunk = this->mlib_resize_buffer = NULL;
+  this->mlib_filter_type = MLIB_BILINEAR;
+#endif
+
   this->table_rV                 = factory->table_rV;
   this->table_gU                 = factory->table_gU;
   this->table_gV                 = factory->table_gV;
   this->table_bU                 = factory->table_bU;
+  this->table_mmx                = factory->table_mmx;
 
   this->yuv2rgb_fun              = factory->yuv2rgb_fun;
   this->yuy22rgb_fun             = factory->yuy22rgb_fun;
   this->yuv2rgb_single_pixel_fun = factory->yuv2rgb_single_pixel_fun;
 
   this->configure                = yuv2rgb_configure;
+  this->next_slice               = yuv2rgb_next_slice;
+  this->dispose                  = yuv2rgb_dispose;
   return this;
 }
 
 /*
  * factory functions 
  */
-void yuv2rgb_set_gamma (yuv2rgb_factory_t *this, int gamma) {
-    
-    int i;
-    
-    for (i = 0; i < 256; i++) {
-	(uint8_t *)this->table_rV[i] += this->entry_size*(gamma - this->gamma);
-	(uint8_t *)this->table_gU[i] += this->entry_size*(gamma - this->gamma);
-	(uint8_t *)this->table_bU[i] += this->entry_size*(gamma - this->gamma);
-    }
-#ifdef ARCH_X86
-  mmx_yuv2rgb_set_gamma(gamma);
-#endif  
-  this->gamma = gamma;
-}
 
-int yuv2rgb_get_gamma (yuv2rgb_factory_t *this) {
+static void yuv2rgb_factory_dispose (yuv2rgb_factory_t *this) {
 
-  return this->gamma;
+  free (this->table_base);
+  free (this->table_mmx_base);
+  free (this);
 }
 
 yuv2rgb_factory_t* yuv2rgb_factory_init (int mode, int swapped, 
 					 uint8_t *cmap) {
 
   yuv2rgb_factory_t *this;
-
-#ifdef ARCH_X86
   uint32_t mm = xine_mm_accel();
-#endif
 
   this = malloc (sizeof (yuv2rgb_factory_t));
 
@@ -3098,54 +3198,65 @@ yuv2rgb_factory_t* yuv2rgb_factory_init (int mode, int swapped,
   this->swapped             = swapped;
   this->cmap                = cmap;
   this->create_converter    = yuv2rgb_create_converter;
-  this->set_gamma           = yuv2rgb_set_gamma;
-  this->get_gamma           = yuv2rgb_get_gamma;
+  this->set_csc_levels      = yuv2rgb_set_csc_levels;
+  this->dispose             = yuv2rgb_factory_dispose;
   this->matrix_coefficients = 6;
+  this->table_base          = NULL;
+  this->table_mmx           = NULL;
+  this->table_mmx_base      = NULL;
 
 
-  yuv2rgb_setup_tables (this, mode, swapped);
+  yuv2rgb_set_csc_levels (this, 0, 128, 128);
 
   /*
    * auto-probe for the best yuv2rgb function
    */
 
   this->yuv2rgb_fun = NULL;
-#ifdef ARCH_X86
+#if defined(ARCH_X86) || defined(ARCH_X86_64)
   if ((this->yuv2rgb_fun == NULL) && (mm & MM_ACCEL_X86_MMXEXT)) {
 
     yuv2rgb_init_mmxext (this);
 
+#ifdef LOG
     if (this->yuv2rgb_fun != NULL)
       printf ("yuv2rgb: using MMXEXT for colorspace transform\n");
+#endif
   }
 
   if ((this->yuv2rgb_fun == NULL) && (mm & MM_ACCEL_X86_MMX)) {
 
     yuv2rgb_init_mmx (this);
 
+#ifdef LOG
     if (this->yuv2rgb_fun != NULL)
       printf ("yuv2rgb: using MMX for colorspace transform\n");
-  }
 #endif
-#if HAVE_MLIB
-  if (this->yuv2rgb_fun == NULL) {
-
-    yuv2rgb_init_mlib (this);
-
-    if (this->yuv2rgb_fun != NULL)
-      printf ("yuv2rgb: using medialib for colorspace transform\n");
   }
-#endif
 #ifdef __arm__
   if (this->yuv2rgb_fun == NULL) {
   yuv2rgb_init_arm ( this );
-  
+
   if(this->yuv2rgb_fun != NULL)
-  	printf("yuv2rgb: using arm4l assembler for colorspace transform\n" );
+       printf("yuv2rgb: using arm4l assembler for colorspace transform\n" );
+  }
+#endif
+
+#endif
+#if HAVE_MLIB
+  if ((this->yuv2rgb_fun == NULL) && (mm & MM_ACCEL_MLIB)) {
+
+    yuv2rgb_init_mlib (this);
+
+#ifdef LOG
+    if (this->yuv2rgb_fun != NULL)
+      printf ("yuv2rgb: using medialib for colorspace transform\n");
+#endif
   }
 #endif
   if (this->yuv2rgb_fun == NULL) {
-    printf ("yuv2rgb: no accelerated colorspace conversion found\n");
+    lprintf ("no accelerated colorspace conversion found\n");
+
     yuv2rgb_c_init (this);
   }
 
@@ -3164,4 +3275,3 @@ yuv2rgb_factory_t* yuv2rgb_factory_init (int mode, int swapped,
 
   return this;
 }
-

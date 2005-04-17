@@ -2,7 +2,6 @@
                             This file is part of the Opie Project
 
                              Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
-                             Copyright (c)  2002 LJP <>
                              Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
 			     Copyright (c)  2002-2003 Miguel Freitas of xine
               =.
@@ -40,7 +39,6 @@
 #include <xine.h>
 #include <xine/video_out.h>
 #include <xine/xine_internal.h>
-//#include <xine/xineutils.h>
 #include <xine/vo_scale.h>
 #include <xine/buffer.h>
 
@@ -51,40 +49,43 @@
 #define printf(x,...)
 
 /*
-#define LOG
-*/
+ * #define LOG
+ */
 
 /* the caller for our event draw handler */
 typedef void (*display_xine_frame_t) (void *user_data, uint8_t* frame,
-              int  width, int height,int bytes );
+				      int  width, int height,int bytes );
+typedef void (*vo_scale_cb) (void*, int, int, double,
+			     int*, int*, int*, double*, int*, int* );
+typedef void (*dest_size_cb) (void*, int, int, double, int*, int*, double*);
+
 
 typedef struct null_driver_s null_driver_t;
 
 struct null_driver_s {
   vo_driver_t     vo_driver;
 
-  uint32_t             m_capabilities;
   int                  m_show_video;
   int                  m_video_fullscreen;
-  int                  m_is_scaling;
 
   int                  depth, bpp, bytes_per_pixel;
   int                  yuv2rgb_mode;
   int                  yuv2rgb_swap;
-  int                  yuv2rgb_gamma;
+  int                  yuv2rgb_brightness;
   uint8_t             *yuv2rgb_cmap;
   yuv2rgb_factory_t   *yuv2rgb_factory;
 
   vo_overlay_t        *overlay;
-  vo_scale_t           sc;  
+  vo_scale_t           sc;
 
-  int                  gui_width;
-  int                  gui_height;
-  int                  gui_changed;
-
-  double               display_ratio;
-  void*                caller;
+  /*
+   * DISPLAY to widget...
+   */
   display_xine_frame_t frameDis;
+  void *userData;
+
+  xine_t              *xine;
+  alphablend_t         alphablend_extra_data;
 };
 
 typedef struct opie_frame_s opie_frame_t;
@@ -105,13 +106,13 @@ struct opie_frame_s {
   uint8_t           *rgb_dst;
   int                yuv_stride;
   int                stripe_height, stripe_inc;
- 
+
   null_driver_t     *output;
 };
 
 static uint32_t null_get_capabilities( vo_driver_t *self ){
-  null_driver_t* this = (null_driver_t*)self;
-  return this->m_capabilities;
+    self = self;
+    return VO_CAP_YUY2 | VO_CAP_YV12;
 }
 
 static void null_frame_proc_slice (vo_frame_t *vo_img, uint8_t **src) {
@@ -119,8 +120,18 @@ static void null_frame_proc_slice (vo_frame_t *vo_img, uint8_t **src) {
 
   vo_img->proc_called = 1;
 
-  if (!frame->output->m_show_video) {
-    /* printf("nullvideo: no video\n");  */
+  /*
+   * drop hard if we don't show the video
+   */
+  if (!frame->output->m_show_video)
+    return;
+
+  if( frame->frame.crop_left  || frame->frame.crop_top ||
+      frame->frame.crop_right || frame->frame.crop_bottom )
+  {
+    /* we don't support crop, so don't even waste cpu cycles.
+     * cropping will be performed by video_out.c
+     */
     return;
   }
 
@@ -142,15 +153,15 @@ static void null_frame_field (vo_frame_t *vo_img, int which_field) {
 
   switch (which_field) {
   case VO_TOP_FIELD:
-    frame->rgb_dst    = (uint8_t *)frame->data;
+    frame->rgb_dst    = frame->data;
     frame->stripe_inc = 2*frame->stripe_height * frame->bytes_per_line;
     break;
   case VO_BOTTOM_FIELD:
-    frame->rgb_dst    = (uint8_t *)frame->data + frame->bytes_per_line ;
+    frame->rgb_dst    = frame->data + frame->bytes_per_line ;
     frame->stripe_inc = 2*frame->stripe_height * frame->bytes_per_line;
     break;
   case VO_BOTH_FIELDS:
-    frame->rgb_dst    = (uint8_t *)frame->data;
+    frame->rgb_dst    = frame->data;
     break;
   }
 }
@@ -177,6 +188,8 @@ static vo_frame_t* null_alloc_frame( vo_driver_t* self ){
 #endif
 
   frame = (opie_frame_t*)xine_xmalloc ( sizeof(opie_frame_t) );
+  if(!frame)
+      return NULL;
 
   memcpy (&frame->sc, &this->sc, sizeof(vo_scale_t));
 
@@ -187,6 +200,7 @@ static vo_frame_t* null_alloc_frame( vo_driver_t* self ){
   /* initialize the frame*/
   frame->frame.driver = self;
   frame->frame.proc_slice = null_frame_proc_slice;
+  frame->frame.proc_frame = NULL;
   frame->frame.field = null_frame_field;
   frame->frame.dispose = null_frame_dispose;
 
@@ -199,7 +213,7 @@ static vo_frame_t* null_alloc_frame( vo_driver_t* self ){
 }
 
 
-static void null_frame_compute_ideal_size( null_driver_t *this, 
+static void null_frame_compute_ideal_size( null_driver_t *this,
 					   opie_frame_t *frame ) {
     this = this;
 
@@ -229,23 +243,22 @@ static void null_frame_reallocate( null_driver_t *this, opie_frame_t *frame,
     /*
      * (re-) allocate
      */
-    if( frame->data ) {
-      if( frame->chunk[0] ){
-	  free( frame->chunk[0] );
-	  frame->chunk[0] = NULL;
-      }
-      if( frame->chunk[1] ){
-	  free ( frame->chunk[1] );
-	  frame->chunk[1] = NULL;
-      }
-      if( frame->chunk[2] ){
-	  free ( frame->chunk[2] );
-	  frame->chunk[2] = NULL;
-      }
-      free ( frame->data );
+    if( frame->chunk[0] ){
+	free( frame->chunk[0] );
+	frame->chunk[0] = NULL;
     }
+    if( frame->chunk[1] ){
+	free ( frame->chunk[1] );
+	frame->chunk[1] = NULL;
+    }
+    if( frame->chunk[2] ){
+	free ( frame->chunk[2] );
+	frame->chunk[2] = NULL;
+    }
+    if(frame->data)
+	free ( frame->data );
 
-      frame->data = xine_xmalloc (frame->sc.output_width
+    frame->data = xine_xmalloc (frame->sc.output_width
 				* frame->sc.output_height
 				* this->bytes_per_pixel );
 
@@ -301,7 +314,7 @@ static void null_setup_colorspace_converter(opie_frame_t *frame, int flags ) {
 
 static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 				      uint32_t width, uint32_t height,
-				      double ratio_code,  int format, 
+				      double ratio_code,  int format,
 				      int flags ){
   null_driver_t* this = (null_driver_t*) self;
   opie_frame_t*  frame = (opie_frame_t*)img;
@@ -310,28 +323,33 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
   fprintf (stderr, "nullvideo: update_frame_format\n");
 #endif
 
+  int gui_width  = 0;
+  int gui_height = 0;
+  double gui_pixel_aspect = 0.0;
+
   flags &= VO_BOTH_FIELDS;
 
-  /* find out if we need to adapt this frame */
+  frame->sc.dest_size_cb(frame->sc.user_data, width, height,
+			 frame->sc.video_pixel_aspect,
+			 &gui_width, &gui_height, &gui_pixel_aspect);
 
+  /* find out if we need to adapt this frame */
   if ((width != frame->sc.delivered_width)
       || (height != frame->sc.delivered_height)
       || (ratio_code != frame->sc.delivered_ratio)
       || (flags != frame->flags)
       || (format != frame->format)
       || (this->sc.user_ratio != frame->sc.user_ratio)
-      || (this->gui_width != frame->sc.gui_width)
-      || (this->gui_height != frame->sc.gui_height)) {
-
+      || (gui_width  != frame->sc.gui_width)
+      || (gui_height != frame->sc.gui_height)) {
     frame->sc.delivered_width      = width;
     frame->sc.delivered_height     = height;
     frame->sc.delivered_ratio      = ratio_code;
     frame->flags                   = flags;
     frame->format                  = format;
     frame->sc.user_ratio           = this->sc.user_ratio;
-    frame->sc.gui_width            = this->gui_width;
-    frame->sc.gui_height           = this->gui_height;
-    frame->sc.gui_pixel_aspect     = 1.0;
+    frame->sc.gui_width  = gui_width;
+    frame->sc.gui_height = gui_height;
 
 
     null_frame_compute_ideal_size(this, frame);
@@ -363,15 +381,15 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
     if (frame->data) {
 	switch (flags) {
 	    case VO_TOP_FIELD:
-		frame->rgb_dst    = (uint8_t *)frame->data;
+		frame->rgb_dst    = frame->data;
 		frame->stripe_inc = 2 * frame->stripe_height * frame->bytes_per_line;
 		break;
 	    case VO_BOTTOM_FIELD:
-		frame->rgb_dst    = (uint8_t *)frame->data + frame->bytes_per_line ;
+		frame->rgb_dst    = frame->data + frame->bytes_per_line ;
 		frame->stripe_inc = 2 * frame->stripe_height * frame->bytes_per_line;
 		break;
 	    case VO_BOTH_FIELDS:
-		frame->rgb_dst    = (uint8_t *)frame->data;
+		frame->rgb_dst    = frame->data;
 		frame->stripe_inc = frame->stripe_height * frame->bytes_per_line;
 		break;
 	}
@@ -387,7 +405,7 @@ static void null_display_frame( vo_driver_t* self, vo_frame_t *frame_gen ){
     return;
 
   if( display != NULL ) {
-    (*display)(this->caller, frame->data,
+    (*display)(this->userData, frame->data,
 	       frame->sc.output_width, frame->sc.output_height,
 	       frame->bytes_per_line );
   }
@@ -442,28 +460,31 @@ static void null_overlay_blend ( vo_driver_t *this_gen, vo_frame_t *frame_gen,
 
     switch(this->bpp) {
 	case 16:
-	    blend_rgb16((uint8_t *)frame->data,
+	    blend_rgb16(frame->data,
 			overlay,
 			frame->sc.output_width,
 			frame->sc.output_height,
 			frame->sc.delivered_width,
-			frame->sc.delivered_height);
+			frame->sc.delivered_height,
+			&this->alphablend_extra_data);
 	break;
 	case 24:
-	    blend_rgb24((uint8_t *)frame->data,
+	    blend_rgb24(frame->data,
 			overlay,
 			frame->sc.output_width,
 			frame->sc.output_height,
 			frame->sc.delivered_width,
-			frame->sc.delivered_height);
+			frame->sc.delivered_height,
+			&this->alphablend_extra_data);
 	break;
 	case 32:
-	    blend_rgb32((uint8_t *)frame->data,
+	    blend_rgb32(frame->data,
 			overlay,
 			frame->sc.output_width,
 			frame->sc.output_height,
 			frame->sc.delivered_width,
-			frame->sc.delivered_height);
+			frame->sc.delivered_height,
+			&this->alphablend_extra_data);
 	break;
 	default:
         /* It should never get here */
@@ -474,7 +495,6 @@ static void null_overlay_blend ( vo_driver_t *this_gen, vo_frame_t *frame_gen,
 
 
 static int null_get_property( vo_driver_t* self, int property ){
-#if 0
   null_driver_t *this = (null_driver_t *)self;
 
   switch(property)
@@ -490,16 +510,11 @@ static int null_get_property( vo_driver_t* self, int property ){
     default:
 	break;
   }
-#else
-  property = property;
-  self = self;
-#endif
 
   return 0;
 }
 static int null_set_property( vo_driver_t* self, int property,
 			      int value ){
-#if 0
   null_driver_t *this = (null_driver_t *)self;
 
   switch(property)
@@ -517,88 +532,84 @@ static int null_set_property( vo_driver_t* self, int property,
       default:
 	  break;
   }
-#else
-  self = self;
-  property = property;
-#endif
 
   return value;
 }
 static void null_get_property_min_max( vo_driver_t* self,
 				       int property, int *min,
 				       int *max ){
-  self = self;
-  property = property;
-
-  *max = 0;
-  *min = 0;
+ if(property == VO_PROP_BRIGHTNESS) {
+     *min = -100;
+     *max = +100;
+ }else {
+     *min = 0;
+     *max = 0;
+ }
 }
 static int null_gui_data_exchange( vo_driver_t* self,
 				   int data_type,
 				   void *data ){
-  self = self;
-  data_type = data_type;
-  data = data;
-
   return 0;
 }
 
 static void null_dispose ( vo_driver_t* self ){
   null_driver_t* this = (null_driver_t*)self;
+  _x_alphablend_free(&this->alphablend_extra_data);
   free ( this );
 }
 static int null_redraw_needed( vo_driver_t* self ){
-    self = self;
-
-    return 0;
+    null_driver_t *this = (null_driver_t*)self;
+    return _x_vo_scale_redraw_needed(&this->sc);
 }
 
 
 xine_video_port_t* init_video_out_plugin( xine_t *xine,
-					 void* video,
-					 display_xine_frame_t frameDisplayFunc,
-					 void *userData ){
-  video = video;
-
-
+					  void* video,
+					  display_xine_frame_t frameDisplayFunc,
+					  void *userData, vo_scale_cb frame_cb,
+					  dest_size_cb dest_cb) {
   null_driver_t *vo;
-  vo = (null_driver_t*)malloc( sizeof(null_driver_t ) );
+  vo = (null_driver_t*)xine_xmalloc(sizeof(null_driver_t ));
+  vo->xine = xine;
 
-  /* memset? */
-  memset(vo,0, sizeof(null_driver_t ) );
-
+  _x_alphablend_init(&vo->alphablend_extra_data, xine);
   _x_vo_scale_init (&vo->sc, 0, 0, xine->config);
+  vo->sc.gui_width  = 18;
+  vo->sc.gui_height = 6;
+  vo->sc.user_ratio = XINE_VO_ASPECT_AUTO;
+  vo->sc.user_data  = userData;
+  vo->sc.frame_output_cb = frame_cb;
+  vo->sc.dest_size_cb    = dest_cb;
 
-  vo->sc.gui_pixel_aspect = 1.0;
 
   vo->m_show_video = 0; // false
-  vo->m_video_fullscreen = 0;
-  vo->m_is_scaling = 0;
-  vo->display_ratio = 1.0;
-  vo->gui_width = 16;
-  vo->gui_height = 8;
-  vo->frameDis = NULL;
 
   /* install callback handlers*/
-  vo->vo_driver.get_capabilities      = null_get_capabilities;
-  vo->vo_driver.alloc_frame           = null_alloc_frame;
-  vo->vo_driver.update_frame_format   = null_update_frame_format;
-  vo->vo_driver.display_frame         = null_display_frame;
-  vo->vo_driver.overlay_blend         = null_overlay_blend;
-  vo->vo_driver.get_property          = null_get_property;
-  vo->vo_driver.set_property          = null_set_property;
-  vo->vo_driver.get_property_min_max  = null_get_property_min_max;
-  vo->vo_driver.gui_data_exchange     = null_gui_data_exchange;
-  vo->vo_driver.dispose               = null_dispose;
-  vo->vo_driver.redraw_needed         = null_redraw_needed;
-    
+  vo->vo_driver.get_capabilities    = null_get_capabilities;
+  vo->vo_driver.alloc_frame         = null_alloc_frame;
+  vo->vo_driver.update_frame_format = null_update_frame_format;
+  vo->vo_driver.display_frame       = null_display_frame;
+  vo->vo_driver.overlay_begin       = 0;
+  vo->vo_driver.overlay_blend       = null_overlay_blend;
+  vo->vo_driver.overlay_end         = 0;
+  vo->vo_driver.get_property        = null_get_property;
+  vo->vo_driver.set_property        = null_set_property;
+  vo->vo_driver.get_property_min_max= null_get_property_min_max;
+  vo->vo_driver.gui_data_exchange   = null_gui_data_exchange;
+  vo->vo_driver.dispose             = null_dispose;
+  vo->vo_driver.redraw_needed       = null_redraw_needed;
 
   /* capabilities */
-  vo->m_capabilities = VO_CAP_YUY2 | VO_CAP_YV12;
-  vo->yuv2rgb_factory = yuv2rgb_factory_init (MODE_16_RGB, vo->yuv2rgb_swap,
+  vo->yuv2rgb_mode       = MODE_16_RGB;
+  vo->yuv2rgb_brightness = 0;
+  vo->yuv2rgb_factory = yuv2rgb_factory_init (vo->yuv2rgb_mode,
+					      vo->yuv2rgb_swap,
 					      vo->yuv2rgb_cmap);
+  vo->yuv2rgb_factory->set_csc_levels(vo->yuv2rgb_factory,
+				      vo->yuv2rgb_brightness,
+				      128,128);
 
-  vo->caller = userData;
+  vo->userData = userData;
   vo->frameDis = frameDisplayFunc;
 
   return _x_vo_new_port(xine, &vo->vo_driver, 0);
@@ -621,31 +632,6 @@ void null_set_show_video( xine_vo_driver_t* self, int show ) {
   ((null_driver_t*)self->driver)->m_show_video = show;
 }
 
-int null_is_fullscreen( xine_vo_driver_t* self ){
-  return ((null_driver_t*)self->driver)->m_video_fullscreen;
-}
-void null_set_fullscreen( xine_vo_driver_t* self, int screen ){
-  ((null_driver_t*)self->driver)->m_video_fullscreen = screen;
-}
-int null_is_scaling( xine_vo_driver_t* self ){
-  return ((null_driver_t*)self->driver)->m_is_scaling;
-}
-
-void null_set_videoGamma( xine_vo_driver_t* self , int value ) {
-  ((null_driver_t*) self->driver) ->yuv2rgb_gamma = value;
-  ((null_driver_t*) self->driver) ->yuv2rgb_factory->set_gamma( ((null_driver_t*) self->driver) ->yuv2rgb_factory, value );
-}
-
-void null_set_scaling( xine_vo_driver_t* self, int scale ) {
-  ((null_driver_t*)self->driver)->m_is_scaling = scale;
-}
-
-void null_set_gui_width( xine_vo_driver_t* self, int width ) {
-  ((null_driver_t*)self->driver)->gui_width = width;
-}
-void null_set_gui_height( xine_vo_driver_t* self, int height ) {
-  ((null_driver_t*)self->driver)->gui_height = height;
-}
 
 
 void null_set_mode( xine_vo_driver_t* self, int depth,  int rgb  ) {
@@ -654,7 +640,7 @@ void null_set_mode( xine_vo_driver_t* self, int depth,  int rgb  ) {
   this->bytes_per_pixel = (depth + 7 ) / 8;
   this->bpp = this->bytes_per_pixel * 8;
   this->depth = depth;
- 
+
   switch ( this->depth ) {
   case 32:
     if( rgb == 0 )
@@ -697,39 +683,13 @@ void null_set_mode( xine_vo_driver_t* self, int depth,  int rgb  ) {
     }
     break;
   };
-  //free(this->yuv2rgb_factory );
-  // this->yuv2rgb_factory = yuv2rgb_factory_init (this->yuv2rgb_mode, this->yuv2rgb_swap, 
-  //            this->yuv2rgb_cmap);
 };
 
-void null_display_handler( xine_vo_driver_t* self, display_xine_frame_t t, 
-         void* user_data ) {
+void null_display_handler( xine_vo_driver_t* self, display_xine_frame_t t,
+			   void* user_data ) {
   null_driver_t* this = (null_driver_t*) self->driver;
-  this->caller = user_data;
+  this->userData = user_data;
   this->frameDis = t;
 }
 
-void null_preload_decoders( xine_stream_t *stream )
-{
-    static const uint32_t preloadedAudioDecoders[] = { BUF_AUDIO_MPEG, BUF_AUDIO_VORBIS };
-    static const uint8_t preloadedAudioDecoderCount = sizeof( preloadedAudioDecoders ) / sizeof( preloadedAudioDecoders[ 0 ] );
-    static const uint32_t preloadedVideoDecoders[] = { BUF_VIDEO_MPEG, BUF_VIDEO_MPEG4, BUF_VIDEO_DIVX5 };
-    static const uint8_t preloadedVideoDecoderCount = sizeof( preloadedVideoDecoders ) / sizeof( preloadedVideoDecoders[ 0 ] );
-
-    uint8_t i;
-#if 0
-
-    for ( i = 0; i < preloadedAudioDecoderCount; ++i ) {
-	audio_decoder_t *decoder = get_audio_decoder( stream, ( preloadedAudioDecoders[ i ] >> 16 ) & 0xff );
-	decoder = decoder;
-/*        free_audio_decoder( stream, decoder ); */
-    }
-
-    for ( i = 0; i < preloadedVideoDecoderCount; ++i ) {
-	video_decoder_t *decoder = get_video_decoder( stream, ( preloadedVideoDecoders[ i ] >> 16 ) & 0xff );
-	 decoder = decoder;
-/*         free_video_decoder( stream, decoder ); */
-    }
-#endif
-}
 
