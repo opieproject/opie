@@ -2,10 +2,13 @@
 
 	Fixed Bugs
 	----------
-	* n.a.	- scale O-Menu-Applets appropriately (mickeyl)
 	* #1535	- Missing line break and unnecessary location shown with Today-Calendar plugin (deller)
+	* #1565 - crash-fix in odevice.cpp while scanning the distribution table (deller)
 	* n.a.	- always show volume and wireless applet popups inside visible screen (deller)
-	* #1565	- crash-fix in odevice.cpp while scanning the distribution table (deller)
+	* n.a.  - scale O-Menu-Applets appropriately (mickeyl)
+	* n.a.	- libopienet: fix bugs in wireless scanning and setting SSID (skyhusker)
+	* n.a.	- Wellenreiter: relax WE version matching test a bit (mickeyl)
+
 
 2005-03-25	Opie 1.2.0
 
@@ -15,7 +18,7 @@
 	* #1620 - OFileSelector - show the button on press and not on press on hold (alwin)
 	* #1473 - Opie-Eye - Same as #1620 but we lack a common FileSystem Button class (zecke)
 	* n.a.  - PackageManager - fix bug where messages show up multiple times in install dialog (drw)
-	* n.a.   - make qpeglobal.h include qglobal.h (zecke)
+	* n.a.	- make qpeglobal.h include qglobal.h (zecke)
 
 2005-03-20	Opie 1.2.0-rc1
 
