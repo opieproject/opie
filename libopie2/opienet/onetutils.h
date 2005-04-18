@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-
-                             (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+                             (C) 2003-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
               =.
             .=l.
            .>+-=
@@ -10,7 +9,7 @@
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
  - .   .-<_>     .<>         Foundation; version 2 of the License.
-     ._= =}       :           
+     ._= =}       :
     .%`+i>       _;_.
     .i_,=:_.      -<s.       This program is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
@@ -150,12 +149,32 @@ int stringToMode( const QString& );
 #define IW_PRIV_SIZE_FIXED      0x0800
 #define IW_PRIV_SIZE_MASK       0x07FF
 
+#define IW_HEADER_TYPE_NULL     0       /* Not available */
+#define IW_HEADER_TYPE_CHAR     2       /* char [IFNAMSIZ] */
+#define IW_HEADER_TYPE_UINT     4       /* __u32 */
+#define IW_HEADER_TYPE_FREQ     5       /* struct iw_freq */
+#define IW_HEADER_TYPE_ADDR     6       /* struct sockaddr */
+#define IW_HEADER_TYPE_POINT    8       /* struct iw_point */
+#define IW_HEADER_TYPE_PARAM    9       /* struct iw_param */
+#define IW_HEADER_TYPE_QUAL     10      /* struct iw_quality */
+
+#define IW_EV_POINT_OFF (((char *) &(((struct iw_point *) NULL)->length)) - \
+                                  (char *) NULL)
+
 #ifndef ARPHRD_IEEE80211
 #define ARPHRD_IEEE80211 801
 #endif
 #ifndef ARPHRD_IEEE80211_PRISM
 #define ARPHRD_IEEE80211_PRISM 802
 #endif
+
+/* Wireless Extension Scanning Stuff */
+struct iw_stream_descr
+{
+    char *        end;            /* End of the stream */
+    char *        current;        /* Current event in stream of events */
+    char *        value;          /* Current value in event */
+};
 
 
 /* Network to host order macros */

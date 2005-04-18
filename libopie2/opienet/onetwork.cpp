@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2003-2004 by Michael 'Mickey' Lauer
-              =.             <mickey@Vanille.de>
+                             Copyright (C) 2003-2005 by Michael 'Mickey' Lauer <mickey@Vanille.de>
+              =.
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -9,7 +9,7 @@
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
  - .   .-<_>     .<>         Foundation; version 2 of the License.
-     ._= =}       :           
+     ._= =}       :
     .%`+i>       _;_.
     .i_,=:_.      -<s.       This program is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
@@ -57,7 +57,6 @@
 
 #ifndef NODEBUG
 #include <opie2/odebugmapper.h>
-
 
 using namespace Opie::Core;
 using namespace Opie::Net::Internal;
@@ -865,7 +864,7 @@ QString OWirelessNetworkInterface::SSID() const
 void OWirelessNetworkInterface::setSSID( const QString& ssid )
 {
     _iwr.u.essid.pointer = const_cast<char*>( (const char*) ssid );
-    _iwr.u.essid.length = ssid.length();
+    _iwr.u.essid.length = ssid.length()+1; // zero byte
     wioctl( SIOCSIWESSID );
 }
 
@@ -881,7 +880,7 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
 
     OStationList* stations = new OStationList();
 
-    int timeout = 1000000;
+    int timeout = 10000000;
 
     odebug << "ONetworkInterface::scanNetwork() - scan started." << oendl;
 
@@ -935,14 +934,180 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
         dumpBytes( (const unsigned char*) &buffer[0], _iwr.u.data.length );
 
         // parse results
+        struct iw_event iwe;
+        struct iw_stream_descr stream;
+        unsigned int cmd_index, event_type, event_len;
+        char *pointer;
 
-        int offset = 0;
-        struct iw_event* we = (struct iw_event*) &buffer[0];
+        const char standard_ioctl_hdr[] = {
+                IW_HEADER_TYPE_NULL,    /* SIOCSIWCOMMIT */
+                IW_HEADER_TYPE_CHAR,    /* SIOCGIWNAME */
+                IW_HEADER_TYPE_PARAM,   /* SIOCSIWNWID */
+                IW_HEADER_TYPE_PARAM,   /* SIOCGIWNWID */
+                IW_HEADER_TYPE_FREQ,    /* SIOCSIWFREQ */
+                IW_HEADER_TYPE_FREQ,    /* SIOCGIWFREQ */
+                IW_HEADER_TYPE_UINT,    /* SIOCSIWMODE */
+                IW_HEADER_TYPE_UINT,    /* SIOCGIWMODE */
+                IW_HEADER_TYPE_PARAM,   /* SIOCSIWSENS */
+                IW_HEADER_TYPE_PARAM,   /* SIOCGIWSENS */
+                IW_HEADER_TYPE_NULL,    /* SIOCSIWRANGE */
+                IW_HEADER_TYPE_POINT,   /* SIOCGIWRANGE */
+                IW_HEADER_TYPE_NULL,    /* SIOCSIWPRIV */
+                IW_HEADER_TYPE_POINT,   /* SIOCGIWPRIV */
+                IW_HEADER_TYPE_NULL,    /* SIOCSIWSTATS */
+                IW_HEADER_TYPE_POINT,   /* SIOCGIWSTATS */
+                IW_HEADER_TYPE_POINT,   /* SIOCSIWSPY */
+                IW_HEADER_TYPE_POINT,   /* SIOCGIWSPY */
+                IW_HEADER_TYPE_POINT,   /* SIOCSIWTHRSPY */
+                IW_HEADER_TYPE_POINT,   /* SIOCGIWTHRSPY */
+                IW_HEADER_TYPE_ADDR,    /* SIOCSIWAP */
+                IW_HEADER_TYPE_ADDR,    /* SIOCGIWAP */
+                IW_HEADER_TYPE_NULL,    /* -- hole -- */
+                IW_HEADER_TYPE_POINT,   /* SIOCGIWAPLIST */
+                IW_HEADER_TYPE_PARAM,   /* SIOCSIWSCAN */
+                IW_HEADER_TYPE_POINT,   /* SIOCGIWSCAN */
+                IW_HEADER_TYPE_POINT,   /* SIOCSIWESSID */
+                IW_HEADER_TYPE_POINT,   /* SIOCGIWESSID */
+                IW_HEADER_TYPE_POINT,   /* SIOCSIWNICKN */
+                IW_HEADER_TYPE_POINT,   /* SIOCGIWNICKN */
+                IW_HEADER_TYPE_NULL,    /* -- hole -- */
+                IW_HEADER_TYPE_NULL,    /* -- hole -- */
+                IW_HEADER_TYPE_PARAM,   /* SIOCSIWRATE */
+                IW_HEADER_TYPE_PARAM,   /* SIOCGIWRATE */
+                IW_HEADER_TYPE_PARAM,   /* SIOCSIWRTS */
+                IW_HEADER_TYPE_PARAM,   /* SIOCGIWRTS */
+                IW_HEADER_TYPE_PARAM,   /* SIOCSIWFRAG */
+                IW_HEADER_TYPE_PARAM,   /* SIOCGIWFRAG */
+                IW_HEADER_TYPE_PARAM,   /* SIOCSIWTXPOW */
+                IW_HEADER_TYPE_PARAM,   /* SIOCGIWTXPOW */
+                IW_HEADER_TYPE_PARAM,   /* SIOCSIWRETRY */
+                IW_HEADER_TYPE_PARAM,   /* SIOCGIWRETRY */
+                IW_HEADER_TYPE_POINT,   /* SIOCSIWENCODE */
+                IW_HEADER_TYPE_POINT,   /* SIOCGIWENCODE */
+                IW_HEADER_TYPE_PARAM,   /* SIOCSIWPOWER */
+                IW_HEADER_TYPE_PARAM,   /* SIOCGIWPOWER */
+        };
 
-        while ( offset < _iwr.u.data.length )
+        const char standard_event_hdr[] = {
+                IW_HEADER_TYPE_ADDR,    /* IWEVTXDROP */
+                IW_HEADER_TYPE_QUAL,    /* IWEVQUAL */
+                IW_HEADER_TYPE_POINT,   /* IWEVCUSTOM */
+                IW_HEADER_TYPE_ADDR,    /* IWEVREGISTERED */
+                IW_HEADER_TYPE_ADDR,    /* IWEVEXPIRED */
+                IW_HEADER_TYPE_POINT,   /* IWEVGENIE */
+                IW_HEADER_TYPE_POINT,   /* IWEVMICHAELMICFAILURE */
+                IW_HEADER_TYPE_POINT,   /* IWEVASSOCREQIE */
+                IW_HEADER_TYPE_POINT,   /* IWEVASSOCRESPIE */
+                IW_HEADER_TYPE_POINT,   /* IWEVPMKIDCAND */
+        };
+
+
+        const int event_type_size[] = {
+                IW_EV_LCP_LEN,          /* IW_HEADER_TYPE_NULL */
+                0,
+                IW_EV_CHAR_LEN,         /* IW_HEADER_TYPE_CHAR */
+                0,
+                IW_EV_UINT_LEN,         /* IW_HEADER_TYPE_UINT */
+                IW_EV_FREQ_LEN,         /* IW_HEADER_TYPE_FREQ */
+                IW_EV_ADDR_LEN,         /* IW_HEADER_TYPE_ADDR */
+                0,
+                IW_EV_POINT_LEN,        /* Without variable payload */
+                IW_EV_PARAM_LEN,        /* IW_HEADER_TYPE_PARAM */
+                IW_EV_QUAL_LEN,         /* IW_HEADER_TYPE_QUAL */
+        };
+
+
+        //Initialize the stream
+        memset( &stream, 0, sizeof(struct iw_stream_descr) );
+        stream.current = buffer;
+        stream.end = buffer + _iwr.u.data.length;
+
+        do
         {
-            //const char* cmd = *(*_ioctlmap)[we->cmd];
-            //if ( !cmd ) cmd = "<unknown>";
+            if ((stream.current + IW_EV_LCP_LEN) > stream.end)
+                break;
+            memcpy((char *) &iwe, stream.current, IW_EV_LCP_LEN);
+
+            if (iwe.len <= IW_EV_LCP_LEN) //If yes, it is an invalid event
+                break;
+            if (iwe.cmd <= SIOCIWLAST) {
+                cmd_index = iwe.cmd - SIOCIWFIRST;
+
+                if(cmd_index < sizeof(standard_ioctl_hdr))
+                    event_type = standard_ioctl_hdr[cmd_index];
+            }
+            else {
+                cmd_index = iwe.cmd - IWEVFIRST;
+
+                if(cmd_index < sizeof(standard_event_hdr))
+                    event_type = standard_event_hdr[cmd_index];
+            }
+
+            /* Unknown events -> event_type=0 => IW_EV_LCP_LEN */
+            event_len = event_type_size[event_type];
+
+            /* Fixup for later version of WE */
+            if((_range.we_version_compiled > 18) && (event_type == IW_HEADER_TYPE_POINT))
+                event_len -= IW_EV_POINT_OFF;
+
+            /* Check if we know about this event */
+            if(event_len <= IW_EV_LCP_LEN) {
+                /* Skip to next event */
+                stream.current += iwe.len;
+                continue;
+            }
+
+            event_len -= IW_EV_LCP_LEN;
+
+            /* Set pointer on data */
+            if(stream.value != NULL)
+                pointer = stream.value;                    /* Next value in event */
+            else
+                pointer = stream.current + IW_EV_LCP_LEN;  /* First value in event */
+
+            if((pointer + event_len) > stream.end) {
+                /* Go to next event */
+                stream.current += iwe.len;
+                break;
+            }
+
+            /* Fixup for later version of WE */
+            if((_range.we_version_compiled > 18) && (event_type == IW_HEADER_TYPE_POINT))
+                memcpy((char *) &iwe + IW_EV_LCP_LEN + IW_EV_POINT_OFF, pointer, event_len);
+            else
+                memcpy((char *) &iwe + IW_EV_LCP_LEN, pointer, event_len);
+
+            /* Skip event in the stream */
+            pointer += event_len;
+
+            /* Special processing for iw_point events */
+            if(event_type == IW_HEADER_TYPE_POINT) {
+            /* Check the length of the payload */
+
+                if((iwe.len - (event_len + IW_EV_LCP_LEN)) > 0)
+                    /* Set pointer on variable part (warning : non aligned) */
+                    iwe.u.data.pointer = pointer;
+                else
+                    /* No data */
+                    iwe.u.data.pointer = NULL;
+                    /* Go to next event */
+                    stream.current += iwe.len;
+            }
+
+            else {
+                /* Is there more value in the event ? */
+                if((pointer + event_len) <= (stream.current + iwe.len))
+                    /* Go to next value */
+                     stream.value = pointer;
+                else {
+                    /* Go to next event */
+                    stream.value = NULL;
+                    stream.current += iwe.len;
+                }
+            }
+
+            struct iw_event *we = &iwe;
+            //------
             odebug << " - reading next event... cmd=" << we->cmd << ", len=" << we->len << oendl;
             switch (we->cmd)
             {
@@ -968,7 +1133,9 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
                 case SIOCGIWESSID:
                 {
                     odebug << "SIOCGIWESSID" << oendl;
-                    stations->last()->ssid = static_cast<const char*>( we->u.essid.pointer );
+                    we->u.essid.length = '\0'; // make sure it is zero terminated
+                    stations->last()->ssid = static_cast<const char*> (we->u.essid.pointer);
+                    odebug << "ESSID: " << stations->last()->ssid << oendl;
                     break;
                 }
                 case SIOCGIWSENS: odebug << "SIOCGIWSENS" << oendl; break;
@@ -981,19 +1148,13 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
                 default: odebug << "unhandled event" << oendl;
             }
 
-            offset += we->len;
-            we = (struct iw_event*) &buffer[offset];
-        }
-        return stations;
-
-        return stations;
-
+        } while (true);
     }
     else
     {
         odebug << " - no results (timeout) :(" << oendl;
-        return stations;
     }
+    return stations;
 }
 
 

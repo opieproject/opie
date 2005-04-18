@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2003-2004 by Michael 'Mickey' Lauer
-              =.             <mickey@Vanille.de>
+                             Copyright (C) 2003-2005 by Michael 'Mickey' Lauer <mickey@Vanille.de>
+              =.
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -9,7 +9,7 @@
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
  - .   .-<_>     .<>         Foundation; version 2 of the License.
-     ._= =}       :           
+     ._= =}       :
     .%`+i>       _;_.
     .i_,=:_.      -<s.       This program is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
@@ -43,7 +43,7 @@
 #include <qhostaddress.h>
 
 /* STD */
-// hacky workaround until we have a user space wireless.h
+// hacky workarounds until we have a true user space wireless.h
 #include <net/if.h>
 #define _LINUX_IF_H
 #include <linux/wireless.h>

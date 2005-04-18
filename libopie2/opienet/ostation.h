@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2003 by Michael 'Mickey' Lauer <mickey@Vanille.de>
+                             Copyright (C) 2003-2005 by Michael 'Mickey' Lauer <mickey@Vanille.de>
               =.
             .=l.
            .>+-=
@@ -9,7 +9,7 @@
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
  - .   .-<_>     .<>         Foundation; version 2 of the License.
-     ._= =}       :           
+     ._= =}       :
     .%`+i>       _;_.
     .i_,=:_.      -<s.       This program is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
@@ -69,6 +69,7 @@ class OStation
     QString ssid;
     OMacAddress apAddress;
     int channel;
+    int level;
     bool encrypted;
   private:
     class Private;
