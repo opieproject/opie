@@ -33,8 +33,6 @@ using namespace Opie;
 #include <qtabwidget.h>
 #endif
 
-#define WELLENREITER_VERSION "V1.0.3 (unofficial)"
-
 /*
  *  Constructs a WellenreiterBase which is a child of 'parent', with the
  *  name 'name' and widget flags set to 'f'
@@ -111,7 +109,7 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     QPainter draw( &logo );
     draw.setPen( Qt::black );
     draw.setFont( QFont( "Fixed", 8 ) );
-    draw.drawText( 30, 10, WELLENREITER_VERSION );
+    draw.drawText( 5, 10, WELLENREITER_VERSION );
 
     PixmapLabel1_3_2->setPixmap( logo );
     PixmapLabel1_3_2->setScaledContents( TRUE );
