@@ -28,6 +28,7 @@ namespace OpieTooth {
 
     protected slots:
         void accept();
+	void addnum();
 
     };
 };

@@ -9,6 +9,7 @@
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlineedit.h>
+#include <qpushbutton.h>
 
 /* STD */
 #include <stdio.h>
@@ -32,7 +33,7 @@ PinDlg::PinDlg(QWidget* parent,
     {
         test( m_mac );
         txtStatus->setText(makeTextFromArgs());
-        QPEApplication::showDialog( this , true) ; 
+        QPEApplication::showDialog( this , false) ; 
     }
 }
 
@@ -94,6 +95,14 @@ QString PinDlg::makeMacFromArgs()
         return qApp->argv()[2] ;
 }
 
+void PinDlg::addnum()
+{
+    if( sender()->inherits( "QPushButton") ) { 
+        const QPushButton* btn = static_cast<const QPushButton*> (sender()); 
+        lnePin->setText(lnePin->text() + btn->text());
+    }
+}
+
 void PinDlg::accept()
 {
     if ( ckbPin->isChecked() )
@@ -107,3 +116,4 @@ void PinDlg::accept()
     qApp->quit();
     ::exit(0);
 }
+
