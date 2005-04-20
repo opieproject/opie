@@ -255,3 +255,4 @@ CONFIG_ZKBAPPLET noncore/applets/zkbapplet zkbapplet.pro
 CONFIG_ZLINES		noncore/games/zlines		zlines.pro
 CONFIG_ZSAFE	noncore/apps/zsafe zsafe.pro
 CONFIG_ZSAME		noncore/games/zsame		zsame.pro
+CONFIG_OPIESTUMBLER     noncore/net/opiestumbler        opiestumbler.pro
