@@ -1,4 +1,9 @@
 2005-??-??	Opie 1.2.1
+	
+	
+	New Features
+	------------
+	* OpieStumbler: New application (skyhusker)
 
 	Fixed Bugs
 	----------
@@ -8,6 +13,7 @@
 	* n.a.  - scale O-Menu-Applets appropriately (mickeyl)
 	* n.a.	- libopienet: fix bugs in wireless scanning and setting SSID (skyhusker)
 	* n.a.	- Wellenreiter: relax WE version matching test a bit (mickeyl)
+	* #1614 - Make Opie-console start in $HOME instead of / (skyhusker)
 
 
 2005-03-25	Opie 1.2.0
