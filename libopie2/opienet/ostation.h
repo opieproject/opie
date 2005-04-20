@@ -37,6 +37,7 @@
 #include <qstring.h>
 #include <qhostaddress.h>
 #include <qobject.h>
+#include <qvaluelist.h>
 
 #include <sys/types.h>
 
@@ -71,6 +72,7 @@ class OStation
     int channel;
     int level;
     bool encrypted;
+    QValueList <int> rates;
   private:
     class Private;
     Private *d;

@@ -413,6 +413,9 @@ class OWirelessNetworkInterface : public ONetworkInterface
      * @note: This information is only valid if the interface is in managed mode.
      */
     virtual bool isAssociated() const;
+    /** Set the @a mac associated AP address.
+    */
+    virtual void setAssociatedAP( const OMacAddress& mac ) const;
     /**
      * @returns the MAC address of the Access Point if the device is in infrastructure mode.
      * @returns a (more or less random) cell ID address if the device is in adhoc mode.

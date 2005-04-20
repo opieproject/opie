@@ -38,6 +38,7 @@
 
 #include <qfile.h>
 #include <qtextstream.h>
+#include <qapplication.h>
 
 /* UNIX */
 
@@ -53,6 +54,7 @@
 #include <unistd.h>
 #include <linux/sockios.h>
 #include <net/if_arp.h>
+#include <net/ethernet.h>
 #include <stdarg.h>
 
 #ifndef NODEBUG
@@ -491,6 +493,14 @@ bool OWirelessNetworkInterface::isAssociated() const
 }
 
 
+void OWirelessNetworkInterface::setAssociatedAP( const OMacAddress& mac ) const
+{
+    _iwr.u.ap_addr.sa_family = ARPHRD_ETHER;
+    ::memcpy(_iwr.u.ap_addr.sa_data, mac.native(), ETH_ALEN);
+    wioctl( SIOCSIWAP );
+}
+
+
 OMacAddress OWirelessNetworkInterface::associatedAP() const
 {
     if ( ioctl( SIOCGIWAP ) )
@@ -906,13 +916,11 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
         else if ( errno == EAGAIN)
         {
             odebug << "ONetworkInterface::scanNetwork() - scan in progress..." << oendl;
-            #if 0
             if ( qApp )
             {
                 qApp->processEvents( 100 );
                 continue;
             }
-            #endif
             tv.tv_sec = 0;
             tv.tv_usec = 100000;
             continue;
@@ -1127,7 +1135,10 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
                 case SIOCGIWFREQ:
                 {
                     odebug << "SIOCGIWFREQ" << oendl;
-                    stations->last()->channel = _channels[ static_cast<int>(double( we->u.freq.m ) * pow( 10.0, we->u.freq.e ) / 1000000) ];
+                    if ( we->u.freq.m > 1000 )
+                        stations->last()->channel = _channels[ static_cast<int>(double( we->u.freq.m ) * pow( 10.0, we->u.freq.e ) / 1000000) ];
+                    else
+                        stations->last()->channel = static_cast<int>(((double) we->u.freq.m) * pow( 10.0, we->u.freq.e ));
                     break;
                 }
                 case SIOCGIWESSID:
@@ -1138,10 +1149,27 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
                     odebug << "ESSID: " << stations->last()->ssid << oendl;
                     break;
                 }
+                case IWEVQUAL:
+                {
+                    odebug << "IWEVQUAL" << oendl; 
+                    stations->last()->level = static_cast<int>(we->u.qual.level);
+                    break;             /* Quality part of statistics (scan) */
+                }
+                case SIOCGIWENCODE:
+                {
+                    odebug << "SIOCGIWENCODE" << oendl; 
+                    stations->last()->encrypted = !(we->u.data.flags & IW_ENCODE_DISABLED);
+                    break;
+                }
+
+                case SIOCGIWRATE:
+                {
+                    odebug << "SIOCGIWRATE" << oendl;
+                    stations->last()->rates.append(we->u.bitrate.value);
+                    break;
+                }
                 case SIOCGIWSENS: odebug << "SIOCGIWSENS" << oendl; break;
-                case SIOCGIWENCODE: odebug << "SIOCGIWENCODE" << oendl; break;
                 case IWEVTXDROP: odebug << "IWEVTXDROP" << oendl; break;         /* Packet dropped to excessive retry */
-                case IWEVQUAL: odebug << "IWEVQUAL" << oendl; break;             /* Quality part of statistics (scan) */
                 case IWEVCUSTOM: odebug << "IWEVCUSTOM" << oendl; break;         /* Driver specific ascii string */
                 case IWEVREGISTERED: odebug << "IWEVREGISTERED" << oendl; break; /* Discovered a new node (AP mode) */
                 case IWEVEXPIRED: odebug << "IWEVEXPIRED" << oendl; break;       /* Expired a node (AP mode) */
