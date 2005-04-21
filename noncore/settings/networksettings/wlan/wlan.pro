@@ -8,7 +8,7 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -L../interfaces/ -linterfaces -lopiecore2 -lopienet2
 INTERFACES	= wlan.ui info.ui
 TARGET		= wlan
-VERSION		= 1.0.0
+VERSION		= 1.0.1
 
 #CONFIG += wirelessopts
 

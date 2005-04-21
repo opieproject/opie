@@ -370,7 +370,8 @@ void WLANImp::rescanNeighbourhood()
         return;
     }
 
-    // display splash screen
+    // disable button and display splash screen
+    rescanButton->setEnabled( false );
     QFrame* splash = new QFrame( this, "splash", false, WStyle_StaysOnTop | WStyle_DialogBorder | WStyle_Customize );
     splash->setLineWidth( 2 );
     splash->setFrameStyle( QFrame::Panel | QFrame::Raised );
@@ -416,9 +417,10 @@ void WLANImp::rescanNeighbourhood()
     wiface->setMode( "managed" ); // TODO: use previous mode
     wiface->setPromiscuousMode( false );
 
+    // hide splash screen and reenable button
     splash->hide();
     delete splash;
-
+    rescanButton->setEnabled( true );
 }
 
 void WLANImp::handlePacket( OPacket* p )
