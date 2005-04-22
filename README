@@ -70,7 +70,7 @@ For a successful build you must install these librarys and headers.
 * libsdl >= 1.2.0
   http://www.libsdl.org/download-1.2.php
 
-* libxine >= 1.0 RC6
+* libxine >= 1.0
   http://prdownloads.sourceforge.net/xine/
 
 * libpcap >= 0.7.2
@@ -82,7 +82,7 @@ For a successful build you must install these librarys and headers.
 * libsqlite >= 3.0.0
   http://www.sqlite.org/download.html
 
-* libipk v109 (or greater)
+* libipk v135 (or greater)
   ftp://handhelds.org/linux/packages/ipkg
 
 3. Supported Devices
