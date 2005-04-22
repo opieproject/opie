@@ -3,23 +3,23 @@
              .=l.            Copyright (c)  2002 Maximilian Reiss <max.reiss@gmx.de>
            .>+-=
  _;:,     .>    :=|.         This library is free software; you can
-.> <,   >  .   <=          redistribute it and/or  modify it under
-:=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.> <,   >  .   <=           redistribute it and/or  modify it under
+:=1 )Y*s>-.--   :            the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
+ - .   .-<_>     .<>         Foundation; version 2 of the License.
+     ._= =}       :
     .%+i>       _;_.
     .i_,=:_.      -<s.       This library is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
     : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>:     PARTICULAR PURPOSE. See the GNU
+    =_        +     =;=|     MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>:      PARTICULAR PURPOSE. See the GNU
 ..}^=.=       =       ;      Library General Public License for more
-++=   -.     .     .:       details.
+++=   -.     .     .:        details.
  :     =  ...= . :.=-
  -.   .:....=;==+<;          You should have received a copy of the GNU
   -_. . .   )=.  =           Library General Public License along with
-    --        :-=           this library; see the file COPYING.LIB.
+    --        :-=            this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -28,15 +28,19 @@
 
 
 #include "bluezapplet.h"
-#include <qapplication.h>
 
+/* OPIE */
+#include <opie2/otaskbarapplet.h>
+#include <opie2/odevice.h>
+#include <opie2/odebug.h>
+#include <qpe/applnk.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
+using namespace Opie::Core;
 
-#include <opie2/odevice.h>
-#include <opie2/odebug.h>
-
+/* QT */
+#include <qapplication.h>
 #include <qpoint.h>
 #include <qpainter.h>
 #include <qlayout.h>
@@ -46,18 +50,17 @@
 #include <qtimer.h>
 #include <qpopupmenu.h>
 
+/* STD */
 #include <device.h>
-
-using namespace Opie::Core;
 
 namespace OpieTooth {
 
     BluezApplet::BluezApplet( QWidget *parent, const char *name ) : QWidget( parent, name ) {
-        setFixedHeight( 18 );
-        setFixedWidth( 14 );
-        bluezOnPixmap = Resource::loadPixmap( "bluetoothapplet/bluezon" );
-        bluezOffPixmap = Resource::loadPixmap( "bluetoothapplet/bluezoff" );
-        //    bluezDiscoveryOnPixmap = Resource::loadPixmap( "bluetoothapplet/magglass" );
+        setFixedHeight( AppLnk::smallIconSize() );
+        setFixedWidth( AppLnk::smallIconSize() );
+        bluezOnPixmap = Resource::loadImage( "bluetoothapplet/bluezon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
+        bluezOffPixmap = Resource::loadImage( "bluetoothapplet/bluezoff" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
+        //bluezDiscoveryOnPixmap = Resource::loadImage( "bluetoothapplet/magglass" )smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize());
         startTimer(4000);
         btDevice = 0;
         bluezactive = false;
@@ -70,6 +73,12 @@ namespace OpieTooth {
             delete btDevice;
         }
     }
+
+int BluezApplet::position()
+{
+        return 6;
+}
+
 
     bool BluezApplet::checkBluezStatus() {
         if (btDevice) {
@@ -220,3 +229,6 @@ namespace OpieTooth {
         }
     }
 };
+
+EXPORT_OPIE_APPLET_v1( OpieTooth::BluezApplet )
+

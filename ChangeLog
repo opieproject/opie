@@ -9,12 +9,16 @@
 	----------
 	* #1535	- Missing line break and unnecessary location shown with Today-Calendar plugin (deller)
 	* #1565 - crash-fix in odevice.cpp while scanning the distribution table (deller)
+	* #1614 - Make Opie-console start in $HOME instead of / (skyhusker)
 	* n.a.	- always show volume and wireless applet popups inside visible screen (deller)
 	* n.a.  - scale O-Menu-Applets appropriately (mickeyl)
 	* n.a.	- libopienet: fix bugs in wireless scanning and setting SSID (skyhusker)
 	* n.a.	- Wellenreiter: relax WE version matching test a bit (mickeyl)
-	* #1614 - Make Opie-console start in $HOME instead of / (skyhusker)
+	* n.a.	- scale BluezApplet appropriately (mickeyl)
 
+	Internal
+	--------
+	* make BluezApplet use OTaskbarApplet (mickeyl)
 
 2005-03-25	Opie 1.2.0
 
