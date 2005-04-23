@@ -11,6 +11,7 @@
 #define __OPIE_RESTART_APPLET_H__
 
 #include <qpe/menuappletinterface.h>
+#include <qobject.h>
 
 class RestartApplet : public QObject, public MenuAppletInterface
 {
