@@ -16,6 +16,7 @@
 	* n.a.	- Wellenreiter: relax WE version matching test a bit (mickeyl)
 	* n.a.	- scale BluezApplet appropriately (mickeyl)
 	* n.a.	- memoryapplet: fix crash in memoryapplet on kernels without swap support (seneca cunningham)
+	* #1476 - Wrong order of application entries in the O-menu (skyhusker)
 
 	Internal
 	--------
