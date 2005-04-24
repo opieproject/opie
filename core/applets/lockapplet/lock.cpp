@@ -2,9 +2,9 @@
 
 /* OPIE */
 #include <opie2/multiauthpassword.h>
+#include <opie2/oresource.h>
 
 #include <qpe/applnk.h>
-#include <qpe/resource.h>
 
 /* QT */
 #include <qiconset.h>
@@ -38,10 +38,7 @@ QString LockMenuApplet::text() const
 
 QIconSet LockMenuApplet::icon() const
 {
-    QPixmap pix;
-    QImage img = Resource::loadImage( "security/lock" );
-    if ( !img.isNull() )
-        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    QPixmap pix = Opie::Core::OResource::loadPixmap( "security/lock", Opie::Core::OResource::SmallIcon );
     return pix;
 }
 

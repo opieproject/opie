@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applets
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal, opie-security
+Depends: task-opie-minimal, libopiecore2, libopiesecurity2
 Description: Lock Opie now
  Button to lock Opie (as configured in the Security
  settings) on demand.
