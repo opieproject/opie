@@ -3,7 +3,7 @@
 	
 	New Features
 	------------
-	* OpieStumbler: New application (skyhusker)
+	* OpieStumbler: Scans WiFi networks using the wireless extension scanning (skyhusker)
 
 	Fixed Bugs
 	----------
@@ -15,6 +15,7 @@
 	* n.a.	- libopienet: fix bugs in wireless scanning and setting SSID (skyhusker)
 	* n.a.	- Wellenreiter: relax WE version matching test a bit (mickeyl)
 	* n.a.	- scale BluezApplet appropriately (mickeyl)
+	* n.a.	- memoryapplet: fix crash in memoryapplet on kernels without swap support (seneca cunningham)
 
 	Internal
 	--------

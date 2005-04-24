@@ -1,7 +1,8 @@
 /**********************************************************************
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2002-2005 the Opie Team <opie-devel@handhelds.org>
 **
-** This file is part of Qtopia Environment.
+** This file is part of Opie Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -56,6 +57,11 @@ using namespace Opie::Core;
 Swapfile::Swapfile( QWidget *parent, const char *name, WFlags f )
     : QWidget( parent, name, f )
 {
+	if ( !QFile::exists( "/proc/swaps" ) )
+	{
+		QLabel *text = new QLabel( tr( "Swap disabled in kernel" ), this );
+		return;
+	}
 	// are we running as root?
 	isRoot = geteuid() == 0;
 
