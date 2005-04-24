@@ -2,41 +2,11 @@
 
 #include "restart.h"
 
+#include <opie2/oresource.h>
+
 #include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
-
-/* XPM */
-static char *restart_xpm[] = {
-"16 16 11 1",
-"   c None",
-".  c #000000",
-"+  c #DCDCDC",
-"@  c #A0A0A0",
-"#  c #C3C3C3",
-"$  c #808080",
-"%  c #FFA858",
-"&  c #FFDCA8",
-"*  c #FFFFC0",
-"=  c #FFFFFF",
-"-  c #585858",
-"       ..       ",
-"   .. .++. ..   ",
-"  .+@.@##@.@+.  ",
-"  .@+$@%%@$+@.  ",
-"   .$%%&%&%$.   ",
-" ..+@%&$$%&@+.. ",
-".+#@%&%@@&*%@#+.",
-".$@+$&*&&=*$+@$.",
-" .--+$&*=&$+--. ",
-"  .$#++$$++#$.  ",
-" .@=$-$++$-$=@. ",
-" .+@-..@@..-@+. ",
-"  ... .+=. ...  ",
-"      .-$.      ",
-"       ..       ",
-"                "};
 
 RestartApplet::RestartApplet ( )
   : QObject ( 0, "RestartApplet" )
@@ -64,12 +34,8 @@ QString RestartApplet::text ( ) const
 
 QIconSet RestartApplet::icon ( ) const
 {
-  QPixmap pix;
-  QImage img =  ( const char** ) restart_xpm ;//Resource::loadImage ( "Run" );
-  
-  if ( !img. isNull ( ))
-        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-  return pix;
+    QPixmap pix = Opie::Core::OResource::loadPixmap( "exec", Opie::Core::OResource::SmallIcon );
+    return pix;
 }
 
 QPopupMenu *RestartApplet::popup ( QWidget * ) const

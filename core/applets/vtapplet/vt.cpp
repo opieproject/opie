@@ -15,8 +15,10 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
+
 #include <qpe/applnk.h>
-#include <qpe/resource.h>
+
 using namespace Opie::Core;
 
 /* QT */
@@ -68,11 +70,7 @@ QString VTApplet::tr( const char* s, const char* p ) const
 
 QIconSet VTApplet::icon ( ) const
 {
-    QPixmap pix;
-    QImage img = Resource::loadImage ( "terminal" );
-
-    if ( !img. isNull ( ))
-        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    QPixmap pix = Opie::Core::OResource::loadPixmap( "terminal", Opie::Core::OResource::SmallIcon );
     return pix;
 }
 

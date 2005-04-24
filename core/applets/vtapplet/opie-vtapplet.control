@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/applets
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 Description: Switch to another virtual terminal
 Version: $QPE_VERSION$EXTRAVERSION
