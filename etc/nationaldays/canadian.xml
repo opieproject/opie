@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nationaldays>
+<description value="Canadian Holidays"/>
+<entries>
+<entry name="New Year's Day" date="01-01"/>
+<entry name="Good Friday" type="floating">
+ <calculation>
+   <date value="easter"/>
+   <offset value="-2"/>
+ </calculation>
+</entry>
+<entry name="Easter Sunday" type="floating">
+ <calculation>
+   <date value="easter"/>
+ </calculation>
+</entry>
+<entry name="Easter Monday (Government)" type="floating">
+ <calculation>
+   <date value="easter"/>
+   <offset value="+1"/>
+ </calculation>
+</entry>
+<entry name="St Patrick's Day (Newfoundland)" date="03-17"/>
+<entry name="Victoria Day" type="floating">
+ <calculation>
+  <weekday value="monday"/>
+  <datedep value="before"/>
+  <date value="05-25"/>
+ </calculation>
+</entry>
+<entry name="St. Jean-Baptiste Day (Quebec)" date="06-24"/>
+<entry name="Canada Day" date="07-01"/>
+<entry name="Civic Holiday/Simcoe Day" type="floating">
+ <calculation>
+   <weekday value="monday"/>
+   <dayofmonth value="first"/>
+   <month value="august"/>
+ </calculation>
+</entry>
+<entry name="Labour Day" type="floating">
+ <calculation>
+   <weekday value="monday"/>
+   <dayofmonth value="first"/>
+   <month value="september"/>
+ </calculation>
+</entry>
+<entry name="Canadian Thanksgiving" type="floating">
+ <calculation>
+   <weekday value="monday"/>
+   <dayofmonth value="second"/>
+   <month value="october"/>
+ </calculation>
+</entry>
+<entry name="Remembrance Day (Banks)" date="11-11"/>
+<entry name="Christmas Day" date="12-25"/>
+<entry name="Boxing Day" date="12-26"/>
+</entries>
+</nationaldays>
