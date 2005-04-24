@@ -67,6 +67,7 @@ StartMenu::StartMenu(QWidget *parent) : QLabel( parent )
 
     useWidePopupMenu = true;
     launchMenu = 0;
+    currentItem = 0;
     refreshMenu();
 }
 
@@ -150,11 +151,21 @@ void StartMenu::createAppEntry( QPopupMenu *menu, QDir dir, QString file )
                     test.convertFromImage(
                            img.smoothScale(
                             AppLnk::smallIconSize(), AppLnk::smallIconSize() ), 0 );
-
+                
+                // Insert items ordered lexically
+		int current, left = 0, right = currentItem;
+                while( left != right ) {
+                    current = ( left + right ) / 2;
+                    if ( menu->text(menu->idAt( ( current ) ) ) < applnk->name() )
+                        left = ++current;
+                    else
+                        right = current;
+                }
+                
                 menu->insertItem( test, applnk->name(),
-                              currentItem + APPLNK_ID_OFFSET );
-            appLnks.insert( currentItem + APPLNK_ID_OFFSET, applnk );
-            currentItem++;
+                              currentItem + APPLNK_ID_OFFSET, current );
+                appLnks.insert( currentItem + APPLNK_ID_OFFSET, applnk );
+                currentItem++;
    		}
     }
 
