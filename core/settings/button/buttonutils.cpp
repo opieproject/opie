@@ -1,10 +1,11 @@
 #include <stdlib.h>
 
+#include <opie2/oresource.h>
+
 #include <qapplication.h>
 #include <qlistview.h>
 #include <qpe/applnk.h>
 #include <qpe/mimetype.h>
-#include <qpe/resource.h>
 
 #include "buttonutils.h"
 
@@ -72,7 +73,8 @@ qCopInfo ButtonUtils::messageToInfo ( const OQCopMessage &c )
 	
 	for ( const predef_qcop *p = predef; p-> m_text; p++ ) {
 		if (( ch == p-> m_channel ) && ( f == p-> m_function ))
-			return qCopInfo ( qApp-> translate ( "ButtonSettings", p-> m_text ), Resource::loadPixmap ( p-> m_pixmap ));
+			return qCopInfo ( qApp-> translate ( "ButtonSettings", p-> m_text ),
+                              Opie::Core::OResource::loadPixmap( p->m_pixmap, Opie::Core::OResource::SmallIcon ) );
 	}	
 	
 	if ( ch. left ( 16 ) == "QPE/Application/" ) {
@@ -96,7 +98,7 @@ void ButtonUtils::insertActions ( QListViewItem *here )
 {
 	for ( const predef_qcop *p = predef; p-> m_text; p++ ) {
 		QListViewItem *item = new QListViewItem ( here, qApp-> translate ( "ButtonSettings", p-> m_text ), p-> m_channel, p-> m_function );
-		item-> setPixmap ( 0, Resource::loadPixmap ( p-> m_pixmap ));
+  item-> setPixmap ( 0, Opie::Core::OResource::loadPixmap( p->m_pixmap, Opie::Core::OResource::SmallIcon ) );
 	}		
 }
 
