@@ -29,7 +29,7 @@ DEPENDPATH  += $(OPIEDIR)/include
 
 
 
-LIBS += -lqpe 
+LIBS += -lqpe -lopiecore2
 # libs to link against
 
 #Important include the global include.pro just like below
