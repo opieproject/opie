@@ -317,7 +317,7 @@ void MainWindow::slotNtpFinished( OProcess *p )
     setCaption( tr( "SystemTime" ) );
 
     //  Verify run was successful
-    if ( p->exitStatus() != 0 || !p->normalExit() )
+    if ( p->exitStatus() != 0 )
     {
         if ( isVisible() && ntpInteractive )
         {
