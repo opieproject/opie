@@ -1,7 +1,8 @@
 #include "suspend.h"
 
+#include <opie2/oresource.h>
+
 #include <qpe/applnk.h>
-#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
 #include <qapplication.h>
@@ -42,11 +43,7 @@ QString SuspendApplet::tr( const char* s, const char* p ) const
 
 QIconSet SuspendApplet::icon ( ) const
 {
-	QPixmap pix;
-	QImage img = Resource::loadImage ( "suspend" );
-	
-	if ( !img. isNull ( ))
-        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    QPixmap pix = Opie::Core::OResource::loadPixmap( "suspend", Opie::Core::OResource::SmallIcon );
 	return pix;
 }
 
