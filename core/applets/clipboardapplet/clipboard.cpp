@@ -21,7 +21,8 @@
 #include "clipboard.h"
 
 #include <opie2/otaskbarapplet.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
+
 #include <qpe/applnk.h>
 
 #include <qpainter.h>
@@ -40,10 +41,7 @@ ClipboardApplet::ClipboardApplet( QWidget *parent, const char *name ) : QWidget(
         setFixedWidth ( AppLnk::smallIconSize()  );
         setFixedHeight ( AppLnk::smallIconSize()  );
 
-	QImage img = Resource::loadImage( "paste");
-	img = img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
-
-	m_clipboardPixmap.convertFromImage( img );
+    m_clipboardPixmap = Opie::Core::OResource::loadPixmap( "paste", Opie::Core::OResource::SmallIcon );
 
 	m_timer = new QTimer ( this );
 
@@ -96,9 +94,9 @@ void ClipboardApplet::mousePressEvent ( QMouseEvent *)
 			m_menu-> setItemChecked ( m_history. count ( ) - 1, true );
 			m_menu-> insertSeparator ( );
 		}
-		m_menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "cut" )), tr( "Cut" ), 100 );
-		m_menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "copy" )), tr( "Copy" ), 101 );
-		m_menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "paste" )), tr( "Paste" ), 102 );
+    m_menu-> insertItem ( Opie::Core::OResource::loadPixmap( "cut", Opie::Core::OResource::SmallIcon ), tr( "Cut" ), 100 );
+    m_menu-> insertItem ( Opie::Core::OResource::loadPixmap( "copy", Opie::Core::OResource::SmallIcon ), tr( "Copy" ), 101 );
+    m_menu-> insertItem ( Opie::Core::OResource::loadPixmap( "paste", Opie::Core::OResource::SmallIcon ), tr( "Paste" ), 102 );
 
 		connect ( m_menu, SIGNAL( activated(int)), this, SLOT( action(int)));
 

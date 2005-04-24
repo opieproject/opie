@@ -1,7 +1,8 @@
 #include "logout.h"
 
+#include <opie2/oresource.h>
+
 #include <qpe/applnk.h>
-#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
 #include <qapplication.h>
@@ -45,11 +46,7 @@ QString LogoutApplet::tr( const char* s, const char* p ) const
 
 QIconSet LogoutApplet::icon ( ) const
 {
-	QPixmap pix;
-	QImage img = Resource::loadImage ( "logout" );
-
-	if ( !img. isNull ( ))
-        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    QPixmap pix = Opie::Core::OResource::loadPixmap("logout", Opie::Core::OResource::SmallIcon );
 	return pix;
 }
 

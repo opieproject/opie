@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applets
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 Description: Clipboard applet
  Clipboard applet for the Opie environment taskbar.
 Version: $QPE_VERSION$EXTRAVERSION
