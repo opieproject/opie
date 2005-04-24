@@ -23,10 +23,10 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 #include "textwidget.h"
 
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 
 #include <qaction.h>
 #include <qclipboard.h>
@@ -64,9 +64,9 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags /*fl*/ )
     connect( &m_tabs, SIGNAL(currentChanged(QWidget *)), this, SLOT( slotTextDisplayed(QWidget *)) );
     connect( &m_autoScrollTimer, SIGNAL(timeout()), this, SLOT(slotNavNextVerse()) );
 
-    m_bibleIcon = new QPixmap( Resource::loadPixmap( "dagger/bibletext" ) );
-    m_commentaryIcon = new QPixmap( Resource::loadPixmap( "dagger/commentary" ) );
-    m_lexiconIcon = new QPixmap( Resource::loadPixmap( "dagger/lexicon" ) );
+    m_bibleIcon = new QPixmap( Opie::Core::OResource::loadPixmap( "dagger/bibletext", Opie::Core::OResource::SmallIcon ) );
+    m_commentaryIcon = new QPixmap( Opie::Core::OResource::loadPixmap( "dagger/commentary", Opie::Core::OResource::SmallIcon ) );
+    m_lexiconIcon = new QPixmap( Opie::Core::OResource::loadPixmap( "dagger/lexicon", Opie::Core::OResource::SmallIcon ) );
 
     // Load initial configuration
     QTimer::singleShot( 100, this, SLOT( initConfig() ) );
@@ -187,18 +187,21 @@ void MainWindow::initUI()
     // Text menu
     QPopupMenu *popup = new QPopupMenu( this );
 
-    QAction *a = new QAction( tr( "Open..." ), Resource::loadPixmap( "fileopen" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( tr( "Open..." ), Opie::Core::OResource::loadPixmap( "fileopen", Opie::Core::OResource::SmallIcon ),
+                              QString::null, 0, this, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(slotTextOpen()) );
     a->addTo( popup );
 
-    m_actionTextClose = new QAction( tr( "Close" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+    m_actionTextClose = new QAction( tr( "Close" ), Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ),
+                                     QString::null, 0, this, 0 );
     connect( m_actionTextClose, SIGNAL(activated()), this, SLOT(slotTextClose()) );
     m_actionTextClose->addTo( popup );
 
     popup->insertSeparator();
 
     // TODO - need to implent
-    a = new QAction( tr( "Install..." ), Resource::loadPixmap( "install" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Install" ), Opie::Core::OResource::loadPixmap( "install", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->setEnabled( false );
     connect( a, SIGNAL(activated()), this, SLOT(slotTextInstall()) );
     a->addTo( popup );
@@ -208,13 +211,15 @@ void MainWindow::initUI()
     // Edit menu
     popup = new QPopupMenu( this );
 
-    m_actionEditCopy = new QAction( tr( "Copy" ), Resource::loadPixmap( "copy" ), QString::null, 0, this, 0 );
+    m_actionEditCopy = new QAction( tr( "Copy" ), Opie::Core::OResource::loadPixmap( "copy", Opie::Core::OResource::SmallIcon ),
+                                    QString::null, 0, this, 0 );
     connect( m_actionEditCopy, SIGNAL(activated()), this, SLOT(slotEditCopy()) );
     m_actionEditCopy->addTo( popup );
 
     popup->insertSeparator();
 
-    a = new QAction( tr( "Configure..." ), Resource::loadPixmap( "SettingsIcon" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Configure" ), Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(slotEditConfigure()) );
     a->addTo( popup );
 
@@ -223,11 +228,15 @@ void MainWindow::initUI()
     // Bookmark menu
     m_bookmarkMenu = new QPopupMenu( this );
 
-    m_actionBookmarkAdd = new QAction( tr( "Add" ), Resource::loadPixmap( "dagger/bookmarkadd" ), QString::null, 0, this, 0 );
+    m_actionBookmarkAdd = new QAction( tr( "Add" ),
+                                       Opie::Core::OResource::loadPixmap( "dagger/bookmarkadd", Opie::Core::OResource::SmallIcon ),
+                                       QString::null, 0, this, 0 );
     connect( m_actionBookmarkAdd, SIGNAL(activated()), this, SLOT(slotBookmarkAdd()) );
     m_actionBookmarkAdd->addTo( m_bookmarkMenu );
 
-    m_actionBookmarkRemove = new QAction( tr( "Remove" ), Resource::loadPixmap( "dagger/bookmarkremove" ), QString::null, 0, this, 0 );
+    m_actionBookmarkRemove = new QAction( tr( "Remove" ),
+                                          Opie::Core::OResource::loadPixmap( "dagger/bookmarkremove", Opie::Core::OResource::SmallIcon ),
+                                          QString::null, 0, this, 0 );
     connect( m_actionBookmarkRemove, SIGNAL(activated()), this, SLOT(slotBookmarkRemove()) );
     m_actionBookmarkRemove->addTo( m_bookmarkMenu );
 

@@ -18,6 +18,7 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 #include "searchbar.h"
 #include "textwidget.h"
 
+#include <opie2/oresource.h>
 #include <opie2/owait.h>
 
 #include <qpe/qpeapplication.h>
@@ -31,6 +32,8 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 #include <listkey.h>
 #include <regex.h>
 #include <versekey.h>
+
+using Opie::Core::OResource;
 
 void searchCallback( char /*percent*/, void */*userData*/ )
 {
@@ -48,7 +51,7 @@ SearchBar::SearchBar( QMainWindow *parent )
     connect(m_searchText, SIGNAL(textChanged(const QString &)),
             this, SLOT(slotTextChanged(const QString &)) );
 
-    m_actionFind = new QAction( tr( "Find" ), Resource::loadPixmap( "find" ), QString::null,
+    m_actionFind = new QAction( tr( "Find" ), OResource::loadPixmap( "find", OResource::SmallIcon ), QString::null,
                                 0, this, 0 );
     m_actionFind->setEnabled( false );
     m_actionFind->addTo( this );
@@ -57,7 +60,7 @@ SearchBar::SearchBar( QMainWindow *parent )
 
     addSeparator();
 
-    m_actionPrev = new QAction( tr( "Previous result" ), Resource::loadPixmap( "back" ),
+    m_actionPrev = new QAction( tr( "Previous result" ), OResource::loadPixmap( "back", OResource::SmallIcon ),
                                      QString::null, 0, this, 0 );
     m_actionPrev->setEnabled( false );
     m_actionPrev->addTo( this );
@@ -69,7 +72,7 @@ SearchBar::SearchBar( QMainWindow *parent )
     QWhatsThis::add( m_resultList, tr( "Select the desired search result here." ) );
     connect( m_resultList, SIGNAL(activated(const QString &)), this, SIGNAL(sigResultClicked(const QString &)) );
 
-    m_actionNext = new QAction( tr( "Next result" ), Resource::loadPixmap( "forward" ),
+    m_actionNext = new QAction( tr( "Next result" ), OResource::loadPixmap( "forward", OResource::SmallIcon ),
                                      QString::null, 0, this, 0 );
     m_actionNext->setEnabled( false );
     m_actionNext->addTo( this );
