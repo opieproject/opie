@@ -3,15 +3,15 @@
     <name>Opietooth2::Opietooth2Applet</name>
     <message>
         <source>Disable</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizliegt</translation>
     </message>
     <message>
         <source>Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut</translation>
     </message>
     <message>
         <source>Launch manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Palaist menedžeri</translation>
     </message>
 </context>
 </TS>

@@ -41,89 +41,91 @@
     </message>
     <message>
         <source>Fluorescent</source>
-        <translation type="unfinished"></translation>
+        <translation>Fluriscents</translation>
     </message>
     <message>
         <source>Tungsten</source>
-        <translation type="unfinished"></translation>
+        <translation>Tungsten</translation>
     </message>
     <message>
         <source>Standard light A</source>
-        <translation type="unfinished"></translation>
+        <translation>Standarta apgaismojums A</translation>
     </message>
     <message>
         <source>Standard light B</source>
-        <translation type="unfinished"></translation>
+        <translation>Standarta apgaismojums B</translation>
     </message>
     <message>
         <source>Standard light C</source>
-        <translation type="unfinished"></translation>
+        <translation>Standarta apgaismojums C</translation>
     </message>
     <message>
         <source>D55</source>
-        <translation type="unfinished"></translation>
+        <translation>D55</translation>
     </message>
     <message>
         <source>D65</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>D75</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Cits</translation>
     </message>
     <message>
         <source>White Balance: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Baltais Balans: %1
+</translation>
     </message>
     <message>
         <source>Average</source>
-        <translation type="unfinished"></translation>
+        <translation>Vidēji</translation>
     </message>
     <message>
         <source>Center weighted average</source>
-        <translation type="unfinished"></translation>
+        <translation>Vidējais izsvērtais</translation>
     </message>
     <message>
         <source>Spot</source>
-        <translation type="unfinished"></translation>
+        <translation>Kūlis</translation>
     </message>
     <message>
         <source>MultiSpot</source>
-        <translation type="unfinished"></translation>
+        <translation>MultiKūlis</translation>
     </message>
     <message>
         <source>Pattern</source>
-        <translation type="unfinished"></translation>
+        <translation>Raksts</translation>
     </message>
     <message>
         <source>Partial</source>
-        <translation type="unfinished"></translation>
+        <translation>Daļējs</translation>
     </message>
     <message>
         <source>Metering Mode: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Metrošanas Režīms: %1
+</translation>
     </message>
     <message>
         <source>Not defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav definēts</translation>
     </message>
     <message>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Rokas</translation>
     </message>
     <message>
         <source>Normal progam</source>
-        <translation type="unfinished"></translation>
+        <translation>Normāla programma</translation>
     </message>
     <message>
         <source>Aperture priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Aparatūras prioritāte</translation>
     </message>
     <message>
         <source>Shutter priority</source>
