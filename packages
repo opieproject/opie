@@ -68,6 +68,7 @@ CONFIG_GUTENBROWSER	noncore/apps/opie-gutenbrowser	opie-gutenbrowser.pro
 CONFIG_HANDWRITING	inputmethods/handwriting	handwriting.pro
 CONFIG_HELPBROWSER	core/apps/helpbrowser	helpbrowser.pro
 CONFIG_HOMEAPPLET	core/applets/homeapplet	homeapplet.pro
+CONFIG_HOTPLUG_QCOP	core/tools/hotplug-qcop	hotplug-qcop.pro
 CONFIG_INTERFACES	noncore/settings/networksettings/interfaces	interfaces.pro
 CONFIG_IRDAAPPLET	core/applets/irdaapplet	irdaapplet.pro
 CONFIG_JUMPX	inputmethods/jumpx	jumpx.pro

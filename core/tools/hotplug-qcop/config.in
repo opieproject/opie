@@ -1,0 +1,5 @@
+  config HOTPLUG_QCOP
+    boolean "The HotPlug -> QCop Event Bridge"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 )
+
