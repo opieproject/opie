@@ -31,15 +31,37 @@
 #include <qpe/qcopenvelope_qws.h>
 
 /* QT */
+#include <qapplication.h>
 #include <qstring.h>
+#include <qstringlist.h>
 
 /* STD */
 #include <stdlib.h>
+#include <unistd.h>
+
+extern char **environ;
 
 int main( int argc, char** argv )
 {
     qDebug( "NOTE: hotplug-qcop started" );
-    qDebug( "... now doing something meaningful ..." );
+    QString event( argc > 1 ? QString( argv[1] ) : QString::null );
+
+    QStringList list;
+    int i = 0;
+    while( environ[i] )
+    {
+        qDebug( "NOTE: hotplug-qcop adding '%s'", environ[i] );
+        list += environ[i++];
+    }
+
+    QApplication app( argc, argv );
+
+	if ( 1 )
+    {
+        QCopEnvelope e( "QPE/System", "HotPlugEvent(QString, QStringList)" );
+        e << event << list;
+    }
+
     qDebug( "NOTE: hotplug-qcop ended" );
 	return 0;
 }
