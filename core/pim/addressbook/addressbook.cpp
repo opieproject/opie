@@ -101,22 +101,22 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
     QActionGroup *items = new QActionGroup( this, QString::null, false );
 
     m_actionMail = new QAction( tr( "Write Mail To" ),
-                                Opie::Core::OResource::loadPixmap( "addressbook/sendmail" ),
+                                Opie::Core::OResource::loadPixmap( "addressbook/sendmail", Opie::Core::OResource::SmallIcon ),
                                 QString::null, 0, items, 0 );
     connect( m_actionMail, SIGNAL(activated()), this, SLOT(writeMail()) );
 
     a = new QAction( tr("Import vCard"),
-                     Opie::Core::OResource::loadPixmap( "addressbook/fileimport" ),
+                     Opie::Core::OResource::loadPixmap( "addressbook/fileimport", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, items, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(importvCard()) );
 
     a = new QAction( tr("Export vCard"),
-                     Opie::Core::OResource::loadPixmap( "addressbook/fileexport" ),
+                     Opie::Core::OResource::loadPixmap( "addressbook/fileexport", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, items, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(exportvCard()) );
 
     m_actionPersonal = new QAction( tr("My Personal Details"),
-                                    Opie::Core::OResource::loadPixmap( "addressbook/identity" ),
+                                    Opie::Core::OResource::loadPixmap( "addressbook/identity", Opie::Core::OResource::SmallIcon ),
                                     QString::null, 0, items, 0 , true );
     connect( m_actionPersonal, SIGNAL(activated()), this, SLOT(slotPersonalView()) );
 
