@@ -24,7 +24,7 @@
 #include <opie2/oledbox.h>
 #include <opie2/odevice.h>
 #include <opie2/otaskbarapplet.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -272,17 +272,14 @@ VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *pa
 
   upButton = new QPushButton ( this );
   upButton-> setSizePolicy ( QSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Expanding ));
-  QPixmap pic;
-  pic.convertFromImage( Resource::loadImage( "up" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-  upButton-> setPixmap ( pic );
+  upButton-> setPixmap ( Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ) );
   upButton-> setFocusPolicy ( QWidget::NoFocus );
 
   vbox-> addWidget ( upButton );
 
   downButton = new QPushButton ( this );
   downButton-> setSizePolicy ( QSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Expanding ));
-  pic.convertFromImage( Resource::loadImage( "down" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-  downButton-> setPixmap ( pic );
+  downButton-> setPixmap ( Opie::Core::OResource::loadPixmap( "down", Opie::Core::OResource::SmallIcon ) );
   downButton-> setFocusPolicy ( QWidget::NoFocus );
 
   vbox-> addWidget ( downButton );
@@ -727,9 +724,7 @@ VolumeApplet::VolumeApplet( QWidget *parent, const char *name )
   setFixedWidth ( AppLnk::smallIconSize()  );
   setFixedHeight ( AppLnk::smallIconSize()+4 );
 
-  QPixmap pic;
-  pic.convertFromImage( Resource::loadImage( "volume" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-  m_pixmap = new QPixmap ( pic );
+  m_pixmap = new QPixmap ( Opie::Core::OResource::loadPixmap( "volume", Opie::Core::OResource::SmallIcon ) );
   m_dialog = new VolumeControl ( this, true, this, "volumecontrol" );
 
   connect ( qApp, SIGNAL( volumeChanged(bool)), m_dialog, SLOT( volumeChanged(bool)));
