@@ -13,16 +13,16 @@
 **********************************************************************/
 
 #include "screenshot.h"
-#include "inputDialog.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/ofiledialog.h>
+#include <opie2/oresource.h>
 #include <opie2/otaskbarapplet.h>
+
 #include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/resource.h>
-
 
 /* QT */
 #include <qlineedit.h>
@@ -111,22 +111,13 @@ void ScreenshotControl::slotGrab()
   setFileName = FALSE;
   if ( saveNamedCheck->isChecked()) {
     setFileName = TRUE;
-    InputDialog *fileDlg;
 
-    fileDlg = new InputDialog( 0 , tr("Name of screenshot "), TRUE, 0);
-    fileDlg->exec();
-    fileDlg->raise();
-    QString fileName, list;
-    if ( fileDlg->result() == 1 ) {
-      fileName = fileDlg->LineEdit1->text();
+    MimeTypes types;
+    QStringList list;
+    list << "image/*";
+    types. insert ( "Images", list );
 
-      if (fileName.find("/", 0, TRUE) == -1)
-        FileNamePath = QDir::homeDirPath() + "/Documents/image/png/" + fileName;
-      else
-        FileNamePath = fileName;
-
-    }
-    delete fileDlg;
+    FileNamePath = Opie::Ui::OFileDialog::getSaveFileName( 1,"/","", types, 0 );
   }
 
   if ( delaySpin->value() )
@@ -304,7 +295,7 @@ ScreenshotApplet::ScreenshotApplet( QWidget *parent, const char *name )
 {
     setFixedHeight( AppLnk::smallIconSize() );
     setFixedWidth( AppLnk::smallIconSize() );
-    m_icon.convertFromImage( Resource::loadImage( "screenshotapplet/screenshot" ).smoothScale( height(), width() ) );
+    m_icon = Opie::Core::OResource::loadPixmap( "screenshotapplet/screenshot", Opie::Core::OResource::SmallIcon );
 }
 
 ScreenshotApplet::~ScreenshotApplet()

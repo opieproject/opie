@@ -1,12 +1,12 @@
 TEMPLATE  = lib
 CONFIG    += qt plugin warn_on 
-HEADERS   = screenshot.h inputDialog.h
-SOURCES   = screenshot.cpp inputDialog.cpp
+HEADERS   = screenshot.h
+SOURCES   = screenshot.cpp
 TARGET    = screenshotapplet
 DESTDIR   = $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += 
-LIBS            += -lqpe
+LIBS            += -lqpe -lopiecore2 -lopieui2
 VERSION   = 1.0.0
 
 include( $(OPIEDIR)/include.pro )
