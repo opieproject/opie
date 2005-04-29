@@ -1,4 +1,4 @@
   config ABOUTAPPLET
     boolean "About (show version and credits)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 )
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
