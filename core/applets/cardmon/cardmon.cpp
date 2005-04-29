@@ -21,8 +21,9 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/odevice.h>
-#include <opie2/otaskbarapplet.h>
 #include <opie2/oprocess.h>
+#include <opie2/oresource.h>
+#include <opie2/otaskbarapplet.h>
 
 #include <qpe/applnk.h>
 #include <qpe/resource.h>
@@ -50,7 +51,7 @@ using namespace Opie::Ui;
 
 CardMonitor::CardMonitor( QWidget * parent ) : QWidget( parent )
 {
-    pm = Resource::loadImage( "cardmon/pcmcia").smoothScale(AppLnk::smallIconSize(), AppLnk::smallIconSize());
+    pm = Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon );
 
     QCopChannel * pcmciaChannel = new QCopChannel( "QPE/Card", this );
     connect( pcmciaChannel,
@@ -91,7 +92,7 @@ void CardMonitor::popUp( QString message, QString icon ) {
     if ( icon.isEmpty() ) {
         popupMenu->insertItem( message, 0 );
     } else {
-        popupMenu->insertItem( QIconSet( Resource::loadPixmap( icon ) ),
+        popupMenu->insertItem( QIconSet( Opie::Core::OResource::loadPixmap( icon, Opie::Core::OResource::SmallIcon ) ),
                                message, 0 );
     }
 
@@ -113,21 +114,21 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
     bool execute = true;
 
     if ( cardInSd ) {
-        menu->insertItem( QIconSet( Resource::loadPixmap( "cardmon/ide" ) ),
+        menu->insertItem( QIconSet( Opie::Core::OResource::loadPixmap( "cardmon/ide", Opie::Core::OResource::SmallIcon ) ),
                           tr( "Eject SD/MMC card" ), 0 );
     }
 
     if ( cardInPcmcia0 ) {
         menu->
         insertItem( QIconSet
-                    ( Resource::loadPixmap( "cardmon/" + cardInPcmcia0Type ) ),
+                    ( Opie::Core::OResource::loadPixmap( "cardmon/" + cardInPcmcia0Type, Opie::Core::OResource::SmallIcon ) ),
                     tr( "Eject card 0: %1" ).arg( cardInPcmcia0Name ), 1 );
     }
 
     if ( cardInPcmcia1 ) {
         menu->
         insertItem( QIconSet
-                    ( Resource::loadPixmap( "cardmon/" + cardInPcmcia1Type ) ),
+                    ( Opie::Core::OResource::loadPixmap( "cardmon/" + cardInPcmcia1Type, Opie::Core::OResource::SmallIcon ) ),
                     tr( "Eject card 1: %1" ).arg( cardInPcmcia1Name ), 2 );
     }
 
