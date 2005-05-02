@@ -29,46 +29,218 @@ _;:,     .>    :=|.         This program is free software; you can
 #include "devicesinfo.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
+#include <opie2/oinputsystem.h>
 #include <opie2/olistview.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
 /* QT */
 #include <qcombobox.h>
 #include <qfile.h>
 #include <qlayout.h>
-#include <qmessagebox.h>
 #include <qpushbutton.h>
+#include <qtextstream.h>
 #include <qtextview.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>
 
-using namespace Opie::Ui;
-
+//=================================================================================================
 DevicesView::DevicesView( QWidget* parent,  const char* name, WFlags fl )
-        : OListView( parent, name, fl )
+            :OListView( parent, name, fl )
 {
-    addColumn( tr( "Module" ) );
+    addColumn( tr( "My Computer" ) );
     setAllColumnsShowFocus( true );
     setRootIsDecorated( true );
     QWhatsThis::add( this, tr( "This is a list of all the devices currently recognized on this device." ) );
+
+    DevicesView* root = this;
+    ( new CpuCategory( root ) )->populate();
+    ( new InputCategory( root ) )->populate();
+    ( new CardsCategory( root ) )->populate();
+    ( new UsbCategory( root ) )->populate();
 }
 
 DevicesView::~DevicesView()
 {
 }
 
+//=================================================================================================
 DevicesInfo::DevicesInfo( QWidget* parent,  const char* name, WFlags fl )
-        : QWidget( parent, name, fl )
+            :QWidget( parent, name, fl )
 {
-    QGridLayout *layout = new QGridLayout( this );
+    QVBoxLayout *layout = new QVBoxLayout( this );
     layout->setSpacing( 4 );
     layout->setMargin( 4 );
-
     view = new DevicesView( this );
-    
-    layout->addMultiCellWidget( view, 0, 0, 0, 1 );
+    layout->addWidget( view );
 }
 
 DevicesInfo::~DevicesInfo()
 {
 }
+
+
+Category::Category( DevicesView* parent, const QString& name )
+         :OListViewItem( parent, name )
+{
+    odebug << "Category '" << name << "' inserted. Scanning for devices..." << oendl;
+}
+
+Category::~Category()
+{
+}
+
+//=================================================================================================
+Device::Device( Category* parent, const QString& name )
+         :OListViewItem( parent, name )
+{
+}
+
+Device::~Device()
+{
+}
+
+//=================================================================================================
+CpuCategory::CpuCategory( DevicesView* parent )
+         :Category( parent, "1. Central Processing Unit" )
+{
+}
+
+CpuCategory::~CpuCategory()
+{
+}
+
+void CpuCategory::populate()
+{
+    odebug << "CpuCategory::populate()" << oendl;
+    QFile cpuinfofile( "/proc/cpuinfo" );
+    if ( !cpuinfofile.exists() || !cpuinfofile.open( IO_ReadOnly ) )
+    {
+        new OListViewItem( this, "ERROR: /proc/cpuinfo not found or unaccessible" );
+        return;
+    }
+    QTextStream cpuinfo( &cpuinfofile );
+
+    int cpucount = 0;
+    while ( !cpuinfo.atEnd() )
+    {
+        QString line = cpuinfo.readLine();
+        odebug << "got line '" << line << "'" << oendl;
+        if ( line.startsWith( "processor" ) )
+        {
+            new OListViewItem( this, QString( "CPU #%1" ).arg( cpucount++ ) );
+        }
+        else
+        {
+            continue;
+        }
+    }
+}
+
+//=================================================================================================
+InputCategory::InputCategory( DevicesView* parent )
+         :Category( parent, "2. Input Subsystem" )
+{
+}
+
+InputCategory::~InputCategory()
+{
+}
+
+void InputCategory::populate()
+{
+    odebug << "InputCategory::populate()" << oendl;
+    OInputSystem* sys = OInputSystem::instance();
+    OInputSystem::DeviceIterator it = sys->iterator();
+    while ( it.current() )
+    {
+            OInputDevice* dev = it.current();
+        new OListViewItem( this, dev->identity() );
+        ++it;
+    }
+}
+
+//=================================================================================================
+CardsCategory::CardsCategory( DevicesView* parent )
+         :Category( parent, "3. Removable Cards" )
+{
+}
+
+CardsCategory::~CardsCategory()
+{
+}
+
+void CardsCategory::populate()
+{
+    odebug << "CardsCategory::populate()" << oendl;
+    QString fileName;
+    if ( QFile::exists( "/var/run/stab" ) ) { fileName = "/var/run/stab"; }
+    else if ( QFile::exists( "/var/state/pcmcia/stab" ) ) { fileName = "/var/state/pcmcia/stab"; }
+    else { fileName = "/var/lib/pcmcia/stab"; }
+    QFile cardinfofile( fileName );
+    if ( !cardinfofile.exists() || !cardinfofile.open( IO_ReadOnly ) )
+    {
+        new OListViewItem( this, "ERROR: pcmcia info file not found or unaccessible" );
+        return;
+    }
+    QTextStream cardinfo( &cardinfofile );
+    while ( !cardinfo.atEnd() )
+    {
+        QString line = cardinfo.readLine();
+        odebug << "got line '" << line << "'" << oendl;
+        if ( line.startsWith("Socket") )
+        {
+            new OListViewItem( this, line );
+        }
+        else
+        {
+            continue;
+        }
+    }
+}
+
+//=================================================================================================
+UsbCategory::UsbCategory( DevicesView* parent )
+         :Category( parent, "4. Universal Serial Bus" )
+{
+}
+
+UsbCategory::~UsbCategory()
+{
+}
+
+void UsbCategory::populate()
+{
+    odebug << "UsbCategory::populate()" << oendl;
+    QFile usbinfofile( "/proc/bus/usb/devices" );
+    if ( !usbinfofile.exists() || !usbinfofile.open( IO_ReadOnly ) )
+    {
+        new OListViewItem( this, "ERROR: /proc/bus/usb/devices not found or unaccessible" );
+        return;
+    }
+    QTextStream usbinfo( &usbinfofile );
+
+    int _bus, _level, _parent, _port, _count, _device, _channels, _power;
+    float _speed;
+    QString _manufacturer, _product, _serial;
+
+    int usbcount = 0;
+    while ( !usbinfo.atEnd() )
+    {
+        QString line = usbinfo.readLine();
+        odebug << "got line '" << line << "'" << oendl;
+        if ( line.startsWith("T:") )
+        {
+            sscanf(line.local8Bit().data(), "T:  Bus=%2d Lev=%2d Prnt=%2d Port=%d Cnt=%2d Dev#=%3d Spd=%3f MxCh=%2d", &_bus, &_level, &_parent, &_port, &_count, &_device, &_speed, &_channels);
+
+            new OListViewItem( this, QString( "USB Device #%1" ).arg( usbcount++ ) );
+        }
+        else
+        {
+            continue;
+        }
+    }
+}
+

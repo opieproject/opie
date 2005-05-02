@@ -33,6 +33,7 @@ _;:,     .>    :=|.         This program is free software; you can
 #include <opie2/olistview.h>
 using namespace Opie::Ui;
 
+//=================================================================================================
 class DevicesView : public OListView
 {
     Q_OBJECT
@@ -41,6 +42,7 @@ public:
     ~DevicesView();
 };
 
+//=================================================================================================
 class DevicesInfo : public QWidget
 {
     Q_OBJECT
@@ -53,4 +55,64 @@ private:
 
 private slots:
 };
+
+//=================================================================================================
+class Category : public OListViewItem
+{
+public:
+    Category( DevicesView* parent, const QString& name );
+    virtual ~Category();
+
+    virtual void populate() = 0;
+};
+
+//=================================================================================================
+class Device : public OListViewItem
+{
+public:
+    Device( Category* parent, const QString& name );
+    ~Device();
+};
+
+//=================================================================================================
+class CpuCategory : public Category
+{
+public:
+    CpuCategory( DevicesView* parent );
+    virtual ~CpuCategory();
+
+    virtual void populate();
+};
+
+//=================================================================================================
+class InputCategory : public Category
+{
+public:
+    InputCategory( DevicesView* parent );
+    virtual ~InputCategory();
+
+    virtual void populate();
+};
+
+//=================================================================================================
+class CardsCategory : public Category
+{
+public:
+    CardsCategory( DevicesView* parent );
+    virtual ~CardsCategory();
+
+    virtual void populate();
+};
+
+//=================================================================================================
+class UsbCategory : public Category
+{
+public:
+    UsbCategory( DevicesView* parent );
+    virtual ~UsbCategory();
+
+    virtual void populate();
+};
+
+
 #endif
