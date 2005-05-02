@@ -32,21 +32,31 @@ DemoApp::DemoApp( int argc, char** argv ) : OApplication( argc, argv, "libopie2 
     l->setColumnAlignment( 2, AlignCenter );
 
     QHBox* hbox = new QHBox( vbox );
-
     g2 = new QVButtonGroup( "Specify Trigger Type", hbox );
-    //QCheckBox* c1 = new QCheckBox( "Multi", g2 );
-    QCheckBox* c2 = new QCheckBox( "Access", g2 );
-    QCheckBox* c3 = new QCheckBox( "Modify", g2 );
-    QCheckBox* c4 = new QCheckBox( "Create", g2 );
-    QCheckBox* c5 = new QCheckBox( "Delete", g2 );
-    QCheckBox* c6 = new QCheckBox( "Rename", g2 );
-    QCheckBox* c7 = new QCheckBox( "Attrib", g2 );
-    g2->insert( c2, Access );
-    g2->insert( c3, Modify );
-    g2->insert( c4, Create );
-    g2->insert( c5, Delete );
-    g2->insert( c6, Rename );
-    g2->insert( c7, Attrib );
+    QCheckBox* c1 = new QCheckBox( "Access", g2 );
+    QCheckBox* c2 = new QCheckBox( "Modify", g2 );
+    QCheckBox* c3 = new QCheckBox( "Attrib", g2 );
+    QCheckBox* c4 = new QCheckBox( "CloseWrite", g2 );
+    QCheckBox* c5 = new QCheckBox( "CloseNoWrite", g2 );
+    QCheckBox* c6 = new QCheckBox( "MovedFrom", g2 );
+    QCheckBox* c7 = new QCheckBox( "MovedTo", g2 );
+    QCheckBox* c8 = new QCheckBox( "DeleteSubdir", g2 );
+    QCheckBox* c9 = new QCheckBox( "DeleteFile", g2 );
+    QCheckBox* c10 = new QCheckBox( "CreateSubdir", g2 );
+    QCheckBox* c11 = new QCheckBox( "CreateFile", g2 );
+    QCheckBox* c12 = new QCheckBox( "Unmount", g2 );
+    g2->insert( c1, Access );
+    g2->insert( c2, Modify );
+    g2->insert( c3, Attrib );
+    g2->insert( c4, CloseWrite );
+    g2->insert( c5, CloseNoWrite );
+    g2->insert( c6, MovedFrom );
+    g2->insert( c7, MovedTo );
+    g2->insert( c8, DeleteSubdir );
+    g2->insert( c9, DeleteFile );
+    g2->insert( c10, CreateSubdir );
+    g2->insert( c11, CreateFile );
+    g2->insert( c12, Unmount );
     connect( g2, SIGNAL( pressed(int) ), this, SLOT( modifierClicked(int) ) );
 
     g1 = new QVButtonGroup( "Add/Remove", hbox );
@@ -82,14 +92,12 @@ DemoApp::DemoApp( int argc, char** argv ) : OApplication( argc, argv, "libopie2 
             odebug << "Filename = " << filename << oendl;
 
             int fntype = m;
-            if ( multi ) fntype |=(int) Multi;
-
             QString modifier = QString().sprintf( " = 0x%08x", fntype );
             new OListViewItem( l, filename, multi ? "MULTI" : "SINGLE", modifier );
             if ( !multi )
                 OFileNotification::singleShot( filename, this, SLOT( trigger() ), (OFileNotificationType) fntype );
             else
-                OFileNotification::singleShot( filename, this, SLOT( trigger() ), (OFileNotificationType) fntype );
+                odebug << "not yet implemented..." << oendl;
         }
         else
         {

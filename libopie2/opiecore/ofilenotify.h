@@ -1,14 +1,14 @@
 /*
                             This file is part of the Opie Project
-             =.             Copyright (C) 2004 Michael 'Mickey' Lauer <mickey@Vanille.de>
+             =.             Copyright (C) 2004-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
            .=l.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
           .>+-=
 _;:,     .>    :=|.         This program is free software; you can
 .> <`_,   >  .   <=         redistribute it and/or  modify it under
 :`=1 )Y*s>-.--   :          the terms of the GNU Library General Public
 .="- .-=="i,     .._        License as published by the Free Software
-- .   .-<_>     .<>         Foundation; either version 2 of the License,
-    ._= =}       :          or (at your option) any later version.
+- .   .-<_>     .<>         Foundation; version 2 of the License.
+    ._= =}       :
    .%`+i>       _;_.
    .i_,=:_.      -<s.       This program is distributed in the hope that
     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
@@ -33,13 +33,12 @@ _;:,     .>    :=|.         This program is free software; you can
 #endif
 
 /* QT */
-#include <qobject.h>
+#include <qsocketnotifier.h>
 #include <qsignal.h>
 #include <qstring.h>
 
 /* STD */
-#include <signal.h>
-#include <fcntl.h>
+#include "inotify.h"
 
 namespace Opie {
 namespace Core {
@@ -56,22 +55,41 @@ namespace Core {
  * <ul>
  *    <li>Access: The file was accessed (read)
  *    <li>Modify The file was modified (write,truncate)
- *    <li>Create = The file was created in the directory
- *    <li>Delete = The file was unlinked from directory
- *    <li>Rename = The file was renamed
  *    <li>Attrib = The file had its attributes changed (chmod,chown,chgrp)
+ *    <li>CloseWrite = Writable file was closed
+ *    <li>CloseNoWrite = Unwritable file was closed
+ *    <li>Open = File was opened
+ *    <li>MovedFrom = File was moved from X
+ *    <li>MovedTo = File was moved to Y
+ *    <li>DeleteSubdir = Subdir was deleted
+ *    <li>DeleteFile = Subfile was deleted
+ *    <li>CreateSubdir = Subdir was created
+ *    <li>CreateFile = Subfile was created
+ *    <li>DeleteSelf = Self was deleted
+ *    <li>Unmount = The backing filesystem was unmounted
  * </ul>
  *
  **/
 
-enum OFileNotificationType { Single = 0x0000000,
-                             Multi  = DN_MULTISHOT,
-                             Access = DN_ACCESS,
-                             Modify = DN_MODIFY,
-                             Create = DN_CREATE,
-                             Delete = DN_DELETE,
-                             Rename = DN_RENAME,
-                             Attrib = DN_ATTRIB };
+enum OFileNotificationType
+{
+    Access          =   IN_ACCESS,
+    Modify          =   IN_MODIFY,
+    Attrib          =   IN_ATTRIB,
+    CloseWrite      =   IN_CLOSE_WRITE,
+    CloseNoWrite    =   IN_CLOSE_NOWRITE,
+    Open            =   IN_OPEN,
+    MovedFrom       =   IN_MOVED_FROM,
+    MovedTo         =   IN_MOVED_TO,
+    DeleteSubdir    =   IN_DELETE_SUBDIR,
+    DeleteFile      =   IN_DELETE_FILE,
+    CreateSubdir    =   IN_CREATE_SUBDIR,
+    CreateFile      =   IN_CREATE_FILE,
+    DeleteSelf      =   IN_DELETE_SELF,
+    Unmount         =   IN_UNMOUNT,
+    _QueueOverflow  =   IN_Q_OVERFLOW,  /* Internal, don't use this in client code */
+    _Ignored        =   IN_IGNORED,     /* Internal, don't use this in client code */
+};
 
 /*======================================================================================
  * OFileNotification
@@ -81,9 +99,9 @@ enum OFileNotificationType { Single = 0x0000000,
  * @brief Represents a file notification
  *
  * This class allows to watch for events happening to files.
- * It uses the dnotify kernel interface which is a very efficient signalling interface.
+ * It uses the inotify kernel interface
  *
- * @see <file:///usr/src/linux/Documentation/dnotify.txt>
+ * @see http://www.kernel.org/pub/linux/kernel/people/rml/inotify/
  *
  * @author Michael 'Mickey' Lauer <mickey@vanille.de>
  *
@@ -106,7 +124,7 @@ class OFileNotification : public QObject
      *  <pre>
      *
      *     #include <opie2/oapplication.h>
-     *     #include <opie2/onitify.h>
+     *     #include <opie2/ofilenotify.h>
      *     using namespace Opie::Core;
      *
      *     int main( int argc, char **argv )
@@ -118,7 +136,7 @@ class OFileNotification : public QObject
      *     }
      *  </pre>
      *
-     * This sample program automatically terminates when the file "/tmp/quite" has been created.
+     * This sample program automatically terminates when the file "/tmp/quit" has been created.
      *
      *
      * The @a receiver is the receiving object and the @a member is the slot.
@@ -128,7 +146,7 @@ class OFileNotification : public QObject
      * Starts to watch for @a type changes to @a path. Set @a sshot to True if you want to be notified only once.
      * Note that in that case it may be more convenient to use @ref OFileNotification::singleShot() then.
      **/
-    int start( const QString& path, bool sshot = false, OFileNotificationType type = Modify );
+    int watch( const QString& path, bool sshot = false, OFileNotificationType type = Modify );
     /**
      * Stop watching for file events.
      **/
@@ -142,10 +160,6 @@ class OFileNotification : public QObject
      **/
     QString path() const;
     /**
-     * @returns the UNIX file descriptor for the file being watched.
-     **/
-    int fileno() const;
-    /**
      * @returns if a file is currently being watched.
      **/
     bool isActive() const;
@@ -158,30 +172,23 @@ class OFileNotification : public QObject
 
   protected:
     bool activate();
-    virtual bool hasChanged();
-    static bool registerSignalHandler();
-    static void unregisterSignalHandler();
-    static void __signalHandler( int sig, siginfo_t *si, void *data );
+
+  private slots:
+    void inotifyEventHandler();
 
   private:
+    bool registerEventHandler();
+    void unregisterEventHandler();
+
     QString _path;
     OFileNotificationType _type;
     QSignal _signal;
-    int _fd;
     bool _active;
-    struct stat _stat;
+    bool _multi;
+    static QSocketNotifier* _sn;
+    int _wd; // inotify watch descriptor
+    static int _fd; // inotify device descriptor
 };
-
-#if 0
-
-class ODirectoryNotification : public OFileNotification
-{
-
-  public:
-      virtual bool hasChanged() { return true; };
-};
-
-#endif
 
 }
 }
