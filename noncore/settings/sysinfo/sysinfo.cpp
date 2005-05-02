@@ -23,7 +23,7 @@
 **********************************************************************/
 
 #include "memory.h"
-#include "load.h"
+#include "devicesinfo.h"
 #include "storage.h"
 #include "processinfo.h"
 #include "modulesinfo.h"
@@ -47,12 +47,6 @@ SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags )
     setIcon( Resource::loadPixmap( "system_icon" ) );
     setCaption( tr("System Info") );
 
-    resize( 220, 180 );
-
-    Config config( "qpe" );
-    config.setGroup( "Appearance" );
-    bool advanced = config.readBoolEntry( "Advanced", TRUE );
-
     QVBoxLayout *lay = new QVBoxLayout( this );
     OTabWidget *tab = new OTabWidget( this, "tabwidget", OTabWidget::Global );
     lay->addWidget( tab );
@@ -61,12 +55,9 @@ SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags )
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
     tab->addTab( new FileSysInfo( tab ), "sysinfo/storagetabicon", tr("Storage") );
 #endif
-    tab->addTab( new LoadInfo( tab ), "sysinfo/cputabicon", tr("CPU") );
-    if ( advanced )
-    {
-        tab->addTab( new ProcessInfo( tab ), "sysinfo/processtabicon", tr( "Process" ) );
-        tab->addTab( new ModulesInfo( tab ), "sysinfo/moduletabicon", tr( "Modules" ) );
-    }
+    tab->addTab( new DevicesInfo( tab ), "sysinfo/cputabicon", tr("Devices") );
+    tab->addTab( new ProcessInfo( tab ), "sysinfo/processtabicon", tr( "Process" ) );
+    tab->addTab( new ModulesInfo( tab ), "sysinfo/moduletabicon", tr( "Modules" ) );
     tab->addTab( new SyslogInfo( tab ), "sysinfo/syslogtabicon", tr( "Syslog" ) );
     tab->addTab( new BenchmarkInfo( tab ), "sysinfo/benchmarktabicon", tr( "Benchmark" ) );
     tab->addTab( new VersionInfo( tab ), "sysinfo/versiontabicon", tr("Version") );
