@@ -32,13 +32,12 @@ _;:,     .>    :=|.         This program is free software; you can
 #define _GNU_SOURCE
 #endif
 
+#include "linux_inotify.h"
+
 /* QT */
 #include <qsocketnotifier.h>
 #include <qsignal.h>
 #include <qstring.h>
-
-/* STD */
-#include "inotify.h"
 
 namespace Opie {
 namespace Core {
