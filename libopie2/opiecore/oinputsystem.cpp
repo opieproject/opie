@@ -71,8 +71,8 @@ void OInputSystem::synchronize()
         {
             QString absPath = devInput.absFilePath( *it );
             bool isValid = OInputDevice::isValid( absPath );
-            qDebug( "OInputSystem::synchronize() - checking if '%s' is a valid input system node... '%s'",
-            (const char*) absPath, isValid ? "yes" : "no" );
+            qDebug( "OInputSystem::synchronize() - checking if '%s' is a valid input system node... '%s' [%s]",
+            (const char*) absPath, isValid ? "yes" : "no", isValid ? "(ok)" : strerror( errno ) );
             if ( isValid ) _devices.insert( *it, new OInputDevice( this, absPath ) );
         }
     }
