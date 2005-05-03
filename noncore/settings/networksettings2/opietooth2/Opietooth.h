@@ -1,7 +1,7 @@
 #ifndef OPIETOOTH_H
 #define OPIETOOTH_H
 
-#include <OTIcons.h>
+#include "OTIcons.h"
 
 class MyProcess;
 
@@ -15,7 +15,7 @@ namespace Opie {
 
 }
 
-#include <OTSniffGUI.h>
+#include "OTSniffGUI.h"
 namespace Opietooth2 {
 
 class OTGateway;
@@ -53,7 +53,7 @@ private :
 };
 }
 
-#include <OTPairingGUI.h>
+#include "OTPairingGUI.h"
 
 namespace Opietooth2 {
 class OTPairing : public OTPairingGUI {
@@ -82,7 +82,7 @@ private :
 };
 }
 
-#include <OTScanGUI.h>
+#include "OTScanGUI.h"
 
 namespace Opietooth2 {
 
@@ -160,7 +160,7 @@ private :
 };
 }
 
-#include <OTManageGUI.h>
+#include "OTManageGUI.h"
 namespace Opietooth2 {
 
 class OTManage : public OTManageGUI {
@@ -198,7 +198,7 @@ private :
 };
 }
 
-#include <OTMainGUI.h>
+#include "OTMainGUI.h"
 
 namespace Opietooth2 {
 class OTMain : public OTMainGUI {
