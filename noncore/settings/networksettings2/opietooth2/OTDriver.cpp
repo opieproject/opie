@@ -13,7 +13,9 @@
 
 #include <sys/poll.h>
 #include <bluezlib.h>
-
+#ifndef GET_LINK_QUALITY_RP_SIZE
+#define GET_LINK_QUALITY_RP_SIZE READ_LINK_QUALITY_RP_SIZE
+#endif
 #include <OTGateway.h>
 #include <OTDriver.h>
 #include <OTHCISocket.h>
