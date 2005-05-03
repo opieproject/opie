@@ -29,17 +29,21 @@ _;:,     .>    :=|.         This program is free software; you can
 #ifndef DEVICESINFO_H
 #define DEVICESINFO_H
 
-#include <qwidget.h>
+/* OPIE */
 #include <opie2/olistview.h>
-using namespace Opie::Ui;
+
+/* QT */
+#include <qwidget.h>
 
 //=================================================================================================
-class DevicesView : public OListView
+class DevicesView : public Opie::Ui::OListView
 {
     Q_OBJECT
 public:
     DevicesView( QWidget* parent = 0, const char* name = 0, WFlags f = 0 );
     ~DevicesView();
+public slots:
+    void selectionChanged( QListViewItem* item );
 };
 
 //=================================================================================================
@@ -51,13 +55,13 @@ public:
     ~DevicesInfo();
 
 private:
-    OListView* view;
+    Opie::Ui::OListView* view;
 
 private slots:
 };
 
 //=================================================================================================
-class Category : public OListViewItem
+class Category : public Opie::Ui::OListViewItem
 {
 public:
     Category( DevicesView* parent, const QString& name );
@@ -67,7 +71,7 @@ public:
 };
 
 //=================================================================================================
-class Device : public OListViewItem
+class Device : public Opie::Ui::OListViewItem
 {
 public:
     Device( Category* parent, const QString& name );

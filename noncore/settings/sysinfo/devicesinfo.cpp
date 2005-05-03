@@ -31,15 +31,16 @@ _;:,     .>    :=|.         This program is free software; you can
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/oinputsystem.h>
+#include <opie2/olayout.h>
 #include <opie2/olistview.h>
 #include <qpe/qpeapplication.h>
 using namespace Opie::Core;
 using namespace Opie::Ui;
 
 /* QT */
+#include <qlistview.h>
 #include <qcombobox.h>
 #include <qfile.h>
-#include <qlayout.h>
 #include <qpushbutton.h>
 #include <qtextstream.h>
 #include <qtextview.h>
@@ -48,7 +49,7 @@ using namespace Opie::Ui;
 
 //=================================================================================================
 DevicesView::DevicesView( QWidget* parent,  const char* name, WFlags fl )
-            :OListView( parent, name, fl )
+            :Opie::Ui::OListView( parent, name, fl )
 {
     addColumn( tr( "My Computer" ) );
     setAllColumnsShowFocus( true );
@@ -60,17 +61,26 @@ DevicesView::DevicesView( QWidget* parent,  const char* name, WFlags fl )
     ( new InputCategory( root ) )->populate();
     ( new CardsCategory( root ) )->populate();
     ( new UsbCategory( root ) )->populate();
+
+    connect( this, SIGNAL(selectionChanged(QListViewItem*)), this, SLOT(selectionChanged(QListViewItem*)) );
 }
 
 DevicesView::~DevicesView()
 {
 }
 
+
+void DevicesView::selectionChanged( QListViewItem* item )
+{
+    odebug << "DevicesView::selectionChanged to '" << item->text( 0 ) << "'" << oendl;
+}
+
+
 //=================================================================================================
 DevicesInfo::DevicesInfo( QWidget* parent,  const char* name, WFlags fl )
             :QWidget( parent, name, fl )
 {
-    QVBoxLayout *layout = new QVBoxLayout( this );
+    OAutoBoxLayout *layout = new OAutoBoxLayout( this );
     layout->setSpacing( 4 );
     layout->setMargin( 4 );
     view = new DevicesView( this );
