@@ -18,6 +18,10 @@
 #include "configdlg.h"
 #include "dingwidget.h"
 
+#include <opie2/oresource.h>
+
+#include <qpe/config.h>
+
 #include <qmenubar.h>
 #include <qmessagebox.h>
 #include <qvbox.h>
@@ -27,9 +31,6 @@
 #include <qaction.h>
 #include <qtextbrowser.h>
 #include <qcombobox.h>
-
-#include <qpe/resource.h>
-#include <qpe/config.h>
 
 ODict::ODict(QWidget* parent, const char* name, WFlags fl ) : QMainWindow(parent,  name, fl )
 {
@@ -202,15 +203,18 @@ void ODict::setupMenus()
 	menu = new QMenuBar( this );
 
 	settings = new QPopupMenu( menu );
-	setting_a = new QAction(tr( "Configuration" ), Resource::loadPixmap( "new" ), QString::null, 0, this, 0 );
+    setting_a = new QAction( tr( "Configuration" ),
+                             Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ),
+                             QString::null, 0, this, 0 );
 	connect( setting_a, SIGNAL( activated() ), this, SLOT( slotSettings() ) );
 	setting_a->addTo( settings );
-	setting_b = new QAction(tr(  "Searchmethods" ), Resource::loadPixmap( "edit" ), QString::null, 0, this, 0 );
+	setting_b = new QAction( tr( "Search methods" ),
+                             Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ),
+                             QString::null, 0, this, 0 );
 
 	parameter = new QPopupMenu( menu );
 	connect(  parameter, SIGNAL( activated(int) ), this, SLOT( slotSetParameter(int) ) );
-	parameter->insertItem( tr( "C&ase sensitive" ), 0 ,0 );
-	parameter->insertSeparator();
+	parameter->insertItem( tr( "Case sensitive" ), 0 ,0 );
 
 	menu->insertItem( tr( "Settings" ) , settings );
 	menu->insertItem( tr( "Parameter" ) , parameter );
