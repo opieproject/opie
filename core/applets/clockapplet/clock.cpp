@@ -25,12 +25,12 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <opie2/otaskbarapplet.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
-#include <qpe/resource.h>
 
 #include <qpopupmenu.h>
 
@@ -75,8 +75,8 @@ void LauncherClock::mousePressEvent( QMouseEvent * )
     Config config( "Clock" );
     config.setGroup( "Daily Alarm" );
     bool alarmOn = config.readBoolEntry("Enabled", FALSE);
-    menu->insertItem(Resource::loadIconSet(alarmOn?"clockapplet/smallalarm":"clockapplet/smallalarm_off" ),
-                     tr("Alarm..."), 2);
+    menu->insertItem( Opie::Core::OResource::loadPixmap( alarmOn ? "clockapplet/smallalarm" : "clockapplet/smallalarm_off",
+                                                         Opie::Core::OResource::SmallIcon ), tr("Alarm..."), 2 );
 
 
     /* FIXME use OTaskBarApplet ### */

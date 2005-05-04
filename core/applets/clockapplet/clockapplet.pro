@@ -6,7 +6,7 @@ TARGET		= clockapplet
 DESTDIR		= $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      +=  ..
-LIBS            += -lqpe
+LIBS            += -lqpe -lopiecore2
 VERSION		= 1.0.0
 
 include( $(OPIEDIR)/include.pro )
