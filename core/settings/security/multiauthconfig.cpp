@@ -1,9 +1,9 @@
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <opie2/multiauthpassword.h>
 
 #include <qgroupbox.h>
 #include <qvgroupbox.h>
-#include <qpe/resource.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qhbox.h>
@@ -49,7 +49,7 @@ class ToolButton : public QToolButton {
     public:
         ToolButton( QWidget *parent, const char *name, const QString& icon, QObject *handler, const QString& slot, bool t = FALSE )
             : QToolButton( parent, name ) {
-                setPixmap( Resource::loadPixmap( icon ) );
+                setPixmap( Opie::Core::OResource::loadPixmap( icon, Opie::Core::OResource::SmallIcon ) );
                 setAutoRaise( TRUE );
                 setFocusPolicy( QWidget::NoFocus );
                 setToggleButton( t );
@@ -228,7 +228,8 @@ static void test_and_start() {
                                   plugin.pluginObject->pluginName() );
             }
             // set the order/activate tab
-            QPixmap icon = Resource::loadPixmap( plugin.pluginObject->pixmapNameWidget() );
+            QPixmap icon = Opie::Core::OResource::loadPixmap( plugin.pluginObject->pixmapNameWidget(),
+                                                              Opie::Core::OResource::SmallIcon );
             QCheckListItem * item = new QCheckListItem(m_pluginListView, plugin.pluginObject->pluginName(), QCheckListItem::CheckBox );
             if ( !icon.isNull() ) {
                 item->setPixmap( 0, icon );
