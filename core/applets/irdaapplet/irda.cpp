@@ -17,9 +17,10 @@
 #include "irda.h"
 
 /* OPIE */
+#include <opie2/oresource.h>
 #include <opie2/otaskbarapplet.h>
+
 #include <qpe/applnk.h>
-#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/ir.h>
 
@@ -48,10 +49,10 @@ IrdaApplet::IrdaApplet ( QWidget *parent, const char *name )
 
     m_sockfd = ::socket ( PF_INET, SOCK_DGRAM, IPPROTO_IP );
 
-    m_irdaOnPixmap = Resource::loadImage( "irdaapplet/irdaon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize());
-    m_irdaOffPixmap = Resource::loadImage( "irdaapplet/irdaoff" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize());
-    m_irdaDiscoveryOnPixmap = Resource::loadImage( "irdaapplet/magglass" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize());
-    m_receiveActivePixmap = Resource::loadImage( "irdaapplet/receive" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize());
+    m_irdaOnPixmap = Opie::Core::OResource::loadPixmap( "irdaapplet/irdaon", Opie::Core::OResource::SmallIcon );
+    m_irdaOffPixmap = Opie::Core::OResource::loadPixmap( "irdaapplet/irdaoff", Opie::Core::OResource::SmallIcon );
+    m_irdaDiscoveryOnPixmap = Opie::Core::OResource::loadPixmap( "irdaapplet/magglass", Opie::Core::OResource::SmallIcon );
+    m_receiveActivePixmap = Opie::Core::OResource::loadPixmap( "irdaapplet/receive", Opie::Core::OResource::SmallIcon );
 
 	m_irda_active = false;
 	m_irda_discovery_active = false;
@@ -93,7 +94,8 @@ void IrdaApplet::popup ( QString message, QString icon )
 	if ( icon. isEmpty ( ))
 		m_popup-> insertItem ( message, 0 );
 	else
-		m_popup-> insertItem ( QIconSet ( Resource::loadPixmap ( icon )), message, 0 );
+        m_popup-> insertItem ( QIconSet ( Opie::Core::OResource::loadPixmap ( icon, Opie::Core::OResource::SmallIcon )),
+                               message, 0 );
 
 	QPoint p = mapToGlobal ( QPoint ( 0, 0 ));
 	QSize s = m_popup-> sizeHint ( );
