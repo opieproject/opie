@@ -24,9 +24,10 @@
 #include "zonemap.h"
 
 /* OPIE */
-#include <qpe/resource.h>
-#include <qpe/qpeapplication.h>
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
+
+#include <qpe/qpeapplication.h>
 
 /* QT */
 #include <qfile.h>
@@ -160,9 +161,10 @@ ZoneMap::ZoneMap( QWidget *parent, const char* name )
     // just set the current image to point
     pixCurr = new QPixmap();
 
-    QPixmap pixZoom = Resource::loadPixmap( "mag" );
+    QPixmap pixZoom = Opie::Core::OResource::loadPixmap( "mag", Opie::Core::OResource::SmallIcon );
 
     cmdZoom = new QToolButton( this, "Zoom command" );
+    cmdZoom->setUsesBigPixmap( qApp->desktop()->size().width() > 330 );
     cmdZoom->setPixmap( pixZoom );
     cmdZoom->setToggleButton( true );
 
@@ -602,7 +604,7 @@ static inline void darken( QImage *pImage, int start, int stop, int row )
 
 void ZoneMap::makeMap( int w, int h )
 {
-    QImage imgOrig = Resource::loadImage( strMAP );
+    QImage imgOrig = Opie::Core::OResource::loadImage( strMAP );
     if ( imgOrig.isNull() ) {
     QMessageBox::warning( this,
                           tr( "Couldn't Find Map" ),
