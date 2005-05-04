@@ -73,25 +73,37 @@ DevicesView::~DevicesView()
 void DevicesView::selectionChanged( QListViewItem* item )
 {
     odebug << "DevicesView::selectionChanged to '" << item->text( 0 ) << "'" << oendl;
+    QWidget* details = ( static_cast<Device*>( item ) )->detailsWidget();
+    ( static_cast<DevicesInfo*>( parent() ) )->setDetailsWidget( details );
 }
 
 
 //=================================================================================================
 DevicesInfo::DevicesInfo( QWidget* parent,  const char* name, WFlags fl )
-            :QWidget( parent, name, fl )
+            :QWidget( parent, name, fl ), details( 0 )
 {
-    OAutoBoxLayout *layout = new OAutoBoxLayout( this );
+    layout = new OAutoBoxLayout( this );
     layout->setSpacing( 4 );
     layout->setMargin( 4 );
     view = new DevicesView( this );
     layout->addWidget( view );
 }
 
+
 DevicesInfo::~DevicesInfo()
 {
 }
 
 
+void DevicesInfo::setDetailsWidget( QWidget* w )
+{
+    if ( details ) delete( details );
+    layout->addWidget( w );
+    w->show();
+}
+
+
+//=================================================================================================
 Category::Category( DevicesView* parent, const QString& name )
          :OListViewItem( parent, name )
 {
@@ -111,6 +123,12 @@ Device::Device( Category* parent, const QString& name )
 Device::~Device()
 {
 }
+
+QWidget* Device::detailsWidget()
+{
+    return new QPushButton( static_cast<QWidget*>( listView()->parent() ), "Press Button to self-destruct" );
+}
+
 
 //=================================================================================================
 CpuCategory::CpuCategory( DevicesView* parent )

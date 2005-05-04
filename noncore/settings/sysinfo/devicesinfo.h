@@ -31,6 +31,7 @@ _;:,     .>    :=|.         This program is free software; you can
 
 /* OPIE */
 #include <opie2/olistview.h>
+#include <opie2/olayout.h>
 
 /* QT */
 #include <qwidget.h>
@@ -54,9 +55,12 @@ public:
     DevicesInfo( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
     ~DevicesInfo();
 
-private:
-    Opie::Ui::OListView* view;
+    void setDetailsWidget( QWidget* w = 0 );
 
+private:
+    Opie::Ui::OAutoBoxLayout* layout;
+    Opie::Ui::OListView* view;
+    QWidget* details;
 private slots:
 };
 
@@ -76,6 +80,8 @@ class Device : public Opie::Ui::OListViewItem
 public:
     Device( Category* parent, const QString& name );
     ~Device();
+
+    QWidget* detailsWidget();
 };
 
 //=================================================================================================
