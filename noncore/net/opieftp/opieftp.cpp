@@ -23,24 +23,27 @@ extern "C" {
 //#include <opie2/odebug.h>
 //using namespace Opie::Core;
 
-#include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
+
+#include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/qpemenubar.h>
 
-#include <qtextstream.h>
-#include <qpushbutton.h>
-#include <qtoolbutton.h>
+#include <qbitmap.h>
 #include <qcombobox.h>
-#include <qlistview.h>
 #include <qlabel.h>
+#include <qlayout.h>
+#include <qlistview.h>
+#include <qmenubar.h>
+#include <qmessagebox.h>
 #include <qprogressbar.h>
+#include <qpushbutton.h>
 #include <qspinbox.h>
 #include <qtabwidget.h>
-#include <qlayout.h>
-#include <qmessagebox.h>
-#include <qmenubar.h>
-#include <qpe/qpemenubar.h>
+#include <qtextstream.h>
+#include <qtoolbutton.h>
 
 #include <qlineedit.h>
 #include <qlistbox.h>
@@ -90,10 +93,7 @@ void OpieFtp::initializeGui() {
 //     QPEToolBar *menuBar = new QPEToolBar(this);
 //     menuBar->setHorizontalStretchable( TRUE );
 
-    QWMatrix matrix;
-    QPixmap pix(Resource::loadPixmap( "UnknownDocument" ));
-    matrix.scale( .4, .4);
-    unknownXpm =  pix.xForm(matrix);
+    unknownXpm =  Opie::Core::OResource::loadPixmap( "UnknownDocument", Opie::Core::OResource::SmallIcon );
 
     connectionMenu  = new QPopupMenu( this );
     localMenu  = new QPopupMenu( this );
@@ -133,35 +133,27 @@ void OpieFtp::initializeGui() {
     tabMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
     tabMenu->insertItem( tr( "Switch to Remote" ), this, SLOT( switchToRemoteTab() ));
     tabMenu->insertItem( tr( "Switch to Config" ), this, SLOT( switchToConfigTab() ));
-    tabMenu->insertSeparator();
-//    tabMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
     tabMenu->setCheckable(TRUE);
 
-
+    bool useBigPix = qApp->desktop()->size().width() > 330;
     cdUpButton = new QToolButton( view,"cdUpButton");
-    cdUpButton->setPixmap(Resource::loadPixmap("up"));
-    cdUpButton ->setFixedSize( QSize( 20, 20 ) );
+    cdUpButton->setUsesBigPixmap( useBigPix );
+    cdUpButton->setPixmap( Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ) );
+    cdUpButton->setFixedSize( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
     connect( cdUpButton ,SIGNAL(released()),this,SLOT( upDir()) );
     layout->addMultiCellWidget( cdUpButton, 0, 0, 4, 4 );
     cdUpButton->hide();
 
-//     docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",view,"docsButton");
-//     docButton->setFixedSize( QSize( 20, 20 ) );
-//     connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
-//     docButton->setFlat(TRUE);
-//     layout->addMultiCellWidget( docButton, 0, 0, 6, 6 );
-
     homeButton = new QToolButton( view,"homeButton");
-    homeButton->setPixmap( Resource::loadPixmap("home"));
-    homeButton->setFixedSize( QSize( 20, 20 ) );
+    homeButton->setUsesBigPixmap( useBigPix );
+    homeButton->setPixmap( Opie::Core::OResource::loadPixmap( "home", Opie::Core::OResource::SmallIcon ) );
+    homeButton->setFixedSize( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
     connect(homeButton,SIGNAL(released()),this,SLOT(homeButtonPushed()) );
     layout->addMultiCellWidget( homeButton, 0, 0, 3, 3);
     homeButton->hide();
 
     TabWidget = new QTabWidget( view, "TabWidget" );
     layout->addMultiCellWidget( TabWidget, 1, 1, 0, 4 );
-
-//     TabWidget->setTabShape(QTabWidget::Triangular);
 
     tab = new QWidget( TabWidget, "tab" );
     tabLayout = new QGridLayout( tab );
@@ -341,7 +333,7 @@ void OpieFtp::initializeGui() {
 //    ServerComboBox->setCurrentItem(currentServerConfig);
 
     TabWidget->setCurrentPage(2);
-		qDebug("XXXXXXXXXXXX Constructor done");
+//		qDebug("XXXXXXXXXXXX Constructor done");
 
 }
 
@@ -699,13 +691,13 @@ void OpieFtp::populateLocalView()
 
             if(isDir || fileL.find("/",0,TRUE) != -1) {
                 if( !QDir( fi->filePath() ).isReadable())
-                    pm = Resource::loadPixmap( "lockedfolder" );
+                    pm = Opie::Core::OResource::loadPixmap( "lockedfolder", Opie::Core::OResource::SmallIcon );
                 else
-                    pm= Resource::loadPixmap( "folder" );
+                    pm = Opie::Core::OResource::loadPixmap( "folder", Opie::Core::OResource::SmallIcon );
                 item->setPixmap( 0,pm );
             } else {
                 if( !fi->isReadable() )
-                    pm = Resource::loadPixmap( "locked" );
+                    pm = Opie::Core::OResource::loadPixmap( "locked", Opie::Core::OResource::SmallIcon );
                 else {
                     MimeType mt(fi->filePath());
                     pm=mt.pixmap(); //sets the correct pixmap for mimetype
@@ -715,13 +707,12 @@ void OpieFtp::populateLocalView()
             }
             if(  fileL.find("->",0,TRUE) != -1) {
                   // overlay link image
-                pm= Resource::loadPixmap( "folder" );
-                QPixmap lnk = Resource::loadPixmap( "opie/symlink" );
+                pm = Opie::Core::OResource::loadPixmap( "folder", Opie::Core::OResource::SmallIcon );
+                QPixmap lnk = Opie::Core::OResource::loadPixmap( "opie/symlink" );
                 QPainter painter( &pm );
                 painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
-                pm.setMask( pm.createHeuristicMask( FALSE ) );
             }
-                    item->setPixmap( 0,pm);
+            item->setPixmap( 0,pm);
         }
         isDir=FALSE;
         ++it;
@@ -763,13 +754,13 @@ bool OpieFtp::populateRemoteView( )
 
            if(s.left(1) == "d" || fileL.find("/",0,TRUE) != -1) {
                QListViewItem * item = new QListViewItem( Remote_View, fileL, fileDate, fileS,"d");
-               item->setPixmap( 0, Resource::loadPixmap( "folder" ));
+               item->setPixmap( 0, Opie::Core::OResource::loadPixmap( "folder", Opie::Core::OResource::SmallIcon ));
 //                      if(itemDir)
                      item->moveItem(itemDir);
                  itemDir=item;
            } else {
                QListViewItem * item = new QListViewItem( Remote_View, fileL, fileDate, fileS,"f");
-               item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
+               item->setPixmap( 0, Opie::Core::OResource::loadPixmap( "fileopen", Opie::Core::OResource::SmallIcon ));
 //                      if(itemFile)
                      item->moveItem(itemDir);
                      item->moveItem(itemFile);
@@ -777,7 +768,7 @@ bool OpieFtp::populateRemoteView( )
            }
         }
         QListViewItem * item1 = new QListViewItem( Remote_View, "../");
-        item1->setPixmap( 0, Resource::loadPixmap( "folder" ));
+        item1->setPixmap( 0, Opie::Core::OResource::loadPixmap( "folder", Opie::Core::OResource::SmallIcon ));
         file.close();
         if( file.exists())
             file. remove();
