@@ -27,7 +27,6 @@ _;:,     .>    :=|.         This program is free software; you can
 */
 
 #include "devicesinfo.h"
-
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/oinputsystem.h>
@@ -38,6 +37,7 @@ using namespace Opie::Core;
 using namespace Opie::Ui;
 
 /* QT */
+#include <qobjectlist.h>
 #include <qlistview.h>
 #include <qcombobox.h>
 #include <qfile.h>
@@ -73,8 +73,15 @@ DevicesView::~DevicesView()
 void DevicesView::selectionChanged( QListViewItem* item )
 {
     odebug << "DevicesView::selectionChanged to '" << item->text( 0 ) << "'" << oendl;
-    QWidget* details = ( static_cast<Device*>( item ) )->detailsWidget();
-    ( static_cast<DevicesInfo*>( parent() ) )->setDetailsWidget( details );
+    if ( item->parent() )
+    {
+        QWidget* details = ( static_cast<Device*>( item ) )->detailsWidget();
+        ( static_cast<DevicesInfo*>( parent() ) )->setDetailsWidget( details );
+    }
+    else
+    {
+        odebug << "DevicesView::not a device node." << oendl;
+    }
 }
 
 
@@ -83,10 +90,12 @@ DevicesInfo::DevicesInfo( QWidget* parent,  const char* name, WFlags fl )
             :QWidget( parent, name, fl ), details( 0 )
 {
     layout = new OAutoBoxLayout( this );
-    layout->setSpacing( 4 );
-    layout->setMargin( 4 );
+    layout->setSpacing( 2 );
+    layout->setMargin( 2 );
     view = new DevicesView( this );
-    layout->addWidget( view );
+    layout->addWidget( view, 100 );
+    stack = new QWidgetStack( this );
+    layout->addWidget( stack, 70 );
 }
 
 
@@ -97,9 +106,14 @@ DevicesInfo::~DevicesInfo()
 
 void DevicesInfo::setDetailsWidget( QWidget* w )
 {
-    if ( details ) delete( details );
-    layout->addWidget( w );
-    w->show();
+    if ( details )
+    {
+        qDebug( "hiding widget '%s' ('%s')", details->name(), details->className() );
+        stack->removeWidget( w );
+    }
+
+    stack->addWidget( details = w, 40 );
+    stack->raiseWidget( details );
 }
 
 
@@ -113,22 +127,6 @@ Category::Category( DevicesView* parent, const QString& name )
 Category::~Category()
 {
 }
-
-//=================================================================================================
-Device::Device( Category* parent, const QString& name )
-         :OListViewItem( parent, name )
-{
-}
-
-Device::~Device()
-{
-}
-
-QWidget* Device::detailsWidget()
-{
-    return new QPushButton( static_cast<QWidget*>( listView()->parent() ), "Press Button to self-destruct" );
-}
-
 
 //=================================================================================================
 CpuCategory::CpuCategory( DevicesView* parent )
@@ -146,23 +144,26 @@ void CpuCategory::populate()
     QFile cpuinfofile( "/proc/cpuinfo" );
     if ( !cpuinfofile.exists() || !cpuinfofile.open( IO_ReadOnly ) )
     {
-        new OListViewItem( this, "ERROR: /proc/cpuinfo not found or unaccessible" );
+        new CpuDevice( this, "ERROR: /proc/cpuinfo not found or unaccessible" );
         return;
     }
     QTextStream cpuinfo( &cpuinfofile );
 
     int cpucount = 0;
+    CpuDevice* dev = 0;
+
     while ( !cpuinfo.atEnd() )
     {
         QString line = cpuinfo.readLine();
         odebug << "got line '" << line << "'" << oendl;
         if ( line.startsWith( "processor" ) )
         {
-            new OListViewItem( this, QString( "CPU #%1" ).arg( cpucount++ ) );
+            dev = new CpuDevice( this, QString( "CPU #%1" ).arg( cpucount++ ) );
+            dev->addInfo( line );
         }
         else
         {
-            continue;
+            if ( dev ) dev->addInfo( line );
         }
     }
 }
@@ -185,7 +186,7 @@ void InputCategory::populate()
     while ( it.current() )
     {
             OInputDevice* dev = it.current();
-        new OListViewItem( this, dev->identity() );
+        new InputDevice( this, dev->identity() );
         ++it;
     }
 }
@@ -210,7 +211,7 @@ void CardsCategory::populate()
     QFile cardinfofile( fileName );
     if ( !cardinfofile.exists() || !cardinfofile.open( IO_ReadOnly ) )
     {
-        new OListViewItem( this, "ERROR: pcmcia info file not found or unaccessible" );
+        new CardDevice( this, "ERROR: pcmcia info file not found or unaccessible" );
         return;
     }
     QTextStream cardinfo( &cardinfofile );
@@ -218,9 +219,9 @@ void CardsCategory::populate()
     {
         QString line = cardinfo.readLine();
         odebug << "got line '" << line << "'" << oendl;
-        if ( line.startsWith("Socket") )
+        if ( line.startsWith( "Socket" ) )
         {
-            new OListViewItem( this, line );
+            new CardDevice( this, line );
         }
         else
         {
@@ -245,7 +246,7 @@ void UsbCategory::populate()
     QFile usbinfofile( "/proc/bus/usb/devices" );
     if ( !usbinfofile.exists() || !usbinfofile.open( IO_ReadOnly ) )
     {
-        new OListViewItem( this, "ERROR: /proc/bus/usb/devices not found or unaccessible" );
+        new UsbDevice( this, "ERROR: /proc/bus/usb/devices not found or unaccessible" );
         return;
     }
     QTextStream usbinfo( &usbinfofile );
@@ -259,11 +260,11 @@ void UsbCategory::populate()
     {
         QString line = usbinfo.readLine();
         odebug << "got line '" << line << "'" << oendl;
-        if ( line.startsWith("T:") )
+        if ( line.startsWith( "T:" ) )
         {
             sscanf(line.local8Bit().data(), "T:  Bus=%2d Lev=%2d Prnt=%2d Port=%d Cnt=%2d Dev#=%3d Spd=%3f MxCh=%2d", &_bus, &_level, &_parent, &_port, &_count, &_device, &_speed, &_channels);
 
-            new OListViewItem( this, QString( "USB Device #%1" ).arg( usbcount++ ) );
+            new UsbDevice( this, QString( "USB Device #%1" ).arg( usbcount++ ) );
         }
         else
         {
@@ -272,3 +273,80 @@ void UsbCategory::populate()
     }
 }
 
+
+//=================================================================================================
+Device::Device( Category* parent, const QString& name )
+       :OListViewItem( parent, name )
+{
+    devinfo = static_cast<QWidget*>( listView()->parent() );
+}
+
+Device::~Device()
+{
+}
+
+
+QWidget* Device::detailsWidget()
+{
+    return details;
+}
+
+//=================================================================================================
+CpuDevice::CpuDevice( Category* parent, const QString& name )
+          :Device( parent, name )
+{
+    OListView* w = new OListView( devinfo );
+    details = w;
+    w->addColumn( "Info" );
+    w->addColumn( "Value" );
+    w->hide();
+}
+
+CpuDevice::~CpuDevice()
+{
+}
+
+void CpuDevice::addInfo( const QString& info )
+{
+    int dp = info.find( ':' );
+    if ( dp != -1 )
+    {
+        new OListViewItem( (OListView*) details, info.left( dp ), info.right( info.length()-dp ) );
+    }
+}
+
+//=================================================================================================
+CardDevice::CardDevice( Category* parent, const QString& name )
+           :Device( parent, name )
+{
+    details = new QPushButton( name, devinfo );
+    details->hide();
+}
+
+CardDevice::~CardDevice()
+{
+}
+
+//=================================================================================================
+InputDevice::InputDevice( Category* parent, const QString& name )
+            :Device( parent, name )
+{
+    details = new QPushButton( name, devinfo );
+    details->hide();
+}
+
+InputDevice::~InputDevice()
+{
+}
+
+//=================================================================================================
+UsbDevice::UsbDevice( Category* parent, const QString& name )
+          :Device( parent, name )
+{
+    details = new QPushButton( name, devinfo );
+    details->hide();
+}
+
+UsbDevice::~UsbDevice()
+{
+}

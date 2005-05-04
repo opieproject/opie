@@ -2,3 +2,6 @@
     boolean "opie-sysinfo (System Information dialog)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI
+    comment "opie-sysinfo needs a libqpe, libopie2core, libopie2ui"
+    depends !( ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI )
+

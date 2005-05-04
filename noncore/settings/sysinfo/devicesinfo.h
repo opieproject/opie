@@ -35,6 +35,7 @@ _;:,     .>    :=|.         This program is free software; you can
 
 /* QT */
 #include <qwidget.h>
+#include <qwidgetstack.h>
 
 //=================================================================================================
 class DevicesView : public Opie::Ui::OListView
@@ -61,6 +62,7 @@ private:
     Opie::Ui::OAutoBoxLayout* layout;
     Opie::Ui::OListView* view;
     QWidget* details;
+    QWidgetStack* stack;
 private slots:
 };
 
@@ -72,16 +74,6 @@ public:
     virtual ~Category();
 
     virtual void populate() = 0;
-};
-
-//=================================================================================================
-class Device : public Opie::Ui::OListViewItem
-{
-public:
-    Device( Category* parent, const QString& name );
-    ~Device();
-
-    QWidget* detailsWidget();
 };
 
 //=================================================================================================
@@ -124,5 +116,59 @@ public:
     virtual void populate();
 };
 
+//=================================================================================================
+class Device : public Opie::Ui::OListViewItem
+{
+public:
+    Device( Category* parent, const QString& name );
+    ~Device();
+
+    QWidget* devinfo;
+    QWidget* details;
+
+    virtual QWidget* detailsWidget();
+};
+
+//=================================================================================================
+class CpuDevice : public Device
+{
+public:
+    CpuDevice( Category* parent, const QString& name );
+    ~CpuDevice();
+
+    void addInfo( const QString& line );
+
+//     virtual QWidget* detailsWidget();
+};
+
+//=================================================================================================
+class InputDevice : public Device
+{
+public:
+    InputDevice( Category* parent, const QString& name );
+    ~InputDevice();
+
+//     virtual QWidget* detailsWidget();
+};
+
+//=================================================================================================
+class CardDevice : public Device
+{
+public:
+    CardDevice( Category* parent, const QString& name );
+    ~CardDevice();
+
+//     virtual QWidget* detailsWidget();
+};
+
+//=================================================================================================
+class UsbDevice : public Device
+{
+public:
+    UsbDevice( Category* parent, const QString& name );
+    ~UsbDevice();
+
+//     virtual QWidget* detailsWidget();
+};
 
 #endif
