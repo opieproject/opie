@@ -2,10 +2,9 @@
 #include "mainwindow.h"
 
 #include <opie2/okeyconfigmanager.h>
+#include <opie2/oresource.h>
 
 #include <qpe/applnk.h>
-#include <qpe/resource.h>
-
 
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
@@ -44,10 +43,9 @@ IRCTab::IRCTab(QWidget *parent, const char *name, WFlags f) : QWidget(parent, na
     QWhatsThis::add(m_description, tr("Description of the tab's content"));
     descLayout->addWidget(m_description);
     descLayout->setStretchFactor(m_description, 5);
-    QPixmap pic;
-    pic.convertFromImage( Resource::loadImage( "close" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    QPushButton *close = new QPushButton(pic, QString::null, this);
-    close->setMaximumWidth( close->height() );
+    QPushButton *close = new QPushButton( Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ),
+                                          QString::null, this);
+    close->setFixedSize( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
     QWhatsThis::add(close, tr("Close this tab"));
     connect(close, SIGNAL(clicked()), this, SLOT(remove()));
     descLayout->addWidget(close);

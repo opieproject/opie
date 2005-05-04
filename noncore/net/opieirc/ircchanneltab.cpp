@@ -1,4 +1,4 @@
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #include <qwhatsthis.h>
 #include <qhbox.h>
 #include <qdict.h>
@@ -43,11 +43,15 @@ IRCChannelTab::IRCChannelTab(IRCChannel *channel, IRCServerTab *parentTab, MainW
     connect(m_list, SIGNAL(mouseButtonPressed(int,QListBoxItem*,const QPoint&)), this, SLOT(mouseButtonPressed(int,QListBoxItem*,const QPoint&)));
     /* Construct the popup menu */
     //QPopupMenu *ctcpMenu = new QPopupMenu(m_list);
-    m_popup->insertItem(Resource::loadPixmap("opieirc/query"), tr("Query"), this, SLOT(popupQuery()));
+    m_popup->insertItem(Opie::Core::OResource::loadPixmap("opieirc/query",Opie::Core::OResource::SmallIcon),
+                        tr("Query"), this, SLOT(popupQuery()));
     m_popup->insertSeparator();
-    m_popup->insertItem(Resource::loadPixmap("opieirc/ping"), tr("Ping"), this, SLOT(popupPing()));
-    m_popup->insertItem(Resource::loadPixmap("opieirc/version"), tr("Version"), this, SLOT(popupVersion()));
-    m_popup->insertItem(Resource::loadPixmap("opieirc/whois"), tr("Whois"), this, SLOT(popupWhois()));
+    m_popup->insertItem(Opie::Core::OResource::loadPixmap("opieirc/ping",Opie::Core::OResource::SmallIcon),
+                        tr("Ping"), this, SLOT(popupPing()));
+    m_popup->insertItem(Opie::Core::OResource::loadPixmap("opieirc/version",Opie::Core::OResource::SmallIcon),
+                        tr("Version"), this, SLOT(popupVersion()));
+    m_popup->insertItem(Opie::Core::OResource::loadPixmap("opieirc/whois",Opie::Core::OResource::SmallIcon),
+                        tr("Whois"), this, SLOT(popupWhois()));
     //m_popup->insertItem(ctcpMenu, "CTCP");
     connect(m_mainWindow, SIGNAL(updateScroll()), this, SLOT(scrolling()));
     m_layout->add(hbox);

@@ -1,8 +1,8 @@
-#include <qmenubar.h>
-#include <qpe/resource.h>
 
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 
+#include <qmenubar.h>
 #include <qwhatsthis.h>
 
 #include "mainwindow.h"
@@ -29,11 +29,15 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(
     QMenuBar *menuBar = new QMenuBar(this);
     QPopupMenu *irc = new QPopupMenu(this);
     menuBar->insertItem(tr("IRC"), irc);
-    QAction *a = new QAction(tr("New connection"), Resource::loadPixmap("pass"), QString::null, 0, this, 0);
+    QAction *a = new QAction( tr("New connection"),
+                              Opie::Core::OResource::loadPixmap( "pass", Opie::Core::OResource::SmallIcon ),
+                              QString::null, 0, this, 0 );
     connect(a, SIGNAL(activated()), this, SLOT(newConnection()));
     a->setWhatsThis(tr("Create a new connection to an IRC server"));
     a->addTo(irc);
-    a = new QAction(tr("Settings"), Resource::loadPixmap("SettingsIcon"), QString::null, 0, this, 0);
+    a = new QAction( tr("Settings"),
+                     Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->setWhatsThis(tr("Configure OpieIRC's behavior and appearance"));
     connect(a, SIGNAL(activated()), this, SLOT(settings()));
     a->addTo(irc);

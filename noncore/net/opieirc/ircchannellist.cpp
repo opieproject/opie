@@ -1,4 +1,4 @@
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 #include "ircchannellist.h"
 #include "ircchannelperson.h"
@@ -8,9 +8,9 @@ IRCChannelList::IRCChannelList(IRCChannel *channel, QWidget *parent, const char 
 }
 
 void IRCChannelList::update() {
-    QPixmap op = Resource::loadPixmap("opieirc/op");
-    QPixmap hop = Resource::loadPixmap("opieirc/hop");
-    QPixmap voice = Resource::loadPixmap("opieirc/voice");
+    QPixmap op = Opie::Core::OResource::loadPixmap( "opieirc/op" );
+    QPixmap hop = Opie::Core::OResource::loadPixmap( "opieirc/hop" );
+    QPixmap voice = Opie::Core::OResource::loadPixmap( "opieirc/voice" );
     QListIterator<IRCChannelPerson> it = m_channel->people();
     clear();
     for (; it.current(); ++it) {
