@@ -1,4 +1,7 @@
   config OPIE-READER-FLITEDYN
     boolean "opie-reader flite plugin (speech output via lib in 8kHz)"
     default "n"
-    depends OPIE-READER
+    depends OPIE-READER && LIBFLITE_DEP
+    comment "opie-reader flite plugin needs libflite"
+    depends !( OPIE-READER && LIBFLITE_DEP )
+

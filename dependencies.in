@@ -24,7 +24,7 @@
 
   config LIBSQLITE_DEP
     boolean "Have sqlite >= 3.0.7"
-    default n
+    default "n"
 
   config LIBSQLITE_LIB_DIR
     string "LIBSQLITE library dir"
@@ -102,3 +102,15 @@
     string "freetype2 include dir"
     depends LIBFREETYPE2_DEP
  
+  config LIBFLITE_DEP
+    boolean "Have flite library"
+    default "n"
+
+  config LIBFLITE_INC_DIR
+    string "libflite include dir"
+    depends LIBFLITE_DEP
+
+  config LIBFLITE_LIB_DIR
+    string "libflite library dir"
+    depends LIBFLITE_DEP
+

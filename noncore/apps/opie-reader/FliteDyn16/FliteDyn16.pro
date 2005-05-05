@@ -10,9 +10,19 @@ SOURCES		= flitedyn.cpp
 INTERFACES	= 
 DESTDIR		= $(OPIEDIR)/plugins/reader/outcodecs
 TARGET		= flitedyn
-LIBS            += -L/home/tim/flite/flite-1.2-release/lib -lflite_cmu_us_kal16 -lflite_usenglish -lflite_cmulex -lflite
+LIBS            += -lflite_cmu_us_kal16 -lflite_usenglish -lflite_cmulex -lflite
 
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 
 include( $(OPIEDIR)/include.pro )
+
+!isEmpty( LIBFLITE_INC_DIR ) {
+    INCLUDEPATH = $$LIBFLITE_INC_DIR $$INCLUDEPATH
+}
+!isEmpty( LIBFLITE_LIB_DIR ) {
+    LIBS = -L$$LIBFLITE_LIB_DIR $$LIBS
+}
+
+
+
