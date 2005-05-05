@@ -165,6 +165,8 @@ CONFIG_OPIEPLAYER3	noncore/multimedia/opieplayer3	opieplayer3.pro
 CONFIG_OPIEPLAYER	core/multimedia/opieplayer	opieplayer.pro
 CONFIG_OPIE-RDESKTOP	noncore/net/opierdesktop	opierdesktop.pro
 CONFIG_OPIE-READER	noncore/apps/opie-reader	opie-reader.pro
+CONFIG_OPIE-READER-FLITEDYN	noncore/apps/opie-reader/FliteDyn	FliteDyn.pro
+CONFIG_OPIE-READER-FLITEDYN16	noncore/apps/opie-reader/FliteDyn16	FliteDyn16.pro
 CONFIG_OPIEREC		noncore/multimedia/opierec	opierec.pro
 CONFIG_OPIE-SHEET	noncore/apps/opie-sheet	opie-sheet.pro
 CONFIG_OPIE-SH	noncore/tools/opie-sh	opie-sh.pro

@@ -4,6 +4,7 @@
 	New Features
 	------------
 	* OpieStumbler: Scans WiFi networks using the wireless extension scanning (skyhusker)
+	* Opie-Reader: Support for document formats ArriereGo and Reb, add flite output (tim,pohly)
 
 	Fixed Bugs
 	----------
