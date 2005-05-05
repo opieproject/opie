@@ -12,7 +12,7 @@ DESTDIR		= $(OPIEDIR)/plugins/reader/outcodecs
 TARGET		= flitedyn
 LIBS            += -L/home/tim/flite/flite-1.2-release/lib -lflite_cmu_us_kal -lflite_usenglish -lflite_cmulex -lflite
 
-INCLUDEPATH	+= /home/tim/flite/flite-1.2-release/include $(OPIEDIR)/include
-DEPENDPATH += /home/tim/flite/flite-1.2-release/include $(OPIEDIR)/include
+INCLUDEPATH	+= $(OPIEDIR)/include
+DEPENDPATH      += $(OPIEDIR)/include
 
 include( $(OPIEDIR)/include.pro )
