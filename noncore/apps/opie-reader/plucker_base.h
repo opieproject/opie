@@ -66,11 +66,11 @@ protected:
     bool m_bufferisreserved;
     size_t currentpos;
     bool expand(int);
-    static void UnZip(UInt8*, size_t, UInt8*, size_t);
-    static void UnDoc(UInt8*, size_t, UInt8*, size_t);
+    //static void UnZip(UInt8*, size_t, UInt8*, size_t);
+    static size_t UnDoc(UInt8*, size_t, UInt8*, size_t);
 
-    void (*m_decompress)(UInt8*, size_t, UInt8*, size_t);
-    void (*getdecompressor(const QString& _s))(UInt8*, size_t, UInt8*, size_t);
+    size_t (*m_decompress)(UInt8*, size_t, UInt8*, size_t);
+
 #ifdef LOCALPICTURES
     void showimg(UInt16 tgt);
 #endif
@@ -110,6 +110,7 @@ protected:
     virtual bool CorrectDecoder() = 0;
 //    virtual void setlink(QString&, const QString&) = 0;
     virtual QImage* imagefromdata(UInt8*, UInt32) = 0;
+    QString getTableAsHtml(unsigned long loc);
 };
 
 #endif

@@ -9,17 +9,15 @@
 #include "utypes.h"
 #include <stdio.h>
 
+class ppm_expander;
+
 class PPM_ReadBuf
 {
   FILE *my_file_in;
+  ppm_expander* parent;
 public:
-  PPM_ReadBuf(FILE* f) : my_file_in(f) {}
-  UINT readbuf(UCHAR *buf,UINT len)
-  {
-    UINT len1;
-    len1=fread(buf,1,len,my_file_in);
-    return len1;
-  }
+  PPM_ReadBuf(FILE* f, ppm_expander* _parent) : my_file_in(f), parent(_parent) {}
+  UINT readbuf(UCHAR *buf,UINT len);
 };
 
 class ArithClass

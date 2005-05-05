@@ -8,7 +8,6 @@
 #include "CDrawBuffer.h"
 #include "striphtml.h"
 #include "hrule.h"
-#include "util.h"
 
 #include <qregexp.h>
 #include <qimage.h>
@@ -90,15 +89,23 @@ void striphtml::skipblock(const QString& _ent)
     } while (ent != _ent && ch != UEOF);
 }
 
-void striphtml::locate(unsigned int n)
+void striphtml::reset()
 {
   m_inblock = false;
   text_q = "";
+  q = "";
+  tablenesteddepth = 0;
   forcecentre = false;
   ignorespace = false;
+  indent = 0;
   while (!stylestack.isEmpty()) stylestack.pop();
   currentstyle.unset();
+}
+
+void striphtml::locate(unsigned int n)
+{
   qDebug("striphtml:locating:%u", n);
+  reset();
   parent->locate(n);
 }
 
@@ -233,6 +240,13 @@ bool striphtml::findanchor(const QString& _info)
 {
   //  QProgressDialog dlg("Finding link...", QString::null, 0, NULL, "progress", true);
   //  QProgressBar dlg(0);
+  if (parent->findanchor(_info))
+    {
+      reset();
+      return true;
+    }
+  qDebug("Using html find");
+  parent->locate(parent->startSection());
 #if defined(USEQPE) || defined(_WINDOWS) 
   QString info;
   for (int i = 0; i < _info.length(); i++)
@@ -295,7 +309,7 @@ bool striphtml::findanchor(const QString& _info)
   return ret;
 }
 
-striphtml::striphtml(const QString& _s) : entmap(NULL), isPre(false), currentid(0), lastch(0), currentfile(_s), indent(0), forcecentre(false), m_inblock(false), m_bchm(false), ignorespace(false)
+striphtml::striphtml(const QString& _s) : entmap(NULL), isPre(false), currentid(0), lastch(0), currentfile(_s), indent(0), forcecentre(false), m_inblock(false), m_bchm(false), ignorespace(false), tablenesteddepth(0)
 {
   href2filepos = new QMap<QString, unsigned long>;
   id2href = new QMap<unsigned long, QString>;
@@ -311,7 +325,17 @@ striphtml::~striphtml()
 void striphtml::initentmap()
 {
   entmap = new QMap<QString, tchar>;
-  QString fname(QTReaderUtil::getPluginPath("data"));
+#ifdef USEQPE
+#ifdef OPIE
+  QString fname(getenv("OPIEDIR"));
+#else
+  QString fname(getenv("QTDIR"));
+#endif
+  fname += "/plugins/reader/data";
+#else
+  QString fname(getenv("READERDIR"));
+  fname += "/data";
+#endif  
   QFileInfo fi;
   fi.setFile(fname, "HTMLentities");
   if (fi.exists())
@@ -412,6 +436,12 @@ QString striphtml::getattr(tchar& ch)
 	  ref = getname(ch, "\"");
 	  ch = skip_ws();
 	}
+      else if (ch == '\'')
+	{
+	  mygetch(ch, sty, pos);
+	  ref = getname(ch, "\'");
+	  ch = skip_ws();
+	}
       else
 	{
 	  ref = getname(ch, " >");
@@ -478,6 +508,11 @@ linkType striphtml::hyperlink(unsigned int n, unsigned int, QString& w, QString&
 
       if (file.isEmpty())
 	{
+	  if (parent->findanchor(name))
+	    {
+	      reset();
+	      return eLink;
+	    }
 	  fpit = href2filepos->find(name);
 	  if (fpit != href2filepos->end())
 	    {
@@ -488,7 +523,6 @@ linkType striphtml::hyperlink(unsigned int n, unsigned int, QString& w, QString&
 	    {
 	      //	      nm = QString("<a[^>]*name[ \t]*=[ \t]*\"") + name + "\"";
 	      qDebug("Do a search for:%s", (const char*)name);
-	      parent->locate(0);
 	      findanchor(name);
 	      return eLink;
 	    }
@@ -498,7 +532,7 @@ linkType striphtml::hyperlink(unsigned int n, unsigned int, QString& w, QString&
 	{
 	  if (m_bchm)
 	    {
-	      w = "/"+file;
+	      w = file;
 	      nm = name;
 	      return eFile;
 	    }
@@ -564,7 +598,31 @@ void striphtml::mygetch(tchar& ch, CStyle& sty, unsigned long& pos)
     }
   if (ch == 10 && !isPre)
     {
+#ifdef REMOVE_LF_BEFORE_ENDTAG
+      parent->getch(ch, sty, pos);
+      if (ch == '<')
+	{
+	  parent->getch(ch, sty, pos);
+	  if (ch == '/')
+	    {
+	      ch = '<';
+	      text_q += '/';
+	    }
+	  else
+	    {
+	      text_q += '<';
+	      text_q += ch;
+	      ch = ' ';
+	    }
+	}
+      else
+	{
+	  text_q += ch;
+	  ch = ' ';
+	}
+#else
       ch = ' ';
+#endif
     }
 }
 
@@ -584,7 +642,6 @@ void striphtml::parse_paragraph(CStyle& currentstyle, tchar& ch, unsigned long p
      }
    else
      {
-	qDebug("Using stack style");
 	currentstyle = stylestack.first();
      }
   if (forcecentre)
@@ -606,6 +663,10 @@ void striphtml::parse_paragraph(CStyle& currentstyle, tchar& ch, unsigned long p
 	  if (attr == "right")
 	    {
 	      currentstyle.setRightJustify();
+	    }
+	  if (attr == "justify")
+	    {
+	      currentstyle.setFullJustify();
 	    }
 	}
       if (ent == "id")
@@ -654,6 +715,7 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	  q = q.right(q.length()-1);
 	}
       sty = currentstyle;
+      lastch = ch;
       return;
     }
   do
@@ -661,11 +723,9 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
       unsigned long npos;
       CStyle dummy;
       mygetch(ch, dummy, pos);
-      //    if (ch == 10 && !isPre) ch = ' ';
       while (ch == '<' && ch != UEOF)
 	{
 	  ch = skip_ws();
-
 	  QString ent = getname(ch, " >").lower();
 
 	  //	  qDebug("Entity:%s", (const char*)ent);
@@ -681,7 +741,7 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 		{
 		  QString ent = getname(ch, " =>").lower();
 		  QString attr = getattr(ch);
-		  qDebug("<A>Entity:%s Attr:%s", (const char*)ent, (const char*)attr);
+		  //qDebug("<A>Entity:%s Attr:%s", (const char*)ent, (const char*)attr);
 		  if (ent == "name")
 		    {
 		      name = attr;
@@ -712,7 +772,7 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 		    {
 		      text_q = attr + "</a><p>";
 		    }
-		  qDebug("<a %s=%s>", (const char*)ent, (const char*)ref);
+		  //qDebug("<a %s=%s>", (const char*)ent, (const char*)ref);
 		}
 	      if (ishref)
 		{
@@ -747,8 +807,9 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	  else if (ent == "div")
 	    {
 	      parse_paragraph(currentstyle, ch, pos);
-	       stylestack.push_front(currentstyle);
-	      //indent = 0;
+	      stylestack.push_front(currentstyle);
+	      currentstyle.setExtraSpace(16);
+		  //indent = 0;
 	      continue;
 	    }
 	  else if (ent == "sup")
@@ -800,6 +861,7 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	  else if (ent == "pre")
 	    {
 	      isPre = true;
+	      currentstyle.setNoJustify();
 	      currentstyle.setMono();
 	    }
 	  else if (ent == "tt")
@@ -822,6 +884,7 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	    {
 	      if (ch != '>') ch = skip_ws_end();
 	      ch = 10;
+	      currentstyle.setExtraSpace(0);
 	      currentstyle.setLeftMargin(30);
 	      currentstyle.setRightMargin(30);
 	      continue;
@@ -830,6 +893,8 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	    {
 	      if (ch != '>') ch = skip_ws_end();
 	      ch = 10;
+	      currentstyle.setExtraSpace(0);
+	      lastch = 0;
 	      continue;
 	    }
 	  else if (ent == "mbp:pagebreak")
@@ -861,6 +926,7 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	  else if (ent == "li")
 	    {
 	      if (ch != '>') ch = skip_ws_end();
+	      lastch = 0;
 	      ch = 10;
 	      if (m_listtype[indent % m_cmaxdepth] == 1)
 		{
@@ -918,6 +984,12 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	    {
 	      currentstyle.setFontSize(0);
 	    }
+	  else if (ent[0] == '/' && ent[1] == 'h' && ent.length() == 3 && QString("123456789").find(ent[2]) != -1)
+	    {
+	      parse_paragraph(currentstyle, ch, pos);
+	      currentstyle.setExtraSpace(3);
+	      continue;
+	    }
 	  else if (ent[0] == 'h' && ent.length() == 2 && QString("123456789").find(ent[1]) != -1)
 	    {
 	      indent = 0;
@@ -928,7 +1000,6 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 		  currentstyle.setExtraSpace(8);
 		  currentstyle.setBold();
 		  //		    currentstyle.setExtraSpace(10);
-		  continue;
 		}
 	      else if (ent[1] == '2')
 		{
@@ -937,7 +1008,6 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 		  currentstyle.setExtraSpace(6);
 		  currentstyle.setBold();
 		  //		    currentstyle.setExtraSpace(10);
-		  continue;
 		}
 	      else if (ent[1] == '3')
 		{
@@ -946,7 +1016,6 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 		  currentstyle.setExtraSpace(4);
 		  currentstyle.setBold();
 		  //		    currentstyle.setExtraSpace(10);
-		  continue;
 		}
 	      else
 		{
@@ -954,8 +1023,9 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 		  currentstyle.setExtraSpace(4);
 		  currentstyle.setBold();
 		  //		    currentstyle.setExtraSpace(10);
-		  continue;
 		}
+	      ch = 10;
+	      continue;
 	    }
 	
 	
@@ -1047,16 +1117,25 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	    {
 	      currentstyle.unset();
 	      if (ch != '>') ch = skip_ws_end();
-	      ch = 10;
-	      continue;
+	      //ch = 10;
+	      //continue;
 	    }
-
-
-
 	  else if (ent == "table" || ent == "/table")
 	    {
 	      currentstyle.unset();
 	      ignorespace = (ent == "table");
+	      if (ent == "table")
+		{
+		  if (tablenesteddepth++ == 0) currentstyle.setTable(pos);
+		}
+	      else
+		{
+		  if (--tablenesteddepth <= 0)
+		    {
+		      tablenesteddepth = 0;
+		      currentstyle.setTable(0xffffffff);
+		    }
+		}
 	      if (ch == ' ') ch = skip_ws();
 	      while (ch != '>' && ch != UEOF)
 		{
@@ -1066,10 +1145,14 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 		}
 	      if (ch != '>') ch = skip_ws_end();
 
+	      currentstyle.setLeftMargin(6*tablenesteddepth);
+
+
+	      lastch = 0; // Anything but 10
 	      ch = 10;
 	      q += '-';
 	      q += QChar(parent->getwidth());
-	      q += 2;
+	      q += 3;
 	      q += '\0';
 	      q += '\0';
 	      q += '\0';
@@ -1077,18 +1160,8 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	    }
 	  else if (ent == "hr")
 	    {
+	      //bool isPageBreak = false;
 	      if (ch == ' ') ch = skip_ws();
-	      //	      if (stylestack.isEmpty())
-	      //		{
-		  currentstyle.unset();
-		  //		}
-		  /*
-	      else
-		{
-		  qDebug("Using stack style");
-		  currentstyle = stylestack.first();
-		}
-		  */
 	      unsigned char red = 0, green = 0, blue = 0;
 	      while (ch != '>' && ch != UEOF)
 		{
@@ -1098,16 +1171,46 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 		    {
 		      parse_color(attr, red, green, blue);
 		    }
+		  /*
+		  if (ent == "size")
+		    {
+		      if (attr == "0")
+			{
+			  isPageBreak = true;
+			}
+		    }
+		  */
 		  qDebug("<hr>Entity:%s Attr:%s", (const char*)ent, (const char*)attr);
 		}
 	      if (ch != '>') ch = skip_ws_end();
-	      ch = 10;
-	      q += '-';
-	      q += QChar(parent->getwidth());
-	      q += 3;
-	      q += red;
-	      q += green;
-	      q += blue;
+	      /*
+	      if (isPageBreak)
+		{
+		  ch = UEOF;
+		}
+	      else
+		{
+	      */
+		  //	      if (stylestack.isEmpty())
+		  //		{
+		  currentstyle.unset();
+		  //		}
+		  /*
+		    else
+		    {
+		    qDebug("Using stack style");
+		    currentstyle = stylestack.first();
+		    }
+		  */
+		  lastch = 0; //Anything but 10 or ' '
+		  ch = 10;
+		  q += '-';
+		  q += QChar(parent->getwidth());
+		  q += 3;
+		  q += red;
+		  q += green;
+		  q += blue;
+
 	      continue;
 	    }
 
@@ -1123,6 +1226,7 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 		  qDebug("<img>Entity:%s Attr:%s", (const char*)ent, (const char*)attr);
 		  if (ent == "src")
 		    {
+		      /*
 		      if (m_bchm)
 			{
 			  QImage* img = parent->getPicture(attr);
@@ -1130,6 +1234,14 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 			    {
 			      currentstyle.setPicture(true, img);
 			    }
+			}
+		      */
+
+
+		      QImage* img = parent->getPicture(attr);
+		      if (img != NULL)
+			{
+			  currentstyle.setPicture(true, img);
 			}
 		      else
 			{
@@ -1172,6 +1284,14 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	    {
 	      //	      skipblock("/metadata");
 	    }
+	  else if (ent == "title")
+	    {
+	      skipblock("/title");
+	    }
+	  else if (ent == "head")
+	    {
+	      skipblock("/head");
+	    }
 	  /*
 	  else if (ent == "metadata")
 	    {
@@ -1191,7 +1311,10 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	    }
 
 	  if (ch != '>') ch = skip_ws_end();
-	  mygetch(ch, dummy, npos);
+	  if (ent[0] == '/')
+	    mygetch(ch, dummy, pos);
+	  else
+	    mygetch(ch, dummy, npos);
 	}
       if (ch == '&')
 	{
@@ -1234,13 +1357,56 @@ void striphtml::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	    }
 	}
       //    sty = (dummy == ucFontBase) ? currentstyle : dummy;
+      if (lastch == 10 && ch == 10 && sty.getExtraSpace() > currentstyle.getExtraSpace())
+	{
+	  currentstyle.setExtraSpace(sty.getExtraSpace());
+	}
       sty = currentstyle;
     }
-  while (!isPre && (lastch == ' '  || lastch == 10 || ignorespace) && ch == ' ');
+  while (!isPre && (((lastch == ' '  || lastch == 10 || ignorespace) && ch == ' ') || ((ch == 10) && (lastch == 10))));
   //  lastch = ch;
   lastch = ch;
   return;
 }
+
+QString striphtml::getTableAsHtml(unsigned long loc)
+{
+  qDebug("striphtml::getTableAsHtml");
+  QString ret;
+  tchar ch(0);
+  CStyle sty;
+  unsigned long pos;
+  locate(loc);
+  int endpos(0);
+  QString endmarker("</table>");
+  QString startmarker("<table");
+  int startpos(0);
+  int depth(0);
+  while (ch != UEOF)
+    {
+      parent->getch(ch, sty, pos);
+      QChar qc(ch);
+      ret += qc;
+      if (qc.lower() == endmarker[endpos])
+	{
+	  if ((++endpos >= endmarker.length()) && (--depth <= 0)) break;
+	}
+      else
+	{
+	  endpos = 0;
+	}
+      if (qc.lower() == startmarker[startpos])
+	{
+	  if (++startpos >= startmarker.length()) ++depth;
+	}
+      else
+	{
+	  startpos = 0;
+	}
+    }
+  return ret;
+}
+
 
 extern "C"
 {

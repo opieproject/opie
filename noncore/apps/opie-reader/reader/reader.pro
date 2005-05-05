@@ -30,6 +30,7 @@ HEADERS		= Aportis.h \
                   QtrListView.h \
                   Queue.h \
                   StyleConsts.h \
+                  TableDialog.h \
                   ToolbarPrefs.h \
                   URLDialog.h \
                   ZText.h \
@@ -46,7 +47,6 @@ HEADERS		= Aportis.h \
                   plucker_base.h \
                   ppm.h \
                   ppm_expander.h \
-                  usenef.h \
                   ustring.h \
 		  util.h \
                   utypes.h \
@@ -68,6 +68,7 @@ SOURCES		= BuffDoc.cpp \
                   QTReader.cpp \
                   QTReaderApp.cpp \
                   QtrListView.cpp \
+                  TableDialog.cpp \
                   ToolbarPrefs.cpp \
                   URLDialog.cpp \
                   fileBrowser.cpp \

@@ -55,7 +55,7 @@ fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, boo
     ListView->addColumn( tr( "Size" ) );
     ListView->setSelectionMode(QListView::Single);
     ListView->setAllColumnsShowFocus( TRUE );
-    ListView->setColumnWidthMode(0, QListView::Manual);
+    ListView->setColumnWidthMode(0, ((modal) ? QListView::Manual : QListView::Maximum));
     ListView->setColumnWidthMode(1, QListView::Manual);
 
     // signals and slots connections

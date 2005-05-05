@@ -294,6 +294,7 @@ u_int32_t iSilo::get_bits(int num) {
 
   for (i = 0; i < num; i++) {
     if (pos == 0) {
+    unsuspend();
       r = fread(buf, sizeof(u_int32_t), 256, fin);
       if (r <= 0) {
 	qDebug("ERROR: Unexpected end of file");

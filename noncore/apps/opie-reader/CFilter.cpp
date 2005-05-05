@@ -2,13 +2,13 @@
 #include <qfileinfo.h>
 #include <qtextstream.h>
 #include <qdir.h>
+
 #ifdef USEQPE
 #include <qpe/global.h>
 #endif
 #include "CDrawBuffer.h"
 #include "CFilter.h"
 #include "hrule.h"
-#include "util.h"
 
 #include <qregexp.h>
 #include <qimage.h>
@@ -665,8 +665,17 @@ class ErrorFilter : public CFilter
 #ifndef __STATIC
 ExternFilter::ExternFilter(const QString& nm, const QString& optional) : filt(NULL), handle(NULL)
 {
-  QString filterpath(QTReaderUtil::getPluginPath("filters"));
-  filterpath += "/lib";
+#ifdef USEQPE
+#ifdef OPIE
+  QString filterpath(getenv("OPIEDIR"));
+#else
+  QString filterpath(getenv("QTDIR"));
+#endif
+  filterpath += "/plugins/reader/filters/lib";
+#else
+  QString filterpath(getenv("READERDIR"));
+  filterpath += "/filters/lib";
+#endif
   filterpath += nm;
   filterpath += ".so";
   if (QFile::exists(filterpath))
@@ -692,7 +701,7 @@ ExternFilter::ExternFilter(const QString& nm, const QString& optional) : filt(NU
     }
   else
     {
-      qDebug("No filter path");
+      qDebug("No filter path:%s", (const char*)filterpath);
       filt = new ErrorFilter(QString("No filter plugins installed:")+nm);
     }
   if (filt == NULL)
@@ -812,4 +821,41 @@ void repara::getch(tchar& ch, CStyle& sty, unsigned long& pos)
   tch = ch;
   */
   return;
+}
+
+void tableLink::getch(tchar& ch, CStyle& sty, unsigned long& pos)
+{
+  if (offset >= (int)text.length())
+    {
+      offset = -1;
+      sty.setColour(m_r, m_g, m_b);
+      do
+	{
+	  parent->getch(ch, sty, pos);
+	}
+      while (sty.isTable());
+      return;
+    }
+  if (offset >= 0)
+    {
+      ch = text[offset++].unicode();
+      return;
+    }
+  parent->getch(ch, sty, pos);
+  if (sty.isTable())
+    {
+      offset = 1;
+      ch = text[0].unicode();
+      m_r = sty.Red(), m_g = sty.Green(), m_b = sty.Blue();
+      sty.setColour(255, 0, 0);
+    }
+  return;      
+}
+
+void underlineLink::getch(tchar& ch, CStyle& sty, unsigned long& pos)
+{
+  parent->getch(ch, sty, pos);
+  if (sty.getLink()) sty.setUnderline();
+  //if (isLink && !sty.getLink()) sty.unsetUnderline();
+  //isLink = sty.getLink();
 }

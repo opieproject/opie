@@ -3,7 +3,7 @@
 
 #define MAJOR 0
 #define BKMKTYPE 7
-#define MINOR 'g'
+#define MINOR 'i'
 #define RELEASE_TYPE "beta"
 
 #endif

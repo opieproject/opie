@@ -61,7 +61,7 @@ class FontControl
 	    {
 		tgt = m_maxsize - 1;
 	    }
-	    return m_fontsizes[tgt];
+	    return tgt >= 0 ? m_fontsizes[tgt] : 12;
 	}
     int ascent()
     {

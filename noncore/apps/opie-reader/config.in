@@ -2,3 +2,7 @@
     boolean "opie-reader (E-Text reader)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI
+
+  source noncore/apps/opie-reader/FliteDyn/config.in
+  source noncore/apps/opie-reader/FliteDyn16/config.in
+  

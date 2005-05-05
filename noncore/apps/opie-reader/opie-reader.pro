@@ -9,7 +9,15 @@ SUBDIRS         = pluckerbaselib \
                   WeaselCodec \
                   iSiloCodec \
                   ppmsCodec \
+                  FliteCmd \
+                  pluckerdecompress \
+                  ArriereCodec \
+                  RebCodec \
                   reader
+
+# these are added only built if enabled in "make menuconfig"
+#                  FliteDyn
+#                  FliteDyn16
 
 include( $(OPIEDIR)/include.pro )
 

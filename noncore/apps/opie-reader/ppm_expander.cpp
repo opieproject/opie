@@ -38,7 +38,7 @@ ppm_expander::~ppm_expander() {
 int ppm_expander::OpenFile(const char* infile)
 {
   my_file_in=fopen(infile,"rb");
-  my_read_buf = new PPM_ReadBuf(my_file_in);
+  my_read_buf = new PPM_ReadBuf(my_file_in, this);
   return home();
 }
 
@@ -106,6 +106,15 @@ int ppm_expander::getch() {
   outbytes++;
   return (c==SYM_EOF) ? EOF : c;
 }
+
+UINT PPM_ReadBuf::readbuf(UCHAR *buf,UINT len)
+  {
+    UINT len1;
+    parent->unsuspend();
+    len1=fread(buf,1,len,my_file_in);
+    return len1;
+  }
+
 
 #ifndef __STATIC
 extern "C"

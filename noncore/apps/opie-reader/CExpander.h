@@ -24,6 +24,7 @@ class CList;
 class CCharacterSource
 {
  public:
+  virtual QString getTableAsHtml(unsigned long loc) = 0;
     virtual void getch(tchar&, CStyle&, unsigned long&) = 0;
     virtual linkType hyperlink(unsigned int n, unsigned int noff, QString&, QString& nm) = 0;
     virtual void locate(unsigned int n) = 0;
@@ -36,8 +37,9 @@ class CCharacterSource
     virtual int getwidth() = 0;
     virtual QImage* getPicture(unsigned long) = 0;
     virtual QImage* getPicture(const QString& href) = 0;
-    virtual bool getFile(const QString& href) = 0;
+    virtual bool getFile(const QString& href, const QString& nm) = 0;
     virtual QString about() = 0;
+    virtual unsigned long startSection() = 0;
 };
 
 class CExpander_Interface
@@ -83,7 +85,9 @@ class CExpander_Interface
     //    int getpara(CBuffer& buff);
     virtual int getwidth() = 0;
     virtual QImage* getPicture(const QString& href) = 0;
-    virtual bool getFile(const QString& href) = 0;
+    virtual bool getFile(const QString& href, const QString& nm) = 0;
+    virtual bool findanchor(const QString& nm) = 0;
+    virtual QString getTableAsHtml(unsigned long loc) { return QString(""); }
 };
 
 class CExpander : public CExpander_Interface
@@ -143,6 +147,10 @@ class CExpander : public CExpander_Interface
     //    bool findstring(const QString& info);
     //    int getpara(CBuffer& buff);
     virtual QImage* getPicture(const QString& href) { return NULL; }
-    virtual bool getFile(const QString& href) { return false; }
+    virtual bool getFile(const QString& href, const QString& nm) { return false; }
+    virtual bool findanchor(const QString& nm)
+      {
+	return false;
+      }
 };
 #endif

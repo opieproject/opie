@@ -1,4 +1,5 @@
 #include "util.h"
+#include <limits.h>
 
 QString filesize(unsigned long l)
 {
@@ -22,7 +23,15 @@ QString percent(unsigned long pos, unsigned long len)
   unsigned long permil = 0;
   if (len != 0)
     {
-      permil = (1000*pos+len/2)/len;
+      if (pos > UINT_MAX/1000)
+	{
+	  unsigned long l1 = (len+500)/1000;
+	  permil = (pos+l1/2)/l1;
+	}
+      else
+	{
+	  permil = (1000*pos+len/2)/len;
+	}
     }
   unsigned long percen = permil/10;
   unsigned long frac = permil - 10*percen;

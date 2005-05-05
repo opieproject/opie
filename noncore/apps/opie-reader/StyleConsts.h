@@ -38,7 +38,8 @@ enum EalignmentType
     m_AlignLeft,
     m_AlignRight,
     m_AlignCentre,
-    m_AlignJustify
+    m_AlignJustify,
+    m_AlignNone
 };
 
 class CBasicStyle
@@ -46,6 +47,7 @@ class CBasicStyle
     friend class CStyle;
     bool m_bold,
       m_italic;
+    unsigned long m_table;
     int m_fontsize;
     EalignmentType m_align;
     unsigned char red, green, blue;
@@ -64,6 +66,7 @@ class CBasicStyle
     CBasicStyle()
 	{
 	    unset();
+	    m_table = 0xffffffff;
 	}
     bool operator!=(const CBasicStyle& rhs)
 	{
@@ -146,6 +149,9 @@ class CStyle
     CStyle(const CStyle&);
     CStyle& operator=(const CStyle&);
     void unset();
+    bool isTable() const { return (sty.m_table != 0xffffffff); }
+    void setTable(unsigned long _b) { sty.m_table = _b; }
+    unsigned long getTable() { return sty.m_table; }
     bool isPicture() const { return (graphic != NULL); }
     bool canScale() const { return graphic->m_isScaleable; }
     void clearPicture();
@@ -186,6 +192,10 @@ class CStyle
     void setFullJustify()
 	{
 	    sty.m_align = m_AlignJustify;
+	}
+    void setNoJustify()
+	{
+	    sty.m_align = m_AlignNone;
 	}
     StyleType getJustify()
 	{

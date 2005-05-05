@@ -9,8 +9,10 @@
 
 class striphtml : public CFilter
 {
+  void reset();
   bool ignorespace;
   bool m_bchm;
+  int tablenesteddepth;
    CList<CStyle> stylestack;
   static CNavigation_base<htmlmark> m_nav;
   QMap<QString, tchar>* entmap;
@@ -89,5 +91,6 @@ class striphtml : public CFilter
     bool hasnavigation() { return true; }
     virtual void locate(unsigned int n);
     void setchm(bool _b) { m_bchm = _b; }
+    QString getTableAsHtml(unsigned long loc);
 };
 #endif

@@ -3,7 +3,6 @@
 #include <winsock2.h>
 #endif
 
-
 #ifdef USEQPE
 void Cpdb::suspend()
 {
@@ -37,6 +36,7 @@ size_t Cpdb::recordpos(int n)
     {
 	size_t dataoffset = sizeof(DatabaseHdrType) - sizeof(UInt16);
 	dataoffset += /*dataoffset%4 + */ sizeof(RecordListType) * n;
+	unsuspend();
 	fseek(fin, dataoffset, SEEK_SET);
 	RecordListType hdr;
 	fread(&hdr, 1, sizeof(hdr), fin);
@@ -52,6 +52,7 @@ size_t Cpdb::recordlength(int n)
 
 void Cpdb::gotorecordnumber(int n)
 {
+unsuspend();
     fseek(fin, recordpos(n), SEEK_SET);
 }
 
@@ -82,8 +83,8 @@ bool Cpdb::openpdbfile(const char *src)
 
     fread(&head, 1, sizeof(head), fin);
 
-    qDebug("Database name:%s", head.name);
-    qDebug("Total number of records:%u", ntohs(head.recordList.numRecords));
+    //qDebug("Database name:%s", head.name);
+    //qDebug("Total number of records:%u", ntohs(head.recordList.numRecords));
 
     return true;
 }

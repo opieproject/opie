@@ -3,7 +3,6 @@
 #define NEWLINEBREAK
 #define INCREMENTALWIDTH
 
-#include "usenef.h"
 #include "BuffDoc.h"
 #include "config.h"
 #include "CDrawBuffer.h"
@@ -21,6 +20,7 @@
 #include "arrierego.h"
 #endif
 #include "iSilo.h"
+#include "Reb.h"
 #endif
 
 
@@ -58,6 +58,18 @@ void BuffDoc::locate(unsigned int n)
   //    tchar linebuf[1024];
   if (exp != NULL) filt->locate(n);
   //  //qDebug("BuffDoc:Located");
+}
+
+void BuffDoc::resetPos()
+{
+  //  //qDebug("BuffDoc:locating:%u",n);
+    lastword.empty();
+  lastsizes[0] = laststartline = exp->locate();
+#ifdef NEWLINEBREAK
+    lastispara = false;
+#else
+    lastispara = false;
+#endif
 }
 
 static bool isletter(unsigned short c)
@@ -635,6 +647,13 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
     {
 	delete exp;
 	//qDebug("Trying ppms");
+	exp = new CReb;
+	ret = exp->openfile(src);
+    }
+    if (ret != 0)
+    {
+	delete exp;
+	//qDebug("Trying ppms");
 	exp = new ppm_expander;
 	ret = exp->openfile(src);
     }
@@ -655,7 +674,17 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
     }
     //        //qDebug("Doing final open:%x:%x",exp,filt);
 #else
-  QString codecpath(QTReaderUtil::getPluginPath());
+#ifdef USEQPE
+#ifdef OPIE
+  QString codecpath(getenv("OPIEDIR"));
+#else
+  QString codecpath(getenv("QTDIR"));
+#endif
+  codecpath += "/plugins/reader/codecs";
+#else
+  QString codecpath(getenv("READERDIR"));
+  codecpath += "/codecs";
+#endif
   QDir d(codecpath, "*.so");
 
   if (d.exists())
@@ -705,4 +734,26 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
 QString BuffDoc::about()
 {
   return QString("Buffered Decompressor (c) Tim Wentford\nHyphenation algorithm (c) Tim Wentford\n  (Cyrillic support by Konstantin Isakov\n")+filt->about();
+}
+
+int BuffDoc::getsentence(CBuffer& buff)
+{
+  tchar ch;
+  int i = 0;
+  bool intext = false;
+  while ((ch = getch()) != 10 && ch != UEOF)
+    {
+      buff[i++] = ch;
+      if (ch == '"' || ch == '\'' || ch == 0x2018 || ch == 0x2019 ||
+	  ch == 0x201a || ch == 0x201b || ch == 0x201c || ch == 0x201d)
+	{
+	  intext = !intext;
+	}
+      if (!intext && (ch == '.' || ch == '!' || ch == '?')) break;
+   }
+
+  buff[i] = '\0';
+  if (i == 0 && ch == UEOF) i = -1;
+  laststartline = exp->locate();
+  return i;
 }

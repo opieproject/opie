@@ -18,25 +18,28 @@ class QTimer;
 class QImage;
 
 #include "BGType.h"
-#include "striphtml.h"
 
-#define ROTATION_ENABLED
 #define SPECIALSCROLL
-#define DOUBLEBUFFER
-#ifdef DOUBLEBUFFER
+
 class QPainter;
-#endif
+class COutput;
 
 class CStyle;
+#define USETIMER
 
 class QTReader : public QWidget
 {
     Q_OBJECT
       friend class QTReaderApp;
-#ifdef DOUBLEBUFFER
+#ifdef USETIMER
+    QTimer* m_dragtimer;
+    unsigned long m_dragtarget;
+#endif
+    COutput* m_output;
+    bool checkoutput();
+    bool m_outofdate, m_drageligible;
     QPixmap *dbuff;
     QPainter* dbp;
-#endif
     void drawSingleLine(int lineno);
     void gotoLink();
     void emitRedraw();
@@ -74,11 +77,9 @@ class QTReader : public QWidget
     int m_delay, m_scrolltype;
     unsigned int m_overlap;
     bool m_autoScroll, m_swapmouse;
-    void drawBackground();
-#ifdef ROTATION_ENABLED
+    void drawBackground(QPainter*);
       bool m_rotated;
       void setrotated(bool);
-#endif
     void autoscroll();
     QTimer* timer;
     int m_scrolldy1, m_scrolldy2, m_encd, m_scrollpart, m_totalscroll;
@@ -95,6 +96,7 @@ class QTReader : public QWidget
     FontControl m_fontControl;
     void setBaseSize(unsigned char _s) { m_fontControl.setBaseSize(_s); }
     unsigned char getBaseSize() { return m_fontControl.getBaseSize(); }
+    QString m_outputName;
 #ifdef _SCROLLPIPE
     FILE* m_pipeout;
     QString m_pipetarget;
@@ -106,6 +108,7 @@ public:
     //    QTReader( const QString& filename, QWidget *parent=0, const tchar *name=0, WFlags f = 0);
     ~QTReader();
     QString about();
+    void readAloud();
     CList<Bkmk>* Bkmklist() { return pBkmklist; }
     void setBackground(const QColor& _c)
       {
@@ -153,7 +156,7 @@ public:
 */
       };
     void clear() {};
-    void setText(const QString& n, const QString& s) { m_string = n; load_file((const char*)s); };
+    void setText(const QString& n, const QString& s, unsigned int lcn = 0) { m_string = n; load_file((const char*)s, lcn); };
     /*
     void setText(bool oldfile)
       {
@@ -225,60 +228,12 @@ public:
 	    }
 	}
     HighlightFilter* m_highlightfilter;
-  CFilterChain* getfilter()
-  {
-    CFilterChain * filt = new CFilterChain(getencoding());
-    if (bstripcr) filt->addfilter(new stripcr);
-
-    if (btextfmt || (bautofmt && (PreferredMarkup() == cTEXT))) filt->addfilter(new textfmt);
-    if (bpeanut || (bautofmt && (PreferredMarkup() == cPML))) filt->addfilter(new PeanutFormatter);
-    //    if (bstriphtml || (bautofmt && (PreferredMarkup() == cHTML))) filt->addfilter(new striphtml(m_lastfile));
-
-#ifdef __STATIC
-    if (bstriphtml || (bautofmt && (PreferredMarkup() == cHTML))) filt->addfilter(new striphtml(m_lastfile));
-    if (bautofmt && (PreferredMarkup() == cCHM))
-      {
-        filt->addfilter(new striphtml(m_lastfile));
-      }
-#else
-    if (bstriphtml || (bautofmt && (PreferredMarkup() == cHTML))) filt->addfilter(new ExternFilter("HTMLfilter", m_lastfile));
-    if (bautofmt && (PreferredMarkup() == cCHM))
-      {
-	ExternFilter* f = new ExternFilter("HTMLfilter",m_lastfile);
-	((striphtml*)f->filter())->setchm(true);
-        filt->addfilter(f);
-      }
-#endif
-    m_highlightfilter = new HighlightFilter(this);
-    filt->addfilter(m_highlightfilter);
-
-    if (bdehyphen) filt->addfilter(new dehyphen);
-    if (bunindent) filt->addfilter(new unindent);
-    if (brepara) filt->addfilter(new repara(m_reparastring));
-    if (bonespace) filt->addfilter(new OnePara);
-    if (bindenter) filt->addfilter(new indenter(bindenter));
-    if (bdblspce) filt->addfilter(new dblspce);
-    if (bdepluck) filt->addfilter(new DePluck(pluckernextpart));
-    if (bdejpluck) filt->addfilter(new DePluck(jplucknextpart));
-    if (brepalm) filt->addfilter(new repalm);
-    if (bkern) filt->addfilter(new kern);
-    if (bremap) filt->addfilter(new remap);
-    if (bmakebold) filt->addfilter(new embolden);
-    if (bfulljust) filt->addfilter(new FullJust);
-    int r,g,b;
-    m_default_bg.rgb(&r, &g, &b);
-    if (r != 255 || g != 255 || b != 255)
-      filt->addfilter(new setbg(r,g,b));
-    m_default_fg.rgb(&r, &g, &b);
-    if (r != 0 || g != 0 || b != 0)
-      filt->addfilter(new setfg(r,g,b));
-    //    if (bNegative) filt->addfilter(new makeNegative);
-    if (bInverse) filt->addfilter(new makeInverse);
-    return filt;
-  }
-
+    CFilterChain* getfilter();
 
 private slots:
+#ifdef USETIMER
+  void actionDrag();
+#endif
   void dopageup();
   void lineDown();
   void lineUp();
@@ -288,9 +243,9 @@ private slots:
     void goForward();
 	void doscroll();
     void   paintEvent( QPaintEvent * );
-#ifdef DOUBLEBUFFER
+
     void   resizeEvent( QResizeEvent * p );
-#endif
+
   void keyPressEvent(QKeyEvent*);
  private:
   //    void   drawIt( QPainter * );
@@ -300,18 +255,22 @@ private slots:
   QColor m_scrollcolor, m_scrollbarcolor;
   void setTwoTouch(bool _b);
   void init();
+  void mouseMoveEvent( QMouseEvent* );
   void mousePressEvent( QMouseEvent* );
   void mouseReleaseEvent( QMouseEvent* );
 //  void mouseDoubleClickEvent( QMouseEvent* );
   QString m_string, m_fontname, m_reparastring;
   void setfont();
+  bool m_doubleBuffered;
+
+  void setDoubleBuffer(bool _b);
   //myoutput stuff
  private:
 #ifdef SPECIALSCROLL
   int m_scrolldy;
 #endif
   bool mouseUpOn;
-  linkType getcurrentpos(int x, int y, int w, int h, int& lineno, size_t& start, size_t& offset, size_t& tgt, size_t& tgtoffset, size_t& pictgt, QImage*&);
+  linkType getcurrentpos(int x, int y, int w, int h, int& lineno, size_t& start, size_t& offset, size_t& tgt, size_t& tgtoffset, size_t& pictgt, QImage*&, size_t&);
   bool m_twotouch, m_touchone;
   size_t m_startpos, m_startoffset;
   void dopageup(unsigned int);
@@ -322,14 +281,15 @@ private slots:
   CBufferFace<size_t>   locnarray;
   unsigned int numlines;
 //  bool m_showlast;
-  bool bstripcr, btextfmt, bstriphtml, bdehyphen, bdepluck, bdejpluck, bunindent, brepara, bdblspce, btight, bmakebold, bremap, bpeanut, bautofmt, bonespace, bfulljust, /*bNegative,*/ bInverse;
-  bool bkern, brepalm;
+  bool bstripcr, btextfmt, bstriphtml, bdehyphen, bdepluck, bdejpluck, bunindent, brepara, bdblspce, btight, bmakebold, bremap, bpeanut, bautofmt, bonespace, bfulljust, /*bNegative,*/ bInverse, bNoInlineTables;
+  bool bkern, brepalm, bunderlineLink;
   bool m_bpagemode, m_bMonoSpaced, m_continuousDocument;
   unsigned char bindenter;
   QString m_lastfile;
   size_t m_lastposn;
   bool bDoUpdates;
  public:
+  bool doOutput(const QString& wrd);
   void setDoUpdates(bool b) { bDoUpdates = b; }
   void setStripCR(bool b) { bstripcr = b; }
   void NavUp();

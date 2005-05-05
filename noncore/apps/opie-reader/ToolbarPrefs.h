@@ -8,6 +8,7 @@
  ****************************************************************************/
 #ifndef CTOOLBARPREFS_H
 #define CTOOLBARPREFS_H
+
 #include <qvariant.h>
 #include <qwidget.h>
 #include <qtabdialog.h>
@@ -22,9 +23,7 @@
 #else
 #include "preferences.h"
 #endif
-//#ifdef OPIE
 #define USECOMBO
-//#endif
 
 class QVBoxLayout; 
 class QHBoxLayout; 

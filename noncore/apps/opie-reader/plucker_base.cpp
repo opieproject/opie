@@ -1,4 +1,3 @@
-#include "usenef.h"
 #include <stdio.h>
 #include <string.h>
 #include <qmessagebox.h>
@@ -23,7 +22,7 @@
 #include "plucker_base.h"
 #include "Aportis.h"
 #include "hrule.h"
-#include "util.h"
+#include "decompress.h"
 
 const UInt8 CPlucker_base::continuation_bit = 1;
 
@@ -42,7 +41,8 @@ CPlucker_base::CPlucker_base() :
 
 void CPlucker_base::Expand(UInt32 reclen, UInt8 type, UInt8* buffer, UInt32 buffersize)
 {
-  if (type%2 == 0)
+unsuspend();
+  if ((type%2 == 0) && (type != 14))
     {
       fread(buffer, reclen, sizeof(char), fin);
     }
@@ -305,7 +305,7 @@ void CPlucker_base::locate(unsigned int n)
 	{
 	  bs = 0;
 	}
-    } while (locpos + bs <= n);
+    } while (locpos + bs < n);
 
   //    qDebug("Time(2): %u", clock()-start);
   /*
@@ -412,7 +412,7 @@ bool CPlucker_base::expand(int thisrec)
   //qDebug("BC:%u, HS:%u", buffercontent, thishdr_size);
   return true;
 }
-
+/*
 void CPlucker_base::UnZip(UInt8* compressedbuffer, size_t reclen, UInt8* tgtbuffer, size_t bsize)
 {
   z_stream zstream;
@@ -449,8 +449,8 @@ void CPlucker_base::UnZip(UInt8* compressedbuffer, size_t reclen, UInt8* tgtbuff
 
   inflateEnd(&zstream);
 }
-
-void CPlucker_base::UnDoc(UInt8* compressedbuffer, size_t reclen, UInt8* tgtbuffer, size_t bsize)
+*/
+size_t CPlucker_base::UnDoc(UInt8* compressedbuffer, size_t reclen, UInt8* tgtbuffer, size_t bsize)
 {
   //    UInt16      headerSize;
   UInt16      docSize;
@@ -501,6 +501,7 @@ void CPlucker_base::UnDoc(UInt8* compressedbuffer, size_t reclen, UInt8* tgtbuff
     }
     k += bsize;
   }
+  return i;
 }
 
 void CPlucker_base::home()
@@ -1056,9 +1057,163 @@ linkType CPlucker_base::hyperlink(unsigned int n, unsigned int offset, QString& 
     }
   return eLink;
 }
+QString CPlucker_base::getTableAsHtml(unsigned long tgt)
+{
+  qDebug("CPlucker_base::getTableAsHtml:%u", tgt);
+  size_t reclen;
+  UInt16 thisrec = finduid(tgt);
+  qDebug("getimg:Found %u from uid:%u", thisrec, tgt);
+  reclen = recordlength(thisrec);
+  gotorecordnumber(thisrec);
+  UInt16 thishdr_uid, thishdr_nParagraphs;
+  UInt32 thishdr_size;
+  UInt8 thishdr_type, thishdr_reserved;
+  GetHeader(thishdr_uid, thishdr_nParagraphs, thishdr_size, thishdr_type, thishdr_reserved);
+  qDebug("Found a table of type:%u", thishdr_type);
+  reclen -= HeaderSize();
+  UInt32 imgsize = thishdr_size;
+  UInt8* imgbuffer = new UInt8[imgsize];
+  Expand(reclen, thishdr_type, imgbuffer, imgsize);
+
+  QString ret;
+
+  UInt16 size, columns, rows;
+  UInt8 depth, border;
+  UInt32 borderColour, linkColour;
+  UInt8* dp(imgbuffer);
+
+  memcpy(&size, dp, sizeof(size));
+  size = ntohs(size);
+  dp += sizeof(size);
+  memcpy(&columns, dp, sizeof(columns));
+  columns = ntohs(columns);
+  dp += sizeof(columns);
+  memcpy(&rows, dp, sizeof(rows));
+  rows = ntohs(rows);
+  dp += sizeof(rows);
+  qDebug("Rows:%u Cols:%u", rows, columns);
+
+  memcpy(&depth, dp, sizeof(depth));
+  dp += sizeof(depth);
+  memcpy(&border, dp, sizeof(border));
+  dp += sizeof(border);
+
+  qDebug("Depth:%u, Border:%u", depth, border);
+
+  memcpy(&borderColour, dp, sizeof(borderColour));
+  dp += sizeof(borderColour);
+  memcpy(&linkColour, dp, sizeof(linkColour));
+  dp += sizeof(linkColour);
+
+  qDebug("Colours: border:%x, link:%x", borderColour, linkColour);
+
+  if (border)
+    {
+      ret = "<table border>";
+    }
+  else
+    {
+      ret = "<table>";
+    }
+  bool firstrow = true;
+  bool firstcol = true;
+  while (dp < imgbuffer+imgsize)
+    {
+      UInt8 ch = *dp++;
+      if (ch == 0x00)
+	{
+	  ch = *dp++;
+	  if (ch == 0x90)
+	    {
+	      if (firstrow)
+		{
+		  ret += "<tr>";
+		  firstrow = false;
+		  firstcol = true;
+		}
+	      else
+		{
+		  ret += "</tr><tr>";
+		}
+	    }
+	  else if (ch == 0x97)
+	    {
+	      if (firstcol)
+		{
+		  ret += "<td";
+		  firstcol = false;
+		}
+	      else
+		{
+		  ret += "</td><td";
+		}
+	      UInt8 align;
+	      UInt16 imgid;
+	      UInt8 cols, rows;
+	      UInt16 len;
+	      memcpy(&align, dp, sizeof(align));
+	      dp += sizeof(align);
+	      memcpy(&imgid, dp, sizeof(imgid));
+	      dp += sizeof(imgid);
+	      imgid = ntohs(imgid);
+	      memcpy(&cols, dp, sizeof(cols));
+	      dp += sizeof(cols);
+	      memcpy(&rows, dp, sizeof(rows));
+	      dp += sizeof(rows);
+	      memcpy(&len, dp, sizeof(len));
+	      dp += sizeof(len);
+	      len = ntohs(len);
+	      switch (align)
+		{
+		case 1:
+		  ret += " align=right";
+		  break;
+		case 2:
+		  ret += " align=center";
+		  break;
+		case 3:
+		  ret += " align=justify";
+		  break;
+		case 0:
+		  break;
+		default:
+		  qDebug("Unknown table cell alignment:%u", align);
+		}
+	      if (cols != 1)
+		{
+		  QString num;
+		  num.setNum(cols);
+		  ret += " colspan=";
+		  ret += num;
+		}
+	      if (rows != 1)
+		{
+		  QString num;
+		  num.setNum(rows);
+		  ret += " rowspan=";
+		  ret += num;
+		}
+	      ret += ">";
+	    }
+	  else
+	    {
+	      dp += (ch & 7);
+	    }
+	}
+      else
+	{
+	  ret += QChar(ch);
+	}
+    }
+
+  ret += "</td></tr></table>";
+  delete [] imgbuffer;
+  return ret;
+}
 
 tchar CPlucker_base::getch_base(bool fast)
 {
+  mystyle.setTable(0xffffffff);
   int ch = bgetch();
   while (ch == 0)
     {
@@ -1118,10 +1273,6 @@ tchar CPlucker_base::getch_base(bool fast)
 	    if (hasseen)
 	      {
 		mystyle.setStrikethru();
-	      }
-	    else
-	      {
-		mystyle.setUnderline();
 	      }
 	    mystyle.setOffset(m_offset);
 	    m_offset = 0;
@@ -1329,6 +1480,15 @@ tchar CPlucker_base::getch_base(bool fast)
 	    ch = bgetch();
 	  }
 	  break;
+	case 0x92:
+	  {
+	    ch = bgetch();
+	    ch <<= 8;
+	    ch |= (tchar)bgetch();
+	    mystyle.setTable(ch);
+	    ch = 0x16e5;
+	  }
+	  break;
 	case 0x85:
 	default:
 	  qDebug("Function:%x NOT IMPLEMENTED", ch);
@@ -1357,52 +1517,12 @@ tchar CPlucker_base::getch_base(bool fast)
   return (ch == EOF) ? UEOF : ch;
 }
 
-#if defined(__STATIC) && defined(USENEF)
-#include "Model.h"
-void (*CPlucker_base::getdecompressor(const QString& _s))(UInt8*, size_t, UInt8*, size_t)
-{
-	if (_s == "PluckerDecompress3")
-	{
-		return PluckerDecompress3;
-	}
-	if (_s == "PluckerDecompress4")
-	{
-		return PluckerDecompress4;
-	}
-  return NULL;
-}
-#else
-
-#include "qfileinfo.h"
-
-#include <dlfcn.h>
-
-void (*CPlucker_base::getdecompressor(const QString& _s))(UInt8*, size_t, UInt8*, size_t)
-{
-  QString codecpath(QTReaderUtil::getPluginPath("support"));
-  codecpath += "/libpluckerdecompress.so";
-  qDebug("Codec:%s", (const char*)codecpath);
-  if (QFile::exists(codecpath))
-    {
-      qDebug("Codec:%s", (const char*)codecpath);
-      void* handle = dlopen(codecpath, RTLD_LAZY);
-      if (handle == 0)
-	{
-	  qDebug("Can't find codec:%s", dlerror());
-	  return NULL;
-	}
-      return (void (*)(UInt8*, size_t, UInt8*, size_t))dlsym(handle, _s);
-    }
-  return NULL;
-}
-#endif
-
 QString CPlucker_base::about()
 {
   QString abt = "Plucker base codec (c) Tim Wentford";
   if (m_decompress != UnDoc && m_decompress != UnZip)
     {
-      abt += "\nSpecial decompression (c) Tim Wentford";
+      abt += "\nSpecial decompression (c) Tim Wentford (ppmd by Dmitry Shkarin";
     }
   return abt;
 }

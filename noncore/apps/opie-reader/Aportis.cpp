@@ -54,6 +54,7 @@ CList<Bkmk>* Aportis::getbkmklist()
 */
   if (bCompressed != 4) return NULL;
   CList<Bkmk>* t = new CList<Bkmk>;
+  unsuspend();
   size_t cur = ftell(fin);
   for (int i = 0; i < nRecs2; i++)
     {
@@ -246,6 +247,7 @@ int Aportis::getch()
       if ((dwRecLen == 0) && !refreshbuffer()) return EOF;
       else
 	{
+unsuspend();
 	  int c = getc(fin);
 	  dePeanut(c);
 	  dwRecLen--;
@@ -263,6 +265,7 @@ int Aportis::getch()
   int c;
 
   // take a char from the input buffer
+unsuspend();
   c = getc(fin);
   dePeanut(c);
   dwRecLen--;
@@ -320,7 +323,7 @@ unsigned int Aportis::GetBS(unsigned int bn)
 {
   DWORD dwPos;
   WORD fs;
-
+unsuspend();
   fseek(fin, 0x56 + 8*bn, SEEK_SET);
   fread(&dwPos, 4, 1, fin);
   dwPos = SwapLong(dwPos);
@@ -343,6 +346,7 @@ unsigned int Aportis::locate()
 {
   if (bCompressed == 4)
     {
+unsuspend();
       size_t cur = ftell(fin);
       unsigned int clen = 0;
       for (unsigned int i = 0; i < currentrec-1; i++)
@@ -401,6 +405,7 @@ bool Aportis::refreshbuffer()
       if (bCompressed == 4)
 	{
 	  unsigned char t[3];
+	  unsuspend();
 	  fread(t,1,3,fin);
 	  if (t[0] != 241)
 	    {
@@ -430,6 +435,7 @@ bool Aportis::refreshbuffer()
 
 QImage* Aportis::getPicture(unsigned long tgt)
 {
+unsuspend();
   unsigned short tgtrec = tgt+mobiimagerec;
   if (tgtrec > nRecs2) return NULL;
   size_t cur = ftell(fin);

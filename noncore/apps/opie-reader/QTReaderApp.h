@@ -175,7 +175,7 @@ class QTReaderApp : public QMainWindow
       }
 #endif
     void suspend();
-    void openFile( const QString & );
+    void openFile( const QString &, unsigned int loc = 0 );
 
 
  protected:
@@ -186,10 +186,10 @@ class QTReaderApp : public QMainWindow
     int m_scrollcolor, m_scrollbarcolor, m_background, m_foreground;
 //    void resizeEvent(QResizeEvent* e);
     void closeEvent( QCloseEvent *e );
-#ifdef NEWFULLSCREEN
+#if defined(USEQPE) && defined(USENEWFULLSCREEN)
+    bool m_usenewfullscreen;
     void resizeEvent(QResizeEvent *);
     void focusInEvent(QFocusEvent*);
-    void enableFullscreen();
 #endif
 	void readbkmks();
 	void do_mono(const QString&);
@@ -208,6 +208,7 @@ class QTReaderApp : public QMainWindow
 #endif
     bool m_doAnnotation;
     bool m_doDictionary;
+    bool m_doOutput;
     bool m_doClipboard;
     bool m_fullscreen;
     bool m_loadedconfig;
@@ -388,7 +389,7 @@ private slots:
     void updatefileinfo();
     bool openfrombkmk(Bkmk*);
   QString m_targetapp, m_targetmsg, m_statusstring, m_themename;
-    bool listbkmk(CList<Bkmk>*, const QString& _lab = QString::null);
+    bool listbkmk(CList<Bkmk>*, const QString& _lab = QString::null, bool presel=false);
     QString usefilebrowser();
     void do_regedit();
     void colorChanged( const QColor &c );
@@ -421,11 +422,11 @@ private slots:
     QTReader* reader;
     QComboBox* m_fontSelector;
 //    QPEToolBar /* *menu,*/ *fileBar;
-#ifdef USEQPE
+#if defined(USEQPE)
     QToolBar *menubar;
 #endif
     QToolBar *fileBar, *navBar, *viewBar, *markBar;
-#ifdef USEQPE
+#if defined(USEQPE)
     QPEMenuBar *mb;
 #else
     QMenuBar *mb;

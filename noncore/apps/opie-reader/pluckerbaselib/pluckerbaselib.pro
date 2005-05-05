@@ -5,7 +5,8 @@ CONFIG		= qt warn_on release dll
 HEADERS		= pdb.h \
                   util.h
 
-SOURCES		= plucker_base.cpp
+SOURCES		= plucker_base.cpp \
+                  decompress.cpp
 
 INTERFACES	= 
 DESTDIR		= $(OPIEDIR)/lib

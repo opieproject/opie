@@ -152,6 +152,10 @@ CButtonPrefs::CButtonPrefs( QMap<orKey, int>* _kmap, QWidget* parent,  const cha
     debounce = new QSpinBox( this, "Debounce" );
     debounce->setRange(0,1000);
     lo->addWidget(debounce);
+    /*
+    QPushButton* assignClose = new QPushButton("Assign\nCancel", this);
+    lo->addWidget(assignClose);
+    */
     lo->addStretch(1);
     QPushButton* delButton = new QPushButton("Delete", this);
     connect(delButton, SIGNAL( clicked() ), this, SLOT( erasemapping() ));

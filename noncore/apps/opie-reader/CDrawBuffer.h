@@ -78,7 +78,7 @@ class CDrawBuffer : public CBuffer
     int lineExtraSpacing() { return m_lineExtraSpacing; }
 
 //    void frig();
-    linkType getLinkType(int numchars, size_t& tgt, size_t& offset, size_t& pictgt, QImage*&);
+    linkType getLinkType(int numchars, size_t& tgt, size_t& offset, size_t& pictgt, QImage*&, size_t&);
     void resize(int);
     bool showPartial() { return m_showPartial; }
     CStyle* getNextLink(int&);

@@ -364,6 +364,7 @@ int CDrawBuffer::offset(int scwidth, unsigned short _lborder, unsigned short _rb
 	break;
 	case m_AlignJustify:
 	case m_AlignLeft:
+	case m_AlignNone:
 	    currentx = _lborder + leftMargin();
 	    break;
     }
@@ -484,7 +485,7 @@ void CDrawBuffer::render(QPainter* _p, int _y, bool _bMono, int _charWidth, int 
 	_p->setFont(f);
 	QString str = text.mid(textstart->start, end-textstart->start);
 #if defined(OPIE) || !defined(USEQPE)
-	_p->setPen(QPen(QColor(currentstyle.Red(), currentstyle.Green(), currentstyle.Blue()), fc->getsize(currentstyle)/100));
+	_p->setPen(QPen(QColor(currentstyle.Red(), currentstyle.Green(), currentstyle.Blue()), fc->getsize(currentstyle)/10/*0*/));
 #else
 	_p->setPen(QPen(QColor(currentstyle.Red(), currentstyle.Green(), currentstyle.Blue()), fc->getsize(currentstyle)/10));
 #endif
@@ -658,7 +659,7 @@ CStyle CDrawBuffer::firststyle()
     return segs.first().style;
 }
 
-linkType CDrawBuffer::getLinkType(int numchars, size_t& tgt, size_t& offset, size_t& pictgt, QImage*& img)
+linkType CDrawBuffer::getLinkType(int numchars, size_t& tgt, size_t& offset, size_t& pictgt, QImage*& img, size_t& tabletgt)
 {
   linkType ret = eNone;
     int end = 0;
@@ -690,6 +691,11 @@ linkType CDrawBuffer::getLinkType(int numchars, size_t& tgt, size_t& offset, siz
 	offset = currentstyle.getOffset();
 	ret |= eLink;
     }
+    if (currentstyle.isTable())
+      {
+	tabletgt = currentstyle.getTable();
+	ret |= eTable;
+      }	
     return ret;
 }
 
@@ -716,7 +722,7 @@ void CDrawBuffer::resize(int availht)
     }
    if (m_hastext)
      {
-	
+       int p_linespacing = 0;
 	for (CList<textsegment>::iterator iter = segs.begin(); iter != segs.end() && iter->start <= len; )
 	  {
 	     CList<textsegment>::iterator next = iter;
@@ -756,6 +762,17 @@ void CDrawBuffer::resize(int availht)
 		       descent = ((gzoom*_style.getPicture()->height())/100-ascent)/2;
 		       ascent = ((gzoom*_style.getPicture()->height())/100+ascent)/2;
 		    }
+		  else
+		    {
+		       descent = (_style.getPicture()->height()-ascent)/2;
+		       ascent = (_style.getPicture()->height()+ascent)/2;
+		    }
+		  int lineSpacing = ascent+descent;
+		  if (lineSpacing > p_linespacing)
+		    {
+		      p_linespacing = lineSpacing;
+		    }
+		  extra = 0;
 	       }
 	     
 	     /*
@@ -772,7 +789,7 @@ void CDrawBuffer::resize(int availht)
 	     if (extra > m_lineExtraSpacing) m_lineExtraSpacing = extra;
 	     m_lineSpacing = m_ascent+m_descent+m_lineExtraSpacing;
 	  }
-	m_showPartial = (m_lineSpacing > t_lineSpacing);
+	m_showPartial = (p_linespacing > t_lineSpacing);
 	int lead = fc->getlead();
 	if (lead != 0)
 	  {

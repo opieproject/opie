@@ -47,10 +47,8 @@ class BuffDoc
 	}
 #ifdef USEQPE
     void suspend() { if (exp != NULL) exp->suspend(); }
-    void unsuspend() { if (exp != NULL) exp->unsuspend(); }
 #else
     void suspend() {}
-    void unsuspend() {}
 #endif
     ~BuffDoc()
 	{
@@ -95,10 +93,22 @@ class BuffDoc
 	    else
 		ch = UEOF;
 	}
+    /*
+    void rawgetch(tchar& ch, CStyle& sty, unsigned long& pos)
+	{
+	    if (exp != NULL)
+	    {
+		filt->rawgetch(ch, sty, pos);
+	    }
+	    else
+		ch = UEOF;
+	}
+    */
     void setwidth(int w) { if (exp != NULL) exp->setwidth(w); }
     QImage* getPicture(unsigned long tgt) { return (exp == NULL) ? NULL : exp->getPicture(tgt); }
     unsigned int startSection() { return (exp == NULL) ? 0 : exp->startSection(); }
     unsigned int endSection() { return (exp == NULL) ? 0 : exp->endSection(); }
+    void resetPos();
     unsigned int locate() { return (exp == NULL) ? 0 : laststartline; }
     unsigned int explocate() { return (exp == NULL) ? 0 : exp->locate(); }
     void setContinuous(bool _b) { if (exp != NULL) exp->setContinuous(_b); }
@@ -129,14 +139,19 @@ class BuffDoc
 	    laststartline = exp->locate();
 	    return i;
 	}
+    int getsentence(CBuffer& buff);
     void saveposn(const QString& f, size_t posn) { filt->saveposn(f, posn); }
     void writeposn(const QString& f, size_t posn) { filt->writeposn(f, posn); }
     linkType forward(QString& f, size_t& loc) { return filt->forward(f, loc); }
     linkType back(QString& f, size_t& loc) { return filt->back(f, loc); }
-    bool hasnavigation() { return filt->hasnavigation(); }
-    bool getFile(QString href)
+    bool hasnavigation() { return (exp == NULL) ? false : filt->hasnavigation(); }
+    bool getFile(const QString& href, QString& nm)
       {
-	return (exp == NULL) ? false : exp->getFile(href);
+	return (exp == NULL) ? false : exp->getFile(href, nm);
+      }
+    QString getTableAsHtml(unsigned long loc)
+      {
+	return (exp != NULL) ? filt->getTableAsHtml(loc) : QString("");
       }
 };
 

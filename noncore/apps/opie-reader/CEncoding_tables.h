@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: CEncoding_tables.h,v 1.4 2004-08-24 20:52:45 pohly Exp $
+** $Id: CEncoding_tables.h,v 1.5 2005-05-05 14:39:34 pohly Exp $
 **
 ** Implementation of QTextCodec class
 **

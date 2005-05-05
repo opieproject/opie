@@ -19,6 +19,7 @@ class CFilter_IFace : public CCharacterSource
     virtual bool hasnavigation() = 0;
     virtual int getwidth() = 0;
     virtual CCharacterSource* getparent() = 0;
+    virtual unsigned long startSection() = 0;
 };
 
 class CFilter : public CFilter_IFace
@@ -26,6 +27,11 @@ class CFilter : public CFilter_IFace
  protected:
     CCharacterSource* parent;
  public:
+  virtual QString getTableAsHtml(unsigned long loc)
+    {
+      qDebug("CFilter::getTableAsHtml()");
+      return parent->getTableAsHtml(loc);
+    }
     virtual linkType hyperlink(unsigned int n, unsigned int noff, QString& w, QString& nm)
 	{
 	    return parent->hyperlink(n,noff,w,nm);
@@ -50,7 +56,8 @@ class CFilter : public CFilter_IFace
     virtual int getwidth() { return parent->getwidth(); }
     QImage* getPicture(unsigned long tgt) { return parent->getPicture(tgt); }
     QImage* getPicture(const QString& href) { return parent->getPicture(href); }
-    bool getFile(const QString& href) { return parent->getFile(href); }
+    bool getFile(const QString& href, const QString& nm) { return parent->getFile(href, nm); }
+    virtual unsigned long startSection() { return parent->startSection(); }
 };
 
 class CFilterChain
@@ -76,6 +83,10 @@ class CFilterChain
       {
 	return front->hyperlink(n, noff, wrd, nm);
       }
+    QString getTableAsHtml(unsigned long loc)
+      {
+	return front->getTableAsHtml(loc);
+      }
     void locate(unsigned int n)
       {
 	front->locate(n);
@@ -84,6 +95,12 @@ class CFilterChain
 	{
 	    front->getch(ch, sty, pos);
 	}
+    /*
+    void rawgetch(tchar& ch, CStyle& sty, unsigned long& pos)
+      {
+	encoder->getch(ch, sty, pos);
+      }
+    */
     void addfilter(CFilter_IFace* p)
 	{
 	    if (first == NULL)
@@ -403,6 +420,11 @@ class ExternFilter : public CFilter_IFace
     {
       return filt->hyperlink(n, noff, w, nm);
     }
+  QString getTableAsHtml(unsigned long loc)
+    {
+      qDebug("ExternFilter::getTableAsHtml()");
+      return filt->getTableAsHtml(loc);
+    }
   void setparent(CCharacterSource* p) { filt->setparent(p); }
   ExternFilter(const QString& nm, const QString& optional);
   ~ExternFilter()
@@ -411,7 +433,10 @@ class ExternFilter : public CFilter_IFace
       if (handle != NULL) dlclose(handle);
     }
   void locate(unsigned int n) { filt->locate(n); }
-  bool findanchor(const QString& nm) { return filt->findanchor(nm); }
+  bool findanchor(const QString& nm)
+    {
+      return filt->findanchor(nm);
+    }
   void saveposn(const QString& f, size_t posn) { filt->saveposn(f, posn); }
   void writeposn(const QString& f, size_t posn) { filt->writeposn(f, posn); }
   linkType forward(QString& f, size_t& loc) { return filt->forward(f, loc); }
@@ -423,8 +448,9 @@ class ExternFilter : public CFilter_IFace
   QImage* getPicture(unsigned long tgt) { return filt->getPicture(tgt); }
   CFilter* filter() { return filt; }
   QImage* getPicture(const QString& href) { return filt->getPicture(href); }
-  bool getFile(const QString& href) { return filt->getFile(href); }
+  bool getFile(const QString& href, const QString& nm) { return filt->getFile(href, nm); }
   QString about() { return QString("Filter plug-in (c) Tim Wentford\n")+filt->about(); }
+  unsigned long startSection() { return filt->startSection(); }
 };
 #endif
 
@@ -469,6 +495,29 @@ class setfg : public CFilter
   setfg(int _r, int _g, int _b) : m_r(_r), m_g(_g), m_b(_b) {}
   void getch(tchar& ch, CStyle& sty, unsigned long& pos);
   QString about() { return QString("Foreground colour filter (c) Tim Wentford\n")+parent->about(); }
+};
+
+class tableLink : public CFilter
+{
+  QString text;
+  int offset;
+  int m_r, m_g, m_b;
+ public:
+  tableLink() : text( "See Table" ), offset(-1)
+    {
+    }
+  void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+  QString about() { return QString("Table link filter (c) Tim Wentford\n")+parent->about(); }
+};
+
+class underlineLink : public CFilter
+{
+  bool isLink;
+ public:
+    underlineLink() : isLink(false) {}
+    ~underlineLink() {}
+    void getch(tchar& ch, CStyle& sty, unsigned long& pos);
+    QString about() { return QString("Link underlining filter (c) Tim Wentford\n")+parent->about(); }
 };
 
 #endif

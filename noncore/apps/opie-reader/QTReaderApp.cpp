@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #include <qregexp.h>
 #include <qclipboard.h>
 #include <qwidgetstack.h>
@@ -66,12 +67,17 @@
 #include "URLDialog.h"
 #include "util.h"
 #include <qfontdatabase.h>
+
 #ifdef USEQPE
 #include <qpe/resource.h>
 #ifdef OPIE
-//#include <qpe/applnk.h>
+#if defined(OPIEFILEDIALOG)
+#include <qpe/applnk.h>
 #include <opie2/ofiledialog.h>
 using namespace Opie::Ui;
+#else
+#include "fileBrowser.h"
+#endif
 #else
 #include "fileBrowser.h"
 #endif
@@ -88,7 +94,7 @@ using namespace Opie::Ui;
 
 #include "ButtonPrefs.h"
 
-bool CheckVersion(int&, int&, char&);
+bool CheckVersion(int&, int&, char&, QWidget*);
 
 #ifdef _WINDOWS
 #define PICDIR "c:\\uqtreader\\pics\\"
@@ -153,11 +159,9 @@ void QTReaderApp::listBkmkFiles()
         const QFileInfoList *list = d.entryInfoList();
         QFileInfoListIterator it( *list );      // create list iterator
         QFileInfo *fi;                          // pointer for traversing
-
         while ( (fi=it.current()) ) {           // for each file...
   
-		    bkmkselector->insertItem(fi->fileName());
-		    cnt++;
+		    bkmkselector->insertItem(fi->fileName(), cnt++);
 			
 			//qDebug( "%10li %s", fi->size(), fi->fileName().data() );
             ++it;                               // goto next list element
@@ -177,8 +181,7 @@ void QTReaderApp::listBkmkFiles()
 
 	if (lstat((const char *)Global::applicationFileName(APPDIR,de->d_name),&buf) == 0 && S_ISREG(buf.st_mode))
 	{
-	    bkmkselector->insertItem(de->d_name);
-	    cnt++;
+	    bkmkselector->insertItem(de->d_name, cnt++);
 	}
     }
 
@@ -202,7 +205,7 @@ void QTReaderApp::hidetoolbars()
   if (m_scrollbar != NULL) m_scrollbar->hide();
   if (m_prog != NULL) m_prog->hide();
 
-#ifdef USEQPE
+#if defined(USEQPE)
     menubar->hide();
 #endif
 
@@ -333,14 +336,14 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 //    QToolBar* navBar = new QToolBar("File", this);
 //    QToolBar* markBar = new QToolBar("File", this);
 
-#ifdef USEQPE
+#if defined(USEQPE)
     menubar = new QToolBar("Menus", this, m_tbposition);
     mb = new QPEMenuBar( menubar );
 #else
     mb = new QMenuBar( this );
 #endif
 
-#ifdef USEQPE
+#if defined(USEQPE)
     QPopupMenu* tmp = new QPopupMenu(mb);
     mb->insertItem( geticon( "AppsIcon" ), tmp );
 #else
@@ -436,6 +439,9 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 //    qDebug("Reading config");
 //  Config config( APPDIR );
   config.setGroup( "View" );
+#if defined(USEQPE) && defined(USENEWFULLSCREEN)
+  m_usenewfullscreen = config.readBoolEntry("NewFullScreen", false);
+#endif
   m_debounce = config.readNumEntry("Debounce", 0);
   m_buttonprefs->Debounce(m_debounce);
 #ifdef USEQPE
@@ -456,6 +462,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
   reader->btextfmt = config.readBoolEntry( "TextFmt", false );
   reader->bautofmt = config.readBoolEntry( "AutoFmt", true );
   reader->bstriphtml = config.readBoolEntry( "StripHtml", false );
+  reader->bNoInlineTables = config.readBoolEntry( "NoInlineTables", false );
   reader->bpeanut = config.readBoolEntry( "Peanut", false );
   reader->bdehyphen = config.readBoolEntry( "Dehyphen", false );
   reader->bdepluck = config.readBoolEntry( "Depluck", false );
@@ -471,6 +478,8 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
   reader->m_textsize = config.readNumEntry( "FontSize", 12 );
   reader->m_delay = config.readNumEntry( "ScrollDelay", 5184);
   reader->m_scrollstep = config.readNumEntry( "ScrollStep", 1);
+  reader->m_outputName = config.readEntry( "OutputCodec", "");
+
 
   reader->m_lastfile = config.readEntry( "LastFile", QString::null );
   reader->m_lastposn = config.readNumEntry( "LastPosn", 0 );
@@ -500,12 +509,15 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
   reader->m_absright_border = config.readNumEntry( "Right Margin", 100 );
 
   m_scrollishidden = config.readBoolEntry( "HideScrollBar", false );
+  m_hidebars = config.readBoolEntry( "HideToolBar", false );
 
   reader->brepalm = config.readBoolEntry( "Repalm", false );
+  reader->bunderlineLink = config.readBoolEntry( "UnderlineLink", true );
   reader->bkern = config.readBoolEntry( "Kern", false );
   reader->bremap = config.readBoolEntry( "Remap", true );
   reader->bmakebold = config.readBoolEntry( "MakeBold", false );
   reader->setContinuous(config.readBoolEntry( "Continuous", true ));
+  reader->setDoubleBuffer(config.readBoolEntry("DoubleBuffer", true));
   m_targetapp = config.readEntry( "TargetApp", QString::null );
   m_targetmsg = config.readEntry( "TargetMsg", QString::null );
 #ifdef _SCROLLPIPE
@@ -516,6 +528,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
   m_doAnnotation = config.readBoolEntry( "Annotation", false);
   m_doDictionary = config.readBoolEntry( "Dictionary", false);
   m_doClipboard = config.readBoolEntry( "Clipboard", false);
+  m_doOutput = config.readBoolEntry( "OutputTgt", false);
   /*
   m_spaceTarget = (ActionTypes)config.readNumEntry("SpaceTarget", cesAutoScroll);
   m_escapeTarget = (ActionTypes)config.readNumEntry("EscapeTarget", cesNone);
@@ -842,6 +855,18 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 
     setToolBarsMovable(m_tbmove);
     addtoolbars(&config);
+    if (m_hidebars)
+      {
+#if defined(USEQPE)
+	menubar->hide();
+#endif
+	if (fileBar != NULL) fileBar->hide();
+	if (viewBar != NULL) viewBar->hide();
+	if (navBar != NULL) navBar->hide();
+	if (markBar != NULL) markBar->hide();
+	mb->hide();
+      }
+
 
     pbar = new QProgressBar(this);
     pbar->hide();
@@ -972,6 +997,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
     QFont progfont(reader->m_fontname, reader->m_fontControl.getsize(0));
     m_prog->setFont( progfont );
     if (m_statusishidden) m_prog->hide();
+    showEditTools();
     if (!reader->m_lastfile.isEmpty())
     {
 //	qDebug("doclnk");
@@ -1032,13 +1058,13 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
       {
 	reader->m_scrollpos = (m_qtscroll == 0) ? m_localscroll : 0;
       }
-    reader->bDoUpdates = true;
-    reader->update();
+    //    reader->bDoUpdates = true;
+    //    reader->update();
     config.setGroup("Version");
     int major = config.readNumEntry("Major", 0);
     int bkmktype = config.readNumEntry("BkmkType", 0);
     char minor = config.readNumEntry("Minor", 0);
-    if (CheckVersion(major, bkmktype, minor))
+    if (CheckVersion(major, bkmktype, minor, this))
     {
 	config.writeEntry("Major", major);
 	config.writeEntry("BkmkType", bkmktype);
@@ -1065,7 +1091,7 @@ void QTReaderApp::addtoolbars(Config* config)
 
     if (fileBar != NULL)
     {
-#ifdef USEQPE
+#if defined(USEQPE)
 	if (fileBar != menubar)
 	{
 	    fileBar->clear();
@@ -1093,7 +1119,7 @@ void QTReaderApp::addtoolbars(Config* config)
 
     if (navBar != NULL)
     {
-#ifdef USEQPE
+#if defined(USEQPE)
 	if ((navBar == fileBar) && (fileBar == menubar))
 #else
 	if (navBar == fileBar)
@@ -1132,7 +1158,7 @@ void QTReaderApp::addtoolbars(Config* config)
 
     if (viewBar != NULL)
     {
-#ifdef USEQPE
+#if defined(USEQPE)
 	if ((viewBar == fileBar) && (fileBar == menubar))
 #else
 	if (viewBar == fileBar)
@@ -1164,7 +1190,7 @@ void QTReaderApp::addtoolbars(Config* config)
 
     if (markBar != NULL)
     {
-#ifdef USEQPE
+#if defined(USEQPE)
 	if ((markBar == fileBar) && (fileBar == menubar))
 #else
 	if (markBar == fileBar)
@@ -1233,7 +1259,7 @@ QToolBar* QTReaderApp::filebar()
     {
 	switch (m_tbpol)
 	{
-#ifdef USEQPE
+#if defined(USEQPE)
 	    case cesSingle:
 //		qDebug("Setting filebar to menubar");
 		fileBar = menubar;
@@ -1717,7 +1743,6 @@ void QTReaderApp::setrotated(bool sfs)
 	    connect(scrollbar, SIGNAL(sliderMoved(int)), this, SLOT(actionscroll(int)) );
 	  }
 	//	reader->repaint(0, reader->m_left_border, reader->width(), reader->height()-2*reader->m_border);
-	reader->repaint();
       }
     else
       {
@@ -1733,9 +1758,8 @@ void QTReaderApp::setrotated(bool sfs)
 	    connect(scrollbar, SIGNAL(sliderMoved(int)), this, SLOT(actionscroll(int)) );
 	  }
 	//	reader->repaint(reader->m_border, 0, reader->width()-2*reader->m_border, reader->height());
-	reader->repaint();
       }
-    //    reader->update();
+    reader->refresh();
 }
 
 void QTReaderApp::setgrab(bool sfs)
@@ -1928,7 +1952,7 @@ void QTReaderApp::fileOpen2()
     if (pOpenlist != NULL)
     {
 	m_nBkmkAction = cOpenFile;
-	if (listbkmk(pOpenlist, "Browse")) usebrowser = false;
+	if (listbkmk(pOpenlist, "Browse", true)) usebrowser = false;
     }
     if (usebrowser)
     {
@@ -1951,7 +1975,7 @@ QString QTReaderApp::usefilebrowser()
     return s;
 #else
     QString fn;
-#ifdef OPIE
+#if defined(OPIE) && defined(OPIEFILEDIALOG)
     QMap<QString, QStringList> mimeTypes;
     QStringList etypes;
     etypes << "etext/*";
@@ -2003,6 +2027,7 @@ void QTReaderApp::showprefs()
     //    prefwin->Debounce(m_debounce);
     prefwin->bgtype(m_bgtype);
     prefwin->repalm(reader->brepalm);
+    prefwin->UnderlineLink(reader->bunderlineLink);
     prefwin->kern(reader->bkern);
     prefwin->hyphenate(reader->hyphenate);
     //    prefwin->customhyphen(reader->buffdoc.getCustomHyphen());
@@ -2015,6 +2040,7 @@ void QTReaderApp::showprefs()
     prefwin->twotouch(m_twoTouch); 
     prefwin->propfontchange(m_propogatefontchange);
     prefwin->StripCR(reader->bstripcr);
+    prefwin->InlineTables(!reader->bNoInlineTables);
     prefwin->Dehyphen(reader->bdehyphen);
     prefwin->SingleSpace(reader->bonespace);
     prefwin->Unindent(reader->bunindent);
@@ -2056,6 +2082,7 @@ void QTReaderApp::showprefs()
     prefwin->Depluck(reader->bdepluck);
     prefwin->Dejpluck(reader->bdejpluck);
     prefwin->Continuous(reader->m_continuousDocument);
+    prefwin->DoubleBuffer(reader->m_doubleBuffered);
 
     prefwin->dictApplication(m_targetapp);
     prefwin->dictMessage(m_targetmsg);
@@ -2070,6 +2097,7 @@ void QTReaderApp::showprefs()
     prefwin->miscannotation(m_doAnnotation);
     prefwin->miscdictionary(m_doDictionary);
     prefwin->miscclipboard(m_doClipboard);
+    prefwin->miscoutput(m_doOutput);
 
     prefwin->SwapMouse(reader->m_swapmouse);
 
@@ -2085,10 +2113,14 @@ void QTReaderApp::showprefs()
 
     prefwin->ideogramwidth(reader->m_charpc);
 
+    prefwin->outcodec(reader->m_outputName);
+
     if (prefwin->exec())
     {
       //      m_debounce = prefwin->Debounce();
       reader->brepalm = prefwin->repalm();
+      reader->bunderlineLink = prefwin->UnderlineLink();
+
       reader->bkern = prefwin->kern();
       reader->hyphenate = prefwin->hyphenate();
       //      reader->buffdoc.setCustomHyphen(prefwin->customhyphen());
@@ -2107,6 +2139,7 @@ void QTReaderApp::showprefs()
 	m_touch_action->setOn(m_twoTouch);
 
 	reader->bstripcr = prefwin->StripCR();
+	reader->bNoInlineTables = !prefwin->InlineTables();
 	reader->bdehyphen = prefwin->Dehyphen();
 	reader->bonespace = prefwin->SingleSpace();
 	reader->bunindent = prefwin->Unindent();
@@ -2149,6 +2182,7 @@ void QTReaderApp::showprefs()
 	reader->bdepluck = prefwin->Depluck();
 	reader->bdejpluck = prefwin->Dejpluck();
 	reader->setContinuous(prefwin->Continuous());
+	reader->setDoubleBuffer(prefwin->DoubleBuffer());
 
 	/*
 	m_leftScroll = prefwin->leftScroll();
@@ -2162,6 +2196,7 @@ void QTReaderApp::showprefs()
 	m_doAnnotation = prefwin->miscannotation();
 	m_doDictionary = prefwin->miscdictionary();
 	m_doClipboard = prefwin->miscclipboard();
+	m_doOutput = prefwin->miscoutput();
 	reader->m_swapmouse = prefwin->SwapMouse();
 	reader->setBaseSize(prefwin->gfxsize());
 	reader->m_overlap = prefwin->pageoverlap();
@@ -2182,6 +2217,15 @@ void QTReaderApp::showprefs()
 	  {
 	    m_bgtype = (bground)prefwin->bgtype();
 	    setBackgroundBitmap();
+	  }
+	qDebug("OutCodec:%s", (const char*)prefwin->outcodec());
+	if (reader->m_outputName != prefwin->outcodec())
+	  {
+	    if (reader->m_output != NULL)
+	      {
+		QMessageBox::warning(this, PROGNAME, "Change of output codec\nrequires a restart");
+	      }
+	    reader->m_outputName = prefwin->outcodec();
 	  }
 	delete prefwin;
 	reader->setfilter(reader->getfilter());
@@ -2290,12 +2334,36 @@ void QTReaderApp::showinfo()
 	dl = pl - reader->buffdoc.startSection();
 	m_infoWin->setFileSize(fs);
 	m_infoWin->setTextSize(ts);
-	m_infoWin->setRatio(100-(100*fs + (ts >> 1))/ts);
+	if (fs > UINT_MAX/100)
+	  {
+	    unsigned long t1 = (ts+50)/100;
+	    m_infoWin->setRatio(100-(fs + (t1 >> 1))/t1);
+	  }
+	else
+	  {
+	    m_infoWin->setRatio(100-(100*fs + (ts >> 1))/ts);
+	  }
 	m_infoWin->setLocation(pl);
-	m_infoWin->setRead((100*pl + (ts >> 1))/ts);
+	if (pl > UINT_MAX/100)
+	  {
+	    unsigned long t1 = (ts+50)/100;
+	    m_infoWin->setRead((pl + (t1 >> 1))/t1);
+	  }
+	else
+	  {
+	    m_infoWin->setRead((100*pl + (ts >> 1))/ts);
+	  }
 	m_infoWin->setDocSize(ds);
 	m_infoWin->setDocLocation(dl);
-	m_infoWin->setDocRead((100*dl + (ds >> 1))/ds);
+	if (dl > UINT_MAX/100)
+	  {
+	    unsigned long d1 = (ds+50)/100;
+	    m_infoWin->setDocRead((dl + (d1 >> 1))/d1);
+	  }
+	else
+	  {
+	    m_infoWin->setDocRead((100*dl + (ds >> 1))/ds);
+	  }
 	m_infoWin->setZoom(reader->m_fontControl.currentsize()*10);
 	m_infoWin->setAbout(QString("\nApplication (c) Tim Wentford\n")+reader->about());
 	editorStack->raiseWidget( m_infoWin );
@@ -2742,7 +2810,7 @@ void QTReaderApp::search()
 }
 #endif
 
-void QTReaderApp::openFile( const QString &f )
+void QTReaderApp::openFile( const QString &f, unsigned int loc )
 {
 //    qDebug("File:%s", (const char*)f);
 //    openFile(DocLnk(f));
@@ -2765,7 +2833,7 @@ void QTReaderApp::openFile( const QString &f )
 	}
 #endif
       clear();
-      reader->setText(fm.baseName(), fm.absFilePath());
+      reader->setText(fm.baseName(), fm.absFilePath(), loc);
       m_loadedconfig = readconfig(APPDIR "/configs", reader->m_string, false);
       qDebug("Showing tools");
       showEditTools();
@@ -2806,7 +2874,7 @@ void QTReaderApp::handlekey(QKeyEvent* e)
     switch(e->key())
     {
 	case Key_Escape:
-//	    qDebug("escape event");
+	    qDebug("escape event");
 	    if (m_disableesckey)
 	    {
 		m_disableesckey = false;
@@ -2891,29 +2959,30 @@ void QTReaderApp::handlekey(QKeyEvent* e)
     ftime(&m_lastkeytime);
 }
 
-#ifdef NEWFULLSCREEN
-void QTReaderApp::enableFullscreen()
+#if defined(USEQPE) && defined(USENEWFULLSCREEN)
+void QTReaderApp::focusInEvent(QFocusEvent *)
 {
-    setFixedSize(qApp->desktop()->size());
-    showNormal();
-    reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));
-    showFullScreen();
+  if (m_usenewfullscreen && m_fullscreen && (editorStack->visibleWidget() == reader))
+    {
+      m_usenewfullscreen = false;
+      reader->bDoUpdates = false;
+      showEditTools();
+      reader->bDoUpdates = true;
+      reader->update();
+      m_usenewfullscreen = true;
+    }
 }
 
 void QTReaderApp::resizeEvent(QResizeEvent *)
 {
-    if (m_fullscreen && (size() != qApp->desktop()->size()))
+  if (m_usenewfullscreen && m_fullscreen && (editorStack->visibleWidget() == reader))
     {
-	enableFullscreen();
-    }
-}
-
-void QTReaderApp::focusInEvent(QFocusEvent*)
-{
-    if (m_fullscreen)
-    {
-	enableFullscreen();
-	raise();
+      m_usenewfullscreen = false;
+      reader->bDoUpdates = false;
+      showEditTools();
+      reader->bDoUpdates = true;
+      reader->update();
+      m_usenewfullscreen = true;
     }
 }
 #endif
@@ -2924,7 +2993,7 @@ void QTReaderApp::showEditTools()
 //	close();
     if (m_fullscreen)
     {
-#ifdef USEQPE
+#if defined(USEQPE)
 	if (menubar != NULL) menubar->hide();
 #endif
 	if (fileBar != NULL) fileBar->hide();
@@ -2944,12 +3013,8 @@ void QTReaderApp::showEditTools()
 	if (m_scrollbar != NULL) m_scrollbar->hide();
 	m_fontBar->hide();
 //	showNormal();
-#ifdef NEWFULLSCREEN
-	enableFullscreen();
-#else
 	showFullScreen();
-#endif
-    }
+  }
     else
     {
 //	qDebug("him");
@@ -2970,7 +3035,7 @@ void QTReaderApp::showEditTools()
 	  }
 	if (!m_hidebars)
 	  {
-#ifdef USEQPE
+#if defined(USEQPE)
 	    menubar->show();
 #endif
 	    if (fileBar != NULL) fileBar->show();
@@ -3004,7 +3069,7 @@ void QTReaderApp::showEditTools()
 //	qDebug("sn");
 	showNormal();
 //	qDebug("sm");
-#ifdef USEQPE
+#if defined(USEQPE) && !defined(SIMPAD) 
 	showMaximized();
 #endif
 //	setCentralWidget(reader);
@@ -3017,7 +3082,7 @@ void QTReaderApp::showEditTools()
     //    qDebug("sf");
     reader->setFocus();
     //    qDebug("ref");
-    reader->refresh(true);
+    //reader->refresh(true);
     //    qDebug("done");
 }
 /*
@@ -3174,7 +3239,7 @@ void QTReaderApp::do_delmark()
 	QMessageBox::information(this, PROGNAME, "No bookmarks in memory");
 }
 
-bool QTReaderApp::listbkmk(CList<Bkmk>* plist, const QString& _lab)
+bool QTReaderApp::listbkmk(CList<Bkmk>* plist, const QString& _lab, bool presel)
 {
     bkmkselector->clear();
     if (_lab.isEmpty())
@@ -3182,23 +3247,33 @@ bool QTReaderApp::listbkmk(CList<Bkmk>* plist, const QString& _lab)
     else
 	bkmkselector->setText(_lab);
     int cnt = 0;
+    int slt = -1;
     if (plist != NULL)
       {
 	for (CList<Bkmk>::iterator i = plist->begin(); i != plist->end(); i++)
 	  {
+	    if (presel)
+	      {
+		Bkmk* p = i.pContent();
+		if (toQString(CFiledata(p->anno()).name()) == reader->m_lastfile)
+		  {
+		    slt = cnt;
+		  }
+	      }
 #ifdef _UNICODE
 //	      qDebug("Item:%s", (const char*)toQString(i->name()));
-	    bkmkselector->insertItem(toQString(i->name()));
+	    bkmkselector->insertItem(toQString(i->name()), cnt++);
 #else
-	    bkmkselector->insertItem(i->name());
+	    bkmkselector->insertItem(i->name(), cnt++);
 #endif
-	    cnt++;
+
 	  }
       }
     if (cnt > 0)
       {
 	  hidetoolbars();
         editorStack->raiseWidget( bkmkselector );
+	if (slt != -1) bkmkselector->setCurrentItem(slt);
 	return true;
       }
     else
@@ -3238,9 +3313,8 @@ bool QTReaderApp::openfrombkmk(Bkmk* bk)
     if (!fn.isEmpty() && QFileInfo(fn).isFile())
     {
 //	qDebug("Opening");
-	openFile(fn);
 	struct stat fnstat;
-	stat((const char *)reader->m_lastfile, &fnstat);
+	stat((const char *)fn, &fnstat);
 	
 	if (CFiledata(bk->anno()).date()
 	    != fnstat.st_mtime)
@@ -3248,11 +3322,14 @@ bool QTReaderApp::openfrombkmk(Bkmk* bk)
 	    CFiledata fd(bk->anno());
 	    fd.setdate(fnstat.st_mtime);
 	    bk->value(0);
+	    reader->m_lastposn = 0;
+	    openFile(fn);
 	}
 	else
 	{
 	    unsigned short svlen = bk->filedatalen();
 	    unsigned char* svdata = bk->filedata();
+	    openFile(fn, bk->value());
 	    reader->putSaveData(svdata, svlen);
 //	    setstate(svdata, svlen);
 	    if (svlen != 0)
@@ -3261,7 +3338,6 @@ bool QTReaderApp::openfrombkmk(Bkmk* bk)
 	    }
 //	    qDebug("updating");
 //	    showEditTools();
-	    reader->locate(bk->value());
 	}
 	return true;
     }
@@ -3366,7 +3442,7 @@ void QTReaderApp::gotobkmk(int ind)
 	    if (fin != NULL)
 	    {
 		bool allok = false;
-#ifdef OPIE
+#if defined(OPIE) && defined(OPIEFILEDIALOG)
 		QString outfile = OFileDialog::getSaveFileName(OFileSelector::EXTENDED_ALL, QString::null, QString::null, MimeTypes(), 0, "OpieReader");
 		if (!outfile.isEmpty())
 		{
@@ -3703,9 +3779,10 @@ void QTReaderApp::do_autogen(const QString& regText)
   reader->jumpto(0);
   int lastpc = 0;
   int i = 0;
+  unsigned int llcn = reader->locate();
   while (i >= 0)
     {
-      unsigned int lcn = reader->locate();
+      unsigned int lcn = llcn;
       int pc = (100*lcn)/ts;
       if (pc != lastpc)
       {
@@ -3722,6 +3799,14 @@ void QTReaderApp::do_autogen(const QString& regText)
       if (re.match(buff.data()) != -1)
 #endif
 	pBkmklist->push_back(Bkmk(buff.data(), NULL, lcn));
+      /*
+      llcn = reader->locate();
+      if ((i == 0) && (llcn+1 < ts))
+	{
+	  reader->jumpto(++llcn);
+	  i = 1;
+	}
+      */
     }
   pBkmklist->sort();
   pbar->setProgress(100);
@@ -4032,6 +4117,10 @@ void QTReaderApp::OnWordSelected(const QString& wrd, size_t posn, size_t posn2, 
 {
 ////    qDebug("OnWordSelected(%u):%s", posn, (const char*)wrd);
 
+    if (m_doOutput && reader->checkoutput())
+      {
+	reader->doOutput(wrd);
+      }
     if (m_doClipboard)
     {
 	QClipboard* cb = QApplication::clipboard();
@@ -4116,7 +4205,7 @@ void QTReaderApp::doAction(QKeyEvent* e)
 	  m_hidebars = !m_hidebars;
 	  if (m_hidebars)
 	    {
-#ifdef USEQPE
+#if defined(USEQPE)
 	      menubar->hide();
 #endif
 	      if (fileBar != NULL) fileBar->hide();
@@ -4127,7 +4216,7 @@ void QTReaderApp::doAction(QKeyEvent* e)
 	    }
 	  else
 	    {
-#ifdef USEQPE
+#if defined(USEQPE)
 	      menubar->show();
 #endif
 	      if (fileBar != NULL) fileBar->show();
@@ -4340,6 +4429,7 @@ void QTReaderApp::do_saveconfig(const QString& _txt, bool full)
 
 
     config.writeEntry( "StripCr", reader->bstripcr );
+    config.writeEntry( "NoInlineTables", reader->bNoInlineTables );
     config.writeEntry( "AutoFmt", reader->bautofmt );
     config.writeEntry( "TextFmt", reader->btextfmt );
     config.writeEntry( "StripHtml", reader->bstriphtml );
@@ -4365,6 +4455,7 @@ void QTReaderApp::do_saveconfig(const QString& _txt, bool full)
 	reader->m_lastposn = reader->pagelocate();
 	config.writeEntry( "LastFile", reader->m_lastfile );
 	config.writeEntry( "LastPosn", (int)(reader->pagelocate()) );
+	config.writeEntry( "OutputCodec", reader->m_outputName);
     }
     config.writeEntry( "PageMode", reader->m_bpagemode );
     config.writeEntry( "MonoSpaced", reader->m_bMonoSpaced );
@@ -4396,6 +4487,7 @@ void QTReaderApp::do_saveconfig(const QString& _txt, bool full)
     config.writeEntry( "Annotation", m_doAnnotation);
     config.writeEntry( "Dictionary", m_doDictionary);
     config.writeEntry( "Clipboard", m_doClipboard);
+    config.writeEntry( "OutputTgt", m_doOutput);
     /*
     config.writeEntry( "SpaceTarget", m_spaceTarget);
     config.writeEntry( "EscapeTarget", m_escapeTarget);
@@ -4410,12 +4502,15 @@ void QTReaderApp::do_saveconfig(const QString& _txt, bool full)
     config.writeEntry("DownScroll", m_downScroll);
     */
     config.writeEntry( "Repalm", reader->brepalm );
+    config.writeEntry( "UnderlineLink", reader->bunderlineLink );
     config.writeEntry( "HideScrollBar", m_scrollishidden );
+    config.writeEntry( "HideToolBar", m_hidebars );
     config.writeEntry( "Kern", reader->bkern );
     config.writeEntry( "Remap", reader->bremap );
     config.writeEntry( "Peanut", reader->bpeanut );
     config.writeEntry( "MakeBold", reader->bmakebold );
     config.writeEntry( "Continuous", reader->m_continuousDocument );
+    config.writeEntry( "DoubleBuffer", reader->m_doubleBuffered);
     config.writeEntry( "FullJust", reader->bfulljust );
     //    config.writeEntry( "Negative", reader->bNegative );
     config.writeEntry( "Inverse", reader->bInverse );
@@ -4519,6 +4614,7 @@ bool QTReaderApp::readconfig(const QString& dirname, const QString& _txt, bool f
     config.setGroup( "View" );
     m_bFloatingDialog = config.readBoolEntry("FloatDialogs", m_bFloatingDialog);
     reader->bstripcr = config.readBoolEntry( "StripCr", reader->bstripcr );
+    reader->bNoInlineTables = config.readBoolEntry( "NoInlineTables", reader->bNoInlineTables );
     reader->bfulljust = config.readBoolEntry( "FullJust", reader->bfulljust );
     reader->bInverse = config.readBoolEntry( "Inverse", reader->bInverse );
     //    reader->bNegative = config.readBoolEntry( "Negative", false );
@@ -4574,11 +4670,14 @@ bool QTReaderApp::readconfig(const QString& dirname, const QString& _txt, bool f
     reader->m_absleft_border = config.readNumEntry( "Left Margin", reader->m_absleft_border );
     reader->m_absright_border = config.readNumEntry( "Right Margin", reader->m_absright_border );
     m_scrollishidden = config.readBoolEntry( "HideScrollBar", m_scrollishidden );
+    m_hidebars = config.readBoolEntry( "HideToolBar", m_hidebars );
     reader->brepalm = config.readBoolEntry( "Repalm", reader->brepalm );
+    reader->bunderlineLink = config.readBoolEntry( "UnderlineLink", reader->bunderlineLink );
     reader->bkern = config.readBoolEntry( "Kern", reader->bkern );
     reader->bremap = config.readBoolEntry( "Remap", reader->bremap );
     reader->bmakebold = config.readBoolEntry( "MakeBold", reader->bmakebold );
     reader->setContinuous(config.readBoolEntry( "Continuous", reader->m_continuousDocument ));
+    reader->setDoubleBuffer(config.readBoolEntry("DoubleBuffer", reader->m_doubleBuffered));
     m_targetapp = config.readEntry( "TargetApp", m_targetapp );
     m_targetmsg = config.readEntry( "TargetMsg", m_targetmsg );
 #ifdef _SCROLLPIPE
@@ -4589,12 +4688,15 @@ bool QTReaderApp::readconfig(const QString& dirname, const QString& _txt, bool f
     m_doAnnotation = config.readBoolEntry( "Annotation", m_doAnnotation);
     m_doDictionary = config.readBoolEntry( "Dictionary", m_doDictionary);
     m_doClipboard = config.readBoolEntry( "Clipboard", m_doClipboard);
+    m_doOutput = config.readBoolEntry( "OutputTgt", m_doOutput);
 #ifdef USEQPE
     m_grabkeyboard = config.readBoolEntry( "GrabKeyboard", m_grabkeyboard);
 #endif
     m_propogatefontchange = config.readBoolEntry( "RequestorFontChange", m_propogatefontchange);
     reader->setBaseSize(config.readNumEntry( "Basesize", reader->getBaseSize() ));
     reader->setTwoTouch(m_twoTouch);
+    
+    reader->m_outputName = config.readEntry( "OutputCodec", reader->m_outputName);
 
     m_touch_action->setOn(m_twoTouch);
     m_setmono_action->setOn(reader->m_bMonoSpaced);
@@ -4637,8 +4739,7 @@ bool QTReaderApp::PopulateConfig(const char* tgtdir, bool usedirs)
 
     while ( (fi=it.current()) ) {           // for each file...
   
-	bkmkselector->insertItem(fi->fileName());
-	cnt++;
+	bkmkselector->insertItem(fi->fileName(), cnt++);
 			
 	//qDebug( "%10li %s", fi->size(), fi->fileName().data() );
 	++it;                               // goto next list element
@@ -4663,8 +4764,7 @@ bool QTReaderApp::PopulateConfig(const char* tgtdir, bool usedirs)
 
 	if (lstat((const char *)Global::applicationFileName(finaldir,de->d_name),&buf) == 0 && ((usedirs && S_ISDIR(buf.st_mode)) || (!usedirs && S_ISREG(buf.st_mode))))
 	{
-	    bkmkselector->insertItem(de->d_name);
-	    cnt++;
+	    bkmkselector->insertItem(de->d_name, cnt++);
 	}
     }
     delete [] finaldir;
@@ -4735,6 +4835,8 @@ void QTReaderApp::OnURLSelected(const QString& href, const size_t tgt)
     {
       qDebug("No type");
     }
+  QString msg = "External URL\n" + href;
+  QMessageBox::information(this, PROGNAME, msg);
 #else
   if (href.isEmpty())
     {
@@ -4901,7 +5003,7 @@ void QTReaderApp::forceopen(const QString& filename)
     fi = QFileInfo(filename);
     QString flnm = fi.absFilePath();
   */
-  if (!filename.isEmpty())
+  if (!filename.isEmpty() && QFileInfo(filename).exists())
     {
       updatefileinfo();
       if (pBkmklist != NULL)
@@ -4917,6 +5019,10 @@ void QTReaderApp::forceopen(const QString& filename)
       reader->disableAutoscroll();
       openFile(filename);
       reader->setFocus();
+    }
+  else
+    {
+      OnURLSelected(filename, 0);
     }
 }
 

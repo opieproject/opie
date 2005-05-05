@@ -67,6 +67,7 @@ void ztxt::locate(unsigned int n)
 
     if (hasrandomaccess())
     {
+	unsuspend();
 	bufferrec = n / ntohs(hdr0.recordSize) + 1;
 	if (bufferrec == 1)
 	{
@@ -107,6 +108,7 @@ void ztxt::locate(unsigned int n)
 
 void ztxt::home()
 {
+unsuspend();
     if (bInit)
     {
 	inflateEnd(&zstream);
@@ -147,6 +149,7 @@ CList<Bkmk>* ztxt::getbkmklist()
   if (recno == 0) return NULL;
 
   CList<Bkmk>* t = new CList<Bkmk>;
+  unsuspend();
   size_t cur = ftell(fin);
   gotorecordnumber(recno);
   for (int i = 0; i < ntohs(hdr0.numBookmarks); i++)

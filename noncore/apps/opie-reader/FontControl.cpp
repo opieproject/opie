@@ -1,4 +1,5 @@
 #include <qfontdatabase.h>
+
 #include "FontControl.h"
 
 int FontControl::gzoom()

@@ -8,6 +8,8 @@
 ****************************************************************************/
 #include "Prefs.h"
 
+#include <stdlib.h>
+
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
@@ -18,6 +20,7 @@
 #include <qwhatsthis.h>
 #include <qbuttongroup.h>
 #include <qlineedit.h>
+#include <qdir.h>
 #ifdef USECOMBO
 #include <qcombobox.h>
 #else
@@ -102,6 +105,11 @@ CLayoutPrefs::CLayoutPrefs( QWidget* parent,  const char* name, WFlags fl )
     pkern = new QCheckBox( bg );
     pkern->setText( tr( "Kern" ) );
 
+    InlineTables = new QCheckBox( bg );
+    InlineTables->setText( tr( "Inline Tables" ) );
+
+    Underlinelinks = new QCheckBox( bg );
+    Underlinelinks->setText( tr( "Underline Links" ) );
     /*
     Negative = new QCheckBox( bg );
     Negative->setText( tr( "Negative" ) );
@@ -562,6 +570,9 @@ CMiscPrefs::CMiscPrefs( QWidget* parent,  const char* name, WFlags fl )
     clipboard = new QCheckBox( bg );
     clipboard->setText( tr( "Clipboard" ) );
 
+    QCheckBox* outcodec = new QCheckBox( bg );
+    outcodec->setText( tr( "Output" ) );
+
 }
 
 CMiscPrefs::~CMiscPrefs()
@@ -593,6 +604,9 @@ CMiscPrefs::CMiscPrefs( QWidget* parent,  const char* name, WFlags fl )
     clipboard = new QCheckBox( gb );
     clipboard->setText( tr( "Clipboard" ) );
 
+    boutput = new QCheckBox( gb );
+    boutput->setText( tr( "Output" ) );
+
     QButtonGroup* bg = new QButtonGroup(1, Qt::Horizontal, "Plucker", this);
     hl->addWidget( bg );
 
@@ -604,52 +618,7 @@ CMiscPrefs::CMiscPrefs( QWidget* parent,  const char* name, WFlags fl )
 
     Continuous = new QCheckBox( bg );
     Continuous->setText( tr( "Continuous" ) );
-
-    bg = new QButtonGroup(2, Qt::Horizontal, "Scroll", this);
-    vl->addWidget( bg );
-
-    //    scrollinplace = new QCheckBox( bg );
-    //    scrollinplace->setText( tr( "In Place" ) );
-#ifdef USECOMBO
-    scrolltype = new QComboBox( bg );
-#else
-    scrolltype = new MenuButton( this);
-#endif
-    scrolltype->insertItem("In Place");
-    scrolltype->insertItem("Rolling (moving bg)");
-    scrolltype->insertItem("Rolling (window)");
-    scrolltype->insertItem("Rolling (static bg)");
-    scrolltype->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-
-
-#ifdef USECOMBO
-    scrollcolor = new QComboBox( bg );
-#else
-    scrollcolor = new MenuButton( this);
-#endif
-    populate_colours(scrollcolor);
-    scrollcolor->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-
-
-    QLabel* TextLabel = new QLabel( bg );
-    TextLabel->setText( tr( "Scroll step" ) );
-    //    gl->addWidget(TextLabel, 2, 0);
-    scrollstep = new QSpinBox( bg );
-    scrollstep->setRange(1, 10);
-    scrollstep->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-
-    TextLabel = new QLabel( bg );
-    TextLabel->setText( tr( "Minibar Colour" ) );
-#ifdef USECOMBO
-    minibarcol = new QComboBox( bg );
-#else
-    minibarcol = new MenuButton( this);
-#endif
-    populate_colours(minibarcol);
-    minibarcol->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
-
-
-    bg = new QButtonGroup(2, Qt::Vertical, "Background", this);
+    bg = new QButtonGroup(2, Qt::Horizontal, "Background", this);
     vl->addWidget( bg );
 
 //    QLabel* TextLabel = new QLabel( bg );
@@ -665,6 +634,19 @@ CMiscPrefs::CMiscPrefs( QWidget* parent,  const char* name, WFlags fl )
     bgtype->insertItem( tr("Centred") );
     bgtype->insertItem( tr("Tiled") );
     bgtype->insertItem( tr("Fitted") );
+
+    DoubleBuffer = new QCheckBox( bg );
+    DoubleBuffer->setText( tr( "Double Buffer" ) );
+
+    QLabel* TextLabel = new QLabel( bg );
+    TextLabel->setText( tr( "Minibar Colour" ) );
+#ifdef USECOMBO
+    minibarcol = new QComboBox( bg );
+#else
+    minibarcol = new MenuButton( this);
+#endif
+    populate_colours(minibarcol);
+    minibarcol->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
 }
 
 CMiscPrefs::~CMiscPrefs()
@@ -672,18 +654,99 @@ CMiscPrefs::~CMiscPrefs()
     // no need to delete child widgets, Qt does it all for us
 }
 
+CScrollPrefs::CScrollPrefs( QWidget* parent,  const char* name, WFlags fl )
+    : QWidget( parent, name, fl )
+{
+
+    QHBoxLayout* hl = new QHBoxLayout(this);
+
+    hl->setMargin( 0 );
+
+    QButtonGroup* bg = new QButtonGroup(2, Qt::Horizontal, "Scroll", this);
+    hl->addWidget( bg );
+
+    //    scrollinplace = new QCheckBox( bg );
+    //    scrollinplace->setText( tr( "In Place" ) );
+    QLabel* TextLabel = new QLabel( bg );
+    TextLabel->setText( tr( "Scroll step" ) );
+    //    gl->addWidget(TextLabel, 2, 0);
+    scrollstep = new QSpinBox( bg );
+    scrollstep->setRange(1, 10);
+    scrollstep->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+    TextLabel = new QLabel( bg );
+    TextLabel->setText( tr( "Scroll type" ) );
+#ifdef USECOMBO
+    scrolltype = new QComboBox( bg );
+#else
+    scrolltype = new MenuButton( this);
+#endif
+    scrolltype->insertItem("In Place");
+    scrolltype->insertItem("Rolling (moving bg)");
+    scrolltype->insertItem("Rolling (window)");
+    scrolltype->insertItem("Rolling (static bg)");
+    scrolltype->insertItem("Send to output");
+    scrolltype->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+    TextLabel = new QLabel( bg );
+    TextLabel->setText( tr( "Colour of scroll\nprogress indicator" ) );
+
+#ifdef USECOMBO
+    scrollcolor = new QComboBox( bg );
+#else
+    scrollcolor = new MenuButton( this);
+#endif
+    populate_colours(scrollcolor);
+    scrollcolor->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+
+    TextLabel = new QLabel( bg );
+    TextLabel->setText( tr( "Output" ) );
+
+#ifdef USECOMBO
+    outcodec = new QComboBox( bg );
+#else
+    outcodec = new MenuButton( this);
+#endif
+#ifdef USEQPE
+#ifdef OPIE
+      QString codecpath(getenv("OPIEDIR"));
+#else
+      QString codecpath(getenv("QTDIR"));
+#endif
+      codecpath += "/plugins/reader/outcodecs";
+#else
+      QString codecpath(getenv("READERDIR"));
+      codecpath += "/outcodecs";
+#endif
+      QDir ocd(codecpath, "lib*.so");
+      for (int i = 0; i < ocd.count(); ++i)
+	{
+	  QString tmp(ocd[i]);
+	  outcodec->insertItem(tmp.mid(3,tmp.length()-6));
+	}
+    outcodec->setSizePolicy(QSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed));
+}
+
+CScrollPrefs::~CScrollPrefs()
+{
+    // no need to delete child widgets, Qt does it all for us
+}
+
+
 CPrefs::CPrefs( int w, bool fs, QWidget* parent, const char* name) : QDialog(parent, name, true)
 {
     setCaption(tr( "OpieReader Settings" ) );
     QTabWidget* td = new QTabWidget(this);
     layout = new CLayoutPrefs(this);
     layout2 = new CLayoutPrefs2(w, this);
+    scroll = new CScrollPrefs(this);
     misc = new CMiscPrefs(this);
     //    button = new CButtonPrefs(kmap, this);
     inter = new CInterPrefs(this);
     td->addTab(layout, tr("Layout"));
     td->addTab(layout2, tr("Layout(2)"));
     td->addTab(inter, tr("Locale"));
+    td->addTab(scroll, tr("Scroll"));
     td->addTab(misc, tr("Misc"));
     //    td->addTab(button, tr("Buttons"));
     QVBoxLayout* v = new QVBoxLayout(this);

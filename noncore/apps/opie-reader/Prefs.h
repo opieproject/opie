@@ -61,6 +61,8 @@ public:
     QCheckBox* pkern;
     //    QCheckBox* Inverse;
     //    QCheckBox* Negative;
+    QCheckBox* InlineTables;
+    QCheckBox* Underlinelinks;
 };
 
 class CLayoutPrefs2 : public QWidget
@@ -98,6 +100,7 @@ public:
     QCheckBox* Depluck;
     QCheckBox* Dejpluck;
     QCheckBox* Continuous;
+    QCheckBox* DoubleBuffer;
 protected:
 
     QHBoxLayout* Layout5;
@@ -116,22 +119,39 @@ public:
     CMiscPrefs( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~CMiscPrefs();
 
-    QCheckBox *annotation, *dictionary, *clipboard;
-    QCheckBox *Depluck, *Dejpluck, *Continuous;
+    QCheckBox *annotation, *dictionary, *clipboard, *boutput;
+    QCheckBox *Depluck, *Dejpluck, *Continuous, *DoubleBuffer;
+
+#ifdef USECOMBO
+    QComboBox *bgtype, *minibarcol;
+#else
+    MenuButton *bgtype, *minibarcol;
+#endif
+};
+
+class CScrollPrefs : public QWidget
+{ 
+
+public:
+
+    friend class CPrefs;
+
+    CScrollPrefs( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    ~CScrollPrefs();
 
     QSpinBox *scrollstep;
 
 #ifdef USECOMBO
-    QComboBox *scrollcolor, *bgtype, *scrolltype, *minibarcol;
+    QComboBox *scrollcolor, *scrolltype, *outcodec;
 #else
-    MenuButton *scrollcolor, *bgtype, *scrolltype, *minibarcol;
+    MenuButton *scrollcolor, *scrolltype, *outcodec;
 #endif
 };
 /*
 class QListView;
 class QListViewItem;
 
-class CButtonPrefs : public QWidget
+sclass CButtonPrefs : public QWidget
 {
 Q_OBJECT
   QMap<orKey, int> *kmap;
@@ -189,7 +209,7 @@ Q_OBJECT
     CLayoutPrefs* layout;
     CLayoutPrefs2* layout2;
  CMiscPrefs* misc;
- // CButtonPrefs* button;
+ CScrollPrefs* scroll;
  CInterPrefs* inter;
 
     void keyPressEvent(QKeyEvent* e)
@@ -221,7 +241,9 @@ Q_OBJECT
     void customhyphen(bool _v) { layout->customhyphen->setChecked(_v); }
     */
     bool StripCR() { return layout->StripCR->isChecked(); }
+    bool InlineTables() { return layout->InlineTables->isChecked(); }
     bool repalm() { return layout->prepalm->isChecked(); }
+    bool UnderlineLink() { return layout->Underlinelinks->isChecked(); }
     bool kern() { return layout->pkern->isChecked(); }
     bool Dehyphen() { return layout->Dehyphen->isChecked(); }
     bool SingleSpace() { return layout->SingleSpace->isChecked(); }
@@ -246,7 +268,9 @@ Q_OBJECT
 
 
     void StripCR(bool v) { layout->StripCR->setChecked(v); }
+    void InlineTables(bool v) { layout->InlineTables->setChecked(v); }
     void repalm(bool v) { layout->prepalm->setChecked(v); }
+    void UnderlineLink(bool v) { layout->Underlinelinks->setChecked(v); }
     void kern(bool v) { layout->pkern->setChecked(v); }
     void Dehyphen(bool v) { layout->Dehyphen->setChecked(v); }
     void SingleSpace(bool v) { layout->SingleSpace->setChecked(v); }
@@ -273,15 +297,15 @@ Q_OBJECT
 #endif
 #ifdef USECOMBO
     void bgtype(int v) { misc->bgtype->setCurrentItem(v); }
-    void scrollcolor(int v) { misc->scrollcolor->setCurrentItem(v); }
+    void scrollcolor(int v) { scroll->scrollcolor->setCurrentItem(v); }
     void minibarcol(int v) { misc->minibarcol->setCurrentItem(v); }
 #else
     void bgtype(int v) { misc->bgtype->select(v); }
-    void scrollcolor(int v) { misc->scrollcolor->select(v); }
+    void scrollcolor(int v) { scroll->scrollcolor->select(v); }
     void minibarcol(int v) { misc->minibarcol->select(v); }
 #endif
     int bgtype() { return misc->bgtype->currentItem(); }
-    int scrollcolor() { return misc->scrollcolor->currentItem(); }
+    int scrollcolor() { return scroll->scrollcolor->currentItem(); }
     int minibarcol() { return misc->minibarcol->currentItem(); }
 
 
@@ -300,7 +324,6 @@ Q_OBJECT
     int background() { return layout2->bgsel->currentItem(); }
 
 
-
 #ifdef USECOMBO
     void Font(QString& s)
 	{
@@ -317,12 +340,34 @@ Q_OBJECT
     void Font(QString& s) { layout2->fontselector->select(s); }
 #endif
 
+#ifdef USECOMBO
+    void outcodec(QString& s)
+	{
+	    for (int i = 1; i <= scroll->outcodec->count(); i++)
+	    {
+		if (scroll->outcodec->text(i) == s)
+		{
+		    scroll->outcodec->setCurrentItem(i);
+		    break;
+		}
+	    }
+	}
+#else
+    void outcodec(QString& s) { scroll->outcodec->select(s); }
+#endif
+    QString outcodec() { return scroll->outcodec->currentText(); }
+
+    void miscoutput(bool v) { return misc->boutput->setChecked(v); }
+    bool miscoutput() { return misc->boutput->isChecked(); }
+
     bool Depluck() { return misc->Depluck->isChecked(); }
     void Depluck(bool v) { misc->Depluck->setChecked(v); }
     bool Dejpluck() { return misc->Dejpluck->isChecked(); }
     void Dejpluck(bool v) { misc->Dejpluck->setChecked(v); }
     bool Continuous() { return misc->Continuous->isChecked(); }
     void Continuous(bool v) { misc->Continuous->setChecked(v); }
+    bool DoubleBuffer() { return misc->DoubleBuffer->isChecked(); }
+    void DoubleBuffer(bool v) { misc->DoubleBuffer->setChecked(v); }
     bool SwapMouse() { return inter->SwapMouse->isChecked(); }
     void SwapMouse(bool v) { inter->SwapMouse->setChecked(v); }
 
@@ -371,15 +416,15 @@ Q_OBJECT
     void propfontchange(bool v) { inter->propfontchange->setChecked(v); }
 
     int encoding() { return inter->encoding->currentItem(); }
-    int scrolltype() { return misc->scrolltype->currentItem(); }
+    int scrolltype() { return scroll->scrolltype->currentItem(); }
 #ifdef USECOMBO
     void encoding(int v) { inter->encoding->setCurrentItem(v); }
-    void scrolltype(int v) { misc->scrolltype->setCurrentItem(v); }
+    void scrolltype(int v) { scroll->scrolltype->setCurrentItem(v); }
 #else
     void encoding(int v) { inter->encoding->select(v); }
-    void scrolltype(int v) { misc->scrolltype->select(v); }
+    void scrolltype(int v) { scroll->scrolltype->select(v); }
 #endif
-    void scrollstep(int v) { misc->scrollstep->setValue(v); }
-    int scrollstep() { return misc->scrollstep->value(); }
+    void scrollstep(int v) { scroll->scrollstep->setValue(v); }
+    int scrollstep() { return scroll->scrollstep->value(); }
 };
 #endif // CPREFS_H

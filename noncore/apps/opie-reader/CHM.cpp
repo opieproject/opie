@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <qimage.h>
 #include <qpixmap.h>
+#ifdef USEQPE
+#include <qpe/global.h>
+#endif
 
 #ifndef __STATIC
 extern "C"
@@ -66,9 +69,13 @@ void CHM::unsuspend() {
             bSuspended = false;
             int delay = time(NULL) - sustime;
             if (delay < 10)
+	      {
+		Global::statusMessage("Stalling");
                 sleep(10-delay);
+	      }
             chmFile = chm_open(fname);
             for (int i = 0; chmFile == NULL && i < 5; i++) {
+	      Global::statusMessage("Stalling");
                 sleep(5);
                 chmFile = chm_open(fname);
             }
@@ -86,6 +93,7 @@ void CHM::addContent(QString content) {
 }
 
 void CHM::FillHomeContent() {
+unsuspend();
     if (chmHHCPath != "") {
         const char *ext;
         char buffer[65536];
@@ -162,6 +170,7 @@ void CHM::FillHomeContent() {
 
 bool CHM::FillBuffer()
 {
+unsuspend();
   bool bRetVal = false;
   char buffer[65536];
   int swath, offset;
@@ -196,6 +205,7 @@ bool CHM::FillBuffer()
 }
 
 bool CHM::FillContent() {
+unsuspend();
     bool bRetVal = false;
     if (chmPath != "") {
         /* try to find the file */
@@ -239,7 +249,8 @@ bool CHM::FillContent() {
     return bRetVal;
 }
 
-bool CHM::getFile(const QString& href) {
+bool CHM::getFile(const QString& _href, const QString& ) {
+  QString href = "/" + _href;
   qDebug("Got:%s", (const char*)href);
     bool bRetVal = false;
     QString temp = chmPath;

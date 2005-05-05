@@ -7,8 +7,6 @@
 #include <qpe/global.h>
 #endif
 
-#include "util.h"
-
 #ifndef __STATIC
 #include <dlfcn.h>
 class ebookcodec : public CExpander_Interface
@@ -17,13 +15,24 @@ class ebookcodec : public CExpander_Interface
   void *handle;
   int status;
  public:
+  QString getTableAsHtml(unsigned long loc) { return codec->getTableAsHtml(loc); }
   QString about()
     {
       return QString("Plug-in ebook codec interface (c) Tim Wentford\n")+codec->about();
     }
   ebookcodec(const QString& _s) : codec(NULL), handle(NULL), status(0)
     {
-		QString codecpath(QTReaderUtil::getPluginPath());
+#ifdef USEQPE
+#ifdef OPIE
+      QString codecpath(getenv("OPIEDIR"));
+#else
+		QString codecpath(getenv("QTDIR"));
+#endif
+      codecpath += "/plugins/reader/codecs/";
+#else
+      QString codecpath(getenv("READERDIR"));
+      codecpath += "/codecs/";
+#endif
       codecpath += _s;
       if (QFile::exists(codecpath))
 	{
@@ -113,6 +122,10 @@ class ebookcodec : public CExpander_Interface
     }
   int getwidth() { return codec->getwidth(); }
   QImage* getPicture(const QString& href) { return codec->getPicture(href); }
-  bool getFile(const QString& href) { return codec->getFile(href); }
+  bool getFile(const QString& href, const QString& nm) { return codec->getFile(href, nm); }
+  bool findanchor(const QString& nm)
+    {
+      return codec->findanchor(nm);
+    }
 };
 #endif

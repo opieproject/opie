@@ -56,7 +56,7 @@ public:
     MarkupType PreferredMarkup() {
         return cCHM;
     }
-    bool getFile(const QString& href);
+    bool getFile(const QString& href, const QString& nm);
     QImage *getPicture(const QString& href);
     QString about() { return QString("CHM codec (c) Bob Griffin\nchm_lib (c) Jed Wing\nLZX code (c) Stuart Cale"); }
 private :

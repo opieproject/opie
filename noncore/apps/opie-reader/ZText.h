@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include <zlib.h>
 #include <sys/stat.h>
+#ifdef USEQPE
+#include <qpe/global.h>
+#endif
+
 #include "CExpander.h"
 
 class Text: public CExpander {
@@ -31,14 +35,19 @@ public:
 	      if (sustime != ((time_t)-1))
 		{
 		  int delay = time(NULL) - sustime;
-		  if (delay < 10) sleep(10-delay);
+		  if (delay < 10)
+		    {
+		      Global::statusMessage("Stalling");
+		      sleep(10-delay);
+		    }
 		}
 	      file = gzopen(fname, "rb");
 	      for (int i = 0; file == NULL && i < 5; i++)
-	      {
+		{
+		  Global::statusMessage("Stalling");
 		  sleep(5);
 		  file = gzopen(fname, "rb");
-	      }
+		}
 	      if (file == NULL)
 	      {
 		  QMessageBox::warning(NULL, PROGNAME, "Couldn't reopen file");

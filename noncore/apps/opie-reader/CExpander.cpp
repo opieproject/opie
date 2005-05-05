@@ -1,4 +1,7 @@
 #include "CExpander.h"
+#ifdef USEQPE
+#include <qpe/global.h>
+#endif
 
 size_t CExpander::getHome() { return m_homepos; }
 
@@ -70,10 +73,15 @@ void CExpander::unsuspend(FILE*& fin)
     {
       bSuspended = false;
       int delay = time(NULL) - sustime;
-      if (delay < 10) sleep(10-delay);
+      if (delay < 10)
+	{
+	  Global::statusMessage("Stalling");
+	  sleep(10-delay);
+	}
       fin = fopen(fname, "rb");
       for (int i = 0; fin == NULL && i < 5; i++)
 	{
+	  Global::statusMessage("Stalling");
 	  sleep(5);
 	  fin = fopen(fname, "rb");
 	}

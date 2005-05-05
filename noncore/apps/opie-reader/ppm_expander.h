@@ -7,8 +7,8 @@
 
 #include "utypes.h"
 #include "ppm.h"
-#include "arith.h"
 
+class PPM_ReadBuf;
 
 #define SYM_EOF 256
 
@@ -36,6 +36,9 @@ public:
       {
 	  CExpander::unsuspend(my_file_in);
       }
+#else
+      void suspend() {}
+      void unsuspend() {}
 #endif
   ppm_expander() : needppmend(false), my_file_in(NULL), my_read_buf(NULL)
     {

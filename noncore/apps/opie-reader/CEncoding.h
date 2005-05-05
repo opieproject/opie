@@ -12,11 +12,19 @@ class CEncoding : public CCharacterSource
   CExpander_Interface* parent;
   linkType hyperlink(unsigned int n, unsigned int noff, QString& t, QString& nm) { return parent->hyperlink(n, noff, t, nm); }
 public:
+  virtual QString getTableAsHtml(unsigned long loc)
+    {
+      qDebug("CEncoding::getTableAsHtml()");
+      return parent->getTableAsHtml(loc);
+    }
   CEncoding() : parent(NULL) {}
   void setparent(CExpander_Interface* p) { parent = p; }
   virtual ~CEncoding() {};
   void locate(unsigned int n) { parent->locate(n); }
-  bool findanchor(const QString& nm) { return false; }
+  bool findanchor(const QString& nm)
+    {
+      return parent->findanchor(nm);
+    }
   void saveposn(const QString& f, size_t posn) { parent->saveposn(posn); }
   void writeposn(const QString& f, size_t posn) { parent->writeposn(posn); }
   linkType forward(QString& f, size_t& loc) { return parent->forward(loc); }
@@ -25,9 +33,8 @@ public:
   virtual int getwidth() { return parent->getwidth(); }
   QImage* getPicture(unsigned long tgt) { return parent->getPicture(tgt); }
   QImage* getPicture(const QString& href) { return parent->getPicture(href); }
-  bool getFile(const QString& href) { qDebug("Encoding Get File"); return parent->getFile(href);}
-
-
+  bool getFile(const QString& href, const QString& nm) { qDebug("Encoding Get File"); return parent->getFile(href, nm);}
+  unsigned long startSection() { return parent->startSection(); }
 };
 
 class CUtf8 : public CEncoding

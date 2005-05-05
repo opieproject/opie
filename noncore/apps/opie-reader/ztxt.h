@@ -11,7 +11,7 @@
 /*
  * Stuff common to both Weasel Reader and makeztxt
  *
- * $Id: ztxt.h,v 1.11 2004/02/28 11:21:06 tim Exp $
+ * $Id: ztxt.h,v 1.11 2004/02/28 11:21:06 tim Exp tim $
  *
  */
 

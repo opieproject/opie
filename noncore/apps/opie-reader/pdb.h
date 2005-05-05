@@ -4,7 +4,7 @@
  * Palm SDK.  However, I don't want to require the presense of the SDK for a
  * small utility since most Palm owners won't have it.
  *
- * $Id: pdb.h,v 1.7 2004-08-26 05:57:55 pohly Exp $
+ * $Id: pdb.h,v 1.8 2005-05-05 14:39:34 pohly Exp $
  *
  */
 
@@ -15,13 +15,11 @@
 #include <netinet/in.h>
 #endif
 #include <stdio.h>
+
 #include "CExpander.h"
 
 /* Normal Palm typedefs */
-typedef unsigned char   UInt8;
-typedef unsigned short  UInt16;
-typedef signed short  Int16;
-typedef unsigned long   UInt32;
+#include "mytypes.h"
 typedef UInt32          LocalID;
 
 /* Max length of DB name */
@@ -92,6 +90,9 @@ class Cpdb : public CExpander
 #ifdef USEQPE
     void suspend();
     void unsuspend();
+#else
+    void suspend() {}
+    void unsuspend() {}
 #endif
  public:
     virtual void sizes(unsigned long& _file, unsigned long& _text) = 0;
