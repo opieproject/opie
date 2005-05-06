@@ -26,7 +26,7 @@ You need to do set the OPIEDIR environment variable:
 export OPIEDIR=`pwd`
 or
 export OPIEDIR=~/projects/sources/opie
-or whereever you placed the Opie sources.
+or wherever you placed the Opie sources.
 
 You need to adjust your runtime library search path,
 so that the Qt/Embedded and Opie libraries can be found:
@@ -62,10 +62,10 @@ Exit and save the configuration and enter "make" to build everything selected.
 Have fun!
 
 2. Required Libraries
-================
+=====================
 
 The following Libraries are used by Opie parts.
-For a successful build you must install these librarys and headers.
+For a successful build you must install these libraries and headers.
 
 * libsdl >= 1.2.0
   http://www.libsdl.org/download-1.2.php
