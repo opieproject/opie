@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nationaldays>
+<description value="Californian Holidays"/>
+<entries>
+<entry name="Martin Luther King, Jr.'s Birthday Observed" type="floating">
+  <calculation>
+    <weekday value="monday"/>
+    <datedep value="after"/>
+    <date value="01-15"/>
+  </calculation>
+</entry>
+<entry name="Cesar Chavez's Birthday" date="03-31"/>
+<entry name="Daylight Savings (spring forward)" type="floating">
+  <calculation>
+    <dayofmonth value="first"/>
+    <weekday value="sunday"/>
+    <month value="april"/>
+  </calculation>
+</entry>
+<entry name="Columbus Day" type="floating">
+  <calculation>
+    <dayofmonth value="second"/>
+    <weekday value="monday"/>
+    <month value="october"/>
+  </calculation>
+</entry>
+<entry name="Daylight Savings (fall back)" type="floating">
+  <calculation>
+    <dayofmonth value="last"/>
+    <weekday value="sunday"/>
+    <month value="october"/>
+  </calculation>
+</entry>
+</entries>
+</nationaldays>

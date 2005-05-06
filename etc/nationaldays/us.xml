@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nationaldays>
+<description value="US Holidays"/>
+<entries>
+<entry name="New Year's Day" date="01-01"/>
+<entry name="Martin Luther King, Jr.'s Birthday" date="01-15"/>
+<entry name="President's Day" type="floating">
+  <calculation>
+    <dayofmonth value="third"/>
+    <weekday value="monday"/>
+    <month value="february"/>
+  </calculation>
+</entry>
+<entry name="Memorial Day" type="floating">
+  <calculation>
+    <dayofmonth value="last"/>
+    <weekday value="monday"/>
+    <month value="may"/>
+  </calculation>
+</entry>
+<entry name="Flag Day" date="06-14"/>
+<entry name="Independence Day" date="07-04"/>
+<entry name="Labor Day" type="floating">
+  <calculation>
+    <dayofmonth value="first"/>
+    <weekday value="monday"/>
+    <month value="september"/>
+  </calculation>
+</entry>
+<entry name="Veteran's Day" date="11-11"/>
+<entry name="Thanksgiving" type="floating">
+  <calculation>
+    <dayofmonth value="last"/>
+    <weekday value="thursday"/>
+    <month value="november"/>
+  </calculation>
+</entry>
+<entry name="Day after Thanksgiving" type="floating">
+  <calculation>
+    <dayofmonth value="last"/>
+    <weekday value="thursday"/>
+    <month value="november"/>
+    <offset value="+1"/>
+  </calculation>
+</entry>
+<entry name="Christmas Eve" date="12-24"/>
+<entry name="Christmas Day" date="12-25"/>
+</entries>
+</nationaldays>

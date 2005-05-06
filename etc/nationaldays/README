@@ -1,48 +1,54 @@
-Config files for the nationalholiday plugin
+Entry files for the nationalholiday plugin
 
-Format is simple:
-Standard-xml file. 
-It must always enclosed by
+The format is simple. It is a standard xml file. So all tags must closed. A
+handy tool for checking closed tags is the xmllint utility provided by
+libxml2.
+
+Each xml file is enclosed by:
 <nationaldays>
 ...
 </nationaldays>
 
-then a short description tag.
+Each <nationaldays> tag should be follwed by a short description tag:
 <description value="german holidays"/>
 
-for example. It should be used later on.
-
-then a list of holidays follows, encapsulated with 
+The description will probably be used later on. Follow the description with
+the <entries> enclosure:
 <entries>
 ...
 </entries>
 
-A non-floating holiday entry has the form 
-<entry date="M-D" name="description of holiday"/>
+Insert your holidays in either fixed or floating format.  A fixed holiday entry
+has the form:
+<entry name="description of holiday" date="M-D" />
 
-floating holidays:
+A floating holiday entry has the form:
 <entry name="<name>" type="floating">
-<calculation>
- ... calc entries ..
-</calculation>
+  <calculation>
+     ... calc entries ..
+  </calculation>
 </entry>
 
-The calcentries may following tags:
+The calc entries may have the following tags:
+date - A short date (without Year!) in the form M-D or the special string
+       "easter"
+offset - A signed integer. This will added (or substracted) after all other
+         calculations are made.
+weekday - The day of week as in "monday', "tuesday", "wednesday", "thursday",
+          "friday", "saturday" or "sunday".
+dayofmonth - Used in combination with weekday tag. You can use "first",
+             "second", "third", "fourth" or "last".
+month - Used in combination with weekday and/or dayofmonth eg. "january",
+        "february" and so on.
+datedep - Used in combination with date and/or weekday, may "before" or "after".
 
-date - a short date (without Year!) in form M-D or the string "easter"
-offset - integer. these days will added (or substracted) after all other calcs are made.
-weekday - the day of week as monday, tuesday and so on.
-dayofmoth - in combination with weekday you can say "first <weekday> of ..." or "second <weekday> of ..."
-month - monthname(!) eg. january, february and so on.
-datedep - dependy to "date", may "before" or "after".
-
-example:
+example calculation entry:
 <calculation>
    <weekday value="sunday"/>
    <datedep value="before"/>
    <date value="12-24"/>
 </calculation>
 
-these will calculate sunday before christmaseve or christmas eve itself if it is a sunday.
+this will calculate sunday before christmas eve or christmas eve itself if it is a sunday.
 
-see german.xml for futher examples.
+see german.xml or any of the .xml files in this directory for futher examples.

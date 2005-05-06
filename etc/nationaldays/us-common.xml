@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nationaldays>
+<description value="US Commonly Celebrated Holidays"/>
+<entries>
+<entry name="Groundhog Day" date="02-02"/>
+<entry name="Valentine's Day" date="02-14"/>
+<entry name="St. Patrick's Day" date="03-17"/>
+<entry name="April Fool's Day" date="04-01"/>
+<entry name="Earth Day" date="04-22"/>
+<entry name="Bring Your Children to Work Day" type="floating">
+  <calculation>
+    <dayofmonth value="fourth"/>
+    <weekday value="thursday"/>
+    <month value="april"/>
+  </calculation>
+</entry>
+<entry name="Secretaries' Day" type="floating">
+  <calculation>
+    <dayofmonth value="last"/>
+    <weekday value="saturday"/>
+    <month value="april"/>
+    <offset value="-3"/>
+  </calculation>
+</entry>
+<entry name="Arbor Day" type="floating">
+  <calculation>
+    <dayofmonth value="last"/>
+    <weekday value="friday"/>
+    <month value="april"/>
+  </calculation>
+</entry>
+<entry name="May Day" date="05-01"/>
+<entry name="Cinco de Mayo" date="05-05"/>
+<entry name="National Teacher's Day" type="floating">
+  <calculation>
+    <dayofmonth value="first"/>
+    <weekday value="tuesday"/>
+    <month value="may"/>
+  </calculation>
+</entry>
+<entry name="Mother's Day" type="floating">
+  <calculation>
+    <dayofmonth value="second"/>
+    <weekday value="sunday"/>
+    <month value="may"/>
+  </calculation>
+</entry>
+<entry name="Emancipation Day" date="06-20"/>
+<entry name="Summer Solstice" date="06-21"/>
+<entry name="Father's Day" type="floating">
+  <calculation>
+    <dayofmonth value="third"/>
+    <weekday value="sunday"/>
+    <month value="june"/>
+  </calculation>
+</entry>
+<entry name="Gay Pride Day" type="floating">
+  <calculation>
+    <dayofmonth value="last"/>
+    <weekday value="sunday"/>
+    <month value="june"/>
+  </calculation>
+</entry>
+<entry name="Grandparent's Day" type="floating">
+  <calculation>
+    <dayofmonth value="first"/>
+    <weekday value="monday"/>
+    <month value="september"/>
+    <offset value="+6"/>
+  </calculation>
+</entry>
+<entry name="Patriot Day" date="09-11"/>
+<entry name="Fall Equinox" date="09-23"/>
+<entry name="National Children's Day" date="10-12"/>
+<entry name="Bosses Day" date="10-16"/>
+<entry name="Mother-in-Law's Day" date="10-23"/>
+<entry name="Halloween" date="10-31"/>
+<entry name="Election Day" type="floating">
+  <calculation>
+    <dayofmonth value="first"/>
+    <weekday value="monday"/>
+    <month value="november"/>
+    <offset value="+1"/>
+  </calculation>
+</entry>
+<entry name="Pearl Harbor Day" date="12-07"/>
+<entry name="Human Rights Day" date="12-10"/>
+<entry name="Forefathers' Day" date="12-21"/>
+<entry name="Winter Solstice" date="12-21"/>
+<entry name="New Year's Eve" date="12-31"/>
+</entries>
+</nationaldays>
