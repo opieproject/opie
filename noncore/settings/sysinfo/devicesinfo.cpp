@@ -256,6 +256,8 @@ void UsbCategory::populate()
     QString _manufacturer, _product, _serial;
 
     int usbcount = 0;
+    UsbDevice* lastDev = 0;
+    UsbDevice* dev = 0;
     while ( !usbinfo.atEnd() )
     {
         QString line = usbinfo.readLine();
@@ -264,7 +266,23 @@ void UsbCategory::populate()
         {
             sscanf(line.local8Bit().data(), "T:  Bus=%2d Lev=%2d Prnt=%2d Port=%d Cnt=%2d Dev#=%3d Spd=%3f MxCh=%2d", &_bus, &_level, &_parent, &_port, &_count, &_device, &_speed, &_channels);
 
-            new UsbDevice( this, QString( "USB Device #%1" ).arg( usbcount++ ) );
+            if ( !_level )
+            {
+                odebug << "adding new bus" << oendl;
+                dev = new UsbDevice( this, QString( "Generic USB Hub Device" ) );
+                lastDev = dev;
+            }
+            else
+            {
+                odebug << "adding new dev" << oendl;
+                dev = new UsbDevice( lastDev, QString( "Generic USB Hub Device" ) );
+                lastDev = dev;
+            }
+        }
+        else if ( line.startsWith( "S:  Product" ) )
+        {
+            int dp = line.find( '=' );
+            dev->setText( 0, dp != -1 ? line.right( line.length()-1-dp ) : "<unknown>" );
         }
         else
         {
@@ -276,6 +294,12 @@ void UsbCategory::populate()
 
 //=================================================================================================
 Device::Device( Category* parent, const QString& name )
+       :OListViewItem( parent, name )
+{
+    devinfo = static_cast<QWidget*>( listView()->parent() );
+}
+
+Device::Device( Device* parent, const QString& name )
        :OListViewItem( parent, name )
 {
     devinfo = static_cast<QWidget*>( listView()->parent() );
@@ -341,6 +365,14 @@ InputDevice::~InputDevice()
 
 //=================================================================================================
 UsbDevice::UsbDevice( Category* parent, const QString& name )
+          :Device( parent, name )
+{
+    details = new QPushButton( name, devinfo );
+    details->hide();
+}
+
+//=================================================================================================
+UsbDevice::UsbDevice( UsbDevice* parent, const QString& name )
           :Device( parent, name )
 {
     details = new QPushButton( name, devinfo );

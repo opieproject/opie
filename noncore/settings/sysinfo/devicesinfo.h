@@ -121,6 +121,7 @@ class Device : public Opie::Ui::OListViewItem
 {
 public:
     Device( Category* parent, const QString& name );
+    Device( Device* parent, const QString& name );
     ~Device();
 
     QWidget* devinfo;
@@ -166,6 +167,7 @@ class UsbDevice : public Device
 {
 public:
     UsbDevice( Category* parent, const QString& name );
+    UsbDevice( UsbDevice* parent, const QString& name );
     ~UsbDevice();
 
 //     virtual QWidget* detailsWidget();
