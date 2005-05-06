@@ -5,7 +5,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.h,v 1.5 2004-11-15 17:08:58 zecke Exp $
+** $Id: zsafe.h,v 1.6 2005-05-06 21:54:49 drw Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -19,6 +19,8 @@
 #include "infoform.h"
 #include "categorylist.h"
 #include "shadedlistitem.h"
+
+#include <qmainwindow.h>
 
 #include <qvariant.h>
 #include <qdialog.h>
@@ -46,13 +48,12 @@ class QPixmap;
 // number of fields for one entry
 #define FIELD_SIZE 7
 
-class ZSafe : public QWidget
+class ZSafe : public QMainWindow
 { 
     Q_OBJECT
 
 protected:
     void paintEvent( QPaintEvent * e );
-    void resizeEvent ( QResizeEvent * );
 
     bool raiseFlag;
     QTimer raiseTimer;
@@ -65,10 +66,6 @@ public:
      static const QColor *evenRowColor; 
      static const QColor *oddRowColor;  
 
-    QToolButton* Edit;
-    QToolButton* Delete;
-    QToolButton* Find;
-    QToolButton* New;
     ZListView* ListView;
 
     QString cfgFile;
@@ -181,7 +178,6 @@ public slots:
     virtual void saveDocumentAs();
     virtual void saveDocumentWithoutPwd();
     virtual void saveDocumentWithPwd();
-    virtual void about();
     virtual void setExpandFlag();
 
     virtual void categoryFieldActivated( const QString& str);
@@ -196,9 +192,4 @@ private slots:
 
 };
 
-
-extern ZSafe *zs;
-extern QApplication *appl;
-extern int DeskW;
-extern int DeskH;
 #endif // ZSAFE_H

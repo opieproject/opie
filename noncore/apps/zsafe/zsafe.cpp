@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.27 2004-11-15 17:08:58 zecke Exp $
+** $Id: zsafe.cpp,v 1.28 2005-05-06 21:54:49 drw Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -19,6 +19,7 @@
 #include "zlistview.h"
 #include "shadedlistitem.h"
 
+#include <opie2/oresource.h>
 #include <opie2/ofiledialog.h>
 #include <opie2/odebug.h>
 using namespace Opie::Core;
@@ -38,12 +39,12 @@ using namespace Opie::Ui;
 #include <qpopupmenu.h>
 
 #include <qfile.h>
-#include <qpe/fileselector.h>
+#include <qpe/applnk.h>
 #include <qpe/global.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 #include <qpe/config.h>
 
+#include <qaction.h>
 #include <qtimer.h>
 #include <qlayout.h>
 #include <qmessagebox.h>
@@ -51,7 +52,6 @@ using namespace Opie::Ui;
 #include <qtextstream.h>
 #include <qheader.h>
 #include <qlistview.h>
-#include <qtoolbutton.h>
 #include <qvariant.h>
 #include <qtooltip.h>
 #include <qwhatsthis.h>
@@ -64,34 +64,18 @@ using namespace Opie::Ui;
 #include <qtextbrowser.h>
 #include <qlabel.h>
 #include <qcombobox.h>
+#include <qtoolbar.h>
 
 #include "krc2.h"
 
 #include "wait.h"
 
-int DeskW, DeskH;
-QApplication *appl;
-ZSafe *zs;
-
 const QString APP_KEY = "";
 
 // include xmp images
-#include "pics/zsafe/copy.xpm"
-#include "pics/zsafe/cut.xpm"
-#include "pics/zsafe/edit.xpm"
-#include "pics/zsafe/editdelete.xpm"
-#include "pics/zsafe/find.xpm"
-#include "pics/zsafe/folder_open.xpm"
-#include "pics/zsafe/help_icon.xpm"
-#include "pics/zsafe/new.xpm"
-#include "pics/zsafe/paste.xpm"
-#include "pics/zsafe/quit_icon.xpm"
-#include "pics/zsafe/save.xpm"
-#include "pics/zsafe/trash.xpm"
 #include "pics/zsafe/expand.xpm"
 #include "pics/zsafe/export.xpm"
 #include "pics/zsafe/import.xpm"
-#include "pics/zsafe/zsafe.xpm"
 
 static const char* const bank_cards_data[] = {
 "14 14 16 1",
@@ -336,14 +320,9 @@ static const char* const general_data[] = {
  *  TRUE to construct a modal dialog.
  */
 ZSafe::ZSafe( QWidget* parent,  const char* name, WFlags fl )
-    : QWidget( parent, name, fl),
-      Edit(0l), Delete(0l), Find(0l), New(0l), ListView(0l)
+    : QMainWindow( parent, name, fl),
+      ListView(0l)
 {
-    zs = this;
-    appl  = qApp;
-    DeskW = qApp->desktop()->width();
-    DeskH = qApp->desktop()->height();
-
     IsCut = false;
     IsCopy = false;
     modified = false;
@@ -362,18 +341,16 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, WFlags fl )
     expandTree = conf->readNumEntry(APP_KEY+"expandTree", 0);
     conf->setGroup ("zsafe");
 
-    QPixmap copy_img((const char**) copy_xpm);
-    QPixmap cut_img((const char**) cut_xpm);
-    QPixmap edit_img((const char**) edit_xpm);
-    QPixmap editdelete_img((const char**) editdelete_xpm);
-    QPixmap find_img((const char**) find_xpm);
-    QPixmap folder_open_img((const char**) folder_open_xpm);
-    QPixmap help_icon_img((const char**) help_icon_xpm);
-    QPixmap new_img((const char**) new_xpm);
-    QPixmap paste_img((const char**) paste_xpm);
-    QPixmap quit_icon_img((const char**) quit_icon_xpm);
-    QPixmap save_img((const char**) save_xpm);
-    QPixmap trash_img((const char**) trash_xpm);
+    QPixmap new_img = Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon );
+    QPixmap edit_img = Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon );
+    QPixmap trash_img = Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon );
+    QPixmap copy_img = Opie::Core::OResource::loadPixmap( "copy", Opie::Core::OResource::SmallIcon );
+    QPixmap cut_img = Opie::Core::OResource::loadPixmap( "cut", Opie::Core::OResource::SmallIcon );
+    QPixmap editdelete_img = Opie::Core::OResource::loadPixmap( "editdelete", Opie::Core::OResource::SmallIcon );
+    QPixmap folder_open_img = Opie::Core::OResource::loadPixmap( "folder_open", Opie::Core::OResource::SmallIcon );
+    QPixmap help_icon_img = Opie::Core::OResource::loadPixmap( "help_icon", Opie::Core::OResource::SmallIcon );
+    QPixmap paste_img = Opie::Core::OResource::loadPixmap( "paste", Opie::Core::OResource::SmallIcon );
+    QPixmap save_img = Opie::Core::OResource::loadPixmap( "save", Opie::Core::OResource::SmallIcon );
     QPixmap expand_img((const char**) expand_xpm);
     QPixmap export_img((const char**) export_xpm);
     QPixmap import_img((const char**) import_xpm);
@@ -382,7 +359,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, WFlags fl )
     QPixmap passwords( ( const char** ) passwords_data );
     QPixmap software( ( const char** ) software_data );
     QPixmap general( ( const char** ) general_data );
-		QPixmap image0( ( const char** ) zsafe_xpm );
+    QPixmap image0 = Opie::Core::OResource::loadPixmap( "zsafe/zsafe", Opie::Core::OResource::SmallIcon );
 
     if ( !name )
 	setName( "ZSafe" );
@@ -448,90 +425,75 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, WFlags fl )
     categoryDialog = NULL;
     infoForm->setIcon( image0);
 
+    // Create menu and tool bar dock
+    setToolBarsMovable( false );
+    QToolBar *dock = new QToolBar( this );
+    dock->setHorizontalStretchable( true );
+
     // add a menu bar
-    QMenuBar *menu = new QMenuBar( this );
+    QMenuBar *menu = new QMenuBar( dock );
+    menu->setMargin( 0 );
+
+    // Add a toolbar
+    QToolBar *toolbar = new QToolBar( this );
 
     // add file menu
     // QPopupMenu *file = new QPopupMenu( this );
     file = new QPopupMenu( this );
 
-    file->insertItem( new_img, tr("&New document"),  this, SLOT(newDocument()) );
-    file->insertItem( folder_open_img, tr("&Open document"),  this, SLOT(loadDocument()) );
-    file->insertItem( save_img, tr("&Save document as .."),  this, SLOT(saveDocumentAs()) );
+    // File menu
+    file->insertItem( new_img, tr("New document"),  this, SLOT(newDocument()) );
+    file->insertItem( folder_open_img, tr("Open document"),  this, SLOT(loadDocument()) );
+    file->insertItem( save_img, tr("Save document as"),  this, SLOT(saveDocumentAs()) );
     file->insertSeparator();
 
-    file->insertItem( save_img, tr("&Save document"),  this, SLOT(saveDocumentWithoutPwd()) );
-    file->insertItem( save_img, tr("S&ave document with new Password"),  this,
+    file->insertItem( save_img, tr("Save document"),  this, SLOT(saveDocumentWithoutPwd()) );
+    file->insertItem( save_img, tr("Save document with new Password"),  this,
                       SLOT(saveDocumentWithPwd()) );
     file->insertSeparator();
-    file->insertItem( export_img, tr("&Export text file"),  this, SLOT(writeAllEntries()) );
-    file->insertItem( import_img, tr("&Import text file"),  this, SLOT(readAllEntries()) );
-    file->insertItem( trash_img, tr("&Remove text file"),  this, SLOT(removeAsciiFile()) );
+    file->insertItem( export_img, tr("Export text file"),  this, SLOT(writeAllEntries()) );
+    file->insertItem( import_img, tr("Import text file"),  this, SLOT(readAllEntries()) );
+    file->insertItem( trash_img, tr("Remove text file"),  this, SLOT(removeAsciiFile()) );
     file->insertSeparator();
-    file->insertItem( expand_img, tr("&Open entries expanded"), this,
+    file->insertItem( expand_img, tr("Open entries expanded"), this,
                       SLOT(setExpandFlag()), 0, 'o');
     file->setItemChecked('o', expandTree);
-    file->insertSeparator();
-    file->insertItem( quit_icon_img, tr("E&xit"),  this, SLOT(quitMe()) );
-    menu->insertItem( tr("&File"), file );
+    menu->insertItem( tr("File"), file );
 
+    // Category menu
     QPopupMenu *cat = new QPopupMenu( this );
-    cat->insertItem( new_img, tr("&New"),  this, SLOT(addCategory()) );
-    cat->insertItem( edit_img, tr("&Edit"),  this, SLOT(editCategory()) );
-    cat->insertItem( trash_img, tr("&Delete"),  this, SLOT(delCategory()) );
-    menu->insertItem( tr("&Category"), cat );
+    cat->insertItem( new_img, tr("New"),  this, SLOT(addCategory()) );
+    cat->insertItem( edit_img, tr("Edit"),  this, SLOT(editCategory()) );
+    cat->insertItem( trash_img, tr("Delete"),  this, SLOT(delCategory()) );
+    menu->insertItem( tr("Category"), cat );
 
+    // Entry menu
     QPopupMenu *it = new QPopupMenu( this );
-    it->insertItem( cut_img, tr("&Cut"),  this, SLOT(cutItem()) );
-    it->insertItem( copy_img, tr("C&opy"),  this, SLOT(copyItem()) );
-    it->insertItem( paste_img, tr("&Paste"),  this, SLOT(pasteItem()) );
+    it->insertItem( cut_img, tr("Cut"),  this, SLOT(cutItem()) );
+    it->insertItem( copy_img, tr("Copy"),  this, SLOT(copyItem()) );
+    it->insertItem( paste_img, tr("Paste"),  this, SLOT(pasteItem()) );
     it->insertSeparator();
-    it->insertItem( new_img, tr("&New"),  this, SLOT(newPwd()) );
-    it->insertItem( edit_img, tr("&Edit"),  this, SLOT(editPwd()) );
-    it->insertItem( trash_img, tr("&Delete"),  this, SLOT(deletePwd()) );
-    it->insertItem( find_img, tr("&Search"),  this, SLOT(findPwd()) );
-    menu->insertItem( tr("&Entry"), it );
 
-    QPopupMenu *help = new QPopupMenu( this );
-    help->insertItem( help_icon_img, tr("&About"),  this, SLOT(about()) );
-    menu->insertItem( tr("&Help"), help );
+    QAction *a = new QAction( tr( "New" ), new_img, QString::null, 0, this, 0 );
+    connect( a, SIGNAL(activated()), this, SLOT(newPwd()) );
+    a->addTo( it );
+    a->addTo( toolbar );
+    a = new QAction( tr( "Edit" ), edit_img, QString::null, 0, this, 0 );
+    connect( a, SIGNAL(activated()), this, SLOT(editPwd()) );
+    a->addTo( it );
+    a->addTo( toolbar );
+    a = new QAction( tr( "Delete" ), trash_img, QString::null, 0, this, 0 );
+    connect( a, SIGNAL(activated()), this, SLOT(deletePwd()) );
+    a->addTo( it );
+    a->addTo( toolbar );
+    a = new QAction( tr( "Search" ), Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
+    connect( a, SIGNAL(activated()), this, SLOT(findPwd()) );
+    a->addTo( it );
+    a->addTo( toolbar );
+    menu->insertItem( tr("Entry"), it );
 
-    // toolbar icons
-
-    New = new QToolButton( menu, "New" );
-    New->setGeometry( QRect( DeskW-84, 2, 20, 20 ) );
-    New->setMouseTracking( TRUE );
-    New->setText( "" );
-    New->setPixmap( new_img );
-    QToolTip::add(  New, tr( "New entry" ) );
-
-    Edit = new QToolButton( menu, "Edit" );
-    Edit->setGeometry( QRect( DeskW-64, 2, 20, 20 ) );
-    Edit->setText( "" );
-    Edit->setPixmap( edit_img );
-    QToolTip::add(  Edit, tr( "Edit category or entry" ) );
-
-    Delete = new QToolButton( menu, "Delete" );
-    Delete->setGeometry( QRect( DeskW-44, 2, 20, 20 ) );
-    Delete->setText( "" );
-    Delete->setPixmap( trash_img );
-    QToolTip::add(  Delete, tr( "Delete category or entry" ) );
-
-    Find = new QToolButton( menu, "Find" );
-    Find->setGeometry( QRect( DeskW-24, 2, 20, 20 ) );
-    Find->setText( "" );
-    Find->setPixmap( find_img );
-    QToolTip::add(  Find, tr( "Find entry" ) );
-
-/*
-    QBoxLayout * h = new QHBoxLayout( this );
-    h->addWidget (menu);
-    h->addWidget (New);
-    h->addWidget (Edit);
-    h->addWidget (Delete);
-    h->addWidget (Find);
-*/
-
+    // Add main view
     ListView = new ZListView( this, "ListView" );
     ListView->addColumn( tr( "Name" ) );
     ListView->addColumn( tr( "Field 2" ) );
@@ -542,10 +504,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, WFlags fl )
     ListView->setAllColumnsShowFocus(TRUE);
 
     ListView->setResizePolicy(QScrollView::AutoOneFit);
-    // ListView->setGeometry( QRect( 0, 22,
-                           // this->width(), this->height() - 30 ) );
-    // ListView->setMaximumSize( QSize( 440, 290 ) );
-   // ListView->setVScrollBarMode( QListView::Auto );
+    setCentralWidget( ListView );
 
     QBoxLayout * l = new QVBoxLayout( this );
     l->addWidget (menu);
@@ -557,11 +516,6 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, WFlags fl )
     raiseFlag = true;
     connect( &raiseTimer, SIGNAL(timeout()), SLOT( slotRaiseTimer() ) );
 
-    // signals and slots connections for QTollButton
-    connect( New, SIGNAL( clicked() ), this, SLOT( newPwd() ) );
-    connect( Edit, SIGNAL( clicked() ), this, SLOT( editPwd() ) );
-    connect( Delete, SIGNAL( clicked() ), this, SLOT( deletePwd() ) );
-    connect( Find, SIGNAL( clicked() ), this, SLOT( findPwd() ) );
     // signals and slots connections for QListView
     connect( ListView, SIGNAL( selectionChanged(QListViewItem*) ),
              this, SLOT( listViewSelected(QListViewItem*) ) );
@@ -2110,8 +2064,8 @@ void ZSafe::getDocPassword(QString title)
     newPwdDialog = dialog;
     newPwdDialogResult = false;
 
-		QPixmap image0( ( const char** ) zsafe_xpm );
-		dialog->setIcon( image0);
+//    QPixmap image0 = Opie::Core::OResource::loadPixmap( "zsafe/zsafe", Opie::Core::OResource::SmallIcon );
+//		dialog->setIcon( image0);
 
     connect( dialog->PasswordField, SIGNAL( returnPressed() ),
              this, SLOT( setPasswordDialogDone() ) );
@@ -2407,10 +2361,7 @@ void ZSafe::addCategory()
             QString fileName = fi->fileName();
             if(fileName.right(4) == ".png"){
                 fileName = fileName.mid(0,fileName.length()-4);
-                QPixmap imageOfFile(Resource::loadPixmap(fileName));
-                QImage foo = imageOfFile.convertToImage();
-                foo = foo.smoothScale(16,16);
-                imageOfFile.convertFromImage(foo);
+                QPixmap imageOfFile(Opie::Core::OResource::loadPixmap(fileName,Opie::Core::OResource::SmallIcon));
                 dialog->IconField->insertItem(imageOfFile,fileName);
             }
             ++it;
@@ -2761,10 +2712,7 @@ void ZSafe::editCategory()
             if(fileName.right(4) == ".png")
                         {
                 fileName = fileName.mid(0,fileName.length()-4);
-                QPixmap imageOfFile(Resource::loadPixmap(fileName));
-                QImage foo = imageOfFile.convertToImage();
-                foo = foo.smoothScale(16,16);
-                imageOfFile.convertFromImage(foo);
+                QPixmap imageOfFile(Opie::Core::OResource::loadPixmap(fileName,Opie::Core::OResource::SmallIcon));
                 dialog->IconField->insertItem(imageOfFile,fileName);
                 if(fileName+".png"==icon)
                                    dialog->IconField->setCurrentItem(i+1);
@@ -3113,33 +3061,6 @@ void ZSafe::saveDocumentWithPwd()
    saveDocument(filename, TRUE);
 }
 
-void ZSafe::about()
-{
-   QString info;
-   info  = tr("<html><body><div align=""center"">"
-              "<b>"
-              "Zaurus Password Manager<br>"
-              "ZSafe version 2.1.2<br>"
-              "</b>"
-              "by Carsten Schneider<br>"
-              "zcarsten@gmx.net<br>"
-              "http://z-soft.z-portal.info/zsafe"
-              "<br>"
-              "Translations by Robert Ernst<br>"
-              "robert.ernst@linux-solutions.at<br>"
-              "<br></div>"
-              "</body></html>");
-
-   // QMessageBox::information( this, tr("ZSafe"), info, tr("&OK"), 0);
-
-   QMessageBox mb( this, tr("ZSafe"));
-   mb.setText (info);
-   mb.setButtonText (QMessageBox::Ok, tr ("&OK"));
-   QPixmap zsafe_img((const char**) zsafe_xpm);
-   mb.setIconPixmap (zsafe_img);
-   mb.exec();
-}
-
 void ZSafe::setExpandFlag()
 {
    expandTree = !expandTree;
@@ -3161,22 +3082,6 @@ void ZSafe::paintEvent( QPaintEvent * )
       if (infoForm->isVisible())
          infoForm->raise();
    }
-}
-
-void ZSafe::resizeEvent ( QResizeEvent * )
-{
-   // owarn << "resizeEvent" << oendl;
-   DeskW = appl->desktop()->width();
-   DeskH = appl->desktop()->height();
-
-   if (New)
-      New->setGeometry   ( QRect( DeskW-84, 2, 20, 20 ) );
-   if (Edit)
-      Edit->setGeometry  ( QRect( DeskW-64, 2, 20, 20 ) );
-   if (Delete)
-      Delete->setGeometry( QRect( DeskW-44, 2, 20, 20 ) );
-   if (Find)
-      Find->setGeometry  ( QRect( DeskW-24, 2, 20, 20 ) );
 }
 
 void ZSafe::slotRaiseTimer()
@@ -3268,10 +3173,10 @@ void ZSafe::ListPressed(int mouse, QListViewItem *item, const QPoint&, int colum
 	   {
 			QClipboard *cb = QApplication::clipboard();
 
-			QIconSet copy_img((const char**) copy_xpm);
-			QIconSet edit_img((const char**) edit_xpm);
-			QPixmap folder_open_img((const char**) folder_open_xpm);
-			QPixmap editdelete_img((const char**) editdelete_xpm);
+            QIconSet copy_img = Opie::Core::OResource::loadPixmap( "copy", Opie::Core::OResource::SmallIcon );
+            QIconSet edit_img = Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon );
+            QPixmap folder_open_img = Opie::Core::OResource::loadPixmap( "folder_open", Opie::Core::OResource::SmallIcon );
+            QPixmap editdelete_img = Opie::Core::OResource::loadPixmap( "editdelete", Opie::Core::OResource::SmallIcon );
 
 			QPopupMenu *m = new QPopupMenu(this);
 			int copyItem = 	m->insertItem( copy_img, tr( "Copy to Clipboard" ));
