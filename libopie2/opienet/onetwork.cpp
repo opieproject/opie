@@ -104,6 +104,12 @@ void ONetwork::synchronize()
         s >> str;
         str.truncate( str.find( ':' ) );
         odebug << "ONetwork: found interface '" << str << "'" << oendl;
+        if ( str.startsWith( "wifi" ) )
+        {
+            odebug << "ONetwork: ignoring hostap control interface" << oendl;
+            s.readLine();
+            continue;
+        }
         ONetworkInterface* iface = 0;
         if ( isWirelessInterface( str ) )
         {
@@ -808,7 +814,7 @@ QString OWirelessNetworkInterface::nickName() const
     }
     else
     {
-        str[_iwr.u.data.length] = 0x0; // some drivers (e.g. wlan-ng) don't zero-terminate the string
+        str[_iwr.u.data.length] = '\0'; // some drivers don't zero-terminate the string
         return str;
     }
 }
@@ -866,6 +872,7 @@ QString OWirelessNetworkInterface::SSID() const
     }
     else
     {
+        str[_iwr.u.essid.length] = '\0'; // some drivers don't zero-terminate the string
         return str;
     }
 }

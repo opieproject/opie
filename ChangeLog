@@ -23,6 +23,7 @@
 	--------
 	* Make BluezApplet use OTaskbarApplet (mickeyl)
 	* Rewrite OFileNotification to use the upcoming inotify interface instead of the deprecated dnotify (mickeyl)
+	* libopienet: Skip hostap control interfaces 'wifi' and improve robustness in ONetworkInterface (mickeyl)
 
 2005-03-25	Opie 1.2.0
 
