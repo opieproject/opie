@@ -129,13 +129,13 @@ class OFileNotification : public QObject
      *     int main( int argc, char **argv )
      *     {
      *         OApplication a( argc, argv, "File Notification Example" );
-     *         OFileNotification::singleShot( "/tmp/quit", &a, SLOT(quit()), Create );
+     *         OFileNotification::singleShot( "/tmp/quit", &a, SLOT(quit()), Access );
      *         ... // create and show your widgets
      *         return a.exec();
      *     }
      *  </pre>
      *
-     * This sample program automatically terminates when the file "/tmp/quit" has been created.
+     * This sample program automatically terminates when the file "/tmp/quit" has been accessed.
      *
      *
      * The @a receiver is the receiving object and the @a member is the slot.
@@ -222,6 +222,12 @@ class ODirNotification : public QObject
      * Set @a sshot to True if you want to be notified only once.
      **/
     int watch( const QString& path, bool sshot = false, OFileNotificationType type = Modify, int recurse = 0 );
+
+  signals:
+    /**
+     * This signal is emitted if an event happens of the specified type happens to the directory being watched.
+     **/
+    void triggered( const QString& name );
 };
 
 

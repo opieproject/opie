@@ -11,6 +11,7 @@ using namespace Opie::Ui;
 
 /* QT */
 #include <qcheckbox.h>
+#include <qfileinfo.h>
 #include <qvbox.h>
 #include <qhbox.h>
 #include <qhbuttongroup.h>
@@ -89,15 +90,47 @@ DemoApp::DemoApp( int argc, char** argv ) : OApplication( argc, argv, "libopie2 
         QString filename = OFileDialog::getOpenFileName( OFileSelector::ExtendedAll );
         if ( !filename.isEmpty() )
         {
+            bool success = true;
             odebug << "Filename = " << filename << oendl;
 
             int fntype = m;
             QString modifier = QString().sprintf( " = 0x%08x", fntype );
-            new OListViewItem( l, filename, multi ? "MULTI" : "SINGLE", modifier );
-            if ( !multi )
-                OFileNotification::singleShot( filename, this, SLOT( trigger() ), (OFileNotificationType) fntype );
+
+            if ( QFileInfo( filename ).isFile() )
+            {
+                if ( !multi )
+                {
+                    success = OFileNotification::singleShot( filename, this, SLOT( unnamedTrigger() ), (OFileNotificationType) fntype );
+                }
+                else
+                {
+                    OFileNotification* fn = new OFileNotification();
+                    success = fn->watch( filename, false, (OFileNotificationType) fntype );
+                    connect( fn, SIGNAL( triggered( const QString& ) ), this, SLOT( namedTrigger( const QString& ) ) );
+                }
+            }
+            else if ( QFileInfo( filename ).isDir() )
+            {
+                ODirNotification* dn = new ODirNotification();
+                success = dn->watch( filename, !multi, (OFileNotificationType) fntype );
+                connect( dn, SIGNAL( triggered( const QString& ) ), this, SLOT( namedTrigger( const QString& ) ) );
+            }
             else
-                odebug << "not yet implemented..." << oendl;
+            {
+                odebug << "Huh!? Neither file nor directory..." << oendl;
+                return;
+            }
+
+/*            if ( !success )
+            {
+                QMessageBox::warning( 0, "Add Trigger", "<p>Couldn't add trigger :(</p>", "&Sorry", 0 );
+                return;
+            }
+            else
+*/            {
+                new OListViewItem( l, filename, multi ? "MULTI" : "SINGLE", modifier );
+            }
+            return;
         }
         else
         {
@@ -124,9 +157,14 @@ DemoApp::DemoApp( int argc, char** argv ) : OApplication( argc, argv, "libopie2 
         }
     }
 
-    void DemoApp::trigger()
+    void DemoApp::unnamedTrigger()
     {
-        owarn << "FIRE!" << oendl;
+        owarn << "DemoApp::singleShotStrigger() : F I R E !!!!!" << oendl;
+    }
+
+    void DemoApp::namedTrigger( const QString& path )
+    {
+        owarn << "DemoApp::named trigger = " << path << " : F I R E !!!!!" << oendl;
     }
 
 int main( int argc, char** argv )

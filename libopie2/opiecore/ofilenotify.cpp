@@ -93,17 +93,17 @@ int OFileNotification::watch( const QString& path, bool sshot, OFileNotification
         return -1;
     }
 
-    if ( notification_list.isEmpty() )
-    {
-        OFileNotification::registerEventHandler();
-    }
-
     return startWatching( path, sshot, type );
 }
 
 
 int OFileNotification::startWatching( const QString& path, bool sshot, OFileNotificationType type )
 {
+    if ( notification_list.isEmpty() )
+    {
+        OFileNotification::registerEventHandler();
+    }
+
     struct inotify_watch_request iwr;
     ::memset( &iwr, 0, sizeof iwr );
     iwr.name = const_cast<char*>( (const char*) path );
@@ -255,9 +255,24 @@ ODirNotification::~ODirNotification()
 int ODirNotification::watch( const QString& path, bool sshot, OFileNotificationType type, int recurse )
 {
     qDebug( "ODirNotification::watch( %s, %d, 0x%08x, %d )", (const char*) path, sshot, type, recurse );
-    return 0;
+
+    if ( recurse == 0 )
+    {
+        OFileNotification* fn = new OFileNotification( this, "ODirNotification delegate" );
+        int result = fn->startWatching( path, sshot, type );
+        if ( result != -1 )
+        {
+            connect( fn, SIGNAL( triggered( const QString& ) ), this, SIGNAL( triggered( const QString& ) ) );
+            return result;
+        }
+    }
+    else
+    {
+        qDebug( "ODirNotification::watch(), recursion not yet implemented... :)" );
+        return -1;
+    }
 }
 
-}
+} // namespace Ui
 
-}
+} // namespace Opie
