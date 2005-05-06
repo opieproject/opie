@@ -80,38 +80,50 @@ bool OFileNotification::isActive() const
 
 int OFileNotification::watch( const QString& path, bool sshot, OFileNotificationType type )
 {
-    if ( QFile::exists( path ) )
-    {
-        if ( notification_list.isEmpty() )
-        {
-            OFileNotification::registerEventHandler();
-        }
-
-        struct inotify_watch_request iwr;
-        ::memset( &iwr, 0, sizeof iwr );
-        iwr.name = const_cast<char*>( (const char*) path );
-        iwr.mask = type;
-
-        _wd = ::ioctl( OFileNotification::_fd, INOTIFY_WATCH, &iwr );
-
-        if ( _wd < 0 )
-        {
-            qWarning( "OFileNotification::watch(): inotify can't watch '%s': %s.", (const char*) path, strerror( errno ) );
-            return -1;
-        }
-
-        notification_list.insert( _wd, this );
-        _multi = !sshot;
-        _type = type;
-        _active = true;
-        qDebug( "OFileNotification::watch(): watching '%s' [wd=%d].", (const char*) path, _wd );
-        return _wd;
-    }
-    else
+    // check if path exists and is a regular file
+    struct stat s;
+    if ( ::stat( (const char*) path, &s ) == -1 )
     {
         qWarning( "OFileNotification::watch(): Can't watch '%s': %s.", (const char*) path, strerror( errno ) );
         return -1;
     }
+    if ( !S_ISREG( s.st_mode ) )
+    {
+        qWarning( "OFileNotification::watch(): Can't watch '%s': %s.", (const char*) path, "not a regular file" );
+        return -1;
+    }
+
+    if ( notification_list.isEmpty() )
+    {
+        OFileNotification::registerEventHandler();
+    }
+
+    return startWatching( path, sshot, type );
+}
+
+
+int OFileNotification::startWatching( const QString& path, bool sshot, OFileNotificationType type )
+{
+    struct inotify_watch_request iwr;
+    ::memset( &iwr, 0, sizeof iwr );
+    iwr.name = const_cast<char*>( (const char*) path );
+    iwr.mask = type;
+
+    _wd = ::ioctl( OFileNotification::_fd, INOTIFY_WATCH, &iwr );
+
+    if ( _wd < 0 )
+    {
+        qWarning( "OFileNotification::watch(): inotify can't watch '%s': %s.", (const char*) path, strerror( errno ) );
+        return -1;
+    }
+
+    notification_list.insert( _wd, this );
+    _path = path;
+    _multi = !sshot;
+    _type = type;
+    _active = true;
+    qDebug( "OFileNotification::watch(): watching '%s' [wd=%d].", (const char*) path, _wd );
+    return _wd;
 }
 
 
@@ -142,18 +154,18 @@ QString OFileNotification::path() const
 
 bool OFileNotification::activate()
 {
-    emit triggered();
+    emit triggered( _path );
     _signal.activate();
     if ( !_multi ) stop();
     return true;
 }
 
 
-void OFileNotification::singleShot( const QString& path, QObject* receiver, const char* member, OFileNotificationType type )
+bool OFileNotification::singleShot( const QString& path, QObject* receiver, const char* member, OFileNotificationType type )
 {
     OFileNotification* ofn = new OFileNotification();
     ofn->_signal.connect( receiver, member );
-    ofn->watch( path, true, type );
+    return ofn->watch( path, true, type ) != -1;
 }
 
 
@@ -218,11 +230,34 @@ bool OFileNotification::registerEventHandler()
 
 void OFileNotification::unregisterEventHandler()
 {
+    if ( _sn ) delete _sn;
     if ( OFileNotification::_fd )
     ::close( OFileNotification::_fd );
     qDebug( "OFileNotification::unregisterEventHandler(): done" );
 }
 
+//=================================================================================================
+// ODirNotification
+//=================================================================================================
+ODirNotification::ODirNotification( QObject* parent, const char* name )
+                  :QObject( parent, name )
+{
+    qDebug( "ODirNotification::ODirNotification()" );
+}
+
+
+ODirNotification::~ODirNotification()
+{
+    qDebug( "ODirNotification::~ODirNotification()" );
+}
+
+
+int ODirNotification::watch( const QString& path, bool sshot, OFileNotificationType type, int recurse )
+{
+    qDebug( "ODirNotification::watch( %s, %d, 0x%08x, %d )", (const char*) path, sshot, type, recurse );
+    return 0;
+}
 
 }
+
 }

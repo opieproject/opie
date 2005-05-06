@@ -98,7 +98,7 @@ enum OFileNotificationType
  * @brief Represents a file notification
  *
  * This class allows to watch for events happening to files.
- * It uses the inotify kernel interface
+ * It uses the inotify linux (2.6.x) kernel interface.
  *
  * @see http://www.kernel.org/pub/linux/kernel/people/rml/inotify/
  *
@@ -140,7 +140,7 @@ class OFileNotification : public QObject
      *
      * The @a receiver is the receiving object and the @a member is the slot.
      **/
-    static void singleShot( const QString& path, QObject* receiver, const char* member, OFileNotificationType type = Modify );
+    static bool singleShot( const QString& path, QObject* receiver, const char* member, OFileNotificationType type = Modify );
     /**
      * Starts to watch for @a type changes to @a path. Set @a sshot to True if you want to be notified only once.
      * Note that in that case it may be more convenient to use @ref OFileNotification::singleShot() then.
@@ -162,12 +162,16 @@ class OFileNotification : public QObject
      * @returns if a file is currently being watched.
      **/
     bool isActive() const;
+    /**
+      * @internal
+      */
+    int startWatching( const QString& path, bool sshot = false, OFileNotificationType type = Modify );
 
   signals:
     /**
      * This signal is emitted if an event happens of the specified type happens to the file being watched.
      **/
-    void triggered();
+    void triggered( const QString& name );
 
   protected:
     bool activate();
@@ -188,6 +192,38 @@ class OFileNotification : public QObject
     int _wd; // inotify watch descriptor
     static int _fd; // inotify device descriptor
 };
+
+/*======================================================================================
+ * ODirNotification
+ *======================================================================================*/
+
+/**
+ * @brief Represents a directory notification
+ *
+ * This class allows to watch for events happening to directories
+ * It uses the OFileNotification class
+ *
+ * @see http://www.kernel.org/pub/linux/kernel/people/rml/inotify/
+ *
+ * @author Michael 'Mickey' Lauer <mickey@vanille.de>
+ *
+ **/
+
+class ODirNotification : public QObject
+{
+  Q_OBJECT
+
+  public:
+    ODirNotification( QObject* parent = 0, const char* name = 0 );
+    ~ODirNotification();
+    /**
+     * Starts to watch for @a type changes to @a path. Recurse @a recurse levels down the filesystem tree,
+     * use 0 for no recursion and -1 for unlimited recursion.
+     * Set @a sshot to True if you want to be notified only once.
+     **/
+    int watch( const QString& path, bool sshot = false, OFileNotificationType type = Modify, int recurse = 0 );
+};
+
 
 }
 }
