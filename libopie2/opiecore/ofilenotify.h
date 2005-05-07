@@ -42,6 +42,8 @@ _;:,     .>    :=|.         This program is free software; you can
 namespace Opie {
 namespace Core {
 
+class OFileNotificationEvent;
+
 /*======================================================================================
  * OFileNotificationType
  *======================================================================================*/
@@ -168,13 +170,23 @@ class OFileNotification : public QObject
     int startWatching( const QString& path, bool sshot = false, OFileNotificationType type = Modify );
 
   signals:
-    /**
-     * This signal is emitted if an event happens of the specified type happens to the file being watched.
-     **/
-    void triggered( const QString& name );
+    void triggered( const QString&, unsigned int, const QString& );
+    void accessed( const QString& );
+    void modified( const QString& );
+    void attributed( const QString& );
+    void closed( const QString&, bool );
+    void opened( const QString& );
+    void movedTo( const QString&, const QString& );
+    void movedFrom( const QString&, const QString& );
+    void deletedSubdir( const QString&, const QString& );
+    void deletedFile( const QString&, const QString& );
+    void createdSubdir( const QString&, const QString& );
+    void createdFile( const QString&, const QString& );
+    void deleted( const QString& );
+    void unmounted( const QString& );
 
   protected:
-    bool activate();
+    bool activate( const OFileNotificationEvent* e );
 
   private slots:
     void inotifyEventHandler();
@@ -191,6 +203,8 @@ class OFileNotification : public QObject
     static QSocketNotifier* _sn;
     int _wd; // inotify watch descriptor
     static int _fd; // inotify device descriptor
+
+    friend class OFileNotificationEvent;
 };
 
 /*======================================================================================
@@ -227,7 +241,44 @@ class ODirNotification : public QObject
     /**
      * This signal is emitted if an event happens of the specified type happens to the directory being watched.
      **/
-    void triggered( const QString& name );
+    void triggered( const QString&, unsigned int, const QString& );
+    void accessed( const QString& );
+    void modified( const QString& );
+    void attributed( const QString& );
+    void closed( const QString&, bool );
+    void opened( const QString& );
+    void movedTo( const QString&, const QString& );
+    void movedFrom( const QString&, const QString& );
+    void deletedSubdir( const QString&, const QString& );
+    void deletedFile( const QString&, const QString& );
+    void createdSubdir( const QString&, const QString& );
+    void createdFile( const QString&, const QString& );
+    void deleted( const QString& );
+    void unmounted( const QString& );
+};
+
+/*======================================================================================
+ * OFileNotificationEvent
+ *======================================================================================*/
+
+class OFileNotificationEvent
+{
+  public:
+    OFileNotificationEvent( OFileNotification* parent, int wd, unsigned int mask, unsigned int cookie, const QString& name );
+    ~OFileNotificationEvent();
+    OFileNotification* parent() const { return _parent; };
+    int descriptor() const            { return _wd; };
+    unsigned int mask() const         { return _mask; };
+    unsigned int cookie() const       { return _cookie; };
+    QString name() const              { return _name; };
+    void activate()                   { _parent->activate( this ); };
+
+  private:
+    OFileNotification* _parent;
+    int _wd;
+    unsigned int _mask;
+    unsigned int _cookie;
+    QString _name;
 };
 
 

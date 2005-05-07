@@ -58,6 +58,24 @@ int OFileNotification::_fd = -1;
 namespace Opie {
 namespace Core {
 
+//=================================================================================================
+// OFileNotificationEvent
+//=================================================================================================
+OFileNotificationEvent::OFileNotificationEvent( OFileNotification* parent, int wd, unsigned int mask, unsigned int cookie, const QString& name )
+                       :_parent( parent ), _wd( wd ), _mask( mask ), _cookie( cookie ), _name( name )
+{
+    qDebug( "OFileNotificationEvent()" );
+}
+
+
+OFileNotificationEvent::~OFileNotificationEvent()
+{
+    qDebug( "~OFileNotificationEvent()" );
+}
+
+//=================================================================================================
+// OFileNotification
+//=================================================================================================
 OFileNotification::OFileNotification( QObject* parent, const char* name )
                   :QObject( parent, name ), _active( false ), _multi( true )
 {
@@ -152,11 +170,38 @@ QString OFileNotification::path() const
 }
 
 
-bool OFileNotification::activate()
+bool OFileNotification::activate( const OFileNotificationEvent* e )
 {
-    emit triggered( _path );
+    qDebug( "OFileNotification::activate(): e = ( %s, %d, 0x%08x, %d, %s )", (const char*) _path, e->descriptor(), e->mask(), e->cookie(), (const char*) e->name() );
+
+    // dumb signal
     _signal.activate();
+
+    // generic signal
+    emit triggered( _path, e->mask(), e->name() );
+
+    // specialized signals
+    switch ( e->mask() )
+    {
+        case Access:        emit accessed( _path );                 break;
+        case Modify:        emit modified( _path );                 break;
+        case Attrib:        emit attributed( _path);                break;
+        case CloseWrite:    emit closed( _path, true );             break;
+        case CloseNoWrite:  emit closed( _path, false );            break;
+        case Open:          emit opened( _path );                   break;
+        case MovedFrom:     emit movedFrom( _path, e->name() );     break;
+        case MovedTo:       emit movedTo( _path, e->name() );       break;
+        case DeleteSubdir:  emit deletedSubdir( _path, e->name() ); break;
+        case DeleteFile:    emit deletedFile( _path, e->name() );   break;
+        case CreateSubdir:  emit createdSubdir( _path, e->name() ); break;
+        case CreateFile:    emit createdFile( _path, e->name() );   break;
+        case DeleteSelf:    emit deleted( _path );                  break;
+        case Unmount:       emit unmounted( _path );                break;
+        default: assert( 0 );
+    }
+
     if ( !_multi ) stop();
+
     return true;
 }
 
@@ -171,7 +216,7 @@ bool OFileNotification::singleShot( const QString& path, QObject* receiver, cons
 
 void OFileNotification::inotifyEventHandler()
 {
-    qWarning( "OFileNotification::__eventHandler(): reached." );
+    qDebug( "OFileNotification::inotifyEventHandler(): reached." );
 
     char buffer[16384];
     size_t buffer_i;
@@ -188,26 +233,16 @@ void OFileNotification::inotifyEventHandler()
     buffer_i = 0;
     while ( buffer_i < r )
     {
-            /* Parse events and queue them ! */
-            pevent = (struct inotify_event *)&buffer[buffer_i];
-            event_size = sizeof(struct inotify_event) + pevent->len;
-            qDebug( "pevent->len = %d\n", pevent->len);
-
-            OFileNotification* fn = notification_list[ pevent->wd ];
-            if ( fn )
-                fn->activate();
-            else
-                assert( false );
-
-            //event = malloc(event_size);
-            //memmove(event, pevent, event_size);
-            //queue_enqueue(event, q);
-            buffer_i += event_size;
-            count++;
+        pevent = (struct inotify_event *)&buffer[buffer_i];
+        event_size = sizeof(struct inotify_event) + pevent->len;
+        OFileNotificationEvent* e = new OFileNotificationEvent( notification_list[ pevent->wd ], pevent->wd, pevent->mask,
+                                                                pevent->cookie, pevent->len ? pevent->name : 0 );
+        e->activate();
+        buffer_i += event_size;
+        count++;
     }
 
-    qDebug( "received %d events...", count );
-    return;
+    qDebug( "OFileNotification::inotifyEventHandler(): processed %d events", count );
 }
 
 
@@ -262,16 +297,53 @@ int ODirNotification::watch( const QString& path, bool sshot, OFileNotificationT
         int result = fn->startWatching( path, sshot, type );
         if ( result != -1 )
         {
-            connect( fn, SIGNAL( triggered( const QString& ) ), this, SIGNAL( triggered( const QString& ) ) );
-            return result;
+            connect( fn, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ), this, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ) );
+            connect( fn, SIGNAL( accessed( const QString& ) ), this, SIGNAL( accessed( const QString& ) ) );
+            connect( fn, SIGNAL( modified( const QString& ) ), this, SIGNAL( modified( const QString& ) ) );
+            connect( fn, SIGNAL( attributed( const QString& ) ), this, SIGNAL( attributed( const QString& ) ) );
+            connect( fn, SIGNAL( closed( const QString&, bool ) ), this, SIGNAL( closed( const QString&, bool ) ) );
+            connect( fn, SIGNAL( opened( const QString& ) ), this, SIGNAL( opened( const QString& ) ) );
+            connect( fn, SIGNAL( movedTo( const QString&, const QString& ) ), this, SIGNAL( movedTo( const QString&, const QString& ) ) );
+            connect( fn, SIGNAL( movedFrom( const QString&, const QString& ) ), this, SIGNAL( movedFrom( const QString&, const QString& ) ) );
+            connect( fn, SIGNAL( deletedSubdir( const QString&, const QString& ) ), this, SIGNAL( deletedSubdir( const QString&, const QString& ) ) );
+            connect( fn, SIGNAL( deletedFile( const QString&, const QString& ) ), this, SIGNAL( deletedFile( const QString&, const QString& ) ) );;
+            connect( fn, SIGNAL( createdSubdir( const QString&, const QString& ) ), this, SIGNAL( createdSubdir( const QString&, const QString& ) ) );
+            connect( fn, SIGNAL( createdFile( const QString&, const QString& ) ), this, SIGNAL( createdFile( const QString&, const QString& ) ) );
+            connect( fn, SIGNAL( deleted( const QString& ) ), this, SIGNAL( deleted( const QString& ) ) );
+            connect( fn, SIGNAL( unmounted( const QString& ) ), this, SIGNAL( unmounted( const QString& ) ) );
         }
+        return result;
     }
     else
     {
-        qDebug( "ODirNotification::watch(), recursion not yet implemented... :)" );
-        return -1;
+
+        return 1;
     }
 }
+
+
+// void ODirNotification::subdirCreated( const QString& name )
+
+
+/*
+  Love-Trowbridge recursive directory scanning algorithm:
+
+        Step 1.  Start at initial directory foo.  Add watch.
+
+        Step 2.  Setup handlers for watch created in Step 1.
+                 Specifically, ensure that a directory created
+                 in foo will result in a handled CREATE_SUBDIR
+                 event.
+
+        Step 3.  Read the contents of foo.
+
+        Step 4.  For each subdirectory of foo read in step 3, repeat
+                 step 1.
+
+        Step 5.  For any CREATE_SUBDIR event on bar, if a watch is
+                 not yet created on bar, repeat step 1 on bar.
+*/
+
 
 } // namespace Ui
 

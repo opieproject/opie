@@ -100,20 +100,22 @@ DemoApp::DemoApp( int argc, char** argv ) : OApplication( argc, argv, "libopie2 
             {
                 if ( !multi )
                 {
-                    success = OFileNotification::singleShot( filename, this, SLOT( unnamedTrigger() ), (OFileNotificationType) fntype );
+                    success = OFileNotification::singleShot( filename, this, SLOT(unnamedTrigger()), (OFileNotificationType) fntype );
                 }
                 else
                 {
                     OFileNotification* fn = new OFileNotification();
                     success = fn->watch( filename, false, (OFileNotificationType) fntype );
-                    connect( fn, SIGNAL( triggered( const QString& ) ), this, SLOT( namedTrigger( const QString& ) ) );
-                }
+                    connect( fn, SIGNAL(triggered(const QString&,unsigned int,const QString&)),
+                             this, SLOT(namedTrigger(const QString&,unsigned int,const QString&)) );
+                 }
             }
             else if ( QFileInfo( filename ).isDir() )
             {
                 ODirNotification* dn = new ODirNotification();
                 success = dn->watch( filename, !multi, (OFileNotificationType) fntype );
-                connect( dn, SIGNAL( triggered( const QString& ) ), this, SLOT( namedTrigger( const QString& ) ) );
+                connect( dn, SIGNAL(triggered(const QString&,unsigned int,const QString&)),
+                         this, SLOT(namedTrigger(const QString&,unsigned int,const QString&)) );
             }
             else
             {
@@ -162,9 +164,9 @@ DemoApp::DemoApp( int argc, char** argv ) : OApplication( argc, argv, "libopie2 
         owarn << "DemoApp::singleShotStrigger() : F I R E !!!!!" << oendl;
     }
 
-    void DemoApp::namedTrigger( const QString& path )
+    void DemoApp::namedTrigger( const QString& path, unsigned int type, const QString& name )
     {
-        owarn << "DemoApp::named trigger = " << path << " : F I R E !!!!!" << oendl;
+        owarn << "DemoApp::named trigger = ( " << path << ", " << type << ", " << name << " ) : F I R E !!!!!" << oendl;
     }
 
 int main( int argc, char** argv )

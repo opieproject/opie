@@ -20,7 +20,7 @@ public slots:
     void addMulti();
     void delTrigger();
     void unnamedTrigger();
-    void namedTrigger( const QString& name );
+    void namedTrigger( const QString&, unsigned int, const QString& );
 
 private:
   Opie::Ui::OListView* l;
