@@ -288,6 +288,7 @@ void CPlucker_base::locate(unsigned int n)
   UInt16 thisrec = 0;
   unsigned long locpos = 0;
   unsigned long bs = 0;
+  unsigned int np1 = n+1;
   UInt16 thishdr_uid, thishdr_nParagraphs;
   UInt32 thishdr_size;
   UInt8 thishdr_type, thishdr_reserved;
@@ -305,7 +306,7 @@ void CPlucker_base::locate(unsigned int n)
 	{
 	  bs = 0;
 	}
-    } while (locpos + bs < n);
+    } while (locpos + bs < np1);
 
   //    qDebug("Time(2): %u", clock()-start);
   /*
