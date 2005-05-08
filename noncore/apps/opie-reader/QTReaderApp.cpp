@@ -3158,7 +3158,12 @@ void QTReaderApp::closeEvent( QCloseEvent *e )
     }
     else if (editorStack->visibleWidget() == m_buttonprefs)
       {
-	m_buttonprefs->mapkey(Qt::NoButton, Key_Escape);
+	int ret = QMessageBox::warning(this, PROGNAME,
+tr("Do you wish to map this key?\n\nIf you proceed you will map\nthe escape key and you will\nneed to press the close box\ntwice to exit this program\n\nContinue?"), tr("Yes"), tr("No"), QString::null, 0, 1);
+	if (ret == 0)
+	  {
+	    m_buttonprefs->mapkey(Qt::NoButton, Key_Escape);
+	  }
 	e->ignore();
       }
     else if (m_dontSave)
