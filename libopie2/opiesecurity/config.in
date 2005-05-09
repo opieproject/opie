@@ -1,4 +1,5 @@
   config LIBOPIE2SECURITY
     boolean "libopie2security (plugin-based authentication library for Opie)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2PIM
+
