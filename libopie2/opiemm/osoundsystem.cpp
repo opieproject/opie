@@ -58,10 +58,6 @@ OSoundSystem::OSoundSystem()
 
 void OSoundSystem::synchronize()
 {
-    // gather available interfaces by inspecting /dev
-    //FIXME: we could use SIOCGIFCONF here, but we aren't interested in virtual (e.g. eth0:0) devices
-    //FIXME: Use SIOCGIFCONF anway, because we can disable listing of aliased devices
-
     _interfaces.clear();
     _interfaces.insert( "soundcard", new OSoundCard( this, "soundcard" ) );
     
