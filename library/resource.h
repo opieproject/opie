@@ -42,15 +42,22 @@ public:
     static QStringList allSounds();
 };
 
+#ifdef OPIE_INTERNAL_LIBRARY_BUILD
 extern bool qpe_fast_findPixmap;
+#endif
+
+
 // Inline for compatibility with SHARP ROMs
 inline QIconSet Resource::loadIconSet( const QString &pix )
 {
+
+#ifdef OPIE_INTERNAL_LIBRARY_BUILD
     /*
      * disable the slow load
      */
     bool oldMode = qpe_fast_findPixmap;
     qpe_fast_findPixmap = true;
+#endif
 
     QPixmap dpm = loadPixmap( pix + "_disabled" );
     QPixmap pm = loadPixmap( pix );
@@ -58,7 +65,10 @@ inline QIconSet Resource::loadIconSet( const QString &pix )
     if ( !dpm.isNull() )
 	is.setPixmap( dpm, pm.width() <= 22 ? QIconSet::Small : QIconSet::Large, QIconSet::Disabled );
 
+#ifdef OPIE_INTERNAL_LIBRARY_BUILD
     qpe_fast_findPixmap = oldMode;
+#endif
+
     return is;
 }
 

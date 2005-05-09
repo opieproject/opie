@@ -123,6 +123,8 @@ SOURCES	=   calendar.cpp \
 # Qt 3 compatibility
 HEADERS += quuid.h qcom.h qlibrary.h qlibrary_p.h
 SOURCES += quuid.cpp qlibrary.cpp qlibrary_unix.cpp
+
+DEFINES     += OPIE_INTERNAL_LIBRARY_BUILD
 INCLUDEPATH += $(OPIEDIR)/include backend
 LIBS		+= -ldl -lcrypt -lm
 INTERFACES = passwordbase_p.ui categoryeditbase_p.ui findwidgetbase_p.ui lnkpropertiesbase_p.ui
