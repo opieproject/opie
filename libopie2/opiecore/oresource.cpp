@@ -33,6 +33,7 @@
 #include <opie2/odebug.h>
 
 #include <qpe/applnk.h>
+#include <qpe/resource.h>
 
 #include "oresource.h"
 
@@ -45,11 +46,9 @@ static int bigIconSize   = -1; // Size of large icons (width & height)
 QImage OResource::loadImage( const QString &name, Scale scale )
 {
     // Load image
-    QString filename;
-    filename.sprintf( "%spics/%s.png", (const char*) oApp->qpeDir(), (const char*) name );
-    QImage image( filename );
+    QImage image = Resource::loadImage( name );
     if ( image.isNull() )
-        odebug << "libopie2 OResource: can't find image " << filename << oendl;
+        odebug << "libopie2 OResource: can't find image " << name << oendl;
 
     // Scale image (if necessary)
     if ( scale == SmallIcon )
