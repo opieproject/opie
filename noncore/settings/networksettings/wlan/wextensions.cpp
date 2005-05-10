@@ -69,10 +69,13 @@ QString WExtensions::essid(){
   if(!hasWirelessExtensions)
     return QString();
   const char* buffer[200];
+  memset(buffer,0x00,200);
   iwr.u.data.pointer = (caddr_t) buffer;
   iwr.u.data.length = IW_ESSID_MAX_SIZE;
   iwr.u.data.flags = 0;
   if ( 0 == ioctl( fd, SIOCGIWESSID, &iwr )){
+    if (iwr.u.essid.length > IW_ESSID_MAX_SIZE)
+      iwr.u.essid.length = IW_ESSID_MAX_SIZE;
     buffer[(unsigned int) iwr.u.essid.length] = '\0';
     return (const char*) buffer;
   }

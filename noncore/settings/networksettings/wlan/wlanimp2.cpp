@@ -79,11 +79,10 @@ void WLANImp::setProfile(const QString &profile){
 
 void WLANImp::parseOpts() {
   bool error;
-  QString opt;
+  QString opt,key;
 
   if (! interfaces->isInterfaceSet())
     return;
-
 
   opt = interfaces->getInterfaceOption("wireless_essid", error);
   if(opt == "any" || opt == "off" || opt.isNull()){
@@ -109,10 +108,65 @@ void WLANImp::parseOpts() {
     networkChannel->setValue(opt.toInt());
   }
 
-  opt = interfaces->getInterfaceOption("wireless_key", error).simplifyWhiteSpace();
-  if (opt.isNull())
+  opt = interfaces->getInterfaceOption("wireless_type", error).simplifyWhiteSpace();
+
+  if ( opt == "wlan-ng") {
+
+     //FIXME:Handle wlan_ng_priv_genstr
+
+    // get default key_id
+    opt = interfaces->getInterfaceOption("wlan_ng_default_key_id", error).simplifyWhiteSpace();
+
+    if (opt == "0")
+       keyRadio0->setChecked(true);
+    if (opt == "1")
+       keyRadio1->setChecked(true);
+    if (opt == "2")
+       keyRadio2->setChecked(true);
+    if (opt == "3")
+       keyRadio3->setChecked(true);
+
+    // get key0
+    key = interfaces->getInterfaceOption("wlan_ng_key0", error).simplifyWhiteSpace();
+    key.replace(QString(":"),QString(""));
+    keyLineEdit0->setText(key);
+
+    // get key1
+    key = interfaces->getInterfaceOption("wlan_ng_key1", error).simplifyWhiteSpace();
+    key.replace(QString(":"),QString(""));
+    keyLineEdit1->setText(key);
+
+    // get key2
+    key = interfaces->getInterfaceOption("wlan_ng_key2", error).simplifyWhiteSpace();
+    key.replace(QString(":"),QString(""));
+    keyLineEdit2->setText(key);
+
+    // get key3
+    key = interfaces->getInterfaceOption("wlan_ng_key3", error).simplifyWhiteSpace();
+    key.replace(QString(":"),QString(""));
+    keyLineEdit3->setText(key);
+
     opt = interfaces->getInterfaceOption("wireless_enc", error).simplifyWhiteSpace();
-  parseKeyStr(opt);
+
+    // encryption on?
+    if(opt == "on"){
+      wepEnabled->setChecked(true);
+    } else {
+        wepEnabled->setChecked(false);
+    }
+
+    opt = interfaces->getInterfaceOption("wireless_keymode", error).simplifyWhiteSpace();
+
+    if(opt == "restricted"){
+      // restricted mode, only accept encrypted packets
+      rejectNonEnc->setChecked(true);
+    }
+  }
+  else {
+    opt = interfaces->getInterfaceOption("wireless_key", error).simplifyWhiteSpace();
+
+    parseKeyStr(opt);
+  }
 }
 
 void WLANImp::parseKeyStr(QString keystr) {
@@ -226,25 +280,45 @@ void WLANImp::accept() {
 // FIXME:  QDialog::accept();
 }
 
+QString WLANImp::formatKey(QString input)
+{
+  int len,r=0;
+
+  len = input.length();
+
+  if (!len)
+    return input;
+
+  for(int i=1;i<len/2;i++)
+  {
+    input.insert(r+i*2,QString(":"));
+    r++;
+  }
+
+  return input;
+}
+
 void WLANImp::writeOpts() {
-    // eh can't really do anything about it other then return. :-D
-    if(!interfaces->isInterfaceSet()){
-        QMessageBox::warning(0,"Inface not set","should not happen!!!");
-        return;
-    }
-    bool error = false;
+  QString para, devicetype;
 
-    odebug << "setting wlan interface " << interfaces->getInterfaceName( error ).latin1() << "" << oendl;
+  // eh can't really do anything about it other then return. :-D
+  if(!interfaces->isInterfaceSet()){
+    QMessageBox::warning(0,"Inface not set","should not happen!!!");
+    return;
+  }
+  bool error = false;
 
-    if (error)  QMessageBox::warning(0,"Inface not set","should not happen!!!");
+  odebug << "setting wlan interface " << interfaces->getInterfaceName( error ).latin1() << "" << oendl;
+
+  if (error)  QMessageBox::warning(0,"Inface not set","should not happen!!!");
 
   interfaces->setInterfaceOption(QString("wireless_mode"), mode->currentText());
   interfaces->setInterfaceOption(QString("wireless_essid"), essid->currentText());
 
   if (specifyAp->isChecked()) {
-    interfaces->setInterfaceOption(QString("wireless_ap"), macEdit->text());
+     interfaces->setInterfaceOption(QString("wireless_ap"), macEdit->text());
   } else {
-    interfaces->removeInterfaceOption(QString("wireless_ap"));
+     interfaces->removeInterfaceOption(QString("wireless_ap"));
   }
 
   if (specifyChan->isChecked()) {
@@ -253,46 +327,105 @@ void WLANImp::writeOpts() {
     interfaces->removeInterfaceOption(QString("wireless_channel"));
   }
 
-  if (wepEnabled->isChecked()) {
-    QStringList keyList;
+  devicetype = interfaces->getInterfaceOption("wireless_type", error).simplifyWhiteSpace();
 
-    if (! keyLineEdit0->text().isNull()) {
-      keyList += keyLineEdit0->text();
-      keyList += "[1]";
-    } //else
-    if (! keyLineEdit1->text().isNull()) {
-      keyList += keyLineEdit1->text();
-      keyList += "[2]";
-    } //else
-    if (! keyLineEdit2->text().isNull()) {
-      keyList += keyLineEdit2->text();
-      keyList += "[3]";
-    } //else
-    if (! keyLineEdit3->text().isNull()) {
-      keyList += keyLineEdit3->text();
-      keyList += "[4]";
-    }
-    if (acceptNonEnc->isChecked()) {
-      keyList += "open";
-    } else {
-      keyList += "restricted";
-    }
+  if ( devicetype == "wlan-ng") {
 
-    keyList += "key";
-    if (keyRadio0->isChecked()) {
-      keyList += "[1]";
-    } else if (keyRadio1->isChecked()) {
-      keyList += "[2]";
-    } else if (keyRadio2->isChecked()) {
-      keyList += "[3]";
-    } else if (keyRadio3->isChecked()) {
-      keyList += "[4]";
-    }
-    interfaces->setInterfaceOption(QString("wireless_key"), keyList.join(QString(" ")));
-  } else {
+    // wlan-ng style
     interfaces->removeInterfaceOption(QString("wireless_key"));
+
+    if (wepEnabled->isChecked()) {
+
+      interfaces->setInterfaceOption(QString("wireless_enc"),"on");
+
+      if (! keyLineEdit0->text().isNull()) {
+        interfaces->setInterfaceOption(QString("wlan_ng_key0"), formatKey(keyLineEdit0->text()));
+      } else
+        interfaces->removeInterfaceOption(QString("wlan_ng_key0"));
+      if (! keyLineEdit1->text().isNull()) {
+        interfaces->setInterfaceOption(QString("wlan_ng_key1"), formatKey(keyLineEdit1->text()));
+      } else
+        interfaces->removeInterfaceOption(QString("wlan_ng_key1"));
+      if (! keyLineEdit2->text().isNull()) {
+        interfaces->setInterfaceOption(QString("wlan_ng_key2"), formatKey(keyLineEdit2->text()));
+      } else
+        interfaces->removeInterfaceOption(QString("wlan_ng_key2"));
+      if (! keyLineEdit3->text().isNull()) {
+        interfaces->setInterfaceOption(QString("wlan_ng_key3"), formatKey(keyLineEdit3->text()));
+      } else
+        interfaces->removeInterfaceOption(QString("wlan_ng_key3"));
+
+      if (acceptNonEnc->isChecked())
+        interfaces->removeInterfaceOption(QString("wireless_keymode"));
+      else
+        interfaces->setInterfaceOption(QString("wireless_keymode"),"restricted");
+
+      para = "";
+      if (keyRadio0->isChecked()) {
+        para = "0";
+      } else if (keyRadio1->isChecked()) {
+        para = "1";
+      } else if (keyRadio2->isChecked()) {
+        para = "2";
+      } else if (keyRadio3->isChecked()) {
+        para = "3";
+      }
+
+      interfaces->setInterfaceOption(QString("wlan_ng_default_key_id"), para);
+
+    } else {
+      // No wep, remove all previous keys
+      interfaces->removeInterfaceOption(QString("wireless_enc"));
+      interfaces->removeInterfaceOption(QString("wlan_ng_default_key_id"));
+      interfaces->removeInterfaceOption(QString("wlan_ng_key0"));
+      interfaces->removeInterfaceOption(QString("wlan_ng_key1"));
+      interfaces->removeInterfaceOption(QString("wlan_ng_key2"));
+      interfaces->removeInterfaceOption(QString("wlan_ng_key3"));
+    }
+
+  } else {
+    // This is the old style
+    if (wepEnabled->isChecked()) {
+      QStringList keyList;
+
+      if (! keyLineEdit0->text().isNull()) {
+        keyList += keyLineEdit0->text();
+        keyList += "[1]";
+      } //else
+      if (! keyLineEdit1->text().isNull()) {
+        keyList += keyLineEdit1->text();
+        keyList += "[2]";
+      } //else
+      if (! keyLineEdit2->text().isNull()) {
+        keyList += keyLineEdit2->text();
+        keyList += "[3]";
+      } //else
+      if (! keyLineEdit3->text().isNull()) {
+        keyList += keyLineEdit3->text();
+        keyList += "[4]";
+      }
+      if (acceptNonEnc->isChecked()) {
+        keyList += "open";
+      } else {
+        keyList += "restricted";
+      }
+
+      keyList += "key";
+      if (keyRadio0->isChecked()) {
+        keyList += "[1]";
+      } else if (keyRadio1->isChecked()) {
+        keyList += "[2]";
+      } else if (keyRadio2->isChecked()) {
+        keyList += "[3]";
+      } else if (keyRadio3->isChecked()) {
+        keyList += "[4]";
+      }
+      interfaces->setInterfaceOption(QString("wireless_key"), keyList.join(QString(" ")));
+    } else {
+      interfaces->removeInterfaceOption(QString("wireless_key"));
+    }
+    interfaces->removeInterfaceOption(QString("wireless_enc"));
   }
-  interfaces->removeInterfaceOption(QString("wireless_enc"));
 
   if(!interfaceSetup->saveChanges())
     return;
