@@ -195,6 +195,7 @@ QString OInputDevice::globalKeyMask() const
     if( ioctl( _fd, EVIOCGKEY( sizeof(keys) ), keys ) < 0 )
     {
         perror( "EVIOCGKEY" );
+        return QString::null;
     }
     else
     {
