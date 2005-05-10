@@ -82,8 +82,6 @@ Wellenreiter::Wellenreiter( QWidget* parent )
     #endif
 
     netview->setColumnWidthMode( 1, QListView::Manual );
-    connect( netview, SIGNAL( joinNetwork(const QString&,const QString&,int,const QString&) ),
-             this, SLOT( joinNetwork(const QString&,const QString&,int,const QString&) ) );
     pcap = new OPacketCapturer();
     pcap->setAutoDelete( false );
 
@@ -726,43 +724,6 @@ void Wellenreiter::doAction( const QString& action, const QString& protocol, OPa
     #else
     #warning Actions do not work with Qt/X11 yet
     #endif
-}
-
-void Wellenreiter::joinNetwork(const QString& type, const QString& essid, int channel, const QString& macaddr)
-{
-    #ifdef QWS
-    if ( !iface )
-    {
-        QMessageBox::warning( this, tr( "Can't do that!" ), tr( "No wireless\ninterface available." ) );
-        return;
-    }
-
-    if ( sniffing )
-    {
-        QMessageBox::warning( this, tr( "Can't do that!" ), tr( "Stop sniffing before\njoining a net." ) );
-        return;
-    }
-
-    odebug << "joinNetwork() with Interface " << iface->name()
-           << ": " << type << ", " << essid
-           << ", " << channel << ", " << macaddr << oendl;
-
-    QCopEnvelope msg( "QPE/Application/networksettings", "wlan(QString,QString,QString)" );
-    int count = 3;
-    odebug << "sending " << count << " messages" << oendl;
-    msg << QString("count") << QString::number(count);
-    odebug << "msg >" << iface->name() << "< Mode >" << type.latin1() << "<" << oendl;
-    msg << QString(iface->name()) << QString("Mode") << type;
-    odebug << "msg >" << iface->name() << "< essid >" << essid.latin1() << "<" << oendl;
-    msg << QString(iface->name()) << QString("ESSID") << essid;
-    odebug << "msg >" << iface->name() << "< channel >" << channel << "<" << oendl;
-    msg << QString(iface->name()) << QString("Channel") << channel;
-//    odebug << "msg >" << iface->name() << "< mac >" << macaddr << "<" << oendl;
-//    msg << QString(iface->name()) << QString("MacAddr") << macaddr;
-    #else
-    QMessageBox::warning( this, tr( "Can't do that!" ), tr( "Function only available on Embedded build" ) );
-    #endif
-
 }
 
 void Wellenreiter::updateStatistics()

@@ -33,7 +33,7 @@ INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
 INTERFACES      = configbase.ui
 TARGET          = wellenreiter
-VERSION         = 1.0.5
+VERSION         = 1.0.6
 
 DEFINES         += WELLENREITER_VERSION='"$$VERSION (GPL) Opie"'
 

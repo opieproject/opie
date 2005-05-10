@@ -55,7 +55,6 @@ class MScanListView: public Opie::Ui::OListView
 
   signals:
     void rightButtonClicked(QListViewItem*,const QPoint&,int);
-    void joinNetwork( const QString&, const QString&, int, const QString& );
 
   protected:
     void addIfNotExisting( MScanListItem* parent, const Opie::Net::OMacAddress& addr, const QString& type = "station" );

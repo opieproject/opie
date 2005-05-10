@@ -402,16 +402,9 @@ void MScanListView::contextMenuRequested( QListViewItem* item, const QPoint&, in
     odebug << "contextMenuRequested on item '" << itm->text(0) << "' ("
            << itm->type << ") in column: '" << col << "'" << oendl;
 
-    if ( itm->type == "adhoc" || itm->type == "managed" )
-    {
-        QString entry = QString( "&Join %1 Net '%2'..." ).arg( itm->type ).arg( itm->essid() );
+    /* do something meaningful */
 
-        QPopupMenu m( this );
-        m.insertItem( entry, 37773, 0 );
-        int result = m.exec( QCursor::pos() );
-        if ( result == 37773 )
-            emit joinNetwork( itm->type, itm->essid(), itm->channel(), itm->macaddr() );
-    }
+    return;
 }
 
 //============================================================
