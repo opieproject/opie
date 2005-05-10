@@ -38,9 +38,46 @@ _;:,     .>    :=|.         This program is free software; you can
 #include <qsocketnotifier.h>
 #include <qsignal.h>
 #include <qstring.h>
+#include <qobject.h>
+#include <qfile.h>
 
 namespace Opie {
 namespace Core {
+
+class OFile : public QObject, public QFile
+{
+  Q_OBJECT
+
+  public:
+    OFile();
+    OFile( const QString & name );
+    virtual ~OFile();
+
+  protected:
+    virtual void connectNotify( const char* signal );
+    virtual void disconnectNotify( const char* signal );
+
+  private:
+    int startWatch( int mode );
+
+  signals:
+    void accessed( const QString& );
+    void modified( const QString& );
+    void attributed( const QString& );
+    void closed( const QString&, bool );
+    void opened( const QString& );
+    void deleted( const QString& );
+    void unmounted( const QString& );
+};
+
+/*
+    void movedTo( const QString&, const QString& );
+    void movedFrom( const QString&, const QString& );
+    void deletedSubdir( const QString&, const QString& );
+    void deletedFile( const QString&, const QString& );
+    void createdSubdir( const QString&, const QString& );
+    void createdFile( const QString&, const QString& );
+*/
 
 class OFileNotificationEvent;
 

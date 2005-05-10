@@ -59,6 +59,62 @@ namespace Opie {
 namespace Core {
 
 //=================================================================================================
+// OFile
+//=================================================================================================
+
+OFile::OFile() : QObject( 0, 0 ), QFile()
+{
+    qDebug( "OFile()" );
+}
+
+OFile::OFile( const QString& name ) : QObject( 0, 0 ), QFile( name )
+{
+    qDebug( "OFile()" );
+}
+
+OFile::~OFile()
+{
+    qDebug( "~OFile()" );
+}
+
+void OFile::connectNotify( const char *signal )
+{
+    QString s = normalizeSignalSlot( signal+1 );
+    qDebug( "OFile::connectNotify() signal = '%s'", (const char*) s );
+
+    if ( s.startsWith( "accessed" ) )
+
+
+
+
+
+
+
+    QObject::connectNotify( signal );
+
+/*
+    void accessed( const QString& );
+    void modified( const QString& );
+    void attributed( const QString& );
+    void closed( const QString&, bool );
+    void opened( const QString& );
+    void deleted( const QString& );
+    void unmounted( const QString& );
+*/
+
+}
+
+void OFile::disconnectNotify( const char* signal )
+{
+    qDebug( "OFile::disconnectNotify() signal = '%s'", signal );
+    QObject::disconnectNotify( signal );
+}
+
+int OFile::startWatch( int mode )
+{
+}
+
+//=================================================================================================
 // OFileNotificationEvent
 //=================================================================================================
 OFileNotificationEvent::OFileNotificationEvent( OFileNotification* parent, int wd, unsigned int mask, unsigned int cookie, const QString& name )
@@ -219,7 +275,7 @@ void OFileNotification::inotifyEventHandler()
     qDebug( "OFileNotification::inotifyEventHandler(): reached." );
 
     char buffer[16384];
-    size_t buffer_i;
+    ssize_t buffer_i;
     struct inotify_event *pevent, *event;
     ssize_t r;
     size_t event_size;
