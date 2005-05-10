@@ -5,6 +5,7 @@
 	------------
 	* OpieStumbler: Scans WiFi networks using the wireless extension scanning (skyhusker)
 	* Opie-Reader: Support for document formats ArriereGo and Reb, add flite output (tim,pohly)
+	* Opie-Networksettings: Add support for wlan-ng devices and improve WEP handling (Dirk Opfer)
 
 	Fixed Bugs
 	----------
