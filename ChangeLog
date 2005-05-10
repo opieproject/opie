@@ -19,6 +19,7 @@
 	* n.a.	- Wellenreiter: relax WE version matching test a bit (mickeyl)
 	* n.a.	- scale BluezApplet appropriately and use larger icons (mickeyl)
 	* n.a.	- memoryapplet: fix crash in memoryapplet on kernels without swap support (seneca cunningham)
+	* n.a.  - networksettings: ignore hostap control interfaces wifi* (mickeyl)
 
 	Internal
 	--------

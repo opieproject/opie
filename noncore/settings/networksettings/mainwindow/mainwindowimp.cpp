@@ -189,8 +189,8 @@ void MainWindowImp::getAllInterfaces()
         for (unsigned int i = 0; i < ifc.ifc_len / sizeof(struct ifreq); i++)
         {
             struct ifreq *pifr = &ifrs[i];
-
-            ifaces += pifr->ifr_name;
+            if ( !QString( pifr->ifr_name ).startsWith( "wifi" ) ) ifaces += pifr->ifr_name;
+            else odebug << "ignoring hostap control interface " << pifr->ifr_name << oendl;
         }
     }
     else
@@ -206,7 +206,9 @@ void MainWindowImp::getAllInterfaces()
         {
             if((loc = line.find(":")) != -1)
             {
-                ifaces += line.left(loc);
+                // ignore wifi* (hostap control interfaces)
+                if ( !line.left(loc).startsWith( "wifi" ) ) ifaces += line.left(loc);
+                else odebug << "ignoring hostap control interface " << line.left(loc) << oendl;
             }
         }
     }
