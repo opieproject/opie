@@ -76,8 +76,9 @@ static char Base64DecMap[128] =
 OConfig* OGlobal::_config = 0;
 OConfig* OGlobal::_qpe_config = 0;
 
-void OGlobal::clean_up() {
-    qWarning( "Oglobal clean up" );
+void OGlobal::clean_up()
+{
+    qDebug( "Oglobal clean up" );
     delete OGlobal::_config;
     delete OGlobal::_qpe_config;
     OGlobal::_config = 0;
