@@ -14,3 +14,5 @@ LIBS += -L$(OPIEDIR)/lib -lreader_pdb -lreader_pluckerbase -lreader_codec
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH += $(OPIEDIR)/include
 DEFINES += USENEF
+
+include( $(OPIEDIR)/include.pro )
