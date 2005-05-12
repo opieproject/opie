@@ -120,7 +120,7 @@ CONFIG_MEMORYAPPLET	noncore/applets/memoryapplet	memoryapplet.pro
 CONFIG_METAL	noncore/styles/metal	metal.pro
 CONFIG_MINDBREAKER	noncore/games/mindbreaker	mindbreaker.pro
 CONFIG_MINESWEEP	noncore/games/minesweep	minesweep.pro
-CONFIG_MOBILEMSG	noncore/comm/mobilemsg	mobilemsg.pro
+CONFIG_MOBILEMSG	noncore/unsupported/mobilemsg	mobilemsg.pro
 CONFIG_MODPLUG	core/multimedia/opieplayer/modplug	modplug.pro
 CONFIG_MULTIAUTH_BLUEPING     noncore/securityplugins/blueping        bluepingplugin.pro
 CONFIG_MULTIAUTH_DUMMY  noncore/securityplugins/dummy   dummyplugin.pro
