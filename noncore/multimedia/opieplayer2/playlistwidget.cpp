@@ -766,6 +766,12 @@ void PlayListWidget::openDirectory() {
             addFileToPlaylist( filename, QFileInfo(*it).baseName() );
         }
     }
+
+    if (!d->selectedFiles->isEmpty()) {
+        d->selectedFiles->first();
+
+        setButtons();
+    }
 }
 
 void PlayListWidget::readListFromFile( const QString &filename ) {
