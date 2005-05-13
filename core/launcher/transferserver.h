@@ -22,9 +22,12 @@
 #include <qdir.h>
 #include <qfile.h>
 #include <qbuffer.h>
+#include <qlist.h>
 
 class QFileInfo;
-class OProcess;
+class QProcess;
+class ServerPI;
+
 class TransferServer : public QServerSocket
 {
     Q_OBJECT
@@ -34,6 +37,13 @@ public:
     virtual ~TransferServer();
 
     void newConnection( int socket );
+    void authorizeConnections();
+
+protected slots:
+    void closed(ServerPI *);
+
+private:
+    QList<ServerPI> connections;
 };
 
 class SyncAuthentication : QObject
@@ -70,8 +80,8 @@ public:
     void sendByteArray( const QByteArray& array );
     void sendByteArray( const QByteArray& array, const QHostAddress& host, Q_UINT16 port );
 
-    void retrieveFile( const QString fn );
-    void retrieveFile( const QString fn, const QHostAddress& host, Q_UINT16 port );
+    void retrieveFile( const QString fn, int fileSize );
+    void retrieveFile( const QString fn, const QHostAddress& host, Q_UINT16 port, int fileSize );
     void retrieveGzipFile( const QString &fn );
     void retrieveGzipFile( const QString &fn, const QHostAddress& host, Q_UINT16 port );
     void retrieveByteArray();
@@ -92,12 +102,8 @@ private slots:
     void connected();
     void bytesWritten( int bytes );
     void readyRead();
-    void writeTargzBlock(OProcess *, char *, int);
+    void writeTargzBlock();
     void targzDone();
-
-    void gzipTarBlock(OProcess *, char *, int);
-    void tarExtractBlock(OProcess *, char *, int);
-    void gunzipDone();
     void extractTarDone();
 
 private:
@@ -106,9 +112,9 @@ private:
     Mode mode;
     QFile file;
     QBuffer buf;
-    OProcess *createTargzProc;
-    OProcess *retrieveTargzProc;
-    OProcess *gzipProc;
+    QProcess *createTargzProc;
+    QProcess *retrieveTargzProc;
+    int recvFileSize;
 };
 
 class ServerSocket : public QServerSocket
@@ -134,6 +140,11 @@ class ServerPI : public QSocket
 public:
     ServerPI( int socket, QObject *parent = 0, const char* name = 0 );
     virtual ~ServerPI();
+
+    bool verifyAuthorised();
+
+signals:
+    void connectionClosed(ServerPI *);
 
 protected slots:
     void read();
@@ -176,4 +187,5 @@ private:
     QString renameFrom;
     QString lastCommand;
     int waitsocket;
+    int storFileSize;
 };
