@@ -32,12 +32,14 @@
 
 #include <opie2/odebug.h>
 #include <opie2/opluginloader.h>
+#include <opie2/opimcontact.h>
+#include <opie2/ocontactaccessbackend_vcard.h>
+#include <opie2/ocontactaccess.h>
 #include <opie2/oconfig.h>
 #include <opie2/oresource.h>
 
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/contact.h>
 
 #include <qdir.h>
 #include <qtimer.h>
@@ -132,9 +134,11 @@ void Today::setRefreshTimer( int interval ) {
  * Initialises the owner field with the default value, the username
  */
 void Today::setOwnerField() {
-    QString file = Global::applicationFileName( "addressbook", "businesscard.vcf" );
-    if ( QFile::exists( file ) ) {
-        Contact cont = Contact::readVCard( file )[0];
+    QString vfilename = Global::applicationFileName("addressbook", "businesscard.vcf");
+    Opie::OPimContactAccess acc( "today", vfilename,
+                                 new Opie::OPimContactAccessBackend_VCard("today", vfilename ) );
+    if ( acc.load() ) {
+        Opie::OPimContact cont = acc.allRecords()[0];
         QString returnString = cont.fullName();
         OwnerField->setText( "<b>" + tr ( "Owned by " ) + returnString + "</b>" );
     } else {
