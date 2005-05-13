@@ -156,7 +156,7 @@ void CpuCategory::populate()
     {
         QString line = cpuinfo.readLine();
         odebug << "got line '" << line << "'" << oendl;
-        if ( line.startsWith( "processor" ) )
+        if ( line.lower().startsWith( "processor" ) )
         {
             dev = new CpuDevice( this, QString( "CPU #%1" ).arg( cpucount++ ) );
             dev->addInfo( line );
