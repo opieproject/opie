@@ -529,17 +529,16 @@ void OWirelessNetworkInterface::buildInformation()
 
     struct iwreq wrq;
     int len = sizeof( struct iw_range )*2;
-    char *buffer = (char*) malloc( len );
-    //FIXME: Validate if we actually got the memory block
+    char buffer[len];
     memset( buffer, 0, len );
     memcpy( wrq.ifr_name, name(), IFNAMSIZ);
     wrq.u.data.pointer = (caddr_t) buffer;
-    wrq.u.data.length = sizeof( struct iw_range );
+    wrq.u.data.length = sizeof buffer;
     wrq.u.data.flags = 0;
 
     if ( ::ioctl( _sfd, SIOCGIWRANGE, &wrq ) == -1 )
     {
-        owarn << "OWirelessNetworkInterface::buildInformation(): Can't get channel information - using default values." << oendl;
+        owarn << "OWirelessNetworkInterface::buildInformation(): Can't get driver information (" << strerror( errno ) << ") - using default values." << oendl;
         _channels.insert( 2412,  1 ); // 2.412 GHz
         _channels.insert( 2417,  2 ); // 2.417 GHz
         _channels.insert( 2422,  3 ); // 2.422 GHz
@@ -582,7 +581,6 @@ void OWirelessNetworkInterface::buildInformation()
 
     memcpy( &_range, buffer, sizeof( struct iw_range ) );
     odebug << "OWirelessNetworkInterface::buildInformation(): Information block constructed." << oendl;
-    free(buffer);
 }
 
 
@@ -604,7 +602,7 @@ void OWirelessNetworkInterface::buildPrivateList()
 
     if ( !wioctl( SIOCGIWPRIV ) )
     {
-        owarn << "OWirelessNetworkInterface::buildPrivateList(): Can't get private ioctl information." << oendl;
+        owarn << "OWirelessNetworkInterface::buildPrivateList(): Can't get private ioctl information (" << strerror( errno ) << ")." << oendl;
         return;
     }
 
@@ -1158,13 +1156,13 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
                 }
                 case IWEVQUAL:
                 {
-                    odebug << "IWEVQUAL" << oendl; 
+                    odebug << "IWEVQUAL" << oendl;
                     stations->last()->level = static_cast<int>(we->u.qual.level);
                     break;             /* Quality part of statistics (scan) */
                 }
                 case SIOCGIWENCODE:
                 {
-                    odebug << "SIOCGIWENCODE" << oendl; 
+                    odebug << "SIOCGIWENCODE" << oendl;
                     stations->last()->encrypted = !(we->u.data.flags & IW_ENCODE_DISABLED);
                     break;
                 }
