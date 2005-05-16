@@ -202,6 +202,7 @@ class ONetworkInterface : public QObject
     /**
      * Associate the MAC address @a addr with the interface.
      * @note It can be necessary to shut down the interface prior to calling this method.
+     * @note This operation needs root privileges
      * @warning This is not supported by all drivers.
      */
     void setMacAddress( const OMacAddress& addr );
@@ -222,6 +223,12 @@ class ONetworkInterface : public QObject
      * @see #include <net/if_arp.h> for possible values.
      */
     int dataLinkType() const;
+    /**
+     * @returns a ONetworkInterfaceDriverInfo driver information block
+     * @note This operation needs root privileges
+     * @warning This is not supported by all drivers
+     */
+    ONetworkInterfaceDriverInfo driverInfo() const;
 
   protected:
     const int _sfd;

@@ -18,7 +18,7 @@ SOURCES     = odebugmapper.cpp    \
               ostation.cpp
 INTERFACES  =
 TARGET      = opienet2
-VERSION     = 1.8.6
+VERSION     = 1.8.7
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lpcap

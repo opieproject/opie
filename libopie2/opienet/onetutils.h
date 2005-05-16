@@ -100,6 +100,32 @@ class OHostAddress : public QHostAddress
 
 
 /*======================================================================================
+ * ONetworkInterfaceDriverInfo
+ *======================================================================================*/
+
+class ONetworkInterfaceDriverInfo
+{
+  public:
+    ONetworkInterfaceDriverInfo( const QString& name = "<unknown>",
+                                 const QString& version = "<unknown>",
+                                 const QString& firmware = "<unknown>",
+                                 const QString& bus = "<unknown>" ) :
+                                 _name( name ), _version( version ), _firmware( firmware ), _bus( bus ) { };
+    ~ONetworkInterfaceDriverInfo() { };
+
+    QString name() const { return _name; };
+    QString version() const { return _version; };
+    QString firmware() const { return _firmware; };
+    QString bus() const { return _bus; };
+
+  private:
+    const QString _name;
+    const QString _version;
+    const QString _firmware;
+    const QString _bus;
+};
+
+/*======================================================================================
  * OPrivateIOCTL
  *======================================================================================*/
 

@@ -29,38 +29,40 @@
 */
 
 /* OPIE */
-
 #include <opie2/onetwork.h>
 #include <opie2/ostation.h>
 #include <opie2/odebug.h>
+using namespace Opie::Core;
 
 /* QT */
-
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qapplication.h>
 
-/* UNIX */
-
+/* STD */
 #include <assert.h>
 #include <arpa/inet.h>
 #include <errno.h>
+#include <stdarg.h>
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <unistd.h>
+#include <net/if_arp.h>
+#include <net/ethernet.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
 #include <sys/types.h>
-#include <unistd.h>
+#include <linux/types.h>
 #include <linux/sockios.h>
-#include <net/if_arp.h>
-#include <net/ethernet.h>
-#include <stdarg.h>
+#define u64 __u64
+#define u32 __u32
+#define u16 __u16
+#define u8 __u8
+#include <linux/ethtool.h>
 
 #ifndef NODEBUG
 #include <opie2/odebugmapper.h>
-
-using namespace Opie::Core;
 using namespace Opie::Net::Internal;
 DebugMapper* debugmapper = new DebugMapper();
 #endif
@@ -381,6 +383,14 @@ bool ONetworkInterface::isWireless() const
 }
 
 
+ONetworkInterfaceDriverInfo ONetworkInterface::driverInfo() const
+{
+        struct ethtool_drvinfo info;
+        info.cmd = ETHTOOL_GDRVINFO;
+        _ifr.ifr_data = (caddr_t) &info;
+        return ioctl( SIOCETHTOOL ) ? ONetworkInterfaceDriverInfo( info.driver, info.version, info.fw_version, info.bus_info) : ONetworkInterfaceDriverInfo();
+}
+
 /*======================================================================================
  * OChannelHopper
  *======================================================================================*/
@@ -405,6 +415,7 @@ OChannelHopper::OChannelHopper( OWirelessNetworkInterface* iface )
     if ( _maxChannel >= 11 ) _channels.append( 11 );
     if ( _maxChannel >=  6 ) _channels.append(  6 );
     if ( _maxChannel >= 12 ) _channels.append( 12 );
+    //FIXME: Add 802.11a/g channels
     _channel = _channels.begin();
 }
 

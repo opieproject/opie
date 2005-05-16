@@ -48,6 +48,11 @@ int main( int argc, char** argv )
     while ( it.current() )
     {
         odebug << "DEMO: ONetwork contains Interface '" <<  it.current()->name() << "'" << oendl;
+        ONetworkInterfaceDriverInfo info = it.current()->driverInfo();
+        odebug << "DEMO: DriverName reported as '" << info.name() << "'" << oendl;
+        odebug << "DEMO: DriverVersion reported as '" << info.version() << "'" << oendl;
+        odebug << "DEMO: DriverFirmware reported as '" << info.firmware() << "'" << oendl;
+        odebug << "DEMO: DriverBus reported as '" << info.bus() << "'" << oendl;
         odebug << "DEMO: Datalink code is '" << it.current()->dataLinkType() << "'" << oendl;
         odebug << "DEMO: MAC Address is '" <<  it.current()->macAddress().toString() << "'" << oendl;
         odebug << "DEMO: MAC Address is '" <<  it.current()->macAddress().toString(true) << "'" << oendl;
