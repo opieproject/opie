@@ -13,10 +13,10 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <qpe/applnk.h>
 #include <qpe/storage.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 #include <qpe/menubutton.h>
 using namespace Opie::Core;
 using namespace Opie::Ui;
@@ -52,40 +52,41 @@ void AdvancedFm::init() {
 	 menuBar->insertItem( tr( "File" ), fileMenu);
 	 menuBar->insertItem( tr( "View" ), viewMenu);
 
-	 QPixmap pm;
+    bool useBigIcon = qApp->desktop()->size().width() > 330;
+
 	 cdUpButton = new QToolButton( 0,"cdUpButton");
-	 pm.convertFromImage( Resource::loadImage( "up" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-	 cdUpButton->setPixmap( pm );
+     cdUpButton->setUsesBigPixmap( useBigIcon );
+	 cdUpButton->setPixmap( Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ) );
 	 cdUpButton->setAutoRaise( true );
 	 menuBar->insertItem( cdUpButton );
 
 	 qpeDirButton= new QToolButton( 0,"QPEButton");
-	 pm.convertFromImage( Resource::loadImage( "logo/opielogo" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-	 qpeDirButton->setPixmap( pm );//,"",this,"QPEButton");
+     qpeDirButton->setUsesBigPixmap( useBigIcon );
+	 qpeDirButton->setPixmap( Opie::Core::OResource::loadPixmap( "logo/opielogo", Opie::Core::OResource::SmallIcon ) );
 	 qpeDirButton->setAutoRaise( true );
 	 menuBar->insertItem( qpeDirButton );
 
 	 cfButton = new QToolButton( 0, "CFButton");
-	 pm.convertFromImage( Resource::loadImage( "cardmon/pcmcia" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-	 cfButton->setPixmap( pm );
+     cfButton->setUsesBigPixmap( useBigIcon );
+	 cfButton->setPixmap( Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon ) );
 	 cfButton->setAutoRaise( true );
 	 menuBar->insertItem( cfButton );
 
 	 sdButton = new QToolButton( 0, "SDButton");
-	 pm.convertFromImage( Resource::loadImage( "advancedfm/sdcard" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-	 sdButton->setPixmap( pm );
+     sdButton->setUsesBigPixmap( useBigIcon );
+	 sdButton->setPixmap( Opie::Core::OResource::loadPixmap( "advancedfm/sdcard", Opie::Core::OResource::SmallIcon ) );
 	 sdButton->setAutoRaise( true );
 	 menuBar->insertItem( sdButton );
 
 	 docButton = new QToolButton( 0,"docsButton");
-	 pm.convertFromImage( Resource::loadImage( "DocsIcon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-	 docButton->setPixmap( pm );
+     docButton->setUsesBigPixmap( useBigIcon );
+	 docButton->setPixmap( Opie::Core::OResource::loadPixmap( "DocsIcon", Opie::Core::OResource::SmallIcon ) );
 	 docButton->setAutoRaise( true );
 	 menuBar->insertItem( docButton );
 
 	 homeButton = new QToolButton( 0, "homeButton");
-	 pm.convertFromImage( Resource::loadImage( "home" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-	 homeButton->setPixmap( pm );
+     homeButton->setUsesBigPixmap( useBigIcon );
+	 homeButton->setPixmap( Opie::Core::OResource::loadPixmap( "home", Opie::Core::OResource::SmallIcon ) );
 	 homeButton->setAutoRaise( true );
 	 menuBar->insertItem( homeButton );
 

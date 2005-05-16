@@ -13,14 +13,13 @@
 #include "advancedfm.h"
 
 #include <opie2/odebug.h>
-
+#include <opie2/oresource.h>
 #include <opie2/ostorageinfo.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
 #include <qpe/applnk.h>
-#include <qpe/resource.h>
 #include <qpe/menubutton.h>
 
 #include <qcombobox.h>
@@ -44,7 +43,7 @@ AdvancedFm::AdvancedFm(QWidget *,const char*, WFlags )
    init();
    renameBox = 0;
 	 whichTab = 1;
-   unknownXpm = Resource::loadImage("UnknownDocument").smoothScale(AppLnk::smallIconSize(),AppLnk::smallIconSize() );
+   unknownXpm = Opie::Core::OResource::loadImage("UnknownDocument", Opie::Core::OResource::SmallIcon);
 
 	 initConnections();
 	 rePopulate();
@@ -136,20 +135,20 @@ void AdvancedFm::populateView() {
 						if(isDir || fileL.find("/",0,TRUE) != -1) {
 
 								if( !QDir( fi->filePath() ).isReadable()) //is directory
-										pm.convertFromImage( Resource::loadImage( "lockedfolder" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+                                    pm = Opie::Core::OResource::loadPixmap( "lockedfolder", Opie::Core::OResource::SmallIcon );
 								else
-										pm.convertFromImage( Resource::loadImage( "folder" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-						}
+                                    pm = Opie::Core::OResource::loadPixmap( "folder", Opie::Core::OResource::SmallIcon );
+      }
 						else if ( fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
-								pm.convertFromImage( Resource::loadImage( "exec" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+                            pm = Opie::Core::OResource::loadPixmap( "exec", Opie::Core::OResource::SmallIcon );
 						}
 						else if( (fileInfo.permission( QFileInfo::ExeUser)
 											| fileInfo.permission( QFileInfo::ExeGroup)
 											| fileInfo.permission( QFileInfo::ExeOther)) && fs != "vfat" ) {
-								pm.convertFromImage( Resource::loadImage( "exec" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+                            pm = Opie::Core::OResource::loadPixmap( "exec", Opie::Core::OResource::SmallIcon );
 						}
 						else if( !fi->isReadable() )  {
-								pm.convertFromImage( Resource::loadImage( "locked" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+                            pm = Opie::Core::OResource::loadPixmap( "locked", Opie::Core::OResource::SmallIcon );
 						}
 						else { //everything else goes by mimetype
 								MimeType mt(fi->filePath());
@@ -160,12 +159,7 @@ void AdvancedFm::populateView() {
 						}
 						if(  fi->isSymLink() || fileL.find("->",0,TRUE) != -1) {
 									//  odebug << " overlay link image" << oendl;
-								pm.convertFromImage( Resource::loadImage( "advancedfm/symlink" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-									//              pm= Resource::loadPixmap( "folder" );
-//                QPixmap lnk = Resource::loadPixmap( "opie/symlink" );
-//                QPainter painter( &pm );
-//                painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
-//                pm.setMask( pm.createHeuristicMask( FALSE ) );
+                            pm = Opie::Core::OResource::loadPixmap( "advancedfm/symlink", Opie::Core::OResource::SmallIcon );
 						}
 						item->setPixmap( 0, pm );
 
@@ -460,7 +454,8 @@ void AdvancedFm::showFileMenu() {
          m->insertItem(app->pixmap(),tr("Open in " + app->name()),this,SLOT(runThis()));
       else if(QFileInfo(fi).isExecutable() ) //damn opie doesnt like this
          m->insertItem(tr("Execute"),this,SLOT(runThis()));
-      m->insertItem(Resource::loadPixmap("txt"),tr("Open as text"),this,SLOT(runText()));
+      m->insertItem( Opie::Core::OResource::loadPixmap( "txt", Opie::Core::OResource::SmallIcon ),
+                     tr("Open as text"),this,SLOT(runText()));
    }
 
    m->insertItem(tr("Actions"),n);
