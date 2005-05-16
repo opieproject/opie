@@ -29,12 +29,13 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
+
 #include <qpe/qpeapplication.h>
 #include <qpe/fontdatabase.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/mimetype.h>
-#include <qpe/resource.h>
 #include <qpe/applnk.h>
 
 /* QT */
@@ -287,15 +288,15 @@ void Gutenbrowser::toggleButtonIcons( bool useEm) {
 		odebug << "Docdir is "+QPEApplication::documentDir() << oendl;
 
 		if( useIcons && QDir( pixDir).exists() ) {
-				LibraryButton->setPixmap( Resource::loadPixmap("home") ); //in inline
-				OpenButton->setPixmap( Resource::loadPixmap("gutenbrowser/openbook"));
-				ForwardButton->setPixmap( Resource::loadPixmap("forward"));//in inline
-				BackButton->setPixmap( Resource::loadPixmap("back") );//in inline
-				SearchButton->setPixmap( Resource::loadPixmap("gutenbrowser/search") );//in inline
-				lastBmkButton->setPixmap( Resource::loadPixmap("gutenbrowser/bookmark_folder"));
-				setBookmarkButton->setPixmap( Resource::loadPixmap("gutenbrowser/bookmark") );
-				dictionaryButton->setPixmap( Resource::loadPixmap("gutenbrowser/spellcheck") );
-				InfoBar->setPixmap( Resource::loadPixmap("gutenbrowser/google"));
+                LibraryButton->setPixmap( Opie::Core::OResource::loadPixmap("home", Opie::Core::OResource::SmallIcon ) );
+                OpenButton->setPixmap( Opie::Core::OResource::loadPixmap("gutenbrowser/openbook", Opie::Core::OResource::SmallIcon ));
+                ForwardButton->setPixmap( Opie::Core::OResource::loadPixmap("forward", Opie::Core::OResource::SmallIcon ));
+                BackButton->setPixmap( Opie::Core::OResource::loadPixmap("back", Opie::Core::OResource::SmallIcon ) );
+                SearchButton->setPixmap( Opie::Core::OResource::loadPixmap("gutenbrowser/search", Opie::Core::OResource::SmallIcon ) );
+                lastBmkButton->setPixmap( Opie::Core::OResource::loadPixmap("gutenbrowser/bookmark_folder", Opie::Core::OResource::SmallIcon ));
+                setBookmarkButton->setPixmap( Opie::Core::OResource::loadPixmap("gutenbrowser/bookmark", Opie::Core::OResource::SmallIcon ) );
+                dictionaryButton->setPixmap( Opie::Core::OResource::loadPixmap("gutenbrowser/spellcheck", Opie::Core::OResource::SmallIcon ) );
+                InfoBar->setPixmap( Opie::Core::OResource::loadPixmap("gutenbrowser/google", Opie::Core::OResource::SmallIcon ));
 		}
 }
 
@@ -1771,7 +1772,8 @@ void Gutenbrowser::fillWithTitles() {
 				config.setGroup( "Titles" );
 				temp = config.readEntry(ramble, "");
 				if( !temp.isEmpty()) {
-						mainList->insertItem (  Resource::loadPixmap("gutenbrowser/gutenbrowser_sm"), temp, -1);
+                    mainList->insertItem ( Opie::Core::OResource::loadPixmap("gutenbrowser/gutenbrowser_sm",
+                                           Opie::Core::OResource::SmallIcon ), temp, -1);
 				}
 		}
 }
@@ -1920,7 +1922,8 @@ void Gutenbrowser::menuEditTitle()
 									//odebug << titleEdit->newTitle << oendl;
 								config.writeEntry( s_filename, titleEdit->newTitle);
 								mainList->removeItem(currentItem);
-								mainList->insertItem (  Resource::loadPixmap("gutenbrowser/gutenbrowser_sm"), titleEdit->newTitle, currentItem);
+        mainList->insertItem ( Opie::Core::OResource::loadPixmap("gutenbrowser/gutenbrowser_sm",
+                               Opie::Core::OResource::SmallIcon ), titleEdit->newTitle, currentItem);
 						}
 				}
 		}

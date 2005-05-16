@@ -18,6 +18,8 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
+
 #include <qpe/config.h>
 #include <qpe/fontdatabase.h>
 #include <qpe/menubutton.h>
@@ -171,33 +173,33 @@ void Gutenbrowser::initMenuBar()
     menubar = new QPEMenuBar(this);
 
     fileMenu=new QPopupMenu();
-    fileMenu->insertItem(Resource::loadPixmap("gutenbrowser/openbook"),
+    fileMenu->insertItem( Opie::Core::OResource::loadPixmap("gutenbrowser/openbook", Opie::Core::OResource::SmallIcon ),
                          "Open Local Library...", this, SLOT( OpenBtn()) );
 //    fileMenu->insertItem("Download FTPSite", this, SLOT( downloadFtpList()) );
-    fileMenu->insertItem( Resource::loadPixmap("home"),
+    fileMenu->insertItem( Opie::Core::OResource::loadPixmap("home", Opie::Core::OResource::SmallIcon ),
                           "Download Library Index", this, SLOT( downloadLibIndex()) );
-    fileMenu->insertItem( Resource::loadPixmap("quit"),
+    fileMenu->insertItem( Opie::Core::OResource::loadPixmap("quit", Opie::Core::OResource::SmallIcon ),
                           "Quit Gutenbrowser...", this, SLOT( ByeBye()) );
       // menuBar entry editMenu
 
     editMenu=new QPopupMenu();
 
-    editMenu->insertItem(Resource::loadPixmap("up"), "Top",
+    editMenu->insertItem( Opie::Core::OResource::loadPixmap("up", Opie::Core::OResource::SmallIcon ), "Top",
                                                  this, SLOT(TopBtn()) );
-    editMenu->insertItem( Resource::loadPixmap("back"), "Beginning",
+    editMenu->insertItem( Opie::Core::OResource::loadPixmap("back", Opie::Core::OResource::SmallIcon ), "Beginning",
                           this, SLOT(doBeginBtn()) );
-    editMenu->insertItem( Resource::loadPixmap("gutenbrowser/search"), "Search",
+    editMenu->insertItem( Opie::Core::OResource::loadPixmap("gutenbrowser/search", Opie::Core::OResource::SmallIcon ), "Search",
                           this, SLOT(SearchBtn()) );
 
     editMenu->insertItem("Clear", this, SLOT(ClearEdit()) );
 
     optionsMenu= new QPopupMenu();
-    optionsMenu->insertItem( Resource::loadPixmap("gutenbrowser/configure"),
+    optionsMenu->insertItem( Opie::Core::OResource::loadPixmap("gutenbrowser/configure", Opie::Core::OResource::SmallIcon ),
                              "Configure", this, SLOT(doOptions()) );
 
     donateMenu = new QPopupMenu();
 //     donateMenu->insertItem("Gutenberg", this, SLOT(donateGutenberg()) );
-    donateMenu->insertItem( Resource::loadPixmap("gutenbrowser/gutenbrowser_sm"),
+    donateMenu->insertItem( Opie::Core::OResource::loadPixmap("gutenbrowser/gutenbrowser_sm", Opie::Core::OResource::SmallIcon ),
                             "Gutenbrowser Developer", this, SLOT(infoGutenbrowser()) );
 
     menubar->insertItem("File", fileMenu);
