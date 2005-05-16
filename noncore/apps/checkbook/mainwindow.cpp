@@ -1,26 +1,26 @@
 /*
-                             This file is part of the OPIE Project
+                     This file is part of the OPIE Project
                =.
-             .=l.            Copyright (c)  2002 Dan Williams <drw@handhelds.org>
-           .>+-=
- _;:,     .>    :=|.         This file is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This file is distributed in the hope that
-     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
-..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:
- :     =  ...= . :.=-        You should have received a copy of the GNU
- -.   .:....=;==+<;          General Public License along with this file;
-  -_. . .   )=.  =           see the file COPYING. If not, write to the
-    --        :-=`           Free Software Foundation, Inc.,
+      .=l.            Copyright (c)  2002 Dan Williams <drw@handhelds.org>
+     .>+-=
+_;:,   .>  :=|.         This file is free software; you can
+.> <`_,  > .  <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This file is distributed in the hope that
+  + . -:.    =       it will be useful, but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=    =    ;      Public License for more details.
+++=  -.   .`   .:
+:   = ...= . :.=-        You should have received a copy of the GNU
+-.  .:....=;==+<;          General Public License along with this file;
+ -_. . .  )=. =           see the file COPYING. If not, write to the
+  --    :-=`           Free Software Foundation, Inc.,
                              59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
@@ -32,15 +32,16 @@
 #include "password.h"
 #include "checkbook.h"
 
+#include <opie2/oresource.h>
+
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpemessagebox.h>
-#include <qtoolbar.h>
-#include <qpe/resource.h>
 
-#include <qmenubar.h>
 #include <qaction.h>
 #include <qdir.h>
+#include <qmenubar.h>
+#include <qtoolbar.h>
 #include <qwhatsthis.h>
 
 
@@ -50,7 +51,7 @@ MainWindow::MainWindow( QWidget* parent, const char* name, WFlags /*fl*/ )
     setCaption( tr( "Checkbook" ) );
 
     cbDir = Global::applicationFileName( "checkbook", "" );
-    lockIcon = Resource::loadPixmap( "locked" );
+    lockIcon = Opie::Core::OResource::loadPixmap( "locked", Opie::Core::OResource::SmallIcon );
 
     // Load configuration options
     Config config( "checkbook" );
@@ -67,21 +68,22 @@ MainWindow::MainWindow( QWidget* parent, const char* name, WFlags /*fl*/ )
     QPopupMenu *popup = new QPopupMenu( this );
 
     bar = new QToolBar( this );
-    QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( tr( "New" ), Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
+                              QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to create a new checkbook.\n\nYou also can select New from the Checkbook menu." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( slotNew() ) );
     a->addTo( popup );
     a->addTo( bar );
 
-    actionOpen = new QAction( tr( "Edit" ), Resource::loadPixmap( "edit" ), QString::null,
-                              0, this, 0 );
+    actionOpen = new QAction( tr( "Edit" ), Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ),
+                              QString::null, 0, this, 0 );
     actionOpen->setWhatsThis( tr( "Select a checkbook and then click here to edit it.\n\nYou also can select Edit from the Checkbook menu, or click and hold on a checkbook name." ) );
     connect( actionOpen, SIGNAL( activated() ), this, SLOT( slotEdit() ) );
     actionOpen->addTo( popup );
     actionOpen->addTo( bar );
 
-    actionDelete = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ), QString::null,
-                                0, this, 0 );
+    actionDelete = new QAction( tr( "Delete" ), Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon ),
+                                QString::null, 0, this, 0 );
     actionDelete->setWhatsThis( tr( "Select a checkbook and then click here delete it.\n\nYou also can select Delete from the Checkbook menu." ) );
     connect( actionDelete, SIGNAL( activated() ), this, SLOT( slotDelete() ) );
     actionDelete->addTo( popup );
@@ -89,7 +91,8 @@ MainWindow::MainWindow( QWidget* parent, const char* name, WFlags /*fl*/ )
 
     popup->insertSeparator();
 
-    a = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Configure" ), Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to configure this app." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( slotConfigure() ) );
     a->addTo( popup );
@@ -156,7 +159,7 @@ void MainWindow::buildList()
 
     if ( _cfg.getShowLocks() )
     {
-        cbList->addColumn( Resource::loadIconSet( "locked" ), "", 24 );
+        cbList->addColumn( lockIcon, "", 24 );
         posName = 1;
     }
     else

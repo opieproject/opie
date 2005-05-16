@@ -1,26 +1,26 @@
 /*
-                             This file is part of the OPIE Project
+                     This file is part of the OPIE Project
                =.
-             .=l.            Copyright (c)  2002 Dan Williams <drw@handhelds.org>
-           .>+-=
- _;:,     .>    :=|.         This file is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This file is distributed in the hope that
-     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
-..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:
- :     =  ...= . :.=-        You should have received a copy of the GNU
- -.   .:....=;==+<;          General Public License along with this file;
-  -_. . .   )=.  =           see the file COPYING. If not, write to the
-    --        :-=`           Free Software Foundation, Inc.,
+      .=l.            Copyright (c)  2002 Dan Williams <drw@handhelds.org>
+     .>+-=
+_;:,   .>  :=|.         This file is free software; you can
+.> <`_,  > .  <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This file is distributed in the hope that
+  + . -:.    =       it will be useful, but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=    =    ;      Public License for more details.
+++=  -.   .`   .:
+:   = ...= . :.=-        You should have received a copy of the GNU
+-.  .:....=;==+<;          General Public License along with this file;
+ -_. . .  )=. =           see the file COPYING. If not, write to the
+  --    :-=`           Free Software Foundation, Inc.,
                              59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
@@ -35,9 +35,11 @@
 #include "password.h"
 #include "cfg.h"
 
+#include <opie2/oresource.h>
+
+#include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpemessagebox.h>
-#include <qpe/resource.h>
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
@@ -247,17 +249,23 @@ QWidget *Checkbook::initTransactions()
     _sortCol=COL_ID;
 
     // Buttons
-    QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), control );
+    QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
+                                        tr( "New" ), control );
+    btn->setFixedHeight( AppLnk::smallIconSize()+4 );
     QWhatsThis::add( btn, tr( "Click here to add a new transaction." ) );
     connect( btn, SIGNAL( clicked() ), this, SLOT( slotNewTran() ) );
     layout->addWidget( btn, 2, 0 );
 
-    btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Edit" ), control );
+    btn = new QPushButton( Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ),
+                           tr( "Edit" ), control );
+    btn->setFixedHeight( AppLnk::smallIconSize()+4 );
     QWhatsThis::add( btn, tr( "Select a transaction and then click here to edit it." ) );
     connect( btn, SIGNAL( clicked() ), this, SLOT( slotEditTran() ) );
     layout->addWidget( btn, 2, 1 );
 
-    btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), control );
+    btn = new QPushButton( Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon ),
+                           tr( "Delete" ), control );
+    btn->setFixedHeight( AppLnk::smallIconSize()+4 );
     QWhatsThis::add( btn, tr( "Select a checkbook and then click here to delete it." ) );
     connect( btn, SIGNAL( clicked() ), this, SLOT( slotDeleteTran() ) );
     layout->addWidget( btn, 2, 2 );
@@ -289,7 +297,9 @@ QWidget *Checkbook::initCharts()
 
     layout->addMultiCellWidget( graphList, 1, 1, 0, 1 );
 
-    QPushButton *btn = new QPushButton( Resource::loadPixmap( "checkbook/drawbtn" ), tr( "Draw" ), control );
+    QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "checkbook/drawbtn", Opie::Core::OResource::SmallIcon ),
+                                        tr( "Draw" ), control );
+    btn->setFixedHeight( AppLnk::smallIconSize()+4 );
     QWhatsThis::add( btn, tr( "Click here to draw the selected chart." ) );
     connect( btn, SIGNAL( clicked() ), this, SLOT( slotDrawGraph() ) );
     layout->addWidget( btn, 1, 2 );
