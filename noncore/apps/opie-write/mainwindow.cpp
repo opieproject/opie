@@ -23,9 +23,9 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <qpe/fileselector.h>
 #include <qpe/applnk.h>
-#include <qpe/resource.h>
 #include <qpe/fontdatabase.h>
 using namespace Opie::Core;
 
@@ -168,21 +168,23 @@ void MainWindow::setupActions()
     //     IPaq keys defined???
     QAction *a;
 
-    a = new QAction( tr( "New" ), Resource::loadPixmap("new"), QString::null, 0, this, 0 );
+    a = new QAction( tr( "New" ), Opie::Core::OResource::loadPixmap("new", Opie::Core::OResource::SmallIcon),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(fileNew()) );
     a->addTo( file );
 
-    a = new QAction( tr( "Open" ), Resource::loadPixmap( "fileopen" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Open" ), Opie::Core::OResource::loadPixmap( "fileopen", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(fileOpen()) );
     a->addTo( file );
 
-    a = new QAction( tr( "Undo" ), Resource::loadIconSet("undo"),
-         QString::null, 0, this, "editUndo" );
+    a = new QAction( tr( "Undo" ), Opie::Core::OResource::loadPixmap("undo", Opie::Core::OResource::SmallIcon),
+                     QString::null, 0, this, "editUndo" );
     connect( a, SIGNAL( activated() ), this, SLOT( editUndo() ) );
     connect( editor, SIGNAL(undoAvailable(bool)), a, SLOT(setEnabled(bool)) );
     a->addTo( tbEdit );
     a->addTo( edit );
-    a = new QAction( tr( "Redo" ), Resource::loadIconSet("redo"),
+    a = new QAction( tr( "Redo" ), Opie::Core::OResource::loadPixmap("redo", Opie::Core::OResource::SmallIcon),
          QString::null, 0, this, "editRedo" );
     connect( a, SIGNAL( activated() ), this, SLOT( editRedo() ) );
     connect( editor, SIGNAL(redoAvailable(bool)), a, SLOT(setEnabled(bool)) );
@@ -191,19 +193,19 @@ void MainWindow::setupActions()
 
     edit->insertSeparator();
 
-    a = new QAction( tr( "Copy" ), Resource::loadIconSet("copy"),
+    a = new QAction( tr( "Copy" ), Opie::Core::OResource::loadPixmap("copy", Opie::Core::OResource::SmallIcon ),
          QString::null, 0, this, "editCopy" );
     connect( a, SIGNAL( activated() ), this, SLOT( editCopy() ) );
     connect( editor, SIGNAL(copyAvailable(bool)), a, SLOT(setEnabled(bool)) );
     a->addTo( tbEdit );
     a->addTo( edit );
-    a = new QAction( tr( "Cut" ), Resource::loadIconSet("cut"),
+    a = new QAction( tr( "Cut" ), Opie::Core::OResource::loadPixmap("cut", Opie::Core::OResource::SmallIcon ),
          QString::null, 0, this, "editCut" );
     connect( a, SIGNAL( activated() ), this, SLOT( editCut() ) );
     connect( editor, SIGNAL(copyAvailable(bool)), a, SLOT(setEnabled(bool)) );
     a->addTo( tbEdit );
     a->addTo( edit );
-    a = new QAction( tr( "Paste" ), Resource::loadPixmap("paste"),
+    a = new QAction( tr( "Paste" ), Opie::Core::OResource::loadPixmap("paste", Opie::Core::OResource::SmallIcon ),
          QString::null, 0, this, "editPaste" );
     connect( a, SIGNAL( activated() ), this, SLOT( editPaste() ) );
     a->addTo( tbEdit );
@@ -236,34 +238,37 @@ void MainWindow::setupActions()
     tbStyle->setLabel( "Style Actions" );
 
     actionTextBold = new QAction( tr( "Bold" ),
-          Resource::loadPixmap("bold"),
-          QString::null, CTRL + Key_B,
-          this, "textBold" );
+                                  Opie::Core::OResource::loadPixmap("bold", Opie::Core::OResource::SmallIcon ),
+                                  QString::null, CTRL + Key_B,
+                                  this, "textBold" );
     connect( actionTextBold, SIGNAL( activated() ), this, SLOT( textBold() ) );
     actionTextBold->addTo( tbStyle );
     actionTextBold->setToggleAction( TRUE );
     actionTextItalic = new QAction( tr( "Italic" ),
-            Resource::loadPixmap("italic"),
-            tr( "&Italic" ), CTRL + Key_I,
-            this, "textItalic" );
+                                    Opie::Core::OResource::loadPixmap("italic", Opie::Core::OResource::SmallIcon ),
+                                    tr( "&Italic" ), CTRL + Key_I,
+                                    this, "textItalic" );
     connect( actionTextItalic, SIGNAL( activated() ), this,
        SLOT( textItalic() ) );
     actionTextItalic->addTo( tbStyle );
     actionTextItalic->setToggleAction( TRUE );
     actionTextUnderline = new QAction( tr( "Underline" ),
-               Resource::loadPixmap("underline"),
-               tr( "&Underline" ), CTRL + Key_U,
-               this, "textUnderline" );
+                                       Opie::Core::OResource::loadPixmap("underline", Opie::Core::OResource::SmallIcon ),
+                                       tr( "&Underline" ), CTRL + Key_U,
+                                       this, "textUnderline" );
     connect( actionTextUnderline, SIGNAL( activated() ),
        this, SLOT( textUnderline() ) );
     actionTextUnderline->addTo( tbStyle );
     actionTextUnderline->setToggleAction( TRUE );
 
     alignMenu = new ButtonMenu( tbStyle );
-    alignMenu->insertItem( Resource::loadPixmap("left"), tr("Left"), AlignLeft );
-    alignMenu->insertItem( Resource::loadPixmap("center"), tr("Center"), AlignCenter );
-    alignMenu->insertItem( Resource::loadPixmap("right"), tr("Right"), AlignRight );
-    alignMenu->insertItem( Resource::loadPixmap("opie-write/justify"), tr("Full"), Qt3::AlignJustify );
+    alignMenu->insertItem( Opie::Core::OResource::loadPixmap("left", Opie::Core::OResource::SmallIcon), tr("Left"), AlignLeft );
+    alignMenu->insertItem( Opie::Core::OResource::loadPixmap("center", Opie::Core::OResource::SmallIcon),
+                           tr("Center"), AlignCenter );
+    alignMenu->insertItem( Opie::Core::OResource::loadPixmap("right", Opie::Core::OResource::SmallIcon),
+                           tr("Right"), AlignRight );
+    alignMenu->insertItem( Opie::Core::OResource::loadPixmap("opie-write/justify", Opie::Core::OResource::SmallIcon),
+                           tr("Full"), Qt3::AlignJustify );
     connect( alignMenu, SIGNAL(activated(int)), this, SLOT(textAlign(int)) );
 }
 
