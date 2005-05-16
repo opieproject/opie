@@ -17,7 +17,7 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 
 #include "opentextdlg.h"
 
-#include <qpe/resource.h>
+#include <qpe/applnk.h>
 
 #include <qheader.h>
 #include <qlayout.h>
@@ -35,7 +35,7 @@ OpenTextDlg::OpenTextDlg( QWidget *parent, sword::SWMgr *swordMgr, QPixmap *bibl
     layout->addWidget( &m_textList );
 
     m_textList.setRootIsDecorated( true );
-    m_textList.addColumn( tr( "Icon" ),35 );
+    m_textList.addColumn( tr( "Icon" ) );
     m_textList.addColumn( tr( "Text" ) );
     m_textList.header()->hide();
     m_textList.setAllColumnsShowFocus( true );

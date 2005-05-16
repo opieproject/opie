@@ -26,19 +26,19 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 #include <qlineedit.h>
 #include <qwhatsthis.h>
 
-using Opie::Core::OResource;
-
 NavBar::NavBar( QMainWindow *parent )
     : QToolBar( QString::null, parent, QMainWindow::Top, true )
 {
     // Initialize UI
-    m_actionPrevPage = new QAction( tr( "Previous page" ), OResource::loadPixmap( "fastback", OResource::SmallIcon ),
+    m_actionPrevPage = new QAction( tr( "Previous page" ),
+                                    Opie::Core::OResource::loadPixmap( "fastback", Opie::Core::OResource::SmallIcon ),
                                        QString::null, 0, this, 0 );
     m_actionPrevPage->setWhatsThis( tr( "Tap here to scroll backward one page." ) );
     m_actionPrevPage->addTo( this );
     connect( m_actionPrevPage, SIGNAL(activated()), this, SIGNAL(prevPage()) );
 
-    m_actionPrevVerse = new QAction( tr( "Previous verse" ), OResource::loadPixmap( "back", OResource::SmallIcon ),
+    m_actionPrevVerse = new QAction( tr( "Previous verse" ),
+                                     Opie::Core::OResource::loadPixmap( "back", Opie::Core::OResource::SmallIcon ),
                                      QString::null, 0, this, 0 );
     m_actionPrevVerse->setWhatsThis( tr( "Tap here to scroll backward one verse." ) );
     m_actionPrevVerse->addTo( this );
@@ -49,14 +49,16 @@ NavBar::NavBar( QMainWindow *parent )
     QWhatsThis::add( m_key, tr( "Enter location to display here." ) );
     connect(m_key, SIGNAL(textChanged(const QString &)), this, SIGNAL(keyChanged(const QString &)) );
 
-    m_actionNextVerse = new QAction( tr( "Next verse" ), OResource::loadPixmap( "forward", OResource::SmallIcon ),
+    m_actionNextVerse = new QAction( tr( "Next verse" ),
+                                     Opie::Core::OResource::loadPixmap( "forward", Opie::Core::OResource::SmallIcon ),
                                      QString::null, 0, this, 0 );
     m_actionNextVerse->setWhatsThis( tr( "Tap here to scroll forward one verse." ) );
     m_actionNextVerse->addTo( this );
     connect( m_actionNextVerse, SIGNAL(activated()), this, SIGNAL(nextVerse()) );
 
-    m_actionNextPage = new QAction( tr( "Next page" ), OResource::loadPixmap( "fastforward", OResource::SmallIcon ),
-                                       QString::null, 0, this, 0 );
+    m_actionNextPage = new QAction( tr( "Next page" ),
+                                    Opie::Core::OResource::loadPixmap( "fastforward", Opie::Core::OResource::SmallIcon ),
+                                    QString::null, 0, this, 0 );
     m_actionNextPage->setWhatsThis( tr( "Tap here to scroll forward one page." ) );
     m_actionNextPage->addTo( this );
     connect( m_actionNextPage, SIGNAL(activated()), this, SIGNAL(nextPage()) );
@@ -68,7 +70,8 @@ NavBar::NavBar( QMainWindow *parent )
     QWhatsThis::add( m_scrollRate, tr( "Adjust auto-scroll rate here.  A larger value represents a slower scrolling rate." ) );
     connect( m_scrollRate, SIGNAL(valueChanged(int)), this, SIGNAL(scrollRateChanged(int)) );
 
-    m_actionScroll = new QAction( tr( "Auto-scroll" ), OResource::loadPixmap( "dagger/autoscroll", OResource::SmallIcon ),
+    m_actionScroll = new QAction( tr( "Auto-scroll" ),
+                                  Opie::Core::OResource::loadPixmap( "dagger/autoscroll", Opie::Core::OResource::SmallIcon ),
                                   QString::null, 0, this, 0 );
     m_actionScroll->setToggleAction( true );
     m_actionScroll->setWhatsThis( tr( "Tap here to start or stop auto-scrolling." ) );

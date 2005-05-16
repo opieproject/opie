@@ -18,8 +18,7 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 #include "configuredlg.h"
 
 #include <opie2/ofiledialog.h>
-
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 #include <qlabel.h>
 #include <qlayout.h>
@@ -51,9 +50,8 @@ ConfigureDlg::ConfigureDlg( QWidget *parent, const QString &swordPath, bool alwa
     m_swordPath = new QLineEdit( swordPath, widget );
     QWhatsThis::add( m_swordPath, tr( "Enter the path where the Sword texts (Bibles, commentaries, etc.) can be found.  This path should contain either the 'mods.conf' file or 'mods.d' sub-directory." ) );
     grid->addWidget( m_swordPath, 1, 0 );
-    QPixmap pic;
-    pic.convertFromImage( Resource::loadImage( "folder" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    QPushButton *btn = new QPushButton( pic, QString::null, widget );
+    QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "folder", Opie::Core::OResource::SmallIcon ),
+                                        QString::null, widget );
     btn->setMaximumWidth( btn->height() );
     QWhatsThis::add( btn, tr( "Tap here to select the path where the Sword texts (Bibles, commentaries, etc.) can be found.  This path should contain either the 'mods.conf' file or 'mods.d' sub-directory." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotSelectSwordPath()) );
