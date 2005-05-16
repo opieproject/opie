@@ -1,8 +1,9 @@
 #ifndef OPIE_FUNCTION_KEYBOARD_H
 #define OPIE_FUNCTION_KEYBOARD_H
 
+#include <opie2/oresource.h>
+
 #include <qpe/config.h>
-#include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 #include <qframe.h>
 #include <qpainter.h>
@@ -22,7 +23,7 @@ struct FKey {
 
         if (!f.isEmpty()) {
 
-            pix = new QPixmap ( Resource::loadPixmap("console/keys/" + f ) );
+            pix = new QPixmap ( Opie::Core::OResource::loadPixmap("console/keys/" + f ) );
         }
     };
 

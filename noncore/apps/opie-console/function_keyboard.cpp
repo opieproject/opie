@@ -83,7 +83,7 @@ void FunctionKeyboard::load (const Profile& prof) {
                 // load pixmap if used
                 if (!l[1].isEmpty()) {
 
-                    keys[h].pix = new QPixmap( Resource::loadPixmap( "console/keys/" + l[1] ) );
+                    keys[h].pix = new QPixmap( Opie::Core::OResource::loadPixmap( "console/keys/" + l[1] ) );
                 }
             }
         }
@@ -277,8 +277,7 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
     QStringList files = QDir( QPEApplication::qpeDir() + "pics/console/keys/", "*.png").entryList();
 
     for (uint i = 0; i < files.count(); i++) {
-
-        m_labels->insertItem( Resource::loadPixmap("console/keys/" + files[i]), files[i]);
+        m_labels->insertItem( Opie::Core::OResource::loadPixmap("console/keys/" + files[i]), files[i]);
     }
     connect (m_labels, SIGNAL(activated(int)), this, SLOT(slotChangeIcon(int)));
     connect (m_labels, SIGNAL(textChanged(const QString&)), this, SLOT(slotChangeLabelText(const QString&)));
@@ -328,7 +327,7 @@ void FunctionKeyboardConfig::load (const Profile& prof) {
                 // load pixmap if used
                 if (!l[1].isEmpty()) {
 
-                    kb->keys[h].pix = new QPixmap( Resource::loadPixmap( "console/keys/" + l[1] ) );
+                    kb->keys[h].pix = new QPixmap( Opie::Core::OResource::loadPixmap( "console/keys/" + l[1] ) );
                 }
             }
         }
@@ -403,7 +402,7 @@ void FunctionKeyboardConfig::slotChangeIcon(int index) {
         // is a pixmap
         m_labels->setEditable(false);
         kb->keys[selectedHandle].pixFile = m_labels->currentText();
-        kb->keys[selectedHandle].pix = new QPixmap(  Resource::loadPixmap( "console/keys/" + m_labels->currentText() ) );
+        kb->keys[selectedHandle].pix = new QPixmap( Opie::Core::OResource::loadPixmap( "console/keys/" + m_labels->currentText() ) );
     }
     kb->paintKey(selectedRow, selectedCol);
 }

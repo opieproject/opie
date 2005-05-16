@@ -13,6 +13,7 @@
 
 /* OPIE */
 #include <opie2/ofiledialog.h>
+#include <opie2/oresource.h>
 #include <qpe/filemanager.h>
 using namespace Opie::Ui;
 
@@ -76,8 +77,8 @@ void MainWindow::initUI() {
      * the settings action
      */
     m_setProfiles = new QAction(tr("Configure Profiles"),
-                             Resource::loadPixmap( "SettingsIcon" ),
-                             QString::null, 0, this, 0);
+                                Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ),
+                                QString::null, 0, this, 0);
     m_setProfiles->addTo( m_console );
     connect( m_setProfiles, SIGNAL(activated() ),
              this, SLOT(slotConfigure() ) );
@@ -87,8 +88,8 @@ void MainWindow::initUI() {
      * new Action for new sessions
      */
     QAction* newCon = new QAction(tr("New Profile"),
-                             Resource::loadPixmap( "new" ),
-                             QString::null, 0, this, 0);
+                                  Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
+                                  QString::null, 0, this, 0);
     newCon->addTo( m_console );
     connect( newCon, SIGNAL(activated() ),
             this, SLOT(slotNew() ) );
@@ -96,8 +97,8 @@ void MainWindow::initUI() {
     m_console->insertSeparator();
 
     QAction *saveCon = new QAction( tr("Save Profile" ),
-                      Resource::loadPixmap( "save" ), QString::null,
-                    0, this, 0 );
+                                    Opie::Core::OResource::loadPixmap( "save", Opie::Core::OResource::SmallIcon ), QString::null,
+                                    0, this, 0 );
     saveCon->addTo( m_console );
     connect( saveCon, SIGNAL(activated() ),
             this, SLOT(slotSaveSession() ) );
@@ -106,8 +107,8 @@ void MainWindow::initUI() {
     /*
      * connect action
      */
-    m_connect = new QAction( tr("Connect"), Resource::loadPixmap("console/connected"),
-                             QString::null, 0, this, 0 );
+    m_connect = new QAction( tr("Connect"), Opie::Core::OResource::loadPixmap("console/connected",
+                             Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
     m_connect->addTo( m_console );
     connect(m_connect, SIGNAL(activated() ),
             this, SLOT(slotConnect() ) );
@@ -115,8 +116,8 @@ void MainWindow::initUI() {
     /*
      * disconnect action
      */
-    m_disconnect = new QAction( tr("Disconnect"), Resource::loadPixmap("console/notconnected"),
-                                QString::null, 0, this, 0 );
+    m_disconnect = new QAction( tr("Disconnect"), Opie::Core::OResource::loadPixmap("console/notconnected",
+                                Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
     m_disconnect->addTo( m_console );
     connect(m_disconnect, SIGNAL(activated() ),
             this, SLOT(slotDisconnect() ) );
@@ -124,7 +125,9 @@ void MainWindow::initUI() {
     m_console->insertSeparator();
 
 #ifndef EAST
-    m_quickLaunch = new QAction( tr("QuickLaunch"),  Resource::loadPixmap("console/konsole_mini"),  QString::null,  0,  this, 0 );
+    m_quickLaunch = new QAction( tr("QuickLaunch"),
+                                 Opie::Core::OResource::loadPixmap("console/konsole_mini", Opie::Core::OResource::SmallIcon ),
+                                 QString::null,  0,  this, 0 );
     m_quickLaunch->addTo( m_icons );
     connect( m_quickLaunch,  SIGNAL( activated() ),
              this,  SLOT( slotQuickLaunch() ) );
@@ -132,8 +135,8 @@ void MainWindow::initUI() {
 
     QWhatsThis::add( m_icons, tr( "The shell button launches the \"default\" profile. If there is none default values are taken" ) );
 
-    m_transfer = new QAction( tr("Transfer file..."), Resource::loadPixmap("pass") , QString::null,
-                    0, this, 0  );
+    m_transfer = new QAction( tr("Transfer file..."), Opie::Core::OResource::loadPixmap("pass", Opie::Core::OResource::SmallIcon ),
+                              QString::null, 0, this, 0  );
     m_transfer->addTo( m_console );
     connect(m_transfer, SIGNAL(activated() ),
             this, SLOT(slotTransfer() ) );
@@ -144,7 +147,8 @@ void MainWindow::initUI() {
      * immediate change of line wrap policy
      */
     m_isWrapped = true;
-    m_wrap = new QAction( tr("Line wrap"), Resource::loadPixmap( "linewrap" ), QString::null, 0, this, 0, true );
+    m_wrap = new QAction( tr("Line wrap"), Opie::Core::OResource::loadPixmap( "linewrap", Opie::Core::OResource::SmallIcon ),
+                          QString::null, 0, this, 0, true );
     m_wrap->addTo( m_console );
     m_wrap->setOn( true );
     connect( m_wrap, SIGNAL( activated() ), SLOT( slotWrap() ) );
@@ -154,8 +158,8 @@ void MainWindow::initUI() {
      */
     m_isFullscreen = false;
 
-    m_fullscreen = new QAction( tr("Full screen"), Resource::loadPixmap( "fullscreen" )
-                           , QString::null, 0, this, 0 );
+    m_fullscreen = new QAction( tr("Full screen"), Opie::Core::OResource::loadPixmap( "fullscreen",
+                                Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
     m_fullscreen->addTo( m_console );
     connect( m_fullscreen, SIGNAL( activated() ),
              this,  SLOT( slotFullscreen() ) );
@@ -211,7 +215,7 @@ void MainWindow::initUI() {
      * action that open/closes the keyboard
      */
     m_openKeys = new QAction (tr("Open Keyboard..."),
-                             Resource::loadPixmap( "console/keys/keyboard_icon" ),
+                              Opie::Core::OResource::loadPixmap( "console/keys/keyboard_icon", Opie::Core::OResource::SmallIcon ),
                              QString::null, 0, this, 0);
     m_openKeys->setToggleAction(true);
     connect (m_openKeys, SIGNAL(toggled(bool)), this, SLOT(slotOpenKeb(bool)));
@@ -244,14 +248,14 @@ void MainWindow::initUI() {
 
 
     a = new QAction(tr("Copy"),
-                    Resource::loadPixmap("copy"), QString::null,
+                    Opie::Core::OResource::loadPixmap("copy", Opie::Core::OResource::SmallIcon ), QString::null,
                     0, this, 0 );
     //a->addTo( m_icons );
     connect( a, SIGNAL(activated() ),
              this, SLOT(slotCopy() ) );
 
     QAction *paste = new QAction(tr("Paste"),
-                    Resource::loadPixmap("paste"), QString::null,
+                                 Opie::Core::OResource::loadPixmap("paste", Opie::Core::OResource::SmallIcon ), QString::null,
                     0, this, 0 );
     connect( paste, SIGNAL(activated() ),
              this, SLOT(slotPaste() ) );
