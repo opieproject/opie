@@ -34,7 +34,7 @@
 #include "mainwindow.h"
 
 /* OPIE */
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
@@ -289,18 +289,28 @@ void MainWindow::setDocument(const QString &applnk_filename)
 
 void MainWindow::initActions()
 {
-    fileNew=new QAction(tr("New File"), Resource::loadPixmap( "new" ), tr("&New"), 0, this);
+    fileNew=new QAction(tr("New File"),
+                        Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
+                        tr("&New"), 0, this);
     connect(fileNew, SIGNAL(activated()), this, SLOT(slotFileNew()));
-    fileOpen=new QAction(tr("Open File"), Resource::loadPixmap( "fileopen" ), tr("&Open"), 0, this);
+    fileOpen=new QAction(tr("Open File"),
+                         Opie::Core::OResource::loadPixmap( "fileopen", Opie::Core::OResource::SmallIcon ),
+                         tr("&Open"), 0, this);
     connect(fileOpen, SIGNAL(activated()), this, SLOT(slotFileOpen()));
-    fileSave=new QAction(tr("Save File"),Resource::loadPixmap( "save" ), tr("&Save"), 0, this);
+    fileSave=new QAction(tr("Save File"),
+                         Opie::Core::OResource::loadPixmap( "save", Opie::Core::OResource::SmallIcon ),
+                         tr("&Save"), 0, this);
     connect(fileSave, SIGNAL(activated()), this, SLOT(slotFileSave()));
-    fileSaveAs=new QAction(tr("Save File As"), Resource::loadPixmap( "save" ), tr("Save &As"), 0, this);
+    fileSaveAs=new QAction(tr("Save File As"),
+                           Opie::Core::OResource::loadPixmap( "save", Opie::Core::OResource::SmallIcon ),
+                           tr("Save &As"), 0, this);
     connect(fileSaveAs, SIGNAL(activated()), this, SLOT(slotFileSaveAs()));
 
     //fileQuit=new QAction(tr("Quit"), tr("&Quit"), 0, this);
     //connect(fileQuit, SIGNAL(activated()), this, SLOT(close()));
-    fileExcelImport=new QAction(tr("Import Excel file"),Resource::loadPixmap( "opie-sheet/excel16" ),tr("Import E&xcel file"),0,this);
+    fileExcelImport=new QAction(tr("Import Excel file"),
+                                Opie::Core::OResource::loadPixmap( "opie-sheet/excel16", Opie::Core::OResource::SmallIcon ),
+                                tr("Import E&xcel file"),0,this);
     connect(fileExcelImport, SIGNAL(activated()), this, SLOT(slotImportExcelOpen()));
 
     // helpGeneral=new QAction(tr("General Help"), QPixmap(help_general_xpm), tr("&General"), 0, this);
@@ -308,11 +318,17 @@ void MainWindow::initActions()
     //helpAbout=new QAction(tr("About Opie Sheet"), tr("&About"), 0, this);
     //connect(helpAbout, SIGNAL(activated()), this, SLOT(slotHelpAbout()));
 
-    editAccept=new QAction(tr("Accept"),Resource::loadPixmap( "enter" ) , tr("&Accept"), 0, this);
+    editAccept=new QAction(tr("Accept"),
+                           Opie::Core::OResource::loadPixmap( "enter", Opie::Core::OResource::SmallIcon ),
+                           tr("&Accept"), 0, this);
     connect(editAccept, SIGNAL(activated()), this, SLOT(slotEditAccept()));
-    editCancel=new QAction(tr("Cancel"), Resource::loadPixmap( "close" ), tr("&Cancel"), 0, this);
+    editCancel=new QAction(tr("Cancel"),
+                           Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ),
+                           tr("&Cancel"), 0, this);
     connect(editCancel, SIGNAL(activated()), this, SLOT(slotEditCancel()));
-    editCellSelect=new QAction(tr("Cell Selector"), Resource::loadPixmap( "opie-sheet/cell-select" ), tr("Cell &Selector"), 0, this);
+    editCellSelect=new QAction(tr("Cell Selector"),
+                               Opie::Core::OResource::loadPixmap( "opie-sheet/cell-select", Opie::Core::OResource::SmallIcon ),
+                               tr("Cell &Selector"), 0, this);
     editCellSelect->setToggleAction(TRUE);
     connect(editCellSelect, SIGNAL(toggled(bool)), this, SLOT(slotCellSelect(bool)));
     editCut=new QAction(tr("Cut Cells"), tr("Cu&t"), 0, this);
@@ -363,28 +379,44 @@ void MainWindow::initActions()
     dataFindReplace=new QAction(tr("Find && Replace"), tr("&Find && Replace"), 0, this);
     connect(dataFindReplace, SIGNAL(activated()), this, SLOT(slotDataFindReplace()));
 
-    funcEqual=new QAction(tr("Equal To"), Resource::loadPixmap( "opie-sheet/func-equal" ), tr("&Equal To"), 0, this);
+    funcEqual=new QAction(tr("Equal To"),
+                          Opie::Core::OResource::loadPixmap( "opie-sheet/func-equal", Opie::Core::OResource::SmallIcon ),
+                          tr("&Equal To"), 0, this);
     funcEqual->setToolTip("=");
     connect(funcEqual, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-    funcPlus=new QAction(tr("Addition"), Resource::loadPixmap( "opie-sheet/func-plus" ), tr("&Addition"), 0, this);
+    funcPlus=new QAction(tr("Addition"),
+                         Opie::Core::OResource::loadPixmap( "opie-sheet/func-plus", Opie::Core::OResource::SmallIcon ),
+                         tr("&Addition"), 0, this);
     funcPlus->setToolTip("+");
     connect(funcPlus, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-    funcMinus=new QAction(tr("Subtraction"), Resource::loadPixmap( "opie-sheet/func-minus" ), tr("&Subtraction"), 0, this);
+    funcMinus=new QAction(tr("Subtraction"),
+                          Opie::Core::OResource::loadPixmap( "opie-sheet/func-minus", Opie::Core::OResource::SmallIcon ),
+                          tr("&Subtraction"), 0, this);
     funcMinus->setToolTip("-");
     connect(funcMinus, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-    funcCross=new QAction(tr("Multiplication"), Resource::loadPixmap ("opie-sheet/func-cross" ), tr("&Multiplication"), 0, this);
+    funcCross=new QAction(tr("Multiplication"),
+                          Opie::Core::OResource::loadPixmap ("opie-sheet/func-cross", Opie::Core::OResource::SmallIcon ),
+                          tr("&Multiplication"), 0, this);
     funcCross->setToolTip("*");
     connect(funcCross, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-    funcDivide=new QAction(tr("Division"), Resource::loadPixmap( "opie-sheet/func-divide" ), tr("&Division"), 0, this);
+    funcDivide=new QAction(tr("Division"),
+                           Opie::Core::OResource::loadPixmap( "opie-sheet/func-divide", Opie::Core::OResource::SmallIcon ),
+                           tr("&Division"), 0, this);
     funcDivide->setToolTip("/");
     connect(funcDivide, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-    funcParanOpen=new QAction(tr("Open ParanthesistempCellData->row+row1, tempCellData->col+col1"), Resource::loadPixmap( "opie-sheet/func-paran-open" ), tr("&Open Paranthesis"), 0, this);
+    funcParanOpen=new QAction(tr("Open ParanthesistempCellData->row+row1, tempCellData->col+col1"),
+                              Opie::Core::OResource::loadPixmap( "opie-sheet/func-paran-open", Opie::Core::OResource::SmallIcon ),
+                              tr("&Open Paranthesis"), 0, this);
     funcParanOpen->setToolTip("(");
     connect(funcParanOpen, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-    funcParanClose=new QAction(tr("Close Paranthesis"), Resource::loadPixmap( "opie-sheet/func-paran-close" ), tr("&Close Paranthesis"), 0, this);
+    funcParanClose=new QAction(tr("Close Paranthesis"),
+                               Opie::Core::OResource::loadPixmap( "opie-sheet/func-paran-close", Opie::Core::OResource::SmallIcon ),
+                               tr("&Close Paranthesis"), 0, this);
     funcParanClose->setToolTip(")");
     connect(funcParanClose, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
-    funcComma=new QAction(tr("Comma"), Resource::loadPixmap( "opie-sheet/func-comma" ), tr("&Comma"), 0, this);
+    funcComma=new QAction(tr("Comma"),
+                          Opie::Core::OResource::loadPixmap( "opie-sheet/func-comma", Opie::Core::OResource::SmallIcon ),
+                          tr("&Comma"), 0, this);
     funcComma->setToolTip(",");
     connect(funcComma, SIGNAL(activated()), this, SLOT(slotFuncOutput()));
 }
@@ -620,7 +652,8 @@ void MainWindow::initFunctionsToolbar()
     funcComma->addTo(toolbarFunctions);
 
     toolFunction=new QToolButton(toolbarFunctions);
-    toolFunction->setPixmap(Resource::loadPixmap( "opie-sheet/func-func" ));
+    toolFunction->setUsesBigPixmap( qApp->desktop()->size().width() > 330 );
+    toolFunction->setPixmap(Opie::Core::OResource::loadPixmap( "opie-sheet/func-func", Opie::Core::OResource::SmallIcon ));
     toolFunction->setTextLabel(tr("Functions"));
     toolFunction->setPopup(submenuFunc);
     toolFunction->setPopupDelay(0);
