@@ -23,7 +23,7 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/ofiledialog.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
@@ -55,28 +55,33 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     QPopupMenu *popup = new QPopupMenu( this );
 
     // Action for creating a new document
-    QAction *a = new QAction( tr( "New" ),  Resource::loadPixmap( "new" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( tr( "New" ), Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
+                              QString::null, 0, this, 0 );
     a->addTo( popup );
     connect(a, SIGNAL(activated()), this, SLOT(slotNew()));
 
     // Action for opening an exisiting document
-    a = new QAction( tr( "Open" ),Resource::loadPixmap( "fileopen" ) , QString::null, 0, this, 0 );
+    a = new QAction( tr( "Open" ), Opie::Core::OResource::loadPixmap( "fileopen", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->addTo(popup);
     connect(a, SIGNAL(activated()), this, SLOT(slotOpen()));
 
 
     // Action for saving  document
-    a = new QAction( tr( "Save" ), Resource::loadPixmap( "save" ) , QString::null, 0, this, 0 );
+    a = new QAction( tr( "Save" ), Opie::Core::OResource::loadPixmap( "save", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->addTo(popup);
     connect(a, SIGNAL(activated()), this, SLOT(slotSave()));
 
     // Action for saving document to a new name
-    a = new QAction( tr( "Save As" ),Resource::loadPixmap( "save" ) , QString::null, 0, this, 0 );
+    a = new QAction( tr( "Save As" ), Opie::Core::OResource::loadPixmap( "save", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->addTo(popup);
     connect(a, SIGNAL(activated()), this, SLOT(slotSaveAs()));
 
     // Action for closing the currently active document
-    a = new QAction( tr( "Close" ), Resource::loadPixmap( "quit_icon" ) , QString::null, 0, this, 0 );
+    a = new QAction( tr( "Close" ), Opie::Core::OResource::loadPixmap( "quit_icon", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->addTo(popup);
     connect(a, SIGNAL(activated()), this, SLOT(slotClose()));
 
@@ -84,36 +89,43 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     mb->insertItem(tr("File"),popup);
 
     //EDIT ACTIONS
+    bool useBigIcon = qApp->desktop()->size().width() > 330;
 
     // Action for cutting text
     editCut = new QToolButton( 0 );
+    editCut->setUsesBigPixmap( useBigIcon );
     editCut->setAutoRaise( true );
-    editCut->setIconSet(  Resource::loadPixmap( "cut" ) );
+    editCut->setIconSet( Opie::Core::OResource::loadPixmap( "cut", Opie::Core::OResource::SmallIcon ) );
 
     // Action for Copying text
     editCopy = new QToolButton( 0 );
+    editCopy->setUsesBigPixmap( useBigIcon );
     editCopy->setAutoRaise( true );
-    editCopy->setIconSet( Resource::loadPixmap( "copy" ) );
+    editCopy->setIconSet( Opie::Core::OResource::loadPixmap( "copy", Opie::Core::OResource::SmallIcon ) );
 
     // Action for pasting text
     editPaste =  new QToolButton( 0 );
+    editPaste->setUsesBigPixmap( useBigIcon );
     editPaste->setAutoRaise( true );
-    editPaste->setIconSet( Resource::loadPixmap( "paste" ) );
+    editPaste->setIconSet( Opie::Core::OResource::loadPixmap( "paste", Opie::Core::OResource::SmallIcon ) );
 
     // Action for finding / replacing  text
     editFindReplace = new QToolButton( 0 );
+    editFindReplace->setUsesBigPixmap( useBigIcon );
     editFindReplace->setAutoRaise( true );
-    editFindReplace->setIconSet( Resource::loadPixmap("find") );
+    editFindReplace->setIconSet( Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ) );
 
     // Action for undo
     editUndo = new QToolButton( 0 );
+    editUndo->setUsesBigPixmap( useBigIcon );
     editUndo->setAutoRaise( true );
-    editUndo->setIconSet( Resource::loadPixmap( "undo" ) );
+    editUndo->setIconSet( Opie::Core::OResource::loadPixmap( "undo", Opie::Core::OResource::SmallIcon ) );
 
     // Action for redo
     editRedo = new QToolButton( 0 );
+    editRedo->setUsesBigPixmap( useBigIcon );
     editRedo->setAutoRaise( true );
-    editRedo->setIconSet( Resource::loadPixmap( "redo" ) );
+    editRedo->setIconSet( Opie::Core::OResource::loadPixmap( "redo", Opie::Core::OResource::SmallIcon ) );
 
     //VIEW ACITONS
     popup = new QPopupMenu( this );
@@ -148,7 +160,9 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     popup->insertItem(tr("Highlighting"),hlmenu);
 
 
-    utilSettings = new QAction( tr( "Settings" ), QString::null, 0, this, 0 );
+    utilSettings = new QAction( tr( "Settings" ),
+                                Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ),
+                                QString::null, 0, this, 0 );
     utilSettings->addTo( popup);
 
     if( qApp->argc() > 1) open(qApp->argv()[1]);

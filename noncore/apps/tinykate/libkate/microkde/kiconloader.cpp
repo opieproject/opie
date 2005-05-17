@@ -1,10 +1,10 @@
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 #include "kiconloader.h"
 
 QPixmap KIconLoader::loadIcon( const QString &name, int )
 {
-  return Resource::loadPixmap( "kate/" + name );
+    return Opie::Core::OResource::loadPixmap( "kate/" + name, Opie::Core::OResource::SmallIcon );
 }
 
 QString KIconLoader::iconPath( const QString &, int )
@@ -14,20 +14,20 @@ QString KIconLoader::iconPath( const QString &, int )
 
 QPixmap BarIcon( const QString &name )
 {
-  return Resource::loadPixmap( "kate/" + name );
+    return Opie::Core::OResource::loadPixmap( "kate/" + name, Opie::Core::OResource::SmallIcon );
 }
 
 QPixmap DesktopIcon( const QString &name, int )
 {
-  return Resource::loadPixmap( "kate/" + name );
+    return Opie::Core::OResource::loadPixmap( "kate/" + name, Opie::Core::OResource::SmallIcon );
 }
 
 QPixmap SmallIcon( const QString &name )
 {
-  return Resource::loadPixmap( "kate/" + name );
+    return Opie::Core::OResource::loadPixmap( "kate/" + name, Opie::Core::OResource::SmallIcon );
 }
 
 QPixmap SmallIconSet( const QString &name )
 {
-  return Resource::loadPixmap( "kate/" + name );
+    return Opie::Core::OResource::loadPixmap( "kate/" + name, Opie::Core::OResource::SmallIcon );
 }
