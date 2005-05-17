@@ -19,8 +19,8 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -48,21 +48,18 @@ using namespace Opie::Core;
 Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
     : QMainWindow( parent, name, fl ) {
     if ( !name )
-  setName( "Bartender" );
-    QGridLayout *layout = new QGridLayout( this );
-    layout->setSpacing( 2);
-    layout->setMargin( 2);
+        setName( "Bartender" );
+
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     setCaption( tr( "Bartender" ) );
 
-    setToolBarsMovable( FALSE );
-        
-    ToolBar1 = new QToolBar( this, "ToolBar1" );
-    ToolBar1->setFixedHeight(22);
-    layout->addMultiCellWidget( ToolBar1, 0, 0, 0, 4 );
+    setToolBarsMovable( false );
+    QToolBar *dock = new QToolBar( this );
+    dock->setHorizontalStretchable( true );
 
-    QMenuBar *menuBar = new QMenuBar( ToolBar1 );
+    QMenuBar *menuBar = new QMenuBar( dock );
+    menuBar->setMargin( 0 );
     QPopupMenu *fileMenu;
     fileMenu = new QPopupMenu( this);
     menuBar->insertItem( tr("File"), fileMenu );
@@ -80,20 +77,25 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
     connect( fileMenu, SIGNAL( activated(int) ), this, SLOT( fileMenuActivated(int) ));
     connect( editMenu, SIGNAL( activated(int) ), this, SLOT( editMenuActivated(int) ));
 
+    ToolBar1 = new QToolBar( this );
 
-    QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ), "New", 0, this, 0 );
+    QAction *a = new QAction( tr( "New" ), Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
+                              "New", 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( fileNew() ) );
     a->addTo( ToolBar1 );
 
-    a = new QAction( tr( "Open" ), Resource::loadPixmap( "bartender/bartender_sm" ), "open", 0, this, 0 );
+    a = new QAction( tr( "Open" ), Opie::Core::OResource::loadPixmap( "bartender/bartender_sm", Opie::Core::OResource::SmallIcon ),
+                     "open", 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( openCurrentDrink() ) );
     a->addTo( ToolBar1 );
 
-    a = new QAction( tr( "Find" ), Resource::loadPixmap( "find" ), "Find", 0, this, 0 );
+    a = new QAction( tr( "Find" ), Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ),
+                     "Find", 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( askSearch() ) );
     a->addTo( ToolBar1 );
 
-    a = new QAction( tr( "Edit" ), Resource::loadPixmap( "edit" ),"Edit", 0, this, 0 );
+    a = new QAction( tr( "Edit" ), Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ),
+                     "Edit", 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( doEdit() ) );
     a->addTo( ToolBar1 );
 
@@ -103,7 +105,6 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
 
     DrinkView = new QListView( this, "DrinkView" );
     DrinkView->addColumn( tr( "Name of Drink" ) );
-//    DrinkView->setRootIsDecorated( TRUE );
     DrinkView->header()->hide();
 
     QPEApplication::setStylusOperation( DrinkView->viewport(),QPEApplication::RightOnHold);
@@ -112,7 +113,6 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
     connect(DrinkView, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
             this,SLOT( showDrink(int,QListViewItem*,const QPoint&,int)));
 
-    layout->addMultiCellWidget( DrinkView, 1, 2, 0, 4 );
     if(QDir("db").exists())
         drinkDB.setFile("db/drinkdb.txt");
     else
@@ -121,6 +121,8 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
     initDrinkDb();
 
     DrinkView->setFocus();
+
+    setCentralWidget( DrinkView );
 }
 
 Bartender::~Bartender() {
