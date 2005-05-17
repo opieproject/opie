@@ -69,7 +69,7 @@
 #include <qfontdatabase.h>
 
 #ifdef USEQPE
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #ifdef OPIE
 #if defined(OPIEFILEDIALOG)
 #include <qpe/applnk.h>
@@ -118,8 +118,8 @@ unsigned long QTReaderApp::m_uid = 0;
 void QTReaderApp::setScrollState(bool _b) { m_scrollButton->setOn(_b); }
 
 #ifdef USEQPE
-#define geticon(iconname) Resource::loadPixmap( iconname )
-#define getmyicon(iconname) Resource::loadPixmap( PICDIR iconname )
+#define geticon(iconname) Opie::Core::OResource::loadPixmap( iconname, Opie::Core::OResource::SmallIcon )
+#define getmyicon(iconname) Opie::Core::OResource::loadPixmap( PICDIR iconname, Opie::Core::OResource::SmallIcon )
 #else
 //#define geticon(iconname) QPixmap(PICDIR iconname ".png")
 #define geticon(iconname) QPixmap(PICDIR +"/"+iconname+".png")
@@ -303,7 +303,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
   m_autogenstr = "^ *[A-Z].*[a-z] *$";
 
 #ifdef USEQPE
-    setIcon( Resource::loadPixmap( PICDIR  "uqtreader") );
+    setIcon( Opie::Core::OResource::loadPixmap( PICDIR  "uqtreader", Opie::Core::OResource::SmallIcon ) );
 #else
     setIcon( QPixmap (PICDIR  + "/uqtreader.png") );
 #endif /* USEQPE */

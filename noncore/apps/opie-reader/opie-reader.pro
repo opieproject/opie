@@ -14,6 +14,7 @@ SUBDIRS         = pluckerbaselib \
                   ArriereCodec \
                   RebCodec \
                   reader
+LIBS            += -lopiecore2
 
 # these are added only built if enabled in "make menuconfig"
 #                  FliteDyn
