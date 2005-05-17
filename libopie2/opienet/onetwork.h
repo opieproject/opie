@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2003-2005 by Michael 'Mickey' Lauer <mickey@Vanille.de>
-              =.
+              =.             Copyright (C) 2003-2005 by Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -198,7 +197,7 @@ class ONetworkInterface : public QObject
     /**
      * @returns the IPv4 address associated with the interface.
      */
-    QString ipV4Address() const; //TODO: make this return an OHostAddress
+    OHostAddress ipV4Address() const;
     /**
      * Associate the MAC address @a addr with the interface.
      * @note It can be necessary to shut down the interface prior to calling this method.
@@ -217,7 +216,7 @@ class ONetworkInterface : public QObject
     /**
      * @returns the IPv4 netmask associated with the interface.
      */
-    QString ipV4Netmask() const; //TODO: make this return an OHostAddress
+    OHostAddress ipV4Netmask() const;
     /**
      * @returns the data link type currently associated with the interface.
      * @see #include <net/if_arp.h> for possible values.

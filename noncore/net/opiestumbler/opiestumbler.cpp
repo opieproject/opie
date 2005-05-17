@@ -336,7 +336,7 @@ void OpieStumbler::slotCheckDHCP()
 
     
     OWirelessNetworkInterface *wiface = static_cast<OWirelessNetworkInterface*>(ONetwork::instance()->interface(m_interface));
-    Global::statusMessage(tr("Obtained IP ") + wiface->ipV4Address());
+    Global::statusMessage(tr("Obtained IP ") + wiface->ipV4Address().toString());
 }
         
     

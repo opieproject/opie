@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2003-2005 by Michael 'Mickey' Lauer <mickey@Vanille.de>
-              =.
+              =.             Copyright (C) 2003-2005 by Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -85,10 +84,6 @@ ONetwork::ONetwork()
 void ONetwork::synchronize()
 {
     // gather available interfaces by inspecting /proc/net/dev
-    //FIXME: we could use SIOCGIFCONF here, but we aren't interested in virtual (e.g. eth0:0) devices
-    //FIXME: Use SIOCGIFCONF anway, because we can disable listing of aliased devices
-    //FIXME: Best is use SIOCGIFCONF and if this doesn't work (result=-1), then fallback to parsing /proc/net/dev
-
     _interfaces.clear();
     QString str;
     QFile f( "/proc/net/dev" );
@@ -202,7 +197,6 @@ struct ifreq& ONetworkInterface::ifr() const
 void ONetworkInterface::init()
 {
     odebug << "ONetworkInterface::init()" << oendl;
-
     memset( &_ifr, 0, sizeof( struct ifreq ) );
 
     if ( _sfd == -1 )
@@ -270,17 +264,10 @@ void ONetworkInterface::setIPV4Address( const QHostAddress& addr )
 }
 
 
-QString ONetworkInterface::ipV4Address() const
+OHostAddress ONetworkInterface::ipV4Address() const
 {
-    if ( ioctl( SIOCGIFADDR ) )
-    {
-        struct sockaddr_in* sa = (struct sockaddr_in *) &_ifr.ifr_addr;
-        //FIXME: Use QHostAddress here
-        return QString( inet_ntoa( sa->sin_addr ) );
-    }
-    else
-        return "<unknown>";
-
+    struct sockaddr_in* sa = (struct sockaddr_in *) &_ifr.ifr_addr;
+    return ioctl( SIOCGIFADDR ) ? OHostAddress( ntohl( sa->sin_addr.s_addr ) ) : OHostAddress();
 }
 
 
@@ -315,16 +302,10 @@ void ONetworkInterface::setIPV4Netmask( const QHostAddress& addr )
 }
 
 
-QString ONetworkInterface::ipV4Netmask() const
+OHostAddress ONetworkInterface::ipV4Netmask() const
 {
-    if ( ioctl( SIOCGIFNETMASK ) )
-    {
-        struct sockaddr_in* sa = (struct sockaddr_in *) &_ifr.ifr_addr;
-        //FIXME: Use QHostAddress here
-        return QString( inet_ntoa( sa->sin_addr ) );
-    }
-    else
-        return "<unknown>";
+    struct sockaddr_in* sa = (struct sockaddr_in *) &_ifr.ifr_addr;
+    return ioctl( SIOCGIFNETMASK ) ? OHostAddress( ntohl( sa->sin_addr.s_addr ) ) : OHostAddress();
 }
 
 
@@ -547,7 +528,15 @@ void OWirelessNetworkInterface::buildInformation()
     wrq.u.data.length = sizeof buffer;
     wrq.u.data.flags = 0;
 
-    if ( ::ioctl( _sfd, SIOCGIWRANGE, &wrq ) == -1 )
+    int result = ::ioctl( _sfd, SIOCGIWRANGE, &wrq );
+    if ( result == -1 )
+    {
+        owarn << "OWirelessNetworkInterface::buildInformation(): SIOCGIWRANGE failed (" << strerror( errno ) << ") - retrying with smaller buffer..." << oendl;
+        wrq.u.data.length = sizeof( struct iw_range );
+        result = ::ioctl( _sfd, SIOCGIWRANGE, &wrq );
+    }
+
+    if ( result == -1 )
     {
         owarn << "OWirelessNetworkInterface::buildInformation(): Can't get driver information (" << strerror( errno ) << ") - using default values." << oendl;
         _channels.insert( 2412,  1 ); // 2.412 GHz

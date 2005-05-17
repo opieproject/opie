@@ -59,7 +59,7 @@ int main( int argc, char** argv )
         odebug << "DEMO: MAC Manufacturer seems to be '" <<  it.current()->macAddress().manufacturer() << "'" << oendl;
         odebug << "DEMO: Manufacturertest1 = '" <<  OManufacturerDB::instance()->lookupExt( "08:00:87" ) << "'" << oendl;
         odebug << "DEMO: Manufacturertest2 = '" <<  OManufacturerDB::instance()->lookupExt( "E2:0C:0F" ) << "'" << oendl;
-        odebug << "Demo: IPv4 Address is '" <<  it.current()->ipV4Address() << "'" << oendl;
+        odebug << "Demo: IPv4 Address is '" <<  it.current()->ipV4Address().toString() << "'" << oendl;
         if ( it.current()->isWireless() )
         {
             OWirelessNetworkInterface* iface = static_cast<OWirelessNetworkInterface*>( it.current() );

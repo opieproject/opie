@@ -83,7 +83,7 @@ IfaceIPAddress::IfaceIPAddress( QWidget* parent, const char* name )
     setFont( QFont( "fixed" ) );
     _iface = ONetwork::instance()->interface( name );
     setFixedWidth( 105 );
-    setText( _iface->ipV4Address() );
+    setText( _iface->ipV4Address().toString() );
     connect( this, SIGNAL( returnPressed() ), this, SLOT( returnPressed() ) );
 }
 
@@ -98,10 +98,10 @@ void IfaceIPAddress::returnPressed()
     QHostAddress a;
     a.setAddress( text() );
     QHostAddress mask;
-    mask.setAddress( _iface->ipV4Netmask() ); // setIPV4Address destroys the netmask...
+    mask.setAddress( _iface->ipV4Netmask().toString() ); // setIPV4Address destroys the netmask...
     _iface->setIPV4Address( a );
     _iface->setIPV4Netmask( mask );           // recover the old netmask
-    setText( _iface->ipV4Address() );
+    setText( _iface->ipV4Address().toString() );
     repaint();
 }
 

@@ -51,7 +51,7 @@ public:
             {
                 printf( " - '%s' (MAC=%s) (IPv4=%s)\n", (const char*) it.current()->name(),
                                                     (const char*) it.current()->macAddress().toString(),
-                                                    (const char*) it.current()->ipV4Address() );
+                                                    (const char*) it.current()->ipV4Address().toString() );
             }
             ++it;
         }

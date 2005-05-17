@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             (C) 2003-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
-              =.
+              =.             (C) 2003-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -89,10 +88,11 @@ bool operator==( const OMacAddress &m1, const OMacAddress &m2 );
 
 class OHostAddress : public QHostAddress
 {
-  /*public:
+  public:
     OHostAddress();
+    OHostAddress( Q_UINT32 ip4Addr );
     ~OHostAddress();
-  */
+
   private:
   class Private;
   Private *d;
