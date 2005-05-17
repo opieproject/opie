@@ -28,8 +28,8 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <qpe/fileselector.h>
-#include <qpe/resource.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -93,49 +93,42 @@ TableViewerWindow::TableViewerWindow(QWidget *parent, const char *name, WFlags f
     QVBoxLayout *main_layout = new QVBoxLayout;
 
     /* Build tool bar */
+    bool useBigIcon = qApp->desktop()->size().width() > 330;
+
     navigation = new QToolBar(this, "navigation");
-    QToolButton *newItemButton = new QToolButton(
-      QIconSet(Resource::loadPixmap("new")), "New Item", QString::null,
-      this, SLOT(newItemSlot()), navigation, "New Item");
-    QToolButton *editItemButton = new QToolButton(
-      QIconSet(Resource::loadPixmap("edit")), "Edit Item", QString::null,
-      this, SLOT(editItemSlot()), navigation, "Edit Item");
-    QToolButton *deleteItemButton = new QToolButton(
-      QIconSet(Resource::loadPixmap("trash")), "Delete Item", 
-      QString::null, this, 
-      SLOT(deleteItemSlot()), navigation, "Delete Item");
+    QToolButton *btn = new QToolButton( Opie::Core::OResource::loadPixmap("new", Opie::Core::OResource::SmallIcon),
+                                        "New Item", QString::null, this, SLOT(newItemSlot()), navigation, "New Item");
+    btn->setUsesBigPixmap( useBigIcon );
+    btn = new QToolButton( Opie::Core::OResource::loadPixmap("edit", Opie::Core::OResource::SmallIcon),
+                           "Edit Item", QString::null, this, SLOT(editItemSlot()), navigation, "Edit Item");
+    btn->setUsesBigPixmap( useBigIcon );
+    btn = new QToolButton( Opie::Core::OResource::loadPixmap("trash", Opie::Core::OResource::SmallIcon),
+                           "Delete Item", QString::null, this, SLOT(deleteItemSlot()), navigation, "Delete Item");
+    btn->setUsesBigPixmap( useBigIcon );
 
     navigation->addSeparator();
 
-    QToolButton *firstItemButton = new QToolButton(
-      QIconSet(Resource::loadPixmap("fastback")), "First Item", 
-      QString::null, this, 
-      SLOT(firstItem()), navigation, "First Item");
-    QToolButton *previousItemButton = new QToolButton(
-      QIconSet(Resource::loadPixmap("back")), "Previous Item", 
-      QString::null, this, 
-      SLOT(previousItem()), navigation, "Previous Item");
-    QToolButton *nextItemButton = new QToolButton(
-      QIconSet(Resource::loadPixmap("forward")), "Next Item", 
-      QString::null, this, 
-      SLOT(nextItem()), navigation, "Next Item");
-    QToolButton *lastItemButton = new QToolButton(
-      QIconSet(Resource::loadPixmap("fastforward")), "Last Item", 
-      QString::null, this, 
-      SLOT(lastItem()), navigation, "Last Item");
+    btn = new QToolButton( Opie::Core::OResource::loadPixmap("fastback", Opie::Core::OResource::SmallIcon),
+                           "First Item", QString::null, this, SLOT(firstItem()), navigation, "First Item");
+    btn->setUsesBigPixmap( useBigIcon );
+    btn = new QToolButton( Opie::Core::OResource::loadPixmap("back", Opie::Core::OResource::SmallIcon),
+                           "Previous Item", QString::null, this, SLOT(previousItem()), navigation, "Previous Item");
+    btn->setUsesBigPixmap( useBigIcon );
+    btn = new QToolButton( Opie::Core::OResource::loadPixmap("forward", Opie::Core::OResource::SmallIcon),
+                           "Next Item", QString::null, this, SLOT(nextItem()), navigation, "Next Item");
+    btn->setUsesBigPixmap( useBigIcon );
+    btn = new QToolButton( Opie::Core::OResource::loadPixmap("fastforward", Opie::Core::OResource::SmallIcon),
+                           "Last Item", QString::null, this, SLOT(lastItem()), navigation, "Last Item");
+    btn->setUsesBigPixmap( useBigIcon );
 
     navigation->addSeparator();
-    QToolButton *browseButton = new QToolButton(
-      QIconSet(Resource::loadPixmap("day")), "View Single Item", 
-      QString::null, this, 
-      SLOT(browseViewSlot()), navigation, "View Single Item");
-    QToolButton *listButton = new QToolButton(
-      QIconSet(Resource::loadPixmap("month")), "View Multiple Items", 
-      QString::null, this, 
-      SLOT(listViewSlot()), navigation, "View Multiple Items");
+    btn = new QToolButton( Opie::Core::OResource::loadPixmap("day", Opie::Core::OResource::SmallIcon),
+                           "View Single Item", QString::null, this, SLOT(browseViewSlot()), navigation, "View Single Item");
+    btn->setUsesBigPixmap( useBigIcon );
+    btn = new QToolButton( Opie::Core::OResource::loadPixmap("month", Opie::Core::OResource::SmallIcon),
+                           "View Multiple Items", QString::null, this, SLOT(listViewSlot()), navigation, "View Multiple Items");
+    btn->setUsesBigPixmap( useBigIcon );
 
-    setToolBarsMovable(FALSE);
-    setToolBarsMovable(FALSE);
     setToolBarsMovable(FALSE);
 
 /* Build widgets */

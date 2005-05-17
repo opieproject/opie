@@ -1,10 +1,12 @@
+#include <opie2/oresource.h>
+
+#include <qpe/qpeapplication.h>
+
 #include <qaction.h>
 #include <qpopupmenu.h>
 #include <qpushbutton.h>
 #include <qmessagebox.h>
 #include <qlistbox.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 
 #include <assert.h>
 
@@ -85,20 +87,20 @@ KVNC::KVNC(  QWidget *parent, const char *name, WFlags ) : QMainWindow( parent, 
 		setRightJustification(false);
 
 
-		 QAction *n = new QAction( tr( "New Connection" ), Resource::loadPixmap( "new" ),
-				QString::null, 0, this, 0 );
+         QAction *n = new QAction( tr( "New Connection" ), Opie::Core::OResource::loadPixmap( "new",
+                                   Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
 		 connect( n, SIGNAL( activated() ),
 						this, SLOT( newConnection() ) );
 		n->addTo( bar );
 
-		 QAction *o = new QAction( tr( "Open Bookmark" ), Resource::loadPixmap( "fileopen" ),
-				QString::null, 0, this, 0 );
+         QAction *o = new QAction( tr( "Open Bookmark" ), Opie::Core::OResource::loadPixmap( "fileopen",
+                                   Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
 		 connect( o, SIGNAL( activated() ),
 						this, SLOT( openConnection() ) );
 		o->addTo( bar );
 
-		 QAction *d = new QAction( tr( "Delete Bookmark" ), Resource::loadPixmap( "trash" ),
-				QString::null, 0, this, 0 );
+         QAction *d = new QAction( tr( "Delete Bookmark" ), Opie::Core::OResource::loadPixmap( "trash",
+                                   Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
 		 connect( d, SIGNAL( activated() ),
 						this, SLOT( deleteBookmark() ) );
 		d->addTo( bar );
