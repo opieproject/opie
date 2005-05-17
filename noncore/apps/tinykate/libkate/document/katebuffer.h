@@ -30,7 +30,7 @@
 #include "katetextline.h"
 
 class QTextCodec;
-
+class KWBufBlock;
 /**
  * The KWBuffer class maintains a collections of lines.
  * It allows to maintain state information in a lazy way. 
