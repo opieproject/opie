@@ -22,8 +22,8 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <qpe/config.h>
-#include <qpe/resource.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -39,9 +39,6 @@ static const enum bVal computer_color = BLACK;
 static int current_handicap = 1;
 
 static QBrush *goBrush;
-//static QImage *newBlackStone;
-//static QImage *blackStone;
-//static QImage *whiteStone;
 static QPixmap *newBlackStone;
 static QPixmap *blackStone;
 static QPixmap *whiteStone;
@@ -51,6 +48,7 @@ static bool smallStones = FALSE;
 GoMainWidget::GoMainWidget( QWidget *parent, const char* name, WFlags fl) :
 	QMainWindow( parent, name, fl )
 {
+    setCaption( tr( "Go" ) );
      setToolBarsMovable( FALSE );
     GoWidget *go = new GoWidget(this);
 
@@ -67,13 +65,15 @@ GoMainWidget::GoMainWidget( QWidget *parent, const char* name, WFlags fl) :
     connect( a, SIGNAL( activated() ), go, SLOT( newGame() ) );
     a->addTo( file );
 
-    a = new QAction( tr( "Pass" ), Resource::loadPixmap( "pass" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Pass" ), Opie::Core::OResource::loadPixmap( "pass", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), go, SLOT( pass() ) );
     a->addTo( file );
     a->addTo( toolbar );
 
 
-    a = new QAction( tr( "Resign" ), Resource::loadPixmap( "reset" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Resign" ), Opie::Core::OResource::loadPixmap( "reset", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), go, SLOT( resign() ) );
     a->addTo( file );
 
@@ -124,19 +124,11 @@ GoWidget::GoWidget( QWidget *parent, const char* name) :
 
     d = bx = by = 1;
 
-    QPixmap pix = Resource::loadPixmap( "go/pine" );
+    QPixmap pix = Opie::Core::OResource::loadPixmap( "go/pine" );
     goBrush = new QBrush( black, pix );
-    /*
-    QString fn = Resource::findPixmap("Go-black");
-    blackStone = new QImage( fn );
-    fn = Resource::findPixmap("Go-black-highlight");
-    newBlackStone = new QImage( fn );
-    fn = Resource::findPixmap("Go-white");
-    whiteStone = new QImage( fn );
-    */
-    blackStone = new QPixmap(Resource::loadPixmap( "Go-black" ));
-    whiteStone = new QPixmap(Resource::loadPixmap( "Go-white" ));
-    newBlackStone = new QPixmap(Resource::loadPixmap( "Go-black-highlight" ));
+    blackStone = new QPixmap(Opie::Core::OResource::loadPixmap( "Go-black" ));
+    whiteStone = new QPixmap(Opie::Core::OResource::loadPixmap( "Go-white" ));
+    newBlackStone = new QPixmap(Opie::Core::OResource::loadPixmap( "Go-black-highlight" ));
 
     init();
 }
@@ -204,9 +196,9 @@ void GoWidget::resizeEvent( QResizeEvent * )
 
 	smallStones = TRUE;
     } else if ( d >= 10 && smallStones ) {
-	blackStone = new QPixmap(Resource::loadPixmap( "Go-black" ));
-	whiteStone = new QPixmap(Resource::loadPixmap( "Go-white" ));
-	newBlackStone = new QPixmap(Resource::loadPixmap( "Go-black-highlight" ));
+        blackStone = new QPixmap(Opie::Core::OResource::loadPixmap( "Go-black" ));
+        whiteStone = new QPixmap(Opie::Core::OResource::loadPixmap( "Go-white" ));
+        newBlackStone = new QPixmap(Opie::Core::OResource::loadPixmap( "Go-black-highlight" ));
 	smallStones = FALSE;
     }
 }
