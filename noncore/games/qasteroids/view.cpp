@@ -24,13 +24,13 @@
 
 #include "view.h"
 
-#include <qpe/resource.h>
-
+#include <opie2/oresource.h>
+#include <qpe/qpeapplication.h>
 
 #include <stdlib.h>
 #include <math.h>
 
-#define IMG_BACKGROUND "qasteroids/bg.png"
+#define IMG_BACKGROUND "qasteroids/bg"
 
 #define REFRESH_DELAY           33
 #define SHIP_SPEED              0.3
@@ -95,8 +95,7 @@ KAsteroidsView::KAsteroidsView( QWidget *parent, const char *name )
     powerups.setAutoDelete( TRUE );
     exhaust.setAutoDelete( TRUE );
 
-    QPixmap pm( Resource::loadPixmap(IMG_BACKGROUND) );
-    field.setBackgroundPixmap( pm );
+    field.setBackgroundPixmap( Opie::Core::OResource::loadPixmap(IMG_BACKGROUND) );
 
     textSprite = new QCanvasText( &field );
     QFont font( "helvetica", 14 );
@@ -248,10 +247,7 @@ void KAsteroidsView::brake( bool b )
 
 void KAsteroidsView::readSprites()
 {
-    QString sprites_prefix = Resource::findPixmap( IMG_BACKGROUND );
-    int sep = sprites_prefix.findRev( "/" );
-
-    sprites_prefix.truncate( sep );
+    QString sprites_prefix = QPEApplication::qpeDir() + "pics/qasteroids";
 
     int i = 0;
     while ( kas_animations[i].id )

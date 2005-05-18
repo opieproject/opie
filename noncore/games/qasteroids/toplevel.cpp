@@ -26,8 +26,9 @@
 #include "toplevel.h"
 #include "ledmeter.h"
 
+#include <opie2/oresource.h>
+
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 
 #include <qlabel.h>
 #include <qlayout.h>
@@ -185,7 +186,7 @@ KAstTopLevel::KAstTopLevel( QWidget *parent, const char *_name, WFlags fl )
     hbd->addSpacing( 10 );
 */
     label = new QLabel( mainWin );
-    label->setPixmap( Resource::loadPixmap("qasteroids/powerups/brake.png") );
+    label->setPixmap( Opie::Core::OResource::loadPixmap("qasteroids/powerups/brake.png") );
     label->setFixedWidth( 16 );
     label->setPalette( pal );
     hbd->addWidget( label );
@@ -200,7 +201,7 @@ KAstTopLevel::KAstTopLevel( QWidget *parent, const char *_name, WFlags fl )
     hbd->addSpacing( 5 );
 
     label = new QLabel( mainWin );
-    label->setPixmap( Resource::loadPixmap("qasteroids/powerups/shield.png") );
+    label->setPixmap( Opie::Core::OResource::loadPixmap("qasteroids/powerups/shield.png") );
     label->setFixedWidth( 16 );
     label->setPalette( pal );
     hbd->addWidget( label );
@@ -215,7 +216,7 @@ KAstTopLevel::KAstTopLevel( QWidget *parent, const char *_name, WFlags fl )
     hbd->addSpacing( 5 );
 
     label = new QLabel( mainWin );
-    label->setPixmap( Resource::loadPixmap("qasteroids/powerups/shoot.png") );
+    label->setPixmap( Opie::Core::OResource::loadPixmap("qasteroids/powerups/shoot.png") );
     label->setFixedWidth( 16 );
     label->setPalette( pal );
     hbd->addWidget( label );
