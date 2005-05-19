@@ -30,6 +30,7 @@ _;:,     .>    :=|.         This program is free software; you can
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/oinputsystem.h>
+#include <opie2/opcmciasystem.h>
 #include <opie2/olayout.h>
 #include <opie2/olistview.h>
 #include <qpe/qpeapplication.h>
@@ -185,8 +186,7 @@ void InputCategory::populate()
     OInputSystem::DeviceIterator it = sys->iterator();
     while ( it.current() )
     {
-            OInputDevice* dev = it.current();
-        new InputDevice( this, dev->identity() );
+        new InputDevice( this, it.current()->identity() );
         ++it;
     }
 }
@@ -204,29 +204,12 @@ CardsCategory::~CardsCategory()
 void CardsCategory::populate()
 {
     odebug << "CardsCategory::populate()" << oendl;
-    QString fileName;
-    if ( QFile::exists( "/var/run/stab" ) ) { fileName = "/var/run/stab"; }
-    else if ( QFile::exists( "/var/state/pcmcia/stab" ) ) { fileName = "/var/state/pcmcia/stab"; }
-    else { fileName = "/var/lib/pcmcia/stab"; }
-    QFile cardinfofile( fileName );
-    if ( !cardinfofile.exists() || !cardinfofile.open( IO_ReadOnly ) )
+    OPcmciaSystem* sys = OPcmciaSystem::instance();
+    OPcmciaSystem::CardIterator it = sys->iterator();
+    while ( it.current() )
     {
-        new CardDevice( this, "ERROR: pcmcia info file not found or unaccessible" );
-        return;
-    }
-    QTextStream cardinfo( &cardinfofile );
-    while ( !cardinfo.atEnd() )
-    {
-        QString line = cardinfo.readLine();
-        odebug << "got line '" << line << "'" << oendl;
-        if ( line.startsWith( "Socket" ) )
-        {
-            new CardDevice( this, line );
-        }
-        else
-        {
-            continue;
-        }
+        new CardDevice( this, (const char*) it.currentKey() );
+        ++it;
     }
 }
 
