@@ -58,9 +58,9 @@ public:
     exit( -1 );
     }
 
-    printf( "*******************************************************************\n" );
-    printf( "* Wellenreiter mini edition 1.0.0 (C) 2003 Michael 'Mickey' Lauer *\n" );
-    printf( "*******************************************************************\n" );
+    printf( "************************************************************************\n" );
+    printf( "* Wellenreiter mini edition 1.0.0 (C) 2003-2005 Michael 'Mickey' Lauer *\n" );
+    printf( "************************************************************************\n" );
     printf( "\n\n" );
 
     QString interface( argv[1] );
@@ -124,6 +124,7 @@ public:
 
     // open a packet capturer
     cap = new OPacketCapturer();
+    printf( "OPacketCapturer using libpcap %s", (const char*) cap->version() );
     cap->open( interface );
     if ( !cap->isOpen() )
     {
