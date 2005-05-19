@@ -78,12 +78,13 @@ void OPcmciaSystem::synchronize()
     while ( !cardinfo.atEnd() )
     {
         QString line = cardinfo.readLine();
-        if ( line.startsWith( "Socket" ) )
+        // qDebug( "line = '%s'", (const char*) line );
+        if ( line.startsWith( "Socket" ) && ! line.contains( "empty" ) )
         {
             int mid = line.find( ':' );
             QString name = line.right( line.length() - mid - 1 );
             QString id = line.right( line.length() - mid + 1 );
-            if ( mid ) _interfaces.insert( name, new OPcmciaCard( this, (const char*) id ) );
+            if ( mid ) _interfaces.insert( name.stripWhiteSpace(), new OPcmciaCard( this, (const char*) id.stripWhiteSpace() ) );
         }
         else
         {
