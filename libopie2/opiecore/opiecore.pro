@@ -6,7 +6,6 @@ HEADERS     = oapplication.h            \
               odebug.h                  \
               oglobal.h                 \
               oglobalsettings.h         \
-              oinputsystem.h            \
               okeyconfigmanager.h       \
               okeyfilter.h              \
               opluginloader.h           \
@@ -23,7 +22,6 @@ SOURCES     = oapplication.cpp          \
               odebug.cpp                \
               oglobal.cpp               \
               oglobalsettings.cpp       \
-              oinputsystem.cpp          \
               okeyconfigmanager.cpp     \
               okeyfilter.cpp            \
               opluginloader.cpp         \
@@ -35,22 +33,18 @@ SOURCES     = oapplication.cpp          \
               xmltree.cpp
 
 
-# The following files are currently not compileable on mac !
-# Therfore I removed them from the build .. (eilers)
-
-CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
-!contains( CONFTEST, y ) {
-HEADERS     += ofilenotify.h
-SOURCES     += ofilenotify.cpp
+# Disable Linux-only subsystems for MAC build
+!contains( CONFIG_TARGET_MACOSX, y ) {
+include ( linux/linux.pro )
 } else {
-    message( "ofilenotify is not available in a mac build !" )
+    message( "disabling linux-only subsystems for MAC build" )
 }
 
 include( device/device.pro )
 
 INTERFACES  =
 TARGET      = opiecore2
-VERSION     = 1.9.3
+VERSION     = 1.9.4
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 

@@ -1,15 +1,14 @@
 /*
                              This file is part of the Opie Project
-                             (C) 2003-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
-              =.
+              =.             (C) 2003-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
+ - .   .-<_>     .<>         Foundation; version 2 of the License.
+     ._= =}       :
     .%`+i>       _;_.
     .i_,=:_.      -<s.       This program is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
@@ -47,11 +46,11 @@ class OSoundCard;
  *======================================================================================*/
 
 /**
- * @brief A container class for all audio interfaces
+ * @brief A container class for the Linux OSS/ALSA audio subsystem
  *
- * This class provides access to all available audio/midi/sequencer interfaces of your computer.
+ * This class provides access to all available audio/midi/sequencer interfaces of your device.
  *
- * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ * @author Michael 'Mickey' Lauer <mickey@Vanille.de>
  */
 class OSoundSystem : public QObject
 {

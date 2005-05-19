@@ -58,7 +58,6 @@ extern "C"  // work around a bpf/pcap conflict in recent headers
 #include "802_11_user.h"
 #include "dhcp.h"
 
-
 /* TYPEDEFS */
 typedef struct timeval timevalstruct;
 typedef struct pcap_pkthdr packetheaderstruct;

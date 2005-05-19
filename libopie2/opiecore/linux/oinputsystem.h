@@ -7,8 +7,8 @@
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
+ - .   .-<_>     .<>         Foundation; version 2 of the License.
+     ._= =}       :
     .%`+i>       _;_.
     .i_,=:_.      -<s.       This program is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
@@ -41,11 +41,11 @@ namespace Core {
 class OInputDevice;
 
 /**
- * @brief A container class for all input devices
+ * @brief A container class for the Linux input device subsystem
  *
- * This class provides access to all available input system devices of your computer.
+ * This class provides access to all available input system devices of your device.
  *
- * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ * @author Michael 'Mickey' Lauer <mickey@Vanille.de>
  */
 class OInputSystem : public QObject
 {

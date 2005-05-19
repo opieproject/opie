@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             (C) 2003-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
-              =.
+              =.             (C) 2003-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -28,9 +27,14 @@
 
 */
 
-#include <opie2/osoundsystem.h>
-#include <opie2/odebug.h>
+#include "osoundsystem.h"
+using namespace Opie::MM;
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* STD */
 #include <errno.h>
 #include <fcntl.h>
 #include <string.h>
@@ -42,8 +46,6 @@
 static const char* device_label[] = SOUND_DEVICE_LABELS;
 static int max_device_nr = sizeof device_label / sizeof (const char*);
 
-using namespace Opie::Core;
-using namespace Opie::MM;
 /*======================================================================================
  * OSoundSystem
  *======================================================================================*/
