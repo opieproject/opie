@@ -37,43 +37,28 @@
 class PcmciaManager : public QWidget
 {
     Q_OBJECT
-public:
-    enum {
-	PCMCIA_Socket1,
-	PCMCIA_Socket2,
-	MMC_Socket
-    };
-
+  public:
     PcmciaManager( QWidget *parent = 0 );
     ~PcmciaManager();
-    bool getStatusPcmcia( int showPopUp = FALSE );
-    bool getStatusSd( int showPopUp = FALSE );
     static int position();
-private slots:
-    void cardMessage( const QCString &msg, const QByteArray & );
+
+  private slots:
+    void cardMessage( const QCString& msg, const QByteArray& );
     void popupTimeout();
 
-protected:
+  protected:
     void paintEvent( QPaintEvent* );
     void mousePressEvent( QMouseEvent * );
 
-private:
+  private:
     void execCommand( const QStringList &command );
+    void popUp(QString message, QString icon = QString::null );
+
+  private:
     int m_commandOrig;
     QPixmap pm;
-    // pcmcia socket 0
-    bool cardInPcmcia0;
-    QString cardInPcmcia0Name;
-    QString cardInPcmcia0Type;
-    // pcmcia socket 1
-    bool cardInPcmcia1;
-    QString cardInPcmcia1Name;
-    QString cardInPcmcia1Type;
-    bool cardInSd;
-    QString cardSdName; // the device which is mounted
-    void iconShow();
     QPopupMenu *popupMenu;
-    void popUp(QString message, QString icon = QString::null );
+
 };
 
 #endif

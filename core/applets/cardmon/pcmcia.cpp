@@ -32,7 +32,9 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/odevice.h>
+#include <opie2/oconfig.h>
 #include <opie2/oprocess.h>
+#include <opie2/opcmciasystem.h>
 #include <opie2/oresource.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/applnk.h>
@@ -45,6 +47,7 @@ using namespace Opie::Ui;
 #include <qpainter.h>
 #include <qfile.h>
 #include <qtextstream.h>
+#include <qmessagebox.h>
 #include <qsound.h>
 #include <qtimer.h>
 
@@ -61,41 +64,20 @@ using namespace Opie::Ui;
 
 PcmciaManager::PcmciaManager( QWidget * parent ) : QWidget( parent )
 {
-    pm = Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon );
-#if 0
-    QCopChannel *channel = new QCopChannel("QPE/System", this);
-    connect(channel, SIGNAL(received(const QCString&,const QByteArray&)),
-        this, SLOT(systemMsg(const QCString&,const QByteArray&)) );
-#endif
     QCopChannel * pcmciaChannel = new QCopChannel( "QPE/Card", this );
     connect( pcmciaChannel,
              SIGNAL( received(const QCString&,const QByteArray&) ), this,
              SLOT( cardMessage(const QCString&,const QByteArray&) ) );
 
-    QCopChannel *sdChannel = new QCopChannel( "QPE/Card", this );
-    connect( sdChannel,
-             SIGNAL( received(const QCString&,const QByteArray&) ), this,
-             SLOT( cardMessage(const QCString&,const QByteArray&) ) );
-
-    cardInPcmcia0 = FALSE;
-    cardInPcmcia1 = FALSE;
-    cardInSd = FALSE;
-
     setFocusPolicy( NoFocus );
-
     setFixedWidth ( AppLnk::smallIconSize() );
     setFixedHeight ( AppLnk::smallIconSize() );
-
-    getStatusPcmcia( TRUE );
-    getStatusSd( TRUE );
-    repaint( FALSE );
-    popupMenu = 0;
+    pm = Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon );
 }
 
 
 PcmciaManager::~PcmciaManager()
 {
-    delete popupMenu;
 }
 
 
@@ -128,16 +110,32 @@ void PcmciaManager::popupTimeout()
 }
 
 
-void PcmciaManager::mousePressEvent( QMouseEvent * )
+void PcmciaManager::mousePressEvent( QMouseEvent* )
 {
     QPopupMenu * menu = new QPopupMenu( this );
     QStringList cmd;
     bool execute = true;
 
+    OPcmciaSystem* sys = OPcmciaSystem::instance();
+    OPcmciaSystem::CardIterator it = sys->iterator();
+    if ( !sys->count() ) return;
+
+    int i = 0;
+    while ( it.current() )
+    {
+        menu->insertItem( tr( "Eject card %1: %2" ).arg( i++ ).arg( it.currentKey() ), 1 );
+        ++it;
+    }
+
+
+    /* insert items depending on number of cards etc.
+
     if ( cardInSd ) {
         menu->insertItem( QIconSet( Opie::Core::OResource::loadPixmap( "cardmon/ide", Opie::Core::OResource::SmallIcon ) ),
                           tr( "Eject SD/MMC card" ), 0 );
     }
+
+    
 
     if ( cardInPcmcia0 ) {
         menu->
@@ -152,208 +150,88 @@ void PcmciaManager::mousePressEvent( QMouseEvent * )
                     ( Opie::Core::OResource::loadPixmap( "cardmon/" + cardInPcmcia1Type, Opie::Core::OResource::SmallIcon ) ),
                     tr( "Eject card 1: %1" ).arg( cardInPcmcia1Name ), 2 );
     }
+        */
 
     QPoint p = mapToGlobal( QPoint( 0, 0 ) );
     QSize s = menu->sizeHint();
-    int opt = menu->exec( QPoint( p.x() + ( width() / 2 ) - ( s.width() / 2 ),
-                                  p.y() - s.height() ), 0 );
-
-    if ( opt == 1 ) {
-        m_commandOrig = PCMCIA_Socket1;
-        cmd << "/sbin/cardctl" << "eject" << "0";
-    } else if ( opt == 0 ) {
-        m_commandOrig = MMC_Socket;
-        cmd << "umount" << cardSdName;
-    } else if ( opt == 2 ) {
-        m_commandOrig = PCMCIA_Socket2;
-        cmd << "/sbin/cardctl" << "eject" <<  "1";
-    }else
-        execute = false;
-
-    if ( execute )
-        execCommand( cmd );
-
+    int opt = menu->exec( QPoint( p.x() + ( width() / 2 ) - ( s.width() / 2 ), p.y() - s.height() ), 0 );
+    qDebug( "pcmcia: menu result = %d", opt );
     delete menu;
 }
 
 
 void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
 {
-    if ( msg == "stabChanged()" ) {
-        // odebug << "Pcmcia: stabchanged" << oendl;
-        getStatusPcmcia();
-    } else if ( msg == "mtabChanged()" ) {
-        // odebug << "CARDMONAPPLET: mtabchanged" << oendl;
-        getStatusSd();
+    odebug << "PcmciaManager::cardMessage( '" << msg << "' )" << oendl;
+    if ( msg != "stabChanged()" ) return;
+
+    /* check if a previously unknown card has been inserted */
+    OPcmciaSystem::instance()->synchronize();
+
+    if ( !OPcmciaSystem::instance()->count() ) return;
+
+    OConfig cfg( "PCMCIA" );
+    cfg.setGroup( "Global" );
+    int nCards = cfg.readNumEntry( "nCards", 0 );
+
+    OPcmciaSystem* sys = OPcmciaSystem::instance();
+    OPcmciaSystem::CardIterator it = sys->iterator();
+
+    bool newCard = true;
+    while ( it.current() && newCard )
+    {
+        QString name = it.currentKey();
+        for ( int i = 0; i < nCards; ++i )
+        {
+            QString cardSection = QString( "Card_%1" ).arg( i );
+            cfg.setGroup( cardSection );
+            QString cardName = cfg.readEntry( "name" );
+            odebug << "comparing card '" << name << "' with known card '" << cardName << "'" << oendl;
+            if ( cardName == name )
+            {
+                newCard = false;
+                break;
+            }
+        }
+        if ( !newCard ) ++it; else break;
     }
+    QString newCardName = it.currentKey();
+
+    if ( newCard )
+    {
+        odebug << "pcmcia: new card detected" << oendl;
+        cfg.setGroup( QString( "Card_%1" ).arg( nCards ) );
+        cfg.writeEntry( "name", newCardName );
+        cfg.setGroup( "Global" );
+        cfg.writeEntry( "nCards", nCards+1 );
+        cfg.write();
+
+        int result = QMessageBox::information( qApp->desktop(),
+                                           tr( "PCMCIA/CF Subsystem" ),
+                                           tr( "You have inserted a new card\n%1\nDo you want to configure this card?" ).arg( newCardName ),
+                                           tr( "Yes" ), tr( "No" ), 0, 0, 1 );
+        odebug << "result = " << result << oendl;
+
+    }
+    else
+    {
+        odebug << "pcmcia: card has been previously inserted" << oendl;
+    }
+    repaint( TRUE );
 }
 
-
-bool PcmciaManager::getStatusPcmcia( int showPopUp ) {
-
-    bool cardWas0 = cardInPcmcia0;    // remember last state
-    bool cardWas1 = cardInPcmcia1;
-
-    QString fileName;
-
-    if ( QFile::exists( "/var/run/stab" ) ) { fileName = "/var/run/stab"; }
-    else if ( QFile::exists( "/var/state/pcmcia/stab" ) ) { fileName = "/var/state/pcmcia/stab"; }
-    else { fileName = "/var/lib/pcmcia/stab"; }
-
-    QFile f( fileName );
-
-    if ( f.open( IO_ReadOnly ) ) {
-        QStringList list;
-        QTextStream stream( &f );
-        QString streamIn;
-        streamIn = stream.read();
-        list = QStringList::split( "\n", streamIn );
-        for ( QStringList::Iterator line = list.begin(); line != list.end();
-                line++ ) {
-            if ( ( *line ).startsWith( "Socket 0:" ) ) {
-                if ( ( *line ).startsWith( "Socket 0: empty" ) && cardInPcmcia0 ) {
-                    cardInPcmcia0 = FALSE;
-                } else if ( !( *line ).startsWith( "Socket 0: empty" )
-                            && !cardInPcmcia0 ) {
-                    cardInPcmcia0Name =
-                        ( *line ).mid( ( ( *line ).find( ':' ) + 1 ),
-                                       ( *line ).length() - 9 );
-                    cardInPcmcia0Name.stripWhiteSpace();
-                    cardInPcmcia0 = TRUE;
-                    show();
-                    line++;
-                    int pos = ( *line ).find( '\t' ) + 1;
-                    cardInPcmcia0Type =
-                        ( *line ).mid( pos, ( *line ).find( "\t", pos ) - pos );
-                }
-            } else if ( ( *line ).startsWith( "Socket 1:" ) ) {
-                if ( ( *line ).startsWith( "Socket 1: empty" ) && cardInPcmcia1 ) {
-                    cardInPcmcia1 = FALSE;
-                } else if ( !( *line ).startsWith( "Socket 1: empty" )
-                            && !cardInPcmcia1 ) {
-                    cardInPcmcia1Name =
-                        ( *line ).mid( ( ( *line ).find( ':' ) + 1 ),
-                                       ( *line ).length() - 9 );
-                    cardInPcmcia1Name.stripWhiteSpace();
-                    cardInPcmcia1 = TRUE;
-                    show();
-                    line++;
-                    int pos = ( *line ).find( '\t' ) + 1;
-                    cardInPcmcia1Type =
-                        ( *line ).mid( pos, ( *line ).find( "\t", pos ) - pos );
-                }
-            }
-        }
-        f.close();
-
-        if ( !showPopUp
-                && ( cardWas0 != cardInPcmcia0 || cardWas1 != cardInPcmcia1 ) ) {
-            QString text = QString::null;
-            QString what = QString::null;
-            if ( cardWas0 != cardInPcmcia0 ) {
-                if ( cardInPcmcia0 ) {
-                    text += tr( "New card: " );
-                    what = "on";
-                } else {
-                    text += tr( "Ejected: " );
-                    what = "off";
-                }
-                text += cardInPcmcia0Name;
-                popUp( text, "cardmon/" + cardInPcmcia0Type );
-            }
-
-            if ( cardWas1 != cardInPcmcia1 ) {
-                if ( cardInPcmcia1 ) {
-                    text += tr( "New card: " );
-                    what = "on";
-                } else {
-                    text += tr( "Ejected: " );
-                    what = "off";
-                }
-                text += cardInPcmcia1Name;
-                popUp( text, "cardmon/" + cardInPcmcia1Type );
-            }
-            #ifndef QT_NO_SOUND
-            QSound::play( Resource::findSound( "cardmon/card" + what ) );
-            #endif
-
-        }
-    } else {
-        // no file found
-        odebug << "no file found" << oendl;
-        cardInPcmcia0 = FALSE;
-        cardInPcmcia1 = FALSE;
-    }
-
-    repaint( FALSE );
-    return ( ( cardWas0 == cardInPcmcia0
-               && cardWas1 == cardInPcmcia1 ) ? FALSE : TRUE );
-
-}
-
-
-bool PcmciaManager::getStatusSd( int showPopUp )
-{
-
-    bool cardWas = cardInSd;    // remember last state
-    cardInSd = FALSE;
-
-    #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
-
-    struct mntent *me;
-    FILE *mntfp = setmntent( "/etc/mtab", "r" );
-
-    if ( mntfp ) {
-        while ( ( me = getmntent( mntfp ) ) != 0 ) {
-            QString fs = QFile::decodeName( me->mnt_fsname );
-            //odebug << fs << oendl;
-            if ( fs.left( 14 ) == "/dev/mmc/part1" || fs.left( 7 ) == "/dev/sd"
-                    || fs.left( 9 ) == "/dev/mmcd" || fs.left(11) == "/dev/mmcblk" ) {
-                cardInSd = TRUE;
-                cardSdName = fs;
-                show();
-            }
-            //            else {
-            //                 cardInSd = FALSE;
-            //             }
-        }
-        endmntent( mntfp );
-    }
-
-    if ( !showPopUp && cardWas != cardInSd ) {
-        QString text = QString::null;
-        QString what = QString::null;
-        if ( cardInSd ) {
-            text += tr("New card: SD/MMC");
-            what = "on";
-        } else {
-            text += tr("Ejected: SD/MMC");
-            what = "off";
-        }
-        //odebug << "TEXT: " + text << oendl;
-        #ifndef QT_NO_SOUND
-        QSound::play( Resource::findSound( "cardmon/card" + what ) );
-        #endif
-
-        popUp( text, "cardmon/ide" );    // XX add SD pic
-    }
-    #else
-    #error "Not on Linux"
-    #endif
-    repaint( FALSE );
-    return ( ( cardWas == cardInSd ) ? FALSE : TRUE );
-}
 
 void PcmciaManager::paintEvent( QPaintEvent * )
 {
-
     QPainter p( this );
-
-    if ( cardInPcmcia0 || cardInPcmcia1 || cardInSd ) {
+    qDebug( "count = %d", (OPcmciaSystem::instance()->count() ) );
+    if ( OPcmciaSystem::instance()->count() )
+    {
         p.drawPixmap( 0, 0, pm );
         show();
-    } else {
-        //p.eraseRect(rect());
+    }
+    else
+    {
         hide();
     }
 }
