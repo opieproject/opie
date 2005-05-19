@@ -177,6 +177,7 @@ CONFIG_OSEARCH	core/pim/osearch	osearch.pro
 CONFIG_OXYGEN	noncore/apps/oxygen	oxygen.pro
 CONFIG_PACKAGEMANAGER	noncore/settings/packagemanager	packagemanager.pro
 CONFIG_PARASHOOT	noncore/games/parashoot	parashoot.pro
+CONFIG_PCMCIA-APPLET	noncore/applets/pcmcia	pcmcia.pro
 CONFIG_PHASE	noncore/styles/phase	phase.pro
 CONFIG_PICKBOARD	inputmethods/pickboard	pickboard.pro
 CONFIG_PIMCONVERTER     noncore/tools/pimconverter converter.pro

@@ -1,4 +1,4 @@
-  config CARDMON
-    boolean "opie-cardmon (monitor cf/sd/mmc card status, and eject function)"
+  config PCMCIA-APPLET
+    boolean "opie-pcmciaapplet (monitor and configure pcmcia/cf cards)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

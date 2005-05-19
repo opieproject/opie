@@ -180,6 +180,7 @@ $(OPIEDIR)/stamp-headers :
 	# libopie2
 	( cd include/opie2 && ln -sf ../../libopie2/opiecore/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiecore/device/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiecore/linux/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiemm/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiedb/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opienet/*.h .; )
