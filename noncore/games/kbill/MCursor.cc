@@ -21,8 +21,10 @@
 #include <kstandarddirs.h>
 #endif
 #include <opie2/odebug.h>
-using namespace Opie::Core;
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
+
+#include <qbitmap.h>
+
 MCursor::~MCursor() {
 	delete cursor;
 }
@@ -54,10 +56,10 @@ void MCursor::load(const char *name, int masked) {
 	#endif
 
 	QBitmap bitmap, mask;
-	bitmap = Resource::loadBitmap("kbill/bitmaps/" + QString::fromLocal8Bit(name));
+    bitmap = Opie::Core::OResource::loadPixmap( "kbill/bitmaps/" + QString::fromLocal8Bit( name ) );
 
-        if (masked == SEP_MASK)
-	    mask = bitmap = Resource::loadBitmap("kbill/bitmaps/" + QString::fromLocal8Bit(name) + "_mask.xbm");
+    if (masked == SEP_MASK)
+        mask = bitmap = Opie::Core::OResource::loadPixmap( "kbill/bitmaps/" + QString::fromLocal8Bit(name) + "_mask.xbm" );
 	else
 	   mask = bitmap;
 	cursor = new QCursor(bitmap, mask, bitmap.width() / 2, bitmap.height() / 2);

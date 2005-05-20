@@ -17,21 +17,13 @@
 #include "Picture.h"
 
 #include <opie2/odebug.h>
-using namespace Opie::Core;
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #ifdef KDEVER
 #include <kapp.h>
 #include <kstandarddirs.h>
 #include <kdebug.h>
 #endif
 void Picture::load(const char *name, int index) {
-	//QString dir = KApplication::kde_datadir(), file;
-// 	QString dir = locate("data",""),file;
-// 	dir += "/kbill/";
-// 	if (index>=0)
-// 		file.sprintf ("%spixmaps/%s_%d.xpm", (const char *)dir, name, index);
-// 	else
-// 		file.sprintf("%spixmaps/%s.xpm", (const char *)dir, name);
 #ifdef KDEVER
 	KStandardDirs dirs;
 	QString file;
@@ -53,12 +45,12 @@ void Picture::load(const char *name, int index) {
 	height = pix->height();
 #endif
 QString sindex;
-pix = new QPixmap();
+//pix = new QPixmap();
 sindex.setNum(index);
 if (index>=0)
-pix->load(Resource::findPixmap("kbill/pixmaps/" + QString::fromLocal8Bit(name) +"_"+ sindex));
+    pix = new QPixmap( Opie::Core::OResource::loadPixmap( "kbill/pixmaps/" + QString::fromLocal8Bit(name) +"_"+ sindex ) );
 else
-pix->load(Resource::findPixmap("kbill/pixmaps/" + QString::fromLocal8Bit(name)));
+    pix = new QPixmap( Opie::Core::OResource::loadPixmap( "kbill/pixmaps/" + QString::fromLocal8Bit(name) ) );
 
 	width = pix->width();
 	height = pix->height();
