@@ -20,7 +20,7 @@
 
 #include "interface.h"
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 #include <qtoolbar.h>
 #include <qtoolbutton.h>
@@ -31,7 +31,7 @@ SnakeGame::SnakeGame(QWidget* parent, const char* name, WFlags f) :
 {
     setCaption( tr("Snake") );
     QPEApplication::setInputMethodHint(this, QPEApplication::AlwaysOff );
-    QPixmap bg = Resource::loadPixmap("snake/grass");
+    QPixmap bg = Opie::Core::OResource::loadPixmap("snake/grass");
     canvas.setBackgroundPixmap(bg);
     canvas.setUpdatePeriod(100);
     snake = 0;
@@ -46,7 +46,7 @@ SnakeGame::SnakeGame(QWidget* parent, const char* name, WFlags f) :
     QToolBar* toolbar = new QToolBar( this);
     toolbar->setHorizontalStretchable( TRUE );
 
-    QPixmap newicon = Resource::loadPixmap("ksnake");
+    QPixmap newicon = Opie::Core::OResource::loadPixmap("ksnake");
     setIcon(newicon);
     (void)new QToolButton(newicon, tr("New Game"), 0,
                             this, SLOT(newGame()), toolbar, "New Game");
@@ -86,7 +86,7 @@ void SnakeGame::welcomescreen()
    int w = title->boundingRect().width();
    title->move(canvas.width()/2 -w/2, canvas.height()/2-110);
    title->show();
-   QCanvasPixmapArray* titlearray = new QCanvasPixmapArray(Resource::findPixmap("snake/title"));
+   QCanvasPixmapArray* titlearray = new QCanvasPixmapArray(Opie::Core::OResource::findPixmap("snake/title"));
    QCanvasSprite* titlepic = new QCanvasSprite(titlearray, &canvas);
    titlepic->move(canvas.width()/2 - 33, canvas.height()/2-85);
    titlepic->show();

@@ -21,14 +21,14 @@
 #include "target.h"
 #include "codes.h"
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 #include <stdlib.h>
 
 Target::Target(QCanvas* canvas) 
        : QCanvasSprite(0, canvas)
 {
-   mouse = new QCanvasPixmapArray(Resource::findPixmap("snake/mouse"));
+   mouse = new QCanvasPixmapArray(Opie::Core::OResource::findPixmap("snake/mouse"));
    setSequence(mouse);
    newTarget();
 }

@@ -21,9 +21,7 @@
 #include "obstacle.h"
 #include "codes.h"
 
-#include <qpe/resource.h>
-
-
+#include <opie2/oresource.h>
 
 Obstacle::Obstacle(QCanvas* canvas, int y)
          : QCanvasSprite(0,canvas)
@@ -33,7 +31,7 @@ Obstacle::Obstacle(QCanvas* canvas, int y)
 
 void Obstacle::newObstacle(int y)
 {
-   QPixmap obstaclePix( Resource::findPixmap("snake/wall.png") );
+   QPixmap obstaclePix( Opie::Core::OResource::findPixmap("snake/wall") );
    
    if ( obstaclePix.width() > canvas()->width()*3/5 ) {
        int w = canvas()->width()*3/5;

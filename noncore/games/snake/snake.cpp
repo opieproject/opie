@@ -21,8 +21,7 @@
 #include "snake.h"
 #include "target.h"
 
-#include <qpe/resource.h>
-
+#include <opie2/oresource.h>
 
 static int Piecekey[4][4] = { {6, 0, 4, 3 }, {0, 6, 2, 1 }, { 1, 3, 5, 0 }, {2, 4, 0, 5 } };
 
@@ -39,7 +38,7 @@ Snake::Snake(QCanvas* c)
 void Snake::createSnake()
 {
    snakeparts = new QCanvasPixmapArray();
-   QString s0 = Resource::findPixmap("snake/s0001");
+   QString s0 = Opie::Core::OResource::findPixmap("snake/s0001");
    s0.replace(QRegExp("0001"),"%1");
    snakeparts->readPixmaps(s0, 15);
  
