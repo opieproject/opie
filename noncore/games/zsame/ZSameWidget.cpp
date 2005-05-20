@@ -19,11 +19,8 @@
  *
  */
 
-#include <stdio.h>
-
 #include <opie2/oapplicationfactory.h>
-
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 #include <qtoolbar.h>
 #include <qmenubar.h>
@@ -58,25 +55,25 @@ ZSameWidget::ZSameWidget( QWidget* parent, const char* name,  WFlags fl )
 
     QPopupMenu* fileMenu = new QPopupMenu( this );
 
-    QAction* a = new QAction(tr("New Game"), Resource::loadIconSet("new") ,
+    QAction* a = new QAction(tr("New Game"), Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
                              QString::null, 0, this, "new_icon");
     a->addTo( fileMenu );
     a->addTo( tb );
     connect(a, SIGNAL(activated()), this, SLOT(m_new()));
 
-    a = new QAction(tr("Restart This Board"), Resource::loadIconSet("redo"),
+    a = new QAction(tr("Restart This Board"), Opie::Core::OResource::loadPixmap( "redo", Opie::Core::OResource::SmallIcon ),
                               QString::null, 0, this, "restart_board" );
     a->addTo( fileMenu );
     connect( a, SIGNAL(activated()), this, SLOT(m_restart()));
     restart = a;
 
-    a = new QAction( tr("Undo"), Resource::loadIconSet("undo"),
+    a = new QAction( tr("Undo"), Opie::Core::OResource::loadPixmap( "undo", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, "undo_action" );
     a->addTo( fileMenu );
     a->addTo( tb );
     connect( a, SIGNAL(activated()), this, SLOT(m_undo()));
 
-    a = new QAction(tr("Quit"), Resource::loadIconSet("quit_icon"),
+    a = new QAction(tr("Quit"), Opie::Core::OResource::loadPixmap( "quit_icon", Opie::Core::OResource::SmallIcon ),
                               QString::null, 0, this, "quit_action");
     a->addTo( fileMenu );
     a->addTo( tb );

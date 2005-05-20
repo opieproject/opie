@@ -18,12 +18,9 @@
  *
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <opie2/oresource.h>
 
-
-
-#include <qpe/resource.h>
+#include <qbitmap.h>
 
 #include <time.h>
 #include <assert.h>
@@ -40,10 +37,7 @@ struct StoneSlice {
 StoneWidget::StoneWidget( QWidget *parent, int x, int y )
     : QWidget(parent,"StoneWidget"), stonefield(x,y)
 {
-//    setBackgroundPixmap(QPixmap(locate("wallpaper", "Time-For-Lunch-2.jpg")));
-//    QPixmap stonemap(locate("appdata", "stones.png"));
-
-    QPixmap stonemap = Resource::loadPixmap("zsame/stones" );
+    QPixmap stonemap = Opie::Core::OResource::loadPixmap( "zsame/stones" );
     assert(!stonemap.isNull());
 
     slice=0;
