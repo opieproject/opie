@@ -82,6 +82,17 @@ class OResource
          * @return QPixmap containing image loaded (and scaled if appropriate)
          **/
         static QPixmap loadPixmap( const QString &name, Scale scale = NoScale );
+
+        /**
+         * @fn findPixmap( const QString &name )
+         * @brief Retrieve fully qualified filename of image.
+         *
+         * @param name - name of pixmap image to retrieve filename of
+         *
+         * @return QString containing fully qualified filename of image
+         *         (Null string if image is not found)
+         **/
+        static QString findPixmap( const QString &name );
 };
 
 } // namespace Core

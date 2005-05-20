@@ -80,6 +80,11 @@ QPixmap OResource::loadPixmap( const QString &name, Scale scale )
     return pixmap;
 }
 
+QString OResource::findPixmap( const QString &name )
+{
+    return Resource::findPixmap( name );
+}
+
 } // namespace Core
 } // namespace Opie
 
