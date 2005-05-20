@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nationaldays>
+<description value="Feste Nazionali Italiane"/>
+
+<entries>
+ <entry name="Capodanno" date="01-01"/>
+ <entry name="Epifania" date="01-06"/>
+ <entry name="Festa dei Lavoratori" date="05-01"/>
+ <entry name="Festa della Liberazione" date="04-25"/>
+ <entry name="Ferragosto" date="08-15"/>
+ <entry name="Tutti i Santi" date="11-01"/>
+ <entry name="Festa della Repubblica" date="06-02"/>
+ <entry name="Natale" date="12-25"/>
+ <entry name="S. Stefano" date="12-26"/>
+ <entry name="Pasqua" type="floating">
+  <calculation>
+   <date value="easter"/>
+  </calculation>
+ </entry>
+ <entry name="Pasquetta" type="floating">
+  <calculation>
+   <date value="easter"/>
+   <offset value="1"/>
+  </calculation>
+ </entry>
+</entries>
+
+</nationaldays>
