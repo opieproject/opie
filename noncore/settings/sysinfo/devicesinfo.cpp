@@ -208,7 +208,7 @@ void CardsCategory::populate()
     OPcmciaSystem::CardIterator it = sys->iterator();
     while ( it.current() )
     {
-        new CardDevice( this, (const char*) it.currentKey() );
+        new CardDevice( this, it.current()->identity() );
         ++it;
     }
 }

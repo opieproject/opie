@@ -112,7 +112,7 @@ void PcmciaManager::popupTimeout()
 
 void PcmciaManager::mousePressEvent( QMouseEvent* )
 {
-    QPopupMenu * menu = new QPopupMenu( this );
+    QPopupMenu* menu = new QPopupMenu( this );
     QStringList cmd;
     bool execute = true;
 
@@ -123,9 +123,18 @@ void PcmciaManager::mousePressEvent( QMouseEvent* )
     int i = 0;
     while ( it.current() )
     {
-        menu->insertItem( tr( "Eject card %1: %2" ).arg( i++ ).arg( it.currentKey() ), 1 );
+
+        QPopupMenu* submenu = new QPopupMenu( menu );
+        submenu->insertItem( "Eject" );
+        submenu->insertItem( "Insert" );
+        submenu->insertItem( "Suspend" );
+        submenu->insertItem( "Resume" );
+        submenu->insertItem( "Configure" );
+
+        menu->insertItem( tr( "%1: %2" ).arg( i++ ).arg( it.current()->identity() ), submenu, 1 );
         ++it;
     }
+
 
 
     /* insert items depending on number of cards etc.
@@ -135,7 +144,7 @@ void PcmciaManager::mousePressEvent( QMouseEvent* )
                           tr( "Eject SD/MMC card" ), 0 );
     }
 
-    
+
 
     if ( cardInPcmcia0 ) {
         menu->
@@ -168,7 +177,7 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
     /* check if a previously unknown card has been inserted */
     OPcmciaSystem::instance()->synchronize();
 
-    if ( !OPcmciaSystem::instance()->count() ) return;
+    if ( !OPcmciaSystem::instance()->cardCount() ) return;
 
     OConfig cfg( "PCMCIA" );
     cfg.setGroup( "Global" );
@@ -178,9 +187,10 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
     OPcmciaSystem::CardIterator it = sys->iterator();
 
     bool newCard = true;
-    while ( it.current() && newCard )
+
+    while ( it.current() && !it.current()->isEmpty() && newCard )
     {
-        QString name = it.currentKey();
+        QString name = it.current()->identity();
         for ( int i = 0; i < nCards; ++i )
         {
             QString cardSection = QString( "Card_%1" ).arg( i );
@@ -195,10 +205,10 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
         }
         if ( !newCard ) ++it; else break;
     }
-    QString newCardName = it.currentKey();
 
     if ( newCard )
     {
+        QString newCardName = it.current()->identity();
         odebug << "pcmcia: new card detected" << oendl;
         cfg.setGroup( QString( "Card_%1" ).arg( nCards ) );
         cfg.writeEntry( "name", newCardName );
