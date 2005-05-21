@@ -187,47 +187,65 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
     OPcmciaSystem::CardIterator it = sys->iterator();
 
     bool newCard = true;
-
-    while ( it.current() && !it.current()->isEmpty() && newCard )
+    QString cardName;
+    
+    while ( it.current() && newCard )
     {
-        QString name = it.current()->identity();
-        for ( int i = 0; i < nCards; ++i )
+        if ( it.current()->isEmpty() )
         {
-            QString cardSection = QString( "Card_%1" ).arg( i );
-            cfg.setGroup( cardSection );
-            QString cardName = cfg.readEntry( "name" );
-            odebug << "comparing card '" << name << "' with known card '" << cardName << "'" << oendl;
-            if ( cardName == name )
-            {
-                newCard = false;
-                break;
-            }
+            odebug << "skipping empty card in socket " << it.current()->number() << oendl;
+            ++it;
+            continue;
         }
-        if ( !newCard ) ++it; else break;
+        else
+        {
+            cardName = it.current()->identity();
+            for ( int i = 0; i < nCards; ++i )
+            {
+                QString cardSection = QString( "Card_%1" ).arg( i );
+                cfg.setGroup( cardSection );
+                QString name = cfg.readEntry( "name" );
+                odebug << "comparing card '" << cardName << "' with known card '" << name << "'" << oendl;
+                if ( cardName == name )
+                {
+                    newCard = false;
+                    break;
+                }
+            }
+            if ( !newCard ) ++it; else break;
+        }
     }
-
     if ( newCard )
     {
-        QString newCardName = it.current()->identity();
         odebug << "pcmcia: new card detected" << oendl;
         cfg.setGroup( QString( "Card_%1" ).arg( nCards ) );
-        cfg.writeEntry( "name", newCardName );
+        cfg.writeEntry( "name", cardName );
         cfg.setGroup( "Global" );
         cfg.writeEntry( "nCards", nCards+1 );
         cfg.write();
 
         int result = QMessageBox::information( qApp->desktop(),
                                            tr( "PCMCIA/CF Subsystem" ),
-                                           tr( "You have inserted a new card\n%1\nDo you want to configure this card?" ).arg( newCardName ),
+                                           tr( "You have inserted a new card:\n%1\nDo you want to configure?" ).arg( cardName ),
                                            tr( "Yes" ), tr( "No" ), 0, 0, 1 );
         odebug << "result = " << result << oendl;
-
+        if ( result == 0 )
+        {
+            QMessageBox::information( qApp->desktop(),
+                                      tr( "PCMCIA/CF Subsystem" ),
+                                      tr( "Sorry, not yet implemented...\n~lart mickeyl :D" ),
+                                      tr( "No Problem" ), 0, 0, 0 );
+        }
+        else
+        {
+            odebug << "pcmcia: user doesn't want to configure " << cardName << " now." << oendl;
+        }
     }
     else
     {
         odebug << "pcmcia: card has been previously inserted" << oendl;
     }
-    repaint( TRUE );
+    repaint( true );
 }
 
 
