@@ -23,8 +23,8 @@
 #include "fifteenconfigdialog.h"
 
 #include <opie2/ofileselector.h>
+#include <opie2/oresource.h>
 
-#include <qtopia/resource.h>
 #include <qtopia/config.h>
 #include <qtopia/qpeapplication.h>
 
@@ -52,6 +52,7 @@ FifteenMainWindow::FifteenMainWindow(QWidget *parent, const char* name, WFlags f
   QMenuBar *menubar = new QMenuBar( toolbar );
   menubar->setMargin(0);
   QPopupMenu *game = new QPopupMenu( this );
+  menubar->insertItem( tr( "Game" ), game );
 
   QWidget *spacer = new QWidget( toolbar );
   spacer->setBackgroundMode( PaletteButton );
@@ -65,26 +66,17 @@ FifteenMainWindow::FifteenMainWindow(QWidget *parent, const char* name, WFlags f
 
 
 
-  QAction *a = new QAction( tr( "Randomize" ), Resource::loadPixmap( "new" ),
+  QAction *a = new QAction( tr( "Randomize" ), Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
 			    QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), table, SLOT( slotRandomize() ) );
   a->addTo( game );
   a->addTo( toolbar );
 
 
-  a  = new QAction( tr("Configure"), Resource::loadPixmap( "SettingsIcon" ),
+  a  = new QAction( tr("Configure"), Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ),
                     QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated()), table, SLOT( slotConfigure()) );
   a->addTo( game );
-
-    /* This is pointless and confusing.
-  a = new QAction( tr( "Solve" ), Resource::loadIconSet( "repeat" ),
-		   QString::null, 0, this, 0 );
-  connect( a, SIGNAL( activated() ), table, SLOT( slotReset() ) );
-  a->addTo( game );
-  a->addTo( toolbar );
-    */
-  menubar->insertItem( tr( "Game" ), game );
 }
 
 

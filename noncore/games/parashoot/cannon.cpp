@@ -18,8 +18,7 @@
 **
 **********************************************************************/
 
-#include <qtopia/resource.h>
-
+#include <opie2/oresource.h>
 
 #include "codes.h"  
 #include "cannon.h"
@@ -32,7 +31,7 @@ shotsfired=0;
     cannonx = 0;
     cannony = 0;
     cannonarray = new QCanvasPixmapArray();
-    QString c0 = Resource::findPixmap("parashoot/can0001");
+    QString c0 = Opie::Core::OResource::findPixmap("parashoot/can0001");
     c0.replace(QRegExp("0001"),"%1");
     cannonarray->readPixmaps(c0,17);
     setSequence(cannonarray);

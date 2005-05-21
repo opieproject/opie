@@ -22,7 +22,7 @@
 #include "man.h"
 #include "codes.h"
 
-#include <qtopia/resource.h>
+#include <opie2/oresource.h>
 
 
 static QList<Helicopter> all;
@@ -34,7 +34,7 @@ Helicopter::Helicopter(QCanvas* canvas) :
     all.append(this);
     hits = 0;
     QCanvasPixmapArray* helicopterarray = new QCanvasPixmapArray();
-    QString h0 = Resource::findPixmap("parashoot/helicopter0001");
+    QString h0 = Opie::Core::OResource::findPixmap("parashoot/helicopter0001");
     h0.replace(QRegExp("0001"),"%1");
     helicopterarray->readPixmaps(h0,4 );
 

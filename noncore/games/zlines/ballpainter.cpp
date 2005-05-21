@@ -17,7 +17,7 @@
  *                                                                         *
  ***************************************************************************/
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 #include "ballpainter.h"
 //#include "shotcounter.h"
@@ -59,7 +59,7 @@ QPixmap* BallPainter::pixmap( enum Pixmaps pix )
         break;
     }
 
-    return new QPixmap(Resource::loadPixmap(name) );
+    return new QPixmap(Opie::Core::OResource::loadPixmap(name) );
 }
 
 void BallPainter::createPixmap()

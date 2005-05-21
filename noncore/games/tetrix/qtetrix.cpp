@@ -21,7 +21,7 @@
 
 #include "qtetrix.h"
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 #include <qlabel.h>
 #include <qdatetime.h>
@@ -97,7 +97,7 @@ void ShowNextPiece::drawNextSquare(int x, int y,QColor *color)
 QTetrix::QTetrix( QWidget *parent, const char *name, WFlags f )
     : QMainWindow( parent, name, f )
 {
-    setIcon( Resource::loadPixmap( "tetrix_icon" ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "tetrix_icon" ) );
     setCaption( tr("Tetrix" ) );
 
     QTime t = QTime::currentTime();

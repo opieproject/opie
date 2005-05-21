@@ -20,8 +20,7 @@
 #include "codes.h"  
 #include "base.h"
 
-#include <qtopia/resource.h>
-
+#include <opie2/oresource.h>
 
 int damage;
 
@@ -31,7 +30,7 @@ Base::Base(QCanvas* canvas) :
     ohdear("crmble01")
 {
    basearray = new QCanvasPixmapArray();
-   QString b0 = Resource::findPixmap("parashoot/b0001");
+   QString b0 = Opie::Core::OResource::findPixmap("parashoot/b0001");
    b0.replace(QRegExp("0001"),"%1");
    basearray->readPixmaps(b0, 4);
    setSequence(basearray);

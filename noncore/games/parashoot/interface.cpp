@@ -21,8 +21,9 @@
 #include "interface.h"
 #include "man.h"
 
+#include <opie2/oresource.h>
+
 #include <qtopia/qpeapplication.h>
-#include <qtopia/resource.h>
 
 #include <qtoolbar.h>
 #include <qtoolbutton.h>
@@ -52,8 +53,9 @@ ParaShoot::ParaShoot(QWidget* parent, const char* name, WFlags f) :
     toolbar->setHorizontalStretchable( TRUE );
 
     setCaption( tr("ParaShoot") );
-    new QToolButton( Resource::loadIconSet("new"), tr("New Game"), 0,
-                           this, SLOT(newGame()), toolbar, "New Game");
+    QToolButton *btn = new QToolButton( Opie::Core::OResource::loadPixmap("new", Opie::Core::OResource::SmallIcon),
+                                        tr("New Game"), 0, this, SLOT(newGame()), toolbar, "New Game");
+    btn->setUsesBigPixmap( qApp->desktop()->size().width() > 330 );
 
     levelscore = new QLabel(toolbar);
     levelscore->setBackgroundMode( PaletteButton );
@@ -79,7 +81,7 @@ void ParaShoot::resizeEvent(QResizeEvent *)
     int fw = style().defaultFrameWidth();
     canvas.resize( s.width() - fw - 2, s.height() - fw - 2);
 
-    QImage bgimage = Resource::loadImage("parashoot/sky");
+    QImage bgimage = Opie::Core::OResource::loadImage("parashoot/sky");
     QPixmap bgpixmap;
 
     bgpixmap.convertFromImage(bgimage.smoothScale(canvas.width(),

@@ -21,8 +21,9 @@
 
 #include "wordgame.h"
 
+#include <opie2/oresource.h>
+
 #include <qpe/global.h>
-#include <qpe/resource.h>
 #include <qpe/config.h>
 
 #include <qapplication.h>
@@ -118,7 +119,7 @@ WordGame::WordGame( QWidget* parent, const char* name, WFlags fl ) :
 	tile_btweak = 0;
     }
 
-    setIcon( Resource::loadPixmap( "wordgame/WordGame.png" ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "wordgame/WordGame" ) );
     setCaption( tr("Word Game") );
 
     setToolBarsMovable( FALSE );
@@ -127,11 +128,18 @@ WordGame::WordGame( QWidget* parent, const char* name, WFlags fl ) :
     setCentralWidget(vbox);
     toolbar = new QToolBar(this);
     addToolBar(toolbar, Bottom);
-    reset = new QToolButton(Resource::loadPixmap("back"), tr("Back"), "", this, SLOT(resetTurn()), toolbar);
-    done = new QToolButton(Resource::loadPixmap("done"), tr("Done"), "", this, SLOT(endTurn()), toolbar);
+    bool useBigIcon = qApp->desktop()->size().width() > 330;
+    reset = new QToolButton(Opie::Core::OResource::loadPixmap("back", Opie::Core::OResource::SmallIcon),
+                            tr("Back"), "", this, SLOT(resetTurn()), toolbar);
+    reset->setUsesBigPixmap( useBigIcon );
+    done = new QToolButton(Opie::Core::OResource::loadPixmap("done", Opie::Core::OResource::SmallIcon),
+                           tr("Done"), "", this, SLOT(endTurn()), toolbar);
+    done->setUsesBigPixmap( useBigIcon );
     scoreinfo = new ScoreInfo(toolbar);
     scoreinfo->setFont(QFont("Helvetica",10));
-    new QToolButton(Resource::loadPixmap("finish"), tr("Close"), "", this, SLOT(endGame()), toolbar);
+    QToolButton *btn = new QToolButton(Opie::Core::OResource::loadPixmap("finish", Opie::Core::OResource::SmallIcon),
+                                       tr("Close"), "", this, SLOT(endGame()), toolbar);
+    btn->setUsesBigPixmap( useBigIcon );
     toolbar->setStretchableWidget(scoreinfo);
 
     cpu = 0;
@@ -305,7 +313,7 @@ bool WordGame::loadRules(const QString &name)
 	if ( re++ < 10 ) ts >> e;
     }
 
-    QImage shim = Resource::loadImage("wordgame/wordgame_shapes");
+    QImage shim = Opie::Core::OResource::loadImage("wordgame/wordgame_shapes");
     shim = shim.smoothScale((re-1)*TileItem::smallWidth(),TileItem::smallHeight());
     QPixmap bgshapes;
     bgshapes.convertFromImage(shim);
@@ -1362,7 +1370,7 @@ void Rack::contentsMouseMoveEvent(QMouseEvent* e)
     }
 }
 
-void Rack::contentsMouseReleaseEvent(QMouseEvent* e)
+void Rack::contentsMouseReleaseEvent(QMouseEvent* /*e*/)
 {
     if ( computerized() )
 	return;

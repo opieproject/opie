@@ -23,7 +23,8 @@
 #include "man.h"
 #include "helicopter.h"
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
+
 #include <qpe/qmath.h>
 
 
@@ -35,7 +36,7 @@ Bullet::Bullet(QCanvas* canvas, double angle, int cannonx, int cannony) :
         QCanvasSprite(0, canvas),
 	bang("collide01")
 {
-     QCanvasPixmapArray* bulletarray = new QCanvasPixmapArray(Resource::findPixmap("parashoot/bullet"));
+     QCanvasPixmapArray* bulletarray = new QCanvasPixmapArray(Opie::Core::OResource::findPixmap("parashoot/bullet"));
      setSequence(bulletarray);
      if (nobullets < limit) { 
         nobullets++;

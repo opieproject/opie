@@ -21,8 +21,9 @@
 #include "minesweep.h"
 #include "minefield.h"
 
+#include <opie2/oresource.h>
+
 #include <qtopia/qpeapplication.h>
-#include <qtopia/resource.h>
 #include <qtopia/config.h>
 
 #include <qtoolbar.h>
@@ -242,7 +243,7 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     srand(::time(0));
     setCaption( tr("Mine Sweep") );
     QPEApplication::setInputMethodHint(this, QPEApplication::AlwaysOff );
-    setIcon( Resource::loadPixmap( "minesweep/MineSweep" ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "minesweep/MineSweep" ) );
 
     QToolBar *toolBar = new QToolBar( this );
     toolBar->setHorizontalStretchable( TRUE );

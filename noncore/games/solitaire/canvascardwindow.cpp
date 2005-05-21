@@ -24,14 +24,13 @@
 #include "harpcardgame.h"
 #include "teeclubcardgame.h"
 
-
-
+#include <opie2/oresource.h>
 
 CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) :
     QMainWindow(parent, name, f), canvas(230, 260), snapOn(TRUE), cardBack(4), gameType(0),
     cardGame(NULL)
 {
-    setIcon( Resource::loadPixmap( "cards" ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "cards" ) );
     setCaption(tr("Patience"));
 
     // Create Playing Area for Games
@@ -41,7 +40,7 @@ CanvasCardWindow::CanvasCardWindow(QWidget* parent, const char* name, WFlags f) 
   canvas.setBackgroundColor(QColor(0x08, 0x98, 0x2D));
     } else {
         QPixmap bg;
-  bg.convertFromImage( Resource::loadImage( "table_pattern" ), ThresholdDither );
+  bg.convertFromImage( Opie::Core::OResource::loadImage( "table_pattern" ), ThresholdDither );
         canvas.setBackgroundPixmap(bg);
     }
 

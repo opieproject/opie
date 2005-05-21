@@ -24,7 +24,6 @@
 #include "canvasshapes.h"
 #include "canvascard.h"
 
-#include <qpe/resource.h>
 #include <qpe/config.h>
 
 #include <qmainwindow.h>

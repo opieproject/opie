@@ -7,9 +7,9 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
-#include <qpe/resource.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -27,7 +27,7 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
 {
     if (!name) setName("BackGammon");
     setCaption(tr( "Backgammon") );
-    setIcon( Resource::loadPixmap( "backgammon" ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "backgammon" ) );
     //general counter varaible
     int a=0;
     //the game engine
@@ -169,13 +169,13 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     //the pieces
     p1=new CanvasImageItem*[15];
     p1_side=new CanvasImageItem*[15];
-    QImage piece_1_all(Resource::loadImage("backgammon/pieces/"+piecesA_name));
+    QImage piece_1_all(Opie::Core::OResource::loadImage("backgammon/pieces/"+piecesA_name));
     QImage piece_1_front=piece_1_all.copy(0,0,15,15);
     QImage piece_1_side=piece_1_all.copy(0,15,15,5);
 
     p2=new CanvasImageItem*[15];
     p2_side=new CanvasImageItem*[15];
-    QImage piece_2_all(Resource::loadImage("backgammon/pieces/"+piecesB_name));
+    QImage piece_2_all(Opie::Core::OResource::loadImage("backgammon/pieces/"+piecesB_name));
     QImage piece_2_front=piece_2_all.copy(0,0,15,15);
     QImage piece_2_side=piece_2_all.copy(0,15,15,5);
 
@@ -195,13 +195,13 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     draw();
 
     //the dice
-    QImage dicebgA_all(Resource::loadImage("backgammon/dice/"+diceA_name));
+    QImage dicebgA_all(Opie::Core::OResource::loadImage("backgammon/dice/"+diceA_name));
     diceA1=new CanvasImageItem*[7];
     diceA2=new CanvasImageItem*[7];
-    QImage dicebgB_all(Resource::loadImage("backgammon/dice/"+diceB_name));
+    QImage dicebgB_all(Opie::Core::OResource::loadImage("backgammon/dice/"+diceB_name));
     diceB1=new CanvasImageItem*[7];
     diceB2=new CanvasImageItem*[7];
-    QImage oddsbg_all=(Resource::loadImage("backgammon/odds/"+odds_name));
+    QImage oddsbg_all=(Opie::Core::OResource::loadImage("backgammon/odds/"+odds_name));
     //oddsDice=new CanvasImageItem*[6];
 
 
@@ -247,7 +247,7 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     //oddsDice[0]->show();
 
     //set the board
-    QImage boardbg(Resource::loadImage("backgammon/boards/"+board_name));
+    QImage boardbg(Opie::Core::OResource::loadImage("backgammon/boards/"+board_name));
     board=new CanvasImageItem(boardbg,area);
     board->setX(0);
     board->setY(0);
@@ -256,7 +256,7 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     board->show();
 
     //the table
-    QImage tablebg(Resource::loadImage("backgammon/table/"+table_name));
+    QImage tablebg(Opie::Core::OResource::loadImage("backgammon/table/"+table_name));
     table=new CanvasImageItem(tablebg,area);
     table->setX(0);
     table->setY(200-2);
@@ -265,7 +265,7 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     table->show();
 
     //the no move marker
-    QImage nomovebg(Resource::loadImage("backgammon/no_move"));
+    QImage nomovebg(Opie::Core::OResource::loadImage("backgammon/no_move"));
     nomove_marker=new CanvasImageItem(nomovebg,area);
     nomove_marker->setX(0);
     nomove_marker->setY(200);
@@ -924,17 +924,17 @@ void BackGammon::autoroll_dice2()
 
 void BackGammon::applytheme()
 {
-    QImage boardbg(Resource::loadImage("backgammon/boards/"+board_name));
+    QImage boardbg(Opie::Core::OResource::loadImage("backgammon/boards/"+board_name));
     board->setImage(boardbg);
 
-    QImage tablebg(Resource::loadImage("backgammon/table/"+table_name));
+    QImage tablebg(Opie::Core::OResource::loadImage("backgammon/table/"+table_name));
     table->setImage(tablebg);
 
-    QImage piece_1_all(Resource::loadImage("backgammon/pieces/"+piecesA_name));
+    QImage piece_1_all(Opie::Core::OResource::loadImage("backgammon/pieces/"+piecesA_name));
     QImage piece_1_front=piece_1_all.copy(0,0,15,15);
     QImage piece_1_side=piece_1_all.copy(0,15,15,5);
 
-    QImage piece_2_all(Resource::loadImage("backgammon/pieces/"+piecesB_name));
+    QImage piece_2_all(Opie::Core::OResource::loadImage("backgammon/pieces/"+piecesB_name));
     QImage piece_2_front=piece_2_all.copy(0,0,15,15);
     QImage piece_2_side=piece_2_all.copy(0,15,15,5);
 
@@ -949,9 +949,9 @@ void BackGammon::applytheme()
     }
     draw();
 
-    QImage dicebgA_all(Resource::loadImage("backgammon/dice/"+diceA_name));
-    QImage dicebgB_all(Resource::loadImage("backgammon/dice/"+diceB_name));
-    QImage oddsbg_all=(Resource::loadImage("backgammon/odds/"+odds_name));
+    QImage dicebgA_all(Opie::Core::OResource::loadImage("backgammon/dice/"+diceA_name));
+    QImage dicebgB_all(Opie::Core::OResource::loadImage("backgammon/dice/"+diceB_name));
+    QImage oddsbg_all=(Opie::Core::OResource::loadImage("backgammon/odds/"+odds_name));
 
     for(a=0;a<7;a++)
     {

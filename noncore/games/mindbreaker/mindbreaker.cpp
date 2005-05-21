@@ -20,7 +20,8 @@
 
 #include "mindbreaker.h"
 
-#include <qtopia/resource.h>
+#include <opie2/oresource.h>
+
 #include <qtopia/config.h>
 #include <qtopia/qpeapplication.h>
 #include <qtoolbar.h>
@@ -139,7 +140,7 @@ QVector<QImage> Peg::specialPegs;
 
 void Peg::buildImages()
 {
-    QImage pegs = Resource::loadImage("mindbreaker/pegs");
+    QImage pegs = Opie::Core::OResource::loadImage("mindbreaker/pegs");
     int x = 0;
     int y = 0;
     int i;
@@ -157,7 +158,7 @@ void Peg::buildImages()
         x += peg_size;
     }
 
-    QImage image = Resource::loadImage("mindbreaker/mindbreaker");
+    QImage image = Opie::Core::OResource::loadImage("mindbreaker/mindbreaker");
     /* copy from master image to functional images */
     x = 0;
     y = panel_height;
@@ -289,9 +290,9 @@ MindBreaker::MindBreaker( QWidget *parent, const char *name, int wFlags )
     QToolBar *tb = new QToolBar(this);
     tb->setHorizontalStretchable( TRUE );
 
-    QIconSet newicon = Resource::loadIconSet("new");
-    new QToolButton(newicon, tr("New Game"), 0,
-                                       board, SLOT(clear()), tb, "NewGame");
+    QToolButton *btn = new QToolButton( Opie::Core::OResource::loadPixmap("new", Opie::Core::OResource::SmallIcon), tr("New Game"), 0,
+                     board, SLOT(clear()), tb, "NewGame");
+    btn->setUsesBigPixmap( qApp->desktop()->size().width() > 330 );
 
     score = new QToolButton(tb);
     score->setText("");
@@ -483,7 +484,7 @@ void MindBreakerBoard::doFixSize()
     canvas()->resize(s.width() - fw, s.height() - fw);
     Peg::buildImages(); // must be done BEFORE any pegs are made
 
-    QImage image = Resource::loadImage("mindbreaker/mindbreaker");
+    QImage image = Opie::Core::OResource::loadImage("mindbreaker/mindbreaker");
 
     /* copy from master image to functional images */
     int x = 0;

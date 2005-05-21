@@ -22,8 +22,7 @@
 #include "man.h"
 #include "base.h"
 
-#include <qtopia/resource.h>
-
+#include <opie2/oresource.h>
 
 int mancount;
 
@@ -32,7 +31,7 @@ Man::Man(QCanvas* canvas) :
     splat("lose") // No tr
 {
     manarray = new QCanvasPixmapArray();
-    QString m0 = Resource::findPixmap("parashoot/man0001");
+    QString m0 = Opie::Core::OResource::findPixmap("parashoot/man0001");
     m0.replace(QRegExp("0001"),"%1");
     manarray->readPixmaps(m0, 7);
     setSequence(manarray);
@@ -47,7 +46,7 @@ Man::Man(QCanvas* canvas, int x, int y) :
     splat("bang") // No tr
 {
     manarray = new QCanvasPixmapArray();
-    QString m0 = Resource::findPixmap("parashoot/man0001");
+    QString m0 = Opie::Core::OResource::findPixmap("parashoot/man0001");
     m0.replace(QString("0001"),"%1");
     manarray->readPixmaps(m0, 7);
     setSequence(manarray);
