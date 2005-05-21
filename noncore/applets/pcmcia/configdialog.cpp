@@ -27,43 +27,47 @@
 
 */
 
-#ifndef PCMCIA_H
-#define PCMCIA_H
+#include "configdialog.h"
 
-#include <qwidget.h>
-#include <qpixmap.h>
-#include <qpopupmenu.h>
+/* OPIE */
+#include <opie2/oconfig.h>
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
-namespace Opie { namespace Core { class OPcmciaSocket; } };
+/* QT */
+#include <qcombobox.h>
 
-class PcmciaManager : public QWidget
+ConfigDialog::ConfigDialog( const QString& cardname, QWidget* parent )
+             :ConfigDialogBase( parent, "pcmcia config dialog", true )
 {
-    Q_OBJECT
-  public:
-    PcmciaManager( QWidget *parent = 0 );
-    ~PcmciaManager();
-    static int position();
+    setCaption( tr( "Configure %1" ).arg( cardname ) );
+    
+    OConfig cfg( "PCMCIA" );
+    cfg.setGroup( "Global" );
+    int nCards = cfg.readNumEntry( "nCards", 0 );
+    QString insert;
+    
+    for ( int i = 0; i < nCards; ++i )
+    {
+        QString cardSection = QString( "Card_%1" ).arg( i );
+        cfg.setGroup( cardSection );
+        QString name = cfg.readEntry( "name" );
+        odebug << "comparing card '" << cardname << "' with known card '" << name << "'" << oendl;
+        if ( cardname == name )
+        {
+            insert = cfg.readEntry( "insert" );
+            break;
+        }
+    }
+    odebug << "preferred action for card '" << cardname << "' seems to be '" << insert << "'" << oendl;
+    
+    if ( !insert.isEmpty() )
+    {
+        for ( int i; i < cbAction->count(); ++i )
+            if ( cbAction->text( i ) == insert ) cbAction->setCurrentItem( i );
+    }
+}
 
-  private slots:
-    void cardMessage( const QCString& msg, const QByteArray& );
-    void userCardAction( int action );
-    void popupTimeout();
-
-  protected:
-    void paintEvent( QPaintEvent* );
-    void mousePressEvent( QMouseEvent * );
-
-  private:
-    void configure( Opie::Core::OPcmciaSocket* );
-    void execCommand( const QStringList &command );
-    void popUp(QString message, QString icon = QString::null );
-
-  private:
-    int m_commandOrig;
-    QPixmap pm;
-    QPopupMenu *popupMenu;
-
-};
-
-#endif
-
+ConfigDialog::~ConfigDialog()
+{
+}

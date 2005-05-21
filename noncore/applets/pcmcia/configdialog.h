@@ -27,43 +27,18 @@
 
 */
 
-#ifndef PCMCIA_H
-#define PCMCIA_H
+#ifndef CONFIGDIALOG_H
+#define CONFIGDIALOG_H
 
-#include <qwidget.h>
-#include <qpixmap.h>
-#include <qpopupmenu.h>
+#include "configdialogbase.h"
 
-namespace Opie { namespace Core { class OPcmciaSocket; } };
-
-class PcmciaManager : public QWidget
+class ConfigDialog : public ConfigDialogBase
 {
-    Q_OBJECT
+  Q_OBJECT
   public:
-    PcmciaManager( QWidget *parent = 0 );
-    ~PcmciaManager();
-    static int position();
-
-  private slots:
-    void cardMessage( const QCString& msg, const QByteArray& );
-    void userCardAction( int action );
-    void popupTimeout();
-
-  protected:
-    void paintEvent( QPaintEvent* );
-    void mousePressEvent( QMouseEvent * );
-
-  private:
-    void configure( Opie::Core::OPcmciaSocket* );
-    void execCommand( const QStringList &command );
-    void popUp(QString message, QString icon = QString::null );
-
-  private:
-    int m_commandOrig;
-    QPixmap pm;
-    QPopupMenu *popupMenu;
-
+  
+    ConfigDialog( const QString& cardname, QWidget* parent );
+    ~ConfigDialog();
 };
 
 #endif
-

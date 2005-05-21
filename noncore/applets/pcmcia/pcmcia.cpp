@@ -28,6 +28,7 @@
 */
 
 #include "pcmcia.h"
+#include "configdialog.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
@@ -109,6 +110,7 @@ void PcmciaManager::popupTimeout()
     popupMenu->hide();
 }
 
+enum { EJECT, INSERT, SUSPEND, RESUME, CONFIGURE };
 
 void PcmciaManager::mousePressEvent( QMouseEvent* )
 {
@@ -123,43 +125,23 @@ void PcmciaManager::mousePressEvent( QMouseEvent* )
     int i = 0;
     while ( it.current() )
     {
-
         QPopupMenu* submenu = new QPopupMenu( menu );
-        submenu->insertItem( "Eject" );
-        submenu->insertItem( "Insert" );
-        submenu->insertItem( "Suspend" );
-        submenu->insertItem( "Resume" );
-        submenu->insertItem( "Configure" );
-
+        submenu->insertItem( "&Eject",     EJECT+i*100 );
+        submenu->insertItem( "&Insert",    INSERT+i*100 );
+        submenu->insertItem( "&Suspend",   SUSPEND+i*100 );
+        submenu->insertItem( "&Resume",    RESUME+i*100 );
+        submenu->insertItem( "&Configure", CONFIGURE+i*100 );
+        
+        submenu->setItemEnabled( EJECT+i*100, !it.current()->isEmpty() );
+        submenu->setItemEnabled( INSERT+i*100, it.current()->isEmpty() );
+        submenu->setItemEnabled( SUSPEND+i*100, !it.current()->isEmpty() && !it.current()->isSuspended() );
+        submenu->setItemEnabled( RESUME+i*100, !it.current()->isEmpty() && it.current()->isSuspended() );
+        submenu->setItemEnabled( CONFIGURE+i*100, !it.current()->isEmpty() );
+        
+        connect( submenu, SIGNAL(activated(int)), this, SLOT(userCardAction(int)) );
         menu->insertItem( tr( "%1: %2" ).arg( i++ ).arg( it.current()->identity() ), submenu, 1 );
         ++it;
     }
-
-
-
-    /* insert items depending on number of cards etc.
-
-    if ( cardInSd ) {
-        menu->insertItem( QIconSet( Opie::Core::OResource::loadPixmap( "cardmon/ide", Opie::Core::OResource::SmallIcon ) ),
-                          tr( "Eject SD/MMC card" ), 0 );
-    }
-
-
-
-    if ( cardInPcmcia0 ) {
-        menu->
-        insertItem( QIconSet
-                    ( Opie::Core::OResource::loadPixmap( "cardmon/" + cardInPcmcia0Type, Opie::Core::OResource::SmallIcon ) ),
-                    tr( "Eject card 0: %1" ).arg( cardInPcmcia0Name ), 1 );
-    }
-
-    if ( cardInPcmcia1 ) {
-        menu->
-        insertItem( QIconSet
-                    ( Opie::Core::OResource::loadPixmap( "cardmon/" + cardInPcmcia1Type, Opie::Core::OResource::SmallIcon ) ),
-                    tr( "Eject card 1: %1" ).arg( cardInPcmcia1Name ), 2 );
-    }
-        */
 
     QPoint p = mapToGlobal( QPoint( 0, 0 ) );
     QSize s = menu->sizeHint();
@@ -187,7 +169,7 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
     OPcmciaSystem::CardIterator it = sys->iterator();
 
     bool newCard = true;
-    QString cardName;
+    OPcmciaSocket* theCard = 0;
     
     while ( it.current() && newCard )
     {
@@ -199,7 +181,8 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
         }
         else
         {
-            cardName = it.current()->identity();
+            OPcmciaSocket* theCard = it.current();
+            QString cardName = theCard->identity();
             for ( int i = 0; i < nCards; ++i )
             {
                 QString cardSection = QString( "Card_%1" ).arg( i );
@@ -219,26 +202,24 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
     {
         odebug << "pcmcia: new card detected" << oendl;
         cfg.setGroup( QString( "Card_%1" ).arg( nCards ) );
-        cfg.writeEntry( "name", cardName );
+        cfg.writeEntry( "name", theCard->identity() );
+        cfg.writeEntry( "insert", "suspend" );
         cfg.setGroup( "Global" );
         cfg.writeEntry( "nCards", nCards+1 );
         cfg.write();
 
         int result = QMessageBox::information( qApp->desktop(),
                                            tr( "PCMCIA/CF Subsystem" ),
-                                           tr( "You have inserted a new card:\n%1\nDo you want to configure?" ).arg( cardName ),
+                                           tr( "You have inserted a new card:\n%1\nDo you want to configure?" ).arg( theCard->identity() ),
                                            tr( "Yes" ), tr( "No" ), 0, 0, 1 );
         odebug << "result = " << result << oendl;
         if ( result == 0 )
         {
-            QMessageBox::information( qApp->desktop(),
-                                      tr( "PCMCIA/CF Subsystem" ),
-                                      tr( "Sorry, not yet implemented...\n~lart mickeyl :D" ),
-                                      tr( "No Problem" ), 0, 0, 0 );
+            configure( theCard );
         }
         else
         {
-            odebug << "pcmcia: user doesn't want to configure " << cardName << " now." << oendl;
+            odebug << "pcmcia: user doesn't want to configure " << theCard->identity() << " now." << oendl;
         }
     }
     else
@@ -252,8 +233,9 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
 void PcmciaManager::paintEvent( QPaintEvent * )
 {
     QPainter p( this );
-    qDebug( "count = %d", (OPcmciaSystem::instance()->count() ) );
-    if ( OPcmciaSystem::instance()->count() )
+    odebug << "sockets = " << OPcmciaSystem::instance()->count() << ", cards = " << OPcmciaSystem::instance()->cardCount() << oendl;
+    
+    if ( OPcmciaSystem::instance()->cardCount() )
     {
         p.drawPixmap( 0, 0, pm );
         show();
@@ -272,6 +254,28 @@ int PcmciaManager::position()
 void PcmciaManager::execCommand( const QStringList &strList )
 {
 }
+
+void PcmciaManager::userCardAction( int action )
+{
+    odebug << "user action requested. action = " << action << oendl;
+    
+    int socket = action / 100;
+    int what = action % 100;
+    
+    switch ( what )
+    {
+        case CONFIGURE: configure( OPcmciaSystem::instance()->socket( socket ) ); break;
+        default: odebug << "not yet implemented";
+    }
+}
+
+void PcmciaManager::configure( OPcmciaSocket* card )
+{
+    ConfigDialog dialog( card->identity(), qApp->desktop() );
+    int configresult = dialog.exec();
+    odebug << "pcmcia: configresult = " << configresult << oendl;
+}
+
 
 EXPORT_OPIE_APPLET_v1( PcmciaManager )
 
