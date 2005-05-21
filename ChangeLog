@@ -7,6 +7,7 @@
 	* Opie-Reader: Support for document formats ArriereGo and Reb, add flite output (tim,pohly)
 	* Opie-Networksettings: Add support for wlan-ng devices and improve WEP handling (Dirk Opfer)
 	* Wellenreiter: Remove Joining networks - use OpieStumbler for that (mickeyl)
+	* Opie-Mobilemsg has gone unsupported - it never really worked and there will be a replacement (mickeyl)
 
 	Fixed Bugs
 	----------
@@ -29,6 +30,7 @@
 	* libopienet: Skip hostap control interfaces 'wifi' and improve robustness in ONetworkInterface (mickeyl)
 	* libopieui: Remove OVersatileView and OVersatileViewItem (mickeyl)
 	* libopienet: Miscellaneous API cleanups (mickeyl)
+	* libopiecore: Add linux pcmcia system abstraction classes (mickeyl)
 
 2005-03-25	Opie 1.2.0
 
