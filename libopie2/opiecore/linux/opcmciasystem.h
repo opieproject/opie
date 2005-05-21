@@ -31,13 +31,12 @@
 #define OPCMCIASYSTEM_H
 
 #include <qobject.h>
-#include <qdict.h>
-#include <qmap.h>
+#include <qlist.h>
 
 namespace Opie {
 namespace Core {
 
-class OPcmciaCard;
+class OPcmciaSocket;
 
 /*======================================================================================
  * OPcmciaSystem
@@ -55,14 +54,18 @@ class OPcmciaSystem : public QObject
   Q_OBJECT
 
   public:
-    typedef QDict<OPcmciaCard> CardMap;
-    typedef QDictIterator<OPcmciaCard> CardIterator;
+    typedef QList<OPcmciaSocket> CardList;
+    typedef QListIterator<OPcmciaSocket> CardIterator;
 
   public:
     /**
-     * @returns the number of available interfaces
+     * @returns the number of available sockets
      */
     int count() const;
+    /**
+     * @returns the number of populated sockets
+     */
+    int cardCount() const;
     /**
      * @returns a pointer to the (one and only) @ref OSystem instance.
      */
@@ -72,12 +75,12 @@ class OPcmciaSystem : public QObject
      */
     CardIterator iterator() const;
     /**
-     * @returns a pointer to the @ref OAudioInterface object for the specified @a interface or 0, if not found
-     * @see OAudioInterface
+     * @returns a pointer to the @ref OPcmciaSocket object correspinding to socket number n, or 0, if not found
+     * @see OPcmciaSocket
      */
-    OPcmciaCard* card( const QString& interface ) const;
+    OPcmciaSocket* socket( unsigned int number );
     /**
-     * @internal Rebuild the internal interface database
+     * @internal Rebuild the internal database
      * @note Sometimes it might be useful to call this from client code,
      * e.g. after issuing a cardctl insert
      */
@@ -88,35 +91,74 @@ class OPcmciaSystem : public QObject
 
   private:
     static OPcmciaSystem* _instance;
-    CardMap _interfaces;
+    CardList _interfaces;
     class Private;
     Private *d;
 };
 
 
 /*======================================================================================
- * OPcmciaCard
+ * OPcmciaSocket
  *======================================================================================*/
 
-class OPcmciaCard : public QObject
+class OPcmciaSocket : public QObject
 {
   Q_OBJECT
 
   public:
     /**
-     * Constructor. Normally you don't create @ref OPcmciaCard objects yourself,
+     * Constructor. Normally you don't create @ref OPcmciaSocket objects yourself,
      * but access them via @ref OPcmciaSystem::card().
      */
-    OPcmciaCard( QObject* parent, const char* name );
+    OPcmciaSocket( int socket, QObject* parent, const char* name );
     /**
      * Destructor.
      */
-    virtual ~OPcmciaCard();
+    virtual ~OPcmciaSocket();
+    /**
+     * @returns the corresponding socket number
+     */
+    int number() const;
+    /**
+     * @returns the identification string of the card in this socket, or "<Empty Socket>"
+     */
+    QString identity() const;
+    /**
+     * @returns true, if the socket is empty
+     */
+    bool isEmpty() const;
+    /**
+     * @returns true, if the socket is suspended
+     */
+    bool isSuspended() const;
+    /**
+     * Eject card. @returns true, if operation succeeded
+     * @note: This operation needs root privileges
+     */
+    bool eject();
+    /**
+     * Insert card. @returns true, if operation succeeded
+     * @note: This operation needs root privileges
+     */
+    bool insert();
+    /**
+     * Suspend card. @returns true, if operation succeeded
+     * @note: This operation needs root privileges
+     */
+    bool suspend();
+    /**
+     * Resume card. @returns true, if operation succeeded
+     * @note: This operation needs root privileges
+     */
+    bool resume();
 
   protected:
 
   private:
     void init();
+    bool command( const QString& cmd );
+    int _socket;
+
   private:
     class Private;
     Private *d;

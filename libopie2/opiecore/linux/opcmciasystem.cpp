@@ -41,6 +41,7 @@ using namespace Opie::Core;
 #include <errno.h>
 #include <fcntl.h>
 #include <string.h>
+#include <stdlib.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -77,14 +78,16 @@ void OPcmciaSystem::synchronize()
     QTextStream cardinfo( &cardinfofile );
     while ( !cardinfo.atEnd() )
     {
-        QString line = cardinfo.readLine();
-        // qDebug( "line = '%s'", (const char*) line );
-        if ( line.startsWith( "Socket" ) && ! line.contains( "empty" ) )
+        QString strSocket;
+        int numSocket;
+        char colon;
+        QString cardName;
+        cardinfo >> strSocket >> numSocket >> colon;
+        cardName = cardinfo.readLine().stripWhiteSpace();
+        qDebug( "strSocket = '%s', numSocket = '%d', colon = '%c', cardName = '%s'", (const char*) strSocket, numSocket, colon, ( const char*) cardName );
+        if ( strSocket == "Socket" && colon == ':' )
         {
-            int mid = line.find( ':' );
-            QString name = line.right( line.length() - mid - 1 );
-            QString id = line.right( line.length() - mid + 1 );
-            if ( mid ) _interfaces.insert( name.stripWhiteSpace(), new OPcmciaCard( this, (const char*) id.stripWhiteSpace() ) );
+            _interfaces.append( new OPcmciaSocket( numSocket, this, (const char*) cardName ) );
         }
         else
         {
@@ -100,9 +103,22 @@ int OPcmciaSystem::count() const
 }
 
 
-OPcmciaCard* OPcmciaSystem::card( const QString& iface ) const
+int OPcmciaSystem::cardCount() const
 {
-    return _interfaces[iface];
+    int nonEmpty = 0;
+    OPcmciaSystem::CardIterator it = iterator();
+    while ( it.current() )
+    {
+        if ( !it.current()->isEmpty() ) nonEmpty++;
+        ++it;
+    }
+    return nonEmpty;
+}
+
+
+OPcmciaSocket* OPcmciaSystem::socket( unsigned int number )
+{
+    return _interfaces.at( number );
 }
 
 
@@ -120,24 +136,70 @@ OPcmciaSystem::CardIterator OPcmciaSystem::iterator() const
 
 
 /*======================================================================================
- * OPcmciaCard
+ * OPcmciaSocket
  *======================================================================================*/
 
-OPcmciaCard::OPcmciaCard( QObject* parent, const char* name )
-                 :QObject( parent, name )
+OPcmciaSocket::OPcmciaSocket( int socket, QObject* parent, const char* name )
+                 :QObject( parent, name ), _socket( socket )
 {
-    odebug << "OPcmciaCard::OPcmciaCard()" << oendl;
+    odebug << "OPcmciaSocket::OPcmciaSocket()" << oendl;
     init();
 }
 
 
-OPcmciaCard::~OPcmciaCard()
+OPcmciaSocket::~OPcmciaSocket()
 {
 }
 
 
-void OPcmciaCard::init()
+/* internal */ void OPcmciaSocket::init()
 {
 }
 
+/* internal */ bool OPcmciaSocket::command( const QString& cmd )
+{
+    QString cmdline = QString().sprintf( "cardctl %s %d &", (const char*) cmd, _socket );
+    ::system( (const char*) cmdline );
+}
 
+int OPcmciaSocket::number() const
+{
+    return _socket;
+}
+
+
+QString OPcmciaSocket::identity() const
+{
+    return ( strcmp( name(), "empty" ) == 0 ) ? "<Empty Socket>" : name();
+}
+
+
+bool OPcmciaSocket::isEmpty() const
+{
+    return ( strcmp( name(), "empty" ) == 0 );
+}
+
+
+bool OPcmciaSocket::isSuspended() const
+{
+}
+
+bool OPcmciaSocket::eject()
+{
+    return command( "eject" );
+}
+
+bool OPcmciaSocket::insert()
+{
+    return command( "insert" );
+}
+
+bool OPcmciaSocket::suspend()
+{
+    return command( "suspend" );
+}
+
+bool OPcmciaSocket::resume()
+{
+    return command( "resume ");
+}
