@@ -124,6 +124,10 @@ class OPcmciaSocket : public QObject
      */
     QString identity() const;
     /**
+     * @returns true, if the card is unsupported by the cardmgr
+     */
+    bool isUnsupported() const;
+    /**
      * @returns true, if the socket is empty
      */
     bool isEmpty() const;
@@ -151,6 +155,11 @@ class OPcmciaSocket : public QObject
      * @note: This operation needs root privileges
      */
     bool resume();
+    /**
+     * Reset card. @returns true, if operation succeeded
+     * @note: This operation needs root privileges
+     */
+    bool reset();
 
   protected:
 

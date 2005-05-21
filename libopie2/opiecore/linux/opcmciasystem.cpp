@@ -174,6 +174,12 @@ QString OPcmciaSocket::identity() const
 }
 
 
+bool OPcmciaSocket::isUnsupported() const
+{
+    return ( strcmp( name(), "unsupported card" ) == 0 );
+}
+
+
 bool OPcmciaSocket::isEmpty() const
 {
     return ( strcmp( name(), "empty" ) == 0 );
@@ -182,6 +188,8 @@ bool OPcmciaSocket::isEmpty() const
 
 bool OPcmciaSocket::isSuspended() const
 {
+    //FIXME
+    return false;
 }
 
 bool OPcmciaSocket::eject()
@@ -201,5 +209,10 @@ bool OPcmciaSocket::suspend()
 
 bool OPcmciaSocket::resume()
 {
-    return command( "resume ");
+    return command( "resume");
+}
+
+bool OPcmciaSocket::reset()
+{
+    return command( "reset");
 }
