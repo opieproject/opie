@@ -30,6 +30,8 @@
 #ifndef OPCMCIASYSTEM_H
 #define OPCMCIASYSTEM_H
 
+#include "linux_pcmcia.h"
+
 #include <qobject.h>
 #include <qlist.h>
 
@@ -92,6 +94,9 @@ class OPcmciaSystem : public QObject
   private:
     static OPcmciaSystem* _instance;
     CardList _interfaces;
+    int _major;
+
+  private:
     class Private;
     Private *d;
 };
@@ -108,9 +113,9 @@ class OPcmciaSocket : public QObject
   public:
     /**
      * Constructor. Normally you don't create @ref OPcmciaSocket objects yourself,
-     * but access them via @ref OPcmciaSystem::card().
+     * but access them via @ref OPcmciaSystem::socket().
      */
-    OPcmciaSocket( int socket, QObject* parent, const char* name );
+    OPcmciaSocket( int major, int socket, QObject* parent, const char* name );
     /**
      * Destructor.
      */
@@ -160,13 +165,30 @@ class OPcmciaSocket : public QObject
      * @note: This operation needs root privileges
      */
     bool reset();
+    /**
+      * @returns a list of product IDs
+      */
+    const QStringList& productIdentity() const;
+    /**
+      * @returns the manufacturer ID pair
+      */
+#if 0
+    const QPair& manufacturerIdentity() const;
+#endif
 
-  protected:
+  private:
+    QStringList _productId;
 
   private:
     void init();
+    void buildInformation();
+    void cleanup();
     bool command( const QString& cmd );
+    bool getTuple( cisdata_t tuple );
+    int _major;
     int _socket;
+    int _fd;
+    ds_ioctl_arg_t _ioctlarg;
 
   private:
     class Private;

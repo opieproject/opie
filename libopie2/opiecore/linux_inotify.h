@@ -44,7 +44,7 @@ struct inotify_watch_request {
 #define IN_OPEN			0x00000020	/* File was opened */
 #define IN_MOVED_FROM		0x00000040	/* File was moved from X */
 #define IN_MOVED_TO		0x00000080	/* File was moved to Y */
-#define IN_DELETE_SUBDIR	0x00000100	/* Subdir was deleted */ 
+#define IN_DELETE_SUBDIR	0x00000100	/* Subdir was deleted */
 #define IN_DELETE_FILE		0x00000200	/* Subfile was deleted */
 #define IN_CREATE_SUBDIR	0x00000400	/* Subdir was created */
 #define IN_CREATE_FILE		0x00000800	/* Subfile was created */
