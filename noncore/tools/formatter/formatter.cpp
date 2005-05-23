@@ -13,7 +13,6 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -56,7 +55,7 @@ using namespace Opie::Core;
 
 /*
    Blah blah blah blah */
-FormatterApp::FormatterApp( QWidget* parent,  const char* name, WFlags fl, bool modal )
+FormatterApp::FormatterApp( QWidget* parent,  const char* name, WFlags fl, bool /*modal*/ )
         : QMainWindow( parent, name, fl )
         //    : QDialog( parent, name, modal, fl )
 {
