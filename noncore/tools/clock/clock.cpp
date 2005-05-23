@@ -27,6 +27,7 @@
 #include <qtabwidget.h>
 
 #include <opie2/ofiledialog.h>
+#include <opie2/oresource.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -34,7 +35,6 @@
 #include <qpe/timestring.h>
 #include <qpe/alarmserver.h>
 #include <qpe/sound.h>
-#include <qpe/resource.h>
 #include <qsound.h>
 #include <qtimer.h>
 
@@ -103,7 +103,7 @@ AlarmDlg::AlarmDlg(QWidget *parent, const char *name, bool modal,
     AlarmDlgBase(parent, name, modal)
 {
     setCaption( tr("Clock") );
-    pixmap->setPixmap( Resource::loadPixmap("clock/alarmbell") );
+    pixmap->setPixmap( Opie::Core::OResource::loadPixmap("clock/alarmbell") );
     alarmDlgLabel->setText(txt);
 
     connect(snoozeTime, SIGNAL(valueChanged(int)), this,
