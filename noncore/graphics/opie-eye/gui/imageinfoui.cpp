@@ -19,9 +19,9 @@
 #include <opie2/oconfig.h>
 #include <opie2/okeyconfigwidget.h>
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/resource.h>
 
 static const int THUMBSIZE = 128;
 
@@ -72,8 +72,8 @@ void imageinfo::initKeys()
     m_viewManager = new Opie::Core::OKeyConfigManager(m_cfg, "imageinfo_keys",
                                                     lst, false,this, "keyconfig name" );
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("View Full Image"), "infoview",
-                                                            Resource::loadPixmap("1to1"), ViewItem,
-                                                            Opie::Core::OKeyPair(Qt::Key_V, Qt::ShiftButton),
+                                                            Opie::Core::OResource::loadPixmap("1to1", Opie::Core::OResource::SmallIcon),
+                                                            ViewItem, Opie::Core::OKeyPair(Qt::Key_V, Qt::ShiftButton),
                                                             this, SLOT(slotShowImage())));
     m_viewManager->load();
     m_viewManager->handleWidget( this );
@@ -135,7 +135,7 @@ void imageinfo::slotChangeName(const QString&_path)
 
     QPixmap*m_pix = PPixmapCache::self()->cachedImage( _path, THUMBSIZE,THUMBSIZE );
     if (!m_pix) {
-        PixmapLabel1->setPixmap(QPixmap( Resource::loadPixmap( "UnknownDocument" )));
+        PixmapLabel1->setPixmap(QPixmap( Opie::Core::OResource::loadPixmap( "UnknownDocument", Opie::Core::OResource::SmallIcon )));
         SlaveMaster::self()->thumbNail(currentFile,THUMBSIZE,THUMBSIZE);
     } else {
         PixmapLabel1->setPixmap(*m_pix);

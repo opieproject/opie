@@ -16,8 +16,8 @@
 #include <opie2/okeyconfigwidget.h>
 #include <opie2/odebug.h>
 #include <opie2/oimagescrollview.h>
+#include <opie2/oresource.h>
 
-#include <qpe/resource.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/ir.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -102,11 +102,11 @@ namespace {
         m_iconsize = a_iconsize;
         if ( isDir ) {
             if (!_dirPix ) {
-                _dirPix = new QPixmap( Resource::loadPixmap("advancedfm/FileBrowser"));
+                _dirPix = new QPixmap( Opie::Core::OResource::loadPixmap("advancedfm/FileBrowser", Opie::Core::OResource::SmallIcon));
             }
         } else {
             if (!_unkPix ) {
-                _unkPix = new QPixmap( Resource::loadPixmap( "UnknownDocument" ) );
+                _unkPix = new QPixmap( Opie::Core::OResource::loadPixmap( "UnknownDocument", Opie::Core::OResource::SmallIcon ) );
             }
         }
         check_pix();
@@ -270,24 +270,24 @@ void PIconView::initKeys() {
     m_viewManager = new Opie::Core::OKeyConfigManager(m_cfg, "View-KeyBoard-Config",
                                                     lst, false,this, "keyconfig name" );
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("Beam Current Item") , "beam",
-                                                Resource::loadPixmap("beam"), BeamItem,
-                                                Opie::Core::OKeyPair(Qt::Key_B, Qt::ShiftButton),
+                                                Opie::Core::OResource::loadPixmap("beam", Opie::Core::OResource::SmallIcon),
+                                                BeamItem, Opie::Core::OKeyPair(Qt::Key_B, Qt::ShiftButton),
                                                 this, SLOT(slotBeam())) );
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("Delete Current Item"), "delete",
-                                                Resource::loadPixmap("trash"), DeleteItem,
-                                                Opie::Core::OKeyPair(Qt::Key_D, Qt::ShiftButton),
+                                                Opie::Core::OResource::loadPixmap("trash", Opie::Core::OResource::SmallIcon),
+                                                DeleteItem, Opie::Core::OKeyPair(Qt::Key_D, Qt::ShiftButton),
                                                 this, SLOT(slotTrash())) );
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("View Current Item"), "view",
-                                                Resource::loadPixmap("1to1"), ViewItem,
-                                                Opie::Core::OKeyPair(Qt::Key_V, Qt::ShiftButton),
+                                                Opie::Core::OResource::loadPixmap("1to1", Opie::Core::OResource::SmallIcon),
+                                                ViewItem, Opie::Core::OKeyPair(Qt::Key_V, Qt::ShiftButton),
                                                 this, SLOT(slotShowImage())));
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("Show Image Info") , "info",
-                                                Resource::loadPixmap("DocumentTypeWord"), InfoItem,
-                                                Opie::Core::OKeyPair(Qt::Key_I, Qt::ShiftButton ),
+                                                Opie::Core::OResource::loadPixmap("DocumentTypeWord", Opie::Core::OResource::SmallIcon),
+                                                InfoItem, Opie::Core::OKeyPair(Qt::Key_I, Qt::ShiftButton ),
                                                 this, SLOT(slotImageInfo()) ) );
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("Start slideshow"), "slideshow",
-                                                Resource::loadPixmap("1to1"), SlideItem,
-                                                Opie::Core::OKeyPair(Qt::Key_S, Qt::ShiftButton),
+                                                Opie::Core::OResource::loadPixmap("1to1", Opie::Core::OResource::SmallIcon),
+                                                SlideItem, Opie::Core::OKeyPair(Qt::Key_S, Qt::ShiftButton),
                                                 this, SLOT(slotStartSlide())));
     m_viewManager->load();
     m_viewManager->handleWidget( m_view );
@@ -642,7 +642,8 @@ void PIconView::slotThumbNail(const QString& _path, const QPixmap &pix) {
         }
 
     } else {
-        PPixmapCache::self()->insertImage( _path, Resource::loadPixmap( "UnknownDocument" ), m_iconsize, m_iconsize );
+        PPixmapCache::self()->insertImage( _path, Opie::Core::OResource::loadPixmap( "UnknownDocument",
+                                           Opie::Core::OResource::SmallIcon ), m_iconsize, m_iconsize );
     }
     g_stringPix.remove( _path );
     m_view->arrangeItemsInGrid(true);

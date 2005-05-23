@@ -44,5 +44,5 @@ void ViewModeButton::slotChange( int i ) {
     }
 
     owarn << "foo " << name << oendl;
-    setIconSet( Resource::loadIconSet( name ) );
+    setIconSet( Opie::Core::OResource::loadPixmap( name, Opie::Core::OResource::SmallIcon ) );
 }

@@ -6,7 +6,7 @@
 #ifndef PHUNK_VIEW_MODE_BUTTON_H
 #define PHUNK_VIEW_MODE_BUTTON_H
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 #include <qtoolbutton.h>
 

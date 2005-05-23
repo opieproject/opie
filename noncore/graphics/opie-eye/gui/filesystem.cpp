@@ -6,7 +6,8 @@
 #include <qpopupmenu.h>
 #include <qtoolbar.h>
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
+
 #include <qpe/storage.h>
 
 
@@ -15,7 +16,7 @@
 PFileSystem::PFileSystem(  QToolBar* bar)
     : QToolButton( bar )
 {
-    setIconSet( Resource::loadIconSet( "cardmon/pcmcia" ) );
+    setIconSet( Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon ) );
 
     m_pop = new QPopupMenu( this );
     connect( m_pop, SIGNAL( activated( int ) ),

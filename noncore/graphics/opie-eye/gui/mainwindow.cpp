@@ -21,8 +21,8 @@
 #include <opie2/okeyconfigwidget.h>
 #include <opie2/owait.h>
 #include <opie2/oapplication.h>
+#include <opie2/oresource.h>
 
-#include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/ir.h>
 #include <qpe/storage.h>
@@ -517,50 +517,61 @@ void PMainWindow::showToolbar(bool how)
 
 void PMainWindow::setupActions()
 {
-    m_aDirUp = new QAction( tr( "Go dir up" ), Resource::loadIconSet( "up" ), 0, 0, this, 0, true );
+    m_aDirUp = new QAction( tr( "Go dir up" ), Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ),
+                            0, 0, this, 0, true );
     m_aDirUp->setToggleAction(false);
     connect(m_aDirUp,SIGNAL(activated()),m_view,SLOT(slotDirUp()));
 
     if ( Ir::supported() ) {
-        m_aBeam = new QAction( tr( "Beam file" ), Resource::loadIconSet( "beam" ),0, 0, this, 0, true );
+        m_aBeam = new QAction( tr( "Beam file" ), Opie::Core::OResource::loadPixmap( "beam", Opie::Core::OResource::SmallIcon ),
+                               0, 0, this, 0, true );
         m_aBeam->setToggleAction(false);
         connect(m_aBeam,SIGNAL(activated()),m_view,SLOT(slotBeam()));
     } else {
         m_aBeam = 0;
     }
 
-    m_aShowInfo = new QAction( tr( "Show imageinfo" ), Resource::loadIconSet( "edit" ), 0, 0, this, 0, true );
+    m_aShowInfo = new QAction( tr( "Show imageinfo" ), Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ),
+                               0, 0, this, 0, true );
     m_aShowInfo->setToggleAction(false);
     connect(m_aShowInfo,SIGNAL(activated()),m_view,SLOT(slotImageInfo()));
 
-    m_aTrash = new QAction( tr( "Delete file" ), Resource::loadIconSet("trash"), 0, 0, this, 0, true );
+    m_aTrash = new QAction( tr( "Delete file" ), Opie::Core::OResource::loadPixmap("trash", Opie::Core::OResource::SmallIcon),
+                            0, 0, this, 0, true );
     m_aTrash->setToggleAction(false);
     connect(m_aTrash,SIGNAL(activated()),m_view,SLOT(slotTrash()));
 
-    m_aViewfile = new QAction( tr( "Display image" ), Resource::loadIconSet("mag"), 0, 0, this, 0, true );
+    m_aViewfile = new QAction( tr( "Display image" ), Opie::Core::OResource::loadPixmap("mag", Opie::Core::OResource::SmallIcon),
+                               0, 0, this, 0, true );
     m_aViewfile->setToggleAction(false);
     connect(m_aViewfile,SIGNAL(activated()),m_view,SLOT(slotShowImage()));
 
-    m_aStartSlide = new QAction( tr( "Start slideshow" ), Resource::loadIconSet("play"),0, 0, this, 0, true );
+    m_aStartSlide = new QAction( tr( "Start slideshow" ), Opie::Core::OResource::loadPixmap("play", Opie::Core::OResource::SmallIcon),
+                                 0, 0, this, 0, true );
     m_aStartSlide->setToggleAction(false);
     connect(m_aStartSlide,SIGNAL(activated()),m_view,SLOT(slotStartSlide()));
 
-    m_aHideToolbar = new QAction( tr( "Show toolbar" ), Resource::loadIconSet( "UtilsIcon" ), 0, 0, this, 0, true );
+    m_aHideToolbar = new QAction( tr( "Show toolbar" ), Opie::Core::OResource::loadPixmap( "UtilsIcon",
+                                  Opie::Core::OResource::SmallIcon ), 0, 0, this, 0, true );
     m_aHideToolbar->setOn (true);
     connect(m_aHideToolbar,SIGNAL(toggled(bool)),this,SLOT(showToolbar(bool)));
 
-    m_aSetup = new QAction( tr( "Settings" ), Resource::loadIconSet("SettingsIcon"), 0, 0, this, 0, true );
+    m_aSetup = new QAction( tr( "Settings" ), Opie::Core::OResource::loadPixmap("SettingsIcon", Opie::Core::OResource::SmallIcon),
+                            0, 0, this, 0, true );
     m_aSetup->setToggleAction(false);
     connect(m_aSetup,SIGNAL(activated()),this,SLOT(slotConfig()));
 
     m_gListViewMode = new QActionGroup(this,"Select listmode",true);
     connect(m_gListViewMode,SIGNAL(selected(QAction*)),this,SLOT(listviewselected(QAction*)));
 
-    m_aDirLong = new QAction( tr( "Thumbnail and Imageinfo" ),Resource::loadIconSet("opie-eye/opie-eye-thumb"), 0, 0, this, 0, true );
+    m_aDirLong = new QAction( tr( "Thumbnail and Imageinfo" ),Opie::Core::OResource::loadPixmap("opie-eye/opie-eye-thumb",
+                              Opie::Core::OResource::SmallIcon), 0, 0, this, 0, true );
     m_aDirLong->setToggleAction(true);
-    m_aDirShort = new QAction( tr( "Thumbnail and name" ),Resource::loadIconSet("opie-eye/opie-eye-thumbonly"), 0, 0, this, 0, true );
+    m_aDirShort = new QAction( tr( "Thumbnail and name" ),Opie::Core::OResource::loadPixmap("opie-eye/opie-eye-thumbonly",
+                               Opie::Core::OResource::SmallIcon), 0, 0, this, 0, true );
     m_aDirShort->setToggleAction(true);
-    m_aDirName = new QAction( tr( "Name only" ), Resource::loadIconSet("opie-eye/opie-eye-textview"),0, 0, this, 0, true );
+    m_aDirName = new QAction( tr( "Name only" ), Opie::Core::OResource::loadPixmap("opie-eye/opie-eye-textview",
+                              Opie::Core::OResource::SmallIcon),0, 0, this, 0, true );
     m_aDirName->setToggleAction(true);
     int mode = m_cfg->readNumEntry("ListViewMode", 1);
     if (mode < 1 || mode>3) mode = 1;
@@ -580,17 +591,19 @@ void PMainWindow::setupActions()
     m_gListViewMode->insert(m_aDirName);
 
     m_gPrevNext = new QActionGroup(this,"imageprevnext",false);
-    m_aNext = new QAction( tr( "Next image" ), Resource::loadIconSet("forward"), 0, 0, this, 0, true );
+    m_aNext = new QAction( tr( "Next image" ),Opie::Core::OResource::loadPixmap("forward", Opie::Core::OResource::SmallIcon),
+                           0, 0, this, 0, true );
     m_aNext->setToggleAction(false);
     connect(m_aNext,SIGNAL(activated()),m_view,SLOT(slotShowNext()));
-    m_aPrevious = new QAction( tr( "Previous image" ), Resource::loadIconSet("back"), 0, 0, this, 0, true );
+    m_aPrevious = new QAction( tr( "Previous image" ),Opie::Core::OResource::loadPixmap("back", Opie::Core::OResource::SmallIcon),
+                               0, 0, this, 0, true );
     m_aPrevious->setToggleAction(false);
     connect(m_aPrevious,SIGNAL(activated()),m_view,SLOT(slotShowPrev()));
     m_gPrevNext->insert(m_aPrevious);
     m_gPrevNext->insert(m_aNext);
 
     m_aFullScreen = new QAction( tr( "Show images fullscreen" ),
-        Resource::loadIconSet("fullscreen"), 0, 0, this, 0, true );
+       Opie::Core::OResource::loadPixmap("fullscreen", Opie::Core::OResource::SmallIcon), 0, 0, this, 0, true );
     m_aFullScreen->setToggleAction(true);
     if (autoSave) {
         m_aFullScreen->setOn(m_cfg->readBoolEntry("fullscreen",false));
@@ -600,7 +613,9 @@ void PMainWindow::setupActions()
     connect(m_aFullScreen,SIGNAL(toggled(bool)),this,SLOT(slotFullScreenButton(bool)));
 
     m_gDisplayType = new QActionGroup(this,"imagedisplaytype",false);
-    m_aAutoRotate = new QAction( tr( "Auto rotate images" ), Resource::loadIconSet( "rotate" ), 0, 0, this, 0, true );
+    m_aAutoRotate = new QAction( tr( "Auto rotate images" ),
+                                 Opie::Core::OResource::loadPixmap( "rotate", Opie::Core::OResource::SmallIcon ),
+                                 0, 0, this, 0, true );
     m_aAutoRotate->setToggleAction(true);
 
     if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
@@ -613,7 +628,9 @@ void PMainWindow::setupActions()
     }
     connect(m_aAutoRotate,SIGNAL(toggled(bool)),this,SLOT(slotRotateToggled(bool)));
 
-    m_aUnscaled = new QAction( tr( "Show images unscaled" ), Resource::loadIconSet( "1to1" ), 0, 0, this, 0, true );
+    m_aUnscaled = new QAction( tr( "Show images unscaled" ),
+                               Opie::Core::OResource::loadPixmap( "1to1", Opie::Core::OResource::SmallIcon ),
+                               0, 0, this, 0, true );
     m_aUnscaled->setToggleAction(true);
     connect(m_aUnscaled,SIGNAL(toggled(bool)),this,SLOT(slotScaleToggled(bool)));
     if (autoSave) {
@@ -622,7 +639,9 @@ void PMainWindow::setupActions()
         m_aUnscaled->setOn(false);
     }
 
-    m_aZoomer = new QAction( tr( "Show zoomer window when unscaled" ), Resource::loadIconSet( "mag" ), 0, 0, this, 0, true );
+    m_aZoomer = new QAction( tr( "Show zoomer window when unscaled" ),
+                             Opie::Core::OResource::loadPixmap( "mag", Opie::Core::OResource::SmallIcon ),
+                             0, 0, this, 0, true );
     m_aZoomer->setToggleAction(true);
     if (autoSave) {
         m_aZoomer->setOn(m_cfg->readBoolEntry("zoomeron",true));
@@ -638,7 +657,9 @@ void PMainWindow::setupActions()
     m_hGroup->insert(m_aFullScreen);
 
     if (!m_SmallWindow) {
-        m_aForceSmall = new QAction(tr("Dont show seperate windows"),Resource::loadIconSet( "AppsIcon" ), 0, 0, this, 0, true);
+        m_aForceSmall = new QAction(tr("Dont show seperate windows"),
+                                    Opie::Core::OResource::loadPixmap( "AppsIcon", Opie::Core::OResource::SmallIcon ),
+                                    0, 0, this, 0, true);
         m_aForceSmall->setToggleAction(true);
         connect(m_aForceSmall,SIGNAL(toggled(bool)),this,SLOT(slotForceSmall(bool)));
     } else {
@@ -646,8 +667,12 @@ void PMainWindow::setupActions()
     }
     m_setCurrentBrightness = new QAction(tr("Display brightness..."), 0, 0, this, 0, false);
     connect(m_setCurrentBrightness,SIGNAL(activated()),this,SLOT(setupBrightness()));
-    m_IncBrightness = new QAction(tr("Increase brightness by 5"),Resource::loadIconSet( "up" ),0, 0, this, 0, false);
-    m_DecBrightness = new QAction(tr("Decrease brightness by 5"),Resource::loadIconSet( "down" ),0, 0, this, 0, false);
+    m_IncBrightness = new QAction(tr("Increase brightness by 5"),
+                                  Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ),
+                                  0, 0, this, 0, false);
+    m_DecBrightness = new QAction(tr("Decrease brightness by 5"),
+                                  Opie::Core::OResource::loadPixmap( "down", Opie::Core::OResource::SmallIcon ),
+                                  0, 0, this, 0, false);
     m_hBright = new QActionGroup(this,"actioncollection",false),
     m_hBright->insert(m_setCurrentBrightness);
     m_hBright->insert(m_IncBrightness);
@@ -720,7 +745,8 @@ void PMainWindow::setupMenu()
     m_aDirUp->addTo( fileMenu );
 
     fsMenu = new QPopupMenu(fileMenu);
-    fileMenu->insertItem(Resource::loadIconSet( "cardmon/pcmcia" ),tr("Select filesystem"),fsMenu);
+    fileMenu->insertItem(Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon ),
+                         tr("Select filesystem"),fsMenu);
     connect( fsMenu, SIGNAL( activated( int ) ), this, SLOT(slotSelectDir( int ) ) );
     dirChanged();
 
@@ -732,7 +758,8 @@ void PMainWindow::setupMenu()
     m_aTrash->addTo(fileMenu);
 
     listviewMenu = new QPopupMenu(dispMenu);
-    dispMenu->insertItem(Resource::loadIconSet("opie-eye/opie-eye-thumb"),tr("Listview mode"),listviewMenu);
+    dispMenu->insertItem(Opie::Core::OResource::loadPixmap("opie-eye/opie-eye-thumb", Opie::Core::OResource::SmallIcon),
+                         tr("Listview mode"),listviewMenu);
     m_gListViewMode->addTo(listviewMenu);
     dispMenu->insertSeparator();
     m_aFullScreen->addTo(dispMenu);

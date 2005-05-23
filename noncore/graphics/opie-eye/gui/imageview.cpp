@@ -3,8 +3,8 @@
 #include <opie2/odebug.h>
 #include <opie2/oconfig.h>
 #include <opie2/okeyconfigwidget.h>
+#include <opie2/oresource.h>
 
-#include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 
@@ -163,43 +163,43 @@ void ImageView::initKeys()
     m_viewManager->setEventMask( Opie::Core::OKeyConfigManager::MaskPressed );
 
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("View Image Info"), "imageviewinfo",
-                                                Resource::loadPixmap("1to1"), ViewInfo,
-                                                Opie::Core::OKeyPair(Qt::Key_I,0),
+                                                Opie::Core::OResource::loadPixmap("1to1", Opie::Core::OResource::SmallIcon),
+                                                ViewInfo, Opie::Core::OKeyPair(Qt::Key_I,0),
                                                 this, SLOT(slotShowImageInfo())));
 
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Toggle autorotate"), "imageautorotate",
-                                                Resource::loadPixmap("rotate"), Autorotate,
-                                                Opie::Core::OKeyPair(Qt::Key_R,0),
+                                                Opie::Core::OResource::loadPixmap("rotate", Opie::Core::OResource::SmallIcon),
+                                                Autorotate, Opie::Core::OKeyPair(Qt::Key_R,0),
                                                 this, SIGNAL(toggleAutorotate())));
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Toggle autoscale"), "imageautoscale",
-                                                Resource::loadPixmap("1to1"), Autoscale,
-                                                Opie::Core::OKeyPair(Qt::Key_S,0),
+                                                Opie::Core::OResource::loadPixmap("1to1", Opie::Core::OResource::SmallIcon),
+                                                Autoscale, Opie::Core::OKeyPair(Qt::Key_S,0),
                                                 this, SIGNAL(toggleAutoscale())));
 
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Switch to next image"), "imageshownext",
-                                                Resource::loadPixmap("forward"), ShowNext,
-                                                Opie::Core::OKeyPair(Qt::Key_Return,0),
+                                                Opie::Core::OResource::loadPixmap("forward", Opie::Core::OResource::SmallIcon),
+                                                ShowNext, Opie::Core::OKeyPair(Qt::Key_Return,0),
                                                 this, SIGNAL(dispNext())));
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Switch to previous image"), "imageshowprev",
-                                                Resource::loadPixmap("back"), ShowPrevious,
-                                                Opie::Core::OKeyPair(Qt::Key_P,0),
+                                                Opie::Core::OResource::loadPixmap("back", Opie::Core::OResource::SmallIcon),
+                                                ShowPrevious, Opie::Core::OKeyPair(Qt::Key_P,0),
                                                 this, SIGNAL(dispPrev())));
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Toggle fullscreen"), "imagefullscreen",
-                                                Resource::loadPixmap("fullscreen"), FullScreen,
-                                                Opie::Core::OKeyPair(Qt::Key_F,0),
+                                                Opie::Core::OResource::loadPixmap("fullscreen", Opie::Core::OResource::SmallIcon),
+                                                FullScreen, Opie::Core::OKeyPair(Qt::Key_F,0),
                                                 this, SIGNAL(toggleFullScreen())));
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Toggle thumbnail"), "imagezoomer",
-                                                Resource::loadPixmap("mag"), Zoomer,
-                                                Opie::Core::OKeyPair(Qt::Key_T,0),
+                                                Opie::Core::OResource::loadPixmap("mag", Opie::Core::OResource::SmallIcon),
+                                                Zoomer, Opie::Core::OKeyPair(Qt::Key_T,0),
                                                 this, SIGNAL(toggleZoomer())));
 
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Increase brightness"), "incbrightness",
-                                                Resource::loadPixmap("up"), Incbrightness,
-                                                Opie::Core::OKeyPair(Qt::Key_B,0),
+                                                Opie::Core::OResource::loadPixmap("up", Opie::Core::OResource::SmallIcon),
+                                                Incbrightness, Opie::Core::OKeyPair(Qt::Key_B,0),
                                                 this, SIGNAL(incBrightness())));
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Decrease brightness"), "decbrightness",
-                                                Resource::loadPixmap("down"), Decbrightness,
-                                                Opie::Core::OKeyPair(Qt::Key_D,0),
+                                                Opie::Core::OResource::loadPixmap("down", Opie::Core::OResource::SmallIcon),
+                                                Decbrightness, Opie::Core::OKeyPair(Qt::Key_D,0),
                                                 this, SIGNAL(decBrightness())));
     m_viewManager->handleWidget( this );
     m_viewManager->load();
