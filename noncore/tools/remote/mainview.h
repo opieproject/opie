@@ -15,7 +15,6 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpushbutton.h>
 #include <qtabwidget.h>

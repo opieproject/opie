@@ -16,9 +16,11 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "mainview.h"
 
+#include <opie2/oresource.h>
+
 MainView::MainView(QWidget *parent, const char *name) : QWidget(parent, name)
 {
-	setIcon( Resource::loadPixmap( "remote" ) );
+	setIcon( Opie::Core::OResource::loadPixmap( "remote", Opie::Core::OResource::SmallIcon ) );
 	setCaption(tr("Remote") );
 
 	QVBoxLayout *layout = new QVBoxLayout(this);
