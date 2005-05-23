@@ -32,11 +32,11 @@
 
 #include <opie2/qcolordialog.h>
 #include <opie2/ocolorpopupmenu.h>
+#include <opie2/oresource.h>
 
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qtoolbar.h>
-#include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 
 #include <qmenubar.h>
@@ -107,17 +107,22 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags /*fl*/ )
 
     QToolBar* pageToolBar = new QToolBar(this);
 
-    QAction* newPageAction = new QAction(tr("New Page"), Resource::loadPixmap("new"), QString::null, 0, this);
+    QAction* newPageAction = new QAction(tr("New Page"), Opie::Core::OResource::loadPixmap("new", Opie::Core::OResource::SmallIcon),
+                                         QString::null, 0, this);
     connect(newPageAction, SIGNAL(activated()), this, SLOT(newPage()));
     newPageAction->addTo(pageToolBar);
     newPageAction->setWhatsThis( tr( "Click here to add a new sheet." ) );
 
-    QAction* clearPageAction = new QAction(tr("Clear Page"), Resource::loadPixmap("drawpad/clear"), QString::null, 0, this);
+    QAction* clearPageAction = new QAction(tr("Clear Page"),
+                                           Opie::Core::OResource::loadPixmap("drawpad/clear", Opie::Core::OResource::SmallIcon),
+                                           QString::null, 0, this);
     connect(clearPageAction, SIGNAL(activated()), this, SLOT(clearPage()));
     clearPageAction->addTo(pageToolBar);
     clearPageAction->setWhatsThis( tr( "Click here to erase the current sheet." ) );
 
-    QAction* deletePageAction = new QAction(tr("Delete Page"), Resource::loadPixmap("trash"), QString::null, 0, this);
+    QAction* deletePageAction = new QAction(tr("Delete Page"),
+                                            Opie::Core::OResource::loadPixmap("trash", Opie::Core::OResource::SmallIcon),
+                                            QString::null, 0, this);
     connect(deletePageAction, SIGNAL(activated()), this, SLOT(deletePage()));
     deletePageAction->addTo(pageToolBar);
     deletePageAction->setWhatsThis( tr( "Click here to remove the current sheet." ) );
@@ -129,32 +134,42 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags /*fl*/ )
 
     QToolBar* navigationToolBar = new QToolBar(this);
 
-    m_pUndoAction = new QAction(tr("Undo"), Resource::loadIconSet("undo"), QString::null, 0, this);
+    m_pUndoAction = new QAction(tr("Undo"), Opie::Core::OResource::loadPixmap("undo", Opie::Core::OResource::SmallIcon),
+                                QString::null, 0, this);
     connect(m_pUndoAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(undo()));
     m_pUndoAction->addTo(navigationToolBar);
     m_pUndoAction->setWhatsThis( tr( "Click here to undo the last action." ) );
 
-    m_pRedoAction = new QAction(tr("Redo"), Resource::loadIconSet("redo"), QString::null, 0, this);
+    m_pRedoAction = new QAction(tr("Redo"), Opie::Core::OResource::loadPixmap("redo", Opie::Core::OResource::SmallIcon),
+                                QString::null, 0, this);
     connect(m_pRedoAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(redo()));
     m_pRedoAction->addTo(navigationToolBar);
     m_pRedoAction->setWhatsThis( tr( "Click here to re-perform the last action." ) );
 
-    m_pFirstPageAction = new QAction(tr("First Page"), Resource::loadIconSet("fastback"), QString::null, 0, this);
+    m_pFirstPageAction = new QAction(tr("First Page"),
+                                     Opie::Core::OResource::loadPixmap("fastback", Opie::Core::OResource::SmallIcon),
+                                     QString::null, 0, this);
     connect(m_pFirstPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goFirstPage()));
     m_pFirstPageAction->addTo(navigationToolBar);
     m_pFirstPageAction->setWhatsThis( tr( "Click here to view the first page." ) );
 
-    m_pPreviousPageAction = new QAction(tr("Previous Page"), Resource::loadIconSet("back"), QString::null, 0, this);
+    m_pPreviousPageAction = new QAction(tr("Previous Page"),
+                                        Opie::Core::OResource::loadPixmap("back", Opie::Core::OResource::SmallIcon),
+                                        QString::null, 0, this);
     connect(m_pPreviousPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goPreviousPage()));
     m_pPreviousPageAction->addTo(navigationToolBar);
     m_pPreviousPageAction->setWhatsThis( tr( "Click here to view the previous page." ) );
 
-    m_pNextPageAction = new QAction(tr("Next Page"), Resource::loadIconSet("forward"), QString::null, 0, this);
+    m_pNextPageAction = new QAction(tr("Next Page"),
+                                    Opie::Core::OResource::loadPixmap("forward", Opie::Core::OResource::SmallIcon),
+                                    QString::null, 0, this);
     connect(m_pNextPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goNextPage()));
     m_pNextPageAction->addTo(navigationToolBar);
     m_pNextPageAction->setWhatsThis( tr( "Click here to view the next page." ) );
 
-    m_pLastPageAction = new QAction(tr("Last Page"), Resource::loadIconSet("fastforward"), QString::null, 0, this);
+    m_pLastPageAction = new QAction(tr("Last Page"),
+                                    Opie::Core::OResource::loadPixmap("fastforward", Opie::Core::OResource::SmallIcon),
+                                    QString::null, 0, this);
     connect(m_pLastPageAction, SIGNAL(activated()), m_pDrawPadCanvas, SLOT(goLastPage()));
     m_pLastPageAction->addTo(navigationToolBar);
     m_pLastPageAction->setWhatsThis( tr( "Click here to view the last page." ) );
@@ -170,11 +185,15 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags /*fl*/ )
 
     QPopupMenu* linePopupMenu = new QPopupMenu(m_pLineToolButton);
 
-    m_pPointToolAction = new QAction(tr("Draw Point"), Resource::loadPixmap("drawpad/point"), "", 0, this);
+    m_pPointToolAction = new QAction(tr("Draw Point"),
+                                     Opie::Core::OResource::loadPixmap("drawpad/point", Opie::Core::OResource::SmallIcon),
+                                     "", 0, this);
     connect(m_pPointToolAction, SIGNAL(activated()), this, SLOT(setPointTool()));
     m_pPointToolAction->addTo(linePopupMenu);
 
-    m_pLineToolAction = new QAction(tr("Draw Line"), Resource::loadPixmap("drawpad/line"), "", 0, this);
+    m_pLineToolAction = new QAction(tr("Draw Line"),
+                                    Opie::Core::OResource::loadPixmap("drawpad/line", Opie::Core::OResource::SmallIcon),
+                                    "", 0, this);
     connect(m_pLineToolAction, SIGNAL(activated()), this, SLOT(setLineTool()));
     m_pLineToolAction->addTo(linePopupMenu);
 
@@ -187,11 +206,15 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags /*fl*/ )
 
     QPopupMenu* rectanglePopupMenu = new QPopupMenu(m_pRectangleToolButton);
 
-    m_pRectangleToolAction = new QAction(tr("Draw Rectangle"), Resource::loadPixmap("drawpad/rectangle"), "", 0, this);
+    m_pRectangleToolAction = new QAction(tr("Draw Rectangle"),
+                                         Opie::Core::OResource::loadPixmap("drawpad/rectangle", Opie::Core::OResource::SmallIcon),
+                                         "", 0, this);
     connect(m_pRectangleToolAction, SIGNAL(activated()), this, SLOT(setRectangleTool()));
     m_pRectangleToolAction->addTo(rectanglePopupMenu);
 
-    m_pFilledRectangleToolAction = new QAction(tr("Draw Filled Rectangle"), Resource::loadPixmap("drawpad/filledrectangle"), "", 0, this);
+    m_pFilledRectangleToolAction = new QAction(tr("Draw Filled Rectangle"),
+                                               Opie::Core::OResource::loadPixmap("drawpad/filledrectangle",
+                                               Opie::Core::OResource::SmallIcon), "", 0, this);
     connect(m_pFilledRectangleToolAction, SIGNAL(activated()), this, SLOT(setFilledRectangleTool()));
     m_pFilledRectangleToolAction->addTo(rectanglePopupMenu);
 
@@ -204,30 +227,40 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags /*fl*/ )
 
     QPopupMenu* ellipsePopupMenu = new QPopupMenu(m_pEllipseToolButton);
 
-    m_pEllipseToolAction = new QAction(tr("Draw Ellipse"), Resource::loadPixmap("drawpad/ellipse"), "", 0, this);
+    m_pEllipseToolAction = new QAction(tr("Draw Ellipse"),
+                                       Opie::Core::OResource::loadPixmap("drawpad/ellipse", Opie::Core::OResource::SmallIcon),
+                                       "", 0, this);
     connect(m_pEllipseToolAction, SIGNAL(activated()), this, SLOT(setEllipseTool()));
     m_pEllipseToolAction->addTo(ellipsePopupMenu);
 
-    m_pFilledEllipseToolAction = new QAction(tr("Draw Filled Ellipse"), Resource::loadPixmap("drawpad/filledellipse"), "", 0, this);
+    m_pFilledEllipseToolAction = new QAction(tr("Draw Filled Ellipse"),
+                                             Opie::Core::OResource::loadPixmap("drawpad/filledellipse",
+                                             Opie::Core::OResource::SmallIcon), "", 0, this);
     connect(m_pFilledEllipseToolAction, SIGNAL(activated()), this, SLOT(setFilledEllipseTool()));
     m_pFilledEllipseToolAction->addTo(ellipsePopupMenu);
 
     m_pEllipseToolButton->setPopup(ellipsePopupMenu);
     m_pEllipseToolButton->setPopupDelay(0);
 
-    m_pTextToolAction = new QAction(tr("Insert Text"), Resource::loadPixmap("drawpad/text"), QString::null, 0, this);
+    m_pTextToolAction = new QAction(tr("Insert Text"),
+                                    Opie::Core::OResource::loadPixmap("drawpad/text", Opie::Core::OResource::SmallIcon),
+                                    QString::null, 0, this);
     m_pTextToolAction->setToggleAction(true);
     connect(m_pTextToolAction, SIGNAL(activated()), this, SLOT(setTextTool()));
     m_pTextToolAction->addTo(drawModeToolBar);
     m_pTextToolAction->setWhatsThis( tr( "Click here to select the text drawing tool." ) );
 
-    m_pFillToolAction = new QAction(tr("Fill Region"), Resource::loadPixmap("drawpad/fill"), QString::null, 0, this);
+    m_pFillToolAction = new QAction(tr("Fill Region"),
+                                    Opie::Core::OResource::loadPixmap("drawpad/fill", Opie::Core::OResource::SmallIcon),
+                                    QString::null, 0, this);
     m_pFillToolAction->setToggleAction(true);
     connect(m_pFillToolAction, SIGNAL(activated()), this, SLOT(setFillTool()));
     m_pFillToolAction->addTo(drawModeToolBar);
     m_pFillToolAction->setWhatsThis( tr( "Click here to select the fill tool." ) );
 
-    m_pEraseToolAction = new QAction(tr("Erase Point"), Resource::loadPixmap("drawpad/erase"), QString::null, 0, this);
+    m_pEraseToolAction = new QAction(tr("Erase Point"),
+                                     Opie::Core::OResource::loadPixmap("drawpad/erase", Opie::Core::OResource::SmallIcon),
+                                     QString::null, 0, this);
     m_pEraseToolAction->setToggleAction(true);
     connect(m_pEraseToolAction, SIGNAL(activated()), this, SLOT(setEraseTool()));
     m_pEraseToolAction->addTo(drawModeToolBar);
@@ -254,8 +287,11 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags /*fl*/ )
     m_pPenWidthSpinBox->setFocusPolicy(QWidget::NoFocus);
     QWhatsThis::add( m_pPenWidthSpinBox, tr( "Click here to select the width of the drawing pen." ) );
 
+    bool useBigIcon = qApp->desktop()->size().width() > 330;
+
     m_pPenColorToolButton = new QToolButton(drawParametersToolBar);
-    m_pPenColorToolButton->setPixmap(Resource::loadPixmap("drawpad/pencolor"));
+    m_pPenColorToolButton->setUsesBigPixmap( useBigIcon );
+    m_pPenColorToolButton->setPixmap(Opie::Core::OResource::loadPixmap("drawpad/pencolor", Opie::Core::OResource::SmallIcon));
     QWhatsThis::add( m_pPenColorToolButton, tr( "Click here to select the color used when drawing." ) );
 
     Opie::OColorPopupMenu* penColorPopupMenu = new Opie::OColorPopupMenu(Qt::black, m_pPenColorToolButton);
@@ -268,7 +304,8 @@ DrawPad::DrawPad(QWidget* parent, const char* name,  WFlags /*fl*/ )
     changePenColor(Qt::black);
 
     m_pBrushColorToolButton = new QToolButton(drawParametersToolBar);
-    m_pBrushColorToolButton->setPixmap(Resource::loadPixmap("drawpad/brushcolor"));
+    m_pBrushColorToolButton->setUsesBigPixmap( useBigIcon );
+    m_pBrushColorToolButton->setPixmap(Opie::Core::OResource::loadPixmap("drawpad/brushcolor", Opie::Core::OResource::SmallIcon));
     QWhatsThis::add( m_pBrushColorToolButton, tr( "Click here to select the color used when filling in areas." ) );
 
     Opie::OColorPopupMenu* brushColorPopupMenu = new Opie::OColorPopupMenu(Qt::white, m_pBrushColorToolButton);
@@ -554,7 +591,8 @@ void DrawPad::changePenColor(const QColor& color)
 
     QPainter painter;
     painter.begin(m_pPenColorToolButton->pixmap());
-    painter.fillRect(QRect(0, 12, 14, 2), m_pen.color());
+    int size = AppLnk::smallIconSize();
+    painter.fillRect(QRect(0, 6*size/7+1, size, size/7), m_pen.color());
     painter.end();
 
     m_pPenColorToolButton->popup()->hide();
@@ -566,7 +604,8 @@ void DrawPad::changeBrushColor(const QColor& color)
 
     QPainter painter;
     painter.begin(m_pBrushColorToolButton->pixmap());
-    painter.fillRect(QRect(0, 12, 14, 2), m_brush.color());
+    int size = AppLnk::smallIconSize();
+    painter.fillRect(QRect(0, 6*size/7+1, size, size/7), m_brush.color());
     painter.end();
 
     m_pBrushColorToolButton->popup()->hide();

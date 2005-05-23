@@ -18,8 +18,9 @@
 #include "newpagedialog.h"
 #include "page.h"
 
+#include <opie2/oresource.h>
+
 #include <qpe/config.h>
-#include <qpe/resource.h>
 #include <qpe/timestring.h>
 
 #include <qapplication.h>
@@ -239,32 +240,39 @@ ThumbnailView::ThumbnailView(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas, QWi
 
     setCaption(tr("DrawPad - Thumbnail View"));
 
+    bool useBigIcon = qApp->desktop()->size().width() > 330;
+
     QToolButton* newPageButton = new QToolButton(this);
-    newPageButton->setIconSet(Resource::loadIconSet("new"));
+    newPageButton->setUsesBigPixmap( useBigIcon );
+    newPageButton->setPixmap(Opie::Core::OResource::loadPixmap("new", Opie::Core::OResource::SmallIcon));
     newPageButton->setAutoRaise(true);
     connect(newPageButton, SIGNAL(clicked()), this, SLOT(newPage()));
     QWhatsThis::add( newPageButton, tr( "Click here to add a new sheet." ) );
 
     QToolButton* clearPageButton = new QToolButton(this);
-    clearPageButton->setIconSet(Resource::loadIconSet("drawpad/clear"));
+    clearPageButton->setUsesBigPixmap( useBigIcon );
+    clearPageButton->setPixmap(Opie::Core::OResource::loadPixmap("drawpad/clear", Opie::Core::OResource::SmallIcon));
     clearPageButton->setAutoRaise(true);
     connect(clearPageButton, SIGNAL(clicked()), this, SLOT(clearPage()));
     QWhatsThis::add( clearPageButton, tr( "Click here to erase the current sheet." ) );
 
     QToolButton* deletePageButton = new QToolButton(this);
-    deletePageButton->setIconSet(Resource::loadIconSet("trash"));
+    deletePageButton->setUsesBigPixmap( useBigIcon );
+    deletePageButton->setPixmap(Opie::Core::OResource::loadPixmap("trash", Opie::Core::OResource::SmallIcon));
     deletePageButton->setAutoRaise(true);
     connect(deletePageButton, SIGNAL(clicked()), this, SLOT(deletePage()));
     QWhatsThis::add( deletePageButton, tr( "Click here to remove the current sheet." ) );
 
     m_pMovePageUpButton = new QToolButton(this);
-    m_pMovePageUpButton->setIconSet(Resource::loadIconSet("up"));
+    m_pMovePageUpButton->setUsesBigPixmap( useBigIcon );
+    m_pMovePageUpButton->setPixmap(Opie::Core::OResource::loadPixmap("up", Opie::Core::OResource::SmallIcon));
     m_pMovePageUpButton->setAutoRaise(true);
     connect(m_pMovePageUpButton, SIGNAL(clicked()), this, SLOT(movePageUp()));
     QWhatsThis::add( m_pMovePageUpButton, tr( "Click here to move the current sheet up one position in the list." ) );
-    
+
     m_pMovePageDownButton = new QToolButton(this);
-    m_pMovePageDownButton->setIconSet(Resource::loadIconSet("down"));
+    m_pMovePageDownButton->setUsesBigPixmap( useBigIcon );
+    m_pMovePageDownButton->setPixmap(Opie::Core::OResource::loadPixmap("down", Opie::Core::OResource::SmallIcon));
     m_pMovePageDownButton->setAutoRaise(true);
     connect(m_pMovePageDownButton, SIGNAL(clicked()), this, SLOT(movePageDown()));
     QWhatsThis::add( m_pMovePageDownButton, tr( "Click here to move the current sheet down one position in the list." ) );
