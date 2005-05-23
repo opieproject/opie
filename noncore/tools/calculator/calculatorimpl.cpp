@@ -28,7 +28,6 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
-#include <qpe/resource.h>
 #include <qpe/qmath.h>
 #include <qpe/qpeapplication.h>
 using namespace Opie::Core;
@@ -109,10 +108,6 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
         WFlags f )
     : Calculator( parent, name, f )
 {
-//      xtopowerofy = Resource::loadPixmap("xtopowerofy");
-//      ythrootofx = Resource::loadPixmap("ythrootofx");
-//      oneoverx = Resource::loadPixmap("oneoverx");
-
     memMark = new QLabel( "m", LCD );
     memMark->setFont( QFont( "helvetica", 12, QFont::Bold, TRUE ) );
     memMark->resize( 12, 12 );
@@ -133,13 +128,13 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
     QObject::tr("Temperatures");
     QObject::tr("Volume");
     QObject::tr("acres");
-    QObject::tr("°C");
+    QObject::tr("C");
     QObject::tr("carats");
     QObject::tr("cm");
     QObject::tr("cu cm");
     QObject::tr("cu ft");
     QObject::tr("cu in");
-    QObject::tr("°F");
+    QObject::tr("F");
     QObject::tr("fl oz (US)");
     QObject::tr("ft");
     QObject::tr("g");
