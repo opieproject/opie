@@ -19,12 +19,10 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-//#include <FL/Fl.H>
-//#include <FL/Fl_Widget.H>
-//#include <FL/fl_draw.H>
-#include <stdio.h>
-#include <qpe/resource.h>
 #include "fretboard.h"
+
+#include <opie2/oresource.h>
+
 #include <qpainter.h>
 
 void FretBoard::refresh(){
@@ -74,10 +72,10 @@ FretBoard::FretBoard(QWidget *parent, const char *name )
 
   //  setPalette( QPalette( QColor( 250, 250, 200) ) );
 
-  stringtop_pix = Resource::loadPixmap( "powerchord/stringtop_s");
-  string_pix = Resource::loadPixmap( "powerchord/string_s");
-  finger_pix = Resource::loadPixmap( "powerchord/justfing_s");
-  mute_pix = Resource::loadPixmap( "powerchord/muted_s");
+  stringtop_pix = Opie::Core::OResource::loadPixmap( "powerchord/stringtop_s");
+  string_pix = Opie::Core::OResource::loadPixmap( "powerchord/string_s");
+  finger_pix = Opie::Core::OResource::loadPixmap( "powerchord/justfing_s");
+  mute_pix = Opie::Core::OResource::loadPixmap( "powerchord/muted_s");
 
   //  box(FL_NO_BOX);
 

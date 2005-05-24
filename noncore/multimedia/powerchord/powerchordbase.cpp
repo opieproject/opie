@@ -12,10 +12,11 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 using namespace Opie::Core;
 
 /* QT */
+#include <qbitmap.h>
 #include <qcombobox.h>
 #include <qlabel.h>
 #include <qlistbox.h>
@@ -38,13 +39,13 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
   //    setPalette( QPalette( QColor( 232, 227, 215) ) );
 
   //  QPixmap image0(QString("/opt/Qtopia/pics/powerchord/image0"));
-  QPixmap image1 = Resource::loadPixmap( "powerchord/image1");
-  QPixmap image2 = Resource::loadPixmap( "powerchord/image2");
-  QPixmap image3 = Resource::loadPixmap( "powerchord/image3");
-  QPixmap image4 = Resource::loadPixmap( "powerchord/image4");
-  QPixmap image5 = Resource::loadPixmap( "powerchord/image5");
-  image6 = Resource::loadPixmap( "powerchord/image6");
-  image_open = Resource::loadPixmap( "powerchord/image_open");
+  QPixmap image1 = Opie::Core::OResource::loadPixmap( "powerchord/image1");
+  QPixmap image2 = Opie::Core::OResource::loadPixmap( "powerchord/image2");
+  QPixmap image3 = Opie::Core::OResource::loadPixmap( "powerchord/image3");
+  QPixmap image4 = Opie::Core::OResource::loadPixmap( "powerchord/image4");
+  QPixmap image5 = Opie::Core::OResource::loadPixmap( "powerchord/image5");
+  image6 = Opie::Core::OResource::loadPixmap( "powerchord/image6");
+  image_open = Opie::Core::OResource::loadPixmap( "powerchord/image_open");
 
   //  image0.setMask(image0.createHeuristicMask());
    image1.setMask(image1.createHeuristicMask());
