@@ -16,6 +16,8 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "mbox.h"
 
+#include <opie2/oresource.h>
+
 MBox::MBox(int w, int h, int type, QString title, QString message, QString *btext0, QString *btext1, QString *btext2, QWidget *parent, const char*name, bool modal, WFlags f):QDialog(parent, name, modal, f)
 {
 	QVBoxLayout *layout = new QVBoxLayout(this);
@@ -36,13 +38,13 @@ MBox::MBox(int w, int h, int type, QString title, QString message, QString *btex
 	switch (type)
 	{
 	case 0:
-		image->setPixmap(Resource::loadPixmap("opie-sh/info"));
+		image->setPixmap(Opie::Core::OResource::loadPixmap("opie-sh/info", Opie::Core::OResource::SmallIcon));
 		break;
 	case 1:
-		image->setPixmap(Resource::loadPixmap("opie-sh/warning"));
+		image->setPixmap(Opie::Core::OResource::loadPixmap("opie-sh/warning", Opie::Core::OResource::SmallIcon));
 		break;
 	case 2:
-		image->setPixmap(Resource::loadPixmap("opie-sh/error"));
+		image->setPixmap(Opie::Core::OResource::loadPixmap("opie-sh/error", Opie::Core::OResource::SmallIcon));
 		break;
 	}
 

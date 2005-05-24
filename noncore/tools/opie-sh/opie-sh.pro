@@ -5,7 +5,7 @@ HEADERS				=mbox.h fviewer.h inputdialog.h
 SOURCES				=opie-sh.cpp mbox.cpp fviewer.cpp inputdialog.cpp
 INCLUDEPATH		+=$(OPIEDIR)/include
 DEPENDPATH		+=$(OPIEDIR)/include
-LIBS						+=-lqpe
+LIBS						+=-lqpe -lopiecore2
 TARGET                   = opie-sh
 
 include( $(OPIEDIR)/include.pro )
