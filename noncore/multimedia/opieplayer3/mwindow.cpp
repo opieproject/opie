@@ -41,8 +41,8 @@
 #include <opie2/owidgetstack.h>
 #include <opie2/ofileselector.h>
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 
-#include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 
 #include <qfileinfo.h>
@@ -329,13 +329,17 @@ void PMainWindow::slotRemoveFiles()
 
 void PMainWindow::setupActions()
 {
-    a_appendFiles = new QAction(tr("Append file(s)"),Resource::loadIconSet( "opieplayer2/add_to_playlist" ), 0, 0, this, 0, false );
+    a_appendFiles = new QAction(tr("Append file(s)"),Opie::Core::OResource::loadPixmap( "opieplayer2/add_to_playlist",
+                                Opie::Core::OResource::SmallIcon ), 0, 0, this, 0, false );
     connect(a_appendFiles,SIGNAL(activated()),this,SLOT(slotAppendFiles()));
-    a_addDir = new QAction(tr("Add directory"),Resource::loadIconSet("folder_open"),0,0,this,0,false);
+    a_addDir = new QAction(tr("Add directory"),Opie::Core::OResource::loadPixmap("folder_open",
+                           Opie::Core::OResource::SmallIcon),0,0,this,0,false);
     connect(a_addDir,SIGNAL(activated()),m_playList,SLOT(slotAppendDir()));
-    a_loadPlaylist = new QAction(tr("Append playlist"),Resource::loadIconSet("opieplayer2/add_to_playlist"),0,0,this,0,false);
+    a_loadPlaylist = new QAction(tr("Append playlist"),Opie::Core::OResource::loadPixmap("opieplayer2/add_to_playlist",
+                                 Opie::Core::OResource::SmallIcon),0,0,this,0,false);
     connect(a_loadPlaylist,SIGNAL(activated()),m_playList,SLOT(slotOpenM3u()));
-    a_savePlaylist = new QAction(tr("Save playlist"),Resource::loadIconSet("save"),0,0,this,0,false);
+    a_savePlaylist = new QAction(tr("Save playlist"),Opie::Core::OResource::loadPixmap("save",
+                                 Opie::Core::OResource::SmallIcon),0,0,this,0,false);
     connect(a_savePlaylist,SIGNAL(activated()),m_playList,SLOT(slotSaveAsM3u()));
 
     playlistOnly = new QActionGroup(this,"playlistgroup",false);
@@ -344,25 +348,32 @@ void PMainWindow::setupActions()
     playlistOnly->insert(a_loadPlaylist);
     playlistOnly->insert(a_savePlaylist);
 
-    a_showPlaylist = new QAction(tr("Show playlist"),Resource::loadIconSet( "txt" ), 0, 0, this, 0, false );
+    a_showPlaylist = new QAction(tr("Show playlist"),Opie::Core::OResource::loadPixmap( "txt",
+                                 Opie::Core::OResource::SmallIcon ), 0, 0, this, 0, false );
     connect(a_showPlaylist,SIGNAL(activated()),this,SLOT(slotShowList()));
-    a_ShowMedia = new QAction(tr("Show media window"),Resource::loadIconSet("opieplayer2/musicfile"), 0, 0, this, 0, false );
+    a_ShowMedia = new QAction(tr("Show media window"),Opie::Core::OResource::loadPixmap("opieplayer2/musicfile",
+                              Opie::Core::OResource::SmallIcon), 0, 0, this, 0, false );
     connect(a_ShowMedia,SIGNAL(activated()),this,SLOT(slotShowMediaWindow()));
 
-    a_removeFiles = new QAction(tr("Remove file"),Resource::loadIconSet( "opieplayer2/remove_from_playlist" ), 0, 0, this, 0, false );
+    a_removeFiles = new QAction(tr("Remove file"),Opie::Core::OResource::loadPixmap( "opieplayer2/remove_from_playlist",
+                                Opie::Core::OResource::SmallIcon), 0, 0, this, 0, false );
     connect(a_removeFiles,SIGNAL(activated()),this,SLOT(slotRemoveFiles()));
 
     playersGroup = new QActionGroup(this,"playgroup",false);
 
-    a_playAction = new QAction(tr("Play list"),Resource::loadIconSet( "opieplayer2/play" ), 0, 0, this, 0, true);
+    a_playAction = new QAction(tr("Play list"),Opie::Core::OResource::loadPixmap( "opieplayer2/play",
+                               Opie::Core::OResource::SmallIcon ), 0, 0, this, 0, true);
     a_playAction->setOn(false);
     connect(a_playAction,SIGNAL(toggled(bool)),this,SLOT(slotTogglePlay(bool)));
 
-    a_playNext = new QAction(tr("Play next in list"),Resource::loadIconSet( "fastforward" ), 0, 0, this, 0, false );
+    a_playNext = new QAction(tr("Play next in list"),Opie::Core::OResource::loadPixmap( "fastforward",
+                             Opie::Core::OResource::SmallIcon ), 0, 0, this, 0, false );
     connect(a_playNext,SIGNAL(activated()),this,SLOT(slotPlayNext()));
-    a_playPrevious = new QAction(tr("Play previous in list"),Resource::loadIconSet( "fastback" ), 0, 0, this, 0, false );
+    a_playPrevious = new QAction(tr("Play previous in list"),Opie::Core::OResource::loadPixmap( "fastback",
+                                 Opie::Core::OResource::SmallIcon ), 0, 0, this, 0, false );
     connect(a_playPrevious,SIGNAL(activated()),this,SLOT(slotPlayPrevious()));
-    a_ShowFull = new QAction(tr("Show videos fullscreen"),Resource::loadIconSet( "fullscreen" ), 0, 0, this, 0, true );
+    a_ShowFull = new QAction(tr("Show videos fullscreen"),Opie::Core::OResource::loadPixmap( "fullscreen",
+                             Opie::Core::OResource::SmallIcon ), 0, 0, this, 0, true );
     connect(a_ShowFull,SIGNAL(toggled(bool)),this,SLOT(slotToggleFull(bool)));
 
     playersGroup->insert(a_playPrevious);
@@ -378,7 +389,8 @@ void PMainWindow::setupActions()
 
     settingsGroup = new QActionGroup(this,"configgroup",false);
 
-    a_Scaleup = new QAction(tr("Scale videos larger"),Resource::loadIconSet( "fullscreen" ), 0, 0, this, 0, true );
+    a_Scaleup = new QAction(tr("Scale videos larger"),Opie::Core::OResource::loadPixmap( "fullscreen",
+                            Opie::Core::OResource::SmallIcon ), 0, 0, this, 0, true );
     connect(a_Scaleup,SIGNAL(toggled(bool)),this,SLOT(slot_scaleupToggled(bool)));
     settingsGroup->insert(a_Scaleup);
 }

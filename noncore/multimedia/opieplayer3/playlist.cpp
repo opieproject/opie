@@ -38,8 +38,6 @@
 #include <opie2/oresource.h>
 #include <opie2/ofiledialog.h>
 
-#include <qpe/resource.h>
-
 #include <qfileinfo.h>
 #include <qmessagebox.h>
 #include <qdir.h>
