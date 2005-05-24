@@ -28,12 +28,11 @@ _;:,   .>  :=|.         This file is free software; you can
 
 #include <opie2/oprocess.h>
 
-#include <qpe/applnk.h>
+#include <opie2/oresource.h>
+
 #include <qpe/config.h>
-#include <qpe/resource.h>
 
 #include <qfile.h>
-#include <qimage.h>
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qpixmap.h>
@@ -49,9 +48,7 @@ WeatherPluginWidget::WeatherPluginWidget( QWidget *parent,  const char* name )
 	layout->setAutoAdd( true );
 
 	weatherIcon = new QLabel( this );
-    QPixmap pic;
-    pic.convertFromImage( Resource::loadImage( "Clock" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-	weatherIcon->setPixmap( pic );
+	weatherIcon->setPixmap( Opie::Core::OResource::loadPixmap( "Clock", Opie::Core::OResource::SmallIcon ) );
 
 	weatherLabel = new QLabel( tr( "Retreiving current weather information." ), this );
 	weatherLabel->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Preferred ) );
@@ -145,9 +142,7 @@ void WeatherPluginWidget::displayWeather()
 		tmpstr = "todayweatherplugin/";
 		getIcon( weatherData );
 		tmpstr.append( dataStr );
-        QPixmap pic;
-        pic.convertFromImage( Resource::loadImage( tmpstr ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-        weatherIcon->setPixmap( pic );
+        weatherIcon->setPixmap( Opie::Core::OResource::loadPixmap( tmpstr, Opie::Core::OResource::SmallIcon ) );
 	}
 	else
 	{
