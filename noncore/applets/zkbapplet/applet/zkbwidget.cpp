@@ -1,18 +1,18 @@
 #include <opie2/otaskbarapplet.h>
 #include <opie2/okeyfilter.h>
+#include <opie2/oresource.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
-#include <stdio.h>
-#include <unistd.h>
+//#include <stdio.h>
+//#include <unistd.h>
 #include "zkbwidget.h"
 #include "zkbcfg.h"
 
 using namespace Opie::Ui;
 
 ZkbWidget::ZkbWidget(QWidget* parent)
-    :QLabel(parent),keymap(0),disabled(Resource::loadPixmap("zkb-disabled")) {
+    :QLabel(parent),keymap(0),disabled(Opie::Core::OResource::loadPixmap("zkb-disabled", Opie::Core::OResource::SmallIcon)) {
 
     labels = new QPopupMenu();
     connect(labels, SIGNAL(activated(int)), this,

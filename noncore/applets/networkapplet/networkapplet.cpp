@@ -1,27 +1,27 @@
 /*
-                             This file is part of the Opie Project
+                     This file is part of the Opie Project
 
               =.             (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU Library General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      Library General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           Library General Public License along with
+  --    :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -33,9 +33,10 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/onetwork.h>
+#include <opie2/oresource.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/applnk.h>
-#include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
 using namespace Opie::Core;
 using namespace Opie::Ui;
 using namespace Opie::Net;
@@ -55,11 +56,10 @@ IfaceUpDownButton::IfaceUpDownButton( QWidget* parent, const char* name )
     _iface = ONetwork::instance()->interface( name );
     assert( _iface );
     setToggleButton( true );
-    //setAutoRaise( true );
-    setOnIconSet( QIconSet( Resource::loadPixmap( "up" ) ) );
-    setOffIconSet( QIconSet( Resource::loadPixmap( "down" ) ) );
+    setUsesBigPixmap( qApp->desktop()->size().width() > 330 );
+    setOnIconSet( QIconSet( Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ) ) );
+    setOffIconSet( QIconSet( Opie::Core::OResource::loadPixmap( "down", Opie::Core::OResource::SmallIcon ) ) );
     setOn( _iface->isUp() );
-    //setFixedWidth( 16 );
     connect( this, SIGNAL( clicked() ), this, SLOT( clicked() ) );
 }
 
@@ -121,7 +121,7 @@ void NetworkAppletControl::build()
     {
         QHBoxLayout* h = new QHBoxLayout( l );
         QLabel* symbol = new QLabel( this );
-        symbol->setPixmap( Resource::loadPixmap( guessDevice( it.current() ) ) );
+        symbol->setPixmap( Opie::Core::OResource::loadPixmap( guessDevice( it.current() ), Opie::Core::OResource::SmallIcon ) );
         h->addWidget( symbol );
         symbol->show();
 
@@ -215,7 +215,7 @@ NetworkApplet::NetworkApplet( QWidget *parent, const char *name )
 {
     setFixedHeight( AppLnk::smallIconSize() );
     setFixedWidth( AppLnk::smallIconSize() );
-    _pixmap.convertFromImage( Resource::loadImage( "networkapplet/network" ).smoothScale( height(), width() ) );
+    _pixmap = Opie::Core::OResource::loadPixmap( "networkapplet/network", Opie::Core::OResource::SmallIcon );
    _control = new NetworkAppletControl( this, "control" );
 }
 

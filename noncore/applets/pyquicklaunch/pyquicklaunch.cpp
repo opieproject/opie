@@ -16,10 +16,10 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -82,8 +82,8 @@ PyQuicklaunchApplet::PyQuicklaunchApplet( QWidget *parent, const char *name )
     setFixedWidth( 14 );
     status = new PyQuicklaunchControl( this, this, "Python Quicklaunch Status" );
 
-    _online = Resource::loadPixmap( "pyquicklaunch/online" );
-    _offline = Resource::loadPixmap( "pyquicklaunch/offline" );
+    _online = Opie::Core::OResource::loadPixmap( "pyquicklaunch/online", Opie::Core::OResource::SmallIcon );
+    _offline = Opie::Core::OResource::loadPixmap( "pyquicklaunch/offline", Opie::Core::OResource::SmallIcon );
 
     _fifoName = QString().sprintf( "/tmp/mickeys-quicklauncher-%s", ::getpwuid( ::getuid() )->pw_name );
     odebug << "PyQuicklaunchApplet fifo name = '" << _fifoName << "'" << oendl;

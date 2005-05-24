@@ -18,13 +18,13 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/otaskbarapplet.h>
+#include <opie2/oresource.h>
 #include <qpe/filemanager.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/timestring.h>
 #include <qpe/applnk.h>
 #include <qpe/ir.h>
 #include <qpe/config.h>
-#include <qpe/resource.h>
 using namespace Opie::Core;
 using namespace Opie::Ui;
 
@@ -432,7 +432,7 @@ NotesApplet::NotesApplet( QWidget *parent, const char *name )
         : QWidget( parent, name ) {
     setFixedHeight( AppLnk::smallIconSize() );
     setFixedWidth( AppLnk::smallIconSize() );
-    notesPixmap.convertFromImage( Resource::loadImage( "edit" ).smoothScale( height(), width() ) );
+    notesPixmap = Opie::Core::OResource::loadImage( "edit", Opie::Core::OResource::SmallIcon );
    vc = new NotesControl;
 }
 

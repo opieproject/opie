@@ -15,9 +15,9 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/otaskbarapplet.h>
+#include <opie2/oresource.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>
-#include <qpe/resource.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -28,8 +28,8 @@ AutoRotate::AutoRotate(QWidget * parent):QWidget(parent)
     setFixedWidth( AppLnk::smallIconSize() );
     setFixedHeight( AppLnk::smallIconSize() );
 
-    enabledPm.convertFromImage( Resource::loadImage("autorotate/rotate").smoothScale( height(), width() ) );
-    disabledPm.convertFromImage( Resource::loadImage("autorotate/norotate").smoothScale( height(), width() ) );
+    enabledPm = Opie::Core::OResource::loadImage("autorotate/rotate", Opie::Core::OResource::SmallIcon);
+    disabledPm = Opie::Core::OResource::loadImage("autorotate/norotate", Opie::Core::OResource::SmallIcon);
 
     repaint(true);
     popupMenu = 0;
