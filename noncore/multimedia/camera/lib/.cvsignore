@@ -1,6 +1,6 @@
 *.pro
-moc
-obj
+*moc
+*obj
 config.in
 Makefile
 

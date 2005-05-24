@@ -25,8 +25,8 @@
 #include <opie2/oapplication.h>
 #include <opie2/oconfig.h>
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <qpe/global.h>
-#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
 /* QT */
@@ -79,7 +79,7 @@ CameraMainWindow::CameraMainWindow( QWidget * parent, const char * name, WFlags 
         QVBox* v = new QVBox( this );
         v->setMargin( 10 );
         QLabel* l1 = new QLabel( v );
-        l1->setPixmap( Resource::loadPixmap( "camera/error" ) );
+        l1->setPixmap( Opie::Core::OResource::loadPixmap( "camera/error", Opie::Core::OResource::SmallIcon ) );
         QLabel* l2 = new QLabel( v );
         l2->setText( "<b>Sorry. could not detect your camera :-(</b><p>"
         "* Is the sharpzdc_cs module loaded ?<br>"
@@ -238,7 +238,7 @@ void CameraMainWindow::systemMessage( const QCString& msg, const QByteArray& dat
             case 180: preview->resize( QSize( 320, 208 ) ); break;
             default: QMessageBox::warning( this, "opie-camera",
                 "This rotation is not supported.\n"
-                "Supported are 180° and 270°" );
+                "Supported are 180 and 270" );
         }
 
         if ( _newrotation != _rotation )
@@ -333,7 +333,7 @@ void CameraMainWindow::resoMenuItemClicked( QAction* a )
             break;
         default: QMessageBox::warning( this, "opie-camera",
             "This rotation is not supported.\n"
-            "Supported are 180° and 270°" );
+            "Supported are 180 and 270" );
     }
     odebug << "Capture Resolution now: " << captureX << ", " << captureY << oendl;
     updateCaption();
