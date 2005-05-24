@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: helpwindow.cpp,v 1.6 2004-04-04 13:54:51 mickeyl Exp $
+** $Id: helpwindow.cpp,v 1.7 2005-05-24 21:48:49 drw Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -12,7 +12,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -43,11 +43,13 @@ HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* par
         browser->setSource( home_ );
     QToolBar *toolbar = new QToolBar( this );
 
-    QAction *a = new QAction( tr( "Backward" ), Resource::loadPixmap( "back" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( tr( "Backward" ), Opie::Core::OResource::loadPixmap( "back", Opie::Core::OResource::SmallIcon ),
+                              QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), browser, SLOT( backward() ) );
     a->addTo( toolbar );
 
-    a = new QAction( tr( "Forward" ), Resource::loadPixmap( "forward" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Forward" ), Opie::Core::OResource::loadPixmap( "forward", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), browser, SLOT( forward() ) );
     a->addTo( toolbar );
 

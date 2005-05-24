@@ -14,10 +14,10 @@ extern "C" {
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 #include <qpe/storage.h>
 using namespace Opie::Core;
 
@@ -506,12 +506,12 @@ void QtRec::init() {
 		toBeginningButton = new QPushButton(  tab, "Beginning_PushButton" );
 		layout1->addMultiCellWidget(toBeginningButton, 1, 1, 5, 5);
 		toBeginningButton->setFixedSize( 22, 22);
-		toBeginningButton->setPixmap( Resource::loadPixmap("fastback") );
+		toBeginningButton->setPixmap( Opie::Core::OResource::loadPixmap("fastback", Opie::Core::OResource::SmallIcon) );
 
 		toEndButton = new QPushButton(  tab, "End_PushButton" );
 		layout1->addMultiCellWidget( toEndButton, 1, 1, 6, 6);
 		toEndButton->setFixedSize( 22, 22);
-		toEndButton->setPixmap(  Resource::loadPixmap( "fastforward" )  );
+		toEndButton->setPixmap(  Opie::Core::OResource::loadPixmap( "fastforward", Opie::Core::OResource::SmallIcon )  );
 
 // 		QLabel *recLabel2;
 // 		recLabel2 = new QLabel( tab, "recLabel2" );
