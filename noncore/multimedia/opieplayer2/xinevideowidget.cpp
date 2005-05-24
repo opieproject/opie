@@ -33,14 +33,13 @@
 
 #include "xinevideowidget.h"
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 
 #include <qimage.h>
 #include <qdirectpainter_qws.h>
 #include <qgfx_qws.h>
 #include <qsize.h>
 #include <qapplication.h>
-
-#include <qpe/resource.h>
 
 #include <pthread.h>
 

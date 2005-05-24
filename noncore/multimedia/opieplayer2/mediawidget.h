@@ -23,6 +23,7 @@
 #ifndef MEDIAWIDGET_H
 #define MEDIAWIDGET_H
 
+#include <qbitmap.h>
 #include <qwidget.h>
 #include <qmap.h>
 

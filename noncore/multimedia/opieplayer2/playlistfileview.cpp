@@ -1,9 +1,10 @@
 
 #include "playlistfileview.h"
 
+#include <opie2/oresource.h>
+
 #include <qfile.h>
 #include <qpe/global.h>
-#include <qpe/resource.h>
 
 PlayListFileView::PlayListFileView( const QString &mimeTypePattern, const QString &itemPixmapName, QWidget *parent, const char *name )
     : PlayListView( parent, name ), m_mimeTypePattern( mimeTypePattern ), m_itemPixmapName( itemPixmapName ), m_scannedFiles( false ),
@@ -83,7 +84,7 @@ void PlayListFileView::populateView()
             newItem = new QListViewItem( this, dit.current()->name(),
                                                sizestr, "" /*storage*/,
                                                dit.current()->file() );
-            newItem->setPixmap( 0, Resource::loadPixmap( m_itemPixmapName ) );
+            newItem->setPixmap( 0, Opie::Core::OResource::loadPixmap( m_itemPixmapName, Opie::Core::OResource::SmallIcon ) );
         }
     }
 }
