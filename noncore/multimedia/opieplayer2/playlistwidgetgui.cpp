@@ -64,7 +64,7 @@ PlayListWidgetGui::PlayListWidgetGui(QWidget* parent, const char* name )
     bar = new QToolBar( this );
     bar->setLabel( tr( "Play Operations" ) );
 
-    tbDeletePlaylist = new QPushButton( Opie::Core::OResource::loadIconSet( "trash", Opie::Core::OResource::SmallIcon ),
+    tbDeletePlaylist = new QPushButton( Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon ),
                                         "", bar, "close" );
     tbDeletePlaylist->setFlat( TRUE );
     tbDeletePlaylist->setFixedSize( 20, 20 );
