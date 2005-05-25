@@ -190,7 +190,7 @@ OPcmciaSocket::~OPcmciaSocket()
     // open control socket and gather file descriptor
     if ( _major )
     {
-        dev_t dev = ::makedev( _major, _socket );
+        dev_t dev = makedev( _major, _socket );
         QString filename = QString().sprintf( "/tmp/opcmciasystem-%d", ::getpid() );
         if ( ::mknod( (const char*) filename, ( S_IFCHR|S_IREAD|S_IWRITE ), dev ) == 0 )
         {
