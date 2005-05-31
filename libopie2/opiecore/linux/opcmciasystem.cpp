@@ -172,9 +172,7 @@ OPcmciaSocket::OPcmciaSocket( int major, int socket, QObject* parent, const char
                  :QObject( parent, name ), _major( major ), _socket( socket )
 {
     qDebug( "OPcmciaSocket::OPcmciaSocket()" );
-
     init();
-    buildInformation();
 }
 
 
@@ -211,41 +209,12 @@ OPcmciaSocket::~OPcmciaSocket()
     }
 }
 
-/* internal */ void OPcmciaSocket::buildInformation()
-{
-    cistpl_vers_1_t *vers = &_ioctlarg.tuple_parse.parse.version_1;
-    cistpl_manfid_t *manfid = &_ioctlarg.tuple_parse.parse.manfid;
-    cistpl_funcid_t *funcid = &_ioctlarg.tuple_parse.parse.funcid;
-    config_info_t config;
-
-    if ( getTuple( CISTPL_VERS_1 ) )
-    {
-        for ( int i = 0; i < CISTPL_VERS_1_MAX_PROD_STRINGS; ++i )
-        {
-            qDebug( " PRODID = '%s'", vers->str+vers->ofs[i] );
-            _productId += vers->str+vers->ofs[i];
-        }
-    }
-        /*
-        for (i = 0; i < 4; i++)
-            printf("PRODID_%d=\"%s\"\n", i+1,
-                (i < vers->ns) ? vers->str+vers->ofs[i] : "");
-        *manfid = (cistpl_manfid_t) { 0, 0 };
-        get_tuple(fd, CISTPL_MANFID, &arg);
-        printf("MANFID=%04x,%04x\n", manfid->manf, manfid->card);
-        *funcid = (cistpl_funcid_t) { 0xff, 0xff };
-        get_tuple(fd, CISTPL_FUNCID, &arg);
-        printf("FUNCID=%d\n", funcid->func);
-        config.Function = config.ConfigBase = 0;
-        */
-}
-
 /* internal */ void OPcmciaSocket::cleanup()
 {
     // close control socket
 }
 
-/* internal */ bool OPcmciaSocket::getTuple( cisdata_t tuple )
+/* internal */ bool OPcmciaSocket::getTuple( cisdata_t tuple ) const
 {
     _ioctlarg.tuple.DesiredTuple = tuple;
     _ioctlarg.tuple.Attributes = TUPLE_RETURN_COMMON;
@@ -266,7 +235,7 @@ OPcmciaSocket::~OPcmciaSocket()
         return false;
     }
 
-    result = ::ioctl(_fd, DS_PARSE_TUPLE, &_ioctlarg);
+    result = ::ioctl( _fd, DS_PARSE_TUPLE, &_ioctlarg );
     if ( result != 0 )
     {
         qWarning( "OPcmciaSocket::getTuple() - DS_PARSE_TUPLE failed (%s)", strerror( errno ) );
@@ -276,12 +245,6 @@ OPcmciaSocket::~OPcmciaSocket()
     return true;
 }
 
-
-/* internal */ bool OPcmciaSocket::command( const QString& cmd )
-{
-    QString cmdline = QString().sprintf( "cardctl %s %d &", (const char*) cmd, _socket );
-    ::system( (const char*) cmdline );
-}
 
 int OPcmciaSocket::number() const
 {
@@ -295,6 +258,25 @@ QString OPcmciaSocket::identity() const
 }
 
 
+const OPcmciaSocket::OPcmciaSocketCardStatus OPcmciaSocket::status() const
+{
+    cs_status_t cs_status;
+    cs_status.Function = 0;
+    int result = ::ioctl( _fd, DS_GET_STATUS, &cs_status );
+    if ( result != 0 )
+    {
+        qWarning( "OPcmciaSocket::status() - DS_GET_STATUS failed (%s)", strerror( errno ) );
+        return Unknown;
+    }
+    else
+    {
+        qDebug( " card   status = 0x%08x", cs_status.CardState );
+        qDebug( " socket status = 0x%08x", cs_status.SocketState );
+        return (OPcmciaSocket::OPcmciaSocketCardStatus) (cs_status.CardState + cs_status.SocketState);
+    }
+}
+
+
 bool OPcmciaSocket::isUnsupported() const
 {
     return ( strcmp( name(), "unsupported card" ) == 0 );
@@ -303,45 +285,65 @@ bool OPcmciaSocket::isUnsupported() const
 
 bool OPcmciaSocket::isEmpty() const
 {
-    return ( strcmp( name(), "empty" ) == 0 );
+    return ! status() && ( Occupied || OccupiedCardBus );
 }
 
 
 bool OPcmciaSocket::isSuspended() const
 {
-    //FIXME
-    return false;
+    return status() && Suspended;    
 }
+
 
 bool OPcmciaSocket::eject()
 {
-    return command( "eject" );
+    return ::ioctl( _fd, DS_EJECT_CARD );
 }
+
 
 bool OPcmciaSocket::insert()
 {
-    return command( "insert" );
+    return ::ioctl( _fd, DS_INSERT_CARD );
 }
+
 
 bool OPcmciaSocket::suspend()
 {
-    return command( "suspend" );
+    return ::ioctl( _fd, DS_SUSPEND_CARD );
 }
+
 
 bool OPcmciaSocket::resume()
 {
-    return command( "resume");
+    return ::ioctl( _fd, DS_RESUME_CARD );
 }
+
 
 bool OPcmciaSocket::reset()
 {
-    return command( "reset");
+    return ::ioctl( _fd, DS_RESET_CARD );
 }
 
-const QStringList& OPcmciaSocket::productIdentity() const
+
+QStringList OPcmciaSocket::productIdentity() const
 {
-    return _productId;
+    QStringList list;
+    cistpl_vers_1_t *vers = &_ioctlarg.tuple_parse.parse.version_1;
+    if ( getTuple( CISTPL_VERS_1 ) )
+    {
+        for ( int i = 0; i < CISTPL_VERS_1_MAX_PROD_STRINGS; ++i )
+        {
+            qDebug( " PRODID = '%s'", vers->str+vers->ofs[i] );
+            list += vers->str+vers->ofs[i];
+        }
+    }
+    else
+    {
+        list += "<unknown>";
+    }
+    return list;
 }
+
 
 #if 0
 const QPair& OPcmciaSocket::manufacturerIdentity() const
@@ -350,3 +352,28 @@ const QPair& OPcmciaSocket::manufacturerIdentity() const
 }
 #endif
 
+
+QString OPcmciaSocket::function() const
+{
+    cistpl_funcid_t *funcid = &_ioctlarg.tuple_parse.parse.funcid;
+    if ( getTuple( CISTPL_FUNCID ) )
+    {
+        switch ( funcid->func )
+        {
+            case 0: return "Multifunction"; break;
+            case 1: return "Memory"; break;
+            case 2: return "Serial"; break;
+            case 3: return "Parallel"; break;
+            case 4: return "Fixed Disk"; break;
+            case 5: return "Video"; break;
+            case 6: return "Network"; break;
+            case 7: return "AIMS"; break;
+            case 8: return "SCSI"; break;
+            default: return "<unknown>"; break;
+        }
+    }
+    else
+    {
+        return "<unknown>";
+    }
+}

@@ -109,6 +109,24 @@ class OPcmciaSystem : public QObject
 class OPcmciaSocket : public QObject
 {
   Q_OBJECT
+  public:
+
+    enum OPcmciaSocketCardStatus
+    {
+        Unknown             = 0,
+        Occupied            = CS_EVENT_CARD_DETECT,
+        OccupiedCardBus     = CS_EVENT_CB_DETECT,
+        WriteProtected      = CS_EVENT_WRITE_PROTECT,
+        BatteryLow          = CS_EVENT_BATTERY_LOW,
+        BatteryDead         = CS_EVENT_BATTERY_DEAD,
+        Ready               = CS_EVENT_READY_CHANGE,
+        Suspended           = CS_EVENT_PM_SUSPEND,
+        Attention           = CS_EVENT_REQUEST_ATTENTION,
+        InsertionInProgress = CS_EVENT_CARD_INSERTION,
+        RemovalInProgress   = CS_EVENT_CARD_REMOVAL,
+        ThreeVolts          = CS_EVENT_3VCARD,
+        SupportsVoltage     = CS_EVENT_XVCARD,
+    };
 
   public:
     /**
@@ -125,9 +143,13 @@ class OPcmciaSocket : public QObject
      */
     int number() const;
     /**
-     * @returns the identification string of the card in this socket, or "<Empty Socket>"
+     * @returns the card managers idea of the cards' identy, or "<Empty Socket>"
      */
     QString identity() const;
+    /**
+      * @returns the socket status
+      */
+    const OPcmciaSocketCardStatus status() const;
     /**
      * @returns true, if the card is unsupported by the cardmgr
      */
@@ -168,27 +190,26 @@ class OPcmciaSocket : public QObject
     /**
       * @returns a list of product IDs
       */
-    const QStringList& productIdentity() const;
+    QStringList productIdentity() const;
     /**
       * @returns the manufacturer ID pair
       */
 #if 0
     const QPair& manufacturerIdentity() const;
 #endif
-
-  private:
-    QStringList _productId;
+    /**
+      * @returns the function string
+      */
+    QString function() const;
 
   private:
     void init();
-    void buildInformation();
     void cleanup();
-    bool command( const QString& cmd );
-    bool getTuple( cisdata_t tuple );
+    bool getTuple( cisdata_t tuple ) const;
     int _major;
     int _socket;
     int _fd;
-    ds_ioctl_arg_t _ioctlarg;
+    mutable ds_ioctl_arg_t _ioctlarg;
 
   private:
     class Private;

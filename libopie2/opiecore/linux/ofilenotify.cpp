@@ -347,34 +347,45 @@ int ODirNotification::watch( const QString& path, bool sshot, OFileNotificationT
 {
     qDebug( "ODirNotification::watch( %s, %d, 0x%08x, %d )", (const char*) path, sshot, type, recurse );
 
-    if ( recurse == 0 )
+    OFileNotification* fn = new OFileNotification( this, "ODirNotification delegate" );
+    int result = fn->startWatching( path, sshot, type );
+    if ( result != -1 )
     {
-        OFileNotification* fn = new OFileNotification( this, "ODirNotification delegate" );
-        int result = fn->startWatching( path, sshot, type );
-        if ( result != -1 )
-        {
-            connect( fn, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ), this, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ) );
-            connect( fn, SIGNAL( accessed( const QString& ) ), this, SIGNAL( accessed( const QString& ) ) );
-            connect( fn, SIGNAL( modified( const QString& ) ), this, SIGNAL( modified( const QString& ) ) );
-            connect( fn, SIGNAL( attributed( const QString& ) ), this, SIGNAL( attributed( const QString& ) ) );
-            connect( fn, SIGNAL( closed( const QString&, bool ) ), this, SIGNAL( closed( const QString&, bool ) ) );
-            connect( fn, SIGNAL( opened( const QString& ) ), this, SIGNAL( opened( const QString& ) ) );
-            connect( fn, SIGNAL( movedTo( const QString&, const QString& ) ), this, SIGNAL( movedTo( const QString&, const QString& ) ) );
-            connect( fn, SIGNAL( movedFrom( const QString&, const QString& ) ), this, SIGNAL( movedFrom( const QString&, const QString& ) ) );
-            connect( fn, SIGNAL( deletedSubdir( const QString&, const QString& ) ), this, SIGNAL( deletedSubdir( const QString&, const QString& ) ) );
-            connect( fn, SIGNAL( deletedFile( const QString&, const QString& ) ), this, SIGNAL( deletedFile( const QString&, const QString& ) ) );;
-            connect( fn, SIGNAL( createdSubdir( const QString&, const QString& ) ), this, SIGNAL( createdSubdir( const QString&, const QString& ) ) );
-            connect( fn, SIGNAL( createdFile( const QString&, const QString& ) ), this, SIGNAL( createdFile( const QString&, const QString& ) ) );
-            connect( fn, SIGNAL( deleted( const QString& ) ), this, SIGNAL( deleted( const QString& ) ) );
-            connect( fn, SIGNAL( unmounted( const QString& ) ), this, SIGNAL( unmounted( const QString& ) ) );
-        }
-        return result;
-    }
-    else
-    {
+        connect( fn, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ), this, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ) );
+        connect( fn, SIGNAL( accessed( const QString& ) ), this, SIGNAL( accessed( const QString& ) ) );
+        connect( fn, SIGNAL( modified( const QString& ) ), this, SIGNAL( modified( const QString& ) ) );
+        connect( fn, SIGNAL( attributed( const QString& ) ), this, SIGNAL( attributed( const QString& ) ) );
+        connect( fn, SIGNAL( closed( const QString&, bool ) ), this, SIGNAL( closed( const QString&, bool ) ) );
+        connect( fn, SIGNAL( opened( const QString& ) ), this, SIGNAL( opened( const QString& ) ) );
+        connect( fn, SIGNAL( movedTo( const QString&, const QString& ) ), this, SIGNAL( movedTo( const QString&, const QString& ) ) );
+        connect( fn, SIGNAL( movedFrom( const QString&, const QString& ) ), this, SIGNAL( movedFrom( const QString&, const QString& ) ) );
+        connect( fn, SIGNAL( deletedSubdir( const QString&, const QString& ) ), this, SIGNAL( deletedSubdir( const QString&, const QString& ) ) );
+        connect( fn, SIGNAL( deletedFile( const QString&, const QString& ) ), this, SIGNAL( deletedFile( const QString&, const QString& ) ) );;
+        connect( fn, SIGNAL( createdSubdir( const QString&, const QString& ) ), this, SIGNAL( createdSubdir( const QString&, const QString& ) ) );
+        connect( fn, SIGNAL( createdFile( const QString&, const QString& ) ), this, SIGNAL( createdFile( const QString&, const QString& ) ) );
+        connect( fn, SIGNAL( deleted( const QString& ) ), this, SIGNAL( deleted( const QString& ) ) );
+        connect( fn, SIGNAL( unmounted( const QString& ) ), this, SIGNAL( unmounted( const QString& ) ) );
 
-        return 1;
+        if ( recurse )
+        {
+            QDir directory( path );
+            QStringList subdirs = directory.entryList( QDir::Dirs );
+
+            for ( QStringList::Iterator it = subdirs.begin(); it != subdirs.end(); ++it )
+            {
+                if ( (*it) == "." || (*it) == ".." ) continue;
+                QString subpath = QString( "%1/%2" ).arg( path ).arg( *it );
+                int subresult = watch( subpath, sshot, type, recurse-1 );
+                if ( subresult == -1 )
+                {
+                    qDebug( "ODirNotification::watch(): subresult for '%s' was -1. Interrupting", (const char*) (*it) );
+                    return -1;
+                }
+            }
+        }
+//connect( fn, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ), this, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ) );
     }
+    else return -1;
 }
 
 
