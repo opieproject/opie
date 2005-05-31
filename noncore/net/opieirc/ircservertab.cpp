@@ -117,9 +117,10 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
         stream >> channel;
         /* According to RFC 1459 */
         if (channel.length() > 0 && channel.length() < 200 &&
-            channel.find(",") == -1 && channel.find("") == -1) {
+            channel.find(",") == -1 && channel.find('\007') == -1) {
             
-            if (!channel.startsWith("#") && !channel.startsWith("&")) {
+            if (!channel.startsWith("#") && !channel.startsWith("&") 
+		&& !channel.startsWith("+") && !channel.startsWith("!")) {
                 channel = channel.prepend("#");
             }
             m_session->join(channel);
