@@ -15,6 +15,8 @@ int main( int argc, char** argv )
     while ( sock = it.current() )
     {
         odebug << "card in socket # " << sock->number() << " is '" << sock->identity() << "'" << oendl;
+        odebug << "card status is " << sock->status() << oendl;
+        odebug << "card function is " << sock->function() << oendl;
         ++it;
     }
 

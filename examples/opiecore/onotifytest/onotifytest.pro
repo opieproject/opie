@@ -1,5 +1,6 @@
 TEMPLATE        = app
 CONFIG          = qt warn_on
+HEADERS         = main.h
 SOURCES         = main.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
