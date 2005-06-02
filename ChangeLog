@@ -27,7 +27,8 @@
 	Internal
 	--------
 	* Make BluezApplet use OTaskbarApplet (mickeyl)
-	* Rewrite OFileNotification to use the upcoming inotify interface instead of the deprecated dnotify (mickeyl)
+	* libopiecore: rewrite OFileNotification to use the Linux 2.6 inotify interface (mickeyl)
+	* libopiecore: add ODirNotification - recursive directory notifications (mickeyl)
 	* libopienet: Skip hostap control interfaces 'wifi' and improve robustness in ONetworkInterface (mickeyl)
 	* libopieui: Remove OVersatileView and OVersatileViewItem (mickeyl)
 	* libopienet: Miscellaneous API cleanups (mickeyl)

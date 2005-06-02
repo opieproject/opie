@@ -31,21 +31,31 @@ App::App( int argc, char** argv ) : QApplication( argc, argv )
     QObject::connect( tmpfoo, SIGNAL(closed(const QString&,bool)), this, SLOT(quit()) );
 #endif
 
-    ODirNotification* tmpfoo = new ODirNotification( 0, 0 );
+    tmpfoo = new ODirNotification( 0, 0 );
 
     int result = tmpfoo->watch( "/tmp/foo", false, CreateFile, 2 );
-    QObject::connect( tmpfoo, SIGNAL(triggered(const QString&,unsigned int,const QString&)),
-                        this,   SLOT(triggered(const QString&,unsigned int,const QString&)) );
+
+    if ( result != -1 )
+    {
+        QObject::connect( tmpfoo, SIGNAL(triggered(const QString&,unsigned int,const QString&)),
+                          this,   SLOT(triggered(const QString&,unsigned int,const QString&)) );
+    }
+    else
+    {
+        QMessageBox::warning( qApp->desktop(), "info", "Couldn't watch /tmp/foo\nDoes it exist?" );
+    }
 }
 
 App::~App()
 {
     odebug << "~App()" << oendl;
+    delete tmpfoo;
 }
 
 void App::triggered( const QString& str1, unsigned int id, const QString& str2 )
 {
-    QMessageBox::information( qApp->desktop(), "info", QString( "%1\n%2\n%3" ).arg( str1 ).arg( id ).arg( str2 ) );
+    QMessageBox::information( qApp->desktop(), "info", QString().sprintf( "%s\n0x%08x\n%s",
+    (const char*) str1, id, (const char*) str2 ) );
 }
 
 int main( int argc, char** argv )

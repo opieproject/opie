@@ -257,7 +257,8 @@ class OFileNotification : public QObject
  * @brief Represents a directory notification
  *
  * This class allows to watch for events happening to directories
- * It uses the OFileNotification class
+ * It uses the OFileNotification class and (for recursive watches)
+ * implements the Love-Trowbridge recursive directory scanning algorithm.
  *
  * @see http://www.kernel.org/pub/linux/kernel/people/rml/inotify/
  *

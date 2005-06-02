@@ -236,6 +236,8 @@ bool OFileNotification::activate( const OFileNotificationEvent* e )
 {
     qDebug( "OFileNotification::activate(): e = ( %s, %d, 0x%08x, %d, %s )", (const char*) _path, e->descriptor(), e->mask(), e->cookie(), (const char*) e->name() );
 
+    //FIXME: Should we really deliver QueueOverflow and/or Ignore to user level code?
+
     // dumb signal
     _signal.activate();
 
@@ -245,22 +247,26 @@ bool OFileNotification::activate( const OFileNotificationEvent* e )
     // specialized signals
     switch ( e->mask() )
     {
-        case Access:        emit accessed( _path );                 break;
-        case Modify:        emit modified( _path );                 break;
-        case Attrib:        emit attributed( _path);                break;
-        case CloseWrite:    emit closed( _path, true );             break;
-        case CloseNoWrite:  emit closed( _path, false );            break;
-        case Open:          emit opened( _path );                   break;
-        case MovedFrom:     emit movedFrom( _path, e->name() );     break;
-        case MovedTo:       emit movedTo( _path, e->name() );       break;
-        case DeleteSubdir:  emit deletedSubdir( _path, e->name() ); break;
-        case DeleteFile:    emit deletedFile( _path, e->name() );   break;
-        case CreateSubdir:  emit createdSubdir( _path, e->name() ); break;
-        case CreateFile:    emit createdFile( _path, e->name() );   break;
-        case DeleteSelf:    emit deleted( _path );                  break;
-        case Unmount:       emit unmounted( _path );                break;
+        case Access:         emit accessed( _path );                 break;
+        case Modify:         emit modified( _path );                 break;
+        case Attrib:         emit attributed( _path);                break;
+        case CloseWrite:     emit closed( _path, true );             break;
+        case CloseNoWrite:   emit closed( _path, false );            break;
+        case Open:           emit opened( _path );                   break;
+        case MovedFrom:      emit movedFrom( _path, e->name() );     break;
+        case MovedTo:        emit movedTo( _path, e->name() );       break;
+        case DeleteSubdir:   emit deletedSubdir( _path, e->name() ); break;
+        case DeleteFile:     emit deletedFile( _path, e->name() );   break;
+        case CreateSubdir:   emit createdSubdir( _path, e->name() ); break;
+        case CreateFile:     emit createdFile( _path, e->name() );   break;
+        case DeleteSelf:     emit deleted( _path );                  break;
+        case Unmount:        emit unmounted( _path );                break;
+        case _QueueOverflow: qFatal( "OFileNotification::activate() - Inotify Event Queue Overload!" ); break;
+        case _Ignored:       qWarning( "OFileNotification::activate() - Further Events for '%s' will be ignored", (const char*) _path ); break;
         default: assert( 0 );
     }
+
+    delete e;
 
     if ( !_multi ) stop();
 
@@ -317,7 +323,7 @@ bool OFileNotification::registerEventHandler()
         return false;
     }
 
-    OFileNotification::_sn = new QSocketNotifier( _fd, QSocketNotifier::Read, this, "inotify event" );
+    OFileNotification::_sn = new QSocketNotifier( _fd, QSocketNotifier::Read );
     connect( OFileNotification::_sn, SIGNAL( activated(int) ), this, SLOT( inotifyEventHandler() ) );
 
     qDebug( "OFileNotification::registerEventHandler(): done" );
@@ -348,7 +354,7 @@ ODirNotification::~ODirNotification()
     qDebug( "ODirNotification::~ODirNotification()" );
 }
 
-/*
+/**
   Love-Trowbridge recursive directory scanning algorithm:
 
         Step 1.  Start at initial directory foo.  Add watch.
@@ -365,7 +371,7 @@ ODirNotification::~ODirNotification()
 
         Step 5.  For any CREATE_SUBDIR event on bar, if a watch is
                  not yet created on bar, repeat step 1 on bar.
-*/
+**/
 
 int ODirNotification::watch( const QString& path, bool sshot, OFileNotificationType type, int recurse )
 {
