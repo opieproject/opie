@@ -22,14 +22,19 @@
 
 #include "skin.h"
 #include "singleton.h"
+
+/* OPIE */
 #include <opie2/odebug.h>
-
-#include <qcache.h>
-#include <qtimer.h>
-
+#include <opie2/oresource.h>
+using namespace Opie::Core;
 #include <qpe/config.h>
 #include <qpe/global.h>
 
+/* QT */
+#include <qcache.h>
+#include <qtimer.h>
+
+/* STD */
 #include <assert.h>
 
 struct SkinData
@@ -161,7 +166,7 @@ QString Skin::defaultSkinName()
 
 QImage Skin::loadImage( const QString &fileName )
 {
-    return QImage( Resource::findPixmap( fileName ) );
+    return QImage( OResource::findPixmap( fileName ) );
 }
 
 SkinCache::SkinCache()
