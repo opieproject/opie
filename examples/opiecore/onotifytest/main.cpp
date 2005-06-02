@@ -33,7 +33,7 @@ App::App( int argc, char** argv ) : QApplication( argc, argv )
 
     ODirNotification* tmpfoo = new ODirNotification( 0, 0 );
 
-    int result = tmpfoo->watch( "/tmp/foo", false, CreateFile, 1 );
+    int result = tmpfoo->watch( "/tmp/foo", false, CreateFile, 2 );
     QObject::connect( tmpfoo, SIGNAL(triggered(const QString&,unsigned int,const QString&)),
                         this,   SLOT(triggered(const QString&,unsigned int,const QString&)) );
 }

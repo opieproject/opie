@@ -111,6 +111,7 @@ class OFileNotificationEvent;
 
 enum OFileNotificationType
 {
+    Nothing         =   0,
     Access          =   IN_ACCESS,
     Modify          =   IN_MODIFY,
     Attrib          =   IN_ATTRIB,
@@ -197,6 +198,10 @@ class OFileNotification : public QObject
      * @returns the path to the file being watched by this instance.
      **/
     QString path() const;
+    /**
+     * @returns if the notification is single-shot
+     */
+    bool isSingleShot() const;
     /**
      * @returns if a file is currently being watched.
      **/
@@ -292,6 +297,14 @@ class ODirNotification : public QObject
     void createdFile( const QString&, const QString& );
     void deleted( const QString& );
     void unmounted( const QString& );
+
+  private slots:
+    void subdirCreated( const QString&, const QString& );
+
+  private:
+    OFileNotification* _topfilenotification;
+    OFileNotificationType _type;
+    int _depth;
 };
 
 /*======================================================================================

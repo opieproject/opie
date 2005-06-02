@@ -226,6 +226,12 @@ QString OFileNotification::path() const
 }
 
 
+bool OFileNotification::isSingleShot() const
+{
+    return !_multi;
+}
+
+
 bool OFileNotification::activate( const OFileNotificationEvent* e )
 {
     qDebug( "OFileNotification::activate(): e = ( %s, %d, 0x%08x, %d, %s )", (const char*) _path, e->descriptor(), e->mask(), e->cookie(), (const char*) e->name() );
@@ -331,7 +337,7 @@ void OFileNotification::unregisterEventHandler()
 // ODirNotification
 //=================================================================================================
 ODirNotification::ODirNotification( QObject* parent, const char* name )
-                  :QObject( parent, name )
+                  :QObject( parent, name ), _topfilenotification( 0 ), _type( Nothing ), _depth( -123 )
 {
     qDebug( "ODirNotification::ODirNotification()" );
 }
@@ -341,56 +347,6 @@ ODirNotification::~ODirNotification()
 {
     qDebug( "ODirNotification::~ODirNotification()" );
 }
-
-
-int ODirNotification::watch( const QString& path, bool sshot, OFileNotificationType type, int recurse )
-{
-    qDebug( "ODirNotification::watch( %s, %d, 0x%08x, %d )", (const char*) path, sshot, type, recurse );
-
-    OFileNotification* fn = new OFileNotification( this, "ODirNotification delegate" );
-    int result = fn->startWatching( path, sshot, type );
-    if ( result != -1 )
-    {
-        connect( fn, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ), this, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ) );
-        connect( fn, SIGNAL( accessed( const QString& ) ), this, SIGNAL( accessed( const QString& ) ) );
-        connect( fn, SIGNAL( modified( const QString& ) ), this, SIGNAL( modified( const QString& ) ) );
-        connect( fn, SIGNAL( attributed( const QString& ) ), this, SIGNAL( attributed( const QString& ) ) );
-        connect( fn, SIGNAL( closed( const QString&, bool ) ), this, SIGNAL( closed( const QString&, bool ) ) );
-        connect( fn, SIGNAL( opened( const QString& ) ), this, SIGNAL( opened( const QString& ) ) );
-        connect( fn, SIGNAL( movedTo( const QString&, const QString& ) ), this, SIGNAL( movedTo( const QString&, const QString& ) ) );
-        connect( fn, SIGNAL( movedFrom( const QString&, const QString& ) ), this, SIGNAL( movedFrom( const QString&, const QString& ) ) );
-        connect( fn, SIGNAL( deletedSubdir( const QString&, const QString& ) ), this, SIGNAL( deletedSubdir( const QString&, const QString& ) ) );
-        connect( fn, SIGNAL( deletedFile( const QString&, const QString& ) ), this, SIGNAL( deletedFile( const QString&, const QString& ) ) );;
-        connect( fn, SIGNAL( createdSubdir( const QString&, const QString& ) ), this, SIGNAL( createdSubdir( const QString&, const QString& ) ) );
-        connect( fn, SIGNAL( createdFile( const QString&, const QString& ) ), this, SIGNAL( createdFile( const QString&, const QString& ) ) );
-        connect( fn, SIGNAL( deleted( const QString& ) ), this, SIGNAL( deleted( const QString& ) ) );
-        connect( fn, SIGNAL( unmounted( const QString& ) ), this, SIGNAL( unmounted( const QString& ) ) );
-
-        if ( recurse )
-        {
-            QDir directory( path );
-            QStringList subdirs = directory.entryList( QDir::Dirs );
-
-            for ( QStringList::Iterator it = subdirs.begin(); it != subdirs.end(); ++it )
-            {
-                if ( (*it) == "." || (*it) == ".." ) continue;
-                QString subpath = QString( "%1/%2" ).arg( path ).arg( *it );
-                int subresult = watch( subpath, sshot, type, recurse-1 );
-                if ( subresult == -1 )
-                {
-                    qDebug( "ODirNotification::watch(): subresult for '%s' was -1. Interrupting", (const char*) (*it) );
-                    return -1;
-                }
-            }
-        }
-//connect( fn, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ), this, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ) );
-    }
-    else return -1;
-}
-
-
-// void ODirNotification::subdirCreated( const QString& name )
-
 
 /*
   Love-Trowbridge recursive directory scanning algorithm:
@@ -410,6 +366,77 @@ int ODirNotification::watch( const QString& path, bool sshot, OFileNotificationT
         Step 5.  For any CREATE_SUBDIR event on bar, if a watch is
                  not yet created on bar, repeat step 1 on bar.
 */
+
+int ODirNotification::watch( const QString& path, bool sshot, OFileNotificationType type, int recurse )
+{
+    if ( _type == Nothing ) _type = type; // only set it once - for the top level call
+    OFileNotificationType subtype = ( recurse != 0 ) ? (OFileNotificationType) int( _type | CreateSubdir ) : _type;
+    qDebug( "ODirNotification::watch( %s, %d, 0x%08x, %d )", (const char*) path, sshot, subtype, recurse );
+    OFileNotification* fn = new OFileNotification( this, "ODirNotification delegate" );
+
+    int result = fn->startWatching( path, sshot, subtype );
+    if ( result != -1 )
+    {
+
+        if ( !_topfilenotification ) _topfilenotification = fn; // only set it once - for the top level call
+        if ( _depth == -123 ) _depth = recurse; // only set it once - for the top level call
+
+        connect( fn, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ), this, SIGNAL( triggered( const QString&, unsigned int, const QString& ) ) );
+        connect( fn, SIGNAL( accessed( const QString& ) ), this, SIGNAL( accessed( const QString& ) ) );
+        connect( fn, SIGNAL( modified( const QString& ) ), this, SIGNAL( modified( const QString& ) ) );
+        connect( fn, SIGNAL( attributed( const QString& ) ), this, SIGNAL( attributed( const QString& ) ) );
+        connect( fn, SIGNAL( closed( const QString&, bool ) ), this, SIGNAL( closed( const QString&, bool ) ) );
+        connect( fn, SIGNAL( opened( const QString& ) ), this, SIGNAL( opened( const QString& ) ) );
+        connect( fn, SIGNAL( movedTo( const QString&, const QString& ) ), this, SIGNAL( movedTo( const QString&, const QString& ) ) );
+        connect( fn, SIGNAL( movedFrom( const QString&, const QString& ) ), this, SIGNAL( movedFrom( const QString&, const QString& ) ) );
+        connect( fn, SIGNAL( deletedSubdir( const QString&, const QString& ) ), this, SIGNAL( deletedSubdir( const QString&, const QString& ) ) );
+        connect( fn, SIGNAL( deletedFile( const QString&, const QString& ) ), this, SIGNAL( deletedFile( const QString&, const QString& ) ) );;
+        connect( fn, SIGNAL( createdSubdir( const QString&, const QString& ) ), this, SIGNAL( createdSubdir( const QString&, const QString& ) ) );
+        connect( fn, SIGNAL( createdFile( const QString&, const QString& ) ), this, SIGNAL( createdFile( const QString&, const QString& ) ) );
+        connect( fn, SIGNAL( deleted( const QString& ) ), this, SIGNAL( deleted( const QString& ) ) );
+        connect( fn, SIGNAL( unmounted( const QString& ) ), this, SIGNAL( unmounted( const QString& ) ) );
+
+        if ( recurse != 0 )
+        {
+            connect( fn, SIGNAL( createdSubdir( const QString&, const QString& ) ), this, SLOT( subdirCreated( const QString&, const QString& ) ) );
+
+            QDir directory( path );
+            QStringList subdirs = directory.entryList( QDir::Dirs );
+
+            for ( QStringList::Iterator it = subdirs.begin(); it != subdirs.end(); ++it )
+            {
+                if ( (*it) == "." || (*it) == ".." ) continue;
+                QString subpath = QString( "%1/%2" ).arg( path ).arg( *it );
+                int subresult = watch( subpath, sshot, subtype, recurse-1 );
+                if ( subresult == -1 )
+                {
+                    qDebug( "ODirNotification::watch(): subresult for '%s' was -1. Interrupting", (const char*) (*it) );
+                    return -1;
+                }
+            }
+        }
+    }
+    else return -1;
+}
+
+
+void ODirNotification::subdirCreated( const QString& dir, const QString& subdir )
+{
+    qDebug( "*** ODirNotification::subdirCreated '%s/%s'", (const char*) dir, (const char*) subdir );
+    QString newdir = dir;
+    if ( newdir.startsWith( _topfilenotification->path() ) )
+    {
+        newdir.replace( _topfilenotification->path(), "" );
+        int level = newdir.contains( '/' );
+        qDebug( "*** dirpart = '%s' ==> level = %d", (const char*) newdir, level );
+
+        if ( _depth == -1 || _depth > level )
+        {
+            watch( QString( "%1/%2" ).arg( dir ).arg( subdir ), _topfilenotification->isSingleShot(), _topfilenotification->type(), _depth == -1 ? -1 : _depth-level-1 );
+        }
+
+    }
+}
 
 
 } // namespace Ui
