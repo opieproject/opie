@@ -146,6 +146,11 @@ QWidget *Configuration::initSettings(Cfg &cfg)
     savePayees->setChecked( cfg.getSavePayees() );
     layout->addMultiCellWidget( savePayees, 5, 5, 0, 1 );
 
+	smallFontCB = new QCheckBox( tr( "Use smaller font for list" ), container );
+	QWhatsThis::add( smallFontCB, tr( "Click here to select smaller font for transactions." ) );
+	smallFontCB->setChecked( cfg.getUseSmallFont() );
+	layout->addMultiCellWidget( smallFontCB, 6, 6, 0, 1 );
+
     return(control);
 }
 
@@ -154,6 +159,7 @@ void Configuration::saveConfig(Cfg &cfg)
 {
     // Settings
     cfg.setCurrencySymbol( symbolEdit->text() );
+    cfg.setUseSmallFont( smallFontCB->isChecked() );
     cfg.setShowLocks( lockCB->isChecked() );
     cfg.setShowBalances( balCB->isChecked() );
     cfg.setOpenLastBook( openLastBookCB->isChecked() );

@@ -48,6 +48,7 @@ class Configuration : public QDialog
 		~Configuration();
 
 		QLineEdit *symbolEdit;
+		QCheckBox *smallFontCB;
 		QCheckBox *lockCB;
 		QCheckBox *balCB;
         QCheckBox *openLastBookCB;

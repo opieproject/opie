@@ -221,7 +221,10 @@ QWidget *Checkbook::initTransactions()
     // Table
     tranTable = new QListView( control );
     QFont fnt(QPEApplication::font());
-    fnt.setPointSize( fnt.pointSize()-1 );
+    if( _pCfg->getUseSmallFont() )
+	{
+		fnt.setPointSize( fnt.pointSize()-1 );
+	}
     tranTable->setFont( fnt );
     QWhatsThis::add( tranTable, tr( "This is a listing of all transactions entered for this checkbook.\n\nTo sort entries by a specific field, click on the column name." ) );
     tranTable->addColumn( tr( "Id" ) );

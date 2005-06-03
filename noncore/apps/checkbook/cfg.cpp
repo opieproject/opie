@@ -37,6 +37,7 @@
 Cfg::Cfg()
 {
     _currencySymbol="$";
+    _useSmallFont=TRUE;
     _showLocks=FALSE;
     _showBalances=FALSE;
     _pCategories=new CategoryList();
@@ -77,6 +78,7 @@ void Cfg::readConfig(Config &config)
 
     // read scalars
 	_currencySymbol = config.readEntry( "CurrencySymbol", "$" );
+	_useSmallFont = config.readBoolEntry( "UseSmallFont", TRUE );
 	_showLocks = config.readBoolEntry( "ShowLocks", FALSE );
 	_showBalances = config.readBoolEntry( "ShowBalances", FALSE );
     _openLastBook = config.readBoolEntry( "OpenLastBook", FALSE );
@@ -164,6 +166,7 @@ void Cfg::writeConfig(Config &config)
 
     // write scalars
     config.writeEntry( "CurrencySymbol", _currencySymbol );
+    config.writeEntry( "UseSmallFont", _useSmallFont );
     config.writeEntry( "ShowLocks", _showLocks );
     config.writeEntry( "ShowBalances", _showBalances );
     config.writeEntry( "OpenLastBook", _openLastBook );
