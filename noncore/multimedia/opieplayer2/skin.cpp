@@ -166,7 +166,7 @@ QString Skin::defaultSkinName()
 
 QImage Skin::loadImage( const QString &fileName )
 {
-    return QImage( OResource::findPixmap( fileName ) );
+    return QImage( Opie::Core::OResource::findPixmap( fileName ) );
 }
 
 SkinCache::SkinCache()
