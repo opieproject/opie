@@ -9,6 +9,8 @@
 	* Wellenreiter: Remove Joining networks - use OpieStumbler for that (mickeyl)
 	* Opie-Mobilemsg has gone unsupported - it never really worked and there will be a replacement (mickeyl)
 	* Opie-Tabmanager has gone unsupported - it barely works and there is not much of a use of it anyway (mickeyl)
+	* Checkbook - added configuration option to use smaller font for checkbook transaction tab (hrw)
+	* ZSafe - make UI conform to Opie standards (drw)
 
 	Fixed Bugs
 	----------
