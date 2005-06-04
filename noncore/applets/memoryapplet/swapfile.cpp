@@ -23,7 +23,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -293,7 +293,7 @@ void Swapfile::swapon()
 void Swapfile::setStatusMessage(const QString& text, bool error /* = false */)
 {
 	swapStatus->setText("<b>" + text + "</b>");
-	swapStatusIcon->setPixmap(Resource::loadPixmap(error ? "close" : "done"));
+	swapStatusIcon->setPixmap(Opie::Core::OResource::loadPixmap(error ? "close" : "done", Opie::Core::OResource::SmallIcon));
 }
 
 
