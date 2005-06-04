@@ -8,11 +8,11 @@
 #include <qaccel.h>
 #include <opie2/otaskbarapplet.h>
 #include <opie2/okeyfilter.h>
+#include <opie2/oresource.h>
 
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/global.h>
-#include <qpe/resource.h>
 #include "KeyHelper.h"
 #include "AppLnkManager.h"
 #include "ConfigEx.h"

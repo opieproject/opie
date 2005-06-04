@@ -4,13 +4,7 @@
 void AnyLnk::loadPixmap()
 {
 	if(m_params.count() >= 3){
-		QString& str = m_params[2];
-		QImage image = Resource::loadImage(str);
-		if(image.isNull() == false){
-			const QSize& size = AppLnkManager::getIconSize();
-			m_pixmap.convertFromImage(
-				image.smoothScale(size.width(), size.height()) );
-		}	
+		m_pixmap = Opie::Core::OResource::loadPixmap( m_params[2], Opie::Core::OResource::SmallIcon );
 	}
 }
 

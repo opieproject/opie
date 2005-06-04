@@ -8,7 +8,7 @@ int g_level = 0;
 static const char* _version_ = "1.2.2";
 
 KeyHelperWidget::KeyHelperWidget(QWidget* parent, const char* name)
-    : QLabel(parent, name),disabled(Resource::loadPixmap("zkb-disabled"))
+    : QLabel(parent, name),disabled(Opie::Core::OResource::loadPixmap("zkb-disabled"))
 {
     qDebug("KeyHelperWidget::KeyHelperWidget()");
     g_Widget = this;
@@ -294,7 +294,7 @@ void KeyHelperWidget::initDebugLevel()
     setDebugLevel(level);
 }
 
-void KeyHelperWidget::setDebugLevel(int level)
+void KeyHelperWidget::setDebugLevel(int /*level*/)
 {
 #ifdef QT_QWS_EBX
     static bool noDebug = true;

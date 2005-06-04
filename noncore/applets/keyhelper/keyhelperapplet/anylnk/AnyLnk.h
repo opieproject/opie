@@ -11,7 +11,8 @@
 #include <qtextcodec.h>
 
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
+
+#include <opie2/oresource.h>
 
 #include "AppLnkManager.h"
 #include "ConfigEx.h"
