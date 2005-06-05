@@ -1,27 +1,27 @@
 /*
-                             This file is part of the Opie Project
+                     This file is part of the Opie Project
 
               =.             (C) 2004 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
             .=l.             Based on Qtopia 1.7 Brightnessapplet (C) 2003-2004 TrollTech
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           General Public License along with
-    --        :-=`           this application; see the file COPYING.LIB.
+     .>+-=
+_;:,   .>  :=|.         This program is free software; you can
+.> <`_,  > .  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This program is distributed in the hope that
+  + . -:.    =       it will be useful,  but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=    =    ;      General Public License for more
+++=  -.   .`   .:       details.
+:   = ...= . :.=-
+-.  .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .  )=. =           General Public License along with
+  --    :-=`           this application; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -33,12 +33,12 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/odevice.h>
+#include <opie2/oresource.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/power.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/resource.h>
 using namespace Opie::Core;
 using namespace Opie::Ui;
 
@@ -151,7 +151,7 @@ BrightnessApplet::BrightnessApplet( QWidget *parent, const char *name )
 {
     setFixedHeight( AppLnk::smallIconSize() );
     setFixedWidth( AppLnk::smallIconSize() );
-    _pixmap.convertFromImage( Resource::loadImage( "brightnessapplet/icon" ).smoothScale( height(), width() ) );
+    _pixmap = Opie::Core::OResource::loadPixmap( "brightnessapplet/icon", Opie::Core::OResource::SmallIcon );
    _control = new BrightnessAppletControl( this, "control" );
 }
 
@@ -214,7 +214,7 @@ int BrightnessApplet::calcBrightnessValue()
 }
 
 
-void BrightnessApplet::sliderMoved( int value )
+void BrightnessApplet::sliderMoved( int /*value*/ )
 {
 #ifndef QT_NO_COP
     QCopEnvelope e("QPE/System", "setBacklight(int)");
