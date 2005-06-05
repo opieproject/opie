@@ -1,5 +1,4 @@
 TEMPLATE	= lib
-CONFIG		+= qt warn_on release
 HEADERS	=   ../../library/calendar.h \
 	    ../../library/global.h \
 	    ../../library/resource.h \
@@ -131,10 +130,10 @@ SOURCES +=  ../../library/quuid.cpp \
 INCLUDEPATH += $(OPIEDIR)/include backend
 LIBS		+= -ldl -lcrypt -lm
 
-INTERFACES =  ../../library/passwordbase_p.ui \
-              ../../library/categoryeditbase_p.ui \
-              ../../library/findwidgetbase_p.ui \
-              ../../library/lnkpropertiesbase_p.ui
+FORMS =  ../../library/passwordbase_p.ui \
+         ../../library/categoryeditbase_p.ui \
+         ../../library/findwidgetbase_p.ui \
+         ../../library/lnkpropertiesbase_p.ui
 
 TARGET		= qpe
 DESTDIR		= $(OPIEDIR)/lib$(PROJMAK)

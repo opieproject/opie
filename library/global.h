@@ -20,8 +20,9 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-#include <qstringlist.h>
-#include <qguardedptr.h>
+#include <QStringList>
+#include <QPointer>
+#include <QWidget>
 class QDawg;
 class QLabel;
 class QWidget;
@@ -84,7 +85,7 @@ public:
 private:
     static void invoke( const QString &exec);
     static Command* builtin;
-    static QGuardedPtr<QWidget> *running;
+    static QPointer<QWidget> *running;
 };
 
 #endif

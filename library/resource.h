@@ -20,10 +20,10 @@
 #ifndef PIXMAPLOADER_H
 #define PIXMAPLOADER_H
 
-#include <qimage.h>
-#include <qbitmap.h>
-#include <qiconset.h>
-#include <qstringlist.h>
+#include <QImage>
+#include <QBitmap>
+#include <QIcon>
+#include <QStringList>
 
 class Resource
 {
@@ -36,7 +36,7 @@ public:
     static QBitmap loadBitmap( const QString &name );
     static QString findPixmap( const QString &name );
 
-    static QIconSet loadIconSet( const QString &name );
+    static QIcon loadIconSet( const QString &name );
 
     static QString findSound( const QString &name );
     static QStringList allSounds();
@@ -48,7 +48,7 @@ extern bool qpe_fast_findPixmap;
 
 
 // Inline for compatibility with SHARP ROMs
-inline QIconSet Resource::loadIconSet( const QString &pix )
+inline QIcon Resource::loadIconSet( const QString &pix )
 {
 
 #ifdef OPIE_INTERNAL_LIBRARY_BUILD
@@ -61,9 +61,9 @@ inline QIconSet Resource::loadIconSet( const QString &pix )
 
     QPixmap dpm = loadPixmap( pix + "_disabled" );
     QPixmap pm = loadPixmap( pix );
-    QIconSet is( pm );
+    QIcon is( pm );
     if ( !dpm.isNull() )
-	is.setPixmap( dpm, pm.width() <= 22 ? QIconSet::Small : QIconSet::Large, QIconSet::Disabled );
+	is.setPixmap( dpm, pm.width() <= 22 ? QIcon::Small : QIcon::Large, QIcon::Disabled );
 
 #ifdef OPIE_INTERNAL_LIBRARY_BUILD
     qpe_fast_findPixmap = oldMode;

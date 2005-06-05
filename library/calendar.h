@@ -20,10 +20,11 @@
 #ifndef CALENDAR_H
 #define CALENDAR_H
 
-#include <qstring.h>
-#include <qvaluelist.h>
+#include <QString>
+#include <QList>
+#include "qpeglobal.h"
 
-class Calendar
+class QPE_EXPORT_SYMBOL Calendar
 {
 public:
     struct Day
@@ -38,9 +39,11 @@ public:
 	bool holiday;
     };
 
-    static QString nameOfMonth( int m );
-    static QString nameOfDay( int d );
-    static QValueList<Day> daysOfMonth( int year, int month, bool startWithMonday = FALSE );
+    /* Obsolete. Use QDate::{long,short}MonthName directly. */
+    static QString nameOfMonth( int m ) QPE_DEPRECATED;
+    /* Obsolete. Use QDate::{long,short}DayName directly. */
+    static QString nameOfDay( int d ) QPE_DEPRECATED;
+    static QList<Day> daysOfMonth( int year, int month, bool startWithMonday = FALSE );
 
 };
 

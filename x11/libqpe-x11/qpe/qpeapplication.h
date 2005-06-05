@@ -5,8 +5,9 @@
  * LGPLed
  */
 
-#include <qapplication.h>
-#include <qevent.h>
+#include <QApplication>
+#include <QByteArray>
+#include <QEvent>
 #include <qtopia/timestring.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -72,7 +73,7 @@ signals:
     void clockChanged( bool pm );
     void micChanged( bool muted );
     void volumeChanged( bool muted );
-    void appMessage( const QCString& msg, const QByteArray& data);
+    void appMessage( const QByteArray& msg, const QByteArray& data);
     void weekChanged( bool startOnMonday );
     void dateFormatChanged( DateFormat );
     void flush();
@@ -84,8 +85,8 @@ private:
 
 private slots:
     void hideOrQuit();
-    void systemMessage( const QCString&, const QByteArray& );
-    void pidMessage( const QCString&, const QByteArray& );
+    void systemMessage( const QByteArray&, const QByteArray& );
+    void pidMessage( const QByteArray&, const QByteArray& );
     void removeSenderFromStylusDict();
 protected:
     virtual void restart();

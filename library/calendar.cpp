@@ -64,8 +64,7 @@ static void never_called_tr_function_um_libqpe_ts_etwas_unter_zu_jubeln() {
 
 QString Calendar::nameOfMonth( int m )
 {
-    QDate d;
-    return QObject::tr( d.monthName( m ) );
+    return QDate::longMonthName( m );
 }
 
 /*!
@@ -74,20 +73,19 @@ QString Calendar::nameOfMonth( int m )
 */
 QString Calendar::nameOfDay( int d )
 {
-    QDate dt;
-    return QObject::tr( dt.dayName( d ) );
+    return QDate::longDayName( d );
 }
 
 /*! \obsolete */
-QValueList<Calendar::Day> Calendar::daysOfMonth( int year, int month,
-						 bool startWithMonday )
+QList<Calendar::Day> Calendar::daysOfMonth( int year, int month,
+					    bool startWithMonday )
 {
     QDate temp;
     temp.setYMD( year, month, 1 );
     int firstDay = temp.dayOfWeek();
     int i;
     QDate prev;
-    QValueList<Day> days;
+    QList<Day> days;
 
     if ( startWithMonday )
 	i = 1;
