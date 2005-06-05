@@ -258,7 +258,7 @@ $(TOPDIR)/library/custom.h : $(TOPDIR)/.config
 		ln -sf $(patsubst "%",%,$(CONFIG_CUSTOMFILE)) $@)
 	@touch $@
 
-$(TOPDIR)/scripts/lxdialog/lxdialog $(TOPDIR)/scripts/kconfig/mconf $(TOPDIR)/scripts/kconfig/conf $(TOPDIR)/scripts/kconfig/qconf $(TOPDIR)/scripts/kconfig/libkconfig.so $(TOPDIR)/scripts/kconfig/gconf $(TOPDIR)/qmake/qmake:
+$(TOPDIR)/scripts/lxdialog/lxdialog $(TOPDIR)/scripts/kconfig/mconf $(TOPDIR)/scripts/kconfig/conf $(TOPDIR)/scripts/kconfig/qconf $(TOPDIR)/scripts/kconfig/libkconfig.so $(TOPDIR)/scripts/kconfig/gconf:
 	+$(call descend,$(shell dirname $@),$(shell basename $@))
 
 menuconfig: $(TOPDIR)/scripts/lxdialog/lxdialog $(TOPDIR)/scripts/kconfig/mconf ./config.in
@@ -296,8 +296,6 @@ allnoconfig: $(TOPDIR)/scripts/kconfig/conf ./config.in
 defconfig: $(TOPDIR)/scripts/kconfig/conf ./config.in
 	$(TOPDIR)/scripts/kconfig/conf -d ./config.in
 	@touch .config.stamp
-
-$(TOPDIR)/qmake/qmake : $(TOPDIR)/mkspecs/default
 
 $(TOPDIR)/mkspecs/default :
 	ln -sf linux-g++ $@
@@ -342,7 +340,7 @@ define descend
 endef
 
 define makefilegen
-	cd $(if $(1),$(dir $(1))); $(TOPDIR)/qmake/qmake $(3) -o $(if $(1),$(notdir $(1))) $(word 3,$(shell grep "[[:space:]]$(patsubst %/Makefile,%,$(1))[[:space:]]" $(OPIEDIR)/packages))
+	cd $(if $(1),$(dir $(1))); $(QTDIR)/bin/qmake $(3) -o $(if $(1),$(notdir $(1))) $(word 3,$(shell grep "[[:space:]]$(patsubst %/Makefile,%,$(1))[[:space:]]" $(OPIEDIR)/packages))
 endef
 
 define makecfg

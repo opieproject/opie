@@ -48,7 +48,7 @@ ifdef CONFIG_TARGET_MACOSX
   PLATFORM=macx-darwin
 endif
 
-export QMAKE:=$(OPIEDIR)/qmake/qmake
+export QMAKE:=$(QTDIR)/bin/qmake
 export QMAKESPECSDIR=$(OPIEDIR)/mkspecs
 
 ifeq ($(QPE_VERSION),)

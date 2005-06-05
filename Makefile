@@ -133,8 +133,6 @@ mrproper : clean-configs
 	find plugins -name "lib*.*"|xargs rm -f
 	find . -name "*.pro"|xargs touch
 	rm stamp-headers
-	make -C qmake clean
-	rm qmake/qmake
 
 include $(TOPDIR)/Rules.make
 
