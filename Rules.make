@@ -6,12 +6,6 @@ $(configs) :
 
 $(TOPDIR)/gen.pro : $(TOPDIR)/.config
 	echo > $@
-# added for threaded version
-ifneq ($(CONFIG_THREADED),)
-	echo CONFIG += thread >> $@
-else
-	echo CONFIG -= thread >> $@
-endif
 # added for auto stripped build
 ifneq ($(CONFIG_STRIP),)
 	echo CONFIG += strip >> $@

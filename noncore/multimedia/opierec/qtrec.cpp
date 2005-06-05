@@ -98,11 +98,7 @@ Waveform* waveform;
 Device *soundDevice;
 
 
-#ifdef THREADED
 void quickRec()
-#else
-		void QtRec::quickRec()
-#endif
 {
 
 		odebug << ( filePara.numberSamples/filePara.sampleRate * filePara.channels ) << oendl;
@@ -271,11 +267,7 @@ void quickRec()
 } /// END quickRec()
 
 
-#ifdef THREADED
 void playIt()
-#else
-		void QtRec::playIt()
-#endif
 {
 		int bytesWritten = 0;
 		int number = 0;
@@ -916,18 +908,13 @@ bool QtRec::rec() { //record
 										odebug << "Start recording" << oendl;
 										stopped = false;
 
-#ifdef THREADED
 										odebug << "Start recording thread" << oendl;
 										pthread_t thread1;
 										pthread_create( &thread1, NULL, (void * (*)(void *))quickRec, NULL/* &*/);
-#endif
 										toBeginningButton->setEnabled( false);
 										toEndButton->setEnabled( false);
 
 										startTimer(1000);
-#ifndef THREADED
-										quickRec();
-#endif
 								}
 						} //end setUpFile
 		} //end setupAudio
@@ -1135,16 +1122,11 @@ bool QtRec::doPlay() {
 #endif
 
 		startTimer( 1000);
-#ifdef THREADED
 		pthread_t thread2;
 		pthread_create( &thread2, NULL, (void * (*)(void *))playIt, NULL/* &*/);
-#endif
 
 		toBeginningButton->setEnabled( false);
 		toEndButton->setEnabled( false);
-#ifndef  THREADED
-		playIt();
-#endif
 		return true;
 }
 

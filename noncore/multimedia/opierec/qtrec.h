@@ -186,11 +186,6 @@ protected:
    void keyReleaseEvent( QKeyEvent *e);
    void receive( const QCString &, const QByteArray & );
    void showListMenu(QListViewItem * );
-#ifndef THREADED
-   void quickRec();
-	 void playIt();
-#endif
-	 
 };
 
 #endif // QTREC_H

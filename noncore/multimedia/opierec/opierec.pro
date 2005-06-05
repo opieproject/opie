@@ -21,7 +21,6 @@ contains(CONFIG, pdaudio) {
   INCLUDEPATH += $(QPEDIR)/include
   DEPENDPATH  += $(QPEDIR)/include
   DEFINES += PDAUDIO
-  DEFINES += THREADED
   TARGET    = qperec
 
 #  DESTDIR=$(QPEDIR)/bin
@@ -31,7 +30,6 @@ contains(CONFIG, pdaudio) {
   INCLUDEPATH += $(OPIEDIR)/include
   DEPENDPATH  += $(OPIEDIR)/include
   LIBS            += -lqpe -lopiecore2 -lpthread
-  DEFINES += THREADED
   TARGET    = opierec
   include( $(OPIEDIR)/include.pro )
 }

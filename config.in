@@ -56,10 +56,6 @@ config OPTIMIZE
   boolean "Use optimizations"
   default "y" if ! TARGET_X86
 
-config THREADED
-  boolean "Enable threaded build"
-  default "n"
-
 config STATIC
   boolean "Build static libraries"
   default "n"
