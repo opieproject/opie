@@ -20,8 +20,9 @@
 #ifndef __storage_h__
 #define __storage_h__
 
-#include <qobject.h>
-#include <qlist.h>
+#include <QObject>
+#include <QList>
+#include <QByteArray>
 
 class FileSystem;
 class QCopChannel;
@@ -44,7 +45,7 @@ public slots:
     void update();
 
 private slots:
-    void cardMessage( const QCString& msg, const QByteArray& data );
+    void cardMessage( const QByteArray& msg, const QByteArray& data );
 private:
     QList<FileSystem> mFileSystems;
     QCopChannel *channel;

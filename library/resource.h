@@ -63,7 +63,7 @@ inline QIcon Resource::loadIconSet( const QString &pix )
     QPixmap pm = loadPixmap( pix );
     QIcon is( pm );
     if ( !dpm.isNull() )
-	is.setPixmap( dpm, pm.width() <= 22 ? QIcon::Small : QIcon::Large, QIcon::Disabled );
+	is.addPixmap( dpm, QIcon::Disabled );
 
 #ifdef OPIE_INTERNAL_LIBRARY_BUILD
     qpe_fast_findPixmap = oldMode;

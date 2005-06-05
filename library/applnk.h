@@ -20,11 +20,10 @@
 #ifndef __APPLNK_H__
 #define __APPLNK_H__
 
-#include <qobject.h>
-#include <qiconset.h>
-#include <qlist.h>
-#include <qdict.h>
-#include <qstringlist.h>
+#include <QObject>
+#include <QList>
+#include <QHash>
+#include <QStringList>
 
 class AppLnkSetPrivate;
 class AppLnkPrivate;
@@ -56,7 +55,7 @@ public:
     QString linkFile() const;
     QStringList mimeTypes() const { return mMimeTypes; }
     QStringList mimeTypeIcons() const { return mMimeTypeIcons; }
-    const QArray<int> &categories() const;
+    const QVector<int> &categories() const;
     int id() const { return mId; }
 
     bool fileKnown() const { return !mFile.isNull(); }
@@ -75,7 +74,7 @@ public:
     void setType( const QString& mimetype );
     inline void setRotation ( const QString &rot ) { mRotation = rot; } // inline for BC 
     void setIcon( const QString& iconname );
-    void setCategories( const QArray<int> &v );
+    void setCategories( const QVector<int> &v );
     bool writeLink() const;
 
     void setProperty(const QString& key, const QString& value);
@@ -160,15 +159,14 @@ public:
     void add(AppLnk*);
     bool remove(AppLnk*);
     void clear() {
-	QListIterator<AppLnk> it( mApps );
-	for ( ; it.current(); ) {
-	    AppLnk* a = *it;
-	    ++it;
-	    a->mId = 0;
-	    delete a;
-	}
-	mApps.clear();
-	typs.clear();
+	    for(QList<AppLnk>::Iterator it=mApps.begin(); it!=mApps.end();) {
+		    AppLnk *a = &(*it);
+		    a->mId=0;
+		    ++it;
+		    delete a;
+	    }
+	    mApps.clear();
+	    typs.clear();
     }
 
     const QList<AppLnk> &children() const { return mApps; }
@@ -198,7 +196,7 @@ public:
 
 private:
     DocLnkSet( const DocLnkSet & ); // no copying!
-    void findChildren(const QString &dr, const QValueList<QRegExp> &mimeFilters, QDict<void> &reference, int depth=0);
+    void findChildren(const QString &dr, const QList<QRegExp> &mimeFilters, QHash<QString, void*> &reference, int depth=0);
 };
 
 

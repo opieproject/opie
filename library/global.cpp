@@ -28,13 +28,13 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 
-#include <qlabel.h>
-#include <qtimer.h>
-#include <qmap.h>
-#include <qdict.h>
-#include <qdir.h>
-#include <qmessagebox.h>
-#include <qregexp.h>
+#include <QLabel>
+#include <QTimer>
+#include <QMap>
+#include <QHash>
+#include <QDir>
+#include <QMessageBox>
+#include <QRegExp>
 
 #include <stdlib.h>
 #include <sys/stat.h>
@@ -75,22 +75,21 @@ public:
 private slots:
     void handleNewChannel( const QString &);
 private:
-    StartingAppList( QObject *parent=0, const char* name=0 ) ;
+    StartingAppList( QObject *parent=0 ) ;
 
-    QDict<QTime> dict;
+    QHash<QString,QTime> dict;
     static StartingAppList *appl;
 };
 
 StartingAppList* StartingAppList::appl = 0;
 
-StartingAppList::StartingAppList( QObject *parent, const char* name )
-    :QObject( parent, name )
+StartingAppList::StartingAppList( QObject *parent )
+    :QObject( parent )
 {
-#if QT_VERSION >= 232 && defined(QWS)
+#if defined(Q_WS_QWS)
     connect( qwsServer, SIGNAL( newChannel(const QString&)),
          this, SLOT( handleNewChannel(const QString&)) );
 #endif
-    dict.setAutoDelete( TRUE );
 }
 
 void StartingAppList::add( const QString& name )
@@ -131,7 +130,7 @@ void StartingAppList::handleNewChannel( const QString & name )
 
 static bool docDirCreated = FALSE;
 static QDawg* fixed_dawg = 0;
-static QDict<QDawg> *named_dawg = 0;
+static QHash<QString, QDawg*> *named_dawg = 0;
 
 static QString qpeDir()
 {
@@ -240,9 +239,9 @@ const QDawg& Global::fixedDawg()
         if ( QFile::exists(words_lang) )
         fn = words_lang;
         QFile in(fn);
-        if ( in.open(IO_ReadOnly) ) {
+        if ( in.open(QFile::ReadOnly) ) {
         fixed_dawg->createFromWords(&in);
-        dawgfile.open(IO_WriteOnly);
+        dawgfile.open(QFile::WriteOnly);
         fixed_dawg->write(&dawgfile);
         dawgfile.close();
         }
@@ -275,15 +274,15 @@ const QDawg& Global::dawg(const QString& name)
 {
     createDocDir();
     if ( !named_dawg )
-    named_dawg = new QDict<QDawg>;
+        named_dawg = new QHash<QString, QDawg*>;
     QDawg* r = named_dawg->find(name);
     if ( !r ) {
-    r = new QDawg;
-    named_dawg->insert(name,r);
-    QString dawgfilename = applicationFileName("Dictionary", name ) + ".dawg";
-    QFile dawgfile(dawgfilename);
-    if ( dawgfile.open(IO_ReadOnly) )
-        r->readFile(dawgfilename);
+        r = new QDawg;
+        named_dawg->insert(name,r);
+        QString dawgfilename = applicationFileName("Dictionary", name ) + ".dawg";
+        QFile dawgfile(dawgfilename);
+        if ( dawgfile.open(QFile::ReadOnly) )
+            r->readFile(dawgfilename);
     }
     return *r;
 }
@@ -317,7 +316,7 @@ void Global::addWords(const QString& dictname, const QStringList& wordlist)
 
     QString dawgfilename = applicationFileName("Dictionary", dictname) + ".dawg";
     QFile dawgfile(dawgfilename);
-    if ( dawgfile.open(IO_WriteOnly) ) {
+    if ( dawgfile.open(QFile::WriteOnly) ) {
     d.write(&dawgfile);
     dawgfile.close();
     }
@@ -356,10 +355,11 @@ QString Global::applicationFileName(const QString& appname, const QString& filen
 */
 void Global::createDocDir()
 {
-    if ( !docDirCreated ) {
-    docDirCreated = TRUE;
-    mkdir( QPEApplication::documentDir().latin1(), 0755 );
-    }
+	if ( !docDirCreated ) {
+		docDirCreated = TRUE;
+		QDir d("/");
+		d.mkpath( QPEApplication::documentDir() );
+	}
 }
 
 
@@ -458,7 +458,7 @@ bool Global::isBuiltinCommand( const QString &name )
 }
 
 Global::Command* Global::builtin=0;
-QGuardedPtr<QWidget> *Global::running=0;
+QPointer<QWidget> *Global::running=0;
 
 /*!
   \class Global::Command
@@ -481,7 +481,7 @@ void Global::setBuiltinCommands( Command* list )
     while ( builtin[count].file )
     count++;
 
-    running = new QGuardedPtr<QWidget> [ count ];
+    running = new QPointer<QWidget> [ count ];
 }
 
 /*!
