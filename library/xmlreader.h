@@ -20,9 +20,9 @@
 #ifndef XMLREADER_H
 #define XMLREADER_H
 
-#include <qstring.h>
+#include <QString>
+#include <QMap>
 #include <qxml.h>
-#include <qmap.h>
 
 class Node
 {

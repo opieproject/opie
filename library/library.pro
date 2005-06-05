@@ -1,6 +1,5 @@
 TEMPLATE	= lib
-#CONFIG		+= qt warn_on release
-CONFIG		+= qt warn_on debug
+QT += xml
 HEADERS	=   calendar.h \
 	    global.h \
 	    resource.h \
