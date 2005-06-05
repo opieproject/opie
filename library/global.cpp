@@ -1,3 +1,4 @@
+// vim:ts=4:sw=4
 /**********************************************************************
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
@@ -275,7 +276,7 @@ const QDawg& Global::dawg(const QString& name)
     createDocDir();
     if ( !named_dawg )
         named_dawg = new QHash<QString, QDawg*>;
-    QDawg* r = named_dawg->find(name);
+    QDawg* r = *named_dawg->find(name);
     if ( !r ) {
         r = new QDawg;
         named_dawg->insert(name,r);
@@ -533,7 +534,7 @@ void Global::terminate( const AppLnk* app )
 void Global::invoke(const QString &c)
 {
     // Convert the command line in to a list of arguments
-    QStringList list = QStringList::split(QRegExp("  *"),c);
+    QStringList list = c.split(QRegExp("  *"));
 
 #if !defined(QT_NO_COP)
     QString ap=list[0];
@@ -541,24 +542,25 @@ void Global::invoke(const QString &c)
     // XXX should lock file /tmp/qcop-msg-ap
     if ( QCopChannel::isRegistered( ("QPE/Application/" + ap).latin1() ) ) {
     // If the channel is already register, the app is already running, so show it.
-    { QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" ); }
+    {
+		QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" ); }
 
-    //QCopEnvelope e("QPE/System", "notBusy(QString)" );
-    //e << ap;
-    return;
-    }
-    // XXX should unlock file /tmp/qcop-msg-ap
-    //see if it is being started
-    if ( StartingAppList::isStarting( ap ) ) {
+		//QCopEnvelope e("QPE/System", "notBusy(QString)" );
+		//e << ap;
+		return;
+	}
+	// XXX should unlock file /tmp/qcop-msg-ap
+	//see if it is being started
+	if ( StartingAppList::isStarting( ap ) ) {
         // FIXME take it out for now, since it leads to a much to short showing of wait if
         // some entry is clicked.
         // Real cause is that ::execute is called twice for document tab. But it would need some larger changes
         // to fix that, and with future syncs with qtopia 1.6 it will change anyway big time since somebody there
         // had the idea that an apploader belongs to the launcher ...
-    //QCopEnvelope e("QPE/System", "notBusy(QString)" );
-    //e << ap;
-    return;
-    }
+		//QCopEnvelope e("QPE/System", "notBusy(QString)" );
+		//e << ap;
+		return;
+	}
 
 #endif
 
@@ -566,15 +568,10 @@ void Global::invoke(const QString &c)
     QMessageBox::warning( 0, "Error", "Could not find the application " + c, "Ok", 0, 0, 0, 1 );
 #else
 
-    QStrList slist;
-    unsigned int j;
-    for ( j = 0; j < list.count(); j++ )
-    slist.append( list[j].utf8() );
-
-    const char **args = new const char *[slist.count() + 1];
-    for ( j = 0; j < slist.count(); j++ )
-    args[j] = slist.at(j);
-    args[j] = NULL;
+    const char **args = new const char *[list.count() + 1];
+    for ( unsigned int j = 0; j < list.count(); j++ )
+		args[j] = list[j].toUtf8().data();
+    args[list.count()] = NULL;
 
 #if !defined(QT_NO_COP)
     // an attempt to show a wait...
@@ -590,8 +587,8 @@ void Global::invoke(const QString &c)
 #endif
     qDebug("libfile = %s", libexe.latin1() );
     if ( QFile::exists( libexe ) ) {
-    qDebug("calling quickexec %s", libexe.latin1() );
-    quickexecv( libexe.utf8().data(), (const char **)args );
+		qDebug("calling quickexec %s", libexe.latin1() );
+		quickexecv( libexe.toUtf8().data(), (const char **)args );
     } else
 #endif
     {
@@ -614,7 +611,7 @@ void Global::invoke(const QString &c)
                 ::fcntl ( pfd [1], F_SETFD, FD_CLOEXEC );
 
             // Try bindir first, so that foo/bar works too
-            ::execv ( qpeDir ( ) + "/bin/" + args [0], (char * const *) args );
+            ::execv ( (qpeDir ( ) + "/bin/" + args [0]).toUtf8().data(), (char * const *) args );
             ::execvp ( args [0], (char * const *) args );
 
             char resultByte = 1;
@@ -684,7 +681,7 @@ QString Global::shellQuote(const QString& s)
 {
     QString r="\"";
     for (int i=0; i<(int)s.length(); i++) {
-    char c = s[i].latin1();
+    char c = s[i].toLatin1();
     switch (c) {
         case '\\': case '"': case '$':
         r+="\\";
@@ -705,7 +702,7 @@ QString Global::stringQuote(const QString& s)
 {
     QString r="\"";
     for (int i=0; i<(int)s.length(); i++) {
-    char c = s[i].latin1();
+    char c = s[i].toLatin1();
     switch (c) {
         case '\\': case '"':
         r+="\\";
@@ -742,70 +739,71 @@ void Global::findDocuments(DocLnkSet* folder, const QString &mimefilter)
      */
     StorageInfo storage;
     const QList<FileSystem> &fs = storage.fileSystems();
-    QListIterator<FileSystem> it ( fs );
-    for ( ; it.current(); ++it ) {
-      if ( (*it)->isRemovable() ) { // let's find out  if we should search on it
-        // this is a candidate look at the cf and see if we should search on it
-        QString path = (*it)->path();
-        Config conf((*it)->path() + "/.opiestorage.cf", Config::File );
-        conf.setGroup("main");
-        if (!conf.readBoolEntry("check",true)) {
-            continue;
-        }
-        conf.setGroup("subdirs");
-        if (conf.readBoolEntry("wholemedia",true)) {
-            DocLnkSet ide( path,mimefilter);
-            folder->appendFrom(ide);
-        } else {
-            QStringList subDirs = conf.readListEntry("subdirs",':');
-            if (subDirs.isEmpty()) {
-                subDirs.append("Documents");
-            }
-            for (unsigned c = 0; c < subDirs.count();++c) {
-                DocLnkSet ide( path+"/"+subDirs[c], mimefilter );
-                folder->appendFrom(ide);
-            }
-        }
-      } else if ( (*it)->disk() == "/dev/mtdblock6" || (*it)->disk() == "tmpfs" ) {
-    QString path = (*it)->path() + "/Documents";
-    DocLnkSet ide( path, mimefilter );
-    folder->appendFrom(ide);
-      }
-    }
+    foreach(FileSystem it, fs) {
+		if ( it.isRemovable() ) { // let's find out  if we should search on it
+			// this is a candidate look at the cf and see if we should search on it
+			QString path = it.path();
+			Config conf(it.path() + "/.opiestorage.cf", Config::File );
+			conf.setGroup("main");
+			if (!conf.readBoolEntry("check",true))
+				continue;
+			conf.setGroup("subdirs");
+			if (conf.readBoolEntry("wholemedia",true)) {
+				DocLnkSet ide( path,mimefilter);
+				folder->appendFrom(ide);
+			} else {
+				QStringList subDirs = conf.readListEntry("subdirs",':');
+				if (subDirs.isEmpty())
+					subDirs.append("Documents");
+				for (unsigned int c = 0; c < subDirs.count();++c) {
+					DocLnkSet ide( path+"/"+subDirs[c], mimefilter );
+					folder->appendFrom(ide);
+				}
+			}
+		} else if ( it.disk() == "/dev/mtdblock6" || it.disk() == "tmpfs" ) {
+			QString path = it.path() + "/Documents";
+			DocLnkSet ide( path, mimefilter );
+			folder->appendFrom(ide);
+		}
+	}
 }
 
 QStringList Global::languageList()
 {
-    QString lang = getenv("LANG");
-    QStringList langs;
-    langs.append(lang);
-    int i  = lang.find(".");
-    if ( i > 0 )
-    lang = lang.left( i );
-    i = lang.find( "_" );
-    if ( i > 0 )
-    langs.append(lang.left(i));
-    return langs;
+	QString lang = getenv("LANG");
+	QStringList langs(lang);
+	if(lang.contains("@") || lang.contains(".")) {
+		// deal with the likes of de_CH.utf8 and de_DE@euro
+		// (fallback: de_CH / de_DE)
+		lang=lang.section("@", 0, 0).section(".", 0, 0);
+		langs.append(lang);
+	}
+	if(lang.contains("_")) {
+		// deal with the likes of de_CH and de_DE
+		// (fallback: de)
+		lang=lang.section("_", 0, 0);
+		langs.append(lang);
+	}
+	return langs;
 }
 
 QStringList Global::helpPath()
 {
-    QString qpeDir = QPEApplication::qpeDir();
-    QStringList path;
-    QStringList langs = Global::languageList();
-    for (QStringList::ConstIterator it = langs.fromLast(); it!=langs.end(); --it) {
-    QString lang = *it;
-    if ( !lang.isEmpty() )
-        path += qpeDir + "/help/" + lang + "/html";
-    }
-    path += qpeDir + "/pics";
-    path += qpeDir + "/help/html";
-    /* we even put english into the en dir so try it as fallback as well for opie */
-    path += qpeDir + "/help/en/html";
-    path += qpeDir + "/docs";
+	QString qpeDir = QPEApplication::qpeDir();
+	QStringList path;
+	QStringList langs = Global::languageList();
+	for (QStringList::ConstIterator it = langs.end(); it!=langs.begin(); --it) {
+		QString lang = *it;
+		if ( !lang.isEmpty() )
+			path += qpeDir + "/help/" + lang + "/html";
+	}
+	path += qpeDir + "/pics";
+	path += qpeDir + "/help/html";
+	/* we even put english into the en dir so try it as fallback as well for opie */
+	path += qpeDir + "/help/en/html";
+	path += qpeDir + "/docs";
 
-
-    return path;
+	return path;
 }
 
 
