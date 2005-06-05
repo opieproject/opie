@@ -169,7 +169,7 @@ Klicken Sie hier, um ein verfügbares Farbschema auszuwählen.</translation>
     </message>
     <message>
         <source>Show Scrollbars on the left</source>
-        <translation>Zeige Bildlaufleisten auf der rechten Seite</translation>
+        <translation>Zeige Bildlaufleisten auf der linken Seite</translation>
     </message>
     <message>
         <source>Click here to display scrollbars on the left side instead of the right.</source>
