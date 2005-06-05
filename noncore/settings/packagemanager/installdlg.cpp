@@ -31,9 +31,9 @@
 #include "installdlg.h"
 
 #include <opie2/ofiledialog.h>
+#include <opie2/oresource.h>
 
 #include <qpe/fileselector.h>
-#include <qpe/resource.h>
 #include <qpe/storage.h>
 
 #include <qapplication.h>
@@ -130,15 +130,14 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
     groupBoxLayout->addWidget( m_output );
     layout->addMultiCellWidget( groupBox, 2, 2, 0, 1 );
 
-    QPixmap pic;
-    pic.convertFromImage( Resource::loadImage( "packagemanager/apply" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    m_btnStart = new QPushButton( pic, tr( "Start" ), this );
+    m_btnStart = new QPushButton( Opie::Core::OResource::loadPixmap( "packagemanager/apply",
+                                  Opie::Core::OResource::SmallIcon ), tr( "Start" ), this );
     m_btnStart->setMinimumHeight( AppLnk::smallIconSize() );
     layout->addWidget( m_btnStart, 3, 0 );
     connect( m_btnStart, SIGNAL(clicked()), this, SLOT(slotBtnStart()) );
 
-    pic.convertFromImage( Resource::loadImage( "SettingsIcon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    m_btnOptions = new QPushButton( pic, tr( "Options" ), this );
+    m_btnOptions = new QPushButton( Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ),
+                                    tr( "Options" ), this );
     m_btnOptions->setMinimumHeight( AppLnk::smallIconSize() );
     layout->addWidget( m_btnOptions, 3, 1 );
     connect( m_btnOptions, SIGNAL( clicked() ), this, SLOT(slotBtnOptions()) );
@@ -223,9 +222,7 @@ void InstallDlg::slotBtnStart()
 
         // Allow user to close dialog
         m_btnStart->setText( tr( "Close" ) );
-        QPixmap pic;
-        pic.convertFromImage( Resource::loadImage( "close" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-        m_btnStart->setIconSet( pic );
+        m_btnStart->setIconSet( Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ) );
         return;
     }
     else if ( btnText == tr( "Close" ) )
@@ -247,9 +244,7 @@ void InstallDlg::slotBtnStart()
     if ( m_numCommands > 1 )
     {
         m_btnStart->setText( tr( "Abort" ) );
-        QPixmap pic;
-        pic.convertFromImage( Resource::loadImage( "reset" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-        m_btnStart->setIconSet( pic );
+        m_btnStart->setIconSet( Opie::Core::OResource::loadPixmap( "reset", Opie::Core::OResource::SmallIcon ) );
     }
     else
     {
@@ -266,14 +261,11 @@ void InstallDlg::slotBtnStart()
     // All commands executed, allow user to close dialog
     m_btnStart->setEnabled( true );
     m_btnStart->setText( tr( "Close" ) );
-    QPixmap pic;
-    pic.convertFromImage( Resource::loadImage( "close" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    m_btnStart->setIconSet( pic );
+    m_btnStart->setIconSet( Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ) );
 
     m_btnOptions->setEnabled( true );
     m_btnOptions->setText( tr( "Save output" ) );
-    pic.convertFromImage( Resource::loadImage( "save" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    m_btnOptions->setIconSet( pic );
+    m_btnOptions->setIconSet( Opie::Core::OResource::loadPixmap( "save", Opie::Core::OResource::SmallIcon ) );
 }
 
 void InstallDlg::slotBtnOptions()

@@ -32,9 +32,8 @@
 #include "opackage.h"
 #include "opackagemanager.h"
 
+#include <opie2/oresource.h>
 #include <opie2/otabwidget.h>
-
-#include <qpe/resource.h>
 
 #include <qlayout.h>
 #include <qpushbutton.h>
@@ -96,8 +95,9 @@ PackageInfoDlg::PackageInfoDlg( QWidget *parent, OPackageManager *pm, const QStr
             m_files.setText( m_package->files() );
         else
         {
-            m_retrieveFiles = new QPushButton( Resource::loadPixmap( "packagemanager/apply" ),
-                                            tr( "Retrieve file list" ), filesWidget );
+            m_retrieveFiles = new QPushButton( Opie::Core::OResource::loadPixmap( "packagemanager/apply",
+                                               Opie::Core::OResource::SmallIcon ), tr( "Retrieve file list" ),
+                                               filesWidget );
             QWhatsThis::add( m_retrieveFiles, tr( "Tap here to retrieve list of files contained in this package." ) );
             filesLayout->addWidget( m_retrieveFiles );
             connect( m_retrieveFiles, SIGNAL(clicked()), this, SLOT(slotBtnFileScan()) );

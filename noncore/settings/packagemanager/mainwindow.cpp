@@ -36,10 +36,10 @@
 #include "packageinfodlg.h"
 
 #include <opie2/ofiledialog.h>
+#include <opie2/oresource.h>
 
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 
 #include <qaction.h>
 #include <qdir.h>
@@ -64,8 +64,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags /*fl*/ )
     , m_statusWidget( this )
     , m_statusText( &m_statusWidget )
     , m_statusBar( &m_statusWidget )
-    , m_iconUpdated( Resource::loadPixmap( "packagemanager/updated" ) )
-    , m_iconInstalled( Resource::loadPixmap( "installed" ) )
+    , m_iconUpdated( Opie::Core::OResource::loadPixmap( "packagemanager/updated" ) )
+    , m_iconInstalled( Opie::Core::OResource::loadPixmap( "installed" ) )
     , m_iconNull( m_iconUpdated.size() )
     , m_filterName( QString::null )
     , m_filterServer( QString::null )
@@ -159,33 +159,37 @@ void MainWindow::initUI()
     // Packages menu
     QPopupMenu *popup = new QPopupMenu( this );
 
-    QAction *a = new QAction( tr( "Update lists" ), Resource::loadPixmap( "packagemanager/update" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( tr( "Update lists" ), Opie::Core::OResource::loadPixmap( "packagemanager/update",
+                              Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Tap here to update package lists from servers." ) );
     connect( a, SIGNAL(activated()), this, SLOT(slotUpdate()) );
     a->addTo( popup );
     a->addTo( &m_toolBar );
 
-    QAction *actionUpgrade = new QAction( tr( "Upgrade" ), Resource::loadPixmap( "packagemanager/upgrade" ), QString::null, 0, this, 0 );
+    QAction *actionUpgrade = new QAction( tr( "Upgrade" ), Opie::Core::OResource::loadPixmap( "packagemanager/upgrade",
+                                          Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
     actionUpgrade->setWhatsThis( tr( "Tap here to upgrade all installed packages if a newer version is available." ) );
     connect( actionUpgrade, SIGNAL(activated()), this, SLOT(slotUpgrade()) );
     actionUpgrade->addTo( popup );
     actionUpgrade->addTo( &m_toolBar );
 
-    QPixmap iconDownload = Resource::loadPixmap( "packagemanager/download" );
-    QPixmap iconRemove = Resource::loadPixmap( "packagemanager/remove" );
+    QPixmap iconDownload = Opie::Core::OResource::loadPixmap( "packagemanager/download", Opie::Core::OResource::SmallIcon );
+    QPixmap iconRemove = Opie::Core::OResource::loadPixmap( "packagemanager/remove", Opie::Core::OResource::SmallIcon );
     QAction *actionDownload = new QAction( tr( "Download" ), iconDownload, QString::null, 0, this, 0 );
     actionDownload->setWhatsThis( tr( "Tap here to download the currently selected package(s)." ) );
     connect( actionDownload, SIGNAL(activated()), this, SLOT(slotDownload()) );
     actionDownload->addTo( popup );
     actionDownload->addTo( &m_toolBar );
 
-    a = new QAction( tr( "Apply changes" ), Resource::loadPixmap( "packagemanager/apply" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Apply changes" ), Opie::Core::OResource::loadPixmap( "packagemanager/apply",
+                     Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Tap here to install, remove or upgrade currently selected package(s)." ) );
     connect( a, SIGNAL(activated()), this, SLOT(slotApply()) );
     a->addTo( popup );
     a->addTo( &m_toolBar );
 
-    a = new QAction( tr( "Install local package" ), Resource::loadPixmap( "folder" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Install local package" ), Opie::Core::OResource::loadPixmap( "folder",
+                     Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Tap here to install a package file located on device." ) );
     connect( a, SIGNAL(activated()), this, SLOT(slotInstallLocal()) );
     a->addTo( popup );
@@ -193,7 +197,8 @@ void MainWindow::initUI()
 
     popup->insertSeparator();
 
-    a = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Configure" ), Opie::Core::OResource::loadPixmap( "SettingsIcon",
+                     Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Tap here to configure this application." ) );
     connect( a, SIGNAL(activated()), this, SLOT(slotConfigure()) );
     a->addTo( popup );
@@ -222,8 +227,8 @@ void MainWindow::initUI()
 
     popup->insertSeparator();
 
-    m_actionFilter = new QAction( tr( "Filter" ), Resource::loadPixmap( "packagemanager/filter" ),
-                                         QString::null, 0, this, 0 );
+    m_actionFilter = new QAction( tr( "Filter" ), Opie::Core::OResource::loadPixmap( "packagemanager/filter",
+                                  Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
     m_actionFilter->setToggleAction( true );
     m_actionFilter->setWhatsThis( tr( "Tap here to apply current filter." ) );
     connect( m_actionFilter, SIGNAL(toggled(bool)), this, SLOT(slotFilter(bool)) );
@@ -236,12 +241,14 @@ void MainWindow::initUI()
 
     popup->insertSeparator();
 
-    a = new QAction( tr( "Find" ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Find" ), Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Tap here to search for text in package names." ) );
     connect( a, SIGNAL(activated()), this, SLOT(slotFindShowToolbar()) );
     a->addTo( popup );
 
-    m_actionFindNext = new QAction( tr( "Find next" ), Resource::loadIconSet( "next" ), QString::null, 0, this, 0 );
+    m_actionFindNext = new QAction( tr( "Find next" ), Opie::Core::OResource::loadPixmap( "next",
+                                    Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
     m_actionFindNext->setEnabled( false );
     m_actionFindNext->setWhatsThis( tr( "Tap here to find the next package name containing the text you are searching for." ) );
     connect( m_actionFindNext, SIGNAL(activated()), this, SLOT(slotFindNext()) );
@@ -251,7 +258,8 @@ void MainWindow::initUI()
     mb->insertItem( tr( "View" ), popup );
 
     // Finish find toolbar creation
-    a = new QAction( QString::null, Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+    a = new QAction( QString::null, Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Tap here to hide the find toolbar." ) );
     connect( a, SIGNAL(activated()), this, SLOT(slotFindHideToolbar()) );
     a->addTo( &m_findBar );

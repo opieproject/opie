@@ -31,9 +31,9 @@
 #include "entrydlg.h"
 
 #include <opie2/ofiledialog.h>
+#include <opie2/oresource.h>
 
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 
 #include <qlabel.h>
 #include <qlayout.h>
@@ -53,9 +53,9 @@ EntryDlg::EntryDlg( const QString &label, QWidget* parent, const char* name, boo
     layout->addWidget( m_entry, 1, 0 );
     connect( m_entry, SIGNAL(returnPressed()), this, SLOT(slotTryAccept()) );
 
-    QPixmap pic;
-    pic.convertFromImage( Resource::loadImage( "folder" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    QPushButton *btn = new QPushButton( pic, QString::null, this );
+    QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "folder", Opie::Core::OResource::SmallIcon ),
+                                        QString::null, this );
+    btn->setMinimumHeight( AppLnk::smallIconSize()+4 );
     btn->setMaximumWidth( btn->height() );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotSelectPath()) );
     layout->addWidget( btn, 1, 1 );

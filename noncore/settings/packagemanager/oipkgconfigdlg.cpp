@@ -31,9 +31,9 @@
 #include "oipkgconfigdlg.h"
 
 #include <opie2/ofiledialog.h>
+#include <opie2/oresource.h>
 
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
@@ -182,25 +182,24 @@ void OIpkgConfigDlg::initServerWidget()
     connect( m_serverList, SIGNAL(highlighted(int)), this, SLOT(slotServerSelected(int)) );
     layout->addMultiCellWidget( m_serverList, 0, 0, 0, 2 );
 
-    QPixmap pic;
-    pic.convertFromImage( Resource::loadImage( "new" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    QPushButton *btn = new QPushButton( pic, tr( "New" ), container );
-    btn->setMinimumHeight( AppLnk::smallIconSize() );
+    QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
+                                        tr( "New" ), container );
+    btn->setMinimumHeight( AppLnk::smallIconSize()+4 );
     QWhatsThis::add( btn, tr( "Tap here to create a new entry.  Fill in the fields below and then tap on Update." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotServerNew()) );
     layout->addWidget( btn, 1, 0 );
 
-    pic.convertFromImage( Resource::loadImage( "edit" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    m_serverEditBtn = new QPushButton( pic, tr( "Edit" ), container );
-    m_serverEditBtn->setMinimumHeight( AppLnk::smallIconSize() );
+    m_serverEditBtn = new QPushButton( Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ),
+                                       tr( "Edit" ), container );
+    m_serverEditBtn->setMinimumHeight( AppLnk::smallIconSize()+4 );
     m_serverEditBtn->setEnabled( false );
     QWhatsThis::add( m_serverEditBtn, tr( "Tap here to edit the entry selected above." ) );
     connect( m_serverEditBtn, SIGNAL(clicked()), this, SLOT(slotServerEdit()) );
     layout->addWidget( m_serverEditBtn, 1, 1 );
 
-    pic.convertFromImage( Resource::loadImage( "trash" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    m_serverDeleteBtn = new QPushButton( pic, tr( "Delete" ), container );
-    m_serverDeleteBtn->setMinimumHeight( AppLnk::smallIconSize() );
+    m_serverDeleteBtn = new QPushButton( Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon ),
+                                         tr( "Delete" ), container );
+    m_serverDeleteBtn->setMinimumHeight( AppLnk::smallIconSize()+4 );
     m_serverDeleteBtn->setEnabled( false );
     QWhatsThis::add( m_serverDeleteBtn, tr( "Tap here to delete the entry selected above." ) );
     connect( m_serverDeleteBtn, SIGNAL(clicked()), this, SLOT(slotServerDelete()) );
@@ -227,25 +226,24 @@ void OIpkgConfigDlg::initDestinationWidget()
     connect( m_destList, SIGNAL(highlighted(int)), this, SLOT(slotDestSelected(int)) );
     layout->addMultiCellWidget( m_destList, 0, 0, 0, 2 );
 
-    QPixmap pic;
-    pic.convertFromImage( Resource::loadImage( "new" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    QPushButton *btn = new QPushButton( pic, tr( "New" ), container );
-    btn->setMinimumHeight( AppLnk::smallIconSize() );
+    QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
+                                        tr( "New" ), container );
+    btn->setMinimumHeight( AppLnk::smallIconSize()+4 );
     QWhatsThis::add( btn, tr( "Tap here to create a new entry.  Fill in the fields below and then tap on Update." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotDestNew()) );
     layout->addWidget( btn, 1, 0 );
 
-    pic.convertFromImage( Resource::loadImage( "edit" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    m_destEditBtn = new QPushButton( pic, tr( "Edit" ), container );
-    m_destEditBtn->setMinimumHeight( AppLnk::smallIconSize() );
+    m_destEditBtn = new QPushButton( Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ),
+                                     tr( "Edit" ), container );
+    m_destEditBtn->setMinimumHeight( AppLnk::smallIconSize()+4 );
     m_destEditBtn->setEnabled( false );
     QWhatsThis::add( m_destEditBtn, tr( "Tap here to edit the entry selected above." ) );
     connect( m_destEditBtn, SIGNAL(clicked()), this, SLOT(slotDestEdit()) );
     layout->addWidget( m_destEditBtn, 1, 1 );
 
-    pic.convertFromImage( Resource::loadImage( "trash" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    m_destDeleteBtn = new QPushButton( pic, tr( "Delete" ), container );
-    m_destDeleteBtn->setMinimumHeight( AppLnk::smallIconSize() );
+    m_destDeleteBtn = new QPushButton( Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon ),
+                                       tr( "Delete" ), container );
+    m_destDeleteBtn->setMinimumHeight( AppLnk::smallIconSize()+4 );
     m_destDeleteBtn->setEnabled( false );
     QWhatsThis::add( m_destDeleteBtn, tr( "Tap here to delete the entry selected above." ) );
     connect( m_destDeleteBtn, SIGNAL(clicked()), this, SLOT(slotDestDelete()) );
@@ -357,9 +355,10 @@ void OIpkgConfigDlg::initOptionsWidget()
     m_optSourceLists = new QLineEdit( container );
     QWhatsThis::add( m_optSourceLists, tr( "Enter the directory where package source feed information is stored." ) );
     layout->addWidget( m_optSourceLists, 7, 0 );
-    QPixmap pic;
-    pic.convertFromImage( Resource::loadImage( "folder" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    QPushButton *btn = new QPushButton( pic, QString::null, container );
+
+    QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "folder", Opie::Core::OResource::SmallIcon ),
+                                        QString::null, container );
+    btn->setMinimumHeight( AppLnk::smallIconSize()+4 );
     btn->setMaximumWidth( btn->height() );
     QWhatsThis::add( btn, tr( "Tap here to select the directory where package source feed information is stored." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotOptSelectSourceListsPath()) );
@@ -662,9 +661,8 @@ OIpkgDestDlg::OIpkgDestDlg( OConfItem *dest, QWidget *parent )
     m_location = new QLineEdit( this );
     QWhatsThis::add( m_location, tr( "Enter the absolute directory path of this entry here." ) );
     layout2->addWidget( m_location );
-    QPixmap pic;
-    pic.convertFromImage( Resource::loadImage( "folder" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    QPushButton *btn = new QPushButton( pic, QString::null, this );
+    QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "folder", Opie::Core::OResource::SmallIcon ),
+                                        QString::null, this );
     btn->setMaximumWidth( btn->height() );
     QWhatsThis::add( btn, tr( "Tap here to select the desired location." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotSelectPath()) );
