@@ -51,12 +51,14 @@
 #define QPE_SYMBOL_USED
 #define QPE_SYMBOL_UNUSED
 #define QPE_EXPORT_SYMBOL
+#define QPE_HIDE_SYMBOL
 
 #elif defined(_OS_UNIX_)
 #define QPE_WEAK_SYMBOL  __attribute__((weak))
 #define QPE_SYMBOL_USED __attribute__((used))
 #define QPE_SYMBOL_UNUSED __attribute__((unused))
 #define QPE_EXPORT_SYMBOL
+#define QPE_HIDE_SYMBOL
 
 
 /*
@@ -73,7 +75,9 @@
  */
 #ifdef GCC_SUPPORTS_VISIBILITY
 #undef QPE_EXPORT_SYMBOL
+#undef QPE_HIDE_SYMBOL
 #define QPE_EXPORT_SYMBOL __attribute__((visibility("default")))
+#define QPE_HIDE_SYMBOL __attribute__((visibility("hidden")))
 #endif
 
 
@@ -83,6 +87,7 @@
 #define QPE_SYMBOL_USED
 #define QPE_SYMBOL_UNUSED
 #define QPE_EXPORT_SYMBOL
+#define QPE_HIDE_SYMBOL
 #endif
 
 

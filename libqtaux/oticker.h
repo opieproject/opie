@@ -32,16 +32,16 @@
 #ifndef OTICKER_H
 #define OTICKER_H
 
-#include <qwidget.h>
-#include <qpainter.h>
-#include <qdrawutil.h>
-#include <qpixmap.h>
-#include <qstring.h>
-#include <qslider.h>
-#include <qlabel.h>
-#include <qframe.h>
-#include <qcolor.h>
-
+#include <qpe/qpeglobal.h>
+#include <QWidget>
+#include <QPainter>
+#include <QPixmap>
+#include <QString>
+#include <QSlider>
+#include <QLabel>
+#include <QFrame>
+#include <QColor>
+#include <QTimer>
 
 namespace Opie {
 namespace Ui   {
@@ -50,7 +50,7 @@ namespace Ui   {
  * @brief The OTicker class provides a QLabel widget that scroll its contents
  *
  */
-class OTicker : public QLabel {
+class QPE_EXPORT_SYMBOL OTicker : public QLabel {
     Q_OBJECT
 
 public:
@@ -75,7 +75,7 @@ public:
  * @param text QString text to be displayed.
  *
  */
-    void setText( const QString& text ) ;
+    void setText( const QString& text );
 /*!
  * @fn setBackgroundColor(const QColor& color)
  * @brief sets color of the ticker's background
@@ -118,14 +118,15 @@ signals:
  *
  */
     void mousePressed();
-protected:
+protected slots:
 /*!
- * @fn timerEvent( QTimerEvent * e)
+ * @fn updateEvent( )
  * @brief timer timeout event
- * @param e QEvent see QEvent.
  *
  */
-    void timerEvent( QTimerEvent * e);
+    void updateEvent();
+
+protected:
 /*!
  * @fn drawContents( QPainter *p )
  * @brief draws widget contents
@@ -145,6 +146,7 @@ private:
     QString scrollText;
     QPixmap scrollTextPixmap;
     int pos, updateTimerTime, scrollLength;
+    QTimer updateTimer;
 };
 
 }

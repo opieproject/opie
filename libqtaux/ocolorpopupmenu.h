@@ -35,8 +35,8 @@
 
 /* QT */
 
-#include <qframe.h>
-#include <qpopupmenu.h>
+#include <QFrame>
+#include <QMenu>
 
 class QWidget;
 class QGridLayout;
@@ -70,7 +70,7 @@ public:
  *
  * Constructs a new ColorPanelButton control with parent, name and desired color.
  */
-    OColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
+    OColorPanelButton(const QColor& color, QWidget* parent = 0);
 
 /**
  * @fn ~OColorPanelButton()
@@ -159,7 +159,7 @@ private:
  * @brief The OColorPopupMenu class provides a small color selection
  *        popup menu.
  *
- * OColorPopupMenu is a derivation of TrollTech's QPopupMenu and provides
+ * OColorPopupMenu is a derivation of TrollTech's QMenu and provides
  * a small color selection popup menu which can be attached to another control
  * such as a toolbar button of menu item.
  *
@@ -167,7 +167,7 @@ private:
  * includes an option at the bottom to display a color selection dialog box for
  * finer color control.
  */
-class OColorPopupMenu : public QPopupMenu
+class OColorPopupMenu : public QMenu
 {
     Q_OBJECT
 
@@ -183,8 +183,7 @@ public:
  *
  * Constructs a new OColorPopupMenu control with parent, name and initial color selected.
  */
- // FIXME add Wflags? -zecke
-    OColorPopupMenu( const QColor& color, QWidget* parent = 0, const char* name = 0 );
+    OColorPopupMenu( const QColor& color, QWidget* parent = 0 );
 
 /**
  * @fn ~OColorPopupMenu()

@@ -39,8 +39,8 @@
 
 using namespace Opie;
 
-OColorPanelButton::OColorPanelButton( const QColor& color, QWidget* parent, const char* name )
-    : QFrame( parent, name )
+OColorPanelButton::OColorPanelButton( const QColor& color, QWidget* parent )
+    : QFrame( parent )
 {
     m_color = color;
 
@@ -94,14 +94,14 @@ void OColorPanelButton::mouseReleaseEvent( QMouseEvent*   )
     emit selected( m_color );
 }
 
-OColorPopupMenu::OColorPopupMenu( const QColor& color, QWidget* parent, const char* name )
-    : QPopupMenu( parent, name )
+OColorPopupMenu::OColorPopupMenu( const QColor& color, QWidget* parent )
+    : QMenu( parent )
 {
     m_color = color;
 
     colorPanel = new QWidget( this );
 
-    colorLayout = new QGridLayout(colorPanel, 5, 6);
+    colorLayout = new QGridLayout(colorPanel);
 
     addColor(QColor(255, 255, 255), 0, 1);
     addColor(QColor(192, 192, 192), 0, 2);
@@ -137,15 +137,17 @@ OColorPopupMenu::OColorPopupMenu( const QColor& color, QWidget* parent, const ch
     addColor(QColor(128, 0, 128), 4, 4);
     addColor(QColor(128, 0, 64), 4, 5);
 
-    insertItem( colorPanel );
-    insertSeparator();
-    insertItem(tr("More"),this,SLOT( moreColorClicked()));
+#warning FIXME this doesn't seem possible anymore
+#warning temporarily removed to get it to compile (though not work)
+    // QAction *panel=insertItem( colorPanel );
+    // setActiveAction(panel);
+    addSeparator();
+    addAction(tr("More"), this, SLOT(moreColorClicked()));
     /*
     QAction* chooseColorAction = new QAction( tr( "More" ), tr( "More..." ), 0, colorPanel, "More" );
     connect( chooseColorAction, SIGNAL( activated() ), this, SLOT( moreColorClicked() ) );
     chooseColorAction->addTo( this );
     */
-    activateItemAt( 0 );
 }
 
 OColorPopupMenu::~OColorPopupMenu()

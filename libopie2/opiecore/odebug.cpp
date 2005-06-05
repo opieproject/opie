@@ -51,9 +51,9 @@
 
 /* QT */
 
-#include <qfile.h>
-#include <qmessagebox.h>
-#include <qsocketdevice.h>
+#include <QFile>
+#include <QMessageBox>
+#include <QSocketDevice>
 
 /* UNIX */
 
@@ -109,7 +109,7 @@ private:
     void debugShel( const QString&, const QString& data );
     void debugSysl( int, const QString& );
     void debugSock( const QString&, const QString& data );
-    QCString line( const QString&, const QString& data );
+    QByteArray line( const QString&, const QString& data );
     bool m_opened : 1;
     QFile *m_file;
     QHostAddress m_addr;
@@ -181,7 +181,7 @@ inline void DebugBackend::debugFile(const QString& area, const QString& data) {
 
     /* go to end of file */
     m_file->at( m_file->size() );
-    QCString li = line( area, data );
+    QByteArray li = line( area, data );
     m_file->writeBlock(li.data(), li.length() );
 }
 
@@ -216,7 +216,7 @@ void DebugBackend::debugSock( const QString& are, const QString& data ) {
         }
     }
 
-    QCString li = line( are, data );
+    QByteArray li = line( are, data );
     int result = m_sock->writeBlock(li.data(), li.length(), m_addr, m_port );
     if ( result == -1 ) {
          qDebug( "ODebug: can't send to address '"+ m_addr.toString() +":%d' (%s)",
@@ -224,7 +224,7 @@ void DebugBackend::debugSock( const QString& are, const QString& data ) {
     }
 }
 
-QCString DebugBackend::line( const QString& area, const QString& data ) {
+QByteArray DebugBackend::line( const QString& area, const QString& data ) {
     QString str = area +":"+data;
     return str.local8Bit();
 }
@@ -391,7 +391,7 @@ odbgstream& odbgstream::operator<<(const char *string)
 }
 
 
-odbgstream& odbgstream::operator<<(const QCString& string)
+odbgstream& odbgstream::operator<<(const QByteArray& string)
 {
     *this << string.data();
     return *this;

@@ -33,13 +33,13 @@ _;:,   .>  :=|.         This program is free software; you can
 /* OPIE */
 
 /* QT */
-#include <qimage.h>
+#include <QImage>
 
 using namespace Opie;
 
 struct OColorButtonPrivate
 {
-    QPopupMenu *m_menu;
+    QMenu *m_menu;
     QColor m_color;
 };
 
@@ -51,14 +51,13 @@ struct OColorButtonPrivate
  * @param color The color from where to start on
  * @param name @see QObject
  */
-OColorButton::OColorButton ( QWidget *parent, const QColor &color, const char *name )
-        : QPushButton ( parent, name )
+OColorButton::OColorButton ( QWidget *parent, const QColor &color )
+        : QPushButton ( parent )
 {
     d = new OColorButtonPrivate;
 
-    d-> m_menu = new OColorPopupMenu ( color, 0, 0 );
-    setPopup ( d-> m_menu );
-    //	setPopupDelay ( 0 );
+    d-> m_menu = new OColorPopupMenu ( color, 0 );
+    setMenu ( d-> m_menu );
     connect ( d-> m_menu, SIGNAL( colorSelected(const QColor&)), this, SLOT( updateColor(const QColor&)));
 
 
@@ -106,11 +105,10 @@ void OColorButton::updateColor ( const QColor &c, bool sendSignal )
 {
     d-> m_color = c;
 
-    QImage img ( width()-14, height()-6, 32 );
+    QImage img ( width()-14, height()-6, QImage::Format_ARGB32 );
     img. fill ( 0 );
 
-    int r, g, b;
-    c. rgb ( &r, &g, &b );
+    QRgb color=c.rgb();
 
     int w = img. width ( );
     int h = img. height ( );
@@ -139,14 +137,14 @@ void OColorButton::updateColor ( const QColor &c, bool sendSignal )
             if ( a > 255 )
                 a = 255;
 
-            img. setPixel ( x, y, qRgba ( r, g, b, a ));
+            img. setPixel ( x, y, qRgba ( qRed(color), qGreen(color), qBlue(color), a ));
         }
     }
-    img. setAlphaBuffer ( true );
 
-    QPixmap pix;
-    pix. convertFromImage ( img );
-    setPixmap ( pix );
+    QPixmap pix(QPixmap::fromImage(img));
+#warning This doesn't seem to be possible anymore :(
+#warning Commented out for now to make it compile, but not work
+    // setPixmap ( pix );
 
     if ( sendSignal )
         emit colorSelected ( c );

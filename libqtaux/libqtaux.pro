@@ -1,20 +1,11 @@
 TEMPLATE        = lib
-CONFIG          += qte warn_on 
 
-HEADERS         = qcolordialog.h       \
-                  qsplitter.h          \
-                  qinputdialog.h       \
-                                       \
-                  ocolorpopupmenu.h    \
+HEADERS         = ocolorpopupmenu.h    \
                   ocolorbutton.h       \
                   oticker.h
 
 
-SOURCES         = qcolordialog.cpp     \
-                  qsplitter.cpp        \
-                  qinputdialog.cpp     \
-                                       \
-                  ocolorpopupmenu.cpp  \
+SOURCES         = ocolorpopupmenu.cpp  \
                   ocolorbutton.cpp     \
                   oticker.cpp
 

@@ -180,7 +180,7 @@ class odbgstream
      * @param string the string to print
      * @return this stream
      */
-    odbgstream &operator<<(const QCString& string);
+    odbgstream &operator<<(const QByteArray& string);
     /**
      * Prints the given value.
      * @param p a pointer to print (in number form)
@@ -352,7 +352,7 @@ class ondbgstream {
      * Does nothing.
      * @return this stream
      */
-    ondbgstream &operator<<(const QCString& ) { return *this; }
+    ondbgstream &operator<<(const QByteArray& ) { return *this; }
     /**
      * Does nothing.
      * @return this stream

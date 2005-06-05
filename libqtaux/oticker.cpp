@@ -1,3 +1,4 @@
+// vim:ts=4:sw=4
 /*
                             This file is part of the Opie Project
                              Copyright (c)  2002 L. Potter <ljp@llornkcor.com>
@@ -41,14 +42,17 @@ using namespace Opie::Ui;
 
 OTicker::OTicker( QWidget* parent )
         : QLabel( parent )
+	, foregroundcolor ( Qt::black )
+	, updateTimerTime( 500 )
+	, scrollLength( 1 )
+	, updateTimer( this )
 {
     setTextFormat( Qt::RichText );
     Config cfg( "qpe" );
     cfg.setGroup( "Appearance" );
     backgroundcolor = QColor( cfg.readEntry( "Background", "#E5E1D5" ) );
-    foregroundcolor = Qt::black;
-    updateTimerTime = 50;
-    scrollLength = 1;
+	updateTimer.setSingleShot(false);
+    connect(&updateTimer, SIGNAL(timeout()), this, SLOT(updateEvent()));
 }
 
 OTicker::~OTicker()
@@ -99,22 +103,22 @@ void OTicker::setText( const QString& text )
     pm.fill( backgroundcolor );
     QPainter pmp( &pm );
     pmp.setPen( foregroundcolor );
-    pmp.drawText( 0, 0, pixelTextLen, contHeight, AlignVCenter, scrollText );
+    pmp.drawText( 0, 0, pixelTextLen, contHeight, Qt::AlignVCenter, scrollText );
     pmp.end();
     scrollTextPixmap = pm;
 
-    killTimers();
+    updateTimer.stop();
     //    odebug << "Scrollupdate " << updateTimerTime << "" << oendl;
     if ( bigger /*pixelTextLen > contWidth*/ )
-        startTimer( updateTimerTime );
+	    updateTimer.start(updateTimerTime);
     update();
 }
 
 
-void OTicker::timerEvent( QTimerEvent * )
+void OTicker::updateEvent()
 {
     pos = ( pos <= 0 ) ? scrollTextPixmap.width() : pos - scrollLength; //1;
-    repaint( FALSE );
+    repaint( 0, 0, width(), height() );
 }
 
 void OTicker::drawContents( QPainter *p )
@@ -134,6 +138,8 @@ void OTicker::mouseReleaseEvent( QMouseEvent * )
 void OTicker::setUpdateTime( int time )
 {
     updateTimerTime = time;
+    if(updateTimer.isActive())
+    	updateTimer.start(updateTimerTime);
 }
 
 void OTicker::setScrollLength( int len )

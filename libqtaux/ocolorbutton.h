@@ -50,7 +50,7 @@ class OColorButton : public QPushButton
 {
     Q_OBJECT
 public:
-    OColorButton ( QWidget *parent = 0, const QColor & = black, const char *name = 0 );
+    OColorButton ( QWidget *parent = 0, const QColor & = Qt::black );
     virtual ~OColorButton ( );
 
     QColor color ( ) const;
@@ -76,7 +76,7 @@ protected slots:
 private:
     OColorButtonPrivate *d;
 
-    void updateColor ( const QColor &, bool sendSignal = true );
+    void updateColor ( const QColor &, bool sendSignal );
 };
 
 };
