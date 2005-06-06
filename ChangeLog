@@ -11,6 +11,7 @@
 	* Opie-Tabmanager has gone unsupported - it barely works and there is not much of a use of it anyway (mickeyl)
 	* Checkbook - added configuration option to use smaller font for checkbook transaction tab (hrw)
 	* ZSafe - make UI conform to Opie standards (drw)
+	* Today Addressbook plugin - fix configuration to show/not show birthdays, use checkboxes for selection (hrw)
 
 	Fixed Bugs
 	----------
@@ -25,6 +26,7 @@
 	* n.a.	- scale BluezApplet appropriately and use larger icons (mickeyl)
 	* n.a.	- memoryapplet: fix crash in memoryapplet on kernels without swap support (seneca cunningham)
 	* n.a.  - networksettings: ignore hostap control interfaces wifi* (mickeyl)
+	* n.a.  - Today Addressbook plugin fix configuration to show/not show birthdays, use checkboxes for selection (hrw)
 
 	Internal
 	--------
