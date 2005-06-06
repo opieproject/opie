@@ -36,9 +36,9 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     // Buttongroup to enable/disable shown stuff
     QVGroupBox* b_group = new QVGroupBox( this, "name" );
     b_group -> setTitle( tr("Enable/Disable Views") );
-    m_showBirthdayButton = new QRadioButton( b_group );
+    m_showBirthdayButton = new QCheckBox( b_group );
     m_showBirthdayButton -> setText( tr( "Show &Birthdays" ) );
-    m_showAnniversaryButton = new QRadioButton( b_group );
+    m_showAnniversaryButton = new QCheckBox( b_group );
     m_showAnniversaryButton -> setText( tr( "Show &Anniveraries" ) );
 
     QWhatsThis::add( m_showBirthdayButton , tr( "The next birthdays will just be shown, if enabled!" ) );

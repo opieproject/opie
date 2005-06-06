@@ -24,7 +24,7 @@
 
 #include <qwidget.h>
 #include <qspinbox.h>
-#include <qradiobutton.h>
+#include <qcheckbox.h>
 
 class AddressBookPluginConfig : public TodayConfigWidget {
     Q_OBJECT
@@ -49,8 +49,8 @@ private:
     Opie::OColorButton* entryColor;
     Opie::OColorButton* headlineColor;
     Opie::OColorButton* urgentColor;
-    QRadioButton* m_showBirthdayButton;
-    QRadioButton* m_showAnniversaryButton;
+    QCheckBox* m_showBirthdayButton;
+    QCheckBox* m_showAnniversaryButton;
 
     // how many lines should be showed in the AddressBook section
     int m_max_lines_task;
