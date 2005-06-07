@@ -39,11 +39,15 @@ public:
     MimeTypeData(const QString& i) :
 	id(i)
     {
-	apps.setAutoDelete(TRUE);
+    }
+    ~MimeTypeData()
+    {
+	    foreach(AppLnk *a, apps)
+		    delete a;
     }
     QString id;
     QString extension;
-    QList<AppLnk> apps;
+    QList<AppLnk*> apps;
 
     QString description()
     {
@@ -71,7 +75,9 @@ private:
     {
 	if ( apps.count() ) {
 	    QString icon;
-	    for (AppLnk* lnk = apps.first(); icon.isNull() && lnk; lnk=apps.next()) {
+	    foreach (AppLnk *lnk, apps) {
+		if(!icon.isNull())
+		    break;
 		QStringList icons = lnk->mimeTypeIcons();
 		if ( icons.count() ) {
 		    QStringList types = lnk->mimeTypes();
@@ -89,8 +95,8 @@ private:
 		bigicon = lnk->bigPixmap();
 	    } else {
 		QImage unscaledIcon = Resource::loadImage( icon );
-		regicon.convertFromImage( unscaledIcon.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-		bigicon.convertFromImage( unscaledIcon.smoothScale( AppLnk::bigIconSize(), AppLnk::bigIconSize() ) );
+		regicon=QPixmap::fromImage( unscaledIcon.scaled( AppLnk::smallIconSize(), AppLnk::smallIconSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
+		bigicon=QPixmap::fromImage( unscaledIcon.scaled( AppLnk::bigIconSize(), AppLnk::bigIconSize(), Qt::KeepAspectRatio, Qt::SmoothTransformation ) );
 	    }
 	}
     }
@@ -100,10 +106,13 @@ private:
     QString desc;
 };
 
-class MimeType::Private : public QDict<MimeTypeData> {
+class MimeType::Private : public QHash<QString, MimeTypeData*> {
 public:
     Private() {}
-    ~Private() {}
+    ~Private() {
+	    for(Iterator it=begin(); it!=end(); ++it)
+		    delete *it;
+    }
 
     // ...
 };
@@ -117,7 +126,6 @@ MimeType::Private& MimeType::data()
 {
     if ( !d ) {
 	d = new Private;
-	d->setAutoDelete(TRUE);
 	static bool setCleanup = FALSE;
 	if ( !setCleanup ) {
 	    qAddPostRoutine( cleanupMime );
@@ -290,22 +298,22 @@ void MimeType::loadExtensions()
 void MimeType::loadExtensions(const QString& filename)
 {
     QFile file(filename);
-    if ( file.open(IO_ReadOnly) ) {
+    if ( file.open(QFile::ReadOnly) ) {
 	QTextStream in(&file);
 	QRegExp space("[ \t]+");
 	while (!in.atEnd()) {
-	    QStringList tokens = QStringList::split(space, in.readLine());
-	    QStringList::ConstIterator it = tokens.begin();
+	    QStringList tokens = in.readLine().split(space);
+	    QStringList::Iterator it = tokens.begin();
 	    if ( it != tokens.end() ) {
 		QString id = *it; ++it;
 		// new override old (though left overrides right)
 		QStringList exts = (*extFor)[id];
 		QStringList newexts;
 		while ( it != tokens.end() ) {
-		    exts.remove(*it);
 		    if ( !newexts.contains(*it) )
 			newexts.append(*it);
 		    (*typeFor)[*it] = id;
+		    exts.erase(it);
 		    ++it;
 		}
 		(*extFor)[id] = newexts + exts;
@@ -317,12 +325,12 @@ void MimeType::loadExtensions(const QString& filename)
 void MimeType::init( const QString& ext_or_id )
 {
     if ( ext_or_id[0] != '/' && ext_or_id.contains('/') ) {
-	i = ext_or_id.lower();
+	i = ext_or_id.toLower();
     } else {
 	loadExtensions();
-	int dot = ext_or_id.findRev('.');
+	int dot = ext_or_id.lastIndexOf('.');
 	QString ext = dot >= 0 ? ext_or_id.mid(dot+1) : ext_or_id;
-	i = (*typeFor)[ext.lower()];
+	i = (*typeFor)[ext.toLower()];
 	if ( i.isNull() )
 	    i = "application/octet-stream";
     }
@@ -336,7 +344,7 @@ MimeTypeData* MimeType::data(const QString& id)
 {
     MimeTypeData* d = data()[id];
     if ( !d ) {
-	int s = id.find('/');
+	int s = id.indexOf('/');
 	QString idw = id.left(s)+"/*";
 	d = data()[idw];
     }
@@ -364,7 +372,6 @@ void MimeType::updateApplications()
 
 void MimeType::updateApplications(AppLnkSet* folder)
 {
-    for ( QListIterator<AppLnk> it( folder->children() ); it.current(); ++it ) {
-	registerApp(*it.current());
-    }
+    foreach (AppLnk lnk, folder->children())
+	registerApp(lnk);
 }

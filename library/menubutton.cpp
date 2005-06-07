@@ -19,7 +19,7 @@
 **********************************************************************/
 
 #include "menubutton.h"
-#include <qpopupmenu.h>
+#include <QMenu>
 
 /*!
   \class MenuButton menubutton.h
@@ -64,8 +64,8 @@
   standard \a parent an \a name arguments are passed to the base
   class.
 */
-MenuButton::MenuButton( const QStringList& items, QWidget* parent, const char* name) :
-    QPushButton(parent,name)
+MenuButton::MenuButton( const QStringList& items, QWidget* parent ) :
+    QPushButton(parent)
 {
     useLabel = true;
     init();
@@ -78,8 +78,8 @@ MenuButton::MenuButton( const QStringList& items, QWidget* parent, const char* n
 
   \sa insertItem() insertItems()
 */
-MenuButton::MenuButton( QWidget* parent, const char* name) :
-    QPushButton(parent,name)
+MenuButton::MenuButton( QWidget* parent ) :
+    QPushButton(parent)
 {
     init();
 }
@@ -87,7 +87,7 @@ MenuButton::MenuButton( QWidget* parent, const char* name) :
 void MenuButton::init()
 {
     setAutoDefault(FALSE);
-    pop = new QPopupMenu(this);
+    pop = new QMenu(this);
     nitems=0;
     connect(pop, SIGNAL(activated(int)), this, SLOT(select(int)));
     setPopup(pop);

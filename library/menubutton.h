@@ -26,8 +26,8 @@
 class MenuButton : public QPushButton {
     Q_OBJECT
 public:
-    MenuButton( QWidget* parent, const char* name=0);
-    MenuButton( const QStringList& items, QWidget* parent, const char* name=0);
+    MenuButton( QWidget* parent );
+    MenuButton( const QStringList& items, QWidget* parent );
 
     void clear();
 
@@ -36,7 +36,7 @@ public:
     QString currentText() const;
 
     void insertItems( const QStringList& items );
-    void insertItem( const QIconSet& icon, const QString& text=QString::null );
+    void insertItem( const QIcon& icon, const QString& text=QString::null );
     void insertItem( const QString& text );
     void insertSeparator();
 
@@ -58,7 +58,7 @@ private:
     bool useLabel;
     void init();
     QStringList txts;
-    QPopupMenu* pop;
+    QMenu* pop;
     int nitems;
     int cur;
     QString lab;
