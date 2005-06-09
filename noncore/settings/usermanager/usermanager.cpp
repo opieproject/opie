@@ -11,9 +11,9 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 using namespace Opie::Core;
-
+#include <qpe/qpeapplication.h>
 /* QT */
 #include <qlayout.h>
 #include <qmessagebox.h>
@@ -36,19 +36,33 @@ UserConfig::UserConfig(QWidget* parent, const char* name, WFlags fl) : QMainWind
 	accounts->open();	// This actually loads the files /etc/passwd & /etc/group into memory.
 
 	// Create the toolbar.
+    setToolBarsMovable( false );
+    bool useBigIcon = qApp->desktop()->size().width() > 330;
 	QToolBar *toolbar = new QToolBar(this,"Toolbar");
-	toolbar->setHorizontalStretchable(1); // Is there any other way to get the toolbar to stretch of the full screen!?
-	adduserToolButton = new QToolButton(Resource::loadPixmap("usermanager/adduser"),"Add User",0,this,SLOT(addUser()),toolbar,"Add User");
-	edituserToolButton = new QToolButton(Resource::loadPixmap("usermanager/edituser"),"Edit User",0,this,SLOT(editUser()),toolbar,"Edit User");
-	deleteuserToolButton = new QToolButton(Resource::loadPixmap("usermanager/deleteuser"),"Delete User",0,this,SLOT(delUser()),toolbar,"Delete User");
-	QToolButton *userstext = new QToolButton(0,"User",0,0,0,toolbar,"User");
-	userstext->setUsesTextLabel(true);
+    toolbar->setHorizontalStretchable( true );
+	adduserToolButton = new QToolButton(Opie::Core::OResource::loadPixmap("usermanager/adduser", Opie::Core::OResource::SmallIcon),
+                                        "Add User",0,this,SLOT(addUser()),toolbar,"Add User");
+    adduserToolButton->setUsesBigPixmap( useBigIcon );
+    edituserToolButton = new QToolButton(Opie::Core::OResource::loadPixmap("usermanager/edituser", Opie::Core::OResource::SmallIcon),
+                                         "Edit User",0,this,SLOT(editUser()),toolbar,"Edit User");
+    edituserToolButton->setUsesBigPixmap( useBigIcon );
+	deleteuserToolButton = new QToolButton(Opie::Core::OResource::loadPixmap("usermanager/deleteuser", Opie::Core::OResource::SmallIcon),
+                                           "Delete User",0,this,SLOT(delUser()),toolbar,"Delete User");
+    deleteuserToolButton->setUsesBigPixmap( useBigIcon );
+	//QToolButton *userstext = new QToolButton(0,"User",0,0,0,toolbar,"User");
+	//userstext->setUsesTextLabel(true);
 	toolbar->addSeparator();
-	addgroupToolButton = new QToolButton(Resource::loadPixmap("usermanager/addgroup"),"Add Group",0,this,SLOT(addGroup()),toolbar,"Add Group");
-	editgroupToolButton = new QToolButton(Resource::loadPixmap("usermanager/editgroup"),"Edit Group",0,this,SLOT(editGroup()),toolbar,"Edit Group");
-	deletegroupToolButton = new QToolButton(Resource::loadPixmap("usermanager/deletegroup"),"Delete Group",0,this,SLOT(delGroup()),toolbar,"Delete Group");
-	QToolButton *groupstext = new QToolButton(0,"Group",0,0,0,toolbar,"Group");
-	groupstext->setUsesTextLabel(true);
+	addgroupToolButton = new QToolButton(Opie::Core::OResource::loadPixmap("usermanager/addgroup", Opie::Core::OResource::SmallIcon),
+                                         "Add Group",0,this,SLOT(addGroup()),toolbar,"Add Group");
+	addgroupToolButton->setUsesBigPixmap( useBigIcon );
+    editgroupToolButton = new QToolButton(Opie::Core::OResource::loadPixmap("usermanager/editgroup", Opie::Core::OResource::SmallIcon),
+                                          "Edit Group",0,this,SLOT(editGroup()),toolbar,"Edit Group");
+    editgroupToolButton->setUsesBigPixmap( useBigIcon );
+	deletegroupToolButton = new QToolButton(Opie::Core::OResource::loadPixmap("usermanager/deletegroup", Opie::Core::OResource::SmallIcon),
+                                            "Delete Group",0,this,SLOT(delGroup()),toolbar,"Delete Group");
+    deletegroupToolButton->setUsesBigPixmap( useBigIcon );
+	//QToolButton *groupstext = new QToolButton(0,"Group",0,0,0,toolbar,"Group");
+	//groupstext->setUsesTextLabel(true);
 	addToolBar(toolbar,"myToolBar");
 
 	// Add a tabwidget and all the tabs.
@@ -132,8 +146,8 @@ void UserConfig::getUsers() {
 			new QListViewItem(usersListView,QString::number(accounts->pw_uid),accounts->pw_name,accounts->pw_gecos);
 			if((accounts->pw_uid>=500) && (accounts->pw_uid<65000)) {	// Is this user a "normal" user ?
 				mytext=QString(accounts->pw_name)+" - ("+QString(accounts->pw_gecos)+")"; // The string displayed next to the icon.
-				if(!(mypixmap.load("/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png"))) { //  Is there an icon for this user? Resource::loadPixmap is caching, doesn't work.
-					mypixmap=Resource::loadPixmap(QString("usermanager/usericon"));	// If this user has no icon, load the default icon.
+				if(!(mypixmap.load("/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png"))) { //  Is there an icon for this user? Opie::Core::OResource::loadPixmap is caching, doesn't work.
+					mypixmap=Opie::Core::OResource::loadPixmap("usermanager/usericon", Opie::Core::OResource::SmallIcon);	// If this user has no icon, load the default icon.
 				}
 				listviewitem=new QListViewItem(usersIconView,"",mytext);	// Add the icon+text to the qiconview.
 				listviewitem->setPixmap(0,mypixmap);

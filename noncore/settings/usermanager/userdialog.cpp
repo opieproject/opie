@@ -13,6 +13,7 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/odevice.h>
+#include <opie2/oresource.h>
 #include <qpe/qpeapplication.h>
 using namespace Opie::Core;
 using namespace Opie::Ui;
@@ -78,7 +79,7 @@ void UserDialog::setupTab1()
     picturePushButton = new QPushButton(tabpage,"Label");
     picturePushButton->setMinimumSize(48,48);
     picturePushButton->setMaximumSize(48,48);
-    picturePushButton->setPixmap(Resource::loadPixmap("usermanager/usericon"));    // Load default usericon.
+    picturePushButton->setPixmap(Opie::Core::OResource::loadPixmap("usermanager/usericon"));    // Load default usericon.
     connect(picturePushButton,SIGNAL(clicked()),this,SLOT(clickedPicture()));    // Clicking the picture should invoke pictureselector.
 
     // Login
