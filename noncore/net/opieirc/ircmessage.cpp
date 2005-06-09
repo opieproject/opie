@@ -39,7 +39,7 @@ IRCMessage::IRCMessage(QString line) {
         stream >> temp;
         if (temp.startsWith(":")) {
             /* last parameter */
-            m_trailing = line.right(line.length() - line.find(QChar(':'), 1) - 1);
+            m_trailing = line.right(line.length() - line.find(" :") - 2);
             m_parameters << m_trailing;
             break;
         } else {
