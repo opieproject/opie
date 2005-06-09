@@ -22,7 +22,7 @@
 
 /* OPIE */
 #include <opie2/odevice.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #include <qpe/version.h>
 
 /* QT */
@@ -89,7 +89,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     hb1->setSpacing( 2 );
 
     QLabel *palmtopLogo = new QLabel( container );
-    QImage logo1 = Resource::loadImage( "logo/opielogo" );
+    QImage logo1 = Opie::Core::OResource::loadImage( "logo/opielogo" );
     logo1 = logo1.smoothScale( 50, 55 );
     QPixmap logo1Pixmap;
     logo1Pixmap.convertFromImage( logo1 );
@@ -106,7 +106,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     hb1->setSpacing( 2 );
 
     QLabel *linuxLogo = new QLabel( container );
-    QImage logo2 = Resource::loadImage( "logo/tux-logo" );
+    QImage logo2 = Opie::Core::OResource::loadImage( "logo/tux-logo" );
     logo2 = logo2.smoothScale( 55, 60 );
     QPixmap logo2Pixmap;
     logo2Pixmap.convertFromImage( logo2 );
@@ -141,7 +141,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     else
         modelPixmap += "pda";
 
-    QImage logo3 = Resource::loadImage( modelPixmap );
+    QImage logo3 = Opie::Core::OResource::loadImage( modelPixmap );
 
     int width = logo3.width();
     int height = logo3.height();

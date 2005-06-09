@@ -33,10 +33,10 @@
 #include "sysinfo.h"
 
 /* OPIE */
+#include <opie2/oresource.h>
 #include <opie2/otabwidget.h>
 using namespace Opie::Ui;
 #include <qpe/config.h>
-#include <qpe/resource.h>
 
 /* QT */
 #include <qlayout.h>
@@ -44,7 +44,7 @@ using namespace Opie::Ui;
 SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags )
     : QWidget( parent, name, WStyle_ContextHelp )
 {
-    setIcon( Resource::loadPixmap( "system_icon" ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "system_icon", Opie::Core::OResource::SmallIcon ) );
     setCaption( tr("System Info") );
 
     QVBoxLayout *lay = new QVBoxLayout( this );

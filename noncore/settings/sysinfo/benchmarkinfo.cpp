@@ -22,10 +22,10 @@
 #include <opie2/odebug.h>
 #include <opie2/ostorageinfo.h>
 #include <opie2/olistview.h>
+#include <opie2/oresource.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpedecoration_qws.h>
-#include <qpe/resource.h>
 #include <qpe/config.h>
 using namespace Opie::Core;
 using namespace Opie::Ui;
@@ -329,7 +329,7 @@ int BenchmarkInfo::gfxRendering( int seconds )
         ++loops;
     }
 
-    QPixmap p = Resource::loadPixmap( "sysinfo/pattern" );
+    QPixmap p = Opie::Core::OResource::loadPixmap( "sysinfo/pattern" );
     t.restart();
     stop = t.elapsed() + seconds*1000;
 
