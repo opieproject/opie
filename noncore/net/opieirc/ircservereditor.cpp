@@ -1,4 +1,5 @@
 #include "ircservereditor.h"
+#include "ircchannel.h"
 
 /* OPIE */
 #include <qpe/qpeapplication.h>
@@ -69,8 +70,10 @@ void IRCServerEditor::accept() {
         QStringList channels = QStringList::split(QChar(','), m_channels->text());
         for (QStringList::Iterator it = channels.begin(); it != channels.end(); ++it) {
             QString channelName = (*it).stripWhiteSpace();
-            if (!channelName.startsWith("#") && !channelName.startsWith("+")) {
-                QMessageBox::critical(this, tr("Error"), tr("The channel list needs to contain a\ncomma separated list of channel\n names which start with either '#' or '+'"));
+            if (!IRCChannel::isValid(channelName)) {
+                QMessageBox::critical(this, tr("Error"), tr("The channel list needs to contain a\ncomma "
+                "separated list of valid\n channel names (starting \n"
+                "with one of '#' '+' '&' '!'"));
                 return;
             }
         }

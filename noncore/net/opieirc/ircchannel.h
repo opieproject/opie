@@ -49,6 +49,7 @@ public:
     void setHasPeople(bool hasPeople);
     QString channelname();
     bool hasPeople();
+    static bool isValid(const QString &channel);
 protected:
     QList<IRCChannelPerson>   m_people;
     QString                   m_channelname;

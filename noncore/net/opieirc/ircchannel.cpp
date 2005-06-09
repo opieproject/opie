@@ -46,3 +46,9 @@ IRCChannelPerson *IRCChannel::getPerson(QString nickname) {
     return 0;
 }
 
+bool IRCChannel::isValid(const QString &channel)
+{
+    return ( channel.startsWith("#") || channel.startsWith("&")
+            || channel.startsWith("+") || channel.startsWith("!"));
+}
+
