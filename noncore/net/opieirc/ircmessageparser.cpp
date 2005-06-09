@@ -76,6 +76,7 @@ IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
     { 378, "%1", "1", 0 },                                  // RPL_MOTD3
     { 391, QT_TR_NOOP("Time on server %1 is %2"), "1,2", 0 },           // RPL_TIME
     { 401, QT_TR_NOOP("Channel or nick %1 doesn't exists"), "1", 0 },   // ERR_NOSUCHNICK
+    { 403, QT_TR_NOOP("Channel %1 doesn't exists"), "1", 0 },           // ERR_ERR_NOSUCHCHANNEL
     { 406, QT_TR_NOOP("There is no history information for %1"), "1", 0 }, // ERR_WASNOSUCHNICK
     { 409, "%1", "1", 0 },                                  // ERR_NOORIGIN
     { 411, "%1", "1", 0 },                                  // ERR_NORECIPIENT
@@ -269,7 +270,7 @@ void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
         emit outputReady(output);
     } 
     else 
-        if (message->param(0).at(0) == '#' || message->param(0).at(0) == '+') {
+        if (IRCChannel::isValid(message->param(0))) {
             /* IRC Channel message detected, verify sender, channel and display it */
             IRCChannel *channel = m_session->getChannel(message->param(0).lower());
             if (channel) {
@@ -490,7 +491,7 @@ void IRCMessageParser::parseCTCPDCC(IRCMessage *message) {
 void IRCMessageParser::parseLiteralMode(IRCMessage *message) {
     IRCPerson mask(message->prefix());
 
-    if (message->param(0).startsWith("#")) {
+    if (IRCChannel::isValid(message->param(0))) {
         IRCChannel *channel = m_session->getChannel(message->param(0).lower());
         if (channel) {
             QString temp, parameters = message->allParameters().right(message->allParameters().length() - channel->channelname().length() - 1);
