@@ -32,9 +32,10 @@
 #define STYLELISTITEM_H
 
 /* OPIE */
+#include <opie2/oresource.h>
+
 #include <qpe/styleinterface.h>
 #include <qpe/qlibrary.h>
-#include <qpe/resource.h>
 
 /* QT */
 #include <qlistbox.h>

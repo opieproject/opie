@@ -363,11 +363,11 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
     rotbtngrp-> insert ( m_rotdir_ccw );
     rotbtngrp-> insert ( m_rotdir_flip );
 
-    QImage ccwImage = Resource::loadImage( "redo" );
+    QImage ccwImage = Opie::Core::OResource::loadImage( "redo", Opie::Core::OResource::SmallIcon );
     QPixmap cw, ccw, flip;
-    cw.convertFromImage( ccwImage.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    ccw.convertFromImage( ccwImage.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ).mirror( 1, 0 ) );
-    flip.convertFromImage( Resource::loadImage( "pass" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    cw.convertFromImage( ccwImage );
+    ccw.convertFromImage( ccwImage.mirror( 1, 0 ) );
+    flip.convertFromImage( Opie::Core::OResource::loadImage( "pass", Opie::Core::OResource::SmallIcon ) );
 
     m_rotdir_cw-> setPixmap( cw );
     m_rotdir_ccw-> setPixmap( ccw );

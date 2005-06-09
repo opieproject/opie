@@ -84,10 +84,10 @@ public:
 		if ( init ) 
 			return;
 	
-		QImage noimg    = Resource::loadImage ( "appearance/no.png" );
-		QImage fontimg  = Resource::loadImage ( "appearance/font.png" );
-		QImage styleimg = Resource::loadImage ( "appearance/style.png" );
-		QImage decoimg  = Resource::loadImage ( "appearance/deco.png" );
+		QImage noimg    = Opie::Core::OResource::loadImage ( "appearance/no.png", Opie::Core::OResource::SmallIcon );
+		QImage fontimg  = Opie::Core::OResource::loadImage ( "appearance/font.png", Opie::Core::OResource::SmallIcon );
+		QImage styleimg = Opie::Core::OResource::loadImage ( "appearance/style.png", Opie::Core::OResource::SmallIcon );
+		QImage decoimg  = Opie::Core::OResource::loadImage ( "appearance/deco.png", Opie::Core::OResource::SmallIcon );
 
 		s_fontpix [0] = new QPixmap ( );
 		s_fontpix [0]-> convertFromImage ( fontimg );
