@@ -1,28 +1,27 @@
 /*
- Â  Â  Â  Â  Â  Â  Â  Â              This file is part of the Opie Project
-
-                             Copyright (C)2002-2005 The Opie Team <opie-devel@handhelds.org>
+                             This file is part of the Opie Project
+                             Copyright (C) 2002-2005 The Opie Team <opie-devel@handhelds.org>
               =.
             .=l.
-Â  Â  Â  Â  Â  Â .>+-=
-Â _;:, Â  Â  .> Â  Â :=|.         This program is free software; you can
-.> <`_, Â  > Â . Â  <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.-- Â  :           the terms of the GNU Library General Public
-.="- .-=="i, Â  Â  .._         License as published by the Free Software
-Â - . Â  .-<_> Â  Â  .<>         Foundation; either version 2 of the License,
-Â  Â  Â ._= =} Â  Â  Â  :          or (at your option) any later version.
-Â  Â  .%`+i> Â  Â  Â  _;_.
-Â  Â  .i_,=:_. Â  Â  Â -<s.       This program is distributed in the hope that
-Â  Â  Â + Â . Â -:. Â  Â  Â  =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : .. Â  Â .:, Â  Â  . . .    without even the implied warranty of
-Â  Â  =_ Â  Â  Â  Â + Â  Â  =;=|`    MERCHANTABILITY or FITNESS FOR A
-Â  _.=:. Â  Â  Â  : Â  Â :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.= Â  Â  Â  = Â  Â  Â  ;      Library General Public License for more
-++= Â  -. Â  Â  .` Â  Â  .:       details.
-: Â  Â  = Â ...= . :.=-
-Â -. Â  .:....=;==+<;          You should have received a copy of the GNU
-Â  -_. . . Â  )=. Â =           Library General Public License along with
-Â  Â  -- Â  Â  Â  Â :-=`           this library; see the file COPYING.LIB.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; version 2 of the License.
+     ._= =}       :
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -120,7 +119,7 @@ struct z_button z_buttons_c700 [] = {
 //
 //       Zaurus-Collie (SA-model  w/ 320x240 lcd, for SL5500 and SL5000)
 //       Zaurus-Poodle (PXA-model w/ 320x240 lcd, for SL5600)
-//       Zaurus-Corgi  (PXA-model w/ 640x480 lcd, for C700, C750, C760, C860, C3000, C1000)
+//       Zaurus-Corgi  (PXA-model w/ 640x480 lcd, for C700, C750, C760, C860, C3000, C1000, C3100)
 //       Zaurus-Tosa   (PXA-model w/ 480x640 lcd, for SL6000)
 
 void Zaurus::init(const QString& cpu_info)
@@ -197,6 +196,20 @@ void Zaurus::init(const QString& cpu_info)
     } else {
         d->m_model = Model_Zaurus_SL5500;
         d->m_modelstr = "Unknown Zaurus";
+    }
+
+    // set path to backlight device in kernel 2.6
+    switch ( d->m_model ) {
+        case Model_Zaurus_SLB600: // fallthrough
+        case Model_Zaurus_SL5500:
+            m_backlightdev = "/sys/class/backlight/locomo-backlight/";
+            break;
+        case Model_Zaurus_SL6000:
+            m_backlightdev = "/sys/class/backlight/tosa-bl/";
+            break;
+        default:
+            m_backlightdev = "/sys/class/backlight/corgi-bl/";
+            break;
     }
 
     // set initial rotation
@@ -411,7 +424,7 @@ int Zaurus::displayBrightnessResolution() const
     }
     else
     {
-        int fd = ::open( "/sys/class/backlight/corgi-bl/max_brightness", O_RDONLY|O_NONBLOCK );
+        int fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
         if ( fd )
         {
             char buf[100];
@@ -444,7 +457,7 @@ bool Zaurus::setDisplayBrightness( int bright )
     }
     else
     {
-        int fd = ::open( "/sys/class/backlight/corgi-bl/brightness", O_WRONLY|O_NONBLOCK );
+        int fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
         if ( fd )
         {
             char buf[100];
@@ -471,7 +484,7 @@ bool Zaurus::setDisplayStatus( bool on )
     }
     else
     {
-        int fd = ::open( "/sys/class/backlight/corgi-bl/power", O_WRONLY|O_NONBLOCK );
+        int fd = ::open( m_backlightdev + "power", O_WRONLY|O_NONBLOCK );
         if ( fd )
         {
             char buf[10];
