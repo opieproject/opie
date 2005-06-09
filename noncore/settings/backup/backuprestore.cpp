@@ -30,14 +30,16 @@ _;:,   .>  :=|.         This file is free software; you can
 #include "errordialog.h"
 
 /* OPIE */
-#include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
 #include <opie2/odebug.h>
 #include <opie2/odevice.h>
 #include <opie2/ostorageinfo.h>
 #include <opie2/ofiledialog.h>
+#include <opie2/oresource.h>
 #include <opie2/owait.h>
+
+#include <qpe/qpeapplication.h>
+#include <qpe/config.h>
+
 using namespace Opie::Core;
 using namespace Opie::Ui;
 
@@ -233,12 +235,12 @@ void BackupAndRestore::selectItem(QListViewItem *currentItem)
 
     if(currentItem->text(HEADER_BACKUP) == "B")
     {
-        currentItem->setPixmap(HEADER_NAME, Resource::loadPixmap("backup/null"));
+        currentItem->setPixmap(HEADER_NAME, Opie::Core::OResource::loadPixmap("backup/null"));
         currentItem->setText(HEADER_BACKUP, "");
     }
     else
     {
-        currentItem->setPixmap(HEADER_NAME, Resource::loadPixmap("backup/check"));
+        currentItem->setPixmap(HEADER_NAME, Opie::Core::OResource::loadPixmap("backup/check"));
         currentItem->setText(HEADER_BACKUP, "B");
     }
 }

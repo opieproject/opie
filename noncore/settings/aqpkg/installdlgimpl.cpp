@@ -1,27 +1,27 @@
 /*
-                             This file is part of the OPIE Project
+                     This file is part of the OPIE Project
 
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
-             .=l.                                Dan Williams <drw@handhelds.org>
-           .>+-=
- _;:,     .>    :=|.         This file is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This file is distributed in the hope that
-     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
-..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:
- :     =  ...= . :.=-        You should have received a copy of the GNU
- -.   .:....=;==+<;          General Public License along with this file;
-  -_. . .   )=.  =           see the file COPYING. If not, write to the
-    --        :-=`           Free Software Foundation, Inc.,
+      .=l.                                Dan Williams <drw@handhelds.org>
+     .>+-=
+_;:,   .>  :=|.         This file is free software; you can
+.> <`_,  > .  <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This file is distributed in the hope that
+  + . -:.    =       it will be useful, but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=    =    ;      Public License for more details.
+++=  -.   .`   .:
+:   = ...= . :.=-        You should have received a copy of the GNU
+-.  .:....=;==+<;          General Public License along with this file;
+ -_. . .  )=. =           see the file COPYING. If not, write to the
+  --    :-=`           Free Software Foundation, Inc.,
                              59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
@@ -30,14 +30,12 @@
 #include <stdio.h>
 
 #include <opie2/ofiledialog.h>
+#include <opie2/oresource.h>
 
-#ifdef QWS
 #include <qpe/config.h>
 #include <qpe/fileselector.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 #include <qpe/storage.h>
-#endif
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
@@ -196,11 +194,11 @@ void InstallDlgImpl :: init( bool displayextrainfo )
     GroupBox2Layout->addWidget( output );
     layout->addMultiCellWidget( GroupBox2, 2, 2, 0, 1 );
 
-    btnInstall = new QPushButton( Resource::loadPixmap( "aqpkg/apply" ), tr( "Start" ), this );
+    btnInstall = new QPushButton( Opie::Core::OResource::loadPixmap( "aqpkg/apply", Opie::Core::OResource::SmallIcon ), tr( "Start" ), this );
     layout->addWidget( btnInstall, 3, 0 );
     connect( btnInstall, SIGNAL( clicked() ), this, SLOT( installSelected() ) );
 
-    btnOptions = new QPushButton( Resource::loadPixmap( "SettingsIcon" ), tr( "Options" ), this );
+    btnOptions = new QPushButton( Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ), tr( "Options" ), this );
     layout->addWidget( btnOptions, 3, 1 );
     connect( btnOptions, SIGNAL( clicked() ), this, SLOT( optionsSelected() ) );
 }
@@ -260,7 +258,7 @@ void InstallDlgImpl :: installSelected()
         }
 
         btnInstall->setText( tr( "Close" ) );
-        btnInstall->setIconSet( Resource::loadPixmap( "enter" ) );
+        btnInstall->setIconSet( Opie::Core::OResource::loadPixmap( "enter", Opie::Core::OResource::SmallIcon ) );
         return;
     }
     else if ( btnInstall->text() == tr( "Close" ) )
@@ -274,7 +272,7 @@ void InstallDlgImpl :: installSelected()
 //    btnInstall->setEnabled( false );
 
     btnInstall->setText( tr( "Abort" ) );
-    btnInstall->setIconSet( Resource::loadPixmap( "close" ) );
+    btnInstall->setIconSet( Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ) );
 
     if ( pIpkg )
     {
@@ -466,10 +464,10 @@ void InstallDlgImpl :: ipkgFinished()
     {
         btnOptions->setEnabled( true );
         btnInstall->setText( tr( "Close" ) );
-        btnInstall->setIconSet( Resource::loadPixmap( "enter" ) );
+        btnInstall->setIconSet( Opie::Core::OResource::loadPixmap( "enter", Opie::Core::OResource::SmallIcon ) );
 
         btnOptions->setText( tr( "Save output" ) );
-        btnOptions->setIconSet( Resource::loadPixmap( "save" ) );
+        btnOptions->setIconSet( Opie::Core::OResource::loadPixmap( "save", Opie::Core::OResource::SmallIcon ) );
 
         if ( destination && destination->currentText() != 0 && destination->currentText() != "" )
             displayAvailableSpace( destination->currentText() );

@@ -1,27 +1,27 @@
 /*
-                             This file is part of the OPIE Project
+                     This file is part of the OPIE Project
  
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
-             .=l.                                Dan Williams <drw@handhelds.org>
-           .>+-=
- _;:,     .>    :=|.         This file is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This file is distributed in the hope that
-     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
-..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:
- :     =  ...= . :.=-        You should have received a copy of the GNU
- -.   .:....=;==+<;          General Public License along with this file;
-  -_. . .   )=.  =           see the file COPYING. If not, write to the
-    --        :-=`           Free Software Foundation, Inc.,
+      .=l.                                Dan Williams <drw@handhelds.org>
+     .>+-=
+_;:,   .>  :=|.         This file is free software; you can
+.> <`_,  > .  <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This file is distributed in the hope that
+  + . -:.    =       it will be useful, but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=    =    ;      Public License for more details.
+++=  -.   .`   .:
+:   = ...= . :.=-        You should have received a copy of the GNU
+-.  .:....=;==+<;          General Public License along with this file;
+ -_. . .  )=. =           see the file COPYING. If not, write to the
+  --    :-=`           Free Software Foundation, Inc.,
                              59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
@@ -40,10 +40,11 @@
 #include "utils.h"
 
 /* OPIE */
+#include <opie2/oresource.h>
+
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
-#include <qpe/resource.h>
 
 /* QT */
 #include <qmenubar.h>
@@ -121,7 +122,8 @@ MainWindow :: MainWindow( QWidget* parent, const char* name, WFlags fl )
         layout->addWidget( b, i / 13, i % 13);
     }
 
-    QAction *a = new QAction( QString::null, Resource::loadPixmap( "close" ), QString::null, 0, w, 0 );
+    QAction *a = new QAction( QString::null, Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ),
+                              QString::null, 0, w, 0 );
     a->setWhatsThis( tr( "Click here to hide the Quick Jump toolbar." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( hideJumpBar() ) );
     a->addTo( jumpBar );
@@ -130,27 +132,30 @@ MainWindow :: MainWindow( QWidget* parent, const char* name, WFlags fl )
     // Packages menu
     QPopupMenu *popup = new QPopupMenu( this );
 
-    a = new QAction( tr( "Update lists" ), Resource::loadPixmap( "aqpkg/update" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Update lists" ), Opie::Core::OResource::loadPixmap( "aqpkg/update", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to update package lists from servers." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( updateServer() ) );
     a->addTo( popup );
     a->addTo( bar );
 
-    actionUpgrade = new QAction( tr( "Upgrade" ), Resource::loadPixmap( "aqpkg/upgrade" ), QString::null, 0, this, 0 );
+    actionUpgrade = new QAction( tr( "Upgrade" ), Opie::Core::OResource::loadPixmap( "aqpkg/upgrade", Opie::Core::OResource::SmallIcon ),
+                                 QString::null, 0, this, 0 );
     actionUpgrade->setWhatsThis( tr( "Click here to upgrade all installed packages if a newer version is available." ) );
     connect( actionUpgrade, SIGNAL( activated() ), this, SLOT( upgradePackages() ) );
     actionUpgrade->addTo( popup );
     actionUpgrade->addTo( bar );
 
-    iconDownload = Resource::loadPixmap( "aqpkg/download" );
-    iconRemove = Resource::loadPixmap( "aqpkg/remove" );
+    iconDownload = Opie::Core::OResource::loadPixmap( "aqpkg/download", Opie::Core::OResource::SmallIcon );
+    iconRemove = Opie::Core::OResource::loadPixmap( "aqpkg/remove", Opie::Core::OResource::SmallIcon );
     actionDownload = new QAction( tr( "Download" ), iconDownload, QString::null, 0, this, 0 );
     actionDownload->setWhatsThis( tr( "Click here to download the currently selected package(s)." ) );
     connect( actionDownload, SIGNAL( activated() ), this, SLOT( downloadPackage() ) );
     actionDownload->addTo( popup );
     actionDownload->addTo( bar );
 
-    a = new QAction( tr( "Apply changes" ), Resource::loadPixmap( "aqpkg/apply" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Apply changes" ), Opie::Core::OResource::loadPixmap( "aqpkg/apply", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to install, remove or upgrade currently selected package(s)." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( applyChanges() ) );
     a->addTo( popup );
@@ -158,7 +163,8 @@ MainWindow :: MainWindow( QWidget* parent, const char* name, WFlags fl )
 
     popup->insertSeparator();
 
-    a = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Configure" ), Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to configure this application." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( displaySettings() ) );
     a->addTo( popup );
@@ -187,7 +193,8 @@ MainWindow :: MainWindow( QWidget* parent, const char* name, WFlags fl )
 
     popup->insertSeparator();
 
-    actionFilter = new QAction( tr( "Filter by category" ), Resource::loadPixmap( "aqpkg/filter" ),  QString::null, 0, this, 0 );
+    actionFilter = new QAction( tr( "Filter by category" ), Opie::Core::OResource::loadPixmap( "aqpkg/filter",
+                                Opie::Core::OResource::SmallIcon ),  QString::null, 0, this, 0 );
     actionFilter->setToggleAction( TRUE );
     actionFilter->setWhatsThis( tr( "Click here to list packages belonging to one category." ) );
     connect( actionFilter, SIGNAL( activated() ), this, SLOT( filterCategory() ) );
@@ -200,12 +207,14 @@ MainWindow :: MainWindow( QWidget* parent, const char* name, WFlags fl )
 
     popup->insertSeparator();
 
-    a = new QAction( tr( "Find" ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Find" ), Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to search for text in package names." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( displayFindBar() ) );
     a->addTo( popup );
 
-    actionFindNext = new QAction( tr( "Find next" ), Resource::loadIconSet( "next" ), QString::null, 0, this, 0 );
+    actionFindNext = new QAction( tr( "Find next" ), Opie::Core::OResource::loadPixmap( "next", Opie::Core::OResource::SmallIcon ),
+                                  QString::null, 0, this, 0 );
     actionFindNext->setEnabled( FALSE );
     actionFindNext->setWhatsThis( tr( "Click here to find the next package name containing the text you are searching for." ) );
     connect( actionFindNext, SIGNAL( activated() ), this, SLOT( repeatFind() ) );
@@ -215,7 +224,8 @@ MainWindow :: MainWindow( QWidget* parent, const char* name, WFlags fl )
 
     popup->insertSeparator();
 
-    a = new QAction( tr( "Quick Jump keypad" ), Resource::loadPixmap( "aqpkg/keyboard" ),  QString::null, 0, this, 0 );
+    a = new QAction( tr( "Quick Jump keypad" ), Opie::Core::OResource::loadPixmap( "aqpkg/keyboard", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to display/hide keypad to allow quick movement through the package list." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( displayJumpBar() ) );
     a->addTo( popup );
@@ -223,7 +233,8 @@ MainWindow :: MainWindow( QWidget* parent, const char* name, WFlags fl )
     mb->insertItem( tr( "View" ), popup );
 
     // Finish find toolbar creation
-    a = new QAction( QString::null, Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+    a = new QAction( QString::null, Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to hide the find toolbar." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( hideFindBar() ) );
     a->addTo( findBar );
@@ -258,8 +269,8 @@ void MainWindow :: initMainWidget()
     connect( serversList, SIGNAL(activated(int)), this, SLOT(serverSelected(int)) );
     QWhatsThis::add( serversList, tr( "Click here to select a package feed." ) );
 
-    installedIcon = Resource::loadPixmap( "installed" );
-    updatedIcon = Resource::loadPixmap( "aqpkg/updated" );
+    installedIcon = Opie::Core::OResource::loadPixmap( "installed" );
+    updatedIcon = Opie::Core::OResource::loadPixmap( "aqpkg/updated" );
 
     packagesList = new QListView( networkPkgWindow );
     packagesList->addColumn( tr( "Packages" ), 225 );

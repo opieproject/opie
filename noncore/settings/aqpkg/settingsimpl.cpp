@@ -1,27 +1,27 @@
 /*
-                             This file is part of the OPIE Project
+                     This file is part of the OPIE Project
 
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
-             .=l.                                Dan Williams <drw@handhelds.org>
-           .>+-=
- _;:,     .>    :=|.         This file is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This file is distributed in the hope that
-     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
-..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:
- :     =  ...= . :.=-        You should have received a copy of the GNU
- -.   .:....=;==+<;          General Public License along with this file;
-  -_. . .   )=.  =           see the file COPYING. If not, write to the
-    --        :-=`           Free Software Foundation, Inc.,
+      .=l.                                Dan Williams <drw@handhelds.org>
+     .>+-=
+_;:,   .>  :=|.         This file is free software; you can
+.> <`_,  > .  <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This file is distributed in the hope that
+  + . -:.    =       it will be useful, but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=    =    ;      Public License for more details.
+++=  -.   .`   .:
+:   = ...= . :.=-        You should have received a copy of the GNU
+-.  .:....=;==+<;          General Public License along with this file;
+ -_. . .  )=. =           see the file COPYING. If not, write to the
+  --    :-=`           Free Software Foundation, Inc.,
                              59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
@@ -32,10 +32,8 @@
 
 /* OPIE */
 #include <opie2/otabwidget.h>
-#ifdef QWS
+#include <opie2/oresource.h>
 #include <qpe/config.h>
-#include <qpe/resource.h>
-#endif
 #include <qpe/qpeapplication.h>
 
 /* QT */
@@ -111,11 +109,12 @@ QWidget *SettingsImpl :: initServerTab()
     connect( servers, SIGNAL( highlighted(int) ), this, SLOT( editServer(int) ) );
     layout->addMultiCellWidget( servers, 0, 0, 0, 1 );
 
-    QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
+    QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ),
+                                        tr( "New" ), container );
     connect( btn, SIGNAL( clicked() ), this, SLOT( newServer() ) );
     layout->addWidget( btn, 1, 0 );
 
-    btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
+    btn = new QPushButton( Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon ), tr( "Delete" ), container );
     connect( btn, SIGNAL( clicked() ), this, SLOT( removeServer() ) );
     layout->addWidget( btn, 1, 1 );
 
@@ -139,7 +138,7 @@ QWidget *SettingsImpl :: initServerTab()
     active = new QCheckBox( tr( "Active Server" ), grpbox );
     grplayout->addMultiCellWidget( active, 2, 2, 0, 1 );
 
-    btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), grpbox );
+    btn = new QPushButton( Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ), tr( "Update" ), grpbox );
     connect( btn, SIGNAL( clicked() ), this, SLOT( changeServerDetails() ) );
     grplayout->addMultiCellWidget( btn, 3, 3, 0, 1 );
 
@@ -169,11 +168,11 @@ QWidget *SettingsImpl :: initDestinationTab()
     connect( destinations, SIGNAL( highlighted(int) ), this, SLOT( editDestination(int) ) );
     layout->addMultiCellWidget( destinations, 0, 0, 0, 1 );
 
-    QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
+    QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "new", Opie::Core::OResource::SmallIcon ), tr( "New" ), container );
     connect( btn, SIGNAL( clicked() ), this, SLOT( newDestination() ) );
     layout->addWidget( btn, 1, 0 );
 
-    btn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
+    btn = new QPushButton( Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon ), tr( "Delete" ), container );
     connect( btn, SIGNAL( clicked() ), this, SLOT( removeDestination() ) );
     layout->addWidget( btn, 1, 1 );
 
@@ -197,7 +196,7 @@ QWidget *SettingsImpl :: initDestinationTab()
     linkToRoot = new QCheckBox( tr( "Link to root" ), grpbox );
     grplayout->addMultiCellWidget( linkToRoot, 2, 2, 0, 1 );
 
-    btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), grpbox );
+    btn = new QPushButton( Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ), tr( "Update" ), grpbox );
     connect( btn, SIGNAL( clicked() ), this, SLOT( changeDestinationDetails() ) );
     grplayout->addMultiCellWidget( btn, 3, 3, 0, 1 );
 
@@ -252,7 +251,7 @@ QWidget *SettingsImpl :: initProxyTab()
     txtPassword = new QLineEdit( container );
     layout->addWidget( txtPassword, 3, 1 );
 
-    QPushButton *btn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Update" ), container );
+    QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ), tr( "Update" ), container );
     connect( btn, SIGNAL( clicked() ), this, SLOT( proxyApplyChanges() ) );
     layout->addMultiCellWidget( btn, 4, 4, 0, 1 );
 
