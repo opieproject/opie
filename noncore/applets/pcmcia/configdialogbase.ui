@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>214</width>
-            <height>44</height>
+            <width>234</width>
+            <height>130</height>
         </rect>
     </property>
     <property stdset="1">
@@ -28,13 +28,13 @@
     <grid>
         <property stdset="1">
             <name>margin</name>
-            <number>11</number>
+            <number>7</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>6</number>
+            <number>4</number>
         </property>
-        <widget row="0"  column="2" >
+        <widget row="2"  column="2" >
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
@@ -45,7 +45,18 @@
                 <string>card</string>
             </property>
         </widget>
-        <widget row="0"  column="1" >
+        <widget row="2"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Upon insertion,</string>
+            </property>
+        </widget>
+        <widget row="2"  column="1" >
             <class>QComboBox</class>
             <item>
                 <property>
@@ -76,15 +87,62 @@
                 <cstring>cbAction</cstring>
             </property>
         </widget>
-        <widget row="0"  column="0" >
+        <widget row="3"  column="1"  rowspan="1"  colspan="2" >
+            <class>QComboBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>cbBindTo</cstring>
+            </property>
+        </widget>
+        <widget row="1"  column="0"  rowspan="1"  colspan="3" >
+            <class>Line</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Line1</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Horizontal</enum>
+            </property>
+        </widget>
+        <widget row="3"  column="0" >
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>TextLabel2</cstring>
+                <cstring>textBindTo</cstring>
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Upon insertion,</string>
+                <string>Bind to:</string>
+            </property>
+        </widget>
+        <widget row="4"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>textClassName</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Classname:</string>
+            </property>
+        </widget>
+        <widget row="4"  column="1"  rowspan="1"  colspan="2" >
+            <class>QComboBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>cbClassName</cstring>
+            </property>
+        </widget>
+        <widget row="0"  column="0"  rowspan="1"  colspan="3" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>textCardName</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>CardName</string>
             </property>
         </widget>
     </grid>

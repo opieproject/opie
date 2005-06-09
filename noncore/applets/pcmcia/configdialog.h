@@ -36,7 +36,7 @@ class ConfigDialog : public ConfigDialogBase
 {
   Q_OBJECT
   public:
-  
+
     ConfigDialog( const QString& cardname, QWidget* parent );
     ~ConfigDialog();
 };

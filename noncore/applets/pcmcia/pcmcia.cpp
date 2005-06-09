@@ -131,13 +131,13 @@ void PcmciaManager::mousePressEvent( QMouseEvent* )
         submenu->insertItem( "&Suspend",   SUSPEND+i*100 );
         submenu->insertItem( "&Resume",    RESUME+i*100 );
         submenu->insertItem( "&Configure", CONFIGURE+i*100 );
-        
+
         submenu->setItemEnabled( EJECT+i*100, !it.current()->isEmpty() );
         submenu->setItemEnabled( INSERT+i*100, it.current()->isEmpty() );
         submenu->setItemEnabled( SUSPEND+i*100, !it.current()->isEmpty() && !it.current()->isSuspended() );
         submenu->setItemEnabled( RESUME+i*100, !it.current()->isEmpty() && it.current()->isSuspended() );
         submenu->setItemEnabled( CONFIGURE+i*100, !it.current()->isEmpty() );
-        
+
         connect( submenu, SIGNAL(activated(int)), this, SLOT(userCardAction(int)) );
         menu->insertItem( tr( "%1: %2" ).arg( i++ ).arg( it.current()->identity() ), submenu, 1 );
         ++it;
@@ -170,7 +170,7 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
 
     bool newCard = true;
     OPcmciaSocket* theCard = 0;
-    
+
     while ( it.current() && newCard )
     {
         if ( it.current()->isEmpty() )
@@ -234,7 +234,7 @@ void PcmciaManager::paintEvent( QPaintEvent * )
 {
     QPainter p( this );
     odebug << "sockets = " << OPcmciaSystem::instance()->count() << ", cards = " << OPcmciaSystem::instance()->cardCount() << oendl;
-    
+
     if ( OPcmciaSystem::instance()->cardCount() )
     {
         p.drawPixmap( 0, 0, pm );
@@ -258,10 +258,10 @@ void PcmciaManager::execCommand( const QStringList &strList )
 void PcmciaManager::userCardAction( int action )
 {
     odebug << "user action requested. action = " << action << oendl;
-    
+
     int socket = action / 100;
     int what = action % 100;
-    
+
     switch ( what )
     {
         case CONFIGURE: configure( OPcmciaSystem::instance()->socket( socket ) ); break;

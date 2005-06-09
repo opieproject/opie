@@ -36,17 +36,20 @@ using namespace Opie::Core;
 
 /* QT */
 #include <qcombobox.h>
+#include <qdir.h>
+#include <qlabel.h>
 
 ConfigDialog::ConfigDialog( const QString& cardname, QWidget* parent )
              :ConfigDialogBase( parent, "pcmcia config dialog", true )
 {
-    setCaption( tr( "Configure %1" ).arg( cardname ) );
-    
+    //setCaption( tr( "Configure %1" ).arg( cardname ) );
+    textCardName->setText( cardname );
+
     OConfig cfg( "PCMCIA" );
     cfg.setGroup( "Global" );
     int nCards = cfg.readNumEntry( "nCards", 0 );
     QString insert;
-    
+
     for ( int i = 0; i < nCards; ++i )
     {
         QString cardSection = QString( "Card_%1" ).arg( i );
@@ -60,12 +63,22 @@ ConfigDialog::ConfigDialog( const QString& cardname, QWidget* parent )
         }
     }
     odebug << "preferred action for card '" << cardname << "' seems to be '" << insert << "'" << oendl;
-    
+
     if ( !insert.isEmpty() )
     {
         for ( int i; i < cbAction->count(); ++i )
             if ( cbAction->text( i ) == insert ) cbAction->setCurrentItem( i );
     }
+
+    // parse possible device and class names out of /etc/pcmcia/*.conf
+    QStringList deviceNames;
+    QStringList classNames;
+
+    QDir pcmciaconfdir( "/etc/pcmcia", "*.conf" );
+
+    for ( int i = 0; i < pcmciaconfdir.count(); ++i )
+        odebug << "found conf file '" << pcmciaconfdir[i] << "'" << oendl;
+
 }
 
 ConfigDialog::~ConfigDialog()
