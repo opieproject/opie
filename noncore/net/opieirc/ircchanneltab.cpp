@@ -188,7 +188,10 @@ void IRCChannelTab::popupWhois() {
 }
 
 QString IRCChannelTab::title() {
-    return m_channel->channelname();
+    if(!m_channel->channelname().startsWith("&"))
+        return m_channel->channelname();
+
+    return "&" + m_channel->channelname();
 }
 
 IRCSession *IRCChannelTab::session() {
