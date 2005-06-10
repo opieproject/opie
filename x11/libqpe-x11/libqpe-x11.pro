@@ -127,7 +127,7 @@ SOURCES +=  ../../library/quuid.cpp \
             ../../library/qlibrary.cpp \
             ../../library/qlibrary_unix.cpp
 
-INCLUDEPATH += $(OPIEDIR)/include backend
+INCLUDEPATH += $(OPIEDIR)/include $(QTDIR)/include $(QTDIR)/include/QtCore $(QTDIR)/include/QtGui backend
 LIBS		+= -ldl -lcrypt -lm
 
 FORMS =  ../../library/passwordbase_p.ui \
