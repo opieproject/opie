@@ -12,6 +12,7 @@
 	* Checkbook - added configuration option to use smaller font for checkbook transaction tab (hrw)
 	* ZSafe - make UI conform to Opie standards (drw)
 	* Today Addressbook plugin - fix configuration to show/not show birthdays, use checkboxes for selection (hrw)
+	* Opie-Console: read initial fixed font configuration from qpe.conf (mickeyl)
 
 	Fixed Bugs
 	----------

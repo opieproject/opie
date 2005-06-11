@@ -4,6 +4,10 @@
 #include "script.h"
 #include "logger.h"
 
+/* OPIE */
+#include <qpe/config.h>
+
+/* QT */
 #include <qfile.h>
 #include <qtextstream.h>
 
@@ -44,12 +48,22 @@ EmulationHandler::~EmulationHandler() {
 
 void EmulationHandler::load( const Profile& prof) {
 
-//     m_teWid->setVTFont( font( prof.readNumEntry("Font")  )  );
-    QFont font( prof.readEntry("Font"), prof.readNumEntry( "FontSize"  ), QFont::Normal  );
+    // try to read the fontconfig from the profile
+    QString aFont = prof.readEntry( "Font" );
+    int aFontSize = prof.readNumEntry( "FontSize" );
+    // use defaults from qpe.conf if no profile yet
+    if ( ( aFontSize == -1 ) || ( aFont == QString::null ) )
+    {
+        Config c( "qpe" );
+        c.setGroup( "Appearance" );
+        aFont = c.readEntry( "FixedFontFamily", "Fixed" );
+        aFontSize = c.readNumEntry( "FixedFontSize", 7 );
+    }
+    QFont font( aFont, aFontSize );
     font.setFixedPitch( TRUE );
     m_teWid->setVTFont( font );
 
-    int num = prof.readNumEntry("Color");
+    int num = prof.readNumEntry("Color", 0);
     setColor( foreColor(num), backColor(num) );
     m_teWid->setBackgroundColor(backColor(num) );
 
