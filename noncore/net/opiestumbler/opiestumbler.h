@@ -40,7 +40,7 @@ public:
     static QString appName() { return QString::fromLatin1("opiestumbler"); }
     static QString appCaption();
     void displayStations();
-    QString manufacturer(const QString &mac, bool extended = FALSE );
+    QString manufacturer(const QString &mac, bool extended = false );
 protected slots:
     void slotConfigure();
     void slotStartScanning();

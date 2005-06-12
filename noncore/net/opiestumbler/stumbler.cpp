@@ -35,10 +35,10 @@ void Stumbler::start()
     
     if (!m_timer->isActive()) {
         odebug << "Starting stumbler" << oendl;
-        m_wiface->setUp(FALSE);
+        m_wiface->setUp(false);
         m_wiface->setSSID("any");
         m_wiface->setAssociatedAP( OMacAddress::broadcast );
-        m_wiface->setUp(TRUE);
+        m_wiface->setUp(true);
         m_timer->start(m_interval);
     }
 }

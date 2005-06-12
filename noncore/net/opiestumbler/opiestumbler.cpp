@@ -63,7 +63,7 @@ OpieStumbler::OpieStumbler(QWidget *parent, const char *name, WFlags)
     lay->addWidget(m_listHistory);
     grid->addLayout(lay, 0, 0);
 
-    m_stationsCurrent->setAutoDelete(TRUE);
+    m_stationsCurrent->setAutoDelete(true);
     
     m_channel = new QCopChannel( "QPE/OpieStumbler", this );
     connect(m_channel, SIGNAL(received(const QCString &, const QByteArray &)), 
@@ -71,7 +71,7 @@ OpieStumbler::OpieStumbler(QWidget *parent, const char *name, WFlags)
     
     //setCaption(appCaption());
     //setCentralWidget(grid);
-    setToolBarsMovable(FALSE);
+    setToolBarsMovable(false);
     
     
     QPopupMenu *fileMenu = new QPopupMenu(this);
@@ -127,7 +127,7 @@ OpieStumbler::OpieStumbler(QWidget *parent, const char *name, WFlags)
 
 void OpieStumbler::slotConfigure()
 {
-    StumblerSettings settings(this, "Settings", TRUE);
+    StumblerSettings settings(this, "Settings", true);
     if (settings.exec() == QDialog::Accepted)
     loadConfig();
 }
@@ -234,8 +234,8 @@ void OpieStumbler::slotShowDetails()
         StationInfo info(it.current()->st->ssid, it.current()->st->type, QString::number(it.current()->st->channel),
                 QString::number(it.current()->st->rates.last()/1000000), QString::number(it.current()->st->level),
                 it.current()->st->encrypted ? "WEP": "No", 
-                it.current()->st->macAddress.toString(), manufacturer(it.current()->st->macAddress.toString(), TRUE),
-                    it.current()->lastTimeSeen.toString() ,this, "", TRUE);
+                it.current()->st->macAddress.toString(), manufacturer(it.current()->st->macAddress.toString(), true),
+                    it.current()->lastTimeSeen.toString() ,this, "", true);
         info.exec();
     }
     
@@ -295,7 +295,7 @@ void OpieStumbler::slotJoinNetwork()
     Opie::Net::OStation *station = it.current()->st;
     
     odebug << "Bringing interface down" << oendl;
-    wiface->setUp(FALSE);
+    wiface->setUp(false);
     
     odebug << "Setting mode to " << (station->type == "adhoc" ? "adhoc" : "managed") << oendl;
     wiface->setMode(station->type == "adhoc" ? "adhoc" : "managed" );
@@ -309,7 +309,7 @@ void OpieStumbler::slotJoinNetwork()
     wiface->commit();
     
     odebug << "Bringing interface up" << oendl;
-    wiface->setUp(TRUE);
+    wiface->setUp(true);
     m_pbar->setProgress(1);
     //Wait 5 sec for association
     QTimer::singleShot(5000, this, SLOT(slotAssociated()));

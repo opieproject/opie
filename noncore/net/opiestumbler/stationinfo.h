@@ -16,7 +16,7 @@ public:
     StationInfo( const QString &essid, const QString &type, const QString &channel, 
             const QString &maxrate, const QString &level, const QString &encryption, const QString &address,
             const QString &vendor, const QString &time,
-            QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
+            QWidget* parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0 );
 
 protected:
     QLabel *m_ssidLabel;

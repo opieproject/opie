@@ -9,7 +9,7 @@ class QLineEdit;
 class StumblerSettings: public QDialog {
 
 public:
-    StumblerSettings(QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags f = 0);
+    StumblerSettings(QWidget* parent = 0, const char* name = 0, bool modal = false, WFlags f = 0);
     ~StumblerSettings();
 
 protected slots:
