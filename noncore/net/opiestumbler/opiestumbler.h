@@ -12,6 +12,10 @@ class Stumbler;
 class QCopChannel;
 class QListView;
 class QListViewItem;
+class QFrame;
+class QLabel;
+class QProgressBar;
+class QVBoxLayout;
 
 namespace Opie{
     namespace Net {
@@ -50,8 +54,10 @@ protected slots:
     void slotJoinNetwork();
     void slotAssociated();
     void slotCheckDHCP();
+    void slotCleanSplash();
 protected:
     void loadConfig();
+    
     QListView *m_listCurrent;
     QListView *m_listHistory;
     QString m_interface;
@@ -63,7 +69,12 @@ protected:
     QPopupMenu *m_popupHistory;
     Opie::Net::OManufacturerDB *m_db;
     QString m_mac;
+    QString m_ssid;
     Opie::Core::OProcess *m_proc;
+    QFrame *m_splash;
+    QVBoxLayout *m_splashBox;
+    QLabel *m_infoLabel;
+    QProgressBar *m_pbar;
     
 };
 

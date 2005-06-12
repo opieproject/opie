@@ -11,6 +11,7 @@
 #include <qlayout.h>
 #include <qwhatsthis.h>
 #include <qtimer.h>
+#include <qprogressbar.h>
 
 #include <qpe/resource.h>
 #include <qpe/config.h>
@@ -275,7 +276,22 @@ void OpieStumbler::slotJoinNetwork()
 
     if( !it.current() )
         return;
-                
+    
+    m_ssid = it.current()->st->ssid.left(it.current()->st->ssid.length()-1);
+    m_splash = new QFrame( this, "splash", false, WStyle_StaysOnTop | WStyle_DialogBorder | WStyle_Customize );
+    m_splash->setFrameStyle( QFrame::Panel | QFrame::Raised );
+    m_splashBox = new QVBoxLayout( m_splash, 4, 4 );
+    m_infoLabel = new QLabel( QString("<center><b>%1 %2</b></center>").arg(tr("Joining Network")).arg(m_ssid), m_splash );
+    m_pbar = new QProgressBar( 3, m_splash );
+    m_pbar->setCenterIndicator(true);
+    m_splashBox->addWidget( m_infoLabel );
+    m_splashBox->addWidget( m_pbar );
+    int sw = m_splashBox->sizeHint().width()*2;
+    int sh = m_splashBox->sizeHint().height();
+    m_splash->setGeometry((240-(sw))/2, (320-sh)/2, sw, sh);
+    m_splash->show();
+    m_splash->raise();
+
     Opie::Net::OStation *station = it.current()->st;
     
     odebug << "Bringing interface down" << oendl;
@@ -294,6 +310,7 @@ void OpieStumbler::slotJoinNetwork()
     
     odebug << "Bringing interface up" << oendl;
     wiface->setUp(TRUE);
+    m_pbar->setProgress(1);
     //Wait 5 sec for association
     QTimer::singleShot(5000, this, SLOT(slotAssociated()));
 }
@@ -302,15 +319,21 @@ void OpieStumbler::slotAssociated()
 {
     OWirelessNetworkInterface *wiface = static_cast<OWirelessNetworkInterface*>(ONetwork::instance()->interface(m_interface));
 
-    if( !wiface )
+    if( !wiface ) {
+        slotCleanSplash();
         return;
+    }
 
     if (!wiface->isAssociated()) {
         Global::statusMessage(tr("Could not Join"));
+        m_infoLabel->setText(tr("Could not Join"));
+        QTimer::singleShot(5000, this, SLOT(slotCleanSplash()));
         return;
     }
     
     Global::statusMessage(tr("Joined"));
+    m_pbar->setProgress(2);
+    m_infoLabel->setText(QString("<center><b>%1 %2</b></center>").arg(tr("Joined Network")).arg(m_ssid));
    
     if(m_proc) {
         m_proc->kill();
@@ -328,21 +351,35 @@ void OpieStumbler::slotCheckDHCP()
 {
     if(!m_proc->isRunning()) {
         Global::statusMessage(tr("Could not Obtain an Address"));
+        m_infoLabel->setText(QString("<center><b>%1</b></center>").arg(tr("Could not Obtain an Address")));
         delete m_proc;
         m_proc = NULL;
+        QTimer::singleShot(5000, this, SLOT(slotCleanSplash()));
         return;
     }
     m_listCurrent->show();
+    m_pbar->setProgress(3);
 
-    
     OWirelessNetworkInterface *wiface = static_cast<OWirelessNetworkInterface*>(ONetwork::instance()->interface(m_interface));
-    Global::statusMessage(tr("Obtained IP ") + wiface->ipV4Address().toString());
+    QString ipv4 = wiface->ipV4Address().toString();
+    m_infoLabel->setText(QString("<center><b>%1 %2</b></center>").arg(tr("Obtained IP")).arg(ipv4));
+    Global::statusMessage(tr("Obtained IP") + " " + ipv4);
+    QTimer::singleShot(5000, this, SLOT(slotCleanSplash()));
+    
 }
-        
-    
-    
-        
 
-
-        
+void OpieStumbler::slotCleanSplash()
+{
+    delete m_pbar;
+    m_pbar = 0;  
+    
+    delete m_infoLabel;
+    m_infoLabel = 0;
+    
+    delete m_splashBox;
+    m_splashBox = 0;
+    
+    delete m_splash;
+    m_splash = 0;           
+}
 
