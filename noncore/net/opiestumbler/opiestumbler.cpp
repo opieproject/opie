@@ -286,9 +286,9 @@ void OpieStumbler::slotJoinNetwork()
     m_pbar->setCenterIndicator(true);
     m_splashBox->addWidget( m_infoLabel );
     m_splashBox->addWidget( m_pbar );
-    int sw = m_splashBox->sizeHint().width()*2;
+    int sw = m_splashBox->sizeHint().width() * 2;
     int sh = m_splashBox->sizeHint().height();
-    m_splash->setGeometry((240-(sw))/2, (320-sh)/2, sw, sh);
+    m_splash->setGeometry((qApp->desktop()->width() - sw)/2, (qApp->desktop()->height() - sh)/2, sw, sh);
     m_splash->show();
     m_splash->raise();
 
