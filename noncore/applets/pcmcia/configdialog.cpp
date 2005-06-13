@@ -37,13 +37,15 @@ using namespace Opie::Core;
 /* QT */
 #include <qcombobox.h>
 #include <qdir.h>
+#include <qfile.h>
 #include <qlabel.h>
+#include <qtextstream.h>
 
 ConfigDialog::ConfigDialog( const QString& cardname, QWidget* parent )
              :ConfigDialogBase( parent, "pcmcia config dialog", true )
 {
     //setCaption( tr( "Configure %1" ).arg( cardname ) );
-    textCardName->setText( cardname );
+    txtCardName->setText( cardname );
 
     OConfig cfg( "PCMCIA" );
     cfg.setGroup( "Global" );
@@ -70,15 +72,45 @@ ConfigDialog::ConfigDialog( const QString& cardname, QWidget* parent )
             if ( cbAction->text( i ) == insert ) cbAction->setCurrentItem( i );
     }
 
-    // parse possible device and class names out of /etc/pcmcia/*.conf
-    QStringList deviceNames;
-    QStringList classNames;
+    // parse possible bind entries out of /etc/pcmcia/*.conf
+    typedef QMap<QString,QString> StringMap;
+    StringMap bindEntries;
 
     QDir pcmciaconfdir( "/etc/pcmcia", "*.conf" );
 
     for ( int i = 0; i < pcmciaconfdir.count(); ++i )
-        odebug << "found conf file '" << pcmciaconfdir[i] << "'" << oendl;
+    {
+        odebug << "processing conf file '" << pcmciaconfdir[i] << "'" << oendl;
+        QString conffilename = QString( "%1/%2" ).arg( pcmciaconfdir.absPath() ).arg( pcmciaconfdir[i] );
+        QFile conffile( conffilename );
+        if ( conffile.open( IO_ReadOnly ) )
+        {
+            QTextStream ts( &conffile );
+            while ( !ts.atEnd() )
+            {
+                QString word;
+                ts >> word;
+                if ( word == "bind" )
+                {
+                    word = ts.readLine();
+                    bindEntries[ word.stripWhiteSpace() ] = conffilename;
+                    continue;
+                }
+                ts.readLine();
+            }
+        }
+        else
+        {
+            owarn << "couldn't open '" << conffile.name() << "' for reading" << oendl;
+            continue;
+        }
+    }
 
+    for ( StringMap::Iterator it = bindEntries.begin(); it != bindEntries.end(); ++it )
+    {
+        odebug << "found device '" << it.key() << "' defined in '" << it.data().latin1() << "'" << oendl;
+        cbBindTo->insertItem( it.key() );
+    }
 }
 
 ConfigDialog::~ConfigDialog()
