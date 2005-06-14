@@ -63,12 +63,6 @@ void imageinfo::initKeys()
     }
 #endif
     Opie::Core::OKeyPair::List lst;
-    lst.append( Opie::Core::OKeyPair::upArrowKey() );
-    lst.append( Opie::Core::OKeyPair::downArrowKey() );
-    lst.append( Opie::Core::OKeyPair::leftArrowKey() );
-    lst.append( Opie::Core::OKeyPair::rightArrowKey() );
-    lst.append( Opie::Core::OKeyPair::returnKey() );
-
     m_viewManager = new Opie::Core::OKeyConfigManager(m_cfg, "imageinfo_keys",
                                                     lst, false,this, "keyconfig name" );
     m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("View Full Image"), "infoview",
