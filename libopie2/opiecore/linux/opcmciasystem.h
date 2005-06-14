@@ -192,11 +192,9 @@ class OPcmciaSocket : public QObject
       */
     QStringList productIdentity() const;
     /**
-      * @returns the manufacturer ID pair
+      * @returns the manufacturer ID string
       */
-#if 0
-    const QPair& manufacturerIdentity() const;
-#endif
+    QString manufacturerIdentity() const;
     /**
       * @returns the function string
       */

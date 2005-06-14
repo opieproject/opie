@@ -49,6 +49,8 @@ using namespace Opie::Core;
 
 #define PROC_DEVICES "/proc/devices"
 
+#define OPCMCIA_DEBUG 1
+
 /*======================================================================================
  * OPcmciaSystem
  *======================================================================================*/
@@ -189,8 +191,14 @@ OPcmciaSocket::~OPcmciaSocket()
     if ( _major )
     {
         dev_t dev = makedev( _major, _socket );
+
+#ifdef OPCMCIA_DEBUG
+        QString filename = "/tmp/opcmciasystem-debug";
+        if ( QFile::exists( filename ) )
+#else
         QString filename = QString().sprintf( "/tmp/opcmciasystem-%d", ::getpid() );
         if ( ::mknod( (const char*) filename, ( S_IFCHR|S_IREAD|S_IWRITE ), dev ) == 0 )
+#endif
         {
             _fd = ::open( (const char*) filename, O_RDONLY);
             if ( !_fd )
@@ -204,7 +212,7 @@ OPcmciaSocket::~OPcmciaSocket()
         }
         else
         {
-            qWarning( "OPcmciaSocket::init() - can't create device node (%s)", strerror( errno ) );
+            qWarning( "OPcmciaSocket::init() - can't create device node '%s' (%s)", (const char*) filename, strerror( errno ) );
         }
     }
 }
@@ -291,7 +299,7 @@ bool OPcmciaSocket::isEmpty() const
 
 bool OPcmciaSocket::isSuspended() const
 {
-    return status() && Suspended;    
+    return status() && Suspended;
 }
 
 
@@ -345,12 +353,16 @@ QStringList OPcmciaSocket::productIdentity() const
 }
 
 
-#if 0
-const QPair& OPcmciaSocket::manufacturerIdentity() const
+QString OPcmciaSocket::manufacturerIdentity() const
 {
-    return _manufId;
+    cistpl_manfid_t *manfid = &_ioctlarg.tuple_parse.parse.manfid;
+    if ( getTuple( CISTPL_MANFID ) )
+    {
+        return QString().sprintf( "0x%04x, 0x%04x", manfid->manf, manfid->card );
+    }
+    else
+        return "<unknown>";
 }
-#endif
 
 
 QString OPcmciaSocket::function() const
