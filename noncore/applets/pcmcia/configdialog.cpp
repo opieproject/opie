@@ -32,20 +32,24 @@
 /* OPIE */
 #include <opie2/oconfig.h>
 #include <opie2/odebug.h>
+#include <opie2/opcmciasystem.h>
 using namespace Opie::Core;
 
 /* QT */
 #include <qcombobox.h>
 #include <qdir.h>
 #include <qfile.h>
+#include <qgroupbox.h>
 #include <qlabel.h>
 #include <qtextstream.h>
 
-ConfigDialog::ConfigDialog( const QString& cardname, QWidget* parent )
+ConfigDialog::ConfigDialog( const OPcmciaSocket* card, QWidget* parent )
              :ConfigDialogBase( parent, "pcmcia config dialog", true )
 {
-    //setCaption( tr( "Configure %1" ).arg( cardname ) );
-    txtCardName->setText( cardname );
+    gbDetails->setTitle( QString( "Details for '%1'" ).arg( card->identity() ) );
+    txtCardName->setText( card->productIdentity().join( " " ) );
+    txtManfid->setText( card->manufacturerIdentity() );
+    txtFunction->setText( card->function() );
 
     OConfig cfg( "PCMCIA" );
     cfg.setGroup( "Global" );
@@ -57,19 +61,33 @@ ConfigDialog::ConfigDialog( const QString& cardname, QWidget* parent )
         QString cardSection = QString( "Card_%1" ).arg( i );
         cfg.setGroup( cardSection );
         QString name = cfg.readEntry( "name" );
-        odebug << "comparing card '" << cardname << "' with known card '" << name << "'" << oendl;
-        if ( cardname == name )
+        odebug << "comparing card '" << card->name() << "' with known card '" << name << "'" << oendl;
+        if ( card->name() == name )
         {
             insert = cfg.readEntry( "insert" );
             break;
         }
     }
-    odebug << "preferred action for card '" << cardname << "' seems to be '" << insert << "'" << oendl;
+    odebug << "preferred action for card '" << card->name() << "' seems to be '" << insert << "'" << oendl;
 
     if ( !insert.isEmpty() )
     {
         for ( int i; i < cbAction->count(); ++i )
             if ( cbAction->text( i ) == insert ) cbAction->setCurrentItem( i );
+    }
+
+    if ( !card->isUnsupported() )
+    {
+        odebug << "card is recognized - hiding bindings" << oendl;
+        textBindTo->hide();
+        cbBindTo->hide();
+        return;
+    }
+    else
+    {
+        odebug << "card is unsupported yet - showing possible bindings" << oendl;
+        textBindTo->show();
+        cbBindTo->show();
     }
 
     // parse possible bind entries out of /etc/pcmcia/*.conf
@@ -108,7 +126,7 @@ ConfigDialog::ConfigDialog( const QString& cardname, QWidget* parent )
 
     for ( StringMap::Iterator it = bindEntries.begin(); it != bindEntries.end(); ++it )
     {
-        odebug << "found device '" << it.key() << "' defined in '" << it.data().latin1() << "'" << oendl;
+        odebug << "found binding '" << it.key() << "' defined in '" << it.data().latin1() << "'" << oendl;
         cbBindTo->insertItem( it.key() );
     }
 }

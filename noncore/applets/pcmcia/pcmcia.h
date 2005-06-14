@@ -59,7 +59,8 @@ class PcmciaManager : public QWidget
     void popUp(QString message, QString icon = QString::null );
 
   private:
-    int m_commandOrig;
+    bool configuring;
+    int commandOrig;
     QPixmap pm;
     QPopupMenu *popupMenu;
 

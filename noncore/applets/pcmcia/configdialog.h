@@ -32,12 +32,14 @@
 
 #include "configdialogbase.h"
 
+namespace Opie { namespace Core { class OPcmciaSocket; }; };
+
 class ConfigDialog : public ConfigDialogBase
 {
   Q_OBJECT
   public:
 
-    ConfigDialog( const QString& cardname, QWidget* parent );
+    ConfigDialog( const Opie::Core::OPcmciaSocket* card, QWidget* parent );
     ~ConfigDialog();
 };
 

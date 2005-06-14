@@ -74,6 +74,7 @@ PcmciaManager::PcmciaManager( QWidget * parent ) : QWidget( parent )
     setFixedWidth ( AppLnk::smallIconSize() );
     setFixedHeight ( AppLnk::smallIconSize() );
     pm = Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon );
+    configuring = false;
 }
 
 
@@ -110,7 +111,7 @@ void PcmciaManager::popupTimeout()
     popupMenu->hide();
 }
 
-enum { EJECT, INSERT, SUSPEND, RESUME, CONFIGURE };
+enum { EJECT, INSERT, SUSPEND, RESUME, RESET, CONFIGURE };
 
 void PcmciaManager::mousePressEvent( QMouseEvent* )
 {
@@ -130,13 +131,14 @@ void PcmciaManager::mousePressEvent( QMouseEvent* )
         submenu->insertItem( "&Insert",    INSERT+i*100 );
         submenu->insertItem( "&Suspend",   SUSPEND+i*100 );
         submenu->insertItem( "&Resume",    RESUME+i*100 );
+        submenu->insertItem( "Rese&t",     RESET+i*100 );
         submenu->insertItem( "&Configure", CONFIGURE+i*100 );
 
         submenu->setItemEnabled( EJECT+i*100, !it.current()->isEmpty() );
         submenu->setItemEnabled( INSERT+i*100, it.current()->isEmpty() );
         submenu->setItemEnabled( SUSPEND+i*100, !it.current()->isEmpty() && !it.current()->isSuspended() );
         submenu->setItemEnabled( RESUME+i*100, !it.current()->isEmpty() && it.current()->isSuspended() );
-        submenu->setItemEnabled( CONFIGURE+i*100, !it.current()->isEmpty() );
+        submenu->setItemEnabled( CONFIGURE+i*100, !it.current()->isEmpty() && !configuring );
 
         connect( submenu, SIGNAL(activated(int)), this, SLOT(userCardAction(int)) );
         menu->insertItem( tr( "%1: %2" ).arg( i++ ).arg( it.current()->identity() ), submenu, 1 );
@@ -271,8 +273,10 @@ void PcmciaManager::userCardAction( int action )
 
 void PcmciaManager::configure( OPcmciaSocket* card )
 {
-    ConfigDialog dialog( card->identity(), qApp->desktop() );
-    int configresult = dialog.exec();
+    configuring = true;
+    ConfigDialog dialog( card, qApp->desktop() );
+    int configresult = QPEApplication::execDialog( &dialog, false );
+    configuring = false;
     odebug << "pcmcia: configresult = " << configresult << oendl;
 }
 
