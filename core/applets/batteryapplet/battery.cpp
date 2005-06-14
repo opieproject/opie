@@ -132,6 +132,8 @@ void BatteryMeter::paintEvent( QPaintEvent* ) {
         QPainter p(this);
         QFont f( "Fixed", AppLnk::smallIconSize()/2 );
         QFontMetrics fm( f );
+        //Avoid text overlapping
+        p.eraseRect( 0, 0, 20, 20 );
         p.setFont( f );
         p.drawText( 0, height()/2, QString::number( percent ) );
         p.drawText( width()/4, height(), "%" );

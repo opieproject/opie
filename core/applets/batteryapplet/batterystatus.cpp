@@ -48,6 +48,8 @@ bool BatteryStatus::getProcApmStatusIpaq() {
         QString streamIn;
         streamIn = stream.read();
         list = QStringList::split("\n", streamIn);
+       
+        sec2 = sec1 = "";
 
         for(QStringList::Iterator line=list.begin(); line!=list.end(); line++) {
             // not nice, need a rewrite later
@@ -87,7 +89,7 @@ bool BatteryStatus::getProcApmStatusIpaq() {
     jackPercent = perc2.toInt();
     ipaqPercent = perc1.toInt();
 
-    if (perc2.isEmpty()) {
+    if (perc2.isEmpty() || perc2 == "unknow" ) {
         perc2 = tr("no data");
     } else {
         perc2 += " %";
@@ -190,7 +192,7 @@ QString  BatteryStatus::statusText() const {
 }
 
 QString  BatteryStatus::statusTextIpaq() const {
-    QString text = tr( "Remaing Power: %1 %2\nRemaining Time: %3" ).arg( perc2 )
+    QString text = tr( "Remaining Power: %1 \n%2\nRemaining Time: %3" ).arg( perc2 )
                                                                    .arg( jackStatus )
                                                                    .arg( sec2 );
 /*    QString text =  tr("Remaining Power: ") + perc2 + " " + jackStatus;
@@ -203,6 +205,7 @@ void BatteryStatus::paintEvent( QPaintEvent * ev ) {
     QPainter p( this );
 
     QString text = statusText();
+    p.eraseRect( p.boundingRect( 10, 50, width() - 20, 40 , AlignVCenter, text ) );
     p.drawText( 10, 50, width() - 20, 40 , AlignVCenter, text );
 
     QColor c;
@@ -243,7 +246,8 @@ void BatteryStatus::paintEvent( QPaintEvent * ev ) {
         if (bat2) {
             p.setPen(black);
             QString text = statusTextIpaq();
-            p.drawText( 10, 150,  text );
+            p.eraseRect( p.boundingRect( 10, 130, width() - 20, 40 , AlignVCenter, text ) );
+            p.drawText( 10, 130,  width() - 20, 40 , AlignVCenter, text );
             jacketMsg = tr("Jacket  ").arg( jackChem );
         } else {
             jackPercent = 0;
@@ -272,7 +276,7 @@ QSize BatteryStatus::sizeHint() const {
 
     if ( bat2 )  {
     return QSize( QMAX( QMIN( 200, qApp->desktop()->width() ),
-                        r.width()+2*10 ), 2 * 10 + 80 + r.height() +  r2.height() );
+                        r.width()+2*10 ), 2 * 10 + 100 + r.height() +  r2.height() );
     }
     return QSize( QMAX( QMIN( 200, qApp->desktop()->width() ),
                         r.width()+2*10 ), 2 * 10 + 40 + r.height() );
