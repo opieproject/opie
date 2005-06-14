@@ -116,7 +116,7 @@ void DatebookPluginWidget::getDates() {
 			     {
 				count++;
 				// show only later appointments
-				DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes, m_timeExtraLine );
+				DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes, m_timeExtraLine, m_maxCharClip );
 				m_eventsList.append( l );
 				l->show();
 				QObject::connect ( l, SIGNAL( editEvent(const Event&) ), l, SLOT( editEventSlot(const Event&) ) );
