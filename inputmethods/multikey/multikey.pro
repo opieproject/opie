@@ -10,7 +10,7 @@ TARGET		= qmultikey
 DESTDIR		= $(OPIEDIR)/plugins/inputmethods
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      +=  ../../launcher
-LIBS            += -lqpe -L$(OPIEDIR)/plugins/inputmethods -lqpickboard -lqtaux2 -lopieui2
+LIBS            += -lqpe -L$(OPIEDIR)/plugins/inputmethods -lqpickboard -lqtaux2 -lopiecore2 -lopieui2
 QMAKE_LFLAGS	+= -Wl,-rpath,/opt/QtPalmtop/plugins/inputmethods
 VERSION		= 1.0.0
 

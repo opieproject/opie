@@ -11,7 +11,7 @@
 *********************************************************************************************/
 #include "keyboard.h"
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 //#include <iostream.h>
 
@@ -153,25 +153,25 @@ Keyboard::Keyboard(QWidget* parent, const char* name, WFlags f) :
 {
     //setPalette(QPalette(QColor(240,240,230))); // Beige!
 
-    releasedPlain = releasedShift = releasedParen = Resource::loadPixmap("kjumpx/released");
-    pressedPlain  = pressedShift  = pressedParen  = Resource::loadPixmap("kjumpx/pressed");
-    pressedDigit = Resource::loadPixmap("kjumpx/pressed");
+    releasedPlain = releasedShift = releasedParen = Opie::Core::OResource::loadPixmap("kjumpx/released");
+    pressedPlain  = pressedShift  = pressedParen  = Opie::Core::OResource::loadPixmap("kjumpx/pressed");
+    pressedDigit = Opie::Core::OResource::loadPixmap("kjumpx/pressed");
 
     QPixmap tmp;
 
-    tmp = Resource::loadPixmap("kjumpx/releasedShift");
+    tmp = Opie::Core::OResource::loadPixmap("kjumpx/releasedShift");
     bitBlt(&releasedShift, letterx1, 0, &tmp);
 
-    tmp = Resource::loadPixmap("kjumpx/releasedParen");
+    tmp = Opie::Core::OResource::loadPixmap("kjumpx/releasedParen");
     bitBlt(&releasedParen, specialx1, 0, &tmp);
 
-    tmp = Resource::loadPixmap("kjumpx/pressedShift");
+    tmp = Opie::Core::OResource::loadPixmap("kjumpx/pressedShift");
     bitBlt(&pressedShift, letterx1, 0, &tmp);
 
-    tmp = Resource::loadPixmap("kjumpx/pressedParen");
+    tmp = Opie::Core::OResource::loadPixmap("kjumpx/pressedParen");
     bitBlt(&pressedParen, specialx1, 0, &tmp);
 
-    tmp = Resource::loadPixmap("kjumpx/pressedDigit");
+    tmp = Opie::Core::OResource::loadPixmap("kjumpx/pressedDigit");
     bitBlt(&pressedDigit, specialx1, 0, &tmp);
 
     offscreen = QPixmap( releasedPlain );
@@ -564,9 +564,9 @@ void Keyboard::resetState()
  *
  * all following chars means unicode char value and are in hex
  *
- * ÃÊÀ½ = schar (start char)
- * ÁßÀ½ = mchar (middle char)
- * ³¡À½ = echar (end char)
+ * ï¿½= = schar (start char)
+ * ï¿½= = mchar (middle char)
+ * = = echar (end char)
  *
  * there are 19 schars. unicode position is at 1100 - 1112
  * there are 21 mchars. unicode position is at 1161 - 1175
@@ -610,49 +610,49 @@ QChar Keyboard::parseKoreanInput (ushort c) {
 			}
 			else { // must figure out what the echar is
 
-				if (echar == 0x11a8) { // ¤¡
+				if (echar == 0x11a8) { // 
 
-					if (c == 0x1100) 		echar = 0x11a9; // ¤¡ + ¤¡
-					else if (c == 0x1109) 	echar = 0x11aa; // ¤¡ + ¤µ
+					if (c == 0x1100) 		echar = 0x11a9; //  + 
+					else if (c == 0x1109) 	echar = 0x11aa; //  + 
 					else { 
 						schar = c; mchar = 0; echar = 0; 
 						return QChar(c);
 					}
 
-				} else if (echar == 0x11ab) { // ¤¤
+				} else if (echar == 0x11ab) { // 
 
-					if (c == 0x110c)  		echar = 0x11ac; // ¤¤ + ¤¸
-					else if (c == 0x1112)  	echar = 0x11ad; // ¤¤ + ¤¾
+					if (c == 0x110c)  		echar = 0x11ac; //  + 
+					else if (c == 0x1112)  	echar = 0x11ad; //  + 
 					else {
 						schar = c; mchar = 0; echar = 0; 
 						return QChar(c);
 					}
 
-				} else if (echar == 0x11af) { // ¤©
+				} else if (echar == 0x11af) { // 
 
-					if (c == 0x1100) 		echar = 0x11b0; // ¤© + ¤¡
-					else if (c == 0x1106) 	echar = 0x11b1; // ¤© + ¤±
-					else if (c == 0x1107) 	echar = 0x11b2; // ¤© + ¤²
-					else if (c == 0x1109) 	echar = 0x11b3; // ¤© + ¤µ
-					else if (c == 0x1110) 	echar = 0x11b4; // ¤© + ¤¼
-					else if (c == 0x1111) 	echar = 0x11b5; // ¤© + ¤½
-					else if (c == 0x1112) 	echar = 0x11b6; // ¤© + ¤¾
+					if (c == 0x1100) 		echar = 0x11b0; //  + 
+					else if (c == 0x1106) 	echar = 0x11b1; //  + 
+					else if (c == 0x1107) 	echar = 0x11b2; //  + 
+					else if (c == 0x1109) 	echar = 0x11b3; //  + 
+					else if (c == 0x1110) 	echar = 0x11b4; //  + 
+					else if (c == 0x1111) 	echar = 0x11b5; //  + 
+					else if (c == 0x1112) 	echar = 0x11b6; //  + 
 					else {
 						schar = c; mchar = 0; echar = 0; 
 						return QChar(c);
 					}
 
-				} else if (echar == 0x11b8) { // ¤²
+				} else if (echar == 0x11b8) { // 
 
-					if (c == 0x1109) 		echar = 0x11b9; // ¤² + ¤µ
+					if (c == 0x1109) 		echar = 0x11b9; //  + 
 					else {
 						schar = c; mchar = 0; echar = 0; 
 						return QChar(c);
 					}
 
-				} else if (echar == 0x11ba) { // ¤µ 
+				} else if (echar == 0x11ba) { //  
 
-					if (c == 0x1109) 		echar = 0x11bb; // ¤µ + ¤µ 
+					if (c == 0x1109) 		echar = 0x11bb; //  +  
 					else {
 						schar = c; mchar = 0; echar = 0; 
 						return QChar(c);

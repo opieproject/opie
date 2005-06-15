@@ -11,7 +11,7 @@
 *********************************************************************************************/
 #include "keyboard.h"
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 //#include <iostream.h>
 
@@ -137,25 +137,25 @@ Keyboard::Keyboard(QWidget* parent, const char* name, WFlags f) :
 {
     //setPalette(QPalette(QColor(240,240,230))); // Beige!
 
-    releasedPlain = releasedShift = releasedParen = Resource::loadPixmap("jumpx/released");
-    pressedPlain  = pressedShift  = pressedParen  = Resource::loadPixmap("jumpx/pressed");
-    pressedDigit = Resource::loadPixmap("jumpx/pressed");
+    releasedPlain = releasedShift = releasedParen = Opie::Core::OResource::loadPixmap("jumpx/released");
+    pressedPlain  = pressedShift  = pressedParen  = Opie::Core::OResource::loadPixmap("jumpx/pressed");
+    pressedDigit = Opie::Core::OResource::loadPixmap("jumpx/pressed");
 
     QPixmap tmp;
 
-    tmp = Resource::loadPixmap("jumpx/releasedShift");
+    tmp = Opie::Core::OResource::loadPixmap("jumpx/releasedShift");
     bitBlt(&releasedShift, letterx1, 0, &tmp);
 
-    tmp = Resource::loadPixmap("jumpx/releasedParen");
+    tmp = Opie::Core::OResource::loadPixmap("jumpx/releasedParen");
     bitBlt(&releasedParen, specialx1, 0, &tmp);
 
-    tmp = Resource::loadPixmap("jumpx/pressedShift");
+    tmp = Opie::Core::OResource::loadPixmap("jumpx/pressedShift");
     bitBlt(&pressedShift, letterx1, 0, &tmp);
 
-    tmp = Resource::loadPixmap("jumpx/pressedParen");
+    tmp = Opie::Core::OResource::loadPixmap("jumpx/pressedParen");
     bitBlt(&pressedParen, specialx1, 0, &tmp);
 
-    tmp = Resource::loadPixmap("jumpx/pressedDigit");
+    tmp = Opie::Core::OResource::loadPixmap("jumpx/pressedDigit");
     bitBlt(&pressedDigit, specialx1, 0, &tmp);
 
     offscreen = QPixmap( releasedPlain );

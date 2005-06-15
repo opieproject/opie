@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/inputmethods
 Maintainer: Markus Gritsch <gritsch@iue.tuwien.ac.at>
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 License: GPL
 Description: JumpX input method
  Keyboard-like input method for the Opie environment.

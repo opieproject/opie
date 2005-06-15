@@ -8,9 +8,12 @@
  *
  */
 
+#include <opie2/ofiledialog.h>
+#include <opie2/qcolordialog.h>
+#include <opie2/oresource.h>
+
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
-#include <qpe/resource.h>
 
 #include <qlayout.h>
 #include <qwidget.h>
@@ -26,8 +29,6 @@
 #include <qlistbox.h>
 #include <qstringlist.h>
 #include <qtoolbutton.h>
-#include <opie2/ofiledialog.h>
-#include <opie2/qcolordialog.h>
 #include <qdir.h>
 #include <qfileinfo.h>
 #include "configdlg.h"
@@ -62,14 +63,16 @@ ConfigDlg::ConfigDlg () : QDialog ()
     QVBox *vbox1 = new QVBox(hbox1);
     
     QToolButton *tb1 = new QToolButton(vbox1, tr("Move Up"));
-    tb1->setPixmap(Resource::loadPixmap("up"));
+    tb1->setUsesBigPixmap( qApp->desktop()->size().width() > 330 );
+    tb1->setPixmap(Opie::Core::OResource::loadPixmap("up", Opie::Core::OResource::SmallIcon));
     tb1->setAutoRaise(TRUE);
     tb1->setFocusPolicy(QWidget::NoFocus);
     tb1->setToggleButton(FALSE);
     connect(tb1, SIGNAL(clicked()), this, SLOT(moveSelectedUp()));
 
     QToolButton *tb2 = new QToolButton(vbox1, tr("Move Down"));
-    tb2->setPixmap(Resource::loadPixmap("down"));
+    tb2->setUsesBigPixmap( qApp->desktop()->size().width() > 330 );
+    tb2->setPixmap(Opie::Core::OResource::loadPixmap("down", Opie::Core::OResource::SmallIcon));
     tb2->setAutoRaise(TRUE);
     tb2->setFocusPolicy(QWidget::NoFocus);
     tb2->setToggleButton(FALSE);
