@@ -1,5 +1,5 @@
 #include <qlayout.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #include <qpe/qpeapplication.h>
 
 #include "mainwindow.h"
@@ -17,7 +17,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     prefMenu = new QPopupMenu( menuBar );
     menuBar->insertItem( tr( "Connection" ), prefMenu );
 
-    settings = new QAction( tr("Settings"), QIconSet( Resource::loadPixmap("SettingsIcon") ), 0, 0, this);
+    settings = new QAction( tr("Settings"), Opie::Core::OResource::loadPixmap("SettingsIcon", Opie::Core::OResource::SmallIcon) ), 0, 0, this);
     settings->addTo( prefMenu );
     connect( settings, SIGNAL( activated() ),
              SLOT( slotSettings() ) );
