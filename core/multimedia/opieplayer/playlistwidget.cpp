@@ -28,9 +28,11 @@
 #include "videowidget.h"
 
 /* OPIE */
+#include <qpe/qpeapplication.h>
 #include <qpe/qpemenubar.h>
 #include <qpe/lnkproperties.h>
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 
 /* QT */
 #include <qtoolbar.h>
@@ -88,8 +90,9 @@ public:
     ToolButton( QWidget *parent, const char *name, const QString& icon, QObject *handler, const QString& slot, bool t = FALSE )
             : QToolButton( parent, name ) {
         setTextLabel( name );
-        setPixmap( Resource::loadPixmap( icon ) );
+        setPixmap( Opie::Core::OResource::loadPixmap( icon, Opie::Core::OResource::SmallIcon ) );
         setAutoRaise( TRUE );
+        setUsesBigPixmap( qApp->desktop()->size().width() > 330 );
         setFocusPolicy( QWidget::NoFocus );
         setToggleButton( t );
         connect( this, t ? SIGNAL( toggled(bool) ) : SIGNAL( clicked() ), handler, slot );
@@ -127,7 +130,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     setBackgroundMode( PaletteButton );
 
     setCaption( tr("OpiePlayer") );
-    setIcon( Resource::loadPixmap( "opieplayer/MPEGPlayer" ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "opieplayer/MPEGPlayer", Opie::Core::OResource::SmallIcon ) );
 
     setToolBarsMovable( FALSE );
 
@@ -143,7 +146,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     bar->setLabel( tr( "Play Operations" ) );
 //      d->tbPlayCurList =  new ToolButton( bar, tr( "play List" ), "opieplayer/play_current_list",
 //                                        this , SLOT( addSelected()) );
-    tbDeletePlaylist = new QPushButton( Resource::loadIconSet("trash"),"",bar,"close");
+    tbDeletePlaylist = new QPushButton( Opie::Core::OResource::loadPixmap("trash", Opie::Core::OResource::SmallIcon),"",bar,"close");
     tbDeletePlaylist->setFlat(TRUE);
 
     tbDeletePlaylist->setFixedSize(20,20);
@@ -177,9 +180,11 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     QPopupMenu *pmView = new QPopupMenu( this );
     menu->insertItem( tr( "View" ), pmView );
 
-    fullScreenButton = new QAction(tr("Full Screen"), Resource::loadPixmap("fullscreen"), QString::null, 0, this, 0);
+    fullScreenButton = new QAction(tr("Full Screen"), Opie::Core::OResource::loadPixmap("fullscreen", Opie::Core::OResource::SmallIcon),
+                                   QString::null, 0, this, 0);
     fullScreenButton->addTo(pmView);
-    scaleButton = new QAction(tr("Scale"), Resource::loadPixmap("opieplayer/scale"), QString::null, 0, this, 0);
+    scaleButton = new QAction(tr("Scale"), Opie::Core::OResource::loadPixmap("opieplayer/scale", Opie::Core::OResource::SmallIcon),
+                              QString::null, 0, this, 0);
     scaleButton->addTo(pmView);
 
 
@@ -1001,7 +1006,7 @@ void PlayListWidget::populateAudioView() {
          //            odebug << dit.current()->name() << oendl;
          newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(),
                                                 QString::number(size ), storage, dit.current()->file());
-         newItem->setPixmap(0, Resource::loadPixmap( "opieplayer/musicfile" ));
+         newItem->setPixmap(0, Opie::Core::OResource::loadPixmap( "opieplayer/musicfile", Opie::Core::OResource::SmallIcon ));
       }
    }
 
@@ -1030,7 +1035,7 @@ void PlayListWidget::populateVideoView() {
             newItem= /*(void)*/ new QListViewItem( videoView, Vdit.current()->name(),
                    QString::number( QFile( Vdit.current()->file() ).size() ),
                                                    storage, Vdit.current()->file());
-            newItem->setPixmap(0, Resource::loadPixmap( "opieplayer/videofile" ));
+            newItem->setPixmap(0, Opie::Core::OResource::loadPixmap( "opieplayer/videofile", Opie::Core::OResource::SmallIcon ));
         }
     }
 }

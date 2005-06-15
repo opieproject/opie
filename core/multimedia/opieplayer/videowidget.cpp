@@ -22,13 +22,14 @@
 #include "mediaplayerstate.h"
 
 /* OPIE */
-#include <qpe/resource.h>
 #include <qpe/mediaplayerplugininterface.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 
 /* QT */
+#include <qbitmap.h>
 #include <qdir.h>
 #include <qslider.h>
 
@@ -90,9 +91,9 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
 
 //     QString skinPath = "opieplayer2/skins/" + skin;
 
-		pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
-		imgUp = new QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
-		imgDn = new QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
+		pixBg = new QPixmap( Opie::Core::OResource::loadPixmap( QString("%1/background").arg(skinPath) ) );
+		imgUp = new QImage( Opie::Core::OResource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
+		imgDn = new QImage( Opie::Core::OResource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
 
 		imgButtonMask = new QImage( imgUp->width(), imgUp->height(), 8, 255 );
 		imgButtonMask->fill( 0 );

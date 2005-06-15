@@ -22,9 +22,9 @@
 
 /* OPIE */
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 #include <qpe/config.h>
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 
 /* QT */
 #include <qdir.h>
@@ -92,9 +92,9 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
     //    odebug << "skin path " + skinPath << oendl;
 
-    pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
-    imgUp = new QImage( Resource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
-    imgDn = new QImage( Resource::loadImage( QString("%1/skin_down").arg(skinPath) ) );
+    pixBg = new QPixmap( Opie::Core::OResource::loadPixmap( QString("%1/background").arg(skinPath) ) );
+    imgUp = new QImage( Opie::Core::OResource::loadImage( QString("%1/skin_up").arg(skinPath) ) );
+    imgDn = new QImage( Opie::Core::OResource::loadImage( QString("%1/skin_down").arg(skinPath) ) );
 
     imgButtonMask = new QImage( imgUp->width(), imgUp->height(), 8, 255 );
     imgButtonMask->fill( 0 );

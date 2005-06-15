@@ -1,8 +1,9 @@
 #include "inputDialog.h"
 
-#include <qpe/resource.h>
-
 #include <opie2/ofiledialog.h>
+#include <opie2/oresource.h>
+
+#include <qpe/applnk.h>
 
 #include <qlineedit.h>
 #include <qpushbutton.h>
@@ -18,8 +19,8 @@ InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags
     setCaption( tr( name ) );
 
     QPushButton *browserButton;
-    browserButton = new QPushButton( Resource::loadIconSet("fileopen"),"",this,"BrowseButton");
-    browserButton->setGeometry( QRect( 205, 10, 22, 22));
+    browserButton = new QPushButton( Opie::Core::OResource::loadPixmap("fileopen", Opie::Core::OResource::SmallIcon),"",this,"BrowseButton");
+    browserButton->setGeometry( QRect( 205, 10, AppLnk::smallIconSize(), AppLnk::smallIconSize()));
     connect( browserButton, SIGNAL(released()),this,SLOT(browse()));
     LineEdit1 = new QLineEdit( this, "LineEdit1" );
     LineEdit1->setGeometry( QRect( 4, 10, 190, 22 ) );
