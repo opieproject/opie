@@ -13,7 +13,6 @@
 #include <qtimer.h>
 #include <qprogressbar.h>
 
-#include <qpe/resource.h>
 #include <qpe/config.h>
 //#include <qpe/global.h>
 #include <qpe/qcopenvelope_qws.h>
