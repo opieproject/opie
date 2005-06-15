@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.cpp,v 1.12 2004-09-10 11:16:55 zecke Exp $
+ * $Id: edit.cpp,v 1.13 2005-06-15 19:04:33 drw Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *
@@ -29,7 +29,9 @@
 #include "auth.h"
 
 /* OPIE */
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
+
+#include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
@@ -83,9 +85,11 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
     del = new QPushButton(tr("&Remove"), this);
 
     up = new QPushButton(this);
-    up->setPixmap( Resource::loadPixmap("up") );
+    up->setPixmap( Opie::Core::OResource::loadPixmap("up", Opie::Core::OResource::SmallIcon) );
+    up->setMinimumHeight( AppLnk::smallIconSize()+4 );
     down = new QPushButton(this);
-    down->setPixmap( Resource::loadPixmap("down") );
+    down->setPixmap( Opie::Core::OResource::loadPixmap("down", Opie::Core::OResource::SmallIcon) );
+    down->setMinimumHeight( AppLnk::smallIconSize()+4 );
     lpn1->addWidget(add);
     lpn1->addWidget(del);
     lpn1->addStretch(1);

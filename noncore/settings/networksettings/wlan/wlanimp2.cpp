@@ -12,7 +12,7 @@
 #include <opie2/oprocess.h>
 #include <opie2/onetwork.h>
 #include <opie2/opcap.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 using namespace Opie::Core;
 using namespace Opie::Net;
 
@@ -602,7 +602,7 @@ void WLANImp::displayFoundNetwork( const QString& mode, int channel, const QStri
         QListViewItem* item = new QListViewItem( netView, mode.left( 1 ).upper(), ssid, QString::number( channel ), mac.toString() );
         QString name;
         name.sprintf( "networksettings/%s", (const char*) mode );
-        item->setPixmap( col_mode, Resource::loadPixmap( name ) );
+        item->setPixmap( col_mode, Opie::Core::OResource::loadPixmap( name, Opie::Core::OResource::SmallIcon ) );
         qApp->processEvents();
     }
 

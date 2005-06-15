@@ -9,12 +9,13 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/oprocess.h>
+#include <opie2/oresource.h>
+
 #include <qpe/applnk.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/qlibrary.h>
-#include <qpe/resource.h>
 
 /* QT */
 #include <qpushbutton.h>
@@ -532,13 +533,7 @@ void MainWindowImp::updateInterface(Interface *i)
         item = items[i];
 
     // Update the icons and information
-#ifdef QWS
-    QPixmap pic;
-    pic.convertFromImage( Resource::loadImage( i->getStatus() ? "up": "down" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    item->setPixmap(0, ( pic ));
-#else
-    item->setPixmap(0, (SmallIcon(i->getStatus() ? "up": "down")));
-#endif
+    item->setPixmap( 0, Opie::Core::OResource::loadPixmap( i->getStatus() ? "up" : "down", Opie::Core::OResource::SmallIcon ) );
 
     QString typeName = "lan";
     if(i->getInterfaceName() == "lo")
@@ -556,11 +551,8 @@ void MainWindowImp::updateInterface(Interface *i)
     if(i->getModuleOwner() != NULL)
         typeName = i->getModuleOwner()->getPixmapName(i);
 
-#ifdef QWS
-    item->setPixmap(1, (Resource::loadPixmap(QString("networksettings/") + typeName)));
-#else
-    item->setPixmap(1, (SmallIcon(typeName)));
-#endif
+    item->setPixmap( 1, ( Opie::Core::OResource::loadPixmap( "networksettings/" + typeName, Opie::Core::OResource::SmallIcon ) ) );
+    
     item->setText(2, i->getHardwareName());
     item->setText(3, QString("(%1)").arg(i->getInterfaceName()));
     item->setText(4, (i->getStatus()) ? i->getIp() : QString(""));
@@ -782,7 +774,7 @@ void MainWindowImp::initHostname()
     _procTemp="";
 }
 
-void MainWindowImp::slotHostname(Opie::Core::OProcess *proc, char *buffer, int buflen)
+void MainWindowImp::slotHostname(Opie::Core::OProcess */*proc*/, char *buffer, int buflen)
 {
     if (buflen < 1 || buffer==0) return;
     char*_t = new char[buflen+1];
