@@ -20,8 +20,8 @@
 /* OPIE */
 #ifdef QWS
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 #else
 #include "resource.h"
 #endif
@@ -477,9 +477,9 @@ void MScanListItem::serializeFrom( QDataStream& s )
     _wep = (wep == 'y');
 
     QString name = QString( "wellenreiter/"+ _type );
-    setPixmap( col_type, Resource::loadPixmap( name ) );
+    setPixmap( col_type, Opie::Core::OResource::loadPixmap( name, Opie::Core::OResource::SmallIcon ) );
     if ( _wep )
-        setPixmap( col_wep, Resource::loadPixmap( "wellenreiter/cracked" ) ); //FIXME: rename the pixmap!
+        setPixmap( col_wep, Opie::Core::OResource::loadPixmap( "wellenreiter/cracked", Opie::Core::OResource::SmallIcon ) ); //FIXME: rename the pixmap!
     listView()->triggerUpdate();
 }
 
@@ -494,17 +494,17 @@ void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, 
     // set icon for managed or adhoc mode
     QString name;
     name.sprintf( "wellenreiter/"+ type );
-    setPixmap( col_type, Resource::loadPixmap( name ) );
+    setPixmap( col_type, Opie::Core::OResource::loadPixmap( name, Opie::Core::OResource::SmallIcon ) );
 
     // special case for probed networks FIXME: This is ugly at present
     if ( type == "network" && probed )
     {
-        setPixmap( col_type, Resource::loadPixmap( "wellenreiter/network-probed.png" ) );
+        setPixmap( col_type, Opie::Core::OResource::loadPixmap( "wellenreiter/network-probed", Opie::Core::OResource::SmallIcon ) );
     }
 
     // set icon for wep (wireless encryption protocol)
     if ( wep )
-        setPixmap( col_wep, Resource::loadPixmap( "wellenreiter/cracked" ) ); //FIXME: rename the pixmap!
+        setPixmap( col_wep, Opie::Core::OResource::loadPixmap( "wellenreiter/cracked", Opie::Core::OResource::SmallIcon ) ); //FIXME: rename the pixmap!
 
     // set channel and signal text
 

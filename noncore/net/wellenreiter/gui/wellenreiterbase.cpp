@@ -25,7 +25,7 @@
 #include "graphwindow.h"
 
 #ifdef QWS
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #include <opie2/otabwidget.h>
 using namespace Opie;
 #else
@@ -43,10 +43,10 @@ using namespace Opie::Ui;
 WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
-    //ani1 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot0" ) );
-    //ani2 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot90" ) );
-    //ani3 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot180" ) );
-    //ani4 = new QPixmap( Resource::loadPixmap( "wellenreiter/networks_rot270" ) );
+    //ani1 = new QPixmap( Opie::Core::OResource::loadPixmap( "wellenreiter/networks_rot0", Opie::Core::OResource::SmallIcon ) );
+    //ani2 = new QPixmap( Opie::Core::OResource::loadPixmap( "wellenreiter/networks_rot90", Opie::Core::OResource::SmallIcon ) );
+    //ani3 = new QPixmap( Opie::Core::OResource::loadPixmap( "wellenreiter/networks_rot180", Opie::Core::OResource::SmallIcon ) );
+    //ani4 = new QPixmap( Opie::Core::OResource::loadPixmap( "wellenreiter/networks_rot270", Opie::Core::OResource::SmallIcon ) );
 
     if ( !name )
         setName( "WellenreiterBase" );
@@ -105,7 +105,7 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     PixmapLabel1_3_2->setMargin( 0 );
     PixmapLabel1_3_2->setMidLineWidth( 0 );
 
-    QPixmap logo = Resource::loadPixmap( "wellenreiter/logo" );
+    QPixmap logo = Opie::Core::OResource::loadPixmap( "wellenreiter/logo" );
     QPainter draw( &logo );
     draw.setPen( Qt::black );
     draw.setFont( QFont( "Fixed", 8 ) );

@@ -23,7 +23,7 @@
 
 /* OPIE */
 #ifdef QWS
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #include <opie2/odebug.h>
 #include <opie2/ofiledialog.h>
 #else
@@ -68,45 +68,50 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
     // setup application icon
 
-    setIcon( Resource::loadPixmap( "wellenreiter/appicon-trans" ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "wellenreiter/appicon-trans", Opie::Core::OResource::SmallIcon ) );
     #ifndef QWS
     setIconText( "Wellenreiter/X11" );
     #endif
 
     // setup tool buttons
+    bool useBigIcon = qApp->desktop()->size().width() > 330;
 
     startButton = new QToolButton( 0 );
+    startButton->setUsesBigPixmap( useBigIcon );
     QWhatsThis::add( startButton, tr( "Click here to start scanning." ) );
     #ifdef QWS
     startButton->setAutoRaise( true );
     #endif
-    startButton->setIconSet( Resource::loadIconSet( "wellenreiter/SearchIcon" ) );
+    startButton->setIconSet( Opie::Core::OResource::loadPixmap( "wellenreiter/SearchIcon", Opie::Core::OResource::SmallIcon ) );
     startButton->setEnabled( false );
     connect( startButton, SIGNAL( clicked() ), mw, SLOT( startClicked() ) );
 
     stopButton = new QToolButton( 0 );
+    stopButton->setUsesBigPixmap( useBigIcon );
     QWhatsThis::add( stopButton, tr( "Click here to stop scanning." ) );
     #ifdef QWS
     stopButton->setAutoRaise( true );
     #endif
-    stopButton->setIconSet( Resource::loadIconSet( "wellenreiter/CancelIcon" ) );
+    stopButton->setIconSet( Opie::Core::OResource::loadPixmap( "wellenreiter/CancelIcon", Opie::Core::OResource::SmallIcon ) );
     stopButton->setEnabled( false );
     connect( stopButton, SIGNAL( clicked() ), mw, SLOT( stopClicked() ) );
 
     QToolButton* d = new QToolButton( 0 );
+    d->setUsesBigPixmap( useBigIcon );
     QWhatsThis::add( d, tr( "Click here to open the configure dialog." ) ),
     #ifdef QWS
     d->setAutoRaise( true );
     #endif
-    d->setIconSet( Resource::loadIconSet( "wellenreiter/SettingsIcon" ) );
+    d->setIconSet( Opie::Core::OResource::loadPixmap( "wellenreiter/SettingsIcon", Opie::Core::OResource::SmallIcon ) );
     connect( d, SIGNAL( clicked() ), this, SLOT( showConfigure() ) );
 
     uploadButton = new QToolButton( 0 );
+    uploadButton->setUsesBigPixmap( useBigIcon );
     QWhatsThis::add( uploadButton, tr( "Click here to upload a capture session." ) );
     #ifdef QWS
     uploadButton->setAutoRaise( true );
     #endif
-    uploadButton->setIconSet( Resource::loadIconSet( "up" ) );
+    uploadButton->setIconSet( Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ) );
     uploadButton->setEnabled( false );
     //uploadButton->setEnabled( true ); // DEBUGGING
     connect( uploadButton, SIGNAL( clicked() ), this, SLOT( uploadSession() ) );
