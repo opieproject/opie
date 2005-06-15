@@ -26,7 +26,6 @@
 #include <qpe/config.h>
 #include <qpe/datebookmonth.h>
 
-#include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 
 #include <qtoolbutton.h>

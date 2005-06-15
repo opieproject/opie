@@ -10,6 +10,7 @@
 #define USERDIALOG_H
 
 #include <qdialog.h>
+#include <qimage.h>
 #include <qlineedit.h>
 #include <qcombobox.h>
 #include <qlistview.h>
@@ -17,8 +18,6 @@
 #include <qpushbutton.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
-
-#include <qpe/resource.h>
 
 #include <opie2/ofiledialog.h>
 
