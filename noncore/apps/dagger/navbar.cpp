@@ -20,7 +20,6 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 #include <opie2/oresource.h>
 
 #include <qpe/config.h>
-#include <qpe/resource.h>
 
 #include <qaction.h>
 #include <qlineedit.h>
