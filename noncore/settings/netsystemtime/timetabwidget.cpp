@@ -1,37 +1,41 @@
 /*
-                     This file is part of the OPIE Project
-               =.
-      .=l.            Copyright (c)  2002 OPIE team <opie@handhelds.org?>
-     .>+-=
-_;:,   .>  :=|.         This file is free software; you can
-.> <`_,  > .  <=          redistribute it and/or modify it under
-:`=1 )Y*s>-.--  :           the terms of the GNU General Public
-.="- .-=="i,   .._         License as published by the Free Software
-- .  .-<_>   .<>         Foundation; either version 2 of the License,
-  ._= =}    :          or (at your option) any later version.
-  .%`+i>    _;_.
-  .i_,=:_.   -<s.       This file is distributed in the hope that
-  + . -:.    =       it will be useful, but WITHOUT ANY WARRANTY;
-  : ..  .:,   . . .    without even the implied warranty of
-  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
- _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU General
-..}^=.=    =    ;      Public License for more details.
-++=  -.   .`   .:
-:   = ...= . :.=-        You should have received a copy of the GNU
--.  .:....=;==+<;          General Public License along with this file;
- -_. . .  )=. =           see the file COPYING. If not, write to the
-  --    :-=`           Free Software Foundation, Inc.,
-                             59 Temple Place - Suite 330,
-                             Boston, MA 02111-1307, USA.
+                             This file is part of the Opie Project
 
+                             Copyright (C) Opie Team <opie-devel@handhelds.org>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+:     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
 */
 
 #include "timetabwidget.h"
 
+#include <opie2/oresource.h>
+
+#include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/datebookmonth.h>
 #include <qpe/global.h>
-#include <qpe/resource.h>
 #include <qpe/tzselect.h>
 
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
@@ -109,14 +113,16 @@ TimeTabWidget::TimeTabWidget( QWidget *parent )
 	layout->addItem( new QSpacerItem( 1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding ), 7, 0 );
 
 	// Set NTP time button
-    m_ntpBtn = new QPushButton( Resource::loadPixmap( "netsystemtime/ntptab" ),
+    m_ntpBtn = new QPushButton( Opie::Core::OResource::loadPixmap( "netsystemtime/ntptab", Opie::Core::OResource::SmallIcon ),
                                 tr( "Get time from the network" ), container );
+    m_ntpBtn->setMinimumHeight( AppLnk::smallIconSize()+4 );
 	connect( m_ntpBtn, SIGNAL(clicked()), this, SIGNAL(getNTPTime()) );
 	layout->addMultiCellWidget( m_ntpBtn, 8, 8, 0, 5 );
 
 	// Set predicted time button
-	QPushButton *pb = new QPushButton( Resource::loadPixmap( "netsystemtime/predicttab" ), tr( "Set predicted time" ),
-						  container );
+	QPushButton *pb = new QPushButton( Opie::Core::OResource::loadPixmap( "netsystemtime/predicttab", Opie::Core::OResource::SmallIcon ),
+                                       tr( "Set predicted time" ), container );
+    pb->setMinimumHeight( AppLnk::smallIconSize()+4 );
 	connect( pb, SIGNAL(clicked()), this, SIGNAL(getPredictedTime()) );
 	layout->addMultiCellWidget( pb, 9, 9, 0, 5 );
 
