@@ -6,7 +6,7 @@ TARGET		= example_board
 DESTDIR		= $(OPIEDIR)/plugins/inputmethods
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      +=  ../../launcher
-LIBS            += -lqpe
+LIBS            += -lqpe -lopiecore2
 VERSION		= 1.0.0
 
 include( $(OPIEDIR)/include.pro )

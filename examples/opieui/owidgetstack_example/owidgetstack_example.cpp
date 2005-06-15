@@ -7,7 +7,7 @@
 /* OPIE */
 #include <opie2/oapplicationfactory.h>
 #include <opie2/owidgetstack.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 /* QT */
 #include <qaction.h>
@@ -44,28 +44,28 @@ StackExample::StackExample( QWidget* parent, const char* name, WFlags fl )
     QMenuBar *bar = new QMenuBar( holder );
     QPopupMenu *menu = new QPopupMenu( this );
 
-    QAction* a = new QAction( tr("Show MainWidget"), Resource::loadPixmap("zoom"),
+    QAction* a = new QAction( tr("Show MainWidget"), Opie::Core::OResource::loadPixmap("zoom", Opie::Core::OResource::SmallIcon),
                               QString::null, 0, this, 0 );
     sm->setMapping(a, 1 );
     connect(a, SIGNAL(activated() ),
             sm, SLOT(map() ) );
     a->addTo( menu );
 
-    a = new QAction( tr("Show Details Small"), Resource::loadPixmap("zoom"),
+    a = new QAction( tr("Show Details Small"), Opie::Core::OResource::loadPixmap("zoom", Opie::Core::OResource::SmallIcon),
                      QString::null, 0, this, 0 );
     sm->setMapping(a, 2 );
     connect(a, SIGNAL(activated() ),
             sm, SLOT(map() ) );
     a->addTo( menu );
 
-    a = new QAction( tr("Show Details More"), Resource::loadPixmap("zoom"),
+    a = new QAction( tr("Show Details More"), Opie::Core::OResource::loadPixmap("zoom", Opie::Core::OResource::SmallIcon),
                      QString::null, 0, this, 0 );
     sm->setMapping(a, 3 );
     connect(a, SIGNAL(activated() ),
             sm, SLOT(map() ) );
     a->addTo( menu );
 
-    a =  new QAction( tr("Show Details All"), Resource::loadPixmap("zoom"),
+    a =  new QAction( tr("Show Details All"), Opie::Core::OResource::loadPixmap("zoom", Opie::Core::OResource::SmallIcon),
                       QString::null, 0, this, 0 );
     sm->setMapping(a, 4 );
     connect(a, SIGNAL(activated() ),
@@ -98,7 +98,7 @@ StackExample::StackExample( QWidget* parent, const char* name, WFlags fl )
     m_main = wid;
 
     QLabel *lbl = new QLabel(m_stack );
-    lbl->setText(tr("Only small Details are shown here. Määh") );
+    lbl->setText(tr("Only small Details are shown here. Mï¿½h") );
     m_stack->addWidget( lbl, 2 );
 
     lbl = new QLabel( m_stack );
@@ -106,7 +106,7 @@ StackExample::StackExample( QWidget* parent, const char* name, WFlags fl )
     m_stack->addWidget( lbl, 3 );
 
     lbl = new QLabel( m_stack );
-    lbl->setText( tr("<qt>Ne nicht in Bayerisch Gmain sondern in Berlin<br>Vermiss und meine Augen werden nicht eckig, da mein Bildschirm abgerundet ist<br>Es lebe Hamburg Süd,weiss du, verstehst du? ;)<br>Susi ist dOOf, es lebe die Ofenecke...", "hard to translate that") );
+    lbl->setText( tr("<qt>Ne nicht in Bayerisch Gmain sondern in Berlin<br>Vermiss und meine Augen werden nicht eckig, da mein Bildschirm abgerundet ist<br>Es lebe Hamburg Sd,weiss du, verstehst du? ;)<br>Susi ist dOOf, es lebe die Ofenecke...", "hard to translate that") );
     m_stack->addWidget( lbl, 4 );
 
 

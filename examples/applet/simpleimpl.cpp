@@ -1,10 +1,10 @@
 
 #include "simpleimpl.h"
 
+#include <opie2/oresource.h> // for OResource loading
 #include <opie2/otaskbarapplet.h>
 
 #include <qpe/applnk.h> // for AppLnk
-#include <qpe/resource.h> // for Resource loading
 
 #include <qlabel.h>
 #include <qpainter.h>
@@ -16,35 +16,18 @@
 SimpleApplet::SimpleApplet(QWidget *parent)
     : QWidget( parent,  "Simple Applet" ) {
 /*
- * we will load an Image, scale it for the right usage
+ * we will load an Pixmap, scaled for the right usage
  * remember your applet might be used by different
  * resolutions.
- * Then we will convert the image back to an Pixmap
- * and draw this Pimxap. We need to use Image because its
- * the only class that allows scaling.
  */
 
-    QImage image = Resource::loadImage("Tux");
-    /*
-     * smooth scale to AppLnk smallIconSize for applest
-     * smallIconSize gets adjusted to the resolution
-     * so on some displays like SIMpad and a C-750 the smallIconSize
-     * is greater than on a iPAQ h3870
-     */
-    image = image.smoothScale(AppLnk::smallIconSize(), AppLnk::smallIconSize() );
-
-    /*
-     * now we need to convert the Image to a Pixmap cause these
-     * can be drawn more easily
-     */
-    m_pix = new QPixmap();
-    m_pix->convertFromImage( image );
+    m_pix = new QPixmap( Opie::Core::OResource::loadPixmap("Tux", Opie::Core::OResource::SmallIcon) );
 
     /*
      * Now we will say that we don't want to be bigger than our
      * Pixmap
      */
-    setFixedHeight(AppLnk::smallIconSize() );
+    setFixedHeight( AppLnk::smallIconSize() );
     setFixedWidth( AppLnk::smallIconSize() );
 
 }

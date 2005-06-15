@@ -8,10 +8,10 @@
 This includes qpe stuff which will eventually be merged with libopie2 */
 #include <opie2/odebug.h> // for odebug streams
 #include <opie2/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
+#include <opie2/oresource.h>
 #include <opie2/otabwidget.h>
 #include <opie2/owait.h>
 #include <qpe/qpeapplication.h> // the QPEApplication
-#include <qpe/resource.h>
 #include <qpe/sound.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/datebookmonth.h>
@@ -131,7 +131,7 @@ void MainWindow::initUI() {
     QPopupMenu *fileMenu = new QPopupMenu( this );
 
 
-    QAction *a = new QAction( tr("Quit"), Resource::loadIconSet("quit_icon"),
+    QAction *a = new QAction( tr("Quit"), Opie::Core::OResource::loadPixmap("quit_icon", Opie::Core::OResource::SmallIcon),
                               QString::null, 0, this, "quit_action" );
     /*
      * Connect quit to the QApplication quit slot
@@ -141,7 +141,7 @@ void MainWindow::initUI() {
     a->addTo( fileMenu );
 
     a =  new QAction(tr("View Current"),
-                     Resource::loadIconSet("zoom"),
+                     Opie::Core::OResource::loadPixmap("zoom", Opie::Core::OResource::SmallIcon),
                      QString::null, 0, this, "view current");
     /* a simple whats this online explanation of out button */
     a->setWhatsThis(tr("Views the current record")  );
@@ -153,7 +153,7 @@ void MainWindow::initUI() {
     m_fire = a;
 
     a = new QAction(tr("Choose Date"),
-                    Resource::loadIconSet("day"),
+                    Opie::Core::OResource::loadPixmap("day", Opie::Core::OResource::SmallIcon),
                     QString::null, 0, this, "choose date" );
     a->addTo( fileMenu );
     a->addTo( tb );

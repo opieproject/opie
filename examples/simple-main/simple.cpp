@@ -6,9 +6,9 @@
 #include <qlayout.h>
 
 #include <qpe/qpeapplication.h> // the QPEApplication
-#include <qpe/resource.h>
 
 #include <opie2/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
+#include <opie2/oresource.h>
 
 #include "simple.h"
 
@@ -30,7 +30,7 @@ OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )
 MainWindow::MainWindow(QWidget *parent,  const char* name, WFlags fl )
     : QMainWindow( parent, name, fl ) {
     setCaption(tr("My MainWindow") );
-    setIcon( Resource::loadPixmap("new") );
+    setIcon( Opie::Core::OResource::loadPixmap("new", Opie::Core::OResource::SmallIcon) );
     /*
      * out mainwindow should have a menubar
      * a toolbar, a mainwidget and use Resource
@@ -128,7 +128,7 @@ void MainWindow::initUI() {
      * you musn't prefix inline/ inline means these pics are built in
      * into libqpe so the name without ending and directory is enough
      */
-    QAction *a = new QAction( tr("Quit"), Resource::loadIconSet("quit_icon"),
+    QAction *a = new QAction( tr("Quit"), Opie::Core::OResource::loadPixmap("quit_icon", Opie::Core::OResource::SmallIcon),
                               QString::null, 0, this, "quit_action" );
     /*
      * Connect quit to the QApplication quit slot
@@ -138,7 +138,7 @@ void MainWindow::initUI() {
     a->addTo( fileMenu );
 
    a =  new QAction(tr("Fire"),
-                             Resource::loadIconSet("new"),
+                             Opie::Core::OResource::loadPixmap("new", Opie::Core::OResource::SmallIcon),
                              QString::null, 0, this, "fire_button");
 
     /* see  the power? */

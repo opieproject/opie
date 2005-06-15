@@ -3,7 +3,8 @@
 #include <qlabel.h>
 #include <qsignalmapper.h>
 #include <qpushbutton.h>
-#include <qpe/resource.h>
+
+#include <opie2/oresource.h>
 
 #include "exampleboardimpl.h"
 
@@ -118,7 +119,7 @@ void ExampleboardImpl::resetState()
 QPixmap *ExampleboardImpl::icon()
 {
     if ( !m_icn )
-	m_icn = new QPixmap(Resource::loadPixmap("Tux"));
+	m_icn = new QPixmap(Opie::Core::OResource::loadPixmap("Tux", Opie::Core::OResource::SmallIcon));
     return m_icn;
 }
 

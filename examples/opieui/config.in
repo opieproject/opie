@@ -1,4 +1,4 @@
  config EXAMPLE_LIBOPIE2UI
     boolean "libopieui2 examples"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && EXAMPLES
 

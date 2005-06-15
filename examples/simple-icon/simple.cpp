@@ -3,11 +3,10 @@
 #include <qlayout.h>
 
 #include <qpe/qpeapplication.h> // the QPEApplication
-#include <qpe/resource.h>  // for loading icon
 #include <qpe/sound.h>  // for playing a sound
 
 #include <opie2/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
-
+#include <opie2/oresource.h> // for loading icon
 #include "simple.h"
 
 /*
@@ -53,7 +52,7 @@ Simple::Simple( QWidget* parent, const char* name,  WFlags fl )
      * to find 'logo/opielogo' You need to pass the subdir
      * but not the ending
      */
-    lbl->setPixmap( Resource::loadPixmap("logo/opielogo") );
+    lbl->setPixmap( Opie::Core::OResource::loadPixmap("logo/opielogo", Opie::Core::OResource::SmallIcon) );
     layout->addWidget( lbl );
 
 

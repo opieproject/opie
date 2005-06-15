@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/examples
 Maintainer: Holger 'zecke' Freyther <zecke@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal,  opie-pics
+Depends: task-opie-minimal, libopiecore2, libopieui2, libopiepim2, opie-pics
 Description:  A simple example
 Version: $QPE_VERSION$EXTRAVERSION

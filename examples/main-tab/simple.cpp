@@ -6,10 +6,10 @@
 #include <qlayout.h>
 
 #include <qpe/qpeapplication.h> // the QPEApplication
-#include <qpe/resource.h>
 #include <qpe/sound.h>
 
 #include <opie2/oapplicationfactory.h> // a template + macro to save the main method and allow quick launching
+#include <opie2/oresource.h>
 #include <opie2/otabwidget.h>
 
 #include "simple.h"
@@ -87,7 +87,7 @@ void MainWindow::initUI() {
     QPopupMenu *fileMenu = new QPopupMenu( this );
 
 
-    QAction *a = new QAction( tr("Quit"), Resource::loadIconSet("quit_icon"),
+    QAction *a = new QAction( tr("Quit"), Opie::Core::OResource::loadPixmap("quit_icon", Opie::Core::OResource::SmallIcon),
                               QString::null, 0, this, "quit_action" );
     /*
      * Connect quit to the QApplication quit slot
@@ -96,8 +96,7 @@ void MainWindow::initUI() {
             qApp, SLOT(quit() ) );
     a->addTo( fileMenu );
 
-   a =  new QAction(tr("Fire"),
-                             Resource::loadIconSet("new"),
+   a =  new QAction(tr("Fire"), Opie::Core::OResource::loadPixmap("new", Opie::Core::OResource::SmallIcon),
                              QString::null, 0, this, "fire_button");
 
     /* see  the power? */
@@ -173,11 +172,11 @@ Simple2::Simple2( QWidget* parent, const char* name,  WFlags fl )
      */
     QLabel *lbl = new QLabel( this, "a name for the label" );
     /*
-     * Resource will search hard for a Pixmap in $OPIEDIR/pics
+     * OResource will search hard for a Pixmap in $OPIEDIR/pics
      * to find 'logo/opielogo' You need to pass the subdir
      * but not the ending
      */
-    lbl->setPixmap( Resource::loadPixmap("logo/opielogo") );
+    lbl->setPixmap( Opie::Core::OResource::loadPixmap("logo/opielogo", Opie::Core::OResource::SmallIcon) );
     layout->addWidget( lbl );
 
 

@@ -1,7 +1,6 @@
 #include "example.h"
 
-#include <qpe/applnk.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 /* QT */
 #include <qiconset.h>
@@ -35,11 +34,7 @@ QString MenuAppletExample::text() const
 
 QIconSet MenuAppletExample::icon() const
 {
-    QPixmap pix;
-    QImage img = Resource::loadImage( "Tux" );
-    if ( !img.isNull() )
-        pix.convertFromImage( img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
-    return pix;
+    return Opie::Core::OResource::loadPixmap( "Tux", Opie::Core::OResource::SmallIcon );
 }
 
 QPopupMenu* MenuAppletExample::popup(QWidget*) const
