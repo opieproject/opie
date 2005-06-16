@@ -9,7 +9,7 @@ SOURCES		= flitedyn.cpp
 
 INTERFACES	= 
 DESTDIR		= $(OPIEDIR)/plugins/reader/outcodecs
-TARGET		= flitedyn
+TARGET		= flitedyn16
 LIBS            += -lflite_cmu_us_kal16 -lflite_usenglish -lflite_cmulex -lflite
 
 INCLUDEPATH	+= $(OPIEDIR)/include
