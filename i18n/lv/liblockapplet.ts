@@ -3,11 +3,11 @@
     <name>LockMenuApplet</name>
     <message>
         <source>Lock shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Noslēgšanas īsinājumikona</translation>
     </message>
     <message>
         <source>Lock</source>
-        <translation type="unfinished"></translation>
+        <translation>Noslēgt</translation>
     </message>
 </context>
 </TS>

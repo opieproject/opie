@@ -3,167 +3,167 @@
     <name>Interface</name>
     <message>
         <source>Restarting interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārlaist interfeisu</translation>
     </message>
 </context>
 <context>
     <name>InterfaceAdvanced</name>
     <message>
         <source>Advanced Interface Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Paplašinātā Interfeisa Informācija</translation>
     </message>
     <message>
         <source>eth0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Adrese</translation>
     </message>
     <message>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Interfeis</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Subneta maska</translation>
     </message>
     <message>
         <source>0.0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>DHCP Information</source>
-        <translation type="unfinished"></translation>
+        <translation>DHCP Informācija</translation>
     </message>
     <message>
         <source>DHCP Server</source>
-        <translation type="unfinished"></translation>
+        <translation>DHCP Serveris</translation>
     </message>
     <message>
         <source>Lease Expires</source>
-        <translation type="unfinished"></translation>
+        <translation>Noveco</translation>
     </message>
     <message>
         <source>Lease Obtained</source>
-        <translation type="unfinished"></translation>
+        <translation>Saņemts</translation>
     </message>
     <message>
         <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Izziņošana</translation>
     </message>
     <message>
         <source>MAC Address</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC Adrese</translation>
     </message>
     <message>
         <source>00:00:00:00:00:00</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>InterfaceInformation</name>
     <message>
         <source>Interface Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Interfeisa Informācija</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Adrese</translation>
     </message>
     <message>
         <source>0.0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Subneta Maska</translation>
     </message>
     <message>
         <source>00:00:00:00:00:00</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>MAC Address</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC Adrese</translation>
     </message>
     <message>
         <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Izziņošana</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atjaunot</translation>
     </message>
     <message>
         <source>S&amp;top</source>
-        <translation type="unfinished"></translation>
+        <translation>Ap&amp;stādināt</translation>
     </message>
     <message>
         <source>R&amp;estart</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pārstartēt</translation>
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Startēt</translation>
     </message>
     <message>
         <source>&amp;View Advanced Information</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Skatīt Paplašināto Informāciju</translation>
     </message>
     <message>
         <source>be &amp;silent</source>
-        <translation type="unfinished"></translation>
+        <translation>būt &amp;klusam</translation>
     </message>
 </context>
 <context>
     <name>InterfaceSetup</name>
     <message>
         <source>Interface Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Intefeisa Konfigurācija</translation>
     </message>
     <message>
         <source>Automatically bring up</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivizēt automātiski</translation>
     </message>
     <message>
         <source>DHCP</source>
-        <translation type="unfinished"></translation>
+        <translation>DHCP</translation>
     </message>
     <message>
         <source>Static Ip Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Statiskā IP Konfigurācija</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Subneta Maska</translation>
     </message>
     <message>
         <source>255.255.255.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>First DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Pirmais DNS</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Adrese</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Pāreja</translation>
     </message>
     <message>
         <source>Second DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Otrs DNS</translation>
     </message>
 </context>
 <context>
     <name>InterfaceSetupImp</name>
     <message>
         <source>Restarting interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Pārlaist interfeisu</translation>
     </message>
 </context>
 </TS>

@@ -3,23 +3,23 @@
     <name>OpieTooth::BluezApplet</name>
     <message>
         <source>Disable Bluetooth</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizliegt Bluetooth</translation>
     </message>
     <message>
         <source>Enable Bluetooth</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut Bluetooth</translation>
     </message>
     <message>
         <source>Launch manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Palaist menedžeri</translation>
     </message>
     <message>
         <source>Disable discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Azliegt atklāšanu</translation>
     </message>
     <message>
         <source>Enable discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut atklāšanu</translation>
     </message>
 </context>
 </TS>
