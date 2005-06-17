@@ -49,7 +49,7 @@ using namespace Opie::Core;
 
 #define PROC_DEVICES "/proc/devices"
 
-#define OPCMCIA_DEBUG 1
+// #define OPCMCIA_DEBUG 1
 
 /*======================================================================================
  * OPcmciaSystem
@@ -305,31 +305,31 @@ bool OPcmciaSocket::isSuspended() const
 
 bool OPcmciaSocket::eject()
 {
-    return ::ioctl( _fd, DS_EJECT_CARD );
+    return ::ioctl( _fd, DS_EJECT_CARD ) != -1;
 }
 
 
 bool OPcmciaSocket::insert()
 {
-    return ::ioctl( _fd, DS_INSERT_CARD );
+    return ::ioctl( _fd, DS_INSERT_CARD ) != -1;
 }
 
 
 bool OPcmciaSocket::suspend()
 {
-    return ::ioctl( _fd, DS_SUSPEND_CARD );
+    return ::ioctl( _fd, DS_SUSPEND_CARD ) != -1;
 }
 
 
 bool OPcmciaSocket::resume()
 {
-    return ::ioctl( _fd, DS_RESUME_CARD );
+    return ::ioctl( _fd, DS_RESUME_CARD ) != -1;
 }
 
 
 bool OPcmciaSocket::reset()
 {
-    return ::ioctl( _fd, DS_RESET_CARD );
+    return ::ioctl( _fd, DS_RESET_CARD ) != -1;
 }
 
 

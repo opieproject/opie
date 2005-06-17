@@ -57,6 +57,7 @@ using namespace Opie::Ui;
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 #include <fcntl.h>
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
 #include <sys/vfs.h>
@@ -136,8 +137,8 @@ void PcmciaManager::mousePressEvent( QMouseEvent* )
 
         submenu->setItemEnabled( EJECT+i*100, !it.current()->isEmpty() );
         submenu->setItemEnabled( INSERT+i*100, it.current()->isEmpty() );
-        submenu->setItemEnabled( SUSPEND+i*100, !it.current()->isEmpty() && !it.current()->isSuspended() );
-        submenu->setItemEnabled( RESUME+i*100, !it.current()->isEmpty() && it.current()->isSuspended() );
+        submenu->setItemEnabled( SUSPEND+i*100, !it.current()->isEmpty() && it.current()->isSuspended() );
+        submenu->setItemEnabled( RESUME+i*100, !it.current()->isEmpty() && !it.current()->isSuspended() );
         submenu->setItemEnabled( CONFIGURE+i*100, !it.current()->isEmpty() && !configuring );
 
         connect( submenu, SIGNAL(activated(int)), this, SLOT(userCardAction(int)) );
@@ -259,7 +260,7 @@ void PcmciaManager::execCommand( const QStringList &strList )
 
 void PcmciaManager::userCardAction( int action )
 {
-    odebug << "user action requested. action = " << action << oendl;
+    odebug << "user action on socket " << action / 100 << " requested. action = " << action << oendl;
 
     int socket = action / 100;
     int what = action % 100;
@@ -278,7 +279,7 @@ void PcmciaManager::userCardAction( int action )
 
     if ( !success )
     {
-        owarn << "couldn't perform user action" << oendl;
+        owarn << "couldn't perform user action (" << strerror( errno ) << ")" << oendl;
     }
 
 }
