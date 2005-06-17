@@ -183,8 +183,8 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
         }
         else
         {
-            OPcmciaSocket* theCard = it.current();
-            QString cardName = theCard->identity();
+            theCard = it.current();
+            QString cardName = theCard->productIdentity().join( " " );
             for ( int i = 0; i < nCards; ++i )
             {
                 QString cardSection = QString( "Card_%1" ).arg( i );
@@ -204,7 +204,7 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
     {
         odebug << "pcmcia: new card detected" << oendl;
         cfg.setGroup( QString( "Card_%1" ).arg( nCards ) );
-        cfg.writeEntry( "name", theCard->identity() );
+        cfg.writeEntry( "name", theCard->productIdentity().join( " " ) );
         cfg.writeEntry( "insert", "suspend" );
         cfg.setGroup( "Global" );
         cfg.writeEntry( "nCards", nCards+1 );
@@ -212,7 +212,7 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
 
         int result = QMessageBox::information( qApp->desktop(),
                                            tr( "PCMCIA/CF Subsystem" ),
-                                           tr( "You have inserted a new card:\n%1\nDo you want to configure?" ).arg( theCard->identity() ),
+                                           tr( "You have inserted a new card:\n%1\nDo you want to configure?" ).arg( theCard->productIdentity().join( " " ) ),
                                            tr( "Yes" ), tr( "No" ), 0, 0, 1 );
         odebug << "result = " << result << oendl;
         if ( result == 0 )
@@ -221,7 +221,7 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
         }
         else
         {
-            odebug << "pcmcia: user doesn't want to configure " << theCard->identity() << " now." << oendl;
+            odebug << "pcmcia: user doesn't want to configure " << theCard->productIdentity().join( " " ) << " now." << oendl;
         }
     }
     else
@@ -263,12 +263,24 @@ void PcmciaManager::userCardAction( int action )
 
     int socket = action / 100;
     int what = action % 100;
+    bool success = false;
 
     switch ( what )
     {
-        case CONFIGURE: configure( OPcmciaSystem::instance()->socket( socket ) ); break;
-        default: odebug << "not yet implemented";
+        case CONFIGURE: configure( OPcmciaSystem::instance()->socket( socket ) ); success = true; break;
+        case EJECT: success = OPcmciaSystem::instance()->socket( socket )->eject(); break;
+        case INSERT: success = OPcmciaSystem::instance()->socket( socket )->insert(); break;
+        case SUSPEND: success = OPcmciaSystem::instance()->socket( socket )->suspend(); break;
+        case RESUME: success = OPcmciaSystem::instance()->socket( socket )->resume(); break;
+        case RESET: success = OPcmciaSystem::instance()->socket( socket )->reset(); break;
+        default: odebug << "not yet implemented" << oendl;
     }
+
+    if ( !success )
+    {
+        owarn << "couldn't perform user action" << oendl;
+    }
+
 }
 
 void PcmciaManager::configure( OPcmciaSocket* card )
