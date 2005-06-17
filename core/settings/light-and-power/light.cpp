@@ -172,9 +172,9 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 
     // warnings
     config. setGroup ( "Warnings" );
-    warnintervalBox-> setValue ( config. readNumEntry ( "checkinterval", 10000 ) / 1000 );
-    lowSpinBox->      setValue ( config. readNumEntry ( "powerverylow", 10 ) );
-    criticalSpinBox-> setValue ( config. readNumEntry ( "powercritical", 5 ) );
+    warnintervalBox-> setValue ( config. readNumEntry ( "check_interval", 10000 ) / 1000 );
+    lowSpinBox->      setValue ( config. readNumEntry ( "power_verylow", 10 ) );
+    criticalSpinBox-> setValue ( config. readNumEntry ( "power_critical", 5 ) );
 
     m_resettimer = new QTimer ( this );
     connect ( m_resettimer, SIGNAL( timeout()), this, SLOT( resetBacklight()));
