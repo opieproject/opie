@@ -20,6 +20,7 @@
 	* #1476 - Wrong order of application entries in the O-menu (skyhusker)
 	* #1535	- Missing line break and unnecessary location shown with Today-Calendar plugin (deller)
 	* #1546 - Battery applet popup is not always large enough to show jacket remaining info (skyhusker)
+	* #1557 - Light&Power-Settings don't store warning intervall and warning levels (skyhusker)
 	* #1565 - crash-fix in odevice.cpp while scanning the distribution table (deller)
 	* #1614 - Make Opie-console start in $HOME instead of / (skyhusker)
 	* #1635 - opie-today, datebook-plugin does not show notes (skyhusker)
