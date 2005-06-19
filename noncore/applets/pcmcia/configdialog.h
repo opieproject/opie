@@ -38,9 +38,9 @@ class ConfigDialog : public ConfigDialogBase
 {
   Q_OBJECT
   public:
-
     ConfigDialog( const Opie::Core::OPcmciaSocket* card, QWidget* parent );
     ~ConfigDialog();
+    static QString preferredAction( const Opie::Core::OPcmciaSocket* card );
 };
 
 #endif

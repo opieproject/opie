@@ -203,31 +203,42 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
     }
     if ( newCard )
     {
-        odebug << "pcmcia: new card detected" << oendl;
-        cfg.setGroup( QString( "Card_%1" ).arg( nCards ) );
-        cfg.writeEntry( "name", theCard->productIdentity().join( " " ) );
-        cfg.writeEntry( "insert", "suspend" );
-        cfg.setGroup( "Global" );
-        cfg.writeEntry( "nCards", nCards+1 );
-        cfg.write();
-
+        odebug << "pcmcia: unconfigured card detected" << oendl;
+        QString newCardName = theCard->productIdentity().join( " " ).stripWhiteSpace();
         int result = QMessageBox::information( qApp->desktop(),
                                            tr( "PCMCIA/CF Subsystem" ),
-                                           tr( "You have inserted a new card:\n%1\nDo you want to configure?" ).arg( theCard->productIdentity().join( " " ) ),
+                                           tr( "<qt>You have inserted the card '%1'. This card is not yet configured. Do you want to configure it now?</qt>" ).arg( newCardName ),
                                            tr( "Yes" ), tr( "No" ), 0, 0, 1 );
         odebug << "result = " << result << oendl;
         if ( result == 0 )
         {
-            configure( theCard );
+            bool configured = configure( theCard );
+
+            if ( configured )
+            {
+                odebug << "card has been configured. writing out to dabase" << oendl;
+                cfg.setGroup( QString( "Card_%1" ).arg( nCards ) );
+                cfg.writeEntry( "name", newCardName );
+                cfg.writeEntry( "insert", "suspend" );
+                cfg.setGroup( "Global" );
+                cfg.writeEntry( "nCards", nCards+1 );
+                cfg.write();
+            }
+            else
+            {
+                odebug << "card has not been configured this time. leaving as unknown card" << oendl;
+            }
         }
         else
         {
-            odebug << "pcmcia: user doesn't want to configure " << theCard->productIdentity().join( " " ) << " now." << oendl;
+            odebug << "pcmcia: user doesn't want to configure " << newCardName << " now." << oendl;
         }
     }
-    else
+    else // it's an already configured card
     {
-        odebug << "pcmcia: card has been previously inserted" << oendl;
+        QString action = ConfigDialog::preferredAction( theCard );
+        odebug << "pcmcia: card has been previously configured" << oendl;
+        odebug << "pcmcia: need to perform action'" << action << "' now... sorry, not yet implemented..." << oendl;
     }
     repaint( true );
 }
@@ -284,13 +295,14 @@ void PcmciaManager::userCardAction( int action )
 
 }
 
-void PcmciaManager::configure( OPcmciaSocket* card )
+bool PcmciaManager::configure( OPcmciaSocket* card )
 {
     configuring = true;
     ConfigDialog dialog( card, qApp->desktop() );
     int configresult = QPEApplication::execDialog( &dialog, false );
     configuring = false;
     odebug << "pcmcia: configresult = " << configresult << oendl;
+    return configresult;
 }
 
 
