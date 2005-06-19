@@ -94,7 +94,10 @@ void OPcmciaSystem::synchronize()
     qDebug( "OPcmciaSystem::synchronize()" );
     _interfaces.clear();
 
-    //FIXME: Use cardmgr subsystem ioctls
+    //NOTE: We _could_ use ioctl's here as well, however we want to know if
+    //      the card is recognized by the cardmgr (hence has a valid binding)
+    //      If it is not recognized yet, userland may want to provide a configuration dialog
+    //TODO: Revise for pcmciautils
 
     QString fileName;
     if ( QFile::exists( "/var/run/stab" ) ) { fileName = "/var/run/stab"; }
