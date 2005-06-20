@@ -32,26 +32,26 @@ using namespace Opie::Core;
 #include <sys/ioctl.h>
 #include <linux/vt.h>
 
-VTApplet::VTApplet ( )
-    : QObject ( 0, "VTApplet" )
+VTApplet::VTApplet()
+         :QObject( 0, "VTApplet" ), m_ourVT( 0 )
 {
 }
 
-VTApplet::~VTApplet ( )
+VTApplet::~VTApplet()
 {
 }
 
-int VTApplet::position ( ) const
+int VTApplet::position() const
 {
     return 2;
 }
 
-QString VTApplet::name ( ) const
+QString VTApplet::name() const
 {
     return tr( "VT shortcut" );
 }
 
-QString VTApplet::text ( ) const
+QString VTApplet::text() const
 {
     return tr( "Terminal" );
 }
@@ -68,13 +68,13 @@ QString VTApplet::tr( const char* s, const char* p ) const
 }
 */
 
-QIconSet VTApplet::icon ( ) const
+QIconSet VTApplet::icon() const
 {
     QPixmap pix = Opie::Core::OResource::loadPixmap( "terminal", Opie::Core::OResource::SmallIcon );
     return pix;
 }
 
-QPopupMenu *VTApplet::popup ( QWidget* parent ) const
+QPopupMenu *VTApplet::popup( QWidget* parent ) const
 {
     odebug << "VTApplet::popup" << oendl;
 
@@ -96,6 +96,8 @@ QPopupMenu *VTApplet::popup ( QWidget* parent ) const
     }
     ::close( fd );
 
+    m_ourVT = vtstat.v_active;
+
     connect( m_subMenu, SIGNAL( activated(int) ), this, SLOT( changeVT(int) ) );
     connect( m_subMenu, SIGNAL( aboutToShow() ), this, SLOT( updateMenu() ) );
 
@@ -114,6 +116,11 @@ void VTApplet::changeVT( int index )
 #endif
     if ( fd == -1 ) return;
     ioctl( fd, VT_ACTIVATE, index-500 );
+    if ( m_ourVT )
+    {
+        odebug << "VTApplet::waiting for user to return to VT " << m_ourVT << oendl;
+        ioctl( fd, VT_WAITACTIVE, m_ourVT );
+    }
 }
 
 
@@ -148,7 +155,7 @@ void VTApplet::activated()
 }
 
 
-QRESULT VTApplet::queryInterface ( const QUuid &uuid, QUnknownInterface **iface )
+QRESULT VTApplet::queryInterface( const QUuid &uuid, QUnknownInterface **iface )
 {
     *iface = 0;
     if ( uuid == IID_QUnknown )

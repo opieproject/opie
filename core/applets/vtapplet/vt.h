@@ -46,6 +46,7 @@ public slots:
     virtual void updateMenu();
 private:
     mutable QPopupMenu* m_subMenu;
+    mutable int m_ourVT;
 };
 
 
