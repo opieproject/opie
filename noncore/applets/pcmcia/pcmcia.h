@@ -54,7 +54,7 @@ class PcmciaManager : public QWidget
     void mousePressEvent( QMouseEvent * );
 
   private:
-    bool configure( Opie::Core::OPcmciaSocket* );
+    bool configure( Opie::Core::OPcmciaSocket*, QString&, QString&, QString&, QString& );
     void execCommand( const QStringList &command );
     void popUp(QString message, QString icon = QString::null );
 

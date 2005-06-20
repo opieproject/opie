@@ -34,13 +34,18 @@
 
 namespace Opie { namespace Core { class OPcmciaSocket; }; };
 
+typedef QMap<QString,QString> StringMap;
+
 class ConfigDialog : public ConfigDialogBase
 {
   Q_OBJECT
   public:
     ConfigDialog( const Opie::Core::OPcmciaSocket* card, QWidget* parent );
     ~ConfigDialog();
-    static QString preferredAction( const Opie::Core::OPcmciaSocket* card );
+    static QString preferredAction( const Opie::Core::OPcmciaSocket* card, const QString& type );
+    static QString readConfigEntry( const Opie::Core::OPcmciaSocket* card, const QString& key, const QString& defaultValue );
+    static void writeConfigEntry( const Opie::Core::OPcmciaSocket* card, const QString& key, const QString& value );
+    StringMap bindEntries;
 };
 
 #endif

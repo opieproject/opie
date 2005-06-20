@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>215</width>
+            <width>211</width>
             <height>329</height>
         </rect>
     </property>
@@ -28,7 +28,7 @@
     <grid>
         <property stdset="1">
             <name>margin</name>
-            <number>5</number>
+            <number>6</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
@@ -148,60 +148,7 @@
                 </widget>
             </grid>
         </widget>
-        <widget row="1"  column="0" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>TextLabel2</cstring>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>On insertion,</string>
-            </property>
-        </widget>
-        <widget row="1"  column="1" >
-            <class>QComboBox</class>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>suspend</string>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>activate</string>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>eject</string>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>prompt for</string>
-                </property>
-            </item>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>cbAction</cstring>
-            </property>
-        </widget>
-        <widget row="1"  column="2" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>TextLabel3</cstring>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>card</string>
-            </property>
-        </widget>
-        <widget row="4"  column="0" >
+        <widget row="5"  column="0" >
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
@@ -212,7 +159,7 @@
                 <string>Bind to:</string>
             </property>
         </widget>
-        <widget row="4"  column="1"  rowspan="1"  colspan="2" >
+        <widget row="5"  column="1"  rowspan="1"  colspan="2" >
             <class>QComboBox</class>
             <item>
                 <property>
@@ -244,7 +191,7 @@
                 <bool>false</bool>
             </property>
         </widget>
-        <widget row="3"  column="0"  rowspan="1"  colspan="3" >
+        <widget row="4"  column="0"  rowspan="1"  colspan="3" >
             <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
@@ -271,7 +218,51 @@
                 <string>&lt;qt&gt;CAUTION: This card is not yet recognized by your system. Without a valid binding, your card may not function correctly. Please choose a driver to bind the card to below:&lt;/qt&gt;</string>
             </property>
         </widget>
-        <spacer row="2"  column="1" >
+        <widget row="1"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>On insertion,</string>
+            </property>
+        </widget>
+        <widget row="1"  column="2" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel3</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>card</string>
+            </property>
+        </widget>
+        <widget row="2"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel2_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>On resume,</string>
+            </property>
+        </widget>
+        <widget row="2"  column="2" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>TextLabel3_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>card</string>
+            </property>
+        </widget>
+        <spacer row="3"  column="1" >
             <property>
                 <name>name</name>
                 <cstring>Spacer2</cstring>
@@ -292,6 +283,68 @@
                 </size>
             </property>
         </spacer>
+        <widget row="1"  column="1" >
+            <class>QComboBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>suspend</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>activate</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>eject</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>prompt for</string>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>cbInsertAction</cstring>
+            </property>
+        </widget>
+        <widget row="2"  column="1" >
+            <class>QComboBox</class>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>suspend</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>activate</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>eject</string>
+                </property>
+            </item>
+            <item>
+                <property>
+                    <name>text</name>
+                    <string>prompt for</string>
+                </property>
+            </item>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>cbResumeAction</cstring>
+            </property>
+        </widget>
     </grid>
 </widget>
 </UI>

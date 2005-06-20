@@ -39,11 +39,13 @@
 #include <opie2/oresource.h>
 #include <opie2/otaskbarapplet.h>
 #include <qpe/applnk.h>
+#include <qpe/global.h>
 #include <qpe/resource.h>
 using namespace Opie::Core;
 using namespace Opie::Ui;
 
 /* QT */
+#include <qcombobox.h>
 #include <qcopchannel_qws.h>
 #include <qpainter.h>
 #include <qfile.h>
@@ -178,7 +180,7 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
     {
         if ( it.current()->isEmpty() )
         {
-            odebug << "skipping empty card in socket " << it.current()->number() << oendl;
+            odebug << "pcmcia: skipping empty card in socket " << it.current()->number() << oendl;
             ++it;
             continue;
         }
@@ -191,7 +193,7 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
                 QString cardSection = QString( "Card_%1" ).arg( i );
                 cfg.setGroup( cardSection );
                 QString name = cfg.readEntry( "name" );
-                odebug << "comparing card '" << cardName << "' with known card '" << name << "'" << oendl;
+                odebug << "pcmcia: comparing card '" << cardName << "' with known card '" << name << "'" << oendl;
                 if ( cardName == name )
                 {
                     newCard = false;
@@ -207,26 +209,50 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
         QString newCardName = theCard->productIdentity().join( " " ).stripWhiteSpace();
         int result = QMessageBox::information( qApp->desktop(),
                                            tr( "PCMCIA/CF Subsystem" ),
-                                           tr( "<qt>You have inserted the card '%1'. This card is not yet configured. Do you want to configure it now?</qt>" ).arg( newCardName ),
+                                           tr( "<qt>You have inserted the card<br/><b>%1</b><br/>This card is not yet configured. Do you want to configure it now?</qt>" ).arg( newCardName ),
                                            tr( "Yes" ), tr( "No" ), 0, 0, 1 );
-        odebug << "result = " << result << oendl;
+        odebug << "pcmcia: result = " << result << oendl;
         if ( result == 0 )
         {
-            bool configured = configure( theCard );
+            QString insertAction; QString resumeAction; QString driver; QString conf;
+            bool configured = configure( theCard, insertAction, resumeAction, driver, conf );
 
             if ( configured )
             {
-                odebug << "card has been configured. writing out to dabase" << oendl;
+                odebug << "pcmcia: card has been configured. writing out to database" << oendl;
                 cfg.setGroup( QString( "Card_%1" ).arg( nCards ) );
                 cfg.writeEntry( "name", newCardName );
-                cfg.writeEntry( "insert", "suspend" );
+                cfg.writeEntry( "insertAction", insertAction );
+                cfg.writeEntry( "resumeAction", resumeAction );
                 cfg.setGroup( "Global" );
                 cfg.writeEntry( "nCards", nCards+1 );
                 cfg.write();
+
+                QFile confFile( QString( "/etc/pcmcia/%1" ).arg( conf ) );
+                if ( confFile.open( IO_ReadWrite | IO_Append ) )
+                {
+                    QString entryCard = QString( "card \"%1\"" ).arg( newCardName );
+                    QString entryVersion( "    version " );
+                    for ( QStringList::Iterator it = theCard->productIdentity().begin(); it != theCard->productIdentity().end(); ++it )
+                    {
+                        entryVersion += QString( "\"%1\", " ).arg( *it );
+                    }
+                    QString entryBind = QString( "    bind %1" ).arg( driver );
+                    QString entry = QString( "\n%1\n%2\n%3\n" ).arg( entryCard ).arg( entryVersion ).arg( entryBind );
+                    odebug << "pcmcia: writing entry...:" << entry << oendl;
+
+                    confFile.writeBlock( (const char*) entry, entry.length() );
+                    Global::statusMessage( "restarting pcmcia services..." );
+                    ::system( "/etc/init.d/pcmcia restart" );
+                }
+                else
+                {
+                    owarn << "pcmcia: couldn't write binding to '" << conf << "'." << oendl;
+                }
             }
             else
             {
-                odebug << "card has not been configured this time. leaving as unknown card" << oendl;
+                odebug << "pcmcia: card has not been configured this time. leaving as unknown card" << oendl;
             }
         }
         else
@@ -236,9 +262,9 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
     }
     else // it's an already configured card
     {
-        QString action = ConfigDialog::preferredAction( theCard );
+        QString insertAction = ConfigDialog::preferredAction( theCard, "insert" );
         odebug << "pcmcia: card has been previously configured" << oendl;
-        odebug << "pcmcia: need to perform action'" << action << "' now... sorry, not yet implemented..." << oendl;
+        odebug << "pcmcia: TODO: need to perform action'" << insertAction << "' now... sorry, not yet implemented..." << oendl;
     }
     repaint( true );
 }
@@ -271,7 +297,7 @@ void PcmciaManager::execCommand( const QStringList &strList )
 
 void PcmciaManager::userCardAction( int action )
 {
-    odebug << "user action on socket " << action / 100 << " requested. action = " << action << oendl;
+    odebug << "pcmcia: user action on socket " << action / 100 << " requested. action = " << action << oendl;
 
     int socket = action / 100;
     int what = action % 100;
@@ -279,29 +305,42 @@ void PcmciaManager::userCardAction( int action )
 
     switch ( what )
     {
-        case CONFIGURE: configure( OPcmciaSystem::instance()->socket( socket ) ); success = true; break;
+        case CONFIGURE:
+        {
+            QString insertAction; QString resumeAction; QString driver; QString conf;
+            bool result = configure( OPcmciaSystem::instance()->socket( socket ), insertAction, resumeAction, driver, conf );
+            success = true;
+            break;
+        }
         case EJECT: success = OPcmciaSystem::instance()->socket( socket )->eject(); break;
         case INSERT: success = OPcmciaSystem::instance()->socket( socket )->insert(); break;
         case SUSPEND: success = OPcmciaSystem::instance()->socket( socket )->suspend(); break;
         case RESUME: success = OPcmciaSystem::instance()->socket( socket )->resume(); break;
         case RESET: success = OPcmciaSystem::instance()->socket( socket )->reset(); break;
-        default: odebug << "not yet implemented" << oendl;
+        default: odebug << "pcmcia: not yet implemented" << oendl;
     }
 
     if ( !success )
     {
-        owarn << "couldn't perform user action (" << strerror( errno ) << ")" << oendl;
+        owarn << "pcmcia: couldn't perform user action (" << strerror( errno ) << ")" << oendl;
     }
 
 }
 
-bool PcmciaManager::configure( OPcmciaSocket* card )
+bool PcmciaManager::configure( OPcmciaSocket* card, QString& insertAction, QString& resumeAction, QString& driver, QString& conf )
 {
     configuring = true;
     ConfigDialog dialog( card, qApp->desktop() );
     int configresult = QPEApplication::execDialog( &dialog, false );
     configuring = false;
     odebug << "pcmcia: configresult = " << configresult << oendl;
+    if ( configresult )
+    {
+        insertAction = dialog.cbInsertAction->currentText();
+        resumeAction = dialog.cbResumeAction->currentText();
+        driver = dialog.cbBindTo->currentText();
+        conf = dialog.bindEntries[driver];
+    }
     return configresult;
 }
 

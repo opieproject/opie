@@ -51,19 +51,27 @@ ConfigDialog::ConfigDialog( const OPcmciaSocket* card, QWidget* parent )
     txtManfid->setText( card->manufacturerIdentity() );
     txtFunction->setText( card->function() );
 
-    QString action = preferredAction( card );
+    QString insertAction = preferredAction( card, "insert" );
+    QString resumeAction = preferredAction( card, "resume" );
 
-    odebug << "preferred action for card '" << card->name() << "' seems to be '" << action << "'" << oendl;
+    odebug << "pcmcia: preferred insertion action for card '" << card->name() << "' seems to be '" << insertAction << "'" << oendl;
+    odebug << "pcmcia: preferred resume    action for card '" << card->name() << "' seems to be '" << resumeAction << "'" << oendl;
 
-    if ( !action.isEmpty() )
+    if ( !insertAction.isEmpty() )
     {
-        for ( int i; i < cbAction->count(); ++i )
-            if ( cbAction->text( i ) == action ) cbAction->setCurrentItem( i );
+        for ( int i; i < cbInsertAction->count(); ++i )
+            if ( cbInsertAction->text( i ) == insertAction ) cbInsertAction->setCurrentItem( i );
+    }
+
+    if ( !resumeAction.isEmpty() )
+    {
+        for ( int i; i < cbResumeAction->count(); ++i )
+            if ( cbResumeAction->text( i ) == resumeAction ) cbResumeAction->setCurrentItem( i );
     }
 
     if ( !card->isUnsupported() )
     {
-        odebug << "card is recognized - hiding bindings" << oendl;
+        odebug << "pcmcia: card is recognized - hiding bindings" << oendl;
         textInfo->hide();
         textBindTo->hide();
         cbBindTo->hide();
@@ -78,9 +86,6 @@ ConfigDialog::ConfigDialog( const OPcmciaSocket* card, QWidget* parent )
     }
 
     // parse possible bind entries out of /etc/pcmcia/*.conf
-    typedef QMap<QString,QString> StringMap;
-    StringMap bindEntries;
-
     QDir pcmciaconfdir( "/etc/pcmcia", "*.conf" );
 
     for ( unsigned int i = 0; i < pcmciaconfdir.count(); ++i )
@@ -122,7 +127,7 @@ ConfigDialog::~ConfigDialog()
 {
 }
 
-QString ConfigDialog::preferredAction( const OPcmciaSocket* card )
+void ConfigDialog::writeConfigEntry( const OPcmciaSocket* card, const QString& key, const QString& value )
 {
     OConfig cfg( "PCMCIA" );
     cfg.setGroup( "Global" );
@@ -137,10 +142,36 @@ QString ConfigDialog::preferredAction( const OPcmciaSocket* card )
         odebug << "comparing card '" << card->name() << "' with known card '" << name << "'" << oendl;
         if ( card->name() == name )
         {
-            action = cfg.readEntry( "action" );
+            cfg.writeEntry( key, value );
             break;
         }
     }
+}
 
-    return action;
+QString ConfigDialog::readConfigEntry( const OPcmciaSocket* card, const QString& key, const QString& defaultValue )
+{
+    OConfig cfg( "PCMCIA" );
+    cfg.setGroup( "Global" );
+    int nCards = cfg.readNumEntry( "nCards", 0 );
+    QString value;
+
+    for ( int i = 0; i < nCards; ++i )
+    {
+        QString cardSection = QString( "Card_%1" ).arg( i );
+        cfg.setGroup( cardSection );
+        QString name = cfg.readEntry( "name" );
+        odebug << "comparing card '" << card->name() << "' with known card '" << name << "'" << oendl;
+        if ( card->name() == name )
+        {
+            value = cfg.readEntry( key, defaultValue );
+            break;
+        }
+    }
+    return value;
+}
+
+
+QString ConfigDialog::preferredAction( const OPcmciaSocket* card, const QString& type )
+{
+    return ConfigDialog::readConfigEntry( card, QString( "%1Action" ).arg( type ), "suspend" );
 }
