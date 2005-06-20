@@ -16,6 +16,8 @@
 
 	Fixed Bugs
 	----------
+    * #1377 - Suspend Powermanagement when switched to another VT (mickeyl)
+              We actually suspend the complete Opie now in that case.
 	* #1384 - Battery status updated improperly when charging (skyhusker)
 	* #1476 - Wrong order of application entries in the O-menu (skyhusker)
 	* #1535	- Missing line break and unnecessary location shown with Today-Calendar plugin (deller)
