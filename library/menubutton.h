@@ -59,7 +59,6 @@ private:
     void init();
     QStringList txts;
     QMenu* pop;
-    int nitems;
     int cur;
     QString lab;
     void updateLabel();

@@ -88,10 +88,8 @@ void MenuButton::init()
 {
     setAutoDefault(FALSE);
     pop = new QMenu(this);
-    nitems=0;
     connect(pop, SIGNAL(activated(int)), this, SLOT(select(int)));
-    setPopup(pop);
-    //setPopupDelay(0);
+    setMenu(pop);
 }
 
 /*!
@@ -127,8 +125,7 @@ void MenuButton::insertItems( const QStringList& items )
 */
 void MenuButton::insertItem( const QIcon& icon, const QString& text )
 {
-    pop->insertItem(icon, text, nitems++);
-//    if ( nitems==1 ) select(0);
+	pop->addAction(icon, text);
 }
 
 /*!
@@ -139,8 +136,7 @@ void MenuButton::insertItem( const QIcon& icon, const QString& text )
 */
 void MenuButton::insertItem( const QString& text )
 {
-    pop->insertItem(text, nitems++);
-//    if ( nitems==1 ) select(0);
+    pop->addAction(text);
 }
 
 /*!
@@ -150,7 +146,7 @@ void MenuButton::insertItem( const QString& text )
 */
 void MenuButton::insertSeparator()
 {
-    pop->insertSeparator();
+    pop->addSeparator();
 }
 
 /*!
@@ -158,11 +154,11 @@ void MenuButton::insertSeparator()
 */
 void MenuButton::select(const QString& s)
 {
-    for (int i=0; i<nitems; i++) {
-  if ( pop->text(i) == s ) {
-      select(i);
-      break;
-  }
+    for (int i=0; i<pop->actions().count(); i++) {
+        if ( pop->actions()[i]->text() == s ) {
+            select(i);
+            break;
+        }
     }
 }
 
@@ -174,8 +170,7 @@ void MenuButton::select(int s)
 {
     cur = s;
     updateLabel();
-    if ( pop->iconSet(cur) )
-  setIconSet(*pop->iconSet(cur));
+    setIcon(pop->actions()[cur]->icon());
     emit selected(cur);
     emit selected(currentText());
 }
@@ -193,7 +188,7 @@ int MenuButton::currentItem() const
 */
 QString MenuButton::currentText() const
 {
-    return pop->text(cur);
+    return pop->activeAction()->text();
 }
 
 /*!
@@ -211,7 +206,7 @@ void MenuButton::updateLabel()
 {
     if(useLabel)
       {
-          QString t = pop->text(cur);
+          QString t = pop->actions()[cur]->text();
           if ( !lab.isEmpty() )
               t = lab.arg(t);
           setText(t);
@@ -224,8 +219,7 @@ void MenuButton::updateLabel()
  */
 void MenuButton::remove(int id)
 {
-     pop->removeItem(id);
-     nitems--;
+     pop->removeAction(pop->actions()[id]);
 }
 
 /*!
@@ -233,7 +227,7 @@ void MenuButton::remove(int id)
  */
 int MenuButton::count()
 {
-     return nitems;
+     return pop->actions().count();
 }
 
 /*!
@@ -241,7 +235,7 @@ int MenuButton::count()
  */
 QString MenuButton::text(int id)
 {
-    return pop->text(id);
+    return pop->actions()[id]->text();
 }
 
 /*!
