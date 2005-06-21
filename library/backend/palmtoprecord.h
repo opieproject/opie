@@ -22,8 +22,8 @@
 #include <qglobal.h>
 #include "qpcglobal.h"
 #include "palmtopuidgen.h"
-#include <qarray.h>
-#include <qmap.h>
+#include <QVector>
+#include <QMap>
 
 #if defined(QPC_TEMPLATEDLL)
 // MOC_SKIP_BEGIN
@@ -61,13 +61,13 @@ public:
 
     virtual bool match( const QRegExp & ) const { return FALSE; }
 
-    void setCategories( const QArray<int> &v ) { mCats = v; mCats.sort(); }
+    void setCategories( const QVector<int> &v ) { mCats = v; qSort(mCats.begin(), mCats.end()); }
     void setCategories( int single );
-    const QArray<int> &categories() const { return mCats; }
+    const QVector<int> &categories() const { return mCats; }
 
     void reassignCategoryId( int oldId, int newId )
     {
-	int index = mCats.find( oldId );
+	int index = mCats.indexOf( oldId );
 	if ( index >= 0 )
 	    mCats[index] = newId;
     }
@@ -87,9 +87,9 @@ public:
 { return mUid != r.mUid; }
 
     // convenience methods provided for loading and saving to xml
-    static QString idsToString( const QArray<int> &ids );
+    static QString idsToString( const QVector<int> &ids );
     // convenience methods provided for loading and saving to xml
-    static QArray<int> idsFromString( const QString &str );
+    static QVector<int> idsFromString( const QString &str );
 
     // for debugging
     static void dump( const QMap<int, QString> &map );
@@ -99,7 +99,7 @@ protected:
     virtual QString customToXml() const;
 private:
     int mUid;
-    QArray<int> mCats;
+    QVector<int> mCats;
     QMap<QString, QString> customMap;
     RecordPrivate *d;
 };

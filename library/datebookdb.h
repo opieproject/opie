@@ -21,9 +21,9 @@
 #ifndef DATEBOOKDB_H
 #define DATEBOOKDB_H
 
-#include <qdatetime.h>
-#include <qfile.h>
-#include <qvaluelist.h>
+#include <QDateTime>
+#include <QFile>
+#include <QList>
 #include <qpe/event.h>
 
 // journal actions...
@@ -37,16 +37,16 @@ public:
     ~DateBookDB();
 
     // very depreciated now!!!
-    QValueList<Event> getEvents( const QDate &from, const QDate &to );
-    QValueList<Event> getEvents( const QDateTime &start );
+    QList<Event> getEvents( const QDate &from, const QDate &to );
+    QList<Event> getEvents( const QDateTime &start );
 
     // USE THESE!!!
-    QValueList<EffectiveEvent> getEffectiveEvents( const QDate &from,
+    QList<EffectiveEvent> getEffectiveEvents( const QDate &from,
 						   const QDate &to );
-    QValueList<EffectiveEvent> getEffectiveEvents( const QDateTime &start );
+    QList<EffectiveEvent> getEffectiveEvents( const QDateTime &start );
 
-    QValueList<Event> getRawRepeats() const;
-    QValueList<Event> getNonRepeatingEvents( const QDate &from,
+    QList<Event> getRawRepeats() const;
+    QList<Event> getNonRepeatingEvents( const QDate &from,
 					     const QDate &to ) const;
 
     // Use these when dealing with adding removing events...
@@ -74,8 +74,8 @@ private:
     bool saveJournalEntry( const Event &ev, journal_action action,
 			   int key/* = -1*/, bool origHadRepeat = false );
 
-    QValueList<Event> eventList; // non-repeating events...
-    QValueList<Event> repeatEvents; // the repeating events...
+    QList<Event> eventList; // non-repeating events...
+    QList<Event> repeatEvents; // the repeating events...
     DateBookDBPrivate *d;
     QFile journalFile;
 

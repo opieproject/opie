@@ -24,6 +24,7 @@
 #include <QList>
 #include <QHash>
 #include <QStringList>
+#include <QPixmap>
 
 class AppLnkSetPrivate;
 class AppLnkPrivate;

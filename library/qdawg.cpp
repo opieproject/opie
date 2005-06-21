@@ -1,5 +1,7 @@
 /**********************************************************************
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2005 Bernhard Rosenkraenzer <bero@arklinux.org>.
+** All rights reserved.
 **
 ** This file is part of the Qtopia Environment.
 **
@@ -18,9 +20,11 @@
 **
 **********************************************************************/
 #include "qdawg.h"
-#include <qintdict.h>
-#include <qfile.h>
-#include <qtl.h>
+#include <QHash>
+#include <QFile>
+#include <QList>
+#include <QTextStream>
+#include <qalgorithms.h>
 
 #include <limits.h>
 #include <stdio.h>
@@ -36,8 +40,8 @@
 class QDawgPrivate;
 class QTrie;
 
-typedef QValueList<QTrie*> TrieClub;
-typedef QIntDict<TrieClub> TrieClubDirectory;
+typedef QList<QTrie*> TrieClub;
+typedef QHash<int, TrieClub*> TrieClubDirectory;
 
 class TriePtr {
 public:
@@ -48,7 +52,7 @@ public:
     int operator <=(const TriePtr& o) const;
 };
 
-class TrieList : public QValueList<TriePtr> {
+class TrieList : public QList<TriePtr> {
     bool sorted;
 public:
     TrieList()
@@ -62,7 +66,7 @@ public:
     void sort()
     {
 	if ( !sorted ) {
-	    qHeapSort(*this);
+	    qSort(*this);
 	    sorted = TRUE;
 	}
     }
@@ -225,7 +229,7 @@ public:
     {
 	QDataStream ds(dev);
 	char sig[8];
-	ds.readRawBytes(sig,8);
+	ds.readRawData(sig,8);
 	if ( !strncmp(dawg_sig,sig,8) ) {
 	    uint n;
 	    char* nn;
@@ -257,15 +261,17 @@ public:
 
     QDawgPrivate(QTrie* t) // destroys the QTrie.
     {
-	TrieClubDirectory directory(9973);
+	TrieClubDirectory directory; // (9973);
 	t->distributeKeys(directory);
 	QTrie* l = t->clubLeader(directory);
-	ASSERT(l==t);
+#ifndef NDEBUG
+	assert(l==t);
+#endif
 	generateArray(t);
 
 	TrieClub *club;
-	for (QIntDictIterator<TrieClub> dit(directory); (club=dit); ++dit)
-	{
+	QHashIterator<int, TrieClub*> dit(directory);
+	while (dit.findNext(club)) {
 	    for (TrieClub::Iterator it = club->begin(); it != club->end(); ++it) {
 		delete *it;
 	    }
@@ -276,10 +282,9 @@ public:
     bool write(QIODevice* dev)
     {
 	QDataStream ds(dev);
-	ds.writeRawBytes(dawg_sig,8);
+	ds.writeRawData(dawg_sig,8);
 	// #### endianness problem ignored.
-	ds.writeBytes((char*)node,sizeof(QDawg::Node)*nodes);
-	return dev->state() == IO_Ok;
+	return ds.writeBytes((char*)node,sizeof(QDawg::Node)*nodes).status() == QDataStream::Ok;
     }
 
     void dumpWords(int nid=0, int index=0)
@@ -361,7 +366,9 @@ private:
 	int n = t->collectKeys();
 	node = new QDawg::Node[n];
 	appendToArray(t);
-	ASSERT(n == nodes);
+#ifndef NDEBUG
+	assert(n == nodes);
+#endif
     }
 
     int appendToArray(QTrie* t)
@@ -465,7 +472,7 @@ bool QDawg::createFromWords(QIODevice* dev)
     QTrie* trie = new QTrie;
     int n=0;
     while (!i.atEnd()) {
-	trie->insertWord(QString::fromUtf8(i.readLine()));
+	trie->insertWord(i.readLine());
 	n++;
     }
     if ( n )

@@ -26,13 +26,13 @@
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/qlibrary.h>
+#include <QLibrary>
 
-#include <qlistbox.h>
-#include <qdir.h>
-#include <qlayout.h>
-#include <qdict.h>
-#include <qtranslator.h>
+#include <QListWidget>
+#include <QDir>
+#include <QLayout>
+#include <QHash>
+#include <QTranslator>
 
 #include <stdlib.h>
 
@@ -128,7 +128,7 @@ QString Network::settingsDir()
 /*!
   \internal
 */
-QStringList Network::choices(QListBox* lb, const QString& dir)
+QStringList Network::choices(QListWidget* lb, const QString& dir)
 {
     QStringList list;
 
@@ -407,7 +407,7 @@ int Network::addStateWidgets(QWidget* parent)
     return n;
 }
 
-static QDict<NetworkInterface> *ifaces;
+static QHash<QString, NetworkInterface> *ifaces;
 
 /*!
   \internal
@@ -415,7 +415,7 @@ static QDict<NetworkInterface> *ifaces;
 NetworkInterface* Network::loadPlugin(const QString& type)
 {
 #ifndef QT_NO_COMPONENT
-    if ( !ifaces ) ifaces = new QDict<NetworkInterface>;
+    if ( !ifaces ) ifaces = new QHash<QString, NetworkInterface>;
     NetworkInterface *iface = ifaces->find(type);
     if ( !iface ) {
 #ifdef Q_OS_MACX

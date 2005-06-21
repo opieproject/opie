@@ -23,54 +23,58 @@
 #include "resource.h"
 #include <qpe/qpeapplication.h>
 
-#include <qtoolbutton.h>
-#include <qspinbox.h>
-#include <qcombobox.h>
-#include <qvaluestack.h>
-#include <qwhatsthis.h>
+#include <QToolButton>
+#include <QSpinBox>
+#include <QComboBox>
+#include <QStack>
+#include <QWhatsThis>
+#include <QHBoxLayout>
 
 static const QColor s_colorNormalLight = QColor(255, 150, 150);
 static const QColor s_colorRepeatLight = QColor(150, 150, 255);
 static const QColor s_colorHolidayLight= QColor(150, 255, 150);
 
-DateBookMonthHeader::DateBookMonthHeader( QWidget *parent, const char *name )
-    : QHBox( parent, name )
+DateBookMonthHeader::DateBookMonthHeader( QWidget *parent )
+    : QWidget( parent )
 {
-    setBackgroundMode( PaletteButton );
+    setLayout(new QHBoxLayout);
 
     begin = new QToolButton( this );
-    begin->setFocusPolicy(NoFocus);
-    begin->setPixmap( Resource::loadPixmap( "start" ) );
+    begin->setFocusPolicy(Qt::NoFocus);
+    begin->setIcon( Resource::loadPixmap( "start" ) );
     begin->setAutoRaise( TRUE );
     begin->setFixedSize( begin->sizeHint() );
-    QWhatsThis::add( begin, tr("Show January in the selected year") );
+    begin->defaultAction()->setWhatsThis( tr("Show January in the selected year") );
 
     back = new QToolButton( this );
-    back->setFocusPolicy(NoFocus);
-    back->setPixmap( Resource::loadPixmap( "back" ) );
+    back->setFocusPolicy(Qt::NoFocus);
+    back->setIcon( Resource::loadPixmap( "back" ) );
     back->setAutoRaise( TRUE );
     back->setFixedSize( back->sizeHint() );
-    QWhatsThis::add( back, tr("Show the previous month") );
+    back->defaultAction()->setWhatsThis( tr("Show the previous month") );
 
-    month = new QComboBox( FALSE, this );
+    month = new QComboBox( this );
+    month->setEditable(false);
     for ( int i = 0; i < 12; ++i )
-	month->insertItem( Calendar::nameOfMonth( i + 1 ) );
+	month->insertItem( i, Calendar::nameOfMonth( i + 1 ) );
 
-    year = new QSpinBox( 1752, 8000, 1, this );
+    year = new QSpinBox( this );
+    year->setRange(1752, 8000);
+    year->setSingleStep(1);
 
     next = new QToolButton( this );
-    next->setFocusPolicy(NoFocus);
-    next->setPixmap( Resource::loadPixmap( "forward" ) );
+    next->setFocusPolicy(Qt::NoFocus);
+    next->setIcon( Resource::loadPixmap( "forward" ) );
     next->setAutoRaise( TRUE );
     next->setFixedSize( next->sizeHint() );
-    QWhatsThis::add( next, tr("Show the next month") );
+    next->defaultAction()->setWhatsThis( tr("Show the next month") );
 
     end = new QToolButton( this );
-    end->setFocusPolicy(NoFocus);
-    end->setPixmap( Resource::loadPixmap( "finish" ) );
+    end->setFocusPolicy(Qt::NoFocus);
+    end->setIcon( Resource::loadPixmap( "finish" ) );
     end->setAutoRaise( TRUE );
     end->setFixedSize( end->sizeHint() );
-    QWhatsThis::add( end, tr("Show December in the selected year") );
+    end->defaultAction()->setWhatsThis( tr("Show December in the selected year") );
 
     connect( month, SIGNAL( activated(int) ),
 	     this, SLOT( updateDate() ) );
@@ -96,44 +100,44 @@ DateBookMonthHeader::~DateBookMonthHeader()
 
 void DateBookMonthHeader::updateDate()
 {
-    emit dateChanged( year->value(), month->currentItem() + 1 );
+    emit dateChanged( year->value(), month->currentIndex() + 1 );
 }
 
 void DateBookMonthHeader::firstMonth()
 {
     emit dateChanged( year->value(), 1 );
-    month->setCurrentItem( 0 );
+    month->setCurrentIndex( 0 );
 }
 
 void DateBookMonthHeader::lastMonth()
 {
     emit dateChanged( year->value(), 12 );
-    month->setCurrentItem( 11 );
+    month->setCurrentIndex( 11 );
 }
 
 void DateBookMonthHeader::monthBack()
 {
-    if ( month->currentItem() > 0 ) {
-	emit dateChanged( year->value(), month->currentItem() );
-	month->setCurrentItem( month->currentItem() - 1 );
+    if ( month->currentIndex() > 0 ) {
+	emit dateChanged( year->value(), month->currentIndex() );
+	month->setCurrentIndex( month->currentIndex() - 1 );
     } else {
 	emit dateChanged( year->value() - 1, 12 );
 	// we have a signal set to a changed value in year so we only need to change
 	// year to get the result...
-	month->setCurrentItem( 11 );
+	month->setCurrentIndex( 11 );
 	year->setValue( year->value() - 1 );
     }
 }
 
 void DateBookMonthHeader::monthForward()
 {
-    if ( month->currentItem() < 11 ) {
-	emit dateChanged( year->value(), month->currentItem() + 2 );
-	month->setCurrentItem( month->currentItem() + 1 );
+    if ( month->currentIndex() < 11 ) {
+	emit dateChanged( year->value(), month->currentIndex() + 2 );
+	month->setCurrentIndex( month->currentIndex() + 1 );
     } else {
 	// we have a signal set to a changed value in year so we only need to change
 	// year to get the result...
-	month->setCurrentItem( 0 );
+	month->setCurrentIndex( 0 );
 	year->setValue( year->value() + 1 );
     }
 }
@@ -141,7 +145,7 @@ void DateBookMonthHeader::monthForward()
 void DateBookMonthHeader::setDate( int y, int m )
 {
     year->setValue( y );
-    month->setCurrentItem( m - 1 );
+    month->setCurrentIndex( m - 1 );
 }
 
 //---------------------------------------------------------------------------
@@ -152,13 +156,13 @@ public:
     DateBookMonthTablePrivate() {};
     ~DateBookMonthTablePrivate() { mMonthEvents.clear(); };
 
-    QValueList<EffectiveEvent> mMonthEvents;
+    QList<EffectiveEvent> mMonthEvents;
     bool onMonday;
 };
 
-DateBookMonthTable::DateBookMonthTable( QWidget *parent, const char *name,
+DateBookMonthTable::DateBookMonthTable( QWidget *parent,
                                         DateBookDB *newDb  )
-    : QTable( 6, 7, parent, name ),
+    : QTableWidget( 6, 7, parent ),
       db( newDb )
 {
     d = new DateBookMonthTablePrivate();
@@ -241,8 +245,8 @@ void DateBookMonthTable::setWeekStart( bool onMonday )
 
 void DateBookMonthTable::setupTable()
 {
-    QValueList<Calendar::Day> days = Calendar::daysOfMonth( year, month, d->onMonday );
-    QValueList<Calendar::Day>::Iterator it = days.begin();
+    QList<Calendar::Day> days = Calendar::daysOfMonth( year, month, d->onMonday );
+    QList<Calendar::Day>::Iterator it = days.begin();
     int row = 0, col = 0;
     int crow = 0;
     int ccol = 0;
@@ -339,12 +343,12 @@ void DateBookMonthTable::getEvents()
     d->mMonthEvents = db->getEffectiveEvents( dtStart,
 					      QDate( year, month,
 						     dtStart.daysInMonth() ) );
-    QValueListIterator<EffectiveEvent> it = d->mMonthEvents.begin();
+    QListIterator<EffectiveEvent> it = d->mMonthEvents.begin();
     // now that the events are sorted, basically go through the list, make
     // a small list for every day and set it for each item...
     // clear all the items...
     while ( it != d->mMonthEvents.end() ) {
-	QValueList<EffectiveEvent> dayEvent;
+	QList<EffectiveEvent> dayEvent;
 	EffectiveEvent e = *it;
 	++it;
 	dayEvent.append( e );
@@ -382,11 +386,12 @@ void DateBookMonthTable::setupLabels()
 
 //---------------------------------------------------------------------------
 
-DateBookMonth::DateBookMonth( QWidget *parent, const char *name, bool ac,
+DateBookMonth::DateBookMonth( QWidget *parent, bool ac,
                               DateBookDB *data )
-    : QVBox( parent, name ),
+    : QWidget( parent ),
       autoClose( ac )
 {
+    setLayout(new QHBoxLayout);
     setFocusPolicy(StrongFocus);
     year = QDate::currentDate().year();
     month = QDate::currentDate().month();
@@ -505,11 +510,11 @@ class DayItemMonthPrivate
 public:
     DayItemMonthPrivate() {};
     ~DayItemMonthPrivate() { mDayEvents.clear(); };
-    QValueList<EffectiveEvent> mDayEvents;
+    QList<EffectiveEvent> mDayEvents;
 };
 
-DayItemMonth::DayItemMonth( QTable *table, EditType et, const QString &t )
-	: QTableItem( table, et, t )
+DayItemMonth::DayItemMonth( const QString &t, int type )
+	: QTableItem( t, type )
 {
     d = new DayItemMonthPrivate();
 }
@@ -520,7 +525,7 @@ DayItemMonth::~DayItemMonth()
     delete d;
 }
 
-void DayItemMonth::setEvents( const QValueList<EffectiveEvent> &effEv )
+void DayItemMonth::setEvents( const QList<EffectiveEvent> &effEv )
 {
     d->mDayEvents = effEv;
 }
@@ -543,16 +548,16 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
     else
 	p->setPen( g.text() );
 
-    QValueStack<int> normalLine;
-    QValueStack<int> repeatLine;
-    QValueStack<int> travelLine;
+    QStack<int> normalLine;
+    QStack<int> repeatLine;
+    QStack<int> travelLine;
 
     bool normalAllDay = FALSE;
     bool repeatAllDay = FALSE;
     bool travelAllDay = FALSE;
 	bool holidayAllDay = FALSE;
 
-    QValueListIterator<EffectiveEvent> itDays = d->mDayEvents.begin();
+    QListIterator<EffectiveEvent> itDays = d->mDayEvents.begin();
 
     for ( ; itDays != d->mDayEvents.end(); ++itDays ) {
 	int w = cr.width();
@@ -689,8 +694,8 @@ void DayItemMonth::setType( Calendar::Day::Type t )
 
 
 
-DateButton::DateButton( bool longDate, QWidget *parent, const char * name )
-    :QPushButton( parent, name )
+DateButton::DateButton( bool longDate, QWidget *parent )
+    :QPushButton( parent )
 {
     longFormat = longDate;
     df = DateFormat('/', DateFormat::MonthDayYear, DateFormat::MonthDayYear);

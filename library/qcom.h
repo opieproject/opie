@@ -25,8 +25,11 @@
 
 #ifndef QT_NO_COMPONENT
 
-#include <qpe/quuid.h>
+#include <QUuid>
 #include <qpe/qpeglobal.h>
+#ifndef Q_EXPORT
+#define Q_EXPORT __attribute__((visibility("default")))
+#endif
 
 #define QRESULT         unsigned long
 #define QS_OK           (QRESULT)0x00000000
@@ -42,6 +45,7 @@
 #ifndef IID_QUnknown
 #define IID_QUnknown QUuid(0x1d8518cd, 0xe8f5, 0x4366, 0x99, 0xe8, 0x87, 0x9f, 0xd7, 0xe4, 0x82, 0xde)
 #endif
+
 
 struct Q_EXPORT QUnknownInterface
 {

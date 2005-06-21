@@ -21,9 +21,9 @@
 #ifndef __EVENT_H__
 #define __EVENT_H__
 
-#include <qdatetime.h>
-#include <qvaluelist.h>
-#include <qcolor.h>
+#include <QDateTime>
+#include <QList>
+#include <QColor>
 
 #ifdef PALMTOPCENTER
 #include <qpc/qsorter.h>
@@ -61,7 +61,7 @@ public:
 	char days;  // a mask for days OR in your days!
 	bool hasEndDate;
 	QDate endDate() const { return TimeConversion::fromUTC( endDateUTC ).date(); }
-	void setEndDate( const QDate &dt ) { endDateUTC = TimeConversion::toUTC( dt ); }
+	void setEndDate( const QDate &dt ) { endDateUTC = TimeConversion::toUTC( QDateTime(dt, QTime()) ); }
 	time_t endDateUTC;
 	time_t createTime;
     };
@@ -72,9 +72,9 @@ public:
 
     QMap<int, QString> toMap() const;
 
-    static void writeVCalendar( const QString &filename, const QValueList<Event> &events);
+    static void writeVCalendar( const QString &filename, const QList<Event> &events);
     static void writeVCalendar( const QString &filename, const Event &event);
-    static QValueList<Event> readVCalendar( const QString &filename );
+    static QList<Event> readVCalendar( const QString &filename );
 
     enum Type { Normal, AllDay };
     enum SoundTypeChoice { Silent, Loud };

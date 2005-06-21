@@ -1,5 +1,7 @@
 /**********************************************************************
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2005 Bernhard Rosenkraenzer <bero@arklinux.org>. All
+** rights reserved.
 **
 ** This file is part of the Qtopia Environment.
 **
@@ -22,13 +24,15 @@
 
 #include <qtopia/private/event.h>
 
-#include <qvbox.h>
-#include <qhbox.h>
-#include <qdatetime.h>
-#include <qvaluelist.h>
-#include <qtable.h>
-#include <qpushbutton.h>
-#include <qpopupmenu.h>
+#include <QDateTime>
+#include <QList>
+#include <QTableWidget>
+#include <QPushButton>
+#include <QKeyEvent>
+#include <QMenu>
+#include <QRect>
+#include <QPainter>
+#include <QColorGroup>
 
 #include "calendar.h"
 #include "timestring.h"
@@ -40,12 +44,12 @@ class Event;
 class DateBookDB;
 
 class DateBookMonthHeaderPrivate;
-class DateBookMonthHeader : public QHBox
+class DateBookMonthHeader : public QWidget
 {
     Q_OBJECT
 
 public:
-    DateBookMonthHeader( QWidget *parent = 0, const char *name = 0 );
+    DateBookMonthHeader( QWidget *parent = 0 );
     ~DateBookMonthHeader();
     void setDate( int year, int month );
 
@@ -73,15 +77,15 @@ private:
 };
 
 class DayItemMonthPrivate;
-class DayItemMonth : public QTableItem
+class DayItemMonth : public QTableWidgetItem
 {
 public:
-    DayItemMonth( QTable *table, EditType et, const QString &t );
+    DayItemMonth( const QString &t, int type=Type );
     ~DayItemMonth();
-    void paint( QPainter *p, const QColorGroup &cg, const QRect &cr, bool selected );
+    void paint( QPainter *p, const QPalette &pal, const QRect &cr, bool selected );
     void setDay( int d ) { dy = d; }
-    void setEvents( const QValueList<Event> &events ) { daysEvents = events; };
-    void setEvents( const QValueList<EffectiveEvent> &effEvents );
+    void setEvents( const QList<Event> &events ) { daysEvents = events; };
+    void setEvents( const QList<EffectiveEvent> &effEvents );
     void clearEvents() { daysEvents.clear(); };
     void clearEffEvents();
     int day() const { return dy; }
@@ -93,18 +97,17 @@ private:
     QColor forg;
     int dy;
     Calendar::Day::Type typ;
-    QValueList<Event> daysEvents; // not used anymore...
+    QList<Event> daysEvents; // not used anymore...
     DayItemMonthPrivate *d;
 };
 
 class DateBookMonthTablePrivate;
-class DateBookMonthTable : public QTable
+class DateBookMonthTable : public QTableWidget
 {
     Q_OBJECT
 
 public:
-    DateBookMonthTable( QWidget *parent = 0, const char *name = 0,
-                        DateBookDB *newDb = 0 );
+    DateBookMonthTable( QWidget *parent = 0, DateBookDB *newDb = 0 );
     ~DateBookMonthTable();
     void setDate( int y, int m, int d );
     void redraw();
@@ -139,19 +142,19 @@ private:
 
     int year, month, day;
     int selYear, selMonth, selDay;
-    QValueList<Event> monthsEvents; // not used anymore...
+    QList<Event> monthsEvents; // not used anymore...
     DateBookDB *db;
     DateBookMonthTablePrivate *d;
 };
 
 class DateBookMonthPrivate;
-class DateBookMonth : public QVBox
+class DateBookMonth : public QWidget
 {
     Q_OBJECT
 
 public:
     /* ac = Auto Close */
-    DateBookMonth( QWidget *parent = 0, const char *name = 0, bool ac = FALSE,
+    DateBookMonth( QWidget *parent = 0, bool ac = FALSE,
                    DateBookDB *data = 0 );
     ~DateBookMonth();
     QDate  selectedDate() const;
@@ -187,7 +190,7 @@ class DateButton : public QPushButton
     Q_OBJECT
 
 public:
-    DateButton( bool longDate, QWidget *parent, const char * name = 0 );
+    DateButton( bool longDate, QWidget *parent );
     QDate date() const { return currDate; }
 
     bool customWhatsThis() const;
@@ -217,7 +220,7 @@ private:
 // work (only qtmail seems to use it)   - sandman
 // DO NOT USE IT IN NEW CODE !!
 
-class DateBookMonthPopup : public QPopupMenu 
+class DateBookMonthPopup : public QMenu 
 {
 	Q_OBJECT
 public:

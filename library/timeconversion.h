@@ -23,7 +23,9 @@
 
 #include <time.h>
 #include <sys/types.h>
-#include <qdatetime.h>
+
+#include <QDateTime>
+#include <QByteArray>
 
 #include <qtopia/private/qpcglobal.h>
 
@@ -37,9 +39,9 @@ public:
     static QDateTime fromUTC( time_t time );
     static int secsTo( const QDateTime &from, const QDateTime &to );
 
-    static QCString toISO8601( const QDate & );
-    static QCString toISO8601( const QDateTime & );
-    static QDateTime fromISO8601( const QCString & );
+    static QByteArray toISO8601( const QDate & );
+    static QByteArray toISO8601( const QDateTime & );
+    static QDateTime fromISO8601( const QByteArray & );
 };
 
 #endif // __timeconversion_h__

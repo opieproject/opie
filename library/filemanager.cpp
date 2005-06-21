@@ -22,9 +22,11 @@
 #include "applnk.h"
 
 /* QT */
-#include <qdir.h>
-#include <qfileinfo.h>
-#include <qtextstream.h>
+#include <QDir>
+#include <QFileInfo>
+#include <QTextStream>
+#include <QTextCodec>
+#include <QByteArray>
 
 /* STD */
 #include <stdlib.h>
@@ -62,12 +64,12 @@ bool FileManager::saveFile( const DocLnk &f, const QByteArray &data )
     QFile file( fileName );
 
     //write data in temporary .new file
-    if ( !file.open( IO_WriteOnly|IO_Raw ) )
+    if ( !file.open( QIODevice::WriteOnly ) )
     {
         qWarning( "open failed" );
         return FALSE;
     }
-    int total_written = file.writeBlock( data );
+    int total_written = file.write( data );
     file.close();
     //check if every was written
     if ( total_written != int( data.size() ) || !f.writeLink() )
@@ -97,15 +99,15 @@ bool FileManager::saveFile( const DocLnk &f, const QString &text )
     QFile file( fileName );
 
     //write data in temporary .new file
-    if ( !file.open( IO_WriteOnly|IO_Raw ) )
+    if ( !file.open( QIODevice::WriteOnly ) )
     {
         qWarning( "open failed" );
         return FALSE;
     }
 
-    QCString cstr = text.utf8();
+    QByteArray cstr = text.toUtf8();
     int total_written;
-    total_written = file.writeBlock( cstr.data(), cstr.length() );
+    total_written = file.write( cstr );
     file.close();
     if ( total_written != int( cstr.length()) || !f.writeLink() )
     {
@@ -131,16 +133,11 @@ bool FileManager::loadFile( const DocLnk &f, QString &text )
 {
     QString fn = f.file();
     QFile fl( fn );
-    if ( !fl.open( IO_ReadOnly ) )
+    if ( !fl.open( QIODevice::ReadOnly ) )
         return FALSE;
     QTextStream ts( &fl );
-#if QT_VERSION <= 230 && defined(QT_NO_CODECS)
-    // The below should work, but doesn't in Qt 2.3.0
     ts.setCodec( QTextCodec::codecForMib( 106 ) );
-#else
-    ts.setEncoding( QTextStream::UnicodeUTF8 );
-#endif
-    text = ts.read();
+    text = ts.readAll();
     fl.close();
     return TRUE;
 }
@@ -155,11 +152,11 @@ bool FileManager::loadFile( const DocLnk &f, QByteArray &ba )
 {
     QString fn = f.file();
     QFile fl( fn );
-    if ( !fl.open( IO_ReadOnly ) )
+    if ( !fl.open( QIODevice::ReadOnly ) )
         return FALSE;
     ba.resize( fl.size() );
     if ( fl.size() > 0 )
-        fl.readBlock( ba.data(), fl.size() );
+        fl.read( ba.data(), fl.size() );
     fl.close();
     return TRUE;
 }
@@ -173,7 +170,7 @@ bool FileManager::loadFile( const DocLnk &f, QByteArray &ba )
 bool FileManager::copyFile( const AppLnk &src, const AppLnk &dest )
 {
     QFile srcFile( src.file() );
-    if ( !srcFile.open( IO_ReadOnly ) )
+    if ( !srcFile.open( QIODevice::ReadOnly ) )
         return FALSE;
 
     QString fileName = dest.file() + ".new";
@@ -204,17 +201,17 @@ bool FileManager::copyFile( const QString & src, const QString & dest )
 {
     //open read file
     QFile srcFile( src );
-    if( !srcFile.open( IO_ReadOnly|IO_Raw) )
+    if( !srcFile.open( QIODevice::ReadOnly) )
     {
-        qWarning( "open read failed %s, %s", src.latin1(), dest.latin1() );
+        qWarning( "open read failed %s, %s", src.toLatin1().data(), dest.toLatin1().data() );
         return FALSE;
     }
 
     //open write file
     QFile destFile( dest );
-    if( !destFile.open( IO_WriteOnly|IO_Raw ) )
+    if( !destFile.open( QIODevice::WriteOnly ) )
     {
-        qWarning( "open write failed %s, %s", src.latin1(), dest.latin1() );
+        qWarning( "open write failed %s, %s", src.toLatin1().data(), dest.toLatin1().data() );
         srcFile.close();
         return FALSE;
     }
@@ -226,12 +223,12 @@ bool FileManager::copyFile( const QString & src, const QString & dest )
     int bytesRead = 0;
     while ( ok && !srcFile.atEnd() )
     {
-        bytesRead = srcFile.readBlock( buffer, bufsize );
+        bytesRead = srcFile.read( buffer, bufsize );
         if ( bytesRead < 0 )
             ok = FALSE;
         while ( ok && bytesRead > 0 )
         {
-            int bytesWritten = destFile.writeBlock( buffer, bytesRead );
+            int bytesWritten = destFile.write( buffer, bytesRead );
             if ( bytesWritten < 0 )
                 ok = FALSE;
             else
@@ -256,7 +253,7 @@ bool FileManager::renameFile( const QString & src, const QString & dest )
     {
         if ( errno != 2 && errno != 11 ) //ignore ENOENT and EAGAIN - bug in system?
         {
-            qWarning( "problem renaming file %s to %s, errno: %d", src.latin1(), dest.latin1(), errno );
+            qWarning( "problem renaming file %s to %s, errno: %d", src.toLatin1().data(), dest.toLatin1().data(), errno );
             return false;
         }
     }
@@ -273,7 +270,7 @@ QIODevice* FileManager::openFile( const DocLnk& f )
 {
     QString fn = f.file();
     QFile* fl = new QFile( fn );
-    if ( !fl->open( IO_ReadOnly ) )
+    if ( !fl->open( QIODevice::ReadOnly ) )
     {
         delete fl;
         fl = 0;
@@ -292,7 +289,7 @@ QIODevice* FileManager::saveFile( const DocLnk& f )
     QString fn = f.file();
     ensurePathExists( fn );
     QFile* fl = new QFile( fn );
-    if ( fl->open( IO_WriteOnly ) )
+    if ( fl->open( QIODevice::WriteOnly ) )
     {
         f.writeLink();
     }
@@ -322,7 +319,7 @@ bool FileManager::ensurePathExists( const QString &fileName )
     QDir directory = QFileInfo( fileName ).dir();
     if ( !directory.exists() )
     {
-        if ( !directory.mkdir( directory.absPath() ) )
+        if ( !directory.mkdir( directory.absolutePath() ) )
             return FALSE;
     }
     return TRUE;
