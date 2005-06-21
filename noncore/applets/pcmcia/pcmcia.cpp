@@ -78,6 +78,10 @@ PcmciaManager::PcmciaManager( QWidget * parent ) : QWidget( parent )
     setFixedHeight ( AppLnk::smallIconSize() );
     pm = Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon );
     configuring = false;
+
+    QCopChannel *channel = new QCopChannel( "QPE/System", this );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+                this, SLOT(handleSystemChannel(const QCString&,const QByteArray&)) );
 }
 
 
@@ -85,6 +89,25 @@ PcmciaManager::~PcmciaManager()
 {
 }
 
+void PcmciaManager::handleSystemChannel( const QCString&msg, const QByteArray& )
+{
+    if ( msg == "returnFromSuspend()" )
+    {
+        if ( !OPcmciaSystem::instance()->cardCount() ) return;
+        OPcmciaSystem* sys = OPcmciaSystem::instance();
+        OPcmciaSystem::CardIterator it = sys->iterator();
+        OPcmciaSocket* theCard = 0;
+
+        while ( it.current() )
+        {
+            if ( it.current()->isEmpty() )
+            {
+                executeResumeAction( theCard );
+            }
+        ++it;
+        }
+    }
+}
 
 void PcmciaManager::popUp( QString message, QString icon )
 {
@@ -197,6 +220,8 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
                 if ( cardName == name )
                 {
                     newCard = false;
+                    odebug << "pcmcia: we have seen this card before" << oendl;
+                    executeInsertAction( theCard );
                     break;
                 }
             }
@@ -342,6 +367,16 @@ bool PcmciaManager::configure( OPcmciaSocket* card, QString& insertAction, QStri
         conf = dialog.bindEntries[driver];
     }
     return configresult;
+}
+
+void PcmciaManager::executeInsertAction( Opie::Core::OPcmciaSocket* card )
+{
+    odebug << "pcmcia: execute insert action" << oendl;
+}
+
+void PcmciaManager::executeResumeAction( Opie::Core::OPcmciaSocket* card )
+{
+    odebug << "pcmcia: execute resume action" << oendl;
 }
 
 

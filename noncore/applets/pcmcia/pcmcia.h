@@ -45,7 +45,8 @@ class PcmciaManager : public QWidget
     static int position();
 
   private slots:
-    void cardMessage( const QCString& msg, const QByteArray& );
+    void handleSystemChannel( const QCString&, const QByteArray& );
+    void cardMessage( const QCString&, const QByteArray& );
     void userCardAction( int action );
     void popupTimeout();
 
@@ -56,6 +57,8 @@ class PcmciaManager : public QWidget
   private:
     bool configure( Opie::Core::OPcmciaSocket*, QString&, QString&, QString&, QString& );
     void execCommand( const QStringList &command );
+    void executeInsertAction( Opie::Core::OPcmciaSocket* );
+    void executeResumeAction( Opie::Core::OPcmciaSocket* );
     void popUp(QString message, QString icon = QString::null );
 
   private:
