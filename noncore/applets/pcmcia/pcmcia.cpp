@@ -76,7 +76,7 @@ PcmciaManager::PcmciaManager( QWidget * parent ) : QWidget( parent )
     setFocusPolicy( NoFocus );
     setFixedWidth ( AppLnk::smallIconSize() );
     setFixedHeight ( AppLnk::smallIconSize() );
-    pm = Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon );
+    pm = Opie::Core::OResource::loadPixmap( "pcmcia/pcmcia", Opie::Core::OResource::SmallIcon );
     configuring = false;
 
     QCopChannel *channel = new QCopChannel( "QPE/System", this );
