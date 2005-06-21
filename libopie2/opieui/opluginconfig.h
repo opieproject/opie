@@ -35,6 +35,7 @@ namespace Ui {
  *
  */
 class OPluginConfigWidget :  public QWidget {
+    Q_OBJECT
 public:
     enum ChangeMode { Queued, Immediate };
     OPluginConfigWidget( QWidget* wid = 0, const char* name = 0, WFlags fl = 0);
