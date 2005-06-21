@@ -1,19 +1,15 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2004, 2005 Holger Hans Peter Freyther <freyther@handhelds.org>
-                             Copyright (C) 2004, 2005 Michael 'mickey' Lauer <mickeyl@handhelds.org>
-                             Copyright (C) 2002, 2003 Robert Griebl <sandman@handhelds.org>
-
-
-              =.
-            .=l.
+                             Copyright (C) 2004, 2005 Holger Hans Peter Freyther <freyther@handhelds.org>
+              =.             Copyright (C) 2004, 2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
+            .=l.             Copyright (C) 2002, 2003 Robert Griebl <sandman@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
+ - .   .-<_>     .<>         Foundation; version 2 of the License.
+     ._= =}       :
     .%`+i>       _;_.
     .i_,=:_.      -<s.       This program is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
@@ -32,6 +28,8 @@
 */
 
 #include "odevice_abstractmobiledevice.h"
+
+#include <qpe/qcopenvelope_qws.h>
 
 #include <sys/time.h>
 #include <sys/ioctl.h>
@@ -64,7 +62,8 @@ bool OAbstractMobileDevice::suspend() {
         return false;
 
     bool res = false;
-    ODevice::sendSuspendmsg();
+
+    QCopEnvelope( "QPE/System", "aboutToSuspend()" );
 
     struct timeval tvs, tvn;
     ::gettimeofday ( &tvs, 0 );
@@ -84,6 +83,8 @@ bool OAbstractMobileDevice::suspend() {
     }
 
     return res;
+
+    QCopEnvelope( "QPE/System", "returnFromSuspend()" );
 }
 
 //#include <linux/fb.h> better not rely on kernel headers in userspace ...
