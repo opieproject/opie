@@ -206,10 +206,12 @@ OPcmciaSocket::~OPcmciaSocket()
             {
                 qWarning( "OPcmciaSocket::init() - can't open control socket (%s)", strerror( errno ) );
             }
+#ifndef OPCMCIA_DEBUG
             else
             {
                 ::unlink( (const char*) filename );
             }
+#endif
         }
         else
         {

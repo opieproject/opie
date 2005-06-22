@@ -8,4 +8,4 @@ SOURCES += \
            linux/oinputsystem.cpp \
            linux/opcmciasystem.cpp
 
-DEFINES += OPCMCIA_DEBUG=1
+# DEFINES += OPCMCIA_DEBUG=1
