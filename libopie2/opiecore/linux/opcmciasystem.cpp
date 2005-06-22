@@ -340,9 +340,11 @@ QStringList OPcmciaSocket::productIdentity() const
 {
     QStringList list;
     cistpl_vers_1_t *vers = &_ioctlarg.tuple_parse.parse.version_1;
+    vers->ns = 0; // number of strings
     if ( getTuple( CISTPL_VERS_1 ) )
     {
-        for ( int i = 0; i < CISTPL_VERS_1_MAX_PROD_STRINGS; ++i )
+        qDebug( " NUMBER_OF_PRODIDs = %d", vers->ns );
+        for ( int i = 0; i < QMIN( CISTPL_VERS_1_MAX_PROD_STRINGS, vers->ns ); ++i )
         {
             qDebug( " PRODID = '%s'", vers->str+vers->ofs[i] );
             list += vers->str+vers->ofs[i];
