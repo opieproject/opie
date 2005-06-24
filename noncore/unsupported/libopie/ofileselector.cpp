@@ -232,7 +232,7 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
             selector(), SIGNAL(closeMe() ) );
 
     btn = new QToolButton( box );
-    btn->setIconSet( Resource::loadIconSet("cardmon/pcmcia") );
+    btn->setIconSet( Resource::loadIconSet("pcmcia") );
 
     /* let's fill device parts */
     QPopupMenu* pop = new QPopupMenu(this);

@@ -68,7 +68,7 @@ void AdvancedFm::init() {
 
 	 cfButton = new QToolButton( 0, "CFButton");
      cfButton->setUsesBigPixmap( useBigIcon );
-	 cfButton->setPixmap( Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon ) );
+	 cfButton->setPixmap( Opie::Core::OResource::loadPixmap( "pcmcia", Opie::Core::OResource::SmallIcon ) );
 	 cfButton->setAutoRaise( true );
 	 menuBar->insertItem( cfButton );
 

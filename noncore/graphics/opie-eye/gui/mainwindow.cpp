@@ -745,7 +745,7 @@ void PMainWindow::setupMenu()
     m_aDirUp->addTo( fileMenu );
 
     fsMenu = new QPopupMenu(fileMenu);
-    fileMenu->insertItem(Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon ),
+    fileMenu->insertItem(Opie::Core::OResource::loadPixmap( "pcmcia", Opie::Core::OResource::SmallIcon ),
                          tr("Select filesystem"),fsMenu);
     connect( fsMenu, SIGNAL( activated( int ) ), this, SLOT(slotSelectDir( int ) ) );
     dirChanged();

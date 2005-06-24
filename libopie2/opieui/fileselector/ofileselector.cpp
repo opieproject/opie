@@ -369,7 +369,7 @@ OFileViewFileListView::OFileViewFileListView( QWidget* parent, const QString& st
 
     btn = new QToolButton( box );
     btn->setUsesBigPixmap(bigicons);
-    btn->setPixmap( Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon ) );
+    btn->setPixmap( Opie::Core::OResource::loadPixmap( "pcmcia", Opie::Core::OResource::SmallIcon ) );
 
     m_fsButton = btn;
     /* let's fill device parts */

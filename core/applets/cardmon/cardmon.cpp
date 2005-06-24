@@ -51,7 +51,7 @@ using namespace Opie::Ui;
 
 CardMonitor::CardMonitor( QWidget * parent ) : QWidget( parent )
 {
-    pm = Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon );
+    pm = Opie::Core::OResource::loadPixmap( "pcmcia", Opie::Core::OResource::SmallIcon );
 
     QCopChannel * pcmciaChannel = new QCopChannel( "QPE/Card", this );
     connect( pcmciaChannel,

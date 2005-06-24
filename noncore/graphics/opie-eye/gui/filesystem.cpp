@@ -16,7 +16,7 @@
 PFileSystem::PFileSystem(  QToolBar* bar)
     : QToolButton( bar )
 {
-    setIconSet( Opie::Core::OResource::loadPixmap( "cardmon/pcmcia", Opie::Core::OResource::SmallIcon ) );
+    setIconSet( Opie::Core::OResource::loadPixmap( "pcmcia", Opie::Core::OResource::SmallIcon ) );
 
     m_pop = new QPopupMenu( this );
     connect( m_pop, SIGNAL( activated( int ) ),
