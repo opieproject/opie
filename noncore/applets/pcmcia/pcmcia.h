@@ -57,9 +57,8 @@ class PcmciaManager : public QWidget
   private:
     bool configure( Opie::Core::OPcmciaSocket*, QString&, QString&, QString&, QString& );
     void execCommand( const QStringList &command );
-    void executeInsertAction( Opie::Core::OPcmciaSocket* );
-    void executeResumeAction( Opie::Core::OPcmciaSocket* );
-    void popUp(QString message, QString icon = QString::null );
+    void executeAction( Opie::Core::OPcmciaSocket*, const QString& );
+    void popUp( QString message, QString icon = QString::null );
 
   private:
     bool configuring;

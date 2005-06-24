@@ -132,6 +132,7 @@ void ConfigDialog::writeConfigEntry( const OPcmciaSocket* card, const QString& k
     OConfig cfg( "PCMCIA" );
     cfg.setGroup( "Global" );
     int nCards = cfg.readNumEntry( "nCards", 0 );
+    QString cardName = card->productIdentity().join( " " ).stripWhiteSpace();
     QString action;
 
     for ( int i = 0; i < nCards; ++i )
@@ -139,8 +140,8 @@ void ConfigDialog::writeConfigEntry( const OPcmciaSocket* card, const QString& k
         QString cardSection = QString( "Card_%1" ).arg( i );
         cfg.setGroup( cardSection );
         QString name = cfg.readEntry( "name" );
-        odebug << "comparing card '" << card->name() << "' with known card '" << name << "'" << oendl;
-        if ( card->name() == name )
+        odebug << "comparing card '" << cardName << "' with known card '" << name << "'" << oendl;
+        if ( cardName == name )
         {
             cfg.writeEntry( key, value );
             break;
@@ -153,6 +154,7 @@ QString ConfigDialog::readConfigEntry( const OPcmciaSocket* card, const QString&
     OConfig cfg( "PCMCIA" );
     cfg.setGroup( "Global" );
     int nCards = cfg.readNumEntry( "nCards", 0 );
+    QString cardName = card->productIdentity().join( " " ).stripWhiteSpace();
     QString value;
 
     for ( int i = 0; i < nCards; ++i )
@@ -160,8 +162,8 @@ QString ConfigDialog::readConfigEntry( const OPcmciaSocket* card, const QString&
         QString cardSection = QString( "Card_%1" ).arg( i );
         cfg.setGroup( cardSection );
         QString name = cfg.readEntry( "name" );
-        odebug << "comparing card '" << card->name() << "' with known card '" << name << "'" << oendl;
-        if ( card->name() == name )
+        odebug << "comparing card '" << cardName << "' with known card '" << name << "'" << oendl;
+        if ( cardName == name )
         {
             value = cfg.readEntry( key, defaultValue );
             break;
