@@ -20,6 +20,7 @@
 	        - We actually suspend the complete Opie now in that case.
 	* #1384 - Battery status updated improperly when charging (skyhusker)
 	* #1476 - Wrong order of application entries in the O-menu (skyhusker)
+	* #1514 - Remove usage of cardmon/pcmcia picture in applications. pcmcia is now an inline picture (mickeyl)
 	* #1535	- Missing line break and unnecessary location shown with Today-Calendar plugin (deller)
 	* #1546 - Battery applet popup is not always large enough to show jacket remaining info (skyhusker)
 	* #1557 - Light&Power-Settings don't store warning intervall and warning levels (skyhusker)
