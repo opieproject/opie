@@ -277,6 +277,7 @@ const OPcmciaSocket::OPcmciaSocketCardStatus OPcmciaSocket::status() const
     if ( result != 0 )
     {
         qWarning( "OPcmciaSocket::status() - DS_GET_STATUS failed (%s)", strerror( errno ) );
+        // return ( errno == -ENODEV ) ? Empty : Unknown;
         return Unknown;
     }
     else
@@ -296,13 +297,13 @@ bool OPcmciaSocket::isUnsupported() const
 
 bool OPcmciaSocket::isEmpty() const
 {
-    return ! status() && ( Occupied || OccupiedCardBus );
+    return !(status() & ( Occupied | OccupiedCardBus ));
 }
 
 
 bool OPcmciaSocket::isSuspended() const
 {
-    return status() && Suspended;
+    return status() & Suspended;
 }
 
 
@@ -336,7 +337,7 @@ bool OPcmciaSocket::reset()
 }
 
 
-QStringList OPcmciaSocket::productIdentity() const
+QStringList OPcmciaSocket::productIdentityVector() const
 {
     QStringList list;
     cistpl_vers_1_t *vers = &_ioctlarg.tuple_parse.parse.version_1;
@@ -355,6 +356,12 @@ QStringList OPcmciaSocket::productIdentity() const
         list += "<unknown>";
     }
     return list;
+}
+
+
+QString OPcmciaSocket::productIdentity() const
+{
+    return productIdentityVector().join( " " ).stripWhiteSpace();
 }
 
 

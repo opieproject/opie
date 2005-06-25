@@ -188,9 +188,13 @@ class OPcmciaSocket : public QObject
      */
     bool reset();
     /**
-      * @returns a list of product IDs
+     * @returns the product ID vector
+     */
+    QStringList productIdentityVector() const;
+    /**
+      * @returns the product ID string
       */
-    QStringList productIdentity() const;
+    QString productIdentity() const;
     /**
       * @returns the manufacturer ID string
       */
