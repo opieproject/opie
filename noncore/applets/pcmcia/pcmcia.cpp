@@ -76,7 +76,7 @@ PcmciaManager::PcmciaManager( QWidget * parent ) : QWidget( parent ), popupMenu(
     setFocusPolicy( NoFocus );
     setFixedWidth ( AppLnk::smallIconSize() );
     setFixedHeight ( AppLnk::smallIconSize() );
-    pm = Opie::Core::OResource::loadPixmap( "pcmcia/pcmcia", Opie::Core::OResource::SmallIcon );
+    pm = Opie::Core::OResource::loadPixmap( "pcmcia", Opie::Core::OResource::SmallIcon );
     configuring = false;
 
     QCopChannel *channel = new QCopChannel( "QPE/System", this );
@@ -163,11 +163,15 @@ void PcmciaManager::mousePressEvent( QMouseEvent* )
         submenu->insertItem( "Rese&t",     RESET+i*100 );
         submenu->insertItem( "&Configure", CONFIGURE+i*100 );
 
-        submenu->setItemEnabled( EJECT+i*100, !it.current()->isEmpty() );
-        submenu->setItemEnabled( INSERT+i*100, it.current()->isEmpty() );
-        submenu->setItemEnabled( SUSPEND+i*100, !it.current()->isEmpty() && it.current()->isSuspended() );
-        submenu->setItemEnabled( RESUME+i*100, !it.current()->isEmpty() && !it.current()->isSuspended() );
-        submenu->setItemEnabled( CONFIGURE+i*100, !it.current()->isEmpty() && !configuring );
+        bool isSuspended = it.current()->isSuspended();
+        bool isEmpty = it.current()->isEmpty();
+
+        submenu->setItemEnabled( EJECT+i*100, !isEmpty );
+        submenu->setItemEnabled( INSERT+i*100, isEmpty );
+        submenu->setItemEnabled( SUSPEND+i*100, !isEmpty && !isSuspended );
+        submenu->setItemEnabled( RESUME+i*100, !isEmpty && isSuspended );
+        submenu->setItemEnabled( RESET+i*100, !isEmpty && !isSuspended );
+        submenu->setItemEnabled( CONFIGURE+i*100, !isEmpty && !configuring );
 
         connect( submenu, SIGNAL(activated(int)), this, SLOT(userCardAction(int)) );
         menu->insertItem( tr( "%1: %2" ).arg( i++ ).arg( it.current()->identity() ), submenu, 1 );
@@ -213,7 +217,7 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
         else
         {
             theCard = it.current();
-            QString cardName = theCard->productIdentity().join( " " ).stripWhiteSpace();
+            QString cardName = theCard->productIdentity();
             for ( int i = 0; i < nCards; ++i )
             {
                 QString cardSection = QString( "Card_%1" ).arg( i );
@@ -234,7 +238,7 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
     if ( newCard )
     {
         odebug << "pcmcia: unconfigured card detected" << oendl;
-        QString newCardName = theCard->productIdentity().join( " " ).stripWhiteSpace();
+        QString newCardName = theCard->productIdentity();
         int result = QMessageBox::information( qApp->desktop(),
                                            tr( "PCMCIA/CF Subsystem" ),
                                            tr( "<qt>You have inserted the card<br/><b>%1</b><br/>This card is not yet configured. Do you want to configure it now?</qt>" ).arg( newCardName ),
@@ -261,7 +265,7 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
                 {
                     QString entryCard = QString( "card \"%1\"" ).arg( newCardName );
                     QString entryVersion( "    version " );
-                    for ( QStringList::Iterator it = theCard->productIdentity().begin(); it != theCard->productIdentity().end(); ++it )
+                    for ( QStringList::Iterator it = theCard->productIdentityVector().begin(); it != theCard->productIdentityVector().end(); ++it )
                     {
                         entryVersion += QString( "\"%1\", " ).arg( *it );
                     }

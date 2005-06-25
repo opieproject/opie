@@ -47,15 +47,15 @@ ConfigDialog::ConfigDialog( const OPcmciaSocket* card, QWidget* parent )
              :ConfigDialogBase( parent, "pcmcia config dialog", true )
 {
     gbDetails->setTitle( QString( "Details for card in socket #%1" ).arg( card->number() ) );
-    txtCardName->setText( card->productIdentity().join( " " ) );
+    txtCardName->setText( card->productIdentity() );
     txtManfid->setText( card->manufacturerIdentity() );
     txtFunction->setText( card->function() );
 
     QString insertAction = preferredAction( card, "insert" );
     QString resumeAction = preferredAction( card, "resume" );
 
-    odebug << "pcmcia: preferred insertion action for card '" << card->name() << "' seems to be '" << insertAction << "'" << oendl;
-    odebug << "pcmcia: preferred resume    action for card '" << card->name() << "' seems to be '" << resumeAction << "'" << oendl;
+    odebug << "pcmcia: preferred insertion action for card '" << card->productIdentity() << "' seems to be '" << insertAction << "'" << oendl;
+    odebug << "pcmcia: preferred resume    action for card '" << card->productIdentity() << "' seems to be '" << resumeAction << "'" << oendl;
 
     if ( !insertAction.isEmpty() )
     {
@@ -132,7 +132,7 @@ void ConfigDialog::writeConfigEntry( const OPcmciaSocket* card, const QString& k
     OConfig cfg( "PCMCIA" );
     cfg.setGroup( "Global" );
     int nCards = cfg.readNumEntry( "nCards", 0 );
-    QString cardName = card->productIdentity().join( " " ).stripWhiteSpace();
+    QString cardName = card->productIdentity();
     QString action;
 
     for ( int i = 0; i < nCards; ++i )
@@ -154,7 +154,7 @@ QString ConfigDialog::readConfigEntry( const OPcmciaSocket* card, const QString&
     OConfig cfg( "PCMCIA" );
     cfg.setGroup( "Global" );
     int nCards = cfg.readNumEntry( "nCards", 0 );
-    QString cardName = card->productIdentity().join( " " ).stripWhiteSpace();
+    QString cardName = card->productIdentity();
     QString value;
 
     for ( int i = 0; i < nCards; ++i )
