@@ -685,9 +685,11 @@ void AppLnk::execute(const QStringList& args) const
     if ( !mRotation.isEmpty() ) {
   // ######## this will only work in the server
   int rot = QPEApplication::defaultRotation();
+  int j = 0;
   rot = (rot+mRotation.toInt())%360;
-  QCString old = getenv("QWS_DISPLAY");
-  setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(rot), 1);
+  QCString old = getenv( "QWS_DISPLAY" ) ? getenv( "QWS_DISPLAY" ) : "Transformed";
+  QString driver( old.left( ( ( j = old.find( ':' ) ) >= 0 ) ? j : old.size() ).data() );
+  setenv( "QWS_DISPLAY", QString( "%1:Rot%2:0" ).arg( driver ).arg( rot ), 1 );
   invoke(args);
   setenv("QWS_DISPLAY", old.data(), 1);
     } else

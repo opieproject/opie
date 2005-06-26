@@ -1288,7 +1288,10 @@ void QPEApplication::setDefaultRotation( int r )
 {
     if ( qApp->type() == GuiServer ) {
         deforient = r;
-        setenv( "QWS_DISPLAY", QString( "Transformed:Rot%1:0" ).arg( r ).latin1(), 1 );
+        int j = 0;
+        QCString old = getenv( "QWS_DISPLAY" ) ? getenv( "QWS_DISPLAY" ) : "Transformed";
+        QString driver( old.left( ( ( j = old.find( ':' ) ) >= 0 ) ? j : old.size() ).data() );
+        setenv( "QWS_DISPLAY", QString( "%1:Rot%2:0" ).arg(driver).arg( r ).latin1(), 1 );
         Config config("qpe");
         config.setGroup( "Rotation" );
         config.writeEntry( "Rot", r );

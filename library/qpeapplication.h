@@ -208,7 +208,10 @@ inline void QPEApplication::setCurrentRotation( int r )
     // for compatibility with the SharpROM use fallback to setDefaultTransformation()
 #if QT_VERSION > 233
     Transformation e = DegToTrans( r );
-    ::setenv( "QWS_DISPLAY", QString( "Transformed:Rot%1:0" ).arg( r ).latin1(), 1 );
+    QCString old = getenv("QWS_DISPLAY") ? getenv( "QWS_DISPLAY" ) : "Transformed";
+    int j = 0;
+    QString driver( old.left( ( ( j = old.find( ':' ) ) >= 0 ) ? j : old.size() ).data() );
+    ::setenv( "QWS_DISPLAY", QString( "%1:Rot%2:0" ).arg( driver ).arg( r ).latin1(), 1 );
     qApp->desktop()->qwsDisplay()->setTransformation( e );
 #else
     setDefaultRotation( r );
