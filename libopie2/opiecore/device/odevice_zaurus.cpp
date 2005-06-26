@@ -199,7 +199,8 @@ void Zaurus::init(const QString& cpu_info)
     }
 
     // set path to backlight device in kernel 2.6
-    switch ( d->m_model ) {
+    switch ( d->m_model )
+    {
         case Model_Zaurus_SLB600: // fallthrough
         case Model_Zaurus_SL5500:
             m_backlightdev = "/sys/class/backlight/locomo-backlight/";
@@ -209,11 +210,11 @@ void Zaurus::init(const QString& cpu_info)
             break;
         default:
             m_backlightdev = "/sys/class/backlight/corgi-bl/";
-            break;
     }
 
     // set initial rotation
-    switch( d->m_model ) {
+    switch( d->m_model )
+    {
         case Model_Zaurus_SL6000: // fallthrough
         case Model_Zaurus_SLA300:
             d->m_rotation = Rot0;
@@ -229,8 +230,18 @@ void Zaurus::init(const QString& cpu_info)
         case Model_Zaurus_SL5500: // fallthrough
         default:
             d->m_rotation = Rot270;
-            break;
     }
+
+    // set default qte driver
+    switch( d->m_model )
+    {
+        case Model_Zaurus_SLC7x0:
+            d->m_qteDriver = "W100";
+            break;
+        default:
+            d->m_qteDriver = "Transformed";
+    }
+
     m_leds[0] = Led_Off;
 
     if ( m_embedix )

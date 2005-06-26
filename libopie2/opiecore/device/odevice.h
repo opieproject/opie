@@ -236,11 +236,9 @@ protected:
 public:
     // sandman do we want to allow destructions? -zecke?
     virtual ~ODevice();
-
     static ODevice *inst();
 
     // information
-
     QString modelString() const;
     OModel model() const;
     inline OModel series() const { return (OModel) ( model() & Model_Series_Mask ); }
@@ -255,6 +253,8 @@ public:
 
     virtual Transformation rotation() const;
     virtual ODirection direction() const;
+
+    QString qteDriver() const;
 
     // system
     virtual bool suspend();
@@ -358,6 +358,8 @@ class ODeviceData {
 
     Transformation m_rotation;
     ODirection m_direction;
+
+    QString m_qteDriver;
 
     QValueList <ODeviceButton> *m_buttons;
     uint                        m_holdtime;

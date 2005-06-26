@@ -177,6 +177,7 @@ ODevice::ODevice()
     d->m_sysverstr = "0.0";
     d->m_rotation = Rot0;
     d->m_direction = CW;
+    d->m_qteDriver = "Transformed";
 
     d->m_holdtime = 1000; // 1000ms
     d->m_buttons = 0;
@@ -400,6 +401,11 @@ Transformation ODevice::rotation() const
 ODirection ODevice::direction() const
 {
     return d->m_direction;
+}
+
+QString ODevice::qteDriver() const
+{
+    return d->m_qteDriver;
 }
 
 /**
