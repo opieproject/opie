@@ -86,19 +86,19 @@ void initEnvironment()
     // rotation
     int t = ODevice::inst()->rotation();
     odebug << "ODevice reports transformation to be " << t << oendl;
-    
+
     QString env( getenv("QWS_DISPLAY") );
     if ( env.isEmpty() )
     {
             int rot = ODevice::inst()->rotation() * 90;
-            QString qws_display = QString("Transformed:Rot%1:0").arg(rot);
+            QString qws_display = QString( "%1:Rot%2:0").arg(ODevice::inst()->qteDriver()).arg(rot);
             odebug << "setting QWS_DISPLAY to '" << qws_display << "'" << oendl;
             setenv("QWS_DISPLAY", (const char*) qws_display, 1);
     }
     else
         odebug << "QWS_DISPLAY already set as '" << env << "' - overriding ODevice transformation" << oendl;
 
-    QPEApplication::defaultRotation(); /* to ensure deforient matches reality */   
+    QPEApplication::defaultRotation(); /* to ensure deforient matches reality */
 }
 
 static void initKeyboard()
@@ -171,7 +171,7 @@ int initApplication( int argc, char ** argv )
 #endif
     s->show();
 
-#if 0   
+#if 0
     if ( QDate::currentDate().year() < 2005 )
     {
         if ( QMessageBox::information ( 0, ServerApplication::tr( "Information" ),
@@ -188,7 +188,7 @@ int initApplication( int argc, char ** argv )
     odebug << "--> mainloop in" << oendl;
     int rv = a.exec();
     odebug << "<-- mainloop out" << oendl;
-    remove_pidfile();          
+    remove_pidfile();
     odebug << "removing server object..." << oendl;
     delete s;
 
