@@ -49,6 +49,8 @@
 	* libopieui: Remove OVersatileView and OVersatileViewItem (mickeyl)
 	* libopienet: Miscellaneous API cleanups (mickeyl)
 	* libopiecore: Add linux pcmcia system abstraction classes (mickeyl)
+	* libopiecore: ODevice now knows the default gfx driver to use (mteira,mickeyl)
+	* Remove assumptions about default gfx driver ("Transformed") all over the place (mteira,mickeyl)
 
 2005-03-25	Opie 1.2.0
 
