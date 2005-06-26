@@ -32,7 +32,7 @@
 
 #include "configdialogbase.h"
 
-namespace Opie { namespace Core { class OPcmciaSocket; }; };
+namespace Opie { namespace Core { class OPcmciaSocket; class OConfig; }; };
 
 typedef QMap<QString,QString> StringMap;
 
@@ -45,6 +45,8 @@ class ConfigDialog : public ConfigDialogBase
     static QString preferredAction( const Opie::Core::OPcmciaSocket* card, const QString& type );
     static QString readConfigEntry( const Opie::Core::OPcmciaSocket* card, const QString& key, const QString& defaultValue );
     static void writeConfigEntry( const Opie::Core::OPcmciaSocket* card, const QString& key, const QString& value );
+    static Opie::Core::OConfig* cardConfig( const Opie::Core::OPcmciaSocket* card );
+    void writeConfiguration( const Opie::Core::OPcmciaSocket* card );
     StringMap bindEntries;
 };
 

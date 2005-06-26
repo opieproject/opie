@@ -33,6 +33,7 @@
 #include <opie2/oconfig.h>
 #include <opie2/odebug.h>
 #include <opie2/opcmciasystem.h>
+#include <qpe/global.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -42,6 +43,10 @@ using namespace Opie::Core;
 #include <qgroupbox.h>
 #include <qlabel.h>
 #include <qtextstream.h>
+
+/* STD */
+#include <errno.h>
+#include <string.h>
 
 ConfigDialog::ConfigDialog( const OPcmciaSocket* card, QWidget* parent )
              :ConfigDialogBase( parent, "pcmcia config dialog", true )
@@ -59,13 +64,13 @@ ConfigDialog::ConfigDialog( const OPcmciaSocket* card, QWidget* parent )
 
     if ( !insertAction.isEmpty() )
     {
-        for ( int i; i < cbInsertAction->count(); ++i )
+        for ( unsigned int i = 0; i < cbInsertAction->count(); ++i )
             if ( cbInsertAction->text( i ) == insertAction ) cbInsertAction->setCurrentItem( i );
     }
 
     if ( !resumeAction.isEmpty() )
     {
-        for ( int i; i < cbResumeAction->count(); ++i )
+        for ( unsigned int i = 0; i < cbResumeAction->count(); ++i )
             if ( cbResumeAction->text( i ) == resumeAction ) cbResumeAction->setCurrentItem( i );
     }
 
@@ -129,46 +134,23 @@ ConfigDialog::~ConfigDialog()
 
 void ConfigDialog::writeConfigEntry( const OPcmciaSocket* card, const QString& key, const QString& value )
 {
-    OConfig cfg( "PCMCIA" );
-    cfg.setGroup( "Global" );
-    int nCards = cfg.readNumEntry( "nCards", 0 );
-    QString cardName = card->productIdentity();
-    QString action;
-
-    for ( int i = 0; i < nCards; ++i )
+    OConfig* cfg = cardConfig( card );
+    if ( cfg )
     {
-        QString cardSection = QString( "Card_%1" ).arg( i );
-        cfg.setGroup( cardSection );
-        QString name = cfg.readEntry( "name" );
-        odebug << "comparing card '" << cardName << "' with known card '" << name << "'" << oendl;
-        if ( cardName == name )
-        {
-            cfg.writeEntry( key, value );
-            break;
-        }
+        cfg->writeEntry( key, value );
     }
+    delete cfg; // deleting a 0 pointer is within spec.
 }
 
 QString ConfigDialog::readConfigEntry( const OPcmciaSocket* card, const QString& key, const QString& defaultValue )
 {
-    OConfig cfg( "PCMCIA" );
-    cfg.setGroup( "Global" );
-    int nCards = cfg.readNumEntry( "nCards", 0 );
-    QString cardName = card->productIdentity();
     QString value;
-
-    for ( int i = 0; i < nCards; ++i )
+    OConfig* cfg = cardConfig( card );
+    if ( cfg )
     {
-        QString cardSection = QString( "Card_%1" ).arg( i );
-        cfg.setGroup( cardSection );
-        QString name = cfg.readEntry( "name" );
-        odebug << "comparing card '" << cardName << "' with known card '" << name << "'" << oendl;
-        if ( cardName == name )
-        {
-            value = cfg.readEntry( key, defaultValue );
-            break;
-        }
+        value = cfg->readEntry( key, defaultValue );
     }
+    delete cfg; // deleting a 0 pointer is within spec.
     return value;
 }
 
@@ -177,3 +159,80 @@ QString ConfigDialog::preferredAction( const OPcmciaSocket* card, const QString&
 {
     return ConfigDialog::readConfigEntry( card, QString( "%1Action" ).arg( type ), "suspend" );
 }
+
+
+OConfig* ConfigDialog::cardConfig( const OPcmciaSocket* card )
+{
+    OConfig* cardcfg = 0;
+    OConfig* cfg = new OConfig( "PCMCIA" );
+    cfg->setGroup( "Global" );
+    int nCards = cfg->readNumEntry( "nCards", 0 );
+    QString cardName = card->productIdentity();
+
+    for ( int i = 0; i < nCards; ++i )
+    {
+        QString cardSection = QString( "Card_%1" ).arg( i );
+        cfg->setGroup( cardSection );
+        QString name = cfg->readEntry( "name" );
+        odebug << "comparing card '" << cardName << "' with known card '" << name << "'" << oendl;
+        if ( cardName == name )
+        {
+            cardcfg = cfg;
+            break;
+        }
+    }
+    return cardcfg;
+}
+
+
+void ConfigDialog::writeConfiguration( const OPcmciaSocket* card )
+{
+    odebug << "pcmcia: ConfigDialog::writeConfiguration()" << oendl;
+    OConfig* cfg = cardConfig( card );
+    if ( !cfg )
+    {
+        cfg = new OConfig( "PCMCIA" );
+        cfg->setGroup( "Global" );
+        int nCards = cfg->readNumEntry( "nCards", 0 );
+        cfg->setGroup( QString( "Card_%1" ).arg( nCards ) );
+        cfg->writeEntry( "name", card->productIdentity() );
+        cfg->setGroup( "Global" );
+        cfg->writeEntry( "nCards", nCards+1 );
+        cfg->setGroup( QString( "Card_%1" ).arg( nCards ) );
+    }
+
+    cfg->writeEntry( "insertAction", cbInsertAction->currentText() );
+    cfg->writeEntry( "resumeAction", cbResumeAction->currentText() );
+    cfg->write();
+
+    if ( cbBindTo->isVisible() && cbBindTo->currentText() != "<None>" )
+    {
+        QString driver = cbBindTo->currentText();
+        QString conf = bindEntries[driver];
+
+        // write binding
+
+        QFile confFile( conf );
+        if ( confFile.open( IO_ReadWrite | IO_Append ) )
+        {
+            QString entryCard = QString( "card \"%1\"" ).arg( card->productIdentity() );
+            QString entryVersion( "    version " );
+            for ( QStringList::Iterator it = card->productIdentityVector().begin(); it != card->productIdentityVector().end(); ++it )
+            {
+                entryVersion += QString( "\"%1\", " ).arg( *it );
+            }
+            QString entryBind = QString( "    bind %1" ).arg( driver );
+            QString entry = QString( "\n%1\n%2\n%3\n" ).arg( entryCard ).arg( entryVersion ).arg( entryBind );
+            odebug << "pcmcia: writing entry...:" << entry << oendl;
+
+            confFile.writeBlock( (const char*) entry, entry.length() );
+            Global::statusMessage( "restarting pcmcia services..." );
+            OPcmciaSystem::instance()->restart();
+        }
+        else
+        {
+            owarn << "pcmcia: couldn't write binding to '" << conf << "' ( " << strerror( errno ) << " )." << oendl;
+        }
+    }
+}
+

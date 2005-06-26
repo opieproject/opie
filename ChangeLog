@@ -13,6 +13,7 @@
 	* ZSafe - make UI conform to Opie standards (drw)
 	* Today Addressbook plugin - fix configuration to show/not show birthdays, use checkboxes for selection (hrw)
 	* Opie-Console: read initial fixed font configuration from qpe.conf (mickeyl)
+	* Opie-PcmciaApplet: card monitoring applet lets you configure insert/resume actions and bind unsupported cards (mickeyl)
 
 	Fixed Bugs
 	----------

@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-             =.             (C) 2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
+             =.              (C) 2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -29,6 +29,7 @@
 
 #include "pcmcia.h"
 #include "configdialog.h"
+#include "promptactiondialog.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
@@ -138,8 +139,8 @@ void PcmciaManager::popupTimeout()
     popupMenu->hide();
 }
 
-enum { EJECT, INSERT, SUSPEND, RESUME, RESET, CONFIGURE };
-static const char* actionText[] = { "eject", "insert", "suspend", "resum", "resett", "configur" };
+enum { EJECT, INSERT, SUSPEND, RESUME, RESET, CONFIGURE, ACTIVATE };
+static const char* actionText[] = { "eject", "insert", "suspend", "resum", "resett", "configur", "activat" };
 
 void PcmciaManager::mousePressEvent( QMouseEvent* )
 {
@@ -246,46 +247,7 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
         odebug << "pcmcia: result = " << result << oendl;
         if ( result == 0 )
         {
-            QString insertAction; QString resumeAction; QString driver; QString conf;
-            bool configured = configure( theCard, insertAction, resumeAction, driver, conf );
-
-            if ( configured )
-            {
-                odebug << "pcmcia: card has been configured. writing out to database" << oendl;
-                cfg.setGroup( QString( "Card_%1" ).arg( nCards ) );
-                cfg.writeEntry( "name", newCardName );
-                cfg.writeEntry( "insertAction", insertAction );
-                cfg.writeEntry( "resumeAction", resumeAction );
-                cfg.setGroup( "Global" );
-                cfg.writeEntry( "nCards", nCards+1 );
-                cfg.write();
-
-                QFile confFile( conf );
-                if ( confFile.open( IO_ReadWrite | IO_Append ) )
-                {
-                    QString entryCard = QString( "card \"%1\"" ).arg( newCardName );
-                    QString entryVersion( "    version " );
-                    for ( QStringList::Iterator it = theCard->productIdentityVector().begin(); it != theCard->productIdentityVector().end(); ++it )
-                    {
-                        entryVersion += QString( "\"%1\", " ).arg( *it );
-                    }
-                    QString entryBind = QString( "    bind %1" ).arg( driver );
-                    QString entry = QString( "\n%1\n%2\n%3\n" ).arg( entryCard ).arg( entryVersion ).arg( entryBind );
-                    odebug << "pcmcia: writing entry...:" << entry << oendl;
-
-                    confFile.writeBlock( (const char*) entry, entry.length() );
-                    Global::statusMessage( "restarting pcmcia services..." );
-                    ::system( "/etc/init.d/pcmcia restart" );
-                }
-                else
-                {
-                    owarn << "pcmcia: couldn't write binding to '" << conf << "' ( " << strerror( errno ) << " )." << oendl;
-                }
-            }
-            else
-            {
-                odebug << "pcmcia: card has not been configured this time. leaving as unknown card" << oendl;
-            }
+            configure( theCard );
         }
         else
         {
@@ -326,47 +288,47 @@ void PcmciaManager::userCardAction( int action )
         case CONFIGURE:
         {
             QString insertAction; QString resumeAction; QString driver; QString conf;
-            configure( OPcmciaSystem::instance()->socket( socket ), insertAction, resumeAction, driver, conf );
+            configure( OPcmciaSystem::instance()->socket( socket ) );
             return;
         }
-        case EJECT:   success = OPcmciaSystem::instance()->socket( socket )->eject();
-                      break;
-        case INSERT:  success = OPcmciaSystem::instance()->socket( socket )->insert();
-                      break;
-        case SUSPEND: success = OPcmciaSystem::instance()->socket( socket )->suspend();
-                      break;
-        case RESUME:  success = OPcmciaSystem::instance()->socket( socket )->resume();
-                      break;
-        case RESET:   success = OPcmciaSystem::instance()->socket( socket )->reset();
-                      break;
-        default:      odebug << "pcmcia: not yet implemented" << oendl;
+        case EJECT:    success = OPcmciaSystem::instance()->socket( socket )->eject();
+                       break;
+        case INSERT:   success = OPcmciaSystem::instance()->socket( socket )->insert();
+                       break;
+        case SUSPEND:  success = OPcmciaSystem::instance()->socket( socket )->suspend();
+                       break;
+        case RESUME:   success = OPcmciaSystem::instance()->socket( socket )->resume();
+                       break;
+        case RESET:    success = OPcmciaSystem::instance()->socket( socket )->reset();
+                       break;
+        case ACTIVATE: success = true;
+                       break;
+        default:       odebug << "pcmcia: not yet implemented" << oendl;
     }
 
     if ( success )
     {
+        odebug << tr( "Successfully %1ed card in socket #%2" ).arg( actionText[action] ).arg( socket ) << oendl;
         popUp( tr( "Successfully %1ed card in socket #%2" ).arg( actionText[action] ).arg( socket ) );
     }
     else
     {
+        odebug << tr( "Error while %1ing card in socket #%2" ).arg( actionText[action] ).arg( socket ) << oendl;
         popUp( tr( "Error while %1ing card in socket #%2" ).arg( actionText[action] ).arg( socket ) );
     }
 }
 
-bool PcmciaManager::configure( OPcmciaSocket* card, QString& insertAction, QString& resumeAction, QString& driver, QString& conf )
+void PcmciaManager::configure( OPcmciaSocket* card )
 {
     configuring = true;
     ConfigDialog dialog( card, qApp->desktop() );
-    int configresult = QPEApplication::execDialog( &dialog, false );
+    int result = QPEApplication::execDialog( &dialog, false );
     configuring = false;
-    odebug << "pcmcia: configresult = " << configresult << oendl;
-    if ( configresult )
+    odebug << "pcmcia: configresult = " << result << oendl;
+    if ( result )
     {
-        insertAction = dialog.cbInsertAction->currentText();
-        resumeAction = dialog.cbResumeAction->currentText();
-        driver = dialog.cbBindTo->currentText();
-        conf = dialog.bindEntries[driver];
+        dialog.writeConfiguration( card );
     }
-    return configresult;
 }
 
 void PcmciaManager::executeAction( Opie::Core::OPcmciaSocket* card, const QString& type )
@@ -374,14 +336,26 @@ void PcmciaManager::executeAction( Opie::Core::OPcmciaSocket* card, const QStrin
     odebug << "pcmcia: performing " << type << " action ..." << oendl;
     QString theAction = ConfigDialog::preferredAction( card, type );
     int intAction = card->number() * 100;
-    if ( theAction == "activate" ) ;
+
+    if ( theAction == "prompt for" )
+    {
+        PromptActionDialog dialog( qApp->desktop(), "promptfor", true );
+        dialog.setCaption( QString( "Choose action for card #%1" ).arg( card->number() ) );
+        int result = QPEApplication::execDialog( &dialog, true );
+        odebug << "pcmcia: configresult = " << result << oendl;
+        if ( result )
+        {
+            theAction = dialog.cbAction->currentText();
+        }
+        else
+        {
+            odebug << "pcmcia: prompted to do nothing" << oendl;
+            return;
+        }
+    }
+    if ( theAction == "activate" ) intAction += ACTIVATE;
     else if ( theAction == "eject" ) intAction += EJECT;
     else if ( theAction == "suspend" ) intAction += SUSPEND;
-    else if ( theAction == "prompt for" )
-    {
-        odebug << "pcmcia: sorry, not 'prompt for' is not yet implemented!" << oendl;
-        return;
-    }
     else
     {
         owarn << "pcmcia: action '" << theAction << "' not known. Huh?" << oendl;

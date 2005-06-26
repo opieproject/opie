@@ -1,7 +1,8 @@
 TEMPLATE    = lib
 CONFIG      += qt plugin warn_on 
 
-INTERFACES  = configdialogbase.ui
+INTERFACES  = configdialogbase.ui \
+              promptactiondialog.ui
 HEADERS     = pcmcia.h \
               configdialog.h
 SOURCES     = pcmcia.cpp \
@@ -9,10 +10,11 @@ SOURCES     = pcmcia.cpp \
 TARGET      = pcmciaapplet
 
 DESTDIR     = $(OPIEDIR)/plugins/applets
+
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 
 LIBS        += -lqpe -lopiecore2
-VERSION     = 0.2.0
+VERSION     = 0.9.0
 
 include( $(OPIEDIR)/include.pro )
