@@ -592,10 +592,8 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
 		    // information we need and do the query on it. 
 		    // This table is just visible for this process and will be removed
 		    // automatically after using.
-		    datediff_query = "CREATE TEMP TABLE bs ( uid, \"Birthday\", \"Anniversary\" );";
-		    datediff_query += "INSERT INTO bs SELECT uid,substr(\"Birthday\", 6, 10),substr(\"Anniversary\", 6, 10) FROM addressbook WHERE ( \"Birthday\" != '' OR \"Anniversary\" != '' );";
-		    datediff_query += QString( "SELECT uid FROM bs WHERE " ) + uid_query;
-                    datediff_query += QString( " (\"%1\" <= '%2-%3\' AND \"%4\" >= '%5-%6')" )
+				datediff_query = "SELECT uid,substr(\"Birthday\", 6, 10) as \"BirthdayMD\", substr(\"Anniversary\", 6, 10) as \"AnniversaryMD\" FROM addressbook WHERE ( \"Birthday\" != '' OR \"Anniversary\" != '' ) AND ";
+				datediff_query += QString( " (\"%1MD\" <= '%2-%3\' AND \"%4MD\" >= '%5-%6')" )
                         .arg( *it )
 			    //.arg( QString::number( endDate->year() ).rightJustify( 4, '0' ) )
                         .arg( QString::number( endDate->month() ).rightJustify( 2, '0' ) )
@@ -683,13 +681,6 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
     }
 
     UIDArray list = extractUids( res );
-
-    // Remove temp table if created
-    if ( !datediff_query.isEmpty( ) ){
-	    qu = "DROP TABLE bs";
-	    OSQLRawQuery raw( qu );
-	    OSQLResult res = m_driver->query( &raw );
-    }
 
     return list;
 }
