@@ -87,14 +87,16 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
         SortTitle = SortCustom,
         SortFirstName,
         SortMiddleName,
-	SortLastName,
+		SortLastName,
         SortSuffix,
         SortEmail,
         SortNickname,
         SortFileAsName,
         SortAnniversary,
         SortBirthday,
-        SortGender
+        SortGender,
+        SortBirthdayWithoutYear,
+        SortAnniversaryWithoutYear
     };
 
 	/**
