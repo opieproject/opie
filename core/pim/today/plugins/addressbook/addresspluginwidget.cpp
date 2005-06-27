@@ -116,6 +116,11 @@ void AddressBookPluginWidget::getAddress() {
 					+ QObject::tr( "Next birthdays in <b> %1 </b> days:" )
 					.arg( m_daysLookAhead )
 					+ "</font> <br>";
+
+				// Sort filtered results
+				m_list = m_contactdb->sorted( m_list, true, Opie::OPimContactAccess::SortBirthday,
+								  Opie::OPimContactAccess::FilterOff, NULL );
+
 				for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
 					if ( ammount++ < m_maxLinesTask ){
 						// Now we want to calculate how many days
@@ -168,6 +173,11 @@ void AddressBookPluginWidget::getAddress() {
 				+ QObject::tr( "Next anniversaries in <b> %1 </b> days:" )
 				.arg( m_daysLookAhead )
 				+ "</font> <br>";
+
+			// Sort filtered results
+			m_list = m_contactdb->sorted( m_list, true, Opie::OPimContactAccess::SortAnniversary,
+							  Opie::OPimContactAccess::FilterOff, NULL );
+
 			for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
 				if ( ammount++ < m_maxLinesTask ){
 					// Now we want to calculate how many days until anniversary.
