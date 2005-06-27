@@ -118,7 +118,7 @@ void AddressBookPluginWidget::getAddress() {
 					+ "</font> <br>";
 
 				// Sort filtered results
-				m_list = m_contactdb->sorted( m_list, true, Opie::OPimContactAccess::SortBirthday,
+				m_list = m_contactdb->sorted( m_list, true, Opie::OPimContactAccess::SortBirthdayWithoutYear,
 								  Opie::OPimContactAccess::FilterOff, 0 );
 
 				for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
@@ -175,7 +175,7 @@ void AddressBookPluginWidget::getAddress() {
 				+ "</font> <br>";
 
 			// Sort filtered results
-			m_list = m_contactdb->sorted( m_list, true, Opie::OPimContactAccess::SortAnniversary,
+			m_list = m_contactdb->sorted( m_list, true, Opie::OPimContactAccess::SortAnniversaryWithoutYear,
 							  Opie::OPimContactAccess::FilterOff, 0 );
 
 			for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
