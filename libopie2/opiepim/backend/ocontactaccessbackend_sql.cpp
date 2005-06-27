@@ -648,7 +648,7 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
 
 	// The following if line is a replacement for 
 	// if ( searchQuery.endsWith( "AND" ) )
-	if ( searchQuery.findRev( "AND" ) == ( searchQuery.length() - 3 ) ){
+	if ( searchQuery.findRev( "AND" ) == static_cast<int>( searchQuery.length() - 3 ) ){
 		odebug << "remove AND" << oendl;
 		searchQuery.remove( searchQuery.length()-3, 3 ); // Hmmmm..
 	}
@@ -872,6 +872,12 @@ UIDArray OPimContactAccessBackend_SQL::sorted( const UIDArray& ar, bool asc, int
 	    break;
     case OPimContactAccess::SortGender:
 	    query += " \"Gender\"";
+	    break;
+    case OPimContactAccess::SortBirthdayWithoutYear:
+	    query += " substr(\"Birthday\", 6, 10)";
+	    break;
+    case OPimContactAccess::SortAnniversaryWithoutYear:
+	    query += " substr(\"Anniversary\", 6, 10)";
 	    break;
     default:
 	   query += " \"Last Name\"";
