@@ -656,7 +656,7 @@ bool Zaurus::suspend() {
         return false;
 
     bool res = false;
-    OAbstractMobileDevice::sendSuspendmsg();
+    QCopEnvelope( "QPE/System", "aboutToSuspend()" );
 
     struct timeval tvs, tvn;
     ::gettimeofday ( &tvs, 0 );
@@ -675,6 +675,8 @@ bool Zaurus::suspend() {
             ::gettimeofday ( &tvn, 0 );
         } while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < m_timeOut );
     }
+
+    QCopEnvelope( "QPE/System", "returnFromSuspend()" );
 
     return res;
 }
