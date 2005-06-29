@@ -69,11 +69,11 @@ class OPcmciaSystem : public QObject
      */
     int cardCount() const;
     /**
-     * @returns a pointer to the (one and only) @ref OSystem instance.
+     * @returns a pointer to the (one and only) @ref OSystem instance
      */
     static OPcmciaSystem* instance();
     /**
-     * @returns an iterator usable for iterating through all sound cards.
+     * @returns an iterator usable for iterating through all sound cards
      */
     CardIterator iterator() const;
     /**
@@ -81,6 +81,10 @@ class OPcmciaSystem : public QObject
      * @see OPcmciaSocket
      */
     OPcmciaSocket* socket( unsigned int number );
+    /**
+      * Restarts the subsystem
+      */
+    void restart();
     /**
      * @internal Rebuild the internal database
      * @note Sometimes it might be useful to call this from client code,

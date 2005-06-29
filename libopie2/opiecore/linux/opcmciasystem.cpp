@@ -154,6 +154,13 @@ OPcmciaSocket* OPcmciaSystem::socket( unsigned int number )
 }
 
 
+void OPcmciaSystem::restart()
+{
+    //FIXME Use OProcess or something that allows more control
+    ::system( "/etc/init.d/pcmcia restart" );
+}
+
+
 OPcmciaSystem* OPcmciaSystem::instance()
 {
     if ( !_instance ) _instance = new OPcmciaSystem();
