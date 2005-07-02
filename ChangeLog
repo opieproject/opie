@@ -9,11 +9,12 @@
 	* Wellenreiter: Remove Joining networks - use OpieStumbler for that (mickeyl)
 	* Opie-Mobilemsg has gone unsupported - it never really worked and there will be a replacement (mickeyl)
 	* Opie-Tabmanager has gone unsupported - it barely works and there is not much of a use of it anyway (mickeyl)
-	* Checkbook - added configuration option to use smaller font for checkbook transaction tab (hrw)
-	* ZSafe - make UI conform to Opie standards (drw)
-	* Today Addressbook plugin - fix configuration to show/not show birthdays, use checkboxes for selection (hrw)
-	* Opie-Console: read initial fixed font configuration from qpe.conf (mickeyl)
-	* Opie-PcmciaApplet: card monitoring applet lets you configure insert/resume actions and bind unsupported cards (mickeyl)
+	* Checkbook: Added configuration option to use smaller font for checkbook transaction tab (hrw)
+	* ZSafe: Made UI conform to Opie standards (drw)
+	* Today Addressbook plugin: Fixed configuration to show/not show birthdays, use checkboxes for selection (hrw)
+	* Opie-Console: Read initial fixed font configuration from qpe.conf (mickeyl)
+	* Opie-PcmciaApplet: Configure insert/resume actions and bind unsupported cards (mickeyl)
+	* SysInfo: Remove CPU tab and add Devices tab instead (mickeyl)
 
 	Fixed Bugs
 	----------

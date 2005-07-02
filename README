@@ -82,13 +82,13 @@ For a successful build you must install these libraries and headers.
 * libsqlite >= 3.0.0
   http://www.sqlite.org/download.html
 
-* libipk v135 (or greater)
+* libipk >= 138
   ftp://handhelds.org/linux/packages/ipkg
 
 3. Supported Devices
 ====================
 
-Sharp Zaurus SL-5x00, SL-B500, SL-C7x0, SL-C8x0, SL-6000
+Sharp Zaurus SL-5x00, SL-B500, SL-C7x0, SL-C8x0, SL-C1000, SL-C3000, SL-6000
 
 HP iPAQ 36xx, 37xx, 38xx, 39xx, 54xx, 55xx
 
