@@ -3,9 +3,7 @@
 **
 ** Display Syslog information
 **
-** Copyright (C) 2004, Michael Lauer
-**                    mickey@tm.informatik.uni-frankfurt.de
-**                    http://www.Vanille.de
+** Copyright (C) 2004-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -69,7 +67,7 @@ SyslogInfo::SyslogInfo( QWidget* parent,  const char* name, WFlags fl )
     syslogview->setTextFormat( PlainText );
     OConfig cfg( "qpe" );
     cfg.setGroup( "Appearance" );
-    syslogview->setFont( QFont( "Fixed", cfg.readNumEntry( "FontSize", 10 ) ) );
+    syslogview->setFont( QFont( cfg.readEntry( "FixedFontFamily", "Fixed" ), cfg.readNumEntry( "FixedFontSize", 10 ) ) );
     layout->addWidget( syslogview, 0, 0 );
     syslogview->setText( "..." );
 

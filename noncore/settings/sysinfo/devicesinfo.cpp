@@ -43,6 +43,7 @@ using namespace Opie::Ui;
 #include <qcombobox.h>
 #include <qfile.h>
 #include <qpushbutton.h>
+#include <qstringlist.h>
 #include <qtextstream.h>
 #include <qtextview.h>
 #include <qtimer.h>
@@ -96,7 +97,7 @@ DevicesInfo::DevicesInfo( QWidget* parent,  const char* name, WFlags fl )
     view = new DevicesView( this );
     layout->addWidget( view, 100 );
     stack = new QWidgetStack( this );
-    layout->addWidget( stack, 70 );
+    layout->addWidget( stack, 80 );
 }
 
 
@@ -186,7 +187,8 @@ void InputCategory::populate()
     OInputSystem::DeviceIterator it = sys->iterator();
     while ( it.current() )
     {
-        new InputDevice( this, it.current()->identity() );
+        InputDevice* dev = new InputDevice( this, it.current()->identity() );
+        dev->setInfo( it.current() );
         ++it;
     }
 }
@@ -208,7 +210,8 @@ void CardsCategory::populate()
     OPcmciaSystem::CardIterator it = sys->iterator();
     while ( it.current() )
     {
-        new CardDevice( this, it.current()->identity() );
+        CardDevice *dev = new CardDevice( this, it.current()->identity() );
+        dev->setInfo( it.current() );
         ++it;
     }
 }
@@ -326,8 +329,45 @@ void CpuDevice::addInfo( const QString& info )
 CardDevice::CardDevice( Category* parent, const QString& name )
            :Device( parent, name )
 {
-    details = new QPushButton( name, devinfo );
-    details->hide();
+    OListView* w = new OListView( devinfo );
+    details = w;
+    w->addColumn( "Info" );
+    w->addColumn( "Value" );
+    w->hide();
+}
+
+void CardDevice::setInfo( const OPcmciaSocket* card )
+{
+    QStringList vendorlst = card->productIdentityVector();
+    for( QStringList::Iterator it = vendorlst.begin(); it != vendorlst.end(); ++it )
+    {
+        new OListViewItem( (OListView*) details, "VendorID", *it );
+    }
+    new OListViewItem( (OListView*) details, "Manufacturer", card->manufacturerIdentity() );
+    new OListViewItem( (OListView*) details, "Function", card->function() );
+
+    QStringList text;
+    OPcmciaSocket::OPcmciaSocketCardStatus status = card->status();
+    if ( status )
+    {
+        if ( status & OPcmciaSocket::Occupied ) text += "Occupied";
+        if ( status & OPcmciaSocket::OccupiedCardBus ) text += "CardBus";
+        if ( status & OPcmciaSocket::WriteProtected ) text += "WriteProtected";
+        if ( status & OPcmciaSocket::BatteryLow ) text += "BatteryLow";
+        if ( status & OPcmciaSocket::BatteryDead ) text += "BatteryDead";
+        if ( status & OPcmciaSocket::Ready ) text += "Ready";
+        if ( status & OPcmciaSocket::Suspended ) text += "Suspended";
+        if ( status & OPcmciaSocket::Attention ) text += "Attention";
+        if ( status & OPcmciaSocket::InsertionInProgress ) text += "InsertionInProgress";
+        if ( status & OPcmciaSocket::RemovalInProgress ) text += "RemovalInProgress";
+        if ( status & OPcmciaSocket::ThreeVolts  ) text += "3V";
+        if ( status & OPcmciaSocket::SupportsVoltage ) text += "SupportsVoltage";
+    }
+    else
+    {
+        text += "<unknown>";
+    }
+    new OListViewItem( (OListView*) details, "Status", text.join( ", " ) );
 }
 
 CardDevice::~CardDevice()
@@ -338,8 +378,33 @@ CardDevice::~CardDevice()
 InputDevice::InputDevice( Category* parent, const QString& name )
             :Device( parent, name )
 {
-    details = new QPushButton( name, devinfo );
-    details->hide();
+    OListView* w = new OListView( devinfo );
+    details = w;
+    w->addColumn( "Info" );
+    w->addColumn( "Value" );
+    w->hide();
+}
+
+void InputDevice::setInfo( const OInputDevice* dev )
+{
+    new OListViewItem( (OListView*) details, "Identity", dev->identity() );
+    new OListViewItem( (OListView*) details, "Path", dev->path() );
+    new OListViewItem( (OListView*) details, "Unique", dev->uniq() );
+
+    QStringList text;
+    if ( dev->hasFeature( OInputDevice::Synchronous ) ) text += "Synchronous";
+    if ( dev->hasFeature( OInputDevice::Keys ) ) text += "Keys";
+    if ( dev->hasFeature( OInputDevice::Relative ) ) text += "Relative";
+    if ( dev->hasFeature( OInputDevice::Absolute ) ) text += "Absolute";
+    if ( dev->hasFeature( OInputDevice::Miscellaneous ) ) text += "Miscellaneous";
+    if ( dev->hasFeature( OInputDevice::Leds ) ) text += "Leds";
+    if ( dev->hasFeature( OInputDevice::Sound ) ) text += "Sound";
+    if ( dev->hasFeature( OInputDevice::AutoRepeat ) ) text += "AutoRepeat";
+    if ( dev->hasFeature( OInputDevice::ForceFeedback ) ) text += "ForceFeedback";
+    if ( dev->hasFeature( OInputDevice::PowerManagement ) ) text += "PowerManagement";
+    if ( dev->hasFeature( OInputDevice::ForceFeedbackStatus ) ) text += "ForceFeedbackStatus";
+    new OListViewItem( (OListView*) details, "Features", text.join( ", " ) );
+
 }
 
 InputDevice::~InputDevice()

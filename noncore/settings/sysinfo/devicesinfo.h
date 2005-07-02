@@ -37,6 +37,8 @@ _;:,     .>    :=|.         This program is free software; you can
 #include <qwidget.h>
 #include <qwidgetstack.h>
 
+namespace Opie { namespace Core { class OPcmciaSocket; class OInputDevice; }; };
+
 //=================================================================================================
 class DevicesView : public Opie::Ui::OListView
 {
@@ -102,7 +104,6 @@ class CardsCategory : public Category
 public:
     CardsCategory( DevicesView* parent );
     virtual ~CardsCategory();
-
     virtual void populate();
 };
 
@@ -149,6 +150,8 @@ public:
     InputDevice( Category* parent, const QString& name );
     ~InputDevice();
 
+    void setInfo( const Opie::Core::OInputDevice* dev );
+
 //     virtual QWidget* detailsWidget();
 };
 
@@ -158,6 +161,7 @@ class CardDevice : public Device
 public:
     CardDevice( Category* parent, const QString& name );
     ~CardDevice();
+    void setInfo( const Opie::Core::OPcmciaSocket* card );
 
 //     virtual QWidget* detailsWidget();
 };
