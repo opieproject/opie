@@ -50,8 +50,8 @@ OListView::OListView( QWidget *parent, const char *name, WFlags fl )
 {
     //FIXME: get from global settings and calculate ==> see oglobalsettings.*
 
-    m_alternateBackground = QColor( 238, 246, 255 );
-    m_columnSeparator = QPen( QColor( 150, 160, 170 ), 0, DotLine );
+    m_alternateBackground = QColor( 228, 236, 245 );
+    m_columnSeparator = QPen( QColor( 50, 60, 70 ), 0, DotLine );
     m_fullWidth = true;
     connect( this, SIGNAL(expanded(QListViewItem*)), SLOT(expand(QListViewItem*)));
 }
