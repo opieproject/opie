@@ -1,37 +1,45 @@
-/**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
-**
-** This file is part of the Qtopia Environment.
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
-**********************************************************************/
-
+/*
+                             This file is part of the Opie Project
+              =.             (C) 2000-2002 Trolltech AS
+            .=l.             (C) 2002-2005 The Opie Team <opie-devel@handhelds.org>
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+    :`=1 )Y*s>-.--   :       the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; version 2 of the License.
+     ._= =}       :
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+    :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
 #include "startmenu.h"
 #include "taskbar.h"
 #include "serverinterface.h"
 #include "launcherview.h"
 #include "launcher.h"
 #include "server.h"
-
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
+using namespace Opie::Core;
+
 #include <qtopia/global.h>
 #ifdef Q_WS_QWS
 #include <qtopia/qcopenvelope_qws.h>
 #endif
-#include <qtopia/resource.h>
 #include <qtopia/applnk.h>
 #include <qtopia/config.h>
 #include <qtopia/qpeapplication.h>
@@ -121,9 +129,8 @@ void LauncherTabWidget::createDocLoadingWidget()
     QWidget *space1 = new QWidget( docLoadingVBox );
     docLoadingVBox->setStretchFactor( space1, 1 );
 
-    QLabel *waitPixmap = new QLabel( docLoadingVBox );
+    QLabel *waitPixmap = new QLabel( "Please Wait...", docLoadingVBox );
     waitPixmap->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)5, waitPixmap->sizePolicy().hasHeightForWidth() ) );
-    waitPixmap->setPixmap( Resource::loadPixmap( "bigwait" ) );
     waitPixmap->setAlignment( int( QLabel::AlignCenter ) );
 
     Config cfg( "Launcher" );
@@ -529,11 +536,8 @@ void Launcher::createGUI()
 #endif
 
     // all documents
-    QImage img( Resource::loadImage( "DocsIcon" ) );
-    QPixmap pm;
-    pm = img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
+    QPixmap pm = OResource::loadPixmap( "DocsIcon", OResource::SmallIcon );
     // It could add this itself if it handles docs
-
     tabs->newView("Documents", pm, tr("Documents") )->setToolsEnabled( TRUE );
 
     QTimer::singleShot( 0, tabs, SLOT( initLayout() ) );

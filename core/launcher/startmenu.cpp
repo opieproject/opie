@@ -1,23 +1,30 @@
-/**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
-**
-** This file is part of the Qtopia Environment.
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
-**********************************************************************/
-
+/*
+                             This file is part of the Opie Project
+              =.             (C) 2000-2002 Trolltech AS
+            .=l.             (C) 2002-2005 The Opie Team <opie-devel@handhelds.org>
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+    :`=1 )Y*s>-.--   :       the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; version 2 of the License.
+     ._= =}       :
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+    :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
 // TODO. During startup
 // Launcher::typeAdded
 // is called for each new tab and calls then each time the refresh of startmenu
@@ -27,16 +34,13 @@
 
 #include "startmenu.h"
 
+/* OPIE */
+#include <opie2/oresource.h>
+using namespace Opie::Core;
 #include <qtopia/qpeapplication.h>
 #include <qtopia/config.h>
-#include <qtopia/resource.h>
 #include <qtopia/mimetype.h>
 #include <qtopia/qlibrary.h>
-
-//#include <qpainter.h>
-
-//#include <stdlib.h>
-
 
 #define APPLNK_ID_OFFSET 250
 #define NO_ID -1
@@ -61,7 +65,7 @@ StartMenu::StartMenu(QWidget *parent) : QLabel( parent )
 
     int sz = AppLnk::smallIconSize()+3;
     QPixmap pm;
-    pm.convertFromImage(Resource::loadImage( startButtonPixmap).smoothScale( sz,sz) );
+    pm.convertFromImage(OResource::loadImage( startButtonPixmap, OResource::NoScale ).smoothScale( sz,sz) );
     setPixmap(pm);
     setFocusPolicy( NoFocus );
 
@@ -145,13 +149,7 @@ void StartMenu::createAppEntry( QPopupMenu *menu, QDir dir, QString file )
 		    menu->insertSeparator();
     		delete applnk;
        	} else {
-                QPixmap test;
-                QImage img = Resource::loadImage( applnk->icon() );
-                if(!img.isNull() )
-                    test.convertFromImage(
-                           img.smoothScale(
-                            AppLnk::smallIconSize(), AppLnk::smallIconSize() ), 0 );
-                
+            QPixmap pixmap = OResource::loadPixmap( applnk->icon(), OResource::SmallIcon );
                 // Insert items ordered lexically
 		int current, left = 0, right = currentItem;
                 while( left != right ) {
@@ -161,8 +159,8 @@ void StartMenu::createAppEntry( QPopupMenu *menu, QDir dir, QString file )
                     else
                         right = current;
                 }
-                
-                menu->insertItem( test, applnk->name(),
+
+                menu->insertItem( pixmap, applnk->name(),
                               currentItem + APPLNK_ID_OFFSET, current );
                 appLnks.insert( currentItem + APPLNK_ID_OFFSET, applnk );
                 currentItem++;
@@ -194,21 +192,18 @@ void StartMenu::createDirEntry( QPopupMenu *menu, QDir dir, QString file, bool l
 
     // checks were ok
 
-    QPixmap test;
-    test.convertFromImage( Resource::loadImage( icon ).smoothScale(
-        AppLnk::smallIconSize(), AppLnk::smallIconSize() ), 0 );
-
+    QPixmap pixmap = OResource::loadPixmap( icon, OResource::SmallIcon );
 	if ( useWidePopupMenu ) {
         // generate submenu
         QPopupMenu *submenu = new QPopupMenu( menu );
         connect( submenu,  SIGNAL(activated(int)), SLOT(itemSelected(int)) );
-        menu->insertItem( test, name, submenu, NO_ID );
+        menu->insertItem( pixmap, name, submenu, NO_ID );
 
         // ltabs is true cause else we wouldn't stuck around..
         createMenuEntries( submenu, subdir, true, lot );
     } else {
         // no submenus - just bring corresponding tab to front
-        menu->insertItem( test, name, currentItem );
+        menu->insertItem( pixmap, name, currentItem );
         tabNames.insert( currentItem, new QString( file ) );
         currentItem++;
     }

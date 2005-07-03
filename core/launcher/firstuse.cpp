@@ -1,25 +1,32 @@
-/**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
-**
-** This file is part of the Qtopia Environment.
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
-**********************************************************************/
+/*
+                             This file is part of the Opie Project
+              =.             (C) 2000-2002 Trolltech AS
+            .=l.             (C) 2002-2005 The Opie Team <opie-devel@handhelds.org>
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+    :`=1 )Y*s>-.--   :       the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; version 2 of the License.
+     ._= =}       :
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+    :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
 
 // I need access to some things you don't normally get access to.
-
 #ifndef _MSC_VER
   //### revise to allow removal of translators under MSVC
 #define private public
@@ -34,7 +41,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
-#include <qtopia/resource.h>
+#include <opie2/oresource.h>
 #include <qtopia/qcopenvelope_qws.h>
 #include <qtopia/config.h>
 #include <qtopia/fontmanager.h>
@@ -241,12 +248,10 @@ void FirstUse::nextDialog()
 		Config config( "qpe" );
 		config.setGroup( "Startup" );
 		config.writeEntry( "FirstUse", FALSE );
-		QPixmap pix = Resource::loadPixmap("bigwait");
-		QLabel *lblWait = new QLabel(0, "wait hack!", // No tr
+		QLabel *lblWait = new QLabel("Please Wait...", 0, "wait hack!", // No tr
 			QWidget::WStyle_Customize | QWidget::WDestructiveClose |
 			QWidget::WStyle_NoBorder | QWidget::WStyle_Tool |
 			QWidget::WStyle_StaysOnTop);
-		lblWait->setPixmap( pix );
 		lblWait->setAlignment( QWidget::AlignCenter );
 		lblWait->setGeometry( qApp->desktop()->geometry() );
 		lblWait->show();
@@ -430,14 +435,7 @@ void FirstUse::reloadLanguages()
 void FirstUse::paintEvent( QPaintEvent * )
 {
     QPainter p( this );
-
     p.drawPixmap(0,0, splash);
-
-    QFont f = p.font();
-    f.setPointSize(15);
-    f.setItalic(FALSE);
-    f.setBold(FALSE);
-    p.setFont(f);
 
     if ( currApp < 0 ) {
 	drawText(p, tr( "Tap anywhere on the screen to continue." ));
@@ -451,7 +449,7 @@ void FirstUse::paintEvent( QPaintEvent * )
 
 void FirstUse::loadPixmaps()
 {
-    splash.convertFromImage( Resource::loadImage("launcher/firstuse")
+    splash.convertFromImage( OResource::loadImage("launcher/firstuse", OResource::NoScale )
                              .smoothScale( width(), height() ) );
 
     setBackgroundPixmap(splash);
