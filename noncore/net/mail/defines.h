@@ -1,7 +1,8 @@
 #ifndef DEFINE_CONSTANTS_H
 #define DEFINE_CONSTANTS_H
 
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
+using namespace Opie::Core;
 
 #define USER_AGENT          "OpieMail v0.3"
 
@@ -19,22 +20,22 @@
 #define PIC_OFFLINE         "mail/notconnected"
 #define PIC_DOCUMENT        "DocsIcon"
 
-#define ICON_COMPOSEMAIL    QIconSet( Resource::loadPixmap( PIC_COMPOSEMAIL ) )
-#define ICON_SENDQUEUED     QIconSet( Resource::loadPixmap( PIC_SENDQUEUED ) )
-#define ICON_SHOWFOLDERS    QIconSet( Resource::loadPixmap( PIC_SHOWFOLDERS ) )
-#define ICON_SEARCHMAILS    QIconSet( Resource::loadPixmap( PIC_SEARCHMAILS ) )
-#define ICON_EDITSETTINGS   QIconSet( Resource::loadPixmap( PIC_EDITSETTINGS ) )
-#define ICON_EDITACCOUNTS   QIconSet( Resource::loadPixmap( PIC_EDITACCOUNTS ) )
-#define ICON_SYNC           QIconSet( Resource::loadPixmap( PIC_SYNC ) )
-#define ICON_READMAIL       QIconSet( Resource::loadPixmap( PIC_DOCUMENT))
+#define ICON_COMPOSEMAIL    QIconSet( OResource::loadPixmap( PIC_COMPOSEMAIL, OResource::SmallIcon ) )
+#define ICON_SENDQUEUED     QIconSet( OResource::loadPixmap( PIC_SENDQUEUED, OResource::SmallIcon ) )
+#define ICON_SHOWFOLDERS    QIconSet( OResource::loadPixmap( PIC_SHOWFOLDERS, OResource::SmallIcon ) )
+#define ICON_SEARCHMAILS    QIconSet( OResource::loadPixmap( PIC_SEARCHMAILS, OResource::SmallIcon ) )
+#define ICON_EDITSETTINGS   QIconSet( OResource::loadPixmap( PIC_EDITSETTINGS, OResource::SmallIcon ) )
+#define ICON_EDITACCOUNTS   QIconSet( OResource::loadPixmap( PIC_EDITACCOUNTS, OResource::SmallIcon ) )
+#define ICON_SYNC           QIconSet( OResource::loadPixmap( PIC_SYNC, OResource::SmallIcon ) )
+#define ICON_READMAIL       QIconSet( OResource::loadPixmap( PIC_DOCUMENT, OResource::SmallIcon) )
 
-#define PIXMAP_IMAPFOLDER   QPixmap( Resource::loadPixmap( PIC_IMAPFOLDER ) )
-#define PIXMAP_POP3FOLDER   QPixmap( Resource::loadPixmap( PIC_POP3FOLDER ) )
-#define PIXMAP_INBOXFOLDER  QPixmap( Resource::loadPixmap( PIC_INBOXFOLDER) )
-#define PIXMAP_MBOXFOLDER   QPixmap( Resource::loadPixmap( PIC_MBOXFOLDER ) )
-#define PIXMAP_OUTBOXFOLDER QPixmap( Resource::loadPixmap( PIC_OUTBOXFOLDER) )
-#define PIXMAP_LOCALFOLDER  QPixmap( Resource::loadPixmap( PIC_LOCALFOLDER) )
-#define PIXMAP_OFFLINE      QPixmap( Resource::loadPixmap( PIC_OFFLINE) )
+#define PIXMAP_IMAPFOLDER   QPixmap( OResource::loadPixmap( PIC_IMAPFOLDER, OResource::SmallIcon ) )
+#define PIXMAP_POP3FOLDER   QPixmap( OResource::loadPixmap( PIC_POP3FOLDER, OResource::SmallIcon ) )
+#define PIXMAP_INBOXFOLDER  QPixmap( OResource::loadPixmap( PIC_INBOXFOLDER, OResource::SmallIcon ) )
+#define PIXMAP_MBOXFOLDER   QPixmap( OResource::loadPixmap( PIC_MBOXFOLDER, OResource::SmallIcon ) )
+#define PIXMAP_OUTBOXFOLDER QPixmap( OResource::loadPixmap( PIC_OUTBOXFOLDER, OResource::SmallIcon ) )
+#define PIXMAP_LOCALFOLDER  QPixmap( OResource::loadPixmap( PIC_LOCALFOLDER, OResource::SmallIcon ) )
+#define PIXMAP_OFFLINE      QPixmap( OResource::loadPixmap( PIC_OFFLINE, OResource::SmallIcon ) )
 
 #define IMAP_PORT           "143"
 #define IMAP_SSL_PORT       "993"

@@ -4,7 +4,7 @@
 /* OPIE */
 #include <opie2/ocontactaccess.h>
 #include <opie2/opimcontact.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
@@ -18,8 +18,8 @@
 AddressPicker::AddressPicker( QWidget *parent, const char *name, bool modal, WFlags flags )
         : AddressPickerUI( parent, name, modal, flags )
 {
-    okButton->setIconSet( Resource::loadPixmap( "enter" ) );
-    cancelButton->setIconSet( Resource::loadPixmap( "editdelete" ) );
+    okButton->setIconSet( Opie::Core::OResource::loadPixmap( "enter", Opie::Core::OResource::SmallIcon ) );
+    cancelButton->setIconSet( Opie::Core::OResource::loadPixmap( "editdelete", Opie::Core::OResource::SmallIcon ) );
 
     connect(okButton, SIGNAL(clicked()), SLOT(accept()));
     connect(cancelButton, SIGNAL(clicked()), SLOT(close()));

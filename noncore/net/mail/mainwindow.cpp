@@ -1,22 +1,23 @@
+#include "defines.h"
+#include "mainwindow.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <opie2/oresource.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/qcopenvelope_qws.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qlabel.h>
 #include <qvbox.h>
 #include <qheader.h>
 #include <qtimer.h>
 #include <qlayout.h>
 
-#include <opie2/odebug.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/qcopenvelope_qws.h>
-
-#include "defines.h"
-#include "mainwindow.h"
-
-using namespace Opie::Core;
-
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     : QMainWindow( parent, name, flags )
 {
-
     setCaption( tr( "Mail" ) );
     setToolBarsMovable( false );
 
@@ -95,24 +96,24 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
             SLOT( slotShowFolders(bool) ) );
 
     /*
-      searchMails = new QAction( tr( "Search mails" ), QIconSet( Resource::loadPixmap("find") ),
+    searchMails = new QAction( tr( "Search mails" ), OResource::loadPixmap("find", OResource::SmallIcon ),
                                0, 0, this );
     searchMails->addTo( toolBar );
     searchMails->addTo( mailMenu );
     */
 
-    deleteMails = new QAction(tr("Delete Mail"), QIconSet( Resource::loadPixmap("trash")), 0, 0, this);
+    deleteMails = new QAction(tr("Delete Mail"), OResource::loadPixmap("trash", OResource::SmallIcon ), 0, 0, this);
     deleteMails->addTo( toolBar );
     deleteMails->addTo( mailMenu );
     connect( deleteMails, SIGNAL( activated() ),
              SLOT( slotDeleteMail() ) );
 
-    editSettings = new QAction( tr( "Edit settings" ), QIconSet( Resource::loadPixmap("SettingsIcon") ) ,
+    editSettings = new QAction( tr( "Edit settings" ), OResource::loadPixmap("SettingsIcon", OResource::SmallIcon ) ,
                                 0, 0, this );
     editSettings->addTo( settingsMenu );
     connect( editSettings, SIGNAL( activated() ),
              SLOT( slotEditSettings() ) );
-    editAccounts = new QAction( tr( "Configure accounts" ), QIconSet( Resource::loadPixmap("mail/editaccounts") ) ,
+    editAccounts = new QAction( tr( "Configure accounts" ), OResource::loadPixmap("mail/editaccounts", OResource::SmallIcon  ) ,
                                 0, 0, this );
     editAccounts->addTo( settingsMenu );
 

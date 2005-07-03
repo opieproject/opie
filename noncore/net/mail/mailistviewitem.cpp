@@ -1,8 +1,12 @@
 #include "mailistviewitem.h"
 #include <libmailwrapper/abstractmail.h>
-#include <qtextstream.h>
-#include <qpe/resource.h>
+
+/* OPIE */
+#include <opie2/oresource.h>
 #include <qpe/timestring.h>
+
+/* QT */
+#include <qtextstream.h>
 
 MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * item )
         :QListViewItem(parent,item),mail_data()
@@ -12,13 +16,13 @@ MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * item )
 void MailListViewItem::showEntry()
 {
     if ( mail_data->getFlags().testBit( FLAG_ANSWERED ) == true) {
-        setPixmap( 0, Resource::loadPixmap( "mail/kmmsgreplied") );
+        setPixmap( 0, Opie::Core::OResource::loadPixmap( "mail/kmmsgreplied", Opie::Core::OResource::SmallIcon ) );
     } else if ( mail_data->getFlags().testBit( FLAG_SEEN ) == true )  {
         /* I think it looks nicer if there are not such a lot of icons but only on mails
            replied or new - Alwin*/
-        //setPixmap( 0, Resource::loadPixmap( "mail/kmmsgunseen") );
+        //setPixmap( 0, Opie::Core::OResource::loadPixmap( "mail/kmmsgunseen", Opie::Core::OResource::SmallIcon ) );
     } else  {
-        setPixmap( 0, Resource::loadPixmap( "mail/kmmsgnew") );
+        setPixmap( 0, Opie::Core::OResource::loadPixmap( "mail/kmmsgnew", Opie::Core::OResource::SmallIcon ) );
     }
     double s = mail_data->Msgsize();
     int w;

@@ -8,15 +8,17 @@
 #include <libmailwrapper/mailtypes.h>
 #include <libmailwrapper/abstractmail.h>
 #include <libmailwrapper/mailwrapper.h>
+
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
 
-using namespace Opie::Core;
 #define SETPIX(x) if (!account->getOffline()) {setPixmap( 0,x);} else {setPixmap( 0, PIXMAP_OFFLINE );}
 /**
  * POP3 Account stuff
@@ -898,7 +900,7 @@ void MHfolderItem::initName()
     {
         setPixmap( 0, PIXMAP_INBOXFOLDER);
     } else if (bName.lower() == "drafts") {
-        setPixmap(0, Resource::loadPixmap("edit"));
+        setPixmap(0, Opie::Core::OResource::loadPixmap("edit", Opie::Core::OResource::SmallIcon));
     } else {
         setPixmap( 0, PIXMAP_MBOXFOLDER );
     }

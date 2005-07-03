@@ -11,11 +11,12 @@
 #include <libmailwrapper/smtpwrapper.h>
 #include <libmailwrapper/mailtypes.h>
 #include <libmailwrapper/abstractmail.h>
+
 /* OPIE */
 #include <opie2/odebug.h>
-#include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qmap.h>
@@ -23,8 +24,6 @@
 
 /* UNIX */
 #include <signal.h>
-
-using namespace Opie::Core;
 
 typedef QMapNode<QString,QString> tkeyvalues;
 typedef QValueList<tkeyvalues> tvaluelist;
@@ -278,7 +277,7 @@ void OpieMail::displayMail()
     }
     else
     {
-        ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "" ) );
+        ( (MailListViewItem*)item )->setPixmap( 0, QPixmap() );
     }
 }
 

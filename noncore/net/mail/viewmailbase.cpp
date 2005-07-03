@@ -1,16 +1,18 @@
+#include "viewmailbase.h"
+
+/* OPIE */
+#include <opie2/oresource.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qtextbrowser.h>
 #include <qlistview.h>
 #include <qaction.h>
 #include <qlabel.h>
 #include <qvbox.h>
-
 #include <qtoolbar.h>
 #include <qlayout.h>
 #include <qmenubar.h>
-#include <qpe/resource.h>
-
-#include "viewmailbase.h"
-//#include "opendiag.h"
 
 ViewMailBase::ViewMailBase(QWidget *parent, const char *name, WFlags fl)
     : QMainWindow(parent, name, fl)
@@ -28,30 +30,30 @@ ViewMailBase::ViewMailBase(QWidget *parent, const char *name, WFlags fl)
     spacer->setBackgroundMode(QWidget::PaletteButton);
     toolbar->setStretchableWidget(spacer);
 
-    reply = new QAction(tr("Reply"), QIconSet(Resource::loadPixmap("mail/reply")), 0, 0, this);
+    reply = new QAction(tr("Reply"), OResource::loadPixmap("mail/reply", OResource::SmallIcon), 0, 0, this);
     reply->addTo(toolbar);
     reply->addTo(mailmenu);
 
-    forward = new QAction(tr("Forward"), QIconSet(Resource::loadPixmap("mail/forward")), 0, 0, this);
+    forward = new QAction(tr("Forward"), OResource::loadPixmap("mail/forward", OResource::SmallIcon), 0, 0, this);
     forward->addTo(toolbar);
     forward->addTo(mailmenu);
 
-    attachbutton = new QAction(tr("Attachments"), QIconSet(Resource::loadPixmap("mail/attach")), 0, 0, this, 0, true);
+    attachbutton = new QAction(tr("Attachments"), OResource::loadPixmap("mail/attach", OResource::SmallIcon), 0, 0, this, 0, true);
     attachbutton->addTo(toolbar);
     attachbutton->addTo(mailmenu);
     connect(attachbutton, SIGNAL(toggled(bool)), SLOT(slotChangeAttachview(bool)));
 
 
-    showHtml = new QAction( tr( "Show Html" ), QIconSet( Resource::loadPixmap( "mail/html" ) ), 0, 0, this, 0, true );
+    showHtml = new QAction( tr( "Show Html" ), OResource::loadPixmap( "mail/html", OResource::SmallIcon ), 0, 0, this, 0, true );
     showHtml->addTo( toolbar );
     showHtml->addTo( mailmenu );
 
-    showPicsInline= new QAction(tr("Show image preview inline"), QIconSet(Resource::loadPixmap("pixmap")), 0, 0, this);
+    showPicsInline= new QAction(tr("Show image preview inline"), OResource::loadPixmap("pixmap", OResource::SmallIcon), 0, 0, this);
     showPicsInline->setToggleAction(true);
     showPicsInline->addTo(toolbar);
     showPicsInline->addTo(mailmenu);
 
-    deleteMail = new QAction(tr("Delete Mail"), QIconSet(Resource::loadPixmap("trash")), 0, 0, this);
+    deleteMail = new QAction(tr("Delete Mail"), OResource::loadPixmap("trash", OResource::SmallIcon), 0, 0, this);
     deleteMail->addTo(toolbar);
     deleteMail->addTo(mailmenu);
 

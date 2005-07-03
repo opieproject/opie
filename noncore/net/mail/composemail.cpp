@@ -9,17 +9,16 @@
 /* OPIE */
 #include <opie2/ofiledialog.h>
 #include <opie2/odebug.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 #include <qpe/config.h>
 #include <qpe/global.h>
 #include <qpe/contact.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
 /* QT */
 #include <qt.h>
 
-
-using namespace Opie::Core;
-using namespace Opie::Ui;
 ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool modal, WFlags flags )
     : ComposeMailUI( parent, name, modal, flags )
 {
@@ -299,7 +298,7 @@ AttachViewItem::AttachViewItem( QListView *parent, Attachment *att )
     attachment = att;
     odebug << att->getMimeType() << oendl;
     setPixmap( 0, attachment->getDocLnk().pixmap().isNull() ?
-                  Resource::loadPixmap( "UnknownDocument-14" ) :
+                  OResource::loadPixmap( "UnknownDocument", OResource::SmallIcon ) :
                   attachment->getDocLnk().pixmap() );
     setText( 0, att->getName().isEmpty() ? att->getFileName() : att->getName() );
     setText( 1, QString::number( att->getSize() ) );
