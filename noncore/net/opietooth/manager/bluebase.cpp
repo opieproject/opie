@@ -59,16 +59,13 @@ using namespace OpieTooth;
 BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
         : BluetoothBase( parent, name, fl )
 {
-
     m_localDevice = new Manager( "hci0" );
 
     connect( PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
     connect( configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
 
     connect( rfcommBindButton,  SIGNAL( clicked() ),  this,  SLOT( rfcommDialog() ) );
-    // not good since lib is async
-    //       connect( devicesView, SIGNAL( expanded(QListViewItem*) ),
-    //                  this, SLOT( addServicesToDevice(QListViewItem*) ) );
+
     connect( devicesView, SIGNAL( clicked(QListViewItem*)),
              this, SLOT( startServiceActionClicked(QListViewItem*) ) );
     connect( devicesView, SIGNAL( rightButtonClicked(QListViewItem*,const QPoint&,int) ),
@@ -81,7 +78,6 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
              this, SLOT( addConnectedDevices(ConnectionState::ValueList) ) );
     connect( m_localDevice, SIGNAL( signalStrength(const QString&,const QString&) ),
              this, SLOT( addSignalStrength(const QString&,const QString&) ) );
-
 
     // let hold be rightButtonClicked()
     QPEApplication::setStylusOperation( devicesView->viewport(), QPEApplication::RightOnHold);
@@ -106,14 +102,12 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     initGui();
 
     devicesView->setRootIsDecorated(true);
-
-
-    writeToHciConfig();
-    // search conncetions
-    addConnectedDevices();
-    addSignalStrength();
     m_iconLoader = new BTIconLoader();
+    writeToHciConfig();
+    addConnectedDevices();
     readSavedDevices();
+    addServicesToDevices();
+    QTimer::singleShot( 3000, this, SLOT( addServicesToDevices() ) );
 }
 
 /**
@@ -171,7 +165,7 @@ void BlueBase::writeToHciConfig()
 
 
 /**
- * Read the list of allready known devices
+ * Read the list of already known devices
  */
 void BlueBase::readSavedDevices()
 {
@@ -185,7 +179,7 @@ void BlueBase::readSavedDevices()
 
 
 /**
- * Write the list of allready known devices
+ * Write the list of already known devices
  */
 void BlueBase::writeSavedDevices()
 {
@@ -295,9 +289,6 @@ void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices )
 
         // look if device is avail. atm, async
         deviceActive( (*it) );
-
-        // ggf auch hier?
-        addServicesToDevice( deviceItem );
     }
 }
 
@@ -398,13 +389,24 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
 }
 
 
+void BlueBase::addServicesToDevices()
+{
+    odebug << "BlueBase::addServicesToDevices()" << oendl;
+    BTDeviceItem* item = (BTDeviceItem*) devicesView->firstChild();
+    while ( item )
+    {
+        addServicesToDevice( item );
+        item = (BTDeviceItem*) static_cast<QListViewItem*>( item )->nextSibling();
+    }
+}
+
 /**
  * Search and display avail. services for a device (on expand from device listing)
  * @param item the service item returned
  */
 void BlueBase::addServicesToDevice( BTDeviceItem * item )
 {
-    odebug << "addServicesToDevice" << oendl;
+    odebug << "BlueBase::addServicesToDevice" << oendl;
     // row of mac adress text(3)
     RemoteDevice device = item->remoteDevice();
     m_deviceList.insert( item->mac() , item );
@@ -414,14 +416,12 @@ void BlueBase::addServicesToDevice( BTDeviceItem * item )
 
 
 /**
- * Overloaded. This one it the one that is
- ted to the foundServices signal
  * @param device the mac address of the remote device
  * @param servicesList the list with the service the device has.
  */
 void BlueBase::addServicesToDevice( const QString& device, Services::ValueList servicesList )
 {
-    odebug << "fill services list" << oendl;
+    odebug << "BlueBase::fill services list" << oendl;
 
     QMap<QString,BTDeviceItem*>::Iterator it;
     BTDeviceItem* deviceItem = 0;
@@ -476,10 +476,6 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
     m_deviceList.remove( it );
 }
 
-
-
-
-
 void BlueBase::addSignalStrength()
 {
 
@@ -512,6 +508,7 @@ void BlueBase::addSignalStrength( const QString& mac, const QString& strength )
 void BlueBase::addConnectedDevices()
 {
     m_localDevice->searchConnections();
+    QTimer::singleShot( 5000, this, SLOT( addSignalStrength() ) );
 }
 
 /**
@@ -614,7 +611,6 @@ void BlueBase::deviceActive( const QString& device, bool connected  )
         return;
 
     BTDeviceItem* deviceItem = it.data();
-
 
     if ( connected )
     {

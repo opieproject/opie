@@ -13,7 +13,7 @@ using Opie::Core::OProcess;
 Manager::Manager( const QString& dev )
   : QObject()
 {
-    owarn << "created" << oendl;
+    odebug << "Manager: created" << oendl;
     m_device = dev;
     m_hcitool = 0;
     m_sdp = 0;
@@ -58,7 +58,7 @@ void Manager::isAvailable( Device* /*dev*/ ){
 
 }
 void Manager::searchDevices( const QString& device ){
-    owarn << "search devices" << oendl;
+    odebug << "Manager: search devices" << oendl;
     OProcess* hcitool = new OProcess();
     hcitool->setName( device.isEmpty() ? "hci0" : device.latin1() );
     *hcitool << "hcitool" << "scan";
@@ -67,7 +67,7 @@ void Manager::searchDevices( const QString& device ){
     connect( hcitool, SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int ) ),
              this, SLOT(slotHCIOut(Opie::Core::OProcess*, char*, int ) ) );
     if (!hcitool->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
-        owarn << "could not start" << oendl;
+        odebug << "Manager: could not start" << oendl;
         RemoteDevice::ValueList list;
         emit foundDevices( device, list );
         delete hcitool;
@@ -108,13 +108,13 @@ void Manager::searchServices( const QString& remDevice ){
     OProcess *m_sdp =new OProcess();
     *m_sdp << "sdptool" << "browse" << remDevice;
     m_sdp->setName( remDevice.latin1() );
-    owarn << "search Services for " << remDevice.latin1() << oendl;
+    odebug << "Manager: search Services for " << remDevice.latin1() << oendl;
     connect(m_sdp, SIGNAL(processExited(Opie::Core::OProcess*) ),
             this, SLOT(slotSDPExited(Opie::Core::OProcess* ) ) );
     connect(m_sdp, SIGNAL(receivedStdout(Opie::Core::OProcess*, char*,  int ) ),
             this, SLOT(slotSDPOut(Opie::Core::OProcess*, char*, int) ) );
     if (!m_sdp->start(OProcess::NotifyOnExit,  OProcess::AllOutput) ) {
-        owarn << "could not start sdptool" << oendl;
+        odebug << "Manager: could not start sdptool" << oendl;
         delete m_sdp;
         Services::ValueList list;
         emit foundServices( remDevice, list );
@@ -141,7 +141,7 @@ void Manager::slotProcessExited(OProcess* proc ) {
 void Manager::slotSDPOut(OProcess* proc, char* ch, int len)
 {
     QCString str(ch,  len+1 );
-    owarn << "SDP:" << str.data() << oendl;
+    odebug << "Manager: SDP:" << str.data() << oendl;
     QMap<QString, QString>::Iterator it;
     it = m_out.find(proc->name() );
     QString string;
@@ -154,12 +154,12 @@ void Manager::slotSDPOut(OProcess* proc, char* ch, int len)
 }
 void Manager::slotSDPExited( OProcess* proc)
 {
-    owarn << "proc name " << proc->name() << oendl;
+    odebug << "Manager: proc name " << proc->name() << oendl;
     Services::ValueList  list;
     if (proc->normalExit()  ) {
         QMap<QString, QString>::Iterator it = m_out.find( proc->name() );
         if ( it != m_out.end() ) {
-        owarn << "found process" << oendl;
+        odebug << "Manager: found process" << oendl;
             list = parseSDPOutput( it.data() );
             m_out.remove( it );
         }
@@ -169,20 +169,20 @@ void Manager::slotSDPExited( OProcess* proc)
 }
 Services::ValueList Manager::parseSDPOutput( const QString& out ) {
     Services::ValueList list;
-    owarn << "parsing output" << oendl;
+    odebug << "Manager: parsing output" << oendl;
     Parser parser( out );
     list = parser.services();
     return list;
 }
 
 void Manager::slotHCIExited(OProcess* proc ) {
-    owarn << "process exited" << oendl;
+    odebug << "Manager: process exited" << oendl;
     RemoteDevice::ValueList list;
     if (proc->normalExit() ) {
-        owarn << "normalExit " << proc->name() << oendl;
+        odebug << "Manager: normalExit " << proc->name() << oendl;
         QMap<QString, QString>::Iterator it = m_devices.find(proc->name() );
         if (it != m_devices.end() ) {
-            owarn << "!= end ;)" << oendl;
+            odebug << "Manager: != end ;)" << oendl;
             list = parseHCIOutput( it.data() );
             m_devices.remove( it );
         }
@@ -192,13 +192,13 @@ void Manager::slotHCIExited(OProcess* proc ) {
 }
 void Manager::slotHCIOut(OProcess* proc,  char* ch,  int len) {
     QCString str( ch, len+1 );
-    owarn << "hci: " << str.data() << oendl;
+    odebug << "Manager: hci: " << str.data() << oendl;
     QMap<QString, QString>::Iterator it;
     it = m_devices.find( proc->name() );
-    owarn << "proc->name " << proc->name() << oendl;
+    odebug << "Manager: proc->name " << proc->name() << oendl;
     QString string;
     if (it != m_devices.end() ) {
-        owarn << "slotHCIOut " << oendl;
+        odebug << "Manager: slotHCIOut " << oendl;
         string = it.data();
     }
     string.append( str );
@@ -206,20 +206,20 @@ void Manager::slotHCIOut(OProcess* proc,  char* ch,  int len) {
     m_devices.replace( proc->name(),  string );
 }
 RemoteDevice::ValueList Manager::parseHCIOutput(const QString& output ) {
-    owarn << "parseHCI " << output.latin1() << oendl;
+    odebug << "Manager: parseHCI " << output.latin1() << oendl;
     RemoteDevice::ValueList list;
     QStringList strList = QStringList::split('\n',  output );
     QStringList::Iterator it;
     QString str;
     for ( it = strList.begin(); it != strList.end(); ++it ) {
         str = (*it).stripWhiteSpace();
-        owarn << "OpieTooth " << str.latin1() << oendl;
+        odebug << "Manager: OpieTooth " << str.latin1() << oendl;
         int pos = str.findRev(':' );
         if ( pos > 0 ) {
             QString mac = str.left(17 );
             str.remove( 0,  17 );
-            owarn << "mac " << mac.latin1() << oendl;
-            owarn << "rest: " << str.latin1() << oendl;
+            odebug << "Manager: mac " << mac.latin1() << oendl;
+            odebug << "Manager: rest: " << str.latin1() << oendl;
             RemoteDevice rem( mac , str.stripWhiteSpace() );
             list.append( rem );
         }
@@ -244,7 +244,7 @@ void Manager::connectTo( const QString& mac) {
 
 
 void Manager::searchConnections() {
-    owarn << "searching connections?" << oendl;
+    odebug << "Manager: searchConnections()" << oendl;
     OProcess* proc = new OProcess();
     m_hcitoolCon = QString::null;
 
@@ -282,15 +282,15 @@ ConnectionState::ValueList Manager::parseConnections( const QString& out ) {
     for (; it != list.end(); ++it ) {
         QString row = (*it).stripWhiteSpace();
         QStringList value = QStringList::split(' ', row );
-        owarn << "0: %s" << value[0].latin1() << oendl;
-        owarn << "1: %s" << value[1].latin1() << oendl;
-        owarn << "2: %s" << value[2].latin1() << oendl;
-        owarn << "3: %s" << value[3].latin1() << oendl;
-        owarn << "4: %s" << value[4].latin1() << oendl;
-        owarn << "5: %s" << value[5].latin1() << oendl;
-        owarn << "6: %s" << value[6].latin1() << oendl;
-        owarn << "7: %s" << value[7].latin1() << oendl;
-        owarn << "8: %s" << value[8].latin1() << oendl;
+        odebug << "Manager: 0: " << value[0].latin1() << oendl;
+        odebug << "Manager: 1: " << value[1].latin1() << oendl;
+        odebug << "Manager: 2: " << value[2].latin1() << oendl;
+        odebug << "Manager: 3: " << value[3].latin1() << oendl;
+        odebug << "Manager: 4: " << value[4].latin1() << oendl;
+        odebug << "Manager: 5: " << value[5].latin1() << oendl;
+        odebug << "Manager: 6: " << value[6].latin1() << oendl;
+        odebug << "Manager: 7: " << value[7].latin1() << oendl;
+        odebug << "Manager: 8: " << value[8].latin1() << oendl;
         ConnectionState con;
         con.setDirection( value[0] == QString::fromLatin1("<") ? Outgoing : Incoming );
         con.setConnectionMode( value[1] );
