@@ -157,7 +157,7 @@ void BlueBase::writeConfig()
  */
 void BlueBase::writeToHciConfig()
 {
-    owarn << "writeToHciConfig" << oendl; 
+    owarn << "writeToHciConfig" << oendl;
     HciConfWrapper hciconf ( "/etc/bluetooth/hcid.conf" );
     hciconf.load();
     hciconf.setPinHelper( QPEApplication::qpeDir() + "bin/bluepin" );
@@ -318,36 +318,32 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         return;
 
     QPopupMenu *menu = new QPopupMenu();
-    int ret=0;
 
-    if ( ((BTListItem*)item)->type() == "device")
+    if ( static_cast<BTListItem*>( item )->type() == "device")
     {
-
         QPopupMenu *groups = new QPopupMenu();
 
-        menu->insertItem( ((BTDeviceItem*)item)->name(),0 );
-        menu->insertSeparator(1);
-        menu->insertItem( tr("rescan sevices"),  2);
-        menu->insertItem( tr("to group"), groups , 3);
-        menu->insertItem( tr("delete"),  4);
-
-        ret = menu->exec( point  , 0);
+        menu->insertItem( static_cast<BTDeviceItem*>( item )->name(), 0 );
+        menu->insertSeparator( 1 );
+        menu->insertItem( tr( "&Rescan services" ), 2);
+        // menu->insertItem( tr( "&Add to group" ), groups, 3);
+        menu->insertItem( tr( "&Delete"),  4);
+        int ret = menu->exec( point, 0);
 
         switch(ret)
         {
-        case -1:
-            break;
-        case 2:
-            addServicesToDevice( (BTDeviceItem*)item );
-            break;
+            case -1:
+                break;
+            case 2:
+                addServicesToDevice( static_cast<BTDeviceItem*>( item ) );
+                break;
 
-        case 4:
-            // deletes childs too
-            delete item;
-            break;
+            case 4:
+                // deletes childs too
+                delete item;
+                break;
         }
-        delete groups;
-
+        // delete groups;
     }
 
     /*
@@ -369,25 +365,25 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         QPopupMenu *popup =0l;
         if ( it != list.end() )
         {
-            owarn << "Searching id " << it.key() << " " << it.data().latin1() << "" << oendl; 
+            owarn << "Searching id " << it.key() << " " << it.data().latin1() << "" << oendl;
             popup = m_popHelper.find( it.key(),
                                       service->services(),
                                       (BTDeviceItem*)service->parent() );
         }
         else
         {
-            owarn << "Empty" << oendl; 
+            owarn << "Empty" << oendl;
         }
 
         if ( popup == 0l )
         {
-            owarn << "factory returned 0l" << oendl; 
+            owarn << "factory returned 0l" << oendl;
             popup = new QPopupMenu();
         }
         int test1 = popup->insertItem( tr("Test1:"),  2);
 
-        ret = popup->exec( point );
-        owarn << "returned from exec() " << oendl; 
+        int ret = popup->exec( point );
+        owarn << "returned from exec() " << oendl;
         if ( ret == -1 )
         {
             ;
@@ -408,7 +404,7 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
  */
 void BlueBase::addServicesToDevice( BTDeviceItem * item )
 {
-    odebug << "addServicesToDevice" << oendl; 
+    odebug << "addServicesToDevice" << oendl;
     // row of mac adress text(3)
     RemoteDevice device = item->remoteDevice();
     m_deviceList.insert( item->mac() , item );
@@ -425,7 +421,7 @@ void BlueBase::addServicesToDevice( BTDeviceItem * item )
  */
 void BlueBase::addServicesToDevice( const QString& device, Services::ValueList servicesList )
 {
-    odebug << "fill services list" << oendl; 
+    odebug << "fill services list" << oendl;
 
     QMap<QString,BTDeviceItem*>::Iterator it;
     BTDeviceItem* deviceItem = 0;
@@ -609,7 +605,7 @@ void BlueBase::deviceActive( const RemoteDevice &device )
  */
 void BlueBase::deviceActive( const QString& device, bool connected  )
 {
-    odebug << "deviceActive slot" << oendl; 
+    odebug << "deviceActive slot" << oendl;
 
     QMap<QString,BTDeviceItem*>::Iterator it;
 
