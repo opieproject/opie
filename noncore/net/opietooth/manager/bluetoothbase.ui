@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>297</width>
+            <width>293</width>
             <height>382</height>
         </rect>
     </property>
@@ -97,7 +97,7 @@
                         </column>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>ListView2</cstring>
+                            <cstring>devicesView</cstring>
                         </property>
                     </widget>
                     <widget>
@@ -185,7 +185,7 @@
                         </column>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>ListView4</cstring>
+                            <cstring>connectionsView</cstring>
                         </property>
                     </widget>
                 </vbox>

@@ -46,7 +46,7 @@ class Device;
     private: 
 	QProgressBar* progress;
         QPushButton* StartStopButton;
-        QListView* ListView1;
+        QListView* serviceView;
 
     public slots:
          void accept();

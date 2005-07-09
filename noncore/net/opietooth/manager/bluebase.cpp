@@ -67,11 +67,11 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
 
     connect( rfcommBindButton,  SIGNAL( clicked() ),  this,  SLOT( rfcommDialog() ) );
     // not good since lib is async
-    //       connect( ListView2, SIGNAL( expanded(QListViewItem*) ),
+    //       connect( devicesView, SIGNAL( expanded(QListViewItem*) ),
     //                  this, SLOT( addServicesToDevice(QListViewItem*) ) );
-    connect( ListView2, SIGNAL( clicked(QListViewItem*)),
+    connect( devicesView, SIGNAL( clicked(QListViewItem*)),
              this, SLOT( startServiceActionClicked(QListViewItem*) ) );
-    connect( ListView2, SIGNAL( rightButtonClicked(QListViewItem*,const QPoint&,int) ),
+    connect( devicesView, SIGNAL( rightButtonClicked(QListViewItem*,const QPoint&,int) ),
              this,  SLOT(startServiceActionHold(QListViewItem*,const QPoint&,int) ) );
     connect( m_localDevice , SIGNAL( foundServices(const QString&,Services::ValueList) ),
              this, SLOT( addServicesToDevice(const QString&,Services::ValueList) ) );
@@ -84,8 +84,8 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
 
 
     // let hold be rightButtonClicked()
-    QPEApplication::setStylusOperation( ListView2->viewport(), QPEApplication::RightOnHold);
-    QPEApplication::setStylusOperation( ListView4->viewport(), QPEApplication::RightOnHold);
+    QPEApplication::setStylusOperation( devicesView->viewport(), QPEApplication::RightOnHold);
+    QPEApplication::setStylusOperation( connectionsView->viewport(), QPEApplication::RightOnHold);
 
     //Load all icons needed
     m_offPix = Resource::loadPixmap( "opietooth/notconnected" );
@@ -105,7 +105,7 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     readConfig();
     initGui();
 
-    ListView2->setRootIsDecorated(true);
+    devicesView->setRootIsDecorated(true);
 
 
     writeToHciConfig();
@@ -189,7 +189,7 @@ void BlueBase::readSavedDevices()
  */
 void BlueBase::writeSavedDevices()
 {
-    QListViewItemIterator it( ListView2 );
+    QListViewItemIterator it( devicesView );
     BTListItem* item;
     BTDeviceItem* device;
     RemoteDevice::ValueList list;
@@ -289,7 +289,7 @@ void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices )
         if (find( (*it)  )) // is already inserted
             continue;
 
-        deviceItem = new BTDeviceItem( ListView2 , (*it) );
+        deviceItem = new BTDeviceItem( devicesView , (*it) );
         deviceItem->setPixmap( 1, m_findPix );
         deviceItem->setExpandable ( true );
 
@@ -487,7 +487,7 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
 void BlueBase::addSignalStrength()
 {
 
-    QListViewItemIterator it( ListView4 );
+    QListViewItemIterator it( connectionsView );
     for ( ; it.current(); ++it )
     {
         m_localDevice->signalStrength( ((BTConnectionItem*)it.current() )->connection().mac() );
@@ -499,7 +499,7 @@ void BlueBase::addSignalStrength()
 void BlueBase::addSignalStrength( const QString& mac, const QString& strength )
 {
 
-    QListViewItemIterator it( ListView4 );
+    QListViewItemIterator it( connectionsView );
     for ( ; it.current(); ++it )
     {
         if( ((BTConnectionItem*)it.current())->connection().mac() == mac )
@@ -534,7 +534,7 @@ void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList )
         for (it = connectionList.begin(); it != connectionList.end(); ++it)
         {
 
-            QListViewItemIterator it2( ListView4 );
+            QListViewItemIterator it2( connectionsView );
             bool found = false;
             for ( ; it2.current(); ++it2 )
             {
@@ -546,7 +546,7 @@ void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList )
 
             if ( found == false )
             {
-                connectionItem = new BTConnectionItem( ListView4, (*it) );
+                connectionItem = new BTConnectionItem( connectionsView, (*it) );
 
                 if( m_deviceList.find((*it).mac()).data() )
                 {
@@ -556,7 +556,7 @@ void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList )
 
         }
 
-        QListViewItemIterator it2( ListView4 );
+        QListViewItemIterator it2( connectionsView );
         for ( ; it2.current(); ++it2 )
         {
             bool found = false;
@@ -579,10 +579,10 @@ void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList )
     }
     else
     {
-        ListView4->clear();
+        connectionsView->clear();
         ConnectionState con;
         con.setMac( tr("No connections found") );
-        connectionItem = new BTConnectionItem( ListView4 , con );
+        connectionItem = new BTConnectionItem( connectionsView , con );
     }
 
     //  recall connection search after some time
@@ -673,7 +673,7 @@ BlueBase::~BlueBase()
  */
 bool BlueBase::find( const RemoteDevice& rem )
 {
-    QListViewItemIterator it( ListView2 );
+    QListViewItemIterator it( devicesView );
     BTListItem* item;
     BTDeviceItem* device;
     for (; it.current(); ++it )

@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>275</width>
+            <width>267</width>
             <height>323</height>
         </rect>
     </property>
@@ -69,7 +69,7 @@
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>PushButton5</cstring>
+                            <cstring>applyChanges</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>
@@ -108,7 +108,7 @@
                         </column>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>ListView1</cstring>
+                            <cstring>serviceView</cstring>
                         </property>
                     </widget>
                 </grid>
@@ -147,14 +147,14 @@
                         <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>LineEdit6</cstring>
+                            <cstring>defaultPinCode</cstring>
                         </property>
                     </widget>
                     <widget row="0"  column="1" >
                         <class>QLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>LineEdit1</cstring>
+                            <cstring>deviceName</cstring>
                         </property>
                     </widget>
                     <widget row="0"  column="0" >
@@ -214,7 +214,7 @@
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>DeviceInfoLabel</cstring>
+                            <cstring>deviceInfoLabel</cstring>
                         </property>
                         <property stdset="1">
                             <name>text</name>

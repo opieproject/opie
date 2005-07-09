@@ -56,13 +56,13 @@ namespace OpieTooth {
         StartStopButton = new QPushButton( this, "StartButton" );
         StartStopButton->setText( tr( "Start scan" ) );
 
-        ListView1 = new QListView( this, "ListView1" );
+        serviceView = new QListView( this, "serviceView" );
 
-        //ListView1->addColumn( tr( "Add" ) );
-        ListView1->addColumn( tr( "Add Device" ) );
-        //ListView1->addColumn( tr( "Type" ) );
+        //serviceView->addColumn( tr( "Add" ) );
+        serviceView->addColumn( tr( "Add Device" ) );
+        //serviceView->addColumn( tr( "Type" ) );
 
-        Layout11->addWidget( ListView1 );
+        Layout11->addWidget( serviceView );
         Layout11->addWidget( progress );
         Layout11->addWidget( StartStopButton );
 
@@ -102,7 +102,7 @@ namespace OpieTooth {
         progressStat = 0;
 
         // empty list before a new scan
-        ListView1->clear();
+        serviceView->clear();
 
         progressTimer();
         // when finished, it emmite foundDevices()
@@ -125,7 +125,7 @@ namespace OpieTooth {
         RemoteDevice::ValueList::Iterator it;
         for( it = deviceList.begin(); it != deviceList.end(); ++it ) {
 
-            deviceItem = new QCheckListItem( ListView1, (*it).name(),  QCheckListItem::CheckBox );
+            deviceItem = new QCheckListItem( serviceView, (*it).name(),  QCheckListItem::CheckBox );
             deviceItem->setText( 1, (*it).mac() );
         }
         m_search = false;
@@ -138,13 +138,13 @@ namespace OpieTooth {
  */
     void ScanDialog::emitToManager() {
 
-        if (!ListView1) {
+        if (!serviceView) {
             return;
         }
 
         QValueList<RemoteDevice> deviceList;
 
-        QListViewItemIterator it( ListView1 );
+        QListViewItemIterator it( serviceView );
         for ( ; it.current(); ++it ) {
             if ( ( (QCheckListItem*)it.current() )->isOn() ) {
                 RemoteDevice device(  it.current()->text(1), it.current()->text(0) );
