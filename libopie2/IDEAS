@@ -1,0 +1,10 @@
+* universal connectivity API that implements OBEX on top of
+(wired or wireless) ethernet, infrared, and bluetooth:
+Every host device has a number of interfaces which are
+"connected" to certain peers. There are different kinds of
+inquiry methods and connection states, however the basic
+principle is the same. User level code that wants to send
+an object to a peer could be greatly simplified that way.
+
+* generic subsystem base classes to unify the
+network, bluetooth, pcmcia, input, etc. APIs
