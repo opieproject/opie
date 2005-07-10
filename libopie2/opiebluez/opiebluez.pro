@@ -2,11 +2,9 @@ TEMPLATE    = lib
 CONFIG      += qt warn_on
 DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = obluetooth.h \
-              oinfrared.h
 SOURCES     = obluetooth.cpp \
-              oinfrared.cpp
 INTERFACES  =
-TARGET      = opieshower2
+TARGET      = opiebluez2
 VERSION     = 0.0.0
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
