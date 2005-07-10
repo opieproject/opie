@@ -1,5 +1,5 @@
-TEMPLATE = subdirs
-SUBDIRS =      applet \
+TEMPLATE =    subdirs
+SUBDIRS  =    applet \
               inputmethod \
               main-tab \
               menuapplet \
@@ -13,5 +13,6 @@ SUBDIRS =      applet \
               opiedb \
               opiemm \
               opienet \
-              opieui
+              opieui \
+              opieshower
 

@@ -2,9 +2,14 @@
 #include <opie2/odebug.h>
 using namespace Opie::Core;
 
+#include <qmap.h>
+#include <qtextstream.h>
+#include <qdir.h>
+#include <qfile.h>
+
 int main( int argc, char** argv )
 {
-    odebug << "start" << oendl;
+    odebug << "APP start" << oendl;
     OPcmciaSystem* sys = OPcmciaSystem::instance();
 
     odebug << "number of detected sockets is = " << sys->count() << oendl;
@@ -20,7 +25,7 @@ int main( int argc, char** argv )
         ++it;
     }
 
-    odebug << "end" << oendl;
+    odebug << "APP end" << oendl;
     return 0;
 }
 
