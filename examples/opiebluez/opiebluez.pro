@@ -1,3 +1,3 @@
 TEMPLATE = subdirs
-SUBDIRS = oshowerdemo oshowertest
+SUBDIRS = obluezdemo oblueztest
 
