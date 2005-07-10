@@ -193,6 +193,7 @@ $(OPIEDIR)/stamp-headers :
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/fileselector/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/big-screen/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiesecurity/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opieshower/*.h .; )
 	# auxilliary libraries
 	( cd include/opie2 && ln -sf ../../libqtaux/*.h .; )
 	( cd include/sl && ln -sf ../../libslcompat/*.h .; )
@@ -235,6 +236,7 @@ $(OPIEDIR)/stamp-headers-x11 :
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/fileselector/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/big-screen/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiesecurity/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opieshower/*.h .; )
 	# auxilliary libraries
 	( cd include/opie2 && ln -sf ../../libqtaux/*.h .; )
 	( cd include/sl && ln -sf ../../libslcompat/*.h .; )

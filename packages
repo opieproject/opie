@@ -51,6 +51,7 @@ CONFIG_EXAMPLE_LIBOPIE2DB	examples/opiedb opiedb.pro
 CONFIG_EXAMPLE_LIBOPIE2MM	examples/opiemm opiemm.pro
 CONFIG_EXAMPLE_LIBOPIE2NET	examples/opienet        opienet.pro
 CONFIG_EXAMPLE_LIBOPIE2PIM	examples/opiepim        opiepim.pro
+CONFIG_EXAMPLE_LIBOPIE2SHOWER	examples/opieshower	opieshower.pro
 CONFIG_EXAMPLE_LIBOPIE2SECURITY	examples/opiesecurity opiesecurity.pro
 CONFIG_EXAMPLE_LIBOPIE2UI	examples/opieui	opieui.pro
 CONFIG_EXAMPLE_MENU     examples/menuapplet menuapplet.pro
@@ -95,6 +96,7 @@ CONFIG_LIBOPIE2EXAMPLES	libopie2/examples	examples.pro
 CONFIG_LIBOPIE2MM	libopie2/opiemm	opiemm.pro
 CONFIG_LIBOPIE2NET	libopie2/opienet	opienet.pro
 CONFIG_LIBOPIE2PIM	libopie2/opiepim	opiepim.pro
+CONFIG_LIBOPIE2SHOWER	libopie2/opieshower	opieshower.pro
 CONFIG_LIBOPIE2SECURITY	libopie2/opiesecurity opiesecurity.pro
 CONFIG_LIBOPIE2UI	libopie2/opieui	opieui.pro
 CONFIG_LIBOPIETOOTH	noncore/net/opietooth/lib	lib.pro
