@@ -14,5 +14,5 @@ SUBDIRS  =    applet \
               opiemm \
               opienet \
               opieui \
-              opieshower
+              opiebluez
 
