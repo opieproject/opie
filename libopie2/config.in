@@ -7,7 +7,7 @@
   source libopie2/opieui/config.in
   source libopie2/opiemm/config.in
   source libopie2/opiesecurity/config.in
-  source libopie2/opieshower/config.in
+  source libopie2/opiebluez/config.in
   comment ""
 #endmenu
 
