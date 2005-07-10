@@ -1,6 +1,5 @@
 #include <opie2/odebug.h>
 #include <opie2/obluetooth.h>
-#include <opie2/oinfrared.h>
 
 using namespace Opie::Core;
 using namespace Opie::Shower;
