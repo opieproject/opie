@@ -2,7 +2,7 @@
 #include <opie2/obluetooth.h>
 
 using namespace Opie::Core;
-using namespace Opie::Shower;
+using namespace Opie::Bluez;
 
 int main( int argc, char** argv )
 {

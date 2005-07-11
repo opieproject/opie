@@ -4,8 +4,8 @@ HEADERS         = main.h
 SOURCES         = main.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lopiecore2 -lopieshower2
-TARGET          = oshowerdemo
+LIBS            += -lopiecore2 -lopiebluez2
+TARGET          = obluezdemo
 
 !contains( platform, x11 ) {
   include( $(OPIEDIR)/include.pro )
