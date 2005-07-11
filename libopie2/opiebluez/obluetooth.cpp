@@ -113,8 +113,11 @@ void OBluetooth::synchronize()
     for ( int i = 0; i < dl->dev_num; ++i )
     {
         di.dev_id = ( dr + i )->dev_id;
-        if ( ioctl( _fd, HCIGETDEVINFO, (void *) &di) < 0 )
+        if ( ioctl( _fd, HCIGETDEVINFO, (void *) &di) == -1 )
+        {
+            owarn << "OBluetooth::synchronize() - can't issue HCIGETDEVINFO on device " << i << " (" << strerror( errno ) << ") - skipping that device. " << oendl;
             continue;
+        }
         odebug << "OBluetooth::synchronize() - found device #" << di.dev_id << oendl;
         _interfaces.insert( di.name, new OBluetoothInterface( this, di.name, (void*) &di ) );
     }
@@ -135,6 +138,7 @@ class OBluetoothInterface::Private
 };
 
 OBluetoothInterface::OBluetoothInterface( QObject* parent, const char* name, void* devinfo )
+                    :QObject( parent, name )
 {
     d = new OBluetoothInterface::Private( (struct hci_dev_info*) devinfo );
 }
@@ -145,10 +149,13 @@ OBluetoothInterface::~OBluetoothInterface()
 
 QString OBluetoothInterface::macAddress() const
 {
-    char addr[18];
-    //ba2str( &d->devinfo.bdaddr, addr);
-    //return addr;
-    return "BLA";
+    return QString().sprintf( "%2.2X:%2.2X:%2.2X:%2.2X:%2.2X:%2.2X",
+                              d->devinfo.bdaddr.b[5],
+                              d->devinfo.bdaddr.b[4],
+                              d->devinfo.bdaddr.b[3],
+                              d->devinfo.bdaddr.b[2],
+                              d->devinfo.bdaddr.b[1],
+                              d->devinfo.bdaddr.b[0] );
 }
 
 }
