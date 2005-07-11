@@ -1,8 +1,8 @@
 TEMPLATE    = lib
 CONFIG      += qt warn_on
 DESTDIR     = $(OPIEDIR)/lib
-HEADERS     = obluetooth.h \
-SOURCES     = obluetooth.cpp \
+HEADERS     = obluetooth.h
+SOURCES     = obluetooth.cpp
 INTERFACES  =
 TARGET      = opiebluez2
 VERSION     = 0.0.0
