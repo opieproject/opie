@@ -45,7 +45,7 @@ using namespace Opie::Core;
 #include <sys/socket.h>
 
 namespace Opie {
-namespace Shower {
+namespace Bluez {
 
 /*======================================================================================
  * OBluetooth
@@ -115,12 +115,6 @@ void OBluetooth::synchronize()
         di.dev_id = ( dr + i )->dev_id;
         if ( ioctl( _fd, HCIGETDEVINFO, (void *) &di) < 0 )
             continue;
-        if ( hci_test_bit(HCI_RAW, &di.flags) && !bacmp(&di.bdaddr, BDADDR_ANY))
-        {
-            int dd = hci_open_dev(di.dev_id);
-            hci_read_bd_addr(dd, &di.bdaddr, 1000);
-            hci_close_dev(dd);
-        }
         odebug << "OBluetooth::synchronize() - found device #" << di.dev_id << oendl;
         _interfaces.insert( di.name, new OBluetoothInterface( this, di.name, (void*) &di ) );
     }
@@ -152,8 +146,9 @@ OBluetoothInterface::~OBluetoothInterface()
 QString OBluetoothInterface::macAddress() const
 {
     char addr[18];
-    ba2str( &d->devinfo.bdaddr, addr);
-    return addr;
+    //ba2str( &d->devinfo.bdaddr, addr);
+    //return addr;
+    return "BLA";
 }
 
 }

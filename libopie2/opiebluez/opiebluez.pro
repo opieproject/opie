@@ -8,7 +8,7 @@ TARGET      = opiebluez2
 VERSION     = 0.0.0
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lopiecore2 -lbluetooth
+LIBS        += -lopiecore2
 
 !contains( platform, x11 ) {
   include( $(OPIEDIR)/include.pro )
@@ -21,7 +21,3 @@ contains( platform, x11 ) {
 !isEmpty( LIBBLUEZ_INC_DIR ) {
     INCLUDEPATH = $$LIBBLUEZ_INC_DIR $$INCLUDEPATH
 }
-!isEmpty( LIBBLUEZ_LIB_DIR ) {
-    LIBS = -L$$LIBBLUEZ_LIB_DIR $$LIBS
-}
-

@@ -34,7 +34,7 @@
 #include <qdict.h>
 
 namespace Opie {
-namespace Shower {
+namespace Bluez {
 
 class OBluetoothInterface;
 
