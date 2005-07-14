@@ -13,6 +13,9 @@ int main( int argc, char** argv )
     while( it.current() )
     {
         odebug << "APP: Bluetooth host controller interface '" << it.current()->name() << "' has MAC '" << it.current()->macAddress() << "'" << oendl;
+        odebug << "APP: Interface is " << ( it.current()->isUp() ? "UP" : "DOWN" ) << ". Trying to toggle state..." << oendl;
+        it.current()->setUp( !it.current()->isUp() );
+        odebug << "APP: Interface is " << ( it.current()->isUp() ? "UP" : "DOWN" ) << "." << oendl;
         ++it;
     }
     return 0;

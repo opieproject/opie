@@ -104,7 +104,7 @@ void OBluetooth::synchronize()
     dl->dev_num = HCI_MAX_DEV;
     dr = dl->dev_req;
 
-    if (ioctl( _fd, HCIGETDEVLIST, (void *) dl) == -1)
+    if (::ioctl( _fd, HCIGETDEVLIST, (void *) dl) == -1)
     {
         owarn << "OBluetooth::synchronize() - can't complete HCIGETDEVLIST (" << strerror( errno ) << ")" << oendl;
         return;
@@ -113,13 +113,13 @@ void OBluetooth::synchronize()
     for ( int i = 0; i < dl->dev_num; ++i )
     {
         di.dev_id = ( dr + i )->dev_id;
-        if ( ioctl( _fd, HCIGETDEVINFO, (void *) &di) == -1 )
+        if ( ::ioctl( _fd, HCIGETDEVINFO, (void *) &di ) == -1 )
         {
             owarn << "OBluetooth::synchronize() - can't issue HCIGETDEVINFO on device " << i << " (" << strerror( errno ) << ") - skipping that device. " << oendl;
             continue;
         }
         odebug << "OBluetooth::synchronize() - found device #" << di.dev_id << oendl;
-        _interfaces.insert( di.name, new OBluetoothInterface( this, di.name, (void*) &di ) );
+        _interfaces.insert( di.name, new OBluetoothInterface( this, di.name, (void*) &di, _fd ) );
     }
 }
 
@@ -130,17 +130,27 @@ void OBluetooth::synchronize()
 class OBluetoothInterface::Private
 {
   public:
-    Private( struct hci_dev_info* di )
+    Private( struct hci_dev_info* di, int fd )
     {
         ::memcpy( &devinfo, di, sizeof(struct hci_dev_info) );
+        ctlfd = fd;
+    }
+    void reloadInfo()
+    {
+        int result = ::ioctl( ctlfd, HCIGETDEVINFO, (void *) &devinfo );
+        if ( result == -1 )
+        {
+            owarn << "OBluetoothInterface::Private - can't reload device info (" << strerror( errno ) << ")" << oendl;
+        }
     }
     struct hci_dev_info devinfo;
+    int ctlfd;
 };
 
-OBluetoothInterface::OBluetoothInterface( QObject* parent, const char* name, void* devinfo )
+OBluetoothInterface::OBluetoothInterface( QObject* parent, const char* name, void* devinfo, int ctlfd )
                     :QObject( parent, name )
 {
-    d = new OBluetoothInterface::Private( (struct hci_dev_info*) devinfo );
+    d = new OBluetoothInterface::Private( (struct hci_dev_info*) devinfo, ctlfd );
 }
 
 OBluetoothInterface::~OBluetoothInterface()
@@ -156,6 +166,27 @@ QString OBluetoothInterface::macAddress() const
                               d->devinfo.bdaddr.b[2],
                               d->devinfo.bdaddr.b[1],
                               d->devinfo.bdaddr.b[0] );
+}
+
+bool OBluetoothInterface::setUp( bool b )
+{
+    int cmd = b ? HCIDEVUP : HCIDEVDOWN;
+    int result = ::ioctl( d->ctlfd, cmd, d->devinfo.dev_id );
+    if ( result == -1 && errno != EALREADY )
+    {
+        owarn << "OBluetoothInterface::setUp( " << b << " ) - couldn't change interface state (" << strerror( errno ) << ")" << oendl;
+        return false;
+    }
+    else
+    {
+        d->reloadInfo();
+        return true;
+    }
+}
+
+bool OBluetoothInterface::isUp() const
+{
+    return hci_test_bit( HCI_UP, &d->devinfo.flags );
 }
 
 }

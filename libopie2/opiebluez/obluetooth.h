@@ -118,7 +118,7 @@ class OBluetoothInterface : public QObject
      * Constructor. Normally you don't create @ref OBluetoothInterface objects yourself,
      * but access them via @ref OBluetooth::interface().
      */
-    OBluetoothInterface( QObject* parent, const char* name, void* devinfo );
+    OBluetoothInterface( QObject* parent, const char* name, void* devinfo, int ctlfd );
     /**
      * Destructor.
      */
@@ -127,6 +127,14 @@ class OBluetoothInterface : public QObject
      * @return the MAC address of the interfaces
      */
     QString macAddress() const;
+    /**
+     * Setting an interface to up enables it to receive packets.
+     */
+    bool setUp( bool );
+    /**
+     * @returns true if the interface is up.
+     */
+    bool isUp() const;
 
   private:
     class Private;
