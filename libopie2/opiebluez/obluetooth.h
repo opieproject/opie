@@ -37,6 +37,7 @@ namespace Opie {
 namespace Bluez {
 
 class OBluetoothInterface;
+class OBluetoothDevice;
 
 /**
  * @brief A container class for all bluetooth interfaces
@@ -104,7 +105,7 @@ class OBluetooth : public QObject
 /**
  * @brief An bluetooth interface wrapper.
  *
- * This class provides a wrapper for an infrared interface. All the cumbersome details of
+ * This class provides a wrapper for a bluetooth HCI device. All the cumbersome details of
  * Linux ioctls are hidden under a convenient high-level interface.
  * @warning Most of the setting methods contained in this class require the appropriate
  * process permissions to work.
@@ -113,6 +114,11 @@ class OBluetooth : public QObject
  */
 class OBluetoothInterface : public QObject
 {
+  Q_OBJECT
+  public:
+    typedef QDict<OBluetoothDevice> DeviceMap;
+    typedef QDictIterator<OBluetoothDevice> DeviceIterator;
+
   public:
     /**
      * Constructor. Normally you don't create @ref OBluetoothInterface objects yourself,
@@ -135,13 +141,45 @@ class OBluetoothInterface : public QObject
      * @returns true if the interface is up.
      */
     bool isUp() const;
+    /**
+      * @returns an iterator usable for iterating through the devices in range
+      */
+    DeviceIterator neighbourhood();
 
   private:
+    DeviceMap _devices;
     class Private;
     Private *d;
 };
 
+/*======================================================================================
+ * OBluetoothDevice
+ *======================================================================================*/
 
+/**
+ * @brief An bluetooth (remote) device abstraction.
+ *
+ * This class resembles a (remote) bluetooth device.
+ * @author Michael 'Mickey' Lauer <mickey@vanille.de>
+ */
+class OBluetoothDevice : public QObject
+{
+  Q_OBJECT
+
+  public:
+    /**
+     * Constructor.
+     */
+    OBluetoothDevice( QObject* parent, const char* name );
+    /**
+     * Destructor.
+     */
+    virtual ~OBluetoothDevice();
+    /**
+      * @returns the MAC address of the device's interface
+      */
+    QString macAddress() const;
+};
 
 }
 }

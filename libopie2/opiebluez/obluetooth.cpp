@@ -37,9 +37,11 @@ using namespace Opie::Core;
 #include <bluetooth/bluetooth.h>
 #include <bluetooth/hci.h>
 #include <bluetooth/hci_lib.h>
+#include <assert.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -189,6 +191,61 @@ bool OBluetoothInterface::isUp() const
     return hci_test_bit( HCI_UP, &d->devinfo.flags );
 }
 
-}
+OBluetoothInterface::DeviceIterator OBluetoothInterface::neighbourhood()
+{
+    _devices.clear();
+    struct hci_inquiry_req* ir;
+    int nrsp = 255;
+
+    char* mybuffer = static_cast<char*>( malloc( sizeof( *ir ) + ( sizeof( inquiry_info ) * (nrsp) ) ) );
+    assert( mybuffer );
+
+    ir = (struct hci_inquiry_req*) mybuffer;
+    memset( ir, 0, sizeof( *ir ) + ( sizeof( inquiry_info ) * (nrsp) ) );
+
+    ir->dev_id  = d->devinfo.dev_id;
+    ir->num_rsp = nrsp;
+    ir->length  = 8;
+    ir->flags   = 0;
+    ir->lap[0] = 0x33;
+    ir->lap[1] = 0x8b;
+    ir->lap[2] = 0x9e;
+
+    int result = ::ioctl( d->ctlfd, HCIINQUIRY, mybuffer );
+    if ( result == -1 )
+    {
+        owarn << "OBluetoothInterface::neighbourhood() - can't issue HCIINQUIRY (" << strerror( errno ) << ")" << oendl;
+        return DeviceIterator( _devices );
+    }
+
+    for( int i = 0; i < ir->num_rsp; ++i )
+    {
+        odebug << "found a device" << oendl;
+    }
+
+    return DeviceIterator( _devices );
 }
 
+
+/*======================================================================================
+ * OBluetoothDevice
+ *======================================================================================*/
+
+OBluetoothDevice::OBluetoothDevice( QObject* parent, const char* name )
+                 :QObject( parent, name )
+{
+    odebug << "OBluetoothDevice::OBluetoothDevice() - '" << name << "'" << oendl;
+}
+
+OBluetoothDevice::~OBluetoothDevice()
+{
+    odebug << "OBluetoothDevice::~OBluetoothDevice()" << oendl;
+}
+
+QString OBluetoothDevice::macAddress() const
+{
+    return "N/A";
+}
+
+}
+}
