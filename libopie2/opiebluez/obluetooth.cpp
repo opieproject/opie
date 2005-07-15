@@ -205,9 +205,9 @@ OBluetoothInterface::DeviceIterator OBluetoothInterface::neighbourhood()
 
     ir->dev_id  = d->devinfo.dev_id;
     ir->num_rsp = nrsp;
-    ir->length  = 8;
+    ir->length  = 8; // 10 seconds
     ir->flags   = 0;
-    ir->lap[0] = 0x33;
+    ir->lap[0] = 0x33; // GIAC
     ir->lap[1] = 0x8b;
     ir->lap[2] = 0x9e;
 
@@ -218,23 +218,37 @@ OBluetoothInterface::DeviceIterator OBluetoothInterface::neighbourhood()
         return DeviceIterator( _devices );
     }
 
-    for( int i = 0; i < ir->num_rsp; ++i )
+    inquiry_info* ii = (inquiry_info*)( ir+1 );
+
+    for ( int i = 0; i < ir->num_rsp; ++i )
     {
-        odebug << "found a device" << oendl;
+        OBluetoothDevice* dev = new OBluetoothDevice( this, 0, ii );
+        _devices.insert( dev->macAddress(), dev );
+        ++ii;
     }
 
     return DeviceIterator( _devices );
 }
 
-
 /*======================================================================================
  * OBluetoothDevice
  *======================================================================================*/
 
-OBluetoothDevice::OBluetoothDevice( QObject* parent, const char* name )
+class OBluetoothDevice::Private
+{
+  public:
+    Private( inquiry_info* ii )
+    {
+        ::memcpy( &inqinfo, ii, sizeof(inquiry_info) );
+    }
+    inquiry_info inqinfo;
+};
+
+OBluetoothDevice::OBluetoothDevice( QObject* parent, const char* name, void* inqinfo )
                  :QObject( parent, name )
 {
     odebug << "OBluetoothDevice::OBluetoothDevice() - '" << name << "'" << oendl;
+    d = new OBluetoothDevice::Private( (inquiry_info*) inqinfo );
 }
 
 OBluetoothDevice::~OBluetoothDevice()
@@ -244,8 +258,117 @@ OBluetoothDevice::~OBluetoothDevice()
 
 QString OBluetoothDevice::macAddress() const
 {
-    return "N/A";
+    return QString().sprintf( "%2.2X:%2.2X:%2.2X:%2.2X:%2.2X:%2.2X",
+    d->inqinfo.bdaddr.b[5],
+    d->inqinfo.bdaddr.b[4],
+    d->inqinfo.bdaddr.b[3],
+    d->inqinfo.bdaddr.b[2],
+    d->inqinfo.bdaddr.b[1],
+    d->inqinfo.bdaddr.b[0] );
 }
+
+QString OBluetoothDevice::deviceClass() const
+{
+    int maj = d->inqinfo.dev_class[1] & 0x1f;
+    int min = d->inqinfo.dev_class[0] >> 2;
+
+    QString major = QString( "Unknown(%1)" ).arg( maj );
+    QString minor = QString( "Unknown(%1)" ).arg( min );
+
+    switch ( maj )
+    {
+        case 0: major = "Miscellaneous";
+        break;
+
+        case 1: major = "Computer";
+        switch ( min )
+        {
+            case 0: minor = "Uncategorized";
+            case 1: minor = "Desktop workstation";
+            case 2: minor = "Server";
+            case 3: minor = "Laptop";
+            case 4: minor = "Handheld";
+            case 5: minor = "Palm";
+            case 6: minor = "Wearable";
+        }
+        break;
+
+        case 2: major = "Phone";
+        switch ( min )
+        {
+            case 0: minor = "Uncategorized"; break;
+            case 1: minor = "Cellular"; break;
+            case 2: minor = "Cordless"; break;
+            case 3: minor = "Smart phone"; break;
+            case 4: minor = "Wired modem or voice gateway"; break;
+            case 5: minor = "Common ISDN Access"; break;
+            case 6: minor = "Sim Card Reader"; break;
+        }
+        break;
+
+        case 3: major = "LAN Access";
+        break;
+
+        case 4: major = "Audio/Video";
+        switch ( min )
+        {
+            case 0: minor = "Uncategorized"; break;
+            case 1: minor = "Device conforms to the Headset profile"; break;
+            case 2: minor = "Hands-free"; break;
+            case 3: minor = "Reserved(3)"; break;
+            case 4: minor = "Microphone"; break;
+            case 5: minor = "Loudspeaker"; break;
+            case 6: minor = "Headphones"; break;
+            case 7: minor = "Portable Audio"; break;
+            case 8: minor = "Car Audio"; break;
+            case 9: minor = "Set-top box"; break;
+            case 10: minor = "HiFi Audio Device"; break;
+            case 11: minor = "VCR"; break;
+            case 12: minor = "Video Camera"; break;
+            case 13: minor = "Camcorder"; break;
+            case 14: minor = "Video Monitor"; break;
+            case 15: minor = "Video Display and Loudspeaker"; break;
+            case 16: minor = "Video Conferencing"; break;
+            case 17: minor = "Reserved(17)"; break;
+            case 18: minor = "Gaming/Toy"; break;
+        }
+        break;
+
+        case 5: major = "Peripheral";
+        switch ( min )
+        {
+            case 16: minor = "Keyboard"; break;
+            case 32: minor = "Pointing Device"; break;
+            case 48: minor = "Keyboard and Pointing Device"; break;
+        }
+        break;
+
+        case 6: major = "Imaging";
+        if (min & 4) minor = "Display";
+        else if (min & 8) minor = "Camera";
+        else if (min & 16) minor = "Scanner";
+        else if (min & 32) minor = "Printer";
+        break;
+
+        case 63: major = "Uncategorized";
+        break;
+    }
+
+    return QString( "%1:%2" ).arg( major ).arg( minor );
+}
+
+QString OBluetoothDevice::getName()
+{
+    /* FIXME: Uahhh, this gets ugly.
+    The BlueZ kernel interface seems to be very badly (if at all) documented.
+    All people are assuming that you use libbluetooth to talk to that stack.
+    However since libbluetooth is GPL, we can't do that :/
+    Guess, we are stuck here until someone finds time and/or motivation to look
+    into that and create some easy-to-understand examples for how to talk
+    directly to the BlueZ kernel interface.
+    */
+};
+
 
 }
 }

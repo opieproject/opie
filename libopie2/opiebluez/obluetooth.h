@@ -130,7 +130,7 @@ class OBluetoothInterface : public QObject
      */
     virtual ~OBluetoothInterface();
     /**
-     * @return the MAC address of the interfaces
+     * @return the MAC address of the interface.
      */
     QString macAddress() const;
     /**
@@ -142,7 +142,7 @@ class OBluetoothInterface : public QObject
      */
     bool isUp() const;
     /**
-      * @returns an iterator usable for iterating through the devices in range
+      * @returns an iterator usable for iterating through the devices in range.
       */
     DeviceIterator neighbourhood();
 
@@ -170,15 +170,27 @@ class OBluetoothDevice : public QObject
     /**
      * Constructor.
      */
-    OBluetoothDevice( QObject* parent, const char* name );
+    OBluetoothDevice( QObject* parent, const char* name, void* inqinfo );
     /**
      * Destructor.
      */
     virtual ~OBluetoothDevice();
     /**
-      * @returns the MAC address of the device's interface
+      * @returns the MAC address of the device's interface.
       */
     QString macAddress() const;
+    /**
+     * @returns the class of device.
+     */
+    QString deviceClass() const;
+    /**
+     * @returns the device name.
+     */
+    QString getName();
+
+  private:
+    class Private;
+    Private *d;
 };
 
 }
