@@ -41,6 +41,7 @@
 	* n.a.	- memoryapplet: fix crash in memoryapplet on kernels without swap support (seneca cunningham)
 	* n.a.  - networksettings: ignore hostap control interfaces wifi* (mickeyl)
 	* n.a.  - Today Addressbook plugin fix configuration to show/not show birthdays, use checkboxes for selection (hrw)
+	* n.a.  - remove hardcoded font size from netsystemtime (hrw)
 
 	Internal
 	--------
