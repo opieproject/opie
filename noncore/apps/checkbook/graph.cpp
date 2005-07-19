@@ -97,8 +97,9 @@ void Graph::drawBarChart( int width, int height, float max, float min )
 	QPainter p( &graph );
 
 	// Try to set the font size smaller for text
+	// it would be nice to get _pCfg->getUseSmallFont here
 	QFont f = font();
-	f.setPointSize( 8 );
+	f.setPointSize( f.pointSize()-1 );
 	p.setFont( f );
 
 	int x = 0;
@@ -133,8 +134,9 @@ void Graph::drawPieChart( int width, int height, float sum )
 	QPainter p( &graph );
 
 	// Try to set the font size smaller for text
+	// it would be nice to get _pCfg->getUseSmallFont here
 	QFont f = font();
-	f.setPointSize( 8 );
+	f.setPointSize( f.pointSize()-1 );
 	p.setFont( f );
 
 	int n = data->numberDataPoints();
