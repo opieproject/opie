@@ -76,7 +76,7 @@ PredictTabWidget::PredictTabWidget( QWidget *parent )
 	// Prediction table
 	tblLookups = new QTable( 2, 3, this );
 	QFont font(  tblLookups->font() );
-	font.setPointSize( 7 );
+	font.setPointSize( font.pointSize() - 2 );
 	tblLookups->setFont( font );
 	tblLookups->horizontalHeader()->setLabel( 0, tr( "Shift [s/h]" ) );
 	tblLookups->horizontalHeader()->setLabel( 1, tr( "Last [h]" ) );

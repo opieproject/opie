@@ -73,7 +73,7 @@ NTPTabWidget::NTPTabWidget( QWidget *parent )
 	// NTP output display
 	mleNtpOutput = new QMultiLineEdit( container );
 	QFont font(  mleNtpOutput->font() );
-	font.setPointSize( 7 );
+	font.setPointSize( font.pointSize() - 2 );
 	mleNtpOutput->setFont( font );
 	mleNtpOutput->setWordWrap( QMultiLineEdit::WidgetWidth );
 	layout->addMultiCellWidget( mleNtpOutput, 3, 3, 0, 1 );
