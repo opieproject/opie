@@ -114,6 +114,37 @@ struct z_button z_buttons_c700 [] = {
     "QPE/Rotation", "rotateDefault()",0},
 };
 
+struct z_button z_buttons_6000 [] = {
+    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
+    "devicebuttons/z_calendar",
+    "datebook", "nextView()",
+    "today", "raise()" },
+    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
+    "devicebuttons/z_contact",
+    "addressbook", "raise()",
+    "addressbook", "beamBusinessCard()" },
+    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
+    "devicebuttons/z_home",
+    "QPE/Launcher", "home()",
+    "buttonsettings", "raise()" },
+    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
+    "devicebuttons/z_menu",
+    "QPE/TaskBar", "toggleMenu()",
+    "QPE/TaskBar", "toggleStartMenu()" },
+    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
+    "devicebuttons/z_mail",
+    "opiemail", "raise()",
+    "opiemail", "newMail()" },
+    { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Rotate Button"),
+    "devicebuttons/z_rotate",
+    0,
+    "QPE/Rotation", "rotateDefault()" },
+    { Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"),
+    "devicebuttons/z_hinge3",
+    "QPE/VMemo", "toggleRecord()",
+    "sound", "raise()" },
+};
+
 // FIXME This gets unnecessary complicated. We should think about splitting the Zaurus
 //       class up into individual classes. We would need three classes
 //
@@ -255,12 +286,16 @@ void Zaurus::initButtons()
     if ( d->m_buttons )
         return;
 
-
     d->m_buttons = new QValueList <ODeviceButton>;
 
     struct z_button * pz_buttons;
     int buttoncount;
-    switch ( d->m_model ) {
+    switch ( d->m_model )
+    {
+        case Model_Zaurus_SL6000:
+            pz_buttons = z_buttons_6000;
+            buttoncount = ARRAY_SIZE(z_buttons_6000);
+            break;
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC1000: // fallthrough
         case Model_Zaurus_SLC7x0:
