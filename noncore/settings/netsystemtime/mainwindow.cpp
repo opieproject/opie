@@ -67,12 +67,12 @@ MainWindow::MainWindow( QWidget *parent , const char *name,  bool modal, WFlags 
     // Default object pointers to null
     ntpProcess = 0x0;
     ntpTab = 0x0;
+    predictTab = 0x0;
 
     // Add tab widgets
     mainWidget->addTab( timeTab = new TimeTabWidget( mainWidget ), "netsystemtime/DateTime", tr( "Time" ) );
     mainWidget->addTab( formatTab = new FormatTabWidget( mainWidget ), "netsystemtime/formattab", tr( "Format" ) );
     mainWidget->addTab( settingsTab = new SettingsTabWidget( mainWidget ), "SettingsIcon", tr( "Settings" ) );
-    mainWidget->addTab( predictTab = new PredictTabWidget( mainWidget ), "netsystemtime/predicttab", tr( "Predict" ) );
     Config config( "ntp" );
     config.setGroup( "settings" );
     slotDisplayNTPTab( config.readBoolEntry( "displayNtpTab", false ) );
@@ -275,6 +275,7 @@ void MainWindow::slotDisplayPredictTab( bool display )
     // Create widget if it hasn't needed
     if ( display && !predictTab )
     {
+        predictTab = new PredictTabWidget( mainWidget );
     }
     // Display/hide tab
     display ? mainWidget->addTab( predictTab, "netsystemtime/predicttab", tr( "Predict" ) )
@@ -371,7 +372,12 @@ void MainWindow::slotNtpFinished( OProcess *p )
         QString grpname = QString( "lookup_" ).append( QString::number( lookupCount ) );
         config.setGroup( grpname );
         lookupCount++;
-        predictTab->setShiftPerSec( (int)(timeShift / secsSinceLast) );
+        
+        if(predictTab)
+        {
+            predictTab->setShiftPerSec( (int)(timeShift / secsSinceLast) );
+        }
+
         config.writeEntry( "secsSinceLast", secsSinceLast );
         config.writeEntry( "timeShift", QString::number( timeShift ) );
         config.setGroup( "lookups" );
@@ -404,7 +410,11 @@ void MainWindow::slotCheckNtp( int i )
     }
     else
     {
-        predictTab->slotPredictTime();
+        if(predictTab)
+        {
+            predictTab->slotPredictTime();
+        }
+
         if ( i > 0 )
         {
             QString output = tr( "Could not connect to server " );
