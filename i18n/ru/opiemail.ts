@@ -335,55 +335,55 @@
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished">Сервер</translation>
+        <translation>Сервер</translation>
     </message>
     <message>
         <source>Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключиться</translation>
     </message>
     <message>
         <source>Set on/offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Он-/офф-лайн</translation>
     </message>
     <message>
         <source>Refresh folder list</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить список папок</translation>
     </message>
     <message>
         <source>Create new folder</source>
-        <translation type="unfinished">Создать новую папку</translation>
+        <translation>Создать новую папку</translation>
     </message>
     <message>
         <source>(Un-)Subscribe groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Подписаться/отказаться от групп</translation>
     </message>
     <message>
         <source>Refresh headerlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить заголовки</translation>
     </message>
     <message>
         <source>Delete all mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить всю почту</translation>
     </message>
     <message>
         <source>New subfolder</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая подпапка</translation>
     </message>
     <message>
         <source>Delete folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить папку</translation>
     </message>
     <message>
         <source>Move/Copie all mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить/скопировать всю почту</translation>
     </message>
     <message>
         <source>Read current mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочитать текущую почту</translation>
     </message>
 </context>
 <context>
@@ -718,11 +718,11 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Click opens mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Открывать почту щелчком</translation>
     </message>
     <message>
         <source>Click activate server/folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Открывать папку/сервер щелчком</translation>
     </message>
 </context>
 <context>
@@ -785,11 +785,11 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Reading attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотр вложения</translation>
     </message>
     <message>
         <source>Could not read content of attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу прочитать вложение</translation>
     </message>
 </context>
 <context>
@@ -836,7 +836,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Show image preview inline</source>
-        <translation type="unfinished"></translation>
+        <translation>Изображения внутри текста</translation>
     </message>
 </context>
 <context>

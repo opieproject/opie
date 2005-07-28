@@ -223,11 +223,7 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

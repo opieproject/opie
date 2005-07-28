@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Default display brightness:</source>
-        <translation type="unfinished"></translation>
+        <translation>Яркость дисплея по умолчанию:</translation>
     </message>
 </context>
 <context>
@@ -62,11 +62,11 @@
     </message>
     <message>
         <source>Increase brightness</source>
-        <translation type="unfinished"></translation>
+        <translation>Увеличить яркость</translation>
     </message>
     <message>
         <source>Decrease brightness</source>
-        <translation type="unfinished"></translation>
+        <translation>Уменьшить яркость</translation>
     </message>
 </context>
 <context>
@@ -220,15 +220,15 @@
     </message>
     <message>
         <source>Display brightness...</source>
-        <translation type="unfinished"></translation>
+        <translation>Яркость дисплея...</translation>
     </message>
     <message>
         <source>Increase brightness by 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Увеличить яркость на 5</translation>
     </message>
     <message>
         <source>Decrease brightness by 5</source>
-        <translation type="unfinished"></translation>
+        <translation>Уменьшить яркость на 5</translation>
     </message>
 </context>
 <context>
@@ -288,7 +288,7 @@
     </message>
     <message>
         <source>Display brightness:</source>
-        <translation type="unfinished"></translation>
+        <translation>Яркость дисплея:</translation>
     </message>
 </context>
 <context>

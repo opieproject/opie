@@ -344,11 +344,11 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Plugins</source>
-        <translation type="unfinished"></translation>
+        <translation>Плагины</translation>
     </message>
     <message>
         <source>Pluginlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Список плагинов</translation>
     </message>
 </context>
 <context>
@@ -421,7 +421,7 @@ Quit anyway?</source>
     <name>DateBookWeekView</name>
     <message>
         <source>p</source>
-        <translation type="unfinished"></translation>
+        <translation>п</translation>
     </message>
 </context>
 <context>
