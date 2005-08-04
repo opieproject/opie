@@ -68,6 +68,7 @@ enum OModel {
     Model_iPAQ_H39xx    = ( Model_iPAQ | 0x000010 ),
     Model_iPAQ_H5xxx    = ( Model_iPAQ | 0x000020 ),
     Model_iPAQ_H22xx    = ( Model_iPAQ | 0x000040 ),
+    Model_iPAQ_H191x    = ( Model_iPAQ | 0x000080 ),
 
     Model_Jornada       = ( 6 << 24 ),
     Model_Jornada_56x   = ( Model_Jornada | 0x000001 ),

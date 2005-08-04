@@ -85,12 +85,12 @@ typedef struct {
 #define FLITE_ON  OD_IOW( 'f', 7, FLITE_IN )
 
 struct i_button ipaq_buttons [] = {
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x,
     Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
     "devicebuttons/ipaq_calendar",
     "datebook", "nextView()",
     "today", "raise()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x,
     Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
     "devicebuttons/ipaq_contact",
     "addressbook", "raise()",
@@ -100,17 +100,17 @@ struct i_button ipaq_buttons [] = {
     "devicebuttons/ipaq_menu",
     "QPE/TaskBar", "toggleMenu()",
     "QPE/TaskBar", "toggleStartMenu()" },
-    { Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
+    { Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x,
     Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
     "devicebuttons/ipaq_mail",
     "opiemail", "raise()",
     "opiemail", "newMail()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x,
     Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
     "devicebuttons/ipaq_home",
     "QPE/Launcher", "home()",
     "buttonsettings", "raise()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x,
     Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"),
     "devicebuttons/ipaq_record",
     "QPE/VMemo", "toggleRecord()",
@@ -138,6 +138,8 @@ void iPAQ::init(const QString& model)
         d->m_model = Model_iPAQ_H5xxx;
     else if ( d->m_modelstr == "H2200" )
         d->m_model = Model_iPAQ_H22xx;
+    else if ( d->m_modelstr == "H1910" )
+        d->m_model = Model_iPAQ_H191x;
     else
         d->m_model = Model_Unknown;
 
@@ -148,6 +150,7 @@ void iPAQ::init(const QString& model)
             break;
         case Model_iPAQ_H5xxx:
         case Model_iPAQ_H22xx:
+        case Model_iPAQ_H191x:
             d->m_rotation = Rot0;
             break;
         case Model_iPAQ_H36xx:
@@ -285,7 +288,8 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
             // keycode - Key_Left = position of the button starting from left clockwise
             // add the rotation to it and modolo. No we've the original offset
             // add the offset to the Key_Left key
-            if ( d-> m_model == Model_iPAQ_H5xxx )
+            if (( d->m_model == Model_iPAQ_H5xxx ) ||
+		( d->m_model == Model_iPAQ_H191x ))
                 newkeycode = Key_Left + ( keycode - Key_Left + 3 ) % 4;
             break;
         }
@@ -348,13 +352,26 @@ bool iPAQ::setDisplayBrightness ( int bright )
     if ( bright < 0 )
         bright = 0;
 
-    if (( fd = ::open ( "/dev/touchscreen/0", O_WRONLY )) >= 0 ) {
-        FLITE_IN bl;
-        bl. mode = 1;
-        bl. pwr = bright ? 1 : 0;
-        bl. brightness = ( bright * ( displayBrightnessResolution() - 1 ) + 127 ) / 255;
-        res = ( ::ioctl ( fd, FLITE_ON, &bl ) == 0 );
-        ::close ( fd );
+    QString cmdline;
+
+    switch ( model()) {
+    case Model_iPAQ_H191x:
+        if ( !bright )
+            cmdline = QString::fromLatin1( "echo 4 > /sys/class/backlight/pxafb/power");
+        else
+            cmdline = QString::fromLatin1( "echo 0 > /sys/class/backlight/pxafb/power; echo %1 > /sys/class/backlight/pxafb/brightness" ).arg( bright );
+        // No Global::shellQuote as we gurantee it to be sane
+        res = ( ::system( QFile::encodeName(cmdline) ) == 0 );
+        break; 
+    default:
+        if (( fd = ::open ( "/dev/touchscreen/0", O_WRONLY )) >= 0 ) {
+            FLITE_IN bl;
+            bl. mode = 1;
+            bl. pwr = bright ? 1 : 0;
+            bl. brightness = ( bright * ( displayBrightnessResolution() - 1 ) + 127 ) / 255;
+            res = ( ::ioctl ( fd, FLITE_ON, &bl ) == 0 );
+            ::close ( fd );
+        }
     }
     return res;
 }
@@ -372,12 +389,29 @@ int iPAQ::displayBrightnessResolution() const
             return 64;
         case Model_iPAQ_H5xxx:
             return 255;
-
+        case Model_iPAQ_H191x:
+            return 183;
         default:
             return 2;
     }
 }
 
+bool iPAQ::setDisplayStatus ( bool on )
+{
+    bool res = false;
+
+    QString cmdline;
+
+    if ( model() == Model_iPAQ_H191x ) {
+        cmdline = QString::fromLatin1( "echo %1 > /sys/class/lcd/pxafb/power; echo %2 > /sys/class/backlight/pxafb/power").arg( on ? "0" : "4" ).arg( on ? "0" : "4" );
+    } else {
+        res = OAbstractMobileDevice::setDisplayStatus(on);
+    }
+
+    res = ( ::system( QFile::encodeName(cmdline) ) == 0 );
+
+    return res;
+}
 
 bool iPAQ::hasLightSensor() const
 {

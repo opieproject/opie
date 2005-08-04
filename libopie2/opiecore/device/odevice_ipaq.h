@@ -47,6 +47,7 @@ class iPAQ : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual void initButtons();
 
   public:
+    virtual bool setDisplayStatus ( bool on );
     virtual bool setDisplayBrightness( int b );
     virtual int displayBrightnessResolution() const;
 
