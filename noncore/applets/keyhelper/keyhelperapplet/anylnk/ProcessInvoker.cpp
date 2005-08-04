@@ -1,5 +1,9 @@
 #include "ProcessInvoker.h"
 
+#ifndef PIPE_BUF // uClibc or similar
+#include <linux/limits.h>
+#endif
+
 static ProcessInvoker* g_this;
 /* ------------------------------------------------------------------------ */
 /*	static functions														*/

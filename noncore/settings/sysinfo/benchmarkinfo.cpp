@@ -50,7 +50,7 @@ using namespace Opie::Ui;
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#if defined (__GNUC__) && (__GNUC__ < 3)
+#if (defined (__GNUC__) && (__GNUC__ < 3)) || defined(__UCLIBC__)
 #define round qRound
 #endif
 
