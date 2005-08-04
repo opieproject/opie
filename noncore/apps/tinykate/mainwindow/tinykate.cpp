@@ -203,8 +203,7 @@ void TinyKate::open(const QString & filename)
     KTextEditor::View *kv;
     QString realFileName;
     //check if filename is a .desktop file
-    if ( filename.find( ".desktop", 0, true ) )
-    {
+    if ( filename.find( ".desktop", 0, true ) != -1 ) {
         switch ( QMessageBox::warning( this, tr( "TinyKATE" ),
                                        tr("TinyKATE has detected<BR>you selected a <B>.desktop</B> file.<BR>Open <B>.desktop</B> file or <B>linked</B> file?" ),
                                        tr(".desktop File"),
@@ -218,6 +217,8 @@ void TinyKate::open(const QString & filename)
             realFileName = docLnk.file();
             break;
         };
+    } else {
+	    realFileName = filename;
     }
 
     QFileInfo fileInfo( realFileName );
