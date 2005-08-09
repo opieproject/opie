@@ -325,6 +325,8 @@ void MainWindow::openModule( const QString &modulename, const QString &key )
             // Set key if one is present
             if ( !key.isNull() )
                 tw->setKey( key );
+            setCaption( QString( "%1 - Dagger" ).arg( tw->getFullKey() ) );
+            m_navToolbar->setKey( tw->getAbbrevKey() );
         }
     }
 }
@@ -634,12 +636,13 @@ void MainWindow::slotNavPrevVerse()
 
 void MainWindow::slotNavKeyChanged( const QString &newKey )
 {
-    QString key = newKey;
-    key.replace( QRegExp( "[-=.]" ), ":" );
-
     TextWidget *text = reinterpret_cast<TextWidget *>(m_tabs.currentWidget());
     if ( text )
     {
+        QString key = newKey;
+        if ( text->isBibleText() )
+            key.replace( QRegExp( "[-=.]" ), ":" );
+
         text->setKey( key );
         setCaption( QString( "%1 - Dagger" ).arg( text->getFullKey() ) );
     }
@@ -699,10 +702,10 @@ void MainWindow::slotTextRefClicked( const QString &ref )
 {
 //printf( "Ref clicked: '%s'\n", ref.latin1() );
 /*
-Ref clicked: 'type=Strongs value=G3482'
-Ref clicked: 'type=Strongs value=H07225'
-Ref clicked: 'type=morph class=x-Robinson:N-PRI value=N-PRI'
-Ref clicked: 'type=morph class=x-StrongsMorph:TH8804 value=TH8804'
+Ref clicked: 'passagestudy.jsp?action=showStrongs&type=Hebrew&value=07225'
+Ref clicked: 'passagestudy.jsp?action=showStrongs&type=Greek&value=602'
+Ref clicked: 'passagestudy.jsp?action=showMorph&type=x-Robinson%3AN-NSF&value=N-NSF'
+Ref clicked: 'passagestudy.jsp?action=showNote&type=n&value=1&module=KJV&passage=Genesis+1%3A5'
 */
     //owarn << "Reference: " << ref << oendl;
     if ( !ref.isNull() )
@@ -710,43 +713,36 @@ Ref clicked: 'type=morph class=x-StrongsMorph:TH8804 value=TH8804'
         TextWidget *text = reinterpret_cast<TextWidget *>(m_tabs.currentWidget());
         if ( text )
         {
+            // Parse action
+            int pos = ref.find( '&', 28 );
+            QString actionStr = ref.mid( 28, pos - 28 );
+
             // Parse type
-            int pos = ref.find( "type=", 0, false ) + 5;
-            QString typeStr = ref.mid( pos, ref.find( ' ', pos ) - pos );
-            
-            // Parse class (for morph. only)
-            QString classStr;
-            if ( typeStr == "morph" )
-            {
-                pos = ref.find( "class=", 0, false ) + 5;
-                QString classStr = ref.mid( pos, ref.find( ' ', pos ) - pos );
-                
-                // TODO - need to strip 'x-' from beginning and ':key' at end?
-            }
-            
+            pos = ref.find( "type=", pos, false ) + 5;
+            QString typeStr = ref.mid( pos, ref.find( '&', pos ) - pos );
+
             // Parse value
             pos = ref.find( "value=", 0, false ) + 6;
             QString valueStr = ref.mid( pos, ref.find( ' ', pos ) - pos );
-            
-            if ( typeStr == "Strongs" )
+
+            if ( actionStr == "Strongs" )
             {
-                //Determine if is a Hebrew or Greek reference
-                QString module;
-                if ( valueStr.at( 0 ) == 'H' )
-                    module = "StrongsHebrew";
-                else
-                    module = "StrongsGreek";
-                
-                // Get key
-                QString key( valueStr );
-                key.remove( 0, 1 );
+                QString module = actionStr;
+                module.append( typeStr );
+
                 // Open reference
-                 openModule( module, key );
+                 openModule( module, valueStr );
             }
-            else if ( typeStr == "morph" )
+            else if ( actionStr == "Morph" )
             {
-                QMessageBox::information( this, tr( "Morphological Tags" ),
-                       tr( "Morphological tag cross-referencing not implemented yet." ) );
+                QString module = typeStr.mid( 2, typeStr.find( '%', 2 ) - 2 );
+
+                // Open reference
+                openModule( module, valueStr );
+            }
+            else if ( actionStr == "Note" )
+            {
+                // TODO
             }
         }
     }

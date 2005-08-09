@@ -1,3 +1,11 @@
+2005-08-09 Dan Williams <drw@handhelds.org>
+
+    * Released version 0.9.2
+    * Added support for Sword v1.5.8
+    * Implemented morph tag cross-referencing
+    * Fix crash when last module is closed
+    * Fix display of key when module is opened
+
 2004-04-22 Dan Williams <drw@handhelds.org>
 
     * Released version 0.9.1

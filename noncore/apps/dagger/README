@@ -2,14 +2,14 @@
 /*
 /*                           Opie - Dagger
 /*                          ===============
-/*                           Version 0.9.1
+/*                           Version 0.9.2
 /*
 /*                   A Bible study/reader application
 /*
 /************************************************************************
 
 ---------------------------------------------
- Release Notes for Opie-Dagger - April, 2004
+ Release Notes for Opie-Dagger - August, 2005
 ---------------------------------------------
 
 ======================
@@ -25,7 +25,7 @@
 In order to build opie-dagger, libsword needs to be present on
 the build system along with the appropriate headers.
 
-- libsword source (best to use version 1.5.x or greater):
+- libsword source (requires version 1.5.8 or greater):
   - http://www.crosswire.org/sword/
 
 - the Sword library headers need to be located in an appropriate
@@ -48,7 +48,7 @@ the build system along with the appropriate headers.
 =       Credits      =
 ======================
 
-- Opie-Dagger is (C) 2004 Dan Williams
+- Opie-Dagger is (C) 2004, 2005 Dan Williams
 
 ======================
 =        Links       =

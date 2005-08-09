@@ -91,7 +91,7 @@ void SearchBar::setCurrModule( TextWidget *currText )
 {
     m_actionFind->setEnabled( ( m_searchText->text() != "" ) && currText );
 
-    if ( !m_currText || ( currText->getModuleName() != m_currText->getModuleName() ) )
+    if ( !m_currText || !currText || ( currText->getModuleName() != m_currText->getModuleName() ) )
     {
         m_actionPrev->setEnabled( false );
         m_resultList->clear();
