@@ -45,6 +45,7 @@
 	* n.a.  - Today Addressbook plugin fix configuration to show/not show birthdays, use checkboxes for selection (hrw)
 	* n.a.  - remove hardcoded font size from netsystemtime (hrw)
 	* n.a.  - remove hardcoded font size from checkbook graphs (hrw)
+	* n.a.  - Dagger - fixes for Sword 1.5.8, morph tag x-refs, closing last tab crash (drw)
 
 	Internal
 	--------
