@@ -166,6 +166,8 @@ qDebug("lease query before leaving the library.");;
 
 }// end initConfig()
 
+#define SCALED  Opie::Core::OResource::SmallIcon
+
 void Gutenbrowser::initMenuBar()
 {
 	qDebug("Starting menu init.");
@@ -173,33 +175,33 @@ void Gutenbrowser::initMenuBar()
     menubar = new QPEMenuBar(this);
 
     fileMenu=new QPopupMenu();
-    fileMenu->insertItem( Opie::Core::OResource::loadPixmap("gutenbrowser/openbook", Opie::Core::OResource::SmallIcon ),
+    fileMenu->insertItem( Opie::Core::OResource::loadPixmap("gutenbrowser/openbook", SCALED ),
                          "Open Local Library...", this, SLOT( OpenBtn()) );
 //    fileMenu->insertItem("Download FTPSite", this, SLOT( downloadFtpList()) );
-    fileMenu->insertItem( Opie::Core::OResource::loadPixmap("home", Opie::Core::OResource::SmallIcon ),
+    fileMenu->insertItem( Opie::Core::OResource::loadPixmap("home", SCALED ),
                           "Download Library Index", this, SLOT( downloadLibIndex()) );
-    fileMenu->insertItem( Opie::Core::OResource::loadPixmap("quit", Opie::Core::OResource::SmallIcon ),
+    fileMenu->insertItem( Opie::Core::OResource::loadPixmap("quit",SCALED),
                           "Quit Gutenbrowser...", this, SLOT( ByeBye()) );
       // menuBar entry editMenu
 
     editMenu=new QPopupMenu();
 
-    editMenu->insertItem( Opie::Core::OResource::loadPixmap("up", Opie::Core::OResource::SmallIcon ), "Top",
+    editMenu->insertItem( Opie::Core::OResource::loadPixmap("up", SCALED ), "Top",
                                                  this, SLOT(TopBtn()) );
-    editMenu->insertItem( Opie::Core::OResource::loadPixmap("back", Opie::Core::OResource::SmallIcon ), "Beginning",
+    editMenu->insertItem( Opie::Core::OResource::loadPixmap("back",SCALED ), "Beginning",
                           this, SLOT(doBeginBtn()) );
-    editMenu->insertItem( Opie::Core::OResource::loadPixmap("gutenbrowser/search", Opie::Core::OResource::SmallIcon ), "Search",
+    editMenu->insertItem( Opie::Core::OResource::loadPixmap("gutenbrowser/search",SCALED ), "Search",
                           this, SLOT(SearchBtn()) );
 
     editMenu->insertItem("Clear", this, SLOT(ClearEdit()) );
 
     optionsMenu= new QPopupMenu();
-    optionsMenu->insertItem( Opie::Core::OResource::loadPixmap("gutenbrowser/configure", Opie::Core::OResource::SmallIcon ),
+    optionsMenu->insertItem( Opie::Core::OResource::loadPixmap("gutenbrowser/configure",SCALED ),
                              "Configure", this, SLOT(doOptions()) );
 
     donateMenu = new QPopupMenu();
 //     donateMenu->insertItem("Gutenberg", this, SLOT(donateGutenberg()) );
-    donateMenu->insertItem( Opie::Core::OResource::loadPixmap("gutenbrowser/gutenbrowser_sm", Opie::Core::OResource::SmallIcon ),
+    donateMenu->insertItem( Opie::Core::OResource::loadPixmap("gutenbrowser/gutenbrowser_sm", SCALED ),
                             "Gutenbrowser Developer", this, SLOT(infoGutenbrowser()) );
 
     menubar->insertItem("File", fileMenu);
@@ -214,7 +216,7 @@ void Gutenbrowser::initMenuBar()
 
 void Gutenbrowser::initButtonBar()
 {
-	qDebug("Starting buttonbar init.");
+//	qDebug("Starting buttonbar init.");
 
     OpenButton = new QPushButton( this, "OpenButton" );
     OpenButton->setFocusPolicy( QWidget::TabFocus );
@@ -249,8 +251,8 @@ void Gutenbrowser::initButtonBar()
     InfoBar = new QPushButton( this, "Info_Bar" );
 //    if(!useSplitter) {
 
-    buttonsHidden=FALSE;
-    buttons2->setSpacing(2);
+    buttonsHidden=false;
+
     buttons2->addWidget(OpenButton, 0, AlignCenter);
     buttons2->addWidget(LibraryButton, 0, AlignCenter);
     buttons2->addWidget(BackButton, 0, AlignCenter);
@@ -260,8 +262,9 @@ void Gutenbrowser::initButtonBar()
     buttons2->addWidget(lastBmkButton, 0, AlignCenter);
     buttons2->addWidget(dictionaryButton, 0, AlignCenter);
     buttons2->addWidget(InfoBar, 0, AlignCenter);
+    buttons2->addStretch(5);
+    buttons2->setSpacing(5);
 
-    topLayout->setSpacing(0);
     topLayout->addLayout( buttons2,0);
 }
 
