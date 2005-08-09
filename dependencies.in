@@ -71,7 +71,7 @@
     depends LIBSDL_DEP
 
   config LIBSWORD_DEP
-    boolean "Have libsword > = 1.5.0"
+    boolean "Have libsword > = 1.5.8"
     default "n"
 
   config LIBSWORD_LIB_DIR
