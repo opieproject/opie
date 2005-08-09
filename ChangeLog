@@ -34,6 +34,7 @@
 	* #1666 - Opie-IRC does not allow to add !channels in config as	autojoin ones (skyhusker)
 	* #1667 - Opie-IRC does not show messages from !channel (skyhusker)
 	* #1679 - Security PIN plugin is QVGA sized (hrw)
+	* #1682 - Properly resize tab control in OTabWidget (drw)
 	* n.a.	- always show volume and wireless applet popups inside visible screen (deller)
 	* n.a.  - scale O-Menu-Applets appropriately (mickeyl)
 	* n.a.	- libopienet: fix bugs in wireless scanning and setting SSID (skyhusker)
