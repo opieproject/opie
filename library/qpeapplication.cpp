@@ -219,13 +219,13 @@ public:
                     mw->resize(s);
                     mw->move(p);
 
-                    if ( max && !nomaximize ) {
-                        mw->showMaximized();
-                    } else {
-                        mw->show();
+                     if ( max && !nomaximize ) {
+                         mw->showMaximized();
+                     } else {
+                    mw->show();
                     }
                 } else {
-                    QPEApplication::showDialog((QDialog*)mw,nomaximize);
+                    QPEApplication::showDialog((QDialog*)mw, !nomaximize);
                 }
             } else {
                 if ( read_widget_rect(strName, max, p, s) && validate_widget_size(mw, p, s) ) {
