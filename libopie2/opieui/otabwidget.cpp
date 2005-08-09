@@ -121,6 +121,9 @@ void OTabWidget::addTab( QWidget *child, const QString &icon, const QString &lab
     OTabInfo *tabinfo = new OTabInfo( tabid, child, icon, label );
     m_tabs.append( tabinfo );
 
+    // Force resizing of child controls
+    resizeEvent( 0x0 );
+
     // Make newly added tab the current one displayed
     selectTab( tabinfo );
 }
@@ -167,6 +170,9 @@ void OTabWidget::removePage( QWidget *childwidget )
             // Redraw widget
             setUpLayout();
         }
+
+        // Force resizing of child controls
+        resizeEvent( 0x0 );
     }
 }
 
@@ -207,6 +213,9 @@ void OTabWidget::changeTab( QWidget *widget, const QString &iconset, const QStri
         // Update tab information
         currtab->setLabel( label );
         currtab->setIcon( iconset );
+
+        // Force resizing of child controls
+        resizeEvent( 0x0 );
 
         // Redraw widget
         setUpLayout();
