@@ -8,7 +8,8 @@ HEADERS    += device/odevice.h          \
               device/odevice_simpad.h   \
               device/odevice_zaurus.h   \
               device/odevice_genuineintel.h   \
-              device/odevice_yopy.h
+              device/odevice_yopy.h  \
+              device/odevice_mypal.h 
 
 SOURCES    += device/odevice.cpp        \
               device/odevicebutton.cpp  \
@@ -20,5 +21,6 @@ SOURCES    += device/odevice.cpp        \
               device/odevice_simpad.cpp \
               device/odevice_zaurus.cpp \
               device/odevice_genuineintel.cpp   \
-              device/odevice_yopy.cpp
+              device/odevice_yopy.cpp \
+              device/odevice_mypal.cpp
 
