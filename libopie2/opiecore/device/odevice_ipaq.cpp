@@ -1,31 +1,30 @@
 /*
- Â  Â  Â  Â  Â  Â  Â  Â              This file is part of the Opie Project
-
-                             Copyright (C)2002, 2003, 2004 The Opie Team <opie-devel@handhelds.org>
-              =.
+                             This file is part of the Opie Project
+             =.              (C) 2002-2005 The Opie Team <opie-devel@handhelds.org>
             .=l.
-Â  Â  Â  Â  Â  Â .>+-=
-Â _;:, Â  Â  .> Â  Â :=|.         This program is free software; you can
-.> <`_, Â  > Â . Â  <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.-- Â  :           the terms of the GNU Library General Public
-.="- .-=="i, Â  Â  .._         License as published by the Free Software
-Â - . Â  .-<_> Â  Â  .<>         Foundation; either version 2 of the License,
-Â  Â  Â ._= =} Â  Â  Â  :          or (at your option) any later version.
-Â  Â  .%`+i> Â  Â  Â  _;_.
-Â  Â  .i_,=:_. Â  Â  Â -<s.       This program is distributed in the hope that
-Â  Â  Â + Â . Â -:. Â  Â  Â  =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : .. Â  Â .:, Â  Â  . . .    without even the implied warranty of
-Â  Â  =_ Â  Â  Â  Â + Â  Â  =;=|`    MERCHANTABILITY or FITNESS FOR A
-Â  _.=:. Â  Â  Â  : Â  Â :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.= Â  Â  Â  = Â  Â  Â  ;      Library General Public License for more
-++= Â  -. Â  Â  .` Â  Â  .:       details.
-: Â  Â  = Â ...= . :.=-
-Â -. Â  .:....=;==+<;          You should have received a copy of the GNU
-Â  -_. . . Â  )=. Â =           Library General Public License along with
-Â  Â  -- Â  Â  Â  Â :-=`           this library; see the file COPYING.LIB.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; version 2 of the License.
+     ._= =}       :
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
+
 */
 
 #include "odevice_ipaq.h"
@@ -100,7 +99,7 @@ struct i_button ipaq_buttons [] = {
     "devicebuttons/ipaq_menu",
     "QPE/TaskBar", "toggleMenu()",
     "QPE/TaskBar", "toggleStartMenu()" },
-    { Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x,
+    { Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
     Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
     "devicebuttons/ipaq_mail",
     "opiemail", "raise()",
@@ -110,11 +109,23 @@ struct i_button ipaq_buttons [] = {
     "devicebuttons/ipaq_home",
     "QPE/Launcher", "home()",
     "buttonsettings", "raise()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x,
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
     Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"),
     "devicebuttons/ipaq_record",
     "QPE/VMemo", "toggleRecord()",
     "sound", "raise()" },
+
+    { Model_iPAQ_H191x,
+    Qt::Key_F8, QT_TRANSLATE_NOOP("Button", "Mail Button"),
+    "devicebuttons/ipaq_mail",
+    "opiemail", "raise()",
+    "opiemail", "newMail()" },
+    { Model_iPAQ_H191x,
+    Qt::Key_F7, QT_TRANSLATE_NOOP("Button", "Record Button"),
+    "devicebuttons/ipaq_record",
+    "QPE/VMemo", "toggleRecord()",
+    "sound", "raise()" },
+
 };
 
 void iPAQ::init(const QString& model)
@@ -405,7 +416,7 @@ bool iPAQ::setDisplayStatus ( bool on )
     if ( model() == Model_iPAQ_H191x ) {
         cmdline = QString::fromLatin1( "echo %1 > /sys/class/lcd/pxafb/power; echo %2 > /sys/class/backlight/pxafb/power").arg( on ? "0" : "4" ).arg( on ? "0" : "4" );
     } else {
-        res = OAbstractMobileDevice::setDisplayStatus(on);
+        return OAbstractMobileDevice::setDisplayStatus(on);
     }
 
     res = ( ::system( QFile::encodeName(cmdline) ) == 0 );
