@@ -622,9 +622,12 @@ void Konsole::init(const char* _pgm, QStrList & _args)
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitDown() ) ); a->addTo( toolBar );
 
-    a = new QAction( tr("Paste"), Opie::Core::OResource::loadPixmap( "paste", Opie::Core::OResource::SmallIcon ),
-                     QString::null, 0, this, 0 );
+    a = new QAction( tr("Paste"), Opie::Core::OResource::loadPixmap( "paste", Opie::Core::OResource::SmallIcon ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( hitPaste() ) );
+
+    a = new QAction( tr("Close"), Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ),QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( closeSession() ) );
+
     a->addTo( toolBar );
 
     secondToolBar = new QToolBar( this );
@@ -1915,4 +1918,7 @@ void Konsole::doWrap()
         te->setWrapAt(120);
         configMenu->setItemChecked( cm_wrap,FALSE);
     }
+}
+void Konsole::closeSession() {
+   doneSession(getTe(), 0);
 }

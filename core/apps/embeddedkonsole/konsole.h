@@ -101,6 +101,7 @@ private slots:
 
     void historyDialog();
     void fullscreenTimeout();
+    void closeSession();
 
 private:
     void doWrap();
