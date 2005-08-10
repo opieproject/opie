@@ -1,0 +1,34 @@
+#!/usr/bin/perl
+
+# Strips unnecessary whitespace from SIGNAL() and SLOT() macros,
+# so that this doesn't have to be done at runtime.
+# Believe it or not, this actually speeds things up.
+#
+# Limitation: only 1 set of (...) inside the macro, so it can't handle
+#  signals and slots that have function pointers as arguments.
+
+for $arg (@ARGV) {
+    if ( 0 ) {
+	# opts
+    } else {
+	push @files, $arg;
+    }
+}
+
+sub canonWS {
+    my ($s) = @_;
+    $s =~ s/(.)\s+(\W)/$1$2/g;
+    $s =~ s/(\W)\s+(.)/$1$2/g;
+    return $s;
+};
+
+for $file (@files) {
+    open F, $file;
+    $c = join "",<F>;
+    close F;
+    $c =~ s/\b((?:SIGNAL|SLOT)\s*\(\s*)((?:[^\n;()]+|\([^()]*\))*)\)/"$1".canonWS($2).")"/egs;
+    open F, ">t$$";
+    print F $c;
+    close F;
+    system("diff -u $file t$$");
+}
