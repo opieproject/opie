@@ -56,63 +56,69 @@ class ODeviceData;
 enum OModel {
     Model_Unknown, // = 0
 
-    Model_Series_Mask   = 0xff000000,
+    Model_Series_Mask   = 0xffff0000,
 
-    Model_iPAQ          = ( 1 << 24 ),
+    Model_iPAQ          = ( 1 << 16 ),
 
-    Model_iPAQ_All      = ( Model_iPAQ | 0xffffff ),
-    Model_iPAQ_H31xx    = ( Model_iPAQ | 0x000001 ),
-    Model_iPAQ_H36xx    = ( Model_iPAQ | 0x000002 ),
-    Model_iPAQ_H37xx    = ( Model_iPAQ | 0x000004 ),
-    Model_iPAQ_H38xx    = ( Model_iPAQ | 0x000008 ),
-    Model_iPAQ_H39xx    = ( Model_iPAQ | 0x000010 ),
-    Model_iPAQ_H5xxx    = ( Model_iPAQ | 0x000020 ),
-    Model_iPAQ_H22xx    = ( Model_iPAQ | 0x000040 ),
-    Model_iPAQ_H191x    = ( Model_iPAQ | 0x000080 ),
+    Model_iPAQ_All      = ( Model_iPAQ | 0xffff ),
+    Model_iPAQ_H31xx    = ( Model_iPAQ | 0x0001 ),
+    Model_iPAQ_H36xx    = ( Model_iPAQ | 0x0002 ),
+    Model_iPAQ_H37xx    = ( Model_iPAQ | 0x0003 ),
+    Model_iPAQ_H38xx    = ( Model_iPAQ | 0x0004 ),
+    Model_iPAQ_H39xx    = ( Model_iPAQ | 0x0005 ),
+    Model_iPAQ_H5xxx    = ( Model_iPAQ | 0x0006 ),
+    Model_iPAQ_H22xx    = ( Model_iPAQ | 0x0007 ),
+    Model_iPAQ_H191x    = ( Model_iPAQ | 0x0008 ),
 
-    Model_Jornada       = ( 6 << 24 ),
-    Model_Jornada_56x   = ( Model_Jornada | 0x000001 ),
-    Model_Jornada_720   = ( Model_Jornada | 0x000002 ),
+    Model_Jornada       = ( 6 << 16 ),
+    Model_Jornada_56x   = ( Model_Jornada | 0x0001 ),
+    Model_Jornada_720   = ( Model_Jornada | 0x0002 ),
 
-    Model_Zaurus        = ( 2 << 24 ),
+    Model_Zaurus        = ( 2 << 16 ),
 
-    Model_Zaurus_SL5000 = ( Model_Zaurus | 0x000001 ),
-    Model_Zaurus_SL5500 = ( Model_Zaurus | 0x000002 ),
-    Model_Zaurus_SLA300 = ( Model_Zaurus | 0x000003 ),
-    Model_Zaurus_SLB600 = ( Model_Zaurus | 0x000004 ),
-    Model_Zaurus_SLC7x0 = ( Model_Zaurus | 0x000005 ),
-    Model_Zaurus_SL6000 = ( Model_Zaurus | 0x000006 ),
-    Model_Zaurus_SLC3000 = ( Model_Zaurus | 0x000007 ),
-    Model_Zaurus_SLC1000 = ( Model_Zaurus | 0x000008 ),
+    Model_Zaurus_SL5000 = ( Model_Zaurus | 0x0001 ),
+    Model_Zaurus_SL5500 = ( Model_Zaurus | 0x0002 ),
+    Model_Zaurus_SLA300 = ( Model_Zaurus | 0x0003 ),
+    Model_Zaurus_SLB600 = ( Model_Zaurus | 0x0004 ),
+    Model_Zaurus_SLC7x0 = ( Model_Zaurus | 0x0005 ),
+    Model_Zaurus_SL6000 = ( Model_Zaurus | 0x0006 ),
+    Model_Zaurus_SLC3000 = ( Model_Zaurus | 0x0007 ),
+    Model_Zaurus_SLC1000 = ( Model_Zaurus | 0x0008 ),
 
-    Model_SIMpad        = ( 3 << 24 ),
+    Model_SIMpad        = ( 3 << 16 ),
 
-    Model_SIMpad_All    = ( Model_SIMpad | 0xffffff ),
-    Model_SIMpad_CL4    = ( Model_SIMpad | 0x000001 ),
-    Model_SIMpad_SL4    = ( Model_SIMpad | 0x000002 ),
-    Model_SIMpad_SLC    = ( Model_SIMpad | 0x000004 ),
-    Model_SIMpad_TSinus = ( Model_SIMpad | 0x000008 ),
+    Model_SIMpad_All    = ( Model_SIMpad | 0xffff ),
+    Model_SIMpad_CL4    = ( Model_SIMpad | 0x0001 ),
+    Model_SIMpad_SL4    = ( Model_SIMpad | 0x0002 ),
+    Model_SIMpad_SLC    = ( Model_SIMpad | 0x0003 ),
+    Model_SIMpad_TSinus = ( Model_SIMpad | 0x0004 ),
 
-    Model_Ramses        = ( 4 << 24 ),
+    Model_Ramses        = ( 4 << 16 ),
 
-    Model_Ramses_All    = ( Model_Ramses | 0xffffff ),
-    Model_Ramses_MNCI   = ( Model_Ramses | 0x000001 ),
-    Model_Ramses_MNCIRX = ( Model_Ramses | 0x000002 ),
+    Model_Ramses_All    = ( Model_Ramses | 0xffff ),
+    Model_Ramses_MNCI   = ( Model_Ramses | 0x0001 ),
+    Model_Ramses_MNCIRX = ( Model_Ramses | 0x0002 ),
 
-    Model_Yopy          = ( 5 << 24 ),
+    Model_Yopy          = ( 5 << 16 ),
 
-    Model_Yopy_All      = ( Model_Yopy | 0xffffff ),
-    Model_Yopy_3000     = ( Model_Yopy | 0x000001 ),
-    Model_Yopy_3500     = ( Model_Yopy | 0x000002 ),
-    Model_Yopy_3700     = ( Model_Yopy | 0x000003 ),
+    Model_Yopy_All      = ( Model_Yopy | 0xffff ),
+    Model_Yopy_3000     = ( Model_Yopy | 0x0001 ),
+    Model_Yopy_3500     = ( Model_Yopy | 0x0002 ),
+    Model_Yopy_3700     = ( Model_Yopy | 0x0003 ),
 
-    Model_Beagle        = ( 6 << 24 ),
+    Model_Beagle        = ( 6 << 16 ),
 
-    Model_Beagle_All    = ( Model_Beagle | 0xffffff ),
-    Model_Beagle_PA100  = ( Model_Beagle | 0x000001 ),
+    Model_Beagle_All    = ( Model_Beagle | 0xffff ),
+    Model_Beagle_PA100  = ( Model_Beagle | 0x0001 ),
 
-    Model_GenuineIntel  = ( 7 << 24 )
+    Model_GenuineIntel  = ( 7 << 16 ),
 
+    Model_MyPal         = ( 8 << 16 ),
+
+    Model_MyPal_All     = ( Model_MyPal | 0xffff ),
+    Model_MyPal_620     = ( Model_MyPal | 0x0001 ),
+    Model_MyPal_716     = ( Model_MyPal | 0x0002 ),
+    Model_MyPal_730     = ( Model_MyPal | 0x0003 )
 };
 
 /**
@@ -127,7 +133,8 @@ enum OVendor {
     Vendor_MundN,
     Vendor_GMate,
     Vendor_MasterIA,
-    Vendor_GenuineIntel
+    Vendor_GenuineIntel,
+    Vendor_Asus
 };
 
 /**
