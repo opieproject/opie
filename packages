@@ -17,7 +17,9 @@ CONFIG_BOUNCE	noncore/games/bounce	bounce.pro
 CONFIG_BRIGHTNESSAPPLET	noncore/applets/brightnessapplet	brightnessapplet.pro
 CONFIG_BUTTON-SETTINGS	core/settings/button	button.pro
 CONFIG_BUZZWORD	noncore/games/buzzword	buzzword.pro
-CONFIG_CALC2	noncore/tools/calc2	calc.pro
+CONFIG_CALC2	noncore/tools/calc2	calc2.pro
+CONFIG_CALC2-BINARY	noncore/tools/calc2/binary	binary.pro
+CONFIG_CALC2-SIMPLE	noncore/tools/calc2/simple	simple.pro
 CONFIG_CALCULATOR	noncore/tools/calculator	calculator.pro
 CONFIG_CALIBRATE	core/apps/calibrate	calibrate.pro
 CONFIG_CAMERA	noncore/multimedia/camera	camera.pro
@@ -170,6 +172,7 @@ CONFIG_OPIE-READER	noncore/apps/opie-reader	opie-reader.pro
 CONFIG_OPIE-READER-FLITEDYN	noncore/apps/opie-reader/FliteDyn	FliteDyn.pro
 CONFIG_OPIE-READER-FLITEDYN16	noncore/apps/opie-reader/FliteDyn16	FliteDyn16.pro
 CONFIG_OPIEREC		noncore/multimedia/opierec	opierec.pro
+CONFIG_OPIESMB	noncore/net/opie-smb	opie-smb.pro
 CONFIG_OPIE-SHEET	noncore/apps/opie-sheet	opie-sheet.pro
 CONFIG_OPIE-SH	noncore/tools/opie-sh	opie-sh.pro
 CONFIG_OPIETOOTH-APPLET	noncore/net/opietooth/applet	applet.pro

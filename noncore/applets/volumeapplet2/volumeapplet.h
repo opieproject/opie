@@ -32,15 +32,17 @@
 #define VOLUMEAPPLET_H
 
 #include <opie2/otaskbarapplet.h>
+#include <opie2/osoundsystem.h>
 #include <qframe.h>
 #include <qstring.h>
 #include <qvbox.h>
 #include <qpixmap.h>
+//using namespace Opie::MM;
 
 namespace Opie
 {
     namespace Ui { class OLedBox; }
-    namespace MM { class OMixerInterface; }
+//    namespace MM { class OMixerInterface; }
 }
 class QLabel;
 class QSlider;
@@ -69,6 +71,13 @@ class VolumeAppletControl : public QFrame
   public:
     VolumeAppletControl( Opie::Ui::OTaskbarApplet* parent, const char* name = 0 );
     ~VolumeAppletControl();
+   bool volMuted() const;
+   int volPercent() const;
+
+   int  m_vol_percent;
+   bool m_vol_muted;
+
+    Opie::MM::OMixerInterface* mixer;
 
     virtual QSize sizeHint() const;
 
@@ -78,8 +87,8 @@ class VolumeAppletControl : public QFrame
     void build();
 
   private:
+   
     QGridLayout* l;
-
 };
 
 
@@ -96,7 +105,7 @@ class VolumeApplet : public Opie::Ui::OTaskbarApplet
 
   private:
     VolumeAppletControl* _control;
-    QPixmap _pixmap;
+    QPixmap* _pixmap;
 };
 
 #endif

@@ -22,7 +22,7 @@
 
 #include "simplefactory.h"
 #include "simpleimpl.h"
-#include <engine.h>
+#include "../engine.h"
 
 QWidget *SimpleInterface::getPlugin ( Engine *e, QWidget *parent ) {
     if ( !input )

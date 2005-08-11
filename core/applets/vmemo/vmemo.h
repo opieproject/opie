@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.15 2004-03-01 19:19:38 mickeyl Exp $
+ * $Id: vmemo.h,v 1.16 2005-08-11 10:10:40 llornkcor Exp $
  */
 
 #ifndef __VMEMO_H__
@@ -29,7 +29,9 @@
 class VMemo : public QWidget
 {
   Q_OBJECT
+			
 public:
+	
   VMemo( QWidget *parent, const char *name = NULL);
   ~VMemo();
   static int position();
@@ -38,8 +40,10 @@ public:
   QString fileName, errorMsg, date;
   QLabel* msgLabel;
   QTimer *t_timer;
-bool usingIcon, useADPCM;
+	bool usingIcon, useADPCM;
+ 
 public slots:
+		
   bool record();
   void mousePressEvent( QMouseEvent * );
   void mouseReleaseEvent( QMouseEvent * );
@@ -47,7 +51,9 @@ public slots:
   bool startRecording();
   void stopRecording();
   void timerBreak();
+	
 private:
+	
   bool useAlerts;
   void paintEvent( QPaintEvent* );
   int setToggleButton(int);

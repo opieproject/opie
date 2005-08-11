@@ -653,19 +653,33 @@ void AdvancedFm::runCommandStd() {
 }
 
 void AdvancedFm::fileStatus() {
-   if( !CurrentView()->currentItem()) return;
-   QString curFile;
-   curFile = CurrentView()->currentItem()->text(0);
+		if( !CurrentView()->currentItem()) return;
+		QString curFile;
+		curFile = CurrentView()->currentItem()->text(0);
+		if(QFileInfo("/usr/bin/stat").exists()) {
+				QStringList command;
+				command << "/bin/sh";
+				command << "-c";
+				command << "stat -l "+ curFile;
+				Output *outDlg;
+				outDlg = new Output( command, this, tr("AdvancedFm Output"), true);
+				QPEApplication::execDialog( outDlg );
+		} else {
+/*    struct stat buf;
+		stat( curFile.local8bit(), &buf);
+		
+		st_dev dev;
+		st_uid uid;
+		st_gid gid;
+		st_size size;
+		st_atime atime;
+		st_mtime mtime;
+		st_ctime ctime;
+    st_mode mode;
+*/
+		}
 
-   QStringList command;
-   command << "/bin/sh";
-   command << "-c";
-   command << "stat -l "+ curFile;
-
-   Output *outDlg;
-   outDlg = new Output( command, this, tr("AdvancedFm Output"), true);
-   QPEApplication::execDialog( outDlg );
-   qApp->processEvents();
+		qApp->processEvents();
 }
 
 

@@ -1,0 +1,4 @@
+  config OPIESMB
+    boolean "opie-smb (samba front end client for Opie)"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

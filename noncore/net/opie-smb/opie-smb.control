@@ -1,0 +1,12 @@
+Package: smbclient
+Version: 1.0
+Architecture: arm
+Arch: arm
+Maintainer: Kurt Korbatits (support@midget.net.au)
+Section: Network
+Priority: optional
+Description: Gui front end for samba utilities.
+Source:
+Depends: smbclient
+
+

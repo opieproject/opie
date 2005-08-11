@@ -22,8 +22,8 @@
 #define BINARYIMPL_H
 
 #include "simpleimpl.h"
-#include <plugininterface.h>
-#include <engine.h>
+#include "../plugininterface.h"
+#include "../engine.h"
 
 class SimpleInterface : public CalcInterface
 {

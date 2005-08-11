@@ -22,7 +22,7 @@
 
 #include "binaryfactory.h"
 #include "binaryimpl.h"
-#include <engine.h>
+#include "../engine.h"
 
 QWidget *BinaryInterface::getPlugin ( Engine *e, QWidget *parent ) {
     if ( !input )

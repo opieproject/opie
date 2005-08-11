@@ -68,7 +68,6 @@ LCD->setSegmentStyle(QLCDNumber::Filled);
   for (it = list.begin (); it != list.end (); ++it) {
     CalcInterface *iface = 0;
     QLibrary *lib = new QLibrary (path + "/" + *it);
-
     Plugin plugin;
     plugin.pluginWidget = 0;
 

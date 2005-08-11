@@ -22,6 +22,7 @@ using namespace Opie::Core;
 using namespace Opie::Ui;
 
 /* QT */
+#include <qframe.h>
 #include <qlayout.h>
 #include <qhbox.h>
 #include <qmenubar.h>
@@ -37,7 +38,11 @@ void AdvancedFm::init() {
 	 b = false;
 	 setCaption( tr( "AdvancedFm" ) );
 
-	 QVBoxLayout *layout = new QVBoxLayout( this );
+//    QFrame* frame = new QFrame(this);
+//    setCentralWidget(frame);
+//   QVBoxLayout *layout = new QVBoxLayout( frame );
+   
+   QVBoxLayout *layout = new QVBoxLayout( this);
 	 layout->setSpacing( 2);
 	 layout->setMargin( 0); // squeeze
 

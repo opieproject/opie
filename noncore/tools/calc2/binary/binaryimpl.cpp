@@ -19,7 +19,7 @@
 **********************************************************************/
 
 #include "binaryimpl.h"
-#include <instruction.h>
+#include "../instruction.h"
 
 class iXOR : public Instruction {
 public:

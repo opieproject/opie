@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=Samba Client Utility
+Exec=opie-smb
+Icon=opie-smb/opie-smb
+Type=Application
+Name=opie-smb

@@ -907,11 +907,11 @@ bool TextEdit::saveAs() {
         dire = QPEApplication::documentDir();
     QString str;
     if( !featureAutoSave) {
-          str = OFileDialog::getSaveFileName( 2,
-                                              dire,
-                                              filee, map);
-      } else
-        str=currentFileName;
+				str = OFileDialog::getSaveFileName( 2,
+																						dire,
+																						filee, map);
+		} else
+        str = currentFileName;
 
     if(!str.isEmpty()) {
         QString fileNm=str;
@@ -923,31 +923,31 @@ bool TextEdit::saveAs() {
 //        QString file = doc->file();
 //        doc->removeFiles();
             delete doc;
-            DocLnk nf;
-            nf.setType("text/plain");
-            nf.setFile( fileNm);
-            doc = new DocLnk(nf);
+				DocLnk nf;
+				nf.setType("text/plain");
+				nf.setFile( fileNm);
+				doc = new DocLnk(nf);
 //        editor->setText(rt);
-            odebug << "Saving file as "+currentFileName << oendl;
-            doc->setName( fi.baseName() /*currentFileName*/);
-            updateCaption( currentFileName);
+				odebug << "Saving file as "+currentFileName << oendl;
+				doc->setName( fi.baseName() /*currentFileName*/);
+				updateCaption( currentFileName);
 
-            FileManager fm;
-            if ( !fm.saveFile( *doc, rt ) ) {
-                                QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
-                return false;
-            }
+				FileManager fm;
+				if ( !fm.saveFile( *doc, rt ) ) {
+						QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
+						return false;
+				}
 
-            if( filePerms ) {
-                filePermissions *filePerm;
-                filePerm = new filePermissions(this,
-                                               tr("Permissions"),true,
-                                               0,(const QString &)fileNm);
-                QPEApplication::execDialog( filePerm );
+				if( filePerms ) {
+						filePermissions *filePerm;
+						filePerm = new filePermissions(this,
+																					 tr("Permissions"),true,
+																					 0,(const QString &)fileNm);
+						QPEApplication::execDialog( filePerm );
 
-                if( filePerm)
-                    delete  filePerm;
-            }
+						if( filePerm)
+								delete  filePerm;
+				}
 //        }
         editor->setEdited( false);
         edited1 = false;

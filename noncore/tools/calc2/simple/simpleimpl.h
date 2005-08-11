@@ -25,8 +25,8 @@
 #include <qlcdnumber.h>
 
 #include "simple.h"
-#include "engine.h"
-#include "instruction.h"
+#include "../engine.h"
+#include "../instruction.h"
 
 class FormSimpleImpl:public FormSimple {
 Q_OBJECT

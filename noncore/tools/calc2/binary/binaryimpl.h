@@ -21,7 +21,7 @@
 #define FORMBINARYINPUTIMPL
 
 #include "binary.h"
-#include <engine.h>
+#include "../engine.h"
 
 class FormBinaryImpl : public FormBinary {
 Q_OBJECT
