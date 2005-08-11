@@ -70,13 +70,13 @@ FormatTabWidget::FormatTabWidget( QWidget *parent )
 	cbAmpm = new QComboBox( container );
 	cbAmpm->insertItem( tr( "24 hour" ), 0 );
 	cbAmpm->insertItem( tr( "12 hour" ), 1 );
-	connect( cbAmpm, SIGNAL(activated( int)), this, SIGNAL(show12HourTime( int)) );
+	connect( cbAmpm, SIGNAL(activated(int)), this, SIGNAL(show12HourTime(int)) );
 	layout->addWidget( cbAmpm, 1, 1 );
 
 	// Date format selector
 	layout->addWidget( new QLabel( tr( "Date format" ), container ), 2, 0 );
 	cbDateFormat = new QComboBox( container );
-	connect( cbDateFormat, SIGNAL(activated( int)), this, SLOT(slotDateFormatChanged( int)) );
+	connect( cbDateFormat, SIGNAL(activated(int)), this, SLOT(slotDateFormatChanged(int)) );
 	layout->addWidget( cbDateFormat, 2, 1 );
 
 	// Week starts on selector
