@@ -1,5 +1,6 @@
-Package: smbclient
-Version: 1.0
+Package: opie-smb
+Files: plugins/application/libopie-smb.so* bin/opie-smb pics/opie-smb apps/Applications/opie-smb.desktop
+Version: $QPE_VERSION$EXTRAVERSION
 Architecture: arm
 Arch: arm
 Maintainer: Kurt Korbatits (support@midget.net.au)
@@ -8,5 +9,3 @@ Priority: optional
 Description: Gui front end for samba utilities.
 Source:
 Depends: smbclient
-
-
