@@ -153,7 +153,8 @@ VolumeApplet::VolumeApplet( QWidget *parent, const char *name )
 {
     setFixedHeight( AppLnk::smallIconSize() +4);
     setFixedWidth( AppLnk::smallIconSize() );
-    _pixmap =  new QPixmap (Opie::Core::OResource::loadPixmap( "volume", Opie::Core::OResource::SmallIcon ));
+    _pixmap = Opie::Core::OResource::loadPixmap( "volume", Opie::Core::OResource::SmallIcon );
+//    _pixmap =  new QPixmap (Opie::Core::OResource::loadPixmap( "volume", Opie::Core::OResource::SmallIcon ));
    _control = new VolumeAppletControl( this, "control" );
 }
 

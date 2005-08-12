@@ -105,7 +105,7 @@ class VolumeApplet : public Opie::Ui::OTaskbarApplet
 
   private:
     VolumeAppletControl* _control;
-    QPixmap* _pixmap;
+    QPixmap _pixmap;
 };
 
 #endif
