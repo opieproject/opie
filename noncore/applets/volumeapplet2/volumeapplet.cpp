@@ -171,8 +171,10 @@ int VolumeApplet::position()
 
 void VolumeApplet::paintEvent( QPaintEvent* )
 {
-  QPainter p ( this );
+    QPainter p(this);
+    p.drawPixmap(0, 2, _pixmap );
 
+/*
   p. drawPixmap ( (width()- _pixmap->width())/2, QMAX( (height()-4-_pixmap->height() )/2, 1), *_pixmap );
   p. setPen ( darkGray );
   p. drawRect ( 1, height() - 4, width() - 2, 4 );
@@ -184,6 +186,7 @@ void VolumeApplet::paintEvent( QPaintEvent* )
   int pixelsWide =  volPercent  * ( width() - 4 ) / 100;
   p. fillRect ( 2, height() - 3, pixelsWide, 2, red );
   p. fillRect ( pixelsWide + 2, height() - 3, width() - 4 - pixelsWide, 2, lightGray );
+*/
 
 //   if ( _control-> volMuted ( )) {
 //     p. setPen ( red );
