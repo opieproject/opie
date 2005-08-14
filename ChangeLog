@@ -15,6 +15,8 @@
 	* Opie-Console: Read initial fixed font configuration from qpe.conf (mickeyl)
 	* Opie-PcmciaApplet: Configure insert/resume actions and bind unsupported cards (mickeyl)
 	* SysInfo: Remove CPU tab and add Devices tab instead (mickeyl)
+	* Opie-smb: Added Opie front end for Samba (ljp)
+	
 
 	Fixed Bugs
 	----------
@@ -46,6 +48,7 @@
 	* n.a.  - remove hardcoded font size from netsystemtime (hrw)
 	* n.a.  - remove hardcoded font size from checkbook graphs (hrw)
 	* n.a.  - Dagger - fixes for Sword 1.5.8, morph tag x-refs, closing last tab crash (drw)
+	
 
 	Internal
 	--------
@@ -58,7 +61,8 @@
 	* libopiecore: Add linux pcmcia system abstraction classes (mickeyl)
 	* libopiecore: ODevice now knows the default gfx driver to use (mteira,mickeyl)
 	* Remove assumptions about default gfx driver ("Transformed") all over the place (mteira,mickeyl)
-
+        * fix / optimize number of scanned directories. (ljp)
+	
 2005-03-25	Opie 1.2.0
 
 	Fixed Bugs
