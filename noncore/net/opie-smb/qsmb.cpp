@@ -122,7 +122,7 @@ void Qsmb::scan()
    }
    owarn << "match: " << match << oendl;
 
-   cmd = "/usr/bin/findsmb";
+   cmd = "smbfind";
    owarn <<"cmd: " << cmd << oendl;
 	
    TextViewOutput->append(cmd);

@@ -1,5 +1,5 @@
 Package: opie-smb
-Files: plugins/application/libopie-smb.so* bin/opie-smb pics/opie-smb apps/Applications/opie-smb.desktop
+Files: plugins/application/libopie-smb.so* bin/opie-smb bin/smbfind pics/opie-smb apps/Applications/opie-smb.desktop
 Version: $QPE_VERSION$EXTRAVERSION
 Architecture: arm
 Arch: arm
