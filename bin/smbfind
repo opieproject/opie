@@ -1,0 +1,22 @@
+#!/bin/sh
+#
+# export PATH=$PATH:/dos/extras/bin
+#
+# A replacement for standard perl findsmb.
+#
+# First get list of ip addresses
+#
+IPS=`nmblookup \* |awk '{print $1}'|grep -v "Send"`
+echo
+echo "IP Address      Name       Description"
+echo "*************************************"
+echo
+for i in $IPS
+do
+  # For each ip address that responds lookup name
+  value=`echo $i|awk '{print $1}'`
+  MACHINE=`nmblookup -T -A $value |grep "<00>"|awk '{h=tolower($1); print h}'|head -n1`
+  TYPE=`smbclient -N -L $MACHINE -I $value 2>&1 |grep "Domain="|head -n1|sed 's/ /_/g'`
+
+  echo "$value $MACHINE $TYPE"
+done
