@@ -120,7 +120,7 @@ DocumentList::DocumentList( ServerInterface *serverGui, bool /*scanDocs*/,
     d->scanDocs = cfg.readBoolEntry( "Enable", true );
     odebug << "DocumentList::DocumentList() : scanDocs = " << d->scanDocs << "" << oendl;
 
-    QTimer::singleShot( 10, this, SLOT( startInitialScan() ) );
+    QTimer::singleShot( 0, this, SLOT( startInitialScan() ) );
 }
 
 void DocumentList::startInitialScan()
@@ -187,7 +187,7 @@ void DocumentList::resendWorker()
 
 void DocumentList::rescan()
 {
-    //odebug << "rescan" << oendl;
+  owarn << "XXXXXXXXXXX rescan" << oendl;
     pause();
     d->initialize();
     resume();
@@ -701,7 +701,9 @@ const QString DocumentListPrivate::nextFile()
         QString bn = fi->fileName();
         if ( bn[0] != '.' ) {
         if ( fi->isDir()  ) {
-            if ( bn != "CVS" && bn != "Qtopia" && bn != "QtPalmtop" ) {
+        if ( bn != "CVS" && bn != "Qtopia" && bn != "QtPalmtop"
+           && bn != "proc" && bn != "dev" && bn != "bin" && bn != "usr"
+           && bn != "etc" && bn != "lib" && bn != "sbin" && bn != "tmp" && bn != "var") {
             // go down a depth
             QDir dir( fi->filePath() );
             // odebug << "now going in to path: " << bn << "" << oendl;
