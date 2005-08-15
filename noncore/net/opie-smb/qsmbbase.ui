@@ -186,7 +186,7 @@
                         </property>
                         <property stdset="1">
                             <name>text</name>
-                            <string>&amp;Login</string>
+                            <string>&amp;Mount</string>
                         </property>
                     </widget>
                     <widget row="5"  column="2"  rowspan="1"  colspan="2" >
