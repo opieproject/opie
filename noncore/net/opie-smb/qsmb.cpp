@@ -95,7 +95,7 @@ void* runitm(void* arg)
 
 void Qsmb::scan() 
 {
-   int i;
+//   int i;
 
    if (scanning) return;
    scanning = true;
@@ -123,7 +123,6 @@ void Qsmb::scan()
     
    /* parse output and display in ListViewScan */
    ccmd = "smbfind";
-   owarn <<"cmd: " << ccmd << oendl;
 	 runCommand(ccmd);
 
    QTextStream s(&out, IO_ReadOnly);
@@ -151,8 +150,6 @@ void Qsmb::scan()
 void Qsmb::hostSelected(int index)
 {
    owarn << "hostSelected" << oendl;
-   int  i;
-
    QListViewItem *element;
    QListViewItem *parent;
 
@@ -162,77 +159,90 @@ void Qsmb::hostSelected(int index)
    scanning = true;
 
    QString cmd;
-   char result[256];
-
-   FILE *pipe;
+   QStringList ccmd;
 
    LScan->setText("Scanning...");
 
-   if(username->text().isEmpty())
-      cmd = "/usr/bin/smbclient -L //"+CBHost->currentText()+" -N 2>&1 |grep Disk";
-   else
-      cmd = "/usr/bin/smbclient -L //"+CBHost->currentText()+" -N -U "+username->text()+"\%"+password->text()+" 2>&1 |grep Disk";
+   ccmd << "/usr/bin/smbclient";
+   ccmd << "-L";
+   ccmd << CBHost->currentText();
+   ccmd << "-N";
+   
+   if(username->text().isEmpty()) {
+   } else {
+      ccmd << "-U";
+      ccmd << username->text()+"\%"+ password->text();
+   }
+   runCommand(ccmd);
+   QTextStream s(&out, IO_ReadOnly);
 
-//    for(i = 0; i < 512; i++) {
-//       if(cmd[i]==':') {
-//          cmd[i]='%';
-//          break;
-//       }
-//        if(cmd[i]=='\0')
-//           break;
-//     }
+   while ( !s.atEnd() ) {
+      QString share;
+      QString comment;
+      QString tmp = s.readLine();
+      
+      if( tmp.find("$") == -1 && tmp.find("Disk") != -1) {
+         QStringList token = QStringList::split(' ',  tmp );
+         share = token[0];
+         comment = token[2];
+         element = new QListViewItem(ListViewScan,share, comment);
+         element->setOpen(true);
+//             top_element = element;
+//             parent = element;
+      }
 
-   owarn << "i="<< index << "cmd:" <<  cmd << oendl;
+   }
+//   owarn << "i="<< index << "cmd:" <<  cmd << oendl;
 
    TextViewOutput->append(cmd);
 
    /* run smbclient & read output */
-   if ((pipe = popen(cmd.latin1(), "r")) == NULL) {
-      snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
-//      cmd = "Error: Can't run "+cmd;
-      TextViewOutput->append(result);
-      return;
-   }
+//    if ((pipe = popen(cmd.latin1(), "r")) == NULL) {
+//       snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
+// //      cmd = "Error: Can't run "+cmd;
+//       TextViewOutput->append(result);
+//       return;
+//    }
 
    /* parse output and display in ListViewScan */
-   while(fgets(result, 256, pipe) != NULL) {
-      /* put result into TextViewOutput */
-      TextViewOutput->append(result);
+//    while(fgets(result, 256, pipe) != NULL) {
+//       /* put result into TextViewOutput */
+//       TextViewOutput->append(result);
 
-      if( strchr(result, '$') == NULL ) { 
-         char share[256], *ptr1;
+//       if( strchr(result, '$') == NULL ) { 
+//          char share[256], *ptr1;
 
-         strcpy(share,result);
-         ptr1 = strchr(share,' ');
-         share[ptr1 - share]='\0';
+//          strcpy(share,result);
+//          ptr1 = strchr(share,' ');
+//          share[ptr1 - share]='\0';
 
-         owarn<< "add share: " << share << oendl;
+//          owarn<< "add share: " << share << oendl;
 
-         if(top_element != NULL) {
-            bool found = false;
-            element = top_element;
+//          if(top_element != NULL) {
+//             bool found = false;
+//             element = top_element;
 
-            while(element != NULL && !found) {
-               if(strcmp( element->text(0).ascii(), share)==0) {
-                  parent = element;
-                  found = true;
-               }
-               element = element->nextSibling();
-            }
+//             while(element != NULL && !found) {
+//                if(strcmp( element->text(0).ascii(), share)==0) {
+//                   parent = element;
+//                   found = true;
+//                }
+//                element = element->nextSibling();
+//             }
 
-            if(!found) {
-               element = new QListViewItem(ListViewScan,share);
-               element->setOpen(true);
-               parent=element;
-            }
-         } else {
-            element = new QListViewItem(ListViewScan,share);
-            element->setOpen(true);
-            top_element = element;
-            parent = element;
-         }
-      }
-   }
+//             if(!found) {
+//                element = new QListViewItem(ListViewScan,share);
+//                element->setOpen(true);
+//                parent=element;
+//             }
+//          } else {
+//             element = new QListViewItem(ListViewScan,share);
+//             element->setOpen(true);
+//             top_element = element;
+//             parent = element;
+//          }
+//       }
+//    }
 
    TextViewOutput->append("\n\n============================================\n");
    LScan->setText("");
@@ -268,19 +278,6 @@ void Qsmb::DoIt()
 
 
    if(! QFileInfo(text).exists()) {
-//       /* make sure mount exists! */
-
-//       cmd = "mkdir -p "+ text;
-//       owarn<<"cmd: "<< cmd << oendl;
-//       if ((pipe2 = popen(cmd.latin1(), "r")) == NULL)  {
-//          snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
-//          TextViewOutput->append(result);
-//          return;
-//       }
-//       while(fgets(result, 256, pipe2) != NULL) {
-//          /* put result into TextViewOutput */
-//          TextViewOutput->append(result);
-//       }
       QStringList ccmd;
       ccmd << "mkdir";
       ccmd << "-p";
