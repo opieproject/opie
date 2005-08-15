@@ -28,10 +28,13 @@ private:
 	bool scanning;
 
 public slots:
-	void clear();
-	void scanClicked();
-        void hostSelected(int);
-        void DoItClicked();
+   void clear();
+	 void scanClicked();
+   void hostSelected(int);
+   void DoItClicked();
+   QString out;
+   bool runCommand(const QStringList &);
+
 };
 void* runit(void *arg);
 void* runitm(void *arg);

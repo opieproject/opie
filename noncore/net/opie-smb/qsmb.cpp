@@ -7,6 +7,7 @@
 #include <qdir.h>
 #include <qfileinfo.h>
 
+#include <qpe/process.h>
 #include <qlabel.h>
 #include <qlineedit.h>
 #include <qcombobox.h>
@@ -33,11 +34,6 @@ Qsmb::Qsmb( QWidget* parent,  const char* name, WFlags fl )
    connect(BtnScan, SIGNAL(clicked()), this, SLOT(scanClicked()));
    connect(BtnClear, SIGNAL(clicked()), this, SLOT(clear()));
 
-//TODO configurable mount points
-   if(!QFileInfo("/mnt/samba1").exists()) system("mkdir /mnt/samba1");
-   if(!QFileInfo("/mnt/samba2").exists()) system("mkdir /mnt/samba2");
-   if(!QFileInfo("/mnt/samba2").exists()) system("mkdir /mnt/samba3");
-    
    mountpt->insertItem("/mnt/samba1",-1);
    mountpt->insertItem("/mnt/samba2",-1);
    mountpt->insertItem("/mnt/samba3",-1);
@@ -203,19 +199,19 @@ void Qsmb::hostSelected(int index)
 
    LScan->setText("Scanning...");
 
-   if((const char *)username->text() == '\0')
+   if(username->text().isEmpty())
       cmd = "/usr/bin/smbclient -L //"+CBHost->currentText()+" -N 2>&1 |grep Disk";
    else
-      cmd = "/usr/bin/smbclient -L //"+CBHost->currentText()+" -N -U"+username->text()+":"+password->text()+" 2>&1 |grep Disk";
+      cmd = "/usr/bin/smbclient -L //"+CBHost->currentText()+" -N -U "+username->text()+"\%"+password->text()+" 2>&1 |grep Disk";
 
-   for(i = 0; i < 512; i++) {
-      if(cmd[i]==':') {
-         cmd[i]='%';
-         break;
-      }
-      if(cmd[i]=='\0')
-         break;
-   }
+//    for(i = 0; i < 512; i++) {
+//       if(cmd[i]==':') {
+//          cmd[i]='%';
+//          break;
+//       }
+//        if(cmd[i]=='\0')
+//           break;
+//     }
 
    owarn << "i="<< index << "cmd:" <<  cmd << oendl;
 
@@ -299,23 +295,22 @@ void Qsmb::DoIt()
 
    LScan->setText("Mounting...");
    qApp->processEvents();
-   
-   cmd = "mkdir -p "+ text;
 
-   owarn<<"cmd: "<< cmd << oendl;
 
-   /* make sure mount exists! */
-   if ((pipe2 = popen(cmd.latin1(), "r")) == NULL)  {
-
-      snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
-      //    result = "Error: Can't run " + cmd;
-      TextViewOutput->append(result);
-      return;
-   }
-
-   while(fgets(result, 256, pipe2) != NULL) {
-      /* put result into TextViewOutput */
-      TextViewOutput->append(result);
+   if(! QFileInfo(text).exists()) {
+      cmd = "mkdir -p "+ text;
+      owarn<<"cmd: "<< cmd << oendl;
+      /* make sure mount exists! */
+      if ((pipe2 = popen(cmd.latin1(), "r")) == NULL)  {
+         snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
+         //    result = "Error: Can't run " + cmd;
+         TextViewOutput->append(result);
+         return;
+      }
+      while(fgets(result, 256, pipe2) != NULL) {
+         /* put result into TextViewOutput */
+         TextViewOutput->append(result);
+      }
    }
 
 
@@ -328,16 +323,7 @@ void Qsmb::DoIt()
       }
    }
 
-   cmd = "/usr/bin/smbmount  //"+CBHost->currentText()+"/"+share+" "+mountpt->currentText()+" -U"+username->text()+":"+password->text();
-
-   for(i = 0; i < 512; i++) {
-      if(cmd[i]==':') {
-         cmd[i]='%';
-         break;
-      }
-      if(cmd[i]=='\0')
-         break;
-   }
+   cmd = "/usr/bin/smbmount  //"+CBHost->currentText()+"/"+share+" "+mountpt->currentText()+" -o username="+username->text()+",password="+password->text();
 
    owarn << "cmd: " << cmd << oendl;
    TextViewOutput->append(cmd.latin1());
@@ -400,3 +386,20 @@ void Qsmb::DoIt()
    TextViewOutput->append("\n\n============================================\n");
    scanning = false;
 }
+
+bool Qsmb::runCommand(const QStringList & command) {
+   owarn << "runCommand " << command.join(" ") << oendl;
+   out = "";
+   Process ipkg_status( command);
+   bool r = ipkg_status.exec("",out);
+
+   if(!r) {
+      QMessageBox::warning(this, tr("Error!!"),tr("<p>"+out+"</p>"));
+   }
+
+   owarn << "Output " << out << oendl;
+   TextViewOutput->append(out.latin1());
+   return r;
+}
+
+
