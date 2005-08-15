@@ -16,6 +16,7 @@
 #include <qcheckbox.h>
 #include <qtextview.h>
 #include <qmessagebox.h>
+#include <qtextstream.h>
 
 
 #include <pthread.h>
@@ -100,12 +101,7 @@ void Qsmb::scan()
    scanning = true;
 
    QString match;
-   char lmhosts[512];
    QString cmd;
-   char result[256];
-
-   FILE *pipe, *pipe2;
-
    LScan->setText("Scanning...");
    qApp->processEvents();
 
@@ -117,61 +113,35 @@ void Qsmb::scan()
 
    match = ip.left(5);
 
-   cmd = "smbfind";
-   owarn <<"cmd: " << cmd << oendl;
-	
-   TextViewOutput->append(cmd);
+   QStringList ccmd;
+   TextViewOutput->append("smbfind");
 
-   snprintf(lmhosts, 512, "echo '127.0.0.1 localhost'>/etc/samba/lmhosts");
-   
-   if ((pipe2 = popen(lmhosts, "r")) == NULL) {
-      snprintf(result, 256, "Error: Can't run %s", lmhosts);
-      //TextViewOutput->append(result);
-      return;
-   }
-	
-   /* run command & read output */
-   if ((pipe = popen(cmd.latin1(), "r")) == NULL) {
-      snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
-      TextViewOutput->append(result);
-      return;
-   }
-
+   QFile lmhosts("/etc/samba/lmhosts");
+   QTextStream lms(&lmhosts);
+   lmhosts.open(IO_WriteOnly);
+   lms << "127.0.0.1 localhost\n";
+    
    /* parse output and display in ListViewScan */
-   while(fgets(result, 256, pipe) != NULL) {
-      /* put result into TextViewOutput */
-      TextViewOutput->append(result);
+   ccmd = "smbfind";
+   owarn <<"cmd: " << ccmd << oendl;
+	 runCommand(ccmd);
 
-      if( strstr(result, match.latin1()) != NULL ) { 
-         char ip_addr[256], host[256], *ptr1;
+   QTextStream s(&out, IO_ReadOnly);
 
-         strcpy( ip_addr, result);
-         ptr1 = strchr(ip_addr,' ');
-         strcpy( host, ptr1);
-         ip_addr[ptr1 - ip_addr]='\0';
-
-         for(i = 0; i < 256; i++)  {
-            if(host[i]!=' ') {
-               strcpy( host, host + i);
-               break; 
-            }
-         } 
-         ptr1 = strchr(host,' ');
-         host[ptr1 - host] = '\0'; 
-
-         owarn << "add host: " << host << oendl;
-         
+   while ( !s.atEnd() ) {
+      QString ip_addr, host, output;
+      QString tmp = s.readLine();
+      bool ok;
+      tmp.left(1).toInt( &ok, 10 );
+      if(ok) {
+         QStringList token = QStringList::split(' ',  tmp );
+         ip_addr =  token[0];
+         host = token[1];
          CBHost->insertItem( host, -1);
-         snprintf( lmhosts, 512, "echo '%s %s'>>/etc/samba/lmhosts", ip_addr,host);
-
-         owarn << "lmhosts: " << lmhosts << oendl;
-
-         if ((pipe2 = popen(lmhosts, "r")) == NULL) {
-            snprintf(result, 256, "Error: Can't run %s", lmhosts);
-            return;
-         }
+         lms <<  ip_addr+" "+host+"\n";
       }
    }
+   lmhosts.close();
 
    TextViewOutput->append("\n\n============================================\n");
    LScan->setText("");
