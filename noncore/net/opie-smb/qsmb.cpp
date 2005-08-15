@@ -4,6 +4,7 @@
 
 #include <string.h>
 #include <qstring.h>
+#include <qstringlist.h>
 #include <qdir.h>
 #include <qfileinfo.h>
 
@@ -20,6 +21,12 @@
 #include <pthread.h>
 #include <signal.h>
 #include <ctype.h>
+
+
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+#include <rpc/clnt.h>
 
 
 #include <opie2/odebug.h>
@@ -92,7 +99,8 @@ void Qsmb::scan()
    if (scanning) return;
    scanning = true;
 
-   char match[512], lmhosts[512];
+   QString match;
+   char lmhosts[512];
    QString cmd;
    char result[256];
 
@@ -101,22 +109,13 @@ void Qsmb::scan()
    LScan->setText("Scanning...");
    qApp->processEvents();
 
-   cmd = "ifconfig |grep 'addr:'|awk '{print $2}'|awk 'BEGIN{FS=\":\"}{print $2}'|sed 's/\\.[0-9]*$//'|head -n1";
+   sockaddr_in my_addr;
+   get_myaddress( &my_addr);
 
-   owarn << "cmd: " << cmd << oendl;
+   QString ip = inet_ntoa( my_addr.sin_addr);
+   owarn << "IP Address : " << ip<< oendl;
 
-   /* run findsmb & read output */
-   if ((pipe = popen(cmd.latin1(), "r")) == NULL) {
-      snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
-      TextViewOutput->append(result);
-      return;
-   }
-   while(fgets(result, 256, pipe) != NULL) {
-      strcpy( match, result);
-      match[5]='\0';
-      break;
-   }
-   owarn << "match: " << match << oendl;
+   match = ip.left(5);
 
    cmd = "smbfind";
    owarn <<"cmd: " << cmd << oendl;
@@ -143,7 +142,7 @@ void Qsmb::scan()
       /* put result into TextViewOutput */
       TextViewOutput->append(result);
 
-      if( strstr(result, match) != NULL ) { 
+      if( strstr(result, match.latin1()) != NULL ) { 
          char ip_addr[256], host[256], *ptr1;
 
          strcpy( ip_addr, result);
@@ -283,6 +282,7 @@ void Qsmb::DoIt()
    scanning = true;
 
    int i;
+   bool err = false;
 
    char share[512];
    QString cmd;
@@ -298,19 +298,26 @@ void Qsmb::DoIt()
 
 
    if(! QFileInfo(text).exists()) {
-      cmd = "mkdir -p "+ text;
-      owarn<<"cmd: "<< cmd << oendl;
-      /* make sure mount exists! */
-      if ((pipe2 = popen(cmd.latin1(), "r")) == NULL)  {
-         snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
-         //    result = "Error: Can't run " + cmd;
-         TextViewOutput->append(result);
-         return;
-      }
-      while(fgets(result, 256, pipe2) != NULL) {
-         /* put result into TextViewOutput */
-         TextViewOutput->append(result);
-      }
+//       /* make sure mount exists! */
+
+//       cmd = "mkdir -p "+ text;
+//       owarn<<"cmd: "<< cmd << oendl;
+//       if ((pipe2 = popen(cmd.latin1(), "r")) == NULL)  {
+//          snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
+//          TextViewOutput->append(result);
+//          return;
+//       }
+//       while(fgets(result, 256, pipe2) != NULL) {
+//          /* put result into TextViewOutput */
+//          TextViewOutput->append(result);
+//       }
+      QStringList ccmd;
+      ccmd << "mkdir";
+      ccmd << "-p";
+      ccmd << text;
+
+      owarn<<"cmd: "<< ccmd << oendl;
+      runCommand(ccmd);
    }
 
 
@@ -332,28 +339,20 @@ void Qsmb::DoIt()
    if(onbootBtn->isChecked()) {
       owarn << "Saving Setting permanently..." << oendl;
       cmd2 = "echo '" + cmd + "'>/opt/QtPalmtop/etc/samba.env";
-      
       /* run command & read output */
       if ((pipe = popen(cmd2.latin1(), "r")) == NULL) {
-
          snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
-//         result = "Error: Can't run "+ cmd;
-         //TextViewOutput->append(result);
          return;
       }
       /* parse output and display in ListViewScan */
       while(fgets(result, 256, pipe) != NULL) {
-         /* put result into TextViewOutput */
-         //TextViewOutput->append(result);
       }
    }
 	
+
    /* run command & read output */
    if ((pipe = popen(cmd.latin1(), "r")) == NULL) {
-
-//         result = "Error: Can't run "+ cmd;
       snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
-      
       TextViewOutput->append(result);
       return;
    }
@@ -363,6 +362,8 @@ void Qsmb::DoIt()
       /* put result into TextViewOutput */
       TextViewOutput->append(result);
    }
+
+   
    TextViewOutput->append("\n\n================CheckMounts==================\n");
    LScan->setText("");
 
