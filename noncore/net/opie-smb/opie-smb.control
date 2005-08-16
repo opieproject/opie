@@ -3,7 +3,7 @@ Files: plugins/application/libopie-smb.so* bin/opie-smb bin/smbfind pics/opie-sm
 Version: $QPE_VERSION$EXTRAVERSION
 Architecture: arm
 Arch: arm
-Maintainer: Kurt Korbatits (support@midget.net.au)
+Maintainer: ljp <lpotter@trolltech.com>
 Section: Network
 Priority: optional
 Description: Gui front end for samba utilities.
