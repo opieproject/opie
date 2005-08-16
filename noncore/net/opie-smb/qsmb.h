@@ -27,6 +27,7 @@ private:
    pthread_t tpid;
    bool scanning;
    bool isMounted(const QString &);
+   QString getMount(const QString &);
 
 public slots:
    void clear();

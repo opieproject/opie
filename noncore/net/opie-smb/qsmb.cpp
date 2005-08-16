@@ -192,6 +192,7 @@ void Qsmb::hostSelected(int /*index*/ )
    while ( !s.atEnd() ) {
       QString share;
       QString comment;
+      QString mount;
       QString tmp = s.readLine();
       
       if( tmp.find("$") == -1 && tmp.find("Disk") != -1) {
@@ -200,7 +201,10 @@ void Qsmb::hostSelected(int /*index*/ )
          comment = token[2];
          share = share.stripWhiteSpace();
          comment = comment.stripWhiteSpace();
-         element = new QListViewItem(ListViewScan, share, comment);
+//         if(isMounted(share))
+
+         mount = getMount(share);
+         element = new QListViewItem(ListViewScan, share, comment, mount);
          element->setOpen(true);
 //             top_element = element;
 //             parent = element;
@@ -320,8 +324,6 @@ void Qsmb::DoIt()
    ccmd << "-o";
    ccmd << "username="+username->text()+",password="+password->text()+"";
 
-   TextViewOutput->append(ccmd.join(" ").latin1());
-
    if(onbootBtn->isChecked()) {
       qWarning("Saving Setting permanently...");
       QFile sambenv("/opt/QtPalmtop/etc/samba.env");
@@ -335,7 +337,7 @@ void Qsmb::DoIt()
    
    LScan->setText("");
 
-   if(noerr) {
+   if(noerr && isMounted(mount)) {
       element->setText(2, mount);
       TextViewOutput->append("\n\n================CheckMounts==================\n");
       ccmd = "/bin/mount";
@@ -398,7 +400,8 @@ bool Qsmb::runCommand(const QStringList & command) {
 }
 
 
-bool Qsmb::isMounted(const QString &mountPoint) {
+bool Qsmb::isMounted(const QString &mountPoint)
+{
     struct mntent *me;
     bool mounted = false;
     FILE *mntfp = setmntent( "/etc/mtab", "r" );
@@ -407,10 +410,28 @@ bool Qsmb::isMounted(const QString &mountPoint) {
             QString deviceName = me->mnt_fsname;
             QString mountDir = me->mnt_dir;
             QString fsType = me->mnt_type;
-            if( fsType == "smbfs" && mountDir.find(mountPoint) !=-1)
+            if( fsType == "smbfs" && (mountDir.find(mountPoint) != -1 | deviceName.find(mountPoint) != -1))
                mounted = true;
         }
     }
     endmntent( mntfp );
     return mounted;
+}
+
+QString Qsmb::getMount(const QString &shareName)
+{
+   struct mntent *me;
+    QString mount;
+    FILE *mntfp = setmntent( "/etc/mtab", "r" );
+    if ( mntfp ){
+        while ( (me = getmntent( mntfp )) != 0 ) {
+            QString deviceName = me->mnt_fsname;
+            QString mountDir = me->mnt_dir;
+            QString fsType = me->mnt_type;
+            if( fsType == "smbfs" &&  deviceName.find(shareName) != -1)
+               mount = mountDir;
+        }
+    }
+    endmntent( mntfp );
+    return mount;
 }
