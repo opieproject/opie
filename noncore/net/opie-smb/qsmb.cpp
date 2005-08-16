@@ -168,7 +168,8 @@ void Qsmb::hostSelected(int index)
    ccmd << CBHost->currentText();
    ccmd << "-N";
    
-   if(!username->text().isEmpty()) {
+   if(username->text().isEmpty()) {
+      //do nothing
    } else {
       ccmd << "-U";
       ccmd << username->text()+"\%"+ password->text();
