@@ -50,7 +50,13 @@ Qsmb::Qsmb( QWidget* parent,  const char* name, WFlags fl )
    mountpt->insertItem("/mnt/samba2",-1);
    mountpt->insertItem("/mnt/samba3",-1);
    
-//   TextViewOutput
+   setTabOrder(BtnScan, username);
+   setTabOrder(username, password);
+   setTabOrder(password, CBHost);
+   setTabOrder(CBHost, TextViewOutput);
+   setTabOrder(TextViewOutput, mountpt);
+   setTabOrder(mountpt, DoItBtn);
+   setTabOrder(DoItBtn, UnmountBtn);
    
    top_element = NULL;
    scanning = false;
@@ -65,6 +71,7 @@ void Qsmb::clear()
    if (scanning) return;
    ListViewScan->clear();	
    TextViewOutput->setText("");
+   CBHost->clear();
    top_element = NULL;	
 }
 
@@ -101,7 +108,8 @@ void* runitm(void* arg)
 
 void Qsmb::scan() 
 {
-   if (scanning) return;
+   clear();
+//   if (scanning) return;
    scanning = true;
 
    QString match;
