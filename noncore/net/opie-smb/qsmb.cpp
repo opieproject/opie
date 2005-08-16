@@ -7,6 +7,7 @@
 #include <qstringlist.h>
 #include <qdir.h>
 #include <qfileinfo.h>
+#include <qtabwidget.h>
 
 #include <qpe/process.h>
 #include <qlabel.h>
@@ -26,12 +27,13 @@
 
 #include <netinet/in.h>
 #include <arpa/inet.h>
-
 #include <rpc/clnt.h>
 
+#include <sys/vfs.h>
+#include <mntent.h>
 
-#include <opie2/odebug.h>
-using namespace Opie::Core;
+// #include <opie2/odebug.h>
+// using namespace Opie::Core;
 
 
 Qsmb::Qsmb( QWidget* parent,  const char* name, WFlags fl )
@@ -39,13 +41,17 @@ Qsmb::Qsmb( QWidget* parent,  const char* name, WFlags fl )
 {
    connect(CBHost, SIGNAL(activated(int)), this, SLOT(hostSelected(int)));
    connect(DoItBtn, SIGNAL(clicked()), this, SLOT(DoItClicked()));
+   connect(UnmountBtn, SIGNAL(clicked()), this, SLOT(umountIt()));
    connect(BtnScan, SIGNAL(clicked()), this, SLOT(scanClicked()));
    connect(BtnClear, SIGNAL(clicked()), this, SLOT(clear()));
 
+   mountpt->setEditable(true);
    mountpt->insertItem("/mnt/samba1",-1);
    mountpt->insertItem("/mnt/samba2",-1);
    mountpt->insertItem("/mnt/samba3",-1);
-
+   
+//   TextViewOutput
+   
    top_element = NULL;
    scanning = false;
 }
@@ -71,7 +77,7 @@ void Qsmb::scanClicked()
 void Qsmb::DoItClicked() 
 {
 
-   if(! ListViewScan->selectedItem()) {
+   if( !ListViewScan->selectedItem()) {
       QMessageBox::warning(this, tr("Error"),tr("<p>No share selected!</p>"));
       return;
    }
@@ -95,8 +101,6 @@ void* runitm(void* arg)
 
 void Qsmb::scan() 
 {
-//   int i;
-
    if (scanning) return;
    scanning = true;
 
@@ -109,7 +113,7 @@ void Qsmb::scan()
    get_myaddress( &my_addr);
 
    QString ip = inet_ntoa( my_addr.sin_addr);
-   owarn << "IP Address : " << ip<< oendl;
+   qWarning("IP Address : "+ip);
 
    match = ip.left(5);
 
@@ -147,13 +151,13 @@ void Qsmb::scan()
    scanning = false;
 }
 
-void Qsmb::hostSelected(int index)
+void Qsmb::hostSelected(int /*index*/ )
 {
-   owarn << "hostSelected" << oendl;
    QListViewItem *element;
-   QListViewItem *parent;
+//   QListViewItem *parent;
 
    QString text = CBHost->currentText();
+   ListViewScan->clear();
 
    if (scanning) return;
    scanning = true;
@@ -186,7 +190,9 @@ void Qsmb::hostSelected(int index)
          QStringList token = QStringList::split(' ',  tmp );
          share = token[0];
          comment = token[2];
-         element = new QListViewItem(ListViewScan,share, comment);
+         share = share.stripWhiteSpace();
+         comment = comment.stripWhiteSpace();
+         element = new QListViewItem(ListViewScan, share, comment);
          element->setOpen(true);
 //             top_element = element;
 //             parent = element;
@@ -250,125 +256,153 @@ void Qsmb::hostSelected(int index)
    scanning = false;
 }
 
+
 void Qsmb::DoIt()
 {
+   
    QListViewItem *element;
    element = ListViewScan->selectedItem();
    if(!element) {
-      QMessageBox::warning(this, tr("Error!!"),tr("<p><b>No</b> share selected!!</p>"));
       return;
    }
 
    if (scanning) return;
    scanning = true;
 
-   int i;
-   bool err = false;
+   QString mount = mountpt->currentText();
+   if(isMounted(mount)) {
+      qWarning(mount +" is already mounted");
+      TextViewOutput->append(mount +" is already mounted");
+      return;
+   }
+   
+   bool noerr = false;
 
-   char share[512];
+   QString share;
    QString cmd;
    QString cmd2;
-   char result[256];
-//   QString result;
    QString text = mountpt->currentText();
-
-   FILE *pipe,*pipe2;
+   QStringList ccmd;
 
    LScan->setText("Mounting...");
    qApp->processEvents();
 
-
-   if(! QFileInfo(text).exists()) {
-      QStringList ccmd;
+   if( !QFileInfo(text).exists()) {
       ccmd << "mkdir";
       ccmd << "-p";
       ccmd << text;
 
-      owarn<<"cmd: "<< ccmd << oendl;
+      qWarning( "cmd: "+ ccmd.join(" "));
       runCommand(ccmd);
    }
 
+   share = element->text(0);
+   qWarning("selected share is "+share);
 
-   strcpy(share,(const char *)element->text(0));
+   QString service = CBHost->currentText();
+   service = service.stripWhiteSpace();
+   if(mount.left(1) != "/")
+      mount = QDir::currentDirPath()+"/"+mount;
+   mount = mount.stripWhiteSpace();
+   ccmd.clear();
+   
+   ccmd << "/usr/bin/smbmount";
+   ccmd << "//"+ service+"/"+share;
+   ccmd << mount;
+   ccmd << "-o";
+   ccmd << "username="+username->text()+",password="+password->text()+"";
 
-   for(i = 0; i < 256; i++) {
-      if(isalpha( share[i]))  {
-         strcpy( share, share + i);
-         break;
-      }
-   }
-
-   cmd = "/usr/bin/smbmount  //"+CBHost->currentText()+"/"+share+" "+mountpt->currentText()+" -o username="+username->text()+",password="+password->text();
-
-   owarn << "cmd: " << cmd << oendl;
-   TextViewOutput->append(cmd.latin1());
-
+   TextViewOutput->append(ccmd.join(" ").latin1());
 
    if(onbootBtn->isChecked()) {
-      owarn << "Saving Setting permanently..." << oendl;
-      cmd2 = "echo '" + cmd + "'>/opt/QtPalmtop/etc/samba.env";
-      /* run command & read output */
-      if ((pipe = popen(cmd2.latin1(), "r")) == NULL) {
-         snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
-         return;
-      }
-      /* parse output and display in ListViewScan */
-      while(fgets(result, 256, pipe) != NULL) {
-      }
-   }
-	
-
-   /* run command & read output */
-   if ((pipe = popen(cmd.latin1(), "r")) == NULL) {
-      snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
-      TextViewOutput->append(result);
-      return;
+      qWarning("Saving Setting permanently...");
+      QFile sambenv("/opt/QtPalmtop/etc/samba.env");
+      QTextStream smbv(&sambenv);
+      sambenv.open(IO_WriteOnly);
+      smbv << ccmd.join(" ") ;
+      sambenv.close();
    }
 
-   /* parse output and display in ListViewScan */
-   while(fgets(result, 256, pipe) != NULL) {
-      /* put result into TextViewOutput */
-      TextViewOutput->append(result);
-   }
-
+   noerr = runCommand(ccmd);
    
-   TextViewOutput->append("\n\n================CheckMounts==================\n");
    LScan->setText("");
 
-   cmd = "/bin/mount 2>&1";
-   owarn << "cmd: " << cmd << oendl;
+   if(noerr) {
+      element->setText(2, mount);
+      TextViewOutput->append("\n\n================CheckMounts==================\n");
+      ccmd = "/bin/mount";
+      runCommand(ccmd);
+      TextViewOutput->append("\n\n============================================\n");
+      qApp->processEvents();
+   } else {
+   //do nothing
+ }
 
-   if ((pipe2 = popen(cmd.latin1(), "r")) == NULL) {
-
-      snprintf(result, 256, "Error: Can't run %s", cmd.latin1());
-//         result = "Error: Can't run "+ cmd;
-
-      TextViewOutput->append(result);
-      return;
-   }
-   /* parse output and display in ListViewScan */
-   while(fgets(result, 256, pipe2) != NULL) {
-      /* put result into TextViewOutput */
-      TextViewOutput->append(result);
-   }
-
-   TextViewOutput->append("\n\n============================================\n");
    scanning = false;
 }
 
+void Qsmb::umountIt()
+{
+   QString mount = mountpt->currentText();
+   if(!isMounted(mount)) {
+      qWarning(mount +" is not mounted");
+      TextViewOutput->append(mount +" is not mounted");
+      return;
+   }
+
+   QStringList ccmd;
+   QString share;
+   QListViewItem *element;
+   element = ListViewScan->selectedItem();
+   share = element->text(0);
+   qWarning("selected share is "+share);
+
+   if(mount.left(1) != "/")
+      mount = QDir::currentDirPath()+"/"+mount;
+   mount = mount.stripWhiteSpace();
+
+   ccmd << "/usr/bin/smbumount";
+   ccmd << mount;
+   runCommand(ccmd);
+
+   element->setText(2, "");
+
+   ccmd = "/bin/mount";
+   runCommand(ccmd);
+}
+
 bool Qsmb::runCommand(const QStringList & command) {
-   owarn << "runCommand " << command.join(" ") << oendl;
+   qWarning( "runCommand " + command.join(" ") );
+   TextViewOutput->append(command.join(" "));
    out = "";
    Process ipkg_status( command);
    bool r = ipkg_status.exec("",out);
 
-   if(!r) {
-      QMessageBox::warning(this, tr("Error!!"),tr("<p>"+out+"</p>"));
-   }
+   qWarning("result is %d"+ r );
+   qWarning("Output " + out );
+   TextViewOutput->append(out);
 
-   owarn << "Output " << out << oendl;
-   TextViewOutput->append(out.latin1());
+//very hacky
+   if(out.find("failed") !=-1) {
+      r = false;
+   }
    return r;
 }
 
 
+bool Qsmb::isMounted(const QString &mountPoint) {
+    struct mntent *me;
+    bool mounted = false;
+    FILE *mntfp = setmntent( "/etc/mtab", "r" );
+    if ( mntfp ){
+        while ( (me = getmntent( mntfp )) != 0 ) {
+            QString deviceName = me->mnt_fsname;
+            QString mountDir = me->mnt_dir;
+            QString fsType = me->mnt_type;
+            if( fsType == "smbfs" && mountDir.find(mountPoint) !=-1)
+               mounted = true;
+        }
+    }
+    endmntent( mntfp );
+    return mounted;
+}

@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>250</width>
-            <height>352</height>
+            <width>259</width>
+            <height>395</height>
         </rect>
     </property>
     <property stdset="1">
@@ -68,7 +68,7 @@
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>0</number>
+                        <number>2</number>
                     </property>
                     <widget row="1"  column="0"  rowspan="1"  colspan="4" >
                         <class>QComboBox</class>
@@ -136,6 +136,20 @@
                                 <bool>true</bool>
                             </property>
                         </column>
+                        <column>
+                            <property>
+                                <name>text</name>
+                                <string>Mount</string>
+                            </property>
+                            <property>
+                                <name>clickable</name>
+                                <bool>true</bool>
+                            </property>
+                            <property>
+                                <name>resizeable</name>
+                                <bool>true</bool>
+                            </property>
+                        </column>
                         <property stdset="1">
                             <name>name</name>
                             <cstring>ListViewScan</cstring>
@@ -178,18 +192,7 @@
                             <string>Reconnect on boot</string>
                         </property>
                     </widget>
-                    <widget row="5"  column="0"  rowspan="1"  colspan="2" >
-                        <class>QPushButton</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>DoItBtn</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>&amp;Mount</string>
-                        </property>
-                    </widget>
-                    <widget row="5"  column="2"  rowspan="1"  colspan="2" >
+                    <widget row="5"  column="2"  rowspan="2"  colspan="2" >
                         <class>QLayoutWidget</class>
                         <property stdset="1">
                             <name>name</name>
@@ -276,6 +279,28 @@
                             </widget>
                         </grid>
                     </widget>
+                    <widget row="6"  column="0"  rowspan="1"  colspan="2" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>UnmountBtn</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&amp;Umount</string>
+                        </property>
+                    </widget>
+                    <widget row="5"  column="0"  rowspan="1"  colspan="2" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>DoItBtn</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&amp;Mount</string>
+                        </property>
+                    </widget>
                 </grid>
             </widget>
             <widget>
@@ -291,11 +316,11 @@
                 <grid>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>11</number>
+                        <number>2</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>6</number>
+                        <number>2</number>
                     </property>
                     <widget row="0"  column="0" >
                         <class>QTextView</class>
