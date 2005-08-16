@@ -10,6 +10,8 @@
 #include <qlistview.h>
 #include <pthread.h>
 
+#include <qlistview.h>
+
 class Qsmb : public FormQPESMBBase
 { 
    Q_OBJECT
@@ -38,6 +40,8 @@ public slots:
    QString out;
    bool runCommand(const QStringList &);
 
+private slots:
+   void TextViewClicked(QListViewItem*);
 };
 void* runit(void *arg);
 void* runitm(void *arg);

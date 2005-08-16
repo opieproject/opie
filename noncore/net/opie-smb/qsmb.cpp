@@ -44,6 +44,7 @@ Qsmb::Qsmb( QWidget* parent,  const char* name, WFlags fl )
    connect(UnmountBtn, SIGNAL(clicked()), this, SLOT(umountIt()));
    connect(BtnScan, SIGNAL(clicked()), this, SLOT(scanClicked()));
    connect(BtnClear, SIGNAL(clicked()), this, SLOT(clear()));
+   connect(ListViewScan, SIGNAL(clicked(QListViewItem*)), this, SLOT(TextViewClicked(QListViewItem*)));
 
    mountpt->setEditable(true);
    mountpt->insertItem("/mnt/samba1",-1);
@@ -353,6 +354,12 @@ void Qsmb::DoIt()
 
 void Qsmb::umountIt()
 {
+   QListViewItem *element;
+   element = ListViewScan->selectedItem();
+   if(!element) {
+      return;
+   }
+
    QString mount = mountpt->currentText();
    if(!isMounted(mount)) {
       qWarning(mount +" is not mounted");
@@ -362,8 +369,6 @@ void Qsmb::umountIt()
 
    QStringList ccmd;
    QString share;
-   QListViewItem *element;
-   element = ListViewScan->selectedItem();
    share = element->text(0);
    qWarning("selected share is "+share);
 
@@ -434,4 +439,14 @@ QString Qsmb::getMount(const QString &shareName)
     }
     endmntent( mntfp );
     return mount;
+}
+
+void Qsmb::TextViewClicked(QListViewItem* item)
+{
+   if(item == NULL) return;
+
+   QString text = item->text(2);
+   qWarning(text);
+   if( !text.isEmpty())
+      mountpt->insertItem(text,0);
 }
