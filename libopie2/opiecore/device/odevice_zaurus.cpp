@@ -550,7 +550,18 @@ Transformation Zaurus::rotation() const
 
     switch ( d->m_model ) {
         case Model_Zaurus_SLC3000: // fallthrough
-        case Model_Zaurus_SLC1000: // fallthrough
+        case Model_Zaurus_SLC1000:
+        {
+            OHingeStatus hs = readHingeSensor();
+            qDebug( "Zaurus::rotation() - hinge sensor = %d", (int) hs );
+            if ( hs == CASE_PORTRAIT ) rot = Rot0;
+            else if ( hs == CASE_UNKNOWN ) rot = Rot270;
+            else rot = Rot270;
+        }
+        break;
+
+        // SLC7x0 needs a special case here, because we were able to set the W100
+        // hardware default rotation on kernel 2.6 to Rot0
         case Model_Zaurus_SLC7x0:
         {
             OHingeStatus hs = readHingeSensor();
@@ -559,7 +570,7 @@ Transformation Zaurus::rotation() const
             if ( m_embedix )
             {
                 if ( hs == CASE_PORTRAIT ) rot = Rot0;
-                else if ( hs == CASE_UNKNOWN ) rot = Rot0;
+                else if ( hs == CASE_UNKNOWN ) rot = Rot270;
                 else rot = Rot270;
             }
             else
@@ -569,7 +580,7 @@ Transformation Zaurus::rotation() const
                 else rot = Rot0;
             }
         }
-            break;
+        break;
         case Model_Zaurus_SL6000:
         case Model_Zaurus_SLB600:
         case Model_Zaurus_SLA300:
