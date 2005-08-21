@@ -4,6 +4,8 @@
 /* OPIE */
 #include <opie2/oprocess.h>
 #include <opie2/odebug.h>
+#include <opie2/odevice.h>
+
 using namespace Opie::Core;
 
 /* STD */
@@ -14,19 +16,33 @@ using namespace OpieTooth;
 
 using Opie::Core::OProcess;
 namespace {
-  int parsePid( const QCString& par ){
-    int id=0;
-    QString string( par );
-    QStringList list =  QStringList::split( '\n', string );
-    for( QStringList::Iterator it = list.begin(); it != list.end(); ++it ){
-    owarn << "parsePID: " << (*it).latin1() << oendl;
-      if( !(*it).startsWith("CSR") ){
-    id = (*it).toInt();
-    break;
-      }
+    int parsePid( const QCString& par )
+    {
+	int id=0;
+	QString string( par );
+	QStringList list =  QStringList::split( '\n', string );
+
+	for( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
+	{
+	    owarn << "parsePID: " << (*it).latin1() << oendl;
+
+	    // FIXME mbhaynie:  Surely there is a better way to skip
+	    // verbosity (E.g. the TI device configuration
+	    // script). Apparently the PID is always on a line by 
+	    // itself, or is at least the first word of a line.  Does
+	    // QString have somethine like startsWithRegex("[0-9]+")?
+	    if( (*it).startsWith("#") ) continue;
+	    if( (*it).startsWith("TI") ) continue;
+	    if( (*it).startsWith("Loading") ) continue;
+	    if( (*it).startsWith("BTS") ) continue;
+	    if( !(*it).startsWith("CSR") )
+	    {
+		id = (*it).toInt();
+		break;
+	    }
+	}
+	return id;
     }
-    return id;
-  }
 }
 
 Device::Device(const QString &device, const QString &mode, const QString &speed )
@@ -44,6 +60,10 @@ Device::Device(const QString &device, const QString &mode, const QString &speed 
 Device::~Device(){
   detach();
 }
+
+// FIXME mbhaynie -- If BT is active, and opie is restarted, this
+// applet thinks bt is down, and will fail to start it again.  Not
+// sure why. 
 void Device::attach(){
   owarn << "attaching " << m_device.latin1() << " " << m_mode.latin1() << " " << m_speed.latin1() << oendl;
   if(m_process == 0 ){
@@ -52,7 +72,16 @@ void Device::attach(){
     m_process = new OProcess();
     *m_process << "hciattach";
     *m_process << "-p";
-    *m_process << m_device << m_mode << m_speed;
+
+    // FIXME -- this is a hack for an odd hciattach interface.
+    if ( ODevice::inst()->modelString() == "HX4700" )
+    {
+	*m_process << "-S" << "/etc/bluetooth/TIInit_3.2.26.bts" << "/dev/ttyS1" << "texas";
+    }
+    else
+    {
+	*m_process << m_device << m_mode << m_speed;
+    }
     connect(m_process, SIGNAL( processExited(Opie::Core::OProcess*) ),
             this, SLOT( slotExited(Opie::Core::OProcess* ) ) );
     connect(m_process, SIGNAL( receivedStdout(Opie::Core::OProcess*, char*, int) ),
