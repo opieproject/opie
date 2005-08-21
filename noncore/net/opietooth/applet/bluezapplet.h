@@ -32,6 +32,7 @@
 #include <qwidget.h>
 #include <qpixmap.h>
 #include <qtimer.h>
+#include <manager.h>
 
 namespace OpieTooth {
     class Device;
@@ -46,6 +47,8 @@ namespace OpieTooth {
         void timerEvent(QTimerEvent *te );
 
 public slots:
+        void fillList( const QString& device, RemoteDevice::ValueList list );
+
     private:
         void mousePressEvent( QMouseEvent * );
         void paintEvent( QPaintEvent* );
@@ -57,6 +60,7 @@ public slots:
 
     private:
         Device* btDevice;
+	Manager *btManager;
         QPixmap bluezOnPixmap;
         QPixmap bluezOffPixmap;
         QPixmap bluezDiscoveryOnPixmap;
@@ -64,6 +68,7 @@ public slots:
         bool bluezDiscoveryActive;
 
 private slots:
+        void slotMessage( const QCString& , const QByteArray& );
 
 
     };

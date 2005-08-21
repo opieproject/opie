@@ -63,14 +63,22 @@ namespace OpieTooth {
         //bluezDiscoveryOnPixmap = Resource::loadImage( "bluetoothapplet/magglass" )smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize());
         startTimer(4000);
         btDevice = 0;
+	btManager = 0;
         bluezactive = false;
         bluezDiscoveryActive = false;
 
+	// TODO: determine whether this channel has to be closed at destruction time.
+        QCopChannel* chan = new QCopChannel("QPE/Bluetooth", this );
+        connect(chan, SIGNAL(received(const QCString&,const QByteArray&) ),
+                this, SLOT(slotMessage(const QCString&,const QByteArray&) ) );
     }
 
     BluezApplet::~BluezApplet() {
         if ( btDevice ) {
             delete btDevice;
+        }
+        if ( btManager ) {
+            delete btManager;
         }
     }
 
@@ -118,9 +126,52 @@ int BluezApplet::position()
     }
 
     int BluezApplet::checkBluezDiscoveryStatus() {
+      return bluezDiscoveryActive;
     }
 
     int BluezApplet::setBluezDiscoveryStatus(int d) {
+      return bluezDiscoveryActive=d;
+    }
+
+    // FIXME mbhaynie
+    // receiver for QCopChannel("QPE/Bluetooth") messages.
+    void BluezApplet::slotMessage( const QCString& str, const QByteArray& )
+    {
+	if ( str == "enableBluetooth()") {
+	    if (!checkBluezStatus())  {
+		setBluezStatus(1);
+	    }
+	} else if ( str == "disableBluetooth()") {
+	    if (checkBluezStatus())  {
+		// setBluezStatus(0);
+	    }
+	} else if ( str == "listDevices()") {
+	    if (!btManager)
+	    {
+		btManager = new Manager("hci0");
+		connect( btManager, SIGNAL( foundDevices(const QString&,RemoteDevice::ValueList) ),
+			 this, SLOT( fillList(const QString&,RemoteDevice::ValueList) ) ) ;
+	    }
+
+	    btManager->searchDevices();
+	}
+    }
+
+    // Once the hcitool scan is complete, report back.
+    void BluezApplet::fillList(const QString&, RemoteDevice::ValueList deviceList)
+    {
+	QCopEnvelope e("QPE/BluetoothBack", "devices(QStringMap)");
+
+	QStringList list;
+	QMap<QString, QString> btmap;
+
+        RemoteDevice::ValueList::Iterator it;
+        for( it = deviceList.begin(); it != deviceList.end(); ++it )
+	{
+	    btmap[(*it).name()] = (*it).mac();
+        }
+
+	e << btmap;
     }
 
     void BluezApplet::mousePressEvent( QMouseEvent *) {
