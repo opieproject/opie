@@ -1,31 +1,32 @@
 
 
-#ifndef OpieObex_H
-#define OpieObex_H
+#ifndef OpieBtObex_H
+#define OpieBtObex_H
 
 #include <qobject.h>
 
 namespace Opie {namespace Core {class OProcess;}}
 class QCopChannel;
 namespace OpieObex {
-  class Obex : public QObject {
+  // Maybe this should be derved from Obex.
+  class BtObex : public QObject {
       Q_OBJECT
   public:
       /**
-       * Obex c'tor look
+       * BtObex c'tor look
        */
-      Obex( QObject *parent, const char* name);
+      BtObex( QObject *parent, const char* name);
       /**
        * d'tor
        */
-      ~Obex();
+      ~BtObex();
 
-      /**
-       *  Starting listening to irda after enabled by the applet
+      /** TODO mbhaynie -- Maybe opd would be a better way to receive.
+       *  Starting listening to Bluetooth after enabled by the applet
        * a  signal gets emitted when received a file
        */
       void receive();
-      void send( const QString& );
+      void send( const QString&, const QString& );
       void setReceiveEnabled( bool = false );
   signals:
 
@@ -53,18 +54,13 @@ namespace OpieObex {
       uint m_count;
       QString m_file;
       QString m_outp;
+      QString m_bdaddr;
       Opie::Core::OProcess *m_send;
       Opie::Core::OProcess *m_rec;
       bool m_receive : 1;
       void shutDownReceive();
 
 private slots:
-
-      /**
-       * send over palm obex
-       */
-
-      //void send(const QString&);
 
       // the process exited
       void slotExited(Opie::Core::OProcess* proc) ;
