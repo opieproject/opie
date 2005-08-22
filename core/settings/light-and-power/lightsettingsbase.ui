@@ -1359,34 +1359,29 @@
     <slot access="public">calibrateSensorAC()</slot>
 </connections>
 <tabstops>
-    <tabstop>brightness</tabstop>
-    <tabstop>brightness_ac</tabstop>
     <tabstop>tabs</tabstop>
+    <tabstop>interval_dim</tabstop>
+    <tabstop>interval_lightoff</tabstop>
+    <tabstop>interval_suspend</tabstop>
+    <tabstop>frequency</tabstop>
     <tabstop>LcdOffOnly</tabstop>
     <tabstop>closeHingeAction</tabstop>
-    <tabstop>interval_dim</tabstop>
-    <tabstop>interval_lightoff</tabstop>
-    <tabstop>interval_suspend</tabstop>
+    <tabstop>brightness</tabstop>
+    <tabstop>contrast</tabstop>
     <tabstop>auto_brightness</tabstop>
     <tabstop>CalibrateLightSensor</tabstop>
-    <tabstop>brightness</tabstop>
-    <tabstop>interval_lightoff</tabstop>
-    <tabstop>interval_suspend</tabstop>
-    <tabstop>interval_dim</tabstop>
-    <tabstop>LcdOffOnly_ac</tabstop>
-    <tabstop>auto_brightness</tabstop>
-    <tabstop>CalibrateLightSensor_ac</tabstop>
-    <tabstop>lowSpinBox</tabstop>
-    <tabstop>warnintervalBox</tabstop>
-    <tabstop>criticalSpinBox</tabstop>
-    <tabstop>frequency</tabstop>
-    <tabstop>contrast</tabstop>
+    <tabstop>interval_dim_ac</tabstop>
     <tabstop>interval_lightoff_ac</tabstop>
     <tabstop>interval_suspend_ac</tabstop>
-    <tabstop>interval_dim_ac</tabstop>
     <tabstop>frequency_ac</tabstop>
+    <tabstop>LcdOffOnly_ac</tabstop>
     <tabstop>closeHingeAction_ac</tabstop>
+    <tabstop>brightness_ac</tabstop>
     <tabstop>contrast_ac</tabstop>
     <tabstop>auto_brightness_ac</tabstop>
+    <tabstop>CalibrateLightSensor_ac</tabstop>
+    <tabstop>warnintervalBox</tabstop>
+    <tabstop>lowSpinBox</tabstop>
+    <tabstop>criticalSpinBox</tabstop>
 </tabstops>
 </UI>
