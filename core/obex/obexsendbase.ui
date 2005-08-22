@@ -1,0 +1,369 @@
+<!DOCTYPE UI><UI>
+<class>obexSendBase</class>
+<comment>Manage send via OBEX over both IrDA and Bluetooth
+The form provides status information, and method
+for selecting destination hosts.</comment>
+<author>Michael Haynie &lt;mbh@sdgsystems.com&gt;</author>
+<include location="global">qlistview.h</include>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>obexSendBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>363</width>
+            <height>221</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Send via OBEX</string>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>11</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>6</number>
+        </property>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout1</cstring>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>sendLabel</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Sending:</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>fileToSend</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Unknown</string>
+                    </property>
+                </widget>
+                <spacer>
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer1</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>Expanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+            </hbox>
+        </widget>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout4</cstring>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>irdaLabel</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string></string>
+                    </property>
+                    <property stdset="1">
+                        <name>pixmap</name>
+                        <pixmap>image0</pixmap>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>irdaStatus</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Unknown</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>btLabel</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string></string>
+                    </property>
+                    <property stdset="1">
+                        <name>pixmap</name>
+                        <pixmap>image1</pixmap>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>btStatus</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>7</hsizetype>
+                            <vsizetype>1</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Unknown</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget>
+            <class>QListView</class>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Receiver</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>false</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>false</bool>
+                </property>
+            </column>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>T</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>false</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>false</bool>
+                </property>
+            </column>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>S</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>false</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>false</bool>
+                </property>
+            </column>
+            <column>
+                <property>
+                    <name>text</name>
+                    <string>Status</string>
+                </property>
+                <property>
+                    <name>clickable</name>
+                    <bool>false</bool>
+                </property>
+                <property>
+                    <name>resizeable</name>
+                    <bool>false</bool>
+                </property>
+            </column>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>receiverList</cstring>
+            </property>
+        </widget>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout3</cstring>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <spacer>
+                    <property>
+                        <name>name</name>
+                        <cstring>Spacer2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>orientation</name>
+                        <enum>Horizontal</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>sizeType</name>
+                        <enum>Expanding</enum>
+                    </property>
+                    <property>
+                        <name>sizeHint</name>
+                        <size>
+                            <width>20</width>
+                            <height>20</height>
+                        </size>
+                    </property>
+                </spacer>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>scanButton</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Scan</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>sendButton</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Send</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>doneButton</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Done</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+    </vbox>
+</widget>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="356">789c5d8f410a02310c45f73d456876453a0aeec423282e05719156075d8c82332e44bcbb4d52eb4c435bf25ffe6f69e360bfdb806b4c3fd0708d102ff400777a76ddeb705cbf8d5d2c21ad74d899b11e226cefb733f721f5389762492c6391c8b26d7fd24f2a13a49a7844ac88f79499120d118eef1126a8a4248393141b789794e23f91a952212148afa64c823acaeb42ea5f8cc86765bebe81454c</data>
+    </image>
+    <image>
+        <name>image1</name>
+        <data format="XPM.GZ" length="2334">789c9dd5596f1b390c00e0f7fc0a237c0b0a7634a363068b3ee4be9da467da451f6674c44ee238877316fdef2b93f4a02db258606de4e10365511425e5edcae0f4f870b0f276e96ed6cec67ee047eded6025dc4f26cf7f7f7ff7636959e981aa07aa708372f9cdd2f2c96ce007c3e9559c03eb0c28e83337ccc4aaa0c1b0df5b9337c4baf0e423b1291279280e258f3f14a7b2251fb095aa38dfb9d85681bc27f686f3dfb14be778fc7a6f8ae3963838ceefd95555b377c5b669c86be2baadc89be2b635e455b16fb9bedbdebc3e1087d6517edd9be71f89a38cbf59b8a3f5a313a74e9187bd693df899ad8b8eeb7f11971dcd8fa637ed277e12575d47e3dbde9c7f6b61cff9bf887547fd87c7853df76b476cbc254fc4d673bdd23f5d7bce2ffdd58de7f9c60b07aa0f1ec46da0f9d08a3bf1a9d8879ac66ff7e6fdec7af3f9b9ec4df5a2f453c740fd46399f3a45de5f392fa688541f4abf4d1979fe6bb2cafde2f9beb2b5eab8de477190fcf7e218b8de0b769e9ffb37162bc927f39b9c803c12dbc4e7b7ebcdbf6fc86536afffac379f874836793dfc7beeb731b5cc5792ad6964be6f64675a897fe8cd7145ee4c10f3f90e2689df93a32d12d7f334b72a4c8abcdf05db2a999fde0355da4ac6533f95b65aeaa1fb99cbad229d4facc8d6941ddd37dc17b781f79fee8f7256478ed37ba16a6bc4811c6c13b91fcfe4681a3ebf48ef4959d890d827e4d226f14772654de0f5d0efe7db2df51d93ad2b793c50fd65639d9cd7200e520f9d87b2758b7ae9fd283b67647fe87ee5d7ca257a6f90dea74abb90f87ed3f9ae8c8b89eba7fb5fb9ba48940fe97dae52ad793c4ce7d6b5b39ee3f45eeaa66e653c9d17edeb5af24d7b733d74be74748de738dd579df2ef293f5ccd6d8adaca7d496217f9beb0eba690f148f6d95c3fdd17131a23eba1f7c4c4def4dedaae0962ca97e8c3ffacfefdfb7b1c015bec5e8fa3c78011139ee108c77fc6f11c2ff01227788553ecf2f7fad738dee02ddee10cef73fc0a1f727c848f8b383ee133be506435ffade5bf75dcc04ddc92f836eee02eeed188f9771f0ff0308f1b4afc088ff104dfe3078a7ec44ff819bfe0297e95f8372c5061d9ffbe428d062d3ae4fd1a6193579423809c1f005ae8c0f7ebcf1541800889469dc128c7c770be88c3458e5fc204e6d1295cc30ddcc21dfcb23f700f0ff0084ff00c2fb00a6bb00e1bbfef2f6cc216aec136ecc02eecc1fe6bfd81033884211c61fd7afffeabbfff23fef3afa57f00b9561583</data>
+    </image>
+</images>
+<connections>
+    <connection>
+        <sender>scanButton</sender>
+        <signal>clicked()</signal>
+        <receiver>obexSendBase</receiver>
+        <slot>scan_for_receivers()</slot>
+    </connection>
+    <connection>
+        <sender>sendButton</sender>
+        <signal>clicked()</signal>
+        <receiver>obexSendBase</receiver>
+        <slot>send_to_receivers()</slot>
+    </connection>
+    <connection>
+        <sender>doneButton</sender>
+        <signal>clicked()</signal>
+        <receiver>obexSendBase</receiver>
+        <slot>userDone()</slot>
+    </connection>
+    <connection>
+        <sender>receiverList</sender>
+        <signal>clicked(QListViewItem*)</signal>
+        <receiver>obexSendBase</receiver>
+        <slot>toggle_receiver(QListViewItem *)</slot>
+    </connection>
+    <slot access="protected">scan_for_receivers()</slot>
+    <slot access="protected">send_to_receivers()</slot>
+    <slot access="protected">toggle_receiver(QListViewItem *)</slot>
+    <slot access="protected">userDone()</slot>
+</connections>
+</UI>
