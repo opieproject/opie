@@ -16,7 +16,8 @@
 	* Opie-PcmciaApplet: Configure insert/resume actions and bind unsupported cards (mickeyl)
 	* SysInfo: Remove CPU tab and add Devices tab instead (mickeyl)
 	* Opie-smb: Added Opie front end for Samba (ljp)
-	
+	* Opie-Bluetooth: Replace obex send implementation and patch libopieobex and the bluetoothapplet (Michael Haynie)
+
 
 	Fixed Bugs
 	----------
