@@ -17,6 +17,7 @@ using namespace Opie::Core;
 
 /* QT */
 #include <qlabel.h>
+#include <qpushbutton.h>
 #include <qpixmap.h>
 #include <qlistview.h>
 #include <qtimer.h>
@@ -138,7 +139,8 @@ void SendWidget::slotIrTry(unsigned int trI) {
     setReceiverStatus(m_irDaIt.key(), tr("Try %1").arg( QString::number( trI ) ));
 }
 void SendWidget::slotStartIrda() {
-    if (m_irDaIt == m_irDa.end() ) {
+	if ( !m_irDa.count() ) return;
+    if ( m_irDaIt == m_irDa.end() ) {
 	irdaStatus->setText(tr("complete."));
         return;
     }
@@ -183,31 +185,34 @@ void SendWidget::send_to_receivers() {
     slotStartBt();
 }
 
-void SendWidget::scan_for_receivers() {
+void SendWidget::scan_for_receivers()
+{
+    //FIXME: Clean ListBox prior to (re)scan
+    sendButton->setDisabled( true );
 
-    bool enable_irda=false;
-    bool enable_bt=false;
+    if ( !QCopChannel::isRegistered("QPE/IrDaApplet") )
+    {
+        irdaStatus->setText(tr("not enabled."));
+    }
+    else
+    {
+        QCopEnvelope e1("QPE/IrDaApplet", "enableIrda()");
+        irdaStatus->setText(tr("searching..."));
+        sendButton->setEnabled( true );
+        QCopEnvelope e2("QPE/IrDaApplet", "listDevices()");
+    }
 
-    if ( !QCopChannel::isRegistered("QPE/IrDaApplet") ) {
-	irdaStatus->setText(tr("not enabled."));
-	enable_irda=true;
-    } else
-	irdaStatus->setText(tr("searching..."));
-
-    if ( !QCopChannel::isRegistered("QPE/Bluetooth") ) {
-	btStatus->setText(tr("not enabled."));
-	enable_bt=true;
-    } else
-	btStatus->setText(tr("searching..."));
-
-    if (enable_irda)
-        QCopEnvelope e0("QPE/IrDaApplet", "enableIrda()");
-    if (enable_bt)
+    if ( !QCopChannel::isRegistered("QPE/Bluetooth") )
+    {
+        btStatus->setText(tr("not enabled."));
+    }
+    else
+    {
         QCopEnvelope e1("QPE/Bluetooth", "enableBluetooth()");
-
-    QCopEnvelope e2("QPE/IrDaApplet", "listDevices()");
-    QCopEnvelope e3("QPE/Bluetooth", "listDevices()");
-
+        btStatus->setText(tr("searching..."));
+        sendButton->setEnabled( true );
+        QCopEnvelope e3("QPE/Bluetooth", "listDevices()");
+    }
 }
 
 void SendWidget::toggle_receiver(QListViewItem* item)

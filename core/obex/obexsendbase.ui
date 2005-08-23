@@ -16,7 +16,7 @@ for selecting destination hosts.</comment>
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>363</width>
+            <width>359</width>
             <height>221</height>
         </rect>
     </property>
@@ -297,7 +297,7 @@ for selecting destination hosts.</comment>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Scan</string>
+                        <string>&amp;Rescan</string>
                     </property>
                 </widget>
                 <widget>
@@ -308,7 +308,7 @@ for selecting destination hosts.</comment>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Send</string>
+                        <string>&amp;Send</string>
                     </property>
                 </widget>
                 <widget>
@@ -319,7 +319,7 @@ for selecting destination hosts.</comment>
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Done</string>
+                        <string>&amp;Close</string>
                     </property>
                 </widget>
             </hbox>
