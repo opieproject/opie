@@ -1,0 +1,4 @@
+  config CALCULATOR2
+    boolean "opie-calculator2 (A plugin based calculator)"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
