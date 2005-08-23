@@ -64,8 +64,7 @@ Have fun!
 2. Required Libraries
 =====================
 
-The following Libraries are used by Opie parts.
-For a successful build you must install these libraries and headers.
+For a successful Opie build, you need to install the following libraries and headers:
 
 * libsdl >= 1.2.0
   http://www.libsdl.org/download-1.2.php
@@ -85,10 +84,18 @@ For a successful build you must install these libraries and headers.
 * libipk >= 138
   ftp://handhelds.org/linux/packages/ipkg
 
-3. Supported Devices
+3. Required Programs
 ====================
 
-Sharp Zaurus SL-5x00, SL-B500, SL-C7x0, SL-C8x0, SL-C1000, SL-C3000, SL-6000
+For a successful usage of Opie, you should install the following programs:
+
+* obexftpd
+* obextool
+
+4. Supported Devices
+====================
+
+Sharp Zaurus SL-5x00, SL-B500, SL-C7x0, SL-C8x0, SL-C1000, SL-C3000, SL-C3100, SL-6000
 
 HP iPAQ 36xx, 37xx, 38xx, 39xx, 54xx, 55xx
 
