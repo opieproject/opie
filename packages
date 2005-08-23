@@ -11,15 +11,12 @@ CONFIG_BARTENDER noncore/apps/opie-bartender	bartender.pro
 CONFIG_BATTERYAPPLET	core/applets/batteryapplet	batteryapplet.pro
 CONFIG_BEND	noncore/unsupported/mail2/bend	bend.pro
 CONFIG_BIGSCREEN_EXAMPLE       unsupported/libopie/big-screen/example      osplitter_mail.pro
-CONFIG_BINARY	noncore/tools/calc2/binary	binary.pro
 CONFIG_BLUE-PIN	noncore/net/opietooth/blue-pin	blue-pin.pro
 CONFIG_BOUNCE	noncore/games/bounce	bounce.pro
 CONFIG_BRIGHTNESSAPPLET	noncore/applets/brightnessapplet	brightnessapplet.pro
 CONFIG_BUTTON-SETTINGS	core/settings/button	button.pro
 CONFIG_BUZZWORD	noncore/games/buzzword	buzzword.pro
 CONFIG_CALC2	noncore/tools/calc2	calc2.pro
-CONFIG_CALC2-BINARY	noncore/tools/calc2/binary	binary.pro
-CONFIG_CALC2-SIMPLE	noncore/tools/calc2/simple	simple.pro
 CONFIG_CALCULATOR	noncore/tools/calculator	calculator.pro
 CONFIG_CALIBRATE	core/apps/calibrate	calibrate.pro
 CONFIG_CAMERA	noncore/multimedia/camera	camera.pro
@@ -213,7 +210,6 @@ CONFIG_SHOWIMG	noncore/unsupported/showimg	showimg.pro
 CONFIG_SIMPLE_EXAMPLE   examples/simple simple.pro
 CONFIG_SIMPLE_ICON      examples/simple-icon    simple-icon.pro
 CONFIG_SIMPLE_MAIN      examples/simple-main    simple-main.pro
-CONFIG_SIMPLE	noncore/tools/calc2/simple	simple.pro
 CONFIG_SIMPLE_PIM       examples/simple-pim     simple-pim.pro
 CONFIG_SINGLE	single	single.pro
 CONFIG_SNAKE	noncore/games/snake	snake.pro
