@@ -22,7 +22,7 @@
 #include <qlcdnumber.h>
 
 #include "simpleimpl.h"
-#include "../stdinstructions.h"
+#include "stdinstructions.h"
 
 void FormSimpleImpl::CEClicked() {
     engine->hardReset();
