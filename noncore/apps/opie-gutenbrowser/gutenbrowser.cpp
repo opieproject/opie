@@ -382,7 +382,7 @@ void Gutenbrowser::downloadLibIndex() {
 			//                QString networkUrl= "ftp://"+ftp_host+ftp_base_dir+"/GUTINDEX.ALL";
 		QDir dir( local_library);
 		dir.cd("", TRUE);
-		goGetit( "http://sailor.gutenberg.org/GUTINDEX.ALL", false); // until ghttp works on binaries -qt3
+		goGetit( "http://www.gutenberg.org/dirs/GUTINDEX.ALL", false); // until ghttp works on binaries -qt3
 			//    goGetit( "http://www.gutenberg.net/pgwhole.zip", true); // until ghttp works on binaries -qt3
 			//                NetworkDialog *NetworkDlg;
 			//                NetworkDlg = new NetworkDialog( this,"Network Protocol Dialog", TRUE, 0, networkUrl, outputFile );

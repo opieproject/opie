@@ -928,7 +928,7 @@ void LibraryDialog::newList()
       //odebug << "changing dir "+QPEApplication::qpeDir()+"etc/gutenbrowser" << oendl;
       QString gutenindex1 = local_library + "/GUTINDEX.ALL";
          
-      QString cmd="wget -O " + gutenindex1 + " http://sailor.gutenberg.org/GUTINDEX.ALL 2>&1";
+      QString cmd="wget -O " + gutenindex1 + " http://www.gutenberg.org/dirs/GUTINDEX.ALL 2>&1";
 
       int result = QMessageBox::warning( this,"Download"
                                          ,"<p>Ok to use /'wget/' to download a new library list?</P>"
