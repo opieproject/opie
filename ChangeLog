@@ -18,7 +18,6 @@
 	* Opie-smb: Added Opie front end for Samba (ljp)
 	* Opie-Bluetooth: Replace obex send implementation and patch libopieobex and the bluetoothapplet (Michael Haynie)
 
-
 	Fixed Bugs
 	----------
 	* #1377 - Suspend Powermanagement when switched to another VT (mickeyl)
@@ -38,12 +37,12 @@
 	* #1667 - Opie-IRC does not show messages from !channel (skyhusker)
 	* #1679 - Security PIN plugin is QVGA sized (hrw)
 	* #1682 - Properly resize tab control in OTabWidget (drw)
-	* n.a.	- always show volume and wireless applet popups inside visible screen (deller)
+	* n.a.  - always show volume and wireless applet popups inside visible screen (deller)
 	* n.a.  - scale O-Menu-Applets appropriately (mickeyl)
-	* n.a.	- libopienet: fix bugs in wireless scanning and setting SSID (skyhusker)
-	* n.a.	- Wellenreiter: relax WE version matching test a bit (mickeyl)
-	* n.a.	- scale BluezApplet appropriately and use larger icons (mickeyl)
-	* n.a.	- memoryapplet: fix crash in memoryapplet on kernels without swap support (seneca cunningham)
+	* n.a.  - libopienet: fix bugs in wireless scanning and setting SSID (skyhusker)
+	* n.a.  - Wellenreiter: relax WE version matching test a bit (mickeyl)
+	* n.a.  - scale BluezApplet appropriately and use larger icons (mickeyl)
+	* n.a.  - memoryapplet: fix crash in memoryapplet on kernels without swap support (seneca cunningham)
 	* n.a.  - networksettings: ignore hostap control interfaces wifi* (mickeyl)
 	* n.a.  - Today Addressbook plugin fix configuration to show/not show birthdays, use checkboxes for selection (hrw)
 	* n.a.  - remove hardcoded font size from netsystemtime (hrw)
@@ -61,8 +60,9 @@
 	* libopienet: Miscellaneous API cleanups (mickeyl)
 	* libopiecore: Add linux pcmcia system abstraction classes (mickeyl)
 	* libopiecore: ODevice now knows the default gfx driver to use (mteira,mickeyl)
+	* libopiecore: Add support for the Sharp SL-C3100 "Borzoi" (mickeyl)
 	* Remove assumptions about default gfx driver ("Transformed") all over the place (mteira,mickeyl)
-        * fix / optimize number of scanned directories. (ljp)
+	* Fix / Optimize number of scanned directories (ljp)
 	
 2005-03-25	Opie 1.2.0
 

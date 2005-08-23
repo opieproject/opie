@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) 2002-2005 The Opie Team <opie-devel@handhelds.org>
-              =.
+              =.             Copyright (C) 2002-2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -224,6 +224,9 @@ void Zaurus::init(const QString& cpu_info)
     } else if ( model == "SHARP Akita" ) {
         d->m_model = Model_Zaurus_SLC1000;
         d->m_modelstr = "Zaurus SL-C1000";
+    } else if ( model == "SHARP Borzoi" ) {
+        d->m_model = Model_Zaurus_SLC3100;
+        d->m_modelstr = "Zaurus SL-C3100";
     } else {
         d->m_model = Model_Zaurus_SL5500;
         d->m_modelstr = "Unknown Zaurus";
@@ -250,6 +253,7 @@ void Zaurus::init(const QString& cpu_info)
         case Model_Zaurus_SLA300:
             d->m_rotation = Rot0;
             break;
+        case Model_Zaurus_SLC3100: // fallthrough
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC1000: // fallthrough
         case Model_Zaurus_SLC7x0:
@@ -296,6 +300,7 @@ void Zaurus::initButtons()
             pz_buttons = z_buttons_6000;
             buttoncount = ARRAY_SIZE(z_buttons_6000);
             break;
+        case Model_Zaurus_SLC3100: // fallthrough
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC1000: // fallthrough
         case Model_Zaurus_SLC7x0:
@@ -549,6 +554,7 @@ Transformation Zaurus::rotation() const
     Transformation rot;
 
     switch ( d->m_model ) {
+        case Model_Zaurus_SLC3100: // fallthrough
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC1000:
         {
@@ -598,6 +604,7 @@ ODirection Zaurus::direction() const
     ODirection dir;
 
     switch ( d->m_model ) {
+        case Model_Zaurus_SLC3100: // fallthrough
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC1000: // fallthrough
         case Model_Zaurus_SLC7x0: {
@@ -621,7 +628,10 @@ ODirection Zaurus::direction() const
 
 bool Zaurus::hasHingeSensor() const
 {
-    return d->m_model == Model_Zaurus_SLC7x0 || d->m_model == Model_Zaurus_SLC3000 || d->m_model == Model_Zaurus_SLC1000;
+    return d->m_model == Model_Zaurus_SLC7x0 ||
+           d->m_model == Model_Zaurus_SLC3100 ||
+           d->m_model == Model_Zaurus_SLC3000 ||
+           d->m_model == Model_Zaurus_SLC1000;
 }
 
 OHingeStatus Zaurus::readHingeSensor() const
@@ -671,7 +681,7 @@ bool Zaurus::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress,
 {
     int newkeycode = keycode;
 
-    if (d->m_model != Model_Zaurus_SLC7x0 && d->m_model != Model_Zaurus_SLC3000 && d->m_model != Model_Zaurus_SLC1000) return false;
+    if ( !hasHingeSensor() ) return false;
 
     /* map cursor keys depending on the hinge status */
     switch ( keycode ) {
