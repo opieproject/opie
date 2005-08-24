@@ -63,7 +63,9 @@ bool OAbstractMobileDevice::suspend() {
 
     bool res = false;
 
-    QCopEnvelope( "QPE/System", "aboutToSuspend()" );
+    {
+        QCopEnvelope( "QPE/System", "aboutToSuspend()" );
+    }
 
     struct timeval tvs, tvn;
     ::gettimeofday ( &tvs, 0 );
@@ -82,9 +84,11 @@ bool OAbstractMobileDevice::suspend() {
         } while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < m_timeOut );
     }
 
-    return res;
+    {
+        QCopEnvelope( "QPE/System", "returnFromSuspend()" );
+    }
 
-    QCopEnvelope( "QPE/System", "returnFromSuspend()" );
+    return res;
 }
 
 //#include <linux/fb.h> better not rely on kernel headers in userspace ...
