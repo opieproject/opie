@@ -72,105 +72,78 @@ void  LibraryDialog::initDialog(){
     QGridLayout *layout5 = new QGridLayout(widget_5 );
 
 
-    ListView1->addColumn( tr( "Title" ) );
-    ListView1->setColumnWidthMode( 0, QListView::Manual );
-    ListView1->setColumnWidth(0, 330);
+    ListView1->addColumn( tr( "Author" ), -1 );
+    ListView1->setColumnAlignment( 1, 1 );
+
+    ListView1->addColumn( tr( "Title" ), -1 );
     ListView1->setColumnAlignment( 0, 1 );
 
-    ListView1->addColumn( tr( "Author" ) );
-    ListView1->setColumnWidthMode( 1, QListView::Manual );
-    ListView1->setColumnWidth(1, 170);
-    ListView1->setColumnAlignment( 1, 1 );
 
     ListView1->addColumn( tr( "Year" ) );
     ListView1->setColumnWidthMode( 2, QListView::Manual );
-    ListView1->setColumnWidth(2, 50);
     ListView1->setColumnAlignment( 2, 1 );
 
-    ListView1->addColumn( tr( "File" ) );
+    ListView1->addColumn( tr( "File" ), -1 );
     ListView1->setColumnWidthMode( 2, QListView::Manual );
-    ListView1->setColumnWidth(2, 100);
+
     ListView1->setColumnAlignment( 2, 1 );
 
-    ListView2->addColumn( tr( "Title" ) );
-    ListView2->setColumnWidthMode( 0, QListView::Manual );
-    ListView2->setColumnWidth(0, 330);
-    ListView2->setColumnAlignment( 0, 1 );
-
-    ListView2->addColumn( tr( "Author" ) );
-    ListView2->setColumnWidthMode( 1, QListView::Manual );
-    ListView2->setColumnWidth(1, 170);
+    ListView2->addColumn( tr( "Author" ), -1 );
     ListView2->setColumnAlignment( 1, 1 );
 
-    ListView2->addColumn( tr( "Year" ) );
+    ListView2->addColumn( tr( "Title" ), -1);
+    ListView2->setColumnAlignment( 0, 1 );
+
+    ListView2->addColumn( tr( "Year" ), -1 );
     ListView2->setColumnWidthMode( 2, QListView::Manual );
-    ListView2->setColumnWidth(2, 50);
     ListView2->setColumnAlignment( 2, 1 );
 
-    ListView2->addColumn( tr( "File" ) );
+    ListView2->addColumn( tr( "File" ), -1 );
     ListView2->setColumnWidthMode( 3, QListView::Manual );
-    ListView2->setColumnWidth(3, 100);
     ListView2->setColumnAlignment( 3, 1 );
 
-    ListView3->addColumn( tr( "Title" ) );
-    ListView3->setColumnWidthMode( 0, QListView::Manual );
-    ListView3->setColumnWidth(0, 330);
-    ListView3->setColumnAlignment( 0, 1 );
-
-    ListView3->addColumn( tr( "Author" ) );
-    ListView3->setColumnWidthMode( 1, QListView::Manual );
-    ListView3->setColumnWidth(1, 170);
+    ListView3->addColumn( tr( "Author" ), -1 );
     ListView3->setColumnAlignment( 1, 1 );
 
-    ListView3->addColumn( tr( "Year" ) );
+    ListView3->addColumn( tr( "Title" ), -1 );
+    ListView3->setColumnAlignment( 0, 1 );
+
+
+    ListView3->addColumn( tr( "Year" ), -1 );
     ListView3->setColumnWidthMode( 2, QListView::Manual );
-    ListView3->setColumnWidth(2, 50);
     ListView3->setColumnAlignment( 2, 1 );
 
-    ListView3->addColumn( tr( "File" ) );
+    ListView3->addColumn( tr( "File" ), -1 );
     ListView3->setColumnWidthMode( 3, QListView::Manual );
-    ListView3->setColumnWidth(3, 100);
     ListView3->setColumnAlignment( 3, 1 );
 
 
-    ListView4->addColumn( tr( "Title" ) );
-    ListView4->setColumnWidthMode( 0, QListView::Manual );
-    ListView4->setColumnWidth(0, 330);
+    ListView4->addColumn( tr( "Author" ), -1 );
+    ListView4->setColumnAlignment( 1, 1 );
+    ListView4->addColumn( tr( "Title" ), -1 );
     ListView4->setColumnAlignment( 0, 1 );
 
-    ListView4->addColumn( tr( "Author" ) );
-    ListView4->setColumnWidthMode( 1, QListView::Manual );
-    ListView4->setColumnWidth(1, 170);
-    ListView4->setColumnAlignment( 1, 1 );
-
-    ListView4->addColumn( tr( "Year" ) );
+    ListView4->addColumn( tr( "Year" ), -1 );
     ListView4->setColumnWidthMode( 2, QListView::Manual );
-    ListView4->setColumnWidth(2, 50);
     ListView4->setColumnAlignment( 2, 1 );
 
-    ListView4->addColumn( tr( "File" ) );
+    ListView4->addColumn( tr( "File" ), -1 );
     ListView4->setColumnWidthMode( 3, QListView::Manual );
-    ListView4->setColumnWidth(3, 100);
     ListView4->setColumnAlignment( 3, 1 );
 
-    ListView5->addColumn( tr( "Title" ) );
-    ListView5->setColumnWidthMode( 0, QListView::Manual );
-    ListView5->setColumnWidth(0, 330);
-    ListView5->setColumnAlignment( 0, 1 );
-
-    ListView5->addColumn( tr( "Author" ) );
-    ListView5->setColumnWidthMode( 1, QListView::Manual );
-    ListView5->setColumnWidth(1, 170);
+    ListView5->addColumn( tr( "Author" ), -1 );
     ListView5->setColumnAlignment( 1, 1 );
 
-    ListView5->addColumn( tr( "Year" ) );
+    ListView5->addColumn( tr( "Title" ), -1 );
+    ListView5->setColumnAlignment( 0, 1 );
+
+
+    ListView5->addColumn( tr( "Year" ), -1 );
     ListView5->setColumnWidthMode( 2, QListView::Manual );
-    ListView5->setColumnWidth(2, 50);
     ListView5->setColumnAlignment( 2, 1 );
 
-    ListView5->addColumn( tr( "File" ) );
+    ListView5->addColumn( tr( "File" ), -1 );
     ListView5->setColumnWidthMode( 3, QListView::Manual );
-    ListView5->setColumnWidth(3, 100);
     ListView5->setColumnAlignment( 3, 1 );
 
     tabWidget->insertTab( widget_1, tr( "A-F" ) );
@@ -207,8 +180,8 @@ void  LibraryDialog::initDialog(){
 //      httpBox = new QCheckBox( ( tr("Use http")),widget_6);
 //      httpBox->setChecked( FALSE);
 //      QToolTip::add( httpBox, ( tr("Use http to download \nproxy users should probably use this.")) );
-    authBox= new QCheckBox( ( tr("Last name first \n(requires library restart)")),widget_6);
-    authBox->setChecked( FALSE);
+    authBox= new QCheckBox( ( tr("Last name first.")),widget_6);
+    authBox->setChecked( true);
 
     layout1->addMultiCellWidget( ListView1, 0, 0, 0, 4);
     layout2->addMultiCellWidget( ListView2, 0, 0, 0, 4);
@@ -272,6 +245,7 @@ void  LibraryDialog::initDialog(){
     connect(ListView4,SIGNAL(returnPressed(QListViewItem*)),SLOT(select_title(QListViewItem*)));
     connect(ListView5,SIGNAL(doubleClicked(QListViewItem*)),SLOT(select_title(QListViewItem*)));
     connect(ListView5,SIGNAL(returnPressed(QListViewItem*)),SLOT(select_title(QListViewItem*)));
+    connect(authBox,SIGNAL(clicked()),this,SLOT(authBoxClicked()));
 
     connect(sortingCombo,SIGNAL(activated(int)),SLOT(comboSelect(int)));
 

@@ -136,54 +136,72 @@ void LibraryDialog::Library() {
 		
 //		qDebug( "opening GUTINDEX.ALL file");
    IDontKnowWhy = "";
-   if ( indexLib.open( IO_ReadOnly) ) {  // file opened successfully
+   system("date");
+   if ( indexLib.open( IO_ReadOnly) ) {
+// file opened successfully
       QTextStream indexStream( &indexLib );
       QString indexLine;
       qApp->processEvents();
-
+      
+      bool okToRead = false;
       while ( !indexStream.eof() ) {
-
          indexLine = indexStream.readLine();
-         if ( indexLine != "") {
-
-            if( (indexLine.mid(4,4)).toInt()  ) {
-										
-               year = indexLine.mid(4,4);
-               file = indexLine.mid(60,12);
-               if(file.left(1).find("[",0,TRUE) != -1)
-                  file.remove(1,1);
-               if( file.find("]",0,TRUE) != -1)
-                  file = file.left( file.find("]",0,TRUE));
-
-							 if(file.find("?", 0, false) != -1 ) {
-                  QString tmpfile = file.replace(QRegExp("[?]"), "8");
-                  file = tmpfile;
-							 }
-
-               number = indexLine.mid(55,5);
-               title = indexLine.mid( 9,  50 );
-
-               addItems();
-										
-            }
-            else if ( indexLine.mid(73,5).toInt() && indexLine.mid(73,5).toInt() > 10000 ) {
-// newer files with numbers > 100000 have new dir structure and need to be parsed differently..
-               number = indexLine.mid(73,5);
-               int num = number.toInt();
-               if(num < 10626)
-                  year = "2003";
-               else if(num >= 10626 && num < 14600)
-                  year = "2004";
-               else if(num >= 14600)
-                  year = "2005";
-
-               file = number;// + ".txt";
-               title = indexLine.mid(0,72);
-
-               addItems();
-               //	qDebug("file number is " + number + " title is " + title );
-            }
+         if(indexLine == "<==Start GUTINDEX.ALL listings==>")
+            okToRead = true;
+         if(indexLine == "<==End of GUTINDEX.ALL==>") {
+            okToRead = false;
+            indexLib.at(indexLib.size());
          }
+
+         if(okToRead) {
+            QStringList token = QStringList::split(' ', indexLine);
+            int textNumber;
+            if(( textNumber = token.last().toInt() ))
+               if(textNumber > 10001) {
+//            qWarning("Last "+token.last());
+// newer files with numbers > 100000 have new dir structure and need to be parsed differently..
+                  if(textNumber < 10626)
+                     year = "2003";
+                  else if(textNumber >= 10626 && textNumber < 14600)
+                     year = "2004";
+                  else if(textNumber >= 14600)
+                     year = "2005";
+
+                  file = token.last();
+                  title = indexLine.mid(0,72);
+
+                  addItems(); //author and qlistview
+                  //	qDebug("file number is " + number + " title is " + title );
+
+               } else { //end new etexts
+                  
+                  if(token[1].toInt() && token[1].toInt() > 1969) {
+                     year = token[1];
+                     file = indexLine.mid(60,12);
+
+                     if(file.left(1).find("[",0,TRUE) != -1) {
+                        file.remove(1,1);
+                        if( file.find("]",0,TRUE) != -1)
+                           file = file.left( file.find("]",0,TRUE));
+
+                        if(file.find("?", 0, false) != -1 ) {
+                           QString tmpfile = file.replace(QRegExp("[?]"), "8");
+                           file = tmpfile;
+                        }
+                     title = indexLine.mid( 9, 50);
+
+                     addItems(); 
+                  }
+                  } else { // then try new format texts
+                     file = token.last();
+                     title = indexLine.mid(0,72);
+                     year = "1980";
+
+                     addItems(); //author and qlistview
+                  }
+               } //end old etexts
+
+         } //end okToTRead
       }
       indexLib.close();
    } else {
@@ -192,6 +210,9 @@ void LibraryDialog::Library() {
       sMsg = ( tr("<p>Error opening library index file. Please download a new one.</P> "));
       QMessageBox::message( "Error",sMsg);
    }
+   system("date");
+   sortLists(0);
+   
 } //end Library()
 
 
@@ -303,33 +324,40 @@ bool LibraryDialog::getAuthor()
    return true;
 }////// end getAuthor()
 
-void LibraryDialog::addItems() {
+void LibraryDialog::addItems()
+{
    cleanStrings();
    getAuthor();  // grok author
-   if( !number.isEmpty()
-       && (title.find( "reserved",0, FALSE) == -1)
+
+    etext etextStruct;
+   if(  /*!number.isEmpty()
+          && */
+      (title.find( "reserved",0, FALSE) == -1)
        && (file.find( "]",0, true) == -1)
        &&(title.find( "Audio",0, FALSE) == -1)) {
 //				qDebug("new item "+title);
       // fill string list or something to be able to sort by Author
+       etextStruct.title = title;
+       etextStruct.author = author;
+       etextStruct.year = year;
+       etextStruct.file = file;
+      
+      etextLibrary.append( etextStruct);
+
       if( author.isEmpty() )
-         QList_Item5 = new QListViewItem( ListView5,  /*number, */title, author, year, file );
+         QList_Item5 = new QListViewItem( ListView5,  /*number, */author, title,  year, file );
       else  {
-         if(  (author.left(1) >= QString("A") && author.left(1) <= QString("F")) ||
-              (author.left(1) >= QString("a")  && author.left(1) <= QString("f")) )
-            QList_Item1 = new QListViewItem( ListView1, /* number,*/ title, author, year, file );
+         if( author.find(QRegExp("[^a-fA-F]")) )
+            QList_Item1 = new QListViewItem( ListView1, /* number,*/author,  title, year, file );
 
-         else if( (author.left(1) >= QString("G") && author.left(1) <= QString("M")) ||
-                  (author.left(1) >= QString("g") && author.left(1) <= QString("m")) )
-            QList_Item2 = new QListViewItem( ListView2, /* number,*/ title, author, year, file );
+         else if(author.find(QRegExp("[^g-mG-M]")) )
+            QList_Item2 = new QListViewItem( ListView2, /* number,*/ author, title,year, file );
 
-         else if( (author.left(1) >= QString("N") && author.left(1) <= QString("R")) ||
-                  (author.left(1) >= QString("n") && author.left(1) <= QString("r")) )
-            QList_Item3 = new QListViewItem( ListView3, /* number,*/ title, author, year, file );
+         else if(author.find(QRegExp("[^n-rN-R]")) )
+            QList_Item3 = new QListViewItem( ListView3, /* number,*/ author, title, year, file );
 
-         else if( (author.left(1) >= QString("S") && author.left(1) <= QString("Z")) ||
-                  (author.left(1) >= QString("s") && author.left(1) <= QString("z")) )
-            QList_Item4 = new QListViewItem( ListView4, /* number,*/ title, author, year, file );
+         else if(author.find(QRegExp("[^s-zS-Z]")) )
+            QList_Item4 = new QListViewItem( ListView4, /* number,*/ author, title, year, file );
       }
    }
 }
@@ -675,86 +703,27 @@ void LibraryDialog::onButtonSearch()
       QString searcherStr = searchDlg->get_text();
       int fluff = 0;
 
-      //        int tabPage = tabWidget->currentPageIndex();
-      // TODO ititerate here... struct<listViews>??
-
-      QListViewItemIterator it1( ListView1 );
-      QListViewItemIterator it2( ListView2 );
-      QListViewItemIterator it3( ListView3 );
-      QListViewItemIterator it4( ListView4 );
-      QListViewItemIterator it5( ListView5 );
-
-      //// this is really pitiful work,
-      ///////
       bool cS;
       if( searchDlg->caseSensitiveCheckBox->isChecked())
-         cS=true; //case sensitive
+         cS = true; //case sensitive
       else
-         cS=false;
+         cS = false;
 
-      if(fluff==0) {
-         for ( ; it1.current(); ++it1 ) {
-            resultString = ( it1.current() )->text(0);
-            resultString += (" : ");
-            resultString += ( it1.current() )->text(2);
-            resultString += (" : ");
-            resultString += ( it1.current() )->text(3);
-            if( resultString.find( searcherStr, 0, cS) != -1)
-            {
-               Searchlist.append( resultString);
-            }
-         }
-      }
-      if(fluff==0) {// search routine here
-         for ( ; it2.current(); ++it2 ) {
-            resultString = ( it2.current() )->text(0);
-            resultString += (" : ");
-            resultString += ( it2.current() )->text(2);
-            resultString += (" : ");
-            resultString += ( it2.current() )->text(3);
-            if( resultString.find( searcherStr, 0, cS) != -1) {
-               Searchlist.append( resultString);
-            }
-         }
-      }
-      if(fluff==0) {// search routine here
-         for ( ; it3.current(); ++it3 ) {
-            resultString = ( it3.current() )->text(0);
-            resultString += (" : ");
-            resultString += ( it3.current() )->text(2);
-            resultString += (" : ");
-            resultString += ( it3.current() )->text(3);
+        etext etextStruct;
+         QValueList<etext>::Iterator it;
 
-            if( resultString.find( searcherStr, 0, cS) != -1) {
-               Searchlist.append( resultString);
-            }
-         }
-      }
-      if(fluff==0) {
-         // search routine here
-         for ( ; it4.current(); ++it4 )  {
-            resultString = ( it4.current() )->text(0);
-            resultString += (" : ");
-            resultString += ( it4.current() )->text(2);
-            resultString += (" : ");
-            resultString += ( it4.current() )->text(3);
-            if( resultString.find( searcherStr, 0, cS) != -1) {
-               Searchlist.append( resultString);
-            }
-         }
-      }
-      if(fluff==0) {              // search routine here
-         for ( ; it5.current(); ++it5 )  {
-            resultString = ( it5.current() )->text(0);
-            resultString += (" : ");
-            resultString += ( it5.current() )->text(2);
-            resultString += (" : ");
-            resultString += ( it5.current() )->text(3);
-            if( resultString.find( searcherStr, 0, cS) != -1) {
-               Searchlist.append( resultString);
-            }
-         }
-      }
+        for( it = etextLibrary.begin(); it != etextLibrary.end(); ++it ) {
+           QString tempTitle = (*it).title;
+           QString tempAuthor = (*it).author;
+           QString tempFile = (*it).file;
+           QString tempYear = (*it).year;
+           if(tempTitle.find( searcherStr, 0, cS) != -1
+              || tempAuthor.find( searcherStr, 0, cS) != -1) {
+              qWarning(tempTitle);
+              Searchlist.append( tempTitle + " : " + tempYear + " : " + tempFile);
+           }
+        }
+
 
       tabWidget->setCurrentPage( curTab);
 
@@ -773,8 +742,6 @@ void LibraryDialog::onButtonSearch()
       }
       Searchlist.clear();
 
-      //        if(SearchResultsDialog)
-      //        delete SearchResultsDialog;
       QString tester;
       for ( QStringList::Iterator it = resultLs.begin(); it != resultLs.end(); ++it ) {
          texter.sprintf("%s \n",(*it).latin1());
@@ -820,7 +787,7 @@ void  LibraryDialog::parseSearchResults( QString resultStr)
 					DlglistItemFile = DlglistItemFile.right( DlglistItemFile.length() - 1);
 
 			
-			if(	DlglistItemFile.toInt() > 10000 ) {
+			if(	DlglistItemFile.toInt() > 10000 || yearInt == 1980 ) {
          // new directory sturcture
 					download_newEtext(); //)
       } else {
@@ -829,9 +796,19 @@ void  LibraryDialog::parseSearchResults( QString resultStr)
    }
 }
 
-void LibraryDialog::sort()
+void LibraryDialog::sortLists(int index)
 {
-
+	 
+    ListView1->setSorting(index);
+    ListView2->setSorting(index);
+    ListView3->setSorting(index);
+    ListView4->setSorting(index);
+    ListView5->setSorting(index);
+    ListView1->sort();
+    ListView2->sort();
+    ListView3->sort();
+    ListView4->sort();
+    ListView5->sort();
 }
 
 /*
@@ -1050,7 +1027,7 @@ void LibraryDialog::FindLibrary()
       //odebug << "new index nameis "+ old_index << oendl;
       Library();
    }
-   indexLoaded=true;
+   indexLoaded =true;
    buttonSearch->setEnabled(true);
    moreInfoButton->setEnabled(true);
 
@@ -1066,4 +1043,10 @@ void LibraryDialog::cleanStrings() {
    title = title.stripWhiteSpace();
    number = number.stripWhiteSpace();
 	 
+}
+
+void LibraryDialog::authBoxClicked()
+{
+   qApp->processEvents();
+   FindLibrary();
 }

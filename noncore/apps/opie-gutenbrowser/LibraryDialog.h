@@ -30,6 +30,7 @@
 #include <qlabel.h>
 #include <stdlib.h>
 #include <qtabwidget.h>
+#include <qvaluelist.h>
 
 class QVBoxLayout;
 class QHBoxLayout; 
@@ -40,6 +41,14 @@ class QPushButton;
 //class QTabWidget;
 class QWidget;
 //class Gutenbrowser;
+
+typedef struct {
+   QString title;
+   QString author;
+   QString year;
+   QString file;
+} etext;
+   
 
 class LibraryDialog : public QDialog { 
     Q_OBJECT
@@ -99,7 +108,7 @@ public slots:
     bool getAuthor();
     void select_title(QListViewItem*);
     void cancelIt();
-    void sort();
+    void sortLists(int);
     bool moreInfo();
 //    void DownloadEmAll();
     bool httpDownload();
@@ -118,6 +127,8 @@ protected slots:
     
 protected:
 
+  QValueList<etext> etextLibrary;
+
  void initDialog();
  QHBoxLayout *hbox,*hbox1,*hbox2;
  QVBoxLayout *vbox;
@@ -127,6 +138,8 @@ private:
  void clearItems();
  void cleanStrings();
  bool getEtext(const QStringList &);
+private slots:
+  void authBoxClicked();
 
 };
 
