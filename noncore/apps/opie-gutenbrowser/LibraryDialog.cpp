@@ -770,24 +770,25 @@ void  LibraryDialog::parseSearchResults( QString resultStr)
    my.setNum( stringLeng, 10);
 
    if( resultStr.length() > 2 && resultStr.length() < 130) {
+      QStringList token = QStringList::split(" : ", resultStr);
 
-			 int titleInt = resultStr.find( " : ", 0, true);
-      DlglistItemTitle  = resultStr.left( titleInt);
+      DlglistItemTitle  = token[0];
+			DlglistItemTitle = DlglistItemTitle.stripWhiteSpace();
 			
-      int yearInt = resultStr.find( " : ", titleInt+3, true);
-			
-      DlglistItemYear  = resultStr.mid( titleInt+3, (yearInt - titleInt)-3);
-		
-      DlglistItemFile = resultStr.right( resultStr.length() - (yearInt + 3));
-			DlglistItemFile = DlglistItemFile.left( DlglistItemFile.length() - 2);
-					
-			cleanStrings();
+      DlglistItemYear  = token[1];
+      DlglistItemYear = DlglistItemYear.stripWhiteSpace();
+      
+      DlglistItemFile = token[2];
+
+      DlglistItemFile = DlglistItemFile.stripWhiteSpace();
+      
+//      qWarning(DlglistItemYear);
+
 
 			if(DlglistItemFile.left(1) == "/")
 					DlglistItemFile = DlglistItemFile.right( DlglistItemFile.length() - 1);
 
-			
-			if(	DlglistItemFile.toInt() > 10000 || yearInt == 1980 ) {
+			if(	DlglistItemFile.toInt() > 10000 || DlglistItemYear == "1980" ) {
          // new directory sturcture
 					download_newEtext(); //)
       } else {
