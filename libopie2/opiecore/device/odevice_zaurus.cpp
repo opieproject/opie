@@ -29,19 +29,19 @@
 
 #include "odevice_zaurus.h"
 
-/* QT */
-#include <qapplication.h>
-#include <qfile.h>
-#include <qtextstream.h>
-#include <qwindowsystem_qws.h>
-
 /* OPIE */
 #include <opie2/oinputsystem.h>
 #include <opie2/oresource.h>
 
 #include <qpe/config.h>
 #include <qpe/sound.h>
-#include <qpe/qcopenvelope_qws.h>
+
+/* QT */
+#include <qapplication.h>
+#include <qfile.h>
+#include <qtextstream.h>
+#include <qwindowsystem_qws.h>
+#include <qcopchannel_qws.h>
 
 /* STD */
 #include <fcntl.h>
@@ -712,10 +712,7 @@ bool Zaurus::suspend() {
         return false;
 
     bool res = false;
-    {
-        QCopEnvelope( "QPE/System", "aboutToSuspend()" );
-    }
-    qApp->processEvents(); // ensure the qcop call is being processed asap
+    QCopChannel::send( "QPE/System", "aboutToSuspend()" );
 
     struct timeval tvs, tvn;
     ::gettimeofday ( &tvs, 0 );
@@ -735,10 +732,7 @@ bool Zaurus::suspend() {
         } while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < m_timeOut );
     }
 
-    {
-        QCopEnvelope( "QPE/System", "returnFromSuspend()" );
-    }
-    qApp->processEvents(); // ensure the qcop call is being processed asap
+    QCopChannel::send( "QPE/System", "returnFromSuspend()" );
 
     return res;
 }

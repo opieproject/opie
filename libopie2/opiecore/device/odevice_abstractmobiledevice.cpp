@@ -29,11 +29,12 @@
 
 #include "odevice_abstractmobiledevice.h"
 
-#include <qpe/qcopenvelope_qws.h>
+/* QT */
+#include <qcopchannel_qws.h>
 
+/* STD */
 #include <sys/time.h>
 #include <sys/ioctl.h>
-
 #include <time.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -62,11 +63,7 @@ bool OAbstractMobileDevice::suspend() {
         return false;
 
     bool res = false;
-
-    {
-        QCopEnvelope( "QPE/System", "aboutToSuspend()" );
-    }
-    qApp->processEvents(); // ensure the qcop call is being processed asap
+    QCopChannel::send( "QPE/System", "aboutToSuspend()" );
 
     struct timeval tvs, tvn;
     ::gettimeofday ( &tvs, 0 );
@@ -85,10 +82,7 @@ bool OAbstractMobileDevice::suspend() {
         } while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < m_timeOut );
     }
 
-    {
-        QCopEnvelope( "QPE/System", "returnFromSuspend()" );
-    }
-    qApp->processEvents(); // ensure the qcop call is being processed asap
+    QCopChannel::send( "QPE/System", "returnFromSuspend()" );
 
     return res;
 }
