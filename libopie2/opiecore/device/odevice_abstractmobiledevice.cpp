@@ -66,6 +66,7 @@ bool OAbstractMobileDevice::suspend() {
     {
         QCopEnvelope( "QPE/System", "aboutToSuspend()" );
     }
+    qApp->processEvents(); // ensure the qcop call is being processed asap
 
     struct timeval tvs, tvn;
     ::gettimeofday ( &tvs, 0 );
@@ -87,6 +88,7 @@ bool OAbstractMobileDevice::suspend() {
     {
         QCopEnvelope( "QPE/System", "returnFromSuspend()" );
     }
+    qApp->processEvents(); // ensure the qcop call is being processed asap
 
     return res;
 }
