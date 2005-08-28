@@ -17,7 +17,8 @@
 	* SysInfo: Remove CPU tab and add Devices tab instead (mickeyl)
 	* Opie-smb: Added Opie front end for Samba (ljp)
 	* Opie-Bluetooth: Replace obex send implementation and patch libopieobex and the bluetoothapplet (Michael Haynie)
-
+	* Opieplayer: rudimentary podcast support (ljp)
+	
 	Fixed Bugs
 	----------
 	* #1377 - Suspend Powermanagement when switched to another VT (mickeyl)
