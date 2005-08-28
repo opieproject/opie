@@ -26,7 +26,12 @@
 #include "inputDialog.h"
 #include "audiowidget.h"
 #include "videowidget.h"
+#include "rssparser.h"
 
+#include <qpe/process.h>
+
+#include <qvector.h>
+#include <qxml.h>
 /* OPIE */
 #include <qpe/qpeapplication.h>
 #include <qpe/qpemenubar.h>
@@ -490,7 +495,7 @@ void PlayListWidget::setDocument(const QString& fileref) {
 }
 
 void PlayListWidget::setDocumentEx(const QString& fileref) {
-   odebug << "opieplayer receive "+fileref << oendl;
+   owarn << "opieplayer receive "+fileref << oendl;
    clearList();
    DocLnk lnk;
    QFileInfo fileInfo(fileref);
@@ -1005,7 +1010,7 @@ void PlayListWidget::populateAudioView() {
             size = QFile( dit.current()->file() ).size();
          //            odebug << dit.current()->name() << oendl;
          newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(),
-                                                QString::number(size ), storage, dit.current()->file());
+                             QString::number(size ), storage, dit.current()->file());
          newItem->setPixmap(0, Opie::Core::OResource::loadPixmap( "opieplayer/musicfile", Opie::Core::OResource::SmallIcon ));
       }
    }
@@ -1063,17 +1068,28 @@ void PlayListWidget::openFile() {
             }
             filename = m3uFile;
          }
-         lnk.setName( m3uFile ); //sets name
-         lnk.setFile( filename ); //sets file name
-         lnk.setIcon("opieplayer2/musicfile");
-         d->selectedFiles->addToSelection(  lnk );
-         writeCurrentM3u();
+         if( filename.right(3) == "xml" ||
+                 filename.find("rss" ) !=-1)
+         {
+            // readpodcast(filename );
+            downloadPodcast(filename);
+         } else {
+            lnk.setName( m3uFile ); //sets name
+            lnk.setFile( filename ); //sets file name
+            lnk.setIcon("opieplayer2/musicfile");
+            d->selectedFiles->addToSelection(  lnk );
+            writeCurrentM3u();
+         }
       }
       else if( filename.right( 3) == "m3u" ) {
          readm3u( filename );
 
       } else if( filename.right(3) == "pls" ) {
          readPls( filename );
+      } else if( filename.right(3) == "xml" ||
+                 filename.find("rss" ) !=-1
+         ) {
+         readpodcast( filename );
       } else {
          lnk.setName( fullBaseName ( QFileInfo(filename)) ); //sets name
          lnk.setFile( filename ); //sets file name
@@ -1088,106 +1104,6 @@ void PlayListWidget::openFile() {
    }
 }
 
-
-/*
-reads m3u and shows files/urls to playlist widget */
-void PlayListWidget::readm3u( const QString &filename ) {
-   //    odebug << "read m3u filename " + filename << oendl;
-
-   Om3u *m3uList;
-   QString s, name;
-   m3uList = new Om3u( filename, IO_ReadOnly );
-   m3uList->readM3u();
-   DocLnk lnk;
-   for ( QStringList::ConstIterator it = m3uList->begin(); it != m3uList->end(); ++it ) {
-      s = *it;
-      //          odebug << "reading "+ s << oendl;
-      if(s.left(4)=="http") {
-         lnk.setName( s ); //sets file name
-         lnk.setIcon("opieplayer2/musicfile");
-
-         //          if(s.right(4) != '.' || s.right(5) != '.')
-         if(s.right(4) != '.' || s.right(5) != '.' )
-            if( s.right(1) != "/")
-               lnk.setFile( s+"/"); //if url with no extension
-            else
-               lnk.setFile( s ); //sets file name
-
-      }  else {
-         //               if( QFileInfo( s ).exists() ) {
-         lnk.setName( fullBaseName ( QFileInfo(s)));
-         //                 if(s.right(4) == '.')   {//if regular file
-         if(s.left(1) != "/")  {
-            //            odebug << "set link "+QFileInfo(filename).dirPath()+"/"+s << oendl;
-            lnk.setFile( QFileInfo(filename).dirPath()+"/"+s);
-            lnk.setIcon("SoundPlayer");
-         } else {
-            //            odebug << "set link2 "+s << oendl;
-            lnk.setFile( s);
-            lnk.setIcon("SoundPlayer");
-         }
-      }
-      d->selectedFiles->addToSelection( lnk );
-   }
-   Config config( "OpiePlayer" );
-   config.setGroup( "PlayList" );
-
-   config.writeEntry("CurrentPlaylist",filename);
-   config.write();
-   currentPlayList=filename;
-
-//    m3uList->write();
-   m3uList->close();
-   if(m3uList) delete m3uList;
-
-   d->selectedFiles->setSelectedItem( s);
-   setCaption(tr("OpiePlayer: ")+ fullBaseName ( QFileInfo(filename)));
-
-}
-
-/*
-reads pls and adds files/urls to playlist  */
-void PlayListWidget::readPls( const QString &filename ) {
-
-   //    odebug << "pls filename is " + filename << oendl;
-   Om3u *m3uList;
-   QString s, name;
-   m3uList = new Om3u( filename, IO_ReadOnly );
-   m3uList->readPls();
-
-   for ( QStringList::ConstIterator it = m3uList->begin(); it != m3uList->end(); ++it ) {
-      s = *it;
-      //        s.replace( QRegExp( "%20" )," " );
-      DocLnk lnk( s );
-      QFileInfo f( s );
-      QString name = fullBaseName ( f);
-
-      if( name.left( 4 ) == "http" ) {
-         name = s.right( s.length() - 7);
-      }  else {
-         name = s;
-      }
-
-      name = name.right( name.length() - name.findRev( "\\", -1, TRUE) - 1 );
-
-      lnk.setName( name );
-      if( s.at( s.length() - 4) == '.') {// if this is probably a file
-         lnk.setFile( s );
-      } else { //if its a url
-         if( name.right( 1 ).find( '/' ) == -1) {
-            s += "/";
-         }
-         lnk.setFile( s );
-      }
-      lnk.setType( "audio/x-mpegurl" );
-
-      lnk.writeLink();
-      d->selectedFiles->addToSelection( lnk );
-   }
-
-   m3uList->close();
-   if(m3uList) delete m3uList;
-}
 
 /*
  writes current playlist to current m3u file */
@@ -1462,3 +1378,217 @@ void PlayListWidget::qcopReceive(const QCString &msg, const QByteArray &data) {
       QCopEnvelope h("QPE/Application/opieplayer", "raise()");
    }
 }
+
+/*
+reads m3u and shows files/urls to playlist widget */
+void PlayListWidget::readm3u( const QString &filename ) {
+   //    odebug << "read m3u filename " + filename << oendl;
+
+   Om3u *m3uList;
+   QString s, name;
+   m3uList = new Om3u( filename, IO_ReadOnly );
+   m3uList->readM3u();
+   DocLnk lnk;
+   for ( QStringList::ConstIterator it = m3uList->begin(); it != m3uList->end(); ++it ) {
+      s = *it;
+      //          odebug << "reading "+ s << oendl;
+      if(s.left(4)=="http") {
+         lnk.setName( s ); //sets file name
+         lnk.setIcon("opieplayer2/musicfile");
+
+         //          if(s.right(4) != '.' || s.right(5) != '.')
+         if(s.right(4) != '.' || s.right(5) != '.' )
+            if( s.right(1) != "/")
+               lnk.setFile( s+"/"); //if url with no extension
+            else
+               lnk.setFile( s ); //sets file name
+
+      }  else {
+         //               if( QFileInfo( s ).exists() ) {
+         lnk.setName( fullBaseName ( QFileInfo(s)));
+         //                 if(s.right(4) == '.')   {//if regular file
+         if(s.left(1) != "/")  {
+            //            odebug << "set link "+QFileInfo(filename).dirPath()+"/"+s << oendl;
+            lnk.setFile( QFileInfo(filename).dirPath()+"/"+s);
+            lnk.setIcon("SoundPlayer");
+         } else {
+            //            odebug << "set link2 "+s << oendl;
+            lnk.setFile( s);
+            lnk.setIcon("SoundPlayer");
+         }
+      }
+      d->selectedFiles->addToSelection( lnk );
+   }
+   Config config( "OpiePlayer" );
+   config.setGroup( "PlayList" );
+
+   config.writeEntry("CurrentPlaylist",filename);
+   config.write();
+   currentPlayList=filename;
+
+//    m3uList->write();
+   m3uList->close();
+   if(m3uList) delete m3uList;
+
+   d->selectedFiles->setSelectedItem( s);
+   setCaption(tr("OpiePlayer: ")+ fullBaseName ( QFileInfo(filename)));
+
+}
+
+/*
+reads pls and adds files/urls to playlist  */
+void PlayListWidget::readPls( const QString &filename )
+{
+   //    odebug << "pls filename is " + filename << oendl;
+   Om3u *m3uList;
+   QString s, name;
+   m3uList = new Om3u( filename, IO_ReadOnly );
+   m3uList->readPls();
+
+   for ( QStringList::ConstIterator it = m3uList->begin(); it != m3uList->end(); ++it ) {
+      s = *it;
+      //        s.replace( QRegExp( "%20" )," " );
+      DocLnk lnk( s );
+      QFileInfo f( s );
+      QString name = fullBaseName ( f);
+
+      if( name.left( 4 ) == "http" ) {
+         name = s.right( s.length() - 7);
+      }  else {
+         name = s;
+      }
+
+      name = name.right( name.length() - name.findRev( "\\", -1, TRUE) - 1 );
+
+      lnk.setName( name );
+      if( s.at( s.length() - 4) == '.') {// if this is probably a file
+         lnk.setFile( s );
+      } else { //if its a url
+         if( name.right( 1 ).find( '/' ) == -1) {
+            s += "/";
+         }
+         lnk.setFile( s );
+      }
+      lnk.setType( "audio/x-mpegurl" );
+
+      lnk.writeLink();
+      d->selectedFiles->addToSelection( lnk );
+   }
+
+   m3uList->close();
+   if(m3uList) delete m3uList;
+}
+
+bool PlayListWidget::readpodcast( const QString &filename )
+{
+   QStringList latestPodCast;
+   //download url
+   qWarning("podcast "+filename);
+   QFileInfo info(filename);
+   if (info.size() > 0) {
+      bool result = false;
+      // qWarning("parseDoc " + feedFile.name() );
+      QFile file(filename);
+      QXmlInputSource source( file);
+      QXmlSimpleReader reader;
+      //  reader.setFeature("http://xml.org/sax/features/namespaces", true);
+      //  reader.setFeature("http://xml.org/sax/features/namespace-prefixes", true);
+      //  reader.setFeature("http://trolltech.com/xml/features/report-whitespace-only-CharData", false);
+
+      reader.setContentHandler( &rssHandler);
+      reader.setErrorHandler( &rssHandler);
+      result = reader.parse( source);
+      if (!result) {
+         QMessageBox::critical(0, "Error", tr("<p>Error unable to parse file.</p>"));
+//            qWarning("Error unable to parse file\n%s", handler.errorMessage.local8Bit().data());
+         return false;
+      } else {
+         int size = rssHandler.getItems().size();
+          qWarning( rssHandler.getChannelInfo().join("\n"));
+         
+         for(int i = 0; i < size; i++) {
+            QList<QStringList> attributesList = rssHandler.getItems().at(i)->attributes;
+            QStringList *sList;
+            QStringList attList;
+            for(sList = attributesList.first(); sList !=0; sList = attributesList.next()) {
+               for( QStringList::Iterator it = sList->begin(); it != sList->end(); ++it ) {
+                  attList << (*it);
+               }
+               if(i == 0) { //this assumes that the latest is the first
+                  latestPodCast << attList[2]; //this is our mp3 url
+                  latestPodCast << rssHandler.getItems().at(i)->title;
+                  latestPodCast << rssHandler.getItems().at(i)->description;   
+                  latestPodCast << rssHandler.getItems().at(i)->pubdate;
+               }
+            }
+         }
+         QString s = latestPodCast[0];   //this is our mp3 url
+         
+//            http://www.davesipaq.com/podcast.xml
+         DocLnk lnk( s );
+         QFileInfo f( s );
+         QString name = fullBaseName ( f);
+
+         if( name.left( 4 ) == "http" ) {
+            name = s.right( s.length() - 7);
+         }  else {
+            name = s;
+         }
+
+         name = name.right( name.length() - name.findRev( "\\", -1, TRUE) - 1 );
+
+         lnk.setName( name );
+         if( s.at( s.length() - 4) == '.') {// if this is probably a file
+            lnk.setFile( s );
+         } else { //if its a url
+            if( name.right( 1 ).find( '/' ) == -1) {
+               s += "/";
+            }
+            lnk.setFile( s );
+         }
+         lnk.setType( "audio/x-mpegurl" );
+
+         lnk.writeLink();
+         d->selectedFiles->addToSelection( lnk );
+
+      }
+   } else {
+      QMessageBox::critical( 0, "Qtopia Rss", tr("<p>Sorry, could not find the requested document.</p>"));
+      return false;
+   }
+
+   qWarning( latestPodCast.join("\n"));
+
+   return true;
+}
+
+bool PlayListWidget::downloadPodcast(const QString &url)
+{
+   qWarning("download "+url);
+   QString localFile;
+   localFile = url;
+   localFile = localFile.mid(7, localFile.length()-7);
+  
+   localFile = localFile.replace(QRegExp("/"), "_");
+   localFile = localFile.replace(QRegExp("&"), "_");
+   localFile = localFile.replace(QRegExp("="), "_");
+   localFile = localFile.replace(QRegExp("\\?"), "_");
+   localFile = localFile.replace(QRegExp("@"), "_");
+   localFile = QDir::homeDirPath()+"/Settings/"+localFile;
+   
+#warning FIXME
+   QString cmd;
+   cmd = "wget ";
+   cmd +=" -O ";
+   cmd += localFile + " " + url;
+   qWarning(cmd);
+   system(cmd.latin1());   
+//   Process ipkg_status(QStringList()<< "wget" <<"-O" << localFile << url );
+   // QString out;
+//   bool r = ipkg_status.exec("",out);
+//   if(r)
+//      qWarning(out);
+   readpodcast(localFile);   
+   return true;
+}
+

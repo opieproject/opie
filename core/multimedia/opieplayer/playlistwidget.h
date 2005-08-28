@@ -29,6 +29,7 @@
 #include <qpe/qcopenvelope_qws.h>
 
 #include "om3u.h"
+#include "rssparser.h"
 /* #include <qtimer.h> */
 
 
@@ -74,16 +75,17 @@ protected:
         QPopupMenu *skinsMenu;
 /*     void contentsMousePressEvent( QMouseEvent * e ); */
 /*     void contentsMouseReleaseEvent( QMouseEvent * e ); */
-void keyReleaseEvent( QKeyEvent *e);
-void keyPressEvent( QKeyEvent *e);
+   void keyReleaseEvent( QKeyEvent *e);
+   void keyPressEvent( QKeyEvent *e);
 private:
+    RssParser rssHandler;
     int defaultSkinIndex;
     bool audioScan, videoScan; 
     void doBlank();
     void doUnblank();
     void readm3u(const QString &);
     void readPls(const QString &);
-
+    bool readpodcast(const QString&);
     
     void initializeStates();
     void readConfig( Config& cfg );
@@ -125,6 +127,8 @@ private slots:
     void playlistViewPressed( int, QListViewItem *, const QPoint&, int);
     void playSelected();
     void listDelete();
+
+   bool downloadPodcast(const QString &);
         
 protected slots:
 /*     void cancelMenuTimer(); */
