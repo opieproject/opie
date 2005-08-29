@@ -24,11 +24,10 @@ ConfigDlg::ConfigDlg( QWidget *parent, const char *name):
 	setWFlags ( WStyle_ContextHelp );
 
 	// Set Pics to Buttons and Tabs
-	m_upButton->setIconSet( QIconSet( Opie::Core::OResource::loadPixmap( "addressbook/up" ) ) );
-	m_downButton->setIconSet( QIconSet( Opie::Core::OResource::loadPixmap( "addressbook/down" ) ) );
-	m_addButton->setIconSet( QIconSet( Opie::Core::OResource::loadPixmap( "addressbook/add" ) ) );
-	m_removeButton->setIconSet( QIconSet( Opie::Core::OResource::loadPixmap( "addressbook/sub" ) ) );
-
+	m_upButton->setPixmap( Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ) );
+	m_downButton->setPixmap( Opie::Core::OResource::loadPixmap( "down", Opie::Core::OResource::SmallIcon ) );
+	m_addButton->setPixmap( Opie::Core::OResource::loadPixmap( "addressbook/add", Opie::Core::OResource::SmallIcon ) );
+	m_removeButton->setPixmap( Opie::Core::OResource::loadPixmap( "addressbook/sub", Opie::Core::OResource::SmallIcon ) );
 
 	// Get the translation maps between Field ID and translated strings
 	m_mapStrToID = Opie::OPimContactFields::trFieldsToId();

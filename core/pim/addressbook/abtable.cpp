@@ -608,12 +608,16 @@ void AbTable::rowHeightChanged( int row )
 ContactItem AbTable::findContactContact( const Opie::OPimContact &entry, int /* row */ )
 {
 
-	ContactItem item;
+	int iconsize = fontMetrics().height();
+	QImage icon;
 
+	ContactItem item;
 	item.value = "";
 
 	for ( QValueList<int>::ConstIterator it = intFields.begin();
 	      it != intFields.end(); ++it ) {
+		icon.reset();
+
 		switch ( *it ) {
 		default:
 			break;
@@ -629,12 +633,12 @@ ContactItem AbTable::findContactContact( const Opie::OPimContact &entry, int /* 
 		case Qtopia::DefaultEmail:
 			item.value = entry.defaultEmail();
 			if ( !item.value.isEmpty() )
-				item.icon = Opie::Core::OResource::loadPixmap( "addressbook/email" );
+				icon = Opie::Core::OResource::loadPixmap( "addressbook/email" );
 			break;
 		case Qtopia::Emails:
 			item.value = entry.emails();
 			if ( !item.value.isEmpty() )
-				item.icon = Opie::Core::OResource::loadPixmap( "addressbook/email" );
+				icon = Opie::Core::OResource::loadPixmap( "addressbook/email" );
 			break;
 		case Qtopia::HomeStreet:
 			item.value = entry.homeStreet();
@@ -654,22 +658,22 @@ ContactItem AbTable::findContactContact( const Opie::OPimContact &entry, int /* 
 		case Qtopia::HomePhone:
 			item.value = entry.homePhone();
 			if ( !item.value.isEmpty() )
-				item.icon = Opie::Core::OResource::loadPixmap( "addressbook/phonehome" );
+				icon = Opie::Core::OResource::loadPixmap( "addressbook/phonehome" );
 			break;
 		case Qtopia::HomeFax:
 			item.value = entry.homeFax();
 			if ( !item.value.isEmpty() )
-				item.icon = Opie::Core::OResource::loadPixmap( "addressbook/faxhome" );
+				icon = Opie::Core::OResource::loadPixmap( "addressbook/faxhome" );
 			break;
 		case Qtopia::HomeMobile:
 			item.value = entry.homeMobile();
 			if ( !item.value.isEmpty() )
-				item.icon = Opie::Core::OResource::loadPixmap( "addressbook/mobilehome" );
+				icon = Opie::Core::OResource::loadPixmap( "addressbook/mobilehome" );
 			break;
 		case Qtopia::HomeWebPage:
 			item.value = entry.homeWebpage();
 			if ( !item.value.isEmpty() )
-				item.icon = Opie::Core::OResource::loadPixmap( "addressbook/webpagehome" );
+				icon = Opie::Core::OResource::loadPixmap( "addressbook/webpagehome" );
 			break;
 		case Qtopia::Company:
 			item.value = entry.company();
@@ -689,7 +693,7 @@ ContactItem AbTable::findContactContact( const Opie::OPimContact &entry, int /* 
 		case Qtopia::BusinessWebPage:
 			item.value = entry.businessWebpage();
 			if ( !item.value.isEmpty() )
-				item.icon = Opie::Core::OResource::loadPixmap( "addressbook/webpagework" );
+				icon = Opie::Core::OResource::loadPixmap( "addressbook/webpagework" );
 			break;
 		case Qtopia::JobTitle:
 			item.value = entry.jobTitle();
@@ -703,17 +707,17 @@ ContactItem AbTable::findContactContact( const Opie::OPimContact &entry, int /* 
 		case Qtopia::BusinessPhone:
 			item.value = entry.businessPhone();
 			if ( !item.value.isEmpty() )
-				item.icon = Opie::Core::OResource::loadPixmap( "addressbook/phonework" );
+				icon = Opie::Core::OResource::loadPixmap( "addressbook/phonework" );
 			break;
 		case Qtopia::BusinessFax:
 			item.value = entry.businessFax();
 			if ( !item.value.isEmpty() )
-				item.icon = Opie::Core::OResource::loadPixmap( "addressbook/faxwork" );
+				icon = Opie::Core::OResource::loadPixmap( "addressbook/faxwork" );
 			break;
 		case Qtopia::BusinessMobile:
 			item.value = entry.businessMobile();
 			if ( !item.value.isEmpty() )
-				item.icon = Opie::Core::OResource::loadPixmap( "addressbook/mobilework" );
+				icon = Opie::Core::OResource::loadPixmap( "addressbook/mobilework" );
 			break;
 		case Qtopia::BusinessPager:
 			item.value = entry.businessPager();
@@ -753,6 +757,11 @@ ContactItem AbTable::findContactContact( const Opie::OPimContact &entry, int /* 
 			item.value = entry.notes();
 			break;
 		}
+
+		if ( !icon.isNull() ) {
+			item.icon = icon.smoothScale( iconsize, iconsize );
+		}
+
 		if ( !item.value.isEmpty() )
 			break;
 	}
