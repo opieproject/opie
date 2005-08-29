@@ -33,10 +33,10 @@
 #include <opie2/otaskbarapplet.h>
 #include <opie2/odevice.h>
 #include <opie2/odebug.h>
+#include <opie2/oresource.h>
 #include <qpe/applnk.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
-#include <qpe/resource.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -58,12 +58,12 @@ namespace OpieTooth {
     BluezApplet::BluezApplet( QWidget *parent, const char *name ) : QWidget( parent, name ) {
         setFixedHeight( AppLnk::smallIconSize() );
         setFixedWidth( AppLnk::smallIconSize() );
-        bluezOnPixmap = Resource::loadImage( "bluetoothapplet/bluezon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
-        bluezOffPixmap = Resource::loadImage( "bluetoothapplet/bluezoff" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
-        //bluezDiscoveryOnPixmap = Resource::loadImage( "bluetoothapplet/magglass" )smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize());
+        bluezOnPixmap = OResource::loadImage( "bluetoothapplet/bluezon", OResource::SmallIcon );
+        bluezOffPixmap = OResource::loadImage( "bluetoothapplet/bluezoff", Opie::Core::OResource::SmallIcon );
+        bluezDiscoveryOnPixmap = OResource::loadImage( "bluetoothapplet/bluezondiscovery", Opie::Core::OResource::SmallIcon );
         startTimer(4000);
         btDevice = 0;
-	btManager = 0;
+        btManager = 0;
         bluezactive = false;
         bluezDiscoveryActive = false;
 
@@ -270,13 +270,13 @@ int BluezApplet::position()
         odebug << "paint bluetooth pixmap" << oendl; 
 
         if (bluezactive > 0) {
-            p.drawPixmap( 0, 1,  bluezOnPixmap );
+            p.drawPixmap( 0, 0,  bluezOnPixmap );
         } else {
-            p.drawPixmap( 0, 1,  bluezOffPixmap );
+            p.drawPixmap( 0, 0,  bluezOffPixmap );
         }
 
         if (bluezDiscoveryActive > 0) {
-            p.drawPixmap( 0, 1,  bluezDiscoveryOnPixmap );
+            p.drawPixmap( 0, 0,  bluezDiscoveryOnPixmap );
         }
     }
 };

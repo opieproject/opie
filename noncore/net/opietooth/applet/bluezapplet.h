@@ -60,7 +60,7 @@ public slots:
 
     private:
         Device* btDevice;
-	Manager *btManager;
+        Manager *btManager;
         QPixmap bluezOnPixmap;
         QPixmap bluezOffPixmap;
         QPixmap bluezDiscoveryOnPixmap;
