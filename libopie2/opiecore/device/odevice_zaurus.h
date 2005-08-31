@@ -33,6 +33,7 @@
 #include "odevice_abstractmobiledevice.h"
 
 /* QT */
+#include <qfile.h>
 #include <qwindowsystem_qws.h>
 
 #ifndef ARRAY_SIZE
@@ -99,6 +100,10 @@ class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
   protected:
     virtual void init(const QString&);
     virtual void initButtons();
+    void initHingeSensor();
+
+  protected slots:
+    void hingeSensorTriggered();
 
   public:
     virtual bool setDisplayBrightness( int b );
@@ -128,6 +133,7 @@ class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     QString m_backlightdev;
     OLedState m_leds[1];
     bool m_embedix;
+    QFile m_hinge;
 };
 
 struct z_button {

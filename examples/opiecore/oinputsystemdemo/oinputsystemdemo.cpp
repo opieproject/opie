@@ -63,6 +63,8 @@ int main( int argc, char** argv )
         if ( dev->hasFeature( OInputDevice::Absolute ) ) features += "[ x ]"; else features += "[   ]";
         features += QString( "\nMiscellaneous:   " );
         if ( dev->hasFeature( OInputDevice::Miscellaneous ) ) features += "[ x ]"; else features += "[   ]";
+        features += QString( "\nSwitches:        " );
+        if ( dev->hasFeature( OInputDevice::Switches ) ) features += "[ x ]"; else features += "[   ]";
         features += QString( "\nLeds:            " );
         if ( dev->hasFeature( OInputDevice::Leds ) ) features += "[ x ]"; else features += "[   ]";
         features += QString( "\nSound:           " );
@@ -93,7 +95,9 @@ int main( int argc, char** argv )
         else odebug << "Left Mouse Button is _not_ being held." << oendl;
         
         odebug << "Global key mask: " << dev->globalKeyMask() << oendl;
-    
+        odebug << "Global switch mask: " << dev->globalSwitchMask() << oendl;
+
+
         ++it;
     }
 }

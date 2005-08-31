@@ -44,6 +44,8 @@
 #include <qcopchannel_qws.h>
 
 /* STD */
+#include <string.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <math.h>
 #include <stdlib.h>
@@ -304,8 +306,10 @@ void Zaurus::initButtons()
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC1000: // fallthrough
         case Model_Zaurus_SLC7x0:
-            if ( isQWS( ) ) {
-                addPreHandler(this); // hinge-sensor-handler
+            if ( isQWS( ) )
+            {   // setup hinge sensor stuff
+                addPreHandler(this);
+                initHingeSensor();
             }
             pz_buttons = z_buttons_c700;
             buttoncount = ARRAY_SIZE(z_buttons_c700);
@@ -662,13 +666,66 @@ OHingeStatus Zaurus::readHingeSensor() const
     }
     else
     {
-        // corgi keyboard is event source 0 in OZ kernel 2.6
+        /*
+         * The corgi keyboard is event source 0 in OZ kernel 2.6.
+         * Hinge status is reported via Input System Switchs 0 and 1 like that:
+         *
+         * -------------------------
+         * | SW0 | SW1 |    CASE   |
+         * |-----|-----|-----------|
+         * |  0     0    Landscape |
+         * |  0     1    Portrait  |
+         * |  1     0    Unknown   |
+         * |  1     1    Closed    |
+         * -------------------------
+         */
         OInputDevice* keyboard = OInputSystem::instance()->device( "event0" );
-        if ( keyboard && keyboard->isHeld( OInputDevice::Key_KP0 ) ) return CASE_LANDSCAPE;
-        else if ( keyboard && keyboard->isHeld( OInputDevice::Key_KP1 ) ) return CASE_PORTRAIT;
-        else if ( keyboard && keyboard->isHeld( OInputDevice::Key_KP2 ) ) return CASE_CLOSED;
-        qWarning("Zaurus::readHingeSensor() - couldn't compute hinge status!" );
-        return CASE_UNKNOWN;
+        bool switch0 = true;
+        bool switch1 = false;
+        if ( keyboard )
+        {
+            switch0 = keyboard->isHeld( OInputDevice::Switch0 );
+            switch1 = keyboard->isHeld( OInputDevice::Switch1 );
+        }
+        if ( switch0 )
+        {
+            return switch1 ? CASE_CLOSED : CASE_UNKNOWN;
+        }
+        else
+        {
+            return switch1 ? CASE_PORTRAIT : CASE_LANDSCAPE;
+        }
+    }
+}
+
+void Zaurus::initHingeSensor()
+{
+    if ( m_embedix ) return;
+
+    m_hinge.setName( "/dev/input/event0" );
+    if ( !m_hinge.open( IO_ReadOnly ) )
+    {
+        qDebug( "Zaurus::init() - Couldn't open /dev/input/event0 for read (%s)", strerror( errno ) );
+        return;
+    }
+
+    QSocketNotifier* sn = new QSocketNotifier( m_hinge.handle(), QSocketNotifier::Read, this );
+    QObject::connect( sn, SIGNAL(activated(int)), this, SLOT(hingeSensorTriggered()) );
+}
+
+void Zaurus::hingeSensorTriggered()
+{
+    qDebug( "Zaurus::hingeSensorTriggered() - got event" );
+    struct input_event e;
+    if ( ::read( m_hinge.handle(), &e, sizeof e ) > 0 )
+    {
+        qDebug( "Zaurus::hingeSensorTriggered() - event has type %d, code %d, value %d", e.type, e.code, e.value );
+        if ( e.type != EV_SW ) return;
+        if ( readHingeSensor() != CASE_UNKNOWN )
+        {
+            qDebug( "Zaurus::hingeSensorTriggered() - got valid switch event, calling rotateDefault()" );
+            QCopChannel::send( "QPE/Rotation", "rotateDefault()" );
+        }
     }
 }
 

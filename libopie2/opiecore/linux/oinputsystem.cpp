@@ -188,6 +188,22 @@ bool OInputDevice::isHeld( Key bit ) const
 }
 
 
+bool OInputDevice::isHeld( Switch bit ) const
+{
+    BIT_MASK( switches, SW_MAX );
+
+    if( ioctl( _fd, EVIOCGSW( sizeof(switches) ), switches ) < 0 )
+    {
+        perror( "EVIOCGSW" );
+        return false;
+    }
+    else
+    {
+        return BIT_TEST( switches, bit );
+    }
+}
+
+
 QString OInputDevice::globalKeyMask() const
 {
     BIT_MASK( keys, KEY_MAX );
@@ -205,6 +221,28 @@ QString OInputDevice::globalKeyMask() const
             if ( BIT_TEST( keys, i ) ) keymask.append( QString().sprintf( "%0d, ", i ) );
         }
         return keymask;
+
+    }
+}
+
+
+QString OInputDevice::globalSwitchMask() const
+{
+    BIT_MASK( switches, SW_MAX );
+
+    if( ioctl( _fd, EVIOCGSW( sizeof(switches) ), switches ) < 0 )
+    {
+        perror( "EVIOCGSW" );
+        return QString::null;
+    }
+    else
+    {
+        QString switchmask;
+        for ( int i = 0; i < SW_MAX; ++i )
+        {
+            if ( BIT_TEST( switches, i ) ) switchmask.append( QString().sprintf( "%0d, ", i ) );
+        }
+        return switchmask;
 
     }
 }

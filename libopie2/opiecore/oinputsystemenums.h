@@ -6,6 +6,7 @@
         Relative        = EV_REL,
         Absolute        = EV_ABS,
         Miscellaneous   = EV_MSC,
+        Switches        = EV_SW,
         Leds            = EV_LED,
         Sound           = EV_SND,
         AutoRepeat      = EV_REP,
@@ -32,6 +33,18 @@
         HOST            = BUS_HOST,
     };
     
+    enum Switch
+    {
+        Switch0          = SW_0,
+        Switch1          = SW_1,
+        Switch2          = SW_2,
+        Switch3          = SW_3,
+        Switch4          = SW_4,
+        Switch5          = SW_5,
+        Switch6          = SW_6,
+        Switch7          = SW_7,
+    };
+
     enum Key
     {
         Key_RESERVED		= 0,

@@ -94,7 +94,7 @@ class OInputDevice : public QObject
     OInputDevice( QObject* parent, const char* name = 0 );
     ~OInputDevice();
 
-    #include "oinputsystemenums.h"
+    #include <opie2/oinputsystemenums.h>
 
   public:
     /**
@@ -119,8 +119,17 @@ class OInputDevice : public QObject
      */
     bool isHeld( Key ) const;
     /**
+     * @returns whether a given @a Switch is being held at the moment
+     */
+    bool isHeld( Switch ) const;
+    /**
      * @internal
      * @returns a string containing a printable form of the global keymask
+     */
+    QString globalSwitchMask() const;
+    /**
+     * @internal
+     * @returns a string containing a printable form of the global switchmask
      */
     QString globalKeyMask() const;
     /**

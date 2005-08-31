@@ -397,6 +397,7 @@ void InputDevice::setInfo( const OInputDevice* dev )
     if ( dev->hasFeature( OInputDevice::Relative ) ) text += "Relative";
     if ( dev->hasFeature( OInputDevice::Absolute ) ) text += "Absolute";
     if ( dev->hasFeature( OInputDevice::Miscellaneous ) ) text += "Miscellaneous";
+    if ( dev->hasFeature( OInputDevice::Switches ) ) text += "Switches";
     if ( dev->hasFeature( OInputDevice::Leds ) ) text += "Leds";
     if ( dev->hasFeature( OInputDevice::Sound ) ) text += "Sound";
     if ( dev->hasFeature( OInputDevice::AutoRepeat ) ) text += "AutoRepeat";
