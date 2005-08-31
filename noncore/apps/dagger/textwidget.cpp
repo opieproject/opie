@@ -145,7 +145,7 @@ void TextWidget::setText()
         for ( int i = 0; i < m_numVerses; i++ )
         {
             QString key = ( QString ) m_module->KeyText();
-            QString verseStr = ( QString ) *m_module;
+            QString verseStr = QString::fromUtf8( *m_module );
 
             // Format current verse (adding chapter and/or book headings if necessary)
             int verse = static_cast<sword::VerseKey>(m_module->Key()).Verse();

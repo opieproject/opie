@@ -6,4 +6,4 @@ Depends: task-opie-minimal, libopiecore2, libopieui2
 Architecture: arm
 Maintainer: Dan Williams (drw@handhelds.org)
 Description: A Bible study program utilizing the Sword library.
-Version: 0.9.2$EXTRAVERSION
+Version: 0.9.3$EXTRAVERSION

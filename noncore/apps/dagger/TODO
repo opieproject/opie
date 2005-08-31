@@ -2,7 +2,7 @@
 /*
 /*                           Opie - Dagger
 /*                          ===============
-/*                           Version 0.9.2
+/*                           Version 0.9.3
 /*
 /*                   A Bible study/reader application
 /*
@@ -17,9 +17,8 @@ To-do for Opie-Dagger - August, 2005
 ======================
 
 1. Implement module installation
-2. Fix support for other languages
-3. Fix display sleep prevention
-4. Implement footnote cross-referencing
+2. Fix display sleep prevention
+3. Implement footnote cross-referencing
 
 ======================
 =   Future releases  =
