@@ -146,7 +146,7 @@ void CpuCategory::populate()
     QFile cpuinfofile( "/proc/cpuinfo" );
     if ( !cpuinfofile.exists() || !cpuinfofile.open( IO_ReadOnly ) )
     {
-        new CpuDevice( this, "ERROR: /proc/cpuinfo not found or unaccessible" );
+        new CpuDevice( this, "(no cpu found)" );
         return;
     }
     QTextStream cpuinfo( &cpuinfofile );
@@ -232,7 +232,7 @@ void UsbCategory::populate()
     QFile usbinfofile( "/proc/bus/usb/devices" );
     if ( !usbinfofile.exists() || !usbinfofile.open( IO_ReadOnly ) )
     {
-        new UsbDevice( this, "ERROR: /proc/bus/usb/devices not found or unaccessible" );
+        new UsbDevice( this, "(no USB found)" );
         return;
     }
     QTextStream usbinfo( &usbinfofile );
