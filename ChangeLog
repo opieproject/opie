@@ -65,7 +65,8 @@
 	* libopiecore: Add support for the new Linux Inputsystem Switches type [necessary for auto rotation in 2.6.13] (mickeyl)
 	* Remove assumptions about default gfx driver ("Transformed") all over the place (mteira,mickeyl)
 	* Fix / Optimize number of scanned directories (ljp)
-	
+	* Use five point mouse calibration to make calibrated mouse drivers work on newer Zaurii (rp,mickeyl)
+
 2005-03-25	Opie 1.2.0
 
 	Fixed Bugs

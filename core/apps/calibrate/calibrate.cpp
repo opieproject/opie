@@ -124,7 +124,7 @@ bool Calibrate::sanityCheck()
 	QPoint br = cd.devPoints[QWSPointerCalibrationData::BottomRight];
 
 	// not needed anywhere .. just calculate it, so it's there
-	cd.devPoints[QWSPointerCalibrationData::Center] = QRect( tl, br ).normalize().center();
+	//cd.devPoints[QWSPointerCalibrationData::Center] = QRect( tl, br ).normalize().center();
 
 	int dlx = QABS( bl. x ( ) - tl. x ( ));
 	int dly = QABS( bl. y ( ) - tl. y ( ));
@@ -175,7 +175,7 @@ void Calibrate::moveCrosshair( QPoint pt )
 void Calibrate::paintEvent( QPaintEvent * )
 {
 	QPainter p( this );
-	int y = height() / 3;
+	int y = height() / 2;
 
 	p.drawText( 0, y + height() / 8, width(), height() - y, AlignHCenter,
 	            tr( "Touch the crosshairs firmly and\n"
@@ -223,7 +223,7 @@ void Calibrate::mouseReleaseEvent( QMouseEvent * )
 	bool doMove = TRUE;
 
 	cd.devPoints[ location ] = penPos;
-	if ( location < QWSPointerCalibrationData::TopRight ) {
+	if ( location < QWSPointerCalibrationData::Center ) {
 		location = (QWSPointerCalibrationData::Location) ( int( location ) + 1 );
 	}
 	else {
