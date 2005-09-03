@@ -97,6 +97,8 @@ namespace Internal {
 
 class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
 {
+  Q_OBJECT
+
   protected:
     virtual void init(const QString&);
     virtual void initButtons();
@@ -104,6 +106,7 @@ class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
 
   protected slots:
     void hingeSensorTriggered();
+    void systemMessage( const QCString &msg, const QByteArray & );
 
   public:
     virtual bool setDisplayBrightness( int b );

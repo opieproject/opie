@@ -221,7 +221,7 @@ struct default_button {
  * like the Hardware used, LEDs, the Base Distribution and
  * hardware key mappings.
  *
- * @short A small class for device specefic options
+ * @short A small class for device specific options
  * @see QObject
  * @author Robert Griebl
  * @version 1.0

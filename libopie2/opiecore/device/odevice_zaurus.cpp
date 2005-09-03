@@ -157,6 +157,7 @@ struct z_button z_buttons_6000 [] = {
 
 void Zaurus::init(const QString& cpu_info)
 {
+    qDebug( "Zaurus::init()" );
     // Set the time to wait until the system is really suspended
     // the delta between apm --suspend and sleeping
     setAPMTimeOut( 15000 );
@@ -259,6 +260,7 @@ void Zaurus::init(const QString& cpu_info)
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC1000: // fallthrough
         case Model_Zaurus_SLC7x0:
+            initHingeSensor();
             d->m_rotation = rotation();
             d->m_direction = direction();
             break;
@@ -289,6 +291,7 @@ void Zaurus::init(const QString& cpu_info)
 
 void Zaurus::initButtons()
 {
+    qDebug( "Zaurus::initButtons()" );
     if ( d->m_buttons )
         return;
 
@@ -307,9 +310,8 @@ void Zaurus::initButtons()
         case Model_Zaurus_SLC1000: // fallthrough
         case Model_Zaurus_SLC7x0:
             if ( isQWS( ) )
-            {   // setup hinge sensor stuff
+            {
                 addPreHandler(this);
-                initHingeSensor();
             }
             pz_buttons = z_buttons_c700;
             buttoncount = ARRAY_SIZE(z_buttons_c700);
@@ -601,6 +603,7 @@ Transformation Zaurus::rotation() const
             break;
     }
 
+    qDebug( "Zaurus::rotation() - returning '%d'", rot );
     return rot;
 }
 ODirection Zaurus::direction() const
@@ -705,12 +708,14 @@ void Zaurus::initHingeSensor()
     m_hinge.setName( "/dev/input/event0" );
     if ( !m_hinge.open( IO_ReadOnly ) )
     {
-        qDebug( "Zaurus::init() - Couldn't open /dev/input/event0 for read (%s)", strerror( errno ) );
+        qWarning( "Zaurus::init() - Couldn't open /dev/input/event0 for read (%s)", strerror( errno ) );
         return;
     }
 
     QSocketNotifier* sn = new QSocketNotifier( m_hinge.handle(), QSocketNotifier::Read, this );
     QObject::connect( sn, SIGNAL(activated(int)), this, SLOT(hingeSensorTriggered()) );
+
+    qDebug( "Zaurus::init() - Hinge Sensor Initialization successfully completed" );
 }
 
 void Zaurus::hingeSensorTriggered()
@@ -726,6 +731,13 @@ void Zaurus::hingeSensorTriggered()
             qDebug( "Zaurus::hingeSensorTriggered() - got valid switch event, calling rotateDefault()" );
             QCopChannel::send( "QPE/Rotation", "rotateDefault()" );
         }
+    }
+}
+
+void Zaurus::systemMessage( const QCString &msg, const QByteArray & )
+{
+    if ( msg == "deviceButtonMappingChanged()" ) {
+        reloadButtonMapping();
     }
 }
 
