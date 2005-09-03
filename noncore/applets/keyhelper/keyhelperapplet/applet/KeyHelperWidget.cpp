@@ -294,7 +294,7 @@ void KeyHelperWidget::initDebugLevel()
     setDebugLevel(level);
 }
 
-void KeyHelperWidget::setDebugLevel(int /*level*/)
+void KeyHelperWidget::setDebugLevel(int level)
 {
 #ifdef QT_QWS_EBX
     static bool noDebug = true;
