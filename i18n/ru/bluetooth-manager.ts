@@ -27,15 +27,15 @@
     </message>
     <message>
         <source>rescan sevices</source>
-        <translation>просканировать сервисы</translation>
+        <translation type="obsolete">просканировать сервисы</translation>
     </message>
     <message>
         <source>to group</source>
-        <translation>в группу</translation>
+        <translation type="obsolete">в группу</translation>
     </message>
     <message>
         <source>delete</source>
-        <translation>удалить</translation>
+        <translation type="obsolete">удалить</translation>
     </message>
     <message>
         <source>Test1:</source>
@@ -48,6 +48,14 @@
     <message>
         <source>No connections found</source>
         <translation>Не найдено соединений</translation>
+    </message>
+    <message>
+        <source>&amp;Rescan services</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -70,7 +78,7 @@
     </message>
     <message>
         <source>Scan for Devices</source>
-        <translation>Просканировать устройства</translation>
+        <translation type="obsolete">Просканировать устройства</translation>
     </message>
     <message>
         <source>Connections</source>
@@ -118,7 +126,7 @@
     </message>
     <message>
         <source>Rfcomm Bind Table</source>
-        <translation>Таблица привязок Rfcomm</translation>
+        <translation type="obsolete">Таблица привязок Rfcomm</translation>
     </message>
     <message>
         <source>Status</source>
@@ -132,6 +140,14 @@
         <source>Bluetooth Basic Config</source>
         <translation>Основная настройка Bluetooth</translation>
     </message>
+    <message>
+        <source>&amp;Rescan Devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit RFCOMM Bind Table</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DeviceDialog</name>
@@ -141,7 +157,7 @@
     </message>
     <message>
         <source>Devicename</source>
-        <translation>Имя устройства</translation>
+        <translation type="obsolete">Имя устройства</translation>
     </message>
     <message>
         <source>Services</source>
@@ -149,7 +165,7 @@
     </message>
     <message>
         <source>change settings</source>
-        <translation>изменить настройки</translation>
+        <translation type="obsolete">изменить настройки</translation>
     </message>
     <message>
         <source>active</source>
@@ -166,13 +182,13 @@
     <message>
         <source>Change device 
 name</source>
-        <translation>Изменить имя
+        <translation type="obsolete">Изменить имя
 устройства</translation>
     </message>
     <message>
         <source>Default PIN 
 Code</source>
-        <translation>PIN-код по
+        <translation type="obsolete">PIN-код по
 умолчанию</translation>
     </message>
     <message>
@@ -182,6 +198,18 @@ Code</source>
     <message>
         <source>TextLabel9</source>
         <translation>ТекстМетка9</translation>
+    </message>
+    <message>
+        <source>&amp;Apply Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default PIN Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change device name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

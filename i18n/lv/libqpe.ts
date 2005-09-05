@@ -675,7 +675,7 @@ Atbrīvojat nedaudz atmiņas un mēģiniet vēl.</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation> </translation>
+        <translation></translation>
     </message>
     <message>
         <source>Last Name</source>
@@ -952,7 +952,7 @@ please install citytime.</source>
     <name>TimerReceiverObject</name>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nepietiek Vietas</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.

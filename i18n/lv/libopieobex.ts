@@ -22,35 +22,35 @@
     <name>OpieObex::SendWidget</name>
     <message>
         <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;&lt;h1&gt;Sūtu:&lt;/h1&gt;&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;&lt;h1&gt;Sūtu:&lt;/h1&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>Darīts</translation>
+        <translation type="obsolete">Darīts</translation>
     </message>
     <message>
         <source>IrDa is not enabled!</source>
-        <translation>IrDa nav ieslēgts!</translation>
+        <translation type="obsolete">IrDa nav ieslēgts!</translation>
     </message>
     <message>
         <source>Searching for IrDa Devices.</source>
-        <translation>Meklēju IrDa Iekārtas.</translation>
+        <translation type="obsolete">Meklēju IrDa Iekārtas.</translation>
     </message>
     <message>
         <source>Bluetooth is not available</source>
-        <translation>Bluetooth nav pieejams</translation>
+        <translation type="obsolete">Bluetooth nav pieejams</translation>
     </message>
     <message>
         <source>Searching for bluetooth Devices.</source>
-        <translation>Meklēju bluetooth Iekārtas.</translation>
+        <translation type="obsolete">Meklēju bluetooth Iekārtas.</translation>
     </message>
     <message>
         <source>Scheduling for beam.</source>
-        <translation>Piesaku bīmošanai.</translation>
+        <translation type="obsolete">Piesaku bīmošanai.</translation>
     </message>
     <message>
         <source>Click to beam</source>
-        <translation>Klikšķiniet lai bīmotu</translation>
+        <translation type="obsolete">Klikšķiniet lai bīmotu</translation>
     </message>
     <message>
         <source>Sent</source>
@@ -66,11 +66,74 @@
     </message>
     <message>
         <source>Search again for IrDa.</source>
-        <translation>Meklējam IrDa atkārtoti.</translation>
+        <translation type="obsolete">Meklējam IrDa atkārtoti.</translation>
     </message>
     <message>
         <source>Start sending</source>
         <translation>Sākt sūtīšanu</translation>
+    </message>
+    <message>
+        <source>ready.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>error :(</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>complete.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>searching...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>obexSendBase</name>
+    <message>
+        <source>Send via OBEX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sending:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receiver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rescan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

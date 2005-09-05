@@ -38,11 +38,11 @@
     </message>
     <message>
         <source>Searchmethods</source>
-        <translation>Zoekmethoden</translation>
+        <translation type="obsolete">Zoekmethoden</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation>&amp;Hoofdlettergevoelig</translation>
+        <translation type="obsolete">&amp;Hoofdlettergevoelig</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -71,6 +71,14 @@
     <message>
         <source>Opie-Dictionary</source>
         <translation>Opie-Woordenboek</translation>
+    </message>
+    <message>
+        <source>Search methods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

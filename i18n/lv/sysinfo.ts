@@ -113,19 +113,19 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation>Aplikācijas CPU lietojums (%)</translation>
+        <translation type="obsolete">Aplikācijas CPU lietojums (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation>Sistēmas CPU lietojums (%)</translation>
+        <translation type="obsolete">Sistēmas CPU lietojums (%)</translation>
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation>Šī lapa rāda cik daudz tiek izmantots iekārtas procesors.</translation>
+        <translation type="obsolete">Šī lapa rāda cik daudz tiek izmantots iekārtas procesors.</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation>Tips:</translation>
+        <translation type="obsolete">Tips:</translation>
     </message>
 </context>
 <context>
@@ -237,6 +237,17 @@ Vai tiešām vēlaties palaist
     </message>
 </context>
 <context>
+    <name>Opie::Ui</name>
+    <message>
+        <source>My Computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a list of all the devices currently recognized on this device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
@@ -301,7 +312,7 @@ to this process?</source>
     </message>
     <message>
         <source>CPU</source>
-        <translation>CPU</translation>
+        <translation type="obsolete">CPU</translation>
     </message>
     <message>
         <source>Process</source>
@@ -321,6 +332,10 @@ to this process?</source>
     </message>
     <message>
         <source>Syslog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Devices</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

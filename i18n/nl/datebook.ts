@@ -533,7 +533,7 @@ Weekdagen</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation>minuten</translation>
+        <translation type="obsolete">minuten</translation>
     </message>
     <message>
         <source>Silent</source>
@@ -554,6 +554,18 @@ Weekdagen</translation>
     <message>
         <source>Note...</source>
         <translation>Opmerking...</translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">dagen</translation>
     </message>
 </context>
 <context>

@@ -27,15 +27,15 @@
     </message>
     <message>
         <source>rescan sevices</source>
-        <translation>Herzoek naar diensten</translation>
+        <translation type="obsolete">Herzoek naar diensten</translation>
     </message>
     <message>
         <source>to group</source>
-        <translation>aan groep</translation>
+        <translation type="obsolete">aan groep</translation>
     </message>
     <message>
         <source>delete</source>
-        <translation>verwijder</translation>
+        <translation type="obsolete">verwijder</translation>
     </message>
     <message>
         <source>Test1:</source>
@@ -48,6 +48,14 @@
     <message>
         <source>No connections found</source>
         <translation>Geen verbindingen gevonden</translation>
+    </message>
+    <message>
+        <source>&amp;Rescan services</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -70,7 +78,7 @@
     </message>
     <message>
         <source>Scan for Devices</source>
-        <translation>Zoek naar apparaten</translation>
+        <translation type="obsolete">Zoek naar apparaten</translation>
     </message>
     <message>
         <source>Connections</source>
@@ -118,7 +126,7 @@
     </message>
     <message>
         <source>Rfcomm Bind Table</source>
-        <translation>Rfcomm Koppelingstabel</translation>
+        <translation type="obsolete">Rfcomm Koppelingstabel</translation>
     </message>
     <message>
         <source>Status</source>
@@ -132,6 +140,14 @@
         <source>Bluetooth Basic Config</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&amp;Rescan Devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit RFCOMM Bind Table</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DeviceDialog</name>
@@ -141,7 +157,7 @@
     </message>
     <message>
         <source>Devicename</source>
-        <translation>Apparaatnaam</translation>
+        <translation type="obsolete">Apparaatnaam</translation>
     </message>
     <message>
         <source>Services</source>
@@ -149,7 +165,7 @@
     </message>
     <message>
         <source>change settings</source>
-        <translation>verander instellingen</translation>
+        <translation type="obsolete">verander instellingen</translation>
     </message>
     <message>
         <source>active</source>
@@ -166,13 +182,13 @@
     <message>
         <source>Change device 
 name</source>
-        <translation>Verander
+        <translation type="obsolete">Verander
 apparaatnaam</translation>
     </message>
     <message>
         <source>Default PIN 
 Code</source>
-        <translation>Standaard
+        <translation type="obsolete">Standaard
 PIN code</translation>
     </message>
     <message>
@@ -182,6 +198,18 @@ PIN code</translation>
     <message>
         <source>TextLabel9</source>
         <translation>Tekstlabel9</translation>
+    </message>
+    <message>
+        <source>&amp;Apply Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default PIN Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change device name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

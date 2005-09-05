@@ -40,12 +40,16 @@ Programm zu starten</translation>
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation>Heute von Maximilian Reiß</translation>
+        <translation type="obsolete">Heute von Maximilian Reiß</translation>
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
         <translation>Klicken Sie hier, um den Konfigurations-
 dialog zu starten</translation>
+    </message>
+    <message>
+        <source>Today by Maximilian Rei&#xef;&#xbf;&#xbd;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

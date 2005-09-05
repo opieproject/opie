@@ -162,5 +162,9 @@ Speicher wird wie folgt eingeteilt:
         <source>2 Mb,4 Mb,6 Mb,8 Mb,16 Mb,32 Mb,64 Mb</source>
         <translation>2 MB, 4 MB, 6 MB, 8 MB, 16 MB, 32 MB, 64 MB</translation>
     </message>
+    <message>
+        <source>Swap disabled in kernel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

@@ -14,6 +14,10 @@
         <source>All day</source>
         <translation>Tutto il giorno</translation>
     </message>
+    <message>
+        <source>(Unknown)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DatebookPluginConfigBase</name>
@@ -68,6 +72,10 @@
     <message>
         <source>How many more days</source>
         <translation>Quanti altri giorni</translation>
+    </message>
+    <message>
+        <source>Clip line after X chars</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

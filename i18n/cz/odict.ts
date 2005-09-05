@@ -58,11 +58,11 @@
     </message>
     <message>
         <source>Searchmethods</source>
-        <translation>Metody vyhledávání</translation>
+        <translation type="obsolete">Metody vyhledávání</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation>Rozlišov&amp;at velikost</translation>
+        <translation type="obsolete">Rozlišov&amp;at velikost</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -71,6 +71,14 @@
     <message>
         <source>Parameter</source>
         <translation>Parametr</translation>
+    </message>
+    <message>
+        <source>Search methods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

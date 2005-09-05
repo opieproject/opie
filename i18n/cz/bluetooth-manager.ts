@@ -27,15 +27,15 @@
     </message>
     <message>
         <source>rescan sevices</source>
-        <translation>prohledat služby</translation>
+        <translation type="obsolete">prohledat služby</translation>
     </message>
     <message>
         <source>to group</source>
-        <translation>do skupiny</translation>
+        <translation type="obsolete">do skupiny</translation>
     </message>
     <message>
         <source>delete</source>
-        <translation>smazat</translation>
+        <translation type="obsolete">smazat</translation>
     </message>
     <message>
         <source>Test1:</source>
@@ -48,6 +48,14 @@
     <message>
         <source>No connections found</source>
         <translation>Žádná připojení nenalezena</translation>
+    </message>
+    <message>
+        <source>&amp;Rescan services</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -70,7 +78,7 @@
     </message>
     <message>
         <source>Scan for Devices</source>
-        <translation>Hledat zařízení</translation>
+        <translation type="obsolete">Hledat zařízení</translation>
     </message>
     <message>
         <source>Connections</source>
@@ -118,7 +126,7 @@
     </message>
     <message>
         <source>Rfcomm Bind Table</source>
-        <translation>Tabulka spojených Rfcomm</translation>
+        <translation type="obsolete">Tabulka spojených Rfcomm</translation>
     </message>
     <message>
         <source>Status</source>
@@ -132,6 +140,14 @@
         <source>Bluetooth Basic Config</source>
         <translation>Základní konfigurace bluetooth</translation>
     </message>
+    <message>
+        <source>&amp;Rescan Devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit RFCOMM Bind Table</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DeviceDialog</name>
@@ -141,7 +157,7 @@
     </message>
     <message>
         <source>Devicename</source>
-        <translation>Jméno zařízení</translation>
+        <translation type="obsolete">Jméno zařízení</translation>
     </message>
     <message>
         <source>Services</source>
@@ -149,7 +165,7 @@
     </message>
     <message>
         <source>change settings</source>
-        <translation>změnit nastavení</translation>
+        <translation type="obsolete">změnit nastavení</translation>
     </message>
     <message>
         <source>active</source>
@@ -166,13 +182,13 @@
     <message>
         <source>Change device 
 name</source>
-        <translation>Změna jména
+        <translation type="obsolete">Změna jména
 zařízení</translation>
     </message>
     <message>
         <source>Default PIN 
 Code</source>
-        <translation>Výchozí PIN</translation>
+        <translation type="obsolete">Výchozí PIN</translation>
     </message>
     <message>
         <source>Information</source>
@@ -181,6 +197,18 @@ Code</source>
     <message>
         <source>TextLabel9</source>
         <translation>TextLabel9</translation>
+    </message>
+    <message>
+        <source>&amp;Apply Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default PIN Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change device name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -27,15 +27,15 @@
     </message>
     <message>
         <source>rescan sevices</source>
-        <translation>pārskanēt servisus</translation>
+        <translation type="obsolete">pārskanēt servisus</translation>
     </message>
     <message>
         <source>to group</source>
-        <translation>uz grupu</translation>
+        <translation type="obsolete">uz grupu</translation>
     </message>
     <message>
         <source>delete</source>
-        <translation>dzēst</translation>
+        <translation type="obsolete">dzēst</translation>
     </message>
     <message>
         <source>Test1:</source>
@@ -48,6 +48,14 @@
     <message>
         <source>No connections found</source>
         <translation>Nav atrastas konekcijas</translation>
+    </message>
+    <message>
+        <source>&amp;Rescan services</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -70,7 +78,7 @@
     </message>
     <message>
         <source>Scan for Devices</source>
-        <translation>Skanēt Iekārtas</translation>
+        <translation type="obsolete">Skanēt Iekārtas</translation>
     </message>
     <message>
         <source>Connections</source>
@@ -118,7 +126,7 @@
     </message>
     <message>
         <source>Rfcomm Bind Table</source>
-        <translation>Rfcomm Saistību Tabula</translation>
+        <translation type="obsolete">Rfcomm Saistību Tabula</translation>
     </message>
     <message>
         <source>Status</source>
@@ -132,6 +140,14 @@
         <source>Bluetooth Basic Config</source>
         <translation>Bluetooth Bāzes Konfigurācija</translation>
     </message>
+    <message>
+        <source>&amp;Rescan Devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit RFCOMM Bind Table</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DeviceDialog</name>
@@ -141,7 +157,7 @@
     </message>
     <message>
         <source>Devicename</source>
-        <translation>Iekārtasvārds</translation>
+        <translation type="obsolete">Iekārtasvārds</translation>
     </message>
     <message>
         <source>Services</source>
@@ -149,7 +165,7 @@
     </message>
     <message>
         <source>change settings</source>
-        <translation>mainīt uzstādījumus</translation>
+        <translation type="obsolete">mainīt uzstādījumus</translation>
     </message>
     <message>
         <source>active</source>
@@ -166,12 +182,12 @@
     <message>
         <source>Change device 
 name</source>
-        <translation>Mainīt iekārtas vārdu</translation>
+        <translation type="obsolete">Mainīt iekārtas vārdu</translation>
     </message>
     <message>
         <source>Default PIN 
 Code</source>
-        <translation>Noklusētais PIN 
+        <translation type="obsolete">Noklusētais PIN 
 Kods</translation>
     </message>
     <message>
@@ -181,6 +197,18 @@ Kods</translation>
     <message>
         <source>TextLabel9</source>
         <translation>TextEtiķete9</translation>
+    </message>
+    <message>
+        <source>&amp;Apply Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default PIN Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change device name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

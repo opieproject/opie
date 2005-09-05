@@ -38,11 +38,11 @@
     </message>
     <message>
         <source>Searchmethods</source>
-        <translation>Métodos de Procura</translation>
+        <translation type="obsolete">Métodos de Procura</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation>&amp;Sensível a letra grande/pequena</translation>
+        <translation type="obsolete">&amp;Sensível a letra grande/pequena</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -71,6 +71,14 @@
     <message>
         <source>Opie-Dictionary</source>
         <translation>Dicionário Opie</translation>
+    </message>
+    <message>
+        <source>Search methods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

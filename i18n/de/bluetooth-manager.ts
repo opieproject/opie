@@ -27,15 +27,15 @@
     </message>
     <message>
         <source>rescan sevices</source>
-        <translation>Dienste neu scannen</translation>
+        <translation type="obsolete">Dienste neu scannen</translation>
     </message>
     <message>
         <source>to group</source>
-        <translation>an Gruppe </translation>
+        <translation type="obsolete">an Gruppe </translation>
     </message>
     <message>
         <source>delete</source>
-        <translation>löschen</translation>
+        <translation type="obsolete">löschen</translation>
     </message>
     <message>
         <source>Test1:</source>
@@ -48,6 +48,14 @@
     <message>
         <source>No connections found</source>
         <translation>Keine Verbindung gefunden</translation>
+    </message>
+    <message>
+        <source>&amp;Rescan services</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Delete</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -70,7 +78,7 @@
     </message>
     <message>
         <source>Scan for Devices</source>
-        <translation>Nach Geräten suchen </translation>
+        <translation type="obsolete">Nach Geräten suchen </translation>
     </message>
     <message>
         <source>Connections</source>
@@ -118,7 +126,7 @@
     </message>
     <message>
         <source>Rfcomm Bind Table</source>
-        <translation>Rfcomm Bind Table</translation>
+        <translation type="obsolete">Rfcomm Bind Table</translation>
     </message>
     <message>
         <source>Status</source>
@@ -132,6 +140,14 @@
         <source>Bluetooth Basic Config</source>
         <translation>Bluetooth Basiskonfiguration</translation>
     </message>
+    <message>
+        <source>&amp;Rescan Devices</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit RFCOMM Bind Table</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DeviceDialog</name>
@@ -141,7 +157,7 @@
     </message>
     <message>
         <source>Devicename</source>
-        <translation>Gerätename</translation>
+        <translation type="obsolete">Gerätename</translation>
     </message>
     <message>
         <source>Services</source>
@@ -149,7 +165,7 @@
     </message>
     <message>
         <source>change settings</source>
-        <translation>Einstellungen ändern</translation>
+        <translation type="obsolete">Einstellungen ändern</translation>
     </message>
     <message>
         <source>active</source>
@@ -166,13 +182,13 @@
     <message>
         <source>Change device 
 name</source>
-        <translation>Gerätename
+        <translation type="obsolete">Gerätename
 ändern</translation>
     </message>
     <message>
         <source>Default PIN 
 Code</source>
-        <translation>Default PIN
+        <translation type="obsolete">Default PIN
 Code</translation>
     </message>
     <message>
@@ -182,6 +198,18 @@ Code</translation>
     <message>
         <source>TextLabel9</source>
         <translation>TextLabel9</translation>
+    </message>
+    <message>
+        <source>&amp;Apply Changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default PIN Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change device name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

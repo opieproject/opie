@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Name of screenshot </source>
-        <translation>Naam van Screenshot</translation>
+        <translation type="obsolete">Naam van Screenshot</translation>
     </message>
     <message>
         <source>Success</source>

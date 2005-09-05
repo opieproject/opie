@@ -22,35 +22,35 @@
     <name>OpieObex::SendWidget</name>
     <message>
         <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;&lt;h1&gt;Wysyłanie:&lt;/h1&gt;&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;&lt;h1&gt;Wysyłanie:&lt;/h1&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>Gotowe</translation>
+        <translation type="obsolete">Gotowe</translation>
     </message>
     <message>
         <source>IrDa is not enabled!</source>
-        <translation>IrDa nie jest włączona!</translation>
+        <translation type="obsolete">IrDa nie jest włączona!</translation>
     </message>
     <message>
         <source>Searching for IrDa Devices.</source>
-        <translation>Szukanie urządzeń IrDa.</translation>
+        <translation type="obsolete">Szukanie urządzeń IrDa.</translation>
     </message>
     <message>
         <source>Bluetooth is not available</source>
-        <translation>Bluetooth niedostępny</translation>
+        <translation type="obsolete">Bluetooth niedostępny</translation>
     </message>
     <message>
         <source>Searching for bluetooth Devices.</source>
-        <translation>Szukanie urządzeń bluetooth.</translation>
+        <translation type="obsolete">Szukanie urządzeń bluetooth.</translation>
     </message>
     <message>
         <source>Scheduling for beam.</source>
-        <translation>Wstawianie do emisji.</translation>
+        <translation type="obsolete">Wstawianie do emisji.</translation>
     </message>
     <message>
         <source>Click to beam</source>
-        <translation>Kliknij by emitować</translation>
+        <translation type="obsolete">Kliknij by emitować</translation>
     </message>
     <message>
         <source>Sent</source>
@@ -66,11 +66,74 @@
     </message>
     <message>
         <source>Search again for IrDa.</source>
-        <translation>Jeszcze raz szukaj IrDa.</translation>
+        <translation type="obsolete">Jeszcze raz szukaj IrDa.</translation>
     </message>
     <message>
         <source>Start sending</source>
         <translation>Rozpocznij wysyłanie</translation>
+    </message>
+    <message>
+        <source>ready.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>error :(</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>complete.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>searching...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>obexSendBase</name>
+    <message>
+        <source>Send via OBEX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sending:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receiver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rescan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

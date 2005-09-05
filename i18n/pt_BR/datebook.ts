@@ -492,7 +492,7 @@ longa que o intervalo entre repetições.</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation> minutos</translation>
+        <translation type="obsolete"> minutos</translation>
     </message>
     <message>
         <source>Dinner</source>
@@ -553,6 +553,18 @@ longa que o intervalo entre repetições.</translation>
     <message>
         <source>Start time</source>
         <translation>Hora Inicial</translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">dias</translation>
     </message>
 </context>
 <context>

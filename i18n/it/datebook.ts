@@ -532,7 +532,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation> minuti</translation>
+        <translation type="obsolete"> minuti</translation>
     </message>
     <message>
         <source>Silent</source>
@@ -553,6 +553,18 @@ Uscire comunque?</translation>
     <message>
         <source>Note...</source>
         <translation>Note...</translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">giorni</translation>
     </message>
 </context>
 <context>

@@ -113,19 +113,19 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation>應用程式CPU使用率 (%)</translation>
+        <translation type="obsolete">應用程式CPU使用率 (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation>系統CPU使用率</translation>
+        <translation type="obsolete">系統CPU使用率</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation>型號</translation>
+        <translation type="obsolete">型號</translation>
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation>本頁顯示處理器資源消耗程度</translation>
+        <translation type="obsolete">本頁顯示處理器資源消耗程度</translation>
     </message>
 </context>
 <context>
@@ -229,6 +229,17 @@ Click and hold on a module to see additional information about the module, or to
     </message>
 </context>
 <context>
+    <name>Opie::Ui</name>
+    <message>
+        <source>My Computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a list of all the devices currently recognized on this device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
@@ -292,7 +303,7 @@ to this process?</source>
     </message>
     <message>
         <source>CPU</source>
-        <translation>中央處理器</translation>
+        <translation type="obsolete">中央處理器</translation>
     </message>
     <message>
         <source>Process</source>
@@ -312,6 +323,10 @@ to this process?</source>
     </message>
     <message>
         <source>Syslog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Devices</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

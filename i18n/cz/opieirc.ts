@@ -384,6 +384,10 @@ Skutečné jméno: %4</translation>
         <source>Save As</source>
         <translation>Uložit jako</translation>
     </message>
+    <message>
+        <source>Channel %1 doesn&apos;t exists</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IRCQueryTab</name>
@@ -486,9 +490,16 @@ Skutečné jméno: %4</translation>
         <source>The channel list needs to contain a
 comma separated list of channel
  names which start with either &apos;#&apos; or &apos;+&apos;</source>
-        <translation>Seznam kanálů musí obsahovat
+        <translation type="obsolete">Seznam kanálů musí obsahovat
 jejich názvy oddělené čárkami
 a nezačínající na &apos;#&apos; nebo &apos;+&apos;</translation>
+    </message>
+    <message>
+        <source>The channel list needs to contain a
+comma separated list of valid
+ channel names (starting 
+with one of &apos;#&apos; &apos;+&apos; &apos;&amp;&apos; &apos;!&apos;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

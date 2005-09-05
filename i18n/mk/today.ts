@@ -38,11 +38,15 @@
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation>денес од Maximillian ReiB</translation>
+        <translation type="obsolete">денес од Maximillian ReiB</translation>
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
         <translation>Кликни овде за да се отвори прозорот за конфигурација</translation>
+    </message>
+    <message>
+        <source>Today by Maximilian Rei&#xef;&#xbf;&#xbd;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

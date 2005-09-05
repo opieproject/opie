@@ -58,11 +58,11 @@
     </message>
     <message>
         <source>Searchmethods</source>
-        <translation>Meklēšanas metodes</translation>
+        <translation type="obsolete">Meklēšanas metodes</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation>&amp;Reģistrjūtīgs</translation>
+        <translation type="obsolete">&amp;Reģistrjūtīgs</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -71,6 +71,14 @@
     <message>
         <source>Parameter</source>
         <translation>Parametrs</translation>
+    </message>
+    <message>
+        <source>Search methods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

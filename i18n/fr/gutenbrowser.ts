@@ -285,11 +285,6 @@ http://www.trolltech.com
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Last name first 
-(requires library restart)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation type="unfinished"></translation>
     </message>
@@ -303,6 +298,10 @@ http://www.trolltech.com
     </message>
     <message>
         <source>   </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last name first.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

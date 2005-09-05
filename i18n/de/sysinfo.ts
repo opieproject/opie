@@ -115,19 +115,19 @@ Mit den Auswahlboxen kann man die gewünschten Tests einstellen.</translation>
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation>CPU-Auslastung für Anwendungen (%)</translation>
+        <translation type="obsolete">CPU-Auslastung für Anwendungen (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation>Systemauslastung (%)</translation>
+        <translation type="obsolete">Systemauslastung (%)</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation>Typ:</translation>
+        <translation type="obsolete">Typ:</translation>
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation>Diese Seite zeigt die Auslastung des Prozessors.</translation>
+        <translation type="obsolete">Diese Seite zeigt die Auslastung des Prozessors.</translation>
     </message>
 </context>
 <context>
@@ -237,6 +237,17 @@ ausführen?</translation>
     </message>
 </context>
 <context>
+    <name>Opie::Ui</name>
+    <message>
+        <source>My Computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a list of all the devices currently recognized on this device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
@@ -301,7 +312,7 @@ Prozess senden?</translation>
     </message>
     <message>
         <source>CPU</source>
-        <translation>CPU</translation>
+        <translation type="obsolete">CPU</translation>
     </message>
     <message>
         <source>Process</source>
@@ -322,6 +333,10 @@ Prozess senden?</translation>
     <message>
         <source>Syslog</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>Devices</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -42,7 +42,11 @@
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation>Hoy por Maximilian Reiß</translation>
+        <translation type="obsolete">Hoy por Maximilian Reiß</translation>
+    </message>
+    <message>
+        <source>Today by Maximilian Rei&#xef;&#xbf;&#xbd;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -77,12 +77,18 @@
     <message>
         <source>Remaing Power: %1 %2
 Remaining Time: %3</source>
-        <translation>Restliche Energie: %1 %2
+        <translation type="obsolete">Restliche Energie: %1 %2
 Restliche Zeit: %3</translation>
     </message>
     <message>
         <source>Ipaq  %1</source>
         <translation>iPAQ  %1</translation>
+    </message>
+    <message>
+        <source>Remaining Power: %1 
+%2
+Remaining Time: %3</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

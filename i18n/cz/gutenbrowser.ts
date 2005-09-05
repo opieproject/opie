@@ -293,7 +293,7 @@ http://www.trolltech.com
     <message>
         <source>Last name first 
 (requires library restart)</source>
-        <translation>Poslední jméno první 
+        <translation type="obsolete">Poslední jméno první 
 (vyžaduje restart knihovny)</translation>
     </message>
     <message>
@@ -310,6 +310,10 @@ http://www.trolltech.com
     </message>
     <message>
         <source>   </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last name first.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

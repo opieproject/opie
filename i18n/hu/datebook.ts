@@ -523,7 +523,7 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation>perc</translation>
+        <translation type="obsolete">perc</translation>
     </message>
     <message>
         <source>Silent</source>
@@ -552,6 +552,18 @@ Mégis kilép?</translation>
     <message>
         <source>Note...</source>
         <translation>Jegyzet...</translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">nap</translation>
     </message>
 </context>
 <context>

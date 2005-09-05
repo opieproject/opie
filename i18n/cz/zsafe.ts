@@ -217,55 +217,55 @@ zobrazí seznam adresářů a souborů</translation>
     </message>
     <message>
         <source>&amp;New document</source>
-        <translation>&amp;Nový dokument</translation>
+        <translation type="obsolete">&amp;Nový dokument</translation>
     </message>
     <message>
         <source>&amp;Open document</source>
-        <translation>&amp;Otevřít dokument</translation>
+        <translation type="obsolete">&amp;Otevřít dokument</translation>
     </message>
     <message>
         <source>&amp;Save document as ..</source>
-        <translation>&amp;Uložit dokument jako..</translation>
+        <translation type="obsolete">&amp;Uložit dokument jako..</translation>
     </message>
     <message>
         <source>&amp;Save document</source>
-        <translation>&amp;Uložit dokument</translation>
+        <translation type="obsolete">&amp;Uložit dokument</translation>
     </message>
     <message>
         <source>S&amp;ave document with new Password</source>
-        <translation>U&amp;ložit dokument s novým heslem</translation>
+        <translation type="obsolete">U&amp;ložit dokument s novým heslem</translation>
     </message>
     <message>
         <source>&amp;Export text file</source>
-        <translation>&amp;Export do textového souboru</translation>
+        <translation type="obsolete">&amp;Export do textového souboru</translation>
     </message>
     <message>
         <source>&amp;Import text file</source>
-        <translation>&amp;Import z textového souboru</translation>
+        <translation type="obsolete">&amp;Import z textového souboru</translation>
     </message>
     <message>
         <source>&amp;Remove text file</source>
-        <translation>&amp;Odstranit textový soubor</translation>
+        <translation type="obsolete">&amp;Odstranit textový soubor</translation>
     </message>
     <message>
         <source>&amp;Open entries expanded</source>
-        <translation>&amp;Otevřít položky rozvinuté</translation>
+        <translation type="obsolete">&amp;Otevřít položky rozvinuté</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation>K&amp;onec</translation>
+        <translation type="obsolete">K&amp;onec</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Soubor</translation>
+        <translation type="obsolete">&amp;Soubor</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Nový</translation>
+        <translation type="obsolete">&amp;Nový</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Upravit</translation>
+        <translation type="obsolete">&amp;Upravit</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
@@ -273,51 +273,51 @@ zobrazí seznam adresářů a souborů</translation>
     </message>
     <message>
         <source>&amp;Category</source>
-        <translation>&amp;Kategorie</translation>
+        <translation type="obsolete">&amp;Kategorie</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
-        <translation>&amp;Vyjmout</translation>
+        <translation type="obsolete">&amp;Vyjmout</translation>
     </message>
     <message>
         <source>C&amp;opy</source>
-        <translation>K&amp;opírovat</translation>
+        <translation type="obsolete">K&amp;opírovat</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation>&amp;Vložit</translation>
+        <translation type="obsolete">&amp;Vložit</translation>
     </message>
     <message>
         <source>&amp;Search</source>
-        <translation>&amp;Hledat</translation>
+        <translation type="obsolete">&amp;Hledat</translation>
     </message>
     <message>
         <source>&amp;Entry</source>
-        <translation>&amp;Položka</translation>
+        <translation type="obsolete">&amp;Položka</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;O aplikaci</translation>
+        <translation type="obsolete">&amp;O aplikaci</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;Nápověda</translation>
+        <translation type="obsolete">&amp;Nápověda</translation>
     </message>
     <message>
         <source>New entry</source>
-        <translation>Nová položka</translation>
+        <translation type="obsolete">Nová položka</translation>
     </message>
     <message>
         <source>Edit category or entry</source>
-        <translation>Upravit kategorii, nebo položku</translation>
+        <translation type="obsolete">Upravit kategorii, nebo položku</translation>
     </message>
     <message>
         <source>Delete category or entry</source>
-        <translation>Smazat kategorii, nebo položku</translation>
+        <translation type="obsolete">Smazat kategorii, nebo položku</translation>
     </message>
     <message>
         <source>Find entry</source>
-        <translation>Hledat položku</translation>
+        <translation type="obsolete">Hledat položku</translation>
     </message>
     <message>
         <source>Name</source>
@@ -555,7 +555,7 @@ nově vytvořenému dokumentu.</translation>
     </message>
     <message>
         <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Password Manager&lt;br&gt;ZSafe version 2.1.2&lt;br&gt;&lt;/b&gt;by Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Translations by Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus správce hesel&lt;br&gt;ZSafe verze 2.1.2&lt;br&gt;&lt;/b&gt;vytvořil Carsten
+        <translation type="obsolete">&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus správce hesel&lt;br&gt;ZSafe verze 2.1.2&lt;br&gt;&lt;/b&gt;vytvořil Carsten
 Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Přeložil Robert
 Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
@@ -574,6 +574,58 @@ Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&l
     <message>
         <source>Cancel</source>
         <translation>Storno</translation>
+    </message>
+    <message>
+        <source>New document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document with new Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open entries expanded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entry</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

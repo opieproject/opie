@@ -162,5 +162,9 @@ La mémoire (i.e RAM) est divisée en catégories comme suit :
         <source>2 Mb,4 Mb,6 Mb,8 Mb,16 Mb,32 Mb,64 Mb</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Swap disabled in kernel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

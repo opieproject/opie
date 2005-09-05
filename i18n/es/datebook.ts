@@ -522,7 +522,7 @@ Libere espacio y vuelva a intentarlo.
     </message>
     <message>
         <source> minutes</source>
-        <translation> minutos</translation>
+        <translation type="obsolete"> minutos</translation>
     </message>
     <message>
         <source>Silent</source>
@@ -551,6 +551,18 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>Note...</source>
         <translation>Nota...</translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">días</translation>
     </message>
 </context>
 <context>

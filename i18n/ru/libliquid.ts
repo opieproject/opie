@@ -1,13 +1,20 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>Decoration</name>
+    <message>
+        <source>Liquid</source>
+        <translation type="obsolete">Жидкость</translation>
+    </message>
+</context>
+<context>
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation>Стиль Жидкость</translation>
+        <translation type="unfinished">Стиль Жидкость</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation>Без полупрозрачности</translation>
+        <translation type="unfinished">Без полупрозрачности</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
@@ -27,27 +34,27 @@
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation>Своя полупрозрачность</translation>
+        <translation type="unfinished">Своя полупрозрачность</translation>
     </message>
     <message>
         <source>Menu color</source>
-        <translation>Цвет меню</translation>
+        <translation type="unfinished">Цвет меню</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation>Цвет текста</translation>
+        <translation type="unfinished">Цвет текста</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation>Непрозрачность</translation>
+        <translation type="unfinished">Непрозрачность</translation>
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation>Затененный текст в меню</translation>
+        <translation type="unfinished">Затененный текст в меню</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation>Плоская панель инструментов</translation>
+        <translation type="unfinished">Плоская панель инструментов</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
@@ -58,7 +65,7 @@
     <name>Styles</name>
     <message>
         <source>Liquid</source>
-        <translation>Жидкость</translation>
+        <translation type="unfinished">Жидкость</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>

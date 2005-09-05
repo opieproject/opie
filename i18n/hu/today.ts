@@ -38,11 +38,15 @@
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation>Készítette Maximilian Reiß</translation>
+        <translation type="obsolete">Készítette Maximilian Reiß</translation>
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
         <translation>Bökjön ide a beállításhoz</translation>
+    </message>
+    <message>
+        <source>Today by Maximilian Rei&#xef;&#xbf;&#xbd;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

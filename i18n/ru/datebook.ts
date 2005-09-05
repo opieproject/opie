@@ -523,7 +523,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source> minutes</source>
-        <translation>минут</translation>
+        <translation type="obsolete">минут</translation>
     </message>
     <message>
         <source>Silent</source>
@@ -552,6 +552,18 @@ Quit anyway?</source>
     <message>
         <source>Note...</source>
         <translation>Заметки...</translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">дней</translation>
     </message>
 </context>
 <context>

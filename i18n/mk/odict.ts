@@ -54,11 +54,11 @@
     </message>
     <message>
         <source>Searchmethods</source>
-        <translation>Методи на пребарување</translation>
+        <translation type="obsolete">Методи на пребарување</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation>О&amp;сетливо на големи и мали букви</translation>
+        <translation type="obsolete">О&amp;сетливо на големи и мали букви</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -70,6 +70,14 @@
     </message>
     <message>
         <source>Opie-Dictionary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search methods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

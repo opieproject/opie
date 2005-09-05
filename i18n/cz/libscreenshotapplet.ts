@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Name of screenshot </source>
-        <translation>Název sejmutí obrazovky</translation>
+        <translation type="obsolete">Název sejmutí obrazovky</translation>
     </message>
     <message>
         <source>Success</source>

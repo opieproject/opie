@@ -162,5 +162,9 @@ Memory is categorized as follows:
         <source>2 Mb,4 Mb,6 Mb,8 Mb,16 Mb,32 Mb,64 Mb</source>
         <translation>2 Мб,4 Мб,6 Мб,8 Мб,16 Мб,32 Мб,64 Мб</translation>
     </message>
+    <message>
+        <source>Swap disabled in kernel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

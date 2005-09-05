@@ -160,10 +160,6 @@
         <translation>akri</translation>
     </message>
     <message>
-        <source>&#xb0;C</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>carats</source>
         <translation>karāti</translation>
     </message>
@@ -181,10 +177,6 @@
     </message>
     <message>
         <source>cu in</source>
-        <translation></translation>
-    </message>
-    <message>
-        <source>&#xb0;F</source>
         <translation></translation>
     </message>
     <message>
@@ -326,6 +318,14 @@
     <message>
         <source>yd</source>
         <translation>jardi</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

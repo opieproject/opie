@@ -37,11 +37,11 @@
         <translation type="unfinished">Danes</translation>
     </message>
     <message>
-        <source>Today by Maximilian Rei&#xdf;</source>
+        <source>Click here to get to the config dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Click here to get to the config dialog</source>
+        <source>Today by Maximilian Rei&#xef;&#xbf;&#xbd;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

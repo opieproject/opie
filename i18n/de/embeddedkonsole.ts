@@ -229,6 +229,10 @@
         <source>Konsole </source>
         <translation></translation>
     </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayListSelection</name>

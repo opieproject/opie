@@ -1,5 +1,12 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>Decoration</name>
+    <message>
+        <source>Liquid</source>
+        <translation type="obsolete">透明</translation>
+    </message>
+</context>
+<context>
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>

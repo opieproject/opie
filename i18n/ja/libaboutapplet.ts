@@ -61,7 +61,8 @@ Visit &lt;i&gt;http://opie.handhelds.org&lt;/i&gt; for more information on the O
 &lt;b&gt;Rajko &apos;alwin&apos; Albrecht&lt;/b&gt; (alwin@handhelds.org)&lt;br/&gt;
 &lt;b&gt;Stefan &apos;eilers&apos; Eilers&lt;/b&gt; (eilers@handhelds.org)&lt;br/&gt;
 &lt;b&gt;Holger &apos;Zecke&apos; Freyther&lt;/b&gt; (zecke@handhelds.org)&lt;br/&gt;
-&lt;b&gt;Alberto &apos;Skyhusker&apos; Garcia Hierro&lt;/b&gt; (skyhusker@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Robert &apos;Sandman&apos; Griebl&lt;/b&gt; (sandman@handhelds.org)&lt;br/&gt;
+&lt;b&gt;Alberto &apos;Skyhusker&apos; Hierro&lt;/b&gt; (skyhusker@handhelds.org)&lt;br/&gt;
 &lt;b&gt;Chris &apos;Kergoth&apos; Larson&lt;/b&gt; (kergoth@handhelds.org)&lt;br/&gt;
 &lt;b&gt;Michael &apos;Mickey&apos; Lauer&lt;/b&gt; (mickeyl@handhelds.org)&lt;br/&gt;
 &lt;b&gt;Lorn &apos;ljp&apos; Potter&lt;/b&gt; (ljp@handhelds.org)&lt;br/&gt;

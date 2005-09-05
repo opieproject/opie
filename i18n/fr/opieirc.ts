@@ -382,6 +382,10 @@ Real name: %4</source>
         <source>Save As</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Channel %1 doesn&apos;t exists</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IRCQueryTab</name>
@@ -484,9 +488,16 @@ Real name: %4</source>
         <source>The channel list needs to contain a
 comma separated list of channel
  names which start with either &apos;#&apos; or &apos;+&apos;</source>
-        <translation>La liste des canaux nécessite que
+        <translation type="obsolete">La liste des canaux nécessite que
 les noms de canaux soient séparés
 par des virgules et commancent par &apos;#&apos; or &apos;+&apos;</translation>
+    </message>
+    <message>
+        <source>The channel list needs to contain a
+comma separated list of valid
+ channel names (starting 
+with one of &apos;#&apos; &apos;+&apos; &apos;&amp;&apos; &apos;!&apos;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

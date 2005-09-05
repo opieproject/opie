@@ -4,7 +4,7 @@
     <name>ScreenshotControl</name>
     <message>
         <source>Name of screenshot </source>
-        <translation>Nome dello screenshot</translation>
+        <translation type="obsolete">Nome dello screenshot</translation>
     </message>
     <message>
         <source>Delay</source>

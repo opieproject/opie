@@ -76,12 +76,18 @@
     <message>
         <source>Remaing Power: %1 %2
 Remaining Time: %3</source>
-        <translation>Atlikusi Strāva: %1 %2
+        <translation type="obsolete">Atlikusi Strāva: %1 %2
 Atlicis Laiks: %3</translation>
     </message>
     <message>
         <source>Ipaq  %1</source>
         <translation>Ipaq  %1</translation>
+    </message>
+    <message>
+        <source>Remaining Power: %1 
+%2
+Remaining Time: %3</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

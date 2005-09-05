@@ -2,10 +2,6 @@
 <context>
     <name>ScreenshotControl</name>
     <message>
-        <source>Name of screenshot </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Delay</source>
         <translation type="unfinished"></translation>
     </message>

@@ -218,43 +218,43 @@ shows the list of dirs and files</source>
     </message>
     <message>
         <source>&amp;Save document</source>
-        <translation>&amp;Сохранить документ</translation>
+        <translation type="obsolete">&amp;Сохранить документ</translation>
     </message>
     <message>
         <source>S&amp;ave document with new Password</source>
-        <translation>С&amp;охранить документ с новым паролем</translation>
+        <translation type="obsolete">С&amp;охранить документ с новым паролем</translation>
     </message>
     <message>
         <source>&amp;Export text file</source>
-        <translation>&amp;Экспорт текст файла</translation>
+        <translation type="obsolete">&amp;Экспорт текст файла</translation>
     </message>
     <message>
         <source>&amp;Import text file</source>
-        <translation>&amp;Импорт текст файла</translation>
+        <translation type="obsolete">&amp;Импорт текст файла</translation>
     </message>
     <message>
         <source>&amp;Remove text file</source>
-        <translation>&amp;Удалить текст файл</translation>
+        <translation type="obsolete">&amp;Удалить текст файл</translation>
     </message>
     <message>
         <source>&amp;Open entries expanded</source>
-        <translation>О&amp;ткрывать записи в раскрытом виде</translation>
+        <translation type="obsolete">О&amp;ткрывать записи в раскрытом виде</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation>В&amp;ыйти</translation>
+        <translation type="obsolete">В&amp;ыйти</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Файл</translation>
+        <translation type="obsolete">&amp;Файл</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Создать</translation>
+        <translation type="obsolete">&amp;Создать</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Правка</translation>
+        <translation type="obsolete">&amp;Правка</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
@@ -262,35 +262,35 @@ shows the list of dirs and files</source>
     </message>
     <message>
         <source>&amp;Category</source>
-        <translation>&amp;Категория</translation>
+        <translation type="obsolete">&amp;Категория</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
-        <translation>&amp;Вырезать</translation>
+        <translation type="obsolete">&amp;Вырезать</translation>
     </message>
     <message>
         <source>C&amp;opy</source>
-        <translation>&amp;Копировать</translation>
+        <translation type="obsolete">&amp;Копировать</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation>&amp;Вставить</translation>
+        <translation type="obsolete">&amp;Вставить</translation>
     </message>
     <message>
         <source>&amp;Search</source>
-        <translation>&amp;Поиск</translation>
+        <translation type="obsolete">&amp;Поиск</translation>
     </message>
     <message>
         <source>&amp;Entry</source>
-        <translation>&amp;Запись</translation>
+        <translation type="obsolete">&amp;Запись</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;О программе</translation>
+        <translation type="obsolete">&amp;О программе</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>С&amp;правка</translation>
+        <translation type="obsolete">С&amp;правка</translation>
     </message>
     <message>
         <source>Name</source>
@@ -318,31 +318,31 @@ shows the list of dirs and files</source>
     </message>
     <message>
         <source>&amp;New document</source>
-        <translation>&amp;Создать документ</translation>
+        <translation type="obsolete">&amp;Создать документ</translation>
     </message>
     <message>
         <source>&amp;Open document</source>
-        <translation>О&amp;ткрыть документ</translation>
+        <translation type="obsolete">О&amp;ткрыть документ</translation>
     </message>
     <message>
         <source>&amp;Save document as ..</source>
-        <translation>&amp;Сохранить документ как ..</translation>
+        <translation type="obsolete">&amp;Сохранить документ как ..</translation>
     </message>
     <message>
         <source>New entry</source>
-        <translation>Добавить запись</translation>
+        <translation type="obsolete">Добавить запись</translation>
     </message>
     <message>
         <source>Edit category or entry</source>
-        <translation>Правка категории или записи</translation>
+        <translation type="obsolete">Правка категории или записи</translation>
     </message>
     <message>
         <source>Delete category or entry</source>
-        <translation>Удалить категорию или запись</translation>
+        <translation type="obsolete">Удалить категорию или запись</translation>
     </message>
     <message>
         <source>Find entry</source>
-        <translation>Поиск записи</translation>
+        <translation type="obsolete">Поиск записи</translation>
     </message>
     <message>
         <source></source>
@@ -556,7 +556,7 @@ newly created document.</source>
     </message>
     <message>
         <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Password Manager&lt;br&gt;ZSafe version 2.1.2&lt;br&gt;&lt;/b&gt;by Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Translations by Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Менеджер Паролей&lt;br&gt;ZСейф версии 2.1.2-jv01b&lt;br&gt;&lt;/b&gt;написан Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Перевод Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation type="obsolete">&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Менеджер Паролей&lt;br&gt;ZСейф версии 2.1.2-jv01b&lt;br&gt;&lt;/b&gt;написан Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Перевод Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <source>Copy to Clipboard</source>
@@ -573,6 +573,58 @@ newly created document.</source>
     <message>
         <source>Cancel</source>
         <translation>Отмена</translation>
+    </message>
+    <message>
+        <source>New document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document with new Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open entries expanded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entry</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

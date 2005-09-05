@@ -295,7 +295,7 @@ http://www.trolltech.com
     <message>
         <source>Last name first 
 (requires library restart)</source>
-        <translation>Letzter Name zuerst 
+        <translation type="obsolete">Letzter Name zuerst 
 (benötigt neustart der Bibliothek)
 </translation>
     </message>
@@ -317,6 +317,10 @@ http://www.trolltech.com
     </message>
     <message>
         <source>   </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last name first.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

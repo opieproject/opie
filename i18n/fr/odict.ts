@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>Searchmethods</source>
-        <translation>Méthodes de recherche</translation>
+        <translation type="obsolete">Méthodes de recherche</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation>Respecter la C&amp;asse</translation>
+        <translation type="obsolete">Respecter la C&amp;asse</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -72,6 +72,14 @@
     <message>
         <source>Configuration</source>
         <translation>Configuration</translation>
+    </message>
+    <message>
+        <source>Search methods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

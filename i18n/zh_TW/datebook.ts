@@ -521,7 +521,7 @@ Quit anyway?</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation>分鐘</translation>
+        <translation type="obsolete">分鐘</translation>
     </message>
     <message>
         <source>Silent</source>
@@ -550,6 +550,18 @@ Quit anyway?</translation>
     <message>
         <source>Note...</source>
         <translation>備忘錄...</translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">日</translation>
     </message>
 </context>
 <context>

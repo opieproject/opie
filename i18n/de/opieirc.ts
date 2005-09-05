@@ -385,6 +385,10 @@ Name: %4</translation>
         <source>Save As</source>
         <translation>Speichern als</translation>
     </message>
+    <message>
+        <source>Channel %1 doesn&apos;t exists</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IRCQueryTab</name>
@@ -487,9 +491,16 @@ Name: %4</translation>
         <source>The channel list needs to contain a
 comma separated list of channel
  names which start with either &apos;#&apos; or &apos;+&apos;</source>
-        <translation>Die Kanalliste muss eine Komma-
+        <translation type="obsolete">Die Kanalliste muss eine Komma-
 separierte Liste von Kanalnamen
 enthalten, die mit &apos;#&apos; oder &apos;+&apos; anfangen</translation>
+    </message>
+    <message>
+        <source>The channel list needs to contain a
+comma separated list of valid
+ channel names (starting 
+with one of &apos;#&apos; &apos;+&apos; &apos;&amp;&apos; &apos;!&apos;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

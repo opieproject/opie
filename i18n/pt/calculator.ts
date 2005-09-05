@@ -161,7 +161,7 @@
     </message>
     <message>
         <source>&#xb0;C</source>
-        <translation>ºC</translation>
+        <translation type="obsolete">ºC</translation>
     </message>
     <message>
         <source>carats</source>
@@ -185,7 +185,7 @@
     </message>
     <message>
         <source>&#xb0;F</source>
-        <translation>ºF</translation>
+        <translation type="obsolete">ºF</translation>
     </message>
     <message>
         <source>fl oz (US)</source>
@@ -326,6 +326,14 @@
     <message>
         <source>yd</source>
         <translation>jardas</translation>
+    </message>
+    <message>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

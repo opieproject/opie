@@ -113,19 +113,19 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation>Programma GPU gebruik (%)</translation>
+        <translation type="obsolete">Programma GPU gebruik (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation>Systeem CPU gebruik (%)</translation>
+        <translation type="obsolete">Systeem CPU gebruik (%)</translation>
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation>Deze pagina laat zien hoeveel van de processor van dit apparaat gebruikt wordt.</translation>
+        <translation type="obsolete">Deze pagina laat zien hoeveel van de processor van dit apparaat gebruikt wordt.</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation>Type:</translation>
+        <translation type="obsolete">Type:</translation>
     </message>
 </context>
 <context>
@@ -236,6 +236,17 @@ gebruikt worden op deze module?</translation>
     </message>
 </context>
 <context>
+    <name>Opie::Ui</name>
+    <message>
+        <source>My Computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a list of all the devices currently recognized on this device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
@@ -300,7 +311,7 @@ dit proces gestuurd worden?</translation>
     </message>
     <message>
         <source>CPU</source>
-        <translation>CPU</translation>
+        <translation type="obsolete">CPU</translation>
     </message>
     <message>
         <source>Process</source>
@@ -320,6 +331,10 @@ dit proces gestuurd worden?</translation>
     </message>
     <message>
         <source>Syslog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Devices</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

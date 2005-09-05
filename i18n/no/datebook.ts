@@ -521,10 +521,6 @@ Quit anyway?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> minutes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Silent</source>
         <translation type="unfinished"></translation>
     </message>
@@ -546,6 +542,18 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Start time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

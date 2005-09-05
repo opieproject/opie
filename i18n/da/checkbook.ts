@@ -318,6 +318,14 @@ kodeord</translation>
         <source>Click here to save new descriptions in the list of payess.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Use smaller font for list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to select smaller font for transactions.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ListEdit</name>

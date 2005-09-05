@@ -85,6 +85,10 @@
         <source>Hinge3</source>
         <translation>Крышка3</translation>
     </message>
+    <message>
+        <source>Rotate Button</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

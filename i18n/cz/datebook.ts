@@ -531,7 +531,7 @@ Chcete přesto skončit?</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation>minut</translation>
+        <translation type="obsolete">minut</translation>
     </message>
     <message>
         <source>Silent</source>
@@ -552,6 +552,18 @@ Chcete přesto skončit?</translation>
     <message>
         <source>Note...</source>
         <translation>Poznámka...</translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">dny</translation>
     </message>
 </context>
 <context>

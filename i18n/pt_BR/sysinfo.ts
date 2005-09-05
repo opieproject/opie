@@ -114,19 +114,15 @@
     <name>LoadInfo</name>
     <message>
         <source>Type: </source>
-        <translation>Tipo: </translation>
+        <translation type="obsolete">Tipo: </translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation>Uso de CPU pelo sistema (%)</translation>
+        <translation type="obsolete">Uso de CPU pelo sistema (%)</translation>
     </message>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation>Uso de CPU por aplicações (%)</translation>
-    </message>
-    <message>
-        <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Uso de CPU por aplicações (%)</translation>
     </message>
 </context>
 <context>
@@ -228,6 +224,17 @@ Click and hold on a module to see additional information about the module, or to
     </message>
 </context>
 <context>
+    <name>Opie::Ui</name>
+    <message>
+        <source>My Computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a list of all the devices currently recognized on this device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
@@ -277,7 +284,7 @@ to this process?</source>
     <name>SystemInfo</name>
     <message>
         <source>CPU</source>
-        <translation>CPU</translation>
+        <translation type="obsolete">CPU</translation>
     </message>
     <message>
         <source>Memory</source>
@@ -309,6 +316,10 @@ to this process?</source>
     </message>
     <message>
         <source>Syslog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Devices</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

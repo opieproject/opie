@@ -526,7 +526,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source> minutes</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Silent</source>
@@ -547,6 +547,18 @@ Quit anyway?</source>
     <message>
         <source>Note...</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">FOO</translation>
     </message>
 </context>
 <context>

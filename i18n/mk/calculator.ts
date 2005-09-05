@@ -161,10 +161,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&#xb0;C</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>carats</source>
         <translation type="unfinished"></translation>
     </message>
@@ -182,10 +178,6 @@
     </message>
     <message>
         <source>cu in</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&#xb0;F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -326,6 +318,14 @@
     </message>
     <message>
         <source>yd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

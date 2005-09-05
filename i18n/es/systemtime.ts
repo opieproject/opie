@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation>Configuración</translation>
+        <translation>Configuraciï¿½</translation>
     </message>
     <message>
         <source>Predict</source>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Continue?</source>
-        <translation>¿Continúo?</translation>
+        <translation>Contino?</translation>
     </message>
     <message>
         <source>Running:
@@ -106,7 +106,7 @@ servidor: </translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation>Preguntó por un retraso de %1 minutos, pero sólo %2 minutos transcurrieron desde el último ajuste.&lt;br&gt;¿Continúo?</translation>
+        <translation>Preguntï¿½por un retraso de %1 minutos, pero sï¿½o %2 minutos transcurrieron desde el ltimo ajuste.&lt;br&gt;Contino?</translation>
     </message>
     <message>
         <source>%1 seconds</source>
@@ -144,7 +144,7 @@ servidor: </translation>
     <name>PredictTabWidget</name>
     <message>
         <source>Predicted time drift</source>
-        <translation>Predicción de deriva horaria</translation>
+        <translation>Predicciï¿½ de deriva horaria</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -164,11 +164,11 @@ servidor: </translation>
     </message>
     <message>
         <source>Last [h]</source>
-        <translation>Última [h]</translation>
+        <translation>ï¿½tima [h]</translation>
     </message>
     <message>
         <source>Offset [s]</source>
-        <translation>Corrección [s]</translation>
+        <translation>Correcciï¿½ [s]</translation>
     </message>
     <message>
         <source>Predict time</source>
@@ -203,11 +203,11 @@ servidor: </translation>
     </message>
     <message>
         <source>Display time server information</source>
-        <translation>Mostrar información del servidor horario</translation>
+        <translation>Mostrar informaciï¿½ del servidor horario</translation>
     </message>
     <message>
         <source>Display time prediction information</source>
-        <translation>Mostrar información de la predicción horaria</translation>
+        <translation>Mostrar informaciï¿½ de la predicciï¿½ horaria</translation>
     </message>
 </context>
 <context>

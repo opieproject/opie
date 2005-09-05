@@ -39,11 +39,15 @@
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation>Aujourd&apos;hui par Maximilian Reiß</translation>
+        <translation type="obsolete">Aujourd&apos;hui par Maximilian Reiß</translation>
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
         <translation>Cliquez ici pour accéder à la fenêtre de configuration</translation>
+    </message>
+    <message>
+        <source>Today by Maximilian Rei&#xef;&#xbf;&#xbd;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

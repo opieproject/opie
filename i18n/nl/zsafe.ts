@@ -218,43 +218,43 @@ laat de lijst van mappen en bestanden zien</translation>
     </message>
     <message>
         <source>&amp;Save document</source>
-        <translation>&amp;Opslaan</translation>
+        <translation type="obsolete">&amp;Opslaan</translation>
     </message>
     <message>
         <source>S&amp;ave document with new Password</source>
-        <translation>Opslaan met nieuw &amp;Wachtwoord</translation>
+        <translation type="obsolete">Opslaan met nieuw &amp;Wachtwoord</translation>
     </message>
     <message>
         <source>&amp;Export text file</source>
-        <translation>&amp;Exporteer tekstbestand</translation>
+        <translation type="obsolete">&amp;Exporteer tekstbestand</translation>
     </message>
     <message>
         <source>&amp;Import text file</source>
-        <translation>&amp;Importeer tekstbestand</translation>
+        <translation type="obsolete">&amp;Importeer tekstbestand</translation>
     </message>
     <message>
         <source>&amp;Remove text file</source>
-        <translation>Verwijde&amp;r tekstbestand</translation>
+        <translation type="obsolete">Verwijde&amp;r tekstbestand</translation>
     </message>
     <message>
         <source>&amp;Open entries expanded</source>
-        <translation>&amp;Geexpandeerd openen</translation>
+        <translation type="obsolete">&amp;Geexpandeerd openen</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation>&amp;Afsluiten</translation>
+        <translation type="obsolete">&amp;Afsluiten</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Bestand</translation>
+        <translation type="obsolete">&amp;Bestand</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Nieuw</translation>
+        <translation type="obsolete">&amp;Nieuw</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Wijzigen</translation>
+        <translation type="obsolete">&amp;Wijzigen</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
@@ -262,35 +262,35 @@ laat de lijst van mappen en bestanden zien</translation>
     </message>
     <message>
         <source>&amp;Category</source>
-        <translation>&amp;Categorie</translation>
+        <translation type="obsolete">&amp;Categorie</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
-        <translation>&amp;Knip</translation>
+        <translation type="obsolete">&amp;Knip</translation>
     </message>
     <message>
         <source>C&amp;opy</source>
-        <translation>&amp;Kopieer</translation>
+        <translation type="obsolete">&amp;Kopieer</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation>&amp;Plak</translation>
+        <translation type="obsolete">&amp;Plak</translation>
     </message>
     <message>
         <source>&amp;Search</source>
-        <translation>&amp;Zoek</translation>
+        <translation type="obsolete">&amp;Zoek</translation>
     </message>
     <message>
         <source>&amp;Entry</source>
-        <translation>&amp;Record</translation>
+        <translation type="obsolete">&amp;Record</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;Over</translation>
+        <translation type="obsolete">&amp;Over</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;Help</translation>
+        <translation type="obsolete">&amp;Help</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -466,15 +466,15 @@ opslaan</translation>
     </message>
     <message>
         <source>&amp;New document</source>
-        <translation>&amp;Nieuw document</translation>
+        <translation type="obsolete">&amp;Nieuw document</translation>
     </message>
     <message>
         <source>&amp;Open document</source>
-        <translation>&amp;Open document</translation>
+        <translation type="obsolete">&amp;Open document</translation>
     </message>
     <message>
         <source>&amp;Save document as ..</source>
-        <translation>Bestand &amp;opslaan als..</translation>
+        <translation type="obsolete">Bestand &amp;opslaan als..</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
@@ -482,19 +482,19 @@ opslaan</translation>
     </message>
     <message>
         <source>New entry</source>
-        <translation>Nieuwe Invoer</translation>
+        <translation type="obsolete">Nieuwe Invoer</translation>
     </message>
     <message>
         <source>Edit category or entry</source>
-        <translation>Wijzig categorie of record</translation>
+        <translation type="obsolete">Wijzig categorie of record</translation>
     </message>
     <message>
         <source>Delete category or entry</source>
-        <translation>Verwijder categorie of record</translation>
+        <translation type="obsolete">Verwijder categorie of record</translation>
     </message>
     <message>
         <source>Find entry</source>
-        <translation>Vind Record</translation>
+        <translation type="obsolete">Vind Record</translation>
     </message>
     <message>
         <source></source>
@@ -561,10 +561,6 @@ uw nieuwe bestand.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Password Manager&lt;br&gt;ZSafe version 2.1.2&lt;br&gt;&lt;/b&gt;by Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Translations by Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Copy to Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -574,6 +570,58 @@ uw nieuwe bestand.</translation>
     </message>
     <message>
         <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document with new Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open entries expanded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entry</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -23,35 +23,35 @@
     <name>OpieObex::SendWidget</name>
     <message>
         <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;&lt;h1&gt;Sende:&lt;/h1&gt;&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;&lt;h1&gt;Sende:&lt;/h1&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>Fertig</translation>
+        <translation type="obsolete">Fertig</translation>
     </message>
     <message>
         <source>IrDa is not enabled!</source>
-        <translation>Infrarot ist nicht verfügbar!</translation>
+        <translation type="obsolete">Infrarot ist nicht verfügbar!</translation>
     </message>
     <message>
         <source>Searching for IrDa Devices.</source>
-        <translation>Suche nach Infrarot-Geräten.</translation>
+        <translation type="obsolete">Suche nach Infrarot-Geräten.</translation>
     </message>
     <message>
         <source>Bluetooth is not available</source>
-        <translation>Bluetooth is nicht verfügbar</translation>
+        <translation type="obsolete">Bluetooth is nicht verfügbar</translation>
     </message>
     <message>
         <source>Searching for bluetooth Devices.</source>
-        <translation>Suche nach Bluetooth-Geräten.</translation>
+        <translation type="obsolete">Suche nach Bluetooth-Geräten.</translation>
     </message>
     <message>
         <source>Scheduling for beam.</source>
-        <translation>beginne zu beamen.</translation>
+        <translation type="obsolete">beginne zu beamen.</translation>
     </message>
     <message>
         <source>Click to beam</source>
-        <translation>Clicke um zu senden</translation>
+        <translation type="obsolete">Clicke um zu senden</translation>
     </message>
     <message>
         <source>Sent</source>
@@ -67,11 +67,74 @@
     </message>
     <message>
         <source>Search again for IrDa.</source>
-        <translation>Suche nochmals für Infrarot-Geräte.</translation>
+        <translation type="obsolete">Suche nochmals für Infrarot-Geräte.</translation>
     </message>
     <message>
         <source>Start sending</source>
         <translation>Beginne zu senden</translation>
+    </message>
+    <message>
+        <source>ready.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>error :(</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>complete.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>searching...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>obexSendBase</name>
+    <message>
+        <source>Send via OBEX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sending:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receiver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rescan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

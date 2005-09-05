@@ -22,35 +22,35 @@
     <name>OpieObex::SendWidget</name>
     <message>
         <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;&lt;h1&gt;Праќање:&lt;/h1&gt;&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;&lt;h1&gt;Праќање:&lt;/h1&gt;&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Done</source>
-        <translation>Готово</translation>
+        <translation type="obsolete">Готово</translation>
     </message>
     <message>
         <source>IrDa is not enabled!</source>
-        <translation>IrDa не е вклучена!</translation>
+        <translation type="obsolete">IrDa не е вклучена!</translation>
     </message>
     <message>
         <source>Searching for IrDa Devices.</source>
-        <translation>Барање IrDa уреди.</translation>
+        <translation type="obsolete">Барање IrDa уреди.</translation>
     </message>
     <message>
         <source>Bluetooth is not available</source>
-        <translation>Bluetooth не е достапен</translation>
+        <translation type="obsolete">Bluetooth не е достапен</translation>
     </message>
     <message>
         <source>Searching for bluetooth Devices.</source>
-        <translation>Барање bluetooth уреди.</translation>
+        <translation type="obsolete">Барање bluetooth уреди.</translation>
     </message>
     <message>
         <source>Scheduling for beam.</source>
-        <translation>Закажување на испраќање.</translation>
+        <translation type="obsolete">Закажување на испраќање.</translation>
     </message>
     <message>
         <source>Click to beam</source>
-        <translation>Кликно да пренесеш</translation>
+        <translation type="obsolete">Кликно да пренесеш</translation>
     </message>
     <message>
         <source>Sent</source>
@@ -66,11 +66,74 @@
     </message>
     <message>
         <source>Search again for IrDa.</source>
-        <translation>Повторно барај IrDa.</translation>
+        <translation type="obsolete">Повторно барај IrDa.</translation>
     </message>
     <message>
         <source>Start sending</source>
         <translation>Почни праќање</translation>
+    </message>
+    <message>
+        <source>ready.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>error :(</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>complete.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>not enabled.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>searching...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>obexSendBase</name>
+    <message>
+        <source>Send via OBEX</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sending:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receiver</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>T</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Rescan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -113,19 +113,19 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation>Процессор ( программы ),%</translation>
+        <translation type="obsolete">Процессор ( программы ),%</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation>Процессор ( система ), %</translation>
+        <translation type="obsolete">Процессор ( система ), %</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation>Тип:</translation>
+        <translation type="obsolete">Тип:</translation>
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation>Страница отображает использование процессора.</translation>
+        <translation type="obsolete">Страница отображает использование процессора.</translation>
     </message>
 </context>
 <context>
@@ -236,6 +236,17 @@ Click and hold on a module to see additional information about the module, or to
     </message>
 </context>
 <context>
+    <name>Opie::Ui</name>
+    <message>
+        <source>My Computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a list of all the devices currently recognized on this device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
@@ -299,7 +310,7 @@ to this process?</source>
     </message>
     <message>
         <source>CPU</source>
-        <translation>Процессор</translation>
+        <translation type="obsolete">Процессор</translation>
     </message>
     <message>
         <source>Process</source>
@@ -320,6 +331,10 @@ to this process?</source>
     <message>
         <source>Syslog</source>
         <translation>Системный журнал</translation>
+    </message>
+    <message>
+        <source>Devices</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -21,6 +21,10 @@
         <source>Game</source>
         <translation>Gra</translation>
     </message>
+    <message>
+        <source>Go</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>GoWidget</name>

@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Name of screenshot </source>
-        <translation>Име на слика</translation>
+        <translation type="obsolete">Име на слика</translation>
     </message>
     <message>
         <source>Success</source>

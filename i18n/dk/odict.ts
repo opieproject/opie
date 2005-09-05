@@ -57,19 +57,19 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Searchmethods</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>C&amp;ase sensitive</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Parameter</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search methods</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case sensitive</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

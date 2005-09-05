@@ -3,7 +3,7 @@
     <name>ScreenshotControl</name>
     <message>
         <source>Name of screenshot </source>
-        <translation>Ime posnetka</translation>
+        <translation type="obsolete">Ime posnetka</translation>
     </message>
     <message>
         <source>Delay</source>

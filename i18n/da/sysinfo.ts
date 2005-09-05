@@ -113,19 +113,19 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation>Program CPU forbrug (%)</translation>
+        <translation type="obsolete">Program CPU forbrug (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation>System CPU forbrug (%)</translation>
+        <translation type="obsolete">System CPU forbrug (%)</translation>
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation>Denne side viser hvor meget af denne enheds processor er i brug.</translation>
+        <translation type="obsolete">Denne side viser hvor meget af denne enheds processor er i brug.</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation>Type: </translation>
+        <translation type="obsolete">Type: </translation>
     </message>
 </context>
 <context>
@@ -229,6 +229,17 @@ Klik og hold på et modul for at se yderligere information om modulet eller for 
     </message>
 </context>
 <context>
+    <name>Opie::Ui</name>
+    <message>
+        <source>My Computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a list of all the devices currently recognized on this device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
@@ -292,7 +303,7 @@ to this process?</source>
     </message>
     <message>
         <source>CPU</source>
-        <translation>CPU</translation>
+        <translation type="obsolete">CPU</translation>
     </message>
     <message>
         <source>Process</source>
@@ -312,6 +323,10 @@ to this process?</source>
     </message>
     <message>
         <source>Syslog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Devices</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

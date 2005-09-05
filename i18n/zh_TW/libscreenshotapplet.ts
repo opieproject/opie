@@ -3,7 +3,7 @@
     <name>ScreenshotControl</name>
     <message>
         <source>Name of screenshot </source>
-        <translation>檔案名稱</translation>
+        <translation type="obsolete">檔案名稱</translation>
     </message>
     <message>
         <source>Delay</source>

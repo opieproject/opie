@@ -532,7 +532,7 @@ horaire
     </message>
     <message>
         <source> minutes</source>
-        <translation> mn</translation>
+        <translation type="obsolete"> mn</translation>
     </message>
     <message>
         <source>Silent</source>
@@ -561,6 +561,18 @@ horaire
     <message>
         <source>Note...</source>
         <translation>Note...</translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">jours</translation>
     </message>
 </context>
 <context>

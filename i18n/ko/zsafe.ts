@@ -208,43 +208,43 @@ shows the list of dirs and files</source>
     </message>
     <message>
         <source>&amp;Save document</source>
-        <translation>&amp;Speichern</translation>
+        <translation type="obsolete">&amp;Speichern</translation>
     </message>
     <message>
         <source>S&amp;ave document with new Password</source>
-        <translation>Speichern mit neuem &amp;Passwort</translation>
+        <translation type="obsolete">Speichern mit neuem &amp;Passwort</translation>
     </message>
     <message>
         <source>&amp;Export text file</source>
-        <translation>Textdatei &amp;Exportieren</translation>
+        <translation type="obsolete">Textdatei &amp;Exportieren</translation>
     </message>
     <message>
         <source>&amp;Import text file</source>
-        <translation>Textdatei &amp;Importieren</translation>
+        <translation type="obsolete">Textdatei &amp;Importieren</translation>
     </message>
     <message>
         <source>&amp;Remove text file</source>
-        <translation>Textdatei &amp;löschen</translation>
+        <translation type="obsolete">Textdatei &amp;löschen</translation>
     </message>
     <message>
         <source>&amp;Open entries expanded</source>
-        <translation>&amp;Expandiert Öffnen</translation>
+        <translation type="obsolete">&amp;Expandiert Öffnen</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation>&amp;Beenden</translation>
+        <translation type="obsolete">&amp;Beenden</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Datei</translation>
+        <translation type="obsolete">&amp;Datei</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Neu</translation>
+        <translation type="obsolete">&amp;Neu</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Ändern</translation>
+        <translation type="obsolete">&amp;Ändern</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
@@ -252,35 +252,35 @@ shows the list of dirs and files</source>
     </message>
     <message>
         <source>&amp;Category</source>
-        <translation>&amp;Kategorie</translation>
+        <translation type="obsolete">&amp;Kategorie</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
-        <translation>&amp;Ausschneiden</translation>
+        <translation type="obsolete">&amp;Ausschneiden</translation>
     </message>
     <message>
         <source>C&amp;opy</source>
-        <translation>&amp;Kopieren</translation>
+        <translation type="obsolete">&amp;Kopieren</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation>&amp;Einfügen</translation>
+        <translation type="obsolete">&amp;Einfügen</translation>
     </message>
     <message>
         <source>&amp;Search</source>
-        <translation>&amp;Suchen</translation>
+        <translation type="obsolete">&amp;Suchen</translation>
     </message>
     <message>
         <source>&amp;Entry</source>
-        <translation>&amp;Eintrag</translation>
+        <translation type="obsolete">&amp;Eintrag</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;Über</translation>
+        <translation type="obsolete">&amp;Über</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;Hilfe</translation>
+        <translation type="obsolete">&amp;Hilfe</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -456,35 +456,19 @@ sichern</translation>
     </message>
     <message>
         <source>&amp;New document</source>
-        <translation>&amp;Neue Datei</translation>
+        <translation type="obsolete">&amp;Neue Datei</translation>
     </message>
     <message>
         <source>&amp;Open document</source>
-        <translation>&amp;Öffne Datei</translation>
+        <translation type="obsolete">&amp;Öffne Datei</translation>
     </message>
     <message>
         <source>&amp;Save document as ..</source>
-        <translation>&amp;Speichere Datei als..</translation>
+        <translation type="obsolete">&amp;Speichere Datei als..</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
         <translation type="unfinished">Öffne ZSafe Datei</translation>
-    </message>
-    <message>
-        <source>New entry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edit category or entry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete category or entry</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Find entry</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source></source>
@@ -547,10 +531,6 @@ newly created document.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Password Manager&lt;br&gt;ZSafe version 2.1.2&lt;br&gt;&lt;/b&gt;by Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Translations by Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Copy to Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -560,6 +540,58 @@ newly created document.</source>
     </message>
     <message>
         <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document with new Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open entries expanded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entry</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

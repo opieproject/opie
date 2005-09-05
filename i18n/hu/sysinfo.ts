@@ -113,19 +113,19 @@
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
-        <translation>Alkalmazás CPU használat (%)</translation>
+        <translation type="obsolete">Alkalmazás CPU használat (%)</translation>
     </message>
     <message>
         <source>System CPU usage (%)</source>
-        <translation>Rendszer CPU használat (%)</translation>
+        <translation type="obsolete">Rendszer CPU használat (%)</translation>
     </message>
     <message>
         <source>Type: </source>
-        <translation>Típus:</translation>
+        <translation type="obsolete">Típus:</translation>
     </message>
     <message>
         <source>This page shows how much this device&apos;s processor is being used.</source>
-        <translation>Ez a lap megmutatja, mennyire van az eszköz processzora kihasználva.</translation>
+        <translation type="obsolete">Ez a lap megmutatja, mennyire van az eszköz processzora kihasználva.</translation>
     </message>
 </context>
 <context>
@@ -229,6 +229,17 @@ Bökjön a modul nevére és tartsa, hogy további információkat kapjon a modu
     </message>
 </context>
 <context>
+    <name>Opie::Ui</name>
+    <message>
+        <source>My Computer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is a list of all the devices currently recognized on this device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ProcessInfo</name>
     <message>
         <source>PID</source>
@@ -292,7 +303,7 @@ to this process?</source>
     </message>
     <message>
         <source>CPU</source>
-        <translation>CPU</translation>
+        <translation type="obsolete">CPU</translation>
     </message>
     <message>
         <source>Process</source>
@@ -312,6 +323,10 @@ to this process?</source>
     </message>
     <message>
         <source>Syslog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Devices</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -217,55 +217,55 @@ rāda sarakstu ar direktorijiem un failiem</translation>
     </message>
     <message>
         <source>&amp;New document</source>
-        <translation>&amp;Jauns dokuments</translation>
+        <translation type="obsolete">&amp;Jauns dokuments</translation>
     </message>
     <message>
         <source>&amp;Open document</source>
-        <translation>&amp;Atvērt dokumentu</translation>
+        <translation type="obsolete">&amp;Atvērt dokumentu</translation>
     </message>
     <message>
         <source>&amp;Save document as ..</source>
-        <translation>&amp;Saglabāt dokumentu kā ..</translation>
+        <translation type="obsolete">&amp;Saglabāt dokumentu kā ..</translation>
     </message>
     <message>
         <source>&amp;Save document</source>
-        <translation>&amp;Saglabāt dokumentu</translation>
+        <translation type="obsolete">&amp;Saglabāt dokumentu</translation>
     </message>
     <message>
         <source>S&amp;ave document with new Password</source>
-        <translation>S&amp;aglabāt dokumentu ar jaunu Paroli</translation>
+        <translation type="obsolete">S&amp;aglabāt dokumentu ar jaunu Paroli</translation>
     </message>
     <message>
         <source>&amp;Export text file</source>
-        <translation>&amp;Eksportēt teksta failu</translation>
+        <translation type="obsolete">&amp;Eksportēt teksta failu</translation>
     </message>
     <message>
         <source>&amp;Import text file</source>
-        <translation>&amp;Importēt teksta failu</translation>
+        <translation type="obsolete">&amp;Importēt teksta failu</translation>
     </message>
     <message>
         <source>&amp;Remove text file</source>
-        <translation>&amp;Izņemt teksta failu</translation>
+        <translation type="obsolete">&amp;Izņemt teksta failu</translation>
     </message>
     <message>
         <source>&amp;Open entries expanded</source>
-        <translation>&amp;Atvērt ierakstus izvērsti</translation>
+        <translation type="obsolete">&amp;Atvērt ierakstus izvērsti</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation>&amp;Iziet</translation>
+        <translation type="obsolete">&amp;Iziet</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Fails</translation>
+        <translation type="obsolete">&amp;Fails</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Jauns</translation>
+        <translation type="obsolete">&amp;Jauns</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Labot</translation>
+        <translation type="obsolete">&amp;Labot</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
@@ -273,51 +273,51 @@ rāda sarakstu ar direktorijiem un failiem</translation>
     </message>
     <message>
         <source>&amp;Category</source>
-        <translation>&amp;Categorija</translation>
+        <translation type="obsolete">&amp;Categorija</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
-        <translation>&amp;Izgriezt</translation>
+        <translation type="obsolete">&amp;Izgriezt</translation>
     </message>
     <message>
         <source>C&amp;opy</source>
-        <translation>&amp;Kopēt</translation>
+        <translation type="obsolete">&amp;Kopēt</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation>I&amp;evietot</translation>
+        <translation type="obsolete">I&amp;evietot</translation>
     </message>
     <message>
         <source>&amp;Search</source>
-        <translation>&amp;Meklēt</translation>
+        <translation type="obsolete">&amp;Meklēt</translation>
     </message>
     <message>
         <source>&amp;Entry</source>
-        <translation>&amp;Ieraksts</translation>
+        <translation type="obsolete">&amp;Ieraksts</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>Pa&amp;r</translation>
+        <translation type="obsolete">Pa&amp;r</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;Palīdzība</translation>
+        <translation type="obsolete">&amp;Palīdzība</translation>
     </message>
     <message>
         <source>New entry</source>
-        <translation>Jauns ieraksts</translation>
+        <translation type="obsolete">Jauns ieraksts</translation>
     </message>
     <message>
         <source>Edit category or entry</source>
-        <translation>Labot ieraksta kategoriju</translation>
+        <translation type="obsolete">Labot ieraksta kategoriju</translation>
     </message>
     <message>
         <source>Delete category or entry</source>
-        <translation>Dzēst ieraksta kategoriju</translation>
+        <translation type="obsolete">Dzēst ieraksta kategoriju</translation>
     </message>
     <message>
         <source>Find entry</source>
-        <translation>Meklēt ierakstu</translation>
+        <translation type="obsolete">Meklēt ierakstu</translation>
     </message>
     <message>
         <source>Name</source>
@@ -554,10 +554,6 @@ paroli divas reizes.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;body&gt;&lt;div align=center&gt;&lt;b&gt;Zaurus Password Manager&lt;br&gt;ZSafe version 2.1.2&lt;br&gt;&lt;/b&gt;by Carsten Schneider&lt;br&gt;zcarsten@gmx.net&lt;br&gt;http://z-soft.z-portal.info/zsafe&lt;br&gt;Translations by Robert Ernst&lt;br&gt;robert.ernst@linux-solutions.at&lt;br&gt;&lt;br&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Copy to Clipboard</source>
         <translation type="unfinished"></translation>
     </message>
@@ -571,6 +567,58 @@ paroli divas reizes.</translation>
     </message>
     <message>
         <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document as</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save document with new Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open entries expanded</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Entry</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -298,7 +298,7 @@ http://www.trolltech.com
     <message>
         <source>Last name first 
 (requires library restart)</source>
-        <translation>Сначала фамилия 
+        <translation type="obsolete">Сначала фамилия 
 (необходим перезапуск библиотеки)</translation>
     </message>
     <message>
@@ -312,6 +312,14 @@ http://www.trolltech.com
     <message>
         <source>&lt;p&gt;Error opening library index file. Please download a new one.&lt;/P&gt; </source>
         <translation>&lt;p&gt;Ошибка открытия файла индекса библиотеки. Пожалуйста скачайте новый.&lt;/P&gt; </translation>
+    </message>
+    <message>
+        <source>   </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Last name first.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -531,7 +531,7 @@ Sair na mesma?</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation>minutos</translation>
+        <translation type="obsolete">minutos</translation>
     </message>
     <message>
         <source>Silent</source>
@@ -552,6 +552,18 @@ Sair na mesma?</translation>
     <message>
         <source>Note...</source>
         <translation>Nota...</translation>
+    </message>
+    <message>
+        <source>minutes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>hours</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>days</source>
+        <translation type="unfinished">dias</translation>
     </message>
 </context>
 <context>

@@ -3,7 +3,7 @@
     <name>ScreenshotControl</name>
     <message>
         <source>Name of screenshot </source>
-        <translation>Nome da captura do ecrâ</translation>
+        <translation type="obsolete">Nome da captura do ecrâ</translation>
     </message>
     <message>
         <source>Delay</source>
