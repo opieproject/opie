@@ -1,206 +1,207 @@
-<!DOCTYPE TS><TS>
-<context>
+<!DOCTYPE TS>
+<TS>
+  <context>
     <name>AlarmDlg</name>
     <message>
-        <source>Clock</source>
-        <translation type="unfinished">Zegar</translation>
+      <source>Clock</source>
+      <translation>Zegar</translation>
     </message>
     <message>
-        <source>Snooze</source>
-        <translation type="unfinished">Drzemka</translation>
+      <source>Snooze</source>
+      <translation>Drzemka</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
+      <source>Close</source>
+      <translation type="unfinished" />
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>AlarmDlgBase</name>
     <message>
-        <source>Form1</source>
-        <translation type="unfinished"></translation>
+      <source>Form1</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>TextLabel1</source>
-        <translation type="unfinished"></translation>
+      <source>TextLabel1</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Snooze</source>
-        <translation type="unfinished">Drzemka</translation>
+      <source>Snooze</source>
+      <translation>Drzemka</translation>
     </message>
     <message>
-        <source> mins</source>
-        <translation type="unfinished"></translation>
+      <source> mins</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
+      <source>Close</source>
+      <translation type="unfinished" />
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>Clock</name>
     <message>
-        <source>Start</source>
-        <translation>Uruchom</translation>
+      <source>Start</source>
+      <translation>Uruchom</translation>
     </message>
     <message>
-        <source>Reset</source>
-        <translation>Zeruj</translation>
+      <source>Reset</source>
+      <translation>Zeruj</translation>
     </message>
     <message>
-        <source>Stop</source>
-        <translation>Zatrzymaj</translation>
+      <source>Stop</source>
+      <translation>Zatrzymaj</translation>
     </message>
     <message>
-        <source>Mon</source>
-        <comment>Monday</comment>
-        <translation type="unfinished"></translation>
+      <source>Mon</source>
+      <comment>Monday</comment>
+      <translation>Pon</translation>
     </message>
     <message>
-        <source>Tue</source>
-        <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
+      <source>Tue</source>
+      <comment>Tuesday</comment>
+      <translation>Wto</translation>
     </message>
     <message>
-        <source>Wed</source>
-        <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
+      <source>Wed</source>
+      <comment>Wednesday</comment>
+      <translation>Śro</translation>
     </message>
     <message>
-        <source>Thu</source>
-        <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
+      <source>Thu</source>
+      <comment>Thursday</comment>
+      <translation>Czw</translation>
     </message>
     <message>
-        <source>Fri</source>
-        <comment>Friday</comment>
-        <translation type="unfinished"></translation>
+      <source>Fri</source>
+      <comment>Friday</comment>
+      <translation>Pią</translation>
     </message>
     <message>
-        <source>Sat</source>
-        <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
+      <source>Sat</source>
+      <comment>Saturday</comment>
+      <translation>Sob</translation>
     </message>
     <message>
-        <source>Sun</source>
-        <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
+      <source>Sun</source>
+      <comment>Sunday</comment>
+      <translation>Nie</translation>
     </message>
     <message>
-        <source>Lap/Split</source>
-        <translation type="unfinished"></translation>
+      <source>Lap/Split</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>&lt;b&gt;Daily Alarm:&lt;/b&gt;&lt;p&gt;</source>
-        <translation type="unfinished"></translation>
+      <source>&lt;b>Daily Alarm:&lt;/b>&lt;p></source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Select Day</source>
-        <translation type="unfinished"></translation>
+      <source>Select Day</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Daily alarm requires at least
+      <source>Daily alarm requires at least
 one day to be selected.</source>
-        <translation type="unfinished"></translation>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>All</source>
-        <translation type="unfinished">Wszystkie</translation>
+      <source>All</source>
+      <translation>Wszystkie</translation>
     </message>
     <message>
-        <source>Audio</source>
-        <translation type="unfinished">Audio</translation>
+      <source>Audio</source>
+      <translation>Audio</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>ClockBase</name>
     <message>
-        <source>Clock</source>
-        <translation type="unfinished">Zegar</translation>
+      <source>Clock</source>
+      <translation>Zegar</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
+      <source>...</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Stopwatch</source>
-        <translation type="unfinished">Stoper</translation>
+      <source>Stopwatch</source>
+      <translation>Stoper</translation>
     </message>
     <message>
-        <source>Split</source>
-        <translation type="unfinished"></translation>
+      <source>Split</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Lap</source>
-        <translation type="unfinished"></translation>
+      <source>Lap</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Start</source>
-        <translation type="unfinished">Uruchom</translation>
+      <source>Start</source>
+      <translation>Uruchom</translation>
     </message>
     <message>
-        <source>Starts and stops the stopwatch.</source>
-        <translation type="unfinished"></translation>
+      <source>Starts and stops the stopwatch.</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Lap/Split</source>
-        <translation type="unfinished"></translation>
+      <source>Lap/Split</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Resets the stopwatch.</source>
-        <translation type="unfinished"></translation>
+      <source>Resets the stopwatch.</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Alarm</source>
-        <translation type="unfinished"></translation>
+      <source>Alarm</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Daily Alarm</source>
-        <translation type="unfinished"></translation>
+      <source>Daily Alarm</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Enabled</source>
-        <translation type="unfinished"></translation>
+      <source>Enabled</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Check to enable the daily alarm</source>
-        <translation type="unfinished"></translation>
+      <source>Check to enable the daily alarm</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Set the hour the alarm will sound.</source>
-        <translation type="unfinished"></translation>
+      <source>Set the hour the alarm will sound.</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>:</source>
-        <translation type="unfinished"></translation>
+      <source>:</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Set the minute the alarm will sound.</source>
-        <translation type="unfinished"></translation>
+      <source>Set the minute the alarm will sound.</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>AM</source>
-        <translation type="unfinished">AM</translation>
+      <source>AM</source>
+      <translation>AM</translation>
     </message>
     <message>
-        <source>PM</source>
-        <translation type="unfinished">PM</translation>
+      <source>PM</source>
+      <translation>PM</translation>
     </message>
     <message>
-        <source>Days:</source>
-        <translation type="unfinished"></translation>
+      <source>Days:</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Countdown Alarm</source>
-        <translation type="unfinished"></translation>
+      <source>Countdown Alarm</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Play Sound</source>
-        <translation type="unfinished"></translation>
+      <source>Play Sound</source>
+      <translation type="unfinished" />
     </message>
     <message>
-        <source>Play File</source>
-        <translation type="unfinished"></translation>
+      <source>Play File</source>
+      <translation type="unfinished" />
     </message>
-</context>
+  </context>
 </TS>

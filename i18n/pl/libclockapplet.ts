@@ -1,17 +1,18 @@
-<!DOCTYPE TS><TS>
-<context>
+<!DOCTYPE TS>
+<TS>
+  <context>
     <name>LauncherClock</name>
     <message>
-        <source>Set time...</source>
-        <translation type="unfinished"></translation>
+      <source>Set time...</source>
+      <translation>Ustaw czas...</translation>
     </message>
     <message>
-        <source>Clock..</source>
-        <translation type="unfinished"></translation>
+      <source>Clock..</source>
+      <translation>Zegar..</translation>
     </message>
     <message>
-        <source>Alarm...</source>
-        <translation type="unfinished"></translation>
+      <source>Alarm...</source>
+      <translation type="unfinished" />
     </message>
-</context>
+  </context>
 </TS>

@@ -1,180 +1,180 @@
-<!DOCTYPE TS><TS>
-<context>
+<!DOCTYPE TS>
+<TS>
+  <context>
     <name>FormatterApp</name>
     <message>
-        <source>Formatter</source>
-        <translation>Formater</translation>
+      <source>Formatter</source>
+      <translation>Formater</translation>
     </message>
     <message>
-        <source>Storage Type</source>
-        <translation>Typ pamieci</translation>
+      <source>Storage Type</source>
+      <translation>Typ pamięci</translation>
     </message>
     <message>
-        <source>File Systems</source>
-        <translation>Systemy plikow</translation>
+      <source>File Systems</source>
+      <translation>Systemy plików</translation>
     </message>
     <message>
-        <source>Format</source>
-        <translation>Format</translation>
+      <source>Format</source>
+      <translation>Format</translation>
     </message>
     <message>
-        <source>Main</source>
-        <translation>Glowny</translation>
+      <source>Main</source>
+      <translation>Główny</translation>
     </message>
     <message>
-        <source>Edit fstab</source>
-        <translation>Edytuj fstab</translation>
+      <source>Edit fstab</source>
+      <translation>Edytuj fstab</translation>
     </message>
     <message>
-        <source>Check Disk</source>
-        <translation>Sprawdz dysk</translation>
+      <source>Check Disk</source>
+      <translation>Sprawdź dysk</translation>
     </message>
     <message>
-        <source>Device</source>
-        <translation>Urzadzenie</translation>
+      <source>Device</source>
+      <translation>Urządzenie</translation>
     </message>
     <message>
-        <source>Mount Point</source>
-        <translation>Punkt montowania</translation>
+      <source>Mount Point</source>
+      <translation>Punkt montowania</translation>
     </message>
     <message>
-        <source>Advanced</source>
-        <translation>Zaawansowane</translation>
+      <source>Advanced</source>
+      <translation>Zaawansowane</translation>
     </message>
     <message>
-        <source>Really format
+      <source>Really format
 </source>
-        <translation>Na pewno formatowac
-</translation>
+      <translation>Na pewno formatować</translation>
     </message>
     <message>
-        <source>Yes</source>
-        <translation>Tak</translation>
+      <source>Yes</source>
+      <translation>Tak</translation>
     </message>
     <message>
-        <source>No</source>
-        <translation>Nie</translation>
+      <source>No</source>
+      <translation>Nie</translation>
     </message>
     <message>
-        <source>Could not format.
+      <source>Could not format.
 Unknown type</source>
-        <translation>Nie mozna zformatowac.
+      <translation>Nie można sformatować.
 Nieznany typ</translation>
     </message>
     <message>
-        <source>Ok</source>
-        <translation>Ok</translation>
+      <source>Ok</source>
+      <translation>Ok</translation>
     </message>
     <message>
-        <source>Formatter Output</source>
-        <translation>Dane wyjsciowe Formatera</translation>
+      <source>Formatter Output</source>
+      <translation>Dane wyjściowe Formatera</translation>
     </message>
     <message>
-        <source>Trying to umount.</source>
-        <translation>Probuje odmontowac.</translation>
+      <source>Trying to umount.</source>
+      <translation>Probuje odmontować.</translation>
     </message>
     <message>
-        <source>umount failed!</source>
-        <translation>odmontowanie sie nie powiodlo!</translation>
+      <source>umount failed!</source>
+      <translation>odmontowanie sie nie powiodło!</translation>
     </message>
     <message>
-        <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+      <source>&amp;OK</source>
+      <translation>&amp;OK</translation>
     </message>
     <message>
-        <source>Could not umount.
+      <source>Could not umount.
 Device is busy!</source>
-        <translation>Nie mozna odmontowac. Urzadzenie jest uzywane!</translation>
+      <translation>Nie można odmontować. Urządzenie jest używane!</translation>
     </message>
     <message>
-        <source>Trying to format.</source>
-        <translation>Probuje formatowac.</translation>
+      <source>Trying to format.</source>
+      <translation>Probuje formatować.</translation>
     </message>
     <message>
-        <source>No such device!</source>
-        <translation>Brak takiego urzadzenia!</translation>
+      <source>No such device!</source>
+      <translation>Brak takiego urządzenia!</translation>
     </message>
     <message>
-        <source>
+      <source>
 has been successfully formatted.</source>
-        <translation>
-zostal zformatowany.</translation>
+      <translation>
+został sformatowany.</translation>
     </message>
     <message>
-        <source>Card mount failed!</source>
-        <translation>Zamontowanie karty nie powiodlo sie!</translation>
+      <source>Card mount failed!</source>
+      <translation>Zamontowanie karty nie powiodło sie!</translation>
     </message>
     <message>
-        <source>You can now close the output window.</source>
-        <translation>Mozesz zamknac okno z wynikami.</translation>
+      <source>You can now close the output window.</source>
+      <translation>Możesz zamknąć okno z wynikami.</translation>
     </message>
     <message>
-        <source>Internal</source>
-        <translation>Wewnetrzny</translation>
+      <source>Internal</source>
+      <translation>Wewnętrzny</translation>
     </message>
     <message>
-        <source>Total: %1 kB ( %d mB)
+      <source>Total: %1 kB ( %d mB)
 </source>
-        <translation>Calosc: %1 kB ( %d mB)
+      <translation>Całość: %1 kB ( %d mB)
 </translation>
     </message>
     <message>
-        <source>Used: %1 kB ( %d mB)
+      <source>Used: %1 kB ( %d mB)
 </source>
-        <translation>Zajete: %1 kB ( %d mB)
+      <translation>Zajęte: %1 kB ( %d mB)
 </translation>
     </message>
     <message>
-        <source>Available: %1 kB ( %d mB)</source>
-        <translation>Dostepne: %1 kB ( %d mB)</translation>
+      <source>Available: %1 kB ( %d mB)</source>
+      <translation>Dostępne: %1 kB ( %d mB)</translation>
     </message>
     <message>
-        <source>CAUTION:
+      <source>CAUTION:
 Changing parameters on this
 page may cause your system
 to stop functioning properly!</source>
-        <translation>UWAGA:
-Zmiana parametrow na tej
-stronie moe spowodowac nieprawidlowe
+      <translation>UWAGA:
+Zmiana parametrów na tej
+stronie może spowodować nieprawidłowe 
 funkcjonowanie systemu!</translation>
     </message>
     <message>
-        <source>Format?</source>
-        <translation>Formatowac?</translation>
+      <source>Format?</source>
+      <translation>Formatować?</translation>
     </message>
     <message>
-        <source>
+      <source>
 with %1 filesystem?
 You will loose all data!!</source>
-        <translation>
+      <translation>
 na system %1?
 Stracisz wszystkie dane!!</translation>
     </message>
     <message>
-        <source>Trying to umount %1.</source>
-        <translation>Odmontowuje %1.</translation>
+      <source>Trying to umount %1.</source>
+      <translation>Odmontowuje %1.</translation>
     </message>
     <message>
-        <source>Trying to mount %1.</source>
-        <translation>Montuje %1.</translation>
+      <source>Trying to mount %1.</source>
+      <translation>Montuje %1.</translation>
     </message>
     <message>
-        <source>%1
+      <source>%1
 has been successfully mounted.</source>
-        <translation>%1
-zostal zamontowany.</translation>
+      <translation>%1
+został zamontowany.</translation>
     </message>
     <message>
-        <source>Storage Type: %1</source>
-        <translation>Typ Nosnika: %1</translation>
+      <source>Storage Type: %1</source>
+      <translation>Typ Nośnika: %1</translation>
     </message>
     <message>
-        <source>Type: %1
+      <source>Type: %1
 Formatted with %2
 %3, %4, %5</source>
-        <translation>Typ: %1
-Zformatowany na %2
+      <translation>Typ: %1
+Sformatowany na %2
 %3, %4, %5</translation>
     </message>
-</context>
+  </context>
 </TS>
