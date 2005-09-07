@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>Fortune plugin</source>
-        <translation>Plugin Fortune</translation>
+        <translation>Wtyczka Fortune</translation>
     </message>
 </context>
 </TS>

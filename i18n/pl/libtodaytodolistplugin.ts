@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>Todolist plugin</source>
-        <translation>Plugin ZróbTo</translation>
+        <translation>Wtyczka ZróbTo</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>

@@ -22,7 +22,7 @@
     <name>DatebookPluginConfigBase</name>
     <message>
         <source>DatebookPluginConfigBase</source>
-        <translation>Konfiguracja pluginu Kalendarza</translation>
+        <translation>Konfiguracja wtyczki Kalendarza</translation>
     </message>
     <message>
         <source>Show location</source>
@@ -81,7 +81,7 @@
     <name>QObject</name>
     <message>
         <source>Datebook plugin</source>
-        <translation>Plugin Kalendarz</translation>
+        <translation>Wtyczka Kalendarz</translation>
     </message>
     <message>
         <source>No more appointments today</source>

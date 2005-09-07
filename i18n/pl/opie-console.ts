@@ -559,7 +559,7 @@
     <name>NoOptions</name>
     <message>
       <source>This Plugin does not support any configurations</source>
-      <translation>Ta Wtyczka nie obsługuje żadnej konfiguracji</translation>
+      <translation>Ta wtyczka nie obsługuje żadnej konfiguracji</translation>
     </message>
   </context>
   <context>

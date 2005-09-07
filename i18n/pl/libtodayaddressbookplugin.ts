@@ -77,7 +77,7 @@ jeśli bliżej niż</translation>
     <name>QObject</name>
     <message>
       <source>AddressBook plugin</source>
-      <translation>Plugin Książka Adresowa</translation>
+      <translation>Wtyczka Książka Adresowa</translation>
     </message>
     <message>
       <source>Next birthdays in &lt;b> %1 &lt;/b> days:</source>
