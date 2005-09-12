@@ -661,7 +661,14 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
 
     // Finally, draw the number.
     QFont f = p->font();
-    f.setPointSize( ( f.pointSize() / 3 ) * 2 );
+    if(qApp->desktop()->width() >= 480)
+    {
+	f.setPointSize( f.pointSize() - 2 );
+    }
+    else
+    {
+	f.setPointSize( ( f.pointSize() / 3 ) * 2 );
+    }
     p->setFont( f );
     QFontMetrics fm( f );
     p->drawText( 1, 1 + fm.ascent(), QString::number( day() ) );
