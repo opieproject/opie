@@ -20,6 +20,7 @@
 #include <opie2/odebug.h>
 #include <opie2/olistview.h>
 #include <opie2/oapplication.h>
+#include <qpe/config.h>
 
 /* QT */
 #include <qfont.h>
@@ -38,6 +39,9 @@ using namespace Opie::Ui;
 PacketView::PacketView( QWidget * parent, const char * name, WFlags f )
            :QFrame( parent, name, f )
 {
+    Config c( "qpe" );
+    c.setGroup( "Appearance" );
+    
     _number = new QSpinBox( this );
     _number->setPrefix( "Pkt# " );
     _label = new QLabel( this );
@@ -47,11 +51,10 @@ PacketView::PacketView( QWidget * parent, const char * name, WFlags f )
     _list->setColumnAlignment( 0, Qt::AlignCenter );
     _list->setColumnAlignment( 1, Qt::AlignLeft );
     _list->setAllColumnsShowFocus( true );
-    _list->setFont( QFont( "Fixed", 8 ) );
 
     _hex = new QTextView( this );
     _hex->setMargin( 0 );
-    _hex->setFont( QFont( "Fixed", 8 ) );
+    _hex->setFont( QFont( c.readEntry( "FixedFontFamily", "Fixed" ), c.readNumEntry( "FixedFontSize", 8 ) ) );
 
     QVBoxLayout* vb = new QVBoxLayout( this, 2, 2 );
     QHBoxLayout* hb = new QHBoxLayout( vb, 2 );
