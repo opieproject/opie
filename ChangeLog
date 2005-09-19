@@ -9,6 +9,7 @@
 	----------
 	* #1695 - Date selector use too small fontsize on VGA screen (hrw)
 	* n.a.  - remove hardcoded font size from wellenreiter (hrw)
+	* n.a.  - added patch to build QT/E 2.3.10 with gc 4.x.x (hrw)
 
 2005-09-11	Opie 1.2.1
 	
