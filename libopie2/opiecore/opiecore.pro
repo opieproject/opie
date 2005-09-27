@@ -34,7 +34,8 @@ SOURCES     = oapplication.cpp          \
 
 
 # Disable Linux-only subsystems for MAC build
-!contains( CONFIG_TARGET_MACOSX, y ) {
+CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
+!contains( CONFTEST, y ) {
 include ( linux/linux.pro )
 } else {
     message( "disabling linux-only subsystems for MAC build" )

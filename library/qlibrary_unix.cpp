@@ -153,7 +153,7 @@ bool QLibraryPrivate::freeLibrary()
 	DyldLibDesc* desc = (DyldLibDesc*) pHnd;
 	NSModule mod = desc->mod;
 	NSObjectFileImage img = desc->img;
-	DYLD_BOOL success = NSUnLinkModule(mod, NSUNLINKMODULE_OPTION_NONE);
+	bool success = NSUnLinkModule(mod, NSUNLINKMODULE_OPTION_NONE);
 	if ( success ) {
 	NSDestroyObjectFileImage(img);
 	delete desc;

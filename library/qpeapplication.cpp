@@ -2207,7 +2207,7 @@ void QPEApplication::hideOrQuit()
         quit();
 }
 
-#if (__GNUC__ > 2 )
+#if (__GNUC__ > 2 ) && !defined(_OS_MACX_)
 extern "C" void __cxa_pure_virtual();
 
 void __cxa_pure_virtual()
