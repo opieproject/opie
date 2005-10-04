@@ -225,7 +225,7 @@ inline void QPEApplication::setCurrentRotation( int r )
 #define QTOPIA_ADD_APPLICATION(NAME,IMPLEMENTATION) 			\
 	int main( int argc, char** argv )				\
 	{ 								\
-		QPEApplication app = QPEApplication( argc, argv );	\
+		QPEApplication app( argc, argv );	\
 		IMPLEMENTATION* mw = new IMPLEMENTATION();		\
 		app.showMainWidget( mw );				\
 		app.exec();						\
