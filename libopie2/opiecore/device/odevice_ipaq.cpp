@@ -151,6 +151,8 @@ void iPAQ::init(const QString& model)
         d->m_model = Model_iPAQ_H22xx;
     else if ( d->m_modelstr == "H1910" )
         d->m_model = Model_iPAQ_H191x;
+    else if ( d->m_modelstr == "H1940" )
+        d->m_model = Model_iPAQ_H1940;
     else
         d->m_model = Model_Unknown;
 
@@ -162,6 +164,7 @@ void iPAQ::init(const QString& model)
         case Model_iPAQ_H5xxx:
         case Model_iPAQ_H22xx:
         case Model_iPAQ_H191x:
+        case Model_iPAQ_H1940:
             d->m_rotation = Rot0;
             break;
         case Model_iPAQ_H36xx:
@@ -300,7 +303,8 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
             // add the rotation to it and modolo. No we've the original offset
             // add the offset to the Key_Left key
             if (( d->m_model == Model_iPAQ_H5xxx ) ||
-		( d->m_model == Model_iPAQ_H191x ))
+		( d->m_model == Model_iPAQ_H191x ) ||
+		( d->m_model == Model_iPAQ_H1940 ))
                 newkeycode = Key_Left + ( keycode - Key_Left + 3 ) % 4;
             break;
         }
@@ -402,6 +406,8 @@ int iPAQ::displayBrightnessResolution() const
             return 255;
         case Model_iPAQ_H191x:
             return 183;
+        case Model_iPAQ_H191x:
+            return 44;
         default:
             return 2;
     }
