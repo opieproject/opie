@@ -250,3 +250,6 @@ void EmulationHandler::setWrap(int columns) {
   m_teWid->setWrapAt(columns);
 }
 
+void EmulationHandler::setScrollbarLocation(int index) {
+  m_teWid->setScrollbarLocation(index);
+}

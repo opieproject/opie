@@ -8,6 +8,7 @@
 	Fixed Bugs
 	----------
 	* #1695 - Date selector use too small fontsize on VGA screen (hrw)
+	* #1686 - opie-console lack UI setting for switching scrollbar (hrw)
 	* n.a.  - remove hardcoded font size from wellenreiter (hrw)
 	* n.a.  - added patch to build QT/E 2.3.10 with gc 4.x.x (hrw)
 

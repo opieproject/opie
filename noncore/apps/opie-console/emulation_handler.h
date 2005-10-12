@@ -83,6 +83,7 @@ public:
 
 	/* Propagate change to widget */
 	void setWrap(int columns);
+	void setScrollbarLocation(int index);
 signals:
     void send( const QByteArray& );
     void changeSize(int rows, int cols );

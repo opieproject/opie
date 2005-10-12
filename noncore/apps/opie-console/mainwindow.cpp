@@ -69,6 +69,7 @@ void MainWindow::initUI() {
     m_scripts = new QPopupMenu( this );
     m_sessionsPop= new QPopupMenu( this );
     m_scriptsPop = new QPopupMenu( this );
+    m_scrollbar = new QPopupMenu( this );
 
     /* add a toolbar for icons */
     m_icons = new QToolBar(this);
@@ -163,6 +164,17 @@ void MainWindow::initUI() {
     m_fullscreen->addTo( m_console );
     connect( m_fullscreen, SIGNAL( activated() ),
              this,  SLOT( slotFullscreen() ) );
+
+	/*
+	 * scrollbar
+	 */
+    sm_none = m_scrollbar->insertItem(tr( "None" ));
+    sm_left = m_scrollbar->insertItem(tr( "Left" ));
+    sm_right = m_scrollbar->insertItem(tr( "Right" ));
+
+    m_console->insertItem(tr("Scrollbar"), m_scrollbar, -1, 0);
+    connect( m_scrollbar, SIGNAL(activated(int)),
+			 this, SLOT(slotScrollbarSelected(int)));
 
     m_console->insertSeparator();
 
@@ -693,6 +705,35 @@ void MainWindow::slotFullscreen() {
     m_isFullscreen = !m_isFullscreen;
 }
 
+void MainWindow::slotScrollbarSelected(int index)
+{
+	int loc;
+
+    Config cfg( "Konsole" );
+    cfg.setGroup("ScrollBar");
+    if(index == sm_none)
+    {
+		loc = 0;
+    }
+    else if(index == sm_left)
+    {
+		loc = 1;
+    }
+    else if(index == sm_right)
+    {
+		loc = 2;
+    }
+	
+	cfg.writeEntry("Position", loc);
+
+    if (currentSession()) {
+        currentSession()->emulationHandler()->setScrollbarLocation(loc);
+    }
+
+    m_scrollbar->setItemChecked(sm_none, index == sm_none);
+    m_scrollbar->setItemChecked(sm_left, index == sm_left);
+    m_scrollbar->setItemChecked(sm_right, index == sm_right);
+}
 
 void MainWindow::slotKeyReceived(FKey k, ushort, ushort, bool pressed) {
 

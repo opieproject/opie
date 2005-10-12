@@ -24,6 +24,7 @@ class FunctionKeyboard;
 class FKey;
 class DocLnk;
 
+
 class MainWindow : public QMainWindow {
     Q_OBJECT
 public:
@@ -75,6 +76,7 @@ private slots:
     void slotKeyReceived(FKey, ushort, ushort, bool);
     void slotSaveHistory();
     void slotSaveLog();
+    void slotScrollbarSelected(int);
 
     /* what could these both slot do? */
     void slotCopy();
@@ -105,6 +107,12 @@ private:
     MetaFactory* m_factory;
     ProfileManager* m_manager;
 
+	/*
+	 * scrollbar
+	 */
+
+    int sm_none, sm_left, sm_right;
+	
     TabWidget* m_consoleWindow;
     QToolBar* m_tool;
     QToolBar* m_icons;
@@ -115,6 +123,7 @@ private:
     QPopupMenu* m_sessionsPop;
     QPopupMenu* m_scriptsPop;
     QPopupMenu* m_scripts;
+    QPopupMenu* m_scrollbar;
     QAction* m_connect;
     QAction* m_disconnect;
     QAction* m_quickLaunch;
