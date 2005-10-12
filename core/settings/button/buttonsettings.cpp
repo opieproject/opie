@@ -37,7 +37,7 @@ _;:,   .>  :=|.         This file is free software; you can
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qscrollview.h>
-
+#include <qcopchannel_qws.h>
 
 using namespace Opie::Core;
 
@@ -157,6 +157,7 @@ ButtonSettings::ButtonSettings ( QWidget *parent , const char *,  bool, WFlags  
 ButtonSettings::~ButtonSettings ( )
 {
     QPEApplication::ungrabKeyboard ( );
+    QCopChannel::send ("QPE/System", "deviceButtonMappingChanged()" );
 }
 
 void ButtonSettings::updateLabels ( )
