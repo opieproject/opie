@@ -10,6 +10,7 @@
 	* #1695 - Date selector use too small fontsize on VGA screen (hrw)
 	* #1686 - opie-console lack UI setting for switching scrollbar (hrw)
 	* #1624 - Button settngs changes are applied only after restart (hrw)
+	* #1492 - Backup and Restore does not show list of backups to restore on start (hrw)
 	* n.a.  - remove hardcoded font size from wellenreiter (hrw)
 	* n.a.  - added patch to build QT/E 2.3.10 with gc 4.x.x (hrw)
 

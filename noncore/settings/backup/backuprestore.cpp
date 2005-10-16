@@ -102,6 +102,7 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
     scanForApplicationSettings();
     refreshLocations();
     refreshBackupLocations();
+    sourceDirChanged(restoreSource->currentItem());
 
     // Read the list of items to ignore.
     QList<QString> dontBackupList;
