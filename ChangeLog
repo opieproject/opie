@@ -3,7 +3,7 @@
 	
 	New Features
 	------------
-
+	* Appearance: Added configuration options to set smallIconSize, bigIconSize, useBigPixmaps (hrw)
 
 	Fixed Bugs
 	----------

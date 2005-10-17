@@ -37,6 +37,7 @@
 #include <qpe/fontdatabase.h>
 
 #include <qdialog.h>
+#include <qspinbox.h>
 
 using Opie::Ui::OFontSelector;
 
@@ -123,6 +124,10 @@ private:
 
     QWidget *     m_advtab;
     QCheckBox    *m_leftHand;
+
+    QSpinBox	*m_bigIconSize;
+    QSpinBox	*m_smallIconSize;
+    QCheckBox	*m_useBigPixmaps;
 };
 
 #endif

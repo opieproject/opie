@@ -394,6 +394,39 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
     m_rotdir_ccw-> setChecked ( rot == CCW );
     m_rotdir_flip-> setChecked ( rot == Flip );
 
+    QFrame *f2 = new QFrame ( tab );
+    f2-> setFrameStyle ( QFrame::HLine | QFrame::Sunken );
+    vertLayout-> addWidget ( f2 );
+    vertLayout-> addSpacing ( 3 );
+
+    QHBoxLayout *bigIconlay = new QHBoxLayout ( vertLayout, 3 );
+
+    QLabel* label2 = new QLabel( tr( "&Big Icon size:" ), tab );
+    bigIconlay-> addWidget ( label2, 0, 0 );
+
+    m_bigIconSize = new QSpinBox(0, 128, 1, tab);
+    m_bigIconSize->setValue(cfg.readNumEntry( "BigIconSize" ));
+    bigIconlay->addWidget( m_bigIconSize );
+    label2->setBuddy( m_bigIconSize );
+    QWhatsThis::add( label2, tr( "Big Icon Size determines the size of the application icons in Launcher" ) );
+    QWhatsThis::add( m_bigIconSize, tr( "Big Icon Size determines the size of the application icons in Launcher" ) );
+
+    QHBoxLayout *smallIconlay = new QHBoxLayout ( vertLayout, 3 );
+
+    QLabel* label3 = new QLabel( tr( "&Small Icon size:" ), tab );
+    smallIconlay-> addWidget ( label3, 0, 0 );
+
+    m_smallIconSize = new QSpinBox(0, 128, 1, tab);
+    m_smallIconSize->setValue(cfg.readNumEntry( "SmallIconSize" ));
+    smallIconlay->addWidget( m_smallIconSize );
+    label3->setBuddy( m_smallIconSize );
+    QWhatsThis::add( label3, tr( "Small Icon Size determines the size of many of the icons seen in applications (in menus, tab bars, tool bars, etc.), as well as the size of taskbar." ) );
+    QWhatsThis::add( m_smallIconSize, tr( "Small Icon Size determines the size of many of the icons seen in applications (in menus, tab bars, tool bars, etc.), as well as the size of taskbar." ) );
+
+    m_useBigPixmaps = new QCheckBox( tr("use Big &Pixmaps"), tab);
+    m_useBigPixmaps->setChecked(cfg.readBoolEntry( "useBigPixmaps" ));
+    vertLayout->addWidget( m_useBigPixmaps );
+    QWhatsThis::add( m_useBigPixmaps, tr( "Enlarge toolbar pixmaps" ) );
 
     /*
      * add a spacing
@@ -512,6 +545,10 @@ void Appearance::accept ( )
     config. writeEntry ( "rotatedir", (int)rot );
 
     config. writeEntry( "LeftHand", m_leftHand->isChecked() );
+
+    config. writeEntry( "useBigPixmaps", m_useBigPixmaps->isChecked() );
+    config. writeEntry( "BigIconSize", m_bigIconSize->value() );
+    config. writeEntry( "SmallIconSize", m_smallIconSize->value() );
 
     config. write ( ); // need to flush the config info first
     Global::applyStyle ( );
