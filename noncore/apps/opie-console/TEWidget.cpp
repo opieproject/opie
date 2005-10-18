@@ -320,16 +320,21 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
 
   Config cfg("Konsole");
   cfg.setGroup("ScrollBar");
-  switch( cfg.readNumEntry("Position",2)){
-  case 0:
-      scrollLoc = SCRNONE;
-      break;
-  case 1:
-      scrollLoc = SCRLEFT;
-      break;
-  case 2:
-      scrollLoc = SCRRIGHT;
-      break;
+  
+  scrollLoc = cfg.readNumEntry("Position", -1);
+
+  // bugfix for #1647
+  // if user set 'show scrollbar on left' then let it be on left
+  // but only if it is not set in opie-console itself
+  if(scrollLoc == -1)
+  {
+      Config qpecfg ("qpe");
+      qpecfg.setGroup("Appearance");
+      scrollLoc = qpecfg.readNumEntry("LeftHand", SCRRIGHT);
+      if(scrollLoc == 0)    // user set LeftHand in past and switched it off later
+      {
+	  scrollLoc = SCRRIGHT;
+      }
   };
 
   blinkT   = new QTimer(this);
