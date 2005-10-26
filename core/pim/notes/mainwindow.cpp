@@ -20,6 +20,9 @@
  *                 - variables translated to English (were in German)
  *                 - started work on beaming
  *
+ *  - 2005.10.26 - version 0.4:
+ *                 - added check does Documents/text/plain exist and create it if not
+ *
  *  ToDo:
  *  - beaming
  *  - moving to SQLite database
@@ -41,6 +44,33 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
     setCentralWidget(notesList);
 
     documentsDirName = QPEApplication::documentDir() + "/text/plain/";
+
+    fileList.setPath(documentsDirName);
+
+    if(!fileList.exists())
+    {
+        fileList.setPath(QPEApplication::documentDir() + "/text/");
+
+        if(!fileList.exists())
+        {
+            QString text;
+
+            if(!fileList.mkdir(fileList.absPath()))
+            {
+                QMessageBox::critical(0, tr("i/o error"), text.sprintf(tr("Could not create directory '%s'"), fileList.absPath()));
+            }
+            else
+            {
+                fileList.setPath(documentsDirName);
+
+                if(!fileList.mkdir(fileList.absPath()))
+                {
+                    QMessageBox::critical(0, tr("i/o error"), text.sprintf(tr("Could not create directory '%s'"), fileList.absPath()));
+                }
+            }
+        }
+    }
+
     this->selected = -1;
     refreshList();
 
