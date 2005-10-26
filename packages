@@ -132,6 +132,7 @@ CONFIG_MULTIKEY	inputmethods/multikey	multikey.pro
 CONFIG_NETSYSTEMTIME	noncore/settings/netsystemtime	netsystemtime.pro
 CONFIG_NETWORKAPPLET	noncore/applets/networkapplet	networkapplet.pro
 CONFIG_NETWORKSETUP	noncore/settings/networksettings	networksettings.pro
+CONFIG_NOTES	core/pim/notes	opie-notes.pro
 CONFIG_NOTESAPPLET	noncore/applets/notesapplet	notesapplet.pro
 CONFIG_NS2BT	noncore/settings/networksettings2/bluetooth	bluetooth.pro
 CONFIG_NS2GPRS	noncore/settings/networksettings2/gprs	GPRS.pro
