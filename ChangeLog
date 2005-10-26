@@ -3,7 +3,7 @@
 	
 	New Features
 	------------
-	* Appearance: Added configuration options to set smallIconSize, bigIconSize, useBigPixmaps (hrw)
+	* Appearance: Added configuration options to set smallIconSize, bigIconSize, useBigPixmaps (hrw, drw)
 	* Opie-Notes: Notes application based on NoteZ (hrw)
 
 	Fixed Bugs
