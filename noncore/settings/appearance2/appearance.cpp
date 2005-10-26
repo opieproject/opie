@@ -401,11 +401,11 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 
     QHBoxLayout *bigIconlay = new QHBoxLayout ( vertLayout, 3 );
 
-    QLabel* label2 = new QLabel( tr( "&Big Icon size:" ), tab );
+    QLabel* label2 = new QLabel( tr( "Big Icon size:" ), tab );
     bigIconlay-> addWidget ( label2, 0, 0 );
 
     m_bigIconSize = new QSpinBox(0, 128, 1, tab);
-    m_bigIconSize->setValue(cfg.readNumEntry( "BigIconSize" ));
+    m_bigIconSize->setValue(cfg.readNumEntry( "BigIconSize", AppLnk::bigIconSize() ));
     bigIconlay->addWidget( m_bigIconSize );
     label2->setBuddy( m_bigIconSize );
     QWhatsThis::add( label2, tr( "Big Icon Size determines the size of the application icons in Launcher" ) );
@@ -413,20 +413,20 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 
     QHBoxLayout *smallIconlay = new QHBoxLayout ( vertLayout, 3 );
 
-    QLabel* label3 = new QLabel( tr( "&Small Icon size:" ), tab );
+    QLabel* label3 = new QLabel( tr( "Small Icon size:" ), tab );
     smallIconlay-> addWidget ( label3, 0, 0 );
 
     m_smallIconSize = new QSpinBox(0, 128, 1, tab);
-    m_smallIconSize->setValue(cfg.readNumEntry( "SmallIconSize" ));
+    m_smallIconSize->setValue(cfg.readNumEntry( "SmallIconSize", AppLnk::smallIconSize() ));
     smallIconlay->addWidget( m_smallIconSize );
     label3->setBuddy( m_smallIconSize );
     QWhatsThis::add( label3, tr( "Small Icon Size determines the size of many of the icons seen in applications (in menus, tab bars, tool bars, etc.), as well as the size of taskbar." ) );
     QWhatsThis::add( m_smallIconSize, tr( "Small Icon Size determines the size of many of the icons seen in applications (in menus, tab bars, tool bars, etc.), as well as the size of taskbar." ) );
 
-    m_useBigPixmaps = new QCheckBox( tr("use Big &Pixmaps"), tab);
-    m_useBigPixmaps->setChecked(cfg.readBoolEntry( "useBigPixmaps" ));
+    m_useBigPixmaps = new QCheckBox( tr("use Big Pixmaps"), tab);
+    m_useBigPixmaps->setChecked(cfg.readBoolEntry( "useBigPixmaps", qApp->desktop()->width() > 320 ));
     vertLayout->addWidget( m_useBigPixmaps );
-    QWhatsThis::add( m_useBigPixmaps, tr( "Enlarge toolbar pixmaps" ) );
+    QWhatsThis::add( m_useBigPixmaps, tr( "Enlarge toolbar pixmaps, you probably want to enable this option for devices with screen resolution greater than 240x320" ) );
 
     /*
      * add a spacing
