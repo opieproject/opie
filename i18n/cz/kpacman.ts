@@ -1,71 +1,72 @@
-<!DOCTYPE TS><TS>
-<context>
+<!DOCTYPE TS>
+<TS>
+  <context>
     <name>Keys</name>
     <message>
-        <source>Ok</source>
-        <translation>Ok</translation>
+      <source>Ok</source>
+      <translation>Ok</translation>
     </message>
     <message>
-        <source>Defaults</source>
-        <translation>Výchozí</translation>
+      <source>Defaults</source>
+      <translation>Výchozí</translation>
     </message>
     <message>
-        <source>Cancel</source>
-        <translation>Storno</translation>
+      <source>Cancel</source>
+      <translation>Storno</translation>
     </message>
     <message>
-        <source>Change Direction Keys</source>
-        <translation>Změnit směrové klávesy</translation>
+      <source>Change Direction Keys</source>
+      <translation>Změnit směrové klávesy</translation>
     </message>
     <message>
-        <source>Undefined key</source>
-        <translation>Nedefinovaná klávesa</translation>
+      <source>Undefined key</source>
+      <translation>Nedefinovaná klávesa</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>Kpacman</name>
     <message>
-        <source>KPacman</source>
-        <translation>KPacman</translation>
+      <source>KPacman</source>
+      <translation>KPacman</translation>
     </message>
     <message>
-        <source>&amp;New</source>
-        <translation>&amp;Nový</translation>
+      <source>&amp;New</source>
+      <translation>&amp;Nový</translation>
     </message>
     <message>
-        <source>&amp;Pause</source>
-        <translation>&amp;Pauza</translation>
+      <source>&amp;Pause</source>
+      <translation>&amp;Pauza</translation>
     </message>
     <message>
-        <source>&amp;Hall of fame</source>
-        <translation>&amp;Dvorana slávy</translation>
+      <source>&amp;Hall of fame</source>
+      <translation>&amp;Dvorana slávy</translation>
     </message>
     <message>
-        <source>&amp;Quit</source>
-        <translation>&amp;Ukončit</translation>
+      <source>&amp;Quit</source>
+      <translation>&amp;Ukončit</translation>
     </message>
     <message>
-        <source>&amp;Hide Mousecursor</source>
-        <translation>&amp;Skrýt ukazatel myši</translation>
+      <source>&amp;Hide Mousecursor</source>
+      <translation>&amp;Skrýt ukazatel myši</translation>
     </message>
     <message>
-        <source>&amp;Select graphic scheme</source>
-        <translation>&amp;Vybrat grafické schéma</translation>
+      <source>&amp;Select graphic scheme</source>
+      <translation>&amp;Vybrat grafické schéma</translation>
     </message>
     <message>
-        <source>&amp;Pause in Background</source>
-        <translation>&amp;Pauznout na pozadí</translation>
+      <source>&amp;Pause in Background</source>
+      <translation>&amp;Pauznout na pozadí</translation>
     </message>
     <message>
-        <source>&amp;Continue in Foreground</source>
-        <translation>&amp;Pokračovat na popředí</translation>
+      <source>&amp;Continue in Foreground</source>
+      <translation>&amp;Pokračovat na popředí</translation>
     </message>
     <message>
-        <source>Change &amp;keys...</source>
-        <translation>Změnit &amp;klávesy...</translation>
+      <source>Change &amp;keys...</source>
+      <translation>Změnit &amp;klávesy...</translation>
     </message>
     <message>
-        <source>@PACKAGE@ - @VERSION@
+      <source>@PACKAGE@ - @VERSION@
 
 Joerg Thoennissen (joe@dsite.de)
 
@@ -79,7 +80,7 @@ The design was strongly influenced by the pacman
 I like to thank my girlfriend Elke Krueers for
 the last 10 years of her friendship.
 </source>
-        <translation>@PACKAGE@ - @VERSION@
+      <translation>@PACKAGE@ - @VERSION@
 
 Joerg Thoennissen (joe@dsite.de)
 
@@ -95,156 +96,156 @@ za 10 let našeho přátelství.
 </translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation>&amp;Nápověda</translation>
+      <source>&amp;Help</source>
+      <translation>&amp;Nápověda</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>KpacmanWidget</name>
     <message>
-        <source>The bitfont could not be contructed.
+      <source>The bitfont could not be contructed.
 
-The file &apos;@FONTNAME@&apos; does not exist,
+The file '@FONTNAME@' does not exist,
 or is of an unknown format.</source>
-        <translation>Bitfont nelze sestavit.
+      <translation>Bitfont nelze sestavit.
 
-Soubor &apos;@FONTNAME@&apos; neexistuje,
+Soubor '@FONTNAME@' neexistuje,
 nebo má neznámý formát.</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>Referee</name>
     <message>
-        <source>GAME  OVER</source>
-        <translation>KONEC HRY</translation>
+      <source>GAME  OVER</source>
+      <translation>KONEC HRY</translation>
     </message>
     <message>
-        <source>PLAYER ONE</source>
-        <translation>HRÁČ 1</translation>
+      <source>PLAYER ONE</source>
+      <translation>HRÁČ 1</translation>
     </message>
     <message>
-        <source>READY!</source>
-        <translation>PŘIPRAVEN!</translation>
+      <source>READY!</source>
+      <translation>PŘIPRAVEN!</translation>
     </message>
     <message>
-        <source>PAUSED</source>
-        <translation>PAUZA</translation>
+      <source>PAUSED</source>
+      <translation>PAUZA</translation>
     </message>
     <message>
-        <source>CHARACTER</source>
-        <translation>POSTAVA</translation>
+      <source>CHARACTER</source>
+      <translation>POSTAVA</translation>
     </message>
     <message>
-        <source>/</source>
-        <translation>/</translation>
+      <source>/</source>
+      <translation>/</translation>
     </message>
     <message>
-        <source>NICKNAME</source>
-        <translation>PŘEZDÍVKA</translation>
+      <source>NICKNAME</source>
+      <translation>PŘEZDÍVKA</translation>
     </message>
     <message>
-        <source>-SHADOW</source>
-        <translation>-SHADOW</translation>
+      <source>-SHADOW</source>
+      <translation>-SHADOW</translation>
     </message>
     <message>
-        <source>&quot;BLINKY&quot;</source>
-        <translation>&quot;BLINKY&quot;</translation>
+      <source>&quot;BLINKY&quot;</source>
+      <translation>&quot;BLINKY&quot;</translation>
     </message>
     <message>
-        <source>-SPEEDY</source>
-        <translation>-SPEEDY</translation>
+      <source>-SPEEDY</source>
+      <translation>-SPEEDY</translation>
     </message>
     <message>
-        <source>&quot;PINKY&quot;</source>
-        <translation>&quot;PINKY&quot;</translation>
+      <source>&quot;PINKY&quot;</source>
+      <translation>&quot;PINKY&quot;</translation>
     </message>
     <message>
-        <source>-BASHFUL</source>
-        <translation>-BASHFUL</translation>
+      <source>-BASHFUL</source>
+      <translation>-BASHFUL</translation>
     </message>
     <message>
-        <source>&quot;INKY&quot;</source>
-        <translation>&quot;INKY&quot;</translation>
+      <source>&quot;INKY&quot;</source>
+      <translation>&quot;INKY&quot;</translation>
     </message>
     <message>
-        <source>-POKEY</source>
-        <translation>-POKEY</translation>
+      <source>-POKEY</source>
+      <translation>-POKEY</translation>
     </message>
     <message>
-        <source>&quot;CLYDE&quot;</source>
-        <translation>&quot;CLYDE&quot;</translation>
+      <source>&quot;CLYDE&quot;</source>
+      <translation>&quot;CLYDE&quot;</translation>
     </message>
     <message>
-        <source>QTOPIA PORT: CATALIN CLIMOV</source>
-        <translation>QTOPIA PORT: CATALIN CLIMOV</translation>
+      <source>QTOPIA PORT: CATALIN CLIMOV</source>
+      <translation>QTOPIA PORT: CATALIN CLIMOV</translation>
     </message>
     <message>
-        <source>PRESS CURSOR TO START</source>
-        <translation>PRO START STISKNĚTE KURZOR</translation>
+      <source>PRESS CURSOR TO START</source>
+      <translation>PRO START STISKNĚTE KURZOR</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>Score</name>
     <message>
-        <source>  1UP </source>
-        <translation>1HR</translation>
+      <source>  1UP </source>
+      <translation>1HR</translation>
     </message>
     <message>
-        <source> HIGH SCORE </source>
-        <translation>SKÓRE</translation>
+      <source> HIGH SCORE </source>
+      <translation>SKÓRE</translation>
     </message>
     <message>
-        <source>  2UP </source>
-        <translation>2HR</translation>
+      <source>  2UP </source>
+      <translation>2HR</translation>
     </message>
     <message>
-        <source>     CONGRATULATIONS      </source>
-        <translation>GRATULUJI</translation>
+      <source>     CONGRATULATIONS      </source>
+      <translation>GRATULUJI</translation>
     </message>
     <message>
-        <source>    YOU HAVE ARCHIEVED    </source>
-        <translation>JSEŠ ZAPSÁN</translation>
+      <source>    YOU HAVE ARCHIEVED    </source>
+      <translation>JSEŠ ZAPSÁN</translation>
     </message>
     <message>
-        <source>  A SCORE IN THE TOP 10.  </source>
-        <translation>SKÓRE V NEJLEPŠÍ 10.</translation>
+      <source>  A SCORE IN THE TOP 10.  </source>
+      <translation>SKÓRE V NEJLEPŠÍ 10.</translation>
     </message>
     <message>
-        <source>RNK   SCORE  NAME   DATE</source>
-        <translation>RNK   SKÓRE  JMÉNO  DATUM</translation>
+      <source>RNK   SCORE  NAME   DATE</source>
+      <translation>RNK   SKÓRE  JMÉNO  DATUM</translation>
     </message>
     <message>
-        <source>PAUSED</source>
-        <translation>PAUZA</translation>
+      <source>PAUSED</source>
+      <translation>PAUZA</translation>
     </message>
     <message>
-        <source>@YY@/@MM@/@DD@</source>
-        <translation>@YY@/@MM@/@DD@</translation>
+      <source>@YY@/@MM@/@DD@</source>
+      <translation>@YY@/@MM@/@DD@</translation>
     </message>
     <message>
-        <source></source>
-        <translation type="unfinished"></translation>
+      <source></source>
+      <translation> </translation>
     </message>
     <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
+      <source></source>
+      <translation> </translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>Status</name>
     <message>
-        <source>The pixmap could not be contructed.
+      <source>The pixmap could not be contructed.
 
-The file &apos;@PIXMAPNAME@&apos; does not exist,
+The file '@PIXMAPNAME@' does not exist,
 or is of an unknown format.</source>
-        <translation>Pixmapu nelze sestavit.
+      <translation>Pixmapu nelze sestavit.
 
-Soubor &apos;@PIXMAPNAME@&apos; neexistuje,
+Soubor '@PIXMAPNAME@' neexistuje,
 nebo má neznámý formát.</translation>
     </message>
     <message>
-        <source>Initialization Error</source>
-        <translation>Chyba inicializace</translation>
+      <source>Initialization Error</source>
+      <translation>Chyba inicializace</translation>
     </message>
-</context>
+  </context>
 </TS>
