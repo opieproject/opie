@@ -405,7 +405,7 @@ int iPAQ::displayBrightnessResolution() const
         case Model_iPAQ_H5xxx:
             return 255;
         case Model_iPAQ_H191x:
-            return 183;
+            return 7;
         case Model_iPAQ_H1940:
             return 44;
         default:

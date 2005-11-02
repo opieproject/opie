@@ -201,8 +201,8 @@ bool MyPal::setDisplayBrightness ( int bright )
 {
     bool res = false;
 
-    if ( bright > 220 )
-        bright = 220;
+    if ( bright > 255 )
+        bright = 255;
     if ( bright < 0 )
         bright = 0;
 
@@ -228,7 +228,7 @@ int MyPal::displayBrightnessResolution() const
 {
     switch ( model()) {
         case Model_MyPal_716:
-            return 220;
+            return 7;
         default:
             return OAbstractMobileDevice::displayBrightnessResolution();
     }
