@@ -35,6 +35,10 @@ choice
 
   config TARGET_YOPY
     boolean "Yopy 3500/3700"  
+
+  config TARGET_64BIT
+    boolean "64 BIT"
+
 endchoice
 
 config OE_BUILD_DIR

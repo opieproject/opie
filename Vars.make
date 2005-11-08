@@ -28,6 +28,9 @@ endif
 ifdef CONFIG_TARGET_X86
     PLATFORM=x86-linux
 endif
+ifdef CONFIG_TARGET_64BIT
+    PLATFORM=64-linux
+endif
 ifdef CONFIG_TARGET_SHARP
   PLATFORM=sharp-linux
 endif
@@ -111,6 +114,9 @@ endif
 
 ifeq ($(STRIP),)
     ifneq ($(CONFIG_TARGET_X86),)
+        STRIP=strip
+    endif
+    ifneq ($(CONFIG_TARGET_64BIT),)
         STRIP=strip
     endif
     ifneq ($(CONFIG_TARGET_IPAQ),)
