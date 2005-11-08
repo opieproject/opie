@@ -29,7 +29,7 @@ ifdef CONFIG_TARGET_X86
     PLATFORM=x86-linux
 endif
 ifdef CONFIG_TARGET_64BIT
-    PLATFORM=64-linux
+    PLATFORM=64bit-linux
 endif
 ifdef CONFIG_TARGET_SHARP
   PLATFORM=sharp-linux
