@@ -56,8 +56,6 @@ QRESULT LibMadPluginImpl::queryInterface( const QUuid &uuid, QUnknownInterface *
     *iface = 0;
     if ( ( uuid == IID_QUnknown ) || ( uuid == IID_MediaPlayerPlugin )  )
   *iface = this, (*iface)->addRef();
-    else
-	return QS_FALSE;
     return QS_OK;
 }
 

@@ -1,6 +1,6 @@
 /*
  * libmad - MPEG audio decoder library
- * Copyright (C) 2000-2001 Robert Leslie
+ * Copyright (C) 2000-2004 Underbit Technologies, Inc.
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: timer.c,v 1.2 2002-04-19 16:08:55 harlekin Exp $
+ * $Id: timer.c,v 1.3 2005-11-08 23:16:04 llornkcor Exp $
  */
 
 # ifdef HAVE_CONFIG_H
@@ -78,7 +78,7 @@ void mad_timer_negate(mad_timer_t *timer)
  */
 mad_timer_t mad_timer_abs(mad_timer_t timer)
 {
-  if (mad_timer_sign(timer) < 0)
+  if (timer.seconds < 0)
     mad_timer_negate(&timer);
 
   return timer;
@@ -327,7 +327,8 @@ unsigned long mad_timer_fraction(mad_timer_t timer, unsigned long denom)
 
   switch (denom) {
   case 0:
-    return MAD_TIMER_RESOLUTION / timer.fraction;
+    return timer.fraction ?
+      MAD_TIMER_RESOLUTION / timer.fraction : MAD_TIMER_RESOLUTION + 1;
 
   case MAD_TIMER_RESOLUTION:
     return timer.fraction;

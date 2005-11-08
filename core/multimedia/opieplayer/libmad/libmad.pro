@@ -1,5 +1,15 @@
+QMAKE_CFLAGS += $(if $(CONFIG_TARGET_X86),-DFPM_INTEL) \
+		$(if $(CONFIG_TARGET_64BIT),-DFPM_64BIT) \
+		$(if $(CONFIG_TARGET_IPAQ),-DFPM_ARM) \
+		$(if $(CONFIG_TARGET_SHARP),-DFPM_ARM)
+QMAKE_CXXFLAGS += $(if $(CONFIG_TARGET_X86),-DFPM_INTEL) \
+		$(if $(CONFIG_TARGET_64BIT),-DFPM_64BIT) \
+		$(if $(CONFIG_TARGET_IPAQ),-DFPM_ARM) \
+		$(if $(CONFIG_TARGET_SHARP),-DFPM_ARM)
+
+
 TEMPLATE 	= lib
-CONFIG   	+=  qt warn_on 
+CONFIG   	+=  qt warn_on release
 HEADERS   	= libmad_version.h fixed.h bit.h timer.h stream.h frame.h synth.h decoder.h \
 		layer12.h layer3.h huffman.h libmad_global.h mad.h libmadplugin.h libmadpluginimpl.h
 SOURCES   	= version.c fixed.c bit.c timer.c stream.c frame.c synth.c decoder.c \
@@ -7,47 +17,28 @@ SOURCES   	= version.c fixed.c bit.c timer.c stream.c frame.c synth.c decoder.c 
 TARGET   	= madplugin
 DESTDIR   	= $(OPIEDIR)/plugins/codecs
 INCLUDEPATH += $(OPIEDIR)/include ..
-DEPENDPATH      +=  ..
+DEPENDPATH      += ../$(OPIEDIR)/include ..
 LIBS            += -lqpe -lm
 VERSION   =   1.0.0
 
-include( $(OPIEDIR)/include.pro )
-	
-DEFINES += FPM_INTEL
-
-system(echo $QMAKESPEC | grep -s sharp) {
-	DEFINES -= FPM_INTEL
-	DEFINES += FPM_ARM
-}
-
-system(echo $QMAKESPEC | grep -s ipaq) {
-	DEFINES -= FPM_INTEL
-	DEFINES += FPM_ARM
-}
-
-system(echo $QMAKESPEC | grep -s mipsel) {
-	DEFINES -= FPM_INTEL
-	DEFINES += FPM_MIPS
-}
-
-system(echo $QMAKESPEC | grep -s ramses) {
-	DEFINES -= FPM_INTEL
-	DEFINES += FPM_ARM
-}
-
-system(echo $QMAKESPEC | grep -s arm) {
-	DEFINES -= FPM_INTEL
-	DEFINES += FPM_ARM
-}
-
-system(echo $QMAKESPEC | grep -s simpad) {
-	DEFINES -= FPM_INTEL
-	DEFINES += FPM_ARM
-}
-
-system(echo $QMAKESPEC | grep -s yopy) {
-	DEFINES -= FPM_INTEL
-	DEFINES += FPM_ARM
-}
+TRANSLATIONS = ../../../../i18n/de/libmadplugin.ts \
+	 ../../../../i18n/nl/libmadplugin.ts \
+	 ../../../../i18n/da/libmadplugin.ts \
+	 ../../../../i18n/xx/libmadplugin.ts \
+	 ../../../../i18n/en/libmadplugin.ts \
+	 ../../../../i18n/es/libmadplugin.ts \
+	 ../../../../i18n/fr/libmadplugin.ts \
+	 ../../../../i18n/hu/libmadplugin.ts \
+	 ../../../../i18n/ja/libmadplugin.ts \
+	 ../../../../i18n/ko/libmadplugin.ts \
+	 ../../../../i18n/no/libmadplugin.ts \
+	 ../../../../i18n/pl/libmadplugin.ts \
+	 ../../../../i18n/pt/libmadplugin.ts \
+	 ../../../../i18n/pt_BR/libmadplugin.ts \
+	 ../../../../i18n/sl/libmadplugin.ts \
+	 ../../../../i18n/zh_CN/libmadplugin.ts \
+	 ../../../../i18n/zh_TW/libmadplugin.ts
 
 
+
+include ( $(OPIEDIR)/include.pro )
