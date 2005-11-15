@@ -288,13 +288,13 @@
             <item>
                 <property>
                     <name>text</name>
-                    <string>suspend</string>
+                    <string>activate</string>
                 </property>
             </item>
             <item>
                 <property>
                     <name>text</name>
-                    <string>activate</string>
+                    <string>suspend</string>
                 </property>
             </item>
             <item>
@@ -319,13 +319,13 @@
             <item>
                 <property>
                     <name>text</name>
-                    <string>suspend</string>
+                    <string>activate</string>
                 </property>
             </item>
             <item>
                 <property>
                     <name>text</name>
-                    <string>activate</string>
+                    <string>suspend</string>
                 </property>
             </item>
             <item>
