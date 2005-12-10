@@ -469,11 +469,11 @@ VObject* OPimContactAccessBackend_VCard::createVObject( const OPimContact &c )
     VObject *home_phone = safeAddPropValue( vcard, VCTelephoneProp, c.homePhone() );
     safeAddProp( home_phone, VCHomeProp );
     home_phone = safeAddPropValue( vcard, VCTelephoneProp, c.homeMobile() );
-    safeAddProp( home_phone, VCHomeProp );
     safeAddProp( home_phone, VCCellularProp );
-    home_phone = safeAddPropValue( vcard, VCTelephoneProp, c.homeFax() );
     safeAddProp( home_phone, VCHomeProp );
+    home_phone = safeAddPropValue( vcard, VCTelephoneProp, c.homeFax() );
     safeAddProp( home_phone, VCFaxProp );
+    safeAddProp( home_phone, VCHomeProp );
 
     VObject *url = safeAddPropValue( vcard, VCURLProp, c.homeWebpage() );
     safeAddProp( url, VCHomeProp );
@@ -496,14 +496,14 @@ VObject* OPimContactAccessBackend_VCard::createVObject( const OPimContact &c )
     VObject *work_phone = safeAddPropValue( vcard, VCTelephoneProp, c.businessPhone() );
     safeAddProp( work_phone, VCWorkProp );
     work_phone = safeAddPropValue( vcard, VCTelephoneProp, c.businessMobile() );
-    safeAddProp( work_phone, VCWorkProp );
     safeAddProp( work_phone, VCCellularProp );
+    safeAddProp( work_phone, VCWorkProp );
     work_phone = safeAddPropValue( vcard, VCTelephoneProp, c.businessFax() );
-    safeAddProp( work_phone, VCWorkProp );
     safeAddProp( work_phone, VCFaxProp );
-    work_phone = safeAddPropValue( vcard, VCTelephoneProp, c.businessPager() );
     safeAddProp( work_phone, VCWorkProp );
+    work_phone = safeAddPropValue( vcard, VCTelephoneProp, c.businessPager() );
     safeAddProp( work_phone, VCPagerProp );
+    safeAddProp( work_phone, VCWorkProp );
 
     url = safeAddPropValue( vcard, VCURLProp, c.businessWebpage() );
     safeAddProp( url, VCWorkProp );
