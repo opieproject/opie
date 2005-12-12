@@ -17,6 +17,7 @@
 	* n.a.  - added patch to build QT/E 2.3.10 with gcc 4.x.x (hrw)
 	* n.a.  - make blue-pin UI resizable to looks good in any resolution (hrw)
 	* n.a.  - fix a problem with vCard send to Sony Ericsson k600i (ar)
+	* n.a.  - add a patch to build Qt/E 2.3.10 on amd64 with gcc 4.x.x (ar)
 
 2005-09-11	Opie 1.2.1
 	
