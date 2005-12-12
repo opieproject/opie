@@ -15,7 +15,8 @@
 	* #1492 - Backup and Restore does not show list of backups to restore on start (hrw)
 	* n.a.  - remove hardcoded font size from wellenreiter (hrw)
 	* n.a.  - added patch to build QT/E 2.3.10 with gcc 4.x.x (hrw)
-    * n.a.  - make blue-pin UI resizable to looks good in any resolution (hrw)
+	* n.a.  - make blue-pin UI resizable to looks good in any resolution (hrw)
+	* n.a.  - fix a problem with vCard send to Sony Ericsson k600i (ar)
 
 2005-09-11	Opie 1.2.1
 	
