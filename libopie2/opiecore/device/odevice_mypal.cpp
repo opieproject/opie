@@ -149,8 +149,8 @@ bool MyPal::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, 
             break;
         }
 
-        // map Power Button short/long press to F34/F35
-        case Key_SysReq: {
+        // map Power Button short/long press to F6
+        case Key_F6: {
             if ( isPress ) {
                 if ( m_power_timer )
                     killTimer ( m_power_timer );

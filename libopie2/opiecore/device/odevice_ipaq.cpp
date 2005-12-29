@@ -309,6 +309,10 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
             break;
         }
 
+        // map Power Button short/long press to F6 for h191x
+        case Key_F6:
+            if ( d->m_model != Model_iPAQ_H191x )
+                break;
         // map Power Button short/long press to F34/F35
         case Key_SysReq: {
             if ( isPress ) {
