@@ -179,6 +179,10 @@ int BluepingPlugin::authenticate() {
                     startB << "/sbin/hciattach" << "/dev/tts/1" << "any" << "921600";
                     break;
 
+                case Model_MyPal_716:
+                    startB << "/sbin/hciattach" <<  "/dev/ttyS1" << "bcsp" << "921600";
+                    break;
+
                 default:
                     startB << "/sbin/hciattach" << "/dev/ttySB0" << "bcsp" << "230400";
                     break;
