@@ -422,6 +422,8 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
     m_ipkgArgs.force_reinstall = ( m_ipkgExecOptions & FORCE_REINSTALL );
     // TODO m_ipkgArgs.force_remove = ( m_ipkgExecOptions & FORCE_REMOVE );
     m_ipkgArgs.force_overwrite = ( m_ipkgExecOptions & FORCE_OVERWRITE );
+    m_ipkgArgs.force_removal_of_dependent_packages = ( m_ipkgExecOptions & FORCE_RECURSIVE );
+    m_ipkgArgs.verbose_wget = ( m_ipkgExecOptions & FORCE_VERBOSE_WGET );
     m_ipkgArgs.verbosity = m_ipkgExecVerbosity;
     if ( m_ipkgArgs.dest )
         free( m_ipkgArgs.dest );

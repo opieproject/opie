@@ -43,6 +43,8 @@
 #define FORCE_REMOVE                            0x0002
 #define FORCE_REINSTALL                         0x0004
 #define FORCE_OVERWRITE                         0x0008
+#define FORCE_RECURSIVE                         0x0010
+#define FORCE_VERBOSE_WGET                      0x0020
 
 class OConfItemList;
 

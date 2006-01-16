@@ -5,6 +5,7 @@
 	------------
 	* Appearance: Added configuration options to set smallIconSize, bigIconSize, useBigPixmaps (hrw, drw)
 	* Opie-Notes: Notes application based on NoteZ (hrw)
+	* OPIE-PackageManager: Added two configuration options: "Force recursive", "Verbose fetch" (hrw)
 
 	Fixed Bugs
 	----------

@@ -96,6 +96,8 @@ private:
     QCheckBox *m_optForceReinstall; // Force reinstall ipkg option checkbox
     QCheckBox *m_optForceRemove;    // Force remove ipkg option checkbox
     QCheckBox *m_optForceOverwrite; // Force overwrite ipkg option checkbox
+    QCheckBox *m_optForceRecursive; // Force recursive ipkg option checkbox
+    QCheckBox *m_optVerboseWget;    // Force verbose_wget ipkg option checkbox
     QComboBox *m_optVerboseIpkg;    // Ipkg verbosity option selection
     QLineEdit *m_optSourceLists;    // Ipkg source lists destination directory
 

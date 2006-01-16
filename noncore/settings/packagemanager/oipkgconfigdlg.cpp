@@ -150,6 +150,10 @@ void OIpkgConfigDlg::accept()
         options |= FORCE_REMOVE;
     if ( m_optForceOverwrite->isChecked() )
         options |= FORCE_OVERWRITE;
+    if ( m_optForceRecursive->isChecked() )
+        options |= FORCE_RECURSIVE;
+    if ( m_optVerboseWget->isChecked() )
+        options |= FORCE_VERBOSE_WGET;
     m_ipkg->setIpkgExecOptions( options );
     m_ipkg->setIpkgExecVerbosity( m_optVerboseIpkg->currentItem() );
 
@@ -336,9 +340,17 @@ void OIpkgConfigDlg::initOptionsWidget()
     QWhatsThis::add( m_optForceOverwrite, tr( "Tap here to enable or disable the '-force-overwrite' option for Ipkg." ) );
     layout->addMultiCellWidget( m_optForceOverwrite, 3, 3, 0, 1 );
 
+    m_optForceRecursive = new QCheckBox( tr( "Force Recursive" ), container );
+    QWhatsThis::add( m_optForceRecursive, tr( "Tap here to enable or disable the '-recursive' option for Ipkg." ) );
+    layout->addMultiCellWidget( m_optForceRecursive, 4, 4, 0, 1 );
+
+    m_optVerboseWget = new QCheckBox( tr( "Verbose fetch" ), container );
+    QWhatsThis::add( m_optVerboseWget, tr( "Tap here to enable or disable the '-verbose_wget' option for Ipkg." ) );
+    layout->addMultiCellWidget( m_optVerboseWget, 5, 5, 0, 1 );
+
     QLabel *l = new QLabel( tr( "Information level:" ), container );
     QWhatsThis::add( l, tr( "Select information level for Ipkg." ) );
-    layout->addMultiCellWidget( l, 4, 4, 0, 1 );
+    layout->addMultiCellWidget( l, 6, 6, 0, 1 );
 
     m_optVerboseIpkg = new QComboBox( container );
     QWhatsThis::add( m_optVerboseIpkg, tr( "Select information level for Ipkg." ) );
@@ -346,15 +358,15 @@ void OIpkgConfigDlg::initOptionsWidget()
     m_optVerboseIpkg->insertItem( tr( "Normal messages" ) );
     m_optVerboseIpkg->insertItem( tr( "Informative messages" ) );
     m_optVerboseIpkg->insertItem( tr( "Troubleshooting output" ) );
-    layout->addMultiCellWidget( m_optVerboseIpkg, 5, 5, 0, 1 );
+    layout->addMultiCellWidget( m_optVerboseIpkg, 7, 7, 0, 1 );
 
     l = new QLabel( tr( "Package source lists directory:" ), container );
     QWhatsThis::add( l, tr( "Enter the directory where package source feed information is stored." ) );
-    layout->addMultiCellWidget( l, 6, 6, 0, 1 );
+    layout->addMultiCellWidget( l, 8, 8, 0, 1 );
 
     m_optSourceLists = new QLineEdit( container );
     QWhatsThis::add( m_optSourceLists, tr( "Enter the directory where package source feed information is stored." ) );
-    layout->addWidget( m_optSourceLists, 7, 0 );
+    layout->addWidget( m_optSourceLists, 9, 0 );
 
     QPushButton *btn = new QPushButton( Opie::Core::OResource::loadPixmap( "folder", Opie::Core::OResource::SmallIcon ),
                                         QString::null, container );
@@ -362,7 +374,7 @@ void OIpkgConfigDlg::initOptionsWidget()
     btn->setMaximumWidth( btn->height() );
     QWhatsThis::add( btn, tr( "Tap here to select the directory where package source feed information is stored." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotOptSelectSourceListsPath()) );
-    layout->addWidget( btn, 7, 1 );
+    layout->addWidget( btn, 9, 1 );
 
     layout->addItem( new QSpacerItem( 1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
 }
@@ -433,6 +445,10 @@ void OIpkgConfigDlg::initData()
         m_optForceRemove->setChecked( true );
     if ( options & FORCE_OVERWRITE )
         m_optForceOverwrite->setChecked( true );
+    if ( options & FORCE_RECURSIVE )
+        m_optForceRecursive->setChecked( true );
+    if ( options & FORCE_VERBOSE_WGET )
+        m_optVerboseWget->setChecked( true );
 
     m_optVerboseIpkg->setCurrentItem( m_ipkg->ipkgExecVerbosity() );
 }
