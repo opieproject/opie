@@ -1,4 +1,5 @@
 #include "terminalwidget.h"
+#include <qpe/config.h>
 
 /* QT */
 #include <qlabel.h>
@@ -151,8 +152,10 @@ void TerminalWidget::load( const Profile& prof ) {
         break;
     };
 
+    Config qpecfg("qpe");
+    qpecfg.setGroup("Appearance");
 
-    m_fontSelector->setSelectedFont( prof.readEntry( "Font"), prof.readEntry( "FontStyle"), prof.readNumEntry( "FontSize"  ), prof.readEntry( "FontCharset") );
+    m_fontSelector->setSelectedFont( prof.readEntry( "Font", qpecfg.readEntry("FixedFontFamily")), prof.readEntry( "FontStyle", qpecfg.readEntry("FixedFontStyle")), prof.readNumEntry( "FontSize" , qpecfg.readNumEntry("FixedFontStyle")), prof.readEntry( "FontCharset") );
 
 //     switch( fontsize ) {
 //     case Profile::Micro:
