@@ -42,7 +42,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.2&lt;/b&gt;&lt;/center&gt;</string>
+                <string>&lt;center&gt;&lt;b&gt;The Open Palmtop Integrated Environment V1.2.1&lt;/b&gt;&lt;/center&gt;</string>
             </property>
         </widget>
         <widget row="1"  column="1" >
