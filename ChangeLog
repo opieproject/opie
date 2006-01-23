@@ -22,6 +22,10 @@
 	* n.a.  - Opie-console fallback to FixedFont settings from qpe.conf in config (hrw)
 	* n.a.  - Set version to 1.2.1 in About applet (hrw)
 
+	Internal
+	--------
+    * libopiecore: /etc/oz_version renamed to /etc/openzaurus-version (hrw)
+	
 2005-09-11	Opie 1.2.1
 	
 	
