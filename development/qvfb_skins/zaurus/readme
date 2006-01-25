@@ -1,0 +1,6 @@
+How to use a qvfb skin.
+copy these files, including the directory and put them in the bin/ where qvfb lives.
+
+Call qvfb like this:
+qvfb -skin zaurus &
+
