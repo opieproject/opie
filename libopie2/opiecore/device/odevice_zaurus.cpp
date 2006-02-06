@@ -242,9 +242,6 @@ void Zaurus::init(const QString& cpu_info)
         case Model_Zaurus_SL5500:
             m_backlightdev = "/sys/class/backlight/locomo-backlight/";
             break;
-        case Model_Zaurus_SL6000:
-            m_backlightdev = "/sys/class/backlight/tosa-bl/";
-            break;
         default:
             m_backlightdev = "/sys/class/backlight/corgi-bl/";
     }

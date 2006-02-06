@@ -25,6 +25,7 @@
 	Internal
 	--------
     * libopiecore: /etc/oz_version renamed to /etc/openzaurus-version (hrw)
+	* libopiecore: SL6000 (tosa) now uses corgi-bl (Dirk Opfer)
 	
 2005-09-11	Opie 1.2.1
 	
