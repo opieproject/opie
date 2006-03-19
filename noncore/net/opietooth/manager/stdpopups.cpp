@@ -1,6 +1,7 @@
 
 #include "rfcpopup.h"
 #include "obexpopup.h"
+#include "obexftpopup.h"
 #include "panpopup.h"
 #include "dunpopup.h"
 
@@ -9,17 +10,19 @@
 extern "C" {
 
     QPopupMenu* newRfcComPopup( const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item ) {
-        return new OpieTooth::RfcCommPopup(/* servive,*/  item ); // fix spellin RfComm vs. RfcComm and paramaters
-        //return 0l;
+        return new OpieTooth::RfcCommPopup(service, item); // fix spellin RfComm vs. RfcComm and paramaters
     }
-    QPopupMenu* newObexPushPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* ) {
-        return  new OpieTooth::ObexPopup();
+    QPopupMenu* newObexPushPopup( const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item) {
+        return  new OpieTooth::ObexPopup(service, item);
     }
-    QPopupMenu* newPanPopup( const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item ) {
+    QPopupMenu* newObexFtpPopup( const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item) {
+        return  new OpieTooth::ObexFtpPopup(service, item);
+    }
+    QPopupMenu* newPanPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* item ) {
         return new OpieTooth::PanPopup( item );
     }
 
-    QPopupMenu* newDunPopup( const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item ) {
+    QPopupMenu* newDunPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* item ) {
         return new OpieTooth::DunPopup( item );
     }
 }
