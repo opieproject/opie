@@ -3,7 +3,7 @@
 
 #include <qpopupmenu.h>
 #include <qaction.h>
-
+#include <services.h>
 #include "btdeviceitem.h"
 
 namespace OpieTooth {
@@ -18,16 +18,17 @@ namespace OpieTooth {
     class RfcCommPopup : public QPopupMenu {
         Q_OBJECT
     public:
-        RfcCommPopup( OpieTooth::BTDeviceItem* );
+        RfcCommPopup(const OpieTooth::Services&, OpieTooth::BTDeviceItem*);
         ~RfcCommPopup();
-
 
     private:
         QAction* m_con;
         QAction* m_dis;
         QAction* m_bind;
         QAction* m_bar;
-	OpieTooth::BTDeviceItem *m_item;
+        OpieTooth::BTDeviceItem *m_item;
+        Services m_service;
+        int procId; //Connection process number
     private slots:
         void slotConnect();
         void slotDisconnect();

@@ -6,6 +6,8 @@
 /* OPIE */
 #include <qpe/qpeapplication.h>
 #include <opie2/odebug.h>
+#include <opie2/oprocess.h>
+
 using namespace Opie::Core;
 
 /* QT */
@@ -16,31 +18,42 @@ using namespace OpieTooth;
 /*
  * c'tor init the QAction
  */
-RfcCommPopup::RfcCommPopup( OpieTooth::BTDeviceItem* item  )
-        : QPopupMenu()
+RfcCommPopup::RfcCommPopup(const OpieTooth::Services& service, 
+  OpieTooth::BTDeviceItem* item)
+        : QPopupMenu(), m_service(service)
 {
     owarn << "RfcCommPopup c'tor" << oendl; 
 
     QAction* a;
+    int port = service.protocolDescriptorList().last().port();
+    QString mac = item->mac();
+    unsigned int i;
 
-
+    procId = -1;
     m_item = item;
 
-    /* connect action */
-    a = new QAction(  ); // so it's get deleted
-    a->setText("Connect");
-    a->addTo( this );
-    connect( a,  SIGNAL( activated() ),
-             this, SLOT( slotConnect() ) );
-
-
-    /* disconnect action */
-    a = new QAction(  );
-    a->setText("Disconnect");
-    a->addTo( this );
-    connect( a, SIGNAL( activated() ) ,
-             this, SLOT( slotDisconnect() ) );
-
+    for (i = 0; i < sizeof(PPPDialog::conns) / sizeof(Connection); i++) {
+      if (PPPDialog::conns[i].port == port && 
+          PPPDialog::conns[i].btAddr == mac && 
+          PPPDialog::conns[i].proc.isRunning()) {
+          /* disconnect action */
+          a = new QAction(  );
+          a->setText("Disconnect");
+          a->addTo( this );
+          connect( a, SIGNAL( activated() ) ,
+                this, SLOT( slotDisconnect() ) );
+          procId = i;
+          break;
+      }
+    }
+    if (procId == -1) {
+        /* connect action */
+        a = new QAction(  ); // so it's get deleted
+        a->setText("Connect");
+        a->addTo( this );
+        connect( a,  SIGNAL( activated() ),
+                this, SLOT( slotConnect() ) );
+    }
 
     /* foo action */
     a = new QAction(  );
@@ -74,14 +87,17 @@ void RfcCommPopup::slotConnect()
 
     owarn << "connect" << oendl; 
 
-    PPPDialog pppDialog;
+    PPPDialog pppDialog(m_item->mac(), 
+      m_service.protocolDescriptorList().last().port());
     QPEApplication::execDialog( &pppDialog );
 }
 
 
 void RfcCommPopup::slotDisconnect()
 {
-    owarn << "slot disconnected" << oendl; 
+    owarn << "slot disconnected " << procId << oendl; 
+    if (procId >= 0)
+        PPPDialog::conns[procId].proc.kill();
 }
 
 
