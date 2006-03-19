@@ -9,21 +9,32 @@ class QVBoxLayout;
 class QPushButton;
 class QMultiLineEdit;
 class QLineEdit;
-
+#define NCONNECTS 10 //Maximal 
 
 namespace OpieTooth {
+    typedef struct {
+      Opie::Core::OProcess proc; //Connection process
+      QString btAddr; //MAC address
+      int port; //port
+    } Connection;
 
     class PPPDialog : public QDialog {
 
         Q_OBJECT
 
     public:
-        PPPDialog( QWidget* parent = 0, const char* name = 0, bool modal = TRUE, WFlags fl = 0, const QString& device = 0);
+        PPPDialog(const QString& device = 0, int port = 0, QWidget* parent = 0, const char* name = 0, bool modal = TRUE, WFlags fl = 0);
         ~PPPDialog();
 
     private slots:
         void connectToDevice();
         void fillOutPut( Opie::Core::OProcess* pppDial, char* cha, int len );
+        void fillErr(Opie::Core::OProcess*, char*, int);
+        void slotProcessExited(Opie::Core::OProcess* proc);
+        void closeEvent(QCloseEvent* e);
+    public:
+        //Array of connections indexed by rfcomm device number
+        static Connection conns[NCONNECTS];
     protected:
         QVBoxLayout* layout;
         QLineEdit* cmdLine;
@@ -32,6 +43,7 @@ namespace OpieTooth {
 
     private:
         QString m_device;
+        int m_port;
     };
 }
 #endif

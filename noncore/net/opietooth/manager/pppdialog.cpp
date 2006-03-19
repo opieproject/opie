@@ -1,5 +1,6 @@
 
 #include "pppdialog.h"
+#include "rfcommhelper.h"
 #include <qpushbutton.h>
 #include <qmultilineedit.h>
 #include <qlineedit.h>
@@ -12,14 +13,19 @@ using namespace Opie::Core;
 using namespace OpieTooth;
 
 using namespace Opie::Core;
-PPPDialog::PPPDialog( QWidget* parent,  const char* name, bool modal, WFlags fl, const QString& device )
+
+Connection PPPDialog::conns[NCONNECTS];
+
+PPPDialog::PPPDialog( const QString& device, int port, QWidget* parent,  
+    const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
 
     if ( !name )
-	setName( "PPPDialog" );
+        setName( "PPPDialog" );
     setCaption( tr( "ppp connection " ) ) ;
 
     m_device = device;
+    m_port = port;
 
     layout = new QVBoxLayout( this );
 
@@ -44,28 +50,72 @@ PPPDialog::PPPDialog( QWidget* parent,  const char* name, bool modal, WFlags fl,
 
     connect( connectButton, SIGNAL( clicked() ), this,  SLOT( connectToDevice() ) );
 
+    connect(&PPPDialog::conns[0].proc, 
+		        SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int)),
+            this, SLOT(fillOutPut(Opie::Core::OProcess*, char*, int)));
+    connect( &PPPDialog::conns[0].proc, 
+            SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int)),
+            this,    SLOT(fillErr(Opie::Core::OProcess*, char*, int)));
+    connect( &PPPDialog::conns[0].proc, 
+        SIGNAL(processExited(Opie::Core::OProcess*)),
+        this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
 }
 
 PPPDialog::~PPPDialog() {
 }
 
 void PPPDialog::connectToDevice() {
+    if (PPPDialog::conns[0].proc.isRunning()) {
+        outPut->append(tr("Work in progress"));
+        return;
+    }
     outPut->clear();
+    PPPDialog::conns[0].proc.clearArguments();
     // vom popupmenu beziehen
-    QString connectScript = "/etc/ppp/peers/" + cmdLine->text();
-    OProcess* pppDial = new OProcess();
-    *pppDial << "pppd" << m_device << "call" << connectScript;
-    connect( pppDial, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int) ),
-             this, SLOT(fillOutPut(Opie::Core::OProcess*,char*,int) ) );
-     if (!pppDial->start(OProcess::DontCare, OProcess::AllOutput) ) {
-        owarn << "could not start" << oendl; 
-        delete pppDial;
+    if (cmdLine->text().isEmpty()) {//Connect by rfcomm
+        PPPDialog::conns[0].proc << "rfcomm" << "connect" 
+            << "0" << m_device << QString::number(m_port);
+    }
+    else {
+        QString connectScript = "/etc/ppp/peers/" + cmdLine->text();
+        PPPDialog::conns[0].proc << "pppd" 
+            << m_device << "call" << connectScript;
+    }
+    if (!PPPDialog::conns[0].proc.start(OProcess::NotifyOnExit, OProcess::All)) {
+        outPut->append(tr("Couldn't start"));
+    }
+    else
+    {
+        PPPDialog::conns[0].proc.resume();
+        outPut->append(tr("Started"));
+        PPPDialog::conns[0].btAddr = m_device;
+        PPPDialog::conns[0].port = m_port;
     }
 }
 
-void PPPDialog::fillOutPut( OProcess* pppDial, char* cha, int len ) {
-    QCString str(cha, len );
-    outPut->insertLine( str );
-    delete pppDial;
+void PPPDialog::fillOutPut( OProcess*, char* cha, int len ) {
+    QCString str(cha, len);
+    outPut->append(str);
 }
 
+void PPPDialog::fillErr(OProcess*, char* buf, int len)
+{
+    QCString str(buf, len);
+    outPut->append(str);
+}
+
+void PPPDialog::slotProcessExited(OProcess* proc) {
+    if (proc->normalExit()) {
+        outPut->append( tr("Finished with result ") );
+        outPut->append( QString::number(proc->exitStatus()) );
+    }
+    else
+        outPut->append( tr("Exited abnormally") );
+}
+
+void PPPDialog::closeEvent(QCloseEvent* e)
+{
+    if(PPPDialog::conns[0].proc.isRunning())
+        PPPDialog::conns[0].proc.kill();
+    QDialog::closeEvent(e);
+}
