@@ -155,8 +155,17 @@ bool Parser::parseProtocol( const QString& str) {
         m_protocolAdded = false;
         return true;
 
+    }else if (m_protocolOver && str.startsWith("   ") ) {
+        m_protocolAdded = true;
+        QString dummy = str.stripWhiteSpace();
+        int pos = dummy.findRev(':');
+        if ( pos > -1 ) {
+            int port = dummy.mid(pos+1 ).stripWhiteSpace().toInt();
+            Services::ProtocolDescriptor desc(  m_protName,  m_protId, port );
+            m_item.insertProtocolDescriptor( desc );
+        }
+        return true;
     }else if (m_protocolOver && str.startsWith("  ") ) { // "L2CAP" (0x0100)
-        owarn << "double protocol filter" << oendl;
 
         if (!m_protocolAdded ) { // the protocol does neither supply a channel nor port so add it now
             Services::ProtocolDescriptor desc(  m_protName,  m_protId );
@@ -165,17 +174,6 @@ bool Parser::parseProtocol( const QString& str) {
         m_protocolAdded = false;
         { // the find function
             m_protId = convert(str, m_protName );
-        }
-        return true;
-    }else if (m_protocolOver && str.startsWith("   ") ) {
-        owarn << "tripple protocol filter" << oendl;
-        m_protocolAdded = true;
-        QString dummy = str.stripWhiteSpace();
-        int pos = dummy.findRev(':');
-        if ( pos > -1 ) {
-            int port = dummy.mid(pos+1 ).stripWhiteSpace().toInt();
-            Services::ProtocolDescriptor desc(  m_protName,  m_protId, port );
-            m_item.insertProtocolDescriptor( desc );
         }
         return true;
     }else if (m_protocolOver ) {
