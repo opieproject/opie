@@ -3,19 +3,21 @@
 
 #include <qpopupmenu.h>
 #include <qaction.h>
+#include <services.h>
+#include "btdeviceitem.h"
 
 namespace OpieTooth {
 
     class ObexPopup : public QPopupMenu {
         Q_OBJECT
     public:
-        ObexPopup();
+        ObexPopup(const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item);
         ~ObexPopup();
-
-
-    private:
+    protected:
         QAction* m_push;
-    private slots:
+        OpieTooth::BTDeviceItem *m_item;
+        Services m_service;
+    protected slots:
         void slotPush();
     };
 };

@@ -15,32 +15,34 @@ using namespace OpieTooth;
 /*
  * c'tor init the QAction
  */
-ObexPopup::ObexPopup()
-        : QPopupMenu()
+ObexPopup::ObexPopup(const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item)
+        : QPopupMenu(), m_service(service)
 {
-    owarn << "RfcCommPopup c'tor" << oendl; 
+    owarn << "ObexPopup c'tor" << oendl; 
 
-    QAction* a;
-
+    m_item = item;
     /* connect action */
-    a = new QAction( ); // so it's get deleted
-    a->setText("Push file");
-    a->addTo( this );
-    connect( a, SIGNAL( activated() ),
-             this, SLOT( slotPush() ) );
-};
+    m_push = new QAction( ); // so it's get deleted
+    m_push->setText("Push file");
+    m_push->addTo( this );
+    connect(m_push, SIGNAL(activated()), SLOT(slotPush()));
+}
 
 
 ObexPopup::~ObexPopup()
-{}
+{
+    delete m_push;
+}
 
 
 void ObexPopup::slotPush()
 {
-
-    owarn << "push something" << oendl; 
-
-    ObexDialog obexDialog;
+    QString device = m_item->mac();
+    int port = m_service.protocolDescriptorList().last().port();
+    device += "@";
+    device += QString::number(port);
+    owarn << "push something to " << device << oendl; 
+    ObexDialog obexDialog(device);
     QPEApplication::execDialog( &obexDialog );
 }
 
