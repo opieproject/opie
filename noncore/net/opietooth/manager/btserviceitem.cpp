@@ -5,8 +5,11 @@ using namespace OpieTooth;
 
 BTServiceItem::BTServiceItem( QListViewItem* item,  const Services& serv )
     : BTListItem( item ) {
+    int port = serv.protocolDescriptorList().last().port();
     m_service = serv;
     setText(0, QObject::tr(serv.serviceName() ) );
+    if (port > 0)
+        setText(1, QString::number(port) );
 }
 BTServiceItem::~BTServiceItem() {
 
