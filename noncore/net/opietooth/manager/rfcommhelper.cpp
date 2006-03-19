@@ -42,12 +42,10 @@ void RfCommHelper::detach() {
         close(m_out2in[1] );
 }
 bool RfCommHelper::attach( const QString& bd_addr, int port ) {
-    int i =0;
+    int i = 0;
     bool ok = false;
-    while (!ok   ) {
-        if (i == 4) break;
+    for (i = 0; i < 5 && !ok; i++) {
         ok = connect( i,  bd_addr,  port );
-        i++;
     }
     return ok;
 }
@@ -83,7 +81,7 @@ bool RfCommHelper::connect(int devi, const QString& bdaddr, int port) {
         char dev[15];
         sprintf( por, "%d", port );
         sprintf( dev, "%d", devi );
-        execlp( "rfcomm", "rfcomm",  dev, bdaddr.latin1(), por, NULL );
+        execlp( "rfcomm", "rfcomm", "connect", dev, bdaddr.latin1(), por, NULL );
         char resultByte = 1;
         if ( m_fd[1] )
             write(m_fd[1], &resultByte, 1 );
@@ -113,7 +111,6 @@ bool RfCommHelper::connect(int devi, const QString& bdaddr, int port) {
             if ( len == -1 )
                 if ( (errno == ECHILD ) || (errno == EINTR ) )
                     continue; // the other process is not yet ready?
-
             break;
         }
         if ( m_fd[0] )
@@ -127,15 +124,19 @@ bool RfCommHelper::connect(int devi, const QString& bdaddr, int port) {
             FD_SET( m_in2out[0], &fds );
             timeout.tv_sec = 5;
             timeout.tv_usec = 0;
-
+            printf("do select\n");
             sel = select( m_in2out[0]+1, &fds, NULL, NULL,  &timeout );
-            if ( sel )
+            printf("Check select\n");
+            if ( sel > 0)
+            {
                 if (FD_ISSET(m_in2out[0], &fds ) ) {
                     char buf[2048];
                     int len;
                     buf[0]  = 0;
+                    printf("read output\n");
                     len = read( m_in2out[0], buf,  sizeof(buf) );
                     if ( len > 0 ) {
+                        printf("%s", buf);
                         QCString string( buf );
                         if (string.left(9) == "Connected" ) {
                             m_connected = true;
@@ -144,11 +145,11 @@ bool RfCommHelper::connect(int devi, const QString& bdaddr, int port) {
                         };
                     }
                     // now parese it
-                }else {// time out
-                    // 5 seconds without input check terminate?
-                    //
-                    ;
                 }
+            } else {// time out
+                terminate = true;
+                printf("terminate\n");
+            }
         }
         break;
     }
