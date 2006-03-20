@@ -1,4 +1,4 @@
-/* $Id: obexftpdialog.h,v 1.1 2006-03-19 14:59:21 korovkin Exp $ */
+/* $Id: obexftpdialog.h,v 1.2 2006-03-20 21:44:55 korovkin Exp $ */
 /* OBEX file browser dialog */
 /***************************************************************************
  *                                                                         *
@@ -56,10 +56,12 @@ namespace OpieTooth {
         int progressStatus; //Progress status
         Opie::Ui::OFileSelector* destFile; //Destination file or directory
         QVBoxLayout* localLayout; //Window layout
+        int nRetries; //Number of retries (on connection)
     private slots:
         void slotBrowse();
         void slotCd(QListViewItem* item);
         void getFile();    
+        void putFile();    
         void updateDir(const QString& newdir);
     };
 };

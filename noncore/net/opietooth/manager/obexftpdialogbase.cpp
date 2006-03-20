@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Form implementation generated from reading ui file 'obexftpdialogbase.ui'
 **
-** Created: Sun Mar 19 16:47:24 2006
+** Created: Tue Mar 21 00:29:33 2006
 **      by:  The User Interface Compiler (uic)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -11,11 +11,11 @@
 #include <qcombobox.h>
 #include <qheader.h>
 #include <qlabel.h>
-#include <qlineedit.h>
 #include <qlistview.h>
 #include <qmultilineedit.h>
 #include <qprogressbar.h>
 #include <qpushbutton.h>
+#include <qspinbox.h>
 #include <qtabwidget.h>
 #include <qwidget.h>
 #include <qlayout.h>
@@ -35,7 +35,7 @@ ObexFtpDialogBase::ObexFtpDialogBase( QWidget* parent,  const char* name, bool m
 {
     if ( !name )
 	setName( "ObexFtpDialogBase" );
-    resize( 221, 396 ); 
+    resize( 267, 312 ); 
     setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, sizePolicy().hasHeightForWidth() ) );
     setCaption( tr( "Browse device" ) );
     ObexFtpDialogBaseLayout = new QVBoxLayout( this ); 
@@ -49,35 +49,43 @@ ObexFtpDialogBase::ObexFtpDialogBase( QWidget* parent,  const char* name, bool m
     filesLayout->setSpacing( 0 );
     filesLayout->setMargin( 0 );
 
-    Layout9 = new QVBoxLayout; 
-    Layout9->setSpacing( 6 );
-    Layout9->setMargin( 0 );
+    Layout13 = new QGridLayout; 
+    Layout13->setSpacing( 6 );
+    Layout13->setMargin( 0 );
 
     fileList = new QListView( files, "fileList" );
     fileList->addColumn( tr( "Name" ) );
     fileList->addColumn( tr( "Size" ) );
-    Layout9->addWidget( fileList );
+
+    Layout13->addWidget( fileList, 0, 0 );
 
     fileProgress = new QProgressBar( files, "fileProgress" );
-    Layout9->addWidget( fileProgress );
 
-    buttons = new QHBoxLayout; 
-    buttons->setSpacing( 6 );
-    buttons->setMargin( 0 );
+    Layout13->addWidget( fileProgress, 1, 0 );
 
-    getButton = new QPushButton( files, "getButton" );
-    getButton->setText( tr( "Get file" ) );
-    buttons->addWidget( getButton );
+    Layout11 = new QHBoxLayout; 
+    Layout11->setSpacing( 6 );
+    Layout11->setMargin( 0 );
 
     browseOK = new QPushButton( files, "browseOK" );
     browseOK->setText( tr( "Browse" ) );
-    buttons->addWidget( browseOK );
-    Layout9->addLayout( buttons );
+    Layout11->addWidget( browseOK );
+
+    getButton = new QPushButton( files, "getButton" );
+    getButton->setText( tr( "Get file" ) );
+    Layout11->addWidget( getButton );
+
+    putButton = new QPushButton( files, "putButton" );
+    putButton->setText( tr( "Put file" ) );
+    Layout11->addWidget( putButton );
+
+    Layout13->addLayout( Layout11, 2, 0 );
 
     statusBar = new QLabel( files, "statusBar" );
     statusBar->setText( tr( "" ) );
-    Layout9->addWidget( statusBar );
-    filesLayout->addLayout( Layout9 );
+
+    Layout13->addWidget( statusBar, 3, 0 );
+    filesLayout->addLayout( Layout13 );
     obexFtpTab->insertTab( files, tr( "Device" ) );
 
     localFs = new QWidget( obexFtpTab, "localFs" );
@@ -85,21 +93,38 @@ ObexFtpDialogBase::ObexFtpDialogBase( QWidget* parent,  const char* name, bool m
 
     options = new QWidget( obexFtpTab, "options" );
 
-    connRetries = new QLabel( options, "connRetries" );
-    connRetries->setGeometry( QRect( 10, 45, 100, 16 ) ); 
-    connRetries->setText( tr( "Retry to connect" ) );
+    QWidget* privateLayoutWidget = new QWidget( options, "Layout5" );
+    privateLayoutWidget->setGeometry( QRect( 45, 5, 162, 63 ) ); 
+    Layout5 = new QVBoxLayout( privateLayoutWidget ); 
+    Layout5->setSpacing( 6 );
+    Layout5->setMargin( 0 );
 
-    nReries = new QLineEdit( options, "nReries" );
-    nReries->setGeometry( QRect( 115, 40, 60, 23 ) ); 
+    Layout3 = new QHBoxLayout; 
+    Layout3->setSpacing( 6 );
+    Layout3->setMargin( 0 );
 
-    uuidLabel = new QLabel( options, "uuidLabel" );
-    uuidLabel->setGeometry( QRect( 15, 20, 67, 15 ) ); 
+    uuidLabel = new QLabel( privateLayoutWidget, "uuidLabel" );
     uuidLabel->setText( tr( "uuid type" ) );
+    Layout3->addWidget( uuidLabel );
 
-    uuidType = new QComboBox( FALSE, options, "uuidType" );
+    uuidType = new QComboBox( FALSE, privateLayoutWidget, "uuidType" );
     uuidType->insertItem( tr( "FBS" ) );
     uuidType->insertItem( tr( "S45" ) );
-    uuidType->setGeometry( QRect( 85, 10, 100, 30 ) ); 
+    Layout3->addWidget( uuidType );
+    Layout5->addLayout( Layout3 );
+
+    Layout4 = new QHBoxLayout; 
+    Layout4->setSpacing( 6 );
+    Layout4->setMargin( 0 );
+
+    connRetries = new QLabel( privateLayoutWidget, "connRetries" );
+    connRetries->setText( tr( "Retry to connect" ) );
+    Layout4->addWidget( connRetries );
+
+    nReries = new QSpinBox( privateLayoutWidget, "nReries" );
+    nReries->setButtonSymbols( QSpinBox::PlusMinus );
+    Layout4->addWidget( nReries );
+    Layout5->addLayout( Layout4 );
     obexFtpTab->insertTab( options, tr( "Options" ) );
 
     browse = new QWidget( obexFtpTab, "browse" );
@@ -114,11 +139,11 @@ ObexFtpDialogBase::ObexFtpDialogBase( QWidget* parent,  const char* name, bool m
 
     // tab order
     setTabOrder( obexFtpTab, fileList );
-    setTabOrder( fileList, getButton );
-    setTabOrder( getButton, browseOK );
-    setTabOrder( browseOK, uuidType );
-    setTabOrder( uuidType, nReries );
-    setTabOrder( nReries, browseLog );
+    setTabOrder( fileList, browseOK );
+    setTabOrder( browseOK, getButton );
+    setTabOrder( getButton, putButton );
+    setTabOrder( putButton, uuidType );
+    setTabOrder( uuidType, browseLog );
 }
 
 /*  

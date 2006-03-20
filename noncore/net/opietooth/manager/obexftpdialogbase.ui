@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>221</width>
-            <height>396</height>
+            <width>267</width>
+            <height>312</height>
         </rect>
     </property>
     <property stdset="1">
@@ -76,9 +76,9 @@
                         <class>QLayoutWidget</class>
                         <property stdset="1">
                             <name>name</name>
-                            <cstring>Layout9</cstring>
+                            <cstring>Layout13</cstring>
                         </property>
-                        <vbox>
+                        <grid>
                             <property stdset="1">
                                 <name>margin</name>
                                 <number>0</number>
@@ -87,7 +87,7 @@
                                 <name>spacing</name>
                                 <number>6</number>
                             </property>
-                            <widget>
+                            <widget row="0"  column="0" >
                                 <class>QListView</class>
                                 <column>
                                     <property>
@@ -122,18 +122,18 @@
                                     <cstring>fileList</cstring>
                                 </property>
                             </widget>
-                            <widget>
+                            <widget row="1"  column="0" >
                                 <class>QProgressBar</class>
                                 <property stdset="1">
                                     <name>name</name>
                                     <cstring>fileProgress</cstring>
                                 </property>
                             </widget>
-                            <widget>
+                            <widget row="2"  column="0" >
                                 <class>QLayoutWidget</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>buttons</cstring>
+                                    <cstring>Layout11</cstring>
                                 </property>
                                 <hbox>
                                     <property stdset="1">
@@ -144,6 +144,17 @@
                                         <name>spacing</name>
                                         <number>6</number>
                                     </property>
+                                    <widget>
+                                        <class>QPushButton</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>browseOK</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>Browse</string>
+                                        </property>
+                                    </widget>
                                     <widget>
                                         <class>QPushButton</class>
                                         <property stdset="1">
@@ -159,16 +170,16 @@
                                         <class>QPushButton</class>
                                         <property stdset="1">
                                             <name>name</name>
-                                            <cstring>browseOK</cstring>
+                                            <cstring>putButton</cstring>
                                         </property>
                                         <property stdset="1">
                                             <name>text</name>
-                                            <string>Browse</string>
+                                            <string>Put file</string>
                                         </property>
                                     </widget>
                                 </hbox>
                             </widget>
-                            <widget>
+                            <widget row="3"  column="0" >
                                 <class>QLabel</class>
                                 <property stdset="1">
                                     <name>name</name>
@@ -179,7 +190,7 @@
                                     <string></string>
                                 </property>
                             </widget>
-                        </vbox>
+                        </grid>
                     </widget>
                 </vbox>
             </widget>
@@ -205,88 +216,116 @@
                     <string>Options</string>
                 </attribute>
                 <widget>
-                    <class>QLabel</class>
+                    <class>QLayoutWidget</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>connRetries</cstring>
+                        <cstring>Layout5</cstring>
                     </property>
                     <property stdset="1">
                         <name>geometry</name>
                         <rect>
-                            <x>10</x>
-                            <y>45</y>
-                            <width>100</width>
-                            <height>16</height>
+                            <x>45</x>
+                            <y>5</y>
+                            <width>162</width>
+                            <height>63</height>
                         </rect>
                     </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Retry to connect</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QLineEdit</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>nReries</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>geometry</name>
-                        <rect>
-                            <x>115</x>
-                            <y>40</y>
-                            <width>60</width>
-                            <height>23</height>
-                        </rect>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>uuidLabel</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>geometry</name>
-                        <rect>
-                            <x>15</x>
-                            <y>20</y>
-                            <width>67</width>
-                            <height>15</height>
-                        </rect>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>uuid type</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QComboBox</class>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>FBS</string>
+                    <vbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
                         </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>S45</string>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
                         </property>
-                    </item>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>uuidType</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>geometry</name>
-                        <rect>
-                            <x>85</x>
-                            <y>10</y>
-                            <width>100</width>
-                            <height>30</height>
-                        </rect>
-                    </property>
+                        <widget>
+                            <class>QLayoutWidget</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Layout3</cstring>
+                            </property>
+                            <hbox>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>6</number>
+                                </property>
+                                <widget>
+                                    <class>QLabel</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>uuidLabel</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>uuid type</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QComboBox</class>
+                                    <item>
+                                        <property>
+                                            <name>text</name>
+                                            <string>FBS</string>
+                                        </property>
+                                    </item>
+                                    <item>
+                                        <property>
+                                            <name>text</name>
+                                            <string>S45</string>
+                                        </property>
+                                    </item>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>uuidType</cstring>
+                                    </property>
+                                </widget>
+                            </hbox>
+                        </widget>
+                        <widget>
+                            <class>QLayoutWidget</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Layout4</cstring>
+                            </property>
+                            <hbox>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>6</number>
+                                </property>
+                                <widget>
+                                    <class>QLabel</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>connRetries</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>Retry to connect</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QSpinBox</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>nReries</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>buttonSymbols</name>
+                                        <enum>PlusMinus</enum>
+                                    </property>
+                                </widget>
+                            </hbox>
+                        </widget>
+                    </vbox>
                 </widget>
             </widget>
             <widget>
@@ -323,10 +362,10 @@
 <tabstops>
     <tabstop>obexFtpTab</tabstop>
     <tabstop>fileList</tabstop>
-    <tabstop>getButton</tabstop>
     <tabstop>browseOK</tabstop>
+    <tabstop>getButton</tabstop>
+    <tabstop>putButton</tabstop>
     <tabstop>uuidType</tabstop>
-    <tabstop>nReries</tabstop>
     <tabstop>browseLog</tabstop>
 </tabstops>
 </UI>

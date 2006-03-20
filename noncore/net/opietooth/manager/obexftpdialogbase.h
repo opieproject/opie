@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Form interface generated from reading ui file 'obexftpdialogbase.ui'
 **
-** Created: Sun Mar 19 16:46:33 2006
+** Created: Tue Mar 21 00:28:12 2006
 **      by:  The User Interface Compiler (uic)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -16,12 +16,12 @@ class QHBoxLayout;
 class QGridLayout; 
 class QComboBox;
 class QLabel;
-class QLineEdit;
 class QListView;
 class QListViewItem;
 class QMultiLineEdit;
 class QProgressBar;
 class QPushButton;
+class QSpinBox;
 class QTabWidget;
 class QWidget;
 
@@ -37,23 +37,27 @@ public:
     QWidget* files;
     QListView* fileList;
     QProgressBar* fileProgress;
-    QPushButton* getButton;
     QPushButton* browseOK;
+    QPushButton* getButton;
+    QPushButton* putButton;
     QLabel* statusBar;
     QWidget* localFs;
     QWidget* options;
-    QLabel* connRetries;
-    QLineEdit* nReries;
     QLabel* uuidLabel;
     QComboBox* uuidType;
+    QLabel* connRetries;
+    QSpinBox* nReries;
     QWidget* browse;
     QMultiLineEdit* browseLog;
 
 protected:
     QVBoxLayout* ObexFtpDialogBaseLayout;
     QVBoxLayout* filesLayout;
-    QVBoxLayout* Layout9;
-    QHBoxLayout* buttons;
+    QGridLayout* Layout13;
+    QHBoxLayout* Layout11;
+    QVBoxLayout* Layout5;
+    QHBoxLayout* Layout3;
+    QHBoxLayout* Layout4;
     QHBoxLayout* browseLayout;
 };
 

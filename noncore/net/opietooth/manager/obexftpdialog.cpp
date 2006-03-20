@@ -1,4 +1,4 @@
-/* $Id: obexftpdialog.cpp,v 1.1 2006-03-19 14:59:21 korovkin Exp $ */
+/* $Id: obexftpdialog.cpp,v 1.2 2006-03-20 21:44:55 korovkin Exp $ */
 /* OBEX file browser dialog */
 /***************************************************************************
  *                                                                         *
@@ -12,9 +12,15 @@
  * This code uses and is based on ObexFTP project code: http://triq.net/obexftp/
  */
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <string.h>
+#include <errno.h>
 #include <qpushbutton.h>
 #include <qmessagebox.h>
 #include <qmultilineedit.h>
+#include <qspinbox.h>
+#include <qcombobox.h>
 #include <qlistview.h>
 #include <qprogressbar.h>
 #include <qlabel.h>
@@ -49,6 +55,7 @@ ObexFtpDialog::ObexFtpDialog(const QString& device, int port,
     m_port(port), curdir("")
 {
     client = NULL;
+    nRetries = 3;
     transport = OBEX_TRANS_BLUETOOTH;
     use_conn = TRUE;
     use_path = TRUE;
@@ -68,12 +75,16 @@ ObexFtpDialog::ObexFtpDialog(const QString& device, int port,
     destFile->setCloseVisible(false);
     destFile->setNewVisible(false);
     localLayout->addWidget(destFile);
+    nReries->setValue(nRetries);
     connect(browseOK, SIGNAL(clicked()), SLOT(slotBrowse()));
     connect(fileList, SIGNAL(clicked(QListViewItem*)), 
         SLOT(slotCd(QListViewItem*)));
     connect(getButton, 
         SIGNAL(clicked()),
         SLOT(getFile()));
+    connect(putButton,
+        SIGNAL(clicked()),
+        SLOT(putFile()));
     connect(destFile, 
         SIGNAL(dirSelected (const QString&)),
         SLOT(updateDir(const QString&)));
@@ -94,18 +105,36 @@ void ObexFtpDialog::slotBrowse()
 {
     stat_entry_t* ent; //Directory entry
     void *dir; //Directory to read
-    const uint8_t use_uuid[] = __UUID_FBS_bytes;
-    int len = sizeof(UUID_FBS);
+    const uint8_t* use_uuid; //uuid
+    int len; //uuid length
     FileListItem* root; //root node
-    stat_entry_t* st; //File statistics
     int fsize; //file size
+    bool numOk; //true if the string is a number 
+    int tmp; //just a temp var
     
     status(tr("Connecting to ") + m_device);
     odebug << "Browse device " << m_device << oendl;
     browseLog->clear();
     fileList->clear();
     progressStatus = 0;
+    fileProgress->setTotalSteps(MAX_PROGRESS);
     fileProgress->reset();
+
+    //Get parameters
+    tmp = nReries->text().toInt(&numOk);
+    if (numOk)
+        nRetries = tmp;
+    if (uuidType->currentText() == "FBS") {
+        use_uuid = UUID_FBS;
+        len = sizeof(UUID_FBS);
+    } else if (uuidType->currentText() == "S45") {
+        use_uuid = UUID_S45;
+        len = sizeof(UUID_S45);
+    } else {
+        use_uuid = UUID_FBS;
+        len = sizeof(UUID_FBS);
+    }
+
     if (!cli_connect_uuid(use_uuid, len)) {
         log("Connection failed");
         errBox("Connection failed");
@@ -121,13 +150,10 @@ void ObexFtpDialog::slotBrowse()
     dir = obexftp_opendir(client, curdir);
 	while ((ent = obexftp_readdir(dir)) != NULL) {
         FileListItem* a; //List view item
-#if 0 //Causes sigsegv        
     	if (ent->mode != 16877) {
-            st = obexftp_stat(client, ent->name);
-            fsize = st->size;
+            fsize = ent->size;
         }
         else
-#endif        
             fsize = 0;
 		log(QString(ent->name) + QString(" ") + 
             QString::number(ent->mode));
@@ -222,6 +248,10 @@ void ObexFtpDialog::getFile()
     if (local.right(1) != "/")
         local += "/";
     if (file->gettype() == IS_FILE) {
+        if (client == NULL) {
+            errBox("No connection established");
+            return;
+        }
         file2get += curdir;
         if (curdir != "" && curdir.right(1) != "/")
             file2get += "/";
@@ -229,6 +259,7 @@ void ObexFtpDialog::getFile()
         local += file->text(0);
         odebug << "Copy " << file2get << " to " << local << oendl;
         progressStatus = 0;
+        fileProgress->setTotalSteps(file->getsize() / 1024);
         fileProgress->reset();
         status(tr("Receiving file ") + file2get);
         result = obexftp_get(client, local, file2get);
@@ -242,6 +273,54 @@ void ObexFtpDialog::getFile()
             status(file2get + QString(" received")); 
             destFile->reread();
         }
+    }
+}
+
+/*
+ * Put the file
+ */
+void ObexFtpDialog::putFile()
+{
+    int result; //OPeration result
+    int idx; //Index of a symbol in the string
+    struct stat localFStat; //Local file information
+    
+    if (client == NULL) {
+        errBox("No connection established");
+        return;
+    }
+    local = destFile->selectedName();
+    if (local == "") {
+        errBox("No file slected");
+        return;
+    }
+    result = stat(local, &localFStat);
+    if (result < 0) {
+        errBox(tr("Wrong file selected ") + local + tr(" ") + 
+            tr(strerror(errno)));
+        return;
+    }
+    idx = local.findRev('/');
+    if (idx > 0) {
+        file2get = local.right(local.length() - idx - 1);
+    }
+    else 
+        file2get = local;
+    
+    odebug << "Copy " << local << " to " << file2get << oendl;
+    progressStatus = 0;
+    fileProgress->setTotalSteps(localFStat.st_size / 1024);
+    fileProgress->reset();
+    status(tr("Sending file ") + local);
+    result = obexftp_put_file(client, local, file2get);
+    if (result < 0) {
+        log(local + QString(" send ERROR")); 
+        errBox(local + QString(" send ERROR"));
+        status(local + QString(" send ERROR"));
+    }
+    else {
+        log(local + QString(" sent")); 
+        status(local + QString(" sent")); 
     }
 }
 
@@ -261,7 +340,7 @@ int ObexFtpDialog::cli_connect_uuid(const uint8_t *uuid, int uuid_len)
         client->quirks &= ~OBEXFTP_CONN_HEADER;
     if (!use_path)
         client->quirks &= ~OBEXFTP_SPLIT_SETPATH;
-    for (retry = 0; retry < 3; retry++) {
+    for (retry = 0; retry < nRetries; retry++) {
         /* Connect */
         switch (transport) {
         case OBEX_TRANS_IRDA:
@@ -309,10 +388,8 @@ void ObexFtpDialog::log(const char* str)
 
 void ObexFtpDialog::incProgress()
 {
-    odebug << "Progress " << progressStatus << oendl;
-    if (progressStatus < MAX_PROGRESS) {
+    if (progressStatus < fileProgress->totalSteps())
         fileProgress->setProgress(progressStatus++);
-    }
 }
 
 void ObexFtpDialog::doneProgress()
