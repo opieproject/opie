@@ -1,4 +1,4 @@
-/* $Id: filelistitem.cpp,v 1.1 2006-03-19 14:59:21 korovkin Exp $ */
+/* $Id: filelistitem.cpp,v 1.2 2006-03-20 21:43:19 korovkin Exp $ */
 /* Directory tree entry */
 /***************************************************************************
  *                                                                         *
@@ -66,6 +66,11 @@ QString FileListItem::key(int, bool) const
 enum dtype FileListItem::gettype()
 {
     return type;
+}
+
+int FileListItem::getsize()
+{
+    return m_size;
 }
 
 //eof

@@ -1,4 +1,4 @@
-/* $Id: filelistitem.h,v 1.1 2006-03-19 14:59:21 korovkin Exp $ */
+/* $Id: filelistitem.h,v 1.2 2006-03-20 21:43:20 korovkin Exp $ */
 /* Directory tree entry */
 /***************************************************************************
  *                                                                         *
@@ -26,6 +26,7 @@ namespace OpieTooth {
         FileListItem(QListViewItem * parent, stat_entry_t* ent, int size = 0);
         virtual QString key ( int, bool ) const;
         virtual enum dtype gettype();
+        virtual int getsize();
     protected:
         void init(stat_entry_t* ent, int size);
     protected:
