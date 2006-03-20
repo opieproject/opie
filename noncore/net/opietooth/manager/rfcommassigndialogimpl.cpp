@@ -60,6 +60,8 @@ void RfcommAssignDialog::newDevice( const QString & mac )
         if (  it == confHandler->foundEntries().end() )
         {
             QDialog dialog( this,  "newdevice", true, WStyle_ContextHelp );
+            dialog.setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, 
+                (QSizePolicy::SizeType)7, sizePolicy().hasHeightForWidth()));
 
             RfcommDialogItem *newDev = new RfcommDialogItem( &dialog );
             newDev->setIdent( i );
