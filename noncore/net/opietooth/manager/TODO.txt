@@ -1,6 +1,5 @@
-1. Add a "Put file" function to bluetooth manager file transfer protocol.
-2. Make bind table edit /etc/bluetooth/rfcomm.conf file.
-3. Add an rfcomm port number to the connection dialog.
-4. Collect requirements from others.
+1. Make bind table edit /etc/bluetooth/rfcomm.conf file.
+2. Add an rfcomm port number to the connection dialog.
+3. Collect requirements from others.
 
 //eof
