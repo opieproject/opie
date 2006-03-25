@@ -7,7 +7,7 @@ using namespace OpieTooth;
 BTDeviceItem::BTDeviceItem( QListView* parent,  const RemoteDevice& dev )
     : BTListItem( parent ) {
 
-    setText( 0, dev.name() );
+    setText( 0, dev.name().utf8() );
     m_device = dev;
 };
 BTDeviceItem::~BTDeviceItem() {

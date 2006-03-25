@@ -4,6 +4,7 @@
 #include <qlineedit.h>
 #include <qcombobox.h>
 #include <qgroupbox.h>
+#include <qcheckbox.h>
 
 using namespace OpieTooth;
 
@@ -33,6 +34,10 @@ QString RfcommDialogItem::comment()  {
     return m_commentLine->text();
 }
 
+bool RfcommDialogItem::isBind()  {
+    return m_bind->isChecked();
+}
+
 void RfcommDialogItem::setIdent( int ident )  {
     m_ident = ident;
     m_identLabel->setTitle( QString( "rfcomm%1").arg( ident ) );
@@ -50,4 +55,8 @@ void RfcommDialogItem::setComment( const QString &comment ) {
     m_commentLine->setText( comment );
 }
 
+void RfcommDialogItem::setBind( bool dobind ) {
+    m_bind->setChecked( dobind );
+}
 
+//eof

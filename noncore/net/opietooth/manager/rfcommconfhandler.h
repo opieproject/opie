@@ -11,7 +11,8 @@ namespace OpieTooth {
     class RfCommConfObject {
 	
     public:
-	RfCommConfObject( int number, QString mac, int channel, QString comment );
+	RfCommConfObject( int number, QString mac, int channel, QString comment, 
+        bool bind);
 	~RfCommConfObject();
 	
 	void setNumber( int number );
@@ -22,9 +23,11 @@ namespace OpieTooth {
 	int channel() { return m_channel; };
 	void setComment( QString comment );
 	QString comment() { return m_comment; };
-
+    bool isBind() { return m_doBind; }
+    void doBind(bool arg) { m_doBind = arg; }
 
     private:
+    bool m_doBind;
 	int m_number;
 	QString m_mac;
 	int m_channel;

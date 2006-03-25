@@ -1,5 +1,4 @@
-1. Make bind table edit /etc/bluetooth/rfcomm.conf file.
-2. Add an rfcomm port number to the connection dialog.
-3. Collect requirements from others.
+1. Add an rfcomm port number to the connection dialog.
+2. Collect requirements from others.
 
 //eof

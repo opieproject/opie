@@ -105,7 +105,8 @@ void RfcCommPopup::slotBind()
 {
     RfcommAssignDialog rfcommAssign ( this, "RfcommAssignDialog", true, WStyle_ContextHelp  );
 
-    rfcommAssign.newDevice( m_item->mac() );
+    rfcommAssign.newDevice( m_item->mac(), 
+        m_service.protocolDescriptorList().last().port());
 
     if ( QPEApplication::execDialog( &rfcommAssign ) == QDialog::Accepted )
     {

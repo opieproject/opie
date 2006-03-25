@@ -21,11 +21,13 @@ namespace OpieTooth {
 	QString mac();
 	int channel();	
 	QString comment();
+    bool isBind();
 
-        void setIdent( int ident );
+    void setIdent( int ident );
 	void setMac( const QString& mac  );
 	void setChannel( int channel );
 	void setComment( const QString& comment );
+    void setBind(bool dobind);
 
     private:
 
