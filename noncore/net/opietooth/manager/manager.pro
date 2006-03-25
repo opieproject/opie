@@ -30,12 +30,12 @@ TARGET 		= bluetooth-manager
 
 include( $(OPIEDIR)/include.pro )
 
-!isEmpty( LIBBLUEZ_INC_DIR ) {
-    INCLUDEPATH += $$LIBBLUEZ_INC_DIR/obexftp
+!isEmpty( LIBOBEXFTP_INC_DIR ) {
+    INCLUDEPATH += $$LIBOBEXFTP_INC_DIR
 }
 
-!isEmpty( LIBBLUEZ_LIB_DIR ) {
-    LIBS += $$LIBBLUEZ_LIB_DIR/libobexftp.a
-    LIBS += $$LIBBLUEZ_LIB_DIR/libmulticobex.a
-    LIBS += $$LIBBLUEZ_LIB_DIR/libbfb.a
+!isEmpty( LIBOBEXFTP_LIB_DIR ) {
+    LIBS += $$LIBOBEXFTP_LIB_DIR/libobexftp.a
+    LIBS += $$LIBOBEXFTP_LIB_DIR/libmulticobex.a
+    LIBS += $$LIBOBEXFTP_LIB_DIR/libbfb.a
 }
