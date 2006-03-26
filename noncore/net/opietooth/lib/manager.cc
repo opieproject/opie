@@ -220,7 +220,7 @@ RemoteDevice::ValueList Manager::parseHCIOutput(const QString& output ) {
             str.remove( 0,  17 );
             odebug << "Manager: mac " << mac.latin1() << oendl;
             odebug << "Manager: rest: " << str.latin1() << oendl;
-            RemoteDevice rem( mac , str.stripWhiteSpace() );
+            RemoteDevice rem( mac , QString::fromUtf8(str.stripWhiteSpace()) );
             list.append( rem );
         }
     }
