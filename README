@@ -84,6 +84,9 @@ For a successful Opie build, you need to install the following libraries and hea
 * libipk >= 138
   ftp://handhelds.org/linux/packages/ipkg
 
+* libobexftp >= 0.19
+  http://triq.net/obexftp.html
+
 3. Required Programs
 ====================
 

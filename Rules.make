@@ -131,6 +131,10 @@ ifeq ($(CONFIG_LIBFLITE_DEP),y)
 	echo LIBFLITE_LIB_DIR = $(CONFIG_LIBFLITE_LIB_DIR) >> $@
 	echo LIBFLITE_INC_DIR = $(CONFIG_LIBFLITE_INC_DIR) >> $@
 endif
+ifeq ($(CONFIG_LIBOBEXFTP_DEP),y)
+	echo LIBOBEXFTP_INC_DIR = $(CONFIG_LIBOBEXFTP_INC_DIR) >> $@
+	echo LIBOBEXFTP_LIB_DIR = $(CONFIG_LIBOBEXFTP_LIB_DIR) >> $@
+endif
 $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)/config.in\; fi\;) $(TOPDIR)/.config $(TOPDIR)/packages
 	@echo Generating dependency information...
 # add to subdir-y, and add descend rules

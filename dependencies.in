@@ -114,3 +114,14 @@
     string "libflite library dir"
     depends LIBFLITE_DEP
 
+  config LIBOBEXFTP_DEP
+    boolean "Have OBEX FTP library"
+    default "n"
+
+  config LIBOBEXFTP_INC_DIR
+    string "OBEXFTP include dir"
+    depends LIBOBEXFTP_DEP
+
+  config LIBOBEXFTP_LIB_DIR
+    string "OBEXFTP library dir"
+    depends LIBOBEXFTP_DEP
