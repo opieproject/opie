@@ -9,6 +9,7 @@ class QVBoxLayout;
 class QPushButton;
 class QMultiLineEdit;
 class QLineEdit;
+class QComboBox;
 #define NCONNECTS 10 //Maximal 
 
 namespace OpieTooth {
@@ -40,6 +41,7 @@ namespace OpieTooth {
         QLineEdit* cmdLine;
         QPushButton* connectButton;
         QMultiLineEdit* outPut;
+        QComboBox* serPort;
 
     private:
         QString m_device;

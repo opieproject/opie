@@ -5,6 +5,7 @@
 #include <qmultilineedit.h>
 #include <qlineedit.h>
 #include <qlayout.h>
+#include <qcombobox.h>
 #include <qlabel.h>
 #include <opie2/oprocess.h>
 #include <opie2/odebug.h>
@@ -19,6 +20,7 @@ Connection PPPDialog::conns[NCONNECTS];
 PPPDialog::PPPDialog( const QString& device, int port, QWidget* parent,  
     const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
+    int i; //Just an index variable
 
     if ( !name )
         setName( "PPPDialog" );
@@ -42,54 +44,63 @@ PPPDialog::PPPDialog( const QString& device, int port, QWidget* parent,
 
     connectButton = new QPushButton( this );
     connectButton->setText( tr( "Connect" ) );
-
+    
+    serPort = new QComboBox(this);
+    for (i = 0; i < NCONNECTS; i++) {
+        if (!PPPDialog::conns[i].proc.isRunning())
+            serPort->insertItem(tr("rfcomm%1").arg(i));
+    }
+    
     layout->addWidget(info);
     layout->addWidget(cmdLine);
+    layout->addWidget(serPort);
     layout->addWidget(outPut);
     layout->addWidget(connectButton);
 
     connect( connectButton, SIGNAL( clicked() ), this,  SLOT( connectToDevice() ) );
-
-    connect(&PPPDialog::conns[0].proc, 
-		        SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int)),
-            this, SLOT(fillOutPut(Opie::Core::OProcess*, char*, int)));
-    connect( &PPPDialog::conns[0].proc, 
-            SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int)),
-            this,    SLOT(fillErr(Opie::Core::OProcess*, char*, int)));
-    connect( &PPPDialog::conns[0].proc, 
-        SIGNAL(processExited(Opie::Core::OProcess*)),
-        this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
 }
 
 PPPDialog::~PPPDialog() {
 }
 
 void PPPDialog::connectToDevice() {
-    if (PPPDialog::conns[0].proc.isRunning()) {
+    int portNum = serPort->currentText().right(1).toInt();
+    if (PPPDialog::conns[portNum].proc.isRunning()) {
         outPut->append(tr("Work in progress"));
         return;
     }
     outPut->clear();
-    PPPDialog::conns[0].proc.clearArguments();
+    PPPDialog::conns[portNum].proc.clearArguments();
     // vom popupmenu beziehen
     if (cmdLine->text().isEmpty()) {//Connect by rfcomm
-        PPPDialog::conns[0].proc << "rfcomm" << "connect" 
-            << "0" << m_device << QString::number(m_port);
+        PPPDialog::conns[portNum].proc << "rfcomm" << "connect" 
+            << QString::number(portNum) << m_device << QString::number(m_port);
     }
     else {
-        QString connectScript = "/etc/ppp/peers/" + cmdLine->text();
-        PPPDialog::conns[0].proc << "pppd" 
-            << m_device << "call" << connectScript;
+        PPPDialog::conns[portNum].proc << "pppd" 
+            << tr("/dev/bluetooth/rfcomm/%1").arg(portNum) 
+            << "call" 
+            << cmdLine->text();
     }
-    if (!PPPDialog::conns[0].proc.start(OProcess::NotifyOnExit, OProcess::All)) {
+    if (!PPPDialog::conns[portNum].proc.start(OProcess::NotifyOnExit, 
+        OProcess::All)) {
         outPut->append(tr("Couldn't start"));
     }
     else
     {
-        PPPDialog::conns[0].proc.resume();
+        PPPDialog::conns[portNum].proc.resume();
         outPut->append(tr("Started"));
-        PPPDialog::conns[0].btAddr = m_device;
-        PPPDialog::conns[0].port = m_port;
+        PPPDialog::conns[portNum].btAddr = m_device;
+        PPPDialog::conns[portNum].port = m_port;
+        connect(&PPPDialog::conns[portNum].proc, 
+		    SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int)),
+            this, SLOT(fillOutPut(Opie::Core::OProcess*, char*, int)));
+        connect( &PPPDialog::conns[portNum].proc, 
+            SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int)),
+            this,    SLOT(fillErr(Opie::Core::OProcess*, char*, int)));
+        connect( &PPPDialog::conns[portNum].proc, 
+            SIGNAL(processExited(Opie::Core::OProcess*)),
+            this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
     }
 }
 
@@ -115,7 +126,12 @@ void PPPDialog::slotProcessExited(OProcess* proc) {
 
 void PPPDialog::closeEvent(QCloseEvent* e)
 {
-    if(PPPDialog::conns[0].proc.isRunning())
-        PPPDialog::conns[0].proc.kill();
+    int i; //index variable
+    for (i = 0; i < NCONNECTS; i++) {
+        if(PPPDialog::conns[i].proc.isRunning())
+            PPPDialog::conns[i].proc.kill();
+    }
     QDialog::closeEvent(e);
 }
+
+//eof
