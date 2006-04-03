@@ -1,4 +1,4 @@
-1. Add an rfcomm port number to the connection dialog.
+1. Try and run and correct authentification and encoding.
 2. Collect requirements from others.
 
 //eof

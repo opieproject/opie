@@ -4,6 +4,6 @@ Sun 19 Mar 2006 17:29:28
    object.h and uuid.h files to $LIBBLUEZ_INC_DIR/obexftp and libobexftp.a,
    libmulticobex.a and libbfb.a to $LIBBLUEZ_LIB_DIR.
 2. In "ppp connection" dialog if you press connect with an empty ppp script
-   name it runs rfcomm connect 0 <device> <port>.
+   name it runs rfcomm connect <number of a port selected> <device> <port>.
    
 //eof

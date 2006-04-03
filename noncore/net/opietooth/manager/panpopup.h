@@ -27,7 +27,7 @@ namespace OpieTooth {
         void slotConnect();
         void slotDisconnect();
         void slotConnectAndConfig();
-   };
+    };
 };
 
 #endif

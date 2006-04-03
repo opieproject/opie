@@ -1,5 +1,9 @@
 #include <qpe/qcopenvelope_qws.h>
+#include <qmessagebox.h>
 #include <opie2/odebug.h>
+#include <opie2/oprocess.h>
+#include <qpe/qpeapplication.h>
+#include "pandialog.h"
 using namespace Opie::Core;
 
 #include <qtimer.h>
@@ -45,14 +49,16 @@ PanPopup::~PanPopup() {
 }
 
 void PanPopup::slotConnect() {
-
-    m_panconnection = new StartPanConnection( m_item->mac() );
-    m_panconnection->start();
+    odebug << "connect" << oendl;
+    PanDialog pandlg(m_item->mac());
+    QPEApplication::execDialog(&pandlg);
 }
 
 void PanPopup::slotDisconnect()  {
-    if (!m_panconnection) m_panconnection = new StartPanConnection( m_item->mac() );
+    if (!m_panconnection) 
+        m_panconnection = new StartPanConnection( m_item->mac() );
     m_panconnection->stop();
+    QMessageBox::information(this, tr("Pan Disconnect"), tr("PAN Disconnected"));
 }
 
 

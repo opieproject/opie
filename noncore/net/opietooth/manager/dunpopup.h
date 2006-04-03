@@ -3,8 +3,7 @@
 
 #include <qpopupmenu.h>
 #include <qaction.h>
-
-#include <startdunconnection.h>
+#include <services.h>
 
 #include "btdeviceitem.h"
 
@@ -16,13 +15,13 @@ namespace OpieTooth {
 	Q_OBJECT
 
     public:
-        DunPopup( OpieTooth::BTDeviceItem* );
+        DunPopup(const OpieTooth::Services&, OpieTooth::BTDeviceItem* );
         ~DunPopup();
 
     private:
         QAction* m_push;
-	OpieTooth::StartDunConnection* m_dunconnection;
-	OpieTooth::BTDeviceItem *m_item;
+        OpieTooth::BTDeviceItem *m_item; //device item 
+        Services m_service; //device service (port)
     private slots:
         void slotConnect();
         void slotDisconnect();

@@ -1,32 +1,30 @@
 #include <qpe/qcopenvelope_qws.h>
-
-#include <qtimer.h>
+#include <qmessagebox.h>
 #include <opie2/odebug.h>
+#include <opie2/oprocess.h>
+#include <qpe/qpeapplication.h>
 using namespace Opie::Core;
 
 #include "dunpopup.h"
+#include "dundialog.h"
 
 using namespace OpieTooth;
 
 /*
  * c'tor init the QAction
  */
-DunPopup::DunPopup( OpieTooth::BTDeviceItem* item ) : QPopupMenu()  {
+DunPopup::DunPopup( const Services& service,
+    BTDeviceItem* item ) : QPopupMenu(), m_service(service) {
 
     owarn << "DunPopup c'tor" << oendl; 
 
     m_item = item;
     QAction *a, *b, *c;
 
-    m_dunconnection = 0l;
-    /* connect action */
-
-
     a = new QAction(); // so it's get deleted
     a->setText( tr("connect") );
     a->addTo( this );
     connect( a, SIGNAL( activated() ), this, SLOT( slotConnect() ) );
-
 
     b = new QAction();
     b->setText( tr( "connect+conf" ) );
@@ -45,13 +43,21 @@ DunPopup::~DunPopup() {
 }
 
 void DunPopup::slotConnect() {
-
-    m_dunconnection = new StartDunConnection( m_item->mac() );
-    m_dunconnection->start();
+    odebug << "connect" << oendl;
+    DunDialog dundlg(m_item->mac(),
+        m_service.protocolDescriptorList().last().port());
+    QPEApplication::execDialog( &dundlg );
 }
 
 void DunPopup::slotDisconnect()  {
-    m_dunconnection->stop();
+    OProcess dunDis;
+    OProcess pppDis;
+    dunDis << tr("dund") << tr("--kill") << m_item->mac();
+    dunDis.start(OProcess::DontCare, OProcess::NoCommunication);
+    pppDis << tr("killall") << tr("-q") << tr("pppd");
+    pppDis.start(OProcess::DontCare, OProcess::NoCommunication);
+    sleep(1);
+    QMessageBox::information(this, tr("DUN Disconnect"), tr("DUN Disconnected"));
 }
 
 
@@ -61,5 +67,4 @@ void DunPopup::slotConnectAndConfig() {
     // more intelligence here later like passing the device ( bnepX )
     QCopEnvelope e( "QPE/System", "execute(QString)" );
     e << QString( "networksettings" );
-
 }

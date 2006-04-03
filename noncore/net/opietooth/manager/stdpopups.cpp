@@ -22,8 +22,8 @@ extern "C" {
         return new OpieTooth::PanPopup( item );
     }
 
-    QPopupMenu* newDunPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* item ) {
-        return new OpieTooth::DunPopup( item );
+    QPopupMenu* newDunPopup( const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item ) {
+        return new OpieTooth::DunPopup(service, item);
     }
 }
 
