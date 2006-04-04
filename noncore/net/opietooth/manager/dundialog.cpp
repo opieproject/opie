@@ -1,4 +1,4 @@
-/* $Id: dundialog.cpp,v 1.2 2006-04-04 12:15:10 korovkin Exp $ */
+/* $Id: dundialog.cpp,v 1.3 2006-04-04 18:53:07 korovkin Exp $ */
 /* DUN connection dialog */
 /***************************************************************************
  *                                                                         *
@@ -54,9 +54,13 @@ DunDialog::DunDialog( const QString& device, int port, QWidget* parent,
     doEncryption = new QCheckBox(this, "encrypt");
     doEncryption->setText( tr( "encrypt" ) );
 
+    persist = new QCheckBox(this, "persist");
+    persist->setText( tr( "persist" ) );
+
     layout->addWidget(info);
     layout->addWidget(cmdLine);
     layout->addWidget(doEncryption);
+    layout->addWidget(persist);
     layout->addWidget(outPut);
     layout->addWidget(connectButton);
 
@@ -68,6 +72,8 @@ DunDialog::~DunDialog() {
 
 void DunDialog::connectToDevice() {
     bool doEnc = doEncryption->isChecked();
+    bool doPersist = persist->isChecked();
+    
     if (cmdLine->text() == "")
         return;
     if (m_dunConnect) {
@@ -84,6 +90,8 @@ void DunDialog::connectToDevice() {
             << tr("--nodetach");
     if (doEnc)
         *m_dunConnect << tr("--encrypt");
+    if (doPersist)
+        *m_dunConnect << tr("--persist");
     *m_dunConnect << tr("call")
             << cmdLine->text();
     if (!m_dunConnect->start(OProcess::NotifyOnExit, 

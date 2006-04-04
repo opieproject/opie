@@ -1,4 +1,4 @@
-/* $Id: dunpopup.cpp,v 1.5 2006-04-04 12:15:10 korovkin Exp $ */
+/* $Id: dunpopup.cpp,v 1.6 2006-04-04 18:53:07 korovkin Exp $ */
 /* DUN context menu */
 /***************************************************************************
  *                                                                         *
@@ -62,8 +62,11 @@ void DunPopup::slotConnect() {
 void DunPopup::slotDisconnect()  {
     OProcess dunDis;
     OProcess pppDis;
+    OProcess dunKill;
     dunDis << tr("dund") << tr("--kill") << m_item->mac();
     dunDis.start(OProcess::DontCare, OProcess::NoCommunication);
+    dunKill << tr("killall") << tr("-q") << tr("dund");
+    dunKill.start(OProcess::DontCare, OProcess::NoCommunication);
     pppDis << tr("killall") << tr("-q") << tr("pppd");
     pppDis.start(OProcess::DontCare, OProcess::NoCommunication);
     sleep(1);

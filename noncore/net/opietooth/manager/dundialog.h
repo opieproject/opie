@@ -1,4 +1,4 @@
-/* $Id: dundialog.h,v 1.2 2006-04-04 12:15:10 korovkin Exp $ */
+/* $Id: dundialog.h,v 1.3 2006-04-04 18:53:07 korovkin Exp $ */
 /* DUN connection dialog */
 /***************************************************************************
  *                                                                         *
@@ -42,6 +42,7 @@ namespace OpieTooth {
         QPushButton* connectButton;
         QMultiLineEdit* outPut;
         QCheckBox* doEncryption;
+        QCheckBox* persist;
 
     private:
         QString m_device; //device BT address
