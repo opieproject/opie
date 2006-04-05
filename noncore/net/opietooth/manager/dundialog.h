@@ -1,4 +1,4 @@
-/* $Id: dundialog.h,v 1.3 2006-04-04 18:53:07 korovkin Exp $ */
+/* $Id: dundialog.h,v 1.4 2006-04-05 19:29:20 korovkin Exp $ */
 /* DUN connection dialog */
 /***************************************************************************
  *                                                                         *
@@ -20,6 +20,7 @@ class QPushButton;
 class QMultiLineEdit;
 class QLineEdit;
 class QCheckBox;
+class QComboBox;
 
 namespace OpieTooth {
     class DunDialog : public QDialog {
@@ -38,7 +39,7 @@ namespace OpieTooth {
         void closeEvent(QCloseEvent* e);
     protected:
         QVBoxLayout* layout;
-        QLineEdit* cmdLine;
+        QComboBox* cmdLine;
         QPushButton* connectButton;
         QMultiLineEdit* outPut;
         QCheckBox* doEncryption;

@@ -1,4 +1,4 @@
-/* $Id: dundialog.cpp,v 1.3 2006-04-04 18:53:07 korovkin Exp $ */
+/* $Id: dundialog.cpp,v 1.4 2006-04-05 19:29:19 korovkin Exp $ */
 /* DUN connection dialog */
 /***************************************************************************
  *                                                                         *
@@ -16,6 +16,8 @@
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qstring.h>
+#include <qcombobox.h>
+#include <qdir.h>
 #include <opie2/oprocess.h>
 #include <opie2/odebug.h>
 using namespace Opie::Core;
@@ -27,6 +29,10 @@ using namespace Opie::Core;
 DunDialog::DunDialog( const QString& device, int port, QWidget* parent,  
     const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
+    QDir d("/etc/ppp/peers/"); //Dir we search files in
+    d.setFilter( QDir::Files);
+    d.setSorting( QDir::Size | QDir::Reversed );
+
     if ( !name )
         setName( "DUNDialog" );
     setCaption( tr( "DUN connection " ) ) ;
@@ -40,7 +46,8 @@ DunDialog::DunDialog( const QString& device, int port, QWidget* parent,
     QLabel* info = new QLabel( this );
     info->setText( tr("Enter an ppp script name:") );
 
-    cmdLine = new QLineEdit( this );
+    cmdLine = new QComboBox( this );
+    cmdLine->setEditable(true);
 
     outPut = new QMultiLineEdit( this );
     QFont outPut_font(  outPut->font() );
@@ -65,6 +72,8 @@ DunDialog::DunDialog( const QString& device, int port, QWidget* parent,
     layout->addWidget(connectButton);
 
     connect( connectButton, SIGNAL( clicked() ), this,  SLOT( connectToDevice() ) );
+    //And fill cmdLine with ppp script filenames
+    cmdLine->insertStringList(d.entryList());
 }
 
 DunDialog::~DunDialog() {
@@ -74,7 +83,7 @@ void DunDialog::connectToDevice() {
     bool doEnc = doEncryption->isChecked();
     bool doPersist = persist->isChecked();
     
-    if (cmdLine->text() == "")
+    if (cmdLine->currentText() == "")
         return;
     if (m_dunConnect) {
         outPut->append(tr("Work in progress"));
@@ -93,7 +102,7 @@ void DunDialog::connectToDevice() {
     if (doPersist)
         *m_dunConnect << tr("--persist");
     *m_dunConnect << tr("call")
-            << cmdLine->text();
+            << cmdLine->currentText();
     if (!m_dunConnect->start(OProcess::NotifyOnExit, 
         OProcess::All)) {
         outPut->append(tr("Couldn't start"));

@@ -1,4 +1,13 @@
-
+/* $Id: pppdialog.cpp,v 1.11 2006-04-05 19:29:20 korovkin Exp $ */
+/* PPP/rfcomm connection dialog */
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
 #include "pppdialog.h"
 #include "rfcommhelper.h"
 #include <qpushbutton.h>
@@ -7,6 +16,7 @@
 #include <qlayout.h>
 #include <qcombobox.h>
 #include <qlabel.h>
+#include <qdir.h>
 #include <opie2/oprocess.h>
 #include <opie2/odebug.h>
 using namespace Opie::Core;
@@ -21,7 +31,10 @@ PPPDialog::PPPDialog( const QString& device, int port, QWidget* parent,
     const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
     int i; //Just an index variable
-
+    QDir d("/etc/ppp/peers/"); //Dir we search files in
+    d.setFilter( QDir::Files);
+    d.setSorting( QDir::Size | QDir::Reversed );
+    
     if ( !name )
         setName( "PPPDialog" );
     setCaption( tr( "ppp connection " ) ) ;
@@ -32,9 +45,10 @@ PPPDialog::PPPDialog( const QString& device, int port, QWidget* parent,
     layout = new QVBoxLayout( this );
 
     QLabel* info = new QLabel( this );
-    info->setText( tr("Enter an ppp script name:") );
+    info->setText( tr("Enter a ppp script name:") );
 
-    cmdLine = new QLineEdit( this );
+    cmdLine = new QComboBox( this );
+    cmdLine->setEditable(true);
 
     outPut = new QMultiLineEdit( this );
     QFont outPut_font(  outPut->font() );
@@ -58,6 +72,8 @@ PPPDialog::PPPDialog( const QString& device, int port, QWidget* parent,
     layout->addWidget(connectButton);
 
     connect( connectButton, SIGNAL( clicked() ), this,  SLOT( connectToDevice() ) );
+    //And fill cmdLine with ppp script filenames
+    cmdLine->insertStringList(d.entryList());
 }
 
 PPPDialog::~PPPDialog() {
@@ -72,7 +88,7 @@ void PPPDialog::connectToDevice() {
     outPut->clear();
     PPPDialog::conns[portNum].proc.clearArguments();
     // vom popupmenu beziehen
-    if (cmdLine->text().isEmpty()) {//Connect by rfcomm
+    if (cmdLine->currentText().isEmpty()) {//Connect by rfcomm
         PPPDialog::conns[portNum].proc << "rfcomm" << "connect" 
             << QString::number(portNum) << m_device << QString::number(m_port);
     }
@@ -80,7 +96,7 @@ void PPPDialog::connectToDevice() {
         PPPDialog::conns[portNum].proc << "pppd" 
             << tr("/dev/bluetooth/rfcomm/%1").arg(portNum) 
             << "call" 
-            << cmdLine->text();
+            << cmdLine->currentText();
     }
     if (!PPPDialog::conns[portNum].proc.start(OProcess::NotifyOnExit, 
         OProcess::All)) {
