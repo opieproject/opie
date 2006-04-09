@@ -1,4 +1,4 @@
-/* $Id: pppdialog.cpp,v 1.11 2006-04-05 19:29:20 korovkin Exp $ */
+/* $Id: pppdialog.cpp,v 1.12 2006-04-09 17:14:19 korovkin Exp $ */
 /* PPP/rfcomm connection dialog */
 /***************************************************************************
  *                                                                         *
@@ -73,6 +73,7 @@ PPPDialog::PPPDialog( const QString& device, int port, QWidget* parent,
 
     connect( connectButton, SIGNAL( clicked() ), this,  SLOT( connectToDevice() ) );
     //And fill cmdLine with ppp script filenames
+    cmdLine->insertItem("");
     cmdLine->insertStringList(d.entryList());
 }
 
