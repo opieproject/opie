@@ -87,7 +87,7 @@
     </message>
     <message>
         <source>Rotate Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Кнопка &quot;Повернуть&quot;</translation>
     </message>
 </context>
 <context>

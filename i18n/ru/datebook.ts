@@ -555,15 +555,15 @@ Quit anyway?</source>
     </message>
     <message>
         <source>minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>минут</translation>
     </message>
     <message>
         <source>hours</source>
-        <translation type="unfinished"></translation>
+        <translation>часов</translation>
     </message>
     <message>
         <source>days</source>
-        <translation type="unfinished">дней</translation>
+        <translation>дней</translation>
     </message>
 </context>
 <context>

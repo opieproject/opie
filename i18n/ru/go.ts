@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Go</source>
-        <translation type="unfinished"></translation>
+        <translation>Го</translation>
     </message>
 </context>
 <context>

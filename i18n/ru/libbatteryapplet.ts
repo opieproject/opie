@@ -87,7 +87,9 @@ Remaining Time: %3</source>
         <source>Remaining Power: %1 
 %2
 Remaining Time: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Осталось заряда: %1
+%2
+Осталось времени: %3</translation>
     </message>
 </context>
 </TS>

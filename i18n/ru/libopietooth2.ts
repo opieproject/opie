@@ -359,7 +359,7 @@
     </message>
     <message>
         <source>GroupBox1</source>
-        <translation type="unfinished"></translation>
+        <translation>GroupBox1</translation>
     </message>
     <message>
         <source>Services</source>

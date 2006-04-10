@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>Today by Maximilian Rei&#xef;&#xbf;&#xbd;</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегодня, автор Maximilian Reiï¿½</translation>
     </message>
 </context>
 <context>

@@ -386,7 +386,7 @@ Real name: %4</source>
     </message>
     <message>
         <source>Channel %1 doesn&apos;t exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Канал %1 не существует</translation>
     </message>
 </context>
 <context>
@@ -499,7 +499,10 @@ comma separated list of channel
 comma separated list of valid
  channel names (starting 
 with one of &apos;#&apos; &apos;+&apos; &apos;&amp;&apos; &apos;!&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Список каналов должен содержать
+список доступных имен каналов
+через запятую (имена начинаются
+с &apos;#&apos;, &apos;+&apos; или &apos;&amp;&apos;!)</translation>
     </message>
 </context>
 <context>

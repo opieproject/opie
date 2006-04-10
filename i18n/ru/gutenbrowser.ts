@@ -314,12 +314,8 @@ http://www.trolltech.com
         <translation>&lt;p&gt;Ошибка открытия файла индекса библиотеки. Пожалуйста скачайте новый.&lt;/P&gt; </translation>
     </message>
     <message>
-        <source>   </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Last name first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сначала фамилия.</translation>
     </message>
 </context>
 <context>

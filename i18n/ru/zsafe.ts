@@ -576,23 +576,23 @@ newly created document.</source>
     </message>
     <message>
         <source>New document</source>
-        <translation type="unfinished"></translation>
+        <translation>Новый документ</translation>
     </message>
     <message>
         <source>Open document</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть документ</translation>
     </message>
     <message>
         <source>Save document as</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить документ как</translation>
     </message>
     <message>
         <source>Save document</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить документ</translation>
     </message>
     <message>
         <source>Save document with new Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить документ с новым паролем</translation>
     </message>
     <message>
         <source>Open entries expanded</source>
@@ -600,31 +600,31 @@ newly created document.</source>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Новый</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Вырезать</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить</translation>
     </message>
     <message>
         <source>Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Запись</translation>
     </message>
 </context>
 </TS>

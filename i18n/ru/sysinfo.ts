@@ -239,11 +239,11 @@ Click and hold on a module to see additional information about the module, or to
     <name>Opie::Ui</name>
     <message>
         <source>My Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Мой компьютер</translation>
     </message>
     <message>
         <source>This is a list of all the devices currently recognized on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Это список всех устройств, определенных системой.</translation>
     </message>
 </context>
 <context>
@@ -334,7 +334,7 @@ to this process?</source>
     </message>
     <message>
         <source>Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройства</translation>
     </message>
 </context>
 <context>

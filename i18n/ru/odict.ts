@@ -74,11 +74,11 @@
     </message>
     <message>
         <source>Search methods</source>
-        <translation type="unfinished"></translation>
+        <translation>Методы поиска</translation>
     </message>
     <message>
         <source>Case sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>С учетом регистра</translation>
     </message>
 </context>
 <context>

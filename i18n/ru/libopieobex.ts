@@ -74,42 +74,42 @@
     </message>
     <message>
         <source>ready.</source>
-        <translation type="unfinished"></translation>
+        <translation>готов.</translation>
     </message>
     <message>
         <source>error :(</source>
-        <translation type="unfinished"></translation>
+        <translation>ошибка :(</translation>
     </message>
     <message>
         <source>complete.</source>
-        <translation type="unfinished"></translation>
+        <translation>завершена.</translation>
     </message>
     <message>
         <source>not enabled.</source>
-        <translation type="unfinished"></translation>
+        <translation>не включена.</translation>
     </message>
     <message>
         <source>searching...</source>
-        <translation type="unfinished"></translation>
+        <translation>ищу...</translation>
     </message>
 </context>
 <context>
     <name>obexSendBase</name>
     <message>
         <source>Send via OBEX</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправить через OBEX</translation>
     </message>
     <message>
         <source>Sending:</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправляю:</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный</translation>
     </message>
     <message>
         <source>Receiver</source>
-        <translation type="unfinished"></translation>
+        <translation>Получающий</translation>
     </message>
     <message>
         <source>T</source>
@@ -121,19 +121,19 @@
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Статус</translation>
     </message>
     <message>
         <source>&amp;Rescan</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Пересканировать</translation>
     </message>
     <message>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Отправить</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
 </context>
 </TS>

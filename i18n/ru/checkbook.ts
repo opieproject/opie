@@ -320,11 +320,11 @@ protected</source>
     </message>
     <message>
         <source>Use smaller font for list</source>
-        <translation type="unfinished"></translation>
+        <translation>Мелкий шрифт для списка</translation>
     </message>
     <message>
         <source>Click here to select smaller font for transactions.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы выбрать мелкий шрифт для транзакций.</translation>
     </message>
 </context>
 <context>

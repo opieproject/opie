@@ -51,11 +51,11 @@
     </message>
     <message>
         <source>&amp;Rescan services</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Просканировать сервисы</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Удалить</translation>
     </message>
 </context>
 <context>
@@ -142,11 +142,11 @@
     </message>
     <message>
         <source>&amp;Rescan Devices</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Просканировать устройства</translation>
     </message>
     <message>
         <source>&amp;Edit RFCOMM Bind Table</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">П&amp;равка таблицы RFCOMM </translation>
     </message>
 </context>
 <context>
@@ -201,15 +201,15 @@ Code</source>
     </message>
     <message>
         <source>&amp;Apply Changes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Применить</translation>
     </message>
     <message>
         <source>Default PIN Code</source>
-        <translation type="unfinished"></translation>
+        <translation>PIN код по умолчанию</translation>
     </message>
     <message>
         <source>Change device name</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить имя устройства</translation>
     </message>
 </context>
 <context>

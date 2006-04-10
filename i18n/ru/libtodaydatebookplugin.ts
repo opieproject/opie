@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>(Unknown)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Неизвестный)</translation>
     </message>
 </context>
 <context>
@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>Clip line after X chars</source>
-        <translation type="unfinished"></translation>
+        <translation>Обрезать строку после X символов</translation>
     </message>
 </context>
 <context>

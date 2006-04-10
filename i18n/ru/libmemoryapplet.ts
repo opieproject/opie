@@ -164,7 +164,7 @@ Memory is categorized as follows:
     </message>
     <message>
         <source>Swap disabled in kernel</source>
-        <translation type="unfinished"></translation>
+        <translation>Подкачка отключена в ядре</translation>
     </message>
 </context>
 </TS>
