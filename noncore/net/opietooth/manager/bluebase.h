@@ -17,6 +17,7 @@
 #include "popuphelper.h"
 
 #include "bticonloader.h"
+#include "forwarder.h"
 
 #include <remotedevice.h>
 #include <manager.h>
@@ -79,6 +80,7 @@ namespace OpieTooth {
         QPixmap m_findPix;
 
         BTIconLoader *m_iconLoader;
+        SerialForwarder* forwarder;
 
 	private slots:
         void addSearchedDevices( const QValueList<RemoteDevice> &newDevices );
@@ -91,6 +93,8 @@ namespace OpieTooth {
         void startServiceActionHold( QListViewItem *, const QPoint &, int );
         void deviceActive( const QString& mac, bool connected  );
         void applyConfigChanges();
+        void doForward();
+        void forwardExit(Opie::Core::OProcess* proc);
 	void addSignalStrength();
 	void addSignalStrength( const QString& mac, const QString& strengh );
 	void rfcommDialog();

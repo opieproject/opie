@@ -21,6 +21,10 @@
 #include "devicehandler.h"
 #include "btconnectionitem.h"
 #include "rfcommassigndialogimpl.h"
+#include "forwarder.h"
+#include <termios.h>
+#include <string.h>
+#include <errno.h>
 
 /* OPIE */
 #include <qpe/qpeapplication.h>
@@ -41,6 +45,7 @@ using namespace Opie::Core;
 #include <qscrollview.h>
 #include <qvbox.h>
 #include <qmessagebox.h>
+#include <qcombobox.h>
 #include <qcheckbox.h>
 #include <qlineedit.h>
 #include <qlistview.h>
@@ -55,6 +60,16 @@ using namespace Opie::Core;
 #include <stdlib.h>
 
 using namespace OpieTooth;
+//Array of possible speeds of the serial port
+struct SerSpeed {
+    const char* str; //string value
+    int val; //value itself
+} speeds[] = { 
+      { "150", B150 },   { "300", B300 },   { "600", B600 }, { "1200", B1200 }, 
+    { "2400", B2400 }, { "4800", B4800 }, { "9600", B9600 }, 
+    { "19200", B19200 }, { "38400", B38400 }, { "57600", B57600 }, 
+    { "115200", B115200}
+};
 
 BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
         : BluetoothBase( parent, name, fl )
@@ -78,6 +93,7 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
              this, SLOT( addConnectedDevices(ConnectionState::ValueList) ) );
     connect( m_localDevice, SIGNAL( signalStrength(const QString&,const QString&) ),
              this, SLOT( addSignalStrength(const QString&,const QString&) ) );
+    connect(runButton, SIGNAL(clicked()), this, SLOT(doForward()));
 
     // let hold be rightButtonClicked()
     QPEApplication::setStylusOperation( devicesView->viewport(), QPEApplication::RightOnHold);
@@ -108,6 +124,12 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     readSavedDevices();
     addServicesToDevices();
     QTimer::singleShot( 3000, this, SLOT( addServicesToDevices() ) );
+    forwarder = NULL;
+    serDevName->setText(tr("/dev/ircomm0"));
+    for (unsigned int i = 0; i < (sizeof(speeds) / sizeof(speeds[0])); i++) {
+        serSpeed->insertItem(speeds[i].str);
+    }
+    serSpeed->setCurrentItem((sizeof(speeds) / sizeof(speeds[0])) - 1);
 }
 
 /**
@@ -680,3 +702,42 @@ bool BlueBase::find( const RemoteDevice& rem )
     }
     return false; // not found
 }
+
+/**
+ * Start process of the cell phone forwarding
+ */
+void BlueBase::doForward()
+{
+    if (forwarder && forwarder->isRunning()) {
+        runButton->setText("start gateway");
+        forwarder->stop();
+        delete forwarder;
+        forwarder = NULL;
+        return;
+    }
+    QString str = serDevName->text();
+    forwarder = new SerialForwarder(str, speeds[serSpeed->currentItem()].val);
+    connect(forwarder, SIGNAL(processExited(Opie::Core::OProcess*)), 
+        this, SLOT(forwardExited(Opie::Core::OProcess*)));
+    if (forwarder->start(OProcess::NotifyOnExit) < 0) {
+        QMessageBox::critical(this, tr("Forwarder Error"), 
+            tr("Forwarder start error:") + tr(strerror(errno)));
+        return;
+    }
+    runButton->setText("stop gateway");
+}
+
+/**
+ * React on the process end
+ */
+void BlueBase::forwardExit(Opie::Core::OProcess* proc)
+{
+    if (proc->exitStatus() != 0)
+        QMessageBox::critical(this, tr("Forwarder Error"), 
+            tr("Forwarder start error"));
+    delete proc;
+    forwarder = NULL;
+    runButton->setText("start gateway");
+}
+
+//eof
