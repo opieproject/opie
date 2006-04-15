@@ -94,6 +94,7 @@ namespace OpieTooth {
         void deviceActive( const QString& mac, bool connected  );
         void applyConfigChanges();
         void doForward();
+        void doEncrypt(bool);
         void forwardExit(Opie::Core::OProcess* proc);
 	void addSignalStrength();
 	void addSignalStrength( const QString& mac, const QString& strengh );

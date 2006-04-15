@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>268</width>
+            <width>273</width>
             <height>368</height>
         </rect>
     </property>
@@ -19,7 +19,7 @@
         <name>caption</name>
         <string>Form1</string>
     </property>
-    <vbox>
+    <hbox>
         <property stdset="1">
             <name>margin</name>
             <number>0</number>
@@ -239,61 +239,6 @@
                                 <name>spacing</name>
                                 <number>2</number>
                             </property>
-                            <widget row="6"  column="0"  rowspan="1"  colspan="2" >
-                                <class>QPushButton</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>configApplyButton</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Apply</string>
-                                </property>
-                            </widget>
-                            <widget row="2"  column="0"  rowspan="1"  colspan="2" >
-                                <class>QCheckBox</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>authCheckBox</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>enable authentification</string>
-                                </property>
-                            </widget>
-                            <widget row="3"  column="0"  rowspan="1"  colspan="2" >
-                                <class>QCheckBox</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>cryptCheckBox</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>enable encryption</string>
-                                </property>
-                            </widget>
-                            <widget row="4"  column="0"  rowspan="1"  colspan="2" >
-                                <class>QCheckBox</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>pagescanCheckBox</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Enable Page scan</string>
-                                </property>
-                            </widget>
-                            <widget row="5"  column="0"  rowspan="1"  colspan="2" >
-                                <class>QCheckBox</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>inquiryscanCheckBox</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Enable Inquiry scan</string>
-                                </property>
-                            </widget>
                             <widget row="0"  column="0" >
                                 <class>QLabel</class>
                                 <property stdset="1">
@@ -334,6 +279,72 @@
                                     <enum>Password</enum>
                                 </property>
                             </widget>
+                            <widget row="2"  column="1" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>encCheckBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>encrypt</string>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>authCheckBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>enable authentification</string>
+                                </property>
+                            </widget>
+                            <widget row="4"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>cryptCheckBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>enable encryption</string>
+                                </property>
+                            </widget>
+                            <widget row="5"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>pagescanCheckBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Enable Page scan</string>
+                                </property>
+                            </widget>
+                            <widget row="6"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>inquiryscanCheckBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Enable Inquiry scan</string>
+                                </property>
+                            </widget>
+                            <widget row="7"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QPushButton</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>configApplyButton</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Apply</string>
+                                </property>
+                            </widget>
                         </grid>
                     </widget>
                 </grid>
@@ -351,11 +362,11 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>4</number>
+                        <number>0</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>2</number>
+                        <number>0</number>
                     </property>
                     <widget>
                         <class>QLabel</class>
@@ -383,11 +394,11 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>0</number>
+                        <number>4</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>0</number>
+                        <number>2</number>
                     </property>
                     <widget>
                         <class>QGroupBox</class>
@@ -399,119 +410,74 @@
                             <name>title</name>
                             <string>Cell Forwarder</string>
                         </property>
-                        <vbox>
+                        <property>
+                            <name>layoutMargin</name>
+                        </property>
+                        <property>
+                            <name>layoutSpacing</name>
+                        </property>
+                        <grid>
                             <property stdset="1">
                                 <name>margin</name>
-                                <number>11</number>
+                                <number>4</number>
                             </property>
                             <property stdset="1">
                                 <name>spacing</name>
-                                <number>6</number>
+                                <number>2</number>
                             </property>
-                            <widget>
-                                <class>QLayoutWidget</class>
+                            <widget row="2"  column="0"  rowspan="1"  colspan="3" >
+                                <class>QPushButton</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>Layout9</cstring>
+                                    <cstring>runButton</cstring>
                                 </property>
-                                <vbox>
-                                    <property stdset="1">
-                                        <name>margin</name>
-                                        <number>0</number>
-                                    </property>
-                                    <property stdset="1">
-                                        <name>spacing</name>
-                                        <number>6</number>
-                                    </property>
-                                    <widget>
-                                        <class>QLayoutWidget</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>Layout5</cstring>
-                                        </property>
-                                        <hbox>
-                                            <property stdset="1">
-                                                <name>margin</name>
-                                                <number>0</number>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>spacing</name>
-                                                <number>6</number>
-                                            </property>
-                                            <widget>
-                                                <class>QLabel</class>
-                                                <property stdset="1">
-                                                    <name>name</name>
-                                                    <cstring>serDevLabel</cstring>
-                                                </property>
-                                                <property stdset="1">
-                                                    <name>text</name>
-                                                    <string>Serial device:</string>
-                                                </property>
-                                            </widget>
-                                            <widget>
-                                                <class>QLineEdit</class>
-                                                <property stdset="1">
-                                                    <name>name</name>
-                                                    <cstring>serDevName</cstring>
-                                                </property>
-                                            </widget>
-                                        </hbox>
-                                    </widget>
-                                    <widget>
-                                        <class>QLayoutWidget</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>Layout6</cstring>
-                                        </property>
-                                        <hbox>
-                                            <property stdset="1">
-                                                <name>margin</name>
-                                                <number>0</number>
-                                            </property>
-                                            <property stdset="1">
-                                                <name>spacing</name>
-                                                <number>6</number>
-                                            </property>
-                                            <widget>
-                                                <class>QLabel</class>
-                                                <property stdset="1">
-                                                    <name>name</name>
-                                                    <cstring>serSpeedLabel</cstring>
-                                                </property>
-                                                <property stdset="1">
-                                                    <name>text</name>
-                                                    <string>Speed:</string>
-                                                </property>
-                                            </widget>
-                                            <widget>
-                                                <class>QComboBox</class>
-                                                <property stdset="1">
-                                                    <name>name</name>
-                                                    <cstring>serSpeed</cstring>
-                                                </property>
-                                            </widget>
-                                        </hbox>
-                                    </widget>
-                                    <widget>
-                                        <class>QPushButton</class>
-                                        <property stdset="1">
-                                            <name>name</name>
-                                            <cstring>runButton</cstring>
-                                        </property>
-                                        <property stdset="1">
-                                            <name>text</name>
-                                            <string>start gateway</string>
-                                        </property>
-                                    </widget>
-                                </vbox>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>start gateway</string>
+                                </property>
                             </widget>
-                        </vbox>
+                            <widget row="0"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>serDevLabel</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Serial device:</string>
+                                </property>
+                            </widget>
+                            <widget row="0"  column="2" >
+                                <class>QLineEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>serDevName</cstring>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="1"  rowspan="1"  colspan="2" >
+                                <class>QComboBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>serSpeed</cstring>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>serSpeedLabel</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Speed:</string>
+                                </property>
+                            </widget>
+                        </grid>
                     </widget>
                 </vbox>
             </widget>
         </widget>
-    </vbox>
+    </hbox>
 </widget>
 <customwidgets>
     <customwidget>
@@ -535,4 +501,22 @@
         <data format="XPM.GZ" length="646">789c6dd2c10ac2300c00d07bbf2234b7229d1be245fc04c5a3201e4615f430059d0711ff5ddb2e6bb236ec90eed134cb5a19d8ef36602af5ecdbfeeac05dda0798d3abebde87e3faa374d3807fa0d633a52d38d8de6f679fe33fc776e196f53cd010188256a3600a292882096246517815ca99884606e18044a3a40d91824820924265a7923a2e8bcd05f33db1173e002913175f2a6be6d3294871a2d95fa00e8a94ee017b69d339d90df1e77c57ea072ede6758</data>
     </image>
 </images>
+<tabstops>
+    <tabstop>Status</tabstop>
+    <tabstop>devicesView</tabstop>
+    <tabstop>PushButton2</tabstop>
+    <tabstop>connectionsView</tabstop>
+    <tabstop>deviceNameLine</tabstop>
+    <tabstop>passkeyLine</tabstop>
+    <tabstop>encCheckBox</tabstop>
+    <tabstop>authCheckBox</tabstop>
+    <tabstop>cryptCheckBox</tabstop>
+    <tabstop>pagescanCheckBox</tabstop>
+    <tabstop>inquiryscanCheckBox</tabstop>
+    <tabstop>configApplyButton</tabstop>
+    <tabstop>rfcommBindButton</tabstop>
+    <tabstop>serDevName</tabstop>
+    <tabstop>serSpeed</tabstop>
+    <tabstop>runButton</tabstop>
+</tabstops>
 </UI>

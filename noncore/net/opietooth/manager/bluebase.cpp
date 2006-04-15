@@ -53,6 +53,7 @@ using namespace Opie::Core;
 #include <qpopupmenu.h>
 #include <qtimer.h>
 #include <qlist.h>
+#include <qfile.h>
 
 /* STD */
 #include <remotedevice.h>
@@ -94,6 +95,7 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     connect( m_localDevice, SIGNAL( signalStrength(const QString&,const QString&) ),
              this, SLOT( addSignalStrength(const QString&,const QString&) ) );
     connect(runButton, SIGNAL(clicked()), this, SLOT(doForward()));
+    connect(encCheckBox, SIGNAL(toggled(bool)), this, SLOT(doEncrypt(bool)));
 
     // let hold be rightButtonClicked()
     QPEApplication::setStylusOperation( devicesView->viewport(), QPEApplication::RightOnHold);
@@ -130,6 +132,7 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
         serSpeed->insertItem(speeds[i].str);
     }
     serSpeed->setCurrentItem((sizeof(speeds) / sizeof(speeds[0])) - 1);
+    encCheckBox->setChecked(true);
 }
 
 /**
@@ -173,7 +176,9 @@ void BlueBase::writeConfig()
  */
 void BlueBase::writeToHciConfig()
 {
+    QFile pinFile("/etc/bluetooth/pin"); // /etc/bluetooth/pin file
     owarn << "writeToHciConfig" << oendl;
+    //Write /etc/bluetooth/hcid.conf file
     HciConfWrapper hciconf ( "/etc/bluetooth/hcid.conf" );
     hciconf.load();
     hciconf.setPinHelper( QPEApplication::qpeDir() + "bin/bluepin" );
@@ -183,6 +188,12 @@ void BlueBase::writeToHciConfig()
     hciconf.setPscan( m_enablePagescan );
     hciconf.setIscan( m_enableInquiryscan );
     hciconf.save();
+    // Write /etc/bluetooth/pin (default PIN file)
+    pinFile.open(IO_WriteOnly | IO_Truncate);
+    pinFile.writeBlock(m_defaultPasskey, m_defaultPasskey.length());
+    pinFile.writeBlock("\n", sizeof("\n"));
+    pinFile.flush();
+    pinFile.close();
 }
 
 
@@ -738,6 +749,15 @@ void BlueBase::forwardExit(Opie::Core::OProcess* proc)
     delete proc;
     forwarder = NULL;
     runButton->setText("start gateway");
+}
+
+/**
+ * Encrypt entered passkey
+ * doit - do encryption of the key
+ */
+void BlueBase::doEncrypt(bool doit)
+{
+    passkeyLine->setEchoMode((doit)? QLineEdit::Password: QLineEdit::Normal);
 }
 
 //eof
