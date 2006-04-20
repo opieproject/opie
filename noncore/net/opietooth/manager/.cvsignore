@@ -11,5 +11,9 @@ rfcommassigndialogbase.cpp
 rfcommassigndialogbase.h
 rfcommdialogitembase.cpp
 rfcommdialogitembase.h
+servicesdialogbase.cpp
+servicesdialogbase.h
+obexftpdialogbase.cpp
+obexftpdialogbase.h
 .moc*
 .obj

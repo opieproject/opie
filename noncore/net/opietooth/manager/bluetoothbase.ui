@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>273</width>
+            <width>269</width>
             <height>368</height>
         </rect>
     </property>
@@ -194,27 +194,16 @@
                     <name>title</name>
                     <string>Config</string>
                 </attribute>
-                <grid>
+                <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>4</number>
+                        <number>2</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
                         <number>2</number>
                     </property>
-                    <widget row="1"  column="0" >
-                        <class>QPushButton</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>rfcommBindButton</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>&amp;Edit RFCOMM Bind Table</string>
-                        </property>
-                    </widget>
-                    <widget row="0"  column="0" >
+                    <widget>
                         <class>QGroupBox</class>
                         <property stdset="1">
                             <name>name</name>
@@ -347,7 +336,29 @@
                             </widget>
                         </grid>
                     </widget>
-                </grid>
+                    <widget>
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>servicesEditButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Edit Services Configuration</string>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>rfcommBindButton</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>&amp;Edit RFCOMM Bind Table</string>
+                        </property>
+                    </widget>
+                </vbox>
             </widget>
             <widget>
                 <class>QWidget</class>

@@ -22,6 +22,7 @@
 #include "btconnectionitem.h"
 #include "rfcommassigndialogimpl.h"
 #include "forwarder.h"
+#include "servicesdialog.h"
 #include <termios.h>
 #include <string.h>
 #include <errno.h>
@@ -96,6 +97,7 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
              this, SLOT( addSignalStrength(const QString&,const QString&) ) );
     connect(runButton, SIGNAL(clicked()), this, SLOT(doForward()));
     connect(encCheckBox, SIGNAL(toggled(bool)), this, SLOT(doEncrypt(bool)));
+    connect(servicesEditButton, SIGNAL(clicked()), this, SLOT(editServices()));
 
     // let hold be rightButtonClicked()
     QPEApplication::setStylusOperation( devicesView->viewport(), QPEApplication::RightOnHold);
@@ -127,12 +129,6 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     addServicesToDevices();
     QTimer::singleShot( 3000, this, SLOT( addServicesToDevices() ) );
     forwarder = NULL;
-    serDevName->setText(tr("/dev/ircomm0"));
-    for (unsigned int i = 0; i < (sizeof(speeds) / sizeof(speeds[0])); i++) {
-        serSpeed->insertItem(speeds[i].str);
-    }
-    serSpeed->setCurrentItem((sizeof(speeds) / sizeof(speeds[0])) - 1);
-    encCheckBox->setChecked(true);
 }
 
 /**
@@ -253,6 +249,12 @@ void BlueBase::initGui()
     passkeyLine->setText( m_defaultPasskey );
     // set info tab
     setInfo();
+    serDevName->setText(tr("/dev/ircomm0"));
+    for (unsigned int i = 0; i < (sizeof(speeds) / sizeof(speeds[0])); i++) {
+        serSpeed->insertItem(speeds[i].str);
+    }
+    serSpeed->setCurrentItem((sizeof(speeds) / sizeof(speeds[0])) - 1);
+    encCheckBox->setChecked(true);
 }
 
 
@@ -758,6 +760,22 @@ void BlueBase::forwardExit(Opie::Core::OProcess* proc)
 void BlueBase::doEncrypt(bool doit)
 {
     passkeyLine->setEchoMode((doit)? QLineEdit::Password: QLineEdit::Normal);
+}
+
+/**
+ * Start services edit dialog
+ */
+void BlueBase::editServices()
+{
+    QString conf = "/etc/default/bluetooth";
+//// Use for debugging purposes    
+////    QString conf = "/mnt/net/opie/bin/bluetooth";
+    ServicesDialog svcEdit(conf, this, "ServicesDialog", true, 
+        WStyle_ContextHelp);
+
+    if (QPEApplication::execDialog(&svcEdit) == QDialog::Accepted)
+    {
+    }
 }
 
 //eof

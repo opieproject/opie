@@ -96,6 +96,7 @@ namespace OpieTooth {
         void doForward();
         void doEncrypt(bool);
         void forwardExit(Opie::Core::OProcess* proc);
+        void editServices();
 	void addSignalStrength();
 	void addSignalStrength( const QString& mac, const QString& strengh );
 	void rfcommDialog();

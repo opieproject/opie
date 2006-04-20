@@ -1,0 +1,658 @@
+<!DOCTYPE UI><UI>
+<class>ServicesDialogBase</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>ServicesDialogBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>258</width>
+            <height>368</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>sizePolicy</name>
+        <sizepolicy>
+            <hsizetype>7</hsizetype>
+            <vsizetype>7</vsizetype>
+        </sizepolicy>
+    </property>
+    <property stdset="1">
+        <name>baseSize</name>
+        <size>
+            <width>240</width>
+            <height>320</height>
+        </size>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Configure Services</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>0</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>0</number>
+        </property>
+        <widget>
+            <class>QTabWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>servicesTab</cstring>
+            </property>
+            <property stdset="1">
+                <name>tabShape</name>
+                <enum>Rounded</enum>
+            </property>
+            <property>
+                <name>layoutMargin</name>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>HCID</string>
+                </attribute>
+                <vbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>0</number>
+                    </property>
+                    <widget>
+                        <class>QGroupBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>GroupBox3</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>title</name>
+                            <string>Host Controller Interface</string>
+                        </property>
+                        <property>
+                            <name>layoutMargin</name>
+                        </property>
+                        <property>
+                            <name>layoutSpacing</name>
+                        </property>
+                        <grid>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>11</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                            <widget row="0"  column="0" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>hcidEnableCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Enable</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                </vbox>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>SDPD</string>
+                </attribute>
+                <vbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>0</number>
+                    </property>
+                    <widget>
+                        <class>QGroupBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>GroupBox4</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>title</name>
+                            <string>Service Discovery Protocol </string>
+                        </property>
+                        <grid>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>11</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                            <widget row="0"  column="0" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>sdpdEnableCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Enable</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                </vbox>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>HIDD</string>
+                </attribute>
+                <grid>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>0</number>
+                    </property>
+                    <widget row="0"  column="0" >
+                        <class>QGroupBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>GroupBox6</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>title</name>
+                            <string>Human Interface Devices</string>
+                        </property>
+                        <grid>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>11</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                            <widget row="0"  column="0" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>hiddEnableCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Enable</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                </grid>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>RFCOMM</string>
+                </attribute>
+                <vbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>0</number>
+                    </property>
+                    <widget>
+                        <class>QGroupBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>GroupBox5</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>title</name>
+                            <string>RFCOMM</string>
+                        </property>
+                        <property>
+                            <name>layoutMargin</name>
+                        </property>
+                        <property>
+                            <name>layoutSpacing</name>
+                        </property>
+                        <grid>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>11</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>6</number>
+                            </property>
+                            <widget row="0"  column="0" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>rfcommEnableCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Enable</string>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                </vbox>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>DUND</string>
+                </attribute>
+                <vbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>0</number>
+                    </property>
+                    <widget>
+                        <class>QGroupBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>GroupBox7</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>title</name>
+                            <string>DialUp Network</string>
+                        </property>
+                        <property>
+                            <name>layoutMargin</name>
+                        </property>
+                        <property>
+                            <name>layoutSpacing</name>
+                        </property>
+                        <grid>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>4</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>2</number>
+                            </property>
+                            <widget row="0"  column="0"  rowspan="1"  colspan="3" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundEnableCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Enable</string>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="3" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundCacheCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Cache</string>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundPersistCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Persist</string>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="2" >
+                                <class>QLineEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundPersistEdit</cstring>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="4" >
+                                <class>QLineEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundCacheEdit</cstring>
+                                </property>
+                            </widget>
+                            <widget row="0"  column="3"  rowspan="1"  colspan="2" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundDisableSDPCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Disable SDP</string>
+                                </property>
+                            </widget>
+                            <widget row="2"  column="0"  rowspan="1"  colspan="5" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundPPPdLabel</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>PPPD Options:</string>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="0"  rowspan="1"  colspan="5" >
+                                <class>QLineEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundPPPdOptionsEdit</cstring>
+                                </property>
+                            </widget>
+                            <widget row="4"  column="0"  rowspan="1"  colspan="5" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundPPPdCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Specify pppd path</string>
+                                </property>
+                            </widget>
+                            <widget row="7"  column="1"  rowspan="1"  colspan="4" >
+                                <class>QLineEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundMsdunTimeoutEdit</cstring>
+                                </property>
+                            </widget>
+                            <widget row="7"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundMsdunLabel</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Timeout: </string>
+                                </property>
+                            </widget>
+                            <widget row="6"  column="0"  rowspan="1"  colspan="5" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundMsdunCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Enable Microsoft dialup networking</string>
+                                </property>
+                            </widget>
+                            <widget row="5"  column="0"  rowspan="1"  colspan="5" >
+                                <class>QLineEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundPPPdPathEdit</cstring>
+                                </property>
+                            </widget>
+                            <widget row="8"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundChannelLabel</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Channel:</string>
+                                </property>
+                            </widget>
+                            <widget row="8"  column="2"  rowspan="1"  colspan="3" >
+                                <class>QComboBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>dundChannelCBox</cstring>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                </vbox>
+            </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>PAND</string>
+                </attribute>
+                <vbox>
+                    <property stdset="1">
+                        <name>margin</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>spacing</name>
+                        <number>0</number>
+                    </property>
+                    <widget>
+                        <class>QGroupBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>GroupBox6_2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>title</name>
+                            <string>Personal Area Network</string>
+                        </property>
+                        <property>
+                            <name>layoutMargin</name>
+                        </property>
+                        <property>
+                            <name>layoutSpacing</name>
+                        </property>
+                        <grid>
+                            <property stdset="1">
+                                <name>margin</name>
+                                <number>4</number>
+                            </property>
+                            <property stdset="1">
+                                <name>spacing</name>
+                                <number>2</number>
+                            </property>
+                            <widget row="0"  column="0"  rowspan="1"  colspan="3" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>pandEnableCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Enable</string>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="2" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>pandSecureCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Secure</string>
+                                </property>
+                            </widget>
+                            <widget row="2"  column="2" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>pandDisableSDPCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Disable SDP</string>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="0" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>pandPersistCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Persist</string>
+                                </property>
+                            </widget>
+                            <widget row="3"  column="1"  rowspan="1"  colspan="2" >
+                                <class>QLineEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>pandPersistEdit</cstring>
+                                </property>
+                            </widget>
+                            <widget row="4"  column="0" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>pandCacheCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Cache</string>
+                                </property>
+                            </widget>
+                            <widget row="4"  column="1"  rowspan="1"  colspan="2" >
+                                <class>QLineEdit</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>pandCacheEdit</cstring>
+                                </property>
+                            </widget>
+                            <widget row="2"  column="0"  rowspan="1"  colspan="2" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>pandMasterCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Master</string>
+                                </property>
+                            </widget>
+                            <widget row="1"  column="0" >
+                                <class>QCheckBox</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>pandEncryptCBox</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Encrypt</string>
+                                </property>
+                            </widget>
+                            <widget row="5"  column="0" >
+                                <class>QLabel</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>pandRoleLabel</cstring>
+                                </property>
+                                <property stdset="1">
+                                    <name>text</name>
+                                    <string>Role: </string>
+                                </property>
+                            </widget>
+                            <widget row="5"  column="1"  rowspan="1"  colspan="2" >
+                                <class>QComboBox</class>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>PANU</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>NAP</string>
+                                    </property>
+                                </item>
+                                <item>
+                                    <property>
+                                        <name>text</name>
+                                        <string>GN</string>
+                                    </property>
+                                </item>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>pandRoleComboBox</cstring>
+                                </property>
+                            </widget>
+                        </grid>
+                    </widget>
+                </vbox>
+            </widget>
+        </widget>
+    </vbox>
+</widget>
+</UI>
