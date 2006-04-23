@@ -6,7 +6,8 @@
 	* Appearance: Added configuration options to set smallIconSize, bigIconSize, useBigPixmaps (hrw, drw)
 	* Opie-Notes: Notes application based on NoteZ (hrw)
 	* OPIE-PackageManager: Added two configuration options: "Force recursive", "Verbose fetch" (hrw)
-
+        * Added hardware support for HTC Universal (ljp)
+	
 	Fixed Bugs
 	----------
 	* #1695 - Date selector use too small fontsize on VGA screen (hrw)

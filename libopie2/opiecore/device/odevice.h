@@ -120,7 +120,11 @@ enum OModel {
     Model_MyPal_All     = ( Model_MyPal | 0xffff ),
     Model_MyPal_620     = ( Model_MyPal | 0x0001 ),
     Model_MyPal_716     = ( Model_MyPal | 0x0002 ),
-    Model_MyPal_730     = ( Model_MyPal | 0x0003 )
+    Model_MyPal_730     = ( Model_MyPal | 0x0003 ),
+
+    Model_HTC           = ( 9 << 16 ),
+    Model_HTC_All       = ( Model_HTC | 0xffff ),
+    Model_HTC_Universal = ( Model_HTC | 0x0001 )
 };
 
 /**
@@ -136,7 +140,8 @@ enum OVendor {
     Vendor_GMate,
     Vendor_MasterIA,
     Vendor_GenuineIntel,
-    Vendor_Asus
+    Vendor_Asus,
+    Vendor_HTC
 };
 
 /**

@@ -36,6 +36,9 @@ choice
   config TARGET_YOPY
     boolean "Yopy 3500/3700"  
 
+  config TARGET_HTC
+    boolean "HTC"
+
   config TARGET_64BIT
     boolean "64 BIT"
 
@@ -102,6 +105,8 @@ config SPECFILE
   default "qws/linux-yopy-g++" if TARGET_YOPY && (! X11)
   default "qws/macx-generic-g++" if TARGET_MACOSX && (! X11)
   default "qws/linux-oe-g++" if TARGET_OE && (!X11)
+  default "qws/linux-htc-g++" if TARGET_HTC && (! X11)
+  default "linux-g++" if TARGET_HTC  && X11
 
 config CUSTOMFILE
   string
@@ -120,6 +125,7 @@ config OPTIMIZATIONS
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_RAMSES
   default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_SIMPAD
   default "-march=armv5te -mtune=xscale -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_C700
+  default "-march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2" if TARGET_HTC
 
 config EXPERIMENTAL
   bool "Prompt for development and/or incomplete items"

@@ -50,6 +50,9 @@ endif
 ifdef CONFIG_TARGET_MACOSX
   PLATFORM=macx-darwin
 endif
+ifdef CONFIG_TARGET_HTC
+  PLATFORM=htc-linux
+endif
 
 export QMAKE:=$(OPIEDIR)/qmake/qmake
 export QMAKESPECSDIR=$(OPIEDIR)/mkspecs

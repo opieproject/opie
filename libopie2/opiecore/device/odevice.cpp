@@ -37,6 +37,7 @@
 #include "odevice_yopy.h"
 #include "odevice_zaurus.h"
 #include "odevice_genuineintel.h"
+#include "odevice_htc.h"
 
 /* QT */
 #include <qapplication.h>
@@ -144,6 +145,8 @@ ODevice *ODevice::inst()
                     else if ( line.contains( "jornada", false ) ) dev = new Internal::Jornada();
                     else if ( line.contains( "ramses", false ) ) dev = new Internal::Ramses();
                     else if ( line.contains( "Tradesquare.NL", false ) ) dev = new Internal::Beagle();
+                    else if ( line.contains( "HTC", false ) ) dev = new Internal::HTC();
+
                     else qWarning( "ODevice() - unknown hardware - using default." );
                     break;
                 } else if ( line.startsWith( "vendor_id" ) ) {
