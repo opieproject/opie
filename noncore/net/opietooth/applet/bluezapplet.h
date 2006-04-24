@@ -33,6 +33,7 @@
 #include <qpixmap.h>
 #include <qtimer.h>
 #include <manager.h>
+#include <opie2/oprocess.h>
 
 namespace OpieTooth {
     class Device;
@@ -66,10 +67,13 @@ public slots:
         QPixmap bluezDiscoveryOnPixmap;
         bool bluezactive;
         bool bluezDiscoveryActive;
+        bool doListDevice; //If I have to list devices after bringing BT up?
+        bool isScanning; //If I'm scanning devices
+        bool m_wasOn; //If BT was started by menu?
 
 private slots:
         void slotMessage( const QCString& , const QByteArray& );
-
+        void slotProcessExited(Opie::Core::OProcess* proc);
 
     };
 };

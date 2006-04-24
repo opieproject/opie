@@ -34,6 +34,7 @@
 #include <opie2/odevice.h>
 #include <opie2/odebug.h>
 #include <opie2/oresource.h>
+#include <opie2/oprocess.h>
 #include <qpe/applnk.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
@@ -49,28 +50,49 @@ using namespace Opie::Core;
 #include <qstring.h>
 #include <qtimer.h>
 #include <qpopupmenu.h>
+#include <qmessagebox.h>
 
 /* STD */
 #include <device.h>
 
-namespace OpieTooth {
+// #define OPIE120 // undefine it fo the latest OPIE
 
+namespace OpieTooth {
     BluezApplet::BluezApplet( QWidget *parent, const char *name ) : QWidget( parent, name ) {
         setFixedHeight( AppLnk::smallIconSize() );
         setFixedWidth( AppLnk::smallIconSize() );
+#ifdef OPIE120
+        bluezOnPixmap = Resource::loadPixmap( "bluetoothapplet/bluezon" );
+        bluezOffPixmap = Resource::loadPixmap( "bluetoothapplet/bluezoff" );
+        bluezDiscoveryOnPixmap = Resource::loadPixmap( "bluetoothapplet/magglass.png" );
+#else
         bluezOnPixmap = OResource::loadImage( "bluetoothapplet/bluezon", OResource::SmallIcon );
         bluezOffPixmap = OResource::loadImage( "bluetoothapplet/bluezoff", Opie::Core::OResource::SmallIcon );
         bluezDiscoveryOnPixmap = OResource::loadImage( "bluetoothapplet/bluezondiscovery", Opie::Core::OResource::SmallIcon );
-        startTimer(4000);
+#endif
+        startTimer(2000);
         btDevice = 0;
         btManager = 0;
         bluezactive = false;
         bluezDiscoveryActive = false;
+        doListDevice = false;
+        isScanning = false;
+        m_wasOn = false;
 
 	// TODO: determine whether this channel has to be closed at destruction time.
         QCopChannel* chan = new QCopChannel("QPE/Bluetooth", this );
         connect(chan, SIGNAL(received(const QCString&,const QByteArray&) ),
                 this, SLOT(slotMessage(const QCString&,const QByteArray&) ) );
+
+        OProcess* btstart = new OProcess();
+        *btstart << "/etc/init.d/bluetooth" << "stop";
+        btstart->setUseShell(true);
+        if (!btstart->start(OProcess::DontCare, OProcess::AllOutput))
+            delete btstart;
+        else {
+            connect(btstart, SIGNAL(processExited(Opie::Core::OProcess*)),
+                this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
+        }
     }
 
     BluezApplet::~BluezApplet() {
@@ -102,25 +124,44 @@ int BluezApplet::position()
 
     int BluezApplet::setBluezStatus(int c) {
 
+        OProcess* btstart = new OProcess();
         if ( c == 1 ) {
             switch ( ODevice::inst()->model() ) {
             case Model_iPAQ_H39xx:
                 btDevice = new Device( "/dev/tts/1", "bcsp", "921600" );
                 break;
 
-	    case Model_iPAQ_H5xxx:
-	        btDevice = new Device( "/dev/tts/1", "any", "921600" );
-		break;
+            case Model_iPAQ_H5xxx:
+                btDevice = new Device( "/dev/tts/1", "any", "921600" );
+                break;
 
+#ifndef OPIE120
             case Model_MyPal_716:
                 btDevice = new Device( "/dev/ttyS1", "bcsp", "921600" );
                 break;
+#endif
 
             default:
                 btDevice = new Device( "/dev/ttySB0", "bcsp", "230400" );
                 break;
             }
+            *btstart << "/etc/init.d/bluetooth" << "start";
+            btstart->setUseShell(true);
+            if (!btstart->start(OProcess::DontCare, OProcess::AllOutput))
+              delete btstart;
+            else {
+                connect(btstart, SIGNAL(processExited(Opie::Core::OProcess*)),
+                    this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
+            }
         } else {
+            *btstart << "/etc/init.d/bluetooth" << "stop";
+            btstart->setUseShell(true);
+            if (!btstart->start(OProcess::DontCare, OProcess::AllOutput))
+              delete btstart;
+            else {
+                connect(btstart, SIGNAL(processExited(Opie::Core::OProcess*)),
+                    this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
+            }
             if ( btDevice ) {
                 delete btDevice;
                 btDevice = 0;
@@ -130,52 +171,64 @@ int BluezApplet::position()
     }
 
     int BluezApplet::checkBluezDiscoveryStatus() {
-      return bluezDiscoveryActive;
+      return isScanning;
     }
 
     int BluezApplet::setBluezDiscoveryStatus(int d) {
-      return bluezDiscoveryActive=d;
+      return bluezDiscoveryActive = d;
     }
 
     // FIXME mbhaynie
     // receiver for QCopChannel("QPE/Bluetooth") messages.
     void BluezApplet::slotMessage( const QCString& str, const QByteArray& )
     {
-	if ( str == "enableBluetooth()") {
-	    if (!checkBluezStatus())  {
-		setBluezStatus(1);
+        if ( str == "enableBluetooth()") {
+            m_wasOn = checkBluezStatus();
+            if (!m_wasOn) {
+                setBluezStatus(1);
+                sleep(2);
+            }
+        }
+        else if ( str == "disableBluetooth()") {
+            /*
+             * We can down BT only if it was started by qcop. We don't want 
+             * to down BT started from menu an break our networking connection
+             */
+            if (checkBluezStatus() && !m_wasOn)
+                setBluezStatus(0);
+            doListDevice = false;
 	    }
-	} else if ( str == "disableBluetooth()") {
-	    if (checkBluezStatus())  {
-		// setBluezStatus(0);
-	    }
-	} else if ( str == "listDevices()") {
-	    if (!btManager)
-	    {
-		btManager = new Manager("hci0");
-		connect( btManager, SIGNAL( foundDevices(const QString&,RemoteDevice::ValueList) ),
-			 this, SLOT( fillList(const QString&,RemoteDevice::ValueList) ) ) ;
-	    }
-
-	    btManager->searchDevices();
-	}
+        else if ( str == "listDevices()") {
+            if (checkBluezStatus()) {
+                doListDevice = false;
+                timerEvent(0);
+                if (!btManager) {
+                    btManager = new Manager("hci0");
+                    connect( btManager, 
+                        SIGNAL( foundDevices(const QString&, RemoteDevice::ValueList) ),
+                        this, SLOT( fillList(const QString&, RemoteDevice::ValueList) ) ) ;
+                }
+                btManager->searchDevices();
+                isScanning = true;
+            } else
+                doListDevice = true;
+        }
     }
 
     // Once the hcitool scan is complete, report back.
     void BluezApplet::fillList(const QString&, RemoteDevice::ValueList deviceList)
     {
-	QCopEnvelope e("QPE/BluetoothBack", "devices(QStringMap)");
+        QCopEnvelope e("QPE/BluetoothBack", "devices(QStringMap)");
 
-	QStringList list;
-	QMap<QString, QString> btmap;
+        QMap<QString, QString> btmap;
 
         RemoteDevice::ValueList::Iterator it;
         for( it = deviceList.begin(); it != deviceList.end(); ++it )
-	{
-	    btmap[(*it).name()] = (*it).mac();
-        }
+            btmap[(*it).name()] = (*it).mac();
 
-	e << btmap;
+        e << btmap;
+        isScanning = false;
+        timerEvent( 0 );
     }
 
     void BluezApplet::mousePressEvent( QMouseEvent *) {
@@ -260,8 +313,12 @@ int BluezApplet::position()
         bluezactive = checkBluezStatus();
         bluezDiscoveryActive = checkBluezDiscoveryStatus();
 
-        if ((bluezactive != oldactive) || (bluezDiscoveryActive != olddiscovery)) {
+        if ((bluezactive != oldactive) || 
+            (bluezDiscoveryActive != olddiscovery))
             update();
+        if (bluezactive && doListDevice) {
+            const QByteArray arr;
+            slotMessage("listDevices()", arr);
         }
     }
 
@@ -273,17 +330,35 @@ int BluezApplet::position()
         QPainter p(this);
         odebug << "paint bluetooth pixmap" << oendl; 
 
-        if (bluezactive > 0) {
+        if (bluezactive) {
+#ifdef OPIE120
+            p.drawPixmap( 0, -1,  bluezOnPixmap );
+#else
             p.drawPixmap( 0, 0,  bluezOnPixmap );
+#endif
         } else {
+#ifdef OPIE120
+            p.drawPixmap( 0, -1,  bluezOffPixmap );
+#else
             p.drawPixmap( 0, 0,  bluezOffPixmap );
+#endif
         }
 
-        if (bluezDiscoveryActive > 0) {
+        if (bluezDiscoveryActive) {
             p.drawPixmap( 0, 0,  bluezDiscoveryOnPixmap );
         }
     }
+
+/**
+ * Implementation of the process finish
+ * @param the finished process
+ */
+    void BluezApplet::slotProcessExited(OProcess* proc) 
+    {
+        delete proc;
+    }
 };
+
 
 EXPORT_OPIE_APPLET_v1( OpieTooth::BluezApplet )
 
