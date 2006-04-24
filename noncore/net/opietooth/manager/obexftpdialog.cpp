@@ -1,4 +1,4 @@
-/* $Id: obexftpdialog.cpp,v 1.2 2006-03-20 21:44:55 korovkin Exp $ */
+/* $Id: obexftpdialog.cpp,v 1.3 2006-04-24 19:09:49 korovkin Exp $ */
 /* OBEX file browser dialog */
 /***************************************************************************
  *                                                                         *
@@ -19,6 +19,7 @@
 #include <qpushbutton.h>
 #include <qmessagebox.h>
 #include <qmultilineedit.h>
+#include <qlineedit.h>
 #include <qspinbox.h>
 #include <qcombobox.h>
 #include <qlistview.h>
@@ -26,6 +27,9 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <errno.h>
+#include <qfile.h>
+#include <qtextstream.h>
+#include <qstringlist.h>
 #include "obexftpdialog.h"
 #include "filelistitem.h"
 
@@ -34,6 +38,7 @@
 #include <qpe/config.h>
 #include <opie2/odebug.h>
 #include <opie2/ofileselector.h>
+#include <opie2/ofiledialog.h>
 
 using namespace Opie::Core;
 using namespace Opie::Ui;
@@ -88,6 +93,12 @@ ObexFtpDialog::ObexFtpDialog(const QString& device, int port,
     connect(destFile, 
         SIGNAL(dirSelected (const QString&)),
         SLOT(updateDir(const QString&)));
+    connect(saveButton, 
+        SIGNAL(clicked()),
+        SLOT(slotSaveLog()));
+    connect(browseButton, 
+        SIGNAL(clicked()),
+        SLOT(slotBrowseLog()));
 }
 
 ObexFtpDialog::~ObexFtpDialog()
@@ -136,7 +147,7 @@ void ObexFtpDialog::slotBrowse()
     }
 
     if (!cli_connect_uuid(use_uuid, len)) {
-        log("Connection failed");
+        log(tr("Connection failed: ") + tr(strerror(errno)));
         errBox("Connection failed");
         status("Connection failed");
         return;
@@ -225,7 +236,7 @@ void ObexFtpDialog::slotCd(QListViewItem* item)
         }
         odebug << "Browse " << curdir << oendl;
         if (obexftp_setpath(client, curdir, 0) < 0)
-            log("CD failed");
+            log(tr("CD failed: ") + tr(strerror(errno)));
         slotBrowse();
     }
 }
@@ -264,7 +275,7 @@ void ObexFtpDialog::getFile()
         status(tr("Receiving file ") + file2get);
         result = obexftp_get(client, local, file2get);
         if (result < 0) {
-    		log(file2get + QString(" receive ERROR")); 
+    		log(file2get + QString(" receive ERROR: ") + tr(strerror(errno))); 
             errBox(file2get + QString(" receive ERROR"));
             status(file2get + QString(" receive ERROR"));
         }
@@ -314,7 +325,7 @@ void ObexFtpDialog::putFile()
     status(tr("Sending file ") + local);
     result = obexftp_put_file(client, local, file2get);
     if (result < 0) {
-        log(local + QString(" send ERROR")); 
+        log(local + QString(" send ERROR: ") + tr(strerror(errno))); 
         errBox(local + QString(" send ERROR"));
         status(local + QString(" send ERROR"));
     }
@@ -401,6 +412,34 @@ void ObexFtpDialog::doneProgress()
 void ObexFtpDialog::updateDir(const QString& newdir)
 {
     localCurdir = newdir;
+}
+
+/**
+ * Save Log to the specified file
+ */
+void ObexFtpDialog::slotSaveLog()
+{
+    QFile logFile(saveLogEdit->text());
+    if (!logFile.open(IO_WriteOnly)) {
+        errBox(tr("Unable to open file ") + saveLogEdit->text() + tr(" ") + 
+            tr(strerror(errno)));
+        return;
+    }
+    QTextStream stream(&logFile);
+    stream << browseLog->text() << endl;
+    QMessageBox::information(this, tr("Saving"), 
+        tr("Log file saved to ") + saveLogEdit->text());
+}
+
+void ObexFtpDialog::slotBrowseLog()
+{
+    MimeTypes types;
+    QStringList all;
+    all << "*/*";
+    types.insert("All Files", all );
+
+    QString str = OFileDialog::getOpenFileName( 1,"/","", types, 0 );
+    saveLogEdit->setText(str);
 }
 
 /*

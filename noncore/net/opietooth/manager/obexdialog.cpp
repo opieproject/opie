@@ -109,8 +109,8 @@ void ObexDialog::sendData() {
     if (!obexSend->start(OProcess::NotifyOnExit, OProcess::All) ) {
 		    statLine->setText( tr("Error: couln't start process") );
     }
-		else
-	    statLine->setText( tr("Sending") );
+    else
+        statLine->setText( tr("Sending") );
 }
 
 void ObexDialog::slotPushOut(OProcess*, char* buf, int len) {
