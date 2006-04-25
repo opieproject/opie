@@ -1,4 +1,4 @@
-/* $Id: obexftpdialog.h,v 1.3 2006-04-24 19:09:50 korovkin Exp $ */
+/* $Id: obexftpdialog.h,v 1.4 2006-04-25 20:17:31 korovkin Exp $ */
 /* OBEX file browser dialog */
 /***************************************************************************
  *                                                                         *
@@ -62,6 +62,7 @@ namespace OpieTooth {
         void slotCd(QListViewItem* item);
         void getFile();    
         void putFile();    
+        void delFile();    
         void updateDir(const QString& newdir);
         void slotSaveLog();
         void slotBrowseLog();

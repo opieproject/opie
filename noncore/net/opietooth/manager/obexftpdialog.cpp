@@ -1,4 +1,4 @@
-/* $Id: obexftpdialog.cpp,v 1.3 2006-04-24 19:09:49 korovkin Exp $ */
+/* $Id: obexftpdialog.cpp,v 1.4 2006-04-25 20:17:22 korovkin Exp $ */
 /* OBEX file browser dialog */
 /***************************************************************************
  *                                                                         *
@@ -90,6 +90,9 @@ ObexFtpDialog::ObexFtpDialog(const QString& device, int port,
     connect(putButton,
         SIGNAL(clicked()),
         SLOT(putFile()));
+    connect(delButton,
+        SIGNAL(clicked()),
+        SLOT(delFile()));
     connect(destFile, 
         SIGNAL(dirSelected (const QString&)),
         SLOT(updateDir(const QString&)));
@@ -242,7 +245,7 @@ void ObexFtpDialog::slotCd(QListViewItem* item)
 }
 
 /*
- * Get the file
+ * Copy file from a remote device to the local device
  */
 void ObexFtpDialog::getFile()
 {
@@ -275,7 +278,7 @@ void ObexFtpDialog::getFile()
         status(tr("Receiving file ") + file2get);
         result = obexftp_get(client, local, file2get);
         if (result < 0) {
-    		log(file2get + QString(" receive ERROR: ") + tr(strerror(errno))); 
+    		log(file2get + QString(" receive ERROR:\n") + tr(strerror(errno))); 
             errBox(file2get + QString(" receive ERROR"));
             status(file2get + QString(" receive ERROR"));
         }
@@ -288,7 +291,7 @@ void ObexFtpDialog::getFile()
 }
 
 /*
- * Put the file
+ * Copy file from the local device to a remote device
  */
 void ObexFtpDialog::putFile()
 {
@@ -325,13 +328,52 @@ void ObexFtpDialog::putFile()
     status(tr("Sending file ") + local);
     result = obexftp_put_file(client, local, file2get);
     if (result < 0) {
-        log(local + QString(" send ERROR: ") + tr(strerror(errno))); 
+        log(local + QString(" send ERROR:\n") + tr(strerror(errno))); 
         errBox(local + QString(" send ERROR"));
         status(local + QString(" send ERROR"));
     }
     else {
+        slotBrowse();
         log(local + QString(" sent")); 
         status(local + QString(" sent")); 
+    }
+}
+
+/*
+ * Delete file on a remote device
+ */
+void ObexFtpDialog::delFile()
+{
+    FileListItem* file = (FileListItem*)fileList->selectedItem();
+    int result;
+    if (file == NULL)
+        return;
+    file2get = "/";
+    if (file->gettype() == IS_FILE) {
+        if (client == NULL) {
+            errBox("No connection established");
+            return;
+        }
+        file2get += curdir;
+        if (curdir != "" && curdir.right(1) != "/")
+            file2get += "/";
+        file2get += file->text(0);
+    }
+    result = QMessageBox::warning(this, tr("Remove File"), 
+        tr("Do you want to remove\n") + file2get, "Yes", "No");
+    if (result != 0)
+        return;
+    odebug << "Remove " << file2get << oendl;
+    result = obexftp_del(client, file2get);
+    if (result < 0) {
+        log(file2get + QString(" remove ERROR\n") + tr(strerror(errno))); 
+        errBox(file2get + QString(" remove ERROR"));
+        status(file2get + QString(" remove ERROR"));
+    }
+    else {
+        slotBrowse();
+        log(file2get + QString(" removed")); 
+        status(file2get + QString(" removed")); 
     }
 }
 
