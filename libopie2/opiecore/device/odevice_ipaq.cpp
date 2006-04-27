@@ -153,6 +153,9 @@ void iPAQ::init(const QString& model)
         d->m_model = Model_iPAQ_H191x;
     else if ( d->m_modelstr == "H1940" )
         d->m_model = Model_iPAQ_H1940;
+    else if ( d->m_modelstr == "HX4700" )
+        d->m_model = Model_iPAQ_HX4700;
+
     else
         d->m_model = Model_Unknown;
 
@@ -165,6 +168,7 @@ void iPAQ::init(const QString& model)
         case Model_iPAQ_H22xx:
         case Model_iPAQ_H191x:
         case Model_iPAQ_H1940:
+	case Model_iPAQ_HX4700:
             d->m_rotation = Rot0;
             break;
         case Model_iPAQ_H36xx:
@@ -382,6 +386,14 @@ bool iPAQ::setDisplayBrightness ( int bright )
         // No Global::shellQuote as we gurantee it to be sane
         res = ( ::system( QFile::encodeName(cmdline) ) == 0 );
         break; 
+	
+    case Model_iPAQ_HX4700:
+            cmdline = QString::fromLatin1( "echo %1 > /sys/class/backlight/w100fb/brightness" ).arg( bright );
+        // No Global::shellQuote as we gurantee it to be sane
+        res = ( ::system( QFile::encodeName(cmdline) ) == 0 );
+        break; 
+	
+
     default:
         if (( fd = ::open ( "/dev/touchscreen/0", O_WRONLY )) >= 0 ) {
             FLITE_IN bl;
@@ -407,6 +419,7 @@ int iPAQ::displayBrightnessResolution() const
         case Model_iPAQ_H39xx:
             return 64;
         case Model_iPAQ_H5xxx:
+	case Model_iPAQ_HX4700:
             return 255;
         case Model_iPAQ_H191x:
             return 7;
