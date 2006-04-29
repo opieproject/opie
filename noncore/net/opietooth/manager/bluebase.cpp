@@ -32,6 +32,10 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <opie2/odebug.h>
+#ifdef Q_WS_QWS
+#include <qpe/qcopenvelope_qws.h>
+#endif
+
 using namespace Opie::Core;
 
 /* QT */
@@ -688,6 +692,14 @@ void BlueBase::setInfo()
 BlueBase::~BlueBase()
 {
     writeSavedDevices();
+    if (forwarder) {
+#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+        QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) 
+            << QPEApplication::Enable;
+#endif
+        delete forwarder;
+        forwarder = NULL;
+    }
     delete m_iconLoader;
 }
 
@@ -738,6 +750,10 @@ void BlueBase::doForward()
         return;
     }
     runButton->setText("stop gateway");
+#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+    QCopEnvelope("QPE/System", "setScreenSaverMode(int)")
+            << QPEApplication::DisableSuspend;
+#endif
 }
 
 /**
@@ -745,6 +761,10 @@ void BlueBase::doForward()
  */
 void BlueBase::forwardExit(Opie::Core::OProcess* proc)
 {
+#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+    QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) 
+            << QPEApplication::Enable;
+#endif
     if (proc->exitStatus() != 0)
         QMessageBox::critical(this, tr("Forwarder Error"), 
             tr("Forwarder start error"));
