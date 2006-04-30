@@ -694,8 +694,11 @@ BlueBase::~BlueBase()
     writeSavedDevices();
     if (forwarder) {
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
-        QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) 
-            << QPEApplication::Enable;
+        {
+            odebug << "SUSP: Enable suspend mode" << oendl;
+            QCopEnvelope e("QPE/System", "setScreenSaverMode(int)" );
+            e << QPEApplication::Enable;
+        }
 #endif
         delete forwarder;
         forwarder = NULL;
@@ -738,21 +741,31 @@ void BlueBase::doForward()
         forwarder->stop();
         delete forwarder;
         forwarder = NULL;
+#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+        {
+            odebug << "SUSP: Enable suspend mode" << oendl;
+            QCopEnvelope e("QPE/System", "setScreenSaverMode(int)" );
+            e << QPEApplication::Enable;
+        }
+#endif
         return;
     }
     QString str = serDevName->text();
     forwarder = new SerialForwarder(str, speeds[serSpeed->currentItem()].val);
-    connect(forwarder, SIGNAL(processExited(Opie::Core::OProcess*)), 
-        this, SLOT(forwardExited(Opie::Core::OProcess*)));
     if (forwarder->start(OProcess::NotifyOnExit) < 0) {
         QMessageBox::critical(this, tr("Forwarder Error"), 
             tr("Forwarder start error:") + tr(strerror(errno)));
         return;
     }
+    connect(forwarder, SIGNAL(processExited(Opie::Core::OProcess*)), 
+        this, SLOT(forwardExited(Opie::Core::OProcess*)));
     runButton->setText("stop gateway");
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
-    QCopEnvelope("QPE/System", "setScreenSaverMode(int)")
-            << QPEApplication::DisableSuspend;
+    {
+        odebug << "SUSP: Disable suspend mode" << oendl;
+        QCopEnvelope e("QPE/System", "setScreenSaverMode(int)");
+        e << QPEApplication::DisableSuspend;
+    }
 #endif
 }
 
@@ -761,16 +774,20 @@ void BlueBase::doForward()
  */
 void BlueBase::forwardExit(Opie::Core::OProcess* proc)
 {
+    odebug << "Process exited" << oendl;
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
-    QCopEnvelope("QPE/System", "setScreenSaverMode(int)" ) 
-            << QPEApplication::Enable;
+    if (forwarder) {
+        delete forwarder;
+        forwarder = NULL;
+        runButton->setText("start gateway");
+        odebug << "SUSP: Enable suspend mode" << oendl;
+        QCopEnvelope e("QPE/System", "setScreenSaverMode(int)" );
+        e << QPEApplication::Enable;
+    }
 #endif
     if (proc->exitStatus() != 0)
         QMessageBox::critical(this, tr("Forwarder Error"), 
             tr("Forwarder start error"));
-    delete proc;
-    forwarder = NULL;
-    runButton->setText("start gateway");
 }
 
 /**

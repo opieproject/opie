@@ -1,4 +1,4 @@
-/* $Id: obexftpdialog.cpp,v 1.4 2006-04-25 20:17:22 korovkin Exp $ */
+/* $Id: obexftpdialog.cpp,v 1.5 2006-04-30 08:55:07 korovkin Exp $ */
 /* OBEX file browser dialog */
 /***************************************************************************
  *                                                                         *
@@ -278,7 +278,7 @@ void ObexFtpDialog::getFile()
         status(tr("Receiving file ") + file2get);
         result = obexftp_get(client, local, file2get);
         if (result < 0) {
-    		log(file2get + QString(" receive ERROR:\n") + tr(strerror(errno))); 
+            log(file2get + QString(" receive ERROR:\n") + tr(strerror(errno))); 
             errBox(file2get + QString(" receive ERROR"));
             status(file2get + QString(" receive ERROR"));
         }
