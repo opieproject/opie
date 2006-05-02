@@ -5,9 +5,10 @@
 	------------
 	* Appearance: Added configuration options to set smallIconSize, bigIconSize, useBigPixmaps (hrw, drw)
 	* Opie-Notes: Notes application based on NoteZ (hrw)
-	* OPIE-PackageManager: Added two configuration options: "Force recursive", "Verbose fetch" (hrw)
-        * Added hardware support for HTC Universal (ljp)
-	
+	* Opie-PackageManager: Added two configuration options: "Force recursive", "Verbose fetch" (hrw)
+	* Added hardware support for HTC Universal (ljp)
+	* Make Opie-Bluetooth subsystem actually usable (korovkin)
+
 	Fixed Bugs
 	----------
 	* #1695 - Date selector use too small fontsize on VGA screen (hrw)
@@ -23,6 +24,7 @@
 	* n.a.  - Opie-console fallback to FixedFont settings from qpe.conf in config (hrw)
 	* n.a.  - Set version to 1.2.1 in About applet (hrw)
 	* n.a.  - add firstusage and background pictures for 480x640 devices (mickeyl)
+	* n.a.  - many bluetooth fixes (korovkin)
 
 	Internal
 	--------
