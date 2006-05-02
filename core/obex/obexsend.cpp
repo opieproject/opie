@@ -20,8 +20,8 @@ using namespace Opie::Core;
 #include <qpushbutton.h>
 #include <qpixmap.h>
 #include <qlistview.h>
-#include <qtimer.h>
 
+#include <unistd.h>
 /* TRANSLATOR OpieObex::SendWidget */
 
 SendWidget::SendWidget( QWidget* parent, const char* name )
@@ -83,7 +83,7 @@ int SendWidget::addReceiver(const char *r, const char *icon)
 
 bool SendWidget::receiverSelected(int id)
 {
-    return receivers[id]->pixmap(2);
+    return (bool)(receivers[id]->pixmap(2) != NULL);
 }
 
 void SendWidget::setReceiverStatus( int id, const QString& status ) {
@@ -141,7 +141,7 @@ void SendWidget::slotIrTry(unsigned int trI) {
 void SendWidget::slotStartIrda() {
 	if ( !m_irDa.count() ) return;
     if ( m_irDaIt == m_irDa.end() ) {
-	irdaStatus->setText(tr("complete."));
+        irdaStatus->setText(tr("complete."));
         return;
     }
     setReceiverStatus( m_irDaIt.key(), tr("Start sending") );
@@ -173,7 +173,7 @@ void SendWidget::slotStartBt() {
     while((m_btIt != m_bt.end()) && !receiverSelected(m_btIt.key()))
 	  ++m_btIt;
     if (m_btIt == m_bt.end() ) {
-	btStatus->setText(tr("complete."));
+        btStatus->setText(tr("complete."));
         return;
     }
     setReceiverStatus( m_btIt.key(), tr("Start sending") );
@@ -187,7 +187,8 @@ void SendWidget::send_to_receivers() {
 
 void SendWidget::scan_for_receivers()
 {
-    //FIXME: Clean ListBox prior to (re)scan
+    receiverList->clear();
+    receivers.clear();
     sendButton->setDisabled( true );
 
     if ( !QCopChannel::isRegistered("QPE/IrDaApplet") )
@@ -219,21 +220,22 @@ void SendWidget::toggle_receiver(QListViewItem* item)
 {
     // toggle the state of an individual receiver.
     if(item->pixmap(2))
-	item->setPixmap(2,QPixmap());
+        item->setPixmap(2,QPixmap());
     else
-	item->setPixmap(2,Resource::loadPixmap("backup/check.png"));
+        item->setPixmap(2,Resource::loadPixmap("backup/check.png"));
 }
 
 
 void SendWidget::closeEvent( QCloseEvent* e) {
-    e->accept(); // make sure
-    QTimer::singleShot(0, this, SLOT(userDone() ) );
-}
-void SendWidget::userDone() {
+    obexSendBase::closeEvent(e);
     QCopEnvelope e0("QPE/IrDaApplet", "disableIrda()");
     QCopEnvelope e1("QPE/Bluetooth", "disableBluetooth()");
-    emit done();
 }
+
+void SendWidget::userDone() {
+    close();
+}
+
 QString SendWidget::file()const {
     return m_file;
 }

@@ -5,9 +5,9 @@ SOURCES	=   obex.cpp btobex.cpp obexsend.cpp obexhandler.cpp receiver.cpp obexim
 TARGET		= opieobex
 DESTDIR		= $(OPIEDIR)/plugins/obex
 INTERFACES  = obexsendbase.ui
-INCLUDEPATH += $(OPIEDIR)/include $(OPIEDIR)/core/launcher
+INCLUDEPATH += $(OPIEDIR)/include $(OPIEDIR)/core/launcher $(OPIEDIR)/noncore/net/opietooth/lib
 DEPENDPATH  += 
-LIBS        += -lqpe -lopiecore2
+LIBS        += -lopietooth1 -lqpe -lopiecore2 
 VERSION		= 0.0.3
 
 include( $(OPIEDIR)/include.pro )

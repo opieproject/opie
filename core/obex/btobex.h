@@ -4,9 +4,12 @@
 #define OpieBtObex_H
 
 #include <qobject.h>
+#include <services.h>
+#include <manager.h>
 
 namespace Opie {namespace Core {class OProcess;}}
 class QCopChannel;
+using namespace OpieTooth;
 namespace OpieObex {
   // Maybe this should be derved from Obex.
   class BtObex : public QObject {
@@ -55,17 +58,20 @@ namespace OpieObex {
       QString m_file;
       QString m_outp;
       QString m_bdaddr;
+      int m_port;
       Opie::Core::OProcess *m_send;
       Opie::Core::OProcess *m_rec;
       bool m_receive : 1;
+      OpieTooth::Manager* btManager;
       void shutDownReceive();
 
 private slots:
 
       // the process exited
-      void slotExited(Opie::Core::OProcess* proc) ;
+      void slotExited(Opie::Core::OProcess*) ;
       void slotStdOut(Opie::Core::OProcess*, char*, int);
       void slotError();
+      void slotFoundServices(const QString&, Services::ValueList);
 
   private:
       void sendNow();
