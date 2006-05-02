@@ -59,18 +59,19 @@ void Manager::isAvailable( Device* /*dev*/ ){
 }
 void Manager::searchDevices( const QString& device ){
     odebug << "Manager: search devices" << oendl;
-    OProcess* hcitool = new OProcess();
-    hcitool->setName( device.isEmpty() ? "hci0" : device.latin1() );
-    *hcitool << "hcitool" << "scan";
-    connect( hcitool, SIGNAL(processExited(Opie::Core::OProcess*) ) ,
+    m_hcitool = new OProcess();
+    m_hcitool->setName( device.isEmpty() ? "hci0" : device.latin1() );
+    *m_hcitool << "hcitool" << "scan";
+    connect( m_hcitool, SIGNAL(processExited(Opie::Core::OProcess*) ) ,
              this, SLOT(slotHCIExited(Opie::Core::OProcess* ) ) );
-    connect( hcitool, SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int ) ),
+    connect( m_hcitool, SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int ) ),
              this, SLOT(slotHCIOut(Opie::Core::OProcess*, char*, int ) ) );
-    if (!hcitool->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
+    if (!m_hcitool->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
         odebug << "Manager: could not start" << oendl;
         RemoteDevice::ValueList list;
         emit foundDevices( device, list );
-        delete hcitool;
+        delete m_hcitool;
+        m_hcitool = 0;
     }
 }
 
@@ -105,7 +106,7 @@ void Manager::removeServices( const QStringList& list){
         removeService( (*it) );
 }
 void Manager::searchServices( const QString& remDevice ){
-    OProcess *m_sdp =new OProcess();
+    m_sdp =new OProcess();
     *m_sdp << "sdptool" << "browse" << remDevice;
     m_sdp->setName( remDevice.latin1() );
     odebug << "Manager: search Services for " << remDevice.latin1() << oendl;
@@ -116,6 +117,7 @@ void Manager::searchServices( const QString& remDevice ){
     if (!m_sdp->start(OProcess::NotifyOnExit,  OProcess::AllOutput) ) {
         odebug << "Manager: could not start sdptool" << oendl;
         delete m_sdp;
+        m_sdp = 0;
         Services::ValueList list;
         emit foundServices( remDevice, list );
     }
@@ -165,6 +167,8 @@ void Manager::slotSDPExited( OProcess* proc)
         }
     }
     emit foundServices( proc->name(), list );
+    if (proc == m_sdp)
+        m_sdp = 0;
     delete proc;
 }
 Services::ValueList Manager::parseSDPOutput( const QString& out ) {
@@ -188,6 +192,8 @@ void Manager::slotHCIExited(OProcess* proc ) {
         }
     }
     emit foundDevices( proc->name(), list );
+    if (proc == m_hcitool)
+        m_hcitool = 0;
     delete proc;
 }
 void Manager::slotHCIOut(OProcess* proc,  char* ch,  int len) {
