@@ -34,8 +34,7 @@ BtObex::BtObex( QObject *parent, const char* name )
 };
 
 BtObex::~BtObex() {
-    if (btManager)
-        delete btManager;
+    delete btManager;
     delete m_rec;
     delete m_send;
 }

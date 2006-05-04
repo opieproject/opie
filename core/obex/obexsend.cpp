@@ -92,9 +92,10 @@ void SendWidget::setReceiverStatus( int id, const QString& status ) {
 }
 
 void SendWidget::slotIrDaDevices( const QStringList& list) {
-    for (QStringList::ConstIterator it = list.begin(); it != list.end(); ++it ) {
-	int id = addReceiver(*it, "obex/irda.png");
-	m_irDa.insert( id, (*it) );
+    for (QStringList::ConstIterator it = list.begin(); 
+        it != list.end(); ++it ) {
+        int id = addReceiver(*it, "obex/irda.png");
+        m_irDa.insert( id, (*it) );
     }
     irdaStatus->setText( tr("ready."));
     m_irDaIt = m_irDa.begin();
@@ -102,8 +103,9 @@ void SendWidget::slotIrDaDevices( const QStringList& list) {
 }
 
 void SendWidget::slotBTDevices( const QMap<QString, QString>& str ) {
-    for(QMap<QString, QString>::ConstIterator it = str.begin(); it != str.end(); ++it ) {
-	int id = addReceiver(it.key(), "obex/bt.png");
+    for(QMap<QString, QString>::ConstIterator it = str.begin(); 
+        it != str.end(); ++it ) {
+        int id = addReceiver(it.key(), "obex/bt.png");
         m_bt.insert( id, Pair( it.key(), it.data() ) );
     }
     btStatus->setText(tr("ready."));
@@ -139,8 +141,9 @@ void SendWidget::slotIrTry(unsigned int trI) {
     setReceiverStatus(m_irDaIt.key(), tr("Try %1").arg( QString::number( trI ) ));
 }
 void SendWidget::slotStartIrda() {
-	if ( !m_irDa.count() ) return;
-    if ( m_irDaIt == m_irDa.end() ) {
+    if ( !m_irDa.count() ) 
+        return;
+    if ( m_irDaIt == m_irDa.end() || !receiverSelected(m_irDaIt.key())) {
         irdaStatus->setText(tr("complete."));
         return;
     }
@@ -151,7 +154,7 @@ void SendWidget::slotStartIrda() {
 void SendWidget::dispatchBt( const QCString& str, const QByteArray& ar ) {
     if ( str == "devices(QStringMap)" ) {
         QDataStream stream( ar, IO_ReadOnly );
-	QMap<QString, QString> btmap;
+        QMap<QString, QString> btmap;
         stream >> btmap;
         slotBTDevices( btmap );
     }
@@ -171,7 +174,7 @@ void SendWidget::slotBtTry(unsigned int trI) {
 void SendWidget::slotStartBt() {
     // skip past unselected receivers
     while((m_btIt != m_bt.end()) && !receiverSelected(m_btIt.key()))
-	  ++m_btIt;
+        ++m_btIt;
     if (m_btIt == m_bt.end() ) {
         btStatus->setText(tr("complete."));
         return;
@@ -222,14 +225,22 @@ void SendWidget::toggle_receiver(QListViewItem* item)
     if(item->pixmap(2))
         item->setPixmap(2,QPixmap());
     else
-        item->setPixmap(2,Resource::loadPixmap("backup/check.png"));
+        item->setPixmap(2,Resource::loadPixmap("obex/check.png"));
 }
 
 
-void SendWidget::closeEvent( QCloseEvent* e) {
-    obexSendBase::closeEvent(e);
-    QCopEnvelope e0("QPE/IrDaApplet", "disableIrda()");
-    QCopEnvelope e1("QPE/Bluetooth", "disableBluetooth()");
+void SendWidget::closeEvent( QCloseEvent* evt) {
+    delete m_obex;
+    m_obex = NULL;
+    delete m_btobex;
+    m_btobex = NULL;
+    obexSendBase::closeEvent(evt);
+    {
+        QCopEnvelope e("QPE/IrDaApplet", "disableIrda()");
+    }
+    {
+        QCopEnvelope e("QPE/Bluetooth", "disableBluetooth()");
+    }
 }
 
 void SendWidget::userDone() {
