@@ -177,7 +177,8 @@ $(OPIEDIR)/stamp-headers :
 		$(TOPDIR)/include/opie2 \
 		$(TOPDIR)/include/opie2/private \
 		$(TOPDIR)/include/qtopia/private \
-		$(TOPDIR)/include/sl
+		$(TOPDIR)/include/sl \
+		$(TOPDIR)/include/opietooth
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
 	( cd include/qtopia && rm -f *.h; ln -sf ../../library/*.h .; )
 	( cd include/qtopia/private && rm -f *.h; ln -sf ../../../library/backend/*.h .; )
@@ -201,6 +202,7 @@ $(OPIEDIR)/stamp-headers :
 	# auxilliary libraries
 	( cd include/opie2 && ln -sf ../../libqtaux/*.h .; )
 	( cd include/sl && ln -sf ../../libslcompat/*.h .; )
+	( cd include/opietooth && ln -sf ../../noncore/net/opietooth/lib/*.h .; )
 	( cd include/ && ln -sf ../noncore/net/ftplib/*.h .; )
 	( cd include/ && ln -sf ../inputmethods/pickboard/pickboardcfg.h .; )
 	( cd include/ && ln -sf ../inputmethods/pickboard/pickboardpicks.h .; )
@@ -220,8 +222,8 @@ $(OPIEDIR)/stamp-headers-x11 :
 		 $(TOPDIR)/include/opie   \
 		 $(TOPDIR)/include/opie2  \
 		 $(TOPDIR)/include/opie2/private \
-		 $(TOPDIR)/include/sl
-
+		 $(TOPDIR)/include/sl \
+		 $(TOPDIR)/include/opietooth
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
 	( cd include/qtopia && rm -f *.h; ln -sf ../../library/*.h .; )
 	( cd include/qtopia/private && rm -f *.h; ln -sf ../../../library/backend/*.h .; )
@@ -244,6 +246,7 @@ $(OPIEDIR)/stamp-headers-x11 :
 	# auxilliary libraries
 	( cd include/opie2 && ln -sf ../../libqtaux/*.h .; )
 	( cd include/sl && ln -sf ../../libslcompat/*.h .; )
+	( cd include/opietooth && ln -s ../../noncore/net/opietooth/lib/*.h .; )
 	( cd include/ && ln -sf ../noncore/net/ftplib/*.h .; )
 	( cd include/ && ln -sf ../inputmethods/pickboard/pickboardcfg.h .; )
 	( cd include/ && ln -sf ../inputmethods/pickboard/pickboardpicks.h .; )
