@@ -4,8 +4,8 @@
 #define OpieBtObex_H
 
 #include <qobject.h>
-#include <services.h>
-#include <manager.h>
+#include <opietooth/services.h>
+#include <opietooth/manager.h>
 
 namespace Opie {namespace Core {class OProcess;}}
 class QCopChannel;

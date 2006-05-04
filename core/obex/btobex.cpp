@@ -1,7 +1,7 @@
 
 #include "btobex.h"
-#include <manager.h>
-#include <services.h>
+#include <opietooth/manager.h>
+#include <opietooth/services.h>
 
 /* OPIE */
 #include <opie2/oprocess.h>
