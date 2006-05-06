@@ -1,4 +1,4 @@
-/* $Id: obexftpdialog.cpp,v 1.5 2006-04-30 08:55:07 korovkin Exp $ */
+/* $Id: obexftpdialog.cpp,v 1.6 2006-05-06 18:37:33 korovkin Exp $ */
 /* OBEX file browser dialog */
 /***************************************************************************
  *                                                                         *
@@ -112,10 +112,15 @@ ObexFtpDialog::~ObexFtpDialog()
     }
 }
 
+void ObexFtpDialog::slotBrowse()
+{
+    doBrowse(TRUE);
+}
+
 /*
  * Do device browsing
  */
-void ObexFtpDialog::slotBrowse()
+void ObexFtpDialog::doBrowse(bool reconnect)
 {
     stat_entry_t* ent; //Directory entry
     void *dir; //Directory to read
@@ -149,7 +154,7 @@ void ObexFtpDialog::slotBrowse()
         len = sizeof(UUID_FBS);
     }
 
-    if (!cli_connect_uuid(use_uuid, len)) {
+    if (!cli_connect_uuid(use_uuid, len, reconnect)) {
         log(tr("Connection failed: ") + tr(strerror(errno)));
         errBox("Connection failed");
         status("Connection failed");
@@ -240,7 +245,7 @@ void ObexFtpDialog::slotCd(QListViewItem* item)
         odebug << "Browse " << curdir << oendl;
         if (obexftp_setpath(client, curdir, 0) < 0)
             log(tr("CD failed: ") + tr(strerror(errno)));
-        slotBrowse();
+        doBrowse();
     }
 }
 
@@ -333,7 +338,7 @@ void ObexFtpDialog::putFile()
         status(local + QString(" send ERROR"));
     }
     else {
-        slotBrowse();
+        doBrowse();
         log(local + QString(" sent")); 
         status(local + QString(" sent")); 
     }
@@ -371,18 +376,26 @@ void ObexFtpDialog::delFile()
         status(file2get + QString(" remove ERROR"));
     }
     else {
-        slotBrowse();
+        doBrowse();
         log(file2get + QString(" removed")); 
         status(file2get + QString(" removed")); 
     }
 }
 
 /* connect with given uuid. re-connect every time */
-int ObexFtpDialog::cli_connect_uuid(const uint8_t *uuid, int uuid_len)
+int ObexFtpDialog::cli_connect_uuid(const uint8_t *uuid, int uuid_len, 
+    bool reconnect)
 {
 	int retry;
-	if (client != NULL)
-        return TRUE;
+	if (client != NULL) {
+        if (reconnect) {
+            obexftp_disconnect(client);
+            obexftp_close(client);
+            sleep(3);
+        }
+        else
+            return TRUE;
+    }
     /* Open */
     client = obexftp_open (transport, NULL, info_cb, this);
     if(client == NULL) {

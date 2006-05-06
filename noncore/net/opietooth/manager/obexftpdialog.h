@@ -1,4 +1,4 @@
-/* $Id: obexftpdialog.h,v 1.4 2006-04-25 20:17:31 korovkin Exp $ */
+/* $Id: obexftpdialog.h,v 1.5 2006-05-06 18:37:34 korovkin Exp $ */
 /* OBEX file browser dialog */
 /***************************************************************************
  *                                                                         *
@@ -35,13 +35,15 @@ namespace OpieTooth {
         void incProgress();
         void doneProgress();
     protected:    
-        int cli_connect_uuid(const uint8_t *uuid, int uuid_len);
+        int cli_connect_uuid(const uint8_t *uuid, int uuid_len, 
+            bool reconnect = FALSE);
         int errBox(QCString msg); //Error message box
         int errBox(QString msg); //Error message box
         int errBox(const char* msg); //Error message box
         void status(QCString msg); //Text in the status bar
         void status(QString msg); //Text in the status bar
         void status(const char* msg); //Text in the status bar
+        void doBrowse(bool reconnect = FALSE); //Browse device
     protected:
         QString m_device; //device MAC address
         int m_port; //port
