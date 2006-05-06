@@ -95,11 +95,25 @@ QString PinDlg::makeMacFromArgs()
         return qApp->argv()[2] ;
 }
 
+/*
+ * Add a number to the PIN number
+ */
 void PinDlg::addnum()
 {
     if( sender()->inherits( "QPushButton") ) { 
         const QPushButton* btn = static_cast<const QPushButton*> (sender()); 
         lnePin->setText(lnePin->text() + btn->text());
+    }
+}
+
+/*
+ * Delete a number from the end of the line
+ */
+void PinDlg::delnum()
+{
+    if( sender()->inherits( "QPushButton") ) { 
+        const QPushButton* btn = static_cast<const QPushButton*> (sender()); 
+        lnePin->setText(lnePin->text().remove(lnePin->text().length() - 1, 1));
     }
 }
 
@@ -113,6 +127,14 @@ void PinDlg::accept()
     }
     printf("PIN:%s\n", lnePin->text().latin1());
     QDialog::accept();
+    qApp->quit();
+    ::exit(0);
+}
+
+void PinDlg::reject()
+{
+    printf("ERR\n"); 
+    QDialog::reject();
     qApp->quit();
     ::exit(0);
 }
