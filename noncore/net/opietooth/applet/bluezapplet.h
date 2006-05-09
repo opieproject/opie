@@ -73,8 +73,6 @@ public slots:
 
 private slots:
         void slotMessage( const QCString& , const QByteArray& );
-        void slotProcessExited(Opie::Core::OProcess* proc);
-
     };
 };
 

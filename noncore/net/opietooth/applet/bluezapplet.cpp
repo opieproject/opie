@@ -55,7 +55,7 @@ using namespace Opie::Core;
 /* STD */
 #include <device.h>
 
-// #define OPIE120 // undefine it fo the latest OPIE
+#define OPIE120 // undefine it fo the latest OPIE
 
 namespace OpieTooth {
     BluezApplet::BluezApplet( QWidget *parent, const char *name ) : QWidget( parent, name ) {
@@ -83,16 +83,7 @@ namespace OpieTooth {
         QCopChannel* chan = new QCopChannel("QPE/Bluetooth", this );
         connect(chan, SIGNAL(received(const QCString&,const QByteArray&) ),
                 this, SLOT(slotMessage(const QCString&,const QByteArray&) ) );
-
-        OProcess* btstart = new OProcess();
-        *btstart << "/etc/init.d/bluetooth" << "stop";
-        btstart->setUseShell(true);
-        if (!btstart->start(OProcess::DontCare, OProcess::AllOutput))
-            delete btstart;
-        else {
-            connect(btstart, SIGNAL(processExited(Opie::Core::OProcess*)),
-                this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
-        }
+        ::system("/etc/init.d/bluetooth stop >/dev/null 2>/dev/null");
     }
 
     BluezApplet::~BluezApplet() {
@@ -104,27 +95,29 @@ namespace OpieTooth {
         }
     }
 
-int BluezApplet::position()
-{
+    int BluezApplet::position()
+    {
         return 6;
-}
+    }
 
 
     bool BluezApplet::checkBluezStatus() {
         if (btDevice) {
             if (btDevice->isLoaded() ) {
+                odebug << "btDevice isLoaded" << oendl;
                 return true;
             } else {
+                odebug << "btDevice is NOT loaded" << oendl;
                 return false;
             }
         } else {
+            odebug << "btDevice is ZERO" << oendl;
             return false;
         }
     }
 
     int BluezApplet::setBluezStatus(int c) {
 
-        OProcess* btstart = new OProcess();
         if ( c == 1 ) {
             switch ( ODevice::inst()->model() ) {
             case Model_iPAQ_H39xx:
@@ -145,22 +138,13 @@ int BluezApplet::position()
                 btDevice = new Device( "/dev/ttySB0", "bcsp", "230400" );
                 break;
             }
-            *btstart << "/etc/init.d/bluetooth" << "start";
-            btstart->setUseShell(true);
-            if (!btstart->start(OProcess::DontCare, OProcess::AllOutput))
-              delete btstart;
-            else {
-                connect(btstart, SIGNAL(processExited(Opie::Core::OProcess*)),
-                    this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
-            }
+            QCopEnvelope e("QPE/System", "execute(QString)");
+            e << QString("/etc/init.d/bluetooth start");
         } else {
-            *btstart << "/etc/init.d/bluetooth" << "stop";
-            btstart->setUseShell(true);
-            if (!btstart->start(OProcess::DontCare, OProcess::AllOutput))
-              delete btstart;
-            else {
-                connect(btstart, SIGNAL(processExited(Opie::Core::OProcess*)),
-                    this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
+            ::system("/etc/init.d/bluetooth stop >/dev/null 2>/dev/null");
+            if ( btManager ) {
+                delete btManager;
+                btManager = 0;
             }
             if ( btDevice ) {
                 delete btDevice;
@@ -197,7 +181,7 @@ int BluezApplet::position()
             if (checkBluezStatus() && !m_wasOn)
                 setBluezStatus(0);
             doListDevice = false;
-	    }
+        }
         else if ( str == "listDevices()") {
             if (checkBluezStatus()) {
                 doListDevice = false;
@@ -262,6 +246,7 @@ int BluezApplet::position()
 
         QPoint p = mapToGlobal( QPoint(1, -menu->sizeHint().height()-1) );
         ret = menu->exec(p, 0);
+        menu->hide();
 
         switch(ret) {
         case 0:
@@ -347,15 +332,6 @@ int BluezApplet::position()
         if (bluezDiscoveryActive) {
             p.drawPixmap( 0, 0,  bluezDiscoveryOnPixmap );
         }
-    }
-
-/**
- * Implementation of the process finish
- * @param the finished process
- */
-    void BluezApplet::slotProcessExited(OProcess* proc) 
-    {
-        delete proc;
     }
 };
 
