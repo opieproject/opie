@@ -1,4 +1,4 @@
-/* $Id: obexftpdialog.cpp,v 1.6 2006-05-06 18:37:33 korovkin Exp $ */
+/* $Id: obexftpdialog.cpp,v 1.7 2006-05-10 13:32:46 korovkin Exp $ */
 /* OBEX file browser dialog */
 /***************************************************************************
  *                                                                         *
@@ -243,7 +243,7 @@ void ObexFtpDialog::slotCd(QListViewItem* item)
             curdir += file->text(0);
         }
         odebug << "Browse " << curdir << oendl;
-        if (obexftp_setpath(client, curdir, 0) < 0)
+        if (obexftp_setpath(client, QFile::encodeName(curdir), 0) < 0)
             log(tr("CD failed: ") + tr(strerror(errno)));
         doBrowse();
     }

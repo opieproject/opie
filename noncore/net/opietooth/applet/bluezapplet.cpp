@@ -116,7 +116,7 @@ namespace OpieTooth {
         }
     }
 
-    int BluezApplet::setBluezStatus(int c) {
+    int BluezApplet::setBluezStatus(int c, bool sync) {
 
         if ( c == 1 ) {
             switch ( ODevice::inst()->model() ) {
@@ -138,8 +138,12 @@ namespace OpieTooth {
                 btDevice = new Device( "/dev/ttySB0", "bcsp", "230400" );
                 break;
             }
-            QCopEnvelope e("QPE/System", "execute(QString)");
-            e << QString("/etc/init.d/bluetooth start");
+            if (sync) {
+                ::system("/etc/init.d/bluetooth start >/dev/null 2>/dev/null");
+            } else {
+                QCopEnvelope e("QPE/System", "execute(QString)");
+                e << QString("/etc/init.d/bluetooth start");
+            }
         } else {
             ::system("/etc/init.d/bluetooth stop >/dev/null 2>/dev/null");
             if ( btManager ) {
@@ -169,7 +173,7 @@ namespace OpieTooth {
         if ( str == "enableBluetooth()") {
             m_wasOn = checkBluezStatus();
             if (!m_wasOn) {
-                setBluezStatus(1);
+                setBluezStatus(1, true);
                 sleep(2);
             }
         }

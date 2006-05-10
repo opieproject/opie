@@ -3,9 +3,9 @@
 
 
 #include <qdialog.h>
-#include <opie2/oprocess.h>
 #include <qlabel.h>
 #include <qmultilineedit.h>
+#include "obexpush.h"
 
 class QVBoxLayout;
 class QPushButton;
@@ -20,16 +20,18 @@ namespace OpieTooth {
         Q_OBJECT
 
     public:
-        ObexDialog( const QString& device = 0, QWidget* parent = 0, const char* name = 0, bool modal = TRUE, WFlags fl = 0);
+        ObexDialog( const QString& device = 0, int port = 0, 
+            QWidget* parent = 0, const char* name = 0, 
+            bool modal = TRUE, WFlags fl = 0);
         ~ObexDialog();
 
 
 private slots:
         void browse();
         void sendData();
-        void slotPushOut(Opie::Core::OProcess*, char*, int);
-        void slotPushErr(Opie::Core::OProcess*, char*, int);
-        void slotProcessExited(Opie::Core::OProcess* proc);   	
+        void slotPushStatus(QCString&);
+        void slotPushComplete(int);
+        void slotPushError(int);
         
     protected:
         QVBoxLayout* layout;
@@ -42,7 +44,8 @@ private slots:
     private:
         // Device that is used
         QString m_device;
-        Opie::Core::OProcess *obexSend;
+        int m_port; //Port used
+        ObexPush* obexSend;
     };
 }
 #endif

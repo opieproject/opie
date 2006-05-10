@@ -18,7 +18,7 @@ using namespace OpieTooth;
 ObexPopup::ObexPopup(const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item)
         : QPopupMenu(), m_service(service)
 {
-    owarn << "ObexPopup c'tor" << oendl; 
+    odebug << "ObexPopup c'tor" << oendl; 
 
     m_item = item;
     /* connect action */
@@ -39,10 +39,8 @@ void ObexPopup::slotPush()
 {
     QString device = m_item->mac();
     int port = m_service.protocolDescriptorList().last().port();
-    device += "@";
-    device += QString::number(port);
-    owarn << "push something to " << device << oendl; 
-    ObexDialog obexDialog(device);
+    odebug << "push something to " << device << " " << port << oendl; 
+    ObexDialog obexDialog(device, port);
     QPEApplication::execDialog( &obexDialog );
 }
 

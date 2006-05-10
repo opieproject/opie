@@ -20,7 +20,8 @@ using namespace OpieTooth;
 using namespace Opie::Core;
 using namespace Opie::Ui;
 using namespace Opie::Core;
-ObexDialog::ObexDialog(const QString& device, QWidget* parent,  const char* name, bool modal, WFlags fl)
+ObexDialog::ObexDialog(const QString& device, int port, 
+    QWidget* parent,  const char* name, bool modal, WFlags fl)
     : QDialog( parent, name, modal, fl ) {
 
     if ( !name )
@@ -28,9 +29,10 @@ ObexDialog::ObexDialog(const QString& device, QWidget* parent,  const char* name
     setCaption( tr( "beam files " ) ) ;
 
     m_device = device;
+    m_port = port;
 
     layout = new QVBoxLayout( this );
-    obexSend  = new OProcess();
+    obexSend  = new ObexPush();
 
     info = new QLabel( this );
     info->setText( tr("Which file should be beamed?") );
@@ -62,18 +64,16 @@ ObexDialog::ObexDialog(const QString& device, QWidget* parent,  const char* name
 
     connect( sendButton, SIGNAL( clicked() ), this,  SLOT( sendData() ) );
 
-    connect(obexSend, SIGNAL(processExited(Opie::Core::OProcess*)),
-        this, SLOT(slotProcessExited(Opie::Core::OProcess*)));
-    connect(obexSend, SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int)),
-        this, SLOT(slotPushOut(Opie::Core::OProcess*, char*, int)));
-    connect(obexSend, SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int)),
-        this, SLOT(slotPushErr(Opie::Core::OProcess*, char*, int)));
+    connect(obexSend, SIGNAL(sendComplete(int)),
+        this, SLOT(slotPushComplete(int)));
+    connect(obexSend, SIGNAL(sendError(int)),
+        this, SLOT(slotPushError(int)));
+    connect(obexSend, SIGNAL(status(QCString&)),
+        this, SLOT(slotPushStatus(QCString&)));
 
 }
 
 ObexDialog::~ObexDialog() {
-  if (obexSend->isRunning())
-    obexSend->kill();
   delete obexSend;
   obexSend = NULL;
 }
@@ -91,50 +91,32 @@ void ObexDialog::browse() {
 }
 
 void ObexDialog::sendData() {
+    int result; //function call result
     QString fileURL = cmdLine->text();
-    QString file = QFileInfo( fileURL ).fileName();
     QString modifiedName = chNameLine->text();
-    QString execName = "ussp-push";
-
-    if (obexSend->isRunning())
+    result = obexSend->send(m_device, m_port, fileURL, modifiedName);
+    if (result > 0)
         return;
-    obexSend->clearArguments();
-       // vom popupmenu beziehen
-    if ( !modifiedName.isEmpty() ) {
-        *obexSend << execName << "--timeo 30" << m_device << fileURL << modifiedName;
-    } else {
-        *obexSend << execName << "--timeo 30" << m_device << fileURL << file;
-    }
-    obexSend->setUseShell(true);
-    if (!obexSend->start(OProcess::NotifyOnExit, OProcess::All) ) {
+    else if (result < 0)
 		    statLine->setText( tr("Error: couln't start process") );
-    }
     else
         statLine->setText( tr("Sending") );
 }
 
-void ObexDialog::slotPushOut(OProcess*, char* buf, int len) {
-  QCString str(buf, len);
+void ObexDialog::slotPushStatus(QCString& str) {
   status->append(str);
 }
 
-void ObexDialog::slotPushErr(OProcess*, char* buf, int len) {
-  QCString str(buf, len);
-  status->append(str);
+void ObexDialog::slotPushComplete(int result) {
+  status->append( tr("Finished with result ") );
+  status->append( QString::number(result) );
+  status->append( tr("\n") );
+  odebug << result << oendl;
+  statLine->setText( tr("Finished: ") + tr(strerror(result)) );
 }
 
-void ObexDialog::slotProcessExited(OProcess*) {
-  if (obexSend == NULL)
-      return;
-  if (obexSend->normalExit()) {
-    status->append( tr("Finished with result ") );
-    status->append( QString::number(obexSend->exitStatus()) );
-    status->append( tr("\n") );
-    odebug << obexSend->exitStatus() << oendl;
-    statLine->setText( tr("Finished: ") + tr(strerror(obexSend->exitStatus())) );
-  }
-  else {
-    status->append( tr("Exited abnormally\n") );
-    statLine->setText( tr("Exited abnormally") );
-  }
+void ObexDialog::slotPushError(int) {
+  status->append( tr("Exited abnormally\n") );
+  statLine->setText( tr("Exited abnormally") );
 }
+//eof

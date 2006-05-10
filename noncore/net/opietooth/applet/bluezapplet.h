@@ -55,7 +55,7 @@ public slots:
         void paintEvent( QPaintEvent* );
         void launchManager();
         bool checkBluezStatus();
-        int setBluezStatus(int);
+        int setBluezStatus(int, bool sync = false);
         int checkBluezDiscoveryStatus();
         int setBluezDiscoveryStatus(int);
 

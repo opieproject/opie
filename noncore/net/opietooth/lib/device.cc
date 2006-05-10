@@ -16,33 +16,31 @@ using namespace OpieTooth;
 
 using Opie::Core::OProcess;
 namespace {
-    int parsePid( const QCString& par )
-    {
-	int id=0;
-	QString string( par );
-	QStringList list =  QStringList::split( '\n', string );
+  int parsePid( const QCString& par )
+  {
+    int id = 0;
+    QString string( par );
+    QStringList list =  QStringList::split( '\n', string );
 
-	for( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
-	{
-	    owarn << "parsePID: " << (*it).latin1() << oendl;
+    for( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
+      owarn << "parsePID: " << (*it).latin1() << oendl;
 
-	    // FIXME mbhaynie:  Surely there is a better way to skip
-	    // verbosity (E.g. the TI device configuration
-	    // script). Apparently the PID is always on a line by 
-	    // itself, or is at least the first word of a line.  Does
-	    // QString have somethine like startsWithRegex("[0-9]+")?
-	    if( (*it).startsWith("#") ) continue;
-	    if( (*it).startsWith("TI") ) continue;
-	    if( (*it).startsWith("Loading") ) continue;
-	    if( (*it).startsWith("BTS") ) continue;
-	    if( !(*it).startsWith("CSR") )
-	    {
-		id = (*it).toInt();
-		break;
-	    }
-	}
-	return id;
+      // FIXME mbhaynie:  Surely there is a better way to skip
+      // verbosity (E.g. the TI device configuration
+      // script). Apparently the PID is always on a line by 
+      // itself, or is at least the first word of a line.  Does
+      // QString have somethine like startsWithRegex("[0-9]+")?
+      if( (*it).startsWith("#") ) continue;
+      if( (*it).startsWith("TI") ) continue;
+      if( (*it).startsWith("Loading") ) continue;
+      if( (*it).startsWith("BTS") ) continue;
+      if( !(*it).startsWith("CSR") ) {
+        id = (*it).toInt();
+        break;
+      }
     }
+    return id;
+  }
 }
 
 Device::Device(const QString &device, const QString &mode, const QString &speed )
@@ -75,13 +73,9 @@ void Device::attach(){
 
     // FIXME -- this is a hack for an odd hciattach interface.
     if ( ODevice::inst()->modelString() == "HX4700" )
-    {
-	*m_process << "-S" << "/etc/bluetooth/TIInit_3.2.26.bts" << "/dev/ttyS1" << "texas";
-    }
+      *m_process << "-S" << "/etc/bluetooth/TIInit_3.2.26.bts" << "/dev/ttyS1" << "texas";
     else
-    {
-	*m_process << m_device << m_mode << m_speed;
-    }
+      *m_process << m_device << m_mode << m_speed;
     connect(m_process, SIGNAL( processExited(Opie::Core::OProcess*) ),
             this, SLOT( slotExited(Opie::Core::OProcess* ) ) );
     connect(m_process, SIGNAL( receivedStdout(Opie::Core::OProcess*, char*, int) ),
@@ -93,16 +87,18 @@ void Device::attach(){
       delete m_process;
       m_process = 0;
     }
-  };
+  }
 }
 void Device::detach(){
   delete m_hci;
+  m_hci = 0;
   delete m_process;
+  m_process = 0;
   // kill the pid we got
   if(m_attached ){
     //kill the pid
     owarn << "killing" << oendl;
-    kill(pid, 9);
+    ::kill(pid, 9);
   }
   owarn << "detached" << oendl;
 }
@@ -121,27 +117,27 @@ void Device::slotExited( OProcess* proc)
       owarn << "normalExit" << oendl;
       int ret = m_process->exitStatus();
       if( ret == 0 ){ // attached
-    owarn << "attached" << oendl;
-    owarn << "Output: " << m_output.data() << oendl;
-    pid = parsePid( m_output );
-    owarn << "Pid = " << pid << oendl;
-    // now hciconfig hci0 up ( determine hciX FIXME)
-    // and call hciconfig hci0 up
-    // FIXME hardcoded to hci0 now :(
-    m_hci = new OProcess( );
-    *m_hci << "hciconfig";
-    *m_hci << "hci0 up";
-    connect(m_hci, SIGNAL( processExited(Opie::Core::OProcess*) ),
+        owarn << "attached" << oendl;
+        owarn << "Output: " << m_output.data() << oendl;
+        pid = parsePid( m_output );
+        owarn << "Pid = " << pid << oendl;
+        // now hciconfig hci0 up ( determine hciX FIXME)
+        // and call hciconfig hci0 up
+        // FIXME hardcoded to hci0 now :(
+        m_hci = new OProcess( );
+        *m_hci << "hciconfig";
+        *m_hci << "hci0 up";
+        connect(m_hci, SIGNAL( processExited(Opie::Core::OProcess*) ),
                 this, SLOT( slotExited(Opie::Core::OProcess* ) ) );
-    if(!m_hci->start() ){
-      owarn << "could not start" << oendl;
-      m_attached = false;
-      emit device("hci0", false );
-    }
+        if(!m_hci->start() ){
+          owarn << "could not start" << oendl;
+          m_attached = false;
+          emit device("hci0", false );
+        }
       }else{
         owarn << "crass" << oendl;
-    m_attached = false;
-    emit device("hci0", false );
+        m_attached = false;
+        emit device("hci0", false );
 
       }
     }
@@ -153,13 +149,13 @@ void Device::slotExited( OProcess* proc)
       owarn << "normal exit" << oendl;
       int ret = m_hci->exitStatus();
       if( ret == 0 ){
-    owarn << "attached really really attached" << oendl;
-    m_attached = true;
-    emit device("hci0", true );
+        owarn << "attached really really attached" << oendl;
+        m_attached = true;
+        emit device("hci0", true );
       }else{
-    owarn << "failed" << oendl;
-    emit device("hci0", false );
-    m_attached = false;
+        owarn << "failed" << oendl;
+        emit device("hci0", false );
+        m_attached = false;
       }
     }// normal exit
     delete m_hci;
