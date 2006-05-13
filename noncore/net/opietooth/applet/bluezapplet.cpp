@@ -35,6 +35,7 @@
 #include <opie2/odebug.h>
 #include <opie2/oresource.h>
 #include <opie2/oprocess.h>
+#include <qpe/version.h>
 #include <qpe/applnk.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
@@ -55,13 +56,11 @@ using namespace Opie::Core;
 /* STD */
 #include <device.h>
 
-#define OPIE120 // undefine it fo the latest OPIE
-
 namespace OpieTooth {
     BluezApplet::BluezApplet( QWidget *parent, const char *name ) : QWidget( parent, name ) {
         setFixedHeight( AppLnk::smallIconSize() );
         setFixedWidth( AppLnk::smallIconSize() );
-#ifdef OPIE120
+#if OPIE_VERSION < 102010
         bluezOnPixmap = Resource::loadPixmap( "bluetoothapplet/bluezon" );
         bluezOffPixmap = Resource::loadPixmap( "bluetoothapplet/bluezoff" );
         bluezDiscoveryOnPixmap = Resource::loadPixmap( "bluetoothapplet/magglass.png" );
@@ -320,13 +319,13 @@ namespace OpieTooth {
         odebug << "paint bluetooth pixmap" << oendl; 
 
         if (bluezactive) {
-#ifdef OPIE120
+#if OPIE_VERSION < 102010
             p.drawPixmap( 0, -1,  bluezOnPixmap );
 #else
             p.drawPixmap( 0, 0,  bluezOnPixmap );
 #endif
         } else {
-#ifdef OPIE120
+#if OPIE_VERSION < 102010
             p.drawPixmap( 0, -1,  bluezOffPixmap );
 #else
             p.drawPixmap( 0, 0,  bluezOffPixmap );
