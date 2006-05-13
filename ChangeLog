@@ -30,6 +30,7 @@
 	--------
 	* libopiecore: /etc/oz_version renamed to /etc/openzaurus-version (hrw)
 	* libopiecore: SL6000 (tosa) now uses corgi-bl (Dirk Opfer)
+	* library/version.h: introduce integer version code in OPIE_VERSION for conditional compilation
 	
 2005-09-11	Opie 1.2.1
 	
