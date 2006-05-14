@@ -4,8 +4,9 @@
 #define OpieBtObex_H
 
 #include <qobject.h>
-#include <opietooth/services.h>
-#include <opietooth/manager.h>
+#include <services.h>
+#include <manager.h>
+#include <obexpush.h>
 
 namespace Opie {namespace Core {class OProcess;}}
 class QCopChannel;
@@ -59,13 +60,18 @@ namespace OpieObex {
       QString m_outp;
       QString m_bdaddr;
       int m_port;
-      Opie::Core::OProcess *m_send;
+      ObexPush* m_send;
       Opie::Core::OProcess *m_rec;
       bool m_receive : 1;
       OpieTooth::Manager* btManager;
       void shutDownReceive();
 
 private slots:
+
+      // Push process slots
+      void slotPushStatus(QCString&);
+      void slotPushComplete(int);
+      void slotPushError(int);
 
       // the process exited
       void slotExited(Opie::Core::OProcess*) ;
@@ -77,8 +83,6 @@ private slots:
       void sendNow();
       QString parseOut();
       void received();
-      void sendEnd();
-
   };
 };
 

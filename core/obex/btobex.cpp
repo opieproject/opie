@@ -1,7 +1,7 @@
 
 #include "btobex.h"
-#include <opietooth/manager.h>
-#include <opietooth/services.h>
+#include <manager.h>
+#include <services.h>
 
 /* OPIE */
 #include <opie2/oprocess.h>
@@ -65,6 +65,14 @@ void BtObex::send( const QString& fileName, const QString& bdaddr) {
     m_count = 0;
     m_file = fileName;
     m_bdaddr = bdaddr;
+    if (m_send != 0) {
+        if (m_send->isSending())
+            return;
+        else {
+            delete m_send;
+            m_send = 0;
+        }
+    }
     if (m_rec != 0 ) {
         if (m_rec->isRunning() ) {
             emit error(-1 );
@@ -125,29 +133,29 @@ void BtObex::slotFoundServices(const QString&, Services::ValueList svcList)
 }
 
 void BtObex::sendNow(){
+    QString m_dst = "";
+    int result; //function call result
     if ( m_count >= 25 ) { // could not send
         emit error(-1 );
         emit sent(false);
         return;
     }
     // OProcess inititialisation
-    m_send = new OProcess(0, "ussp-push");
-    m_send->setWorkingDirectory( QFileInfo(m_file).dirPath(true) );
-
-    // ussp-push --timeo 30 <btaddr:port> file file
-    *m_send << "ussp-push" << "--timeo 30";
-    *m_send << m_bdaddr + "@" + QString::number(m_port);
-    *m_send << QFile::encodeName(QFileInfo(m_file).fileName());
-    *m_send << QFile::encodeName(QFileInfo(m_file).fileName());
-    m_send->setUseShell(true);
-    
+    m_send = new ObexPush();
     // connect to slots Exited and and StdOut
-    connect(m_send,  SIGNAL(processExited(Opie::Core::OProcess*) ),
-            this, SLOT(slotExited(Opie::Core::OProcess*)) );
-    connect(m_send,  SIGNAL(receivedStdout(Opie::Core::OProcess*, char*,  int)),
-            this, SLOT(slotStdOut(Opie::Core::OProcess*, char*, int) ) );
+    connect(m_send,  SIGNAL(sendComplete(int)),
+            this, SLOT(slotPushComplete(int)) );
+    connect(m_send,  SIGNAL(sendError(int)),
+            this, SLOT(slotPushError(int)) );
+    connect(m_send,  SIGNAL(status(QCString&)),
+            this, SLOT(slotPushStatus(QCString&) ) );
+
+    ::sleep(4);
     // now start it
-    if (!m_send->start(OProcess::NotifyOnExit,  OProcess::AllOutput) ) {
+    result = m_send->send(m_bdaddr, m_port, m_file, m_dst);
+    if (result > 0) //Sending process is actually running
+        return;
+    else if (result < 0) {
         m_count = 25;
         emit error(-1 );
         delete m_send;
@@ -163,9 +171,6 @@ void BtObex::slotExited(OProcess* proc ){
            << proc->exitStatus() << oendl;
     if (proc == m_rec )  // receive process
         received();
-    else if ( proc == m_send ) 
-        sendEnd();
-    
 }
 void BtObex::slotStdOut(OProcess* proc, char* buf, int len){
     if ( proc == m_rec ) { // only receive
@@ -173,6 +178,29 @@ void BtObex::slotStdOut(OProcess* proc, char* buf, int len){
         memcpy( ar.data(), buf, len );
         m_outp.append( ar );
     }
+}
+
+void BtObex::slotPushComplete(int result) {
+    if (result == 0) {
+      delete m_send;
+      m_send=0;
+      emit sent(true);
+    } else { // it failed maybe the other side wasn't ready
+      // let's try it again
+      delete m_send;
+      m_send = 0;
+      sendNow();
+   }
+}
+
+void BtObex::slotPushError(int) {
+    emit error( -1 );
+    delete m_send;
+    m_send = 0;
+}
+
+void BtObex::slotPushStatus(QCString& str) {
+    odebug << str << oendl;
 }
 
 void BtObex::received() {
@@ -187,25 +215,6 @@ void BtObex::received() {
   delete m_rec;
   m_rec = 0;
   receive();
-}
-
-void BtObex::sendEnd() {
-  if (m_send->normalExit() ) {
-    if ( m_send->exitStatus() == 0 ) {
-      delete m_send;
-      m_send=0;
-      emit sent(true);
-    }else if (m_send->exitStatus() != 0 ) { // it failed maybe the other side wasn't ready
-      // let's try it again
-      delete m_send;
-      m_send = 0;
-      sendNow();
-    }
-  }else {
-    emit error( -1 );
-    delete m_send;
-    m_send = 0;
-  }
 }
 
 // This probably doesn't do anything useful for bt.
