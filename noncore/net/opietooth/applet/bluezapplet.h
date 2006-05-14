@@ -70,9 +70,17 @@ public slots:
         bool doListDevice; //If I have to list devices after bringing BT up?
         bool isScanning; //If I'm scanning devices
         bool m_wasOn; //If BT was started by menu?
+    protected:
+        bool m_sync; //If we have to bring BT synchronously
 
 private slots:
         void slotMessage( const QCString& , const QByteArray& );
+        /**
+         * Reacts on device up
+         * @param name device name
+         * @param up if device was brought up
+         */
+        void slotDevice(const QString&, bool);
     };
 };
 

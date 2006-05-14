@@ -126,7 +126,8 @@ void Device::slotExited( OProcess* proc)
         // FIXME hardcoded to hci0 now :(
         m_hci = new OProcess( );
         *m_hci << "hciconfig";
-        *m_hci << "hci0 up";
+        *m_hci << "hci0";
+        *m_hci << "up";
         connect(m_hci, SIGNAL( processExited(Opie::Core::OProcess*) ),
                 this, SLOT( slotExited(Opie::Core::OProcess* ) ) );
         if(!m_hci->start() ){
@@ -151,6 +152,8 @@ void Device::slotExited( OProcess* proc)
       if( ret == 0 ){
         owarn << "attached really really attached" << oendl;
         m_attached = true;
+        //Wait for a device to be brought up
+        ::sleep(1);
         emit device("hci0", true );
       }else{
         owarn << "failed" << oendl;

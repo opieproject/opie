@@ -77,6 +77,7 @@ namespace OpieTooth {
         doListDevice = false;
         isScanning = false;
         m_wasOn = false;
+        m_sync = false;
 
 	// TODO: determine whether this channel has to be closed at destruction time.
         QCopChannel* chan = new QCopChannel("QPE/Bluetooth", this );
@@ -87,6 +88,7 @@ namespace OpieTooth {
 
     BluezApplet::~BluezApplet() {
         if ( btDevice ) {
+            ::system("/etc/init.d/bluetooth stop >/dev/null 2>/dev/null");
             delete btDevice;
         }
         if ( btManager ) {
@@ -127,7 +129,7 @@ namespace OpieTooth {
                 btDevice = new Device( "/dev/tts/1", "any", "921600" );
                 break;
 
-#ifndef OPIE120
+#if OPIE_VERSION >= 102010
             case Model_MyPal_716:
                 btDevice = new Device( "/dev/ttyS1", "bcsp", "921600" );
                 break;
@@ -137,12 +139,10 @@ namespace OpieTooth {
                 btDevice = new Device( "/dev/ttySB0", "bcsp", "230400" );
                 break;
             }
-            if (sync) {
-                ::system("/etc/init.d/bluetooth start >/dev/null 2>/dev/null");
-            } else {
-                QCopEnvelope e("QPE/System", "execute(QString)");
-                e << QString("/etc/init.d/bluetooth start");
-            }
+            m_sync = sync;
+            connect(btDevice, SIGNAL(device(const QString&, bool)),
+                this, SLOT(slotDevice(const QString&, bool)));
+            
         } else {
             ::system("/etc/init.d/bluetooth stop >/dev/null 2>/dev/null");
             if ( btManager ) {
@@ -334,6 +334,23 @@ namespace OpieTooth {
 
         if (bluezDiscoveryActive) {
             p.drawPixmap( 0, 0,  bluezDiscoveryOnPixmap );
+        }
+    }
+    /**
+    * Reacts on device up
+    * @param name device name
+    * @param up if device was brought up
+    */
+    void BluezApplet::slotDevice(const QString& name, bool up)
+    {
+        if (!up)
+            return;
+        odebug << name << " is up" << oendl;
+        if (m_sync) {
+            ::system("/etc/init.d/bluetooth start >/dev/null 2>/dev/null");
+        } else {
+            QCopEnvelope e("QPE/System", "execute(QString)");
+            e << QString("/etc/init.d/bluetooth start");
         }
     }
 };
