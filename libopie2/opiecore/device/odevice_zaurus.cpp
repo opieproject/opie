@@ -240,7 +240,7 @@ void Zaurus::init(const QString& cpu_info)
     {
         case Model_Zaurus_SLB600: // fallthrough
         case Model_Zaurus_SL5500:
-            m_backlightdev = "/sys/class/backlight/locomo-backlight/";
+            m_backlightdev = "/sys/class/backlight/locomo-bl/";
             break;
         default:
             m_backlightdev = "/sys/class/backlight/corgi-bl/";
