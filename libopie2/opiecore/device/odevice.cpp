@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-             =.              (C) 2002-2005 The Opie Team <opie-devel@handhelds.org>
+             =.              (C) 2002-2006 The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -38,6 +38,7 @@
 #include "odevice_zaurus.h"
 #include "odevice_genuineintel.h"
 #include "odevice_htc.h"
+#include "odevice_motorola_ezx.h"
 
 /* QT */
 #include <qapplication.h>
@@ -146,6 +147,7 @@ ODevice *ODevice::inst()
                     else if ( line.contains( "ramses", false ) ) dev = new Internal::Ramses();
                     else if ( line.contains( "Tradesquare.NL", false ) ) dev = new Internal::Beagle();
                     else if ( line.contains( "HTC", false ) ) dev = new Internal::HTC();
+                    else if ( line.contains( "Motorola", false ) ) dev = new Internal::Motorola_EZX();
 
                     else qWarning( "ODevice() - unknown hardware - using default." );
                     break;

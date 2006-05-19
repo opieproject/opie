@@ -1,7 +1,7 @@
 HEADERS    += device/odevice.h          \
               device/odevicebutton.h    \
-	      device/odevice_abstractmobiledevice.h \
-	      device/odevice_beagle.h   \
+              device/odevice_abstractmobiledevice.h \
+              device/odevice_beagle.h   \
               device/odevice_ipaq.h     \
               device/odevice_jornada.h  \
               device/odevice_ramses.h   \
@@ -10,12 +10,13 @@ HEADERS    += device/odevice.h          \
               device/odevice_genuineintel.h   \
               device/odevice_yopy.h  \
               device/odevice_mypal.h \
-              device/odevice_htc.h
+              device/odevice_htc.h \
+              device/odevice_motorola_ezx.h
 
 SOURCES    += device/odevice.cpp        \
               device/odevicebutton.cpp  \
-	      device/odevice_abstractmobiledevice.cpp \
-	      device/odevice_beagle.cpp \
+              device/odevice_abstractmobiledevice.cpp \
+              device/odevice_beagle.cpp \
               device/odevice_ipaq.cpp   \
               device/odevice_jornada.cpp\
               device/odevice_ramses.cpp \
@@ -24,5 +25,6 @@ SOURCES    += device/odevice.cpp        \
               device/odevice_genuineintel.cpp   \
               device/odevice_yopy.cpp \
               device/odevice_mypal.cpp \
-              device/odevice_htc.cpp
+              device/odevice_htc.cpp \
+              device/odevice_motorola_ezx.cpp
 

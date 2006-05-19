@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+                             (C) 2002-2006 The Opie Team <opie-devel@handhelds.org>
               =.
             .=l.
            .>+-=
@@ -8,8 +8,8 @@
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
+ - .   .-<_>     .<>         Foundation; version 2 of the License.
+     ._= =}       :
     .%`+i>       _;_.
     .i_,=:_.      -<s.       This program is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
@@ -124,7 +124,12 @@ enum OModel {
 
     Model_HTC           = ( 9 << 16 ),
     Model_HTC_All       = ( Model_HTC | 0xffff ),
-    Model_HTC_Universal = ( Model_HTC | 0x0001 )
+    Model_HTC_Universal = ( Model_HTC | 0x0001 ),
+
+    Model_Motorola      = ( 9 << 17 ),
+    Model_Motorola_All  = ( Model_Motorola | 0xffff ),
+    Model_Motorola_EZX  = ( Model_Motorola | 0x0001 ),
+
 };
 
 /**
@@ -141,7 +146,8 @@ enum OVendor {
     Vendor_MasterIA,
     Vendor_GenuineIntel,
     Vendor_Asus,
-    Vendor_HTC
+    Vendor_HTC,
+    Vendor_Motorola,
 };
 
 /**
@@ -155,7 +161,9 @@ enum OSystem {
     System_OpenZaurus,
     System_Linupy,
     System_OpenEmbedded,
-    System_PC
+    System_PC,
+    System_OpenEZX,
+    System_Angstrom,
 };
 
 typedef struct {
@@ -390,8 +398,4 @@ extern QCString makeChannel ( const char *str );
 }
 }
 
-
-
-
 #endif
-
