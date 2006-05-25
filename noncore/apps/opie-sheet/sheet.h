@@ -94,7 +94,7 @@ public:
     void Eighth();
     void Ninth();
 
-    bool Expression::Parse(); //parses the expression in RPN format;
+    bool Parse(); //parses the expression in RPN format;
 
 };
 

@@ -19,7 +19,7 @@ Q_OBJECT
     QLabel* zoom;
     QMultiLineEdit* aboutbox;
 public:
-    infowin::infowin( QWidget *parent=0, const char *name=0, WFlags f = 0);
+    infowin( QWidget *parent=0, const char *name=0, WFlags f = 0);
     void setFileSize(int sz) { fileSize->setNum(sz); }
     void setTextSize(int sz) { textSize->setNum(sz); }
     void setRatio(int sz) { ratio->setText(QString().setNum(sz)+"%"); }
