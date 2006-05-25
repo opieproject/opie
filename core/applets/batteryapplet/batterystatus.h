@@ -30,13 +30,13 @@ class BatteryStatus : public QFrame
 public:
     BatteryStatus( const PowerStatus *s, QWidget *parent=0, WFlags f = 0 );
     ~BatteryStatus();
-    void BatteryStatus::UpdateBatteryStatus();
+    void UpdateBatteryStatus();
     void updatePercent( int );
     QSize sizeHint() const;
 protected:
     void drawSegment( QPainter *p, const QRect &r, const QColor &topgrad, const QColor &botgrad, const QColor &highlight, int hightlight_height );
     void paintEvent( QPaintEvent *pe );
-    bool BatteryStatus::getProcApmStatusIpaq();
+    bool getProcApmStatusIpaq();
 
 private:
     QString  statusText() const;
