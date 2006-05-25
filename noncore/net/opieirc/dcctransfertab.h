@@ -18,11 +18,11 @@ public:
 
     DCCTransferTab(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
     ~DCCTransferTab();
-    virtual QString DCCTransferTab::title();
-    virtual IRCSession* DCCTransferTab::session(){return 0;};
-    virtual void DCCTransferTab::appendText(QString){};
-    virtual void DCCTransferTab::remove();
-    virtual void DCCTransferTab::settingsChanged() {};
+    virtual QString title();
+    virtual IRCSession* session(){return 0;};
+    virtual void appendText(QString){};
+    virtual void remove();
+    virtual void settingsChanged() {};
     void addTransfer(DCCTransfer::Type type, Q_UINT32 ip4Addr, 
             Q_UINT16 port, const QString &filename,
             const QString &nickname, unsigned int size);
