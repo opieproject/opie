@@ -48,7 +48,7 @@ class MFrequencySpectrum : public QWidget
     void drawLine( QPainter* p, int x, int y, int width, const QColor& c );
     void drawTopLine( QPainter* p, int x, int y, int width, const QColor& c );
     void drawBottomLine( QPainter* p, int x, int y, int width, const QColor& c );
-    void MFrequencySpectrum::drawBar( QPainter* p, int x, int y, int width, int height, int maxheight );
+    void drawBar( QPainter* p, int x, int y, int width, int height, int maxheight );
 
   private:
     int _channels;

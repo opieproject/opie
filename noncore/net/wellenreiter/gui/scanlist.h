@@ -66,7 +66,7 @@ class MScanListView: public Opie::Ui::OListView
 class MScanListItem: public Opie::Ui::OListViewItem
 {
   public:
-    MScanListItem::MScanListItem( QListView* parent,
+                   MScanListItem( QListView* parent,
                                   const QString& type = "unknown",
                                   const QString& essid = "unknown",
                                   const QString& macaddr = "unknown",
@@ -75,7 +75,7 @@ class MScanListItem: public Opie::Ui::OListViewItem
                                   int signal = 0,
                                   bool probed = false );
 
-    MScanListItem::MScanListItem( QListViewItem* parent,
+                   MScanListItem( QListViewItem* parent,
                                   const QString& type = "unknown",
                                   const QString& essid = "unknown",
                                   const QString& macaddr = "unknown",
