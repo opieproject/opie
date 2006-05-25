@@ -40,7 +40,7 @@ public:
     Q_REFCOUNT
 
 protected:
-    void PolishedDecoration::drawBlend( QPainter *, const QRect &r, const QColor &c1, const QColor&c2 ) const;
+    void drawBlend( QPainter *, const QRect &r, const QColor &c1, const QColor&c2 ) const;
 
 };
 
