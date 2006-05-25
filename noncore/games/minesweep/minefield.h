@@ -82,8 +82,8 @@ private:
     void setCellSize( int );
     
     State stat;
-    void MineField::setState( State st );
-    void MineField::placeMines();
+    void setState( State st );
+    void placeMines();
     enum FlagAction { NoAction, FlagOn, FlagNext };
     FlagAction flagAction;
     bool ignoreClick;

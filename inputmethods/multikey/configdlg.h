@@ -13,7 +13,7 @@ class ConfigDlg : public QDialog
 
 public:
     ConfigDlg ();
-    static QStringList ConfigDlg::loadSw();
+    static QStringList loadSw();
 
 signals:
     void pickboardToggled(bool on_off);
