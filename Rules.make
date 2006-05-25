@@ -201,7 +201,6 @@ $(OPIEDIR)/stamp-headers :
 	( cd include/opie2 && ln -sf ../../libopie2/opiebluez/*.h .; )
 	# auxilliary libraries
 	( cd include/opie2 && ln -sf ../../libqtaux/*.h .; )
-	( cd include/sl && ln -sf ../../libslcompat/*.h .; )
 	( cd include/opietooth && ln -sf ../../noncore/net/opietooth/lib/*.h .; )
 	( cd include/ && ln -sf ../noncore/net/ftplib/*.h .; )
 	( cd include/ && ln -sf ../inputmethods/pickboard/pickboardcfg.h .; )
@@ -245,7 +244,6 @@ $(OPIEDIR)/stamp-headers-x11 :
 	( cd include/opie2 && ln -sf ../../libopie2/opiebluez/*.h .; )
 	# auxilliary libraries
 	( cd include/opie2 && ln -sf ../../libqtaux/*.h .; )
-	( cd include/sl && ln -sf ../../libslcompat/*.h .; )
 	( cd include/opietooth && ln -s ../../noncore/net/opietooth/lib/*.h .; )
 	( cd include/ && ln -sf ../noncore/net/ftplib/*.h .; )
 	( cd include/ && ln -sf ../inputmethods/pickboard/pickboardcfg.h .; )

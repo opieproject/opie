@@ -292,6 +292,5 @@ comment ""
   depends on EXPERIMENTAL
 menu "Experimental"
   depends on EXPERIMENTAL
-  source libslcompat/config.in
   source core/qws/config.in
 endmenu
