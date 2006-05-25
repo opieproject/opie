@@ -80,7 +80,7 @@ int InputMethod::operator <=(const InputMethod& o) const
 class IMToolButton : public QToolButton
 {
 public:
-    IMToolButton::IMToolButton( QWidget *parent ) : QToolButton( parent )
+    IMToolButton( QWidget *parent ) : QToolButton( parent )
     { setWFlags( WStyle_Tool ); 
       setBackgroundOrigin( ParentOrigin );
       setBackgroundMode( PaletteBackground );
