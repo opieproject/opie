@@ -135,6 +135,10 @@ namespace OpieTooth {
                 break;
 #endif
 
+	    case Model_iPAQ_H22xx:
+		btDevice = new Device( "/dev/tts/3", "any", "921600" );
+		break;
+
             default:
                 btDevice = new Device( "/dev/ttySB0", "bcsp", "230400" );
                 break;
