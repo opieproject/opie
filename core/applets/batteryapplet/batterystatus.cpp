@@ -82,11 +82,9 @@ bool BatteryStatus::getProcApmStatusIpaq() {
                 }
             }
         }
-    } else {
-        QMessageBox::warning(this, tr("Failure"),tr("could not open file"));
+	procApmIpaq.close();
     }
 
-    procApmIpaq.close();
     jackPercent = perc2.toInt();
     ipaqPercent = perc1.toInt();
 
