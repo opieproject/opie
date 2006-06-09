@@ -216,34 +216,15 @@ bool Motorola_EZX::setLedState( OLed which, OLedState st )
 
 int Motorola_EZX::displayBrightnessResolution() const
 {
-     // Currently not supported
-    qDebug( "Motorola_EZX::displayBrightnessResolution: ODevice handling not yet implemented" );
-    return 100;
-
-#if 0
     int res = 1;
-    if (m_embedix)
+    int fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
+    if ( fd )
     {
-        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_RDWR|O_NONBLOCK );
-        if ( fd )
-        {
-            int value = ::ioctl( fd, SHARP_FL_IOCTL_GET_STEP, 0 );
-            ::close( fd );
-            return value ? value : res;
-        }
-    }
-    else
-    {
-        int fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
-        if ( fd )
-        {
-            char buf[100];
-            if ( ::read( fd, &buf[0], sizeof buf ) ) ::sscanf( &buf[0], "%d", &res );
-            ::close( fd );
-        }
+        char buf[100];
+        if ( ::read( fd, &buf[0], sizeof buf ) ) ::sscanf( &buf[0], "%d", &res );
+        ::close( fd );
     }
     return res;
-#endif
 }
 
 bool Motorola_EZX::setDisplayBrightness( int bright )
@@ -251,7 +232,6 @@ bool Motorola_EZX::setDisplayBrightness( int bright )
     qDebug( "Motorola_EZX::setDisplayBrightness( %d )", bright );
     return false;
 
-#if 0
     bool res = false;
 
     if ( bright > 255 ) bright = 255;
@@ -260,28 +240,15 @@ bool Motorola_EZX::setDisplayBrightness( int bright )
     int numberOfSteps = displayBrightnessResolution();
     int val = ( bright == 1 ) ? 1 : ( bright * numberOfSteps ) / 255;
 
-    if ( m_embedix )
+    int fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
+    if ( fd )
     {
-        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );
-        if ( fd )
-        {
-            res = ( ::ioctl( fd, SHARP_FL_IOCTL_STEP_CONTRAST, val ) == 0 );
-            ::close( fd );
-        }
-    }
-    else
-    {
-        int fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
-        if ( fd )
-        {
-            char buf[100];
-            int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-            res = ( ::write( fd, &buf[0], len ) == 0 );
-            ::close( fd );
-        }
+        char buf[100];
+        int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
+        res = ( ::write( fd, &buf[0], len ) == 0 );
+        ::close( fd );
     }
     return res;
-#endif
 }
 
 bool Motorola_EZX::setDisplayStatus( bool on )
