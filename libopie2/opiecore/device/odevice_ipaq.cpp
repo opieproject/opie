@@ -31,6 +31,7 @@
 
 /* QT */
 #include <qapplication.h>
+#include <qdir.h>
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qwindowsystem_qws.h>
@@ -379,12 +380,30 @@ bool iPAQ::setDisplayBrightness ( int bright )
 
     switch ( model()) {
     case Model_iPAQ_H191x:
-        if ( !bright )
-            cmdline = QString::fromLatin1( "echo 4 > /sys/class/backlight/pxafb/power");
-        else
-            cmdline = QString::fromLatin1( "echo 0 > /sys/class/backlight/pxafb/power; echo %1 > /sys/class/backlight/pxafb/brightness" ).arg( bright );
-        // No Global::shellQuote as we gurantee it to be sane
-        res = ( ::system( QFile::encodeName(cmdline) ) == 0 );
+	{
+	    QDir sysClass( "/sys/class/backlight/pxafb/" );
+	    sysClass.setFilter(QDir::Dirs);
+	    int fd;
+	    if ( sysClass.exists() ) {
+		QString sysClassPath = sysClass.absFilePath( "/sys/class/backlight/pxafb/power" );
+		fd = ::open( sysClassPath, O_WRONLY | O_NONBLOCK );
+		if ( fd ) {
+		    char buf[10];
+		    buf[0] = bright ? 0 : 4;
+		    buf[1] = '\0';
+		    res = ( ::write( fd, &buf[0], 2 ) == 0 );
+		    ::close( fd );
+		}
+		sysClassPath = sysClass.absFilePath( "/sys/class/backlight/pxafb/brightness" );
+		fd = ::open( sysClassPath, O_WRONLY | O_NONBLOCK );
+		if ( fd ) {
+		    char buf[100];
+		    int len = ::snprintf( &buf[0], sizeof buf, "%d", bright );
+		    res = ( ::write( fd, &buf[0], len ) == 0 );
+		    ::close( fd );
+		}
+	    }
+	}
         break; 
 	
     case Model_iPAQ_HX4700:
@@ -437,7 +456,20 @@ bool iPAQ::setDisplayStatus ( bool on )
     QString cmdline;
 
     if ( model() == Model_iPAQ_H191x ) {
-        cmdline = QString::fromLatin1( "echo %1 > /sys/class/lcd/pxafb/power; echo %2 > /sys/class/backlight/pxafb/power").arg( on ? "0" : "4" ).arg( on ? "0" : "4" );
+	QDir sysClass( "/sys/class/lcd/pxafb/" );
+	sysClass.setFilter(QDir::Dirs);
+	if ( sysClass.exists() ) {
+	    QString sysClassPath = sysClass.absFilePath( "/sys/class/lcd/pxafb/power" );
+	    int fd = ::open( sysClassPath, O_WRONLY | O_NONBLOCK );
+	    if ( fd ) {
+		char buf[10];
+		buf[0] = on ? 0 : 4;
+		buf[1] = '\0';
+		res = ( ::write( fd, &buf[0], 2 ) == 0 );
+		::close( fd );
+	    }
+	}
+	return res;
     } else {
         return OAbstractMobileDevice::setDisplayStatus(on);
     }
@@ -449,7 +481,12 @@ bool iPAQ::setDisplayStatus ( bool on )
 
 bool iPAQ::hasLightSensor() const
 {
-    return true;
+    switch (model()) {
+	case Model_iPAQ_H191x:
+	    return false;
+	default:
+	    return true;
+    }
 }
 
 int iPAQ::readLightSensor()
