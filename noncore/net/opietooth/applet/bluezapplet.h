@@ -58,6 +58,7 @@ public slots:
         int setBluezStatus(int, bool sync = false);
         int checkBluezDiscoveryStatus();
         int setBluezDiscoveryStatus(int);
+        int setObexRecieveStatus(int);
 
     private:
         Device* btDevice;
@@ -65,8 +66,11 @@ public slots:
         QPixmap bluezOnPixmap;
         QPixmap bluezOffPixmap;
         QPixmap bluezDiscoveryOnPixmap;
+        QPixmap bluezReceiveOnPixmap;
         bool bluezactive;
         bool bluezDiscoveryActive;
+        bool bluezReceiveActive;
+        bool bluezReceiveChanged;
         bool doListDevice; //If I have to list devices after bringing BT up?
         bool isScanning; //If I'm scanning devices
         bool m_wasOn; //If BT was started by menu?

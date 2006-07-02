@@ -64,16 +64,20 @@ namespace OpieTooth {
         bluezOnPixmap = Resource::loadPixmap( "bluetoothapplet/bluezon" );
         bluezOffPixmap = Resource::loadPixmap( "bluetoothapplet/bluezoff" );
         bluezDiscoveryOnPixmap = Resource::loadPixmap( "bluetoothapplet/magglass.png" );
+        bluezReceiveOnPixmap = Resource::loadPixmap( "bluetoothapplet/receive.png" );
 #else
         bluezOnPixmap = OResource::loadImage( "bluetoothapplet/bluezon", OResource::SmallIcon );
         bluezOffPixmap = OResource::loadImage( "bluetoothapplet/bluezoff", Opie::Core::OResource::SmallIcon );
         bluezDiscoveryOnPixmap = OResource::loadImage( "bluetoothapplet/bluezondiscovery", Opie::Core::OResource::SmallIcon );
+        bluezReceiveOnPixmap = )Resource::loadImage( "bluetoothapplet/bluezonreceive", Opie::Core::OResource::SmallIcon );
 #endif
         startTimer(2000);
         btDevice = 0;
         btManager = 0;
         bluezactive = false;
         bluezDiscoveryActive = false;
+        bluezReceiveActive = false;
+        bluezReceiveChanged = false;
         doListDevice = false;
         isScanning = false;
         m_wasOn = false;
@@ -134,10 +138,9 @@ namespace OpieTooth {
                 btDevice = new Device( "/dev/ttyS1", "bcsp", "921600" );
                 break;
 #endif
-
-	    case Model_iPAQ_H22xx:
-		btDevice = new Device( "/dev/tts/3", "any", "921600" );
-		break;
+           case Model_iPAQ_H22xx:
+               btDevice = new Device( "/dev/tts/3", "any", "921600" );
+               break;
 
             default:
                 btDevice = new Device( "/dev/ttySB0", "bcsp", "230400" );
@@ -148,6 +151,7 @@ namespace OpieTooth {
                 this, SLOT(slotDevice(const QString&, bool)));
             
         } else {
+            setObexRecieveStatus(0);
             ::system("/etc/init.d/bluetooth stop >/dev/null 2>/dev/null");
             if ( btManager ) {
                 delete btManager;
@@ -168,8 +172,18 @@ namespace OpieTooth {
     int BluezApplet::setBluezDiscoveryStatus(int d) {
       return bluezDiscoveryActive = d;
     }
-
-    // FIXME mbhaynie
+	
+    int BluezApplet::setObexRecieveStatus(int d) {
+        {
+    	    QCopEnvelope e ( "QPE/Obex", "btreceive(int)" );
+	        e << ( d ? 1 : 0 );
+        }
+		bluezReceiveActive = (bool)(d != 0);
+		bluezReceiveChanged = true;
+		return d;
+    }
+    
+	// FIXME mbhaynie
     // receiver for QCopChannel("QPE/Bluetooth") messages.
     void BluezApplet::slotMessage( const QCString& str, const QByteArray& )
     {
@@ -244,12 +258,13 @@ namespace OpieTooth {
         //menu->insertItem( tr("Signal strength"), signal,  5);
         //menu->insertSeparator(8);
 
-        if (bluezDiscoveryActive) {
-            menu->insertItem( tr("Disable discovery"), 3 );
-        } else {
-            menu->insertItem( tr("Enable discovery"), 4 );
-        }
-
+        if (bluezactive) {
+	        if (bluezReceiveActive) {
+                menu->insertItem( tr("Disable receive"), 3 );
+        	} else {
+                menu->insertItem( tr("Enable receive"), 4 );
+        	}
+		}
 
         QPoint p = mapToGlobal( QPoint(1, -menu->sizeHint().height()-1) );
         ret = menu->exec(p, 0);
@@ -270,12 +285,12 @@ namespace OpieTooth {
             timerEvent( 0 );
             break;
         case 3:
-            setBluezDiscoveryStatus(0);
+            setObexRecieveStatus(0);
             timerEvent( 0 );
             break;
         case 4:
-            setBluezDiscoveryStatus(1);
-            timerEvent(0 );
+            setObexRecieveStatus(1);
+            timerEvent( 0 );
             break;
             //case 7:
             // With table of currently-detected devices.
@@ -306,12 +321,15 @@ namespace OpieTooth {
         bluezDiscoveryActive = checkBluezDiscoveryStatus();
 
         if ((bluezactive != oldactive) || 
-            (bluezDiscoveryActive != olddiscovery))
+            (bluezDiscoveryActive != olddiscovery) ||
+			bluezReceiveChanged)
             update();
         if (bluezactive && doListDevice) {
             const QByteArray arr;
             slotMessage("listDevices()", arr);
         }
+		if (bluezReceiveChanged)
+			bluezReceiveChanged = false;
     }
 
 /**
@@ -339,7 +357,11 @@ namespace OpieTooth {
         if (bluezDiscoveryActive) {
             p.drawPixmap( 0, 0,  bluezDiscoveryOnPixmap );
         }
+        if (bluezReceiveActive) {
+            p.drawPixmap( 0, 0,  bluezReceiveOnPixmap );
+        }
     }
+
     /**
     * Reacts on device up
     * @param name device name
