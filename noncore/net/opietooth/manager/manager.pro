@@ -9,7 +9,7 @@ HEADERS         = btconnectionitem.h btdeviceitem.h \
 		  rfcommassigndialogimpl.h rfcommassigndialogitem.h \
 		  devicehandler.h rfcpopup.h obexpopup.h obexftpopup.h \
 		  rfcommhelper.h panpopup.h dunpopup.h rfcommconfhandler.h \
-          servicesdialog.h btconfhandler.h
+		  servicesdialog.h btconfhandler.h hidpopup.h
 		  
 SOURCES         = btconnectionitem.cpp btdeviceitem.cpp \ 
 	          btserviceitem.cpp filelistitem.cpp stdpopups.cpp \
@@ -21,7 +21,7 @@ SOURCES         = btconnectionitem.cpp btdeviceitem.cpp \
 		  obexdialog.cpp devicehandler.cpp \
 		  rfcpopup.cpp obexpopup.cpp obexftpopup.cpp obexftpdialog.cpp \
 		  rfcommhelper.cpp panpopup.cpp dunpopup.cpp rfcommconfhandler.cpp \
-          servicesdialog.cpp btconfhandler.cpp
+		  servicesdialog.cpp btconfhandler.cpp hidpopup.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 INCLUDEPATH     += $(OPIEDIR)/noncore/net/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include

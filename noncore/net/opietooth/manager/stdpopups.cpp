@@ -4,6 +4,7 @@
 #include "obexftpopup.h"
 #include "panpopup.h"
 #include "dunpopup.h"
+#include "hidpopup.h"
 
 #include "stdpopups.h"
 
@@ -24,6 +25,10 @@ extern "C" {
 
     QPopupMenu* newDunPopup( const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item ) {
         return new OpieTooth::DunPopup(service, item);
+    }
+
+    QPopupMenu* newHidPopup( const OpieTooth::Services& service,  OpieTooth::BTDeviceItem* item ) {
+        return new OpieTooth::HidPopup(service, item);
     }
 }
 

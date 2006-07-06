@@ -29,6 +29,7 @@ namespace OpieTooth {
         serviceIcons.insert( 4361 , "phone_16"); // CordlessTelephony
         serviceIcons.insert( 4362 , "audio_16"); // AudioSource
         serviceIcons.insert( 4363 , "audio_16"); // AudioSink
+        serviceIcons.insert( 4388 , "other_16" ); //Human Interface Device
         serviceIcons.insert( 4390 , "print_16" ); //HCR_Print
         serviceIcons.insert( 4392 , "phone_16" ); //Common_ISDN_Access
 

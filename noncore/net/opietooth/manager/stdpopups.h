@@ -15,6 +15,7 @@ extern "C" {
     QPopupMenu* newObexPushPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* );
     QPopupMenu* newPanPopup( const OpieTooth::Services&, OpieTooth::BTDeviceItem* );
     QPopupMenu* newDunPopup( const OpieTooth::Services&, OpieTooth::BTDeviceItem* );
+    QPopupMenu* newHidPopup( const OpieTooth::Services&, OpieTooth::BTDeviceItem* );
     QPopupMenu* newObexFtpPopup( const OpieTooth::Services&, OpieTooth::BTDeviceItem* );
 }
 
