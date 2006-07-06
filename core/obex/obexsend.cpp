@@ -148,7 +148,7 @@ void SendWidget::slotStartIrda() {
         return;
     }
     setReceiverStatus( m_irDaIt.key(), tr("Start sending") );
-    m_obex->send( m_file );
+    m_obex->send( m_file, tr("noaddress") );
 }
 
 void SendWidget::dispatchBt( const QCString& str, const QByteArray& ar ) {

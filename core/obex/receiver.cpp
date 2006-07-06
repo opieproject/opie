@@ -1,4 +1,6 @@
 #include "obex.h"
+#include "btobex.h"
+#include "obexbase.h"
 #include "receiver.h"
 using namespace OpieObex;
 
@@ -26,8 +28,11 @@ using namespace Opie::Core;
 
 /* TRANSLATOR OpieObex::Receiver */
 
-Receiver::Receiver() {
-    m_obex = new Obex(this, "Receiver");
+Receiver::Receiver(RecType type) {
+    if (type == REC_IRDA)
+        m_obex = new Obex(this, "Receiver");
+    else
+        m_obex = new BtObex(this, "Receiver");
     connect(m_obex, SIGNAL(receivedFile(const QString&) ),
             this, SLOT(slotReceived(const QString&) ) );
     m_obex->receive();

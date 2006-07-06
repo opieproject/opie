@@ -5,16 +5,22 @@
 #include <qvbox.h>
 #include <qstring.h>
 
+//Receiver type
+typedef enum _RecType {
+    REC_IRDA = 0, 
+    REC_BLUETOOTH = 1
+} RecType;
+
 class QLabel;
 class QTextView;
 namespace OpieObex {
-    class Obex;
+    class ObexBase;
     class OtherHandler;
     class Receiver : public QObject {
         Q_OBJECT
     public:
         enum { Datebook , AddressBook, Other };
-        Receiver();
+        Receiver(RecType type);
         ~Receiver();
 
     private:
@@ -32,7 +38,7 @@ namespace OpieObex {
         void slotReceived( const QString& );
 
     private:
-        Obex* m_obex;
+        ObexBase* m_obex; //IR obex
     };
 
     class OtherHandler : public QVBox {

@@ -1,3 +1,33 @@
+/*
+               =.            This file is part of the OPIE Project
+             .=l.            Copyright (c)  2002 Maximilian Reiss <max.reiss@gmx.de>
+           .>+-=
+ _;:,     .>    :=|.         This library is free software; you can
+.> <,   >  .   <=           redistribute it and/or  modify it under
+:=1 )Y*s>-.--   :            the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; version 2 of the License.
+     ._= =}       :
+    .%+i>       _;_.
+    .i_,=:_.      -<s.       This library is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|     MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>:      PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .     .:        details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=            this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+
+*/
+/*
+ * The Infrared OBEX handling class implementation
+ */
 
 #include "obex.h"
 
@@ -16,24 +46,17 @@ using namespace Opie::Core;
 /* TRANSLATOR OpieObex::Obex */
 
 Obex::Obex( QObject *parent, const char* name )
-  : QObject(parent, name )
+  : ObexBase(parent, name )
 {
     m_rec = 0;
     m_send=0;
-    m_count = 0;
-    m_receive = false;
-    connect( this, SIGNAL(error(int) ), // for recovering to receive
-             SLOT(slotError() ) );
-    connect( this, SIGNAL(sent(bool) ),
-             SLOT(slotError() ) );
 };
 Obex::~Obex() {
     delete m_rec;
     delete m_send;
 }
 void Obex::receive()  {
-    m_receive = true;
-    m_outp = QString::null;
+    ObexBase::receive();
     m_rec = new OProcess();
     *m_rec << "irobex_palm3";
     // connect to the necessary slots
@@ -50,9 +73,9 @@ void Obex::receive()  {
     }
 }
 
-void Obex::send( const QString& fileName) { // if currently receiving stop it send receive
-    m_count = 0;
-    m_file = fileName;
+// if currently receiving stop it send receive
+void Obex::send(const QString& fileName, const QString& addr) { 
+    ObexBase::send(fileName, addr);
     if (m_rec != 0 ) {
         if (m_rec->isRunning() ) {
             emit error(-1 );
@@ -165,10 +188,12 @@ QString Obex::parseOut(     ){
  * when sent is done slotError is called we  will start receive again
  */
 void Obex::slotError() {
+    ObexBase::slotError();
     if ( m_receive )
         receive();
 };
 void Obex::setReceiveEnabled( bool receive ) {
+    ObexBase::setReceiveEnabled(receive);
     if ( !receive ) { //
         m_receive = false;
         shutDownReceive();

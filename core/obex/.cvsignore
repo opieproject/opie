@@ -2,3 +2,5 @@ Makefile
 moc_*
 .moc
 .obj
+obexsendbase.h
+obexsendbase.cpp

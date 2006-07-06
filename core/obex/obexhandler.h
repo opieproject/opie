@@ -3,6 +3,7 @@
 
 #include <qobject.h>
 #include <qstring.h>
+#include "receiver.h"
 
 namespace OpieObex {
     /*
@@ -21,7 +22,7 @@ namespace OpieObex {
 
     private slots:
         void doSend(const QString&,const QString& );
-        void doReceive(bool b);
+        void doReceive(RecType type, bool b);
         void slotSent();
 
     private slots: // QCOP message
@@ -29,9 +30,9 @@ namespace OpieObex {
 
     private:
         SendWidget* m_sender;
-        Receiver* m_receiver;
-        bool m_wasRec : 1;
-
+        Receiver* m_receiver[2]; //For IRDA and Bluetooth
+        bool m_wasRec[2];
+        RecType m_type; //receiver type (IRDA or Bluetooth)
     };
 }
 
