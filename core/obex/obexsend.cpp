@@ -11,7 +11,7 @@ using namespace OpieObex;
 /* OPIE */
 #include <opie2/odebug.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 using namespace Opie::Core;
 
@@ -74,7 +74,7 @@ int SendWidget::addReceiver(const char *r, const char *icon)
 {
     QListViewItem * item = new QListViewItem( receiverList, 0 );
     item->setText( 0, r);
-    item->setPixmap( 1, Resource::loadPixmap( icon ) );
+    item->setPixmap( 1, OResource::loadPixmap( icon ) );
 
     int id=receivers.count();
     receivers[id]=item;
@@ -222,10 +222,10 @@ void SendWidget::scan_for_receivers()
 void SendWidget::toggle_receiver(QListViewItem* item)
 {
     // toggle the state of an individual receiver.
-    if(item->pixmap(2))
-        item->setPixmap(2,QPixmap());
+    if (item->pixmap(2))
+        item->setPixmap(2, QPixmap());
     else
-        item->setPixmap(2,Resource::loadPixmap("obex/check.png"));
+        item->setPixmap(2, OResource::loadPixmap("obex/check.png"));
 }
 
 
