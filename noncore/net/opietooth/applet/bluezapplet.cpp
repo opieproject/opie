@@ -69,7 +69,7 @@ namespace OpieTooth {
         bluezOnPixmap = OResource::loadImage( "bluetoothapplet/bluezon", OResource::SmallIcon );
         bluezOffPixmap = OResource::loadImage( "bluetoothapplet/bluezoff", Opie::Core::OResource::SmallIcon );
         bluezDiscoveryOnPixmap = OResource::loadImage( "bluetoothapplet/bluezondiscovery", Opie::Core::OResource::SmallIcon );
-        bluezReceiveOnPixmap = )Resource::loadImage( "bluetoothapplet/bluezonreceive", Opie::Core::OResource::SmallIcon );
+        bluezReceiveOnPixmap = Resource::loadImage( "bluetoothapplet/bluezonreceive", Opie::Core::OResource::SmallIcon );
 #endif
         startTimer(2000);
         btDevice = 0;
@@ -138,9 +138,9 @@ namespace OpieTooth {
                 btDevice = new Device( "/dev/ttyS1", "bcsp", "921600" );
                 break;
 #endif
-           case Model_iPAQ_H22xx:
-               btDevice = new Device( "/dev/tts/3", "any", "921600" );
-               break;
+            case Model_iPAQ_H22xx:
+                btDevice = new Device( "/dev/tts/3", "any", "921600" );
+                break;
 
             default:
                 btDevice = new Device( "/dev/ttySB0", "bcsp", "230400" );
