@@ -12,6 +12,7 @@ using namespace OpieObex;
 #include <opie2/odebug.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <opie2/oresource.h>
+#include <qpe/version.h>
 
 using namespace Opie::Core;
 
@@ -23,6 +24,11 @@ using namespace Opie::Core;
 
 #include <unistd.h>
 /* TRANSLATOR OpieObex::SendWidget */
+
+/* Just for backward compatibility */
+#if OPIE_VERSION < 102010
+    #define OResource Resource
+#endif
 
 SendWidget::SendWidget( QWidget* parent, const char* name )
     : obexSendBase( parent, name ) {
