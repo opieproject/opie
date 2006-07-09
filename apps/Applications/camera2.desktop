@@ -1,0 +1,26 @@
+[Desktop Entry]
+Exec=camera2
+File=camera2
+Icon=camera2/Camera
+Type=Application
+Name=OpieCam2
+Comment=A Camera Program
+Name[de]=Kamera2
+Comment[de]=Ein Kamera-Programm
+Name[fr]=Photo2
+Comment[fr]=Gestionnaire de photos et images
+Name[it]=Telecamera2
+Comment[it]=Programma per telecamera
+Name[pt]=Câmera2
+Comment[pt]=Uma aplicação de câmera
+Name[pt_BR]=Câmera2
+Comment[pt_BR]=Uma aplicação de câmera
+Name[sl]=OpieKamera2
+Comment[sl]=Program za kamero
+Naam[nl]=Camera2
+Comment[nl]=Een camerabesturingsprogramma
+Name[ru]=Камера2
+Comment[ru]=Программа для управления (фото)камерой
+Name[lv]=OpieCam2
+Comment[lv]=Opie Kameras Programma
+

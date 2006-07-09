@@ -20,6 +20,7 @@ CONFIG_CALC2	noncore/tools/calc2	calc2.pro
 CONFIG_CALCULATOR	noncore/tools/calculator	calculator.pro
 CONFIG_CALIBRATE	core/apps/calibrate	calibrate.pro
 CONFIG_CAMERA	noncore/multimedia/camera	camera.pro
+CONFIG_CAMERA2	noncore/multimedia/camera2	camera2.pro
 CONFIG_CARDMON	core/applets/cardmon	cardmon.pro
 CONFIG_CHECKBOOK	noncore/apps/checkbook	checkbook.pro
 CONFIG_CITYTIME	core/settings/citytime	citytime.pro

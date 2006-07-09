@@ -1,15 +1,30 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2006 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the Qtopia Environment.
 **
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
+** This program is free software; you can redistribute it and/or modify it
+** under the terms of the GNU General Public License as published by the
+** Free Software Foundation; either version 2 of the License, or (at your
+** option) any later version.
 **
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+** A copy of the GNU GPL license version 2 is included in this package as
+** LICENSE.GPL.
+**
+** This program is distributed in the hope that it will be useful, but
+** WITHOUT ANY WARRANTY; without even the implied warranty of
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+** See the GNU General Public License for more details.
+**
+** In addition, as a special exception Trolltech gives permission to link
+** the code of this program with Qtopia applications copyrighted, developed
+** and distributed by Trolltech under the terms of the Qtopia Personal Use
+** License Agreement. You must comply with the GNU General Public License
+** in all respects for all of the code used other than the applications
+** licensed under the Qtopia Personal Use License Agreement. If you modify
+** this file, you may extend this exception to your version of the file,
+** but you are not obligated to do so. If you do not wish to do so, delete
+** this exception statement from your version.
 **
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
@@ -20,18 +35,21 @@
 
 #include "timestring.h"
 #include <qobject.h>
-#include <qpe/qpeapplication.h> //for qApp
+#include <qdatetime.h>
+#include <qapplication.h>
 #include "config.h"
 
+#include <time.h>
 
-class TimeStringFormatKeeper : public QObject
+
+class TimeStringFormat : public QObject
 {
     Q_OBJECT
 public:
     static DateFormat currentFormat()
     {
 	if ( !self )
-	    self  = new TimeStringFormatKeeper;
+	    self  = new TimeStringFormat;
 	return self->format;
     }
 private slots:
@@ -40,24 +58,24 @@ private slots:
 	format = f;
     }
 private:
-    static TimeStringFormatKeeper *self;
+    static TimeStringFormat *self;
     DateFormat format;
 
-    TimeStringFormatKeeper()
+    TimeStringFormat()
 	: QObject( qApp )
     {
 	Config config("qpe");
 	config.setGroup( "Date" );
-	format = DateFormat(QChar(config.readEntry("Separator", "/")[0]),
-		(DateFormat::Order)config .readNumEntry("ShortOrder", DateFormat::DayMonthYear),
-		(DateFormat::Order)config.readNumEntry("LongOrder", DateFormat::DayMonthYear));
+	format = ::DateFormat(QChar(config.readEntry("Separator", "/")[0]),
+		(::DateFormat::Order)config.readNumEntry("ShortOrder", ::DateFormat::DayMonthYear),
+		(::DateFormat::Order)config.readNumEntry("LongOrder", ::DateFormat::DayMonthYear));
 
 	connect( qApp, SIGNAL( dateFormatChanged(DateFormat) ),
 		 this, SLOT( formatChanged(DateFormat) ) );
     }
 };
 
-TimeStringFormatKeeper *TimeStringFormatKeeper::self = 0;
+TimeStringFormat *TimeStringFormat::self = 0;
 
 QString DateFormat::toNumberString() const
 {
@@ -67,13 +85,13 @@ QString DateFormat::toNumberString() const
 	// switch on the relavent 3 bits.
 	switch((_shortOrder >> (i * 3)) & 0x0007) {
 	    case 0x0001:
-		buf += QObject::tr( "D" , "Shortcut for Day");
+		buf += TimeStringFormat::tr( "D", "first letter of the word 'Day'" );
 		break;
 	    case 0x0002:
-		buf += QObject::tr( "M", "Shortcur for Month" );
+		buf += TimeStringFormat::tr( "M" , "first letter of the word 'Month'" );
 		break;
 	    case 0x0004:
-		buf += QObject::tr( "Y" );
+		buf += TimeStringFormat::tr( "Y" , "first letter of the word 'Year'" );
 		break;
 	}
 	if (i < 2)
@@ -90,7 +108,7 @@ QString DateFormat::toWordString() const
 	// switch on the relavent 3 bits.
 	switch((_longOrder >> (i * 3)) & 0x0007) {
 	    case 0x0001:
-		buf += QObject::tr( "day" );
+		buf += TimeStringFormat::tr( "day", "in month" );
 		if (i < 2) {
 		    if ((_shortOrder << ((i+1) * 3)) & 0x0007)
 			buf += ", ";
@@ -99,12 +117,12 @@ QString DateFormat::toWordString() const
 		}
 		break;
 	    case 0x0002:
-		buf += QObject::tr( "month" );
+		buf += TimeStringFormat::tr( "month" );
 		if (i < 2)
 		    buf += " ";
 		break;
 	    case 0x0004:
-		buf += QObject::tr( "year" );
+		buf += TimeStringFormat::tr( "year" );
 		if (i < 2)
 		    buf += ", ";
 		break;
@@ -149,64 +167,140 @@ QString DateFormat::numberDate(const QDate &d, int v) const
     return buf;
 }
 
+static const char* unTranslatedFullMonthNames[] = {
+    QT_TRANSLATE_NOOP( "QDate", "January" ),
+    QT_TRANSLATE_NOOP( "QDate", "February" ),
+    QT_TRANSLATE_NOOP( "QDate", "March" ),
+    QT_TRANSLATE_NOOP( "QDate", "April" ),
+    QT_TRANSLATE_NOOP( "QDate", "May" ),
+    QT_TRANSLATE_NOOP( "QDate", "June" ),
+    QT_TRANSLATE_NOOP( "QDate", "July" ),
+    QT_TRANSLATE_NOOP( "QDate", "August" ),
+    QT_TRANSLATE_NOOP( "QDate", "September" ),
+    QT_TRANSLATE_NOOP( "QDate", "October" ),
+    QT_TRANSLATE_NOOP( "QDate", "November" ),
+    QT_TRANSLATE_NOOP( "QDate", "December" )
+};
+
+static const char* unTranslatedFullDayNames[] = {
+    QT_TRANSLATE_NOOP( "QDate", "Monday" ),
+    QT_TRANSLATE_NOOP( "QDate", "Tuesday" ),
+    QT_TRANSLATE_NOOP( "QDate", "Wednesday" ),
+    QT_TRANSLATE_NOOP( "QDate", "Thursday" ),
+    QT_TRANSLATE_NOOP( "QDate", "Friday" ),
+    QT_TRANSLATE_NOOP( "QDate", "Saturday" ),
+    QT_TRANSLATE_NOOP( "QDate", "Sunday" )
+};
+
+#ifdef QTOPIA_DESKTOP
+//translations in qt.qm
+static const char* unTranslatedMediumDayNames[] = {
+    "Mon" , "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"
+};
+
+static const char* unTranslatedMediumMonthNames[] = {
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+};
+#endif
+
+static QString dayname(const QDate& d, bool lng)
+{
+    if (lng && qApp)
+        return qApp->translate("QDate", unTranslatedFullDayNames[d.dayOfWeek()-1]);
+    else {
+#ifdef QTOPIA_DESKTOP
+        if (qApp)
+            return qApp->translate("QDate", unTranslatedMediumDayNames[ d.dayOfWeek()-1]);
+#endif
+        return d.dayName(d.dayOfWeek());
+    }
+}
+
 QString DateFormat::wordDate(const QDate &d, int v) const
 {
-    QString buf = "";
     // for each part of the order
-    if (v & showWeekDay) {
-	QString weekDay = d.dayName(d.dayOfWeek());
-	if (!(v & longWord)) {
-	    weekDay = weekDay.left(3);
-	}
-	buf += weekDay;
-	if ((_longOrder & 0x0007) == 0x0002)
-	    buf += ' ';
-	else
-	    buf += ", ";
-    }
+    QString weekDay;
+    if (v & showWeekDay)
+	weekDay = ::dayname(d,(v & longWord));
 
+    QString date="";
+    QString sep="";
     for (int i = 0; i < 3; i++) {
 	// switch on the relavent 3 bits.
-	switch((_longOrder >> (i * 3)) & 0x0007) {
-	    case 0x0001:
-	      if (i==1) {
-		buf += QString().sprintf("%02d, ",d.day());
-	      } else {
-		buf += QString().sprintf("%2d",d.day());
-		if (separator()=='.') // 2002/1/11
-		  buf += ". ";
-		    else
-			buf += " ";
-		}
+	int field = (_longOrder >> (i * 3)) & 0x0007;
+        if ( field && !date.isEmpty() )
+	    date += sep;
+	switch (field) {
+	    case 0x0001: // Day
+                {
+                    QString daysuffix = TimeStringFormat::tr("@day", "day suffix - applies to some asian languages (e.g. Japanese and Trad. Chinese). If it doesn't apply to your language it has to be translated to an '@day' " );
+                    if (i==1) {
+                        date += QString().sprintf("%02d",d.day());
+                        if (daysuffix != "@day")
+                            date+=daysuffix;
+                        sep = TimeStringFormat::tr(",","day-date separator") + " ";
+                    } else {
+                        date += QString().sprintf("%2d",d.day());
+                        if (daysuffix == "@day") {
+                            if (separator()=='.') // 2002/1/11
+                                sep = ". ";
+                            else
+                                sep = " ";
+                        } else {
+                            date += daysuffix+" ";
+                            sep = " ";
+                        }
+                    }
+                }
 		break;
-	    case 0x0002:
+	    case 0x0002: // Month
 		{
-		    QString monthName = d.monthName(d.month());
-		    if (!(v & longWord)) {
-			monthName = monthName.left(3);
-		    }
-		    buf += monthName;
+		    QString monthName;
+
+                    if (v & longWord)
+                        monthName = qApp->translate("QDate", unTranslatedFullMonthNames[d.month()-1] );
+                    else {
+#ifdef QTOPIA_DESKTOP
+                        monthName = qApp->translate("QDate", unTranslatedMediumMonthNames[d.month()-1] );
+#else
+                        monthName = d.monthName( d.month() );
+#endif
+                    }
+		    date += monthName;
 		}
-		if (i < 2)
-		    buf += " ";
+		sep = " ";//TimeStringFormat::tr(" ","month-date separator");
 		break;
-	    case 0x0004:
+	    case 0x0004: // Year
 		{
 		    int year = d.year();
 		    if (!(v & longNumber))
 			year = year % 100;
 
 		    if (year < 10)
-			buf += "0";
+			date += "0";
 
-		    buf += QString::number(year);
+		    date += QString::number(year);
+                    QString yearsuffix = TimeStringFormat::tr("@year", "year suffix - applies to some asian languages (e.g. Japanese and Trad. Chinese). If it doesn't apply to your language it has to be translated to an '@year' " );
+                    if (yearsuffix != "@year")
+                        date += yearsuffix;
+
 		}
-		if (i < 2)
-		    buf += ", ";
+		sep = TimeStringFormat::tr(",","year-date seperator") + " ";
 		break;
 	}
     }
-    return buf;
+
+    QString r = "";
+    if ( weekDay.isEmpty() )
+	r = date;
+    else if ((_longOrder & 0x0007) == 0x0002)
+	r = TimeStringFormat::tr("%1 %2","1=Monday 2=January 12").arg(weekDay).arg(date);
+    else if ( _longOrder )
+	r = TimeStringFormat::tr("%1, %2","1=Monday 2=12 January").arg(weekDay).arg(date);
+    else
+	r = weekDay;
+    return r;
 }
 
 #ifndef QT_NO_DATASTREAM
@@ -251,19 +345,19 @@ QString TimeString::shortDate( const QDate &d, DateFormat dtf )
 
 QString TimeString::dateString( const QDate &d, DateFormat dtf )
 {
-    return QObject::tr( dtf.wordDate(d, DateFormat::longNumber | DateFormat::longWord) );
+    return dtf.wordDate(d, DateFormat::longNumber);
 }
 
 
 QString TimeString::longDateString( const QDate &d, DateFormat dtf )
 {
-    return QObject::tr( dtf.wordDate(d, DateFormat::showWeekDay | DateFormat::longNumber
-	    | DateFormat::longWord) );
+    return dtf.wordDate(d, DateFormat::showWeekDay | DateFormat::longNumber
+	    | DateFormat::longWord);
 }
 
 DateFormat TimeString::currentDateFormat()
 {
-    return TimeStringFormatKeeper::currentFormat();
+    return TimeStringFormat::currentFormat();
 }
 
 
@@ -313,28 +407,19 @@ QString TimeString::timeString( const QTime &t, bool ampm, bool seconds )
     if ( seconds )
 	argString = argString.arg( strSec );
     if ( hour >= 12 )
-	argString = argString.arg( QObject::tr("PM") );
+	argString = argString.arg( TimeStringFormat::tr("PM") );
     else
-	argString = argString.arg( QObject::tr("AM") );
+	argString = argString.arg( TimeStringFormat::tr("AM") );
     return argString;
 }
 
 QString TimeString::shortTime( bool ampm, bool seconds )
 {
-    static const char* const day[] = {
-	    QT_TRANSLATE_NOOP( "QObject", "Mon" ),
-	    QT_TRANSLATE_NOOP( "QObject", "Tue" ),
-	    QT_TRANSLATE_NOOP( "QObject", "Wed" ),
-	    QT_TRANSLATE_NOOP( "QObject", "Thu" ),
-	    QT_TRANSLATE_NOOP( "QObject", "Fri" ),
-	    QT_TRANSLATE_NOOP( "QObject", "Sat" ),
-	    QT_TRANSLATE_NOOP( "QObject", "Sun" )
-    };
     // just create a shorter time String
     QDateTime dtTmp = QDateTime::currentDateTime();
-    QString strTime;
-    strTime = QObject::tr( day[dtTmp.date().dayOfWeek()-1] ) + " " +
-    timeString( dtTmp.time(), ampm, seconds );
+    QString strTime = TimeStringFormat::tr( "%1 %2", "1=Monday 2=12:45" )
+	.arg(::dayname(dtTmp.date(),FALSE))
+	.arg(timeString( dtTmp.time(), ampm, seconds ));
     return strTime;
 }
 
@@ -361,5 +446,21 @@ QString TimeString::longNumberDateString( const QDate &d, DateFormat dtf )
 {
   return dtf.numberDate(d,DateFormat::longNumber);
 }
+/*!
+    Returns date/time \a dt as a string,
+      showing year, month, date, hours, minutes, and seconds.
+        \a len determines the length of the resulting string.
+        
+          The format, including order depends on the user's settings.
+          
+            First availability: Qtopia 1.6
+*/
+//QString TimeString::localYMDHMS( const QDateTime &dt, Length len )
+//{
+//    const QDate& d = dt.date();
+//    const QTime& t = dt.time();
+//    return LocalTimeFormat::tr("%1 %2","date,time").arg(localYMD(d,len)).arg(localHMS(t));
+//}
+
 
 #include "timestring.moc"

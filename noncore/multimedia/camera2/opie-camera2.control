@@ -1,0 +1,10 @@
+Package: opie-camera2
+Files: bin/camerapics/camera2 apps/Applications/camera2.desktop
+Priority: optional
+Section: opie/multimedia
+Maintainer: Lorn "ljp" Potter <lorn.potter@trolltech.com>
+Architecture: arm
+Version: 1.0.1$EXTRAVERSION
+Depends: libqpe1, libopiecore2, libopieui2
+Description: A Camera Application
+ A Camera Application to use with Video4Linux.

@@ -59,6 +59,7 @@ HEADERS	=   calendar.h \
 	windowdecorationinterface.h \
 	textcodecinterface.h \
 	imagecodecinterface.h \
+	locationcombo.h \
 	qpeglobal.h
 	
 SOURCES	=   calendar.cpp \
@@ -116,6 +117,7 @@ SOURCES	=   calendar.cpp \
 	findwidget_p.cpp \
 	finddialog.cpp \
 	lnkproperties.cpp \
+	locationcombo.cpp \
 	widget_showing.cpp
 
 

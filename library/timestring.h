@@ -1,16 +1,31 @@
 /**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2006 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the Qtopia Environment.
+** 
+** This program is free software; you can redistribute it and/or modify it
+** under the terms of the GNU General Public License as published by the
+** Free Software Foundation; either version 2 of the License, or (at your
+** option) any later version.
+** 
+** A copy of the GNU GPL license version 2 is included in this package as 
+** LICENSE.GPL.
 **
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
+** This program is distributed in the hope that it will be useful, but
+** WITHOUT ANY WARRANTY; without even the implied warranty of
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+** See the GNU General Public License for more details.
 **
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
+** In addition, as a special exception Trolltech gives permission to link
+** the code of this program with Qtopia applications copyrighted, developed
+** and distributed by Trolltech under the terms of the Qtopia Personal Use
+** License Agreement. You must comply with the GNU General Public License
+** in all respects for all of the code used other than the applications
+** licensed under the Qtopia Personal Use License Agreement. If you modify
+** this file, you may extend this exception to your version of the file,
+** but you are not obligated to do so. If you do not wish to do so, delete
+** this exception statement from your version.
+** 
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
 ** Contact info@trolltech.com if any conditions of this licensing are
@@ -22,23 +37,28 @@
 #define _TIMESTRING_H_
 #include <qdatetime.h>
 #include <qstring.h>
+#include <qarray.h>
 
 #if (QT_VERSION-0 >= 0x030000)
 #define DateFormat QPEDateFormat
 #endif
 
+#include <qtopia/qpeglobal.h>
+
+class QObject;
+
 // return a string with the time based on whether or not you want
 // you want it in 12 hour form.   if ampm is true, then return
 // it in 12 hour (am/pm) form otherwise return it in 24 hour form
 // in theory Qt 3,0 handles this better (hopefully obsoleteing this)
-class DateFormat
+class DateFormat 
 {
 public:
-    // date format type 001,010,100 = day month year
+    // date format type 1,2,4 = day,month,year
     enum Order {
-	DayMonthYear = 0x0111, // 0x001 + 0x010(0x2 << 3) + 0x100(0x4 << 3)
-	MonthDayYear = 0x010A,
-	YearMonthDay = 0x0054
+	DayMonthYear = 0421, // right-to-left
+	MonthDayYear = 0412,
+	YearMonthDay = 0124
     };
 
     DateFormat(QChar s = '/', Order so = MonthDayYear) : _shortOrder(so),
@@ -99,34 +119,48 @@ class TimeString
 {
 public:
 
-    //enum DateFormat { MonthDayYear, DayMonthYear, ISO8601,
+    //enum DateFormat { MonthDayYear, DayMonthYear, ISO8601, 
 		      //YearMonthDay = ISO8601 };
 
-/**
- * @name Convience functions which use currentDateFormat
- */
-//@{
-    static QString shortDate( const QDate &d )
+
+//private:
+    static QString shortDate( const QDate &d ) 
     { return shortDate( d, currentDateFormat() ); }
     static QString dateString( const QDate &d )
     { return dateString( d, currentDateFormat() ); }
     static QString longDateString( const QDate &d )
     { return longDateString( d, currentDateFormat() ); }
-//@}
     static QString dateString( const QDateTime &dt, bool ampm, bool seconds )
     { return dateString( dt, ampm, seconds, currentDateFormat() ); }
 
+public:
+    enum Length { Short, Medium, Long };
+    static QString localH( int hour );
+    static QString localHM( const QTime & );
+    static QString localHM( const QTime &, Length ); // qtopia 2.1.0
+    static QString localHMS( const QTime & );
+    static QString localHMDayOfWeek( const QDateTime &t );
+    static QString localHMSDayOfWeek( const QDateTime &t );
+    static QString localMD( const QDate &, Length=Medium );
+    static QString localYMD( const QDate &, Length=Medium );
+    static QString localYMDHMS( const QDateTime &, Length=Medium );
+    static QString localDayOfWeek( const QDate&, Length=Medium );
+    static QString localDayOfWeek( int day1to7, Length=Medium );
 
-   /** @name Do not use as they don't honor system settings for AMPM
-    *
-    */
-    //@{
-    static QString dateString( const QDateTime &t, bool ampm = false );
+    static QString hourString( int hour, bool ampm );
+    static bool currentAMPM();
+    static DateFormat currentDateFormat();
+    static QArray<DateFormat> formatOptions(); // qtopia 1.6.0
+
+    static void connectChange(QObject*,const char* member);
+    static void disconnectChange(QObject*,const char* member);
+
+    // Not recommended to call these (they don't honor system ampm)
+    static QString dateString( const QDateTime &t, bool ampm );
     static QString timeString( const QTime &t, bool ampm, bool seconds );
-    static QString timeString( const QTime &t, bool ampm = false );
+    static QString timeString( const QTime &t, bool ampm );
     static QString shortTime( bool ampm, bool seconds );
-    static QString shortTime( bool ampm = false );
-    //@}
+    static QString shortTime( bool ampm );
 
     static QString numberDateString( const QDate &d, DateFormat );
     static QString numberDateString( const QDate &d )
@@ -139,11 +173,9 @@ public:
     static QString dateString( const QDate &, DateFormat  );
     static QString longDateString( const QDate &, DateFormat );
 
-    static DateFormat currentDateFormat();
-
 private:
     static QString dateString( const QDateTime &t, bool ampm, bool seconds, DateFormat );
-
+    
 
 };
 

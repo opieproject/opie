@@ -27,7 +27,7 @@ class QLabel;
 class QWidget;
 class AppLnk;
 class DocLnkSet;
-
+class QFile;
 class Global
 {
 public:
@@ -80,6 +80,10 @@ public:
     static QStringList languageList();
     static QStringList helpPath();
 #endif
+//#ifdef QTOPIA_INTERNAL_FILEOPERATIONS
+    static bool truncateFile(QFile &f, int size);
+    static QString tempDir( );
+//#endif
 
 private:
     static void invoke( const QString &exec);

@@ -808,5 +808,54 @@ QStringList Global::helpPath()
     return path;
 }
 
+/*!
+  \internal
+  Truncate file to size specified
+  \a f must be an open file
+  \a size must be a positive value
+ */
+bool Global::truncateFile(QFile &f, int size){
+    if (!f.isOpen())
+      return FALSE;
+
+    return ::ftruncate(f.handle(), size) != -1;
+}
+
+
+
+
+// #if defined(Q_OS_UNIX) && defined(Q_WS_QWS)
+// extern int qws_display_id;
+// #endif
+
+/*!
+  /internal
+  Returns the default system path for storing temporary files.
+  Note: This does not it ensure that the provided directory exists
+*/
+QString Global::tempDir()
+{
+    QString result;
+#ifdef Q_OS_UNIX
+#ifdef Q_WS_QWS
+    result = QString("/tmp/qtopia-%1/").arg(QString::number(qws_display_id));
+#else
+    result="/tmp/";
+#endif
+#else
+    if (getenv("TEMP"))
+	result = getenv("TEMP");
+    else
+	result = getenv("TMP");
+
+    if (result[(int)result.length() - 1] != QDir::separator())
+	result.append(QDir::separator());
+#endif
+
+    return result;
+}
+
+//#endif
+
 
 #include "global.moc"

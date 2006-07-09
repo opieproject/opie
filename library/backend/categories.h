@@ -31,6 +31,7 @@
 #include "palmtopuidgen.h"
 
 class CategoryGroup;
+QString categoryFileName();
 
 #if defined(QPC_TEMPLATEDLL)
 // MOC_SKIP_BEGIN

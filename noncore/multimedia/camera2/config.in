@@ -1,0 +1,7 @@
+  config CAMERA2
+    boolean "opie-camera2 (camera app to use with Video4Linux)"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI
+    comment "opie-camera needs a libqpe, libopie2core & libopie2ui"
+    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI )
+
