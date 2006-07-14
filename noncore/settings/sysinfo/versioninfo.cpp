@@ -138,6 +138,20 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
         modelPixmap += "jornada56x";
     else if ( model == Model_Jornada_720 )
         modelPixmap += "jornada720";
+    else if ( model == Model_HTC_Universal )
+        modelPixmap += "htcuniversal";
+    else if ( model == Model_HTC_Blueangel )
+        modelPixmap += "htcblueangel";
+    else if ( model == Model_HTC_Apache )
+        modelPixmap += "htcapache";
+    else if ( model == Model_HTC_Magician )
+        modelPixmap += "htcmagician";
+    else if ( model == Model_HTC_Himalaya )
+        modelPixmap += "htchimalaya";
+    else if ( model == Model_HTC_Alpine )
+        modelPixmap += "htcalpine";
+    else if ( model == Model_HTC_Beetles )
+        modelPixmap += "htcbeetles";
     else
         modelPixmap += "pda";
 

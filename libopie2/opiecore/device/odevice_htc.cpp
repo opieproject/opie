@@ -116,41 +116,15 @@ struct htc_button htc_buttons_universal [] = {
     "QPE/Rotation", "rotateDefault()",0},
 };
 
-struct htc_button htc_buttons_6000 [] = {
-    { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
-    "devicebuttons/z_calendar",
-    "datebook", "nextView()",
-    "today", "raise()" },
-    { Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
-    "devicebuttons/z_contact",
-    "addressbook", "raise()",
-    "addressbook", "beamBusinessCard()" },
-    { Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
-    "devicebuttons/z_home",
-    "QPE/Launcher", "home()",
-    "buttonsettings", "raise()" },
-    { Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Menu Button"),
-    "devicebuttons/z_menu",
-    "QPE/TaskBar", "toggleMenu()",
-    "QPE/TaskBar", "toggleStartMenu()" },
-    { Qt::Key_F13, QT_TRANSLATE_NOOP("Button", "Mail Button"),
-    "devicebuttons/z_mail",
-    "opiemail", "raise()",
-    "opiemail", "newMail()" },
-    { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Rotate Button"),
-    "devicebuttons/z_rotate",
-    0,
-    "QPE/Rotation", "rotateDefault()" },
-    { Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"),
-    "devicebuttons/z_hinge3",
-    "QPE/VMemo", "toggleRecord()",
-    "sound", "raise()" },
-};
 
-// FIXME This gets unnecessary complicated. We should think about splitting the HTC
-//       class up into individual classes. We would need three classes
 //
-//       HTC-Universal  (PXA-model w/ 640x480 lcd, for Universal)
+//       HTC-Universal (PXA-model w/ 480x640 3.6" lcd)
+//       HTC-Alpine    (PXA-model w/ 240x320 3.5" lcd)
+//       HTC-Apache    (PXA-model w/ 240x320 2.8" lcd)
+//       HTC-Beetles   (PXA-model w/ 240x240 3.0" lcd)
+//       HTC-Blueangel (PXA-model w/ 240x320 3.5" lcd)
+//       HTC-Himalaya  (PXA-model w/ 240x320 3.5" lcd)
+//       HTC-Magician  (PXA-model w/ 240x320 2.8" lcd)
 
 void HTC::init(const QString& cpu_info)
 {
@@ -159,35 +133,9 @@ void HTC::init(const QString& cpu_info)
     // the delta between apm --suspend and sleeping
     setAPMTimeOut( 15000 );
 
-    // generic distribution code already scanned /etc/issue at that point -
-    // embedix releases contain "Embedix <version> | Linux for Embedded Devices"
-    if ( d->m_sysverstr.contains( "embedix", false ) )
-    {
-        d->m_vendorstr = "HTC";
-        d->m_vendor = Vendor_HTC;
-        d->m_systemstr = "OpenEmbedded";
-        d->m_system = System_OpenEmbedded;
-        m_embedix = true;
-    }
-    else
-    {
-        d->m_vendorstr = "Xanadux Team";
-        d->m_systemstr = "Familiar";
-        d->m_system = System_Familiar;
-        // sysver already gathered
-
-        // OpenHTC sometimes uses the 2.4 (embedix) kernel, check if this is one
-        FILE *uname = popen("uname -r", "r");
-        QFile f;
-        QString line;
-        if ( f.open(IO_ReadOnly, uname) ) {
-            QTextStream ts ( &f );
-            line = ts.readLine();
-            m_embedix = line.startsWith( "2.4." );
-            f.close();
-        }
-        pclose(uname);
-    }
+    d->m_vendorstr = "Xanadux Team";
+    d->m_systemstr = "Familiar";
+    d->m_system = System_Familiar;
 
     // check the HTC model
     QString model;
@@ -197,20 +145,54 @@ void HTC::init(const QString& cpu_info)
     else
         model = cpu_info;
 
+    d->m_model = Model_HTC_Universal;
+    d->m_modelstr = "Unknown HTC";
+
     if ( model == "HTC Universal" ) {
         d->m_model = Model_HTC_Universal;
         d->m_modelstr = "HTC Universal";
-    } else {
-        d->m_model = Model_HTC_Universal;
-        d->m_modelstr = "Unknown HTC";
+    }
+    if ( model == "HTC Alpine" ) {
+        d->m_model = Model_HTC_Alpine;
+        d->m_modelstr = "HTC Alpine";
+    }
+    if ( model == "HTC Apache" ) {
+        d->m_model = Model_HTC_Apache;
+        d->m_modelstr = "HTC Apache";
+    }
+    if ( model == "HTC Beetles" ) {
+        d->m_model = Model_HTC_Beetles;
+        d->m_modelstr = "HTC Beetles";
+    }
+    if ( model == "HTC Blueangel" ) {
+        d->m_model = Model_HTC_Blueangel;
+        d->m_modelstr = "HTC Blueangel";
+    }
+    if ( model == "HTC Himalaya" ) {
+        d->m_model = Model_HTC_Himalaya;
+        d->m_modelstr = "HTC Himalaya";
+    }
+    if ( model == "HTC Magician" ) {
+        d->m_model = Model_HTC_Magician;
+        d->m_modelstr = "HTC Magician";
     }
 
-    // set path to backlight device in kernel 2.6
+
+    // set path to backlight device
     switch ( d->m_model )
     {
         case Model_HTC_Universal:
+        case Model_HTC_Magician:
+        case Model_HTC_Alpine:
+        case Model_HTC_Beetles:
+        case Model_HTC_Apache:
+            m_backlightdev = "/sys/class/backlight/pxa2xx-fb/";
+        break;
+        case Model_HTC_Blueangel:
+        case Model_HTC_Himalaya:
+            m_backlightdev = "/sys/class/backlight/w100fb/";
+        break;
         default:
-//            m_backlightdev = "/sys/class/backlight/corgi-bl/";
             m_backlightdev = "/sys/class/backlight/pxafb/";
     }
 
@@ -235,10 +217,7 @@ void HTC::init(const QString& cpu_info)
 
     m_leds[0] = Led_Off;
 
-    if ( m_embedix )
-        qDebug( "HTC::init() - Using the 2.4 Embedix HAL on a %s", (const char*) d->m_modelstr );
-    else
-        qDebug( "HTC::init() - Using the 2.6 Xanadux HAL on a %s", (const char*) d->m_modelstr );
+    qDebug( "HTC::init() - Using the 2.6 Xanadux on a %s", (const char*) d->m_modelstr );
 }
 
 void HTC::initButtons()
@@ -378,71 +357,28 @@ OLedState HTC::ledState( OLed which ) const
 
 bool HTC::setLedState( OLed which, OLedState st )
 {
-     // Currently not supported on non_embedix kernels
-    if (!m_embedix)
-    {
-        qDebug( "HTC::setLedState: ODevice handling for non-embedix kernels not yet implemented" );
-        return false;
-    }
-
-    static int fd = ::open ( "/dev/sharp_led", O_RDWR|O_NONBLOCK );
-
-    if ( which == Led_Mail ) {
-        if ( fd >= 0 ) {
-            struct sharp_led_status leds;
-            ::memset ( &leds, 0, sizeof( leds ));
-            leds. which = SHARP_LED_MAIL_EXISTS;
-            bool ok = true;
-
-            switch ( st ) {
-                case Led_Off      : leds. status = LED_MAIL_NO_UNREAD_MAIL; break;
-                case Led_On       : leds. status = LED_MAIL_NEWMAIL_EXISTS; break;
-                case Led_BlinkSlow: leds. status = LED_MAIL_UNREAD_MAIL_EX; break;
-                default            : ok = false;
-            }
-
-            if ( ok && ( ::ioctl ( fd, SHARP_LED_SETSTATUS, &leds ) >= 0 )) {
-                m_leds [0] = st;
-                return true;
-            }
-        }
-    }
+    qDebug( "HTC::setLedState: ODevice handling not yet implemented" );
     return false;
 }
 
 int HTC::displayBrightnessResolution() const
 {
-/* MV */
-	return 16;
-
     int res = 1;
-    if (m_embedix)
-    {
-        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_RDWR|O_NONBLOCK );
-        if ( fd )
-        {
-            int value = ::ioctl( fd, SHARP_FL_IOCTL_GET_STEP, 0 );
-            ::close( fd );
-            return value ? value : res;
-        }
-    }
-    else
-    {
-        int fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
+
+    int fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
+
         if ( fd )
         {
             char buf[100];
             if ( ::read( fd, &buf[0], sizeof buf ) ) ::sscanf( &buf[0], "%d", &res );
             ::close( fd );
         }
-    }
+
     return res;
 }
 
 bool HTC::setDisplayBrightness( int bright )
 {
-/* MV */
-	return false;
 
     //qDebug( "HTC::setDisplayBrightness( %d )", bright );
     bool res = false;
@@ -453,56 +389,30 @@ bool HTC::setDisplayBrightness( int bright )
     int numberOfSteps = displayBrightnessResolution();
     int val = ( bright == 1 ) ? 1 : ( bright * numberOfSteps ) / 255;
 
-    if ( m_embedix )
+    int fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
+    if ( fd )
     {
-        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );
-        if ( fd )
-        {
-            res = ( ::ioctl( fd, SHARP_FL_IOCTL_STEP_CONTRAST, val ) == 0 );
-            ::close( fd );
-        }
-    }
-    else
-    {
-        int fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
-        if ( fd )
-        {
-            char buf[100];
-            int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-            res = ( ::write( fd, &buf[0], len ) == 0 );
-            ::close( fd );
-        }
+      char buf[100];
+      int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
+      res = ( ::write( fd, &buf[0], len ) == 0 );
+      ::close( fd );
     }
     return res;
 }
 
 bool HTC::setDisplayStatus( bool on )
 {
-/* MV */
-	return false;
 
     bool res = false;
-    if ( m_embedix )
+
+    int fd = ::open( m_backlightdev + "power", O_WRONLY|O_NONBLOCK );
+    if ( fd )
     {
-        int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );
-        if ( fd )
-        {
-            int ioctlnum = on ? SHARP_FL_IOCTL_ON : SHARP_FL_IOCTL_OFF;
-            res = ( ::ioctl ( fd, ioctlnum, 0 ) == 0 );
-            ::close ( fd );
-        }
-    }
-    else
-    {
-        int fd = ::open( m_backlightdev + "power", O_WRONLY|O_NONBLOCK );
-        if ( fd )
-        {
-            char buf[10];
-            buf[0] = on ? FB_BLANK_UNBLANK : FB_BLANK_POWERDOWN;
-            buf[1] = '\0';
-            res = ( ::write( fd, &buf[0], 2 ) == 0 );
-            ::close( fd );
-        }
+     char buf[10];
+     buf[0] = on ? FB_BLANK_UNBLANK : FB_BLANK_POWERDOWN;
+     buf[1] = '\0';
+     res = ( ::write( fd, &buf[0], 2 ) == 0 );
+     ::close( fd );
     }
     return res;
 }
@@ -553,32 +463,6 @@ bool HTC::hasHingeSensor() const
 
 OHingeStatus HTC::readHingeSensor() const
 {
-    if (m_embedix)
-    {
-        int handle = ::open("/dev/apm_bios", O_RDWR|O_NONBLOCK);
-        if (handle == -1)
-        {
-            qWarning("HTC::readHingeSensor() - failed (%s)", "unknown reason" ); //FIXME: use strerror
-            return CASE_UNKNOWN;
-        }
-        else
-        {
-            int retval = ::ioctl(handle, SHARP_IOCTL_GET_ROTATION);
-            ::close (handle);
-            if ( retval == CASE_CLOSED || retval == CASE_PORTRAIT || retval == CASE_LANDSCAPE )
-            {
-                qDebug( "HTC::readHingeSensor() - result = %d", retval );
-                return static_cast<OHingeStatus>( retval );
-            }
-            else
-            {
-                qWarning("HTC::readHingeSensor() - couldn't compute hinge status!" );
-                return CASE_UNKNOWN;
-            }
-        }
-    }
-    else
-    {
         /*
          * The HTC Universal keyboard is event source 1 in kernel 2.6.
          * Hinge status is reported via Input System Switchs 0 and 1 like that:
@@ -608,7 +492,6 @@ OHingeStatus HTC::readHingeSensor() const
         {
             return switch1 ? CASE_CLOSED : CASE_UNKNOWN;
         }
-    }
 }
 
 void HTC::initHingeSensor()

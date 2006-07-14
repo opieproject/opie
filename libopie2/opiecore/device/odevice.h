@@ -74,6 +74,7 @@ enum OModel {
     Model_Jornada       = ( 6 << 16 ),
     Model_Jornada_56x   = ( Model_Jornada | 0x0001 ),
     Model_Jornada_720   = ( Model_Jornada | 0x0002 ),
+    Model_Jornada_820   = ( Model_Jornada | 0x0003 ),
 
     Model_Zaurus        = ( 2 << 16 ),
 
@@ -125,6 +126,12 @@ enum OModel {
     Model_HTC           = ( 9 << 16 ),
     Model_HTC_All       = ( Model_HTC | 0xffff ),
     Model_HTC_Universal = ( Model_HTC | 0x0001 ),
+    Model_HTC_Alpine    = ( Model_HTC | 0x0002 ),
+    Model_HTC_Apache    = ( Model_HTC | 0x0003 ),
+    Model_HTC_Beetles   = ( Model_HTC | 0x0004 ),
+    Model_HTC_Blueangel = ( Model_HTC | 0x0005 ),
+    Model_HTC_Himalaya  = ( Model_HTC | 0x0006 ),
+    Model_HTC_Magician  = ( Model_HTC | 0x0007 ),
 
     Model_Motorola      = ( 9 << 17 ),
     Model_Motorola_All  = ( Model_Motorola | 0xffff ),
