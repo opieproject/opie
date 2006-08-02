@@ -6,7 +6,7 @@
 
 	Fixed Bugs
 	----------
-	* n.a.	- Improved iPAQ support in ODevice and low-level applets (Slavek Banko)
+	* n.a.	- Improved iPAQ support in ODevice and low-level applets (S.Banko, R.Wagner, E.Hovland, P.Sokolovsky)
 	* n.a.  - Improved platform support for the Motorola EZX platform (mickeyl)
 
 	Internal

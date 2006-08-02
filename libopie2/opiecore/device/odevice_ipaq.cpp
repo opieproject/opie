@@ -85,12 +85,12 @@ typedef struct {
 #define FLITE_ON  OD_IOW( 'f', 7, FLITE_IN )
 
 struct i_button ipaq_buttons [] = {
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x,
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x | Model_iPAQ_H22xx | Model_iPAQ_HX4700 | Model_iPAQ_H4xxx,
     Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
     "devicebuttons/ipaq_calendar",
     "datebook", "nextView()",
     "today", "raise()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x,
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x | Model_iPAQ_H22xx | Model_iPAQ_HX4700 | Model_iPAQ_H4xxx,
     Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
     "devicebuttons/ipaq_contact",
     "addressbook", "raise()",
@@ -105,7 +105,7 @@ struct i_button ipaq_buttons [] = {
     "devicebuttons/ipaq_mail",
     "opiemail", "raise()",
     "opiemail", "newMail()" },
-    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x,
+    { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx | Model_iPAQ_H191x | Model_iPAQ_H4xxx,
     Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
     "devicebuttons/ipaq_home",
     "QPE/Launcher", "home()",
@@ -116,16 +116,44 @@ struct i_button ipaq_buttons [] = {
     "QPE/VMemo", "toggleRecord()",
     "sound", "raise()" },
 
-    { Model_iPAQ_H191x,
+    { Model_iPAQ_H191x | Model_iPAQ_H4xxx,
     Qt::Key_F8, QT_TRANSLATE_NOOP("Button", "Mail Button"),
     "devicebuttons/ipaq_mail",
     "opiemail", "raise()",
     "opiemail", "newMail()" },
-    { Model_iPAQ_H191x,
+    { Model_iPAQ_H191x | Model_iPAQ_H4xxx,
     Qt::Key_F7, QT_TRANSLATE_NOOP("Button", "Record Button"),
     "devicebuttons/ipaq_record",
     "QPE/VMemo", "toggleRecord()",
     "sound", "raise()" },
+
+    //h2200 has different button mapping
+    { Model_iPAQ_H22xx,
+    Qt::Key_NumLock, QT_TRANSLATE_NOOP("Button", "Mail Button"),
+    "devicebuttons/ipaq_mail",
+    "opiemail", "raise()",
+    "opiemail", "newMail()" },
+    { Model_iPAQ_H22xx,
+    Qt::Key_ScrollLock, QT_TRANSLATE_NOOP("Button", "Menu Button"),
+    "devicebuttons/ipaq_menu",
+    "QPE/TaskBar", "toggleMenu()",
+    "QPE/TaskBar", "toggleStartMenu()" },
+    // and hx4700 has different button mapping still
+    { Model_iPAQ_HX4700,
+    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Mail Button"),
+    "devicebuttons/ipaq_mail",
+    "opiemail", "raise()",
+    "opiemail", "newMail()" },
+    { Model_iPAQ_HX4700,
+    Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Record Button"),
+    "devicebuttons/ipaq_record",
+    "QPE/VMemo", "toggleRecord()",
+    "sound", "raise()" },
+    { Model_iPAQ_HX4700,
+    Qt::Key_Home, QT_TRANSLATE_NOOP("Button", "Home Button"),
+    "devicebuttons/ipaq_home",
+    "QPE/Launcher", "home()",
+    "buttonsettings", "raise()" },
 
 };
 
@@ -156,6 +184,8 @@ void iPAQ::init(const QString& model)
         d->m_model = Model_iPAQ_H1940;
     else if ( d->m_modelstr == "HX4700" )
         d->m_model = Model_iPAQ_HX4700;
+    else if ( d->m_modelstr == "H4000" )
+        d->m_model = Model_iPAQ_H4xxx;
 
     else
         d->m_model = Model_Unknown;
@@ -170,6 +200,7 @@ void iPAQ::init(const QString& model)
         case Model_iPAQ_H191x:
         case Model_iPAQ_H1940:
 	case Model_iPAQ_HX4700:
+	case Model_iPAQ_H4xxx:
             d->m_rotation = Rot0;
             break;
         case Model_iPAQ_H36xx:
@@ -309,6 +340,7 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
             // add the offset to the Key_Left key
             if (( d->m_model == Model_iPAQ_H5xxx ) ||
 		( d->m_model == Model_iPAQ_H191x ) ||
+		( d->m_model == Model_iPAQ_H4xxx ) ||
 		( d->m_model == Model_iPAQ_H1940 ))
                 newkeycode = Key_Left + ( keycode - Key_Left + 3 ) % 4;
             break;
@@ -316,7 +348,7 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
 
         // map Power Button short/long press to F6 for h191x
         case Key_F6:
-            if ( d->m_model != Model_iPAQ_H191x )
+            if ( d->m_model != Model_iPAQ_H191x && d->m_model != Model_iPAQ_H4xxx )
                 break;
         // map Power Button short/long press to F34/F35
         case Key_SysReq: {
@@ -380,6 +412,7 @@ bool iPAQ::setDisplayBrightness ( int bright )
 
     switch ( model()) {
     case Model_iPAQ_H191x:
+    case Model_iPAQ_H4xxx:
 	{
 	    QDir sysClass( "/sys/class/backlight/pxafb/" );
 	    sysClass.setFilter(QDir::Dirs);
@@ -439,6 +472,7 @@ int iPAQ::displayBrightnessResolution() const
             return 64;
         case Model_iPAQ_H5xxx:
 	case Model_iPAQ_HX4700:
+	case Model_iPAQ_H4xxx:
             return 255;
         case Model_iPAQ_H191x:
             return 7;
@@ -483,6 +517,7 @@ bool iPAQ::hasLightSensor() const
 {
     switch (model()) {
 	case Model_iPAQ_H191x:
+	case Model_iPAQ_H4xxx:
 	    return false;
 	default:
 	    return true;
