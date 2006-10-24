@@ -48,9 +48,10 @@ using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 using namespace OpieObex;
 
-ObexServer::ObexServer() : 
+ObexServer::ObexServer(int trans) : 
     OProcess(tr("ObexServer"), 0, "ObexServer")
 {
+    transport = trans;
     m_obex = NULL;
 }
 
@@ -329,19 +330,22 @@ int ObexServer::initObex(void)
     int channel = 10; //Channel on which we do listen
     if (m_obex)
         return 0;
-    m_obex = ::OBEX_Init(OBEX_TRANS_BLUETOOTH, obex_event, 0);
+    m_obex = ::OBEX_Init(transport, obex_event, 0);
     if (!m_obex) {
         printf("OBEX initialization error %d\n", errno);
         return -1;
     }
-    ::BtOBEX_ServerRegister(m_obex, NULL, channel);
-    m_session = addOpushSvc(channel, "OBEX push service");
-    if (!m_session) {
-        printf("OBEX registration error %d\n", errno);
-        ::OBEX_Cleanup(m_obex);
-        m_obex = NULL;
-        return -1;
-    }    
+    if (transport == OBEX_TRANS_BLUETOOTH) {
+	::BtOBEX_ServerRegister(m_obex, NULL, channel);
+	m_session = addOpushSvc(channel, "OBEX push service");
+	if (!m_session) {
+	    printf("OBEX registration error %d\n", errno);
+	    ::OBEX_Cleanup(m_obex);
+	    m_obex = NULL;
+	    return -1;
+	}
+    } else if (transport == OBEX_TRANS_IRDA)
+	::IrOBEX_ServerRegister(m_obex, "OBEX");
     return 0;
 }
 

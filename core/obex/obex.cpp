@@ -57,8 +57,7 @@ Obex::~Obex() {
 }
 void Obex::receive()  {
     ObexBase::receive();
-    m_rec = new OProcess();
-    *m_rec << "irobex_palm3";
+    m_rec = new ObexServer(OBEX_TRANS_IRDA);
     // connect to the necessary slots
     connect(m_rec,  SIGNAL(processExited(Opie::Core::OProcess*) ),
             this,  SLOT(slotExited(Opie::Core::OProcess*) ) );

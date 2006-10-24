@@ -53,11 +53,13 @@ namespace Opie {namespace Core {class OProcess;}}
 namespace OpieObex {
     class ObexServer : public Opie::Core::OProcess {
         Q_OBJECT
+    private:
+	int transport; //The OBEX transport type
     public:
         /**
          * ObexServer constructor
          */
-        ObexServer();
+        ObexServer(int trans);
         /**
          *
          */

@@ -34,6 +34,7 @@
 
 #include "obexbase.h"
 #include <qobject.h>
+#include "obexserver.h"
 
 namespace Opie {namespace Core {class OProcess;}}
 class QCopChannel;
@@ -84,7 +85,7 @@ namespace OpieObex {
       QString m_file;
       QString m_outp;
       Opie::Core::OProcess *m_send;
-      Opie::Core::OProcess *m_rec;
+      ObexServer* m_rec; //The OBEX server
       bool m_receive : 1;
       void shutDownReceive();
 

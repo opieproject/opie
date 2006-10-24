@@ -65,7 +65,7 @@ BtObex::~BtObex() {
 
 void BtObex::receive()  {
     ObexBase::receive();
-    m_rec = new ObexServer();
+    m_rec = new ObexServer(OBEX_TRANS_BLUETOOTH);
 
     odebug << "BT OBEX do receive" << oendl;
     // TODO mbhaynie: No idea if this actually works -- maybe opd is better.
