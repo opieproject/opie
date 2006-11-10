@@ -44,6 +44,7 @@ namespace OpieObex {
 
     protected:
         void closeEvent( QCloseEvent* );
+	void read_receivers();
 
     public slots:
         void send( const QString& file, const QString& desc );
@@ -79,7 +80,7 @@ namespace OpieObex {
 
     private:
         void initUI();
-	int addReceiver(const char *r, const char *icon);
+	int addReceiver(const QString& str, const char *icon);
 	void setReceiverStatus( int id, const QString& status );
 	bool receiverSelected(int id);
 

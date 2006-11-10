@@ -7,12 +7,15 @@
 #include "btobex.h"
 #include "obexsend.h"
 using namespace OpieObex;
+using namespace OpieTooth;
 
 /* OPIE */
 #include <opie2/odebug.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <opie2/oresource.h>
 #include <qpe/version.h>
+#include <devicehandler.h>
+#include "remotedevice.h"
 
 using namespace Opie::Core;
 
@@ -73,13 +76,13 @@ void SendWidget::send( const QString& file, const QString& desc ) {
     m_start = 0;
 
     fileToSend->setText(desc.isEmpty() ? file : desc );
-    scan_for_receivers();
+    read_receivers();
 }
 
-int SendWidget::addReceiver(const char *r, const char *icon)
+int SendWidget::addReceiver(const QString& str, const char *icon)
 {
     QListViewItem * item = new QListViewItem( receiverList, 0 );
-    item->setText( 0, r);
+    item->setText( 0, str );
     item->setPixmap( 1, OResource::loadPixmap( icon ) );
 
     int id=receivers.count();
@@ -193,6 +196,50 @@ void SendWidget::send_to_receivers() {
     slotStartIrda();
     slotStartBt();
 }
+
+/**
+ * Read receivers saved by bluetooth manager
+ */
+void SendWidget::read_receivers()
+{
+    QValueList<RemoteDevice> devices;
+    DeviceHandler handler;
+    QValueList<RemoteDevice>::ConstIterator it;
+
+    receiverList->clear();
+    receivers.clear();
+    sendButton->setDisabled( true );
+
+    if ( !QCopChannel::isRegistered("QPE/IrDaApplet") )
+    {
+        irdaStatus->setText(tr("not enabled."));
+    }
+    else
+    {
+        QCopEnvelope e1("QPE/IrDaApplet", "enableIrda()");
+        irdaStatus->setText(tr("ready"));
+        sendButton->setEnabled( true );
+    }
+    if ( !QCopChannel::isRegistered("QPE/Bluetooth") )
+    {
+        btStatus->setText(tr("not enabled."));
+    }
+    else
+    {
+        QCopEnvelope e1("QPE/Bluetooth", "enableBluetooth()");
+
+	devices = handler.load();
+	for( it = devices.begin(); it != devices.end() ; ++it )
+	{
+	    int id = addReceiver((*it).name(), "obex/bt.png");
+	    m_bt.insert(id, Pair((*it).name(), (*it).mac()));
+	}
+	btStatus->setText(tr("ready."));
+	m_btIt = m_bt.begin();
+	sendButton->setEnabled( true );
+    }
+}
+
 
 void SendWidget::scan_for_receivers()
 {
