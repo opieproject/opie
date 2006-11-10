@@ -7,7 +7,7 @@ HEADERS         = btconnectionitem.h btdeviceitem.h \
 		  pppdialog.h dundialog.h pandialog.h \
 		  obexdialog.h obexftpdialog.h \
 		  rfcommassigndialogimpl.h rfcommassigndialogitem.h \
-		  devicehandler.h rfcpopup.h obexpopup.h obexftpopup.h \
+		  rfcpopup.h obexpopup.h obexftpopup.h \
 		  rfcommhelper.h panpopup.h dunpopup.h rfcommconfhandler.h \
 		  servicesdialog.h btconfhandler.h hidpopup.h
 		  
@@ -18,7 +18,7 @@ SOURCES         = btconnectionitem.cpp btdeviceitem.cpp \
 		  btlistitem.cpp hciconfwrapper.cpp \ 
 		  bticonloader.cpp pppdialog.cpp dundialog.cpp pandialog.cpp \
 		  rfcommassigndialogimpl.cpp rfcommassigndialogitem.cpp \
-		  obexdialog.cpp devicehandler.cpp \
+		  obexdialog.cpp \
 		  rfcpopup.cpp obexpopup.cpp obexftpopup.cpp obexftpdialog.cpp \
 		  rfcommhelper.cpp panpopup.cpp dunpopup.cpp rfcommconfhandler.cpp \
 		  servicesdialog.cpp btconfhandler.cpp hidpopup.cpp
