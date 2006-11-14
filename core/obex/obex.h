@@ -81,12 +81,8 @@ namespace OpieObex {
       void done(bool);
 
   private:
-      uint m_count;
-      QString m_file;
-      QString m_outp;
       Opie::Core::OProcess *m_send;
       ObexServer* m_rec; //The OBEX server
-      bool m_receive : 1;
       void shutDownReceive();
 
 private slots:

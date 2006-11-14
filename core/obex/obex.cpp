@@ -49,7 +49,7 @@ Obex::Obex( QObject *parent, const char* name )
   : ObexBase(parent, name )
 {
     m_rec = 0;
-    m_send=0;
+    m_send = 0;
 };
 Obex::~Obex() {
     delete m_rec;
@@ -80,7 +80,6 @@ void Obex::send(const QString& fileName, const QString& addr) {
             emit error(-1 );
             delete m_rec;
             m_rec = 0;
-
         }else{
             emit error( -1 ); // we did not delete yet but it's not running slotExited is pending
             return;
