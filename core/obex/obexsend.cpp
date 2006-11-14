@@ -73,9 +73,31 @@ void SendWidget::initUI() {
 void SendWidget::send( const QString& file, const QString& desc ) {
     m_file = file;
     m_irDa.clear();
+    m_bt.clear();
     m_start = 0;
 
     fileToSend->setText(desc.isEmpty() ? file : desc );
+
+    if ( !QCopChannel::isRegistered("QPE/IrDaApplet") )
+    {
+        irdaStatus->setText(tr("not enabled."));
+    }
+    else
+    {
+        QCopEnvelope e1("QPE/IrDaApplet", "enableIrda()");
+        irdaStatus->setText(tr("ready"));
+        sendButton->setEnabled( true );
+    }
+    if ( !QCopChannel::isRegistered("QPE/Bluetooth") )
+    {
+        btStatus->setText(tr("not enabled."));
+    }
+    else
+    {
+        QCopEnvelope e1("QPE/Bluetooth", "enableBluetooth()");
+	btStatus->setText(tr("ready."));
+	sendButton->setEnabled( true );
+    }
     read_receivers();
 }
 
@@ -85,8 +107,8 @@ int SendWidget::addReceiver(const QString& str, const char *icon)
     item->setText( 0, str );
     item->setPixmap( 1, OResource::loadPixmap( icon ) );
 
-    int id=receivers.count();
-    receivers[id]=item;
+    int id = receivers.count();
+    receivers[id] = item;
     return id;
 }
 
@@ -154,9 +176,11 @@ void SendWidget::slotStartIrda() {
         return;
     if ( m_irDaIt == m_irDa.end() || !receiverSelected(m_irDaIt.key())) {
         irdaStatus->setText(tr("complete."));
+	m_irDaIt = m_irDa.begin();
         return;
     }
     setReceiverStatus( m_irDaIt.key(), tr("Start sending") );
+    irdaStatus->setText(tr("sending."));
     m_obex->send( m_file, tr("noaddress") );
 }
 
@@ -182,19 +206,23 @@ void SendWidget::slotBtTry(unsigned int trI) {
 }
 void SendWidget::slotStartBt() {
     // skip past unselected receivers
+    if ( !m_bt.count() ) 
+        return;
     while((m_btIt != m_bt.end()) && !receiverSelected(m_btIt.key()))
         ++m_btIt;
     if (m_btIt == m_bt.end() ) {
         btStatus->setText(tr("complete."));
+	m_btIt = m_bt.begin();
         return;
     }
     setReceiverStatus( m_btIt.key(), tr("Start sending") );
+    btStatus->setText(tr("sending."));
     m_btobex->send( m_file, m_btIt.data().second() );
 }
 
 void SendWidget::send_to_receivers() {
-    slotStartIrda();
     slotStartBt();
+    slotStartIrda();
 }
 
 /**
@@ -209,25 +237,11 @@ void SendWidget::read_receivers()
     receiverList->clear();
     receivers.clear();
     sendButton->setDisabled( true );
+    btStatus->setText(tr("load."));
+    m_bt.clear();
 
-    if ( !QCopChannel::isRegistered("QPE/IrDaApplet") )
+    if ( QCopChannel::isRegistered("QPE/Bluetooth") )
     {
-        irdaStatus->setText(tr("not enabled."));
-    }
-    else
-    {
-        QCopEnvelope e1("QPE/IrDaApplet", "enableIrda()");
-        irdaStatus->setText(tr("ready"));
-        sendButton->setEnabled( true );
-    }
-    if ( !QCopChannel::isRegistered("QPE/Bluetooth") )
-    {
-        btStatus->setText(tr("not enabled."));
-    }
-    else
-    {
-        QCopEnvelope e1("QPE/Bluetooth", "enableBluetooth()");
-
 	devices = handler.load();
 	for( it = devices.begin(); it != devices.end() ; ++it )
 	{
@@ -243,29 +257,21 @@ void SendWidget::read_receivers()
 
 void SendWidget::scan_for_receivers()
 {
+    sendButton->setDisabled( true );
     receiverList->clear();
     receivers.clear();
-    sendButton->setDisabled( true );
+    m_irDa.clear();
+    m_bt.clear();
 
-    if ( !QCopChannel::isRegistered("QPE/IrDaApplet") )
+    if ( QCopChannel::isRegistered("QPE/IrDaApplet") )
     {
-        irdaStatus->setText(tr("not enabled."));
-    }
-    else
-    {
-        QCopEnvelope e1("QPE/IrDaApplet", "enableIrda()");
         irdaStatus->setText(tr("searching..."));
         sendButton->setEnabled( true );
         QCopEnvelope e2("QPE/IrDaApplet", "listDevices()");
     }
 
-    if ( !QCopChannel::isRegistered("QPE/Bluetooth") )
+    if ( QCopChannel::isRegistered("QPE/Bluetooth") )
     {
-        btStatus->setText(tr("not enabled."));
-    }
-    else
-    {
-        QCopEnvelope e1("QPE/Bluetooth", "enableBluetooth()");
         btStatus->setText(tr("searching..."));
         sendButton->setEnabled( true );
         QCopEnvelope e3("QPE/Bluetooth", "listDevices()");
@@ -274,6 +280,8 @@ void SendWidget::scan_for_receivers()
 
 void SendWidget::toggle_receiver(QListViewItem* item)
 {
+    if (!item)
+	return;
     // toggle the state of an individual receiver.
     if (item->pixmap(2))
         item->setPixmap(2, QPixmap());
