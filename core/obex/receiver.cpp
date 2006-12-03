@@ -31,8 +31,10 @@ using namespace Opie::Core;
 Receiver::Receiver(RecType type) {
     if (type == REC_IRDA)
         m_obex = new Obex(this, "Receiver");
+#ifdef BLUETOOTH
     else
         m_obex = new BtObex(this, "Receiver");
+#endif
     connect(m_obex, SIGNAL(receivedFile(const QString&) ),
             this, SLOT(slotReceived(const QString&) ) );
     m_obex->receive();

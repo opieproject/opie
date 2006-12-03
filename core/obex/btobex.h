@@ -32,6 +32,7 @@
 
 #ifndef OpieBtObex_H
 #define OpieBtObex_H
+#ifdef BLUETOOTH
 
 #include "obexbase.h"
 #include <qobject.h>
@@ -114,5 +115,5 @@ private slots:
   };
 };
 
-
+#endif //BLUETOOTH
 #endif

@@ -4,18 +4,24 @@
 //             all.
 
 #include "obex.h"
+#ifdef BLUETOOTH
 #include "btobex.h"
+#endif
 #include "obexsend.h"
 using namespace OpieObex;
+#ifdef BLUETOOTH
 using namespace OpieTooth;
+#endif
 
 /* OPIE */
 #include <opie2/odebug.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <opie2/oresource.h>
 #include <qpe/version.h>
+#ifdef BLUETOOTH
 #include <devicehandler.h>
 #include "remotedevice.h"
+#endif
 
 using namespace Opie::Core;
 
@@ -52,6 +58,7 @@ void SendWidget::initUI() {
     connect(chan, SIGNAL(received(const QCString&,const QByteArray&) ),
             this, SLOT(dispatchIrda(const QCString&,const QByteArray&) ) );
 
+#ifdef BLUETOOTH
     m_btobex = new BtObex(this, "btobex");
     connect(m_btobex, SIGNAL(error(int) ),
             this, SLOT(slotBtError(int) ) );
@@ -63,7 +70,7 @@ void SendWidget::initUI() {
     chan = new QCopChannel("QPE/BluetoothBack", this );
     connect(chan, SIGNAL(received(const QCString&,const QByteArray&) ),
             this, SLOT(dispatchBt(const QCString&,const QByteArray&) ) );
-
+#endif
 }
 
 /*
@@ -73,7 +80,9 @@ void SendWidget::initUI() {
 void SendWidget::send( const QString& file, const QString& desc ) {
     m_file = file;
     m_irDa.clear();
+#ifdef BLUETOOTH
     m_bt.clear();
+#endif
     m_start = 0;
 
     fileToSend->setText(desc.isEmpty() ? file : desc );
@@ -88,6 +97,7 @@ void SendWidget::send( const QString& file, const QString& desc ) {
         irdaStatus->setText(tr("ready"));
         sendButton->setEnabled( true );
     }
+#ifdef BLUETOOTH
     if ( !QCopChannel::isRegistered("QPE/Bluetooth") )
     {
         btStatus->setText(tr("not enabled."));
@@ -99,6 +109,7 @@ void SendWidget::send( const QString& file, const QString& desc ) {
 	sendButton->setEnabled( true );
     }
     read_receivers();
+#endif
 }
 
 int SendWidget::addReceiver(const QString& str, const char *icon)
@@ -134,6 +145,7 @@ void SendWidget::slotIrDaDevices( const QStringList& list) {
 }
 
 void SendWidget::slotBTDevices( const QMap<QString, QString>& str ) {
+#ifdef BLUETOOTH
     for(QMap<QString, QString>::ConstIterator it = str.begin(); 
         it != str.end(); ++it ) {
         int id = addReceiver(it.key(), "obex/bt.png");
@@ -142,6 +154,9 @@ void SendWidget::slotBTDevices( const QMap<QString, QString>& str ) {
     btStatus->setText(tr("ready."));
     m_btIt = m_bt.begin();
 
+#else
+    (void)str;
+#endif
 }
 void SendWidget::slotSelectedDevice( int, int ) {
 /*    if ( name ==  m_irDeSearch ) {
@@ -163,10 +178,14 @@ void SendWidget::slotIrError( int ) {
     irdaStatus->setText(tr("error :("));
 }
 void SendWidget::slotIrSent( bool b) {
+#ifdef BLUETOOTH
     QString text = b ? tr("Sent") : tr("Failure");
     setReceiverStatus( m_irDaIt.key(), text );
     ++m_irDaIt;
     slotStartIrda();
+#else
+    (void)b;
+#endif
 }
 void SendWidget::slotIrTry(unsigned int trI) {
     setReceiverStatus(m_irDaIt.key(), tr("Try %1").arg( QString::number( trI ) ));
@@ -196,15 +215,24 @@ void SendWidget::slotBtError( int ) {
     btStatus->setText(tr("error :("));    
 }
 void SendWidget::slotBtSent( bool b) {
+#ifdef BLUETOOTH
     QString text = b ? tr("Sent") : tr("Failure");
     setReceiverStatus( m_btIt.key(), text );
     ++m_btIt;
     slotStartBt();
+#else
+    (void)b;
+#endif
 }
 void SendWidget::slotBtTry(unsigned int trI) {
+#ifdef BLUETOOTH
     setReceiverStatus( m_btIt.key(), tr("Try %1").arg( QString::number( trI ) ) );
+#else
+    (void)trI;
+#endif
 }
 void SendWidget::slotStartBt() {
+#ifdef BLUETOOTH
     // skip past unselected receivers
     if ( !m_bt.count() ) 
         return;
@@ -218,13 +246,17 @@ void SendWidget::slotStartBt() {
     setReceiverStatus( m_btIt.key(), tr("Start sending") );
     btStatus->setText(tr("sending."));
     m_btobex->send( m_file, m_btIt.data().second() );
+#endif
 }
 
 void SendWidget::send_to_receivers() {
+#ifdef BLUETOOTH
     slotStartBt();
+#endif
     slotStartIrda();
 }
 
+#ifdef BLUETOOTH
 /**
  * Read receivers saved by bluetooth manager
  */
@@ -253,7 +285,7 @@ void SendWidget::read_receivers()
 	sendButton->setEnabled( true );
     }
 }
-
+#endif
 
 void SendWidget::scan_for_receivers()
 {
@@ -261,8 +293,9 @@ void SendWidget::scan_for_receivers()
     receiverList->clear();
     receivers.clear();
     m_irDa.clear();
+#ifdef BLUETOOTH
     m_bt.clear();
-
+#endif
     if ( QCopChannel::isRegistered("QPE/IrDaApplet") )
     {
         irdaStatus->setText(tr("searching..."));
@@ -270,12 +303,14 @@ void SendWidget::scan_for_receivers()
         QCopEnvelope e2("QPE/IrDaApplet", "listDevices()");
     }
 
+#ifdef BLUETOOTH
     if ( QCopChannel::isRegistered("QPE/Bluetooth") )
     {
         btStatus->setText(tr("searching..."));
         sendButton->setEnabled( true );
         QCopEnvelope e3("QPE/Bluetooth", "listDevices()");
     }
+#endif
 }
 
 void SendWidget::toggle_receiver(QListViewItem* item)
@@ -293,15 +328,19 @@ void SendWidget::toggle_receiver(QListViewItem* item)
 void SendWidget::closeEvent( QCloseEvent* evt) {
     delete m_obex;
     m_obex = NULL;
+#ifdef BLUETOOTH
     delete m_btobex;
     m_btobex = NULL;
+#endif
     obexSendBase::closeEvent(evt);
     {
         QCopEnvelope e("QPE/IrDaApplet", "disableIrda()");
     }
+#ifdef BLUETOOTH
     {
         QCopEnvelope e("QPE/Bluetooth", "disableBluetooth()");
     }
+#endif
 }
 
 void SendWidget::userDone() {

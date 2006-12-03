@@ -21,7 +21,9 @@ class QVBoxLayout;
  */
 namespace OpieObex {
     class Obex;
+#ifdef BLUETOOTH
     class BtObex;
+#endif
 
     struct Pair {
         Pair(const QString& first = QString::null,
@@ -44,7 +46,9 @@ namespace OpieObex {
 
     protected:
         void closeEvent( QCloseEvent* );
+#ifdef BLUETOOTH
 	void read_receivers();
+#endif
 
     public slots:
         void send( const QString& file, const QString& desc );
@@ -63,6 +67,7 @@ namespace OpieObex {
         void slotIrDaDevices( const QStringList& );
         /* Bt Names + BD-Addr */
         void slotBTDevices( const QMap<QString, QString>& );
+
         void slotSelectedDevice( int id, int dev );
 
         void dispatchIrda( const QCString& str, const QByteArray& ar );
@@ -87,12 +92,16 @@ namespace OpieObex {
         int m_start;
         QMap<int, QString> m_irDa;
         QMap<int, QString>::Iterator m_irDaIt;
+#ifdef BLUETOOTH
         QMap<int, Pair > m_bt;
         QMap<int, Pair>::Iterator m_btIt;
+#endif
 	QMap<int, QListViewItem *> receivers;
         QString m_file;
         Obex* m_obex;
+#ifdef BLUETOOTH
         BtObex* m_btobex;
+#endif
     };
 }
 
