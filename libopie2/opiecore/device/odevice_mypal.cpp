@@ -153,9 +153,9 @@ bool MyPal::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, 
             break;
         }
 
-        // map Power Button short/long press to F6
-        case Key_F6: {
-            if ( isPress ) {
+        // map Power Button short/long press
+        case HardKey_Suspend: { // Hope we don't have infinite recursion here:
+	    if ( isPress ) {
                 if ( m_power_timer )
                     killTimer ( m_power_timer );
                 m_power_timer = startTimer ( 500 );
