@@ -60,29 +60,32 @@
 using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 
+#define Model_Keyboardless_2_6 (Model_MyPal_716)
+
 struct m_button mypal_buttons [] = {
-    { Model_MyPal_716,
+    // Common button map for all keyboardless devices with 2.6 kernel
+    { Model_Keyboardless_2_6,
     Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
     "devicebuttons/ipaq_calendar",
     "datebook", "nextView()",
     "today", "raise()" },
-    { Model_MyPal_716,
+    { Model_Keyboardless_2_6,
     Qt::Key_F10, QT_TRANSLATE_NOOP("Button", "Contacts Button"),
     "devicebuttons/ipaq_contact",
     "addressbook", "raise()",
     "addressbook", "beamBusinessCard()" },
-    { Model_MyPal_716,
-    Qt::Key_F8, QT_TRANSLATE_NOOP("Button", "Mail Button"),
+    { Model_Keyboardless_2_6,
+    Qt::Key_F11, QT_TRANSLATE_NOOP("Button", "Mail Button"),
     "devicebuttons/ipaq_mail",
     "opiemail", "raise()",
     "opiemail", "newMail()" },
-    { Model_MyPal_716,
+    { Model_Keyboardless_2_6,
     Qt::Key_F12, QT_TRANSLATE_NOOP("Button", "Home Button"),
     "devicebuttons/ipaq_home",
     "QPE/Launcher", "home()",
     "buttonsettings", "raise()" },
-    { Model_MyPal_716,
-    Qt::Key_F7, QT_TRANSLATE_NOOP("Button", "Record Button"),
+    { Model_Keyboardless_2_6,
+    Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"),
     "devicebuttons/ipaq_record",
     "QPE/VMemo", "toggleRecord()",
     "sound", "raise()" },
