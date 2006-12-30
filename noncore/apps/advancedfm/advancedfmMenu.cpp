@@ -13,6 +13,7 @@
 #include "advancedfm.h"
 #include "output.h"
 #include "filePermissions.h"
+#include "fileInfoDialog.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
@@ -26,6 +27,7 @@ using namespace Opie::Core;
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
 #include <qlistview.h>
+#include <qlabel.h>
 
 /* STD */
 
@@ -653,33 +655,91 @@ void AdvancedFm::runCommandStd() {
 }
 
 void AdvancedFm::fileStatus() {
-		if( !CurrentView()->currentItem()) return;
-		QString curFile;
-		curFile = CurrentView()->currentItem()->text(0);
-		if(QFileInfo("/usr/bin/stat").exists()) {
-				QStringList command;
-				command << "/bin/sh";
-				command << "-c";
-				command << "stat -l "+ curFile;
-				Output *outDlg;
-				outDlg = new Output( command, this, tr("AdvancedFm Output"), true);
-				QPEApplication::execDialog( outDlg );
-		} else {
-/*    struct stat buf;
-		stat( curFile.local8bit(), &buf);
-		
-		st_dev dev;
-		st_uid uid;
-		st_gid gid;
-		st_size size;
-		st_atime atime;
-		st_mtime mtime;
-		st_ctime ctime;
-    st_mode mode;
-*/
-		}
+	if( !CurrentView()->currentItem()) return;
+	
+	QString curFile;
+	curFile = CurrentView()->currentItem()->text(0);
+	
+	QFileInfo curFileInfo(curFile);
+	
+	FileInfoDialog *infoDlg = new FileInfoDialog(this);
+	infoDlg->setCaption(tr("Info for %1").arg(curFile));
+	
+	uint size = curFileInfo.size();
+	QString sizestr;
+	if( size > 1048576 )
+		sizestr = tr("%1MB (%2 bytes)").arg(QString().sprintf("%.0f", size / 1048576.0)).arg(size);
+	else if( size > 1024 )
+		sizestr = tr("%1kB (%2 bytes)").arg(QString().sprintf("%.0f", size / 1024.0)).arg(size);
+	else
+		sizestr = tr("%1 bytes").arg(size);
+			
+	infoDlg->sizeLabel->setText(sizestr);
+	
+	if(curFileInfo.isSymLink())
+		infoDlg->typeLabel->setText(tr("symbolic link"));
+	else if(curFileInfo.isFile()) {
+		if(curFileInfo.isExecutable())
+			infoDlg->typeLabel->setText(tr("executable file"));
+		else
+			infoDlg->typeLabel->setText(tr("file"));
+	}
+	else if(curFileInfo.isDir())
+		infoDlg->typeLabel->setText(tr("directory"));
+	else
+		infoDlg->typeLabel->setText(tr("unknown"));
+	
+	infoDlg->ownerLabel->setText( QString("%1 (%2)").arg(curFileInfo.owner()).arg(curFileInfo.ownerId()) );
+	infoDlg->groupLabel->setText( QString("%1 (%2)").arg(curFileInfo.group()).arg(curFileInfo.groupId()) );
+	
+	infoDlg->lastReadLabel->setText( curFileInfo.lastRead().toString() );
+	infoDlg->lastModifiedLabel->setText( curFileInfo.lastModified().toString() );
+	
+	QString perms;
+	// User
+	if(curFileInfo.permission(QFileInfo::ReadUser))
+		perms += "r";
+	else
+		perms += "-";
+	if(curFileInfo.permission(QFileInfo::WriteUser))
+		perms += "w";
+	else
+		perms += "-";
+	if(curFileInfo.permission(QFileInfo::ExeUser))
+		perms += "x";
+	else
+		perms += "-";
+	// Group
+	if(curFileInfo.permission(QFileInfo::ReadGroup))
+		perms += "r";
+	else
+		perms += "-";
+	if(curFileInfo.permission(QFileInfo::WriteGroup))
+		perms += "w";
+	else
+		perms += "-";
+	if(curFileInfo.permission(QFileInfo::ExeGroup))
+		perms += "x";
+	else
+		perms += "-";
+	// Other
+	if(curFileInfo.permission(QFileInfo::ReadOther))
+		perms += "r";
+	else
+		perms += "-";
+	if(curFileInfo.permission(QFileInfo::WriteOther))
+		perms += "w";
+	else
+		perms += "-";
+	if(curFileInfo.permission(QFileInfo::ExeOther))
+		perms += "x";
+	else
+		perms += "-";
+	infoDlg->permsLabel->setText( perms );
+	
+	QPEApplication::execDialog( infoDlg );
 
-		qApp->processEvents();
+	qApp->processEvents();
 }
 
 
