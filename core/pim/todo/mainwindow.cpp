@@ -285,27 +285,35 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
     }
 }
 void MainWindow::slotItemNew() {
-    NewTaskDlg dlg( templateManager()->templates(), this );
-    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
-        QString tempName = dlg.tempSelected();
-        if ( tempName.isNull() )
-            // Create new, blank task
-            create();
-        else {
-            // Create new task from the template selected
-            OPimTodo event = templateManager()->templateEvent( tempName );
-            event = currentEditor()->edit( this, event );
-            if ( currentEditor()->accepted() ) {
-                event.setUid( 1 );
-                handleAlarms( OPimTodo(), event );
-                m_todoMgr.add( event );
-                currentView()->addEvent( event );
+	QStringList templateList = templateManager()->templates();
+	if(templateList.isEmpty()) {
+		// No templates, just create a blank task
+		create();
+	}
+	else {
+		// There are templates, so allow the user to select one
+		NewTaskDlg dlg( templateList, this );
+		if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
+			QString tempName = dlg.tempSelected();
+			if ( tempName.isNull() )
+				// Create new, blank task
+				create();
+			else {
+				// Create new task from the template selected
+				OPimTodo event = templateManager()->templateEvent( tempName );
+				event = currentEditor()->edit( this, event );
+				if ( currentEditor()->accepted() ) {
+					event.setUid( 1 );
+					handleAlarms( OPimTodo(), event );
+					m_todoMgr.add( event );
+					currentView()->addEvent( event );
 
-                reloadCategories();
-            }
-            raiseCurrentView();
-        }
-    }
+					reloadCategories();
+				}
+				raiseCurrentView();
+			}
+		}
+	}
 }
 void MainWindow::slotItemEdit() {
     slotEdit( currentView()->current() );
