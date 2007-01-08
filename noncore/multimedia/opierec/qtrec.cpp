@@ -466,8 +466,6 @@ void QtRec::cleanUp() {
 void QtRec::init() {
 
 		needsStereoOut = false;
-		QPixmap image3( ( const char** ) image3_data );
-		QPixmap image4( ( const char** ) image4_data );
 		QPixmap image6( ( const char** ) image6_data );
 
 		stopped = true;
@@ -501,7 +499,7 @@ void QtRec::init() {
 		Stop_PushButton = new QPushButton(  tab, "Stop_PushButton" );
 		layout1->addMultiCellWidget( Stop_PushButton, 1, 1, 4, 4);
 		Stop_PushButton->setFixedSize( 22, 22);
-		Stop_PushButton->setPixmap( image4 );
+		Stop_PushButton->setPixmap( Opie::Core::OResource::loadPixmap("play2", Opie::Core::OResource::SmallIcon) );
 
 		toBeginningButton = new QPushButton(  tab, "Beginning_PushButton" );
 		layout1->addMultiCellWidget(toBeginningButton, 1, 1, 5, 5);
@@ -537,7 +535,8 @@ void QtRec::init() {
 
 		deleteSoundButton  = new QPushButton( tab, "deleteSoundButton" );
 		layout1->addMultiCellWidget( deleteSoundButton, 1, 1, 8, 8);
-		deleteSoundButton->setText( tr( "Del" ) );
+		deleteSoundButton->setFixedSize( 22, 22);
+		deleteSoundButton->setPixmap(  Opie::Core::OResource::loadPixmap( "editdelete", Opie::Core::OResource::SmallIcon )  );
 
 		ListView1 = new QListView( tab, "IconView1" );
 		layout1->addMultiCellWidget( ListView1, 2, 2, 0, 8);
@@ -545,8 +544,10 @@ void QtRec::init() {
 		ListView1->addColumn( tr( "Name" ) );
 		ListView1->setSorting( 1, false);
 		ListView1->addColumn( tr( "Time" ) ); //in seconds
+		ListView1->addColumn( tr( "Size" ) );
 		ListView1->setColumnWidthMode(0, QListView::Maximum);
- 		ListView1->setColumnAlignment( 1, QListView::AlignCenter);
+ 		ListView1->setColumnAlignment( 1, QListView::AlignRight);
+ 		ListView1->setColumnAlignment( 2, QListView::AlignRight);
 		ListView1->setAllColumnsShowFocus( true );
 		QPEApplication::setStylusOperation( ListView1->viewport(), QPEApplication::RightOnHold);
 
@@ -702,15 +703,19 @@ void QtRec::initIconView() {
 				fileDate = info.lastModified().toString();
 
 				fileS = cfg.readEntry( filePath, "0" );// file length in seconds
+				QString sizeStr;
+				fileSize(info.size(), sizeStr);
 				mediaLocation = getStorage( filePath);
 				if( info.exists()) {
 //						owarn << "new item " << temp << oendl;
-						item = new QListViewItem( ListView1, temp,  fileS /*,  mediaLocation, fileDate*/);
+						item = new QListViewItem( ListView1, temp, fileS, sizeStr );
 						item->setPixmap( 0, image0);
 						if( currentFileName == filePath)
 								ListView1->setSelected( item, true);
 				}
 		}
+		
+		setButtons();
 }
 
 void QtRec::initConnections() {
@@ -786,7 +791,7 @@ void QtRec::initConfig() {
 		QString temp;
 		sizeLimitCombo->setCurrentItem((i/5));
 
-		stereoCheckBox->setChecked( cfg.readBoolEntry("stereo", 1));
+		stereoCheckBox->setChecked( cfg.readBoolEntry("stereo", 0));
 		if( stereoCheckBox->isChecked()) {
 				filePara.channels = 2;
 		} else {
@@ -814,7 +819,6 @@ void QtRec::initConfig() {
 
 void QtRec::stop() {
 //		owarn << "STOP" << oendl;
-		setRecordButton(false);
 
 		if( !recording) {
 				emit stopPlaying();
@@ -824,6 +828,7 @@ void QtRec::stop() {
 				endRecording();
 		}
 		timeSlider->setValue(0);
+		setButtons();
 }
 
 void QtRec::doPlayBtn() {
@@ -841,11 +846,9 @@ void QtRec::doPlayBtn() {
 
 void QtRec::start() { //play
 		if( stopped) {
-				QPixmap image3( ( const char** ) image3_data );
-				Stop_PushButton->setPixmap( image3 );
-				Stop_PushButton->setDown( true);
 				stopped = false;
 				paused = false;
+				setButtons();
 				secCount = 1;
 
 				if( openPlayFile())
@@ -865,7 +868,7 @@ bool QtRec::rec() { //record
 				secCount = 1;
 //				playLabel2->setText(tr("Stop"));
 				monitoring = false;
-				setRecordButton( true);
+				setButtons();
 
 				if( setupAudio( true))
 						if(setUpFile())  {
@@ -921,8 +924,7 @@ bool QtRec::rec() { //record
 										pthread_t thread1;
 										pthread_create( &thread1, NULL, (void * (*)(void *))quickRec, NULL/* &*/);
 #endif
-										toBeginningButton->setEnabled( false);
-										toEndButton->setEnabled( false);
+										setButtons();
 
 										startTimer(1000);
 #ifndef THREADED
@@ -1140,8 +1142,7 @@ bool QtRec::doPlay() {
 		pthread_create( &thread2, NULL, (void * (*)(void *))playIt, NULL/* &*/);
 #endif
 
-		toBeginningButton->setEnabled( false);
-		toEndButton->setEnabled( false);
+		setButtons();
 #ifndef  THREADED
 		playIt();
 #endif
@@ -1205,9 +1206,8 @@ void QtRec::changeSizeLimitCombo(int) {
 }
 
 void QtRec::newSound() {
-		if( !rec()) {
-				endRecording();
-				deleteSound();
+	if(!rec()) {
+		stop();
 		}
 }
 
@@ -1221,6 +1221,8 @@ void QtRec::deleteSound() {
 		cfg.setGroup("Sounds");
 		if( ListView1->currentItem() == NULL)
 				return;
+		
+	if (QMessageBox::information(this, tr("Delete"), tr("Are you sure?"), QMessageBox::Yes, QMessageBox::No)==QMessageBox::Yes) {
 		QString file = ListView1->currentItem()->text(0);
 		QString fileName;
 		fileName = cfg.readEntry( file, "");
@@ -1254,6 +1256,7 @@ void QtRec::deleteSound() {
 		initIconView();
 		update();
 		setCaption( tr( "OpieRecord " ));
+	}
 }
 
 void QtRec::keyPressEvent( QKeyEvent *e) {
@@ -1376,10 +1379,8 @@ void QtRec::endRecording() {
 		recording = false;
 		stopped = true;
 		waveform->reset();
-		setRecordButton( false);
 
-		toBeginningButton->setEnabled( true);
-		toEndButton->setEnabled( true);
+		setButtons();
 
 		killTimers();
 
@@ -1442,10 +1443,7 @@ void QtRec::endPlaying() {
 		waveform->reset();
 //   errorStop();
     odebug << "end playing" << oendl;
-		setRecordButton( false);
-
-		toBeginningButton->setEnabled( true);
-		toEndButton->setEnabled( true);
+		setButtons();
 
 		if(autoMute)
 				doMute( true);
@@ -1531,6 +1529,7 @@ void QtRec::listPressed( int mouse, QListViewItem *item, const QPoint &, int ) {
 							cancelRename();
 
 					currentFile = item->text(0);
+					setButtons();
 //					setCaption( "OpieRecord  " + currentFile);
 			}
 					break;
@@ -1590,6 +1589,7 @@ void QtRec::doBeam() {
 void QtRec::doMenuPlay() {
 		qApp->processEvents();
 		currentFile = ListView1->currentItem()->text(0);
+		doPlayBtn();
 }
 
 void QtRec::doRename() {
@@ -1627,6 +1627,9 @@ void QtRec::okRename() {
 
 		QString file = ListView1->currentItem()->text(0);
 
+		if(file == filename)
+				return;
+			
 		odebug << "filename is  " + filename << oendl;
 
 		int nFiles = cfg.readNumEntry("NumberofFiles",0);
@@ -1938,29 +1941,6 @@ QString QtRec::getStorage(const QString &fileName) {
 			//      endmntent( mntfp );
 }
 
-void QtRec::setRecordButton(bool b) {
-
-		if(b) { //about to record or play
-
-				Rec_PushButton->setDown( true);
-				QPixmap image3( ( const char** ) image3_data );
-				Stop_PushButton->setPixmap( image3 );
-				if(Stop_PushButton->isDown())
-						Stop_PushButton->setDown( true);
-//				playLabel2->setText( tr("Stop") );
-
-		} else { //about to stop
-
-				QPixmap image4( ( const char** ) image4_data );
-				Stop_PushButton->setPixmap( image4);
-				if(Stop_PushButton->isDown())
-						Stop_PushButton->setDown( false);
-//				playLabel2->setText( tr("Play") );
-				if(Rec_PushButton->isDown())
-						Rec_PushButton->setDown( false);
-		}
-}
-
 void QtRec::fillDirectoryCombo() {
 		if( directoryComboBox->count() > 0)
 				directoryComboBox->clear();
@@ -2050,4 +2030,39 @@ void QtRec::changeStereoCheck(bool b) {
 		cfg.write();
 }
 
+void QtRec::setButtons() {
+	if(stopped) {
+		Stop_PushButton->setPixmap( Opie::Core::OResource::loadPixmap("play2", Opie::Core::OResource::SmallIcon) );
+		if(ListView1->currentItem()) {
+			Stop_PushButton->setEnabled(true);
+			toBeginningButton->setEnabled(true);
+			toEndButton->setEnabled(true);
+			deleteSoundButton->setEnabled(true);
+			timeSlider->setEnabled(true);
+		}
+		else {
+			Stop_PushButton->setEnabled(false);
+			toBeginningButton->setEnabled(false);
+			toEndButton->setEnabled(false);
+			deleteSoundButton->setEnabled(false);
+			timeSlider->setEnabled(false);
+		}
+	}
+	else {
+		timeSlider->setEnabled(true);
+		Stop_PushButton->setPixmap( Opie::Core::OResource::loadPixmap("stop", Opie::Core::OResource::SmallIcon) );
+		Stop_PushButton->setEnabled(true);
+		toBeginningButton->setEnabled(false);
+		toEndButton->setEnabled(false);
+		deleteSoundButton->setEnabled(false);
+	}
+}
 
+void QtRec::fileSize(unsigned long size, QString &str) {
+	if( size > 1048576 )
+		str.sprintf( "%.0fM", size / 1048576.0 );
+	else if( size > 1024 )
+		str.sprintf( "%.0fk", size / 1024.0 );
+	else
+		str.sprintf( "%d", size );
+}

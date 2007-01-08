@@ -98,10 +98,11 @@ private:
    void initConfig();
    void initConnections();
    void selectItemByName(const QString &);
-   void setRecordButton(bool);
    void start();
    void stop();
    void timerEvent( QTimerEvent *e );
+   void setButtons();
+   void QtRec::fileSize(unsigned long size, QString &str);
     
 private slots:
    void endPlaying();
