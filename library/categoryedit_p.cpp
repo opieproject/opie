@@ -125,12 +125,15 @@ void CategoryEdit::slotSetText( QListViewItem *selected )
 void CategoryEdit::slotAdd()
 {
     QString name = tr( "New Category" );
-    bool insertOk = FALSE;
+    int uid = 0;
     int num = 0;
-    while ( !insertOk ) {
+    while ( !uid ) {
 	if ( num++ > 0 )
 	    name = tr("New Category ") + QString::number(num);
-	insertOk = d->mCategories.addCategory( d->mStrApp, name );
+	if ( chkGlobal->isChecked() )
+	    uid = d->mCategories.addGlobalCategory( name );
+	else
+	    uid = d->mCategories.addCategory( d->mStrApp, name );
     }
     QCheckListItem *chk;
     chk = new QCheckListItem( lvView, name, QCheckListItem::CheckBox );
