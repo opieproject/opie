@@ -543,21 +543,21 @@ QString customToXml(const QMap<QString, QString>& customMap )
 QString OPimTodoAccessXML::toString( const OPimTodo& ev )const {
     QString str;
 
-    str += "Completed=\"" + QString::number( ev.isCompleted() ) + "\" ";
-    str += "HasDate=\"" + QString::number( ev.hasDueDate() ) + "\" ";
-    str += "Priority=\"" + QString::number( ev.priority() ) + "\" ";
-    str += "Progress=\"" + QString::number(ev.progress() ) + "\" ";
+    str += "Completed=\"" + QString::number( ev.isCompleted() ) + "\"";
+    str += " HasDate=\"" + QString::number( ev.hasDueDate() ) + "\"";
+    str += " Priority=\"" + QString::number( ev.priority() ) + "\"";
+    str += " Progress=\"" + QString::number(ev.progress() ) + "\"";
 
-    str += "Categories=\"" + toString( ev.categories() ) + "\" ";
-    str += "Description=\"" + Qtopia::escapeString( ev.description() ) + "\" ";
-    str += "Summary=\"" + Qtopia::escapeString( ev.summary() ) + "\" ";
+    str += " Categories=\"" + toString( ev.categories() ) + "\"";
+    str += " Description=\"" + Qtopia::escapeString( ev.description() ) + "\"";
+    str += " Summary=\"" + Qtopia::escapeString( ev.summary() ) + "\"";
 
     if ( ev.hasDueDate() ) {
-        str += "DateYear=\"" + QString::number( ev.dueDate().year() ) + "\" ";
-        str += "DateMonth=\"" + QString::number( ev.dueDate().month() ) + "\" ";
-        str += "DateDay=\"" + QString::number( ev.dueDate().day() ) + "\" ";
+        str += " DateYear=\"" + QString::number( ev.dueDate().year() ) + "\"";
+        str += " DateMonth=\"" + QString::number( ev.dueDate().month() ) + "\"";
+        str += " DateDay=\"" + QString::number( ev.dueDate().day() ) + "\"";
     }
-    str += "Uid=\"" + QString::number( ev.uid() ) + "\" ";
+    str += " Uid=\"" + QString::number( ev.uid() ) + "\"";
 
 // append the extra options
     /* FIXME Qtopia::Record this is currently not
@@ -570,18 +570,18 @@ QString OPimTodoAccessXML::toString( const OPimTodo& ev )const {
     QMap<QString, QString> extras = ev.extras();
     QMap<QString, QString>::Iterator extIt;
     for (extIt = extras.begin(); extIt != extras.end(); ++extIt )
-        str += extIt.key() + "=\"" +  extIt.data() + "\" ";
+        str += " " + extIt.key() + "=\"" +  extIt.data() + "\"";
     */
     // cross refernce
     if ( ev.hasRecurrence() ) {
         str += ev.recurrence().toString();
     }
     if ( ev.hasStartDate() )
-        str += "StartDate=\""+ OPimDateConversion::dateToString( ev.startDate() ) +"\" ";
+        str += " StartDate=\""+ OPimDateConversion::dateToString( ev.startDate() ) +"\"";
     if ( ev.hasCompletedDate() )
-        str += "CompletedDate=\""+ OPimDateConversion::dateToString( ev.completedDate() ) +"\" ";
+        str += " CompletedDate=\""+ OPimDateConversion::dateToString( ev.completedDate() ) +"\"";
     if ( ev.hasState() )
-        str += "State=\""+QString::number( ev.state().state() )+"\" ";
+        str += " State=\""+QString::number( ev.state().state() )+"\"";
 
     /*
      * save reminders and notifiers!
@@ -603,7 +603,7 @@ QString OPimTodoAccessXML::toString( const OPimTodo& ev )const {
                 }
             }
             // now write the list
-            str += "Alarms=\""+als.join(";") +"\" ";
+            str += " Alarms=\""+als.join(";") +"\"";
         }
 
         /*
@@ -616,7 +616,7 @@ QString OPimTodoAccessXML::toString( const OPimTodo& ev )const {
             for ( ; it != reminders.end(); ++it ) {
                 records << QString::number( (*it).recordUid() );
             }
-            str += "Reminders=\""+ records.join(";") +"\" ";
+            str += " Reminders=\""+ records.join(";") +"\"";
         }
     }
     str += customToXml( ev.toExtraMap() );
