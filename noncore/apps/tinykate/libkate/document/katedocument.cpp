@@ -2219,7 +2219,7 @@ bool KateDocument::doSearch(SConfig &sc, const QString &searchFor) {
       textLine = getTextLine(line);
       tlen = textLine->length();
       if (tlen > bufLen) {
-        delete t;
+        delete [] t;
         bufLen = (tlen + 255) & (~255);
         t = new QChar[bufLen];
       }
@@ -2280,7 +2280,7 @@ bool KateDocument::doSearch(SConfig &sc, const QString &searchFor) {
       textLine = getTextLine(line);
       tlen = textLine->length();
       if (tlen > bufLen) {
-        delete t;
+        delete [] t;
         bufLen = (tlen + 255) & (~255);
         t = new QChar[bufLen];
       }

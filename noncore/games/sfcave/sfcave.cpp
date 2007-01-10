@@ -998,7 +998,7 @@ void SFCave :: loadReplay()
         replayList.append( new int( v ) );
     }
 
-    delete data;
+    delete [] data;
 
     fclose( in );
     

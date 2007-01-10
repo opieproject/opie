@@ -225,7 +225,7 @@ void KRFBDecoder::gotDesktopName()
 
   owarn << "Desktop: " << info->name.latin1() << "" << oendl;
 
-  delete buf;
+  delete [] buf;
 
   // Get the format we'll really use and tell the server
   decidePixelFormat();
@@ -535,7 +535,7 @@ void KRFBDecoder::gotRawRectChunk()
   char *hack = new char[ count ];
   con->read( hack, count );
   buf->drawRawRectChunk( hack, x, y, w, lines );
-  delete hack;
+  delete [] hack;
   // /TODO:
 
   h = h - lines;
@@ -728,7 +728,7 @@ void KRFBDecoder::gotServerCutText()
   qApp->clipboard()->setText( cutText );
   */
 
-  delete cutbuf;
+  delete [] cutbuf;
   // Now wait for the update (again)
   if ( oldState == AwaitingUpdate ) {
     currentState = AwaitingUpdate;

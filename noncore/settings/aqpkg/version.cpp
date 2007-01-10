@@ -38,7 +38,7 @@ public:
     ~versionrevision()
     {
         if ( version )
-            delete version;
+            delete [] version;
     }
 
     void setVersion( const char *str )

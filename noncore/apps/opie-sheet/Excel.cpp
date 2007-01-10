@@ -338,7 +338,7 @@ int ExcelBook::SeekBOF(void)
             version=Integer2Byte(data[0], data[1]);
             streamtype=Integer2Byte(data[2], data[3]);
             printf("SEEKBOF:opcode=XLBOF, %d ,version %d\r\n",Position,version);
-            delete data; data=NULL;
+            delete [] data; data=NULL;
             if (version==BIFF8) ret=8;
             else if(version==BIFF7) ret=7;
             printf("SEEKBOF:versionBIFF%d\r\n",ret);

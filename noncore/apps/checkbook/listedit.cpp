@@ -236,7 +236,7 @@ void ListEdit::fixTypes(int iColumn)
         colMap[i]->getItem()->setText(iColumn, colMap[i]->getValue());
         delete colMap[i];
     }
-    delete colMap;
+    delete [] colMap;
 }
 
 void ListEdit::fixTypes()

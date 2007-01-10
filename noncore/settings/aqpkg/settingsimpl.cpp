@@ -347,7 +347,7 @@ void SettingsImpl :: changeServerDetails()
     tmpStr[newName.length()] = '\0';
 
     newName = tmpStr;
-    delete tmpStr;
+    delete [] tmpStr;
 
     if ( !newserver )
     {
