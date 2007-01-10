@@ -282,7 +282,7 @@ bool QIMPenWidget::selectSet( QPoint p )
 /*!
   Hopefully returns a sensible size.
 */
-QSize QIMPenWidget::sizeHint()
+QSize QIMPenWidget::sizeHint() const
 {
     return QSize( TITLE_WIDTH * charSets.count(), 75 );
 }

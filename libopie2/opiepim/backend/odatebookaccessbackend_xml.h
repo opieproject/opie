@@ -52,7 +52,7 @@ public:
 
     QArray<int> allRecords()const;
     QArray<int> matchRegexp(const QRegExp &r) const;
-    QArray<int> queryByExample( const OPimEvent&, int, const QDateTime& d = QDateTime() );
+    QArray<int> queryByExample( const OPimEvent&, int, const QDateTime& d = QDateTime() )const;
     OPimEvent find( int uid )const;
     void clear();
     bool add( const OPimEvent& ev );

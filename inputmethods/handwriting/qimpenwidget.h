@@ -37,7 +37,7 @@ public:
     void changeCharSet( QIMPenCharSet *cs, int pos );
     void clearCharSets();
     void showCharacter( QIMPenChar *, int speed = 10 );
-    virtual QSize sizeHint();
+    virtual QSize sizeHint() const;
 
 public slots:
     void removeStroke();

@@ -390,7 +390,7 @@ void LightStyle::drawBevelButton(QPainter *p, int x, int y, int w, int h,
 }
 
 
-void LightStyle::getButtonShift(int &x, int &y) const
+void LightStyle::getButtonShift(int &x, int &y)
 {
     x = y = 0;
 }
@@ -425,7 +425,7 @@ void LightStyle::drawComboButton(QPainter *p, int x, int y, int w, int h,
 }
 
 
-QRect LightStyle::comboButtonRect( int x, int y, int w, int h ) const
+QRect LightStyle::comboButtonRect( int x, int y, int w, int h )
 {
     QRect r(x + 3, y + 3, w - 6, h - 6);
     int indent = ((y + h) / 2) - 3;
@@ -440,7 +440,7 @@ QRect LightStyle::comboButtonRect( int x, int y, int w, int h ) const
 }
 
 
-QRect LightStyle::comboButtonFocusRect(int x, int y, int w, int h ) const
+QRect LightStyle::comboButtonFocusRect(int x, int y, int w, int h )
 {
     return comboButtonRect(x, y, w, h);
 }
@@ -801,7 +801,7 @@ void LightStyle::drawSliderGroove(QPainter *p, int x, int y, int w, int h,
 
 void LightStyle::scrollBarMetrics(const QScrollBar *scrollbar,
                                        int &sliderMin, int &sliderMax,
-                                       int &sliderLength, int &buttonDim) const
+                                       int &sliderLength, int &buttonDim)
 {
     int maxLength;
     int length = ((scrollbar->orientation() == Horizontal) ?

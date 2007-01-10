@@ -291,7 +291,7 @@ QArray<int> ODateBookAccessBackend_XML::allRecords()const {
 
     return ints;
 }
-QArray<int> ODateBookAccessBackend_XML::queryByExample(const OPimEvent&, int,  const QDateTime& ) {
+QArray<int> ODateBookAccessBackend_XML::queryByExample(const OPimEvent&, int,  const QDateTime& ) const {
     return QArray<int>();
 }
 void ODateBookAccessBackend_XML::clear() {

@@ -56,14 +56,14 @@ public:
     void drawBevelButton(QPainter *p, int x, int y, int w, int h,
                          const QColorGroup &g, bool sunken = FALSE,
                          const QBrush *fill = 0);
-    void getButtonShift(int &x, int &y) const;
+    void getButtonShift(int &x, int &y);
 
     void drawComboButton(QPainter *p, int x, int y, int w, int h,
                          const QColorGroup &g, bool sunken = FALSE,
                          bool editable = FALSE, bool = TRUE,
                          const QBrush *fill = 0);
-    QRect comboButtonRect(int x, int y, int w, int h) const;
-    QRect comboButtonFocusRect(int x, int y, int w, int h) const;
+    QRect comboButtonRect(int x, int y, int w, int h);
+    QRect comboButtonFocusRect(int x, int y, int w, int h);
 
     void drawIndicator(QPainter *p, int x, int y ,int w, int h,
                        const QColorGroup &g, int state,
@@ -80,7 +80,7 @@ public:
                    int = 1, const QBrush * = 0);
 
     void scrollBarMetrics( const QScrollBar *,
-                           int &, int &, int &, int & ) const;
+                           int &, int &, int &, int & );
     void drawScrollBarControls(QPainter* p, const QScrollBar* sb,
                                int sliderStart, uint controls,
                                uint activeControl);
