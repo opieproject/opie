@@ -276,7 +276,7 @@ bool NHcfg::endElement(const QString&, const QString&,const QString& name)
     return true;
 }
 
-QString NHcfg::errorString() const
+QString NHcfg::errorString()
 {
     return err;
 }

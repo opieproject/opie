@@ -57,7 +57,7 @@ public:
     virtual bool fatalError(const QXmlParseException& e);
     virtual bool startElement(const QString&, const QString&,const QString& name, const QXmlAttributes& attr);
     virtual bool endElement(const QString&, const QString&,const QString& name);
-    virtual QString errorString()const;
+    virtual QString errorString();
 
 protected:
     QString err,_contentname;
