@@ -2,8 +2,8 @@
 <context>
     <name>Ntp</name>
     <message>
-        <source>time.fu-berlin.de</source>
-        <translation>time.fu-berlin.de</translation>
+	<source>pool.ntp.org</source>
+        <translation>pool.ntp.org</translation>
     </message>
     <message>
         <source>Run NTP?</source>

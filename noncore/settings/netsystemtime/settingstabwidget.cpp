@@ -103,9 +103,9 @@ SettingsTabWidget::SettingsTabWidget( QWidget *parent )
 		cbTimeServer->insertItem( ntpSrvs.readEntry( "name" ) );
 	}
 	if ( srvCount==0 ) {
-		cbTimeServer->insertItem( "time.fu-berlin.de" );
-    cbTimeServer->insertItem( "time-a.nist.gov" );
-    cbTimeServer->insertItem( "ntp.bri.connect.com.au" );
+		cbTimeServer->insertItem( "0.pool.ntp.org" );
+    cbTimeServer->insertItem( "1.pool.ntp.org" );
+    cbTimeServer->insertItem( "2.pool.ntp.org" );
   }
 	Config config( "ntp" );
 	config.setGroup( "settings" );

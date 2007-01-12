@@ -1,24 +1,24 @@
 [servers]
 count = 11
 [0]
-name = time.fu-berlin.de
+name = de.pool.ntp.org
 [1]
-name = time.ethz.ch
+name = ch.pool.ntp.org
 [2]
-name = otc2.psu.edu
+name = us.pool.ntp.org
 [3]
-name = ice.mcc.ac.uk
+name = uk.pool.ntp.org
 [4]
-name = ptbtime1.ptb.de
+name = 0.de.pool.ntp.org
 [5]
-name = bernina.ethz.ch
+name = 0.ch.pool.ntp.org
 [6]
-name = ntp.univ-lyon1.fr
+name = fr.pool.ntp.org
 [7]
-name = ntp.bri.connect.com.au
+name = au.pool.ntp.org
 [8]
-name = nist1.datum.com
+name = 1.us.pool.ntp.org
 [9]
-name = time-a.nist.gov
+name = 2.us.pool.ntp.org
 [10]
-name = time-b.timefreq.bldrdoc.gov
+name = 3.us.pool.ntp.org
