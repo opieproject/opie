@@ -1,24 +1,14 @@
 [servers]
-count = 11
+count = 6
 [0]
-name = de.pool.ntp.org
+name = africa.pool.ntp.org
 [1]
-name = ch.pool.ntp.org
+name = asia.pool.ntp.org
 [2]
-name = us.pool.ntp.org
+name = europe.pool.ntp.org
 [3]
-name = uk.pool.ntp.org
+name = north-america.pool.ntp.org
 [4]
-name = 0.de.pool.ntp.org
+name = oceania.pool.ntp.org
 [5]
-name = 0.ch.pool.ntp.org
-[6]
-name = fr.pool.ntp.org
-[7]
-name = au.pool.ntp.org
-[8]
-name = 1.us.pool.ntp.org
-[9]
-name = 2.us.pool.ntp.org
-[10]
-name = 3.us.pool.ntp.org
+name = south-america.pool.ntp.org
