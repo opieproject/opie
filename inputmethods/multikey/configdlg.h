@@ -52,7 +52,7 @@ private:
 
     QStringList default_maps; // the maps in your share/multikey/ dir
     QStringList custom_maps; // maps you added with the 'add' button
-    QStringList sw_maps; // maps, which used in keyboard switch rotation ring
+    QStringList sw_maps; // maps used in keyboard switch rotation ring
 
     /* color buttons */
     QPushButton *keycolor_button;

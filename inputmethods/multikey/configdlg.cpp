@@ -83,7 +83,7 @@ ConfigDlg::ConfigDlg () : QDialog ()
     keymaps->setSelected(0, true);
     
     QDir map_dir(QPEApplication::qpeDir() + "share/multikey", "*.keymap");
-    default_maps = map_dir.entryList(); // so i can access it in other places
+    default_maps = map_dir.entryList(); // so the object can access keymaps in other places
     custom_maps = config.readListEntry("maps", QChar('|'));
     sw_maps = ConfigDlg::loadSw();
 
@@ -144,14 +144,16 @@ ConfigDlg::ConfigDlg () : QDialog ()
     add_remove_grid->setMargin(3);
     add_remove_grid->setSpacing(3);
 
-    add_button = new QPushButton(tr("Add"), add_remove_grid);
+    add_button = new QPushButton(tr("Add keymap..."), add_remove_grid);
     add_button->setFlat(TRUE);
     connect(add_button, SIGNAL(clicked()), SLOT(addMap()));
 
-    remove_button = new QPushButton(tr("Remove"), add_remove_grid);
+    remove_button = new QPushButton(tr("Remove keymap"), add_remove_grid);
     remove_button->setFlat(TRUE);
-    if (keymaps->currentItem() == 0 || default_maps.find(QFileInfo(current_map).fileName()) != default_maps.end())
-	remove_button->setDisabled(true);
+    if (keymaps->currentItem() == 0 || default_maps.find(QFileInfo(current_map).fileName()) != default_maps.end()) {
+        remove_button->setDisabled(true);
+        remove_button->hide();
+    }
     connect(remove_button, SIGNAL(clicked()), SLOT(removeMap()));
 
     gen_lay->addWidget(map_group);
@@ -305,15 +307,17 @@ void ConfigDlg::accept()
     if (index == 0) {
 
         remove_button->setDisabled(true);
+        remove_button->hide();
         emit setMapToDefault();
     }
     else if (default_maps.find(sw_maps[index-1]) != default_maps.end()) {
 
         remove_button->setDisabled(true);
+        remove_button->hide();
         emit setMapToFile(QPEApplication::qpeDir() + "share/multikey/" + sw_maps[index - 1]);
 
     } else {
-
+        remove_button->show();
         remove_button->setEnabled(true);
         emit setMapToFile(sw_maps[index - 1]);
     }
@@ -368,7 +372,9 @@ void ConfigDlg::setMap(int index) {
 
     if (index == 0 || default_maps.find(sw_maps[index-1]) != default_maps.end()) {
         remove_button->setDisabled(true);
+        remove_button->hide();
     } else {
+        remove_button->show();
         remove_button->setEnabled(true);
     }
 }
