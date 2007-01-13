@@ -55,6 +55,13 @@ DocTabSettings::DocTabSettings( QWidget* parent, const char* name, WFlags fl )
 {
 	dl = new QPEDialogListener(this);
 	reset();
+
+	Config cfg( "Launcher" );
+	cfg.setGroup( "DocTab" );
+	if(cfg.readBoolEntry( "Enable", true ))
+		yes->setChecked(true);
+	else
+		no->setChecked(true);
 }
 
 DocTabSettings::~DocTabSettings()
