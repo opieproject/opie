@@ -1893,6 +1893,7 @@ void KateView::find() {
     initSearch(s, searchFlags);
     findAgain(s);
   }
+  qApp->processEvents();
   delete searchDialog;
 }
 
@@ -1932,6 +1933,7 @@ void KateView::replace() {
     initSearch(s, searchFlags);
     replaceAgain();
   }
+  qApp->processEvents();
   delete searchDialog;
 }
 
@@ -1952,6 +1954,7 @@ void KateView::gotoLine() {
     myViewInternal->updateView(KateView::ufUpdateOnScroll);
     myDoc->updateViews(this); //uptade all other views except this one
   }
+  qApp->processEvents();
   delete dlg;
 }
 
