@@ -64,6 +64,9 @@ int OPimContactSortVector::compareItems( const OPimContact& left,
         ret = testString( left.middleName(), right.middleName() );
         soMiddleName = true;
         break;
+    case OPimContactAccess::SortLastName:
+        ret = testString( left.lastName(), right.lastName() );
+        break;
     case OPimContactAccess::SortSuffix:
         ret = testString( left.suffix(), right.suffix() );
         soSuffix = true;
@@ -92,6 +95,17 @@ int OPimContactSortVector::compareItems( const OPimContact& left,
     case OPimContactAccess::SortGender:
         ret = testString( left.gender(), right.gender() );
         soGender = true;
+        break;
+    case OPimContactAccess::SortBirthdayWithoutYear:
+        // This doesn't actually just sort by the date without year,
+        // it actually works out the days until the next occurrence,
+        // which is more useful since it will work correctly when
+        // crossing year boundaries. - Paul Eggleton Dec 2006
+        ret = testDaysUntilNextDate( left.birthday(), right.birthday() );
+        break;
+    case OPimContactAccess::SortAnniversaryWithoutYear:
+        // (as above)
+        ret = testDaysUntilNextDate( left.anniversary(), right.anniversary() );
         break;
     }
 

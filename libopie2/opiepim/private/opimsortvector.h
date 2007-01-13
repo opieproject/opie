@@ -56,6 +56,8 @@ protected:
     int testTime( const QTime&, const QTime& )const;
     int testDateTime( const QDateTime& left,
 		      const QDateTime& right )const;
+    int testDaysUntilNextDate( const QDate& left,
+          const QDate& right )const;
 protected:
     bool sortAscending()const;
     int  sortOrder()const;
@@ -164,6 +166,28 @@ inline int OPimSortVector<T>::testDateTime( const QDateTime& left,
 
     return ret;
 
+}
+
+template<class T>
+inline int OPimSortVector<T>::testDaysUntilNextDate( const QDate& left,
+                                        const QDate& right )const {
+    int ret = 0;
+    if ( !left .isValid() ) ret++;
+    if ( !right.isValid() ) ret--;
+
+    if ( left.isValid() && right.isValid() ){
+        int currentYear = QDate::currentDate().year();
+        QDate nextLeft( currentYear, left.month(), left.day() );
+        if ( QDate::currentDate().daysTo(nextLeft) < 0 )
+            nextLeft.setYMD( currentYear+1, left.month(), left.day() );
+        QDate nextRight( currentYear, right.month(), right.day() );
+        if ( QDate::currentDate().daysTo(nextRight) < 0 )
+            nextRight.setYMD( currentYear+1, right.month(), right.day() );
+
+        ret += QDate::currentDate().daysTo(nextLeft) < QDate::currentDate().daysTo(nextRight) ? -1 : 1;
+    }
+
+    return ret;
 }
 
 }
