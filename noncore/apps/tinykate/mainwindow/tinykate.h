@@ -54,8 +54,8 @@ private:
     KTextEditor::View *currentView;
     bool shutDown;
 
-    QToolButton *editCopy, *editCut, *editPaste, *editUndo, *editRedo,  *editFindReplace;
-    QAction *viewIncFontSizes, *viewDecFontSizes, *utilSettings;
+    QToolButton *editCopy, *editCut, *editPaste, *editUndo, *editRedo;
+    QAction *viewIncFontSizes, *viewDecFontSizes, *utilSettings, *editFind, *editReplace, *editGotoLine;
 
     QPopupMenu *hlmenu;
     uint nextUnnamed;

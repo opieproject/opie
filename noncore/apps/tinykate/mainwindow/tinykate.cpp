@@ -89,6 +89,7 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     mb->insertItem(tr("File"),popup);
 
     //EDIT ACTIONS
+    popup = new QPopupMenu( this );
     bool useBigIcon = qApp->desktop()->size().width() > 330;
 
     // Action for cutting text
@@ -109,11 +110,18 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     editPaste->setAutoRaise( true );
     editPaste->setIconSet( Opie::Core::OResource::loadPixmap( "paste", Opie::Core::OResource::SmallIcon ) );
 
-    // Action for finding / replacing  text
-    editFindReplace = new QToolButton( 0 );
-    editFindReplace->setUsesBigPixmap( useBigIcon );
-    editFindReplace->setAutoRaise( true );
-    editFindReplace->setIconSet( Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ) );
+    // Action for finding text
+    editFind = new QAction( tr( "Find..." ), Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
+    editFind->addTo(popup);
+
+    // Action for replacing text
+    editReplace = new QAction( tr( "Replace..." ), QString::null, 0, this, 0 );
+    editReplace->addTo(popup);
+
+    // Action for going to a specific line
+    editGotoLine = new QAction( tr( "Goto Line..." ), QString::null, 0, this, 0 );
+    editGotoLine->addTo(popup);
 
     // Action for undo
     editUndo = new QToolButton( 0 );
@@ -126,6 +134,8 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     editRedo->setUsesBigPixmap( useBigIcon );
     editRedo->setAutoRaise( true );
     editRedo->setIconSet( Opie::Core::OResource::loadPixmap( "redo", Opie::Core::OResource::SmallIcon ) );
+
+    mb->insertItem(tr("Edit"),popup);
 
     //VIEW ACITONS
     popup = new QPopupMenu( this );
@@ -145,7 +155,6 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
     mb->insertItem( editCut );
     mb->insertItem( editCopy );
     mb->insertItem( editPaste );
-    mb->insertItem( editFindReplace );
     mb->insertItem( editUndo );
     mb->insertItem(  editRedo );
 
@@ -246,6 +255,9 @@ void TinyKate::slotCurrentChanged( QWidget * view)
         disconnect(editPaste,SIGNAL(clicked()),currentView,SLOT(paste()));
         disconnect(editUndo,SIGNAL(clicked()),currentView,SLOT(undo()));
         disconnect(editRedo,SIGNAL(clicked()),currentView,SLOT(redo()));
+        disconnect(editFind,SIGNAL(activated()),currentView,SLOT(find()));
+        disconnect(editReplace,SIGNAL(activated()),currentView,SLOT(replace()));
+        disconnect(editGotoLine,SIGNAL(activated()),currentView,SLOT(gotoLine()));
         disconnect(viewIncFontSizes,SIGNAL(activated()), currentView,SLOT(slotIncFontSizes()));
         disconnect(viewDecFontSizes,SIGNAL(activated()), currentView,SLOT(slotDecFontSizes()));
         disconnect(hlmenu,SIGNAL(activated(int)), currentView,SLOT(setHl(int)));
@@ -259,6 +271,9 @@ void TinyKate::slotCurrentChanged( QWidget * view)
     connect(editPaste,SIGNAL(clicked()),currentView,SLOT(paste()));
     connect(editUndo,SIGNAL(clicked()),currentView,SLOT(undo()));
     connect(editRedo,SIGNAL(clicked()),currentView,SLOT(redo()));
+    connect(editFind,SIGNAL(activated()),currentView,SLOT(find()));
+    connect(editReplace,SIGNAL(activated()),currentView,SLOT(replace()));
+    connect(editGotoLine,SIGNAL(activated()),currentView,SLOT(gotoLine()));
     connect(viewIncFontSizes,SIGNAL(activated()), currentView,SLOT(slotIncFontSizes()));
     connect(viewDecFontSizes,SIGNAL(activated()), currentView,SLOT(slotDecFontSizes()));
     connect(hlmenu,SIGNAL(activated(int)), currentView,SLOT(setHl(int)));
