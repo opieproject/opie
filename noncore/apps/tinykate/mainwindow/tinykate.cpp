@@ -183,12 +183,6 @@ TinyKate::~TinyKate( )
 {
     owarn << "TinyKate destructor\n" << oendl;
 
-    shutDown=true;
-    while (currentView!=0)
-    {
-        slotClose();
-    }
-
     if( KGlobal::config() != 0 )
     {
         owarn << "deleting KateConfig object..\n" << oendl;
@@ -285,42 +279,95 @@ void TinyKate::slotNew( )
 {
     KateDocument *kd= new KateDocument(false, false, this,0,this);
     KTextEditor::View *kv;
+    
+    kd->setDocName(tr("Unnamed %1").arg(nextUnnamed++));
+    kd->setNewDoc(true);
     tabwidget->addTab(kv=kd->createView(tabwidget,"BLAH"),
                       "tinykate/tinykate",
-                      tr("Unnamed %1").arg(nextUnnamed++));
+                      kd->docName());
     viewCount++;
+}
+
+bool TinyKate::checkSave() {
+    if (currentView==0) return true;
+
+    KateView *kv = (KateView*) currentView;
+    if(kv->isModified()) {
+        KateDocument *kd = (KateDocument*) kv->document();
+        switch( QMessageBox::information( 0, (tr("TinyKATE")),
+                                        (tr("Do you want to save\n"
+                                            "changes to the document\n"
+                                            "%1?\n").arg(kd->docName())),
+                                        (tr("Save")), (tr("Don't Save")), (tr("&Cancel")), 2, 2 ) )
+        {
+            case 0:
+            {
+                return saveDocument();
+            }
+            break;
+    
+            case 1:
+            {
+                return true;
+            }
+            break;
+    
+            default:
+            {
+                return false;
+            }
+            break;
+        };
+    }
+    else {
+        return true;
+    }
+}
+
+bool TinyKate::closeDocument()
+{
+    if (currentView==0) return true;
+    KTextEditor::View *dv=currentView;
+    if(checkSave()) {
+        currentView=0;
+        tabwidget->removePage(dv);
+        delete dv->document();
+        viewCount--;
+        if ((!viewCount) && (!shutDown))  slotNew();
+        return true;
+    }
+    else
+        return false;
 }
 
 void TinyKate::slotClose( )
 {
-    if (currentView==0) return;
-    KTextEditor::View *dv=currentView;
-    currentView=0;
-    tabwidget->removePage(dv);
-    delete dv->document();
-    viewCount--;
-    if ((!viewCount) && (!shutDown))  slotNew();
+    closeDocument();
 }
 
-void TinyKate::slotSave()
+bool TinyKate::saveDocument()
 {
     // feel free to make this how you want
-    if (currentView==0) return;
+    if (currentView==0) return false;
 
     //  KateView *kv = (KateView*) currentView;
     KateDocument *kd = (KateDocument*) currentView->document();
     //  odebug << "saving file "+kd->docName() << oendl;
-    if( kd->docName().isEmpty())
-        slotSaveAs();
+    if( kd->isNewDoc()) {
+        return saveDocumentAs();
+    }
     else
-        kd->saveFile();
+        return kd->saveFile();
+    // FIXME check result of saveFile and show message if failed?
     //    kv->save();
     //    kd->saveFile();
 }
 
-void TinyKate::slotSaveAs()
+bool TinyKate::saveDocumentAs()
 {
-    if (currentView==0) return;
+    if (currentView==0) return false;
+
+    bool result = false;
     KateDocument *kd = (KateDocument*) currentView->document();
 
     QString filename= OFileDialog::getSaveFileName(OFileSelector::EXTENDED_ALL,
@@ -329,13 +376,52 @@ void TinyKate::slotSaveAs()
     {
         odebug << "saving file "+filename << oendl;
         QFileInfo fi(filename);
+        if(fi.exists()) {
+            if ( QMessageBox::warning(this,tr("TinyKATE"),
+                                  tr("The file %1\n"
+                                     "already exists.\n\n"
+                                     "Are you sure you want to\n"
+                                     "overwrite it?")
+                                     .arg(fi.fileName()),
+                                  tr("Yes"),tr("No"),0,0,1) != 0) {
+                return false;
+            }
+        }
         QString filenamed = fi.fileName();
         kd->setDocFile( filename);
         kd->setDocName( filenamed);
-        kd->saveFile();
-        //   KTextEditor::View *dv = currentView;
-        //     tabwidget->changeTab( dv, filenamed);
-        // need to change tab label here
+        kd->setNewDoc(false);
+        result = kd->saveFile();
+        // FIXME check result of saveFile and show message if failed?
+        tabwidget->changeTab( tabwidget->currentWidget(), "tinykate/tinykate", filenamed );
+    }
+    return result;
+}
+
+void TinyKate::slotSave()
+{
+    saveDocument();
+}
+
+void TinyKate::slotSaveAs()
+{
+    saveDocumentAs();
+}
+
+void TinyKate::closeEvent(QCloseEvent *e) {
+    // Close all documents
+    shutDown = true;
+    while (currentView!=0)
+    {
+        if(!closeDocument()) {
+            // User cancelled
+            shutDown=false;
+            break;
+        }
     }
 
+    if(shutDown)
+        e->accept();
+    else
+        e->ignore();
 }

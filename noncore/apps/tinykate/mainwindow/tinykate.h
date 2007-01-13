@@ -48,6 +48,11 @@ protected slots:
     void slotSaveAs();
 protected:
     void open(const QString&);
+    bool closeDocument();
+    bool checkSave();
+    bool saveDocument();
+    bool saveDocumentAs();
+    void closeEvent(QCloseEvent *e);
 private:
     QString currentFileName;
     Opie::Ui::OTabWidget *tabwidget;
