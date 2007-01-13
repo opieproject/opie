@@ -365,7 +365,12 @@ bool KateDocument::saveFile()
   }
   emit fileNameChanged ();
 
-  return (f.status() == IO_Ok);
+  if(f.status() == IO_Ok) {
+    setModified(false);
+    return true;
+  }
+  else
+    return false;
 }
 
 KTextEditor::View *KateDocument::createView( QWidget *parent, const char *name )
