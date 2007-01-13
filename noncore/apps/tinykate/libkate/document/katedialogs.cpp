@@ -48,10 +48,11 @@ StyleChanger::StyleChanger( QWidget *parent )
 {
   QLabel *label;
 
-  QGridLayout *glay = new QGridLayout( this, 4, 3, 0, KDialog::spacingHint() );
+  QGridLayout *glay = new QGridLayout( this, 2, 6, 0, KDialog::spacingHint() );
   CHECK_PTR(glay);
   glay->addColSpacing( 1, KDialog::spacingHint() ); // Looks better
-  glay->setColStretch( 2, 10 );
+  glay->addColSpacing( 3, KDialog::spacingHint() );
+  glay->addColSpacing( 5, KDialog::spacingHint() );
 
   col = new KColorButton(this);
   CHECK_PTR(col);
@@ -66,18 +67,18 @@ StyleChanger::StyleChanger( QWidget *parent )
   connect(selCol,SIGNAL(changed(const QColor&)),this,SLOT(changed()));
   label = new QLabel(selCol,i18n("Selected:"),this);
   CHECK_PTR(label);
-  glay->addWidget(label,2,0);
-  glay->addWidget(selCol,3,0);
+  glay->addWidget(label,0,2);
+  glay->addWidget(selCol,1,2);
 
   bold = new QCheckBox(i18n("Bold"),this);
   CHECK_PTR(bold);
   connect(bold,SIGNAL(clicked()),SLOT(changed()));
-  glay->addWidget(bold,1,2);
+  glay->addWidget(bold,0,4);
 
   italic = new QCheckBox(i18n("Italic"),this);
   CHECK_PTR(italic);
   connect(italic,SIGNAL(clicked()),SLOT(changed()));
-  glay->addWidget(italic,2,2);
+  glay->addWidget(italic,1,4);
 }
 
 void StyleChanger::setRef(ItemStyle *s) {
@@ -156,21 +157,16 @@ HighlightDialogPage::HighlightDialogPage(HlManager *hlManager, ItemStyleList *st
 
   QFrame *page2 = new QFrame(this);
   addTab(page2,i18n("&Highlight Modes"));
-  //grid = new QGridLayout(page2,2,2);
   QVBoxLayout *bl=new QVBoxLayout(page2);
   bl->setAutoAdd(true);
-  QHGroupBox *hbox1 = new QHGroupBox( i18n("Config Select"), page2 );
-  hbox1->layout()->setMargin(5);
-  QVBox *vbox1=new QVBox(hbox1);
-//  grid->addMultiCellWidget(vbox1,0,0,0,1);
-  QVGroupBox *vbox2 = new QVGroupBox( i18n("Item Style"), page2 );
-//  grid->addWidget(vbox2,1,0);
-  QVGroupBox *vbox3 = new QVGroupBox( i18n("Highlight Auto Select"), hbox1 );
-  //grid->addWidget(vbox3,1,1);
+  QGroupBox *gbox1 = new QGroupBox( 2, Qt::Horizontal, i18n("Config Select"), page2 );
+  gbox1->layout()->setMargin(5);
+  QGroupBox *gbox2 = new QGroupBox( 2, Qt::Horizontal, i18n("Item Style"), page2 );
+  gbox2->layout()->setMargin(5);
 
-  QLabel *label = new QLabel( i18n("Highlight:"), vbox1 );
-  hlCombo = new QComboBox( false, vbox1 );
-  QHBox *modHl = new QHBox(vbox1);
+  QLabel *label = new QLabel( i18n("Highlight:"), gbox1 );
+  hlCombo = new QComboBox( false, gbox1 );
+  hlCombo->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Minimum ) );
 //  connect(new QPushButton(i18n("New"),modHl),SIGNAL(clicked()),this,SLOT(hlNew()));
 //  connect(new QPushButton(i18n("Edit"),modHl),SIGNAL(clicked()),this,SLOT(hlEdit()));
   connect( hlCombo, SIGNAL(activated(int)),
@@ -180,20 +176,20 @@ HighlightDialogPage::HighlightDialogPage(HlManager *hlManager, ItemStyleList *st
   }
   hlCombo->setCurrentItem(hlNumber);
 
+  label = new QLabel( i18n("File Extensions:"), gbox1 );
+  wildcards  = new QLineEdit( gbox1 );
+  label = new QLabel( i18n("Mime Types:"), gbox1 );
+  mimetypes = new QLineEdit( gbox1 );
 
-  label = new QLabel( i18n("Item:"), vbox2 );
-  itemCombo = new QComboBox( false, vbox2 );
+  label = new QLabel( i18n("Item:"), gbox2 );
+  itemCombo = new QComboBox( false, gbox2 );
   connect( itemCombo, SIGNAL(activated(int)), this, SLOT(itemChanged(int)) );
 
-  label = new QLabel( i18n("File Extensions:"), vbox3 );
-  wildcards  = new QLineEdit( vbox3 );
-  label = new QLabel( i18n("Mime Types:"), vbox3 );
-  mimetypes = new QLineEdit( vbox3 );
-
-
-  styleDefault = new QCheckBox(i18n("Default"), vbox2 );
+  styleDefault = new QCheckBox(i18n("Default"), gbox2 );
   connect(styleDefault,SIGNAL(clicked()),SLOT(changed()));
-  styleChanger = new StyleChanger( vbox2 );
+  gbox2->addSpace(1);
+  gbox2->addSpace(1);
+  styleChanger = new StyleChanger( gbox2 );
 
   hlDataList = highlightDataList;
   hlChanged(hlNumber);
