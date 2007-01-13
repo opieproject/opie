@@ -230,6 +230,9 @@ GotoLineDialog::GotoLineDialog(QWidget *parent, int line, int max)
   topLayout->addWidget(e1);
   topLayout->addSpacing(spacingHint()); // A little bit extra space
   topLayout->addStretch(10);
+  
+  page->setMinimumWidth(100);
+  
   e1->setFocus();
 }
 
