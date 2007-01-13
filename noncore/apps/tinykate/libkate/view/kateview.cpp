@@ -2342,7 +2342,8 @@ void KateView::configDialog()
     hlPage->saveData();
   }
 
-//  delete kd;
+  qApp->processEvents();
+  delete kd;
 
 #endif
 }
