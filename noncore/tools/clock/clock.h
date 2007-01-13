@@ -44,7 +44,6 @@ public:
 
 private slots:
     void    checkSnooze(void);
-    void    changePrompt(int minutes);
 };
 
 class Clock : public ClockBase

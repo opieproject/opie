@@ -102,14 +102,19 @@ AlarmDlg::AlarmDlg(QWidget *parent, const char *name, bool modal,
     const QString &txt) :
     AlarmDlgBase(parent, name, modal)
 {
+    // Increase font size to make it a little more readable
+    QFont f(font());
+    f.setPointSize((int)(f.pointSize() * 1.7));
+    setFont(f);
+
     setCaption( tr("Clock") );
     pixmap->setPixmap( Opie::Core::OResource::loadPixmap("clock/alarmbell") );
     alarmDlgLabel->setText(txt);
 
-    connect(snoozeTime, SIGNAL(valueChanged(int)), this,
-	SLOT(changePrompt(int)));
-    connect(cmdOk, SIGNAL(clicked()), this, SLOT(checkSnooze()));
+    connect(cmdSnooze, SIGNAL(clicked()), this, SLOT(checkSnooze()));
+    connect(cmdOk, SIGNAL(clicked()), this, SLOT(accept()));
 }
+
 
 //
 //
@@ -140,14 +145,6 @@ AlarmDlg::checkSnooze(void)
 	    ALARM_CLOCK_MESSAGE, magic_snooze);
     }
     accept();
-}
-
-
-
-void
-AlarmDlg::changePrompt(int mins)
-{
-    cmdOk->setText(mins > 0 ? tr("Snooze") : tr("Close") );
 }
 
 
