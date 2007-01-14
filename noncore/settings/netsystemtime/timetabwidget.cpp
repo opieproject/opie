@@ -50,6 +50,8 @@
 #include <qpushbutton.h>
 #include <qscrollview.h>
 #include <qspinbox.h>
+#include <qmessagebox.h>
+#include <qfile.h>
 
 #include <stdlib.h>
 #include <sys/time.h>
@@ -277,33 +279,40 @@ void TimeTabWidget::slotWeekStartChanged( int monday )
 
 void TimeTabWidget::slotTZChanged( const QString &newtz )
 {
-	// If controls have a valid date & time, update systemtime
-	int hour = sbHour->value();
-	if ( use12HourTime && cbAmpm->currentItem() == ValuePM )
-		hour += 12;
-	QDateTime dt( btnDate->date(), QTime ( hour, sbMin->value(), QTime::currentTime().second() ) );
-	setSystemTime( dt );
-	QCopEnvelope setTimeZone( "QPE/System", "timeChange(QString)" );
-	setTimeZone << newtz;
-
-	// Set system timezone
-	QString currtz = getenv( "TZ" );
-	setenv( "TZ", newtz, 1 );
-
-	// Get new date/time
-	hour = sbHour->value();
-	if ( use12HourTime && cbAmpm->currentItem() == ValuePM )
-		hour += 12;
-	dt = QDateTime::currentDateTime();
-
-	// Reset system timezone
-	if ( !currtz.isNull() )
-	{
-		setenv( "TZ", currtz, 1 );
+	// Check timezone has a valid file in /usr/share/zoneinfo
+	if(!QFile::exists("/usr/share/zoneinfo/" + newtz)) {
+		QMessageBox::warning(this, tr("Time zone file missing"), 
+				(tr("There is no time zone file for the\nselected time zone (%1).\nYou will need to install it before the\nsystem time zone can be set correctly.")).arg(newtz));
 	}
+	else {
+		// If controls have a valid date & time, update systemtime
+		int hour = sbHour->value();
+		if ( use12HourTime && cbAmpm->currentItem() == ValuePM )
+			hour += 12;
+		QDateTime dt( btnDate->date(), QTime ( hour, sbMin->value(), QTime::currentTime().second() ) );
+		setSystemTime( dt );
+		QCopEnvelope setTimeZone( "QPE/System", "timeChange(QString)" );
+		setTimeZone << newtz;
 
-	// Set controls to new time
-	setDateTime( dt );
+		// Set system timezone
+		QString currtz = getenv( "TZ" );
+		setenv( "TZ", newtz, 1 );
 
-	emit tzChanged( newtz );
+		// Get new date/time
+		hour = sbHour->value();
+		if ( use12HourTime && cbAmpm->currentItem() == ValuePM )
+			hour += 12;
+		dt = QDateTime::currentDateTime();
+
+		// Reset system timezone
+		if ( !currtz.isNull() )
+		{
+			setenv( "TZ", currtz, 1 );
+		}
+
+		// Set controls to new time
+		setDateTime( dt );
+
+		emit tzChanged( newtz );
+	}
 }
