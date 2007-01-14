@@ -52,6 +52,7 @@ private:
 	QComboBox *cbTimeServer;
 	QSpinBox  *sbNtpDelay;
 	QSpinBox  *sbPredictDelay;
+	QCheckBox *chShowOnRestart;
 	QCheckBox *chNtpTab;
 	QCheckBox *chPredictTab;
 

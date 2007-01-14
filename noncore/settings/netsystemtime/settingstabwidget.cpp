@@ -78,18 +78,22 @@ SettingsTabWidget::SettingsTabWidget( QWidget *parent )
 	// Space filler
 	layout->addItem( new QSpacerItem( 1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding ), 4, 0 );
 
+	// Show system time options on every restart
+	chShowOnRestart = new QCheckBox( tr( "Show time settings on every restart" ), container );
+	layout->addMultiCellWidget( chShowOnRestart, 5, 5, 0, 1 );
+
 	// Display time server information selector
 	chNtpTab = new QCheckBox( tr( "Display time server information" ), container );
 	connect( chNtpTab, SIGNAL( toggled(bool) ), this, SIGNAL( displayNTPTab(bool) ) );
-	layout->addMultiCellWidget( chNtpTab, 5, 5, 0, 1 );
+	layout->addMultiCellWidget( chNtpTab, 6, 6, 0, 1 );
 
 	// Display time prediction information selector
 	chPredictTab = new QCheckBox( tr( "Display time prediction information" ), container );
 	connect( chPredictTab, SIGNAL( toggled(bool) ), this, SIGNAL( displayPredictTab(bool) ) );
-	layout->addMultiCellWidget( chPredictTab, 6, 6, 0, 1 );
+	layout->addMultiCellWidget( chPredictTab, 7, 7, 0, 1 );
 
 	// Space filler
-	layout->addItem( new QSpacerItem( 1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding ), 7, 0 );
+	layout->addItem( new QSpacerItem( 1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding ), 8, 0 );
 
 	// Initialize values
 	QString ntpSrvsFile = QPEApplication::qpeDir();
@@ -114,6 +118,10 @@ SettingsTabWidget::SettingsTabWidget( QWidget *parent )
 	cbTimeServer->setCurrentItem( config.readNumEntry( "ntpServer", 0 ) );
 	chNtpTab->setChecked( config.readBoolEntry( "displayNtpTab", FALSE ) );
 	chPredictTab->setChecked( config.readBoolEntry( "displayPredictTab", FALSE ) );
+
+	Config config_qpe( "qpe" );
+	config_qpe.setGroup( "Startup" );
+	chShowOnRestart->setChecked( config_qpe.readBoolEntry( "ShowTimeSettings", FALSE ) );
 }
 
 SettingsTabWidget::~SettingsTabWidget()
@@ -155,6 +163,10 @@ void SettingsTabWidget::saveSettings()
 	config.writeEntry( "ntpRefreshFreq", sbNtpDelay->value() );
 	config.writeEntry( "displayNtpTab", chNtpTab->isChecked() );
 	config.writeEntry( "displayPredictTab", chPredictTab->isChecked() );
+
+	Config config_qpe( "qpe" );
+	config_qpe.setGroup( "Startup" );
+	config_qpe.writeEntry( "ShowTimeSettings", chShowOnRestart->isChecked() );
 }
 
 QString SettingsTabWidget::ntpServer()
