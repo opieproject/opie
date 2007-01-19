@@ -588,7 +588,7 @@ bool ComputerPlayer::step()
     QPoint d = across ? QPoint(1,0) : QPoint(0,1);
     const Tile* tiles[99]; // ### max board size
     uchar nletter[4095]; // QDawg only handles 0..4095
-    memset(nletter,0,4096);
+    memset(nletter,0,4095);
     for (int i=0; i<rack->count(); i++) {
 	const Tile* r = rack->tileRef(i);
 	if ( r->isBlank() )
