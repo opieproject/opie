@@ -137,6 +137,8 @@ public:
 
     int exec();
 
+    static bool isSaveWindowsPos();
+
 signals:
     void clientMoused();
     void timeChanged();

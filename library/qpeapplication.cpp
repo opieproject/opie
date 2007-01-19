@@ -101,6 +101,7 @@
 
 
 static bool useBigPixmaps = 0;
+static bool saveWindowsPos = 0;
 
 class HackWidget : public QWidget
 {
@@ -129,6 +130,7 @@ public:
         fontSize = cfg.readNumEntry( "FontSize", 10 );
         smallIconSize = cfg.readNumEntry( "SmallIconSize", 14 );
         bigIconSize = cfg.readNumEntry( "BigIconSize", 32 );
+        saveWindowsPos = cfg.readBoolEntry( "AllowWindowed", false );
 #ifdef OPIE_WITHROHFEEDBACK
         RoH = 0;
 #endif
@@ -250,7 +252,8 @@ public:
 
     static bool read_widget_rect(const QString &app, bool &maximized, QPoint &p, QSize &s)
     {
-#ifndef OPIE_NO_WINDOWED
+    if (!saveWindowsPos)
+	return FALSE;
     maximized = TRUE;
     // 350 is the trigger in qwsdefaultdecoration for providing a resize button
     if ( qApp->desktop()->width() <= 350 )
@@ -272,8 +275,6 @@ public:
 
         return TRUE;
     }
-#endif
-    return FALSE;
     }
 
 
@@ -322,7 +323,8 @@ public:
     {
     if( !w )
     return;
-#ifndef OPIE_NO_WINDOWED
+    if (!saveWindowsPos)
+    return;
     // 350 is the trigger in qwsdefaultdecoration for providing a resize button
     if ( qApp->desktop()->width() <= 350 )
         return;
@@ -343,7 +345,6 @@ public:
     QString s;
     s.sprintf("%d,%d,%d,%d,%d", r.left() + offsetX, r.top() + offsetY, r.width(), r.height(), w->isMaximized() );
     cfg.writeEntry( app, s );
-#endif
     }
 
     static bool setWidgetCaptionFromAppName( QWidget* /*mw*/, const QString& /*appName*/, const QString& /*appsPath*/ )
@@ -2205,6 +2206,11 @@ void QPEApplication::hideOrQuit()
 #endif
     else
         quit();
+}
+
+bool QPEApplication::isSaveWindowsPos()
+{
+    return saveWindowsPos;
 }
 
 #if (__GNUC__ > 2 ) && !defined(_OS_MACX_)
