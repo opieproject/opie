@@ -242,9 +242,12 @@ bool UserDialog::addUser(int uid, int gid)
     if(!(adduserDialog->exec())) return false;
     if((adduserDialog->groupComboBox->currentItem()!=0))
     {
-        accounts->findGroup(adduserDialog->groupComboBox->currentText());
-        adduserDialog->groupID=accounts->gr_gid;
-        owarn << QString::number(accounts->gr_gid) << oendl; 
+	// making the call findGroup() puts the group info in the accounts gr_gid
+        if (accounts->findGroup(adduserDialog->groupComboBox->currentText()))
+        {
+            adduserDialog->groupID=accounts->gr_gid;
+            owarn << QString::number(accounts->gr_gid) << oendl;
+        }
     }
     if(!(accounts->addUser(adduserDialog->loginLineEdit->text(), adduserDialog->passwordLineEdit->text(),
                            adduserDialog->uidLineEdit->text().toInt(), adduserDialog->groupID, adduserDialog->gecosLineEdit->text(),

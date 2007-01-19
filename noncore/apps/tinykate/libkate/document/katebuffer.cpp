@@ -3,7 +3,7 @@
    Copyright (c) 2000 Waldo Bastian <bastian@kde.org>
    Copyright (c) 2002 Joseph Wenninger <jowenn@kde.org>
 
-   $Id: katebuffer.cpp,v 1.4 2004-05-03 21:35:19 ar Exp $
+   $Id: katebuffer.cpp,v 1.5 2007-01-19 01:18:02 erik Exp $
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -72,7 +72,10 @@ KWBuffer::insertFile(int line, const QString &file, QTextCodec *codec)
     }
     clear();
     QFile iofile(file);
-    iofile.open(IO_ReadOnly);
+    if (!iofile.open(IO_ReadOnly)) {
+	owarn << "failed to open file " << iofile.name() << oendl;
+	return;
+    }
     QTextStream stream(&iofile);
     stream.setCodec(codec);
     QString qsl;

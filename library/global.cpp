@@ -216,39 +216,38 @@ Global::Global()
 const QDawg& Global::fixedDawg()
 {
     if ( !fixed_dawg ) {
-    if ( !docDirCreated )
-        createDocDir();
+        if ( !docDirCreated )
+            createDocDir();
 
-    fixed_dawg = new QDawg;
-    QString dawgfilename = dictDir() + "/dawg";
-    QString words_lang;
-    QStringList langs = Global::languageList();
-    for (QStringList::ConstIterator it = langs.begin(); it!=langs.end(); ++it) {
-        QString lang = *it;
-        words_lang = dictDir() + "/words." + lang;
-        QString dawgfilename_lang = dawgfilename + "." + lang;
-        if ( QFile::exists(dawgfilename_lang) ||
-         QFile::exists(words_lang) ) {
-        dawgfilename = dawgfilename_lang;
-        break;
+        fixed_dawg = new QDawg;
+        QString dawgfilename = dictDir() + "/dawg";
+        QString words_lang;
+        QStringList langs = Global::languageList();
+        for (QStringList::ConstIterator it = langs.begin(); it!=langs.end(); ++it) {
+            QString lang = *it;
+            words_lang = dictDir() + "/words." + lang;
+            QString dawgfilename_lang = dawgfilename + "." + lang;
+            if ( QFile::exists(dawgfilename_lang) ||
+                 QFile::exists(words_lang) ) {
+                dawgfilename = dawgfilename_lang;
+                break;
+            }
         }
-    }
-    QFile dawgfile(dawgfilename);
+        QFile dawgfile(dawgfilename);
 
-    if ( !dawgfile.exists() ) {
-        QString fn = dictDir() + "/words";
-        if ( QFile::exists(words_lang) )
-        fn = words_lang;
-        QFile in(fn);
-        if ( in.open(IO_ReadOnly) ) {
-        fixed_dawg->createFromWords(&in);
-        dawgfile.open(IO_WriteOnly);
-        fixed_dawg->write(&dawgfile);
-        dawgfile.close();
-        }
-    } else {
-        fixed_dawg->readFile(dawgfilename);
-    }
+        if ( !dawgfile.exists() ) {
+            QString fn = dictDir() + "/words";
+            if ( QFile::exists(words_lang) )
+                fn = words_lang;
+            QFile in(fn);
+            if ( in.open(IO_ReadOnly) ) {
+                fixed_dawg->createFromWords(&in);
+                if (dawgfile.open(IO_WriteOnly))
+                    fixed_dawg->write(&dawgfile);
+                dawgfile.close();
+            }
+        } else
+            fixed_dawg->readFile(dawgfilename);
     }
 
     return *fixed_dawg;

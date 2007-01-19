@@ -91,7 +91,9 @@ void TaskbarSettings::init ( )
 
         owarn << "Load applet: " << (*it) << "" << oendl;
         QLibrary *lib = new QLibrary ( path + "/" + *it );
-        lib-> queryInterface ( IID_TaskbarNamedApplet, (QUnknownInterface**) &iface );
+	QRESULT retVal = QS_OK;
+        if ((retVal = lib-> queryInterface ( IID_TaskbarNamedApplet, (QUnknownInterface**)(&iface) )) != QS_OK)
+	    owarn << "<0>" << oendl;
         owarn << "<1>" << oendl;
         if ( iface ) {
             owarn << "<2>" << oendl;
@@ -110,10 +112,11 @@ void TaskbarSettings::init ( )
         owarn << "<3>" << oendl;
         if ( !iface ) {
             owarn << "<4>" << oendl;
-            lib-> queryInterface ( IID_TaskbarApplet, (QUnknownInterface**) &iface );
+            if ((retVal = lib-> queryInterface ( IID_TaskbarApplet, (QUnknownInterface**)(&iface))) != QS_OK)
+		owarn << "<5>" << oendl;
 
             if ( iface ) {
-                owarn << "<5>" << oendl;
+                owarn << "<6>" << oendl;
                 name = (*it). mid ( 3 );
                 owarn << "Found applet: " << name << "" << oendl;
 #ifdef Q_OS_MACX
@@ -130,10 +133,10 @@ void TaskbarSettings::init ( )
                 iface-> release ( );
             }
         }
-        owarn << "<6>" << oendl;
+        owarn << "<7>" << oendl;
 
         if ( iface ) {
-            owarn << "<7>" << oendl;
+            owarn << "<8>" << oendl;
             QCheckListItem *item;
             item = new QCheckListItem ( m_list, name, QCheckListItem::CheckBox );
             if ( !icon. isNull ( ))

@@ -367,16 +367,24 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
     } else if ( msg == "rdiffApplyPatch(QString,QString)" ) {
         QString baseFile, deltaFile;
         stream >> baseFile >> deltaFile;
+        bool fileWasCreated = false;
         if ( !QFile::exists( baseFile ) ) {
             QFile f( baseFile );
-            f.open( IO_WriteOnly );
+            fileWasCreated = f.open( IO_WriteOnly );
             f.close();
         }
-        QRsync::applyDiff( baseFile, deltaFile );
+        if ( fileWasCreated ) {
+            QRsync::applyDiff( baseFile, deltaFile );
 #ifndef QT_NO_COP
-        QCopEnvelope e( "QPE/Desktop", "patchApplied(QString)" );
-        e << baseFile;
+            QCopEnvelope e( "QPE/Desktop", "patchApplied(QString)" );
+            e << baseFile;
 #endif
+        } else {
+#ifndef QT_NO_COP
+            QCopEnvelope e( "QPE/Desktop", "patchUnapplied(QString)" );
+            e << baseFile;
+#endif
+        }
     } else if ( msg == "rdiffCleanup()" ) {
         mkdir( "/tmp/rdiff" );
         QDir dir;
@@ -998,7 +1006,8 @@ void Server::startSoundServer() {
 
     process->clearArguments();
     *process << QPEApplication::qpeDir() + "bin/qss";
-    process->start();
+    if (!process->start())
+	owarn << "Sound server process did not start" << oendl;
 }
 
 void Server::soundServerExited() {

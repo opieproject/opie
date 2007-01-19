@@ -313,7 +313,11 @@ void QProcessManager::removeMe()
 void QProcessManager::sigchldHnd( int fd )
 {
     char tmp;
-    ::read( fd, &tmp, sizeof(tmp) );
+    if (::read( fd, &tmp, sizeof(tmp) ) < 0)
+#if defined(QT_QPROCESS_DEBUG)
+        odebug << "QProcessManager::sigchldHnd() failed dummy read of file descriptor" << oendl;
+#endif
+	;
 #if defined(QT_QPROCESS_DEBUG)
     odebug << "QProcessManager::sigchldHnd()" << oendl;
 #endif

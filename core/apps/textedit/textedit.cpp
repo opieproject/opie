@@ -662,22 +662,23 @@ void TextEdit::newFile( const DocLnk &f ) {
 
 void TextEdit::openDotFile( const QString &f ) {
     if(!currentFileName.isEmpty()) {
-    currentFileName=f;
+        currentFileName=f;
 
-    odebug << "openFile dotfile " + currentFileName << oendl;
-    QString txt;
-    QFile file(f);
-    file.open(IO_ReadWrite);
-    QTextStream t(&file);
-    while ( !t.atEnd()) {
-        txt+=t.readLine()+"\n";
-    }
-    editor->setText(txt);
-    editor->setEdited( false);
-    edited1=false;
-    edited=false;
-
-
+        odebug << "openFile dotfile " + currentFileName << oendl;
+        QString txt;
+        QFile file(f);
+        if (!file.open(IO_ReadWrite))
+	    owarn << "Failed to open file " << file.name() << oendl;
+        else {
+	    QTextStream t(&file);
+            while ( !t.atEnd()) {
+                txt+=t.readLine()+"\n";
+            }
+            editor->setText(txt);
+            editor->setEdited( false);
+            edited1=false;
+            edited=false;
+	}
     }
     updateCaption( currentFileName);
 }

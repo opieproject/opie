@@ -33,6 +33,7 @@ _;:,   .>  :=|.         This file is free software; you can
 #include <qpe/qpeapplication.h>
 #include <qpe/menuappletinterface.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <opie2/odebug.h>
 
 #include <qdir.h>
 #include <qlistview.h>
@@ -94,7 +95,9 @@ void MenuSettings::init ( )
 		MenuAppletInterface *iface = 0;
 
 		QLibrary *lib = new QLibrary ( path + "/" + *it );
-		lib-> queryInterface ( IID_MenuApplet, (QUnknownInterface**) &iface );
+		QRESULT retVal = QS_OK;
+		if ((retVal = lib-> queryInterface ( IID_MenuApplet, (QUnknownInterface**)(&iface) )) != QS_OK )
+		        owarn << "queryInterface failed with " << retVal << oendl;
         if ( iface ) {
 			QString lang = getenv( "LANG" );
 			QTranslator *trans = new QTranslator ( qApp );

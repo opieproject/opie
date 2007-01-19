@@ -344,7 +344,7 @@ bool OGlobal::isDocumentFileName( const QString& file )
         if (fs->isRemovable()&&file.startsWith(fs->name()+QDir::separator()))
             return true;
     }
-    if (file.startsWith(homeDirPath())+"/Documents/") return true;
+    if (file.startsWith(homeDirPath()+"/Documents/")) return true;
     return false;
 }
 

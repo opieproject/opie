@@ -928,7 +928,7 @@ int OProcess::processPID( const QString& process )
     {
         //qDebug( "next entry: %s", (const char*) *it );
         QFile file( "/proc/"+*it+"/cmdline" );
-        file.open( IO_ReadOnly );
+        if ( !file.open( IO_ReadOnly ) ) continue;
         if ( !file.isOpen() ) continue;
         QTextStream t( &file );
         line = t.readLine();

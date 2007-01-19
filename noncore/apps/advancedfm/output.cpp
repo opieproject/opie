@@ -192,8 +192,9 @@ void Output::saveOutput() {
       odebug << filename << oendl; 
 
       QFile f(filename);
-      f.open( IO_WriteOnly);
-      if( f.writeBlock( OutputEdit->text(), qstrlen( OutputEdit->text()) ) != -1) {
+      if ( !f.open( IO_WriteOnly ) )
+	  owarn << "Could no open file" << oendl;
+      else if( f.writeBlock( OutputEdit->text(), qstrlen( OutputEdit->text()) ) != -1) {
           DocLnk lnk;
           lnk.setName(name); //sets file name
           lnk.setFile(filename); //sets File property
