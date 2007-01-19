@@ -184,7 +184,7 @@ class HlAnyChar : public HlItem {
 class HlRegExpr : public HlItem {
   public:
   HlRegExpr(int attribute, int context,QString expr);
-  ~HlRegExpr(){delete Expr;};
+  ~HlRegExpr();
   virtual const QChar *checkHgl(const QChar *, int len, bool);
   QRegExp3 *Expr;
   bool handlesLinestart;

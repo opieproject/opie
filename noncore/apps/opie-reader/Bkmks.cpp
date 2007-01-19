@@ -10,7 +10,12 @@
 
 const unsigned long BkmkFile::magic = ((unsigned long)'q' << 24) | ((unsigned long)'t' << 16) | ((unsigned long)'r' << 8) | ((unsigned long)BKMKTYPE);
 
-Bkmk::Bkmk(const unsigned char* _nm, unsigned short _nmlen, const unsigned char* _anno, unsigned short _annolen, unsigned int _p)
+Bkmk::Bkmk(const unsigned char* _nm, unsigned short _nmlen, const unsigned char* _anno, unsigned short _annolen, unsigned int _p) :
+  m_name(0),
+  m_namelen(0),
+  m_anno(0),
+  m_annolen(0),
+  m_position(0)
 {
     init(_nm, _nmlen, _anno, _annolen, _p);
 }
@@ -18,6 +23,17 @@ Bkmk::Bkmk(const unsigned char* _nm, unsigned short _nmlen, const unsigned char*
 Bkmk::Bkmk(const tchar* _nm, const unsigned char* _anno, unsigned short annolen, unsigned int _p) : m_position(_p)
 {
     init(_nm, sizeof(tchar)*(ustrlen(_nm)+1), _anno, annolen, _p);
+}
+
+Bkmk::Bkmk(const Bkmk& rhs) :
+  m_name(0),
+  m_namelen(0),
+  m_anno(0),
+  m_annolen(0),
+  m_position(0)
+{
+    init(rhs.name(), sizeof(tchar)*(ustrlen(rhs.name())+1), rhs.anno(),
+         sizeof(tchar)*(ustrlen(rhs.anno())+1), rhs.value());
 }
 
 Bkmk::Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p) : m_position(_p)

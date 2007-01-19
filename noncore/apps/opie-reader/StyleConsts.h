@@ -21,15 +21,13 @@ struct GraphicLink
     ~GraphicLink();
 };
 
-struct pmstore
+class pmstore
 {
+  public:
     unsigned int count;
     bool m_isScaleable;
     GraphicLink*     graphic;
-    pmstore(bool _canScale, QImage* p, bool isLnk, unsigned long tgt) : count(1), m_isScaleable(_canScale)
-	{
-	    graphic = new GraphicLink(p, isLnk, tgt);
-	}
+    pmstore(bool _canScale, QImage* p, bool isLnk, unsigned long tgt);
     ~pmstore();
 };
 

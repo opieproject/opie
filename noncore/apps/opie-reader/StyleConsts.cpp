@@ -4,6 +4,13 @@
 
 GraphicLink::~GraphicLink() { delete graphic; }
 
+pmstore::pmstore(bool _canScale, QImage* p, bool isLnk, unsigned long tgt) :
+  count(1),
+  m_isScaleable(_canScale)
+{
+    graphic = new GraphicLink(p, isLnk, tgt);
+}
+
 pmstore::~pmstore()
 { 
 ////    qDebug("Deleting image");

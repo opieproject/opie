@@ -20,15 +20,12 @@ class Bkmk
     unsigned char m_red,m_green,m_blue, m_level;
     void init(const void*, unsigned short, const void*, unsigned short, unsigned int);
  public:
-    Bkmk() : m_name(NULL), m_namelen(0), m_anno(NULL), m_annolen(0), m_position(0) {};
+    Bkmk() : m_name(0), m_namelen(0), m_anno(0), m_annolen(0), m_position(0) {};
     Bkmk(const unsigned char* _nm, unsigned short _nmlen, const unsigned char* _anno, unsigned short _annolen, unsigned int _p);
     Bkmk(const tchar* _nm, const unsigned char* _anno, unsigned short _annolen, unsigned int _p);
     Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p);
     Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p, unsigned int _p2);
-    Bkmk(const Bkmk& rhs) : m_name(NULL), m_anno(NULL)
-	{
-	    *this = rhs;
-	}
+    Bkmk(const Bkmk& rhs);
     ~Bkmk();
     unsigned int value() const { return m_position; }
     void value(unsigned int _v) { m_position = _v; }

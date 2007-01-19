@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qrichtext.cpp,v 1.4 2004-04-04 13:54:45 mickeyl Exp $
+** $Id: qrichtext.cpp,v 1.5 2007-01-19 01:12:39 erik Exp $
 **
 ** Implementation of the internal Qt classes dealing with rich text
 **
@@ -6060,7 +6060,7 @@ static QMap<QString, QPixmapInt> *pixmap_map = 0;
 
 QTextImage::QTextImage( QTextDocument *p, const QMap<QString, QString> &attr, const QString& context,
 			QMimeSourceFactory &factory )
-    : QTextCustomItem( p )
+    : QTextCustomItem( p ), reg( 0 )
 {
     width = height = 0;
     if ( attr.contains("width") )
@@ -6068,7 +6068,6 @@ QTextImage::QTextImage( QTextDocument *p, const QMap<QString, QString> &attr, co
     if ( attr.contains("height") )
 	height = attr["height"].toInt();
 
-    reg = 0;
     QString imageName = attr["src"];
 
     if (!imageName)
@@ -6149,6 +6148,7 @@ QTextImage::QTextImage( QTextDocument *p, const QMap<QString, QString> &attr, co
 
 QTextImage::~QTextImage()
 {
+    delete reg;
     if ( pixmap_map && pixmap_map->contains( imgId ) ) {
 	QPixmapInt& pmi = pixmap_map->operator[](imgId);
 	pmi.ref--;
@@ -6160,7 +6160,6 @@ QTextImage::~QTextImage()
 	    }
 	}
     }
-    delete reg;
 }
 
 QString QTextImage::richText() const

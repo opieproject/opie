@@ -389,11 +389,16 @@ const QChar *HlAnyChar::checkHgl(const QChar *s, int len, bool)
 }
 
 HlRegExpr::HlRegExpr(int attribute, int context,QString regexp)
-  : HlItem(attribute, context) {
+  : HlItem(attribute, context), Expr(0) {
 
     handlesLinestart=regexp.startsWith("^");
     if(!handlesLinestart) regexp.prepend("^");
     Expr=new QRegExp3(regexp);
+}
+
+HlRegExpr::~HlRegExpr()
+{
+    delete Expr;
 }
 
 const QChar *HlRegExpr::checkHgl(const QChar *s, int len, bool lineStart)

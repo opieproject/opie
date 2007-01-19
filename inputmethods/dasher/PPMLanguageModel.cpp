@@ -59,7 +59,7 @@ CPPMLanguageModel::CPPMnode * CPPMLanguageModel::CPPMnode::add_symbol_to_node(in
 /////////////////////////////////////////////////////////////////////
 
 CPPMLanguageModel::CPPMLanguageModel(CAlphabet *_alphabet,int _normalization)
-	: CLanguageModel(_alphabet,_normalization)
+	: CLanguageModel(_alphabet,_normalization), root(0), m_rootcontext(0)
 {
 	root=new CPPMnode(-1);
 	m_rootcontext=new CPPMContext(root,0);
@@ -68,6 +68,7 @@ CPPMLanguageModel::CPPMLanguageModel(CAlphabet *_alphabet,int _normalization)
 
 CPPMLanguageModel::~CPPMLanguageModel()
 {
+	delete m_rootcontext;
 	delete root;
 }
 

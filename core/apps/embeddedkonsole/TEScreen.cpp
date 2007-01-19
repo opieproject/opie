@@ -65,17 +65,17 @@
 /*! creates a `TEScreen' of `lines' lines and `columns' columns.
 */
 
-TEScreen::TEScreen(int lines, int columns)
+TEScreen::TEScreen(int _lines, int _columns) :
+  lines(_lines),
+  columns(_columns),
+  tabstops(0),
+  histCursor(0),
+  horzCursor(0)
 {
-  this->lines   = lines;
-  this->columns = columns;
 //  odebug << "Columns " << columns << "" << oendl; 
   
-  image      = (ca*) malloc(lines*columns*sizeof(ca));
-  tabstops   = NULL; initTabStops();
-
-  histCursor = 0;
-  horzCursor = 0;
+  image = new ca[lines*columns];
+  initTabStops();
 
   clearSelection();
   reset();
@@ -86,8 +86,8 @@ TEScreen::TEScreen(int lines, int columns)
 
 TEScreen::~TEScreen()
 {
-  free(image);
-  if (tabstops) free(tabstops);
+  delete [] image;
+  delete [] tabstops;
 }
 
 /* ------------------------------------------------------------------------- */
@@ -396,7 +396,7 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
     }
 
       // make new image
-    ca* newimg = (ca*)malloc( new_lines * new_columns * sizeof( ca));
+    ca* newimg = new ca[new_lines * new_columns];
 
     clearSelection();
 
@@ -418,7 +418,7 @@ void TEScreen::resizeImage(int new_lines, int new_columns)
             newimg[y*new_columns+x].b = image[loc(x,y)].b;
             newimg[y*new_columns+x].r = image[loc(x,y)].r;
         }
-    free(image);
+    delete [] image;
     image = newimg;
     lines = new_lines;
     columns = new_columns;
@@ -507,7 +507,7 @@ void TEScreen::effectiveRendition()
 ca* TEScreen::getCookedImage()
 {
  int x,y;
-  ca* merged = (ca*)malloc(lines*columns*sizeof(ca));
+  ca* merged = new ca[lines*columns];
   ca dft(' ',DEFAULT_FORE_COLOR,DEFAULT_BACK_COLOR,DEFAULT_RENDITION);
 
   if (histCursor > hist.getLines()) {
@@ -623,8 +623,10 @@ void TEScreen::changeTabStop(bool set)
 
 void TEScreen::initTabStops()
 {
-  if (tabstops) free(tabstops);
-  tabstops = (bool*)malloc(columns*sizeof(bool));
+  if (tabstops)
+    delete [] tabstops;
+
+  tabstops = new bool[columns];
   // Arrg! The 1st tabstop has to be one longer than the other.
   // i.e. the kids start counting from 0 instead of 1.
   // Other programs might behave correctly. Be aware.
