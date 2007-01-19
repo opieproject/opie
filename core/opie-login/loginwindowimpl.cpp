@@ -225,15 +225,29 @@ private:
 
 void LoginWindowImpl::login ( )
 {
-	const char *user = ::strdup ( m_user-> currentText ( ). local8Bit ( ));
-	const char *pass = ::strdup ( m_password-> text ( ). local8Bit ( ));
+	char *const user = ::strdup ( m_user-> currentText ( ). local8Bit ( ));
+	char *pass = ::strdup ( m_password-> text ( ). local8Bit ( ));
 
-	if ( !user || !user [0] )
+	if ( !user ) {
+		if ( pass )
+			free( pass );
 		return;
-	if ( !pass )
+	}
+	if ( !user [0] ) {
+		free( user );
+		if ( pass )
+			free( pass );
+		return;
+	}
+	bool passwordIsEmpty = false;
+	if ( !pass ) {
+		passwordIsEmpty = true;
 		pass = "";
+	}
 
 	if ( lApp-> checkPassword ( user, pass )) {
+		if ( !passwordIsEmpty )
+			free(pass);
 		Config cfg ( "opie-login" );
 		cfg. setGroup ( "General" );
 		cfg. writeEntry ( "LastLogin", user );
@@ -249,6 +263,9 @@ void LoginWindowImpl::login ( )
 	else {
 		QMessageBox::warning ( this, tr( "Wrong password" ), tr( "The given password is incorrect." ));
 		m_password-> clear ( );
+		free( user );
+		if ( !passwordIsEmpty )
+		    free( pass );
 	}
 }
 

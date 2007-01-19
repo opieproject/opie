@@ -319,6 +319,7 @@ Bkmk* BkmkFile::read03(BkmkFile* /*_this*/, FILE* f)
 	    unsigned int pos;
 	    fread(&pos,sizeof(pos),1,f);
 	    b = new Bkmk(name,anno,pos);
+	    delete [] anno;
 	}
     }
     return b;
