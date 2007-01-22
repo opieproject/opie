@@ -140,9 +140,11 @@ void IRCSession::updateNickname(const QString &oldNickname, const QString &newNi
     QListIterator<IRCChannel> it(channels);
     for (;it.current(); ++it) {
         IRCChannelPerson *chanperson = it.current()->getPerson(oldNickname);
-        it.current()->removePerson(chanperson);
-        chanperson->setNick(newNickname);
-        it.current()->addPerson(chanperson);
+        if (chanperson) {
+            it.current()->removePerson(chanperson);
+            chanperson->setNick(newNickname);
+            it.current()->addPerson(chanperson);
+        }
     }
 
     emit updateChannels();

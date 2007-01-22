@@ -704,6 +704,8 @@ void MineField::readConfig(Config& cfg)
 		char code='A'+(x*17+y*101)%21; // Reduce the urge to cheat
 		int st = (char)(QChar)grid[i++]-code;
 		Mine* m = mine( y, x );
+		if (!m)
+		    continue;
 		if ( st >= 5 ) {
 		    st-=5;
 		    m->setMined(TRUE);
@@ -728,7 +730,7 @@ void MineField::readConfig(Config& cfg)
 	for ( x = 0; x < numCols; x++ ) {
 	    for ( int y = 0; y < numRows; y++ ) {
 		Mine* m = mine( y, x );
-		if ( m->state() == Mine::Empty )
+		if ( m && m->state() == Mine::Empty )
 		    m->setHint(getHint(y,x));
 	    }
 	}

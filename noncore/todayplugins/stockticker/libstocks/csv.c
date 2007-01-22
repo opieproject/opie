@@ -314,7 +314,8 @@ stock *parse_csv_history_file(char *csv_file)
   end_line = csv_file;
 
   /* do not use the first line */
-  end_line = strstr(line, "\n");
+  if (!(end_line = strstr(line, "\n")))
+      return 0;
   *end_line = 0;
   end_line++;
   line = end_line;
