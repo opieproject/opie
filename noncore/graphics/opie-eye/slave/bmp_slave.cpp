@@ -82,10 +82,8 @@ namespace {
 
     void BmpHeader::read_data() {
         memset(&m_Header,0,sizeof(pBmpHeader));
-        _inputfile.open(IO_Raw|IO_ReadOnly);
-        if (!_inputfile.isOpen()) {
+        if (!_inputfile.open(IO_Raw|IO_ReadOnly))
             return;
-        }
         QDataStream s(&_inputfile);
         s.setByteOrder( QDataStream::LittleEndian );
         s.readRawBytes(m_Header.type,2);

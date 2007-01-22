@@ -40,11 +40,13 @@ InputDialog::InputDialog(int w, int h, int newtype, QString labelString, QString
 		if(!filename.isNull())
 		{
 			QFile file(filename);
-			file.open(IO_ReadOnly);
-			QTextStream stream(&file);
-			QString string = stream.read();
+			if (file.open(IO_ReadOnly))
+			{
+				QTextStream stream(&file);
+				QString string = stream.read();
 
-			comboBox->insertStringList(QStringList::split('\n', string));
+				comboBox->insertStringList(QStringList::split('\n', string));
+			}
 		}
 		else
 		{
@@ -63,11 +65,13 @@ InputDialog::InputDialog(int w, int h, int newtype, QString labelString, QString
 		if(!filename.isNull())
 		{
 			QFile file(filename);
-			file.open(IO_ReadOnly);
-			QTextStream stream(&file);
-			QString string = stream.read();
+			if (file.open(IO_ReadOnly))
+			{
+				QTextStream stream(&file);
+				QString string = stream.read();
 
-			listBox->insertStringList(QStringList::split('\n', string));
+				listBox->insertStringList(QStringList::split('\n', string));
+			}
 		}
 		else
 		{

@@ -1,5 +1,6 @@
 #include <qfile.h>
 #include <qtextstream.h>
+#include <opie2/odebug.h>
 
 #include "logger.h"
 
@@ -8,7 +9,8 @@ Logger::Logger() {}
 
 Logger::Logger(const QString fileName) {
 	m_file.setName(fileName);
-	m_file.open(IO_ReadWrite);
+	if ( !m_file.open(IO_ReadWrite) )
+	    owarn << "failed to open " << m_file.name() << oendl;
 }
 
 Logger::~Logger() {

@@ -47,7 +47,8 @@ Om3u::Om3u( const QString &filePath, int mode)
       : QStringList (){
 //odebug << "<<<<<<<new m3u "+filePath << oendl;
   f.setName(filePath);
-  f.open(mode);
+  if ( !f.open(mode) )
+      owarn << "Failed to open file " << f.name() << oendl;
 }
 
 Om3u::~Om3u(){}

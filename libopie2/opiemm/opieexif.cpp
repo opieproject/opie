@@ -205,7 +205,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
                 if (ReadMode & READ_IMAGE){
                     unsigned long size;
 
-                    size = QMAX( 0ul, infile.size()-infile.at() );
+                    size = infile.size()-infile.at();
                     Data = (uchar *)malloc(size);
                     if (Data == NULL){
                         return false;
@@ -809,7 +809,11 @@ bool ExifData::scan(const QString & path)
     int ret;
 
     QFile f(path);
-    f.open(IO_ReadOnly);
+    if ( !f.open(IO_ReadOnly) ) {
+	owarn << "Unable to open file " << f.name() << " readonly" << oendl;
+	DiscardData();
+	return false;
+    }
 
     // Scan the JPEG headers.
     ret = ReadJpegSections(f, READ_EXIF);

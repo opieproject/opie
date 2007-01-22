@@ -104,7 +104,8 @@ void WeatherPluginWidget::retreiveData()
 
 	*proc << "wget" << "-q" << remoteFile << "-O" << localFile;
 	connect( proc, SIGNAL( processExited(Opie::Core::OProcess*) ), this, SLOT( dataRetrieved(Opie::Core::OProcess*) ) );
-	proc->start();
+	if ( !proc->start() )
+	    weatherLabel->setText( tr( "Could not start wget process." ) );
 }
 
 void WeatherPluginWidget::displayWeather()
@@ -142,7 +143,7 @@ void WeatherPluginWidget::displayWeather()
 		tmpstr = "todayweatherplugin/";
 		getIcon( weatherData );
 		tmpstr.append( dataStr );
-        weatherIcon->setPixmap( Opie::Core::OResource::loadPixmap( tmpstr, Opie::Core::OResource::SmallIcon ) );
+        	weatherIcon->setPixmap( Opie::Core::OResource::loadPixmap( tmpstr, Opie::Core::OResource::SmallIcon ) );
 	}
 	else
 	{

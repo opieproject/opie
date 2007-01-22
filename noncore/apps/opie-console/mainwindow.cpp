@@ -824,7 +824,8 @@ void MainWindow::slotSaveHistory() {
 
 
     QFile file(filename);
-    file.open(IO_WriteOnly );
+    if ( !file.open(IO_WriteOnly ) ) return;
+
     QTextStream str(&file );
     if ( currentSession() )
         currentSession()->emulationHandler()->emulation()->streamHistory(&str);

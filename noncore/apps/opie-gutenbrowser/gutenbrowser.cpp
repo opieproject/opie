@@ -845,22 +845,16 @@ bool Gutenbrowser::load( const char *fileName) {
 } // end load
 
 void Gutenbrowser::Search() {
+	odebug << "Starting search dialog" << oendl;
+	searchDlg = new SearchDialog( this, "Etext Search", true);
+	searchDlg->setCaption( tr( "Etext Search" ));
+	connect( searchDlg,SIGNAL( search_signal()),this,SLOT( search_slot()));
+	connect( searchDlg,SIGNAL( search_done_signal()),this,SLOT( searchdone_slot()));
 
-			//    if( searchDlg->isHidden())
-		{
-				odebug << "Starting search dialog" << oendl;
-				searchDlg = new SearchDialog( this, "Etext Search", true);
-				searchDlg->setCaption( tr( "Etext Search" ));
-					//        searchDlg->setLabel( "- searches etext");
-				connect( searchDlg,SIGNAL( search_signal()),this,SLOT( search_slot()));
-				connect( searchDlg,SIGNAL( search_done_signal()),this,SLOT( searchdone_slot()));
-
-				QString resultString;
-				QString string = searchDlg->searchString;
-				Lview->deselect();
-				searchDlg->show();
-				searchDlg->result();
-		}
+	QString resultString;
+	QString string = searchDlg->searchString;
+	Lview->deselect();
+	searchDlg->show();
 }
 
 void Gutenbrowser::search_slot( ) {

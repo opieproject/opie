@@ -958,7 +958,8 @@ GLOBALDEF int FtpWrite(void *buf, int len, netbuf *nData)
         i = writeline(buf, len, nData);
     else
       {
-          socket_wait(nData);
+          if (socket_wait(nData) < 0)
+	      fprintf(stderr, "FtpWrite: socket_wait failed with %s\n", nData->ctrl->response);
           i = net_write(nData->handle, buf, len);
       }
     if (i == -1)
@@ -1339,7 +1340,10 @@ GLOBALDEF void FtpQuit(netbuf *nControl)
 {
     if (nControl->dir != FTPLIB_CONTROL)
         return;
-    FtpSendCmd("QUIT",'2',nControl);
+    if (FtpSendCmd("QUIT",'2',nControl) == 1) {
+        if (ftplib_debug > 2)
+	    fprintf(stderr, "FtpQuit: FtpSendCmd(QUIT) failed\n");
+    }
     net_close(nControl->handle);
     free(nControl->buf);
     free(nControl);

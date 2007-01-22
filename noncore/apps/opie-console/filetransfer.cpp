@@ -4,6 +4,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#include <opie2/odebug.h>
 #include <qsocketnotifier.h>
 
 #include "procctl.h"
@@ -234,7 +235,8 @@ void FileTransfer::cancel() {
 }
 void FileTransfer::slotExec() {
     char buf[2];
-    ::read(m_term[0], buf, 1 );
+    if (::read(m_term[0], buf, 1 ) == -1)
+	owarn << "read of m_term[0] failed" << oendl;
     delete m_proc;
     delete m_not;
     m_proc = m_not = 0l;

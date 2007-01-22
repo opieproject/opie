@@ -6,13 +6,15 @@ Script::Script() {
 
 Script::Script(const QString fileName) {
     QFile file(fileName);
-    file.open(IO_ReadOnly );
+    if ( !file.open(IO_ReadOnly ) )
+	return;
     m_script = file.readAll();
 }
 
 void Script::saveTo(const QString fileName) const {
     QFile file(fileName);
-    file.open(IO_WriteOnly);
+    if ( !file.open(IO_WriteOnly) )
+	return;
     file.writeBlock(m_script);
     file.close();
 }
