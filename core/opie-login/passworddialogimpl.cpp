@@ -164,7 +164,11 @@ void PasswordDialogImpl::writePassword() {
 
     ::fclose( file );
     ::endpwent();
-    ::rename("/etc/passwd.new","/etc/passwd" );
+    if (::rename("/etc/passwd.new","/etc/passwd" ) == -1)
+	return error( tr("Rename /etc/passwd failed"),
+                      tr("<qt>Renaming /etc/passwd.new to /etc/passwd failed."
+			 "Please check your /etc/passed file, your /etc directory "
+			 "or your filesystem.</qt>") );
 
     /* should be done now */
 #ifdef  OPIE_LOGIN_SHADOW_PW

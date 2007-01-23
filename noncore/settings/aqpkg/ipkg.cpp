@@ -209,7 +209,7 @@ void Ipkg :: removeStatusEntry()
 
     if ( !writeFile.open( IO_WriteOnly ) )
     {
-        tempstr = tr("Couldn't create tempory status file - ");
+        tempstr = tr("Couldn't create temporary status file - ");
         tempstr.append( outStatusFile );
         emit outputText( tempstr );
         return;
@@ -270,7 +270,14 @@ void Ipkg :: removeStatusEntry()
 
     // Remove old status file and put tmp stats file in its place
     remove( statusFile );
-    rename( outStatusFile, statusFile );
+    if (::rename( outStatusFile, statusFile ) == -1)
+    {
+	tempstr = tr("Couldn't rename temporary status file - ");
+	tempstr.append( outStatusFile );
+	tempstr.append( tr("to status file - ") );
+	tempstr.append( statusFile );
+	emit outputText( tempstr );
+    }
  }
 
 int Ipkg :: executeIpkgLinkCommand( QStringList *cmd )
