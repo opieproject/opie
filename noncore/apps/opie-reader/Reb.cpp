@@ -6,52 +6,6 @@
 #include "my_list.h"
 #include "Bkmks.h"
 #include "Model.h"
-/*
-#ifdef offsetof
-#define OffsetOf(type, field) ((int) offsetof(type, field))
-#else
-#define OffsetOf(type, field) ((int) ((char *) &((type *) 0)->field))
-#endif
-
-template<class T>
-UInt32 binarychop(T* data, UInt32 n, T val)
-{
-  UInt32 jl = 0,jh = n-1,jm = (jl+jh)/2;
-  while (jh > jl+1)
-    {
-      if (data[jm] > val)
-	{
-	  jh = jm;
-	}
-      else
-	{
-	  jl = jm;
-	}
-      jm = (jl+jh)/2;
-    }
-  return jl;
-}
-
-template<class T, class D>
-UInt32 binarychop(D* data, UInt32 n, T val, UInt32 offset)
-{
-  UInt32 jl = 0,jh = n-1,jm = (jl+jh)/2;
-  while (jh > jl+1)
-    {
-      T* d = reinterpret_cast<T*>(reinterpret_cast<char*>(data+jm)+offset);
-      if (*d > val)
-	{
-	  jh = jm;
-	}
-      else
-	{
-	  jl = jm;
-	}
-      jm = (jl+jh)/2;
-    }
-  return jl;
-}
-*/
 
 CReb::CReb()
 :
@@ -77,20 +31,6 @@ unsigned int CReb::locate()
 
 void CReb::locate(unsigned int n)
 {
-  /*
-  UInt32 cp = nopages-1;
-  for (int i = 0; i < nopages; ++i)
-    {
-      if (m_pagedetails[i].pagestart > n)
-	{
-	  cp = i-1;
-	  break;
-	}
-    }
-  qDebug("Requesting %u from page %u [%u]", n, cp, n - m_pagedetails[cp].pagestart);
-  */
-  //UInt32 jl = binarychop<UInt32, Page_detail>(m_pagedetails, nopages, n, OffsetOf(Page_detail, pagestart));
-  
   UInt32 jl = 0,jh = nopages-1,jm = (jl+jh)/2;
   while (jh > jl+1)
     {
@@ -112,8 +52,6 @@ void CReb::locate(unsigned int n)
   currentpage.setoffset(page2pos(jl), jl, ((rs.flags & 8) != 0), rs.len, val);
   if (noparas > 0)
     {
-      //jl = binarychop<int, ParaRef>(paras, noparas, val, OffsetOf(ParaRef, pos));
-      
       UInt32 jl = 0,jh = noparas-1,jm = (jl+jh)/2;
       while (jh > jl+1)
 	{
@@ -758,8 +696,6 @@ void CReb::start2endSection()
     {
       if (nojoins > 0)
 	{
-	  //UInt32 jl = binarychop<UInt32>(joins, nojoins, currentpage.offset());
-	  
 	  UInt32 jl = 0,jh = nojoins-1,jm = (jl+jh)/2;
 	  while (jh > jl+1)
 	    {
@@ -776,7 +712,6 @@ void CReb::start2endSection()
 	  
 	  currentpage.m_startoff = joins[jl];
 	  currentpage.m_endoff = joins[jl+1]-1;
-	  //currentpage.m_endoff = joins[jh]-1;
 	}
       m_currentstart = m_pagedetails[currentpage.pageno()].pagestart+currentpage.m_startoff;
       m_currentend = m_pagedetails[currentpage.pageno()].pagestart+currentpage.m_endoff;
