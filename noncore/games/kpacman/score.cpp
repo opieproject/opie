@@ -239,11 +239,11 @@ void Score::keyPressEvent(QKeyEvent *k)
     }
 
     if (x != cursor.x || y != cursor.y) {
-        if (cursor.x != -1)
+        if (cursor.x != -1 && lastScore >= 0)
             cursor.chr = hallOfFame[lastScore].name.at(cursor.x-14);
         scrollRepeat = FALSE;
         repaint(rect(x, y*1.25, cursor.chr), FALSE);
-    } else
+    } else if (lastScore >= 0)
         hallOfFame[lastScore].name.at(cursor.x-14) = cursor.chr;
 
     if (key == UpKey || key == Key_Up || key == DownKey || key == Key_Down)

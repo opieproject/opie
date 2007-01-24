@@ -84,19 +84,18 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
       server.sin_family = host->h_addrtype;
       server.sin_port = (unsigned short) htons( http_proxy_server ? http_proxy_port : 80 );
 
-    } else 
-      {
-
+    }
+  else
+    {
 #ifdef DEBUG
-  printf(" gethostbyname : NOK\n");
+      printf(" gethostbyname : NOK\n");
 #endif
-  return ERRHOST;
-      }
+      return ERRHOST;
+    }
 
   /* create socket */
   if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
     {
-
 #ifdef DEBUG
       printf(" create socket : NOK\n");
 #endif
@@ -124,7 +123,7 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
   if (http_proxy_server) 
     {
       sprintf(header,"GET http://%.128s:80%.256s HTTP/1.0\015\012\015\012",
-         http_server, http_file);
+              http_server, http_file);
     }
   else 
     {
@@ -141,7 +140,7 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
 #endif
     {
 #ifdef DEBUG
-  printf(" send header : NOK\n");
+      printf(" send header : NOK\n");
 #endif
       return ERRWHEA;         
     }
@@ -159,37 +158,37 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
       r=recv(s,buf,BUF_SIZE,0);
 #endif      
       
-      if (r)
-  {
-    if(!data_lgr)
-      {
-        if((data = malloc(r+1))==NULL)
-    {
-      fprintf(stderr,"Memory allocating error (%s line %d)\n"
-        ,__FILE__, __LINE__);
-      exit(1);
-    }
+      if (r > 0)
+        {
+          if(!data_lgr)
+            {
+              if((data = malloc(r+1))==NULL)
+                {
+                  fprintf(stderr,"Memory allocating error (%s line %d)\n",
+                          __FILE__, __LINE__);
+                  exit(1);
+                }
         
-        memcpy(data,buf,r);
-        data_lgr = r;
-        data[r]=0;
-      }
-    else
-      {
-        if((temp = malloc(r+data_lgr+1))==NULL)
-    {
-      fprintf(stderr,"Memory allocating error (%s line %d)\n"
-        ,__FILE__, __LINE__);
-      exit(1);
-    }
-        memcpy(temp, data, data_lgr);
-        memcpy(temp+data_lgr, buf, r);
-        temp[r+data_lgr]=0;
-        data_lgr += r;
-        free(data);
-        data = temp;
-      }
-  }
+              memcpy(data,buf,r);
+              data_lgr = r;
+              data[r]=0;
+            }
+          else
+            {
+              if((temp = malloc(r+data_lgr+1))==NULL)
+                {
+                  fprintf(stderr,"Memory allocating error (%s line %d)\n",
+                          __FILE__, __LINE__);
+                  exit(1);
+                }
+              memcpy(temp, data, data_lgr);
+              memcpy(temp+data_lgr, buf, r);
+              temp[r+data_lgr]=0;
+              data_lgr += r;
+              free(data);
+              data = temp;
+            }
+        }
     }
   
   /* close socket */
@@ -213,14 +212,14 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
       if (!temp || *temp==0) return ERRRHEA;
 
       if( *temp==0x0A )
-  {
-    /* test if it is the header end */
-    temp ++;
-    if (*temp == 0x0D) temp++;
-    if (*temp == 0x0A) header_founded = 1;
-  }
+        {
+          /* test if it is the header end */
+          temp ++;
+          if (*temp == 0x0D) temp++;
+          if (*temp == 0x0A) header_founded = 1;
+        }
       else
-  temp++;
+          temp++;
     }
 
   *temp = 0;
@@ -240,8 +239,8 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
   if ((csv_ptr = malloc(strlen(temp)+1))==NULL)
     {
       free(data);
-      fprintf(stderr,"Memory allocating error (%s line %d)\n"
-        ,__FILE__, __LINE__);
+      fprintf(stderr,"Memory allocating error (%s line %d)\n",
+              __FILE__, __LINE__);
       exit(1);
     }
       
