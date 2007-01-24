@@ -1769,12 +1769,12 @@ void QPEApplication::showMainWidget( QWidget* mw, bool nomaximize )
 */
 void QPEApplication::showMainDocumentWidget( QWidget* mw, bool nomaximize )
 {
-    if ( mw && argc() == 2 )
-        Global::setDocument( mw, QString::fromUtf8(argv()[1]) );
+    if ( mw ) {
+       if ( argc() == 2 )
+           Global::setDocument( mw, QString::fromUtf8(argv()[1]) );
 
-
-//    setMainWidget(mw); see above
-    d->show(mw, nomaximize );
+        d->show(mw, nomaximize );
+    }
 }
 
 

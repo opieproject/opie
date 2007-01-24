@@ -227,7 +227,7 @@ void OSplitter::addWidget( QWidget* wid, const QString& icon, const QString& lab
     {
         if (m_hbox )
             addToBox( cont );
-        else
+        else if (m_tabWidget)
             addToTab( cont );
     }
 }

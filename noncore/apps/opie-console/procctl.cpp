@@ -49,7 +49,10 @@ void ProcCtl::remove( pid_t pi ) {
     while (con ) {
         /* remove it */
         if ( pi == con->pid ) {
-            forw->prev = con->prev;
+            if (forw)
+		forw->prev = con->prev;
+	    else
+		forw = con->prev;
             delete con;
             return;
         }

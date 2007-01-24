@@ -236,6 +236,12 @@ void PcmciaManager::cardMessage( const QCString & msg, const QByteArray & )
             if ( !newCard ) ++it; else break;
         }
     }
+
+    if ( !theCard ) {
+	owarn << "pcmcia: Finished working through cards in PCMCIA system but I do not have a valid card handle" << oendl;
+	return;
+    }
+
     if ( newCard )
     {
         odebug << "pcmcia: unconfigured card detected" << oendl;

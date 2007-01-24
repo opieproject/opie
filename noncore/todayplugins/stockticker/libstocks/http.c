@@ -210,7 +210,7 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
   header_founded = 0;
   while( !header_founded )
     {
-      if (*temp==0) return ERRRHEA;
+      if (!temp || *temp==0) return ERRRHEA;
 
       if( *temp==0x0A )
   {

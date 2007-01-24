@@ -265,7 +265,7 @@ void UsbCategory::populate()
                 lastDev = dev;
             }
         }
-        else if ( line.startsWith( "S:  Product" ) )
+        else if ( dev && line.startsWith( "S:  Product" ) )
         {
             int dp = line.find( '=' );
             dev->setText( 0, dp != -1 ? line.right( line.length()-1-dp ) : "<unknown>" );

@@ -243,6 +243,7 @@ void MainWindow::slotEdit()
 // --- openBook ---------------------------------------------------------------
 void MainWindow::openBook(QListViewItem *curritem)
 {
+    if ( !curritem ) return;
     // find book in List
     QString currname=curritem->text(posName);
     CBInfo *cb = checkbooks->first();
@@ -277,10 +278,8 @@ void MainWindow::openBook(QListViewItem *curritem)
         if ( currname != newname )
         {
             // Update name if changed
-            if( curritem ) {
-                curritem->setText( posName, newname );
-                cbList->sort();
-            }
+            curritem->setText( posName, newname );
+            cbList->sort();
             _cfg.setLastBook( newname );
 
             // Remove old file

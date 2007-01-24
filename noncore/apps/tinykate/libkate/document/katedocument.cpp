@@ -2015,7 +2015,7 @@ void KateDocument::paintTextLine(QPainter &paint, int line, int y, int xStart, i
   const QChar *s;
   int z, x;
   QChar ch;
-  Attribute *a = 0L;
+  Attribute *attrptr = 0L;
   int attr, nextAttr;
   int xs;
   int xc, zc;
@@ -2040,16 +2040,16 @@ void KateDocument::paintTextLine(QPainter &paint, int line, int y, int xStart, i
     if (ch == '\t') {
       x += m_tabWidth - (x % m_tabWidth);
     } else {
-     a = &m_attribs[textLine->getAttr(z)];
+     attrptr = &m_attribs[textLine->getAttr(z)];
 
-   if (a->bold && a->italic)
-      x += myFontMetricsBI.width(ch);
-    else if (a->bold)
-      x += myFontMetricsBold.width(ch);
-    else if (a->italic)
-      x += myFontMetricsItalic.width(ch);
-    else
-      x += myFontMetrics.width(ch);
+     if (attrptr->bold && attrptr->italic)
+       x += myFontMetricsBI.width(ch);
+     else if (attrptr->bold)
+       x += myFontMetricsBold.width(ch);
+     else if (attrptr->italic)
+       x += myFontMetricsItalic.width(ch);
+     else
+       x += myFontMetrics.width(ch);
     }
     z++;
   } while (x <= xStart);
@@ -2079,13 +2079,13 @@ void KateDocument::paintTextLine(QPainter &paint, int line, int y, int xStart, i
       x += m_tabWidth - (x % m_tabWidth);
     else
     {
-      a = &m_attribs[textLine->getAttr(z)];
+      attrptr = &m_attribs[textLine->getAttr(z)];
 
-      if (a->bold && a->italic)
+      if (attrptr->bold && attrptr->italic)
         x += myFontMetricsBI.width(ch);
-      else if (a->bold)
+      else if (attrptr->bold)
         x += myFontMetricsBold.width(ch);
-      else if (a->italic)
+      else if (attrptr->italic)
         x += myFontMetricsItalic.width(ch);
       else
         x += myFontMetrics.width(ch);
@@ -2114,14 +2114,14 @@ void KateDocument::paintTextLine(QPainter &paint, int line, int y, int xStart, i
         QString s = str.string();
         paint.drawText(x - xStart, y, s);
 
-   if (a->bold && a->italic)
-      x += myFontMetricsBI.width(s);
-    else if (a->bold)
-      x += myFontMetricsBold.width(s);
-    else if (a->italic)
-      x += myFontMetricsItalic.width(s);
-    else
-      x += myFontMetrics.width(s);
+        if (attrptr && attrptr->bold && attrptr->italic)
+          x += myFontMetricsBI.width(s);
+        else if (attrptr && attrptr->bold)
+          x += myFontMetricsBold.width(s);
+        else if (attrptr && attrptr->italic)
+          x += myFontMetricsItalic.width(s);
+        else
+          x += myFontMetrics.width(s);
       }
       zc = z +1;
 
@@ -2129,23 +2129,21 @@ void KateDocument::paintTextLine(QPainter &paint, int line, int y, int xStart, i
         nextAttr = textLine->getRawAttr(z);
         if (nextAttr != attr) {
           attr = nextAttr;
-          a = &m_attribs[attr & taAttrMask];
+          attrptr = &m_attribs[attr & taAttrMask];
 
-          if (attr & taSelected) paint.setPen(a->selCol);
-            else paint.setPen(a->col);
+          if (attr & taSelected) paint.setPen(attrptr->selCol);
+            else paint.setPen(attrptr->col);
 
-   if (a->bold && a->italic)
-     paint.setFont(myFontBI);
-    else if (a->bold)
-      paint.setFont(myFontBold);
-    else if (a->italic)
-      paint.setFont(myFontItalic);
-    else
-      paint.setFont(myFont);
+          if (attrptr->bold && attrptr->italic)
+            paint.setFont(myFontBI);
+          else if (attrptr->bold)
+            paint.setFont(myFontBold);
+          else if (attrptr->italic)
+            paint.setFont(myFontItalic);
+          else
+            paint.setFont(myFont);
         }
 
-//        paint.drawLine(x - xStart, y -2, x - xStart, y);
-//        paint.drawLine(x - xStart, y, x - xStart + 2, y);
         paint.drawPoint(x - xStart, y);
         paint.drawPoint(x - xStart +1, y);
         paint.drawPoint(x - xStart, y -1);
@@ -2159,30 +2157,30 @@ void KateDocument::paintTextLine(QPainter &paint, int line, int y, int xStart, i
           QString s = str.string();
           paint.drawText(x - xStart, y, s);
 
-   if (a->bold && a->italic)
-      x += myFontMetricsBI.width(s);
-    else if (a->bold)
-      x += myFontMetricsBold.width(s);
-    else if (a->italic)
-      x += myFontMetricsItalic.width(s);
-    else
-      x += myFontMetrics.width(s);
+          if (attrptr->bold && attrptr->italic)
+            x += myFontMetricsBI.width(s);
+          else if (attrptr->bold)
+            x += myFontMetricsBold.width(s);
+          else if (attrptr->italic)
+            x += myFontMetricsItalic.width(s);
+          else
+            x += myFontMetrics.width(s);
           zc = z;
         }
         attr = nextAttr;
-        a = &m_attribs[attr & taAttrMask];
+        attrptr = &m_attribs[attr & taAttrMask];
 
-        if (attr & taSelected) paint.setPen(a->selCol);
-          else paint.setPen(a->col);
+        if (attr & taSelected) paint.setPen(attrptr->selCol);
+          else paint.setPen(attrptr->col);
 
-   if (a->bold && a->italic)
-     paint.setFont(myFontBI);
-    else if (a->bold)
-      paint.setFont(myFontBold);
-    else if (a->italic)
-      paint.setFont(myFontItalic);
-    else
-      paint.setFont(myFont);
+        if (attrptr->bold && attrptr->italic)
+          paint.setFont(myFontBI);
+        else if (attrptr->bold)
+          paint.setFont(myFontBold);
+        else if (attrptr->italic)
+          paint.setFont(myFontItalic);
+        else
+          paint.setFont(myFont);
       }
     }
     z++;
@@ -2227,7 +2225,9 @@ bool KateDocument::doSearch(SConfig &sc, const QString &searchFor) {
         delete [] t;
         bufLen = (tlen + 255) & (~255);
         t = new QChar[bufLen];
-      }
+      } else if (!t)
+	  t = new QChar[bufLen];
+
       memcpy(t, textLine->getText(), tlen*sizeof(QChar));
       if (sc.flags & KateView::sfSelected) {
         pos = 0;
@@ -2288,7 +2288,8 @@ bool KateDocument::doSearch(SConfig &sc, const QString &searchFor) {
         delete [] t;
         bufLen = (tlen + 255) & (~255);
         t = new QChar[bufLen];
-      }
+      } else if (!t)
+        t = new QChar[bufLen];
       memcpy(t, textLine->getText(), tlen*sizeof(QChar));
       if (sc.flags & KateView::sfSelected) {
         pos = 0;
