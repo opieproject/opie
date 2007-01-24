@@ -1172,7 +1172,11 @@ static int FtpXfer(const char *localfile, const char *path,
     if (local == NULL)
         local = (typ == FTPLIB_FILE_WRITE) ? stdin : stdout;
     if (!FtpAccess(path, typ, mode, nControl, &nData))
+      {
+        if (localfile != NULL)
+            fclose(local);
         return 0;
+      }
     dbuf = malloc(FTPLIB_BUFSIZ);
     if (typ == FTPLIB_FILE_WRITE)
       {

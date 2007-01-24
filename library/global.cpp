@@ -539,12 +539,14 @@ void Global::invoke(const QString &c)
     // see if the application is already running
     // XXX should lock file /tmp/qcop-msg-ap
     if ( QCopChannel::isRegistered( ("QPE/Application/" + ap).latin1() ) ) {
-    // If the channel is already register, the app is already running, so show it.
-    { QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" ); }
+        // If the channel is already register, the app is already running, so show it.
+        {
+            QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" );
+	}
 
-    //QCopEnvelope e("QPE/System", "notBusy(QString)" );
-    //e << ap;
-    return;
+        //QCopEnvelope e("QPE/System", "notBusy(QString)" );
+        //e << ap;
+        return;
     }
     // XXX should unlock file /tmp/qcop-msg-ap
     //see if it is being started
@@ -554,9 +556,9 @@ void Global::invoke(const QString &c)
         // Real cause is that ::execute is called twice for document tab. But it would need some larger changes
         // to fix that, and with future syncs with qtopia 1.6 it will change anyway big time since somebody there
         // had the idea that an apploader belongs to the launcher ...
-    //QCopEnvelope e("QPE/System", "notBusy(QString)" );
-    //e << ap;
-    return;
+        //QCopEnvelope e("QPE/System", "notBusy(QString)" );
+        //e << ap;
+        return;
     }
 
 #endif
@@ -568,11 +570,12 @@ void Global::invoke(const QString &c)
     QStrList slist;
     unsigned int j;
     for ( j = 0; j < list.count(); j++ )
-    slist.append( list[j].utf8() );
+        slist.append( list[j].utf8() );
 
     const char **args = new const char *[slist.count() + 1];
     for ( j = 0; j < slist.count(); j++ )
-    args[j] = slist.at(j);
+        args[j] = slist.at(j);
+
     args[j] = NULL;
 
 #if !defined(QT_NO_COP)
@@ -589,8 +592,8 @@ void Global::invoke(const QString &c)
 #endif
     qDebug("libfile = %s", libexe.latin1() );
     if ( QFile::exists( libexe ) ) {
-    qDebug("calling quickexec %s", libexe.latin1() );
-    quickexecv( libexe.utf8().data(), (const char **)args );
+        qDebug("calling quickexec %s", libexe.latin1() );
+        quickexecv( libexe.utf8().data(), (const char **)args );
     } else
 #endif
     {
@@ -647,6 +650,7 @@ void Global::invoke(const QString &c)
         else
             QMessageBox::warning( 0, "Error", "Could not start the application " + c, "Ok", 0, 0, 0, 1 );
     }
+    delete [] args;
 #endif //QT_NO_QWS_MULTIPROCESS
 }
 

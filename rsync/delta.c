@@ -1,7 +1,7 @@
 /*= -*- c-basic-offset: 4; indent-tabs-mode: nil; -*-
  *
  * librsync -- library for network deltas
- * $Id: delta.c,v 1.1 2002-01-25 22:15:09 kergoth Exp $
+ * $Id: delta.c,v 1.2 2007-01-24 19:46:20 erik Exp $
  *
  * Copyright (C) 2000, 2001 by Martin Pool <mbp@samba.org>
  *
@@ -335,6 +335,7 @@ rs_job_t *rs_delta_begin(rs_signature_t *sig)
     if ((job->block_len = sig->block_len) < 0) {
         rs_log(RS_LOG_ERR, "unreasonable block_len %d in signature",
                job->block_len);
+	rs_job_free(job);
         return NULL;
     }
 
@@ -342,6 +343,7 @@ rs_job_t *rs_delta_begin(rs_signature_t *sig)
     if (job->strong_sum_len < 0  ||  job->strong_sum_len > RS_MD4_LENGTH) {
         rs_log(RS_LOG_ERR, "unreasonable strong_sum_len %d in signature",
                job->strong_sum_len);
+	rs_job_free(job);
         return NULL;
     }
 	

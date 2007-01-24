@@ -27,7 +27,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-// $Id: oimageeffect.cpp,v 1.5 2004-03-13 19:51:49 zecke Exp $
+// $Id: oimageeffect.cpp,v 1.6 2007-01-24 19:46:19 erik Exp $
 
 #include <math.h>
 
@@ -2051,8 +2051,11 @@ void OImageEffect::normalize(QImage &img)
             if(intense > threshold_intensity)
                 break;
         }
-        if(low == high)
+        if(low == high) {
+            free(histogram);
+	    free(normalize_map);
             return;  // zero span bound
+	}
     }
 
     // Stretch the histogram to create the normalized image mapping.

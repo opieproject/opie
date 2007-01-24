@@ -52,6 +52,7 @@ libstocks_return_code get_currency_exchange(char *from,
   strcat(symbol, "=X");
   
   error = get_stocks(symbol, &data);
+  free(symbol);
   if (error) 
     {
       *exchange = 0;

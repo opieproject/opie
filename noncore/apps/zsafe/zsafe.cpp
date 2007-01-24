@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.28 2005-05-06 21:54:49 drw Exp $
+** $Id: zsafe.cpp,v 1.29 2007-01-24 19:46:19 erik Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -1768,12 +1768,14 @@ int ZSafe::loadInit(const char* _filename, const char *password)
 
     fd = fopen (_filename, "rb");
 
-        QFileInfo f (_filename);
-        load_buffer_length = f.size();
-        load_buffer_length = ((load_buffer_length / 1024)+1) * 1024 * 2;
+    QFileInfo f (_filename);
+    load_buffer_length = f.size();
+    load_buffer_length = ((load_buffer_length / 1024)+1) * 1024 * 2;
 
-    if (fd == NULL)
+    if (fd == NULL) {
+        delete krc2;
         return PWERR_OPEN;
+    }
 
     buffer = (char *)malloc(load_buffer_length);
     for (j = 0; password[j] != '\0'; j++) {
@@ -1788,8 +1790,10 @@ int ZSafe::loadInit(const char* _filename, const char *password)
     size = fread ((unsigned char *) (charbuf + count), sizeof(unsigned char), 8, fd);
 #endif
 
-    if (size < 8)
+    if (size < 8) {
+        delete krc2;
         return PWERR_DATA;
+    }
 
     for (count = 0; count < 4; count++) {
         count2 = count << 1;
@@ -1809,6 +1813,7 @@ int ZSafe::loadInit(const char* _filename, const char *password)
             count2 = fread ((unsigned char *) (charbuf + count), sizeof(unsigned char), 8, fd);
 #endif
             if (count2 == 0) {
+                delete krc2;
                 return PWERR_DATA;
             }
             count += count2;
@@ -1829,6 +1834,7 @@ int ZSafe::loadInit(const char* _filename, const char *password)
         bufferIndex += 8;
         buffer[bufferIndex + 1] = '\0';
     } /* while ((count = read (fileno (fd), (unsigned char *) charbuf, 8)) > 0) */
+    delete krc2;
     size -= buffer[size - 1];
     lastcount = 0;
 
@@ -2099,28 +2105,15 @@ int ZSafe::saveInit(const char *_filename, const char *password)
     int count2;
     Krc2* krc2 = new Krc2();
 
-    /* first we should check the permissions of the filename */
-/*
-    if (QFile::exists(_filename)) {
-        val = checkFile(_filename);
-        if (val != PWERR_GOOD)
-            return val;
-    } else
-        {
-        val = creat (_filename, (S_IRUSR | S_IWUSR));
-        if (val == -1)
-            return PWERR_OPEN;
-        else
-            close(val);
-    }
-*/
-        QFileInfo f (_filename);
-        save_buffer_length = f.size();
-        save_buffer_length = ((save_buffer_length / 1024)+1) * 1024;
+    QFileInfo f (_filename);
+    save_buffer_length = f.size();
+    save_buffer_length = ((save_buffer_length / 1024)+1) * 1024;
 
     fd = fopen (_filename, "wb");
-    if (fd == NULL)
+    if (fd == NULL) {
+        delete krc2;
         return PWERR_OPEN;
+    }
 
     buffer = (char*)malloc(save_buffer_length);
 
@@ -2130,6 +2123,7 @@ int ZSafe::saveInit(const char *_filename, const char *password)
     }
     keylength = j;
     krc2->rc2_expandkey (key, keylength, 128);
+    delete krc2;
 
     /* First, we make the IV */
     for (count2 = 0; count2 < 4; count2++) {
@@ -2188,15 +2182,21 @@ int ZSafe::saveEntry(char *entry[FIELD_SIZE])
 
                 /* reset the buffer index */
                 bufferIndex = 0;
-                if (putc ((unsigned char) (ciphertext[count3] >> 8), fd) == EOF) return PWERR_DATA;
-                if (putc ((unsigned char) (ciphertext[count3] & 0xff), fd) == EOF) return PWERR_DATA;
+                if (putc ((unsigned char) (ciphertext[count3] >> 8), fd) == EOF) {
+                    delete krc2;
+		    return PWERR_DATA;
+                }
+                if (putc ((unsigned char) (ciphertext[count3] & 0xff), fd) == EOF) {
+                    delete krc2;
+		    return PWERR_DATA;
+                }
             } /*for (count3 = 0; count3 < 5; count3++)*/
         } /*if (bufferIndex == 5)*/
         /* increment a short, not a byte */
         count2 += 2;
     } /*while (count2 < strlen (buffer))*/
-        int ret = PWERR_GOOD;
-    return ret;
+    delete krc2;
+    return PWERR_GOOD;
 }
 
 int ZSafe::saveFinalize(void)
@@ -2228,6 +2228,7 @@ int ZSafe::saveFinalize(void)
 
     fclose (fd);
     free(buffer);
+    delete krc2;
     return retval;
 }
 

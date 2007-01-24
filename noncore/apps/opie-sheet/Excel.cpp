@@ -377,7 +377,9 @@ char* ExcelBook::GetDataOfBREC(ExcelBREC* record)
 {
     if(record->data==NULL)
     {
-        ConvertCharToArray(record,Read(record->position,record->length),record->length);
+	char* readData = Read(record->position,record->length);
+        ConvertCharToArray(record,readData,record->length);
+	delete [] readData;
     };
     return record->data;//new?
 };

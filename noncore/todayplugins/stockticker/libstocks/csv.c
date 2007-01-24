@@ -141,7 +141,11 @@ stock *parse_csv_file(char *csv)
     StockPtr = malloc_stock();
     
     ptr = csv_strtok(line, ",");
-    if (!ptr) return 0;
+    if (!ptr)
+      {
+        free_stock(StockPtr);
+        return 0;
+      }
 
     symbol = (char *)malloc(strlen(ptr)+1);
     if (symbol==NULL)
@@ -154,7 +158,11 @@ stock *parse_csv_file(char *csv)
     StockPtr->Symbol = symbol;
 
     ptr = csv_strtok(NULL, ",");
-    if (!ptr) return 0;
+    if (!ptr)
+      {
+        free_stock(StockPtr);
+        return 0;
+      }
 
     name = (char *)malloc(strlen(ptr)+1);
     if (name==NULL)
@@ -167,11 +175,19 @@ stock *parse_csv_file(char *csv)
     StockPtr->Name = name;
 
     ptr = csv_strtok(NULL, ",");
-    if (!ptr) return 0;
+    if (!ptr)
+      {
+        free_stock(StockPtr);
+        return 0;
+      }
     sscanf(ptr,"%f",&(StockPtr->CurrentPrice));
 
     ptr = csv_strtok(NULL, ",");
-    if (!ptr) return 0;
+    if (!ptr)
+      {
+        free_stock(StockPtr);
+        return 0;
+      }
 
     date = (char *)malloc(strlen(ptr)+1);
     if (date==NULL)
@@ -184,7 +200,11 @@ stock *parse_csv_file(char *csv)
     StockPtr->Date = date;
 
     ptr = csv_strtok(NULL, ",");
-    if (!ptr) return 0;
+    if (!ptr)
+      {
+        free_stock(StockPtr);
+        return 0;
+      }
 
     time = (char *)malloc(strlen(ptr)+1);
     if (time==NULL)
@@ -197,7 +217,11 @@ stock *parse_csv_file(char *csv)
     StockPtr->Time = time;
     
     ptr = csv_strtok(NULL, ",");
-    if (!ptr) return 0;
+    if (!ptr)
+      {
+        free_stock(StockPtr);
+        return 0;
+      }
     sscanf(ptr,"%f",&(StockPtr->Variation));      
     
     StockPtr->Pourcentage = 100 * StockPtr->Variation /
@@ -206,19 +230,35 @@ stock *parse_csv_file(char *csv)
     StockPtr->LastPrice = StockPtr->CurrentPrice - StockPtr->Variation;
 
     ptr = csv_strtok(NULL, ",");
-    if (!ptr) return 0;
+    if (!ptr)
+      {
+        free_stock(StockPtr);
+        return 0;
+      }
     sscanf(ptr,"%f",&(StockPtr->OpenPrice));      
 
     ptr = csv_strtok(NULL, ",");
-    if (!ptr) return 0;
+    if (!ptr)
+      {
+        free_stock(StockPtr);
+        return 0;
+      }
     sscanf(ptr,"%f",&(StockPtr->MaxPrice));      
 
     ptr = csv_strtok(NULL, ",");
-    if (!ptr) return 0;
+    if (!ptr)
+      {
+        free_stock(StockPtr);
+        return 0;
+      }
     sscanf(ptr,"%f",&(StockPtr->MinPrice));      
   
     ptr = csv_strtok(NULL, ",");
-    if (!ptr) return 0;
+    if (!ptr)
+      {
+        free_stock(StockPtr);
+        return 0;
+      }
     StockPtr->Volume = atoi(ptr);
 
     if( !FirstStockPtr ) 
@@ -247,7 +287,11 @@ stock *parse_csv_file(char *csv)
     StockPtr = malloc_stock();
     
     ptr = csv_strtok(line, ",");
-    if (!ptr) return 0;
+    if (!ptr)
+      {
+        free_stock(StockPtr);
+        return 0;
+      }
 
     symbol = (char *)malloc(strlen(ptr)+1);
     if (symbol==NULL)
@@ -328,7 +372,13 @@ stock *parse_csv_history_file(char *csv_file)
     
       /* Date */
       ptr = strtok(line, ",");
-      if (!ptr) return 0;
+      if (!ptr)
+        {
+          free_stock(StockPtr);
+          free_stock(FirstStockPtr);
+          free_stock(LastStockPtr);
+          return 0;
+	}
 
       sscanf(ptr,"%d-%3s-%d",&day,smonth,&year);
 
@@ -344,57 +394,81 @@ stock *parse_csv_history_file(char *csv_file)
 
       date = (char *)malloc(DATE_LENGTH);
       if (date==NULL)
-  {
-    fprintf(stderr,"Memory allocating error (%s line %d)\n"
-      ,__FILE__, __LINE__);
-    exit(1);
-  }
+        {
+          fprintf(stderr,"Memory allocating error (%s line %d)\n"
+                  ,__FILE__, __LINE__);
+          exit(1);
+        }
       sprintf(date,"%.2d%.2d%.2d", year, month, day);
       StockPtr->Date = date;    
       
       /* Open */
       ptr = strtok(NULL, ",");
-      if (!ptr) return 0;
+      if (!ptr)
+        {
+          free_stock(StockPtr);
+          free_stock(FirstStockPtr);
+          free_stock(LastStockPtr);
+          return 0;
+        }
       sscanf(ptr,"%f",&(StockPtr->OpenPrice));      
 
       /* High */
       ptr = strtok(NULL, ",");
-      if (!ptr) return 0;
+      if (!ptr)
+        {
+          free_stock(StockPtr);
+          free_stock(FirstStockPtr);
+          free_stock(LastStockPtr);
+          return 0;
+        }
       sscanf(ptr,"%f",&(StockPtr->MaxPrice));
 
       /* Low */
       ptr = strtok(NULL, ",");
-      if (!ptr) return 0;
+      if (!ptr)
+        {
+          free_stock(StockPtr);
+          free_stock(FirstStockPtr);
+          free_stock(LastStockPtr);
+          return 0;
+        }
       sscanf(ptr,"%f",&(StockPtr->MinPrice));
 
       /* Close */
       ptr = strtok(NULL, ",");
-      if (!ptr) return 0;
+      if (!ptr)
+        {
+          free_stock(StockPtr);
+          free_stock(FirstStockPtr);
+          free_stock(LastStockPtr);
+          return 0;
+        }
       sscanf(ptr,"%f",&(StockPtr->LastPrice));
 
       /* Volume */
 
       ptr = strtok(NULL, ",");
       if (!ptr) 
-  /* It seems to be an indice */
-  /* No volume for indices */
-  StockPtr->Volume = 0;
+          /* It seems to be an indice */
+          /* No volume for indices */
+          StockPtr->Volume = 0;
       else
-  StockPtr->Volume = atoi(ptr);
+          StockPtr->Volume = atoi(ptr);
 
       if( !FirstStockPtr ) 
-  {
-    FirstStockPtr = StockPtr;
-    StockPtr->PreviousStock = 0;
-  }
+        {
+          FirstStockPtr = StockPtr;
+          StockPtr->PreviousStock = 0;
+        }
       
       StockPtr->NextStock = 0;
       
       if (LastStockPtr) 
-  {
-    LastStockPtr->NextStock = StockPtr;
-    StockPtr->PreviousStock = LastStockPtr;
-  }
+        {
+          LastStockPtr->NextStock = StockPtr;
+          StockPtr->PreviousStock = LastStockPtr;
+        }
       
       LastStockPtr = StockPtr;
 

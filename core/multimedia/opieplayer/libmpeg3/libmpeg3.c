@@ -43,7 +43,7 @@ int mpeg3_check_sig(char *path)
 	if(mpeg3io_open_file(fs))
 	{
 /* File not found */
-		return 0;
+		return mpeg3_delete_fs(fs);
 	}
 
 	bits = mpeg3io_read_int32(fs);

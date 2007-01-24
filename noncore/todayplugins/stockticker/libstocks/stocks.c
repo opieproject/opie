@@ -105,7 +105,7 @@ yahoo_source find_yahoo_source(char *symbol)
 
       if (!test) return YAHOO_US;
     }
-  
+
   /* We suppose now it is a European stock */
   return YAHOO_EUROPE;
 }
@@ -116,8 +116,8 @@ yahoo_source find_yahoo_source(char *symbol)
 /* *stock_datas points to the beginning of the list                          */
 /* count allows to connect to all country servers                            */
 /*****************************************************************************/
-libstocks_return_code download_stocks(char *stocks, 
-              stock **stock_datas, 
+libstocks_return_code download_stocks(char *stocks,
+              stock **stock_datas,
               yahoo_source source)
 {
   char *stocks_server=NULL;
@@ -138,14 +138,14 @@ libstocks_return_code download_stocks(char *stocks,
     case YAHOO_US:
       stocks_server = (char *)yahoo_us_stocks_server;
       break;
-      
+
     case YAHOO_EUROPE:
       stocks_server = (char *)yahoo_eu_stocks_server;
       break;
       default:
       stocks_server = (char *)yahoo_us_stocks_server;
     break;
-          
+
     }
 
   url_beg = (char *)yahoo_url_beg;
@@ -164,13 +164,13 @@ libstocks_return_code download_stocks(char *stocks,
   strcpy(url, url_beg);
   strcat(url, stocks);
   strcat(url, url_end);
-  
+
   error=http_get(url, stocks_server, &data);
- 
+
   free(url);
 
   if (error) return error;
-  
+
   *stock_datas = parse_csv_file(data);
 
   free(data);
@@ -222,7 +222,7 @@ libstocks_return_code get_stocks(const char *stocks, stock **stock_datas)
     {
       fprintf(stderr,"Memory allocating error (%s line %d)\n"
         ,__FILE__, __LINE__);
-      exit(1);  
+      exit(1);
     }
   strcpy(tok_ptr, stocks);
 
@@ -235,77 +235,75 @@ libstocks_return_code get_stocks(const char *stocks, stock **stock_datas)
       source = find_yahoo_source(symbol);
 
       switch (source)
-  {
-  case YAHOO_US:
+        {
+          case YAHOO_US:
+            if (us_quotes)
+              {
+                lgr_us_quotes = strlen(us_quotes);
+                lgr_symbol = strlen(symbol);
 
-    if (us_quotes) 
-      {
-        lgr_us_quotes = strlen(us_quotes);
-        lgr_symbol = strlen(symbol);
+                us_quotes_temp = malloc(lgr_us_quotes + lgr_symbol +2);
+                if(us_quotes_temp==NULL)
+                  {
+                    fprintf(stderr,"Memory allocating error (%s line %d)\n",
+                            __FILE__, __LINE__);
+                    exit(1);
+                  }
+                strcpy(us_quotes_temp, us_quotes);
+                strcat(us_quotes_temp,"+");
+                strcat(us_quotes_temp,symbol);
 
-        us_quotes_temp = malloc(lgr_us_quotes + lgr_symbol +2);
-        if(us_quotes_temp==NULL)
-    {
-      fprintf(stderr,"Memory allocating error (%s line %d)\n"
-        ,__FILE__, __LINE__);
-      exit(1);  
-    }
-        strcpy(us_quotes_temp, us_quotes);
-        strcat(us_quotes_temp,"+");
-        strcat(us_quotes_temp,symbol);
+                free(us_quotes);
+                us_quotes = us_quotes_temp;
+              }
+            else
+              {
+                us_quotes = malloc(strlen(symbol)+1);
 
-        free(us_quotes);
-        us_quotes = us_quotes_temp; 
-      }       
-    else 
-      {
-        us_quotes = malloc(strlen(symbol)+1);
+                if(us_quotes==NULL)
+                  {
+                     fprintf(stderr,"Memory allocating error (%s line %d)\n",
+                             __FILE__, __LINE__);
+                     exit(1);
+                  }
+                strcpy(us_quotes, symbol);
+              }
 
-        if(us_quotes==NULL)
-    {
-      fprintf(stderr,"Memory allocating error (%s line %d)\n"
-        ,__FILE__, __LINE__);
-      exit(1);  
-    }
-        strcpy(us_quotes, symbol);
-      }
+              break;
 
-    break;
+          case YAHOO_EUROPE:
+            if (eu_quotes)
+              {
+                lgr_eu_quotes = strlen(eu_quotes);
+                lgr_symbol = strlen(symbol);
 
-  case YAHOO_EUROPE:
+                eu_quotes_temp = malloc(lgr_eu_quotes + lgr_symbol +2);
+                if(eu_quotes_temp==NULL)
+                  {
+                     fprintf(stderr,"Memory allocating error (%s line %d)\n",
+                             __FILE__, __LINE__);
+                     exit(1);
+                 }
+               strcpy(eu_quotes_temp, eu_quotes);
+               strcat(eu_quotes_temp, "+");
+               strcat(eu_quotes_temp, symbol);
 
-    if (eu_quotes) 
-      {
-        lgr_eu_quotes = strlen(eu_quotes);
-        lgr_symbol = strlen(symbol);
-        
-        eu_quotes_temp = malloc(lgr_eu_quotes + lgr_symbol +2);
-        if(eu_quotes_temp==NULL)
-    {
-      fprintf(stderr,"Memory allocating error (%s line %d)\n"
-        ,__FILE__, __LINE__);
-      exit(1);  
-    }
-        strcpy(eu_quotes_temp, eu_quotes);
-        strcat(eu_quotes_temp, "+");
-        strcat(eu_quotes_temp, symbol);
-
-        free(eu_quotes);
-        eu_quotes = eu_quotes_temp; 
-      }       
-    else 
-      {
-        eu_quotes = malloc(strlen(symbol)+1);
-        if(eu_quotes==NULL)
-    {
-      fprintf(stderr,"Memory allocating error (%s line %d)\n"
-        ,__FILE__, __LINE__);
-      exit(1);  
-    }
-        strcpy(eu_quotes, symbol);
-      }
-    break;
-  }
+               free(eu_quotes);
+               eu_quotes = eu_quotes_temp;
+             }
+           else
+             {
+               eu_quotes = malloc(strlen(symbol)+1);
+               if(eu_quotes==NULL)
+                 {
+                   fprintf(stderr,"Memory allocating error (%s line %d)\n",
+                           __FILE__, __LINE__);
+                   exit(1);
+                 }
+               strcpy(eu_quotes, symbol);
+             }
+           break;
+        }
     }
 
   free(tok_ptr);
@@ -314,34 +312,37 @@ libstocks_return_code get_stocks(const char *stocks, stock **stock_datas)
     {
       /* Gets us quotes */
       error = download_stocks(us_quotes, &stocks_tmp, YAHOO_US);
+      free(us_quotes);
       if (error) return error;
     }
- 
+
   if (eu_quotes)
     {
       /* Gets european quotes */
       error = download_stocks(eu_quotes, &stocks_getted, YAHOO_EUROPE);
+      free(eu_quotes);
       if (error) return error;
 
       /* concats lists if needed */
       if (stocks_tmp)
-  {
-    stocks_tmp2 = stocks_tmp;
+        {
+          stocks_tmp2 = stocks_tmp;
 
-    while(stocks_tmp2 != NULL) 
-      {
-        last_stock = stocks_tmp2;
-        stocks_tmp2 = next_stock(stocks_tmp2);
-      }
+          while(stocks_tmp2 != NULL)
+            {
+              last_stock = stocks_tmp2;
+              stocks_tmp2 = next_stock(stocks_tmp2);
+            }
 
-    last_stock->NextStock = stocks_getted;
-    stocks_getted->PreviousStock = last_stock;
+          last_stock->NextStock = stocks_getted;
+          stocks_getted->PreviousStock = last_stock;
 
-  }
-      else (stocks_tmp = stocks_getted);      
+        }
+      else
+          (stocks_tmp = stocks_getted);
     }
 
-  *stock_datas = stocks_tmp; 
-  
+  *stock_datas = stocks_tmp;
+
   return(0);
 }

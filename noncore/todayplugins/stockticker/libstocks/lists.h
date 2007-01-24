@@ -30,6 +30,7 @@
 #include "stocks.h"
 
 PUBEXT_LISTS  stock *malloc_stock(void); 
+PUBEXT_LISTS  void   free_stock(stock*);
 
 
 #endif /* __LISTS_H */
