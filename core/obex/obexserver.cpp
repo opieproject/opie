@@ -337,7 +337,7 @@ int ObexServer::initObex(void)
     }
     if (transport == OBEX_TRANS_BLUETOOTH) {
 	::BtOBEX_ServerRegister(m_obex, NULL, channel);
-	m_session = addOpushSvc(channel, "OBEX push service");
+	m_session = addOpushSvc(channel, "OBEX Object Push");
 	if (!m_session) {
 	    printf("OBEX registration error %d\n", errno);
 	    ::OBEX_Cleanup(m_obex);
