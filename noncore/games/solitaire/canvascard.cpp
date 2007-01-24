@@ -214,7 +214,7 @@ void CanvasCard::draw(QPainter &painter)
 
     }
 
-    if (p != &painter)
+    if (p != &painter && unscaledCard)
     {
 	p->end();
 	QPixmap *scaledCard = CreateScaledPixmap( unscaledCard, scaleX, scaleY );

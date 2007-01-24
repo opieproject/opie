@@ -12,8 +12,6 @@ size_t UnZip(UInt8* compressedbuffer, size_t reclen, UInt8* tgtbuffer, size_t bs
   zstream.avail_out = bsize;
   zstream.avail_in = reclen;
 
-  int keylen = 0;
-
   zstream.zalloc = Z_NULL;
   zstream.zfree = Z_NULL;
   zstream.opaque = Z_NULL;
@@ -23,11 +21,6 @@ size_t UnZip(UInt8* compressedbuffer, size_t reclen, UInt8* tgtbuffer, size_t bs
   inflateInit(&zstream);
   int err = 0;
   do {
-    if ( zstream.avail_in == 0 && 0 < keylen ) {
-      zstream.next_in   = compressedbuffer + keylen;
-      zstream.avail_in  = reclen - keylen;
-      keylen      = 0;
-    }
     zstream.next_out  = tgtbuffer;
     zstream.avail_out = bsize;
 

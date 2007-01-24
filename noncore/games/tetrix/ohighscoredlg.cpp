@@ -174,7 +174,6 @@ void OHighscoreDialog::createHighscoreListView()
 	int pos = 10;
 	int points_ = 0;
 	int level_ = 0;
-	QListViewItem * Prev = 0;
 
         for ( t_playerData * Run = hs_->playerData.first(); 
               Run != 0; 
@@ -182,14 +181,8 @@ void OHighscoreDialog::createHighscoreListView()
         {
                 QListViewItem *item;
 
-		if( Prev ) {
-                  // after previous
-                  item = new QListViewItem( list, Prev );
-                  Prev = item;
-                } else {
-                  item = new QListViewItem( list );
+                item = new QListViewItem( list );
 
-                }
 		item->setText(  0 , QString::number( pos ) );                   //number
 		item->setText(  1 , Run->sName );                       //name
 		if ( Run->points  == -1 )
