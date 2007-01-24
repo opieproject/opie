@@ -53,7 +53,8 @@ void MoveEngine::position(Pieces& pieces,bool non_qte)
         {
             if(population[a].total>0) //player 1 pieces
             {
-                pieces.player1[player1_counter].x=x_coord[a]-offset;
+		if (a < 26)
+                    pieces.player1[player1_counter].x=x_coord[a]-offset;
                 if(a>=0 && a<13)
                 {
                     pieces.player1[player1_counter].y=yup_coord[b]-offset;
@@ -96,7 +97,8 @@ void MoveEngine::position(Pieces& pieces,bool non_qte)
 
             else if(population[a].total<0) //player 2 pieces
             {
-                pieces.player2[player2_counter].x=x_coord[a]-offset;
+		if (a < 26)
+                    pieces.player2[player2_counter].x=x_coord[a]-offset;
                 if(a>=0 && a<13)
                 {
                     pieces.player2[player2_counter].y=yup_coord[b]-offset;

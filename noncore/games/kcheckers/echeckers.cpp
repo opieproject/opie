@@ -79,9 +79,9 @@ bool ECheckers::checkCapture1()
         if(board[i-5]==MAN2 || board[i-5]==KING2)
           if(board[i-10]==FREE) return true;
         if(board[i+5]==MAN2 || board[i+5]==KING2)
-          if(board[i+10]==FREE) return true;
+          if(board[((i+10) < 54) ? i+10 : 53]==FREE) return true;
         if(board[i+6]==MAN2 || board[i+6]==KING2)
-          if(board[i+12]==FREE) return true;
+          if(board[((i+12) < 54) ? i+12 : 53]==FREE) return true;
     }
   }
   return false;
@@ -221,9 +221,9 @@ bool ECheckers::checkCapture2()
     {
       case MAN2:
         if(board[i+5]==MAN1 || board[i+5]==KING1)
-          if(board[i+10]==FREE) return true;
+          if(board[((i+10) < 54) ? i+10 : 53]==FREE) return true;
         if(board[i+6]==MAN1 || board[i+6]==KING1)
-          if(board[i+12]==FREE) return true;
+          if(board[((i+12) < 54) ? i+12 : 53]==FREE) return true;
         break;
       case KING2:
         if(board[i-6]==MAN1 || board[i-6]==KING1)
@@ -231,9 +231,9 @@ bool ECheckers::checkCapture2()
         if(board[i-5]==MAN1 || board[i-5]==KING1)
           if(board[i-10]==FREE) return true;
         if(board[i+5]==MAN1 || board[i+5]==KING1)
-          if(board[i+10]==FREE) return true;
+          if(board[((i+10) < 54) ? i+10 : 53]==FREE) return true;
         if(board[i+6]==MAN1 || board[i+6]==KING1)
-          if(board[i+12]==FREE) return true;
+          if(board[((i+12) < 54) ? i+12 : 53]==FREE) return true;
     }
   }
   return false;

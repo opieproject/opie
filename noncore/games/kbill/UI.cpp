@@ -68,28 +68,27 @@ void UI::popup_dialog (int dialog) {
 	kill_timer();
 	switch (dialog) {
 	case Game::ENDGAME:
-			QMessageBox::message(("Endgame"), QT_TR_NOOP(endgamestr));
-			break;
+		QMessageBox::message(("Endgame"), QT_TR_NOOP(endgamestr));
+		break;
 	case Game::HIGHSCORE:
-		//	QMessageBox::message(("HighScore"), highscorestr);
-			break;
-	case Game::ENTERNAME: {
+		break;
+	case Game::ENTERNAME:
+		{
 			InputBox b(main, 0, ("Enter Name"), QT_TR_NOOP(enternamestr));
 			bool state = b.exec() == 2;
-		  char str[20], *nl;
-	    strcpy(str, b.getText());
-	    if (!str[0] || state)
+			char str[20], *nl;
+			strncpy(str, b.getText(), 19);
+	    		if (!str[0] || state)
 				strcpy(str, "Anonymous");
-	    else if ((nl = strchr(str, '\n')))
+			else if ((nl = strchr(str, '\n')))
 				*nl = '\0';
-	    if (strlen(str) > 20)
-				str[20] = 0;  /* truncate string if too long */
-//	    scores.recalc(str);
-			}
-	    break;
+			if (strlen(str) > 19)
+				str[19] = '\0';  /* truncate/terminate the string if it is too long */
+		}
+		break;
 	case Game::SCORE:
-			QMessageBox::message(("Score"), scorestr);
-			break;
+		QMessageBox::message(("Score"), scorestr);
+		break;
 	}
 	restart_timer();
 }

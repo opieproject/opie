@@ -29,7 +29,7 @@
 
 #include <math.h>
 
-#define       FFT_TEST_COUNT      500                 // Bench FFT
+#define       FFT_TEST_COUNT      332                 // Bench FFT
 
 // ----------------------------------------------------- FFT
 #define       OBJ_DATA_COUNT      128

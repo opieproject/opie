@@ -112,9 +112,9 @@ bool RCheckers::checkCapture1()
         if(board[i-5]==MAN2 || board[i-5]==KING2)
           if(board[i-10]==FREE) return true;
         if(board[i+5]==MAN2 || board[i+5]==KING2)
-          if(board[i+10]==FREE) return true;
+          if(board[((i+10) < 54) ? i+10 : 53]==FREE) return true;
         if(board[i+6]==MAN2 || board[i+6]==KING2)
-          if(board[i+12]==FREE) return true;
+          if(board[((i+12) < 54) ? i+12 : 53]==FREE) return true;
         break;
       case KING1:
         int k;
@@ -126,13 +126,19 @@ bool RCheckers::checkCapture1()
         if(board[k]==MAN2 || board[k]==KING2)
           if(board[k-5]==FREE) return true;
 
-        for(k=i+5;board[k]==FREE;k+=5);
+        for(k=i+5;board[k]==FREE;k+=5) {
+          if (k >= 49)
+            break;
+        }
         if(board[k]==MAN2 || board[k]==KING2)
-          if(board[k+5]==FREE) return true;
+          if(board[((k+5) < 54) ? k+5 : 53]==FREE) return true;
 
-        for(k=i+6;board[k]==FREE;k+=6);
+        for(k=i+6;board[k]==FREE;k+=6) {
+          if (k >=48)
+            break;
+        }
         if(board[k]==MAN2 || board[k]==KING2)
-          if(board[k+6]==FREE) return true;
+          if(board[((k+6) < 54) ? k+6 : 53]==FREE) return true;
     }
   }
   return false;
@@ -286,9 +292,9 @@ bool RCheckers::checkCapture2()
         if(board[i-5]==MAN1 || board[i-5]==KING1)
           if(board[i-10]==FREE) return true;
         if(board[i+5]==MAN1 || board[i+5]==KING1)
-          if(board[i+10]==FREE) return true;
+          if(board[((i+10) < 54) ? i+10 : 53]==FREE) return true;
         if(board[i+6]==MAN1 || board[i+6]==KING1)
-          if(board[i+12]==FREE) return true;
+          if(board[((i+12) < 54) ? i+12 : 53]==FREE) return true;
         break;
       case KING2:
         int k;
@@ -300,13 +306,19 @@ bool RCheckers::checkCapture2()
         if(board[k]==MAN1 || board[k]==KING1)
           if(board[k-5]==FREE) return true;
 
-        for(k=i+5;board[k]==FREE;k+=5);
+        for(k=i+5;board[k]==FREE;k+=5) {
+          if (k>=49)
+            break;
+        }
         if(board[k]==MAN1 || board[k]==KING1)
-          if(board[k+5]==FREE) return true;
+          if(board[((k+5) < 54) ? k+5 : 53]==FREE) return true;
 
-        for(k=i+6;board[k]==FREE;k+=6);
+        for(k=i+6;board[k]==FREE;k+=6) {
+          if (k>=48)
+            break;
+        }
         if(board[k]==MAN1 || board[k]==KING1)
-          if(board[k+6]==FREE) return true;
+          if(board[((k+6) < 54) ? k+6 : 53]==FREE) return true;
     }
   }
   return false;

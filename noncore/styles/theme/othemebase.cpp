@@ -1004,7 +1004,7 @@ void OThemeBase::readResourceGroup( int i, QString *copyfrom, QString *pixnames,
                 break;
             }
         }
-        if ( loadArray[ sIndex ] ) {
+        if ( sIndex < 54 && loadArray[ sIndex ] ) {
             copyWidgetConfig( sIndex, i, pixnames, brdnames );
         }
         else
