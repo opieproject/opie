@@ -1,4 +1,4 @@
-/* $Id: chm_lib.c,v 1.2 2005-05-05 14:39:34 pohly Exp $ */
+/* $Id: chm_lib.c,v 1.3 2007-01-26 20:24:07 erik Exp $ */
 /***************************************************************************
  *             chm_lib.c - CHM archive manipulation routines               *
  *                           -------------------                           *
@@ -1600,7 +1600,7 @@ int chm_enumerate_dir(struct chmFile *h,
     /* the length of the prefix */
     char prefixRectified[CHM_MAX_PATHLEN+1];
     int prefixLen;
-    char lastPath[CHM_MAX_PATHLEN];
+    char lastPath[CHM_MAX_PATHLEN+1];
     int lastPathLen;
 
     /* starting page */
@@ -1670,7 +1670,8 @@ int chm_enumerate_dir(struct chmFile *h,
                 if (strncmp(ui.path, lastPath, lastPathLen) == 0)
                     continue;
             }
-            strcpy(lastPath, ui.path);
+            strncpy(lastPath, ui.path, CHM_MAX_PATHLEN);
+            lastPath[CHM_MAX_PATHLEN] = '\0';
             lastPathLen = strlen(lastPath);
 
             /* check for DIRS */

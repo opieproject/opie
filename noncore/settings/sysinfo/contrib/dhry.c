@@ -495,7 +495,7 @@ char            Ch_1_Glob,
 int             Arr_1_Glob [50];
 int             Arr_2_Glob [50] [50];
 
-char Reg_Define[] = "Register option selected.";
+char Reg_Define[32] = "Register option selected.";
 
 //extern char     *malloc ();
 Enumeration     Func_1 ();
@@ -983,7 +983,7 @@ double dhry_main( int n )
     //printf ("Register option selected?  YES\n");
 #else
     //printf ("Register option selected?  NO\n");
-    strcpy(Reg_Define, "Register option not selected.");
+    strncpy(Reg_Define, "Register option not selected.", 30);
 #endif
     printf ("Microseconds for one run through Dhrystone: ");
     printf ("%7.1lf \n", Microseconds);
