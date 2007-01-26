@@ -44,7 +44,8 @@ void CPlucker_base::Expand(UInt32 reclen, UInt8 type, UInt8* buffer, UInt32 buff
 unsuspend();
   if ((type%2 == 0) && (type != 14))
     {
-      fread(buffer, reclen, sizeof(char), fin);
+      size_t bytes_read = fread(buffer, reclen, sizeof(char), fin);
+      buffer[bytes_read] = '\0';
     }
   else
     {
@@ -60,7 +61,8 @@ unsuspend();
       if (readbuffer != NULL)
 	{
 	  fread(readbuffer, reclen, sizeof(char), fin);
-	  (*m_decompress)(readbuffer, reclen, buffer, buffersize);
+	  size_t bytes_read = (*m_decompress)(readbuffer, reclen, buffer, buffersize);
+	  buffer[bytes_read] = '\0';
 	  if (reclen > compressedbuffersize)
 	    {
 	      delete [] readbuffer;
