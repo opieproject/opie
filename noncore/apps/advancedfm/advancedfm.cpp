@@ -496,7 +496,7 @@ void AdvancedFm::showFileMenu() {
 
    m->exec(QPoint(QCursor::pos().x(),QCursor::pos().y()));
 
-   if(m) delete m;
+   delete m;
 }
 
 

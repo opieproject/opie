@@ -217,10 +217,16 @@ static void konsoleInit(const char** shell) {
     QPEApplication::grabKeyboard(); // for CTRL and ALT
 #endif
 
-    *shell = getenv("SHELL");
-    owarn << "SHell initially is " << *shell << "" << oendl;
+    if (!shell) {
+        owarn << "No double pointer 'shell'" << oendl;
+	return;
+    }
 
-    if (shell == NULL || *shell == '\0') {
+    *shell = getenv("SHELL");
+    if (*shell)
+        owarn << "Current shell: " << *shell << "" << oendl;
+
+    if (*shell == NULL || **shell == '\0') {
         struct passwd *ent = 0;
         uid_t me = getuid();
         *shell = "/bin/sh";

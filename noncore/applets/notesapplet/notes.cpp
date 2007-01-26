@@ -235,7 +235,7 @@ void NotesControl::showMenu() {
   m->setFocus();
   m->exec( QCursor::pos() );
 
-  if(m) delete m;
+  delete m;
 }
 
 void NotesControl::focusOutEvent ( QFocusEvent * e) {

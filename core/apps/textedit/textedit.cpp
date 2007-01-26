@@ -850,46 +850,32 @@ bool TextEdit::saveAs() {
     if(caption() == tr("Text Editor"))
         return false;
     odebug << "saveAsFile " + currentFileName << oendl;
-      // case of nothing to save...
-//     if ( !doc && !currentFileName.isEmpty()) {
-// //|| !bFromDocView)
-//         odebug << "no doc" << oendl;
-//         return true;
-//     }
-//     if ( !editor->edited() ) {
-//         delete doc;
-//         doc = 0;
-//         return true;
-//     }
 
     QString rt = editor->text();
     odebug << currentFileName << oendl;
 
     if( currentFileName.isEmpty()
         || currentFileName == tr("Unnamed")
-        || currentFileName == tr("Text Editor")) {
+        || currentFileName == tr("Text Editor"))
+    {
         odebug << "do silly TT filename thing" << oendl;
-//        if ( doc && doc->name().isEmpty() ) {
         QString pt = rt.simplifyWhiteSpace();
         int i = pt.find( ' ' );
         QString docname = pt;
-        if ( i > 0 )
-            docname = pt.left( i );
-          // remove "." at the beginning
+        if ( i > 0 ) docname = pt.left( i );
+
         while( docname.startsWith( "." ) )
             docname = docname.mid( 1 );
         docname.replace( QRegExp("/"), "_" );
-          // cut the length. filenames longer than that
-          //don't make sense and something goes wrong when they get too long.
-        if ( docname.length() > 40 )
-            docname = docname.left(40);
-        if ( docname.isEmpty() )
-            docname = tr("Unnamed");
+        // Cut the length. Filenames longer than 40 are not helpful
+        // and something goes wrong when they get too long.
+        if ( docname.length() > 40 ) docname = docname.left(40);
+
+        if ( docname.isEmpty() ) docname = tr("Unnamed");
+
         if(doc) doc->setName(docname);
+
         currentFileName=docname;
-//         }
-//         else
-//             odebug << "hmmmmmm" << oendl;
     }
 
 
@@ -906,12 +892,11 @@ bool TextEdit::saveAs() {
     QString dire = cuFi.dirPath();
     if(dire==".")
         dire = QPEApplication::documentDir();
+
     QString str;
     if( !featureAutoSave) {
-				str = OFileDialog::getSaveFileName( 2,
-																						dire,
-																						filee, map);
-		} else
+        str = OFileDialog::getSaveFileName( 2, dire, filee, map);
+    } else
         str = currentFileName;
 
     if(!str.isEmpty()) {
@@ -921,35 +906,30 @@ bool TextEdit::saveAs() {
         QFileInfo fi(fileNm);
         currentFileName=fi.fileName();
         if(doc)
-//        QString file = doc->file();
-//        doc->removeFiles();
             delete doc;
-				DocLnk nf;
-				nf.setType("text/plain");
-				nf.setFile( fileNm);
-				doc = new DocLnk(nf);
-//        editor->setText(rt);
-				odebug << "Saving file as "+currentFileName << oendl;
-				doc->setName( fi.baseName() /*currentFileName*/);
-				updateCaption( currentFileName);
 
-				FileManager fm;
-				if ( !fm.saveFile( *doc, rt ) ) {
-						QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
-						return false;
-				}
+        DocLnk nf;
+        nf.setType("text/plain");
+        nf.setFile( fileNm);
+        doc = new DocLnk(nf);
+        odebug << "Saving file as "+currentFileName << oendl;
+        doc->setName( fi.baseName() );
+        updateCaption( currentFileName);
 
-				if( filePerms ) {
-						filePermissions *filePerm;
-						filePerm = new filePermissions(this,
-																					 tr("Permissions"),true,
-																					 0,(const QString &)fileNm);
-						QPEApplication::execDialog( filePerm );
+        FileManager fm;
+        if ( !fm.saveFile( *doc, rt ) ) {
+            QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
+            return false;
+        }
 
-						if( filePerm)
-								delete  filePerm;
-				}
-//        }
+        if( filePerms ) {
+            filePermissions *filePerm;
+            filePerm = new filePermissions(this, tr("Permissions"),true, 0,
+                                           (const QString &)fileNm);
+            QPEApplication::execDialog( filePerm );
+
+            delete  filePerm;
+        }
         editor->setEdited( false);
         edited1 = false;
         edited = false;
@@ -1197,10 +1177,8 @@ void TextEdit::doGoto() {
    QString number = gotoEdit->text();
    gotoEdit->hide();
 
-   if(gotoEdit) {
-      delete gotoEdit;
-      gotoEdit = 0;
-   }
+   delete gotoEdit;
+   gotoEdit = 0;
 
    bool ok;
    int lineNumber = number.toInt(&ok, 10);
