@@ -430,6 +430,7 @@ void KCheckers::newGame()
       break;
 
     case RUSSIAN:
+    default:
       game=new RCheckers(skill);
       CHECK_PTR(game);
   }

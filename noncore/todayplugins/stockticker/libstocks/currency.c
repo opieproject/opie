@@ -56,12 +56,11 @@ libstocks_return_code get_currency_exchange(char *from,
   if (error) 
     {
       *exchange = 0;
-      return(error);
+      return error;
     }
 
-  free_stocks(data);
-
   *exchange = data->CurrentPrice;
-  return(error);
+  free_stocks(data);
+  return error;
  
 }
