@@ -780,22 +780,21 @@ void TextEdit::showEditTools() {
 /*!
   unprompted save */
 bool TextEdit::save() {
-		QString name, file;
+    QString name, file;
     odebug << "saveAsFile " + currentFileName << oendl;
     if(currentFileName.isEmpty()) {
         saveAs();
         return false;
     }
-		name = currentFileName;
-		if(doc) {
-				file = doc->file();
-				odebug << "saver file "+file << oendl;
-				name = doc->name();
-				odebug << "File named "+name << oendl;
-		} else {
-				file = currentFileName;
+    if(doc) {
+        file = doc->file();
+        odebug << "saver file "+file << oendl;
+        name = doc->name();
+        odebug << "File named "+name << oendl;
+    } else {
+        file = currentFileName;
         name = QFileInfo(currentFileName).baseName();
-		 }
+    }
 
     QString rt = editor->text();
     if( !rt.isEmpty() ) {
@@ -807,36 +806,34 @@ bool TextEdit::save() {
 
             struct stat buf;
             mode_t mode;
-            stat(file.latin1(), &buf);
+            QFile f(file);
+            fstat(f.handle(), &buf);
             mode = buf.st_mode;
 
             if(!fileIs) {
                 doc->setName( name);
                 FileManager fm;
                 if ( !fm.saveFile( *doc, rt ) ) {
-										QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
+                    QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
                     return false;
                 }
             } else {
                 odebug << "regular save file" << oendl;
-                QFile f(file);
-								if( f.open(IO_WriteOnly)) {
-										QCString crt = rt.utf8();
-										f.writeBlock(crt,crt.length());
-								} else {
-										QMessageBox::message(tr("Text Edit"),tr("Write Failed"));
-										return false;
-								}
-
+                if( f.open(IO_WriteOnly)) {
+                    QCString crt = rt.utf8();
+                    f.writeBlock(crt,crt.length());
+                } else {
+                    QMessageBox::message(tr("Text Edit"),tr("Write Failed"));
+                    return false;
+                }
             }
             editor->setEdited( false);
             edited1=false;
             edited=false;
             if(caption().left(1)=="*")
-								setCaption(caption().right(caption().length()-1));
+                setCaption(caption().right(caption().length()-1));
 
-
-            chmod( file.latin1(), mode);
+            fchmod( f.handle(), mode);
         }
         return true;
     }

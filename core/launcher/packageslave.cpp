@@ -214,32 +214,40 @@ void PackageHandler::cleanupPackageFiles( const QString &listfile  )
     QFile f(listfile);
 
     if ( f.open(IO_ReadOnly) ) {
-    QTextStream ts(&f);
+        QTextStream ts(&f);
 
-    QString s;
-    while ( !ts.eof() ) {        // until end of file...
-        s = ts.readLine();       // line of text excluding '\n'
-        // for s, do link/mkdir.
-        if ( s.right(1) == "/" ) {
-        //should rmdir if empty, after all files have been removed
-        } else {
+        QString s;
+        while ( !ts.eof() ) {        // until end of file...
+            s = ts.readLine();       // line of text excluding '\n'
+            // for s, do link/mkdir.
+            // @todo Right now we just move on if the name of the file we
+            // find is actually a directory. What we ought to do is check
+            // to see if the directory is empty and if so remove it.
+            if ( s.right(1) != "/" ) {
 #ifndef Q_OS_WIN32
-        odebug << "remove symlink for " << s.ascii() << "" << oendl;
-        //check if it is a symlink first (don't remove /etc/passwd...)
-        char buf[10]; //we don't care about the contents
-        if ( ::readlink( s.ascii(),buf, 10 >= 0 ) )
-             ::unlink( s.ascii() );
+                odebug << "remove symlink for " << s << oendl;
+                QFile symFile(s);
+                QFileInfo symFileInfo(symFile);
+                //check if it is a symlink first (don't remove /etc/passwd...)
+                if ( !symFileInfo.readLink().isNull())
+                     if (!symFile.remove())
+                         owarn << "Unable to remove symlink " << symFile.name()
+                               << " " << __FILE__ << ":" << __LINE__ << oendl;
 #else
-        // ### revise
-        owarn << "Unable to remove symlink " << __FILE__ << ":" << __LINE__ << "" << oendl;
+                // @todo If we actually want to be portable to other operating
+                // systems we ought to at least have a portable way of removing
+                // their notion of symlinks.
+                owarn << "Unable to remove symlink " << s " " << __FILE__
+                      << ":" << __LINE__ << oendl;
 #endif
+            }
         }
-    }
-    f.close();
+        f.close();
 
         //remove the list file
-    ::unlink( listfile.ascii() );
-
+        if (!f.remove())
+            owarn << "Unable to remove list file " << f.name() << " "
+                  << __FILE__ << ":" << __LINE__ << oendl;
     }
 }
 
