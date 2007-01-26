@@ -329,12 +329,32 @@ bool VMemo::startRecording() {
     msgLabel->show();
   }
 	
-// open tmp file here
-  char *pointer;
-  pointer=tmpnam(NULL);
-  odebug << "Opening tmp file " << pointer << "" << oendl;
+  // open tmp file here
+  char *tmpFilePath = 0;
+  char *tmpDir = getenv("TMPDIR");
+  if (tmpDir && *tmpDir != '\0') {
+    tmpFilePath = new char[strlen(tmpDir) + strlen("/vmemo-wav-XXXXXX") + 1];
+    strcpy(tmpFilePath, tmpDir);
+    free(tmpDir);
+  } else {
+    tmpFilePath = new char[strlen("/tmp/vmemo-wav-XXXXXX") + 1];
+    strcpy(tmpFilePath, "/tmp");
+  }
+  strcat(tmpFilePath, "/vmemo-wav-XXXXXX");
+  mode_t currUmask = umask(S_IRWXO | S_IRWXG);
+  int tmpFd = mkstemp(tmpFilePath);
+  umask(currUmask);
+  if (tmpFd == -1) {
+    owarn << "Could not open temp file with template " << tmpFilePath
+          << oendl;
+    delete [] tmpFilePath;
+    return false;
+  } else
+    odebug << "Opened temp file " << tmpFilePath << "" << oendl;
 
-  if(openWAV(pointer ) == -1)  {
+  close(tmpFd);
+
+  if(openWAV(tmpFilePath ) == -1)  {
 
     QString err("Could not open the temp file\n");
     err += fileName;
@@ -344,27 +364,30 @@ bool VMemo::startRecording() {
   }
   if( record() ) {
 
-  QString cmd;
-  if( fileName.find(".wav",0,true) == -1)
-      fileName += ".wav";
+    if( fileName.find(".wav",0,true) == -1)
+        fileName += ".wav";
 
-  cmd.sprintf("mv %s "+fileName, pointer);
-// move tmp file to regular file here
+    int retVal = rename(tmpFilePath, fileName.local8Bit());
+    if (retVal == -1) {
+	owarn << "Could not move " << tmpFilePath << " to " << fileName
+              << oendl;
+	delete [] tmpFilePath;
+	return false;
+    }
+    delete [] tmpFilePath;
 
-  system(cmd.latin1());
+    QArray<int> cats(1);
+    cats[0] = config.readNumEntry("Category", 0);
 
-  QArray<int> cats(1);
-  cats[0] = config.readNumEntry("Category", 0);
-
-  QString dlName("vm_");
-  dlName += date;
-  DocLnk l;
-  l.setFile(fileName);
-  l.setName(dlName);
-  l.setType("audio/x-wav");
-  l.setCategories(cats);
-  l.writeLink();
-  return true;
+    QString dlName("vm_");
+    dlName += date;
+    DocLnk l;
+    l.setFile(fileName);
+    l.setName(dlName);
+    l.setType("audio/x-wav");
+    l.setCategories(cats);
+    l.writeLink();
+    return true;
   } else
       return false;
 

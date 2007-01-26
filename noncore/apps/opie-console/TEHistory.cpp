@@ -21,6 +21,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <sys/types.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
 
@@ -96,9 +97,29 @@ void HistoryBuffer::setScroll(bool on)
   {
     assert( ion < 0 );
     assert( length == 0);
-    FILE* tmp = tmpfile(); if (!tmp) { perror("konsole: cannot open temp file.\n"); return; }
-    ion = dup(fileno(tmp)); if (ion<0) perror("konsole: cannot dup temp file.\n");
-    fclose(tmp);
+    char* tmpDir = getenv("TMPDIR");
+    char* tmpFilePath = 0;
+    if (tmpDir && *tmpDir != '\0') {
+        tmpFilePath = new char[strlen(tmpDir) + strlen("/opie-console-HistoryBuffer-XXXXXX") + 1];
+        strcpy(tmpFilePath, tmpDir);
+        free(tmpDir);
+    } else {
+        tmpFilePath = new char[strlen("/tmp/opie-console-HistoryBuffer-XXXXXX") + 1];
+        strcpy(tmpFilePath, "/tmp");
+    }
+    strcat(tmpFilePath, "/opie-console-HistoryBuffer-XXXXXX");
+    mode_t currUmask = umask(S_IRWXO | S_IRWXG);
+    int tmpfd = mkstemp(tmpFilePath);
+    delete [] tmpFilePath;
+    umask(currUmask);
+    if (tmpfd == -1) {
+        perror("konsole: cannot open temp file.\n");
+        return;
+    }
+    ion = dup(tmpfd);
+    if (ion<0)
+        perror("konsole: cannot dup temp file.\n");
+    close(tmpfd);
   }
   else
   {
