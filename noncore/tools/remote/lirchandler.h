@@ -29,7 +29,7 @@ public:
 	LircHandler(void);
 	QStringList getRemotes(void);
 	QStringList getButtons(const char *remoteName);
-	int sendIR(const char *irbutton);
+	int sendIR(const char *lircaction);
 	bool startLircd(void);
 	bool stopLircd(void);
 	bool isLircdRunning(void);

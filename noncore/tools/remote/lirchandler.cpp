@@ -49,26 +49,26 @@ bool LircHandler::connectLirc(void)
 	fd = socket(AF_UNIX, SOCK_STREAM, 0);
 	if(fd == -1)
 	{
-		QMessageBox *mb = new QMessageBox(QObject::tr("Error"),
+		QMessageBox mb(QObject::tr("Error"),
 											QObject::tr("Unable to create socket"),
 											QMessageBox::Critical,
 											QMessageBox::Ok,
 											QMessageBox::NoButton,
 											QMessageBox::NoButton);
-		mb->exec();
+		mb.exec();
 		perror("LircHandler::connectLirc");
 		return false;
 	}
 	
 	if(::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
 	{
-		QMessageBox *mb = new QMessageBox(QObject::tr("Error"),
+		QMessageBox mb(QObject::tr("Error"),
 											QObject::tr("Could not connect to lircd"),
 											QMessageBox::Critical,
 											QMessageBox::Ok,
 											QMessageBox::NoButton,
 											QMessageBox::NoButton);
-		mb->exec();
+		mb.exec();
 		perror("LircHandler::connectLirc");
 		return false;
 	}
@@ -157,13 +157,13 @@ QStringList LircHandler::getRemotes(void)
 	
 		if(strcasecmp(readPacket(), "END") != 0)
 		{
-			QMessageBox *mb = new QMessageBox(QObject::tr("Error"),
+			QMessageBox mb(QObject::tr("Error"),
 												QObject::tr("Bad packet while communicating with lircd"),
 												QMessageBox::Critical,
 												QMessageBox::Ok,
 												QMessageBox::NoButton,
 												QMessageBox::NoButton);
-			mb->exec();
+			mb.exec();
 			perror("LircHandler::getRemotes");
 			return NULL;
 		}
@@ -208,13 +208,13 @@ QStringList LircHandler::getButtons(const char *remoteName)
 
 		if(strcasecmp(readPacket(), "END") != 0)
 		{
-			QMessageBox *mb = new QMessageBox(QObject::tr("Error"),
+			QMessageBox mb(QObject::tr("Error"),
 												QObject::tr("Bad packet while communicating with lircd"),
 												QMessageBox::Critical,
 												QMessageBox::Ok,
 												QMessageBox::NoButton,
 												QMessageBox::NoButton);
-			mb->exec();
+			mb.exec();
 			perror("LircHandler::getRemotes");
 			return NULL;
 		}
@@ -225,17 +225,17 @@ QStringList LircHandler::getButtons(const char *remoteName)
 	return list;
 }
 
-int LircHandler::sendIR(const char *irbutton)
+int LircHandler::sendIR(const char *lircaction)
 {
 	const char *read_buffer;
 	bool done=false;
 
 	if(connectLirc()) {
 		printf("fd2: %d\n", fd);
-		printf("%s", irbutton);
+		printf("%s", lircaction);
 	
 		printf("1\n");
-		printf("%d\n", write(fd, irbutton, strlen(irbutton) ) );
+		printf("%d\n", write(fd, lircaction, strlen(lircaction) ) );
 		printf("2\n");
 		while(!done)
 		{
