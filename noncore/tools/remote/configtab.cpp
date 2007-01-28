@@ -102,24 +102,15 @@ void ConfigTab::setConfig(Config *newCfg)
 	if(curr_remote != "")
 		remoteSelected(curr_remote);
 }
-/*
-void ConfigTab::savePressed()
-{
-	cfg->setGroup(remotes->currentText());
-	ButtonDialog *bd = new ButtonDialog(this, "BD", true, 0);
-	if( bd->exec() == 1)
-	{
-		printf("%s\n", bd->getList().join(" ").latin1());
-	}
-}
-*/
 
 void ConfigTab::newPressed()
 {
 	QStringList list;
 	QString newname = topGroupConf->getRemotesText();
-	if(newname=="Remotes")
-		QMessageBox::warning(this, tr("Error"), tr("The name 'Remotes' is not allowed"), QMessageBox::Ok, QMessageBox::NoButton);
+	if(newname.stripWhiteSpace()=="")
+		QMessageBox::warning(this, tr("Error"), tr("Please enter a name\nfirst"), QMessageBox::Ok, QMessageBox::NoButton);
+	else if(newname=="Remotes")
+		QMessageBox::warning(this, tr("Error"), tr("The name 'Remotes' is\nnot allowed"), QMessageBox::Ok, QMessageBox::NoButton);
 	else {
 		cfg->setGroup("Remotes");
 		list=cfg->readListEntry("remoteList", ',');
