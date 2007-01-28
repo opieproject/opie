@@ -97,6 +97,10 @@ void ConfigTab::setConfig(Config *newCfg)
 	cfg->write();
 
 	cfg->setGroup("Remotes");
+
+	QString curr_remote = topGroupConf->getRemotesText();
+	if(curr_remote != "")
+		remoteSelected(curr_remote);
 }
 /*
 void ConfigTab::savePressed()
@@ -113,15 +117,27 @@ void ConfigTab::savePressed()
 void ConfigTab::newPressed()
 {
 	QStringList list;
-	cfg->setGroup("Remotes");
-	list=cfg->readListEntry("remoteList", ',');
-	list+=topGroupConf->getRemotesText();
-	cfg->writeEntry("remoteList", list, ',');
-	cfg->setGroup(topGroupConf->getRemotesText());
-	topGroupConf->updateRemotes(QStringList(topGroupConf->getRemotesText()) );
-	cfg->write();
-	emit remotesChanged();
-	remoteSelected(topGroupConf->getRemotesText());
+	QString newname = topGroupConf->getRemotesText();
+	if(newname=="Remotes")
+		QMessageBox::warning(this, tr("Error"), tr("The name 'Remotes' is not allowed"), QMessageBox::Ok, QMessageBox::NoButton);
+	else {
+		cfg->setGroup("Remotes");
+		list=cfg->readListEntry("remoteList", ',');
+		if(list.findIndex(newname) == -1) {
+			list+=newname;
+			cfg->writeEntry("remoteList", list, ',');
+			cfg->setGroup(newname);
+			topGroupConf->updateRemotes(QStringList(newname) );
+			cfg->write();
+			emit remotesChanged();
+			remoteSelected(newname);
+		}
+		else {
+			QMessageBox::warning(this, tr("Already exists"), tr("A layout named %1\nalready exists").arg(newname), QMessageBox::Ok, QMessageBox::NoButton);
+			// Re-select existing layout
+			remoteSelected(newname);
+		}
+	}
 }
 
 void ConfigTab::remoteSelected(const QString &string)
@@ -206,13 +222,17 @@ void ConfigTab::buttonPressed()
 {
 	const QObject *button = sender();
 	QString string = button->name();
-
-	ButtonDialog *bd = new ButtonDialog(((QPushButton *)button)->text(), this, "BD", true, 0);
+	
+	QString action = cfg->readEntry(string);
+	
+	ButtonDialog *bd = new ButtonDialog(((QPushButton *)button)->text(), action, this, "BD", true, 0);
 	if( bd->exec() == 1)
 	{
-		cfg->writeEntry(string, bd->getList().join(" ").latin1());
+		cfg->writeEntry(string, bd->getAction().latin1());
 		cfg->writeEntry(string+"Label", bd->getLabel().latin1());
+		cfg->write();
+		((QPushButton *)button)->setText(bd->getLabel());
 	}
-	cfg->write();
-	((QPushButton *)button)->setText(bd->getLabel());
+	
+	delete bd;
 }
