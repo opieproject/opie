@@ -14,6 +14,8 @@ You should have received a copy of the GNU General Public License along with thi
 Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
+#include <qmessagebox.h>
+
 #include "remotetab.h"
 #include "lirchandler.h"
 
@@ -51,10 +53,15 @@ int RemoteTab::sendIR()
 {
 	const QObject *button = sender();
 	QString string = cfg->readEntry(button->name());
-	string+='\n';
-	
-	LircHandler lh;
-	return lh.sendIR(string.latin1());
+	if(string != "") {
+		string+='\n';
+		LircHandler lh;
+		return lh.sendIR(string.latin1());
+	}
+	else {
+		QMessageBox::warning(this, tr("Error"), tr("This button has not\nbeen configured"), QMessageBox::Ok, QMessageBox::NoButton);
+		return 0;
+	}
 }
 
 void RemoteTab::setConfig(Config *newCfg)
@@ -62,6 +69,10 @@ void RemoteTab::setConfig(Config *newCfg)
 	cfg = newCfg;
 	cfg->setGroup("Remotes");
 	topGroup->updateRemotes(cfg);
+	
+	QString curr_remote = topGroup->getRemotesText();
+	if(curr_remote != "")
+		remoteSelected(curr_remote);
 }
 
 void RemoteTab::remoteSelected(const QString &string)
