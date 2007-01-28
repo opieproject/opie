@@ -48,7 +48,11 @@ TopGroup::TopGroup(QWidget *parent, const char *name):QWidget(parent,name)
 void TopGroup::updateRemotes(Config *cfg)
 {
 	remotes->clear();
-	remotes->insertItem(QString("SelectRemote"));
 	cfg->setGroup("Remotes");
 	remotes->insertStringList(cfg->readListEntry("remoteList", ',') );
+}
+
+QString TopGroup::getRemotesText()
+{
+	return remotes->currentText();
 }

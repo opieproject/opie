@@ -33,7 +33,6 @@ TopGroupConf::TopGroupConf(QWidget *parent, const char *name):QWidget(parent,nam
 	//	source->setGeometry(50,5,40,20);
 
 	remotes = new QComboBox(true, this, "remotes");
-	remotes->insertItem(QString("Remotes"));
 	layout->addWidget(remotes);
 	layout->setStretchFactor(remotes, 1);
 	connect(remotes, SIGNAL(activated(const QString&)), this->parentWidget(), SLOT(remoteSelected(const QString&)) );

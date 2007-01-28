@@ -26,6 +26,7 @@ class TopGroup : public QWidget
 public:
 	TopGroup(QWidget *parent=0, const char *name=0);
 	void updateRemotes(Config *cfg);
+	QString getRemotesText();
 private:
 	QComboBox *remotes;
 };
