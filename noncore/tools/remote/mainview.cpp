@@ -34,8 +34,6 @@ MainView::MainView(QWidget *parent, const char *name) : QWidget(parent, name)
 	help = new HelpTab(tabs);
 	connect(config, SIGNAL(remotesChanged()), this, SLOT(updateRemotesList()) );
 
-	remote->setIRSocket(fd);
-
 	tabs->addTab(remote, tr("Remote") );
 	tabs->addTab(learn,tr("Learn") );
 	tabs->addTab(config,tr("Config") );
@@ -47,17 +45,6 @@ MainView::MainView(QWidget *parent, const char *name) : QWidget(parent, name)
 
 	remote->setConfig(cfg);
 	config->setConfig(cfg);
-}
-
-int MainView::getIRSocket()
-{
-	return fd;
-}
-
-void MainView::setIRSocket(int newfd)
-{
-	fd = newfd;
-	remote->setIRSocket(fd);
 }
 
 void MainView::updateRemotesList()

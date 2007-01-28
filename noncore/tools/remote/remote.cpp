@@ -37,69 +37,24 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include <signal.h>
 
 
-/*void reconnect(int &fd)
-{
-//	struct sockaddr_un addr;
- 
-	addr.sun_family=AF_UNIX;
-	strcpy(addr.sun_path,"/dev/lircd");
-	fd = socket(AF_UNIX, SOCK_STREAM, 0);
- 
-	if(connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
-	{
-		QMessageBox *mb = new QMessageBox("error",
-											"couldnt connect to socket",
-											QMessageBox::NoIcon,
-											QMessageBox::Ok,
-											QMessageBox::NoButton,
-											QMessageBox::NoButton);
-		mb->exec();
-	}
-}
-*/
-
 int main( int argc, char **argv )
 {
     QPEApplication a( argc, argv );
     MainView w;
-
-    int fd;
-    //	struct sockaddr_un addr;
-    //	char read_buffer[BUFFERSIZE+1];
-    //	char write_buffer[] = "LIST\n";
-
-    //	addr.sun_family=AF_UNIX;
-    //	strcpy(addr.sun_path,"/dev/lircd");
-    //	fd = socket(AF_UNIX, SOCK_STREAM, 0);
-
-    //	printf("fd1: %d\n", fd);
-    /*
-    	if(connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
-    	{
-    		QMessageBox *mb = new QMessageBox("error",
-    											"couldnt connect to socket",
-    											QMessageBox::NoIcon,
-    											QMessageBox::Ok,
-    											QMessageBox::NoButton,
-    											QMessageBox::NoButton);
-    		mb->exec();
-    	}
-    */
-
-    //	printf("%d\n", write(fd, write_buffer, sizeof(write_buffer) ) );
-
-    //	printf("%d\n", read(fd, read_buffer, BUFFERSIZE ) );
-
-    //	QMessageBox *mbtest = new QMessageBox("lirc test",
-    //											*new QString((const char *) read_buffer),
-    //											QMessageBox::NoIcon,
-    //											QMessageBox::Ok,
-    //											QMessageBox::NoButton,
-    //											QMessageBox::NoButton);
-    //	mbtest->exec();
-
     a.setMainWidget( &w );
-    w.setIRSocket(fd);
     QPEApplication::showWidget( &w );
-    return a.exec();
+    
+		LircHandler lh;
+		if(!lh.isLircdRunning()) {
+			QMessageBox mb("Error!",
+											"Lircd is not running",
+											QMessageBox::NoIcon,
+											QMessageBox::Ok,
+											QMessageBox::NoButton,
+											QMessageBox::NoButton);
+			mb.exec();
+			
+		}
+				
+		return a.exec();
 }

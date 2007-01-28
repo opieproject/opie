@@ -31,18 +31,14 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include <unistd.h>
 #include <errno.h>
 
-#define PACKET_SIZE 256
-#define TIMEOUT 3
+#include "lirchandler.h"
 
 class ButtonDialog : public QDialog
 {
 	Q_OBJECT
 public:
 	ButtonDialog(QString buttonName, QWidget *parent=0, const char*name=0, bool modal=FALSE, WFlags f=0);
-	void setIRSocket(int newfd);
-	const char *readPacket();
-	QStringList getRemotes();
-	QStringList getButtons(const char *remoteName);
+	~ButtonDialog();
 	QStringList getList();
 	QString getLabel();
 public slots:
@@ -53,7 +49,5 @@ private:
 	QComboBox *button;
 	QStringList list;
 	QLineEdit *label;
-	int fd;
-	int timeout;
-	struct sockaddr_un addr;
+	LircHandler *lh;
 };

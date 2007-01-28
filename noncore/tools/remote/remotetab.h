@@ -37,15 +37,11 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include "channelgroup.h"
 #include "vcrgroup.h"
 
-#define PACKET_SIZE 256
-#define TIMEOUT 3
-
 class RemoteTab : public QWidget
 {
 	Q_OBJECT
 public:
 	RemoteTab(QWidget *parent=0, const char *name=0);
-	void setIRSocket(int newfd);
 	const char *readPacket();
 	void setConfig(Config *newCfg);
 	void updateRemotesList();
@@ -53,9 +49,6 @@ public slots:
 	int sendIR();
 	void remoteSelected(const QString &string);
 private:
-	int fd;
-	int timeout;
-	struct sockaddr_un addr;
 	Config *cfg;
 	TopGroup *topGroup;
 	DVDGroup *dvdGroup;

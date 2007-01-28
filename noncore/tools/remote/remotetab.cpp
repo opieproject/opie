@@ -15,6 +15,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
 #include "remotetab.h"
+#include "lirchandler.h"
 
 RemoteTab::RemoteTab(QWidget *parent, const char *name):QWidget(parent,name)
 {
@@ -44,11 +45,6 @@ RemoteTab::RemoteTab(QWidget *parent, const char *name):QWidget(parent,name)
 	layout->addWidget(channelGroup, 0, 0);
 
 	this->setMaximumWidth(240);
-
-	timeout = 0;
-
-	addr.sun_family=AF_UNIX;
-	strcpy(addr.sun_path,"/dev/lircd");
 }
 
 int RemoteTab::sendIR()
@@ -56,119 +52,9 @@ int RemoteTab::sendIR()
 	const QObject *button = sender();
 	QString string = cfg->readEntry(button->name());
 	string+='\n';
-	const char *write_buffer = string.latin1();
-	const char *read_buffer;
-	bool done=false;
-
-	fd = socket(AF_UNIX, SOCK_STREAM, 0);
-	if(fd == -1)
-	{
-		QMessageBox *mb = new QMessageBox("Error!",
-											"couldnt connect to socket",
-											QMessageBox::NoIcon,
-											QMessageBox::Ok,
-											QMessageBox::NoButton,
-											QMessageBox::NoButton);
-		mb->exec();
-		perror("RemoteTab::SendIR");
-		return 0;
-	}
-
-
-	if(::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
-	{
-		QMessageBox *mb = new QMessageBox("Error!",
-											"couldnt connect to socket",
-											QMessageBox::NoIcon,
-											QMessageBox::Ok,
-											QMessageBox::NoButton,
-											QMessageBox::NoButton);
-		mb->exec();
-		perror("RemoteTab::SendIR");
-	}
-
-	printf("fd2: %d\n", fd);
-	printf("%s", write_buffer);
-
-	printf("1\n");
-	printf("%d\n", write(fd, write_buffer, strlen(write_buffer) ) );
-	printf("2\n");
-	while(!done)
-	{
-		read_buffer=readPacket();
-		printf("%s\n", read_buffer);
-		if(strcasecmp(read_buffer, "END") == 0)
-		{
-			printf("done reading packet\n");
-			done=true;
-		}
-	}
-	::close(fd);
-}
-
-//		printf("%s\n", readPacket());
-//		printf("%d\n", read(fd, read_buffer,sizeof(read_buffer)) );
-//		printf("%s", read_buffer);
-
-//this function was ripped for rc.c in xrc, it is available here: http://www.lirc.org/software.html
-const char *RemoteTab::readPacket()
-{
-	static char buffer[PACKET_SIZE+1]="";
-	char *end;
-	static int ptr=0,end_len=0;
-	ssize_t ret;
-
-	if(ptr>0)
-	{
-		memmove(buffer,buffer+ptr,strlen(buffer+ptr)+1);
-		ptr=strlen(buffer);
-		end=strchr(buffer,'\n');
-	}
-	else
-	{
-		end=NULL;
-	}
-	alarm(TIMEOUT);
-	while(end==NULL)
-	{
-		if(PACKET_SIZE<=ptr)
-		{
-//			fprintf(stderr,"%s: bad packet\n",progname);
-			ptr=0;
-			return(NULL);
-		}
-		ret=read(fd,buffer+ptr,PACKET_SIZE-ptr);
-
-		if(ret<=0 || timeout)
-		{
-			if(timeout)
-			{
-//				fprintf(stderr,"%s: timeout\n",progname);
-			}
-			else
-			{
-				alarm(0);
-			}
-			ptr=0;
-			return(NULL);
-		}
-		buffer[ptr+ret]=0;
-		ptr=strlen(buffer);
-		end=strchr(buffer,'\n');
-	}
-	alarm(0);timeout=0;
-
-	end[0]=0;
-	ptr=strlen(buffer)+1;
-//#       ifdef DEBUG
-//	printf("buffer: -%s-\n",buffer);
-//#       endif
-	return(buffer);
-}
-
-void RemoteTab::setIRSocket(int newfd)
-{
-	fd = newfd;
+	
+	LircHandler lh;
+	return lh.sendIR(string.latin1());
 }
 
 void RemoteTab::setConfig(Config *newCfg)

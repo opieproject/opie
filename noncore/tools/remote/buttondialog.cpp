@@ -33,6 +33,8 @@ ButtonDialog::ButtonDialog(QString buttonName, QWidget *parent, const char*name,
 	layout->addSpacing(5);
 	layout->addLayout(hlayout3);
 	layout->addSpacing(5);
+	
+	lh = new LircHandler();
 
 	remote = new QComboBox(false, this, "remote");
 	QLabel *remoteLabel = new QLabel(remote, "Remote: ", this, "remoteLabel");
@@ -42,7 +44,7 @@ ButtonDialog::ButtonDialog(QString buttonName, QWidget *parent, const char*name,
 	hlayout1->addWidget(remote);
 	hlayout1->addSpacing(5);
 	remote->insertItem("Remote  ");
-	remote->insertStringList(getRemotes());
+	remote->insertStringList(lh->getRemotes());
 	connect(remote, SIGNAL(activated(const QString&)), this, SLOT(remoteSelected(const QString&)) );
 
 	button = new QComboBox(false, this, "button");
@@ -65,9 +67,14 @@ ButtonDialog::ButtonDialog(QString buttonName, QWidget *parent, const char*name,
 	hlayout3->addSpacing(5);
 }
 
+ButtonDialog::~ButtonDialog()
+{
+	delete lh;
+}
+
 void ButtonDialog::remoteSelected(const QString &string)
 {
-	button->insertStringList(getButtons(string.latin1()) );
+	button->insertStringList(lh->getButtons(string.latin1()) );
 	list="SEND_ONCE";
 	list+=string;
 }
@@ -85,209 +92,4 @@ QStringList ButtonDialog::getList()
 QString ButtonDialog::getLabel()
 {
 	return label->text();
-}
-
-QStringList ButtonDialog::getRemotes()
-{
-	const char write_buffer[] = "LIST\n";
-	const char *readbuffer;
-	int i, numlines;
-	QStringList list;
-
-	addr.sun_family=AF_UNIX;
-	strcpy(addr.sun_path,"/dev/lircd");
-
-	fd = socket(AF_UNIX, SOCK_STREAM, 0);
-	if(fd == -1)
-	{
-		QMessageBox *mb = new QMessageBox("Error!",
-											"couldnt connect to socket",
-											QMessageBox::NoIcon,
-											QMessageBox::Ok,
-											QMessageBox::NoButton,
-											QMessageBox::NoButton);
-		mb->exec();
-		perror("ButtonDialog::GetRemotes");
-		return NULL;
-	}
-
-	if(::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
-	{
-		QMessageBox *mb = new QMessageBox("Error!",
-											"couldnt connect to socket",
-											QMessageBox::NoIcon,
-											QMessageBox::Ok,
-											QMessageBox::NoButton,
-											QMessageBox::NoButton);
-		mb->exec();
-		perror("ButtonDialog::GetRemotes");
-		return NULL;
-	}
-
-	write(fd, write_buffer, strlen(write_buffer));
-
-	for(i=0; i<5; i++)
-	{
-		printf("%d\n", i);
-		readbuffer = readPacket();
-		printf("%s", readbuffer);
-		printf("%d\n", i);
-	}
-
-	numlines = atoi(readbuffer);
-
-	for(i=0; i<numlines; i++)
-	{
-		list+=readPacket();
-	}
-
-	if(strcasecmp(readPacket(), "END") != 0)
-	{
-		QMessageBox *mb = new QMessageBox("Error!",
-											"bad packet",
-											QMessageBox::NoIcon,
-											QMessageBox::Ok,
-											QMessageBox::NoButton,
-											QMessageBox::NoButton);
-		mb->exec();
-		perror("ButtonDialog::GetRemotes");
-		return NULL;
-	}
-
-	::close(fd);
-	return list;
-}
-
-QStringList ButtonDialog::getButtons(const char *remoteName)
-{
-	QString write_buffer = "LIST ";
-	const char *readbuffer;
-	int i, j, numlines;
-	QStringList list;
-	QString string;
-
-	write_buffer += remoteName;
-	write_buffer += '\n';
-
-	fd = socket(AF_UNIX, SOCK_STREAM, 0);
-	if(fd == -1)
-	{
-		QMessageBox *mb = new QMessageBox("Error!",
-											"couldnt connect to socket",
-											QMessageBox::NoIcon,
-											QMessageBox::Ok,
-											QMessageBox::NoButton,
-											QMessageBox::NoButton);
-		mb->exec();
-		perror("ButtonDialog::GetButtons");
-		return NULL;
-	}
-
-
-	if(::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
-	{
-		QMessageBox *mb = new QMessageBox("Error!",
-											"couldnt connect to socket",
-											QMessageBox::NoIcon,
-											QMessageBox::Ok,
-											QMessageBox::NoButton,
-											QMessageBox::NoButton);
-		mb->exec();
-		perror("ButtonDialog::GetButtons");
-		return NULL;
-	}
-
-	write(fd, write_buffer.latin1(), strlen(write_buffer) );
-
-	for(i=0; i<5; i++)
-	{
-		readbuffer = readPacket();
-	}
-
-	numlines = atoi(readbuffer);
-
-	for(i=0; i<numlines; i++)
-	{
-		list+=readPacket();
-		for(j=0; j<list[i].length(); j++)
-		{
-			if(list[i][j] == ' ')
-				break;
-		}
-		list[i].remove(0, j+1);
-	}
-
-	if(strcasecmp(readPacket(), "END") != 0)
-	{
-		QMessageBox *mb = new QMessageBox("Error!",
-											"bad packet",
-											QMessageBox::NoIcon,
-											QMessageBox::Ok,
-											QMessageBox::NoButton,
-											QMessageBox::NoButton);
-		mb->exec();
-		perror("ButtonDialog::GetButtons");
-		return NULL;
-	}
-
-	::close(fd);
-	return list;
-}
-
-
-//this function was ripped for rc.c in xrc, it is available here: http://www.lirc.org/software.html
-const char *ButtonDialog::readPacket()
-{
-	static char buffer[PACKET_SIZE+1]="";
-	char *end;
-	static int ptr=0,end_len=0;
-	ssize_t ret;
-	timeout = 0;
-
-	if(ptr>0)
-	{
-		memmove(buffer,buffer+ptr,strlen(buffer+ptr)+1);
-		ptr=strlen(buffer);
-		end=strchr(buffer,'\n');
-	}
-	else
-	{
-		end=NULL;
-	}
-	alarm(TIMEOUT);
-	while(end==NULL)
-	{
-		if(PACKET_SIZE<=ptr)
-		{
-			fprintf(stderr,"bad packet\n");
-			ptr=0;
-			return(NULL);
-		}
-		ret=read(fd,buffer+ptr,PACKET_SIZE-ptr);
-
-		if(ret<=0 || timeout)
-		{
-			if(timeout)
-			{
-				fprintf(stderr,"timeout\n");
-			}
-			else
-			{
-				alarm(0);
-			}
-			ptr=0;
-			return(NULL);
-		}
-		buffer[ptr+ret]=0;
-		ptr=strlen(buffer);
-		end=strchr(buffer,'\n');
-	}
-	alarm(0);timeout=0;
-
-	end[0]=0;
-	ptr=strlen(buffer)+1;
-//#       ifdef DEBUG
-//	printf("buffer: -%s-\n",buffer);
-//#       endif
-	return(buffer);
 }

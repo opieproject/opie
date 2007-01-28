@@ -21,13 +21,15 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 LearnTab::LearnTab(QWidget *parent, const char *name):QWidget(parent,name)
 {
+    LircHandler lh;
+
     QVBoxLayout *layout = new QVBoxLayout(this);
     QHBoxLayout *bottomLayout = new QHBoxLayout(this);
 
     layout->insertSpacing(0,5);
     remotesBox = new QListBox(this, "remotesBox");
     layout->insertWidget(0, remotesBox, 1);
-    remotesBox->insertStringList(getRemotes());
+    remotesBox->insertStringList(lh.getRemotes());
 
     layout->insertSpacing(-1,5);
     layout->insertLayout(-1, bottomLayout);
@@ -61,132 +63,4 @@ void LearnTab::edit()
 
 void LearnTab::del()
 {}
-
-QStringList LearnTab::getRemotes()
-{
-    const char write_buffer[] = "LIST\n";
-    const char *readbuffer;
-    int i, numlines;
-    QStringList list;
-
-    addr.sun_family=AF_UNIX;
-    strcpy(addr.sun_path,"/dev/lircd");
-
-    fd = socket(AF_UNIX, SOCK_STREAM, 0);
-    if(fd == -1)
-    {
-        QMessageBox *mb = new QMessageBox("Error!",
-                                          "couldnt connect to socket",
-                                          QMessageBox::NoIcon,
-                                          QMessageBox::Ok,
-                                          QMessageBox::NoButton,
-                                          QMessageBox::NoButton);
-        mb->exec();
-        perror("LearnTab::GetRemotes");
-        return NULL;
-    }
-
-    if(::connect(fd,(struct sockaddr *) &addr, sizeof(addr) ) == -1)
-    {
-        QMessageBox *mb = new QMessageBox("Error!",
-                                          "couldnt connect to socket",
-                                          QMessageBox::NoIcon,
-                                          QMessageBox::Ok,
-                                          QMessageBox::NoButton,
-                                          QMessageBox::NoButton);
-        mb->exec();
-        perror("LearnTab::GetRemotes");
-        return NULL;
-    }
-
-    write(fd, write_buffer, strlen(write_buffer));
-
-    for(i=0; i<5; i++)
-    {
-        printf("%d\n", i);
-        readbuffer = readPacket();
-        printf("%s", readbuffer);
-        printf("%d\n", i);
-    }
-
-    numlines = atoi(readbuffer);
-
-    for(i=0; i<numlines; i++)
-    {
-        list+=readPacket();
-    }
-
-    if(strcasecmp(readPacket(), "END") != 0)
-    {
-        QMessageBox *mb = new QMessageBox("Error!",
-                                          "bad packet",
-                                          QMessageBox::NoIcon,
-                                          QMessageBox::Ok,
-                                          QMessageBox::NoButton,
-                                          QMessageBox::NoButton);
-        mb->exec();
-        perror("LearnTab::GetRemotes");
-        return NULL;
-    }
-
-    ::close(fd);
-    return list;
-}
-
-//this function was ripped for rc.c in xrc, it is available here: http://www.lirc.org/software.html
-const char *LearnTab::readPacket()
-{
-    static char buffer[PACKET_SIZE+1]="";
-    char *end;
-    static int ptr=0,end_len=0;
-    ssize_t ret;
-    timeout = 0;
-
-    if(ptr>0)
-    {
-        memmove(buffer,buffer+ptr,strlen(buffer+ptr)+1);
-        ptr=strlen(buffer);
-        end=strchr(buffer,'\n');
-    }
-    else
-    {
-        end=NULL;
-    }
-    alarm(TIMEOUT);
-    while(end==NULL)
-    {
-        if(PACKET_SIZE<=ptr)
-        {
-            fprintf(stderr,"bad packet\n");
-            ptr=0;
-            return(NULL);
-        }
-        ret=read(fd,buffer+ptr,PACKET_SIZE-ptr);
-
-        if(ret<=0 || timeout)
-        {
-            if(timeout)
-            {
-                fprintf(stderr,"timeout\n");
-            }
-            else
-            {
-                alarm(0);
-            }
-            ptr=0;
-            return(NULL);
-        }
-        buffer[ptr+ret]=0;
-        ptr=strlen(buffer);
-        end=strchr(buffer,'\n');
-    }
-    alarm(0);timeout=0;
-
-    end[0]=0;
-    ptr=strlen(buffer)+1;
-    //#       ifdef DEBUG
-    //	printf("buffer: -%s-\n",buffer);
-    //#       endif
-    return(buffer);
-}
 

@@ -41,12 +41,9 @@ class MainView : public QWidget
 	Q_OBJECT
 public:
 	MainView(QWidget *parent=0, const char *name=0);
-	int getIRSocket();
-	void setIRSocket(int newfd);
 public slots:
 	void updateRemotesList();
 private:
-	int fd;
 	RemoteTab *remote;
 	ConfigTab *config;
 	LearnTab *learn;
