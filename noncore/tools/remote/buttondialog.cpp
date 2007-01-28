@@ -16,7 +16,8 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "buttondialog.h"
 
-ButtonDialog::ButtonDialog(QString buttonName, QWidget *parent, const char*name, bool modal, WFlags f):QDialog(parent, name, modal, f)
+ButtonDialog::ButtonDialog(QString buttonName, QString action, QWidget *parent, const char*name, bool modal, WFlags f)
+: QDialog(parent, name, modal, f)
 {
 	setCaption(tr(buttonName));
 
@@ -43,7 +44,6 @@ ButtonDialog::ButtonDialog(QString buttonName, QWidget *parent, const char*name,
 	hlayout1->addSpacing(5);
 	hlayout1->addWidget(remote);
 	hlayout1->addSpacing(5);
-	remote->insertItem("Remote  ");
 	remote->insertStringList(lh->getRemotes());
 	connect(remote, SIGNAL(activated(const QString&)), this, SLOT(remoteSelected(const QString&)) );
 
@@ -54,8 +54,6 @@ ButtonDialog::ButtonDialog(QString buttonName, QWidget *parent, const char*name,
 	hlayout2->addSpacing(5);
 	hlayout2->addWidget(button);
 	hlayout2->addSpacing(5);
-	button->insertItem("Button       ");
-	connect(button, SIGNAL(activated(const QString&)), this, SLOT(buttonSelected(const QString&)) );
 	
 	label = new QLineEdit(this, "label");
 	label->setText(buttonName);
@@ -65,6 +63,32 @@ ButtonDialog::ButtonDialog(QString buttonName, QWidget *parent, const char*name,
 	hlayout3->addSpacing(5);
 	hlayout3->addWidget(label);
 	hlayout3->addSpacing(5);
+	
+	QStringList actionArgs = QStringList::split(' ', action);
+	if(actionArgs.count() > 1) {
+		// Remote
+		for(int i=0;i<remote->count();i++) {
+			if(remote->text(i) == actionArgs[1]) {
+				remote->setCurrentItem(i);
+				break;
+			}
+		}
+	}
+	// Populate the list of buttons
+	remoteSelected(remote->currentText());
+
+	if(actionArgs.count() > 2) {
+		// Button
+		for(int i=0;i<button->count();i++) {
+			if(button->text(i) == actionArgs[2]) {
+				button->setCurrentItem(i);
+				break;
+			}
+		}
+	}
+	else {
+		button->setCurrentItem(-1);
+	}
 }
 
 ButtonDialog::~ButtonDialog()
@@ -74,19 +98,14 @@ ButtonDialog::~ButtonDialog()
 
 void ButtonDialog::remoteSelected(const QString &string)
 {
+	button->clear();
 	button->insertStringList(lh->getButtons(string.latin1()) );
-	list="SEND_ONCE";
-	list+=string;
 }
 
-void ButtonDialog::buttonSelected(const QString &string)
+QString ButtonDialog::getAction()
 {
-	list+=string;
-}
-
-QStringList ButtonDialog::getList()
-{
-	return list;
+	QString action("SEND_ONCE " + remote->currentText() + " " + button->currentText());
+	return action;
 }
 
 QString ButtonDialog::getLabel()

@@ -37,17 +37,15 @@ class ButtonDialog : public QDialog
 {
 	Q_OBJECT
 public:
-	ButtonDialog(QString buttonName, QWidget *parent=0, const char*name=0, bool modal=FALSE, WFlags f=0);
+	ButtonDialog(QString buttonName, QString action, QWidget *parent=0, const char*name=0, bool modal=FALSE, WFlags f=0);
 	~ButtonDialog();
-	QStringList getList();
+	QString getAction();
 	QString getLabel();
 public slots:
 	void remoteSelected(const QString &string);
-	void buttonSelected(const QString &string);
 private:
 	QComboBox *remote;
 	QComboBox *button;
-	QStringList list;
 	QLineEdit *label;
 	LircHandler *lh;
 };
