@@ -51,6 +51,14 @@ RemoteTab::RemoteTab(QWidget *parent, const char *name):QWidget(parent,name)
 
 int RemoteTab::sendIR()
 {
+	QString curr_remote = topGroup->getRemotesText();
+	if(curr_remote != "")
+		cfg->setGroup(curr_remote);
+	else {
+		QMessageBox::warning(this, tr("Error"), tr("Please select or create\na remote layout"), QMessageBox::Ok, QMessageBox::NoButton);
+		return 0;
+	}
+	
 	const QObject *button = sender();
 	QString string = cfg->readEntry(button->name());
 	if(string != "") {
@@ -157,4 +165,8 @@ void RemoteTab::remoteSelected(const QString &string)
 void RemoteTab::updateRemotesList()
 {
 	topGroup->updateRemotes(cfg);
+	
+	QString curr_remote = topGroup->getRemotesText();
+	if(curr_remote != "")
+		remoteSelected(curr_remote);
 }

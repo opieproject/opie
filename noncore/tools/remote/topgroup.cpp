@@ -47,9 +47,22 @@ TopGroup::TopGroup(QWidget *parent, const char *name):QWidget(parent,name)
 
 void TopGroup::updateRemotes(Config *cfg)
 {
+	// Save currently selected item if any
+	QString curr_remote = remotes->currentText();
+	
 	remotes->clear();
 	cfg->setGroup("Remotes");
 	remotes->insertStringList(cfg->readListEntry("remoteList", ',') );
+	
+	// Select previously selected item
+	if(curr_remote != "") {
+		for(int i=0;i<remotes->count();i++) {
+			if(remotes->text(i) == curr_remote) {
+				remotes->setCurrentItem(i);
+				break;
+			}
+		}
+	}
 }
 
 QString TopGroup::getRemotesText()
