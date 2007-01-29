@@ -66,62 +66,67 @@ void exit_closelog ( );
 int main ( int argc, char **argv )
 {
     int userExited = 0;
-	pid_t ppid = ::getpid ( );
+    pid_t ppid = ::getpid ( );
 
-	if ( ::geteuid ( ) != 0 ) {
-		::fprintf ( stderr, "%s can only be executed by root. (or chmod +s)\n", argv [0] );
-		return 1;
-	}
-	if ( ::getuid ( ) != 0 ) // qt doesn't really like SUID and
-		::setuid ( 0 );      // messes up things like config files
+    if ( ::geteuid ( ) != 0 ) {
+        ::fprintf ( stderr, "%s can only be executed by root. (or chmod +s)\n", argv [0] );
+        return 1;
+    }
+    /*!
+     * @bug
+     * Qte does not really like being set UID root. This is
+     * largely because we do almost everything on config files
+     * in root context. So if you even want to use opie-login
+     * you are in for a world of hurt unless someone at least
+     * scrubs the settings area and the PIM apps to make sure that
+     * they are covered regarding perms and users.
+     */
+    if ( ::getuid ( ) != 0 )
+        ::setuid ( 0 );
 
-//	struct rlimit rl;
-//	::getrlimit ( RLIMIT_NOFILE, &rl );
+    ::setpgid ( 0, 0 );
+    ::setsid ( );
 
-//	for ( unsigned int i = 0; i < rl. rlim_cur; i++ )
-//		::close ( i );
+    ::signal ( SIGTERM, sigterm );
+    ::signal ( SIGINT, sigterm );
 
-	::setpgid ( 0, 0 );
-	::setsid ( );
+    ::openlog ( "opie-login", LOG_CONS, LOG_AUTHPRIV );
+    ::atexit ( exit_closelog );
 
-	::signal ( SIGTERM, sigterm );
-	::signal ( SIGINT, sigterm );
-
-	::openlog ( "opie-login", LOG_CONS, LOG_AUTHPRIV );
-	::atexit ( exit_closelog );
-
-        const char* autolog = 0;
-        Config c( "opie-login" );
-        c.setGroup( "autologin" );
-        QString entry = c.readEntry( "user", "" );
-        if ( !entry.isEmpty() ) autolog = ::strdup( (const char*) entry );
+    const char* autolog = 0;
+    Config c( "opie-login" );
+    c.setGroup( "autologin" );
+    QString entry = c.readEntry( "user", "" );
+    if ( !entry.isEmpty() )
+        autolog = ::strdup( (const char*) entry );
         
-	while ( true ) {
-		pid_t child = ::fork ( );
+    while ( true ) {
+        pid_t child = ::fork ( );
 
-		if ( child < 0 ) {
-			::syslog ( LOG_ERR, "Could not fork GUI process\n" );
-			break;
-		}
-		else if ( child > 0 ) {
-			int status = 0;
-			time_t started = ::time ( 0 );
+        if ( child < 0 ) {
+            ::syslog ( LOG_ERR, "Could not fork GUI process\n" );
+            break;
+        }
+        else if ( child > 0 ) {
+            int status = 0;
+            time_t started = ::time ( 0 );
 
-			while ( ::waitpid ( child, &status, 0 ) < 0 ) { }
+            while ( ::waitpid ( child, &status, 0 ) < 0 )
+                ;
 
-			LoginApplication::logout ( );
+            LoginApplication::logout ( );
 
-			if (( ::time ( 0 ) - started ) < 3 ) {
-				if ( autolog ) {
-					::syslog ( LOG_ERR, "Respawning too fast -- disabling auto-login\n" );
-					autolog = 0;
-				}
-				else {
-					::syslog ( LOG_ERR, "Respawning too fast -- going down\n" );
-					break;
-				}
-			}
-			int killedbysig = 0;
+            if (( ::time ( 0 ) - started ) < 3 ) {
+                if ( autolog ) {
+                    ::syslog ( LOG_ERR, "Respawning too fast -- disabling auto-login\n" );
+                    autolog = 0;
+                }
+                else {
+                    ::syslog ( LOG_ERR, "Respawning too fast -- going down\n" );
+                    break;
+                }
+            }
+            int killedbysig = 0;
             userExited=0;
             if (WIFEXITED(status)!=0 ) {
                 if (WEXITSTATUS(status)==137)  {
@@ -129,235 +134,232 @@ int main ( int argc, char **argv )
                 }
             }
 
-			if ( WIFSIGNALED( status )) {
-				switch ( WTERMSIG( status )) {
-					case SIGTERM:
-					case SIGINT :
-					case SIGKILL:
-						break;
+            if ( WIFSIGNALED( status )) {
+                switch ( WTERMSIG( status )) {
+                    case SIGTERM:
+                    case SIGINT :
+                    case SIGKILL:
+                        break;
 
-					default     :
-						killedbysig = WTERMSIG( status );
-						break;
-				}
-			}
-			if ( killedbysig ) {  // qpe was killed by an uncaught signal
-				qApp = 0;
+                    default     :
+                        killedbysig = WTERMSIG( status );
+                        break;
+                }
+            }
+            if ( killedbysig ) {  // qpe was killed by an uncaught signal
+                qApp = 0;
 
-				::syslog ( LOG_ERR, "Opie was killed by a signal #%d", killedbysig );
+                ::syslog ( LOG_ERR, "Opie was killed by a signal #%d", killedbysig );
 
-				QWSServer::setDesktopBackground ( QImage ( ));
-				QApplication *app = new QApplication ( argc, argv, QApplication::GuiServer );
-				app-> setFont ( QFont ( "Helvetica", 10 ));
-				app-> setStyle ( new QPEStyle ( ));
+                QWSServer::setDesktopBackground ( QImage ( ));
+                QApplication *app = new QApplication ( argc, argv, QApplication::GuiServer );
+                app-> setFont ( QFont ( "Helvetica", 10 ));
+                app-> setStyle ( new QPEStyle ( ));
 
 #ifndef __UCLIBC__
-				const char *sig = ::sys_siglist[killedbysig];
+                const char *sig = ::sys_siglist[killedbysig];
 #else
-				const char *sig = ::strsignal ( killedbysig );
+                const char *sig = ::strsignal ( killedbysig );
 #endif
-				QLabel *l = new QLabel ( 0, "sig", Qt::WStyle_Customize | Qt::WStyle_NoBorder | Qt::WStyle_Tool );
-				l-> setText ( LoginWindowImpl::tr( "Opie was terminated\nby an uncaught signal\n(%1)\n" ). arg ( sig ));
-				l-> setAlignment ( Qt::AlignCenter );
-				l-> move ( 0, 0 );
-				l-> resize ( app-> desktop ( )-> width ( ), app-> desktop ( )-> height ( ));
-				l-> show ( );
-				QTimer::singleShot ( 3000, app, SLOT( quit()));
-				app-> exec ( );
-				delete app;
-				qApp = 0;
-			}
-		}
-		else {
-			if ( !autolog ) {
+                QLabel *l = new QLabel ( 0, "sig", Qt::WStyle_Customize | Qt::WStyle_NoBorder | Qt::WStyle_Tool );
+                l-> setText ( LoginWindowImpl::tr( "Opie was terminated\nby an uncaught signal\n(%1)\n" ). arg ( sig ));
+                l-> setAlignment ( Qt::AlignCenter );
+                l-> move ( 0, 0 );
+                l-> resize ( app-> desktop ( )-> width ( ), app-> desktop ( )-> height ( ));
+                l-> show ( );
+                QTimer::singleShot ( 3000, app, SLOT( quit()));
+                app-> exec ( );
+                delete app;
+                qApp = 0;
+            }
+        }
+        else {
+            if ( !autolog ) {
                 QString confFile=QPEApplication::qpeDir() + "etc/opie-login.conf";
-				Config cfg ( confFile, Config::File );
-				cfg. setGroup ( "General" );
-				QString user = cfg. readEntry ( "AutoLogin" );
+                Config cfg ( confFile, Config::File );
+                cfg. setGroup ( "General" );
+                QString user = cfg. readEntry ( "AutoLogin" );
 
-				if ( !user. isEmpty ( ))
-					autolog = ::strdup ( user. latin1 ( ));
-			}
+                if ( !user. isEmpty ( ))
+                    autolog = ::strdup ( user. latin1 ( ));
+            }
 
-			if ( autolog && !userExited ) {
-
+            if ( autolog && !userExited ) {
                 QWSServer::setDesktopBackground( QImage() );
                 ODevice::inst()->setDisplayStatus( true );
                 LoginApplication *app = new LoginApplication ( argc, argv, ppid );
                 LoginApplication::setLoginAs( autolog );
 
-
-				if ( LoginApplication::changeIdentity ( ))
-					::exit ( LoginApplication::login ( ));
-				else
-					::exit ( 0 );
-			}
-			else  {
-				::exit ( login_main ( argc, argv, ppid ));
+                if ( LoginApplication::changeIdentity ( ))
+                    ::exit ( LoginApplication::login ( ));
+                else
+                    ::exit ( 0 );
             }
-		}
-	}
-	return 0;
+            else  {
+                ::exit ( login_main ( argc, argv, ppid ));
+            }
+        }
+    }
+    return 0;
 }
 
 void sigterm ( int /*sig*/ )
 {
-	::exit ( 0 );
+    ::exit ( 0 );
 }
 
 
 void exit_closelog ( )
 {
-	::closelog ( );
+    ::closelog ( );
 }
 
 
 class LoginScreenSaver : public QWSScreenSaver
 {
-public:
-  LoginScreenSaver ( )
-  {
-    m_lcd_status = true;
+    public:
+        LoginScreenSaver ( )
+        {
+            m_lcd_status = true;
 
-    m_backlight_bright = -1;
-    m_backlight_forcedoff = false;
+            m_backlight_bright = -1;
+            m_backlight_forcedoff = false;
 
-    // Make sure the LCD is in fact on, (if opie was killed while the LCD is off it would still be off)
-    ODevice::inst ( )-> setDisplayStatus ( true );
-  }
-  void restore()
-  {
-    if ( !m_lcd_status )     // We must have turned it off
-      ODevice::inst ( ) -> setDisplayStatus ( true );
-
-    setBacklight ( -3 );
-  }
-  bool save( int level )
-  {
-    switch ( level ) {
-      case 0:
-        if ( backlight() > 1 )
-          setBacklight( 1 ); // lowest non-off
-        return true;
-        break;
-      case 1:
-        setBacklight( 0 ); // off
-        return true;
-        break;
-      case 2:
-        // We're going to suspend the whole machine
-        if ( PowerStatusManager::readStatus().acStatus() != PowerStatus::Online ) {
-          QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
-          return true;
+            // Make sure the LCD is in fact on, (if opie was killed while the LCD is off it would still be off)
+            ODevice::inst ( )-> setDisplayStatus ( true );
         }
-        break;
-    }
-    return false;
-  }
+        void restore()
+        {
+            if ( !m_lcd_status ) // We must have turned it off
+                ODevice::inst ( ) -> setDisplayStatus ( true );
 
-private:
-public:
-  void setIntervals( int i1 = 30, int i2 = 20, int i3 = 60 )
-  {
-    int v [4];
+            setBacklight ( -3 );
+        }
+        bool save( int level )
+        {
+            switch ( level ) {
+                case 0:
+                    if ( backlight() > 1 )
+                        setBacklight( 1 ); // lowest non-off
+                    return true;
+                    break;
+                case 1:
+                    setBacklight( 0 ); // off
+                    return true;
+                    break;
+                case 2:
+		default:
+                    // We're going to suspend the whole machine
+                    if ( PowerStatusManager::readStatus().acStatus() != PowerStatus::Online ) {
+                        QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
+                        return true;
+                    }
+                    break;
+            }
+            return false;
+        }
 
-    v [ 0 ] = QMAX( 1000 * i1, 100 );
-    v [ 1 ] = QMAX( 1000 * i2, 100 );
-    v [ 2 ] = QMAX( 1000 * i3, 100 );
-    v [ 3 ] = 0;
+        void setIntervals( int i1 = 30, int i2 = 20, int i3 = 60 )
+        {
+            int v [4];
 
-    if ( !i1 && !i2 && !i3 )
-      QWSServer::setScreenSaverInterval ( 0 );
-    else
-      QWSServer::setScreenSaverIntervals ( v );
-  }
+            v [ 0 ] = QMAX( 1000 * i1, 100 );
+            v [ 1 ] = QMAX( 1000 * i2, 100 );
+            v [ 2 ] = QMAX( 1000 * i3, 100 );
+            v [ 3 ] = 0;
 
-  int backlight ( )
-  {
-    if ( m_backlight_bright == -1 )
-      m_backlight_bright = 255;
+            if ( !i1 && !i2 && !i3 )
+                QWSServer::setScreenSaverInterval ( 0 );
+            else
+                QWSServer::setScreenSaverIntervals ( v );
+        }
 
-    return m_backlight_bright;
-  }
+        int backlight ( )
+        {
+            if ( m_backlight_bright == -1 )
+                m_backlight_bright = 255;
 
-  void setBacklight ( int bright )
-  {
-    if ( bright == -3 ) {
-      // Forced on
-      m_backlight_forcedoff = false;
-      bright = -1;
-    }
-    if ( m_backlight_forcedoff && bright != -2 )
-      return ;
-    if ( bright == -2 ) {
-      // Toggle between off and on
-      bright = m_backlight_bright ? 0 : -1;
-      m_backlight_forcedoff = !bright;
-    }
+            return m_backlight_bright;
+        }
 
-    m_backlight_bright = bright;
+        void setBacklight ( int bright )
+        {
+            if ( bright == -3 ) {
+                // Forced on
+                m_backlight_forcedoff = false;
+                bright = -1;
+            }
+            if ( m_backlight_forcedoff && bright != -2 )
+                return;
 
-    bright = backlight ( );
-    ODevice::inst ( ) -> setDisplayBrightness ( bright );
+            if ( bright == -2 ) {
+                // Toggle between off and on
+                bright = m_backlight_bright ? 0 : -1;
+                m_backlight_forcedoff = !bright;
+            }
 
-    m_backlight_bright = bright;
-  }
+            m_backlight_bright = bright;
 
-private:
-  bool m_lcd_status;
+            bright = backlight ( );
+            ODevice::inst ( ) -> setDisplayBrightness ( bright );
 
-  int m_backlight_bright;
-  bool m_backlight_forcedoff;
+            m_backlight_bright = bright;
+        }
+
+    private:
+        bool m_lcd_status;
+        int m_backlight_bright;
+        bool m_backlight_forcedoff;
 };
 
 
 int login_main ( int argc, char **argv, pid_t ppid )
 {
-	QWSServer::setDesktopBackground( QImage() );
-	LoginApplication *app = new LoginApplication ( argc, argv, ppid );
+    QWSServer::setDesktopBackground( QImage() );
+    LoginApplication *app = new LoginApplication ( argc, argv, ppid );
 
-	app-> setFont ( QFont ( "Helvetica", 10 ));
-	app-> setStyle ( new QPEStyle ( ));
+    app-> setFont ( QFont ( "Helvetica", 10 ));
+    app-> setStyle ( new QPEStyle ( ));
 
-	if ( QWSServer::mouseHandler() &&
-             QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
-		if ( !QFile::exists ( "/etc/pointercal" )) {
-			// Make sure calibration widget starts on top.
-			Calibrate *cal = new Calibrate;
-			cal-> exec ( );
-			delete cal;
-		}
-	}
+    if ( QWSServer::mouseHandler() &&
+         QWSServer::mouseHandler()-> inherits("QCalibratedMouseHandler") )
+    {
+        if ( !QFile::exists ( "/etc/pointercal" )) {
+            // Make sure calibration widget starts on top.
+            Calibrate *cal = new Calibrate;
+            cal-> exec ( );
+            delete cal;
+        }
+    }
 
-	LoginScreenSaver *saver = new LoginScreenSaver;
+    LoginScreenSaver *saver = new LoginScreenSaver;
 
-	saver-> setIntervals ( );
-	QWSServer::setScreenSaver ( saver );
-	saver-> restore ( );
+    saver-> setIntervals ( );
+    QWSServer::setScreenSaver ( saver );
+    saver-> restore ( );
 
+    LoginWindowImpl *lw = new LoginWindowImpl ( );
+    app-> setMainWidget ( lw );
+    lw-> setGeometry ( 0, 0, app-> desktop ( )-> width ( ),
+                       app-> desktop ( )-> height ( ));
+    lw-> show ( );
 
-	LoginWindowImpl *lw = new LoginWindowImpl ( );
-	app-> setMainWidget ( lw );
-	lw-> setGeometry ( 0, 0, app-> desktop ( )-> width ( ), app-> desktop ( )-> height ( ));
-	lw-> show ( );
+    int rc = app-> exec ( );
 
-	int rc = app-> exec ( );
-
-	if ( app-> loginAs ( )) {
-		if ( app-> changeIdentity ( )) {
-			app-> login ( );
-
-			// if login succeeds, it never comes back
-
-			QMessageBox::critical ( 0, LoginWindowImpl::tr( "Failure" ), LoginWindowImpl::tr( "Could not start Opie." ));
-			rc = 1;
-		}
-		else {
-			QMessageBox::critical ( 0, LoginWindowImpl::tr( "Failure" ), LoginWindowImpl::tr( "Could not switch to new user identity" ));
-			rc = 2;
-		}
-
-	}
-	return rc;
+    if ( app-> loginAs ( )) {
+        if ( app-> changeIdentity ( )) {
+            app-> login ( );
+            // if login succeeds, it never comes back
+            QMessageBox::critical ( 0, LoginWindowImpl::tr( "Failure" ),
+                                    LoginWindowImpl::tr( "Could not start Opie." ));
+            rc = 1;
+        }
+        else {
+            QMessageBox::critical ( 0, LoginWindowImpl::tr( "Failure" ),
+                                    LoginWindowImpl::tr( "Could not switch to new user identity" ));
+            rc = 2;
+        }
+    }
+    return rc;
 }
 
