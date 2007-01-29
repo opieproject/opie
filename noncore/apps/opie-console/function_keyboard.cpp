@@ -17,28 +17,6 @@ FunctionKeyboard::FunctionKeyboard(QWidget *parent) :
 
     setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed));
 
-    /*
-     * all the saving/loading is now done in a profile. downside is that you cant modify
-     * the keyboard for all profiles, but must do it on a profile-basis
-     *
-
-    Config conf("opie-console-keys");
-    conf.setGroup("keys");
-    for (uint r = 0; r < numRows; r++)
-        for (uint c = 0; c < numCols; c++) {
-
-            QString handle = "r" + QString::number(r) + "c" + QString::number(c);
-            QStringList value_list = conf.readListEntry( handle, '|');
-
-            if (value_list.isEmpty()) continue;
-
-            keys.insert(
-
-                 handle,
-                 FKey (value_list[0], value_list[1], value_list[2].toUShort(), value_list[3].toUShort())
-            );
-        }
-    */
     if (keys.isEmpty()) loadDefaults();
 
 
