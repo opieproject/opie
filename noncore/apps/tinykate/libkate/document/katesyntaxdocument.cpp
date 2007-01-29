@@ -57,9 +57,7 @@ void SyntaxDocument::setupModeList(bool force)
   if (myModeList.count() > 0) return;
 
   KateConfig *config=KGlobal::config();
-  KStandardDirs *dirs = KGlobal::dirs();
 
-//  QStringList list=dirs->findAllResources("data","kate/syntax/*.xml",false,true);
   QString path=QPEApplication::qpeDir() +"share/tinykate/syntax/";
 
   QDir dir(path);

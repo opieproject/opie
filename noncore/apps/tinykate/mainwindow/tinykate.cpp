@@ -203,7 +203,6 @@ void TinyKate::slotOpen( )
 void TinyKate::open(const QString & filename)
 {
     KateDocument *kd= new KateDocument(false, false, this,0,this);
-    KTextEditor::View *kv;
     QString realFileName;
     //check if filename is a .desktop file
     if ( filename.find( ".desktop", 0, true ) != -1 ) {
@@ -226,7 +225,7 @@ void TinyKate::open(const QString & filename)
 
     QFileInfo fileInfo( realFileName );
     QString filenamed = fileInfo.fileName();
-    tabwidget->addTab(kv=kd->createView(tabwidget,"bLAH"),"tinykate/tinykate", filenamed );
+    tabwidget->addTab(kd->createView(tabwidget,"Unnamed kateview"),"tinykate/tinykate", filenamed );
     odebug << realFileName << oendl;
 
     kd->setDocName( filenamed);
@@ -278,11 +277,10 @@ void TinyKate::slotCurrentChanged( QWidget * view)
 void TinyKate::slotNew( )
 {
     KateDocument *kd= new KateDocument(false, false, this,0,this);
-    KTextEditor::View *kv;
     
     kd->setDocName(tr("Unnamed %1").arg(nextUnnamed++));
     kd->setNewDoc(true);
-    tabwidget->addTab(kv=kd->createView(tabwidget,"BLAH"),
+    tabwidget->addTab(kd->createView(tabwidget,"Unnamed"),
                       "tinykate/tinykate",
                       kd->docName());
     viewCount++;

@@ -118,14 +118,11 @@ QStringList DCIM_DirLister::findCameras()const {
     m_map.clear();
 
     const QList<FileSystem> &list = inf.fileSystems();
-    QListIterator<FileSystem> it( list );
 
-
-    FileSystem *sys;
-    for ( sys = it.current(); (sys=it.current())!=0  ; ++it )
-        if ( QFileInfo( sys->path() + "/dcim/" ).exists() ) {
-            lst << sys->name();
-            m_map.insert( sys->name(), sys->path() );
+    for ( QListIterator<FileSystem> it( list ); it.current()!=0  ; ++it )
+        if ( QFileInfo( it.current()->path() + "/dcim/" ).exists() ) {
+            lst << it.current()->name();
+            m_map.insert( it.current()->name(), it.current()->path() );
         }
 
     if ( lst.isEmpty() ) {

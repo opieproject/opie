@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qsplitter.cpp,v 1.2 2004-03-01 17:56:47 chicken Exp $
+** $Id: qsplitter.cpp,v 1.3 2007-01-29 22:00:04 erik Exp $
 **
 **  Splitter widget
 **
@@ -727,7 +727,7 @@ void QSplitter::recalc( bool update )
     for ( int i = 0; i< n; i++ ) {
 	QSplitterLayoutStruct *s = data->list.at(i);
 	if ( !s->isSplitter ) {
-	    QSplitterLayoutStruct *p = (i > 0) ? p = data->list.at( i-1 ) : 0;
+	    QSplitterLayoutStruct *p = (i > 0) ? data->list.at( i-1 ) : 0;
 	    if ( p && p->isSplitter )
 		if ( first || s->wid->isHidden() )
 		    p->wid->hide(); //may trigger new recalc
