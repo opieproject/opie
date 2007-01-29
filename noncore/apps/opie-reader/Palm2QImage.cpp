@@ -125,7 +125,7 @@ QImage* Palm2QImage
   unsigned int width, height, bytes_per_row, flags, next_depth_offset;
   unsigned int bits_per_pixel, version, transparent_index, compression_type, i, j, inval, inbit, mask, incount;
   unsigned int palm_red_bits, palm_green_bits, palm_blue_bits;
-  unsigned char *palm_ptr, *x_ptr, *imagedata, *inbyte, *rowbuf, *lastrow,
+  unsigned char *palm_ptr, *x_ptr, *inbyte, *rowbuf, *lastrow,
   *imagedatastart, *palmimage;
   ColorMapEntry *colormap;
 
@@ -213,7 +213,7 @@ QImage* Palm2QImage
   rowbuf = new unsigned char[bytes_per_row * width];
   lastrow = new unsigned char[bytes_per_row * width];
 
-  for (i=0, palm_ptr = imagedatastart , x_ptr = imagedata;  i < height;  ++i) {
+  for (i=0, palm_ptr = imagedatastart , x_ptr = 0;  i < height;  ++i) {
 //        qDebug("inval:%x palm_ptr:%x x_ptr:%x bpr:%x", inval, palm_ptr, x_ptr, bytes_per_row);
 
     /* first, uncompress the Palm image */

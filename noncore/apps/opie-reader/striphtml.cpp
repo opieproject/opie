@@ -473,7 +473,7 @@ linkType striphtml::hyperlink(unsigned int n, unsigned int, QString& w, QString&
       if (href == "history.back()")
 	{
 	  QString fc = currentfile;
-	  unsigned long loc;
+	  unsigned long loc = 0;
 	  htmlmark m(fc, loc);
 	  linkType ret = (m_nav.back(m)) ? eFile : eNone;
 	  if (fc == m.filename())

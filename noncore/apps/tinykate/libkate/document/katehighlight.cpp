@@ -1316,7 +1316,7 @@ int HlManager::wildcardFind(const QString &fileName) {
 
 int HlManager::makeAttribs(Highlight *highlight, Attribute *a, int maxAttribs) {
   ItemStyleList defaultStyleList;
-  ItemStyle *defaultStyle;
+  ItemStyle *defaultStyle = 0;
   ItemDataList itemDataList;
   ItemData *itemData;
   int nAttribs, z;
@@ -1330,7 +1330,7 @@ int HlManager::makeAttribs(Highlight *highlight, Attribute *a, int maxAttribs) {
   highlight->getItemDataList(itemDataList);
   nAttribs = itemDataList.count();
   for (z = 0; z < nAttribs; z++) {
-    odebug << "HlManager::makeAttribs: createing one attribute definition" << oendl;
+    odebug << "HlManager::makeAttribs: creating an attribute definition" << oendl;
     itemData = itemDataList.at(z);
     if (itemData->defStyle) {
       // default style
@@ -1351,8 +1351,10 @@ int HlManager::makeAttribs(Highlight *highlight, Attribute *a, int maxAttribs) {
   for (; z < maxAttribs; z++) {
     a[z].col = black;
     a[z].selCol = black;
-    a[z].bold = defaultStyle->bold;
-    a[z].italic = defaultStyle->italic;
+    if (defaultStyle) {
+      a[z].bold = defaultStyle->bold;
+      a[z].italic = defaultStyle->italic;
+    }
   }
   return nAttribs;
 }

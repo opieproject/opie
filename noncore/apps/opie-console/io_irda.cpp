@@ -35,6 +35,7 @@ bool IOIrda::open() {
     // emit error!!!
         delete m_attach;
 	m_attach = 0l;
+	ret = false;
     }
     return ret;
 }

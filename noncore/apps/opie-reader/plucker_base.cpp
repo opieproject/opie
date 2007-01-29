@@ -705,7 +705,7 @@ void CPlucker_base::setSaveData(unsigned char*& data, unsigned short& len, unsig
 
 void CPlucker_base::putSaveData(unsigned char*& src, unsigned short& srclen)
 {
-  unsigned short sz;
+  unsigned short sz = 0;
   if (srclen >= sizeof(sz))
     {
       memcpy(&sz, src, sizeof(sz));

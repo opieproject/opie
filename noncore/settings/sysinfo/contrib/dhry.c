@@ -572,7 +572,7 @@ Proc_2 (Int_Par_Ref)
 One_Fifty   *Int_Par_Ref;
 {
   One_Fifty  Int_Loc;
-  Enumeration   Enum_Loc;
+  Enumeration   Enum_Loc = Ident_2;
 
   Int_Loc = *Int_Par_Ref + 10;
   do /* executed once */

@@ -707,15 +707,11 @@ void MainWindow::slotFullscreen() {
 
 void MainWindow::slotScrollbarSelected(int index)
 {
-	int loc;
+    int loc = 0;
 
     Config cfg( "Konsole" );
     cfg.setGroup("ScrollBar");
-    if(index == sm_none)
-    {
-		loc = 0;
-    }
-    else if(index == sm_left)
+    if(index == sm_left)
     {
 		loc = 1;
     }
@@ -724,7 +720,7 @@ void MainWindow::slotScrollbarSelected(int index)
 		loc = 2;
     }
 	
-	cfg.writeEntry("Position", loc);
+    cfg.writeEntry("Position", loc);
 
     if (currentSession()) {
         currentSession()->emulationHandler()->setScrollbarLocation(loc);

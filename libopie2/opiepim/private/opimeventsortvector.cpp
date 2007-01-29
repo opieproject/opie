@@ -37,9 +37,7 @@
 namespace Opie {
 namespace Internal {
 
-namespace{
-
-inline int testAlarmNotifiers( const OPimNotifyManager& leftnotifiers, const OPimNotifyManager& rightnotifiers ){
+int testAlarmNotifiers( const OPimNotifyManager& leftnotifiers, const OPimNotifyManager& rightnotifiers ){
 	OPimNotifyManager::Alarms left_alarms = leftnotifiers.alarms();
 	OPimNotifyManager::Alarms right_alarms = rightnotifiers.alarms();
 	
@@ -60,19 +58,18 @@ inline int testAlarmNotifiers( const OPimNotifyManager& leftnotifiers, const OPi
 		}
 	}
 	
-	int ret;
+	int ret = 0;
 	
 	// Now compare this found alarms
 	if ( !left_earliest .isValid() ) ret++;
 	if ( !right_earliest.isValid() ) ret--;
 	
 	if ( left_earliest.isValid() && right_earliest.isValid() ){
-		ret += left_earliest < right_earliest ? -1 : 1;    
+		left_earliest < right_earliest ? ret-- : ret++;
 	}
 	
 	return ret;
 	
-}
 }
 
 OPimEventSortVector::OPimEventSortVector( uint size, bool asc, int sort )

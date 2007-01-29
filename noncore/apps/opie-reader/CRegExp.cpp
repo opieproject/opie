@@ -109,7 +109,7 @@ void CRegExpFilt::prepreprocessing(const QString& pat, bool insens)
 
 	case '[' :
 	  {
-	    tchar clast;
+	    tchar clast = 0;
 	    bool invert = false;
 	    tchar c;
 #ifdef _WINDOWS
@@ -287,7 +287,7 @@ unsigned int CRegExpFilt::preprocessing(const QString& pat, bool insens)
 
 	case '[' :
 	  {
-	    tchar c, clast;
+	    tchar c, clast = 0;
 	    bool invert = false;
 #ifdef _WINDOWS
 	    if (pat.at(p+1).unicode() == '^')

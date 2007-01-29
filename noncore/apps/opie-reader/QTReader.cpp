@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: QTReader.cpp,v 1.14 2005-05-05 14:39:34 pohly Exp $
+** $Id: QTReader.cpp,v 1.15 2007-01-29 21:53:48 erik Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -544,7 +544,7 @@ void QTReader::setContinuous(bool _b)
 
 void QTReader::processmousewordevent(size_t startpos, size_t startoffset, QMouseEvent* _e, int lineno)
 {
-  unsigned long wrdstart, wrdend;
+    unsigned long wrdstart = 0, wrdend = 0;
     QString wrd;
     int availht = ((m_rotated) ? width() : height()) - m_topmargin - m_bottommargin;
     if (m_twotouch)

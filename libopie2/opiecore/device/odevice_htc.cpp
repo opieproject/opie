@@ -420,7 +420,7 @@ bool HTC::setDisplayStatus( bool on )
 Transformation HTC::rotation() const
 {
     qDebug( "HTC::rotation()" );
-    Transformation rot;
+    Transformation rot = Rot270;
 
     switch ( d->m_model ) {
         case Model_HTC_Universal:
@@ -429,7 +429,6 @@ Transformation HTC::rotation() const
             qDebug( "HTC::rotation() - hinge sensor = %d", (int) hs );
             if ( hs == CASE_PORTRAIT ) rot = Rot0;
             else if ( hs == CASE_UNKNOWN ) rot = Rot270;
-            else rot = Rot270;
         }
         break;
     }

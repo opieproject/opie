@@ -501,7 +501,7 @@ void DePluck::getch(tchar& ch, CStyle& sty, unsigned long& pos)
 	    m_buffer = 0;
 	    return;
 	}
-	unsigned long lnk, lnkoff;
+	unsigned long lnk = 0, lnkoff = 0;
 	do
 	{
 	    if (nextpart[m_buffed] == 0) break;
