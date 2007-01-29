@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>231</width>
-            <height>293</height>
+            <width>257</width>
+            <height>280</height>
         </rect>
     </property>
     <property stdset="1">
@@ -34,41 +34,8 @@
             <name>spacing</name>
             <number>6</number>
         </property>
-        <widget row="3"  column="0" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>button_4</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>5</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
-            </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Raised</enum>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>4</string>
-            </property>
-            <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
-            </property>
-            <property>
-                <name>hAlign</name>
-            </property>
-        </widget>
         <widget row="4"  column="0" >
-            <class>QLabel</class>
+            <class>QPushButton</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>button_7</cstring>
@@ -76,28 +43,103 @@
             <property stdset="1">
                 <name>sizePolicy</name>
                 <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>5</vsizetype>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
                 </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
-            </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Raised</enum>
             </property>
             <property stdset="1">
                 <name>text</name>
                 <string>7</string>
             </property>
+        </widget>
+        <widget row="2"  column="0" >
+            <class>QPushButton</class>
             <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
+                <name>name</name>
+                <cstring>button_1</cstring>
             </property>
-            <property>
-                <name>hAlign</name>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>1</string>
+            </property>
+        </widget>
+        <widget row="2"  column="2" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>button_3</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>3</string>
+            </property>
+        </widget>
+        <widget row="4"  column="2" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>button_9</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>  9  </string>
+            </property>
+        </widget>
+        <widget row="3"  column="2" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>button_6</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>6</string>
+            </property>
+        </widget>
+        <widget row="5"  column="0" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>button_0</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>  0  </string>
             </property>
         </widget>
         <widget row="0"  column="0"  rowspan="1"  colspan="3" >
@@ -353,284 +395,8 @@
                 <enum>Password</enum>
             </property>
         </widget>
-        <widget row="2"  column="0" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>button_1</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>5</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
-            </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Raised</enum>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>1</string>
-            </property>
-            <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
-            </property>
-            <property>
-                <name>hAlign</name>
-            </property>
-        </widget>
-        <widget row="2"  column="1" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>button_2</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>5</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
-            </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Raised</enum>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>2</string>
-            </property>
-            <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
-            </property>
-            <property>
-                <name>hAlign</name>
-            </property>
-        </widget>
-        <widget row="3"  column="1" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>button_5</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>5</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
-            </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Raised</enum>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>5</string>
-            </property>
-            <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
-            </property>
-            <property>
-                <name>hAlign</name>
-            </property>
-        </widget>
-        <widget row="3"  column="2" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>button_6</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>5</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
-            </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Raised</enum>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>6</string>
-            </property>
-            <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
-            </property>
-            <property>
-                <name>hAlign</name>
-            </property>
-        </widget>
-        <widget row="2"  column="2" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>button_3</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>5</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
-            </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Raised</enum>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>3</string>
-            </property>
-            <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
-            </property>
-            <property>
-                <name>hAlign</name>
-            </property>
-        </widget>
-        <widget row="5"  column="0" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>button_0</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>5</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
-            </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Raised</enum>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>0</string>
-            </property>
-            <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
-            </property>
-            <property>
-                <name>hAlign</name>
-            </property>
-            <property>
-                <name>layoutMargin</name>
-            </property>
-            <property>
-                <name>layoutSpacing</name>
-            </property>
-        </widget>
-        <widget row="4"  column="1" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>button_8</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>5</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
-            </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Raised</enum>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>8</string>
-            </property>
-            <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
-            </property>
-            <property>
-                <name>hAlign</name>
-            </property>
-        </widget>
-        <widget row="4"  column="2" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>button_9</cstring>
-            </property>
-            <property stdset="1">
-                <name>sizePolicy</name>
-                <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>5</vsizetype>
-                </sizepolicy>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
-            </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Raised</enum>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>9</string>
-            </property>
-            <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
-            </property>
-            <property>
-                <name>hAlign</name>
-            </property>
-            <property>
-                <name>layoutMargin</name>
-            </property>
-            <property>
-                <name>layoutSpacing</name>
-            </property>
-        </widget>
         <widget row="5"  column="2" >
-            <class>QLabel</class>
+            <class>QPushButton</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>button_OK</cstring>
@@ -638,8 +404,8 @@
             <property stdset="1">
                 <name>sizePolicy</name>
                 <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>5</vsizetype>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
                 </sizepolicy>
             </property>
             <property stdset="1">
@@ -652,52 +418,27 @@
                             <blue>0</blue>
                         </color>
                         <color>
-                            <red>192</red>
-                            <green>192</green>
-                            <blue>192</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
+                            <red>170</red>
                             <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
-                            <red>223</red>
-                            <green>223</green>
-                            <blue>223</blue>
-                        </color>
-                        <color>
-                            <red>96</red>
-                            <green>96</green>
-                            <blue>96</blue>
-                        </color>
-                        <color>
-                            <red>128</red>
-                            <green>128</green>
-                            <blue>128</blue>
-                        </color>
-                        <color>
-                            <red>0</red>
-                            <green>0</green>
                             <blue>0</blue>
                         </color>
                         <color>
-                            <red>255</red>
+                            <red>212</red>
                             <green>255</green>
-                            <blue>255</blue>
+                            <blue>127</blue>
                         </color>
                         <color>
-                            <red>0</red>
-                            <green>0</green>
+                            <red>191</red>
+                            <green>255</green>
+                            <blue>63</blue>
+                        </color>
+                        <color>
+                            <red>85</red>
+                            <green>127</green>
                             <blue>0</blue>
                         </color>
                         <color>
-                            <red>255</red>
-                            <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
-                            <red>0</red>
+                            <red>113</red>
                             <green>170</green>
                             <blue>0</blue>
                         </color>
@@ -707,6 +448,11 @@
                             <blue>0</blue>
                         </color>
                         <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
                             <red>0</red>
                             <green>0</green>
                             <blue>0</blue>
@@ -715,6 +461,26 @@
                             <red>255</red>
                             <green>255</green>
                             <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>238</red>
+                            <green>238</green>
+                            <blue>230</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>221</green>
+                            <blue>118</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
                         </color>
                     </active>
                     <disabled>
@@ -724,52 +490,27 @@
                             <blue>128</blue>
                         </color>
                         <color>
-                            <red>192</red>
-                            <green>192</green>
-                            <blue>192</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
+                            <red>170</red>
                             <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
-                            <red>220</red>
-                            <green>220</green>
-                            <blue>220</blue>
-                        </color>
-                        <color>
-                            <red>96</red>
-                            <green>96</green>
-                            <blue>96</blue>
-                        </color>
-                        <color>
-                            <red>128</red>
-                            <green>128</green>
-                            <blue>128</blue>
-                        </color>
-                        <color>
-                            <red>0</red>
-                            <green>0</green>
                             <blue>0</blue>
                         </color>
                         <color>
-                            <red>255</red>
+                            <red>212</red>
                             <green>255</green>
-                            <blue>255</blue>
+                            <blue>127</blue>
                         </color>
                         <color>
-                            <red>128</red>
-                            <green>128</green>
-                            <blue>128</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
+                            <red>183</red>
                             <green>255</green>
-                            <blue>255</blue>
+                            <blue>38</blue>
                         </color>
                         <color>
-                            <red>0</red>
+                            <red>85</red>
+                            <green>127</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>113</red>
                             <green>170</green>
                             <blue>0</blue>
                         </color>
@@ -779,14 +520,39 @@
                             <blue>0</blue>
                         </color>
                         <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>128</red>
+                            <green>128</green>
+                            <blue>128</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>238</red>
+                            <green>238</green>
+                            <blue>230</blue>
+                        </color>
+                        <color>
                             <red>0</red>
                             <green>0</green>
                             <blue>0</blue>
                         </color>
                         <color>
                             <red>255</red>
-                            <green>255</green>
-                            <blue>255</blue>
+                            <green>221</green>
+                            <blue>118</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
                         </color>
                     </disabled>
                     <inactive>
@@ -796,52 +562,27 @@
                             <blue>0</blue>
                         </color>
                         <color>
-                            <red>192</red>
-                            <green>192</green>
-                            <blue>192</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
+                            <red>170</red>
                             <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
-                            <red>220</red>
-                            <green>220</green>
-                            <blue>220</blue>
-                        </color>
-                        <color>
-                            <red>96</red>
-                            <green>96</green>
-                            <blue>96</blue>
-                        </color>
-                        <color>
-                            <red>128</red>
-                            <green>128</green>
-                            <blue>128</blue>
-                        </color>
-                        <color>
-                            <red>0</red>
-                            <green>0</green>
                             <blue>0</blue>
                         </color>
                         <color>
-                            <red>255</red>
+                            <red>212</red>
                             <green>255</green>
-                            <blue>255</blue>
+                            <blue>127</blue>
                         </color>
                         <color>
-                            <red>0</red>
-                            <green>0</green>
+                            <red>183</red>
+                            <green>255</green>
+                            <blue>38</blue>
+                        </color>
+                        <color>
+                            <red>85</red>
+                            <green>127</green>
                             <blue>0</blue>
                         </color>
                         <color>
-                            <red>255</red>
-                            <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
-                            <red>0</red>
+                            <red>113</red>
                             <green>170</green>
                             <blue>0</blue>
                         </color>
@@ -851,6 +592,11 @@
                             <blue>0</blue>
                         </color>
                         <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
                             <red>0</red>
                             <green>0</green>
                             <blue>0</blue>
@@ -860,31 +606,108 @@
                             <green>255</green>
                             <blue>255</blue>
                         </color>
+                        <color>
+                            <red>238</red>
+                            <green>238</green>
+                            <blue>230</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>221</green>
+                            <blue>118</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
                     </inactive>
                 </palette>
             </property>
             <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
+                <name>text</name>
+                <string>OK</string>
+            </property>
+        </widget>
+        <widget row="3"  column="0" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>button_4</cstring>
             </property>
             <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Raised</enum>
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                </sizepolicy>
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Enter</string>
+                <string>4</string>
+            </property>
+        </widget>
+        <widget row="2"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>button_2</cstring>
             </property>
             <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                </sizepolicy>
             </property>
-            <property>
-                <name>hAlign</name>
+            <property stdset="1">
+                <name>text</name>
+                <string>2</string>
+            </property>
+        </widget>
+        <widget row="3"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>button_5</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>5</string>
+            </property>
+        </widget>
+        <widget row="4"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>button_8</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>8</string>
             </property>
         </widget>
         <widget row="5"  column="1" >
-            <class>QLabel</class>
+            <class>QPushButton</class>
             <property stdset="1">
                 <name>name</name>
                 <cstring>button_Skip</cstring>
@@ -892,8 +715,8 @@
             <property stdset="1">
                 <name>sizePolicy</name>
                 <sizepolicy>
-                    <hsizetype>5</hsizetype>
-                    <vsizetype>5</vsizetype>
+                    <hsizetype>7</hsizetype>
+                    <vsizetype>7</vsizetype>
                 </sizepolicy>
             </property>
             <property stdset="1">
@@ -906,59 +729,29 @@
                             <blue>0</blue>
                         </color>
                         <color>
-                            <red>192</red>
-                            <green>192</green>
-                            <blue>192</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
-                            <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
-                            <red>223</red>
-                            <green>223</green>
-                            <blue>223</blue>
-                        </color>
-                        <color>
-                            <red>96</red>
-                            <green>96</green>
-                            <blue>96</blue>
-                        </color>
-                        <color>
-                            <red>128</red>
-                            <green>128</green>
-                            <blue>128</blue>
-                        </color>
-                        <color>
-                            <red>0</red>
-                            <green>0</green>
-                            <blue>0</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
-                            <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
-                            <red>0</red>
-                            <green>0</green>
-                            <blue>0</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
-                            <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
                             <red>255</red>
                             <green>255</green>
                             <blue>127</blue>
                         </color>
                         <color>
-                            <red>0</red>
-                            <green>0</green>
-                            <blue>0</blue>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>254</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>190</blue>
+                        </color>
+                        <color>
+                            <red>127</red>
+                            <green>127</green>
+                            <blue>63</blue>
+                        </color>
+                        <color>
+                            <red>170</red>
+                            <green>170</green>
+                            <blue>85</blue>
                         </color>
                         <color>
                             <red>0</red>
@@ -969,6 +762,36 @@
                             <red>255</red>
                             <green>255</green>
                             <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>238</red>
+                            <green>238</green>
+                            <blue>230</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>221</green>
+                            <blue>118</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
                         </color>
                     </active>
                     <disabled>
@@ -978,59 +801,29 @@
                             <blue>128</blue>
                         </color>
                         <color>
-                            <red>192</red>
-                            <green>192</green>
-                            <blue>192</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
-                            <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
-                            <red>220</red>
-                            <green>220</green>
-                            <blue>220</blue>
-                        </color>
-                        <color>
-                            <red>96</red>
-                            <green>96</green>
-                            <blue>96</blue>
-                        </color>
-                        <color>
-                            <red>128</red>
-                            <green>128</green>
-                            <blue>128</blue>
-                        </color>
-                        <color>
-                            <red>0</red>
-                            <green>0</green>
-                            <blue>0</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
-                            <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
-                            <red>128</red>
-                            <green>128</green>
-                            <blue>128</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
-                            <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
                             <red>255</red>
                             <green>255</green>
                             <blue>127</blue>
                         </color>
                         <color>
-                            <red>0</red>
-                            <green>0</green>
-                            <blue>0</blue>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>254</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>165</blue>
+                        </color>
+                        <color>
+                            <red>127</red>
+                            <green>127</green>
+                            <blue>63</blue>
+                        </color>
+                        <color>
+                            <red>170</red>
+                            <green>170</green>
+                            <blue>85</blue>
                         </color>
                         <color>
                             <red>0</red>
@@ -1041,6 +834,36 @@
                             <red>255</red>
                             <green>255</green>
                             <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>128</red>
+                            <green>128</green>
+                            <blue>128</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>238</red>
+                            <green>238</green>
+                            <blue>230</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>221</green>
+                            <blue>118</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
                         </color>
                     </disabled>
                     <inactive>
@@ -1050,59 +873,29 @@
                             <blue>0</blue>
                         </color>
                         <color>
-                            <red>192</red>
-                            <green>192</green>
-                            <blue>192</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
-                            <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
-                            <red>220</red>
-                            <green>220</green>
-                            <blue>220</blue>
-                        </color>
-                        <color>
-                            <red>96</red>
-                            <green>96</green>
-                            <blue>96</blue>
-                        </color>
-                        <color>
-                            <red>128</red>
-                            <green>128</green>
-                            <blue>128</blue>
-                        </color>
-                        <color>
-                            <red>0</red>
-                            <green>0</green>
-                            <blue>0</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
-                            <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
-                            <red>0</red>
-                            <green>0</green>
-                            <blue>0</blue>
-                        </color>
-                        <color>
-                            <red>255</red>
-                            <green>255</green>
-                            <blue>255</blue>
-                        </color>
-                        <color>
                             <red>255</red>
                             <green>255</green>
                             <blue>127</blue>
                         </color>
                         <color>
-                            <red>0</red>
-                            <green>0</green>
-                            <blue>0</blue>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>254</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>165</blue>
+                        </color>
+                        <color>
+                            <red>127</red>
+                            <green>127</green>
+                            <blue>63</blue>
+                        </color>
+                        <color>
+                            <red>170</red>
+                            <green>170</green>
+                            <blue>85</blue>
                         </color>
                         <color>
                             <red>0</red>
@@ -1114,29 +907,85 @@
                             <green>255</green>
                             <blue>255</blue>
                         </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>255</green>
+                            <blue>255</blue>
+                        </color>
+                        <color>
+                            <red>238</red>
+                            <green>238</green>
+                            <blue>230</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
+                        <color>
+                            <red>255</red>
+                            <green>221</green>
+                            <blue>118</blue>
+                        </color>
+                        <color>
+                            <red>0</red>
+                            <green>0</green>
+                            <blue>0</blue>
+                        </color>
                     </inactive>
                 </palette>
-            </property>
-            <property stdset="1">
-                <name>frameShape</name>
-                <enum>Box</enum>
-            </property>
-            <property stdset="1">
-                <name>frameShadow</name>
-                <enum>Raised</enum>
             </property>
             <property stdset="1">
                 <name>text</name>
                 <string>Skip</string>
             </property>
             <property stdset="1">
-                <name>alignment</name>
-                <set>AlignCenter</set>
-            </property>
-            <property>
-                <name>hAlign</name>
+                <name>autoResize</name>
+                <bool>false</bool>
             </property>
         </widget>
     </grid>
 </widget>
+<customwidgets>
+    <customwidget>
+        <class>QWidget</class>
+        <header location="global">qwidget.h</header>
+        <sizehint>
+            <width>-1</width>
+            <height>-1</height>
+        </sizehint>
+        <container>0</container>
+        <sizepolicy>
+            <hordata>5</hordata>
+            <verdata>5</verdata>
+        </sizepolicy>
+        <pixmap>image0</pixmap>
+    </customwidget>
+</customwidgets>
+<images>
+    <image>
+        <name>image0</name>
+        <data format="XPM.GZ" length="646">789c6dd2c10ac2300c00d07bbf2234b7229d1be245fc04c5a3201e4615f430059d0711ff5ddb2e6bb236ec90eed134cb5a19d8ef36602af5ecdbfeeac05dda0798d3abebde87e3faa374d3807fa0d633a52d38d8de6f679fe33fc776e196f53cd010188256a3600a292882096246517815ca99884606e18044a3a40d91824820924265a7923a2e8bcd05f33db1173e002913175f2a6be6d3294871a2d95fa00e8a94ee017b69d339d90df1e77c57ea072ede6758</data>
+    </image>
+</images>
+<tabstops>
+    <tabstop>display</tabstop>
+    <tabstop>button_1</tabstop>
+    <tabstop>button_2</tabstop>
+    <tabstop>button_3</tabstop>
+    <tabstop>button_4</tabstop>
+    <tabstop>button_5</tabstop>
+    <tabstop>button_6</tabstop>
+    <tabstop>button_7</tabstop>
+    <tabstop>button_8</tabstop>
+    <tabstop>button_9</tabstop>
+    <tabstop>button_0</tabstop>
+    <tabstop>button_Skip</tabstop>
+    <tabstop>button_OK</tabstop>
+</tabstops>
 </UI>

@@ -77,6 +77,12 @@ signals:
         void input( QString );
         friend class PinPlugin;
         QString text;
+
+    private slots:
+       void slotInput();
+       void slotSkip();
+       void slotOK();
+       void slotBackspace();
 };
 
 
@@ -94,6 +100,19 @@ PinDialog::PinDialog( QWidget* parent,  const char* name, WFlags fl )
         prompt->setFont( f );
     }
 
+    connect ( button_0, SIGNAL( clicked()), SLOT( slotInput()));
+    connect ( button_1, SIGNAL( clicked()), SLOT( slotInput()));
+    connect ( button_2, SIGNAL( clicked()), SLOT( slotInput()));
+    connect ( button_3, SIGNAL( clicked()), SLOT( slotInput()));
+    connect ( button_4, SIGNAL( clicked()), SLOT( slotInput()));
+    connect ( button_5, SIGNAL( clicked()), SLOT( slotInput()));
+    connect ( button_6, SIGNAL( clicked()), SLOT( slotInput()));
+    connect ( button_7, SIGNAL( clicked()), SLOT( slotInput()));
+    connect ( button_8, SIGNAL( clicked()), SLOT( slotInput()));
+    connect ( button_9, SIGNAL( clicked()), SLOT( slotInput()));
+    connect ( button_Skip, SIGNAL( clicked()), SLOT( slotSkip()));
+    connect ( button_OK, SIGNAL( clicked()), SLOT( slotOK()));
+
     button_0->installEventFilter( this );
     button_1->installEventFilter( this );
     button_2->installEventFilter( this );
@@ -106,7 +125,7 @@ PinDialog::PinDialog( QWidget* parent,  const char* name, WFlags fl )
     button_9->installEventFilter( this );
     button_Skip->installEventFilter( this );
     button_OK->installEventFilter( this );
-    setFocus();
+    button_OK->setFocus();
 }
 
 /// nothing to do
@@ -115,23 +134,45 @@ PinDialog::~PinDialog()
     // no need to delete child widgets, Qt does it all for us
 }
 
-/// Record the pressed numbers, and the Skip and Enter commands
+/// Handle keyboard events
 bool PinDialog::eventFilter( QObject*o, QEvent*e )
 {
-    if ( e->type() == QEvent::MouseButtonRelease ) {
-        if ( o == button_OK ) {
-            emit passwordEntered( text );
-        }
-        else if ( o == button_Skip ) {
-            isSkip = TRUE;
-            emit skip();
-        }
-        else {
-            QLabel *l = (QLabel*)o;
-            input(l->text());
+    if(e->type() == QEvent::KeyPress) {
+        switch(((QKeyEvent *)e)->key()) {
+            case Key_0...Key_9:
+                input(((QKeyEvent *)e)->text());
+                return TRUE;
+            case Key_Backspace:
+                slotBackspace();
+                return TRUE;
         }
     }
     return FALSE;
+}
+
+void PinDialog::slotInput()
+{
+    QPushButton *l = (QPushButton*)sender();
+    input(l->text().stripWhiteSpace());
+}
+
+void PinDialog::slotSkip()
+{
+    isSkip = TRUE;
+    emit skip();
+}
+
+void PinDialog::slotOK()
+{
+    emit passwordEntered( text );
+}
+
+void PinDialog::slotBackspace()
+{
+    if(text.length() > 0) {
+        text.truncate( text.length() - 1 );
+        display->setText( text );
+    }
 }
 
 void PinDialog::input( QString c )
