@@ -177,6 +177,22 @@ void ODateBookMonthTable::findDay( int day, int &row, int &col )
     col = effective_day % 7;
 }
 
+bool ODateBookMonthTable::findDate( QDate date, int &row, int &col )
+{
+    int rows = numRows();
+    int cols = numCols();
+    for(int r=0;r<rows;r++) {
+        for(int c=0;c<cols;c++) {
+            if(getDateAt(r, c) == date) {
+                row = r;
+                col = c;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 void ODateBookMonthTable::dayClicked( int row, int col )
 {
     changeDaySelection( row, col );
@@ -190,31 +206,42 @@ void ODateBookMonthTable::dragDay( int row, int col )
 
 void ODateBookMonthTable::changeDaySelection( int row, int col )
 {
-    DayItemMonth *i = (DayItemMonth*)item( row, col );
-    if ( !i )
-    return;
-    switch ( i->type() ) {
-    case Calendar::Day::ThisMonth:
-        selMonth = month;
-        break;
-    case Calendar::Day::PrevMonth:
-        selMonth = month-1;
-        break;
-    default:
-        selMonth = month+1;
-    }
-
-    selYear = year;
-    if ( selMonth <= 0 ) {
-    selMonth = 12;
-    selYear--;
-    } else if ( selMonth > 12 ) {
-    selMonth = 1;
-    selYear++;
-    }
-    selDay = i->day();
+    QDate selDate = getDateAt( row, col );
+    selYear = selDate.year();
+    selMonth = selDate.month();
+    selDay = selDate.day();
 }
 
+QDate ODateBookMonthTable::getDateAt( int row, int col ) 
+{
+    int itemMonth, itemYear;
+    
+    DayItemMonth *i = (DayItemMonth*)item( row, col );
+    if ( !i )
+        return QDate(1900, 1, 1);
+    switch ( i->type() ) {
+    case Calendar::Day::ThisMonth:
+            itemMonth = month;
+        break;
+    case Calendar::Day::PrevMonth:
+            itemMonth = month-1;
+        break;
+    default:
+            itemMonth = month+1;
+    }
+
+    itemYear = year;
+    if ( itemMonth <= 0 ) {
+        itemMonth = 12;
+        itemYear--;
+    }
+    else if ( itemMonth > 12 ) {
+        itemMonth = 1;
+        itemYear++;
+    }
+
+    return QDate( itemYear, itemMonth, i->day());
+}
 
 void ODateBookMonthTable::viewportMouseReleaseEvent( QMouseEvent * )
 {
@@ -226,10 +253,9 @@ void ODateBookMonthTable::getEvents()
     if ( !db )
     return;
 
-    QDate dtStart( year, month, 1 );
-    d->mMonthEvents = db->getEffectiveEvents( dtStart,
-                          QDate( year, month,
-                             dtStart.daysInMonth() ) );
+    QDate dtStart = getDateAt(0,0);
+    QDate dtEnd = getDateAt(numRows()-1, numCols()-1);
+    d->mMonthEvents = db->getEffectiveEvents( dtStart, dtEnd);
     QValueListIterator<EffectiveEvent> it = d->mMonthEvents.begin();
     // now that the events are sorted, basically go through the list, make
     // a small list for every day and set it for each item...
@@ -245,7 +271,7 @@ void ODateBookMonthTable::getEvents()
         ++it;
     }
     int row, col;
-    findDay( e.date().day(), row, col );
+        findDate( e.date(), row, col );
     DayItemMonth* w = static_cast<DayItemMonth*>( item( row, col ) );
     w->setEvents( dayEvent );
     updateCell( row, col );

@@ -81,8 +81,10 @@ private:
     void setupLabels();
 
     void findDay( int day, int &row, int &col );
+    bool findDate( QDate date, int &row, int &col );
     void getEvents();
     void changeDaySelection( int row, int col );
+    QDate getDateAt( int row, int col );
 
     int year, month, day;
     int selYear, selMonth, selDay;
