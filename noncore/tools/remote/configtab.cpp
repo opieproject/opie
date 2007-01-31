@@ -211,6 +211,14 @@ void ConfigTab::remoteSelected(const QString &string)
 
 void ConfigTab::buttonPressed()
 {
+	QString curr_remote = topGroupConf->getRemotesText();
+	if(curr_remote != "")
+		cfg->setGroup(curr_remote);
+	else {
+		QMessageBox::warning(this, tr("Error"), tr("Please select or create\na remote layout"), QMessageBox::Ok, QMessageBox::NoButton);
+		return;
+	}
+	
 	const QObject *button = sender();
 	QString string = button->name();
 	
