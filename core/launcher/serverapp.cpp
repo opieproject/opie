@@ -578,7 +578,7 @@ void ServerApplication::togglePower()
     m_suspendTime = QDateTime::currentDateTime();
 
 #ifdef QWS
-    if ( Opie::Security::MultiauthPassword::needToAuthenticate ( true ) && qt_screen ) {
+    if ( Opie::Security::MultiauthPassword::needToAuthenticate ( false ) && qt_screen ) {
         // Should use a big black window instead.
         // But this would not show up fast enough
         QGfx *g = qt_screen-> screenGfx ( );
@@ -597,7 +597,7 @@ void ServerApplication::togglePower()
     }
 
     if ( wasloggedin )
-        login ( true );
+        login ( false );
 
     execAutoStart(m_suspendTime);
     //qcopBridge->closeOpenConnections();
