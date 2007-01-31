@@ -152,7 +152,8 @@ int initApplication( int argc, char ** argv )
     ServerApplication a( argc, argv, QApplication::GuiServer );
     initKeyboard();
 
-    if ( firstUse() )
+    bool firstUseShown = firstUse();
+    if ( firstUseShown )
     {
         a.restart();
         return 0;
@@ -171,18 +172,28 @@ int initApplication( int argc, char ** argv )
 #endif
     s->show();
 
-#if 0
-    if ( QDate::currentDate().year() < 2005 )
-    {
-        if ( QMessageBox::information ( 0, ServerApplication::tr( "Information" ),
-             ServerApplication::tr( "<p>The system date doesn't seem to be valid.\n(%1)</p><p>Do you want to correct the clock ?</p>" )
-                               .arg( TimeString::dateString( QDate::currentDate())), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
+    if ( !firstUseShown ) {
+        Config config( "qpe" );
+        config.setGroup( "Startup" );
+        bool showTimeSettings = config.readBoolEntry( "ShowTimeSettings", FALSE );
+
+        if ( !showTimeSettings && QDate::currentDate().year() < 2007 )
+        {
+            if ( QMessageBox::information ( 0, ServerApplication::tr( "Information" ),
+                ServerApplication::tr( "<p>The system date doesn't seem to be valid.\n(%1)</p><p>Do you want to correct the clock ?</p>" )
+                                    .arg( TimeString::dateString( QDate::currentDate())),
+                    QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes )
+                    {
+                        showTimeSettings = TRUE;
+                    }
+            }
+
+            if ( showTimeSettings )
             {
                 QCopEnvelope e ( "QPE/Application/systemtime", "setDocument(QString)" );
                 e << QString ( );
             }
     }
-#endif
 
     create_pidfile();
     odebug << "--> mainloop in" << oendl;
