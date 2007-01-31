@@ -77,20 +77,22 @@ Lib::Lib( InitializationMode initMode, XineVideoWidget* widget )
     // not really OO, should be an extra class, later
     if ( !QFile::exists(configPath) ) {
         QFile f(configPath);
-        f.open(IO_WriteOnly);
-        QTextStream ts( &f );
-        ts << "misc.memcpy_method:glibc\n";
-        ts << "# uncomment if you experience double speed audio \n #audio.oss_sync_method:softsync\n";
-        ts << "codec.ffmpeg_pp_quality:3\n";
-        ts << "audio.num_buffers:50\n";
-        ts << "audio.size_buffers:4096\n";
-        ts << "video.num_buffers:20\n";
-        ts << "video.size_buffers:4096\n";
-        ts << "audio.out_num_audio_buf:16\n";
-        ts << "audio.out_size_audio_buf:8096\n";
-        ts << "audio.out_size_zero_buf:1024\n";
-        ts << "audio.passthrough_offset:0\n";
-        f.close();
+        if (f.open(IO_WriteOnly)) {
+            QTextStream ts( &f );
+            ts << "misc.memcpy_method:glibc\n";
+            ts << "# uncomment if you experience double speed audio \n #audio.oss_sync_method:softsync\n";
+            ts << "codec.ffmpeg_pp_quality:3\n";
+            ts << "audio.num_buffers:50\n";
+            ts << "audio.size_buffers:4096\n";
+            ts << "video.num_buffers:20\n";
+            ts << "video.size_buffers:4096\n";
+            ts << "audio.out_num_audio_buf:16\n";
+            ts << "audio.out_size_audio_buf:8096\n";
+            ts << "audio.out_size_zero_buf:1024\n";
+            ts << "audio.passthrough_offset:0\n";
+            f.close();
+        } else
+            owarn << "Failed to open " f.name() << oendl;
     }
 
     if ( initMode == InitializeImmediately ) {

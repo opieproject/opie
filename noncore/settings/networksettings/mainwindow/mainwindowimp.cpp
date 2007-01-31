@@ -196,7 +196,8 @@ void MainWindowImp::getAllInterfaces()
     }
     else
     {
-        procFile.open(IO_ReadOnly);
+        if (!procFile.open(IO_ReadOnly))
+            owarn << "Failed to open proc file " << procFile.name() << oendl;
         QString line;
         QTextStream procTs(&procFile);
         int loc = -1;
@@ -732,7 +733,8 @@ void MainWindowImp::setHostname()
     _procTemp="";
     h << "hostname" << m_Nameinput->text();
     connect(&h,SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),this,SLOT(slotHostname(Opie::Core::OProcess*,char*,int)));
-    h.start(OProcess::Block,OProcess::Stderr);
+    if (!h.start(OProcess::Block,OProcess::Stderr))
+        owarn << "Failed execution of 'hostname'. Are the paths correct?" << oendl;
     odebug << "Got " << _procTemp << " - " << h.exitStatus() << oendl;
     if (h.exitStatus()!=0) {
         QMessageBox::critical(0, tr("Sorry"), QString(tr("Could not set name.\n%1")).arg(_procTemp.stripWhiteSpace()));
@@ -768,13 +770,14 @@ void MainWindowImp::initHostname()
 
     h << "hostname";
     connect(&h,SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),this,SLOT(slotHostname(Opie::Core::OProcess*,char*,int)));
-    h.start(OProcess::Block,OProcess::AllOutput);
+    if (!h.start(OProcess::Block,OProcess::AllOutput))
+        owarn << "Could not execute 'hostname'. Are the paths correct?" oendl;
     odebug << "Got " << _procTemp <<oendl;
     m_Nameinput->setText(_procTemp.stripWhiteSpace());
     _procTemp="";
 }
 
-void MainWindowImp::slotHostname(Opie::Core::OProcess */*proc*/, char *buffer, int buflen)
+void MainWindowImp::slotHostname(Opie::Core::OProcess * /*proc*/, char *buffer, int buflen)
 {
     if (buflen < 1 || buffer==0) return;
     char*_t = new char[buflen+1];

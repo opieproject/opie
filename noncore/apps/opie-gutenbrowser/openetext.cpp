@@ -57,8 +57,7 @@ void OpenEtext::getTitles()
     Config config("Gutenbrowser");
     config.setGroup( "Files" );
     s_numofFiles = config.readEntry("NumberOfFiles", "0");
-    QLabel_1->setText( tr(
-        s_numofFiles+" etexts in your library."));
+    QLabel_1->setText( tr( s_numofFiles+" etexts in your library." ) );
      int  i_numofFiles = s_numofFiles.toInt();
     for (int i = 1; i <= i_numofFiles+1; i++) {
         QString temp;
@@ -68,7 +67,12 @@ void OpenEtext::getTitles()
         config.setGroup( "Titles" );
         title = config.readEntry(ramble, "");
         if( !title.isEmpty()) {
-            QListBox_1->insertItem ( QPixmap( QPEApplication::qpeDir()+"pics/gutenbrowser/gutenbrowser_sm.png"), title, -1);
+            QListBox_1->insertItem ( QPixmap(
+                                         QPEApplication::qpeDir() +
+                                         "pics/gutenbrowser/gutenbrowser_sm.png"
+                                            ),
+                                     title,
+                                     -1);
         }
     }
 }
@@ -100,8 +104,9 @@ void OpenEtext::select_title(int index )
     OpenEtext::accept();
 }
 
-/*
- This function imports already existing etexts into the local library list*/
+/*!
+ * This function imports already existing etexts into the local library list
+ */
 void OpenEtext::open()
 {
 OpenFileButton->setDown(TRUE);
@@ -113,14 +118,6 @@ OpenFileButton->setDown(TRUE);
     local = (QDir::homeDirPath () +"Applications/gutenbrowser");
     QDir library( local);
 
-//      fileBrowser *browseForFiles;
-//      browseForFiles=new fileBrowser(this,"Browse for File", TRUE, 0, "guten/plain;text/plain");
-//  //    browseForFiles=new fileBrowser(this,"fileBrowser",TRUE,0, "*");
-//              browseForFiles->setFileView( 0);
-//              browseForFiles->showMaximized();
-//      browseForFiles->exec();
-//      QString selFile= browseForFiles->selectedFileName;
-//      fileList=browseForFiles->fileList;
     Config cfg("Gutenbrowser");
     cfg. setGroup ( "View" );
     QString dir = cfg.readEntry("LastOpenDirectory", QPEApplication::documentDir());
@@ -134,55 +131,43 @@ OpenFileButton->setDown(TRUE);
 
     QString str = OFileDialog::getOpenFileName( 2, dir , QString::null, map);
 
-    if( !str.isEmpty() && QFile(str).exists() && !QFileInfo(str).isDir() )  {
-      filer = str;
+    if( !str.isEmpty() && QFile(str).exists() && !QFileInfo(str).isDir() ) {
+        filer = str;
 
-    odebug << "Open file: "+str << oendl;
+        odebug << "Open file: "+str << oendl;
 
-    //      QStringList::ConstIterator f;
-//      QString fileTemp;
-//      for (  f = fileList.begin(); f != fileList.end(); f++ ) {
-//          fileTemp = *f;
-//          fileTemp.right( fileTemp.length()-5);
-//          fileName = fileTemp;
-//          if( !fileName.isEmpty() ){
-//              filer = fileName;
-//          } else { //filename is empty
-//  //              QString sMsg;
-//  //              sMsg = "Error opening library filelist "+fileName;
-//          }
-
-        if( filer.right(4) == ".txt"
-                        || filer.right(4) == ".TXT"
-                        || filer.right(4) == ".etx"
-                        || filer.right(4) == ".ETX"
-                        || filer.right(4) == ".etx"
-                        || filer.right(4) == ".ETX"
-                        || filer.right(4) == ".zip"
-                        || filer.right(4) == ".ZIP" ) {
+        if( filer.right(4) == ".txt" ||
+            filer.right(4) == ".TXT" ||
+            filer.right(4) == ".etx" ||
+            filer.right(4) == ".ETX" ||
+            filer.right(4) == ".etx" ||
+            filer.right(4) == ".ETX" ||
+            filer.right(4) == ".zip" ||
+            filer.right(4) == ".ZIP" )
+        {
             QFileInfo zipFile( filer);
             QString s_fileName = zipFile.fileName();
             QString cmd;
 
-            if( s_fileName.right(4) == ".zip") { // unzip that sucker....
+            if( s_fileName.right(4) == ".zip") { // unzip the file
                 s_fileName = s_fileName.left( s_fileName.length() - 4);
                 if( chdir((const char*)local_library.latin1())!=0)
-                    odebug << "chdir failed." << oendl; //                QString cmd = "gunzip -d " + filer + " -d " + local_library;
+                    odebug << "chdir failed." << oendl;
                 cmd = "gunzip -S .zip " + filer;
                 fileName = local_library + s_fileName + ".txt";
                 system( cmd);
-            }
-// this renames the .txt to .etx!!
-            else  /*if( s_fileName.right(4) == ".txt" ||  if( s_fileName.right(4) == ".TXT"))*/ {
-//   odebug << "Filename is "+fileName << oendl;
+            } else { // else rename .txt to .etx
+                // odebug << "Filename is "+fileName << oendl;
                 s_fileName = fileName;
-                s_fileName.replace( s_fileName.length()-3,3,"gtn");//  s_fileName.replace( s_fileName.length()-3,3,"etx");
-                rename(fileName.latin1(),s_fileName.latin1());
+                s_fileName.replace( s_fileName.length()-3,3,"gtn");
+                if (rename(fileName.latin1(),s_fileName.latin1()) == -1)
+                    owarn << "Rename of " << fileName.latin1() << " to "
+                        << s_fileName.latin1() << " failed" << oendl;
                 fileName = s_fileName;
-//  odebug << "Filename is now "+fileName << oendl;
+                //  odebug << "Filename is now "+fileName << oendl;
             }
         } else
-                        fileName = str;
+            fileName = str;
 
         FindTitle(fileName);
 
@@ -201,14 +186,17 @@ OpenFileButton->setDown(TRUE);
         getTitles();
         odebug << "Filename is "+fileName << oendl;
         lnk.setFile(fileName); //sets File property
-        lnk.setType("guten/plain");// hey is this a REGISTERED mime type?!?!? ;D
+        // @bug This is probably not a registered MIME type. Perhaps we should
+        // set a valid MIME type here instead. Or maybe register .etx as a
+        // Gutenberge etext?
+        lnk.setType("guten/plain");
         lnk.setExec(fileName);
         lnk.setIcon("gutenbrowser/Gutenbrowser");
         if(!lnk.writeLink())
             odebug << "Writing doclink did not work" << oendl;
 
    } // end of for each file name....
-    OpenFileButton->setDown(FALSE);
+   OpenFileButton->setDown(FALSE);
 }
 
 /*
@@ -224,11 +212,10 @@ bool OpenEtext::FindTitle( QString filename)
     name = fi.fileName();
     odebug << "filename to open is " + name << oendl;
     QFile indexLib( filename);
-        bool findCheck = FALSE;
-        //        int Titlenumber=0;
+    bool findCheck = FALSE;
 
     if ( indexLib.open( IO_ReadOnly) ) {
-                odebug << "file opened successfully" << oendl;
+        odebug << "file opened successfully" << oendl;
         QTextStream indexStream( &indexLib );
         QString target = "Project Gutenberg Etext of";
         QString target2 = "Project Gutenberg Etext";
@@ -236,22 +223,22 @@ bool OpenEtext::FindTitle( QString filename)
         QString target4 = "Project Gutenberg's Etext";
         QString indexLine;
         while ( !indexStream.eof() ) {
-              // until end of file..
+            // until end of file..
             indexLine = indexStream.readLine();
             if(  indexLine.find(target, 0, TRUE) > -1 && !findCheck) {findCheck = TRUE;
                 title = indexLine.mid( indexLine.find(target, 0, TRUE) + (target.length()) , indexLine.find("\r", 0, TRUE));
                 title = title.left( title.find( "*",0, TRUE));
                 title = title.stripWhiteSpace ();
 //                odebug << "Found the title 1 and it is " << title << "" << oendl;
-//                              QListBox_1->insertItem ( title);
+//                QListBox_1->insertItem ( title);
             }
             if( indexLine.find( target2, 0, TRUE) > -1 && !findCheck) {
                 findCheck = TRUE;
                 title = indexLine.mid(  indexLine.find( target2, 0, TRUE ) + ( target2.length()) , indexLine.find("\r", 0, TRUE) );
                 title = title.left( title.find( "*",0, TRUE));
                 title = title.stripWhiteSpace ();
-//                    odebug << "Found the title 2 and it is " << title << "" << oendl;
-//                              QListBox_1->insertItem ( title);
+//                odebug << "Found the title 2 and it is " << title << "" << oendl;
+//                QListBox_1->insertItem ( title);
             }
             if( indexLine.find( target3, 0, TRUE) > -1 && !findCheck) {
                 findCheck = TRUE;
@@ -277,7 +264,6 @@ bool OpenEtext::FindTitle( QString filename)
         }
 
         if ( checkConf() == false && findCheck == TRUE) {
-
             config.setGroup( "Files");
             config.writeEntry("NumberOfFiles",i_numofFiles + 1 );
             QString interger;
@@ -315,10 +301,10 @@ QString OpenEtext::titleFromLibrary( QString fileName)
     QString target;
     int find1 = fileName.findRev("/",-1,TRUE)  + 1;
     int find2 = fileName.findRev(".gtn",-1,TRUE) - find1;
-    if(find2==-1-find1)
-    int find2 = fileName.findRev(".etx",-1,TRUE) - find1;
-    else if(find2==-1-find1)
-    int find2 = fileName.findRev(".txt",-1,TRUE) - find1;
+    if(find2== (-1-find1))
+        find2 = fileName.findRev(".etx",-1,TRUE) - find1;
+    else if(find2==(-1-find1))
+        find2 = fileName.findRev(".txt",-1,TRUE) - find1;
 
     target = fileName.mid( find1,  find2 );
     QString checker = target.right(1);
@@ -334,25 +320,24 @@ QString OpenEtext::titleFromLibrary( QString fileName)
         }
     }
     if ( indexLib.open( IO_ReadOnly) ) {
-          // file opened successfully
+        // file opened successfully
         QTextStream indexStream( &indexLib );
         QString indexLine;
         bool findCheck = FALSE;
-        while ( !indexStream.atEnd() ) {                  // until end of file..
+        while ( !indexStream.atEnd() ) { // until end of file..
             indexLine = indexStream.readLine();
 
             if( indexLine.find( target,0,FALSE) > 0 ) {
                 findCheck = TRUE;
                 title = indexLine.mid( 9, 50);
-//                title = indexLine.mid( 26, indexLine.length() );
                 title = title.stripWhiteSpace ();
 //                odebug << "Finally Found the title and it is\n " << title << "" << oendl;
-//                              QListBox_1->insertItem ( title);
+//                QListBox_1->insertItem ( title);
             }
         } //end while loop
     }
     else
-       odebug << "Error opening library index "+ local_index << oendl;
+        odebug << "Error opening library index "+ local_index << oendl;
     return title;
 }
 
@@ -381,22 +366,25 @@ void OpenEtext::remove()
 {
     title_text = QListBox_1->text( QListBox_1->currentItem() );
     title_text=title_text.stripWhiteSpace();
-    QString msg ="<p>Do you really want to REMOVE\n" +title_text +"?\nThis will not delete the file.</P>";
-    switch( QMessageBox::information( this, (tr("Remove Etext")),
-                                      (tr(msg)),
-                                      (tr("&Yes")), (tr("&Cancel")), 0 )){
+    QString msg ="<p>Do you really want to REMOVE\n" + title_text +
+                 "?\nThis will not delete the file.</P>";
+    switch( QMessageBox::information( this, tr("Remove Etext"),
+                                      tr(msg),
+                                      tr("&Yes"), tr("&Cancel"), 0 ) )
+    {
         case 0: // Yes clicked,
             removeSelection();
             QListBox_1->clear();
             getTitles();
             break;
-        case 1: // Cancel
-            break;
-    };
+	case 1:
+        default:
+    }
 }
 
-/*
- this removes selected title entry*/
+/*!
+ * This removes selected title entry
+ */
 void OpenEtext::removeSelection()
 {
     Config config("Gutenbrowser");
@@ -417,7 +405,7 @@ void OpenEtext::removeSelection()
         QString file_title = config.readEntry( s_filename, "");
         if(title_text == file_title) {
             rem=i;
-//odebug << "file title to remove is "+file_title << oendl;
+            //odebug << "file title to remove is "+file_title << oendl;
             selFile = s_filename;
             config.removeEntry( s_filename); //removes file=title
         }
@@ -436,11 +424,11 @@ void OpenEtext::removeSelection()
     }
     config.writeEntry("NumberOfFiles", i_numofFiles - 1 );
     config.removeEntry(fileNum2);
-//    remFile();
 }
 
-/*
- removes file title name from list and config file*/
+/*!
+ * Removes file title name from list and config file
+ */
 void OpenEtext::remFile()
 {
     Config config("Gutenbrowser");
@@ -461,9 +449,8 @@ void OpenEtext::remFile()
                 fileNum2.setNum( fg + 1);
                 QString s_filename2 = config.readEntry(fileNum2, "" );
 
-                if (!s_filename2.isEmpty()) {
+                if (!s_filename2.isEmpty())
                     config.writeEntry(fileNum, s_filename2 );
-                }
             }
         }
     }
@@ -473,8 +460,9 @@ void OpenEtext::remFile()
     QListBox_1->triggerUpdate(true);
 }
 
-/*
-sorts the list*/
+/*!
+ * Sorts the list
+ */
 void OpenEtext::scan() {
 
     QListBox_1->sort(TRUE);
@@ -485,7 +473,7 @@ void  OpenEtext::editTitle() {
 
     int currentItem=QListBox_1->currentItem();
     QString title_text = QListBox_1->text( currentItem);
-//odebug << "Selected "+title_text << oendl;
+    //odebug << "Selected "+title_text << oendl;
 
     Config config("Gutenbrowser");
     config.setGroup( "Files" );
@@ -499,23 +487,27 @@ void  OpenEtext::editTitle() {
         QString s_filename = config.readEntry(fileNum, "" );
         config.setGroup( "Titles" );
         QString file_title = config.readEntry( s_filename, "");
-//odebug << "file_title is "+file_title << oendl;
+        //odebug << "file_title is "+file_title << oendl;
         if(title_text == file_title ) {
             selFile = s_filename;
-//odebug << "Edit: "+ file_title << oendl;
+            //odebug << "Edit: "+ file_title << oendl;
             i=i_numofFiles+1;
             Edit_Title *titleEdit;
             titleEdit = new Edit_Title(this,file_title ,TRUE);
             if(titleEdit->exec() !=0) {
-//odebug << titleEdit->newTitle << oendl;
+                //odebug << titleEdit->newTitle << oendl;
                 config.writeEntry( s_filename, titleEdit->newTitle);
                 QListBox_1->removeItem(currentItem);
-                QListBox_1->insertItem ( QPixmap( QPEApplication::qpeDir()+"pics/gutenbrowser/gutenbrowser_sm.png"), titleEdit->newTitle, currentItem);
+                QListBox_1->insertItem (
+                    QPixmap( QPEApplication::qpeDir()+
+                             "pics/gutenbrowser/gutenbrowser_sm.png"),
+                    titleEdit->newTitle, currentItem
+                                       );
             }
         }
     }
 
-//    getTitles();
+    //getTitles();
     QListBox_1->triggerUpdate(true);
 }
 

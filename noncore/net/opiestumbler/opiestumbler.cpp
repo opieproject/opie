@@ -342,7 +342,8 @@ void OpieStumbler::slotAssociated()
     m_proc = new Opie::Core::OProcess(this);
         
     *m_proc << "udhcpc" << "-f" << "-n" << "-i" << m_interface;
-    m_proc->start(Opie::Core::OProcess::DontCare);
+    if (!m_proc->start(Opie::Core::OProcess::DontCare))
+	owarn << "Execution of udhcpc returned false. Are paths correct?" << oendl;
     QTimer::singleShot(5000, this, SLOT(slotCheckDHCP()));
 }
 

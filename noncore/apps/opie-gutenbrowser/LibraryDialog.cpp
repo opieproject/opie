@@ -20,7 +20,7 @@
 #include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpedialog.h>
-//#include <opie2///odebug.h>
+#include <opie2/odebug.h>
 
 /* QT */
 #include <qpushbutton.h>
@@ -458,55 +458,58 @@ bool LibraryDialog::download_newEtext()
 
 bool LibraryDialog::getEtext(const QStringList &networkList)
 {
-   NetworkDialog *NetworkDlg;
-   NetworkDlg = new NetworkDialog( this,"Network Protocol Dialog", true, 0, networkList);
+    NetworkDialog *NetworkDlg;
+    NetworkDlg = new NetworkDialog( this,"Network Protocol Dialog", true, 0, networkList);
 
-// use new, improved, *INSTANT* network-dialog-file-getterer
-   if( NetworkDlg->exec() != 0 ) {
-      File_Name = NetworkDlg->localFileName;
+    // use new, improved, *INSTANT* network-dialog-file-getterer
+    if( NetworkDlg->exec() != 0 ) {
+        File_Name = NetworkDlg->localFileName;
 
-      qDebug("Just downloaded " + NetworkDlg->localFileName);
+        qDebug("Just downloaded " + NetworkDlg->localFileName);
 
-      if(NetworkDlg->successDownload) {
-         //odebug << "Filename is "+File_Name << oendl;
-         if(File_Name.right(4) == ".txt") {
-            QString  s_fileName = File_Name;
-            s_fileName.replace( s_fileName.length() - 3, 3, "gtn");
-            //                s_fileName.replace( s_fileName.length()-3,3,"etx");
-            rename( File_Name.latin1(), s_fileName.latin1());
-            File_Name = s_fileName;
-
-            //odebug << "Filename is now "+File_Name << oendl;
-
-         }
-         if(File_Name.length() > 5 ) {
-            setTitle();
-            QFileInfo fi(File_Name);
-            QString  name_file = fi.fileName();
-            name_file = name_file.left( name_file.length() - 4);
-
-            //odebug << "Setting doclink" << oendl;
-            DocLnk lnk;
-            //odebug << "name is "+name_file << oendl;
-            lnk.setName(name_file); //sets file name
-            //odebug << "Title is "+DlglistItemTitle << oendl;
-            lnk.setComment(DlglistItemTitle);
-
+        if(NetworkDlg->successDownload) {
             //odebug << "Filename is "+File_Name << oendl;
-            lnk.setFile(File_Name); //sets File property
-            lnk.setType("guten/plain");// hey is this a REGISTERED mime type?!?!? ;D
-            lnk.setExec(File_Name);
-            lnk.setIcon("gutenbrowser/Gutenbrowser");
-            if(!lnk.writeLink()) {
-               //odebug << "Writing doclink did not work" << oendl;
-            } else {
-            }
-         } else
-            QMessageBox::message("Note","<p>There was an error with the file</p>");
-      }
-   }
+            if(File_Name.right(4) == ".txt") {
+                QString  s_fileName = File_Name;
+                s_fileName.replace( s_fileName.length() - 3, 3, "gtn");
+                if (rename( File_Name.latin1(), s_fileName.latin1()) == 1) {
+		    owarn << "Failed to rename " << File_Name.latin1() << " to "
+			<< s_fileName.latin1() << oendl;
+		    return false;
+		}
 
-   return true;
+                File_Name = s_fileName;
+
+                //odebug << "Filename is now "+File_Name << oendl;
+
+            }
+            if(File_Name.length() > 5 ) {
+                setTitle();
+                QFileInfo fi(File_Name);
+                QString  name_file = fi.fileName();
+                name_file = name_file.left( name_file.length() - 4);
+
+                //odebug << "Setting doclink" << oendl;
+                DocLnk lnk;
+                //odebug << "name is "+name_file << oendl;
+                lnk.setName(name_file); //sets file name
+                //odebug << "Title is "+DlglistItemTitle << oendl;
+                lnk.setComment(DlglistItemTitle);
+
+                //odebug << "Filename is "+File_Name << oendl;
+                lnk.setFile(File_Name); //sets File property
+                lnk.setType("guten/plain");// hey is this a REGISTERED mime type?!?!? ;D
+                lnk.setExec(File_Name);
+                lnk.setIcon("gutenbrowser/Gutenbrowser");
+                if(!lnk.writeLink()) {
+                   //odebug << "Writing doclink did not work" << oendl;
+                }
+            } else
+                QMessageBox::message("Note","<p>There was an error with the file</p>");
+        }
+    }
+
+    return true;
 }
 
 bool LibraryDialog::download_Etext()
@@ -701,7 +704,6 @@ void LibraryDialog::onButtonSearch()
 	 int i_berger = 0;
    if( searchDlg->exec() != 0 )  {
       QString searcherStr = searchDlg->get_text();
-      int fluff = 0;
 
       bool cS;
       if( searchDlg->caseSensitiveCheckBox->isChecked())

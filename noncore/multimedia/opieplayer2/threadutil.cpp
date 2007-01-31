@@ -233,12 +233,17 @@ void Thread::exit()
     pthread_exit( 0 );
 }
 
-OnewayNotifier::OnewayNotifier()
+OnewayNotifier::OnewayNotifier() :
+  m_readFd(-1),
+  m_writeFd(-1)
 {
-    int fds[ 2 ];
-    pipe( fds );
-    m_readFd = fds[ 0 ];
-    m_writeFd = fds[ 1 ];
+    int fds[ 2 ] = { -1, -1 };
+    if (pipe( fds ) == 0) {
+        m_readFd = fds[ 0 ];
+        m_writeFd = fds[ 1 ];
+    } else {
+        owarn << "Call to pipe() failed" << oendl;
+    }
 
     m_notifier = new QSocketNotifier( m_readFd, QSocketNotifier::Read );
     connect( m_notifier, SIGNAL( activated(int) ),

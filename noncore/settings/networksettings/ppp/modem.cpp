@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.13 2004-10-14 01:44:27 zecke Exp $
+ * $Id: modem.cpp,v 1.14 2007-01-31 22:06:08 erik Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -768,8 +768,10 @@ bool Modem::createAuthFile(Auth method, const char *username, const char *passwo
   // delete old file if any
   unlink(oldName);
 
-  rename(authfile, oldName);
-  rename(newName, authfile);
+  if (rename(authfile, oldName) == -1)
+    return false;
+  if (rename(newName, authfile) == -1)
+    return false;
 
   return true;
 }
