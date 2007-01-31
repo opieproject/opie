@@ -245,12 +245,13 @@ void EditNetworkSetup::setNetworkSetup( NetworkSetup * NC ) {
 
           if( ! Found ) {
             // this means that this level is NOT present in collection
-            // probably INCOMPATIBEL collection OR Missing plugin
+            // probably INCOMPATIBLE collection OR Missing plugin
+	    QString pluginName = NNI ? NNI->nodeClass()->name() : "";
             QMessageBox::warning(
                 0, 
                 tr( "Error presentig NetworkSetup" ),
                 tr( "<p>Old NetworkSetup or missing plugin \"<i>%1</i>\"</p>" ).
-                    arg(NNI->nodeClass()->name()) );
+                    arg(pluginName) );
             return;
           }
 

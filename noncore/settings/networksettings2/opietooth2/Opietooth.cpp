@@ -444,7 +444,7 @@ int OTScan::getDevice( OTPeer *& Peer,
       bool IsUp = 0;
       unsigned int i;
 
-      if( ! OT->isEnabled() ) {
+      if( ! OT || ! OT->isEnabled() ) {
         QMessageBox::warning( 0,
             tr("Scanning problem"),
             tr("Bluetooth not enabled" )

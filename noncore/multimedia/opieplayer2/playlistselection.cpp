@@ -50,14 +50,6 @@ PlayListSelection::PlayListSelection( QWidget *parent, const char *name )
     : QListView( parent, name )
 {
 //    odebug << "starting playlistselector" << oendl; 
-// #ifdef USE_PLAYLIST_BACKGROUND
-//    setStaticBackground( TRUE );
-//      setBackgroundPixmap( Resource::loadPixmap( "opieplayer/background" ) );
-
-//      setBackgroundPixmap( Resource::loadPixmap( "launcher/opielogo" ) );
-// #endif
-//      addColumn("Title",236);
-//      setAllColumnsShowFocus( TRUE );
      addColumn( tr( "Playlist Selection" ) );
     header()->hide();
     setSorting( -1, FALSE );
@@ -68,15 +60,10 @@ PlayListSelection::~PlayListSelection() {
 }
 
 
-// #ifdef USE_PLAYLIST_BACKGROUND
 void PlayListSelection::drawBackground( QPainter *p, const QRect &r ) {
 //  odebug << "drawBackground" << oendl; 
    p->fillRect( r, QBrush( white ) );
-//        QImage logo = Resource::loadImage( "launcher/opielogo" );
-//          if ( !logo.isNull() )
-//        p->drawImage( (width() - logo.width()) / 2, (height() - logo.height()) / 2, logo );
 }
-// #endif
 
 
 void PlayListSelection::contentsMouseMoveEvent( QMouseEvent *event ) {
@@ -94,7 +81,7 @@ void PlayListSelection::contentsMouseMoveEvent( QMouseEvent *event ) {
 const DocLnk *PlayListSelection::current() {
     PlayListSelectionItem *item = (PlayListSelectionItem *)selectedItem();
     if ( item )
-  return item->file();
+        return item->file();
     return NULL;
 }
 
@@ -120,7 +107,7 @@ void PlayListSelection::removeSelected() {
 void PlayListSelection::moveSelectedUp() {
     QListViewItem *item = selectedItem();
     if ( item && item->itemAbove() )
-  item->itemAbove()->moveItem( item );
+        item->itemAbove()->moveItem( item );
     ensureItemVisible( selectedItem() );
 }
 
@@ -138,7 +125,7 @@ bool PlayListSelection::prev() {
     if ( item && item->itemAbove() )
         setSelected( item->itemAbove(), TRUE );
     else
-  return FALSE;
+        return FALSE;
     ensureItemVisible( selectedItem() );
     return TRUE;
 }
@@ -148,7 +135,7 @@ bool PlayListSelection::next() {
     if ( item && item->itemBelow() )
         setSelected( item->itemBelow(), TRUE );
     else
-  return FALSE;
+        return FALSE;
     ensureItemVisible( selectedItem() );
     return TRUE;
 }
@@ -159,7 +146,7 @@ bool PlayListSelection::first() {
     if ( item )
         setSelected( item, TRUE );
     else
-  return FALSE;
+        return FALSE;
     ensureItemVisible( selectedItem() );
     return TRUE;
 }
@@ -169,27 +156,27 @@ bool PlayListSelection::last() {
     QListViewItem *prevItem = NULL;
     QListViewItem *item = firstChild();
     while ( ( item = item->nextSibling() ) )
-  prevItem = item;
+        prevItem = item;
     if ( prevItem )
         setSelected( prevItem, TRUE );
     else
-  return FALSE;
+        return FALSE;
     ensureItemVisible( selectedItem() );
     return TRUE;
 }
 
 void PlayListSelection::unSelect()
 {
-    //QListViewItem *item = selectedItem();
     setSelected( currentItem(), FALSE);
 }
 
 void PlayListSelection::writeCurrent( Config& cfg ) {
     cfg.setGroup("PlayList");
     QListViewItem *item = selectedItem();
-    if ( item )
+    if ( item ) {
         cfg.writeEntry("current", item->text(0) );
-    odebug << item->text(0) << oendl; 
+        odebug << item->text(0) << oendl;
+    }
 
 }
 
@@ -206,6 +193,4 @@ void  PlayListSelection::setSelectedItem(const QString &strk ) {
             return;
         }
     }
-//     setSelected( item, TRUE );
-//     ensureItemVisible( selectedItem() );
 }
