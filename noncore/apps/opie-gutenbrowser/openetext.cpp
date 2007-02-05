@@ -368,17 +368,15 @@ void OpenEtext::remove()
     title_text=title_text.stripWhiteSpace();
     QString msg ="<p>Do you really want to REMOVE\n" + title_text +
                  "?\nThis will not delete the file.</P>";
-    switch( QMessageBox::information( this, tr("Remove Etext"),
-                                      tr(msg),
-                                      tr("&Yes"), tr("&Cancel"), 0 ) )
-    {
-        case 0: // Yes clicked,
-            removeSelection();
-            QListBox_1->clear();
-            getTitles();
-            break;
-	case 1:
-        default:
+    unsigned short clickVal =
+        QMessageBox::information( this, tr("Remove Etext"),
+                                  tr(msg),
+                                  tr("&Yes"), tr("&Cancel"), 0 );
+    if ( clickVal == 0 ) {
+        // The yes button was clicked
+        removeSelection();
+        QListBox_1->clear();
+        getTitles();
     }
 }
 
