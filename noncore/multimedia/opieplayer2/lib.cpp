@@ -92,7 +92,7 @@ Lib::Lib( InitializationMode initMode, XineVideoWidget* widget )
             ts << "audio.passthrough_offset:0\n";
             f.close();
         } else
-            owarn << "Failed to open " f.name() << oendl;
+            owarn << "Failed to open " << f.name() << oendl;
     }
 
     if ( initMode == InitializeImmediately ) {
