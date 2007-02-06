@@ -19,7 +19,6 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include <string.h>
 #include <sys/socket.h>
 #include <sys/types.h>
-#include <sys/un.h>
 #include <unistd.h>
 #include <errno.h>
 
@@ -27,6 +26,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include <qmessagebox.h>
 #include <qobject.h>
 #include <opie2/oprocess.h>
+#include <qpe/qcopenvelope_qws.h>
 
 #include "lirchandler.h"
 
@@ -267,4 +267,27 @@ bool LircHandler::stopLircd(void)
 bool LircHandler::isLircdRunning(void)
 {
 	return (OProcess::processPID("lircd") != 0);
+}
+
+bool LircHandler::setupModules(void)
+{
+	// Remove IrDA modules which get in the way
+	system("rmmod ircomm-tty ircomm");
+	// Load LIRC device driver
+	system("modprobe lirc_sir");
+	return true;
+}
+
+bool LircHandler::cleanupModules(void)
+{
+	// Unload LIRC device driver
+	system("rmmod lirc_sir");
+	// Load IrDA drivers back in
+	system("modprobe ircomm-tty");
+	return true;
+}
+
+void LircHandler::disableIrDA(void)
+{
+	QCopEnvelope e("QPE/IrDaApplet", "disableIrda()");
 }

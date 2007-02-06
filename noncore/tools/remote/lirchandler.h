@@ -17,6 +17,8 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #ifndef LIRCHANDLER_H
 #define LIRCHANDLER_H
 
+#include <sys/un.h>
+
 class LircHandler
 {
 private:
@@ -33,6 +35,9 @@ public:
 	bool startLircd(void);
 	bool stopLircd(void);
 	bool isLircdRunning(void);
+	bool setupModules(void);
+	bool cleanupModules(void);
+	void disableIrDA(void);
 };
 
 #endif

@@ -39,22 +39,26 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 int main( int argc, char **argv )
 {
-    QPEApplication a( argc, argv );
-    MainView w;
-    a.setMainWidget( &w );
-    QPEApplication::showWidget( &w );
-    
-		LircHandler lh;
-		if(!lh.isLircdRunning()) {
-			QMessageBox mb("Error!",
-											"Lircd is not running",
-											QMessageBox::NoIcon,
-											QMessageBox::Ok,
-											QMessageBox::NoButton,
-											QMessageBox::NoButton);
-			mb.exec();
-			
-		}
-				
-		return a.exec();
+	QPEApplication a( argc, argv );
+	
+	LircHandler lh;
+	
+	lh.disableIrDA();
+	lh.setupModules();
+	lh.startLircd();
+	if(!lh.isLircdRunning()) {
+		QMessageBox::critical(NULL, QObject::tr("Error"),
+				QObject::tr("Unable to start lircd"),
+				QMessageBox::Ok, QMessageBox::NoButton);
+	}
+	
+	MainView w;
+	a.setMainWidget( &w );
+	QPEApplication::showWidget( &w );
+	int result = a.exec();
+	
+	lh.stopLircd();
+	lh.cleanupModules();
+	
+	return result;
 }
