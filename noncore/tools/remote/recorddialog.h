@@ -18,31 +18,52 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #define RecordDialog_H
 
 #include <qdialog.h>
-#include <qtextview.h>
+#include <qmultilineedit.h>
 #include <qlineedit.h>
 #include <qpushbutton.h>
 #include <qwidget.h>
 #include <qlayout.h>
+#include <qlabel.h>
 #include <qmessagebox.h>
 
 #include <stdio.h>
 
 #include <opie2/oprocess.h>
 
+#include "lirchandler.h"
+
 class RecordDialog : public QDialog
 {
 	Q_OBJECT
 public:
 	RecordDialog(QWidget *parent=0, const char *name=0);
+	~RecordDialog(void);
 public slots:
-	void retPressed();
+	void nextPressed();
 	void incoming(Opie::Core::OProcess *proc, char *buffer, int len);
+	void incomingErr(Opie::Core::OProcess *proc, char *buffer, int len);
+	void writeFinished(Opie::Core::OProcess *proc);
 	void done(Opie::Core::OProcess *proc);
+	void accept();
+	void reject();
+protected:
+	bool confirmClose();
+	bool checkClose();
 private:
-	QTextView *output;
+	QMultiLineEdit *output;
 	QLineEdit *input;
+  QPushButton *nextbtn;
 	Opie::Core::OProcess *record;
-	int where;
+	int stepnum;
+	bool outputenabled;
+	bool decoding;
+	bool writeok;
+	bool ignorekill;
+	QString errors;
+	QString remotefile;
+	LircHandler *lh;
+	
+	void writeToProcess(const char *buffer, int len);
 };
 
 #endif
