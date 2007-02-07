@@ -25,6 +25,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include <qstring.h>
 #include <qmessagebox.h>
 #include <qobject.h>
+#include <qtextstream.h>
 #include <opie2/oprocess.h>
 #include <qpe/qcopenvelope_qws.h>
 
@@ -34,6 +35,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #define TIMEOUT 3
 #define LIRCD_SOCKET "/dev/lircd"
 #define LIRCD_SERVICECMD "/etc/init.d/lircd"
+#define LIRCD_CONF "/etc/lircd.conf"
 
 using namespace Opie::Core;
 
@@ -46,6 +48,9 @@ LircHandler::LircHandler(void)
 
 bool LircHandler::connectLirc(void)
 {
+	if(!checkLircdConfValid(false))
+		return false;
+	
 	fd = socket(AF_UNIX, SOCK_STREAM, 0);
 	if(fd == -1)
 	{
@@ -269,6 +274,15 @@ bool LircHandler::isLircdRunning(void)
 	return (OProcess::processPID("lircd") != 0);
 }
 
+void LircHandler::reloadLircdConf(void)
+{
+	int pid = OProcess::processPID("lircd");
+	if(pid > -1)
+		kill(pid, SIGHUP);
+	else
+		startLircd();
+}
+
 bool LircHandler::setupModules(void)
 {
 	// Remove IrDA modules which get in the way
@@ -290,4 +304,156 @@ bool LircHandler::cleanupModules(void)
 void LircHandler::disableIrDA(void)
 {
 	QCopEnvelope e("QPE/IrDaApplet", "disableIrda()");
+}
+
+void LircHandler::mergeRemoteConfig(const QString &newconfig)
+{
+	QStringList contents;
+	QStringList newcontents;
+	QFile conf(LIRCD_CONF);
+	QFile newconf(newconfig);
+	
+	readFromFile(conf, contents);
+	readFromFile(newconf, newcontents);
+	contents += newcontents;
+	
+	writeToFile(conf, contents);
+}
+
+void LircHandler::removeRemote(const QString &remotetodelete)
+{
+	QStringList contents;
+	QFile conf(LIRCD_CONF);
+	bool found = false;
+	bool inremote = false;
+	QString remotename("");
+	int lineidx = 0;
+	int startidx = 0;
+	int lastendidx = 0;
+	
+	readFromFile(conf, contents);
+	
+	for (QStringList::Iterator it = contents.begin(); it != contents.end(); ++it ) {
+		QString line = (*it).stripWhiteSpace();
+		if(line == "begin remote") {
+			startidx = lastendidx;
+			inremote = true;
+		}
+		else if(line == "end remote") {
+			lastendidx = lineidx + 1;
+			if(remotename == remotetodelete) {
+				found = true;
+				break;
+			}
+			inremote = false;
+		}
+		else if(inremote && line.left(4) == "name") {
+			remotename = line.mid(4).stripWhiteSpace();
+		}
+		lineidx++;
+	}
+	
+	if(found) {
+		// Remove the remote and any preceding lines (most likely associated comments)
+		int linecount = lastendidx - startidx; 
+		QStringList::Iterator it = contents.at(startidx);
+		for (int i = 0; i < linecount; i++ ) {
+			it = contents.remove(it);
+		}
+		
+		// Check if there is at least one remote still defined
+		found = false;
+		for (it = contents.begin(); it != contents.end(); ++it ) {
+			QString line = (*it).stripWhiteSpace();
+			if(line == "begin remote") {
+				found = true;
+				break;
+			}
+		}
+		
+		if(found)
+			writeToFile(conf, contents);
+		else
+			conf.remove();
+	}
+}
+
+bool LircHandler::checkRemoteExists(const QString &remote)
+{
+	QStringList contents;
+	QFile conf(LIRCD_CONF);
+	bool inremote = false;
+	
+	readFromFile(conf, contents);
+	
+	for (QStringList::Iterator it = contents.begin(); it != contents.end(); ++it ) {
+		QString line = (*it).stripWhiteSpace();
+		if(line == "begin remote") {
+			inremote = true;
+		}
+		else if(line == "end remote") {
+			inremote = false;
+		}
+		else if(inremote && line.left(4) == "name") {
+			QString rname = line.mid(4).stripWhiteSpace();
+			if(rname == remote)
+				return true;
+		}
+	}
+	return false;
+}
+
+bool LircHandler::checkLircdConfValid(bool silent)
+{
+	QStringList contents;
+	QFile conf(LIRCD_CONF);
+	bool inremote = false;
+	
+	if(conf.exists()) {
+		readFromFile(conf, contents);
+		
+		for (QStringList::Iterator it = contents.begin(); it != contents.end(); ++it ) {
+			QString line = (*it).stripWhiteSpace();
+			if(line == "begin remote") {
+				inremote = true;
+			}
+			else if(line == "end remote") {
+				if(inremote)
+					return true;
+			}
+		}
+	}
+	
+	if(!silent) {
+		QMessageBox::information(NULL, QObject::tr("No remote"),
+				QObject::tr("No remotes have been learned.\nPlease go to the Learn tab\nand learn a remote."),
+				QMessageBox::Ok, QMessageBox::NoButton);
+	}
+	
+	return false;
+}
+
+bool LircHandler::readFromFile(QFile &file, QStringList &strlist) 
+{
+	if(file.open(IO_ReadOnly)) {
+		QTextStream in(&file);
+
+		strlist = QStringList::split('\n', in.read(), true);
+		file.close();
+		if(strlist.count() > 0)
+			strlist.remove(strlist.at(strlist.count() - 1));  // remove extra blank line
+	}
+	return true;
+}
+
+bool LircHandler::writeToFile(QFile &file, QStringList &strlist) 
+{
+	if(file.open(IO_WriteOnly | IO_Truncate)) {
+		QTextStream out(&file);
+		for (QStringList::Iterator it = strlist.begin(); it != strlist.end(); ++it ) {
+			out << (*it) << "\n";
+		}
+		file.close();
+	}
+	return true;
 }

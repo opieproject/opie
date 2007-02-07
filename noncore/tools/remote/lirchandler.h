@@ -18,12 +18,15 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #define LIRCHANDLER_H
 
 #include <sys/un.h>
+#include <qfile.h>
 
 class LircHandler
 {
 private:
 	bool connectLirc(void);
 	const char *readPacket();
+	bool readFromFile(QFile &file, QStringList &strlist);
+	bool writeToFile(QFile &file, QStringList &strlist);
 	
 	struct sockaddr_un addr;
 	int fd;
@@ -35,9 +38,14 @@ public:
 	bool startLircd(void);
 	bool stopLircd(void);
 	bool isLircdRunning(void);
+	void reloadLircdConf(void);
 	bool setupModules(void);
 	bool cleanupModules(void);
 	void disableIrDA(void);
+	void mergeRemoteConfig(const QString &newconfig);
+	void removeRemote(const QString &remotetodelete);
+	bool checkRemoteExists(const QString &remote);
+	bool checkLircdConfValid(bool silent);
 };
 
 #endif
