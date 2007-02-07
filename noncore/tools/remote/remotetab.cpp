@@ -51,6 +51,11 @@ RemoteTab::RemoteTab(QWidget *parent, const char *name):QWidget(parent,name)
 
 int RemoteTab::sendIR()
 {
+	LircHandler lh;
+	
+	if(!lh.checkLircdConfValid(false))
+		return 0;
+	
 	QString curr_remote = topGroup->getRemotesText();
 	if(curr_remote != "")
 		cfg->setGroup(curr_remote);
@@ -63,7 +68,6 @@ int RemoteTab::sendIR()
 	QString string = cfg->readEntry(button->name());
 	if(string != "") {
 		string+='\n';
-		LircHandler lh;
 		return lh.sendIR(string.latin1());
 	}
 	else {
