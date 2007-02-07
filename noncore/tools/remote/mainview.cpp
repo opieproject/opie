@@ -52,3 +52,8 @@ void MainView::updateRemotesList()
 	remote->updateRemotesList();
 	printf("MainView: got remotes changed signal\n");
 }
+
+void MainView::updateLearnTab()
+{
+	learn->updateRemotesList();
+}

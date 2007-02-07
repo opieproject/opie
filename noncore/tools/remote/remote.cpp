@@ -42,17 +42,27 @@ int main( int argc, char **argv )
 	QPEApplication a( argc, argv );
 	
 	LircHandler lh;
+	bool disablelirc = false;
 	
 	lh.disableIrDA();
 	lh.setupModules();
 	lh.startLircd();
-	if(!lh.isLircdRunning()) {
-		QMessageBox::critical(NULL, QObject::tr("Error"),
-				QObject::tr("Unable to start lircd"),
-				QMessageBox::Ok, QMessageBox::NoButton);
+	
+	if(lh.checkLircdConfValid(false)) {
+		if(!lh.isLircdRunning()) {
+			QMessageBox::critical(NULL, QObject::tr("Error"),
+					QObject::tr("Unable to start lircd"),
+					QMessageBox::Ok, QMessageBox::NoButton);
+			disablelirc = true;
+		}
+	}
+	else {
+		disablelirc = true;
 	}
 	
 	MainView w;
+	if(!disablelirc)
+		w.updateLearnTab();
 	a.setMainWidget( &w );
 	QPEApplication::showWidget( &w );
 	int result = a.exec();
