@@ -1,1 +1,26 @@
-<qt><h1>Opie-Remote Usage Instructions</h1><p>First, some definitions.  A Remote is a remote entry in an lircd.conf file, it represents one remote you want to emulate.  A Remote Layout is one entry in your ~/Settings/Remote.conf file.  It represents the buttons that you see on your screen.  Each button on a Remote Layout can be mapped to any button in a Remote.  This way you can have, for example, a vcr remote layout, in which all the play/pause/etc buttons are mapped to the buttons on your vcr's remote.  However, most VCR's don't have volume controls, so the volume buttons can be mapped to the volume buttons on your TV.</p><p>The first things you need the lirc and lirc-modules ipkgs.  If you installed this from an ipkg, they should already be there, thanks to the wonderful world of dependencies.  If not, get them.  The next thing you need is an lircd.conf file.  you can get these at <a href=http://www.lirc.org/>http://www.lirc.org/</a>.  Read the documentation there to figure out how to make your own, if one for your remote doesn't exist, or how to have multiple remotes in one lircd.conf file.  Once you have a good lircd.conf file, put it in /etc, kill the lircd daemon (if its running) and do a modprobe lirc_sir.  Then, run lircd again.</p><p>The next thing you want to do is to create a remote layout.  Go to the config tab, and enter a name for your remote layout in the pulldown menu. Dont use the name Remotes, as that could confuse the app.  Hopefully, that will be fixed soon.  after entering the name you want to use, press New, and then select the name again from the pulldown menu (another oddity that i hope to fix).  Then, press each button that you want to map, and a dialog should appear.  Select the remote and button that you want to use, and click OK.  Once you are done, go to the Remote tab, and select the new remote from the dropdown menu.  It should works fine.  If at any time you want to change a remote layout, go to the Config tab, select the layout from the dropdown menu, and change the buttons you want to change.</p><p>This is program is written and maintaned by Thomas (spiralman) Stephens. <a href=mailto:spiralman@softhome.net>spiralman@softhome.net</a>.  Or, look for me on #opie or #handhelds.org on irc.openprojects.net.</p></qt>");
+<qt><h1>Opie-Remote Usage Instructions</h1>
+
+<h2>Introduction</h2>
+
+<p>Opie-Remote allows you to learn the signals from infra-red remotes (for your TV, VCR, DVD player, etc.) and then set up a multi-function remote to control many different devices at once from your handheld.</p>
+
+<p>Each button on a Remote Layout (as seen on the main <b>Remote</b> tab) can be mapped to any button in a real remote.  This way you can have, for example, a VCR remote layout, in which all the play, pause, etc. buttons are mapped to the buttons on your VCR's remote.  However, most VCRs don't have volume controls, so the volume buttons can be mapped to the volume buttons on your TV.</p>
+
+<h2>Requirements</h2>
+
+<p>Opie-Remote requires LIRC, a handheld with supported infra-red hardware, and an appropriate LIRC driver. Your distribution should hopefully have ensured that LIRC and an appropriate driver have been installed along with this program.</p>
+
+<p>Note that currently Opie-Remote has only been tested on an iPAQ h3800 series handheld.</p>
+
+<h2>Setup</h2>
+
+<p>First, you will need to record the signals from a real remote into Opie-Remote. Go to the <b>Learn</b> tab, tap <b>Add</b> and follow the instructions.</p>
+
+<p>Secondly you need to create a remote layout. Go to the <b>Config</b> tab, and enter a name for your remote layout in the pulldown menu, then tap <b>New</b>. Then, press each button that you want to map, and a dialog should appear.  Select the remote and button that you want to use, and tap <b>OK</b>. Once you are done, go to the <b>Remote</b> tab, and select the new remote from the dropdown menu.</p>
+
+<h2>About Opie-Remote</h2>
+
+<p>Please direct all support enquiries to the Opie users mailing list (<a href=mailto:opie@handhelds.org>opie@handhelds.org</a>). Developers can send patches to <a href=mailto:opie-devel@handhelds.org>opie-devel@handhelds.org</a>.</p>
+
+<p>Maintained by: Paul Eggleton<br>
+Originally written by: Thomas Stephens</p></qt>
