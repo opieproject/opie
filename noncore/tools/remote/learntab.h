@@ -40,9 +40,9 @@ class LearnTab : public QWidget
 public:
 	LearnTab(QWidget *parent=0, const char *name=0);
 public slots:
-	void add();
-	void edit();
+	void learn();
 	void del();
+	void updateRemotesList();
 private:
 	QListBox *remotesBox;
 };

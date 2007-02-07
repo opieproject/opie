@@ -21,46 +21,59 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 LearnTab::LearnTab(QWidget *parent, const char *name):QWidget(parent,name)
 {
-    LircHandler lh;
-
     QVBoxLayout *layout = new QVBoxLayout(this);
     QHBoxLayout *bottomLayout = new QHBoxLayout(this);
 
     layout->insertSpacing(0,5);
     remotesBox = new QListBox(this, "remotesBox");
     layout->insertWidget(0, remotesBox, 1);
-    remotesBox->insertStringList(lh.getRemotes());
 
     layout->insertSpacing(-1,5);
     layout->insertLayout(-1, bottomLayout);
     layout->insertSpacing(-1,5);
 
-    QPushButton *add = new QPushButton("Add", this, "add");
+    QPushButton *learn = new QPushButton(tr("Learn"), this, "learn");
     bottomLayout->insertSpacing(-1, 5);
-    bottomLayout->insertWidget(-1, add);
+    bottomLayout->insertWidget(-1, learn);
     bottomLayout->insertSpacing(-1, 5);
-    QPushButton *edit = new QPushButton("Edit", this, "edit");
-    bottomLayout->insertWidget(-1, edit);
-    bottomLayout->insertSpacing(-1, 5);
-    QPushButton *del = new QPushButton("Delete", this, "delete");
+    QPushButton *del = new QPushButton(tr("Delete"), this, "delete");
     bottomLayout->insertWidget(-1, del);
     bottomLayout->insertSpacing(-1, 5);
 
-    connect(add, SIGNAL(clicked()), this, SLOT(add()) );
-    connect(edit, SIGNAL(clicked()), this, SLOT(edit()) );
+    connect(learn, SIGNAL(clicked()), this, SLOT(learn()) );
     connect(del, SIGNAL(clicked()), this, SLOT(del()) );
 }
 
-void LearnTab::add()
+void LearnTab::learn()
 {
-    printf("LearnTab::add: add pressed\n");
-    RecordDialog *dialog = new RecordDialog(this);
-    QPEApplication::showDialog( dialog );
+	printf("LearnTab::learn: learn pressed\n");
+	RecordDialog *dialog = new RecordDialog(this);
+	dialog->showMaximized();
+	dialog->exec();
+	delete dialog;
+	updateRemotesList();
 }
 
-void LearnTab::edit()
-{}
-
 void LearnTab::del()
-{}
+{
+	QString remotename = remotesBox->currentText();
+	
+	if(remotename != "") {
+		if (QMessageBox::warning(this, tr("Delete"), 
+					tr("Are you sure you want\n to delete %1?").arg(remotename),
+					QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes) {
+			LircHandler lh;
+			lh.removeRemote(remotename);
+			lh.reloadLircdConf();
+			updateRemotesList();
+		}
+	}
+}
 
+void LearnTab::updateRemotesList()
+{
+	LircHandler lh;
+	remotesBox->clear();
+	if(lh.checkLircdConfValid(true))
+		remotesBox->insertStringList(lh.getRemotes());
+}
