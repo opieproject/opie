@@ -39,6 +39,7 @@
 #include "odevice_genuineintel.h"
 #include "odevice_htc.h"
 #include "odevice_motorola_ezx.h"
+#include "odevice_palm.h"
 
 /* QT */
 #include <qapplication.h>
@@ -148,6 +149,7 @@ ODevice *ODevice::inst()
                     else if ( line.contains( "Tradesquare.NL", false ) ) dev = new Internal::Beagle();
                     else if ( line.contains( "HTC", false ) ) dev = new Internal::HTC();
                     else if ( line.contains( "Motorola", false ) ) dev = new Internal::Motorola_EZX();
+                    else if ( line.contains( "Palm", false ) ) dev = new Internal::Palm();
 
                     else qWarning( "ODevice() - unknown hardware - using default." );
                     break;

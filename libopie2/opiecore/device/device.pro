@@ -11,7 +11,8 @@ HEADERS    += device/odevice.h          \
               device/odevice_yopy.h  \
               device/odevice_mypal.h \
               device/odevice_htc.h \
-              device/odevice_motorola_ezx.h
+              device/odevice_motorola_ezx.h \
+              device/odevice_palm.h
 
 SOURCES    += device/odevice.cpp        \
               device/odevicebutton.cpp  \
@@ -26,5 +27,6 @@ SOURCES    += device/odevice.cpp        \
               device/odevice_yopy.cpp \
               device/odevice_mypal.cpp \
               device/odevice_htc.cpp \
-              device/odevice_motorola_ezx.cpp
+              device/odevice_motorola_ezx.cpp \
+              device/odevice_palm.cpp
 

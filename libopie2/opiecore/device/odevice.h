@@ -138,6 +138,12 @@ enum OModel {
     Model_Motorola_All  = ( Model_Motorola | 0xffff ),
     Model_Motorola_EZX  = ( Model_Motorola | 0x0001 ),
 
+    Model_Palm          = ( 10 << 16),
+    Model_Palm_All      = ( Model_Palm | 0xffff ),
+    Model_Palm_LD       = ( Model_Palm | 0x0001 ),
+    Model_Palm_TX       = ( Model_Palm | 0x0002 ),
+    Model_Palm_Z72      = ( Model_Palm | 0x0003 ),
+
 };
 
 /**
@@ -156,6 +162,7 @@ enum OVendor {
     Vendor_Asus,
     Vendor_HTC,
     Vendor_Motorola,
+    Vendor_Palm,
 };
 
 /**
