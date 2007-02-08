@@ -107,13 +107,13 @@ struct z_button z_buttons_c700 [] = {
 
     { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Hinge1"),
     "devicebuttons/z_hinge1",
-    "QPE/Rotation", "rotateDefault()",0},
+    "QPE/Rotation", "rotateDefault()",0,0},
     { Qt::Key_F16, QT_TRANSLATE_NOOP("Button", "Hinge2"),
     "devicebuttons/z_hinge2",
-    "QPE/Rotation", "rotateDefault()",0},
+    "QPE/Rotation", "rotateDefault()",0,0},
     { Qt::Key_F17, QT_TRANSLATE_NOOP("Button", "Hinge3"),
     "devicebuttons/z_hinge3",
-    "QPE/Rotation", "rotateDefault()",0},
+    "QPE/Rotation", "rotateDefault()",0,0},
 };
 
 struct z_button z_buttons_6000 [] = {
@@ -139,8 +139,8 @@ struct z_button z_buttons_6000 [] = {
     "opiemail", "newMail()" },
     { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Rotate Button"),
     "devicebuttons/z_rotate",
-    0,
-    "QPE/Rotation", "rotateDefault()" },
+    0, "QPE/Rotation",
+    "rotateDefault()", 0 },
     { Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"),
     "devicebuttons/z_hinge3",
     "QPE/VMemo", "toggleRecord()",

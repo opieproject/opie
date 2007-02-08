@@ -107,13 +107,13 @@ struct htc_button htc_buttons_universal [] = {
 
     { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Hinge1"),
     "devicebuttons/z_hinge1",
-    "QPE/Rotation", "rotateDefault()",0},
+    "QPE/Rotation", "rotateDefault()",0,0},
     { Qt::Key_F16, QT_TRANSLATE_NOOP("Button", "Hinge2"),
     "devicebuttons/z_hinge2",
-    "QPE/Rotation", "rotateDefault()",0},
+    "QPE/Rotation", "rotateDefault()",0,0},
     { Qt::Key_F17, QT_TRANSLATE_NOOP("Button", "Hinge3"),
     "devicebuttons/z_hinge3",
-    "QPE/Rotation", "rotateDefault()",0},
+    "QPE/Rotation", "rotateDefault()",0,0},
 };
 
 
@@ -355,7 +355,7 @@ OLedState HTC::ledState( OLed which ) const
         return Led_Off;
 }
 
-bool HTC::setLedState( OLed which, OLedState st )
+bool HTC::setLedState( OLed, OLedState )
 {
     qDebug( "HTC::setLedState: ODevice handling not yet implemented" );
     return false;
@@ -430,6 +430,8 @@ Transformation HTC::rotation() const
             if ( hs == CASE_PORTRAIT ) rot = Rot0;
             else if ( hs == CASE_UNKNOWN ) rot = Rot270;
         }
+        break;
+        default:
         break;
     }
 

@@ -127,47 +127,6 @@ void Motorola_EZX::initButtons()
         return;
 
     d->m_buttons = new QValueList <ODeviceButton>;
-
-    struct ezx_button * ezx_buttons;
-    int buttoncount;
-
-/*
-
-    switch ( d->m_model )
-    {
-        case Model_Motorola_EZX_SL6000:
-            pezx_buttons = ezx_buttons_6000;
-            buttoncount = ARRAY_SIZE(ezx_buttons_6000);
-            break;
-        case Model_Motorola_EZX_SLC3100: // fallthrough
-        case Model_Motorola_EZX_SLC3000: // fallthrough
-        case Model_Motorola_EZX_SLC1000: // fallthrough
-        case Model_Motorola_EZX_SLC7x0:
-            if ( isQWS( ) )
-            {
-                addPreHandler(this);
-            }
-            pezx_buttons = ezx_buttons_c700;
-            buttoncount = ARRAY_SIZE(ezx_buttons_c700);
-            break;
-        default:
-            pezx_buttons = ezx_buttons;
-            buttoncount = ARRAY_SIZE(ezx_buttons);
-            break;
-    }
-
-    for ( int i = 0; i < buttoncount; i++ ) {
-        struct ezx_button *zb = pezx_buttons + i;
-        ODeviceButton b;
-
-        b.setKeycode( zb->code );
-        b.setUserText( QObject::tr( "Button", zb->utext ));
-        b.setPixmap( OResource::loadPixmap( zb->pix ));
-        b.setFactoryPresetPressedAction( OQCopMessage( makeChannel ( zb->fpressedservice ), zb->fpressedaction ));
-        b.setFactoryPresetHeldAction( OQCopMessage( makeChannel ( zb->fheldservice ), zb->fheldaction ));
-        d->m_buttons->append( b );
-    }
-*/
     reloadButtonMapping();
 }
 
@@ -207,7 +166,7 @@ OLedState Motorola_EZX::ledState( OLed which ) const
         return Led_Off;
 }
 
-bool Motorola_EZX::setLedState( OLed which, OLedState st )
+bool Motorola_EZX::setLedState( OLed, OLedState )
 {
      // Currently not supported
     qDebug( "Motorola_EZX::setLedState: ODevice handling not yet implemented" );
@@ -280,7 +239,7 @@ bool Motorola_EZX::suspend() {
     bool res = false;
     QCopChannel::send( "QPE/System", "aboutToSuspend()" );
 
-    struct timeval tvs, tvn;
+    struct timeval tvs;
     ::gettimeofday ( &tvs, 0 );
 
     ::sync(); // flush fs caches

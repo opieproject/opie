@@ -89,7 +89,7 @@ struct palm_button palm_buttons [] = {
     { Model_Palm_LD,
       Qt::Key_F8, QT_TRANSLATE_NOOP( "Button", "Rotate Button" ),
         "devicebuttons/palm_rotate",
-        "QPE/Rotation", "flip()",0},
+        "QPE/Rotation", "flip()",0,0},
 };
 
 void Palm::init(const QString& cpu_info)
@@ -218,6 +218,8 @@ bool Palm::suspend()
             QCopChannel::send( "QPE/System", "returnFromSuspend()" );
         }
         break;
+	default:
+	break;
     }
 
     return res;
