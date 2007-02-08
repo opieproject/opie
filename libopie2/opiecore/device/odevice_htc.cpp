@@ -186,14 +186,14 @@ void HTC::init(const QString& cpu_info)
         case Model_HTC_Alpine:
         case Model_HTC_Beetles:
         case Model_HTC_Apache:
-            m_backlightdev = "/sys/class/backlight/pxa2xx-fb/";
+            m_backlightdev = "/sys/class/backlight/corgi-bl/";
         break;
         case Model_HTC_Blueangel:
         case Model_HTC_Himalaya:
             m_backlightdev = "/sys/class/backlight/w100fb/";
         break;
         default:
-            m_backlightdev = "/sys/class/backlight/pxafb/";
+            m_backlightdev = "/sys/class/backlight/corgi-bl/";
     }
 
     // set initial rotation
@@ -300,7 +300,7 @@ void HTC::buzzer( int sound )
     // sound capabilities.. Otherwise we expect to have the buzzer
     // device..
     if ( snd && snd->isFinished() ){
-        changeMixerForAlarm( 0, "/dev/sound/mixer", snd );
+        changeMixerForAlarm( 0, "/dev/mixer", snd );
         snd->play();
     } else if( !snd ) {
         int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
