@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qrichtext.cpp,v 1.5 2007-01-19 01:12:39 erik Exp $
+** $Id: qrichtext.cpp,v 1.6 2007-02-08 01:45:16 erik Exp $
 **
 ** Implementation of the internal Qt classes dealing with rich text
 **
@@ -189,8 +189,11 @@ QTextDeleteCommand::~QTextDeleteCommand()
 QTextCursor *QTextDeleteCommand::execute( QTextCursor *c )
 {
     QTextParagraph *s = doc ? doc->paragAt( id ) : parag;
-    if ( !s ) {
+    if ( !s && doc ) {
 	owarn << "can't locate parag at " << id << ", last parag: " << doc->lastParagraph()->paragId() << "" << oendl; 
+	return 0;
+    } else if ( !doc ) {
+	owarn << "No valid doc" << oendl;
 	return 0;
     }
 
@@ -217,8 +220,11 @@ QTextCursor *QTextDeleteCommand::execute( QTextCursor *c )
 QTextCursor *QTextDeleteCommand::unexecute( QTextCursor *c )
 {
     QTextParagraph *s = doc ? doc->paragAt( id ) : parag;
-    if ( !s ) {
+    if ( !s && doc ) {
 	owarn << "can't locate parag at " << id << ", last parag: " << doc->lastParagraph()->paragId() << "" << oendl; 
+	return 0;
+    } else if ( !doc ) {
+	owarn << "No valid doc" << oendl;
 	return 0;
     }
 
@@ -233,6 +239,9 @@ QTextCursor *QTextDeleteCommand::unexecute( QTextCursor *c )
 	c->setIndex( index );
 	for ( int i = 0; i < (int)text.size(); ++i )
 	    c->gotoNextLetter();
+    } else {
+	owarn << "No valid cursor" << oendl;
+	return 0;
     }
 
     if ( !styleInformation.isEmpty() ) {
@@ -1392,24 +1401,35 @@ struct Q_EXPORT QTextDocumentTag {
 };
 
 
-#define NEWPAR       do{ if ( !hasNewPar) { \
-		    if ( !textEditMode && curpar && curpar->length()>1 && curpar->at( curpar->length()-2)->c == QChar_linesep ) \
-			curpar->remove( curpar->length()-2, 1 ); \
-		    curpar = createParagraph( this, curpar, curpar->next() ); styles.append( vec ); vec = 0;} \
-		    hasNewPar = TRUE; \
-		    curpar->rtext = TRUE;  \
-		    curpar->align = curtag.alignment; \
-		    curpar->lstyle = curtag.liststyle; \
-		    curpar->litem = ( curtag.style->displayMode() == QStyleSheetItem::DisplayListItem ); \
-		    curpar->str->setDirection( (QChar::Direction)curtag.direction ); \
-		    space = TRUE; \
-		    delete vec; vec = new QPtrVector<QStyleSheetItem>( (uint)tags.count() + 1); \
-		    int i = 0; \
-		    for ( QValueStack<QTextDocumentTag>::Iterator it = tags.begin(); it != tags.end(); ++it ) \
-			vec->insert( i++, (*it).style ); \
-		    vec->insert( i, curtag.style ); \
-		    }while(FALSE)
-
+#define NEWPAR do { \
+                   if ( !hasNewPar) { \
+                       if ( !curpar ) { \
+                           owarn << "no current paragraph" << oendl; \
+                           return; \
+                       } \
+                       if ( !textEditMode && curpar && curpar->length()>1 && curpar->at( curpar->length()-2)->c == QChar_linesep ) \
+                           curpar->remove( curpar->length()-2, 1 ); \
+                       curpar = createParagraph( this, curpar, curpar->next() ); styles.append( vec ); \
+                       if ( !curpar ) { \
+                           owarn << "failed in creating a new paragraph" << oendl; \
+                           return; \
+                       } \
+                       vec = 0; \
+                   } \
+                   hasNewPar = TRUE; \
+                   curpar->rtext = TRUE;  \
+                   curpar->align = curtag.alignment; \
+                   curpar->lstyle = curtag.liststyle; \
+                   curpar->litem = ( curtag.style->displayMode() == QStyleSheetItem::DisplayListItem ); \
+                   curpar->str->setDirection( (QChar::Direction)curtag.direction ); \
+                   space = TRUE; \
+                   delete vec; \
+                   vec = new QPtrVector<QStyleSheetItem>( (uint)tags.count() + 1); \
+                   int i = 0; \
+                   for ( QValueStack<QTextDocumentTag>::Iterator it = tags.begin(); it != tags.end(); ++it ) \
+                       vec->insert( i++, (*it).style ); \
+                   vec->insert( i, curtag.style ); \
+               } while ( FALSE )
 
 void QTextDocument::setRichText( const QString &text, const QString &context )
 {
@@ -1895,8 +1915,11 @@ void QTextDocument::setRichTextMarginsInternal( QPtrList< QPtrVector<QStyleSheet
 	}
 
 	int i, mar;
-	QStyleSheetItem* mainStyle = curStyle->size() ? (*curStyle)[curStyle->size()-1] : 0;
-	if ( mainStyle && mainStyle->displayMode() == QStyleSheetItem::DisplayListItem )
+	QStyleSheetItem* mainStyle = (*curStyle)[curStyle->size()-1];
+	if ( !mainStyle )
+	    return;
+
+	if ( mainStyle->displayMode() == QStyleSheetItem::DisplayListItem )
 	    stylesPar->setListItem( TRUE );
 	int numLists = 0;
 	for ( i = 0; i < (int)curStyle->size(); ++i ) {
@@ -5341,7 +5364,7 @@ int QTextFormatterBreakWords::format( QTextDocument *doc, QTextParagraph *parag,
 	if ( c )
 	    lastChr = c->c;
 	// ### next line should not be needed
-	if ( painter )
+	if ( c && painter )
 	    c->format()->setPainter( painter );
 	c = &string->at( i );
 	c->rightToLeft = FALSE;

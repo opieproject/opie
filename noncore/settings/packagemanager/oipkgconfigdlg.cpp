@@ -436,7 +436,9 @@ void OIpkgConfigDlg::initData()
     }
 
     // Get Ipkg execution options
-    int options = m_ipkg->ipkgExecOptions();
+    int options = 0;
+    if ( m_ipkg )
+        options = m_ipkg->ipkgExecOptions();
     if ( options & FORCE_DEPENDS )
         m_optForceDepends->setChecked( true );
     if ( options & FORCE_REINSTALL )
@@ -450,7 +452,7 @@ void OIpkgConfigDlg::initData()
     if ( options & FORCE_VERBOSE_WGET )
         m_optVerboseWget->setChecked( true );
 
-    m_optVerboseIpkg->setCurrentItem( m_ipkg->ipkgExecVerbosity() );
+    m_optVerboseIpkg->setCurrentItem( ( m_ipkg ? m_ipkg->ipkgExecVerbosity() : 0 ) );
 }
 
 void OIpkgConfigDlg::slotServerSelected( int index )

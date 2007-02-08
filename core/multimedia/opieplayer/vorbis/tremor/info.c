@@ -97,8 +97,8 @@ void vorbis_comment_clear(vorbis_comment *vc){
     if(vc->user_comments)_ogg_free(vc->user_comments);
 	if(vc->comment_lengths)_ogg_free(vc->comment_lengths);
     if(vc->vendor)_ogg_free(vc->vendor);
+    memset(vc,0,sizeof(*vc));
   }
-  memset(vc,0,sizeof(*vc));
 }
 
 /* blocksize 0 is guaranteed to be short, 1 is guarantted to be long.

@@ -295,6 +295,9 @@ UUIDVector OTSDPAttribute::getAllUUIDs() {
           subAttributes = getAlternative();
       }
 
+      if (!subAttributes)
+          return 0;
+
       int os;
       for( unsigned int i = 0; i < subAttributes->count(); i++ ) {
         UUIDVector subUUIDs = (*subAttributes)[i]->getAllUUIDs();

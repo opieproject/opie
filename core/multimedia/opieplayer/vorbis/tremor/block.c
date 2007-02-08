@@ -226,8 +226,10 @@ void vorbis_dsp_clear(vorbis_dsp_state *v){
     private_state *b=(private_state *)v->backend_state;
 
     if(v->pcm){
-      for(i=0;i<vi->channels;i++)
-	if(v->pcm[i])_ogg_free(v->pcm[i]);
+      if (vi) {
+	for(i=0;i<vi->channels;i++)
+	  if(v->pcm[i])_ogg_free(v->pcm[i]);
+      }
       _ogg_free(v->pcm);
       if(v->pcmret)_ogg_free(v->pcmret);
     }
