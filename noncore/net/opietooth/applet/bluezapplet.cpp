@@ -138,6 +138,10 @@ namespace OpieTooth {
                 btDevice = new Device( "/dev/ttyS1", "bcsp", "921600" );
                 break;
 #endif
+            case Model_HTC_Universal:
+                btDevice = new Device( "/dev/ttyS1", "texas", "115200" );
+                break;
+
             case Model_iPAQ_H22xx:
                 btDevice = new Device( "/dev/tts/3", "any", "921600" );
                 break;
