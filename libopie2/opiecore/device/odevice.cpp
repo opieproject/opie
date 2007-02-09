@@ -66,6 +66,7 @@
 #include <unistd.h>
 #ifndef QT_NO_SOUND
 #include <linux/soundcard.h>
+#include <errno.h>
 #endif
 
 namespace Opie {
@@ -749,6 +750,8 @@ void ODevice::remPreHandler(QWSServer::KeyboardFilter*aFilter)
 /**
  * @internal
  *
+ * Returns the volume back to the user preference after an alarm is finished.
+ *
  * @see changeMixerForAlarm
  */
 void ODevice::playingStopped() {
@@ -757,7 +760,9 @@ void ODevice::playingStopped() {
 
 #ifndef QT_NO_SOUND
     if ( d->m_sound >= 0 ) {
-        ::ioctl ( d->m_sound, MIXER_WRITE( d->m_mixer ), &d->m_vol );
+        if (::ioctl ( d->m_sound, MIXER_WRITE( d->m_mixer ), &d->m_vol ) == -1)
+            qWarning( "ODevice::playingStopped() - "
+		      "unable to change volume back (%s)", strerror( errno ) );
         ::close ( d->m_sound );
     }
 #endif

@@ -380,7 +380,9 @@ void Zaurus::buzzer( int sound )
         int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
 
         if ( fd >= 0 ) {
-            ::ioctl ( fd, SHARP_BUZZER_MAKESOUND, sound );
+            if (::ioctl ( fd, SHARP_BUZZER_MAKESOUND, sound ) == -1)
+                qWarning( "HTC::buzzer() - Couldn't make the buzzer buzz (%s)",
+			  strerror( errno ) );
             ::close ( fd );
         }
 
