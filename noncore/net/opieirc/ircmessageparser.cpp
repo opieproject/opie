@@ -593,18 +593,33 @@ void IRCMessageParser::parseNumericalNames(IRCMessage *message) {
             int flag = 0;
             QString nick;
             /* Parse person flags */
-            if (flagch == '@' || flagch == '+' || flagch=='%' || flagch == '*') {
+            if (flagch == '~' || flagch == '&' || flagch == '@' || flagch == '+' ||
+                flagch=='%' || flagch == '*') {
 
                 nick = temp.right(temp.length()-1);
                 switch (flagch) {
-                    case '@': flag = IRCChannelPerson::PERSON_FLAG_OP;     break;
-                    case '+': flag = IRCChannelPerson::PERSON_FLAG_VOICE;  break;
-                    case '%': flag = IRCChannelPerson::PERSON_FLAG_HALFOP; break;
-                    default : flag = 0; break;
+                    /**
+                     * @note '~' and `&' are extensions of the unrealircd irc
+                     * daemon. This app can't see users w/out checking for these
+                     * chars.
+                     */
+                    case '~':
+                    case '&':
+                    case '@':
+                        flag = IRCChannelPerson::PERSON_FLAG_OP;
+                        break;
+                    case '+':
+                        flag = IRCChannelPerson::PERSON_FLAG_VOICE;
+                        break;
+                    case '%':
+                        flag = IRCChannelPerson::PERSON_FLAG_HALFOP;
+                        break;
+                    default :
+                        flag = 0;
+                        break;
                 }
-            } else {
+            } else
                 nick = temp;
-            }
 
             IRCPerson *person = m_session->getPerson(nick);
             if (person == 0) {
@@ -616,9 +631,9 @@ void IRCMessageParser::parseNumericalNames(IRCMessage *message) {
             chan_person->setFlags(flag);
             channel->addPerson(chan_person);
         }
-    } else {
-        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Server message with unknown channel")));
-    }
+    } else
+        emit outputReady(IRCOutput(OUTPUT_ERROR,
+                                   tr("Server message with unknown channel")));
 }
 
 void IRCMessageParser::parseNumericalEndOfNames(IRCMessage *message) {
