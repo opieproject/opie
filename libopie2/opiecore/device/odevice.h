@@ -63,39 +63,41 @@ enum OModel {
     Model_iPAQ_All      = ( Model_iPAQ | 0xffff ),
     Model_iPAQ_H31xx    = ( Model_iPAQ | 0x0001 ),
     Model_iPAQ_H36xx    = ( Model_iPAQ | 0x0002 ),
-    Model_iPAQ_H37xx    = ( Model_iPAQ | 0x0003 ),
-    Model_iPAQ_H38xx    = ( Model_iPAQ | 0x0004 ),
-    Model_iPAQ_H39xx    = ( Model_iPAQ | 0x0005 ),
-    Model_iPAQ_H5xxx    = ( Model_iPAQ | 0x0006 ),
-    Model_iPAQ_H22xx    = ( Model_iPAQ | 0x0007 ),
-    Model_iPAQ_H191x    = ( Model_iPAQ | 0x0008 ),
-    Model_iPAQ_H1940    = ( Model_iPAQ | 0x0009 ),
-    Model_iPAQ_HX4700   = ( Model_iPAQ | 0x000A ),
-    Model_iPAQ_H4xxx    = ( Model_iPAQ | 0x000b ),
-    Model_Jornada       = ( 6 << 16 ),
+    Model_iPAQ_H37xx    = ( Model_iPAQ | 0x0004 ),
+    Model_iPAQ_H38xx    = ( Model_iPAQ | 0x0008 ),
+    Model_iPAQ_H39xx    = ( Model_iPAQ | 0x0010 ),
+    Model_iPAQ_H5xxx    = ( Model_iPAQ | 0x0020 ),
+    Model_iPAQ_H22xx    = ( Model_iPAQ | 0x0040 ),
+    Model_iPAQ_H191x    = ( Model_iPAQ | 0x0080 ),
+    Model_iPAQ_H1940    = ( Model_iPAQ | 0x0100 ),
+    Model_iPAQ_HX4700   = ( Model_iPAQ | 0x0200 ),
+    Model_iPAQ_H4xxx    = ( Model_iPAQ | 0x0400 ),
+
+    Model_Jornada       = ( 3 << 17 ),
+
     Model_Jornada_56x   = ( Model_Jornada | 0x0001 ),
     Model_Jornada_720   = ( Model_Jornada | 0x0002 ),
-    Model_Jornada_820   = ( Model_Jornada | 0x0003 ),
+    Model_Jornada_820   = ( Model_Jornada | 0x0004 ),
 
     Model_Zaurus        = ( 2 << 16 ),
 
     Model_Zaurus_SL5000 = ( Model_Zaurus | 0x0001 ),
     Model_Zaurus_SL5500 = ( Model_Zaurus | 0x0002 ),
-    Model_Zaurus_SLA300 = ( Model_Zaurus | 0x0003 ),
-    Model_Zaurus_SLB600 = ( Model_Zaurus | 0x0004 ),
-    Model_Zaurus_SLC7x0 = ( Model_Zaurus | 0x0005 ),
-    Model_Zaurus_SL6000 = ( Model_Zaurus | 0x0006 ),
-    Model_Zaurus_SLC3000 = ( Model_Zaurus | 0x0007 ),
-    Model_Zaurus_SLC1000 = ( Model_Zaurus | 0x0008 ),
-    Model_Zaurus_SLC3100 = ( Model_Zaurus | 0x0009 ),
+    Model_Zaurus_SLA300 = ( Model_Zaurus | 0x0004 ),
+    Model_Zaurus_SLB600 = ( Model_Zaurus | 0x0008 ),
+    Model_Zaurus_SLC7x0 = ( Model_Zaurus | 0x0010 ),
+    Model_Zaurus_SL6000 = ( Model_Zaurus | 0x0020 ),
+    Model_Zaurus_SLC3000 = ( Model_Zaurus | 0x0040 ),
+    Model_Zaurus_SLC1000 = ( Model_Zaurus | 0x0080 ),
+    Model_Zaurus_SLC3100 = ( Model_Zaurus | 0x0100 ),
 
     Model_SIMpad        = ( 3 << 16 ),
 
     Model_SIMpad_All    = ( Model_SIMpad | 0xffff ),
     Model_SIMpad_CL4    = ( Model_SIMpad | 0x0001 ),
     Model_SIMpad_SL4    = ( Model_SIMpad | 0x0002 ),
-    Model_SIMpad_SLC    = ( Model_SIMpad | 0x0003 ),
-    Model_SIMpad_TSinus = ( Model_SIMpad | 0x0004 ),
+    Model_SIMpad_SLC    = ( Model_SIMpad | 0x0004 ),
+    Model_SIMpad_TSinus = ( Model_SIMpad | 0x0008 ),
 
     Model_Ramses        = ( 4 << 16 ),
 
@@ -108,7 +110,7 @@ enum OModel {
     Model_Yopy_All      = ( Model_Yopy | 0xffff ),
     Model_Yopy_3000     = ( Model_Yopy | 0x0001 ),
     Model_Yopy_3500     = ( Model_Yopy | 0x0002 ),
-    Model_Yopy_3700     = ( Model_Yopy | 0x0003 ),
+    Model_Yopy_3700     = ( Model_Yopy | 0x0004 ),
 
     Model_Beagle        = ( 6 << 16 ),
 
@@ -122,27 +124,30 @@ enum OModel {
     Model_MyPal_All     = ( Model_MyPal | 0xffff ),
     Model_MyPal_620     = ( Model_MyPal | 0x0001 ),
     Model_MyPal_716     = ( Model_MyPal | 0x0002 ),
-    Model_MyPal_730     = ( Model_MyPal | 0x0003 ),
+    Model_MyPal_730     = ( Model_MyPal | 0x0004 ),
 
     Model_HTC           = ( 9 << 16 ),
+
     Model_HTC_All       = ( Model_HTC | 0xffff ),
     Model_HTC_Universal = ( Model_HTC | 0x0001 ),
     Model_HTC_Alpine    = ( Model_HTC | 0x0002 ),
-    Model_HTC_Apache    = ( Model_HTC | 0x0003 ),
-    Model_HTC_Beetles   = ( Model_HTC | 0x0004 ),
-    Model_HTC_Blueangel = ( Model_HTC | 0x0005 ),
-    Model_HTC_Himalaya  = ( Model_HTC | 0x0006 ),
-    Model_HTC_Magician  = ( Model_HTC | 0x0007 ),
+    Model_HTC_Apache    = ( Model_HTC | 0x0004 ),
+    Model_HTC_Beetles   = ( Model_HTC | 0x0008 ),
+    Model_HTC_Blueangel = ( Model_HTC | 0x0010 ),
+    Model_HTC_Himalaya  = ( Model_HTC | 0x0020 ),
+    Model_HTC_Magician  = ( Model_HTC | 0x0040 ),
 
-    Model_Motorola      = ( 9 << 17 ),
+    Model_Motorola      = ( 2 << 17 ),
+
     Model_Motorola_All  = ( Model_Motorola | 0xffff ),
     Model_Motorola_EZX  = ( Model_Motorola | 0x0001 ),
 
-    Model_Palm          = ( 10 << 16),
+    Model_Palm          = ( 1 << 17),
+
     Model_Palm_All      = ( Model_Palm | 0xffff ),
     Model_Palm_LD       = ( Model_Palm | 0x0001 ),
     Model_Palm_TX       = ( Model_Palm | 0x0002 ),
-    Model_Palm_Z72      = ( Model_Palm | 0x0003 ),
+    Model_Palm_Z72      = ( Model_Palm | 0x0004 ),
 
 };
 
