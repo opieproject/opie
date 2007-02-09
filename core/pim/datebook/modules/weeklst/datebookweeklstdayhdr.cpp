@@ -14,7 +14,7 @@ DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool /* onM */,
     char day=wdays[d.dayOfWeek()-1];
 
     //dont use dayOfWeek() to save space !
-    label->setText( QString(QObject::tr(QString(QChar(day)))) + " " +QString::number(d.day()) );
+    label->setText( QString(QString(QChar(day))) + " " +QString::number(d.day()) );
 
      add->setText("+");
 
