@@ -3,14 +3,57 @@
 	
 	New Features
 	------------
+	* Improved support for some newer iPAQ models (S.Banko, R.Wagner, E.Hovland, P.Sokolovsky)
+	* Partial support for the Palm LD, TX and Zire 72 handhelds (Alex Osborne, Cristiano, Sergey Lapin, Jan Herman, Aaron11)
+	* Backlight support for iPAQ handhelds using 2.6 kernel (psokolovsky, unknown)
+	* Improved HTC Universal handheld support (GoXbox Live)
+	* Opie-Remote: added integrated remote learning and now completely sets up LIRC for you (bluelightning)
+	* Added video4linux camera app from Qtopia 2, needs more work (ljp)
+	* Multikey: added Hebrew keymap (Skliarouk Arieh)
+	* Multikey: added Italian keymap (Giorgio Padrin)
 
 	Fixed Bugs
 	----------
-	* n.a.	- Improved iPAQ support in ODevice and low-level applets (S.Banko, R.Wagner, E.Hovland, P.Sokolovsky)
+	* n.a.  - Many, many code fixes that should improve Opie stability (ehovland)
+	* n.a.  - Fixed many bugs in bluetooth & OBEX code (korovkin)
+	* #1150 - Fix adding global categories in all PIM applications (bluelightning)
+	* #1553 - AdvancedFM: Implement File Info function without relying on stat(1) command (bluelightning)
+	* #1760 - Today: correctly sort birthdays and anniversaries (bluelightning)
+	* #1597 - Clock: Alarm dialog: increase font size (bluelightning)
+	* #1616 - Clock: Alarm dialog: fix bad icon scaling (bluelightning)
+	* #1598 - Clock: Alarm dialog: add separate large snooze button with default snooze time (bluelightning)
+	* #1618 - DocTab Settings: correctly load current doctab enabled/disabled status (bluelightning)
+	* #1547 - Todo: don't prompt for template if no templates are defined (bluelightning)
+	* #1753 - Todo: fix writing invalid XML when todo recurrence is enabled (bluelightning)
+	* #1351 - Datebook: show events from visible days of previous/next month in month view (bluelightning)
+	* #1702 - Datebook: Fix incorrect translated day name abbreviations in week list view (antonus, sgourichon)
+	* n.a.  - Date/Time Settings: add option to prompt for date/time on every restart (bluelightning)
+	* n.a.  - Date/Time Settings: show a warning if timezone file for selected system time zone is missing (bluelightning)
+	* #1580 - Date/Time Settings: Use pool.ntp.org servers for time sync (ehovland)
+	* n.a.  - OpieRec: show size in bytes/kb/mb of recordings (bluelightning)
+	* n.a.  - OpieRec: several minor usability fixes (bluelightning)
+	* n.a.  - OpieRec: default the stereo option to off instead of on (bluelightning)
+	* #1836 - Button Settings: fix incorrect button listing on some iPAQs (ehovland)
+	* #1830 - Security: fix "On Resume" option to actually control showing authentication on resume (bluelightning)
+	* #1680 - Security: rework PIN dialog to work with number keys and joypad (bluelightning)
+	* #1373 - TinyKATE: make OK/cancel buttons visible in settings at QVGA resolution (bluelightning)
+	* #1231 - TinyKATE: add Find, Replace and Goto Line functions (bluelightning)
+	* n.a.  - TinyKATE: prompt to save changes on closing (bluelightning)
+	* #1735 - OpieIRC: fix special channel op markers with unrealIRCd servers (andrewy)
+	* #1530 - Opie-Mediaplayer2: enable searching for audio/x-ogg (polyonymous)
+	* n.a.  - Improved iPAQ support in ODevice and low-level applets (S.Banko, R.Wagner, E.Hovland, P.Sokolovsky)
 	* n.a.  - Improved platform support for the Motorola EZX platform (mickeyl)
+	* n.a.  - Changed suspend button mapping for Asus MyPal to same as for iPAQ (aquadran)
+	* n.a.  - Fix for LCD on iPAQ h191x and MyPal A716 (Slavek Banko, aquadran)
 
 	Internal
 	--------
+	* Fixed lots of unchecked return values, bad/missing frees, etc. (ehovland)
+	* Removed some old commented out code (ehovland)
+	* Made OBEX library buildable if bluetooth support is disabled (korovkin)
+	* ODevice: devices renumbered to allow proper bitmasking (ehovland)
+	* Opie-Remote: abstracted all lircd interaction to a single LircHandler class (bluelightning)
+
 
 2006-05-28	Opie 1.2.2
 	
