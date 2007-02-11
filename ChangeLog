@@ -48,7 +48,7 @@
 
 	Internal
 	--------
-	* Fixed lots of unchecked return values, bad/missing frees, etc. (ehovland)
+	* Fixed lots of unchecked return values, bad member function overrides, bad/missing frees, etc. (ehovland)
 	* Removed some old commented out code (ehovland)
 	* Made OBEX library buildable if bluetooth support is disabled (korovkin)
 	* ODevice: devices renumbered to allow proper bitmasking (ehovland)
