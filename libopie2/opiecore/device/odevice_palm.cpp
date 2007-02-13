@@ -183,7 +183,7 @@ bool Palm::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
 	    default:
 		break;
         }
-    
+
         if (newkeycode!=keycode) {
             if ( newkeycode != Key_unknown ) {
                 QWSServer::sendKeyEvent ( -1, newkeycode, modifiers, isPress, autoRepeat );
@@ -192,7 +192,7 @@ bool Palm::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
         }
 
     }
-  
+
     return false;
 }
 
@@ -229,17 +229,19 @@ bool Palm::suspend()
 int Palm::displayBrightnessResolution() const
 {
     int res = 1;
+    int fd = -1;
 
     switch ( d->m_model )
     {
       case Model_Palm_LD:
       case Model_Palm_TX:
       case Model_Palm_Z72:
-        int fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
-        if ( fd )
+        fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
+        if ( fd != -1)
         {
           char buf[100];
-          if ( ::read( fd, &buf[0], sizeof buf ) ) ::sscanf( &buf[0], "%d", &res );
+          if ( ::read( fd, &buf[0], sizeof buf ) > 0 )
+              ::sscanf( &buf[0], "%d", &res );
           ::close( fd );
         }
 	break;
@@ -247,7 +249,7 @@ int Palm::displayBrightnessResolution() const
       default:
 	res = 1;
     }
- 
+
     return res;
 }
 
@@ -261,6 +263,7 @@ bool Palm::setDisplayBrightness( int bright )
 
     int numberOfSteps = displayBrightnessResolution();
     int val = ( bright == 1 ) ? 1 : ( bright * numberOfSteps ) / 255;
+    int fd = -1;
 
     switch ( d->m_model )
     {
@@ -268,8 +271,8 @@ bool Palm::setDisplayBrightness( int bright )
       case Model_Palm_LD:
       case Model_Palm_TX:
       case Model_Palm_Z72:
-        int fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
-        if ( fd )
+        fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
+        if ( fd  != -1 )
         {
             char buf[100];
             int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
@@ -277,8 +280,9 @@ bool Palm::setDisplayBrightness( int bright )
             ::close( fd );
         }
         break;
-      
-      default: res = false;
+
+      default:
+        res = false;
     }
     return res;
 }
