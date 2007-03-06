@@ -52,6 +52,8 @@ using namespace Opie::Core;
 #include <qtimer.h>
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
+#include <qfile.h>
+#include <qtextstream.h>
 
 /* STD */
 #include <device.h>
@@ -124,6 +126,25 @@ namespace OpieTooth {
     int BluezApplet::setBluezStatus(int c, bool sync) {
 
         if ( c == 1 ) {
+            QFile cfg("/etc/sysconfig/bluetooth");
+            if ( cfg.open( IO_ReadOnly ) ) {
+                QTextStream stream( &cfg );
+                QString streamIn = stream.read();
+                QStringList list = QStringList::split( "\n", streamIn );
+                cfg.close();
+                if ( list.grep( "BLUETOOTH_PORT=" ).count() > 0 &&
+                     list.grep( "BLUETOOTH_PROTOCOL=" ).count() > 0 &&
+                     list.grep( "BLUETOOTH_SPEED=" ).count() > 0)
+                {
+                    btDevice =
+                        new Device( list.grep( "BLUETOOTH_PORT=" )[0].replace( QString( "BLUETOOTH_PORT=" ), ""),
+                                    list.grep( "BLUETOOTH_PROTOCOL=" )[0].replace( QString( "BLUETOOTH_PROTOCOL=" ), ""),
+                                    list.grep( "BLUETOOTH_SPEED=" )[0].replace( QString( "BLUETOOTH_SPEED=" ), "" ) );
+                    return 0;
+               }
+            }
+
+            // Device-specific stuff - should be removed
             switch ( ODevice::inst()->model() ) {
             case Model_iPAQ_H39xx:
                 btDevice = new Device( "/dev/tts/1", "bcsp", "921600" );
