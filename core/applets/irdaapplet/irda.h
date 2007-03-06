@@ -23,55 +23,53 @@
 
 class IrdaApplet : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 
-public:
-	IrdaApplet( QWidget *parent = 0, const char *name = 0 );
-	~IrdaApplet();
-	static int position();
+    public:
+        IrdaApplet( QWidget *parent = 0, const char *name = 0 );
+        ~IrdaApplet();
+        static int position();
 
-	virtual void show ( );
+        virtual void show ( );
 
-protected:
-	virtual void timerEvent ( QTimerEvent * );
-	virtual void mousePressEvent ( QMouseEvent * );
-	virtual void paintEvent ( QPaintEvent* );
+    protected:
+        virtual void timerEvent ( QTimerEvent * );
+        virtual void mousePressEvent ( QMouseEvent * );
+        virtual void paintEvent ( QPaintEvent* );
 
-private slots:
-	void popupTimeout ( );
+    private slots:
+        void popupTimeout ( );
         void slotMessage( const QCString& , const QByteArray& );
 
-private:
-	void popup( QString message, QString icon = QString::null );
+    private:
+        void popup( QString message, QString icon = QString::null );
 
-	bool checkIrdaStatus ( );
-	bool setIrdaStatus ( bool );
-	bool checkIrdaDiscoveryStatus ();
-	bool setIrdaDiscoveryStatus ( bool );
-	bool setIrdaReceiveStatus ( bool );
+        bool checkIrdaStatus ( );
+        bool setIrdaStatus ( bool );
+        bool checkIrdaDiscoveryStatus ();
+        bool setIrdaDiscoveryStatus ( bool );
+        bool setIrdaReceiveStatus ( bool );
 
-	void showDiscovered();
+        void showDiscovered();
 
-private:
-	QPixmap m_irdaOnPixmap;
-	QPixmap m_irdaOffPixmap;
-	QPixmap m_irdaDiscoveryOnPixmap;
-	QPixmap m_receiveActivePixmap;
+        QPixmap m_irdaOnPixmap;
+        QPixmap m_irdaOffPixmap;
+        QPixmap m_irdaDiscoveryOnPixmap;
+        QPixmap m_receiveActivePixmap;
 
-	bool m_irda_active;
-	bool m_irda_discovery_active;
-	bool m_receive_active;
-	bool m_receive_state_changed;
+        bool m_irda_active;
+        bool m_irda_discovery_active;
+        bool m_receive_active;
+        bool m_receive_state_changed;
 
-	QPopupMenu *m_popup;
+        QPopupMenu *m_popup;
 
-	int m_sockfd;
+        int m_sockfd;
 
-	QMap <QString, QString> m_devices;
+        QMap <QString, QString> m_devices;
 
-                bool m_wasOn; // if IrDa was enabled
-	bool m_wasDiscover;
+        bool m_wasOn; ///< If IrDA was enabled this is true
+        bool m_wasDiscover;
 };
-
-
 #endif // __OPIE_IRDA_APPLET_H__
+
