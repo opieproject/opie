@@ -35,7 +35,7 @@
 namespace Opie {
 namespace Core {
 
-class OStorageInfo : public StorageInfo
+class Q_EXPORT OStorageInfo : public StorageInfo
 {
   Q_OBJECT
 
