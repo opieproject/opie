@@ -140,18 +140,22 @@ bool MyPal::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, 
     int newkeycode = keycode;
 
     switch ( keycode ) {
-        case Key_Left :
-        case Key_Right:
-        case Key_Up   :
-        case Key_Down : {
-            // Rotate the cursor keys by 270
-            // keycode - Key_Left = position of the button starting from left clockwise
-            // add the rotation to it and modolo. No we've the original offset
-            // add the offset to the Key_Left key
-            if ( d->m_model == Model_MyPal_716 )
-                newkeycode = Key_Left + ( keycode - Key_Left + 3 ) % 4;
-            break;
-        }
+        // QT has strange screen coordinate system, so depending
+	// on native device screen orientation, we need to rotate cursor keys
+	case Key_Left :
+	case Key_Right:
+	case Key_Up   :
+	case Key_Down : {
+	    int quarters;
+	    switch (d->m_rotation) {
+	        case Rot0:   quarters = 3/*270deg*/; break;
+	        case Rot90:  quarters = 2/*270deg*/; break;
+	        case Rot180: quarters = 1/*270deg*/; break;
+	        case Rot270: quarters = 0/*270deg*/; break;
+	    }
+	    newkeycode = Key_Left + ( keycode - Key_Left + quarters ) % 4;
+	    break;
+	}
 
         // map Power Button short/long press
         case HardKey_Suspend: { // Hope we don't have infinite recursion here:
@@ -210,26 +214,17 @@ bool MyPal::setDisplayBrightness ( int bright )
     if ( bright < 0 )
         bright = 0;
 
-    QDir sysClass( "/sys/class/backlight/pxafb/" );
+    QDir sysClass( "/sys/class/backlight/" );
     sysClass.setFilter(QDir::Dirs);
-    int fd;
-    if ( sysClass.exists() ) {
-	QString sysClassPath = sysClass.absFilePath( "/sys/class/backlight/pxafb/power" );
-	fd = ::open( sysClassPath, O_WRONLY | O_NONBLOCK );
+    if ( sysClass.exists() && sysClass.count() > 2 ) {
+        QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/brightness" );
+	int fd = ::open( sysClassPath, O_WRONLY|O_NONBLOCK );
 	if ( fd ) {
-	    char buf[10];
-	    buf[0] = bright ? 0 : 4;
-	    buf[1] = '\0';
-	    res = ( ::write( fd, &buf[0], 2 ) == 0 );
-	    ::close( fd );
-	}
-	sysClassPath = sysClass.absFilePath( "/sys/class/backlight/pxafb/brightness" );
-	fd = ::open( sysClassPath, O_WRONLY | O_NONBLOCK );
-	if ( fd ) {
-	    char buf[100];
-            int len = ::snprintf( &buf[0], sizeof buf, "%d", bright );
-            res = ( ::write( fd, &buf[0], len ) == 0 );
-	    ::close( fd );
+		char buf[100];
+		int val = bright * displayBrightnessResolution() / 255;
+		int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
+		res = ( ::write( fd, &buf[0], len ) == 0 );
+		::close( fd );
 	}
     }
 
@@ -240,7 +235,7 @@ int MyPal::displayBrightnessResolution() const
 {
     switch ( model()) {
         case Model_MyPal_716:
-            return 7;
+            return 255;
         default:
             return OAbstractMobileDevice::displayBrightnessResolution();
     }
@@ -252,9 +247,9 @@ bool MyPal::setDisplayStatus ( bool on )
 
     QDir sysClass( "/sys/class/lcd/" );
     sysClass.setFilter(QDir::Dirs);
-    if ( sysClass.exists() ) {
-	QString sysClassPath = sysClass.absFilePath( "/sys/class/lcd/pxafb/power" );
-	int fd = ::open( sysClassPath, O_WRONLY | O_NONBLOCK );
+    if ( sysClass.exists() && sysClass.count() > 2 ) {
+	QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/power" );
+	int fd = ::open( sysClassPath, O_WRONLY|O_NONBLOCK );
 	if ( fd ) {
 	    char buf[10];
 	    buf[0] = on ? 0 : 4;
@@ -262,6 +257,8 @@ bool MyPal::setDisplayStatus ( bool on )
 	    res = ( ::write( fd, &buf[0], 2 ) == 0 );
 	    ::close( fd );
 	}
+    } else {
+	res = OAbstractMobileDevice::setDisplayStatus(on);
     }
 
     return res;
