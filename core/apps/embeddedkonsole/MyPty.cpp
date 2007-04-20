@@ -161,7 +161,7 @@ int MyPty::run(const char* cmd, QStrList &, const char*, int)
   if ( setsid() < 0 )
       perror( "failed to set process group" );
 #if defined (TIOCSCTTY)
-  // grabbed from APUE by Stevens
+  // grabbed from APUE by Stevens (see section 9.6, should be page 246)
   ioctl(STDIN_FILENO, TIOCSCTTY, 0);
 #endif
   tcgetattr( STDIN_FILENO, &ttmode );
