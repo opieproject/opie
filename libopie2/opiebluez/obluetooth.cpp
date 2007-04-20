@@ -357,18 +357,5 @@ QString OBluetoothDevice::deviceClass() const
     return QString( "%1:%2" ).arg( major ).arg( minor );
 }
 
-QString OBluetoothDevice::getName()
-{
-    /* FIXME: Uahhh, this gets ugly.
-    The BlueZ kernel interface seems to be very badly (if at all) documented.
-    All people are assuming that you use libbluetooth to talk to that stack.
-    However since libbluetooth is GPL, we can't do that :/
-    Guess, we are stuck here until someone finds time and/or motivation to look
-    into that and create some easy-to-understand examples for how to talk
-    directly to the BlueZ kernel interface.
-    */
-};
-
-
 }
 }

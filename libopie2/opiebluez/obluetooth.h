@@ -183,10 +183,6 @@ class OBluetoothDevice : public QObject
      * @returns the class of device.
      */
     QString deviceClass() const;
-    /**
-     * @returns the device name.
-     */
-    QString getName();
 
   private:
     class Private;
