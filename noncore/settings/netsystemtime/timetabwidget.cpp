@@ -177,7 +177,7 @@ void TimeTabWidget::setDateTime( const QDateTime &dt )
 	if( use12HourTime )
 	{
 		int show_hour = t.hour();
-		if ( t.hour() >= 12 )
+		if ( t.hour() > 12 )
 		{
 			show_hour -= 12;
 			cbAmpm->setCurrentItem( ValuePM );
@@ -239,7 +239,7 @@ void TimeTabWidget::slotUse12HourTime( int i )
 		sbHour->setMinValue( 1 );
 		sbHour->setMaxValue( 12 );
 
-		if ( show_hour >= 12 )
+		if ( show_hour > 12 )
 		{
 			show_hour -= 12;
 			cbAmpm->setCurrentItem( ValuePM );
