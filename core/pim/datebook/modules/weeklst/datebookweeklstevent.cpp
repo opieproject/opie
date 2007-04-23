@@ -8,26 +8,39 @@
 #include <qstring.h>
 #include <qpopupmenu.h>
 
-DateBookWeekLstEvent::DateBookWeekLstEvent(const EffectiveEvent &ev,
+DateBookWeekLstEvent::DateBookWeekLstEvent(bool ap, const EffectiveEvent &ev,
                         int weeklistviewconfig,
                         QWidget* parent,
                         const char* name,
-                        WFlags fl ) : OClickableLabel(parent,name,fl), event(ev)
+                        WFlags fl ) : OClickableLabel(parent,name,fl), event(ev), ampm(ap)
 {
     // old values... lastday = "__|__", middle="   |---", Firstday="00:00",
     QString s,start,middle,end,day;
 
     odebug << "weeklistviewconfig=" << weeklistviewconfig << oendl;
-    if(weeklistviewconfig==NONE) {  // No times displayed.
-//      start.sprintf("%.2d:%.2d-",ev.start().hour(),ev.start().minute());
-//      middle.sprintf("<--->");
-//      end.sprintf("-%.2d:%.2d",ev.end().hour(),ev.end().minute());
-//      day.sprintf("%.2d:%.2d-%.2d:%.2d",ev.start().hour(),ev.start().minute(),ev.end().hour(),ev.end().minute());
-    } else if(weeklistviewconfig==NORMAL) { // "Normal", only display start time.
+    if(weeklistviewconfig==NORMAL) { // "Normal", only display start time.
+        if ( ampm ) {
+            int shour = ev.start().hour();
+            int smin = ev.start().minute();
+            if ( shour >= 12 ) {
+                if ( shour > 12 ) {
+                    shour -= 12;
+                }
+                start.sprintf( "%.2d:%.2d PM", shour, smin );
+                day.sprintf("%.2d:%.2d PM",shour,smin);
+            } else {
+                if ( shour == 0 ) {
+                    shour = 12;
+                }
+             start.sprintf( "%.2d:%.2d AM", shour, smin );
+             day.sprintf("%.2d:%.2d AM",shour,smin);
+            }
+        } else {
         start.sprintf("%.2d:%.2d",ev.start().hour(),ev.start().minute());
+            day.sprintf("%.2d:%.2d",ev.start().hour(),ev.start().minute());
+        }
         middle.sprintf("   |---");
         end.sprintf("__|__");
-        day.sprintf("%.2d:%.2d",ev.start().hour(),ev.start().minute());
     } else if(weeklistviewconfig==EXTENDED) { // Extended mode, display start and end times.
         start.sprintf("%.2d:%.2d-",ev.start().hour(),ev.start().minute());
         middle.sprintf("<--->");

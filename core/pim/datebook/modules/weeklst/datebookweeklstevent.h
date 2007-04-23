@@ -9,7 +9,7 @@ class DateBookWeekLstEvent: public Opie::Ui::OClickableLabel
 {
   Q_OBJECT
 public:
-    DateBookWeekLstEvent(const EffectiveEvent &ev, int weeklistviewconfig =1,
+    DateBookWeekLstEvent(bool ampm, const EffectiveEvent &ev, int weeklistviewconfig =1,
              QWidget* parent = 0, const char* name = 0,
              WFlags fl = 0);
 signals:
@@ -28,6 +28,7 @@ private:
     QPopupMenu* popmenue;
 protected:
     void mousePressEvent( QMouseEvent *e );
+    bool ampm;
 };
 
 

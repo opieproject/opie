@@ -10,6 +10,7 @@
 
 #include <qpe/datebookmonth.h>
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 
 #include <qlayout.h>
 #include <qtoolbutton.h>
@@ -68,7 +69,9 @@ void DateBookWeekLst::setDbl(bool on) {
     }
 }
 
-void DateBookWeekLst::redraw() {getEvents();}
+void DateBookWeekLst::redraw() {
+    getEvents();
+}
 
 QDate DateBookWeekLst::date() {
     return bdate;
@@ -106,9 +109,9 @@ void DateBookWeekLst::getEvents() {
     }
     if (!m_CurrentView) {
         if (dbl) {
-            m_CurrentView=new DateBookWeekLstDblView(el,el2,start,bStartOnMonday,scroll);
+            m_CurrentView=new DateBookWeekLstDblView(el,el2,start,bStartOnMonday,ampm,scroll);
         } else {
-            m_CurrentView=new DateBookWeekLstDblView(el,start,bStartOnMonday,scroll);
+            m_CurrentView=new DateBookWeekLstDblView(el,start,bStartOnMonday,ampm,scroll);
         }
         m_CurrentView->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed));
         connect (m_CurrentView, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
@@ -119,6 +122,7 @@ void DateBookWeekLst::getEvents() {
         connect (m_CurrentView, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
         connect (m_CurrentView, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
             this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
+        connect( qApp, SIGNAL(clockChanged(bool)), this, SLOT(slotClockChanged(bool)));
         scroll->addChild(m_CurrentView);
     } else {
         if (dbl) {
@@ -128,6 +132,11 @@ void DateBookWeekLst::getEvents() {
         }
     }
     scroll->updateScrollBars();
+}
+
+void DateBookWeekLst::slotClockChanged( bool ap ) {
+    ampm = ap;
+    getEvents();
 }
 
 void DateBookWeekLst::dateChanged(QDate &newdate) {

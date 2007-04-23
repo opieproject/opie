@@ -7,15 +7,16 @@
 #include <opie2/odebug.h>
 
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 
 #include <qlayout.h>
 #include <qtl.h>
 
 DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
-                     const QDate &d, bool onM,
+                     const QDate &d, bool onM, bool showAmPm,
                      QWidget* parent,
                      const char* name, WFlags fl)
-    : QWidget( parent, name, fl )
+    : QWidget( parent, name, fl ), ampm(showAmPm)
 {
     childs.clear();
     m_MainLayout = new QVBoxLayout( this );
@@ -65,17 +66,18 @@ void DateBookWeekLstView::setEvents(QValueList<EffectiveEvent> &ev, const QDate 
         w->setPalette(white);
         QVBoxLayout * tlayout = new QVBoxLayout(w);
         childs.append(w);
-    // Header
+        // Header
         DateBookWeekLstDayHdr *hdr=new DateBookWeekLstDayHdr(d.addDays(i-dayoffset), bStartOnMonday,w);
         connect(hdr, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
         connect(hdr, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
             this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
         tlayout->addWidget(hdr);
+        connect( qApp, SIGNAL(clockChanged(bool)), this, SLOT(slotClockChanged(bool)));
 
         // Events
         while ( (*it).date().dayOfWeek() == dayOrder[i] && it!=ev.end() ) {
             if(!(((*it).end().hour()==0) && ((*it).end().minute()==0) && ((*it).startDate()!=(*it).date()))) {  // Skip events ending at 00:00 starting at another day.
-                DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,weeklistviewconfig,w);
+                DateBookWeekLstEvent *l=new DateBookWeekLstEvent(ampm,*it,weeklistviewconfig,w);
                 tlayout->addWidget(l);
                 connect (l, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
                 connect (l, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
@@ -87,12 +89,12 @@ void DateBookWeekLstView::setEvents(QValueList<EffectiveEvent> &ev, const QDate 
         }
         tlayout->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));
         m_MainLayout->addWidget(w);
-/*
-        QSpacerItem * tmp = new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding);
-        m_MainLayout->addItem(tmp);
-*/
     }
     setUpdatesEnabled(true);
+}
+
+void DateBookWeekLstView::slotClockChanged( bool ap ) {
+    ampm = ap;
 }
 
 DateBookWeekLstView::~DateBookWeekLstView()

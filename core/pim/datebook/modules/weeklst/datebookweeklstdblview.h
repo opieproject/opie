@@ -16,11 +16,11 @@ class DateBookWeekLstDblView: public QWidget {
 public:
     DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
                QValueList<EffectiveEvent> &ev2,
-               QDate &d, bool onM,
+               QDate &d, bool onM, bool showAmPm,
                QWidget* parent = 0, const char* name = 0,
                WFlags fl = 0 );
     DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
-               QDate &d, bool onM,
+               QDate &d, bool onM, bool showAmPm,
                QWidget* parent = 0, const char* name = 0,
                WFlags fl = 0 );
     virtual ~DateBookWeekLstDblView();
@@ -43,6 +43,7 @@ signals:
 protected:
     QHBoxLayout*m_MainLayout;
     DateBookWeekLstView *leftView,*rightView;
+    bool ampm;
 };
 
 #endif

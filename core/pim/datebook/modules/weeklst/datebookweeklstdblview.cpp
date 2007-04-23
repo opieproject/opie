@@ -5,10 +5,10 @@
 
 DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
                            QValueList<EffectiveEvent> &ev2,
-                           QDate &d, bool onM,
+                           QDate &d, bool onM, bool showAmPm,
                            QWidget* parent,
                            const char* name, WFlags fl)
-    : QWidget( parent, name, fl )
+    : QWidget( parent, name, fl ), ampm( showAmPm )
 {
     m_MainLayout = new QHBoxLayout( this );
 
@@ -18,10 +18,10 @@ DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
 }
 
 DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
-                           QDate &d, bool onM,
+                           QDate &d, bool onM, bool showAmPm,
                            QWidget* parent,
                            const char* name, WFlags fl)
-    : QWidget( parent, name, fl )
+    : QWidget( parent, name, fl ), ampm( showAmPm )
 {
     m_MainLayout = new QHBoxLayout( this );
 
@@ -35,7 +35,7 @@ void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QValueLis
 {
     setUpdatesEnabled(false);
     if (!leftView) {
-        leftView=new DateBookWeekLstView(ev1,d,onM,this);
+        leftView=new DateBookWeekLstView(ev1, d, onM, ampm, this);
         m_MainLayout->addWidget(leftView);
         connect (leftView, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
         connect (leftView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
@@ -52,7 +52,7 @@ void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QValueLis
     }
 
     if (!rightView) {
-        rightView=new DateBookWeekLstView(ev2,d.addDays(7),onM,this);
+        rightView=new DateBookWeekLstView(ev2, d.addDays(7), onM, ampm, this);
         m_MainLayout->addWidget(rightView);
         connect (rightView, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
         connect (rightView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
@@ -75,7 +75,7 @@ void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QValueLis
 void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QDate &d, bool onM)
 {
     if (!leftView) {
-        leftView=new DateBookWeekLstView(ev1,d,onM,this);
+        leftView=new DateBookWeekLstView(ev1, d, onM, ampm, this);
         m_MainLayout->addWidget(leftView);
         connect (leftView, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
         connect (leftView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
@@ -99,7 +99,7 @@ void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QDate &d,
 void DateBookWeekLstDblView::setRightEvents(QValueList<EffectiveEvent> &ev1,QDate &d, bool onM)
 {
     if (!rightView) {
-        rightView=new DateBookWeekLstView(ev1,d,onM,this);
+        rightView=new DateBookWeekLstView(ev1, d, onM, ampm, this);
         m_MainLayout->addWidget(rightView);
         connect (leftView, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
         connect (leftView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));

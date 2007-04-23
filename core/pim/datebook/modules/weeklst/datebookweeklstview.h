@@ -15,7 +15,9 @@ class DateBookWeekLstView: public QWidget
 {
     Q_OBJECT
 public:
-    DateBookWeekLstView(QValueList<EffectiveEvent> &ev, const QDate &d, bool onM, QWidget* parent = 0, const char* name = 0,
+    DateBookWeekLstView(QValueList<EffectiveEvent> &ev, const QDate &d,
+                        bool onM, bool showAmPm, QWidget* parent = 0,
+                        const char* name = 0,
             WFlags fl = 0 );
     ~DateBookWeekLstView();
 
@@ -30,14 +32,17 @@ signals:
     void showDate(int y, int m, int d);
     void addEvent(const QDateTime &start, const QDateTime &stop,
     const QString &str, const QString &location);
+
 protected:
     bool bStartOnMonday;
+    bool ampm;
     QValueList<QObject*> childs;
 
     QVBoxLayout*m_MainLayout;
 
 protected slots:
     void keyPressEvent(QKeyEvent *);
+    void slotClockChanged( bool ap );
 };
 
 #endif

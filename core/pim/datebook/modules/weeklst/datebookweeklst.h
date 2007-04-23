@@ -35,6 +35,7 @@ public slots:
 
 protected slots:
     void keyPressEvent(QKeyEvent *);
+    void slotClockChanged(bool);
     void setDbl(bool on);
 
 signals:
