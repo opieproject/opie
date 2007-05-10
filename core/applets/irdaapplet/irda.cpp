@@ -54,7 +54,7 @@ IrdaApplet::IrdaApplet ( QWidget *parent, const char *name ) :
     setFixedHeight( AppLnk::smallIconSize() );
     setFixedWidth( AppLnk::smallIconSize() );
 
-    if (m_sockfd = ::socket ( PF_INET, SOCK_DGRAM, IPPROTO_IP ) == -1)
+    if ( ( m_sockfd = ::socket ( PF_INET, SOCK_DGRAM, IPPROTO_IP ) ) == -1)
         perror ( "failed grabbing IrDA socket" );
 
     m_irdaOnPixmap =
