@@ -45,6 +45,7 @@
 // hacky workarounds until we have a true user space wireless.h
 #include <net/if.h>
 #define _LINUX_IF_H
+#include <linux/types.h>
 #include <linux/wireless.h>
 #ifndef IW_MAX_PRIV_DEF
 #define IW_MAX_PRIV_DEF        128
