@@ -134,6 +134,7 @@ void HTC::init(const QString& cpu_info)
     setAPMTimeOut( 15000 );
 
     d->m_vendorstr = "Xanadux Team";
+    d->m_vendor = Vendor_HTC;
     d->m_systemstr = "Familiar";
     d->m_system = System_Familiar;
 
