@@ -125,36 +125,177 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     QLabel *palmtopLogo3 = new QLabel( container );
 
     OModel model = ODevice::inst()->model();
+    OVendor vendor = ODevice::inst()->vendor();
     QString modelPixmap = "sysinfo/";
-    if ( model == Model_Zaurus_SLC7x0 )
-        modelPixmap += "zaurusc700";
-    else if ( model >= Model_Zaurus_SL5000 && model <= Model_Zaurus_SLB600 )
-        modelPixmap += "zaurus5500";
-    else if ( model >= Model_iPAQ_H31xx && model <= Model_iPAQ_H5xxx )
-        modelPixmap += "ipaq3600";
-    else if ( model >= Model_SIMpad_CL4 && model <= Model_SIMpad_TSinus )
-        modelPixmap += "simpad";
-    else if ( model == Model_Jornada_56x )
-        modelPixmap += "jornada56x";
-    else if ( model == Model_Jornada_720 )
-        modelPixmap += "jornada720";
-    else if ( model == Model_HTC_Universal )
-        modelPixmap += "htcuniversal";
-    else if ( model == Model_HTC_Blueangel )
-        modelPixmap += "htcblueangel";
-    else if ( model == Model_HTC_Apache )
-        modelPixmap += "htcapache";
-    else if ( model == Model_HTC_Magician )
-        modelPixmap += "htcmagician";
-    else if ( model == Model_HTC_Himalaya )
-        modelPixmap += "htchimalaya";
-    else if ( model == Model_HTC_Alpine )
-        modelPixmap += "htcalpine";
-    else if ( model == Model_HTC_Beetles )
-        modelPixmap += "htcbeetles";
-    else
-        modelPixmap += "pda";
 
+    switch ( vendor ) {
+        /* SHARP */
+        case Vendor_Sharp:
+        {
+            switch ( model ) {
+                /* ZAURUS */
+                case Model_Zaurus_SLC7x0:
+                    modelPixmap += "zaurusc700";
+                    break;
+                case Model_Zaurus_SL5000:
+                case Model_Zaurus_SL5500:
+                case Model_Zaurus_SLA300:
+                case Model_Zaurus_SLB600:
+                    modelPixmap += "zaurus5500";
+                    break;
+                default:
+                    modelPixmap += "pda";
+                    break;
+            }
+            break;
+        }
+        /* HP */
+        case Vendor_HP:
+        {
+            switch ( model ) {
+                /* IPAQ */
+                case Model_iPAQ_H31xx:
+                case Model_iPAQ_H36xx:
+                case Model_iPAQ_H37xx:
+                case Model_iPAQ_H38xx:
+                case Model_iPAQ_H39xx:
+                case Model_iPAQ_H5xxx:
+                    modelPixmap += "ipaq3600";
+                    break;
+                /* JORNADA */
+                case Model_Jornada_56x:
+                    modelPixmap += "jornada56x";
+                    break;
+                case Model_Jornada_720:
+                    modelPixmap += "jornada720";
+                    break;
+                default:
+                    modelPixmap += "pda";
+                    break;
+            }
+            break;
+        }
+        /* SIEMENS */    
+        case Vendor_SIEMENS:
+        {
+            switch ( model ) 
+            {
+                /* SIMPAD */
+                case Model_SIMpad_CL4:
+                case Model_SIMpad_SL4:
+                case Model_SIMpad_SLC:
+                case Model_SIMpad_TSinus:
+                    modelPixmap += "simpad";
+                    break;
+                default:
+                    modelPixmap += "pda";
+                    break;
+            }
+            break;
+        }
+        /* HTC */
+        case Vendor_HTC:
+        {
+            switch ( model ) {
+                case Model_HTC_Universal:
+                    modelPixmap += "htcuniversal";
+                    break;
+                case Model_HTC_Blueangel:
+                    modelPixmap += "htcblueangel";
+                    break;
+                case Model_HTC_Apache:
+                    modelPixmap += "htcapache";
+                    break;
+                case Model_HTC_Magician:
+                    modelPixmap += "htcmagician";
+                    break;
+                case Model_HTC_Himalaya:
+                    modelPixmap += "htchimalaya";
+                    break;
+                case Model_HTC_Alpine:
+                    modelPixmap += "htcalpine";
+                    break;
+                case Model_HTC_Beetles:
+                    modelPixmap += "htcbeetles";
+                    break;
+                default:
+                    modelPixmap += "pda";
+                    break;
+            }
+            break;
+        }
+        /* PALM */
+        case Vendor_Palm:
+        {
+            switch ( model ) {
+                case Model_Palm_TT:
+                    modelPixmap += "palmtt";
+                    break;
+                case Model_Palm_TT2:
+                    modelPixmap += "palmtt2";
+                    break;
+                case Model_Palm_TT3:
+                    modelPixmap += "palmtt3";
+                    break;
+                case Model_Palm_TT5:
+                    modelPixmap += "palmtt5";
+                    break;
+                case Model_Palm_TE:
+                    modelPixmap += "palmte";
+                    break;
+                case Model_Palm_TE2:
+                    modelPixmap += "palmte2";
+                    break;
+                case Model_Palm_TC:
+                    modelPixmap += "palmtc";
+                    break;
+                case Model_Palm_LD:
+                    modelPixmap += "palmld";
+                    break;
+                case Model_Palm_TX:
+                    modelPixmap += "palmtx";
+                    break;
+                case Model_Palm_Z71:
+                    modelPixmap += "palmz71";
+                    break;
+                case Model_Palm_Z72:
+                    modelPixmap += "palmz72";
+                    break;
+                case Model_Palm_T600:
+                    modelPixmap += "palmt600";
+                    break;
+                case Model_Palm_T650:
+                    modelPixmap += "palmt650";
+                    break;
+                case Model_Palm_T680:
+                    modelPixmap += "palmt680";
+                    break;
+                case Model_Palm_T700W:
+                    modelPixmap += "palmt700w";
+                    break;
+                case Model_Palm_T700P:
+                    modelPixmap += "palmt700p";
+                    break;
+                case Model_Palm_T750:
+                    modelPixmap += "palmt750";
+                    break;
+                case Model_Palm_T755P:
+                    modelPixmap += "palmt755p";
+                    break;
+                case Model_Palm_FOLEO:
+                    modelPixmap += "palmfoleo";
+                    break;
+                default:
+                    modelPixmap += "pda";
+                    break;
+            }
+            break;
+        }
+        /* OTHER DEVICES */
+        default:
+            modelPixmap += "pda";
+            break;
+    }
     QImage logo3 = Opie::Core::OResource::loadImage( modelPixmap );
 
     int width = logo3.width();
