@@ -1,28 +1,28 @@
 /*
-                             This file is part of the Opie Project
+ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½             This file is part of the Opie Project
 
                              Copyright (C)2002-2005 The Opie Team <opie-devel@handhelds.org>
               =.
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
-:     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½.>+-=
+ï¿½_;:, ï¿½ ï¿½ .> ï¿½ ï¿½:=|.         This program is free software; you can
+.> <`_, ï¿½ > ï¿½. ï¿½ <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.-- ï¿½ :           the terms of the GNU Library General Public
+.="- .-=="i, ï¿½ ï¿½ .._         License as published by the Free Software
+ï¿½- . ï¿½ .-<_> ï¿½ ï¿½ .<>         Foundation; either version 2 of the License,
+ï¿½ ï¿½ ï¿½._= =} ï¿½ ï¿½ ï¿½ :          or (at your option) any later version.
+ï¿½ ï¿½ .%`+i> ï¿½ ï¿½ ï¿½ _;_.
+ï¿½ ï¿½ .i_,=:_. ï¿½ ï¿½ ï¿½-<s.       This program is distributed in the hope that
+ï¿½ ï¿½ ï¿½+ ï¿½. ï¿½-:. ï¿½ ï¿½ ï¿½ =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : .. ï¿½ ï¿½.:, ï¿½ ï¿½ . . .    without even the implied warranty of
+ï¿½ ï¿½ =_ ï¿½ ï¿½ ï¿½ ï¿½+ ï¿½ ï¿½ =;=|`    MERCHANTABILITY or FITNESS FOR A
+ï¿½ _.=:. ï¿½ ï¿½ ï¿½ : ï¿½ ï¿½:=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.= ï¿½ ï¿½ ï¿½ = ï¿½ ï¿½ ï¿½ ;      Library General Public License for more
+++= ï¿½ -. ï¿½ ï¿½ .` ï¿½ ï¿½ .:       details.
+: ï¿½ ï¿½ = ï¿½...= . :.=-
+ï¿½-. ï¿½ .:....=;==+<;          You should have received a copy of the GNU
+ï¿½ -_. . . ï¿½ )=. ï¿½=           Library General Public License along with
+ï¿½ ï¿½ -- ï¿½ ï¿½ ï¿½ ï¿½:-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -61,35 +61,58 @@ using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 
 struct palm_button palm_buttons [] = {
-    { Model_Palm_TX | Model_Palm_LD | Model_Palm_Z72,
+    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
+      Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
+      Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
+      Model_Palm_T650 | Model_Palm_T680 | Model_Palm_T700W |
+      Model_Palm_T700P | Model_Palm_T750 | Model_Palm_T755P,
       Qt::Key_F9, QT_TRANSLATE_NOOP( "Button", "Home Button" ),
         "devicebuttons/palm_home",
         "QPE/Launcher", "home()",
         "buttonsettings", "raise()" },
-    { Model_Palm_TX | Model_Palm_LD | Model_Palm_Z72,
+    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
+      Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
+      Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
+      Model_Palm_T650 | Model_Palm_T680 | Model_Palm_T700W |
+      Model_Palm_T700P | Model_Palm_T750 | Model_Palm_T755P,
       Qt::Key_F10, QT_TRANSLATE_NOOP( "Button", "Calendar Button" ),
         "devicebuttons/palm_calendar",
         "datebook", "nextView()",
         "today", "raise()" },
-    { Model_Palm_TX | Model_Palm_LD | Model_Palm_Z72,
+    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
+      Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
+      Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
+      Model_Palm_T650 | Model_Palm_T680 | Model_Palm_T700W |
+      Model_Palm_T700P | Model_Palm_T750 | Model_Palm_T755P,
       Qt::Key_F11, QT_TRANSLATE_NOOP( "Button", "Todo Button" ),
         "devicebuttons/palm_todo",
         "todolist", "raise()",
         "todolist", "create()" },
-    { Model_Palm_TX | Model_Palm_LD | Model_Palm_Z72,
+    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
+      Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
+      Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
+      Model_Palm_T650 | Model_Palm_T680 | Model_Palm_T700W |
+      Model_Palm_T700P | Model_Palm_T750 | Model_Palm_T755P,
       Qt::Key_F12, QT_TRANSLATE_NOOP( "Button", "Mail Button" ),
         "devicebuttons/palm_mail",
         "opiemail", "raise()",
         "opiemail", "newmail()" },
-    { Model_Palm_LD,
-      Qt::Key_F7, QT_TRANSLATE_NOOP( "Button", "Voice Memo Button" ),
-        "devicebuttons/palm_voice_memo",
-	"QPE/TaskBar", "toggleMenu()",
-        "QPE/TaskBar", "toggleStartMenu()" },
-    { Model_Palm_LD,
-      Qt::Key_F8, QT_TRANSLATE_NOOP( "Button", "Rotate Button" ),
-        "devicebuttons/palm_rotate",
-        "QPE/Rotation", "flip()",0,0},
+    { Model_Palm_LD | Model_Palm_Z72 | Model_Palm_T600 | Model_Palm_T650 |
+      Model_Palm_T680 | Model_Palm_T700W | Model_Palm_T700P |
+      Model_Palm_T750 | Model_Palm_T755P,
+      Qt::Key_F7, QT_TRANSLATE_NOOP(  "Button", "Record Button" ),
+        "devicebuttons/palm_record",
+        "QPE/VMemo", "toggleRecord()",
+        "sound", "raise()" },
+    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
+      Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
+      Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
+      Model_Palm_T650 | Model_Palm_T680 | Model_Palm_T700W |
+      Model_Palm_T700P | Model_Palm_T750 | Model_Palm_T755P,
+      Qt::Key_F8, QT_TRANSLATE_NOOP(  "Button", "Suspend Button" ),
+        "devicebuttons/palm_suspend",
+        "suspend", "raise()",
+        "suspend", "raise()" },
 };
 
 void Palm::init(const QString& cpu_info)
@@ -105,7 +128,35 @@ void Palm::init(const QString& cpu_info)
     else
         model = cpu_info;
 
-    if ( model == "Palm LifeDrive" ) {
+    if ( model == "Palm Tungsten T" ) {
+      d->m_modelstr  = "Palm Tungsten|T";
+      d->m_model  = Model_Palm_TT;
+    }
+    else if ( model == "Palm Tungsten T2" ) {
+      d->m_modelstr  = "Palm Tungsten|T2";
+      d->m_model  = Model_Palm_TT2;
+    }
+    else if ( model == "Palm Tungsten T3" ) {
+      d->m_modelstr  = "Palm Tungsten|T3";
+      d->m_model  = Model_Palm_TT3;
+    }
+    else if ( model == "Palm Tungsten T5" ) {
+      d->m_modelstr  = "Palm Tungsten|T5";
+      d->m_model  = Model_Palm_TT5;
+    }
+    else if ( model == "Palm Tungsten C" ) {
+      d->m_modelstr  = "Palm Tungsten|C";
+      d->m_model  = Model_Palm_TC;
+    }
+    else if ( model == "Palm Tungsten E" ) {
+      d->m_modelstr  = "Palm Tungsten|E";
+      d->m_model  = Model_Palm_TE;
+    }
+    else if ( model == "Palm Tungsten E2" ) {
+      d->m_modelstr  = "Palm Tungsten|E2";
+      d->m_model  = Model_Palm_TE2;
+    }
+    else if ( model == "Palm LifeDrive" ) {
       d->m_modelstr = "Palm LifeDrive";
       d->m_model = Model_Palm_LD;
     }
@@ -113,23 +164,79 @@ void Palm::init(const QString& cpu_info)
       d->m_modelstr = "Palm TX";
       d->m_model = Model_Palm_TX;
     }
+    else if ( model == "Palm Zire 71" ) {
+      d->m_modelstr  = "Palm Zire 71";
+      d->m_model  = Model_Palm_Z71;
+    }
     else if ( model == "Palm Zire 72" ) {
       d->m_modelstr = "Palm Zire 72";
       d->m_model = Model_Palm_Z72;
+    }
+    else if ( model == "Palm Treo 600" ) {
+      d->m_modelstr  = "Palm Treo 600";
+      d->m_model  = Model_Palm_T600;
+    }
+    else if ( model == "Palm Treo 650" ) {
+      d->m_modelstr  = "Palm Treo 650";
+      d->m_model  = Model_Palm_T650;
+    }
+    else if ( model == "Palm Treo 680" ) {
+      d->m_modelstr  = "Palm Treo 680";
+      d->m_model  = Model_Palm_T680;
+    }
+    else if ( model == "Palm Treo 700w" ) {
+      d->m_modelstr  = "Palm Treo 700w/700wx";
+      d->m_model  = Model_Palm_T700W;
+    }
+    else if ( model == "Palm Treo 700p" ) {
+      d->m_modelstr  = "Palm Treo 700p";
+      d->m_model  = Model_Palm_T700P;
+    }
+    else if ( model == "Palm Treo 750" ) {
+      d->m_modelstr  = "Palm Treo 750";
+      d->m_model  = Model_Palm_T750;
+    }
+    else if ( model == "Palm Treo 755p" ) {
+      d->m_modelstr	=  "Palm Treo 755";
+      d->m_model	=  Model_Palm_T755P;
+    }
+    else if ( model == "Palm Foleo" ) {
+      d->m_modelstr	=  "Palm Foleo";
+      d->m_model	=  Model_Palm_FOLEO;
     }
     else
       d->m_model = Model_Unknown;
 
     switch ( d->m_model )
     {
+      case Model_Palm_TT3:
+      case Model_Palm_TT5:
+      case Model_Palm_TC:
       case Model_Palm_LD:
       case Model_Palm_TX:
+      case Model_Palm_TE2:
       case Model_Palm_Z72:
 	m_backlightdev = "/sys/class/backlight/pxapwm-bl/";
 	d->m_rotation  = Rot0;
 	d->m_direction = CCW;
 	d->m_qteDriver = "Transformed";
 	break;
+      case Model_Palm_T600:
+      case Model_Palm_TT:
+      case Model_Palm_TT2:
+      case Model_Palm_TE:
+      case Model_Palm_Z71:
+	m_backlightdev = "/sys/class/backlight/omap-bl/";
+	break;
+      case Model_Palm_T650:
+      case Model_Palm_T680:
+      case Model_Palm_T700W:
+      case Model_Palm_T700P:
+      case Model_Palm_T750:
+      case Model_Palm_T755P:
+	m_backlightdev = "/sys/class/backlight/corgi-bl/";
+	break;
+
       default:
             m_backlightdev = "";
     }
@@ -207,8 +314,24 @@ bool Palm::suspend()
         return false;
 
     switch ( d->m_model ) {
+        case Model_Palm_TT:
+        case Model_Palm_TT2:
+        case Model_Palm_TT3:
+        case Model_Palm_TT5:
+        case Model_Palm_TE:
+        case Model_Palm_TE2:
+        case Model_Palm_TC:
         case Model_Palm_LD:
+        case Model_Palm_TX:
+        case Model_Palm_Z71:
         case Model_Palm_Z72:
+        case Model_Palm_T600:
+        case Model_Palm_T650:
+        case Model_Palm_T680:
+        case Model_Palm_T700W:
+        case Model_Palm_T700P:
+        case Model_Palm_T750:
+        case Model_Palm_T755P:
         {
             QCopChannel::send( "QPE/System", "aboutToSuspend()" );
 
@@ -233,9 +356,24 @@ int Palm::displayBrightnessResolution() const
 
     switch ( d->m_model )
     {
+      case Model_Palm_TT:
+      case Model_Palm_TT2:
+      case Model_Palm_TT3:
+      case Model_Palm_TT5:
+      case Model_Palm_TE:
+      case Model_Palm_TE2:
+      case Model_Palm_TC:
       case Model_Palm_LD:
       case Model_Palm_TX:
+      case Model_Palm_Z71:
       case Model_Palm_Z72:
+      case Model_Palm_T600:
+      case Model_Palm_T650:
+      case Model_Palm_T680:
+      case Model_Palm_T700W:
+      case Model_Palm_T700P:
+      case Model_Palm_T750:
+      case Model_Palm_T755P:
         fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
         if ( fd != -1)
         {
@@ -267,10 +405,24 @@ bool Palm::setDisplayBrightness( int bright )
 
     switch ( d->m_model )
     {
-
+      case Model_Palm_TT:
+      case Model_Palm_TT2:
+      case Model_Palm_TT3:
+      case Model_Palm_TT5:
+      case Model_Palm_TE:
+      case Model_Palm_TE2:
+      case Model_Palm_TC:
       case Model_Palm_LD:
       case Model_Palm_TX:
+      case Model_Palm_Z71:
       case Model_Palm_Z72:
+      case Model_Palm_T600:
+      case Model_Palm_T650:
+      case Model_Palm_T680:
+      case Model_Palm_T700W:
+      case Model_Palm_T700P:
+      case Model_Palm_T750:
+      case Model_Palm_T755P:
         fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
         if ( fd  != -1 )
         {
