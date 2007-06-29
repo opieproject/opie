@@ -61,6 +61,27 @@ using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 
 struct palm_button palm_buttons [] = {
+    { Model_Palm_LD,
+      Qt::Key_F6, QT_TRANSLATE_NOOP( "Button", "Rotate Button" ),
+	"devicebuttons/palm_rotate",
+	"QPE/Rotation", "flip()",
+	0, 0 },
+    { Model_Palm_LD | Model_Palm_Z72 | Model_Palm_T600 | Model_Palm_T650 |
+      Model_Palm_T680 | Model_Palm_T700W | Model_Palm_T700P |
+      Model_Palm_T750 | Model_Palm_T755P,
+      Qt::Key_F7, QT_TRANSLATE_NOOP(  "Button", "Record Button" ),
+        "devicebuttons/palm_record",
+        "QPE/VMemo", "toggleRecord()",
+        "sound", "raise()" },
+    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
+      Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
+      Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
+      Model_Palm_T650 | Model_Palm_T680 | Model_Palm_T700W |
+      Model_Palm_T700P | Model_Palm_T750 | Model_Palm_T755P,
+      Qt::Key_F8, QT_TRANSLATE_NOOP(  "Button", "Suspend Button" ),
+        "devicebuttons/palm_suspend",
+        "suspend", "raise()",
+        "suspend", "raise()" },
     { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
       Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
       Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
@@ -97,22 +118,6 @@ struct palm_button palm_buttons [] = {
         "devicebuttons/palm_mail",
         "opiemail", "raise()",
         "opiemail", "newmail()" },
-    { Model_Palm_LD | Model_Palm_Z72 | Model_Palm_T600 | Model_Palm_T650 |
-      Model_Palm_T680 | Model_Palm_T700W | Model_Palm_T700P |
-      Model_Palm_T750 | Model_Palm_T755P,
-      Qt::Key_F7, QT_TRANSLATE_NOOP(  "Button", "Record Button" ),
-        "devicebuttons/palm_record",
-        "QPE/VMemo", "toggleRecord()",
-        "sound", "raise()" },
-    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_TT5 |
-      Model_Palm_TE | Model_Palm_TE2 | Model_Palm_TC | Model_Palm_LD |
-      Model_Palm_TX | Model_Palm_Z71 | Model_Palm_Z72 | Model_Palm_T600 |
-      Model_Palm_T650 | Model_Palm_T680 | Model_Palm_T700W |
-      Model_Palm_T700P | Model_Palm_T750 | Model_Palm_T755P,
-      Qt::Key_F8, QT_TRANSLATE_NOOP(  "Button", "Suspend Button" ),
-        "devicebuttons/palm_suspend",
-        "suspend", "raise()",
-        "suspend", "raise()" },
 };
 
 void Palm::init(const QString& cpu_info)
@@ -216,6 +221,7 @@ void Palm::init(const QString& cpu_info)
       case Model_Palm_TX:
       case Model_Palm_TE2:
       case Model_Palm_Z72:
+      case Model_Palm_T650:
 	m_backlightdev = "/sys/class/backlight/pxapwm-bl/";
 	d->m_rotation  = Rot0;
 	d->m_direction = CCW;
@@ -228,7 +234,6 @@ void Palm::init(const QString& cpu_info)
       case Model_Palm_Z71:
 	m_backlightdev = "/sys/class/backlight/omap-bl/";
 	break;
-      case Model_Palm_T650:
       case Model_Palm_T680:
       case Model_Palm_T700W:
       case Model_Palm_T700P:
@@ -286,7 +291,7 @@ bool Palm::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
             case Key_Right:
             case Key_Up   :
             case Key_Down :
-		    newkeycode = Key_Left + ( keycode - Key_Left + (int) qt_screen->transformOrientation() ) % 4;
+		    newkeycode = Key_Left + ( keycode - Key_Left + 4 ) % 4;
 	    default:
 		break;
         }
