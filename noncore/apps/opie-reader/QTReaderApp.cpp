@@ -2558,7 +2558,7 @@ void QTReaderApp::editCopy()
 	reader->jumpto(m_savedpos);
 	while (reader->explocate() < endpos && (ch = reader->getch()) != UEOF)
 	{
-	    text += ch;
+	    text += QChar(ch);
 	}
 	cb->setText(text);
 	reader->locate(currentpos);
