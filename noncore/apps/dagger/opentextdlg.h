@@ -22,6 +22,7 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 #include <qlistview.h>
 
 #include <swmgr.h>
+#include <swmodule.h>
 
 class QPixmap;
 
