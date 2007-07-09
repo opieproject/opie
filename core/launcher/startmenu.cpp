@@ -271,7 +271,7 @@ void StartMenu::launch()
     if ( launchMenu->isVisible() )
         launchMenu->hide();
     else
-        launchMenu->popup( QPoint( 1, y ) );
+        launchMenu->popup( QPoint( 0, y ) );
 }
 
 
