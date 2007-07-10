@@ -37,7 +37,7 @@ class StartPopupMenu : public QPopupMenu
 
 public:
     StartPopupMenu( QWidget *parent ) : QPopupMenu( parent ) {}
-    
+
 protected:
     void keyPressEvent( QKeyEvent *e );
 
@@ -54,9 +54,9 @@ struct MenuApplet {
 };
 
 class StartMenu : public QLabel {
-    
+
     Q_OBJECT
-        
+
 public:
     StartMenu( QWidget * );
     ~StartMenu();
@@ -100,7 +100,7 @@ private:
     QIntDict<AppLnk> appLnks;
     QIntDict<QString> tabNames;
     QIntDict<MenuApplet> menuApplets;
-    
+
 };
 
 #endif // __START_MENU_H__
