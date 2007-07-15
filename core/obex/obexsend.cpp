@@ -178,14 +178,10 @@ void SendWidget::slotIrError( int ) {
     irdaStatus->setText(tr("error :("));
 }
 void SendWidget::slotIrSent( bool b) {
-#ifdef BLUETOOTH
     QString text = b ? tr("Sent") : tr("Failure");
     setReceiverStatus( m_irDaIt.key(), text );
     ++m_irDaIt;
     slotStartIrda();
-#else
-    (void)b;
-#endif
 }
 void SendWidget::slotIrTry(unsigned int trI) {
     setReceiverStatus(m_irDaIt.key(), tr("Try %1").arg( QString::number( trI ) ));
