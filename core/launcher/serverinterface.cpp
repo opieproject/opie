@@ -113,7 +113,7 @@ void LayoutManager::layout()
 		mwr.setTop( w->geometry().bottom() + 1 );
 		break;
 	    case ServerInterface::Bottom:
-                w->setGeometry( mwr.left(), mwr.bottom() - sh.height(),
+                w->setGeometry( mwr.left(), mwr.bottom() - sh.height() + 1,
                                 mwr.width(), sh.height() );
 		mwr.setBottom( w->geometry().top() - 1 );
 		break;
