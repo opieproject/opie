@@ -61,12 +61,25 @@ using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 
 struct palm_button palm_buttons [] = {
+    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3,
+      Qt::Key_F3, QT_TRANSLATE_NOOP(  "Button", "Slider Close" ),
+        "devicebuttons/palm_slider_close",
+        0, 0, 0, 0 },
+    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3,
+      Qt::Key_F4, QT_TRANSLATE_NOOP(  "Button", "Slider Open" ),
+        "devicebuttons/palm_slider_open",
+        0, 0, 0, 0 },
+    { Model_Palm_LD,
+      Qt::Key_F5, QT_TRANSLATE_NOOP( "Button", "Lock Button" ),
+	"devicebuttons/palm_lock",
+        0, 0, 0, 0 },
     { Model_Palm_LD,
       Qt::Key_F6, QT_TRANSLATE_NOOP( "Button", "Rotate Button" ),
 	"devicebuttons/palm_rotate",
 	"QPE/Rotation", "flip()",
 	0, 0 },
-    { Model_Palm_LD | Model_Palm_Z72 | Model_Palm_T600 | Model_Palm_T650 |
+    { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3 | Model_Palm_LD |
+      Model_Palm_Z72 | Model_Palm_T600 | Model_Palm_T650 |
       Model_Palm_T680 | Model_Palm_T700W | Model_Palm_T700P |
       Model_Palm_T750 | Model_Palm_T755P,
       Qt::Key_F7, QT_TRANSLATE_NOOP(  "Button", "Record Button" ),
