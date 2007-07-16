@@ -207,7 +207,19 @@ static void obex_conn_event (obex_t *handle, obex_object_t *object,
             /* Comes when a server-request has been received. */
             handle_request (handle, object, event, obex_cmd);
             break;
-
+	case OBEX_EV_REQDONE:
+	    switch(obex_cmd) {
+		case OBEX_CMD_PUT:
+		case OBEX_CMD_CONNECT:
+		    break;
+		case OBEX_CMD_DISCONNECT:
+		    OBEX_TransportDisconnect(handle);
+		    _exit(0);
+		    break;
+		default:
+		    break;
+	    }
+	    break;
         case OBEX_EV_LINKERR:
             break;
     }
@@ -423,21 +435,15 @@ bool ObexServer::start(RunMode runmode, Communication comm)
             fcntl( fd[ 1 ], F_SETFD, FD_CLOEXEC );
 
         if (initObex() == 0) {
+	    if ( fd[ 1 ] ) {
+		::close(fd[1]);
+		fd[1] = 0;
+	    }
             do {
-                int result; //Connection result
-                if ( fd[ 1 ] ) {
-                    ::close(fd[1]);
-                    fd[1] = 0;
-                }
-                if ((result = OBEX_HandleInput(m_obex, 60)) < 0) {
-                    if (errno != ECONNRESET) {
-                        printf("OBEX_HandleInput error %d\n", errno);
-                        fflush(stdout);
-                        _exit(-1);
-                    }
-                    else
-                        _exit(0);
-                }
+                if (OBEX_HandleInput(m_obex, 60) < 0) {
+		    fprintf(stderr,"failed to OBEX_HandleInput(), errno=%d\n",errno);
+                    _exit(errno?errno:-1);
+		}
             } while(1);
         }
         char resultByte = 1;
