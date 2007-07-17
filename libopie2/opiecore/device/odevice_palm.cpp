@@ -235,7 +235,12 @@ void Palm::init(const QString& cpu_info)
       case Model_Palm_TE2:
       case Model_Palm_Z72:
       case Model_Palm_T650:
-	m_backlightdev = "/sys/class/backlight/pxapwm-bl/";
+      case Model_Palm_T680:
+      case Model_Palm_T700W:
+      case Model_Palm_T700P:
+      case Model_Palm_T750:
+      case Model_Palm_T755P:
+	m_backlightdev = "/sys/class/backlight/corgi-bl/";
 	d->m_rotation  = Rot0;
 	d->m_direction = CCW;
 	d->m_qteDriver = "Transformed";
@@ -247,12 +252,6 @@ void Palm::init(const QString& cpu_info)
       case Model_Palm_Z71:
 	m_backlightdev = "/sys/class/backlight/omap-bl/";
 	break;
-      case Model_Palm_T680:
-      case Model_Palm_T700W:
-      case Model_Palm_T700P:
-      case Model_Palm_T750:
-      case Model_Palm_T755P:
-	m_backlightdev = "/sys/class/backlight/corgi-bl/";
 	break;
 
       default:
