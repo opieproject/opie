@@ -46,10 +46,6 @@ CONFIG_CLOCK=y
 CONFIG_CALCULATOR=y
 
 #
-# calc2
-#
-
-#
 # todayplugins
 #
 
