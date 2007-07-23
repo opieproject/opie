@@ -182,13 +182,15 @@ void iPAQ::init(const QString& model)
     else
         d->m_model = Model_Unknown;
 
+    // FIXME: h2200 rotation should be Rot0, but somewhere else things are messed 
+    // up - so I have set it to Rot270 as a workaround. This should be fixed properly
+    // later. - Paul Eggleton 22/07/2007
     switch ( d->m_model ) {
         case Model_iPAQ_H31xx:
         case Model_iPAQ_H38xx:
             d->m_rotation = Rot90;
             break;
         case Model_iPAQ_H5xxx:
-        case Model_iPAQ_H22xx:
         case Model_iPAQ_H191x:
         case Model_iPAQ_H1940:
 	case Model_iPAQ_HX4700:
@@ -198,6 +200,7 @@ void iPAQ::init(const QString& model)
         case Model_iPAQ_H36xx:
         case Model_iPAQ_H37xx:
         case Model_iPAQ_H39xx:
+        case Model_iPAQ_H22xx:
         default:
             d->m_rotation = Rot270;
             break;
