@@ -60,6 +60,8 @@
 using namespace Opie::Core;
 using namespace Opie::Core::Internal;
 
+bool suspended;
+
 struct palm_button palm_buttons [] = {
     { Model_Palm_TT | Model_Palm_TT2 | Model_Palm_TT3,
       Qt::Key_F3, QT_TRANSLATE_NOOP(  "Button", "Slider Close" ),
@@ -329,6 +331,12 @@ bool Palm::suspend()
 
     if ( !isQWS( ) ) // only qwsserver is allowed to suspend
         return false;
+
+    if (d->m_model == Model_Palm_LD) {
+	suspended = !suspended;
+	if (!suspended)
+	    return 0;
+    }
 
     switch ( d->m_model ) {
         case Model_Palm_TT:
