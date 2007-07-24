@@ -28,8 +28,8 @@ CONFIG_CLOCKAPPLET	core/applets/clockapplet	clockapplet.pro
 CONFIG_CLOCK	noncore/tools/clock	clock.pro
 CONFIG_CONFEDIT	noncore/apps/confedit	confedit.pro
 CONFIG_DAGGER noncore/apps/dagger dagger.pro
-CONFIG_DASHER	inputmethods/dasher	dasher.pro
-CONFIG_DATEBOOK2	core/pim/datebook2	datebook2.pro
+CONFIG_DASHER	noncore/unsupported/dasher	dasher.pro
+CONFIG_DATEBOOK2	noncore/unsupported/datebook2	datebook2.pro
 CONFIG_DATEBOOK	core/pim/datebook	datebook.pro
 CONFIG_DATEBOOK_BIRTHDAYS_HOLIDAY core/pim/datebook/holiday/birthday birthdays.pro
 CONFIG_DATEBOOK_CHRISTIAN_HOLIDAY core/pim/datebook/holiday/christian christian-holidays.pro
@@ -162,7 +162,6 @@ CONFIG_OPIEIRC	noncore/net/opieirc	opieirc.pro
 CONFIG_OPIE-LOGIN	core/opie-login	opie-login.pro
 CONFIG_OPIEMAIL2	noncore/unsupported/mail2 mail.pro
 CONFIG_OPIEPLAYER2	noncore/multimedia/opieplayer2	opieplayer2.pro
-CONFIG_OPIEPLAYER3	noncore/multimedia/opieplayer3	opieplayer3.pro
 CONFIG_OPIEPLAYER	core/multimedia/opieplayer	opieplayer.pro
 CONFIG_OPIE-RDESKTOP	noncore/net/opierdesktop	opierdesktop.pro
 CONFIG_OPIE-READER	noncore/apps/opie-reader	opie-reader.pro
@@ -244,7 +243,7 @@ CONFIG_TONLEITER	noncore/multimedia/tonleiter	tonleiter.pro
 CONFIG_TRACKER	noncore/multimedia/tracker	tracker.pro
 CONFIG_UBROWSER	noncore/unsupported/ubrowser	ubrowser.pro
 CONFIG_UNIKEYBOARD	inputmethods/unikeyboard	unikeyboard.pro
-CONFIG_USERMANAGER	noncore/settings/usermanager	usermanager.pro
+CONFIG_USERMANAGER	noncore/unsupported/usermanager	usermanager.pro
 CONFIG_VMEMO	core/applets/vmemo	vmemo.pro
 CONFIG_VOLUMEAPPLET	core/applets/volumeapplet	volumeapplet.pro
 CONFIG_VOLUMEAPPLET2	noncore/applets/volumeapplet2	volumeapplet2.pro
