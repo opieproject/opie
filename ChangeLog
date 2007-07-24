@@ -3,9 +3,9 @@
 	
 	New Features
 	------------
-	* Improved support for some newer iPAQ models (S.Banko, R.Wagner, E.Hovland, P.Sokolovsky)
+	* Improved support for some newer iPAQ models (S. Banko, R. Wagner, E. Hovland, P. Sokolovsky)
 	* Added support for the Palm Tungsten T/T2/T3/T5/C/E/E2, LifeDrive, TX, Zire 71/72, Treo 600/650/680/700w/700p/750/755p and Foleo handhelds (Marek Vasut, Alex Osborne, Cristiano, Sergey Lapin, Jan Herman, Aaron11)
-	* Backlight support for iPAQ handhelds using 2.6 kernel (psokolovsky, Slavek Banko)
+	* Backlight support for iPAQ handhelds using 2.6 kernel (P. Sokolovsky, Slavek Banko)
 	* Improved HTC Universal handheld support (GoXbox Live)
 	* Opie-Remote: added integrated remote learning and now completely sets up LIRC for you (bluelightning)
 	* Added video4linux camera app from Qtopia 2, needs more work (ljp)
@@ -14,7 +14,7 @@
 
 	Fixed Bugs
 	----------
-	* n.a.  - Many, many code fixes that should improve Opie stability (ehovland)
+	* n.a.  - Many, many code fixes that should improve Opie stability (E. Hovland)
 	* n.a.  - Fixed many bugs in bluetooth & OBEX code (korovkin)
 	* #1150 - Fix adding global categories in all PIM applications (bluelightning)
 	* #1764 - Multikey: fix ru.keymap to allow it to load with utf8 locale set (polyonymous)
@@ -31,14 +31,14 @@
 	* #1844 - Datebook: show 12-hour time when selected for system time (harlekin)
 	* n.a.  - Date/Time Settings: add option to prompt for date/time on every restart (bluelightning)
 	* n.a.  - Date/Time Settings: show a warning if timezone file for selected system time zone is missing (bluelightning)
-	* #1580 - Date/Time Settings: Use pool.ntp.org servers for time sync (ehovland)
+	* #1580 - Date/Time Settings: Use pool.ntp.org servers for time sync (E. Hovland)
 	* #1848 - Date/Time Settings: correctly set AM/PM (harlekin)
 	* n.a.  - OpieRec: show size in bytes/kb/mb of recordings (bluelightning)
 	* n.a.  - OpieRec: several minor usability fixes (bluelightning)
 	* n.a.  - OpieRec: default the stereo option to off instead of on (bluelightning)
 	* #1766 - Opie-reader: fix copying unicode block into clipboard (polyonymous)
 	* #1851 - Opie-dagger: allow building against Sword 1.5.9 (Marex)
-	* #1836 - Button Settings: fix incorrect button listing on some iPAQs (ehovland)
+	* #1836 - Button Settings: fix incorrect button listing on some iPAQs (E. Hovland)
 	* #1830 - Security: fix "On Resume" option to actually control showing authentication on resume (bluelightning)
 	* #1680 - Security: rework PIN dialog to work with number keys and joypad (bluelightning)
 	* #1373 - TinyKATE: make OK/cancel buttons visible in settings at QVGA resolution (bluelightning)
@@ -49,19 +49,19 @@
 	* #1530 - Opie-Mediaplayer2: enable searching for audio/x-ogg (polyonymous)
 	* #1864 - Taskbar: fix 1 pixel gap under taskbar (Marex)
 	* #1866 - Taskbar: fix 1 pixel gap left of main menu (Marex)
-	* #1854 - Fix IR OBEX regressions in 1.2.3 (Marex, polyonymous, psokolovsky, bluelightning)
-	* #1838 - Read Bluetooth configuration parameters from /etc/sysconfig/bluetooth (Slavek Banko, psokolovsky)
-	* n.a.  - Improved iPAQ support in ODevice and low-level applets (S.Banko, R.Wagner, E.Hovland, P.Sokolovsky)
+	* #1854 - Fix IR OBEX regressions in 1.2.3 (Marex, polyonymous, P. Sokolovsky, bluelightning)
+	* #1838 - Read Bluetooth configuration parameters from /etc/sysconfig/bluetooth (Slavek Banko, P. Sokolovsky)
+	* n.a.  - Improved iPAQ support in ODevice and low-level applets (S. Banko, R. Wagner, E. Hovland, P. Sokolovsky)
 	* n.a.  - Improved platform support for the Motorola EZX platform (mickeyl)
 	* n.a.  - Changed suspend button mapping for Asus MyPal to same as for iPAQ (aquadran)
 	* n.a.  - Fix for LCD on iPAQ h191x and MyPal A716 (Slavek Banko, aquadran)
 
 	Internal
 	--------
-	* Fixed lots of unchecked return values, bad member function overrides, bad/missing frees, etc. (ehovland)
-	* Removed some old commented out code (ehovland)
+	* Fixed lots of unchecked return values, bad member function overrides, bad/missing frees, etc. (E. Hovland)
+	* Removed some old commented out code (E. Hovland)
 	* Made OBEX library buildable if bluetooth support is disabled (korovkin)
-	* ODevice: devices renumbered to allow proper bitmasking (ehovland, bluelightning)
+	* ODevice: devices renumbered to allow proper bitmasking (E. Hovland, bluelightning)
 	* Opie-Remote: abstracted all lircd interaction to a single LircHandler class (bluelightning)
 	* Move datebook2, dasher & usermanager to unsupported - these applications are unusable and/or unmaintained.
 	* Remove unfinished applications: opieplayer3, calc2 & linphone
