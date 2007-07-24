@@ -50,7 +50,7 @@
 	* #1864 - Taskbar: fix 1 pixel gap under taskbar (Marex)
 	* #1866 - Taskbar: fix 1 pixel gap left of main menu (Marex)
 	* #1854 - Fix IR OBEX regressions in 1.2.3 (Marex, polyonymous, psokolovsky, bluelightning)
-        * #1838 - Read Bluetooth configuration parameters from /etc/sysconfig/bluetooth (Slavek Banko, psokolovsky)
+	* #1838 - Read Bluetooth configuration parameters from /etc/sysconfig/bluetooth (Slavek Banko, psokolovsky)
 	* n.a.  - Improved iPAQ support in ODevice and low-level applets (S.Banko, R.Wagner, E.Hovland, P.Sokolovsky)
 	* n.a.  - Improved platform support for the Motorola EZX platform (mickeyl)
 	* n.a.  - Changed suspend button mapping for Asus MyPal to same as for iPAQ (aquadran)
@@ -63,6 +63,8 @@
 	* Made OBEX library buildable if bluetooth support is disabled (korovkin)
 	* ODevice: devices renumbered to allow proper bitmasking (ehovland, bluelightning)
 	* Opie-Remote: abstracted all lircd interaction to a single LircHandler class (bluelightning)
+	* Move datebook2, dasher & usermanager to unsupported - these applications are unusable and/or unmaintained.
+	* Remove unfinished applications: opieplayer3, calc2 & linphone
 
 
 2006-05-28	Opie 1.2.2
