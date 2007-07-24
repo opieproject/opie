@@ -64,18 +64,10 @@ TabsSettings::TabsSettings ( QWidget *parent, const char *name )
 
 	QWhatsThis::add ( m_list, tr( "foobar" ));
 
-	QPushButton *p1, *p2, *p3;
-	p1 = new QPushButton ( tr( "New" ), this );
+	QPushButton *p1;
+	p1 = new QPushButton ( tr( "Edit" ), this );
 	lay-> addWidget ( p1, 1, 1 );
-	connect ( p1, SIGNAL( clicked()), this, SLOT( newClicked()));
-
-	p2 = new QPushButton ( tr( "Edit" ), this );
-	lay-> addWidget ( p2, 2, 1 );
-	connect ( p2, SIGNAL( clicked()), this, SLOT( editClicked()));
-
-	p3 = new QPushButton ( tr( "Delete" ), this );
-	lay-> addWidget ( p3, 3, 1 );
-	connect ( p3, SIGNAL( clicked()), this, SLOT( deleteClicked()));
+	connect ( p1, SIGNAL( clicked()), this, SLOT( editClicked()));
 
 	lay-> setRowStretch ( 4, 10 );
 
@@ -88,16 +80,11 @@ TabsSettings::TabsSettings ( QWidget *parent, const char *name )
         m_staticbackground = new QCheckBox( tr( "Enable static background pixmap" ), this );
         lay->addMultiCellWidget( m_staticbackground, 7, 7, 0, 1 );
 
-	p1-> setEnabled ( false );
-	p3-> setEnabled ( false );
-
 	init ( );
 
 	QWhatsThis::add ( m_list, tr( "Select the Launcher Tab you want to edit or delete." ));
-	QWhatsThis::add ( p1, tr( "Adds a new Tab to the Launcher." ) + QString ( "<center><br><i>not yet implemented</i><br>Please use the tabmanager</center>." ));
-	QWhatsThis::add ( p2, tr( "Opens a new dialog to customize the select Tab." ));
-	QWhatsThis::add ( p3, tr( "Deletes a Tab from the Launcher." ) + QString ( "<center><br><i>not yet implemented</i><br>Please use the tabmanager</center>." ));
-        	QWhatsThis::add ( m_bigbusy, tr( "Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar." ));
+	QWhatsThis::add ( p1, tr( "Opens a new dialog to customize the select Tab." ));
+       	QWhatsThis::add ( m_bigbusy, tr( "Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar." ));
 	QWhatsThis::add ( m_busyani, tr( "Activate this, if you want an animatedbusy indicator for starting applications in the Launcher." ));
 	QWhatsThis::add ( m_staticbackground, tr( "Activate this, if you want the background pixmap not to scroll with the icons." ));
 }
