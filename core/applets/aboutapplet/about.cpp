@@ -2,6 +2,7 @@
 #include "widget.h"
 
 #include <opie2/oresource.h>
+#include <qpe/version.h>
 
 #include <qpe/applnk.h>
 #include <qpe/qpeapplication.h>
@@ -56,8 +57,10 @@ QPopupMenu *AboutApplet::popup ( QWidget * ) const
 
 void AboutApplet::activated()
 {
-    if ( !m_ad )
+    if ( !m_ad ) {
         m_ad = new AboutWidget( 0, "aboutDialog" );
+        m_ad->lbVerString->setText(tr("<center><b>The Open Palmtop Integrated Environment v%1</b></center>").arg(QPE_VERSION));
+    }
 
     QPEApplication::showWidget( m_ad );
 }
