@@ -109,7 +109,7 @@ struct i_button ipaq_buttons [] = {
     "devicebuttons/ipaq_home",
     "QPE/Launcher", "home()",
     "buttonsettings", "raise()" },
-    { Model_Keyboardless_2_6,
+    { Model_iPAQ_H191x | Model_iPAQ_HX4700 | Model_iPAQ_H4xxx,
     Qt::Key_F24, QT_TRANSLATE_NOOP("Button", "Record Button"),
     "devicebuttons/ipaq_record",
     "QPE/VMemo", "toggleRecord()",
