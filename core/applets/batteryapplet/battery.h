@@ -53,7 +53,7 @@ class BatteryMeter : public QWidget
     QTimer *chargeTimer;
     int percent;
     bool charging;
-    int style;
+    bool style;
 };
 
 #endif

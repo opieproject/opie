@@ -88,7 +88,7 @@ bool BatteryStatus::getProcApmStatusIpaq() {
     jackPercent = perc2.toInt();
     ipaqPercent = perc1.toInt();
 
-    if (perc2.isEmpty() || perc2 == "unknow" ) {
+    if (perc2.isEmpty() || perc2 == "unknown" ) {
         perc2 = tr("no data");
     } else {
         perc2 += " %";

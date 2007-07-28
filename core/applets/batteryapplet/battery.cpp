@@ -48,7 +48,7 @@ BatteryMeter::BatteryMeter( QWidget *parent )
     QPEApplication::setStylusOperation( this, QPEApplication::RightOnHold );
     Config c( "qpe" );
     c.setGroup( "Battery" );
-    style = c.readNumEntry( "Style", 0 );
+    style = c.readNumEntry( "Style", 0 ) ? true : false;
 }
 
 BatteryMeter::~BatteryMeter() {
@@ -61,10 +61,10 @@ QSize BatteryMeter::sizeHint() const {
 
 void BatteryMeter::mousePressEvent( QMouseEvent* e ) {
     if ( e->button() == RightButton ) {
-        style = 1-style;
+        style = !style;
         Config c( "qpe" );
         c.setGroup( "Battery" );
-        c.writeEntry( "Style", style );
+        c.writeEntry( "Style", style ? 1 : 0 );
         repaint( true );
     }
     QWidget::mousePressEvent( e );
@@ -110,7 +110,7 @@ void BatteryMeter::timerEvent( QTimerEvent * ) {
             if ( batteryView )
                 batteryView->updatePercent( percent );
         }
-        repaint( style != 0 );
+        repaint( style );
         if ( batteryView )
             batteryView->repaint();
     }
