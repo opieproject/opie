@@ -153,6 +153,7 @@ void LauncherTabWidget::createDocLoadingWidget()
     {
         textLabel->setText( tr( "<b>The Documents Tab<p>has been disabled.<p>"
                                 "Use Settings->Launcher->DocTab<p>to reenable it.</b></center>" ) );
+        waitPixmap->hide();
         docLoadingWidgetProgress->hide();
         docLoadingWidgetEnabled = true;
     }
