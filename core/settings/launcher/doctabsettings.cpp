@@ -54,7 +54,6 @@ DocTabSettings::DocTabSettings( QWidget *parent, const char *name ):QWidget( par
     _enable->setChecked( cfg.readBoolEntry( "Enable", true ) );
 
     lay->addWidget( _enable );
-    lay->addWidget( new QLabel( tr( "<b>Note:</b> Changing these settings may need restarting Opie to become effective." ), this ) );
 
     lay->addStretch();
 
