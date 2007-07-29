@@ -46,6 +46,7 @@
 #if QT_VERSION >= 0x030000
 #include <qstylefactory.h>
 #endif
+#include <qtopia/qcopenvelope_qws.h>
 
 #include <stdlib.h>
 
@@ -79,6 +80,10 @@ void DocTabSettings::applyDocTab()
     cfg.setGroup( "DocTab" );
     cfg.writeEntry( "Enable", yes->isChecked() );
     cfg.write();
+#ifndef QT_NO_COP
+    QCopEnvelope e( "QPE/Launcher", "doctabEnabled(int)" );
+    e << yes->isChecked();
+#endif
 }
 
 
