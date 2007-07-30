@@ -219,12 +219,13 @@ bool MyPal::setDisplayBrightness ( int bright )
     if ( sysClass.exists() && sysClass.count() > 2 ) {
         QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/brightness" );
 	int fd = ::open( sysClassPath, O_WRONLY|O_NONBLOCK );
-	if ( fd ) {
-		char buf[100];
-		int val = bright * displayBrightnessResolution() / 255;
-		int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-		res = ( ::write( fd, &buf[0], len ) == 0 );
-		::close( fd );
+	if ( fd >= 0 ) {
+            char buf[100];
+            int val = bright * displayBrightnessResolution() / 255;
+            int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
+            if (len > 0)
+                res = ( ::write( fd, &buf[0], len ) == 0 );
+            ::close( fd );
 	}
     }
 
@@ -250,7 +251,7 @@ bool MyPal::setDisplayStatus ( bool on )
     if ( sysClass.exists() && sysClass.count() > 2 ) {
 	QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/power" );
 	int fd = ::open( sysClassPath, O_WRONLY|O_NONBLOCK );
-	if ( fd ) {
+	if ( fd >= 0 ) {
 	    char buf[10];
 	    buf[0] = on ? 0 : 4;
 	    buf[1] = '\0';

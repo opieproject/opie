@@ -156,7 +156,13 @@ int MyPty::run(const char* cmd, QStrList &, const char*, int)
     if ( !m_cpid ) {
 	// child - exec shell on tty
 	for (int sig = 1; sig < NSIG; sig++) signal(sig,SIG_DFL);
+
 	int ttyfd = ::open(m_ttynam, O_RDWR);
+	if (ttyfd < 0) {
+            perror( "failed to open they given tty" );
+	    donePty();
+	    exit(-1);
+	}
 	dup2(ttyfd, STDIN_FILENO);
 	dup2(ttyfd, STDOUT_FILENO);
 	dup2(ttyfd, STDERR_FILENO);
@@ -176,10 +182,10 @@ int MyPty::run(const char* cmd, QStrList &, const char*, int)
 	tcsetattr( STDIN_FILENO, TCSANOW, &ttmode );
 	setenv("TERM",m_term,1);
 	setenv("COLORTERM","0",1);
-    EnvironmentMap::Iterator it;
-    for (it = m_env.begin(); it != m_env.end(); it++) {
-        setenv(it.key().latin1(), it.data().latin1(), 1);
-    }
+        EnvironmentMap::Iterator it;
+        for (it = m_env.begin(); it != m_env.end(); it++) {
+            setenv(it.key().latin1(), it.data().latin1(), 1);
+        }
 	if (getuid() == 0) {
 	    char msg[] = "WARNING: You are running this shell as root!\n";
 	    write(ttyfd, msg, sizeof(msg));

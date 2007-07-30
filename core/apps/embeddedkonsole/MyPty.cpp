@@ -141,52 +141,58 @@ void MyPty::error()
 */
 int MyPty::run(const char* cmd, QStrList &, const char*, int)
 {
-      // This is code from the Qt DumbTerminal example
+    // This is code from the Qt DumbTerminal example
     cpid = fork();
 
     if ( !cpid ) {
-  // child - exec shell on tty
-  for (int sig = 1; sig < NSIG; sig++) signal(sig,SIG_DFL);
+        // child - exec shell on tty
+        for (int sig = 1; sig < NSIG; sig++) signal(sig,SIG_DFL);
 
-  // attempt to keep apm driver from killing us on power on/off
-  signal(SIGSTOP, SIG_IGN);
-  signal(SIGCONT, SIG_IGN);
-  signal(SIGTSTP, SIG_IGN);
+        // attempt to keep apm driver from killing us on power on/off
+        signal(SIGSTOP, SIG_IGN);
+        signal(SIGCONT, SIG_IGN);
+        signal(SIGTSTP, SIG_IGN);
 
-  int ttyfd = open(ttynam, O_RDWR);
-  dup2(ttyfd, STDIN_FILENO);
-  dup2(ttyfd, STDOUT_FILENO);
-  dup2(ttyfd, STDERR_FILENO);
-  // should be done with tty, so close it
-  close(ttyfd);
-  static struct termios ttmode;
-  if ( setsid() < 0 )
-      perror( "failed to set process group" );
+        int ttyfd = open(ttynam, O_RDWR);
+        if (ttyfd < 0) {
+            perror( "failed to open they given tty" );
+	    donePty();
+	    exit(-1);
+	}
+        dup2(ttyfd, STDIN_FILENO);
+        dup2(ttyfd, STDOUT_FILENO);
+        dup2(ttyfd, STDERR_FILENO);
+        // should be done with tty, so close it
+        close(ttyfd);
+        static struct termios ttmode;
+        if ( setsid() < 0 )
+            perror( "failed to set process group" );
 #if defined (TIOCSCTTY)
-  // grabbed from APUE by Stevens (see section 9.6, should be page 246)
-  if (ioctl(STDIN_FILENO, TIOCSCTTY, 0) == -1)
-      perror( "failed to allocate a controlling terminal" );
+        // grabbed from APUE by Stevens (see section 9.6, should be page 246)
+        if (ioctl(STDIN_FILENO, TIOCSCTTY, 0) == -1)
+            perror( "failed to allocate a controlling terminal" );
 #endif
-  tcgetattr( STDIN_FILENO, &ttmode );
-  ttmode.c_cc[VINTR] = 3;
-  ttmode.c_cc[VERASE] = 8;
-  tcsetattr( STDIN_FILENO, TCSANOW, &ttmode );
+        tcgetattr( STDIN_FILENO, &ttmode );
+        ttmode.c_cc[VINTR] = 3;
+        ttmode.c_cc[VERASE] = 8;
+        tcsetattr( STDIN_FILENO, TCSANOW, &ttmode );
 
 	if(strlen(getenv("TERM"))<=0)
-			setenv("TERM","vt100",1);
-  setenv("COLORTERM","0",1);
+            setenv("TERM","vt100",1);
 
-  if (getuid() == 0) {
-      char msg[] = "WARNING: You are running this shell as root!\n";
-      write(ttyfd, msg, sizeof(msg));
-  }
+        setenv("COLORTERM","0",1);
 
-  QString ccmd = "-"+QFileInfo(cmd).fileName(); //creates a login shell
+        if (getuid() == 0) {
+            char msg[] = "WARNING: You are running this shell as root!\n";
+            write(ttyfd, msg, sizeof(msg));
+        }
 
-  execl(cmd, ccmd.latin1(), 0);
+        QString ccmd = "-"+QFileInfo(cmd).fileName(); //creates a login shell
 
-  donePty();
-  exit(-1);
+        execl(cmd, ccmd.latin1(), 0);
+
+        donePty();
+        exit(-1);
     }
 
     // parent - continue as a widget

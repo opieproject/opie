@@ -370,7 +370,7 @@ int HTC::displayBrightnessResolution() const
 
     int fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
 
-        if ( fd )
+        if ( fd >= 0 )
         {
             char buf[100];
             if ( ::read( fd, &buf[0], sizeof buf ) ) ::sscanf( &buf[0], "%d", &res );
@@ -393,11 +393,12 @@ bool HTC::setDisplayBrightness( int bright )
     int val = ( bright == 1 ) ? 1 : ( bright * numberOfSteps ) / 255;
 
     int fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
-    if ( fd )
+    if ( fd >= 0 )
     {
       char buf[100];
       int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-      res = ( ::write( fd, &buf[0], len ) == 0 );
+      if (len > 0)
+          res = ( ::write( fd, &buf[0], len ) == 0 );
       ::close( fd );
     }
     return res;
@@ -409,7 +410,7 @@ bool HTC::setDisplayStatus( bool on )
     bool res = false;
 
     int fd = ::open( m_backlightdev + "power", O_WRONLY|O_NONBLOCK );
-    if ( fd )
+    if ( fd >= 0 )
     {
      char buf[10];
      buf[0] = on ? FB_BLANK_UNBLANK : FB_BLANK_POWERDOWN;

@@ -471,7 +471,7 @@ int Zaurus::displayBrightnessResolution() const
     if (m_embedix)
     {
         int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_RDWR|O_NONBLOCK );
-        if ( fd )
+        if ( fd >= 0 )
         {
             int value = ::ioctl( fd, SHARP_FL_IOCTL_GET_STEP, 0 );
             ::close( fd );
@@ -481,7 +481,7 @@ int Zaurus::displayBrightnessResolution() const
     else
     {
         int fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
-        if ( fd )
+        if ( fd >= 0 )
         {
             char buf[100];
             if ( ::read( fd, &buf[0], sizeof buf ) ) ::sscanf( &buf[0], "%d", &res );
@@ -505,7 +505,7 @@ bool Zaurus::setDisplayBrightness( int bright )
     if ( m_embedix )
     {
         int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );
-        if ( fd )
+        if ( fd >= 0 )
         {
             res = ( ::ioctl( fd, SHARP_FL_IOCTL_STEP_CONTRAST, val ) == 0 );
             ::close( fd );
@@ -514,11 +514,12 @@ bool Zaurus::setDisplayBrightness( int bright )
     else
     {
         int fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
-        if ( fd )
+        if ( fd >= 0 )
         {
             char buf[100];
             int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-            res = ( ::write( fd, &buf[0], len ) == 0 );
+            if (len > 0)
+                res = ( ::write( fd, &buf[0], len ) == 0 );
             ::close( fd );
         }
     }
@@ -531,7 +532,7 @@ bool Zaurus::setDisplayStatus( bool on )
     if ( m_embedix )
     {
         int fd = ::open( SHARP_FL_IOCTL_DEVICE, O_WRONLY|O_NONBLOCK );
-        if ( fd )
+        if ( fd >= 0 )
         {
             int ioctlnum = on ? SHARP_FL_IOCTL_ON : SHARP_FL_IOCTL_OFF;
             res = ( ::ioctl ( fd, ioctlnum, 0 ) == 0 );
@@ -541,7 +542,7 @@ bool Zaurus::setDisplayStatus( bool on )
     else
     {
         int fd = ::open( m_backlightdev + "power", O_WRONLY|O_NONBLOCK );
-        if ( fd )
+        if ( fd >= 0 )
         {
             char buf[10];
             buf[0] = on ? FB_BLANK_UNBLANK : FB_BLANK_POWERDOWN;

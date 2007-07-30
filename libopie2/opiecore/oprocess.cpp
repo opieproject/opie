@@ -722,8 +722,11 @@ int OProcess::commSetupDoneC()
     else
     {
         int null_fd = open( "/dev/null", O_RDONLY );
-        ok &= dup2( null_fd, STDIN_FILENO ) != -1;
-        close( null_fd );
+        if (null_fd >= 0)
+        {
+            ok &= dup2( null_fd, STDIN_FILENO ) != -1;
+            close( null_fd );
+        }
     }
     if ( communication & Stdout )
     {
@@ -733,8 +736,11 @@ int OProcess::commSetupDoneC()
     else
     {
         int null_fd = open( "/dev/null", O_WRONLY );
-        ok &= dup2( null_fd, STDOUT_FILENO ) != -1;
-        close( null_fd );
+        if (null_fd >= 0)
+        {
+            ok &= dup2( null_fd, STDOUT_FILENO ) != -1;
+            close( null_fd );
+        }
     }
     if ( communication & Stderr )
     {
@@ -744,8 +750,11 @@ int OProcess::commSetupDoneC()
     else
     {
         int null_fd = open( "/dev/null", O_WRONLY );
-        ok &= dup2( null_fd, STDERR_FILENO ) != -1;
-        close( null_fd );
+        if (null_fd >= 0)
+        {
+            ok &= dup2( null_fd, STDERR_FILENO ) != -1;
+            close( null_fd );
+        }
     }
     return ok;
 }

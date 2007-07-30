@@ -99,6 +99,7 @@ vorbis_info_residue *res0_unpack(vorbis_info *vi,oggpack_buffer *opb){
 
   for(j=0;j<info->partitions;j++){
     int cascade=oggpack_read(opb,3);
+    if(cascade == -1)goto errout;
     if(oggpack_read(opb,1))
       cascade|=(oggpack_read(opb,5)<<3);
     info->secondstages[j]=cascade;

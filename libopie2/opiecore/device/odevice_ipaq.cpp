@@ -404,11 +404,12 @@ bool iPAQ::setDisplayBrightness ( int bright )
     if ( sysClass.exists() && sysClass.count() > 2 ) {
         QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/brightness" );
         int fd = ::open( sysClassPath, O_WRONLY|O_NONBLOCK );
-        if ( fd ) {
+        if ( fd >= 0 ) {
             char buf[100];
             int val = bright * displayBrightnessResolution() / 255;
             int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-            res = ( ::write( fd, &buf[0], len ) == 0 );
+            if (len > 0)
+                res = ( ::write( fd, &buf[0], len ) == 0 );
             ::close( fd );
         }
     } else {
@@ -434,7 +435,7 @@ int iPAQ::displayBrightnessResolution() const
     if ( sysClass.exists() && sysClass.count() > 2 ) {
 	QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/max_brightness" );
         int fd = ::open( sysClassPath, O_RDONLY|O_NONBLOCK );
-        if ( fd ) {
+        if ( fd >= 0 ) {
             char buf[100];
             if ( ::read( fd, &buf[0], sizeof buf ) )
                 ::sscanf( &buf[0], "%d", &res );
@@ -475,7 +476,7 @@ bool iPAQ::setDisplayStatus ( bool on )
     if ( sysClass.exists() && sysClass.count() > 2 ) {
         QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/power" );
         int fd = ::open( sysClassPath, O_WRONLY|O_NONBLOCK );
-        if ( fd ) {
+        if ( fd >= 0 ) {
             char buf[10];
             buf[0] = on ? 0 : 4;
             buf[1] = '\0';

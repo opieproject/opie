@@ -453,7 +453,8 @@ bool Palm::setDisplayBrightness( int bright )
         {
             char buf[100];
             int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-            res = ( ::write( fd, &buf[0], len ) == 0 );
+            if (len > 0)
+                res = ( ::write( fd, &buf[0], len ) == 0 );
             ::close( fd );
         }
         break;

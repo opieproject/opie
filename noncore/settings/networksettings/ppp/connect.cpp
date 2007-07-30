@@ -1373,8 +1373,8 @@ void add_domain(const QString &domain, InterfacePPP *_ifaceppp) {
 	  write(fd, tmp, tmp.length());
 	}
       }
+      close(fd);
     }
-    close(fd);
   }
 }
 
@@ -1453,8 +1453,8 @@ void removedns(InterfacePPP *_ifaceppp) {
 	  write(fd, tmp, tmp.length());
 	}
       }
+      close(fd);
     }
-    close(fd);
 
   }
 

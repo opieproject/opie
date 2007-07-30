@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.14 2007-01-31 22:06:08 erik Exp $
+ * $Id: modem.cpp,v 1.15 2007-07-30 19:10:52 erik Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -902,15 +902,20 @@ bool Modem::execpppd(const char *arguments) {
       parseargs(buf, args);
       // become a session leader and let /dev/ttySx
       // be the controlling terminal.
-      pgrpid = setsid();
+      if ((pgrpid = setsid()) < 0) {
+        fprintf(stderr, "setsid() failed. "
+                "This process must already be the group leader.\n");
+        if ((pgrpid = tcgetsid(modemfd)) < 0)
+          fprintf(stderr, "tcgetsid() on fd %d failed.\n", modemfd);
+      }
 #ifdef TIOCSCTTY
       if(ioctl(modemfd, TIOCSCTTY, 0)<0)
         fprintf(stderr, "ioctl() failed.\n");
 #elif defined (TIOCSPGRP)
-       if(ioctl(modemfd, TIOCSPGRP, &pgrpid)<0)
-       fprintf(stderr, "ioctl() failed.\n");
+       if(pgrpid != -1 && ioctl(modemfd, TIOCSPGRP, &pgrpid)<0)
+         fprintf(stderr, "ioctl() failed.\n");
 #endif
-      if(tcsetpgrp(modemfd, pgrpid)<0)
+      if(pgrpid != -1 && tcsetpgrp(modemfd, pgrpid)<0)
         fprintf(stderr, "tcsetpgrp() failed.\n");
 
       ::close( m_pppdLOG[0] );
