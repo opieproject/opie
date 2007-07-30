@@ -55,136 +55,130 @@ class AdvancedFm : public QMainWindow
     Q_OBJECT
 public:
     static QString appName() { return QString::fromLatin1("advancedfm"); }
-   AdvancedFm(QWidget *p = 0, const char* name = 0, WFlags fl = 0);
-   ~AdvancedFm();
+    AdvancedFm(QWidget *p = 0, const char* name = 0, WFlags fl = 0);
 protected:
 
-   Opie::Ui::OSplitter *TabWidget;
-   QCopChannel * channel;
-   QPixmap unknownXpm;
-   int whichTab;
-//    QTabWidget *TabWidget;
-   QWidget *tab, *tab_2, *tab_3;
-   QListView *Local_View, *Remote_View;
+    Opie::Ui::OSplitter *TabWidget;
+    QCopChannel * channel;
+    QPixmap unknownXpm;
+    int whichTab;
+    QWidget *tab, *tab_2, *tab_3;
+    QListView *Local_View, *Remote_View;
 
-   QLineEdit *currentPathEdit;
-   QPopupMenu *fileMenu, *localMenu, *remoteMenu, *viewMenu /*, *customDirMenu*/;
-   QToolButton  *homeButton, *docButton, *cdUpButton, *sdButton, *cfButton, *qpeDirButton;
-//    QPushButton  *homeButton, *docButton, *cdUpButton, *sdButton, *cfButton, *qpeDirButton;
-   QDir currentDir, currentRemoteDir;
-   QComboBox *currentPathCombo;
-   QString filterStr, s_addBookmark, s_removeBookmark;
-   QListViewItem * item;
-   bool b;
-   QStringList fileSystemTypeList, fsList;
-   int currentServerConfig;
-   QGridLayout *tabLayout, *tabLayout_2, *tabLayout_3;
-   QStringList remoteDirPathStringList, localDirPathStringList;
-   QLineEdit *renameBox;
+    QLineEdit *currentPathEdit;
+    QPopupMenu *fileMenu, *localMenu, *remoteMenu, *viewMenu;
+    QToolButton  *homeButton;
+    QToolButton *docButton;
+    QToolButton *cdUpButton;
+    QToolButton *sdButton;
+    QToolButton *cfButton;
+    QToolButton *qpeDirButton;
+    QDir currentDir, currentRemoteDir;
+    QComboBox *currentPathCombo;
+    QString filterStr, s_addBookmark, s_removeBookmark;
+    QListViewItem * item;
+    bool b;
+    QStringList fileSystemTypeList, fsList;
+    int currentServerConfig;
+    QGridLayout *tabLayout, *tabLayout_2, *tabLayout_3;
+    QStringList remoteDirPathStringList, localDirPathStringList;
+    QLineEdit *renameBox;
 
-   void init();
-   void initConnections();
-   void keyReleaseEvent( QKeyEvent *);
-   void keyPressEvent( QKeyEvent *);
-   QString getFileSystemType(const QString &);
-   QString getDiskSpace(const QString &);
-   void parsetab(const QString &fileName);
-   QString checkDiskSpace(const QString &);
-   QString dealWithSymName(const QString &);
-   QDir *CurrentDir();
-   QDir *OtherDir();
-   QListView *CurrentView();
-   QListView *OtherView();
-   void setOtherTabCurrent();
+    void init();
+    void initConnections();
+    void keyReleaseEvent( QKeyEvent *);
+    void keyPressEvent( QKeyEvent *);
+    QString getFileSystemType(const QString &);
+    QString getDiskSpace(const QString &);
+    void parsetab(const QString &fileName);
+    QString checkDiskSpace(const QString &);
+    QString dealWithSymName(const QString &);
+    QDir *CurrentDir();
+    QDir *OtherDir();
+    QListView *CurrentView();
+    QListView *OtherView();
+    void setOtherTabCurrent();
 
-//protected signals:
-//		void newPath(QString);
-    
 protected slots:
-	 void changeTo(const QString &);
-   void slotSwitchMenu(int);
-   void selectAll();
-   void addToDocs();
-   void doDirChange();
-   void mkDir();
-   void del();
-   void rn();
-   void populateView();
-   void rePopulate();
-   void showHidden();
-   void showMenuHidden();
-   void ListClicked(QListViewItem *);
-   void ListPressed( int, QListViewItem *, const QPoint&, int);
-   void makeDir();
-   void doDelete();
-   void tabChanged(QWidget*);
-   void cleanUp();
-   void renameIt();
-   void runThis();
-   void runText();
-   void filePerms();
-   void doProperties();
-   void runCommand();
-   void runCommandStd();
-   QStringList getPath();
-   void mkSym();
-   void switchToLocalTab();
-   void switchToRemoteTab();
-	 void refreshCurrentTab();
+    void changeTo(const QString &);
+    void slotSwitchMenu(int);
+    void selectAll();
+    void addToDocs();
+    void doDirChange();
+    void mkDir();
+    void del();
+    void rn();
+    void populateView();
+    void rePopulate();
+    void showHidden();
+    void showMenuHidden();
+    void ListClicked(QListViewItem *);
+    void ListPressed( int, QListViewItem *, const QPoint&, int);
+    void makeDir();
+    void doDelete();
+    void tabChanged(QWidget*);
+    void cleanUp();
+    void renameIt();
+    void runThis();
+    void runText();
+    void filePerms();
+    void doProperties();
+    void runCommand();
+    void runCommandStd();
+    QStringList getPath();
+    void mkSym();
+    void switchToLocalTab();
+    void switchToRemoteTab();
+    void refreshCurrentTab();
 
-   void openSearch();
-   void dirMenuSelected(int);
-   void showFileMenu();   
-   void homeButtonPushed();
-   void docButtonPushed();
-   void SDButtonPushed();
-   void CFButtonPushed();
-   void QPEButtonPushed();
-   void upDir();
-   void currentPathComboChanged();
+    void openSearch();
+    void dirMenuSelected(int);
+    void showFileMenu();
+    void homeButtonPushed();
+    void docButtonPushed();
+    void SDButtonPushed();
+    void CFButtonPushed();
+    void QPEButtonPushed();
+    void upDir();
+    void currentPathComboChanged();
 
-   void copy();
-   void copyTimer();
-   void copyAs();
-   void copyAsTimer();
-   void copySameDir();
-   void copySameDirTimer();
-   void move();
-   void moveTimer();
+    void copy();
+    void copyTimer();
+    void copyAs();
+    void copyAsTimer();
+    void copySameDir();
+    void copySameDirTimer();
+    void move();
+    void moveTimer();
 
-   void fillCombo(const QString &);
-   bool copyFile( const QString & , const QString & );
-   void fileStatus();
-   void doAbout();
-   void doBeam();
-   void fileBeamFinished( Ir *);
-   bool copyDirectory( const QString & , const QString & );
-//   void navigateToSelected();
-   bool moveDirectory( const QString & , const QString & );
+    void fillCombo(const QString &);
+    bool copyFile( const QString & , const QString & );
+    void fileStatus();
+    void doAbout();
+    void doBeam();
+    void fileBeamFinished( Ir *);
+    bool copyDirectory( const QString & , const QString & );
+    bool moveDirectory( const QString & , const QString & );
 	 
-//   void slotSwitchtoLocal(int);
-
 private:
-   MenuButton *menuButton;
-   QString oldName, localViewDir, remoteViewDir;
-   void startProcess(const QString &);
-   bool eventFilter( QObject * , QEvent * );
-   void cancelRename();
-   void doRename(QListView *);
-   void okRename();
-   void customDirsToMenu();
-   void addCustomDir();
-   void removeCustomDir();
-   void navigateToSelected();
+    MenuButton *menuButton;
+    QString oldName, localViewDir, remoteViewDir;
+    void startProcess(const QString &);
+    bool eventFilter( QObject * , QEvent * );
+    void cancelRename();
+    void doRename(QListView *);
+    void okRename();
+    void customDirsToMenu();
+    void addCustomDir();
+    void removeCustomDir();
+    void navigateToSelected();
 
 private slots:
-   void processEnded(Opie::Core::OProcess *);
-   void oprocessStderr(Opie::Core::OProcess *, char *, int);
-   void gotoCustomDir(const QString &);
-   void qcopReceive(const QCString&, const QByteArray&);
-   void setDocument(const QString &);
-//	 void doMenu(int
-
+    void processEnded(Opie::Core::OProcess *);
+    void oprocessStderr(Opie::Core::OProcess *, char *, int);
+    void gotoCustomDir(const QString &);
+    void qcopReceive(const QCString&, const QByteArray&);
+    void setDocument(const QString &);
 };
 
 #endif // ADVANCEDFM_H

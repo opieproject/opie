@@ -39,22 +39,22 @@
 using namespace Opie::Ui;
 
 AdvancedFm::AdvancedFm(QWidget *,const char*, WFlags )
-   : QMainWindow( ) {
+   : QMainWindow( )
+{
    init();
    renameBox = 0;
-	 whichTab = 1;
-   unknownXpm = Opie::Core::OResource::loadImage("UnknownDocument", Opie::Core::OResource::SmallIcon);
+   whichTab = 1;
+   unknownXpm =
+       Opie::Core::OResource::loadImage("UnknownDocument",
+                                        Opie::Core::OResource::SmallIcon);
 
-	 initConnections();
-	 rePopulate();
-	 channel = new QCopChannel( "QPE/Application/advancedfm", this );
-	 connect(channel,SIGNAL(received(const QCString&,const QByteArray&)),this,SLOT(qcopReceive(const QCString&,const QByteArray&)));
-	 switchToLocalTab();
+   initConnections();
+   rePopulate();
+   channel = new QCopChannel( "QPE/Application/advancedfm", this );
+   connect(channel, SIGNAL(received(const QCString&, const QByteArray&)), this,
+           SLOT(qcopReceive(const QCString&, const QByteArray&)));
+   switchToLocalTab();
 }
-
-AdvancedFm::~AdvancedFm() {
-}
-
 
 void AdvancedFm::cleanUp() {
    QString sfile=QDir::homeDirPath();
@@ -90,110 +90,126 @@ void AdvancedFm::tabChanged(QWidget *wd) {
 
 
 void AdvancedFm::populateView() {
+    QPixmap pm;
+    QListView *thisView = CurrentView();
+    QDir *thisDir = CurrentDir();
+    QString path = thisDir->canonicalPath();
 
-		QPixmap pm;
-		QListView *thisView = CurrentView();
-		QDir *thisDir = CurrentDir();
-		QString path = thisDir->canonicalPath();
+    thisView->clear();
+    thisDir->setSorting(QDir::DirsFirst);
+    thisDir->setMatchAllDirs(TRUE);
+    thisDir->setNameFilter(filterStr);
+    QString fileL, fileS, fileDate;
 
-		thisView->clear();
-		thisDir->setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
-		thisDir->setMatchAllDirs(TRUE);
-		thisDir->setNameFilter(filterStr);
-		QString fileL, fileS, fileDate;
+    QString fs = getFileSystemType((const QString &) path);
+    setCaption(tr("AdvancedFm :: ") + fs + " :: " +
+               checkDiskSpace((const QString &) path) + tr(" kB free"));
+    bool isDir = FALSE;
 
-		QString fs = getFileSystemType((const QString &) path);
-		setCaption(tr("AdvancedFm :: ")+fs+" :: "
-							 +checkDiskSpace((const QString &) path)+ tr(" kB free") );
-		bool isDir = FALSE;
+    const QFileInfoList *list = thisDir->entryInfoList();
+    QFileInfoListIterator it(*list);
+    QFileInfo *fi;
+    while ( (fi=it.current()) ) {
+        if (fi->isSymLink() )  {
+            QString symLink = fi->readLink();
+            QFileInfo sym( symLink);
+            fileS.sprintf( "%10i", sym.size() );
+            fileL =  fi->fileName() +" ->  " + sym.filePath().data();
+            fileDate = sym.lastModified().toString();
+        }  else  {
+            fileS.sprintf( "%10i", fi->size() );
+            fileL = fi->fileName();
+            fileDate= fi->lastModified().toString();
+            if( QDir(QDir::cleanDirPath( path +"/"+fileL)).exists() ) {
+                fileL += "/";
+                isDir=TRUE;
+            }
+        }
+        QFileInfo fileInfo(  path + "/" + fileL);
 
-		const QFileInfoList *list = thisDir->entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
-		QFileInfoListIterator it(*list);
-		QFileInfo *fi;
-		while ( (fi=it.current()) ) {
-				if (fi->isSymLink() )  {
-						QString symLink = fi->readLink();
-						QFileInfo sym( symLink);
-						fileS.sprintf( "%10i", sym.size() );
-						fileL =  fi->fileName() +" ->  " + sym.filePath().data();
-						fileDate = sym.lastModified().toString();
-				}  else  {
-						fileS.sprintf( "%10i", fi->size() );
-						fileL = fi->fileName();
-						fileDate= fi->lastModified().toString();
-						if( QDir(QDir::cleanDirPath( path +"/"+fileL)).exists() ) {
-//           if(fileL == "..")
-								fileL += "/";
-								isDir=TRUE;
-						}
-				}
-				QFileInfo fileInfo(  path + "/" + fileL);
+        if(fileL !="./" && fi->exists())  {
+            item = new QListViewItem( thisView, fileL, fileS , fileDate);
 
-				if(fileL !="./" && fi->exists())  {
-						item = new QListViewItem( thisView, fileL, fileS , fileDate);
+            if(isDir || fileL.find("/",0,TRUE) != -1) {
 
-						if(isDir || fileL.find("/",0,TRUE) != -1) {
+                if( !QDir( fi->filePath() ).isReadable()) //is directory
+                    pm = Opie::Core::OResource::loadPixmap(
+                                                "lockedfolder",
+                                                Opie::Core::OResource::SmallIcon
+                                                          );
+                else
+                    pm = Opie::Core::OResource::loadPixmap(
+                                                "folder",
+                                                Opie::Core::OResource::SmallIcon
+                                                          );
+            } else if ( fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
+                pm = Opie::Core::OResource::loadPixmap( "exec",
+                                                Opie::Core::OResource::SmallIcon
+                                                      );
+            } else if( (fileInfo.permission( QFileInfo::ExeUser) |
+                        fileInfo.permission( QFileInfo::ExeGroup) |
+                        fileInfo.permission( QFileInfo::ExeOther)) &&
+                       fs != "vfat" )
+            {
+                pm = Opie::Core::OResource::loadPixmap(
+                                                "exec",
+                                                Opie::Core::OResource::SmallIcon
+                                                      );
+            } else if( !fi->isReadable() ) {
+                pm = Opie::Core::OResource::loadPixmap(
+                                                "locked",
+                                                Opie::Core::OResource::SmallIcon
+                                                      );
+            } else {
+                //everything else goes by mimetype
+                MimeType mt(fi->filePath());
+                pm=mt.pixmap(); //sets the correct pixmap for mimetype
+                if(pm.isNull())
+                    pm = unknownXpm;
+            }
+            if(  fi->isSymLink() || fileL.find("->",0,TRUE) != -1) {
+                //  odebug << " overlay link image" << oendl;
+                pm = Opie::Core::OResource::loadPixmap(
+                                                "advancedfm/symlink",
+                                                Opie::Core::OResource::SmallIcon
+                                                      );
+            }
+            item->setPixmap( 0, pm );
 
-								if( !QDir( fi->filePath() ).isReadable()) //is directory
-                                    pm = Opie::Core::OResource::loadPixmap( "lockedfolder", Opie::Core::OResource::SmallIcon );
-								else
-                                    pm = Opie::Core::OResource::loadPixmap( "folder", Opie::Core::OResource::SmallIcon );
-      }
-						else if ( fs == "vfat" && fileInfo.filePath().contains("/bin") ) {
-                            pm = Opie::Core::OResource::loadPixmap( "exec", Opie::Core::OResource::SmallIcon );
-						}
-						else if( (fileInfo.permission( QFileInfo::ExeUser)
-											| fileInfo.permission( QFileInfo::ExeGroup)
-											| fileInfo.permission( QFileInfo::ExeOther)) && fs != "vfat" ) {
-                            pm = Opie::Core::OResource::loadPixmap( "exec", Opie::Core::OResource::SmallIcon );
-						}
-						else if( !fi->isReadable() )  {
-                            pm = Opie::Core::OResource::loadPixmap( "locked", Opie::Core::OResource::SmallIcon );
-						}
-						else { //everything else goes by mimetype
-								MimeType mt(fi->filePath());
-								pm=mt.pixmap(); //sets the correct pixmap for mimetype
-								if(pm.isNull()) {
-										pm = unknownXpm;
-								}
-						}
-						if(  fi->isSymLink() || fileL.find("->",0,TRUE) != -1) {
-									//  odebug << " overlay link image" << oendl;
-                            pm = Opie::Core::OResource::loadPixmap( "advancedfm/symlink", Opie::Core::OResource::SmallIcon );
-						}
-						item->setPixmap( 0, pm );
+        }
+        isDir=FALSE;
+        ++it;
+    }
 
-				}
-				isDir=FALSE;
-				++it;
-		}
+    if( path.find("dev",0,TRUE) != -1) {
+        struct stat buf;
+        dev_t devT;
+        DIR *dir = 0;
+        struct dirent *mydirent;
 
-		if( path.find("dev",0,TRUE) != -1) {
-				struct stat buf;
-				dev_t devT;
-				DIR *dir;
-				struct dirent *mydirent;
+        if((dir = opendir( path.latin1())) != NULL) {
+            while ((mydirent = readdir(dir)) != NULL) {
+                lstat( mydirent->d_name, &buf);
+                // odebug << mydirent->d_name << oendl;
+                fileL.sprintf("%s", mydirent->d_name);
+                devT = buf.st_dev;
+                fileS.sprintf("%d, %d", (int) ( devT >>8) &0xFF,
+                              (int)devT &0xFF);
+                fileDate.sprintf("%s", ctime( &buf.st_mtime));
+                if( fileL.find(".") == -1 ) {
+                    item= new QListViewItem( thisView, fileL, fileS, fileDate);
+                    pm = unknownXpm;
+                    item->setPixmap( 0,pm);
+                }
+            }
+        }
 
-				if((dir = opendir( path.latin1())) != NULL)
-						while ((mydirent = readdir(dir)) != NULL) {
-								lstat( mydirent->d_name, &buf);
-//        odebug << mydirent->d_name << oendl;
-								fileL.sprintf("%s", mydirent->d_name);
-								devT = buf.st_dev;
-								fileS.sprintf("%d, %d", (int) ( devT >>8) &0xFF, (int)devT &0xFF);
-								fileDate.sprintf("%s", ctime( &buf.st_mtime));
-								if( fileL.find(".") == -1 ) {
-										item= new QListViewItem( thisView, fileL, fileS, fileDate);
-										pm = unknownXpm;
-										item->setPixmap( 0,pm);
-								}
-						}
+        if (dir)
+            closedir(dir);
+    }
 
-				closedir(dir);
-		}
-
-		thisView->setSorting( 3,FALSE);
-		fillCombo( (const QString &) path );
+    thisView->setSorting( 3,FALSE);
+    fillCombo( (const QString &) path );
 }
 
 void AdvancedFm::rePopulate() {
@@ -243,16 +259,12 @@ void AdvancedFm::ListPressed( int mouse, QListViewItem *item, const QPoint& , in
       }
    }
    break;
-//    case 2:
-//       menuTimer.start( 50, TRUE );
-//       break;
    };
 }
 
 
 void AdvancedFm::refreshCurrentTab() {
      populateView();
-//	 if ( TabWidget->currentWidget() == tab) {
 }
 
 void AdvancedFm::switchToLocalTab() {
