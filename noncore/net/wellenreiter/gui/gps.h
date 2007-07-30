@@ -41,7 +41,7 @@ class GPS : public QObject
     GPS( QObject* parent = 0, const char * name = "GPS" );
     ~GPS();
 
-    bool open( const QString& host = "localhost", int port = 2947 );
+    void open( const QString& host = "localhost", int port = 2947 );
     GpsLocation position() const;
 
   private:

@@ -1280,6 +1280,7 @@ int HlManager::defaultHl() {
   config->setGroup("General Options");
 
 #warning fixme  return nameFind(config->readEntry("Highlight"));
+  return -1;
 
 }
 

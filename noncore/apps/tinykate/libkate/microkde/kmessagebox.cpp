@@ -23,8 +23,9 @@ int KMessageBox::warningYesNoCancel(QWidget *parent, const QString &text)
 	switch (result) {
 			case QMessageBox::Yes: return Yes;
 			case QMessageBox::No: return No;
-			case QMessageBox::Cancel: return Cancel;
+			default: break;
 	}
+	return Cancel;
 }
 
 int KMessageBox::questionYesNo(QWidget *parent,

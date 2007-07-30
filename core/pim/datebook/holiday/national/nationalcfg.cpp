@@ -107,7 +107,6 @@ bool NHcfg::fatalError(const QXmlParseException& e)
 
 bool NHcfg::startElement(const QString&, const QString&,const QString& name, const QXmlAttributes& attr)
 {
-    bool ret = false;
     if (name==_key_doc) {
         stage = 1;
         return true;
@@ -118,13 +117,15 @@ bool NHcfg::startElement(const QString&, const QString&,const QString& name, con
     }
     if (name==_key_desc) {
         stage = 2;
-        ret = setName(attr);
-        return ret;
+        return setName(attr);
     }
-    if (stage<2) {return false;}
-    if (name==_key_list) {stage=3;return true;}
+    if (stage<2) return false;
+    if (name==_key_list) {
+        stage=3;
+        return true;
+    }
 
-    if (stage<3) {return false;}
+    if (stage<3) return false;
 
     if (name==_key_entry) {
         ++level;
@@ -142,6 +143,7 @@ bool NHcfg::startElement(const QString&, const QString&,const QString& name, con
     } else if (level >= 2) {
         return parseCalc(name,attr);
     }
+    return false;
 }
 
 bool NHcfg::setName(const QXmlAttributes&attr)

@@ -57,9 +57,6 @@ class OFile : public QObject, public QFile
     virtual void connectNotify( const char* signal );
     virtual void disconnectNotify( const char* signal );
 
-  private:
-    int startWatch( int mode );
-
   signals:
     void accessed( const QString& );
     void modified( const QString& );

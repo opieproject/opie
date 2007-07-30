@@ -18,40 +18,6 @@ void Aportis::dePeanut(int& ch)
 
 CList<Bkmk>* Aportis::getbkmklist()
 {
-/*
-    if (peanutfile)
-    {
-	if (nRecs2 > nRecs)
-	{
-	    CList<Bkmk>* t = new CList<Bkmk>;
-	    for (int i = nRecs; i < nRecs2; i++)
-	    {
-		char name[17];
-		name[16] = '\0';
-//		qDebug("Record:%d, Length:%u",i,recordlength(i));
-		gotorecordnumber(i);
-		fread(name,1,16,fin);
-		unsigned long lcn;
-		fread(&lcn,sizeof(lcn),1,fin);
-		lcn ^= 0xa5a5a5a5;
-		lcn = SwapLong(lcn);
-//		qDebug("Bookmark:%s:%u", name,lcn);
-		tchar tname[17];
-		memset(tname, 0, sizeof(tname));
-		for (int i = 0; name[i] != 0; i++)
-		{
-		    tname[i] = name[i] ^ 0xa5;
-		}
-		t->push_back(Bkmk(tname, NULL, lcn));
-	    }
-	    return t;
-	}
-	else
-	{
-	    return NULL;
-	}
-    }
-*/
   if (bCompressed != 4) return NULL;
   CList<Bkmk>* t = new CList<Bkmk>;
   unsuspend();
@@ -247,7 +213,7 @@ int Aportis::getch()
       if ((dwRecLen == 0) && !refreshbuffer()) return EOF;
       else
 	{
-unsuspend();
+          unsuspend();
 	  int c = getc(fin);
 	  dePeanut(c);
 	  dwRecLen--;
@@ -264,8 +230,8 @@ unsuspend();
   currentpos++;
   int c;
 
+  unsuspend();
   // take a char from the input buffer
-unsuspend();
   c = getc(fin);
   dePeanut(c);
   dwRecLen--;
@@ -317,6 +283,7 @@ unsuspend();
       circbuf[cbptr = (cbptr+1)%2048] = c^0x80;
       return circbuf[outptr = (outptr+1)%2048];
     }
+  return 0;
 }
 
 unsigned int Aportis::GetBS(unsigned int bn)

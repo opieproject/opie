@@ -40,7 +40,7 @@ GPS::~GPS()
 }
 
 
-bool GPS::open( const QString& host, int port )
+void GPS::open( const QString& host, int port )
 {
     _socket->connectToHost( host, port );
 }

@@ -269,7 +269,7 @@ bool Character::execCmd(QString cmd, KateView *view)
 
 bool Fifo::execCmd(QString cmd, KateView *view)
 {
-
+    return true;
 }
 
 }

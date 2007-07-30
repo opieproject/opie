@@ -227,11 +227,14 @@ void Converter::closeEvent( QCloseEvent *e )
 	e->accept();
 }
 
-bool Converter::sqliteMoveAndConvert( const QString& name, const QString& src, const QString &dest )
+bool Converter::sqliteMoveAndConvert( const QString& name, const QString& src,
+                                      const QString &dest )
 {
 
-	QMessageBox::information( this, tr( "Pim-Converter" ),
-				  tr( "<qt>Starting to convert the database for %1</qt>" ).arg( name ) );
+    QMessageBox::information(
+                    this, tr( "Pim-Converter" ),
+                    tr( "<qt>Starting convert of database %1</qt>" ).arg( name )
+                            );
 
 
     bool error = false;
@@ -248,19 +251,19 @@ bool Converter::sqliteMoveAndConvert( const QString& name, const QString& src, c
 
 
     if ( error ){
-		QMessageBox::critical( this, tr("Pim-Converter"),
-                                       tr("<qt>Conversion not possible: <br>"
-                                          "Problem: %1</qt>").arg(cmd) );
-		return error;
+        QMessageBox::critical( this, tr("Pim-Converter"),
+                               tr("<qt>Conversion not possible: <br>"
+                                  "Problem: %1</qt>").arg(cmd) );
+        return error;
     }
-	    
+
 
     /*
      * Move it over
      */
     cmd = "mv " + Global::shellQuote(src) + " " + Global::shellQuote(dest);
     if( ::system( cmd ) != 0 ){
-	    error = true;
+        error = true;
     }
 
 
@@ -268,33 +271,32 @@ bool Converter::sqliteMoveAndConvert( const QString& name, const QString& src, c
      * Convert it
      */
     if ( !error ){
-	    cmd = "sqlite " + Global::shellQuote(dest) + " .dump | sqlite3 " + Global::shellQuote(src);
-	    if ( ::system( cmd ) != 0 ){
-		    error = true;
-	    }
+        cmd = "sqlite " + Global::shellQuote(dest) + " .dump | sqlite3 "
+              + Global::shellQuote(src);
+        if ( ::system( cmd ) != 0 )
+            error = true;
     }
 
 
     /*
-     * Check whether conversion really worked. If not, move old database back to recover it
+     * Check whether conversion really worked. If not, move old database back to
+     * recover it
      */
     if ( !QFile::exists( src ) ){
-	    cmd = "mv " + Global::shellQuote(dest) + " " + Global::shellQuote(src);
-	    if ( ::system( cmd ) != 0 ){
-	    }
-	    error = true;
-	    cmd = "Database-Format is not V2!?";	    
+        cmd = "mv " + Global::shellQuote(dest) + " " + Global::shellQuote(src);
+        if ( ::system( cmd ) != 0 ){
+            error = true;
+            cmd = "Database-Format is not V2!?";
+        }
     }
 
     if ( error ){
-	    QMessageBox::critical( this, tr("Pim-Converter"),
-				   tr("<qt>An internal error occurred: <br>"
-				      "Converting the database was impossible! <br>"
-				      "Command/Reason: '%1' </qt>").arg(cmd) );
-	    
+        QMessageBox::critical( this, tr("Pim-Converter"),
+                               tr("<qt>An internal error occurred: <br>"
+                                  "Converting the database was impossible! <br>"
+                                  "Command/Reason: '%1' </qt>").arg(cmd) );
     }
-
-
+    return error;
 }
 
 
@@ -342,7 +344,7 @@ void Converter::start_upgrade()
         src  = Global::applicationFileName("datebook", "datebook.db"    );
         dest = Global::applicationFileName("datebook", "datebook.db_v2" );
 	error = sqliteMoveAndConvert( "Datebook", src, dest );
-	
+
 
         src  = Global::applicationFileName("todolist", "todolist.db"    );
         dest = Global::applicationFileName("todolist", "todolist.db_v2" );
