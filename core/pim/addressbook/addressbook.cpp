@@ -161,26 +161,15 @@ void AddressbookWindow::slotSetFont( int size )
 
 	m_config.setFontSize( size );
 
-	QFont *currentFont;
-
 	switch (size) {
 	case 0:
 		m_abView->setFont( QFont( defaultFont->family(), defaultFont->pointSize() - 2 ) );
-		currentFont = new QFont (m_abView->font());
-		// abList->resizeRows(currentFont->pixelSize() + 7); :SX
-		// abList->resizeRows();
 		break;
 	case 1:
  		m_abView->setFont( *defaultFont );
- 		currentFont = new QFont (m_abView->font());
-// 		// abList->resizeRows(currentFont->pixelSize() + 7);
-// 		abList->resizeRows();
 		break;
 	case 2:
  		m_abView->setFont( QFont( defaultFont->family(), defaultFont->pointSize() + 2 ) );
- 		currentFont = new QFont (m_abView->font());
-// 		//abList->resizeRows(currentFont->pixelSize() + 7);
-// 		abList->resizeRows();
 		break;
 	}
 }
