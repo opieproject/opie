@@ -42,7 +42,7 @@ class OBluetoothDevice;
 /**
  * @brief A container class for all bluetooth interfaces
  *
- * This class provides access to all available bluetooth interfaces of your computer.
+ * This class provides access to all available bluetooth interfaces.
  *
  * @author Michael 'Mickey' Lauer <mickey@vanille.de>
  */

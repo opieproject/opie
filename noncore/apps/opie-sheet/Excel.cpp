@@ -352,9 +352,8 @@ int ExcelBook::SeekBOF(void)
 
 ExcelBREC* ExcelBook::GetBREC(void)
 {
-    ExcelBREC* rec;
-    rec= new ExcelBREC;
     if(FileEOF()) return NULL;
+    ExcelBREC* rec = new ExcelBREC;
     rec->data=NULL;
     rec->code=Get2Bytes();
     rec->length=Get2Bytes();
@@ -497,10 +496,17 @@ int ExcelBook::ReadSheet(ExcelSheet* sheet)
     record = GetBREC();
     while (record!=NULL)
     {
-        if (!SheetHandleRecord(sheet, record)) break;
+        if (!SheetHandleRecord(sheet, record))
+            break;
+
+	delete record;
         record=GetBREC();
     };
     SeekPosition(oldpos);
+
+    if (record)
+        delete record;
+
     return 1;
 };
 
@@ -526,13 +532,15 @@ ExcelSheet* ExcelBook::GetSheet(void)
 
 void ExcelBook::ParseSheets(void)
 {
-    int BOFs;
-    ExcelBREC* r;
-    BOFs=1;
-    r=GetBREC();
-    while(BOFs)
+    int BOFs = 1;
+    ExcelBREC* r = GetBREC();
+
+    while(BOFs && r)
     {
+	delete r;
         r=GetBREC();
+	if (!r)
+	    break;
         switch(r->code)
         {
         case XL_SST:
@@ -571,6 +579,7 @@ void ExcelBook::ParseSheets(void)
             break;
         };
     };
+    delete r;
 };
 
 void ExcelBook::GetSheets(void)
@@ -774,10 +783,11 @@ void ExcelBook::HandleSST(ExcelBREC* rec)
     cont= new SSTList;
     ExcelBREC* nr;
     nr = PeekBREC();
-    while (nr->code == XL_CONTINUE)
+    while (nr && nr->code == XL_CONTINUE)
     {
         cont->rec.resize(cont->rec.count()+1);
         cont->rec[cont->rec.count()-1]=GetBREC();
+	delete nr;
         nr = PeekBREC();
     }
     bytes = MergeBytesFromSSTs(rec,cont);
@@ -787,6 +797,8 @@ void ExcelBook::HandleSST(ExcelBREC* rec)
         if(cont->rec[w1]!=NULL) {delete cont->rec[w1];cont->rec[w1]=NULL;};
     };
     cont->rec.resize(0);
+    if (nr)
+	delete nr;
 };
 
 void ExcelBook::HandleLabelSST(ExcelSheet* sheet, ExcelBREC* rec)
@@ -1065,8 +1077,7 @@ void ExcelBook::HandleFormula(ExcelSheet* sheet, ExcelBREC* record)
                 QString s1;
                 int sz;
                 sz=Integer2Byte(data[20],data[21]);// size of the formula
-                char* formuladata;
-                formuladata=new char[sz];
+                char* formuladata = new char[sz];
                 for(int w1=0;w1<sz;w1++)
                 {
                     formuladata[w1]=data[22+w1];
@@ -1075,6 +1086,7 @@ void ExcelBook::HandleFormula(ExcelSheet* sheet, ExcelBREC* record)
                 s1="="+GetFormula(row,col,sheet,formuladata,sz);
                 //printf("GetFormula:Formula=%s\r\n",s1.ascii());
                 sheet->Set(row,col,CellLabel(row,col,s1));
+		delete [] formuladata;
             }
 };
 

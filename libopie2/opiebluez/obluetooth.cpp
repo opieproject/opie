@@ -109,6 +109,7 @@ void OBluetooth::synchronize()
     if (::ioctl( _fd, HCIGETDEVLIST, (void *) dl) == -1)
     {
         owarn << "OBluetooth::synchronize() - can't complete HCIGETDEVLIST (" << strerror( errno ) << ")" << oendl;
+	free(dl);
         return;
     }
 
@@ -123,6 +124,7 @@ void OBluetooth::synchronize()
         odebug << "OBluetooth::synchronize() - found device #" << di.dev_id << oendl;
         _interfaces.insert( di.name, new OBluetoothInterface( this, di.name, (void*) &di, _fd ) );
     }
+    free(dl);
 }
 
 /*======================================================================================
@@ -226,6 +228,8 @@ OBluetoothInterface::DeviceIterator OBluetoothInterface::neighbourhood()
         _devices.insert( dev->macAddress(), dev );
         ++ii;
     }
+
+    free(mybuffer);
 
     return DeviceIterator( _devices );
 }

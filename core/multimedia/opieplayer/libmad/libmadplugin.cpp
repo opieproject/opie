@@ -315,9 +315,12 @@ int LibMadPlugin::http_open(const QString& path ) {
     char filename[PATH_MAX];
     //char c;
     char *arg =strdup(path.latin1());
+    if (!arg)
+	return (0);
 
     /* Check for URL syntax */
     if (strncmp(arg, "http://", strlen("http://"))) {
+	free(arg);
         return (0);
     }
 
@@ -325,6 +328,7 @@ int LibMadPlugin::http_open(const QString& path ) {
     port = 80;
     host = arg + strlen("http://");
     if ((request = strchr(host, '/')) == NULL) {
+	free(arg);
         return (0);
     }
 
@@ -344,31 +348,14 @@ int LibMadPlugin::http_open(const QString& path ) {
     snprintf(filename, sizeof(filename) - strlen(host) - 75, "%s", request);
 
     /* Send HTTP GET request */
-    /* Please don't use a Agent know by shoutcast (Lynx, Mozilla) seems to be reconized and print
-     * a html page and not the stream */
+    /* Please don't use a Agent known by shoutcast. Lynx and Mozilla seem to be
+     * reconized and print an html page and not the stream
+     */
     snprintf(http_request, sizeof(http_request), "GET /%s HTTP/1.0\r\n"
     /*  "User-Agent: Mozilla/2.0 (Win95; I)\r\n" */
         "Pragma: no-cache\r\n" "Host: %s\r\n" "Accept: */*\r\n" "\r\n", filename, host);
 
     send(tcp_sock, http_request, strlen(http_request), 0);
-
-    /* Parse server reply */
-#if 0
-    do
-        read(tcp_sock, &c, sizeof(char));
-    while (c != ' ');
-    read(tcp_sock, http_request, 4 * sizeof(char));
-    http_request[4] = 0;
-    if (strcmp(http_request, "200 "))     {
-        fprintf(stderr, "http_open: ");
-        do {
-            read(tcp_sock, &c, sizeof(char));
-            fprintf(stderr, "%c", c);
-        } while (c != '\r');
-        fprintf(stderr, "\n");
-        return (0);
-    }
-#endif
 
     QString name;
     QString genre;

@@ -45,7 +45,7 @@ void OTDriverList::update() {
                        ( cur * sizeof(struct hci_dev_req) )
                  );
 
-      if( dl == 0 ) {
+      if( !dl ) {
         // memory problem
         exit(1);
       }
@@ -53,6 +53,7 @@ void OTDriverList::update() {
       dl->dev_num = cur;
 
       if( ioctl( OT->getSocket(), HCIGETDEVLIST, (void*)dl) ) {
+	free(dl);
         odebug << "WARNING : cannot read device list. "
               << errno 
               << strerror( errno ) << oendl;

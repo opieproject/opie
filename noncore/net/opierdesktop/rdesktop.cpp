@@ -171,6 +171,7 @@ load_licence(unsigned char **data)
 	sprintf(path, "%s/.rdesktop/licence.%s", home, hostname);
 
 	fd = open(path, O_RDONLY);
+	xfree(path);
 	if (fd == -1)
 		return -1;
 
@@ -309,5 +310,7 @@ save_licence(unsigned char *data, int length)
 		fcntl(fnfd, F_SETLK, &fnfl);
 		close(fnfd);
 	}
-
+	free(fnamewrk);
+	free(fpath);
+	free(fname);
 }

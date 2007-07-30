@@ -663,7 +663,9 @@ class ErrorFilter : public CFilter
 };
 
 #ifndef __STATIC
-ExternFilter::ExternFilter(const QString& nm, const QString& optional) : filt(NULL), handle(NULL)
+ExternFilter::ExternFilter(const QString& nm, const QString& optional)
+  : filt(0)
+  , handle(0)
 {
 #ifdef USEQPE
 #ifdef OPIE

@@ -8,35 +8,49 @@
 #include "version.h"
 #include "names.h"
 
-const unsigned long BkmkFile::magic = ((unsigned long)'q' << 24) | ((unsigned long)'t' << 16) | ((unsigned long)'r' << 8) | ((unsigned long)BKMKTYPE);
+const unsigned long BkmkFile::magic =
+    ((unsigned long)'q' << 24) | ((unsigned long)'t' << 16) |
+    ((unsigned long)'r' << 8) | ((unsigned long)BKMKTYPE);
 
-Bkmk::Bkmk(const unsigned char* _nm, unsigned short _nmlen, const unsigned char* _anno, unsigned short _annolen, unsigned int _p) :
-  m_name(0),
-  m_namelen(0),
-  m_anno(0),
-  m_annolen(0),
-  m_position(0)
+Bkmk::Bkmk(const unsigned char* _nm, unsigned short _nmlen,
+	   const unsigned char* _anno, unsigned short _annolen, unsigned int _p)
+    : m_name(0)
+    , m_namelen(0)
+    , m_anno(0)
+    , m_annolen(0)
+    , m_position(0)
 {
     init(_nm, _nmlen, _anno, _annolen, _p);
 }
 
-Bkmk::Bkmk(const tchar* _nm, const unsigned char* _anno, unsigned short annolen, unsigned int _p) : m_position(_p)
+Bkmk::Bkmk(const tchar* _nm, const unsigned char* _anno, unsigned short annolen,
+	   unsigned int _p)
+    : m_name(0)
+    , m_namelen(0)
+    , m_anno(0)
+    , m_annolen(0)
+    , m_position(_p)
 {
     init(_nm, sizeof(tchar)*(ustrlen(_nm)+1), _anno, annolen, _p);
 }
 
-Bkmk::Bkmk(const Bkmk& rhs) :
-  m_name(0),
-  m_namelen(0),
-  m_anno(0),
-  m_annolen(0),
-  m_position(0)
+Bkmk::Bkmk(const Bkmk& rhs)
+    : m_name(0)
+    , m_namelen(0)
+    , m_anno(0)
+    , m_annolen(0)
+    , m_position(0)
 {
     init(rhs.name(), sizeof(tchar)*(ustrlen(rhs.name())+1), rhs.anno(),
          sizeof(tchar)*(ustrlen(rhs.anno())+1), rhs.value());
 }
 
-Bkmk::Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p) : m_position(_p)
+Bkmk::Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p)
+    : m_name(0)
+    , m_namelen(0)
+    , m_anno(0)
+    , m_annolen(0)
+    ,m_position(_p)
 {
     if (_anno == NULL)
     {
@@ -45,11 +59,18 @@ Bkmk::Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p) : m_position(_
     }
     else
     {
-	init(_nm, sizeof(tchar)*(ustrlen(_nm)+1), _anno, sizeof(tchar)*(ustrlen(_anno)+1), _p);
+	init(_nm, sizeof(tchar)*(ustrlen(_nm)+1), _anno,
+	     sizeof(tchar)*(ustrlen(_anno)+1), _p);
     }
 }
 
-Bkmk::Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p, unsigned int _p2) : m_position(_p)
+Bkmk::Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p,
+	   unsigned int _p2)
+    : m_name(0)
+    , m_namelen(0)
+    , m_anno(0)
+    , m_annolen(0)
+    , m_position(_p)
 {
     if (_anno == NULL)
     {
@@ -58,13 +79,15 @@ Bkmk::Bkmk(const tchar* _nm, const tchar* _anno, unsigned int _p, unsigned int _
     }
     else
     {
-	init(_nm, sizeof(tchar)*(ustrlen(_nm)+1), _anno, sizeof(tchar)*(ustrlen(_anno)+1), _p);
+	init(_nm, sizeof(tchar)*(ustrlen(_nm)+1), _anno,
+	     sizeof(tchar)*(ustrlen(_anno)+1), _p);
     }
     m_position2 = _p2;
     m_red = m_green = m_blue = 127;
 }
 
-void Bkmk::init(const void* _nm, unsigned short _nmlen, const void* _anno, unsigned short _annolen, unsigned int _p)
+void Bkmk::init(const void* _nm, unsigned short _nmlen, const void* _anno,
+		unsigned short _annolen, unsigned int _p)
 {
     m_namelen = _nmlen;
     if (m_namelen > 0)
@@ -95,10 +118,10 @@ void Bkmk::init(const void* _nm, unsigned short _nmlen, const void* _anno, unsig
 
 Bkmk::~Bkmk()
 {
-    if (m_name != NULL) delete [] m_name;
-    m_name = NULL;
-    if (m_anno != NULL) delete [] m_anno;
-    m_anno = NULL;
+    if (m_name != NULL)
+	delete [] m_name;
+    if (m_anno != NULL)
+	delete [] m_anno;
 }
  
 Bkmk& Bkmk::operator=(const Bkmk& rhs)
@@ -129,6 +152,7 @@ Bkmk& Bkmk::operator=(const Bkmk& rhs)
     }
     else
 	m_anno = NULL;
+
     m_position = rhs.m_position;
     m_position2 = rhs.m_position2;
     m_red = rhs.m_red;
@@ -140,7 +164,9 @@ Bkmk& Bkmk::operator=(const Bkmk& rhs)
 
 bool Bkmk::operator==(const Bkmk& rhs)
 {
-    return ((m_position == rhs.m_position) && (m_position2 == rhs.m_position2) && (rhs.m_namelen == m_namelen) && memcmp(m_name,rhs.m_name,m_namelen) == 0);
+    return ((m_position == rhs.m_position) &&
+	    (m_position2 == rhs.m_position2) && (rhs.m_namelen == m_namelen) &&
+	    memcmp(m_name,rhs.m_name,m_namelen) == 0);
 }
 
 void Bkmk::setAnno(unsigned char* t, unsigned short len)
@@ -246,7 +272,10 @@ CList<Bkmk>* BkmkFile::readall()
 	fread(&newmagic, sizeof(newmagic), 1, f);
 	if ((newmagic & 0xffffff00) != (magic & 0xffffff00))
 	{
-	    if (QMessageBox::warning(NULL, "Old bookmark file!", "Which version of " PROGNAME "\ndid you upgrade from?", "0_4*", "Any other version") == 0)
+	    if (QMessageBox::warning(NULL, "Old bookmark file!",
+				     "Which version of " PROGNAME
+				     "\ndid you upgrade from?", "0_4*",
+				     "Any other version") == 0)
 	    {
 		fseek(f,0,SEEK_SET);
 		bl = readall00(&read05);
@@ -320,6 +349,7 @@ Bkmk* BkmkFile::read03(BkmkFile* /*_this*/, FILE* f)
 	    fread(&pos,sizeof(pos),1,f);
 	    b = new Bkmk(name,anno,pos);
 	    delete [] anno;
+	    delete [] name;
 	}
     }
     return b;
@@ -344,6 +374,7 @@ Bkmk* BkmkFile::read05(BkmkFile* /*_this*/, FILE* f)
 	    fread(&pos,sizeof(pos),1,f);
 	    b = new Bkmk(nm,anno,pos);
 	    delete [] anno;
+	    delete [] nm;
 	}
     }
     return b;

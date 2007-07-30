@@ -429,8 +429,8 @@ class ExternFilter : public CFilter_IFace
   ExternFilter(const QString& nm, const QString& optional);
   ~ExternFilter()
     {
-      if (filt != NULL) delete filt;
-      if (handle != NULL) dlclose(handle);
+      if (filt) delete filt;
+      if (handle) dlclose(handle);
     }
   void locate(unsigned int n) { filt->locate(n); }
   bool findanchor(const QString& nm)

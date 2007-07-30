@@ -18,14 +18,17 @@
 struct FKey {
 
     FKey(): qcode(0), unicode(0) {};
-    FKey(const QString &l, const QString &f, ushort q, ushort u):
-            label(l), pixFile(f), qcode(q), unicode(u) {
-
-        if (!f.isEmpty()) {
-
+    FKey(const QString &l, const QString &f, ushort q, ushort u)
+        : label(l)
+        , pix(0)
+        , pixFile(f)
+        , qcode(q)
+        , unicode(u)
+    {
+        if (!f.isEmpty())
             pix = new QPixmap ( Opie::Core::OResource::loadPixmap("console/keys/" + f ) );
-        }
     };
+    ~FKey() { if (pix) delete pix; }
 
     QString label;
     QPixmap *pix;

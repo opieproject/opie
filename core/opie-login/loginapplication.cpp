@@ -254,6 +254,7 @@ void LoginApplication::execUserScript ( const char *base, const char *script )
         else
             ::execl ( "/bin/sh", "-sh", arg, 0 );
     }
+    delete [] arg;
 }
 
 const char *LoginApplication::loginAs ( )

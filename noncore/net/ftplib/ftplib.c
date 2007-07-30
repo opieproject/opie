@@ -408,6 +408,8 @@ GLOBALDEF int FtpConnect(const char *host, netbuf **nControl)
     memset(&sin,0,sizeof(sin));
     sin.sin_family = AF_INET;
     lhost = strdup(host);
+    if (!lhost)
+	return 0;
     pnum = strchr(lhost,':');
     if (pnum == NULL)
       {
@@ -417,6 +419,7 @@ GLOBALDEF int FtpConnect(const char *host, netbuf **nControl)
           if ((pse = getservbyname("ftp","tcp")) == NULL)
             {
                 perror("getservbyname");
+		free(lhost);
                 return 0;
             }
           sin.sin_port = pse->s_port;
