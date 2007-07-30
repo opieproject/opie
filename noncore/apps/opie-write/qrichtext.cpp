@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qrichtext.cpp,v 1.8 2007-07-30 18:19:43 erik Exp $
+** $Id: qrichtext.cpp,v 1.9 2007-07-30 18:59:26 erik Exp $
 **
 ** Implementation of the internal Qt classes dealing with rich text
 **
@@ -4269,12 +4269,8 @@ void QTextParagraph::paint( QPainter &painter, const QColorGroup &cg, QTextCurso
     i = y =h = baseLine = 0;
     QRect cursorRect;
     drawSelections &= ( mSelections != 0 );
-    // macintosh full-width selection style
-    bool fullWidthStyle = FALSE;
     int fullSelectionWidth = 0;
-    if ( drawSelections && fullWidthStyle )
-	fullSelectionWidth = (hasdoc ? document()->width() : r.width());
-	
+
     QString qstr = str->toString();
     // ### workaround so that \n are not drawn, actually this should
     // be fixed in QFont somewhere (under Windows you get ugly boxes
@@ -4329,11 +4325,6 @@ void QTextParagraph::paint( QPainter &painter, const QColorGroup &cg, QTextCurso
 
 	// init a new line
 	if ( chr->lineStart ) {
-	    if (fullWidthStyle && drawSelections && selection >= 0)
-		painter.fillRect( xend, y, fullSelectionWidth - xend, h,
-				  (selection == QTextDocument::Standard || !hasdoc) ?
-				  cg.color( QColorGroup::Highlight ) :
-				  document()->selectionColor( selection ) );
 	    ++line;
 	    paintStart = i;
 	    lineInfo( line, y, h, baseLine );
@@ -4393,17 +4384,6 @@ void QTextParagraph::paint( QPainter &painter, const QColorGroup &cg, QTextCurso
 	}
 	
     }
-
-    if (fullWidthStyle && drawSelections && selection >= 0 && next() && next()->mSelections)
-	for ( QMap<int, QTextParagraphSelection>::ConstIterator it = next()->mSelections->begin();
-	      it != next()->mSelections->end(); ++it )
-	    if (((*it).start) == 0) {
-		painter.fillRect( xend, y, fullSelectionWidth - xend, h,
-				  (selection == QTextDocument::Standard || !hasdoc) ?
-				  cg.color( QColorGroup::Highlight ) :
-				  document()->selectionColor( selection ) );
-		break;
-	    }
 
     // time to draw the cursor
     const int cursor_extent = 4;
@@ -7784,7 +7764,7 @@ QString QTextDocument::section( QString str, const QString &sep, int start, int 
     const QChar *last = end < 0 ? uc + n : uc;
     if(end == -1) {
 	int c = 0;
-	for(const QChar *tmp = end < 0 ? last - sep_len : last;
+	for(const QChar *tmp = last - sep_len;
 	    c < sep_len && tmp < uc + n && tmp >= uc; tmp++, c++) {
 	    if( *tmp != *(uc_sep + c) )
 		break;

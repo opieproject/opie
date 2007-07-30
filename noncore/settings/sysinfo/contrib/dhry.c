@@ -751,10 +751,11 @@ Str_30  Str_1_Par_Ref;
 Str_30  Str_2_Par_Ref;
 {
   REG One_Thirty        Int_Loc;
-      Capital_Letter    Ch_Loc;
+  Capital_Letter        Ch_Loc = 'W';
 
   Int_Loc = 2;
   while (Int_Loc <= 2) /* loop body executed once */
+  {
     if (Func_1 (Str_1_Par_Ref[Int_Loc],
                 Str_2_Par_Ref[Int_Loc+1]) == Ident_1)
       /* then, executed */
@@ -762,9 +763,8 @@ Str_30  Str_2_Par_Ref;
       Ch_Loc = 'A';
       Int_Loc += 1;
     } /* if, while */
-  if (Ch_Loc >= 'W' && Ch_Loc < 'Z')
-    /* then, not executed */
-    Int_Loc = 7;
+  }
+
   if (Ch_Loc == 'R')
     /* then, not executed */
     return (true);

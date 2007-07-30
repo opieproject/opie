@@ -795,16 +795,15 @@ QDate DateBookDay::findRealStart( int uid, const QDate& isIncluded ,  DateBookDB
     QDate dt( isIncluded );
     QDate fnd = dt;
 
-    bool doAgain = true;
-    do{
-        dt = dt.addDays( -1 );
-        QValueList<EffectiveEvent> events = db->getEffectiveEvents( dt, dt );
-        for (QValueList<EffectiveEvent>::Iterator it = events.begin(); it != events.end(); ++it ) {
-            EffectiveEvent ev = (*it);
-            if ( uid == ev.event().uid() && ev.start() != QTime(0, 0, 0 ) )
-                return ev.date();
-        }
-    }while (doAgain );
+    dt = dt.addDays( -1 );
+    QValueList<EffectiveEvent> events = db->getEffectiveEvents( dt, dt );
+    for (QValueList<EffectiveEvent>::Iterator it = events.begin();
+	 it != events.end(); ++it )
+    {
+        EffectiveEvent ev = (*it);
+        if ( uid == ev.event().uid() && ev.start() != QTime(0, 0, 0 ) )
+            return ev.date();
+    }
 
     return fnd;
 }
