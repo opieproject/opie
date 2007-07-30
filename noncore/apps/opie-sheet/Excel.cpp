@@ -292,7 +292,14 @@ char* ExcelBook::Read(int pos, int length)
     SeekPosition(pos);
     for(i=0; i<length; i++)
     {
-        if(!feof(File)) data[i]=fgetc(File);
+        if(!feof(File)) {
+            int tmpData=0;
+            tmpData=fgetc(File);
+            if (tmpData < -1 || tmpData > 127)
+                tmpData = 0;
+
+            data[i]=tmpData;
+        }
     };
     Position= Position+length;
     return data;
