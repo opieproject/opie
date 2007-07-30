@@ -53,8 +53,8 @@ public slots:
      */
     void slotNoEnd( bool unused );
     void setStartDate( const QDate& );
-    void setRecurrence( const Opie::OPimRecurrence& recur, const QDate& start );
-    void setRecurrence( const Opie::OPimRecurrence& recur );
+    void setRecurrence( const Opie::OPimRecurrence& rp, const QDate& date );
+    void setRecurrence( const Opie::OPimRecurrence& rp );
 
 private slots:
     void setupRepeatLabel( const QString& );
@@ -80,7 +80,7 @@ private:
     QDate start;    // only used in one spot...
     QDate end;
     repeatButtons currInterval;
-    bool startWeekOnMonday : 1;
+    bool startWeekOnMonday;
     DateBookMonth *repeatPicker;
 
     class Private;

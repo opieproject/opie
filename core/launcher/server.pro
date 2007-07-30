@@ -5,7 +5,7 @@ CONFIG		+= qt warn_on
 DESTDIR		= $$(OPIEDIR)/bin
 
 HEADERS		+= server.h \
-	    qrr.h \
+		  qrr.h \
 		  serverinterface.h \
 		  launchertab.h \
 		  documentlist.h \
@@ -31,11 +31,11 @@ HEADERS		+= server.h \
 		  serverapp.h \
 		  qprocess.h \
 		  screensaver.h \
-        $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.h \
+		  $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.h \
                   mediadlg.h 
 
 SOURCES		+= server.cpp \
-      qrr.cpp \
+		  qrr.cpp \
 		  serverinterface.cpp \
 		  launchertab.cpp \
 		  documentlist.cpp \
@@ -63,7 +63,7 @@ SOURCES		+= server.cpp \
 		  qprocess.cpp \
 		  qprocess_unix.cpp \
 		  screensaver.cpp \
-        $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.cc \
+		  $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.cc \
                   mediadlg.cpp
 
 

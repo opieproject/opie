@@ -51,16 +51,16 @@ HEADERS	=   calendar.h \
 	    categoryedit_p.h \
 	    categoryselect.h \
 	    categorywidget.h \
-	ir.h \
-	backend/vobject_p.h \
-	findwidget_p.h \
-	finddialog.h \
-	lnkproperties.h \
-	windowdecorationinterface.h \
-	textcodecinterface.h \
-	imagecodecinterface.h \
-	locationcombo.h \
-	qpeglobal.h
+	    ir.h \
+	    backend/vobject_p.h \
+	    findwidget_p.h \
+	    finddialog.h \
+	    lnkproperties.h \
+	    windowdecorationinterface.h \
+	    textcodecinterface.h \
+	    imagecodecinterface.h \
+	    locationcombo.h \
+	    qpeglobal.h
 	
 SOURCES	=   calendar.cpp \
 	    global.cpp \
@@ -108,17 +108,17 @@ SOURCES	=   calendar.cpp \
 	    backend/event.cpp \
 	    backend/contact.cpp \
 	    categorymenu.cpp \
-	categoryedit_p.cpp \
-	categoryselect.cpp \
-	categorywidget.cpp \
-	ir.cpp \
-	backend/vcc_yacc.cpp \
-	backend/vobject.cpp \
-	findwidget_p.cpp \
-	finddialog.cpp \
-	lnkproperties.cpp \
-	locationcombo.cpp \
-	widget_showing.cpp
+	    categoryedit_p.cpp \
+	    categoryselect.cpp \
+	    categorywidget.cpp \
+	    ir.cpp \
+	    backend/vcc_yacc.cpp \
+	    backend/vobject.cpp \
+	    findwidget_p.cpp \
+	    finddialog.cpp \
+	    lnkproperties.cpp \
+	    locationcombo.cpp \
+	    widget_showing.cpp
 
 
 

@@ -37,6 +37,7 @@
 #include <qspinbox.h>
 
 #include <time.h>
+#include <opie2/osortweekdaybuttons.h>
 
 // Global Templates for use in setting up the repeat label...
 // the problem is these strings get initialized before QPEApplication can install the translator -zecke
@@ -117,20 +118,7 @@ RepeatEntry::RepeatEntry( bool startOnMonday, const Event::RepeatPattern &rp,
 	case Event::Weekly:
 	    currInterval = WEEK;
 	    setupWeekly();
-	    int day, buttons;
-	    for ( day = 0x01, buttons = 0; buttons < 7;
-	          day = day << 1, buttons++ ) {
-		if ( rp.days & day ) {
- 		    if ( startWeekOnMonday )
-			fraExtra->setButton( buttons );
- 		    else {
- 			if ( buttons == 7 )
- 			    fraExtra->setButton( 0 );
- 			else
- 			    fraExtra->setButton( buttons + 1 );
- 		    }
-		}
-	    }
+	    sortWeekdayButtons(rp.days, startWeekOnMonday, fraExtra);
 	    slotWeekLabel();
 	    break;
 	case Event::MonthlyDay:
@@ -548,7 +536,7 @@ void RepeatEntry::slotMonthLabel( int type )
 void RepeatEntry::slotChangeStartOfWeek( bool onMonday )
 {
     startWeekOnMonday = onMonday;
-    // we need to make this unintrusive as possible...
+    // we need to make this as unintrusive as possible...
     int saveSpin = spinFreq->value();
     char days = 0;
     int day;
@@ -567,20 +555,7 @@ void RepeatEntry::slotChangeStartOfWeek( bool onMonday )
     }
     setupWeekly();
     spinFreq->setValue( saveSpin );
-    int buttons;
-    for ( day = 0x01, buttons = 0; buttons < 7;
-	  day = day << 1, buttons++ ) {
-	if ( days & day ) {
-	    if ( startWeekOnMonday )
-		fraExtra->setButton( buttons );
-	    else {
-		if ( buttons == 7 )
-		    fraExtra->setButton( 0 );
-		else
-		    fraExtra->setButton( buttons + 1 );
-	    }
-	}
-    }
+    sortWeekdayButtons( days, startWeekOnMonday, fraExtra );
     slotWeekLabel();
 }
 
