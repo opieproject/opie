@@ -433,14 +433,14 @@ static void null_overlay_clut_yuv2rgb (null_driver_t  *this,
     }
     overlay->rgb_clut++;
   }
-  if (!overlay->clip_rgb_clut) {
-    clut = (clut_t*) overlay->clip_color;
+  if (!overlay->rgb_clut) {
+    clut = (clut_t*) overlay->hili_color;
     for (i = 0; i < sizeof(overlay->color)/sizeof(overlay->color[0]); i++) {
       *((uint32_t *)&clut[i]) =
-  frame->yuv2rgb->yuv2rgb_single_pixel_fun(frame->yuv2rgb,
-					   clut[i].y, clut[i].cb, clut[i].cr);
+        frame->yuv2rgb->yuv2rgb_single_pixel_fun(frame->yuv2rgb,
+						 clut[i].y, clut[i].cb, clut[i].cr);
     }
-    overlay->clip_rgb_clut++;
+    overlay->rgb_clut++;
   }
 }
 
@@ -455,7 +455,7 @@ static void null_overlay_blend ( vo_driver_t *this_gen, vo_frame_t *frame_gen,
 
   /* Alpha Blend here */
   if (overlay->rle) {
-    if( !overlay->rgb_clut || !overlay->clip_rgb_clut)
+    if( !overlay->rgb_clut)
       null_overlay_clut_yuv2rgb(this,overlay,frame);
 
     switch(this->bpp) {
