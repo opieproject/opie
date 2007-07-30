@@ -94,7 +94,7 @@ unsigned int AudioDevicePrivate::rightVolume = 0;
 
 void AudioDevice::getVolume( unsigned int& leftVolume, unsigned int& rightVolume, bool &muted ) {
     muted = AudioDevicePrivate::muted;
-    unsigned int volume;
+    unsigned int volume = 0;
 #ifdef QT_QWS_DEVFS
     int mixerHandle = open( "/dev/sound/mixer", O_RDWR );
 #else

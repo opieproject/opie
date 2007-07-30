@@ -784,8 +784,8 @@ void OTScan::SLOT_RefreshServices( void ) {
           UUIDVector UIDV; 
           QPixmap Pm;
           bool Done = 0;
-          bool R;
-          short ID;
+          bool R = true;
+          short ID = 0;
 
           SIt = 0;
 

@@ -1097,7 +1097,7 @@ QString ExcelBook::GetFormula(int row, int col, ExcelSheet* sheet, char* data, i
     printf("{FormulaParser}\r\n");
     printf("row=%d, col=%d, length=%d\r\n",row,col,length);
     int idx=0;
-    int w1,w2,w3,w4;
+    int w1=0,w2=0,w3=0,w4=0;
     double d1;
     int token;
     QString s1;

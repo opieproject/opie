@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: synth.c,v 1.3 2005-11-08 23:16:04 llornkcor Exp $
+ * $Id: synth.c,v 1.4 2007-07-30 19:13:56 erik Exp $
  */
 
 # ifdef HAVE_CONFIG_H
@@ -563,8 +563,8 @@ void synth_full(struct mad_synth *synth, struct mad_frame const *frame,
   mad_fixed_t const (*sbsample)[36][32];
   register mad_fixed_t (*fe)[8], (*fx)[8], (*fo)[8];
   register mad_fixed_t const (*Dptr)[32], *ptr;
-  register mad_fixed64hi_t hi;
-  register mad_fixed64lo_t lo;
+  register mad_fixed64hi_t hi = 0;
+  register mad_fixed64lo_t lo = 0;
 
   for (ch = 0; ch < nch; ++ch) {
     sbsample = &frame->sbsample[ch];
@@ -700,8 +700,8 @@ void synth_half(struct mad_synth *synth, struct mad_frame const *frame,
   mad_fixed_t const (*sbsample)[36][32];
   register mad_fixed_t (*fe)[8], (*fx)[8], (*fo)[8];
   register mad_fixed_t const (*Dptr)[32], *ptr;
-  register mad_fixed64hi_t hi;
-  register mad_fixed64lo_t lo;
+  register mad_fixed64hi_t hi = 0;
+  register mad_fixed64lo_t lo = 0;
 
   for (ch = 0; ch < nch; ++ch) {
     sbsample = &frame->sbsample[ch];

@@ -949,7 +949,7 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
         // parse results
         struct iw_event iwe;
         struct iw_stream_descr stream;
-        unsigned int cmd_index, event_type, event_len;
+        unsigned int cmd_index = 0, event_type = 0, event_len = 0;
         char *pointer;
 
         const char standard_ioctl_hdr[] = {
