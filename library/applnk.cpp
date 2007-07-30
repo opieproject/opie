@@ -1252,9 +1252,9 @@ const AppLnk *AppLnkSet::find( int id ) const
     QListIterator<AppLnk> it( children() );
 
     for ( ; it.current(); ++it ) {
-  const AppLnk *app = it.current();
-  if ( app->id() == id )
-      return app;
+        const AppLnk *app = it.current();
+        if ( app && app->id() == id )
+            return app;
     }
 
     return 0;
@@ -1268,9 +1268,9 @@ const AppLnk *AppLnkSet::findExec( const QString& exec ) const
     QListIterator<AppLnk> it( children() );
 
     for ( ; it.current(); ++it ) {
-  const AppLnk *app = it.current();
-  if ( app->exec() == exec )
-      return app;
+        const AppLnk *app = it.current();
+        if ( app && app->exec() == exec )
+            return app;
     }
 
     return 0;

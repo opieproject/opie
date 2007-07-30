@@ -139,13 +139,17 @@ void RunningAppBar::paintEvent( QPaintEvent * )
     for (; it.current(); i++, ++it ) {
       if ( x + spacing <= width() ) {
 	curApp = it.current();
-        owarn << "Drawing " << curApp->name() << "" << oendl;
- 	if ( (int)i == selectedAppIndex )
- 	  p.fillRect( x, y, spacing, curApp->pixmap().height()+1, colorGroup().highlight() );
-  	else
-	  p.eraseRect( x, y, spacing, curApp->pixmap().height()+1 );
-	p.drawPixmap( x, y, curApp->pixmap() );
-	x += spacing;
+	if (curApp) {
+          owarn << "Drawing " << curApp->name() << "" << oendl;
+ 	  if ( (int)i == selectedAppIndex )
+ 	    p.fillRect( x, y, spacing, curApp->pixmap().height()+1, colorGroup().highlight() );
+  	  else
+	    p.eraseRect( x, y, spacing, curApp->pixmap().height()+1 );
+
+	  p.drawPixmap( x, y, curApp->pixmap() );
+	  x += spacing;
+	} else
+	  owarn << "No current application found" << oendl;
       }
     }
 }

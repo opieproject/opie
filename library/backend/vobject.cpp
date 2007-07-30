@@ -387,29 +387,29 @@ DLLEXPORT(VObject*) addGroup(VObject *o, const char *g)
 	char *gs, *n = dot+1;
 	gs = dupStr(g,0);	/* so we can write to it. */
 	/* used to be
-	* t = p = addProp_(o,lookupProp_(n));
-	*/
+	 * t = p = addProp_(o,lookupProp_(n));
+	 */
 	t = p = addProp_(o,lookupProp(n));
 	dot = strrchr(gs,'.');
+	if (!dot)
+	    return 0;
 	*dot = 0;
 	do {
 	    dot = strrchr(gs,'.');
 	    if (dot) {
 		n = dot+1;
 		*dot=0;
-		}
-	    else
+	    } else
 		n = gs;
 	    /* property(VCGroupingProp=n);
 	     *	and the value may have VCGrouping property
 	     */
 	    t = addProp(t,VCGroupingProp);
 	    setVObjectStringZValue(t,lookupProp_(n));
-	    } while (n != gs);
+	} while (n != gs);
 	deleteStr(gs);	
 	return p;
-	}
-    else
+    } else
 	return addProp_(o,lookupProp(g));
 }
 
