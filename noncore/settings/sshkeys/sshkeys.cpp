@@ -46,7 +46,8 @@ static void detachTerminal() {
        This is to ensure that SSH uses ssh-askpass */
     int fd = open("/dev/tty", O_RDONLY);
     if (fd != -1) {
-        ioctl(fd, TIOCNOTTY, NULL);
+        if (ioctl(fd, TIOCNOTTY, NULL) == -1)
+            perror("TIOCNOTTY");
         close(fd);
     }
 }

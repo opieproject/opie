@@ -57,7 +57,7 @@ public:
     bool open();
     void close();
     void reload( const Profile& );
-    void setSize(int lines, int columns);
+    void setSize(const unsigned short &lines, const unsigned short &columns);
     void error();
     bool isConnected() { return true; };
   signals:

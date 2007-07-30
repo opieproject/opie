@@ -45,7 +45,7 @@ Q_OBJECT
   public slots:
 
     void send_bytes(const char* s, int len);
-    void setSize(int lines, int columns);
+    void setSize(const unsigned short &lines, const unsigned short &columns);
     void error();
 
   signals:

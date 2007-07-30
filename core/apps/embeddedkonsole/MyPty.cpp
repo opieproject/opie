@@ -91,17 +91,19 @@
 /* -------------------------------------------------------------------------- */
 
 /*!
-   Informs the client program about the
-   actual size of the window.
-*/
+ * Notifies the client program through the SIGWINCH signal about the actual size
+ * of the window.
+ */
 
-void MyPty::setSize(int lines, int columns)
+void MyPty::setSize(const unsigned short &lines, const unsigned short &columns)
 {
-  struct winsize wsize;
-  wsize.ws_row = (unsigned short)lines;
-  wsize.ws_col = (unsigned short)columns;
-  if(fd < 0) return;
-  ioctl(fd,TIOCSWINSZ,(char *)&wsize);
+    struct winsize wsize;
+    wsize.ws_row = lines;
+    wsize.ws_col = columns;
+    if (fd < 0) return;
+
+    if (ioctl(fd,TIOCSWINSZ,(char *)&wsize) == -1)
+        perror( "failed to store the window size" );
 }
 
 
@@ -113,8 +115,8 @@ void MyPty::donePty()
     ::close(fd);
 
     if (cpid) {
-  kill(cpid, SIGHUP);
-  waitpid(cpid, &status, 0);
+        kill(cpid, SIGHUP);
+        waitpid(cpid, &status, 0);
     }
 
     emit done(status);
@@ -162,7 +164,8 @@ int MyPty::run(const char* cmd, QStrList &, const char*, int)
       perror( "failed to set process group" );
 #if defined (TIOCSCTTY)
   // grabbed from APUE by Stevens (see section 9.6, should be page 246)
-  ioctl(STDIN_FILENO, TIOCSCTTY, 0);
+  if (ioctl(STDIN_FILENO, TIOCSCTTY, 0) == -1)
+      perror( "failed to allocate a controlling terminal" );
 #endif
   tcgetattr( STDIN_FILENO, &ttmode );
   ttmode.c_cc[VINTR] = 3;

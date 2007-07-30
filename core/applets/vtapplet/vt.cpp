@@ -115,11 +115,14 @@ void VTApplet::changeVT( int index )
     int fd = ::open("/dev/tty0", O_RDWR);
 #endif
     if ( fd == -1 ) return;
-    ioctl( fd, VT_ACTIVATE, index-500 );
+    if ( ioctl( fd, VT_ACTIVATE, index-500 ) == -1 )
+        return;
     if ( m_ourVT )
     {
         odebug << "VTApplet::waiting for user to return to VT " << m_ourVT << oendl;
-        ioctl( fd, VT_WAITACTIVE, m_ourVT );
+        if ( ioctl( fd, VT_WAITACTIVE, m_ourVT ) == -1 )
+	    owarn << "VTApplet::changeVT - failed waiting for user to return to VT"
+                  << oendl;
     }
 }
 
@@ -133,18 +136,13 @@ void VTApplet::updateMenu()
 
     for ( int i = 1; i < 10; ++i )
     {
-        int result = ioctl( fd, VT_DISALLOCATE, i );
+	int result = -1;
+        if ( ( result = ioctl( fd, VT_DISALLOCATE, i ) ) == -1 )
+            owarn << "VTApplet::updateMenu - failed to disallocate VT " << i
+                  << oendl;
 
-        /*
-        if ( result == -1 )
-            odebug << "VT " << i << " disallocated == free" << oendl;
-        else
-            odebug << "VT " << i << " _not_ disallocated == busy" << oendl;
-        */
-
-        m_subMenu->setItemEnabled( 500+i, result == -1 );
+        m_subMenu->setItemEnabled( 500+i, ( result == -1 ) );
     }
-
     ::close( fd );
 }
 

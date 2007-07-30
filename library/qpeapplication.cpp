@@ -520,7 +520,8 @@ static void setVolume( int t = 0, int percent = -1 )
                     int vol = muted ? 0 : percent;
                     // set both channels to same volume
                     vol |= vol << 8;
-                    ioctl( fd, MIXER_WRITE( SOUND_MIXER_VOLUME ), &vol );
+                    if ( ioctl( fd, MIXER_WRITE( SOUND_MIXER_VOLUME ), &vol ) == -1 )
+                        qWarning( "Failed to set both channels to %d", vol );
                     ::close( fd );
                 }
 #endif
@@ -546,7 +547,8 @@ static void setMic( int t = 0, int percent = -1 )
 #else
                 if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
 #endif
-                    ioctl( fd, MIXER_WRITE( SOUND_MIXER_MIC ), &mic );
+                    if ( ioctl( fd, MIXER_WRITE( SOUND_MIXER_MIC ), &mic ) == -1 )
+                        qWarning( "Failed to set mic to %d", mic );
                     ::close( fd );
                 }
 #endif
@@ -573,7 +575,8 @@ static void setBass( int t = 0, int percent = -1 )
 #else
                                 if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
 #endif
-                    ioctl( fd, MIXER_WRITE( SOUND_MIXER_BASS ), &bass );
+                    if ( ioctl( fd, MIXER_WRITE( SOUND_MIXER_BASS ), &bass ) == -1 )
+                        qWarning( "Failed to set bass to %d", bass );
                     ::close( fd );
                 }
 #endif
@@ -600,7 +603,8 @@ static void setTreble( int t = 0, int percent = -1 )
 #else
                 if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
 #endif
-                    ioctl( fd, MIXER_WRITE( SOUND_MIXER_TREBLE ), &treble );
+                    if ( ioctl( fd, MIXER_WRITE( SOUND_MIXER_TREBLE ), &treble ) == -1 )
+                        qWarning( "Failed to set treble to %d", treble );
                     ::close( fd );
                 }
 #endif

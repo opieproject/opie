@@ -104,8 +104,7 @@ static char *xtopowerofy_xpm[] = {
 "#...#...."
 };
 
-CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
-        WFlags f )
+CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name, WFlags f )
     : Calculator( parent, name, f )
 {
     memMark = new QLabel( "m", LCD );
@@ -172,7 +171,7 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
     QObject::tr("yd");
 
 
-//bgr_command.insert( PushButtonFunction);
+    //bgr_command.insert( PushButtonFunction);
     bgr_command.insert( PushButtonMPlus);
     bgr_command.insert( PushButtonMR);
     bgr_command.insert( PushButtonMC);
@@ -200,19 +199,19 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
     bgr_std.insert(PushButtonTimes);
     connect( &bgr_std, SIGNAL(clicked(int) ), this, SLOT(std_buttons(int)));
 
-// change the / to a proper division signal
+    // change the / to a proper division signal
     PushButtonDivide->setText(QChar(0xF7));
 
-    func_buttons[0] = PushButtonF1;
-    func_buttons[1] = PushButtonF2;
-    func_buttons[2] = PushButtonF3;
-    func_buttons[3] = PushButtonF4;
-    func_buttons[4] = PushButtonF5;
-    func_buttons[5] = PushButtonF6;
-    func_buttons[6] = PushButtonF7;
-    func_buttons[7] = PushButtonF8;
-    func_buttons[8] = PushButtonF9;
-    func_buttons[9] = PushButtonF10;
+    func_buttons[0]  = PushButtonF1;
+    func_buttons[1]  = PushButtonF2;
+    func_buttons[2]  = PushButtonF3;
+    func_buttons[3]  = PushButtonF4;
+    func_buttons[4]  = PushButtonF5;
+    func_buttons[5]  = PushButtonF6;
+    func_buttons[6]  = PushButtonF7;
+    func_buttons[7]  = PushButtonF8;
+    func_buttons[8]  = PushButtonF9;
+    func_buttons[9]  = PushButtonF10;
     func_buttons[10] = PushButtonF11;
     func_buttons[11] = PushButtonF12;
 
@@ -251,37 +250,38 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name,
         }
 
         entry_list = new double[conversion_mode_count*func_button_count];
-    preoffset_list = new double[conversion_mode_count*func_button_count];
-    postoffset_list = new double[conversion_mode_count*func_button_count];
+        preoffset_list = new double[conversion_mode_count*func_button_count];
+        postoffset_list = new double[conversion_mode_count*func_button_count];
         myfile.close();
-        myfile.open( IO_Translate | IO_ReadOnly );
-        QTextStream ts2(&myfile);
+        if (myfile.open( IO_Translate | IO_ReadOnly )) {
+            QTextStream ts2(&myfile);
 
-        // second pass, read in values
-        int x = 0;
-        while ( ! ts2.eof() ) {
+            // second pass, read in values
+            int x = 0;
+            while ( ! ts2.eof() ) {
                 line = ts2.readLine();
                 if ( line.contains("STARTTYPE") ) {
-                        captions << tr( line.remove(0,10) );
-      ComboBoxFunction->insertItem(captions.last());
-                        while ( !line.contains("ENDTYPE") ) {
-                            line = ts2.readLine();
-                            if ( line.contains("NAME") ) {
-                                faces << tr( line.remove(0,5) );
-                                line2 = ts2.readLine();
-                                line2.remove(0,6);
-                                entry_list[x] = line2.toDouble();
-                line2 = ts2.readLine();
-                                line2.remove(0,7);
-                                preoffset_list[x] = line2.toDouble();
-                line2 = ts2.readLine();
-                                line2.remove(0,8);
-                                postoffset_list[x] = line2.toDouble();
-                                x++;
-                            }
+                    captions << tr( line.remove(0,10) );
+                    ComboBoxFunction->insertItem(captions.last());
+                    while ( !line.contains("ENDTYPE") ) {
+                        line = ts2.readLine();
+                        if ( line.contains("NAME") ) {
+                            faces << tr( line.remove(0,5) );
+                            line2 = ts2.readLine();
+                            line2.remove(0,6);
+                            entry_list[x] = line2.toDouble();
+                            line2 = ts2.readLine();
+                            line2.remove(0,7);
+                            preoffset_list[x] = line2.toDouble();
+                            line2 = ts2.readLine();
+                            line2.remove(0,8);
+                            postoffset_list[x] = line2.toDouble();
+                            x++;
                         }
+                    }
                 }
-        }
+            }
+	}
     }
     myfile.close();
     clear();

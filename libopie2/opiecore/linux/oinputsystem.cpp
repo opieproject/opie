@@ -137,7 +137,8 @@ OInputDevice::~OInputDevice()
 QString OInputDevice::identity() const
 {
     char buf[BUFSIZE] = "<unknown>";
-    ::ioctl( _fd, EVIOCGNAME(sizeof buf), buf );
+    if ( ::ioctl( _fd, EVIOCGNAME(sizeof buf), buf ) == -1)
+        perror( "EVIOCGNAME" );
     return buf;
 }
 
@@ -145,7 +146,8 @@ QString OInputDevice::identity() const
 QString OInputDevice::path() const
 {
     char buf[BUFSIZE] = "<unknown>";
-    ::ioctl( _fd, EVIOCGPHYS(sizeof buf), buf );
+    if ( ::ioctl( _fd, EVIOCGPHYS(sizeof buf), buf ) == -1 )
+        perror( "EVIOCGPHYS" );
     return buf;
 }
 
@@ -153,7 +155,8 @@ QString OInputDevice::path() const
 QString OInputDevice::uniq() const
 {
     char buf[BUFSIZE] = "<unknown>";
-    ::ioctl( _fd, EVIOCGUNIQ(sizeof buf), buf );
+    if ( ::ioctl( _fd, EVIOCGUNIQ(sizeof buf), buf ) == -1 )
+        perror( "EVIOCGUNIQ" );;
     return buf;
 }
 
