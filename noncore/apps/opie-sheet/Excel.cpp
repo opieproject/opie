@@ -837,10 +837,11 @@ ExcelCell* ExcelBook::CellNumber(int row, int col, int index, double d)
 
 QString* ExcelBook::CellDataString(ExcelSheet* sh, int row, int col)
 {
+    unsigned int dateFormatSize = 127;
     time_t date;
     struct tm *tmptr;
     ExcelCell* c;
-    char str[128];
+    char str[dateFormatSize + 1];
     QString format;
     int precision;
     int utcOffsetDays = 25569;
@@ -860,11 +861,11 @@ QString* ExcelBook::CellDataString(ExcelSheet* sh, int row, int col)
             tmptr = gmtime(&date);
             if (dateformat)
             {
-                strftime(str,1024,dateformat.ascii(),tmptr);
+                strftime(str, dateFormatSize, dateformat.ascii(), tmptr);
             }
             else
             {
-                strftime(str,1024,format.ascii(),tmptr);
+                strftime(str, dateFormatSize, format.ascii(), tmptr);
             };
         }
         else

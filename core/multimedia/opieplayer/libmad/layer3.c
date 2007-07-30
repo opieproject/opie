@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: layer3.c,v 1.4 2007-07-30 19:13:56 erik Exp $
+ * $Id: layer3.c,v 1.5 2007-07-30 19:15:19 erik Exp $
  */
 
 # ifdef HAVE_CONFIG_H
@@ -1456,6 +1456,9 @@ enum mad_error III_stereo(mad_fixed_t xr[2][576],
 	is_pos = right_ch->scalefac[sfbi];
 
 	for (i = 0; i < n; ++i) {
+          if ((l + i) > 575)
+	     break;
+
 	  register mad_fixed_t left;
 
 	  left = xr[0][l + i];
@@ -1518,7 +1521,7 @@ enum mad_error III_stereo(mad_fixed_t xr[2][576],
       if (modes[sfbi] != MS_STEREO)
 	continue;
 
-      for (i = 0; i < n; ++i) {
+      for (i = 0; i < n && (l + i) < 576; ++i) {
 	register mad_fixed_t m, s;
 
 	m = xr[0][l + i];
