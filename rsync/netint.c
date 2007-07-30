@@ -1,7 +1,7 @@
 /*= -*- c-basic-offset: 4; indent-tabs-mode: nil; -*-
  *
  * librsync -- library for network deltas
- * $Id: netint.c,v 1.1 2002-01-25 22:15:09 kergoth Exp $
+ * $Id: netint.c,v 1.2 2007-07-30 17:37:05 erik Exp $
  * 
  * Copyright (C) 1999, 2000, 2001 by Martin Pool <mbp@samba.org>
  * Copyright (C) 1999 by Andrew Tridgell <tridge@samba.org>
@@ -181,5 +181,6 @@ int rs_int_len(rs_long_t val)
     else {
         rs_fatal("can't encode integer %.0f yet", (double) val);
     }
+    return 0;
 }
 

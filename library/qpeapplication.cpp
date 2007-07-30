@@ -252,29 +252,29 @@ public:
 
     static bool read_widget_rect(const QString &app, bool &maximized, QPoint &p, QSize &s)
     {
-    if (!saveWindowsPos)
-	return FALSE;
-    maximized = TRUE;
-    // 350 is the trigger in qwsdefaultdecoration for providing a resize button
-    if ( qApp->desktop()->width() <= 350 )
+        if (!saveWindowsPos)
+	    return FALSE;
+        maximized = TRUE;
+        // 350 is the trigger in qwsdefaultdecoration for providing a resize button
+        if ( qApp->desktop()->width() <= 350 )
+            return FALSE;
+
+        Config cfg( "qpe" );
+        cfg.setGroup("ApplicationPositions");
+        QString str = cfg.readEntry( app, QString::null );
+        QStringList l = QStringList::split(",", str);
+
+        if ( l.count() == 5) {
+            p.setX( l[0].toInt() );
+            p.setY( l[1].toInt() );
+
+            s.setWidth( l[2].toInt() );
+            s.setHeight( l[3].toInt() );
+
+            maximized = l[4].toInt();
+            return TRUE;
+        }
         return FALSE;
-
-    Config cfg( "qpe" );
-    cfg.setGroup("ApplicationPositions");
-    QString str = cfg.readEntry( app, QString::null );
-    QStringList l = QStringList::split(",", str);
-
-    if ( l.count() == 5) {
-        p.setX( l[0].toInt() );
-        p.setY( l[1].toInt() );
-
-        s.setWidth( l[2].toInt() );
-        s.setHeight( l[3].toInt() );
-
-        maximized = l[4].toInt();
-
-        return TRUE;
-    }
     }
 
 
