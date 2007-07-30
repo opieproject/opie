@@ -194,7 +194,7 @@ QMyDialog::QMyDialog(QWidget* parent) : QDialog(parent, "Settings", true)
   home = getenv("HOME");
   if (home != NULL)
   {
-    sprintf(Text, "%s/rdesktop.ini", home);
+    snprintf(Text, 255 - 13, "%s/rdesktop.ini", home);
     QFile* File = new QFile(Text);
     if (File->open(IO_ReadOnly))
     {
@@ -338,7 +338,7 @@ void QMyDialog::SaveClicked()
   home = getenv("HOME");
   if (home != NULL)
   {
-    sprintf(Text, "%s/rdesktop.ini", home);
+    snprintf(Text, 255 - 13, "%s/rdesktop.ini", home);
     File = new QFile(Text);
     if (File->open(IO_Truncate | IO_ReadWrite))
     {
