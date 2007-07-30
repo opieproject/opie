@@ -1,4 +1,4 @@
-/* $Id: chm_lib.c,v 1.3 2007-01-26 20:24:07 erik Exp $ */
+/* $Id: chm_lib.c,v 1.4 2007-07-30 19:25:11 erik Exp $ */
 /***************************************************************************
  *             chm_lib.c - CHM archive manipulation routines               *
  *                           -------------------                           *
@@ -1432,7 +1432,7 @@ LONGINT64 chm_retrieve_object(struct chmFile *h,
         return (Int64)0;
 
     /* starting address must be in correct range */
-    if (addr < 0  ||  addr >= ui->length)
+    if (addr >= ui->length)
         return (Int64)0;
 
     /* clip length */

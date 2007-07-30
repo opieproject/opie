@@ -1595,7 +1595,7 @@ static void colorToPalette(const uint32_t *icolor, unsigned char *palette_p,
     case 'Y':
     default:  *palette_p = color->y; break;
     }
-    *palette_p++;
+    palette_p++;
   }
 }
 

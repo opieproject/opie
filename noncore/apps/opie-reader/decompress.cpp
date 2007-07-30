@@ -6,7 +6,7 @@
 size_t UnZip(UInt8* compressedbuffer, size_t reclen, UInt8* tgtbuffer, size_t bsize)
 {
   z_stream zstream;
-  memset(&zstream,sizeof(zstream),0);
+  memset(&zstream, 0, sizeof(zstream));
   zstream.next_in = compressedbuffer;
   zstream.next_out = tgtbuffer;
   zstream.avail_out = bsize;
