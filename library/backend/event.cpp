@@ -35,37 +35,37 @@ static void write( QString& buf, const Event::RepeatPattern &r )
 {
     buf += " rtype=\"";
     switch ( r.type ) {
-	case Event::Daily:
-	    buf += "Daily";
-	    break;
-	case Event::Weekly:
-	    buf += "Weekly";
-	    break;
-	case Event::MonthlyDay:
-	    buf += "MonthlyDay";
-	    break;
-	case Event::MonthlyDate:
-	    buf += "MonthlyDate";
-	    break;
-	case Event::Yearly:
-	    buf += "Yearly";
-	    break;
-	default:
-	    buf += "NoRepeat";
-	    break;
+        case Event::Daily:
+            buf += "Daily";
+            break;
+        case Event::Weekly:
+            buf += "Weekly";
+            break;
+        case Event::MonthlyDay:
+            buf += "MonthlyDay";
+            break;
+        case Event::MonthlyDate:
+            buf += "MonthlyDate";
+            break;
+        case Event::Yearly:
+            buf += "Yearly";
+            break;
+        default:
+            buf += "NoRepeat";
+            break;
     }
     buf += "\"";
     if ( r.days > 0 )
-	buf += " rweekdays=\"" + QString::number( static_cast<int>( r.days ) ) + "\"";
+        buf += " rweekdays=\"" + QString::number( static_cast<int>( r.days ) ) + "\"";
     if ( r.position != 0 )
-	buf += " rposition=\"" + QString::number( r.position ) + "\"";
+        buf += " rposition=\"" + QString::number( r.position ) + "\"";
 
     buf += " rfreq=\"" + QString::number( r.frequency ) + "\"";
     buf += " rhasenddate=\"" + QString::number( static_cast<int>( r.hasEndDate ) ) + "\"";
      if ( r.hasEndDate )
-	buf += " enddt=\""
-	       + QString::number( r.endDateUTC ? r.endDateUTC : time( 0 ) )
-	       + "\"";
+        buf += " enddt=\""
+               + QString::number( r.endDateUTC ? r.endDateUTC : time( 0 ) )
+               + "\"";
     buf += " created=\"" + QString::number( r.createTime ) + "\"";
 }
 
@@ -376,7 +376,7 @@ int Event::week( const QDate& date )
     QDate tmp( date.year(), date.month(), 1 );
 
     if ( date.dayOfWeek() < tmp.dayOfWeek() )
-	++week;
+        ++week;
 
     week += ( date.day() - 1 ) / 7;
     return week;
@@ -400,8 +400,8 @@ int Event::dayOfWeek( char day )
     int dayOfWeek = 1;
     char i = Event::MON;
     while ( !( i & day ) && i <= static_cast<char>(Event::SUN) ) {
-	i <<= 1;
-	++dayOfWeek;
+        i <<= 1;
+        ++dayOfWeek;
     }
     return dayOfWeek;
 }
@@ -412,7 +412,7 @@ int Event::dayOfWeek( char day )
 int Event::monthDiff( const QDate& first, const QDate& second )
 {
     return ( second.year() - first.year() ) * 12 +
-	second.month() - first.month();
+        second.month() - first.month();
 }
 
 /*!
@@ -423,15 +423,15 @@ QMap<int, QString> Event::toMap() const
     QMap<int, QString> m;
 
     if ( !description().isEmpty() )
-	m.insert( DatebookDescription, description() );
+        m.insert( DatebookDescription, description() );
     if ( !location().isEmpty() )
-	m.insert ( Location, location() );
+        m.insert ( Location, location() );
     if ( categories().count() )
-	m.insert ( DatebookCategory, idsToString( categories() ) );
+        m.insert ( DatebookCategory, idsToString( categories() ) );
     if ( !timeZone().isEmpty() )
-	m.insert ( TimeZone, timeZone() );
+        m.insert ( TimeZone, timeZone() );
     if ( !notes().isEmpty() )
-	m.insert ( Note, notes() );
+        m.insert ( Note, notes() );
 
     m.insert ( StartDateTime, QString::number( TimeConversion::toUTC( start() ) ) );
     m.insert ( EndDateTime, QString::number( TimeConversion::toUTC( end() ) ) );
@@ -598,9 +598,9 @@ QDateTime Event::start( bool actual ) const
     QDateTime dt = TimeConversion::fromUTC( startUTC );
 
     if ( actual && typ == AllDay ) {
-	QTime t = dt.time();
-	t.setHMS( 0, 0, 0 );
-	dt.setTime( t );
+        QTime t = dt.time();
+        t.setHMS( 0, 0, 0 );
+        dt.setTime( t );
     }
     return dt;
 }
@@ -616,7 +616,7 @@ QDateTime Event::end( bool actual ) const
 {
     QDateTime dt = TimeConversion::fromUTC( endUTC );
     if ( actual && typ == AllDay ) {
-	dt.setTime( QTime(23,59,59) );
+        dt.setTime( QTime(23,59,59) );
     }
     return dt;
 }
@@ -691,20 +691,20 @@ const QString &Event::notes() const
 bool Event::operator==( const Event &e ) const
 {
     if ( uid() && e.uid() == uid() )
-	return TRUE;
+        return TRUE;
     return ( e.descript == descript &&
-	     e.locat == locat &&
-	     e.categ == categ &&
-	     e.typ == typ &&
-	     e.startUTC == startUTC &&
-	     e.endUTC == endUTC &&
-	     e.tz == tz &&
-	     e.hAlarm == hAlarm &&
-	     e.aMinutes == aMinutes &&
-	     e.aSound == aSound &&
-	     e.hRepeat == hRepeat &&
-	     e.pattern == pattern &&
-	     e.note == note );
+             e.locat == locat &&
+             e.categ == categ &&
+             e.typ == typ &&
+             e.startUTC == startUTC &&
+             e.endUTC == endUTC &&
+             e.tz == tz &&
+             e.hAlarm == hAlarm &&
+             e.aMinutes == aMinutes &&
+             e.aSound == aSound &&
+             e.hRepeat == hRepeat &&
+             e.pattern == pattern &&
+             e.note == note );
 }
 
 /*!
@@ -715,34 +715,34 @@ void Event::save( QString& buf )
 {
     buf += " description=\"" + Qtopia::escapeString(descript) + "\"";
     if ( !locat.isEmpty() )
-	buf += " location=\"" + Qtopia::escapeString(locat) + "\"";
+        buf += " location=\"" + Qtopia::escapeString(locat) + "\"";
     // save the categoies differently....
     QString strCats = idsToString( categories() );
     buf += " categories=\"" + Qtopia::escapeString(strCats) + "\"";
     buf += " uid=\"" + QString::number( uid() ) + "\"";
     if ( (Type)typ != Normal )
-	buf += " type=\"AllDay\"";
+        buf += " type=\"AllDay\"";
     if ( hAlarm ) {
-	buf += " alarm=\"" + QString::number( aMinutes ) + "\" sound=\"";
-	if ( aSound == Event::Loud )
-	    buf += "loud";
-	else
-	    buf += "silent";
-	buf += "\"";
+        buf += " alarm=\"" + QString::number( aMinutes ) + "\" sound=\"";
+        if ( aSound == Event::Loud )
+            buf += "loud";
+        else
+            buf += "silent";
+        buf += "\"";
     }
     if ( hRepeat )
-	write( buf, pattern );
+        write( buf, pattern );
 
     buf += " start=\""
-	   + QString::number( startUTC )
-	   + "\"";
+           + QString::number( startUTC )
+           + "\"";
 
     buf += " end=\""
-	   + QString::number( endUTC )
-	   + "\"";
+           + QString::number( endUTC )
+           + "\"";
 
     if ( !note.isEmpty() )
-	buf += " note=\"" + Qtopia::escapeString( note ) + "\"";
+        buf += " note=\"" + Qtopia::escapeString( note ) + "\"";
     buf += customToXml();
 }
 
@@ -753,12 +753,12 @@ bool Event::RepeatPattern::operator==( const Event::RepeatPattern &right ) const
 {
     // *sigh*
     return ( type == right.type
-	     && frequency == right.frequency
-	     && position == right.position
-	     && days == right.days
-	     && hasEndDate == right.hasEndDate
-	     && endDateUTC == right.endDateUTC
-	     && createTime == right.createTime );
+             && frequency == right.frequency
+             && position == right.position
+             && days == right.days
+             && hasEndDate == right.hasEndDate
+             && endDateUTC == right.endDateUTC
+             && createTime == right.createTime );
 }
 
 /*!
@@ -811,14 +811,14 @@ EffectiveEvent::EffectiveEvent( const Event &e, const QDate &date, Position pos 
     mEvent = e;
     mDate = date;
     if ( pos & Start )
-	mStart = e.start( TRUE ).time();
+        mStart = e.start( TRUE ).time();
     else
-	mStart = QTime( 0, 0, 0 );
+        mStart = QTime( 0, 0, 0 );
 
     if ( pos & End )
-	mEnd = e.end( TRUE ).time();
+        mEnd = e.end( TRUE ).time();
     else
-	mEnd = QTime( 23, 59, 59 );
+        mEnd = QTime( 23, 59, 59 );
     d = 0;
 }
 
@@ -842,14 +842,14 @@ EffectiveEvent::EffectiveEvent( const EffectiveEvent &e )
 EffectiveEvent& EffectiveEvent::operator=( const EffectiveEvent & e )
 {
     if ( &e == this )
-	return *this;
+        return *this;
     delete d;
     if ( e.d ) {
-	d = new EffectiveEventPrivate;
-	d->startDate = e.d->startDate;
-	d->endDate = e.d->endDate;
+        d = new EffectiveEventPrivate;
+        d->startDate = e.d->startDate;
+        d->endDate = e.d->endDate;
     } else {
-	d = 0;
+        d = 0;
     }
     mEvent = e.mEvent;
     mDate = e.mDate;
@@ -927,7 +927,7 @@ const QDate &EffectiveEvent::date() const
 int EffectiveEvent::length() const
 {
     return (mEnd.hour() * 60 - mStart.hour() * 60)
-	   + QABS(mStart.minute() - mEnd.minute() );
+           + QABS(mStart.minute() - mEnd.minute() );
 }
 
 /*!
@@ -968,11 +968,11 @@ void EffectiveEvent::setEvent( Event e )
 bool EffectiveEvent::operator<( const EffectiveEvent &e ) const
 {
     if ( mDate < e.date() )
-	return TRUE;
+        return TRUE;
     if ( mDate == e.date() )
-	return ( mStart < e.start() );
+        return ( mStart < e.start() );
     else
-	return FALSE;
+        return FALSE;
 }
 
 /*!
@@ -989,9 +989,9 @@ bool EffectiveEvent::operator<=( const EffectiveEvent &e ) const
 bool EffectiveEvent::operator==( const EffectiveEvent &e ) const
 {
     return ( mDate == e.date()
-	     && mStart == e.start()
-	     && mEnd == e.end()
-	     && mEvent == e.event() );
+             && mStart == e.start()
+             && mEnd == e.end()
+             && mEvent == e.event() );
 }
 
 /*!
@@ -1024,12 +1024,12 @@ bool EffectiveEvent::operator>=(const EffectiveEvent &e) const
 void EffectiveEvent::setEffectiveDates( const QDate &from, const QDate &to )
 {
     if ( !from.isValid() ) {
-	delete d;
-	d = 0;
-	return;
+        delete d;
+        d = 0;
+        return;
     }
     if ( !d )
-	d = new EffectiveEventPrivate;
+        d = new EffectiveEventPrivate;
     d->startDate = from;
     d->endDate = to;
 }
@@ -1040,11 +1040,11 @@ void EffectiveEvent::setEffectiveDates( const QDate &from, const QDate &to )
 QDate EffectiveEvent::startDate() const
 {
     if ( d )
-	return d->startDate;
+        return d->startDate;
     else if ( mEvent.hasRepeat() )
-	return mDate; // single day, since multi-day should have a d pointer
+        return mDate; // single day, since multi-day should have a d pointer
     else
-	return mEvent.start().date();
+        return mEvent.start().date();
 }
 
 /*!
@@ -1053,11 +1053,11 @@ QDate EffectiveEvent::startDate() const
 QDate EffectiveEvent::endDate() const
 {
     if ( d )
-	return d->endDate;
+        return d->endDate;
     else if ( mEvent.hasRepeat() )
-	return mDate; // single day, since multi-day should have a d pointer
+        return mDate; // single day, since multi-day should have a d pointer
     else
-	return mEvent.end().date();
+        return mEvent.end().date();
 }
 
 /*!
@@ -1066,8 +1066,8 @@ QDate EffectiveEvent::endDate() const
 int EffectiveEvent::size() const
 {
     return ( mEnd.hour() - mStart.hour() ) * 3600
-	     + (mEnd.minute() - mStart.minute() * 60
-	     + mEnd.second() - mStart.second() );
+             + (mEnd.minute() - mStart.minute() * 60
+             + mEnd.second() - mStart.second() );
 }
 
 
@@ -1076,7 +1076,7 @@ static inline VObject *safeAddPropValue( VObject *o, const char *prop, const QSt
 {
     VObject *ret = 0;
     if ( o && !value.isEmpty() )
-	ret = addPropValue( o, prop, value.latin1() );
+        ret = addPropValue( o, prop, value.latin1() );
     return ret;
 }
 
@@ -1084,7 +1084,7 @@ static inline VObject *safeAddProp( VObject *o, const char *prop)
 {
     VObject *ret = 0;
     if ( o )
-	ret = addProp( o, prop );
+        ret = addProp( o, prop );
     return ret;
 }
 
@@ -1135,18 +1135,18 @@ static VObject *createVObject( const Event &e )
     safeAddPropValue( event, VCLocationProp, e.location() );
 
     if ( e.hasAlarm() ) {
-	VObject *alarm = safeAddProp( event, VCAAlarmProp );
-	QDateTime dt = e.start();
-	dt = dt.addSecs( -e.alarmTime()*60 );
-	safeAddPropValue( alarm, VCRunTimeProp, toISOLocal( dt ) );
-	safeAddPropValue( alarm, VCAudioContentProp,
-			  (e.alarmSound() == Event::Silent ? "silent" : "alarm" ) );
+        VObject *alarm = safeAddProp( event, VCAAlarmProp );
+        QDateTime dt = e.start();
+        dt = dt.addSecs( -e.alarmTime()*60 );
+        safeAddPropValue( alarm, VCRunTimeProp, toISOLocal( dt ) );
+        safeAddPropValue( alarm, VCAudioContentProp,
+                          (e.alarmSound() == Event::Silent ? "silent" : "alarm" ) );
     }
 
     safeAddPropValue( event, "X-Qtopia-TIMEZONE", e.timeZone() );
 
     if ( e.type() == Event::AllDay )
-	safeAddPropValue( event, "X-Qtopia-AllDay", e.timeZone() );
+        safeAddPropValue( event, "X-Qtopia-AllDay", e.timeZone() );
 
     // ### repeat missing
 
@@ -1169,76 +1169,76 @@ static Event parseVObject( VObject *obj )
     VObjectIterator it;
     initPropIterator( &it, obj );
     while( moreIteration( &it ) ) {
-	VObject *o = nextVObject( &it );
-	QCString name = vObjectName( o );
-	QCString value = vObjectStringZValue( o );
-	if ( name == VCDTstartProp ) {
-	    e.setStart( TimeConversion::fromISO8601( value ) );
-	    haveStart = TRUE;
-	}
-	else if ( name == VCDTendProp ) {
-	    e.setEnd( TimeConversion::fromISO8601( value ) );
-	    haveEnd = TRUE;
-	}
-	else if ( name == "X-Qtopia-NOTES" ) {
-	    e.setNotes( value );
-	}
-	else if ( name == VCDescriptionProp ) {
-	    e.setDescription( value );
-	}
-	else if ( name == VCLocationProp ) {
-	    e.setLocation( value );
-	}
-	else if ( name == VCAudioContentProp ) {
-	    haveAlarm = TRUE;
-	    VObjectIterator nit;
-	    initPropIterator( &nit, o );
-	    while( moreIteration( &nit ) ) {
-		VObject *o = nextVObject( &nit );
-		QCString name = vObjectName( o );
-		QCString value = vObjectStringZValue( o );
-		if ( name == VCRunTimeProp )
-		    alarmTime = TimeConversion::fromISO8601( value );
-		else if ( name == VCAudioContentProp ) {
-		    if ( value == "silent" )
-			soundType = Event::Silent;
-		    else
-			soundType = Event::Loud;
-		}
-	    }
-	}
-	else if ( name == "X-Qtopia-TIMEZONE") {
-	    e.setTimeZone( value );
-	}
-	else if ( name == "X-Qtopia-AllDay" ) {
-	    e.setType( Event::AllDay );
-	}
+        VObject *o = nextVObject( &it );
+        QCString name = vObjectName( o );
+        QCString value = vObjectStringZValue( o );
+        if ( name == VCDTstartProp ) {
+            e.setStart( TimeConversion::fromISO8601( value ) );
+            haveStart = TRUE;
+        }
+        else if ( name == VCDTendProp ) {
+            e.setEnd( TimeConversion::fromISO8601( value ) );
+            haveEnd = TRUE;
+        }
+        else if ( name == "X-Qtopia-NOTES" ) {
+            e.setNotes( value );
+        }
+        else if ( name == VCDescriptionProp ) {
+            e.setDescription( value );
+        }
+        else if ( name == VCLocationProp ) {
+            e.setLocation( value );
+        }
+        else if ( name == VCAudioContentProp ) {
+            haveAlarm = TRUE;
+            VObjectIterator nit;
+            initPropIterator( &nit, o );
+            while( moreIteration( &nit ) ) {
+                VObject *o = nextVObject( &nit );
+                QCString name = vObjectName( o );
+                QCString value = vObjectStringZValue( o );
+                if ( name == VCRunTimeProp )
+                    alarmTime = TimeConversion::fromISO8601( value );
+                else if ( name == VCAudioContentProp ) {
+                    if ( value == "silent" )
+                        soundType = Event::Silent;
+                    else
+                        soundType = Event::Loud;
+                }
+            }
+        }
+        else if ( name == "X-Qtopia-TIMEZONE") {
+            e.setTimeZone( value );
+        }
+        else if ( name == "X-Qtopia-AllDay" ) {
+            e.setType( Event::AllDay );
+        }
 #if 0
-	else {
-	    printf("Name: %s, value=%s\n", name.data(), vObjectStringZValue( o ) );
-	    VObjectIterator nit;
-	    initPropIterator( &nit, o );
-	    while( moreIteration( &nit ) ) {
-		VObject *o = nextVObject( &nit );
-		QCString name = vObjectName( o );
-		QString value = vObjectStringZValue( o );
-		printf(" subprop: %s = %s\n", name.data(), value.latin1() );
-	    }
-	}
+        else {
+            printf("Name: %s, value=%s\n", name.data(), vObjectStringZValue( o ) );
+            VObjectIterator nit;
+            initPropIterator( &nit, o );
+            while( moreIteration( &nit ) ) {
+                VObject *o = nextVObject( &nit );
+                QCString name = vObjectName( o );
+                QString value = vObjectStringZValue( o );
+                printf(" subprop: %s = %s\n", name.data(), value.latin1() );
+            }
+        }
 #endif
     }
 
     if ( !haveStart && !haveEnd )
-	e.setStart( QDateTime::currentDateTime() );
+        e.setStart( QDateTime::currentDateTime() );
 
     if ( !haveEnd ) {
-	e.setType( Event::AllDay );
-	e.setEnd( e.start() );
+        e.setType( Event::AllDay );
+        e.setEnd( e.start() );
     }
 
     if ( haveAlarm ) {
-	int minutes = alarmTime.secsTo( e.start() ) / 60;
-	e.setAlarm( TRUE, minutes, soundType );
+        int minutes = alarmTime.secsTo( e.start() ) / 60;
+        e.setAlarm( TRUE, minutes, soundType );
     }
     return e;
 }
@@ -1250,22 +1250,22 @@ static Event parseVObject( VObject *obj )
 void Event::writeVCalendar( const QString &filename, const QValueList<Event> &events)
 {
 
-	QFileDirect f( filename.utf8().data() );
+        QFileDirect f( filename.utf8().data() );
 
-	if ( !f.open( IO_WriteOnly ) ) {
+        if ( !f.open( IO_WriteOnly ) ) {
 
-		qWarning("Unable to open vcard write");
+                qWarning("Unable to open vcard write");
 
-		return;
+                return;
 
-	}
+        }
 
 
     QValueList<Event>::ConstIterator it;
     for( it = events.begin(); it != events.end(); ++it ) {
-	VObject *obj = createVObject( *it );
-	writeVObject( f.directHandle() , obj );
-	cleanVObject( obj );
+        VObject *obj = createVObject( *it );
+        writeVObject( f.directHandle() , obj );
+        cleanVObject( obj );
     }
 
 
@@ -1278,22 +1278,22 @@ void Event::writeVCalendar( const QString &filename, const QValueList<Event> &ev
 void Event::writeVCalendar( const QString &filename, const Event &event)
 {
 
-	QFileDirect f( filename.utf8().data() );
+        QFileDirect f( filename.utf8().data() );
 
-	if ( !f.open( IO_WriteOnly ) ) {
+        if ( !f.open( IO_WriteOnly ) ) {
 
-		qWarning("Unable to open vcard write");
+                qWarning("Unable to open vcard write");
 
-		return;
+                return;
 
-	}
+        }
 
 
     VObject *obj = createVObject( event );
-	writeVObject( f.directHandle() , obj );
-	cleanVObject( obj );
+        writeVObject( f.directHandle() , obj );
+        cleanVObject( obj );
 
-	cleanStrTbl();
+        cleanStrTbl();
 }
 
 /*!
@@ -1306,23 +1306,23 @@ QValueList<Event> Event::readVCalendar( const QString &filename )
     QValueList<Event> events;
 
     while ( obj ) {
-	QCString name = vObjectName( obj );
-	if ( name == VCCalProp ) {
-	    VObjectIterator nit;
-	    initPropIterator( &nit, obj );
-	    while( moreIteration( &nit ) ) {
-		VObject *o = nextVObject( &nit );
-		QCString name = vObjectName( o );
-		if ( name == VCEventProp )
-		    events.append( parseVObject( o ) );
-	    }
-	} else if ( name == VCEventProp ) {
-	    // shouldn't happen, but just to be sure
-	    events.append( parseVObject( obj ) );
-	}
-	VObject *t = obj;
-	obj = nextVObjectInList(obj);
-	cleanVObject( t );
+        QCString name = vObjectName( obj );
+        if ( name == VCCalProp ) {
+            VObjectIterator nit;
+            initPropIterator( &nit, obj );
+            while( moreIteration( &nit ) ) {
+                VObject *o = nextVObject( &nit );
+                QCString name = vObjectName( o );
+                if ( name == VCEventProp )
+                    events.append( parseVObject( o ) );
+            }
+        } else if ( name == VCEventProp ) {
+            // shouldn't happen, but just to be sure
+            events.append( parseVObject( obj ) );
+        }
+        VObject *t = obj;
+        obj = nextVObjectInList(obj);
+        cleanVObject( t );
     }
 
     return events;
@@ -1334,21 +1334,21 @@ bool Event::match( const QRegExp &r ) const
     returnMe = false;
 
     if ( descript.find( r ) > -1 )
-	returnMe = true;
+        returnMe = true;
     else if ( locat.find( r ) > -1 )
-	returnMe = true;
+        returnMe = true;
     else if ( TimeConversion::fromUTC( startUTC ).toString().find( r ) > -1 )
-	returnMe = true;
+        returnMe = true;
     else if ( TimeConversion::fromUTC( endUTC ).toString().find( r )  > -1 )
-	returnMe = true;
+        returnMe = true;
     else if ( tz.find( r ) > -1 )
-	returnMe = true;
+        returnMe = true;
     else if ( note.find( r ) > -1 )
-	returnMe = true;
+        returnMe = true;
     else if ( doRepeat() ) {
-	if ( pattern.hasEndDate )
-	    if ( TimeConversion::fromUTC( pattern.endDateUTC ).toString().find(r) > -1 )
-		returnMe = true;
+        if ( pattern.hasEndDate )
+            if ( TimeConversion::fromUTC( pattern.endDateUTC ).toString().find(r) > -1 )
+                returnMe = true;
     }
     return returnMe;
 }

@@ -50,20 +50,20 @@ public:
     // Don't use this.
     struct QPC_EXPORT RepeatPattern
     {
-	RepeatPattern() {
-	    type = NoRepeat; frequency = -1; days = 0;  position = 0; createTime = -1;
-	    hasEndDate = FALSE; endDateUTC = 0; }
-	bool operator ==( const RepeatPattern &right ) const;
+        RepeatPattern() {
+            type = NoRepeat; frequency = -1; days = 0;  position = 0; createTime = -1;
+            hasEndDate = FALSE; endDateUTC = 0; }
+        bool operator ==( const RepeatPattern &right ) const;
 
-	RepeatType type;
-	int frequency;
-	int position;	// the posistion in the month (e.g. the first sunday, etc) positive, count from the front negative count from the end...
-	char days;  // a mask for days OR in your days!
-	bool hasEndDate;
-	QDate endDate() const { return TimeConversion::fromUTC( endDateUTC ).date(); }
-	void setEndDate( const QDate &dt ) { endDateUTC = TimeConversion::toUTC( dt ); }
-	time_t endDateUTC;
-	time_t createTime;
+        RepeatType type;
+        int frequency;
+        int position; // the posistion in the month (e.g. the first sunday, etc) positive, count from the front negative count from the end...
+        char days;    // a mask for days OR in your days!
+        bool hasEndDate;
+        QDate endDate() const { return TimeConversion::fromUTC( endDateUTC ).date(); }
+        void setEndDate( const QDate &dt ) { endDateUTC = TimeConversion::toUTC( dt ); }
+        time_t endDateUTC;
+        time_t createTime;
     };
 
     Event();
@@ -177,8 +177,8 @@ private:
     RepeatPattern pattern;
     QString note;
     // ADDITION
-    int mRid;	// Recode ID
-    int mRinfo;	// Recode Info
+    int mRid;   // Recode ID
+    int mRinfo; // Recode Info
     //
     EventPrivate *d;
 
@@ -243,7 +243,7 @@ private:
     Event mEvent;
     QDate mDate;
     QTime mStart,
-	  mEnd;
+          mEnd;
 
 };
 
@@ -265,9 +265,9 @@ inline int Event::alarmDelay() const
 inline void Event::setAllDay(bool enable)
 {
     if (enable)
-	setType(AllDay);
+        setType(AllDay);
     else
-	setType(Normal);
+        setType(Normal);
 };
 
 inline bool Event::isAllDay() const
@@ -288,7 +288,7 @@ inline int Event::frequency() const
 inline int Event::weekOffset() const
 {
     if (start().date().day() == 1)
-	return 1;
+        return 1;
     return (start().date().day() - 1) / 7 + 1;
 }
 
@@ -321,23 +321,23 @@ inline void Event::setRepeatTill(const QDate &d)
 inline void Event::setRepeatForever(bool b)
 {
     if (!b == pattern.hasEndDate)
-	return;
+        return;
     if (!b && !pattern.hasEndDate)
-	pattern.setEndDate(end().date());
+        pattern.setEndDate(end().date());
     pattern.hasEndDate = !b;
 }
 
 inline bool Event::repeatOnWeekDay(int day) const
 {
     if (pattern.type != Weekly)
-	return FALSE;
+        return FALSE;
     return ( (1 << (day - 1)) & pattern.days ) != 0;
 }
 
 inline void Event::setRepeatOnWeekDay(int day, bool enable)
 {
     if ( repeatOnWeekDay( day ) != enable )
-	pattern.days ^= 1 << (day - 1);
+        pattern.days ^= 1 << (day - 1);
 }
 #ifdef PALMTOPCENTER
 class QPC_EXPORT EffectiveEventSizeSorter : public QSorter<EffectiveEvent>
@@ -345,7 +345,7 @@ class QPC_EXPORT EffectiveEventSizeSorter : public QSorter<EffectiveEvent>
 public:
     int compare( const EffectiveEvent& a, const EffectiveEvent& b ) const
     {
-	return a.size() - b.size();
+        return a.size() - b.size();
     }
 };
 
@@ -354,7 +354,7 @@ class QPC_EXPORT EffectiveEventTimeSorter : public QSorter<EffectiveEvent>
 public:
     int compare( const EffectiveEvent& a, const EffectiveEvent& b ) const
     {
-	return a.start().secsTo( b.start() );
+        return a.start().secsTo( b.start() );
     }
 };
 #endif
