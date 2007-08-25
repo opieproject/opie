@@ -47,7 +47,7 @@ Record &Record::operator=( const Record &c )
 void Record::setCategories( int single )
 {
     if ( single == 0 )
-	return;
+        return;
     mCats.resize(1);
     mCats[0] = single;
 }
@@ -60,10 +60,10 @@ QString Record::idsToString( const QArray<int> &catsUnsorted )
 
     QString str;
     for ( uint i = 0; i < cats.size(); i++ )
-	if ( i == 0 )
-	    str = QString::number( cats[int(i)] );
-	else
-	    str += ";" + QString::number( cats[int(i)] );
+        if ( i == 0 )
+            str = QString::number( cats[int(i)] );
+        else
+            str += ";" + QString::number( cats[int(i)] );
 
     return str;
 }
@@ -75,9 +75,9 @@ QArray<int> Record::idsFromString( const QString &str )
     QArray<int> cats( catStrs.count() );
     uint i = 0;
     for ( QStringList::ConstIterator it = catStrs.begin();
-	  it != catStrs.end(); ++it ) {
-	cats[int(i)] = (*it).toInt();
-	i++;
+          it != catStrs.end(); ++it ) {
+        cats[int(i)] = (*it).toInt();
+        i++;
     }
     return cats;
 }
@@ -89,7 +89,7 @@ QArray<int> Record::idsFromString( const QString &str )
 QString Record::customField( const QString &key) const
 {
     if (customMap.contains(key))
-	return customMap[key];
+        return customMap[key];
 
     return QString::null;
 }
@@ -101,9 +101,9 @@ void Record::setCustomField( const QString &key, const QString &value)
 {
 //     qWarning("setting custom " + key + " to " + value);
     if (customMap.contains(key))
-	customMap.replace(key, value);
+        customMap.replace(key, value);
     else
-	customMap.insert(key, value);
+        customMap.insert(key, value);
 
 //     qWarning(QString("custom size %1").arg(customMap.count()));
 }
@@ -121,12 +121,12 @@ QString Record::customToXml() const
     //qWarning(QString("writing custom %1").arg(customMap.count()));
     QString buf(" ");
     for ( QMap<QString, QString>::ConstIterator cit = customMap.begin();
-	    cit != customMap.end(); ++cit) {
-// 	qWarning(".ITEM.");
-	buf += cit.key();
-	buf += "=\"";
-	buf += escapeString(cit.data());
-	buf += "\" ";
+            cit != customMap.end(); ++cit) {
+//         qWarning(".ITEM.");
+        buf += cit.key();
+        buf += "=\"";
+        buf += escapeString(cit.data());
+        buf += "\" ";
     }
     return buf;
 }
@@ -135,7 +135,7 @@ void Record::dump( const QMap<int, QString> &map )
 {
     QMap<int, QString>::ConstIterator it;
     for( it = map.begin(); it != map.end(); ++it )
-	qDebug("%d : %s",  it.key(),  it.data().local8Bit().data() );
+        qDebug("%d : %s",  it.key(),  it.data().local8Bit().data() );
 }
 
 }

@@ -42,12 +42,12 @@ public:
 
     // USE THESE!!!
     QValueList<EffectiveEvent> getEffectiveEvents( const QDate &from,
-						   const QDate &to );
+                                                   const QDate &to );
     QValueList<EffectiveEvent> getEffectiveEvents( const QDateTime &start );
 
     QValueList<Event> getRawRepeats() const;
     QValueList<Event> getNonRepeatingEvents( const QDate &from,
-					     const QDate &to ) const;
+                                             const QDate &to ) const;
 
     // Use these when dealing with adding removing events...
     void addEvent( const Event &ev, bool doalarm=TRUE );
@@ -72,14 +72,14 @@ private:
     // new version, uncomment the "= -1" when we remove the above
     // function..
     bool saveJournalEntry( const Event &ev, journal_action action,
-			   int key/* = -1*/, bool origHadRepeat = false );
+                           int key/* = -1*/, bool origHadRepeat = false );
 
     QValueList<Event> eventList; // non-repeating events...
     QValueList<Event> repeatEvents; // the repeating events...
     DateBookDBPrivate *d;
     QFile journalFile;
 
-    int	recordIdMax;  // ADDITION
+    int recordIdMax;  // ADDITION
 };
 
 /* helper functions, also useful to other apps. */

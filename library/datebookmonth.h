@@ -54,7 +54,7 @@ signals:
 
 protected slots:
     void keyPressEvent(QKeyEvent *e ) {
-	e->ignore();
+        e->ignore();
     }
 
 private slots:
@@ -122,7 +122,7 @@ protected:
 protected slots:
 
     void keyPressEvent(QKeyEvent *e ) {
-	e->ignore();
+        e->ignore();
     }
 
 private slots:
@@ -219,12 +219,12 @@ private:
 
 class DateBookMonthPopup : public QPopupMenu 
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	DateBookMonthPopup ( QWidget *w );
+    DateBookMonthPopup ( QWidget *w );
 
 private:
-	DateBookMonth *m_dbm;
+    DateBookMonth *m_dbm;
 };
 
 #endif

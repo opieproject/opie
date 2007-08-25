@@ -51,7 +51,7 @@ class QPC_EXPORT Record
 {
 public:
     Record() : mUid(0), mCats() { }
-    Record( const Record &c ) :	mUid( c.mUid ), mCats ( c.mCats ), customMap(c.customMap) { }
+    Record( const Record &c ) : mUid( c.mUid ), mCats ( c.mCats ), customMap(c.customMap) { }
     /**
      * @todo make non inline in regard to KDE BC guide
      */
@@ -67,9 +67,9 @@ public:
 
     void reassignCategoryId( int oldId, int newId )
     {
-	int index = mCats.find( oldId );
-	if ( index >= 0 )
-	    mCats[index] = newId;
+        int index = mCats.find( oldId );
+        if ( index >= 0 )
+            mCats[index] = newId;
     }
 
     int uid() const { return mUid; };

@@ -28,14 +28,14 @@ class Calendar
 public:
     struct Day
     {
-	enum Type { PrevMonth, ThisMonth, NextMonth };
-	
-	Day() : date( 0 ), type( ThisMonth ), holiday( FALSE ) {}
-	Day( int d, Type t, bool h ) : date( d ), type( t ), holiday( h ) {}
-	
-	int date;
-	Type type;
-	bool holiday;
+        enum Type { PrevMonth, ThisMonth, NextMonth };
+
+        Day() : date( 0 ), type( ThisMonth ), holiday( FALSE ) {}
+        Day( int d, Type t, bool h ) : date( d ), type( t ), holiday( h ) {}
+
+        int date;
+        Type type;
+        bool holiday;
     };
 
     static QString nameOfMonth( int m );

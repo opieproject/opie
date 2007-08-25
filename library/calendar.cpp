@@ -80,7 +80,7 @@ QString Calendar::nameOfDay( int d )
 
 /*! \obsolete */
 QValueList<Calendar::Day> Calendar::daysOfMonth( int year, int month,
-						 bool startWithMonday )
+                                                 bool startWithMonday )
 {
     QDate temp;
     temp.setYMD( year, month, 1 );
@@ -90,23 +90,23 @@ QValueList<Calendar::Day> Calendar::daysOfMonth( int year, int month,
     QValueList<Day> days;
 
     if ( startWithMonday )
-	i = 1;
+        i = 1;
     else
-	i = 0;
+        i = 0;
 
     if ( month > 1 )
-	    prev.setYMD( year, month - 1, 1 );
+        prev.setYMD( year, month - 1, 1 );
     else
-	prev.setYMD( year - 1, 12, 1 );
+        prev.setYMD( year - 1, 12, 1 );
     for ( ; i < firstDay; i++ ) {
-	days.append( Day( prev.daysInMonth() - ( firstDay - i - 1 ),
-			  Day::PrevMonth, FALSE ) );
+        days.append( Day( prev.daysInMonth() - ( firstDay - i - 1 ),
+                          Day::PrevMonth, FALSE ) );
     }
     for ( i = 1; i <= temp.daysInMonth(); i++ )
-	days.append( Day( i, Day::ThisMonth, FALSE ) );
+        days.append( Day( i, Day::ThisMonth, FALSE ) );
     i = 0;
     while ( days.count() < 6 * 7 )
-	days.append( Day( ++i, Day::NextMonth, FALSE ) );
+        days.append( Day( ++i, Day::NextMonth, FALSE ) );
 
     return days;
 }

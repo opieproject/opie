@@ -54,7 +54,7 @@ DateBookMonthHeader::DateBookMonthHeader( QWidget *parent, const char *name )
 
     month = new QComboBox( FALSE, this );
     for ( int i = 0; i < 12; ++i )
-	month->insertItem( Calendar::nameOfMonth( i + 1 ) );
+        month->insertItem( Calendar::nameOfMonth( i + 1 ) );
 
     year = new QSpinBox( 1752, 8000, 1, this );
 
@@ -73,17 +73,17 @@ DateBookMonthHeader::DateBookMonthHeader( QWidget *parent, const char *name )
     QWhatsThis::add( end, tr("Show December in the selected year") );
 
     connect( month, SIGNAL( activated(int) ),
-	     this, SLOT( updateDate() ) );
+             this, SLOT( updateDate() ) );
     connect( year, SIGNAL( valueChanged(int) ),
-	     this, SLOT( updateDate() ) );
+             this, SLOT( updateDate() ) );
     connect( begin, SIGNAL( clicked() ),
-	     this, SLOT( firstMonth() ) );
+             this, SLOT( firstMonth() ) );
     connect( end, SIGNAL( clicked() ),
-	     this, SLOT( lastMonth() ) );
+             this, SLOT( lastMonth() ) );
     connect( back, SIGNAL( clicked() ),
-	     this, SLOT( monthBack() ) );
+             this, SLOT( monthBack() ) );
     connect( next, SIGNAL( clicked() ),
-	     this, SLOT( monthForward() ) );
+             this, SLOT( monthForward() ) );
     back->setAutoRepeat( TRUE );
     next->setAutoRepeat( TRUE );
 }
@@ -114,27 +114,27 @@ void DateBookMonthHeader::lastMonth()
 void DateBookMonthHeader::monthBack()
 {
     if ( month->currentItem() > 0 ) {
-	emit dateChanged( year->value(), month->currentItem() );
-	month->setCurrentItem( month->currentItem() - 1 );
+        emit dateChanged( year->value(), month->currentItem() );
+        month->setCurrentItem( month->currentItem() - 1 );
     } else {
-	emit dateChanged( year->value() - 1, 12 );
-	// we have a signal set to a changed value in year so we only need to change
-	// year to get the result...
-	month->setCurrentItem( 11 );
-	year->setValue( year->value() - 1 );
+        emit dateChanged( year->value() - 1, 12 );
+        // we have a signal set to a changed value in year so we only need to change
+        // year to get the result...
+        month->setCurrentItem( 11 );
+        year->setValue( year->value() - 1 );
     }
 }
 
 void DateBookMonthHeader::monthForward()
 {
     if ( month->currentItem() < 11 ) {
-	emit dateChanged( year->value(), month->currentItem() + 2 );
-	month->setCurrentItem( month->currentItem() + 1 );
+        emit dateChanged( year->value(), month->currentItem() + 2 );
+        month->setCurrentItem( month->currentItem() + 1 );
     } else {
-	// we have a signal set to a changed value in year so we only need to change
-	// year to get the result...
-	month->setCurrentItem( 0 );
-	year->setValue( year->value() + 1 );
+        // we have a signal set to a changed value in year so we only need to change
+        // year to get the result...
+        month->setCurrentItem( 0 );
+        year->setValue( year->value() + 1 );
     }
 }
 
@@ -178,20 +178,20 @@ DateBookMonthTable::DateBookMonthTable( QWidget *parent, const char *name,
     horizontalHeader()->setResizeEnabled( FALSE );
     // we have to do this here... or suffer the consequences later...
     for ( int i = 0; i < 7; i++ ){
-	horizontalHeader()->resizeSection( i, 30 );
-	setColumnStretchable( i, TRUE );
+        horizontalHeader()->resizeSection( i, 30 );
+        setColumnStretchable( i, TRUE );
     }
     setupLabels();
 
     verticalHeader()->hide();
     setLeftMargin( 0 );
     for ( int i = 0; i < 6; ++i )
-	    setRowStretchable( i, TRUE );
+            setRowStretchable( i, TRUE );
 
     setSelectionMode( NoSelection );
 
     connect( this, SIGNAL( clicked(int,int,int,const QPoint&) ),
-	     this, SLOT( dayClicked(int,int) ) );
+             this, SLOT( dayClicked(int,int) ) );
     connect( this, SIGNAL( currentChanged(int,int) ),
              this, SLOT( dragDay(int,int) ) );
     setVScrollBarMode( AlwaysOff );
@@ -207,22 +207,22 @@ DateBookMonthTable::~DateBookMonthTable()
 void DateBookMonthTable::setDate(int y, int m, int d)
 {
     if (month == m && year == y) {
-	if ( selYear == -1 )
-	    year = selYear;
-	if ( selMonth == -1 )
-	    month = selMonth;
-	int r1, c1, r2, c2;
-	findDay(selDay, r1, c1);
-	selDay = day = d;
-	findDay(selDay, r2, c2);
-	setCurrentCell( r2, c2 );
-	//updateCell(r1,c1);
-	//updateCell(r2,c2);
+        if ( selYear == -1 )
+            year = selYear;
+        if ( selMonth == -1 )
+            month = selMonth;
+        int r1, c1, r2, c2;
+        findDay(selDay, r1, c1);
+        selDay = day = d;
+        findDay(selDay, r2, c2);
+        setCurrentCell( r2, c2 );
+        //updateCell(r1,c1);
+        //updateCell(r2,c2);
     } else {
-	selYear = year = y;
-	selMonth = month = m;
-	selDay = day = d;
-	setupTable();
+        selYear = year = y;
+        selMonth = month = m;
+        selDay = day = d;
+        setupTable();
     }
 }
 
@@ -247,28 +247,28 @@ void DateBookMonthTable::setupTable()
     int crow = 0;
     int ccol = 0;
     for ( ; it != days.end(); ++it ) {
-	DayItemMonth *i = (DayItemMonth *)item( row, col );
-	if ( !i ) {
-	    i = new DayItemMonth( this, QTableItem::Never, "" );
-	    setItem( row, col, i );
-	}
-	Calendar::Day calDay = *it;
-	i->clearEffEvents();
-	i->setDay( calDay.date );
-	i->setType( calDay.type );
-	if ( i->day() == day && calDay.type == Calendar::Day::ThisMonth ) {
-	    crow = row;
-	    ccol = col;
-	}
+        DayItemMonth *i = (DayItemMonth *)item( row, col );
+        if ( !i ) {
+            i = new DayItemMonth( this, QTableItem::Never, "" );
+            setItem( row, col, i );
+        }
+        Calendar::Day calDay = *it;
+        i->clearEffEvents();
+        i->setDay( calDay.date );
+        i->setType( calDay.type );
+        if ( i->day() == day && calDay.type == Calendar::Day::ThisMonth ) {
+            crow = row;
+            ccol = col;
+        }
 
-	updateCell( row, col );
+        updateCell( row, col );
 
-	if ( col == 6 ) {
-	    ++row;
-	    col = 0;
-	} else {
-	    ++col;
-	}
+        if ( col == 6 ) {
+            ++row;
+            col = 0;
+        } else {
+            ++col;
+        }
     }
     setCurrentCell( crow, ccol );
     getEvents();
@@ -281,7 +281,7 @@ void DateBookMonthTable::findDay( int day, int &row, int &col )
     int effective_day = day + skips - 1; // row/columns begin at 0
     // make an extra adjustment if we start on Mondays.
     if ( d->onMonday )
-	effective_day--;
+        effective_day--;
     row = effective_day / 7;
     col = effective_day % 7;
 }
@@ -301,25 +301,25 @@ void DateBookMonthTable::changeDaySelection( int row, int col )
 {
     DayItemMonth *i = (DayItemMonth*)item( row, col );
     if ( !i )
-	return;
+        return;
     switch ( i->type() ) {
-	case Calendar::Day::ThisMonth:
-	    selMonth = month;
-	    break;
-	case Calendar::Day::PrevMonth:
-	    selMonth = month-1;
-	    break;
-	default:
-	    selMonth = month+1;
+        case Calendar::Day::ThisMonth:
+            selMonth = month;
+            break;
+        case Calendar::Day::PrevMonth:
+            selMonth = month-1;
+            break;
+        default:
+            selMonth = month+1;
     }
 
     selYear = year;
     if ( selMonth <= 0 ) {
-	selMonth = 12;
-	selYear--;
+        selMonth = 12;
+        selYear--;
     } else if ( selMonth > 12 ) {
-	selMonth = 1;
-	selYear++;
+        selMonth = 1;
+        selYear++;
     }
     selDay = i->day();
 }
@@ -333,32 +333,32 @@ void DateBookMonthTable::viewportMouseReleaseEvent( QMouseEvent * )
 void DateBookMonthTable::getEvents()
 {
     if ( !db )
-	return;
+        return;
 
     QDate dtStart( year, month, 1 );
     d->mMonthEvents = db->getEffectiveEvents( dtStart,
-					      QDate( year, month,
-						     dtStart.daysInMonth() ) );
+                                              QDate( year, month,
+                                                     dtStart.daysInMonth() ) );
     QValueListIterator<EffectiveEvent> it = d->mMonthEvents.begin();
     // now that the events are sorted, basically go through the list, make
     // a small list for every day and set it for each item...
     // clear all the items...
     while ( it != d->mMonthEvents.end() ) {
-	QValueList<EffectiveEvent> dayEvent;
-	EffectiveEvent e = *it;
-	++it;
-	dayEvent.append( e );
-	while ( it != d->mMonthEvents.end()
-	        && e.date() == (*it).date() ) {
-	    dayEvent.append( *it );
-	    ++it;
-	}
-	int row, col;
-	findDay( e.date().day(), row, col );
-	DayItemMonth* w = static_cast<DayItemMonth*>( item( row, col ) );
-	w->setEvents( dayEvent );
-	updateCell( row, col );
-	dayEvent.clear();
+        QValueList<EffectiveEvent> dayEvent;
+        EffectiveEvent e = *it;
+        ++it;
+        dayEvent.append( e );
+        while ( it != d->mMonthEvents.end()
+                && e.date() == (*it).date() ) {
+            dayEvent.append( *it );
+            ++it;
+        }
+        int row, col;
+        findDay( e.date().day(), row, col );
+        DayItemMonth* w = static_cast<DayItemMonth*>( item( row, col ) );
+        w->setEvents( dayEvent );
+        updateCell( row, col );
+        dayEvent.clear();
     }
 }
 
@@ -366,16 +366,16 @@ void DateBookMonthTable::getEvents()
 void DateBookMonthTable::setupLabels()
 {
     for ( int i = 0; i < 7; ++i ) {
-// 	horizontalHeader()->resizeSection( i, 30 );
-// 	setColumnStretchable( i, TRUE );
-	if ( d->onMonday )
-	    horizontalHeader()->setLabel( i, Calendar::nameOfDay( i + 1 ) );
-	else {
-	    if ( i == 0 )
-		horizontalHeader()->setLabel( i, Calendar::nameOfDay( 7 ) );
-	    else
-		horizontalHeader()->setLabel( i, Calendar::nameOfDay( i ) );
-	}
+//         horizontalHeader()->resizeSection( i, 30 );
+//         setColumnStretchable( i, TRUE );
+        if ( d->onMonday )
+            horizontalHeader()->setLabel( i, Calendar::nameOfDay( i + 1 ) );
+        else {
+            if ( i == 0 )
+                horizontalHeader()->setLabel( i, Calendar::nameOfDay( 7 ) );
+            else
+                horizontalHeader()->setLabel( i, Calendar::nameOfDay( i ) );
+        }
     }
 }
 
@@ -398,11 +398,11 @@ DateBookMonth::DateBookMonth( QWidget *parent, const char *name, bool ac,
     header->setFocusPolicy(NoFocus);
     table->setFocusPolicy(NoFocus);
     connect( header, SIGNAL( dateChanged(int,int) ),
-	     this, SLOT( setDate(int,int) ) );
+             this, SLOT( setDate(int,int) ) );
     connect( table, SIGNAL( dateClicked(int,int,int) ),
-	     this, SLOT( finalDate(int,int,int) ) );
+             this, SLOT( finalDate(int,int,int) ) );
     connect( qApp, SIGNAL(weekChanged(bool)), this,
-	     SLOT(slotWeekChange(bool)) );
+             SLOT(slotWeekChange(bool)) );
     table->setFocus();
 }
 
@@ -416,12 +416,12 @@ void DateBookMonth::setDate( int y, int m )
     /* only change the date if this is a different date,
      * other wise we may mistakenly overide the day */
     if ( (y != year) || (m != month) ) {
-	year = y;
-	month = m;
-	QDate nd( y, m, 1 );
-	if ( nd.daysInMonth() < day )
-	    day = nd.daysInMonth();
-	table->setDate( year, month, day );
+        year = y;
+        month = m;
+        QDate nd( y, m, 1 );
+        if ( nd.daysInMonth() < day )
+            day = nd.daysInMonth();
+        table->setDate( year, month, day );
     }
 }
 
@@ -443,7 +443,7 @@ void DateBookMonth::finalDate(int y, int m, int d)
     //    emit dateClicked(QDate(y, m, d).toString());
 
     if ( autoClose && parentWidget() )
-	parentWidget()->close();
+        parentWidget()->close();
 }
 
 void DateBookMonth::setDate( QDate d)
@@ -460,7 +460,7 @@ void DateBookMonth::redraw()
 QDate  DateBookMonth::selectedDate() const
 {
     if ( !table )
-	return QDate::currentDate();
+        return QDate::currentDate();
     int y, m, d;
     table->getDate( y, m, d );
     return QDate( y, m, d );
@@ -474,28 +474,28 @@ void DateBookMonth::slotWeekChange( bool startOnMonday )
 void DateBookMonth::keyPressEvent( QKeyEvent *e )
 {
     switch(e->key()) {
-	case Key_Up:
-	    setDate(QDate(year, month, day).addDays(-7));
-	    break;
-	case Key_Down:
-	    setDate(QDate(year, month, day).addDays(7));
-	    break;
-	case Key_Left:
-	    setDate(QDate(year, month, day).addDays(-1));
-	    break;
-	case Key_Right:
-	    setDate(QDate(year, month, day).addDays(1));
-	    break;
-	case Key_Space:
-	    qWarning("space");
-	    emit dateClicked(year, month, day);
-	    if ( autoClose && parentWidget() )
-		parentWidget()->close();
-	    break;
-	default:
-	    qWarning("ignore");
-	    e->ignore();
-	    break;
+        case Key_Up:
+            setDate(QDate(year, month, day).addDays(-7));
+            break;
+        case Key_Down:
+            setDate(QDate(year, month, day).addDays(7));
+            break;
+        case Key_Left:
+            setDate(QDate(year, month, day).addDays(-1));
+            break;
+        case Key_Right:
+            setDate(QDate(year, month, day).addDays(1));
+            break;
+        case Key_Space:
+            qWarning("space");
+            emit dateClicked(year, month, day);
+            if ( autoClose && parentWidget() )
+                parentWidget()->close();
+            break;
+        default:
+            qWarning("ignore");
+            e->ignore();
+            break;
     }
 }
 
@@ -509,7 +509,7 @@ public:
 };
 
 DayItemMonth::DayItemMonth( QTable *table, EditType et, const QString &t )
-	: QTableItem( table, et, t )
+        : QTableItem( table, et, t )
 {
     d = new DayItemMonthPrivate();
 }
@@ -539,9 +539,9 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
     g.setBrush( QColorGroup::Base, back );
     g.setColor( QColorGroup::Text, forg );
     if ( selected )
-	p->setPen( g.highlightedText() );
+        p->setPen( g.highlightedText() );
     else
-	p->setPen( g.text() );
+        p->setPen( g.text() );
 
     QValueStack<int> normalLine;
     QValueStack<int> repeatLine;
@@ -550,89 +550,89 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
     bool normalAllDay = FALSE;
     bool repeatAllDay = FALSE;
     bool travelAllDay = FALSE;
-	bool holidayAllDay = FALSE;
+        bool holidayAllDay = FALSE;
 
     QValueListIterator<EffectiveEvent> itDays = d->mDayEvents.begin();
 
     for ( ; itDays != d->mDayEvents.end(); ++itDays ) {
-	int w = cr.width();
-	Event ev = (*itDays).event();
+        int w = cr.width();
+        Event ev = (*itDays).event();
 
-	int f = (*itDays).start().hour(); // assume Effective event
-	int t = (*itDays).end().hour(); 	 // is truncated.
+        int f = (*itDays).start().hour(); // assume Effective event
+        int t = (*itDays).end().hour();          // is truncated.
 
-	if (ev.isAllDay()) {
-	    if (!ev.hasRepeat()) {
-			normalAllDay = TRUE;
-			if (!ev.isValidUid()) {
-				holidayAllDay = TRUE;
-			}
-	    } else {
-			repeatAllDay = TRUE;
-		}
-	} else {
-	    int sLine, eLine;
-	    if (f == 0)
-		sLine = 0;
-	    else if (f < 8 )
-		sLine = 1;
-	    else if (f >= 17)
-		sLine = w - 4;
-	    else {
-		sLine = (f - 8) * (w - 8);
-		if (sLine)
-		    sLine /= 8;
-		sLine += 4;
-	    }
-	    if (t == 23)
-		eLine = w;
-	    else if (t < 8)
-		eLine = 4;
-	    else if (t >= 17)
-		eLine = w - 1;
-	    else {
-		eLine = (t - 8) * (w - 8);
-		if (eLine)
-		    eLine /= 8;
-		eLine += 4;
-	    }
-	    if (!ev.hasRepeat()) {
-		normalLine.push(sLine);
-		normalLine.push(eLine);
-	    } else {
-		repeatLine.push(sLine);
-		repeatLine.push(eLine);
-	    }
-	}
+        if (ev.isAllDay()) {
+            if (!ev.hasRepeat()) {
+                        normalAllDay = TRUE;
+                        if (!ev.isValidUid()) {
+                                holidayAllDay = TRUE;
+                        }
+            } else {
+                        repeatAllDay = TRUE;
+                }
+        } else {
+            int sLine, eLine;
+            if (f == 0)
+                sLine = 0;
+            else if (f < 8 )
+                sLine = 1;
+            else if (f >= 17)
+                sLine = w - 4;
+            else {
+                sLine = (f - 8) * (w - 8);
+                if (sLine)
+                    sLine /= 8;
+                sLine += 4;
+            }
+            if (t == 23)
+                eLine = w;
+            else if (t < 8)
+                eLine = 4;
+            else if (t >= 17)
+                eLine = w - 1;
+            else {
+                eLine = (t - 8) * (w - 8);
+                if (eLine)
+                    eLine /= 8;
+                eLine += 4;
+            }
+            if (!ev.hasRepeat()) {
+                normalLine.push(sLine);
+                normalLine.push(eLine);
+            } else {
+                repeatLine.push(sLine);
+                repeatLine.push(eLine);
+            }
+        }
     }
 
     // draw the background
     if (normalAllDay || repeatAllDay || travelAllDay || holidayAllDay) {
-	p->save();
+        p->save();
 
-	if (normalAllDay)
-	    if (repeatAllDay) {
-		p->fillRect( 0, 0, cr.width(), cr.height() / 2,
-			s_colorNormalLight );
-		p->fillRect( 0, cr.height() / 2, cr.width(), cr.height() / 2,
-			colorRepeatLight );
-	    } else {
-			if (!holidayAllDay) {
-		p->fillRect( 0, 0, cr.width(), cr.height(),
-			s_colorNormalLight );
-			} else {
-		p->fillRect( 0, 0, cr.width(), cr.height(),
-			s_colorHolidayLight );
-			}
-	    } else if (repeatAllDay) {
-		p->fillRect( 0, 0, cr.width(), cr.height(),
-			s_colorRepeatLight );
-		}
+        if (normalAllDay)
+            if (repeatAllDay) {
+                p->fillRect( 0, 0, cr.width(), cr.height() / 2,
+                        s_colorNormalLight );
+                p->fillRect( 0, cr.height() / 2, cr.width(), cr.height() / 2,
+                        colorRepeatLight );
+            } else {
+                        if (!holidayAllDay) {
+                p->fillRect( 0, 0, cr.width(), cr.height(),
+                        s_colorNormalLight );
+                        } else {
+                p->fillRect( 0, 0, cr.width(), cr.height(),
+                        s_colorHolidayLight );
+                        }
+            } else if (repeatAllDay) {
+                p->fillRect( 0, 0, cr.width(), cr.height(),
+                        s_colorRepeatLight );
+                }
     } else {
-	p->fillRect( 0, 0, cr.width(),
-		cr.height(), selected
-		?  g.brush( QColorGroup::Highlight )
-		: g.brush( QColorGroup::Base ) );
+        p->fillRect( 0, 0, cr.width(),
+                cr.height(), selected
+                ?  g.brush( QColorGroup::Highlight )
+                : g.brush( QColorGroup::Base ) );
     }
 
     // The lines
@@ -641,21 +641,21 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
     int y = cr.height() / 2 - h;
 
     while(normalLine.count() >= 2) {
-	int x2 = normalLine.pop();
-	int x1 = normalLine.pop();
-	if (x2 < x1 + 2)
-	    x2 = x1 + 2;
-	p->fillRect(x1, y, x2 - x1, h, colorNormal);
+        int x2 = normalLine.pop();
+        int x1 = normalLine.pop();
+        if (x2 < x1 + 2)
+            x2 = x1 + 2;
+        p->fillRect(x1, y, x2 - x1, h, colorNormal);
     }
 
     y += h;
 
     while(repeatLine.count() >= 2) {
-	int x2 = repeatLine.pop();
-	int x1 = repeatLine.pop();
-	if (x2 < x1 + 2)
-	    x2 = x1 + 2;
-	p->fillRect(x1, y, x2 - x1, h, colorRepeat);
+        int x2 = repeatLine.pop();
+        int x1 = repeatLine.pop();
+        if (x2 < x1 + 2)
+            x2 = x1 + 2;
+        p->fillRect(x1, y, x2 - x1, h, colorRepeat);
     }
 
 
@@ -663,11 +663,11 @@ void DayItemMonth::paint( QPainter *p, const QColorGroup &cg,
     QFont f = p->font();
     if(qApp->desktop()->width() >= 480)
     {
-	f.setPointSize( f.pointSize() - 2 );
+        f.setPointSize( f.pointSize() - 2 );
     }
     else
     {
-	f.setPointSize( ( f.pointSize() / 3 ) * 2 );
+        f.setPointSize( ( f.pointSize() / 3 ) * 2 );
     }
     p->setFont( f );
     QFontMetrics fm( f );
@@ -683,13 +683,13 @@ void DayItemMonth::setType( Calendar::Day::Type t )
     switch ( t ) {
     case Calendar::Day::PrevMonth:
     case Calendar::Day::NextMonth:
-	back = QBrush( QColor( 224, 224, 224 ) );
-	forg = black;
-	break;
+        back = QBrush( QColor( 224, 224, 224 ) );
+        forg = black;
+        break;
     case Calendar::Day::ThisMonth:
-	back = QBrush( white );
-	forg = black;
-	break;
+        back = QBrush( white );
+        forg = black;
+        break;
     }
     typ = t;
 }
@@ -714,15 +714,15 @@ void DateButton::pickDate()
     static QPopupMenu *m1 = 0;
     static DateBookMonth *picker = 0;
     if ( !m1 ) {
-	m1 = new QPopupMenu( this );
-	picker = new DateBookMonth( m1, 0, TRUE );
-	m1->insertItem( picker );
-	connect( picker, SIGNAL( dateClicked(int,int,int) ),
-		 this, SLOT( setDate(int,int,int) ) );
-	connect( picker, SIGNAL( dateClicked(int,int,int) ),
-		 this, SIGNAL( dateSelected(int,int,int) ) );
-	connect( m1, SIGNAL( aboutToHide() ),
-		 this, SLOT( gotHide() ) );
+        m1 = new QPopupMenu( this );
+        picker = new DateBookMonth( m1, 0, TRUE );
+        m1->insertItem( picker );
+        connect( picker, SIGNAL( dateClicked(int,int,int) ),
+                 this, SLOT( setDate(int,int,int) ) );
+        connect( picker, SIGNAL( dateClicked(int,int,int) ),
+                 this, SIGNAL( dateSelected(int,int,int) ) );
+        connect( m1, SIGNAL( aboutToHide() ),
+                 this, SLOT( gotHide() ) );
     }
     picker->slotWeekChange( weekStartsMonday );
     picker->setDate( currDate.year(), currDate.month(), currDate.day() );
@@ -754,7 +754,7 @@ void DateButton::setDate( QDate d )
 {
     currDate = d;
     setText( longFormat ? TimeString::longDateString( d, df ) :
-	     TimeString::shortDate( d, df ) );
+             TimeString::shortDate( d, df ) );
 
 }
 
@@ -776,8 +776,8 @@ bool DateButton::customWhatsThis() const
 // DO NOT USE IT IN NEW CODE !!
 
 DateBookMonthPopup::DateBookMonthPopup ( QWidget *w )
-	: QPopupMenu ( w )
+        : QPopupMenu ( w )
 {
-	m_dbm = new DateBookMonth( this, 0, TRUE );
-	insertItem( m_dbm );
+        m_dbm = new DateBookMonth( this, 0, TRUE );
+        insertItem( m_dbm );
 }
