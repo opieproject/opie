@@ -46,10 +46,10 @@ class DateEntry : public DateEntryBase
 
 public:
     DateEntry( bool startOnMonday, const QDateTime &start,
-	       const QDateTime &end, bool whichClock = FALSE,
-	       QWidget* parent = 0, const char* name = 0 );
+               const QDateTime &end, bool whichClock = FALSE,
+               QWidget* parent = 0, const char* name = 0 );
     DateEntry( bool startOnMonday, const Event &event, bool whichCLock = FALSE,
-	       QWidget* parent = 0, const char* name = 0 );
+               QWidget* parent = 0, const char* name = 0 );
     ~DateEntry();
 
     Event event();

@@ -57,8 +57,8 @@
  */
 
 DateEntry::DateEntry( bool startOnMonday, const QDateTime &start,
-		      const QDateTime &end, bool whichClock, QWidget* parent,
-		      const char* name )
+                      const QDateTime &end, bool whichClock, QWidget* parent,
+                      const char* name )
     : DateEntryBase( parent, name ),
       ampm( whichClock ),
       startWeekOnMonday( startOnMonday ),
@@ -103,10 +103,10 @@ static void addOrPick( QComboBox* combo, const QString& t )
 {
     // Pick an  item if one excists
     for (int i=0; i<combo->count(); i++) {
-	if ( combo->text(i) == t ) {
-	    combo->setCurrentItem(i);
-	    return;
-	}
+        if ( combo->text(i) == t ) {
+            combo->setCurrentItem(i);
+            return;
+        }
     }
 
     // Else add one
@@ -126,19 +126,19 @@ DateEntry::DateEntry( bool startOnMonday, const Event &event, bool whichClock,
     setDates(event.start(),event.end());
     comboCategory->setCategories( event.categories(), "Calendar", tr("Calendar") );
     if(!event.description().isEmpty())
-	addOrPick( comboDescription, event.description() );
+        addOrPick( comboDescription, event.description() );
     if(!event.location().isEmpty())
-	addOrPick( comboLocation, event.location() );
+        addOrPick( comboLocation, event.location() );
     checkAlarm->setChecked( event.hasAlarm() );
     checkAllDay->setChecked( event.type() == Event::AllDay );
     if(!event.notes().isEmpty()) noteStr=event.notes();
     else noteStr="";
     spinAlarm->setValue(event.alarmTime());
     if ( event.alarmSound() != Event::Silent )
-	comboSound->setCurrentItem( 1 );
+        comboSound->setCurrentItem( 1 );
     if ( event.hasRepeat() ) {
-	rp = event.repeatPattern();
-	cmdRepeat->setText( tr("Repeat...") );
+        rp = event.repeatPattern();
+        cmdRepeat->setText( tr("Repeat...") );
     }
     setRepeatLabel();
 }
@@ -162,31 +162,31 @@ void DateEntry::updateTimeEdit(bool s, bool e) {
     QString strStart, strEnd;
     int shour, ehour;
     if ( ampm ) {
-	shour = startTime.hour();
-	ehour = endTime.hour();
-	if ( shour >= 12 ) {
-	    if ( shour > 12 )
-		shour -= 12;
-	    strStart.sprintf( "%d:%02d PM", shour, startTime.minute() );
-	} else {
-	    if ( shour == 0 )
-		shour = 12;
-	    strStart.sprintf( "%d:%02d AM", shour, startTime.minute() );
-	}
-	if ( ehour == 24 && endTime.minute() == 0 ) {
-	    strEnd  = "11:59 PM"; // or "midnight"
-	} else if ( ehour >= 12 ) {
-	    if ( ehour > 12 )
-		ehour -= 12;
-	    strEnd.sprintf( "%d:%02d PM", ehour, endTime.minute() );
-	} else {
-	    if ( ehour == 0 )
-		ehour = 12;
-	    strEnd.sprintf( "%d:%02d AM", ehour, endTime.minute() );
-	}
+        shour = startTime.hour();
+        ehour = endTime.hour();
+        if ( shour >= 12 ) {
+            if ( shour > 12 )
+                shour -= 12;
+            strStart.sprintf( "%d:%02d PM", shour, startTime.minute() );
+        } else {
+            if ( shour == 0 )
+                shour = 12;
+            strStart.sprintf( "%d:%02d AM", shour, startTime.minute() );
+        }
+        if ( ehour == 24 && endTime.minute() == 0 ) {
+            strEnd  = "11:59 PM"; // or "midnight"
+        } else if ( ehour >= 12 ) {
+            if ( ehour > 12 )
+                ehour -= 12;
+            strEnd.sprintf( "%d:%02d PM", ehour, endTime.minute() );
+        } else {
+            if ( ehour == 0 )
+                ehour = 12;
+            strEnd.sprintf( "%d:%02d AM", ehour, endTime.minute() );
+        }
     } else {
-	strStart.sprintf( "%02d:%02d", startTime.hour(), startTime.minute() );
-	strEnd.sprintf( "%02d:%02d", endTime.hour(), endTime.minute() );
+        strStart.sprintf( "%02d:%02d", startTime.hour(), startTime.minute() );
+        strEnd.sprintf( "%02d:%02d", endTime.hour(), endTime.minute() );
     }
 
     if (s) comboStart->setText(strStart);
@@ -204,28 +204,28 @@ void DateEntry::init()
     m1->insertItem( startPicker );
     buttonStart->setPopup( m1 );
     connect( startPicker, SIGNAL( dateClicked(int,int,int) ),
-	     this, SLOT( startDateChanged(int,int,int) ) );
+             this, SLOT( startDateChanged(int,int,int) ) );
 
     //Let start button change both start and end dates
     connect( startPicker, SIGNAL( dateClicked(int,int,int) ),
-	     this, SLOT( endDateChanged(int,int,int) ) );
+             this, SLOT( endDateChanged(int,int,int) ) );
     connect( qApp, SIGNAL( clockChanged(bool) ),
-	     this, SLOT( slotChangeClock(bool) ) );
+             this, SLOT( slotChangeClock(bool) ) );
     connect( qApp, SIGNAL(weekChanged(bool)),
-	     this, SLOT(slotChangeStartOfWeek(bool)) );
+             this, SLOT(slotChangeStartOfWeek(bool)) );
 
     connect( editNote, SIGNAL(clicked()),
-	     this, SLOT(slotEditNote()) );
+             this, SLOT(slotEditNote()) );
 
     QPopupMenu *m2 = new QPopupMenu( this );
     endPicker = new DateBookMonth( m2, 0, TRUE );
     m2->insertItem( endPicker );
     buttonEnd->setPopup( m2 );
     connect( endPicker, SIGNAL( dateClicked(int,int,int) ),
-	     this, SLOT( endDateChanged(int,int,int) ) );
+             this, SLOT( endDateChanged(int,int,int) ) );
 
     connect(timePickerStart, SIGNAL( timeChanged(const QTime&) ),
-	    this, SLOT( startTimePicked(const QTime&) ));
+            this, SLOT( startTimePicked(const QTime&) ));
     // install eventFilters
     comboEnd->installEventFilter( this );
     comboStart->installEventFilter( this );
@@ -237,7 +237,7 @@ void DateEntry::init()
 DateEntry::~DateEntry()
 {
     // no need to delete child widgets, Qt does it all for us
-	//cout << "Del: " << comboStart->currentText() << endl;
+        //cout << "Del: " << comboStart->currentText() << endl;
 }
 
 /*
@@ -249,7 +249,7 @@ void DateEntry::slotEditNote() {
   s = "<B>"+ TimeString::longDateString( startDate ) + "</B>";
 //  s.sprintf("<B>%d/%d</B> ", startDate.day(), startDate.month());
   NoteEntry noteDlg(s+comboDescription->currentText(), noteStr,
-		    this,0,TRUE);
+                    this,0,TRUE);
 
   if ( QPEApplication::execDialog( &noteDlg ) ) {
     noteStr=noteDlg.note->text();
@@ -275,29 +275,29 @@ static QTime parseTime( const QString& s, bool ampm )
     QStringList l = QStringList::split( ':', s );
     int hour = l[0].toInt();
     if ( ampm ) {
-	int i=0;
-	while (i<int(l[1].length()) && l[1][i]>='0' && l[1][i]<='9')
-	    i++;
-	QString digits = l[1].left(i);
-	if ( l[1].contains( "PM", FALSE ) ) {
-	    if ( hour != 12 )
-		hour += 12;
-	} else {
-	    if ( hour == 12 )
-		hour = 0;
-	}
-	l[1] = digits;
+        int i=0;
+        while (i<int(l[1].length()) && l[1][i]>='0' && l[1][i]<='9')
+            i++;
+        QString digits = l[1].left(i);
+        if ( l[1].contains( "PM", FALSE ) ) {
+            if ( hour != 12 )
+                hour += 12;
+        } else {
+            if ( hour == 12 )
+                hour = 0;
+        }
+        l[1] = digits;
     }
     int minute = l[1].toInt();
     if ( minute > 59 )
-	minute = 59;
+        minute = 59;
     else if ( minute < 0 )
-	minute = 0;
+        minute = 0;
     if ( hour > 23 ) {
-	hour = 23;
-	minute = 59;
+        hour = 23;
+        minute = 59;
     } else if ( hour < 0 )
-	hour = 0;
+        hour = 0;
     tmpTime.setHMS( hour, minute, 0 );
     return tmpTime;
 }
@@ -329,12 +329,12 @@ void DateEntry::startDateChanged( int y, int m, int d )
     QDate prev = startDate;
     startDate.setYMD( y, m, d );
     if ( rp.type == Event::Weekly &&
-	 startDate.dayOfWeek() != prev.dayOfWeek() ) {
-	// if we change the start of a weekly repeating event
-	// set the repeating day appropriately
-	char mask = 1 << (prev.dayOfWeek()-1);
-	rp.days &= (~mask);
-	rp.days |= 1 << (startDate.dayOfWeek()-1);
+         startDate.dayOfWeek() != prev.dayOfWeek() ) {
+        // if we change the start of a weekly repeating event
+        // set the repeating day appropriately
+        char mask = 1 << (prev.dayOfWeek()-1);
+        rp.days &= (~mask);
+        rp.days |= 1 << (startDate.dayOfWeek()-1);
     }
 
     buttonStart->setText( TimeString::shortDate( startDate ) );
@@ -390,13 +390,13 @@ void DateEntry::slotRepeat()
     // it is better in my opinion to just grab this from the mother,
     // since, this dialog doesn't need to keep track of it...
     if ( rp.type != Event::NoRepeat )
-	e = new RepeatEntry( startWeekOnMonday, rp, startDate, this);
+        e = new RepeatEntry( startWeekOnMonday, rp, startDate, this);
     else
-	e = new RepeatEntry( startWeekOnMonday, startDate, this );
+        e = new RepeatEntry( startWeekOnMonday, startDate, this );
 
     if ( QPEApplication::execDialog( e ) ) {
-	rp = e->repeatPattern();
-	setRepeatLabel();
+        rp = e->repeatPattern();
+        setRepeatLabel();
     }
     // deleting sounds like a nice idea...
     delete e;
@@ -441,7 +441,7 @@ Event DateEntry::event()
     QDateTime end( endDate, endTime );
     time_t start_utc, end_utc;
 
-//	odebug << "tz: " << timezone->currentZone() << oendl;
+//        odebug << "tz: " << timezone->currentZone() << oendl;
 
     // get real timezone
     QString realTZ;
@@ -449,7 +449,7 @@ Event DateEntry::event()
 
     // set timezone
     if ( setenv( "TZ", timezone->currentZone(), true ) != 0 )
-	owarn << "There was a problem setting the timezone." << oendl;
+        owarn << "There was a problem setting the timezone." << oendl;
 
     // convert to UTC based on selected TZ (calling tzset internally)
     start_utc = TimeConversion::toUTC( start );
@@ -459,7 +459,7 @@ Event DateEntry::event()
     unsetenv( "TZ" );
     if ( !realTZ.isNull() )
         if ( setenv( "TZ", realTZ, true ) != 0 )
-			owarn << "There was a problem setting the timezone." << oendl;
+                        owarn << "There was a problem setting the timezone." << oendl;
 
     // convert UTC to local time (calling tzset internally)
     ev.setStart( TimeConversion::fromUTC( start_utc ) );
@@ -467,15 +467,15 @@ Event DateEntry::event()
 
     // we only have one type of sound at the moment... LOUD!!!
     if ( comboSound->currentItem() != 0 )
-	st = Event::Loud;
+        st = Event::Loud;
     else
-	st = Event::Silent;
+        st = Event::Silent;
     ev.setAlarm( checkAlarm->isChecked(), spinAlarm->value(), st );
     if ( rp.type != Event::NoRepeat )
-	ev.setRepeat( TRUE, rp );
+        ev.setRepeat( TRUE, rp );
     ev.setNotes( noteStr );
 
-		//cout << "Start: " << comboStart->currentText() << endl;
+                //cout << "Start: " << comboStart->currentText() << endl;
 
     return ev;
 }
@@ -484,21 +484,21 @@ void DateEntry::setRepeatLabel()
 {
 
     switch( rp.type ) {
-	case Event::Daily:
-	    cmdRepeat->setText( tr("Daily...") );
-	    break;
-	case Event::Weekly:
-	    cmdRepeat->setText( tr("Weekly...") );
-	    break;
-	case Event::MonthlyDay:
-	case Event::MonthlyDate:
-	    cmdRepeat->setText( tr("Monthly...") );
-	    break;
-	case Event::Yearly:
-	    cmdRepeat->setText( tr("Yearly...") );
-	    break;
-	default:
-	    cmdRepeat->setText( tr("No Repeat...") );
+        case Event::Daily:
+            cmdRepeat->setText( tr("Daily...") );
+            break;
+        case Event::Weekly:
+            cmdRepeat->setText( tr("Weekly...") );
+            break;
+        case Event::MonthlyDay:
+        case Event::MonthlyDate:
+            cmdRepeat->setText( tr("Monthly...") );
+            break;
+        case Event::Yearly:
+            cmdRepeat->setText( tr("Yearly...") );
+            break;
+        default:
+            cmdRepeat->setText( tr("No Repeat...") );
     }
 }
 
@@ -507,9 +507,9 @@ void DateEntry::setAlarmEnabled( bool alarmPreset, int presetTime, Event::SoundT
     checkAlarm->setChecked( alarmPreset );
     spinAlarm->setValue( presetTime );
     if ( sound != Event::Silent )
-	comboSound->setCurrentItem( 1 );
+        comboSound->setCurrentItem( 1 );
     else
-	comboSound->setCurrentItem( 0 );
+        comboSound->setCurrentItem( 0 );
 }
 
 void DateEntry::initCombos()
@@ -518,47 +518,47 @@ void DateEntry::initCombos()
     comboStart->clear();
     comboEnd->clear();
     if ( ampm ) {
-	for ( int i = 0; i < 24; i++ ) {
-	    if ( i == 0 ) {
-		comboStart->insertItem( "12:00 AM" );
-		comboStart->insertItem( "12:30 AM" );
-		comboEnd->insertItem( "12:00 AM" );
-		comboEnd->insertItem( "12:30 AM" );
-	    } else if ( i == 12 ) {
-		comboStart->insertItem( "12:00 PM" );
-		comboStart->insertItem( "12:30 PM" );
-		comboEnd->insertItem( "12:00 PM" );
-		comboEnd->insertItem( "12:30 PM" );
-	    } else if ( i > 12 ) {
-		comboStart->insertItem( QString::number( i - 12 ) + ":00 PM" );
-		comboStart->insertItem( QString::number( i - 12 ) + ":30 PM" );
-		comboEnd->insertItem( QString::number( i - 12 ) + ":00 PM" );
-		comboEnd->insertItem( QString::number( i - 12 ) + ":30 PM" );
-	    } else {
-		comboStart->insertItem( QString::number( i) + ":00 AM" );
-		comboStart->insertItem( QString::number( i ) + ":30 AM" );
-		comboEnd->insertItem( QString::number( i ) + ":00 AM" );
-		comboEnd->insertItem( QString::number( i ) + ":30 AM" );
-	    }
-	}
+        for ( int i = 0; i < 24; i++ ) {
+            if ( i == 0 ) {
+                comboStart->insertItem( "12:00 AM" );
+                comboStart->insertItem( "12:30 AM" );
+                comboEnd->insertItem( "12:00 AM" );
+                comboEnd->insertItem( "12:30 AM" );
+            } else if ( i == 12 ) {
+                comboStart->insertItem( "12:00 PM" );
+                comboStart->insertItem( "12:30 PM" );
+                comboEnd->insertItem( "12:00 PM" );
+                comboEnd->insertItem( "12:30 PM" );
+            } else if ( i > 12 ) {
+                comboStart->insertItem( QString::number( i - 12 ) + ":00 PM" );
+                comboStart->insertItem( QString::number( i - 12 ) + ":30 PM" );
+                comboEnd->insertItem( QString::number( i - 12 ) + ":00 PM" );
+                comboEnd->insertItem( QString::number( i - 12 ) + ":30 PM" );
+            } else {
+                comboStart->insertItem( QString::number( i) + ":00 AM" );
+                comboStart->insertItem( QString::number( i ) + ":30 AM" );
+                comboEnd->insertItem( QString::number( i ) + ":00 AM" );
+                comboEnd->insertItem( QString::number( i ) + ":30 AM" );
+            }
+        }
     } else {
-	for ( int i = 0; i < 24; i++ ) {
-	    if ( i < 10 ) {
-		comboStart->insertItem( QString("0")
-		                        + QString::number(i) + ":00" );
-		comboStart->insertItem( QString("0")
-		                        + QString::number(i) + ":30" );
-		comboEnd->insertItem( QString("0")
-		                      + QString::number(i) + ":00" );
-		comboEnd->insertItem( QString("0")
-		                      + QString::number(i) + ":30" );
-	    } else {
-		comboStart->insertItem( QString::number(i) + ":00" );
-		comboStart->insertItem( QString::number(i) + ":30" );
-		comboEnd->insertItem( QString::number(i) + ":00" );
-		comboEnd->insertItem( QString::number(i) + ":30" );
-	    }
-	}
+        for ( int i = 0; i < 24; i++ ) {
+            if ( i < 10 ) {
+                comboStart->insertItem( QString("0")
+                                        + QString::number(i) + ":00" );
+                comboStart->insertItem( QString("0")
+                                        + QString::number(i) + ":30" );
+                comboEnd->insertItem( QString("0")
+                                      + QString::number(i) + ":00" );
+                comboEnd->insertItem( QString("0")
+                                      + QString::number(i) + ":30" );
+            } else {
+                comboStart->insertItem( QString::number(i) + ":00" );
+                comboStart->insertItem( QString::number(i) + ":30" );
+                comboEnd->insertItem( QString::number(i) + ":00" );
+                comboEnd->insertItem( QString::number(i) + ":30" );
+            }
+        }
     }
     */
 }
