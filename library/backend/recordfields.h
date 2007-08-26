@@ -28,120 +28,120 @@ namespace Qtopia
     static const int CATEGORY_ID = 1;
 
     enum AddressBookFields {
-	AddressUid = UID_ID,	
-	AddressCategory = CATEGORY_ID,
+        AddressUid = UID_ID,
+        AddressCategory = CATEGORY_ID,
 
-	// NOTE: Order of fields dependency in backend/contact.cpp
+        // NOTE: Order of fields dependency in backend/contact.cpp
 
-	Title,
-	FirstName,
-	MiddleName,
-	LastName,
-	Suffix,
-	FileAs,
+        Title,
+        FirstName,
+        MiddleName,
+        LastName,
+        Suffix,
+        FileAs,
 
-	JobTitle,
-	Department,
-	Company,
-	BusinessPhone,
-	BusinessFax,
-	BusinessMobile,
+        JobTitle,
+        Department,
+        Company,
+        BusinessPhone,
+        BusinessFax,
+        BusinessMobile,
 
-	// email
-	DefaultEmail,
-	Emails,
+        // email
+        DefaultEmail,
+        Emails,
 
-	HomePhone,
-	HomeFax,
-	HomeMobile,
+        HomePhone,
+        HomeFax,
+        HomeMobile,
 
-	// business
-	BusinessStreet,
-	BusinessCity,
-	BusinessState,
-	BusinessZip,
-	BusinessCountry,
-	BusinessPager,
-	BusinessWebPage,
+        // business
+        BusinessStreet,
+        BusinessCity,
+        BusinessState,
+        BusinessZip,
+        BusinessCountry,
+        BusinessPager,
+        BusinessWebPage,
 
-	Office,
-	Profession,
-	Assistant,
-	Manager,
+        Office,
+        Profession,
+        Assistant,
+        Manager,
 
-	// home
-	HomeStreet,
-	HomeCity,
-	HomeState,
-	HomeZip,
-	HomeCountry,
-	HomeWebPage,
+        // home
+        HomeStreet,
+        HomeCity,
+        HomeState,
+        HomeZip,
+        HomeCountry,
+        HomeWebPage,
 
-	//personal
-	Spouse,
-	Gender,
-	Birthday,
-	Anniversary,
-	Nickname,
-	Children,
+        //personal
+        Spouse,
+        Gender,
+        Birthday,
+        Anniversary,
+        Nickname,
+        Children,
 
-	// other
-	Notes,
+        // other
+        Notes,
 
-	// used for internal record keeping, not for end user.
-	Groups,
-	rid,
-	rinfo
+        // used for internal record keeping, not for end user.
+        Groups,
+        rid,
+        rinfo
     };
 
     // dataset = "todolist"
     enum TaskFields {
-	TaskUid = UID_ID,
-	TaskCategory = CATEGORY_ID,
-	
-	HasDate,
-	Completed,
-	TaskDescription,
-	Priority,
-	Date,
+        TaskUid = UID_ID,
+        TaskCategory = CATEGORY_ID,
 
-	TaskRid,
-	TaskRinfo
+        HasDate,
+        Completed,
+        TaskDescription,
+        Priority,
+        Date,
+
+        TaskRid,
+        TaskRinfo
     };
 
     // dataset = "categories" for todos
     enum CategoryFields {
-	CatUid = UID_ID,
-	CatName,
-	CatAppGroup
+        CatUid = UID_ID,
+        CatName,
+        CatAppGroup
     };
 
 
 // dataset = "datebook"
     enum DatebookFields {
-	DatebookUid = UID_ID,
-	DatebookCategory = CATEGORY_ID,
-	
-	DatebookDescription,
-	Location,
-	TimeZone,
-	Note,
-	StartDateTime,
-	EndDateTime,
-	DatebookType,
-	HasAlarm,
-	SoundType,
-	AlarmTime,
+        DatebookUid = UID_ID,
+        DatebookCategory = CATEGORY_ID,
 
-	RepeatPatternType,
-	RepeatPatternFrequency,
-	RepeatPatternPosition,
-	RepeatPatternDays,
-	RepeatPatternHasEndDate,
-	RepeatPatternEndDate,	
+        DatebookDescription,
+        Location,
+        TimeZone,
+        Note,
+        StartDateTime,
+        EndDateTime,
+        DatebookType,
+        HasAlarm,
+        SoundType,
+        AlarmTime,
 
-	DateBookRid,
-	DateBookRinfo
+        RepeatPatternType,
+        RepeatPatternFrequency,
+        RepeatPatternPosition,
+        RepeatPatternDays,
+        RepeatPatternHasEndDate,
+        RepeatPatternEndDate,
+
+        DateBookRid,
+        DateBookRinfo
     };
 };
 
