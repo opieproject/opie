@@ -27,8 +27,8 @@ struct FKey {
     {
         if (!f.isEmpty())
             pix = new QPixmap ( Opie::Core::OResource::loadPixmap("console/keys/" + f ) );
-    };
-    ~FKey() { if (pix) delete pix; }
+    }
+//    ~FKey() { if (pix) delete pix; }
 
     QString label;
     QPixmap *pix;
