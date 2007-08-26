@@ -133,6 +133,11 @@ public:
     void setRepeatForever(bool);
     void setRepeatOnWeekDay(int day, bool enable);
 
+    bool hasException(const QDate &date) const;
+    void addException(const QDate &date);
+    QString exceptionsStr() const;
+    void setExceptionsStr(const QString &str);
+
     // Don't use any of these.
     void setRepeat( bool b, const RepeatPattern &p );
     void setRepeat( const RepeatPattern &p );
@@ -176,6 +181,7 @@ private:
     SoundTypeChoice aSound;
     RepeatPattern pattern;
     QString note;
+    QValueList<QDate> exceptions;
     // ADDITION
     int mRid;   // Recode ID
     int mRinfo; // Recode Info

@@ -79,9 +79,9 @@ void DateBookWeekLstView::setEvents(QValueList<EffectiveEvent> &ev, const QDate 
             if(!(((*it).end().hour()==0) && ((*it).end().minute()==0) && ((*it).startDate()!=(*it).date()))) {  // Skip events ending at 00:00 starting at another day.
                 DateBookWeekLstEvent *l=new DateBookWeekLstEvent(ampm,*it,weeklistviewconfig,w);
                 tlayout->addWidget(l);
-                connect (l, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
+                connect (l, SIGNAL(editEvent(const EffectiveEvent&)), this, SIGNAL(editEvent(const EffectiveEvent&)));
                 connect (l, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-                connect (l, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
+                connect (l, SIGNAL(removeEvent(const EffectiveEvent &)), this, SIGNAL(removeEvent(const EffectiveEvent &)));
                 connect (l, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
                 connect (l, SIGNAL(redraw()), this, SIGNAL(redraw()));
             }

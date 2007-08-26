@@ -42,9 +42,9 @@ signals:
     void showDate(int y, int m, int d);
     void addEvent(const QDateTime &start, const QDateTime &stop,
     const QString &str, const QString &location);
-    void editEvent(const Event &e);
+    void editEvent(const EffectiveEvent &e);
     void duplicateEvent(const Event &e);
-    void removeEvent(const Event &e);
+    void removeEvent(const EffectiveEvent &e);
     void beamEvent(const Event &e);
 
 private:

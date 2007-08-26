@@ -116,9 +116,9 @@ public:
     const EffectiveEvent &event() const { return ev; }
 
 signals:
-    void deleteMe( const Event &e );
+    void deleteMe( const EffectiveEvent &e );
     void duplicateMe( const Event &e );
-    void editMe( const Event &e );
+    void editMe( const EffectiveEvent &e );
     void beamMe( const Event &e );
 
 protected:
@@ -216,8 +216,8 @@ public slots:
     void updateView();  //updates TimeMarker and DayWidget-colors
 
 signals:
-    void removeEvent( const Event& );
-    void editEvent( const Event& );
+    void removeEvent( const EffectiveEvent& );
+    void editEvent( const EffectiveEvent& );
     void duplicateEvent( const Event& );
     void beamEvent( const Event& );
     void newEvent();

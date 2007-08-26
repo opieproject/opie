@@ -83,6 +83,7 @@ private:
     bool ampm:1;
     bool startWeekOnMonday:1;
     bool m_showStart:1;
+    QString exceptions;
 
     QString noteStr;
 };

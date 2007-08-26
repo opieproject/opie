@@ -37,10 +37,10 @@ public:
      ~DateBookEvent();
 
  signals:
-     void editEvent( const Event &e );
+     void editEvent( const EffectiveEvent &e );
      
 private slots:
-    void editEventSlot( const Event &e );
+    void editEventSlot( const EffectiveEvent &e );
     void editMe();
 
  private:

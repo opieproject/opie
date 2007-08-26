@@ -114,9 +114,9 @@ void DateBookWeekLst::getEvents() {
             m_CurrentView=new DateBookWeekLstDblView(el,start,bStartOnMonday,ampm,scroll);
         }
         m_CurrentView->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed));
-        connect (m_CurrentView, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
+        connect (m_CurrentView, SIGNAL(editEvent(const EffectiveEvent&)), this, SIGNAL(editEvent(const EffectiveEvent&)));
         connect (m_CurrentView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-        connect (m_CurrentView, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
+        connect (m_CurrentView, SIGNAL(removeEvent(const EffectiveEvent &)), this, SIGNAL(removeEvent(const EffectiveEvent &)));
         connect (m_CurrentView, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
         connect (m_CurrentView, SIGNAL(redraw()), this, SLOT(redraw()));
         connect (m_CurrentView, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));

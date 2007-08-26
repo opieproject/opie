@@ -397,9 +397,9 @@ void DateBookDay::getEvents()
                         object = w;
                     }
 
-                    connect( object, SIGNAL( deleteMe(const Event&) ), this, SIGNAL( removeEvent(const Event&) ) );
+                    connect( object, SIGNAL( deleteMe(const EffectiveEvent&) ), this, SIGNAL( removeEvent(const EffectiveEvent&) ) );
                     connect( object, SIGNAL( duplicateMe(const Event&) ), this, SIGNAL( duplicateEvent(const Event&) ) );
-                    connect( object, SIGNAL( editMe(const Event&) ), this, SIGNAL( editEvent(const Event&) ) );
+                    connect( object, SIGNAL( editMe(const EffectiveEvent&) ), this, SIGNAL( editEvent(const EffectiveEvent&) ) );
                     connect( object, SIGNAL( beamMe(const Event&) ), this, SIGNAL( beamEvent(const Event&) ) );
 
         }
@@ -830,9 +830,9 @@ void DateBookDayWidget::mousePressEvent( QMouseEvent *e )
         if(Ir::supported() && ev.event().doRepeat() ) m.insertItem( tr( "Beam this occurence"), 5 );
     int r = m.exec( e->globalPos() );
     if ( r == 1 ) {
-        emit editMe( eve );
+        emit editMe( ev );
     } else if ( r == 2 ) {
-        emit deleteMe( eve );
+        emit deleteMe( ev );
     } else if ( r == 3 ) {
         emit beamMe( eve );
     } else if ( r == 4 ) {

@@ -141,7 +141,9 @@ namespace Qtopia
         RepeatPatternEndDate,
 
         DateBookRid,
-        DateBookRinfo
+        DateBookRinfo,
+
+        Exceptions
     };
 };
 

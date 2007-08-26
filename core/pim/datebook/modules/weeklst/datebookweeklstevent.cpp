@@ -66,7 +66,7 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(bool ap, const EffectiveEvent &ev,
     setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
 }
 void DateBookWeekLstEvent::editMe() {
-    emit editEvent(event.event());
+    emit editEvent(event);
 }
 void DateBookWeekLstEvent::duplicateMe()
 {
@@ -74,7 +74,7 @@ void DateBookWeekLstEvent::duplicateMe()
 }
 void DateBookWeekLstEvent::deleteMe()
 {
-       emit removeEvent(event.event());
+       emit removeEvent(event);
        emit redraw();
 }
 void DateBookWeekLstEvent::beamMe()

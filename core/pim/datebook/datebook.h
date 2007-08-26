@@ -32,6 +32,7 @@
 #define DATEBOOK_H
 
 #include "datebooktypes.h"
+#include "dateentryimpl.h"
 
 #include <qpe/datebookdb.h>
 
@@ -65,6 +66,8 @@ protected:
     QDate currentDate();
     void timerEvent( QTimerEvent *e );
     void closeEvent( QCloseEvent *e );
+    DateEntry *setupEditDlg( QDialog &editDlg, const Event &e, const QString &caption );
+    void editEvent( const Event &e, const QDate *date );
 
     void view(int v, const QDate &d);
 
@@ -95,9 +98,9 @@ private slots:
     void showDay( int y, int m, int d );
 
     void insertEvent( const Event &e );
-    void editEvent( const Event &e );
+    void editEvent( const EffectiveEvent &e );
     void duplicateEvent( const Event &e );
-    void removeEvent( const Event &e );
+    void removeEvent( const EffectiveEvent &e );
 
     void receive( const QCString &msg, const QByteArray &data );
     void setDocument( const QString & );

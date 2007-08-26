@@ -37,9 +37,9 @@ void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QValueLis
     if (!leftView) {
         leftView=new DateBookWeekLstView(ev1, d, onM, ampm, this);
         m_MainLayout->addWidget(leftView);
-        connect (leftView, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
+        connect (leftView, SIGNAL(editEvent(const EffectiveEvent&)), this, SIGNAL(editEvent(const EffectiveEvent&)));
         connect (leftView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-        connect (leftView, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
+        connect (leftView, SIGNAL(removeEvent(const EffectiveEvent &)), this, SIGNAL(removeEvent(const EffectiveEvent &)));
         connect (leftView, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
         connect (leftView, SIGNAL(redraw()), this, SIGNAL(redraw()));
         connect (leftView, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
@@ -54,9 +54,9 @@ void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QValueLis
     if (!rightView) {
         rightView=new DateBookWeekLstView(ev2, d.addDays(7), onM, ampm, this);
         m_MainLayout->addWidget(rightView);
-        connect (rightView, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
+        connect (rightView, SIGNAL(editEvent(const EffectiveEvent&)), this, SIGNAL(editEvent(const EffectiveEvent&)));
         connect (rightView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-        connect (rightView, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
+        connect (rightView, SIGNAL(removeEvent(const EffectiveEvent &)), this, SIGNAL(removeEvent(const EffectiveEvent &)));
         connect (rightView, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
         connect (rightView, SIGNAL(redraw()), this, SIGNAL(redraw()));
         connect (rightView, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
@@ -77,9 +77,9 @@ void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QDate &d,
     if (!leftView) {
         leftView=new DateBookWeekLstView(ev1, d, onM, ampm, this);
         m_MainLayout->addWidget(leftView);
-        connect (leftView, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
+        connect (leftView, SIGNAL(editEvent(const EffectiveEvent&)), this, SIGNAL(editEvent(const EffectiveEvent&)));
         connect (leftView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-        connect (leftView, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
+        connect (leftView, SIGNAL(removeEvent(const EffectiveEvent &)), this, SIGNAL(removeEvent(const EffectiveEvent &)));
         connect (leftView, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
         connect (leftView, SIGNAL(redraw()), this, SIGNAL(redraw()));
         connect (leftView, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
@@ -101,9 +101,9 @@ void DateBookWeekLstDblView::setRightEvents(QValueList<EffectiveEvent> &ev1,QDat
     if (!rightView) {
         rightView=new DateBookWeekLstView(ev1, d, onM, ampm, this);
         m_MainLayout->addWidget(rightView);
-        connect (leftView, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
+        connect (leftView, SIGNAL(editEvent(const EffectiveEvent&)), this, SIGNAL(editEvent(const EffectiveEvent&)));
         connect (leftView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-        connect (leftView, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
+        connect (leftView, SIGNAL(removeEvent(const EffectiveEvent &)), this, SIGNAL(removeEvent(const EffectiveEvent &)));
         connect (leftView, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
         connect (leftView, SIGNAL(redraw()), this, SIGNAL(redraw()));
         connect (leftView, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));

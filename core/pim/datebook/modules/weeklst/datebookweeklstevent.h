@@ -13,9 +13,9 @@ public:
              QWidget* parent = 0, const char* name = 0,
              WFlags fl = 0);
 signals:
-    void editEvent(const Event &e);
+    void editEvent(const EffectiveEvent &e);
     void duplicateEvent(const Event &e);
-    void removeEvent(const Event &e);
+    void removeEvent(const EffectiveEvent &e);
     void beamEvent(const Event &e);
     void redraw();
 private slots:

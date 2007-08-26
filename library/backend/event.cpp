@@ -354,6 +354,7 @@ Event::Event( const QMap<int, QString> &map )
     p.hasEndDate = map[ RepeatPatternHasEndDate ].toInt();
     p.endDateUTC = map[ RepeatPatternEndDate ].toUInt();
     setRepeat( p );
+    setExceptionsStr( map[Exceptions] );
 
     setUid( map[ DatebookUid ].toInt() );
 }
@@ -445,6 +446,8 @@ QMap<int, QString> Event::toMap() const
     m.insert ( RepeatPatternDays, QString::number( repeatPattern().days ) );
     m.insert ( RepeatPatternHasEndDate, QString::number( static_cast<int>( repeatPattern().hasEndDate ) ) );
     m.insert ( RepeatPatternEndDate, QString::number( repeatPattern().endDateUTC ) );
+
+    m.insert ( Exceptions, exceptionsStr() );
 
     m.insert( DatebookUid, QString::number( uid()) );
 
@@ -744,6 +747,10 @@ void Event::save( QString& buf )
     if ( !note.isEmpty() )
         buf += " note=\"" + Qtopia::escapeString( note ) + "\"";
     buf += customToXml();
+
+    if(!exceptions.isEmpty()) {
+        buf += " exceptions=\"" + exceptionsStr() + "\"";
+    }
 }
 
 /*!
@@ -1351,4 +1358,48 @@ bool Event::match( const QRegExp &r ) const
                 returnMe = true;
     }
     return returnMe;
+}
+
+bool Event::hasException(const QDate &date) const
+{
+    return exceptions.contains(date);
+}
+
+void Event::addException(const QDate &date)
+{
+    exceptions.append(date);
+}
+
+QString Event::exceptionsStr() const
+{
+    QString buf;
+    QDate date;
+    for ( QValueList<QDate>::ConstIterator it=exceptions.begin(); it!=exceptions.end(); ++it ) {
+        date = (*it);
+        if ( it != exceptions.begin() ) buf += " ";
+
+        buf += QCString().sprintf("%04d%02d%02d", date.year(), date.month(), date.day() );
+    }
+    return buf;
+}
+
+void Event::setExceptionsStr(const QString &str)
+{
+    exceptions.clear();
+    if(!str.isEmpty()) {
+        QStringList exceptList = QStringList::split( " ", str );
+        QString item;
+        QStringList::ConstIterator it;
+
+        for ( it = exceptList.begin(); it != exceptList.end(); ++it ) {
+            item = (*it);
+            if(item.length() == 8) {
+                int year = item.left(4).toInt();
+                int month = item.mid(4, 2).toInt();
+                int day = item.mid(6, 2).toInt();
+                QDate date(year, month, day);
+                exceptions.append(date);
+            }
+        }
+    }
 }

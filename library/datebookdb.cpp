@@ -51,12 +51,13 @@ static QString dateBookFilename()
     return Global::applicationFileName("datebook","datebook.xml");
 }
 
+
 /* Calculating the next event of a recuring event is actually
    computationally inexpensive, esp. compared to checking each day
    individually.  There are bad worse cases for say the 29th of
    february or the 31st of some other months.  However
    these are still bounded */
-bool nextOccurance(const Event &e, const QDate &from, QDateTime &next)
+bool nextOccuranceNoExceptions(const Event &e, const QDate &from, QDateTime &next)
 {
     // easy checks, first are we too far in the future or too far in the past?
     QDate tmpDate;
@@ -330,6 +331,27 @@ bool nextOccurance(const Event &e, const QDate &from, QDateTime &next)
                 return FALSE;
             return TRUE;
         default:
+            return FALSE;
+    }
+}
+
+bool nextOccurance(const Event &e, const QDate &from, QDateTime &next)
+{
+    QDate thisfrom = from;
+    QDateTime thisnext = next;
+    while(TRUE) {
+        if(nextOccuranceNoExceptions(e, thisfrom, thisnext)) {
+            thisfrom = thisnext.date();
+            if(e.hasException(thisfrom)) {
+                thisfrom = thisfrom.addDays(1);
+                continue;
+            }
+            else {
+                next = thisnext;
+                return TRUE;
+            }
+        }
+        else
             return FALSE;
     }
 }
@@ -698,7 +720,8 @@ void DateBookDB::loadFile( const QString &strFile )
         FCreated,
         FAction,
         FActionKey,
-        FJournalOrigHadRepeat
+        FJournalOrigHadRepeat,
+        FExceptions
     };
 
     QAsciiDict<int> dict( 97 );
@@ -723,6 +746,7 @@ void DateBookDB::loadFile( const QString &strFile )
     dict.insert( "action", new int(FAction) );
     dict.insert( "actionkey", new int(FActionKey) );
     dict.insert( "actionorig", new int (FJournalOrigHadRepeat) );
+    dict.insert( "exceptions", new int (FExceptions) );
 
 
     QByteArray ba = f.readAll();
@@ -884,6 +908,9 @@ void DateBookDB::loadFile( const QString &strFile )
                 break;
             case FJournalOrigHadRepeat:
                 origHadRepeat = value.toInt();
+                break;
+            case FExceptions:
+                e.setExceptionsStr(value);
                 break;
             default:
                 qDebug( "huh??? missing enum? -- attr.: %s", attr );

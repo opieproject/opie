@@ -36,7 +36,6 @@
 #include "datebookweek.h"
 #include "modules/weeklst/datebookweeklst.h"
 #include "modules/monthview/odatebookmonth.h"
-#include "dateentryimpl.h"
 
 #include <opie2/odebug.h>
 #include <opie2/oholidaypluginif.h>
@@ -230,24 +229,34 @@ void DateBook::receive( const QCString &msg, const QByteArray &data )
 {
     QDataStream stream( data, IO_ReadOnly );
     if ( msg == "timeChange(QString)" ) {
-    // update active view!
-    if ( dayAction->isOn() )
-        viewDay();
-    else if ( weekAction->isOn() )
-        viewWeek();
-    else if ( monthAction->isOn() )
-        viewMonth();
+        // update active view!
+        if ( dayAction->isOn() )
+            viewDay();
+        else if ( weekAction->isOn() )
+            viewWeek();
+        else if ( monthAction->isOn() )
+            viewMonth();
+    }
+    else if (msg == "editEvent(int,QDate)") {
+        int uid;
+        QDate date;
+        stream >> uid >> date;
+        // Find the specific occurrence of this event
+        Event e=db->eventByUID(uid);
+        editEvent(e, &date);
     }
     else if (msg == "editEvent(int)") {
-    int uid;
-    stream >> uid;
-    Event e=db->eventByUID(uid);
-    editEvent(e);
-    }else if (msg == "viewDefault(QDate)"){
+        int uid;
+        stream >> uid;
+        // Find the specific occurrence of this event
+        Event e=db->eventByUID(uid);
+        editEvent(e, NULL);
+    }
+    else if (msg == "viewDefault(QDate)") {
          QDate day;
          stream >> day;
          viewDefault(day);
-     }
+    }
 }
 
 DateBook::~DateBook()
@@ -426,6 +435,23 @@ void DateBook::insertEvent( const Event &e )
     emit newEvent();
 }
 
+DateEntry *DateBook::setupEditDlg( QDialog &editDlg, const Event &e, const QString &caption )
+{
+    // workaround added for text input.
+    DateEntry *entry;
+    editDlg.setCaption( caption );
+    QVBoxLayout *vb = new QVBoxLayout( &editDlg );
+    QScrollView *sv = new QScrollView( &editDlg, "scrollview" );
+    sv->setResizePolicy( QScrollView::AutoOneFit );
+    // KLUDGE!!!
+    sv->setHScrollBarMode( QScrollView::AlwaysOff );
+    vb->addWidget( sv );
+    entry = new DateEntry( onMonday, e, ampm, &editDlg, "editor" );
+    entry->timezone->setEnabled( FALSE );
+    sv->addChild( entry );
+    return entry;
+}
+
 void DateBook::duplicateEvent( const Event &e )
 {
     // Alot of code duplication, as this is almost like editEvent();
@@ -435,20 +461,8 @@ void DateBook::duplicateEvent( const Event &e )
     }
 
     Event dupevent(e);  // Make a duplicate.
-
-    // workaround added for text input.
     QDialog editDlg( this, 0, TRUE );
-    DateEntry *entry;
-    editDlg.setCaption( tr("Duplicate Event") );
-    QVBoxLayout *vb = new QVBoxLayout( &editDlg );
-    QScrollView *sv = new QScrollView( &editDlg, "scrollview" );
-    sv->setResizePolicy( QScrollView::AutoOneFit );
-    // KLUDGE!!!
-    sv->setHScrollBarMode( QScrollView::AlwaysOff );
-    vb->addWidget( sv );
-    entry = new DateEntry( onMonday, dupevent, ampm, &editDlg, "editor" );
-    entry->timezone->setEnabled( FALSE );
-    sv->addChild( entry );
+    DateEntry *entry = setupEditDlg(editDlg, dupevent, tr("Duplicate Event"));
 
     while ( QPEApplication::execDialog( &editDlg ) ) {
         Event newEv = entry->event();
@@ -475,58 +489,89 @@ void DateBook::duplicateEvent( const Event &e )
     }
 }
 
-void DateBook::editEvent( const Event &e )
+void DateBook::editEvent( const EffectiveEvent &e )
+{
+    QDate date = e.date();
+    editEvent( e.event(), &date );
+}
+
+void DateBook::editEvent( const Event &e, const QDate *date )
 {
     if (syncing) {
         QMessageBox::warning( this, tr("Calendar"), tr( "Can not edit data, currently syncing") );
         return;
     }
 
-    // workaround added for text input.
     QDialog editDlg( this, 0, TRUE );
-    DateEntry *entry;
-    editDlg.setCaption( tr("Edit Event") );
-    QVBoxLayout *vb = new QVBoxLayout( &editDlg );
-    QScrollView *sv = new QScrollView( &editDlg, "scrollview" );
-    sv->setResizePolicy( QScrollView::AutoOneFit );
-    // KLUDGE!!!
-    sv->setHScrollBarMode( QScrollView::AlwaysOff );
-    vb->addWidget( sv );
-    entry = new DateEntry( onMonday, e, ampm, &editDlg, "editor" );
-    entry->timezone->setEnabled( FALSE );
-    sv->addChild( entry );
+    DateEntry *entry = setupEditDlg(editDlg, e, tr("Edit Event"));
 
     while ( QPEApplication::execDialog( &editDlg ) ) {
         Event newEv = entry->event();
         if(newEv.description().isEmpty() && newEv.notes().isEmpty() )
             break;
-        newEv.setUid(e.uid()); // FIXME: Hack not to clear uid
         QString error = checkEvent(newEv);
         if (!error.isNull()) {
             if (QMessageBox::warning(this, tr("error box"), error, tr("Fix it"), tr("Continue"), 0, 0, 1) == 0) continue;
-    }
-    db->editEvent(e, newEv);
-    emit newEvent();
-    break;
+        }
+
+        int result = 0;
+        if(date && (e.repeatType() != Event::NoRepeat)) {
+            result = QMessageBox::warning( this, tr("Calendar"), tr( "This is a recurring event.\n\nDo you want to apply changes to\nall occurrences or just this one?"), tr("All"), tr("This one"), tr("Cancel") );
+            if(result == 1) {
+                // Add an exception for the existing event
+                Event dupEvent(e);
+                dupEvent.addException(*date);
+                dupEvent.setUid(e.uid()); // FIXME: Hack not to clear uid
+                db->editEvent(e, dupEvent);
+                // Now create a copy of the event just for this day
+                newEv.assignUid();
+                newEv.setRepeatType(Event::NoRepeat);
+                newEv.setStart(QDateTime(*date, newEv.start().time()));
+                newEv.setEnd(QDateTime(*date, newEv.end().time()));
+                db->addEvent(newEv);
+            }
+            else if(result == 2)
+                continue;
+        }
+
+        if(result == 0) {
+            newEv.setUid(e.uid()); // FIXME: Hack not to clear uid
+            db->editEvent(e, newEv);
+        }
+
+        emit newEvent();
+        break;
     }
 }
 
-void DateBook::removeEvent( const Event &e )
+void DateBook::removeEvent( const EffectiveEvent &e )
 {
     if (syncing) {
         QMessageBox::warning( this, tr("Calendar"), tr( "Can not edit data, currently syncing") );
         return;
     }
 
-    QString strName = e.description();
+    QString strName = e.event().description();
 
     if ( !QPEMessageBox::confirmDelete( this, tr( "Calendar" ),strName ) )
-    return;
+        return;
 
-    db->removeEvent( e );
-    if ( views->visibleWidget() == dayView && dayView )
-        dayView->redraw();
+    int result = 0;
+    if(e.event().repeatType() != Event::NoRepeat) {
+        result = QMessageBox::warning( this, tr("Calendar"), tr( "This is a recurring event.\n\nDo you want to delete all\noccurrences or just this one?"), tr("All"), tr("This one"), tr("Cancel") );
+    }
 
+    if(result == 0) {
+        db->removeEvent( e.event() );
+        if ( views->visibleWidget() == dayView && dayView )
+            dayView->redraw();
+    }
+    else if(result == 1) {
+        Event dupEvent(e.event());
+        dupEvent.addException(e.date());
+        db->editEvent(e.event(), dupEvent);
+        emit newEvent();
+    }
 }
 
 void DateBook::addEvent( const Event &e )
@@ -552,8 +597,8 @@ void DateBook::initDay()
         dayView->setRowStyle( rowStyle );
         connect( this, SIGNAL( newEvent() ), dayView, SLOT( redraw() ) );
         connect( dayView, SIGNAL( newEvent() ),     this, SLOT( fileNew() ) );
-        connect( dayView, SIGNAL( removeEvent(const Event&) ), this, SLOT( removeEvent(const Event&) ) );
-        connect( dayView, SIGNAL( editEvent(const Event&) ), this, SLOT( editEvent(const Event&) ) );
+        connect( dayView, SIGNAL( removeEvent(const EffectiveEvent&) ), this, SLOT( removeEvent(const EffectiveEvent&) ) );
+        connect( dayView, SIGNAL( editEvent(const EffectiveEvent&) ), this, SLOT( editEvent(const EffectiveEvent&) ) );
         connect( dayView, SIGNAL( duplicateEvent(const Event&) ), this, SLOT( duplicateEvent(const Event&) ) );
         connect( dayView, SIGNAL( beamEvent(const Event&) ), this, SLOT( beamEvent(const Event&) ) );
         connect( dayView, SIGNAL(sigNewEvent(const QString&)), this, SLOT(slotNewEventFromKey(const QString&)) );
@@ -595,10 +640,10 @@ void DateBook::initWeekLst() {
         connect( weekLstView, SIGNAL( addEvent(const QDateTime&,const QDateTime&,const QString&, const QString&) ),
             this, SLOT( slotNewEntry(const QDateTime&,const QDateTime&,const QString&, const QString&) ) );
         connect( this, SIGNAL( newEvent() ), weekLstView, SLOT( redraw() ) );
-        connect( weekLstView, SIGNAL( editEvent(const Event&) ), this, SLOT( editEvent(const Event&) ) );
+        connect( weekLstView, SIGNAL( editEvent(const EffectiveEvent&) ), this, SLOT( editEvent(const EffectiveEvent&) ) );
         connect( weekLstView, SIGNAL( duplicateEvent( const Event & ) ), this, SLOT( duplicateEvent( const Event & ) ) );
         connect( weekLstView, SIGNAL( beamEvent(const Event&) ), this, SLOT( beamEvent(const Event&) ) );
-        connect( weekLstView, SIGNAL( removeEvent( const Event & ) ), this, SLOT( removeEvent( const Event & ) ) );
+        connect( weekLstView, SIGNAL( removeEvent( const EffectiveEvent & ) ), this, SLOT( removeEvent( const EffectiveEvent & ) ) );
     }
 }
 
@@ -742,13 +787,21 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
                 needShow = TRUE;
             }
         }
-    }   else if (msg == "editEvent(int)") {
+    } else if (msg == "editEvent(int,QDate)") {
         /* simple copy from receive */
         QDataStream stream(data,IO_ReadOnly);
-    int uid;
-    stream >> uid;
-    Event e=db->eventByUID(uid);
-    editEvent(e);
+        int uid;
+        QDate date;
+        stream >> uid >> date;
+        Event e=db->eventByUID(uid);
+        editEvent(e, &date);
+    } else if (msg == "editEvent(int)") {
+        /* simple copy from receive */
+        QDataStream stream(data,IO_ReadOnly);
+        int uid;
+        stream >> uid;
+        Event e=db->eventByUID(uid);
+        editEvent(e, NULL);
     } else if (msg == "viewDefault(QDate)"){
         /* simple copy from receive */
         QDataStream stream(data,IO_ReadOnly);
@@ -756,7 +809,7 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
         stream >> day;
         viewDefault(day);
         needShow = true;
-     }
+    }
 
     if ( needShow ) {
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)

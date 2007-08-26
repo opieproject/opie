@@ -133,18 +133,18 @@ QString DateBookEvent::differDate( QDate date ) {
 /**
  * starts the edit dialog as known from datebook
  */
-void DateBookEvent::editEventSlot( const Event &e ) {
+void DateBookEvent::editEventSlot( const EffectiveEvent &e ) {
 
     if ( ODevice::inst()->system() == System_Zaurus ) {
         QCopEnvelope env( "QPE/Application/datebook", "raise()" );
     } else {
-        QCopEnvelope env( "QPE/Application/datebook", "editEvent(int)" );
-        env << e.uid();
+        QCopEnvelope env( "QPE/Application/datebook", "editEvent(int,QDate)" );
+        env << e.event().uid() << e.date();
     }
 }
 
 
 void DateBookEvent::editMe() {
-    emit editEvent( event.event() );
+    emit editEvent( event );
 }
 

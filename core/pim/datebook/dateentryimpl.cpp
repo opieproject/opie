@@ -141,6 +141,7 @@ DateEntry::DateEntry( bool startOnMonday, const Event &event, bool whichClock,
         cmdRepeat->setText( tr("Repeat...") );
     }
     setRepeatLabel();
+    exceptions = event.exceptionsStr();
 }
 
 void DateEntry::setDates( const QDateTime& s, const QDateTime& e )
@@ -476,6 +477,8 @@ Event DateEntry::event()
     ev.setNotes( noteStr );
 
                 //cout << "Start: " << comboStart->currentText() << endl;
+
+    ev.setExceptionsStr(exceptions);
 
     return ev;
 }
