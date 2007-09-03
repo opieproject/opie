@@ -868,10 +868,8 @@ void DateBookDB::loadFile( const QString &strFile )
             case FRWeekdays:
                     // QtopiaDesktop 1.6 sometimes creates 'rweekdays="0"'
                     // when it goes mad. This causes datebook to crash.. (se)
-                    if ( value.toInt() != 0 )
-                            rp.days = value.toInt();
-                    else
-                            rp.days = 1;
+                    // If the value is 0 it is fixed up later (see further down in this procedure).
+                    rp.days = value.toInt();
                 break;
             case FRPosition:
                 rp.position = value.toInt();
@@ -921,7 +919,8 @@ void DateBookDB::loadFile( const QString &strFile )
         // "post processing" (dates, times, alarm, recurrence)
 
         // other half of 1169 fixlet without getting into regression
-        // if rp.days == 0 and rp.type == Event::Weekly
+        // if rp.days == 0 and rp.type == Event::Weekly then set rp.days to
+        // be the start day of the event
         if ( rp.type == Event::Weekly && rp.days == 0 )
             rp.days = Event::day( e.start().date().dayOfWeek() );
 
