@@ -11,3 +11,4 @@ clean:
 	done
 
 all install ipk lupdate lrelease opie-lupdate opie-lrelease:
+	true
