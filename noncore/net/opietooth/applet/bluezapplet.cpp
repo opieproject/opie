@@ -62,17 +62,12 @@ namespace OpieTooth {
     BluezApplet::BluezApplet( QWidget *parent, const char *name ) : QWidget( parent, name ) {
         setFixedHeight( AppLnk::smallIconSize() );
         setFixedWidth( AppLnk::smallIconSize() );
-#if OPIE_VERSION < 102010
-        bluezOnPixmap = Resource::loadPixmap( "bluetoothapplet/bluezon" );
-        bluezOffPixmap = Resource::loadPixmap( "bluetoothapplet/bluezoff" );
-        bluezDiscoveryOnPixmap = Resource::loadPixmap( "bluetoothapplet/magglass.png" );
-        bluezReceiveOnPixmap = Resource::loadPixmap( "bluetoothapplet/receive.png" );
-#else
+
         bluezOnPixmap = OResource::loadImage( "bluetoothapplet/bluezon", OResource::SmallIcon );
         bluezOffPixmap = OResource::loadImage( "bluetoothapplet/bluezoff", Opie::Core::OResource::SmallIcon );
         bluezDiscoveryOnPixmap = OResource::loadImage( "bluetoothapplet/bluezondiscovery", Opie::Core::OResource::SmallIcon );
         bluezReceiveOnPixmap = OResource::loadImage( "bluetoothapplet/bluezonreceive", Opie::Core::OResource::SmallIcon );
-#endif
+
         startTimer(2000);
         btDevice = 0;
         btManager = 0;
@@ -154,11 +149,10 @@ namespace OpieTooth {
                 btDevice = new Device( "/dev/tts/1", "any", "921600" );
                 break;
 
-#if OPIE_VERSION >= 102010
             case Model_MyPal_716:
                 btDevice = new Device( "/dev/ttyS1", "bcsp", "921600" );
                 break;
-#endif
+
             case Model_HTC_Universal:
                 btDevice = new Device( "/dev/ttyS1", "texas", "115200" );
                 break;
@@ -366,17 +360,9 @@ namespace OpieTooth {
         odebug << "paint bluetooth pixmap" << oendl; 
 
         if (bluezactive) {
-#if OPIE_VERSION < 102010
-            p.drawPixmap( 0, -1,  bluezOnPixmap );
-#else
             p.drawPixmap( 0, 0,  bluezOnPixmap );
-#endif
         } else {
-#if OPIE_VERSION < 102010
-            p.drawPixmap( 0, -1,  bluezOffPixmap );
-#else
             p.drawPixmap( 0, 0,  bluezOffPixmap );
-#endif
         }
 
         if (bluezDiscoveryActive) {
