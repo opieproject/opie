@@ -55,20 +55,12 @@ RfcCommPopup::RfcCommPopup(const OpieTooth::Services& service,
                 this, SLOT( slotConnect() ) );
     }
 
-    /* foo action */
+    /* Bind action */
     a = new QAction(  );
     a->setText("Bind table");
     a->addTo( this );
     connect( a, SIGNAL( activated() ),
              this, SLOT( slotBind() ) );
-
-
-    /* bar action */
-    a = new QAction(  );
-    a->setText( "Bar" );
-    a->addTo( this );
-    connect( a, SIGNAL( activated() ),
-             this, SLOT( slotBar() ) );
 
 };
 
@@ -77,8 +69,7 @@ RfcCommPopup::~RfcCommPopup()
 {
     /*  delete m_con;
         delete m_dis;
-        delete m_foo;
-        delete m_bar; */
+        delete m_bind; */
 }
 
 
@@ -113,10 +104,3 @@ void RfcCommPopup::slotBind()
         rfcommAssign.saveConfig();
     }
 }
-
-
-void RfcCommPopup::slotBar()
-{
-    owarn << "slotBar" << oendl; 
-};
-

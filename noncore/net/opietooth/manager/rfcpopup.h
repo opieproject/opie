@@ -25,7 +25,6 @@ namespace OpieTooth {
         QAction* m_con;
         QAction* m_dis;
         QAction* m_bind;
-        QAction* m_bar;
         OpieTooth::BTDeviceItem *m_item;
         Services m_service;
         int procId; //Connection process number
@@ -33,7 +32,6 @@ namespace OpieTooth {
         void slotConnect();
         void slotDisconnect();
         void slotBind();
-        void slotBar();
     };
 };
 
