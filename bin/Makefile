@@ -1,3 +1,5 @@
+all install ipk lupdate lrelease opie-lupdate opie-lrelease:
+
 clean:
 	@for i in *; do \
 		test "$$i" == "CVS" && continue; \
@@ -10,5 +12,3 @@ clean:
 		rm $$i; \
 	done
 
-all install ipk lupdate lrelease opie-lupdate opie-lrelease:
-	true
