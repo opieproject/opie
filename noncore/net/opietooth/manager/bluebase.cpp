@@ -351,7 +351,7 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
 
     if ( static_cast<BTListItem*>( item )->type() == "device")
     {
-        QPopupMenu *groups = new QPopupMenu();
+        // QPopupMenu *groups = new QPopupMenu();
 
         menu->insertItem( static_cast<BTDeviceItem*>( item )->name(), 0 );
         menu->insertSeparator( 1 );
@@ -405,12 +405,13 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
             owarn << "Empty" << oendl;
         }
 
+        int noactionitem = -1;
         if ( popup == 0l )
         {
             owarn << "factory returned 0l" << oendl;
             popup = new QPopupMenu();
+            noactionitem = popup->insertItem( tr("No actions"),  2);
         }
-        int test1 = popup->insertItem( tr("Test1:"),  2);
 
         int ret = popup->exec( point );
         owarn << "returned from exec() " << oendl;
@@ -418,7 +419,7 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         {
             ;
         }
-        else if ( ret == test1 )
+        else if ( ret == noactionitem )
         {
             ;
         }
