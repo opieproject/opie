@@ -130,7 +130,6 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     writeToHciConfig();
     addConnectedDevices();
     readSavedDevices();
-    addServicesToDevices();
     QTimer::singleShot( 3000, this, SLOT( addServicesToDevices() ) );
     forwarder = NULL;
 }
@@ -329,6 +328,7 @@ void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices )
         // look if device is avail. atm, async
         deviceActive( (*it) );
     }
+    addServicesToDevices();
 }
 
 
