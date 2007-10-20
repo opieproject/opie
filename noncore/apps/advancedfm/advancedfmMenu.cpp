@@ -28,6 +28,7 @@ using namespace Opie::Core;
 #include <qpopupmenu.h>
 #include <qlistview.h>
 #include <qlabel.h>
+#include <qdatastream.h>
 
 /* STD */
 
@@ -547,6 +548,7 @@ bool AdvancedFm::copyDirectory( const QString & src, const QString & dest ) {
 
 bool AdvancedFm::copyFile( const QString & src, const QString & dest ) {
 		if(QFileInfo(src).isDir()) {
+				odebug << "copyFile: source is a directory" << oendl;
 				if( copyDirectory( src, dest )) {
 //						setOtherTabCurrent();
 						rePopulate();
@@ -556,55 +558,47 @@ bool AdvancedFm::copyFile( const QString & src, const QString & dest ) {
 						return false;
 		}
 
+    QFile srcFile(src);
+    if(!srcFile.open( IO_ReadOnly )) {
+        odebug << "copyFile: srcfile open failed" << oendl;
+        return false;
+    }
 
-		bool success = true;
+    QFile destFile(dest);
+    if(!destFile.open( IO_WriteOnly )) {
+        odebug << "copyFile: destfile open failed" << oendl;
+        srcFile.close();
+        return false;
+    }
+
+    const int BUFFER_SIZE = 1024;
+
+    Q_INT8 buffer[BUFFER_SIZE];
+
+    QDataStream srcStream(&srcFile);
+    QDataStream destStream(&destFile);
+
+    while(!srcStream.atEnd()) {
+        int i = 0;
+        while(!srcStream.atEnd() && i < BUFFER_SIZE) {
+            srcStream >> buffer[i];
+            i++;
+        }
+        for(int k = 0; k < i; k++) {
+            destStream << buffer[k];
+        }
+    }
+
+    srcFile.close();
+    destFile.close();
+
+		// Set file permissions
 		struct stat status;
-		QFile srcFile(src);
-		QFile destFile(dest);
-		int err=0;
-		int read_fd=0;
-		int write_fd=0;
-		struct stat stat_buf;
-		off_t offset = 0;
-		if(!srcFile.open( IO_ReadOnly|IO_Raw)) {
-//         owarn << "open failed" << oendl;
-				return success = false;
-		}
-		read_fd = srcFile.handle();
-		if(read_fd != -1) {
-				fstat (read_fd, &stat_buf);
-				if( !destFile.open( IO_WriteOnly|IO_Raw ) ) {
-//       owarn << "destfile open failed" << oendl;
-						return success = false;
-				}
-				write_fd = destFile.handle();
-				if(write_fd != -1) {
-						err = sendfile(write_fd, read_fd, &offset, stat_buf.st_size);
-						if( err == -1) {
-								QString msg;
-								switch(errno) {
-									case EBADF : msg = "The input file was not opened for reading or the output file was not opened for writing. ";
-									case EINVAL: msg = "Descriptor is not valid or locked. ";
-									case ENOMEM: msg = "Insufficient memory to read from in_fd.";
-									case EIO: msg = "Unspecified error while reading from in_fd.";
-								};
-								success = false;
-//              owarn << msg << oendl;
-						}
-				} else {
-						success = false;
-				}
-		} else {
-				success = false;
-		}
-		srcFile.close();
-		destFile.close();
-			// Set file permissions
 		if( stat( QFile::encodeName(src), &status ) == 0 )  {
 				chmod( QFile::encodeName(dest), status.st_mode );
     }
 
-		return success;
+		return true;
 }
 
 void AdvancedFm::runCommand() {
