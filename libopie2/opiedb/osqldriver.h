@@ -77,7 +77,7 @@ public:
     /**
      * Get a list of tables
      */
-    virtual OSQLTable::ValueList tables() const = 0l;
+    virtual OSQLTable::ValueList tables() const = 0;
     virtual bool sync();
 
 
