@@ -41,9 +41,9 @@ using Opie::OPimTodo;
 namespace Todo{
     class MainWindow;
     struct QuickEditBase {
-        virtual OPimTodo todo()const = 0l;
-        virtual QSignal* signal() = 0l;
-        virtual QWidget* widget() = 0l;
+        virtual OPimTodo todo()const = 0;
+        virtual QSignal* signal() = 0;
+        virtual QWidget* widget() = 0;
     };
     /*
      * this is my second try
