@@ -180,46 +180,56 @@ bool SyncAuthentication::checkPassword( const QString& password )
     cfg.setGroup("SyncMode");
     int mode = cfg.readNumEntry("Mode", 0x02 );
 
-    //No pass word needed if the user really needs it
     if (mode & 0x04) {
-        QMessageBox unauth(
-            tr("Sync Connection"),
-            tr("<qt><p>An unauthorized system is requesting access to this device."
-               "<p>You chose IntelliSync so you may I allow or deny this connection.</qt>" ),
-            QMessageBox::Warning,
-            QMessageBox::Ok, QMessageBox::Cancel|QMessageBox::Default, QMessageBox::NoButton,
-            0, QString::null, TRUE, WStyle_StaysOnTop);
-        unauth.setButtonText(QMessageBox::Ok, tr("Allow" ) );
-        unauth.setButtonText(QMessageBox::Cancel, tr("Deny"));
-        switch( unauth.exec() ) {
-        case QMessageBox::Ok:
+        // For IntelliSync we ignore the password
+        cfg.setGroup("Sync");
+        if( cfg.readBoolEntry( "IntelliSyncIgnorePw", false ) ) {
             return TRUE;
-            break;
-        case QMessageBox::Cancel:
-        default:
-            denials++;
-            lastdenial=now;
-            return FALSE;
+        }
+        else {
+            QMessageBox unauth(
+                tr("Sync Connection"),
+                tr("<qt><p>An unauthorized system is requesting access to this device."
+                "<p>You chose IntelliSync so you may allow or deny this connection.</qt>" ),
+                QMessageBox::Warning,
+                QMessageBox::Ok, QMessageBox::Cancel|QMessageBox::Default, QMessageBox::NoButton,
+                0, QString::null, TRUE, WStyle_StaysOnTop);
+            unauth.setButtonText(QMessageBox::Ok, tr("Allow" ) );
+            unauth.setButtonText(QMessageBox::Cancel, tr("Deny"));
+            switch( unauth.exec() ) {
+            case QMessageBox::Ok:
+                cfg.writeEntry( "IntelliSyncIgnorePw", true );
+                return TRUE;
+                break;
+            case QMessageBox::Cancel:
+            default:
+                denials++;
+                lastdenial=now;
+                return FALSE;
+            }
         }
     }
 
-    // Detect old Qtopia Desktop (no password) and fail
+    // Detect very old Qtopia Desktop versions (which do not supply a password)
+    // or some other sync software with bad settings, and fail
     if ( password.isEmpty() ) {
         if ( denials < 3 || now > lastdenial+600 ) {
             QMessageBox unauth(
-            tr("Sync Connection"),
-            tr("<p>An unauthorized system is requesting access to this device."
-                "<p>If you are using a version of Qtopia Desktop older than 1.5.1, "
-                "please upgrade or change the security setting to use IntelliSync." ),
-            QMessageBox::Warning,
-            QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
-            0, QString::null, TRUE, WStyle_StaysOnTop);
+                tr("Sync Connection"),
+                tr("<p>An unauthorized system is requesting access to this device with no password."
+                    "<p>If you are using a version of Qtopia Desktop older than 1.5.1, "
+                    "please upgrade.<p>Otherwise, check that the correct sync application "
+                    "is selected in the Security settings, and ensure that a sync "
+                    "password has been set in the sync application if it allows one." ),
+                QMessageBox::Warning,
+                QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
+                0, QString::null, TRUE, WStyle_StaysOnTop);
             unauth.setButtonText(QMessageBox::Cancel, tr("Deny"));
             unauth.exec();
 
             denials++;
             lastdenial=now;
-         }
+        }
         return FALSE;
     }
 
