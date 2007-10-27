@@ -176,6 +176,13 @@ bool SyncAuthentication::checkPassword( const QString& password )
     static int denials=0;
     int now = time(0);
 
+    // Use a lock variable to prevent denial-of-service (ie, flooding with
+    // login attempts)
+    static int lock=0;
+    if ( lock ) return FALSE;
+
+    ++lock;
+
     Config cfg("Security");
     cfg.setGroup("SyncMode");
     int mode = cfg.readNumEntry("Mode", 0x02 );
@@ -184,6 +191,7 @@ bool SyncAuthentication::checkPassword( const QString& password )
         // For IntelliSync we ignore the password
         cfg.setGroup("Sync");
         if( cfg.readBoolEntry( "IntelliSyncIgnorePw", false ) ) {
+            lock--;
             return TRUE;
         }
         else {
@@ -199,12 +207,14 @@ bool SyncAuthentication::checkPassword( const QString& password )
             switch( unauth.exec() ) {
             case QMessageBox::Ok:
                 cfg.writeEntry( "IntelliSyncIgnorePw", true );
+                lock--;
                 return TRUE;
                 break;
             case QMessageBox::Cancel:
             default:
                 denials++;
                 lastdenial=now;
+                lock--;
                 return FALSE;
             }
         }
@@ -230,15 +240,9 @@ bool SyncAuthentication::checkPassword( const QString& password )
             denials++;
             lastdenial=now;
         }
+        lock--;
         return FALSE;
     }
-
-    // Second, check sync password...
-
-    static int lock=0;
-    if ( lock ) return FALSE;
-
-    ++lock;
 
     // Old Qtopia Desktop versions send "rootme" as a prefix, and newer versions use "Qtopia".
     // (other software such as OpenSync just sends the password as set by the user)
