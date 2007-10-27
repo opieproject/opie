@@ -240,63 +240,67 @@ bool SyncAuthentication::checkPassword( const QString& password )
 
     ++lock;
 
-    /*
-     *  we need to support old Sync software and QtopiaDesktop
-     */
-    if ( password.left(6) == "Qtopia" || password.left(6) == "rootme" ) {
-        cfg.setGroup("Sync");
-        QStringList pwds = cfg.readListEntry("Passwords",' ');
-        for (QStringList::ConstIterator it=pwds.begin(); it!=pwds.end(); ++it) {
-#ifndef Q_OS_WIN32
-            QString cpassword = QString::fromLocal8Bit(
-            crypt( password.mid(8).local8Bit(), (*it).left(2).latin1() ) );
-#else
-            // ### revise
-            QString cpassword("");
-#endif
-            if ( *it == cpassword ) {
-                lock--;
-                return TRUE;
-            }
-        }
+    // Old Qtopia Desktop versions send "rootme" as a prefix, and newer versions use "Qtopia".
+    // (other software such as OpenSync just sends the password as set by the user)
+    QString lpassword;
+    if ( password.left(6) == "Qtopia" || password.left(6) == "rootme" )
+        lpassword = password.mid(8);
+    else
+        lpassword = password;
 
-        // Unrecognized system. Be careful...
-        QMessageBox unrecbox(
-            tr("Sync Connection"),
-            tr( "<p>An unrecognized system is requesting access to this device."
-            "<p>If you have just initiated a Sync for the first time, this is normal."),
-            QMessageBox::Warning,
-            QMessageBox::Cancel, QMessageBox::Yes, QMessageBox::NoButton,
-            0, QString::null, TRUE, WStyle_StaysOnTop);
-        unrecbox.setButtonText(QMessageBox::Cancel, tr("Deny"));
-        unrecbox.setButtonText(QMessageBox::Yes, tr("Allow"));
-
-        if ( (denials > 2 && now < lastdenial+600)
-            || unrecbox.exec() != QMessageBox::Yes) 
-        {
-            denials++;
-            lastdenial=now;
-            lock--;
-            return FALSE;
-        } else {
-            const char salty[]="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/.";
-            char salt[2];
-            salt[0]= salty[rand() % (sizeof(salty)-1)];
-            salt[1]= salty[rand() % (sizeof(salty)-1)];
+    cfg.setGroup("Sync");
+    QStringList pwds = cfg.readListEntry("Passwords",' ');
+    for (QStringList::ConstIterator it=pwds.begin(); it!=pwds.end(); ++it) {
 #ifndef Q_OS_WIN32
-            QString cpassword = QString::fromLocal8Bit(
-            crypt( password.mid(8).local8Bit(), salt ) );
+        QString cpassword = QString::fromLocal8Bit(
+            crypt( lpassword.local8Bit(), (*it).left(2).latin1() ) );
 #else
-            //### revise
-            QString cpassword("");
+        // ### revise
+        QString cpassword("");
 #endif
-            denials=0;
-            pwds.prepend(cpassword);
-            cfg.writeEntry("Passwords",pwds,' ');
+        if ( *it == cpassword ) {
             lock--;
             return TRUE;
         }
     }
+
+    // Unrecognized system. Be careful...
+    QMessageBox unrecbox(
+        tr("Sync Connection"),
+        tr( "<p>An unrecognized system is requesting access to this device."
+        "<p>If you have just initiated a Sync for the first time, this is normal."),
+        QMessageBox::Warning,
+        QMessageBox::Cancel, QMessageBox::Yes, QMessageBox::NoButton,
+        0, QString::null, TRUE, WStyle_StaysOnTop);
+    unrecbox.setButtonText(QMessageBox::Cancel, tr("Deny"));
+    unrecbox.setButtonText(QMessageBox::Yes, tr("Allow"));
+
+    if ( (denials > 2 && now < lastdenial+600)
+        || unrecbox.exec() != QMessageBox::Yes)
+    {
+        denials++;
+        lastdenial=now;
+        lock--;
+        return FALSE;
+    } else {
+        const char salty[]="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/.";
+        char salt[2];
+        salt[0]= salty[rand() % (sizeof(salty)-1)];
+        salt[1]= salty[rand() % (sizeof(salty)-1)];
+#ifndef Q_OS_WIN32
+        QString cpassword = QString::fromLocal8Bit(
+            crypt( lpassword.local8Bit(), salt ) );
+#else
+        //### revise
+        QString cpassword("");
+#endif
+        denials=0;
+        pwds.prepend(cpassword);
+        cfg.writeEntry("Passwords",pwds,' ');
+        lock--;
+        return TRUE;
+    }
+
     lock--;
 
     return FALSE;
