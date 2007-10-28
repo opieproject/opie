@@ -76,6 +76,7 @@ private slots:
     void applyDailyAlarm();
     void scheduleApplyDailyAlarm();
     void slotBrowseMp3File();
+    void slotTestAlarmSound();
 
 protected:
     QDateTime nextAlarm( int h, int m );

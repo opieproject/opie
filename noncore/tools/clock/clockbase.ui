@@ -11,16 +11,13 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>287</width>
-            <height>389</height>
+            <width>283</width>
+            <height>418</height>
         </rect>
     </property>
     <property stdset="1">
         <name>caption</name>
         <string>Clock</string>
-    </property>
-    <property>
-        <name>layoutMargin</name>
     </property>
     <vbox>
         <property stdset="1">
@@ -516,11 +513,11 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>-1</number>
+                        <number>11</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>-1</number>
+                        <number>6</number>
                     </property>
                     <widget>
                         <class>QGroupBox</class>
@@ -904,7 +901,7 @@
                                 <class>QLayoutWidget</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>Layout6</cstring>
+                                    <cstring>Layout10</cstring>
                                 </property>
                                 <hbox>
                                     <property stdset="1">
@@ -931,6 +928,24 @@
                                         <property stdset="1">
                                             <name>text</name>
                                             <string>...</string>
+                                        </property>
+                                    </widget>
+                                    <widget>
+                                        <class>QPushButton</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>sndTest</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>sizePolicy</name>
+                                            <sizepolicy>
+                                                <hsizetype>1</hsizetype>
+                                                <vsizetype>1</vsizetype>
+                                            </sizepolicy>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>Test</string>
                                         </property>
                                     </widget>
                                 </hbox>
@@ -1005,10 +1020,22 @@
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
+        <sender>sndCheck</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>sndTest</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
         <sender>sndChoose</sender>
         <signal>clicked()</signal>
         <receiver>ClockBase</receiver>
         <slot>slotBrowseMp3File()</slot>
+    </connection>
+    <connection>
+        <sender>sndTest</sender>
+        <signal>clicked()</signal>
+        <receiver>ClockBase</receiver>
+        <slot>slotTestAlarmSound()</slot>
     </connection>
     <connection>
         <sender>sndCheck</sender>
@@ -1018,5 +1045,6 @@
     </connection>
     <slot access="public">scheduleApplyDailyAlarm()</slot>
     <slot access="protected">slotBrowseMp3File()</slot>
+    <slot access="protected">slotTestAlarmSound()</slot>
 </connections>
 </UI>

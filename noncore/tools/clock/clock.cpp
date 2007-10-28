@@ -78,13 +78,18 @@ static void toggleScreenSaver( bool on )
     e << ( on ? QPEApplication::Enable : QPEApplication::DisableSuspend );
 }
 
+static void playFile( QString file )
+{
+    QCopEnvelope e( "QPE/Application/opieplayer", "play(QString)" );
+    e << file;
+}
+
 static void startPlayer()
 {
     Config config( "qpe" );
     config.setGroup( "Time" );
     sleep(15);
-    QCopEnvelope e( "QPE/Application/opieplayer", "setDocument(QString)" );
-    e << config.readEntry( "mp3File", "" );
+    playFile( config.readEntry( "mp3File", "" ) );
 }
 
 class MySpinBox : public QSpinBox
@@ -286,6 +291,7 @@ Clock::Clock( QWidget * parent, const char *, WFlags f )
     sndGroup->setEnabled( alarm );
     sndCheck->setChecked( sound );
     sndChoose->setEnabled( sound );
+    sndTest->setEnabled( sound );
     sndFileName->setEnabled( sound );
 
     // FIXME ODP migrate to own config class.. merge config options
@@ -798,11 +804,15 @@ void Clock::slotBrowseMp3File() {
     QStringList text;
     text << "audio/*";
     map.insert(tr("Audio"), text );
-    QString str = Opie::Ui::OFileDialog::getOpenFileName( 2, QPEApplication::qpeDir() + "sounds/", QString::null, map);
+    QString str = Opie::Ui::OFileDialog::getOpenFileName( 2, QPEApplication::qpeDir() + "sounds", QString::null, map);
     if(!str.isEmpty() ) {
         config.writeEntry("mp3Alarm",1);
         config.writeEntry("mp3File",str);
         sndFileName->setText( str );
         scheduleApplyDailyAlarm();
     }
+}
+
+void Clock::slotTestAlarmSound() {
+    playFile( sndFileName->text() );
 }
