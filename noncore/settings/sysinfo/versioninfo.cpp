@@ -157,10 +157,27 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
                 case Model_iPAQ_H31xx:
                 case Model_iPAQ_H36xx:
                 case Model_iPAQ_H37xx:
+                    modelPixmap += "ipaq3600";
+                    break;
                 case Model_iPAQ_H38xx:
                 case Model_iPAQ_H39xx:
+                    modelPixmap += "ipaqh3800h3900";
+                    break;
                 case Model_iPAQ_H5xxx:
-                    modelPixmap += "ipaq3600";
+                    modelPixmap += "ipaqh5000";
+                    break;
+                case Model_iPAQ_H22xx:
+                    modelPixmap += "ipaqh2200";
+                    break;
+                case Model_iPAQ_HX4700:
+                    modelPixmap += "ipaqhx4700";
+                    break;
+                case Model_iPAQ_H4xxx:
+                    modelPixmap += "ipaqh4100";
+                    break;
+                case Model_iPAQ_H191x:
+                case Model_iPAQ_H1940:
+                    modelPixmap += "ipaqh1900";
                     break;
                 /* JORNADA */
                 case Model_Jornada_56x:
