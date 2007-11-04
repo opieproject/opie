@@ -382,23 +382,31 @@ void ZoneMap::showCity( ZoneField *city )
     // time
     QString strCity = pLast->city();
     QString strCountry = pLast->country();
-    // Display the time at this location by setting the environment timezone
-    // getting the current time [there] and then swapping back the variable
-    // so no one notices...
-    QString strSave;
-    char *p = getenv( "TZ" );
-    if ( p ) {
-        strSave = p;
+    QString newtz = strCountry + strCity;
+    if(!QFile::exists("/usr/share/zoneinfo/" + newtz)) {
+        lblCity->setText( strCity.replace( QRegExp("_"), " ") + "\n" +
+                        tr("Timezone unavailable"));
+        lblCity->setMinimumSize( lblCity->sizeHint() );
     }
-    // set the timezone :)
-    setenv( "TZ", strCountry + strCity, true );
-    lblCity->setText( strCity.replace( QRegExp("_"), " ") + "\n" +
-              TimeString::shortTime( ampm ) );
-    lblCity->setMinimumSize( lblCity->sizeHint() );
-    // undue our damage...
-    unsetenv( "TZ" );
-    if ( p )
-        setenv( "TZ", strSave, true );
+    else {
+        // Display the time at this location by setting the environment timezone
+        // getting the current time [there] and then swapping back the variable
+        // so no one notices...
+        QString strSave;
+        char *p = getenv( "TZ" );
+        if ( p ) {
+            strSave = p;
+        }
+        // set the timezone :)
+        setenv( "TZ", newtz, true );
+        lblCity->setText( strCity.replace( QRegExp("_"), " ") + "\n" +
+                TimeString::shortTime( ampm ) );
+        lblCity->setMinimumSize( lblCity->sizeHint() );
+        // undue our damage...
+        unsetenv( "TZ" );
+        if ( p )
+            setenv( "TZ", strSave, true );
+    }
     // Now decide where to move the label, x & y can be reused
     int tmpx, tmpy, x, y;
     zoneToWin( pLast->x(), pLast->y(), tmpx, tmpy );

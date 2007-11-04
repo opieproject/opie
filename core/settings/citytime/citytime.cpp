@@ -37,6 +37,7 @@
 #include <qmessagebox.h>
 #include <qtoolbutton.h>
 #include <qlayout.h>
+#include <qfile.h>
 
 /* STD */
 #include <stdlib.h>
@@ -183,12 +184,17 @@ void CityTime::showTime( void )
     // traverse the list...
     for ( i = 0, itTime.toFirst(); i < CITIES; i++, ++itTime) {
         if ( !strCityTz[i].isNull() ) {
-            if ( setenv( "TZ", strCityTz[i], true ) == 0 ) {
-                itTime.current()->setText( TimeString::shortTime( bWhichClock ) );
-            } else {
-                QMessageBox::critical( this, tr( "Time Changing" ),
-                tr( "There was a problem setting timezone %1" )
-                .arg( QString::number( i + 1 ) ) );
+            if(!QFile::exists("/usr/share/zoneinfo/" + strCityTz[i])) {
+                    itTime.current()->setText( tr("unavailable") );
+            }
+            else {
+                if ( setenv( "TZ", strCityTz[i], true ) == 0 ) {
+                    itTime.current()->setText( TimeString::shortTime( bWhichClock ) );
+                } else {
+                    QMessageBox::critical( this, tr( "Time Changing" ),
+                    tr( "There was a problem setting timezone %1" )
+                    .arg( QString::number( i + 1 ) ) );
+                }
             }
         }
     }
