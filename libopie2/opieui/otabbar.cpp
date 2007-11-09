@@ -85,3 +85,12 @@ void OTabBar::paintLabel( QPainter* p, const QRect& br, QTab* t, bool has_focus 
         p->drawText( tr, AlignCenter | ShowPrefix, t->label );
     }
 }
+
+void OTabBar::forceSelectedTab()
+{
+    /* This is a hack to make sure the current tab is visible after
+       the layout gets changed by OTabWidget. What we really want
+       here is a call to QTabWidget::makeVisible, however that is
+       private (argh!!) so we have to do it this way. */
+    resizeEvent( NULL );
+}

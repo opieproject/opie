@@ -63,6 +63,8 @@ public:
      */
     OTabBar( QWidget * = 0, const char * = 0 );
 
+    void forceSelectedTab();
+
 protected:
     /**
      * @fn paintLabel( QPainter* p, const QRect& br , QTab* t, bool  has_focus)const

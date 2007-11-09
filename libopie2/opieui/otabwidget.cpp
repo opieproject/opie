@@ -401,6 +401,9 @@ void OTabWidget::selectTab( OTabInfo *tab )
             m_tabBar->setGeometry( QMAX(0, lw-2), height() - t.height() - lw, t.width(), t.height() );
         else
             m_tabBar->setGeometry( QMAX(0, lw-2), 0, t.width(), t.height() );
+
+        // Now force the view back to show the selected tab (setupLayout() above jumps to the left)
+        m_tabBar->forceSelectedTab();
     }
     else if ( m_tabBarStyle == TextTab )
     {
