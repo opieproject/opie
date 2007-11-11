@@ -178,6 +178,10 @@ void iPAQ::init(const QString& model)
         d->m_model = Model_iPAQ_HX4700;
     else if ( d->m_modelstr == "H4000" )
         d->m_model = Model_iPAQ_H4xxx;
+    else if ( d->m_modelstr == "H4100" )
+        d->m_model = Model_iPAQ_H4xxx;
+    else if ( d->m_modelstr == "H4300" )
+        d->m_model = Model_iPAQ_H4xxx;
 
     else
         d->m_model = Model_Unknown;
@@ -198,8 +202,10 @@ void iPAQ::init(const QString& model)
         case Model_iPAQ_H36xx:
         case Model_iPAQ_H37xx:
         case Model_iPAQ_H39xx:
-        default:
             d->m_rotation = Rot270;
+        break;
+        default:
+            d->m_rotation = Rot0;
             break;
 
         }
