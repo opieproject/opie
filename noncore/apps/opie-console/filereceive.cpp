@@ -134,8 +134,11 @@ void FileReceive::setupChild() {
      *      STDOUT_FILENO
      *      STDERR_FILENO
      */
-    dup2( m_fd, STDIN_FILENO );
-    dup2( m_fd, STDOUT_FILENO );
+    if (m_fd >= 0) {
+        dup2( m_fd, STDIN_FILENO );
+        dup2( m_fd, STDOUT_FILENO );
+    }
+
     dup2( m_comm[1], STDERR_FILENO );
 }
 void FileReceive::slotRead() {
@@ -158,7 +161,9 @@ void FileReceive::slotExec() {
     close( m_term[1] );
     close( m_comm[0] );
     close( m_comm[1] );
-    layer()->closeRawIO(m_fd);
+    if (m_fd >= 0)
+        layer()->closeRawIO(m_fd);
+
     emit received(QString::null);
 
 }
