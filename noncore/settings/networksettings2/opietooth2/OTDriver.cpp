@@ -263,7 +263,7 @@ QString OTDriver::name() {
             arg( devname() )
           );
       } // ETIMEDOUT error is quite normal, device is down ... I think ! :)
-      strcpy(name,devname().latin1());
+      strncpy(name,devname().latin1(), 999);
     }
     return QString(name);
 }

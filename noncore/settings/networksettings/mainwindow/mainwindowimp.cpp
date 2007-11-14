@@ -226,7 +226,7 @@ void MainWindowImp::getAllInterfaces()
         //    int family;
         i = NULL;
 
-        strcpy(ifr.ifr_name, (*it).latin1());
+        strncpy(ifr.ifr_name, (*it).latin1(), 16);
 
         struct ifreq ifcopy;
         ifcopy = ifr;

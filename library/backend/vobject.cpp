@@ -1164,11 +1164,12 @@ static void writeAttrValue(OFile *fp, VObject *o)
 	if (pi && ((pi->flags & PD_INTERNAL) != 0)) return;
 	if ( includesUnprintable(o,TRUE) )
 	    appendsOFileEncCs(fp);
+
 	appendcOFile(fp,';');
 	appendsOFile(fp,NAME_OF(o));
-    } else {
+    } else
 	appendcOFile(fp,';');
-    }
+
     if (VALUE_TYPE(o)) {
 	appendcOFile(fp,'=');
 	writeValue(fp,o,0,TRUE);
@@ -1179,13 +1180,13 @@ static void writeGroup(OFile *fp, VObject *o)
 {
     char buf1[256];
     char buf2[256];
-    strcpy(buf1,NAME_OF(o));
+    strncpy(buf1,NAME_OF(o), 255);
     while ((o=isAPropertyOf(o,VCGroupingProp)) != 0) {
-	strcpy(buf2,STRINGZ_VALUE_OF(o));
+	strncpy(buf2,STRINGZ_VALUE_OF(o),255);
 	strcat(buf2,".");
-	strcat(buf2,buf1);
+	strncat(buf2,buf1,254-STRINGZ_VALUE_OF(o));
 	strcpy(buf1,buf2);
-	}
+    }
     appendsOFile(fp,buf1);
 }
 
@@ -1195,7 +1196,7 @@ static int inList(const char **list, const char *s)
     while (*list) {
 	if (qstricmp(*list,s) == 0) return 1;
 	list++;
-	}
+    }
     return 0;
 }
 

@@ -84,7 +84,8 @@ typedef enum {
   ERRPROX = 20, /* Bad proxy url */
   ERRDATE = 30, /* Bad date format */
   ERRDATA = 40, /* No data available */
-  ERRRANG = 50  /* No prices for this date range */
+  ERRRANG = 50, /* No prices for this date range */
+  ERRURL  = 60, /* Bad constructed url */
 
 } libstocks_return_code;
 

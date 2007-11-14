@@ -57,10 +57,14 @@ libstocks_return_code get_history_csv(char *symbol,
   
   char *test;
 
-  strcpy(url, url_history_beg);
-  strcat(url, symbol);
+  int ch_printed = snprintf(url, 80, "%s%s", url_history_beg, symbol);
+  if (ch_printed < 0 || ch_printed == 80)
+      return ERRURL;
 
-  strcpy(adate, date1);
+  if (strlen(date1) > 11) return ERRDATE;
+  strncpy(adate, date1, 11);
+  if (strlen(date1) > 10)
+      adate[11] = '\0';
 
   y1=strtok(adate, "/");
   if(!y1) return ERRDATE;
@@ -69,14 +73,15 @@ libstocks_return_code get_history_csv(char *symbol,
   d1 = strtok(NULL, "/");
   if(!m1) return ERRDATE;
 
-  strcat(url, "&a=");
-  strcat(url, m1);
-  strcat(url, "&b=");
-  strcat(url, d1);
-  strcat(url, "&c=");
-  strcat(url, y1);
+  ch_printed += snprintf(&(url[ch_printed]), 80 - ch_printed, "%s%s%s%s%s%s",
+			 "&a=", m1, "&b=", d1, "&c=", y1);
+  if (ch_print < 0 || ch_printed == 80)
+      return ERRURL;
 
-  strcpy(adate, date2);
+  if (strlen(date2) > 11) return ERRDATE;
+  strncpy(adate, date2, 11);
+  if (strlen(date2) > 10)
+      adate[11] = '\0';
 
   y2=strtok(adate, "/");
   if(!y2) return ERRDATE;
@@ -85,14 +90,12 @@ libstocks_return_code get_history_csv(char *symbol,
   d2 = strtok(NULL, "/");
   if(!d2) return ERRDATE;
 
-  strcat(url, "&d=");
-  strcat(url, m2);
-  strcat(url, "&e=");
-  strcat(url, d2);
-  strcat(url, "&f=");
-  strcat(url, y2);
-  strcat(url, "&g=d&q=q&y=0&x=.csv");
-  
+  ch_printed += snprintf(&(url[ch_printed]), 80 - ch_printed, "%s%s%s%s%s%s%s",
+			 "&d=", m2, "&e=", d2, "&f=", y2, "&g=d&q=q&y=0&x=.csv");
+
+  if (ch_print < 0)
+      return ERRURL;
+
   error=http_get(url, (char *)history_stocks_server, &data);
   if (error) return error;
 

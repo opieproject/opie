@@ -57,8 +57,7 @@ using namespace Opie::Core;
 Swapfile::Swapfile( QWidget *parent, const char *name, WFlags f )
     : QWidget( parent, name, f )
 {
-	if ( !QFile::exists( "/proc/swaps" ) )
-	{
+	if ( !QFile::exists( "/proc/swaps" ) ) {
 		QLabel *text = new QLabel( tr( "Swap disabled in kernel" ), this );
 		return;
 	}
@@ -107,31 +106,31 @@ Swapfile::Swapfile( QWidget *parent, const char *name, WFlags f )
 	swapStatusIcon = new QLabel(hb4);
 	swapStatus = new QLabel("", hb4);
 	hb4->setStretchFactor(swapStatus, 99);
-    vb->addWidget(hb4);
+	vb->addWidget(hb4);
 
-    connect(swapOn, SIGNAL(clicked()), this, SLOT(swapon()));
-    connect(swapOff, SIGNAL(clicked()), this, SLOT(swapoff()));
-    connect(cfRB, SIGNAL(clicked()), this, SLOT(cfsdchecked()));
-    connect(sdRB, SIGNAL(clicked()), this, SLOT(cfsdchecked()));
-    connect(ramRB, SIGNAL(clicked()), this, SLOT(cfsdchecked()));
-    connect(mkSwap, SIGNAL(clicked()), this, SLOT(makeswapfile()));
-    connect(rmSwap, SIGNAL(clicked()), this, SLOT(removeswapfile()));
+	connect(swapOn, SIGNAL(clicked()), this, SLOT(swapon()));
+	connect(swapOff, SIGNAL(clicked()), this, SLOT(swapoff()));
+	connect(cfRB, SIGNAL(clicked()), this, SLOT(cfsdchecked()));
+	connect(sdRB, SIGNAL(clicked()), this, SLOT(cfsdchecked()));
+	connect(ramRB, SIGNAL(clicked()), this, SLOT(cfsdchecked()));
+	connect(mkSwap, SIGNAL(clicked()), this, SLOT(makeswapfile()));
+	connect(rmSwap, SIGNAL(clicked()), this, SLOT(removeswapfile()));
 
 	cfRB->setEnabled(FALSE);
-    sdRB->setEnabled(FALSE);
+	sdRB->setEnabled(FALSE);
 
-    QCopChannel *pcmciaChannel = new QCopChannel("QPE/Card", this);
-    connect(pcmciaChannel, SIGNAL(received(const QCString&,const QByteArray&)), this, SLOT(cardnotify(const QCString&,const QByteArray&)));
-    QCopChannel *sdChannel = new QCopChannel("QPE/Card", this);
-    connect(sdChannel, SIGNAL(received(const QCString&,const QByteArray&)), this, SLOT(cardnotify(const QCString&,const QByteArray&)));
+	QCopChannel *pcmciaChannel = new QCopChannel("QPE/Card", this);
+	connect(pcmciaChannel, SIGNAL(received(const QCString&,const QByteArray&)), this, SLOT(cardnotify(const QCString&,const QByteArray&)));
+	QCopChannel *sdChannel = new QCopChannel("QPE/Card", this);
+	connect(sdChannel, SIGNAL(received(const QCString&,const QByteArray&)), this, SLOT(cardnotify(const QCString&,const QByteArray&)));
 
-    cardInPcmcia0 = FALSE;
-    cardInPcmcia1 = FALSE;
-    cardInSd = FALSE;
+	cardInPcmcia0 = FALSE;
+	cardInPcmcia1 = FALSE;
+	cardInSd = FALSE;
 
-    Swapfile::status();
-    Swapfile::getStatusPcmcia();
-    Swapfile::getStatusSd();
+	Swapfile::status();
+	Swapfile::getStatusPcmcia();
+	Swapfile::getStatusSd();
 }
 
 int Swapfile::exec(const QString& arg)
@@ -140,130 +139,129 @@ int Swapfile::exec(const QString& arg)
 }
 
 
-Swapfile::~Swapfile()
-{
-}
-
 void Swapfile::cardnotify(const QCString & msg, const QByteArray &)
 {
-    if (msg == "stabChanged()")
-	{
-        getStatusPcmcia();
-    }
+	if (msg == "stabChanged()")
+		getStatusPcmcia();
 	else if (msg == "mtabChanged()")
-	{
-        getStatusSd();
-	}
+		getStatusSd();
 }
 
 void Swapfile::getStatusPcmcia()
 {
+	bool cardWas0 = cardInPcmcia0;	// remember last state
+	bool cardWas1 = cardInPcmcia1;
 
-    bool cardWas0 = cardInPcmcia0;	// remember last state
-    bool cardWas1 = cardInPcmcia1;
+	QString fileName;
 
-    QString fileName;
+	// one of these 3 files should exist
+	if (QFile::exists("/var/run/stab"))
+		fileName = "/var/run/stab";
+	else if (QFile::exists("/var/state/pcmcia/stab"))
+		fileName = "/var/state/pcmcia/stab";
+	else
+		fileName = "/var/lib/pcmcia/stab";
 
-    // one of these 3 files should exist
-    if (QFile::exists("/var/run/stab")) {
-	fileName = "/var/run/stab";
-    } else if (QFile::exists("/var/state/pcmcia/stab")) {
-	fileName = "/var/state/pcmcia/stab";
-    } else {
-	fileName = "/var/lib/pcmcia/stab";
-    }
+	QFile f(fileName);
 
-    QFile f(fileName);
-
-    if (f.open(IO_ReadOnly)) {
-	QStringList list;
-	QTextStream stream(&f);
-	QString streamIn;
-	streamIn = stream.read();
-	list = QStringList::split("\n", streamIn);
-	for (QStringList::Iterator line = list.begin(); line != list.end();
-	     line++) {
-	    if ((*line).startsWith("Socket 0:")) {
-		if ((*line).startsWith("Socket 0: empty") && cardInPcmcia0) {
-		    cardInPcmcia0 = FALSE;
-		} else if (!(*line).startsWith("Socket 0: empty")
-			   && !cardInPcmcia0) {
-		    cardInPcmcia0 = TRUE;
+	if (f.open(IO_ReadOnly)) {
+		QStringList list;
+		QTextStream stream(&f);
+		QString streamIn;
+		streamIn = stream.read();
+		list = QStringList::split("\n", streamIn);
+		for (QStringList::Iterator line = list.begin();
+		     line != list.end(); line++)
+		{
+			if ((*line).startsWith("Socket 0:")) {
+				if ((*line).startsWith("Socket 0: empty") &&
+				    cardInPcmcia0)
+				{
+					cardInPcmcia0 = FALSE;
+				} else if (!(*line).startsWith("Socket 0: empty") &&
+					   !cardInPcmcia0)
+				{
+					cardInPcmcia0 = TRUE;
+				}
+			} else if ((*line).startsWith("Socket 1:")) {
+				if ((*line).startsWith("Socket 1: empty") &&
+				    cardInPcmcia1)
+				{
+					cardInPcmcia1 = FALSE;
+				} else if (!(*line).startsWith("Socket 1: empty") &&
+					   !cardInPcmcia1)
+				{
+					cardInPcmcia1 = TRUE;
+				}
+			}
 		}
-	    } else if ((*line).startsWith("Socket 1:")) {
-		if ((*line).startsWith("Socket 1: empty") && cardInPcmcia1) {
-		    cardInPcmcia1 = FALSE;
-		} else if (!(*line).startsWith("Socket 1: empty")
-			   && !cardInPcmcia1) {
-		    cardInPcmcia1 = TRUE;
+		f.close();
+
+		if (cardWas0 != cardInPcmcia0 || cardWas1 != cardInPcmcia1) {
+			QString text = QString::null;
+			QString what = QString::null;
+			if (cardWas0 != cardInPcmcia0) {
+				if (cardInPcmcia0)
+					cfRB->setEnabled(TRUE);
+				else {
+					cfRB->setChecked(FALSE);
+					cfRB->setEnabled(FALSE);
+				}
+			}
+
+			if (cardWas1 != cardInPcmcia1) {
+				if (cardInPcmcia1)
+					cfRB->setEnabled(TRUE);
+				else {
+					cfRB->setChecked(FALSE);
+					cfRB->setEnabled(FALSE);
+				}
+			}
 		}
-	    }
+	} else {
+		// no file found
+		odebug << "no file found" << oendl;
+		cardInPcmcia0 = FALSE;
+		cardInPcmcia1 = FALSE;
 	}
-	f.close();
-
-	if (cardWas0 != cardInPcmcia0 || cardWas1 != cardInPcmcia1) {
-	    QString text = QString::null;
-	    QString what = QString::null;
-	    if (cardWas0 != cardInPcmcia0) {
-		if (cardInPcmcia0) {
-		   cfRB->setEnabled(TRUE);
-		} else {
-    		   cfRB->setChecked(FALSE);
-		   cfRB->setEnabled(FALSE);
-		}
-	    }
-
-	    if (cardWas1 != cardInPcmcia1) {
-		if (cardInPcmcia1) {
-		   cfRB->setEnabled(TRUE);
-		} else {
-    		   cfRB->setChecked(FALSE);
-		   cfRB->setEnabled(FALSE);
-		}
-	    }
-	}
-    } else {
-	// no file found
-	odebug << "no file found" << oendl; 
-	cardInPcmcia0 = FALSE;
-	cardInPcmcia1 = FALSE;
-    }
-    Swapfile::cfsdchecked();
+	Swapfile::cfsdchecked();
 }
 
 
 void Swapfile::getStatusSd()
 {
 
-    bool cardWas = cardInSd;	// remember last state
-    cardInSd = FALSE;
+	bool cardWas = cardInSd;	// remember last state
+	cardInSd = FALSE;
 
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
-    struct mntent *me;
-    FILE *mntfp = setmntent("/etc/mtab", "r");
+	struct mntent *me;
+	FILE *mntfp = setmntent("/etc/mtab", "r");
 
-    if (mntfp) {
-	while ((me = getmntent(mntfp)) != 0) {
-	    QString fs = me->mnt_fsname;
-	    if (fs.left(14) == "/dev/mmc/part1" || fs.left(7) == "/dev/sd"
-		|| fs.left(9) == "/dev/mmcd") {
-		cardInSd = TRUE;
-		show();
-	    }
+	if (mntfp) {
+		while ((me = getmntent(mntfp)) != 0) {
+			QString fs = me->mnt_fsname;
+			if (fs.left(14) == "/dev/mmc/part1" ||
+			    fs.left(7) == "/dev/sd" ||
+			    fs.left(9) == "/dev/mmcd")
+			{
+				cardInSd = TRUE;
+				show();
+			}
+		}
+		endmntent(mntfp);
 	}
-	endmntent(mntfp);
-    }
 
-    if (cardWas != cardInSd) {
-	QString text = QString::null;
-	QString what = QString::null;
-	if (cardInSd) {
-	   sdRB->setEnabled(TRUE);
-	} else {
-    	   sdRB->setChecked(FALSE);
-	   sdRB->setEnabled(FALSE);
+	if (cardWas != cardInSd) {
+		QString text = QString::null;
+		QString what = QString::null;
+		if (cardInSd)
+			sdRB->setEnabled(TRUE);
+		else {
+			sdRB->setChecked(FALSE);
+			sdRB->setEnabled(FALSE);
+		}
 	}
-    }
 #else
 #error "Not on Linux"
 #endif
@@ -276,17 +274,16 @@ void Swapfile::swapon()
 {
 	char swapcmd[128] ="swapon ";
 	Swapfile::cfsdchecked();
-	strcat(swapcmd,swapPath1->text());
+	strncat(swapcmd,swapPath1->text(), 120);
 	char *runcmd = swapcmd;
 	rc = exec(QString("%1").arg(runcmd));
-	if (rc != 0) {
-	       setStatusMessage("Failed to attach swapfile.", true);
-        }
+	if (rc != 0)
+		setStatusMessage("Failed to attach swapfile.", true);
 	else {
-/*	       QMessageBox::information(this, "Information", "Swapfile is active!"); */
-	       setStatusMessage("Swapfile activated.");
+//		QMessageBox::information(this, "Information", "Swapfile is active!");
+		setStatusMessage("Swapfile activated.");
 	}
-       Swapfile::status();
+	Swapfile::status();
 }
 
 
@@ -302,37 +299,33 @@ void Swapfile::swapoff()
 	char swapcmd[128] ="swapoff ";
 	if (Swapfile::cfRB->isChecked() == TRUE)
 	Swapfile::cfsdchecked();
-	strcat(swapcmd,swapPath1->text());
+	strncat(swapcmd,swapPath1->text(), 120);
 	char *runcmd = swapcmd;
 	rc = exec(QString("%1").arg(runcmd));
-	if (rc != 0) {
-	       setStatusMessage(tr("Failed to detach swapfile."), true);
-        }
+	if (rc != 0)
+		setStatusMessage(tr("Failed to detach swapfile."), true);
 	else {
-/*	       QMessageBox::information(this, "Information", "Swapfile is inactive!"); */
-	       setStatusMessage(tr("Swapfile deactivated."));
-/*       	       Swapfile::swapPath->clear();*/
+//		QMessageBox::information(this, "Information", "Swapfile is inactive!");
+		setStatusMessage(tr("Swapfile deactivated."));
+//		Swapfile::swapPath->clear();
 	}
-       Swapfile::status();
+	Swapfile::status();
 }
 
 void Swapfile::cfsdchecked()
 {
-/*       	Swapfile::swapPath->clear();*/
+//	Swapfile::swapPath->clear();
        	Swapfile::swapPath1->clear();
 	if (Swapfile::ramRB->isChecked() == TRUE)
-	{
 		Swapfile::swapPath1->insert("/home/swapfile");
-	}
+
 	if  (Swapfile::sdRB->isChecked() == TRUE)
-	{
        		Swapfile::swapPath1->insert("/mnt/card/swapfile");
-	}
+
 	if  (Swapfile::cfRB->isChecked() == TRUE)
-	{
         	Swapfile::swapPath1->insert("/mnt/cf/swapfile");
-	}
-/*	Swapfile::swapPath->insert(Swapfile::swapPath1->text());*/
+
+//	Swapfile::swapPath->insert(Swapfile::swapPath1->text());
 }
 
 void Swapfile::makeswapfile()
@@ -349,23 +342,21 @@ void Swapfile::makeswapfile()
 		break;
 		case 3: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=8192").arg(swapPath1->text()));
 		break;
-        case 4: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=16384").arg(swapPath1->text()));
-        break;
-        case 5: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=32768").arg(swapPath1->text()));
-        break;
-        case 6: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=65536").arg(swapPath1->text()));
-        break;
-
+		case 4: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=16384").arg(swapPath1->text()));
+		break;
+		case 5: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=32768").arg(swapPath1->text()));
+		break;
+		case 6: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=65536").arg(swapPath1->text()));
+		break;
 	}
-	if (rc != 0) {
-		   setStatusMessage(tr("Failed to create swapfile."), true);
-        }
+	if (rc != 0)
+		setStatusMessage(tr("Failed to create swapfile."), true);
 
 	mkswapProgress->setProgress(2);
 	rc=exec(QString("mkswap %1").arg(swapPath1->text()));
-	if (rc != 0) {
-		   setStatusMessage(tr("Failed to initialize swapfile."), true);
-        }
+	if (rc != 0)
+		setStatusMessage(tr("Failed to initialize swapfile."), true);
+
 	mkswapProgress->setProgress(3);
 	mkswapProgress->reset();
 	setStatusMessage(tr("Swapfile created."));
@@ -375,9 +366,9 @@ void Swapfile::removeswapfile()
 {
 	exec(QString("swapoff %1").arg(swapPath1->text()));
 	rc=exec(QString("rm -rf %1").arg(swapPath1->text()));
-	if (rc != 0) {
-		   setStatusMessage(tr("Failed to remove swapfile."), true);
-        }
+	if (rc != 0)
+		setStatusMessage(tr("Failed to remove swapfile."), true);
+
 	Swapfile::status();
 	Swapfile::cfsdchecked();
 	setStatusMessage(tr("Swapfile removed."));
@@ -390,9 +381,9 @@ void Swapfile::status()
 	int swapsize=2000, i=1;
 
 	fp=fopen("/proc/swaps", "r");
-	while  ( (fgets(buffer,128,fp)) != NULL ) {
-	       sscanf(buffer, "%s %s %d %s %s\n", swapfile, temp, &swapsize, temp, temp);
-   	}
+	while  ( (fgets(buffer,128,fp)) != NULL )
+		sscanf(buffer, "%s %s %d %s %s\n", swapfile, temp, &swapsize, temp, temp);
+
 	fclose(fp);
 
 	ramRB->setChecked(FALSE);
@@ -402,31 +393,31 @@ void Swapfile::status()
         i=strcmp(swapfile, "/home/swapfile");
         if ( i == 0 ) {
            ramRB->setChecked(TRUE);
-/*	   QMessageBox::information(this, "Information", "Swapfile is active!"); */
+//	   QMessageBox::information(this, "Information", "Swapfile is active!");
 	   setStatusMessage(tr("Swapfile activated."));
 	}
 	i=strcmp(swapfile, "/usr/mnt.rom/cf/swapfile");
         if ( i == 0 ) {
            cfRB->setChecked(TRUE);
-/*	   QMessageBox::information(this, "Information", "Swapfile is active!"); */
+//	   QMessageBox::information(this, "Information", "Swapfile is active!");
 	   setStatusMessage(tr("Swapfile activated."));
 	}
 	i=strcmp(swapfile, "/mnt/cf/swapfile");
         if ( i == 0 ) {
            cfRB->setChecked(TRUE);
-/*	   QMessageBox::information(this, "Information", "Swapfile is active!"); */
+//	   QMessageBox::information(this, "Information", "Swapfile is active!");
 	   setStatusMessage(tr("Swapfile activated."));
 	}
 	i=strcmp(swapfile, "/usr/mnt.rom/card/swapfile");
         if ( i == 0 ) {
            sdRB->setChecked(TRUE);
-/*	   QMessageBox::information(this, "Information", "Swapfile is active!"); */
+//	   QMessageBox::information(this, "Information", "Swapfile is active!");
 	   setStatusMessage(tr("Swapfile activated."));
 	}
 	i=strcmp(swapfile, "/mnt/card/swapfile");
         if ( i == 0 ) {
            sdRB->setChecked(TRUE);
-/*	   QMessageBox::information(this, "Information", "Swapfile is active!"); */
+//	   QMessageBox::information(this, "Information", "Swapfile is active!");
 	   setStatusMessage(tr("Swapfile activated."));
 	}
 
@@ -444,15 +435,11 @@ void Swapfile::status()
 		break;
 		case 8: swapSize->setCurrentItem(3);
 		break;
-        case 16: swapSize->setCurrentItem(4);
-        break;
-        case 32: swapSize->setCurrentItem(5);
-        break;
-        case 64: swapSize->setCurrentItem(6);
-        break;
+		case 16: swapSize->setCurrentItem(4);
+		break;
+		case 32: swapSize->setCurrentItem(5);
+		break;
+		case 64: swapSize->setCurrentItem(6);
+		break;
 	}
-
-
 }
-
-

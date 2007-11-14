@@ -31,10 +31,10 @@ class QProgressBar;
 
 class Swapfile : public QWidget
 {
-    Q_OBJECT
+        Q_OBJECT
 public:
-    Swapfile( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
-    ~Swapfile();
+        Swapfile( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
+        ~Swapfile() {}
 
 private slots:
 	void swapon();
@@ -49,7 +49,7 @@ private slots:
 
 private:
 	bool cardInPcmcia0;
-    bool cardInPcmcia1;
+        bool cardInPcmcia1;
 	bool cardInSd;
 
 	QRadioButton* ramRB;
