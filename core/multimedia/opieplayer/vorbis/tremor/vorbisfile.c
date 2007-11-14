@@ -12,7 +12,7 @@
  ********************************************************************
 
  function: stdio-based convenience library for opening/seeking/decoding
- last mod: $Id: vorbisfile.c,v 1.1 2003-04-08 02:56:00 llornkcor Exp $
+ last mod: $Id: vorbisfile.c,v 1.2 2007-11-14 18:31:58 erik Exp $
 
  ********************************************************************/
 
@@ -1077,6 +1077,7 @@ int ov_raw_seek(OggVorbis_File *vf,ogg_int64_t pos){
   ogg_packet_release(&op);
   ogg_page_release(&og);
   ogg_stream_destroy(work_os);
+  free(work_os);
   vf->bittrack=0;
   vf->samptrack=0;
   return(0);

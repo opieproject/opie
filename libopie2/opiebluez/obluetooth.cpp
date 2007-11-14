@@ -217,6 +217,7 @@ OBluetoothInterface::DeviceIterator OBluetoothInterface::neighbourhood()
     if ( result == -1 )
     {
         owarn << "OBluetoothInterface::neighbourhood() - can't issue HCIINQUIRY (" << strerror( errno ) << ")" << oendl;
+	free(mybuffer);
         return DeviceIterator( _devices );
     }
 
