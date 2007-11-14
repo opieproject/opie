@@ -413,46 +413,6 @@ void FreshStyle::drawRiffles( QPainter* p,  int x, int y, int w, int h,
                       const QColorGroup &g, bool horizontal )
 {
     return;
-    if (!horizontal) {
-	if (h > 20) {
-	    y += (h-20)/2 ;
-	    h = 20;
-	}
-	if (h > 12) {
-	    int n = 3;
-	    int my = y+h/2-4;
-	    int i ;
-	    p->setPen(g.light());
-	    for (i=0; i<n; i++) {
-		p->drawLine(x+2, my+3*i, x+w-4, my+3*i);
-	    }
-	    p->setPen(g.dark());
-	    my++;
-	    for (i=0; i<n; i++) {
-		p->drawLine(x+2, my+3*i, x+w-4, my+3*i);
-	    }
-	}
-    }
-    else {
-	if (w > 20) {
-	    x += (w-20)/2 ;
-	    w = 20;
-	}
-	if (w > 12) {
-	    int n = 3;
-	    int mx = x+w/2-4;
-	    int i ;
-	    p->setPen(g.light());
-	    for (i=0; i<n; i++) {
-		p->drawLine(mx+3*i, y+2, mx + 3*i, y+h-4);
-	    }
-	    p->setPen(g.dark());
-	    mx++;
-	    for (i=0; i<n; i++) {
-		p->drawLine(mx+3*i, y+2, mx + 3*i, y+h-4);
-	    }
-	}
-    }
 }
 
 int FreshStyle::sliderLength() const

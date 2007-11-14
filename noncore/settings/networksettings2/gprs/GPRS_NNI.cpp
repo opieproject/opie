@@ -208,27 +208,27 @@ short AGPRSDevice::generateFile( SystemFile & SF,
 }
 
 bool AGPRSDevice::openFile( SystemFile & SF, QStringList & SL ) {
+    bool retval = false;
     if( SF.name() == "peers" ) {
       SL << "/etc" << "ppp" << "peers";
       SF.setPath( 
           QString( "/etc/ppp/peers/" ) + 
               removeSpaces( networkSetup()->name() )
           );
-      return 1;
+      retval = true;
     } else if ( SF.name() == "chatscripts" ) {
       SL << "/etc" << "chatscripts";
       SF.setPath( 
           QString( "/etc/chatscripts/" ) + 
               removeSpaces( networkSetup()->name() )
           );
-      return 1;
-      SL << "/etc" << "ppp";
+      retval = true;
     } else if ( SF.name() == "extra" ) {
       SF.setPath( 
           QString( "/etc/ppp/" ) + 
               removeSpaces( networkSetup()->name() ) + ".fixed"
           );
-      return 1;
+      retval = true;
     }
-    return 0;
+    return retval;
 }

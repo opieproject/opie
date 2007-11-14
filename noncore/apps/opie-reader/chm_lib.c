@@ -1,4 +1,4 @@
-/* $Id: chm_lib.c,v 1.4 2007-07-30 19:25:11 erik Exp $ */
+/* $Id: chm_lib.c,v 1.5 2007-11-14 18:28:05 erik Exp $ */
 /***************************************************************************
  *             chm_lib.c - CHM archive manipulation routines               *
  *                           -------------------                           *
@@ -1802,69 +1802,7 @@ int chm_resolve_location(struct chmFile *h,
       /* else, if it is a branch node: */
       else if (memcmp(page_buf, _chm_pmgi_marker, 4) == 0)
 	{
-	  /*	  curPage = _chm_find_in_PMGI(page_buf, h->block_len, objPath);*/
 	  return CHM_RESOLVE_FAILURE;
-	  if (0)
-	  {
-	    /* XXX: modify this to do a binary search using the nice index structure
-	     *      that is provided for us
-	     */
-	    struct chmPmgiHeader header;
-	    UInt32 hremain;
-	    int page=-1;
-	    UChar *end;
-	    UChar *cur;
-	    UInt64 strLen;
-	    char buffer[CHM_MAX_PATHLEN+1];
-
-	    /* figure out where to start and end */
-	    cur = page_buf;
-	    hremain = _CHM_PMGI_LEN;
-	    if (! _unmarshal_pmgi_header(&cur, &hremain, &header))
-	      return -1;
-	    end = page_buf + h->block_len - (header.free_space);
-
-	    /* now, scan progressively */
-	    while (cur < end)
-	      {
-
-
-
-		if (_chm_parse_PMGL_entry(&cur, ui) == 0)
-		  {
-		    return CHM_RESOLVE_FAILURE;
-		  }
-
-		if (ui->start <= pos && pos < ui->start + ui->length)
-		  {
-		    return CHM_RESOLVE_SUCCESS;
-		  }
-
-
-
-
-
-		/* grab the name */
-		strLen = _chm_parse_cword(&cur);
-		if (! _chm_parse_UTF8(&cur, strLen, buffer))
-		  return -1;
-
-		/* check if it is the right name */
-		/*
-#ifdef WIN32
-		if (stricmp(buffer, objPath) > 0)
-		  return page;
-#else
-		if (strcasecmp(buffer, objPath) > 0)
-		  return page;
-#endif
-		*/
-		/* load next value for path */
-		page = (int)_chm_parse_cword(&cur);
-	      }
-
-	    curPage = page;
-	  }
 	}
       /* else, we are confused.  give up. */
       else

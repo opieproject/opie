@@ -59,7 +59,6 @@ class iSilo : public Cpdb
   s_attrib* attr;
 
 
-  void init_tables(void);
   int code2tree(struct s_huffman *h);
   u_int32_t swap_bits(u_int32_t n, int num);
   u_int32_t *huffman_get(struct s_huffman *h);

@@ -148,7 +148,7 @@ inline bool isconsonant(unsigned short c)
       return false;
       
     default:
-      return (isletter(c) && !isvowel(c));
+      break;
     }
   return (isletter(c) && !isvowel(c));
 }

@@ -90,8 +90,4 @@ QPopupMenu* DocLnkSearch::popupMenu()
  		actionSearchInFiles->addTo( _popupMenu );
 	}
 	return _popupMenu;
-//	(void) new DocLnkItem( this, (DocLnk*)rec );
-		// rec is undeclared here
-#warning  FIXME
-	_resultCount++;
 }

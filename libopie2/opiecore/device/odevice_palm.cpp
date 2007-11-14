@@ -254,7 +254,6 @@ void Palm::init(const QString& cpu_info)
       case Model_Palm_Z71:
 	m_backlightdev = "/sys/class/backlight/omap-bl/";
 	break;
-	break;
 
       default:
             m_backlightdev = "";

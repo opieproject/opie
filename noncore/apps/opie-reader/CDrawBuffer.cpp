@@ -297,38 +297,29 @@ int CDrawBuffer::charwidth(int numchars)
 	    continue;
 	}
 	if (numchars >= 0 && end > numchars)
-	{
 	    end = numchars;
-	}
+
 	CStyle currentstyle = textstart->style;
 	if (currentstyle.isPicture())
 	{
 	    if (currentstyle.canScale())
-	    {
 		return (gzoom*currentstyle.getPicture()->width())/100;
-	    }
 	    else
-	    {
 		return currentstyle.getPicture()->width();
-	    }
 	}
 	else
 	{
 	    if (currentstyle.isMono() && !fc->hasCourier())
-	    {
 		return (7*fc->getsize(currentstyle))/10;
-	    }
 	    else
 	    {
 		QFont f(currentstyle.isMono() ? QString(fc->fixedfontname()) : fc->name(), fc->getsize(currentstyle), (currentstyle.isBold()) ? QFont::Bold : QFont::Normal, (currentstyle.isItalic()) );
-//	    f.setUnderline(currentstyle.isUnderline());
 		QFontMetrics fm(f);
 		return fm.width(text);
 	    }
 	}
-	textstart = textend;
-    }
-    while (textend != segs.end() /* && end != numchars*/ && textstart->start < len);
+    } while (textend != segs.end() && textstart->start < len);
+
     return 0;
 }
 

@@ -25,39 +25,6 @@ u_int8_t *rpos_delta = (u_int8_t *)
   "\x00\x00\x00\x00\x01\x01\x02\x02\x03\x03\x04\x04\x05\x05\x06\x06\x07\x07"
 "\x08\x08\x09\x09\x0a\x0a\x0b\x0b\x0c\x0c\x0d\x0d";
 
-void iSilo::init_tables(void)
-{
-  int i;
-  u_int16_t j;
-  return;  
-  for (i = 0; i < 3; i++)
-    rodata[i] = 0x10 + i;
-  rodata[3] = 0;
-  for (i = 4; i < 19; i = i + 2)
-    rodata[i] = 8 + (i-4)/2;
-  for (i = 5; i < 19; i = i + 2)
-    rodata[i] = 7 - (i-5)/2;
-  
-  memset(rsize_delta, 0, 29);
-  for (i = 4; i < 29; i++) {
-    rsize_delta[i] = (i - 4) >> 2;
-  }
-  memset(rpos_delta, 0, 30);
-  for (i = 2; i < 30; i++) {
-    rpos_delta[i] = (i - 2) >> 1;
-  }      
-  j = 3;
-  for (i = 0; i < 29; i++) {
-    rsize_min[i] = j;
-    j += 1 << rsize_delta[i];
-  }
-  j = 1;
-  for (i = 0; i < 30; i++) {
-    rpos_min[i] = j;
-    j += 1 << rpos_delta[i];
-  }
-}
-
 /* read num bits from the file descriptor */
 
 int iSilo::code2tree(struct s_huffman *h) {
@@ -522,7 +489,6 @@ int iSilo::OpenFile(const char* src)
       return -1;
     }
   qDebug("There is %u records in this PDB file", ntohs(head.recordList.numRecords));
-  init_tables();
   gotorecordnumber(0);
   fread(buffer,1,12,fin);
   fread(&textsize, sizeof(textsize), 1, fin);

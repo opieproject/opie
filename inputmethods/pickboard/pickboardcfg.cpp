@@ -418,9 +418,10 @@ QString DictFilterConfig::capitalize(const QString& s)
 	    QString u = s;
 	    u[0] = u[0].upper();
 	    return u;
-	    break;
-	} case 2:
+        }
+	case 2:
 	    return s.upper();
+	default:
 	    break;
     }
     return s;

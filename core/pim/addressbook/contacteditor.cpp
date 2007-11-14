@@ -1703,19 +1703,6 @@ static inline bool constainsWhiteSpace( const QString &str )
 void ContactEditor::setPersonalView( bool personal )
 {
 	m_personalView = personal;
-
-	// Currently disbled due to the fact that
-	// show will not work...
-	return;
-
-	if ( personal ){
-		cmbCat->hide();
-		labCat->hide();
-
-	} else{
-		cmbCat->show();
-		labCat->show();
-	}
 }
 
 void ContactEditor::slotAnniversaryDateChanged( int year, int month, int day)

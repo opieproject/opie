@@ -197,7 +197,6 @@ void XineVideoWidget::paintEvent2 ( QPaintEvent * )
                     _vw = m_framesize.width();
                     _vh = m_framesize.height();
                     break;
-                 break;
             }
             int middle_w = _vw/2;
             int middle_h = _vh/2;

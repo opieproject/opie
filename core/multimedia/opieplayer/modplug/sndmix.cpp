@@ -375,48 +375,10 @@ BOOL CSoundFile::ProcessRow()
 			{
 				// End of song ?
 				if ((m_nPattern == 0xFF) || (m_nCurrentPattern >= MAX_ORDERS))
-				{
-					//if (!m_nRepeatCount)
-						return FALSE;     //never repeat entire song
-					if (!m_nRestartPos)
-					{
-						m_nMusicSpeed = m_nDefaultSpeed;
-						m_nMusicTempo = m_nDefaultTempo;
-						m_nGlobalVolume = m_nDefaultGlobalVolume;
-						for (UINT i=0; i<MAX_CHANNELS; i++)
-						{
-							Chn[i].dwFlags |= CHN_NOTEFADE | CHN_KEYOFF;
-							Chn[i].nFadeOutVol = 0;
-							if (i < m_nChannels)
-							{
-								Chn[i].nGlobalVol = ChnSettings[i].nVolume;
-								Chn[i].nVolume = ChnSettings[i].nVolume;
-								Chn[i].nPan = ChnSettings[i].nPan;
-								Chn[i].nPanSwing = Chn[i].nVolSwing = 0;
-								Chn[i].nOldVolParam = 0;
-								Chn[i].nOldOffset = 0;
-								Chn[i].nOldHiOffset = 0;
-								Chn[i].nPortamentoDest = 0;
-								if (!Chn[i].nLength)
-								{
-									Chn[i].dwFlags = ChnSettings[i].dwFlags;
-									Chn[i].nLoopStart = 0;
-									Chn[i].nLoopEnd = 0;
-									Chn[i].pHeader = NULL;
-									Chn[i].pSample = NULL;
-									Chn[i].pInstrument = NULL;
-								}
-							}
-						}
-					}
-//					if (m_nRepeatCount > 0) m_nRepeatCount--;
-					m_nCurrentPattern = m_nRestartPos;
-					m_nRow = 0;
-					if ((Order[m_nCurrentPattern] >= MAX_PATTERNS) || (!Patterns[Order[m_nCurrentPattern]])) return FALSE;
-				} else
-				{
+					return FALSE;     //never repeat entire song
+				else
 					m_nCurrentPattern++;
-				}
+
 				m_nPattern = (m_nCurrentPattern < MAX_ORDERS) ? Order[m_nCurrentPattern] : 0xFF;
 				if ((m_nPattern < MAX_PATTERNS) && (!Patterns[m_nPattern])) m_nPattern = 0xFE;
 			}

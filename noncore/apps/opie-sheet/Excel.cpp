@@ -1691,12 +1691,6 @@ QString ExcelBook::GetFormula(int row, int col, ExcelSheet* sheet, char* data, i
         default:
             printf("tokenUNKNOWN=0x%x\r\n",token);
             return QString("TOKEN_UKNOWN");
-            //it is dangerous to go to idx++ and not return
-            // because the result is unexpected.
-            // but there is a possibility the the parser will give the correct
-            // answer, because there are some tokens in excel formulas that can be                  //ignored.
-            idx++;
-            break;
         };
 
     };

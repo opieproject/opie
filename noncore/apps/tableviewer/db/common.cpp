@@ -262,7 +262,7 @@ const QString TVVariant::typeToName(KeyType typ)
             return QString("Int");
         case Invalid:
         default:
-            return QString("Invalid");
+            break;
     }
     return QString("Invalid");
 }
@@ -386,7 +386,7 @@ const QString TVVariant::toString() const
                 return QString::number(d->value.i);
         case Invalid:
         default:
-            return QString::null;
+            break;
     }
     return QString::null;
 }

@@ -316,22 +316,6 @@ void
 StoneWidget::myMoveEvent ( QMouseEvent *e)
 {
     return;
-
-    if (stonefield.isGameover()) {
-        stonefield.unmark();
-        emit s_marked(0);
-        return;
-    }
-
-    int x=e->pos().x();
-    int y=e->pos().y();
-    if (x<0||y<0||x>=field_width||y>=field_height) return;
-
-    int marked=stonefield.mark(x/stone_width,y/stone_height);
-    if (marked>=0) {
-        emit s_marked(marked);
-        slice=0;
-    }
 }
 
 
