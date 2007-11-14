@@ -53,9 +53,9 @@ class Gutenbrowser : public QMainWindow {
 public:
     static QString appName() { return QString::fromLatin1("gutenbrowser"); }
 #ifdef NOQUICKLAUNCH
-		Gutenbrowser();
+    Gutenbrowser();
 #else
-		Gutenbrowser(QWidget *p = 0, const char* name = 0, WFlags fl = 0);
+    Gutenbrowser(QWidget *p = 0, const char* name = 0, WFlags fl = 0);
 #endif
     ~Gutenbrowser();
     LibraryDialog* LibraryDlg;
@@ -82,7 +82,10 @@ public:
     QString status;
     QString statusTop;
     QString title;
-    QPushButton *DownloadButton, *LibraryButton, *OpenButton, *ForwardButton, *BackButton, *PrintButton, *SearchButton, *dictionaryButton, *beginButton, *ExitButton, *OptionsButton, *FontButton, *ClearButton, *HelpButton, *setBookmarkButton;
+    QPushButton *DownloadButton, *LibraryButton, *OpenButton, *ForwardButton,
+                *BackButton, *PrintButton, *SearchButton, *dictionaryButton,
+                *beginButton, *ExitButton, *OptionsButton, *FontButton,
+                *ClearButton, *HelpButton, *setBookmarkButton;
     MenuButton* lastBmkButton;
     SearchDialog* searchDlg;
 
@@ -100,15 +103,11 @@ public:
     int lineCheck;
     int pages;
     int pointSize, weight;
-//    int styleI;
 
 public slots:
 
 private:
 
-/*     typedef QValueList<int> pageStop; */
-/*     pageStop pageStopArray; */
-//     QVector<int>  pageStopArray;
     QArray<int>  pageStopArray;
 
     MultiLine_Ex* Lview;
@@ -119,7 +118,8 @@ private:
     QBoxLayout *topLayout;
     QFile f;
     QPEMenuBar* menubar;
-    QPopupMenu *fileMenu, *editMenu, *viewMenu, *DownloadMenu, *optionsMenu, *bookmarksMenu, *donateMenu, *helpMenu;
+    QPopupMenu *fileMenu, *editMenu, *viewMenu, *DownloadMenu, *optionsMenu,
+               *bookmarksMenu, *donateMenu, *helpMenu;
     bool useWrap;
     int fileHandle, currentFilePos, currentLine; 
     int last_search;
@@ -148,8 +148,6 @@ private slots:
     void searchdone_slot();
     void setDocument(const QString&);
     void slotFilePrint();
-//    void setStyle(int styleInt);
-
 
 protected:
 
@@ -198,30 +196,16 @@ protected slots:
     void searchGoogle(const QString &);
     void setBookmark();
     void toggleButtonIcons( bool usingIcons);
-//    virtual void setBrowser();
-//      void stylePlatinum();
-//      void styleWindows();
-//      void defaultStyle();
-/*      void styleMotif(); */
-/*      void styleMotifPlus(); */
-/*      void styleWood(); */
-/*      void stylePlatinumPlus(); */
-/*      void styleCDE(); */
-//      void styleMetal();
-/*      void styleSgi();     */
-/*      void styleLace(); */
-/*      void styleLacePlus(); */
-/*  #endif */
+
 protected:
 
-    int doSearch(const QString & s_pattern , bool case_sensitive, bool forward, int line, int col );
+    int doSearch(const QString & s_pattern , bool case_sensitive, bool forward,
+                 int line, int col );
     void focusInEvent( QFocusEvent* );
     void focusOutEvent( QFocusEvent* );
-    void keyPressEvent( QKeyEvent * );
     void keyReleaseEvent( QKeyEvent *e);
     void resizeEvent( QResizeEvent * );
     void writeConfig();
-//    void moveSplitter( int pos);
 };
 #endif
 

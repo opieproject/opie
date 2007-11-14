@@ -475,8 +475,6 @@ void Gutenbrowser::BeginBtn() {
     int pageSize = Lview->PageSize();
     Lview->clear();
 
-    int pos = 0;//, i = 0;
-    int i_topRow = Lview->topRow();
     QString LeftText;// = Lview->text();
     i_pageNum = 1;
     int lastPage=1;
@@ -1160,12 +1158,9 @@ void Gutenbrowser::keyReleaseEvent( QKeyEvent *e) {
         case Key_Down:
         case Key_Up:
         case Key_Home:
-        defaul:
+        default:
             break;
     };
-}
-
-void Gutenbrowser::keyPressEvent( QKeyEvent *e) {
 }
 
 void Gutenbrowser::resizeEvent( QResizeEvent *ev) {
@@ -1300,9 +1295,8 @@ void Gutenbrowser::OnNetworkDialog( const QString &/*networkUrl*/, const QString
 
 void Gutenbrowser::donateGutenberg()
 {
-    int exit=QMessageBox::information(this, "Info", "http://www.gutenberg.org\n"
-                                      "donate@gutenberg.net", QMessageBox::Ok,
-                                      QMessageBox::Cancel);
+    QMessageBox::information(this, "Info", "http://www.gutenberg.org\n"
+                             "donate@gutenberg.net", QMessageBox::Ok);
 }
 
 void Gutenbrowser::donateByteMonkie()
