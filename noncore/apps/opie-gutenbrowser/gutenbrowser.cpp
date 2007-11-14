@@ -359,14 +359,11 @@ void Gutenbrowser::DownloadIndex() {
 
 
 void Gutenbrowser::downloadFtpList() {
-			//  QString cmd="wget http://www.promo.net/pg/list.html");
-			//system(cmd);
-		qApp->processEvents();
-		optionsDialog* optDlg;
-		optDlg = new optionsDialog( this,"Options_Dlg", true);
-		optDlg->getSite();
-		if(optDlg)
-				delete optDlg;
+    qApp->processEvents();
+    optionsDialog* optDlg;
+    optDlg = new optionsDialog( this,"Options_Dlg", true);
+    optDlg->getSite();
+    delete optDlg;
 }
 
 

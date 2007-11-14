@@ -29,13 +29,9 @@
 #include <unistd.h>
 #include <stdio.h>
 
-// :)~
 void optionsDialog::ftpSiteDlg( )
 {
-//printf( "ftpSiteDlg: ListFile is "+ ListFile +"\n" );
-//  initDialog();
     local_library = (QDir::homeDirPath ()) +"/Applications/gutenbrowser/";
-//    ListFile = local_library + "ftpList";
     ListFile = QPEApplication::qpeDir() + "etc/gutenbrowser";
     QDir dir(ListFile);
     if( !dir.exists())
@@ -60,34 +56,18 @@ void optionsDialog::ftpSiteDlg( )
 }
 
 
-/*
-// get ftp list from web- parse it. */
+// get ftp list from web- parse it.
 void optionsDialog::getSite()
 {
     QString file_name;
     QString ftp_listFileURL;
     QString outputFile;
-//    outputFile = local_library+ "list.html";
     outputFile = ListFile + "list.html";
     QString networkUrl="http://www.gutenberg.net/catalog/world/selectpermanentmirror?fk_books=12962";
-//    QString networkUrl= "http://www.gutenberg.org/www/mirror.sites.html";
-//http://www.gutenberg.org/index.html";
-//       QString networkUrl= "http://llornkcor.com/index.shtml";
-//    //  "http://www.gutenberg.org/index.html"
-//
-//Qhttp stops working at times.... :(
-//    NetworkDialog *NetworkDlg;
-//    NetworkDlg = new NetworkDialog( this,"Network Protocol Dialog",TRUE,0,networkUrl,outputFile);
-//    if( NetworkDlg->exec() != 0 )
-//    { // use new, improved, *INSTANT* network-dialog-file-getterer
-//        qDebug( "gitcha!" );
-//    }
-//    delete NetworkDlg;
-//#ifdef Q_WS_QWS
 
 // TODO qprocess here
 
-    QString cmd="wget -T 15 -O " +outputFile + " " + networkUrl;// + " 2>&1" ;
+    QString cmd="wget -T 15 -O " +outputFile + " " + networkUrl;
  qDebug( "Issuing the command "+cmd );
     Output *outDlg;
     outDlg = new Output( 0, tr("Downloading ftp sites...."),TRUE);
@@ -105,10 +85,8 @@ void optionsDialog::getSite()
     }
     pclose(fp);
     outDlg->close();
-    if(outDlg)
-        delete outDlg;
+    delete outDlg;
 
-//    outputFile=ListFile;
     ftp_QListBox_1->clear();
     parseFtpList( outputFile); // got the html list, now parse it so we can use it
 }
@@ -135,40 +113,27 @@ bool optionsDialog::parseFtpList( QString outputFile)
             }
             if( b_gotchTest) {
                 if(( start = s.find( "ftp://", 0, TRUE))!=-1 ) {
-//                    qDebug(s);
-//                    qDebug("%d", start);
                     end = s.find( "</td></tr>", 0, TRUE);// ==-1)) {
                     if( end == -1) {
                         end = s.find( "\">");
                     }
-//                    qDebug("end %d", end);
                     start =start + 6;
                     ftpSite =  s.mid( start , (end - start)  );
-                    if(ftpSite.right(1) != "/") {
-                          //    ftpSite += "/";
-                    }
-//                    qDebug("ftpsite " + ftpSite);
 
                     for (int j = 0 ; j<3;j++) {
                         s = t.readLine();
                         QString finder="</td><td rowspan=\"3\">";
                         if(( start = s.find( finder, 0, TRUE) ) != -1) {
-                            //                          qDebug( "%d" + s, start  );
                             end = s.find( finder, start + 2, TRUE) ;
-//                            qDebug("end %d",end);
                             s_location = s.mid( start + finder.length() , (end - start)-finder.length() );
-//
-//                            qDebug("Location "+s_location  );
 
                             ftpList += s_location+ "    "+ftpSite+"\n";
                             ftp_QListBox_1->sort( TRUE );
                             QString winbug="    ";
                             ftp_QListBox_1->insertItem ( s_location.latin1() + winbug + ftpSite);
                             j=3;
-                    // ftp_QListBox_1->insertItem ( ftpSite+"  "+s_location.latin1());
                         }
                     }
-                    //  ftp_QListBox_1->insertItem ( ftpSite);
                 }
             } // end find ftp://
 
@@ -192,7 +157,6 @@ bool optionsDialog::parseFtpList( QString outputFile)
 void optionsDialog::openSiteList() {
 
     qDebug( " just opens the ftp site list" );
-//  ListFile = ( QDir::homeDirPath ()) +"/.gutenbrowser/ftpList";
     QFile f( ListFile);
     if(!f.open( IO_ReadWrite )) {
         QMessageBox::message( (tr("Note")), (tr("File not opened sucessfully." )) );
@@ -212,24 +176,19 @@ void optionsDialog::openSiteList() {
         ftp_QListBox_1->setSelected( itemSel, true);
 }
 
-/*
-List box clicked */
+// List box clicked
 void optionsDialog::getSelection(  QListBoxItem *item)
 {
     QString selctionStr;
     selctionStr = item->text();
-//  selctionStr = ftp_QListBox_1->currentText();
-//  printf( selctionStr+"\n" );
     select_site( selctionStr );
 }
 
 void optionsDialog::select_site( const char *index )
 {
-//   ftp://ftp.datacanyon.com/pub/gutenberg/
 
     s_site = index;
     QString s_site2;
-//    if(s_site.find("(",0,TRUE))
     s_site2=s_site.right( s_site.length()-(s_site.find("    ",0,TRUE)+4)  );
 
     qDebug( "Selected ftp site is "+ s_site2 );
@@ -238,13 +197,10 @@ void optionsDialog::select_site( const char *index )
     ftp_host = s_site2.left(i_ftp );
     ftp_base_dir = s_site2.right( s_site2.length() - i_ftp);
 
-//    config->read();
     Config config("Gutenbrowser");
     config.setGroup( "FTPsite" );
     config.writeEntry("SiteName",ftp_host);
     config.writeEntry("base",ftp_base_dir);
-//    config->write();
-    TextLabel3->setText( "Current ftp server:\n" + ftp_host /*+ ftp_base_dir*/ );
-//    optionsDialog::accept();
+    TextLabel3->setText( "Current ftp server:\n" + ftp_host );
 }
 

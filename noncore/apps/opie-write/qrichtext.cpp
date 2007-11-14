@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qrichtext.cpp,v 1.9 2007-07-30 18:59:26 erik Exp $
+** $Id: qrichtext.cpp,v 1.10 2007-11-14 18:45:04 erik Exp $
 **
 ** Implementation of the internal Qt classes dealing with rich text
 **
@@ -7421,11 +7421,15 @@ bool QTextTable::down( QTextCursor *c, QTextDocument *&doc, QTextParagraph *&par
 {
     if ( currCell.find( c ) == currCell.end() )
 	return FALSE;
+
     QTextTableCell *cell = cells.at( *currCell.find( c ) );
+    if ( !cell )
+	return FALSE;
+
     if ( cell->row_ == layout->numRows() - 1 ) {
 	currCell.insert( c, 0 );
 	QTextCustomItem::down( c, doc, parag, idx, ox, oy );
-	QTextTableCell *cell = cells.first();
+	cell = cells.first();
 	if ( !cell )
 	    return FALSE;
 	doc = cell->richText();
@@ -7437,17 +7441,20 @@ bool QTextTable::down( QTextCursor *c, QTextDocument *&doc, QTextParagraph *&par
     int oldCol = cell->col_;
     if ( currCell.find( c ) == currCell.end() )
 	return FALSE;
+
     int cc = *currCell.find( c );
     for ( int i = cc; i < (int)cells.count(); ++i ) {
 	cell = cells.at( i );
-	if ( cell->row_ > oldRow && cell->col_ == oldCol ) {
+	if ( cell && cell->row_ > oldRow && cell->col_ == oldCol ) {
 	    currCell.insert( c, i );
 	    break;
 	}
     }
-    doc = cell->richText();
+
     if ( !cell )
 	return FALSE;
+
+    doc = cell->richText();
     parag = doc->firstParagraph();
     idx = 0;
     ox += cell->geometry().x() + cell->horizontalAlignmentOffset() + outerborder + parent->x();
@@ -7459,33 +7466,39 @@ bool QTextTable::up( QTextCursor *c, QTextDocument *&doc, QTextParagraph *&parag
 {
     if ( currCell.find( c ) == currCell.end() )
 	return FALSE;
+
     QTextTableCell *cell = cells.at( *currCell.find( c ) );
-    if ( cell->row_ == 0 ) {
+    if ( cell && cell->row_ == 0 ) {
 	currCell.insert( c, 0 );
 	QTextCustomItem::up( c, doc, parag, idx, ox, oy );
-	QTextTableCell *cell = cells.first();
+	cell = cells.first();
 	if ( !cell )
 	    return FALSE;
+
 	doc = cell->richText();
 	idx = -1;
 	return TRUE;
-    }
+    } else if ( !cell )
+	return FALSE;
 
     int oldRow = cell->row_;
     int oldCol = cell->col_;
     if ( currCell.find( c ) == currCell.end() )
 	return FALSE;
+
     int cc = *currCell.find( c );
     for ( int i = cc; i >= 0; --i ) {
 	cell = cells.at( i );
-	if ( cell->row_ < oldRow && cell->col_ == oldCol ) {
+	if ( cell && cell->row_ < oldRow && cell->col_ == oldCol ) {
 	    currCell.insert( c, i );
 	    break;
 	}
     }
-    doc = cell->richText();
+
     if ( !cell )
 	return FALSE;
+
+    doc = cell->richText();
     parag = doc->lastParagraph();
     idx = parag->length() - 1;
     ox += cell->geometry().x() + cell->horizontalAlignmentOffset() + outerborder + parent->x();

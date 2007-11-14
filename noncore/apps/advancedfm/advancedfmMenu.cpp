@@ -242,11 +242,12 @@ void AdvancedFm::filePerms() {
    filePath = CurrentDir()->canonicalPath()+"/";
 
    for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
-      filePermissions *filePerm;
-      filePerm = new filePermissions(this, "Permissions",true,0,(const QString &)(filePath+*it));
+      filePermissions *filePerm = new filePermissions(
+                                                this, "Permissions", true,
+                                                0,(const QString &)(filePath+*it)
+                                                     );
       QPEApplication::execDialog( filePerm );
-      if( filePerm )
-         delete  filePerm;
+      delete filePerm;
    }
     populateView();
 }

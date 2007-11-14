@@ -25,7 +25,6 @@
 /* QT */
 #include <qpushbutton.h>
 #include <qmultilineedit.h>
-//#include <qlayout.h>
 
 /* STD */
 #include <unistd.h>
@@ -34,7 +33,8 @@
 
 /*
  *  The dialog will by default be modeless, unless you set 'modal' to
- *  true to construct a modal dialog. */
+ *  true to construct a modal dialog.
+ */
 LibraryDialog::LibraryDialog( QWidget* parent,  const char* name , bool /*modal*/, WFlags fl )
    : QDialog( parent, name, true/* modal*/, fl )
 {
@@ -42,8 +42,6 @@ LibraryDialog::LibraryDialog( QWidget* parent,  const char* name , bool /*modal*
       setName( "LibraryDialog" );
    indexLoaded=false;
    initDialog();
-
-   //      this->setMaximumWidth(240);
 
    index = "GUTINDEX.ALL";
    local_library = (QDir::homeDirPath ()) +"/Applications/gutenbrowser/";
@@ -53,9 +51,6 @@ LibraryDialog::LibraryDialog( QWidget* parent,  const char* name , bool /*modal*
    iniFile = local_library + "/gutenbrowserrc";
    new_index = local_library + "/PGWHOLE.TXT";
    old_index = local_index;
-   //     iniFile = local_library+"gutenbrowserrc";
-   //     new_index = local_library + "PGWHOLE.TXT";
-   //     old_index = local_library + "GUTINDEX.ALL";
 
    Config config("Gutenbrowser");
 
@@ -64,9 +59,6 @@ LibraryDialog::LibraryDialog( QWidget* parent,  const char* name , bool /*modal*
 
    config.setGroup( "FTPsite" );
    ftp_host = config.readEntry("SiteName", "sailor.gutenberg.org");
-   //odebug << "Library Dialog: ftp_host is "+ftp_host << oendl;
-   //      ftp_host=ftp_host.right(ftp_host.length()-(ftp_host.find(") ",0,true)+1) );
-   //      ftp_host=ftp_host.stripWhiteSpace();
    ftp_base_dir= config.readEntry("base",  "/pub/gutenberg");
 
    i_binary = 0;
@@ -77,17 +69,12 @@ LibraryDialog::LibraryDialog( QWidget* parent,  const char* name , bool /*modal*
 
    config.setGroup("General");
    downDir = config.readEntry( "DownloadDirectory",local_library);
-   //odebug << "downDir is "+downDir << oendl;
    newindexLib.setName( old_index);
    indexLib.setName( old_index);
 
    new QPEDialogListener(this);
    QTimer::singleShot( 1000, this, SLOT( FindLibrary()) );
 
-}
-
-LibraryDialog::~LibraryDialog()
-{
 }
 
 void  LibraryDialog::clearItems() {
@@ -103,9 +90,9 @@ void  LibraryDialog::Newlibrary()
 {
 		clearItems();
 #ifndef Q_WS_QWS //sorry embedded gutenbrowser cant use zip files
-   ////odebug << "Opening new library index " << newindexLib << "" << oendl;
    if ( newindexLib.open( IO_ReadOnly) ) {
-      setCaption( tr( "Library Index - using master pg index."  ) );// file opened successfully
+      // file opened successfully
+      setCaption( tr( "Library Index - using master pg index."  ) );
       QTextStream indexStream( &newindexLib );
       QString indexLine;
       while ( !indexStream.atEnd() )  { // until end of file..
@@ -134,11 +121,10 @@ void  LibraryDialog::Newlibrary()
 void LibraryDialog::Library() {
    clearItems();
 		
-//		qDebug( "opening GUTINDEX.ALL file");
    IDontKnowWhy = "";
    system("date");
    if ( indexLib.open( IO_ReadOnly) ) {
-// file opened successfully
+      // file opened successfully
       QTextStream indexStream( &indexLib );
       QString indexLine;
       qApp->processEvents();
@@ -158,8 +144,8 @@ void LibraryDialog::Library() {
             int textNumber;
             if(( textNumber = token.last().toInt() ))
                if(textNumber > 10001) {
-//            qWarning("Last "+token.last());
-// newer files with numbers > 100000 have new dir structure and need to be parsed differently..
+                   // newer files with numbers > 100000 have new dir structure
+                   // and need to be parsed differently..
                   if(textNumber < 10626)
                      year = "2003";
                   else if(textNumber >= 10626 && textNumber < 14600)
@@ -171,10 +157,8 @@ void LibraryDialog::Library() {
                   title = indexLine.mid(0,72);
 
                   addItems(); //author and qlistview
-                  //	qDebug("file number is " + number + " title is " + title );
-
-               } else { //end new etexts
-                  
+               } else {
+                   //end new etexts
                   if(token[1].toInt() && token[1].toInt() > 1969) {
                      year = token[1];
                      file = indexLine.mid(60,12);
@@ -216,8 +200,7 @@ void LibraryDialog::Library() {
 } //end Library()
 
 
-/*
-  Groks the author out of the title */
+// Groks the author out of the title
 bool LibraryDialog::getAuthor()
 {
    if( title.contains( ", by", true)) {
@@ -310,16 +293,18 @@ bool LibraryDialog::getAuthor()
    }
 
 	 author = author.stripWhiteSpace();
-	 if (authBox->isChecked() == TRUE) { // this reverses the first name and last name of the author
-			 QString lastName, firstName="";
-			 int finder = author.findRev( ' ', -1, TRUE);
-			 lastName = author.right( author.length()-finder);
-			 firstName = author.left(finder);
-			 lastName = lastName.stripWhiteSpace();
-			 firstName = firstName.stripWhiteSpace();
+	 if (authBox->isChecked() == TRUE) {
+             // this reverses the first name and last name of the author
+             QString lastName, firstName="";
+             int finder = author.findRev( ' ', -1, TRUE);
+             lastName = author.right( author.length()-finder);
+             firstName = author.left(finder);
+             lastName = lastName.stripWhiteSpace();
+             firstName = firstName.stripWhiteSpace();
 
-			 if( lastName.find( firstName, 0, true)  == -1) // this avoids dup names
-					 author = lastName+", "+firstName;
+             if( lastName.find( firstName, 0, true)  == -1)
+                 // this avoids dup names
+                 author = lastName+", "+firstName;
 	 }
    return true;
 }////// end getAuthor()
@@ -335,7 +320,6 @@ void LibraryDialog::addItems()
       (title.find( "reserved",0, FALSE) == -1)
        && (file.find( "]",0, true) == -1)
        &&(title.find( "Audio",0, FALSE) == -1)) {
-//				qDebug("new item "+title);
       // fill string list or something to be able to sort by Author
        etextStruct.title = title;
        etextStruct.author = author;
@@ -431,8 +415,6 @@ bool LibraryDialog::download_newEtext()
 
 		directory += "/" + DlglistItemFile;
 
-//    qWarning(directory);
-
     Config cfg("Gutenbrowser");
 		cfg.setGroup("FTPsite");
 		ftp_host = cfg.readEntry("SiteName", "sailor.gutenberg.org");
@@ -468,7 +450,6 @@ bool LibraryDialog::getEtext(const QStringList &networkList)
         qDebug("Just downloaded " + NetworkDlg->localFileName);
 
         if(NetworkDlg->successDownload) {
-            //odebug << "Filename is "+File_Name << oendl;
             if(File_Name.right(4) == ".txt") {
                 QString  s_fileName = File_Name;
                 s_fileName.replace( s_fileName.length() - 3, 3, "gtn");
@@ -479,9 +460,6 @@ bool LibraryDialog::getEtext(const QStringList &networkList)
 		}
 
                 File_Name = s_fileName;
-
-                //odebug << "Filename is now "+File_Name << oendl;
-
             }
             if(File_Name.length() > 5 ) {
                 setTitle();
@@ -489,21 +467,14 @@ bool LibraryDialog::getEtext(const QStringList &networkList)
                 QString  name_file = fi.fileName();
                 name_file = name_file.left( name_file.length() - 4);
 
-                //odebug << "Setting doclink" << oendl;
                 DocLnk lnk;
-                //odebug << "name is "+name_file << oendl;
                 lnk.setName(name_file); //sets file name
-                //odebug << "Title is "+DlglistItemTitle << oendl;
                 lnk.setComment(DlglistItemTitle);
 
-                //odebug << "Filename is "+File_Name << oendl;
                 lnk.setFile(File_Name); //sets File property
                 lnk.setType("guten/plain");// hey is this a REGISTERED mime type?!?!? ;D
                 lnk.setExec(File_Name);
                 lnk.setIcon("gutenbrowser/Gutenbrowser");
-                if(!lnk.writeLink()) {
-                   //odebug << "Writing doclink did not work" << oendl;
-                }
             } else
                 QMessageBox::message("Note","<p>There was an error with the file</p>");
         }
@@ -535,7 +506,6 @@ bool LibraryDialog::download_Etext()
 	 
    NewlistItemYear = DlglistItemYear.right(2);
    int NewlistItemYear_Int = NewlistItemYear.toInt(0, 10);
-   //odebug << NewlistItemYear << oendl;
    if (NewlistItemYear_Int < 91 && NewlistItemYear_Int > 70) {
       NewlistItemYear = "90";
    }
@@ -546,8 +516,6 @@ bool LibraryDialog::download_Etext()
 
    if( ftp_base_dir.find("=",0,true) )
       ftp_base_dir.remove(  ftp_base_dir.find("=",0,true),1);
-
-//   networkUrl = "ftp://"+ftp_host+dir;
 
    outputFile = local_library+".guten_temp";
 
@@ -560,7 +528,6 @@ bool LibraryDialog::download_Etext()
    networkList.append((const char *)dir); //ftp base directory
    networkList.append((const char *)outputFile); //output filepath
    networkList.append((const char *)NewlistItemFile); //filename
-//<< (char *)ftp_host << (char *)dir << (char *)outputFile << (char *)NewlistItemFile;
    getEtext( networkList);
    
  return true;
@@ -573,17 +540,8 @@ bool LibraryDialog::httpDownload()
    config.setGroup( "Browser" );
    QString brow = config.readEntry("Preferred", "");
    QString file_name = "./.guten_temp";
-   //    config.setGroup( "HttpServer" );
-   //    QString s_http = config.readEntry("Preferred", "http://sailor.gutenbook.org");
    QString httpName = proxy_http + "/"+Edir;
-   //    progressBar->setProgress( i);
    i++;
-   if ( brow != "Konq")    { /////////// use lynx
-      //        QString cmd = "lynx -source " + httpName +" | cat >> " + file_name;
-      //        system(cmd);
-   }    else    { //////////// use KFM
-      //        KFM::download( httpName, file_name);
-   }
    i++;
    QFile tmp( file_name);
    QString str;
@@ -602,10 +560,7 @@ bool LibraryDialog::httpDownload()
    i++;
    if ( brow != "KFM"){ ///////// use lynx
       QString cmd = "lynx -source " + httpName +" | cat >> " + m_getFilePath;
-      //        QMessageBox::message("Error", cmd);
       system(cmd);
-   } else { ////////// use KFM
-      //        KFM::download( httpName, m_getFilePath);
    }
    i++;
 #endif
@@ -623,14 +578,12 @@ void LibraryDialog::cancelIt()
 bool LibraryDialog::setTitle()
 {
    Config config("Gutenbrowser");
-   //odebug << "setting title" << oendl;
-   //odebug << DlglistItemTitle << oendl;
 
    if( DlglistItemTitle.find("[",0,true) != -1)
       DlglistItemTitle.replace(DlglistItemTitle.find("[",0,true),1, "(" );
    if( DlglistItemTitle.find("]",0,true) !=-1)
       DlglistItemTitle.replace(DlglistItemTitle.find("]",0,true),1, ")" );
-   //odebug << "Title being set is "+DlglistItemTitle << oendl;
+
    int test = 0;
    QString ramble, temp;
    config.setGroup("Files");
@@ -678,7 +631,6 @@ void LibraryDialog::saveConfig()
       config.setGroup("SortAuth");
       config.writeEntry("authSort", "false");
    }
-   //    config.write();
 }
 
 /*
@@ -736,7 +688,6 @@ void LibraryDialog::onButtonSearch()
       SearchResultsDialog->showMaximized();
       if( SearchResultsDialog->exec() != 0) {
          texter = SearchResultsDialog->selText;
-         //           //odebug << texter << oendl;
          resultLs = SearchResultsDialog->resultsList;
          i_berger = 1;
       } else {
@@ -747,13 +698,11 @@ void LibraryDialog::onButtonSearch()
       QString tester;
       for ( QStringList::Iterator it = resultLs.begin(); it != resultLs.end(); ++it ) {
          texter.sprintf("%s \n",(*it).latin1());
-         //           //odebug << texter << oendl;
          if( tester!=texter)
             parseSearchResults( texter);
          tester = texter;
       }
-      if(searchDlg)
-         delete searchDlg;
+      delete searchDlg;
    }
    if(checkBox->isChecked() ) {
       accept();
@@ -762,8 +711,7 @@ void LibraryDialog::onButtonSearch()
    }
 }
 
-/*
-  splits the result string and calls download for the current search result*/
+// splits the result string and calls download for the current search result
 void  LibraryDialog::parseSearchResults( QString resultStr)
 {
    int stringLeng = resultStr.length();
@@ -771,32 +719,29 @@ void  LibraryDialog::parseSearchResults( QString resultStr)
    QString my;
    my.setNum( stringLeng, 10);
 
-   if( resultStr.length() > 2 && resultStr.length() < 130) {
-      QStringList token = QStringList::split(" : ", resultStr);
+    if( resultStr.length() > 2 && resultStr.length() < 130) {
+        QStringList token = QStringList::split(" : ", resultStr);
 
-      DlglistItemTitle  = token[0];
-			DlglistItemTitle = DlglistItemTitle.stripWhiteSpace();
+        DlglistItemTitle  = token[0];
+        DlglistItemTitle = DlglistItemTitle.stripWhiteSpace();
 			
-      DlglistItemYear  = token[1];
-      DlglistItemYear = DlglistItemYear.stripWhiteSpace();
+        DlglistItemYear  = token[1];
+        DlglistItemYear = DlglistItemYear.stripWhiteSpace();
       
-      DlglistItemFile = token[2];
+        DlglistItemFile = token[2];
 
-      DlglistItemFile = DlglistItemFile.stripWhiteSpace();
-      
-//      qWarning(DlglistItemYear);
+        DlglistItemFile = DlglistItemFile.stripWhiteSpace();
 
+        if(DlglistItemFile.left(1) == "/")
+            DlglistItemFile =
+                DlglistItemFile.right( DlglistItemFile.length() - 1);
 
-			if(DlglistItemFile.left(1) == "/")
-					DlglistItemFile = DlglistItemFile.right( DlglistItemFile.length() - 1);
-
-			if(	DlglistItemFile.toInt() > 10000 || DlglistItemYear == "1980" ) {
-         // new directory sturcture
-					download_newEtext(); //)
-      } else {
-					download_Etext(); //)
-      }
-   }
+        if(DlglistItemFile.toInt() > 10000 || DlglistItemYear == "1980" )
+            // new directory sturcture
+            download_newEtext();
+        else
+            download_Etext();
+    }
 }
 
 void LibraryDialog::sortLists(int index)
@@ -814,13 +759,9 @@ void LibraryDialog::sortLists(int index)
     ListView5->sort();
 }
 
-/*
-  Downloads the current selected listitem*/
+// Downloads the current selected listitem
 bool LibraryDialog::getItem(QListViewItem *it)
 {
-   //    //odebug << "selected getItem" << oendl;
-
-   //    DlglistItemNumber = it->text(0);
    DlglistItemTitle = it->text(0);
    DlglistItemYear = it->text(2);
    DlglistItemFile = it->text(3);
@@ -832,12 +773,9 @@ bool LibraryDialog::getItem(QListViewItem *it)
    return true;
 }
 
-/*
-  download button is pushed so we get the current items to download*/
+// download button is pushed so we get the current items to download
 bool LibraryDialog::onButtonDownload()
 {
-   //    //odebug << "selected onButtonDownloadz" << oendl;
-
    QListViewItemIterator it1( ListView1 );
    QListViewItemIterator it2( ListView2 );
    QListViewItemIterator it3( ListView3 );
@@ -874,11 +812,9 @@ bool LibraryDialog::onButtonDownload()
 }
 
 
-/*
-  handles the sorting combo box */
+// handles the sorting combo box
 void LibraryDialog::comboSelect(int index)
 {
-   //    //odebug << "we are sorting" << oendl;
    ListView1->setSorting( index, true);
    ListView2->setSorting( index, true);
    ListView3->setSorting( index, true);
@@ -890,12 +826,6 @@ void LibraryDialog::comboSelect(int index)
    ListView3->sort();
    ListView4->sort();
    ListView5->sort();
-
-   //      ListView1->triggerUpdate();
-   //      ListView2->triggerUpdate();
-   //      ListView3->triggerUpdate();
-   //      ListView4->triggerUpdate();
-   //      ListView5->triggerUpdate();
 }
 
 void LibraryDialog::newList()
@@ -905,7 +835,6 @@ void LibraryDialog::newList()
    } else {
       Output *outDlg;
       buttonNewList->setDown(true);
-      //odebug << "changing dir "+QPEApplication::qpeDir()+"etc/gutenbrowser" << oendl;
       QString gutenindex1 = local_library + "/GUTINDEX.ALL";
          
       QString cmd="wget -O " + gutenindex1 + " http://www.gutenberg.org/dirs/GUTINDEX.ALL 2>&1";
@@ -925,10 +854,7 @@ void LibraryDialog::newList()
          outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,false);
          sleep(1);
          fp = popen(  (const char *) cmd, "r");
-         if ( !fp ) {
-         } else {
-            //odebug << "Issuing the command\n"+cmd << oendl;
-            //                 system(cmd);
+         if ( fp ) {
             while ( fgets( line, sizeof line, fp)) {
                outDlg->OutputEdit->append(line);
                outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,false);
@@ -938,21 +864,11 @@ void LibraryDialog::newList()
             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,false);
             qApp->processEvents();
 
-            //                  if( QFile(gutenindex1).exists() ) {
-            //                      QString gutenindex=QPEApplication::qpeDir()+"etc/gutenbrowser/GUTINDEX.ALL";
-            //                      if( rename(gutenindex1.latin1(),gutenindex.latin1()) !=0)
-            //                          //odebug << "renaming error" << oendl;
-            //                  }
-
          }
-         //               outDlg->close();
          FindLibrary();
-         if(outDlg) delete outDlg;
+         delete outDlg;
       }
       buttonNewList->setDown(false);
-     
-      //         if(outDlg)
-      //             delete outDlg;
    }
 }
 
@@ -998,7 +914,6 @@ bool LibraryDialog::moreInfo()
    }
    item=0;
    if(titleString.length()>2) {
-      //odebug << "Title is "+titleString << oendl;
       titleString.replace( QRegExp("\\s"), "%20");
       titleString.replace( QRegExp("'"), "%20");
       titleString.replace( QRegExp("\""), "%20");
@@ -1012,22 +927,19 @@ bool LibraryDialog::moreInfo()
 
 }
 
-/*
-  This loads the library Index*/
+// This loads the library Index
 void LibraryDialog::FindLibrary()
 {
    buttonLibrary->setDown(true);
 
    qApp->processEvents();
-   if( QFile( new_index).exists() /* && this->isHidden() */) {
+   if( QFile( new_index).exists()) {
       newindexLib.setName( new_index);
       indexLib.setName( new_index);
-      //odebug << "index file is "+ new_index << oendl;
       Newlibrary();
    } else {
       newindexLib.setName( old_index);
       indexLib.setName( old_index);
-      //odebug << "new index nameis "+ old_index << oendl;
       Library();
    }
    indexLoaded =true;

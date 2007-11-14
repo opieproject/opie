@@ -38,9 +38,7 @@ class QGridLayout;
 class QListView;
 class QListViewItem;
 class QPushButton;
-//class QTabWidget;
 class QWidget;
-//class Gutenbrowser;
 
 typedef struct {
    QString title;
@@ -55,7 +53,6 @@ class LibraryDialog : public QDialog {
 
 public:
     LibraryDialog( QWidget* parent = 0, const char* name = 0 , bool modal = TRUE, WFlags fl = 0 );
-    ~LibraryDialog();
 
     QTabWidget *tabWidget;
     QListView *ListView1,*ListView2,*ListView3,*ListView4,*ListView5;

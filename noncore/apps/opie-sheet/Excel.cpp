@@ -235,10 +235,7 @@ bool ExcelBook::CloseFile(void)
     SharedStrings.resize(0);
     Names.resize(0);
     Sheets.resize(0);
-    fclose(File);
-    printf("closed excel file!\r\n");
-    if(File==NULL) return true;
-    return false;
+    return !fclose(File);
 };
 
 void ExcelBook::SeekPosition(int pos)

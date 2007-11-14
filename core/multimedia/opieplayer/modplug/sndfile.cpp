@@ -1078,9 +1078,13 @@ UINT CSoundFile::WriteSample(FILE *f, MODINSTRUMENT *pins, UINT nFlags, UINT nMa
 UINT CSoundFile::ReadSample(MODINSTRUMENT *pIns, UINT nFlags, LPCSTR lpMemFile, DWORD dwMemLength)
 //------------------------------------------------------------------------------------------------
 {
+	if (!pIns || !lpMemFile)
+		return 0;
+
 	UINT len = 0, mem = pIns->nLength+6;
 
-	if ((!pIns) || (pIns->nLength < 4) || (!lpMemFile)) return 0;
+	if (pIns->nLength < 4)
+		return 0;
 	if (pIns->nLength > MAX_SAMPLE_LENGTH) pIns->nLength = MAX_SAMPLE_LENGTH;
 	pIns->uFlags &= ~(CHN_16BIT|CHN_STEREO);
 	if (nFlags & RSF_16BIT)

@@ -1652,6 +1652,9 @@ void blend_xx44 (uint8_t *dst_img, vo_overlay_t *img_overl,
                 alphablend_t *extra_data,
 		xx44_palette_t *palette,int ia44)
 {
+  if (!img_overl)
+    return;
+
   int  src_width  = img_overl->width;
   int  src_height = img_overl->height;
   rle_elem_t *rle        = img_overl->rle;
@@ -1665,9 +1668,6 @@ void blend_xx44 (uint8_t *dst_img, vo_overlay_t *img_overl,
   uint8_t *dst;
   uint8_t alphamask = (ia44) ? 0x0F : 0xF0;
   int hili_right;
-
-  if (!img_overl)
-    return;
 
   dst_y = dst_img + dst_pitch*y_off + x_off;
 
