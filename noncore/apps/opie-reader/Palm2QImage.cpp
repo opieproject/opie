@@ -193,10 +193,6 @@ QImage* Palm2QImage
 //      qDebug("Can't handle this format DirectColor image -- too wide in some color (%d:%d:%d)\n", palm_red_bits, palm_green_bits, palm_blue_bits);
       return NULL;
     }
-    if (bits_per_pixel > (8 * sizeof(unsigned long))) {
-//      qDebug ("Can't handle this format DirectColor image -- too many bits per pixel (%d)\n", bits_per_pixel);
-      return NULL;
-    }
     imagedatastart = palmimage + 24;
   } else {
 //    qDebug("Unknown bits-per-pixel of %d encountered.\n", bits_per_pixel);

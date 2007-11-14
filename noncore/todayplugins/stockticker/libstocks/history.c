@@ -22,6 +22,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #ifdef __WINDOWS__
 #include <malloc.h>
@@ -71,11 +72,11 @@ libstocks_return_code get_history_csv(char *symbol,
   m1 = strtok(NULL, "/");
   if(!m1) return ERRDATE;
   d1 = strtok(NULL, "/");
-  if(!m1) return ERRDATE;
+  if(!d1) return ERRDATE;
 
   ch_printed += snprintf(&(url[ch_printed]), 80 - ch_printed, "%s%s%s%s%s%s",
 			 "&a=", m1, "&b=", d1, "&c=", y1);
-  if (ch_print < 0 || ch_printed == 80)
+  if (ch_printed < 0 || ch_printed == 80)
       return ERRURL;
 
   if (strlen(date2) > 11) return ERRDATE;
@@ -93,7 +94,7 @@ libstocks_return_code get_history_csv(char *symbol,
   ch_printed += snprintf(&(url[ch_printed]), 80 - ch_printed, "%s%s%s%s%s%s%s",
 			 "&d=", m2, "&e=", d2, "&f=", y2, "&g=d&q=q&y=0&x=.csv");
 
-  if (ch_print < 0)
+  if (ch_printed < 0)
       return ERRURL;
 
   error=http_get(url, (char *)history_stocks_server, &data);
