@@ -1184,7 +1184,7 @@ static void writeGroup(OFile *fp, VObject *o)
     while ((o=isAPropertyOf(o,VCGroupingProp)) != 0) {
 	strncpy(buf2,STRINGZ_VALUE_OF(o),255);
 	strcat(buf2,".");
-	strncat(buf2,buf1,254-STRINGZ_VALUE_OF(o));
+	strncat(buf2,buf1,254-strlen(STRINGZ_VALUE_OF(o)));
 	strcpy(buf1,buf2);
     }
     appendsOFile(fp,buf1);
