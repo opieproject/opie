@@ -214,7 +214,8 @@ QPopupMenu *OPimMainWindow::itemContextMenu() {
         m_itemContextMenu = new QPopupMenu( this );
         m_itemEditAction->addTo( m_itemContextMenu );
         m_itemDuplicateAction->addTo( m_itemContextMenu );
-        m_itemBeamAction->addTo( m_itemContextMenu );
+        if(m_itemBeamAction)
+            m_itemBeamAction->addTo( m_itemContextMenu );
         m_itemDeleteAction->addTo( m_itemContextMenu );
     }
 
