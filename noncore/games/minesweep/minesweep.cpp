@@ -289,12 +289,13 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     addToolBar( toolBar );
 
     MineFrame *mainframe = new MineFrame( this );
-    mainframe->setFrameShape( QFrame::Box );
-    mainframe->setFrameShadow( QFrame::Raised );
-
-    mainframe->setLineWidth(2);
-
+    // FIXME: now really, we should just remove this frame entirely
+    // and just use the MineField as the central widget. I tried
+    // this though and it didn't work. - Paul Eggleton 15 Nov 2007
+    mainframe->setFrameStyle( QFrame::NoFrame );
+    
     field = new MineField( mainframe );
+    field->setLineWidth(1);
     mainframe->setField( field );
     QFont fnt = field->font();
     fnt.setBold( TRUE );
