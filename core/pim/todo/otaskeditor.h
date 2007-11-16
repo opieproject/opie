@@ -58,6 +58,8 @@ public:
     void init( const Opie::OPimTodo& todo );
 
     Opie::OPimTodo todo()const;
+protected:
+    void showEvent( QShowEvent* );
 private:
     void load( const Opie::OPimTodo& );
     void init();

@@ -38,6 +38,8 @@
 
 #include "otaskeditor.h"
 
+#include <qcombobox.h>
+
 using namespace Opie::Ui;
 using namespace Opie;
 
@@ -118,7 +120,10 @@ void OTaskEditor::init() {
     /* connect due date changed to the recurrence tab */
     connect(m_stat, SIGNAL(dueDateChanged(const QDate&) ),
             m_rec, SLOT(setStartDate(const QDate&) ) );
+}
 
-
+void OTaskEditor::showEvent( QShowEvent* ) {
+    // Set appropriate focus each time the editor is shown
     m_tab->setCurrentTab( m_overView );
+    m_overView->cmbDesc->setFocus();
 }
