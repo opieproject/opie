@@ -48,14 +48,17 @@ OTaskEditor::OTaskEditor(int cur)
     init();
     init( cur );
 }
+
 OTaskEditor::OTaskEditor( const OPimTodo& to)
     : QDialog( 0, 0, TRUE, WStyle_ContextHelp ) {
     init();
     init( to );
 }
+
 OTaskEditor::~OTaskEditor() {
 
 }
+
 void OTaskEditor::init( int cur ) {
     OPimTodo to;
     to.setUid( 1 ); // generate a new uid
@@ -63,18 +66,29 @@ void OTaskEditor::init( int cur ) {
         to.setCategories( cur );
     load(to);
 }
+
 void OTaskEditor::init( const OPimTodo& to ) {
     load( to );
 }
+
 OPimTodo OTaskEditor::todo()const{
     OPimTodo to ( m_todo );
     m_overView->save( to );
     m_stat->save( to );
-    to.setRecurrence( m_rec->recurrence() );
+
+    // If user unchecked "recurring task" then make sure recurrence actually gets disabled
+    OPimRecurrence rec = m_rec->recurrence();
+    if(!m_overView->ckbRecurrence->isChecked()) {
+        if(rec.type() != OPimRecurrence::NoRepeat)
+            rec.setType(OPimRecurrence::NoRepeat);
+    }
+    to.setRecurrence( rec );
+
     m_alarm->save( to );
 
     return to;
 }
+
 void OTaskEditor::load(const OPimTodo& to) {
     m_overView->load( to );
     m_stat->load( to );
@@ -83,6 +97,7 @@ void OTaskEditor::load(const OPimTodo& to) {
 
     m_todo = to;
 }
+
 void OTaskEditor::init() {
     setCaption(tr("Task Editor") );
 
@@ -115,7 +130,7 @@ void OTaskEditor::init() {
 
     /* signal and slots */
     connect(m_overView, SIGNAL(recurranceEnabled(bool) ),
-            m_rec, SLOT(setEnabled(bool) ) );
+            this, SLOT(recurranceEnabled(bool) ) );
 
     /* connect due date changed to the recurrence tab */
     connect(m_stat, SIGNAL(dueDateChanged(const QDate&) ),
@@ -126,4 +141,16 @@ void OTaskEditor::showEvent( QShowEvent* ) {
     // Set appropriate focus each time the editor is shown
     m_tab->setCurrentTab( m_overView );
     m_overView->cmbDesc->setFocus();
+}
+
+void OTaskEditor::recurranceEnabled( bool enabled ) {
+    m_rec->setEnabled(enabled);
+    if(enabled) {
+        // Default recurrence to daily if not set
+        OPimRecurrence rec = m_rec->recurrence();
+        if(rec.type() == OPimRecurrence::NoRepeat) {
+            rec.setType(OPimRecurrence::Daily);
+            m_rec->setRecurrence(rec);
+        }
+    }
 }

@@ -60,6 +60,8 @@ public:
     Opie::OPimTodo todo()const;
 protected:
     void showEvent( QShowEvent* );
+protected slots:
+    void recurranceEnabled( bool enabled );
 private:
     void load( const Opie::OPimTodo& );
     void init();
