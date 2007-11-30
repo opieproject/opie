@@ -346,6 +346,7 @@ ServerPI::ServerPI( int socket, QObject *parent, const char* name )
 
 
         directory = QDir::currentDirPath();
+        directory.cd("/");
 
         static int p = 1024;
 
