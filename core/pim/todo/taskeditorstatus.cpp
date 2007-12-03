@@ -63,40 +63,14 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
 
     QGridLayout *layout = new QGridLayout( container, 7, 3, 4, 4 );
 
-    // Status
-    QLabel *label = new QLabel( tr( "Status:" ), container );
-    layout->addWidget( label, 0, 0 );
-    QWhatsThis::add( label, tr( "Click here to set the current status of this task." ) );
-    cmbStatus = new QComboBox( FALSE, container );
-    cmbStatus->insertItem( tr( "Started" ) );
-    cmbStatus->insertItem( tr( "Postponed" ) );
-    cmbStatus->insertItem( tr( "Finished" ) );
-    cmbStatus->insertItem( tr( "Not started" ) );
-    layout->addMultiCellWidget( cmbStatus, 0, 0, 1, 2 );
-    QWhatsThis::add( cmbStatus, tr( "Click here to set the current status of this task." ) );
-
-    // Progress
-    label = new QLabel( tr( "Progress:" ), container );
-    layout->addWidget( label, 1, 0 );
-    QWhatsThis::add( label, tr( "Select progress made on this task here." ) );
-    cmbProgress = new QComboBox( FALSE, container );
-    cmbProgress->insertItem( tr( "0 %" ) );
-    cmbProgress->insertItem( tr( "20 %" ) );
-    cmbProgress->insertItem( tr( "40 %" ) );
-    cmbProgress->insertItem( tr( "60 %" ) );
-    cmbProgress->insertItem( tr( "80 %" ) );
-    cmbProgress->insertItem( tr( "100 %" ) );
-    layout->addMultiCellWidget( cmbProgress, 1, 1, 1, 2 );
-    QWhatsThis::add( cmbProgress, tr( "Select progress made on this task here." ) );
-
     // Start date
     ckbStart = new QCheckBox( tr( "Start Date:" ), container );
-    layout->addWidget( ckbStart, 2, 0 );
+    layout->addWidget( ckbStart, 0, 0 );
     QWhatsThis::add( ckbStart, tr( "Click here to set the date this task was started." ) );
     connect( ckbStart, SIGNAL( clicked() ), this, SLOT( slotStartChecked() ) );
     btnStart = new QPushButton( curDateStr, container );
     btnStart->setEnabled( FALSE );
-    layout->addMultiCellWidget( btnStart, 2, 2, 1, 2 );
+    layout->addMultiCellWidget( btnStart, 0, 0, 1, 2 );
     QWhatsThis::add( btnStart, tr( "Click here to set the date this task was started." ) );
     QPopupMenu *popup = new QPopupMenu( this );
     m_startBook = new DateBookMonth( popup, 0, TRUE );
@@ -107,12 +81,12 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
 
     // Due date
     ckbDue = new QCheckBox( tr( "Due Date:" ), container );
-    layout->addWidget( ckbDue, 3, 0 );
+    layout->addWidget( ckbDue, 1, 0 );
     QWhatsThis::add( ckbDue, tr( "Click here to set the date this task needs to be completed by." ) );
     connect( ckbDue, SIGNAL( clicked() ), this, SLOT( slotDueChecked() ) );
     btnDue = new QPushButton( curDateStr, container );
     btnDue->setEnabled( FALSE );
-    layout->addMultiCellWidget( btnDue, 3, 3, 1, 2 );
+    layout->addMultiCellWidget( btnDue, 1, 1, 1, 2 );
     QWhatsThis::add( btnDue, tr( "Click here to set the date this task needs to be completed by." ) );
     popup = new QPopupMenu( this );
     m_dueBook = new DateBookMonth( popup, 0, TRUE );
@@ -123,12 +97,12 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
 
     // Completed
     ckbComp = new QCheckBox( tr( "Completed:" ), container );
-    layout->addWidget( ckbComp, 4, 0 );
+    layout->addWidget( ckbComp, 2, 0 );
     QWhatsThis::add( ckbComp, tr( "Click here to mark this task as completed." ) );
     connect( ckbComp, SIGNAL( clicked() ), this, SLOT( slotCompChecked() ) );
     btnComp = new QPushButton( curDateStr, container );
     btnComp->setEnabled( FALSE );
-    layout->addMultiCellWidget( btnComp, 4, 4, 1, 2 );
+    layout->addMultiCellWidget( btnComp, 2, 2, 1, 2 );
     QWhatsThis::add( btnComp, tr( "Click here to set the date this task was completed." ) );
     popup = new QPopupMenu( this );
     m_compBook = new DateBookMonth( popup, 0, TRUE );
@@ -136,6 +110,33 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
     btnComp->setPopup( popup );
     connect( m_compBook, SIGNAL( dateClicked(int,int,int) ),
              this, SLOT( slotCompChanged(int,int,int) ) );
+
+    // Status
+    QLabel *label = new QLabel( tr( "Status:" ), container );
+    layout->addWidget( label, 3, 0 );
+    QWhatsThis::add( label, tr( "Click here to set the current status of this task." ) );
+    cmbStatus = new QComboBox( FALSE, container );
+    cmbStatus->insertItem( tr( "Started" ) );
+    cmbStatus->insertItem( tr( "Postponed" ) );
+    cmbStatus->insertItem( tr( "Finished" ) );
+    cmbStatus->insertItem( tr( "Not started" ) );
+    layout->addMultiCellWidget( cmbStatus, 3, 3, 1, 2 );
+    QWhatsThis::add( cmbStatus, tr( "Click here to set the current status of this task." ) );
+
+    // Progress
+    // If items are changed here, don't forget to change constants in slotCompChecked()
+    label = new QLabel( tr( "Progress:" ), container );
+    layout->addWidget( label, 4, 0 );
+    QWhatsThis::add( label, tr( "Select progress made on this task here." ) );
+    cmbProgress = new QComboBox( FALSE, container );
+    cmbProgress->insertItem( tr( "0 %" ) );
+    cmbProgress->insertItem( tr( "20 %" ) );
+    cmbProgress->insertItem( tr( "40 %" ) );
+    cmbProgress->insertItem( tr( "60 %" ) );
+    cmbProgress->insertItem( tr( "80 %" ) );
+    cmbProgress->insertItem( tr( "100 %" ) );
+    layout->addMultiCellWidget( cmbProgress, 4, 4, 1, 2 );
+    QWhatsThis::add( cmbProgress, tr( "Select progress made on this task here." ) );
 
     QSpacerItem *spacer = new QSpacerItem( 5, 5, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding );
     layout->addItem( spacer, 5, 0 );
