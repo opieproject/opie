@@ -1,4 +1,4 @@
-/* $Id: obexftpopup.cpp,v 1.1 2006-03-19 14:59:21 korovkin Exp $ */
+/* $Id: obexftpopup.cpp,v 1.2 2007-12-12 10:03:04 paule Exp $ */
 /* OBEX file browser popup */
 /***************************************************************************
  *                                                                         *
@@ -41,6 +41,8 @@ ObexFtpPopup::ObexFtpPopup(const OpieTooth::Services& service,
 
 ObexFtpPopup::~ObexFtpPopup()
 {
+    m_push->removeFrom(this);
+    m_browse->removeFrom(this);
     delete m_push;
     delete m_browse;
 }

@@ -31,6 +31,7 @@ ObexPopup::ObexPopup(const OpieTooth::Services& service,  OpieTooth::BTDeviceIte
 
 ObexPopup::~ObexPopup()
 {
+    m_push->removeFrom( this );
     delete m_push;
 }
 
@@ -43,5 +44,3 @@ void ObexPopup::slotPush()
     ObexDialog obexDialog(device, port);
     QPEApplication::execDialog( &obexDialog );
 }
-
-
