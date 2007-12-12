@@ -369,7 +369,12 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
                 break;
 
             case 4:
-                // deletes childs too
+                // Remove item from device lists in case we are getting
+                // services or status asynchronously
+                QString mac = static_cast<BTDeviceItem*>( item )->mac();
+                m_deviceList.remove( mac );
+                m_deviceListSrv.remove( mac );
+                // Delete item and child items
                 delete item;
                 break;
         }
