@@ -65,8 +65,9 @@ namespace OpieTooth {
         PopupHelper m_popHelper;
         Manager *m_localDevice;
         QMap<QString,BTDeviceItem*> m_deviceList;
+        QMap<QString,BTDeviceItem*> m_deviceListSrv;
 
-        void deviceActive( const RemoteDevice &device );
+        void deviceActive( BTDeviceItem * item );
 
 	QString m_deviceName;
 	QString m_defaultPasskey;

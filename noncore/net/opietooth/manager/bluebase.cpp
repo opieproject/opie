@@ -126,11 +126,12 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     initGui();
 
     devicesView->setRootIsDecorated(true);
+    devicesView->setColumnWidthMode(0,QListView::Manual);
+    devicesView->setColumnWidth(0,160);
     m_iconLoader = new BTIconLoader();
     writeToHciConfig();
     addConnectedDevices();
     readSavedDevices();
-    QTimer::singleShot( 3000, this, SLOT( addServicesToDevices() ) );
     forwarder = NULL;
 }
 
@@ -323,10 +324,9 @@ void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices )
 
         deviceItem = new BTDeviceItem( devicesView , (*it) );
         deviceItem->setPixmap( 1, m_findPix );
-        deviceItem->setExpandable ( true );
 
         // look if device is avail. atm, async
-        deviceActive( (*it) );
+        deviceActive( deviceItem );
     }
     addServicesToDevices();
 }
@@ -449,7 +449,7 @@ void BlueBase::addServicesToDevice( BTDeviceItem * item )
     odebug << "BlueBase::addServicesToDevice" << oendl;
     // row of mac adress text(3)
     RemoteDevice device = item->remoteDevice();
-    m_deviceList.insert( item->mac() , item );
+    m_deviceListSrv.insert( item->mac() , item );
     // and some time later I get a signal foundServices( const QString& device, Services::ValueList ); back
     m_localDevice->searchServices( device );
 }
@@ -461,14 +461,14 @@ void BlueBase::addServicesToDevice( BTDeviceItem * item )
  */
 void BlueBase::addServicesToDevice( const QString& device, Services::ValueList servicesList )
 {
-    odebug << "BlueBase::fill services list" << oendl;
+    odebug << "BlueBase::fill services list for '" << device << "'"  << oendl;
 
     QMap<QString,BTDeviceItem*>::Iterator it;
     BTDeviceItem* deviceItem = 0;
 
     // get the right devices which requested the search
-    it = m_deviceList.find( device );
-    if( it == m_deviceList.end() )
+    it = m_deviceListSrv.find( device );
+    if( it == m_deviceListSrv.end() )
         return;
     deviceItem = it.data();
 
@@ -513,7 +513,7 @@ void BlueBase::addServicesToDevice( const QString& device, Services::ValueList s
         serviceItem = new BTServiceItem( deviceItem, s1 );
     }
     // now remove them from the  list
-    m_deviceList.remove( it );
+    m_deviceListSrv.remove( it );
 }
 
 void BlueBase::addSignalStrength()
@@ -627,11 +627,11 @@ void BlueBase::addConnectedDevices( ConnectionState::ValueList connectionList )
  * Find out if a device can  currently be reached
  * @param device
  */
-void BlueBase::deviceActive( const RemoteDevice &device )
+void BlueBase::deviceActive( BTDeviceItem * item )
 {
     // search by mac, async, gets a signal back
-    // We should have a BTDeviceItem there or where does it get added to the map -zecke
-    m_localDevice->isAvailable( device.mac() );
+    m_deviceList.insert( item->mac(), item );
+    m_localDevice->isAvailable( item->mac() );
 }
 
 
