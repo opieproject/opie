@@ -105,9 +105,12 @@ void Manager::removeServices( const QStringList& list){
     for (it = list.begin(); it != list.end(); ++it )
         removeService( (*it) );
 }
-void Manager::searchServices( const QString& remDevice ){
+void Manager::searchServices( const QString& remDevice, bool userecords ){
     m_sdp =new OProcess();
-    *m_sdp << "sdptool" << "browse" << remDevice;
+    if(userecords)
+        *m_sdp << "sdptool" << "records" << remDevice;
+    else
+        *m_sdp << "sdptool" << "browse" << remDevice;
     m_sdp->setName( remDevice.latin1() );
     odebug << "Manager: search Services for " << remDevice.latin1() << oendl;
     connect(m_sdp, SIGNAL(processExited(Opie::Core::OProcess*) ),
@@ -122,8 +125,8 @@ void Manager::searchServices( const QString& remDevice ){
         emit foundServices( remDevice, list );
     }
 }
-void Manager::searchServices( const RemoteDevice& dev){
-    searchServices( dev.mac() );
+void Manager::searchServices( const RemoteDevice& dev, bool userecords ){
+    searchServices( dev.mac(), userecords );
 }
 QString Manager::toDevice( const QString& /*mac*/ ){
     return QString::null;
@@ -166,10 +169,22 @@ void Manager::slotSDPExited( OProcess* proc)
             m_out.remove( it );
         }
     }
-    emit foundServices( proc->name(), list );
-    if (proc == m_sdp)
-        m_sdp = 0;
-    delete proc;
+
+    if(list.count()==0 && proc->exitStatus() == 0 && proc->args().count() > 1 && proc->args()[1] == "browse" ) {
+        // No services using browse, now search using "sdptool records"
+        QString dev = proc->name();
+        if (proc == m_sdp)
+            m_sdp = 0;
+        delete proc;
+        odebug << "Manager: sdptool browse returned no services, running sdptool records" << oendl;
+        searchServices(dev, true);
+    }
+    else {
+        emit foundServices( proc->name(), list );
+        if (proc == m_sdp)
+            m_sdp = 0;
+        delete proc;
+    }
 }
 Services::ValueList Manager::parseSDPOutput( const QString& out ) {
     Services::ValueList list;

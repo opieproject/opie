@@ -104,12 +104,12 @@ namespace OpieTooth {
          * search for services on a remote device
          *
          */
-        void searchServices( const QString& remDevice );
+        void searchServices( const QString& remDevice, bool userecords=false );
 
         /**
          * search for services on a remote device
          */
-        void searchServices( const RemoteDevice& );
+        void searchServices( const RemoteDevice& dev, bool userecords=false );
 
         /**
          * Starts to connect to the device
