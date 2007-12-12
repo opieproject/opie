@@ -42,7 +42,7 @@ namespace OpieTooth {
         BlueBase( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
         ~BlueBase();
 
-       static QString appName() { return QString::fromLatin1("bluetooth-manager"); }
+        static QString appName() { return QString::fromLatin1("bluetooth-manager"); }
 
     protected:
 
@@ -53,13 +53,13 @@ namespace OpieTooth {
 
     private:
         bool find( const RemoteDevice& device );
-	void readConfig();
-	void writeConfig();
+        void readConfig();
+        void writeConfig();
         void readSavedDevices();
         void writeSavedDevices();
         void writeToHciConfig();
-	QString status()const;
-	void initGui();
+        QString status()const;
+        void initGui();
         void setInfo();
 
         PopupHelper m_popHelper;
@@ -69,12 +69,12 @@ namespace OpieTooth {
 
         void deviceActive( BTDeviceItem * item );
 
-	QString m_deviceName;
-	QString m_defaultPasskey;
-	bool m_useEncryption;
-	bool m_enableAuthentification;
-	bool m_enablePagescan;
-	bool m_enableInquiryscan;
+        QString m_deviceName;
+        QString m_defaultPasskey;
+        bool m_useEncryption;
+        bool m_enableAuthentification;
+        bool m_enablePagescan;
+        bool m_enableInquiryscan;
 
         QPixmap m_offPix;
         QPixmap m_onPix;
@@ -83,7 +83,7 @@ namespace OpieTooth {
         BTIconLoader *m_iconLoader;
         SerialForwarder* forwarder;
 
-	private slots:
+    private slots:
         void addSearchedDevices( const QValueList<RemoteDevice> &newDevices );
         void addServicesToDevices();
         void addServicesToDevice( BTDeviceItem *item );
@@ -98,9 +98,9 @@ namespace OpieTooth {
         void doEncrypt(bool);
         void forwardExit(Opie::Core::OProcess* proc);
         void editServices();
-	void addSignalStrength();
-	void addSignalStrength( const QString& mac, const QString& strengh );
-	void rfcommDialog();
+        void addSignalStrength();
+        void addSignalStrength( const QString& mac, const QString& strengh );
+        void rfcommDialog();
 
     };
 
