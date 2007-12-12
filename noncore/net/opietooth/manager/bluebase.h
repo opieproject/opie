@@ -83,6 +83,8 @@ namespace OpieTooth {
         BTIconLoader *m_iconLoader;
         SerialForwarder* forwarder;
 
+        bool m_loadedDevices;
+
     private slots:
         void addSearchedDevices( const QValueList<RemoteDevice> &newDevices );
         void addServicesToDevices();

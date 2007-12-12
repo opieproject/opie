@@ -80,6 +80,7 @@ struct SerSpeed {
 BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
         : BluetoothBase( parent, name, fl )
 {
+    m_loadedDevices = false;
     m_localDevice = new Manager( "hci0" );
 
     connect( PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
@@ -208,6 +209,7 @@ void BlueBase::readSavedDevices()
     loadedDevices = handler.load();
 
     addSearchedDevices( loadedDevices );
+    m_loadedDevices = true;
 }
 
 
@@ -230,9 +232,10 @@ void BlueBase::writeSavedDevices()
         list.append( device->remoteDevice() );
     }
     /*
-     * if not empty save the List through DeviceHandler
+     * if not empty, or we loaded the device list already, then
+     * save the List through DeviceHandler
      */
-    if ( list.isEmpty() )
+    if ( list.isEmpty() && !m_loadedDevices )
         return;
     DeviceHandler handler;
     handler.save( list );
