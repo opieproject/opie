@@ -1,0 +1,4 @@
+  config CARD-APPLET
+    boolean "opie-cardapplet (monitor and configure pcmcia/cf/sd cards)"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
