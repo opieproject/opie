@@ -108,7 +108,7 @@ void OPcmciaSystem::synchronize()
         if(devid[0] == '.') continue;
         devid = devid.replace(QRegExp("^[0123456789]"), "");
         int numSocket = devid.toInt();
-        sockets[numSocket] = "No card";
+        sockets[numSocket] = QObject::tr("No card");
     }
 
     // Now, check if there are any cards in the sockets
