@@ -9,3 +9,14 @@
  
  class QWSInternalWindowInfo
  {
+--- qt-2.3.10/src/tools/qvaluestack.h.orig	2005-01-24 03:00:47.000000000 +1300
++++ qt-2.3.10/src/tools/qvaluestack.h	2007-12-22 21:21:21.000000000 +1300
+@@ -54,7 +54,7 @@
+     {
+ 	T elem( this->last() );
+ 	if ( !this->isEmpty() )
+-	    remove( this->fromLast() );
++	    this->remove( this->fromLast() );
+ 	return elem;
+     }
+     T& top() { return this->last(); }
