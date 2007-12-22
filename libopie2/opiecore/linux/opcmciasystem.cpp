@@ -36,6 +36,8 @@ using namespace Opie::Core;
 /* QT */
 #include <qfile.h>
 #include <qtextstream.h>
+#include <qdir.h>
+#include <qmap.h>
 
 /* STD */
 #include <errno.h>
@@ -95,37 +97,59 @@ void OPcmciaSystem::synchronize()
     //NOTE: We _could_ use ioctl's here as well, however we want to know if
     //      the card is recognized by the cardmgr (hence has a valid binding)
     //      If it is not recognized yet, userland may want to provide a configuration dialog
-    //TODO: Revise for pcmciautils
 
-    QString fileName;
-    if ( QFile::exists( "/var/run/stab" ) ) { fileName = "/var/run/stab"; }
-    else if ( QFile::exists( "/var/state/pcmcia/stab" ) ) { fileName = "/var/state/pcmcia/stab"; }
-    else { fileName = "/var/lib/pcmcia/stab"; }
-    QFile cardinfofile( fileName );
-    if ( !cardinfofile.exists() || !cardinfofile.open( IO_ReadOnly ) )
-    {
-        qWarning( "pcmcia info file not found or unaccessible" );
-        return;
+    // First, get available sockets
+    QDir sktdir("/sys/class/pcmcia_socket");
+    sktdir.setFilter( QDir::Dirs );
+
+    QMap<int,QString> sockets;
+    for ( unsigned int i=0; i<sktdir.count(); i++ ) {
+        QString devid = sktdir[i];
+        if(devid[0] == '.') continue;
+        devid = devid.replace(QRegExp("^[0123456789]"), "");
+        int numSocket = devid.toInt();
+        sockets[numSocket] = "No card";
     }
-    QTextStream cardinfo( &cardinfofile );
-    while ( !cardinfo.atEnd() )
-    {
-        QString strSocket;
-        int numSocket;
-        char colon;
+
+    // Now, check if there are any cards in the sockets
+    // FIXME This may not be reliable with multi-function cards
+    
+    QDir carddir("/sys/bus/pcmcia/devices");
+    carddir.setFilter( QDir::Dirs );
+    
+    for ( unsigned int i=0; i<carddir.count(); i++ ) {
+        QString devid = carddir[i];
+        if(devid[0] == '.') continue;
+
         QString cardName;
-        cardinfo >> strSocket >> numSocket >> colon;
-        cardName = cardinfo.readLine().stripWhiteSpace();
-        qDebug( "strSocket = '%s', numSocket = '%d', colon = '%c', cardName = '%s'", (const char*) strSocket, numSocket, colon, ( const char*) cardName );
-        if ( strSocket == "Socket" && colon == ':' )
         {
-            _interfaces.append( new OPcmciaSocket( _major, numSocket, this, (const char*) cardName ) );
+            QFile f("/sys/bus/pcmcia/devices/" + devid + "/prod_id1");
+            if ( f.open(IO_ReadOnly) ) {
+                QTextStream t( &f );
+                cardName += t.readLine();
+            }
+            f.close();
         }
-        else
         {
-            continue;
+            QFile f("/sys/bus/pcmcia/devices/" + devid + "/prod_id2");
+            if ( f.open(IO_ReadOnly) ) {
+                QTextStream t( &f );
+                cardName += " " + t.readLine();
+            }
+            f.close();
         }
+        cardName = cardName.stripWhiteSpace();
+
+        // Now we need to split out the socket number
+        devid = QStringList::split('.', devid)[0];
+        int numSocket = devid.toInt();
+
+        sockets[numSocket] = cardName;
     }
+
+    QMap<int,QString>::Iterator it;
+    for( it = sockets.begin(); it != sockets.end(); ++it )
+        _interfaces.append( new OPcmciaSocket( _major, it.key(), this, (const char*) it.data() ) );
 }
 
 
