@@ -33,6 +33,7 @@
 #include <qwidget.h>
 #include <qpixmap.h>
 #include <qpopupmenu.h>
+#include <qmap.h>
 
 namespace Opie { namespace Core {
 class OPcmciaSocket;
@@ -81,6 +82,9 @@ class CardApplet : public QWidget
     QPopupMenu *popupMenu;
     Opie::Core::OProcess *m_process;
     QStringList m_mounts;
+    QMap<QString,int> m_cardmounts;
+    int m_ejectMode;
+    int m_ejectSocket;
 
 };
 

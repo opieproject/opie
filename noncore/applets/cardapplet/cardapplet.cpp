@@ -69,6 +69,7 @@ using namespace Opie::Ui;
 #endif
 
 enum { CMD_UNMOUNT, CMD_FUSER, CMD_PSINFO };
+enum { EM_NONE, EM_UNMOUNT, EM_EJECT };
 
 CardApplet::CardApplet( QWidget * parent ) : QWidget( parent ), popupMenu( 0 )
 {
@@ -84,6 +85,8 @@ CardApplet::CardApplet( QWidget * parent ) : QWidget( parent ), popupMenu( 0 )
     setFixedHeight ( AppLnk::smallIconSize() );
     pm = Opie::Core::OResource::loadPixmap( "pcmcia", Opie::Core::OResource::SmallIcon );
     configuring = false;
+    m_ejectMode = EM_NONE;
+    m_process = 0;
 
     QCopChannel *channel = new QCopChannel( "QPE/System", this );
     connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
@@ -215,7 +218,7 @@ void CardApplet::cardMessage( const QCString & msg, const QByteArray & )
     }
     else if ( msg == "mtabChanged()" ) {
         // Another device was mounted/unmounted
-        updateMounts( true );
+        updateMounts( m_ejectMode == EM_NONE );
     }
 }
 
@@ -298,43 +301,75 @@ void CardApplet::updatePcmcia()
 void CardApplet::updateMounts( bool showPopup )
 {
     QStringList blockdevs;
-    
+
     struct mntent *me;
     FILE *mntfp = setmntent( "/etc/mtab", "r" );
 
+    m_cardmounts.clear();
     if ( mntfp ) {
-        QDir d("/sys/block");
-        d.setFilter( QDir::Dirs );
-        const QFileInfoList *list = d.entryInfoList();
-        QFileInfo *fi;
+        QDir blockdir("/sys/block");
+        blockdir.setFilter( QDir::Dirs );
+
+        QDir pcmciadir("/sys/bus/pcmcia/devices");
+        pcmciadir.setFilter( QDir::Dirs );
+
+        QMap<QString,QString> pcmciadevs;
+        for ( unsigned int i=0; i<pcmciadir.count(); i++ ) {
+            QString devid = pcmciadir[i];
+            if(devid[0] == '.') continue;
+            QDir pcmciadevdir("/sys/bus/pcmcia/devices/" + devid);
+            // Now we need to split out the socket number
+            devid = QStringList::split('.', devid)[0];
+            pcmciadevs.insert( devid, pcmciadevdir.canonicalPath() );
+            odebug << "pcmcia " << devid << " " << pcmciadevdir.canonicalPath() << oendl;
+        }
 
         // Iterate over mount points
         while ( ( me = getmntent( mntfp ) ) != 0 ) {
             QString fs = QFile::decodeName( me->mnt_fsname );
             // Find which mounted devices are ones we are interested in
-            // FIXME skip previously known devices here?
             if(fs.startsWith("/dev/")) {
                 QString blockdev = fs.mid(5);
 
-                QFileInfoListIterator it( *list );
-                while ( (fi=it.current()) ) {
-                    QString fpath = fi->filePath();
+                for ( unsigned int i=0; i<blockdir.count(); i++ ) {
+                    if(blockdir[i][0] == '.') continue;
+                    QString fpath = "/sys/block/" + blockdir[i];
                     if ( QFile::exists( fpath + "/" + blockdev ) || fpath == blockdev ) {
-                        // Attempt to determine if the device is removable
-                        QFile f(fpath + "/removable");
-                        if ( f.open(IO_ReadOnly) ) {
-                            if(f.getch() == '1') {
-                                odebug << "CARDAPPLET: " << fs << oendl;
-                                blockdevs << fs;
+                        // Check if mount point is associated with a PCMCIA device
+                        bool matched = false;
+                        if(!pcmciadevs.isEmpty()) {
+                            QDir devdir(fpath + "/device");
+                            QString devlink = devdir.canonicalPath();
+                            odebug << "devnode is " << devlink << oendl;
+
+                            QMap<QString,QString>::Iterator pit;
+                            for( pit = pcmciadevs.begin(); pit != pcmciadevs.end(); ++pit ) {
+                                if ( devlink.startsWith(pit.data()) ) {
+                                    m_cardmounts.insert( fs, pit.key().toInt() );
+                                    matched = true;
+                                    odebug << "MATCHED " << fs << " to " << pit.key() << oendl;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!matched) {
+                            // Attempt to determine if the device is removable
+                            QFile f(fpath + "/removable");
+                            if ( f.open(IO_ReadOnly) ) {
+                                if(f.getch() == '1') {
+                                    odebug << "CARDAPPLET: " << fs << oendl;
+                                    blockdevs << fs;
+                                }
+                                else
+                                    odebug << fs << " is not removable" << oendl;
                             }
                             else
-                                odebug << fs << " is not removable" << oendl;
+                                odebug << "could not open " << fpath + "/removable" << oendl;
                         }
-                        else
-                            odebug << "could not open " << fpath + "/removable" << oendl;
+
                         break;
                     }
-                    ++it;
                 }
             }
         }
@@ -384,8 +419,10 @@ int CardApplet::position()
 
 void CardApplet::execCommand( const QStringList &strList )
 {
-    delete m_process;
-    m_process = 0;
+    if(m_process) {
+        delete m_process;
+        m_process = 0;
+    }
 
     if ( m_process == 0 ) {
         m_process = new OProcess();
@@ -426,15 +463,20 @@ void CardApplet::slotExited( OProcess*  )
 {
     if( m_process->normalExit() ) {
         int ret = m_process->exitStatus();
+        odebug << "process returned, code " << ret << oendl;
+
         if( ret != 0 ) {
             if ( m_commandOrig == CMD_UNMOUNT ) {
+                m_ejectMode = EM_NONE;
                 QMessageBox::warning(0,
                     tr("Remove failed"),
                     tr("<p>Unmounting the selected device failed:"
                        "<p>%1").arg( m_commandStderr ) );
             }
             else if ( m_commandOrig == CMD_FUSER ) {
-                // fuser check was OK
+                // fuser found no processes using the device, so we can proceed with unmounting
+                // Note that if fuser failed and is returning non-zero here for some other reason
+                // it doesn't really matter since the unmount will fail anyway
                 unmount(m_mountpt, false);
             }
             else if ( m_commandOrig == CMD_PSINFO ) {
@@ -445,7 +487,8 @@ void CardApplet::slotExited( OProcess*  )
             }
         }
         else if ( m_commandOrig == CMD_FUSER ) {
-            // fuser check returned a list of processes
+            // fuser check returned a list of processes, get some info about them to show to the user
+            m_ejectMode = EM_NONE;
             QString procs = m_commandStdout;
             getProcessInfo(procs);
         }
@@ -453,6 +496,12 @@ void CardApplet::slotExited( OProcess*  )
             QMessageBox::warning(0,
                 tr("Card in use"),
                 tr("<p>The device you are trying to remove is in use by the following applications:</p><pre>%1</pre><p>Please close these applications and then try again.").arg( m_commandStdout.stripWhiteSpace() ) );
+        }
+        else if ( m_commandOrig == CMD_UNMOUNT ) {
+            if(m_ejectMode == EM_UNMOUNT) {
+                m_ejectMode = EM_EJECT;
+                userCardAction( (m_ejectSocket * 100) + EJECT );
+            }
         }
     }
 }
@@ -475,8 +524,27 @@ void CardApplet::userCardAction( int action )
                 configure( OPcmciaSystem::instance()->socket( socket ) );
                 return;
             }
-            case EJECT:    success = OPcmciaSystem::instance()->socket( socket )->eject();
-                        break;
+            case EJECT:
+                if(m_ejectMode == EM_EJECT)
+                    success = OPcmciaSystem::instance()->socket( socket )->eject();
+                else {
+                    m_ejectMode = EM_UNMOUNT;
+                    m_ejectSocket = socket;
+                    QMap<QString,int>::Iterator it;
+                    bool mountsexist = false;
+                    for( it = m_cardmounts.begin(); it != m_cardmounts.end(); ++it ) {
+                        if(it.data() == socket) {
+                            unmount( it.key(), true );
+                            mountsexist = true;
+                        }
+                    }
+                    if(mountsexist)
+                        return;
+                    else
+                        success = OPcmciaSystem::instance()->socket( socket )->eject();
+                }
+                m_ejectMode = EM_NONE;
+                break;
             case INSERT:   success = OPcmciaSystem::instance()->socket( socket )->insert();
                         break;
             case SUSPEND:  success = OPcmciaSystem::instance()->socket( socket )->suspend();
