@@ -73,11 +73,11 @@ class OPcmciaSystem : public QObject
      */
     static OPcmciaSystem* instance();
     /**
-     * @returns an iterator usable for iterating through all sound cards
+     * @returns an iterator usable for iterating through all cards
      */
     CardIterator iterator() const;
     /**
-     * @returns a pointer to the @ref OPcmciaSocket object correspinding to socket number n, or 0, if not found
+     * @returns a pointer to the @ref OPcmciaSocket object corresponding to socket number n, or 0, if not found
      * @see OPcmciaSocket
      */
     OPcmciaSocket* socket( unsigned int number );
@@ -88,7 +88,7 @@ class OPcmciaSystem : public QObject
     /**
      * @internal Rebuild the internal database
      * @note Sometimes it might be useful to call this from client code,
-     * e.g. after issuing a cardctl insert
+     * e.g. after issuing a pccardctl insert
      */
     void synchronize();
 
@@ -147,7 +147,7 @@ class OPcmciaSocket : public QObject
      */
     int number() const;
     /**
-     * @returns the card managers idea of the cards' identy, or "<Empty Socket>"
+     * @returns the card managers idea of the cards' identity, or "<Empty Socket>"
      */
     QString identity() const;
     /**
