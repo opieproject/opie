@@ -192,7 +192,9 @@ void CardApplet::mousePressEvent( QMouseEvent* )
             menu->insertSeparator(i++);
 
         QPixmap mpm = Opie::Core::OResource::loadPixmap( "cardmon/ide", Opie::Core::OResource::SmallIcon );
-        for( QStringList::Iterator it = m_mounts.begin(); it != m_mounts.end(); ++it ) {
+
+        QMap<QString,QString>::Iterator it;
+        for( it = m_mounts.begin(); it != m_mounts.end(); ++it ) {
             QPopupMenu* submenu = new QPopupMenu( menu );
             submenu->insertItem( tr("Safely remove"), EJECT+((i+1)*1000) );
             connect( submenu, SIGNAL(activated(int)), this, SLOT(userCardAction(int)) );
@@ -300,7 +302,7 @@ void CardApplet::updatePcmcia()
 
 void CardApplet::updateMounts( bool showPopup )
 {
-    QStringList blockdevs;
+    QMap<QString,QString> blockdevs;
 
     struct mntent *me;
     FILE *mntfp = setmntent( "/etc/mtab", "r" );
@@ -359,7 +361,7 @@ void CardApplet::updateMounts( bool showPopup )
                             if ( f.open(IO_ReadOnly) ) {
                                 if(f.getch() == '1') {
                                     odebug << "CARDAPPLET: " << fs << oendl;
-                                    blockdevs << fs;
+                                    blockdevs.insert(fs, QFile::decodeName( me->mnt_dir ));
                                 }
                                 else
                                     odebug << fs << " is not removable" << oendl;
@@ -377,13 +379,14 @@ void CardApplet::updateMounts( bool showPopup )
     }
 
     if ( showPopup ) {
-        for( QStringList::Iterator it = blockdevs.begin(); it != blockdevs.end(); ++it )
-            if(!m_mounts.contains(*it))
-                mountChanged( (*it), true );
+        QMap<QString,QString>::Iterator it;
+        for( it = blockdevs.begin(); it != blockdevs.end(); ++it )
+            if(!m_mounts.contains(it.key()))
+                mountChanged( it.data(), true );
 
-        for( QStringList::Iterator it = m_mounts.begin(); it != m_mounts.end(); ++it )
-            if(!blockdevs.contains(*it))
-                mountChanged( (*it), false );
+        for( it = m_mounts.begin(); it != m_mounts.end(); ++it )
+            if(!blockdevs.contains(it.key()))
+                mountChanged( it.data(), false );
     }
     m_mounts = blockdevs;
 }
@@ -577,8 +580,17 @@ void CardApplet::userCardAction( int action )
         odebug << "cardapplet: user action on mount point " << mountpoint << " requested. action = " << what << oendl;
 
         if( what == EJECT ) {
-            if( mountpoint < m_mounts.count() )
-                unmount( m_mounts[mountpoint], true);
+            if( mountpoint < m_mounts.count() ) {
+                QMap<QString,QString>::Iterator it;
+                int i = 0;
+                for( it = m_mounts.begin(); it != m_mounts.end(); ++it ) {
+                    if(i == mountpoint) {
+                        unmount( it.key(), true);
+                        break;
+                    }
+                    i++;
+                }
+            }
             else
                 odebug << "mount point out of range!" << oendl;
         }
@@ -635,15 +647,16 @@ void CardApplet::executeAction( Opie::Core::OPcmciaSocket* card, const QString& 
 
 void CardApplet::unmount( const QString &device, bool fusercheck )
 {
-    odebug << "Unmounting " << device << oendl;
     QStringList cmd;
 
     if(fusercheck) {
+        odebug << "Using fuser to check usage of " << device << oendl;
         cmd << "fuser" << "-m" << device;
         m_mountpt = device;
         m_commandOrig = CMD_FUSER;
     }
     else {
+        odebug << "Unmounting " << device << oendl;
         cmd << "umount" << device;
         m_commandOrig = CMD_UNMOUNT;
     }

@@ -81,7 +81,7 @@ class CardApplet : public QWidget
     QPixmap pm;
     QPopupMenu *popupMenu;
     Opie::Core::OProcess *m_process;
-    QStringList m_mounts;
+    QMap<QString,QString> m_mounts;
     QMap<QString,int> m_cardmounts;
     int m_ejectMode;
     int m_ejectSocket;
