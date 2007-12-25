@@ -66,8 +66,18 @@ namespace Internal {
  * base and ending, but only if base is not empty
  */
 static inline QString createNewPath(const QString& base, const QString &ending) {
-    return  base == QString::fromLatin1("/") ?
-        base + ending : base + "/" + ending;
+    if(ending != "") {
+        if (ending[0] == "/") {
+            // absolute path
+            return ending;
+        }
+        else {
+            return  base == QString::fromLatin1("/") ?
+                base + ending : base + "/" + ending;
+        }
+    }
+    else
+        return base;
 }
 
 
