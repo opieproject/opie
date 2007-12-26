@@ -740,27 +740,26 @@ void AdvancedFm::mkSym() {
             QString destName = thatDir->canonicalPath()+"/"+(*it);
             if(destName.right(1) == "/") {
                 destName = destName.left( destName.length() -1);
-                }
+            }
 
             QString curFile =  thisDir->canonicalPath()+"/"+(*it);
 
             if( curFile.right(1) == "/") {
                 curFile = curFile.left( curFile.length() -1);
-                }
+            }
 
             cmd = "ln -s "+curFile+" "+destName;
 //          odebug << cmd << oendl;
             startProcess( (const QString)cmd );
-            }
-                rePopulate();
-                setOtherTabCurrent();
         }
+        rePopulate();
+        setOtherTabCurrent();
+    }
 }
 
 void AdvancedFm::doBeam() {
     Ir ir;
-    if(!ir.supported()) {
-    } else {
+    if(ir.supported()) {
         QStringList curFileList = getPath();
         if( curFileList.count() > 0)  {
             for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
