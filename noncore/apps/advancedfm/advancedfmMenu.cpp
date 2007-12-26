@@ -75,6 +75,15 @@ QString AdvancedFm::dealWithSymName(const QString &fileName) {
     return  strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
 }
 
+QString AdvancedFm::getSelectedFile() {
+    QString strItem = CurrentView()->currentItem()->text(0);
+    int pos = strItem.find("-> ",0,TRUE);
+    if( pos == -1)
+        return strItem;
+    else
+        return strItem.left( pos - 1);
+}
+
 void AdvancedFm::runThis() {
     if( !CurrentView()->currentItem()) return;
     QString fs;
@@ -634,8 +643,7 @@ void AdvancedFm::runCommandStd() {
 void AdvancedFm::fileStatus() {
     if( !CurrentView()->currentItem()) return;
 
-    QString curFile;
-    curFile = CurrentView()->currentItem()->text(0);
+    QString curFile = getSelectedFile();
 
     QFileInfo curFileInfo(curFile);
 
@@ -879,7 +887,7 @@ void AdvancedFm::doRename(QListView * view) {
 
     renameBox = new QLineEdit( view->viewport(), "qt_renamebox" );
     renameBox->setFrame(true);
-    renameBox->setText(  view->currentItem()->text(0) );
+    renameBox->setText( getSelectedFile() );
     renameBox->selectAll();
     renameBox->installEventFilter( this );
     view->addChild( renameBox, r.x(), r.y() );
@@ -893,12 +901,11 @@ void AdvancedFm::renameIt() {
     if( !CurrentView()->currentItem()) return;
 
     QListView *thisView = CurrentView();
-    oldName = thisView->currentItem()->text(0);
+    oldName = getSelectedFile();
     doRename( thisView );
 }
 
 void AdvancedFm::okRename() {
-    qDebug("okrename");
     if( !renameBox) return;
 
     QString newName = renameBox->text();

@@ -93,6 +93,7 @@ protected:
     void parsetab(const QString &fileName);
     QString checkDiskSpace(const QString &);
     QString dealWithSymName(const QString &);
+    QString getSelectedFile();
     QDir *CurrentDir();
     QDir *OtherDir();
     QListView *CurrentView();
