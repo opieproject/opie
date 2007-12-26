@@ -396,9 +396,9 @@ void AdvancedFm::parsetab(const QString &fileName) {
             QString mountDir = me->mnt_dir;
             if(deviceName != "none") {
                 if( fsList.contains(filesystemType) == 0
-                    & filesystemType.find("proc",0,TRUE) == -1
-                    & filesystemType.find("cramfs",0,TRUE) == -1
-                    & filesystemType.find("auto",0,TRUE) == -1)
+                    && filesystemType.find("proc",0,TRUE) == -1
+                    && filesystemType.find("cramfs",0,TRUE) == -1
+                    && filesystemType.find("auto",0,TRUE) == -1)
                 fsList << filesystemType;
                 fileSystemTypeList << mountDir+"::"+filesystemType;
             }
