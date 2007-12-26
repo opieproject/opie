@@ -101,7 +101,6 @@ protected:
 
 protected slots:
     void changeTo(const QString &);
-    void slotSwitchMenu(int);
     void selectAll();
     void addToDocs();
     void doDirChange();
@@ -110,7 +109,6 @@ protected slots:
     void rn();
     void populateView();
     void rePopulate();
-    void showHidden();
     void showMenuHidden();
     void ListClicked(QListViewItem *);
     void ListPressed( int, QListViewItem *, const QPoint&, int);

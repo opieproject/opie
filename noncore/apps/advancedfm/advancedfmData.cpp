@@ -95,8 +95,6 @@ void AdvancedFm::init() {
 	 homeButton->setAutoRaise( true );
 	 menuBar->insertItem( homeButton );
 
-	 fileMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showMenuHidden() ));
-	 fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
 	 fileMenu->insertSeparator();
 	 fileMenu->insertItem( tr( "File Search" ), this, SLOT( openSearch() ));
 	 fileMenu->insertSeparator();
@@ -109,16 +107,19 @@ void AdvancedFm::init() {
 	 fileMenu->insertItem( tr( "Select All" ), this, SLOT( selectAll() ));
 	 fileMenu->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
 	 fileMenu->insertItem( tr( "Delete" ), this, SLOT( del() ));
-	 fileMenu->setCheckable(TRUE);
 
 	 viewMenu->insertItem( tr( "Switch to View 1" ), this, SLOT( switchToLocalTab()));
 	 viewMenu->insertItem( tr( "Switch to View 2" ), this, SLOT( switchToRemoteTab()));
+	 viewMenu->insertSeparator();
 	 viewMenu->insertItem( tr( "Refresh" ), this, SLOT( refreshCurrentTab()));
+	 viewMenu->insertSeparator();
+	 viewMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showMenuHidden() ));
 //     viewMenu->insertSeparator();
 //     viewMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
 	 viewMenu->setCheckable(true);
 	 viewMenu->setItemChecked( viewMenu->idAt(0), true);
 	 viewMenu->setItemChecked( viewMenu->idAt(1), false);
+	 viewMenu->setItemChecked( viewMenu->idAt(5), false);
 
 	 s_addBookmark = tr("Bookmark Directory");
 	 s_removeBookmark = tr("Remove Current Directory from Bookmarks");
@@ -275,7 +276,6 @@ void AdvancedFm::initConnections()
 
   connect(menuButton,SIGNAL(selected(const QString&)),SLOT(gotoCustomDir(const QString&)));
 //  connect( menuButton, SIGNAL( selected(int)), SLOT( dirMenuSelected(int)));
-  connect(viewMenu,SIGNAL(activated(int)),this,SLOT(slotSwitchMenu(int)));
 //  connect( customDirMenu, SIGNAL( activated(int)), this, SLOT( dirMenuSelected(int)));
 
 }

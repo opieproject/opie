@@ -454,8 +454,6 @@ void AdvancedFm::showFileMenu() {
    QFile fi(curApp);
    QPopupMenu *m = new QPopupMenu(0);
    QPopupMenu *n = new QPopupMenu(0);
-   //    QPopupMenu *o = new QPopupMenu(0);
-   m->insertItem(tr("Show Hidden Files"),this,SLOT(showHidden()));
 
    if ( QFileInfo(fi).isDir()) {
       m->insertSeparator();
@@ -496,11 +494,6 @@ void AdvancedFm::showFileMenu() {
 #if defined(QT_QWS_OPIE)
    m->insertItem(tr("Properties"),this,SLOT(doProperties()));
 #endif
-   m->setCheckable(TRUE);
-   if (!b)
-      m->setItemChecked(m->idAt(0),TRUE);
-   else
-      m->setItemChecked(m->idAt(0),FALSE);
 
    if(Ir::supported())
       m->insertItem(tr("Beam File"),this,SLOT(doBeam()));
@@ -732,18 +725,6 @@ void AdvancedFm::setDocument(const QString &file) {
    changeTo( file);
 }
 
-
-void AdvancedFm::slotSwitchMenu(int item) {
-   if(item == -23)  {
-      switchToLocalTab();
-      tabChanged( tab);
-    }
-
-    if(item == -24) {
-      switchToRemoteTab();
-      tabChanged( tab_2);
-    }
-}
 
 void AdvancedFm::navigateToSelected() {
    if( !CurrentView()->currentItem()) return;
