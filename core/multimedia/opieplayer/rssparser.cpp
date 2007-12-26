@@ -18,16 +18,19 @@
 
 RssParser::RssParser()
 {
+    channel = 0;
     isItem = false;
 }
 
 RssParser::~RssParser()
 {
-    int size =  channel->rssItems.size();
-    for (int i = 0; i < size; i ++) {
-        delete channel->rssItems.at(i);
+    if(channel) {
+        int size = channel->rssItems.size();
+        for (int i = 0; i < size; i++) {
+            delete channel->rssItems.at(i);
+        }
+        delete channel;
     }
-    delete channel;
 }
 
 bool RssParser::startElement( const QString &, const QString & /*localName*/,const QString & qName, const QXmlAttributes &atts)
