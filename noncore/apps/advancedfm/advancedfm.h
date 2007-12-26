@@ -170,6 +170,7 @@ private:
     void addCustomDir();
     void removeCustomDir();
     void navigateToSelected();
+    void showHidden();
 
 private slots:
     void processEnded(Opie::Core::OProcess *);
@@ -177,6 +178,7 @@ private slots:
     void gotoCustomDir(const QString &);
     void qcopReceive(const QCString&, const QByteArray&);
     void setDocument(const QString &);
+    void enableDisableMenu();
 };
 
 #endif // ADVANCEDFM_H

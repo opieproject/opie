@@ -53,6 +53,11 @@ void AdvancedFm::doDirChange() {
 }
 
 void AdvancedFm::showMenuHidden() {
+    showHidden();
+    populateView();
+}
+
+void AdvancedFm::showHidden() {
     if (b) {
         CurrentDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
         OtherDir()->setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
@@ -63,7 +68,6 @@ void AdvancedFm::showMenuHidden() {
         viewMenu->setItemChecked( viewMenu->idAt(5),FALSE);
     }
     b = !b;
-    populateView();
 }
 
 QString AdvancedFm::dealWithSymName(const QString &fileName) {

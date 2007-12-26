@@ -56,6 +56,7 @@ void AdvancedFm::init() {
 
     menuBar->insertItem( tr( "File" ), fileMenu);
     menuBar->insertItem( tr( "View" ), viewMenu);
+    connect(fileMenu,SIGNAL(aboutToShow()),this,SLOT(enableDisableMenu()));
 
     bool useBigIcon = qApp->desktop()->size().width() > 330;
 
@@ -95,18 +96,17 @@ void AdvancedFm::init() {
     homeButton->setAutoRaise( true );
     menuBar->insertItem( homeButton );
 
-    fileMenu->insertSeparator();
 //    fileMenu->insertItem( tr( "File Search" ), this, SLOT( openSearch() ));
 //    fileMenu->insertSeparator();
-    fileMenu->insertItem( tr( "Make Directory" ), this, SLOT( mkDir() ));
-    fileMenu->insertItem( tr( "Rename" ), this, SLOT( rn() ));
-    fileMenu->insertItem( tr( "Run Command" ), this, SLOT( runCommandStd() ));
-    fileMenu->insertItem( tr( "Run Command with Output" ), this, SLOT( runCommand() ));
+    fileMenu->insertItem( tr( "Make Directory" ), this, SLOT( mkDir() ), 0, 101);
+    fileMenu->insertItem( tr( "Select All" ), this, SLOT( selectAll() ), 0, 102);
     fileMenu->insertSeparator();
-    fileMenu->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
-    fileMenu->insertItem( tr( "Select All" ), this, SLOT( selectAll() ));
-    fileMenu->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
-    fileMenu->insertItem( tr( "Delete" ), this, SLOT( del() ));
+    fileMenu->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ), 0, 103);
+    fileMenu->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ), 0, 104);
+    fileMenu->insertItem( tr( "Run Command" ), this, SLOT( runCommandStd() ), 0, 105);
+    fileMenu->insertItem( tr( "Run Command with Output" ), this, SLOT( runCommand() ), 0, 106);
+    fileMenu->insertItem( tr( "Rename" ), this, SLOT( rn() ), 0, 107);
+    fileMenu->insertItem( tr( "Delete" ), this, SLOT( del() ), 0, 108);
 
     viewMenu->insertItem( tr( "Switch to View 1" ), this, SLOT( switchToLocalTab()));
     viewMenu->insertItem( tr( "Switch to View 2" ), this, SLOT( switchToRemoteTab()));
@@ -243,7 +243,7 @@ void AdvancedFm::init() {
     currentRemoteDir.setPath( QDir::currentDirPath());
 
     filterStr="*";
-    showMenuHidden();
+    showHidden();
     TabWidget->setCurrentWidget(0);
 }
 

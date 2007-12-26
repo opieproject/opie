@@ -210,6 +210,8 @@ void AdvancedFm::populateView() {
 
     thisView->setSorting( 3,FALSE);
     fillCombo( (const QString &) path );
+
+    thisView->setCurrentItem(thisView->firstChild());
 }
 
 void AdvancedFm::rePopulate() {
@@ -244,8 +246,8 @@ void AdvancedFm::ListClicked(QListViewItem *selectedItem) {
             CurrentDir()->cd( strItem, TRUE);
             populateView();
             CurrentView()->ensureItemVisible( CurrentView()->firstChild());
+            chdir( strItem.latin1());
         }
-        chdir( strItem.latin1());
     }
 }
 
@@ -258,10 +260,37 @@ void AdvancedFm::ListPressed( int mouse, QListViewItem *item, const QPoint& , in
                 cancelRename();
             }
         }
-    break;
+        break;
     };
 }
 
+void AdvancedFm::enableDisableMenu() {
+    QString curFile;
+    curFile = CurrentView()->currentItem()->text(0);
+
+    if(curFile == "../") {
+        if(fileMenu->isItemEnabled(103)) {
+            odebug << "disabling" << oendl;
+            fileMenu->setItemEnabled(103, false);
+            fileMenu->setItemEnabled(104, false);
+            fileMenu->setItemEnabled(105, false);
+            fileMenu->setItemEnabled(106, false);
+            fileMenu->setItemEnabled(107, false);
+            fileMenu->setItemEnabled(108, false);
+        }
+    }
+    else {
+        if(!fileMenu->isItemEnabled(103)) {
+            odebug << "ensabling" << oendl;
+            fileMenu->setItemEnabled(103, true);
+            fileMenu->setItemEnabled(104, true);
+            fileMenu->setItemEnabled(105, true);
+            fileMenu->setItemEnabled(106, true);
+            fileMenu->setItemEnabled(107, true);
+            fileMenu->setItemEnabled(108, true);
+        }
+    }
+}
 
 void AdvancedFm::refreshCurrentTab() {
     populateView();
@@ -270,13 +299,11 @@ void AdvancedFm::refreshCurrentTab() {
 void AdvancedFm::switchToLocalTab() {
     TabWidget->setCurrentWidget(tab);
     Local_View->setFocus();
-//    whichTab = 1;
 }
 
 void AdvancedFm::switchToRemoteTab() {
     TabWidget->setCurrentWidget(tab_2);
     Remote_View->setFocus();
-//    whichTab = 2;
 }
 
 void  AdvancedFm::currentPathComboChanged() {
@@ -371,17 +398,16 @@ void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
     if( currentPathCombo->lineEdit()->hasFocus()) {
 //        qDebug("shout!");
     }
-
-            else if(  e->key() ==  Key_Left )
-            upDir();
+    else if(  e->key() ==  Key_Left )
+        upDir();
     else if( e->key() == Key_Return || e->key() == Key_Enter)
-            navigateToSelected();
+        navigateToSelected();
     else if( e->key() == Key_Tab)
-            setOtherTabCurrent();
+        setOtherTabCurrent();
     else if( e->key() == Key_Delete )
-            del();
+        del();
     else
-            e->accept();
+        e->accept();
 }
 
 void AdvancedFm::parsetab(const QString &fileName) {
@@ -453,7 +479,6 @@ void AdvancedFm::showFileMenu() {
     QPopupMenu *n = new QPopupMenu(0);
 
     if ( QFileInfo(fi).isDir()) {
-        m->insertSeparator();
         m->insertItem(tr("Change Directory"),this,SLOT(doDirChange()));
     } else {
 
@@ -465,37 +490,38 @@ void AdvancedFm::showFileMenu() {
                         tr("Open as text"),this,SLOT(runText()));
     }
 
-    m->insertItem(tr("Actions"),n);
-    n->insertItem(tr("Make Directory"),this,SLOT(makeDir()));
+    if(curApp != "../") {
+        m->insertItem(tr("Actions"),n);
+        n->insertItem(tr("Make Directory"),this,SLOT(makeDir()));
 
-    n->insertItem(tr("Make Symlink"),this,SLOT(mkSym()));
+        n->insertItem(tr("Make Symlink"),this,SLOT(mkSym()));
 
-    n->insertSeparator();
-    n->insertItem(tr("Rename"),this,SLOT(renameIt()));
+        n->insertSeparator();
+        n->insertItem(tr("Rename"),this,SLOT(renameIt()));
 
-    n->insertItem(tr("Copy"),this,SLOT(copyTimer()));
-    n->insertItem(tr("Copy As"),this,SLOT(copyAsTimer()));
-    n->insertItem(tr("Copy Same Dir"),this,SLOT(copySameDirTimer()));
-    n->insertItem(tr("Move"),this,SLOT(moveTimer()));
+        n->insertItem(tr("Copy"),this,SLOT(copyTimer()));
+        n->insertItem(tr("Copy As"),this,SLOT(copyAsTimer()));
+        n->insertItem(tr("Copy Same Dir"),this,SLOT(copySameDirTimer()));
+        n->insertItem(tr("Move"),this,SLOT(moveTimer()));
 
-    n->insertSeparator();
-    n->insertItem(tr("Delete"),this,SLOT(doDelete()));
-    m->insertItem(tr("Add To Documents"),this,SLOT(addToDocs()));
+        n->insertSeparator();
+        n->insertItem(tr("Delete"),this,SLOT(doDelete()));
+        m->insertItem(tr("Add To Documents"),this,SLOT(addToDocs()));
 
-    m->insertItem(tr("Run Command"),this,SLOT(runCommand()));
-    m->insertItem(tr("File Info"),this,SLOT(fileStatus()));
+        m->insertItem(tr("Run Command"),this,SLOT(runCommand()));
+        m->insertItem(tr("File Info"),this,SLOT(fileStatus()));
 
-    m->insertSeparator();
-    m->insertItem(tr("Set Permissions"),this,SLOT(filePerms()));
+        m->insertSeparator();
+        m->insertItem(tr("Set Permissions"),this,SLOT(filePerms()));
 
 #if defined(QT_QWS_OPIE)
-    m->insertItem(tr("Properties"),this,SLOT(doProperties()));
+        m->insertItem(tr("Properties"),this,SLOT(doProperties()));
 #endif
 
-    if(Ir::supported())
-        m->insertItem(tr("Beam File"),this,SLOT(doBeam()));
+        if(Ir::supported())
+            m->insertItem(tr("Beam File"),this,SLOT(doBeam()));
+    }
     m->setFocus();
-
     m->exec(QPoint(QCursor::pos().x(),QCursor::pos().y()));
 
     delete m;
@@ -717,8 +743,7 @@ void AdvancedFm::setDocument(const QString &file) {
     changeTo( file);
 }
 
-
 void AdvancedFm::navigateToSelected() {
     if( !CurrentView()->currentItem()) return;
-    doDirChange();
+        doDirChange();
 }
