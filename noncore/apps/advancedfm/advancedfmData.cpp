@@ -96,8 +96,8 @@ void AdvancedFm::init() {
 	 menuBar->insertItem( homeButton );
 
 	 fileMenu->insertSeparator();
-	 fileMenu->insertItem( tr( "File Search" ), this, SLOT( openSearch() ));
-	 fileMenu->insertSeparator();
+//	 fileMenu->insertItem( tr( "File Search" ), this, SLOT( openSearch() ));
+//	 fileMenu->insertSeparator();
 	 fileMenu->insertItem( tr( "Make Directory" ), this, SLOT( mkDir() ));
 	 fileMenu->insertItem( tr( "Rename" ), this, SLOT( rn() ));
 	 fileMenu->insertItem( tr( "Run Command" ), this, SLOT( runCommandStd() ));
