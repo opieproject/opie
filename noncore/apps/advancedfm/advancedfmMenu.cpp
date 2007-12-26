@@ -826,19 +826,7 @@ void AdvancedFm::oprocessStderr(OProcess*, char *buffer, int ) {
 
 bool AdvancedFm::eventFilter( QObject * o, QEvent * e ) {
     if ( o->inherits( "QLineEdit" ) )  {
-        if ( e->type() == QEvent::KeyPress ) {
-            QKeyEvent *ke = (QKeyEvent*)e;
-            if ( ke->key() == Key_Return ||
-                 ke->key() == Key_Enter )  {
-                okRename();
-                return true;
-            }
-            else if ( ke->key() == Key_Escape ) {
-                cancelRename();
-                return true;
-            }
-        }
-        else if ( e->type() == QEvent::FocusOut ) {
+        if ( e->type() == QEvent::FocusOut ) {
             cancelRename();
             return true;
         }

@@ -392,22 +392,25 @@ void AdvancedFm::keyPressEvent( QKeyEvent *e) {
 }
 
 void AdvancedFm::keyReleaseEvent( QKeyEvent *e) {
-//    if( CurrentView()->hasFocus() )
-//        e->ignore();
-
-    if( currentPathCombo->lineEdit()->hasFocus()) {
-//        qDebug("shout!");
+    if(renameBox) {
+        if( e->key() == Key_Return || e->key() == Key_Enter)
+            okRename();
     }
-    else if(  e->key() ==  Key_Left )
-        upDir();
-    else if( e->key() == Key_Return || e->key() == Key_Enter)
-        navigateToSelected();
-    else if( e->key() == Key_Tab)
-        setOtherTabCurrent();
-    else if( e->key() == Key_Delete )
-        del();
-    else
-        e->accept();
+    else {
+        if( currentPathCombo->lineEdit()->hasFocus() ) {
+            // ignore
+        }
+        else if(  e->key() ==  Key_Left )
+            upDir();
+        else if( e->key() == Key_Return || e->key() == Key_Enter)
+            navigateToSelected();
+        else if( e->key() == Key_Tab)
+            setOtherTabCurrent();
+        else if( e->key() == Key_Delete )
+            del();
+        else
+            e->accept();
+    }
 }
 
 void AdvancedFm::parsetab(const QString &fileName) {
@@ -745,5 +748,5 @@ void AdvancedFm::setDocument(const QString &file) {
 
 void AdvancedFm::navigateToSelected() {
     if( !CurrentView()->currentItem()) return;
-        doDirChange();
+    doDirChange();
 }
