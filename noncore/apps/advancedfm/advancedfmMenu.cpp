@@ -126,8 +126,9 @@ void AdvancedFm::runText() {
         if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
             curFile = dealWithSymName((const QString&)curFile);
         curFile =  CurrentDir()->canonicalPath()+"/"+curFile;
-        QCopEnvelope e("QPE/Application/textedit", "setDocument(QString)" );
-        e << curFile;
+        QCopEnvelope e("QPE/Application/textedit", "raise()" );
+        QCopEnvelope e2("QPE/Application/textedit", "setDocument(QString)" );
+        e2 << curFile;
     }
 }
 
