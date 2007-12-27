@@ -55,7 +55,7 @@ public:
             : QMultiLineEdit( parent, name ) {
         clearTableFlags();
         setTableFlags( Tbl_vScrollBar | Tbl_autoHScrollBar );
-}
+    }
 
     void find( const QString &txt, bool caseSensitive,
                             bool backwards );
@@ -76,36 +76,39 @@ private:
 
 };
 
-void QpeEditor::mousePressEvent( QMouseEvent *e ) {
- switch(e->button()) {
-   case RightButton:
-   { //rediculous workaround for qt popup menu
-     //and the hold right click mechanism
-       this->setSelection( line1, col1, line2, col2);
-       QMultiLineEdit::mousePressEvent( e );
-       markIt = false;
-   }
-   break;
-   default:
-   {
-       if(!markIt) {
-           int line, col;
-           this->getCursorPosition(&line, &col);
-           line1=line2=line;
-           col1=col2=col;
-       }
-       QMultiLineEdit::mousePressEvent( e );
-   }
-       break;
- };
+void QpeEditor::mousePressEvent( QMouseEvent *e )
+{
+    switch(e->button()) {
+    case RightButton:
+        { //rediculous workaround for qt popup menu
+            //and the hold right click mechanism
+            this->setSelection( line1, col1, line2, col2);
+            QMultiLineEdit::mousePressEvent( e );
+            markIt = false;
+        }
+        break;
+    default:
+        {
+            if(!markIt) {
+                int line, col;
+                this->getCursorPosition(&line, &col);
+                line1=line2=line;
+                col1=col2=col;
+            }
+            QMultiLineEdit::mousePressEvent( e );
+        }
+        break;
+    };
 }
 
-void QpeEditor::mouseReleaseEvent( QMouseEvent * ) {
+void QpeEditor::mouseReleaseEvent( QMouseEvent * )
+{
     if(this->hasMarkedText()) {
         markIt = true;
         this->getMarkedRegion( &line1, &col1, &line2, & col2 );
-    } else {
-       markIt = false;
+    }
+    else {
+        markIt = false;
     }
 }
 
@@ -119,7 +122,8 @@ void QpeEditor::find ( const QString &txt, bool caseSensitive,
             line = col = 0;
         wrap = false;
           //  emit searchWrapped();
-    } else {
+    }
+    else {
         getCursorPosition( &line, &col );
     }
       //ignore backwards for now....
@@ -236,11 +240,11 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     a->addTo( edit );
 #endif
 
-       a = new QAction( tr( "Goto Line..." ), Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ),
+    a = new QAction( tr( "Goto Line..." ), Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ),
                     QString::null, 0, this, 0 );
-   connect( a, SIGNAL( activated() ), this, SLOT( gotoLine() ) );
+    connect( a, SIGNAL( activated() ), this, SLOT( gotoLine() ) );
     edit->insertSeparator();
-   a->addTo( edit );
+    a->addTo( edit );
 
     a = new QAction( tr( "Find..." ), Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
@@ -405,7 +409,8 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
         if(fi.baseName().left(1) == "") {
             openDotFile(currentFileName);
-        } else {
+        }
+        else {
             openFile(currentFileName);
         }
     } else {
@@ -416,43 +421,48 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     viewSelection = cfg.readNumEntry( "FileView", 0 );
 }
 
-TextEdit::~TextEdit() {
+TextEdit::~TextEdit()
+{
     if( edited1 && !promptExit) {
-				switch( savePrompt() ) {
-					case 1: {
-							saveAs();
-					}
-							break;
-				};
-		}
+        switch( savePrompt() ) {
+        case 1:
+            {
+                saveAs();
+            }
+            break;
+        };
+    }
 
     delete editor;
 }
 
-void TextEdit::closeEvent(QCloseEvent *) {
+void TextEdit::closeEvent(QCloseEvent *)
+{
     if(  promptExit) {
-				switch( savePrompt() ) {
-					case 1: {
-							saveAs();
-							qApp->quit();
-					}
-							break;
+        switch( savePrompt() ) {
+        case 1:
+            {
+                saveAs();
+                qApp->quit();
+            }
+            break;
 
-					case 2: {
-							qApp->quit();
-					}
-							break;
+        case 2:
+            {
+                qApp->quit();
+            }
+            break;
 
-					case -1:
-							break;
-				};
-		}
+        case -1:
+            break;
+        };
+    }
     else
         qApp->quit();
 }
 
-void TextEdit::cleanUp() {
-
+void TextEdit::cleanUp()
+{
     Config cfg ( "TextEdit" );
     cfg. setGroup ( "Font" );
     QFont f = editor->font();
@@ -470,40 +480,44 @@ void TextEdit::cleanUp() {
     cfg.writeEntry ( "FilePermissions", filePerms );
     cfg.writeEntry ( "SearchBar", useSearchBar );
     cfg.writeEntry ( "startNew", startWithNew );
-
 }
 
-
-void TextEdit::accept() {
-        if( edited1)
-            saveAs();
-     qApp->quit();
+void TextEdit::accept()
+{
+    if( edited1)
+        saveAs();
+    qApp->quit();
 }
 
-void TextEdit::zoomIn() {
+void TextEdit::zoomIn()
+{
     setFontSize(editor->font().pointSize()+1,false);
 }
 
-void TextEdit::zoomOut() {
+void TextEdit::zoomOut()
+{
     setFontSize(editor->font().pointSize()-1,true);
 }
 
 
-void TextEdit::setFontSize(int sz, bool round_down_not_up) {
+void TextEdit::setFontSize(int sz, bool round_down_not_up)
+{
     int s=10;
     for (int i=0; i<nfontsizes; i++) {
-  if ( fontsize[i] == sz ) {
-      s = sz;
-      break;
-  } else if ( round_down_not_up ) {
-      if ( fontsize[i] < sz )
-    s = fontsize[i];
-  } else {
-      if ( fontsize[i] > sz ) {
-    s = fontsize[i];
-    break;
-      }
-  }
+        if ( fontsize[i] == sz ) {
+            s = sz;
+            break;
+        }
+        else if ( round_down_not_up ) {
+            if ( fontsize[i] < sz )
+                s = fontsize[i];
+        }
+        else {
+            if ( fontsize[i] > sz ) {
+                s = fontsize[i];
+                break;
+            }
+        }
     }
 
     QFont f = editor->font();
@@ -514,19 +528,22 @@ void TextEdit::setFontSize(int sz, bool round_down_not_up) {
     zout->setEnabled(s != fontsize[0]);
 }
 
-void TextEdit::setBold(bool y) {
+void TextEdit::setBold(bool y)
+{
     QFont f = editor->font();
     f.setBold(y);
     editor->setFont(f);
 }
 
-void TextEdit::setItalic(bool y) {
+void TextEdit::setItalic(bool y)
+{
     QFont f = editor->font();
     f.setItalic(y);
     editor->setFont(f);
 }
 
-void TextEdit::setWordWrap(bool y) {
+void TextEdit::setWordWrap(bool y)
+{
     bool state = editor->edited();
     QString captionStr = caption();
     bool b1 = edited1;
@@ -539,7 +556,8 @@ void TextEdit::setWordWrap(bool y) {
     setCaption(captionStr);
 }
 
-void TextEdit::setSearchBar(bool b) {
+void TextEdit::setSearchBar(bool b)
+{
     useSearchBar=b;
     Config cfg("TextEdit");
     cfg.setGroup("View");
@@ -552,14 +570,16 @@ void TextEdit::setSearchBar(bool b) {
     editor->setFocus();
 }
 
-void TextEdit::fileNew() {
+void TextEdit::fileNew()
+{
 //     if( !bFromDocView  ) {
 //         saveAs();
 //     }
     newFile(DocLnk());
 }
 
-void TextEdit::fileOpen() {
+void TextEdit::fileOpen()
+{
     Config cfg("TextEdit");
     cfg. setGroup ( "View" );
     QMap<QString, QStringList> map;
@@ -580,7 +600,8 @@ void TextEdit::fileOpen() {
         updateCaption();
 }
 
-void TextEdit::doSearchBar() {
+void TextEdit::doSearchBar()
+{
     if(!useSearchBar)
         searchBar->hide();
     else
@@ -588,7 +609,8 @@ void TextEdit::doSearchBar() {
 }
 
 #if 0
-void TextEdit::slotFind() {
+void TextEdit::slotFind()
+{
     FindDialog frmFind( tr("Text Editor"), this );
     connect( &frmFind, SIGNAL(signalFindClicked(const QString&,bool,bool,int)),
        editor, SLOT(slotDoFind(const QString&,bool,bool)));
@@ -606,44 +628,51 @@ void TextEdit::slotFind() {
 }
 #endif
 
-void TextEdit::fileRevert() {
+void TextEdit::fileRevert()
+{
     clear();
     fileOpen();
 }
 
-void TextEdit::editCut() {
+void TextEdit::editCut()
+{
 #ifndef QT_NO_CLIPBOARD
     editor->cut();
 #endif
 }
 
-void TextEdit::editCopy() {
+void TextEdit::editCopy()
+{
 #ifndef QT_NO_CLIPBOARD
     editor->copy();
 #endif
 }
 
-void TextEdit::editPaste() {
+void TextEdit::editPaste()
+{
 #ifndef QT_NO_CLIPBOARD
     editor->paste();
 #endif
 }
 
-void TextEdit::editFind() {
+void TextEdit::editFind()
+{
     searchBar->show();
     searchEdit->setFocus();
 }
 
-void TextEdit::findNext() {
+void TextEdit::findNext()
+{
     editor->find( searchEdit->text(), false, false );
-
 }
 
-void TextEdit::findClose() {
+void TextEdit::findClose()
+{
     searchBar->hide();
 }
 
-void TextEdit::search() {
+void TextEdit::search()
+{
     editor->find( searchEdit->text(), false, false );
 }
 
@@ -660,7 +689,8 @@ void TextEdit::newFile( const DocLnk &f ) {
 //    editor->setEdited( false);
 }
 
-void TextEdit::openDotFile( const QString &f ) {
+void TextEdit::openDotFile( const QString &f )
+{
     if(!currentFileName.isEmpty()) {
         currentFileName=f;
 
@@ -668,9 +698,9 @@ void TextEdit::openDotFile( const QString &f ) {
         QString txt;
         QFile file(f);
         if (!file.open(IO_ReadWrite))
-	    owarn << "Failed to open file " << file.name() << oendl;
+            owarn << "Failed to open file " << file.name() << oendl;
         else {
-	    QTextStream t(&file);
+            QTextStream t(&file);
             while ( !t.atEnd()) {
                 txt+=t.readLine()+"\n";
             }
@@ -678,71 +708,68 @@ void TextEdit::openDotFile( const QString &f ) {
             editor->setEdited( false);
             edited1=false;
             edited=false;
-	}
+        }
     }
     updateCaption( currentFileName);
 }
 
-void TextEdit::openFile( const QString &f ) {
-  odebug << "filename is "+ f << oendl;
-  QString filer;
-  QFileInfo fi( f);
+void TextEdit::openFile( const QString &f )
+{
+    odebug << "filename is "+ f << oendl;
+    QString filer;
+    QFileInfo fi( f);
 //    bFromDocView = true;
-  if(f.find(".desktop",0,true) != -1 && !openDesktop )
-    {
-      switch ( QMessageBox::warning(this,tr("Text Editor"),tr("Text Editor has detected<BR>you selected a <B>.desktop</B>file.<BR>Open<B>.desktop</B> file or <B>linked</B> file?"),tr(".desktop File"),tr("Linked Document"),0,1,1) )
-        {
+    if(f.find(".desktop",0,true) != -1 && !openDesktop ) {
+        switch ( QMessageBox::warning(this,tr("Text Editor"),tr("Text Editor has detected<BR>you selected a <B>.desktop</B>file.<BR>Open<B>.desktop</B> file or <B>linked</B> file?"),tr(".desktop File"),tr("Linked Document"),0,1,1) ) {
         case 0: //desktop
-          filer = f;
-          break;
+            filer = f;
+            break;
         case 1: //linked
-          DocLnk sf(f);
-          filer = sf.file();
-          break;
+            DocLnk sf(f);
+            filer = sf.file();
+            break;
         };
     }
-  else if(fi.baseName().left(1) == "")
-    {
-      odebug << "opening dotfile" << oendl;
-      currentFileName=f;
-      openDotFile(currentFileName);
-      return;
+    else if(fi.baseName().left(1) == "") {
+        odebug << "opening dotfile" << oendl;
+        currentFileName=f;
+        openDotFile(currentFileName);
+        return;
     }
-  /*
-   * The problem is a file where Config(f).isValid() and it does not
-   * end with .desktop will be treated as desktop file
-   */
-  else if (f.find(".desktop",0,true) != -1 )
-    {
-      DocLnk sf(f);
-      filer = sf.file();
-      if(filer.right(1) == "/")
-          filer = f;
-
+    /*
+     * The problem is a file where Config(f).isValid() and it does not
+     * end with .desktop will be treated as desktop file
+     */
+    else if (f.find(".desktop",0,true) != -1 ) {
+        DocLnk sf(f);
+        filer = sf.file();
+        if(filer.right(1) == "/")
+            filer = f;
     }
-  else
-      filer = f;
+    else
+        filer = f;
 
-      DocLnk nf;
-      nf.setType("text/plain");
-      nf.setFile(filer);
-      currentFileName=filer;
+    DocLnk nf;
+    nf.setType("text/plain");
+    nf.setFile(filer);
+    currentFileName=filer;
 
-      nf.setName(fi.baseName());
-      openFile(nf);
+    nf.setName(fi.baseName());
+    openFile(nf);
 
-      odebug << "openFile string "+currentFileName << oendl;
+    odebug << "openFile string "+currentFileName << oendl;
 
-  showEditTools();
+    showEditTools();
     // Show filename in caption
-  QString name = filer;
-  int sep = name.findRev( '/' );
-  if ( sep > 0 )
-    name = name.mid( sep+1 );
-  updateCaption( name );
+    QString name = filer;
+    int sep = name.findRev( '/' );
+    if ( sep > 0 )
+        name = name.mid( sep+1 );
+    updateCaption( name );
 }
 
-void TextEdit::openFile( const DocLnk &f ) {
+void TextEdit::openFile( const DocLnk &f )
+{
 //    clear();
 //    bFromDocView = true;
     FileManager fm;
@@ -779,7 +806,8 @@ void TextEdit::showEditTools() {
 
 /*!
   unprompted save */
-bool TextEdit::save() {
+bool TextEdit::save()
+{
     QString name, file;
     odebug << "saveAsFile " + currentFileName << oendl;
     if(currentFileName.isEmpty()) {
@@ -800,7 +828,8 @@ bool TextEdit::save() {
     if( !rt.isEmpty() ) {
         if(name.isEmpty()) {
             saveAs();
-        } else {
+        }
+        else {
             currentFileName = name;
             odebug << "saveFile "+currentFileName << oendl;
 
@@ -842,8 +871,8 @@ bool TextEdit::save() {
 
 /*!
   prompted save */
-bool TextEdit::saveAs() {
-
+bool TextEdit::saveAs()
+{
     if(caption() == tr("Text Editor"))
         return false;
     odebug << "saveAsFile " + currentFileName << oendl;
@@ -859,7 +888,8 @@ bool TextEdit::saveAs() {
         QString pt = rt.simplifyWhiteSpace();
         int i = pt.find( ' ' );
         QString docname = pt;
-        if ( i > 0 ) docname = pt.left( i );
+        if ( i > 0 )
+            docname = pt.left( i );
 
         while( docname.startsWith( "." ) )
             docname = docname.mid( 1 );
@@ -940,21 +970,22 @@ bool TextEdit::saveAs() {
     return false;
 } //end saveAs
 
-void TextEdit::clear() {
+void TextEdit::clear()
+{
     delete doc;
     doc = 0;
     editor->clear();
 }
 
-void TextEdit::updateCaption( const QString &name ) {
-
+void TextEdit::updateCaption( const QString &name )
+{
     if ( name.isEmpty() )
         setCaption( tr("Text Editor") );
     else {
         QString s = name;
         if ( s.isNull() )
             s = doc->name();
-        if ( s.isEmpty()  ) {
+        if ( s.isEmpty() ) {
             s = tr( "Unnamed" );
             currentFileName=s;
         }
@@ -964,63 +995,66 @@ void TextEdit::updateCaption( const QString &name ) {
     }
 }
 
-void TextEdit::setDocument(const QString& fileref) {
+void TextEdit::setDocument(const QString& fileref)
+{
     if(fileref != "Unnamed") {
         currentFileName=fileref;
         odebug << "setDocument" << oendl;
-         QFileInfo fi(currentFileName);
-         odebug << "basename:"+fi.baseName()+": current filenmame "+currentFileName << oendl;
-         if( (fi.baseName().left(1)).isEmpty() ) {
-        openDotFile(currentFileName);
-
-         } else {
-             odebug << "setDoc open" << oendl;
-             bFromDocView = true;
-             openFile(fileref);
-             editor->setEdited(true);
-             edited1=false;
-             edited=true;
-               //   fromSetDocument=false;
- //    doSearchBar();
+        QFileInfo fi(currentFileName);
+        odebug << "basename:"+fi.baseName()+": current filenmame "+currentFileName << oendl;
+        if( (fi.baseName().left(1)).isEmpty() ) {
+            openDotFile(currentFileName);
+        }
+        else {
+            odebug << "setDoc open" << oendl;
+            bFromDocView = true;
+            openFile(fileref);
+            editor->setEdited(true);
+            edited1=false;
+            edited=true;
+            //   fromSetDocument=false;
+//    doSearchBar();
         }
     }
     updateCaption( currentFileName);
 }
 
-void TextEdit::changeFont() {
-  QDialog *d = new QDialog ( this, "FontDialog", true );
-  d-> setCaption ( tr( "Choose font" ));
-  QBoxLayout *lay = new QVBoxLayout ( d );
-  OFontSelector *ofs = new OFontSelector ( true, d );
-  lay-> addWidget ( ofs );
-  ofs-> setSelectedFont ( editor-> font ( ));
+void TextEdit::changeFont()
+{
+    QDialog *d = new QDialog ( this, "FontDialog", true );
+    d-> setCaption ( tr( "Choose font" ));
+    QBoxLayout *lay = new QVBoxLayout ( d );
+    OFontSelector *ofs = new OFontSelector ( true, d );
+    lay-> addWidget ( ofs );
+    ofs-> setSelectedFont ( editor-> font ( ));
 
     if ( QPEApplication::execDialog( d ) == QDialog::Accepted )
-      editor-> setFont ( ofs-> selectedFont ( ));
+        editor-> setFont ( ofs-> selectedFont ( ));
     delete d;
-
 }
 
-void TextEdit::editDelete() {
+void TextEdit::editDelete()
+{
     switch ( QMessageBox::warning(this,tr("Text Editor"),
                                   tr("Do you really want<BR>to <B>delete</B> "
                                      "the current file\nfrom the disk?<BR>This is "
                                      "<B>irreversable!</B>"),
                                   tr("Yes"),tr("No"),0,0,1) ) {
-      case 0:
-          if(doc) {
-              doc->removeFiles();
-              clear();
-              setCaption( tr("Text Editor") );
-          }
-          break;
-      case 1:
-            // exit
-          break;
+    case 0:
+        if(doc) {
+            doc->removeFiles();
+            clear();
+            setCaption( tr("Text Editor") );
+        }
+        break;
+    case 1:
+        // exit
+        break;
     };
 }
 
-void TextEdit::changeStartConfig( bool b ) {
+void TextEdit::changeStartConfig( bool b )
+{
     startWithNew=b;
     Config cfg("TextEdit");
     cfg.setGroup("View");
@@ -1028,7 +1062,8 @@ void TextEdit::changeStartConfig( bool b ) {
     update();
 }
 
-void TextEdit::editorChanged() {
+void TextEdit::editorChanged()
+{
 //    odebug << "editor changed" << oendl;
     if( /*editor->edited() &&*/ /*edited && */!edited1) {
         setCaption( "*"+caption());
@@ -1037,98 +1072,98 @@ void TextEdit::editorChanged() {
     edited=true;
 }
 
-void TextEdit::receive(const QCString&msg, const QByteArray &) {
+void TextEdit::receive(const QCString&msg, const QByteArray &)
+{
     odebug << "QCop "+msg << oendl;
-  if ( msg == "setDocument(QString)" ) {
-      odebug << "bugger all" << oendl;
-
-  }
-
+    if ( msg == "setDocument(QString)" ) {
+//        odebug << "bugger all" << oendl;
+    }
 }
 
-void TextEdit::doAbout() {
+void TextEdit::doAbout()
+{
     QMessageBox::about(0,tr("Text Edit"),tr("Text Edit is copyright<BR>"
                          "2000 Trolltech AS, and<BR>"
                          "2002 by <B>L. J. Potter <BR>llornkcor@handhelds.org</B><BR>"
                          "and is licensed under the GPL"));
 }
 
-void TextEdit::doPrompt(bool b) {
+void TextEdit::doPrompt(bool b)
+{
     promptExit=b;
     Config cfg("TextEdit");
     cfg.setGroup ( "View" );
     cfg.writeEntry ( "PromptExit", b);
 }
 
-void TextEdit::doDesktop(bool b) {
+void TextEdit::doDesktop(bool b)
+{
     openDesktop=b;
     Config cfg("TextEdit");
     cfg.setGroup ( "View" );
     cfg.writeEntry ( "OpenDesktop", b);
 }
 
-void TextEdit::doFilePerms(bool b) {
+void TextEdit::doFilePerms(bool b)
+{
     filePerms=b;
     Config cfg("TextEdit");
     cfg.setGroup ( "View" );
     cfg.writeEntry ( "FilePermissions", b);
 }
 
-void TextEdit::editPasteTimeDate() {
+void TextEdit::editPasteTimeDate()
+{
 #ifndef QT_NO_CLIPBOARD
-  QClipboard *cb = QApplication::clipboard();
-  QDateTime dt = QDateTime::currentDateTime();
-  cb->setText( dt.toString());
-  editor->paste();
+    QClipboard *cb = QApplication::clipboard();
+    QDateTime dt = QDateTime::currentDateTime();
+    cb->setText( dt.toString());
+    editor->paste();
 #endif
 }
 
 int TextEdit::savePrompt()
 {
     switch( QMessageBox::information( 0, (tr("Textedit")),
-                                      (tr("Textedit detected\n"
-                                          "you have unsaved changes\n"
-                                          "Go ahead and save?\n")),
-                                      (tr("Save")), (tr("Don't Save")), (tr("&Cancel")), 2, 2 ) )
-      {
-        case 0:
+                                        (tr("Textedit detected\n"
+                                            "you have unsaved changes\n"
+                                            "Go ahead and save?\n")),
+                                        (tr("Save")), (tr("Don't Save")), (tr("&Cancel")), 2, 2 ) ) {
+    case 0:
         {
             return 1;
         }
         break;
 
-        case 1:
+    case 1:
         {
             return 2;
         }
         break;
 
-        case 2:
+    case 2:
         {
             return -1;
         }
         break;
-      };
+    };
 
     return 0;
 }
 
 void TextEdit::timerCrank()
 {
-    if(featureAutoSave && edited1)
-      {
-          if(currentFileName.isEmpty())
-            {
-                currentFileName = QDir::homeDirPath()+"/textedit.tmp";
-                saveAs();
-            }
-          else
-            {
-//                odebug << "autosave" << oendl;
-                save();
-            }
-          setTimer();
-      }
+    if(featureAutoSave && edited1) {
+        if(currentFileName.isEmpty()) {
+            currentFileName = QDir::homeDirPath()+"/textedit.tmp";
+            saveAs();
+        }
+        else {
+//            odebug << "autosave" << oendl;
+            save();
+        }
+        setTimer();
+    }
 }
 
 void TextEdit::doTimer(bool b)
@@ -1138,51 +1173,49 @@ void TextEdit::doTimer(bool b)
     cfg.writeEntry ( "autosave", b);
     featureAutoSave = b;
     nAutoSave->setOn(b);
-    if(b)
-      {
+    if(b) {
 //          odebug << "doTimer true" << oendl;
-          setTimer();
-      }
-//     else
-//         odebug << "doTimer false" << oendl;
+        setTimer();
+    }
+//    else
+//        odebug << "doTimer false" << oendl;
 }
 
 void TextEdit::setTimer()
 {
-if(featureAutoSave)
-  {
-//      odebug << "setting autosave" << oendl;
-      QTimer *timer = new QTimer(this );
-      connect( timer, SIGNAL(timeout()), this, SLOT(timerCrank()) );
-      timer->start( 300000, true); //5 minutes
+    if(featureAutoSave) {
+//        odebug << "setting autosave" << oendl;
+        QTimer *timer = new QTimer(this );
+        connect( timer, SIGNAL(timeout()), this, SLOT(timerCrank()) );
+        timer->start( 300000, true); //5 minutes
     }
 }
 
-void TextEdit::gotoLine() {
+void TextEdit::gotoLine()
+{
     if( editor->length() < 1)
-       return;
-   QWidget *d = QApplication::desktop();
-   gotoEdit = new QLineEdit( 0, "Goto line");
+        return;
+    QWidget *d = QApplication::desktop();
+    gotoEdit = new QLineEdit( 0, "Goto line");
 
-   gotoEdit->move( (d->width()/2) - ( gotoEdit->width()/2) , (d->height()/2) - (gotoEdit->height()/2));
-   gotoEdit->setFrame(true);
-   gotoEdit->show();
-   connect (gotoEdit,SIGNAL(returnPressed()), this, SLOT(doGoto()));
+    gotoEdit->move( (d->width()/2) - ( gotoEdit->width()/2) , (d->height()/2) - (gotoEdit->height()/2));
+    gotoEdit->setFrame(true);
+    gotoEdit->show();
+    connect (gotoEdit,SIGNAL(returnPressed()), this, SLOT(doGoto()));
 }
 
-void TextEdit::doGoto() {
-   QString number = gotoEdit->text();
-   gotoEdit->hide();
+void TextEdit::doGoto()
+{
+    QString number = gotoEdit->text();
+    gotoEdit->hide();
 
-   delete gotoEdit;
-   gotoEdit = 0;
+    delete gotoEdit;
+    gotoEdit = 0;
 
-   bool ok;
-   int lineNumber = number.toInt(&ok, 10);
-   if( editor->numLines() < lineNumber)
-      QMessageBox::message(tr("Text Edit"),tr("Not enough lines"));
-   else
-   {
-      editor->setCursorPosition(lineNumber, 0, false);
-   }
+    bool ok;
+    int lineNumber = number.toInt(&ok, 10);
+    if( editor->numLines() < lineNumber)
+        QMessageBox::message(tr("Text Edit"),tr("Not enough lines"));
+    else
+        editor->setCursorPosition(lineNumber, 0, false);
 }

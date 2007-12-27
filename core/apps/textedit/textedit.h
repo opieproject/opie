@@ -51,93 +51,93 @@ class QTimer;
 
 class TextEdit : public QMainWindow
 {
-   Q_OBJECT
+    Q_OBJECT
 
 public:
-   static QString appName() { return QString::fromLatin1("textedit"); }
-   TextEdit( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
-   ~TextEdit();
+    static QString appName() { return QString::fromLatin1("textedit"); }
+    TextEdit( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
+    ~TextEdit();
 
 protected:
-   QPopupMenu *font;
-   QAction *nStart, *nFileDlgOpt, *nAdvanced, *desktopAction, *filePermAction, *searchBarAction, *nAutoSave;
-   bool edited, edited1;
-   void openFile( const QString & );
-   QCopChannel * channel;
+    QPopupMenu *font;
+    QAction *nStart, *nFileDlgOpt, *nAdvanced, *desktopAction, *filePermAction, *searchBarAction, *nAutoSave;
+    bool edited, edited1;
+    void openFile( const QString & );
+    QCopChannel * channel;
 
-   bool featureAutoSave;
-   void closeEvent( QCloseEvent *e );
-   void doSearchBar();
-   int savePrompt();
-   void setTimer();
+    bool featureAutoSave;
+    void closeEvent( QCloseEvent *e );
+    void doSearchBar();
+    int savePrompt();
+    void setTimer();
 private slots:
-   void editorChanged();
-   void receive(const QCString&, const QByteArray&);
-   void timerCrank();
-   void doTimer(bool);
-   void editPasteTimeDate();
-   void doPrompt(bool);
-   void doDesktop(bool);
-   void doFilePerms(bool);
-   void doAbout();
-   void setDocument(const QString&);
-   void changeFont();
-   void fileNew();
-   void fileRevert();
-   void fileOpen();
-   void changeStartConfig(bool);
-   bool save();
-   bool saveAs();
-   void cleanUp();
+    void editorChanged();
+    void receive(const QCString&, const QByteArray&);
+    void timerCrank();
+    void doTimer(bool);
+    void editPasteTimeDate();
+    void doPrompt(bool);
+    void doDesktop(bool);
+    void doFilePerms(bool);
+    void doAbout();
+    void setDocument(const QString&);
+    void changeFont();
+    void fileNew();
+    void fileRevert();
+    void fileOpen();
+    void changeStartConfig(bool);
+    bool save();
+    bool saveAs();
+    void cleanUp();
 
-   void gotoLine();
-   void doGoto();
+    void gotoLine();
+    void doGoto();
 
 
-   void editCut();
-   void editCopy();
-   void editPaste();
-   void editFind();
-   void editDelete();
+    void editCut();
+    void editCopy();
+    void editPaste();
+    void editFind();
+    void editDelete();
 
-   void findNext();
-   void findClose();
+    void findNext();
+    void findClose();
 
-   void search();
-   void accept();
+    void search();
+    void accept();
 
-   void newFile( const DocLnk & );
-   void openFile( const DocLnk & );
-   void showEditTools();
+    void newFile( const DocLnk & );
+    void openFile( const DocLnk & );
+    void showEditTools();
 
-   void zoomIn();
-   void zoomOut();
-   void setBold(bool y);
-   void setItalic(bool y);
-   void setWordWrap(bool y);
-   void setSearchBar(bool);
+    void zoomIn();
+    void zoomOut();
+    void setBold(bool y);
+    void setItalic(bool y);
+    void setWordWrap(bool y);
+    void setSearchBar(bool);
 
 private:
-   void openDotFile(const QString &);
-   void colorChanged( const QColor &c );
-   void clear();
-   void updateCaption( const QString &name=QString::null );
-   void setFontSize(int sz, bool round_down_not_up);
+    void openDotFile(const QString &);
+    void colorChanged( const QColor &c );
+    void clear();
+    void updateCaption( const QString &name=QString::null );
+    void setFontSize(int sz, bool round_down_not_up);
 private:
 //    fileSaver *fileSaveDlg;
 //    fileBrowser *browseForFiles;
-   bool fromSetDocument;
-   QpeEditor* editor;
-   QToolBar *menu, *editBar, *searchBar;
-   QPopupMenu *advancedMenu;
-   QLineEdit *gotoEdit;
-   QLineEdit *searchEdit;
-   DocLnk *doc;
-   bool fileIs, useAdvancedFeatures, promptExit, openDesktop, filePerms, useSearchBar, startWithNew;
-   bool bFromDocView;
-   int  viewSelection;
-   QAction *zin, *zout;
-   QString currentFileName;
+    bool fromSetDocument;
+    QpeEditor* editor;
+    QToolBar *menu, *editBar, *searchBar;
+    QPopupMenu *advancedMenu;
+    QLineEdit *gotoEdit;
+    QLineEdit *searchEdit;
+    DocLnk *doc;
+    bool fileIs, useAdvancedFeatures, promptExit, openDesktop, filePerms, useSearchBar, startWithNew;
+    bool bFromDocView;
+    int  viewSelection;
+    QAction *zin, *zout;
+    QString currentFileName;
 };
 
 #endif
