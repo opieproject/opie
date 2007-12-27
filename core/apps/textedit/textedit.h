@@ -60,15 +60,15 @@ public:
 
 protected:
     QPopupMenu *font;
-    QAction *nStart, *nFileDlgOpt, *nAdvanced, *desktopAction, *filePermAction, *searchBarAction, *nAutoSave;
-    bool edited, edited1;
+    QAction *nStart, *nFileDlgOpt, *desktopAction, *filePermAction, *searchBarAction, *nAutoSave;
+    bool edited;
     void openFile( const QString & );
     QCopChannel * channel;
 
     bool featureAutoSave;
     void closeEvent( QCloseEvent *e );
     void doSearchBar();
-    int savePrompt();
+    bool savePrompt();
     void setTimer();
 private slots:
     void editorChanged();
@@ -76,7 +76,6 @@ private slots:
     void timerCrank();
     void doTimer(bool);
     void editPasteTimeDate();
-    void doPrompt(bool);
     void doDesktop(bool);
     void doFilePerms(bool);
     void doAbout();
@@ -92,7 +91,6 @@ private slots:
 
     void gotoLine();
     void doGoto();
-
 
     void editCut();
     void editCopy();
