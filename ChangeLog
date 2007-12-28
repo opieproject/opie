@@ -1,14 +1,57 @@
-2007-??-??	Opie 1.2.4
+2008-??-??	Opie 1.2.4
 	
 	
 	New Features
 	------------
+	* Datebook: add exception support for repeating events - allows editing or deleting one instance of a recurring event. (BlueLightning)
+	* Add new storage management applet (cardapplet) based on the pcmcia applet, with the addition of support for SD cards and other removable storage devices (BlueLightning)
+	* Security: Make display of owner information from the business card during authentication configurable - you can now specify when it is displayed and what information is displayed
+	* TextEdit: Improve usability, particularly with regard to prompting about unsaved changes (BlueLightning)
+	* AdvancedFM: Improve usability (BlueLightning)
+	* Bluetooth Manager: improve service scanning and usability (BlueLightning)
 
 	Fixed Bugs
 	----------
+	* n.a.  - Many, many more code fixes that should improve Opie stability (E. Hovland)
+	* #1749 - AdvancedFM: Make "Open as Text" bring editor to front if it is already running (BlueLightning)
+	* n.a.  - AdvancedFM: Fix File Info and Rename actions so that they work with symlinks (BlueLightning)
+	* n.a.  - AdvancedFM: fix file copy not working with 2.6 kernel (BlueLightning)
+	* #1882 - BatteryApplet: fix freezing on Palm if switching view (Marex)
+	* n.a.  - Bluetooth Manager: fix several crashes (BlueLightning)
+	* #1773 - Todo: make priority icons easier to distinguish (BlueLightning)
+	* #1902 - Todo: set initial focus correctly when adding a task (BlueLightning)
+	* #1234 - Todo: rearrange controls so that Completed date can be set more easily (BlueLightning)
+	* n.a.  - Todo: set recurrence option depending on "Recurring task" checkbox (BlueLightning)
+	* #0079 - Datebook: allow exceptions in repeating events (BlueLightning)
+	* n.a.  - Datebook: fix monday/sunday button sorting (E. Hovland)
+	* #1876 - Button Settings: don't show record button for h2200 (BlueLightning)
+	* #1900 - Clock: add test button for testing alarm sound (BlueLightning)
+	* #1699 - CityTime: show "unavailable" instead of UTC if timezone file is unavailable (BlueLightning)
+	* #1894 - Fix h4000 machine detection and default screen rotation (P. Sokolovsky)
+	* #1833 - DocTab: don't show "Please Wait..." when DocTab is disabled (BlueLightning)
+	* #1618 - DocTab Settings: apply changes without needing a restart (BlueLightning)
+	* #1508 - Minesweeper: fix scrollbars showing for playing field with some (BlueLightning)
+	* #1810 - Add back the ability to unmount SD cards (BlueLightning)
+	* #1567 - Fix file dialog not showing symlinks with absolute paths to directories (BlueLightning)
+	* #1544 - Fix bug syncing repeating events from Outlook using Qtopia Desktop (BlueLightning)
+	* #1693 - Remove sync password restrictions (BlueLightning)
+	* #1639 - Don't ask to allow syncing repeatedly when using IntelliSync (BlueLightning)
+	* #1892 - Fix incorrect abstract method definitions that caused errors with gcc 4.x (MKaehlcke)
+	* n.a.  - OpiePlayer: Fix segfault on exit (BlueLightning)
+	* n.a.  - Update PCMCIA handling code for 2.6 kernel (BlueLightning)
+	* #1885 - SysInfo: add device icons for various iPAQ models (BlueLightning)
+	* #1748 - Fix scrolling back when selecting last tab with lots of tabs eg. in SysInfo (BlueLightning)
+	* #1881 - Add background images for 320x320 devices (kEdAR)
+	* #1887 - Add background images for 480x320 devices (Marex)
+	* #1890 - Add background images for 240x240 devices (Marex)
 
 	Internal
 	--------
+	* About applet now uses version defined in library/version.h  (BlueLightning)
+	* Issuing "make" in bin directory no longer deletes all files (E. Hovland, BlueLightning)
+	* Fixed lots of unchecked return values, unreachable code, etc. (E. Hovland)
+	* Some code style improvements (E. Hovland, BlueLightning)
+	* Update Qt 2.3.10 gcc4 patch to include extra compilation error fix (Brian Austin)
 
 
 2007-07-26	Opie 1.2.3
