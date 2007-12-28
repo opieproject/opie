@@ -144,7 +144,7 @@ static void test_and_start() {
     MultiauthConfig::MultiauthConfig(QWidget* par, const char* w = "MultiauthConfig dialog",  WFlags f = 0)
 : QDialog(par, w, TRUE, f),
     m_mainTW(0), m_pluginListView(0), m_pluginListWidget(0),
-    m_generalConfig(0), m_loginWidget(0), m_syncWidget(0),
+    m_generalConfig(0), m_loginWidget(0), m_syncWidget(0), m_ownerInfoWidget(0),
     m_nbSuccessReq(0), m_plugins_changed(false)
 {
     /* Initializes the global configuration window
@@ -203,6 +203,10 @@ static void test_and_start() {
     // sync settings page
     m_syncWidget = new SyncBase( m_mainTW, "sync config widget" );
     m_mainTW->addTab(m_syncWidget, "security/sync", tr( "Sync") );
+
+    // owner info page
+    m_ownerInfoWidget = new OwnerInfoConfigWidget( m_mainTW, "owner info config widget");
+    m_mainTW->addTab(m_ownerInfoWidget, "security/ownerinfo", tr( "Owner") );
 
     // read the "Security" Config file and update our UI
     readConfig();
@@ -281,6 +285,7 @@ void MultiauthConfig::writeConfigs() {
           confWidget = configWidgetList.next() )
         confWidget->writeConfig();
 
+    m_ownerInfoWidget->writeConfig();
     writeConfig();
 }
 

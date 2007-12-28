@@ -38,35 +38,66 @@
 /* OwnerDialog stuff */
 #include <qpe/global.h>
 #include <qpe/contact.h>
-#include <qtextview.h>
 #include <qdialog.h>
+
+class QVBoxLayout; 
+class QHBoxLayout; 
+class QGridLayout; 
+class QLabel;
+class QPushButton;
+
+#include "ownerInfoDialog.h"
 
 namespace Opie {
 namespace Security {
+
+enum ownerInfoWhenToShow {
+    oimNever,
+    oimFirst,
+    oimAuthFail
+};
 
 /// QDialog simply showing the owner information
 class SecOwnerDlg : public QDialog
 {
     Q_OBJECT
-    public:
+public:
+    SecOwnerDlg( QWidget *parent, const char * name, bool modal, bool fullscreen);
 
-        SecOwnerDlg( QWidget *parent, const char * name, const QString& owner,
-                     bool modal, bool fullscreen);
+    QLabel* TextLabel1;
+    QLabel* pxIcon;
+    QLabel* lbHomePhoneLabel;
+    QLabel* lbEmail;
+    QLabel* lbNameLabel;
+    QLabel* lbHomeMobile;
+    QLabel* lbHomeAddressLabel;
+    QLabel* lbWorkAddress;
+    QLabel* lbEmailLabel;
+    QLabel* lbWorkAddressLabel;
+    QLabel* lbWorkPhoneLabel;
+    QLabel* lbHomeAddress;
+    QLabel* lbWorkMobile;
+    QLabel* lbHomePhone;
+    QLabel* lbWorkMobileLabel;
+    QLabel* lbName;
+    QLabel* lbWorkPhone;
+    QLabel* lbHomeMobileLabel;
+    QLabel* lbMessage;
+    QPushButton* pbOK;
 
-        void resizeEvent( QResizeEvent * );
-        bool eventFilter(QObject *o, QEvent *e);
-        void mousePressEvent( QMouseEvent * );
+protected:
+    QVBoxLayout* OwnerInfoDialogLayout;
+    QHBoxLayout* Layout5;
+    QGridLayout* Layout8;
 
-    private:
-        QTextView *tv;
-	
-    private:
-	struct Private;
-	Private *d;
+private:
+    struct Private;
+    Private *d;
 };
 
 namespace Internal {
 int runPlugins();
+void showOwnerInfo();
 }
 
 }

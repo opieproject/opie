@@ -1,6 +1,6 @@
 CONFIG += qt warn_on quick-app
-HEADERS         = multiauthconfig.h
-SOURCES         = multiauthconfig.cpp main.cpp
+HEADERS         = multiauthconfig.h ownerInfoConfigWidget.h
+SOURCES         = multiauthconfig.cpp main.cpp ownerInfoConfigWidget.cpp
 INTERFACES	= loginbase.ui syncbase.ui
 
 INCLUDEPATH     += $(OPIEDIR)/include

@@ -56,6 +56,7 @@
 /* UI */
 #include "syncbase.h"
 #include "loginbase.h"
+#include "ownerInfoConfigWidget.h"
 
 class MultiauthConfig;
 class MultiauthGeneralConfig;
@@ -123,6 +124,8 @@ private:
     LoginBase *m_loginWidget;
     /// synchronization settings page
     SyncBase *m_syncWidget;
+    /// owner info
+    OwnerInfoConfigWidget *m_ownerInfoWidget;
 
     int m_nbSuccessReq;
     bool m_plugins_changed;
