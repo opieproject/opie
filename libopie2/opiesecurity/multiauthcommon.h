@@ -46,8 +46,6 @@ class QGridLayout;
 class QLabel;
 class QPushButton;
 
-#include "ownerInfoDialog.h"
-
 namespace Opie {
 namespace Security {
 
