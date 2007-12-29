@@ -116,7 +116,7 @@ FormatTabWidget::FormatTabWidget( QWidget *parent )
 	//dateButton->setDateFormat( df );
 
 	config.setGroup( "Time" );
-	cbAmpm->setCurrentItem( config.readBoolEntry( "AMPM", FALSE ) ? 1 : 0 );
+	cbAmpm->setCurrentItem( config.readBoolEntry( "AMPM", TRUE ) ? 1 : 0 );
 	cbWeekStart->setCurrentItem( config.readBoolEntry( "MONDAY", TRUE ) ? 1 : 0 );
 
 	// Send initial configuration options

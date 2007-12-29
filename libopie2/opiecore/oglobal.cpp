@@ -385,7 +385,7 @@ bool OGlobal::useAMPM()
     OConfig*conf=OGlobal::qpe_config();
     if (!conf)return false;
     conf->setGroup("Time");
-    return conf->readBoolEntry("AMPM",false);
+    return conf->readBoolEntry("AMPM",true);
 }
 
 void OGlobal::setUseAMPM( bool what)
