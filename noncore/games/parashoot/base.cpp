@@ -26,8 +26,8 @@ int damage;
 
 Base::Base(QCanvas* canvas) :
     QCanvasSprite(0, canvas),
-    kaboom("landmine"),
-    ohdear("crmble01")
+    kaboom("parashoot/landmine"),
+    ohdear("parashoot/crmble01")
 {
    basearray = new QCanvasPixmapArray();
    QString b0 = Opie::Core::OResource::findPixmap("parashoot/b0001");

@@ -34,7 +34,7 @@ int nobullets;
 
 Bullet::Bullet(QCanvas* canvas, double angle, int cannonx, int cannony) :
         QCanvasSprite(0, canvas),
-	bang("collide01")
+	bang("parashoot/collide01")
 {
      QCanvasPixmapArray* bulletarray = new QCanvasPixmapArray(Opie::Core::OResource::findPixmap("parashoot/bullet"));
      setSequence(bulletarray);

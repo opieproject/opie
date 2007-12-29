@@ -29,7 +29,7 @@ static QList<Helicopter> all;
 
 Helicopter::Helicopter(QCanvas* canvas) :
     QCanvasSprite(0, canvas),
-    chikachika("aland01")
+    chikachika("parashoot/aland01")
 {
     all.append(this);
     hits = 0;

@@ -35,7 +35,7 @@ ParaShoot::ParaShoot(QWidget* parent, const char* name, WFlags f) :
     base(NULL),
     gamestopped( true ),
     waitover( false ),
-    fanfare("level_up"),
+    fanfare("parashoot/level_up"),
     score(0)
 {
     QPEApplication::grabKeyboard();

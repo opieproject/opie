@@ -28,7 +28,7 @@ int mancount;
 
 Man::Man(QCanvas* canvas) :
     QCanvasSprite(0, canvas),
-    splat("lose") // No tr
+    splat("parashoot/lose") // No tr
 {
     manarray = new QCanvasPixmapArray();
     QString m0 = Opie::Core::OResource::findPixmap("parashoot/man0001");
@@ -43,7 +43,7 @@ Man::Man(QCanvas* canvas) :
 
 Man::Man(QCanvas* canvas, int x, int y) :
     QCanvasSprite(0, canvas),
-    splat("bang") // No tr
+    splat("parashoot/bang") // No tr
 {
     manarray = new QCanvasPixmapArray();
     QString m0 = Opie::Core::OResource::findPixmap("parashoot/man0001");
