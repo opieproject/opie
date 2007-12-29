@@ -278,7 +278,7 @@ void VMemo::mousePressEvent( QMouseEvent * /*me*/) {
 
     if(!recording) {
         if(!startRecording() ){
-            QMessageBox::critical(0, "vmemo", "Abort Recording", "Abort Recording");
+            QMessageBox::critical(0, "vmemo", tr("Recording aborted"), tr("Recording aborted"));
         }
     }
     else {
@@ -311,8 +311,6 @@ bool VMemo::startRecording()
         recording = false;
         return false;
     }
-
-    config.setGroup("Defaults");
 
     date = TimeString::dateString( QDateTime::currentDateTime(),false,true);
     date.replace(QRegExp("'"),"");
@@ -364,7 +362,7 @@ bool VMemo::startRecording()
     else
         odebug << "Opened temp file " << tmpFilePath << "" << oendl;
 
-    close(tmpFd);
+    ::close(tmpFd);
 
     if(openWAV(tmpFilePath ) == -1)  {
         QString err("Could not open the temp file\n");
@@ -697,7 +695,7 @@ void VMemo::timerBreak()
 {
     //stop
     stopRecording();
-    QMessageBox::message("Vmemo","Vmemo recording has ended");
+    QMessageBox::message("Vmemo",tr("<p>Vmemo recording stopped (over time limit)"));
 }
 
 
