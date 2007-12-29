@@ -307,7 +307,7 @@ bool StorageInfo::hasMmc()
     bool hasMmc=false;
     if( deviceTab("/dev/mmc/part"))
         hasMmc=true;
-    if( deviceTab("/dev/mmcd"))
+    else if( deviceTab("/dev/mmcblk"))
         hasMmc=true;
     return hasMmc;
 }
