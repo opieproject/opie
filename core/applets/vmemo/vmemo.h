@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.16 2005-08-11 10:10:40 llornkcor Exp $
+ * $Id: vmemo.h,v 1.17 2007-12-29 12:46:36 paule Exp $
  */
 
 #ifndef __VMEMO_H__
@@ -29,42 +29,39 @@
 class VMemo : public QWidget
 {
   Q_OBJECT
-			
+
 public:
-	
-  VMemo( QWidget *parent, const char *name = NULL);
-  ~VMemo();
-  static int position();
-  QFile track;
-  int length;
-  QString fileName, errorMsg, date;
-  QLabel* msgLabel;
-  QTimer *t_timer;
-	bool usingIcon, useADPCM;
- 
+    VMemo( QWidget *parent, const char *name = NULL);
+    ~VMemo();
+    static int position();
+    QFile track;
+    int length;
+    QString fileName, errorMsg, date;
+    QLabel* msgLabel;
+    QTimer *t_timer;
+    bool usingIcon, useADPCM;
+
 public slots:
-		
-  bool record();
-  void mousePressEvent( QMouseEvent * );
-  void mouseReleaseEvent( QMouseEvent * );
-  void receive( const QCString &msg, const QByteArray &data );
-  bool startRecording();
-  void stopRecording();
-  void timerBreak();
-	
+    bool record();
+    void mousePressEvent( QMouseEvent * );
+    void mouseReleaseEvent( QMouseEvent * );
+    void receive( const QCString &msg, const QByteArray &data );
+    bool startRecording();
+    void stopRecording();
+    void timerBreak();
+
 private:
-	
-  bool useAlerts;
-  void paintEvent( QPaintEvent* );
-  int setToggleButton(int);
-  int openDSP();
-  int openWAV(const char *filename);
-  bool fromToggle;
-  QPixmap vmemoPixmap;
-  QCopChannel *myChannel;
-  bool systemZaurus;
-  int dsp, wav, rate, speed, channels, format, resolution;
-  bool recording;
+    bool useAlerts;
+    void paintEvent( QPaintEvent* );
+    int setToggleButton(int);
+    int openDSP();
+    int openWAV(const char *filename);
+    bool fromToggle;
+    QPixmap vmemoPixmap;
+    QCopChannel *myChannel;
+    bool systemZaurus;
+    int dsp, wav, rate, speed, channels, format, resolution;
+    bool recording;
 };
 
 #endif // __VMEMO_H__
