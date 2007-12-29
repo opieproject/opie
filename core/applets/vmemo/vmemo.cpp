@@ -278,7 +278,7 @@ void VMemo::mousePressEvent( QMouseEvent * /*me*/) {
 
     if(!recording) {
         if(!startRecording() ){
-            QMessageBox::critical(0, "vmemo", tr("Recording aborted"), tr("Recording aborted"));
+            QMessageBox::critical(0, tr("vmemo"), tr("Recording aborted"));
         }
     }
     else {
@@ -298,6 +298,12 @@ bool VMemo::startRecording()
     odebug << "Start recording engines" << oendl;
     recording = true;
 
+    date = TimeString::dateString( QDateTime::currentDateTime(),false,true);
+    date.replace(QRegExp("'"),"");
+    date.replace(QRegExp(" "),"_");
+    date.replace(QRegExp(":"),"-");
+    date.replace(QRegExp(","),"");
+
     useAlerts = config.readBoolEntry("Alert",1);
     if(useAlerts) {
         msgLabel = new QLabel( 0, "alertLabel" );
@@ -311,12 +317,6 @@ bool VMemo::startRecording()
         recording = false;
         return false;
     }
-
-    date = TimeString::dateString( QDateTime::currentDateTime(),false,true);
-    date.replace(QRegExp("'"),"");
-    date.replace(QRegExp(" "),"_");
-    date.replace(QRegExp(":"),"-");
-    date.replace(QRegExp(","),"");
 
     QString fName;
     config.setGroup( "System" );
