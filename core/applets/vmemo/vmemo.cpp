@@ -298,6 +298,15 @@ bool VMemo::startRecording()
     odebug << "Start recording engines" << oendl;
     recording = true;
 
+    useAlerts = config.readBoolEntry("Alert",1);
+    if(useAlerts) {
+        msgLabel = new QLabel( 0, "alertLabel" );
+        msgLabel->setText( tr("<B><P><font size=+2>VMemo-Recording</font></B><p>%1</p>").arg("vm_"+ date));
+        msgLabel->show();
+    }
+    else
+        msgLabel=0;
+
     if (openDSP() == -1)  {
         recording = false;
         return false;
@@ -330,13 +339,6 @@ bool VMemo::startRecording()
 
     fileName += fName;
     odebug << "filename is " + fileName << oendl;
-
-    useAlerts = config.readBoolEntry("Alert",1);
-    if(useAlerts) {
-        msgLabel = new QLabel( 0, "alertLabel" );
-        msgLabel->setText( tr("<B><P><font size=+2>VMemo-Recording</font></B><p>%1</p>").arg("vm_"+ date));
-        msgLabel->show();
-    }
 
     // open tmp file here
     char *tmpFilePath = 0;
@@ -378,8 +380,7 @@ bool VMemo::startRecording()
 
         int retVal = rename(tmpFilePath, fileName.local8Bit());
         if (retVal == -1) {
-            owarn << "Could not move " << tmpFilePath << " to " << fileName
-                    << oendl;
+            owarn << "Could not move " << tmpFilePath << " to " << fileName << oendl;
             delete [] tmpFilePath;
             return false;
         }
@@ -451,9 +452,11 @@ int VMemo::openDSP()
     }
 
     if (dsp == -1)  {
-        msgLabel->close();
-        msgLabel=0;
-        delete msgLabel;
+        if(msgLabel) {
+            msgLabel->close();
+            delete msgLabel;
+            msgLabel=0;
+        }
 
         perror("open(\"/dev/dsp\")");
         errorMsg="open(\"/dev/dsp\")\n "+(QString)strerror(errno);
@@ -514,8 +517,8 @@ int VMemo::openWAV(const char *filename)
     wh.bit_p_spl  = resolution;
     wh.data_chunk = DATA;
     wh.data_length= 0;
-    //    odebug << "Write header channels " << wh.modus << ", speed " << wh.sample_fq << ", b/s "
-    //           << wh.byte_p_sec << ", blockalign " << wh.byte_p_spl << ", bitrate " << wh.bit_p_spl << oendl;
+//    odebug << "Write header channels " << wh.modus << ", speed " << wh.sample_fq << ", b/s "
+//           << wh.byte_p_sec << ", blockalign " << wh.byte_p_spl << ", bitrate " << wh.bit_p_spl << oendl;
     write (wav, &wh, sizeof(WaveHeader));
 
     return 1;
@@ -640,7 +643,7 @@ bool VMemo::record() {
     QString time;
     time.sprintf("%.2f", numberOfRecordedSeconds);
     cfgO.writeEntry( currentFileName, time );
-      //      odebug << "writing config numberOfRecordedSeconds "+time << oendl;
+//    odebug << "writing config numberOfRecordedSeconds "+time << oendl;
 
     cfgO.write();
 
@@ -692,7 +695,7 @@ int VMemo::setToggleButton(int tog)
 
 void VMemo::timerBreak()
 {
-  //stop
+    //stop
     stopRecording();
     QMessageBox::message("Vmemo","Vmemo recording has ended");
 }
