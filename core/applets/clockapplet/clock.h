@@ -40,6 +40,7 @@ protected:
     void timerEvent( QTimerEvent * );
     void changeTime( void );
     void readConfig();
+    void doAutoSize();
     bool ampmFormat;
     int timerId;
     int format;

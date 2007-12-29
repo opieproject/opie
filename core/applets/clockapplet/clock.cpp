@@ -33,6 +33,7 @@
 #include <qpe/config.h>
 
 #include <qpopupmenu.h>
+#include <qfontmetrics.h>
 
 using namespace Opie::Core;
 using namespace Opie::Ui;
@@ -45,9 +46,11 @@ LauncherClock::LauncherClock( QWidget *parent ) : QLabel( parent )
     connect( qApp, SIGNAL( timeChanged() ), this, SLOT( updateTime() ) );
     connect( qApp, SIGNAL( clockChanged(bool) ),
         this, SLOT( slotClockChanged(bool) ) );
+
     readConfig();
     timerId = 0;
     timerEvent( 0 );
+    doAutoSize();
     show();
 }
 
@@ -156,7 +159,23 @@ void LauncherClock::changeTime( void )
 void LauncherClock::slotClockChanged( bool  )
 {
     readConfig();
+    doAutoSize();
     updateTime();
+}
+
+void LauncherClock::doAutoSize()
+{
+    QFontMetrics fm(font());
+    QString timetemp;
+    if( ampmFormat )
+        timetemp = "20:00 AM";
+    else
+        timetemp = "20:00";
+
+    if(format > 0)
+        timetemp = "26/12 " + timetemp;
+
+    setMinimumWidth(fm.width(timetemp));
 }
 
 
