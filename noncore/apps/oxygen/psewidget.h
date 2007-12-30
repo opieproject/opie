@@ -25,7 +25,6 @@ class QGridLayout;
 class QStringList;
 
 class OxydataWidget;
-class PSEframe;
 
 class PSEWidget : public QWidget
 {
