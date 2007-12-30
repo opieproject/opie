@@ -69,7 +69,7 @@ QColor PSEWidget::PSEColor( QString block ) const
 void PSEWidget::inverseColor( QString number)
 {
     Config configobj( QPEApplication::qpeDir() +"share/oxygen/oxygendata", Config::File );
-    configobj.setGroup(  number );
+    configobj.setGroup( QString::number(number.toUInt()+1) );
 	QString block = configobj.readEntry( "Block" );
     QColor c, d;
 	c = PSEColor( block );
