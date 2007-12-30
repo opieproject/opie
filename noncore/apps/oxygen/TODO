@@ -1,9 +1,7 @@
 TODO:
 
 small things:
-* there are bugs in the layouting of the table
-* Elementar symbols should be small enough to fit the boxes
-    (font problem?)
+* there are minor bugs in the layouting of the table
 
 big things:
 * backport the conversions from Kalzium (http://edu.kde.org/kalzium)
