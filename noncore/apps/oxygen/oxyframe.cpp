@@ -27,7 +27,8 @@ OxyFrame::OxyFrame(QWidget *parent, const char *name, QString symbol )
     this->setFrameShadow( QFrame::Sunken );
     setMinimumSize(6,6);
     setScaledContents( true );
-    QFont font;
+    setAlignment(Qt::AlignCenter | Qt::AlignVCenter);
+    QFont font("helvetica");
     font.setWeight(QFont::Light);
     font.setPixelSize(3);
     setFont( font );
