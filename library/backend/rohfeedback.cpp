@@ -26,8 +26,8 @@
 #include <qpixmap.h>
 #include <qbitmap.h>
 
-#define SPEED 600
-#define DELAY 500
+#define SPEED 500
+#define DELAY 200
 
 namespace Opie {
 namespace Internal {
