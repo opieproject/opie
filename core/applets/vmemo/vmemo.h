@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.17 2007-12-29 12:46:36 paule Exp $
+ * $Id: vmemo.h,v 1.18 2008-01-04 04:09:34 paule Exp $
  */
 
 #ifndef __VMEMO_H__
@@ -56,6 +56,7 @@ private:
     int setToggleButton(int);
     int openDSP();
     int openWAV(const char *filename);
+    void readSettings();
     bool fromToggle;
     QPixmap vmemoPixmap;
     QCopChannel *myChannel;

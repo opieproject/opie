@@ -207,13 +207,6 @@ VMemo::VMemo( QWidget *parent, const char *_name )
     t_timer = new QTimer( this );
     connect( t_timer, SIGNAL( timeout() ), SLOT( timerBreak() ) );
 
-    Config vmCfg("Vmemo");
-    vmCfg.setGroup("Defaults");
-    int toggleKey = setToggleButton(vmCfg.readNumEntry("toggleKey", -1));
-    useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
-
-    owarn <<"VMemo toggleKey" << toggleKey << oendl;
-
     systemZaurus = false;
 
     myChannel = new QCopChannel( "QPE/VMemo", this );
@@ -221,27 +214,9 @@ VMemo::VMemo( QWidget *parent, const char *_name )
     connect( myChannel, SIGNAL(received(const QCString&,const QByteArray&)),
             this, SLOT(receive(const QCString&,const QByteArray&)) );
 
-
-    if( toggleKey != -1 ) {
-        owarn << "Register key " << toggleKey << "" << oendl;
-
-        QCopEnvelope e("QPE/Launcher", "keyRegister(int,QCString,QCString)");
-        //           e << 4096; // Key_Escape
-        //          e << Key_F5; //4148
-        e << toggleKey;
-        e << QCString("QPE/VMemo");
-        e << QCString("toggleRecord()");
-    }
-
-    if(toggleKey == 0)
-        usingIcon = true;
-    else
-        usingIcon = false;
-
-    if (!usingIcon)
-        hide();
-
     recording = false;
+
+    readSettings();
 }
 
 VMemo::~VMemo()
@@ -267,11 +242,15 @@ void VMemo::receive( const QCString &msg, const QByteArray &data )
             startRecording();
         }
     }
+    else if (msg == "reloadSettings()")  {
+        readSettings();
+    }
 }
 
-void VMemo::paintEvent( QPaintEvent* ) {
-  QPainter p(this);
-  p.drawPixmap( 0, 1,( const char** )  vmemo_xpm );
+void VMemo::paintEvent( QPaintEvent* )
+{
+    QPainter p(this);
+    p.drawPixmap( 0, 1,( const char** )  vmemo_xpm );
 }
 
 void VMemo::mousePressEvent( QMouseEvent * /*me*/) {
@@ -413,8 +392,8 @@ void VMemo::stopRecording()
         delete msgLabel;
     }
     t_timer->stop();
-    Config cfg("Vmemo");
-    cfg.setGroup("Defaults");
+//    Config cfg("Vmemo");
+//    cfg.setGroup("Defaults");
 //     if( cfg.readNumEntry("hideIcon",0) == 1 )
 //         hide();
 }
@@ -698,6 +677,38 @@ void VMemo::timerBreak()
     QMessageBox::message("Vmemo",tr("<p>Vmemo recording stopped (over time limit)"));
 }
 
+void VMemo::readSettings()
+{
+    Config vmCfg("Vmemo");
+    vmCfg.setGroup("Defaults");
+    int toggleKey = setToggleButton(vmCfg.readNumEntry("toggleKey", -1));
+    useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
+
+    owarn <<"VMemo toggleKey" << toggleKey << oendl;
+
+    // FIXME this ought to be removed in favour of enhancing the
+    // Opie button system to allow registering shortcut keys. In any case
+    // you can bind a hardware button to record already.
+    if( toggleKey != -1 ) {
+        owarn << "Register key " << toggleKey << "" << oendl;
+
+        QCopEnvelope e("QPE/Launcher", "keyRegister(int,QCString,QCString)");
+        //           e << 4096; // Key_Escape
+        //          e << Key_F5; //4148
+        e << toggleKey;
+        e << QCString("QPE/VMemo");
+        e << QCString("toggleRecord()");
+
+        usingIcon = false;
+    }
+    else
+        usingIcon = true;
+
+    if (!usingIcon)
+        hide();
+    else
+        show();
+}
 
 EXPORT_OPIE_APPLET_v1( VMemo )
 
