@@ -8,13 +8,15 @@
 	* Security: Make display of owner information from the business card during authentication configurable - you can now specify when it is displayed and what information is displayed
 	* TextEdit: Improve usability, particularly with regard to prompting about unsaved changes (BlueLightning)
 	* AdvancedFM: Improve usability (BlueLightning)
+	* VMemo: Improve usability (BlueLightning)
 	* Bluetooth Manager: improve service scanning and usability (BlueLightning)
 
 	Fixed Bugs
 	----------
 	* n.a.  - Many, many more code fixes that should improve Opie stability (E. Hovland)
-	* #1749 - AdvancedFM: Make "Open as Text" bring editor to front if it is already running (BlueLightning)
-	* n.a.  - AdvancedFM: Fix File Info and Rename actions so that they work with symlinks (BlueLightning)
+	* #1749 - AdvancedFM: make "Open as Text" bring editor to front if it is already running (BlueLightning)
+	* #1809 - AdvancedFM: fix SD card button not working with 2.6 kernel (BlueLightning)
+	* n.a.  - AdvancedFM: fix File Info and Rename actions so that they work with symlinks (BlueLightning)
 	* n.a.  - AdvancedFM: fix file copy not working with 2.6 kernel (BlueLightning)
 	* #1882 - BatteryApplet: fix freezing on Palm if switching view (Marex)
 	* n.a.  - Bluetooth Manager: fix several crashes (BlueLightning)
@@ -36,10 +38,13 @@
 	* #1544 - Fix bug syncing repeating events from Outlook using Qtopia Desktop (BlueLightning)
 	* #1693 - Remove sync password restrictions (BlueLightning)
 	* #1639 - Don't ask to allow syncing repeatedly when using IntelliSync (BlueLightning)
+	* n.a.  - ClockApplet: set minimum width to stop entire taskbar from jumping around when time changes
+	* n.a.  - VMemo: fix up crashing and other bad behaviour to make usable
 	* #1892 - Fix incorrect abstract method definitions that caused errors with gcc 4.x (MKaehlcke)
-	* n.a.  - OpiePlayer: Fix segfault on exit (BlueLightning)
+	* n.a.  - OpiePlayer: fix segfault on exit (BlueLightning)
 	* n.a.  - Update PCMCIA handling code for 2.6 kernel (BlueLightning)
 	* #1885 - SysInfo: add device icons for various iPAQ models (BlueLightning)
+	* #1617 - Oxygen: change font and text alignment to make symbols readable in periodic table
 	* #1748 - Fix scrolling back when selecting last tab with lots of tabs eg. in SysInfo (BlueLightning)
 	* #1881 - Add background images for 320x320 devices (kEdAR)
 	* #1887 - Add background images for 480x320 devices (Marex)
