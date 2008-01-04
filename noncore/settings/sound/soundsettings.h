@@ -23,32 +23,20 @@
 
 #include "soundsettingsbase.h"
 
-
 class SoundSettings : public SoundSettingsBase
-{ 
+{
 Q_OBJECT
-  
+
 public:
- static QString appName() { return QString::fromLatin1("sound"); }
- SoundSettings( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-// ~SoundSettings();
-  
+    static QString appName() { return QString::fromLatin1("sound"); }
+    SoundSettings( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+
 protected:
- int recordKey, hideIt;
- bool noWarning;
-  void accept(); 
-/*  void reject(); */
- void updateStorageCombo();
- void updateLocationCombo();
-  
+    void accept();
+    void updateStorageCombo();
+
 private slots:
-//void closeEvent(QCloseEvent *  ); 
- void setKeyButton( int);
- void setSizeLimitButton(const QString &);
- void setLocation(const QString &);
- void cleanUp();
- void restartOpie(bool);
- void slotAdpcm(bool);
+    void cleanUp();
 };
 
 
