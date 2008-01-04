@@ -32,14 +32,14 @@
 	* #1894 - Fix h4000 machine detection and default screen rotation (P. Sokolovsky)
 	* #1833 - DocTab: don't show "Please Wait..." when DocTab is disabled (BlueLightning)
 	* #1618 - DocTab Settings: apply changes without needing a restart (BlueLightning)
-	* #1508 - Minesweeper: fix scrollbars showing for playing field with some (BlueLightning)
+	* #1508 - Minesweeper: fix scrollbars showing for playing field with some UI styles (BlueLightning)
 	* #1810 - Add back the ability to unmount SD cards (BlueLightning)
 	* #1567 - Fix file dialog not showing symlinks with absolute paths to directories (BlueLightning)
 	* #1544 - Fix bug syncing repeating events from Outlook using Qtopia Desktop (BlueLightning)
 	* #1693 - Remove sync password restrictions (BlueLightning)
 	* #1639 - Don't ask to allow syncing repeatedly when using IntelliSync (BlueLightning)
-	* n.a.  - ClockApplet: set minimum width to stop entire taskbar from jumping around when time changes
-	* n.a.  - VMemo: fix up crashing and other bad behaviour to make usable
+	* n.a.  - ClockApplet: set minimum width to stop entire taskbar from jumping around when time changes (BlueLightning)
+	* #1524 - VMemo: fix up crashing and other bad behaviour to make usable (BlueLightning)
 	* #1892 - Fix incorrect abstract method definitions that caused errors with gcc 4.x (MKaehlcke)
 	* n.a.  - OpiePlayer: fix segfault on exit (BlueLightning)
 	* n.a.  - Update PCMCIA handling code for 2.6 kernel (BlueLightning)
