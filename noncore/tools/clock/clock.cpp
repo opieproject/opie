@@ -37,6 +37,7 @@
 #include <qpe/sound.h>
 #include <qsound.h>
 #include <qtimer.h>
+#include <qfileinfo.h>
 
 
 
@@ -810,7 +811,8 @@ bool Clock::spinBoxValid( QSpinBox *sb )
     return valid;
 }
 
-void Clock::slotBrowseMp3File() {
+void Clock::slotBrowseMp3File()
+{
     Config config( "qpe" );
     config.setGroup("Time");
 
@@ -819,7 +821,14 @@ void Clock::slotBrowseMp3File() {
     QStringList text;
     text << "audio/*";
     map.insert(tr("Audio"), text );
-    QString str = Opie::Ui::OFileDialog::getOpenFileName( 2, QPEApplication::qpeDir() + "sounds", QString::null, map);
+    QString path;
+    if(sndFileName->text().isEmpty())
+        path = QPEApplication::qpeDir() + "sounds";
+    else {
+        QFileInfo fi(sndFileName->text());
+        path = fi.dirPath(true);
+    }
+    QString str = Opie::Ui::OFileDialog::getOpenFileName( 2, path, QString::null, map);
     if(!str.isEmpty() ) {
         config.writeEntry("mp3Alarm",1);
         config.writeEntry("mp3File",str);
@@ -828,6 +837,7 @@ void Clock::slotBrowseMp3File() {
     }
 }
 
-void Clock::slotTestAlarmSound() {
+void Clock::slotTestAlarmSound()
+{
     playFile( sndFileName->text() );
 }
