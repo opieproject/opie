@@ -39,7 +39,10 @@ extern MediaPlayerState *mediaPlayerState;
 
 
 MediaPlayer::MediaPlayer( QObject *parent, const char *name )
-    : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL ) {
+    : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL )
+{
+
+    odebug << "MediaPlayer::MediaPlayer" << oendl;
 
 //    QPEApplication::grabKeyboard();
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
@@ -56,26 +59,27 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
 }
 
 
-MediaPlayer::~MediaPlayer() {
+MediaPlayer::~MediaPlayer()
+{
 
 }
 
-
-void MediaPlayer::pauseCheck( bool b ) {
+void MediaPlayer::pauseCheck( bool b )
+{
     // Only pause if playing
     if ( b && !mediaPlayerState->playing() )
   mediaPlayerState->setPaused( FALSE );
 }
 
-
-void MediaPlayer::play() {
+void MediaPlayer::play()
+{
     mediaPlayerState->setPlaying( FALSE );
     mediaPlayerState->setPlaying( TRUE );
 }
 
-
-void MediaPlayer::setPlaying( bool play ) {
-   //    odebug << "MediaPlayer setPlaying " << play << "" << oendl;
+void MediaPlayer::setPlaying( bool play )
+{
+//    odebug << "MediaPlayer setPlaying " << play << "" << oendl;
     if ( !play ) {
         mediaPlayerState->setPaused( FALSE );
         loopControl->stop( FALSE );
@@ -86,7 +90,7 @@ void MediaPlayer::setPlaying( bool play ) {
         mediaPlayerState->setPaused( FALSE );
         return;
     }
-    //    odebug << "about to ctrash" << oendl;
+//    odebug << "about to ctrash" << oendl;
     const DocLnk *playListCurrent = playList->current();
 
     if ( playListCurrent != NULL ) {
@@ -139,37 +143,39 @@ void MediaPlayer::setPlaying( bool play ) {
     mediaPlayerState->setView( loopControl->hasVideo() ? 'v' : 'a' );
 }
 
-
-void MediaPlayer::prev() {
+void MediaPlayer::prev()
+{
     if ( playList->prev() )
-  play();
+        play();
     else if ( mediaPlayerState->looping() ) {
         if ( playList->last() )
-      play();
-    } else
-  mediaPlayerState->setList();
+            play();
+    }
+    else
+        mediaPlayerState->setList();
 }
 
-
-void MediaPlayer::next() {
+void MediaPlayer::next()
+{
     if ( playList->next() )
-  play();
+        play();
     else if ( mediaPlayerState->looping() ) {
         if ( playList->first() )
-      play();
-    } else
-  mediaPlayerState->setList();
+            play();
+    }
+    else
+        mediaPlayerState->setList();
 }
 
-
-void MediaPlayer::startDecreasingVolume() {
+void MediaPlayer::startDecreasingVolume()
+{
     volumeDirection = -1;
     startTimer( 100 );
     AudioDevice::decreaseVolume();
 }
 
-
-void MediaPlayer::startIncreasingVolume() {
+void MediaPlayer::startIncreasingVolume()
+{
     volumeDirection = +1;
     startTimer( 100 );
     AudioDevice::increaseVolume();
@@ -180,7 +186,8 @@ bool drawnOnScreenDisplay = FALSE;
 unsigned int onScreenDisplayVolume = 0;
 const int yoff = 110;
 
-void MediaPlayer::stopChangingVolume() {
+void MediaPlayer::stopChangingVolume()
+{
     killTimers();
 
       // Get rid of the on-screen display stuff
@@ -191,8 +198,8 @@ void MediaPlayer::stopChangingVolume() {
     audioUI->repaint( (w - 200) / 2, h - yoff, 200 + 9, 70, FALSE );
 }
 
-
-void MediaPlayer::timerEvent( QTimerEvent * ) {
+void MediaPlayer::timerEvent( QTimerEvent * )
+{
 //    odebug << "timer" << oendl;
     if ( volumeDirection == +1 )
         AudioDevice::increaseVolume();
@@ -239,7 +246,8 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
     }
 }
 
-void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
+void MediaPlayer::keyReleaseEvent( QKeyEvent *e)
+{
     switch ( e->key() ) {
 ////////////////////////////// Zaurus keys
       case Key_Home:
@@ -258,16 +266,18 @@ void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
     }
 }
 
-void MediaPlayer::doBlank() {
+void MediaPlayer::doBlank()
+{
 
 }
 
-void MediaPlayer::doUnblank() {
+void MediaPlayer::doUnblank()
+{
 
 }
 
-void MediaPlayer::cleanUp() {
+void MediaPlayer::cleanUp()
+{
 //     QPEApplication::grabKeyboard();
 //     QPEApplication::ungrabKeyboard();
-
 }

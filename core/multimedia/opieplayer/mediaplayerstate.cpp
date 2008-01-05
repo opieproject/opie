@@ -43,20 +43,22 @@
 
 
 MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
-        : QObject( parent, name ), decoder( NULL ), libmpeg3decoder( NULL ) {
+        : QObject( parent, name ), decoder( NULL ), libmpeg3decoder( NULL )
+{
     Config cfg( "OpiePlayer" );
     readConfig( cfg );
+    odebug << "state: loading plugins" << oendl;
     loadPlugins();
 }
 
-
-MediaPlayerState::~MediaPlayerState() {
+MediaPlayerState::~MediaPlayerState()
+{
     Config cfg( "OpiePlayer" );
     writeConfig( cfg );
 }
 
-
-void MediaPlayerState::readConfig( Config& cfg ) {
+void MediaPlayerState::readConfig( Config& cfg )
+{
     cfg.setGroup("Options");
     isFullscreen = cfg.readBoolEntry( "FullScreen" );
     isScaled = cfg.readBoolEntry( "Scaling" );
@@ -71,8 +73,8 @@ void MediaPlayerState::readConfig( Config& cfg ) {
     curView = 'l';
 }
 
-
-void MediaPlayerState::writeConfig( Config& cfg ) const {
+void MediaPlayerState::writeConfig( Config& cfg ) const
+{
     cfg.setGroup("Options");
     cfg.writeEntry("FullScreen", isFullscreen );
     cfg.writeEntry("Scaling", isScaled );
@@ -96,7 +98,8 @@ static QValueList<MediaPlayerPlugin> pluginList;
 
 
 // Find the first decoder which supports this type of file
-MediaPlayerDecoder *MediaPlayerState::newDecoder( const QString& file ) {
+MediaPlayerDecoder *MediaPlayerState::newDecoder( const QString& file )
+{
     MediaPlayerDecoder *tmpDecoder = NULL;
     QValueList<MediaPlayerPlugin>::Iterator it;
     for ( it = pluginList.begin(); it != pluginList.end(); ++it ) {
@@ -112,14 +115,14 @@ MediaPlayerDecoder *MediaPlayerState::newDecoder( const QString& file ) {
     return decoder = tmpDecoder;
 }
 
-
-MediaPlayerDecoder *MediaPlayerState::curDecoder() {
+MediaPlayerDecoder *MediaPlayerState::curDecoder()
+{
     return decoder;
 }
 
-
 // ### hack to get true sample count
-MediaPlayerDecoder *MediaPlayerState::libMpeg3Decoder() {
+MediaPlayerDecoder *MediaPlayerState::libMpeg3Decoder()
+{
     return libmpeg3decoder;
 }
 
@@ -128,7 +131,8 @@ MediaPlayerDecoder *MediaPlayerState::libMpeg3Decoder() {
 //     return libwavdecoder;
 // }
 
-void MediaPlayerState::loadPlugins() {
+void MediaPlayerState::loadPlugins()
+{
    //    odebug << "load plugins" << oendl;
 #ifndef QT_NO_COMPONENT
     QValueList<MediaPlayerPlugin>::Iterator mit;

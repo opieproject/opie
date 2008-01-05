@@ -39,9 +39,8 @@ int main(int argc, char **argv) {
 
     if(!QDir(QString(getenv("OPIEDIR")) +"/pics/opieplayer2/skins/").exists()) {
         QMessageBox::critical( 0,  "Opieplayer Error", "<p>opieplayer2 skin not found. Please install an opieplayer2 skin.</p>" );
-				
-				return -1;
-		} 
+        return -1;
+    }
 
     MediaPlayerState st( 0, "mediaPlayerState" );
     mediaPlayerState = &st;
@@ -52,13 +51,12 @@ int main(int argc, char **argv) {
     VideoWidget vw( 0, "videoUI" );
     videoUI = &vw;
     LoopControl lc( 0, "loopControl" );
-//		qDebug("loop control created");
+//    qDebug("loop control created");
     loopControl = &lc;
     MediaPlayer mp( 0, "mediaPlayer" );
-//		qDebug("mediaplayer created");
+//    qDebug("mediaplayer created");
 //    pl.setCaption( MediaPlayer::tr("OpiePlayer") );
     a.showMainDocumentWidget(&pl);
     return a.exec();
 }
-
 
