@@ -23,6 +23,7 @@
 #include "clockbase.h"
 #include "alarmdlgbase.h"
 #include <qdatetime.h>
+#include <opie2/oprocess.h>
 
 class QTimer;
 class QLabel;
@@ -37,10 +38,9 @@ class AlarmDlg: public AlarmDlgBase
 
 public:
     AlarmDlg(QWidget *parent = 0, const char *name = 0, bool modal = TRUE,
-	const QString &txt = "Alarm");
+    const QString &txt = "Alarm");
 
     void    setText(const QString &txt);
-
 
 private slots:
     void    checkSnooze(void);
@@ -77,6 +77,8 @@ private slots:
     void scheduleApplyDailyAlarm();
     void slotBrowseMp3File();
     void slotTestAlarmSound();
+    void slotSoundChange(int);
+    void slotAlarmProcessExit(Opie::Core::OProcess*);
 
 protected:
     QDateTime nextAlarm( int h, int m );
@@ -87,6 +89,9 @@ protected:
     bool eventFilter( QObject *, QEvent * );
     bool spinBoxValid( QSpinBox *sb );
     bool validDaysSelected(void);
+    void startAlarmProcess();
+    void alarmPlay( const QString file, const QString cmd = "" );
+    void alarmPlayTest( const QString file );
 
 private:
     QTimer *t;
@@ -110,6 +115,9 @@ private:
     QToolButton **dayBtn;
     bool init;
     QTimer *applyAlarmTimer;
+    Opie::Core::OProcess *alarmProc;
+    QString alarmFile;
+    int alarmCmd;
 };
 
 #endif

@@ -887,14 +887,10 @@
                                 <number>6</number>
                             </property>
                             <widget>
-                                <class>QCheckBox</class>
+                                <class>QComboBox</class>
                                 <property stdset="1">
                                     <name>name</name>
-                                    <cstring>sndCheck</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Play File</string>
+                                    <cstring>sndOption</cstring>
                                 </property>
                             </widget>
                             <widget>
@@ -1008,24 +1004,6 @@
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
-        <sender>sndCheck</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>sndFileName</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>sndCheck</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>sndChoose</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
-        <sender>sndCheck</sender>
-        <signal>toggled(bool)</signal>
-        <receiver>sndTest</receiver>
-        <slot>setEnabled(bool)</slot>
-    </connection>
-    <connection>
         <sender>sndChoose</sender>
         <signal>clicked()</signal>
         <receiver>ClockBase</receiver>
@@ -1036,12 +1014,6 @@
         <signal>clicked()</signal>
         <receiver>ClockBase</receiver>
         <slot>slotTestAlarmSound()</slot>
-    </connection>
-    <connection>
-        <sender>sndCheck</sender>
-        <signal>stateChanged(int)</signal>
-        <receiver>ClockBase</receiver>
-        <slot>scheduleApplyDailyAlarm()</slot>
     </connection>
     <slot access="public">scheduleApplyDailyAlarm()</slot>
     <slot access="protected">slotBrowseMp3File()</slot>
