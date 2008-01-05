@@ -96,7 +96,7 @@ class MySpinBox : public QSpinBox
 {
 public:
     QLineEdit *lineEdit() const {
-	return editor();
+        return editor();
     }
 };
 
@@ -140,14 +140,14 @@ AlarmDlg::checkSnooze(void)
     // Ensure we have only one snooze alarm.
     //
     AlarmServer::deleteAlarm(QDateTime(), ALARM_CLOCK_CHANNEL,
-	ALARM_CLOCK_MESSAGE, magic_snooze);
+        ALARM_CLOCK_MESSAGE, magic_snooze);
 
     if (snoozeTime->value() > 0) {
-	QDateTime wake = QDateTime::currentDateTime();
-	wake = wake.addSecs(snoozeTime->value() * 60); // snoozeTime in minutes
+        QDateTime wake = QDateTime::currentDateTime();
+        wake = wake.addSecs(snoozeTime->value() * 60); // snoozeTime in minutes
 
-	AlarmServer::addAlarm(wake, ALARM_CLOCK_CHANNEL,
-	    ALARM_CLOCK_MESSAGE, magic_snooze);
+        AlarmServer::addAlarm(wake, ALARM_CLOCK_CHANNEL,
+            ALARM_CLOCK_MESSAGE, magic_snooze);
     }
     accept();
 }
@@ -167,7 +167,7 @@ Clock::Clock( QWidget * parent, const char *, WFlags f )
     onMonday = config.readBoolEntry( "MONDAY" );
 
     connect( tabs, SIGNAL(currentChanged(QWidget*)),
-	     this, SLOT(tabChanged(QWidget*)) );
+             this, SLOT(tabChanged(QWidget*)) );
 
     analogStopwatch = new AnalogClock( swFrame );
     stopwatchLcd = new QLCDNumber( swFrame );
@@ -180,10 +180,10 @@ Clock::Clock( QWidget * parent, const char *, WFlags f )
     clockLcd->setFixedWidth( clockLcd->sizeHint().width() );
     date->setText( TimeString::dateString( QDate::currentDate(), TimeString::currentDateFormat() ) );
     if ( qApp->desktop()->width() < 200 )
-	date->setFont( QFont(date->font().family(), 14, QFont::Bold) );
+        date->setFont( QFont(date->font().family(), 14, QFont::Bold) );
     if ( qApp->desktop()->height() > 240 ) {
-	clockLcd->setFixedHeight( 30 );
-	stopwatchLcd->setFixedHeight( 30 );
+        clockLcd->setFixedHeight( 30 );
+        stopwatchLcd->setFixedHeight( 30 );
     }
 
     connect( stopStart, SIGNAL(pressed()), SLOT(stopStartStopWatch()) );
@@ -195,7 +195,7 @@ Clock::Clock( QWidget * parent, const char *, WFlags f )
 
     applyAlarmTimer = new QTimer( this );
     connect( applyAlarmTimer, SIGNAL(timeout()),
-	this, SLOT(applyDailyAlarm()) );
+        this, SLOT(applyDailyAlarm()) );
 
     alarmt = new QTimer( this );
     connect( alarmt, SIGNAL(timeout()), SLOT(alarmTimeout()) );
@@ -237,7 +237,7 @@ Clock::Clock( QWidget * parent, const char *, WFlags f )
     connect( lapTimer, SIGNAL(timeout()), this, SLOT(lapTimeout()) );
 
     for (uint s = 0; s < swatch_splitms.count(); s++ )
-	swatch_splitms[(int)s] = 0;
+        swatch_splitms[(int)s] = 0;
 
     connect( qApp, SIGNAL(clockChanged(bool)), this, SLOT(changeClock(bool)) );
 
@@ -266,23 +266,23 @@ Clock::Clock( QWidget * parent, const char *, WFlags f )
     int i;
     QHBoxLayout *hb = new QHBoxLayout( daysFrame );
     for ( i = 0; i < 7; i++ ) {
-	dayBtn[i] = new QToolButton( daysFrame );
-	hb->addWidget( dayBtn[i] );
-	dayBtn[i]->setToggleButton( TRUE );
-	dayBtn[i]->setOn( TRUE );
-	dayBtn[i]->setFocusPolicy( StrongFocus );
-	connect( dayBtn[i], SIGNAL(toggled(bool)), this, SLOT(scheduleApplyDailyAlarm()) );
+        dayBtn[i] = new QToolButton( daysFrame );
+        hb->addWidget( dayBtn[i] );
+        dayBtn[i]->setToggleButton( TRUE );
+        dayBtn[i]->setOn( TRUE );
+        dayBtn[i]->setFocusPolicy( StrongFocus );
+        connect( dayBtn[i], SIGNAL(toggled(bool)), this, SLOT(scheduleApplyDailyAlarm()) );
     }
 
     for ( i = 0; i < 7; i++ )
-	dayBtn[dayBtnIdx(i+1)]->setText( days[i] );
+        dayBtn[dayBtnIdx(i+1)]->setText( days[i] );
 
     QStringList exclDays = cConfig.readListEntry( "ExcludeDays", ',' );
     QStringList::Iterator it;
     for ( it = exclDays.begin(); it != exclDays.end(); ++it ) {
-	int d = (*it).toInt();
-	if ( d >= 1 && d <= 7 )
-	    dayBtn[dayBtnIdx(d)]->setOn( FALSE );
+        int d = (*it).toInt();
+        if ( d >= 1 && d <= 7 )
+            dayBtn[dayBtnIdx(d)]->setOn( FALSE );
     }
 
     bool alarm = cConfig.readBoolEntry("Enabled", FALSE);
@@ -305,26 +305,26 @@ Clock::Clock( QWidget * parent, const char *, WFlags f )
 //    dailyMinute->setPrefix( m <= 9 ? "0" : "" );
     int h = cConfig.readNumEntry( "Hour", 7 );
     if ( ampm ) {
-	if (h > 12) {
-	    h -= 12;
-	    dailyAmPm->setCurrentItem( 1 );
-	}
-	if (h == 0) h = 12;
-	dailyHour->setMinValue( 1 );
-	dailyHour->setMaxValue( 12 );
+        if (h > 12) {
+            h -= 12;
+            dailyAmPm->setCurrentItem( 1 );
+        }
+        if (h == 0) h = 12;
+        dailyHour->setMinValue( 1 );
+        dailyHour->setMaxValue( 12 );
     } else {
-	dailyAmPm->hide();
+        dailyAmPm->hide();
     }
     dailyHour->setValue( h );
 
     connect( ((MySpinBox*)dailyHour)->lineEdit(), SIGNAL(textChanged(const QString&)),
-	    this, SLOT(dailyEdited()) );
+            this, SLOT(dailyEdited()) );
     connect( ((MySpinBox*)dailyMinute)->lineEdit(), SIGNAL(textChanged(const QString&)),
-	    this, SLOT(dailyEdited()) );
+            this, SLOT(dailyEdited()) );
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     connect( qApp, SIGNAL(appMessage(const QCString&,const QByteArray&)),
-	    this, SLOT(appMessage(const QCString&,const QByteArray&)) );
+            this, SLOT(appMessage(const QCString&,const QByteArray&)) );
 #endif
 
     QTimer::singleShot( 0, this, SLOT(updateClock()) );
@@ -342,68 +342,70 @@ Clock::~Clock()
 void Clock::updateClock()
 {
     if ( tabs->currentPageIndex() == 0 ) {
-	QTime tm = QDateTime::currentDateTime().time();
-	QString s;
-	if ( ampm ) {
-	    int hour = tm.hour();
-	    if (hour == 0)
-		hour = 12;
-	    if (hour > 12)
-		hour -= 12;
-	    s.sprintf( "%2d%c%02d", hour, ':', tm.minute() );
-	    clockAmPm->setText( (tm.hour() >= 12) ? "PM" : "AM" );
-	    clockAmPm->show();
-	} else {
-	    s.sprintf( "%2d%c%02d", tm.hour(), ':', tm.minute() );
-	    clockAmPm->hide();
-	}
-	clockLcd->display( s );
-	clockLcd->repaint( FALSE );
-	analogClock->display( QTime::currentTime() );
-	date->setText( TimeString::dateString( QDate::currentDate(), TimeString::currentDateFormat() ) );
-    } else if ( tabs->currentPageIndex() == 1 ) {
-	int totalms = swatch_totalms;
-	if ( swatch_running )
-	    totalms += swatch_start.elapsed();
-	setSwatchLcd( stopwatchLcd, totalms, !swatch_running );
-	QTime swatch_time = QTime(0,0,0).addMSecs(totalms);
-	analogStopwatch->display( swatch_time );
-	if ( swatch_dispLap == swatch_currLap ) {
-	    swatch_splitms[swatch_currLap] = swatch_totalms;
-	    if ( swatch_running )
-		swatch_splitms[swatch_currLap] += swatch_start.elapsed();
-	    updateLap();
-	}
-    } else if ( tabs->currentPageIndex() == 2 ) {
-	// nothing.
+        QTime tm = QDateTime::currentDateTime().time();
+        QString s;
+        if ( ampm ) {
+            int hour = tm.hour();
+            if (hour == 0)
+                hour = 12;
+            if (hour > 12)
+                hour -= 12;
+            s.sprintf( "%2d%c%02d", hour, ':', tm.minute() );
+            clockAmPm->setText( (tm.hour() >= 12) ? "PM" : "AM" );
+            clockAmPm->show();
+        } else {
+            s.sprintf( "%2d%c%02d", tm.hour(), ':', tm.minute() );
+            clockAmPm->hide();
+        }
+        clockLcd->display( s );
+        clockLcd->repaint( FALSE );
+        analogClock->display( QTime::currentTime() );
+        date->setText( TimeString::dateString( QDate::currentDate(), TimeString::currentDateFormat() ) );
+    }
+    else if ( tabs->currentPageIndex() == 1 ) {
+        int totalms = swatch_totalms;
+        if ( swatch_running )
+            totalms += swatch_start.elapsed();
+        setSwatchLcd( stopwatchLcd, totalms, !swatch_running );
+        QTime swatch_time = QTime(0,0,0).addMSecs(totalms);
+        analogStopwatch->display( swatch_time );
+        if ( swatch_dispLap == swatch_currLap ) {
+            swatch_splitms[swatch_currLap] = swatch_totalms;
+            if ( swatch_running )
+                swatch_splitms[swatch_currLap] += swatch_start.elapsed();
+            updateLap();
+        }
+    }
+    else if ( tabs->currentPageIndex() == 2 ) {
+        // nothing.
     }
 }
 
 void Clock::changeClock( bool a )
 {
     if ( ampm != a ) {
-	int minute = dailyMinute->value();
-	int hour = dailyHour->value();
-	if ( ampm ) {
-	    if (hour == 12)
-		hour = 0;
-	    if (dailyAmPm->currentItem() == 1 )
-		hour += 12;
-	    dailyHour->setMinValue( 0 );
-	    dailyHour->setMaxValue( 23 );
-	    dailyAmPm->hide();
-	} else {
-	    if (hour > 12) {
-		hour -= 12;
-		dailyAmPm->setCurrentItem( 1 );
-	    }
-	    if (hour == 0) hour = 12;
-	    dailyHour->setMinValue( 1 );
-	    dailyHour->setMaxValue( 12 );
-	    dailyAmPm->show();
-	}
-	dailyMinute->setValue( minute );
-	dailyHour->setValue( hour );
+        int minute = dailyMinute->value();
+        int hour = dailyHour->value();
+        if ( ampm ) {
+            if (hour == 12)
+                hour = 0;
+            if (dailyAmPm->currentItem() == 1 )
+                hour += 12;
+            dailyHour->setMinValue( 0 );
+            dailyHour->setMaxValue( 23 );
+            dailyAmPm->hide();
+        } else {
+            if (hour > 12) {
+                hour -= 12;
+                dailyAmPm->setCurrentItem( 1 );
+            }
+            if (hour == 0) hour = 12;
+            dailyHour->setMinValue( 1 );
+            dailyHour->setMaxValue( 12 );
+            dailyAmPm->show();
+        }
+        dailyMinute->setValue( minute );
+        dailyHour->setValue( hour );
     }
     ampm = a;
     updateClock();
@@ -412,24 +414,25 @@ void Clock::changeClock( bool a )
 void Clock::stopStartStopWatch()
 {
     if ( swatch_running ) {
-	swatch_totalms += swatch_start.elapsed();
-	swatch_splitms[swatch_currLap] = swatch_totalms;
-	stopStart->setText( tr("Start") );
-	reset->setText( tr("Reset") );
-	reset->setEnabled( TRUE );
-	t->stop();
-	swatch_running = FALSE;
-	toggleScreenSaver( TRUE );
-	updateClock();
-    } else {
-	swatch_start.start();
-	stopStart->setText( tr("Stop") );
-	reset->setText( tr("Lap/Split") );
-	reset->setEnabled( swatch_currLap < 98 );
+        swatch_totalms += swatch_start.elapsed();
+        swatch_splitms[swatch_currLap] = swatch_totalms;
+        stopStart->setText( tr("Start") );
+        reset->setText( tr("Reset") );
+        reset->setEnabled( TRUE );
+        t->stop();
+        swatch_running = FALSE;
+        toggleScreenSaver( TRUE );
+        updateClock();
+    }
+    else {
+        swatch_start.start();
+        stopStart->setText( tr("Stop") );
+        reset->setText( tr("Lap/Split") );
+        reset->setEnabled( swatch_currLap < 98 );
         t->start( 1000 );
-	swatch_running = TRUE;
-	// disable screensaver while stop watch is running
-	toggleScreenSaver( FALSE );
+        swatch_running = TRUE;
+        // disable screensaver while stop watch is running
+        toggleScreenSaver( FALSE );
     }
     swatch_dispLap = swatch_currLap;
     updateLap();
@@ -441,24 +444,25 @@ void Clock::stopStartStopWatch()
 void Clock::resetStopWatch()
 {
     if ( swatch_running ) {
-	swatch_splitms[swatch_currLap] = swatch_totalms+swatch_start.elapsed();
-	swatch_dispLap = swatch_currLap;
-	if ( swatch_currLap < 98 )  // allow up to 99 laps
-	    swatch_currLap++;
-	reset->setEnabled( swatch_currLap < 98 );
-	updateLap();
-	lapTimer->start( 2000, TRUE );
-    } else {
-	swatch_start.start();
-	swatch_totalms = 0;
-	swatch_currLap = 0;
-	swatch_dispLap = 0;
-	for ( uint i = 0; i < swatch_splitms.count(); i++ )
-	    swatch_splitms[(int)i] = 0;
-	updateLap();
-	updateClock();
-	reset->setText( tr("Lap/Split") );
-	reset->setEnabled( FALSE );
+        swatch_splitms[swatch_currLap] = swatch_totalms+swatch_start.elapsed();
+        swatch_dispLap = swatch_currLap;
+        if ( swatch_currLap < 98 )  // allow up to 99 laps
+            swatch_currLap++;
+        reset->setEnabled( swatch_currLap < 98 );
+        updateLap();
+        lapTimer->start( 2000, TRUE );
+    }
+    else {
+        swatch_start.start();
+        swatch_totalms = 0;
+        swatch_currLap = 0;
+        swatch_dispLap = 0;
+        for ( uint i = 0; i < swatch_splitms.count(); i++ )
+            swatch_splitms[(int)i] = 0;
+        updateLap();
+        updateClock();
+        reset->setText( tr("Lap/Split") );
+        reset->setEnabled( FALSE );
     }
     prevLapBtn->setEnabled( swatch_dispLap );
     nextLapBtn->setEnabled( swatch_dispLap < swatch_currLap );
@@ -467,20 +471,20 @@ void Clock::resetStopWatch()
 void Clock::prevLap()
 {
     if ( swatch_dispLap > 0 ) {
-	swatch_dispLap--;
-	updateLap();
-	prevLapBtn->setEnabled( swatch_dispLap );
-	nextLapBtn->setEnabled( swatch_dispLap < swatch_currLap );
+        swatch_dispLap--;
+        updateLap();
+        prevLapBtn->setEnabled( swatch_dispLap );
+        nextLapBtn->setEnabled( swatch_dispLap < swatch_currLap );
     }
 }
 
 void Clock::nextLap()
 {
     if ( swatch_dispLap < swatch_currLap ) {
-	swatch_dispLap++;
-	updateLap();
-	prevLapBtn->setEnabled( swatch_dispLap );
-	nextLapBtn->setEnabled( swatch_dispLap < swatch_currLap );
+        swatch_dispLap++;
+        updateLap();
+        prevLapBtn->setEnabled( swatch_dispLap );
+        nextLapBtn->setEnabled( swatch_dispLap < swatch_currLap );
     }
 }
 
@@ -495,15 +499,15 @@ void Clock::lapTimeout()
 void Clock::updateLap()
 {
     if ( swatch_running && swatch_currLap == swatch_dispLap ) {
-	swatch_splitms[swatch_currLap] = swatch_totalms;
-	swatch_splitms[swatch_currLap] += swatch_start.elapsed();
+        swatch_splitms[swatch_currLap] = swatch_totalms;
+        swatch_splitms[swatch_currLap] += swatch_start.elapsed();
     }
     int split = swatch_splitms[swatch_dispLap];
     int lap;
     if ( swatch_dispLap > 0 )
-	lap = swatch_splitms[swatch_dispLap] - swatch_splitms[swatch_dispLap-1];
+        lap = swatch_splitms[swatch_dispLap] - swatch_splitms[swatch_dispLap-1];
     else
-	lap = swatch_splitms[swatch_dispLap];
+        lap = swatch_splitms[swatch_dispLap];
 
     lapNumLcd->display( swatch_dispLap+1 );
     bool showMs = !swatch_running || swatch_dispLap!=swatch_currLap;
@@ -523,15 +527,15 @@ void Clock::setSwatchLcd( QLCDNumber *lcd, int ms, bool showMs )
 bool Clock::eventFilter( QObject *o, QEvent *e )
 {
     if ( o == swFrame && e->type() == QEvent::Resize ) {
-	QResizeEvent *re = (QResizeEvent *)e;
-	delete swLayout;
-	if ( re->size().height() < 80 || re->size().height()*3 < re->size().width() )
-	    swLayout = new QHBoxLayout( swFrame );
-	else
-	    swLayout = new QVBoxLayout( swFrame );
-	swLayout->addWidget( analogStopwatch );
-	swLayout->addWidget( stopwatchLcd );
-	swLayout->activate();
+        QResizeEvent *re = (QResizeEvent *)e;
+        delete swLayout;
+        if ( re->size().height() < 80 || re->size().height()*3 < re->size().width() )
+            swLayout = new QHBoxLayout( swFrame );
+        else
+            swLayout = new QVBoxLayout( swFrame );
+        swLayout->addWidget( analogStopwatch );
+        swLayout->addWidget( stopwatchLcd );
+        swLayout->activate();
     }
 
     return FALSE;
@@ -540,13 +544,15 @@ bool Clock::eventFilter( QObject *o, QEvent *e )
 void Clock::tabChanged( QWidget * )
 {
     if ( tabs->currentPageIndex() == 0 ) {
-	t->start(1000);
-    } else if ( tabs->currentPageIndex() == 1 ) {
-	if ( !swatch_running )
-	    t->stop();
-	stopStart->setAccel( Key_Return );
-    } else if ( tabs->currentPageIndex() == 2 ) {
-	t->start(1000);
+        t->start(1000);
+    }
+    else if ( tabs->currentPageIndex() == 1 ) {
+        if ( !swatch_running )
+            t->stop();
+        stopStart->setAccel( Key_Return );
+    }
+    else if ( tabs->currentPageIndex() == 2 ) {
+        t->start(1000);
     }
     updateClock();
 }
@@ -564,9 +570,9 @@ void Clock::setDailyMinute( int m )
 void Clock::dailyEdited()
 {
     if ( spinBoxValid(dailyMinute) && spinBoxValid(dailyHour) )
-	scheduleApplyDailyAlarm();
+        scheduleApplyDailyAlarm();
     else
-	applyAlarmTimer->stop();
+        applyAlarmTimer->stop();
 }
 
 void Clock::enableDaily( bool )
@@ -577,80 +583,88 @@ void Clock::enableDaily( bool )
 void Clock::appMessage( const QCString &msg, const QByteArray &data )
 {
     if ( msg == ALARM_CLOCK_MESSAGE ) {
-	QDataStream ds(data,IO_ReadOnly);
-	QDateTime when;
-	int t;
-	ds >> when >> t;
-	QTime theTime( when.time() );
-	if ( t == magic_daily || t == magic_snooze ||
+        QDataStream ds(data,IO_ReadOnly);
+        QDateTime when;
+        int t;
+        ds >> when >> t;
+        QTime theTime( when.time() );
+        if ( t == magic_daily || t == magic_snooze ||
              t == magic_playmp ) {
-	    QString msg = tr("<b>Daily Alarm:</b><p>");
-	    QString ts;
-	    if ( ampm ) {
-	    bool pm = FALSE;
-		int h = theTime.hour();
-		if (h > 12) {
-		    h -= 12;
-		    pm = TRUE;
-		}
-		if (h == 0) h = 12;
-		ts.sprintf( "%02d:%02d %s", h, theTime.minute(), pm?"PM":"AM" );
-	    } else {
-		ts.sprintf( "%02d:%02d", theTime.hour(), theTime.minute() );
-	    }
-	    msg += ts;
+            QString msg = tr("<b>Daily Alarm:</b><p>");
+            QString ts;
+            if ( ampm ) {
+            bool pm = FALSE;
+                int h = theTime.hour();
+                if (h > 12) {
+                    h -= 12;
+                    pm = TRUE;
+                }
+                if (h == 0) h = 12;
+                ts.sprintf( "%02d:%02d %s", h, theTime.minute(), pm?"PM":"AM" );
+            }
+            else {
+                ts.sprintf( "%02d:%02d", theTime.hour(), theTime.minute() );
+            }
+            msg += ts;
 
             if (t == magic_playmp ) {
                 pthread_t thread;
                 pthread_create(&thread,NULL, (void * (*) (void *))startPlayer, NULL/* &*/ );
-            }else {
+            }
+            else {
                 Sound::soundAlarm();
                 alarmCount = 0;
                 alarmt->start( 5000 );
             }
-	    if ( !alarmDlg ) {
-		alarmDlg = new AlarmDlg(this);
-	    }
-	    alarmDlg->setText(msg);
+            if ( !alarmDlg ) {
+                alarmDlg = new AlarmDlg(this);
+            }
+            alarmDlg->setText(msg);
 
-	    // Set for tomorrow, so user wakes up every day, even if they
-	    // don't confirm the dialog.  Don't set it again when snoozing.
-	    if (t != magic_snooze) {
-		applyDailyAlarm();
-	    }
+            // Set for tomorrow, so user wakes up every day, even if they
+            // don't confirm the dialog.  Don't set it again when snoozing.
+            if (t != magic_snooze) {
+                applyDailyAlarm();
+            }
 
-
-	    if ( !alarmDlg->isVisible() ) {
-		QPEApplication::execDialog(alarmDlg);
-		alarmt->stop();
-	    }
-	} else if ( t == magic_countdown ) {
-	    // countdown
-	    Sound::soundAlarm();
+            if ( !alarmDlg->isVisible() ) {
+                QPEApplication::execDialog(alarmDlg);
+                alarmt->stop();
+            }
         }
-    } else if ( msg == "setDailyEnabled(int)" ) {
-	QDataStream ds(data,IO_ReadOnly);
-	int enableDaily;
-	ds >> enableDaily;
-	dailyEnabled->setChecked( enableDaily );
-	applyDailyAlarm();
-    } else if ( msg == "editDailyAlarm()" ) {
-	tabs->setCurrentPage(2);
-	QPEApplication::setKeepRunning();
-    } else if (msg == "showClock()") {
-	tabs->setCurrentPage(0);
-	QPEApplication::setKeepRunning();
-    } else if (msg == "timerStart()" ) {
+        else if ( t == magic_countdown ) {
+            // countdown
+            Sound::soundAlarm();
+        }
+    }
+    else if ( msg == "setDailyEnabled(int)" ) {
+        QDataStream ds(data,IO_ReadOnly);
+        int enableDaily;
+        ds >> enableDaily;
+        dailyEnabled->setChecked( enableDaily );
+        applyDailyAlarm();
+    }
+    else if ( msg == "editDailyAlarm()" ) {
+        tabs->setCurrentPage(2);
+        QPEApplication::setKeepRunning();
+    }
+    else if (msg == "showClock()") {
+        tabs->setCurrentPage(0);
+        QPEApplication::setKeepRunning();
+    }
+    else if (msg == "timerStart()" ) {
         if ( !swatch_running )
             stopStartStopWatch();
         tabs->setCurrentPage(1);
         QPEApplication::setKeepRunning();
-    } else if (msg == "timerStop()" ) {
+    }
+    else if (msg == "timerStop()" ) {
         if ( swatch_running )
             stopStartStopWatch();
         tabs->setCurrentPage(1);
         QPEApplication::setKeepRunning();
-    } else if (msg == "timerReset()" ) {
+    }
+    else if (msg == "timerReset()" ) {
         resetStopWatch();
         tabs->setCurrentPage(1);
         QPEApplication::setKeepRunning();
@@ -660,11 +674,12 @@ void Clock::appMessage( const QCString &msg, const QByteArray &data )
 void Clock::alarmTimeout()
 {
     if ( alarmCount < 10 ) {
-	Sound::soundAlarm();
-	alarmCount++;
-    } else {
-	alarmCount = 0;
-	alarmt->stop();
+        Sound::soundAlarm();
+        alarmCount++;
+    }
+    else {
+        alarmCount = 0;
+        alarmt->stop();
     }
 }
 
@@ -676,10 +691,10 @@ QDateTime Clock::nextAlarm( int h, int m )
     int count = 0;
     int dow = when.date().dayOfWeek();
     while ( when < now || !dayBtn[dayBtnIdx(dow)]->isOn() ) {
-	when = when.addDays( 1 );
-	dow = when.date().dayOfWeek();
-	if ( ++count > 7 )
-	    return QDateTime();
+        when = when.addDays( 1 );
+        dow = when.date().dayOfWeek();
+        if ( ++count > 7 )
+            return QDateTime();
     }
 
     return when;
@@ -688,11 +703,11 @@ QDateTime Clock::nextAlarm( int h, int m )
 int Clock::dayBtnIdx( int d ) const
 {
     if ( onMonday )
-	return d-1;
+        return d-1;
     else if ( d == 7 )
-	return 0;
+        return 0;
     else
-	return d;
+        return d;
 }
 
 void Clock::scheduleApplyDailyAlarm()
@@ -703,16 +718,16 @@ void Clock::scheduleApplyDailyAlarm()
 void Clock::applyDailyAlarm()
 {
     if ( !init )
-	return;
+        return;
 
     applyAlarmTimer->stop();
     int minute = dailyMinute->value();
     int hour = dailyHour->value();
     if ( ampm ) {
-	if (hour == 12)
-	    hour = 0;
-	if (dailyAmPm->currentItem() == 1 )
-	    hour += 12;
+        if (hour == 12)
+            hour = 0;
+        if (dailyAmPm->currentItem() == 1 )
+            hour += 12;
     }
 
     Config config( "Clock" );
@@ -729,12 +744,12 @@ void Clock::applyDailyAlarm()
     QString exclDays;
     int exclCount = 0;
     for ( int i = 1; i <= 7; i++ ) {
-	if ( !dayBtn[dayBtnIdx(i)]->isOn() ) {
-	    if ( !exclDays.isEmpty() )
-		exclDays += ",";
-	    exclDays += QString::number( i );
-	    exclCount++;
-	}
+        if ( !dayBtn[dayBtnIdx(i)]->isOn() ) {
+            if ( !exclDays.isEmpty() )
+                exclDays += ",";
+            exclDays += QString::number( i );
+            exclCount++;
+        }
     }
     config.writeEntry( "ExcludeDays", exclDays );
 
@@ -742,23 +757,23 @@ void Clock::applyDailyAlarm()
     AlarmServer::deleteAlarm(QDateTime(), ALARM_CLOCK_CHANNEL,
                              ALARM_CLOCK_MESSAGE, magic_daily);
     AlarmServer::deleteAlarm(QDateTime(), ALARM_CLOCK_CHANNEL,
-			     ALARM_CLOCK_MESSAGE, magic_playmp );
+                             ALARM_CLOCK_MESSAGE, magic_playmp );
     AlarmServer::deleteAlarm(QDateTime(), ALARM_CLOCK_CHANNEL,
-			     ALARM_CLOCK_MESSAGE, magic_snooze);
-    
+                             ALARM_CLOCK_MESSAGE, magic_snooze);
+
     if ( enableDaily && exclCount < 7 ) {
-	QDateTime when = nextAlarm( hour, minute );
-	AlarmServer::addAlarm(when, ALARM_CLOCK_CHANNEL,
-			    ALARM_CLOCK_MESSAGE, isMagic);
+        QDateTime when = nextAlarm( hour, minute );
+        AlarmServer::addAlarm(when, ALARM_CLOCK_CHANNEL,
+                            ALARM_CLOCK_MESSAGE, isMagic);
     }
 }
 
 bool Clock::validDaysSelected(void)
 {
     for ( int i = 1; i <= 7; i++ ) {
-	if ( dayBtn[dayBtnIdx(i)]->isOn() ) {
-	    return TRUE;
-	}
+        if ( dayBtn[dayBtnIdx(i)]->isOn() ) {
+            return TRUE;
+        }
     }
     return FALSE;
 }
@@ -766,11 +781,11 @@ bool Clock::validDaysSelected(void)
 void Clock::closeEvent( QCloseEvent *e )
 {
     if (dailyEnabled->isChecked()) {
-	if (!validDaysSelected()) {
-	    QMessageBox::warning(this, tr("Select Day"),
-		tr("Daily alarm requires at least\none day to be selected."));
-	    return;
-	}
+        if (!validDaysSelected()) {
+            QMessageBox::warning(this, tr("Select Day"),
+                tr("Daily alarm requires at least\none day to be selected."));
+            return;
+        }
     }
 
     applyDailyAlarm();
@@ -782,15 +797,15 @@ bool Clock::spinBoxValid( QSpinBox *sb )
     bool valid = TRUE;
     QString tv = sb->text();
     for ( uint i = 0; i < tv.length(); i++ ) {
-	if ( !tv[0].isDigit() )
-	    valid = FALSE;
+        if ( !tv[0].isDigit() )
+            valid = FALSE;
     }
     bool ok = FALSE;
     int v = tv.toInt( &ok );
     if ( !ok )
-	valid = FALSE;
+        valid = FALSE;
     if ( v < sb->minValue() || v > sb->maxValue() )
-	valid = FALSE;
+        valid = FALSE;
 
     return valid;
 }
