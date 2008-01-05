@@ -135,7 +135,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     setBackgroundMode( PaletteButton );
 
     setCaption( tr("OpiePlayer") );
-    setIcon( Opie::Core::OResource::loadPixmap( "opieplayer/MPEGPlayer", Opie::Core::OResource::SmallIcon ) );
+    setIcon( Opie::Core::OResource::loadPixmap( "opieplayer/OpiePlayer", Opie::Core::OResource::SmallIcon ) );
 
     setToolBarsMovable( FALSE );
 
