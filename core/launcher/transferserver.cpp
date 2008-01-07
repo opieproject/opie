@@ -304,10 +304,6 @@ bool SyncAuthentication::checkPassword( const QString& password )
         lock--;
         return TRUE;
     }
-
-    lock--;
-
-    return FALSE;
 }
 
 
