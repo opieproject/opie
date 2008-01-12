@@ -88,10 +88,13 @@ TZCombo::~TZCombo()
 void TZCombo::updateZones()
 {
     QString cur = currentText();
+    QString tz = currZone();
+    if(tz.isEmpty())
+        tz = getenv("TZ");
+
     clear();
     identifiers.clear();
     int curix=0;
-    QString tz = getenv("TZ");
     bool tzFound = FALSE;
     Config cfg("CityTime");
     cfg.setGroup("TimeZones");
