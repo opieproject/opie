@@ -84,7 +84,7 @@ typedef struct {
 #define LED_ON    OD_IOW( 'f', 5, LED_IN )
 #define FLITE_ON  OD_IOW( 'f', 7, FLITE_IN )
 
-#define Model_Keyboardless_2_6 (Model_iPAQ_H191x | Model_iPAQ_H22xx | Model_iPAQ_HX4700 | Model_iPAQ_H4xxx)
+#define Model_Keyboardless_2_6 (Model_iPAQ_H191x | Model_iPAQ_H22xx | Model_iPAQ_HX4700 | Model_iPAQ_H4xxx | Model_iPAQ_RX3xxx)
 
 struct i_button ipaq_buttons [] = {
 
@@ -182,6 +182,8 @@ void iPAQ::init(const QString& model)
         d->m_model = Model_iPAQ_H4xxx;
     else if ( d->m_modelstr == "H4300" )
         d->m_model = Model_iPAQ_H4xxx;
+    else if ( d->m_modelstr == "RX3000" )
+        d->m_model = Model_iPAQ_RX3xxx;
 
     else
         d->m_model = Model_Unknown;
@@ -197,6 +199,7 @@ void iPAQ::init(const QString& model)
         case Model_iPAQ_H1940:
 	case Model_iPAQ_HX4700:
 	case Model_iPAQ_H4xxx:
+	case Model_iPAQ_RX3xxx:
             d->m_rotation = Rot0;
             break;
         case Model_iPAQ_H36xx:
@@ -466,6 +469,8 @@ int iPAQ::displayBrightnessResolution() const
             return 255;
         case Model_iPAQ_H1940:
             return 44;
+        case Model_iPAQ_RX3xxx:
+            return 900;
         default:
             return 2;
     }
@@ -502,6 +507,7 @@ bool iPAQ::hasLightSensor() const
 	case Model_iPAQ_H191x:
 	case Model_iPAQ_H22xx:
 	case Model_iPAQ_H4xxx:
+	case Model_iPAQ_RX3xxx:
 	    return false;
 	default:
 	    return true;
