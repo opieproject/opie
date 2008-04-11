@@ -50,6 +50,7 @@ void SearchGroup::expand()
 
 void SearchGroup::doSearch()
 {
+	if (_lastSearch == _search) return;
 	clearList();
 	if (_search.isEmpty()) return;
 	_resultCount = realSearch();
