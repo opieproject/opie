@@ -52,27 +52,6 @@
 
 
 
-static const char* const image1_data[] = {
-"14 14 3 1",
-". c None",
-"# c #000000",
-"a c #ff0000",
-"..............",
-"..##.......###",
-".#aa#....##aa#",
-"#aaaa#.##aaaa#",
-".##aaa#aaaaa##",
-"...#aaaaaaa#..",
-"....#aaaaa#...",
-"...#aaaaa#....",
-"..#aaaaaaa#...",
-".#aaaaaaaaa#..",
-"#aaaa###aaaa#.",
-"#aaa#..##aaa#.",
-"#aaa#...#aa#..",
-".###.....##..."};
-
-
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   QMainWindow( parent, name, f ), _currentItem(0)
 {
@@ -195,13 +174,10 @@ void MainWindow::makeMenu()
   //Search button
   SearchAllAction->addTo( searchBar );
 
-  //image ripped of off opie-login/loginwindow.cpp
-  QPixmap image1( ( const char** ) image1_data );
-
   //Clear text
   ClearSearchText = new QToolButton( searchBar, "ClearSearchText");
   ClearSearchText->setText( "" );
-  ClearSearchText->setPixmap( image1 );
+  ClearSearchText->setPixmap( Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ) );
 
   connect( searchEdit, SIGNAL( textChanged(const QString&) ),this, SLOT( setSearch(const QString&) ) );
   connect( ClearSearchText, SIGNAL( clicked() ), searchEdit, SLOT( clear() ) );
