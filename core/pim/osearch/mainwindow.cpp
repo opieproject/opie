@@ -267,6 +267,11 @@ void MainWindow::searchStringChanged()
 	re.setWildcard( actionWildcards->isOn() );
 	for (SearchGroup *s = searches.first(); s != 0; s = searches.next() )
 		s->setSearch( re );
+
+	if(detailsFrame->isVisible()) {
+		detailsFrame->hide();
+		buttonBox->hide();
+	}
 }
 
 void MainWindow::searchAll()
