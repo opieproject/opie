@@ -1,26 +1,26 @@
 /*
-                             This file is part of the Opie Project
+ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½             This file is part of the Opie Project
              =.              (C) Copyright 2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.             (C) Copyright 2007 Paul Eggleton <bluelightning@bluelightning.org>
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+ï¿½ ï¿½ ï¿½ ï¿½ ï¿½ ï¿½.>+-=
+ï¿½_;:, ï¿½ ï¿½ .> ï¿½ ï¿½:=|.         This program is free software; you can
+.> <`_, ï¿½ > ï¿½. ï¿½ <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.-- ï¿½ :           the terms of the GNU Library General Public
+.="- .-=="i, ï¿½ ï¿½ .._         License as published by the Free Software
+ï¿½- . ï¿½ .-<_> ï¿½ ï¿½ .<>         Foundation; either version 2 of the License,
+ï¿½ ï¿½ ï¿½._= =} ï¿½ ï¿½ ï¿½ :          or (at your option) any later version.
+ï¿½ ï¿½ .%`+i> ï¿½ ï¿½ ï¿½ _;_.
+ï¿½ ï¿½ .i_,=:_. ï¿½ ï¿½ ï¿½-<s.       This program is distributed in the hope that
+ï¿½ ï¿½ ï¿½+ ï¿½. ï¿½-:. ï¿½ ï¿½ ï¿½ =       it will be useful,  but WITHOUT ANY WARRANTY;
+ï¿½ ï¿½ : .. ï¿½ ï¿½.:, ï¿½ ï¿½ . . .    without even the implied warranty of
+ï¿½ ï¿½ =_ ï¿½ ï¿½ ï¿½ ï¿½+ ï¿½ ï¿½ =;=|`    MERCHANTABILITY or FITNESS FOR A
+ï¿½ _.=:. ï¿½ ï¿½ ï¿½ : ï¿½ ï¿½:=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.= ï¿½ ï¿½ ï¿½ = ï¿½ ï¿½ ï¿½ ;      Library General Public License for more
+++= ï¿½ -. ï¿½ ï¿½ .` ï¿½ ï¿½ .:       details.
+ï¿½: ï¿½ ï¿½ = ï¿½...= . :.=-
+ï¿½-. ï¿½ .:....=;==+<;          You should have received a copy of the GNU
+ï¿½ -_. . . ï¿½ )=. ï¿½=           Library General Public License along with
+ï¿½ ï¿½ -- ï¿½ ï¿½ ï¿½ ï¿½:-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -42,6 +42,7 @@
 #include <qpe/applnk.h>
 #include <qpe/global.h>
 #include <qpe/resource.h>
+#include <qpe/storage.h>
 using namespace Opie::Core;
 using namespace Opie::Ui;
 
@@ -303,6 +304,7 @@ void CardApplet::updatePcmcia()
 void CardApplet::updateMounts( bool showPopup )
 {
     QMap<QString,QString> blockdevs;
+    StorageInfo storage;
 
     struct mntent *me;
     FILE *mntfp = setmntent( "/etc/mtab", "r" );
@@ -329,6 +331,7 @@ void CardApplet::updateMounts( bool showPopup )
         // Iterate over mount points
         while ( ( me = getmntent( mntfp ) ) != 0 ) {
             QString fs = QFile::decodeName( me->mnt_fsname );
+            QString mntdir = QFile::decodeName( me->mnt_dir );
             // Find which mounted devices are ones we are interested in
             if(fs.startsWith("/dev/")) {
                 QString blockdev = fs.mid(5);
@@ -358,16 +361,28 @@ void CardApplet::updateMounts( bool showPopup )
                         if (!matched) {
                             // Attempt to determine if the device is removable
                             QFile f(fpath + "/removable");
+                            bool removable = false;
                             if ( f.open(IO_ReadOnly) ) {
-                                if(f.getch() == '1') {
-                                    odebug << "CARDAPPLET: " << fs << oendl;
-                                    blockdevs.insert(fs, QFile::decodeName( me->mnt_dir ));
-                                }
-                                else
-                                    odebug << fs << " is not removable" << oendl;
+                                if(f.getch() == '1')
+                                    removable = true;
                             }
                             else
                                 odebug << "could not open " << fpath + "/removable" << oendl;
+                            
+                            if(!removable && mntdir != "/") {
+                                const FileSystem *fsi = storage.fileSystemOf(fs);
+                                if(fsi) {
+                                    if(fsi->isRemovable())
+                                        removable = true;
+                                }
+                            }
+
+                            if(removable) {
+                                odebug << "CARDAPPLET: " << fs << oendl;
+                                blockdevs.insert(fs, mntdir);
+                            }
+                            else
+                                odebug << fs << " is not removable" << oendl;
                         }
 
                         break;
