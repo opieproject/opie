@@ -27,75 +27,31 @@
 
 #include <qfile.h>
 
-#include <sys/stat.h>
-#if defined(Q_OS_LINUX) || defined(_OS_LINUX_)
-#include <unistd.h>
-#endif
-#include <stdlib.h>
-
 SysFileMonitor::SysFileMonitor(QObject* parent) :
     QObject(parent)
 {
     startTimer(2000);
 }
 
-const char * stab0 = "/var/run/stab";
-const char * stab1 = "/var/state/pcmcia/stab";
-const char * stab2 = "/var/lib/pcmcia/stab";
-
 void SysFileMonitor::timerEvent(QTimerEvent*)
 {
-    struct stat s;
-
-    static const char * tab [] = {
-	stab0,
-	stab1,
-	stab2
-    };
-    static const int nstab = sizeof(tab)/sizeof(const char *);
-    static int last[nstab];
-
-    bool ch = FALSE;
-    for ( int i=0; i<nstab; i++ ) {
-	if ( ::stat(tab[i], &s)==0 && (long)s.st_mtime != last[i] ) {
-	    last[i] = (long)s.st_mtime;
-	    ch=TRUE;
-	}
-	if ( ch ) {
-#ifndef QT_NO_COP
-	    QCopEnvelope("QPE/Card", "stabChanged()" );
-#endif
-	    break;
-	}
-    }
-
     // st_size is no use, it's 0 for /proc/mounts too. Read it all.
     static int mtabSize = 0;
     QFile f( "/proc/mounts" );
     if ( f.open(IO_ReadOnly) ) {
-#if 0
-	// readAll does not work correctly on sequential devices (as eg. /proc files)
-	QByteArray ba = f.readAll();
-	if ( (int)ba.size() != mtabSize ) {
-	    mtabSize = (int)ba.size();
+        QString s;
+        // QFile.readAll does not work correctly on sequential devices (eg. /proc files) so we need to read manually
+        while( !f.atEnd() ) {
+            QString tmp;
+            f.readLine( tmp, 1024 );
+            s += tmp;
+        }
+        if ( (int)s.length() != mtabSize ) {
+            mtabSize = (int)s.length();
 #ifndef QT_NO_COP
-	    QCopEnvelope("QPE/Card", "mtabChanged()" );
+            QCopEnvelope("QPE/Card", "mtabChanged()" );
 #endif
-	}
-#else
-	QString s;
-	while( !f.atEnd() ) {
-	    QString tmp;
-	    f.readLine( tmp, 1024 );
-	    s += tmp;
-	}
-	if ( (int)s.length() != mtabSize ) {
-	    mtabSize = (int)s.length();
-#ifndef QT_NO_COP
-	    QCopEnvelope("QPE/Card", "mtabChanged()" );
-#endif
-	}
-#endif
+        }
     }
 }
 
