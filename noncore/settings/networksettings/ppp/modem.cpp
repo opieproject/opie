@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.15 2007-07-30 19:10:52 erik Exp $
+ * $Id: modem.cpp,v 1.16 2008-04-29 19:27:26 erik Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -898,7 +898,7 @@ bool Modem::execpppd(const char *arguments) {
     case 0:
       // let's parse the arguments the user supplied into UNIX suitable form
       // that is a list of pointers each pointing to exactly one word
-      strlcpy(buf, arguments);
+      strncpy(buf, arguments, MAX_CMDLEN - 1);
       parseargs(buf, args);
       // become a session leader and let /dev/ttySx
       // be the controlling terminal.

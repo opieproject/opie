@@ -179,6 +179,12 @@ int CReb::OpenFile(const char *src)
       qDebug("File length:%u", type);
       fseek(fin, toc, SEEK_SET);
       fread(&nopages, 1, sizeof(nopages), fin);
+      // sanitize nopages
+      // We will commit an integer overflow if nopages is larger then a certain
+      // amount
+      if (nopages > (((UInt32)(-1)) / (sizeof(UInt32) > sizeof(Page_detail) ? sizeof(UInt32) : sizeof(Page_detail))))
+	 nopages = (((UInt32)(-1)) / (sizeof(UInt32) > sizeof(Page_detail) ? sizeof(UInt32) : sizeof(Page_detail))) - 1;
+
       m_indexpages = new UInt32[nopages];
       m_pagedetails = new Page_detail[nopages];
       qDebug("There are %u pages", nopages);
@@ -557,6 +563,8 @@ void RBPage::initpage(UInt32 pos, size_t _cp, bool _isCompressed, UInt32 _len)
   if (m_Compressed)
     {
       fread(&nochunks, 1, sizeof(nochunks), fin);
+      if (nochunks > (UInt32)(-1) / sizeof(UInt32))
+	  nochunks = ((UInt32)(-1) / sizeof(UInt32)) - 1;
       fread(&m_pagelen, 1, sizeof(m_pagelen), fin);
       chunklist = new UInt32[nochunks];
       fread(chunklist, nochunks, 4, fin);

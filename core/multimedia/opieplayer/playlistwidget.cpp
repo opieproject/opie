@@ -59,6 +59,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdlib.h>
+#include <errno.h>
 
 #define BUTTONS_ON_TOOLBAR
 #define SIDE_BUTTONS
@@ -352,11 +353,14 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 PlayListWidget::~PlayListWidget()
 {
     Config cfg( "OpiePlayer" );
-    writeConfig( cfg );
+    if (d) {
+        writeConfig( cfg );
 
-      if ( d->current )
-          delete d->current;
-      if(d) delete d;
+        if ( d->current )
+            delete d->current;
+
+        delete d;
+    }
 }
 
 
@@ -399,22 +403,6 @@ void PlayListWidget::writeConfig( Config& cfg ) const
             entryName.sprintf( "File%i", noOfFiles + 1 );
 //            odebug << entryName << oendl;
             cfg.writeEntry( entryName, lnk->linkFile() );
-              // if this link does exist, add it so we have the file
-              // next time...
-            if ( !QFile::exists( lnk->linkFile() ) ) {
-                  // the way writing lnks doesn't really check for out
-                  // of disk space, but check it anyway.
-//                  if ( !lnk->writeLink() ) {
-//                      QMessageBox::critical( 0, tr("Out of space"),
-//                                             tr( "There was a problem saving "
-//                                                 "the playlist.\n"
-//                                                 "Your playlist "
-//                                                 "may be missing some entries\n"
-//                                                 "the next time you start it." )
-//                                             );
-//                  }
-
-            }
             noOfFiles++;
         }
     }
@@ -1111,9 +1099,7 @@ void PlayListWidget::openFile()
         }
     }
 
-    if( fileDlg ) {
-        delete fileDlg;
-    }
+    delete fileDlg;
 }
 
 
@@ -1137,9 +1123,7 @@ void PlayListWidget::writeCurrentM3u()
 //        odebug << "<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" << oendl;
         m3uList->write();
         m3uList->close();
-
-        if(m3uList)
-            delete m3uList;
+        delete m3uList;
     }
 }
 
@@ -1176,11 +1160,7 @@ void PlayListWidget::writem3u()
             //    odebug << list << oendl;
             m3uList->write();
             m3uList->close();
-            if(m3uList)
-                delete m3uList;
-
-            if(fileDlg)
-                delete fileDlg;
+            delete m3uList;
 
             DocLnk lnk;
             lnk.setFile( filename);
@@ -1194,13 +1174,13 @@ void PlayListWidget::writem3u()
             config.writeEntry("CurrentPlaylist",filename);
             currentPlayList=filename;
 
-            if(!lnk.writeLink()) {
-                //            odebug << "Writing doclink did not work" << oendl;
-            }
+            if(!lnk.writeLink())
+                oerr << "Writing doclink did not work" << oendl;
 
             setCaption(tr("OpiePlayer: ") + name);
         }
     }
+    delete fileDlg;
 }
 
 
@@ -1293,8 +1273,8 @@ void PlayListWidget::doBlank() {
     fd=open("/dev/fb0",O_RDWR);
 #endif
     if (fd != -1) {
-        ioctl(fd,FBIOBLANK,1);
-        //            close(fd);
+        if (ioctl(fd,FBIOBLANK,1) == -1)
+            oerr << "Failed blanking the screen. " << strerror(errno) << oendl;
     }
 }
 
@@ -1305,8 +1285,10 @@ void PlayListWidget::doUnblank()
     //       fd=open("/dev/fb0",O_RDWR);
     //    odebug << "do unblanking" << oendl;
     if (fd != -1) {
-        ioctl(fd,FBIOBLANK,0);
-        close(fd);
+        if (ioctl(fd,FBIOBLANK,0) == -1)
+            oerr << "Failed unblanking the screen. " << strerror(errno) << oendl;
+        else
+            close(fd);
     }
     QCopEnvelope h("QPE/System", "setBacklight(int)");
     h <<-3;// v[1]; // -3 Force on
@@ -1461,9 +1443,8 @@ void PlayListWidget::readm3u( const QString &filename )
     config.write();
     currentPlayList=filename;
 
-//    m3uList->write();
     m3uList->close();
-    if(m3uList) delete m3uList;
+    delete m3uList;
 
     d->selectedFiles->setSelectedItem( s);
     setCaption(tr("OpiePlayer: ")+ fullBaseName ( QFileInfo(filename)));
@@ -1512,8 +1493,7 @@ void PlayListWidget::readPls( const QString &filename )
     }
 
     m3uList->close();
-    if(m3uList)
-        delete m3uList;
+    delete m3uList;
 }
 
 bool PlayListWidget::readpodcast( const QString &filename )
