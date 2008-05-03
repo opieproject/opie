@@ -339,12 +339,6 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
                 case Rot180: quarters = 1/*270deg*/; break;
                 case Rot270: quarters = 0/*270deg*/; break;
             }
-            if( d->m_model == Model_iPAQ_H22xx ) {
-              // FIXME: there's something screwed with the keycodes being sent on h2200. I have
-              // added a temporary workaround for this here, but the bug should be fixed properly
-              // later in the right place. - Paul Eggleton 25/07/2007
-              quarters = 0;
-            }
             newkeycode = Key_Left + ( keycode - Key_Left + quarters ) % 4;
             break;
         }
