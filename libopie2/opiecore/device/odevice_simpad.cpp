@@ -70,7 +70,7 @@ struct s_button {
     char *fheldservice;
     char *fheldaction;
 };
-
+//FIXME: buttons have changed to use evdev now
 static struct s_button simpad_buttons [] = {
     { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
     Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Lower+Up"),
@@ -151,8 +151,6 @@ void SIMpad::init(const QString&)
     }
 
     //Distribution detecting code is now in base class
-    m_leds [0] = m_leds [1] = Led_Off;
-
     m_power_timer = 0;
 
 }
@@ -182,128 +180,29 @@ void SIMpad::initButtons()
     reloadButtonMapping();
 }
 
-// SIMpad boardcontrol register CS3
-#define SIMPAD_BOARDCONTROL "/proc/cs3"
-#define SIMPAD_VCC_5V_EN                   0x0001 // For 5V PCMCIA
-#define SIMPAD_VCC_3V_EN                   0x0002 // FOR 3.3V PCMCIA
-#define SIMPAD_EN1                         0x0004 // This is only for EPROM's
-#define SIMPAD_EN0                         0x0008 // Both should be enable for 3.3V or 5V
-#define SIMPAD_DISPLAY_ON                  0x0010
-#define SIMPAD_PCMCIA_BUFF_DIS             0x0020
-#define SIMPAD_MQ_RESET                    0x0040
-#define SIMPAD_PCMCIA_RESET                0x0080
-#define SIMPAD_DECT_POWER_ON               0x0100
-#define SIMPAD_IRDA_SD                     0x0200 // Shutdown for powersave
-#define SIMPAD_RS232_ON                    0x0400
-#define SIMPAD_SD_MEDIAQ                   0x0800 // Shutdown for powersave
-#define SIMPAD_LED2_ON                     0x1000
-#define SIMPAD_IRDA_MODE                   0x2000 // Fast/Slow IrDA mode
-#define SIMPAD_ENABLE_5V                   0x4000 // Enable 5V circuit
-#define SIMPAD_RESET_SIMCARD               0x8000
-
-//SIMpad touchscreen backlight strength control
-#define SIMPAD_BACKLIGHT_CONTROL "/proc/driver/mq200/backlight"
-
-
 /*
  * The SIMpad exposes ChipSelect3 to userspace
- * via a proc filesystem file. Using this register
+ * via a sysfs filesystem files. Using this register
  * one can toggle power of serial, irda, dect circuits
  * change the video driver and display status and
  * many more things.
- * To not lose the current setting we read the current
- * cs3 setting and toggle the necessary bits and then
- * write it.
+ * 
+ * FIXME: I only implemented display_on maybe someone want to
+ * have other parts available?
  */
-static bool setCS3Bit(  bool bitset, int bit ) {
-    QFile file( SIMPAD_BOARDCONTROL );
-    if ( !file.open( IO_ReadOnly ) )
-        return false;
 
-    unsigned int val = 0;
-    bool ok = false;
-    QTextStream stream( &file );
+// SIMpad display switch
+#define SIMPAD_DISPLAY_ON_CONTROLL "/sys/class/simpad/latch_cs3/display_on"
 
-    /*
-     * Use QFile and QTextStream for parsing to be more
-     * robust
-     */
-    while ( !stream.atEnd() ) {
-        QString line = stream.readLine();
-        if ( line.startsWith( "Chipselect3 : " ) ) {
-            val = line.mid( 14 ).toUInt( 0, 16 );
-            ok = true;
-            break;
-        }
-    }
+//SIMpad touchscreen backlight strength control
+#define SIMPAD_BACKLIGHT_CONTROL "/sys/class/backlight/simpad-mq200-bl/brightness"
 
-    if ( !ok )
-        return false;
-
-    file.close();
-
-    /*
-     * change the value
-     */
-    val = bitset ? (val | bit) : (val & ~bit);
-
-    /*
-     * write it back
-     */
-    int cs3_fd = ::open( SIMPAD_BOARDCONTROL, O_WRONLY );
-    if ( cs3_fd < 0 )
-        return false;
-
-    char line[32];
-    ::snprintf(line, sizeof(line), "0x%04x\n", val);
-    ::write(cs3_fd, line, strlen(line));
-    ::close(cs3_fd);
-
-    return true;
-}
-
-
-QValueList <OLed> SIMpad::ledList() const
-{
-    QValueList <OLed> vl;
-    vl << Led_Power; //FIXME which LED is LED2 ? The green one or the amber one?
-    //vl << Led_Mail; //TODO find out if LED1 is accessible anyway
-    return vl;
-}
-
-QValueList <OLedState> SIMpad::ledStateList ( OLed l ) const
-{
-    QValueList <OLedState> vl;
-
-    if ( l == Led_Power )  //FIXME which LED is LED2 ? The green one or the amber one?
-        vl << Led_Off << Led_On;
-    //else if ( l == Led_Mail ) //TODO find out if LED1 is accessible anyway
-        //vl << Led_Off;
-    return vl;
-}
-
-OLedState SIMpad::ledState ( OLed l ) const
-{
-    switch ( l ) {
-        case Led_Power:
-            return m_leds [0];
-        //case Led_Mail:
-        //  return m_leds [1];
-        default:
-            return Led_Off;
-    }
-}
-
-bool SIMpad::setLedState ( OLed l, OLedState st )
-{
-    if ( l == Led_Power ) {
-        m_leds [0] = st;
-        setCS3Bit(st == Led_On, SIMPAD_LED2_ON);
-	return true;
-    }
-
-    return false;
-}
+/* 
+ * Since LED1 is for charging only and LED2 is used by to show power on/off and we should not change the
+ * LEDs I decided to remove this code from odevice_simpad.cpp. If you still want to get the led states
+ * you will need to use /sys/class/simpad/latch_cs3/ for it.
+ *
+ */
 
 void SIMpad::timerEvent ( QTimerEvent * )
 {
@@ -348,8 +247,16 @@ bool SIMpad::suspend() // Must override because SIMpad does NOT have apm
 bool SIMpad::setDisplayStatus ( bool on )
 {
     qDebug( "ODevice for SIMpad: setDisplayStatus(%s)", on? "on" : "off" );
-
-    return setCS3Bit(on, SIMPAD_DISPLAY_ON);
+    bool res = false;
+    int fd;
+    int status=static_cast<int> (on);
+    
+    if (( fd = ::open ( SIMPAD_DISPLAY_ON_CONTROLL, O_WRONLY )) >= 0 ) {
+        QCString str = QFile::encodeName( QString::number(status));
+        res = ( ::write(fd, str, str.length()) != -1 );
+        ::close ( fd );
+    }
+    return res;
 }
 
 
@@ -359,8 +266,8 @@ bool SIMpad::setDisplayBrightness ( int bright )
     bool res = false;
     int fd;
 
-    if ( bright > 255 )
-        bright = 255;
+    if ( bright > 254 )
+        bright = 254;
     if ( bright < 1 )
         bright = 0;
 
@@ -375,7 +282,7 @@ bool SIMpad::setDisplayBrightness ( int bright )
 
 int SIMpad::displayBrightnessResolution() const
 {
-    return 255; // All SIMpad models share the same display
+    return 254; // All SIMpad models share the same display
 }
 
 

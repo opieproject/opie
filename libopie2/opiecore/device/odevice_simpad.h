@@ -54,17 +54,11 @@ class SIMpad : public OAbstractMobileDevice
 
     virtual void playAlarmSound();
 
-    virtual QValueList <OLed> ledList() const;
-    virtual QValueList <OLedState> ledStateList( OLed led ) const;
-    virtual OLedState ledState( OLed led ) const;
-    virtual bool setLedState( OLed led, OLedState st );
-
 protected:
     virtual void timerEvent( QTimerEvent *te );
 
     int m_power_timer;
 
-    OLedState m_leds [2];
 private:
     static void updateAllWidgets();
 };
