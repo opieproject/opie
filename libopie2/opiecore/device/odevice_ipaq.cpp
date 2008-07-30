@@ -334,10 +334,10 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
         case Key_Down : {
             int quarters;
             switch (d->m_rotation) {
-                case Rot0:   quarters = 3/*270deg*/; break;
-                case Rot90:  quarters = 2/*270deg*/; break;
-                case Rot180: quarters = 1/*270deg*/; break;
-                case Rot270: quarters = 0/*270deg*/; break;
+                case Rot0:   quarters = 0/*0deg*/; break;
+                case Rot90:  quarters = 1/*90deg*/; break;
+                case Rot180: quarters = 2/*180deg*/; break;
+                case Rot270: quarters = 3/*270deg*/; break;
             }
             newkeycode = Key_Left + ( keycode - Key_Left + quarters ) % 4;
             break;
