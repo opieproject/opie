@@ -33,6 +33,7 @@
 /* QT */
 #include <qapplication.h>
 #include <qfile.h>
+#include <qdir.h>
 #include <qtextstream.h>
 #include <qwindowsystem_qws.h>
 #include <qgfx_qws.h>
@@ -242,23 +243,20 @@ void Palm::init(const QString& cpu_info)
       case Model_Palm_T700P:
       case Model_Palm_T750:
       case Model_Palm_T755P:
-	m_backlightdev = "/sys/class/backlight/corgi-bl/";
 	d->m_rotation  = Rot0;
 	d->m_direction = CCW;
 	d->m_qteDriver = "Transformed";
 	break;
-      case Model_Palm_T600:
-      case Model_Palm_TT:
-      case Model_Palm_TT2:
-      case Model_Palm_TE:
-      case Model_Palm_Z71:
-	m_backlightdev = "/sys/class/backlight/omap-bl/";
-	break;
-
-      default:
-            m_backlightdev = "";
     }
-
+    m_backlightdev = "/sys/class/backlight/";
+    QDir test(m_backlightdev);
+    int list_len=0;
+    if(test.exists() && ((list_len=test.count())>2)) {
+       m_backlightdev += test[list_len-1];
+       m_backlightdev += "/";
+    } else {
+       m_backlightdev = "";
+    }
 }
 
 
@@ -378,38 +376,12 @@ int Palm::displayBrightnessResolution() const
     int res = 1;
     int fd = -1;
 
-    switch ( d->m_model )
-    {
-      case Model_Palm_TT:
-      case Model_Palm_TT2:
-      case Model_Palm_TT3:
-      case Model_Palm_TT5:
-      case Model_Palm_TE:
-      case Model_Palm_TE2:
-      case Model_Palm_TC:
-      case Model_Palm_LD:
-      case Model_Palm_TX:
-      case Model_Palm_Z71:
-      case Model_Palm_Z72:
-      case Model_Palm_T600:
-      case Model_Palm_T650:
-      case Model_Palm_T680:
-      case Model_Palm_T700W:
-      case Model_Palm_T700P:
-      case Model_Palm_T750:
-      case Model_Palm_T755P:
-        fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
-        if ( fd != -1)
-        {
-          char buf[100];
-          if ( ::read( fd, &buf[0], sizeof buf ) > 0 )
-              ::sscanf( &buf[0], "%d", &res );
-          ::close( fd );
-        }
-	break;
-
-      default:
-	res = 1;
+    fd = ::open( m_backlightdev + "max_brightness", O_RDONLY|O_NONBLOCK );
+    if ( fd != -1) {
+      char buf[100];
+      if ( ::read( fd, &buf[0], sizeof buf ) > 0 )
+           ::sscanf( &buf[0], "%d", &res );
+      ::close( fd );
     }
 
     return res;
@@ -427,39 +399,15 @@ bool Palm::setDisplayBrightness( int bright )
     int val = ( bright == 1 ) ? 1 : ( bright * numberOfSteps ) / 255;
     int fd = -1;
 
-    switch ( d->m_model )
+    fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
+    if ( fd  != -1 )
     {
-      case Model_Palm_TT:
-      case Model_Palm_TT2:
-      case Model_Palm_TT3:
-      case Model_Palm_TT5:
-      case Model_Palm_TE:
-      case Model_Palm_TE2:
-      case Model_Palm_TC:
-      case Model_Palm_LD:
-      case Model_Palm_TX:
-      case Model_Palm_Z71:
-      case Model_Palm_Z72:
-      case Model_Palm_T600:
-      case Model_Palm_T650:
-      case Model_Palm_T680:
-      case Model_Palm_T700W:
-      case Model_Palm_T700P:
-      case Model_Palm_T750:
-      case Model_Palm_T755P:
-        fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
-        if ( fd  != -1 )
-        {
-            char buf[100];
-            int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-            if (len > 0)
-                res = ( ::write( fd, &buf[0], len ) == 0 );
-            ::close( fd );
-        }
-        break;
-
-      default:
-        res = false;
+       char buf[100];
+       int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
+       if (len > 0)
+           res = ( ::write( fd, &buf[0], len ) == 0 );
+       ::close( fd );
+       res = true;
     }
     return res;
 }
