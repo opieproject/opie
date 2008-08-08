@@ -760,9 +760,18 @@ bool Zaurus::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress,
         case Key_Up   :
         case Key_Down :
         {
-            if (rotation()==Rot90) {
-                newkeycode = Key_Left + ( keycode - Key_Left + 3 ) % 4;
+            if (d->m_model == Model_Zaurus_SLC3000) {
+                // This ensures that the cursor keys work correctly and that the
+                // side wheel works as expected when the screen is flipped over
+                if (rotation() == Rot270)
+                    newkeycode = Key_Left + ( keycode - Key_Left + 1 ) % 4;
             }
+            else {
+                if (rotation()==Rot90)
+                    newkeycode = Key_Left + ( keycode - Key_Left + 3 ) % 4;
+            }
+            break;
+            
         }
         break;
 
