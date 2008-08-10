@@ -169,6 +169,7 @@ void BrightnessApplet::writeSystemBrightness(int brightness)
     cfg.writeEntry("Brightness", brightness);
     odebug << "writing brightness " << brightness << oendl;
     cfg.write();
+    sliderMoved(0); // ensures that screensaver picks up saved brightness
 }
 
 
