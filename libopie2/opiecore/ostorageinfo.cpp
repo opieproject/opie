@@ -46,10 +46,25 @@ QString OStorageInfo::cfPath()const
 
     for (QListIterator<FileSystem> i( fileSystems() ); i.current(); ++i)
     {
-        if ( (*i)->disk().left( 8 ) == "/dev/hda"  )
+        const FileSystem *fs = (*i);
+        if ( fs->path() == "/media/cf" )
         {
-            r = (*i)->path();
+            r = "/media/cf";
             break;
+        }
+    }
+    
+    if ( r == "" ) 
+    {
+        for (QListIterator<FileSystem> i( fileSystems() ); i.current(); ++i)
+        {
+            const FileSystem *fs = (*i);
+            if ( fs->disk().left( 8 ) == "/dev/hda" 
+                    && fs->path().left(6) == "/media" )
+            {
+                r = (*i)->path();
+                break;
+            }
         }
     }
     return r;
