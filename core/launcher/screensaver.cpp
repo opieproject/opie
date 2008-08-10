@@ -240,6 +240,28 @@ void OpieScreenSaver::setBacklight ( int bright )
     ODevice::inst ( )-> setDisplayContrast(contrast);
 }
 
+/**
+ * Adjusts the backlight up or down by the specified amount
+ *
+ * @param increase true to step the backlight up, false to step it down
+ */
+void OpieScreenSaver::adjustBacklight( bool increase )
+{
+    int amount;
+    if(increase)
+        amount = 32;
+    else
+        amount = -32;
+
+    int bright = m_backlight_current + amount;
+    if( bright < 0 )
+        bright = 0;
+    else if( bright > 255 )
+        bright = 255;
+    
+    if (bright != m_backlight_current)
+        setBacklight( bright );
+}
 
 /**
  * Internal brightness setting method

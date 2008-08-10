@@ -22,6 +22,7 @@ public:
 	void setMode ( int mode );
 
 	void setBacklight ( int bright );
+    void adjustBacklight( bool increase );
 	void setDisplayState ( bool on );
 
 	void powerStatusChanged ( PowerStatus ps );

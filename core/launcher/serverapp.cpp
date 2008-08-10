@@ -450,6 +450,12 @@ void ServerApplication::systemMessage( const QCString& msg,
         stream >> bright;
         m_screensaver-> setBacklight( bright );
     }
+    else if ( msg == "incBacklight()" ) {
+        m_screensaver->adjustBacklight(true);
+    }
+    else if ( msg == "decBacklight()" ) {
+        m_screensaver->adjustBacklight(false);
+    }
     else if ( msg == "setScreenSaverMode(int)" ) {
         int mode;
         stream >> mode;
