@@ -62,7 +62,7 @@ int IRCTab::id() {
 }
 
 void IRCTab::showEvent( QShowEvent *ev ) {
-    topLevelWidget()->setCaption( MainWindow::appCaption() + " " + title() );
+    topLevelWidget()->setCaption( MainWindow::appCaption() + " - " + title() );
     QWidget::showEvent( ev );
     emit editFocus();
 }
