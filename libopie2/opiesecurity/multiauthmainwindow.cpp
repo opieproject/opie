@@ -15,18 +15,19 @@ MultiauthMainWindow::MultiauthMainWindow(bool allowBypass)
               Qt::WStyle_NoBorder | Qt::WStyle_Customize | Qt::WStyle_StaysOnTop)
 
 {
-    alreadyDone = false;
+    m_alreadyDone = false;
+    m_allowBypass = allowBypass;
     // initializes widget pointers which not always point to an object
     quit = 0;
     message2 = 0;
 
     if (allowBypass == true)
-        explanScreens = true;
+        m_explanScreens = true;
     else
     {
         Config *pcfg = new Config("Security");
         pcfg->setGroup("Misc");
-        explanScreens = pcfg->readBoolEntry("explanScreens", true);
+        m_explanScreens = pcfg->readBoolEntry("explanScreens", true);
         delete pcfg;
     }
 
@@ -37,7 +38,7 @@ MultiauthMainWindow::MultiauthMainWindow(bool allowBypass)
 
     // if explanScreens is false, we don't show any text in the QDialog,
     // and we proceed directly
-    if ( explanScreens == true )
+    if ( m_explanScreens == true )
     {
         title = new QLabel("<center><h1>" + tr("Welcome to Opie") + "</h1></center>", this);
         message = new QLabel("<center><h3>" + tr("Launching authentication plugins...") + "</h3></center>", this);
@@ -53,7 +54,7 @@ MultiauthMainWindow::MultiauthMainWindow(bool allowBypass)
 
     QObject::connect(proceedButton, SIGNAL(clicked()), this, SLOT(proceed()));
 
-    if ( explanScreens == true )
+    if ( m_explanScreens == true )
     {
         quit = new QPushButton("Exit", this);
         layout->addWidget(quit, 0, Qt::AlignHCenter);
@@ -74,8 +75,6 @@ MultiauthMainWindow::MultiauthMainWindow(bool allowBypass)
     {
         // we will need this button only if runPlugins() fails in proceed()
         proceedButton->hide();
-        // let's proceed now
-        proceed();
     }
 }
 
@@ -83,19 +82,22 @@ MultiauthMainWindow::MultiauthMainWindow(bool allowBypass)
 MultiauthMainWindow::~MultiauthMainWindow() {
 }
 
+void MultiauthMainWindow::showEvent ( QShowEvent * ) {
+    proceed();
+}
+
 /// launch the authentication
 void MultiauthMainWindow::proceed() {
     int result = Internal::runPlugins();
 
-
-    if ( (result == 0) && !explanScreens )
+    if ( (result == 0) && !m_explanScreens )
     {
         // the authentication has succeeded, we can exit directly
         // this will work if we haven't been called by the constructor of MultiauthMainWindow
         close();
         // and if we've been called by this constructor, we use this variable to tell our
         // caller we're already done
-        alreadyDone = true;
+        m_alreadyDone = true;
         return;
     }
     else
@@ -123,7 +125,7 @@ void MultiauthMainWindow::proceed() {
             // authentication has failed, explain that according to allowBypass
             message->setText( "<center><h3>" + tr("You have <b>not</b> succeeded enough authentication steps!") + "</h3></center>" );
             proceedButton->show();
-            if ( allowBypass == true )
+            if ( m_allowBypass == true )
             {
                 message2->setText( "<center><p>" + tr("Be careful: if this was not a <b>simulation</b>, you would have to go back through all the steps now.") + "</p></center>" );
                 message2->show();
@@ -138,7 +140,7 @@ void MultiauthMainWindow::proceed() {
  * \todo try to avoid this hack?
  */
 bool MultiauthMainWindow::isAlreadyDone() {
-    return alreadyDone;
+    return m_alreadyDone;
 }
 
 }

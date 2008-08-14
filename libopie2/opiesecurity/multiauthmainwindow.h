@@ -58,17 +58,20 @@ class MultiauthMainWindow : public QDialog {
         MultiauthMainWindow(bool allowBypass = false);
         ~MultiauthMainWindow();
         bool isAlreadyDone();
-
+    
+    protected:
+        void showEvent ( QShowEvent * );
+        
     private:
         QVBoxLayout * layout;
         QLabel * title, * message, * message2;
         QPushButton * proceedButton, * quit;
         /// whether to show explanatory screens before and after the authentication plugins
-        bool explanScreens;
+        bool m_explanScreens;
         /// allow to bypass authnentication via 'exit' buttons on both explan. screens
-        bool allowBypass;
+        bool m_allowBypass;
         /// true when the authentication has been done successfully
-        bool alreadyDone;
+        bool m_alreadyDone;
 
         private slots:
             void proceed();
