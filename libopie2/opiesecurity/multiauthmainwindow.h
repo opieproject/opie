@@ -3,7 +3,7 @@
  * \brief Defines the Opie multiauth main window.
  * 
  * This implementation was derived from the today plugins implementation.
- * \author Clément Séveillac (clement . seveillac (at) via . ecp . fr)
+ * \author Clï¿½ment Sï¿½veillac (clement . seveillac (at) via . ecp . fr)
  */
 /*
                =.            This file is part of the Opie Project
@@ -58,10 +58,7 @@ class MultiauthMainWindow : public QDialog {
         MultiauthMainWindow(bool allowBypass = false);
         ~MultiauthMainWindow();
         bool isAlreadyDone();
-    
-    protected:
-        void showEvent ( QShowEvent * );
-        
+
     private:
         QVBoxLayout * layout;
         QLabel * title, * message, * message2;

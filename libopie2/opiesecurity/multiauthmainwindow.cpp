@@ -75,15 +75,13 @@ MultiauthMainWindow::MultiauthMainWindow(bool allowBypass)
     {
         // we will need this button only if runPlugins() fails in proceed()
         proceedButton->hide();
+        // let's proceed now
+        proceed();
     }
 }
 
 /// nothing to do
 MultiauthMainWindow::~MultiauthMainWindow() {
-}
-
-void MultiauthMainWindow::showEvent ( QShowEvent * ) {
-    proceed();
 }
 
 /// launch the authentication
