@@ -44,35 +44,56 @@
 // #include <sys/vfs.h>
 // #include <mntent.h>
 
+#include <qdir.h>
+#include <qmap.h>
 
 static bool isCF(const QString& m)
 {
+    bool matched = false;
+    if(m.startsWith("/dev/")) {
+        QString blockdev = m.mid(5);
+                        
+        QDir pcmciadir("/sys/bus/pcmcia/devices");
+        pcmciadir.setFilter( QDir::Dirs );
 
-#ifndef Q_OS_MACX
-    FILE* f = fopen("/var/run/stab", "r");
-    if (!f) f = fopen("/var/state/pcmcia/stab", "r");
-    if (!f) f = fopen("/var/lib/pcmcia/stab", "r");
-    if ( f )
-    {
-        char line[1024];
-        char devtype[80];
-        char devname[80];
-        while ( fgets( line, 1024, f ) )
-        {
-            // 0       ide     ide-cs  0       hda     3       0
-            if ( sscanf(line,"%*d %s %*s %*s %s", devtype, devname )==2 )
-            {
-                if ( QString(devtype) == "ide" && m.find(devname)>0 )
-                {
-                    fclose(f);
-                    return TRUE;
+        QMap<QString,QString> pcmciadevs;
+        for ( unsigned int i=0; i<pcmciadir.count(); i++ ) {
+            QString devid = pcmciadir[i];
+            if(devid[0] == '.') continue;
+            QDir pcmciadevdir("/sys/bus/pcmcia/devices/" + devid);
+            // Now we need to split out the socket number
+            devid = QStringList::split('.', devid)[0];
+            pcmciadevs.insert( devid, pcmciadevdir.canonicalPath() );
+        }
+
+        if(!pcmciadevs.isEmpty()) {
+            QDir blockdir("/sys/block");
+            blockdir.setFilter( QDir::Dirs );
+    
+            for ( unsigned int i=0; i<blockdir.count(); i++ ) {
+                if(blockdir[i][0] == '.') continue;
+                QString fpath = "/sys/block/" + blockdir[i];
+                if ( QFile::exists( fpath + "/" + blockdev ) || fpath == blockdev ) {
+                    // Check if mount point is associated with a PCMCIA device
+                    bool matched = false;
+                    if(!pcmciadevs.isEmpty()) {
+                        QDir devdir(fpath + "/device");
+                        QString devlink = devdir.canonicalPath();
+
+                        QMap<QString,QString>::Iterator pit;
+                        for( pit = pcmciadevs.begin(); pit != pcmciadevs.end(); ++pit ) {
+                            if ( devlink.startsWith(pit.data()) ) {
+                                matched = true;
+                                break;
+                            }
+                        }
+                    }
+                    break;
                 }
             }
         }
-        fclose(f);
     }
-#endif /* Q_OS_MACX */
-    return FALSE;
+    return matched;
 }
 
 /*! \class StorageInfo storage.h
@@ -105,12 +126,18 @@ StorageInfo::StorageInfo( QObject *parent )
 */
 const FileSystem *StorageInfo::fileSystemOf( const QString &filename )
 {
+    const FileSystem *fs = 0;
+    unsigned int maxlen = 0;
+    
     for (QListIterator<FileSystem> i(mFileSystems); i.current(); ++i)
     {
-        if ( filename.startsWith( (*i)->path() ) )
-            return (*i);
+        const QString &path = (*i)->path();
+        if ( (path.length() > maxlen) && filename.startsWith( path ) ) {
+            fs = (*i);
+            maxlen = path.length();
+        }
     }
-    return 0;
+    return fs;
 }
 
 
