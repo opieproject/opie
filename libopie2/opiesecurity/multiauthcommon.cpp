@@ -171,6 +171,7 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     OwnerInfoDialogLayout->addItem( spacer_2 );
 
     lbMessage = new QLabel( this, "lbMessage" );
+    lbMessage->setAlignment( AlignLeft | AlignVCenter | ExpandTabs | WordBreak );
     OwnerInfoDialogLayout->addWidget( lbMessage );
     QSpacerItem* spacer_3 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     OwnerInfoDialogLayout->addItem( spacer_3 );
@@ -387,7 +388,9 @@ void showOwnerInfo()
             ownerInfoDialog.lbEmailLabel->hide();
         }
 
-        ownerInfoDialog.lbMessage->setText( config.readEntry("Message", "" ) );
+        QString msg = config.readEntry("Message", "" );
+        msg = msg.replace( QRegExp("\\\\n"), "\n" );
+        ownerInfoDialog.lbMessage->setText( msg );
     }
     else {
         ownerInfoDialog.lbMessage->setText( QObject::tr ( "Owner information has not been entered" ) );
