@@ -451,6 +451,8 @@ void TextEdit::accept()
         if(save())
             qApp->quit();
     }
+    else
+        qApp->quit();
 }
 
 void TextEdit::zoomIn()
