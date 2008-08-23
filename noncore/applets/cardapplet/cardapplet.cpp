@@ -195,9 +195,10 @@ void CardApplet::mousePressEvent( QMouseEvent* )
         QPixmap mpm = Opie::Core::OResource::loadPixmap( "cardmon/ide", Opie::Core::OResource::SmallIcon );
 
         QMap<QString,QString>::Iterator it;
+        int idx = 1;
         for( it = m_mounts.begin(); it != m_mounts.end(); ++it ) {
             QPopupMenu* submenu = new QPopupMenu( menu );
-            submenu->insertItem( tr("Safely remove"), EJECT+((i+1)*1000) );
+            submenu->insertItem( tr("Safely remove"), EJECT+((idx++)*1000) );
             connect( submenu, SIGNAL(activated(int)), this, SLOT(userCardAction(int)) );
             menu->insertItem( mpm, tr( "%1" ).arg( (*it) ), submenu, i++ );
         }
@@ -350,7 +351,7 @@ void CardApplet::updateMounts( bool showPopup )
                             QMap<QString,QString>::Iterator pit;
                             for( pit = pcmciadevs.begin(); pit != pcmciadevs.end(); ++pit ) {
                                 if ( devlink.startsWith(pit.data()) ) {
-                                    m_cardmounts.insert( fs, pit.key().toInt() );
+                                    m_cardmounts.insert( mntdir, pit.key().toInt() );
                                     matched = true;
                                     odebug << "MATCHED " << fs << " to " << pit.key() << oendl;
                                     break;
@@ -360,27 +361,23 @@ void CardApplet::updateMounts( bool showPopup )
 
                         if (!matched) {
                             // Attempt to determine if the device is removable
+                            // Actually, I think this first test is useless because the removable flag
+                            // seems to pretty much always be 0 :-/
                             QFile f(fpath + "/removable");
                             bool removable = false;
                             if ( f.open(IO_ReadOnly) ) {
                                 if(f.getch() == '1')
                                     removable = true;
                             }
-                            else
-                                odebug << "could not open " << fpath + "/removable" << oendl;
                             
                             if(!removable && mntdir != "/") {
-                                const FileSystem *fsi = storage.fileSystemOf(fs);
-                                if(fsi) {
-                                    if(fsi->isRemovable())
-                                        removable = true;
-                                }
+                                const FileSystem *fsi = storage.fileSystemOf(mntdir);
+                                if(fsi)
+                                    removable = fsi->isRemovable();
                             }
 
-                            if(removable) {
-                                odebug << "CARDAPPLET: " << fs << oendl;
+                            if(removable)
                                 blockdevs.insert(fs, mntdir);
-                            }
                             else
                                 odebug << fs << " is not removable" << oendl;
                         }
@@ -516,10 +513,12 @@ void CardApplet::slotExited( OProcess*  )
                 tr("<p>The device you are trying to remove is in use by the following applications:</p><pre>%1</pre><p>Please close these applications and then try again.").arg( m_commandStdout.stripWhiteSpace() ) );
         }
         else if ( m_commandOrig == CMD_UNMOUNT ) {
-            if(m_ejectMode == EM_UNMOUNT) {
+            if(m_ejectMode == EM_UNMOUNT && m_ejectSocket > -1 ) {
                 m_ejectMode = EM_EJECT;
                 userCardAction( (m_ejectSocket * 100) + EJECT );
             }
+            else
+                m_ejectMode = EM_NONE;
         }
     }
 }
@@ -600,7 +599,8 @@ void CardApplet::userCardAction( int action )
                 int i = 0;
                 for( it = m_mounts.begin(); it != m_mounts.end(); ++it ) {
                     if(i == mountpoint) {
-                        unmount( it.key(), true);
+                        m_ejectSocket = -1;
+                        unmount( it.data(), true);
                         break;
                     }
                     i++;
