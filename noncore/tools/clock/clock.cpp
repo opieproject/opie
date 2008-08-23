@@ -63,6 +63,11 @@ static const int sw_prec = 2;
 static const int magic_daily = 2292922;
 static const int magic_countdown = 2292923;
 static const int magic_snooze = 2292924;
+static const int ALARMTYPE_DEFALARM = 0;
+static const int ALARMTYPE_EXTERNAL = 1;
+static const int ALARMTYPE_OPIEPLAYER = 2;
+static const int ALARMTYPE_OPIEPLAYER2 = 3;
+static const int DEFAULT_ALARMTYPE = ALARMTYPE_DEFALARM;
 static const char ALARM_CLOCK_CHANNEL [] = "QPE/Application/clock";
 static const char ALARM_CLOCK_MESSAGE [] = "alarm(QDateTime,int)";
 
@@ -98,7 +103,7 @@ static void startPlayer()
     sleep(3);
     QString file = config.readEntry( "mp3File", "" );
     if(file != "" && QFile::exists(file)) {
-        if( config.readNumEntry( "mp3Player", 2 ) == 2 )
+        if( config.readNumEntry( "mp3Player", DEFAULT_ALARMTYPE ) == ALARMTYPE_OPIEPLAYER )
             playFile( file, false );
         else
             playFile( file, true );
@@ -300,7 +305,7 @@ Clock::Clock( QWidget * parent, const char *, WFlags f )
     Config cfg_qpe( "qpe" );
     cfg_qpe.setGroup( "Time" );
     sndFileName->setText( cfg_qpe.readEntry( "mp3File" ) );
-    sndOption->setCurrentItem( cfg_qpe.readNumEntry( "mp3Player" ) );
+    sndOption->setCurrentItem( cfg_qpe.readNumEntry( "mp3Player", DEFAULT_ALARMTYPE ) );
     slotSoundChange(sndOption->currentItem());
 
     int m = cConfig.readNumEntry( "Minute", 0 );
@@ -613,13 +618,13 @@ void Clock::appMessage( const QCString &msg, const QByteArray &data )
 
             Config config( "qpe" );
             config.setGroup("Time");
-            int player = config.readNumEntry("mp3Player");
-            if(player == 0) {
+            int player = config.readNumEntry("mp3Player", DEFAULT_ALARMTYPE);
+            if(player == ALARMTYPE_DEFALARM) {
                 Sound::soundAlarm();
                 alarmCount = 0;
                 alarmt->start( 5000 );
             }
-            else if(player == 2) {
+            else if(player == ALARMTYPE_OPIEPLAYER || player == ALARMTYPE_OPIEPLAYER2 ) {
                 pthread_t thread;
                 pthread_create(&thread,NULL, (void * (*) (void *))startPlayer, NULL/* &*/ );
             }
@@ -846,8 +851,8 @@ void Clock::slotBrowseMp3File()
 void Clock::slotTestAlarmSound()
 {
     int player = sndOption->currentItem();
-    if( player == 2 || player == 3 )
-        playFile( sndFileName->text(), player == 3 );
+    if( player == ALARMTYPE_OPIEPLAYER || player == ALARMTYPE_OPIEPLAYER2 )
+        playFile( sndFileName->text(), player == ALARMTYPE_OPIEPLAYER2 );
     else
         alarmPlayTest( sndFileName->text() );
 }
