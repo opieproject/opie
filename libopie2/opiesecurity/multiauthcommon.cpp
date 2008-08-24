@@ -36,7 +36,12 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
 {
     if ( !name )
         setName( "OwnerInfoDialog" );
-    resize( 254, 400 );
+
+    if ( fullscreen ) {
+        QRect desk = qApp->desktop()->geometry();
+        setGeometry( 0, 0, desk.width(), desk.height() );
+    }
+
     OwnerInfoDialogLayout = new QVBoxLayout( this );
     OwnerInfoDialogLayout->setSpacing( 6 );
     OwnerInfoDialogLayout->setMargin( 11 );
@@ -45,13 +50,22 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     Layout5->setSpacing( 6 );
     Layout5->setMargin( 0 );
 
-    TextLabel1 = new QLabel( this, "TextLabel1" );
-    TextLabel1->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)5, (QSizePolicy::SizeType)1, TextLabel1->sizePolicy().hasHeightForWidth() ) );
-    TextLabel1->setMinimumSize( QSize( 0, 20 ) );
-    TextLabel1->setText( tr( "<h1>Owner</h1>" ) );
-    Layout5->addWidget( TextLabel1 );
+    // I'd rather this be laid out with the Owner label on the left, however 
+    // there is apparently something in the top left of the dialog that
+    // covers the text. I couldn't figure out the cause so I had no choice 
+    // but to align the label to the right so it is at least readable.
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
     Layout5->addItem( spacer );
+    TextLabel1 = new QLabel( this, "TextLabel1" );
+    TextLabel1->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Minimum, false ) );
+    QFont f( TextLabel1->font() );
+    f.setPointSize(18);
+    f.setBold(true);
+    TextLabel1->setFont(f);
+    TextLabel1->setMinimumSize( QSize( 0, 20 ) );
+    TextLabel1->setText( tr( "Owner" ) + "  " );
+    TextLabel1->setAlignment( AlignVCenter | AlignRight ); 
+    Layout5->addWidget( TextLabel1 );
 
     pxIcon = new QLabel( this, "pxIcon" );
     pxIcon->setScaledContents( FALSE );
@@ -98,7 +112,7 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     Layout8->addWidget( lbHomeAddressLabel, 5, 0 );
 
     lbWorkAddress = new QLabel( this, "lbWorkAddress" );
-    lbWorkAddress->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)1, (QSizePolicy::SizeType)4, lbWorkAddress->sizePolicy().hasHeightForWidth() ) );
+    lbWorkAddress->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum, false ) );
     lbWorkAddress->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
 
     Layout8->addWidget( lbWorkAddress, 6, 1 );
@@ -130,7 +144,7 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     Layout8->addWidget( lbWorkPhoneLabel, 2, 0 );
 
     lbHomeAddress = new QLabel( this, "lbHomeAddress" );
-    lbHomeAddress->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)1, (QSizePolicy::SizeType)4, lbHomeAddress->sizePolicy().hasHeightForWidth() ) );
+    lbHomeAddress->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Minimum, false ) );
     lbHomeAddress->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );
 
     Layout8->addWidget( lbHomeAddress, 5, 1 );
@@ -180,11 +194,6 @@ SecOwnerDlg::SecOwnerDlg( QWidget *parent, const char * name,
     pbOK->setMinimumSize( QSize( 0, 40 ) );
     pbOK->setText( tr( "OK" ) );
     OwnerInfoDialogLayout->addWidget( pbOK );
-
-    if ( fullscreen ) {
-        QRect desk = qApp->desktop()->geometry();
-        setGeometry( 0, 0, desk.width(), desk.height() );
-    }
 
     pxIcon->setPixmap( Opie::Core::OResource::loadPixmap( "security/ownerinfo", Opie::Core::OResource::BigIcon ) );
 
@@ -371,8 +380,11 @@ void showOwnerInfo()
 
         // Work Address
         if ( config.readBoolEntry("ShowWorkAddress", FALSE ) ) {
-            ownerInfoDialog.lbWorkAddress->setText( cont.company()
-                    + '\n' + cont.displayBusinessAddress() );
+            QString addr = cont.company();
+            if (addr != "")
+                addr += '\n';
+            addr += cont.displayBusinessAddress();
+            ownerInfoDialog.lbWorkAddress->setText( addr );
         }
         else {
             ownerInfoDialog.lbWorkAddress->hide();
