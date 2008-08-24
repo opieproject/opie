@@ -47,6 +47,7 @@ LauncherClock::LauncherClock( QWidget *parent ) : QLabel( parent )
     connect( qApp, SIGNAL( clockChanged(bool) ),
         this, SLOT( slotClockChanged(bool) ) );
 
+    setAlignment( AlignHCenter | AlignVCenter );
     readConfig();
     timerId = 0;
     timerEvent( 0 );
