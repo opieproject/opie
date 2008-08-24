@@ -1,0 +1,57 @@
+<!DOCTYPE UI><UI>
+<class>ExceptionsBase</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>ExceptionsBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>227</width>
+            <height>266</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Exceptions</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>2</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>2</number>
+        </property>
+        <widget>
+            <class>QListBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>lbExceptions</cstring>
+            </property>
+        </widget>
+        <widget>
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>cmdRemove</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Remove</string>
+            </property>
+        </widget>
+    </vbox>
+</widget>
+</UI>

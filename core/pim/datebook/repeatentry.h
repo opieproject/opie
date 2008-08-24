@@ -52,12 +52,14 @@ public:
                  bool modal = TRUE, WFlags fl = 0 );
     RepeatEntry( bool startOnMonday,
 		 const Event::RepeatPattern &rp, const QDate &start,
+         const QString &exceptions,
 		 QWidget *parent = 0, const char *name = 0, bool modal = TRUE,
 		 WFlags fl = 0 );
     ~RepeatEntry();
 
     Event::RepeatPattern repeatPattern();
     QDate endDate() { return end; };
+    const QString &getExceptions() { return exceptions; };
 
 public slots:
     void slotSetRType( int );
@@ -70,6 +72,7 @@ private slots:
     void slotWeekLabel();
     void slotMonthLabel( int );
     void slotChangeStartOfWeek( bool onMonday );
+    void slotEditExceptions();
 
 private:
     void setupNone();
@@ -90,6 +93,7 @@ private:
     repeatButtons currInterval;
     bool startWeekOnMonday;
     DateBookMonth *repeatPicker;
+    QString exceptions;
 };
 
 inline void RepeatEntry::hideExtras()

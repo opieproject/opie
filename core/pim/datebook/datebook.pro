@@ -18,7 +18,8 @@ HEADERS	= datebookday.h \
 	  onoteedit.h \
 	  datebookdayallday.h  \
 	  namespace_hack.h \
-          datebooktypes.h
+          datebooktypes.h \
+          exceptions.h
 SOURCES	= main.cpp \
 	  datebookday.cpp \
 	  datebook.cpp \
@@ -37,7 +38,8 @@ SOURCES	= main.cpp \
 	  repeatentry.cpp \
 	  noteentryimpl.cpp \
 	  onoteedit.cpp \
-	  datebookdayallday.cpp
+	  datebookdayallday.cpp \
+      exceptions.cpp
 INTERFACES	= dateentry.ui \
 		  datebookdayheader.ui \
 		  datebookweekheader.ui \
@@ -45,7 +47,8 @@ INTERFACES	= dateentry.ui \
  		  modules/weeklst/datebookweeklstdayhdrbase.ui \
  		  repeatentrybase.ui \
 		  datebooksettingsbase.ui \
-		  noteentry.ui
+		  noteentry.ui \
+		  exceptionsbase.ui
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopieui2 -lopiecore2 -lopiepim2

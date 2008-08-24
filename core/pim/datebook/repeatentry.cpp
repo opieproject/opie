@@ -39,6 +39,8 @@
 #include <time.h>
 #include <opie2/osortweekdaybuttons.h>
 
+#include <exceptions.h>
+
 // Global Templates for use in setting up the repeat label...
 // the problem is these strings get initialized before QPEApplication can install the translator -zecke
 namespace {
@@ -93,13 +95,14 @@ RepeatEntry::RepeatEntry( bool startOnMonday,
 }
 
 RepeatEntry::RepeatEntry( bool startOnMonday, const Event::RepeatPattern &rp,
-                          const QDate &startDate,
+                          const QDate &startDate, const QString &exceptions,
                           QWidget *parent, const char *name, bool modal,
 			  WFlags fl )
     : RepeatEntryBase( parent, name, modal, fl ),
       start( startDate ),
       end( rp.endDate() ),
-      startWeekOnMonday( startOnMonday )
+      startWeekOnMonday( startOnMonday ),
+      exceptions( exceptions )
 {
     if (strDayTemplate.isEmpty() )
         fillStrings();
@@ -361,6 +364,8 @@ void RepeatEntry::init()
                       this, SLOT(endDateChanged(int,int,int)) );
     QObject::connect( qApp, SIGNAL(weekChanged(bool)),
 		      this, SLOT(slotChangeStartOfWeek(bool)) );
+    QObject::connect( cmdExceptions, SIGNAL(clicked()),
+              this, SLOT(slotEditExceptions()) );
 
     listRTypeButtons.setAutoDelete( TRUE );
     listRTypeButtons.append( cmdNone );
@@ -557,6 +562,15 @@ void RepeatEntry::slotChangeStartOfWeek( bool onMonday )
     spinFreq->setValue( saveSpin );
     sortWeekdayButtons( days, startWeekOnMonday, fraExtra );
     slotWeekLabel();
+}
+
+void RepeatEntry::slotEditExceptions()
+{
+    Exceptions *e = new Exceptions(exceptions, this, 0, WType_Modal);
+    if ( QPEApplication::execDialog( e ) ) {
+        exceptions = e->getExceptions();
+    }
+    delete e;
 }
 
 static int week( const QDate &start )

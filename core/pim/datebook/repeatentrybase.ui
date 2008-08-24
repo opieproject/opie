@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: repeatentrybase.ui,v 1.1 2002-01-25 22:14:29 kergoth Exp $
+** $Id: repeatentrybase.ui,v 1.2 2008-08-24 11:56:05 paule Exp $
 **
 *********************************************************************</comment>
 <widget>
@@ -657,6 +657,28 @@
                     </property>
                 </widget>
             </vbox>
+        </widget>
+        <widget>
+            <class>QToolButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>cmdExceptions</cstring>
+            </property>
+            <property stdset="1">
+                <name>sizePolicy</name>
+                <sizepolicy>
+                    <hsizetype>3</hsizetype>
+                    <vsizetype>0</vsizetype>
+                </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>focusPolicy</name>
+                <enum>TabFocus</enum>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Exceptions...</string>
+            </property>
         </widget>
     </vbox>
 </widget>

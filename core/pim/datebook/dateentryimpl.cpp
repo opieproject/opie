@@ -391,13 +391,14 @@ void DateEntry::slotRepeat()
     // it is better in my opinion to just grab this from the mother,
     // since, this dialog doesn't need to keep track of it...
     if ( rp.type != Event::NoRepeat )
-        e = new RepeatEntry( startWeekOnMonday, rp, startDate, this);
+        e = new RepeatEntry( startWeekOnMonday, rp, startDate, exceptions, this);
     else
         e = new RepeatEntry( startWeekOnMonday, startDate, this );
 
     if ( QPEApplication::execDialog( e ) ) {
         rp = e->repeatPattern();
         setRepeatLabel();
+        exceptions = e->getExceptions();
     }
     // deleting sounds like a nice idea...
     delete e;
