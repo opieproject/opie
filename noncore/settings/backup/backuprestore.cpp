@@ -531,24 +531,27 @@ int BackupAndRestore::getBackupFiles(QString &backupFiles, QListViewItem *parent
 void BackupAndRestore::sourceDirChanged(int selection)
 {
     restoreList->clear();
-    rescanFolder(backupLocations[restoreSource->text(selection)]);
+    QString backuploc = backupLocations[restoreSource->text(selection)];
+    rescanFolder(backuploc, getDeviceOf(backuploc));
 }
 
 void BackupAndRestore::fileListUpdate()
 {
     owarn << "void BackupAndRestore::fileListUpdate()" << oendl;
     restoreList->clear();
-    rescanFolder( backupLocations[restoreSource->currentText()] );
+    QString backuploc = backupLocations[restoreSource->currentText()];
+    rescanFolder(backuploc, getDeviceOf(backuploc));
 }
 
 /**
  * Scans directory for any backup files.  Will recursivly go down,
- * but will not follow symlinks.
+ * but will not follow symlinks or cross into different filesystems.
  * @param directory - the directory to look in.
+ * @param origdev - the device ID of the top level folder (use getDeviceOf())
  */
-void BackupAndRestore::rescanFolder(QString directory)
+void BackupAndRestore::rescanFolder(QString directory, __dev_t origdev)
 {
-    //odebug << QString("rescanFolder: ") + directory.latin1() << oendl;
+    odebug << QString("rescanFolder: ") + directory.latin1() << oendl;
     QDir d(directory);
     if(!d.exists())
         return;
@@ -560,11 +563,16 @@ void BackupAndRestore::rescanFolder(QString directory)
     while ( (file=it.current()) )
     {  // for each file...
         // If it is a dir and not .. or . then add it as a tab and go down.
+        QString filename = file->fileName();
         if(file->isDir())
         {
-            if(file->fileName() != ".." && file->fileName() != ".")
+            if(filename != ".." && filename != ".")
             {
-                rescanFolder(directory + "/" + file->fileName());
+                if ( origdev == getDeviceOf(filename) ) 
+                {
+                    filename = directory + "/" + filename;
+                    rescanFolder(filename, origdev);
+                }
             }
         }
         else
@@ -575,6 +583,15 @@ void BackupAndRestore::rescanFolder(QString directory)
         }
         ++it;
     }
+}
+
+__dev_t BackupAndRestore::getDeviceOf ( const QString &filename )
+{
+    struct stat st;
+    if( stat(filename, &st) == 0 )
+        return st.st_dev;
+    else
+        return 0;
 }
 
 /**

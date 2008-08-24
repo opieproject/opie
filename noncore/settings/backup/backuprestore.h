@@ -33,6 +33,7 @@
 #include "backuprestorebase.h"
 #include <qmap.h>
 #include <qlist.h>
+#include <sys/stat.h>
 
 class QListViewItem;
 class QStringList;
@@ -54,7 +55,7 @@ private slots:
     void restore();
     void selectItem(QListViewItem *currentItem);
     void sourceDirChanged(int);
-    void rescanFolder(QString directory);
+    void rescanFolder(QString directory, __dev_t origdev);
     void fileListUpdate();
 
     void addLocation();
@@ -70,6 +71,7 @@ private:
     QList<QListViewItem> getAllItems(QListViewItem *item, QList<QListViewItem> &list);
     void refreshBackupLocations();
     void refreshLocations();
+    __dev_t getDeviceOf( const QString &filename );
 
     void backupUserData();
     void backupRootFs();
