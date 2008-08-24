@@ -1,25 +1,26 @@
 /*
-               =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 Maximilian Reiss <max.reiss@gmx.de>
+                             This file is part of the Opie Project
+             =.              Copyright (c)  2002 Maximilian Reiss <max.reiss@gmx.de>
+            .=l.
            .>+-=
- _;:,     .>    :=|.         This library is free software; you can
-.> <,   >  .   <=           redistribute it and/or  modify it under
-:=1 )Y*s>-.--   :            the terms of the GNU Library General Public
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; version 2 of the License.
-     ._= =}       :
-    .%+i>       _;_.
-    .i_,=:_.      -<s.       This library is distributed in the hope that
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
     : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|     MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>:      PARTICULAR PURPOSE. See the GNU
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
 ..}^=.=       =       ;      Library General Public License for more
-++=   -.     .     .:        details.
+++=   -.     .`     .:       details.
  :     =  ...= . :.=-
  -.   .:....=;==+<;          You should have received a copy of the GNU
   -_. . .   )=.  =           Library General Public License along with
-    --        :-=            this library; see the file COPYING.LIB.
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -131,10 +132,14 @@ namespace OpieTooth {
                      list.grep( "BLUETOOTH_PROTOCOL=" ).count() > 0 &&
                      list.grep( "BLUETOOTH_SPEED=" ).count() > 0)
                 {
-                    btDevice =
-                        new Device( list.grep( "BLUETOOTH_PORT=" )[0].replace( QString( "BLUETOOTH_PORT=" ), ""),
-                                    list.grep( "BLUETOOTH_PROTOCOL=" )[0].replace( QString( "BLUETOOTH_PROTOCOL=" ), ""),
-                                    list.grep( "BLUETOOTH_SPEED=" )[0].replace( QString( "BLUETOOTH_SPEED=" ), "" ) );
+                    QString port  = list.grep( "BLUETOOTH_PORT=" )[0].replace( QString( "BLUETOOTH_PORT=" ), "");
+                    QString proto = list.grep( "BLUETOOTH_PROTOCOL=" )[0].replace( QString( "BLUETOOTH_PROTOCOL=" ), "");
+                    QString speed = list.grep( "BLUETOOTH_SPEED=" )[0].replace( QString( "BLUETOOTH_SPEED=" ), "");
+                    
+                    if(proto.stripWhiteSpace() == "")
+                        proto = "any";
+                    
+                    btDevice = new Device( port, proto, speed );
                     return 0;
                }
             }
@@ -158,7 +163,7 @@ namespace OpieTooth {
                 break;
 
             case Model_iPAQ_H22xx:
-                btDevice = new Device( "/dev/tts/3", "any", "921600" );
+                btDevice = new Device( "/dev/ttyS3", "any", "921600" );
                 break;
 
             default:
