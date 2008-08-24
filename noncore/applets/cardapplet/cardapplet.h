@@ -83,6 +83,7 @@ class CardApplet : public QWidget
     Opie::Core::OProcess *m_process;
     QMap<QString,QString> m_mounts;
     QMap<QString,int> m_cardmounts;
+    QMap<int,QString> m_cardnames;
     int m_ejectMode;
     int m_ejectSocket;
 

@@ -165,12 +165,12 @@ void CardApplet::mousePressEvent( QMouseEvent* )
         while ( it.current() )
         {
             QPopupMenu* submenu = new QPopupMenu( menu );
-            submenu->insertItem( "&Eject",     EJECT+i*100 );
-            submenu->insertItem( "&Insert",    INSERT+i*100 );
-            submenu->insertItem( "&Suspend",   SUSPEND+i*100 );
-            submenu->insertItem( "&Resume",    RESUME+i*100 );
-            submenu->insertItem( "Rese&t",     RESET+i*100 );
-            submenu->insertItem( "&Configure", CONFIGURE+i*100 );
+            submenu->insertItem( tr("&Eject"),     EJECT+i*100 );
+            submenu->insertItem( tr("&Insert"),    INSERT+i*100 );
+            submenu->insertItem( tr("&Suspend"),   SUSPEND+i*100 );
+            submenu->insertItem( tr("&Resume"),    RESUME+i*100 );
+            submenu->insertItem( tr("Rese&t"),     RESET+i*100 );
+            submenu->insertItem( tr("&Configure"), CONFIGURE+i*100 );
 
             bool isSuspended = it.current()->isSuspended();
             bool isEmpty = it.current()->isEmpty();
@@ -198,7 +198,7 @@ void CardApplet::mousePressEvent( QMouseEvent* )
         int idx = 1;
         for( it = m_mounts.begin(); it != m_mounts.end(); ++it ) {
             QPopupMenu* submenu = new QPopupMenu( menu );
-            submenu->insertItem( tr("Safely remove"), EJECT+((idx++)*1000) );
+            submenu->insertItem( tr("&Eject"), EJECT+((idx++)*1000) );
             connect( submenu, SIGNAL(activated(int)), this, SLOT(userCardAction(int)) );
             menu->insertItem( mpm, tr( "%1" ).arg( (*it) ), submenu, i++ );
         }
@@ -228,78 +228,101 @@ void CardApplet::cardMessage( const QCString & msg, const QByteArray & )
 
 void CardApplet::updatePcmcia()
 {
-    /* check if a previously unknown card has been inserted */
+    static bool excllock = false;
+
+    if(excllock)
+        return;
+    
+    excllock = true;
+    
     OPcmciaSystem::instance()->synchronize();
-
-    if ( !OPcmciaSystem::instance()->cardCount() ) return;
-
-    OConfig cfg( "PCMCIA" );
-    cfg.setGroup( "Global" );
-    int nCards = cfg.readNumEntry( "nCards", 0 );
 
     OPcmciaSystem* sys = OPcmciaSystem::instance();
     OPcmciaSystem::CardIterator it = sys->iterator();
 
-    bool newCard = true;
-    OPcmciaSocket* theCard = 0;
-
-    while ( it.current() && newCard )
+    // This is protection against receiving duplicate events - for some
+    // reason with the udev script on h2200 you get about 5 notifications
+    // for each card insert.
+    bool changed = false;
+    while ( it.current() )
     {
-        if ( it.current()->isEmpty() )
-        {
-            odebug << "pcmcia: skipping empty card in socket " << it.current()->number() << oendl;
-            ++it;
-            continue;
+        QString cardname = "$$$NOCARD$";
+        int socketnum = it.current()->number();
+        if ( ! it.current()->isEmpty() )
+            cardname = it.current()->productIdentity();
+        if ( m_cardnames[socketnum] != cardname ) {
+            changed = true;
+            m_cardnames[socketnum] = cardname;
         }
-        else
+        ++it;
+    }
+
+    /* check if a previously unknown card has been inserted */
+    if ( sys->cardCount() != 0 && changed ) {
+        OConfig cfg( "PCMCIA" );
+        cfg.setGroup( "Global" );
+        int nCards = cfg.readNumEntry( "nCards", 0 );
+
+        bool newCard = true;
+        OPcmciaSocket* theCard = 0;
+
+        it = sys->iterator();
+        while ( it.current() && newCard )
         {
-            theCard = it.current();
-            QString cardName = theCard->productIdentity();
-            for ( int i = 0; i < nCards; ++i )
+            if ( it.current()->isEmpty() )
             {
-                QString cardSection = QString( "Card_%1" ).arg( i );
-                cfg.setGroup( cardSection );
-                QString name = cfg.readEntry( "name" );
-                odebug << "pcmcia: comparing card '" << cardName << "' with known card '" << name << "'" << oendl;
-                if ( cardName == name )
+                odebug << "pcmcia: skipping empty card in socket " << it.current()->number() << oendl;
+                ++it;
+                continue;
+            }
+            else
+            {
+                theCard = it.current();
+                QString cardName = theCard->productIdentity();
+                for ( int i = 0; i < nCards; ++i )
                 {
-                    newCard = false;
-                    odebug << "pcmcia: we have seen this card before" << oendl;
-                    executeAction( theCard, "insert" );
-                    break;
+                    QString cardSection = QString( "Card_%1" ).arg( i );
+                    cfg.setGroup( cardSection );
+                    QString name = cfg.readEntry( "name" );
+                    odebug << "pcmcia: comparing card '" << cardName << "' with known card '" << name << "'" << oendl;
+                    if ( cardName == name )
+                    {
+                        newCard = false;
+                        odebug << "pcmcia: we have seen this card before" << oendl;
+                        executeAction( theCard, "insert" );
+                        break;
+                    }
+                }
+                if ( !newCard ) ++it; else break;
+            }
+        }
+
+        if ( !theCard ) {
+            owarn << "pcmcia: Finished working through cards in PCMCIA system but I do not have a valid card handle" << oendl;
+        }
+        else {
+            if ( newCard )
+            {
+                odebug << "pcmcia: unconfigured card detected" << oendl;
+                QString newCardName = theCard->productIdentity();
+                int result = QMessageBox::information( qApp->desktop(),
+                                                tr( "PCMCIA/CF Subsystem" ),
+                                                tr( "<qt>You have inserted the card<br/><b>%1</b><br/>This card is not yet configured. Do you want to configure it now?</qt>" ).arg( newCardName ),
+                                                tr( "Yes" ), tr( "No" ), 0, 0, 1 );
+                odebug << "pcmcia: result = " << result << oendl;
+                if ( result == 0 )
+                {
+                    configure( theCard );
+                }
+                else
+                {
+                    odebug << "pcmcia: user doesn't want to configure " << newCardName << " now." << oendl;
                 }
             }
-            if ( !newCard ) ++it; else break;
         }
     }
 
-    if ( !theCard ) {
-        owarn << "pcmcia: Finished working through cards in PCMCIA system but I do not have a valid card handle" << oendl;
-        return;
-    }
-
-    if ( newCard )
-    {
-        odebug << "pcmcia: unconfigured card detected" << oendl;
-        QString newCardName = theCard->productIdentity();
-        int result = QMessageBox::information( qApp->desktop(),
-                                        tr( "PCMCIA/CF Subsystem" ),
-                                        tr( "<qt>You have inserted the card<br/><b>%1</b><br/>This card is not yet configured. Do you want to configure it now?</qt>" ).arg( newCardName ),
-                                        tr( "Yes" ), tr( "No" ), 0, 0, 1 );
-        odebug << "pcmcia: result = " << result << oendl;
-        if ( result == 0 )
-        {
-            configure( theCard );
-        }
-        else
-        {
-            odebug << "pcmcia: user doesn't want to configure " << newCardName << " now." << oendl;
-        }
-    }
-    else // it's an already configured card
-    {
-        odebug << "pcmcia: doing nothing... why do we come here?" << oendl;
-    }
+    excllock = false;
 }
 
 void CardApplet::updateMounts( bool showPopup )
@@ -409,10 +432,10 @@ void CardApplet::mountChanged( const QString &device, bool mounted )
     QString text = QString::null;
     QString what = QString::null;
     if ( mounted ) {
-        text += QObject::tr("Inserted %1").arg(device); // FIXME description
+        text += QObject::tr("%1 inserted").arg(device); // FIXME description
         what = "on";
     } else {
-        text += QObject::tr("Removed %1").arg(device);
+        text += QObject::tr("%1 removed").arg(device);
         what = "off";
     }
     #ifndef QT_NO_SOUND
@@ -530,6 +553,7 @@ void CardApplet::userCardAction( int action )
         int socket = action / 100;
         int what = action % 100;
         bool success = false;
+        QString sound = "";
 
         odebug << "cardapplet: user action on pcmcia socket " << socket << " requested. action = " << what << oendl;
 
@@ -542,6 +566,7 @@ void CardApplet::userCardAction( int action )
                 return;
             }
             case EJECT:
+                sound = "cardmon/cardoff";
                 if(m_ejectMode == EM_EJECT)
                     success = OPcmciaSystem::instance()->socket( socket )->eject();
                 else {
@@ -571,12 +596,18 @@ void CardApplet::userCardAction( int action )
             case RESET:    success = OPcmciaSystem::instance()->socket( socket )->reset();
                         break;
             case ACTIVATE: success = true;
+                        sound = "cardmon/cardon";
                         break;
             default:       odebug << "pcmcia: not yet implemented" << oendl;
         }
 
         if ( success )
         {
+            #ifndef QT_NO_SOUND
+            if( sound != "" )
+                QSound::play( Resource::findSound( sound ) );
+            #endif
+
             odebug << tr( "Successfully %1ed card in socket #%2" ).arg( actionText[action] ).arg( socket ) << oendl;
             popUp( tr( "Successfully %1ed card in socket #%2" ).arg( actionText[action] ).arg( socket ) );
         }
