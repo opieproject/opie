@@ -38,6 +38,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
+#include <stdlib.h>
 
 //===========================================================================
 
@@ -143,8 +144,19 @@ bool IrdaApplet::setIrdaStatus ( bool b )
     struct ifreq ifr;
     strcpy ( ifr. ifr_name, "irda0" );
 
-    if ( m_sockfd < 0 || ::ioctl ( m_sockfd, SIOCGIFFLAGS, &ifr ) < 0 )
+    if ( m_sockfd < 0 )
         return false;
+    
+    if ( ::ioctl ( m_sockfd, SIOCGIFFLAGS, &ifr ) < 0 ) {
+        // Try to start irattach service
+        if ( ! QFile::exists("/etc/init.d/irattach") ) 
+            return false;
+        if (::system( "/etc/init.d/irattach start" ) != 0)
+        return false;
+        // Now try reading interface again
+        if ( ::ioctl ( m_sockfd, SIOCGIFFLAGS, &ifr ) < 0 )
+            return false;
+    }
 
     if ( b )
         ifr. ifr_flags |= IFF_UP;
