@@ -1,4 +1,4 @@
-/* $Id: obexpush.cpp,v 1.1 2006-05-10 13:32:46 korovkin Exp $ */
+/* $Id: obexpush.cpp,v 1.2 2008-08-26 21:27:00 paule Exp $ */
 /* OBEX push functions implementation */
 /***************************************************************************
  *                                                                         *
@@ -49,23 +49,13 @@ ObexPush::~ObexPush()
  */
 int ObexPush::send(QString& mac, int port, QString& src, QString& dst)
 {
-    QString dev = mac;
-    QString execName = "ussp-push";
+    QString execName = "obextool";
     if (pushProc->isRunning())
         return 1;
     pushProc->clearArguments();
-    dev += "@";
-    dev += QString::number(port); 
-    if (!dst.isEmpty())
-        *pushProc << execName << "--timeo 30" << dev 
-            << QFile::encodeName(src) << QFile::encodeName(dst);
-    else
-        *pushProc << execName << "--timeo 30" << dev 
-            << QFile::encodeName(src) 
-            << QFile::encodeName(QFileInfo(src).fileName());
-    odebug << execName << " " << dev << " " << src << " " 
-        << ((!dst.isEmpty())? dst: QFileInfo(src).fileName()) << oendl;
-    pushProc->setUseShell(true);
+    *pushProc << execName << "push" << QFile::encodeName(src) << mac << QString::number(port);
+    odebug << execName << " " << src << " " << mac << " " << port << oendl;
+    //pushProc->setUseShell(true);
     if (!pushProc->start(OProcess::NotifyOnExit, OProcess::All))
         return -1;
     else 
