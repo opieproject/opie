@@ -67,6 +67,7 @@ using namespace Opie::Ui;
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
 #include <sys/vfs.h>
 #include <mntent.h>
+#include <sys/stat.h>
 #endif
 
 enum { CMD_UNMOUNT, CMD_FUSER, CMD_PSINFO };
@@ -74,6 +75,7 @@ enum { EM_NONE, EM_UNMOUNT, EM_EJECT };
 
 CardApplet::CardApplet( QWidget * parent ) : QWidget( parent ), popupMenu( 0 )
 {
+    findRootBlock();
     updateMounts( false );
 
     QCopChannel * pcmciaChannel = new QCopChannel( "QPE/Card", this );
@@ -348,8 +350,14 @@ void CardApplet::updateMounts( bool showPopup )
             QDir pcmciadevdir("/sys/bus/pcmcia/devices/" + devid);
             // Now we need to split out the socket number
             devid = QStringList::split('.', devid)[0];
-            pcmciadevs.insert( devid, pcmciadevdir.canonicalPath() );
-            odebug << "pcmcia " << devid << " " << pcmciadevdir.canonicalPath() << oendl;
+            QString devnode = pcmciadevdir.canonicalPath();
+            pcmciadevs.insert( devid, devnode );
+            odebug << "pcmcia " << devid << " " << devnode << oendl;
+            // Check if this is associated with the root device
+            if(m_rootdevnode != "" && m_rootdevnode.startsWith(devnode)) {
+                odebug << "CARD: root card is " << devid.toInt() << oendl;
+                m_cardmounts.insert( "/", devid.toInt() );
+            }
         }
 
         // Iterate over mount points
@@ -426,6 +434,53 @@ void CardApplet::updateMounts( bool showPopup )
     m_mounts = blockdevs;
 }
 
+void CardApplet::findRootBlock()
+{
+    // Find the /sys/block entry that corresponds to the root block device
+    m_rootdevnode = "";
+    struct stat st_root;
+    if(stat("/", &st_root) == 0) {
+        m_rootdev = st_root.st_dev;
+        unsigned int rootmaj = m_rootdev >> 8;
+        unsigned int rootmin = m_rootdev & 0xff;
+
+        QDir blockdir("/sys/block");
+        blockdir.setFilter( QDir::Dirs );
+        QString rootblock = "";
+        for ( unsigned int i=0; i<blockdir.count(); i++ ) {
+            QString blockname = blockdir[i];
+            if(blockname[0] == '.') continue;
+            QDir blocksubdir("/sys/block/" + blockname);
+            blocksubdir.setFilter( QDir::Dirs );
+            for ( unsigned int j=0; j<blocksubdir.count(); j++ ) {
+                QString blocksubname = blocksubdir[j];
+                if(blocksubname[0] == '.') continue;
+                if(blocksubname.startsWith(blockname)) {
+                    QFile f("/sys/block/" + blockname + "/" + blocksubname + "/dev");
+                    if ( f.open(IO_ReadOnly) ) {
+                        QString devaddr = "";
+                        if(f.readLine(devaddr, 16) > 0 ) {
+                            QStringList devparts = QStringList::split(':', devaddr);
+                            if(devparts.count() == 2) {
+                                if (devparts[0].toUInt() == rootmaj && devparts[1].toUInt() == rootmin) {
+                                    rootblock = "/sys/block/" + blockname;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if(rootblock != "") {
+                QDir rootdevdir(rootblock + "/device");
+                m_rootdevnode = rootdevdir.canonicalPath();
+                break;
+            }
+        }
+    }
+    
+    odebug << "CARD: root devnode = " << m_rootdevnode << oendl;
+}
 
 void CardApplet::mountChanged( const QString &device, bool mounted )
 {
@@ -512,10 +567,19 @@ void CardApplet::slotExited( OProcess*  )
                        "<p>%1").arg( m_commandStderr ) );
             }
             else if ( m_commandOrig == CMD_FUSER ) {
-                // fuser found no processes using the device, so we can proceed with unmounting
+                // fuser found no processes using the device
                 // Note that if fuser failed and is returning non-zero here for some other reason
                 // it doesn't really matter since the unmount will fail anyway
-                unmount(m_mountpt, false);
+                
+                // Move checked mount point to umount list
+                m_umount += m_check[0];
+                m_check.remove(m_check.begin());
+                if(m_check.isEmpty()) {
+                    // All checked, time to move onto unmounting
+                    umountNextMount();
+                }
+                else
+                    checkNextMount();
             }
             else if ( m_commandOrig == CMD_PSINFO ) {
                 // Getting info on used processes failed, can't do much more than show a generic message
@@ -536,12 +600,18 @@ void CardApplet::slotExited( OProcess*  )
                 tr("<p>The device you are trying to remove is in use by the following applications:</p><pre>%1</pre><p>Please close these applications and then try again.").arg( m_commandStdout.stripWhiteSpace() ) );
         }
         else if ( m_commandOrig == CMD_UNMOUNT ) {
-            if(m_ejectMode == EM_UNMOUNT && m_ejectSocket > -1 ) {
-                m_ejectMode = EM_EJECT;
-                userCardAction( (m_ejectSocket * 100) + EJECT );
+            // Unmount succeeded
+            m_umount.remove(m_umount.begin());
+            if(m_umount.isEmpty()) {
+                if(m_ejectMode == EM_UNMOUNT && m_ejectSocket > -1 ) {
+                    m_ejectMode = EM_EJECT;
+                    userCardAction( (m_ejectSocket * 100) + EJECT );
+                }
+                else
+                    m_ejectMode = EM_NONE;
             }
             else
-                m_ejectMode = EM_NONE;
+                umountNextMount();
         }
     }
 }
@@ -567,23 +637,35 @@ void CardApplet::userCardAction( int action )
             }
             case EJECT:
                 sound = "cardmon/cardoff";
-                if(m_ejectMode == EM_EJECT)
+                if(m_ejectMode == EM_EJECT) {
                     success = OPcmciaSystem::instance()->socket( socket )->eject();
+                }
                 else {
+                    // Set up list of mount points to check
                     m_ejectMode = EM_UNMOUNT;
                     m_ejectSocket = socket;
                     QMap<QString,int>::Iterator it;
-                    bool mountsexist = false;
+                    m_check.clear();
+                    m_umount.clear();
                     for( it = m_cardmounts.begin(); it != m_cardmounts.end(); ++it ) {
                         if(it.data() == socket) {
-                            unmount( it.key(), true );
-                            mountsexist = true;
+                            if(it.key() == "/") {
+                                QMessageBox::warning(0,
+                                    tr("Card in use"),
+                                    tr("<p>The system is running from the selected device - it cannot be removed.</p>" ));
+                                return;
+                            }
+                            m_check += it.key();
                         }
                     }
-                    if(mountsexist)
-                        return;
-                    else
+                    if(m_check.isEmpty()) {
+                        // This card has no associated mount points
                         success = OPcmciaSystem::instance()->socket( socket )->eject();
+                    }
+                    else {
+                        checkNextMount();
+                        return;
+                    }
                 }
                 m_ejectMode = EM_NONE;
                 break;
@@ -608,13 +690,13 @@ void CardApplet::userCardAction( int action )
                 QSound::play( Resource::findSound( sound ) );
             #endif
 
-            odebug << tr( "Successfully %1ed card in socket #%2" ).arg( actionText[action] ).arg( socket ) << oendl;
-            popUp( tr( "Successfully %1ed card in socket #%2" ).arg( actionText[action] ).arg( socket ) );
+            odebug << tr( "Successfully %1ed card in socket #%2" ).arg( actionText[what] ).arg( socket ) << oendl;
+            popUp( tr( "Successfully %1ed card in socket #%2" ).arg( actionText[what] ).arg( socket ) );
         }
         else
         {
-            odebug << tr( "Error while %1ing card in socket #%2" ).arg( actionText[action] ).arg( socket ) << oendl;
-            popUp( tr( "Error while %1ing card in socket #%2" ).arg( actionText[action] ).arg( socket ) );
+            odebug << tr( "Error while %1ing card in socket #%2" ).arg( actionText[what] ).arg( socket ) << oendl;
+            popUp( tr( "Error while %1ing card in socket #%2" ).arg( actionText[what] ).arg( socket ) );
         }
     }
     else {
@@ -631,7 +713,10 @@ void CardApplet::userCardAction( int action )
                 for( it = m_mounts.begin(); it != m_mounts.end(); ++it ) {
                     if(i == mountpoint) {
                         m_ejectSocket = -1;
-                        unmount( it.data(), true);
+                        m_check.clear();
+                        m_umount.clear();
+                        m_check += it.data();
+                        checkNextMount();
                         break;
                     }
                     i++;
@@ -691,30 +776,49 @@ void CardApplet::executeAction( Opie::Core::OPcmciaSocket* card, const QString& 
     userCardAction( intAction );
 }
 
-void CardApplet::unmount( const QString &device, bool fusercheck )
-{
-    QStringList cmd;
-
-    if(fusercheck) {
-        odebug << "Using fuser to check usage of " << device << oendl;
-        cmd << "fuser" << "-m" << device;
-        m_mountpt = device;
-        m_commandOrig = CMD_FUSER;
-    }
-    else {
-        odebug << "Unmounting " << device << oendl;
-        cmd << "umount" << device;
-        m_commandOrig = CMD_UNMOUNT;
-    }
-    execCommand( cmd );
-}
-
 void CardApplet::getProcessInfo( const QString &processes )
 {
     QStringList cmd;
     QStringList procs = QStringList::split(QRegExp("[ \n]"), processes);
     cmd << "ps" << "-p" << procs.join(",") << "-o" << "comm,pid";
     m_commandOrig = CMD_PSINFO;
+    execCommand( cmd );
+}
+
+bool CardApplet::isRoot ( const QString &mountpt )
+{
+    struct stat st_mountpt;
+   
+    odebug << "CARD: Checking if " << mountpt << " is the root" << oendl;
+    if(stat(mountpt, &st_mountpt) == 0 && (m_rootdev != 0) )
+        return ( st_mountpt.st_dev == m_rootdev );
+    else
+        return false;
+}
+
+void CardApplet::checkNextMount()
+{
+    if( isRoot(m_check[0]) ) {
+        QMessageBox::warning(0,
+            tr("Card in use"),
+            tr("<p>The system is running from the selected device - it cannot be removed.</p>" ));
+        return;
+    }
+
+    QStringList cmd;
+    odebug << "Using fuser to check usage of " << m_check[0] << oendl;
+    cmd << "fuser" << "-m" << m_check[0];
+    m_commandOrig = CMD_FUSER;
+    execCommand( cmd );
+}
+
+void CardApplet::umountNextMount()
+{
+    QStringList cmd;
+
+    odebug << "Unmounting " << m_umount[0] << oendl;
+    cmd << "umount" << m_umount[0];
+    m_commandOrig = CMD_UNMOUNT;
     execCommand( cmd );
 }
 

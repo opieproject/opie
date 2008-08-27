@@ -34,6 +34,7 @@
 #include <qpixmap.h>
 #include <qpopupmenu.h>
 #include <qmap.h>
+#include <sys/stat.h>
 
 namespace Opie { namespace Core {
 class OPcmciaSocket;
@@ -63,8 +64,11 @@ class CardApplet : public QWidget
     void updatePcmcia();
     void updateMounts( bool showPopup );
     void mountChanged( const QString &device, bool mounted );
-    void unmount( const QString &device, bool fusercheck );
     void getProcessInfo( const QString &processes );
+    bool isRoot ( const QString &mountpt );
+    void checkNextMount();
+    void umountNextMount();
+    void findRootBlock();
 
   private:
     void configure( Opie::Core::OPcmciaSocket* );
@@ -77,16 +81,19 @@ class CardApplet : public QWidget
     int m_commandOrig;
     QString m_commandStdout;
     QString m_commandStderr;
-    QString m_mountpt;
     QPixmap pm;
     QPopupMenu *popupMenu;
     Opie::Core::OProcess *m_process;
     QMap<QString,QString> m_mounts;
     QMap<QString,int> m_cardmounts;
     QMap<int,QString> m_cardnames;
+    QStringList m_check;
+    QStringList m_umount;
+    
     int m_ejectMode;
     int m_ejectSocket;
-
+    __dev_t m_rootdev;
+    QString m_rootdevnode;
 };
 
 #endif
