@@ -106,9 +106,9 @@ void OPcmciaSystem::synchronize()
     for ( unsigned int i=0; i<sktdir.count(); i++ ) {
         QString devid = sktdir[i];
         if(devid[0] == '.') continue;
-        devid = devid.replace(QRegExp("^[0123456789]"), "");
+        devid = devid.replace(QRegExp("^[^0123456789]*"), "");
         int numSocket = devid.toInt();
-        sockets[numSocket] = QObject::tr("No card");
+        sockets[numSocket] = QObject::tr("(no card)");
     }
 
     // Now, check if there are any cards in the sockets
