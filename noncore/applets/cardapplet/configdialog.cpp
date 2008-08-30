@@ -147,9 +147,9 @@ QString ConfigDialog::readConfigEntry( const OPcmciaSocket* card, const QString&
     QString value;
     OConfig* cfg = cardConfig( card );
     if ( cfg )
-    {
         value = cfg->readEntry( key, defaultValue );
-    }
+    else
+        value = defaultValue;
     delete cfg; // deleting a 0 pointer is within spec.
     return value;
 }
@@ -157,7 +157,7 @@ QString ConfigDialog::readConfigEntry( const OPcmciaSocket* card, const QString&
 
 QString ConfigDialog::preferredAction( const OPcmciaSocket* card, const QString& type )
 {
-    return ConfigDialog::readConfigEntry( card, QString( "%1Action" ).arg( type ), "suspend" );
+    return ConfigDialog::readConfigEntry( card, QString( "%1Action" ).arg( type ), "activate" );
 }
 
 

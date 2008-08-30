@@ -7,3 +7,7 @@ obj
 moc_
 .moc
 .obj
+configdialogbase.cpp
+configdialogbase.h
+promptactiondialog.cpp
+promptactiondialog.h

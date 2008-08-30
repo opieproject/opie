@@ -56,6 +56,9 @@ using namespace Opie::Ui;
 #include <qmessagebox.h>
 #include <qsound.h>
 #include <qtimer.h>
+#include <qlayout.h>
+#include <qcheckbox.h>
+#include <qdialog.h>
 
 /* STD */
 #include <stdio.h>
@@ -75,6 +78,7 @@ enum { EM_NONE, EM_UNMOUNT, EM_EJECT };
 
 CardApplet::CardApplet( QWidget * parent ) : QWidget( parent ), popupMenu( 0 )
 {
+    readGlobalConfig();
     findRootBlock();
     updateMounts( false );
 
@@ -87,7 +91,7 @@ CardApplet::CardApplet( QWidget * parent ) : QWidget( parent ), popupMenu( 0 )
     setFixedWidth ( AppLnk::smallIconSize() );
     setFixedHeight ( AppLnk::smallIconSize() );
     pm = Opie::Core::OResource::loadPixmap( "pcmcia", Opie::Core::OResource::SmallIcon );
-    configuring = false;
+    m_configuring = false;
     m_ejectMode = EM_NONE;
     m_process = 0;
 
@@ -101,6 +105,20 @@ CardApplet::~CardApplet()
 {
 }
 
+void CardApplet::readGlobalConfig()
+{
+    OConfig cfg( "PCMCIA" );
+    cfg.setGroup( "Global" );
+    m_promptconfig = cfg.readBoolEntry("promptConfig", false);
+    m_sounds = cfg.readBoolEntry("enableSounds", true);
+    
+    int defaulten = 255; // all sockets (famous last words, but nobody is going to have >8 sockets)
+    if( ODevice::inst()->model() == Model_Zaurus_SLC3000 )
+        defaulten = defaulten & ~1;
+    // FIXME more defaults here!
+    m_enabledSockets = cfg.readNumEntry("enabledSockets", defaulten);
+}
+
 void CardApplet::handleSystemChannel( const QCString&msg, const QByteArray& )
 {
     if ( msg == "returnFromSuspend()" )
@@ -111,7 +129,7 @@ void CardApplet::handleSystemChannel( const QCString&msg, const QByteArray& )
 
         while ( it.current() )
         {
-            if ( !it.current()->isEmpty() )
+            if ( ( !it.current()->isEmpty() ) && ( m_enabledSockets & (1 << it.current()->number()) ) )
             {
                 executeAction( it.current(), "resume" );
             }
@@ -166,30 +184,33 @@ void CardApplet::mousePressEvent( QMouseEvent* )
         OPcmciaSystem::CardIterator it = sys->iterator();
         while ( it.current() )
         {
-            QPopupMenu* submenu = new QPopupMenu( menu );
-            submenu->insertItem( tr("&Eject"),     EJECT+i*100 );
-            submenu->insertItem( tr("&Insert"),    INSERT+i*100 );
-            submenu->insertItem( tr("&Suspend"),   SUSPEND+i*100 );
-            submenu->insertItem( tr("&Resume"),    RESUME+i*100 );
-            submenu->insertItem( tr("Rese&t"),     RESET+i*100 );
-            submenu->insertItem( tr("&Configure"), CONFIGURE+i*100 );
+            if ( m_enabledSockets & (1 << i) ) {
+                QPopupMenu* submenu = new QPopupMenu( menu );
+                submenu->insertItem( tr("&Eject"),     EJECT+i*100 );
+                submenu->insertItem( tr("&Insert"),    INSERT+i*100 );
+                submenu->insertItem( tr("&Suspend"),   SUSPEND+i*100 );
+                submenu->insertItem( tr("&Resume"),    RESUME+i*100 );
+                submenu->insertItem( tr("Rese&t"),     RESET+i*100 );
+                submenu->insertItem( tr("&Configure"), CONFIGURE+i*100 );
 
-            bool isSuspended = it.current()->isSuspended();
-            bool isEmpty = it.current()->isEmpty();
+                bool isSuspended = it.current()->isSuspended();
+                bool isEmpty = it.current()->isEmpty();
 
-            submenu->setItemEnabled( EJECT+i*100, !isEmpty );
-            submenu->setItemEnabled( INSERT+i*100, isEmpty );
-            submenu->setItemEnabled( SUSPEND+i*100, !isEmpty && !isSuspended );
-            submenu->setItemEnabled( RESUME+i*100, !isEmpty && isSuspended );
-            submenu->setItemEnabled( RESET+i*100, !isEmpty && !isSuspended );
-            submenu->setItemEnabled( CONFIGURE+i*100, !isEmpty && !configuring );
+                submenu->setItemEnabled( EJECT+i*100, !isEmpty );
+                submenu->setItemEnabled( INSERT+i*100, isEmpty );
+                submenu->setItemEnabled( SUSPEND+i*100, !isEmpty && !isSuspended );
+                submenu->setItemEnabled( RESUME+i*100, !isEmpty && isSuspended );
+                submenu->setItemEnabled( RESET+i*100, !isEmpty && !isSuspended );
+                submenu->setItemEnabled( CONFIGURE+i*100, !isEmpty && !m_configuring );
 
-            connect( submenu, SIGNAL(activated(int)), this, SLOT(userCardAction(int)) );
-            menu->insertItem( tr( "%1: %2" ).arg( i++ ).arg( it.current()->identity() ), submenu, 1 );
+                connect( submenu, SIGNAL(activated(int)), this, SLOT(userCardAction(int)) );
+                menu->insertItem( tr( "%1: %2" ).arg( i ).arg( it.current()->identity() ), submenu, i );
+            }
+            i++;
             ++it;
         }
     }
-
+    
     if ( m_mounts.count() ) {
         if ( sys->count() )
             menu->insertSeparator(i++);
@@ -206,7 +227,11 @@ void CardApplet::mousePressEvent( QMouseEvent* )
         }
     }
     else if ( sys->count() == 0 )
-        menu->insertItem( tr( "No cards" ), 1 );
+        menu->insertItem( tr( "(no cards)" ), i++ );
+
+    menu->insertSeparator(i++);
+    m_optionsMenu = menu->insertItem( tr( "Options..." ), i++ );
+    connect( menu, SIGNAL(activated(int)), this, SLOT(mainMenuAction(int)) );
 
     QPoint p = mapToGlobal( QPoint( 0, 0 ) );
     QSize s = menu->sizeHint();
@@ -215,6 +240,53 @@ void CardApplet::mousePressEvent( QMouseEvent* )
     delete menu;
 }
 
+void CardApplet::mainMenuAction( int action )
+{
+    if(action == m_optionsMenu)
+        showOptions();
+}
+
+void CardApplet::showOptions()
+{
+    static bool excllock = false;
+    
+    if(excllock)
+        return;
+    
+    excllock = true;
+
+    QDialog optDlg(0,0,true);
+    optDlg.setCaption(tr("Options"));
+    QVBoxLayout *layout = new QVBoxLayout( &optDlg );
+    layout->setSpacing( 3 );
+    layout->setMargin( 6 );
+
+    QCheckBox *promptcb = new QCheckBox(&optDlg);
+    promptcb->setText(tr("Prompt for new card"));
+    promptcb->setChecked(m_promptconfig);
+    layout->addWidget(promptcb);
+
+    QCheckBox *soundscb = new QCheckBox(&optDlg);
+    soundscb->setText(tr("Enable sounds"));
+    soundscb->setChecked(m_sounds);
+    layout->addWidget(soundscb);
+
+    QWidget *d = QApplication::desktop();
+    optDlg.resize(layout->sizeHint());
+    optDlg.move( (d->width()/2) - ( optDlg.width()/2) , (d->height()/2) - (optDlg.height()/2) );
+
+    if(optDlg.exec()) {
+        m_promptconfig = promptcb->isChecked();
+        m_sounds = soundscb->isChecked();
+        
+        OConfig cfg( "PCMCIA" );
+        cfg.setGroup( "Global" );
+        cfg.writeEntry("promptConfig", m_promptconfig);
+        cfg.writeEntry("enableSounds", m_sounds);
+    }
+    
+    excllock = false;
+}
 
 void CardApplet::cardMessage( const QCString & msg, const QByteArray & )
 {
@@ -271,7 +343,13 @@ void CardApplet::updatePcmcia()
         it = sys->iterator();
         while ( it.current() && newCard )
         {
-            if ( it.current()->isEmpty() )
+            if ( (m_enabledSockets & (1 << it.current()->number())) == 0 ) 
+            {
+                odebug << "pcmcia: skipping disabled socket " << it.current()->number() << oendl;
+                ++it;
+                continue;
+            }
+            else if ( it.current()->isEmpty() )
             {
                 odebug << "pcmcia: skipping empty card in socket " << it.current()->number() << oendl;
                 ++it;
@@ -305,21 +383,25 @@ void CardApplet::updatePcmcia()
         else {
             if ( newCard )
             {
-                odebug << "pcmcia: unconfigured card detected" << oendl;
-                QString newCardName = theCard->productIdentity();
-                int result = QMessageBox::information( qApp->desktop(),
-                                                tr( "PCMCIA/CF Subsystem" ),
-                                                tr( "<qt>You have inserted the card<br/><b>%1</b><br/>This card is not yet configured. Do you want to configure it now?</qt>" ).arg( newCardName ),
-                                                tr( "Yes" ), tr( "No" ), 0, 0, 1 );
-                odebug << "pcmcia: result = " << result << oendl;
-                if ( result == 0 )
-                {
-                    configure( theCard );
+                if (m_promptconfig) {
+                    odebug << "pcmcia: unconfigured card detected" << oendl;
+                    QString newCardName = theCard->productIdentity();
+                    int result = QMessageBox::information( qApp->desktop(),
+                                                    tr( "PCMCIA/CF Subsystem" ),
+                                                    tr( "<qt>You have inserted the card<br/><b>%1</b><br/>This card is not yet configured. Do you want to configure it now?</qt>" ).arg( newCardName ),
+                                                    tr( "Yes" ), tr( "No" ), 0, 0, 1 );
+                    odebug << "pcmcia: result = " << result << oendl;
+                    if ( result == 0 )
+                    {
+                        configure( theCard );
+                    }
+                    else
+                    {
+                        odebug << "pcmcia: user doesn't want to configure " << newCardName << " now." << oendl;
+                    }
                 }
                 else
-                {
-                    odebug << "pcmcia: user doesn't want to configure " << newCardName << " now." << oendl;
-                }
+                    executeAction( theCard, "insert" );
             }
         }
     }
@@ -494,7 +576,8 @@ void CardApplet::mountChanged( const QString &device, bool mounted )
         what = "off";
     }
     #ifndef QT_NO_SOUND
-    QSound::play( Resource::findSound( "cardmon/card" + what ) );
+    if(m_sounds)
+        QSound::play( Resource::findSound( "cardmon/card" + what ) );
     #endif
     popUp( text, "cardmon/ide" );    // FIXME add SD pic
 }
@@ -686,7 +769,7 @@ void CardApplet::userCardAction( int action )
         if ( success )
         {
             #ifndef QT_NO_SOUND
-            if( sound != "" )
+            if( m_sounds && sound != "" )
                 QSound::play( Resource::findSound( sound ) );
             #endif
 
@@ -732,10 +815,10 @@ void CardApplet::userCardAction( int action )
 
 void CardApplet::configure( OPcmciaSocket* card )
 {
-    configuring = true;
+    m_configuring = true;
     ConfigDialog dialog( card, qApp->desktop() );
     int result = QPEApplication::execDialog( &dialog, false );
-    configuring = false;
+    m_configuring = false;
     odebug << "pcmcia: configresult = " << result << oendl;
     if ( result )
     {

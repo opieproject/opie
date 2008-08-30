@@ -52,6 +52,7 @@ class CardApplet : public QWidget
   private slots:
     void handleSystemChannel( const QCString&, const QByteArray& );
     void cardMessage( const QCString&, const QByteArray& );
+    void mainMenuAction( int action );
     void userCardAction( int action );
     void popupTimeout();
     void slotExited( Opie::Core::OProcess* proc );
@@ -69,6 +70,8 @@ class CardApplet : public QWidget
     void checkNextMount();
     void umountNextMount();
     void findRootBlock();
+    void readGlobalConfig();
+    void showOptions();
 
   private:
     void configure( Opie::Core::OPcmciaSocket* );
@@ -77,7 +80,11 @@ class CardApplet : public QWidget
     void popUp( QString message, QString icon = QString::null );
 
   private:
-    bool configuring;
+    bool m_promptconfig;
+    bool m_sounds;
+    int m_enabledSockets;
+    int m_optionsMenu;
+    bool m_configuring;
     int m_commandOrig;
     QString m_commandStdout;
     QString m_commandStderr;
