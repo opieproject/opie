@@ -127,7 +127,7 @@ public:
     static void showWidget( QWidget*, bool nomax=FALSE ) QPE_WEAK_SYMBOL;
     /* Merge setTempScreenSaverMode */
 #ifdef QTOPIA_INTERNAL_INITAPP
-    void initApp( int argv, char **argv );
+    void initApp( int argc, char **argv );
 #endif
 
     static void setKeepRunning();
