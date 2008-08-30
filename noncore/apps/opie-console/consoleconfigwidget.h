@@ -11,7 +11,7 @@ class QPushButton;
 class ConsoleConfigWidget : public ProfileDialogConnectionWidget {
     Q_OBJECT
 public:
-    ConsoleConfigWidget( const QString& name, QWidget* parent, const char* name = 0l );
+    ConsoleConfigWidget( const QString& name, QWidget* parent, const char* na = 0l );
     ~ConsoleConfigWidget();
 
     void load( const Profile& );

@@ -12,7 +12,7 @@ class IrdaConfigWidget : public ProfileDialogConnectionWidget {
     Q_OBJECT
 
 public:
-    IrdaConfigWidget( const QString& name, QWidget* parent, const char* name = 0l );
+    IrdaConfigWidget( const QString& name, QWidget* parent, const char* na = 0l );
     ~IrdaConfigWidget();
 
     void load( const Profile& );

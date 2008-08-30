@@ -10,7 +10,7 @@ class IOLayerBase;
 class SerialConfigWidget : public ProfileDialogConnectionWidget {
     Q_OBJECT
 public:
-    SerialConfigWidget( const QString& name, QWidget* parent, const char* name = 0l );
+    SerialConfigWidget( const QString& name, QWidget* parent, const char* na = 0l );
     ~SerialConfigWidget();
 
     void load( const Profile& );

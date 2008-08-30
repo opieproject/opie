@@ -13,7 +13,7 @@ public:
         Terminal,
         Keyboard
     };
-    ProfileDialogWidget( const QString& name, QWidget* parent, const char* name = 0l);
+    ProfileDialogWidget( const QString& name, QWidget* parent, const char* na = 0l);
     ~ProfileDialogWidget();
 
     /*
@@ -34,7 +34,7 @@ class ProfileDialogTerminalWidget : public ProfileDialogWidget {
     Q_OBJECT
 public:
     ProfileDialogTerminalWidget( const QString& name, QWidget* widget,
-                                 const char* name  =0l);
+                                 const char* na  =0l);
     ~ProfileDialogTerminalWidget();
     Type type()const;
 };
@@ -42,7 +42,7 @@ class ProfileDialogConnectionWidget : public ProfileDialogWidget {
     Q_OBJECT
 public:
     ProfileDialogConnectionWidget( const QString& name, QWidget* parent,
-                                   const char* name =0l);
+                                   const char* na =0l);
     ~ProfileDialogConnectionWidget();
     Type type() const;
 
@@ -51,7 +51,7 @@ class ProfileDialogKeyWidget : public ProfileDialogWidget {
     Q_OBJECT
 public:
     ProfileDialogKeyWidget( const QString &name, QWidget* parent,
-                           const char *name =0l);
+                           const char *na =0l);
     ~ProfileDialogKeyWidget();
     Type type() const;
 };

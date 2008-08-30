@@ -15,7 +15,7 @@ class ModemConfigWidget : public ProfileDialogConnectionWidget {
     Q_OBJECT
 
 public:
-    ModemConfigWidget( const QString& name, QWidget* parent, const char* name = 0l );
+    ModemConfigWidget( const QString& name, QWidget* parent, const char* na = 0l );
     ~ModemConfigWidget();
 
     void load( const Profile& );

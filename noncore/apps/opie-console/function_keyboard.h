@@ -86,7 +86,7 @@ class FunctionKeyboardConfig : public ProfileDialogKeyWidget {
     Q_OBJECT
 
 public:
-    FunctionKeyboardConfig(const QString& name, QWidget *wid, const char* name = 0l );
+    FunctionKeyboardConfig(const QString& name, QWidget *wid, const char* na = 0l );
     ~FunctionKeyboardConfig();
 
     void load(const Profile&);

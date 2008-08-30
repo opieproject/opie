@@ -14,7 +14,7 @@ class BTConfigWidget : public ProfileDialogConnectionWidget {
     Q_OBJECT
 
 public:
-    BTConfigWidget( const QString& name, QWidget* parent, const char* name = 0l );
+    BTConfigWidget( const QString& name, QWidget* parent, const char* na = 0l );
     ~BTConfigWidget();
 
     void load( const Profile& );
