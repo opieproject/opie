@@ -22,7 +22,10 @@
 	* n.a.  - AdvancedFM: fix File Info and Rename actions so that they work with symlinks (BlueLightning)
 	* n.a.  - AdvancedFM: fix file copy not working with 2.6 kernel (BlueLightning)
 	* #1882 - BatteryApplet: fix freezing on Palm if switching view (Marex)
+	* n.a.  - Backup: fix freezing at startup if booted from CF card (BlueLightning)
 	* n.a.  - Bluetooth Manager: fix several crashes (BlueLightning)
+	* #1918 - Bluetooth: allow enabling bluetooth on h2200 (BlueLightning)
+	* #1919 - Bluetooth: fix bluetooth beaming using only standard BlueZ tools (BlueLightning)
 	* #1773 - Todo: make priority icons easier to distinguish (BlueLightning)
 	* #1902 - Todo: set initial focus correctly when adding a task (BlueLightning)
 	* #1234 - Todo: rearrange controls so that Completed date can be set more easily (BlueLightning)
@@ -38,6 +41,8 @@
 	* #1618 - DocTab Settings: apply changes without needing a restart (BlueLightning)
 	* #1508 - Minesweeper: fix scrollbars showing for playing field with some UI styles (BlueLightning)
 	* #1810 - Add back the ability to unmount SD cards (BlueLightning)
+	* #1807 - Hide or prevent unmounting of internal microdrive on Zaurus devices (BlueLightning)
+	* #1195 - Allow disabling insert/eject sounds in card applet (BlueLightning)
 	* #1567 - Fix file dialog not showing symlinks with absolute paths to directories (BlueLightning)
 	* #1544 - Fix bug syncing repeating events from Outlook using Qtopia Desktop (BlueLightning)
 	* #1693 - Remove sync password restrictions (BlueLightning)
@@ -51,6 +56,7 @@
 	* #1617 - Oxygen: change font and text alignment to make symbols readable in periodic table
 	* #1748 - Fix scrolling back when selecting last tab with lots of tabs eg. in SysInfo (BlueLightning)
 	* #0669 - Add QCop calls for increasing/decreasing backlight brightness (BlueLightning)
+	* #1750 - Fix minor interaction issue between brightness applet and screensaver (BlueLightning) 
 	* #1881 - Add background images for 320x320 devices (kEdAR)
 	* #1887 - Add background images for 480x320 devices (Marex)
 	* #1890 - Add background images for 240x240 devices (Marex)
@@ -62,6 +68,7 @@
 	* Fixed lots of unchecked return values, unreachable code, etc. (E. Hovland)
 	* Some code style improvements (E. Hovland, BlueLightning)
 	* Update Qt 2.3.10 gcc4 patch to include extra compilation error fix (Brian Austin)
+	* Fix compilation errors with gcc 4.3 (woglinde)
 
 
 2007-07-26	Opie 1.2.3
