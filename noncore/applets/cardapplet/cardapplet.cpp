@@ -112,11 +112,11 @@ void CardApplet::readGlobalConfig()
     m_promptconfig = cfg.readBoolEntry("promptConfig", false);
     m_sounds = cfg.readBoolEntry("enableSounds", true);
     
-    int defaulten = 255; // all sockets (famous last words, but nobody is going to have >8 sockets)
+    int defaultdis = 0;
     if( ODevice::inst()->model() == Model_Zaurus_SLC3000 )
-        defaulten = defaulten & ~1;
+        defaultdis = defaultdis | 1;
     // FIXME more defaults here!
-    m_enabledSockets = cfg.readNumEntry("enabledSockets", defaulten);
+    m_disabledSockets = cfg.readNumEntry("disabledSockets", defaultdis);
 }
 
 void CardApplet::handleSystemChannel( const QCString&msg, const QByteArray& )
@@ -129,7 +129,7 @@ void CardApplet::handleSystemChannel( const QCString&msg, const QByteArray& )
 
         while ( it.current() )
         {
-            if ( ( !it.current()->isEmpty() ) && ( m_enabledSockets & (1 << it.current()->number()) ) )
+            if ( ( !it.current()->isEmpty() ) && ((m_disabledSockets & (1 << it.current()->number())) == 0) ) 
             {
                 executeAction( it.current(), "resume" );
             }
@@ -184,7 +184,7 @@ void CardApplet::mousePressEvent( QMouseEvent* )
         OPcmciaSystem::CardIterator it = sys->iterator();
         while ( it.current() )
         {
-            if ( m_enabledSockets & (1 << i) ) {
+            if ( (m_disabledSockets & (1 << i)) == 0 ) {
                 QPopupMenu* submenu = new QPopupMenu( menu );
                 submenu->insertItem( tr("&Eject"),     EJECT+i*100 );
                 submenu->insertItem( tr("&Insert"),    INSERT+i*100 );
@@ -343,7 +343,7 @@ void CardApplet::updatePcmcia()
         it = sys->iterator();
         while ( it.current() && newCard )
         {
-            if ( (m_enabledSockets & (1 << it.current()->number())) == 0 ) 
+            if ( m_disabledSockets & (1 << it.current()->number()) ) 
             {
                 odebug << "pcmcia: skipping disabled socket " << it.current()->number() << oendl;
                 ++it;

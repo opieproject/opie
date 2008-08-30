@@ -82,7 +82,7 @@ class CardApplet : public QWidget
   private:
     bool m_promptconfig;
     bool m_sounds;
-    int m_enabledSockets;
+    int m_disabledSockets;
     int m_optionsMenu;
     bool m_configuring;
     int m_commandOrig;
