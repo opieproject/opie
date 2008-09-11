@@ -1,6 +1,6 @@
 /**
- * $Author: zecke $
- * $Date: 2004-12-20 22:29:08 $
+ * $Author: paule $
+ * $Date: 2008-09-11 21:21:28 $
  */
 
 #include "interface.h"
@@ -90,7 +90,7 @@ bool Interface::callProcess( const QStringList& names ) {
     owait->hide();
     delete owait;
 
-    if ( restart.normalExit() || restart.exitStatus() != 0 )
+    if ( !restart.normalExit() || restart.exitStatus() != 0 )
         return false;
 
     return true;
