@@ -17,6 +17,8 @@ const int col_ssid = 1;
 const int col_chn = 2;
 const int col_mac = 3;
 
+enum WLANEncryptionType { encNone, encWEP, encWPA };  // must match encryptCombo items
+
 class WLANImp : public WLAN {
   Q_OBJECT
 
@@ -28,6 +30,7 @@ public:
 public slots:
   void rescanNeighbourhood();
   void selectNetwork( QListViewItem* );
+  void encryptionChanged(int);
 
 protected:
   void accept();

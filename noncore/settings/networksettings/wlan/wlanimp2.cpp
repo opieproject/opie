@@ -34,6 +34,7 @@ using namespace Opie::Net;
 #include <qlistview.h>
 #include <qvbox.h>
 #include <qprogressbar.h>
+#include <qbuttongroup.h>
 
 /* STD */
 #include <assert.h>
@@ -59,10 +60,10 @@ WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, W
 
   connect( rescanButton, SIGNAL( clicked() ), this, SLOT( rescanNeighbourhood() ) );
   connect( netView, SIGNAL( clicked(QListViewItem*) ), this, SLOT( selectNetwork(QListViewItem*) ) );
+  connect( encryptCombo, SIGNAL( activated(int) ), this, SLOT( encryptionChanged(int) ) );
   netView->setColumnAlignment( col_chn, AlignCenter );
   netView->setItemMargin( 3 );
   netView->setAllColumnsShowFocus( true );
-
 }
 
 WLANImp::~WLANImp() {
@@ -85,6 +86,10 @@ void WLANImp::parseOpts() {
     return;
 
   opt = interfaces->getInterfaceOption("wireless_essid", error);
+  if(opt.isNull())
+    opt = interfaces->getInterfaceOption("wireless-essid", error);
+  if(opt.isNull())
+    opt = interfaces->getInterfaceOption("wpa-essid", error);
   if(opt == "any" || opt == "off" || opt.isNull()){
     essid->setEditText("any");
   } else {
@@ -150,9 +155,9 @@ void WLANImp::parseOpts() {
 
     // encryption on?
     if(opt == "on"){
-      wepEnabled->setChecked(true);
+      encryptCombo->setCurrentItem(encWEP);
     } else {
-        wepEnabled->setChecked(false);
+      encryptCombo->setCurrentItem(encNone);
     }
 
     opt = interfaces->getInterfaceOption("wireless_keymode", error).simplifyWhiteSpace();
@@ -163,10 +168,19 @@ void WLANImp::parseOpts() {
     }
   }
   else {
-    opt = interfaces->getInterfaceOption("wireless_key", error).simplifyWhiteSpace();
-
-    parseKeyStr(opt);
+    opt = interfaces->getInterfaceOption("wpa-psk", error).simplifyWhiteSpace();
+    if(!opt.isNull()) {
+      encryptCombo->setCurrentItem(encWPA);
+      keyRadio0->setChecked(true);
+      keyLineEdit0->setText(opt);
+    }
+    else {
+      opt = interfaces->getInterfaceOption("wireless_key", error).simplifyWhiteSpace();
+      parseKeyStr(opt);
+    }
   }
+
+  encryptionChanged( encryptCombo->currentItem() );
 }
 
 void WLANImp::parseKeyStr(QString keystr) {
@@ -242,9 +256,37 @@ void WLANImp::parseKeyStr(QString keystr) {
     }
   }
   if (enc == 1) {
-    wepEnabled->setChecked(true);
+    encryptCombo->setCurrentItem(encWEP);
   } else {
-    wepEnabled->setChecked(false);
+    encryptCombo->setCurrentItem(encNone);
+  }
+}
+
+void WLANImp::encryptionChanged(int index)
+{
+  if(index == encWPA) {
+    KeyButtonGroup->setEnabled(true);
+    keyRadio1->setEnabled(false);
+    keyLineEdit1->setEnabled(false);
+    keyRadio2->setEnabled(false);
+    keyLineEdit2->setEnabled(false);
+    keyRadio3->setEnabled(false);
+    keyLineEdit3->setEnabled(false);
+    NonEncButtonGroup->setEnabled(false);
+  }
+  else if(index == encWEP) {
+    KeyButtonGroup->setEnabled(true);
+    keyRadio1->setEnabled(true);
+    keyLineEdit1->setEnabled(true);
+    keyRadio2->setEnabled(true);
+    keyLineEdit2->setEnabled(true);
+    keyRadio3->setEnabled(true);
+    keyLineEdit3->setEnabled(true);
+    NonEncButtonGroup->setEnabled(true);
+  }
+  else {
+    KeyButtonGroup->setEnabled(false);
+    NonEncButtonGroup->setEnabled(false);
   }
 }
 
@@ -253,12 +295,12 @@ void WLANImp::parseKeyStr(QString keystr) {
  * Save interfaces
  */
 void WLANImp::accept() {
-  if (wepEnabled->isChecked()) {
+  if (encryptCombo->currentItem() > 0) {
     if ((keyRadio0->isChecked() && keyLineEdit0->text().isEmpty()) ||
         (keyRadio1->isChecked() && keyLineEdit1->text().isEmpty()) ||
         (keyRadio2->isChecked() && keyLineEdit2->text().isEmpty()) ||
         (keyRadio3->isChecked() && keyLineEdit3->text().isEmpty())) {
-      QMessageBox::information(this, "Error", "Please enter a WEP key.", QMessageBox::Ok);
+      QMessageBox::information(this, "Error", "Please enter an encryption key.", QMessageBox::Ok);
       return;
     }
   }
@@ -312,8 +354,20 @@ void WLANImp::writeOpts() {
 
   if (error)  QMessageBox::warning(0,"Inface not set","should not happen!!!");
 
+  interfaces->removeInterfaceOption(QString("wireless-mode"));
+  interfaces->removeInterfaceOption(QString("wireless-essid"));
+  interfaces->removeInterfaceOption(QString("wireless-key"));
+
   interfaces->setInterfaceOption(QString("wireless_mode"), mode->currentText());
-  interfaces->setInterfaceOption(QString("wireless_essid"), essid->currentText());
+  if( encryptCombo->currentItem() == encWPA ) {
+    // WPA/WPA2
+    interfaces->removeInterfaceOption(QString("wireless_essid"));
+    interfaces->setInterfaceOption(QString("wpa-essid"), essid->currentText());
+  }
+  else {
+    // WEP or unencrypted
+    interfaces->setInterfaceOption(QString("wireless_essid"), essid->currentText());
+  }
 
   if (specifyAp->isChecked()) {
      interfaces->setInterfaceOption(QString("wireless_ap"), macEdit->text());
@@ -334,7 +388,7 @@ void WLANImp::writeOpts() {
     // wlan-ng style
     interfaces->removeInterfaceOption(QString("wireless_key"));
 
-    if (wepEnabled->isChecked()) {
+    if (encryptCombo->currentItem() > 0) {
 
       interfaces->setInterfaceOption(QString("wireless_enc"),"on");
 
@@ -384,8 +438,11 @@ void WLANImp::writeOpts() {
     }
 
   } else {
-    // This is the old style
-    if (wepEnabled->isChecked()) {
+    if( encryptCombo->currentItem() == encWPA ) {
+      // WPA/WPA2
+      interfaces->setInterfaceOption(QString("wpa-psk"), keyLineEdit0->text());
+    }
+    else if( encryptCombo->currentItem() == encWEP ) {
       QStringList keyList;
 
       if (! keyLineEdit0->text().isNull()) {
@@ -423,6 +480,7 @@ void WLANImp::writeOpts() {
       interfaces->setInterfaceOption(QString("wireless_key"), keyList.join(QString(" ")));
     } else {
       interfaces->removeInterfaceOption(QString("wireless_key"));
+      interfaces->removeInterfaceOption(QString("wpa-psk"));
     }
     interfaces->removeInterfaceOption(QString("wireless_enc"));
   }
