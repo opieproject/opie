@@ -5,7 +5,8 @@
 	------------
 	* Datebook: add exception support for repeating events - allows editing or deleting one instance of a recurring event. (BlueLightning)
 	* Add new storage management applet (cardapplet) based on the pcmcia applet, with the addition of support for SD cards and other removable storage devices (BlueLightning)
-	* Security: Make display of owner information from the business card during authentication configurable - you can now specify when it is displayed and what information is displayed
+	* Network Settings: add basic support for configuring WPA/WPA2 encryption (BlueLightning)
+	* Security: Make display of owner information from the business card during authentication configurable - you can now specify when it is displayed and what information is displayed (BlueLightning)
 	* TextEdit: Improve usability, particularly with regard to prompting about unsaved changes (BlueLightning)
 	* AdvancedFM: Improve usability (BlueLightning)
 	* VMemo: Improve usability (BlueLightning)
@@ -53,8 +54,10 @@
 	* n.a.  - OpiePlayer: fix segfault on exit (BlueLightning)
 	* n.a.  - Update PCMCIA handling code for 2.6 kernel (BlueLightning)
 	* #1885 - SysInfo: add device icons for various iPAQ models (BlueLightning)
-	* #1617 - Oxygen: change font and text alignment to make symbols readable in periodic table
+	* #1617 - Oxygen: change font and text alignment to make symbols readable in periodic table (BlueLightning)
 	* #1748 - Fix scrolling back when selecting last tab with lots of tabs eg. in SysInfo (BlueLightning)
+	* n.a.  - Fix enabling IrDA in Angstrom (start irattach service first) (BlueLightning)
+	* n.a.  - Network Settings: fix always showing "failed" message on starting/stopping interfaces (BlueLightning)
 	* #0669 - Add QCop calls for increasing/decreasing backlight brightness (BlueLightning)
 	* #1750 - Fix minor interaction issue between brightness applet and screensaver (BlueLightning) 
 	* #1881 - Add background images for 320x320 devices (kEdAR)
