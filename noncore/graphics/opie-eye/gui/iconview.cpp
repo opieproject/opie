@@ -102,7 +102,7 @@ namespace {
         m_iconsize = a_iconsize;
         if ( isDir ) {
             if (!_dirPix ) {
-                _dirPix = new QPixmap( Opie::Core::OResource::loadPixmap("advancedfm/FileBrowser", Opie::Core::OResource::SmallIcon));
+                _dirPix = new QPixmap( Opie::Core::OResource::loadPixmap("folder", Opie::Core::OResource::SmallIcon));
             }
         } else {
             if (!_unkPix ) {
