@@ -294,6 +294,8 @@ void ImageView::hide()
         m_ignore_next_in = true;
         showNormal();
     }
+    else
+        stopSlide();
     QWidget::hide();
 }
 void ImageView::enableFullscreen()
