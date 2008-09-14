@@ -33,5 +33,6 @@ void PopupHelper::init() {
     insert( 4357, newObexPushPopup );
     insert( 4358, newObexFtpPopup );
     insert( 4374, newPanPopup );
+    insert( 4375, newPanPopup );
     insert( 4388, newHidPopup );
 }
