@@ -103,6 +103,7 @@ namespace OpieTooth {
         void addSignalStrength();
         void addSignalStrength( const QString& mac, const QString& strengh );
         void rfcommDialog();
+        void showEvent(QShowEvent *);
 
     };
 

@@ -90,7 +90,7 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
 
     connect( devicesView, SIGNAL( clicked(QListViewItem*)),
              this, SLOT( startServiceActionClicked(QListViewItem*) ) );
-    connect( devicesView, SIGNAL( rightButtonClicked(QListViewItem*,const QPoint&,int) ),
+    connect( devicesView, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ),
              this,  SLOT(startServiceActionHold(QListViewItem*,const QPoint&,int) ) );
     connect( m_localDevice , SIGNAL( foundServices(const QString&,Services::ValueList) ),
              this, SLOT( addServicesToDevice(const QString&,Services::ValueList) ) );
@@ -104,7 +104,7 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     connect(encCheckBox, SIGNAL(toggled(bool)), this, SLOT(doEncrypt(bool)));
     connect(servicesEditButton, SIGNAL(clicked()), this, SLOT(editServices()));
 
-    // let hold be rightButtonClicked()
+    // let hold be rightButtonPressed()
     QPEApplication::setStylusOperation( devicesView->viewport(), QPEApplication::RightOnHold);
     QPEApplication::setStylusOperation( connectionsView->viewport(), QPEApplication::RightOnHold);
 
@@ -128,12 +128,17 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
 
     devicesView->setRootIsDecorated(true);
     devicesView->setColumnWidthMode(0,QListView::Manual);
-    devicesView->setColumnWidth(0,160);
     m_iconLoader = new BTIconLoader();
     writeToHciConfig();
     addConnectedDevices();
     readSavedDevices();
     forwarder = NULL;
+}
+
+void BlueBase::showEvent(QShowEvent *e)
+{
+    BluetoothBase::showEvent(e);
+    devicesView->setColumnWidth(0,devicesView->visibleWidth() - devicesView->columnWidth(1));
 }
 
 /**
