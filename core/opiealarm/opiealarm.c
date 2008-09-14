@@ -213,7 +213,7 @@ int suspend ( int fix_rtc )
 	struct tm alr, sys, rtc;
 	int fd;
 	int rtc_sys_diff;
-	
+	int use_sysfs;
 	
 	if ( !fork_with_pidfile ( ))
 		return 3;
@@ -225,6 +225,7 @@ int suspend ( int fix_rtc )
 	time ( &syst );// get the UNIX system time
 	sys = *localtime ( &syst );		
 	
+	use_sysfs = 0;
 	do {
 		
 		if (( fd = open ( "/dev/misc/rtc", O_RDWR )) < 0 )
@@ -269,11 +270,27 @@ int suspend ( int fix_rtc )
 	
 		alr = *gmtime ( &alrt );
 	
-		if ( ioctl ( fd, RTC_ALM_SET, &alr ) < 0 )  // set RTC alarm time
-			break; //  ( 1, "ioctl RTC_ALM_SET" );		
-	
-	 	if ( ioctl ( fd, RTC_AIE_ON, 0 ) < 0 )
-			break; //  ( 1, "ioctl RTC_AIE_ON" );   // enable RTC alarm irq
+		if (( fp = fopen ( "/sys/class/rtc/rtc0/alarm/since_epoch", "w" ))) {
+			fprintf ( fp, "%d", mktime( &alr ) );
+			fclose ( fp );
+			fp = NULL;
+			
+			if (( fp = fopen ( "/sys/class/rtc/rtc0/alarm/wakeup_enabled", "w" ))) {
+				fprintf ( fp, "1" );
+				fclose ( fp );
+				fp = NULL;
+			}
+			else
+				break;
+			use_sysfs = 1;
+		}
+		else {
+			if ( ioctl ( fd, RTC_ALM_SET, &alr ) < 0 )  // set RTC alarm time
+				break; //  ( 1, "ioctl RTC_ALM_SET" );		
+		
+			if ( ioctl ( fd, RTC_AIE_ON, 0 ) < 0 )
+				break; //  ( 1, "ioctl RTC_AIE_ON" );   // enable RTC alarm irq
+		}
 
 		// tell the parent it is safe to exit now .. we have set the RTC alarm
 		kill ( parent_pid, SIGUSR1 );
@@ -284,8 +301,18 @@ int suspend ( int fix_rtc )
 		// iPAQ woke up via RTC irq -- otherwise we would have received a SIGUSR2
 		// from the "resume instance" of opiealarm.
 	
-		if ( ioctl ( fd, RTC_AIE_OFF, 0 ) < 0 )     // disable RTC alarm irq
-			break; //  ( 1, "ioctl RTC_AIE_OFF" );
+		if ( use_sysfs ) {
+			if (( fp = fopen ( "/sys/class/rtc/rtc0/alarm/wakeup_enabled", "w" ))) {
+				fprintf ( fp, "0" );
+				fclose ( fp );
+				fp = NULL;
+			}
+		}
+		else
+		{
+			if ( ioctl ( fd, RTC_AIE_OFF, 0 ) < 0 )     // disable RTC alarm irq
+				break; //  ( 1, "ioctl RTC_AIE_OFF" );
+		}
 
 		close ( fd );
 		fd = -1;
