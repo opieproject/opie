@@ -1,4 +1,4 @@
-2008-??-??	Opie 1.2.4
+2008-09-30	Opie 1.2.4
 	
 	
 	New Features
@@ -17,6 +17,7 @@
 	* n.a.  - Many, many more code fixes that should improve Opie stability (E. Hovland)
 	* #1914 - Improve Siemens Simpad device support for 2.6 kernels (Bernhard Guillon)
 	* #1913 - Improve brightness handling for Palm devices (miska)
+	* #1916 - Use alternate alarm set method to fix alarm wakeup on h2200 and possibly other devices (BlueLightning)
 	* #1749 - AdvancedFM: make "Open as Text" bring editor to front if it is already running (BlueLightning)
 	* #1809 - AdvancedFM: fix SD card button not working with 2.6 kernel (BlueLightning)
 	* n.a.  - AdvancedFM: fix CF card button going to /home on Zaurus SL-C3000 (BlueLightning)
