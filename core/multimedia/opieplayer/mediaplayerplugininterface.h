@@ -65,7 +65,7 @@ public:
     virtual int audioSamples( int stream ) = 0;
     virtual bool audioSetSample( long sample, int stream ) = 0;
     virtual long audioGetSample( int stream ) = 0;
-    virtual bool audioReadSamples( short *samples, int channels, long samples, long& samplesRead, int stream ) = 0;
+    virtual bool audioReadSamples( short *output, int channels, long samples, long& samplesRead, int stream ) = 0;
 
     // If decoder doesn't support video then return 0 here
     virtual int videoStreams() = 0;
