@@ -134,6 +134,9 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
         {
             switch ( model ) {
                 /* ZAURUS */
+                case Model_Zaurus_SLC3100:
+                case Model_Zaurus_SLC3000:
+                case Model_Zaurus_SLC1000:
                 case Model_Zaurus_SLC7x0:
                     modelPixmap += "zaurusc700";
                     break;
