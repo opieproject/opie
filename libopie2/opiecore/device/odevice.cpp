@@ -80,6 +80,7 @@ static const char* PATH_PROC_CPUINFO = "/proc/cpuinfo";
     { System_Familiar,        "FamiliarLinux",   "/etc/familiar-version" },
     { System_OpenZaurus,      "OpenZaurus",      "/etc/openzaurus-version" },
     { System_OpenEmbedded,    "OpenEmbedded",    "/etc/oe-version" },
+    { System_Angstrom,        "Angstrom",        "/etc/angstrom-version" },
     { System_Unknown,         "Linux",           "/etc/issue" },
 };
 
