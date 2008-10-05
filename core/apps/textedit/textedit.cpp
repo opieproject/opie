@@ -794,25 +794,35 @@ bool TextEdit::save()
             currentFileName = name;
             odebug << "saveFile "+currentFileName << oendl;
 
-            struct stat buf;
-            mode_t mode;
-            QFile f(file);
-            fstat(f.handle(), &buf);
-            mode = buf.st_mode;
-
             if(!fileIs) {
-                doc->setName( name);
+                // Save file permissions
+                struct stat buf;
+                mode_t mode;
+                bool setmode = true;
+                if(stat(file, &buf))
+                    setmode = false;
+                else
+                    mode = buf.st_mode;
+
+                doc->setName(name);
                 FileManager fm;
                 if ( !fm.saveFile( *doc, rt ) ) {
                     QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
                     return false;
                 }
-            } else {
+
+                // Restore file permissions
+                if(setmode)
+                    chmod( file, mode );
+            } 
+            else {
                 odebug << "regular save file" << oendl;
+                QFile f(file);
                 if( f.open(IO_WriteOnly)) {
                     QCString crt = rt.utf8();
                     f.writeBlock(crt,crt.length());
-                } else {
+                } 
+                else {
                     QMessageBox::message(tr("Text Edit"),tr("Write Failed"));
                     return false;
                 }
@@ -821,8 +831,6 @@ bool TextEdit::save()
             edited=false;
             if(caption().left(1)=="*")
                 setCaption(caption().right(caption().length()-1));
-
-            fchmod( f.handle(), mode);
         }
         return true;
     }
@@ -906,7 +914,7 @@ bool TextEdit::saveAs()
         nf.setType("text/plain");
         nf.setFile( fileNm);
         doc = new DocLnk(nf);
-        odebug << "Saving file as "+currentFileName << oendl;
+        odebug << "Saving file as " << currentFileName << oendl;
         doc->setName( fi.baseName() );
         updateCaption( currentFileName);
 
