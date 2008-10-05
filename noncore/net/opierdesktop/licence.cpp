@@ -173,7 +173,6 @@ licence_process_demand(STREAM s)
 	}
 
 	licence_send_request(null_data, null_data, username, hostname);
-	free(licence_data);
 }
 
 /* Send an authentication response packet */
