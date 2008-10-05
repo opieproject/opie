@@ -274,14 +274,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     wa->setToggleAction(true);
     wa->addTo( advancedMenu);
 
-    nStart = new QAction( tr("Start with new file"),
-                          QString::null, 0, this, 0 );
-    connect( nStart, SIGNAL( toggled(bool) ),
-             this, SLOT( changeStartConfig(bool) ) );
-    nStart->setToggleAction(true);
-    nStart->addTo( advancedMenu );
-    nStart->setEnabled(false);
-
     desktopAction = new QAction( tr("Always open linked file"),
                                  QString::null, 0, this, 0 );
     connect( desktopAction, SIGNAL( toggled(bool) ),
@@ -375,13 +367,11 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     openDesktop = cfg.readBoolEntry ( "OpenDesktop", true );
     filePerms = cfg.readBoolEntry ( "FilePermissions", false );
     useSearchBar = cfg.readBoolEntry ( "SearchBar", false );
-    startWithNew =  cfg.readBoolEntry ( "startNew", true);
     featureAutoSave = cfg.readBoolEntry( "autosave", false);
 
     if(useSearchBar) searchBarAction->setOn(true);
     if(openDesktop) desktopAction->setOn( true );
     if(filePerms) filePermAction->setOn( true );
-    if(startWithNew) nStart->setOn( true );
     if(featureAutoSave) nAutoSave->setOn(true);
 
 //       {
@@ -442,7 +432,6 @@ void TextEdit::cleanUp()
     cfg.writeEntry ( "OpenDesktop", openDesktop );
     cfg.writeEntry ( "FilePermissions", filePerms );
     cfg.writeEntry ( "SearchBar", useSearchBar );
-    cfg.writeEntry ( "startNew", startWithNew );
 }
 
 void TextEdit::accept()
@@ -1025,15 +1014,6 @@ void TextEdit::editDelete()
         // exit
         break;
     };
-}
-
-void TextEdit::changeStartConfig( bool b )
-{
-    startWithNew=b;
-    Config cfg("TextEdit");
-    cfg.setGroup("View");
-    cfg.writeEntry("startNew",b);
-    update();
 }
 
 void TextEdit::editorChanged()

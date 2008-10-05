@@ -60,7 +60,7 @@ public:
 
 protected:
     QPopupMenu *font;
-    QAction *nStart, *nFileDlgOpt, *desktopAction, *filePermAction, *searchBarAction, *nAutoSave;
+    QAction *nFileDlgOpt, *desktopAction, *filePermAction, *searchBarAction, *nAutoSave;
     bool edited;
     void openFile( const QString & );
     QCopChannel * channel;
@@ -84,7 +84,6 @@ private slots:
     void fileNew();
     void fileRevert();
     void fileOpen();
-    void changeStartConfig(bool);
     bool save();
     bool saveAs();
     void cleanUp();
@@ -131,7 +130,7 @@ private:
     QLineEdit *gotoEdit;
     QLineEdit *searchEdit;
     DocLnk *doc;
-    bool fileIs, useAdvancedFeatures, promptExit, openDesktop, filePerms, useSearchBar, startWithNew;
+    bool fileIs, useAdvancedFeatures, promptExit, openDesktop, filePerms, useSearchBar;
     bool bFromDocView;
     int  viewSelection;
     QAction *zin, *zout;
