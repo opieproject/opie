@@ -215,15 +215,15 @@ QMyDialog::QMyDialog(QWidget* parent) : QDialog(parent, "Settings", true)
             ConnectionList[i]->ServerName = ItemValue;
             ListBox->insertItem(ItemValue);
           }
-          else if (ItemName == "UserName" && i > 0)
+          else if (ItemName == "UserName" && i > -1)
             ConnectionList[i]->UserName = ItemValue;
-          else if (ItemName == "Width" && i > 0)
+          else if (ItemName == "Width" && i > -1)
             ConnectionList[i]->Width = ItemValue.toInt();
-          else if (ItemName == "Height" && i > 0)
+          else if (ItemName == "Height" && i > -1)
             ConnectionList[i]->Height = ItemValue.toInt();
-          else if (ItemName == "IP" && i > 0)
+          else if (ItemName == "IP" && i > -1)
             ConnectionList[i]->ServerIP = ItemValue;
-          else if (ItemName == "FullScreen" && i > 0)
+          else if (ItemName == "FullScreen" && i > -1)
             ConnectionList[i]->FullScreen = (ItemValue != "0");
         }
       }
