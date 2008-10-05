@@ -218,11 +218,6 @@ void Zaurus::init(const QString& cpu_info)
     }
     else
     {
-        d->m_vendorstr = "OpenZaurus Team";
-        d->m_systemstr = "OpenZaurus";
-        d->m_system = System_OpenZaurus;
-        // sysver already gathered
-
         // OpenZaurus sometimes uses the 2.4 (embedix) kernel, check if this is one
         FILE *uname = popen("uname -r", "r");
         QFile f;
@@ -313,14 +308,14 @@ void Zaurus::init(const QString& cpu_info)
     }
 
     // set default qte driver
-    switch( d->m_model )
+/*    switch( d->m_model )
     {
         case Model_Zaurus_SLC7x0:
             d->m_qteDriver = "W100";
             break;
-        default:
+        default:*/
             d->m_qteDriver = "Transformed";
-    }
+//    }
 
     m_leds[0] = Led_Off;
 
