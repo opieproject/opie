@@ -432,7 +432,12 @@ void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool 
         QString text;
         if (task.hasDueDate()) {
             int off = QDate::currentDate().daysTo( task.dueDate() );
-            text = tr( "%1 day(s)").arg(QString::number(off));
+            if(off==0)
+                text = tr("today");
+            else if(off==1)
+                text = tr("1 day"); // "tomorrow" wouldn't fit
+            else
+                text = tr("%1 days").arg(QString::number(off));
             /*
              * set color if not completed
              */
@@ -441,7 +446,7 @@ void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool 
                 if ( off < 0 )
                     color = Qt::red;
                 else if ( off == 0 )
-                    color = Qt::yellow;
+                    color = Qt::darkRed;
                 else if ( off > 0 )
                     color = Qt::green;
                 p->setPen(color  );
