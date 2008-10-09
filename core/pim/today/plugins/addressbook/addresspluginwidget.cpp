@@ -145,6 +145,8 @@ void AddressBookPluginWidget::getAddress() {
 
 						if(daysleft == 0)
 							output += QObject::tr("today");
+						else if(daysleft == 1)
+							output += QObject::tr("tomorrow");
 						else
 							output += QObject::tr("%1 days").arg(daysleft);
 
@@ -201,6 +203,8 @@ void AddressBookPluginWidget::getAddress() {
 
 					if(daysleft == 0)
 						output += QObject::tr("today");
+					else if(daysleft == 1)
+						output += QObject::tr("tomorrow");
 					else
 						output += QObject::tr("%1 days").arg(daysleft);
 
