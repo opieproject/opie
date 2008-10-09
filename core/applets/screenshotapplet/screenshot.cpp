@@ -16,6 +16,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <opie2/odevice.h>
 #include <opie2/ofiledialog.h>
 #include <opie2/oresource.h>
 #include <opie2/otaskbarapplet.h>
@@ -46,6 +47,8 @@ using namespace Opie::Core;
 using namespace Opie::Ui;
 
 static const char *SCAP_hostname = "www.handhelds.org";
+static const char *SCAP_capture_path = "/scap/capture.cgi";
+static const char *SCAP_view_url = "http://www.handhelds.org/scap";
 static const int SCAP_port = 80;
 
 
@@ -240,10 +243,8 @@ void ScreenshotControl::performGrab()
 
                                         QPixmap pix;
 
-                                        QString SCAP_model="";
-#warning FIXME: model string should be filled with actual device model
-                                                if( snapshot.width() > 320)
-                                                        SCAP_model ="Corgi";
+                                        QString SCAP_model = ODevice::inst()->modelString();
+                                        SCAP_model.replace(QRegExp(" "), "%%%");
 
                                         if(displayEnv == "QVFb:0")  {//set this if you plan on using this app in qvfb!!
                                                  pix = snapshot.xForm(QWMatrix().rotate(90));
@@ -252,14 +253,16 @@ void ScreenshotControl::performGrab()
 
                                         QImage img = pix.convertToImage().convertDepth( 16 ); // could make that also depth independent, if hh.org/scap can handle it
 
-                                        header = "POST /scap/capture.cgi?%1+%2 HTTP/1.1\n"  // 1: model / 2: user
-                                                "Content-length: %3\n"                     // 3: content length
+                                        header = "POST %1?%2+%3+%4 HTTP/1.1\n"  // 1: model / 2: user
+                                                "Content-length: %5\n"                     // 3: content length
                                                 "Content-Type: image/png\n"
-                                                "Host: %4\n"                               // 4: scap host
+                                                "Host: %6\n"                               // 4: scap host
                                                 "\n";
 
-
-                                        header = header.arg( SCAP_model).arg( ::getenv( "USER" ) ).arg( img.numBytes() ).arg( SCAP_hostname );
+                                        QString imgres = QString("%1x%2").arg( QApplication::desktop()->width() ).arg( QApplication::desktop()->height() ); 
+                                        
+                                        header = header.arg( SCAP_capture_path ).arg( SCAP_model).arg( ::getenv( "USER" ) ).arg( imgres ).arg( img.numBytes() ).arg( SCAP_hostname );
+                                        header.replace(QRegExp("%%%"), "%20");
                                         odebug << header << oendl;
 
                                         if ( !pix.isNull() )  {
@@ -275,7 +278,7 @@ void ScreenshotControl::performGrab()
                         }
                 }
                 if ( ok ) {
-                        QMessageBox::information( 0, tr( "Success" ), QString( "<p>%1</p>" ).arg ( tr( "Screenshot was uploaded to %1" )).arg( SCAP_hostname ));
+                        QMessageBox::information( 0, tr( "Success" ), QString( "<p>%1</p>" ).arg ( tr( "Screenshot was uploaded to %1" )).arg( SCAP_view_url ));
                 } else {
                         QMessageBox::warning( 0, tr( "Error" ), QString( "<p>%1</p>" ).arg( tr( "Connection to %1 failed." )).arg( SCAP_hostname ));
                 }
