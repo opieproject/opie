@@ -356,6 +356,8 @@ void OPimMainWindow::initBars( const QString &itemName ) {
         m_itemBeamAction->setWhatsThis( tr( "Click here to transmit the selected item." ) );
         m_itemBeamAction->addTo( toolbar );
     }
+    else
+        m_itemBeamAction = NULL;
 
     m_itemDeleteAction = new QAction( tr( "Delete" ),
                                       Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon ),
