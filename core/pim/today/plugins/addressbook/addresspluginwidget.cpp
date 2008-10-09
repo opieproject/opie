@@ -113,7 +113,7 @@ void AddressBookPluginWidget::getAddress() {
 								  Opie::OPimContactAccess::DateDiff );
 			if ( m_list.count() > 0 ){
 				output = "<font color=" + m_headlineColor + ">"
-					+ QObject::tr( "Next birthdays in <b> %1 </b> days:" )
+					+ QObject::tr( "Birthdays in next %1 days:" )
 					.arg( m_daysLookAhead )
 					+ "</font> <br>";
 
@@ -133,27 +133,27 @@ void AddressBookPluginWidget::getAddress() {
 							destdate.setYMD( QDate::currentDate().year()+1,
 									 destdate.month(), destdate.day() );
 
+						int daysleft = QDate::currentDate().daysTo(destdate);
 
-						if ( QDate::currentDate().daysTo(destdate) < m_urgentDays )
-							output += "<font color=" + m_urgentColor + "><b>-"
-								+ (*m_it).fullName()
-								+ " ("
-								+ QString::number(QDate::currentDate()
-										  .daysTo(destdate))
-								+ " Days) </b></font><br>";
+						QString color = m_entryColor;
+						if ( daysleft < m_urgentDays )
+							color = m_urgentColor;
 
+						output += "<font color=" + color + "><b>- "
+							+ (*m_it).fullName()
+							+ " (";
+
+						if(daysleft == 0)
+							output += QObject::tr("today");
 						else
-							output += "<font color=" + m_entryColor + "><b>-"
-								+ (*m_it).fullName()
-								+ " ("
-								+ QString::number(QDate::currentDate()
-										  .daysTo(destdate))
-								+ " Days) </b></font><br>";
+							output += QObject::tr("%1 days").arg(daysleft);
+
+						output += ") </b></font><br>";
 					}
 				}
 			} else {
 				output = "<font color=" + m_headlineColor + ">"
-					+ QObject::tr( "No birthdays in <b> %1 </b> days!" )
+					+ QObject::tr( "No birthdays in next %1 days" )
 					.arg( m_daysLookAhead )
 					+ "</font> <br>";
 			}
@@ -170,7 +170,7 @@ void AddressBookPluginWidget::getAddress() {
 		ammount = 0;
 		if ( m_list.count() > 0 ){
 			output += "<font color=" + m_headlineColor + ">"
-				+ QObject::tr( "Next anniversaries in <b> %1 </b> days:" )
+				+ QObject::tr( "Anniversaries in next %1 days:" )
 				.arg( m_daysLookAhead )
 				+ "</font> <br>";
 
@@ -189,25 +189,27 @@ void AddressBookPluginWidget::getAddress() {
 						destdate.setYMD( QDate::currentDate().year()+1,
 								 destdate.month(), destdate.day() );
 
-					if ( QDate::currentDate().daysTo(destdate) < m_urgentDays )
-						output += "<font color=" + m_urgentColor + "><b>-"
-							+ (*m_it).fullName()
-							+ " ("
-							+ QString::number(QDate::currentDate()
-									  .daysTo( destdate ) )
-							+ " Days) </b></font><br>";
+					int daysleft = QDate::currentDate().daysTo(destdate);
+
+					QString color = m_entryColor;
+					if ( daysleft < m_urgentDays )
+						color = m_urgentColor;
+
+					output += "<font color=" + color + "><b>- "
+						+ (*m_it).fullName()
+						+ " (";
+
+					if(daysleft == 0)
+						output += QObject::tr("today");
 					else
-						output += "<font color=" + m_entryColor + "><b>-"
-							+ (*m_it).fullName()
-							+ " ("
-							+ QString::number(QDate::currentDate()
-									  .daysTo( destdate ) )
-							+ " Days) </b></font><br>";
+						output += QObject::tr("%1 days").arg(daysleft);
+
+					output += ") </b></font><br>";
 				}
 			}
 		} else {
 			output += "<font color=" + m_headlineColor + ">"
-				+ QObject::tr( "No anniversaries in <b> %1 </b> days!" )
+				+ QObject::tr( "No anniversaries in next %1 days" )
 				.arg( m_daysLookAhead )
 				+ "</font> <br>";
 		}
