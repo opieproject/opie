@@ -102,7 +102,7 @@ private:
    void stop();
    void timerEvent( QTimerEvent *e );
    void setButtons();
-   void QtRec::fileSize(unsigned long size, QString &str);
+   void fileSize(unsigned long size, QString &str);
     
 private slots:
    void endPlaying();
