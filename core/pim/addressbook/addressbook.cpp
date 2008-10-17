@@ -62,6 +62,8 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 
 	isLoading = true;
 
+    initBars();
+
 	m_config.load();
 
 	// Create Views

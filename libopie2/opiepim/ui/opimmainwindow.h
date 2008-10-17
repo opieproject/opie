@@ -66,7 +66,7 @@ public:
 
     OPimMainWindow( const QString &serviceName,
                     const QString &catName = QString::null,
-                    const QString &itemName = QString::null,
+                    const QString &itemName = tr("Item"),
                     const QString &configName = QString::null,
                     QWidget *parent = 0l,  const char* name = 0l, WFlags f = WType_TopLevel );
     virtual ~OPimMainWindow();
@@ -110,6 +110,13 @@ protected slots:
     virtual void slotConfigure() = 0;
 
 protected:
+    QAction      *m_itemNewAction;       // Add new item action
+    QAction      *m_itemEditAction;      // Edit current item action
+    QAction      *m_itemDuplicateAction; // Duplicate current item action
+    QAction      *m_itemDeleteAction;    // Delete current item action
+    QAction      *m_itemBeamAction;      // Beam current item action
+    QAction      *m_configureAction;     // Configure application dialog action
+
     /**
      * start to play soundAlarm()
      * @param count How many times the alarm is played
@@ -135,6 +142,8 @@ protected:
     void setConfigureEnabled( bool enable );
     void setShowCategories( bool show );
 
+    virtual void initBars();
+
 private slots:
     void appMessage( const QCString&, const QByteArray& );
     void setDocument( const QString& );
@@ -146,6 +155,7 @@ private:
     int m_rtti;
     QCopChannel* m_channel;
     QString m_service;
+    QString m_itemName;
     QCString m_str;
     OPimRecord* m_fallBack;
     int m_alarmCount;
@@ -163,12 +173,6 @@ private:
     QActionGroup *m_itemMenuGroup2;      // Action group containing default items in Item menu
     QActionGroup *m_viewMenuAppGroup;    // Action group containing application items in View menu
 //    QActionGroup *m_viewMenuGroup;       // Action group containing default items in View menu
-    QAction      *m_itemNewAction;       // Add new item action
-    QAction      *m_itemEditAction;      // Edit current item action
-    QAction      *m_itemDuplicateAction; // Duplicate current item action
-    QAction      *m_itemDeleteAction;    // Delete current item action
-    QAction      *m_itemBeamAction;      // Beam current item action
-    QAction      *m_configureAction;     // Configure application dialog action
 
     QComboBox    *m_catSelect;           // Category selection combo box
 
@@ -180,7 +184,7 @@ private:
     int service();
 
     /** UI-related functions */
-    void initBars( const QString &itemName = tr( "Item" ) );
+    void initActions();
 
 signals:
     void categorySelected( const QString &cat );

@@ -83,6 +83,8 @@ MainWindow::MainWindow( QWidget* parent,
     m_tempManager = new TemplateManager();
     m_tempManager->load();
 
+    initBars();
+
     initConfig();
     initUI();
     initViews();
@@ -864,6 +866,5 @@ void MainWindow::doAlarm( const QDateTime& dt, int uid ) {
         QPEApplication::setKeepRunning();
 //        setActiveWindow();
     }
-
 }
 

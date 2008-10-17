@@ -76,7 +76,12 @@ OPimMainWindow::OPimMainWindow( const QString &serviceName, const QString &catNa
     connect(qApp, SIGNAL(reload() ),
             this, SLOT(reload() ) );
 
-    initBars( itemName );
+    m_viewMenu = NULL;
+    m_itemMenu = NULL;
+    m_catSelect = NULL;
+
+    m_itemName = itemName;
+    initActions();
 }
 
 OPimMainWindow::~OPimMainWindow() {
@@ -224,7 +229,7 @@ QPopupMenu *OPimMainWindow::itemContextMenu() {
 
 void OPimMainWindow::insertItemMenuItems( QActionGroup *items ) {
     // Insert menu items into Item menu
-    if ( items ) {
+    if ( items && m_itemMenu ) {
         // Rebuild Item menu
         m_itemMenu->clear();
         m_itemMenuGroup1->addTo( m_itemMenu );
@@ -237,7 +242,7 @@ void OPimMainWindow::insertItemMenuItems( QActionGroup *items ) {
 
 void OPimMainWindow::insertViewMenuItems( QActionGroup *items ) {
     // Insert menu items into View menu
-    if ( items ) {
+    if ( items && m_viewMenu ) {
         // Rebuild Item menu
         m_viewMenu->clear();
 //        m_viewMenuGroup->addTo( m_viewMenu );
@@ -248,28 +253,32 @@ void OPimMainWindow::insertViewMenuItems( QActionGroup *items ) {
 }
 
 void OPimMainWindow::setViewCategory( const QString &category ) {
-    // Find category in list
-    for ( int i = 0; i < m_catSelect->count(); i++ ) {
-        if ( m_catSelect->text( i ) == category ) {
-            m_catSelect->setCurrentItem( i );
-            emit categorySelected( category );
-            return;
+    if(m_catSelect) {
+        // Find category in list
+        for ( int i = 0; i < m_catSelect->count(); i++ ) {
+            if ( m_catSelect->text( i ) == category ) {
+                m_catSelect->setCurrentItem( i );
+                emit categorySelected( category );
+                return;
+            }
         }
     }
 }
 
 void OPimMainWindow::reloadCategories() {
-    QString selected = m_catSelect->currentText();
+    if(m_catSelect) {
+        QString selected = m_catSelect->currentText();
 
-    // Remove old categories from list
-    m_catSelect->clear();
+        // Remove old categories from list
+        m_catSelect->clear();
 
-    // Add categories to list
-    Categories cats;
-    cats.load( categoryFileName() );
-    m_catSelect->insertItem( tr( "All" ) );
-    m_catSelect->insertStringList( cats.labels( m_catGroupName ) );
-    m_catSelect->insertItem( tr( "Unfiled" ) );
+        // Add categories to list
+        Categories cats;
+        cats.load( categoryFileName() );
+        m_catSelect->insertItem( tr( "All" ) );
+        m_catSelect->insertStringList( cats.labels( m_catGroupName ) );
+        m_catSelect->insertItem( tr( "Unfiled" ) );
+    }
 }
 
 void OPimMainWindow::setItemNewEnabled( bool enable ) {
@@ -289,7 +298,8 @@ void OPimMainWindow::setItemDeleteEnabled( bool enable ) {
 }
 
 void OPimMainWindow::setItemBeamEnabled( bool enable ) {
-    m_itemBeamAction->setEnabled( enable );
+    if(m_itemBeamAction)
+        m_itemBeamAction->setEnabled( enable );
 }
 
 void OPimMainWindow::setConfigureEnabled( bool enable ) {
@@ -297,34 +307,13 @@ void OPimMainWindow::setConfigureEnabled( bool enable ) {
 }
 
 void OPimMainWindow::setShowCategories( bool show ) {
-    show ? m_catSelect->show()
-         : m_catSelect->hide();
+    if(m_catSelect) {
+        show ? m_catSelect->show()
+            : m_catSelect->hide();
+    }
 }
 
-void OPimMainWindow::initBars( const QString &itemName ) {
-    QString itemStr = itemName.lower();
-
-    setToolBarsMovable( false );
-
-    // Create application menu bar
-    QToolBar *mbHold = new QToolBar( this );
-    mbHold->setHorizontalStretchable( true );
-    QMenuBar *menubar = new QMenuBar( mbHold );
-    menubar->setMargin( 0 );
-
-    // Create application menu bar
-    QToolBar *toolbar = new QToolBar( this );
-
-    // Create sub-menus
-    m_itemMenu = new QPopupMenu( this );
-    m_itemMenu->setCheckable( true );
-    menubar->insertItem( itemName, m_itemMenu );
-    m_viewMenu = new QPopupMenu( this );
-    m_viewMenu->setCheckable( true );
-    menubar->insertItem( tr( "View" ), m_viewMenu );
-
-    m_viewMenuAppGroup = 0l;
-
+void OPimMainWindow::initActions() {
     // Item menu
     m_itemMenuGroup1 = new QActionGroup( this, QString::null, false );
 
@@ -333,14 +322,12 @@ void OPimMainWindow::initBars( const QString &itemName ) {
                                   QString::null, 0, m_itemMenuGroup1, 0 );
     connect( m_itemNewAction, SIGNAL(activated()), this, SLOT(slotItemNew()) );
     m_itemNewAction->setWhatsThis( tr( "Click here to create a new item." ) );
-    m_itemNewAction->addTo( toolbar );
 
     m_itemEditAction = new QAction( tr( "Edit" ),
                                     Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ),
                                     QString::null, 0, m_itemMenuGroup1, 0 );
     connect( m_itemEditAction, SIGNAL(activated()), this, SLOT(slotItemEdit()) );
     m_itemEditAction->setWhatsThis( tr( "Click here to edit the selected item." ) );
-    m_itemEditAction->addTo( toolbar );
 
     m_itemDuplicateAction = new QAction( tr( "Duplicate" ),
                                          Opie::Core::OResource::loadPixmap( "copy", Opie::Core::OResource::SmallIcon ),
@@ -354,7 +341,6 @@ void OPimMainWindow::initBars( const QString &itemName ) {
                                         QString::null, 0, m_itemMenuGroup1, 0 );
         connect( m_itemBeamAction, SIGNAL(activated()), this, SLOT(slotItemBeam()) );
         m_itemBeamAction->setWhatsThis( tr( "Click here to transmit the selected item." ) );
-        m_itemBeamAction->addTo( toolbar );
     }
     else
         m_itemBeamAction = NULL;
@@ -364,11 +350,6 @@ void OPimMainWindow::initBars( const QString &itemName ) {
                                       QString::null, 0, m_itemMenuGroup1, 0 );
     connect( m_itemDeleteAction, SIGNAL(activated()), this, SLOT(slotItemDelete()) );
     m_itemDeleteAction->setWhatsThis( tr( "Click here to delete the selected item." ) );
-    m_itemDeleteAction->addTo( toolbar );
-
-    m_itemMenuGroup1->addTo( m_itemMenu );
-
-    m_itemMenu->insertSeparator();
 
     m_itemMenuGroup2 = new QActionGroup( this, QString::null, false );
 
@@ -378,9 +359,8 @@ void OPimMainWindow::initBars( const QString &itemName ) {
     connect( m_configureAction, SIGNAL(activated()), this, SLOT(slotConfigure()) );
     m_configureAction->setWhatsThis( tr( "Click here to set your preferences for this application." ) );
 
-    m_itemMenuGroup2->addTo( m_itemMenu );
-
     // View menu
+    m_viewMenuAppGroup = 0l;
 //    m_viewMenuGroup = new QActionGroup( this, QString::null, false );
 
 //     QAction *a = new QAction( tr( "Filter" ), QString::null, 0, m_viewMenuGroup, 0 );
@@ -390,6 +370,42 @@ void OPimMainWindow::initBars( const QString &itemName ) {
 //     a = new QAction( tr( "Filter Settings" ), QString::null, 0, m_viewMenuGroup, 0 );
 //     connect( a, SIGNAL(activated()), this, SLOT(slotViewFilterSettings()) );
 //     a->setWhatsThis( tr( "Click here to modify the current filter settings." ) );
+
+
+}
+
+void OPimMainWindow::initBars() {
+    QString itemStr = m_itemName.lower();
+
+    setToolBarsMovable( false );
+
+    // Create application menu bar
+    QToolBar *mbHold = new QToolBar( this );
+    mbHold->setHorizontalStretchable( true );
+    QMenuBar *menubar = new QMenuBar( mbHold );
+    menubar->setMargin( 0 );
+
+    // Create application toolbar
+    QToolBar *toolbar = new QToolBar( this );
+    m_itemNewAction->addTo( toolbar );
+    m_itemEditAction->addTo( toolbar );
+    if( m_itemBeamAction )
+        m_itemBeamAction->addTo( toolbar );
+    m_itemDeleteAction->addTo( toolbar );
+
+    // Create sub-menus
+    m_itemMenu = new QPopupMenu( this );
+    m_itemMenu->setCheckable( true );
+    menubar->insertItem( m_itemName, m_itemMenu );
+    m_viewMenu = new QPopupMenu( this );
+    m_viewMenu->setCheckable( true );
+    menubar->insertItem( tr( "View" ), m_viewMenu );
+
+    m_itemMenuGroup1->addTo( m_itemMenu );
+
+    m_itemMenu->insertSeparator();
+
+    m_itemMenuGroup2->addTo( m_itemMenu );
 
     // Create view toolbar
     toolbar = new QToolBar( this );

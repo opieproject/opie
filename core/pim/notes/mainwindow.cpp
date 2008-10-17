@@ -76,6 +76,8 @@ mainWindowWidget::mainWindowWidget( QWidget *parent, const char *name, WFlags)
 
     QObject::connect(notesList, SIGNAL(returnPressed(QListBoxItem*)), this, SLOT(slotItemEdit()));
     QObject::connect(notesList, SIGNAL(doubleClicked(QListBoxItem*)), this, SLOT(slotItemEdit()));
+
+    initBars();
 }
 
 void mainWindowWidget::deleteFile()
