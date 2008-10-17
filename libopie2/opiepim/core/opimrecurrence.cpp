@@ -35,6 +35,7 @@
 
 /* QT */
 #include <qshared.h>
+#include <qstringlist.h>
 
 /* STD */
 #include <time.h>
@@ -676,16 +677,21 @@ void OPimRecurrence::fromMap( const QMap<int, QString>& map )
     }
     data -> create = cur.fromUTCDateTime( (time_t) map[ OPimRecurrence::Created ].toLong() ).date();
 
-#if 0
-    // FIXME: Exceptions currently not supported...
-    // Convert the list of exceptions from QString into ExceptionList
     data -> list.clear();
     QString exceptStr = map[ OPimRecurrence::Exceptions ];
     QStringList exceptList = QStringList::split( " ", exceptStr );
-    ...
-#endif
-
-
+    QString item;
+    QStringList::ConstIterator it;
+    for ( it = exceptList.begin(); it != exceptList.end(); ++it ) {
+        item = (*it);
+        if(item.length() == 8) {
+            int year = item.left(4).toInt();
+            int month = item.mid(4, 2).toInt();
+            int day = item.mid(6, 2).toInt();
+            QDate date(year, month, day);
+            data -> list.append(date);
+        }
+    }
 }
 
 }
