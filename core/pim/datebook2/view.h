@@ -4,8 +4,9 @@
 #include <qpixmap.h>
 #include <qwidget.h>
 
-#include <opie/oevent.h>
-#include <opie/odatebookaccess.h>
+#include <opie2/opimevent.h>
+#include <opie2/opimoccurrence.h>
+#include <opie2/odatebookaccess.h>
 
 class Config;
 namespace Datebook {
@@ -78,8 +79,8 @@ namespace Datebook {
         virtual void reschedule() = 0;
     protected:
         void popup( int uid);
-        QString toShortText(const OEffectiveEvent& eff)const;
-        QString toText(const OEffectiveEvent& eff)const;
+        QString toShortText(const OPimOccurrence& eff)const;
+        QString toText(const OPimOccurrence& eff)const;
         virtual void doLoadConfig( Config* ) = 0;
         virtual void doSaveConfig( Config* ) = 0;
 
@@ -112,12 +113,12 @@ namespace Datebook {
         /**
          * return events
          */
-        OEffectiveEvent::ValueList events( const QDate& start, const QDate& end );
+        OPimOccurrence::List events( const QDate& start, const QDate& end );
 
         /**
          * return an Event
          */
-        OEvent event( int uid )const;
+        OPimEvent event( int uid )const;
 
         /**
          * Is the clock AP/PM or 24h?

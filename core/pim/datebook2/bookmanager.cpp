@@ -8,7 +8,7 @@ BookManager::BookManager() {
 BookManager::~BookManager() {
     delete m_db;
 }
-void BookManager::add( const OEvent& ev) {
+void BookManager::add( const OPimEvent& ev) {
     if (!m_db ) return;
 
     m_db->add( ev );
@@ -17,7 +17,7 @@ void BookManager::add( const OPimRecord& rec ) {
     if (!m_db) load(); // we might where called by setDocument... before we even fully initialized
     m_db->add( rec );
 }
-void BookManager::update( const OEvent& up) {
+void BookManager::update( const OPimEvent& up) {
     if ( !m_db ) return;
     m_db->replace( up );
 }
@@ -45,21 +45,21 @@ void BookManager::reload() {
 
     m_db->reload();
 }
-OEvent BookManager::event( int uid ) {
-    if (!m_db ) return OEvent();
+OPimEvent BookManager::event( int uid ) {
+    if (!m_db ) return OPimEvent();
 
     return m_db->find( uid );
 }
 ODateBookAccess::List BookManager::allRecords()const {
     if (!m_db) return ODateBookAccess::List();
 
-    return m_db->rawEvents();
+    return m_db->allRecords();
 }
-OEffectiveEvent::ValueList BookManager::list( const QDate& from,
+OPimOccurrence::List BookManager::list( const QDate& from,
                                               const QDate& to ) {
-    if (!m_db) return OEffectiveEvent::ValueList();
+    if (!m_db) return OPimOccurrence::List();
 
-    return m_db->effectiveEvents( from, to );
+    return m_db->occurrences( from, to );
 }
 bool BookManager::save() {
     if (!m_db) return false;

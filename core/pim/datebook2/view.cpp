@@ -1,5 +1,5 @@
 
-#include <opie/odatebookaccess.h>
+#include <opie2/odatebookaccess.h>
 
 #include "bookmanager.h"
 #include "mainwindow.h"
@@ -42,10 +42,10 @@ void View::remove( int uid ) {
 ODateBookAccess::List View::allEvents() const{
     return m_win->manager()->allRecords();
 }
-OEffectiveEvent::ValueList View::events( const QDate& from, const QDate& to ) {
+OPimOccurrence::List View::events( const QDate& from, const QDate& to ) {
     return m_win->manager()->list( from, to );
 }
-OEvent View::event( int uid ) const{
+OPimEvent View::event( int uid ) const{
     return m_win->manager()->event( uid );
 }
 bool View::isAP()const {

@@ -3,8 +3,11 @@
 
 #include <qlist.h>
 
-#include <opie/opimrecord.h>
-#include <opie/odatebookaccess.h>
+#include <opie2/opimrecord.h>
+#include <opie2/odatebookaccess.h>
+#include <opie2/opimoccurrence.h>
+
+using namespace Opie;
 
 namespace Datebook {
     /**
@@ -23,14 +26,14 @@ namespace Datebook {
         void reload();
         bool save();
 
-        OEvent event( int uid );
-        OEffectiveEvent::ValueList list( const QDate& from,
+        OPimEvent event( int uid );
+        OPimOccurrence::List list( const QDate& from,
                                          const QDate& to );
         ODateBookAccess::List allRecords()const;
 
-        void add( const OEvent& );
+        void add( const OPimEvent& );
         void add( const OPimRecord& );
-        void update( const OEvent& );
+        void update( const OPimEvent& );
         void remove( int uid );
         void remove( const QArray<int>& );
 

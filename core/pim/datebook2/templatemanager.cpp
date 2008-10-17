@@ -7,8 +7,7 @@
 
 #include <qpe/config.h>
 
-#include <opie/odatebookaccess.h>
-#include <opie/odatebookaccessbackend_xml.h>
+#include <opie2/odatebookaccess.h>
 
 #include "editor.h"
 #include "templatemanager.h"
@@ -40,7 +39,7 @@ bool TemplateManager::load() {
     QStringList lst = conf.readListEntry( "Names", 0x1f );
     for ( QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
         conf.setGroup( (*it) );
-        add( (*it),  OEvent() );
+        add( (*it),  OPimEvent() );
     }
     return true;
 }
@@ -49,21 +48,21 @@ namespace {
     class TemplateItem : public QListViewItem {
     public:
         TemplateItem( QListView*, const QString& text,
-                      const OEvent& );
+                      const OPimEvent& );
         ~TemplateItem();
 
         QString text()const;
-        OEvent event()const;
+        OPimEvent event()const;
 
         void setText( const QString& text );
-        void setEvent( const OEvent& );
+        void setEvent( const OPimEvent& );
     private:
         QString m_text;
-        OEvent m_event;
+        OPimEvent m_event;
     };
     TemplateItem::TemplateItem( QListView* view,
                                 const QString& text,
-                                const OEvent& ev )
+                                const OPimEvent& ev )
         : QListViewItem( view ), m_event(ev) {
         QListViewItem::setText( 0, text );
     }
@@ -73,13 +72,13 @@ namespace {
         QListViewItem::setText( 0, text );
         m_text = text;
     }
-    void TemplateItem::setEvent( const OEvent& ev ) {
+    void TemplateItem::setEvent( const OPimEvent& ev ) {
         m_event = ev;
     }
     QString TemplateItem::text()const {
         return m_text;
     }
-    OEvent TemplateItem::event()const {
+    OPimEvent TemplateItem::event()const {
 
     }
 

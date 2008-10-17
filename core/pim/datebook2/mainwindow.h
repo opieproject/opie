@@ -3,7 +3,8 @@
 
 #include <qlist.h>
 
-#include <opie/opimmainwindow.h>
+#include <opie2/opimmainwindow.h>
+#include <opie2/opimevent.h>
 
 #include "descriptionmanager.h"
 #include "locationmanager.h"
@@ -46,7 +47,16 @@ namespace Datebook {
         void slotConfigureTemp();
         void slotNewFromTemplate(int ); // called when someone chooses the template menu
 
+        void slotItemNew();
+        void slotItemEdit();
+        void slotItemDuplicate();
+        void slotItemDelete();
+        void slotItemBeam();
+
         void setTemplateMenu(); // updates the templateMenu
+    
+    protected:
+        void initBars();
 
     protected slots:
         void populate();

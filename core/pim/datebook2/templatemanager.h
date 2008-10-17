@@ -3,9 +3,11 @@
 
 #include <qobject.h>
 
-#include <opie/oevent.h>
+#include <opie2/opimevent.h>
 
 #include "managertemplate.h"
+
+using namespace Opie;
 
 class QListView;
 namespace Datebook {
@@ -13,7 +15,7 @@ namespace Datebook {
      * The OEvent Template Manager
      */
     class Editor;
-    class TemplateManager : public ManagerTemplate<OEvent> {
+    class TemplateManager : public ManagerTemplate<OPimEvent> {
     public:
         TemplateManager();
         ~TemplateManager();

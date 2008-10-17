@@ -23,7 +23,7 @@ SOURCES	= main.cpp \
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe -lopie
+LIBS            += -lqpe -lopieui2 -lopiecore2 -lopiepim2
 TARGET		= datebook2
 
 include( $(OPIEDIR)/include.pro )

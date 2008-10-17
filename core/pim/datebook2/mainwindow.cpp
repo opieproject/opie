@@ -19,13 +19,13 @@
 #include "bookmanager.h"
 #include "mainwindow.h"
 
-
+using namespace Opie;
 using namespace Datebook;
 
 MainWindow::MainWindow()
-    : OPimMainWindow( "Datebook", 0, 0 ), m_descMan( "Descriptions" ),  m_locMan( "Locations" )
+    : OPimMainWindow( "Datebook", 0, 0, 0, 0, 0, WType_TopLevel | WStyle_ContextHelp ), m_descMan( "Descriptions" ),  m_locMan( "Locations" )
 {
-    setIcon( Resource::loadPixmap( "datebook_icon" ) );
+    initBars();
     initUI();
     initManagers();
     initView();
@@ -33,6 +33,7 @@ MainWindow::MainWindow()
 
     QTimer::singleShot(0, this, SLOT(populate() ) );
 
+    // FIXME OPimMainWindow already registers QCop receivers
     QCopChannel* chan = new QCopChannel( "QPE/System", this );
     connect( chan, SIGNAL( received(const QCString&,const QByteArray&) ),
              this, SLOT( slotReceive(const QCString&,const QByteArray&) ) );
@@ -41,6 +42,7 @@ MainWindow::MainWindow()
     connect( chan, SIGNAL( received(const QCString&,const QByteArray&) ),
              this, SLOT( slotReceive(const QCString&,const QByteArray&) ) );
 }
+
 MainWindow::~MainWindow() {
     m_tempMan.save();
     m_locMan.save();
@@ -49,46 +51,58 @@ MainWindow::~MainWindow() {
     manager()->save();
     delete m_manager;
 }
+
+void MainWindow::initBars() {
+    // do nothing
+}
+
 void MainWindow::doSetDocument( const QString& str ) {
 
 }
+
 void MainWindow::flush() {
     manager()->save();
 }
+
 void MainWindow::reload() {
     manager()->reload();
 }
+
 int MainWindow::create() {
     return 0;
 }
+
 bool MainWindow::remove( int uid ) {
     manager()->remove( uid );
     return true;
 }
+
 void MainWindow::beam( int uid ) {
 
 }
+
 void MainWindow::show( int uid ) {
 
     eventShow()->show( manager()->event( uid ) );
 }
+
 void MainWindow::add( const OPimRecord& ad) {
     manager()->add( ad );
 }
+
 void MainWindow::edit() {
     edit ( currentView()->currentItem() );
 }
+
 void MainWindow::edit( int uid ) {
 
 }
+
 /*
  * init tool bars layout and so on
  */
 void MainWindow::initUI() {
     setToolBarsMovable( false );
-
-    m_stack = new QWidgetStack( this );
-    setCentralWidget( m_stack );
 
     m_toolBar = new QToolBar( this );
     m_toolBar->setHorizontalStretchable( TRUE );
@@ -152,13 +166,20 @@ void MainWindow::initUI() {
 
     connect( qApp, SIGNAL(appMessage(const QCString&,const QByteArray&) ),
              this, SLOT(slotAppMessage(const QCString&,const QByteArray&) ) );
+
+    m_stack = new QWidgetStack( this );
+    setCentralWidget( m_stack );
+
 }
+
 void MainWindow::initConfig() {
 
 }
+
 void MainWindow::initView() {
 
 }
+
 void MainWindow::initManagers() {
     m_manager = new BookManager;
 
@@ -168,9 +189,11 @@ void MainWindow::initManagers() {
 
     setTemplateMenu();
 }
+
 void MainWindow::raiseCurrentView() {
 
 }
+
 /*
  * populate the view
  */
@@ -178,54 +201,86 @@ void MainWindow::populate() {
     if (!manager()->isLoaded() )
         manager()->load();
 }
+
 void MainWindow::slotGoToNow() {
 
 }
+
 View* MainWindow::currentView() {
 
 }
+
 void MainWindow::slotFind() {
 
 }
+
 void MainWindow::slotConfigure() {
 
 }
+
 void MainWindow::slotClockChanged( bool ) {
 
 }
+
 void MainWindow::slotWeekChanged(bool ) {
 
 }
+
 void MainWindow::slotAppMessage( const QCString&, const QByteArray& ) {
 
 }
+
 void MainWindow::slotReceive( const QCString&, const QByteArray& ) {
 
 }
+
+void MainWindow::slotItemNew() {
+}
+
+void MainWindow::slotItemEdit() {
+}
+
+void MainWindow::slotItemDuplicate() {
+}
+
+void MainWindow::slotItemDelete() {
+}
+
+void MainWindow::slotItemBeam() {
+}
+
 BookManager* MainWindow::manager() {
     return m_manager;
 }
+
 TemplateManager MainWindow::templateManager() {
     return m_tempMan;
 }
+
 LocationManager MainWindow::locationManager() {
     return m_locMan;
 }
+
 DescriptionManager MainWindow::descriptionManager() {
     return m_descMan;
 }
+
 void MainWindow::setLocationManager( const LocationManager& loc) {
     m_locMan = loc;
 }
+
 void MainWindow::setDescriptionManager( const DescriptionManager& dsc ) {
     m_descMan = dsc;
 }
+
 Show* MainWindow::eventShow() {
     return m_show;
 }
+
 void MainWindow::slotAction( QAction* act ) {
 
 }
+
 void MainWindow::slotConfigureLocs() {
     LocationManagerDialog dlg( locationManager() );
     dlg.setCaption( tr("Configure Locations") );
@@ -233,6 +288,7 @@ void MainWindow::slotConfigureLocs() {
         setLocationManager( dlg.manager() );
     }
 }
+
 void MainWindow::slotConfigureDesc() {
     DescriptionManagerDialog dlg( descriptionManager() );
     dlg.setCaption( tr("Configure Descriptions") );
@@ -240,6 +296,7 @@ void MainWindow::slotConfigureDesc() {
         setDescriptionManager( dlg.manager() );
     }
 }
+
 void MainWindow::slotConfigureTemp() {
     TemplateDialog dlg( templateManager(), editor() );
     dlg.setCaption( tr("Configure Templates") );
@@ -248,23 +305,30 @@ void MainWindow::slotConfigureTemp() {
         setTemplateMenu();
     }
 }
+
 void MainWindow::hideShow() {
 
 }
+
 void MainWindow::viewPopup(int ) {
 
 }
+
 void MainWindow::viewAdd(const QDate& ) {
 
 }
+
 void MainWindow::viewAdd( const QDateTime&, const QDateTime& ) {
 
 }
+
 bool MainWindow::viewAP()const{
 }
+
 bool MainWindow::viewStartMonday()const {
 
 }
+
 void MainWindow::setTemplateMenu() {
     m_popTemplate->clear();
 
@@ -273,14 +337,15 @@ void MainWindow::setTemplateMenu() {
         m_popTemplate->insertItem( (*it) );
     }
 }
+
 /*
  * get the name of the item with the id id
- * then ask for an OEvent from the manager
+ * then ask for an OPimEvent from the manager
  */
 void MainWindow::slotNewFromTemplate(int id ) {
     QString name = m_popTemplate->text( id );
 
-    OEvent ev = templateManager().value( name );
+    OPimEvent ev = templateManager().value( name );
 
     if ( editor()->edit( ev ) ) {
         ev =  editor()->event();
@@ -297,6 +362,7 @@ void MainWindow::slotNewFromTemplate(int id ) {
         raiseCurrentView();
     }
 }
+
 Editor* MainWindow::editor() {
     return m_edit;
 }

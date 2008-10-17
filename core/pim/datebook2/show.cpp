@@ -20,6 +20,6 @@ TextShow::~TextShow() {
 QWidget* TextShow::widget() {
     return this;
 }
-void TextShow::show(const OEvent& ev) {
+void TextShow::show(const OPimEvent& ev) {
     setText( ev.toRichText() );
 }

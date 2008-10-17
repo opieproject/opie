@@ -4,7 +4,9 @@
 #include <qstring.h>
 #include <qtextview.h>
 
-#include <opie/oevent.h>
+#include <opie2/opimevent.h>
+
+using namespace Opie;
 
 namespace Datebook {
     class MainWindow;
@@ -13,7 +15,7 @@ namespace Datebook {
      * here is the show
      * The show interface will
      * show the richtext information
-     * of the OEvent
+     * of the OPimEvent
      */
     class Show {
     public:
@@ -24,9 +26,9 @@ namespace Datebook {
         virtual ~Show();
 
         /**
-         * show the OEvent
+         * show the OPimEvent
          */
-        virtual void show(const OEvent& str) = 0;
+        virtual void show(const OPimEvent& str) = 0;
 
         /**
          * the Widget
@@ -49,7 +51,7 @@ namespace Datebook {
         ~TextShow();
 
         QWidget* widget();
-        void show(const OEvent&);
+        void show(const OPimEvent&);
 
     };
 }

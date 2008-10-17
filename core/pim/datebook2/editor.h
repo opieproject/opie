@@ -3,10 +3,12 @@
 
 #include <qdialog.h>
 
-#include <opie/oevent.h>
+#include <opie2/opimevent.h>
 
 #include "descriptionmanager.h"
 #include "locationmanager.h"
+
+using namespace Opie;
 
 namespace Datebook {
     class MainWindow;
@@ -20,9 +22,9 @@ namespace Datebook {
 
         virtual bool newEvent( const QDate& ) = 0;
         virtual bool newEvent( const QDateTime& start, const QDateTime& end ) = 0;
-        virtual bool edit( const OEvent&, bool showRec = TRUE ) = 0;
+        virtual bool edit( const OPimEvent&, bool showRec = TRUE ) = 0;
 
-        virtual OEvent event()const = 0;
+        virtual OPimEvent event() const = 0;
 
     protected:
         DescriptionManager descriptions()const;
