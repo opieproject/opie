@@ -1,5 +1,6 @@
 TEMPLATE     = app
 CONFIG       = qt warn_on 
+DESTDIR		= $(OPIEDIR)/bin
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
