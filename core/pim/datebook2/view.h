@@ -3,15 +3,22 @@
 
 #include <qpixmap.h>
 #include <qwidget.h>
+#include <qaction.h>
+#include <qobject.h>
+#include <qlist.h>
 
 #include <opie2/opimevent.h>
 #include <opie2/opimoccurrence.h>
 #include <opie2/odatebookaccess.h>
 
 class Config;
+namespace Opie {
 namespace Datebook {
     class MainWindow;
-    class View {
+    class View;
+    
+    class View: public QObject {
+        Q_OBJECT
     public:
         View( MainWindow* window,  QWidget* parent );
         virtual ~View();
@@ -139,6 +146,13 @@ namespace Datebook {
     private:
         MainWindow* m_win;
     };
+
+    class ViewAction : public QAction {
+    public:
+        ViewAction(View *view, int accel, QObject *parent, const char *name = 0)
+            : QAction(view->name(), view->pixmap(), QString::null, accel, parent, name, TRUE) { };
+    };
+}
 }
 
 #endif
