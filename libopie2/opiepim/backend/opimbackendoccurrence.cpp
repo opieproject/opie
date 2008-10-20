@@ -133,7 +133,7 @@ UID OPimBackendOccurrence::uid()const {
  *
  */
 bool OPimBackendOccurrence::isAllDay()const {
-    return m_haveTime;
+    return !m_haveTime;
 }
 
 /**
