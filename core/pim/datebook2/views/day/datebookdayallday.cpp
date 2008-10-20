@@ -38,6 +38,9 @@
 
 #include "datebookday.h"
 
+using namespace Opie;
+using namespace Opie::Datebook;
+
 /*
  *  Constructs a DatebookdayAllday which is a child of 'parent', with the
  *  name 'name' and widget flags set to 'f'
@@ -76,7 +79,7 @@ DatebookdayAllday::~DatebookdayAllday()
     // no need to delete child widgets, Qt does it all for us
 }
 
-DatebookAlldayDisp* DatebookdayAllday::addEvent(const EffectiveEvent&ev)
+DatebookAlldayDisp* DatebookdayAllday::addEvent(const OPimOccurrence&ev)
 {
     DatebookAlldayDisp * lb;
     lb = new DatebookAlldayDisp(dateBook,ev,m_MainFrame,NULL);
@@ -84,7 +87,7 @@ DatebookAlldayDisp* DatebookdayAllday::addEvent(const EffectiveEvent&ev)
     datebookdayalldayLayout->addWidget(lb);
     subWidgets.append(lb);
 
-    connect(lb,SIGNAL(displayMe(const Event&)),lblDesc,SLOT(disp_event(const Event&)));
+    connect(lb,SIGNAL(displayMe(const OPimEvent&)),lblDesc,SLOT(disp_event(const OPimEvent&)));
     ++item_count;
 
     return lb;
@@ -98,7 +101,7 @@ DatebookAlldayDisp* DatebookdayAllday::addHoliday(const QString&e)
     datebookdayalldayLayout->addWidget(lb);
     subWidgets.append(lb);
 
-    connect(lb,SIGNAL(displayMe(const Event&)),lblDesc,SLOT(disp_event(const Event&)));
+    connect(lb,SIGNAL(displayMe(const OPimEvent&)),lblDesc,SLOT(disp_event(const OPimEvent&)));
     ++item_count;
 
     return lb;
@@ -110,11 +113,11 @@ void DatebookdayAllday::removeAllEvents()
     item_count = 0;
 }
 
-DatebookAlldayDisp::DatebookAlldayDisp(DateBookDB *db,const EffectiveEvent& ev,
+DatebookAlldayDisp::DatebookAlldayDisp(DateBookDB *db,const OPimOccurrence& ev,
                                        QWidget* parent,const char* name,WFlags f)
     : QLabel(parent,name,f),m_Ev(ev),dateBook(db)
 {
-    QString strDesc = m_Ev.description();
+    QString strDesc = m_Ev.summary();
     strDesc = strDesc.replace(QRegExp("<"),"&#60;");
     setBackgroundColor(yellow);
     setText(strDesc);
@@ -131,10 +134,10 @@ DatebookAlldayDisp::DatebookAlldayDisp(const QString&aholiday,QWidget* parent,co
 {
     QString strDesc = aholiday;
     strDesc = strDesc.replace(QRegExp("<"),"&#60;");
-    Event ev;
+    OPimEvent ev;
     ev.setDescription(strDesc);
     ev.setAllDay(true);
-    m_Ev.setEvent(ev);
+//X    m_Ev.setEvent(ev);
     setText(strDesc);
 
     setAlignment(AlignHCenter);
@@ -157,36 +160,37 @@ DatebookAlldayDisp::~DatebookAlldayDisp()
 void DatebookAlldayDisp::beam_single_event()
 {
     if (m_holiday) return;
-    // create an Event and beam it...
+    // create an OPimEvent and beam it...
     /*
      * Start with the easy stuff. If start and  end date is the same we can just use
      * the values of effective m_Events
      * If it is a multi day m_Event we need to find the real start and end date...
      */
-    if ( m_Ev.event().start().date() == m_Ev.event().end().date() ) {
-        Event m_Event( m_Ev.event() );
+    // FIXME I'm sure we have code duplication here...
+    if ( m_Ev.toEvent().startDateTime().date() == m_Ev.toEvent().endDateTime().date() ) {
+        OPimEvent m_Event( m_Ev.toEvent() );
 
-        QDateTime dt( m_Ev.date(), m_Ev.start() );
-        m_Event.setStart( dt );
+        QDateTime dt( m_Ev.date(), m_Ev.startTime() );
+        m_Event.setStartDateTime( dt );
 
-        dt.setTime( m_Ev.end() );
-        m_Event.setEnd( dt );
+        dt.setTime( m_Ev.endTime() );
+        m_Event.setEndDateTime( dt );
         emit beamMe( m_Event );
     }else {
         /*
          * at least the the Times are right now
          */
-        QDateTime start( m_Ev.event().start() );
-        QDateTime end  ( m_Ev.event().end  () );
+        QDateTime start( m_Ev.toEvent().startDateTime() );
+        QDateTime end  ( m_Ev.toEvent().endDateTime() );
 
         /*
          * ok we know the start date or we need to find it
          */
-        if ( m_Ev.start() != QTime( 0, 0, 0 ) ) {
+        if ( m_Ev.startTime() != QTime( 0, 0, 0 ) ) {
             start.setDate( m_Ev.date() );
         }else {
-            QDate dt = DateBookDay::findRealStart( m_Ev.event().uid(), m_Ev.date(), dateBook );
-            start.setDate( dt );
+//X            QDate dt = DateBookDay::findRealStart( m_Ev.event().uid(), m_Ev.date(), dateBook );
+//X            start.setDate( dt );
         }
 
         /*
@@ -195,22 +199,22 @@ void DatebookAlldayDisp::beam_single_event()
          *   get to know the offset btw the real start and real end
          *   and then add it to the new start date...
          */
-        if ( m_Ev.end() != QTime(23, 59, 59 ) ) {
+        if ( m_Ev.endTime() != QTime(23, 59, 59 ) ) {
             end.setDate( m_Ev.date() );
         }else{
-            int days = m_Ev.event().start().date().daysTo( m_Ev.event().end().date() );
+            int days = m_Ev.toEvent().startDateTime().date().daysTo( m_Ev.toEvent().endDateTime().date() );
             end.setDate( start.date().addDays( days ) );
         }
-        Event m_Event( m_Ev.event() );
-        m_Event.setStart( start );
-        m_Event.setEnd  ( end   );
+        OPimEvent m_Event( m_Ev.toEvent() );
+        m_Event.setStartDateTime( start );
+        m_Event.setEndDateTime( end );
         emit beamMe( m_Event );
     }
 }
 
 void DatebookAlldayDisp::mousePressEvent(QMouseEvent*e)
 {
-    Event ev = m_Ev.event();
+    OPimEvent ev = m_Ev.toEvent();
     QColor b = backgroundColor();
     setBackgroundColor(green);
     update();
@@ -219,8 +223,11 @@ void DatebookAlldayDisp::mousePressEvent(QMouseEvent*e)
         m.insertItem( DateBookDayWidget::tr( "Edit" ), 1 );
         m.insertItem( DateBookDayWidget::tr( "Duplicate" ), 4 );
         m.insertItem( DateBookDayWidget::tr( "Delete" ), 2 );
-        if(Ir::supported()) m.insertItem( DateBookDayWidget::tr( "Beam" ), 3 );
-        if(Ir::supported() && m_Ev.event().doRepeat() ) m.insertItem( DateBookDayWidget::tr( "Beam this occurence"), 5 );
+        if(Ir::supported()) {
+            m.insertItem( DateBookDayWidget::tr( "Beam" ), 3 );
+            if(m_Ev.toEvent().hasRecurrence() ) 
+                m.insertItem( DateBookDayWidget::tr( "Beam this occurence"), 5 );
+        }
     }
     m.insertItem( tr( "Info"),6);
     int r = m.exec( e->globalPos() );
@@ -269,13 +276,13 @@ void DatebookEventDesc::mousePressEvent(QMouseEvent*)
     if (m_Timer->isActive()) m_Timer->stop();
 }
 
-void DatebookEventDesc::disp_event(const Event&e)
+void DatebookEventDesc::disp_event(const OPimEvent&e)
 {
     if (m_Timer->isActive()) m_Timer->stop();
     QString text;
     text = "<b><i>"+e.description()+"</i></b><br>";
-    if (e.notes().length()>0) {
-        text+="<b>"+e.notes()+"</b><br>";
+    if (e.note().length()>0) {
+        text+="<b>"+e.note()+"</b><br>";
     }
     if (e.location().length()>0) {
         text+="<i>"+e.location()+"</i><br>";

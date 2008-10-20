@@ -37,7 +37,9 @@
 #include <qscrollview.h>
 #include <qlabel.h>
 #include <qlist.h>
-#include <qpe/event.h>
+
+#include "opie2/opimevent.h"
+#include "opie2/opimoccurrence.h"
 
 class QVBoxLayout;
 class QHBoxLayout;
@@ -54,8 +56,8 @@ public:
     DatebookdayAllday(DateBookDB* db,
             QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
     ~DatebookdayAllday();
-    DatebookAlldayDisp* addEvent(const EffectiveEvent&e);
-    DatebookAlldayDisp* addHoliday(const QString&e);
+    DatebookAlldayDisp* addEvent(const Opie::OPimOccurrence &e);
+    DatebookAlldayDisp* addHoliday(const QString &e);
     const unsigned int items()const{return item_count;}
 
 public slots:
@@ -75,23 +77,23 @@ class DatebookAlldayDisp : public QLabel
     Q_OBJECT
 
 public:
-    DatebookAlldayDisp(DateBookDB* db,const EffectiveEvent& e,
+    DatebookAlldayDisp(DateBookDB* db,const Opie::OPimOccurrence& e,
                        QWidget* parent=0,const char* name = 0, WFlags fl=0);
     DatebookAlldayDisp(const QString&aholiday,
                        QWidget* parent=0,const char* name = 0, WFlags fl=0);
     virtual ~DatebookAlldayDisp();
 
 signals:
-    void deleteMe( const Event &e );
-    void duplicateMe( const Event &e );
-    void editMe( const Event &e );
-    void beamMe( const Event &e );
-    void displayMe(const Event &e);
+    void deleteMe( const Opie::OPimEvent &e );
+    void duplicateMe( const Opie::OPimEvent &e );
+    void editMe( const Opie::OPimEvent &e );
+    void beamMe( const Opie::OPimEvent &e );
+    void displayMe(const Opie::OPimEvent &e);
 
 public slots:
 
 protected:
-    EffectiveEvent m_Ev;
+    Opie::OPimOccurrence m_Ev;
     DateBookDB* dateBook;
     void mousePressEvent( QMouseEvent *e );
     void beam_single_event();
@@ -107,10 +109,10 @@ public:
     virtual ~DatebookEventDesc();
 
 public slots:
-    void disp_event(const Event&e);
+    void disp_event(const Opie::OPimEvent &e);
 
 protected:
-    void mousePressEvent(QMouseEvent*e);
+    void mousePressEvent(QMouseEvent *e);
     QTimer* m_Timer;
 };
 

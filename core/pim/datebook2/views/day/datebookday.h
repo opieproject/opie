@@ -31,16 +31,17 @@
 #ifndef DATEBOOKDAY_H
 #define DATEBOOKDAY_H
 
-#include <qpe/event.h>
+#include <opie2/opimevent.h>
+#include <opie2/opimoccurrence.h>
 
 #include <qdatetime.h>
 #include <qtable.h>
 #include <qvbox.h>
 #include <qlist.h>
-
-#include "datebook.h"
-#include "datebooktypes.h"
 #include <qlineedit.h>
+
+#include "datebooktypes.h"
+#include "dayview.h"
 
 class DateBookDayHeader;
 class DateBookDB;
@@ -57,14 +58,14 @@ class DateBookDayViewQuickLineEdit : public QLineEdit
 public:
     DateBookDayViewQuickLineEdit(const QDateTime &start, const QDateTime &end,QWidget * parent, const char *name=0);
 protected:
-    Event quickEvent;
+    Opie::OPimEvent quickEvent;
     int active;
     void focusOutEvent( QFocusEvent *e );
 protected slots:
     void slotReturnPressed(void);
         void finallyCallClose();
 signals:
-    void insertEvent(const Event &e);
+    void insertEvent(const Opie::OPimEvent &e);
 };
 
 
@@ -101,25 +102,24 @@ private:
     DateBookDayViewQuickLineEdit *quickLineEdit;
 };
 
-class DateBookDay;
 class DateBookDayWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    DateBookDayWidget( const EffectiveEvent &e, DateBookDay *db );
+    DateBookDayWidget( const Opie::OPimOccurrence &e, Opie::Datebook::DayView *dv );
     ~DateBookDayWidget();
 
     const QRect &geometry() { return geom; }
     void setGeometry( const QRect &r );
 
-    const EffectiveEvent &event() const { return ev; }
+    const Opie::OPimOccurrence &event() const { return ev; }
 
 signals:
-    void deleteMe( const EffectiveEvent &e );
-    void duplicateMe( const Event &e );
-    void editMe( const EffectiveEvent &e );
-    void beamMe( const Event &e );
+    void deleteMe( const Opie::OPimOccurrence &e );
+    void duplicateMe( const Opie::OPimEvent &e );
+    void editMe( const Opie::OPimOccurrence &e );
+    void beamMe( const Opie::OPimEvent &e );
 
 protected:
     void paintEvent( QPaintEvent *e );
@@ -127,7 +127,7 @@ protected:
 
 private:
     /**
-     * Sets the text for an all day Event
+     * Sets the text for an all day Opie::OPimEvent
      * All day events have no time associated
      */
     void setAllDayText( QString& text );
@@ -137,8 +137,8 @@ private:
      * it got a start and an end Time
      */
     void setEventText( QString& text );
-    EffectiveEvent ev;
-    DateBookDay *dateBook;
+    Opie::OPimOccurrence ev;
+    Opie::Datebook::DayView *dayView;
     QString text;
     QRect geom;
 };
@@ -149,7 +149,7 @@ class DateBookDayTimeMarker : public QWidget
     Q_OBJECT
 
 public:
-    DateBookDayTimeMarker( DateBookDay *db );
+    DateBookDayTimeMarker( DateBookDayView *dv );
     ~DateBookDayTimeMarker();
 
     const QRect &geometry() { return geom; }
@@ -164,7 +164,7 @@ protected:
 private:
     QRect geom;
     QTime time;
-    DateBookDay *dateBook;
+    DateBookDayView *dayView;
 };
 
 //reimplemented the compareItems function so that it sorts DayWidgets by geometry heights
@@ -187,65 +187,5 @@ class WidgetListClass : public QList<DateBookDayWidget>
 
 };
 
-class DateBookDay : public QVBox
-{
-    Q_OBJECT
-
-    friend class DateBookDayWidget; // for beam this occurence and access to DateBookDB
-public:
-    DateBookDay( bool ampm, bool startOnMonday, DateBookDBHoliday *newDb,DateBookHoliday*newHdb,
-         QWidget *parent, const char *name );
-    void selectedDates( QDateTime &start, QDateTime &end );
-
-    QDate date() const;
-    DateBookDayView *dayView() const { return view; }
-    void setStartViewTime( int startHere );
-    int startViewTime() const;
-    void setSelectedWidget( DateBookDayWidget * );
-    DateBookDayWidget * getSelectedWidget( void );
-    void setJumpToCurTime( bool bJump );
-    void setRowStyle( int style );
-    static QDate findRealStart( int uid, const QDate& isIncluded,
-                                DateBookDB* );
-
-public slots:
-    void setDate( int y, int m, int d );
-    void setDate( QDate );
-    void redraw();
-    void slotWeekChanged( bool bStartOnMonday );
-    void updateView();  //updates TimeMarker and DayWidget-colors
-
-signals:
-    void removeEvent( const EffectiveEvent& );
-    void editEvent( const EffectiveEvent& );
-    void duplicateEvent( const Event& );
-    void beamEvent( const Event& );
-    void newEvent();
-    void sigNewEvent( const QString & );
-
-protected slots:
-    void keyPressEvent(QKeyEvent *);
-
-private slots:
-    void dateChanged( int y, int m, int d );
-    void slotColWidthChanged() { relayoutPage(); };
-
-private:
-    void getEvents();
-    void relayoutPage( bool fromResize = false );
-    DateBookDayWidget *intersects( const DateBookDayWidget *item, const QRect &geom );
-    QDate currDate;
-    DateBookDayView *view;
-    DateBookDayHeader *header;
-    DatebookdayAllday *m_allDays;
-    DateBookDBHoliday *db;
-    WidgetListClass widgetList; //reimplemented QList for sorting widgets by height
-    int startTime;
-    bool jumpToCurTime; //should we jump to current time in dayview?
-    int rowStyle;
-    DateBookDayWidget *selectedWidget; //actual selected widget (obviously)
-    DateBookDayTimeMarker *timeMarker;  //marker for current time
-    DateBookHoliday*_holiday_db;
-};
 
 #endif
