@@ -7,9 +7,8 @@
 
 #include "managertemplate.h"
 
-using namespace Opie;
-
 class QListView;
+namespace Opie {
 namespace Datebook {
     /**
      * The OEvent Template Manager
@@ -45,6 +44,7 @@ namespace Datebook {
         QListView* m_view;
         Editor* m_edit;
     };
+}
 }
 
 #endif

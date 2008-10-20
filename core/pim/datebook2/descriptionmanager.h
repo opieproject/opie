@@ -3,9 +3,11 @@
 
 #include "stringmanager.h"
 
+namespace Opie {
 namespace Datebook {
     typedef StringManager DescriptionManager;
     typedef StringManagerDialog DescriptionManagerDialog;
+}
 }
 
 #endif

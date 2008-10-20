@@ -6,6 +6,7 @@
 #include "managertemplate.h"
 
 class QListView;
+namespace Opie {
 namespace Datebook {
     /**
      * StringManager is a generic manager
@@ -52,6 +53,7 @@ namespace Datebook {
         QListView* m_view;
         QString m_base;
     };
+}
 }
 
 #endif

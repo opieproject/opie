@@ -3,12 +3,14 @@
 
 #include "stringmanager.h"
 
+namespace Opie {
 namespace Datebook {
     /**
      * life can be so simple
      */
     typedef StringManager LocationManager;
     typedef StringManagerDialog LocationManagerDialog;
+}
 }
 
 #endif

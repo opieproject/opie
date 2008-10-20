@@ -8,7 +8,7 @@
 
 #include "stringmanager.h"
 
-using namespace Datebook;
+using namespace Opie::Datebook;
 
 StringManager::StringManager( const QString& str )
     : m_base( str ) {

@@ -12,8 +12,8 @@
 #include "editor.h"
 #include "templatemanager.h"
 
-using namespace Datebook;
-
+using namespace Opie;
+using namespace Opie::Datebook;
 
 TemplateManager::TemplateManager() {
 

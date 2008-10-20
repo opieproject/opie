@@ -8,8 +8,7 @@
 #include "descriptionmanager.h"
 #include "locationmanager.h"
 
-using namespace Opie;
-
+namespace Opie {
 namespace Datebook {
     class MainWindow;
     /**
@@ -36,6 +35,7 @@ namespace Datebook {
         MainWindow* m_win;
 
     };
+}
 }
 
 #endif

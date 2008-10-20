@@ -5,6 +5,7 @@
 #include <qmap.h>
 #include <qstring.h>
 
+namespace Opie {
 namespace Datebook {
     /**
      * ManagerTemplate is a template which manages
@@ -55,6 +56,7 @@ namespace Datebook {
     T ManagerTemplate<T>::value( const QString& str)const {
         return m_map[str];
     }
+}
 }
 
 #endif

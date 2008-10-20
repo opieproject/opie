@@ -6,8 +6,7 @@
 
 #include <opie2/opimevent.h>
 
-using namespace Opie;
-
+namespace Opie {
 namespace Datebook {
     class MainWindow;
 
@@ -54,6 +53,7 @@ namespace Datebook {
         void show(const OPimEvent&);
 
     };
+}
 }
 
 #endif

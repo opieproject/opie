@@ -7,8 +7,7 @@
 #include <opie2/odatebookaccess.h>
 #include <opie2/opimoccurrence.h>
 
-using namespace Opie;
-
+namespace Opie {
 namespace Datebook {
     /**
      * book manager is responsible for managing the
@@ -43,6 +42,7 @@ namespace Datebook {
     private:
         ODateBookAccess* m_db;
     };
+}
 }
 
 #endif
