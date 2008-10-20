@@ -2,12 +2,12 @@
 
 #include <qpe/qpeapplication.h>
 
+using namespace Opie;
 
 int main( int argc, char* argv[] ) {
     QPEApplication app( argc, argv );
 
     Datebook::MainWindow mw;
-    mw.setCaption( QObject::tr("Opie Datebook") );
 
     app.showMainWidget( &mw );
 
