@@ -78,6 +78,7 @@ void repeat( OPimBackendOccurrence::List& tmpList, const OPimEvent::ValueList& l
             end   = QDateTime( repeat.addDays(dur), event.endDateTime().time() );
             OPimBackendOccurrence eff(start, end, event.uid() );
             tmpList.append( eff );
+            itDate = repeat.addDays(1);
         }
     }
 }
