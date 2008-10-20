@@ -15,6 +15,7 @@ class QAction;
 class QWidgetStack;
 class QPopupMenu;
 class QToolBar;
+namespace Opie {
 namespace Datebook {
     class BookManager;
     class Show;
@@ -31,7 +32,7 @@ namespace Datebook {
     private slots:
         void initUI(); // init the UI
         void initConfig(); // apply the config
-        void initView(); // init the Views..
+        void initViews(); // init the Views..
         void initManagers(); // init the Managers including templates, location and description
         void raiseCurrentView(); // raise the current View
         void slotGoToNow(); // will switch the currentView to the curren date time
@@ -41,7 +42,7 @@ namespace Datebook {
         void slotWeekChanged( bool ); // week changed
         void slotAppMessage( const QCString&, const QByteArray& ); // qApp message QPE/Application/datebook
         void slotReceive( const QCString&, const QByteArray& ); // QPE/System and QPE/Datebook
-        void slotAction( QAction* ); // View changed
+        void slotChangeView(); // View changed
         void slotConfigureLocs(); // Configure the Locations
         void slotConfigureDesc(); // Configure the Desc
         void slotConfigureTemp();
@@ -99,11 +100,12 @@ namespace Datebook {
         bool viewStartMonday()const;
         // off view show
     private:
-        QList<View> m_view; // the Views.. not autoDelete
+        QList<View> m_views; // the Views.. not autoDelete
+        QActionGroup* m_viewsGroup;
         QWidgetStack* m_stack;
         QToolBar *m_toolBar;
-        QPopupMenu* m_popView;
-        QPopupMenu* m_popSetting;
+        QToolBar *m_toolBar2;
+        QToolBar *m_viewsBar;
         QPopupMenu* m_popTemplate;
         BookManager* m_manager;
         TemplateManager m_tempMan;
@@ -111,7 +113,9 @@ namespace Datebook {
         LocationManager m_locMan;
         Show* m_show;
         Editor* m_edit;
+        bool m_ampm;
     };
+}
 }
 
 #endif

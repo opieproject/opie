@@ -5,19 +5,23 @@
 #include <qaction.h>
 #include <qpopupmenu.h>
 #include <qtimer.h>
+#include <qobjectlist.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/ir.h>
 #include <qmenubar.h>
 #include <qtoolbar.h>
 #include <qpe/qpemessagebox.h>
-#include <qpe/resource.h>
+#include <opie2/oresource.h>
 
 #include "editor.h"
 #include "show.h"
 #include "templatemanager.h"
 #include "bookmanager.h"
 #include "mainwindow.h"
+#include "datebooksettings.h"
+
+#include "views/day/dayview.h"
 
 using namespace Opie;
 using namespace Datebook;
@@ -27,10 +31,15 @@ MainWindow::MainWindow()
 {
     initBars();
     initUI();
+    initViews();
     initManagers();
-    initView();
     initConfig();
 
+    setCaption( tr("Calendar") );
+    setIcon( Opie::Core::OResource::loadPixmap( "datebook_icon" ) );
+
+    raiseCurrentView();
+    
     QTimer::singleShot(0, this, SLOT(populate() ) );
 
     // FIXME OPimMainWindow already registers QCop receivers
@@ -95,7 +104,7 @@ void MainWindow::edit() {
 }
 
 void MainWindow::edit( int uid ) {
-
+    
 }
 
 /*
@@ -106,47 +115,44 @@ void MainWindow::initUI() {
 
     m_toolBar = new QToolBar( this );
     m_toolBar->setHorizontalStretchable( TRUE );
-
+    
     QMenuBar* mb = new QMenuBar( m_toolBar );
 
-    m_popView    = new QPopupMenu( this );
-    m_popSetting = new QPopupMenu( this );
-
-    mb->insertItem( tr("View"), m_popView );
-    mb->insertItem( tr("Settings" ), m_popSetting );
+    m_itemNewAction->addTo( m_toolBar );
 
     m_popTemplate = new QPopupMenu( this );
     m_popTemplate->setCheckable( TRUE );
     connect( m_popTemplate, SIGNAL(activated(int) ),
              this, SLOT(slotNewFromTemplate(int) ) );
-    m_popView->insertItem(tr("New from template"), m_popTemplate, -1, 0);
+//     m_popView->insertItem(tr("New from template"), m_popTemplate, -1, 0);
 
+//    m_itemEditAction->addTo( m_popView );
 
-    QAction* a = new QAction( tr("New Event"), Resource::loadPixmap("new"),
-                              QString::null, 0, this, 0 );
-    a->addTo( m_toolBar );
-    a->addTo( m_popView );
-    connect(a, SIGNAL( activated() ), this, SLOT( create() ) );
+    m_toolBar->addSeparator();
 
-    a = new QAction( tr("Edit Event"), Resource::loadPixmap("edit"),
-                     QString::null, 0, this, 0 );
-    a->addTo( m_popView );
-    connect(a, SIGNAL( activated() ), this, SLOT( edit() ) );
-
-    a = new QAction( tr("Today" ), Resource::loadPixmap( "datebook/to_day"),
+    QAction *a = new QAction( tr("Today" ), Opie::Core::OResource::loadPixmap( "datebook/to_day", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     a->addTo( m_toolBar );
     connect(a, SIGNAL( activated() ), this, SLOT( slotGoToNow() ) );
 
-    a = new QAction( tr("Find"), Resource::loadPixmap( "mag" ),
+    m_toolBar->addSeparator();
+
+    m_viewsBar = new QToolBar( this );
+    m_viewsBar->setHorizontalStretchable( FALSE );
+
+    m_toolBar2 = new QToolBar( this );
+    m_toolBar2->setHorizontalStretchable( TRUE );
+
+    m_toolBar2->addSeparator();
+
+    a = new QAction( tr("Find"), Opie::Core::OResource::loadPixmap( "mag", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
-    a->addTo( m_toolBar );
+    a->addTo( m_toolBar2 );
     connect(a, SIGNAL( activated() ), this, SLOT( slotFind() ) );
 
-    a = new QAction( tr("Configure"), QString::null, 0, 0 );
-    a->addTo( m_popSetting );
-    connect(a, SIGNAL( activated() ), this, SLOT( slotConfigure() ) );
+    m_configureAction->addTo( m_toolBar2 );
 
+/*
     a = new QAction( tr("Configure Locations"), QString::null, 0, 0 );
     a->addTo( m_popSetting );
     connect(a, SIGNAL( activated() ), this, SLOT( slotConfigureLocs() ) );
@@ -158,7 +164,7 @@ void MainWindow::initUI() {
     a = new QAction( tr("Configure Templates"), QString::null, 0, 0 );
     a->addTo( m_popSetting );
     connect(a, SIGNAL( activated() ), this, SLOT(slotConfigureTemp() ) );
-
+*/
     connect( qApp, SIGNAL(clockChanged(bool) ),
              this, SLOT(slotClockChanged(bool) ) );
     connect( qApp, SIGNAL(weekChanged(bool) ),
@@ -176,8 +182,20 @@ void MainWindow::initConfig() {
 
 }
 
-void MainWindow::initView() {
+void MainWindow::initViews() {
+    m_views.append(new DayView(this, m_stack));
 
+    m_viewsGroup = new QActionGroup( this );
+
+    bool firstact = TRUE;
+    for ( QListIterator<View> it(m_views); it.current(); ++it ) {
+        QAction *a = new ViewAction( it.current(), 0, m_viewsGroup, it.current()->type());
+        if(firstact) // FIXME should be looking for user-selected default view
+            a->setOn(TRUE);
+        firstact = FALSE;
+        connect(a, SIGNAL( activated() ), this, SLOT( slotChangeView() ) );
+    }
+    m_viewsGroup->addTo( m_viewsBar );
 }
 
 void MainWindow::initManagers() {
@@ -191,7 +209,7 @@ void MainWindow::initManagers() {
 }
 
 void MainWindow::raiseCurrentView() {
-
+    m_stack->raiseWidget( currentView()->widget() );
 }
 
 /*
@@ -207,7 +225,20 @@ void MainWindow::slotGoToNow() {
 }
 
 View* MainWindow::currentView() {
-
+    QObjectListIt itact( *(m_viewsGroup->children()) );
+    QAction *a;
+    while ( (a=(QAction *)itact.current()) ) {
+        ++itact;
+        if ( a->isOn() ) {
+            for ( QListIterator<View> it(m_views); it.current(); ++it ) {
+                if(it.current()->type() == a->name())
+                    return it.current();
+            }    
+            
+            break;
+        }
+    }
+    return NULL;
 }
 
 void MainWindow::slotFind() {
@@ -215,7 +246,49 @@ void MainWindow::slotFind() {
 }
 
 void MainWindow::slotConfigure() {
+    DateBookSettings frmSettings( m_ampm, this );
+/*X    frmSettings.setStartTime( startTime );
+    frmSettings.setAlarmPreset( aPreset, presetTime );
+    frmSettings.setJumpToCurTime( bJumpToCurTime );
+    frmSettings.setRowStyle( rowStyle );
+    frmSettings.comboDefaultView->setCurrentItem(defaultView-1);
+    frmSettings.comboWeekListView->setCurrentItem(weeklistviewconfig);
+    frmSettings.setPluginList(db_holiday->pluginManager(),db_holiday->pluginLoader());
 
+    bool found=false;
+    for (int i=0; i<(frmSettings.comboLocation->count()); i++) {
+        if ( frmSettings.comboLocation->text(i) == defaultLocation ) {
+            frmSettings.comboLocation->setCurrentItem(i);
+            found=true;
+            break;
+        }
+    }
+    if(!found) {
+        frmSettings.comboLocation->insertItem(defaultLocation);
+        frmSettings.comboLocation->setCurrentItem(frmSettings.comboLocation->count()-1);
+    }
+    frmSettings.comboCategory->setCategories(defaultCategories,"Calendar", tr("Calendar"));
+*/
+    if ( QPEApplication::execDialog( &frmSettings ) ) {
+        frmSettings.savePlugins();
+/*X        db_holiday->pluginManager()->save();
+        db_holiday->reloadPlugins();
+
+        aPreset = frmSettings.alarmPreset();
+        presetTime = frmSettings.presetTime();
+        startTime = frmSettings.startTime();
+        bJumpToCurTime = frmSettings.jumpToCurTime();
+        rowStyle = frmSettings.rowStyle();
+        defaultView = frmSettings.comboDefaultView->currentItem()+1;
+        defaultLocation = frmSettings.comboLocation->currentText();
+        defaultCategories = frmSettings.comboCategory->currentCategories();
+
+        saveSettings();
+*/
+        for ( QListIterator<View> it(m_views); it.current(); ++it ) {
+            
+        }    
+    }
 }
 
 void MainWindow::slotClockChanged( bool ) {
@@ -277,8 +350,9 @@ Show* MainWindow::eventShow() {
     return m_show;
 }
 
-void MainWindow::slotAction( QAction* act ) {
-
+void MainWindow::slotChangeView() {
+    odebug << "View changed: " << currentView()->type() << oendl;
+    raiseCurrentView();
 }
 
 void MainWindow::slotConfigureLocs() {
@@ -323,6 +397,7 @@ void MainWindow::viewAdd( const QDateTime&, const QDateTime& ) {
 }
 
 bool MainWindow::viewAP()const{
+    return m_ampm;
 }
 
 bool MainWindow::viewStartMonday()const {
@@ -333,9 +408,6 @@ void MainWindow::setTemplateMenu() {
     m_popTemplate->clear();
 
     QStringList list = templateManager().names();
-    for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
-        m_popTemplate->insertItem( (*it) );
-    }
 }
 
 /*
