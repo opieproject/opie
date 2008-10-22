@@ -31,6 +31,16 @@ namespace Datebook {
         void setDescriptions( const DescriptionManager& );
         void setLocations( const LocationManager& );
 
+        /**
+         * Is the clock AP/PM or 24h?
+         */
+        bool isAP()const;
+
+        /**
+         * if the week starts on monday?
+         */
+        bool weekStartOnMonday()const;
+
     private:
         MainWindow* m_win;
 

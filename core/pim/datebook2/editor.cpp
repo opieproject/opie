@@ -29,3 +29,11 @@ void Editor::setDescriptions( const DescriptionManager& dsc) {
 void Editor::setLocations( const LocationManager& loc) {
     m_win->setLocationManager( loc );
 }
+
+bool Editor::isAP()const {
+    return m_win->viewAP();
+}
+
+bool Editor::weekStartOnMonday()const {
+    return m_win->viewStartMonday();
+}
