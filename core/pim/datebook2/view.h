@@ -45,6 +45,11 @@ namespace Datebook {
         virtual int currentItem()const = 0;
 
         /**
+         * return the date to be used for new items
+         */
+        virtual QDate defaultDate() const = 0;
+
+        /**
          * loadConfig
          * saveConfig
          */
@@ -85,7 +90,7 @@ namespace Datebook {
          */
         virtual void reschedule() = 0;
     protected:
-        void popup( int uid);
+        void popup( const OPimOccurrence &ev, const QPoint &pt );
         QString toShortText(const OPimOccurrence& eff)const;
         QString toText(const OPimOccurrence& eff)const;
         virtual void doLoadConfig( Config* ) = 0;
@@ -147,9 +152,9 @@ namespace Datebook {
         MainWindow* m_win;
     };
 
-    class ViewAction : public QAction {
+    class ViewSelectAction : public QAction {
     public:
-        ViewAction(View *view, int accel, QObject *parent, const char *name = 0)
+        ViewSelectAction(View *view, int accel, QObject *parent, const char *name = 0)
             : QAction(view->name(), view->pixmap(), QString::null, accel, parent, name, TRUE) { };
     };
 }

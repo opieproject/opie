@@ -31,8 +31,8 @@ void View::saveConfig( Config* conf ) {
     doSaveConfig( conf );
 }
 
-void View::popup( int uid ) {
-    m_win->viewPopup( uid );
+void View::popup( const OPimOccurrence &ev, const QPoint &pt ) {
+    m_win->viewPopup( ev, pt );
 }
 
 void View::add( const QDate& start ) {

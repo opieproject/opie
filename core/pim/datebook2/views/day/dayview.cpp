@@ -64,6 +64,7 @@ QWidget* DayView::widget() {
 }
 
 void DayView::reschedule() {
+    relayoutPage();
 }
 
 void DayView::doLoadConfig( Config* ) {
@@ -391,7 +392,17 @@ QDate DayView::date() const
     return currDate;
 }
 
+QDate DayView::defaultDate() const
+{
+    return currDate;
+}
+
 DateBookDayView *DayView::dayViewWidget()
 {
     return m_view;
+}
+
+void DayView::popup( const QPoint &pt )
+{
+    View::popup(selectedWidget->event(), pt);
 }

@@ -21,6 +21,7 @@
 #include "mainwindow.h"
 #include "datebooksettings.h"
 
+#include "dateentryimpl.h"
 #include "views/day/dayview.h"
 
 using namespace Opie;
@@ -34,6 +35,8 @@ MainWindow::MainWindow()
     initViews();
     initManagers();
     initConfig();
+
+    m_edit = NULL;
 
     setCaption( tr("Calendar") );
     setIcon( Opie::Core::OResource::loadPixmap( "datebook_icon" ) );
@@ -189,7 +192,7 @@ void MainWindow::initViews() {
 
     bool firstact = TRUE;
     for ( QListIterator<View> it(m_views); it.current(); ++it ) {
-        QAction *a = new ViewAction( it.current(), 0, m_viewsGroup, it.current()->type());
+        QAction *a = new ViewSelectAction( it.current(), 0, m_viewsGroup, it.current()->type());
         if(firstact) // FIXME should be looking for user-selected default view
             a->setOn(TRUE);
         firstact = FALSE;
@@ -221,7 +224,7 @@ void MainWindow::populate() {
 }
 
 void MainWindow::slotGoToNow() {
-
+    currentView()->showDay( QDate::currentDate() );
 }
 
 View* MainWindow::currentView() {
@@ -308,6 +311,10 @@ void MainWindow::slotReceive( const QCString&, const QByteArray& ) {
 }
 
 void MainWindow::slotItemNew() {
+    if( editor()->newEvent( currentView()->defaultDate() ) ) {
+        add( editor()->event() );
+        currentView()->reschedule();
+    }
 }
 
 void MainWindow::slotItemEdit() {
@@ -384,8 +391,85 @@ void MainWindow::hideShow() {
 
 }
 
-void MainWindow::viewPopup(int ) {
+void MainWindow::viewPopup( const OPimOccurrence &ev, const QPoint &pt ) {
+    OPimEvent eve = ev.toEvent();
+    QPopupMenu m;
+    m.insertItem( tr( "Edit" ), 1 );
+    m.insertItem( tr( "Duplicate" ), 4 );
+    m.insertItem( tr( "Delete" ), 2 );
+    if(Ir::supported()) {
+        m.insertItem( tr( "Beam" ), 3 );
+        if( eve.hasRecurrence() ) 
+            m.insertItem( tr( "Beam this occurrence"), 5 );
+    }
+    int r = m.exec( pt );
+    if ( r == 1 ) {
+        odebug << "edit" << oendl;
+//X        emit editMe( ev );
+    } else if ( r == 2 ) {
+//X        emit deleteMe( ev );
+    } else if ( r == 3 ) {
+//X        emit beamMe( eve );
+    } else if ( r == 4 ) {
+//X        emit duplicateMe( eve );
+    } else if ( r == 5 ) {
+        // create an OPimEvent and beam it...
+        /*
+            * Start with the easy stuff. If start and  end date is the same we can just use
+            * the values of effective events
+            * If it is a multi day event we need to find the real start and end date...
+            */
+        if ( ev.toEvent().startDateTime().date() == ev.toEvent().endDateTime().date() ) {
+            OPimEvent event( ev.toEvent() );
 
+            QDateTime dt( ev.date(), ev.startTime() );
+            event.setStartDateTime( dt );
+
+            dt.setTime( ev.endTime() );
+            event.setEndDateTime( dt );
+//X            emit beamMe( event );
+        }else {
+            /*
+                * at least the the Times are right now
+                */
+            QDateTime start( ev.toEvent().startDateTime() );
+            QDateTime end  ( ev.toEvent().endDateTime() );
+
+
+            /*
+                * ok we know the start date or we need to find it
+                */
+            if ( ev.startTime() != QTime( 0, 0, 0 ) ) {
+                start.setDate( ev.date() );
+            }else {
+//X                    QDate dt = DateBookDay::findRealStart( ev.event().uid(), ev.date(), dateBook->db );
+//X                    start.setDate( dt );
+            }
+
+
+            /*
+                * ok we know now the end date...
+                * else
+                *   get to know the offset btw the real start and real end
+                *   and then add it to the new start date...
+                */
+            if ( ev.endTime() != QTime(23, 59, 59 ) ) {
+                end.setDate( ev.date() );
+            }else{
+                int days = ev.toEvent().startDateTime().date().daysTo( ev.toEvent().endDateTime().date() );
+                end.setDate( start.date().addDays( days ) );
+            }
+
+
+
+            OPimEvent event( ev.toEvent() );
+            event.setStartDateTime( start );
+            event.setEndDateTime( end   );
+
+
+//X            emit beamMe( event );
+        }
+    }
 }
 
 void MainWindow::viewAdd(const QDate& ) {
@@ -436,5 +520,7 @@ void MainWindow::slotNewFromTemplate(int id ) {
 }
 
 Editor* MainWindow::editor() {
+    if(!m_edit)
+        m_edit = new DateEntryEditor(this, this);
     return m_edit;
 }

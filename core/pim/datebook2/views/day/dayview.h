@@ -33,6 +33,7 @@ namespace Datebook {
         virtual QString name()const;
         virtual QString description()const;
         virtual int currentItem()const;
+        virtual QDate defaultDate() const;
 
         virtual void currentRange( const QDateTime& src, const QDateTime& from);
 
@@ -41,6 +42,8 @@ namespace Datebook {
         virtual void showDay( const QDate& date );
         virtual QWidget* widget();
         virtual void reschedule();
+
+        void popup( const QPoint &pt );
 
         void setSelectedWidget( DateBookDayWidget * );
         DateBookDayWidget * getSelectedWidget( void );
