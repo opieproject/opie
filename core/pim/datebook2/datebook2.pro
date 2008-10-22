@@ -13,6 +13,12 @@ HEADERS	= mainwindow.h \
           templatemanager.h \
           datebooksettings.h \
           datebooktypes.h \
+          dateentryimpl.h \
+          noteentryimpl.h \
+          repeatentry.h \
+          exceptions.h \
+          onoteedit.h \
+          namespace_hack.h \
           views/day/dayview.h \
           views/day/datebookday.h \
           views/day/datebookdayheaderimpl.h \
@@ -28,12 +34,21 @@ SOURCES	= main.cpp \
           editor.cpp \
           datebooksettings.cpp \
           holiday.cpp \
+          dateentryimpl.cpp \
+          noteentryimpl.cpp \
+          repeatentry.cpp \
+          exceptions.cpp \
+          onoteedit.cpp \
           views/day/dayview.cpp \
           views/day/datebookday.cpp \
           views/day/datebookdayheaderimpl.cpp \
           views/day/datebookdayallday.cpp
 
 INTERFACES = datebooksettingsbase.ui \
+          dateentry.ui \
+          noteentry.ui \
+          repeatentrybase.ui \
+          exceptionsbase.ui \
           views/day/datebookdayheader.ui
 
 INCLUDEPATH += $(OPIEDIR)/include
