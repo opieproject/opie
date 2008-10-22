@@ -18,8 +18,10 @@ using namespace Opie::Datebook;
 TemplateManager::TemplateManager() {
 
 }
+
 TemplateManager::~TemplateManager() {
 }
+
 bool TemplateManager::save() {
     QStringList lst = names();
     Config conf( "datebook-templates");
@@ -33,6 +35,7 @@ bool TemplateManager::save() {
 
     return true;
 }
+
 bool TemplateManager::load() {
     Config conf( "datebook-templates");
     conf.setGroup( "___Names___");
@@ -60,24 +63,30 @@ namespace {
         QString m_text;
         OPimEvent m_event;
     };
+
     TemplateItem::TemplateItem( QListView* view,
                                 const QString& text,
                                 const OPimEvent& ev )
         : QListViewItem( view ), m_event(ev) {
         QListViewItem::setText( 0, text );
     }
+
     TemplateItem::~TemplateItem() {
     }
+
     void TemplateItem::setText( const QString& text ) {
         QListViewItem::setText( 0, text );
         m_text = text;
     }
+
     void TemplateItem::setEvent( const OPimEvent& ev ) {
         m_event = ev;
     }
+
     QString TemplateItem::text()const {
         return m_text;
     }
+
     OPimEvent TemplateItem::event()const {
 
     }
@@ -91,13 +100,16 @@ namespace {
     private:
         QLineEdit* m_lneEdit;
     };
+
     InputDialog::InputDialog(const QString& text )
         : QDialog(0, 0, true ) {
         m_lneEdit = new QLineEdit( this );
         m_lneEdit->setText( text );
     }
+
     InputDialog::~InputDialog() {
     }
+
     QString InputDialog::text() const{
         return m_lneEdit->text();
     }
@@ -132,13 +144,16 @@ TemplateDialog::TemplateDialog( const TemplateManager& man, Editor* edit )
     init( man );
     m_edit = edit;
 }
+
 TemplateDialog::~TemplateDialog() {
 }
+
 void TemplateDialog::slotAdd() {
     if ( m_edit->newEvent( QDate::currentDate() ) ) {
         (void)new TemplateItem( m_view, tr("New Template"), m_edit->event() );
     }
 }
+
 void TemplateDialog::slotEdit() {
     TemplateItem* item = static_cast<TemplateItem*>(  m_view->currentItem() );
     if (!item) return;
@@ -147,6 +162,7 @@ void TemplateDialog::slotEdit() {
         item->setEvent( m_edit->event() );
 
 }
+
 void TemplateDialog::slotRemove() {
     QListViewItem* item = m_view->currentItem();
     if (!item) return;
@@ -154,6 +170,7 @@ void TemplateDialog::slotRemove() {
     m_view->takeItem( item );
     delete item;
 }
+
 void TemplateDialog::slotRename() {
     TemplateItem* item = static_cast<TemplateItem*>( m_view->currentItem() );
     if (!item) return;
@@ -164,6 +181,7 @@ void TemplateDialog::slotRename() {
         item->setText( dlg.text() );
 
 }
+
 TemplateManager TemplateDialog::manager()const {
     TemplateManager manager;
 
@@ -175,6 +193,7 @@ TemplateManager TemplateDialog::manager()const {
     }
     return manager;
 }
+
 void TemplateDialog::init( const TemplateManager& man ) {
     QStringList list = man.names();
     for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
