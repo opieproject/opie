@@ -33,8 +33,10 @@
 
 #include "dateentry.h"
 #include "noteentryimpl.h"
+#include "editor.h"
 
-#include <qpe/event.h>
+#include <opie2/opimevent.h>
+#include <opie2/opimrecurrence.h>
 
 #include <qdatetime.h>
 
@@ -48,12 +50,12 @@ public:
     DateEntry( bool startOnMonday, const QDateTime &start,
                const QDateTime &end, bool whichClock = FALSE,
                QWidget* parent = 0, const char* name = 0 );
-    DateEntry( bool startOnMonday, const Event &event, bool whichCLock = FALSE,
+    DateEntry( bool startOnMonday, const Opie::OPimEvent &event, bool whichCLock = FALSE,
                QWidget* parent = 0, const char* name = 0 );
     ~DateEntry();
 
-    Event event();
-    void setAlarmEnabled( bool alarmPreset, int presetTime, Event::SoundTypeChoice );
+    Opie::OPimEvent event();
+    void setAlarmEnabled( bool alarmPreset, int presetTime/*X, Opie::OPimEvent::SoundTypeChoice*/ );
     virtual bool eventFilter( QObject *, QEvent * );
 public slots:
     void endDateChanged( int, int, int );
@@ -79,7 +81,7 @@ private:
     DateBookMonth *startPicker, *endPicker;
     QDate startDate, endDate;
     QTime startTime, endTime;
-    Event::RepeatPattern rp;
+    Opie::OPimRecurrence rp;
     bool ampm:1;
     bool startWeekOnMonday:1;
     bool m_showStart:1;
@@ -87,5 +89,28 @@ private:
 
     QString noteStr;
 };
+
+namespace Opie {
+namespace Datebook {
+class DateEntryEditor : public Editor
+{
+public:
+    DateEntryEditor( MainWindow*, QWidget* parent );
+
+    virtual bool newEvent( const QDate& );
+    virtual bool newEvent( const QDateTime& start, const QDateTime& end );
+    virtual bool edit( const OPimEvent&, bool showRec = TRUE );
+
+    virtual OPimEvent event() const;
+
+protected:
+    bool showDialog( QString caption, OPimEvent& event );
+    QString checkEvent(const OPimEvent &e);
+
+    OPimEvent m_event;
+    QWidget *m_parent;
+};
+}
+}
 
 #endif // DATEENTRY_H

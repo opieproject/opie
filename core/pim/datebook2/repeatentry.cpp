@@ -41,6 +41,8 @@
 
 #include <exceptions.h>
 
+using namespace Opie;
+
 // Global Templates for use in setting up the repeat label...
 // the problem is these strings get initialized before QPEApplication can install the translator -zecke
 namespace {
@@ -94,10 +96,10 @@ RepeatEntry::RepeatEntry( bool startOnMonday,
     setupNone();
 }
 
-RepeatEntry::RepeatEntry( bool startOnMonday, const Event::RepeatPattern &rp,
+RepeatEntry::RepeatEntry( bool startOnMonday, const OPimRecurrence &rp,
                           const QDate &startDate, const QString &exceptions,
                           QWidget *parent, const char *name, bool modal,
-			  WFlags fl )
+                          WFlags fl )
     : RepeatEntryBase( parent, name, modal, fl ),
       start( startDate ),
       end( rp.endDate() ),
@@ -108,106 +110,111 @@ RepeatEntry::RepeatEntry( bool startOnMonday, const Event::RepeatPattern &rp,
         fillStrings();
     // do some stuff with the repeat pattern
     init();
-    switch ( rp.type ) {
-	default:
-	case Event::NoRepeat:
-	    currInterval = NONE;
-	    setupNone();
-	    break;
-	case Event::Daily:
-	    currInterval = DAY;
-	    setupDaily();
-	    break;
-	case Event::Weekly:
-	    currInterval = WEEK;
-	    setupWeekly();
-	    sortWeekdayButtons(rp.days, startWeekOnMonday, fraExtra);
-	    slotWeekLabel();
-	    break;
-	case Event::MonthlyDay:
-	    currInterval = MONTH;
-	    setupMonthly();
-	    fraExtra->setButton( 0 );
-	    slotMonthLabel( 0 );
-	    break;
-	case Event::MonthlyDate:
-	    currInterval = MONTH;
-	    setupMonthly();
-	    fraExtra->setButton( 1 );
-	    slotMonthLabel( 1 );
-	    break;
-	case Event::Yearly:
-	    currInterval = YEAR;
-	    setupYearly();
-	    break;
+    switch ( rp.type() ) {
+        default:
+        case OPimRecurrence::NoRepeat:
+            currInterval = NONE;
+            setupNone();
+            break;
+        case OPimRecurrence::Daily:
+            currInterval = DAY;
+            setupDaily();
+            break;
+        case OPimRecurrence::Weekly:
+            currInterval = WEEK;
+            setupWeekly();
+            sortWeekdayButtons(rp.days(), startWeekOnMonday, fraExtra);
+            slotWeekLabel();
+            break;
+        case OPimRecurrence::MonthlyDay:
+            currInterval = MONTH;
+            setupMonthly();
+            fraExtra->setButton( 0 );
+            slotMonthLabel( 0 );
+            break;
+        case OPimRecurrence::MonthlyDate:
+            currInterval = MONTH;
+            setupMonthly();
+            fraExtra->setButton( 1 );
+            slotMonthLabel( 1 );
+            break;
+        case OPimRecurrence::Yearly:
+            currInterval = YEAR;
+            setupYearly();
+            break;
     }
     fraType->setButton( currInterval );
-    spinFreq->setValue( rp.frequency );
-    if ( !rp.hasEndDate ) {
-	cmdEnd->setText( RepeatEntryBase::tr("No End Date") );
-	chkNoEnd->setChecked( TRUE );
-    } else
-	cmdEnd->setText( TimeString::shortDate( end ) );
+    spinFreq->setValue( rp.frequency() );
+    if ( !rp.hasEndDate() ) {
+        cmdEnd->setText( RepeatEntryBase::tr("No End Date") );
+        chkNoEnd->setChecked( TRUE );
+    } 
+    else
+        cmdEnd->setText( TimeString::shortDate( end ) );
 }
 
 RepeatEntry::~RepeatEntry()
 {
 }
 
-Event::RepeatPattern RepeatEntry::repeatPattern()
+OPimRecurrence RepeatEntry::recurrence()
 {
     QListIterator<QToolButton> it( listRTypeButtons );
     QListIterator<QToolButton> itExtra( listExtra );
-    Event::RepeatPattern rpTmp;
+    OPimRecurrence rpTmp;
     int i;
     for ( i = 0; *it; ++it, i++ ) {
-	if ( (*it)->isOn() ) {
-	    switch ( i ) {
-		case NONE:
-		   rpTmp.type = Event::NoRepeat;
-		   break;
-		case DAY:
-		    rpTmp.type = Event::Daily;
-		    break;
-		case WEEK:
-		    rpTmp.type = Event::Weekly;
-		    rpTmp.days = 0;
-		    int day;
-		    for ( day = 1; *itExtra; ++itExtra, day = day << 1 ) {
-			if ( (*itExtra)->isOn() ) {
-			    if ( startWeekOnMonday )
-				rpTmp.days |= day;
-			    else {
-				if ( day == 1 )
-				    rpTmp.days |= Event::SUN;
-				else
-				    rpTmp.days |= day >> 1;
-			    }
-			}
-		    }
-		    break;
-		case MONTH:
-		    if ( cmdExtra1->isOn() )
-			rpTmp.type = Event::MonthlyDay;
-		    else if ( cmdExtra2->isOn() )
-			rpTmp.type = Event::MonthlyDate;
-			// figure out the montly day...
-			rpTmp.position = week( start );
-		    break;
-		case YEAR:
-		    rpTmp.type = Event::Yearly;
-		    break;
-	    }
-	    break;  // no need to keep looking!
-	}
+        if ( (*it)->isOn() ) {
+            switch ( i ) {
+            case NONE:
+                rpTmp.setType( OPimRecurrence::NoRepeat );
+                break;
+            case DAY:
+                rpTmp.setType( OPimRecurrence::Daily );
+                break;
+            case WEEK:
+                {
+                    rpTmp.setType( OPimRecurrence::Weekly );
+                    int days = 0;
+                    for ( int day = 1; *itExtra; ++itExtra, day = day << 1 ) {
+                        if ( (*itExtra)->isOn() ) {
+                            if ( startWeekOnMonday )
+                                days |= day;
+                            else {
+                                if ( day == 1 )
+                                    days |= OPimRecurrence::SUN;
+                                else
+                                    days |= day >> 1;
+                            }
+                        }
+                    }
+                    rpTmp.setDays(days);
+                }
+                break;
+            case MONTH:
+                if ( cmdExtra1->isOn() )
+                    rpTmp.setType( OPimRecurrence::MonthlyDay );
+                else if ( cmdExtra2->isOn() )
+                    rpTmp.setType( OPimRecurrence::MonthlyDate );
+                // figure out the monthly day...
+                rpTmp.setPosition( week( start ) );
+                break;
+            case YEAR:
+                rpTmp.setType( OPimRecurrence::Yearly );
+                break;
+            }
+            break;  // no need to keep looking!
+        }
     }
-    rpTmp.frequency = spinFreq->value();
-    rpTmp.hasEndDate = !chkNoEnd->isChecked();
-    if ( rpTmp.hasEndDate ) {
-	rpTmp.setEndDate( end );
+    rpTmp.setFrequency( spinFreq->value() );
+    if( chkNoEnd->isChecked() )
+        rpTmp.setHasEndDate(false);
+    else {
+        rpTmp.setHasEndDate(true);
+        rpTmp.setEndDate( end );
     }
     // timestamp it...
-    rpTmp.createTime = time( NULL );
+    rpTmp.setCreatedDateTime( QDateTime::currentDateTime() );
     return rpTmp;
 }
 
@@ -216,24 +223,24 @@ void RepeatEntry::slotSetRType( int rtype )
     // now call the right function based on the type...
     currInterval = static_cast<repeatButtons>(rtype);
     switch ( currInterval ) {
-	case NONE:
-	    setupNone();
-	    break;
-	case DAY:
-	    setupDaily();
-	    break;
-	case WEEK:
-	    setupWeekly();
-	    slotWeekLabel();
-	    break;
-	case MONTH:
-	    setupMonthly();
-	    cmdExtra2->setOn( TRUE );
-	    slotMonthLabel( 1 );
-	    break;
-	case YEAR:
-	    setupYearly();
-	    break;
+        case NONE:
+            setupNone();
+            break;
+        case DAY:
+            setupDaily();
+            break;
+        case WEEK:
+            setupWeekly();
+            slotWeekLabel();
+            break;
+        case MONTH:
+            setupMonthly();
+            cmdExtra2->setOn( TRUE );
+            slotMonthLabel( 1 );
+            break;
+        case YEAR:
+            setupYearly();
+            break;
     }
 }
 
@@ -271,21 +278,22 @@ void RepeatEntry::setupWeekly()
     fraExtra->setExclusive( FALSE );
     fraExtra->show();
     if ( startWeekOnMonday ) {
-	cmdExtra1->setText( RepeatEntryBase::tr("Mon") );
-	cmdExtra2->setText( RepeatEntryBase::tr("Tue") );
-	cmdExtra3->setText( RepeatEntryBase::tr("Wed") );
-	cmdExtra4->setText( RepeatEntryBase::tr("Thu") );
-	cmdExtra5->setText( RepeatEntryBase::tr("Fri") );
-	cmdExtra6->setText( RepeatEntryBase::tr("Sat") );
-	cmdExtra7->setText( RepeatEntryBase::tr("Sun") );
-    } else {
-	cmdExtra1->setText( RepeatEntryBase::tr("Sun") );
-	cmdExtra2->setText( RepeatEntryBase::tr("Mon") );
-	cmdExtra3->setText( RepeatEntryBase::tr("Tue") );
-	cmdExtra4->setText( RepeatEntryBase::tr("Wed") );
-	cmdExtra5->setText( RepeatEntryBase::tr("Thu") );
-	cmdExtra6->setText( RepeatEntryBase::tr("Fri") );
-	cmdExtra7->setText( RepeatEntryBase::tr("Sat") );
+        cmdExtra1->setText( RepeatEntryBase::tr("Mon") );
+        cmdExtra2->setText( RepeatEntryBase::tr("Tue") );
+        cmdExtra3->setText( RepeatEntryBase::tr("Wed") );
+        cmdExtra4->setText( RepeatEntryBase::tr("Thu") );
+        cmdExtra5->setText( RepeatEntryBase::tr("Fri") );
+        cmdExtra6->setText( RepeatEntryBase::tr("Sat") );
+        cmdExtra7->setText( RepeatEntryBase::tr("Sun") );
+    } 
+    else {
+        cmdExtra1->setText( RepeatEntryBase::tr("Sun") );
+        cmdExtra2->setText( RepeatEntryBase::tr("Mon") );
+        cmdExtra3->setText( RepeatEntryBase::tr("Tue") );
+        cmdExtra4->setText( RepeatEntryBase::tr("Wed") );
+        cmdExtra5->setText( RepeatEntryBase::tr("Thu") );
+        cmdExtra6->setText( RepeatEntryBase::tr("Fri") );
+        cmdExtra7->setText( RepeatEntryBase::tr("Sat") );
     }
     // I hope clustering these improve performance....
     cmdExtra1->setOn( FALSE );
@@ -307,11 +315,10 @@ void RepeatEntry::setupWeekly()
     lblWeekVar->show();
     spinFreq->setValue( 1 );
     // might as well set the day too...
-    if ( startWeekOnMonday ) {
-	fraExtra->setButton( start.dayOfWeek() - 1 );
-    } else {
-	fraExtra->setButton( start.dayOfWeek() % 7 );
-    }
+    if ( startWeekOnMonday )
+        fraExtra->setButton( start.dayOfWeek() - 1 );
+    else
+        fraExtra->setButton( start.dayOfWeek() % 7 );
     lblFreq->setText( tr("week(s)") );
     lblVar2->show();
     showRepeatStuff();
@@ -349,7 +356,6 @@ void RepeatEntry::setupYearly()
     QString strEvery = strYearTemplate.arg( start.monthName(start.month()) ).arg( numberPlacing(start.day()) );
     lblRepeat->setText( strEvery );
     setupRepeatLabel( 1 );
-
 }
 
 void RepeatEntry::init()
@@ -363,9 +369,9 @@ void RepeatEntry::init()
     QObject::connect( repeatPicker, SIGNAL(dateClicked(int,int,int)),
                       this, SLOT(endDateChanged(int,int,int)) );
     QObject::connect( qApp, SIGNAL(weekChanged(bool)),
-		      this, SLOT(slotChangeStartOfWeek(bool)) );
+                      this, SLOT(slotChangeStartOfWeek(bool)) );
     QObject::connect( cmdExceptions, SIGNAL(clicked()),
-              this, SLOT(slotEditExceptions()) );
+                      this, SLOT(slotEditExceptions()) );
 
     listRTypeButtons.setAutoDelete( TRUE );
     listRTypeButtons.append( cmdNone );
@@ -388,11 +394,12 @@ void RepeatEntry::slotNoEnd( bool unused )
 {
     // if the item was toggled, then go ahead and set it to the maximum date
     if ( unused ) {
-	end.setYMD( 3000, 12, 31 );
-	cmdEnd->setText( RepeatEntryBase::tr("No End Date") );
-    } else {
-	end = start;
-	cmdEnd->setText( TimeString::shortDate(end) );
+        end.setYMD( 3000, 12, 31 );
+        cmdEnd->setText( RepeatEntryBase::tr("No End Date") );
+    } 
+    else {
+        end = start;
+        cmdEnd->setText( TimeString::shortDate(end) );
     }
 }
 
@@ -400,7 +407,7 @@ void RepeatEntry::endDateChanged( int y, int m, int d )
 {
     end.setYMD( y, m, d );
     if ( end < start )
-	end = start;
+        end = start;
     cmdEnd->setText(  TimeString::shortDate( end ) );
     repeatPicker->setDate( end.year(), end.month(), end.day() );
 }
@@ -416,40 +423,40 @@ void RepeatEntry::setupRepeatLabel( int x )
     QString strVar2;
 
     if ( x > 1 )
-	lblVar1->show();
+        lblVar1->show();
     else
-	lblVar1->hide();
+        lblVar1->hide();
 
     switch ( currInterval ) {
-	case NONE:
-	    break;
-	case DAY:
-	    if ( x > 1 )
-		strVar2 = tr( "days" );
-	    else
-		strVar2 = tr( "day" );
-	    break;
-	case WEEK:
-	    if ( x > 1 )
-		strVar2 = tr( "weeks" );
-	    else
-		strVar2 = tr( "week" );
-	    break;
-	case MONTH:
-	    if ( x > 1 )
-		strVar2 = RepeatEntryBase::tr( "months" );
-	    else
-		strVar2 = tr( "month" );
-	    break;
-	case YEAR:
-	    if ( x > 1 )
-		strVar2 = RepeatEntryBase::tr( "years" );
-	    else
-		strVar2 = tr( "year" );
-	    break;
+        case NONE:
+            break;
+        case DAY:
+            if ( x > 1 )
+                strVar2 = tr( "days" );
+            else
+                strVar2 = tr( "day" );
+            break;
+        case WEEK:
+            if ( x > 1 )
+                strVar2 = tr( "weeks" );
+            else
+                strVar2 = tr( "week" );
+            break;
+        case MONTH:
+            if ( x > 1 )
+                strVar2 = RepeatEntryBase::tr( "months" );
+            else
+                strVar2 = tr( "month" );
+            break;
+        case YEAR:
+            if ( x > 1 )
+                strVar2 = RepeatEntryBase::tr( "years" );
+            else
+                strVar2 = tr( "year" );
+            break;
     }
     if ( !strVar2.isNull() )
-	lblVar2->setText( strVar2 );
+        lblVar2->setText( strVar2 );
 }
 
 void RepeatEntry::showRepeatStuff()
@@ -473,53 +480,54 @@ void RepeatEntry::slotWeekLabel()
     bool bNeedCarriage = FALSE;
     // don't do something we'll regret!!!
     if ( currInterval != WEEK )
-	return;
+        return;
 
     if ( startWeekOnMonday )
-	keepMe = start.dayOfWeek() - 1;
+        keepMe = start.dayOfWeek() - 1;
     else
-	keepMe = start.dayOfWeek() % 7;
+        keepMe = start.dayOfWeek() % 7;
 
     QStringList list;
     for ( i = 0; *it; ++it, i++ ) {
-	// a crazy check, if you are repeating weekly, the current day
-	// must be selected!!!
-	if ( i == keepMe && !( (*it)->isOn() ) )
-	    (*it)->setOn( TRUE );
-	if ( (*it)->isOn() ) {
-	    if ( startWeekOnMonday )
-		list.append( dayLabel[i] );
-	    else {
-		if ( i == 0 )
-		    list.append( dayLabel[6] );
-		else
-		    list.append( dayLabel[i - 1] );
-	    }
-	}
+        // a crazy check, if you are repeating weekly, the current day
+        // must be selected!!!
+        if ( i == keepMe && !( (*it)->isOn() ) )
+            (*it)->setOn( TRUE );
+        if ( (*it)->isOn() ) {
+            if ( startWeekOnMonday )
+                list.append( dayLabel[i] );
+            else {
+                if ( i == 0 )
+                    list.append( dayLabel[6] );
+                else
+                    list.append( dayLabel[i - 1] );
+            }
+        }
     }
     QStringList::Iterator itStr;
     for ( i = 0, itStr = list.begin(); itStr != list.end(); ++itStr, i++ ) {
-	if ( i == 3 )
-	    bNeedCarriage = TRUE;
-	else
-	    bNeedCarriage = FALSE;
-	if ( str.isNull() )
-	    str = *itStr;
-	else if ( i == list.count() - 1 ) {
-	    if ( i < 2 )
-		str += tr(" and ") + *itStr;
-	    else {
-		if ( bNeedCarriage )
-		    str += tr( ",\nand " ) + *itStr;
-		else
-		    str += tr( ", and " ) + *itStr;
-	    }
-	} else {
-	    if ( bNeedCarriage )
-		str += ",\n" + *itStr;
-	    else
-		str += ", " + *itStr;
-	}
+        if ( i == 3 )
+            bNeedCarriage = TRUE;
+        else
+            bNeedCarriage = FALSE;
+        if ( str.isNull() )
+            str = *itStr;
+        else if ( i == list.count() - 1 ) {
+            if ( i < 2 )
+                str += tr(" and ") + *itStr;
+            else {
+                if ( bNeedCarriage )
+                    str += tr( ",\nand " ) + *itStr;
+                else
+                    str += tr( ", and " ) + *itStr;
+            }
+        } 
+        else {
+            if ( bNeedCarriage )
+                str += ",\n" + *itStr;
+            else
+                str += ", " + *itStr;
+        }
     }
     str = str.prepend( tr("on ") );
     lblWeekVar->setText( str );
@@ -529,12 +537,12 @@ void RepeatEntry::slotMonthLabel( int type )
 {
     QString str;
     if ( currInterval != MONTH || type > 1 )
-	return;
+        return;
     if ( type == 1 )
-	str = strMonthDateTemplate.arg( numberPlacing(start.day()) );
+        str = strMonthDateTemplate.arg( numberPlacing(start.day()) );
     else
-	str = strMonthDayTemplate.arg( numberPlacing(week(start)))
-	      .arg( dayLabel[start.dayOfWeek() - 1] );
+        str = strMonthDayTemplate.arg( numberPlacing(week(start)))
+              .arg( dayLabel[start.dayOfWeek() - 1] );
     lblRepeat->setText( str );
 }
 
@@ -547,16 +555,16 @@ void RepeatEntry::slotChangeStartOfWeek( bool onMonday )
     int day;
     QListIterator<QToolButton> itExtra( listExtra );
     for ( day = 1; *itExtra; ++itExtra, day = day << 1 ) {
-	if ( (*itExtra)->isOn() ) {
-	    if ( !startWeekOnMonday )
-		days |= day;
-	    else {
-		if ( day == 1 )
-		    days |= Event::SUN;
-		else
-		    days |= day >> 1;
-	    }
-	}
+        if ( (*itExtra)->isOn() ) {
+            if ( !startWeekOnMonday )
+                days |= day;
+            else {
+                if ( day == 1 )
+                    days |= OPimRecurrence::SUN;
+                else
+                    days |= day >> 1;
+            }
+        }
     }
     setupWeekly();
     spinFreq->setValue( saveSpin );
@@ -580,12 +588,12 @@ static int week( const QDate &start )
         sentinel = start.dayOfWeek(),
         dayOfWeek = QDate( start.year(), start.month(), 1 ).dayOfWeek(),
         week = 1,
-	i;
+        i;
     for ( i = 1; i < stop; i++ ) {
-	if ( dayOfWeek++ == sentinel )
-	    week++;
-	if ( dayOfWeek > 7 )
-	    dayOfWeek = 0;
+        if ( dayOfWeek++ == sentinel )
+            week++;
+        if ( dayOfWeek > 7 )
+            dayOfWeek = 0;
     }
     return week;
 }
@@ -593,20 +601,21 @@ static int week( const QDate &start )
 static QString numberPlacing( int x )
 {
     // I hope this works in other languages besides english...
+    // -- I sincerely doubt it will work for all languages
     QString str = QString::number( x );
     switch ( x % 10 ) {
-	case 1:
-	    str += QWidget::tr( "st" );
-	    break;
-	case 2:
-	    str += QWidget::tr( "nd" );
-	    break;
-	case 3:
-	    str += QWidget::tr( "rd" );
-	    break;
-	default:
-	    str += QWidget::tr( "th" );
-	    break;
+        case 1:
+            str += QWidget::tr( "st" );
+            break;
+        case 2:
+            str += QWidget::tr( "nd" );
+            break;
+        case 3:
+            str += QWidget::tr( "rd" );
+            break;
+        default:
+            str += QWidget::tr( "th" );
+            break;
     }
     return str;
 }

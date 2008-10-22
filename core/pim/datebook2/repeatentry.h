@@ -33,7 +33,7 @@
 
 #include "repeatentrybase.h"
 
-#include <qpe/event.h>
+#include <opie2/opimrecurrence.h>
 
 #include <qcheckbox.h>
 #include <qbuttongroup.h>
@@ -48,16 +48,16 @@ class RepeatEntry : public RepeatEntryBase
     Q_OBJECT
 public:
     RepeatEntry( bool startOnMonday,
-		 const QDate &start, QWidget *parent = 0, const char *name = 0,
+        const QDate &start, QWidget *parent = 0, const char *name = 0,
                  bool modal = TRUE, WFlags fl = 0 );
     RepeatEntry( bool startOnMonday,
-		 const Event::RepeatPattern &rp, const QDate &start,
-         const QString &exceptions,
-		 QWidget *parent = 0, const char *name = 0, bool modal = TRUE,
-		 WFlags fl = 0 );
+        const Opie::OPimRecurrence &rp, const QDate &start,
+        const QString &exceptions,
+        QWidget *parent = 0, const char *name = 0, bool modal = TRUE,
+        WFlags fl = 0 );
     ~RepeatEntry();
 
-    Event::RepeatPattern repeatPattern();
+    Opie::OPimRecurrence recurrence();
     QDate endDate() { return end; };
     const QString &getExceptions() { return exceptions; };
 
@@ -103,8 +103,8 @@ inline void RepeatEntry::hideExtras()
     chkNoEnd->hide();
     QListIterator<QToolButton> it( listExtra );
     for ( ; *it; ++it ) {
-	(*it)->hide();
-	(*it)->setOn( FALSE );
+        (*it)->hide();
+        (*it)->setOn( FALSE );
     }
 
 }

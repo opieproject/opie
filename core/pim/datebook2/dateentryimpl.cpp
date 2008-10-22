@@ -42,11 +42,16 @@
 
 #include <qlineedit.h>
 #include <qspinbox.h>
+#include <qlayout.h>
+#include <qmessagebox.h>
 
 #include "onoteedit.h"
 
 #include <stdlib.h>
 #include <stdio.h>
+
+using namespace Opie;
+using namespace Opie::Datebook;
 
 /*
  *  Constructs a DateEntry which is a child of 'parent', with the
@@ -71,19 +76,19 @@ DateEntry::DateEntry( bool startOnMonday, const QDateTime &start,
 
 bool DateEntry::eventFilter(QObject *obj, QEvent *ev )
 {
-  if( ev->type() == QEvent::FocusIn ){
-    if( obj == comboStart ){
-      timePickerStart->setHour(startTime.hour());
-      timePickerStart->setMinute(startTime.minute());
-      TimePickerLabel->setText( tr("Start Time" ) );
-      m_showStart= true;
-    }else if( obj == comboEnd ){
-      timePickerStart->setHour(endTime.hour());
-      timePickerStart->setMinute(endTime.minute());
-      TimePickerLabel->setText( tr("End Time") );
-      m_showStart = false;
-    }
-  } else if( ev->type() == QEvent::FocusOut ){
+    if( ev->type() == QEvent::FocusIn ){
+        if( obj == comboStart ){
+            timePickerStart->setHour(startTime.hour());
+            timePickerStart->setMinute(startTime.minute());
+            TimePickerLabel->setText( tr("Start Time" ) );
+            m_showStart = true;
+        }else if( obj == comboEnd ){
+            timePickerStart->setHour(endTime.hour());
+            timePickerStart->setMinute(endTime.minute());
+            TimePickerLabel->setText( tr("End Time") );
+            m_showStart = false;
+        }
+    } else if( ev->type() == QEvent::FocusOut ){
 //    if( obj == comboEnd ){
 //      QString s;
 //      s.sprintf("%.2d:%.2d",endTime.hour(), endTime.minute());
@@ -94,9 +99,9 @@ bool DateEntry::eventFilter(QObject *obj, QEvent *ev )
 //      s.sprintf("%.2d:%.2d",startTime.hour(), startTime.minute());
 //      comboStart->setText(s);
 //    }
-  }
+    }
 
-  return false;
+    return false;
 }
 
 static void addOrPick( QComboBox* combo, const QString& t )
@@ -114,7 +119,7 @@ static void addOrPick( QComboBox* combo, const QString& t )
     combo->setCurrentItem(combo->count()-1);
 }
 
-DateEntry::DateEntry( bool startOnMonday, const Event &event, bool whichClock,
+DateEntry::DateEntry( bool startOnMonday, const OPimEvent &event, bool whichClock,
                       QWidget* parent,  const char* name )
     : DateEntryBase( parent, name ),
       ampm( whichClock ),
@@ -123,25 +128,27 @@ DateEntry::DateEntry( bool startOnMonday, const Event &event, bool whichClock,
 
 {
     init();
-    setDates(event.start(),event.end());
+    setDates(event.startDateTime(), event.endDateTime());
     comboCategory->setCategories( event.categories(), "Calendar", tr("Calendar") );
     if(!event.description().isEmpty())
         addOrPick( comboDescription, event.description() );
     if(!event.location().isEmpty())
         addOrPick( comboLocation, event.location() );
-    checkAlarm->setChecked( event.hasAlarm() );
-    checkAllDay->setChecked( event.type() == Event::AllDay );
-    if(!event.notes().isEmpty()) noteStr=event.notes();
-    else noteStr="";
-    spinAlarm->setValue(event.alarmTime());
-    if ( event.alarmSound() != Event::Silent )
-        comboSound->setCurrentItem( 1 );
-    if ( event.hasRepeat() ) {
-        rp = event.repeatPattern();
+    checkAlarm->setChecked( event.hasNotifiers() );
+    checkAllDay->setChecked( event.isAllDay() );
+    if(!event.note().isEmpty()) 
+        noteStr=event.note();
+    else 
+        noteStr="";
+//X    spinAlarm->setValue(event.alarmTime());
+//X    if ( event.alarmSound() != OPimEvent::Silent )
+//X        comboSound->setCurrentItem( 1 );
+    if ( event.hasRecurrence() ) {
+        rp = event.recurrence();
         cmdRepeat->setText( tr("Repeat...") );
     }
     setRepeatLabel();
-    exceptions = event.exceptionsStr();
+//X    exceptions = event.exceptionsStr();
 }
 
 void DateEntry::setDates( const QDateTime& s, const QDateTime& e )
@@ -329,13 +336,15 @@ void DateEntry::startDateChanged( int y, int m, int d )
 {
     QDate prev = startDate;
     startDate.setYMD( y, m, d );
-    if ( rp.type == Event::Weekly &&
+    if ( rp.type() == OPimRecurrence::Weekly &&
          startDate.dayOfWeek() != prev.dayOfWeek() ) {
         // if we change the start of a weekly repeating event
         // set the repeating day appropriately
         char mask = 1 << (prev.dayOfWeek()-1);
-        rp.days &= (~mask);
-        rp.days |= 1 << (startDate.dayOfWeek()-1);
+        int days = rp.days();
+        days &= (~mask);
+        days |= 1 << (startDate.dayOfWeek()-1);
+        rp.setDays(days);
     }
 
     buttonStart->setText( TimeString::shortDate( startDate ) );
@@ -358,18 +367,20 @@ void DateEntry::startTimeEdited( const QString &s )
 
 void DateEntry::startTimeChanged( const QTime &t )
 {
-    int duration=startTime.secsTo(endTime);
+    int duration = startTime.secsTo(endTime);
     startTime = t;
-    endTime=t.addSecs(duration);
+    endTime = t.addSecs(duration);
 }
+
 void DateEntry::startTimePicked( const QTime &t ) {
-  if(m_showStart ){
-    startTimeChanged(t);
-    updateTimeEdit(true,true);
-  }else{
-    endTimeChanged(t);
-    updateTimeEdit(false, true );
-  }
+    if(m_showStart) {
+        startTimeChanged(t);
+        updateTimeEdit(true,true);
+    } 
+    else {
+        endTimeChanged(t);
+        updateTimeEdit(false, true );
+    }
 }
 
 /*
@@ -390,13 +401,13 @@ void DateEntry::slotRepeat()
 
     // it is better in my opinion to just grab this from the mother,
     // since, this dialog doesn't need to keep track of it...
-    if ( rp.type != Event::NoRepeat )
+    if ( rp.type() != OPimRecurrence::NoRepeat )
         e = new RepeatEntry( startWeekOnMonday, rp, startDate, exceptions, this);
     else
         e = new RepeatEntry( startWeekOnMonday, startDate, this );
 
     if ( QPEApplication::execDialog( e ) ) {
-        rp = e->repeatPattern();
+        rp = e->recurrence();
         setRepeatLabel();
         exceptions = e->getExceptions();
     }
@@ -409,14 +420,13 @@ void DateEntry::slotChangeStartOfWeek( bool onMonday )
     startWeekOnMonday = onMonday;
 }
 
-Event DateEntry::event()
+OPimEvent DateEntry::event()
 {
-    Event ev;
-    Event::SoundTypeChoice st;
+    OPimEvent ev;
+//X    OPimEvent::SoundTypeChoice st;
     ev.setDescription( comboDescription->currentText() );
     ev.setLocation( comboLocation->currentText() );
     ev.setCategories( comboCategory->currentCategories() );
-    ev.setType( checkAllDay->isChecked() ? Event::AllDay : Event::Normal );
     if ( startDate > endDate ) {
         QDate tmp = endDate;
         endDate = startDate;
@@ -433,7 +443,7 @@ Event DateEntry::event()
         startTime = tmp;
     }
     // don't set the time if theres no need too
-    if ( ev.type() == Event::AllDay ) {
+    if ( ev.isAllDay() ) {
         startTime.setHMS( 0, 0, 0 );
         endTime.setHMS( 23, 59, 59 );
     }
@@ -461,44 +471,46 @@ Event DateEntry::event()
     unsetenv( "TZ" );
     if ( !realTZ.isNull() )
         if ( setenv( "TZ", realTZ, true ) != 0 )
-                        owarn << "There was a problem setting the timezone." << oendl;
+            owarn << "There was a problem setting the timezone." << oendl;
 
     // convert UTC to local time (calling tzset internally)
-    ev.setStart( TimeConversion::fromUTC( start_utc ) );
-    ev.setEnd( TimeConversion::fromUTC( end_utc ) );
+    ev.setStartDateTime( TimeConversion::fromUTC( start_utc ) );
+    ev.setEndDateTime( TimeConversion::fromUTC( end_utc ) );
+
+    if(checkAllDay->isChecked())
+        ev.setAllDay(true);
 
     // we only have one type of sound at the moment... LOUD!!!
-    if ( comboSound->currentItem() != 0 )
-        st = Event::Loud;
-    else
-        st = Event::Silent;
-    ev.setAlarm( checkAlarm->isChecked(), spinAlarm->value(), st );
-    if ( rp.type != Event::NoRepeat )
-        ev.setRepeat( TRUE, rp );
-    ev.setNotes( noteStr );
+//X    if ( comboSound->currentItem() != 0 )
+//X        st = OPimEvent::Loud;
+//X    else
+//X        st = OPimEvent::Silent;
+//X    ev.setAlarm( checkAlarm->isChecked(), spinAlarm->value(), st );
+    if ( rp.type() != OPimRecurrence::NoRepeat )
+        ev.setRecurrence( rp );
+    ev.setNote( noteStr );
 
                 //cout << "Start: " << comboStart->currentText() << endl;
 
-    ev.setExceptionsStr(exceptions);
+//X    ev.setExceptionsStr(exceptions);
 
     return ev;
 }
 
 void DateEntry::setRepeatLabel()
 {
-
-    switch( rp.type ) {
-        case Event::Daily:
+    switch( rp.type() ) {
+        case OPimRecurrence::Daily:
             cmdRepeat->setText( tr("Daily...") );
             break;
-        case Event::Weekly:
+        case OPimRecurrence::Weekly:
             cmdRepeat->setText( tr("Weekly...") );
             break;
-        case Event::MonthlyDay:
-        case Event::MonthlyDate:
+        case OPimRecurrence::MonthlyDay:
+        case OPimRecurrence::MonthlyDate:
             cmdRepeat->setText( tr("Monthly...") );
             break;
-        case Event::Yearly:
+        case OPimRecurrence::Yearly:
             cmdRepeat->setText( tr("Yearly...") );
             break;
         default:
@@ -506,14 +518,14 @@ void DateEntry::setRepeatLabel()
     }
 }
 
-void DateEntry::setAlarmEnabled( bool alarmPreset, int presetTime, Event::SoundTypeChoice sound )
+void DateEntry::setAlarmEnabled( bool alarmPreset, int presetTime/*X, OPimEvent::SoundTypeChoice sound */)
 {
     checkAlarm->setChecked( alarmPreset );
     spinAlarm->setValue( presetTime );
-    if ( sound != Event::Silent )
+/*    if ( sound != OPimEvent::Silent )
         comboSound->setCurrentItem( 1 );
     else
-        comboSound->setCurrentItem( 0 );
+        comboSound->setCurrentItem( 0 );*/
 }
 
 void DateEntry::initCombos()
@@ -574,3 +586,122 @@ void DateEntry::slotChangeClock( bool whichClock )
     setDates( QDateTime( startDate, startTime ), QDateTime( endDate, endTime ) );
 }
 
+////////  DateEntryEditor ////////
+
+DateEntryEditor::DateEntryEditor( MainWindow* mw, QWidget* parent )
+    : Editor(mw, parent)
+{
+    m_parent = parent;
+}
+
+bool DateEntryEditor::showDialog( QString caption, OPimEvent& event ) {
+    QDialog newDlg( m_parent, 0, TRUE );
+    newDlg.setCaption( caption );
+    QVBoxLayout *vb = new QVBoxLayout( &newDlg );
+    QScrollView *sv = new QScrollView( &newDlg );
+    sv->setResizePolicy( QScrollView::AutoOneFit );
+    sv->setFrameStyle( QFrame::NoFrame );
+    sv->setHScrollBarMode( QScrollView::AlwaysOff );
+    vb->addWidget( sv );
+
+    DateEntry *de = new DateEntry( weekStartOnMonday(), event, isAP(), &newDlg );
+    sv->addChild( de );
+    while ( QPEApplication::execDialog( &newDlg ) ) {
+        event = de->event();
+        event.assignUid();
+        QString error = checkEvent( event );
+        if ( !error.isNull() ) {
+            if ( QMessageBox::warning( m_parent, QObject::tr("Error!"), error, QObject::tr("Fix it"), QObject::tr("Continue"), 0, 0, 1 ) == 0 )
+                continue;
+        }
+        return true;
+    }
+    return false;
+}
+
+bool DateEntryEditor::newEvent( const QDate& date ) {
+    OPimEvent ev;
+/*X    ev.setDescription(  str );
+    // When the new gui comes in, change this...
+    if(location==0) {
+        if(defaultLocation.isEmpty()) {
+            ev.setLocation(tr("(Unknown)"));
+        } else {
+            ev.setLocation( defaultLocation );
+        }
+    } 
+    else
+        ev.setLocation(location);
+    ev.setCategories(defaultCategories); */
+    QDateTime start = date;
+    QDateTime end = date;
+    start.setTime( QTime( 10, 0 ) );
+    end.setTime( QTime( 12, 0 ) );
+    ev.setStartDateTime( start );
+    ev.setEndDateTime( end );
+
+    if( showDialog( DateEntryBase::tr("New Event"), ev ) ) {
+        m_event = ev;
+        return true;
+    }
+    else
+        return false;
+
+
+//X    e->setAlarmEnabled( aPreset, presetTime, Event::Loud );
+}
+
+bool DateEntryEditor::newEvent( const QDateTime& start, const QDateTime& end ) {
+    OPimEvent ev;
+    ev.setStartDateTime( start );
+    ev.setEndDateTime( end );
+
+    if( showDialog( DateEntryBase::tr("New Event"), ev ) ) {
+        m_event = ev;
+        return true;
+    }
+    else
+        return false;
+}
+
+bool DateEntryEditor::edit( const OPimEvent& event, bool showRec) {
+    OPimEvent ev(event);
+    if( showDialog( DateEntryBase::tr("New Event"), ev ) ) {
+        m_event = ev;
+        return true;
+    }
+    else
+        return false;
+}
+
+OPimEvent DateEntryEditor::event() const {
+    return m_event;
+}
+
+QString DateEntryEditor::checkEvent(const OPimEvent &e)
+{
+    // check if overlaps with itself
+    bool checkFailed = FALSE;
+
+    // check the next 12 repeats. should catch most problems
+    QDate current_date = e.startDateTime().date();
+    OPimRecurrence rp = e.recurrence();
+    for(int i = 0; i < 12; i++)
+    {
+        QDate next;
+        if (!rp.nextOcurrence(current_date.addDays(1), next)) {
+            break;  // no more repeats
+        }
+        if(next < e.endDateTime().date()) {
+            checkFailed = TRUE;
+            break;
+        }
+        current_date = next;
+    }
+
+    if(checkFailed)
+        return QObject::tr("Event duration is potentially longer\n"
+            "than interval between repeats.");
+    else
+        return QString::null;
+}
