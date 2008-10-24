@@ -322,7 +322,7 @@ bool ODateBookAccessBackend_XML::remove( int uid ) {
     return true;
 }
 bool ODateBookAccessBackend_XML::replace( const OPimEvent& ev ) {
-    replace( ev.uid() ); // ??? Shouldn't this be "remove( ev.uid() ) ??? (eilers)
+    remove( ev.uid() );
     return add( ev );
 }
 
