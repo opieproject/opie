@@ -3,14 +3,10 @@ datebookdayheader.cpp
 datebookdayheader.h
 datebooksettingsbase.cpp
 datebooksettingsbase.h
-datebookweekheader.cpp
-datebookweekheader.h
-datebookweeklstdayhdr.cpp
-datebookweeklstdayhdr.h
-datebookweeklstheader.cpp
-datebookweeklstheader.h
 dateentry.cpp
 dateentry.h
+exceptionsbase.cpp
+exceptionsbase.h
 moc_*
 noteentry.cpp
 noteentry.h
