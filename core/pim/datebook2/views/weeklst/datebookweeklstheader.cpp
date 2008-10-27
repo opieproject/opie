@@ -7,8 +7,9 @@
 #include <qtoolbutton.h>
 #include <qlayout.h>
 
-/* implenented in datebookweek.cpp - HELL */
-bool calcWeek(const QDate &d, int &week, int &year,bool startOnMonday = false);
+#include <view.h>
+
+using namespace Opie::Datebook;
 
 DateBookWeekLstHeader::DateBookWeekLstHeader(bool onM, QWidget* parent, const char* name, WFlags fl)
     : DateBookWeekLstHeaderBase(parent, name, fl)
@@ -50,7 +51,7 @@ void DateBookWeekLstHeader::setDate(const QDate &d) {
 
     date=date.addDays(-dayofweek);
 
-    calcWeek(date,week,year,bStartOnMonday);
+    View::calcWeek(date,week,year,bStartOnMonday);
     QDate start=date;
     QDate stop=start.addDays(6);
     labelDate->setText( QString::number(start.day()) + "." +

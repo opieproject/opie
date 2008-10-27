@@ -30,9 +30,10 @@
 
 #ifndef DATEBOOKDAYHEADER_H
 #define DATEBOOKDAYHEADER_H
-#include <qdatetime.h>
-#include "datebookweekheader.h"
 
+#include <qdatetime.h>
+
+#include "datebookweekheader.h"
 
 class DateBookWeekHeader : public DateBookWeekHeaderBase
 {
@@ -40,29 +41,29 @@ class DateBookWeekHeader : public DateBookWeekHeaderBase
 
 public:
     DateBookWeekHeader( bool startOnMonday, QWidget* parent = 0,
-			const char* name = 0, WFlags fl = 0 );
+            const char* name = 0, WFlags fl = 0 );
     ~DateBookWeekHeader();
 
-	void setDate(const QDate &d);
-	void setStartOfWeek( bool onMonday );
+    void setDate(const QDate &d);
+    void setStartOfWeek( bool onMonday );
 
 signals:
-	void dateChanged( QDate &date );
+    void dateChanged( QDate &date );
 
 public slots:
-	void pickDate();
-	void nextMonth();
-	void prevMonth();
-	void nextWeek();
-	void prevWeek();
-	void setDate( int y, int m, int d);
+    void pickDate();
+    void nextMonth();
+    void prevMonth();
+    void nextWeek();
+    void prevWeek();
+    void setDate( int y, int m, int d);
 
 protected slots:
-	void keyPressEvent(QKeyEvent *e) { e->ignore(); }
+    void keyPressEvent(QKeyEvent *e) { e->ignore(); }
 
 private:
-	QDate date;
-	bool bStartOnMonday;
+    QDate date;
+    bool bStartOnMonday;
 };
 
 #endif // DATEBOOKDAYHEADER_H

@@ -3,8 +3,12 @@
 
 #include <qlayout.h>
 
-DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
-                           QValueList<EffectiveEvent> &ev2,
+using namespace Opie;
+using namespace Opie::Datebook;
+
+DateBookWeekLstDblView::DateBookWeekLstDblView(WeekLstView *view,
+                           OPimOccurrence::List &ev1,
+                           OPimOccurrence::List &ev2,
                            QDate &d, bool onM, bool showAmPm,
                            QWidget* parent,
                            const char* name, WFlags fl)
@@ -12,12 +16,14 @@ DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
 {
     m_MainLayout = new QHBoxLayout( this );
 
+    weekLstView = view;
     leftView = 0;
     rightView = 0;
     setEvents(ev1,ev2,d,onM);
 }
 
-DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
+DateBookWeekLstDblView::DateBookWeekLstDblView(WeekLstView *view,
+                           OPimOccurrence::List &ev1,
                            QDate &d, bool onM, bool showAmPm,
                            QWidget* parent,
                            const char* name, WFlags fl)
@@ -25,26 +31,23 @@ DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
 {
     m_MainLayout = new QHBoxLayout( this );
 
+    weekLstView = view;
     leftView = 0;
     rightView = 0;
     setEvents(ev1,d,onM);
 }
 
 /* setting the variant with both views */
-void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QValueList<EffectiveEvent> &ev2,QDate &d, bool onM)
+void DateBookWeekLstDblView::setEvents(OPimOccurrence::List &ev1,OPimOccurrence::List &ev2,QDate &d, bool onM)
 {
     setUpdatesEnabled(false);
     if (!leftView) {
-        leftView=new DateBookWeekLstView(ev1, d, onM, ampm, this);
+        leftView = new DateBookWeekLstView(ev1, weekLstView, d, onM, ampm, this);
         m_MainLayout->addWidget(leftView);
-        connect (leftView, SIGNAL(editEvent(const EffectiveEvent&)), this, SIGNAL(editEvent(const EffectiveEvent&)));
-        connect (leftView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-        connect (leftView, SIGNAL(removeEvent(const EffectiveEvent &)), this, SIGNAL(removeEvent(const EffectiveEvent &)));
-        connect (leftView, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
         connect (leftView, SIGNAL(redraw()), this, SIGNAL(redraw()));
         connect (leftView, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
-        connect (leftView, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
-        this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
+        connect (leftView, SIGNAL(addEvent(const QDateTime&,const QDateTime&)),
+        this, SIGNAL(addEvent(const QDateTime&,const QDateTime&)));
 
     } else {
         leftView->hide();
@@ -52,16 +55,12 @@ void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QValueLis
     }
 
     if (!rightView) {
-        rightView=new DateBookWeekLstView(ev2, d.addDays(7), onM, ampm, this);
+        rightView = new DateBookWeekLstView(ev2, weekLstView, d.addDays(7), onM, ampm, this);
         m_MainLayout->addWidget(rightView);
-        connect (rightView, SIGNAL(editEvent(const EffectiveEvent&)), this, SIGNAL(editEvent(const EffectiveEvent&)));
-        connect (rightView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-        connect (rightView, SIGNAL(removeEvent(const EffectiveEvent &)), this, SIGNAL(removeEvent(const EffectiveEvent &)));
-        connect (rightView, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
         connect (rightView, SIGNAL(redraw()), this, SIGNAL(redraw()));
         connect (rightView, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
-        connect (rightView, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
-            this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
+        connect (rightView, SIGNAL(addEvent(const QDateTime&,const QDateTime&)),
+            this, SIGNAL(addEvent(const QDateTime&,const QDateTime&)));
     } else {
         rightView->hide();
         rightView->setEvents(ev2,d.addDays(7),onM);
@@ -72,19 +71,15 @@ void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QValueLis
     setUpdatesEnabled(true);
 }
 
-void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QDate &d, bool onM)
+void DateBookWeekLstDblView::setEvents(OPimOccurrence::List &ev1,QDate &d, bool onM)
 {
     if (!leftView) {
-        leftView=new DateBookWeekLstView(ev1, d, onM, ampm, this);
+        leftView = new DateBookWeekLstView(ev1, weekLstView, d, onM, ampm, this);
         m_MainLayout->addWidget(leftView);
-        connect (leftView, SIGNAL(editEvent(const EffectiveEvent&)), this, SIGNAL(editEvent(const EffectiveEvent&)));
-        connect (leftView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-        connect (leftView, SIGNAL(removeEvent(const EffectiveEvent &)), this, SIGNAL(removeEvent(const EffectiveEvent &)));
-        connect (leftView, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
         connect (leftView, SIGNAL(redraw()), this, SIGNAL(redraw()));
         connect (leftView, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
-        connect (leftView, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
-            this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
+        connect (leftView, SIGNAL(addEvent(const QDateTime&,const QDateTime&)),
+            this, SIGNAL(addEvent(const QDateTime&,const QDateTime&)));
     } else {
         leftView->hide();
         leftView->setEvents(ev1,d,onM);
@@ -96,19 +91,15 @@ void DateBookWeekLstDblView::setEvents(QValueList<EffectiveEvent> &ev1,QDate &d,
     }
 }
 
-void DateBookWeekLstDblView::setRightEvents(QValueList<EffectiveEvent> &ev1,QDate &d, bool onM)
+void DateBookWeekLstDblView::setRightEvents(OPimOccurrence::List &ev1,QDate &d, bool onM)
 {
     if (!rightView) {
-        rightView=new DateBookWeekLstView(ev1, d, onM, ampm, this);
+        rightView = new DateBookWeekLstView(ev1, weekLstView, d, onM, ampm, this);
         m_MainLayout->addWidget(rightView);
-        connect (leftView, SIGNAL(editEvent(const EffectiveEvent&)), this, SIGNAL(editEvent(const EffectiveEvent&)));
-        connect (leftView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-        connect (leftView, SIGNAL(removeEvent(const EffectiveEvent &)), this, SIGNAL(removeEvent(const EffectiveEvent &)));
-        connect (leftView, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
         connect (leftView, SIGNAL(redraw()), this, SIGNAL(redraw()));
         connect (leftView, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
-        connect (leftView, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
-            this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
+        connect (leftView, SIGNAL(addEvent(const QDateTime&,const QDateTime&)),
+            this, SIGNAL(addEvent(const QDateTime&,const QDateTime&)));
     } else {
         rightView->hide();
         rightView->setEvents(ev1,d,onM);

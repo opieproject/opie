@@ -49,5 +49,5 @@ void DateBookWeekLstDayHdr::newEvent() {
     start.setTime(QTime(10,0));
     stop.setTime(QTime(12,0));
 
-    emit addEvent(start,stop,"",0);
+    emit addEvent(start,stop);
 }

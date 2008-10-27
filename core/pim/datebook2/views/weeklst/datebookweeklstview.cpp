@@ -1,3 +1,4 @@
+#include "weeklstview.h"
 #include "datebookweeklstview.h"
 #include "datebooktypes.h"
 #include "datebookweeklstdayhdr.h"
@@ -12,18 +13,23 @@
 #include <qlayout.h>
 #include <qtl.h>
 
-DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
+using namespace Opie;
+using namespace Opie::Datebook;
+
+DateBookWeekLstView::DateBookWeekLstView(OPimOccurrence::List &ev,
+                     WeekLstView *view,
                      const QDate &d, bool onM, bool showAmPm,
                      QWidget* parent,
                      const char* name, WFlags fl)
     : QWidget( parent, name, fl ), ampm(showAmPm)
 {
     childs.clear();
+    weekLstView = view;
     m_MainLayout = new QVBoxLayout( this );
     setEvents(ev,d,onM);
 }
 
-void DateBookWeekLstView::setEvents(QValueList<EffectiveEvent> &ev, const QDate &d, bool onM)
+void DateBookWeekLstView::setEvents(OPimOccurrence::List &ev, const QDate &d, bool onM)
 {
     QValueList<QObject*>::Iterator wIter;
     for (wIter=childs.begin();wIter!=childs.end();++wIter) {
@@ -44,14 +50,17 @@ void DateBookWeekLstView::setEvents(QValueList<EffectiveEvent> &ev, const QDate 
     setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
 
     qBubbleSort(ev);
-    QValueListIterator<EffectiveEvent> it;
+    OPimOccurrence::List::ConstIterator it;
     it=ev.begin();
 
     int dayOrder[7];
     if (bStartOnMonday) {
-        for (int d=0; d<7; d++) dayOrder[d]=d+1;
-    } else {
-        for (int d=0; d<7; d++) dayOrder[d]=d;
+        for (int d=0; d<7; d++) 
+            dayOrder[d]=d+1;
+    } 
+    else {
+        for (int d=0; d<7; d++) 
+            dayOrder[d]=d;
         dayOrder[0]=7;
     }
 
@@ -69,22 +78,18 @@ void DateBookWeekLstView::setEvents(QValueList<EffectiveEvent> &ev, const QDate 
         // Header
         DateBookWeekLstDayHdr *hdr=new DateBookWeekLstDayHdr(d.addDays(i-dayoffset), bStartOnMonday,w);
         connect(hdr, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
-        connect(hdr, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
-            this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
+        connect(hdr, SIGNAL(addEvent(const QDateTime&,const QDateTime&)),
+            this, SIGNAL(addEvent(const QDateTime&,const QDateTime&)));
         tlayout->addWidget(hdr);
         connect( qApp, SIGNAL(clockChanged(bool)), this, SLOT(slotClockChanged(bool)));
 
         // Events
         while ( (*it).date().dayOfWeek() == dayOrder[i] && it!=ev.end() ) {
-            if(!(((*it).end().hour()==0) && ((*it).end().minute()==0) && ((*it).startDate()!=(*it).date()))) {  // Skip events ending at 00:00 starting at another day.
-                DateBookWeekLstEvent *l=new DateBookWeekLstEvent(ampm,*it,weeklistviewconfig,w);
+//X            if(!(((*it).endTime().hour()==0) && ((*it).endTime().minute()==0) && ((*it).startDate()!=(*it).date()))) {  // Skip events ending at 00:00 starting at another day.
+                DateBookWeekLstEvent *l=new DateBookWeekLstEvent( ampm, *it, weekLstView, weeklistviewconfig, w );
                 tlayout->addWidget(l);
-                connect (l, SIGNAL(editEvent(const EffectiveEvent&)), this, SIGNAL(editEvent(const EffectiveEvent&)));
-                connect (l, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-                connect (l, SIGNAL(removeEvent(const EffectiveEvent &)), this, SIGNAL(removeEvent(const EffectiveEvent &)));
-                connect (l, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
                 connect (l, SIGNAL(redraw()), this, SIGNAL(redraw()));
-            }
+//X            }
             it++;
         }
         tlayout->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));

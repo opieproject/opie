@@ -2,30 +2,23 @@
 #define _DATEBOOKWEEKLSTEVENT_H
 
 #include <opie2/oclickablelabel.h>
+#include <opie2/opimoccurrence.h>
 
-#include <qpe/event.h>
+#include "weeklstview.h"
 
 class DateBookWeekLstEvent: public Opie::Ui::OClickableLabel
 {
   Q_OBJECT
 public:
-    DateBookWeekLstEvent(bool ampm, const EffectiveEvent &ev, int weeklistviewconfig =1,
+    DateBookWeekLstEvent(bool ampm, const Opie::OPimOccurrence &ev, 
+             Opie::Datebook::WeekLstView *view, int weeklistviewconfig =1,
              QWidget* parent = 0, const char* name = 0,
              WFlags fl = 0);
 signals:
-    void editEvent(const EffectiveEvent &e);
-    void duplicateEvent(const Event &e);
-    void removeEvent(const EffectiveEvent &e);
-    void beamEvent(const Event &e);
     void redraw();
-private slots:
-    void editMe();
-    void duplicateMe();
-    void deleteMe();
-    void beamMe();
 private:
-    const EffectiveEvent event;
-    QPopupMenu* popmenue;
+    const Opie::OPimOccurrence event;
+    Opie::Datebook::WeekLstView *weekLstView;
 protected:
     void mousePressEvent( QMouseEvent *e );
     bool ampm;

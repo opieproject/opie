@@ -23,8 +23,9 @@
 #ifndef ODATEBOOKMONTH
 #define ODATEBOOKMONTH
 
-#include <qtopia/private/event.h>
 #include <qpe/datebookmonth.h>
+
+#include <opie2/opimoccurrence.h>
 
 #include <qvbox.h>
 #include <qhbox.h>
@@ -41,8 +42,6 @@ class QToolButton;
 class QComboBox;
 class QSpinBox;
 class Event;
-class DateBookDB;
-class DateBookDBHoliday;
 
 class ODateBookMonthTablePrivate;
 class ODateBookMonthTable : public QTable
@@ -50,18 +49,21 @@ class ODateBookMonthTable : public QTable
     Q_OBJECT
 
 public:
-    ODateBookMonthTable( QWidget *parent = 0, const char *name = 0,
-                        DateBookDBHoliday *newDb = 0 );
+    ODateBookMonthTable( QWidget *parent = 0, const char *name = 0 );
     virtual ~ODateBookMonthTable();
+
     void setDate( int y, int m, int d );
+    void setEvents( const Opie::OPimOccurrence::List &list );
     void redraw();
 
     QSize minimumSizeHint() const { return sizeHint(); }
     QSize minimumSize() const { return sizeHint(); }
-    void  getDate( int& y, int &m, int &d ) const {y=selYear;m=selMonth;d=selDay;}
+    void getDate( int& y, int &m, int &d ) const {y=selYear;m=selMonth;d=selDay;}
     void setWeekStart( bool onMonday );
+    void visibleDateRange( QDate &start, QDate &end );
 signals:
     void dateClicked( int year, int month, int day );
+    void populateEvents();
 
 protected:
     virtual void viewportMouseReleaseEvent( QMouseEvent * );
@@ -82,14 +84,12 @@ private:
 
     void findDay( int day, int &row, int &col );
     bool findDate( QDate date, int &row, int &col );
-    void getEvents();
+    void layoutEvents();
     void changeDaySelection( int row, int col );
     QDate getDateAt( int row, int col );
 
     int year, month, day;
     int selYear, selMonth, selDay;
-    QValueList<Event> monthsEvents; // not used anymore...
-    DateBookDBHoliday *db;
     ODateBookMonthTablePrivate *d;
 };
 
@@ -100,14 +100,17 @@ class ODateBookMonth : public QVBox
 
 public:
     /* ac = Auto Close */
-    ODateBookMonth( QWidget *parent = 0, const char *name = 0, bool ac = FALSE,
-                   DateBookDBHoliday *data = 0 );
+    ODateBookMonth( QWidget *parent = 0, const char *name = 0, bool ac = FALSE );
     virtual ~ODateBookMonth();
-    QDate  selectedDate() const;
+    QDate date() const; // FIXME this is a mess
+    QDate selectedDate() const;
+    void visibleDateRange( QDate &start, QDate &end );
+    void setEvents( const Opie::OPimOccurrence::List &list );
 
 signals:
     /* ### FIXME add a signal with QDate -zecke */
     void dateClicked( int year, int month, int day );
+    void populateEvents();
 
 public slots:
     void setDate( int y, int m );
@@ -129,6 +132,28 @@ private:
     int year, month, day;
     bool autoClose;
     class ODateBookMonthPrivate *d;
+};
+
+class ODayItemMonthPrivate;
+class ODayItemMonth : public QTableItem
+{
+public:
+    ODayItemMonth( QTable *table, EditType et, const QString &t );
+    ~ODayItemMonth();
+    void paint( QPainter *p, const QColorGroup &cg, const QRect &cr, bool selected );
+    void setDay( int d ) { dy = d; }
+    void setEvents( const Opie::OPimOccurrence::List &effEvents );
+    void clearEffEvents();
+    int day() const { return dy; }
+    void setType( Calendar::Day::Type t );
+    Calendar::Day::Type type() const { return typ; }
+
+private:
+    QBrush back;
+    QColor forg;
+    int dy;
+    Calendar::Day::Type typ;
+    ODayItemMonthPrivate *d;
 };
 
 #endif

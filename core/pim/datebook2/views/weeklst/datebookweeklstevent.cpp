@@ -8,7 +8,11 @@
 #include <qstring.h>
 #include <qpopupmenu.h>
 
-DateBookWeekLstEvent::DateBookWeekLstEvent(bool ap, const EffectiveEvent &ev,
+using namespace Opie;
+using namespace Opie::Datebook;
+
+DateBookWeekLstEvent::DateBookWeekLstEvent(bool ap, const OPimOccurrence &ev,
+                        WeekLstView *view,
                         int weeklistviewconfig,
                         QWidget* parent,
                         const char* name,
@@ -16,83 +20,72 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(bool ap, const EffectiveEvent &ev,
 {
     // old values... lastday = "__|__", middle="   |---", Firstday="00:00",
     QString s,start,middle,end,day;
+    
+    weekLstView = view;
 
     odebug << "weeklistviewconfig=" << weeklistviewconfig << oendl;
     if(weeklistviewconfig==NORMAL) { // "Normal", only display start time.
         if ( ampm ) {
-            int shour = ev.start().hour();
-            int smin = ev.start().minute();
+            int shour = ev.startTime().hour();
+            int smin = ev.startTime().minute();
             if ( shour >= 12 ) {
                 if ( shour > 12 ) {
                     shour -= 12;
                 }
                 start.sprintf( "%.2d:%.2d PM", shour, smin );
                 day.sprintf("%.2d:%.2d PM",shour,smin);
-            } else {
+            } 
+            else {
                 if ( shour == 0 ) {
                     shour = 12;
                 }
-             start.sprintf( "%.2d:%.2d AM", shour, smin );
-             day.sprintf("%.2d:%.2d AM",shour,smin);
+                start.sprintf( "%.2d:%.2d AM", shour, smin );
+                day.sprintf("%.2d:%.2d AM",shour,smin);
             }
-        } else {
-        start.sprintf("%.2d:%.2d",ev.start().hour(),ev.start().minute());
-            day.sprintf("%.2d:%.2d",ev.start().hour(),ev.start().minute());
+        } 
+        else {
+            start.sprintf("%.2d:%.2d",ev.startTime().hour(),ev.startTime().minute());
+            day.sprintf("%.2d:%.2d",ev.startTime().hour(),ev.startTime().minute());
         }
         middle.sprintf("   |---");
         end.sprintf("__|__");
-    } else if(weeklistviewconfig==EXTENDED) { // Extended mode, display start and end times.
-        start.sprintf("%.2d:%.2d-",ev.start().hour(),ev.start().minute());
+    } 
+    else if(weeklistviewconfig==EXTENDED) { // Extended mode, display start and end times.
+        start.sprintf("%.2d:%.2d-",ev.startTime().hour(),ev.startTime().minute());
         middle.sprintf("<--->");
-        end.sprintf("-%.2d:%.2d",ev.end().hour(),ev.end().minute());
-        day.sprintf("%.2d:%.2d-%.2d:%.2d",ev.start().hour(),ev.start().minute(),ev.end().hour(),ev.end().minute());
+        end.sprintf("-%.2d:%.2d",ev.endTime().hour(),ev.endTime().minute());
+        day.sprintf("%.2d:%.2d-%.2d:%.2d",ev.startTime().hour(),ev.startTime().minute(),ev.endTime().hour(),ev.endTime().minute());
     }
 
-    if(ev.event().type() == Event::Normal) {
-        if(ev.startDate()==ev.date() && ev.endDate()==ev.date()) {  // day event.
-            s=day;
-        } else if(ev.startDate()==ev.date()) {  // start event.
-            s=start;
-        } else if(ev.endDate()==ev.date()) { // end event.
-            s=end;
-        } else {    // middle day.
-            s=middle;
+    if( !ev.isAllDay() ) {
+        OPimOccurrence::Position pos = ev.position();
+        if( pos == OPimOccurrence::StartEnd ) {  // day event.
+            s = day;
+        } 
+        else if( pos == OPimOccurrence::Start ) {  // start event.
+            s = start;
+        } 
+        else if( pos == OPimOccurrence::End ) { // end event.
+            s = end;
+        } 
+        else {    // middle day.
+            s = middle;
         }
-    } else {
+    }
+    else {
         s="";
     }
-    setText(QString(s) + " " + ev.description());
+    setText(QString(s) + " " + ev.toEvent().description());
 //  connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
     setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
 }
-void DateBookWeekLstEvent::editMe() {
-    emit editEvent(event);
-}
-void DateBookWeekLstEvent::duplicateMe()
-{
-       emit duplicateEvent(event.event());
-}
-void DateBookWeekLstEvent::deleteMe()
-{
-       emit removeEvent(event);
-       emit redraw();
-}
-void DateBookWeekLstEvent::beamMe()
-{
-    emit beamEvent( event.event() );
-}
+
 void DateBookWeekLstEvent::mousePressEvent( QMouseEvent *e )
 {
-    if (!event.event().isValidUid()) {
+    if (!event.toEvent().isValidUid()) {
         // this is just such a holiday event.
         return;
     }
-    popmenue = new QPopupMenu;
 
-    popmenue->insertItem( tr( "Edit" ), this, SLOT(editMe()));
-    popmenue->insertItem( tr( "Duplicate" ), this, SLOT(duplicateMe()));
-    popmenue->insertItem( tr( "Delete" ), this, SLOT(deleteMe()));
-    if(Ir::supported())
-        popmenue->insertItem( tr( "Beam" ), this, SLOT(beamMe()));
-    popmenue->popup( mapToGlobal( e->pos() ));
+    weekLstView->popup( event, e->globalPos() );
 }
