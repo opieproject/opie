@@ -70,6 +70,7 @@ namespace Datebook {
         void show( int uid );
         void edit( int uid );
         void edit();
+        void showDayView();
         void add( const OPimRecord& );
 
     private:
@@ -95,13 +96,14 @@ namespace Datebook {
         // friend of the view
     private:
         void viewPopup( const OPimOccurrence &ev, const QPoint &pt );
-        void viewAdd( const QDate& date );
+        void viewAdd( const QDateTime& start, const QDateTime& end );
         void viewAdd( const OPimEvent& );
         bool viewAP()const;
         bool viewStartMonday()const;
         // off view show
     private:
         QList<View> m_views; // the Views.. not autoDelete
+        View *m_currView;
         QActionGroup* m_viewsGroup;
         QWidgetStack* m_stack;
         QToolBar *m_toolBar;

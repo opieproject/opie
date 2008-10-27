@@ -11,7 +11,7 @@
 #include <qpe/ir.h>
 #include <qmenubar.h>
 #include <qtoolbar.h>
-#include <qpe/qpemessagebox.h>  // FIXME do we need this?
+#include <qpe/qpemessagebox.h>
 #include <qmessagebox.h>
 #include <opie2/oresource.h>
 
@@ -24,6 +24,9 @@
 
 #include "dateentryimpl.h"
 #include "views/day/dayview.h"
+#include "views/week/weekview.h"
+#include "views/weeklst/weeklstview.h"
+#include "views/month/monthview.h"
 
 using namespace Opie;
 using namespace Datebook;
@@ -32,6 +35,7 @@ MainWindow::MainWindow()
     : OPimMainWindow( "Datebook", 0, 0, 0, 0, 0, WType_TopLevel | WStyle_ContextHelp ), m_descMan( "Descriptions" ),  m_locMan( "Locations" )
 {
     m_ampm = false;
+    m_currView = NULL;
 
     initBars();
     initUI();
@@ -44,8 +48,8 @@ MainWindow::MainWindow()
     setCaption( tr("Calendar") );
     setIcon( Opie::Core::OResource::loadPixmap( "datebook_icon" ) );
 
-    raiseCurrentView();
-    
+    slotChangeView();
+   
     QTimer::singleShot(0, this, SLOT(populate() ) );
 
     // FIXME OPimMainWindow already registers QCop receivers
@@ -113,6 +117,19 @@ void MainWindow::edit( int uid ) {
     
 }
 
+void MainWindow::showDayView() {
+    QObjectListIt itact( *(m_viewsGroup->children()) );
+    QAction *a;
+    while ( (a=(QAction *)itact.current()) ) {
+        ++itact;
+        if ( a->name() == QString("DayView") /* no tr */ ) {
+            a->setOn(true);
+            slotChangeView();
+            break;
+        }
+    }
+}
+
 /*
  * init tool bars layout and so on
  */
@@ -130,9 +147,7 @@ void MainWindow::initUI() {
     m_popTemplate->setCheckable( TRUE );
     connect( m_popTemplate, SIGNAL(activated(int) ),
              this, SLOT(slotNewFromTemplate(int) ) );
-//     m_popView->insertItem(tr("New from template"), m_popTemplate, -1, 0);
-
-//    m_itemEditAction->addTo( m_popView );
+//X     m_popView->insertItem(tr("New from template"), m_popTemplate, -1, 0);
 
     m_toolBar->addSeparator();
 
@@ -158,7 +173,7 @@ void MainWindow::initUI() {
 
     m_configureAction->addTo( m_toolBar2 );
 
-/*
+/*X
     a = new QAction( tr("Configure Locations"), QString::null, 0, 0 );
     a->addTo( m_popSetting );
     connect(a, SIGNAL( activated() ), this, SLOT( slotConfigureLocs() ) );
@@ -190,6 +205,9 @@ void MainWindow::initConfig() {
 
 void MainWindow::initViews() {
     m_views.append(new DayView(this, m_stack));
+    m_views.append(new WeekView(this, m_stack));
+    m_views.append(new WeekLstView(this, m_stack));
+    m_views.append(new MonthView(this, m_stack));
 
     m_viewsGroup = new QActionGroup( this );
 
@@ -231,20 +249,7 @@ void MainWindow::slotGoToNow() {
 }
 
 View* MainWindow::currentView() {
-    QObjectListIt itact( *(m_viewsGroup->children()) );
-    QAction *a;
-    while ( (a=(QAction *)itact.current()) ) {
-        ++itact;
-        if ( a->isOn() ) {
-            for ( QListIterator<View> it(m_views); it.current(); ++it ) {
-                if(it.current()->type() == a->name())
-                    return it.current();
-            }    
-            
-            break;
-        }
-    }
-    return NULL;
+    return m_currView;
 }
 
 void MainWindow::slotFind() {
@@ -314,7 +319,7 @@ void MainWindow::slotReceive( const QCString&, const QByteArray& ) {
 }
 
 void MainWindow::slotItemNew() {
-    if( editor()->newEvent( currentView()->defaultDate() ) ) {
+    if( editor()->newEvent( currentView()->date() ) ) {
         manager()->add( editor()->event() );
         currentView()->reschedule();
     }
@@ -442,7 +447,33 @@ Show* MainWindow::eventShow() {
 }
 
 void MainWindow::slotChangeView() {
-    odebug << "View changed: " << currentView()->type() << oendl;
+    QDate lastDate;
+    if(m_currView)
+        lastDate = m_currView->date();
+    else
+        lastDate = QDate::currentDate();
+
+    View *selected = NULL;
+    QObjectListIt itact( *(m_viewsGroup->children()) );
+    QAction *a;
+    while ( (a=(QAction *)itact.current()) ) {
+        ++itact;
+        if ( a->isOn() ) {
+            for ( QListIterator<View> it(m_views); it.current(); ++it ) {
+                if(it.current()->type() == a->name())
+                    selected = it.current();
+            }    
+            
+            break;
+        }
+    }
+    m_currView = selected;
+   
+    if( m_currView->date() != lastDate )
+        m_currView->showDay(lastDate);
+    else
+        m_currView->reschedule();
+
     raiseCurrentView();
 }
 
@@ -477,88 +508,86 @@ void MainWindow::hideShow() {
 
 void MainWindow::viewPopup( const OPimOccurrence &ev, const QPoint &pt ) {
     OPimEvent eve = ev.toEvent();
-    QPopupMenu m;
-    m_itemEditAction->addTo( &m );
-    m_itemDuplicateAction->addTo( &m );
-    m_itemDeleteAction->addTo( &m );
-    if(Ir::supported()) {
-        m_itemBeamAction->addTo( &m );
-//X        if( eve.hasRecurrence() ) 
-//X            m.insertItem( tr( "Beam this occurrence"), 5 );
-    }
-    int r = m.exec( pt );
+    if(eve.isValidUid()) {  // not a holiday event
+        QPopupMenu m;
+        m_itemEditAction->addTo( &m );
+        m_itemDuplicateAction->addTo( &m );
+        m_itemDeleteAction->addTo( &m );
+        if(Ir::supported()) {
+            m_itemBeamAction->addTo( &m );
+//X            if( eve.hasRecurrence() ) 
+//X                m.insertItem( tr( "Beam this occurrence"), 5 );
+        }
+        int r = m.exec( pt );
 
-    if ( r == 1 ) {
-        odebug << "edit" << oendl;
-//X        emit editMe( ev );
-    } else if ( r == 2 ) {
-//X        emit deleteMe( ev );
-    } else if ( r == 3 ) {
-//X        emit beamMe( eve );
-    } else if ( r == 4 ) {
-//X        emit duplicateMe( eve );
-    } else if ( r == 5 ) {
-        // create an OPimEvent and beam it...
-        /*
-            * Start with the easy stuff. If start and  end date is the same we can just use
-            * the values of effective events
-            * If it is a multi day event we need to find the real start and end date...
-            */
-        if ( ev.toEvent().startDateTime().date() == ev.toEvent().endDateTime().date() ) {
-            OPimEvent event( ev.toEvent() );
-
-            QDateTime dt( ev.date(), ev.startTime() );
-            event.setStartDateTime( dt );
-
-            dt.setTime( ev.endTime() );
-            event.setEndDateTime( dt );
-//X            emit beamMe( event );
-        }else {
+        if ( r == 5 ) {
+            // create an OPimEvent and beam it...
             /*
-                * at least the the Times are right now
+                * Start with the easy stuff. If start and  end date is the same we can just use
+                * the values of effective events
+                * If it is a multi day event we need to find the real start and end date...
                 */
-            QDateTime start( ev.toEvent().startDateTime() );
-            QDateTime end  ( ev.toEvent().endDateTime() );
+            if ( ev.toEvent().startDateTime().date() == ev.toEvent().endDateTime().date() ) {
+                OPimEvent event( ev.toEvent() );
 
+                QDateTime dt( ev.date(), ev.startTime() );
+                event.setStartDateTime( dt );
 
-            /*
-                * ok we know the start date or we need to find it
-                */
-            if ( ev.startTime() != QTime( 0, 0, 0 ) ) {
-                start.setDate( ev.date() );
+                dt.setTime( ev.endTime() );
+                event.setEndDateTime( dt );
+//X                emit beamMe( event );
             }else {
-//X                    QDate dt = DateBookDay::findRealStart( ev.event().uid(), ev.date(), dateBook->db );
-//X                    start.setDate( dt );
+                /*
+                    * at least the the Times are right now
+                    */
+                QDateTime start( ev.toEvent().startDateTime() );
+                QDateTime end  ( ev.toEvent().endDateTime() );
+
+
+                /*
+                    * ok we know the start date or we need to find it
+                    */
+                if ( ev.startTime() != QTime( 0, 0, 0 ) ) {
+                    start.setDate( ev.date() );
+                }
+                else {
+//X                        QDate dt = DateBookDay::findRealStart( ev.event().uid(), ev.date(), dateBook->db );
+//X                        start.setDate( dt );
+                }
+
+
+                /*
+                    * ok we know now the end date...
+                    * else
+                    *   get to know the offset btw the real start and real end
+                    *   and then add it to the new start date...
+                    */
+                if ( ev.endTime() != QTime(23, 59, 59 ) ) {
+                    end.setDate( ev.date() );
+                }
+                else{
+                    int days = ev.toEvent().startDateTime().date().daysTo( ev.toEvent().endDateTime().date() );
+                    end.setDate( start.date().addDays( days ) );
+                }
+
+
+
+                OPimEvent event( ev.toEvent() );
+                event.setStartDateTime( start );
+                event.setEndDateTime( end   );
+
+
+//X                emit beamMe( event );
             }
-
-
-            /*
-                * ok we know now the end date...
-                * else
-                *   get to know the offset btw the real start and real end
-                *   and then add it to the new start date...
-                */
-            if ( ev.endTime() != QTime(23, 59, 59 ) ) {
-                end.setDate( ev.date() );
-            }else{
-                int days = ev.toEvent().startDateTime().date().daysTo( ev.toEvent().endDateTime().date() );
-                end.setDate( start.date().addDays( days ) );
-            }
-
-
-
-            OPimEvent event( ev.toEvent() );
-            event.setStartDateTime( start );
-            event.setEndDateTime( end   );
-
-
-//X            emit beamMe( event );
         }
     }
 }
 
-void MainWindow::viewAdd(const QDate& ) {
-    
+void MainWindow::viewAdd( const QDateTime& start, const QDateTime& end ) {
+    if( editor()->newEvent( start, end ) ) {
+        manager()->add( editor()->event() );
+        currentView()->reschedule();
+    }
 }
 
 void MainWindow::viewAdd( const OPimEvent &ev ) {
@@ -601,7 +630,6 @@ void MainWindow::slotNewFromTemplate(int id ) {
          * FIXME for now we'll call a refresh
          */
         currentView()->reschedule();
-        raiseCurrentView();
     }
 }
 
