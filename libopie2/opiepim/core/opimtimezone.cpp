@@ -58,7 +58,10 @@ static QString setTimeZone( const QString& zone) {
 }
 
 static void resetTimeZone( const QString& zone ) {
-    ::setenv( "TZ", zone.local8Bit(), true );
+    if( zone.isEmpty() )
+        ::unsetenv( "TZ" );
+    else
+        ::setenv( "TZ", zone.local8Bit(), true );
 }
 
 static QDateTime utcTime( time_t t )
