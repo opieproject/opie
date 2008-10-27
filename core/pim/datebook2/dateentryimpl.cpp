@@ -253,16 +253,15 @@ DateEntry::~DateEntry()
  */
 
 void DateEntry::slotEditNote() {
-  QString s;
-  s = "<B>"+ TimeString::longDateString( startDate ) + "</B>";
-//  s.sprintf("<B>%d/%d</B> ", startDate.day(), startDate.month());
-  NoteEntry noteDlg(s+comboDescription->currentText(), noteStr,
+    QString s;
+    s = "<B>" + TimeString::longDateString( startDate ) + "</B>";
+//    s.sprintf("<B>%d/%d</B> ", startDate.day(), startDate.month());
+    NoteEntry noteDlg(s+comboDescription->currentText(), noteStr,
                     this,0,TRUE);
 
-  if ( QPEApplication::execDialog( &noteDlg ) ) {
-    noteStr=noteDlg.note->text();
-  }
-
+    if ( QPEApplication::execDialog( &noteDlg ) ) {
+        noteStr=noteDlg.note->text();
+    }
 }
 
 void DateEntry::endDateChanged( int y, int m, int d )
@@ -608,7 +607,6 @@ bool DateEntryEditor::showDialog( QString caption, OPimEvent& event ) {
     sv->addChild( de );
     while ( QPEApplication::execDialog( &newDlg ) ) {
         event = de->event();
-        event.assignUid();
         QString error = checkEvent( event );
         if ( !error.isNull() ) {
             if ( QMessageBox::warning( m_parent, QObject::tr("Error!"), error, QObject::tr("Fix it"), QObject::tr("Continue"), 0, 0, 1 ) == 0 )
@@ -641,6 +639,7 @@ bool DateEntryEditor::newEvent( const QDate& date ) {
     ev.setEndDateTime( end );
 
     if( showDialog( DateEntryBase::tr("New Event"), ev ) ) {
+        ev.assignUid();
         m_event = ev;
         return true;
     }
@@ -657,6 +656,7 @@ bool DateEntryEditor::newEvent( const QDateTime& start, const QDateTime& end ) {
     ev.setEndDateTime( end );
 
     if( showDialog( DateEntryBase::tr("New Event"), ev ) ) {
+        ev.assignUid();
         m_event = ev;
         return true;
     }
@@ -666,8 +666,9 @@ bool DateEntryEditor::newEvent( const QDateTime& start, const QDateTime& end ) {
 
 bool DateEntryEditor::edit( const OPimEvent& event, bool showRec) {
     OPimEvent ev(event);
-    if( showDialog( DateEntryBase::tr("New Event"), ev ) ) {
+    if( showDialog( DateEntryBase::tr("Edit Event"), ev ) ) {
         m_event = ev;
+        m_event.setUid( event.uid() );
         return true;
     }
     else
