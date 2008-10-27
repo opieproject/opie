@@ -41,24 +41,27 @@
 #include "opie2/opimevent.h"
 #include "opie2/opimoccurrence.h"
 
+#include "dayview.h"
+
 class QVBoxLayout;
 class QHBoxLayout;
 class QGridLayout;
 class DatebookAlldayDisp;
 class DatebookEventDesc;
-class DateBookDB;
 
 class DatebookdayAllday : public QScrollView
 {
     Q_OBJECT
 
 public:
-    DatebookdayAllday(DateBookDB* db,
+    DatebookdayAllday(Opie::Datebook::DayView *view, 
             QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
     ~DatebookdayAllday();
     DatebookAlldayDisp* addEvent(const Opie::OPimOccurrence &e);
     DatebookAlldayDisp* addHoliday(const QString &e);
     const unsigned int items()const{return item_count;}
+    void popup( const Opie::OPimOccurrence &e, const QPoint &pos );
+    const Opie::OPimOccurrence *selectedEvent();
 
 public slots:
     void removeAllEvents();
@@ -69,7 +72,8 @@ protected:
     DatebookEventDesc * lblDesc;
     unsigned int item_count;
     QList<DatebookAlldayDisp> subWidgets;
-    DateBookDB *dateBook;
+    Opie::Datebook::DayView *dayView;
+    const Opie::OPimOccurrence *m_selectedEv;
 };
 
 class DatebookAlldayDisp : public QLabel
@@ -77,27 +81,19 @@ class DatebookAlldayDisp : public QLabel
     Q_OBJECT
 
 public:
-    DatebookAlldayDisp(DateBookDB* db,const Opie::OPimOccurrence& e,
+    DatebookAlldayDisp(DatebookdayAllday *allday, const Opie::OPimOccurrence& e,
                        QWidget* parent=0,const char* name = 0, WFlags fl=0);
-    DatebookAlldayDisp(const QString&aholiday,
+    DatebookAlldayDisp(DatebookdayAllday *allday, const QString&aholiday,
                        QWidget* parent=0,const char* name = 0, WFlags fl=0);
     virtual ~DatebookAlldayDisp();
-
-signals:
-    void deleteMe( const Opie::OPimEvent &e );
-    void duplicateMe( const Opie::OPimEvent &e );
-    void editMe( const Opie::OPimEvent &e );
-    void beamMe( const Opie::OPimEvent &e );
-    void displayMe(const Opie::OPimEvent &e);
 
 public slots:
 
 protected:
     Opie::OPimOccurrence m_Ev;
-    DateBookDB* dateBook;
     void mousePressEvent( QMouseEvent *e );
-    void beam_single_event();
     bool m_holiday:1;
+    DatebookdayAllday *m_allday; 
 };
 
 class DatebookEventDesc: public QLabel

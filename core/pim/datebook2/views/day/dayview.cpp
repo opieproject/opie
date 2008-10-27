@@ -1,7 +1,6 @@
 #include <qtimer.h>
 
 #include <qpe/qpeapplication.h>
-#include <opie2/odatebookaccess.h>
 #include <opie2/oresource.h>
 
 #include "bookmanager.h"
@@ -41,7 +40,11 @@ QString DayView::description() const {
     return QString(QObject::tr("View a single day's events"));
 }
 
-int DayView::currentItem() const {
+const OPimOccurrence* DayView::currentItem() const {
+    if( selectedWidget )
+        return &selectedWidget->event();
+    else
+        return m_allDays->selectedEvent();
 }
 
 void DayView::currentRange( const QDateTime& src, const QDateTime& from) {
@@ -53,6 +56,9 @@ void DayView::clockChanged() {
 void DayView::dayChanged() {
     m_header->setStartOfWeek( weekStartOnMonday() );
 //    redraw();
+}
+
+void DayView::timeChanged() {
 }
 
 void DayView::showDay( const QDate& date )  {
@@ -67,7 +73,10 @@ void DayView::reschedule() {
     relayoutPage();
 }
 
-void DayView::doLoadConfig( Config* ) {
+void DayView::doLoadConfig( Config *config ) {
+    startTime = config->readNumEntry("startviewtime", 8);
+    jumpToCurTime = config->readBoolEntry("jumptocurtime");
+    rowStyle = config->readNumEntry("rowstyle");
 }
 
 void DayView::doSaveConfig( Config* ) {
@@ -82,10 +91,10 @@ void DayView::initUI(QWidget *parent) {
     m_header = new DateBookDayHeader( weekStartOnMonday(), m_box, "day header" );
     m_header->setDate( currDate.year(), currDate.month(), currDate.day() );
 
-    m_allDays = new DatebookdayAllday(NULL /* FIXME */, m_box, "all day event list" );
+    m_allDays = new DatebookdayAllday(this, m_box, "all day event list" );
     m_allDays->hide();
 
-    m_view = new DateBookDayView( isAP(), m_box, "day view" );
+    m_view = new DateBookDayView( isAP(), this, m_box, "day view" );
 
     connect( m_header, SIGNAL( dateChanged(int,int,int) ), this, SLOT( dateChanged(int,int,int) ) );
     connect( m_header, SIGNAL( dateChanged(int,int,int) ), m_view, SLOT( slotDateChanged(int,int,int) ) );
@@ -117,6 +126,10 @@ void DayView::updateView( void )
 {
     timeMarker->setTime( QTime::currentTime() );
     //need to find a way to update all DateBookDayWidgets
+}
+
+void DayView::insertEvent(const Opie::OPimEvent &ev) {
+    add(ev);
 }
 
 void DayView::dateChanged( int y, int m, int d )
@@ -151,7 +164,6 @@ DateBookDayWidget * DayView::getSelectedWidget( void )
 {
     return selectedWidget;
 }
-
 
 static int place( const DateBookDayWidget *item, bool *used, int maxn )
 {
@@ -358,8 +370,6 @@ void DayView::getEvents()
     for (sit=hdays.begin();sit!=hdays.end();++sit) {
         m_allDays->addHoliday(*sit);
     }
-    QValueList<EffectiveEvent> eventList = db->getEffectiveEventsNoHoliday( currDate, currDate );
-    QValueListIterator<EffectiveEvent> it;
 */
 
     OPimOccurrence::List eventList = events(currDate, currDate);
@@ -374,25 +384,15 @@ void DayView::getEvents()
                     continue;
             }
             else {
-                DateBookDayWidget* w = new DateBookDayWidget( *it, this );
+                DateBookDayWidget* w = new DateBookDayWidget( ev, this );
                 widgetList->append( w );
                 object = w;
             }
-
-            connect( object, SIGNAL( deleteMe(const OPimOccurrence&) ), this, SIGNAL( removeEvent(const OPimOccurrence&) ) );
-            connect( object, SIGNAL( duplicateMe(const OPimEvent&) ), this, SIGNAL( duplicateEvent(const OPimEvent&) ) );
-            connect( object, SIGNAL( editMe(const OPimOccurrence&) ), this, SIGNAL( editEvent(const OPimOccurrence&) ) );
-            connect( object, SIGNAL( beamMe(const OPimEvent&) ), this, SIGNAL( beamEvent(const OPimEvent&) ) );
 //X        }
     }
 }
 
 QDate DayView::date() const
-{
-    return currDate;
-}
-
-QDate DayView::defaultDate() const
 {
     return currDate;
 }
@@ -404,5 +404,5 @@ DateBookDayView *DayView::dayViewWidget()
 
 void DayView::popup( const QPoint &pt )
 {
-    View::popup(selectedWidget->event(), pt);
+    View::popup( *currentItem(), pt );
 }

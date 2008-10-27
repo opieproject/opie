@@ -8,7 +8,6 @@
 
 #include <opie2/opimevent.h>
 #include <opie2/opimoccurrence.h>
-#include <opie2/odatebookaccess.h>
 
 #include "view.h"
 
@@ -28,17 +27,18 @@ namespace Datebook {
     public:
         DayView( MainWindow* window,  QWidget* parent );
 
-        virtual QPixmap pixmap()const;
-        virtual QCString type()const;
-        virtual QString name()const;
-        virtual QString description()const;
-        virtual int currentItem()const;
-        virtual QDate defaultDate() const;
+        virtual QPixmap pixmap() const;
+        virtual QCString type() const;
+        virtual QString name() const;
+        virtual QString description() const;
+        virtual const OPimOccurrence *currentItem() const;
+        virtual QDate date() const;
 
         virtual void currentRange( const QDateTime& src, const QDateTime& from);
 
         virtual void clockChanged();
         virtual void dayChanged();
+        virtual void timeChanged();
         virtual void showDay( const QDate& date );
         virtual QWidget* widget();
         virtual void reschedule();
@@ -49,12 +49,12 @@ namespace Datebook {
         DateBookDayWidget * getSelectedWidget( void );
         void setJumpToCurTime( bool bJump );
         void setRowStyle( int style );
-        QDate date() const;
         DateBookDayView *dayViewWidget();
 
     public slots:
         void updateView();  //updates TimeMarker and DayWidget-colors
         void dateChanged( int y, int m, int d );
+        void insertEvent(const Opie::OPimEvent &);
 
     protected:
         QVBox *m_box;

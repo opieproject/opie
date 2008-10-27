@@ -47,6 +47,7 @@ class DateBookDayHeader;
 class DateBookDB;
 class DateBookDBHoliday;
 class DatebookdayAllday;
+class DateBookDayView;
 class QDateTime;
 class QMouseEvent;
 class QPaintEvent;
@@ -56,16 +57,17 @@ class DateBookDayViewQuickLineEdit : public QLineEdit
 {
     Q_OBJECT
 public:
-    DateBookDayViewQuickLineEdit(const QDateTime &start, const QDateTime &end,QWidget * parent, const char *name=0);
+    DateBookDayViewQuickLineEdit(const QDateTime &start, const QDateTime &end, Opie::Datebook::DayView * dv, const char *name=0);
 protected:
     Opie::OPimEvent quickEvent;
+    Opie::Datebook::DayView *dayview;
     int active;
     void focusOutEvent( QFocusEvent *e );
 protected slots:
     void slotReturnPressed(void);
-        void finallyCallClose();
+    void finallyCallClose();
 signals:
-    void insertEvent(const Opie::OPimEvent &e);
+    void insertEvent(const Opie::OPimEvent &);
 };
 
 
@@ -73,7 +75,7 @@ class DateBookDayView : public QTable
 {
     Q_OBJECT
 public:
-    DateBookDayView( bool hourClock, QWidget *parent, const char *name );
+    DateBookDayView( bool hourClock, Opie::Datebook::DayView *dv, QWidget *parent, const char *name );
     bool whichClock() const;
 
     void setRowStyle( int style );
@@ -99,6 +101,7 @@ protected:
 private:
     bool ampm;
     QDate currDate;
+    Opie::Datebook::DayView *dayview;
     DateBookDayViewQuickLineEdit *quickLineEdit;
 };
 
@@ -114,12 +117,6 @@ public:
     void setGeometry( const QRect &r );
 
     const Opie::OPimOccurrence &event() const { return ev; }
-
-signals:
-    void deleteMe( const Opie::OPimOccurrence &e );
-    void duplicateMe( const Opie::OPimEvent &e );
-    void editMe( const Opie::OPimOccurrence &e );
-    void beamMe( const Opie::OPimEvent &e );
 
 protected:
     void paintEvent( QPaintEvent *e );

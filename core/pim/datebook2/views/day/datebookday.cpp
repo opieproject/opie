@@ -49,7 +49,7 @@
 using namespace Opie;
 using namespace Opie::Datebook;
 
-DateBookDayView::DateBookDayView( bool whichClock, QWidget *parent, const char *name )
+DateBookDayView::DateBookDayView( bool whichClock, DayView *dv, QWidget *parent, const char *name )
     : QTable( 24, 1, parent, name ), ampm( whichClock ), currDate( QDate::currentDate() )
 {
     enableClipper(TRUE);
@@ -61,6 +61,8 @@ DateBookDayView::DateBookDayView( bool whichClock, QWidget *parent, const char *
     verticalHeader()->setPalette(white);
     verticalHeader()->setResizeEnabled(FALSE);
     setSelectionMode( Single );
+
+    dayview = dv;
 
     // get rid of being able to edit things...
     QTableItem *tmp;
@@ -204,7 +206,9 @@ void DateBookDayView::contentsMouseReleaseEvent( QMouseEvent* /* e */ )
         eh=9;
     }
 
-    quickLineEdit=new DateBookDayViewQuickLineEdit(QDateTime(currDate,QTime(sh,0,0,0)),QDateTime(currDate,QTime(eh,0,0,0)),this->viewport(),"quickedit");
+    QDateTime start(currDate, QTime(sh,0,0,0));
+    QDateTime end(currDate, QTime(eh,0,0,0));
+    quickLineEdit=new DateBookDayViewQuickLineEdit( start, end, dayview, "quickedit");
     quickLineEdit->setGeometry(0,0,this->columnWidth(0)-1,this->rowHeight(0));
     this->moveChild(quickLineEdit,0,sh*this->rowHeight(0));
     quickLineEdit->setFocus();
@@ -213,11 +217,12 @@ void DateBookDayView::contentsMouseReleaseEvent( QMouseEvent* /* e */ )
 
 //===========================================================================
 
-DateBookDayViewQuickLineEdit::DateBookDayViewQuickLineEdit(const QDateTime &start, const QDateTime &end,QWidget * parent, const char *name) : QLineEdit(parent,name)
+DateBookDayViewQuickLineEdit::DateBookDayViewQuickLineEdit(const QDateTime &start, const QDateTime &end, DayView * dv, const char *name) : QLineEdit(dv->dayViewWidget()->viewport(), name)
 {
     active=1;
     quickEvent.setStartDateTime(start);
     quickEvent.setEndDateTime(end);
+    dayview = dv;
     connect(this,SIGNAL(returnPressed()),this,SLOT(slotReturnPressed()));
 }
 
@@ -225,7 +230,8 @@ void DateBookDayViewQuickLineEdit::slotReturnPressed()
 {
     if(active && (!this->text().isEmpty())) {   // Fix to avoid having this event beeing added multiple times.
         quickEvent.setDescription(this->text());
-        connect(this,SIGNAL(insertEvent(const OPimEvent&)),this->topLevelWidget(),SLOT(insertEvent(const OPimEvent&)));
+        quickEvent.assignUid(); // FIXME should this be being done elsewhere instead?
+        connect(this, SIGNAL(insertEvent(const Opie::OPimEvent&)), dayview, SLOT(insertEvent(const Opie::OPimEvent&)));
         emit(insertEvent(quickEvent));
         active=0;
     }
@@ -248,7 +254,7 @@ DateBookDayWidget::DateBookDayWidget( const OPimOccurrence &e, DayView *dv )
 {
     // why would someone use "<"?  Oh well, fix it up...
     // I wonder what other things may be messed up...
-    QString strDesc = ev.summary();
+    QString strDesc = ev.toEvent().description();
     int where = strDesc.find( "<" );
     while ( where != -1 ) {
         strDesc.remove( where, 1 );
@@ -362,14 +368,13 @@ void DateBookDayWidget::paintEvent( QPaintEvent *e )
     int y = 0;
     int d = 0;
 
-/*X
-    if ( ev.toEvent().hasAlarm() ) {
+    if ( ev.toEvent().hasNotifiers() ) {
         p.drawPixmap( width() - AppLnk::smallIconSize(), 0,
                       Opie::Core::OResource::loadPixmap( "bell", Opie::Core::OResource::SmallIcon ) );
         y = AppLnk::smallIconSize() + 2;
         d = 20;
     }
-*/
+
     if ( ev.toEvent().hasRecurrence() ) {
         p.drawPixmap( width() - AppLnk::smallIconSize(), y,
                       Opie::Core::OResource::loadPixmap( "repeat", Opie::Core::OResource::SmallIcon ) );
