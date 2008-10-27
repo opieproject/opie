@@ -22,7 +22,18 @@ HEADERS	= mainwindow.h \
           views/day/dayview.h \
           views/day/datebookday.h \
           views/day/datebookdayheaderimpl.h \
-          views/day/datebookdayallday.h
+          views/day/datebookdayallday.h \
+          views/week/weekview.h \
+          views/week/datebookweek.h \
+          views/week/datebookweekheaderimpl.h \
+          views/weeklst/weeklstview.h \
+          views/weeklst/datebookweeklstdblview.h \
+          views/weeklst/datebookweeklstdayhdr.h \
+          views/weeklst/datebookweeklstheader.h \
+          views/weeklst/datebookweeklstview.h \
+          views/weeklst/datebookweeklstevent.h \
+          views/month/monthview.h \
+          views/month/odatebookmonth.h
 
 SOURCES	= main.cpp \
           mainwindow.cpp \
@@ -42,14 +53,28 @@ SOURCES	= main.cpp \
           views/day/dayview.cpp \
           views/day/datebookday.cpp \
           views/day/datebookdayheaderimpl.cpp \
-          views/day/datebookdayallday.cpp
+          views/day/datebookdayallday.cpp \
+          views/week/weekview.cpp \
+          views/week/datebookweek.cpp \
+          views/week/datebookweekheaderimpl.cpp \
+          views/weeklst/weeklstview.cpp \
+          views/weeklst/datebookweeklstdayhdr.cpp \
+          views/weeklst/datebookweeklstdblview.cpp \
+          views/weeklst/datebookweeklstevent.cpp \
+          views/weeklst/datebookweeklstheader.cpp \
+          views/weeklst/datebookweeklstview.cpp \
+          views/month/monthview.cpp \
+          views/month/odatebookmonth.cpp
 
 INTERFACES = datebooksettingsbase.ui \
           dateentry.ui \
           noteentry.ui \
           repeatentrybase.ui \
           exceptionsbase.ui \
-          views/day/datebookdayheader.ui
+          views/day/datebookdayheader.ui \
+          views/week/datebookweekheader.ui \
+          views/weeklst/datebookweeklstheaderbase.ui \
+          views/weeklst/datebookweeklstdayhdrbase.ui
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
