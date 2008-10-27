@@ -11,7 +11,8 @@
 #include <qpe/ir.h>
 #include <qmenubar.h>
 #include <qtoolbar.h>
-#include <qpe/qpemessagebox.h>
+#include <qpe/qpemessagebox.h>  // FIXME do we need this?
+#include <qmessagebox.h>
 #include <opie2/oresource.h>
 
 #include "editor.h"
@@ -30,6 +31,8 @@ using namespace Datebook;
 MainWindow::MainWindow()
     : OPimMainWindow( "Datebook", 0, 0, 0, 0, 0, WType_TopLevel | WStyle_ContextHelp ), m_descMan( "Descriptions" ),  m_locMan( "Locations" )
 {
+    m_ampm = false;
+
     initBars();
     initUI();
     initViews();
@@ -99,11 +102,11 @@ void MainWindow::show( int uid ) {
 }
 
 void MainWindow::add( const OPimRecord& ad) {
-    manager()->add( ad );
+
 }
 
 void MainWindow::edit() {
-    edit ( currentView()->currentItem() );
+   
 }
 
 void MainWindow::edit( int uid ) {
@@ -312,18 +315,99 @@ void MainWindow::slotReceive( const QCString&, const QByteArray& ) {
 
 void MainWindow::slotItemNew() {
     if( editor()->newEvent( currentView()->defaultDate() ) ) {
-        add( editor()->event() );
+        manager()->add( editor()->event() );
         currentView()->reschedule();
     }
 }
 
 void MainWindow::slotItemEdit() {
+    const OPimOccurrence *occurrence = currentView()->currentItem();
+    if(!occurrence)
+        return;
+    
+    OPimEvent event = occurrence->toEvent();
+    while ( editor()->edit( event ) ) {
+        int result = 0;
+        event = editor()->event();
+        OPimRecurrence rec = event.recurrence();
+        if( rec.type() != OPimRecurrence::NoRepeat ) {
+            result = QMessageBox::warning( this, tr("Calendar"), tr( "This is a recurring event.\n\nDo you want to apply changes to\nall occurrences or just this one?"), tr("All"), tr("This one"), tr("Cancel") );
+            if(result == 1) {
+                // Now create a copy of the event just for this day
+                event.assignUid();
+                rec.setType( OPimRecurrence::NoRepeat );
+                event.setRecurrence(rec);
+                event.setStartDateTime( QDateTime(occurrence->date(), event.startDateTime().time()) );
+                event.setEndDateTime( QDateTime(occurrence->date(), event.endDateTime().time()) );
+                // Add an exception for the existing event
+                OPimEvent dupEvent( occurrence->toEvent() );
+                OPimRecurrence dupRec( dupEvent.recurrence() );
+                dupRec.exceptions().append( occurrence->date() );
+                dupEvent.setRecurrence(dupRec);
+                // Link the two events
+                event.setParent(dupEvent.uid());
+                dupEvent.addChild(event.uid());
+                // Write changes
+                manager()->add(event);
+                manager()->update( dupEvent );
+            }
+            else if(result == 2)
+                continue;
+        }
+
+        if(result == 0) {
+            manager()->update(event);
+        }
+
+        currentView()->reschedule();
+
+        break;
+    }
 }
 
 void MainWindow::slotItemDuplicate() {
+    const OPimOccurrence *occurrence = currentView()->currentItem();
+    if(!occurrence)
+        return;
+    
+    OPimEvent event = occurrence->toEvent();
+    if ( editor()->edit( event ) ) {
+        OPimEvent dupEvent( editor()->event() );
+        dupEvent.assignUid();
+        manager()->add( dupEvent );
+        currentView()->reschedule();
+    }
 }
 
 void MainWindow::slotItemDelete() {
+    const OPimOccurrence *occurrence = currentView()->currentItem();
+    if(!occurrence)
+        return;
+    
+    OPimEvent ev = occurrence->toEvent();
+    QString strName = ev.description();
+
+    if ( !QPEMessageBox::confirmDelete( this, tr( "Calendar" ),strName ) )
+        return;
+
+    int result = 0;
+    if( ev.hasRecurrence() ) {
+        result = QMessageBox::warning( this, tr("Calendar"), tr( "This is a recurring event.\n\nDo you want to delete all\noccurrences or just this one?"), tr("All"), tr("This one"), tr("Cancel") );
+    }
+
+    if(result == 0) {
+        manager()->remove( ev.uid() );
+        currentView()->reschedule();
+    }
+    else if(result == 1) {
+        // Add an exception to the existing event
+        OPimRecurrence dupRec( ev.recurrence() );
+        dupRec.exceptions().append( occurrence->date() );
+        ev.setRecurrence(dupRec);
+        // Write changes
+        manager()->update( ev );
+        currentView()->reschedule();
+    }
 }
 
 void MainWindow::slotItemBeam() {
@@ -394,15 +478,16 @@ void MainWindow::hideShow() {
 void MainWindow::viewPopup( const OPimOccurrence &ev, const QPoint &pt ) {
     OPimEvent eve = ev.toEvent();
     QPopupMenu m;
-    m.insertItem( tr( "Edit" ), 1 );
-    m.insertItem( tr( "Duplicate" ), 4 );
-    m.insertItem( tr( "Delete" ), 2 );
+    m_itemEditAction->addTo( &m );
+    m_itemDuplicateAction->addTo( &m );
+    m_itemDeleteAction->addTo( &m );
     if(Ir::supported()) {
-        m.insertItem( tr( "Beam" ), 3 );
-        if( eve.hasRecurrence() ) 
-            m.insertItem( tr( "Beam this occurrence"), 5 );
+        m_itemBeamAction->addTo( &m );
+//X        if( eve.hasRecurrence() ) 
+//X            m.insertItem( tr( "Beam this occurrence"), 5 );
     }
     int r = m.exec( pt );
+
     if ( r == 1 ) {
         odebug << "edit" << oendl;
 //X        emit editMe( ev );
@@ -473,11 +558,12 @@ void MainWindow::viewPopup( const OPimOccurrence &ev, const QPoint &pt ) {
 }
 
 void MainWindow::viewAdd(const QDate& ) {
-
+    
 }
 
-void MainWindow::viewAdd( const QDateTime&, const QDateTime& ) {
-
+void MainWindow::viewAdd( const OPimEvent &ev ) {
+    manager()->add(ev);
+    currentView()->reschedule();
 }
 
 bool MainWindow::viewAP()const{

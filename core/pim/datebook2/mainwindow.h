@@ -84,6 +84,7 @@ namespace Datebook {
         DescriptionManager descriptionManager();
         void setLocationManager( const LocationManager& );
         void setDescriptionManager( const DescriptionManager& );
+        void edit ( OPimEvent &event, bool duplicate = FALSE );
         Show* eventShow();
         Editor* editor();
 
@@ -95,7 +96,7 @@ namespace Datebook {
     private:
         void viewPopup( const OPimOccurrence &ev, const QPoint &pt );
         void viewAdd( const QDate& date );
-        void viewAdd( const QDateTime&, const QDateTime& );
+        void viewAdd( const OPimEvent& );
         bool viewAP()const;
         bool viewStartMonday()const;
         // off view show
