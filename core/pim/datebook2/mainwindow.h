@@ -41,7 +41,7 @@ namespace Datebook {
         void slotClockChanged(bool); // clock changed
         void slotWeekChanged( bool ); // week changed
         void slotAppMessage( const QCString&, const QByteArray& ); // qApp message QPE/Application/datebook
-        void slotReceive( const QCString&, const QByteArray& ); // QPE/System and QPE/Datebook
+        void slotSystemReceive( const QCString&, const QByteArray& ); // QPE/System
         void slotChangeView(); // View changed
         void slotConfigureLocs(); // Configure the Locations
         void slotConfigureDesc(); // Configure the Desc
@@ -117,6 +117,8 @@ namespace Datebook {
         Show* m_show;
         Editor* m_edit;
         bool m_ampm;
+        bool m_onMonday;
+        int m_defaultViewIdx;
     };
 }
 }

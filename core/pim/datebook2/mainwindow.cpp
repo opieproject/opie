@@ -8,6 +8,7 @@
 #include <qobjectlist.h>
 
 #include <qpe/qpeapplication.h>
+#include <qpe/config.h>
 #include <qpe/ir.h>
 #include <qmenubar.h>
 #include <qtoolbar.h>
@@ -34,32 +35,27 @@ using namespace Datebook;
 MainWindow::MainWindow()
     : OPimMainWindow( "Datebook", 0, 0, 0, 0, 0, WType_TopLevel | WStyle_ContextHelp ), m_descMan( "Descriptions" ),  m_locMan( "Locations" )
 {
-    m_ampm = false;
     m_currView = NULL;
-
+    
+    initConfig();
     initBars();
     initUI();
     initViews();
     initManagers();
-    initConfig();
 
     m_edit = NULL;
 
     setCaption( tr("Calendar") );
     setIcon( Opie::Core::OResource::loadPixmap( "datebook_icon" ) );
-
-    slotChangeView();
    
     QTimer::singleShot(0, this, SLOT(populate() ) );
 
-    // FIXME OPimMainWindow already registers QCop receivers
     QCopChannel* chan = new QCopChannel( "QPE/System", this );
     connect( chan, SIGNAL( received(const QCString&,const QByteArray&) ),
-             this, SLOT( slotReceive(const QCString&,const QByteArray&) ) );
+             this, SLOT( slotSystemReceive(const QCString&,const QByteArray&) ) );
 
-    chan  = new QCopChannel( "QPE/Datebook", this );
-    connect( chan, SIGNAL( received(const QCString&,const QByteArray&) ),
-             this, SLOT( slotReceive(const QCString&,const QByteArray&) ) );
+    connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
+             this, SLOT( slotAppMessage(const QCString&,const QByteArray&) ) );
 }
 
 MainWindow::~MainWindow() {
@@ -114,7 +110,11 @@ void MainWindow::edit() {
 }
 
 void MainWindow::edit( int uid ) {
-    
+    OPimEvent event = manager()->event( uid );
+    if ( editor()->edit( event ) ) {
+        event = editor()->event();
+        manager()->update(event);
+    }
 }
 
 void MainWindow::showDayView() {
@@ -191,16 +191,37 @@ void MainWindow::initUI() {
     connect( qApp, SIGNAL(weekChanged(bool) ),
              this, SLOT(slotWeekChanged(bool) ) );
 
-    connect( qApp, SIGNAL(appMessage(const QCString&,const QByteArray&) ),
-             this, SLOT(slotAppMessage(const QCString&,const QByteArray&) ) );
-
     m_stack = new QWidgetStack( this );
     setCentralWidget( m_stack );
 
 }
 
 void MainWindow::initConfig() {
+    Config qpeconfig( "qpe" );
+    qpeconfig.setGroup("Time");
+    m_ampm = qpeconfig.readBoolEntry( "AMPM", TRUE );
+    m_onMonday = qpeconfig.readBoolEntry( "MONDAY" );
+    
+    Config config("DateBook");
+    config.setGroup("Main");
+    m_defaultViewIdx = config.readNumEntry("defaultview", 1);
 
+/*    startTime = config.readNumEntry("startviewtime", 8);
+    aPreset = config.readBoolEntry("alarmpreset");
+    presetTime = config.readNumEntry("presettime");
+    bJumpToCurTime = config.readBoolEntry("jumptocurtime");
+    rowStyle = config.readNumEntry("rowstyle");
+    weeklistviewconfig = config.readNumEntry("weeklistviewconfig",NORMAL);
+
+    defaultLocation = config.readEntry("defaultLocation");
+    QString tmpString = config.readEntry("defaultCategories");
+    QStringList tmpStringList = QStringList::split(",",tmpString);
+    defaultCategories.truncate(0);
+
+    for( QStringList::Iterator i=tmpStringList.begin(); i!=tmpStringList.end(); i++) {
+        defaultCategories.resize(defaultCategories.count()+1);
+        defaultCategories[defaultCategories.count()-1]=(*i).toInt();
+    }*/
 }
 
 void MainWindow::initViews() {
@@ -209,15 +230,19 @@ void MainWindow::initViews() {
     m_views.append(new WeekLstView(this, m_stack));
     m_views.append(new MonthView(this, m_stack));
 
+    Config config("DateBook");
+    config.setGroup("Main");
     m_viewsGroup = new QActionGroup( this );
 
-    bool firstact = TRUE;
+    int idx = 1;
     for ( QListIterator<View> it(m_views); it.current(); ++it ) {
         QAction *a = new ViewSelectAction( it.current(), 0, m_viewsGroup, it.current()->type());
-        if(firstact) // FIXME should be looking for user-selected default view
+        if(idx == m_defaultViewIdx)
             a->setOn(TRUE);
-        firstact = FALSE;
         connect(a, SIGNAL( activated() ), this, SLOT( slotChangeView() ) );
+        
+        it.current()->loadConfig( &config );
+        idx++;
     }
     m_viewsGroup->addTo( m_viewsBar );
 }
@@ -242,6 +267,7 @@ void MainWindow::raiseCurrentView() {
 void MainWindow::populate() {
     if (!manager()->isLoaded() )
         manager()->load();
+    slotChangeView();
 }
 
 void MainWindow::slotGoToNow() {
@@ -262,7 +288,7 @@ void MainWindow::slotConfigure() {
     frmSettings.setAlarmPreset( aPreset, presetTime );
     frmSettings.setJumpToCurTime( bJumpToCurTime );
     frmSettings.setRowStyle( rowStyle );
-    frmSettings.comboDefaultView->setCurrentItem(defaultView-1);
+    frmSettings.comboDefaultView->setCurrentItem(m_defaultViewIdx-1);
     frmSettings.comboWeekListView->setCurrentItem(weeklistviewconfig);
     frmSettings.setPluginList(db_holiday->pluginManager(),db_holiday->pluginLoader());
 
@@ -290,7 +316,7 @@ void MainWindow::slotConfigure() {
         startTime = frmSettings.startTime();
         bJumpToCurTime = frmSettings.jumpToCurTime();
         rowStyle = frmSettings.rowStyle();
-        defaultView = frmSettings.comboDefaultView->currentItem()+1;
+        m_defaultViewIdx = frmSettings.comboDefaultView->currentItem()+1;
         defaultLocation = frmSettings.comboLocation->currentText();
         defaultCategories = frmSettings.comboCategory->currentCategories();
 
@@ -303,19 +329,58 @@ void MainWindow::slotConfigure() {
 }
 
 void MainWindow::slotClockChanged( bool ) {
-
+    Config qpeconfig( "qpe" );
+    qpeconfig.setGroup("Time");
+    m_ampm = qpeconfig.readBoolEntry( "AMPM", TRUE );
+    
+    for ( QListIterator<View> it(m_views); it.current(); ++it ) {
+        (*it)->clockChanged();
+    }
 }
 
 void MainWindow::slotWeekChanged(bool ) {
-
+    Config qpeconfig( "qpe" );
+    qpeconfig.setGroup("Time");
+    m_onMonday = qpeconfig.readBoolEntry( "MONDAY" );
+    
+    for ( QListIterator<View> it(m_views); it.current(); ++it ) {
+        (*it)->dayChanged();
+    }
 }
 
-void MainWindow::slotAppMessage( const QCString&, const QByteArray& ) {
-
+void MainWindow::slotSystemReceive( const QCString& msg, const QByteArray& data ) {
+    if ( msg == "timeChange(QString)" ) {
+        currentView()->timeChanged();
+    }
 }
 
-void MainWindow::slotReceive( const QCString&, const QByteArray& ) {
+void MainWindow::slotAppMessage( const QCString& msg, const QByteArray& data ) {
+    bool needShow = false;
+    QDataStream stream( data, IO_ReadOnly );
+    if (msg == "editEvent(int,QDate)") {
+        int uid;
+        QDate date;
+        stream >> uid >> date;
+        // Find the specific occurrence of this event
+        // FIXME implement
+        needShow = true;
+    }
+    else if (msg == "editEvent(int)") {
+        int uid;
+        stream >> uid;
+        // Find the specific occurrence of this event
+        edit(uid);
+        needShow = true;
+    }
+    else if (msg == "viewDefault(QDate)") {
+        QDate day;
+        stream >> day;
+        // FIXME implement
+        needShow = true;
+    }
 
+    if (needShow )
+        QPEApplication::setKeepRunning();
 }
 
 void MainWindow::slotItemNew() {
@@ -469,10 +534,14 @@ void MainWindow::slotChangeView() {
     }
     m_currView = selected;
    
-    if( m_currView->date() != lastDate )
+    if( m_currView->date() != lastDate ) {
+        odebug << "*** calling showDay" << oendl;
         m_currView->showDay(lastDate);
-    else
+    }
+    else {
+        odebug << "*** reschedule only" << oendl;
         m_currView->reschedule();
+    }
 
     raiseCurrentView();
 }
@@ -600,7 +669,7 @@ bool MainWindow::viewAP()const{
 }
 
 bool MainWindow::viewStartMonday()const {
-
+    return m_onMonday;
 }
 
 void MainWindow::setTemplateMenu() {
