@@ -19,8 +19,117 @@ QDate View::dateFromWeek( int week, int year, bool startOnMon ) {
 
 }
 
-bool View::calcWeek( const QDate& d, int & week, int & year, bool ) {
+// For Weeks that start on Monday... (EASY!)
+// At the moment we will use the ISO 8601 method for computing the week.
+// Granted, other countries use other methods, but we aren't doing any
+// Locale stuff at the moment. Without locale info it is too hard to
+// guess what method should be used. So, this should pass. This
+// algorithim is public domain and available at:
+// http://personal.ecu.edu/mccartyr/ISOwdALG.txt
+// the week number is returned, and the year number is returned in year
+// for Instance 2001/12/31 is actually the first week in 2002.
+// There is a more mathematical definition, it should be implemented.
 
+// For Weeks that start on Sunday... (ahh... home rolled)
+// okay, if Jan 1 is on Friday or Saturday, it will go to the previous
+// week.
+
+/*!
+ * The week number and year number of a date may actually be different
+ * then the date itself as specified by the ISO 8601 standard. For
+ * example if Jan 1 year falls on a Friday, the week number will
+ * be the last week number for the previous year (52 of year - 1). Another
+ * example is that the date 2001-12-31 falls on a Monday, its week number
+ * is 1 and its year is 2002. This function provides stripped down
+ * version of the alogrithm described in
+ * http://personal.ecu.edu/mccartyr/ISOwdALG.txt to provide the correct
+ * week number and year number for a given date.
+ *
+ * \param d The date that you want to know the week number for.
+ * \param week A reference to the variable you want to store the week
+ *        number in.
+ * \param year A reference to the variable you want to store the year
+ *        number in.
+ * \param startOnMonday Inform the function whether weeks start on
+ *        Sunday or Monday. Set to true if your weeks start on Monday.
+ * \return false if the supplied date is invalid, true otherwise.
+ */
+bool View::calcWeek( const QDate &d, int &week, int &year,
+           bool startOnMonday )
+{
+    int weekNumber = -1;
+    int yearNumber = -1;
+
+    int jan1WeekDay = QDate(d.year(), 1, 1).dayOfWeek();
+    int dayOfWeek = d.dayOfWeek();
+
+    if ( !d.isValid() )
+        return false;
+
+    if ( startOnMonday ) {
+        // find the Jan1Weekday;
+        if ( d.dayOfYear() <= ( 8 - jan1WeekDay) && jan1WeekDay > 4 ) {
+            yearNumber = d.year() - 1;
+            if ( jan1WeekDay == 5
+                 || ( jan1WeekDay == 6 && QDate::leapYear(yearNumber) ) )
+                weekNumber = 53;
+            else
+                weekNumber = 52;
+        } else
+            yearNumber = d.year();
+
+        if ( yearNumber == d.year() ) {
+            int totalDays = 365;
+            if ( QDate::leapYear(yearNumber) )
+                totalDays++;
+            if ( ((totalDays - d.dayOfYear()) < (4 - dayOfWeek) )
+                 || (jan1WeekDay == 7) && (totalDays - d.dayOfYear()) < 3)
+            {
+                yearNumber++;
+                weekNumber = 1;
+            }
+        }
+        if ( yearNumber == d.year() ) {
+            int j = d.dayOfYear() + (7 - dayOfWeek) + ( jan1WeekDay - 1 );
+            weekNumber = j / 7;
+            if ( jan1WeekDay > 4 )
+                weekNumber--;
+        }
+    } else {
+        // it's better to keep these cases separate...
+        if ( d.dayOfYear() <= (7 - jan1WeekDay) && jan1WeekDay > 4
+             && jan1WeekDay != 7 )
+        {
+            yearNumber = d.year() - 1;
+            if ( jan1WeekDay == 6
+                 || (jan1WeekDay == 7 && QDate::leapYear(yearNumber) ) )
+            {
+                weekNumber = 53;
+            } else
+                weekNumber = 52;
+        } else
+            yearNumber = d.year();
+
+        if ( yearNumber == d.year() ) {
+            int totalDays = 365;
+            if ( QDate::leapYear( yearNumber ) )
+                totalDays++;
+            if ( ((totalDays - d.dayOfYear()) < (4 - dayOfWeek % 7)) ) {
+                yearNumber++;
+                weekNumber = 1;
+            }
+        }
+        if ( yearNumber == d.year() ) {
+            int j = d.dayOfYear() + (7 - dayOfWeek % 7) + ( jan1WeekDay - 1 );
+            weekNumber = j / 7;
+
+            if ( jan1WeekDay > 4 )
+                weekNumber--;
+        }
+    }
+    year = yearNumber;
+    week = weekNumber;
+    return true;
 }
 
 void View::loadConfig( Config* conf ) {
@@ -35,12 +144,12 @@ void View::popup( const OPimOccurrence &ev, const QPoint &pt ) {
     m_win->viewPopup( ev, pt );
 }
 
-void View::add( const QDate& start ) {
-    m_win->viewAdd( start );
-}
-
 void View::add( const QDateTime& start, const QDateTime& end ) {
     m_win->viewAdd( start, end );
+}
+
+void View::add( const OPimEvent &ev ) {
+    m_win->viewAdd( ev );
 }
 
 void View::edit( int uid ) {
@@ -49,6 +158,10 @@ void View::edit( int uid ) {
 
 void View::remove( int uid ) {
     m_win->remove( uid );
+}
+
+void View::showDayView() {
+    m_win->showDayView();
 }
 
 ODateBookAccess::List View::allEvents() const{

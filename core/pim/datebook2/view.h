@@ -40,14 +40,14 @@ namespace Datebook {
         virtual QString description()const = 0;
 
         /**
-         * return the uid of the current item or 0
+         * return the uid of the current item or NULL
          */
-        virtual int currentItem()const = 0;
+        virtual const OPimOccurrence* currentItem() const = 0;
 
         /**
-         * return the date to be used for new items
+         * return the date being viewed
          */
-        virtual QDate defaultDate() const = 0;
+        virtual QDate date() const = 0;
 
         /**
          * loadConfig
@@ -64,7 +64,7 @@ namespace Datebook {
         virtual void currentRange( const QDateTime& src, const QDateTime& from) = 0;
 
         /**
-         * the clock format changed
+         * the clock format (12/24 hour) changed
          */
         virtual void clockChanged() = 0;
 
@@ -73,6 +73,11 @@ namespace Datebook {
          * monday or sunday is the week start
          */
         virtual void dayChanged() = 0;
+
+        /**
+         * System time change notification
+         */
+        virtual void timeChanged() = 0;
 
         /**
          * show date in your view!!
@@ -97,20 +102,24 @@ namespace Datebook {
         virtual void doSaveConfig( Config* ) = 0;
 
         /**
-         * create a new event starting
-         * on start
-         */
-        void add( const QDate& start );
-
-        /**
-         * create a new event in a given range
+         * create a new event
          */
         void add( const QDateTime& start, const QDateTime& end );
 
         /**
-         * will make the MainWindow to open the editor
+         * create a new event
+         */
+        void add( const OPimEvent &event );
+
+        /**
+         * will make the MainWindow open the editor
          */
         void edit( int uid );
+
+        /**
+         * will make the MainWindow show the dayview
+         */
+        void showDayView();
 
         /**
          * remove item with uid
@@ -155,7 +164,10 @@ namespace Datebook {
     class ViewSelectAction : public QAction {
     public:
         ViewSelectAction(View *view, int accel, QObject *parent, const char *name = 0)
-            : QAction(view->name(), view->pixmap(), QString::null, accel, parent, name, TRUE) { };
+            : QAction(view->name(), view->pixmap(), QString::null, accel, parent, name, TRUE) 
+        { 
+            setWhatsThis( view->description() );
+        };
     };
 }
 }
