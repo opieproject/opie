@@ -51,8 +51,14 @@ void events( OPimBackendOccurrence::List& tmpList,
          * If in range
          */
         if (dtStart.date() >= from && dtEnd.date() <= to ) {
-            OPimBackendOccurrence eff( dtStart, dtEnd, (*it).uid() );;
-            tmpList.append( eff );
+            if((*it).isAllDay()) {
+                OPimBackendOccurrence eff( dtStart.date(), (*it).uid() );
+                tmpList.append( eff );
+            }
+            else {
+                OPimBackendOccurrence eff( dtStart, dtEnd, (*it).uid() );
+                tmpList.append( eff );
+            }
         }
     }
 }
@@ -74,10 +80,16 @@ void repeat( OPimBackendOccurrence::List& tmpList, const OPimEvent::ValueList& l
             if (repeat > to ) break;
 
             OPimEvent event = *it;
-            start = QDateTime( repeat, event.startDateTime().time() );
-            end   = QDateTime( repeat.addDays(dur), event.endDateTime().time() );
-            OPimBackendOccurrence eff(start, end, event.uid() );
-            tmpList.append( eff );
+            if(event.isAllDay()) {
+                OPimBackendOccurrence eff(repeat, event.uid() );
+                tmpList.append( eff );
+            }
+            else {
+                start = QDateTime( repeat, event.startDateTime().time() );
+                end   = QDateTime( repeat.addDays(dur), event.endDateTime().time() );
+                OPimBackendOccurrence eff(start, end, event.uid() );
+                tmpList.append( eff );
+            }
             itDate = repeat.addDays(1);
         }
     }
