@@ -44,6 +44,7 @@
 #include <qheader.h>
 #include <qtabwidget.h>
 #include <qlayout.h>
+#include <qpushbutton.h>
 
 #include "view.h"
 
@@ -62,6 +63,9 @@ DateBookSettings::DateBookSettings( bool whichClock, QWidget *parent,
     m_manager = 0;
     m_PluginListView->header()->hide();
     m_PluginListView->setSorting(-1);
+
+    connect(locButton, SIGNAL( clicked() ), this, SLOT( slotConfigureLocs() ) );
+    connect(descButton, SIGNAL( clicked() ), this, SLOT( slotConfigureDesc() ) );
 }
 
 DateBookSettings::~DateBookSettings()
@@ -161,6 +165,22 @@ void DateBookSettings::saveViews()
     }    
 }
 
+void DateBookSettings::setManagers( const DescriptionManager &descMan, const LocationManager &locMan )
+{
+    m_descMan = descMan;
+    m_locMan = locMan;
+}
+
+DescriptionManager DateBookSettings::descriptionManager() const
+{
+    return m_descMan;
+}
+
+LocationManager DateBookSettings::locationManager() const
+{
+    return m_locMan;
+}
+
 void DateBookSettings::pluginItemClicked(QListViewItem *aItem)
 {
     if (!aItem||!m_manager||!m_loader) return;
@@ -239,5 +259,21 @@ void DateBookSettings::slotChangeClock( bool whichClock )
     ampm = whichClock;
     init();
     setStartTime( saveMe );
+}
+
+void DateBookSettings::slotConfigureDesc() {
+    DescriptionManagerDialog dlg( m_descMan );
+    dlg.setCaption( tr("Configure Descriptions") );
+    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
+        m_descMan = dlg.manager();
+    }
+}
+
+void DateBookSettings::slotConfigureLocs() {
+    LocationManagerDialog dlg( m_locMan );
+    dlg.setCaption( tr("Configure Locations") );
+    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
+        m_locMan = dlg.manager();
+    }
 }
 

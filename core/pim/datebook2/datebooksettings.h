@@ -32,6 +32,9 @@
 #define DATEBOOKSETTINGS_H
 
 #include "datebooksettingsbase.h"
+#include "locationmanager.h"
+#include "descriptionmanager.h"
+
 #include <qpe/categoryselect.h>
 #include <qvaluelist.h>
 #include <qlist.h>
@@ -72,11 +75,16 @@ public:
     void setViews( QList<Opie::Datebook::View> *views );
     void saveViews();
 
+    void setManagers( const Opie::Datebook::DescriptionManager &descMan, const Opie::Datebook::LocationManager &locMan );
+    Opie::Datebook::DescriptionManager descriptionManager() const;
+    Opie::Datebook::LocationManager locationManager() const;
 private slots:
     void slot12Hour( int );
     void slotChangeClock( bool );
 protected slots:
     virtual void pluginItemClicked(QListViewItem *);
+    void slotConfigureLocs();
+    void slotConfigureDesc();
 
 protected:
     void init();
@@ -86,6 +94,8 @@ protected:
     Opie::Core::OPluginLoader *m_loader;
     QList<Opie::Datebook::View> *m_views;
     QList<QWidget> m_viewConfigs;
+    Opie::Datebook::DescriptionManager m_descMan; 
+    Opie::Datebook::LocationManager m_locMan;
     
     QValueList<Opie::Datebook::HolidayPluginConfigWidget*> m_cfgWidgets;
 };

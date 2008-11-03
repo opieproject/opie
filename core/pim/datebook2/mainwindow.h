@@ -43,8 +43,6 @@ namespace Datebook {
         void slotAppMessage( const QCString&, const QByteArray& ); // qApp message QPE/Application/datebook
         void slotSystemReceive( const QCString&, const QByteArray& ); // QPE/System
         void slotChangeView(); // View changed
-        void slotConfigureLocs(); // Configure the Locations
-        void slotConfigureDesc(); // Configure the Desc
         void slotConfigureTemp();
         void slotNewFromTemplate(int ); // called when someone chooses the template menu
 

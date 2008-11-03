@@ -6,6 +6,7 @@
 #include <qpopupmenu.h>
 #include <qtimer.h>
 #include <qobjectlist.h>
+#include <qpushbutton.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
@@ -173,14 +174,6 @@ void MainWindow::initUI() {
     m_configureAction->addTo( m_toolBar2 );
 
 /*X
-    a = new QAction( tr("Configure Locations"), QString::null, 0, 0 );
-    a->addTo( m_popSetting );
-    connect(a, SIGNAL( activated() ), this, SLOT( slotConfigureLocs() ) );
-
-    a = new QAction( tr("Configure Descriptions"), QString::null, 0, 0 );
-    a->addTo( m_popSetting );
-    connect(a, SIGNAL( activated() ), this, SLOT(slotConfigureDesc() ) );
-
     a = new QAction( tr("Configure Templates"), QString::null, 0, 0 );
     a->addTo( m_popSetting );
     connect(a, SIGNAL( activated() ), this, SLOT(slotConfigureTemp() ) );
@@ -268,9 +261,21 @@ void MainWindow::initManagers() {
     m_manager = new BookManager;
 
     m_tempMan.load();
-    m_locMan.load();
-    m_descMan.load();
 
+    if(!m_descMan.load()) {
+        // Load default descriptions
+        m_descMan.add( tr("Meeting") );
+        m_descMan.add( tr("Lunch") );
+        m_descMan.add( tr("Dinner") );
+        m_descMan.add( tr("Travel") );
+    }
+
+    if(!m_locMan.load()) {
+        // Load default locations
+        m_locMan.add( tr("Office") );
+        m_locMan.add( tr("Home") );
+    }
+    
     setTemplateMenu();
 }
 
@@ -304,6 +309,7 @@ void MainWindow::slotConfigure() {
     frmSettings.setStartTime( m_startTime );
     frmSettings.setAlarmPreset( m_alarmPreset, m_alarmPresetTime );
     frmSettings.setViews( &m_views );
+    frmSettings.setManagers( descriptionManager(), locationManager() );
     frmSettings.comboDefaultView->setCurrentItem(m_defaultViewIdx-1);
     
     bool found=false;
@@ -329,6 +335,9 @@ void MainWindow::slotConfigure() {
         m_defaultViewIdx = frmSettings.comboDefaultView->currentItem()+1;
         m_defaultLocation = frmSettings.comboLocation->currentText();
         m_defaultCategories = frmSettings.comboCategory->currentCategories();
+
+        setDescriptionManager( frmSettings.descriptionManager() );
+        setLocationManager( frmSettings.locationManager() );
 
         saveConfig();
     }
@@ -550,22 +559,6 @@ void MainWindow::slotChangeView() {
     }
 
     raiseCurrentView();
-}
-
-void MainWindow::slotConfigureLocs() {
-    LocationManagerDialog dlg( locationManager() );
-    dlg.setCaption( tr("Configure Locations") );
-    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
-        setLocationManager( dlg.manager() );
-    }
-}
-
-void MainWindow::slotConfigureDesc() {
-    DescriptionManagerDialog dlg( descriptionManager() );
-    dlg.setCaption( tr("Configure Descriptions") );
-    if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
-        setDescriptionManager( dlg.manager() );
-    }
 }
 
 void MainWindow::slotConfigureTemp() {
