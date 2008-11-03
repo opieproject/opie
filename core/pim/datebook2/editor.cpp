@@ -37,3 +37,11 @@ bool Editor::isAP()const {
 bool Editor::weekStartOnMonday()const {
     return m_win->viewStartMonday();
 }
+
+QString Editor::defaultLocation()const {
+    return m_win->defaultLocation();
+}
+
+QArray<int> Editor::defaultCategories()const {
+    return m_win->defaultCategories();
+}

@@ -706,3 +706,11 @@ Editor* MainWindow::editor() {
         m_edit = new DateEntryEditor(this, this);
     return m_edit;
 }
+
+QString MainWindow::defaultLocation()const {
+    return m_defaultLocation;
+}
+
+QArray<int> MainWindow::defaultCategories()const {
+    return m_defaultCategories;
+}

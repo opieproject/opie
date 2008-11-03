@@ -32,7 +32,7 @@ namespace Datebook {
         void setLocations( const LocationManager& );
 
         /**
-         * Is the clock AP/PM or 24h?
+         * Is the clock AM/PM or 24h?
          */
         bool isAP()const;
 
@@ -40,6 +40,9 @@ namespace Datebook {
          * if the week starts on monday?
          */
         bool weekStartOnMonday()const;
+
+        QString defaultLocation()const;
+        QArray<int> defaultCategories()const;
 
     private:
         MainWindow* m_win;

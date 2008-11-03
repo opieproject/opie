@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: dateentry.ui,v 1.1 2008-10-22 16:46:32 paule Exp $
+** $Id: dateentry.ui,v 1.2 2008-11-03 19:11:52 paule Exp $
 **
 *********************************************************************</comment>
 <widget>
@@ -85,36 +85,6 @@
         </widget>
         <widget row="0"  column="1"  rowspan="1"  colspan="3" >
             <class>QComboBox</class>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string></string>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>Meeting</string>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>Lunch</string>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>Dinner</string>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>Travel</string>
-                </property>
-            </item>
             <property stdset="1">
                 <name>name</name>
                 <cstring>comboDescription</cstring>
@@ -152,24 +122,6 @@
         </widget>
         <widget row="1"  column="1"  rowspan="1"  colspan="3" >
             <class>QComboBox</class>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string></string>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>Office</string>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>Home</string>
-                </property>
-            </item>
             <property stdset="1">
                 <name>name</name>
                 <cstring>comboLocation</cstring>

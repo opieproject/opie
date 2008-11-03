@@ -61,16 +61,15 @@ using namespace Opie::Datebook;
  *  TRUE to construct a modal dialog.
  */
 
-DateEntry::DateEntry( bool startOnMonday, const QDateTime &start,
-                      const QDateTime &end, bool whichClock, QWidget* parent,
-                      const char* name )
+DateEntry::DateEntry( bool startOnMonday, bool whichClock,
+                      QWidget* parent, const char* name )
     : DateEntryBase( parent, name ),
       ampm( whichClock ),
       startWeekOnMonday( startOnMonday ),
       m_showStart(true)
+
 {
     init();
-    setDates(start,end);
     setFocusProxy(comboDescription);
 }
 
@@ -119,15 +118,7 @@ static void addOrPick( QComboBox* combo, const QString& t )
     combo->setCurrentItem(combo->count()-1);
 }
 
-DateEntry::DateEntry( bool startOnMonday, const OPimEvent &event, bool whichClock,
-                      QWidget* parent,  const char* name )
-    : DateEntryBase( parent, name ),
-      ampm( whichClock ),
-      startWeekOnMonday( startOnMonday ),
-      m_showStart(true)
-
-{
-    init();
+void DateEntry::setEvent( const OPimEvent &event ) {
     setDates(event.startDateTime(), event.endDateTime());
     comboCategory->setCategories( event.categories(), "Calendar", tr("Calendar") );
     if(!event.description().isEmpty())
@@ -603,7 +594,18 @@ bool DateEntryEditor::showDialog( QString caption, OPimEvent& event ) {
     sv->setHScrollBarMode( QScrollView::AlwaysOff );
     vb->addWidget( sv );
 
-    DateEntry *de = new DateEntry( weekStartOnMonday(), event, isAP(), &newDlg );
+    DateEntry *de = new DateEntry( weekStartOnMonday(), isAP(), &newDlg );
+
+    de->comboLocation->clear();
+    de->comboLocation->insertItem("");
+    de->comboLocation->insertStringList( locations().names() );    
+
+    de->comboDescription->clear();
+    de->comboDescription->insertItem("");
+    de->comboDescription->insertStringList( descriptions().names() );    
+
+    de->setEvent( event );
+
     sv->addChild( de );
     while ( QPEApplication::execDialog( &newDlg ) ) {
         event = de->event();
@@ -619,18 +621,9 @@ bool DateEntryEditor::showDialog( QString caption, OPimEvent& event ) {
 
 bool DateEntryEditor::newEvent( const QDate& date ) {
     OPimEvent ev;
-/*X    ev.setDescription(  str );
-    // When the new gui comes in, change this...
-    if(location==0) {
-        if(defaultLocation.isEmpty()) {
-            ev.setLocation(tr("(Unknown)"));
-        } else {
-            ev.setLocation( defaultLocation );
-        }
-    } 
-    else
-        ev.setLocation(location);
-    ev.setCategories(defaultCategories); */
+//X    ev.setDescription(  str );
+    ev.setLocation( defaultLocation() );
+    ev.setCategories( defaultCategories() );
     QDateTime start = date;
     QDateTime end = date;
     start.setTime( QTime( 10, 0 ) );
@@ -652,6 +645,8 @@ bool DateEntryEditor::newEvent( const QDate& date ) {
 
 bool DateEntryEditor::newEvent( const QDateTime& start, const QDateTime& end ) {
     OPimEvent ev;
+    ev.setLocation( defaultLocation() );
+    ev.setCategories( defaultCategories() );
     ev.setStartDateTime( start );
     ev.setEndDateTime( end );
 

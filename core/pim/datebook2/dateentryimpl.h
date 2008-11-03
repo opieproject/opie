@@ -47,13 +47,11 @@ class DateEntry : public DateEntryBase
     Q_OBJECT
 
 public:
-    DateEntry( bool startOnMonday, const QDateTime &start,
-               const QDateTime &end, bool whichClock = FALSE,
-               QWidget* parent = 0, const char* name = 0 );
-    DateEntry( bool startOnMonday, const Opie::OPimEvent &event, bool whichCLock = FALSE,
+    DateEntry( bool startOnMonday, bool whichCLock = FALSE,
                QWidget* parent = 0, const char* name = 0 );
     ~DateEntry();
 
+    void setEvent( const Opie::OPimEvent & );
     Opie::OPimEvent event();
     void setAlarmEnabled( bool alarmPreset, int presetTime/*X, Opie::OPimEvent::SoundTypeChoice*/ );
     virtual bool eventFilter( QObject *, QEvent * );

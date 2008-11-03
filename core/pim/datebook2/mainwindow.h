@@ -100,6 +100,11 @@ namespace Datebook {
         bool viewAP()const;
         bool viewStartMonday()const;
         // off view show
+
+    private: // friend functions for Editor
+        QString defaultLocation()const;
+        QArray<int> defaultCategories()const;
+
     private:
         QList<View> m_views; // the Views.. not autoDelete
         View *m_currView;
