@@ -39,6 +39,10 @@ namespace Datebook {
         QList<OPimRecord> records( const QDate& from,
                                       const QDate& to );
 
+    protected:
+        void addAlarms( const OPimEvent &ev );
+        void removeAlarms( const OPimEvent &ev );
+
     private:
         ODateBookAccess* m_db;
     };

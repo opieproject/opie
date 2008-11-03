@@ -1,5 +1,8 @@
 #include "bookmanager.h"
 
+#include <qpe/alarmserver.h>
+#include <opie2/opimnotifymanager.h>
+
 using namespace Opie;
 using namespace Opie::Datebook;
 
@@ -14,21 +17,29 @@ BookManager::~BookManager() {
 void BookManager::add( const OPimEvent& ev) {
     if (!m_db ) return;
 
+    addAlarms( ev );
     m_db->add( ev );
 }
 
 void BookManager::add( const OPimRecord& rec ) {
     if (!m_db) load(); // we might where called by setDocument... before we even fully initialized
+
+    // FIXME alarms
     m_db->add( rec );
 }
 
 void BookManager::update( const OPimEvent& up) {
     if ( !m_db ) return;
+
+    removeAlarms( event(up.uid()) ); // need to remove old alarms
+    addAlarms( up );
     m_db->replace( up );
 }
 
 void BookManager::remove( int uid ) {
     if ( !m_db ) return;
+
+    removeAlarms( event(uid) );
     m_db->remove( uid );
 }
 
@@ -47,8 +58,12 @@ bool BookManager::isLoaded() const{
 }
 
 bool BookManager::load() {
-    m_db = new ODateBookAccess;
-    return m_db->load();
+    if(!m_db) {
+        m_db = new ODateBookAccess;
+        return m_db->load();
+    }
+    else
+        return true;
 }
 
 void BookManager::reload() {
@@ -79,4 +94,20 @@ OPimOccurrence::List BookManager::list( const QDate& from,
 bool BookManager::save() {
     if (!m_db) return false;
     return m_db->save();
+}
+
+void BookManager::addAlarms( const OPimEvent &ev ) {
+    const OPimNotifyManager::Alarms &als = ev.notifiers().alarms();
+    OPimNotifyManager::Alarms::ConstIterator it;
+    for ( it = als.begin(); it != als.end(); ++it ) {
+        AlarmServer::addAlarm( (*it).dateTime(), "QPE/Application/datebook2", "alarm(QDateTime,int)", ev.uid() );
+    }
+}
+
+void BookManager::removeAlarms( const OPimEvent &ev ) {
+    const OPimNotifyManager::Alarms &als = ev.notifiers().alarms();
+    OPimNotifyManager::Alarms::ConstIterator it;
+    for ( it = als.begin(); it != als.end(); ++it ) {
+        AlarmServer::deleteAlarm( (*it).dateTime(), "QPE/Application/datebook2", "alarm(QDateTime,int)", ev.uid() );
+    }
 }

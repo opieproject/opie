@@ -43,6 +43,8 @@ namespace Datebook {
 
         QString defaultLocation()const;
         QArray<int> defaultCategories()const;
+        bool alarmPreset()const;
+        int alarmPresetTime()const;
 
     private:
         MainWindow* m_win;

@@ -37,6 +37,7 @@
 
 #include <opie2/opimevent.h>
 #include <opie2/opimrecurrence.h>
+#include <opie2/opimnotify.h>
 
 #include <qdatetime.h>
 
@@ -53,7 +54,6 @@ public:
 
     void setEvent( const Opie::OPimEvent & );
     Opie::OPimEvent event();
-    void setAlarmEnabled( bool alarmPreset, int presetTime/*X, Opie::OPimEvent::SoundTypeChoice*/ );
     virtual bool eventFilter( QObject *, QEvent * );
 public slots:
     void endDateChanged( int, int, int );
@@ -75,6 +75,7 @@ private:
     void setDates( const QDateTime& s, const QDateTime& e );
     void setRepeatLabel();
     void updateTimeEdit(bool,bool);
+    void setAlarmFromEvent( const Opie::OPimEvent &event );
 
     DateBookMonth *startPicker, *endPicker;
     QDate startDate, endDate;
@@ -100,6 +101,8 @@ public:
     virtual bool edit( const OPimEvent&, bool showRec = TRUE );
 
     virtual OPimEvent event() const;
+
+    static void setEventAlarm( Opie::OPimEvent &ev, bool alarm, int alarmTime, Opie::OPimAlarm::Sound sound );
 
 protected:
     bool showDialog( QString caption, OPimEvent& event );

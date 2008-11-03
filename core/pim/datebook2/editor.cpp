@@ -45,3 +45,11 @@ QString Editor::defaultLocation()const {
 QArray<int> Editor::defaultCategories()const {
     return m_win->defaultCategories();
 }
+
+bool Editor::alarmPreset()const {
+    return m_win->alarmPreset();
+}
+
+int Editor::alarmPresetTime()const {
+    return m_win->alarmPresetTime();
+}

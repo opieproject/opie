@@ -71,6 +71,7 @@ namespace Datebook {
         void edit();
         void showDayView();
         void add( const OPimRecord& );
+        void doAlarm( const QDateTime &when, int uid );
 
     private:
         QToolBar* toolbar();
@@ -104,6 +105,8 @@ namespace Datebook {
     private: // friend functions for Editor
         QString defaultLocation()const;
         QArray<int> defaultCategories()const;
+        bool alarmPreset()const;
+        int alarmPresetTime()const;
 
     private:
         QList<View> m_views; // the Views.. not autoDelete

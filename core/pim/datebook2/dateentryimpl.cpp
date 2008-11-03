@@ -34,6 +34,7 @@
 
 #include <opie2/odebug.h>
 #include <opie2/otimepicker.h>
+#include <opie2/opimnotifymanager.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/categoryselect.h>
@@ -125,15 +126,12 @@ void DateEntry::setEvent( const OPimEvent &event ) {
         addOrPick( comboDescription, event.description() );
     if(!event.location().isEmpty())
         addOrPick( comboLocation, event.location() );
-    checkAlarm->setChecked( event.hasNotifiers() );
     checkAllDay->setChecked( event.isAllDay() );
     if(!event.note().isEmpty()) 
         noteStr=event.note();
     else 
         noteStr="";
-//X    spinAlarm->setValue(event.alarmTime());
-//X    if ( event.alarmSound() != OPimEvent::Silent )
-//X        comboSound->setCurrentItem( 1 );
+    setAlarmFromEvent( event );
     if ( event.hasRecurrence() ) {
         rp = event.recurrence();
         cmdRepeat->setText( tr("Repeat...") );
@@ -413,7 +411,6 @@ void DateEntry::slotChangeStartOfWeek( bool onMonday )
 OPimEvent DateEntry::event()
 {
     OPimEvent ev;
-//X    OPimEvent::SoundTypeChoice st;
     ev.setDescription( comboDescription->currentText() );
     ev.setLocation( comboLocation->currentText() );
     ev.setCategories( comboCategory->currentCategories() );
@@ -471,11 +468,13 @@ OPimEvent DateEntry::event()
         ev.setAllDay(true);
 
     // we only have one type of sound at the moment... LOUD!!!
-//X    if ( comboSound->currentItem() != 0 )
-//X        st = OPimEvent::Loud;
-//X    else
-//X        st = OPimEvent::Silent;
-//X    ev.setAlarm( checkAlarm->isChecked(), spinAlarm->value(), st );
+    OPimAlarm::Sound st;
+    if ( comboSound->currentItem() != 0 )
+        st = OPimAlarm::Loud;
+    else
+        st = OPimAlarm::Silent;
+    DateEntryEditor::setEventAlarm( ev, checkAlarm->isChecked(), spinAlarm->value(), st );
+
     if ( rp.type() != OPimRecurrence::NoRepeat )
         ev.setRecurrence( rp );
     ev.setNote( noteStr );
@@ -508,14 +507,20 @@ void DateEntry::setRepeatLabel()
     }
 }
 
-void DateEntry::setAlarmEnabled( bool alarmPreset, int presetTime/*X, OPimEvent::SoundTypeChoice sound */)
+void DateEntry::setAlarmFromEvent( const Opie::OPimEvent &event )
 {
-    checkAlarm->setChecked( alarmPreset );
-    spinAlarm->setValue( presetTime );
-/*    if ( sound != OPimEvent::Silent )
-        comboSound->setCurrentItem( 1 );
+    checkAlarm->setChecked( event.hasNotifiers() );
+    if( event.hasNotifiers() ) {
+        const OPimAlarm &alarm = event.notifiers().alarms().first();
+        int alarmTime = alarm.dateTime().secsTo( event.startDateTime() ) / 60;
+        spinAlarm->setValue( alarmTime );
+        if ( alarm.sound() != OPimAlarm::Silent )
+            comboSound->setCurrentItem( 1 );
+        else
+            comboSound->setCurrentItem( 0 );
+    }
     else
-        comboSound->setCurrentItem( 0 );*/
+        comboSound->setCurrentItem( 1 ); // we want the default to be loud
 }
 
 void DateEntry::initCombos()
@@ -630,6 +635,7 @@ bool DateEntryEditor::newEvent( const QDate& date ) {
     end.setTime( QTime( 12, 0 ) );
     ev.setStartDateTime( start );
     ev.setEndDateTime( end );
+    setEventAlarm( ev, alarmPreset(), alarmPresetTime(), OPimAlarm::Loud );
 
     if( showDialog( DateEntryBase::tr("New Event"), ev ) ) {
         ev.assignUid();
@@ -638,9 +644,6 @@ bool DateEntryEditor::newEvent( const QDate& date ) {
     }
     else
         return false;
-
-
-//X    e->setAlarmEnabled( aPreset, presetTime, Event::Loud );
 }
 
 bool DateEntryEditor::newEvent( const QDateTime& start, const QDateTime& end ) {
@@ -649,6 +652,7 @@ bool DateEntryEditor::newEvent( const QDateTime& start, const QDateTime& end ) {
     ev.setCategories( defaultCategories() );
     ev.setStartDateTime( start );
     ev.setEndDateTime( end );
+    setEventAlarm( ev, alarmPreset(), alarmPresetTime(), OPimAlarm::Loud );
 
     if( showDialog( DateEntryBase::tr("New Event"), ev ) ) {
         ev.assignUid();
@@ -700,4 +704,11 @@ QString DateEntryEditor::checkEvent(const OPimEvent &e)
             "than interval between repeats.");
     else
         return QString::null;
+}
+
+void DateEntryEditor::setEventAlarm( Opie::OPimEvent &ev, bool alarm, int alarmTime, OPimAlarm::Sound sound ) {
+    if( alarm )
+        ev.notifiers().add( OPimAlarm( sound, ev.startDateTime().addSecs( alarmTime * -60 ), 0, ev.uid() ) );
+    else
+        ev.notifiers().clear();
 }

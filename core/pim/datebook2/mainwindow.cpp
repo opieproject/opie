@@ -16,6 +16,7 @@
 #include <qpe/qpemessagebox.h>
 #include <qmessagebox.h>
 #include <opie2/oresource.h>
+#include <opie2/opimnotifymanager.h>
 
 #include "editor.h"
 #include "show.h"
@@ -713,4 +714,71 @@ QString MainWindow::defaultLocation()const {
 
 QArray<int> MainWindow::defaultCategories()const {
     return m_defaultCategories;
+}
+
+bool MainWindow::alarmPreset()const {
+    return m_alarmPreset;
+}
+
+int MainWindow::alarmPresetTime()const {
+    return m_alarmPresetTime;
+}
+
+void MainWindow::doAlarm( const QDateTime &when, int uid ) {
+    // check to make it's okay to continue,
+    // this is the case that the time was set ahead, and
+    // we are forced given a stale alarm...
+    QDateTime current = QDateTime::currentDateTime();
+    if ( current.time().hour() != when.time().hour() && current.time().minute() != when.time().minute() )
+        return;
+
+    if(!manager()->isLoaded())
+        manager()->load();
+
+    OPimEvent event = manager()->event( uid );
+    if ( !event.isEmpty() ) {
+        QString msg;
+        bool found = FALSE;
+        bool bSound = FALSE;
+        
+        OPimAlarm alarm = event.notifiers().alarmAtDateTime( when, found );
+        if ( found ) {
+            // FIXME this is a bit of a hack
+            QDate recurDate( event.startDateTime().date() );
+            if( event.hasRecurrence() )
+                event.recurrence().nextOcurrence( when.date(), recurDate );
+            QDateTime recurDateTime( recurDate, event.startDateTime().time() );
+            
+            msg += "<CENTER><B>" + event.description() + "</B>"
+                + "<BR>" + event.location() + "<BR>"
+                + TimeString::dateString( recurDateTime, m_ampm );
+            
+            int warn = QDateTime::currentDateTime().secsTo(recurDateTime) / 60;
+            msg += (warn
+                    ? tr(" (in %1 minutes)").arg(warn)
+                    : QString(""))
+                + "<BR>"
+                + event.note() + "</CENTER>";
+            if ( alarm.sound() != OPimAlarm::Silent ) {
+                startAlarm();
+                bSound = TRUE;
+            }
+            QDialog dlg( this, 0, TRUE );
+            dlg.setCaption( tr("Calendar") );
+            QVBoxLayout *vb = new QVBoxLayout( &dlg );
+            QScrollView *view = new QScrollView( &dlg, "scrollView");
+            view->setResizePolicy( QScrollView::AutoOneFit );
+            vb->addWidget( view );
+            QLabel *lblMsg = new QLabel( msg, &dlg );
+            view->addChild( lblMsg );
+            QPushButton *cmdOk = new QPushButton( tr("OK"), &dlg );
+            connect( cmdOk, SIGNAL(clicked()), &dlg, SLOT(accept()) );
+            vb->addWidget( cmdOk );
+
+            QPEApplication::execDialog( &dlg );
+
+            if ( bSound )
+                killAlarm();
+        }
+    }
 }
