@@ -8,6 +8,7 @@ using namespace Opie::Datebook;
 
 BookManager::BookManager() {
     m_db = 0;
+    m_holiday = new DateBookHoliday;
 }
 
 BookManager::~BookManager() {
@@ -88,12 +89,19 @@ OPimOccurrence::List BookManager::list( const QDate& from,
                                               const QDate& to ) {
     if (!m_db) return OPimOccurrence::List();
 
-    return m_db->occurrences( from, to );
+    OPimOccurrence::List ret = m_holiday->getEffectiveEvents( from, to );
+    ret += m_db->occurrences( from, to );
+
+    return ret;
 }
 
 bool BookManager::save() {
     if (!m_db) return false;
     return m_db->save();
+}
+
+DateBookHoliday *BookManager::holiday() {
+    return m_holiday;
 }
 
 void BookManager::addAlarms( const OPimEvent &ev ) {

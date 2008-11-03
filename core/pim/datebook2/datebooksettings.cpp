@@ -32,8 +32,8 @@
 
 #include <opie2/opluginloader.h>
 #include <opie2/odebug.h>
-#include <opie2/oholidaypluginif.h>
-#include <opie2/oholidayplugin.h>
+#include <opie2/oholidaypluginif2.h>
+#include <opie2/oholidayplugin2.h>
 #include <opie2/oholidayplugincfgwidget.h>
 
 #include <qpe/qpeapplication.h>
@@ -63,6 +63,7 @@ DateBookSettings::DateBookSettings( bool whichClock, QWidget *parent,
     m_manager = 0;
     m_PluginListView->header()->hide();
     m_PluginListView->setSorting(-1);
+    m_PluginListView->addColumn(QString::null, 0);
 
     connect(locButton, SIGNAL( clicked() ), this, SLOT( slotConfigureLocs() ) );
     connect(descButton, SIGNAL( clicked() ), this, SLOT( slotConfigureDesc() ) );
@@ -111,15 +112,18 @@ void DateBookSettings::setPluginList(Opie::Core::OPluginManager*aManager,Opie::C
     QCheckListItem *pitem = 0;
 
     for ( Opie::Core::OPluginItem::List::Iterator it = inLst.begin(); it != inLst.end(); ++it ) {
-        pitem = new QCheckListItem(m_PluginListView,(*it).name(),QCheckListItem::CheckBox);
-        pitem->setOn( (*it).isEnabled() );
-
-        Opie::Datebook::HolidayPluginIf*hif = m_loader->load<Opie::Datebook::HolidayPluginIf>(*it,IID_HOLIDAY_PLUGIN);
+        Opie::Datebook::HolidayPluginIf2*hif = m_loader->load<Opie::Datebook::HolidayPluginIf2>(*it,IID_HOLIDAY_PLUGIN);
         if (!hif) continue;
-        Opie::Datebook::HolidayPlugin*pl = hif->plugin();
+        Opie::Datebook::HolidayPlugin2*pl = hif->plugin();
         if (!pl) continue;
+
+        pitem = new QCheckListItem(m_PluginListView,pl->description(),QCheckListItem::CheckBox);
+        pitem->setOn( (*it).isEnabled() );
+        pitem->setText( 1, (*it).name() );
+
         Opie::Datebook::HolidayPluginConfigWidget*cfg = pl->configWidget();
         if (!cfg) continue;
+
         QWidget * dtab = new QWidget(TabWidget,pl->description());
         QVBoxLayout*dlayout = new QVBoxLayout(dtab);
         dlayout->setMargin(2);
@@ -188,7 +192,7 @@ void DateBookSettings::pluginItemClicked(QListViewItem *aItem)
 
     Opie::Core::OPluginItem::List lst = m_loader->allAvailable( true );
     for ( Opie::Core::OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ) {
-        if ( QString::compare( (*it).name() , pitem->text(0) ) == 0 ) {
+        if ( QString::compare( (*it).name() , pitem->text(1) ) == 0 ) {
             m_manager->setEnabled((*it),pitem->isOn());
             break;
         }

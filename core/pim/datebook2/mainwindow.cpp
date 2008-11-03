@@ -16,6 +16,7 @@
 #include <qpe/qpemessagebox.h>
 #include <qmessagebox.h>
 #include <opie2/oresource.h>
+#include <opie2/opluginloader.h>
 #include <opie2/opimnotifymanager.h>
 
 #include "editor.h"
@@ -309,6 +310,7 @@ void MainWindow::slotConfigure() {
     DateBookSettings frmSettings( m_ampm, this );
     frmSettings.setStartTime( m_startTime );
     frmSettings.setAlarmPreset( m_alarmPreset, m_alarmPresetTime );
+    frmSettings.setPluginList( manager()->holiday()->pluginManager(), manager()->holiday()->pluginLoader() );
     frmSettings.setViews( &m_views );
     frmSettings.setManagers( descriptionManager(), locationManager() );
     frmSettings.comboDefaultView->setCurrentItem(m_defaultViewIdx-1);
@@ -328,6 +330,10 @@ void MainWindow::slotConfigure() {
     frmSettings.comboCategory->setCategories(m_defaultCategories,"Calendar", tr("Calendar"));
 
     if ( QPEApplication::execDialog( &frmSettings ) ) {
+        frmSettings.savePlugins();
+        manager()->holiday()->pluginManager()->save();
+        manager()->holiday()->reloadPlugins();
+
         frmSettings.saveViews();
         
         m_alarmPreset = frmSettings.alarmPreset();

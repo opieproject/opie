@@ -7,6 +7,8 @@
 #include <opie2/odatebookaccess.h>
 #include <opie2/opimoccurrence.h>
 
+#include "holiday.h"
+
 namespace Opie {
 namespace Datebook {
     /**
@@ -39,12 +41,15 @@ namespace Datebook {
         QList<OPimRecord> records( const QDate& from,
                                       const QDate& to );
 
+        DateBookHoliday *holiday();
+
     protected:
         void addAlarms( const OPimEvent &ev );
         void removeAlarms( const OPimEvent &ev );
 
     private:
         ODateBookAccess* m_db;
+        DateBookHoliday* m_holiday;
     };
 }
 }

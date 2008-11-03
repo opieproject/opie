@@ -18,6 +18,7 @@ HEADERS	= mainwindow.h \
           repeatentry.h \
           exceptions.h \
           onoteedit.h \
+          odatebookaccessbackend_holiday.h \
           namespace_hack.h \
           views/day/dayview.h \
           views/day/datebookday.h \
@@ -50,6 +51,7 @@ SOURCES	= main.cpp \
           repeatentry.cpp \
           exceptions.cpp \
           onoteedit.cpp \
+          odatebookaccessbackend_holiday.cpp \
           views/day/dayview.cpp \
           views/day/datebookday.cpp \
           views/day/datebookdayheaderimpl.cpp \

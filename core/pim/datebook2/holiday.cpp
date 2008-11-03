@@ -2,10 +2,14 @@
 
 #include <opie2/odebug.h>
 #include <opie2/opluginloader.h>
-#include <opie2/oholidaypluginif.h>
-#include <opie2/oholidayplugin.h>
+#include <opie2/oholidaypluginif2.h>
+#include <opie2/oholidayplugin2.h>
+#include <opie2/opimoccurrence.h>
 
-#include "datebooktypes.h"
+#include <opie2/odatebookaccess.h>
+#include "odatebookaccessbackend_holiday.h"
+
+#include "holiday.h"
 
 using namespace Opie;
 using namespace Opie::Datebook;
@@ -13,7 +17,7 @@ using namespace Opie::Datebook;
 DateBookHoliday::DateBookHoliday()
 {
     _pluginlist.clear();
-    m_pluginLoader = new Opie::Core::OPluginLoader("holidays",false);
+    m_pluginLoader = new Opie::Core::OPluginLoader("holidays2",false);
     m_pluginLoader->setAutoDelete(true);
     m_pluginManager = new Opie::Core::OPluginManager(m_pluginLoader);
     m_pluginManager->load();
@@ -59,13 +63,15 @@ void DateBookHoliday::init()
     Opie::Core::OPluginItem::List  lst = m_pluginLoader->filtered(true);
 //    debugLst( lst );
     for( Opie::Core::OPluginItem::List::Iterator it = lst.begin(); it != lst.end(); ++it ){
-        Opie::Datebook::HolidayPluginIf*hif = m_pluginLoader->load<Opie::Datebook::HolidayPluginIf>(*it,IID_HOLIDAY_PLUGIN);
+        Opie::Datebook::HolidayPluginIf2*hif = m_pluginLoader->load<Opie::Datebook::HolidayPluginIf2>(*it,IID_HOLIDAY_PLUGIN);
         if (hif) {
-            Opie::Datebook::HolidayPlugin*pl = hif->plugin();
+            Opie::Datebook::HolidayPlugin2 *pl = hif->plugin();
             if (pl) {
                 HPlugin*_pl=new HPlugin;
                 _pl->_plugin = pl;
-                odebug << "Found holiday " << pl->description()<<oendl;
+                odebug << "Found holiday " << pl->description() << oendl;
+                ODateBookAccessBackend_Holiday *backend = new ODateBookAccessBackend_Holiday(_pl->_plugin);
+                _pl->_access = new ODateBookAccess(backend);
                 _pluginlist.append(_pl);
                 //_pl->_if = hif;
             }
@@ -89,45 +95,18 @@ QStringList DateBookHoliday::holidaylist(unsigned year, unsigned month, unsigned
     return holidaylist(QDate(year,month,day));
 }
 
-QValueList<EffectiveEvent> DateBookHoliday::getEffectiveEvents(const QDate &from,const QDate &to )
+OPimOccurrence::List DateBookHoliday::getEffectiveEvents(const QDate &from,const QDate &to )
 {
-    QValueList<EffectiveEvent> ret;
+    OPimOccurrence::List ret;
     QValueList<HPlugin*>::Iterator it;
     for (it=_pluginlist.begin();it!=_pluginlist.end();++it) {
         HPlugin*_pl = *it;
-        ret+=_pl->_plugin->events(from,to);
+        ret += _pl->_access->effectiveNonRepeatingEvents(from,to);
     }
     return ret;
 }
 
-QValueList<EffectiveEvent> DateBookDBHoliday::getEffectiveEventsNoHoliday(const QDate &from,const QDate &to )
+OPimOccurrence::List DateBookHoliday::getEffectiveEvents(const QDateTime &d)
 {
-    return DateBookDBHack::getEffectiveEvents(from,to);
-}
-
-QValueList<EffectiveEvent> DateBookDBHoliday::getEffectiveEventsNoHoliday(const QDateTime &start)
-{
-    return DateBookDBHack::getEffectiveEvents(start);
-}
-
-QValueList<EffectiveEvent> DateBookHoliday::getEffectiveEvents(const QDateTime &start)
-{
-    return getEffectiveEvents(start.date(),start.date());
-}
-
-QValueList<EffectiveEvent> DateBookDBHoliday::getEffectiveEvents(const QDate &from,const QDate &to )
-{
-    QValueList<EffectiveEvent> ret;
-    odebug << "Ueberlagert 1" << oendl;
-    if (db_holiday) {
-        ret+=db_holiday->getEffectiveEvents(from,to);
-    }
-    ret+=getEffectiveEventsNoHoliday(from,to);
-    return ret;
-}
-
-QValueList<EffectiveEvent> DateBookDBHoliday::getEffectiveEvents( const QDateTime &start)
-{
-    odebug << "Ueberlagert 2" << oendl;
-    return DateBookDBHack::getEffectiveEvents(start);
+    return getEffectiveEvents( d.date(), d.date() );
 }
