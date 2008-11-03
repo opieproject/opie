@@ -3,24 +3,23 @@
 
 #include "hlist.h"
 
-#include <opie2/oholidayplugin.h>
-#include <opie2/oholidaypluginif.h>
+#include <opie2/oholidayplugin2.h>
+#include <opie2/oholidaypluginif2.h>
 
 #include <qmap.h>
 
-class ChrisHoliday:public Opie::Datebook::HolidayPlugin
+class ChrisHoliday:public Opie::Datebook::HolidayPlugin2
 {
 typedef QMap<QDate,QStringList> tDayMap;
 
 public:
-    ChrisHoliday():Opie::Datebook::HolidayPlugin(){_lastyear=0;}
+    ChrisHoliday():Opie::Datebook::HolidayPlugin2(){_lastyear=0;}
     virtual ~ChrisHoliday(){}
 
     virtual QString description();
     virtual QStringList entries(const QDate&);
     virtual QStringList entries(unsigned year, unsigned month, unsigned day);
     virtual QMap<QDate,QStringList> entries(const QDate&,const QDate&);
-    virtual QValueList<EffectiveEvent> events(const QDate&,const QDate&);
 
 protected:
     HList _internallist;

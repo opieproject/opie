@@ -1,4 +1,4 @@
-  config DATEBOOK_BIRTHDAYS_HOLIDAY
-    boolean "opie-datebook-birthdays"
+  config DATEBOOK2_BIRTHDAYS_PLUGIN
+    boolean "opie-datebook2-birthdays"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2PIM

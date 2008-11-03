@@ -5,12 +5,11 @@
 #include <opie2/odebug.h>
 
 #include <qobject.h>
-#include <qpe/event.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
 
 NationalHoliday::NationalHoliday()
-    :Opie::Datebook::HolidayPlugin()
+    :Opie::Datebook::HolidayPlugin2()
 {
     _lastyear=0;
     init_done = false;
@@ -237,33 +236,6 @@ QMap<QDate,QStringList> NationalHoliday::entries(const QDate&start,const QDate&e
         ret[d.addDays(i)]+=temp;
         temp.clear();
     }
-    return ret;
-}
-
-QValueList<EffectiveEvent> NationalHoliday::events(const QDate&start,const QDate&end)
-{
-    QValueList<EffectiveEvent> ret;
-    QDate d = (start<end?start:end);
-    int daysto = start.daysTo(end);
-    if (daysto < 0) {
-        daysto = end.daysTo(start);
-    }
-
-    QStringList temp;
-    for (int i =0; i<=daysto;++i) {
-        temp = entries(d.addDays(i));
-        if (temp.count()==0) {
-            continue;
-        }
-        for (unsigned j=0;j<temp.count();++j) {
-            Event ev;
-            ev.setDescription(temp[j]);
-            ev.setStart(d.addDays(i));
-            ev.setAllDay(true);
-            ret.append(EffectiveEvent(ev,d.addDays(i)));
-        }
-    }
-
     return ret;
 }
 

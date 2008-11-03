@@ -1,12 +1,11 @@
 #include "birthday.h"
 
 #include <opie2/ocontactaccess.h>
-#include <qpe/event.h>
 
 #include <qobject.h>
 
 Birthday::Birthday()
-    :Opie::Datebook::HolidayPlugin()
+    :Opie::Datebook::HolidayPlugin2()
 {
     m_contactdb = new Opie::OPimContactAccess("addressplugin");
 /*
@@ -17,7 +16,7 @@ Birthday::Birthday()
 
 QString Birthday::description()
 {
-    return QObject::tr("Birthdays","holidays");
+    return QObject::tr("Birthdays & Anniversaries","holidays");
 }
 
 QStringList Birthday::entries(const QDate&aDate)
@@ -113,45 +112,15 @@ QMap<QDate,QStringList> Birthday::entries(const QDate&start,const QDate&end)
     QMap<QDate,QString> collector;
     QMap<QDate,QString>::ConstIterator sit;
 
+    // Birthdays
     collector = _entries(start,end,false);
     for (sit=collector.begin();sit!=collector.end();++sit) {
         ret[sit.key()].append(sit.data());
     }
+    // Anniversaries
     collector = _entries(start,end,true);
     for (sit=collector.begin();sit!=collector.end();++sit) {
         ret[sit.key()].append(sit.data());
-    }
-    return ret;
-}
-
-QValueList<EffectiveEvent> Birthday::events(const QDate&start,const QDate&end)
-{
-    QValueList<EffectiveEvent> ret;
-    QMap<QDate,QString> collector;
-    QMap<QDate,QString>::ConstIterator sit;
-
-    collector = _entries(start,end,false);
-
-    for (sit=collector.begin();sit!=collector.end();++sit) {
-        Event ev;
-        ev.setAllDay(true);
-        ev.setStart(sit.key());
-        ev.setEnd(sit.key());
-        ev.setDescription(sit.data());
-        odebug << sit.key() << oendl;
-        ret.append(EffectiveEvent(ev,sit.key()));
-    }
-
-    collector = _entries(start,end,true);
-
-    for (sit=collector.begin();sit!=collector.end();++sit) {
-        Event ev;
-        ev.setAllDay(true);
-        ev.setStart(sit.key());
-        ev.setEnd(sit.key());
-        ev.setDescription(sit.data());
-        odebug << sit.key() << oendl;
-        ret.append(EffectiveEvent(ev,sit.key()));
     }
     return ret;
 }

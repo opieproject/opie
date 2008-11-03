@@ -14,7 +14,7 @@ DEPENDPATH      += $(OPIEDIR)/include \
 
 LIBS+= -lqpe -lopiecore2 -lopieui2 -lopiepim2
 
-DESTDIR = $(OPIEDIR)/plugins/holidays
+DESTDIR = $(OPIEDIR)/plugins/holidays2
 TARGET = nationaldayplugin
 
 include( $(OPIEDIR)/include.pro )

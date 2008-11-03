@@ -1,7 +1,6 @@
 #include "chrisholiday.h"
 
 #include <qobject.h>
-#include <qpe/event.h>
 
 QString ChrisHoliday::description()
 {
@@ -112,33 +111,6 @@ QMap<QDate,QStringList> ChrisHoliday::entries(const QDate&start,const QDate&end)
         ret[d.addDays(i)]+=temp;
         temp.clear();
     }
-    return ret;
-}
-
-QValueList<EffectiveEvent> ChrisHoliday::events(const QDate&start,const QDate&end)
-{
-    QValueList<EffectiveEvent> ret;
-    QDate d = (start<end?start:end);
-    int daysto = start.daysTo(end);
-    if (daysto < 0) {
-        daysto = end.daysTo(start);
-    }
-
-    QStringList temp;
-    for (int i =0; i<= daysto;++i) {
-        temp = entries(d.addDays(i));
-        if (temp.count()==0) {
-            continue;
-        }
-        for (unsigned j=0;j<temp.count();++j) {
-            Event ev;
-            ev.setDescription(temp[j]);
-            ev.setStart(d.addDays(i));
-            ev.setAllDay(true);
-            ret.append(EffectiveEvent(ev,d.addDays(i)));
-        }
-    }
-
     return ret;
 }
 
