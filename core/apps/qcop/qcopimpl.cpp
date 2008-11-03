@@ -121,6 +121,8 @@ int doqcopimpl (int argc, char *argv[])
 		env << arg.toInt();
 	    } else if ( *it == "QDateTime") {
 		env << TimeConversion::fromISO8601(QCString(arg));
+		} else if ( *it == "QDate") {
+		env << TimeConversion::fromISO8601(QCString(arg)).date();
 	    } else if ( *it == "bool") {
 		if (arg.lower() == "false")
 		    env << (int)false;
