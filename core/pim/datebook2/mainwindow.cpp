@@ -33,7 +33,7 @@ using namespace Opie;
 using namespace Datebook;
 
 MainWindow::MainWindow()
-    : OPimMainWindow( "Datebook", 0, 0, 0, 0, 0, WType_TopLevel | WStyle_ContextHelp ), m_descMan( "Descriptions" ),  m_locMan( "Locations" )
+    : OPimMainWindow( "Datebook", 0, 0, 0, 0, 0, WType_TopLevel | WStyle_ContextHelp ), m_descMan( "Descriptions" ),  m_locMan( "Locations" ) /* no tr */
 {
     m_currView = NULL;
     
@@ -64,6 +64,7 @@ MainWindow::~MainWindow() {
     m_descMan.save();
 
     manager()->save();
+    saveConfig();
     delete m_manager;
 }
 
@@ -139,8 +140,6 @@ void MainWindow::initUI() {
     m_toolBar = new QToolBar( this );
     m_toolBar->setHorizontalStretchable( TRUE );
     
-    QMenuBar* mb = new QMenuBar( m_toolBar );
-
     m_itemNewAction->addTo( m_toolBar );
 
     m_popTemplate = new QPopupMenu( this );
@@ -206,22 +205,40 @@ void MainWindow::initConfig() {
     config.setGroup("Main");
     m_defaultViewIdx = config.readNumEntry("defaultview", 1);
 
-/*    startTime = config.readNumEntry("startviewtime", 8);
-    aPreset = config.readBoolEntry("alarmpreset");
-    presetTime = config.readNumEntry("presettime");
-    bJumpToCurTime = config.readBoolEntry("jumptocurtime");
-    rowStyle = config.readNumEntry("rowstyle");
-    weeklistviewconfig = config.readNumEntry("weeklistviewconfig",NORMAL);
+    m_startTime = config.readNumEntry("startviewtime", 8);
+    m_alarmPreset = config.readBoolEntry("alarmpreset");
+    m_alarmPresetTime = config.readNumEntry("presettime");
 
-    defaultLocation = config.readEntry("defaultLocation");
+    m_defaultLocation = config.readEntry("defaultLocation");
     QString tmpString = config.readEntry("defaultCategories");
     QStringList tmpStringList = QStringList::split(",",tmpString);
-    defaultCategories.truncate(0);
+    m_defaultCategories.truncate(0);
 
     for( QStringList::Iterator i=tmpStringList.begin(); i!=tmpStringList.end(); i++) {
-        defaultCategories.resize(defaultCategories.count()+1);
-        defaultCategories[defaultCategories.count()-1]=(*i).toInt();
-    }*/
+        m_defaultCategories.resize(m_defaultCategories.count()+1);
+        m_defaultCategories[m_defaultCategories.count()-1]=(*i).toInt();
+    }
+}
+
+void MainWindow::saveConfig() {
+    Config config("DateBook");
+    config.setGroup("Main");
+
+    config.writeEntry("defaultview", m_defaultViewIdx);
+    config.writeEntry("startviewtime", m_startTime);
+    config.writeEntry("alarmpreset", m_alarmPreset);
+    config.writeEntry("presettime", m_alarmPresetTime);
+
+    config.writeEntry("defaultLocation",m_defaultLocation);
+    QStringList tmpStringList;
+    for( uint i=0; i<m_defaultCategories.count(); i++) {
+        tmpStringList << QString::number(m_defaultCategories[i]);
+    }
+    config.writeEntry("defaultCategories",tmpStringList.join(","));
+    
+    for ( QListIterator<View> it(m_views); it.current(); ++it ) {
+        it.current()->saveConfig( &config );
+    }
 }
 
 void MainWindow::initViews() {
@@ -284,47 +301,36 @@ void MainWindow::slotFind() {
 
 void MainWindow::slotConfigure() {
     DateBookSettings frmSettings( m_ampm, this );
-/*X    frmSettings.setStartTime( startTime );
-    frmSettings.setAlarmPreset( aPreset, presetTime );
-    frmSettings.setJumpToCurTime( bJumpToCurTime );
-    frmSettings.setRowStyle( rowStyle );
+    frmSettings.setStartTime( m_startTime );
+    frmSettings.setAlarmPreset( m_alarmPreset, m_alarmPresetTime );
+    frmSettings.setViews( &m_views );
     frmSettings.comboDefaultView->setCurrentItem(m_defaultViewIdx-1);
-    frmSettings.comboWeekListView->setCurrentItem(weeklistviewconfig);
-    frmSettings.setPluginList(db_holiday->pluginManager(),db_holiday->pluginLoader());
-
+    
     bool found=false;
     for (int i=0; i<(frmSettings.comboLocation->count()); i++) {
-        if ( frmSettings.comboLocation->text(i) == defaultLocation ) {
+        if ( frmSettings.comboLocation->text(i) == m_defaultLocation ) {
             frmSettings.comboLocation->setCurrentItem(i);
             found=true;
             break;
         }
     }
     if(!found) {
-        frmSettings.comboLocation->insertItem(defaultLocation);
+        frmSettings.comboLocation->insertItem(m_defaultLocation);
         frmSettings.comboLocation->setCurrentItem(frmSettings.comboLocation->count()-1);
     }
-    frmSettings.comboCategory->setCategories(defaultCategories,"Calendar", tr("Calendar"));
-*/
+    frmSettings.comboCategory->setCategories(m_defaultCategories,"Calendar", tr("Calendar"));
+
     if ( QPEApplication::execDialog( &frmSettings ) ) {
-        frmSettings.savePlugins();
-/*X        db_holiday->pluginManager()->save();
-        db_holiday->reloadPlugins();
-
-        aPreset = frmSettings.alarmPreset();
-        presetTime = frmSettings.presetTime();
-        startTime = frmSettings.startTime();
-        bJumpToCurTime = frmSettings.jumpToCurTime();
-        rowStyle = frmSettings.rowStyle();
+        frmSettings.saveViews();
+        
+        m_alarmPreset = frmSettings.alarmPreset();
+        m_alarmPresetTime = frmSettings.presetTime();
+        m_startTime = frmSettings.startTime();
         m_defaultViewIdx = frmSettings.comboDefaultView->currentItem()+1;
-        defaultLocation = frmSettings.comboLocation->currentText();
-        defaultCategories = frmSettings.comboCategory->currentCategories();
+        m_defaultLocation = frmSettings.comboLocation->currentText();
+        m_defaultCategories = frmSettings.comboCategory->currentCategories();
 
-        saveSettings();
-*/
-        for ( QListIterator<View> it(m_views); it.current(); ++it ) {
-            
-        }    
+        saveConfig();
     }
 }
 

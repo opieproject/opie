@@ -58,6 +58,7 @@ namespace Datebook {
     
     protected:
         void initBars();
+        void saveConfig();
 
     protected slots:
         void populate();
@@ -119,6 +120,11 @@ namespace Datebook {
         bool m_ampm;
         bool m_onMonday;
         int m_defaultViewIdx;
+        int m_startTime;
+        bool m_alarmPreset;
+        int m_alarmPresetTime;
+        QArray<int> m_defaultCategories;
+        QString m_defaultLocation;
     };
 }
 }
