@@ -70,8 +70,10 @@ namespace Datebook {
         void edit( int uid );
         void edit();
         void showDayView();
+        void showDefaultView();
         void add( const OPimRecord& );
         void doAlarm( const QDateTime &when, int uid );
+        void nextView();
 
     private:
         QToolBar* toolbar();
@@ -123,6 +125,7 @@ namespace Datebook {
         LocationManager m_locMan;
         Show* m_show;
         Editor* m_edit;
+        QDate m_initialDate;
         bool m_ampm;
         bool m_onMonday;
         int m_defaultViewIdx;

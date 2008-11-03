@@ -39,6 +39,7 @@ MainWindow::MainWindow()
     : OPimMainWindow( "Datebook", 0, 0, 0, 0, 0, WType_TopLevel | WStyle_ContextHelp ), m_descMan( "Descriptions" ),  m_locMan( "Locations" ) /* no tr */
 {
     m_currView = NULL;
+    m_initialDate = QDate::currentDate();
     
     initConfig();
     initBars();
@@ -57,6 +58,9 @@ MainWindow::MainWindow()
     connect( chan, SIGNAL( received(const QCString&,const QByteArray&) ),
              this, SLOT( slotSystemReceive(const QCString&,const QByteArray&) ) );
 
+    chan = new QCopChannel( "QPE/Datebook", this );
+    connect( chan, SIGNAL( received(const QCString&,const QByteArray&) ),
+             this, SLOT( slotAppMessage(const QCString&,const QByteArray&) ) );
     connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
              this, SLOT( slotAppMessage(const QCString&,const QByteArray&) ) );
 }
@@ -131,6 +135,23 @@ void MainWindow::showDayView() {
             slotChangeView();
             break;
         }
+    }
+}
+
+void MainWindow::showDefaultView() {
+    int idx = 1;
+    QObjectListIt itact( *(m_viewsGroup->children()) );
+    QAction *a;
+    while ( (a=(QAction *)itact.current()) ) {
+        ++itact;
+        if(idx == m_defaultViewIdx) {
+            if( !a->isOn() ) {
+                a->setOn(TRUE);
+                slotChangeView();
+            }
+            break;
+        }
+        idx++;
     }
 }
 
@@ -379,7 +400,12 @@ void MainWindow::slotSystemReceive( const QCString& msg, const QByteArray& data 
 void MainWindow::slotAppMessage( const QCString& msg, const QByteArray& data ) {
     bool needShow = false;
     QDataStream stream( data, IO_ReadOnly );
-    if (msg == "editEvent(int,QDate)") {
+    if ( msg == "nextView()" ) {
+        needShow = true;
+        if ( qApp->activeWindow() )
+            nextView();
+    }
+    else if (msg == "editEvent(int,QDate)") {
         int uid;
         QDate date;
         stream >> uid >> date;
@@ -397,7 +423,13 @@ void MainWindow::slotAppMessage( const QCString& msg, const QByteArray& data ) {
     else if (msg == "viewDefault(QDate)") {
         QDate day;
         stream >> day;
-        // FIXME implement
+        if(currentView()) {
+            // Already running
+            showDefaultView();
+            currentView()->showDay(day);
+        }
+        else
+            m_initialDate = day;  // still starting
         needShow = true;
     }
 
@@ -538,7 +570,7 @@ void MainWindow::slotChangeView() {
     if(m_currView)
         lastDate = m_currView->date();
     else
-        lastDate = QDate::currentDate();
+        lastDate = m_initialDate;
 
     View *selected = NULL;
     QObjectListIt itact( *(m_viewsGroup->children()) );
@@ -566,6 +598,27 @@ void MainWindow::slotChangeView() {
     }
 
     raiseCurrentView();
+}
+
+void MainWindow::nextView() {
+    QObjectListIt itact( *(m_viewsGroup->children()) );
+    QAction *a;
+    bool next = false;
+    while ( (a=(QAction *)itact.current()) ) {
+        ++itact;
+        if ( a->isOn() )
+            next = true;
+        else if(next) {
+            a->setOn(true);
+            next = false;
+        }
+    }
+
+    if(next) {
+        // Loop back around
+        ((QAction *)(m_viewsGroup->children()->getFirst()))->setOn(true);
+    }
+    slotChangeView();
 }
 
 void MainWindow::slotConfigureTemp() {
