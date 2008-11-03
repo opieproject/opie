@@ -39,6 +39,9 @@ namespace Datebook {
         virtual QWidget* widget();
         virtual void reschedule();
 
+        virtual QWidget *createConfigWidget( QWidget *owner );
+        virtual void readConfigWidget( QWidget *widget );
+
         void setDate( const QDate &d );
 
     protected:

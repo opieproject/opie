@@ -19,18 +19,18 @@ public:
     DateBookWeekLstDblView( Opie::Datebook::WeekLstView *view,
                 Opie::OPimOccurrence::List &ev1,
                 Opie::OPimOccurrence::List &ev2,
-                QDate &d, bool onM, bool showAmPm,
+                QDate &d, bool onM, int timeDisplay, bool showAmPm,
                 QWidget* parent = 0, const char* name = 0,
                 WFlags fl = 0 );
     DateBookWeekLstDblView( Opie::Datebook::WeekLstView *view,
                 Opie::OPimOccurrence::List &ev1,
-                QDate &d, bool onM, bool showAmPm,
+                QDate &d, bool onM, int timeDisplay, bool showAmPm,
                 QWidget* parent = 0, const char* name = 0,
                 WFlags fl = 0 );
     virtual ~DateBookWeekLstDblView();
-    void setEvents(Opie::OPimOccurrence::List &ev1,Opie::OPimOccurrence::List &ev2,QDate &d, bool onM);
-    void setEvents(Opie::OPimOccurrence::List &ev1,QDate &d, bool onM);
-    void setRightEvents(Opie::OPimOccurrence::List &ev1,QDate &d, bool onM);
+    void setEvents(Opie::OPimOccurrence::List &ev1,Opie::OPimOccurrence::List &ev2,QDate &d, bool onM, int timeDisplay);
+    void setEvents(Opie::OPimOccurrence::List &ev1,QDate &d, bool onM, int timeDisplay);
+    void setRightEvents(Opie::OPimOccurrence::List &ev1,QDate &d, bool onM, int timeDisplay);
 
     bool toggleDoubleView(bool how);
 

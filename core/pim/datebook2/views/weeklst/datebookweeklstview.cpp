@@ -18,7 +18,7 @@ using namespace Opie::Datebook;
 
 DateBookWeekLstView::DateBookWeekLstView(OPimOccurrence::List &ev,
                      WeekLstView *view,
-                     const QDate &d, bool onM, bool showAmPm,
+                     const QDate &d, bool onM, int timeDisplay, bool showAmPm,
                      QWidget* parent,
                      const char* name, WFlags fl)
     : QWidget( parent, name, fl ), ampm(showAmPm)
@@ -26,10 +26,10 @@ DateBookWeekLstView::DateBookWeekLstView(OPimOccurrence::List &ev,
     childs.clear();
     weekLstView = view;
     m_MainLayout = new QVBoxLayout( this );
-    setEvents(ev,d,onM);
+    setEvents(ev,d,onM,timeDisplay);
 }
 
-void DateBookWeekLstView::setEvents(OPimOccurrence::List &ev, const QDate &d, bool onM)
+void DateBookWeekLstView::setEvents(OPimOccurrence::List &ev, const QDate &d, bool onM, int timeDisplay)
 {
     QValueList<QObject*>::Iterator wIter;
     for (wIter=childs.begin();wIter!=childs.end();++wIter) {
@@ -40,10 +40,6 @@ void DateBookWeekLstView::setEvents(OPimOccurrence::List &ev, const QDate &d, bo
 
     setUpdatesEnabled(false);
 //    m_MainLayout->deleteAllItems();
-    Config config("DateBook");
-    config.setGroup("Main");
-    int weeklistviewconfig=config.readNumEntry("weeklistviewconfig", NORMAL);
-    odebug << "weeklistviewconfig: " << weeklistviewconfig << oendl;
 
     bStartOnMonday=onM;
     setPalette(white);
@@ -86,7 +82,7 @@ void DateBookWeekLstView::setEvents(OPimOccurrence::List &ev, const QDate &d, bo
         // Events
         while ( (*it).date().dayOfWeek() == dayOrder[i] && it!=ev.end() ) {
 //X            if(!(((*it).endTime().hour()==0) && ((*it).endTime().minute()==0) && ((*it).startDate()!=(*it).date()))) {  // Skip events ending at 00:00 starting at another day.
-                DateBookWeekLstEvent *l=new DateBookWeekLstEvent( ampm, *it, weekLstView, weeklistviewconfig, w );
+                DateBookWeekLstEvent *l=new DateBookWeekLstEvent( ampm, *it, weekLstView, timeDisplay, w );
                 tlayout->addWidget(l);
                 connect (l, SIGNAL(redraw()), this, SIGNAL(redraw()));
 //X            }

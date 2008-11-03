@@ -40,6 +40,9 @@ namespace Datebook {
         virtual QWidget* widget();
         virtual void reschedule();
 
+        virtual QWidget *createConfigWidget( QWidget *owner );
+        virtual void readConfigWidget( QWidget *widget );
+
         DateBookWeekView *weekViewWidget();
         QDate weekDate() const;
         void setDate( int y, int m, int d );

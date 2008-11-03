@@ -1,4 +1,9 @@
 #include <qtimer.h>
+#include <qlayout.h>
+#include <qgroupbox.h>
+#include <qlabel.h>
+#include <qcombobox.h>
+#include <qcheckbox.h>
 
 #include <qpe/qpeapplication.h>
 #include <opie2/oresource.h>
@@ -20,6 +25,7 @@ DayView::DayView( MainWindow* window, QWidget* parent )
     rowStyle = -1; // initialize with bogus values
     jumpToCurTime = false;
     selectedWidget = 0;
+    m_disabled = true; // prevents relayoutPage from being called too early
 
     initUI(parent);
 }
@@ -33,7 +39,7 @@ QCString DayView::type() const  {
 }
 
 QString DayView::name() const  {
-    return QString(QObject::tr("Day view"));
+    return QString(QObject::tr("Day"));
 }
 
 QString DayView::description() const {
@@ -70,16 +76,65 @@ QWidget* DayView::widget() {
 }
 
 void DayView::reschedule() {
+    m_disabled = false;
     relayoutPage();
 }
 
 void DayView::doLoadConfig( Config *config ) {
     startTime = config->readNumEntry("startviewtime", 8);
     jumpToCurTime = config->readBoolEntry("jumptocurtime");
-    rowStyle = config->readNumEntry("rowstyle");
+    setRowStyle( config->readNumEntry("rowstyle") );
 }
 
-void DayView::doSaveConfig( Config* ) {
+void DayView::doSaveConfig( Config *config ) {
+    config->writeEntry( "jumptocurtime", jumpToCurTime );
+    config->writeEntry( "rowstyle", rowStyle );
+}
+
+QWidget *DayView::createConfigWidget( QWidget *owner ) {
+    QGroupBox *GroupBox4 = new QGroupBox( owner, "GroupBox4" );
+    GroupBox4->setTitle( tr( "Day" ) );
+    GroupBox4->setColumnLayout(0, Qt::Vertical );
+    GroupBox4->layout()->setSpacing( 0 );
+    GroupBox4->layout()->setMargin( 0 );
+    QVBoxLayout *GroupBox4Layout = new QVBoxLayout( GroupBox4->layout() );
+    GroupBox4Layout->setAlignment( Qt::AlignTop );
+    GroupBox4Layout->setSpacing( 6 );
+    GroupBox4Layout->setMargin( 11 );
+
+    QCheckBox *chkJumpToCurTime = new QCheckBox( GroupBox4, "chkJumpToCurTime" );
+    chkJumpToCurTime->setText( tr( "Jump to current time" ) );
+    GroupBox4Layout->addWidget( chkJumpToCurTime );
+
+    QHBoxLayout *Layout5_2 = new QHBoxLayout; 
+    Layout5_2->setSpacing( 6 );
+    Layout5_2->setMargin( 0 );
+
+    QLabel *TextLabel1 = new QLabel( GroupBox4, "TextLabel1" );
+    TextLabel1->setText( tr( "Row style:" ) );
+    Layout5_2->addWidget( TextLabel1 );
+
+    QComboBox *comboRowStyle = new QComboBox( FALSE, GroupBox4, "comboRowStyle" );
+    comboRowStyle->insertItem( tr( "Default" ) );
+    comboRowStyle->insertItem( tr( "Medium" ) );
+    comboRowStyle->insertItem( tr( "Large" ) );
+    Layout5_2->addWidget( comboRowStyle );
+    GroupBox4Layout->addLayout( Layout5_2 );
+
+    chkJumpToCurTime->setChecked( jumpToCurTime );
+    comboRowStyle->setCurrentItem( rowStyle );
+
+    return GroupBox4;
+}
+
+void DayView::readConfigWidget( QWidget *widget ) {
+    QCheckBox *chkJumpToCurTime = (QCheckBox *)widget->child( "chkJumpToCurTime" );
+    if( chkJumpToCurTime )
+        setJumpToCurTime( chkJumpToCurTime->isChecked() );
+    
+    QComboBox *comboRowStyle = (QComboBox *)widget->child( "comboRowStyle" );
+    if( comboRowStyle )
+        setRowStyle( comboRowStyle->currentItem() );
 }
 
 void DayView::initUI(QWidget *parent) {
@@ -138,7 +193,7 @@ void DayView::dateChanged( int y, int m, int d )
     if ( currDate == date )
         return;
     currDate.setYMD( y, m, d );
-    relayoutPage();
+    reschedule();
     dayViewWidget()->clearSelection();
     QTableSelection ts;
 
@@ -202,6 +257,9 @@ static int place( const DateBookDayWidget *item, bool *used, int maxn )
 
 void DayView::relayoutPage( bool fromResize )
 {
+    if(m_disabled)
+        return;
+
     m_box->setUpdatesEnabled( FALSE );
     if ( !fromResize ) {
         getEvents();    // no need we already have them!
@@ -360,17 +418,6 @@ void DayView::getEvents()
     // clear the AllDay List
     m_allDays->hide(); // just in case
     m_allDays->removeAllEvents();
-
-/*X
-    QStringList hdays = _holiday_db->holidaylist(currDate);
-    QStringList::Iterator sit;
-
-    // this way we make sure that holiday dummy events are always
-    //   on top of the widgetlist.
-    for (sit=hdays.begin();sit!=hdays.end();++sit) {
-        m_allDays->addHoliday(*sit);
-    }
-*/
 
     OPimOccurrence::List eventList = events(currDate, currDate);
     OPimOccurrence::List::ConstIterator it;

@@ -42,6 +42,9 @@ namespace Datebook {
         virtual QWidget* widget();
         virtual void reschedule();
 
+        virtual QWidget *createConfigWidget( QWidget *owner );
+        virtual void readConfigWidget( QWidget *widget );
+
         void popup( const OPimOccurrence &occ, const QPoint &pt );
         QDate weekDate() const;
         void setDate( int y, int m, int d );
@@ -49,7 +52,7 @@ namespace Datebook {
 
     protected:
         QWidget *m_widget;
-        bool dbl;
+        bool m_dbl;
         QDate bdate;
         int year, _week, dow;
         DateBookWeekLstHeader *m_header;
@@ -58,6 +61,7 @@ namespace Datebook {
         DateBookWeekLstDblView *m_CurrentView;
         bool dateset:1;
         OPimOccurrence popupItem;
+        int m_timeDisplay;
 
         virtual void doLoadConfig( Config* );
         virtual void doSaveConfig( Config* );

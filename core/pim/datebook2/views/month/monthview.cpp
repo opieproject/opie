@@ -28,7 +28,7 @@ QCString MonthView::type() const  {
 }
 
 QString MonthView::name() const  {
-    return QString(QObject::tr("Month view"));
+    return QString(QObject::tr("Month"));
 }
 
 QString MonthView::description() const {
@@ -68,6 +68,13 @@ void MonthView::doLoadConfig( Config* ) {
 }
 
 void MonthView::doSaveConfig( Config* ) {
+}
+
+QWidget *MonthView::createConfigWidget( QWidget * ) {
+    return NULL;
+}
+
+void MonthView::readConfigWidget( QWidget *widget ) {
 }
 
 void MonthView::initUI(QWidget *parent) {

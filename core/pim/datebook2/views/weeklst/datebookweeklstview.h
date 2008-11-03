@@ -19,12 +19,12 @@ class DateBookWeekLstView: public QWidget
 public:
     DateBookWeekLstView(Opie::OPimOccurrence::List &ev, 
                         Opie::Datebook::WeekLstView *view, const QDate &d,
-                        bool onM, bool showAmPm, QWidget* parent = 0,
+                        bool onM, int timeDisplay, bool showAmPm, QWidget* parent = 0,
                         const char* name = 0,
             WFlags fl = 0 );
     ~DateBookWeekLstView();
 
-    void setEvents(Opie::OPimOccurrence::List &ev, const QDate &d, bool onM);
+    void setEvents(Opie::OPimOccurrence::List &ev, const QDate &d, bool onM, int timeDisplay);
 
 signals:
     void redraw();

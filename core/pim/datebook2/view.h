@@ -55,6 +55,8 @@ namespace Datebook {
          */
         void loadConfig( Config* );
         void saveConfig( Config* );
+        virtual QWidget *createConfigWidget( QWidget *owner ) = 0;
+        virtual void readConfigWidget( QWidget *widget ) = 0;
 
         /**
          * the current range

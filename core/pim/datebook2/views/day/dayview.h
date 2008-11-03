@@ -43,6 +43,9 @@ namespace Datebook {
         virtual QWidget* widget();
         virtual void reschedule();
 
+        virtual QWidget *createConfigWidget( QWidget *owner );
+        virtual void readConfigWidget( QWidget *widget );
+
         void popup( const QPoint &pt );
 
         void setSelectedWidget( DateBookDayWidget * );
@@ -66,6 +69,7 @@ namespace Datebook {
         int startTime;
         bool jumpToCurTime; //should we jump to current time in dayview?
         int rowStyle;
+        bool m_disabled;
         DateBookDayWidget *selectedWidget; //actual selected widget (obviously)
         DateBookDayTimeMarker *timeMarker;  //marker for current time
 

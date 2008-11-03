@@ -29,7 +29,7 @@ QCString WeekView::type() const  {
 }
 
 QString WeekView::name() const  {
-    return QString(QObject::tr("Week view"));
+    return QString(QObject::tr("Week"));
 }
 
 QString WeekView::description() const {
@@ -74,6 +74,13 @@ void WeekView::doLoadConfig( Config *config ) {
 }
 
 void WeekView::doSaveConfig( Config* ) {
+}
+
+QWidget *WeekView::createConfigWidget( QWidget *owner ) {
+    return NULL;
+}
+
+void WeekView::readConfigWidget( QWidget *widget ) {
 }
 
 void WeekView::initUI(QWidget *parent) {

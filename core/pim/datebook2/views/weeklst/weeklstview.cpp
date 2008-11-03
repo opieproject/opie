@@ -1,3 +1,9 @@
+#include <qlayout.h>
+#include <qgroupbox.h>
+#include <qlabel.h>
+#include <qcombobox.h>
+#include <qtoolbutton.h>
+
 #include <qpe/qpeapplication.h>
 #include <opie2/oresource.h>
 
@@ -16,6 +22,8 @@ using namespace Opie::Datebook;
 WeekLstView::WeekLstView( MainWindow* window, QWidget* parent )
     : View(window, parent)
 {
+    m_timeDisplay = 0;
+    m_dbl = false;
     initUI(parent);
 }
 
@@ -28,7 +36,7 @@ QCString WeekLstView::type() const  {
 }
 
 QString WeekLstView::name() const  {
-    return QString(QObject::tr("Week List view"));
+    return QString(QObject::tr("Week List"));
 }
 
 QString WeekLstView::description() const {
@@ -66,10 +74,53 @@ void WeekLstView::reschedule() {
     getEvents();
 }
 
-void WeekLstView::doLoadConfig( Config* ) {
+void WeekLstView::doLoadConfig( Config *config ) {
+    m_timeDisplay = config->readNumEntry("weeklistviewconfig", 0);
+    m_dbl = config->readBoolEntry("weeklst_dbl", false);
+    m_header->dbl->setOn(m_dbl);
 }
 
-void WeekLstView::doSaveConfig( Config* ) {
+void WeekLstView::doSaveConfig( Config *config ) {
+    config->writeEntry("weeklistviewconfig", m_timeDisplay);
+    config->writeEntry("weeklst_dbl", m_dbl);
+}
+
+QWidget *WeekLstView::createConfigWidget( QWidget *owner ) {
+    QGroupBox *GroupBox5 = new QGroupBox( owner, "GroupBox5" );
+    GroupBox5->setTitle( tr( "Week List" ) );
+    GroupBox5->setColumnLayout(0, Qt::Vertical );
+    GroupBox5->layout()->setSpacing( 0 );
+    GroupBox5->layout()->setMargin( 0 );
+    QVBoxLayout *GroupBox5Layout = new QVBoxLayout( GroupBox5->layout() );
+    GroupBox5Layout->setAlignment( Qt::AlignTop );
+    GroupBox5Layout->setSpacing( 6 );
+    GroupBox5Layout->setMargin( 11 );
+
+    QHBoxLayout *Layout6 = new QHBoxLayout; 
+    Layout6->setSpacing( 6 );
+    Layout6->setMargin( 0 );
+
+    QLabel *TextLabel2 = new QLabel( GroupBox5, "TextLabel2" );
+    TextLabel2->setText( tr( "Time display" ) );
+    Layout6->addWidget( TextLabel2 );
+
+    QComboBox *comboWeekListView = new QComboBox( FALSE, GroupBox5, "comboWeekListView" );
+    comboWeekListView->insertItem( tr( "None" ) );
+    comboWeekListView->insertItem( tr( "Start" ) );
+    comboWeekListView->insertItem( tr( "Start-End" ) );
+    Layout6->addWidget( comboWeekListView );
+    GroupBox5Layout->addLayout( Layout6 );
+    
+    comboWeekListView->setCurrentItem( m_timeDisplay );
+
+    return GroupBox5;
+}
+
+void WeekLstView::readConfigWidget( QWidget *widget ) {
+    QComboBox *comboWeekListView = (QComboBox *)widget->child( "comboWeekListView" );
+    if( comboWeekListView )
+        m_timeDisplay = comboWeekListView->currentItem();
+    reschedule();
 }
 
 void WeekLstView::initUI(QWidget *parent) {
@@ -90,10 +141,6 @@ void WeekLstView::initUI(QWidget *parent) {
     m_layout->addWidget(m_scroll);
 
     m_CurrentView=NULL;
-//X    Config config("DateBook");
-//X    config.setGroup("Main");
-//X    dbl=config.readBoolEntry("weeklst_dbl", false);
-//X    header->dbl->setOn(dbl);
 
     bdate = QDate(1900,1,1); // so showDay() gets called by MainWindow
 }
@@ -110,22 +157,18 @@ void WeekLstView::getEvents()
     QDate startWeek2;
     OPimOccurrence::List eventList2;
 
-    if (dbl) {
+    if (m_dbl) {
         startWeek2 = startWeek.addDays(7);
         endWeek = startWeek2.addDays(6);
         eventList2 = events(startWeek2, endWeek);
     }
     if (!m_CurrentView) {
-        if (dbl) {
-            m_CurrentView = new DateBookWeekLstDblView(this, eventList, eventList2, startWeek, weekStartOnMonday(), isAP(), m_scroll);
+        if (m_dbl) {
+            m_CurrentView = new DateBookWeekLstDblView(this, eventList, eventList2, startWeek, weekStartOnMonday(), m_timeDisplay, isAP(), m_scroll);
         } else {
-            m_CurrentView = new DateBookWeekLstDblView(this, eventList, startWeek, weekStartOnMonday(), isAP(), m_scroll);
+            m_CurrentView = new DateBookWeekLstDblView(this, eventList, startWeek, weekStartOnMonday(), m_timeDisplay, isAP(), m_scroll);
         }
         m_CurrentView->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed));
-//X        connect (m_CurrentView, SIGNAL(editEvent(const EffectiveEvent&)), this, SIGNAL(editEvent(const EffectiveEvent&)));
-//X        connect (m_CurrentView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-//X        connect (m_CurrentView, SIGNAL(removeEvent(const EffectiveEvent &)), this, SIGNAL(removeEvent(const EffectiveEvent &)));
-//X        connect (m_CurrentView, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
         connect (m_CurrentView, SIGNAL(redraw()), this, SLOT(redraw()));
         connect (m_CurrentView, SIGNAL(showDate(int,int,int)), this, SLOT(showDate(int,int,int)));
         connect (m_CurrentView, SIGNAL(addEvent(const QDateTime&,const QDateTime&)),
@@ -133,23 +176,23 @@ void WeekLstView::getEvents()
         connect( qApp, SIGNAL(clockChanged(bool)), this, SLOT(slotClockChanged(bool)));
         m_scroll->addChild(m_CurrentView);
     } else {
-        if (dbl) {
-            m_CurrentView->setEvents(eventList, eventList2, startWeek, weekStartOnMonday());
+        if (m_dbl) {
+            m_CurrentView->setEvents(eventList, eventList2, startWeek, weekStartOnMonday(), m_timeDisplay);
         } 
         else {
-            m_CurrentView->setEvents(eventList, startWeek, weekStartOnMonday());
+            m_CurrentView->setEvents(eventList, startWeek, weekStartOnMonday(), m_timeDisplay);
         }
     }
     m_scroll->updateScrollBars();
 }
 
 void WeekLstView::setDbl(bool on) {
-    dbl = on;
+    m_dbl = on;
     bool displayed = false;
     if (m_CurrentView) {
         displayed = m_CurrentView->toggleDoubleView(on);
     }
-    if (!displayed||dbl) {
+    if (!displayed || m_dbl) {
         getEvents();
     }
 }
