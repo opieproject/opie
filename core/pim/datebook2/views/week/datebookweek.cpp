@@ -30,7 +30,6 @@
 
 #include "datebookweek.h"
 #include "datebookweekheaderimpl.h"
-#include "datebooktypes.h"
 
 #include <qpe/qpeapplication.h>
 #include <qpe/calendar.h>
@@ -43,7 +42,6 @@
 #include <qtimer.h>
 
 using namespace Opie;
-using namespace Opie::Datebook;
 
 //-----------------------------------------------------------------
 
