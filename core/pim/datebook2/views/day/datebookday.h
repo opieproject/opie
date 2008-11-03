@@ -40,7 +40,6 @@
 #include <qlist.h>
 #include <qlineedit.h>
 
-#include "datebooktypes.h"
 #include "dayview.h"
 
 class DateBookDayHeader;

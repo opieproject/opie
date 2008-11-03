@@ -21,7 +21,6 @@
 **
 **********************************************************************/
 #include "odatebookmonth.h"
-#include "datebooktypes.h"
 
 #include <qpe/config.h>
 
