@@ -96,6 +96,13 @@ void OPimNotifyManager::replace( const OPimNotify& noti )
 }
 
 
+void OPimNotifyManager::clear()
+{
+    m_al.clear();
+    m_al.clear();
+}
+
+
 OPimNotifyManager::Reminders OPimNotifyManager::reminders() const
 {
     return m_rem;

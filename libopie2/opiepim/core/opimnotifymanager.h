@@ -53,6 +53,7 @@ class OPimNotifyManager
     void remove( const OPimNotify& );
     /* replaces all with this one! */
     void replace( const OPimNotify& );
+    void clear();
 
     Reminders reminders() const;
 
