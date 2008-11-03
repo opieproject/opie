@@ -2,6 +2,7 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qlistview.h>
+#include <qheader.h>
 #include <qlineedit.h>
 
 #include <qpe/config.h>
@@ -13,21 +14,28 @@ using namespace Opie::Datebook;
 StringManager::StringManager( const QString& str )
     : m_base( str ) {
 }
+
 StringManager::~StringManager() {
 
 }
+
 void StringManager::add( const QString& str ) {
     ManagerTemplate<QString>::add(str, str);
 }
+
 bool StringManager::load() {
     Config qpe( "datebook-"+m_base );
-    qpe.setGroup(m_base );
-    QStringList list =  qpe.readListEntry( "Names",  0x1f );
-    for (QStringList::Iterator it = list.begin(); it != list.end(); ++it )
-        add( (*it) );
-
-    return true;
+    if( qpe.isValid() ) {
+        qpe.setGroup(m_base );
+        QStringList list =  qpe.readListEntry( "Names",  0x1f );
+        for (QStringList::Iterator it = list.begin(); it != list.end(); ++it )
+            add( (*it) );
+        return true;
+    }
+    else
+        return false;
 }
+
 bool StringManager::save() {
     Config qpe( "datebook-"+m_base );
     qpe.setGroup(m_base);
@@ -35,6 +43,7 @@ bool StringManager::save() {
 
     return false;
 }
+
 QString StringManager::baseName()const {
     return m_base;
 }
@@ -49,6 +58,7 @@ StringManagerDialog::StringManagerDialog(const StringManager& man)
 
     m_view = new QListView( this );
     m_view->addColumn( QString::null );
+    m_view->header()->hide();
     lay->addWidget( m_view );
 
     QHBox* box = new QHBox( this );
@@ -69,8 +79,10 @@ StringManagerDialog::StringManagerDialog(const StringManager& man)
 
     init( man );
 }
+
 StringManagerDialog::~StringManagerDialog() {
 }
+
 StringManager StringManagerDialog::manager()const {
     StringManager man(m_base );
     QListViewItemIterator it(m_view);
@@ -81,6 +93,7 @@ StringManager StringManagerDialog::manager()const {
 
     return man;
 }
+
 void StringManagerDialog::init( const StringManager& _man ) {
     QStringList::Iterator it;
     QStringList man = _man.names();
@@ -119,6 +132,7 @@ void StringManagerDialog::slotAdd() {
         (void)new QListViewItem( m_view, dlg.text() );
 
 }
+
 void StringManagerDialog::slotRename() {
     QListViewItem* item = m_view->currentItem();
     if (!item) return;
@@ -129,6 +143,7 @@ void StringManagerDialog::slotRename() {
     if ( dlg.exec() == QDialog::Accepted )
         item->setText( 0, dlg.text() );
 }
+
 void StringManagerDialog::slotRemove() {
     QListViewItem* item = m_view->currentItem();
     if (!item) return;
