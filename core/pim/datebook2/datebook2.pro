@@ -18,6 +18,7 @@ HEADERS	= mainwindow.h \
           repeatentry.h \
           exceptions.h \
           onoteedit.h \
+          holiday.h \
           odatebookaccessbackend_holiday.h \
           namespace_hack.h \
           views/day/dayview.h \
