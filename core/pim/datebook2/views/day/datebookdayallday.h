@@ -58,7 +58,6 @@ public:
             QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
     ~DatebookdayAllday();
     DatebookAlldayDisp* addEvent(const Opie::OPimOccurrence &e);
-    DatebookAlldayDisp* addHoliday(const QString &e);
     const unsigned int items()const{return item_count;}
     void popup( const Opie::OPimOccurrence &e, const QPoint &pos );
     const Opie::OPimOccurrence *selectedEvent();
@@ -82,8 +81,6 @@ class DatebookAlldayDisp : public QLabel
 
 public:
     DatebookAlldayDisp(DatebookdayAllday *allday, const Opie::OPimOccurrence& e,
-                       QWidget* parent=0,const char* name = 0, WFlags fl=0);
-    DatebookAlldayDisp(DatebookdayAllday *allday, const QString&aholiday,
                        QWidget* parent=0,const char* name = 0, WFlags fl=0);
     virtual ~DatebookAlldayDisp();
 

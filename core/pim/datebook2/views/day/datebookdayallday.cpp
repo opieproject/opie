@@ -37,6 +37,7 @@
 #include <qtimer.h>
 
 #include "datebookday.h"
+#include "view.h"
 
 using namespace Opie;
 using namespace Opie::Datebook;
@@ -99,20 +100,6 @@ DatebookAlldayDisp* DatebookdayAllday::addEvent(const OPimOccurrence&ev)
     return lb;
 }
 
-DatebookAlldayDisp* DatebookdayAllday::addHoliday(const QString&e)
-{
-    DatebookAlldayDisp * lb;
-    lb = new DatebookAlldayDisp(this, e, m_MainFrame, NULL);
-    lb->show();
-    datebookdayalldayLayout->addWidget(lb);
-    subWidgets.append(lb);
-
-//X    connect(lb,SIGNAL(displayMe(const OPimEvent&)),lblDesc,SLOT(disp_event(const OPimEvent&)));
-    ++item_count;
-
-    return lb;
-}
-
 void DatebookdayAllday::removeAllEvents()
 {
     subWidgets.clear();
@@ -138,43 +125,24 @@ DatebookAlldayDisp::DatebookAlldayDisp(DatebookdayAllday *allday, const OPimOccu
     : QLabel(parent,name,f),m_Ev(ev)
 {
     m_allday = allday;
+    m_holiday = m_Ev.toEvent().isValidUid();
 
-    QString strDesc = m_Ev.toEvent().description();
+    QString strDesc = View::occurrenceDesc( m_Ev );
     strDesc = strDesc.replace(QRegExp("<"),"&#60;");
-    setBackgroundColor(yellow);
     setText(strDesc);
-    setFrameStyle(QFrame::Raised|QFrame::Panel);
-
-    int s = QFontMetrics(font()).height()+4;
-    setMaximumHeight( s );
-    setMinimumSize( QSize( 0, s ) );
-    m_holiday = false;
-}
-
-DatebookAlldayDisp::DatebookAlldayDisp(DatebookdayAllday *allday, const QString&aholiday,QWidget* parent,const char* name, WFlags fl)
-    : QLabel(parent,name,fl),m_Ev()
-{
-    m_allday = allday;
-
-    QString strDesc = aholiday;
-    strDesc = strDesc.replace(QRegExp("<"),"&#60;");
-    OPimEvent ev;
-    ev.setDescription(strDesc);
-    ev.setAllDay(true);
-//X    m_Ev.setEvent(ev);
-    setText(strDesc);
-
-    setAlignment(AlignHCenter);
-    setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Minimum));
-
-    //setFrameStyle(QFrame::Raised|QFrame::Panel);
-    //setBackgroundColor(yellow);
 
     int s = QFontMetrics(font()).height()+4;
     setMaximumHeight( s );
     setMinimumSize( QSize( 0, s ) );
 
-    m_holiday = true;
+    if(m_holiday) {
+        setAlignment(AlignHCenter);
+        setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Minimum));
+    }
+    else {
+        setBackgroundColor(yellow);
+        setFrameStyle(QFrame::Raised|QFrame::Panel);
+    }
 }
 
 DatebookAlldayDisp::~DatebookAlldayDisp()
