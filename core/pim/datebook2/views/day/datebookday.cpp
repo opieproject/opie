@@ -29,11 +29,10 @@
 */
 
 #include "datebookday.h"
-#include "datebooktypes.h"
 #include "datebookdayheaderimpl.h"
 #include "datebookdayallday.h"
+#include "view.h"
 
-#include <opie2/oholidayplugin.h>
 #include <opie2/oresource.h>
 
 #include <qpe/applnk.h>
@@ -254,7 +253,7 @@ DateBookDayWidget::DateBookDayWidget( const OPimOccurrence &e, DayView *dv )
 {
     // why would someone use "<"?  Oh well, fix it up...
     // I wonder what other things may be messed up...
-    QString strDesc = ev.toEvent().description();
+    QString strDesc = View::occurrenceDesc( ev );
     int where = strDesc.find( "<" );
     while ( where != -1 ) {
         strDesc.remove( where, 1 );
