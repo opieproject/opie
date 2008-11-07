@@ -216,7 +216,7 @@ void WeekView::slotShowEvent( const OPimOccurrence &ev )
 
     // why would someone use "<"?  Oh well, fix it up...
     // I wonder what other things may be messed up...
-    QString strDesc = ev.toEvent().description();
+    QString strDesc = occurrenceDesc( ev );
     int where = strDesc.find( "<" );
     while ( where != -1 ) {
         strDesc.remove( where, 1 );

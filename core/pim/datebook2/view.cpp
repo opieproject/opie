@@ -132,6 +132,14 @@ bool View::calcWeek( const QDate &d, int &week, int &year,
     return true;
 }
 
+QString View::occurrenceDesc( const OPimOccurrence &occ ) {
+    QString summary = occ.summary();
+    if( summary.isNull() )
+        return occ.toEvent().description();
+    else
+        return summary;
+}
+
 void View::loadConfig( Config* conf ) {
     doLoadConfig( conf );
 }

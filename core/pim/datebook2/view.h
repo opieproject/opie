@@ -25,6 +25,7 @@ namespace Datebook {
 
         static QDate dateFromWeek( int week, int year, bool startOnMonda );
         static bool calcWeek( const QDate& d, int &week, int &year, bool startOnMonday = false );
+        static QString occurrenceDesc( const OPimOccurrence &occ );
 
         virtual QPixmap pixmap()const = 0;
 

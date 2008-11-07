@@ -1,5 +1,6 @@
 #include "datebookweeklstevent.h"
 #include "datebooktypes.h"
+#include "view.h"
 
 #include <opie2/odebug.h>
 
@@ -75,7 +76,7 @@ DateBookWeekLstEvent::DateBookWeekLstEvent(bool ap, const OPimOccurrence &ev,
     else {
         s="";
     }
-    setText(QString(s) + " " + ev.toEvent().description());
+    setText(QString(s) + " " + View::occurrenceDesc( ev ) );
 //  connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
     setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
 }
