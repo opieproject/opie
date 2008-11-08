@@ -1,6 +1,8 @@
 Makefile*
 opimrecurrencebase.cpp
 opimrecurrencebase.h
+opimalarmdlgbase.cpp
+opimalarmdlgbase.h
 obj
 moc*
 *moc
