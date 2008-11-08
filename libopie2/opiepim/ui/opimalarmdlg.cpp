@@ -18,12 +18,18 @@ OPimAlarmDlg::OPimAlarmDlg( int uid, const QDateTime &alarmTime, const QString &
     
     pixmap->setPixmap( Opie::Core::OResource::loadPixmap("clock/alarmbell") );
 
-    lblTitle->setText( title ); 
+    setCaption( title );
+    lblTitle->setText( tr("Alarm") ); 
     lblDesc->setText( desc );
     sbSnoozeTime->setValue( defaultSnooze );
     cbSnoozeUnits->setCurrentItem( defaultSnoozeUnits );
 
+    QFont f(font());
+    f.setPointSize((int)(f.pointSize() * 1.7));
+    setFont(f);
+
     connect( cmdSnooze, SIGNAL( clicked() ), this, SLOT( snoozeClicked() ) );
+    connect( cmdDismiss, SIGNAL( clicked() ), this, SLOT( accept() ) );
     if( viewEnabled ) 
         connect( cmdView, SIGNAL( clicked() ), this, SLOT( viewClicked() ) );
     else
