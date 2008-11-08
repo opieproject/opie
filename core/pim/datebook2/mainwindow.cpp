@@ -18,6 +18,7 @@
 #include <opie2/oresource.h>
 #include <opie2/opluginloader.h>
 #include <opie2/opimnotifymanager.h>
+#include <opie2/opimalarmdlg.h>
 
 #include "editor.h"
 #include "show.h"
@@ -822,22 +823,21 @@ void MainWindow::doAlarm( const QDateTime &when, int uid ) {
                 startAlarm();
                 bSound = TRUE;
             }
-            QDialog dlg( this, 0, TRUE );
-            dlg.setCaption( tr("Calendar") );
-            QVBoxLayout *vb = new QVBoxLayout( &dlg );
-            QScrollView *view = new QScrollView( &dlg, "scrollView");
-            view->setResizePolicy( QScrollView::AutoOneFit );
-            vb->addWidget( view );
-            QLabel *lblMsg = new QLabel( msg, &dlg );
-            view->addChild( lblMsg );
-            QPushButton *cmdOk = new QPushButton( tr("OK"), &dlg );
-            connect( cmdOk, SIGNAL(clicked()), &dlg, SLOT(accept()) );
-            vb->addWidget( cmdOk );
-
+            
+            OPimAlarmDlg dlg( event.uid(), recurDateTime, tr("Calendar Alarm"), msg, 5, 0, TRUE, this, TRUE );
+            connect( &dlg, SIGNAL(viewItem(int)), this, SLOT(edit(int)) );
             QPEApplication::execDialog( &dlg );
 
             if ( bSound )
                 killAlarm();
+
+            event.notifiers().remove(alarm);
+            if( dlg.snooze() ) {
+                event.notifiers().add( OPimAlarm( alarm.sound(), dlg.snoozeDateTime(), 0, event.uid() ) );
+            }
+            manager()->update( event );
         }
+        else 
+            owarn << "Started for alarm at " << when << " (uid=" << uid << ") that does not exist!" << oendl;
     }
 }
