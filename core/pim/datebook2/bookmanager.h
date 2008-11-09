@@ -33,7 +33,6 @@ namespace Datebook {
         ODateBookAccess::List allRecords()const;
 
         void add( const OPimEvent& );
-        void add( const OPimRecord& );
         void update( const OPimEvent& );
         void remove( int uid );
         void remove( const QArray<int>& );

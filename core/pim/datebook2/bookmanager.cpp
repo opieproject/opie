@@ -23,13 +23,6 @@ void BookManager::add( const OPimEvent& ev) {
     m_db->add( ev );
 }
 
-void BookManager::add( const OPimRecord& rec ) {
-    if (!m_db) load(); // we might where called by setDocument... before we even fully initialized
-
-    // FIXME alarms
-    m_db->add( rec );
-}
-
 void BookManager::update( const OPimEvent& up) {
     if ( !m_db ) return;
 
