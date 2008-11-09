@@ -804,12 +804,11 @@ void MainWindow::doAlarm( const QDateTime &when, int uid ) {
         OPimAlarm alarm = event.notifiers().alarmAtDateTime( when, found );
         if ( found ) {
             QDateTime recurDateTime( alarm.occurrenceDateTime() );
-            QDate recurDate( recurDateTime.date() );
             if( recurDateTime.isNull() ) {
-                recurDate = event.startDateTime().date();
-                if( event.hasRecurrence() )
-                    event.recurrence().nextOcurrence( when.date(), recurDate );
-                recurDateTime = QDateTime( recurDate, event.startDateTime().time() );
+                if( ! BookManager::nextOccurrence( event, when, recurDateTime ) ) {
+                    // This should never happen, but just in case it does...
+                    recurDateTime = event.startDateTime();
+                }
             }
             
             msg += "<CENTER><B>" + event.description() + "</B>"

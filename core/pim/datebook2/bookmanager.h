@@ -43,6 +43,8 @@ namespace Datebook {
 
         DateBookHoliday *holiday();
 
+        static bool nextOccurrence( const OPimEvent &ev, const QDateTime &start, QDateTime &dt ); 
+
     protected:
         void addAlarms( const OPimEvent &ev );
         void removeAlarms( const OPimEvent &ev );

@@ -2,6 +2,7 @@
 
 #include <qpe/alarmserver.h>
 #include <opie2/opimnotifymanager.h>
+#include <opie2/opimrecurrence.h>
 
 using namespace Opie;
 using namespace Opie::Datebook;
@@ -118,4 +119,23 @@ void BookManager::removeAlarms( const OPimEvent &ev ) {
     for ( it = als.begin(); it != als.end(); ++it ) {
         AlarmServer::deleteAlarm( (*it).dateTime(), "QPE/Application/datebook2", "alarm(QDateTime,int)", ev.uid() );
     }
+}
+
+// FIXME: this ought to be moved to somewhere in libopiepim2
+bool BookManager::nextOccurrence( const OPimEvent &ev, const QDateTime &start, QDateTime &dt ) {
+    QDateTime recurDateTime = ev.startDateTime();
+    if( ev.hasRecurrence() ) {
+        QDate recurDate = ev.startDateTime().date();
+        QDate startDate = QDate::currentDate();
+        do {
+            if( ! ev.recurrence().nextOcurrence( startDate, recurDate ) )
+                return false;
+            recurDateTime = QDateTime( recurDate, ev.startDateTime().time() );
+        } while(recurDateTime < start);
+    }
+    if( recurDateTime > start ) {
+        dt = recurDateTime;
+        return true;
+    }
+    return false;
 }
