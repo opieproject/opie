@@ -193,7 +193,7 @@ private slots:
         void show( int uid );
         void edit( int uid );
         void add( const Opie::OPimRecord& );
-        void doAlarm( const QDateTime& dt, int uid );
+        bool doAlarm( const QDateTime& dt, int uid );
     };
 }
 

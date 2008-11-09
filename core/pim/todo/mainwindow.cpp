@@ -821,11 +821,12 @@ void MainWindow::handleAlarms( const OPimTodo& oldTodo, const OPimTodo& newTodo)
     }
 }
 /* we might have not loaded the db */
-void MainWindow::doAlarm( const QDateTime& dt, int uid ) {
+bool MainWindow::doAlarm( const QDateTime& dt, int uid ) {
     m_todoMgr.load();
 
     OPimTodo todo = m_todoMgr.event( uid );
-    if (!todo.hasNotifiers() ) return;
+    if (!todo.hasNotifiers() ) 
+        return false;
 
     /*
      * let's find the right alarm and find out if silent
@@ -866,5 +867,7 @@ void MainWindow::doAlarm( const QDateTime& dt, int uid ) {
         QPEApplication::setKeepRunning();
 //        setActiveWindow();
     }
+
+    return true;
 }
 

@@ -97,7 +97,7 @@ protected slots:
     /** make a copy of it! */
     virtual void add( const OPimRecord& ) = 0;
 
-    virtual void doAlarm( const QDateTime&, int uid );
+    virtual bool doAlarm( const QDateTime&, int uid );
 
     QCopChannel* channel();
 

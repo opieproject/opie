@@ -148,8 +148,7 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         QDateTime current = QDateTime::currentDateTime();
         if ( current.time().hour() != dt.time().hour() && current.time().minute() != dt.time().minute() )
             return;
-        doAlarm( dt,  uid );
-        needShow = true;
+        needShow = doAlarm( dt, uid );
     }
 
     if (needShow )
@@ -189,8 +188,8 @@ int OPimMainWindow::service() {
     return m_rtti;
 }
 
-void OPimMainWindow::doAlarm( const QDateTime&, int  ) {
-
+bool OPimMainWindow::doAlarm( const QDateTime&, int ) {
+    // Implement in descendant classes
 }
 
 void OPimMainWindow::startAlarm(int count  ) {
