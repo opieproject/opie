@@ -784,13 +784,15 @@ int MainWindow::alarmPresetTime()const {
     return m_alarmPresetTime;
 }
 
-void MainWindow::doAlarm( const QDateTime &when, int uid ) {
+bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
+    bool needshow = false;
+    
     // check to make it's okay to continue,
     // this is the case that the time was set ahead, and
     // we are forced given a stale alarm...
     QDateTime current = QDateTime::currentDateTime();
     if ( current.time().hour() != when.time().hour() && current.time().minute() != when.time().minute() )
-        return;
+        return false;
 
     if(!manager()->isLoaded())
         manager()->load();
@@ -826,20 +828,27 @@ void MainWindow::doAlarm( const QDateTime &when, int uid ) {
                 bSound = TRUE;
             }
             
-            OPimAlarmDlg dlg( event.uid(), recurDateTime, tr("Calendar Alarm"), msg, 5, 0, TRUE, this, TRUE );
+            OPimAlarmDlg dlg( recurDateTime, tr("Calendar Alarm"), msg, 5, 0, TRUE, this, TRUE );
             connect( &dlg, SIGNAL(viewItem(int)), this, SLOT(edit(int)) );
             QPEApplication::execDialog( &dlg );
-
+            
             if ( bSound )
                 killAlarm();
 
             event.notifiers().remove(alarm);
-            if( dlg.snooze() ) {
+            if( dlg.response() == OPimAlarmDlg::Snooze ) {
                 event.notifiers().add( OPimAlarm( alarm.sound(), dlg.snoozeDateTime(), 0, event.uid(), recurDateTime ) );
             }
             manager()->update( event );
+            
+            if( dlg.response() == OPimAlarmDlg::View ) {
+                edit( event.uid() );
+                needshow = TRUE;
+            }
         }
         else 
             owarn << "Started for alarm at " << when << " (uid=" << uid << ") that does not exist!" << oendl;
     }
+    
+    return needshow;
 }

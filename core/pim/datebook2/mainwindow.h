@@ -72,7 +72,7 @@ namespace Datebook {
         void showDayView();
         void showDefaultView();
         void add( const OPimRecord& );
-        void doAlarm( const QDateTime &when, int uid );
+        bool doAlarm( const QDateTime &when, int uid );
         void nextView();
 
     private:
@@ -87,7 +87,6 @@ namespace Datebook {
         DescriptionManager descriptionManager();
         void setLocationManager( const LocationManager& );
         void setDescriptionManager( const DescriptionManager& );
-        void edit ( OPimEvent &event, bool duplicate = FALSE );
         Show* eventShow();
         Editor* editor();
 
