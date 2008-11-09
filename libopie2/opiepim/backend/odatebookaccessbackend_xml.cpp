@@ -632,7 +632,7 @@ void ODateBookAccessBackend_XML::setField( OPimEvent& e, int id, const QString& 
         QStringList list = QStringList::split(' ', value );
         for (QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
             QDate date( (*it).left(4).toInt(), (*it).mid(4, 2).toInt(), (*it).right(2).toInt() );
-            recur()->exceptions().append( date );
+            recur()->addException( date );
         }
     }
         break;
