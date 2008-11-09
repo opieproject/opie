@@ -108,7 +108,7 @@ class OPimAlarm : public OPimNotify
 {
   public:
     enum Sound{Loud = 1, Silent = 0, Custom = 2 };
-    OPimAlarm( int sound = Silent, const QDateTime& start = QDateTime(), int duration = 0, int parent = 0 );
+    OPimAlarm( int sound = Silent, const QDateTime& start = QDateTime(), int duration = 0, int parent = 0, QDateTime occur = QDateTime() );
     OPimAlarm( const OPimAlarm& );
     ~OPimAlarm();
 
@@ -122,6 +122,13 @@ class OPimAlarm : public OPimNotify
     void setSound( int );
     /* only when sound is custom... */
     void setFile( const QString& sound );
+
+    /**
+     * Occurrence datetime (the actual occurrence of the event 
+     * that the notification is about - important for snoozing)
+     */
+    QDateTime occurrenceDateTime();
+    void setOccurrenceDateTime( const QDateTime& );
 
   private:
     void deref();

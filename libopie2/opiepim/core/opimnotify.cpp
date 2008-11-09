@@ -185,14 +185,16 @@ struct OPimAlarm::Data : public QShared
     }
     int sound;
     QString file;
+    QDateTime occur;
 };
 
 
-OPimAlarm::OPimAlarm( int sound, const QDateTime& start, int duration, int parent )
+OPimAlarm::OPimAlarm( int sound, const QDateTime& start, int duration, int parent, QDateTime occur )
         : OPimNotify( start, duration, parent )
 {
     data = new Data;
     data->sound = sound;
+    data->occur = occur;
 }
 
 
@@ -231,6 +233,7 @@ bool OPimAlarm::operator==( const OPimAlarm& al )
     if ( data->sound != al.data->sound ) return false;
     else if ( data->sound == Custom && data->file != al.data->file )
         return false;
+    if ( data->occur != al.data->occur ) return false;
 
     return OPimNotify::operator==( al );
 }
@@ -254,6 +257,12 @@ QString OPimAlarm::file() const
 }
 
 
+QDateTime OPimAlarm::occurrenceDateTime()
+{
+    return data->occur;
+}
+
+
 void OPimAlarm::setSound( int snd )
 {
     copyIntern();
@@ -265,6 +274,12 @@ void OPimAlarm::setFile( const QString& sound )
 {
     copyIntern();
     data->file = sound;
+}
+
+
+void OPimAlarm::setOccurrenceDateTime( const QDateTime &dt )
+{
+    data->occur = dt;
 }
 
 
@@ -286,6 +301,7 @@ void OPimAlarm::copyIntern()
         Data *newDat = new Data;
         newDat->sound = data->sound;
         newDat->file = data->file;
+        newDat->occur = data->occur;
         data = newDat;
     }
 }
