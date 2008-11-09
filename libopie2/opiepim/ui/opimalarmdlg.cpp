@@ -9,12 +9,11 @@
 #include <qlabel.h>
 #include <qpixmap.h>
 
-OPimAlarmDlg::OPimAlarmDlg( int uid, const QDateTime &alarmTime, const QString &title, const QString &desc, int defaultSnooze, int defaultSnoozeUnits, bool viewEnabled, QWidget *parent, bool modal )
+OPimAlarmDlg::OPimAlarmDlg( const QDateTime &alarmTime, const QString &title, const QString &desc, int defaultSnooze, int defaultSnoozeUnits, bool viewEnabled, QWidget *parent, bool modal )
     : OPimAlarmDlgBase( parent, 0, modal )
 {
     m_alarmTime = alarmTime;
-    m_uid = uid;
-    m_snooze = FALSE;
+    m_response = None;
     
     pixmap->setPixmap( Opie::Core::OResource::loadPixmap("clock/alarmbell") );
 
@@ -64,19 +63,19 @@ QDateTime OPimAlarmDlg::snoozeDateTime()
     return snoozeDateTime( sbSnoozeTime->value(), cbSnoozeUnits->currentItem() );
 }
 
-bool OPimAlarmDlg::snooze()
+OPimAlarmDlg::AlarmResponse OPimAlarmDlg::response()
 {
-    return m_snooze;
+    return m_response;
 }
 
 void OPimAlarmDlg::viewClicked()
 {
+    m_response = View;
     accept();
-    emit viewItem( m_uid );
 }
 
 void OPimAlarmDlg::snoozeClicked()
 {
-    m_snooze = TRUE;
+    m_response = Snooze;
     accept();
 }
