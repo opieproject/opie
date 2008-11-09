@@ -128,11 +128,7 @@ OPimAlarm OPimNotifyManager::alarmAtDateTime( const QDateTime& when, bool& found
         else {
             // Take care of backends that round off to whole minutes
             if( itemDateTime.time().second() == 0 ) {
-                QDateTime adj = when;
-                QTime adjTime = when.time();
-                adjTime.setHMS( adjTime.hour(), adjTime.minute() + 1, 0 );
-                adj.setTime( adjTime );
-                if ( itemDateTime == adj )
+                if ( itemDateTime.secsTo( when ) < 60 )
                     return ( *it );
             }
         }
