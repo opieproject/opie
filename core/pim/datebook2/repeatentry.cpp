@@ -97,14 +97,14 @@ RepeatEntry::RepeatEntry( bool startOnMonday,
 }
 
 RepeatEntry::RepeatEntry( bool startOnMonday, const OPimRecurrence &rp,
-                          const QDate &startDate, const QString &exceptions,
+                          const QDate &startDate,
                           QWidget *parent, const char *name, bool modal,
                           WFlags fl )
     : RepeatEntryBase( parent, name, modal, fl ),
       start( startDate ),
       end( rp.endDate() ),
       startWeekOnMonday( startOnMonday ),
-      exceptions( exceptions )
+      exceptions( rp.exceptions() )
 {
     if (strDayTemplate.isEmpty() )
         fillStrings();
@@ -213,6 +213,7 @@ OPimRecurrence RepeatEntry::recurrence()
         rpTmp.setHasEndDate(true);
         rpTmp.setEndDate( end );
     }
+    rpTmp.setExceptions( exceptions );
     // timestamp it...
     rpTmp.setCreatedDateTime( QDateTime::currentDateTime() );
     return rpTmp;

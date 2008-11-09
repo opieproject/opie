@@ -34,18 +34,15 @@
 #include "qpushbutton.h"
 #include <qpe/qpemessagebox.h>
 
-Exceptions::Exceptions(const QString &exceptions, QWidget* parent, const char* name, bool modal,
+Exceptions::Exceptions(const Opie::OPimRecurrence::ExceptionList &exceptions, QWidget* parent, const char* name, bool modal,
                        WFlags fl) : ExceptionsBase(parent, name, modal, fl) 
 {
-    QStringList exceptList = QStringList::split( " ", exceptions );
     QString item;
-    QStringList::ConstIterator it;
+    Opie::OPimRecurrence::ExceptionList::ConstIterator it;
 
-    for ( it = exceptList.begin(); it != exceptList.end(); ++it ) {
-        item = (*it);
-        if(item.length() == 8) {
-            lbExceptions->insertItem(item);
-        }
+    for ( it = exceptions.begin(); it != exceptions.end(); ++it ) {
+        item = QCString().sprintf("%04d%02d%02d", (*it).year(), (*it).month(), (*it).day() );;
+        lbExceptions->insertItem(item);
     }
     
     connect( cmdRemove, SIGNAL(clicked()),
@@ -61,13 +58,13 @@ void Exceptions::slotRemoveItem()
         lbExceptions->removeItem( lbExceptions->currentItem() );
 }
 
-QString Exceptions::getExceptions()
+Opie::OPimRecurrence::ExceptionList Exceptions::getExceptions()
 {
-    QString exc = "";
+    Opie::OPimRecurrence::ExceptionList excList;
     for (unsigned int i=0; i<lbExceptions->count(); i++) {
-        if(i>0)
-            exc += " ";
-        exc += lbExceptions->text(i);
+        QString item = lbExceptions->text(i);
+        QDate date( item.left(4).toInt(), item.mid(4, 2).toInt(), item.right(2).toInt() );
+        excList += date;
     }
-    return exc;
+    return excList;
 }

@@ -31,6 +31,8 @@
 #ifndef EXCEPTIONS_H
 #define EXCEPTIONS_H
 
+#include <opie2/opimrecurrence.h>
+
 #include "exceptionsbase.h"
 
 class QString;
@@ -43,9 +45,9 @@ private slots:
     void slotRemoveItem();
 
 public:
-    Exceptions(const QString &exceptions, QWidget* parent = 0, const char* name = 0,
+    Exceptions(const Opie::OPimRecurrence::ExceptionList &exceptions, QWidget* parent = 0, const char* name = 0,
 	      bool modal=TRUE, WFlags fl=0);
-    QString getExceptions();
+    Opie::OPimRecurrence::ExceptionList getExceptions();
 };
 
 #endif

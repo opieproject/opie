@@ -137,7 +137,6 @@ void DateEntry::setEvent( const OPimEvent &event ) {
         cmdRepeat->setText( tr("Repeat...") );
     }
     setRepeatLabel();
-//X    exceptions = event.exceptionsStr();
 }
 
 void DateEntry::setDates( const QDateTime& s, const QDateTime& e )
@@ -390,14 +389,13 @@ void DateEntry::slotRepeat()
     // it is better in my opinion to just grab this from the mother,
     // since, this dialog doesn't need to keep track of it...
     if ( rp.type() != OPimRecurrence::NoRepeat )
-        e = new RepeatEntry( startWeekOnMonday, rp, startDate, exceptions, this);
+        e = new RepeatEntry( startWeekOnMonday, rp, startDate, this);
     else
         e = new RepeatEntry( startWeekOnMonday, startDate, this );
 
     if ( QPEApplication::execDialog( e ) ) {
         rp = e->recurrence();
         setRepeatLabel();
-        exceptions = e->getExceptions();
     }
     // deleting sounds like a nice idea...
     delete e;
@@ -480,9 +478,6 @@ OPimEvent DateEntry::event()
     ev.setNote( noteStr );
 
                 //cout << "Start: " << comboStart->currentText() << endl;
-
-//X    ev.setExceptionsStr(exceptions);
-
     return ev;
 }
 

@@ -467,7 +467,7 @@ void MainWindow::slotItemEdit() {
                 // Add an exception for the existing event
                 OPimEvent dupEvent( occurrence->toEvent() );
                 OPimRecurrence dupRec( dupEvent.recurrence() );
-                dupRec.exceptions().append( occurrence->date() );
+                dupRec.addException( occurrence->date() );
                 dupEvent.setRecurrence(dupRec);
                 // Link the two events
                 event.setParent(dupEvent.uid());
@@ -527,7 +527,7 @@ void MainWindow::slotItemDelete() {
     else if(result == 1) {
         // Add an exception to the existing event
         OPimRecurrence dupRec( ev.recurrence() );
-        dupRec.exceptions().append( occurrence->date() );
+        dupRec.addException( occurrence->date() );
         ev.setRecurrence(dupRec);
         // Write changes
         manager()->update( ev );
