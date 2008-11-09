@@ -803,18 +803,21 @@ void MainWindow::doAlarm( const QDateTime &when, int uid ) {
         
         OPimAlarm alarm = event.notifiers().alarmAtDateTime( when, found );
         if ( found ) {
-            // FIXME this is a bit of a hack
-            QDate recurDate( event.startDateTime().date() );
-            if( event.hasRecurrence() )
-                event.recurrence().nextOcurrence( when.date(), recurDate );
-            QDateTime recurDateTime( recurDate, event.startDateTime().time() );
+            QDateTime recurDateTime( alarm.occurrenceDateTime() );
+            QDate recurDate( recurDateTime.date() );
+            if( recurDateTime.isNull() ) {
+                recurDate = event.startDateTime().date();
+                if( event.hasRecurrence() )
+                    event.recurrence().nextOcurrence( when.date(), recurDate );
+                recurDateTime = QDateTime( recurDate, event.startDateTime().time() );
+            }
             
             msg += "<CENTER><B>" + event.description() + "</B>"
                 + "<BR>" + event.location() + "<BR>"
                 + TimeString::dateString( recurDateTime, m_ampm );
             
-            int warn = QDateTime::currentDateTime().secsTo(recurDateTime) / 60;
-            msg += (warn
+            int warn = (QDateTime::currentDateTime().secsTo(recurDateTime) + 5) / 60; // help with slight delays
+            msg += (warn > 0
                     ? tr(" (in %1 minutes)").arg(warn)
                     : QString(""))
                 + "<BR>"
@@ -833,7 +836,7 @@ void MainWindow::doAlarm( const QDateTime &when, int uid ) {
 
             event.notifiers().remove(alarm);
             if( dlg.snooze() ) {
-                event.notifiers().add( OPimAlarm( alarm.sound(), dlg.snoozeDateTime(), 0, event.uid() ) );
+                event.notifiers().add( OPimAlarm( alarm.sound(), dlg.snoozeDateTime(), 0, event.uid(), recurDateTime ) );
             }
             manager()->update( event );
         }
