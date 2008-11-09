@@ -95,6 +95,7 @@ namespace {
         return rec;
     }
     int alarmTime;
+    bool alarmSpecified;
     int snd;
     enum Attribute{
         FDescription = 0,
@@ -428,6 +429,7 @@ bool ODateBookAccessBackend_XML::loadFile() {
         i+= strLen;
 
         alarmTime = -1;
+        alarmSpecified = FALSE;
         snd = 0; // silent
 
         OPimEvent ev;
@@ -530,7 +532,7 @@ void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
         ev.setRecurrence( recu );
     }
 
-    if (alarmTime != -1 ) {
+    if ( alarmSpecified ) {
         QDateTime dt = ev.startDateTime().addSecs( -1*alarmTime*60 );
         OPimAlarm al( snd ,  dt  );
         ev.notifiers().add( al );
@@ -566,6 +568,7 @@ void ODateBookAccessBackend_XML::setField( OPimEvent& e, int id, const QString& 
         break;
     case FAlarm:
         alarmTime = value.toInt();
+        alarmSpecified = TRUE;
         break;
     case FSound:
         snd = value == "loud" ? OPimAlarm::Loud : OPimAlarm::Silent;
