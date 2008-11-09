@@ -474,8 +474,18 @@ QString OPimRecurrence::service()const {
 }
 
 
-OPimRecurrence::ExceptionList& OPimRecurrence::exceptions() {
+const OPimRecurrence::ExceptionList& OPimRecurrence::exceptions()const {
     return data->list;
+}
+
+
+void OPimRecurrence::addException( const QDate &dt )
+{
+    data->list.append( dt );
+}
+
+void OPimRecurrence::setExceptions( const OPimRecurrence::ExceptionList &e ) {
+    data->list = e;
 }
 
 

@@ -92,7 +92,7 @@ class OPimRecurrence {
     /*
      * reference to the exception list
      */
-    ExceptionList &exceptions();
+    const ExceptionList &exceptions() const;
 
     /**
      * the current repetition
@@ -108,6 +108,8 @@ class OPimRecurrence {
     void setCreatedDateTime( const QDateTime& );
     void setHasEndDate( bool b );
     void setRepitition(int );
+    void setExceptions( const ExceptionList & );
+    void addException( const QDate &dt );
 
     void setService( const QString& ser );
     
