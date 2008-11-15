@@ -173,7 +173,7 @@ int SyncAuthentication::isAuthorized(QHostAddress peeraddress)
     Config cfg("Security");
     cfg.setGroup("Sync");
     //    QString allowedstr = cfg.readEntry("auth_peer","192.168.1.0");
-    uint auth_peer = cfg.readNumEntry("auth_peer", 0xc0a80100);
+    uint auth_peer = cfg.readNumEntry("auth_peer", 0xc0a88100);//new default 192.168.129.0/24
 
     //    QHostAddress allowed;
     //    allowed.setAddress(allowedstr);
