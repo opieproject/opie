@@ -822,7 +822,7 @@ bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
                 bSound = TRUE;
             }
             
-            OPimAlarmDlg dlg( recurDateTime, tr("Calendar Alarm"), msg, 5, 0, m_ampm, TRUE, this, TRUE );
+            OPimAlarmDlg dlg( recurDateTime, tr("Calendar Alarm"), msg, 5, 0, m_ampm, TRUE, FALSE, this, TRUE );
             connect( &dlg, SIGNAL(viewItem(int)), this, SLOT(edit(int)) );
             QPEApplication::execDialog( &dlg );
             
@@ -831,12 +831,12 @@ bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
 
             event.notifiers().remove(alarm);
             if( dlg.response() == OPimAlarmDlg::Snooze ) {
-                event.notifiers().add( OPimAlarm( alarm.sound(), dlg.snoozeDateTime(), 0, event.uid(), recurDateTime ) );
+                event.notifiers().add( OPimAlarm( alarm.sound(), dlg.snoozeDateTime(), 0, uid, recurDateTime ) );
             }
             manager()->update( event );
             
             if( dlg.response() == OPimAlarmDlg::View ) {
-                edit( event.uid() );
+                edit( uid );
                 needshow = TRUE;
             }
         }
