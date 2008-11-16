@@ -10,22 +10,32 @@
 #include <qcombobox.h>
 #include <qlabel.h>
 #include <qpixmap.h>
+#include <qlayout.h>
+#include <qtextview.h>
 
 #include <stdlib.h>
 
-OPimAlarmDlg::OPimAlarmDlg( const QDateTime &eventTime, const QString &title, const QString &desc, int defaultSnooze, int defaultSnoozeUnits, bool ampm, bool viewEnabled, QWidget *parent, bool modal )
+OPimAlarmDlg::OPimAlarmDlg( const QDateTime &eventTime, const QString &title, const QString &desc, int defaultSnooze, int defaultSnoozeUnits, bool ampm, bool viewEnabled, bool largeDesc, QWidget *parent, bool modal )
     : OPimAlarmDlgBase( parent, 0, modal )
 {
     m_eventTime = eventTime;
     m_response = None;
     m_ampm = ampm;
     
-    pixmap->setPixmap( Opie::Core::OResource::loadPixmap("clock/alarmbell") );
-
+    if( largeDesc ) {
+        fraTop->hide();
+        lblDesc->hide();
+        tvDesc->setText( desc );
+        lblTime->hide();
+    }
+    else {
+        pixmap->setPixmap( Opie::Core::OResource::loadPixmap("clock/alarmbell") );
+        lblTitle->setText( tr("Alarm") ); 
+        tvDesc->hide();
+        lblDesc->setText( desc );
+        updateTime();
+    }
     setCaption( title );
-    lblTitle->setText( tr("Alarm") ); 
-    lblDesc->setText( desc );
-    updateTime();
     sbSnoozeTime->setValue( defaultSnooze );
     cbSnoozeUnits->setCurrentItem( defaultSnoozeUnits );
 
@@ -40,7 +50,8 @@ OPimAlarmDlg::OPimAlarmDlg( const QDateTime &eventTime, const QString &title, co
     else
         cmdView->hide();
 
-    startTimer( 60000 );
+    if( ! largeDesc )
+        startTimer( 60000 );
 }
 
 OPimAlarmDlg::~OPimAlarmDlg()

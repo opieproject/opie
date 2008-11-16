@@ -35,6 +35,7 @@
 #include <opie2/opimnotifymanager.h>
 #include <opie2/otodoaccessvcal.h>
 #include <opie2/oapplicationfactory.h>
+#include <opie2/opimalarmdlg.h>
 
 #include <qpe/applnk.h>
 #include <qpe/config.h>
@@ -822,6 +823,8 @@ void MainWindow::handleAlarms( const OPimTodo& oldTodo, const OPimTodo& newTodo)
 }
 /* we might have not loaded the db */
 bool MainWindow::doAlarm( const QDateTime& dt, int uid ) {
+    bool needshow = false;
+
     m_todoMgr.load();
 
     OPimTodo todo = m_todoMgr.event( uid );
@@ -830,44 +833,52 @@ bool MainWindow::doAlarm( const QDateTime& dt, int uid ) {
 
     /*
      * let's find the right alarm and find out if silent
-     * then show a richtext widget
+     * then show alarm dialog
      */
-    bool loud = false;
-    OPimNotifyManager::Alarms als = todo.notifiers().alarms();
-    OPimNotifyManager::Alarms::Iterator it;
-    for ( it = als.begin(); it != als.end(); ++it ) {
-        if ( (*it).dateTime() == dt ) {
-            loud = ( (*it).sound() == OPimAlarm::Loud );
-            break;
+    bool found = FALSE;
+    OPimAlarm alarm = todo.notifiers().alarmAtDateTime( dt, found );
+    if ( found ) {
+        bool bSound = FALSE;
+        if ( alarm.sound() != OPimAlarm::Silent ) {
+            startAlarm();
+            bSound = TRUE;
+        }        
+
+        QDateTime occdt = alarm.occurrenceDateTime();
+        if( occdt.isNull() )
+            occdt = dt;
+
+        QString msg = todo.toRichText();
+
+        Config qpeconfig( "qpe" );
+        qpeconfig.setGroup("Time");
+        bool ampm = qpeconfig.readBoolEntry( "AMPM", TRUE );
+
+        OPimAlarmDlg dlg( occdt, tr("Todo Alarm"), msg, 5, 0, ampm, TRUE, TRUE, this, TRUE );
+        connect( &dlg, SIGNAL(viewItem(int)), this, SLOT(edit(int)) );
+        QPEApplication::execDialog( &dlg );
+                
+        if (bSound)
+            killAlarm();
+
+        odebug << "TODO alarms before = " << todo.notifiers().alarmsToString() << oendl;
+        todo.notifiers().remove( alarm );
+        if( dlg.response() == OPimAlarmDlg::Snooze ) {
+            todo.notifiers().add( OPimAlarm( alarm.sound(), dlg.snoozeDateTime(), 0, uid, occdt ) );
+        }
+        m_todoMgr.update( uid, todo );
+        m_todoMgr.save();
+        odebug << "TODO alarms after = " << todo.notifiers().alarmsToString() << oendl;
+        handleAlarms( OPimTodo(), todo );
+        
+        if( dlg.response() == OPimAlarmDlg::View ) {
+            slotShow( uid );
+            needshow = TRUE;
         }
     }
-    if (loud)
-        startAlarm();
+    else 
+        owarn << "Started for alarm at " << dt << " (uid=" << uid << ") that does not exist!" << oendl;
 
-    QDialog dlg(this, 0, true );
-    QVBoxLayout* lay = new QVBoxLayout( &dlg );
-    QTextView* view = new QTextView( &dlg );
-    lay->addWidget( view );
-    QPushButton* btnOk = new QPushButton( tr("Ok"), &dlg );
-    connect( btnOk, SIGNAL(clicked() ), &dlg, SLOT(accept() ) );
-    lay->addWidget( btnOk );
-
-    QString text = tr("<h1>Alarm at %1</h1><br>").arg( TimeString::dateString( dt ) );
-    text += todo.toRichText();
-    view->setText( text );
-
-    bool needToStay = QPEApplication::execDialog( &dlg );
-
-    if (loud)
-        killAlarm();
-
-    if (needToStay) {
-//        showMaximized();
-//        raise();
-        QPEApplication::setKeepRunning();
-//        setActiveWindow();
-    }
-
-    return true;
+    return needshow;
 }
 

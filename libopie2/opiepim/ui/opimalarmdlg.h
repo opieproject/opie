@@ -17,7 +17,7 @@ class OPimAlarmDlg : public OPimAlarmDlgBase {
 public:
     enum AlarmResponse { None, Snooze, View };
 
-    OPimAlarmDlg( const QDateTime &eventTime, const QString &title, const QString &desc, int defaultSnooze, int defaultSnoozeUnits, bool ampm, bool viewEnabled = TRUE, QWidget * parent=0, bool modal=FALSE );
+    OPimAlarmDlg( const QDateTime &eventTime, const QString &title, const QString &desc, int defaultSnooze, int defaultSnoozeUnits, bool ampm, bool viewEnabled = TRUE, bool largeDesc = FALSE, QWidget * parent=0, bool modal=FALSE );
     ~OPimAlarmDlg();
     AlarmResponse response();
     QDateTime snoozeDateTime();
