@@ -201,6 +201,7 @@ void TaskEditorAlarms::inlineSetTime( AlarmItem* item ) {
     QDateTime dt = al.dateTime();
 
     OTimePickerDialog dialog;
+    dialog.setCaption( tr("Alarm time") );
     dialog.setTime( dt.time() );
     if ( dialog.exec() == QDialog::Accepted ) {
         dt.setTime( dialog.time() );
