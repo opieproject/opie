@@ -814,21 +814,15 @@ bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
             }
             
             msg += "<CENTER><B>" + event.description() + "</B>"
-                + "<BR>" + event.location() + "<BR>"
-                + TimeString::dateString( recurDateTime, m_ampm );
-            
-            int warn = (QDateTime::currentDateTime().secsTo(recurDateTime) + 5) / 60; // help with slight delays
-            msg += (warn > 0
-                    ? tr(" (in %1 minutes)").arg(warn)
-                    : QString(""))
-                + "<BR>"
+                + "<BR>" + event.location()
                 + event.note() + "</CENTER>";
+
             if ( alarm.sound() != OPimAlarm::Silent ) {
                 startAlarm();
                 bSound = TRUE;
             }
             
-            OPimAlarmDlg dlg( recurDateTime, tr("Calendar Alarm"), msg, 5, 0, TRUE, this, TRUE );
+            OPimAlarmDlg dlg( recurDateTime, tr("Calendar Alarm"), msg, 5, 0, m_ampm, TRUE, this, TRUE );
             connect( &dlg, SIGNAL(viewItem(int)), this, SLOT(edit(int)) );
             QPEApplication::execDialog( &dlg );
             
