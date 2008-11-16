@@ -861,14 +861,12 @@ bool MainWindow::doAlarm( const QDateTime& dt, int uid ) {
         if (bSound)
             killAlarm();
 
-        odebug << "TODO alarms before = " << todo.notifiers().alarmsToString() << oendl;
         todo.notifiers().remove( alarm );
         if( dlg.response() == OPimAlarmDlg::Snooze ) {
             todo.notifiers().add( OPimAlarm( alarm.sound(), dlg.snoozeDateTime(), 0, uid, occdt ) );
         }
         m_todoMgr.update( uid, todo );
         m_todoMgr.save();
-        odebug << "TODO alarms after = " << todo.notifiers().alarmsToString() << oendl;
         handleAlarms( OPimTodo(), todo );
         
         if( dlg.response() == OPimAlarmDlg::View ) {
