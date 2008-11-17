@@ -42,6 +42,7 @@
 #include <opie2/ocontactaccessbackend_xml.h>
 #include <opie2/ocontactaccessbackend_vcard.h>
 #include <opie2/odatebookaccessbackend_xml.h>
+#include <opie2/odatebookaccessbackend_vcal.h>
 #include <opie2/odebug.h>
 
 #ifdef __USE_SQL
@@ -161,8 +162,7 @@ database << oendl;
 					 return (T*) new ODateBookAccessBackend_XML( appName, filename );
 					 break;
 				 case OPimGlobal::VCARD:
-					 owarn << "OBackendFactory:: VCal Backend for DATEBOOK not implemented!" << oendl;
-					 return (T*) NULL;
+					 return (T*) new ODateBookAccessBackend_VCal( appName, filename );
 					 break;
 				 }
 			 default:
