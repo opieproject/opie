@@ -61,137 +61,137 @@ public:
    QSlider *OutputSlider,*InputSlider;
 
 signals:
-	 void stopRecording();
-	 void startRecording();
-	 void stopPlaying();
-	 void startPlaying();
+    void stopRecording();
+    void startRecording();
+    void stopPlaying();
+    void startPlaying();
 
 public slots:
 
 private:
 //    int fragment;
-   int fd1;
-   int secCount;
-   QString timeString; 
+    int fd1;
+    int secCount;
+    QString timeString; 
 
-   QLineEdit *renameBox;
-   QGroupBox* GroupBox1;
-   QString currentFile;
-   QString date, currentFileName, tmpFileName;
-   QTimer *t_timer;
-   bool needsStereoOut, paused;
-   bool useTmpFile, autoMute;
+    QLineEdit *renameBox;
+    QGroupBox* GroupBox1;
+    QString currentFile;
+    QString date, currentFileName, tmpFileName;
+    QTimer *t_timer;
+    bool needsStereoOut, paused;
+    bool useTmpFile, autoMute;
 
-   bool eventFilter( QObject * , QEvent * );
-   void okRename();
-   void cancelRename();
-   QString getStorage(const QString &);
-   bool rec();
-   int getCurrentSizeLimit();
-   long checkDiskSpace(const QString &);
-   void doMute(bool);
-   void errorStop();
-   void fillDirectoryCombo();
-   void getInVol();
-   void getOutVol();
-   void init();
-   void initConfig();
-   void initConnections();
-   void selectItemByName(const QString &);
-   void start();
-   void stop();
-   void timerEvent( QTimerEvent *e );
-   void setButtons();
-   void fileSize(unsigned long size, QString &str);
+    bool eventFilter( QObject * , QEvent * );
+    void okRename();
+    void cancelRename();
+    QString getStorage(const QString &);
+    bool rec();
+    int getCurrentSizeLimit();
+    long checkDiskSpace(const QString &);
+    void doMute(bool);
+    void errorStop();
+    void fillDirectoryCombo();
+    void getInVol();
+    void getOutVol();
+    void init();
+    void initConfig();
+    void initConnections();
+    void selectItemByName(const QString &);
+    void start();
+    void stop();
+    void timerEvent( QTimerEvent *e );
+    void setButtons();
+    void fileSize(unsigned long size, QString &str);
     
 private slots:
-   void endPlaying();
-   void endRecording();
+    void endPlaying();
+    void endRecording();
 
-   void FastforwardPressed();
-   void FastforwardReleased();
+    void FastforwardPressed();
+    void FastforwardReleased();
 
-   void changeDirCombo(int);
-   void changeSizeLimitCombo(int);
-   void changeTimeSlider(int);
-   void changebitrateCombo(int);
-   void changeStereoCheck( bool);
+    void changeDirCombo(int);
+    void changeSizeLimitCombo(int);
+    void changeTimeSlider(int);
+    void changebitrateCombo(int);
+    void changeStereoCheck( bool);
 
-   void changedInVolume();
-   void changedOutVolume();
-   void changesamplerateCombo(int);
+    void changedInVolume();
+    void changedOutVolume();
+    void changesamplerateCombo(int);
 
-   void cleanUp();
-   void compressionSelected(bool);
-   void deleteSound();
-   void doBeam();
-   void doMenuPlay();  
-   void doMicMuting(bool);
-   void doPlayBtn();
-   void doRename();
-   void doVolMuting(bool); 
-   void forwardTimerTimeout();
-   void itClick(QListViewItem *item);
-   void listPressed(int, QListViewItem *, const QPoint&, int);
-   void newSound();
-   void rewindPressed();
-   void rewindReleased();
-   void rewindTimerTimeout();
-   void slotAutoMute(bool);
-   void thisTab(QWidget*);
-   void timeSliderPressed();
-   void timeSliderReleased();
-   void timerBreak();
-   void initIconView();
+    void cleanUp();
+    void compressionSelected(bool);
+    void deleteSound();
+    void doBeam();
+    void doMenuPlay();  
+    void doMicMuting(bool);
+    void doPlayBtn();
+    void doRename();
+    void doVolMuting(bool); 
+    void forwardTimerTimeout();
+    void itClick(QListViewItem *item);
+    void listPressed(int, QListViewItem *, const QPoint&, int);
+    void newSound();
+    void rewindPressed();
+    void rewindReleased();
+    void rewindTimerTimeout();
+    void slotAutoMute(bool);
+    void thisTab(QWidget*);
+    void timeSliderPressed();
+    void timeSliderReleased();
+    void timerBreak();
+    void initIconView();
 /*     void changedOutVolume(int); */
 /*    void changedInVolume(int); */
 
 protected:
 
-   WavFile *wavFile;
-   QButtonGroup *ButtonGroup1;
-   QCheckBox *outMuteCheckBox, *inMuteCheckBox, *compressionCheckBox, *autoMuteCheckBox, *stereoCheckBox;
-   QComboBox* sampleRateComboBox, * bitRateComboBox, *directoryComboBox, *sizeLimitCombo;
-   QHBoxLayout* Layout12;
-   QHBoxLayout* Layout13;
-   QHBoxLayout* Layout14;
-   QHBoxLayout* Layout16;
-   QHBoxLayout* Layout17;
-   QHBoxLayout* Layout19;
-   QIconView *IconView1;
-   QLabel *NewSoundLabel,*playLabel2;
-   QLabel *TextLabel3, *TextLabel1, *TextLabel2;
-   QListView *ListView1;
-   QPushButton *Stop_PushButton, *Play_PushButton, *Rec_PushButton,  *NewSoundButton, *deleteSoundButton, *toBeginningButton, *toEndButton;
-   QString recDir;
-   QTabWidget *TabWidget;
-   QTimer *t, *rewindTimer, *forwardTimer;
-   QVBoxLayout* Layout15;
-   QVBoxLayout* Layout15b;
-   QVBoxLayout* Layout18;
-   QWidget *tab, *tab_2, *tab_3, *tab_4, *tab_5;
-   int sliderPos, total;
+    WavFile *wavFile;
+    QButtonGroup *ButtonGroup1;
+    QCheckBox *outMuteCheckBox, *inMuteCheckBox, *compressionCheckBox, *autoMuteCheckBox, *stereoCheckBox;
+    QComboBox* sampleRateComboBox, * bitRateComboBox, *directoryComboBox, *sizeLimitCombo;
+    QHBoxLayout* Layout12;
+    QHBoxLayout* Layout13;
+    QHBoxLayout* Layout14;
+    QHBoxLayout* Layout16;
+    QHBoxLayout* Layout17;
+    QHBoxLayout* Layout19;
+    QIconView *IconView1;
+    QLabel *NewSoundLabel,*playLabel2;
+    QLabel *TextLabel3, *TextLabel1, *TextLabel2;
+    QListView *ListView1;
+    QPushButton *Stop_PushButton, *Play_PushButton, *Rec_PushButton,  *NewSoundButton, *deleteSoundButton, *toBeginningButton, *toEndButton;
+    QString recDir;
+    QTabWidget *TabWidget;
+    QTimer *t, *rewindTimer, *forwardTimer;
+    QVBoxLayout* Layout15;
+    QVBoxLayout* Layout15b;
+    QVBoxLayout* Layout18;
+    QWidget *tab, *tab_2, *tab_3, *tab_4, *tab_5;
+    int sliderPos, total;
 //    short inbuffer[BUFSIZE], outbuffer[BUFSIZE];
 //    unsigned short unsigned_inbuffer[BUFSIZE], unsigned_outbuffer[BUFSIZE];
-   QGroupBox *sampleGroup, *bitGroup, *dirGroup, *sizeGroup;
+    QGroupBox *sampleGroup, *bitGroup, *dirGroup, *sizeGroup;
 /*     short inbuffer[65536], outbuffer[65536]; */
 /*     unsigned short unsigned_inbuffer[65536], unsigned_outbuffer[65536]; */
 
 
-   bool doPlay();
-   bool openPlayFile();
-   bool setUpFile();
-   bool setupAudio( bool b);
-   void fileBeamFinished( Ir *ir);
-   void keyPressEvent( QKeyEvent *e);
-   void keyReleaseEvent( QKeyEvent *e);
-   void receive( const QCString &, const QByteArray & );
-   void showListMenu(QListViewItem * );
+    bool doPlay();
+    bool openPlayFile();
+    bool setUpFile();
+    bool setupAudio( bool b);
+    void fileBeamFinished( Ir *ir);
+    void keyPressEvent( QKeyEvent *e);
+    void keyReleaseEvent( QKeyEvent *e);
+    void receive( const QCString &, const QByteArray & );
+    void showListMenu(QListViewItem * );
 #ifndef THREADED
-   void quickRec();
-	 void playIt();
+    void quickRec();
+    void playIt();
 #endif
-	 
+ 
 };
 
 #endif // QTREC_H

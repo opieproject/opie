@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: helpwindow.cpp,v 1.7 2005-05-24 21:48:49 drw Exp $
+** $Id: helpwindow.cpp,v 1.8 2008-11-25 21:36:04 paule Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -76,12 +76,12 @@ void HelpWindow::setForwardAvailable( bool b)
 void HelpWindow::textChanged()
 {
     if ( browser->documentTitle().isNull() ) {
-  setCaption( "QpeRec - Helpviewer - " + browser->context() );
-  selectedURL = browser->context();
+        setCaption( "QpeRec - Helpviewer - " + browser->context() );
+        selectedURL = browser->context();
     }
     else {
-  setCaption( "QpeRec - Helpviewer - " + browser->documentTitle() ) ;
-  selectedURL = browser->documentTitle();
+        setCaption( "QpeRec - Helpviewer - " + browser->documentTitle() ) ;
+        selectedURL = browser->documentTitle();
     }
 
 //     if ( !selectedURL.isEmpty() && pathCombo ) {
@@ -108,7 +108,7 @@ HelpWindow::~HelpWindow()
     history.clear();
     QMap<int, QString>::Iterator it = mHistory.begin();
     for ( ; it != mHistory.end(); ++it )
-  history.append( *it );
+        history.append( *it );
 
     QFile f( QDir::currentDirPath() + "/.history" );
     f.open( IO_WriteOnly );
@@ -119,7 +119,7 @@ HelpWindow::~HelpWindow()
     bookmarks.clear();
     QMap<int, QString>::Iterator it2 = mBookmarks.begin();
     for ( ; it2 != mBookmarks.end(); ++it2 )
-  bookmarks.append( *it2 );
+        bookmarks.append( *it2 );
 
     QFile f2( QDir::currentDirPath() + "/.bookmarks" );
     f2.open( IO_WriteOnly );
@@ -151,49 +151,49 @@ void HelpWindow::pathSelected( const QString &_path )
     QMap<int, QString>::Iterator it = mHistory.begin();
     bool exists = FALSE;
     for ( ; it != mHistory.end(); ++it ) {
-  if ( *it == _path ) {
-      exists = TRUE;
-      break;
-  }
+        if ( *it == _path ) {
+            exists = TRUE;
+            break;
+        }
     }
     if ( !exists )
-  mHistory[ hist->insertItem( _path ) ] = _path;
+        mHistory[ hist->insertItem( _path ) ] = _path;
 }
 
 void HelpWindow::readHistory()
 {
     if ( QFile::exists( QDir::currentDirPath() + "/.history" ) ) {
-  QFile f( QDir::currentDirPath() + "/.history" );
-  f.open( IO_ReadOnly );
-  QDataStream s( &f );
-  s >> history;
-  f.close();
-  while ( history.count() > 20 )
-      history.remove( history.begin() );
+        QFile f( QDir::currentDirPath() + "/.history" );
+        f.open( IO_ReadOnly );
+        QDataStream s( &f );
+        s >> history;
+        f.close();
+        while ( history.count() > 20 )
+            history.remove( history.begin() );
     }
 }
 
 void HelpWindow::readBookmarks()
 {
     if ( QFile::exists( QDir::currentDirPath() + "/.bookmarks" ) ) {
-  QFile f( QDir::currentDirPath() + "/.bookmarks" );
-  f.open( IO_ReadOnly );
-  QDataStream s( &f );
-  s >> bookmarks;
-  f.close();
+        QFile f( QDir::currentDirPath() + "/.bookmarks" );
+        f.open( IO_ReadOnly );
+        QDataStream s( &f );
+        s >> bookmarks;
+        f.close();
     }
 }
 
 void HelpWindow::histChosen( int i )
 {
     if ( mHistory.contains( i ) )
-  browser->setSource( mHistory[ i ] );
+        browser->setSource( mHistory[ i ] );
 }
 
 void HelpWindow::bookmChosen( int i )
 {
     if ( mBookmarks.contains( i ) )
-  browser->setSource( mBookmarks[ i ] );
+        browser->setSource( mBookmarks[ i ] );
 }
 
 void HelpWindow::addBookmark()

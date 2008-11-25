@@ -29,135 +29,127 @@ using namespace Opie::Core;
 Waveform::Waveform( QWidget *parent, const char *name, WFlags fl )
    : QWidget( parent, name, fl )
 {
-   pixmap = 0;
-   windowSize = 100;
-   samplesPerPixel = 8000 / (5 * windowSize);
-   currentValue = 0;
-   numSamples = 0;
-   windowPosn = 0;
-   window = 0;
+    pixmap = 0;
+    windowSize = 100;
+    samplesPerPixel = 8000 / (5 * windowSize);
+    currentValue = 0;
+    numSamples = 0;
+    windowPosn = 0;
+    window = 0;
 }
-
 
 void Waveform::changeSettings( int frequency, int channels )
 {
-   makePixmap();
+    makePixmap();
 //   owarn << "change waveform " << frequency << ", " << channels << "" << oendl; 
-   samplesPerPixel = frequency * channels / (5 * windowSize);
+    samplesPerPixel = frequency * channels / (5 * windowSize);
 //   owarn << "Waveform::changeSettings " << samplesPerPixel << "" << oendl; 
-   if ( !samplesPerPixel )
-      samplesPerPixel = 1;
-   currentValue = 0;
-   numSamples = 0;
-   windowPosn = 0;
-   draw();
+    if ( !samplesPerPixel )
+        samplesPerPixel = 1;
+    currentValue = 0;
+    numSamples = 0;
+    windowPosn = 0;
+    draw();
 }
-
 
 Waveform::~Waveform()
 {
-   if ( window )
-      delete[] window;
-   if ( pixmap )
-      delete pixmap;
+    if ( window )
+        delete[] window;
+    if ( pixmap )
+        delete pixmap;
 }
-
 
 void Waveform::reset()
 {
-   makePixmap();
-   currentValue = 0;
-   numSamples = 0;
-   windowPosn = 0;
-   draw();
+    makePixmap();
+    currentValue = 0;
+    numSamples = 0;
+    windowPosn = 0;
+    draw();
 }
-
 
 void Waveform::newSamples( const short *buf, int len )
 {
-   // Cache the object values in local variables.
-   int samplesPerPixel = this->samplesPerPixel;
-   int currentValue = this->currentValue;
-   int numSamples = this->numSamples;
-   short *window = this->window;
-   int windowPosn = this->windowPosn;
-   int windowSize = this->windowSize;
+    // Cache the object values in local variables.
+    int samplesPerPixel = this->samplesPerPixel;
+    int currentValue = this->currentValue;
+    int numSamples = this->numSamples;
+    short *window = this->window;
+    int windowPosn = this->windowPosn;
+    int windowSize = this->windowSize;
 
-   // Average the incoming samples to scale them to the window.
-   while ( len > 0 ) {
-      currentValue += *buf++;
-      --len;
-      if ( ++numSamples >= samplesPerPixel ) {
-         window[windowPosn++] = (short)(currentValue / numSamples);
-         if ( windowPosn >= windowSize ) {
-            this->windowPosn = windowPosn;
-            draw();
-            windowPosn = 0;
-         }
-         numSamples = 0;
-         currentValue = 0;
-      }
-   }
+    // Average the incoming samples to scale them to the window.
+    while ( len > 0 ) {
+        currentValue += *buf++;
+        --len;
+        if ( ++numSamples >= samplesPerPixel ) {
+            window[windowPosn++] = (short)(currentValue / numSamples);
+            if ( windowPosn >= windowSize ) {
+                this->windowPosn = windowPosn;
+                draw();
+                windowPosn = 0;
+            }
+            numSamples = 0;
+            currentValue = 0;
+        }
+    }
 
-   // Copy the final state back to the object.
+    // Copy the final state back to the object.
 //owarn << "" << currentValue << ", " << numSamples << ", " << windowPosn << "" << oendl; 
- this->currentValue = currentValue;
-   this->numSamples = numSamples;
-   this->windowPosn = windowPosn;
+    this->currentValue = currentValue;
+    this->numSamples = numSamples;
+    this->windowPosn = windowPosn;
 }
-
 
 void Waveform::makePixmap()
 {
-   if ( !pixmap ) {
-      pixmap = new QPixmap( size() );
-      windowSize = pixmap->width();
-      window = new short [windowSize];
-   }
+    if ( !pixmap ) {
+        pixmap = new QPixmap( size() );
+        windowSize = pixmap->width();
+        window = new short [windowSize];
+    }
 }
-
 
 void Waveform::draw()
 {
-   pixmap->fill( Qt::black );
-   QPainter painter;
-   painter.begin( pixmap );
-   painter.setPen( Qt::green );
+    pixmap->fill( Qt::black );
+    QPainter painter;
+    painter.begin( pixmap );
+    painter.setPen( Qt::green );
 
-   int middle = pixmap->height() / 2;
-   int mag;
-   short *window = this->window;
-   int posn;
-   int size = windowPosn;
-   for( posn = 0; posn < size; ++posn )
-   {
-      mag = (window[posn] * middle / 32768);
-      painter.drawLine(posn, middle - mag, posn, middle + mag);
-   }
-   if ( windowPosn < windowSize )
-   {
-      painter.drawLine(windowPosn, middle, windowSize, middle);
-   }
+    int middle = pixmap->height() / 2;
+    int mag;
+    short *window = this->window;
+    int posn;
+    int size = windowPosn;
+    for( posn = 0; posn < size; ++posn )
+    {
+        mag = (window[posn] * middle / 32768);
+        painter.drawLine(posn, middle - mag, posn, middle + mag);
+    }
+    if ( windowPosn < windowSize )
+    {
+        painter.drawLine(windowPosn, middle, windowSize, middle);
+    }
 
-   painter.end();
+    painter.end();
 
-   paintEvent( 0 );
+    paintEvent( 0 );
 }
-
 
 void Waveform::paintEvent( QPaintEvent * )
 {
-   QPainter painter;
-   painter.begin( this );
+    QPainter painter;
+    painter.begin( this );
 
-   if ( pixmap ) {
-      painter.drawPixmap( 0, 0, *pixmap );
-   } else {
-      painter.setPen( Qt::green );
-      QSize sz = size();
-      painter.drawLine(0, sz.height() / 2, sz.width(), sz.height() / 2);
-   }
+    if ( pixmap ) {
+        painter.drawPixmap( 0, 0, *pixmap );
+    } else {
+        painter.setPen( Qt::green );
+        QSize sz = size();
+        painter.drawLine(0, sz.height() / 2, sz.width(), sz.height() / 2);
+    }
 
-   painter.end();
+    painter.end();
 }
-
