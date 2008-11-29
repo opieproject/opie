@@ -50,6 +50,8 @@ class QLineEdit;
 #define WAVE_FORMAT_PCM (0x0001)
 //AFMT_IMA_ADPCM
 
+enum playerMode { MODE_IDLE, MODE_PLAYING, MODE_PAUSED, MODE_STOPPING, MODE_RECORDING };
+
 class QtRec : public QWidget
 { 
    Q_OBJECT
@@ -72,14 +74,14 @@ private:
 //    int fragment;
     int fd1;
     int secCount;
-    QString timeString; 
+    QString timeString;
+    QString m_dirPath;
 
     QLineEdit *renameBox;
     QGroupBox* GroupBox1;
-    QString currentFile;
-    QString date, currentFileName, tmpFileName;
+    QString date, tmpFileName;
     QTimer *t_timer;
-    bool needsStereoOut, paused;
+    bool needsStereoOut;
     bool useTmpFile, autoMute;
 
     bool eventFilter( QObject * , QEvent * );
@@ -103,6 +105,7 @@ private:
     void timerEvent( QTimerEvent *e );
     void setButtons();
     void fileSize(unsigned long size, QString &str);
+    QString getSelectedFile();
     
 private slots:
     void endPlaying();
@@ -185,12 +188,11 @@ protected:
     void fileBeamFinished( Ir *ir);
     void keyPressEvent( QKeyEvent *e);
     void keyReleaseEvent( QKeyEvent *e);
+    void hideEvent( QHideEvent * );
     void receive( const QCString &, const QByteArray & );
     void showListMenu(QListViewItem * );
-#ifndef THREADED
     void quickRec();
     void playIt();
-#endif
  
 };
 
