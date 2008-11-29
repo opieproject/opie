@@ -3,7 +3,6 @@
 #define WAVFILE_H
 
 #include <qobject.h>
-#include <sys/soundcard.h>
 #include <qfile.h>
 #include <qstring.h>
 
