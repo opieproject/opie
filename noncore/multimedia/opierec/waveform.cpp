@@ -38,7 +38,7 @@ Waveform::Waveform( QWidget *parent, const char *name, WFlags fl )
     window = 0;
 }
 
-void Waveform::changeSettings( int frequency, int channels )
+void Waveform::changeSettings( int frequency, int channels, snd_pcm_format_t format )
 {
     makePixmap();
 //   owarn << "change waveform " << frequency << ", " << channels << "" << oendl; 
@@ -49,6 +49,7 @@ void Waveform::changeSettings( int frequency, int channels )
     currentValue = 0;
     numSamples = 0;
     windowPosn = 0;
+    sndFormat = format;
     draw();
 }
 
@@ -69,7 +70,7 @@ void Waveform::reset()
     draw();
 }
 
-void Waveform::newSamples( const short *buf, int len )
+void Waveform::newSamples( const char *buf, int len )
 {
     // Cache the object values in local variables.
     int samplesPerPixel = this->samplesPerPixel;
@@ -81,8 +82,16 @@ void Waveform::newSamples( const short *buf, int len )
 
     // Average the incoming samples to scale them to the window.
     while ( len > 0 ) {
-        currentValue += *buf++;
-        --len;
+        if( sndFormat == SND_PCM_FORMAT_U8 ) {
+            currentValue += (32768 - ((*buf++) * 256));
+            --len;
+        }
+        else {
+            currentValue += *((short *)buf) * 8;
+            buf+=2;
+            len-=2;
+        }
+
         if ( ++numSamples >= samplesPerPixel ) {
             window[windowPosn++] = (short)(currentValue / numSamples);
             if ( windowPosn >= windowSize ) {

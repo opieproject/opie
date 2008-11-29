@@ -23,6 +23,8 @@
 #include <qwidget.h>
 #include <qpixmap.h>
 
+#include <alsa/asoundlib.h>
+
 
 class QLabel;
 
@@ -34,9 +36,9 @@ public:
     ~Waveform();
 
 public:
-    void changeSettings( int frequency, int channels );
+    void changeSettings( int frequency, int channels, snd_pcm_format_t format );
     void reset();
-    void newSamples( const short *buf, int len );
+    void newSamples( const char *buf, int len );
 
 private:
 
@@ -51,6 +53,7 @@ private:
     int samplesPerPixel;
     int currentValue;
     int numSamples;
+    snd_pcm_format_t sndFormat;
     short *window;
     int windowPosn;
     int windowSize;
