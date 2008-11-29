@@ -1,48 +1,44 @@
 
 #ifndef DEVICE_H
 #define DEVICE_H
-#include <qobject.h>
-#include <sys/soundcard.h>
 
-class Device : public QObject {
-    Q_OBJECT
+#include <qstring.h>
+#include <alsa/asoundlib.h>
+
+class Device {
 public:
-    Device( QObject * parent=0, bool record=0 );
-    ~Device() {};
-    bool closeDevice( bool);
-    int getChannels();
-    int getFormat();
+    Device( QString deviceName );
+    ~Device();
+    bool openDevice(bool record = false);
+    bool closeDevice(bool drop = false);
+    unsigned int getChannels();
+    snd_pcm_format_t getFormat();
     int getInVolume();
     int getOutVolume();
-    int getRate();
-    int getRes();
-    int sd; //sound descriptor
+    unsigned int getRate();
     void changedInVolume(int);
     void changedOutVolume(int);
-    bool openDsp();
-    int getDeviceFormat();
-    int getDeviceRate();
-    int getDeviceBits();
-    int getDeviceChannels();
-    int getDeviceFragSize();
     bool setFragSize(int);
-    bool setDeviceChannels(int);
-    bool setDeviceRate(int);
-    bool setDeviceFormat(int);
+    bool setDeviceChannels(unsigned int);
+    bool setDeviceRate(unsigned int);
+    bool setDeviceFormat(snd_pcm_format_t);
     bool reset();
+    int init();
 
-    int devRead(int, short *, int);
-    int devWrite(int, short *, int);   
+    int devRead(char *buffer);
+    int devWrite(char *buffer);
 
 private:
-    int devRes, devCh, devRate, devForm, flags;
+    snd_pcm_format_t devForm; 
+    unsigned int devCh, devRate;
     QString dspstr, mixstr;
     bool selectMicInput();
-    int openDevice( int );
-private slots:
 
 protected:
-  
+    snd_pcm_t *m_handle;
+    snd_pcm_hw_params_t *m_hwparams;
+    QString m_deviceName;
+    snd_pcm_uframes_t m_frames;
 };
 
 #endif

@@ -8,107 +8,77 @@
 #include <opie2/odebug.h>
 
 /* STD */
-#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/ioctl.h>
-#include <sys/soundcard.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #include <unistd.h>
 #include <errno.h>
+#include <alsa/asoundlib.h>
 
-//extern QtRec *qperec;
-#if defined(QT_QWS_SL5XXX)
-///#if defined(QT_QWS_EBX)
-
-#define DSPSTROUT "/dev/dsp"
-#define DSPSTRMIXEROUT "/dev/mixer"
-
-#ifdef SHARP
-#define DSPSTRIN "/dev/dsp1"
-#define DSPSTRMIXERIN "/dev/mixer1"
-#else
-#define DSPSTRIN "/dev/dsp"
-#define DSPSTRMIXERIN "/dev/mixer"
-#endif
-
-#else
-
-#ifdef QT_QWS_DEVFS
-#define DSPSTROUT "/dev/sound/dsp"
-#define DSPSTRIN "/dev/sound/dsp"
-#define DSPSTRMIXERIN "/dev/sound/mixer"
-#define DSPSTRMIXEROUT "/dev/sound/mixer"
-#else
-#define DSPSTROUT "/dev/dsp"
-#define DSPSTRIN "/dev/dsp"
-#define DSPSTRMIXERIN "/dev/mixer"
-#define DSPSTRMIXEROUT "/dev/mixer"
-#endif
-
-#endif
-
-Device::Device( QObject * parent, bool record )
-        : QObject( parent)
+Device::Device( QString deviceName )
 {
-//    dspstr = dsp;
-    devForm = -1;
+    devForm = SND_PCM_FORMAT_S16_LE;
     devCh = -1;
     devRate = -1;
-
-    if( !record){ //playing
-        owarn << "New Sound device DSP for playing" << oendl;
-        flags = O_RDWR;
-//        flags = O_WRONLY;
-    } else { //recording
-        owarn << "New Sound device DSP for recording" << oendl;
-        flags = O_RDWR;
-//        flags = O_RDONLY;
-        selectMicInput();
-    }
+    m_deviceName = deviceName;
+    m_handle = NULL;
+    snd_pcm_hw_params_malloc(&m_hwparams);
 }
 
-bool Device::openDsp() {
-    qWarning("Device::openDsp()");
-    if( openDevice( flags) == -1) {
-        perror("<<<<<<<<<<<<<<ioctl(\"Open device\")");
+Device::~Device() {
+    snd_pcm_hw_params_free(m_hwparams);
+}
+
+bool Device::openDevice( bool record ) {
+    odebug << "Opening sound device: " << m_deviceName << oendl;
+
+    snd_pcm_stream_t stream;
+    if(record)
+        stream = SND_PCM_STREAM_CAPTURE;
+    else
+        stream = SND_PCM_STREAM_PLAYBACK;
+
+    if (snd_pcm_open(&m_handle, m_deviceName, stream, 0) < 0) {
+        owarn << "Failed to open PCM device " << m_deviceName << oendl;
         return false;
+    }
+
+    if (snd_pcm_hw_params_any(m_handle, m_hwparams) < 0) {
+        owarn << "Failed to configure PCM device" << oendl;
+        return false;
+    }
+
+    if (snd_pcm_hw_params_set_access(m_handle, m_hwparams, SND_PCM_ACCESS_RW_INTERLEAVED) < 0) {
+        owarn << "Error setting access" << oendl;
+        return false;
+    }
+
+    return true;
+}
+
+bool Device::closeDevice(bool drop) {
+    if(m_handle) {
+        odebug << "Closing sound device" << oendl;
+        if(drop)
+            snd_pcm_drop(m_handle);
+        else
+            snd_pcm_drain(m_handle);
+        snd_pcm_close(m_handle);
+        m_handle = NULL;
     }
     return true;
 }
 
-int Device::openDevice( int flags) {
-    owarn << "Opening sound device:"<< DSPSTROUT << oendl;
-
-    if (( sd = ::open( DSPSTROUT, O_RDWR)) == -1) {
-        perror("open(\"/dev/dsp\")\n");
-        QString errorMsg="Could not open audio device\n /dev/dsp\n"
-            +(QString)strerror(errno);
-        qDebug( "XXXXXXXXXXXXXXXXXXXXXXX  "+errorMsg );
-        return -1;
-    }
-
-    if(ioctl(sd,SNDCTL_DSP_RESET,0)<0){
-        perror("ioctl RESET");
-    }
-    qWarning("opened!");
-    return sd;
-}
-
 int Device::getInVolume() {
-    unsigned int volume = 0;
     Config cfg("qpe");
     cfg.setGroup("Volume");
-
     return cfg.readNumEntry("Mic");
 }
 
 int Device::getOutVolume( ) {
-    unsigned int volume;
     Config cfg("qpe");
     cfg.setGroup("Volume");
-
     return cfg.readNumEntry("VolumePercent");
 }
 
@@ -130,148 +100,124 @@ void Device::changedOutVolume(int vol) {
 }
 
 bool Device::selectMicInput() {
+    // FIXME implement
+    return true;
+}
 
-    int md = 0;
-    int info = SOUND_MASK_MIC;//MIXER_WRITE(SOUND_MIXER_MIC);
-    owarn << "sectMicInput" << oendl;
-    md = ::open( DSPSTRMIXEROUT, O_RDWR );
-
-    if ( md <= 0) {
-        QString err;
-        err.sprintf("open %s", DSPSTRMIXEROUT);
-        perror(err.latin1());
-    } else {
-        if( ioctl( md, SOUND_MIXER_WRITE_RECSRC, &info) == -1)
-            perror("ioctl(\"SOUND_MIXER_WRITE_RECSRC\")");
-        ::close(md);
+bool Device::setDeviceFormat( snd_pcm_format_t form) {
+    odebug << "Set device format = " << form << oendl;
+    if (snd_pcm_hw_params_set_format(m_handle, m_hwparams, form) < 0) {
+        owarn << "Error setting format to " << form << oendl;
         return false;
     }
-    ::close(md);
-
+    devForm = form;
     return true;
 }
 
-bool Device::closeDevice( bool) {
-    if(sd)
-        ::close( sd); //close sound device
-    return true;
-}
-
-bool Device::setDeviceFormat( int form) {
-    qDebug( "set device res %d: %d ",form, sd );
-    if (ioctl( sd, SNDCTL_DSP_SETFMT,  &form)==-1) { //set format
-        perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
+bool Device::setDeviceChannels( unsigned int ch) {
+    odebug << "Set channels = " << ch << oendl;
+    int rc = snd_pcm_hw_params_set_channels(m_handle, m_hwparams, ch);
+    if (rc < 0) {
+        owarn << "Error setting channels to " << ch << ": " << QString(snd_strerror(rc)) << oendl;
         return false;
     }
-    devRes=form;
+    devCh = ch;
     return true;
 }
 
-bool Device::setDeviceChannels( int ch) {
-    qDebug( "set channels %d: %d",ch ,sd);
-    if (ioctl( sd, SNDCTL_DSP_CHANNELS, &ch)==-1) {
-        perror("ioctl(\"SNDCTL_DSP_CHANNELS\")");
+bool Device::setDeviceRate( unsigned int rate) {
+    // Set sample rate. If the requested rate is not supported by the hardware,
+    // use the nearest possible rate.
+    unsigned int actual_rate = rate;
+    int rc = snd_pcm_hw_params_set_rate_near(m_handle, m_hwparams, &actual_rate, 0);
+    if (rc < 0) {
+        owarn << "Error setting rate to " << rate << ": " << snd_strerror(rc) << oendl;
         return false;
     }
-    devCh=ch;
+    if ( rate != actual_rate ) 
+        owarn << "The rate " << rate << " Hz is not supported by your hardware, using " << actual_rate << " Hz instead" << oendl;
+    devRate = rate;
     return true;
 }
 
-bool Device::setDeviceRate( int rate) {
-    qDebug( "set rate %d: %d",rate,sd);
-    if (ioctl( sd, SNDCTL_DSP_SPEED, &rate) == -1) {
-        perror("ioctl(\"SNDCTL_DSP_SPEED\")");
-        return false;
+int Device::init() {
+    m_frames = 32;
+    int dir = 0;
+    if (snd_pcm_hw_params_set_period_size_near(m_handle,
+                              m_hwparams, &m_frames, &dir) < 0) {
+        owarn << "Error setting HW params" << oendl;
+        return -1;
     }
 
-    devRate=rate;
+    // Write the parameters to the driver
+    int rc = snd_pcm_hw_params(m_handle, m_hwparams);
+    if (rc < 0) {
+        owarn <<  "unable to set hw parameters: " << snd_strerror(rc) << oendl;
+        return -1;
+    }
 
-    return true;
+    // Use a buffer large enough to hold one period
+    snd_pcm_hw_params_get_period_size(m_hwparams, &m_frames, &dir);
+
+    int bpc = 2; // assume 16-bit
+    if(devForm == SND_PCM_FORMAT_S8 || devForm == SND_PCM_FORMAT_U8)
+        bpc = 1;
+
+    int size = m_frames * bpc * devCh;
+
+    return size;
 }
 
-int Device::getRes() {
-    return devRes;
-}
-
-int Device::getFormat() {
+snd_pcm_format_t Device::getFormat() {
     return devForm;
 }
 
-int Device::getRate() {
+unsigned int Device::getRate() {
     return devRate;
 }
 
-int Device::getChannels() {
+unsigned int Device::getChannels() {
     return devCh;
 }
 
-int Device::getDeviceFormat() {
-    return 0;
-}
-
-int Device::getDeviceRate() {
-    int dRate = 0;
-    if (ioctl( sd, SOUND_PCM_READ_RATE, &dRate) == -1) {
-        perror("ioctl(\"SNDCTL_PCM_READ_RATE\")");
-    }
-    return dRate;
-}
-
-int Device::getDeviceBits() {
-    int dBits = 0;
-    if (ioctl( sd, SOUND_PCM_READ_BITS, &dBits) == -1) {
-        perror("ioctl(\"SNDCTL_PCM_READ_BITS\")");
-    }
-    return dBits;
-}
-
-int Device::getDeviceChannels() {
-    int dCh = 0;
-    if (ioctl( sd, SOUND_PCM_READ_CHANNELS, &dCh) == -1) {
-        perror("ioctl(\"SNDCTL_PCM_READ_CHANNELS\")");
-    }
-    return dCh;
-}
-
-int Device::getDeviceFragSize() {
-    int frag_size;
-
-    if (ioctl( sd, SNDCTL_DSP_GETBLKSIZE, &frag_size) == -1) {
-        qDebug( "no fragsize" );
-    } else {
-        qDebug( "driver says frag size is %d",frag_size);
-    }
-    return frag_size;
-}
-
 bool Device::setFragSize(int frag) {
-    if (ioctl(sd, SNDCTL_DSP_SETFRAGMENT, &frag)) {
-        perror("ioctl(\"SNDCTL_DSP_SETFRAGMENT\")");
-        return false;
-    }
+    // FIXME need to implement?
     return true;
 }
 
 bool Device::reset() {
-    closeDevice(true);
-    openDsp();
-    if (ioctl( sd, SNDCTL_DSP_RESET, 0) == -1) {
-       perror("ioctl(\"SNDCTL_DSP_RESET\")");
+    if (snd_pcm_drop(m_handle) < 0) {
        return false;
     }
     return true;
 }
 
-int Device::devRead(int soundDescriptor, short *buf, int size) {
-    Q_UNUSED(soundDescriptor);
-    int number = 0;
-    number = ::read(  sd /*soundDescriptor*/, (char *)buf, size);
-    return number;
+int Device::devWrite(char *buffer) {
+    int rc = snd_pcm_writei(m_handle, buffer, m_frames);
+    if (rc == -EPIPE) {
+        owarn << "underrun occurred" << oendl;
+        snd_pcm_prepare(m_handle);
+    } 
+    else if (rc < 0) {
+        owarn << "error from writei: " << snd_strerror(rc) << oendl;
+    }  
+    else if (rc != (int)m_frames) {
+        owarn << "short write, wrote " << rc << " frames" << oendl;
+    }
+    return rc;
 }
 
-int Device::devWrite(int soundDescriptor, short * buf, int size) {
-    Q_UNUSED(soundDescriptor);
-    int bytesWritten = 0;
-    bytesWritten = ::write( sd /*soundDescriptor*/, buf, size);
-    return bytesWritten;
+int Device::devRead(char *buffer) {
+    int rc = snd_pcm_readi(m_handle, buffer, m_frames);
+    if (rc == -EPIPE) {
+        owarn << "overrun occurred" << oendl;
+        snd_pcm_prepare(m_handle);
+    } 
+    else if (rc < 0) {
+        owarn << "error from readi: " << snd_strerror(rc) << oendl;
+    }  
+    else if (rc != (int)m_frames) {
+        owarn << "short read, read " << rc << " frames" << oendl;
+    }
+    return rc;
 }
