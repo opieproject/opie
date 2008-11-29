@@ -12,22 +12,9 @@
  ***************************************************************************/
 #include "qtrec.h"
 
-#ifdef PDAUDIO
-int main(int argc, char* argv[]) {
-    QPEApplication a(argc, argv);
-    QtRec qtrec;
-    a.showMainWidget( &qtrec);
- return a.exec();
-}
-
-
-#else
-
 #include <opie2/oapplicationfactory.h>
 
 using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<QtRec> )
-
-#endif
 
 
