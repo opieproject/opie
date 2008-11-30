@@ -9,7 +9,7 @@
 #include "qtrec.h"
 #include "waveform.h"
 extern "C" {
-#include "adpcm.h"
+#include "ima_rw.h"
 }
 
 /* OPIE */
@@ -59,8 +59,6 @@ static int deviceBitRates[] = { 8, 16, -1 };
 
 
 //#define ZAURUS 0
-struct adpcm_state encoder_state;
-struct adpcm_state decoder_state;
 
 typedef struct {
     int sampleRate;
@@ -91,31 +89,40 @@ Device *soundDevice;
 
 void QtRec::quickRec()
 {
-
     odebug << ( filePara.numberSamples/filePara.sampleRate * filePara.channels ) << oendl;
     odebug << "samples " << filePara.numberSamples << ", rate " << filePara.sampleRate
            << ", channels " << filePara.channels << oendl;
 
-//    int total = 0;  // Total number of bytes read in so far.
-    int bytesWritten, number;
-
-    bytesWritten = 0;
-    number = 0;
-//    QString num;
-//    int level = 0;
-//    int threshold = 0;
-//    int bits = filePara.resolution;
-//    odebug << "bits " << bits << "" << oendl;
+    int bytesWritten = 0;
+    int number = 0;
 
     if(bufsize > 0) {
         char *buffer = (char *) malloc(bufsize);
         int bytesRead = 0;
+        
+        int samplesPerBlock = bufsize/2;
+        int adpcm_outsize = lsx_ima_bytes_per_block(filePara.channels, samplesPerBlock);
+        unsigned char adpcm_outbuf[ adpcm_outsize ];
+        int state = 0;
+
+        if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
+            memset( adpcm_outbuf, 0, adpcm_outsize);
+            lsx_ima_init_table();
+        }
+
+        //odebug << "bufsize = " << bufsize << "spb = " << samplesPerBlock << oendl;
+
         while(true) {
             if ( mode == MODE_STOPPING )
                 break;
             if ( mode != MODE_PAUSED ) {
                 soundDevice->devRead(buffer);
-                int number = ::write( filePara.fd, buffer, bufsize);
+                if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
+                    lsx_ima_block_mash_i(filePara.channels, (short *)buffer, samplesPerBlock, &state, adpcm_outbuf, 9);
+                    number = ::write( filePara.fd, adpcm_outbuf, adpcm_outsize);
+                }
+                else
+                    number = ::write( filePara.fd, buffer, bufsize);
                 waveform->newSamples( buffer, number );
                 bytesWritten += number;
             }
@@ -124,77 +131,35 @@ void QtRec::quickRec()
         free(buffer);
         filePara.numberSamples = bytesWritten;
     }
-
-#if 0
-
-    if( filePara.resolution == 16 ) { //AFMT_S16_LE)
-        odebug << "AFMT_S16_LE size " << filePara.SecondsToRecord << "" << oendl;
-        odebug << "samples to record " << filePara.samplesToRecord << "" << oendl;
-        level = 7;
-        threshold = 0;
-
-        if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
-            odebug << "start recording WAVE_FORMAT_DVI_ADPCM" << oendl;
-// <<<<<<<<<<<<<<<<<<<<<<<<<<<  WAVE_FORMAT_DVI_ADPCM  >>>>>>>>>>>>>>>>>>>>>>
-            char abuf[ BUFSIZE/2 ];
-            short sbuf[ BUFSIZE ];
-            short sbuf2[ BUFSIZE ];
-            memset( abuf, 0, BUFSIZE/2);
-            memset( sbuf, 0, BUFSIZE);
-            memset( sbuf2, 0, BUFSIZE);
-
-            for(;;) {
-                if ( mode == MODE_STOPPING ) {
-                    odebug << "quickRec:: stopped" << oendl;
-                    break;
-                }
-
-//             number=::read( filePara.sd, sbuf, BUFSIZE);
-//X                number =  soundDevice->devRead( filePara.sd, sbuf, BUFSIZE);
-
-                if(number <= 0) {
-                    perror("recording error ");
-                    odebug << "" << filePara.fileName << " " << number << "" << oendl;
-                    errorStop();
-                    return;
-                }
-                //if(stereo == 2) {
-//        adpcm_coder( sbuf2, abuf, number/2, &encoder_state);
-                adpcm_coder( sbuf, abuf, number/2, &encoder_state);
-
-                bytesWritten = ::write( filePara.fd , abuf, number/4);
-
-                waveform->newSamples( sbuf, number );
-
-                total += bytesWritten;
-                filePara.numberSamples = total;
-                timeSlider->setValue( total);
-
-                printf("%d, bytes %d,total %d\r", number, bytesWritten, total);
-                fflush(stdout);
-
-                filePara.numberOfRecordedSeconds = (float)total / (float)filePara.sampleRate * (float)2;//  / filePara.channels;
-
-                qApp->processEvents();
-                if( total >= filePara.samplesToRecord) {
-                    break;
-                }
-            }
-        } else {
-#endif
 } /// END quickRec()
-
 
 void QtRec::playIt()
 {
     if(bufsize > 0) {
         char *buffer = (char *) malloc(bufsize);
+
+        int samplesPerBlock = bufsize/2;
+        int adpcm_insize = lsx_ima_bytes_per_block(filePara.channels, samplesPerBlock);
+        unsigned char adpcm_inbuf[ adpcm_insize ];
+
+        if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
+            memset( adpcm_inbuf, 0, adpcm_insize);
+            lsx_ima_init_table();
+        }
+
         int bytesWritten = lseek( filePara.fd, 0, SEEK_CUR ); // so we can resume from the middle
         while(bytesWritten < filePara.numberSamples) {
             if ( mode == MODE_STOPPING )
                 break;
             if ( mode != MODE_PAUSED ) {
-                int number = ::read( filePara.fd, buffer, bufsize);
+                int number;
+                if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
+                    number = ::read( filePara.fd, adpcm_inbuf, adpcm_insize);
+                    lsx_ima_block_expand_i(filePara.channels, adpcm_inbuf, (short *)buffer, samplesPerBlock);
+                }
+                else
+                    number = ::read( filePara.fd, buffer, bufsize);
+    
                 soundDevice->devWrite(buffer);
                 waveform->newSamples( buffer, number );
                 bytesWritten += number;
@@ -205,62 +170,6 @@ void QtRec::playIt()
         }
         free(buffer);
     }
-
-#if 0
-    stopped = true;
-
-    int bytesWritten = 0;
-    int number = 0;
-    int total = 0;  // Total number of bytes read in so far.
-    if( filePara.resolution == 16 ) { //AFMT_S16_LE) {
-        if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
-            char abuf[ BUFSIZE / 2 ];
-            short sbuf[ BUFSIZE ];
-            short sbuf2[ BUFSIZE * 2 ];
-            memset( abuf, 0, BUFSIZE / 2);
-            memset( sbuf, 0, BUFSIZE);
-            memset( sbuf2, 0, BUFSIZE * 2);
-// <<<<<<<<<<<<<<<<<<<<<<<<<<<  WAVE_FORMAT_DVI_ADPCM  >>>>>>>>>>>>>>>>>>>>>>
-            for(;;) {  // play loop
-                if ( stopped) {
-                    break;
-                    return;
-                }// stop if playing was set to false
-
-                number = ::read( filePara.fd, abuf, BUFSIZE / 2);
-                adpcm_decoder( abuf, sbuf, number * 2, &decoder_state);
-
-//                 for (int i=0;i< number * 2; 2 * i++) { //2*i is left channel
-//                     sbuf2[i+1]=sbuf2[i]=sbuf[i];
-//                 }
-                bytesWritten = write ( soundDevice->sd , sbuf, number * 4);
-
-                waveform->newSamples( sbuf, number );
-
-                //          if(filePara.channels==1)
-                //              total += bytesWritten/2; //mono
-                //          else
-                total += bytesWritten;
-                filePara.numberSamples = total/4;
-                filePara.numberOfRecordedSeconds = (float)total / (float)filePara.sampleRate / 2;
-
-                timeSlider->setValue( total/4);
-//            timeString.sprintf("%.2f", filePara.numberOfRecordedSeconds);
-//         if(filePara.numberOfRecordedSeconds>1)
-//            timeLabel->setText( timeString+ tr(" seconds"));
-//                              printf("playing number %d, bytes %d, total %d\n",number,  bytesWritten, total/4);
-//                              fflush(stdout);
-
-                qApp->processEvents();
-
-                if( /*total >= filePara.numberSamples || */ bytesWritten == 0) {
-//            if( total >= filePara.numberSamples ){//||  secCount > filePara.numberOfRecordedSeconds ) {
-                    stopped = true;
-                    break;
-                }
-            }
-        } else {
-#endif
 }
 
 QtRec::QtRec( QWidget* parent,  const char* name, WFlags fl )
@@ -854,7 +763,8 @@ bool QtRec::setUpFile() { //setup file for recording
                             filePara.sampleRate,
                             filePara.channels,
                             filePara.resolution,
-                            filePara.format);
+                            filePara.format, 
+                            bufsize/2);
 
     filePara.fd = wavFile->wavHandle();
     if(filePara.fd == -1)

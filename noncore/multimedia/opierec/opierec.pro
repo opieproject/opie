@@ -1,12 +1,12 @@
 CONFIG  = qt quick-app
-HEADERS = adpcm.h \
+HEADERS = ima_rw.h \
         pixmaps.h \
         helpwindow.h \
         qtrec.h \
         device.h \
         wavFile.h \
         waveform.h
-SOURCES = adpcm.c \
+SOURCES = ima_rw.c \
         helpwindow.cpp \
         main.cpp \
         qtrec.cpp \

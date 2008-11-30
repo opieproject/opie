@@ -1,6 +1,9 @@
 //wavFile.cpp
 #include "wavFile.h"
 #include "qtrec.h"
+extern "C" {
+#include "ima_rw.h"
+}
 
 /* OPIE */
 #include <opie2/odebug.h>
@@ -24,7 +27,7 @@ using namespace Opie::Core;
 #include <unistd.h>
 
 WavFile::WavFile( QObject * parent,const QString &fileName, bool makeNwFile, int sampleRate,
-                  int channels, int resolution, int format )
+                  int channels, int resolution, int format, unsigned short samplesPerBlock )
         : QObject( parent)
 {
     owarn << "new wave file: " << fileName << oendl;
@@ -33,6 +36,7 @@ WavFile::WavFile( QObject * parent,const QString &fileName, bool makeNwFile, int
     wavFormat=format;
     wavChannels=channels;
     wavResolution=resolution;
+    wavSamplesPerBlock=samplesPerBlock;
     useTmpFile=false;
     if( b) {
         newFile();
@@ -92,7 +96,7 @@ bool WavFile::newFile() {
 
         return false;
     } else {
-        setWavHeader( track.handle() , &hdr);
+        setWavHeader( track.handle() );
     }
     return true;
 }
@@ -107,7 +111,7 @@ void WavFile::closeFile() {
 }
 
 int WavFile::openFile(const QString &currentFileName) {
-    qWarning("open play file "+currentFileName);;
+    qWarning("open play file "+currentFileName);
     closeFile();
 
     track.setName(currentFileName);
@@ -123,157 +127,126 @@ int WavFile::openFile(const QString &currentFileName) {
     return track.handle();
 }
 
-bool WavFile::setWavHeader(int fd, wavhdr *hdr) {
-
-    strncpy((*hdr).riffID, "RIFF", 4); // RIFF
-    strncpy((*hdr).wavID, "WAVE", 4); //WAVE
-    strncpy((*hdr).fmtID, "fmt ", 4); // fmt
-    (*hdr).fmtLen = 16; // format length = 16
+bool WavFile::setWavHeader(int fd) {
+    strncpy(hdr.riffID, "RIFF", 4); // RIFF
+    strncpy(hdr.wavID, "WAVE", 4); //WAVE
+    strncpy(hdr.fmtID, "fmt ", 4); // fmt
+    hdr.fmtLen = 16;
 
     if( wavFormat == WAVE_FORMAT_PCM) {
-        (*hdr).fmtTag = 1; // PCM
+        hdr.fmtTag = 1; // PCM
 //    odebug << "set header  WAVE_FORMAT_PCM" << oendl;
     }
     else {
-        (*hdr).fmtTag = WAVE_FORMAT_DVI_ADPCM; //intel ADPCM
+        hdr.fmtTag = WAVE_FORMAT_DVI_ADPCM; //intel ADPCM
  //    odebug << "set header  WAVE_FORMAT_DVI_ADPCM" << oendl;
     }
 
     //  (*hdr).nChannels = 1;//filePara.channels;// ? 2 : 1*/; // channels
-    (*hdr).nChannels = wavChannels;// ? 2 : 1*/; // channels
+    hdr.nChannels = wavChannels;// ? 2 : 1*/; // channels
 
-    (*hdr).sampleRate = wavSampleRate; //samples per second
-    (*hdr).avgBytesPerSec = (wavSampleRate)*( wavChannels*(wavResolution/8)); // bytes per second
-    (*hdr).nBlockAlign = wavChannels*( wavResolution/8); //block align
-    (*hdr).bitsPerSample = wavResolution; //bits per sample 8, or 16
+    hdr.sampleRate = wavSampleRate; //samples per second
+    hdr.avgBytesPerSec = (wavSampleRate)*( wavChannels*(wavResolution/8)); // bytes per second
+    hdr.nBlockAlign = wavChannels*( wavResolution/8); //block align
+    hdr.bitsPerSample = wavResolution; //bits per sample 8, or 16
 
-    strncpy((*hdr).dataID, "data", 4);
+    if( hdr.fmtTag == WAVE_FORMAT_DVI_ADPCM ) {
+        hdr.bitsPerSample = 4;
+        imaext.wExtSize = 2;
+        hdr.fmtLen = 16 + 2 + imaext.wExtSize;
 
-    write( fd,hdr, sizeof(*hdr));
+        hdr.nBlockAlign = lsx_ima_bytes_per_block(hdr.nChannels, wavSamplesPerBlock);
+        // Why we have to do this I'm not exactly sure, but the input samples per block
+        // is not compatible with the ADPCM format (or so sox reports anyway)
+        imaext.wSamplesPerBlock = lsx_ima_samples_in(0, hdr.nChannels, hdr.nBlockAlign, 0);
+    }
+
+    write( fd, &hdr, sizeof(hdr));
+
+    if( hdr.fmtTag == WAVE_FORMAT_DVI_ADPCM ) {
+        // Header extension
+        write( fd, &imaext, sizeof(imaext));
+
+        // fact chunk
+        strncpy(factblk.factID, "fact", 4);
+        factblk.dwFactSize = 4;
+        factblk.dwSamplesWritten = 0;
+        write( fd, &factblk, sizeof(factblk));
+    }
+
+    strncpy(datahdr.dataID, "data", 4);
+    write( fd, &datahdr, sizeof(datahdr));
+    
 //   owarn << "writing header: bitrate " << wavResolution << ", samplerate " << wavSampleRate << ",  channels " << wavChannels << oendl;
     return true;
 }
 
-bool WavFile::adjustHeaders(int fd, int total) {
+bool WavFile::adjustHeaders(int fd, unsigned long total) {
+    // This is cheating, but we only support PCM and IMA ADPCM 
+    // at the moment so we can get away with it
+    int hdrsize;
+    if( hdr.fmtTag == WAVE_FORMAT_DVI_ADPCM )
+        hdrsize = 36 + 4 + 12;
+    else 
+        hdrsize = 36;
+    
+    // RIFF size
     lseek(fd, 4, SEEK_SET);
-    int i = total + 36;
-    write( fd, &i, sizeof(i));
-    lseek( fd, 40, SEEK_SET);
+    unsigned long size = total + hdrsize;
+    write( fd, &size, sizeof(size));
+    // data chunk size
+    lseek( fd, hdrsize + 4, SEEK_SET);
     write( fd, &total, sizeof(total));
 //  owarn << "adjusting header " << total << "" << oendl;
     return true;
 }
 
 int WavFile::parseWavHeader(int fd) {
-//    owarn << "Parsing wav header" << oendl;
     char string[4];
     int found;
     short fmt;
     unsigned short ch, bitrate;
     unsigned long samplerrate, longdata;
 
-    if (read(fd, string, 4) < 4) {
-//        owarn << " Could not read from sound file." << oendl;
+    ssize_t bytes = read(fd, &hdr, sizeof(hdr));
+    if(bytes < sizeof(hdr)) {
         return -1;
     }
-    if (strncmp(string, "RIFF", 4)) {
-//        owarn << " not a valid WAV file." << oendl;
-        return -1;
-    }
-    lseek(fd, 4, SEEK_CUR);
-    if (read(fd, string, 4) < 4) {
-//        owarn << "Could not read from sound file." << oendl;
-        return -1;
-    }
-    if (strncmp(string, "WAVE", 4)) {
-//        owarn << "not a valid WAV file." << oendl;
-        return -1;
-    }
-    found = 0;
 
-    while (!found) {
-        if (read(fd, string, 4) < 4) {
-//            owarn << "Could not read from sound file." << oendl;
+    if(strncmp(hdr.riffID, "RIFF", 4))
+        return -1;
+    if(strncmp(hdr.wavID, "WAVE", 4))
+        return -1;
+    if(strncmp(hdr.fmtID, "fmt ", 4))
+        return -1;
+
+    if (hdr.fmtTag != WAVE_FORMAT_PCM && hdr.fmtTag != WAVE_FORMAT_DVI_ADPCM) {
+        return -1;
+    }
+
+    wavFormat = hdr.fmtTag;
+    wavChannels = hdr.nChannels;
+    wavSampleRate = hdr.sampleRate;
+    wavResolution = hdr.bitsPerSample;
+    
+    if (hdr.fmtTag == WAVE_FORMAT_DVI_ADPCM) {
+        wavResolution = 16;
+        bytes = read(fd, &imaext, sizeof(imaext));
+        if(bytes < sizeof(imaext)) {
             return -1;
         }
-        if (strncmp(string, "fmt ", 4)) {
-            if (read(fd, &longdata, 4) < 4) {
-//                owarn << "Could not read from sound file." << oendl;
-                return -1;
-            }
-            lseek(fd, longdata, SEEK_CUR);
-        } else {
-            lseek(fd, 4, SEEK_CUR);
-            if (read(fd, &fmt, 2) < 2) {
-//                owarn << "Could not read format chunk." << oendl;
-                return -1;
-            }
-            if (fmt != WAVE_FORMAT_PCM && fmt != WAVE_FORMAT_DVI_ADPCM) {
-//                owarn << "Wave file contains unknown format. Unable to continue." << oendl;
-                return -1;
-            }
-            wavFormat = fmt;
-            //            compressionFormat=fmt;
-//            owarn << "compressionFormat is " << fmt << "" << oendl;
-            if (read(fd, &ch, 2) < 2) {
-//                owarn << "Could not read format chunk." << oendl;
-                return -1;
-            } else {
-                wavChannels = ch;
-//                owarn << "File has " << ch << " channels" << oendl;
-            }
-            if (read(fd, &samplerrate, 4) < 4) {
-//                owarn << "Could not read from format chunk." << oendl;
-                return -1;
-            } else {
-                wavSampleRate = samplerrate;
-                //                                sampleRate = samplerrate;
-//                owarn << "File has samplerate of " << (int) samplerrate << "" << oendl;
-            }
-            lseek(fd, 6, SEEK_CUR);
-            if (read(fd, &bitrate, 2) < 2) {
-//                owarn << "Could not read format chunk." << oendl;
-                return -1;
-            } else {
-                wavResolution=bitrate;
-                //                                 resolution = bitrate;
-//                owarn << "File has bitrate of " << bitrate << "" << oendl;
-            }
-            found++;
-        }
     }
-    found = 0;
-    while (!found) {
-        if (read(fd, string, 4) < 4) {
-            odebug << "Could not read from sound file." << oendl;
+
+    lseek(fd, 20 + hdr.fmtLen, SEEK_SET);
+    while(true) {
+        bytes = read(fd, &datahdr, sizeof(datahdr));
+        if(bytes < sizeof(datahdr))
             return -1;
-        }
-
-        if (strncmp(string, "data", 4)) {
-            if (read(fd, &longdata, 4)<4) {
-                odebug << "Could not read from sound file." << oendl;
-                return -1;
-            }
-
-            lseek(fd, longdata, SEEK_CUR);
-        } else {
-            if (read(fd, &longdata, 4) < 4) {
-                odebug << "Could not read from sound file." << oendl;
-                return -1;
-            } else {
-                wavNumberSamples =    longdata;
-                 odebug << "file hase length of " << (int)longdata << ""
-                                << "lasting "
-                                << (int)(( longdata / wavSampleRate) / wavChannels) / ( wavChannels*( wavResolution/8))
-                                << " seconds" << oendl;
-//                wavSeconds = (( longdata / wavSampleRate) / wavChannels) / ( wavChannels*( wavResolution/8));
-
-                return longdata;
-            }
-        }
+        if(!strncmp(datahdr.dataID, "data", 4))
+            break;
+        lseek(fd, datahdr.dataLen, SEEK_CUR);
     }
-
-    lseek(fd, 0, SEEK_SET);
+    wavNumberSamples = datahdr.dataLen;
 
     return 0;
 }
