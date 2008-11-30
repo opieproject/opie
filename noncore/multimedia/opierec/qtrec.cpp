@@ -19,6 +19,7 @@ extern "C" {
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/storage.h>
+#include <qpe/filemanager.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -57,8 +58,6 @@ using namespace Opie::Core;
 static int deviceSampleRates[] = { 11025, 16000, 22050, 32000, 44100, 48000, -1 };
 static int deviceBitRates[] = { 8, 16, -1 };
 
-
-//#define ZAURUS 0
 
 typedef struct {
     int sampleRate;
@@ -511,7 +510,6 @@ void QtRec::initConnections() {
     connect(outMuteCheckBox,SIGNAL(toggled(bool)),this,SLOT(doVolMuting(bool)));
     connect(inMuteCheckBox,SIGNAL(toggled(bool)),this,SLOT(doMicMuting(bool)));
 
-    connect(ListView1,SIGNAL(doubleClicked(QListViewItem*)),this,SLOT(itClick(QListViewItem*)));
     connect(ListView1,SIGNAL(mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),this,SLOT(listPressed(int,QListViewItem*,const QPoint&,int)));
 
     connect(timeSlider,SIGNAL(sliderMoved(int)),this,SLOT(changeTimeSlider(int)));
@@ -595,6 +593,7 @@ void QtRec::start() {
         mode = MODE_PLAYING;
         setButtons();
         secCount = 1;
+        setFocus();
 
         if( openPlayFile())
             if( setupAudio( false))  //recording is false
@@ -743,13 +742,6 @@ bool QtRec::setupAudio( bool record ) {
     soundDevice->setDeviceRate( filePara.sampleRate);
     bufsize = soundDevice->init();
 
-/*X    if ( filePara.sd == -1) {
-
-        stopped = true;
-        update();
-        setCaption( tr( "OpieRecord " )+ QString::number(VERSION) );
-        return false;
-    }*/
     if(autoMute)
         doMute(false);
 
@@ -859,10 +851,6 @@ void QtRec::newSound() {
     }
 }
 
-void QtRec::itClick(QListViewItem *item) {
-    setCaption("OpieRecord  " + item->text(0));
-}
-
 void QtRec::deleteSound() {
     if( ListView1->currentItem() == NULL)
         return;
@@ -876,60 +864,23 @@ void QtRec::deleteSound() {
 
         initIconView();
         update();
-        setCaption( tr( "OpieRecord " ));
     }
 }
 
 void QtRec::keyPressEvent( QKeyEvent *e) {
-
     switch ( e->key() ) {
-            //  case Key_F1:
-            //     if(stopped && !recording)
-            //       newSound();
-            //     else
-            //       stop();
-            //    break;
-            //   case Key_F2: {
-            //     if( !e->isAutoRepeat())
-            //     rewindPressed();
-            //   }
-            //     break;
-            //   case Key_F3: {
-            //     if( !e->isAutoRepeat())
-            //     FastforwardPressed();
-            //   }
-            //     break;
-
-            ////////////////////////////// Zaurus keys
-        case Key_F9: //activity
-            break;
-        case Key_F10: //contacts
-            break;
-        case Key_F11: //menu
-            break;
-        case Key_F12: //home
-            break;
-        case Key_F13: //mail
-            break;
-        case Key_Space:
-            break;
-        case Key_Delete:
-            break;
-        case Key_Up:
-            //    stop();
-            break;
-        case Key_Down:
-            //    newSound();
-            break;
         case Key_Left: {
-            odebug << "rewinding" << oendl;
-            if( !e->isAutoRepeat())
+            if(mode == MODE_PLAYING && !e->isAutoRepeat()) {
                 rewindPressed();
+                e->accept();
+            }
         }
             break;
         case Key_Right: {
-            if( !e->isAutoRepeat())
+            if(mode == MODE_PLAYING && !e->isAutoRepeat()) {
                 FastforwardPressed();
+                e->accept();
+            }
         }
             break;
     }
@@ -937,55 +888,29 @@ void QtRec::keyPressEvent( QKeyEvent *e) {
 
 void  QtRec::keyReleaseEvent( QKeyEvent *e) {
     switch ( e->key() ) {
-            //   case Key_F1:
-            //      if(stopped && !recording)
-            //        newSound();
-            //      else
-            //        stop();
-            //     break;
-            //   case Key_F2:
-            //     rewindReleased();
-            //     break;
-            //   case Key_F3:
-            //     FastforwardReleased();
-            //     break;
-
-            ////////////////////////////// Zaurus keys
-        case Key_F9: //activity
-            break;
-        case Key_F10: //contacts
-            break;
-        case Key_F11: //menu
-            break;
-        case Key_F12: //home
-            doPlayBtn();
-        case Key_F13: //mail
-            break;
         case Key_Space:
-            if( mode == MODE_IDLE )
-                newSound();
-            else
+            if(mode == MODE_RECORDING) {
                 stop();
+                e->accept();
+            }
+            else if (!renameBox) {
+                doPlayBtn();
+                e->accept();
+            }
             break;
         case Key_Delete:
-            deleteSound();
-            break;
-        case Key_Up:
-            //      stop();
-            odebug << "Up" << oendl;
-            break;
-        case Key_Down:
-            //      start();
-            //      odebug << "Down" << oendl;
-            //    newSound();
+            if(deleteSoundButton->isEnabled()) {
+                deleteSound();
+                e->accept();
+            }
             break;
         case Key_Left:
-            odebug << "Left" << oendl;
-            rewindReleased();
+            if(mode == MODE_PAUSED && !e->isAutoRepeat())
+                rewindReleased();
             break;
         case Key_Right:
-            odebug << "Right" << oendl;
-            FastforwardReleased();
+            if(mode == MODE_PAUSED && !e->isAutoRepeat())
+                FastforwardReleased();
             break;
     }
 }
@@ -1027,13 +952,12 @@ void QtRec::endRecording() {
     timeSlider->setValue(0);
     initIconView();
     selectItemByName( wavFile->currentFileName );
-    setCaption( tr( "OpieRecord " ));
-    
 }
 
 void QtRec::endPlaying() {
     mode = MODE_IDLE;
     timeSlider->setValue(0);
+    ListView1->setFocus();
     setButtons();
 
     waveform->reset();
@@ -1081,12 +1005,10 @@ bool QtRec::openPlayFile() {
     if(filePara.fd == -1) {
         //  if(!track.open(IO_ReadOnly)) {
         QString errorMsg = (QString)strerror(errno);
-        setCaption( tr( "OpieRecord " ));
         QMessageBox::message(tr("Note"), tr("Could not open audio file.\n")
                              + errorMsg + "\n" + fileName);
         return false;
     } else {
-
         filePara.numberSamples = wavFile->getNumberSamples();
         filePara.format = wavFile->getFormat();
         filePara.sampleRate = wavFile->getSampleRate();
@@ -1116,12 +1038,11 @@ void QtRec::listPressed( int mouse, QListViewItem *item, const QPoint &, int ) {
                 cancelRename();
 
             setButtons();
-    //          setCaption( "OpieRecord  " + currentFile);
         }
             break;
         case 2:
-            showListMenu(item);
-            ListView1->clearSelection();
+            if(mode == MODE_IDLE)
+                showListMenu(item);
             break;
     };
 }
@@ -1130,7 +1051,6 @@ void QtRec::showListMenu(QListViewItem * item) {
     if(item == NULL)
         return;
     QPopupMenu *m = new QPopupMenu(this);
-    m->insertItem( tr("Play"), this, SLOT( doMenuPlay() ));
     if(Ir::supported())  m->insertItem( tr( "Send with Ir" ), this, SLOT( doBeam() ));
     m->insertItem( tr( "Rename" ), this, SLOT( doRename() ));
     // #if defined (QTOPIA_INTERNAL_FSLP)
@@ -1163,11 +1083,6 @@ void QtRec::doBeam() {
     }
 }
 
-void QtRec::doMenuPlay() {
-    qApp->processEvents();
-    doPlayBtn();
-}
-
 void QtRec::doRename() {
     QRect r = ListView1->itemRect( ListView1->currentItem( ));
     r = QRect( ListView1->viewportToContents( r.topLeft() ), r.size() );
@@ -1178,7 +1093,9 @@ void QtRec::doRename() {
     renameBox = new QLineEdit( ListView1->viewport(), "qt_renamebox" );
     renameBox->setFrame(true);
 
-    renameBox->setText(  ListView1->currentItem()->text(0) );
+    QString filename = ListView1->currentItem()->text(0);
+    filename = filename.left(filename.length() - 4); // remove extension
+    renameBox->setText( filename );
 
     renameBox->selectAll();
     renameBox->installEventFilter( this );
@@ -1191,20 +1108,22 @@ void QtRec::doRename() {
 }
 
 void QtRec::okRename() {
-    odebug << renameBox->text() << oendl;
-    QString  filename = renameBox->text();
+    QString newfilename = renameBox->text() + ".wav";
     cancelRename();
 
     if(  ListView1->currentItem() == NULL)
         return;
 
-    QString file = ListView1->currentItem()->text(0);
+    QString oldfilename = ListView1->currentItem()->text(0);
 
-    if(file == filename)
+    if(oldfilename == newfilename)
         return;
     
-    odebug << "filename is  " + filename << oendl;
+    odebug << "filename is  " + newfilename << oendl;
 
+    FileManager fm;
+    fm.renameFile(m_dirPath + oldfilename, m_dirPath + newfilename);
+    
     initIconView();
     update();
 }
@@ -1375,9 +1294,8 @@ void QtRec::rewindTimerTimeout() {
     int  sliderValue = timeSlider->value();
     sliderValue = sliderValue - ( filePara.sampleRate / 5 );
     timeSlider->setValue( sliderValue );
-    odebug << "" << sliderValue << "" << oendl;
-//    QString timeString;
     filePara.numberOfRecordedSeconds = (float)sliderValue / (float)filePara.sampleRate * (float)2;
+//    QString timeString;
 //    timeString.sprintf( "%.2f", filePara.numberOfRecordedSeconds);
 //    timeLabel->setText( timeString+ tr(" seconds"));
 }
@@ -1406,11 +1324,9 @@ void QtRec::FastforwardPressed() {
 void QtRec::forwardTimerTimeout() {
     int sliderValue = timeSlider->value();
     sliderValue = sliderValue + ( filePara.sampleRate / 5 );
-
     timeSlider->setValue( sliderValue );
-
-//    QString timeString;
     filePara.numberOfRecordedSeconds = (float)sliderValue / (float)filePara.sampleRate * (float)2;
+//    QString timeString;
 //    timeString.sprintf( "%.2f", filePara.numberOfRecordedSeconds);
 //    timeLabel->setText( timeString+ tr(" seconds"));
 }

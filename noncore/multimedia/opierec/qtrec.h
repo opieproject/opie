@@ -128,13 +128,11 @@ private slots:
     void compressionSelected(bool);
     void deleteSound();
     void doBeam();
-    void doMenuPlay();  
     void doMicMuting(bool);
     void doPlayBtn();
     void doRename();
     void doVolMuting(bool); 
     void forwardTimerTimeout();
-    void itClick(QListViewItem *item);
     void listPressed(int, QListViewItem *, const QPoint&, int);
     void newSound();
     void rewindPressed();
