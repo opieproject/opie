@@ -50,7 +50,7 @@ void events( OPimBackendOccurrence::List& tmpList,
         /*
          * If in range
          */
-        if (dtStart.date() >= from && dtEnd.date() <= to ) {
+        if (dtStart.date() <= to && dtEnd.date() >= from ) {
             if((*it).isAllDay()) {
                 OPimBackendOccurrence eff( dtStart.date(), (*it).uid() );
                 tmpList.append( eff );
