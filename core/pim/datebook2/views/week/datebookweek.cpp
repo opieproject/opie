@@ -347,8 +347,13 @@ void DateBookWeekView::resizeEvent( QResizeEvent *e )
         header->resizeSection( i, sw );
     header->resizeSection( 7, avail - hourWidth - sw*6 );
 
-    QListIterator<DateBookWeekItem> it(items);
-    for ( ; it.current(); ++it ) {
+    // Move all the items out of the way so we don't get spurious intersections
+    for ( QListIterator<DateBookWeekItem> it(items); it.current(); ++it ) {
+        DateBookWeekItem *i = it.current();
+        i->setGeometry(0,0,0,0);
+    }
+
+    for (  QListIterator<DateBookWeekItem> it(items); it.current(); ++it ) {
         DateBookWeekItem *i = it.current();
         positionItem( i );
     }
