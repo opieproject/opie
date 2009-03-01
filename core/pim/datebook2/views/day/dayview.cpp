@@ -424,7 +424,7 @@ void DayView::getEvents()
 
     for ( it = eventList.begin(); it != eventList.end(); ++it ) {
         OPimOccurrence ev=*it;
-//X        if(!((ev.endTime().hour()==0) && (ev.endTime().minute()==0) && (ev.startDate()!=ev.date()))) {  // Skip events ending at 00:00 starting at another day.
+        if( ev.date() == date() ) {
             if ( ev.isAllDay() ) {
                 object = m_allDays->addEvent( ev );
                 if (!object)
@@ -435,7 +435,7 @@ void DayView::getEvents()
                 widgetList->append( w );
                 object = w;
             }
-//X        }
+        }
     }
 }
 
