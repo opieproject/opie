@@ -41,7 +41,9 @@ namespace Opie {
 OPimOccurrence::OPimOccurrence( OPimOccurrence::Data* _data,
                                 enum OPimOccurrence::Position pos )
     : m_pos( pos ), data( _data )
-{}
+{
+    data->ref();
+}
 
 /**
  * \brief Copy constructor
