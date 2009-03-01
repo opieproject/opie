@@ -43,6 +43,7 @@ namespace Datebook {
         DateBookHoliday *holiday();
 
         static bool nextOccurrence( const OPimEvent &ev, const QDateTime &start, QDateTime &dt ); 
+        QDate findRealStart( const OPimOccurrence &occ );
 
     protected:
         void addAlarms( const OPimEvent &ev );

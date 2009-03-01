@@ -132,3 +132,19 @@ bool BookManager::nextOccurrence( const OPimEvent &ev, const QDateTime &start, Q
     }
     return false;
 }
+
+QDate BookManager::findRealStart( const OPimOccurrence &occ ) {
+    QDate dt( occ.date() );
+
+    if( occ.position() != OPimOccurrence::Start ) {
+        int uid = occ.toEvent().uid();
+        OPimOccurrence::List occs = list(dt, dt);
+        for (OPimOccurrence::List::ConstIterator it = occs.begin(); it != occs.end(); ++it ) {
+            OPimOccurrence ito = (*it);
+            if ( ito.toEvent().uid() == uid && ito.position() == OPimOccurrence::Start )
+                return ito.date();
+        }
+    }
+
+    return dt;
+}

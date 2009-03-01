@@ -51,12 +51,14 @@ namespace Datebook {
         void slotItemDuplicate();
         void slotItemDelete();
         void slotItemBeam();
+        void slotItemBeamOccurrence();
 
         void setTemplateMenu(); // updates the templateMenu
     
     protected:
         void initBars();
         void saveConfig();
+        void beamEvent( const OPimEvent &e );
 
     protected slots:
         void populate();
@@ -118,6 +120,7 @@ namespace Datebook {
         QToolBar *m_toolBar2;
         QToolBar *m_viewsBar;
         QPopupMenu* m_popTemplate;
+        QAction *m_itemBeamOccurrenceAction;
         BookManager* m_manager;
         TemplateManager m_tempMan;
         DescriptionManager m_descMan;

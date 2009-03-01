@@ -1,3 +1,6 @@
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 #include <qcopchannel_qws.h>
 #include <qwidgetstack.h>
@@ -19,6 +22,8 @@
 #include <opie2/opluginloader.h>
 #include <opie2/opimnotifymanager.h>
 #include <opie2/opimalarmdlg.h>
+#include <opie2/odatebookaccess.h>
+#include <opie2/odatebookaccessbackend_vcal.h>
 
 #include "editor.h"
 #include "show.h"
@@ -197,6 +202,13 @@ void MainWindow::initUI() {
 
     m_configureAction->addTo( m_toolBar2 );
 
+    if ( Ir::supported() ) {
+        m_itemBeamOccurrenceAction = new QAction( tr( "Beam this occurrence" ),
+                                    QString::null, 0, this, 0 );
+        connect( m_itemBeamOccurrenceAction, SIGNAL(activated()), this, SLOT(slotItemBeamOccurrence()) );
+        m_itemBeamOccurrenceAction->setWhatsThis( tr( "Transmit the specific occurrence of the selected recurring item." ) );
+    }
+    
 /*X
     a = new QAction( tr("Configure Templates"), QString::null, 0, 0 );
     a->addTo( m_popSetting );
@@ -536,6 +548,82 @@ void MainWindow::slotItemDelete() {
 }
 
 void MainWindow::slotItemBeam() {
+    const OPimOccurrence *ev = currentView()->currentItem();
+    if(!ev)
+        return;
+    
+    beamEvent( ev->toEvent() );
+}
+
+void MainWindow::slotItemBeamOccurrence() {
+    const OPimOccurrence *ev = currentView()->currentItem();
+    if(!ev)
+        return;
+
+    // create an OPimEvent from the OPimOccurrence and beam it...
+    
+    // Start with the easy stuff. If start and end date is the same we can just use
+    // the values of the occurrence
+    // If it is a multi-day event we need to find the real start and end date...
+    if ( ev->toEvent().startDateTime().date() == ev->toEvent().endDateTime().date() ) {
+        OPimEvent event( ev->toEvent() );
+
+        QDateTime dt( ev->date(), ev->startTime() );
+        event.setStartDateTime( dt );
+
+        dt.setTime( ev->endTime() );
+        event.setEndDateTime( dt );
+        beamEvent( event );
+    }
+    else {
+        // at least the the Times are right now
+        QDateTime start( ev->toEvent().startDateTime() );
+        QDateTime end  ( ev->toEvent().endDateTime() );
+
+        // ok we know the start date or we need to find it
+        if ( ev->startTime() != QTime( 0, 0, 0 ) ) {
+            start.setDate( ev->date() );
+        }
+        else {
+            QDate dt = manager()->findRealStart( *ev );
+            start.setDate( dt );
+        }
+
+        if ( ev->endTime() != QTime(23, 59, 59 ) ) {
+            // ok we know now the end date
+            end.setDate( ev->date() );
+        }
+        else {
+            // get the offset between the real start and real end
+            // and then add it to the new start date...
+            int days = ev->toEvent().startDateTime().date().daysTo( ev->toEvent().endDateTime().date() );
+            end.setDate( start.date().addDays( days ) );
+        }
+
+        OPimEvent event( ev->toEvent() );
+        event.setStartDateTime( start );
+        event.setEndDateTime( end );
+
+        beamEvent( event );
+    }
+}
+
+static const char * beamfile = "/tmp/obex/event.vcs";
+
+void MainWindow::beamEvent( const OPimEvent &e )
+{
+    odebug << "trying to beam" << oendl;
+    unlink( beamfile ); // delete if exists
+    mkdir("/tmp/obex/", 0755);
+    ODateBookAccessBackend_VCal* cal = new ODateBookAccessBackend_VCal( "calendar", QString::fromLatin1(beamfile) );
+    ODateBookAccess acc( cal );
+    acc.load();
+    acc.add( e );
+    acc.save();
+    Ir* ir = new Ir(this );
+    connect(ir, SIGNAL(done(Ir*) ),
+            this, SLOT(beamDone(Ir*) ) );
+    ir->send(beamfile, e.description(), "text/x-vCalendar" );
 }
 
 BookManager* MainWindow::manager() {
@@ -642,73 +730,12 @@ void MainWindow::viewPopup( const OPimOccurrence &ev, const QPoint &pt ) {
         m_itemEditAction->addTo( &m );
         m_itemDuplicateAction->addTo( &m );
         m_itemDeleteAction->addTo( &m );
-        if(Ir::supported()) {
+        if( Ir::supported() && m_itemBeamAction ) {
             m_itemBeamAction->addTo( &m );
-//X            if( eve.hasRecurrence() ) 
-//X                m.insertItem( tr( "Beam this occurrence"), 5 );
+            if( eve.hasRecurrence() ) 
+                m_itemBeamOccurrenceAction->addTo( &m );
         }
-        int r = m.exec( pt );
-
-        if ( r == 5 ) {
-            // create an OPimEvent and beam it...
-            /*
-                * Start with the easy stuff. If start and  end date is the same we can just use
-                * the values of effective events
-                * If it is a multi day event we need to find the real start and end date...
-                */
-            if ( ev.toEvent().startDateTime().date() == ev.toEvent().endDateTime().date() ) {
-                OPimEvent event( ev.toEvent() );
-
-                QDateTime dt( ev.date(), ev.startTime() );
-                event.setStartDateTime( dt );
-
-                dt.setTime( ev.endTime() );
-                event.setEndDateTime( dt );
-//X                emit beamMe( event );
-            }else {
-                /*
-                    * at least the the Times are right now
-                    */
-                QDateTime start( ev.toEvent().startDateTime() );
-                QDateTime end  ( ev.toEvent().endDateTime() );
-
-
-                /*
-                    * ok we know the start date or we need to find it
-                    */
-                if ( ev.startTime() != QTime( 0, 0, 0 ) ) {
-                    start.setDate( ev.date() );
-                }
-                else {
-//X                        QDate dt = DateBookDay::findRealStart( ev.event().uid(), ev.date(), dateBook->db );
-//X                        start.setDate( dt );
-                }
-
-
-                /*
-                    * ok we know now the end date...
-                    * else
-                    *   get to know the offset btw the real start and real end
-                    *   and then add it to the new start date...
-                    */
-                if ( ev.endTime() != QTime(23, 59, 59 ) ) {
-                    end.setDate( ev.date() );
-                }
-                else{
-                    int days = ev.toEvent().startDateTime().date().daysTo( ev.toEvent().endDateTime().date() );
-                    end.setDate( start.date().addDays( days ) );
-                }
-
-
-
-                OPimEvent event( ev.toEvent() );
-                event.setStartDateTime( start );
-                event.setEndDateTime( end   );
-
-
-//X                emit beamMe( event );
-            }
-        }
+        m.exec( pt );
     }
 }
 
