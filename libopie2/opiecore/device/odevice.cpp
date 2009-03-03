@@ -247,12 +247,12 @@ void ODevice::initButtons()
     for ( uint i = 0; i < ( sizeof( default_buttons ) / sizeof( default_button )); i++ ) {
         default_button *db = default_buttons + i;
         ODeviceButton b;
-        b. setKeycode ( db->code );
-        b. setUserText ( QObject::tr ( "Button", db->utext ));
-        b. setPixmap ( OResource::loadPixmap ( db->pix ));
-        b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( db->fpressedservice ), db->fpressedaction ));
-        b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( db->fheldservice ), db->fheldaction ));
-        d->m_buttons->append ( b );
+        b.setKeycode( db->code );
+        b.setUserText( QObject::tr ( "Button", db->utext ));
+        b.setPixmap( OResource::loadPixmap ( db->pix ));
+        b.setFactoryPresetPressedAction( OQCopMessage ( makeChannel ( db->fpressedservice ), db->fpressedaction ));
+        b.setFactoryPresetHeldAction( OQCopMessage ( makeChannel ( db->fheldservice ), db->fheldaction ));
+        d->m_buttons->append( b );
     }
 
     reloadButtonMapping();
@@ -260,9 +260,9 @@ void ODevice::initButtons()
 
 ODevice::~ODevice()
 {
-// we leak m_devicebuttons and m_cpu_frequency
-// but it's a singleton and it is not so importantant
-// -zecke
+    // we leak m_devicebuttons and m_cpu_frequency
+    // but it's a singleton and it is not so importantant
+    // -zecke
     delete d;
 }
 
@@ -612,13 +612,13 @@ const ODeviceButton *ODevice::buttonForKeycode ( ushort code )
 void ODevice::reloadButtonMapping()
 {
     if(!d->m_buttons)
-	initButtons();
+        initButtons();
 
     if(!d->m_initializedButtonQcop) {
-	QCopChannel *chan = new QCopChannel("QPE/System", this, "ODevice button channel");
-	connect(chan,SIGNAL(received(const QCString&,const QByteArray&)),
-		this,SLOT(systemMessage(const QCString&,const QByteArray&)));
-	d->m_initializedButtonQcop = true;
+        QCopChannel *chan = new QCopChannel("QPE/System", this, "ODevice button channel");
+        connect(chan,SIGNAL(received(const QCString&,const QByteArray&)),
+            this,SLOT(systemMessage(const QCString&,const QByteArray&)));
+        d->m_initializedButtonQcop = true;
     }
 
     Config cfg ( "ButtonSettings" );
@@ -633,17 +633,17 @@ void ODevice::reloadButtonMapping()
 
         if ( cfg. hasGroup ( group )) {
             cfg. setGroup ( group );
-            pch = cfg. readEntry ( "PressedActionChannel" ). latin1();
-            pm  = cfg. readEntry ( "PressedActionMessage" ). latin1();
+            pch = cfg.readEntry ( "PressedActionChannel" ). latin1();
+            pm  = cfg.readEntry ( "PressedActionMessage" ). latin1();
             // pdata = decodeBase64 ( buttonFile. readEntry ( "PressedActionArgs" ));
 
-            hch = cfg. readEntry ( "HeldActionChannel" ). latin1();
-            hm  = cfg. readEntry ( "HeldActionMessage" ). latin1();
+            hch = cfg.readEntry ( "HeldActionChannel" ). latin1();
+            hm  = cfg.readEntry ( "HeldActionMessage" ). latin1();
             // hdata = decodeBase64 ( buttonFile. readEntry ( "HeldActionArgs" ));
         }
 
-        b. setPressedAction ( OQCopMessage ( pch, pm, pdata ));
-        b. setHeldAction ( OQCopMessage ( hch, hm, hdata ));
+        b.setPressedAction( OQCopMessage ( pch, pm, pdata ));
+        b.setHeldAction( OQCopMessage ( hch, hm, hdata ));
     }
 }
 
@@ -657,18 +657,18 @@ void ODevice::remapPressedAction ( int button, const OQCopMessage &action )
         return;
 
     ODeviceButton &b = ( *d->m_buttons ) [button];
-        b. setPressedAction ( action );
+    b.setPressedAction( action );
 
-    mb_chan=b. pressedAction(). channel();
+    mb_chan = b.pressedAction(). channel();
 
     Config buttonFile ( "ButtonSettings" );
-    buttonFile. setGroup ( "Button" + QString::number ( button ));
-    buttonFile. writeEntry ( "PressedActionChannel", (const char*) mb_chan);
-    buttonFile. writeEntry ( "PressedActionMessage", (const char*) b. pressedAction(). message());
+    buttonFile.setGroup ( "Button" + QString::number ( button ));
+    buttonFile.writeEntry ( "PressedActionChannel", (const char*) mb_chan);
+    buttonFile.writeEntry ( "PressedActionMessage", (const char*) b.pressedAction(). message());
 
-//  buttonFile. writeEntry ( "PressedActionArgs", encodeBase64 ( b. pressedAction(). data()));
+//  buttonFile.writeEntry( "PressedActionArgs", encodeBase64 ( b.pressedAction(). data()));
 
-    QCopEnvelope ( "QPE/System", "deviceButtonMappingChanged()" );
+    QCopEnvelope( "QPE/System", "deviceButtonMappingChanged()" );
 }
 
 void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
@@ -679,16 +679,16 @@ void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
         return;
 
     ODeviceButton &b = ( *d->m_buttons ) [button];
-        b. setHeldAction ( action );
+    b.setHeldAction( action );
 
-    Config buttonFile ( "ButtonSettings" );
-    buttonFile. setGroup ( "Button" + QString::number ( button ));
-    buttonFile. writeEntry ( "HeldActionChannel", (const char *) b. heldAction(). channel());
-    buttonFile. writeEntry ( "HeldActionMessage", (const char *) b. heldAction(). message());
+    Config buttonFile( "ButtonSettings" );
+    buttonFile.setGroup( "Button" + QString::number ( button ));
+    buttonFile.writeEntry( "HeldActionChannel", (const char *) b.heldAction(). channel());
+    buttonFile.writeEntry( "HeldActionMessage", (const char *) b.heldAction(). message());
 
-//  buttonFile. writeEntry ( "HeldActionArgs", decodeBase64 ( b. heldAction(). data()));
+//  buttonFile.writeEntry( "HeldActionArgs", decodeBase64 ( b.heldAction(). data()));
 
-    QCopEnvelope ( "QPE/System", "deviceButtonMappingChanged()" );
+    QCopEnvelope( "QPE/System", "deviceButtonMappingChanged()" );
 }
 
 /**
@@ -763,7 +763,7 @@ void ODevice::playingStopped() {
     if ( d->m_sound >= 0 ) {
         if (::ioctl ( d->m_sound, MIXER_WRITE( d->m_mixer ), &d->m_vol ) == -1)
             qWarning( "ODevice::playingStopped() - "
-		      "unable to change volume back (%s)", strerror( errno ) );
+            "unable to change volume back (%s)", strerror( errno ) );
         ::close ( d->m_sound );
     }
 #endif

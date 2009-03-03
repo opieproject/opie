@@ -141,25 +141,25 @@ bool MyPal::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, 
 
     switch ( keycode ) {
         // QT has strange screen coordinate system, so depending
-	// on native device screen orientation, we need to rotate cursor keys
-	case Key_Left :
-	case Key_Right:
-	case Key_Up   :
-	case Key_Down : {
-	    int quarters;
-	    switch (d->m_rotation) {
-	        case Rot0:   quarters = 3/*270deg*/; break;
-	        case Rot90:  quarters = 2/*270deg*/; break;
-	        case Rot180: quarters = 1/*270deg*/; break;
-	        case Rot270: quarters = 0/*270deg*/; break;
-	    }
-	    newkeycode = Key_Left + ( keycode - Key_Left + quarters ) % 4;
-	    break;
-	}
+        // on native device screen orientation, we need to rotate cursor keys
+        case Key_Left :
+        case Key_Right:
+        case Key_Up   :
+        case Key_Down : {
+            int quarters;
+            switch (d->m_rotation) {
+                case Rot0:   quarters = 3/*270deg*/; break;
+                case Rot90:  quarters = 2/*270deg*/; break;
+                case Rot180: quarters = 1/*270deg*/; break;
+                case Rot270: quarters = 0/*270deg*/; break;
+            }
+            newkeycode = Key_Left + ( keycode - Key_Left + quarters ) % 4;
+            break;
+        }
 
         // map Power Button short/long press
         case HardKey_Suspend: { // Hope we don't have infinite recursion here:
-	    if ( isPress ) {
+            if ( isPress ) {
                 if ( m_power_timer )
                     killTimer ( m_power_timer );
                 m_power_timer = startTimer ( 500 );
@@ -192,13 +192,12 @@ void MyPal::timerEvent ( QTimerEvent * )
     QWSServer::sendKeyEvent ( -1, HardKey_Backlight, 0, false, false );
 }
 
-
 void MyPal::playAlarmSound()
 {
 #ifndef QT_NO_SOUND
     static Sound snd ( "alarm" );
     if(!snd.isFinished())
-	return;
+        return;
 
     changeMixerForAlarm(0, "/dev/sound/mixer", &snd );
     snd. play();
@@ -218,15 +217,15 @@ bool MyPal::setDisplayBrightness ( int bright )
     sysClass.setFilter(QDir::Dirs);
     if ( sysClass.exists() && sysClass.count() > 2 ) {
         QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/brightness" );
-	int fd = ::open( sysClassPath, O_WRONLY|O_NONBLOCK );
-	if ( fd >= 0 ) {
+        int fd = ::open( sysClassPath, O_WRONLY|O_NONBLOCK );
+        if ( fd >= 0 ) {
             char buf[100];
             int val = bright * displayBrightnessResolution() / 255;
             int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
             if (len > 0)
                 res = ( ::write( fd, &buf[0], len ) == 0 );
             ::close( fd );
-	}
+        }
     }
 
     return res;
@@ -249,17 +248,18 @@ bool MyPal::setDisplayStatus ( bool on )
     QDir sysClass( "/sys/class/lcd/" );
     sysClass.setFilter(QDir::Dirs);
     if ( sysClass.exists() && sysClass.count() > 2 ) {
-	QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/power" );
-	int fd = ::open( sysClassPath, O_WRONLY|O_NONBLOCK );
-	if ( fd >= 0 ) {
-	    char buf[10];
-	    buf[0] = on ? 0 : 4;
-	    buf[1] = '\0';
-	    res = ( ::write( fd, &buf[0], 2 ) == 0 );
-	    ::close( fd );
-	}
-    } else {
-	res = OAbstractMobileDevice::setDisplayStatus(on);
+        QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/power" );
+        int fd = ::open( sysClassPath, O_WRONLY|O_NONBLOCK );
+        if ( fd >= 0 ) {
+            char buf[10];
+            buf[0] = on ? 0 : 4;
+            buf[1] = '\0';
+            res = ( ::write( fd, &buf[0], 2 ) == 0 );
+            ::close( fd );
+        }
+    } 
+    else {
+        res = OAbstractMobileDevice::setDisplayStatus(on);
     }
 
     return res;

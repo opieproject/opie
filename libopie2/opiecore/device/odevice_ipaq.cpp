@@ -197,9 +197,9 @@ void iPAQ::init(const QString& model)
         case Model_iPAQ_H22xx:
         case Model_iPAQ_H191x:
         case Model_iPAQ_H1940:
-	case Model_iPAQ_HX4700:
-	case Model_iPAQ_H4xxx:
-	case Model_iPAQ_RX3xxx:
+        case Model_iPAQ_HX4700:
+        case Model_iPAQ_H4xxx:
+        case Model_iPAQ_RX3xxx:
             d->m_rotation = Rot0;
             break;
         case Model_iPAQ_H36xx:
@@ -436,7 +436,7 @@ int iPAQ::displayBrightnessResolution() const
     QDir sysClass( "/sys/class/backlight/" );
     sysClass.setFilter(QDir::Dirs);
     if ( sysClass.exists() && sysClass.count() > 2 ) {
-	QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/max_brightness" );
+        QString sysClassPath = sysClass.absFilePath( sysClass[2] + "/max_brightness" );
         int fd = ::open( sysClassPath, O_RDONLY|O_NONBLOCK );
         if ( fd >= 0 ) {
             char buf[100];
@@ -444,7 +444,7 @@ int iPAQ::displayBrightnessResolution() const
                 ::sscanf( &buf[0], "%d", &res );
             ::close( fd );
         }
-    	return res;
+        return res;
     }
 
     switch ( model()) {
@@ -457,8 +457,8 @@ int iPAQ::displayBrightnessResolution() const
         case Model_iPAQ_H39xx:
             return 64;
         case Model_iPAQ_H5xxx:
-	case Model_iPAQ_HX4700:
-	case Model_iPAQ_H4xxx:
+        case Model_iPAQ_HX4700:
+        case Model_iPAQ_H4xxx:
         case Model_iPAQ_H191x:
             return 255;
         case Model_iPAQ_H1940:
@@ -498,13 +498,13 @@ bool iPAQ::setDisplayStatus ( bool on )
 bool iPAQ::hasLightSensor() const
 {
     switch (model()) {
-	case Model_iPAQ_H191x:
-	case Model_iPAQ_H22xx:
-	case Model_iPAQ_H4xxx:
-	case Model_iPAQ_RX3xxx:
-	    return false;
-	default:
-	    return true;
+        case Model_iPAQ_H191x:
+        case Model_iPAQ_H22xx:
+        case Model_iPAQ_H4xxx:
+        case Model_iPAQ_RX3xxx:
+            return false;
+        default:
+            return true;
     }
 }
 

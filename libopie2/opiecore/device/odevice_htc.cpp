@@ -309,7 +309,7 @@ void HTC::buzzer( int sound )
         if ( fd >= 0 ) {
             if (::ioctl ( fd, SHARP_BUZZER_MAKESOUND, sound ) == -1)
                 qWarning( "HTC::buzzer() - Couldn't make the buzzer buzz (%s)",
-			  strerror( errno ) );
+                strerror( errno ) );
             ::close ( fd );
         }
 
@@ -395,11 +395,11 @@ bool HTC::setDisplayBrightness( int bright )
     int fd = ::open( m_backlightdev + "brightness", O_WRONLY|O_NONBLOCK );
     if ( fd >= 0 )
     {
-      char buf[100];
-      int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
-      if (len > 0)
-          res = ( ::write( fd, &buf[0], len ) == 0 );
-      ::close( fd );
+        char buf[100];
+        int len = ::snprintf( &buf[0], sizeof buf, "%d", val );
+        if (len > 0)
+            res = ( ::write( fd, &buf[0], len ) == 0 );
+        ::close( fd );
     }
     return res;
 }
@@ -412,11 +412,11 @@ bool HTC::setDisplayStatus( bool on )
     int fd = ::open( m_backlightdev + "power", O_WRONLY|O_NONBLOCK );
     if ( fd >= 0 )
     {
-     char buf[10];
-     buf[0] = on ? FB_BLANK_UNBLANK : FB_BLANK_POWERDOWN;
-     buf[1] = '\0';
-     res = ( ::write( fd, &buf[0], 2 ) == 0 );
-     ::close( fd );
+        char buf[10];
+        buf[0] = on ? FB_BLANK_UNBLANK : FB_BLANK_POWERDOWN;
+        buf[1] = '\0';
+        res = ( ::write( fd, &buf[0], 2 ) == 0 );
+        ::close( fd );
     }
     return res;
 }
@@ -428,33 +428,36 @@ Transformation HTC::rotation() const
 
     switch ( d->m_model ) {
         case Model_HTC_Universal:
-        {
-            OHingeStatus hs = readHingeSensor();
-            qDebug( "HTC::rotation() - hinge sensor = %d", (int) hs );
-            if ( hs == CASE_PORTRAIT ) rot = Rot0;
-            else if ( hs == CASE_UNKNOWN ) rot = Rot270;
-        }
-        break;
+            {
+                OHingeStatus hs = readHingeSensor();
+                qDebug( "HTC::rotation() - hinge sensor = %d", (int) hs );
+                if ( hs == CASE_PORTRAIT ) rot = Rot0;
+                else if ( hs == CASE_UNKNOWN ) rot = Rot270;
+            }
+            break;
         default:
-        break;
+            break;
     }
 
     qDebug( "HTC::rotation() - returning '%d'", rot );
     return rot;
 }
+
 ODirection HTC::direction() const
 {
     ODirection dir;
 
     switch ( d->m_model ) {
-        case Model_HTC_Universal: {
+        case Model_HTC_Universal: 
+            {
                 OHingeStatus hs = readHingeSensor();
                 if ( hs == CASE_PORTRAIT ) dir = CCW;
                 else if ( hs == CASE_UNKNOWN ) dir = CCW;
                 else dir = CW;
             }
             break;
-        default: dir = d->m_direction;
+        default: 
+            dir = d->m_direction;
             break;
     }
     return dir;
@@ -468,35 +471,37 @@ bool HTC::hasHingeSensor() const
 
 OHingeStatus HTC::readHingeSensor() const
 {
-        /*
-         * The HTC Universal keyboard is event source 1 in kernel 2.6.
-         * Hinge status is reported via Input System Switchs 0 and 1 like that:
-         *
-         * -------------------------
-         * | SW0 | SW1 |    CASE   |
-         * |-----|-----|-----------|
-         * |  0     0    Unknown   |
-         * |  1     0    Portrait  |
-         * |  0     1    Closed    |
-         * |  1     1    Landscape |
-         * -------------------------
-         */
-        OInputDevice* keyboard = OInputSystem::instance()->device( "event1" );
-        bool switch0 = true;
-        bool switch1 = false;
-        if ( keyboard )
-        {
-            switch0 = keyboard->isHeld( OInputDevice::Switch0 );
-            switch1 = keyboard->isHeld( OInputDevice::Switch1 );
-        }
-        if ( switch0 )
-        {
-            return switch1 ? CASE_LANDSCAPE : CASE_PORTRAIT;
-        }
-        else
-        {
-            return switch1 ? CASE_CLOSED : CASE_UNKNOWN;
-        }
+    /*
+        * The HTC Universal keyboard is event source 1 in kernel 2.6.
+        * Hinge status is reported via Input System Switchs 0 and 1 like that:
+        *
+        * -------------------------
+        * | SW0 | SW1 |    CASE   |
+        * |-----|-----|-----------|
+        * |  0     0    Unknown   |
+        * |  1     0    Portrait  |
+        * |  0     1    Closed    |
+        * |  1     1    Landscape |
+        * -------------------------
+        */
+    OInputDevice* keyboard = OInputSystem::instance()->device( "event1" );
+    bool switch0 = true;
+    bool switch1 = false;
+
+    if ( keyboard )
+    {
+        switch0 = keyboard->isHeld( OInputDevice::Switch0 );
+        switch1 = keyboard->isHeld( OInputDevice::Switch1 );
+    }
+
+    if ( switch0 )
+    {
+        return switch1 ? CASE_LANDSCAPE : CASE_PORTRAIT;
+    }
+    else
+    {
+        return switch1 ? CASE_CLOSED : CASE_UNKNOWN;
+    }
 }
 
 void HTC::initHingeSensor()
@@ -557,12 +562,12 @@ bool HTC::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, bo
         case Key_Right:
         case Key_Up   :
         case Key_Down :
-        {
-            if (rotation()==Rot90) {
-                newkeycode = Key_Left + ( keycode - Key_Left + 3 ) % 4;
+            {
+                if (rotation()==Rot90) {
+                    newkeycode = Key_Left + ( keycode - Key_Left + 3 ) % 4;
+                }
             }
-        }
-        break;
+            break;
 
     }
     if (newkeycode!=keycode) {
