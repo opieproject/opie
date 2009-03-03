@@ -811,7 +811,7 @@ void ODevice::changeMixerForAlarm( int mixer, const char* file, Sound *snd ) {
             Config cfg ( "qpe" );
             cfg. setGroup ( "Volume" );
 
-            int volalarm = cfg. readNumEntry ( "AlarmPercent", 50 );
+            int volalarm = cfg. readNumEntry ( "AlarmPercent", 65 );
             if ( volalarm < 0 )
                 volalarm = 0;
             else if ( volalarm > 100 )
