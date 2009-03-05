@@ -3,7 +3,6 @@
  Created: Thu Jan 17 11:19:58 2002
  copyright 2002 by L.J. Potter <ljp@llornkcor.com>
 ****************************************************************************/
-//#define DEV_VERSION
 
 #include "pixmaps.h"
 #include "qtrec.h"
@@ -45,7 +44,6 @@ using namespace Opie::Core;
 #include <mntent.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/ioctl.h>
 #include <sys/stat.h>
 #include <sys/time.h>
 #include <sys/types.h>
@@ -237,7 +235,6 @@ void QtRec::cleanUp() {
 
 void QtRec::init() {
 
-    needsStereoOut = false;
     QPixmap image6( ( const char** ) image6_data );
 
     setCaption( tr( "OpieRecord " ));
@@ -292,9 +289,6 @@ void QtRec::init() {
     layout1->addMultiCellWidget(  Rec_PushButton, 1, 1, 7, 7);
     Rec_PushButton->setFixedSize( 22, 22);
     Rec_PushButton->setPixmap( image6 );
-
-    t = new QTimer( this );
-    connect( t, SIGNAL( timeout() ), SLOT( timerBreak() ) );
 
     rewindTimer = new QTimer( this );
     connect( rewindTimer, SIGNAL( timeout() ),
@@ -819,6 +813,7 @@ bool QtRec::doPlay() {
     QString num;
     odebug << "Play number of samples " << filePara.numberSamples << "" << oendl;
 
+    QString timeString;
     timeString.sprintf("%f",  filePara.numberOfRecordedSeconds);
 //    timeLabel->setText( timeString+ tr(" seconds"));
 
@@ -871,9 +866,8 @@ void QtRec::changeDirCombo(int index) {
         if( sName == (*it)->name()+" "+  (*it)->path() ||
             (*it)->name() == sName ) {
             const QString path = (*it)->path();
-            recDir = path;
-            cfg.writeEntry("directory", recDir);
-            odebug << "new rec dir "+recDir << oendl;
+            cfg.writeEntry("directory", path);
+            odebug << "new rec dir " + path << oendl;
         }
     }
     cfg.write();
@@ -1201,10 +1195,6 @@ bool QtRec::eventFilter( QObject * o, QEvent * e ) {
 
 int QtRec::getCurrentSizeLimit() {
     return  sizeLimitCombo->currentItem() * 5;
-}
-
-void QtRec::timerBreak() {
-    endPlaying();
 }
 
 void QtRec::doVolMuting(bool b) {
