@@ -1,13 +1,11 @@
 //wavFile.cpp
 #include "wavFile.h"
-#include "qtrec.h"
 extern "C" {
 #include "ima_rw.h"
 }
 
 /* OPIE */
 #include <opie2/odebug.h>
-#include <qpe/config.h>
 using namespace Opie::Core;
 
 /* QT */
@@ -16,17 +14,10 @@ using namespace Opie::Core;
 
 /* STD */
 #include <errno.h>
-#include <sys/time.h>
-#include <sys/types.h>
-#include <sys/vfs.h>
-#include <fcntl.h>
-#include <math.h>
-#include <mntent.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-WavFile::WavFile( QObject * parent,const QString &fileName, bool makeNwFile, int sampleRate,
+WavFile::WavFile( QObject * parent, const QString &fileName, bool makeNwFile, int sampleRate,
                   int channels, int resolution, int format, unsigned short samplesPerBlock )
         : QObject( parent)
 {
@@ -37,68 +28,7 @@ WavFile::WavFile( QObject * parent,const QString &fileName, bool makeNwFile, int
     wavChannels=channels;
     wavResolution=resolution;
     wavSamplesPerBlock=samplesPerBlock;
-    useTmpFile=false;
-    if( b) {
-        newFile();
-    } else {
-        openFile(fileName);
-    }
-}
-
-bool WavFile::newFile() {
-//  odebug << "Set up new file" << oendl;
-    Config cfg("OpieRec");
-    cfg.setGroup("Settings");
-
-    currentFileName=cfg.readEntry("directory",QDir::homeDirPath());
-    QString date;
-    QDateTime dt = QDateTime::currentDateTime();
-    date = dt.toString();//TimeString::dateString( QDateTime::currentDateTime(),false,true);
-    date.replace(QRegExp("'"),"");
-    date.replace(QRegExp(" "),"_");
-    date.replace(QRegExp(":"),"-");
-    date.replace(QRegExp(","),"");
-
-    QString currentFile=date;
-    if(currentFileName.right(1).find("/",0,true) == -1)
-        currentFileName += "/" + date;
-    else
-        currentFileName += date;
-    currentFileName+=".wav";
-
-    //  odebug << "set up file for recording: "+currentFileName << oendl;
-    char pointer[] = "/tmp/opierec-XXXXXX";
-    int fd = 0;
-
-    if( currentFileName.find("/mnt",0,true) == -1
-        && currentFileName.find("/tmp",0,true) == -1 ) {
-        // if destination file is most likely in flash (assuming jffs2)
-        // we have to write to a different filesystem first
-
-        useTmpFile = true;
-        if(( fd = mkstemp( pointer)) < 0 ) {
-            perror("mkstemp failed");
-            return false;
-        }
-
-    //    odebug << "Opening tmp file " << pointer << "" << oendl;
-        track.setName( pointer);
-
-    } else { //just use regular file.. no moving
-
-        useTmpFile = false;
-        track.setName( currentFileName);
-    }
-    if(!track.open( IO_ReadWrite | IO_Truncate)) {
-        QString errorMsg=(QString)strerror(errno);
-        odebug << errorMsg << oendl;
-        QMessageBox::message("Note", "Error opening file.\n" +errorMsg);
-
-        return false;
-    } else {
-        setWavHeader( track.handle() );
-    }
-    return true;
+    track.setName(fileName);
 }
 
 WavFile::~WavFile() {
@@ -110,20 +40,30 @@ void WavFile::closeFile() {
         track.close();
 }
 
-int WavFile::openFile(const QString &currentFileName) {
-    qWarning("open play file "+currentFileName);
+int WavFile::openFile() {
+    odebug << "open play file " << track.name() << oendl;
     closeFile();
 
-    track.setName(currentFileName);
-
     if(!track.open(IO_ReadOnly)) {
-        QString errorMsg=(QString)strerror(errno);
-        odebug << "<<<<<<<<<<< "+errorMsg+currentFileName << oendl;
-        QMessageBox::message("Note", "Error opening file.\n" +errorMsg);
+        QString errorMsg = (QString)strerror(errno);
+        odebug << "<<<<<<<<<<< " << errorMsg << oendl;
+        QMessageBox::message("Note", "Error opening file.\n" + errorMsg);
         return -1;
-    } else {
-        parseWavHeader( track.handle());
-    }
+    } 
+
+    parseWavHeader( track.handle());
+    return track.handle();
+}
+
+int WavFile::createFile() {
+    if(!track.open( IO_ReadWrite | IO_Truncate )) {
+        QString errorMsg = (QString)strerror(errno);
+        odebug << errorMsg << oendl;
+        QMessageBox::message("Note", "Error opening file.\n" + errorMsg);
+        return -1;
+    } 
+
+    setWavHeader( track.handle() );
     return track.handle();
 }
 
@@ -251,7 +191,7 @@ int WavFile::parseWavHeader(int fd) {
     return 0;
 }
 
-QString WavFile::trackName() {
+QString WavFile::getFileName() {
     return track.name();
 }
 
@@ -275,10 +215,10 @@ int WavFile::getNumberSamples() {
     return wavNumberSamples;
 }
 
-bool WavFile::isTempFile() {
-    return useTmpFile;
-}
-
 int WavFile::getChannels() {
     return wavChannels;
+}
+
+bool WavFile::isOpen() {
+    return track.isOpen();
 }

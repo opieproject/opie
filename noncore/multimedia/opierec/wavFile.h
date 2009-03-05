@@ -6,6 +6,9 @@
 #include <qfile.h>
 #include <qstring.h>
 
+#define WAVE_FORMAT_DVI_ADPCM (0x0011)
+#define WAVE_FORMAT_PCM (0x0001)
+
 typedef struct { 
     char           riffID[4];
     unsigned long  riffLen;
@@ -42,30 +45,29 @@ public:
     WavFile( QObject * parent=0,const QString &fileName=0, bool newFile=0, int sampleRate=0,
              int channels=0 , int resolution=0, int format=0, unsigned short samplesPerBlock=0);
     ~WavFile();
-    wavhdr hdr;
-    wavhdrext_ima imaext;
-    wavdatahdr datahdr;
-    wavfactblk factblk;
     bool adjustHeaders(int fd, unsigned long total);
-    QString currentFileName;
-    QString trackName();
-    
-    QFile track;
+
     int wavHandle();
     int getFormat();
     int getResolution();
     int getSampleRate();
     int getNumberSamples();
     int getChannels();
-    bool isTempFile();
-    int openFile(const QString &);
-    bool newFile();
+    QString getFileName();
+    int openFile();
+    int createFile();
     void closeFile();
+    bool isOpen();
 
 private:
     int wavFormat, wavChannels, wavResolution, wavSampleRate, wavNumberSamples;
     unsigned short wavSamplesPerBlock;
-    bool useTmpFile;
+    wavhdr hdr;
+    wavhdrext_ima imaext;
+    wavdatahdr datahdr;
+    wavfactblk factblk;
+    QFile track;
+
     bool setWavHeader(int fd);
     int parseWavHeader(int fd);
 };

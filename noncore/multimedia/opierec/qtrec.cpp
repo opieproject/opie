@@ -73,7 +73,7 @@ typedef struct {
     int inVol; //input volume
     int outVol; //output volume
     int format; //wavfile format PCM.. ADPCM
-    const  char *fileName; //name of fiel to be played/recorded
+    QString fileName; //name of fiel to be played/recorded
 } fileParameters;
 
 fileParameters filePara;
@@ -615,7 +615,7 @@ bool QtRec::rec() { //record
             Config cfg("OpieRec");
             cfg.setGroup("Settings");
             filePara.SecondsToRecord = getCurrentSizeLimit();
-            int diskSize = checkDiskSpace( (const QString &) wavFile->trackName());
+            int diskSize = checkDiskSpace( (const QString &) wavFile->getFileName());
 
             if( filePara.SecondsToRecord == 0) {
                 fileSize = diskSize;
@@ -641,7 +641,6 @@ bool QtRec::rec() { //record
                 stop();
             } 
             else {
-                filePara.fileName=getSelectedFile();
                 odebug << "Start recording" << oendl;
                 mode = MODE_RECORDING;
 
@@ -750,7 +749,48 @@ bool QtRec::setupAudio( bool record ) {
 
 
 bool QtRec::setUpFile() { //setup file for recording
-    wavFile = new WavFile( this, (const QString &)"",
+    Config cfg("OpieRec");
+    cfg.setGroup("Settings");
+
+    QString fileName = cfg.readEntry("directory", QDir::homeDirPath());
+    
+    QDateTime dt = QDateTime::currentDateTime();
+    QString date = dt.toString();
+    date.replace(QRegExp("'"),"");
+    date.replace(QRegExp(" "),"_");
+    date.replace(QRegExp(":"),"-");
+    date.replace(QRegExp(","),"");
+
+    if(fileName.right(1).find("/",0,true) == -1)
+        fileName += "/" + date;
+    else
+        fileName += date;
+    fileName += ".wav";
+
+//    odebug << "set up file for recording: " << fileName << oendl;
+    char pointer[] = "/tmp/opierec-XXXXXX";
+    int fd = 0;
+
+    QString actualFile;
+    if( fileName.find("/mnt",0,true) == -1
+        && fileName.find("/tmp",0,true) == -1 ) {
+        // if destination file is most likely in flash (assuming jffs2)
+        // we have to write to a different filesystem first
+
+        if(( fd = mkstemp( pointer)) < 0 ) {
+            perror("mkstemp failed");
+            return false;
+        }
+
+//        odebug << "Opening tmp file " << pointer << "" << oendl;
+        actualFile = (QString)pointer;
+    } 
+    else { 
+        // just use regular file.. no moving
+        actualFile = fileName;
+    }
+
+    wavFile = new WavFile( this, actualFile,
                             true,
                             filePara.sampleRate,
                             filePara.channels,
@@ -758,7 +798,8 @@ bool QtRec::setUpFile() { //setup file for recording
                             filePara.format, 
                             bufsize/2);
 
-    filePara.fd = wavFile->wavHandle();
+    filePara.fd = wavFile->createFile();
+    filePara.fileName = fileName;
     if(filePara.fd == -1)
         return false;
 
@@ -928,20 +969,19 @@ void QtRec::endRecording() {
 
     soundDevice->closeDevice();
 
-    if( wavFile->track.isOpen()) {
+    if( wavFile->isOpen()) {
         wavFile->adjustHeaders( filePara.fd, filePara.numberSamples);
         filePara.numberSamples = 0;
         wavFile->closeFile();
         filePara.fd=0;
 
-        if( wavFile->isTempFile()) {
+        QString actualFile = wavFile->getFileName();
+        if( actualFile != filePara.fileName ) {
             // move tmp file to regular file
-            QString cmd = "mv "+ wavFile->trackName() + " " + wavFile->currentFileName;
-            odebug << "moving tmp file to "+wavFile->currentFileName << oendl;
+            QString cmd = "mv " + actualFile + " " + filePara.fileName;
+            odebug << "moving tmp file to " + filePara.fileName << oendl;
             system( cmd.latin1());
         }
-
-        odebug << "Just moved " + wavFile->currentFileName << oendl;
 
         odebug << "finished recording" << oendl;
 //        timeLabel->setText("");
@@ -951,7 +991,8 @@ void QtRec::endRecording() {
 
     timeSlider->setValue(0);
     initIconView();
-    selectItemByName( wavFile->currentFileName );
+    odebug << QFileInfo(filePara.fileName).baseName() << oendl;
+    selectItemByName( QFileInfo(filePara.fileName).fileName() );
 }
 
 void QtRec::endPlaying() {
@@ -1001,7 +1042,7 @@ bool QtRec::openPlayFile() {
     wavFile = new WavFile(this,
                         fileName,
                         false);
-    filePara.fd = wavFile->wavHandle();
+    filePara.fd = wavFile->openFile();
     if(filePara.fd == -1) {
         //  if(!track.open(IO_ReadOnly)) {
         QString errorMsg = (QString)strerror(errno);
@@ -1251,7 +1292,7 @@ void QtRec::timerEvent( QTimerEvent * ) {
 }
 
 void QtRec::changeTimeSlider(int index) {
-    if( ListView1->currentItem() == 0 || !wavFile->track.isOpen()) return;
+    if( ListView1->currentItem() == 0 || !wavFile->isOpen()) return;
     //debug << "Slider moved to " << index << "" << oendl;    mode = MODE_PAUSED;
 
     sliderPos=index;
@@ -1302,7 +1343,7 @@ void QtRec::rewindTimerTimeout() {
 
 void QtRec::rewindReleased() {
     rewindTimer->stop();
-    if( wavFile->track.isOpen()) {
+    if( wavFile->isOpen()) {
         sliderPos = timeSlider->value();
         int newPos = lseek( filePara.fd, sliderPos, SEEK_SET);
         total =  newPos * 4;
@@ -1333,7 +1374,7 @@ void QtRec::forwardTimerTimeout() {
 
 void QtRec::FastforwardReleased() {
     forwardTimer->stop();
-    if( wavFile->track.isOpen()) {
+    if( wavFile->isOpen()) {
         sliderPos = timeSlider->value();
         int newPos = lseek( filePara.fd, sliderPos, SEEK_SET);
         total =  newPos * 4;
@@ -1420,9 +1461,13 @@ void QtRec::slotAutoMute(bool b) {
 
 void QtRec::selectItemByName(const QString & name) {
     QListViewItemIterator it( ListView1 );
-    for ( ; it.current(); ++it )
-        if( name == it.current()->text(0))
+    for ( ; it.current(); ++it ) {
+        if( name == it.current()->text(0)) {
             ListView1->setCurrentItem(it.current());
+            setButtons();
+            break;
+        }
+    }
 }
 
 

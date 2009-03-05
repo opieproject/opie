@@ -46,10 +46,6 @@ class QLineEdit;
 //#define BUFSIZE 2048
 #define FRAGSIZE 0x7fff000A;
 
-#define WAVE_FORMAT_DVI_ADPCM (0x0011)
-#define WAVE_FORMAT_PCM (0x0001)
-//AFMT_IMA_ADPCM
-
 enum playerMode { MODE_IDLE, MODE_PLAYING, MODE_PAUSED, MODE_STOPPING, MODE_RECORDING };
 
 class QtRec : public QWidget
