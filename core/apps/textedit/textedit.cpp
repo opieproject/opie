@@ -359,7 +359,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     openDesktop = cfg.readBoolEntry ( "OpenDesktop", true );
     filePerms = cfg.readBoolEntry ( "FilePermissions", false );
-    useSearchBar = cfg.readBoolEntry ( "SearchBar", false );
     featureAutoSave = cfg.readBoolEntry( "autosave", false);
 
     if(openDesktop) desktopAction->setOn( true );
@@ -423,7 +422,6 @@ void TextEdit::cleanUp()
 
     cfg.writeEntry ( "OpenDesktop", openDesktop );
     cfg.writeEntry ( "FilePermissions", filePerms );
-    cfg.writeEntry ( "SearchBar", useSearchBar );
 }
 
 void TextEdit::accept()
@@ -718,10 +716,6 @@ void TextEdit::openFile( const DocLnk &f )
 void TextEdit::showEditTools() {
     menu->show();
     editBar->show();
-    if(!useSearchBar)
-        searchBar->hide();
-    else
-        searchBar->show();
     setWState (WState_Reserved1 );
 }
 

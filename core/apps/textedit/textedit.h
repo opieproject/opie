@@ -128,7 +128,7 @@ private:
     QLineEdit *gotoEdit;
     QLineEdit *searchEdit;
     DocLnk *doc;
-    bool fileIs, useAdvancedFeatures, promptExit, openDesktop, filePerms, useSearchBar;
+    bool fileIs, useAdvancedFeatures, promptExit, openDesktop, filePerms;
     bool bFromDocView;
     int  viewSelection;
     QAction *zin, *zout;
