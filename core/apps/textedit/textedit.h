@@ -100,7 +100,7 @@ private slots:
     void search();
     void accept();
 
-    void newFile( const DocLnk & );
+    void newFile();
     void openFile( const DocLnk & );
     void showEditTools();
     void resetEditStatus();
@@ -123,7 +123,7 @@ private:
     QLineEdit *gotoEdit;
     QLineEdit *searchEdit;
     DocLnk *doc;
-    bool fileIs, openDesktop, filePerms;
+    bool openDesktop, filePerms;
     QAction *zin, *zout;
     QString currentFileName;
 };

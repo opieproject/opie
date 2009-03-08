@@ -398,7 +398,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
         }
     }
     else {
-        newFile(DocLnk());
+        newFile();
     }
 }
 
@@ -496,7 +496,7 @@ void TextEdit::setWordWrap(bool y)
 void TextEdit::fileNew()
 {
     if(savePrompt())
-        newFile(DocLnk());
+        newFile();
 }
 
 void TextEdit::fileOpen()
@@ -582,14 +582,10 @@ void TextEdit::search()
     editor->find( searchEdit->text(), false, false );
 }
 
-void TextEdit::newFile( const DocLnk &f ) {
-    DocLnk nf = f;
-    nf.setType("text/plain");
+void TextEdit::newFile() {
     clear();
     setWState (WState_Reserved1 );
     editor->setFocus();
-    doc = new DocLnk(nf);
-    currentFileName = "";
     updateCaption();
     resetEditStatus();
     checkEnableDelete();
@@ -741,7 +737,7 @@ bool TextEdit::save()
             currentFileName = name;
             odebug << "saveFile "+currentFileName << oendl;
 
-            if(!fileIs) {
+            if(doc) {
                 // Save file permissions
                 struct stat buf;
                 mode_t mode;
@@ -888,8 +884,11 @@ bool TextEdit::saveAs()
 
 void TextEdit::clear()
 {
-    delete doc;
-    doc = 0;
+    if(doc) {
+        delete doc;
+        doc = 0;
+    }
+    currentFileName = "";
     editor->clear();
 }
 
@@ -953,6 +952,8 @@ void TextEdit::fileDelete()
             doc->removeFiles();
             clear();
             setCaption( tr("Text Editor") );
+            resetEditStatus();
+            checkEnableDelete();
             break;
         case 1:
             // exit
