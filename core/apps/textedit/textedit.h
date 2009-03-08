@@ -60,14 +60,13 @@ public:
 
 protected:
     QPopupMenu *font;
-    QAction *nFileDlgOpt, *desktopAction, *filePermAction, *searchBarAction, *nAutoSave;
+    QAction *nFileDlgOpt, *desktopAction, *filePermAction, *nAutoSave;
     bool edited;
     void openFile( const QString & );
     QCopChannel * channel;
 
     bool featureAutoSave;
     void closeEvent( QCloseEvent *e );
-    void doSearchBar();
     bool savePrompt();
     void setTimer();
 private slots:
@@ -112,7 +111,6 @@ private slots:
     void setBold(bool y);
     void setItalic(bool y);
     void setWordWrap(bool y);
-    void setSearchBar(bool);
 
 private:
     void openDotFile(const QString &);

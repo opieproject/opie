@@ -288,13 +288,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     filePermAction->setToggleAction(true);
     filePermAction->addTo( advancedMenu);
 
-    searchBarAction = new QAction( tr("Search Bar Open"),
-                                   QString::null, 0, this, 0 );
-    connect( searchBarAction, SIGNAL( toggled(bool) ),
-             this, SLOT( setSearchBar(bool) ) );
-    searchBarAction->setToggleAction(true);
-    searchBarAction->addTo( advancedMenu);
-
     nAutoSave = new QAction( tr("Auto Save 5 min."),
                                    QString::null, 0, this, 0 );
     connect( nAutoSave, SIGNAL( toggled(bool) ),
@@ -369,7 +362,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     useSearchBar = cfg.readBoolEntry ( "SearchBar", false );
     featureAutoSave = cfg.readBoolEntry( "autosave", false);
 
-    if(useSearchBar) searchBarAction->setOn(true);
     if(openDesktop) desktopAction->setOn( true );
     if(filePerms) filePermAction->setOn( true );
     if(featureAutoSave) nAutoSave->setOn(true);
@@ -509,20 +501,6 @@ void TextEdit::setWordWrap(bool y)
     setCaption(captionStr);
 }
 
-void TextEdit::setSearchBar(bool b)
-{
-    useSearchBar=b;
-    Config cfg("TextEdit");
-    cfg.setGroup("View");
-    cfg.writeEntry ( "SearchBar", b );
-    searchBarAction->setOn(b);
-    if(b)
-        searchBar->show();
-    else
-        searchBar->hide();
-    editor->setFocus();
-}
-
 void TextEdit::fileNew()
 {
     if(savePrompt())
@@ -552,14 +530,6 @@ void TextEdit::fileOpen()
     }
     else
         updateCaption();
-}
-
-void TextEdit::doSearchBar()
-{
-    if(!useSearchBar)
-        searchBar->hide();
-    else
-        searchBar->show();
 }
 
 #if 0
