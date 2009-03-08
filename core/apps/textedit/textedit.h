@@ -60,7 +60,7 @@ public:
 
 protected:
     QPopupMenu *font;
-    QAction *nFileDlgOpt, *desktopAction, *filePermAction, *nAutoSave;
+    QAction *desktopAction, *filePermAction, *nAutoSave;
     bool edited;
     void openFile( const QString & );
     QCopChannel * channel;
@@ -77,11 +77,9 @@ private slots:
     void editPasteTimeDate();
     void doDesktop(bool);
     void doFilePerms(bool);
-    void doAbout();
     void setDocument(const QString&);
     void changeFont();
     void fileNew();
-    void fileRevert();
     void fileOpen();
     bool save();
     bool saveAs();
@@ -108,8 +106,6 @@ private slots:
 
     void zoomIn();
     void zoomOut();
-    void setBold(bool y);
-    void setItalic(bool y);
     void setWordWrap(bool y);
 
 private:
@@ -119,18 +115,13 @@ private:
     void updateCaption( const QString &name=QString::null );
     void setFontSize(int sz, bool round_down_not_up);
 private:
-//    fileSaver *fileSaveDlg;
-//    fileBrowser *browseForFiles;
-    bool fromSetDocument;
     QpeEditor* editor;
     QToolBar *menu, *editBar, *searchBar;
     QPopupMenu *advancedMenu;
     QLineEdit *gotoEdit;
     QLineEdit *searchEdit;
     DocLnk *doc;
-    bool fileIs, useAdvancedFeatures, promptExit, openDesktop, filePerms;
-    bool bFromDocView;
-    int  viewSelection;
+    bool fileIs, openDesktop, filePerms;
     QAction *zin, *zout;
     QString currentFileName;
 };

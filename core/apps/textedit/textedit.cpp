@@ -161,11 +161,10 @@ static const int nfontsizes = 6;
 static const int fontsize[nfontsizes] = {8,10,12,14,18,24};
 
 TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
-    : QMainWindow( parent, name, f ), bFromDocView( false )
+    : QMainWindow( parent, name, f )
 {
     doc = 0;
     edited=false;
-    fromSetDocument=false;
 
     setToolBarsMovable( false );
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
@@ -295,11 +294,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     nAutoSave->setToggleAction(true);
     nAutoSave->addTo( advancedMenu);
 
-
-    //font->insertSeparator();
-
-    //font->insertItem(tr("About"), this, SLOT( doAbout()) );
-
     mb->insertItem( tr( "File" ), file );
     mb->insertItem( tr( "Edit" ), edit );
     mb->insertItem( tr( "View" ), font );
@@ -389,8 +383,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     else {
         newFile(DocLnk());
     }
-
-    viewSelection = cfg.readNumEntry( "FileView", 0 );
 }
 
 TextEdit::~TextEdit()
@@ -418,7 +410,6 @@ void TextEdit::cleanUp()
 
     cfg.setGroup ( "View" );
     cfg.writeEntry ( "Wrap", editor->wordWrap() == QMultiLineEdit::WidgetWidth );
-    cfg.writeEntry ( "FileView", viewSelection );
 
     cfg.writeEntry ( "OpenDesktop", openDesktop );
     cfg.writeEntry ( "FilePermissions", filePerms );
@@ -471,20 +462,6 @@ void TextEdit::setFontSize(int sz, bool round_down_not_up)
 
     zin->setEnabled(s != fontsize[nfontsizes-1]);
     zout->setEnabled(s != fontsize[0]);
-}
-
-void TextEdit::setBold(bool y)
-{
-    QFont f = editor->font();
-    f.setBold(y);
-    editor->setFont(f);
-}
-
-void TextEdit::setItalic(bool y)
-{
-    QFont f = editor->font();
-    f.setItalic(y);
-    editor->setFont(f);
 }
 
 void TextEdit::setWordWrap(bool y)
@@ -549,12 +526,6 @@ void TextEdit::slotFind()
 
 }
 #endif
-
-void TextEdit::fileRevert()
-{
-    clear();
-    fileOpen();
-}
 
 void TextEdit::editCut()
 {
@@ -639,7 +610,6 @@ void TextEdit::openFile( const QString &f )
     odebug << "filename is "+ f << oendl;
     QString filer;
     QFileInfo fi( f);
-//    bFromDocView = true;
     if(f.find(".desktop",0,true) != -1 && !openDesktop ) {
         switch ( QMessageBox::warning(this,tr("Text Editor"),tr("Text Editor has detected<BR>you selected a <B>.desktop</B>file.<BR>Open<B>.desktop</B> file or <B>linked</B> file?"),tr(".desktop File"),tr("Linked Document"),0,1,1) ) {
         case 0: //desktop
@@ -692,7 +662,6 @@ void TextEdit::openFile( const QString &f )
 void TextEdit::openFile( const DocLnk &f )
 {
 //    clear();
-//    bFromDocView = true;
     FileManager fm;
     QString txt;
     currentFileName=f.file();
@@ -916,8 +885,6 @@ void TextEdit::updateCaption( const QString &name )
             s = tr( "Unnamed" );
             currentFileName=s;
         }
-//         if(s.left(1) == "/")
-//             s = s.right(s.length()-1);
         setCaption( tr("%1 - Text Editor").arg( s ) );
     }
 }
@@ -937,10 +904,7 @@ void TextEdit::setDocument(const QString& fileref)
         }
         else {
             odebug << "setDoc open" << oendl;
-            bFromDocView = true;
             openFile(fileref);
-            //   fromSetDocument=false;
-//    doSearchBar();
         }
     }
     updateCaption( currentFileName);
@@ -994,14 +958,6 @@ void TextEdit::receive(const QCString&msg, const QByteArray &)
     if ( msg == "setDocument(QString)" ) {
 //        odebug << "bugger all" << oendl;
     }
-}
-
-void TextEdit::doAbout()
-{
-    QMessageBox::about(0,tr("Text Edit"),tr("Text Edit is copyright<BR>"
-                         "2000 Trolltech AS, and<BR>"
-                         "2002 by <B>L. J. Potter <BR>llornkcor@handhelds.org</B><BR>"
-                         "and is licensed under the GPL"));
 }
 
 void TextEdit::doDesktop(bool b)
