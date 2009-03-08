@@ -365,7 +365,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     defaultFont = QFont ( family, size, weight, italic );
     editor-> setFont ( defaultFont );
-//    updateCaption();
 
     cfg.setGroup ( "View" );
 
@@ -518,11 +517,7 @@ void TextEdit::fileOpen()
                                                 QString::null ,
                                                 QString::null, map);
     if( !str.isEmpty() && QFile(str).exists() && !QFileInfo(str).isDir() )
-    {
        openFile( str );
-    }
-    else
-        updateCaption();
 }
 
 #if 0
@@ -595,9 +590,9 @@ void TextEdit::newFile( const DocLnk &f ) {
     editor->setFocus();
     doc = new DocLnk(nf);
     currentFileName = "";
-    updateCaption( currentFileName );
+    updateCaption();
     resetEditStatus();
-    deleteAction->setEnabled(false);
+    checkEnableDelete();
 }
 
 void TextEdit::openDotFile( const QString &f )
@@ -617,10 +612,10 @@ void TextEdit::openDotFile( const QString &f )
             }
             editor->setText(txt);
             resetEditStatus();
-            deleteAction->setEnabled(true);
+            checkEnableDelete();
         }
     }
-    updateCaption( currentFileName);
+    updateCaption();
 }
 
 void TextEdit::openFile( const QString &f )
@@ -670,12 +665,8 @@ void TextEdit::openFile( const QString &f )
 
     showEditTools();
     // Show filename in caption
-    QString name = filer;
-    int sep = name.findRev( '/' );
-    if ( sep > 0 )
-        name = name.mid( sep+1 );
-    updateCaption( name );
-    deleteAction->setEnabled(true);
+    updateCaption();
+    checkEnableDelete();
 }
 
 void TextEdit::openFile( const DocLnk &f )
@@ -698,7 +689,7 @@ void TextEdit::openFile( const DocLnk &f )
     doc->setName(currentFileName);
     updateCaption();
     setTimer();
-    deleteAction->setEnabled(true);
+    checkEnableDelete();
 }
 
 void TextEdit::showEditTools() {
@@ -713,6 +704,13 @@ void TextEdit::resetEditStatus() {
     // Clear undo buffer
     editor->setUndoEnabled(false);
     editor->setUndoEnabled(true);
+}
+
+void TextEdit::checkEnableDelete() {
+    if( doc && currentFileName != "" && doc->file().left(5) != "/etc/" ) 
+        deleteAction->setEnabled(true);
+    else
+        deleteAction->setEnabled(false);
 }
 
 /*!
@@ -846,9 +844,6 @@ bool TextEdit::saveAs()
     else
         str = docname;
 
-    if(doc) doc->setName(docname);
-    currentFileName=docname;
-
     if(!str.isEmpty()) {
         QString fileNm=str;
 
@@ -864,7 +859,7 @@ bool TextEdit::saveAs()
         doc = new DocLnk(nf);
         odebug << "Saving file as " << currentFileName << oendl;
         doc->setName( fi.baseName() );
-        updateCaption( currentFileName);
+        updateCaption();
 
         FileManager fm;
         if ( !fm.saveFile( *doc, rt ) ) {
@@ -883,12 +878,11 @@ bool TextEdit::saveAs()
         resetEditStatus();
         if(caption().left(1)=="*")
             setCaption(caption().right(caption().length()-1));
-        deleteAction->setEnabled(true);
+        checkEnableDelete();
 
         return true;
     }
     odebug << "returning false" << oendl;
-    currentFileName = "";
     return false;
 } //end saveAs
 
@@ -899,32 +893,29 @@ void TextEdit::clear()
     editor->clear();
 }
 
-void TextEdit::updateCaption( const QString &name )
+void TextEdit::updateCaption()
 {
-    if ( name.isEmpty() )
+    if ( currentFileName.isEmpty() )
         setCaption( tr("Text Editor") );
     else {
-        QString s = name;
-        if ( s.isNull() )
-            s = doc->name();
-        if ( s.isEmpty() ) {
-            s = tr( "Unnamed" );
-            currentFileName=s;
-        }
+        QString s = currentFileName;
+        int sep = s.findRev( '/' );
+        if ( sep > 0 )
+            s = s.mid( sep+1 );
         setCaption( tr("%1 - Text Editor").arg( s ) );
     }
 }
 
 void TextEdit::setDocument(const QString& fileref)
 {
-    if(fileref != "Unnamed") {
+    if(fileref != tr("Unnamed")) {
         if(!savePrompt())
             return;
 
         currentFileName=fileref;
         odebug << "setDocument" << oendl;
         QFileInfo fi(currentFileName);
-        odebug << "basename:"+fi.baseName()+": current filenmame "+currentFileName << oendl;
+        odebug << "basename:" + fi.baseName() + ": current filename " + currentFileName << oendl;
         if( (fi.baseName().left(1)).isEmpty() ) {
             openDotFile(currentFileName);
         }
@@ -933,7 +924,7 @@ void TextEdit::setDocument(const QString& fileref)
             openFile(fileref);
         }
     }
-    updateCaption( currentFileName);
+    updateCaption();
 }
 
 void TextEdit::changeFont()

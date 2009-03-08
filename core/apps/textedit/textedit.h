@@ -104,6 +104,7 @@ private slots:
     void openFile( const DocLnk & );
     void showEditTools();
     void resetEditStatus();
+    void checkEnableDelete();
 
     void zoomIn();
     void zoomOut();
@@ -113,7 +114,7 @@ private:
     void openDotFile(const QString &);
     void colorChanged( const QColor &c );
     void clear();
-    void updateCaption( const QString &name=QString::null );
+    void updateCaption();
     void setFontSize(int sz, bool round_down_not_up);
 private:
     QpeEditor* editor;
