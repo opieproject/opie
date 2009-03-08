@@ -60,7 +60,7 @@ public:
 
 protected:
     QPopupMenu *font;
-    QAction *desktopAction, *filePermAction, *nAutoSave;
+    QAction *desktopAction, *filePermAction, *nAutoSave, *undoAction, *redoAction;
     bool edited;
     void openFile( const QString & );
     QCopChannel * channel;
@@ -103,6 +103,7 @@ private slots:
     void newFile( const DocLnk & );
     void openFile( const DocLnk & );
     void showEditTools();
+    void resetEditStatus();
 
     void zoomIn();
     void zoomOut();

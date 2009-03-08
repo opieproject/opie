@@ -213,6 +213,18 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     connect( a, SIGNAL( activated() ), this, SLOT( saveAs() ) );
     a->addTo( file );
 
+    undoAction = new QAction( tr( "Undo" ), Opie::Core::OResource::loadPixmap( "undo", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
+    undoAction->addTo( edit );
+    undoAction->setEnabled( false );
+
+    redoAction = new QAction( tr( "Redo" ), Opie::Core::OResource::loadPixmap( "redo", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
+    redoAction->addTo( edit );
+    redoAction->setEnabled( false );
+
+    edit->insertSeparator();
+
     a = new QAction( tr( "Cut" ), Opie::Core::OResource::loadPixmap( "cut", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( editCut() ) );
@@ -332,6 +344,12 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     editor->setFrameStyle( QFrame::Panel | QFrame::Sunken );
     connect( editor, SIGNAL( textChanged() ),
              this, SLOT( editorChanged() ) );
+    connect( editor, SIGNAL( undoAvailable(bool) ),
+             undoAction, SLOT( setEnabled(bool) ) );
+    connect( editor, SIGNAL( redoAvailable(bool) ),
+             redoAction, SLOT( setEnabled(bool) ) );
+    connect( undoAction, SIGNAL( activated() ), editor, SLOT( undo() ) );
+    connect( redoAction, SIGNAL( activated() ), editor, SLOT( redo() ) );
 
     QPEApplication::setStylusOperation( editor, QPEApplication::RightOnHold);
 
@@ -578,8 +596,7 @@ void TextEdit::newFile( const DocLnk &f ) {
     doc = new DocLnk(nf);
     currentFileName = "";
     updateCaption( currentFileName );
-    editor->setEdited( false);
-    edited=false;
+    resetEditStatus();
 }
 
 void TextEdit::openDotFile( const QString &f )
@@ -598,8 +615,7 @@ void TextEdit::openDotFile( const QString &f )
                 txt+=t.readLine()+"\n";
             }
             editor->setText(txt);
-            editor->setEdited( false);
-            edited=false;
+            resetEditStatus();
         }
     }
     updateCaption( currentFileName);
@@ -674,8 +690,7 @@ void TextEdit::openFile( const DocLnk &f )
         delete doc;
     doc = new DocLnk(f);
     editor->setText(txt);
-    editor->setEdited( false);
-    edited=false;
+    resetEditStatus();
 
     doc->setName(currentFileName);
     updateCaption();
@@ -686,6 +701,14 @@ void TextEdit::showEditTools() {
     menu->show();
     editBar->show();
     setWState (WState_Reserved1 );
+}
+
+void TextEdit::resetEditStatus() {
+    editor->setEdited( false);
+    edited=false;
+    // Clear undo buffer
+    editor->setUndoEnabled(false);
+    editor->setUndoEnabled(true);
 }
 
 /*!
@@ -749,8 +772,7 @@ bool TextEdit::save()
                     return false;
                 }
             }
-            editor->setEdited( false);
-            edited=false;
+            resetEditStatus();
             if(caption().left(1)=="*")
                 setCaption(caption().right(caption().length()-1));
         }
@@ -854,8 +876,7 @@ bool TextEdit::saveAs()
 
             delete  filePerm;
         }
-        editor->setEdited( false);
-        edited = false;
+        resetEditStatus();
         if(caption().left(1)=="*")
             setCaption(caption().right(caption().length()-1));
 
