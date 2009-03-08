@@ -213,6 +213,12 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     connect( a, SIGNAL( activated() ), this, SLOT( saveAs() ) );
     a->addTo( file );
 
+    file->insertSeparator();
+    deleteAction = new QAction( tr( "Delete" ), Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ),
+                     QString::null, 0, this, 0 );
+    connect( deleteAction, SIGNAL( activated() ), this, SLOT( fileDelete() ) );
+    deleteAction->addTo( file );
+
     undoAction = new QAction( tr( "Undo" ), Opie::Core::OResource::loadPixmap( "undo", Opie::Core::OResource::SmallIcon ),
                      QString::null, 0, this, 0 );
     undoAction->addTo( edit );
@@ -330,12 +336,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
                      QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( findClose() ) );
     a->addTo( searchBar );
-
-    edit->insertSeparator();
-    a = new QAction( tr( "Delete" ), Opie::Core::OResource::loadPixmap( "close", Opie::Core::OResource::SmallIcon ),
-                     QString::null, 0, this, 0 );
-    connect( a, SIGNAL( activated() ), this, SLOT( editDelete() ) );
-    a->addTo( edit );
 
     searchBar->hide();
 
@@ -597,6 +597,7 @@ void TextEdit::newFile( const DocLnk &f ) {
     currentFileName = "";
     updateCaption( currentFileName );
     resetEditStatus();
+    deleteAction->setEnabled(false);
 }
 
 void TextEdit::openDotFile( const QString &f )
@@ -616,6 +617,7 @@ void TextEdit::openDotFile( const QString &f )
             }
             editor->setText(txt);
             resetEditStatus();
+            deleteAction->setEnabled(true);
         }
     }
     updateCaption( currentFileName);
@@ -673,6 +675,7 @@ void TextEdit::openFile( const QString &f )
     if ( sep > 0 )
         name = name.mid( sep+1 );
     updateCaption( name );
+    deleteAction->setEnabled(true);
 }
 
 void TextEdit::openFile( const DocLnk &f )
@@ -695,6 +698,7 @@ void TextEdit::openFile( const DocLnk &f )
     doc->setName(currentFileName);
     updateCaption();
     setTimer();
+    deleteAction->setEnabled(true);
 }
 
 void TextEdit::showEditTools() {
@@ -879,6 +883,7 @@ bool TextEdit::saveAs()
         resetEditStatus();
         if(caption().left(1)=="*")
             setCaption(caption().right(caption().length()-1));
+        deleteAction->setEnabled(true);
 
         return true;
     }
@@ -945,24 +950,24 @@ void TextEdit::changeFont()
     delete d;
 }
 
-void TextEdit::editDelete()
+void TextEdit::fileDelete()
 {
-    switch ( QMessageBox::warning(this,tr("Text Editor"),
-                                  tr("Do you really want<BR>to <B>delete</B> "
-                                     "the current file\nfrom the disk?<BR>This is "
-                                     "<B>irreversable!</B>"),
-                                  tr("Yes"),tr("No"),0,0,1) ) {
-    case 0:
-        if(doc) {
+    if(doc && ( currentFileName != "" ) ) {
+        switch ( QMessageBox::warning(this,tr("Text Editor"),
+                                    tr("Are you sure you want<BR>to <B>delete</B> "
+                                        "the current file\nfrom disk?<BR>This is "
+                                        "<B>irreversible!</B>"),
+                                    tr("Yes"),tr("No"),0,1,1) ) {
+        case 0:
             doc->removeFiles();
             clear();
             setCaption( tr("Text Editor") );
-        }
-        break;
-    case 1:
-        // exit
-        break;
-    };
+            break;
+        case 1:
+            // exit
+            break;
+        };
+    }
 }
 
 void TextEdit::editorChanged()
