@@ -660,8 +660,6 @@ void QtRec::thisTab(QWidget* widg) {
 
         if(index == 1) { //control page
             fillDirectoryCombo();
-//       soundDevice->getOutVol();
-//       soundDevice->getInVol();
         }
 
         if( index==2) { //help page
@@ -673,23 +671,39 @@ void QtRec::thisTab(QWidget* widg) {
 }
 
 void QtRec::getOutVol( ) {
-    filePara.outVol = soundDevice->getOutVolume();
-//   odebug << "out vol " << filePara.outVol << "" << oendl;
-    OutputSlider->setValue( -filePara.outVol);
+    Config cfg("qpe");
+    cfg.setGroup("Volume");
+    int outvol = cfg.readNumEntry("VolumePercent");
+//   odebug << "out vol " << outvol << "" << oendl;
+    OutputSlider->setValue( -outvol );
 }
 
 void QtRec::getInVol() {
-    filePara.inVol = soundDevice->getInVolume();
-//    odebug << "in vol " << filePara.inVol << "" << oendl;
-    InputSlider->setValue( -filePara.inVol);
+    Config cfg("qpe");
+    cfg.setGroup("Volume");
+    int invol = cfg.readNumEntry("Mic");
+//    odebug << "in vol " << invol << "" << oendl;
+    InputSlider->setValue( -invol);
 }
 
 void QtRec::changedOutVolume() {
-    soundDevice->changedOutVolume( -OutputSlider->value());
+    int vol = -OutputSlider->value();
+    
+    Config cfg("qpe");
+    cfg.setGroup("Volume");
+    cfg.writeEntry("VolumePercent", QString::number( vol ));
+    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << false;
+
+    owarn << "changing output vol " << vol << oendl;
 }
 
 void QtRec::changedInVolume( ) {
-    soundDevice->changedInVolume( -InputSlider->value());
+    int vol = -InputSlider->value();
+
+    Config cfg("qpe");
+    cfg.setGroup("Volume");
+    cfg.writeEntry("Mic", QString::number( vol ));
+    QCopEnvelope( "QPE/System", "micChange(bool)" ) << false;
 }
 
 bool QtRec::setupAudio( bool record ) {

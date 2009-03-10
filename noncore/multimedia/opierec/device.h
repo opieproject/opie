@@ -13,12 +13,7 @@ public:
     bool closeDevice(bool drop = false);
     unsigned int getChannels();
     snd_pcm_format_t getFormat();
-    int getInVolume();
-    int getOutVolume();
     unsigned int getRate();
-    void changedInVolume(int);
-    void changedOutVolume(int);
-    bool setFragSize(int);
     bool setDeviceChannels(unsigned int);
     bool setDeviceRate(unsigned int);
     bool setDeviceFormat(snd_pcm_format_t);

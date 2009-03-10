@@ -2,9 +2,6 @@
 
 #include "device.h"
 
-#include <qpe/config.h>
-#include <qpe/qcopenvelope_qws.h>
-
 #include <opie2/odebug.h>
 
 /* STD */
@@ -68,35 +65,6 @@ bool Device::closeDevice(bool drop) {
         m_handle = NULL;
     }
     return true;
-}
-
-int Device::getInVolume() {
-    Config cfg("qpe");
-    cfg.setGroup("Volume");
-    return cfg.readNumEntry("Mic");
-}
-
-int Device::getOutVolume( ) {
-    Config cfg("qpe");
-    cfg.setGroup("Volume");
-    return cfg.readNumEntry("VolumePercent");
-}
-
-void Device::changedInVolume(int vol ) {
-    Config cfg("qpe");
-    cfg.setGroup("Volume");
-    cfg.writeEntry("Mic", QString::number(vol ));
-    QCopEnvelope( "QPE/System", "micChange(bool)" ) << false;
-}
-
-void Device::changedOutVolume(int vol) {
-    Config cfg("qpe");
-    cfg.setGroup("Volume");
-    cfg.writeEntry("VolumePercent", QString::number( vol ));
-
-    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << false;
-
-    owarn << "changing output vol " << vol << oendl;
 }
 
 bool Device::selectMicInput() {
@@ -178,11 +146,6 @@ unsigned int Device::getRate() {
 
 unsigned int Device::getChannels() {
     return devCh;
-}
-
-bool Device::setFragSize(int frag) {
-    // FIXME need to implement?
-    return true;
 }
 
 bool Device::reset() {
