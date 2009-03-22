@@ -10,8 +10,7 @@ copyright 2002 by L.J. Potter ljp@llornkcor.com
 #include <qlineedit.h>
 #include <qwidget.h>
 
-#include "device.h"
-#include "wavFile.h"
+#include <opie2/owavrecorder.h>
 
 class QButtonGroup;
 class QCheckBox;
@@ -37,17 +36,19 @@ class QLineEdit;
 #define BUFSIZE 1024
 //#define BUFSIZE 2048
 
+using namespace Opie::MM;
+
 enum playerMode { MODE_IDLE, MODE_PLAYING, MODE_PAUSED, MODE_STOPPING, MODE_RECORDING };
 
-class QtRec : public QWidget
+class QtRec : public QWidget, public OWavRecorderCallback
 { 
    Q_OBJECT
 
 public:
     static QString appName() { return QString::fromLatin1("opierec"); }
-   QtRec( QWidget* parent=0, const char* name=0, WFlags fl=0 );
-   ~QtRec();
-   QSlider *OutputSlider,*InputSlider;
+    QtRec( QWidget* parent=0, const char* name=0, WFlags fl=0 );
+    ~QtRec();
+    QSlider *OutputSlider,*InputSlider;
 
 signals:
     void stopRecording();
@@ -87,6 +88,7 @@ private:
     void setButtons();
     void fileSize(unsigned long size, QString &str);
     QString getSelectedFile();
+    void recorderCallback(const char *buffer, const int bytes, const int totalbytes, bool &stopflag);
     
 private slots:
     void endPlaying();
@@ -129,7 +131,8 @@ private slots:
 
 protected:
 
-    WavFile *wavFile;
+    OWavFile *wavFile; // FIXME remove all
+    OWavRecorder m_recorder;
     QCheckBox *outMuteCheckBox, *inMuteCheckBox, *compressionCheckBox, *autoMuteCheckBox, *stereoCheckBox;
     QComboBox* sampleRateComboBox, * bitRateComboBox, *directoryComboBox, *sizeLimitCombo;
     QLabel *playLabel2;
@@ -148,7 +151,7 @@ protected:
 
     bool doPlay();
     bool openPlayFile();
-    bool setUpFile();
+    void setupFileName();
     bool setupAudio( bool b);
     void fileBeamFinished( Ir *ir);
     void keyPressEvent( QKeyEvent *e);
@@ -156,7 +159,6 @@ protected:
     void hideEvent( QHideEvent * );
     void receive( const QCString &, const QByteArray & );
     void showListMenu(QListViewItem * );
-    void quickRec();
     void playIt();
  
 };

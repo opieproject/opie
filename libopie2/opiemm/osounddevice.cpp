@@ -1,6 +1,32 @@
-// device.cpp
+/*
+                             This file is part of the Opie Project
+              =.             (C) 2009 Team Opie <opie@handhelds.org>
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
 
-#include "device.h"
+#include "osounddevice.h"
 
 #include <opie2/odebug.h>
 
@@ -13,7 +39,7 @@
 #include <errno.h>
 #include <alsa/asoundlib.h>
 
-Device::Device( QString deviceName )
+OSoundDevice::OSoundDevice( QString deviceName )
 {
     devForm = SND_PCM_FORMAT_S16_LE;
     devCh = -1;
@@ -23,11 +49,11 @@ Device::Device( QString deviceName )
     snd_pcm_hw_params_malloc(&m_hwparams);
 }
 
-Device::~Device() {
+OSoundDevice::~OSoundDevice() {
     snd_pcm_hw_params_free(m_hwparams);
 }
 
-bool Device::openDevice( bool record ) {
+bool OSoundDevice::openDevice( bool record ) {
     odebug << "Opening sound device: " << m_deviceName << oendl;
 
     snd_pcm_stream_t stream;
@@ -54,7 +80,7 @@ bool Device::openDevice( bool record ) {
     return true;
 }
 
-bool Device::closeDevice(bool drop) {
+bool OSoundDevice::closeDevice(bool drop) {
     if(m_handle) {
         odebug << "Closing sound device" << oendl;
         if(drop)
@@ -67,12 +93,12 @@ bool Device::closeDevice(bool drop) {
     return true;
 }
 
-bool Device::selectMicInput() {
+bool OSoundDevice::selectMicInput() {
     // FIXME implement
     return true;
 }
 
-bool Device::setDeviceFormat( snd_pcm_format_t form) {
+bool OSoundDevice::setDeviceFormat( snd_pcm_format_t form) {
     odebug << "Set device format = " << form << oendl;
     if (snd_pcm_hw_params_set_format(m_handle, m_hwparams, form) < 0) {
         owarn << "Error setting format to " << form << oendl;
@@ -82,7 +108,7 @@ bool Device::setDeviceFormat( snd_pcm_format_t form) {
     return true;
 }
 
-bool Device::setDeviceChannels( unsigned int ch) {
+bool OSoundDevice::setDeviceChannels( unsigned int ch) {
     odebug << "Set channels = " << ch << oendl;
     int rc = snd_pcm_hw_params_set_channels(m_handle, m_hwparams, ch);
     if (rc < 0) {
@@ -93,7 +119,7 @@ bool Device::setDeviceChannels( unsigned int ch) {
     return true;
 }
 
-bool Device::setDeviceRate( unsigned int rate) {
+bool OSoundDevice::setDeviceRate( unsigned int rate) {
     // Set sample rate. If the requested rate is not supported by the hardware,
     // use the nearest possible rate.
     unsigned int actual_rate = rate;
@@ -108,7 +134,7 @@ bool Device::setDeviceRate( unsigned int rate) {
     return true;
 }
 
-int Device::init() {
+int OSoundDevice::init() {
     m_frames = 32;
     int dir = 0;
     if (snd_pcm_hw_params_set_period_size_near(m_handle,
@@ -136,26 +162,26 @@ int Device::init() {
     return size;
 }
 
-snd_pcm_format_t Device::getFormat() {
+snd_pcm_format_t OSoundDevice::getFormat() {
     return devForm;
 }
 
-unsigned int Device::getRate() {
+unsigned int OSoundDevice::getRate() {
     return devRate;
 }
 
-unsigned int Device::getChannels() {
+unsigned int OSoundDevice::getChannels() {
     return devCh;
 }
 
-bool Device::reset() {
+bool OSoundDevice::reset() {
     if (snd_pcm_drop(m_handle) < 0) {
        return false;
     }
     return true;
 }
 
-int Device::devWrite(char *buffer) {
+int OSoundDevice::devWrite(char *buffer) {
     int rc = snd_pcm_writei(m_handle, buffer, m_frames);
     if (rc == -EPIPE) {
         owarn << "underrun occurred" << oendl;
@@ -170,7 +196,7 @@ int Device::devWrite(char *buffer) {
     return rc;
 }
 
-int Device::devRead(char *buffer) {
+int OSoundDevice::devRead(char *buffer) {
     int rc = snd_pcm_readi(m_handle, buffer, m_frames);
     if (rc == -EPIPE) {
         owarn << "overrun occurred" << oendl;

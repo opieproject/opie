@@ -14,6 +14,7 @@ extern "C" {
 /* OPIE */
 #include <opie2/odebug.h>
 #include <opie2/oresource.h>
+#include <opie2/osounddevice.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
@@ -76,54 +77,7 @@ QLabel *timeLabel;
 QSlider *timeSlider;
 
 Waveform* waveform;
-Device *soundDevice;
-
-void QtRec::quickRec()
-{
-    odebug << ( filePara.numberSamples/filePara.sampleRate * filePara.channels ) << oendl;
-    odebug << "samples " << filePara.numberSamples << ", rate " << filePara.sampleRate
-           << ", channels " << filePara.channels << oendl;
-
-    int bytesWritten = 0;
-    int number = 0;
-
-    if(bufsize > 0) {
-        char *buffer = (char *) malloc(bufsize);
-        int bytesRead = 0;
-        
-        int samplesPerBlock = bufsize/2;
-        int adpcm_outsize = lsx_ima_bytes_per_block(filePara.channels, samplesPerBlock);
-        unsigned char adpcm_outbuf[ adpcm_outsize ];
-        int state = 0;
-
-        if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
-            memset( adpcm_outbuf, 0, adpcm_outsize);
-            lsx_ima_init_table();
-        }
-
-        //odebug << "bufsize = " << bufsize << "spb = " << samplesPerBlock << oendl;
-
-        int fd = wavFile->getfd();
-        while(true) {
-            if ( mode == MODE_STOPPING )
-                break;
-            if ( mode != MODE_PAUSED ) {
-                soundDevice->devRead(buffer);
-                if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
-                    lsx_ima_block_mash_i(filePara.channels, (short *)buffer, samplesPerBlock, &state, adpcm_outbuf, 9);
-                    number = ::write( fd, adpcm_outbuf, adpcm_outsize);
-                }
-                else
-                    number = ::write( fd, buffer, bufsize);
-                waveform->newSamples( buffer, number );
-                bytesWritten += number;
-            }
-            qApp->processEvents();
-        }
-        free(buffer);
-        filePara.numberSamples = bytesWritten;
-    }
-} /// END quickRec()
+OSoundDevice *soundDevice;
 
 void QtRec::playIt()
 {
@@ -187,7 +141,7 @@ QtRec::QtRec( QWidget* parent,  const char* name, WFlags fl )
     hwcfg.setGroup("Hardware");
 
     // FIXME this is broken
-    soundDevice = new Device( "default" );
+    soundDevice = new OSoundDevice( "default" );
 
     getInVol();
     getOutVol();
@@ -592,57 +546,82 @@ void QtRec::start() {
 }
 
 bool QtRec::rec() { //record
-    QString timeString;
-    timeString.sprintf("%.0f",  0.0);
-
+//    QString timeString;
+//    timeString.sprintf("%.0f",  0.0);
 //    timeLabel->setText( timeString+ " seconds");
     secCount = 1;
-    setButtons();
+    
+    OWavFileParameters fileparams;
+    bool ok;
+    
+    fileparams.resolution = bitRateComboBox->currentText().toInt( &ok,10);
 
-    if( setupAudio( true)) {
-        if(setUpFile())  {
-            int fileSize = 0;
-            Config cfg("OpieRec");
-            cfg.setGroup("Settings");
-            filePara.SecondsToRecord = getCurrentSizeLimit();
-            int diskSize = checkDiskSpace( (const QString &) wavFile->getFileName());
+    if(stereoCheckBox->isChecked())
+        fileparams.channels = 2; 
+    else
+        fileparams.channels = 1; 
 
-            if( filePara.SecondsToRecord == 0) {
-                fileSize = diskSize;
-            } 
-            else if( filePara.format == WAVE_FORMAT_PCM) {
+    if(compressionCheckBox->isChecked())
+        fileparams.format = WAVE_FORMAT_DVI_ADPCM;
+    else
+        fileparams.format = WAVE_FORMAT_PCM;
+
+    fileparams.sampleRate = sampleRateComboBox->currentText().toInt( &ok,10);
+
+    setupFileName();
+    if( m_recorder.setup( filePara.fileName, fileparams ) ) {
+        int fileSize = 0;
+        Config cfg("OpieRec");
+        cfg.setGroup("Settings");
+        filePara.SecondsToRecord = getCurrentSizeLimit();
+        int diskSize = checkDiskSpace( m_recorder.getWriteFileName() );
+
+        if( filePara.SecondsToRecord == 0) {
+            fileSize = diskSize;
+        } 
+        else if( filePara.format == WAVE_FORMAT_PCM) {
 //                odebug << "WAVE_FORMAT_PCM" << oendl;
-                fileSize = (filePara.SecondsToRecord ) * filePara.channels
-                    * filePara.sampleRate * ( filePara.resolution / 8) + 1000;
-            } 
-            else {
+            fileSize = (filePara.SecondsToRecord ) * filePara.channels
+                * filePara.sampleRate * ( filePara.resolution / 8) + 1000;
+        } 
+        else {
 //                odebug << "WAVE_FORMAT_DVI_ADPCM" << oendl;
-                fileSize = ((filePara.SecondsToRecord) * filePara.channels
-                            * filePara.sampleRate * ( filePara.resolution / 8) ) / 4 + 250;
-            }
+            fileSize = ((filePara.SecondsToRecord) * filePara.channels
+                        * filePara.sampleRate * ( filePara.resolution / 8) ) / 4 + 250;
+        }
 
-            timeSlider->setRange(0, filePara.SecondsToRecord);
+        timeSlider->setRange(0, filePara.SecondsToRecord);
 
-            if( diskSize < fileSize/1024) {
-                QMessageBox::warning(this,
-                                        tr("Low Disk Space"),
-                                        tr("You are running low of\nrecording space\n"
-                                        "or a card isn't being recognized"));
-                stop();
-            } 
-            else {
-                odebug << "Start recording" << oendl;
-                mode = MODE_RECORDING;
+        if( diskSize < fileSize/1024) {
+            QMessageBox::warning(this,
+                                    tr("Low Disk Space"),
+                                    tr("You are running low of\nrecording space\n"
+                                    "or a card isn't being recognized"));
+            stop();
+        } 
+        else {
+            waveform->changeSettings( fileparams.sampleRate, fileparams.channels, m_recorder.getDeviceFormat() );
 
-                setButtons();
+            odebug << "Start recording" << oendl;
+            mode = MODE_RECORDING;
+            setButtons();
 
-                startTimer(1000);
-                quickRec();
-                endRecording();
-            }
-        } //end setUpFile
-    } //end setupAudio
+            startTimer(1000);
+            m_recorder.record( this );
+            endRecording();
+        }
+    }
     return true;
+}
+
+void QtRec::recorderCallback(const char *buffer, const int bytes, const int totalbytes, bool &stopflag)
+{
+    if( mode != MODE_RECORDING )
+        stopflag = true;
+    else {
+        waveform->newSamples( buffer, bytes );
+        qApp->processEvents();
+    }
 }
 
 /*
@@ -736,7 +715,7 @@ bool QtRec::setupAudio( bool record ) {
     owarn << "<<<<<<<<<<<<<<<<<<<open dsp " << filePara.sampleRate << " " << filePara.channels << " " << sampleformat << "" << oendl;
     waveform->changeSettings( filePara.sampleRate, filePara.channels, sampleformat );
 
-    soundDevice = new Device( "default" ); //open rec
+    soundDevice = new OSoundDevice( "default" ); //open rec
     soundDevice->openDevice(record);
 
     //////////////////         <<<<<<<<<<<<>>>>>>>>>>>>
@@ -751,8 +730,7 @@ bool QtRec::setupAudio( bool record ) {
     return true;
 }
 
-
-bool QtRec::setUpFile() { //setup file for recording
+void QtRec::setupFileName() {
     Config cfg("OpieRec");
     cfg.setGroup("Settings");
 
@@ -771,42 +749,7 @@ bool QtRec::setUpFile() { //setup file for recording
         fileName += date;
     fileName += ".wav";
 
-//    odebug << "set up file for recording: " << fileName << oendl;
-    char pointer[] = "/tmp/opierec-XXXXXX";
-    int fd = 0;
-
-    QString actualFile;
-    if( fileName.find("/mnt",0,true) == -1
-        && fileName.find("/tmp",0,true) == -1 ) {
-        // if destination file is most likely in flash (assuming jffs2)
-        // we have to write to a different filesystem first
-
-        if(( fd = mkstemp( pointer)) < 0 ) {
-            perror("mkstemp failed");
-            return false;
-        }
-
-//        odebug << "Opening tmp file " << pointer << "" << oendl;
-        actualFile = (QString)pointer;
-    } 
-    else { 
-        // just use regular file.. no moving
-        actualFile = fileName;
-    }
-
-    wavFile = new WavFile( this, actualFile,
-                            filePara.sampleRate,
-                            filePara.channels,
-                            filePara.resolution,
-                            filePara.format, 
-                            bufsize/2);
-
-    fd = wavFile->createFile();
     filePara.fileName = fileName;
-    if(fd == -1)
-        return false;
-
-    return true;
 }
 
 /// <<<<<<<<<<<<<<<<  PLAY >>>>>>>>>>>>>>>>>>>
@@ -970,27 +913,6 @@ void QtRec::endRecording() {
     if(autoMute)
         doMute( true);
 
-    soundDevice->closeDevice();
-
-    if( wavFile->isOpen()) {
-        wavFile->adjustHeaders( filePara.numberSamples );
-        filePara.numberSamples = 0;
-        wavFile->closeFile();
-
-        QString actualFile = wavFile->getFileName();
-        if( actualFile != filePara.fileName ) {
-            // move tmp file to regular file
-            QString cmd = "mv " + actualFile + " " + filePara.fileName;
-            odebug << "moving tmp file to " + filePara.fileName << oendl;
-            system( cmd.latin1());
-        }
-
-        odebug << "finished recording" << oendl;
-//        timeLabel->setText("");
-    }
-
-//      if(soundDevice) delete soundDevice;
-
     timeSlider->setValue(0);
     initIconView();
     odebug << QFileInfo(filePara.fileName).baseName() << oendl;
@@ -1040,9 +962,7 @@ bool QtRec::openPlayFile() {
         endPlaying();
         return false;
     }
-    wavFile = new WavFile(this,
-                        fileName,
-                        false);
+    wavFile = new OWavFile(fileName);
     int fd = wavFile->openFile();
     if(fd == -1) {
         //  if(!track.open(IO_ReadOnly)) {
