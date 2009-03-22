@@ -42,12 +42,12 @@ typedef struct {
 class WavFile : public QObject {
 Q_OBJECT
 public:
-    WavFile( QObject * parent=0,const QString &fileName=0, bool newFile=0, int sampleRate=0,
+    WavFile( QObject * parent=0,const QString &fileName=0, int sampleRate=0,
              int channels=0 , int resolution=0, int format=0, unsigned short samplesPerBlock=0);
     ~WavFile();
-    bool adjustHeaders(int fd, unsigned long total);
+    bool adjustHeaders(unsigned long total);
 
-    int wavHandle();
+    int getfd();
     int getFormat();
     int getResolution();
     int getSampleRate();
@@ -60,8 +60,8 @@ public:
     bool isOpen();
 
 private:
-    int wavFormat, wavChannels, wavResolution, wavSampleRate, wavNumberSamples;
-    unsigned short wavSamplesPerBlock;
+    int m_format, m_channels, m_resolution, m_samplerate, m_numsamples;
+    unsigned short m_samplesperblock;
     wavhdr hdr;
     wavhdrext_ima imaext;
     wavdatahdr datahdr;

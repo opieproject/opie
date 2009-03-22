@@ -10,24 +10,22 @@ using namespace Opie::Core;
 
 /* QT */
 #include <qmessagebox.h>
-#include <qdir.h>
 
 /* STD */
 #include <errno.h>
 #include <stdlib.h>
 #include <unistd.h>
 
-WavFile::WavFile( QObject * parent, const QString &fileName, bool makeNwFile, int sampleRate,
+WavFile::WavFile( QObject * parent, const QString &fileName, int sampleRate,
                   int channels, int resolution, int format, unsigned short samplesPerBlock )
         : QObject( parent)
 {
     owarn << "new wave file: " << fileName << oendl;
-    bool b =  makeNwFile;
-    wavSampleRate=sampleRate;
-    wavFormat=format;
-    wavChannels=channels;
-    wavResolution=resolution;
-    wavSamplesPerBlock=samplesPerBlock;
+    m_samplerate = sampleRate;
+    m_format = format;
+    m_channels = channels;
+    m_resolution = resolution;
+    m_samplesperblock = samplesPerBlock;
     track.setName(fileName);
 }
 
@@ -73,7 +71,7 @@ bool WavFile::setWavHeader(int fd) {
     strncpy(hdr.fmtID, "fmt ", 4); // fmt
     hdr.fmtLen = 16;
 
-    if( wavFormat == WAVE_FORMAT_PCM) {
+    if( m_format == WAVE_FORMAT_PCM) {
         hdr.fmtTag = 1; // PCM
 //    odebug << "set header  WAVE_FORMAT_PCM" << oendl;
     }
@@ -83,19 +81,19 @@ bool WavFile::setWavHeader(int fd) {
     }
 
     //  (*hdr).nChannels = 1;//filePara.channels;// ? 2 : 1*/; // channels
-    hdr.nChannels = wavChannels;// ? 2 : 1*/; // channels
+    hdr.nChannels = m_channels;// ? 2 : 1*/; // channels
 
-    hdr.sampleRate = wavSampleRate; //samples per second
-    hdr.avgBytesPerSec = (wavSampleRate)*( wavChannels*(wavResolution/8)); // bytes per second
-    hdr.nBlockAlign = wavChannels*( wavResolution/8); //block align
-    hdr.bitsPerSample = wavResolution; //bits per sample 8, or 16
+    hdr.sampleRate = m_samplerate; //samples per second
+    hdr.avgBytesPerSec = (m_samplerate)*( m_channels*(m_resolution/8)); // bytes per second
+    hdr.nBlockAlign = m_channels*( m_resolution/8); //block align
+    hdr.bitsPerSample = m_resolution; //bits per sample 8, or 16
 
     if( hdr.fmtTag == WAVE_FORMAT_DVI_ADPCM ) {
         hdr.bitsPerSample = 4;
         imaext.wExtSize = 2;
         hdr.fmtLen = 16 + 2 + imaext.wExtSize;
 
-        hdr.nBlockAlign = lsx_ima_bytes_per_block(hdr.nChannels, wavSamplesPerBlock);
+        hdr.nBlockAlign = lsx_ima_bytes_per_block(hdr.nChannels, m_samplesperblock);
         // Why we have to do this I'm not exactly sure, but the input samples per block
         // is not compatible with the ADPCM format (or so sox reports anyway)
         imaext.wSamplesPerBlock = lsx_ima_samples_in(0, hdr.nChannels, hdr.nBlockAlign, 0);
@@ -117,11 +115,11 @@ bool WavFile::setWavHeader(int fd) {
     strncpy(datahdr.dataID, "data", 4);
     write( fd, &datahdr, sizeof(datahdr));
     
-//   owarn << "writing header: bitrate " << wavResolution << ", samplerate " << wavSampleRate << ",  channels " << wavChannels << oendl;
+//   owarn << "writing header: bitrate " << m_resolution << ", samplerate " << m_samplerate << ",  channels " << m_channels << oendl;
     return true;
 }
 
-bool WavFile::adjustHeaders(int fd, unsigned long total) {
+bool WavFile::adjustHeaders(unsigned long total) {
     // This is cheating, but we only support PCM and IMA ADPCM 
     // at the moment so we can get away with it
     int hdrsize;
@@ -129,6 +127,8 @@ bool WavFile::adjustHeaders(int fd, unsigned long total) {
         hdrsize = 36 + 4 + 12;
     else 
         hdrsize = 36;
+
+    int fd = track.handle();
     
     // RIFF size
     lseek(fd, 4, SEEK_SET);
@@ -164,13 +164,13 @@ int WavFile::parseWavHeader(int fd) {
         return -1;
     }
 
-    wavFormat = hdr.fmtTag;
-    wavChannels = hdr.nChannels;
-    wavSampleRate = hdr.sampleRate;
-    wavResolution = hdr.bitsPerSample;
+    m_format = hdr.fmtTag;
+    m_channels = hdr.nChannels;
+    m_samplerate = hdr.sampleRate;
+    m_resolution = hdr.bitsPerSample;
     
     if (hdr.fmtTag == WAVE_FORMAT_DVI_ADPCM) {
-        wavResolution = 16;
+        m_resolution = 16;
         bytes = read(fd, &imaext, sizeof(imaext));
         if(bytes < sizeof(imaext)) {
             return -1;
@@ -186,7 +186,7 @@ int WavFile::parseWavHeader(int fd) {
             break;
         lseek(fd, datahdr.dataLen, SEEK_CUR);
     }
-    wavNumberSamples = datahdr.dataLen;
+    m_numsamples = datahdr.dataLen;
 
     return 0;
 }
@@ -195,28 +195,28 @@ QString WavFile::getFileName() {
     return track.name();
 }
 
-int WavFile::wavHandle(){
+int WavFile::getfd(){
     return track.handle();
 }
 
 int WavFile::getFormat() {
-    return wavFormat;
+    return m_format;
 }
 
 int WavFile::getResolution() {
-    return wavResolution;
+    return m_resolution;
 }
 
 int WavFile::getSampleRate() {
-    return wavSampleRate;
+    return m_samplerate;
 }
 
 int WavFile::getNumberSamples() {
-    return wavNumberSamples;
+    return m_numsamples;
 }
 
 int WavFile::getChannels() {
-    return wavChannels;
+    return m_channels;
 }
 
 bool WavFile::isOpen() {

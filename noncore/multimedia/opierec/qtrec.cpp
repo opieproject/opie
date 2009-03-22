@@ -59,17 +59,11 @@ static int deviceBitRates[] = { 8, 16, -1 };
 
 typedef struct {
     int sampleRate;
-    /*      int fragSize; */
-    /*      int blockSize; */
     int resolution; //bitrate
     int channels; //number of channels
-    int fd; //file descriptor
     int numberSamples; //total number of samples
     int SecondsToRecord; // number of seconds that should be recorded
     float numberOfRecordedSeconds; //total number of samples recorded
-    int samplesToRecord; //number of samples to be recorded
-    int inVol; //input volume
-    int outVol; //output volume
     int format; //wavfile format PCM.. ADPCM
     QString fileName; //name of fiel to be played/recorded
 } fileParameters;
@@ -109,6 +103,7 @@ void QtRec::quickRec()
 
         //odebug << "bufsize = " << bufsize << "spb = " << samplesPerBlock << oendl;
 
+        int fd = wavFile->getfd();
         while(true) {
             if ( mode == MODE_STOPPING )
                 break;
@@ -116,10 +111,10 @@ void QtRec::quickRec()
                 soundDevice->devRead(buffer);
                 if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
                     lsx_ima_block_mash_i(filePara.channels, (short *)buffer, samplesPerBlock, &state, adpcm_outbuf, 9);
-                    number = ::write( filePara.fd, adpcm_outbuf, adpcm_outsize);
+                    number = ::write( fd, adpcm_outbuf, adpcm_outsize);
                 }
                 else
-                    number = ::write( filePara.fd, buffer, bufsize);
+                    number = ::write( fd, buffer, bufsize);
                 waveform->newSamples( buffer, number );
                 bytesWritten += number;
             }
@@ -144,18 +139,19 @@ void QtRec::playIt()
             lsx_ima_init_table();
         }
 
-        int bytesWritten = lseek( filePara.fd, 0, SEEK_CUR ); // so we can resume from the middle
+        int fd = wavFile->getfd();
+        int bytesWritten = lseek( fd, 0, SEEK_CUR ); // so we can resume from the middle
         while(bytesWritten < filePara.numberSamples) {
             if ( mode == MODE_STOPPING )
                 break;
             if ( mode != MODE_PAUSED ) {
                 int number;
                 if( filePara.format == WAVE_FORMAT_DVI_ADPCM) {
-                    number = ::read( filePara.fd, adpcm_inbuf, adpcm_insize);
+                    number = ::read( fd, adpcm_inbuf, adpcm_insize);
                     lsx_ima_block_expand_i(filePara.channels, adpcm_inbuf, (short *)buffer, samplesPerBlock);
                 }
                 else
-                    number = ::read( filePara.fd, buffer, bufsize);
+                    number = ::read( fd, buffer, bufsize);
     
                 soundDevice->devWrite(buffer);
                 waveform->newSamples( buffer, number );
@@ -799,16 +795,15 @@ bool QtRec::setUpFile() { //setup file for recording
     }
 
     wavFile = new WavFile( this, actualFile,
-                            true,
                             filePara.sampleRate,
                             filePara.channels,
                             filePara.resolution,
                             filePara.format, 
                             bufsize/2);
 
-    filePara.fd = wavFile->createFile();
+    fd = wavFile->createFile();
     filePara.fileName = fileName;
-    if(filePara.fd == -1)
+    if(fd == -1)
         return false;
 
     return true;
@@ -978,10 +973,9 @@ void QtRec::endRecording() {
     soundDevice->closeDevice();
 
     if( wavFile->isOpen()) {
-        wavFile->adjustHeaders( filePara.fd, filePara.numberSamples);
+        wavFile->adjustHeaders( filePara.numberSamples );
         filePara.numberSamples = 0;
         wavFile->closeFile();
-        filePara.fd=0;
 
         QString actualFile = wavFile->getFileName();
         if( actualFile != filePara.fileName ) {
@@ -1023,7 +1017,6 @@ void QtRec::endPlaying() {
     total = 0;
     filePara.numberSamples = 0;
 //   wavFile->closeFile();
-    filePara.fd = 0;
 //  if(wavFile) delete wavFile; //this crashes
 
     odebug << "track closed" << oendl;
@@ -1050,8 +1043,8 @@ bool QtRec::openPlayFile() {
     wavFile = new WavFile(this,
                         fileName,
                         false);
-    filePara.fd = wavFile->openFile();
-    if(filePara.fd == -1) {
+    int fd = wavFile->openFile();
+    if(fd == -1) {
         //  if(!track.open(IO_ReadOnly)) {
         QString errorMsg = (QString)strerror(errno);
         QMessageBox::message(tr("Note"), tr("Could not open audio file.\n")
@@ -1067,7 +1060,7 @@ bool QtRec::openPlayFile() {
 
         odebug << "**** filePara.resolution = " << filePara.resolution << oendl;
 
-        odebug << "file " << filePara.fd << ", samples " << filePara.numberSamples << " " << filePara.sampleRate << "" << oendl;
+        odebug << "file " << fd << ", samples " << filePara.numberSamples << " " << filePara.sampleRate << "" << oendl;
         int sec = (int) (( filePara.numberSamples / filePara.sampleRate) / filePara.channels) / ( filePara.channels*( filePara.resolution/8));
 
 //        owarn << "seconds " << sec << "" << oendl;
@@ -1319,7 +1312,7 @@ void QtRec::timeSliderReleased() {
     sliderPos = timeSlider->value();
 
     odebug << "slider released " << sliderPos << "" << oendl;
-    int newPos =  lseek( filePara.fd, sliderPos, SEEK_SET);
+    int newPos =  lseek( wavFile->getfd(), sliderPos, SEEK_SET);
     total =  newPos*4;
     filePara.numberOfRecordedSeconds = (float)sliderPos / (float)filePara.sampleRate * (float)2;
 
@@ -1349,7 +1342,7 @@ void QtRec::rewindReleased() {
     rewindTimer->stop();
     if( wavFile->isOpen()) {
         sliderPos = timeSlider->value();
-        int newPos = lseek( filePara.fd, sliderPos, SEEK_SET);
+        int newPos = lseek( wavFile->getfd(), sliderPos, SEEK_SET);
         total =  newPos * 4;
         odebug << "rewind released " << total << "" << oendl;
         startTimer(1000);
@@ -1380,7 +1373,7 @@ void QtRec::FastforwardReleased() {
     forwardTimer->stop();
     if( wavFile->isOpen()) {
         sliderPos = timeSlider->value();
-        int newPos = lseek( filePara.fd, sliderPos, SEEK_SET);
+        int newPos = lseek( wavFile->getfd(), sliderPos, SEEK_SET);
         total =  newPos * 4;
         odebug << "fastforward released " << total << "" << oendl;
         startTimer(1000);
