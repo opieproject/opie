@@ -118,8 +118,8 @@ void BookManager::removeAlarms( const OPimEvent &ev ) {
 bool BookManager::nextOccurrence( const OPimEvent &ev, const QDateTime &start, QDateTime &dt ) {
     QDateTime recurDateTime = ev.startDateTime();
     if( ev.hasRecurrence() ) {
-        QDate recurDate = ev.startDateTime().date();
-        QDate startDate = QDate::currentDate();
+        QDate recurDate;
+        QDate startDate = start.date();
         do {
             if( ! ev.recurrence().nextOcurrence( startDate, recurDate ) )
                 return false;
@@ -147,4 +147,30 @@ QDate BookManager::findRealStart( const OPimOccurrence &occ ) {
     }
 
     return dt;
+}
+
+OPimEvent BookManager::find( const QString &str, bool caseSensitive, QDateTime &dt )
+{
+    // queryByExample not yet implemented in the backends, so we do it by hand instead
+
+    QRegExp r( str );
+    r.setCaseSensitive( caseSensitive );
+    OPimRecordList<OPimEvent> lst = m_db->matchRegexp( r );
+
+    QDateTime min;
+    OPimEvent minev;
+    OPimRecordListIterator<OPimEvent> it;
+    for( it = lst.begin(); it != lst.end(); ++it ) 
+    {
+        QDateTime evdate;
+        if( nextOccurrence( (*it), dt, evdate ) ) {
+            if( !min.isValid() || min < evdate ) {
+                min = evdate;
+                minev = (*it);
+            }
+        }
+    }
+
+    dt = min;
+    return minev;
 }

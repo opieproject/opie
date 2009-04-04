@@ -44,6 +44,7 @@ namespace Datebook {
 
         static bool nextOccurrence( const OPimEvent &ev, const QDateTime &start, QDateTime &dt ); 
         QDate findRealStart( const OPimOccurrence &occ );
+        OPimEvent find( const QString &str, bool caseSensitive, QDateTime &dt );
 
     protected:
         void addAlarms( const OPimEvent &ev );
