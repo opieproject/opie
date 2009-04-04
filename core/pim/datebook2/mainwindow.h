@@ -29,6 +29,10 @@ namespace Datebook {
         MainWindow();
         ~MainWindow();
 
+    signals:
+        void signalFindNotFound();
+        void signalFindWrapAround();
+
     private slots:
         void initUI(); // init the UI
         void initConfig(); // apply the config
@@ -76,6 +80,7 @@ namespace Datebook {
         void add( const OPimRecord& );
         bool doAlarm( const QDateTime &when, int uid );
         void nextView();
+        void slotDoFind( const QString &, const QDate &, bool, bool, int );
 
     private:
         QToolBar* toolbar();
@@ -136,6 +141,7 @@ namespace Datebook {
         int m_alarmPresetTime;
         QArray<int> m_defaultCategories;
         QString m_defaultLocation;
+        bool m_inSearch;
     };
 }
 }

@@ -1,3 +1,5 @@
+#define QTOPIA_INTERNAL_FD
+
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -18,6 +20,7 @@
 #include <qtoolbar.h>
 #include <qpe/qpemessagebox.h>
 #include <qmessagebox.h>
+#include <qpe/finddialog.h>
 #include <opie2/oresource.h>
 #include <opie2/opluginloader.h>
 #include <opie2/opimnotifymanager.h>
@@ -46,6 +49,7 @@ MainWindow::MainWindow()
 {
     m_currView = NULL;
     m_initialDate = QDate::currentDate();
+    m_inSearch = false;
     
     initConfig();
     initBars();
@@ -337,7 +341,57 @@ View* MainWindow::currentView() {
 }
 
 void MainWindow::slotFind() {
+    // move it to the day view...
+    showDayView();
+    FindDialog frmFind( "Calendar", this ); // no tr needed
+    frmFind.setUseDate( true );
+    frmFind.setDate( currentView()->date() );
+    QObject::connect( &frmFind,
+                      SIGNAL(signalFindClicked(const QString&,const QDate&,bool,bool,int)),
+              this,
+              SLOT(slotDoFind(const QString&,const QDate&,bool,bool,int)) );
+    QObject::connect( this,
+              SIGNAL(signalFindNotFound()),
+              &frmFind,
+              SLOT(slotNotFound()) );
+    QObject::connect( this,
+              SIGNAL(signalFindWrapAround()),
+              &frmFind,
+              SLOT(slotWrapAround()) );
+    frmFind.move(0,0);
+    frmFind.exec();
+    m_inSearch = false;
+}
 
+void MainWindow::slotDoFind( const QString& txt, const QDate &dt,
+               bool caseSensitive, bool /*backwards*/,
+               int category )
+{
+    // if true at the end we will start at the begin again and afterwards
+    // we will emit string not found
+    static bool wrapAround = true;
+    static QDateTime startdt;
+
+    if ( !m_inSearch ) {
+        startdt = QDateTime( dt, QTime(0,0,0) );
+        m_inSearch = true;
+    }
+    
+    OPimEvent ev = manager()->find( txt, caseSensitive, startdt );
+    if ( ev.uid() != 0 ) {
+//X        dayView->setStartViewTime( dtEnd.time().hour() );
+        currentView()->showDay( startdt.date() );
+        startdt = startdt.addDays(1);
+    }
+    else {
+        if ( wrapAround ) {
+            emit signalFindWrapAround();
+            startdt = QDateTime();
+        } 
+        else
+            emit signalFindNotFound();
+        wrapAround = !wrapAround;
+    }
 }
 
 void MainWindow::slotConfigure() {
