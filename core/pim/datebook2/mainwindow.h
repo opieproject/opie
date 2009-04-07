@@ -104,6 +104,8 @@ namespace Datebook {
         void show( int uid );
         void edit( int uid );
         void edit();
+        void edit( int uid, const QDate &date );
+        void edit( const OPimOccurrence *occurrence );
         void showDayView();
         void showDefaultView();
         void add( const OPimRecord& );

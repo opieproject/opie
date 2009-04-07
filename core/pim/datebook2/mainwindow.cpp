@@ -157,10 +157,68 @@ void MainWindow::edit() {
 }
 
 void MainWindow::edit( int uid ) {
+    // Need to make sure manager is loaded (in case called from QCop message)
+    if (!manager()->isLoaded() )
+        manager()->load();
+
     OPimEvent event = manager()->event( uid );
     if ( editor()->edit( event ) ) {
         event = editor()->event();
         manager()->update(event);
+    }
+}
+
+void MainWindow::edit( int uid, const QDate &date ) {
+    // Need to make sure manager is loaded (in case called from QCop message)
+    if (!manager()->isLoaded() )
+        manager()->load();
+
+    OPimOccurrence::List occs = manager()->list( date, date );
+    for (OPimOccurrence::List::ConstIterator it = occs.begin(); it != occs.end(); ++it ) {
+        OPimOccurrence ito = (*it);
+        if ( ito.toEvent().uid() == uid ) {
+            edit( &ito );
+            break;
+        }
+    }
+}
+
+void MainWindow::edit( const OPimOccurrence *occurrence ) {
+    OPimEvent event = occurrence->toEvent();
+    while ( editor()->edit( event ) ) {
+        int result = 0;
+        event = editor()->event();
+        OPimRecurrence rec = event.recurrence();
+        if( rec.type() != OPimRecurrence::NoRepeat ) {
+            result = QMessageBox::warning( this, tr("Calendar"), tr( "This is a recurring event.\n\nDo you want to apply changes to\nall occurrences or just this one?"), tr("All"), tr("This one"), tr("Cancel") );
+            if(result == 1) {
+                // Now create a copy of the event just for this day
+                event.assignUid();
+                rec.setType( OPimRecurrence::NoRepeat );
+                event.setRecurrence(rec);
+                event.setStartDateTime( QDateTime(occurrence->date(), event.startDateTime().time()) );
+                event.setEndDateTime( QDateTime(occurrence->date(), event.endDateTime().time()) );
+                // Add an exception for the existing event
+                OPimEvent dupEvent( occurrence->toEvent() );
+                OPimRecurrence dupRec( dupEvent.recurrence() );
+                dupRec.addException( occurrence->date() );
+                dupEvent.setRecurrence(dupRec);
+                // Link the two events
+                event.setParent(dupEvent.uid());
+                dupEvent.addChild(event.uid());
+                // Write changes
+                manager()->add(event);
+                manager()->update( dupEvent );
+            }
+            else if(result == 2)
+                continue;
+        }
+
+        if(result == 0) {
+            manager()->update(event);
+            currentView()->reschedule();
+        }
+        break;
     }
 }
 
@@ -505,14 +563,13 @@ void MainWindow::slotAppMessage( const QCString& msg, const QByteArray& data ) {
         int uid;
         QDate date;
         stream >> uid >> date;
-        // Find the specific occurrence of this event
-        // FIXME implement
+        // Edit the specific occurrence of this event
+        edit( uid, date );
         needShow = true;
     }
     else if (msg == "editEvent(int)") {
         int uid;
         stream >> uid;
-        // Find the specific occurrence of this event
         edit(uid);
         needShow = true;
     }
@@ -544,45 +601,8 @@ void MainWindow::slotItemEdit() {
     const OPimOccurrence *occurrence = currentView()->currentItem();
     if(!occurrence)
         return;
-    
-    OPimEvent event = occurrence->toEvent();
-    while ( editor()->edit( event ) ) {
-        int result = 0;
-        event = editor()->event();
-        OPimRecurrence rec = event.recurrence();
-        if( rec.type() != OPimRecurrence::NoRepeat ) {
-            result = QMessageBox::warning( this, tr("Calendar"), tr( "This is a recurring event.\n\nDo you want to apply changes to\nall occurrences or just this one?"), tr("All"), tr("This one"), tr("Cancel") );
-            if(result == 1) {
-                // Now create a copy of the event just for this day
-                event.assignUid();
-                rec.setType( OPimRecurrence::NoRepeat );
-                event.setRecurrence(rec);
-                event.setStartDateTime( QDateTime(occurrence->date(), event.startDateTime().time()) );
-                event.setEndDateTime( QDateTime(occurrence->date(), event.endDateTime().time()) );
-                // Add an exception for the existing event
-                OPimEvent dupEvent( occurrence->toEvent() );
-                OPimRecurrence dupRec( dupEvent.recurrence() );
-                dupRec.addException( occurrence->date() );
-                dupEvent.setRecurrence(dupRec);
-                // Link the two events
-                event.setParent(dupEvent.uid());
-                dupEvent.addChild(event.uid());
-                // Write changes
-                manager()->add(event);
-                manager()->update( dupEvent );
-            }
-            else if(result == 2)
-                continue;
-        }
 
-        if(result == 0) {
-            manager()->update(event);
-        }
-
-        currentView()->reschedule();
-
-        break;
-    }
+    edit( occurrence );
 }
 
 void MainWindow::slotItemDuplicate() {
