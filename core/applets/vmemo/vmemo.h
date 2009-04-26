@@ -48,7 +48,8 @@ public:
     VMemo( QWidget *parent, const char *name = NULL);
     ~VMemo();
     static int position();
-    QLabel* msgLabel;
+    QWidget *m_statusWidget;
+    QLabel *m_timeLabel;
     QTimer *t_timer;
     bool usingIcon;
 
@@ -69,10 +70,12 @@ private:
     OWavRecorder m_recorder;
     OWavFileParameters m_fileparams;
     int m_maxseconds;
+    int m_elapsedseconds;
     bool m_useAlerts;
     void paintEvent( QPaintEvent* );
     int setToggleButton(int);
     void readSettings();
+    void setupStatusWidget( QString );
     QCopChannel *myChannel;
     bool recording;
 };

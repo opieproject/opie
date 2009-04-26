@@ -40,6 +40,8 @@ using namespace Opie::Core;
 #include <qpainter.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
+#include <qpushbutton.h>
+#include <qlayout.h>
 
 int seq = 0;
 
@@ -132,6 +134,38 @@ void VMemo::mouseReleaseEvent( QMouseEvent * )
 {
 }
 
+void VMemo::setupStatusWidget( QString fileTitle )
+{
+    m_statusWidget = new QWidget();
+    QHBoxLayout *layout2 = new QHBoxLayout( m_statusWidget ); 
+    layout2->setSpacing( 4 );
+    layout2->setMargin( 2 );
+    QVBoxLayout *layout = new QVBoxLayout( m_statusWidget );
+    layout2->addLayout( layout );
+    layout->setSpacing( 4 );
+    layout->setMargin( 2 );
+
+    QLabel *msgLabel = new QLabel( m_statusWidget, "alertLabel" );
+    msgLabel->setText( fileTitle );
+    layout->addWidget( msgLabel );
+
+    m_timeLabel = new QLabel( m_statusWidget );
+    m_timeLabel->setText( "<b>00:00</b>" ); // no tr
+    layout->addWidget( m_timeLabel );
+
+    QPushButton *pb = new QPushButton( m_statusWidget );
+    pb->setPixmap( m_pixrecording );
+    pb->setFixedSize( 20, 20 );
+    connect( pb, SIGNAL( clicked() ), SLOT( stopRecording() ) );
+    layout2->addWidget( pb );
+
+    m_statusWidget->setCaption( tr("VMemo - Recording") );
+    QWidget * desk = QApplication::desktop();
+    m_statusWidget->show();
+    m_statusWidget->move( desk->width()/2 - m_statusWidget->width()/2 ,
+        desk->width()/2-m_statusWidget->height()/2 );
+}
+
 bool VMemo::startRecording()
 {
     QString date = TimeString::dateString( QDateTime::currentDateTime(),false,true);
@@ -141,12 +175,12 @@ bool VMemo::startRecording()
     date.replace(QRegExp(","),"");
 
     if( m_useAlerts ) {
-        msgLabel = new QLabel( 0, "alertLabel" );
-        msgLabel->setText( tr("<B><P><font size=+2>VMemo-Recording</font></B><p>%1</p>").arg("vm_"+ date));
-        msgLabel->show();
+        setupStatusWidget( "vm_"+ date ); // no tr
     }
-    else
-        msgLabel=0;
+    else {
+        m_statusWidget = 0;
+        m_timeLabel = 0;
+    }
 
     Config config( "Vmemo" );
     config.setGroup( "System" );
@@ -171,10 +205,11 @@ bool VMemo::startRecording()
         return false;
     }
 
-    if( m_maxseconds > 0 )
-        t_timer->start( m_maxseconds * 1000 );
+    if( m_maxseconds > 0 || m_statusWidget )
+        t_timer->start( 1000 );
 
     // FIXME error checking!
+    m_elapsedseconds = 0;
     recording = true;
     repaint();
     m_recorder.record( this );
@@ -206,10 +241,11 @@ void VMemo::stopRecording()
 //    show();
     odebug << "Stopped recording" << oendl;
     recording = false;
-    if( msgLabel ) {
-        msgLabel->close();
-        msgLabel=0;
-        delete msgLabel;
+    if( m_statusWidget ) {
+        m_statusWidget->close();
+        delete m_statusWidget;
+        m_statusWidget = 0;
+        m_timeLabel = 0;
     }
     t_timer->stop();
 //    Config cfg("Vmemo");
@@ -257,9 +293,14 @@ int VMemo::setToggleButton(int tog)
 
 void VMemo::timerBreak()
 {
-    //stop
-    stopRecording();
-    QMessageBox::message("Vmemo",tr("<p>Vmemo recording stopped (over time limit)"));
+    m_elapsedseconds++;
+    if( m_timeLabel )
+        m_timeLabel->setText( "<b>" + QString("").sprintf( "%.2d:%.2d", m_elapsedseconds / 60, m_elapsedseconds % 60 ) + "</b>" );
+    if( m_maxseconds > 0 && m_elapsedseconds >= m_maxseconds ) {
+        //stop
+        stopRecording();
+        QMessageBox::message("Vmemo",tr("<p>Vmemo recording stopped (over time limit)"));
+    }
 }
 
 void VMemo::readSettings()
