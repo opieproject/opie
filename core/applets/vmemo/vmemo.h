@@ -64,6 +64,8 @@ private:
     void recorderCallback(const char *buffer, const int bytes, const int totalbytes, bool &stopflag);
 
 private:
+    QPixmap m_pixnormal;
+    QPixmap m_pixrecording;
     OWavRecorder m_recorder;
     OWavFileParameters m_fileparams;
     int m_maxseconds;
