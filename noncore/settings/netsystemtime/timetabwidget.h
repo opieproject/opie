@@ -52,6 +52,10 @@ public:
 	void saveSettings( bool );
 	void setDateTime( const QDateTime & );
     void setNTPBtnEnabled( bool enabled );
+	void showHideAmPm();
+
+protected:
+	void showEvent( QShowEvent * );
 
 private:
 	QSpinBox         *sbHour;

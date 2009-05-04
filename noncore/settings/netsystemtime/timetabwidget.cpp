@@ -150,6 +150,13 @@ TimeTabWidget::~TimeTabWidget()
 {
 }
 
+void TimeTabWidget::showEvent( QShowEvent *e )
+{
+	QWidget::showEvent(e);
+	showHideAmPm();
+}
+
+
 void TimeTabWidget::saveSettings( bool commit )
 {
 	if ( commit )
@@ -237,8 +244,6 @@ void TimeTabWidget::slotUse12HourTime( int i )
 {
 	use12HourTime = (i == 1);
 
-	cbAmpm->setEnabled( use12HourTime );
-
 	int show_hour = sbHour->value();
 
 	if ( use12HourTime )
@@ -272,6 +277,8 @@ void TimeTabWidget::slotUse12HourTime( int i )
 	}
 
 	sbHour->setValue( show_hour );
+
+	showHideAmPm();
 }
 
 void TimeTabWidget::slotDateFormatChanged( const DateFormat &df )
@@ -327,4 +334,14 @@ void TimeTabWidget::slotTZChanged( const QString &newtz )
 void TimeTabWidget::showNetworkSettings()
 {
 	QCopEnvelope e("QPE/Application/networksettings", "raise()" );
+}
+
+void TimeTabWidget::showHideAmPm()
+{
+	if( isVisible() ) {
+		if(use12HourTime)
+			cbAmpm->show();
+		else
+			cbAmpm->hide();
+	}
 }
