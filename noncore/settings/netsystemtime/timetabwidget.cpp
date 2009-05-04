@@ -114,22 +114,29 @@ TimeTabWidget::TimeTabWidget( QWidget *parent )
 	// Space filler
 	layout->addItem( new QSpacerItem( 1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding ), 7, 0 );
 
+	// Network settings button
+	QPushButton *pb = new QPushButton( Opie::Core::OResource::loadPixmap( "Network/PPPConnect", Opie::Core::OResource::SmallIcon ),
+                                       tr( "Network settings" ), container );
+    pb->setMinimumHeight( AppLnk::smallIconSize()+4 );
+	connect( pb, SIGNAL(clicked()), this, SLOT(showNetworkSettings()) );
+	layout->addMultiCellWidget( pb, 8, 8, 0, 5 );
+
 	// Set NTP time button
     m_ntpBtn = new QPushButton( Opie::Core::OResource::loadPixmap( "netsystemtime/ntptab", Opie::Core::OResource::SmallIcon ),
                                 tr( "Get time from the network" ), container );
     m_ntpBtn->setMinimumHeight( AppLnk::smallIconSize()+4 );
 	connect( m_ntpBtn, SIGNAL(clicked()), this, SIGNAL(getNTPTime()) );
-	layout->addMultiCellWidget( m_ntpBtn, 8, 8, 0, 5 );
+	layout->addMultiCellWidget( m_ntpBtn, 9, 9, 0, 5 );
 
 	// Set predicted time button
-	QPushButton *pb = new QPushButton( Opie::Core::OResource::loadPixmap( "netsystemtime/predicttab", Opie::Core::OResource::SmallIcon ),
+	pb = new QPushButton( Opie::Core::OResource::loadPixmap( "netsystemtime/predicttab", Opie::Core::OResource::SmallIcon ),
                                        tr( "Set predicted time" ), container );
     pb->setMinimumHeight( AppLnk::smallIconSize()+4 );
 	connect( pb, SIGNAL(clicked()), this, SIGNAL(getPredictedTime()) );
-	layout->addMultiCellWidget( pb, 9, 9, 0, 5 );
+	layout->addMultiCellWidget( pb, 10, 10, 0, 5 );
 
 	// Space filler at bottom of widget
-	layout->addItem( new QSpacerItem( 1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding ), 10, 0 );
+	layout->addItem( new QSpacerItem( 1, 1, QSizePolicy::Minimum, QSizePolicy::Expanding ), 11, 0 );
 
 	// Initialize values
 	Config config( "locale" );
@@ -315,4 +322,9 @@ void TimeTabWidget::slotTZChanged( const QString &newtz )
 
 		emit tzChanged( newtz );
 	}
+}
+
+void TimeTabWidget::showNetworkSettings()
+{
+	QCopEnvelope e("QPE/Application/networksettings", "raise()" );
 }

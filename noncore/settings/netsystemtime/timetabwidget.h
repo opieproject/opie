@@ -77,6 +77,7 @@ public slots:
 
 private slots:
 	void slotTZChanged( const QString & );
+	void showNetworkSettings();
 };
 
 #endif
