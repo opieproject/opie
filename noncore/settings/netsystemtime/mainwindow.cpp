@@ -110,6 +110,8 @@ MainWindow::MainWindow( QWidget *parent , const char *name,  bool modal, WFlags 
     slotNTPDelayChanged( config.readNumEntry( "ntpRefreshFreq", 1440 ) );
     slotCheckNtp( -1 );
 
+    formatTab->sendOptions();
+
     // Display app
     //showMaximized();
     (void)new QPEDialogListener(this);

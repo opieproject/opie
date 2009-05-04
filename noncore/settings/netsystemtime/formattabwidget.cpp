@@ -118,9 +118,6 @@ FormatTabWidget::FormatTabWidget( QWidget *parent )
 	config.setGroup( "Time" );
 	cbAmpm->setCurrentItem( config.readBoolEntry( "AMPM", TRUE ) ? 1 : 0 );
 	cbWeekStart->setCurrentItem( config.readBoolEntry( "MONDAY", TRUE ) ? 1 : 0 );
-
-	// Send initial configuration options
-	QTimer::singleShot( 1200, this, SLOT(sendOptions()) );
 }
 
 FormatTabWidget::~FormatTabWidget()

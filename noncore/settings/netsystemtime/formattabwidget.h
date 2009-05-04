@@ -46,6 +46,7 @@ public:
 	~FormatTabWidget();
 
 	void saveSettings( bool );
+	void sendOptions();
 
 private:
 	QComboBox *cbAmpm;
@@ -61,7 +62,6 @@ signals:
 
 private slots:
 	void slotDateFormatChanged( int );
-	void sendOptions();
 };
 
 #endif
