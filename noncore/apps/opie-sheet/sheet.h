@@ -209,7 +209,7 @@ public:
     void insertRows(int no=1, bool allColumns=TRUE);
     void insertColumns(int no=1, bool allRows=TRUE);
 
-    void dataFindReplace(const QString &find, const QString &replace, bool matchCase=TRUE, bool allCells=TRUE, bool entireCell=FALSE, bool replace=FALSE, bool replaceAll=FALSE);
+    void dataFindReplace(const QString &find, const QString &replaceStr, bool matchCase=TRUE, bool allCells=TRUE, bool entireCell=FALSE, bool replace=FALSE, bool replaceAll=FALSE);
 
     // Static functions
     static int getHeaderColumn(const QString &section);
