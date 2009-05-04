@@ -58,3 +58,6 @@ contains( platform, x11 ) {
   LIBS        = -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib
 }
 
+!contains( CONFTEST, y ) {
+  LIBS      += -lsysfs
+}

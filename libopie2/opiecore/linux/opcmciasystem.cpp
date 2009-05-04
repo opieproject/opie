@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
               =.             (C) 2005 Michael 'Mickey' Lauer <mickey@Vanille.de>
-            .=l.
+            .=l.             (C) 2009 Paul Eggleton <bluelightning@bluelightning.org>
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
@@ -25,6 +25,9 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
+Note: portions copied from pcmcia-utils (file src/pccardctl.c)
+      (C) 2004-2005  Dominik Brodowski <linux@brodo.de>
+
 */
 
 #include "opcmciasystem.h"
@@ -41,15 +44,164 @@ using namespace Opie::Core;
 
 /* STD */
 #include <errno.h>
-#include <fcntl.h>
 #include <string.h>
 #include <stdlib.h>
-#include <sys/ioctl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <unistd.h>
 
-#define PROC_DEVICES "/proc/devices"
+
+// Functions borrowed from pccardctl.c
+
+static int pccardctl_echo_one(unsigned long socket_no, const char *in_file)
+{
+    int ret;
+    char file[SYSFS_PATH_MAX];
+    struct sysfs_attribute *attr;
+
+    if (!in_file)
+        return -EINVAL;
+
+    snprintf(file, SYSFS_PATH_MAX, "/sys/class/pcmcia_socket/pcmcia_socket%lu/%s",
+                socket_no, in_file);
+
+    attr = sysfs_open_attribute(file);
+    if (!attr)
+            return -ENODEV;
+
+    ret = sysfs_write_attribute(attr, "42", 2);
+
+    sysfs_close_attribute(attr);
+
+    return (ret);
+}
+
+static int pccardctl_power_socket(unsigned long socket_no, unsigned int power)
+{
+    int ret;
+    char file[SYSFS_PATH_MAX];
+        struct sysfs_attribute *attr;
+
+    snprintf(file, SYSFS_PATH_MAX,
+         "/sys/class/pcmcia_socket/pcmcia_socket%lu/card_pm_state",
+         socket_no);
+
+        attr = sysfs_open_attribute(file);
+        if (!attr)
+                return -ENODEV;
+
+        ret = sysfs_write_attribute(attr, power ? "off" : "on", power ? 3 : 2);
+
+        sysfs_close_attribute(attr);
+
+    return (ret);
+}
+
+static int read_out_file(char * file, char **output)
+{
+    struct sysfs_attribute *attr = sysfs_open_attribute(file);
+    int ret;
+    char *result = NULL;
+
+    *output = NULL;
+
+    if (!attr)
+        return -EIO;
+    ret = sysfs_read_attribute(attr);
+
+    if (ret || !attr->value || !attr->len || (attr->len > SYSFS_PATH_MAX))
+        goto close_out;
+
+    result = (char *)malloc(attr->len + 1);
+    if (result) {
+        memcpy(result, attr->value, attr->len);
+        result[attr->len] = '\0';
+        if (result[attr->len - 1] == '\n')
+            result[attr->len - 1] = '\0';
+        *output = result;
+    } else
+        ret = -ENOMEM;
+
+ close_out:
+    sysfs_close_attribute(attr);
+    return ret;
+}
+
+static int pccardctl_get_string_socket(unsigned long socket_no, const char *in_file, char **output)
+{
+    char file[SYSFS_PATH_MAX];
+
+    snprintf(file, SYSFS_PATH_MAX, "/sys/class/pcmcia_socket/pcmcia_socket%lu/%s",
+         socket_no, in_file);
+
+    return read_out_file(file, output);
+}
+
+static int pccardctl_get_string(unsigned long socket_no, const char *in_file, char **output)
+{
+    char file[SYSFS_PATH_MAX];
+
+    snprintf(file, SYSFS_PATH_MAX, "/sys/bus/pcmcia/devices/%lu.0/%s",
+         socket_no, in_file);
+
+    return read_out_file(file, output);
+}
+
+static int pccardctl_get_one_f(unsigned long socket_no, unsigned int dev, const char *in_file, unsigned int *result)
+{
+    char *value;
+    char file[SYSFS_PATH_MAX];
+    int ret;
+
+    snprintf(file, SYSFS_PATH_MAX, "/sys/bus/pcmcia/devices/%lu.%u/%s",
+         socket_no, dev, in_file);
+    ret = read_out_file(file, &value);
+    if (ret || !value)
+        return -EINVAL;
+
+    if (sscanf(value, "0x%X", result) != 1)
+        return -EIO;
+    return 0;
+}
+
+static int pccardctl_get_one(unsigned long socket_no, const char *in_file, unsigned int *result)
+{
+    return pccardctl_get_one_f(socket_no, 0, in_file, result);
+}
+
+static int pccardctl_get_power_device(unsigned long socket_no, unsigned int func)
+{
+    char * value;
+    char file[SYSFS_PATH_MAX];
+
+    snprintf(file, SYSFS_PATH_MAX, "/sys/bus/pcmcia/devices/%lu.%u/pm_state",
+         socket_no, func);
+    read_out_file(file, &value);
+    if (value) {
+        if (!strncmp(value, "off", 3))
+            return 1;
+        return 0;
+    }
+
+    return -ENODEV;
+}
+
+static int pccardctl_get_power_socket(unsigned long socket_no)
+{
+    char * value;
+    char file[SYSFS_PATH_MAX];
+
+    snprintf(file, SYSFS_PATH_MAX, "/sys/class/pcmcia_socket/pcmcia_socket%lu/card_pm_state",
+         socket_no);
+    read_out_file(file, &value);
+    if (value) {
+        if (!strncmp(value, "off", 3))
+            return 1;
+        return 0;
+    }
+
+    return -ENODEV;
+}
 
 /*======================================================================================
  * OPcmciaSystem
@@ -58,34 +210,8 @@ using namespace Opie::Core;
 OPcmciaSystem* OPcmciaSystem::_instance = 0;
 
 OPcmciaSystem::OPcmciaSystem()
-              :_major( 0 )
 {
     qDebug( "OPcmciaSystem::OPcmciaSystem()" );
-
-    // get major node number out of /proc/devices
-    QFile procfile( PROC_DEVICES );
-    if ( procfile.exists() && procfile.open( IO_ReadOnly ) )
-    {
-        QTextStream devstream( &procfile );
-        devstream.readLine(); // skip header
-        while ( !devstream.atEnd() && !_major )
-        {
-            int nodenumber;
-            QString driver;
-            devstream >> nodenumber >> driver;
-            if ( driver == "pcmcia" )
-            {
-                qDebug( "OPcmciaSystem::OPcmciaSystem(): gotcha! pcmcia node number = %d", nodenumber );
-                _major = nodenumber;
-                break;
-            }
-        }
-    }
-    else
-    {
-        qWarning( "OPcmciaSystem::OPcmciaSystem() - can't open /proc/devices - continuing with limited functionality." );
-    }
-
     synchronize();
 }
 
@@ -149,7 +275,7 @@ void OPcmciaSystem::synchronize()
 
     QMap<int,QString>::Iterator it;
     for( it = sockets.begin(); it != sockets.end(); ++it )
-        _interfaces.append( new OPcmciaSocket( _major, it.key(), this, (const char*) it.data() ) );
+        _interfaces.append( new OPcmciaSocket( it.key(), this, (const char*) it.data() ) );
 }
 
 
@@ -202,8 +328,8 @@ OPcmciaSystem::CardIterator OPcmciaSystem::iterator() const
  * OPcmciaSocket
  *======================================================================================*/
 
-OPcmciaSocket::OPcmciaSocket( int major, int socket, QObject* parent, const char* name )
-                 :QObject( parent, name ), _major( major ), _socket( socket )
+OPcmciaSocket::OPcmciaSocket( int socket, QObject* parent, const char* name )
+                 :QObject( parent, name ), _socket( socket )
 {
     qDebug( "OPcmciaSocket::OPcmciaSocket()" );
     init();
@@ -219,74 +345,13 @@ OPcmciaSocket::~OPcmciaSocket()
 
 /* internal */ void OPcmciaSocket::init()
 {
-    // open control socket and gather file descriptor
-    if ( _major )
-    {
-        dev_t dev = makedev( _major, _socket );
-
-#ifdef OPCMCIA_DEBUG
-        QString filename = "/tmp/opcmciasystem-debug";
-        if ( QFile::exists( filename ) )
-#else
-        QString filename = QString().sprintf( "/tmp/opcmciasystem-%d", ::getpid() );
-        if ( ::mknod( (const char*) filename, ( S_IFCHR|S_IREAD|S_IWRITE ), dev ) == 0 )
-#endif
-        {
-            _fd = ::open( (const char*) filename, O_RDONLY);
-            if ( !_fd )
-            {
-                qWarning( "OPcmciaSocket::init() - can't open control socket (%s)", strerror( errno ) );
-            }
-#ifndef OPCMCIA_DEBUG
-            else
-            {
-                ::unlink( (const char*) filename );
-            }
-#endif
-        }
-        else
-        {
-            qWarning( "OPcmciaSocket::init() - can't create device node '%s' (%s)", (const char*) filename, strerror( errno ) );
-        }
-    }
+    // no longer needs to create/open PCMCIA device node
 }
 
 /* internal */ void OPcmciaSocket::cleanup()
 {
     // close control socket
 }
-
-/* internal */ bool OPcmciaSocket::getTuple( cisdata_t tuple ) const
-{
-    _ioctlarg.tuple.DesiredTuple = tuple;
-    _ioctlarg.tuple.Attributes = TUPLE_RETURN_COMMON;
-    _ioctlarg.tuple.TupleOffset = 0;
-
-    int result;
-    result = ::ioctl(_fd, DS_GET_FIRST_TUPLE, &_ioctlarg);
-    if ( result != 0 )
-    {
-        qWarning( "OPcmciaSocket::getTuple() - DS_GET_FIRST_TUPLE failed (%s)", strerror( errno ) );
-        return false;
-    }
-
-    result = ::ioctl(_fd, DS_GET_TUPLE_DATA, &_ioctlarg);
-    if ( result != 0 )
-    {
-        qWarning( "OPcmciaSocket::getTuple() - DS_GET_TUPLE_DATA failed (%s)", strerror( errno ) );
-        return false;
-    }
-
-    result = ::ioctl( _fd, DS_PARSE_TUPLE, &_ioctlarg );
-    if ( result != 0 )
-    {
-        qWarning( "OPcmciaSocket::getTuple() - DS_PARSE_TUPLE failed (%s)", strerror( errno ) );
-        return false;
-    }
-
-    return true;
-}
-
 
 int OPcmciaSocket::number() const
 {
@@ -302,90 +367,97 @@ QString OPcmciaSocket::identity() const
 
 const OPcmciaSocket::OPcmciaSocketCardStatus OPcmciaSocket::status() const
 {
-    cs_status_t cs_status;
-    cs_status.Function = 0;
-    int result = ::ioctl( _fd, DS_GET_STATUS, &cs_status );
-    if ( result != 0 )
-    {
-        qWarning( "OPcmciaSocket::status() - DS_GET_STATUS failed (%s)", strerror( errno ) );
-        // return ( errno == -ENODEV ) ? Empty : Unknown;
-        return Unknown;
-    }
-    else
-    {
-        qDebug( " card   status = 0x%08x", cs_status.CardState );
-        qDebug( " socket status = 0x%08x", cs_status.SocketState );
-        return (OPcmciaSocket::OPcmciaSocketCardStatus) (cs_status.CardState + cs_status.SocketState);
-    }
+    // DS_GET_STATUS is no longer supported
+    // FIXME remove this function
+    return Unknown;
 }
 
 
 bool OPcmciaSocket::isUnsupported() const
 {
+    // FIXME this is no longer going to work
     return ( strcmp( name(), "unsupported card" ) == 0 );
 }
 
 
 bool OPcmciaSocket::isEmpty() const
 {
-    return !(status() & ( Occupied | OccupiedCardBus ));
+    char *card_type = 0;
+    pccardctl_get_string_socket(_socket, "card_type", &card_type);
+    return (!card_type);
 }
 
 
 bool OPcmciaSocket::isSuspended() const
 {
-    return status() & Suspended;
+    return pccardctl_get_power_socket(_socket);
 }
 
 
 bool OPcmciaSocket::eject()
 {
-    return ::ioctl( _fd, DS_EJECT_CARD ) != -1;
+    return (pccardctl_echo_one(_socket, "card_eject") == 0);
 }
 
 
 bool OPcmciaSocket::insert()
 {
-    return ::ioctl( _fd, DS_INSERT_CARD ) != -1;
+    return (pccardctl_echo_one(_socket, "card_insert") == 0);
 }
 
 
 bool OPcmciaSocket::suspend()
 {
-    return ::ioctl( _fd, DS_SUSPEND_CARD ) != -1;
+    return (pccardctl_power_socket(_socket, 1) == 0);
 }
 
 
 bool OPcmciaSocket::resume()
 {
-    return ::ioctl( _fd, DS_RESUME_CARD ) != -1;
+    return (pccardctl_power_socket(_socket, 0) == 0);
 }
 
 
 bool OPcmciaSocket::reset()
 {
-    return ::ioctl( _fd, DS_RESET_CARD ) != -1;
+    int ret = pccardctl_power_socket(_socket, 1);
+    if (ret)
+        return false;
+    return (pccardctl_power_socket(_socket, 0) == 0);
 }
 
 
 QStringList OPcmciaSocket::productIdentityVector() const
 {
     QStringList list;
-    cistpl_vers_1_t *vers = &_ioctlarg.tuple_parse.parse.version_1;
-    vers->ns = 0; // number of strings
-    if ( getTuple( CISTPL_VERS_1 ) )
-    {
-        qDebug( " NUMBER_OF_PRODIDs = %d", vers->ns );
-        for ( int i = 0; i < QMIN( CISTPL_VERS_1_MAX_PROD_STRINGS, vers->ns ); ++i )
-        {
-            qDebug( " PRODID = '%s'", vers->str+vers->ofs[i] );
-            list += vers->str+vers->ofs[i];
+
+    char *prod_id[4];
+    int valid_prod_id = 0;
+    int i;
+
+    for (i=1; i<=4; i++) {
+        char file[SYSFS_PATH_MAX];
+        snprintf(file, SYSFS_PATH_MAX, "prod_id%u", i);
+
+        pccardctl_get_string(_socket, file, &prod_id[i-1]);
+        if (prod_id[i-1])
+            valid_prod_id++;
+    }
+
+    if (valid_prod_id) {
+        for (i=0;i<4;i++) {
+            if (prod_id[i]) {
+                qDebug( " PRODID = '%s'", prod_id[i] );
+                list += prod_id[i]; 
+                free(prod_id[i]);
+            }
+            else
+                list += ""; 
         }
-    }
+    } 
     else
-    {
         list += "<unknown>";
-    }
+
     return list;
 }
 
@@ -398,22 +470,21 @@ QString OPcmciaSocket::productIdentity() const
 
 QString OPcmciaSocket::manufacturerIdentity() const
 {
-    cistpl_manfid_t *manfid = &_ioctlarg.tuple_parse.parse.manfid;
-    if ( getTuple( CISTPL_MANFID ) )
-    {
-        return QString().sprintf( "0x%04x, 0x%04x", manfid->manf, manfid->card );
-    }
-    else
-        return "<unknown>";
+    unsigned int manf_id, card_id;
+    if (!pccardctl_get_one(_socket, "manf_id", &manf_id))
+        if (!pccardctl_get_one(_socket, "card_id", &card_id))
+            return QString().sprintf( "0x%04x, 0x%04x", manf_id, card_id );
+
+    return "<unknown>";
 }
 
 
 QString OPcmciaSocket::function() const
 {
-    cistpl_funcid_t *funcid = &_ioctlarg.tuple_parse.parse.funcid;
-    if ( getTuple( CISTPL_FUNCID ) )
+    unsigned int func_id;
+    if (!pccardctl_get_one(_socket, "func_id", &func_id))
     {
-        switch ( funcid->func )
+        switch ( func_id )
         {
             case 0: return "Multifunction"; break;
             case 1: return "Memory"; break;

@@ -30,6 +30,8 @@
 #ifndef OPCMCIASYSTEM_H
 #define OPCMCIASYSTEM_H
 
+#include <sysfs/libsysfs.h>
+
 #include "linux_pcmcia.h"
 
 #include <qobject.h>
@@ -98,7 +100,6 @@ class OPcmciaSystem : public QObject
   private:
     static OPcmciaSystem* _instance;
     CardList _interfaces;
-    int _major;
 
   private:
     class Private;
@@ -137,7 +138,7 @@ class OPcmciaSocket : public QObject
      * Constructor. Normally you don't create @ref OPcmciaSocket objects yourself,
      * but access them via @ref OPcmciaSystem::socket().
      */
-    OPcmciaSocket( int major, int socket, QObject* parent, const char* name );
+    OPcmciaSocket( int socket, QObject* parent, const char* name );
     /**
      * Destructor.
      */
@@ -211,11 +212,7 @@ class OPcmciaSocket : public QObject
   private:
     void init();
     void cleanup();
-    bool getTuple( cisdata_t tuple ) const;
-    int _major;
     int _socket;
-    int _fd;
-    mutable ds_ioctl_arg_t _ioctlarg;
 
   private:
     class Private;
