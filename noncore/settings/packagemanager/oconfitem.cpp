@@ -31,11 +31,12 @@
 #include "oconfitem.h"
 
 OConfItem::OConfItem( Type type, const QString &name, const QString &value,
-                      const QString &features, bool active )
+                      const QString &features, const QString &file, bool active )
     : m_type( type )
     , m_name( name )
     , m_value( value )
     , m_features( features )
+    , m_file( file )
     , m_active( active )
 {
 }

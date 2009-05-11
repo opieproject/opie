@@ -99,7 +99,7 @@ void OIpkgConfigDlg::accept()
         }
         else
             m_configs->append( new OConfItem( OConfItem::Option, "http_proxy",
-                               m_proxyHttpServer->text(), QString::null,
+                               m_proxyHttpServer->text(), QString::null, QString::null,
                                m_proxyHttpActive->isChecked() ) );
 
         confItem = m_ipkg->findConfItem( OConfItem::Option, "ftp_proxy" );
@@ -110,7 +110,7 @@ void OIpkgConfigDlg::accept()
         }
         else
             m_configs->append( new OConfItem( OConfItem::Option, "ftp_proxy",
-                               m_proxyFtpServer->text(), QString::null,
+                               m_proxyFtpServer->text(), QString::null, QString::null,
                                m_proxyFtpActive->isChecked() ) );
 
         confItem = m_ipkg->findConfItem( OConfItem::Option, "proxy_username" );
@@ -472,6 +472,7 @@ void OIpkgConfigDlg::slotServerNew()
     if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted )
     {
         // Add to configuration option list
+        m_ipkg->defaultConfItemFile( server );
         m_configs->append( server );
         m_configs->sort();
 
@@ -532,6 +533,7 @@ void OIpkgConfigDlg::slotDestNew()
     if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted )
     {
         // Add to configuration option list
+        m_ipkg->defaultConfItemFile( dest );
         m_configs->append( dest );
         m_configs->sort();
 

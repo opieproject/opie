@@ -41,18 +41,20 @@ public:
 
     OConfItem( Type type = NotDefined, const QString &name = QString::null,
                const QString &value = QString::null, const QString &features = QString::null,
-               bool active = true );
+               const QString &file = QString::null, bool active = true );
 
     Type           type()     { return m_type; }
     const QString &name()     { return m_name; }
     const QString &value()    { return m_value; }
     const QString &features() { return m_features; }
+    const QString &file()     { return m_file; }
     bool           active()   { return m_active; }
 
     void setType( Type type )                   { m_type = type; }
     void setName( const QString &name )         { m_name = name; }
     void setValue( const QString &value )       { m_value = value; }
     void setFeatures( const QString &features ) { m_features = features; }
+    void setFile( const QString &file )         { m_file = file; }
     void setActive( bool active )               { m_active = active; }
 
 private:
@@ -60,6 +62,7 @@ private:
     QString m_name;     // Name of item
     QString m_value;    // Value of item
     QString m_features; // Comma-deliminated list of features this item supports
+    QString m_file;     // File this item came from
     bool    m_active;   // Indicates whether item is currently active
 };
 
@@ -69,23 +72,32 @@ private:
 
     int compareItems( QCollection::Item item1, QCollection::Item item2 )
     {
-        // Sort by OConfItem location then by type
-        OConfItem::Type type1 = reinterpret_cast<OConfItem*>(item1)->type();
-        OConfItem::Type type2 = reinterpret_cast<OConfItem*>(item2)->type();
-        if ( type1 < type2 )
+        // Sort by OConfItem file, name, then by type
+        QString file1 = reinterpret_cast<OConfItem*>(item1)->file();
+        QString file2 = reinterpret_cast<OConfItem*>(item2)->file();
+        if ( file1 < file2 )
             return -1;
-        else if ( type1 == type2 )
+        else if ( file1 == file2 )
         {
-            QString name1 = reinterpret_cast<OConfItem*>(item1)->name();
-            QString name2 = reinterpret_cast<OConfItem*>(item2)->name();
-            if ( name1 < name2 )
+            OConfItem::Type type1 = reinterpret_cast<OConfItem*>(item1)->type();
+            OConfItem::Type type2 = reinterpret_cast<OConfItem*>(item2)->type();
+            if ( type1 < type2 )
                 return -1;
-            else if ( name1 == name2 )
-                return 0;
-            else /*if ( name1 > name2 )*/
+            else if ( type1 == type2 )
+            {
+                QString name1 = reinterpret_cast<OConfItem*>(item1)->name();
+                QString name2 = reinterpret_cast<OConfItem*>(item2)->name();
+                if ( name1 < name2 )
+                    return -1;
+                else if ( name1 == name2 )
+                    return 0;
+                else /*if ( name1 > name2 )*/
+                    return 1;
+            }
+            else /*if ( type1 > type2 )*/
                 return 1;
         }
-        else /*if ( type1 > type2 )*/
+        else /*if ( file1 > file2 )*/
             return 1;
     }
 };
