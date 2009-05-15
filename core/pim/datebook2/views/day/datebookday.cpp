@@ -29,7 +29,6 @@
 */
 
 #include "datebookday.h"
-#include "datebookdayheaderimpl.h"
 #include "datebookdayallday.h"
 #include "view.h"
 
@@ -177,9 +176,26 @@ void DateBookDayView::keyPressEvent( QKeyEvent *e )
         // we this is some sort of thing we know about...
         e->accept();
         emit sigCapturedKey( txt );
-    } else {
-        // I don't know what this key is, do you?
-        e->ignore();
+    } 
+    else {
+        switch(e->key()) {
+            case Key_Up:
+                moveUp();
+                break;
+            case Key_Down:
+                moveDown();
+                break;
+            case Key_Left:
+                currDate = currDate.addDays(-1);
+                emit sigDateChanged( currDate.year(), currDate.month(), currDate.day() );
+                break;
+            case Key_Right:
+                currDate = currDate.addDays(1);
+                emit sigDateChanged( currDate.year(), currDate.month(), currDate.day() );
+                break;
+            default:
+                e->ignore();
+        }        // I don't know what this key is, do you?
     }
 }
 

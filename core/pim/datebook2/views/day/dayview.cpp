@@ -155,6 +155,7 @@ void DayView::initUI(QWidget *parent) {
     connect( m_header, SIGNAL( dateChanged(int,int,int) ), m_view, SLOT( slotDateChanged(int,int,int) ) );
     connect( m_view, SIGNAL( sigColWidthChanged() ), this, SLOT( slotColWidthChanged() ) );
     connect( m_view, SIGNAL(sigCapturedKey(const QString&)), this, SLOT(slotNewEvent(const QString&)) );
+    connect( m_view, SIGNAL( sigDateChanged(int,int,int)), this, SLOT(slotViewDateChanged(int,int,int)) );
 
     QTimer *timer = new QTimer( this );
 
@@ -208,6 +209,12 @@ void DayView::dateChanged( int y, int m, int d )
 
     dayViewWidget()->addSelection( ts );
     selectedWidget = 0;
+}
+
+void DayView::slotViewDateChanged( int y, int m, int d )
+{
+    // Date was changed from the view (likely a keypress)
+    m_header->setDate( y, m, d );
 }
 
 void DayView::setSelectedWidget( DateBookDayWidget *w )

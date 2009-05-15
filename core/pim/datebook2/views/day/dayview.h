@@ -57,6 +57,7 @@ namespace Datebook {
     public slots:
         void updateView();  //updates TimeMarker and DayWidget-colors
         void dateChanged( int y, int m, int d );
+        void slotViewDateChanged( int y, int m, int d );
         void insertEvent(const Opie::OPimEvent &);
 
     protected:

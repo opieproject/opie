@@ -89,6 +89,7 @@ public slots:
 signals:
     void sigColWidthChanged();
     void sigCapturedKey( const QString &txt );
+    void sigDateChanged( int y, int m, int d );
 protected slots:
     void slotChangeClock( bool );
 protected:
