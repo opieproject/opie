@@ -191,28 +191,52 @@ void DateBookDayView::setRowStyle( int style )
         setRowHeight(i, style*10+20);
 }
 
-void DateBookDayView::contentsMouseReleaseEvent( QMouseEvent* /* e */ )
+void DateBookDayView::selectedHours( int &sh, int &eh )
 {
-    int sh=99,eh=-1;
+    sh=99;
+    eh=-1;
 
-    for(int i=0;i<this->numSelections();i++) {
+    int n = numSelections();
+
+    for (int i=0; i<n; i++) {
         QTableSelection sel = this->selection( i );
         sh = QMIN(sh,sel.topRow());
         eh = QMAX(sh,sel.bottomRow()+1);
     }
+
     if (sh > 23 || eh < 1) {
         sh=8;
         eh=9;
     }
-
-    QDateTime start(currDate, QTime(sh,0,0,0));
-    QDateTime end(currDate, QTime(eh,0,0,0));
-    quickLineEdit=new DateBookDayViewQuickLineEdit( start, end, dayview, "quickedit");
-    quickLineEdit->setGeometry(0,0,this->columnWidth(0)-1,this->rowHeight(0));
-    this->moveChild(quickLineEdit,0,sh*this->rowHeight(0));
-    quickLineEdit->setFocus();
-    quickLineEdit->show();
 }
+
+void DateBookDayView::contentsMouseReleaseEvent( QMouseEvent* e )
+{
+    if( e->button() != RightButton ) {
+        int sh=99,eh=-1;
+        selectedHours(sh, eh);
+        QDateTime start(currDate, QTime(sh,0,0,0));
+        QDateTime end(currDate, QTime(eh,0,0,0));
+        quickLineEdit=new DateBookDayViewQuickLineEdit( start, end, dayview, "quickedit");
+        quickLineEdit->setGeometry(0,0,this->columnWidth(0)-1,this->rowHeight(0));
+        this->moveChild(quickLineEdit,0,sh*this->rowHeight(0));
+        quickLineEdit->setFocus();
+        quickLineEdit->show();
+    }
+}
+
+void DateBookDayView::selectedDateTimes( QDateTime &start, QDateTime &end )
+{
+    start.setDate( currDate );
+    end.setDate( currDate );
+
+    int sh=99,eh=-1;
+    selectedHours(sh, eh);
+
+    start.setTime( QTime( sh, 0, 0 ) );
+    end.setTime( QTime( eh, 0, 0 ) );
+}
+
 
 //===========================================================================
 
@@ -237,6 +261,7 @@ void DateBookDayViewQuickLineEdit::slotReturnPressed()
         /* we need to return to this object.. */
     QTimer::singleShot(500, this, SLOT(finallyCallClose())  );  // Close and also delete this widget
 }
+
 void DateBookDayViewQuickLineEdit::finallyCallClose() {
     close(true); // also deletes this widget...
 }
@@ -244,6 +269,14 @@ void DateBookDayViewQuickLineEdit::finallyCallClose() {
 void DateBookDayViewQuickLineEdit::focusOutEvent ( QFocusEvent* /* e */)
 {
     slotReturnPressed(); // Reuse code to add event and close this widget.
+}
+
+void DateBookDayViewQuickLineEdit::mousePressEvent( QMouseEvent *e )
+{
+    // Disable the popup menu (which causes focusOut, resulting in the widget 
+    // being destroyed and then a crash occurring)
+    if( e->button() != RightButton )
+        QLineEdit::mousePressEvent(e);
 }
 
 //===========================================================================

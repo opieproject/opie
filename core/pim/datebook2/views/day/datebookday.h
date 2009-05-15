@@ -62,6 +62,7 @@ protected:
     Opie::Datebook::DayView *dayview;
     int active;
     void focusOutEvent( QFocusEvent *e );
+    void mousePressEvent( QMouseEvent *e );
 protected slots:
     void slotReturnPressed(void);
     void finallyCallClose();
@@ -78,6 +79,7 @@ public:
     bool whichClock() const;
 
     void setRowStyle( int style );
+    void selectedDateTimes( QDateTime &start, QDateTime &end );
 
 public slots:
     void moveUp();
@@ -97,6 +99,7 @@ protected:
     void keyPressEvent( QKeyEvent *e );
     void contentsMouseReleaseEvent( QMouseEvent *e );
     void initHeader();
+    void selectedHours( int &sh, int &eh );
 private:
     bool ampm;
     QDate currDate;
