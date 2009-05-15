@@ -96,7 +96,7 @@ public:
     DateEntryEditor( MainWindow*, QWidget* parent );
 
     virtual bool newEvent( const QDate& );
-    virtual bool newEvent( const QDateTime& start, const QDateTime& end );
+    virtual bool newEvent( const QDateTime& start, const QDateTime& end, const QString &desc );
     virtual bool edit( const OPimEvent&, bool showRec = TRUE );
 
     virtual OPimEvent event() const;

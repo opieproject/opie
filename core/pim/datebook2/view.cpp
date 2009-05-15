@@ -181,8 +181,8 @@ void View::popup( const OPimOccurrence &ev, const QPoint &pt ) {
     m_win->viewPopup( ev, pt );
 }
 
-void View::add( const QDateTime& start, const QDateTime& end ) {
-    m_win->viewAdd( start, end );
+void View::add( const QDateTime& start, const QDateTime& end, const QString &desc ) {
+    m_win->viewAdd( start, end, desc );
 }
 
 void View::add( const OPimEvent &ev ) {

@@ -842,8 +842,8 @@ void MainWindow::viewPopup( const OPimOccurrence &ev, const QPoint &pt ) {
     }
 }
 
-void MainWindow::viewAdd( const QDateTime& start, const QDateTime& end ) {
-    if( editor()->newEvent( start, end ) ) {
+void MainWindow::viewAdd( const QDateTime& start, const QDateTime& end, const QString &desc ) {
+    if( editor()->newEvent( start, end, desc ) ) {
         manager()->add( editor()->event() );
         currentView()->reschedule();
     }

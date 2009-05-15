@@ -80,6 +80,7 @@ namespace Datebook {
 
     private slots:
         void slotColWidthChanged() { relayoutPage(); };
+        void slotNewEvent( const QString & );
 
     private:
         DateBookDayWidget *intersects( const DateBookDayWidget *item, const QRect &geom );

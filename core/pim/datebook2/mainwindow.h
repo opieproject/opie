@@ -135,7 +135,7 @@ namespace Datebook {
         // friend of the view
     private:
         void viewPopup( const OPimOccurrence &ev, const QPoint &pt );
-        void viewAdd( const QDateTime& start, const QDateTime& end );
+        void viewAdd( const QDateTime& start, const QDateTime& end, const QString &desc );
         void viewAdd( const OPimEvent& );
         bool viewAP()const;
         bool viewStartMonday()const;

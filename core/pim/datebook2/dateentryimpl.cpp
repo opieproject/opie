@@ -641,8 +641,9 @@ bool DateEntryEditor::newEvent( const QDate& date ) {
         return false;
 }
 
-bool DateEntryEditor::newEvent( const QDateTime& start, const QDateTime& end ) {
+bool DateEntryEditor::newEvent( const QDateTime& start, const QDateTime& end, const QString &desc ) {
     OPimEvent ev;
+    ev.setDescription( desc );
     ev.setLocation( defaultLocation() );
     ev.setCategories( defaultCategories() );
     ev.setStartDateTime( start );

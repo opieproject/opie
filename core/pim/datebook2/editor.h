@@ -49,7 +49,7 @@ namespace Datebook {
         virtual ~Editor();
 
         virtual bool newEvent( const QDate& ) = 0;
-        virtual bool newEvent( const QDateTime& start, const QDateTime& end ) = 0;
+        virtual bool newEvent( const QDateTime& start, const QDateTime& end, const QString &desc ) = 0;
         virtual bool edit( const OPimEvent&, bool showRec = TRUE ) = 0;
 
         virtual OPimEvent event() const = 0;

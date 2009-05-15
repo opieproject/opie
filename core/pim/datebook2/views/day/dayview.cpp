@@ -154,7 +154,7 @@ void DayView::initUI(QWidget *parent) {
     connect( m_header, SIGNAL( dateChanged(int,int,int) ), this, SLOT( dateChanged(int,int,int) ) );
     connect( m_header, SIGNAL( dateChanged(int,int,int) ), m_view, SLOT( slotDateChanged(int,int,int) ) );
     connect( m_view, SIGNAL( sigColWidthChanged() ), this, SLOT( slotColWidthChanged() ) );
-    connect( m_view, SIGNAL(sigCapturedKey(const QString&)), this, SIGNAL(sigNewEvent(const QString&)) );
+    connect( m_view, SIGNAL(sigCapturedKey(const QString&)), this, SLOT(slotNewEvent(const QString&)) );
 
     QTimer *timer = new QTimer( this );
 
@@ -453,3 +453,10 @@ void DayView::popup( const QPoint &pt )
 {
     View::popup( *currentItem(), pt );
 }
+
+void DayView::slotNewEvent( const QString &txt )
+{
+    QDateTime start, end;
+    m_view->selectedDateTimes( start, end );
+    View::add( start, end, txt );
+} 

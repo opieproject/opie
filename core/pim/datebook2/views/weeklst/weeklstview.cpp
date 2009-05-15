@@ -250,5 +250,5 @@ void WeekLstView::showDate( int y, int m, int d )
 
 void WeekLstView::addEvent( const QDateTime &start, const QDateTime &end )
 {
-    add(start,end);
+    add(start, end, "");
 }

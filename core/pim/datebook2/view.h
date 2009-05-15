@@ -136,7 +136,7 @@ namespace Datebook {
         /**
          * create a new event
          */
-        void add( const QDateTime& start, const QDateTime& end );
+        void add( const QDateTime& start, const QDateTime& end, const QString &desc );
 
         /**
          * create a new event
