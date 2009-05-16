@@ -930,16 +930,41 @@ bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
     OPimEvent event = manager()->event( uid );
     if ( !event.isEmpty() ) {
         QString msg;
-        bool found = FALSE;
+        bool alarmfound = FALSE;
         bool bSound = FALSE;
         
-        OPimAlarm alarm = event.notifiers().alarmAtDateTime( when, found );
-        if ( found ) {
-            QDateTime recurDateTime( alarm.occurrenceDateTime() );
-            if( recurDateTime.isNull() ) {
-                if( ! BookManager::nextOccurrence( event, when, recurDateTime ) ) {
-                    // This should never happen, but just in case it does...
-                    recurDateTime = event.startDateTime();
+        OPimAlarm alarm = event.notifiers().alarmAtDateTime( when, alarmfound );
+        if ( !alarmfound ) {
+            // Probably snoozed, look for a "historical" alarm we left when snoozing (see below)
+            const OPimNotifyManager::Alarms &als = event.notifiers().alarms();
+            OPimNotifyManager::Alarms::ConstIterator it;
+            QDateTime now = QDateTime::currentDateTime();
+            for ( it = als.begin(); it != als.end(); ++it ) {
+                if( alarm.dateTime() < now ) {
+                    alarm = (*it);
+                    alarmfound = true;
+                    break;
+                }
+            }
+        }
+
+        if ( alarmfound ) {
+            int warn = alarm.dateTime().secsTo( event.startDateTime() );
+            QDateTime occurDateTime = event.startDateTime();
+            if( event.hasRecurrence() ) {
+                QDateTime start = event.startDateTime().addDays(-1);
+                QDateTime prev;
+                while( BookManager::nextOccurrence( event, start, occurDateTime ) ) {
+                    int diff = when.secsTo( occurDateTime );
+                    if( diff >= 0 && diff <= warn ) {
+                        break;
+                    }   
+                    else if( diff > warn ) {
+                        occurDateTime = prev;
+                        break;
+                    }
+                    prev = occurDateTime;
+                    start = occurDateTime.addSecs(1);
                 }
             }
             
@@ -952,18 +977,40 @@ bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
                 bSound = TRUE;
             }
             
-            OPimAlarmDlg dlg( recurDateTime, tr("Calendar Alarm"), msg, 5, 0, m_ampm, TRUE, FALSE, this, TRUE );
+            OPimAlarmDlg dlg( occurDateTime, tr("Calendar Alarm"), msg, 5, 0, m_ampm, TRUE, FALSE, this, TRUE );
             connect( &dlg, SIGNAL(viewItem(int)), this, SLOT(edit(int)) );
             QPEApplication::execDialog( &dlg );
             
             if ( bSound )
                 killAlarm();
 
-            event.notifiers().remove(alarm);
             if( dlg.response() == OPimAlarmDlg::Snooze ) {
-                event.notifiers().add( OPimAlarm( alarm.sound(), dlg.snoozeDateTime(), 0, uid, recurDateTime ) );
+                // Don't modify the event's notifications for snoozing, because
+                // that breaks for recurring events
+                manager()->snoozeAlarm( dlg.snoozeDateTime(), uid );
             }
-            manager()->update( event );
+            else {
+                bool removeAlarm = false;
+                if ( event.hasRecurrence() ) {
+                    QDateTime nextdt;
+                    if( BookManager::nextOccurrence( event, occurDateTime.addSecs(1), nextdt ) ) {
+                        // Ready the alarm for the next occurrence
+                        manager()->setupAlarms( event );
+                    }
+                    else {
+                        // No more occurrences to be alarmed about :)
+                        removeAlarm = true;
+                    }
+                }
+                else
+                    removeAlarm = true;
+
+                if( removeAlarm ) {
+                    event.notifiers().remove( alarm );
+                    manager()->update( event );
+                }
+            }
+            
             
             if( dlg.response() == OPimAlarmDlg::View ) {
                 edit( uid );

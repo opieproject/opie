@@ -128,19 +128,51 @@ DateBookHoliday *BookManager::holiday() {
 }
 
 void BookManager::addAlarms( const OPimEvent &ev ) {
+    // Technically we only currently support one alarm, but let's iterate through anyway
     const OPimNotifyManager::Alarms &als = ev.notifiers().alarms();
     OPimNotifyManager::Alarms::ConstIterator it;
     for ( it = als.begin(); it != als.end(); ++it ) {
-        AlarmServer::addAlarm( (*it).dateTime(), "QPE/Application/datebook2", "alarm(QDateTime,int)", ev.uid() );
+        QDateTime alarmDateTime = (*it).dateTime();
+        if( ev.hasRecurrence() ) {
+            // HACK: The application only supports setting an alarm n seconds before 
+            // the event, not at a specific datetime; however all we have from the 
+            // notifiers list is a datetime which is event start + n seconds, and in 
+            // the case of a recurring event we need the datetime n seconds prior to 
+            // the next occurrence, not the first one.
+            int warn = alarmDateTime.secsTo( ev.startDateTime() );
+            if( ! nextOccurrence( ev, QDateTime::currentDateTime().addSecs( warn + 1 ), alarmDateTime ) )
+                continue;
+            alarmDateTime = alarmDateTime.addSecs(-warn);
+        }
+        
+        if( alarmDateTime < QDateTime::currentDateTime() )
+            continue;
+
+        AlarmServer::addAlarm( alarmDateTime, "QPE/Application/datebook2", "alarm(QDateTime,int)", ev.uid() );
     }
 }
 
+void BookManager::snoozeAlarm( const QDateTime &dt, int uid ) {
+    AlarmServer::addAlarm( dt, "QPE/Application/datebook2", "alarm(QDateTime,int)", uid );
+}
+
 void BookManager::removeAlarms( const OPimEvent &ev ) {
-    const OPimNotifyManager::Alarms &als = ev.notifiers().alarms();
-    OPimNotifyManager::Alarms::ConstIterator it;
-    for ( it = als.begin(); it != als.end(); ++it ) {
-        AlarmServer::deleteAlarm( (*it).dateTime(), "QPE/Application/datebook2", "alarm(QDateTime,int)", ev.uid() );
-    }
+    AlarmServer::deleteAlarm( QDateTime(), "QPE/Application/datebook2", "alarm(QDateTime,int)", ev.uid() );
+}
+
+void BookManager::setupAlarms( const OPimEvent &ev ) {
+    removeAlarms( ev );
+    addAlarms( ev );
+}
+
+void BookManager::setupAllAlarms() {
+    // Unregister all alarms that belong to us
+    AlarmServer::deleteAlarm( QDateTime(), "QPE/Application/datebook2", "alarm(QDateTime,int)", -1 );
+    // Now, register all alarms in the future
+    ODateBookAccess::List allrecs = allRecords();
+    for ( ODateBookAccess::List::Iterator it = allrecs.begin(); it != allrecs.end(); ++it ) {
+        addAlarms( (*it) );
+    }    
 }
 
 // FIXME: this ought to be moved to somewhere in libopiepim2
@@ -152,6 +184,12 @@ bool BookManager::nextOccurrence( const OPimEvent &ev, const QDateTime &start, Q
         do {
             if( ! ev.recurrence().nextOcurrence( startDate, recurDate ) )
                 return false;
+            if( recurDate == startDate ) {
+                if( start.time() >= ev.startDateTime().time() ) {
+                    startDate = startDate.addDays(1);
+                    continue;
+                }
+            }
             recurDateTime = QDateTime( recurDate, ev.startDateTime().time() );
         } while(recurDateTime < start);
     }

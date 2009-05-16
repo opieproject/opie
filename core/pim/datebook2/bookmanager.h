@@ -75,6 +75,10 @@ namespace Datebook {
         QDate findRealStart( const OPimOccurrence &occ );
         OPimEvent find( const QString &str, bool caseSensitive, QDateTime &dt );
 
+        void snoozeAlarm( const QDateTime &dt, int uid );
+        void setupAlarms( const OPimEvent &ev );
+        void setupAllAlarms();
+
     protected:
         void addAlarms( const OPimEvent &ev );
         void removeAlarms( const OPimEvent &ev );
