@@ -86,10 +86,10 @@ void WeekView::readConfigWidget( QWidget *widget ) {
 void WeekView::initUI(QWidget *parent) {
     m_widget = new QWidget(parent, "weekviewwidget");
 
-    m_widget->setFocusPolicy(QWidget::StrongFocus);
     QVBoxLayout *vb = new QVBoxLayout( m_widget );
     m_header = new DateBookWeekHeader( weekStartOnMonday(), m_widget );
     m_view = new DateBookWeekView( isAP(), weekStartOnMonday(), m_widget );
+    m_view->setFocusPolicy(QWidget::StrongFocus);
     vb->addWidget( m_header );
     vb->addWidget( m_view );
 
@@ -103,7 +103,9 @@ void WeekView::initUI(QWidget *parent) {
     connect( m_view, SIGNAL( showDay(int) ), this, SLOT( showDay(int) ) );
     connect( m_view, SIGNAL(signalShowEvent(const Opie::OPimOccurrence&)), this, SLOT(slotShowEvent(const Opie::OPimOccurrence&)) );
     connect( m_view, SIGNAL(signalHideEvent()), this, SLOT(slotHideEvent()) );
+    connect( m_view, SIGNAL(signalDateChanged(QDate&)), this, SLOT(slotViewDateChanged(QDate&) ) );
     connect( m_header, SIGNAL( dateChanged(QDate&) ), this, SLOT( dateChanged(QDate&) ) );
+    connect( m_header, SIGNAL( dateChanged(QDate&) ), m_view, SLOT( slotDateChanged(QDate&) ) );
     connect( tHide, SIGNAL( timeout() ), lblDesc, SLOT( hide() ) );
     connect( qApp, SIGNAL(weekChanged(bool)), this, SLOT(slotWeekChanged(bool)) );
     connect( qApp, SIGNAL(clockChanged(bool)), this, SLOT(slotClockChanged(bool)));
@@ -189,6 +191,11 @@ void WeekView::slotYearChanged( int y )
         d = d.addDays( -1 );
         calcWeek( d, totWeek, throwAway, weekStartOnMonday() );
     }
+}
+
+void WeekView::slotViewDateChanged( QDate &date )
+{
+    setDate( date );
 }
 
 void WeekView::generateAllDayTooltext( QString& text ) {

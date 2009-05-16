@@ -151,7 +151,30 @@ void DateBookWeekView::moveToHour( int h )
 
 void DateBookWeekView::keyPressEvent( QKeyEvent *e )
 {
-    e->ignore();
+    odebug << "key!!!" << oendl;
+    switch(e->key()) {
+    case Key_Up:
+        scrollBy(0, -20);
+        break;
+    case Key_Down:
+        scrollBy(0, 20);
+        break;
+    case Key_Left:
+        m_date = m_date.addDays(-7);
+        emit signalDateChanged( m_date );
+        break;
+    case Key_Right:
+        m_date = m_date.addDays(7);
+        emit signalDateChanged( m_date );
+        break;
+    default:
+        e->ignore();
+    }
+}
+
+void DateBookWeekView::slotDateChanged( QDate &date )
+{
+    m_date = date;
 }
 
 void DateBookWeekView::slotChangeClock( bool c )

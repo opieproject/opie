@@ -21,6 +21,20 @@ class Config;
 namespace Opie {
 namespace Datebook {
     class MainWindow;
+
+    class WeekLstViewParentWidget: public QWidget {
+        Q_OBJECT
+    public:
+        WeekLstViewParentWidget( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 ); 
+        void setScroll( QScrollView *scroll );
+        void setHeader( DateBookWeekLstHeader *header );
+    protected:
+        void keyPressEvent( QKeyEvent *e );
+    private:
+        QScrollView *m_scroll;
+        DateBookWeekLstHeader *m_header;
+    };
+
     class WeekLstView : public View {
         Q_OBJECT
     public:
@@ -51,7 +65,7 @@ namespace Datebook {
         void setDate( const QDate &d );
 
     protected:
-        QWidget *m_widget;
+        WeekLstViewParentWidget *m_widget;
         bool m_dbl;
         QDate bdate;
         int year, _week, dow;

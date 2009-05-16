@@ -72,6 +72,7 @@ namespace Datebook {
         void slotShowEvent( const Opie::OPimOccurrence & );
         void slotHideEvent();
         void slotYearChanged( int );
+        void slotViewDateChanged( QDate &newdate );
 
     private:
         void generateAllDayTooltext( QString& text );

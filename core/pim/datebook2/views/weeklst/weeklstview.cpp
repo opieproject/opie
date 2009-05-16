@@ -124,7 +124,7 @@ void WeekLstView::readConfigWidget( QWidget *widget ) {
 }
 
 void WeekLstView::initUI(QWidget *parent) {
-    m_widget = new QWidget(parent, "weeklstviewwidget");
+    m_widget = new WeekLstViewParentWidget(parent, "weeklstviewwidget");
 
     m_widget->setFocusPolicy(QWidget::StrongFocus);
     dateset = false;
@@ -139,6 +139,9 @@ void WeekLstView::initUI(QWidget *parent) {
     m_scroll = new QScrollView(m_widget);
     m_scroll->setResizePolicy(QScrollView::AutoOneFit);
     m_layout->addWidget(m_scroll);
+
+    m_widget->setScroll(m_scroll);
+    m_widget->setHeader(m_header);
 
     m_CurrentView=NULL;
 
@@ -252,3 +255,41 @@ void WeekLstView::addEvent( const QDateTime &start, const QDateTime &end )
 {
     add(start, end, "");
 }
+
+//////////////////////////////////////////////////////////
+
+WeekLstViewParentWidget::WeekLstViewParentWidget( QWidget* parent, const char* name, WFlags fl )
+    : QWidget(parent, name, fl)
+{
+}
+
+void WeekLstViewParentWidget::setScroll( QScrollView *scroll )
+{
+    m_scroll = scroll;
+}
+
+void WeekLstViewParentWidget::setHeader( DateBookWeekLstHeader *header )
+{
+    m_header = header;
+}
+
+void WeekLstViewParentWidget::keyPressEvent(QKeyEvent *e)
+{
+    switch(e->key()) {
+        case Key_Up:
+            m_scroll->scrollBy(0, -20);
+            break;
+        case Key_Down:
+            m_scroll->scrollBy(0, 20);
+            break;
+        case Key_Left:
+            m_header->prevWeek();
+            break;
+        case Key_Right:
+            m_header->nextWeek();
+            break;
+        default:
+            e->ignore();
+    }
+}
+

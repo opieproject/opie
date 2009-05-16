@@ -80,13 +80,17 @@ signals:
     void showDay( int d );
     void signalShowEvent( const Opie::OPimOccurrence & );
     void signalHideEvent();
+    void signalDateChanged( QDate &date );
 
-protected slots:
-    void keyPressEvent(QKeyEvent *);
+public slots:
+    void slotDateChanged( QDate &date );
 
 private slots:
     void slotChangeClock( bool );
     void alterDay( int );
+
+protected:
+    void keyPressEvent(QKeyEvent *);
 
 private:
     void positionItem( DateBookWeekItem *i );
@@ -104,6 +108,7 @@ private:
     QList<DateBookWeekItem> items;
     int rowHeight;
     bool showingEvent;
+    QDate m_date;
 };
 
 #endif
