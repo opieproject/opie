@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>283</width>
+            <width>279</width>
             <height>418</height>
         </rect>
     </property>
@@ -513,11 +513,11 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>11</number>
+                        <number>10</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>6</number>
+                        <number>4</number>
                     </property>
                     <widget>
                         <class>QGroupBox</class>
@@ -532,14 +532,17 @@
                         <property>
                             <name>layoutMargin</name>
                         </property>
+                        <property>
+                            <name>layoutSpacing</name>
+                        </property>
                         <vbox>
                             <property stdset="1">
                                 <name>margin</name>
-                                <number>6</number>
+                                <number>10</number>
                             </property>
                             <property stdset="1">
                                 <name>spacing</name>
-                                <number>6</number>
+                                <number>4</number>
                             </property>
                             <widget>
                                 <class>QCheckBox</class>
@@ -728,6 +731,57 @@
                                     <enum>Raised</enum>
                                 </property>
                             </widget>
+                            <widget>
+                                <class>QLayoutWidget</class>
+                                <property stdset="1">
+                                    <name>name</name>
+                                    <cstring>Layout7</cstring>
+                                </property>
+                                <hbox>
+                                    <property stdset="1">
+                                        <name>margin</name>
+                                        <number>0</number>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>spacing</name>
+                                        <number>6</number>
+                                    </property>
+                                    <widget>
+                                        <class>QLabel</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>TextLabel1_2</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>text</name>
+                                            <string>Snooze time:</string>
+                                        </property>
+                                    </widget>
+                                    <widget>
+                                        <class>QSpinBox</class>
+                                        <property stdset="1">
+                                            <name>name</name>
+                                            <cstring>sbSnoozeTime</cstring>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>suffix</name>
+                                            <string> minutes</string>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>maxValue</name>
+                                            <number>60</number>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>minValue</name>
+                                            <number>1</number>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>value</name>
+                                            <number>5</number>
+                                        </property>
+                                    </widget>
+                                </hbox>
+                            </widget>
                         </vbox>
                     </widget>
                     <widget>
@@ -743,14 +797,17 @@
                         <property>
                             <name>layoutMargin</name>
                         </property>
+                        <property>
+                            <name>layoutSpacing</name>
+                        </property>
                         <grid>
                             <property stdset="1">
                                 <name>margin</name>
-                                <number>6</number>
+                                <number>10</number>
                             </property>
                             <property stdset="1">
                                 <name>spacing</name>
-                                <number>6</number>
+                                <number>4</number>
                             </property>
                             <widget row="0"  column="0" >
                                 <class>QLabel</class>
@@ -877,14 +934,20 @@
                             <name>title</name>
                             <string>Play Sound</string>
                         </property>
+                        <property>
+                            <name>layoutMargin</name>
+                        </property>
+                        <property>
+                            <name>layoutSpacing</name>
+                        </property>
                         <vbox>
                             <property stdset="1">
                                 <name>margin</name>
-                                <number>11</number>
+                                <number>10</number>
                             </property>
                             <property stdset="1">
                                 <name>spacing</name>
-                                <number>6</number>
+                                <number>4</number>
                             </property>
                             <widget>
                                 <class>QComboBox</class>

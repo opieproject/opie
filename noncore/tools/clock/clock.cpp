@@ -68,6 +68,7 @@ static const int ALARMTYPE_EXTERNAL = 1;
 static const int ALARMTYPE_OPIEPLAYER = 2;
 static const int ALARMTYPE_OPIEPLAYER2 = 3;
 static const int DEFAULT_ALARMTYPE = ALARMTYPE_DEFALARM;
+static const int DEFAULT_SNOOZE_TIME = 5; // minutes
 static const char ALARM_CLOCK_CHANNEL [] = "QPE/Application/clock";
 static const char ALARM_CLOCK_MESSAGE [] = "alarm(QDateTime,int)";
 
@@ -139,6 +140,11 @@ AlarmDlg::AlarmDlg(QWidget *parent, const char *name, bool modal,
 void AlarmDlg::setText(const QString &txt)
 {
     alarmDlgLabel->setText(txt);
+}
+
+void AlarmDlg::setSnoozeTime( int mins )
+{
+    snoozeTime->setValue( mins );
 }
 
 void AlarmDlg::checkSnooze(void)
@@ -290,6 +296,8 @@ Clock::Clock( QWidget * parent, const char *, WFlags f )
         if ( d >= 1 && d <= 7 )
             dayBtn[dayBtnIdx(d)]->setOn( FALSE );
     }
+
+    sbSnoozeTime->setValue( cConfig.readNumEntry( "SnoozeTime", DEFAULT_SNOOZE_TIME ) );
 
     connect( sndOption, SIGNAL( activated(int) ), SLOT( slotSoundChange(int) ) );
     sndOption->insertItem(tr("Default alarm"));
@@ -636,6 +644,10 @@ void Clock::appMessage( const QCString &msg, const QByteArray &data )
             }
             alarmDlg->setText(msg);
 
+            Config clockConfig( "Clock" );
+            clockConfig.setGroup( "Daily Alarm" );
+            alarmDlg->setSnoozeTime( clockConfig.readNumEntry( "SnoozeTime", DEFAULT_SNOOZE_TIME ) );
+
             // Set for tomorrow, so user wakes up every day, even if they
             // don't confirm the dialog.  Don't set it again when snoozing.
             if (t != magic_snooze) {
@@ -778,6 +790,8 @@ void Clock::applyDailyAlarm()
         AlarmServer::addAlarm(when, ALARM_CLOCK_CHANNEL,
                             ALARM_CLOCK_MESSAGE, magic_daily);
     }
+
+    config.writeEntry( "SnoozeTime", sbSnoozeTime->value() );
 }
 
 bool Clock::validDaysSelected(void)

@@ -41,6 +41,7 @@ public:
     const QString &txt = "Alarm");
 
     void    setText(const QString &txt);
+    void    setSnoozeTime( int mins );
 
 private slots:
     void    checkSnooze(void);
