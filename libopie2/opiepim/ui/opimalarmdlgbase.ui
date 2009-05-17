@@ -12,7 +12,7 @@
             <x>0</x>
             <y>0</y>
             <width>221</width>
-            <height>364</height>
+            <height>330</height>
         </rect>
     </property>
     <property stdset="1">
@@ -145,6 +145,13 @@
                     <hsizetype>5</hsizetype>
                     <vsizetype>5</vsizetype>
                 </sizepolicy>
+            </property>
+            <property stdset="1">
+                <name>minimumSize</name>
+                <size>
+                    <width>0</width>
+                    <height>100</height>
+                </size>
             </property>
             <property stdset="1">
                 <name>text</name>
@@ -809,6 +816,27 @@
                 <string>Dismiss</string>
             </property>
         </widget>
+        <spacer>
+            <property>
+                <name>name</name>
+                <cstring>Spacer4_2</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Vertical</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Minimum</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
     </vbox>
 </widget>
 </UI>
