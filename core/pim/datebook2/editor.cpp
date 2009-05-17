@@ -82,3 +82,7 @@ bool Editor::alarmPreset()const {
 int Editor::alarmPresetTime()const {
     return m_win->alarmPresetTime();
 }
+
+int Editor::alarmPresetUnits()const {
+    return m_win->alarmPresetUnits();
+}

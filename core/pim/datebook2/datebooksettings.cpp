@@ -67,6 +67,11 @@ DateBookSettings::DateBookSettings( bool whichClock, QWidget *parent,
 
     connect(locButton, SIGNAL( clicked() ), this, SLOT( slotConfigureLocs() ) );
     connect(descButton, SIGNAL( clicked() ), this, SLOT( slotConfigureDesc() ) );
+
+    connect(cbAlarmUnits, SIGNAL( activated(int) ),
+            this, SLOT( slotAlarmUnitsChanged(int) ));
+    connect(cbSnoozeUnits, SIGNAL( activated(int) ),
+            this, SLOT( slotSnoozeUnitsChanged(int) ));
 }
 
 DateBookSettings::~DateBookSettings()
@@ -199,17 +204,19 @@ void DateBookSettings::pluginItemClicked(QListViewItem *aItem)
     }
 }
 
-void DateBookSettings::setAlarmPreset( bool bAlarm, int presetTime )
+void DateBookSettings::setAlarmPreset( bool bAlarm, int presetTime, int presetUnits )
 {
     chkAlarmPreset->setChecked( bAlarm );
-    if ( presetTime >=5 )
-        spinAlarmPreset->setValue( presetTime );
+    sbAlarmTime->setValue( presetTime );
+    cbAlarmUnits->setCurrentItem( presetUnits );
+    slotAlarmUnitsChanged( presetUnits );
 }
 
 void DateBookSettings::setSnooze( int snoozeTime, int snoozeUnits )
 {
     sbSnoozeTime->setValue( snoozeTime );
     cbSnoozeUnits->setCurrentItem( snoozeUnits );
+    slotSnoozeUnitsChanged( snoozeUnits );
 }
 
 bool DateBookSettings::alarmPreset() const
@@ -219,7 +226,12 @@ bool DateBookSettings::alarmPreset() const
 
 int DateBookSettings::presetTime() const
 {
-    return spinAlarmPreset->value();
+    return sbAlarmTime->value();
+}
+
+int DateBookSettings::presetUnits() const
+{
+    return cbAlarmUnits->currentItem();
 }
 
 int DateBookSettings::snoozeTime() const
@@ -297,3 +309,18 @@ void DateBookSettings::slotConfigureLocs() {
     }
 }
 
+void DateBookSettings::slotAlarmUnitsChanged( int index )
+{
+    if( index == 0 )
+        sbAlarmTime->setLineStep( 5 );
+    else
+        sbAlarmTime->setLineStep( 1 );
+}
+
+void DateBookSettings::slotSnoozeUnitsChanged( int index )
+{
+    if( index == 0 )
+        sbSnoozeTime->setLineStep( 5 );
+    else
+        sbSnoozeTime->setLineStep( 1 );
+}

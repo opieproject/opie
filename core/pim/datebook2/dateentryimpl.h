@@ -68,6 +68,7 @@ public slots:
     void slotChangeClock( bool );
     void slotChangeStartOfWeek( bool );
     void slotEditNote();
+    void slotAlarmUnitsChanged( int );
 
 private:
     void init();
@@ -101,7 +102,7 @@ public:
 
     virtual OPimEvent event() const;
 
-    static void setEventAlarm( Opie::OPimEvent &ev, bool alarm, int alarmTime, Opie::OPimAlarm::Sound sound );
+    static void setEventAlarm( Opie::OPimEvent &ev, bool alarm, int alarmTime, int alarmUnits, Opie::OPimAlarm::Sound sound );
 
 protected:
     bool showDialog( QString caption, OPimEvent& event );

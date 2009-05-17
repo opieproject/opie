@@ -328,6 +328,7 @@ void MainWindow::initConfig() {
     m_startTime = config.readNumEntry("startviewtime", 8);
     m_alarmPreset = config.readBoolEntry("alarmpreset", FALSE);
     m_alarmPresetTime = config.readNumEntry("presettime", 5);
+    m_alarmPresetUnits = config.readNumEntry("presetunits", 0); // default to minutes
     m_snoozeTime = config.readNumEntry("snoozetime", 5);
     m_snoozeUnits = config.readNumEntry("snoozeunits", 0); // default to minutes
 
@@ -350,6 +351,7 @@ void MainWindow::saveConfig() {
     config.writeEntry("startviewtime", m_startTime);
     config.writeEntry("alarmpreset", m_alarmPreset);
     config.writeEntry("presettime", m_alarmPresetTime);
+    config.writeEntry("presetunits", m_alarmPresetUnits);
     config.writeEntry("snoozetime", m_snoozeTime);
     config.writeEntry("snoozeunits", m_snoozeUnits);
 
@@ -488,7 +490,7 @@ void MainWindow::slotDoFind( const QString& txt, const QDate &dt,
 void MainWindow::slotConfigure() {
     DateBookSettings frmSettings( m_ampm, this );
     frmSettings.setStartTime( m_startTime );
-    frmSettings.setAlarmPreset( m_alarmPreset, m_alarmPresetTime );
+    frmSettings.setAlarmPreset( m_alarmPreset, m_alarmPresetTime, m_alarmPresetUnits );
     frmSettings.setSnooze( m_snoozeTime, m_snoozeUnits );
     frmSettings.setPluginList( manager()->holiday()->pluginManager(), manager()->holiday()->pluginLoader() );
     frmSettings.setViews( &m_views );
@@ -518,6 +520,7 @@ void MainWindow::slotConfigure() {
         
         m_alarmPreset = frmSettings.alarmPreset();
         m_alarmPresetTime = frmSettings.presetTime();
+        m_alarmPresetUnits = frmSettings.presetUnits();
         m_snoozeTime = frmSettings.snoozeTime();
         m_snoozeUnits = frmSettings.snoozeUnits();
         m_startTime = frmSettings.startTime();
@@ -919,6 +922,10 @@ bool MainWindow::alarmPreset()const {
 
 int MainWindow::alarmPresetTime()const {
     return m_alarmPresetTime;
+}
+
+int MainWindow::alarmPresetUnits()const {
+    return m_alarmPresetUnits;
 }
 
 bool MainWindow::doAlarm( const QDateTime &when, int uid ) {

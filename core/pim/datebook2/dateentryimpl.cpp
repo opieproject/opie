@@ -222,6 +222,10 @@ void DateEntry::init()
 
     connect(timePickerStart, SIGNAL( timeChanged(const QTime&) ),
             this, SLOT( startTimePicked(const QTime&) ));
+
+    connect(cbAlarmUnits, SIGNAL( activated(int) ),
+            this, SLOT( slotAlarmUnitsChanged(int) ));
+
     // install eventFilters
     comboEnd->installEventFilter( this );
     comboStart->installEventFilter( this );
@@ -471,7 +475,7 @@ OPimEvent DateEntry::event()
         st = OPimAlarm::Loud;
     else
         st = OPimAlarm::Silent;
-    DateEntryEditor::setEventAlarm( ev, checkAlarm->isChecked(), spinAlarm->value(), st );
+    DateEntryEditor::setEventAlarm( ev, checkAlarm->isChecked(), spinAlarm->value(), cbAlarmUnits->currentItem(), st );
 
     if ( rp.type() != OPimRecurrence::NoRepeat )
         ev.setRecurrence( rp );
@@ -507,8 +511,27 @@ void DateEntry::setAlarmFromEvent( const Opie::OPimEvent &event )
     checkAlarm->setChecked( event.hasNotifiers() );
     if( event.hasNotifiers() ) {
         const OPimAlarm &alarm = event.notifiers().alarms().first();
-        int alarmTime = alarm.dateTime().secsTo( event.startDateTime() ) / 60;
-        spinAlarm->setValue( alarmTime );
+
+        int alarmMins = alarm.dateTime().secsTo( event.startDateTime() ) / 60;
+        int alarmDays = alarmMins / (60 * 24);
+        if( alarmDays > 0) {
+            cbAlarmUnits->setCurrentItem( 2 );
+            spinAlarm->setValue( alarmDays );
+        }
+        else {
+            int alarmHours = alarmMins / 60;
+            if( alarmHours > 0) {
+                cbAlarmUnits->setCurrentItem( 1 );
+                spinAlarm->setValue( alarmHours );
+            }
+            else {
+                // Minutes
+                cbAlarmUnits->setCurrentItem( 0 );
+                spinAlarm->setValue( alarmMins );
+            }
+        }
+        slotAlarmUnitsChanged( cbAlarmUnits->currentItem() );
+
         if ( alarm.sound() != OPimAlarm::Silent )
             comboSound->setCurrentItem( 1 );
         else
@@ -576,6 +599,14 @@ void DateEntry::slotChangeClock( bool whichClock )
     setDates( QDateTime( startDate, startTime ), QDateTime( endDate, endTime ) );
 }
 
+void DateEntry::slotAlarmUnitsChanged( int index )
+{
+    if( index == 0 )
+        spinAlarm->setLineStep( 5 );
+    else
+        spinAlarm->setLineStep( 1 );
+}
+
 ////////  DateEntryEditor ////////
 
 DateEntryEditor::DateEntryEditor( MainWindow* mw, QWidget* parent )
@@ -630,7 +661,7 @@ bool DateEntryEditor::newEvent( const QDate& date ) {
     end.setTime( QTime( 12, 0 ) );
     ev.setStartDateTime( start );
     ev.setEndDateTime( end );
-    setEventAlarm( ev, alarmPreset(), alarmPresetTime(), OPimAlarm::Loud );
+    setEventAlarm( ev, alarmPreset(), alarmPresetTime(), alarmPresetUnits(), OPimAlarm::Loud );
 
     if( showDialog( DateEntryBase::tr("New Event"), ev ) ) {
         ev.assignUid();
@@ -648,7 +679,7 @@ bool DateEntryEditor::newEvent( const QDateTime& start, const QDateTime& end, co
     ev.setCategories( defaultCategories() );
     ev.setStartDateTime( start );
     ev.setEndDateTime( end );
-    setEventAlarm( ev, alarmPreset(), alarmPresetTime(), OPimAlarm::Loud );
+    setEventAlarm( ev, alarmPreset(), alarmPresetTime(), alarmPresetUnits(), OPimAlarm::Loud );
 
     if( showDialog( DateEntryBase::tr("New Event"), ev ) ) {
         ev.assignUid();
@@ -702,9 +733,22 @@ QString DateEntryEditor::checkEvent(const OPimEvent &e)
         return QString::null;
 }
 
-void DateEntryEditor::setEventAlarm( Opie::OPimEvent &ev, bool alarm, int alarmTime, OPimAlarm::Sound sound ) {
-    if( alarm )
-        ev.notifiers().add( OPimAlarm( sound, ev.startDateTime().addSecs( alarmTime * -60 ), 0, ev.uid() ) );
+void DateEntryEditor::setEventAlarm( Opie::OPimEvent &ev, bool alarm, int alarmTime, int alarmUnits, OPimAlarm::Sound sound ) {
+    if( alarm ) {
+        QDateTime alarmDateTime = ev.startDateTime();
+        switch( alarmUnits ) {
+            case 0:
+                alarmDateTime = alarmDateTime.addSecs( alarmTime * -60 );
+                break;
+            case 1:
+                alarmDateTime = alarmDateTime.addSecs( alarmTime * -3600 );
+                break;
+            case 2:
+                alarmDateTime = alarmDateTime.addDays( -alarmTime );
+                break;
+        }
+        ev.notifiers().add( OPimAlarm( sound, alarmDateTime, 0, ev.uid() ) );
+    }
     else
         ev.notifiers().clear();
 }

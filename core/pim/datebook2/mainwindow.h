@@ -146,6 +146,7 @@ namespace Datebook {
         QArray<int> defaultCategories()const;
         bool alarmPreset()const;
         int alarmPresetTime()const;
+        int alarmPresetUnits()const;
 
     private:
         QList<View> m_views; // the Views.. not autoDelete
@@ -170,6 +171,7 @@ namespace Datebook {
         int m_startTime;
         bool m_alarmPreset;
         int m_alarmPresetTime;
+        int m_alarmPresetUnits;
         int m_snoozeTime;
         int m_snoozeUnits;
         QArray<int> m_defaultCategories;

@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: dateentry.ui,v 1.2 2008-11-03 19:11:52 paule Exp $
+** $Id: dateentry.ui,v 1.3 2009-05-17 14:26:19 paule Exp $
 **
 *********************************************************************</comment>
 <widget>
@@ -32,7 +32,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>242</width>
+            <width>274</width>
             <height>339</height>
         </rect>
     </property>
@@ -40,10 +40,16 @@
         <name>caption</name>
         <string>New Event</string>
     </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
     <grid>
         <property stdset="1">
             <name>margin</name>
-            <number>2</number>
+            <number>0</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
@@ -396,69 +402,15 @@
                 <bool>false</bool>
             </property>
         </widget>
-        <widget row="8"  column="1"  rowspan="1"  colspan="2" >
-            <class>QSpinBox</class>
+        <widget row="10"  column="0"  rowspan="1"  colspan="4" >
+            <class>QToolButton</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>spinAlarm</cstring>
-            </property>
-            <property stdset="1">
-                <name>enabled</name>
-                <bool>false</bool>
-            </property>
-            <property stdset="1">
-                <name>suffix</name>
-                <string> minutes</string>
-            </property>
-            <property stdset="1">
-                <name>maxValue</name>
-                <number>180</number>
-            </property>
-            <property stdset="1">
-                <name>minValue</name>
-                <number>0</number>
-            </property>
-            <property stdset="1">
-                <name>lineStep</name>
-                <number>5</number>
-            </property>
-            <property stdset="1">
-                <name>value</name>
-                <number>5</number>
-            </property>
-        </widget>
-        <widget row="8"  column="3" >
-            <class>QComboBox</class>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>Silent</string>
-                </property>
-            </item>
-            <item>
-                <property>
-                    <name>text</name>
-                    <string>Loud</string>
-                </property>
-            </item>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>comboSound</cstring>
-            </property>
-            <property stdset="1">
-                <name>enabled</name>
-                <bool>false</bool>
-            </property>
-        </widget>
-        <widget row="9"  column="0" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>lblRepeat</cstring>
+                <cstring>editNote</cstring>
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Repeat</string>
+                <string>Note...</string>
             </property>
         </widget>
         <widget row="9"  column="1"  rowspan="1"  colspan="3" >
@@ -483,15 +435,114 @@
                 <string>No Repeat...</string>
             </property>
         </widget>
-        <widget row="10"  column="0"  rowspan="1"  colspan="4" >
-            <class>QToolButton</class>
+        <widget row="8"  column="1"  rowspan="1"  colspan="3" >
+            <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>editNote</cstring>
+                <cstring>Layout10</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>0</number>
+                </property>
+                <widget>
+                    <class>QSpinBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>spinAlarm</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>false</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>maxValue</name>
+                        <number>180</number>
+                    </property>
+                    <property stdset="1">
+                        <name>minValue</name>
+                        <number>0</number>
+                    </property>
+                    <property stdset="1">
+                        <name>lineStep</name>
+                        <number>5</number>
+                    </property>
+                    <property stdset="1">
+                        <name>value</name>
+                        <number>5</number>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QComboBox</class>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>mins</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>hours</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>days</string>
+                        </property>
+                    </item>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>cbAlarmUnits</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>false</bool>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QComboBox</class>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Silent</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Loud</string>
+                        </property>
+                    </item>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>comboSound</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>false</bool>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget row="9"  column="0" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>lblRepeat</cstring>
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Note...</string>
+                <string>Repeat</string>
             </property>
         </widget>
     </grid>
@@ -547,7 +598,7 @@
     </image>
     <image>
         <name>image1</name>
-        <data format="XPM.GZ" length="646">789c6dd2c10ac2300c00d07bbf2234b7229d1be245fc04c5a3201e4615f430059d0711ff5ddb2e6bb236ec90eed134cb5a19d8ef36602af5ecdbfeeac05dda0798d3abebde87e3faa374d3807fa0d633a52d38d8de6f679fe33fc776e196f53cd010188256a3600a292882096246517815ca99884606e18044a3a40d91824820924265a7923a2e8bcd05f33db1173e002913175f2a6be6d3294871a2d95fa00e8a94ee017b69d339d90df1e77c57ea072ede6758</data>
+        <data format="XPM.GZ" length="649">789c6dd2c10ac2300c00d07bbf2234b7229b1bb28bf8098247413c947ad0c32e3a0f22febbb45dd66469b6c3b247d32c6bebe07c3a826bcd6bf2d32340b8fb27b8db7b1c3f97ebe16b6cdf43bca1b31b631102a0df85a1dbc6b4896918e295d2393005658b600929288209a2a22cbc0a3d33118dccc2018916290b322591402485caaea5745c97460bea35b9173e00292b175f2a6beae954a43a51f517a8832a9573c05e36651f7542e23ebfbdf9032edf67b6</data>
     </image>
 </images>
 <connections>
@@ -598,6 +649,12 @@
         <signal>toggled(bool)</signal>
         <receiver>comboStart</receiver>
         <slot>setDisabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>checkAlarm</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>cbAlarmUnits</receiver>
+        <slot>setEnabled(bool)</slot>
     </connection>
     <slot access="public">endDateChanged( const QString &amp; )</slot>
     <slot access="public">endDateChanged( int, int, int )</slot>

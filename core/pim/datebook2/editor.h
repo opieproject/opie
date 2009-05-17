@@ -74,6 +74,7 @@ namespace Datebook {
         QArray<int> defaultCategories()const;
         bool alarmPreset()const;
         int alarmPresetTime()const;
+        int alarmPresetUnits()const;
 
     private:
         MainWindow* m_win;

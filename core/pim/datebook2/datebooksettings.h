@@ -63,9 +63,10 @@ public:
     ~DateBookSettings();
     void setStartTime( int newStartViewTime );
     int startTime() const;
-    void setAlarmPreset( bool bAlarm, int presetTime );
+    void setAlarmPreset( bool bAlarm, int presetTime, int presetUnits );
     bool alarmPreset() const;
     int presetTime() const;
+    int presetUnits() const;
     void setAlarmType( int alarmType );
     int alarmType() const;
     void setSnooze( int snoozeTime, int snoozeUnits );
@@ -88,6 +89,8 @@ protected slots:
     virtual void pluginItemClicked(QListViewItem *);
     void slotConfigureLocs();
     void slotConfigureDesc();
+    void slotAlarmUnitsChanged(int);
+    void slotSnoozeUnitsChanged(int);
 
 protected:
     void init();
