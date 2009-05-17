@@ -851,7 +851,9 @@ void Clock::slotBrowseMp3File()
 void Clock::slotTestAlarmSound()
 {
     int player = sndOption->currentItem();
-    if( player == ALARMTYPE_OPIEPLAYER || player == ALARMTYPE_OPIEPLAYER2 )
+    if( player == ALARMTYPE_DEFALARM ) 
+        Sound::soundAlarm();
+    else if( player == ALARMTYPE_OPIEPLAYER || player == ALARMTYPE_OPIEPLAYER2 )
         playFile( sndFileName->text(), player == ALARMTYPE_OPIEPLAYER2 );
     else
         alarmPlayTest( sndFileName->text() );
@@ -861,7 +863,6 @@ void Clock::slotSoundChange(int idx)
 {
     bool playFile = (idx != 0);
     sndChoose->setEnabled(playFile);
-    sndTest->setEnabled(playFile);
     sndFileName->setEnabled(playFile);
 
     Config config( "qpe" );
