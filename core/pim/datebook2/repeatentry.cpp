@@ -158,6 +158,7 @@ OPimRecurrence RepeatEntry::recurrence()
     QListIterator<QToolButton> it( listRTypeButtons );
     QListIterator<QToolButton> itExtra( listExtra );
     OPimRecurrence rpTmp;
+    rpTmp.setStart( start );
     int i;
     for ( i = 0; *it; ++it, i++ ) {
         if ( (*it)->isOn() ) {
