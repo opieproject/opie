@@ -140,6 +140,10 @@
                         <number>60</number>
                     </property>
                     <property stdset="1">
+                        <name>minValue</name>
+                        <number>1</number>
+                    </property>
+                    <property stdset="1">
                         <name>lineStep</name>
                         <number>5</number>
                     </property>
