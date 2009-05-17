@@ -1,3 +1,43 @@
+2008-??-??  Opie 1.2.5
+	
+	
+	New Features
+	------------
+	* DateBook2: rewritten datebook. Supports SQLite database backend, improved alarm functionality (with snooze), etc.
+	* Todo: add snooze capability for alarms
+	* OpieRec: rewrote major parts of this application. Now uses ALSA, writes .wav files correctly with compression enabled, and is much more stable.
+	* VMemo: also rewritten, now sharing the same recording code as OpieRec.
+	* TextEdit: add undo/redo
+
+	Fixed Bugs
+	----------
+	* #1171 - Datebook2: add ability to delay alarm popups
+	* #0767 - Datebook2: allow editing entries for location/event
+	* #1688 - Datebook2: allow alarm time in days or hours as well as minutes
+	* #0995 - Datebook2: select correct default repeat end date
+	* #1927 - OpieRec: change to use ALSA
+	* #1452 - Date/Time Settings: enable access to network settings prior to setting time from network
+	* n.a.  - Date/Time Settings: hide AM/PM box when 24-hour time format set
+	* #1598 - Clock: allow configuring default snooze time
+	* n.a.  - Today: tidy up display of birthdays/anniversaries
+	* n.a.  - Launcher: fix using different default sync protocol than what Security settings application showed until first set
+	* n.a.  - ScreenShotApplet: send actual device model and resolution with upload
+	* n.a.  - ScreenShotApplet: display correct URL for retrieving uploaded screenshots
+	* n.a.  - TextEdit: don't create a documents entry for new file until saving
+	* n.a.  - TextEdit: improve Delete function behaviour (and safety)
+	* n.a.  - Opie-rdesktop: fix crash on connect
+	* n.a.  - Opie-rdesktop: fix not loading settings for the first configuration entry
+	* n.a.  - Security: fix using default IP mask in transferserver that was different to Security settings
+	* n.a.  - SysInfo: improve distribution detection
+	* n.a.  - SysInfo: show better device icons for Zaurus clamshell devices
+	* #1923 - Remove usage of deprecated PCMCIA ioctls
+
+	Internal
+	--------
+	* qcop command line client now supports QDate parameters
+	* Various code style fixes and tidy-ups
+	
+
 2008-09-30	Opie 1.2.4
 	
 	
