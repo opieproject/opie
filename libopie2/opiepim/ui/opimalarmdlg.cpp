@@ -38,6 +38,7 @@ OPimAlarmDlg::OPimAlarmDlg( const QDateTime &eventTime, const QString &title, co
     setCaption( title );
     sbSnoozeTime->setValue( defaultSnooze );
     cbSnoozeUnits->setCurrentItem( defaultSnoozeUnits );
+    slotSnoozeUnitsChanged( defaultSnoozeUnits );
 
 //    QFont f(font());
 //    f.setPointSize((int)(f.pointSize() * 1.7));
@@ -45,6 +46,7 @@ OPimAlarmDlg::OPimAlarmDlg( const QDateTime &eventTime, const QString &title, co
 
     connect( cmdSnooze, SIGNAL( clicked() ), this, SLOT( snoozeClicked() ) );
     connect( cmdDismiss, SIGNAL( clicked() ), this, SLOT( accept() ) );
+    connect( cbSnoozeUnits, SIGNAL( activated(int) ), this, SLOT( slotSnoozeUnitsChanged(int) ));
     if( viewEnabled ) 
         connect( cmdView, SIGNAL( clicked() ), this, SLOT( viewClicked() ) );
     else
@@ -132,4 +134,12 @@ void OPimAlarmDlg::updateTime()
 void OPimAlarmDlg::timerEvent( QTimerEvent* )
 {
     updateTime();
+}
+
+void OPimAlarmDlg::slotSnoozeUnitsChanged( int index )
+{
+    if( index == 0 )
+        sbSnoozeTime->setLineStep( 5 );
+    else
+        sbSnoozeTime->setLineStep( 1 );
 }

@@ -25,6 +25,7 @@ public:
 protected slots:
     void viewClicked();
     void snoozeClicked();
+    void slotSnoozeUnitsChanged(int);
 
 protected:
     bool m_ampm;
