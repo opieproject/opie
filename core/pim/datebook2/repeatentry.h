@@ -83,6 +83,7 @@ private:
     void init();
     inline void hideExtras();
     void showRepeatStuff();
+    void updateEndDate();
 
     QList<QToolButton> listRTypeButtons;
     QList<QToolButton> listExtra;

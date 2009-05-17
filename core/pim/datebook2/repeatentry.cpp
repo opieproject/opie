@@ -145,12 +145,8 @@ RepeatEntry::RepeatEntry( bool startOnMonday, const OPimRecurrence &rp,
     }
     fraType->setButton( currInterval );
     spinFreq->setValue( rp.frequency() );
-    if ( !rp.hasEndDate() ) {
-        cmdEnd->setText( RepeatEntryBase::tr("No End Date") );
-        chkNoEnd->setChecked( TRUE );
-    } 
-    else
-        cmdEnd->setText( TimeString::shortDate( end ) );
+    chkNoEnd->setChecked( !rp.hasEndDate() );
+    updateEndDate();
 }
 
 RepeatEntry::~RepeatEntry()
@@ -394,14 +390,11 @@ void RepeatEntry::init()
 void RepeatEntry::slotNoEnd( bool unused )
 {
     // if the item was toggled, then go ahead and set it to the maximum date
-    if ( unused ) {
+    if ( unused )
         end.setYMD( 3000, 12, 31 );
-        cmdEnd->setText( RepeatEntryBase::tr("No End Date") );
-    } 
-    else {
+    else
         end = start;
-        cmdEnd->setText( TimeString::shortDate(end) );
-    }
+    updateEndDate();
 }
 
 void RepeatEntry::endDateChanged( int y, int m, int d )
@@ -409,8 +402,18 @@ void RepeatEntry::endDateChanged( int y, int m, int d )
     end.setYMD( y, m, d );
     if ( end < start )
         end = start;
-    cmdEnd->setText(  TimeString::shortDate( end ) );
-    repeatPicker->setDate( end.year(), end.month(), end.day() );
+    updateEndDate();
+}
+
+void RepeatEntry::updateEndDate()
+{
+    if ( chkNoEnd->isChecked() ) {
+        cmdEnd->setText( RepeatEntryBase::tr("No End Date") );
+    } 
+    else {
+        cmdEnd->setText( TimeString::shortDate(end) );
+        repeatPicker->setDate( end.year(), end.month(), end.day() );
+    }
 }
 
 void RepeatEntry::setupRepeatLabel( const QString &s )
