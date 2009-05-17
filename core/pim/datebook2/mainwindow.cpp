@@ -326,8 +326,10 @@ void MainWindow::initConfig() {
     m_defaultViewIdx = config.readNumEntry("defaultview", 1);
 
     m_startTime = config.readNumEntry("startviewtime", 8);
-    m_alarmPreset = config.readBoolEntry("alarmpreset");
-    m_alarmPresetTime = config.readNumEntry("presettime");
+    m_alarmPreset = config.readBoolEntry("alarmpreset", FALSE);
+    m_alarmPresetTime = config.readNumEntry("presettime", 5);
+    m_snoozeTime = config.readNumEntry("snoozetime", 5);
+    m_snoozeUnits = config.readNumEntry("snoozeunits", 0); // default to minutes
 
     m_defaultLocation = config.readEntry("defaultLocation");
     QString tmpString = config.readEntry("defaultCategories");
@@ -348,6 +350,8 @@ void MainWindow::saveConfig() {
     config.writeEntry("startviewtime", m_startTime);
     config.writeEntry("alarmpreset", m_alarmPreset);
     config.writeEntry("presettime", m_alarmPresetTime);
+    config.writeEntry("snoozetime", m_snoozeTime);
+    config.writeEntry("snoozeunits", m_snoozeUnits);
 
     config.writeEntry("defaultLocation",m_defaultLocation);
     QStringList tmpStringList;
@@ -485,6 +489,7 @@ void MainWindow::slotConfigure() {
     DateBookSettings frmSettings( m_ampm, this );
     frmSettings.setStartTime( m_startTime );
     frmSettings.setAlarmPreset( m_alarmPreset, m_alarmPresetTime );
+    frmSettings.setSnooze( m_snoozeTime, m_snoozeUnits );
     frmSettings.setPluginList( manager()->holiday()->pluginManager(), manager()->holiday()->pluginLoader() );
     frmSettings.setViews( &m_views );
     frmSettings.setManagers( descriptionManager(), locationManager() );
@@ -513,6 +518,8 @@ void MainWindow::slotConfigure() {
         
         m_alarmPreset = frmSettings.alarmPreset();
         m_alarmPresetTime = frmSettings.presetTime();
+        m_snoozeTime = frmSettings.snoozeTime();
+        m_snoozeUnits = frmSettings.snoozeUnits();
         m_startTime = frmSettings.startTime();
         m_defaultViewIdx = frmSettings.comboDefaultView->currentItem()+1;
         m_defaultLocation = frmSettings.comboLocation->currentText();
@@ -977,7 +984,7 @@ bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
                 bSound = TRUE;
             }
             
-            OPimAlarmDlg dlg( occurDateTime, tr("Calendar Alarm"), msg, 5, 0, m_ampm, TRUE, FALSE, this, TRUE );
+            OPimAlarmDlg dlg( occurDateTime, tr("Calendar Alarm"), msg, m_snoozeTime, m_snoozeUnits, m_ampm, TRUE, FALSE, this, TRUE );
             connect( &dlg, SIGNAL(viewItem(int)), this, SLOT(edit(int)) );
             QPEApplication::execDialog( &dlg );
             

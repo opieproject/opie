@@ -68,6 +68,9 @@ public:
     int presetTime() const;
     void setAlarmType( int alarmType );
     int alarmType() const;
+    void setSnooze( int snoozeTime, int snoozeUnits );
+    int snoozeTime() const;
+    int snoozeUnits() const;
 
     void setPluginList(Opie::Core::OPluginManager*,Opie::Core::OPluginLoader*);
     void savePlugins();

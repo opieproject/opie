@@ -203,7 +203,13 @@ void DateBookSettings::setAlarmPreset( bool bAlarm, int presetTime )
 {
     chkAlarmPreset->setChecked( bAlarm );
     if ( presetTime >=5 )
-        spinPreset->setValue( presetTime );
+        spinAlarmPreset->setValue( presetTime );
+}
+
+void DateBookSettings::setSnooze( int snoozeTime, int snoozeUnits )
+{
+    sbSnoozeTime->setValue( snoozeTime );
+    cbSnoozeUnits->setCurrentItem( snoozeUnits );
 }
 
 bool DateBookSettings::alarmPreset() const
@@ -213,7 +219,17 @@ bool DateBookSettings::alarmPreset() const
 
 int DateBookSettings::presetTime() const
 {
-    return spinPreset->value();
+    return spinAlarmPreset->value();
+}
+
+int DateBookSettings::snoozeTime() const
+{
+    return sbSnoozeTime->value();
+}
+
+int DateBookSettings::snoozeUnits() const
+{
+    return cbSnoozeUnits->currentItem();
 }
 
 

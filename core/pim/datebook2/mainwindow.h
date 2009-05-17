@@ -170,6 +170,8 @@ namespace Datebook {
         int m_startTime;
         bool m_alarmPreset;
         int m_alarmPresetTime;
+        int m_snoozeTime;
+        int m_snoozeUnits;
         QArray<int> m_defaultCategories;
         QString m_defaultLocation;
         bool m_inSearch;
