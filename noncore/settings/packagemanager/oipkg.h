@@ -76,6 +76,7 @@ public:
 
     OConfItem    *findConfItem( OConfItem::Type type = OConfItem::NotDefined,
                                 const QString &name = QString::null );
+    void defaultConfItemFile( OConfItem *item );
 
     bool executeCommand( OPackage::Command command = OPackage::NotDefined,
                          const QStringList &parameters = QStringList(),
