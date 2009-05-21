@@ -84,7 +84,7 @@ bool AutoRotate::isRotateEnabled()
     Config cfg( "qpe" );
     cfg.setGroup( "Appearance" );
 
-    bool res = cfg.readBoolEntry( "rotateEnabled" );
+    bool res = cfg.readBoolEntry( "rotateEnabled", true );
 
     if (res )
         odebug << "Enabled" << oendl; 
