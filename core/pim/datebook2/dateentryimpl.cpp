@@ -120,7 +120,7 @@ static void addOrPick( QComboBox* combo, const QString& t )
 }
 
 void DateEntry::setEvent( const OPimEvent &event ) {
-    setDates(event.startDateTime(), event.endDateTime());
+    setDates( event.startDateTime(), event.endDateTime(), event.timeZone() );
     comboCategory->setCategories( event.categories(), "Calendar", tr("Calendar") );
     if(!event.description().isEmpty())
         addOrPick( comboDescription, event.description() );
@@ -139,12 +139,49 @@ void DateEntry::setEvent( const OPimEvent &event ) {
     setRepeatLabel();
 }
 
-void DateEntry::setDates( const QDateTime& s, const QDateTime& e )
+void DateEntry::setDates( const QDateTime& s, const QDateTime& e, const QString &tz )
 {
     startDate = s.date();
     endDate = e.date();
     startTime = s.time();
     endTime = e.time();
+
+    if( !tz.isNull() ) {
+        // get real timezone
+        QString realTZ;
+        realTZ = QString::fromLocal8Bit( getenv("TZ") );
+
+        timezone->setCurrentZone( tz );
+
+        if( tz != realTZ ) {
+            QDateTime start( startDate, startTime );
+            QDateTime end( endDate, endTime );
+
+            // convert to UTC based on selected TZ (calling tzset internally)
+            time_t start_utc, end_utc;
+            start_utc = TimeConversion::toUTC( start );
+            end_utc = TimeConversion::toUTC( end );
+
+            // set timezone
+            if ( setenv( "TZ", tz, true ) != 0 )
+                owarn << "There was a problem setting the timezone." << oendl;
+
+            // convert UTC to local time (calling tzset internally)
+            start = TimeConversion::fromUTC( start_utc );
+            end = TimeConversion::fromUTC( end_utc );
+
+            // done playing around... put it all back
+            unsetenv( "TZ" );
+            if ( !realTZ.isNull() )
+                if ( setenv( "TZ", realTZ, true ) != 0 )
+                    owarn << "There was a problem setting the timezone." << oendl;
+
+            startTime = start.time();
+            startDate = start.date();
+            endTime = end.time();
+            endDate = end.date();
+        }
+    }
 
     startDateChanged( s.date().year(), s.date().month(), s.date().day() );
     endDateChanged( e.date().year(), e.date().month(), e.date().day() );
@@ -225,6 +262,9 @@ void DateEntry::init()
 
     connect(cbAlarmUnits, SIGNAL( activated(int) ),
             this, SLOT( slotAlarmUnitsChanged(int) ));
+
+    connect(checkAllDay, SIGNAL( toggled(bool) ),
+            timezone, SLOT( setDisabled(bool) ));
 
     // install eventFilters
     comboEnd->installEventFilter( this );
@@ -431,11 +471,16 @@ OPimEvent DateEntry::event()
         endTime = startTime;
         startTime = tmp;
     }
-    // don't set the time if theres no need too
-    if ( ev.isAllDay() ) {
+
+    if(checkAllDay->isChecked()) {
+        // All-day events are always in UTC
+        ev.setAllDay(true);
         startTime.setHMS( 0, 0, 0 );
         endTime.setHMS( 23, 59, 59 );
+        ev.setTimeZone( "UTC" );
     }
+    else
+        ev.setTimeZone( timezone->currentZone() );
 
     // adjust start and end times based on timezone
     QDateTime start( startDate, startTime );
@@ -449,7 +494,7 @@ OPimEvent DateEntry::event()
     realTZ = QString::fromLocal8Bit( getenv("TZ") );
 
     // set timezone
-    if ( setenv( "TZ", timezone->currentZone(), true ) != 0 )
+    if ( setenv( "TZ", ev.timeZone(), true ) != 0 )
         owarn << "There was a problem setting the timezone." << oendl;
 
     // convert to UTC based on selected TZ (calling tzset internally)
@@ -465,9 +510,7 @@ OPimEvent DateEntry::event()
     // convert UTC to local time (calling tzset internally)
     ev.setStartDateTime( TimeConversion::fromUTC( start_utc ) );
     ev.setEndDateTime( TimeConversion::fromUTC( end_utc ) );
-
-    if(checkAllDay->isChecked())
-        ev.setAllDay(true);
+    
 
     // we only have one type of sound at the moment... LOUD!!!
     OPimAlarm::Sound st;
@@ -596,7 +639,7 @@ void DateEntry::slotChangeClock( bool whichClock )
 {
     ampm = whichClock;
     initCombos();
-    setDates( QDateTime( startDate, startTime ), QDateTime( endDate, endTime ) );
+    setDates( QDateTime( startDate, startTime ), QDateTime( endDate, endTime ), "" );
 }
 
 void DateEntry::slotAlarmUnitsChanged( int index )

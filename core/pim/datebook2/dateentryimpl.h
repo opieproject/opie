@@ -73,7 +73,7 @@ public slots:
 private:
     void init();
     void initCombos();
-    void setDates( const QDateTime& s, const QDateTime& e );
+    void setDates( const QDateTime& s, const QDateTime& e, const QString &tz );
     void setRepeatLabel();
     void updateTimeEdit(bool,bool);
     void setAlarmFromEvent( const Opie::OPimEvent &event );
