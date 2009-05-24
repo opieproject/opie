@@ -240,17 +240,9 @@ VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *pa
 {
     m_icon = icon;
 
-    bool has_wav_alarm = true;
+    bool has_wav_alarm = ODevice::inst()->hasWaveAudio();
     bool has_bass = true;
     bool has_treble = true;
-
-    switch ( ODevice::inst()->model()) { // we need to add other devices eventually
-        case Model_Zaurus_SL5000:
-        has_wav_alarm = false; //poor guys probably feeling left out...
-        break;
-        default:
-        break;
-    }
 
     if ( !ODevice::inst()->modelString().contains( "Model_iPAQ" )) {
         has_bass = false;
