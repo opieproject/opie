@@ -79,7 +79,6 @@ class HTC : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual bool suspend();
 
   protected:
-    virtual void buzzer( int snd );
     virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
 
     QString m_backlightdev;
