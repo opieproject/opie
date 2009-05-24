@@ -1,0 +1,143 @@
+<!DOCTYPE UI><UI>
+<class>KbddProfileListBase</class>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>KbddProfileListBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>278</width>
+            <height>311</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>sizePolicy</name>
+        <sizepolicy>
+            <hsizetype>5</hsizetype>
+            <vsizetype>5</vsizetype>
+        </sizepolicy>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>kbdd control</string>
+    </property>
+    <hbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>11</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>6</number>
+        </property>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout7</cstring>
+            </property>
+            <vbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QListBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>lbProfiles</cstring>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout6</cstring>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>bAdd</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Add</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>bEdit</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Edit</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>bDelete</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Delete</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+            </vbox>
+        </widget>
+    </hbox>
+</widget>
+<connections>
+    <connection>
+        <sender>bAdd</sender>
+        <signal>clicked()</signal>
+        <receiver>KbddProfileListBase</receiver>
+        <slot>slotAddProfile()</slot>
+    </connection>
+    <connection>
+        <sender>bEdit</sender>
+        <signal>clicked()</signal>
+        <receiver>KbddProfileListBase</receiver>
+        <slot>slotEditProfile()</slot>
+    </connection>
+    <connection>
+        <sender>bDelete</sender>
+        <signal>clicked()</signal>
+        <receiver>KbddProfileListBase</receiver>
+        <slot>slotDeleteProfile()</slot>
+    </connection>
+    <slot access="public">slotAddProfile()</slot>
+    <slot access="public">slotDeleteProfile()</slot>
+    <slot access="public">slotEditProfile()</slot>
+</connections>
+<tabstops>
+    <tabstop>lbProfiles</tabstop>
+    <tabstop>bAdd</tabstop>
+    <tabstop>bEdit</tabstop>
+    <tabstop>bDelete</tabstop>
+</tabstops>
+</UI>

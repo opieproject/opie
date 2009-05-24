@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=kbddcontrol
+Icon=kbddcontrol/kbddcontrol
+Type=Application
+Name=External Keyboard
+Comment=Configures kbdd

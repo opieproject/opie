@@ -1,0 +1,5 @@
+  config KBDDAPPLET
+    boolean "opie-kbddapplet (kbdd external keyboard control applet)"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI
+

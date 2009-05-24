@@ -1,0 +1,7 @@
+  config KBDDCONTROL
+    boolean "opie-kbddcontrol (kbdd external keyboard settings)"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI
+
+  source noncore/settings/kbddcontrol/applet/config.in
+
