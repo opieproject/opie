@@ -213,20 +213,6 @@ void SIMpad::timerEvent ( QTimerEvent * )
 }
 
 
-void SIMpad::playAlarmSound()
-{
-#ifndef QT_NO_SOUND
-    static Sound snd ( "alarm" );
-    if(!snd.isFinished())
-	return;
-
-    /* save as the Sound is static! */
-    changeMixerForAlarm( 0, "/dev/sound/mixer" , &snd);
-    snd. play();
-#endif
-}
-
-
 bool SIMpad::suspend() // Must override because SIMpad does NOT have apm
 {
     if ( !isQWS( ) ) // only qwsserver is allowed to suspend

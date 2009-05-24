@@ -388,7 +388,7 @@ void Zaurus::buzzer( int sound )
 #ifndef QT_NO_SOUND
     Sound *snd = 0;
 
-    // All devices except SL5500 have a DSP device
+    // All devices except collie have a DSP device
     if ( d->m_model != Model_Zaurus_SL5000
       && d->m_model != Model_Zaurus_SL5500 ) {
 
@@ -416,7 +416,6 @@ void Zaurus::buzzer( int sound )
     // sound capabilities.. Otherwise we expect to have the buzzer
     // device..
     if ( snd && snd->isFinished() ){
-        changeMixerForAlarm( 0, "/dev/sound/mixer", snd );
         snd->play();
     } else if( !snd ) {
         int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
@@ -432,6 +431,12 @@ void Zaurus::buzzer( int sound )
 #endif
 }
 
+bool Zaurus::hasWaveAudio()
+{
+    // All devices except collie have a DSP device
+    return ( d->m_model != Model_Zaurus_SL5000
+        && d->m_model != Model_Zaurus_SL5500 );
+}
 
 void Zaurus::playAlarmSound()
 {

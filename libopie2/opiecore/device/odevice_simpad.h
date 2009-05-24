@@ -52,8 +52,6 @@ class SIMpad : public OAbstractMobileDevice
     virtual bool setDisplayBrightness( int b );
     virtual int displayBrightnessResolution() const;
 
-    virtual void playAlarmSound();
-
 protected:
     virtual void timerEvent( QTimerEvent *te );
 

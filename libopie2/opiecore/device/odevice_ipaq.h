@@ -51,8 +51,6 @@ class iPAQ : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual bool setDisplayBrightness( int b );
     virtual int displayBrightnessResolution() const;
 
-    virtual void playAlarmSound();
-
     virtual QValueList <OLed> ledList() const;
     virtual QValueList <OLedState> ledStateList( OLed led ) const;
     virtual OLedState ledState( OLed led ) const;

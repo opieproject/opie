@@ -192,18 +192,6 @@ void MyPal::timerEvent ( QTimerEvent * )
     QWSServer::sendKeyEvent ( -1, HardKey_Backlight, 0, false, false );
 }
 
-void MyPal::playAlarmSound()
-{
-#ifndef QT_NO_SOUND
-    static Sound snd ( "alarm" );
-    if(!snd.isFinished())
-        return;
-
-    changeMixerForAlarm(0, "/dev/sound/mixer", &snd );
-    snd. play();
-#endif
-}
-
 bool MyPal::setDisplayBrightness ( int bright )
 {
     bool res = false;

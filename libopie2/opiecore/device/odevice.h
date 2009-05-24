@@ -348,6 +348,8 @@ public:
     virtual bool hasHingeSensor() const;
     virtual OHingeStatus readHingeSensor()const;
 
+    virtual bool hasWaveAudio() const;
+
     const QStrList &allowedCpuFrequencies() const;
     bool setCurrentCpuFrequency(uint index);
 
@@ -390,13 +392,11 @@ signals:
 
 private slots:
     void systemMessage ( const QCString &, const QByteArray & );
-    void playingStopped();
 
 protected:
     void addPreHandler(QWSServer::KeyboardFilter*aFilter);
     void remPreHandler(QWSServer::KeyboardFilter*aFilter);
     void reloadButtonMapping();
-    void changeMixerForAlarm( int mixer, const char* file, Sound *snd);
 
     /*  ugly virtual hook */
     virtual void virtual_hook( int id, void* data );
@@ -425,9 +425,6 @@ class ODeviceData {
     uint                        m_holdtime;
     QStrList                   *m_cpu_frequencies;
     bool    m_initializedButtonQcop : 1;
-
-    /* values for changeMixerForAlarm */
-    int m_sound, m_vol, m_mixer;
 };
 
 extern bool isQWS();

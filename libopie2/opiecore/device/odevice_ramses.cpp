@@ -95,19 +95,6 @@ void Ramses::init(const QString&)
 }
 
 
-void Ramses::playAlarmSound()
-{
-#ifndef QT_NO_SOUND
-    static Sound snd ( "alarm" );
-    if(!snd.isFinished())
-	return;
-
-    changeMixerForAlarm( 0, "/dev/sound/mixer" , &snd);
-    snd.play();
-#endif
-}
-
-
 bool Ramses::suspend()
 {
     if ( !isQWS( ) ) // only qwsserver is allowed to suspend

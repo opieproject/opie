@@ -51,8 +51,6 @@ class MyPal : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual bool setDisplayBrightness( int b );
     virtual int displayBrightnessResolution() const;
 
-    virtual void playAlarmSound();
-
   protected:
     virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
     virtual void timerEvent( QTimerEvent *te );

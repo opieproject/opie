@@ -130,18 +130,6 @@ void Motorola_EZX::initButtons()
     reloadButtonMapping();
 }
 
-void Motorola_EZX::playAlarmSound()
-{
-#ifndef QT_NO_SOUND
-    static Sound snd ( "alarm" );
-    if(!snd.isFinished())
-    return;
-
-    changeMixerForAlarm(0, "/dev/sound/mixer", &snd );
-    snd. play();
-#endif
-}
-
 QValueList <OLed> Motorola_EZX::ledList() const
 {
     QValueList <OLed> vl;

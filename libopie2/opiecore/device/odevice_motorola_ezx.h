@@ -72,8 +72,6 @@ class Motorola_EZX : public OAbstractMobileDevice
     virtual bool setDisplayStatus( bool on );
     virtual int displayBrightnessResolution() const;
 
-    virtual void playAlarmSound();
-
     virtual QValueList <OLed> ledList() const;
     virtual QValueList <OLedState> ledStateList ( OLed led ) const;
     virtual OLedState ledState( OLed led ) const;

@@ -301,7 +301,6 @@ void HTC::buzzer( int sound )
     // sound capabilities.. Otherwise we expect to have the buzzer
     // device..
     if ( snd && snd->isFinished() ){
-        changeMixerForAlarm( 0, "/dev/mixer", snd );
         snd->play();
     } else if( !snd ) {
         int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
