@@ -34,7 +34,6 @@
 #include <opie2/oresource.h>
 
 #include <qpe/config.h>
-#include <qpe/sound.h>
 
 /* QT */
 #include <qapplication.h>
@@ -53,9 +52,6 @@
 #include <sys/ioctl.h>
 #include <sys/time.h>
 #include <unistd.h>
-#ifndef QT_NO_SOUND
-#include <linux/soundcard.h>
-#endif
 
 using namespace Opie::Core;
 using namespace Opie::Core::Internal;
@@ -268,70 +264,6 @@ typedef struct sharp_led_status {
     int which;   /* select which LED status is wanted. */
     int status;  /* set new led status if you call SHARP_LED_SETSTATUS */
 } sharp_led_status;
-
-void HTC::buzzer( int sound )
-{
-#ifndef QT_NO_SOUND
-    Sound *snd = 0;
-
-    // All devices except SL5500 have a DSP device
-    if ( d->m_model == Model_HTC_Universal ) {
-
-        switch ( sound ){
-        case SHARP_BUZ_TOUCHSOUND: {
-            static Sound touch_sound("touchsound");
-            snd = &touch_sound;
-    }
-            break;
-        case SHARP_BUZ_KEYSOUND: {
-            static Sound key_sound( "keysound" );
-            snd = &key_sound;
-    }
-            break;
-        case SHARP_BUZ_SCHEDULE_ALARM:
-        default: {
-            static Sound alarm_sound("alarm");
-            snd = &alarm_sound;
-    }
-            break;
-        }
-    }
-
-    // If a soundname is defined, we expect that this device has
-    // sound capabilities.. Otherwise we expect to have the buzzer
-    // device..
-    if ( snd && snd->isFinished() ){
-        snd->play();
-    } else if( !snd ) {
-        int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
-
-        if ( fd >= 0 ) {
-            if (::ioctl ( fd, SHARP_BUZZER_MAKESOUND, sound ) == -1)
-                qWarning( "HTC::buzzer() - Couldn't make the buzzer buzz (%s)",
-                strerror( errno ) );
-            ::close ( fd );
-        }
-
-    }
-#endif
-}
-
-
-void HTC::playAlarmSound()
-{
-    buzzer( SHARP_BUZ_SCHEDULE_ALARM );
-}
-
-void HTC::playTouchSound()
-{
-    buzzer( SHARP_BUZ_TOUCHSOUND );
-}
-
-void HTC::playKeySound()
-{
-    buzzer( SHARP_BUZ_KEYSOUND );
-}
-
 
 QValueList <OLed> HTC::ledList() const
 {
