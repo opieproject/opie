@@ -238,481 +238,480 @@ static const char * alarm_xpm[] = {
 VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *parent, const char *name )
     : QFrame ( parent, name, WStyle_StaysOnTop | WType_Popup )
 {
-  m_icon = icon;
+    m_icon = icon;
 
-  bool has_wav_alarm = true;
-  bool has_bass = true;
-  bool has_treble = true;
+    bool has_wav_alarm = true;
+    bool has_bass = true;
+    bool has_treble = true;
 
-  switch ( ODevice::inst ( )-> model ( )) { // we need to add other devices eventually
-    case Model_Zaurus_SL5000:
-      has_wav_alarm = false; //poor guys probably feeling left out...
-      break;
-    default:
-      break;
-  }
+    switch ( ODevice::inst()->model()) { // we need to add other devices eventually
+        case Model_Zaurus_SL5000:
+        has_wav_alarm = false; //poor guys probably feeling left out...
+        break;
+        default:
+        break;
+    }
 
-  if ( !ODevice::inst()->modelString().contains( "Model_iPAQ" )) {
-    has_bass = false;
-    has_treble = false;
-  }
+    if ( !ODevice::inst()->modelString().contains( "Model_iPAQ" )) {
+        has_bass = false;
+        has_treble = false;
+    }
 
-  setFrameStyle ( QFrame::PopupPanel | QFrame::Raised );
+    setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
 
-  QGridLayout *grid = new QGridLayout ( this, 1, 1, 6, 4 );
-  grid-> setSpacing ( 4 );
-  grid-> setMargin ( 6 );
+    QGridLayout *grid = new QGridLayout( this, 1, 1, 6, 4 );
+    grid->setSpacing( 4 );
+    grid->setMargin( 6 );
 
-  QVBoxLayout *vbox;
-  QLabel *l;
+    QVBoxLayout *vbox;
+    QLabel *l;
 
-  vbox = new QVBoxLayout ( );
-  vbox-> setSpacing ( 4 );
-  grid-> addLayout ( vbox, 1, 0 );
+    vbox = new QVBoxLayout();
+    vbox->setSpacing( 4 );
+    grid->addLayout( vbox, 1, 0 );
 
-  upButton = new QPushButton ( this );
-  upButton-> setSizePolicy ( QSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Expanding ));
-  upButton-> setPixmap ( Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ) );
-  upButton-> setFocusPolicy ( QWidget::NoFocus );
+    upButton = new QPushButton ( this );
+    upButton->setSizePolicy( QSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Expanding ));
+    upButton->setPixmap( Opie::Core::OResource::loadPixmap( "up", Opie::Core::OResource::SmallIcon ) );
+    upButton->setFocusPolicy( QWidget::NoFocus );
 
-  vbox-> addWidget ( upButton );
+    vbox->addWidget ( upButton );
 
-  downButton = new QPushButton ( this );
-  downButton-> setSizePolicy ( QSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Expanding ));
-  downButton-> setPixmap ( Opie::Core::OResource::loadPixmap( "down", Opie::Core::OResource::SmallIcon ) );
-  downButton-> setFocusPolicy ( QWidget::NoFocus );
+    downButton = new QPushButton ( this );
+    downButton->setSizePolicy ( QSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Expanding ));
+    downButton->setPixmap ( Opie::Core::OResource::loadPixmap( "down", Opie::Core::OResource::SmallIcon ) );
+    downButton->setFocusPolicy ( QWidget::NoFocus );
 
-  vbox-> addWidget ( downButton );
+    vbox->addWidget ( downButton );
 
-  volSlider = new QSlider ( this );
-  volSlider-> setRange ( 0, 100 );
-  volSlider-> setTickmarks ( QSlider::Both );
-  volSlider-> setTickInterval ( 20 );
-  volSlider-> setFocusPolicy ( QWidget::NoFocus );
+    volSlider = new QSlider ( this );
+    volSlider->setRange ( 0, 100 );
+    volSlider->setTickmarks ( QSlider::Both );
+    volSlider->setTickInterval ( 20 );
+    volSlider->setFocusPolicy ( QWidget::NoFocus );
 
-  l = new QLabel ( this );
-  l-> setPixmap ( QPixmap ( vol_xpm ));
+    l = new QLabel ( this );
+    l->setPixmap ( QPixmap ( vol_xpm ));
 
-  grid-> addWidget ( l, 0, 1, AlignCenter );
-  grid-> addWidget ( volSlider, 1, 1, AlignCenter );
+    grid->addWidget ( l, 0, 1, AlignCenter );
+    grid->addWidget ( volSlider, 1, 1, AlignCenter );
 
-  volLed = new OLedBox ( green, this );
-  volLed-> setFocusPolicy ( QWidget::NoFocus );
-  volLed-> setFixedSize ( 16, 16  );
+    volLed = new OLedBox ( green, this );
+    volLed->setFocusPolicy ( QWidget::NoFocus );
+    volLed->setFixedSize ( 16, 16  );
 
-  grid-> addWidget ( volLed, 2, 1, AlignCenter );
+    grid->addWidget ( volLed, 2, 1, AlignCenter );
 
-  QVBox *basstrebleBox = new QVBox( this );
+    QVBox *basstrebleBox = new QVBox( this );
 
-  trebleSlider = new QSlider ( basstrebleBox );
-  trebleSlider-> setRange ( 0, 100 );
-  trebleSlider-> setTickmarks ( QSlider::Both );
-  trebleSlider-> setTickInterval ( 20 );
-  trebleSlider->setMaximumHeight( 40 );
-  trebleSlider-> setFocusPolicy ( QWidget::NoFocus );
+    trebleSlider = new QSlider ( basstrebleBox );
+    trebleSlider->setRange ( 0, 100 );
+    trebleSlider->setTickmarks ( QSlider::Both );
+    trebleSlider->setTickInterval ( 20 );
+    trebleSlider->setMaximumHeight( 40 );
+    trebleSlider->setFocusPolicy ( QWidget::NoFocus );
 
-  bassSlider = new QSlider ( basstrebleBox );
-  bassSlider-> setRange ( 0, 100 );
-  bassSlider-> setTickmarks ( QSlider::Both );
-  bassSlider-> setTickInterval ( 20 );
-  bassSlider->setMaximumHeight( 40 );
-  bassSlider-> setFocusPolicy ( QWidget::NoFocus );
+    bassSlider = new QSlider ( basstrebleBox );
+    bassSlider->setRange ( 0, 100 );
+    bassSlider->setTickmarks ( QSlider::Both );
+    bassSlider->setTickInterval ( 20 );
+    bassSlider->setMaximumHeight( 40 );
+    bassSlider->setFocusPolicy ( QWidget::NoFocus );
 
-  QLabel *bassLabel = new QLabel ( this );
-  bassLabel-> setPixmap ( QPixmap ( bass_xpm ));
+    QLabel *bassLabel = new QLabel ( this );
+    bassLabel->setPixmap ( QPixmap ( bass_xpm ));
 
-  QLabel *trebleLabel = new QLabel( this );
-  trebleLabel->setPixmap( QPixmap ( treble_xpm ) );
+    QLabel *trebleLabel = new QLabel( this );
+    trebleLabel->setPixmap( QPixmap ( treble_xpm ) );
 
-  grid->addWidget( trebleLabel, 0, 4, AlignCenter );
-  grid->addWidget( basstrebleBox, 1, 4, AlignCenter );
-  grid-> addWidget ( bassLabel, 2, 4, AlignCenter );
+    grid->addWidget( trebleLabel, 0, 4, AlignCenter );
+    grid->addWidget( basstrebleBox, 1, 4, AlignCenter );
+    grid->addWidget ( bassLabel, 2, 4, AlignCenter );
 
-  if ( !has_bass ) {
-    bassSlider->hide();
-    bassLabel->hide();
-  }
+    if ( !has_bass ) {
+        bassSlider->hide();
+        bassLabel->hide();
+    }
 
-  if ( !has_treble ) {
-    trebleSlider->hide();
-    trebleLabel->hide();
-  }
+    if ( !has_treble ) {
+        trebleSlider->hide();
+        trebleLabel->hide();
+    }
 
-  micSlider = new QSlider ( this );
-  micSlider-> setRange ( 0, 100 );
-  micSlider-> setTickmarks ( QSlider::Both );
-  micSlider-> setTickInterval ( 20 );
-  micSlider-> setFocusPolicy ( QWidget::NoFocus );
+    micSlider = new QSlider ( this );
+    micSlider->setRange ( 0, 100 );
+    micSlider->setTickmarks ( QSlider::Both );
+    micSlider->setTickInterval ( 20 );
+    micSlider->setFocusPolicy ( QWidget::NoFocus );
 
-  l = new QLabel ( this );
-  l-> setPixmap ( QPixmap ( mic_xpm ));
+    l = new QLabel ( this );
+    l->setPixmap ( QPixmap ( mic_xpm ));
 
-  grid-> addWidget ( l, 0, 2, AlignCenter );
-  grid-> addWidget ( micSlider, 1, 2, AlignCenter );
+    grid->addWidget ( l, 0, 2, AlignCenter );
+    grid->addWidget ( micSlider, 1, 2, AlignCenter );
 
-  micLed = new OLedBox ( red, this );
-  micLed-> setFocusPolicy ( QWidget::NoFocus );
-  micLed-> setFixedSize ( 16, 16 );
+    micLed = new OLedBox ( red, this );
+    micLed->setFocusPolicy ( QWidget::NoFocus );
+    micLed->setFixedSize ( 16, 16 );
 
-  grid-> addWidget ( micLed, 2, 2, AlignCenter );
+    grid->addWidget ( micLed, 2, 2, AlignCenter );
 
-  alarmSlider = new QSlider ( this );
-  alarmSlider-> setRange ( 0, 100 );
-  alarmSlider-> setTickmarks ( QSlider::Both );
-  alarmSlider-> setTickInterval ( 20 );
-  alarmSlider-> setFocusPolicy ( QWidget::NoFocus );
+    alarmSlider = new QSlider ( this );
+    alarmSlider->setRange ( 0, 100 );
+    alarmSlider->setTickmarks ( QSlider::Both );
+    alarmSlider->setTickInterval ( 20 );
+    alarmSlider->setFocusPolicy ( QWidget::NoFocus );
 
-  QLabel *alarmLabel = new QLabel ( this );
-  alarmLabel-> setPixmap ( QPixmap ( alarm_xpm ));
+    QLabel *alarmLabel = new QLabel ( this );
+    alarmLabel->setPixmap ( QPixmap ( alarm_xpm ));
 
-  grid-> addWidget ( alarmLabel, 0, 3, AlignCenter );
-  grid-> addWidget ( alarmSlider, 1, 3, AlignCenter );
+    grid->addWidget ( alarmLabel, 0, 3, AlignCenter );
+    grid->addWidget ( alarmSlider, 1, 3, AlignCenter );
 
-  alarmLed = new OLedBox ( yellow, this );
-  alarmLed-> setFocusPolicy ( QWidget::NoFocus );
-  alarmLed-> setFixedSize ( 16, 16 );
+    alarmLed = new OLedBox ( yellow, this );
+    alarmLed->setFocusPolicy ( QWidget::NoFocus );
+    alarmLed->setFixedSize ( 16, 16 );
 
-  grid-> addWidget ( alarmLed, 2, 3, AlignCenter );
+    grid->addWidget ( alarmLed, 2, 3, AlignCenter );
 
-  if ( !has_wav_alarm ) {
-    alarmSlider-> hide ( );
-    alarmLabel-> hide ( );
-    alarmLed-> hide ( );
-  }
+    if ( !has_wav_alarm ) {
+        alarmSlider->hide();
+        alarmLabel->hide();
+        alarmLed->hide();
+    }
 
-  grid-> addWidget ( new QLabel ( tr( "Enable Sounds for:" ), this ), 0, 6, AlignVCenter | AlignLeft );
+    grid->addWidget ( new QLabel ( tr( "Enable Sounds for:" ), this ), 0, 6, AlignVCenter | AlignLeft );
 
-  vbox = new QVBoxLayout ( );
-  vbox-> setSpacing ( 4 );
-  grid-> addMultiCellLayout ( vbox, 1, 2, 6, 6 );
+    vbox = new QVBoxLayout();
+    vbox->setSpacing ( 4 );
+    grid->addMultiCellLayout ( vbox, 1, 2, 6, 6 );
 
-  tapBox = new QCheckBox ( tr( "Screen Taps" ), this );
-  tapBox-> setFocusPolicy ( QWidget::NoFocus );
+    tapBox = new QCheckBox ( tr( "Screen Taps" ), this );
+    tapBox->setFocusPolicy ( QWidget::NoFocus );
 
-  vbox-> addWidget ( tapBox, AlignVCenter | AlignLeft );
+    vbox->addWidget ( tapBox, AlignVCenter | AlignLeft );
 
-  keyBox = new QCheckBox ( tr( "Key Clicks" ), this );
-  keyBox-> setFocusPolicy ( QWidget::NoFocus );
+    keyBox = new QCheckBox ( tr( "Key Clicks" ), this );
+    keyBox->setFocusPolicy ( QWidget::NoFocus );
 
-  vbox-> addWidget ( keyBox, AlignVCenter | AlignLeft );
+    vbox->addWidget ( keyBox, AlignVCenter | AlignLeft );
 
-  alarmBox = new QCheckBox ( tr( "Alarm Sound" ), this );
-  alarmBox-> setFocusPolicy ( QWidget::NoFocus );
+    alarmBox = new QCheckBox ( tr( "Alarm Sound" ), this );
+    alarmBox->setFocusPolicy ( QWidget::NoFocus );
 
-  vbox-> addWidget ( alarmBox, AlignVCenter | AlignLeft );
+    vbox->addWidget ( alarmBox, AlignVCenter | AlignLeft );
 
-  if ( has_wav_alarm ) {
-    alarmBox-> hide ( );
-  }
+    if ( has_wav_alarm ) {
+        alarmBox->hide();
+    }
 
-  vbox-> addStretch ( 100 );
+    vbox->addStretch ( 100 );
 
-  setFixedSize ( sizeHint ( ));
-  setFocusPolicy ( QWidget::NoFocus );
+    setFixedSize ( sizeHint());
+    setFocusPolicy ( QWidget::NoFocus );
 
-  rateTimer = new QTimer( this );
-  connect ( rateTimer, SIGNAL( timeout()), this, SLOT( rateTimerDone()));
+    rateTimer = new QTimer( this );
+    connect ( rateTimer, SIGNAL( timeout()), this, SLOT( rateTimerDone()));
 
-  connect ( upButton,   SIGNAL( pressed()),  this, SLOT( buttonChanged()));
-  connect ( upButton,   SIGNAL( released()), this, SLOT( buttonChanged()));
-  connect ( downButton, SIGNAL( pressed()),  this, SLOT( buttonChanged()));
-  connect ( downButton, SIGNAL( released()), this, SLOT( buttonChanged()));
+    connect ( upButton,   SIGNAL( pressed()),  this, SLOT( buttonChanged()));
+    connect ( upButton,   SIGNAL( released()), this, SLOT( buttonChanged()));
+    connect ( downButton, SIGNAL( pressed()),  this, SLOT( buttonChanged()));
+    connect ( downButton, SIGNAL( released()), this, SLOT( buttonChanged()));
 
-  connect ( micSlider, SIGNAL( valueChanged(int)), this, SLOT( micMoved(int)));
-  connect ( volSlider, SIGNAL( valueChanged(int)), this, SLOT( volMoved(int)));
-  connect ( alarmSlider, SIGNAL( valueChanged(int)), this, SLOT( alarmMoved(int)));
-  connect ( bassSlider, SIGNAL( valueChanged(int)), this, SLOT( bassMoved(int)));
-  connect ( trebleSlider, SIGNAL( valueChanged(int)), this, SLOT( trebleMoved(int)));
+    connect ( micSlider, SIGNAL( valueChanged(int)), this, SLOT( micMoved(int)));
+    connect ( volSlider, SIGNAL( valueChanged(int)), this, SLOT( volMoved(int)));
+    connect ( alarmSlider, SIGNAL( valueChanged(int)), this, SLOT( alarmMoved(int)));
+    connect ( bassSlider, SIGNAL( valueChanged(int)), this, SLOT( bassMoved(int)));
+    connect ( trebleSlider, SIGNAL( valueChanged(int)), this, SLOT( trebleMoved(int)));
 
 
-  connect ( volLed,   SIGNAL( toggled(bool)), this, SLOT( volMuteToggled(bool)));
-  connect ( micLed,   SIGNAL( toggled(bool)), this, SLOT( micMuteToggled(bool)));
-  connect ( alarmLed, SIGNAL( toggled(bool)), this, SLOT( alarmSoundToggled(bool)));
+    connect ( volLed,   SIGNAL( toggled(bool)), this, SLOT( volMuteToggled(bool)));
+    connect ( micLed,   SIGNAL( toggled(bool)), this, SLOT( micMuteToggled(bool)));
+    connect ( alarmLed, SIGNAL( toggled(bool)), this, SLOT( alarmSoundToggled(bool)));
 
-  connect ( alarmBox, SIGNAL( toggled(bool)), this, SLOT( alarmSoundToggled(bool)));
-  connect ( keyBox,   SIGNAL( toggled(bool)), this, SLOT( keyClickToggled(bool)));
-  connect ( tapBox,   SIGNAL( toggled(bool)), this, SLOT( screenTapToggled(bool)));
+    connect ( alarmBox, SIGNAL( toggled(bool)), this, SLOT( alarmSoundToggled(bool)));
+    connect ( keyBox,   SIGNAL( toggled(bool)), this, SLOT( keyClickToggled(bool)));
+    connect ( tapBox,   SIGNAL( toggled(bool)), this, SLOT( screenTapToggled(bool)));
 
-  // initialize variables
+    // initialize variables
 
-  readConfig ( true );
+    readConfig ( true );
 
-  // initialize the config file, in case some entries are missing
+    // initialize the config file, in case some entries are missing
 
-  writeConfigEntry ( "VolumePercent", m_vol_percent,   UPD_None );
-  writeConfigEntry ( "BassPercent",   m_vol_percent,   UPD_None );
-  writeConfigEntry ( "TreblePercent", m_vol_percent,   UPD_None );
-  writeConfigEntry ( "Mute",          m_vol_muted,     UPD_None );
-  writeConfigEntry ( "AlarmPercent",  m_alarm_percent, UPD_None );
-  writeConfigEntry ( "TouchSound",    m_snd_touch,     UPD_None );
-  writeConfigEntry ( "KeySound",      m_snd_key,       UPD_None );
-  writeConfigEntry ( "AlarmSound",    m_snd_alarm,     UPD_Vol );
+    writeConfigEntry ( "VolumePercent", m_vol_percent,   UPD_None );
+    writeConfigEntry ( "BassPercent",   m_vol_percent,   UPD_None );
+    writeConfigEntry ( "TreblePercent", m_vol_percent,   UPD_None );
+    writeConfigEntry ( "Mute",          m_vol_muted,     UPD_None );
+    writeConfigEntry ( "AlarmPercent",  m_alarm_percent, UPD_None );
+    writeConfigEntry ( "TouchSound",    m_snd_touch,     UPD_None );
+    writeConfigEntry ( "KeySound",      m_snd_key,       UPD_None );
+    writeConfigEntry ( "AlarmSound",    m_snd_alarm,     UPD_Vol );
 
-  writeConfigEntry ( "Mic",           m_mic_percent,   UPD_None );
-  writeConfigEntry ( "MicMute",       m_mic_muted,     UPD_Mic );
+    writeConfigEntry ( "Mic",           m_mic_percent,   UPD_None );
+    writeConfigEntry ( "MicMute",       m_mic_muted,     UPD_Mic );
 }
 
-bool VolumeControl::volMuted ( ) const
+bool VolumeControl::volMuted() const
 {
-  return m_vol_muted;
+    return m_vol_muted;
 }
 
-int VolumeControl::volPercent ( ) const
+int VolumeControl::volPercent() const
 {
-  return m_vol_percent;
+    return m_vol_percent;
 }
 
 void VolumeControl::keyPressEvent ( QKeyEvent *e )
 {
-  switch ( e-> key ( )) {
-    case Key_Up:
-      volSlider-> subtractStep ( );
-      break;
-    case Key_Down:
-      volSlider-> addStep ( );
-      break;
-    case Key_Space:
-      volLed-> toggle ( );
-      break;
-    case Key_Escape:
-      hide ( );
-      break;
-  }
+    switch ( e->key()) {
+        case Key_Up:
+            volSlider->subtractStep();
+            break;
+        case Key_Down:
+            volSlider->addStep();
+            break;
+        case Key_Space:
+            volLed->toggle();
+            break;
+        case Key_Escape:
+            hide();
+            break;
+    }
 }
 
-void VolumeControl::buttonChanged ( )
+void VolumeControl::buttonChanged()
 {
-  if ( upButton-> isDown ( ) || downButton->isDown ( )) {
-    rateTimerDone ( ); // Call it one time manually, otherwise it wont get
-    // called at all when a button is pressed for a time
-    // shorter than RATE_TIMER_INTERVAL.
-    rateTimer-> start ( RATE_TIMER_INTERVAL, false );
-  }
-  else
-    rateTimer-> stop ( );
+    if ( upButton->isDown() || downButton->isDown()) {
+        rateTimerDone(); // Call it one time manually, otherwise it wont get
+        // called at all when a button is pressed for a time
+        // shorter than RATE_TIMER_INTERVAL.
+        rateTimer->start ( RATE_TIMER_INTERVAL, false );
+    }
+    else
+        rateTimer->stop();
 }
 
-void VolumeControl::rateTimerDone ( )
+void VolumeControl::rateTimerDone()
 {
-  if ( upButton-> isDown ( ))
-    volSlider-> setValue ( volSlider-> value ( ) - 2 );
-  else // if ( downButton-> isDown ( ))
-    volSlider-> setValue ( volSlider-> value ( ) + 2 );
+    if ( upButton->isDown() )
+        volSlider->setValue ( volSlider->value() - 2 );
+    else // if ( downButton->isDown())
+        volSlider->setValue ( volSlider->value() + 2 );
 }
 
 void VolumeControl::show ( bool /*showMic*/ )
 {
-  readConfig ( );
+    readConfig();
 
-  QPoint curPos = m_icon-> mapToGlobal ( QPoint ( 0, 0 ));
+    QPoint curPos = m_icon->mapToGlobal( QPoint ( 0, 0 ) );
 
-  int w = sizeHint ( ). width ( );
-  int x = curPos.x ( ) - ( w / 2 );
+    int w = sizeHint().width();
+    int x = curPos.x() - ( w / 2 );
 
-  if (( x + w ) > QPEApplication::desktop ( )-> width ( ))
-    x = QPEApplication::desktop ( )-> width ( ) - w;
+    if (( x + w ) > QPEApplication::desktop()->width())
+        x = QPEApplication::desktop()->width() - w;
 
-  move ( QMAX(x,0), curPos. y ( ) - sizeHint ( ). height ( ));
-  QFrame::show ( );
-
+    move ( QMAX(x,0), curPos.y() - sizeHint().height());
+    QFrame::show();
 }
 
 void VolumeControl::readConfig ( bool force )
 {
-  Config cfg ( "qpe" );
-  cfg. setGroup ( "Volume" );
+    Config cfg ( "qpe" );
+    cfg.setGroup ( "Volume" );
 
-  int old_vp = m_vol_percent;
-  int old_mp = m_mic_percent;
-  int old_bass = m_bass_percent;
-  int old_treble = m_treble_percent;
-  bool old_vm = m_vol_muted;
-  bool old_mm = m_mic_muted;
-  bool old_sk = m_snd_key;
-  bool old_st = m_snd_touch;
-  bool old_sa = m_snd_alarm;
-  int old_ap = m_alarm_percent;
+    int old_vp = m_vol_percent;
+    int old_mp = m_mic_percent;
+    int old_bass = m_bass_percent;
+    int old_treble = m_treble_percent;
+    bool old_vm = m_vol_muted;
+    bool old_mm = m_mic_muted;
+    bool old_sk = m_snd_key;
+    bool old_st = m_snd_touch;
+    bool old_sa = m_snd_alarm;
+    int old_ap = m_alarm_percent;
 
-  m_vol_percent   = cfg. readNumEntry ( "VolumePercent", 50 );
-  m_mic_percent   = cfg. readNumEntry ( "Mic", 50 );
-  m_bass_percent  = cfg. readNumEntry ( "BassPercent", 50 );
-  m_treble_percent = cfg. readNumEntry ( "TreblePercent", 50 );
-  m_vol_muted     = cfg. readBoolEntry ( "Mute", 0 );
-  m_mic_muted     = cfg. readBoolEntry ( "MicMute", 0 );
-  m_snd_key       = cfg. readBoolEntry ( "KeySound", 0 );
-  m_snd_touch     = cfg. readBoolEntry ( "TouchSound", 0 );
-  m_snd_alarm     = cfg. readBoolEntry ( "AlarmSound", 1 );
-  m_alarm_percent = cfg. readNumEntry ( "AlarmPercent", 65 );
+    m_vol_percent   = cfg.readNumEntry ( "VolumePercent", 50 );
+    m_mic_percent   = cfg.readNumEntry ( "Mic", 50 );
+    m_bass_percent  = cfg.readNumEntry ( "BassPercent", 50 );
+    m_treble_percent = cfg.readNumEntry ( "TreblePercent", 50 );
+    m_vol_muted     = cfg.readBoolEntry ( "Mute", 0 );
+    m_mic_muted     = cfg.readBoolEntry ( "MicMute", 0 );
+    m_snd_key       = cfg.readBoolEntry ( "KeySound", 0 );
+    m_snd_touch     = cfg.readBoolEntry ( "TouchSound", 0 );
+    m_snd_alarm     = cfg.readBoolEntry ( "AlarmSound", 1 );
+    m_alarm_percent = cfg.readNumEntry ( "AlarmPercent", 65 );
 
-  if ( force || ( m_vol_percent != old_vp ))
-    volSlider-> setValue ( 100 - m_vol_percent );
-  if ( force || ( m_mic_percent != old_mp ))
-    micSlider-> setValue ( 100 - m_mic_percent );
-  if ( force || ( m_alarm_percent != old_ap ))
-    alarmSlider-> setValue ( 100 - m_alarm_percent );
-  if ( force || ( m_bass_percent != old_bass ))
-    bassSlider-> setValue ( 100 - m_bass_percent );
-  if ( force || ( m_treble_percent != old_treble ))
-    trebleSlider-> setValue ( 100 - m_treble_percent );
+    if ( force || ( m_vol_percent != old_vp ))
+        volSlider->setValue ( 100 - m_vol_percent );
+    if ( force || ( m_mic_percent != old_mp ))
+        micSlider->setValue ( 100 - m_mic_percent );
+    if ( force || ( m_alarm_percent != old_ap ))
+        alarmSlider->setValue ( 100 - m_alarm_percent );
+    if ( force || ( m_bass_percent != old_bass ))
+        bassSlider->setValue ( 100 - m_bass_percent );
+    if ( force || ( m_treble_percent != old_treble ))
+        trebleSlider->setValue ( 100 - m_treble_percent );
 
 
-  if ( force || ( m_vol_muted != old_vm ))
-    volLed-> setOn ( !m_vol_muted );
-  if ( force || ( m_mic_muted != old_mm ))
-    micLed-> setOn ( !m_mic_muted );
-  if ( force || ( m_snd_alarm != old_sa ))
-    alarmLed-> setOn ( m_snd_alarm );
+    if ( force || ( m_vol_muted != old_vm ))
+        volLed->setOn ( !m_vol_muted );
+    if ( force || ( m_mic_muted != old_mm ))
+        micLed->setOn ( !m_mic_muted );
+    if ( force || ( m_snd_alarm != old_sa ))
+        alarmLed->setOn ( m_snd_alarm );
 
-  if ( force || ( m_snd_key != old_sk ))
-    keyBox-> setChecked ( m_snd_key );
-  if ( force || ( m_snd_touch != old_st ))
-    tapBox-> setChecked ( m_snd_touch );
-  if ( force || ( m_snd_alarm != old_sa ))
-    alarmBox-> setChecked ( m_snd_alarm );
+    if ( force || ( m_snd_key != old_sk ))
+        keyBox->setChecked ( m_snd_key );
+    if ( force || ( m_snd_touch != old_st ))
+        tapBox->setChecked ( m_snd_touch );
+    if ( force || ( m_snd_alarm != old_sa ))
+        alarmBox->setChecked ( m_snd_alarm );
 }
 
 
 void VolumeControl::volumeChanged ( bool /*nowMuted*/ )
 {
-  int prevVol = m_vol_percent;
-  bool prevMute = m_vol_muted;
+    int prevVol = m_vol_percent;
+    bool prevMute = m_vol_muted;
 
-  readConfig ( );
+    readConfig();
 
-  // Handle case where muting it toggled
-  if ( m_vol_muted != prevMute )
-  	m_icon-> redraw ( true );
-  else if ( prevVol != m_vol_percent ) // Avoid over repainting
-  	m_icon-> redraw ( false );
+    // Handle case where muting it toggled
+    if ( m_vol_muted != prevMute )
+        m_icon->redraw ( true );
+    else if ( prevVol != m_vol_percent ) // Avoid over repainting
+        m_icon->redraw ( false );
 }
 
 void VolumeControl::micChanged ( bool nowMuted )
 {
-  if ( !nowMuted )
-    readConfig ( );
-  m_mic_muted = nowMuted;
+    if ( !nowMuted )
+        readConfig();
+    m_mic_muted = nowMuted;
 }
 
 void VolumeControl::screenTapToggled ( bool b )
 {
-  m_snd_touch = b;
-  writeConfigEntry ( "TouchSound", m_snd_touch, UPD_Vol );
+    m_snd_touch = b;
+    writeConfigEntry ( "TouchSound", m_snd_touch, UPD_Vol );
 }
 
 void VolumeControl::keyClickToggled ( bool b )
 {
-  m_snd_key = b;
-  writeConfigEntry ( "KeySound", m_snd_key, UPD_Vol );
+    m_snd_key = b;
+    writeConfigEntry ( "KeySound", m_snd_key, UPD_Vol );
 }
 
 void VolumeControl::alarmSoundToggled ( bool b )
 {
-  m_snd_alarm = b;
-  writeConfigEntry ( "AlarmSound", m_snd_alarm, UPD_Vol );
+    m_snd_alarm = b;
+    writeConfigEntry ( "AlarmSound", m_snd_alarm, UPD_Vol );
 }
 
 void VolumeControl::volMuteToggled ( bool b )
 {
-  m_vol_muted = !b;
+    m_vol_muted = !b;
 
-  m_icon-> redraw ( true );
+    m_icon->redraw ( true );
 
-  writeConfigEntry ( "Mute", m_vol_muted, UPD_Vol );
+    writeConfigEntry ( "Mute", m_vol_muted, UPD_Vol );
 }
 
 void VolumeControl::micMuteToggled ( bool b )
 {
-  m_mic_muted = !b;
-  writeConfigEntry ( "MicMute", m_mic_muted, UPD_Mic );
+    m_mic_muted = !b;
+    writeConfigEntry ( "MicMute", m_mic_muted, UPD_Mic );
 }
 
 
 void VolumeControl::volMoved ( int percent )
 {
-  m_vol_percent = 100 - percent;
+    m_vol_percent = 100 - percent;
 
-  // clamp volume percent to be between 0 and 100
-  m_vol_percent = ( m_vol_percent < 0 ) ? 0 : (( m_vol_percent > 100 ) ? 100 : m_vol_percent );
-  // repaint just the little volume rectangle
-  m_icon-> redraw ( false );
+    // clamp volume percent to be between 0 and 100
+    m_vol_percent = ( m_vol_percent < 0 ) ? 0 : (( m_vol_percent > 100 ) ? 100 : m_vol_percent );
+    // repaint just the little volume rectangle
+    m_icon->redraw ( false );
 
-  writeConfigEntry ( "VolumePercent", m_vol_percent, UPD_Vol );
+    writeConfigEntry ( "VolumePercent", m_vol_percent, UPD_Vol );
 }
 
 void VolumeControl::micMoved ( int percent )
 {
-  m_mic_percent = 100 - percent;
+    m_mic_percent = 100 - percent;
 
-  // clamp volume percent to be between 0 and 100
-  m_mic_percent = ( m_mic_percent < 0 ) ? 0 : (( m_mic_percent > 100 ) ? 100 : m_mic_percent );
+    // clamp volume percent to be between 0 and 100
+    m_mic_percent = ( m_mic_percent < 0 ) ? 0 : (( m_mic_percent > 100 ) ? 100 : m_mic_percent );
 
-  writeConfigEntry ( "Mic", m_mic_percent, UPD_Mic );
+    writeConfigEntry ( "Mic", m_mic_percent, UPD_Mic );
 }
 
 void VolumeControl::alarmMoved ( int percent )
 {
-  m_alarm_percent = 100 - percent;
+    m_alarm_percent = 100 - percent;
 
-  // clamp volume percent to be between 0 and 100
-  m_alarm_percent = ( m_alarm_percent < 0 ) ? 0 : (( m_alarm_percent > 100 ) ? 100 : m_alarm_percent );
+    // clamp volume percent to be between 0 and 100
+    m_alarm_percent = ( m_alarm_percent < 0 ) ? 0 : (( m_alarm_percent > 100 ) ? 100 : m_alarm_percent );
 
-  writeConfigEntry ( "AlarmPercent", m_alarm_percent, UPD_None );
+    writeConfigEntry ( "AlarmPercent", m_alarm_percent, UPD_None );
 }
 
 
 void VolumeControl::bassMoved ( int percent )
 {
-  m_bass_percent = 100 - percent;
+    m_bass_percent = 100 - percent;
 
-  // clamp bass percent to be between 0 and 100
-  m_bass_percent = ( m_bass_percent < 0 ) ? 0 : (( m_bass_percent > 100 ) ? 100 : m_bass_percent );
+    // clamp bass percent to be between 0 and 100
+    m_bass_percent = ( m_bass_percent < 0 ) ? 0 : (( m_bass_percent > 100 ) ? 100 : m_bass_percent );
 
-  writeConfigEntry ( "BassPercent", m_bass_percent, UPD_Bass );
+    writeConfigEntry ( "BassPercent", m_bass_percent, UPD_Bass );
 }
 
 
 
 void VolumeControl::trebleMoved ( int percent )
 {
-  m_treble_percent = 100 - percent;
+    m_treble_percent = 100 - percent;
 
-  // clamp treble percent to be between 0 and 100
-  m_treble_percent = ( m_treble_percent < 0 ) ? 0 : (( m_treble_percent > 100 ) ? 100 : m_treble_percent );
+    // clamp treble percent to be between 0 and 100
+    m_treble_percent = ( m_treble_percent < 0 ) ? 0 : (( m_treble_percent > 100 ) ? 100 : m_treble_percent );
 
-  writeConfigEntry ( "TreblePercent", m_treble_percent, UPD_Treble );
+    writeConfigEntry ( "TreblePercent", m_treble_percent, UPD_Treble );
 }
 
 
 
 void VolumeControl::writeConfigEntry ( const char *entry, int val, eUpdate upd )
 {
-  Config cfg ( "qpe" );
-  cfg. setGroup ( "Volume" );
-  cfg. writeEntry ( entry, val );
-//  cfg. write ( );
+    Config cfg ( "qpe" );
+    cfg.setGroup ( "Volume" );
+    cfg.writeEntry ( entry, val );
+//    cfg.write();
 
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
-  switch ( upd ) {
-    case UPD_Vol: {
-      QCopEnvelope ( "QPE/System", "volumeChange(bool)" ) << m_vol_muted;
-      break;
-    }
-    case UPD_Mic: {
-      QCopEnvelope ( "QPE/System", "micChange(bool)" ) << m_mic_muted;
-      break;
-    }
-    case UPD_Bass: {
-      QCopEnvelope ( "QPE/System", "bassChange(bool)" ) << true;
-      break;
-    }
-    case UPD_Treble: {
-      QCopEnvelope ( "QPE/System", "trebleChange(bool)" ) << true;
-      break;
-    }
+    switch ( upd ) {
+        case UPD_Vol: {
+            QCopEnvelope ( "QPE/System", "volumeChange(bool)" ) << m_vol_muted;
+            break;
+        }
+        case UPD_Mic: {
+            QCopEnvelope ( "QPE/System", "micChange(bool)" ) << m_mic_muted;
+            break;
+        }
+        case UPD_Bass: {
+            QCopEnvelope ( "QPE/System", "bassChange(bool)" ) << true;
+            break;
+        }
+        case UPD_Treble: {
+            QCopEnvelope ( "QPE/System", "trebleChange(bool)" ) << true;
+            break;
+        }
 
-    case UPD_None:
-      break;
-  }
+        case UPD_None:
+        break;
+    }
 #endif
 }
 
@@ -721,62 +720,62 @@ void VolumeControl::writeConfigEntry ( const char *entry, int val, eUpdate upd )
 VolumeApplet::VolumeApplet( QWidget *parent, const char *name )
     : QWidget( parent, name )
 {
-  setFixedWidth ( AppLnk::smallIconSize()  );
-  setFixedHeight ( AppLnk::smallIconSize()+4 );
+    setFixedWidth ( AppLnk::smallIconSize()  );
+    setFixedHeight ( AppLnk::smallIconSize()+4 );
 
-  m_pixmap = new QPixmap ( Opie::Core::OResource::loadPixmap( "volume", Opie::Core::OResource::SmallIcon ) );
-  m_dialog = new VolumeControl ( this, true, this, "volumecontrol" );
+    m_pixmap = new QPixmap ( Opie::Core::OResource::loadPixmap( "volume", Opie::Core::OResource::SmallIcon ) );
+    m_dialog = new VolumeControl ( this, true, this, "volumecontrol" );
 
-  connect ( qApp, SIGNAL( volumeChanged(bool)), m_dialog, SLOT( volumeChanged(bool)));
-  connect ( qApp, SIGNAL( micChanged(bool)), m_dialog, SLOT ( micChanged(bool)));
+    connect ( qApp, SIGNAL( volumeChanged(bool)), m_dialog, SLOT( volumeChanged(bool)));
+    connect ( qApp, SIGNAL( micChanged(bool)), m_dialog, SLOT ( micChanged(bool)));
 }
 
 VolumeApplet::~VolumeApplet()
 {
-  delete m_pixmap;
+    delete m_pixmap;
 }
 
 int VolumeApplet::position()
 {
-  return 6;
+    return 6;
 }
 
 void VolumeApplet::mousePressEvent ( QMouseEvent * )
 {
-  if ( m_dialog-> isVisible ( ))
-    m_dialog-> hide ( );
-  else
-    m_dialog-> show ( true );
+    if ( m_dialog->isVisible())
+        m_dialog->hide();
+    else
+        m_dialog->show ( true );
 }
 
 void VolumeApplet::redraw ( bool all )
 {
-	if ( all )
-		repaint ( true );
-	else
-		repaint ( 2, height ( ) - 3, width ( ) - 4, 2, false );
+    if ( all )
+        repaint ( true );
+    else
+        repaint ( 2, height() - 3, width() - 4, 2, false );
 }
 
 
 void VolumeApplet::paintEvent ( QPaintEvent * )
 {
-  QPainter p ( this );
+    QPainter p ( this );
 
-  p. drawPixmap ( (width()- m_pixmap->width())/2, QMAX( (height()-4-m_pixmap->height() )/2, 1), *m_pixmap );
-  p. setPen ( darkGray );
-  p. drawRect ( 1, height() - 4, width() - 2, 4 );
+    p.drawPixmap ( (width()- m_pixmap->width())/2, QMAX( (height()-4-m_pixmap->height() )/2, 1), *m_pixmap );
+    p.setPen ( darkGray );
+    p.drawRect ( 1, height() - 4, width() - 2, 4 );
 
-  int pixelsWide = m_dialog-> volPercent ( ) * ( width() - 4 ) / 100;
-  p. fillRect ( 2, height() - 3, pixelsWide, 2, red );
-  p. fillRect ( pixelsWide + 2, height() - 3, width() - 4 - pixelsWide, 2, lightGray );
+    int pixelsWide = m_dialog->volPercent() * ( width() - 4 ) / 100;
+    p.fillRect ( 2, height() - 3, pixelsWide, 2, red );
+    p.fillRect ( pixelsWide + 2, height() - 3, width() - 4 - pixelsWide, 2, lightGray );
 
-  if ( m_dialog-> volMuted ( )) {
-    p. setPen ( red );
-    p. drawLine ( 1, 2, width() - 2, height() - 5 );
-    p. drawLine ( 1, 3, width() - 2, height() - 4 );
-    p. drawLine ( width() - 2, 2, 1, height() - 5 );
-    p. drawLine ( width() - 2, 3, 1, height() - 4 );
-  }
+    if ( m_dialog->volMuted()) {
+        p.setPen ( red );
+        p.drawLine ( 1, 2, width() - 2, height() - 5 );
+        p.drawLine ( 1, 3, width() - 2, height() - 4 );
+        p.drawLine ( width() - 2, 2, 1, height() - 5 );
+        p.drawLine ( width() - 2, 3, 1, height() - 4 );
+    }
 }
 
 

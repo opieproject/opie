@@ -34,100 +34,100 @@ namespace Opie { namespace Ui { class OLedBox; }; };
 class VolumeApplet;
 
 class VolumeControl : public QFrame {
-	Q_OBJECT
-	
+    Q_OBJECT
+    
 public:
-	VolumeControl ( VolumeApplet *icon, bool showMic = false, QWidget *parent=0, const char *name=0 );
+    VolumeControl( VolumeApplet *icon, bool showMic = false, QWidget *parent=0, const char *name=0 );
 
-	bool volMuted ( ) const;
-	int volPercent ( ) const;
+    bool volMuted() const;
+    int volPercent() const;
 
-	virtual void show ( bool showmic );
+    virtual void show( bool showmic );
 
 protected:
-	virtual void keyPressEvent ( QKeyEvent * e );
-	
+    virtual void keyPressEvent( QKeyEvent * e );
+    
 protected slots:
-	void volumeChanged ( bool muted );
-	void micChanged ( bool muted );
-	
+    void volumeChanged( bool muted );
+    void micChanged( bool muted );
+    
 private slots:
-	void volMoved ( int percent );
-	void micMoved ( int percent );
-	void alarmMoved ( int percent );
-	void bassMoved( int percent );
-	void trebleMoved( int percent );
-	
-	void volMuteToggled ( bool );
-	void micMuteToggled ( bool );
-	void alarmSoundToggled ( bool );
-	void keyClickToggled ( bool );
-	void screenTapToggled ( bool ); 
+    void volMoved( int percent );
+    void micMoved( int percent );
+    void alarmMoved( int percent );
+    void bassMoved( int percent );
+    void trebleMoved( int percent );
+    
+    void volMuteToggled( bool );
+    void micMuteToggled( bool );
+    void alarmSoundToggled( bool );
+    void keyClickToggled( bool );
+    void screenTapToggled( bool ); 
 
-	void buttonChanged ( );
-	void rateTimerDone ( );
-	
+    void buttonChanged();
+    void rateTimerDone();
+    
 private:
-	void readConfig ( bool force = false );
+    void readConfig( bool force = false );
 
-	enum eUpdate {
-		UPD_None,
-		UPD_Vol,
-		UPD_Mic,
-		UPD_Bass,
-		UPD_Treble
-	};
-	void writeConfigEntry ( const char *entry, int val, eUpdate upd );
+    enum eUpdate {
+        UPD_None,
+        UPD_Vol,
+        UPD_Mic,
+        UPD_Bass,
+        UPD_Treble
+    };
+    void writeConfigEntry( const char *entry, int val, eUpdate upd );
 
 
 private:
-	QSlider *volSlider;
-	QSlider *bassSlider;
-	QSlider *trebleSlider;
-	QSlider *micSlider;
-	QSlider *alarmSlider;
-	Opie::Ui::OLedBox *volLed;
-	Opie::Ui::OLedBox *micLed;
-	Opie::Ui::OLedBox *alarmLed;
-	
-	QCheckBox *alarmBox;
-	QCheckBox *tapBox;
-	QCheckBox *keyBox;
-	QPushButton *upButton;
-	QPushButton *downButton;
-	QTimer *rateTimer;
+    QSlider *volSlider;
+    QSlider *bassSlider;
+    QSlider *trebleSlider;
+    QSlider *micSlider;
+    QSlider *alarmSlider;
+    Opie::Ui::OLedBox *volLed;
+    Opie::Ui::OLedBox *micLed;
+    Opie::Ui::OLedBox *alarmLed;
+    
+    QCheckBox *alarmBox;
+    QCheckBox *tapBox;
+    QCheckBox *keyBox;
+    QPushButton *upButton;
+    QPushButton *downButton;
+    QTimer *rateTimer;
 
-	int  m_vol_percent;
-	int  m_mic_percent;
-	int  m_alarm_percent;
-	int  m_bass_percent;
-	int  m_treble_percent;
-	bool m_vol_muted;
-	bool m_mic_muted;	
-	bool m_snd_alarm;
-	bool m_snd_touch;
-	bool m_snd_key;
+    int  m_vol_percent;
+    int  m_mic_percent;
+    int  m_alarm_percent;
+    int  m_bass_percent;
+    int  m_treble_percent;
+    bool m_vol_muted;
+    bool m_mic_muted;
+    bool m_snd_alarm;
+    bool m_snd_touch;
+    bool m_snd_key;
 
-	VolumeApplet *m_icon;	
+    VolumeApplet *m_icon;
 };
 
 class VolumeApplet : public QWidget {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	VolumeApplet ( QWidget *parent = 0, const char *name=0 );
-	~VolumeApplet ( );
-	static int position();
+    VolumeApplet( QWidget *parent = 0, const char *name=0 );
+    ~VolumeApplet();
+    static int position();
 
-	void redraw ( bool all = true );
+    void redraw( bool all = true );
 
 protected:
-	virtual void mousePressEvent ( QMouseEvent * );
-	virtual void paintEvent ( QPaintEvent* );
-	
+    virtual void mousePressEvent( QMouseEvent * );
+    virtual void paintEvent( QPaintEvent* );
+    
 private:
-	QPixmap *      m_pixmap;
-	VolumeControl *m_dialog;
+    QPixmap *m_pixmap;
+    VolumeControl *m_dialog;
 };
 
 
