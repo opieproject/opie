@@ -299,6 +299,7 @@ VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *pa
     volLed = new OLedBox ( green, this );
     volLed->setFocusPolicy ( QWidget::NoFocus );
     volLed->setFixedSize ( 16, 16  );
+    volLed->setReadOnly( false );
 
     grid->addWidget ( volLed, 2, 1, AlignCenter );
 
@@ -353,6 +354,7 @@ VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *pa
     micLed = new OLedBox ( red, this );
     micLed->setFocusPolicy ( QWidget::NoFocus );
     micLed->setFixedSize ( 16, 16 );
+    micLed->setReadOnly( false );
 
     grid->addWidget ( micLed, 2, 2, AlignCenter );
 
@@ -371,6 +373,7 @@ VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *pa
     alarmLed = new OLedBox ( yellow, this );
     alarmLed->setFocusPolicy ( QWidget::NoFocus );
     alarmLed->setFixedSize ( 16, 16 );
+    alarmLed->setReadOnly( false );
 
     grid->addWidget ( alarmLed, 2, 3, AlignCenter );
 
@@ -473,6 +476,7 @@ void VolumeControl::keyPressEvent ( QKeyEvent *e )
             break;
         case Key_Space:
             volLed->toggle();
+            volMuteToggled( volLed->isOn() );
             break;
         case Key_Escape:
             hide();
