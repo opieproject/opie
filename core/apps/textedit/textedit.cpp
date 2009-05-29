@@ -855,7 +855,6 @@ bool TextEdit::saveAs()
         doc = new DocLnk(nf);
         odebug << "Saving file as " << currentFileName << oendl;
         doc->setName( fi.baseName() );
-        updateCaption();
 
         FileManager fm;
         if ( !fm.saveFile( *doc, rt ) ) {
@@ -871,6 +870,7 @@ bool TextEdit::saveAs()
 
             delete  filePerm;
         }
+        updateCaption();
         resetEditStatus();
         if(caption().left(1)=="*")
             setCaption(caption().right(caption().length()-1));
