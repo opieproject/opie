@@ -72,7 +72,6 @@ private:
 
     bool loadFile();
     inline void finalizeRecord( OPimEvent& ev );
-    inline void setField( OPimEvent&, int field, const QString& val );
     QString m_name;
     QMap<int, OPimEvent> m_raw;
     QMap<int, OPimEvent> m_rep;

@@ -86,40 +86,6 @@ char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
 }
 
 namespace {
-    time_t start, end, created, rp_end;
-    OPimRecurrence* rec;
-    static OPimRecurrence* recur() {
-        if (!rec)
-            rec = new OPimRecurrence;
-
-        return rec;
-    }
-    int alarmTime;
-    bool alarmSpecified;
-    int snd;
-    enum Attribute{
-        FDescription = 0,
-        FLocation,
-        FCategories,
-        FUid,
-        FType,
-        FAlarm,
-        FSound,
-        FRType,
-        FRWeekdays,
-        FRPosition,
-        FRFreq,
-        FRHasEndDate,
-        FREndDate,
-        FRStart,
-        FREnd,
-        FNote,
-        FCreated,      // Should't this be called FRCreated ?
-        FTimeZone,
-        FRecParent,
-        FRecChildren,
-        FExceptions
-    };
 
     // FIXME: Use OPimEvent::toMap() here !! (eilers)
     static void save( const OPimEvent& ev, QString& buf ) {
@@ -383,7 +349,6 @@ OPimEvent::ValueList ODateBookAccessBackend_XML::directRawRepeats()const {
     return list;
 }
 
-// FIXME: Use OPimEvent::fromMap() (eilers)
 bool ODateBookAccessBackend_XML::loadFile() {
     m_changed = false;
 
@@ -404,33 +369,29 @@ bool ODateBookAccessBackend_XML::loadFile() {
     ::madvise( map_addr, attribute.st_size, MADV_SEQUENTIAL );
     ::close( fd );
 
-    QAsciiDict<int> dict(FExceptions+1);
+    QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
     dict.setAutoDelete( true );
-    dict.insert( "description", new int(FDescription) );
-    dict.insert( "location", new int(FLocation) );
-    dict.insert( "categories", new int(FCategories) );
-    dict.insert( "uid", new int(FUid) );
-    dict.insert( "type", new int(FType) );
-    dict.insert( "alarm", new int(FAlarm) );
-    dict.insert( "sound", new int(FSound) );
-    dict.insert( "rtype", new int(FRType) );
-    dict.insert( "rweekdays", new int(FRWeekdays) );
-    dict.insert( "rposition", new int(FRPosition) );
-    dict.insert( "rfreq", new int(FRFreq) );
-    dict.insert( "rhasenddate", new int(FRHasEndDate) );
-    dict.insert( "enddt", new int(FREndDate) );
-    dict.insert( "start", new int(FRStart) );
-    dict.insert( "end", new int(FREnd) );
-    dict.insert( "note", new int(FNote) );
-    dict.insert( "created", new int(FCreated) );  // Shouldn't this be FRCreated ??
-    dict.insert( "recparent", new int(FRecParent) );
-    dict.insert( "recchildren", new int(FRecChildren) );
-    dict.insert( "exceptions", new int(FExceptions) );
-    dict.insert( "timezone", new int(FTimeZone) );
-
-
-    // initialiaze db hack
-    m_noTimeZone = true;
+    dict.insert( "description", new int(OPimEvent::FDescription) );
+    dict.insert( "location", new int(OPimEvent::FLocation) );
+    dict.insert( "categories", new int(OPimEvent::FCategories) );
+    dict.insert( "uid", new int(OPimEvent::FUid) );
+    dict.insert( "type", new int(OPimEvent::FType) );
+    dict.insert( "alarm", new int(OPimEvent::FAlarm) );
+    dict.insert( "sound", new int(OPimEvent::FSound) );
+    dict.insert( "rtype", new int(OPimEvent::FRType) );
+    dict.insert( "rweekdays", new int(OPimEvent::FRWeekdays) );
+    dict.insert( "rposition", new int(OPimEvent::FRPosition) );
+    dict.insert( "rfreq", new int(OPimEvent::FRFreq) );
+    dict.insert( "rhasenddate", new int(OPimEvent::FRHasEndDate) );
+    dict.insert( "enddt", new int(OPimEvent::FREndDate) );
+    dict.insert( "start", new int(OPimEvent::FStart) );
+    dict.insert( "end", new int(OPimEvent::FEnd) );
+    dict.insert( "note", new int(OPimEvent::FNote) );
+    dict.insert( "created", new int(OPimEvent::FRCreated) );
+    dict.insert( "recparent", new int(OPimEvent::FRecParent) );
+    dict.insert( "recchildren", new int(OPimEvent::FRecChildren) );
+    dict.insert( "exceptions", new int(OPimEvent::FRExceptions) );
+    dict.insert( "timezone", new int(OPimEvent::FTimeZone) );
 
     char* dt = (char*)map_addr;
     int len = attribute.st_size;
@@ -439,16 +400,13 @@ bool ODateBookAccessBackend_XML::loadFile() {
     const char* collectionString = "<event ";
     int strLen = ::strlen(collectionString);
     int *find;
+    QMap<int, QString> map;
     while ( (  point = ::strstrlen( dt+i, len -i, collectionString, strLen ) ) != 0  ) {
         i = point -dt;
         i+= strLen;
 
-        alarmTime = -1;
-        alarmSpecified = FALSE;
-        snd = 0; // silent
-
         OPimEvent ev;
-        rec = 0;
+        map.clear();
 
         while ( TRUE ) {
             while ( i < len && (dt[i] == ' ' || dt[i] == '\n' || dt[i] == '\r') )
@@ -505,13 +463,12 @@ bool ODateBookAccessBackend_XML::loadFile() {
             if (!find)
                 ev.setCustomField( attr, str );
             else {
-                setField( ev, *find, str );
+                map[*find] = str;
             }
         }
         /* time to finalize */
-        finalizeRecord( ev );
-        delete rec;
-        m_noTimeZone = true;
+        ev.fromMap(map);
+        finalizeRecord(ev);
     }
     ::munmap(map_addr, attribute.st_size );
     m_changed = false; // changed during add
@@ -519,46 +476,8 @@ bool ODateBookAccessBackend_XML::loadFile() {
     return true;
 }
 
-// FIXME: Use OPimEvent::fromMap() which makes this obsolete.. (eilers)
-void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
-
-    /*
-     * quirk to import datebook files. They normally don't have a
-     * timeZone attribute and we treat this as to use OPimTimeZone::current()
-     */
-    if (m_noTimeZone )
-        ev.setTimeZone( OPimTimeZone::current().timeZone() );
-
-
-    /* AllDay is alway in UTC */
-    if ( ev.isAllDay() ) {
-        OPimTimeZone utc = OPimTimeZone::utc();
-        ev.setStartDateTime( utc.toDateTime( start ) );
-        ev.setEndDateTime  ( utc.toDateTime( end   ) );
-    }
-    else {
-        /* to current date time */
-        OPimTimeZone   to_zone( ev.timeZone().isEmpty() ? OPimTimeZone::utc() : OPimTimeZone::current() );
-
-        ev.setStartDateTime(to_zone.toDateTime( start));
-        ev.setEndDateTime  (to_zone.toDateTime( end));
-    }
-
-    if ( rec && rec->doesRecur() ) {
-        OPimTimeZone utc = OPimTimeZone::utc();
-        OPimRecurrence recu( *rec ); // call copy c'tor;
-        recu.setEndDate ( utc.toDateTime( rp_end ).date() );
-        recu.setCreatedDateTime( utc.toDateTime( created ) );
-        recu.setStart( ev.startDateTime().date() );
-        ev.setRecurrence( recu );
-    }
-
-    if ( alarmSpecified ) {
-        QDateTime dt = ev.startDateTime().addSecs( -1*alarmTime*60 );
-        OPimAlarm al( snd ,  dt  );
-        ev.notifiers().add( al );
-    }
-
+void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) 
+{
     if ( m_raw.contains( ev.uid() ) || m_rep.contains( ev.uid() ) ) {
         ev.setUid( 1 );
     }
@@ -567,106 +486,6 @@ void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
         m_rep.insert( ev.uid(), ev );
     else
         m_raw.insert( ev.uid(), ev );
-
-}
-
-void ODateBookAccessBackend_XML::setField( OPimEvent& e, int id, const QString& value) {
-    switch( id ) {
-    case FDescription:
-        e.setDescription( value );
-        break;
-    case FLocation:
-        e.setLocation( value );
-        break;
-    case FCategories:
-        e.setCategories( e.idsFromString( value ) );
-        break;
-    case FUid:
-        e.setUid( value.toInt() );
-        break;
-    case FType:
-        if ( value == "AllDay" ) {
-            e.setAllDay( true );
-        }
-        break;
-    case FAlarm:
-        alarmTime = value.toInt();
-        alarmSpecified = TRUE;
-        break;
-    case FSound:
-        snd = value == "loud" ? OPimAlarm::Loud : OPimAlarm::Silent;
-        break;
-        // recurrence stuff
-    case FRType:
-        if ( value == "Daily" )
-            recur()->setType( OPimRecurrence::Daily );
-        else if ( value == "Weekly" )
-            recur()->setType( OPimRecurrence::Weekly);
-        else if ( value == "MonthlyDay" )
-            recur()->setType( OPimRecurrence::MonthlyDay );
-        else if ( value == "MonthlyDate" )
-            recur()->setType( OPimRecurrence::MonthlyDate );
-        else if ( value == "Yearly" )
-            recur()->setType( OPimRecurrence::Yearly );
-        else
-            recur()->setType( OPimRecurrence::NoRepeat );
-        break;
-    case FRWeekdays:
-        recur()->setDays( value.toInt() );
-        break;
-    case FRPosition:
-        recur()->setPosition( value.toInt() );
-        break;
-    case FRFreq:
-        recur()->setFrequency( value.toInt() );
-        break;
-    case FRHasEndDate:
-        recur()->setHasEndDate( value.toInt() );
-        break;
-    case FREndDate: {
-        rp_end = (time_t) value.toLong();
-        break;
-    }
-    case FRStart: {
-        start =  (time_t) value.toLong();
-        break;
-    }
-    case FREnd: {
-        end = ( (time_t) value.toLong() );
-        break;
-    }
-    case FNote:
-        e.setNote( value );
-        break;
-    case FCreated:
-        created = value.toInt();
-        break;
-    case FRecParent:
-        e.setParent( value.toInt() );
-        break;
-    case FRecChildren:{
-        QStringList list = QStringList::split(' ', value );
-        for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
-            e.addChild( (*it).toInt() );
-        }
-    }
-        break;
-    case FExceptions:{
-        QStringList list = QStringList::split(' ', value );
-        for (QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
-            QDate date( (*it).left(4).toInt(), (*it).mid(4, 2).toInt(), (*it).right(2).toInt() );
-            recur()->addException( date );
-        }
-    }
-        break;
-    case FTimeZone:
-        m_noTimeZone = false;
-        if ( value != "None" )
-            e.setTimeZone( value );
-        break;
-    default:
-        break;
-    }
 }
 
 QArray<int> ODateBookAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
