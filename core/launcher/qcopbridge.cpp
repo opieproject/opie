@@ -66,12 +66,12 @@ QCopBridge::QCopBridge( Q_UINT16 port, QObject *parent,
     else {
         ::fcntl( socket(), F_SETFD, FD_CLOEXEC );
 #ifndef QT_NO_COP
-	desktopChannel = new QCopChannel( "QPE/Desktop", this );
-	connect( desktopChannel, SIGNAL(received(const QCString&,const QByteArray&)),
-		 this, SLOT(desktopMessage(const QCString&,const QByteArray&)) );
-	cardChannel = new QCopChannel( "QPE/Card", this );
-	connect( cardChannel, SIGNAL(received(const QCString&,const QByteArray&)),
-		 this, SLOT(desktopMessage(const QCString&,const QByteArray&)) );
+        desktopChannel = new QCopChannel( "QPE/Desktop", this );
+        connect( desktopChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+                 this, SLOT(desktopMessage(const QCString&,const QByteArray&)) );
+        cardChannel = new QCopChannel( "QPE/Card", this );
+        connect( cardChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+                 this, SLOT(desktopMessage(const QCString&,const QByteArray&)) );
 #endif
     }
     sendSync = FALSE;
@@ -93,11 +93,12 @@ void QCopBridge::authorizeConnections()
     m_mode = Mode(cfg.readNumEntry("Mode", Sharp ));
     QListIterator<QCopBridgePI> it(openConnections);
     while ( it.current() ) {
-	if ( !it.current()->verifyAuthorised() ) {
-	    disconnect ( it.current(), SIGNAL( connectionClosed(QCopBridgePI*) ), this, SLOT( closed(QCopBridgePI*) ) );
-	    openConnections.removeRef( it.current() );
-	} else
-	    ++it;
+        if ( !it.current()->verifyAuthorised() ) {
+            disconnect ( it.current(), SIGNAL( connectionClosed(QCopBridgePI*) ), this, SLOT( closed(QCopBridgePI*) ) );
+            openConnections.removeRef( it.current() );
+        } 
+        else
+            ++it;
     }
 }
 
@@ -116,8 +117,8 @@ void QCopBridge::newConnection( int socket )
 #endif
 
     if ( sendSync ) {
-	pi ->startSync();
-	sendSync = FALSE;
+        pi ->startSync();
+        sendSync = FALSE;
     }
 }
 
@@ -128,7 +129,7 @@ void QCopBridge::closed( QCopBridgePI *pi )
     if ( openConnections.count() == 0 ) {
         /* ### FIXME libqtopia merge */
 #if 0
-	QPEApplication::setTempScreenSaverMode( QPEApplication::Enable );
+        QPEApplication::setTempScreenSaverMode( QPEApplication::Enable );
 #endif
 #ifndef QT_NO_COP
         QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
@@ -140,16 +141,16 @@ void QCopBridge::closeOpenConnections()
 {
     QCopBridgePI *pi;
     for ( pi = openConnections.first(); pi != 0; pi = openConnections.next() )
-	pi->close();
+        pi->close();
 }
 
 
 void QCopBridge::desktopMessage( const QCString &command, const QByteArray &data )
 {
     if ( command == "startSync()" ) {
-	// we need to buffer it a bit
-	sendSync = TRUE;
-	startTimer( 20000 );
+        // we need to buffer it a bit
+        sendSync = TRUE;
+        startTimer( 20000 );
     }
 
     if ( m_mode & Qtopia1_7 ) {
@@ -173,13 +174,13 @@ void QCopBridge::sendDesktopMessageOld( const QCString& command, const QByteArra
     int paren = command.find( "(" );
     if ( paren <= 0 ) {
     odebug << "DesktopMessage: bad qcop syntax" << oendl;
-	return;
+        return;
     }
 
     QString params = command.mid( paren + 1 );
     if ( params[params.length()-1] != ')' ) {
     odebug << "DesktopMessage: bad qcop syntax" << oendl;
-	return;
+        return;
     }
 
     params.truncate( params.length()-1 );
@@ -187,51 +188,55 @@ void QCopBridge::sendDesktopMessageOld( const QCString& command, const QByteArra
     QStringList paramList = QStringList::split( ",", params );
     QString data;
     if ( paramList.count() ) {
-	QDataStream stream( args, IO_ReadOnly );
-	for ( QStringList::Iterator it = paramList.begin(); it != paramList.end(); ++it ) {
-	    QString str;
-	    if ( *it == "QString" ) {
-		stream >> str;
-	    } else if ( *it == "QCString" ) {
-		QCString cstr;
-		stream >> cstr;
-		str = QString::fromLocal8Bit( cstr );
-	    } else if ( *it == "int" ) {
-		int i;
-		stream >> i;
-		str = QString::number( i );
-	    } else if ( *it == "bool" ) {
-		int i;
-		stream >> i;
-		str = QString::number( i );
-	    } else {
-        odebug << " cannot route the argument type " << (*it) << " throught the qcop bridge" << oendl;
-		return;
-	    }
-	    QString estr;
-	    for (int i=0; i<(int)str.length(); i++) {
-		QChar ch = str[i];
-		if ( ch.row() )
-		    goto quick;
-		switch (ch.cell()) {
-		    case '&':
-			estr.append( "&amp;" );
-			break;
-		    case ' ':
-			estr.append( "&0x20;" );
-			break;
-		    case '\n':
-			estr.append( "&0x0d;" );
-			break;
-		    case '\r':
-			estr.append( "&0x0a;" );
-			break;
-		    default: quick:
-			estr.append(ch);
-		}
-	    }
-	    data += " " + estr;
-	}
+        QDataStream stream( args, IO_ReadOnly );
+        for ( QStringList::Iterator it = paramList.begin(); it != paramList.end(); ++it ) {
+            QString str;
+            if ( *it == "QString" ) {
+                stream >> str;
+            } 
+            else if ( *it == "QCString" ) {
+                QCString cstr;
+                stream >> cstr;
+                str = QString::fromLocal8Bit( cstr );
+            } 
+            else if ( *it == "int" ) {
+                int i;
+                stream >> i;
+                str = QString::number( i );
+            } 
+            else if ( *it == "bool" ) {
+                int i;
+                stream >> i;
+                str = QString::number( i );
+            } 
+            else {
+                odebug << " cannot route the argument type " << (*it) << " throught the qcop bridge" << oendl;
+                return;
+            }
+            QString estr;
+            for (int i=0; i<(int)str.length(); i++) {
+                QChar ch = str[i];
+                if ( ch.row() )
+                    goto quick;
+                switch (ch.cell()) {
+                    case '&':
+                        estr.append( "&amp;" );
+                        break;
+                    case ' ':
+                        estr.append( "&0x20;" );
+                        break;
+                    case '\n':
+                        estr.append( "&0x0d;" );
+                        break;
+                    case '\r':
+                        estr.append( "&0x0a;" );
+                        break;
+                    default: quick:
+                        estr.append(ch);
+                }
+            }
+            data += " " + estr;
+        }
     }
     QString sendCommand = QString(command.data()) + data;
 
@@ -262,20 +267,21 @@ QCopBridgePI::QCopBridgePI( int socket, QObject *parent, const char* name )
 
 #ifndef INSECURE
     if ( !SyncAuthentication::isAuthorized(peeraddress) ) {
-	state = Forbidden;
-	close();
-    } else
+        state = Forbidden;
+        close();
+    } 
+    else
 #endif
     {
-	state = Connected;
-	connect( this, SIGNAL( readyRead() ), SLOT( read() ) );
-	QString intro="220 Qtopia ";
-	intro += QPE_VERSION; intro += ";";
-	intro += "challenge="; intro += SyncAuthentication::serverId(); intro += ";"; // No tr
-	intro += "loginname="; intro += SyncAuthentication::loginName(); intro += ";";
-	intro += "displayname="; intro += SyncAuthentication::ownerName(); intro += ";";
-	send( intro );
-	state = Wait_USER;
+        state = Connected;
+        connect( this, SIGNAL( readyRead() ), SLOT( read() ) );
+        QString intro="220 Qtopia ";
+        intro += QPE_VERSION; intro += ";";
+        intro += "challenge="; intro += SyncAuthentication::serverId(); intro += ";"; // No tr
+        intro += "loginname="; intro += SyncAuthentication::loginName(); intro += ";";
+        intro += "displayname="; intro += SyncAuthentication::ownerName(); intro += ";";
+        send( intro );
+        state = Wait_USER;
     }
     sendSync = FALSE;
     connect( this, SIGNAL( connectionClosed() ), SLOT( myConnectionClosed() ) );
@@ -294,8 +300,8 @@ QCopBridgePI::~QCopBridgePI()
 bool QCopBridgePI::verifyAuthorised()
 {
     if ( !SyncAuthentication::isAuthorized(peerAddress()) ) {
-	state = Forbidden;
-	return FALSE;
+        state = Forbidden;
+        return FALSE;
     }
     return TRUE;
 }
@@ -314,7 +320,7 @@ void QCopBridgePI::sendDesktopMessage( const QString &msg )
 void QCopBridgePI::sendDesktopMessage( const QCString &msg, const QByteArray& data )
 {
     if ( !isOpen() ) // eg. Forbidden
-	return;
+        return;
 
     const char hdr[]="CALLB QPE/Desktop ";
     writeBlock(hdr,sizeof(hdr)-1);
@@ -330,7 +336,7 @@ void QCopBridgePI::sendDesktopMessage( const QCString &msg, const QByteArray& da
 void QCopBridgePI::send( const QString& msg )
 {
     if ( !isOpen() ) // eg. Forbidden
-	return;
+        return;
     QTextStream os( this );
     os << msg << endl;
     //odebug << "sending qcop message: " << msg << "" << oendl;
@@ -339,14 +345,14 @@ void QCopBridgePI::send( const QString& msg )
 void QCopBridgePI::read()
 {
     while ( canReadLine() ) {
-	timer->start( 300000, TRUE );
-	process( readLine().stripWhiteSpace() );
+        timer->start( 300000, TRUE );
+        process( readLine().stripWhiteSpace() );
     }
 }
 
 void QCopBridgePI::process( const QString& message )
 {
-    //odebug << "Command: " << message << "" << oendl;
+    odebug << "QCop Bridge Command: " << message << "" << oendl;
 
     // split message using "," as separator
     QStringList msg = QStringList::split( " ", message );
@@ -358,135 +364,135 @@ void QCopBridgePI::process( const QString& message )
     // argument token
     QString arg;
     if ( msg.count() >= 2 )
-	arg = msg[1];
+        arg = msg[1];
 
     // we always respond to QUIT, regardless of state
     if ( cmd == "QUIT" ) {
-	send( "211 Have a nice day!" ); // No tr
-	close();
-	return;
+        send( "211 Have a nice day!" ); // No tr
+        close();
+        return;
     }
 
     // connected to client
     if ( Connected == state )
-	return;
+        return;
 
     // waiting for user name
     if ( Wait_USER == state ) {
 
-	if ( cmd != "USER" || msg.count() < 2 || !SyncAuthentication::checkUser( arg ) ) {
-	    send( "530 Please login with USER and PASS" ); // No tr
-	    return;
-	}
-	send( "331 User name ok, need password" ); // No tr
-	state = Wait_PASS;
-	return;
+        if ( cmd != "USER" || msg.count() < 2 || !SyncAuthentication::checkUser( arg ) ) {
+            send( "530 Please login with USER and PASS" ); // No tr
+            return;
+        }
+        send( "331 User name ok, need password" ); // No tr
+        state = Wait_PASS;
+        return;
     }
 
     // waiting for password
     if ( Wait_PASS == state ) {
 
-	if ( cmd != "PASS" || !SyncAuthentication::checkPassword( arg ) ) {
-	    send( "530 Please login with USER and PASS" ); // No tr
-	    return;
-	}
-	send( "230 User logged in, proceed" ); // No tr
-	state = Ready;
-	if ( sendSync ) {
-	    sendDesktopMessage( "startSync()" );
-	    sendSync = FALSE;
-	}
-	return;
+        if ( cmd != "PASS" || !SyncAuthentication::checkPassword( arg ) ) {
+            send( "530 Please login with USER and PASS" ); // No tr
+            return;
+        }
+        send( "230 User logged in, proceed" ); // No tr
+        state = Ready;
+        if ( sendSync ) {
+            sendDesktopMessage( "startSync()" );
+            sendSync = FALSE;
+        }
+        return;
     }
 
     // noop (NOOP)
     else if ( cmd == "NOOP" ) {
-	send( "200 Command okay" ); // No tr
+        send( "200 Command okay" ); // No tr
     }
 
     // call (CALL)
     else if ( cmd == "CALL" ) {
 
-	// example: call QPE/System execute(QString) addressbook
+        // example: call QPE/System execute(QString) addressbook
 
-	if ( msg.count() < 3 ) {
-	    send( "500 Syntax error, command unrecognized" ); // No tr
-	}
-	else {
+        if ( msg.count() < 3 ) {
+            send( "500 Syntax error, command unrecognized" ); // No tr
+        }
+        else {
 
-	    QString channel = msg[1];
-	    QString command = msg[2];
+            QString channel = msg[1];
+            QString command = msg[2];
 
-	    command.stripWhiteSpace();
+            command.stripWhiteSpace();
 
-	    int paren = command.find( "(" );
-	    if ( paren <= 0 ) {
-		send( "500 Syntax error, command unrecognized" ); // No tr
-		return;
-	    }
+            int paren = command.find( "(" );
+            if ( paren <= 0 ) {
+                send( "500 Syntax error, command unrecognized" ); // No tr
+                return;
+            }
 
-	    QString params = command.mid( paren + 1 );
-	    if ( params[(int)params.length()-1] != ')' ) {
-		send( "500 Syntax error, command unrecognized" ); // No tr
-		return;
-	    }
+            QString params = command.mid( paren + 1 );
+            if ( params[(int)params.length()-1] != ')' ) {
+                send( "500 Syntax error, command unrecognized" ); // No tr
+                return;
+            }
 
-	    params.truncate( params.length()-1 );
-	    QByteArray buffer;
-	    QDataStream ds( buffer, IO_WriteOnly );
+            params.truncate( params.length()-1 );
+            QByteArray buffer;
+            QDataStream ds( buffer, IO_WriteOnly );
 
-	    int msgId = 3;
+            int msgId = 3;
 
-	    QStringList paramList = QStringList::split( ",", params );
-	    if ( paramList.count() > msg.count() - 3 ) {
-		send( "500 Syntax error, command unrecognized" ); // No tr
-		return;
-	    }
+            QStringList paramList = QStringList::split( ",", params );
+            if ( paramList.count() > msg.count() - 3 ) {
+                send( "500 Syntax error, command unrecognized" ); // No tr
+                return;
+            }
 
-	    for ( QStringList::Iterator it = paramList.begin(); it != paramList.end(); ++it ) {
+            for ( QStringList::Iterator it = paramList.begin(); it != paramList.end(); ++it ) {
 
-		QString arg = msg[msgId];
-		arg.replace( QRegExp("&0x20;"), " " );
-		arg.replace( QRegExp("&amp;"), "&" );
-		arg.replace( QRegExp("&0x0d;"), "\n" );
-		arg.replace( QRegExp("&0x0a;"), "\r" );
-		if ( *it == "QString" )
-		    ds << arg;
-		else if ( *it == "QCString" )
-		    ds << arg.local8Bit();
-		else if ( *it == "int" )
-		    ds << arg.toInt();
-		else if ( *it == "bool" )
-		    ds << arg.toInt();
-		else {
-		    send( "500 Syntax error, command unrecognized" ); // No tr
-		    return;
-		}
-		msgId++;
-	    }
+                QString arg = msg[msgId];
+                arg.replace( QRegExp("&0x20;"), " " );
+                arg.replace( QRegExp("&amp;"), "&" );
+                arg.replace( QRegExp("&0x0d;"), "\n" );
+                arg.replace( QRegExp("&0x0a;"), "\r" );
+                if ( *it == "QString" )
+                    ds << arg;
+                else if ( *it == "QCString" )
+                    ds << arg.local8Bit();
+                else if ( *it == "int" )
+                    ds << arg.toInt();
+                else if ( *it == "bool" )
+                    ds << arg.toInt();
+                else {
+                    send( "500 Syntax error, command unrecognized" ); // No tr
+                    return;
+                }
+                msgId++;
+            }
 
 #ifndef QT_NO_COP
-	    if ( !QCopChannel::isRegistered( channel.latin1() ) ) {
-		// send message back about it
-		QString answer = "599 ChannelNotRegistered " + channel;
-		send( answer );
-		return;
-	    }
+            if ( !QCopChannel::isRegistered( channel.latin1() ) ) {
+                // send message back about it
+                QString answer = "599 ChannelNotRegistered " + channel;
+                send( answer );
+                return;
+            }
 #endif
 
 #ifndef QT_NO_COP
-	    if ( paramList.count() )
-		QCopChannel::send( channel.latin1(), command.latin1(), buffer );
-	    else
-		QCopChannel::send( channel.latin1(), command.latin1() );
+            if ( paramList.count() )
+                QCopChannel::send( channel.latin1(), command.latin1(), buffer );
+            else
+                QCopChannel::send( channel.latin1(), command.latin1() );
 
-	    send( "200 Command okay" ); // No tr
+            send( "200 Command okay" ); // No tr
 #endif
-	}
+        }
     }
     // not implemented
     else
-	send( "502 Command not implemented" ); // No tr
+        send( "502 Command not implemented" ); // No tr
 }
 
 
