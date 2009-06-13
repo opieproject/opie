@@ -176,16 +176,20 @@ void Converter::start_conversion()
         case SQL:
             odebug << "SQLDestDB = " << m_selectedDatabase << "" << oendl;
             switch( m_selectedDatabase ) {
-                case ADDRESSBOOK:{
-                    destDB = OPimAccessFactory<OPimContactAccess>::create( OPimGlobal::CONTACTLIST, OPimGlobal::SQL, "converter" );
-                        }
+                case ADDRESSBOOK:
+                    {
+                        destDB = OPimAccessFactory<OPimContactAccess>::create( OPimGlobal::CONTACTLIST, OPimGlobal::SQL, "converter" );
+                    }
                     break;
-                case TODOLIST:{
-                    destDB = OPimAccessFactory<OPimTodoAccess>::create( OPimGlobal::TODOLIST, OPimGlobal::SQL, "converter" );
-                    }break;
-                case DATEBOOK:{
-                    destDB = OPimAccessFactory<ODateBookAccess>::create( OPimGlobal::DATEBOOK, OPimGlobal::SQL, "converter" );
-                        }
+                case TODOLIST:
+                    {
+                        destDB = OPimAccessFactory<OPimTodoAccess>::create( OPimGlobal::TODOLIST, OPimGlobal::SQL, "converter" );
+                    }
+                    break;
+                case DATEBOOK:
+                    {
+                        destDB = OPimAccessFactory<ODateBookAccess>::create( OPimGlobal::DATEBOOK, OPimGlobal::SQL, "converter" );
+                    }
                     break;
                 default:
                     owarn << "Unknown database selected (" << m_selectedDatabase << ")" << oendl;
