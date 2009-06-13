@@ -46,53 +46,54 @@ namespace Opie {
  * it does implement everything available for OPimContact.
  * @see OPimAccessBackend for more information of available methods
  */
-class OPimContactAccessBackend_XML : public OPimContactAccessBackend {
- public:
-	OPimContactAccessBackend_XML ( const QString& appname, const QString& filename = QString::null );
+class OPimContactAccessBackend_XML : public OPimContactAccessBackend 
+{
+public:
+    OPimContactAccessBackend_XML ( const QString& appname, const QString& filename = QString::null );
 
-	bool save();
+    bool save();
 
-	bool load ();
+    bool load ();
 
-	void clear ();
+    void clear ();
 
-	bool wasChangedExternally();
+    bool wasChangedExternally();
 
-	UIDArray allRecords() const;
+    UIDArray allRecords() const;
 
-	OPimContact find ( int uid ) const;
+    OPimContact find ( int uid ) const;
 
-	UIDArray matchRegexp(  const QRegExp &r ) const;
+    UIDArray matchRegexp(  const QRegExp &r ) const;
 
-	bool add ( const OPimContact &newcontact );
+    bool add ( const OPimContact &newcontact );
 
-	bool replace ( const OPimContact &contact );
+    bool replace ( const OPimContact &contact );
 
-	bool remove ( int uid );
-	bool reload();
+    bool remove ( int uid );
+    bool reload();
 
- private:
+private:
 
-	enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
+    enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
 
-	void addContact_p( const OPimContact &newcontact );
+    void addContact_p( const OPimContact &newcontact );
 
-	/* This function loads the xml-database and the journalfile */
-	bool load( const QString filename, bool isJournal );
+    /* This function loads the xml-database and the journalfile */
+    bool load( const QString filename, bool isJournal );
 
 
-	void updateJournal( const OPimContact& cnt, journal_action action );
-	void removeJournal();
+    void updateJournal( const OPimContact& cnt, journal_action action );
+    void removeJournal();
 
- protected:
-	bool m_changed;
-	QString m_journalName;
-	QString m_fileName;
-	QString m_appName;
-	QList<OPimContact> m_contactList;
-	QDateTime m_readtime;
+protected:
+    bool m_changed;
+    QString m_journalName;
+    QString m_fileName;
+    QString m_appName;
+    QList<OPimContact> m_contactList;
+    QDateTime m_readtime;
 
-	QDict<OPimContact> m_uidToContact;
+    QDict<OPimContact> m_uidToContact;
 };
 
 }

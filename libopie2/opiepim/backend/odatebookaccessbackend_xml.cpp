@@ -65,21 +65,21 @@ char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
     char needleChar;
     char haystackChar;
     if (!needle || !haystack || !hLen || !nLen)
-    return 0;
+        return 0;
 
     const char* hsearch = haystack;
 
     if ((needleChar = *needle++) != 0) {
-    nLen--; //(to make up for needle++)
-    do {
+        nLen--; //(to make up for needle++)
         do {
-        if ((haystackChar = *hsearch++) == 0)
-            return (0);
-        if (hsearch >= haystack + hLen)
-            return (0);
-        } while (haystackChar != needleChar);
-    } while (strncmp(hsearch, needle, QMIN(hLen - (hsearch - haystack), nLen)) != 0);
-    hsearch--;
+            do {
+                if ((haystackChar = *hsearch++) == 0)
+                    return (0);
+                if (hsearch >= haystack + hLen)
+                    return (0);
+            } while (haystackChar != needleChar);
+        } while (strncmp(hsearch, needle, QMIN(hLen - (hsearch - haystack), nLen)) != 0);
+        hsearch--;
     }
     return ((char *)hsearch);
 }
@@ -145,6 +145,7 @@ namespace {
                 buf += "silent";
             buf += "\"";
         }
+
         if ( ev.hasRecurrence() ) {
             buf += ev.recurrence().toString();
         }
@@ -218,15 +219,19 @@ ODateBookAccessBackend_XML::ODateBookAccessBackend_XML( const QString& ,
     m_name = fileName.isEmpty() ? Global::applicationFileName( "datebook", "datebook.xml" ) : fileName;
     m_changed = false;
 }
+
 ODateBookAccessBackend_XML::~ODateBookAccessBackend_XML() {
 }
+
 bool ODateBookAccessBackend_XML::load() {
     return loadFile();
 }
+
 bool ODateBookAccessBackend_XML::reload() {
     clear();
     return load();
 }
+
 bool ODateBookAccessBackend_XML::save() {
     if (!m_changed) return true;
 
@@ -276,6 +281,7 @@ bool ODateBookAccessBackend_XML::save() {
     m_changed = false;
     return true;
 }
+
 QArray<int> ODateBookAccessBackend_XML::allRecords()const {
     QArray<int> ints( m_raw.count()+ m_rep.count() );
     uint i = 0;
@@ -292,20 +298,24 @@ QArray<int> ODateBookAccessBackend_XML::allRecords()const {
 
     return ints;
 }
+
 QArray<int> ODateBookAccessBackend_XML::queryByExample(const OPimEvent&, int,  const QDateTime& ) const {
     return QArray<int>();
 }
+
 void ODateBookAccessBackend_XML::clear() {
     m_changed = true;
     m_raw.clear();
     m_rep.clear();
 }
+
 OPimEvent ODateBookAccessBackend_XML::find( int uid ) const{
     if ( m_raw.contains( uid ) )
         return m_raw[uid];
     else
         return m_rep[uid];
 }
+
 bool ODateBookAccessBackend_XML::add( const OPimEvent& ev ) {
     m_changed = true;
     if (ev.hasRecurrence() )
@@ -315,6 +325,7 @@ bool ODateBookAccessBackend_XML::add( const OPimEvent& ev ) {
 
     return true;
 }
+
 bool ODateBookAccessBackend_XML::remove( int uid ) {
     m_changed = true;
     m_raw.remove( uid );
@@ -322,6 +333,7 @@ bool ODateBookAccessBackend_XML::remove( int uid ) {
 
     return true;
 }
+
 bool ODateBookAccessBackend_XML::replace( const OPimEvent& ev ) {
     remove( ev.uid() );
     return add( ev );
@@ -339,6 +351,7 @@ QArray<int> ODateBookAccessBackend_XML::rawRepeats()const {
 
     return ints;
 }
+
 QArray<int> ODateBookAccessBackend_XML::nonRepeats()const {
     QArray<int> ints( m_raw.count() );
     uint i = 0;
@@ -351,6 +364,7 @@ QArray<int> ODateBookAccessBackend_XML::nonRepeats()const {
 
     return ints;
 }
+
 OPimEvent::ValueList ODateBookAccessBackend_XML::directNonRepeats()const {
     OPimEvent::ValueList list;
     QMap<int, OPimEvent>::ConstIterator it;
@@ -359,6 +373,7 @@ OPimEvent::ValueList ODateBookAccessBackend_XML::directNonRepeats()const {
 
     return list;
 }
+
 OPimEvent::ValueList ODateBookAccessBackend_XML::directRawRepeats()const {
     OPimEvent::ValueList list;
     QMap<int, OPimEvent>::ConstIterator it;
@@ -437,46 +452,51 @@ bool ODateBookAccessBackend_XML::loadFile() {
 
         while ( TRUE ) {
             while ( i < len && (dt[i] == ' ' || dt[i] == '\n' || dt[i] == '\r') )
-        ++i;
-        if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
-        break;
+                ++i;
+        
+            if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
+                break;
 
 
-        // we have another attribute, read it.
-        int j = i;
-        while ( j < len && dt[j] != '=' )
-        ++j;
-        QCString attr( dt+i, j-i+1);
+            // we have another attribute, read it.
+            int j = i;
+            while ( j < len && dt[j] != '=' )
+                ++j;
 
-        i = ++j; // skip =
+            QCString attr( dt+i, j-i+1);
 
-        // find the start of quotes
-        while ( i < len && dt[i] != '"' )
-        ++i;
-        j = ++i;
+            i = ++j; // skip =
 
-        bool haveUtf = FALSE;
-        bool haveEnt = FALSE;
-        while ( j < len && dt[j] != '"' ) {
-        if ( ((unsigned char)dt[j]) > 0x7f )
-            haveUtf = TRUE;
-        if ( dt[j] == '&' )
-            haveEnt = TRUE;
-        ++j;
-        }
-        if ( i == j ) {
-        // empty value
-        i = j + 1;
-        continue;
-        }
+            // find the start of quotes
+            while ( i < len && dt[i] != '"' )
+                ++i;
 
-        QCString value( dt+i, j-i+1 );
-        i = j + 1;
+            j = ++i;
 
-        QString str = (haveUtf ? QString::fromUtf8( value )
-            : QString::fromLatin1( value ) );
-        if ( haveEnt )
-        str = Qtopia::plainString( str );
+            bool haveUtf = FALSE;
+            bool haveEnt = FALSE;
+            while ( j < len && dt[j] != '"' ) {
+                if ( ((unsigned char)dt[j]) > 0x7f )
+                    haveUtf = TRUE;
+                if ( dt[j] == '&' )
+                    haveEnt = TRUE;
+                ++j;
+            }
+
+            if ( i == j ) {
+                // empty value
+                i = j + 1;
+                continue;
+            }
+
+            QCString value( dt+i, j-i+1 );
+            i = j + 1;
+
+            QString str = (haveUtf ? QString::fromUtf8( value )
+                : QString::fromLatin1( value ) );
+
+            if ( haveEnt )
+                str = Qtopia::plainString( str );
 
             /*
              * add key + value
@@ -510,19 +530,20 @@ void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
         ev.setTimeZone( OPimTimeZone::current().timeZone() );
 
 
-
     /* AllDay is alway in UTC */
     if ( ev.isAllDay() ) {
         OPimTimeZone utc = OPimTimeZone::utc();
         ev.setStartDateTime( utc.toDateTime( start ) );
         ev.setEndDateTime  ( utc.toDateTime( end   ) );
-    }else {
+    }
+    else {
         /* to current date time */
         OPimTimeZone   to_zone( ev.timeZone().isEmpty() ? OPimTimeZone::utc() : OPimTimeZone::current() );
 
         ev.setStartDateTime(to_zone.toDateTime( start));
         ev.setEndDateTime  (to_zone.toDateTime( end));
     }
+
     if ( rec && rec->doesRecur() ) {
         OPimTimeZone utc = OPimTimeZone::utc();
         OPimRecurrence recu( *rec ); // call copy c'tor;
@@ -537,6 +558,7 @@ void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
         OPimAlarm al( snd ,  dt  );
         ev.notifiers().add( al );
     }
+
     if ( m_raw.contains( ev.uid() ) || m_rep.contains( ev.uid() ) ) {
         ev.setUid( 1 );
     }
@@ -547,6 +569,7 @@ void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
         m_raw.insert( ev.uid(), ev );
 
 }
+
 void ODateBookAccessBackend_XML::setField( OPimEvent& e, int id, const QString& value) {
     switch( id ) {
     case FDescription:
@@ -645,6 +668,7 @@ void ODateBookAccessBackend_XML::setField( OPimEvent& e, int id, const QString& 
         break;
     }
 }
+
 QArray<int> ODateBookAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
 {
     QArray<int> m_currentQuery( m_raw.count()+ m_rep.count() );

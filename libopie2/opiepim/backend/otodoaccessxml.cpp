@@ -84,21 +84,21 @@ char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
     char needleChar;
     char haystackChar;
     if (!needle || !haystack || !hLen || !nLen)
-    return 0;
+        return 0;
 
     const char* hsearch = haystack;
 
     if ((needleChar = *needle++) != 0) {
-    nLen--; //(to make up for needle++)
-    do {
+        nLen--; //(to make up for needle++)
         do {
-        if ((haystackChar = *hsearch++) == 0)
-            return (0);
-        if (hsearch >= haystack + hLen)
-            return (0);
-        } while (haystackChar != needleChar);
-    } while (strncmp(hsearch, needle, QMIN(hLen - (hsearch - haystack), nLen)) != 0);
-    hsearch--;
+            do {
+                if ((haystackChar = *hsearch++) == 0)
+                    return (0);
+                if (hsearch >= haystack + hLen)
+                    return (0);
+            } while (haystackChar != needleChar);
+        } while (strncmp(hsearch, needle, QMIN(hLen - (hsearch - haystack), nLen)) != 0);
+        hsearch--;
     }
     return ((char *)hsearch);
 }
@@ -115,9 +115,11 @@ OPimTodoAccessXML::OPimTodoAccessXML( const QString& appName,
     else
         m_file = Global::applicationFileName( "todolist", "todolist.xml" );
 }
+
 OPimTodoAccessXML::~OPimTodoAccessXML() {
 
 }
+
 bool OPimTodoAccessXML::load() {
     rec = 0;
     m_opened = true;
@@ -190,52 +192,57 @@ bool OPimTodoAccessXML::load() {
 
         while ( TRUE ) {
             while ( i < len && (dt[i] == ' ' || dt[i] == '\n' || dt[i] == '\r') )
-        ++i;
-        if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
-        break;
+                ++i;
 
-        // we have another attribute, read it.
-        int j = i;
-        while ( j < len && dt[j] != '=' )
-        ++j;
-        QCString attr( dt+i, j-i+1);
+            if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
+                break;
 
-        i = ++j; // skip =
+            // we have another attribute, read it.
+            int j = i;
+            while ( j < len && dt[j] != '=' )
+                ++j;
 
-        // find the start of quotes
-        while ( i < len && dt[i] != '"' )
-        ++i;
-        j = ++i;
+            QCString attr( dt+i, j-i+1);
 
-        bool haveUtf = FALSE;
-        bool haveEnt = FALSE;
-        while ( j < len && dt[j] != '"' ) {
-        if ( ((unsigned char)dt[j]) > 0x7f )
-            haveUtf = TRUE;
-        if ( dt[j] == '&' )
-            haveEnt = TRUE;
-        ++j;
-        }
-        if ( i == j ) {
-        // empty value
-        i = j + 1;
-        continue;
-        }
+            i = ++j; // skip =
 
-        QCString value( dt+i, j-i+1 );
-        i = j + 1;
+            // find the start of quotes
+            while ( i < len && dt[i] != '"' )
+                ++i;
 
-        QString str = (haveUtf ? QString::fromUtf8( value )
-            : QString::fromLatin1( value ) );
-        if ( haveEnt )
-        str = Qtopia::plainString( str );
+            j = ++i;
+
+            bool haveUtf = FALSE;
+            bool haveEnt = FALSE;
+            while ( j < len && dt[j] != '"' ) {
+                if ( ((unsigned char)dt[j]) > 0x7f )
+                    haveUtf = TRUE;
+                if ( dt[j] == '&' )
+                    haveEnt = TRUE;
+                ++j;
+            }
+
+            if ( i == j ) {
+                // empty value
+                i = j + 1;
+                continue;
+            }
+
+            QCString value( dt+i, j-i+1 );
+            i = j + 1;
+
+            QString str = (haveUtf ? QString::fromUtf8( value )
+                : QString::fromLatin1( value ) );
+
+            if ( haveEnt )
+                str = Qtopia::plainString( str );
 
             /*
              * add key + value
              */
             todo( &dict, ev, attr, str );
-
         }
+
         /*
          * now add it
          */
@@ -243,9 +250,11 @@ bool OPimTodoAccessXML::load() {
             ev.setUid( 1 );
             m_changed = true;
         }
+
         if ( ev.hasDueDate() ) {
             ev.setDueDate( QDate(m_year, m_month, m_day) );
         }
+
         if ( rec && rec->doesRecur() ) {
             OPimTimeZone utc = OPimTimeZone::utc();
             OPimRecurrence recu( *rec ); // call copy c'tor
@@ -253,6 +262,7 @@ bool OPimTodoAccessXML::load() {
             recu.setStart( ev.dueDate() );
             ev.setRecurrence( recu );
         }
+
         m_events.insert(ev.uid(), ev );
         m_year = m_month = m_day = -1;
         delete rec;
@@ -263,10 +273,12 @@ bool OPimTodoAccessXML::load() {
 
     return true;
 }
+
 bool OPimTodoAccessXML::reload() {
     m_events.clear();
     return load();
 }
+
 bool OPimTodoAccessXML::save() {
     if (!m_opened || !m_changed ) {
         return true;
@@ -315,6 +327,7 @@ bool OPimTodoAccessXML::save() {
     m_changed = false;
     return true;
 }
+
 QArray<int> OPimTodoAccessXML::allRecords()const {
     QArray<int> ids( m_events.count() );
     QMap<int, OPimTodo>::ConstIterator it;
@@ -336,30 +349,35 @@ OPimTodo OPimTodoAccessXML::find( int uid )const {
 
     return todo;
 }
+
 void OPimTodoAccessXML::clear() {
     if (m_opened )
         m_changed = true;
 
     m_events.clear();
 }
+
 bool OPimTodoAccessXML::add( const OPimTodo& todo ) {
     m_changed = true;
     m_events.insert( todo.uid(), todo );
 
     return true;
 }
+
 bool OPimTodoAccessXML::remove( int uid ) {
     m_changed = true;
     m_events.remove( uid );
 
     return true;
 }
+
 bool OPimTodoAccessXML::replace( const OPimTodo& todo) {
     m_changed = true;
     m_events.replace( todo.uid(), todo );
 
     return true;
 }
+
 QArray<int> OPimTodoAccessXML::effectiveToDos( const QDate& start,
                                             const QDate& end,
                                             bool includeNoDates )const {
@@ -370,7 +388,8 @@ QArray<int> OPimTodoAccessXML::effectiveToDos( const QDate& start,
     for ( it = m_events.begin(); it != m_events.end(); ++it ) {
         if ( !it.data().hasDueDate() && includeNoDates) {
                 ids[i++] = it.key();
-        }else if ( it.data().dueDate() >= start &&
+        }
+        else if ( it.data().dueDate() >= start &&
                    it.data().dueDate() <= end ) {
             ids[i++] = it.key();
         }
@@ -378,6 +397,7 @@ QArray<int> OPimTodoAccessXML::effectiveToDos( const QDate& start,
     ids.resize( i );
     return ids;
 }
+
 QArray<int> OPimTodoAccessXML::overDue()const {
     QArray<int> ids( m_events.count() );
     int i = 0;
@@ -479,9 +499,9 @@ void OPimTodoAccessXML::todo( QAsciiDict<int>* dict, OPimTodo& ev,
         QStringList::Iterator strIt;
         for (strIt = refs.begin(); strIt != refs.end(); ++strIt ) {
             int pos = (*strIt).find(',');
-            if ( pos > -1 )
-                ; // ev.addRelation( (*strIt).left(pos),  (*strIt).mid(pos+1).toInt() );
-
+            if ( pos > -1 ) {
+                // ev.addRelation( (*strIt).left(pos),  (*strIt).mid(pos+1).toInt() );
+            }
         }
         break;
     }
@@ -656,7 +676,8 @@ QArray<int> OPimTodoAccessXML::sorted( const UIDArray& events, bool asc,
             if ( bCat && cat == -1 ) {
                 if(!todo.categories().isEmpty() )
                     continue;
-            } else if ( bCat && cat != 0)
+            } 
+            else if ( bCat && cat != 0)
                 if (!todo.categories().contains( cat ) )
                     continue;
             catPassed = true;

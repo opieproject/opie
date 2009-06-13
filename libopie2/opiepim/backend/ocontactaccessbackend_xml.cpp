@@ -71,9 +71,9 @@ OPimContactAccessBackend_XML::OPimContactAccessBackend_XML ( const QString& appn
     m_journalName +="/.abjournal" + appname;
 
     /* Expecting to access the default filename if nothing else is set */
-    if ( filename.isEmpty() ){
+    if ( filename.isEmpty() )
         m_fileName = Global::applicationFileName( "addressbook","addressbook.xml" );
-    } else
+    else
         m_fileName = filename;
 
     /* Load Database now */
@@ -189,7 +189,7 @@ UIDArray OPimContactAccessBackend_XML::allRecords() const
 
     uint counter = 0;
     QListIterator<OPimContact> it( m_contactList );
-    for( ; it.current(); ++it ){
+    for( ; it.current(); ++it ) {
         uid_list[counter++] = (*it)->uid();
     }
 
@@ -202,7 +202,7 @@ OPimContact OPimContactAccessBackend_XML::find ( int uid ) const
 
     OPimContact* found = m_uidToContact.find( QString().setNum( uid ) );
 
-    if ( found ){
+    if ( found ) {
         foundContact = *found;
     }
 
@@ -216,8 +216,8 @@ UIDArray OPimContactAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
     QListIterator<OPimContact> it( m_contactList );
     uint arraycounter = 0;
 
-    for( ; it.current(); ++it ){
-        if ( (*it)->match( r ) ){
+    for( ; it.current(); ++it ) {
+        if ( (*it)->match( r ) ) {
             m_currentQuery[arraycounter++] = (*it)->uid();
         }
 
@@ -241,14 +241,14 @@ UIDArray OPimContactAccessBackend_XML::sorted( bool asc,  int , int ,  int )
     // First fill map and StringList with all Names
     // Afterwards sort namelist and use map to fill array to return..
     QListIterator<OPimContact> it( m_contactList );
-    for( ; it.current(); ++it ){
+    for( ; it.current(); ++it ) {
         names.append( (*it)->fileAs() + QString::number( (*it)->uid() ) );
         nameToUid.insert( (*it)->fileAs() + QString::number( (*it)->uid() ), (*it)->uid() );
     }
     names.sort();
 
     int i = 0;
-    if ( asc ){
+    if ( asc ) {
         for ( QStringList::Iterator it = names.begin(); it != names.end(); ++it )
             m_currentQuery[i++] = nameToUid[ (*it) ];
     }else{
@@ -288,7 +288,8 @@ bool OPimContactAccessBackend_XML::replace ( const OPimContact &contact )
         m_uidToContact.insert( QString().setNum( newCont->uid() ), newCont );
 
         return true;
-    } else
+    } 
+    else
         return false;
 }
 
@@ -304,11 +305,12 @@ bool OPimContactAccessBackend_XML::remove ( int uid )
         m_uidToContact.remove( QString().setNum( uid ) );
 
         return true;
-    } else
+    } 
+    else
         return false;
 }
 
-bool OPimContactAccessBackend_XML::reload(){
+bool OPimContactAccessBackend_XML::reload() {
     /* Reload is the same as load in this implementation */
     return ( load() );
 }
@@ -328,7 +330,7 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
     /* We use the time of the last read to check if the file was
      * changed externally.
      */
-    if ( !isJournal ){
+    if ( !isJournal ) {
         QFileInfo fi( filename );
         m_readtime = fi.lastModified ();
     }
@@ -392,7 +394,7 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
     dict.insert( "actionrow", new int(JOURNALROW) );
 
     XMLElement *root = XMLElement::load( filename );
-    if(root != 0l ){ // start parsing
+    if(root != 0l ) { // start parsing
         /* Parse all XML-Elements and put the data into the
          * Contact-Class
          */
@@ -400,17 +402,18 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
         element = element ? element->firstChild() : 0;
 
         /* Search Tag "Contacts" which is the parent of all Contacts */
-        while( element && !isJournal ){
-            if( element->tagName() != QString::fromLatin1("Contacts") ){
+        while( element && !isJournal ) {
+            if( element->tagName() != QString::fromLatin1("Contacts") ) {
                 element = element->nextChild();
-            } else {
+            } 
+            else {
                 element = element->firstChild();
                 break;
             }
         }
         /* Parse all Contacts and ignore unknown tags */
-        while( element ){
-            if( element->tagName() != QString::fromLatin1("Contact") ){
+        while( element ) {
+            if( element->tagName() != QString::fromLatin1("Contact") ) {
                 element = element->nextChild();
                 continue;
             }
@@ -424,7 +427,7 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
             XMLElement::AttributeMap::Iterator it;
             contactMap.clear();
             customMap.clear();
-            for( it = aMap.begin(); it != aMap.end(); ++it ){
+            for( it = aMap.begin(); it != aMap.end(); ++it ) {
                 int *find = dict[ it.key() ];
                 /* Unknown attributes will be stored as "Custom" elements */
                 if ( !find ) {
@@ -465,7 +468,7 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
                 contact.setCustomField( customIt.key(),  customIt.data() );
             }
 
-            if (foundAction){
+            if (foundAction) {
                 foundAction = false;
                 switch ( action ) {
                 case ACTION_ADD:
@@ -483,7 +486,8 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
                     owarn << "Unknown action: ignored !" << oendl;
                     break;
                 }
-            }else{
+            }
+            else {
                 /* Add contact to list */
                 addContact_p (contact);
             }
@@ -512,7 +516,7 @@ void OPimContactAccessBackend_XML::updateJournal( const OPimContact& cnt,
     // if the file was created, we have to set the Tag "<CONTACTS>" to
     // get a XML-File which is readable by our parser.
     // This is just a cheat, but better than rewrite the parser.
-    if ( created ){
+    if ( created ) {
         buf = "<Contacts>";
         QCString cstr = buf.utf8();
         f.writeBlock( cstr.data(), cstr.length() );
