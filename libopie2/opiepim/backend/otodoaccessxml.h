@@ -31,6 +31,7 @@
 
 #include <qasciidict.h>
 #include <qmap.h>
+#include <qasciidict.h>
 
 #include <opie2/otodoaccessbackend.h>
 
@@ -69,7 +70,7 @@ public:
     UIDArray sorted( const UIDArray&, bool, int, int, const QArray<int>& )const;
 //@}
 private:
-    void todo( QAsciiDict<int>*, OPimTodo&,const QCString&,const QString& );
+    void initDict( QAsciiDict<int> &dict ) const;
     QString toString( const OPimTodo& )const;
     QString toString( const QArray<int>& ints ) const;
     QMap<int, OPimTodo> m_events;
@@ -79,7 +80,6 @@ private:
     bool m_changed : 1;
     class OPimTodoAccessXMLPrivate;
     OPimTodoAccessXMLPrivate* d;
-    int m_year, m_month, m_day;
 };
 
 };

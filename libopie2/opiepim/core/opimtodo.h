@@ -70,12 +70,21 @@ class OPimTodo : public OPimRecord
         State,
         Recurrence,
         Alarms,
-	Reminders,
+        Reminders,
         Maintainer,
         StartDate,
-	CompletedDate,
+        CompletedDate,
 //ADDITIONAL FOR RECORDFIELD
-	DueDate,
+        DueDate,
+//Additional for recurrence
+        FRType,
+        FRWeekdays,
+        FRPosition,
+        FRFreq,
+        FRHasEndDate,
+        FREndDate,
+        FRStart,
+        FREnd    
     };
   public:
     // priorities from Very low to very high
@@ -227,6 +236,12 @@ class OPimTodo : public OPimRecord
      * to ToDoEvent RecordFields enum
      */
     QMap<int, QString> toMap() const;
+
+    /**
+     * fromMap sets the data from a map. int relates
+     * to ToDoEvent RecordFields enum
+     */
+    void fromMap( const QMap<int, QString>& map );
 
     /**
      * Set if this Todo is completed

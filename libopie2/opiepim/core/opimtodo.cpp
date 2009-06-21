@@ -35,6 +35,7 @@
 #include <opie2/opimmaintainer.h>
 #include <opie2/opimnotifymanager.h>
 #include <opie2/opimresolver.h>
+#include <opie2/opimdateconversion.h>
 #include <opie2/odebug.h>
 
 #include <qpe/palmtopuidgen.h>
@@ -652,17 +653,150 @@ QMap<int, QString> OPimTodo::toMap() const
     map.insert( Description, data->desc );
     map.insert( Summary, data->sum );
     map.insert( Priority, QString::number( data->priority ) );
-    map.insert( DateDay, QString::number( data->date.day() ) );
-    map.insert( DateMonth, QString::number( data->date.month() ) );
-    map.insert( DateYear, QString::number( data->date.year() ) );
+    if( hasDueDate() ) {
+        map.insert( DateDay, QString::number( data->date.day() ) );
+        map.insert( DateMonth, QString::number( data->date.month() ) );
+        map.insert( DateYear, QString::number( data->date.year() ) );
+    }
     map.insert( Progress, QString::number( data->prog ) );
-    //    map.insert( CrossReference, crossToString() );
-    /* FIXME!!!   map.insert( State,  );
-    map.insert( Recurrence, );
-    map.insert( Reminders, );
-    map.
-    */
+    if( hasStartDate() )
+        map.insert( StartDate, OPimDateConversion::dateToString( data->start ) );
+    if( hasCompletedDate() )
+        map.insert( CompletedDate, OPimDateConversion::dateToString( data->completed ) );
+    if( hasState() )
+        map.insert( State, QString::number( state().state() ) );
+
+    // Add recurrence stuff
+    if ( hasRecurrence() )
+    {
+        OPimRecurrence recur = recurrence();
+        QMap<int, QString> recFields = recur.toMap();
+        map.insert( FRType, recFields[ OPimRecurrence::RType ] );
+        map.insert( FRWeekdays, recFields[ OPimRecurrence::RWeekdays ] );
+        map.insert( FRPosition, recFields[ OPimRecurrence::RPosition ] );
+        map.insert( FRFreq, recFields[ OPimRecurrence::RFreq ] );
+        map.insert( FRHasEndDate, recFields[ OPimRecurrence::RHasEndDate ] );
+        map.insert( FREndDate, recFields[ OPimRecurrence::EndDate ] );
+    }
+
+    // save reminders and notifiers!
+    if ( hasNotifiers() ) {
+        // Alarm format:
+        // DATE_TIME:DURATION:SOUND:NOT_USED_YET;OTHER_DATE_TIME:OTHER_DURATION:SOUND:....
+        OPimNotifyManager manager = notifiers();
+        OPimNotifyManager::Alarms alarms = manager.alarms();
+        if (!alarms.isEmpty() ) {
+            QStringList als;
+            OPimNotifyManager::Alarms::Iterator it = alarms.begin();
+            for ( ; it != alarms.end(); ++it ) {
+                /* only if time is valid */
+                if ( (*it).dateTime().isValid() ) {
+                    als << OPimDateConversion::dateTimeToString( (*it).dateTime() )
+                        + ":" + QString::number( (*it).duration() )
+                        + ":" + QString::number( (*it).sound() )
+                        + ":";
+                }
+            }
+            map.insert( Alarms, als.join(";") );
+        }
+
+        // now the same for reminders but easier. We just save the uid of the OPimEvent.
+        OPimNotifyManager::Reminders reminders = manager.reminders();
+        if (!reminders.isEmpty() ) {
+            OPimNotifyManager::Reminders::Iterator it = reminders.begin();
+            QStringList records;
+            for ( ; it != reminders.end(); ++it ) {
+                records << QString::number( (*it).recordUid() );
+            }
+            map.insert( Reminders, records.join(";") );
+        }
+    }
+
+    // FIXME CrossReference, Maintainer
+
     return map;
+}
+
+void OPimTodo::fromMap( const QMap<int, QString>& map )
+{
+    // We just want to set the UID if it is really stored.
+    if ( !map[ Uid ].isEmpty() )
+        setUid( map[ Uid ].toInt() );
+
+    setCategories( idsFromString( map[ Category ] ) );
+
+    setHasDueDate( map[ HasDate ].toInt() );
+    setCompleted( map[ Completed ].toInt() );
+    setDescription( map[ Description ] );
+    setSummary( map[ Summary ] );
+
+    setPriority( map[ Priority ].toInt() );
+
+    int dateday = map[ DateDay ].toInt();
+    int datemonth = map[ DateMonth ].toInt();
+    int dateyear = map[ DateYear ].toInt();
+    setDueDate( QDate( dateyear, datemonth, dateday ) );
+
+    setProgress( map[ Progress ].toInt() );
+
+    setCompletedDate( OPimDateConversion::dateFromString( map[ CompletedDate ] ) );
+    setStartDate( OPimDateConversion::dateFromString( map[ StartDate ] ) );
+
+    if( !map[ State ].isEmpty() )
+        setState( map[ State ].toInt() );
+
+    QString alarmstr = map[ Alarms ];
+    if( !alarmstr.isEmpty() ) {
+        OPimNotifyManager &manager = notifiers();
+        QStringList als = QStringList::split(";", alarmstr );
+        for (QStringList::Iterator it = als.begin(); it != als.end(); ++it ) {
+            QStringList alarm = QStringList::split(":", (*it), TRUE ); // allow empty
+            OPimAlarm al( alarm[2].toInt(), OPimDateConversion::dateTimeFromString( alarm[0] ), alarm[1].toInt() );
+            manager.add( al );
+        }
+    }
+
+    QString reminderstr = map[ Reminders ];
+    if( !reminderstr.isEmpty() ) {
+        OPimNotifyManager &manager = notifiers();
+        QStringList rems = QStringList::split(";", reminderstr );
+        for (QStringList::Iterator it = rems.begin(); it != rems.end(); ++it ) {
+            OPimReminder rem( (*it).toInt() );
+            manager.add( rem );
+        }
+    }
+
+    // Fill recurrence stuff and put it directly into the OPimRecurrence-Object using fromMap..
+    if ( !map[ OPimTodo::FRType ].isEmpty() ) {
+        QMap<int, QString> recFields;
+        recFields.insert( OPimRecurrence::RType, map[ OPimTodo::FRType ] );
+        recFields.insert( OPimRecurrence::RWeekdays, map[ OPimTodo::FRWeekdays ] );
+        recFields.insert( OPimRecurrence::RPosition, map[ OPimTodo::FRPosition ] );
+        recFields.insert( OPimRecurrence::RFreq, map[ OPimTodo::FRFreq ] );
+        recFields.insert( OPimRecurrence::RHasEndDate, map[ OPimTodo::FRHasEndDate ] );
+        recFields.insert( OPimRecurrence::EndDate, map[ OPimTodo::FREndDate ] );
+        OPimRecurrence recur( recFields );
+        setRecurrence( recur );
+    }
+
+    if ( !map[ OPimTodo::CrossReference ].isEmpty() ) {
+        // FIXME xref is not fully implemented
+        /*
+         * A cross refernce looks like
+         * appname,id;appname,id
+         * we need to split it up
+         */
+        QStringList refs = QStringList::split(';', map[ OPimTodo::CrossReference ] );
+        QStringList::Iterator strIt;
+        for (strIt = refs.begin(); strIt != refs.end(); ++strIt ) {
+            int pos = (*strIt).find(',');
+            if ( pos > -1 ) {
+                // ev.addRelation( (*strIt).left(pos),  (*strIt).mid(pos+1).toInt() );
+            }
+        }
+    }
+
+    // FIXME Maintainer
 }
 
 

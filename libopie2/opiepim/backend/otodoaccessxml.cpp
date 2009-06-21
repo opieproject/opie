@@ -32,7 +32,6 @@
 #include <opie2/opimstate.h>
 #include <opie2/opimtimezone.h>
 #include <opie2/opimnotifymanager.h>
-#include <opie2/opimrecurrence.h>
 #include <opie2/otodoaccessxml.h>
 #include <opie2/otodoaccess.h>
 #include <opie2/odebug.h>
@@ -46,6 +45,7 @@
 /* QT */
 #include <qfile.h>
 #include <qvector.h>
+#include <qintdict.h>
 
 /* STD */
 #include <errno.h>
@@ -61,24 +61,8 @@
 using namespace Opie;
 
 namespace {
-    time_t rp_end;
-    OPimRecurrence* rec;
-    OPimRecurrence *recur() {
-        if (!rec ) rec = new OPimRecurrence;
-        return rec;
-    }
-    int snd;
-    enum MoreAttributes {
-        FRType = OPimTodo::CompletedDate + 2,
-        FRWeekdays,
-        FRPosition,
-        FRFreq,
-        FRHasEndDate,
-        FREndDate,
-        FRStart,
-        FREnd
-    };
-    // FROM TT again
+
+// FROM TT again
 char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
 {
     char needleChar;
@@ -120,15 +104,11 @@ OPimTodoAccessXML::~OPimTodoAccessXML() {
 
 }
 
-bool OPimTodoAccessXML::load() {
-    rec = 0;
-    m_opened = true;
-    m_changed = false;
-    /* initialize dict */
+void OPimTodoAccessXML::initDict( QAsciiDict<int> &dict ) const
+{
     /*
-     * UPDATE dict if you change anything!!!
+     * UPDATE this if you change anything!!!
      */
-    QAsciiDict<int> dict(26);
     dict.setAutoDelete( TRUE );
     dict.insert("Categories" ,     new int(OPimTodo::Category)         );
     dict.insert("Uid" ,            new int(OPimTodo::Uid)              );
@@ -148,13 +128,21 @@ bool OPimTodoAccessXML::load() {
     dict.insert("Alarms",          new int(OPimTodo::Alarms)           );
     dict.insert("Reminders",       new int(OPimTodo::Reminders)        );
     dict.insert("Maintainer",      new int(OPimTodo::Maintainer)       );
-    dict.insert("rtype",           new int(FRType)                  );
-    dict.insert("rweekdays",       new int(FRWeekdays)              );
-    dict.insert("rposition",       new int(FRPosition)              );
-    dict.insert("rfreq",           new int(FRFreq)                  );
-    dict.insert("start",           new int(FRStart)                 );
-    dict.insert("rhasenddate",     new int(FRHasEndDate)            );
-    dict.insert("enddt",           new int(FREndDate)               );
+    dict.insert("rtype",           new int(OPimTodo::FRType)           );
+    dict.insert("rweekdays",       new int(OPimTodo::FRWeekdays)       );
+    dict.insert("rposition",       new int(OPimTodo::FRPosition)       );
+    dict.insert("rfreq",           new int(OPimTodo::FRFreq)           );
+    dict.insert("start",           new int(OPimTodo::FRStart)          );
+    dict.insert("rhasenddate",     new int(OPimTodo::FRHasEndDate)     );
+    dict.insert("enddt",           new int(OPimTodo::FREndDate)        );
+}
+
+bool OPimTodoAccessXML::load() {
+    m_opened = true;
+    m_changed = false;
+    /* initialize dict */
+    QAsciiDict<int> dict(26);
+    initDict(dict);
 
     // here the custom XML parser from TT it's GPL
     // but we want to push OpiePIM... to TT.....
@@ -183,12 +171,13 @@ bool OPimTodoAccessXML::load() {
     char *point;
     const char* collectionString = "<Task ";
     int strLen = strlen(collectionString);
+    QMap<int, QString> map;
+    int *find;
     while ( ( point = strstrlen( dt+i, len -i, collectionString, strLen ) ) != 0l ) {
         i = point -dt;
         i+= strLen;
 
         OPimTodo ev;
-        m_year = m_month = m_day = 0;
 
         while ( TRUE ) {
             while ( i < len && (dt[i] == ' ' || dt[i] == '\n' || dt[i] == '\r') )
@@ -240,33 +229,23 @@ bool OPimTodoAccessXML::load() {
             /*
              * add key + value
              */
-            todo( &dict, ev, attr, str );
+            find = dict[attr.data()];
+            if (!find)
+                ev.setCustomField( attr, str );
+            else
+                map[*find] = str;
         }
 
         /*
          * now add it
          */
+        ev.fromMap( map );
         if (m_events.contains( ev.uid() ) || ev.uid() == 0) {
             ev.setUid( 1 );
             m_changed = true;
         }
 
-        if ( ev.hasDueDate() ) {
-            ev.setDueDate( QDate(m_year, m_month, m_day) );
-        }
-
-        if ( rec && rec->doesRecur() ) {
-            OPimTimeZone utc = OPimTimeZone::utc();
-            OPimRecurrence recu( *rec ); // call copy c'tor
-            recu.setEndDate( utc.fromUTCDateTime( rp_end ).date() );
-            recu.setStart( ev.dueDate() );
-            ev.setRecurrence( recu );
-        }
-
         m_events.insert(ev.uid(), ev );
-        m_year = m_month = m_day = -1;
-        delete rec;
-        rec = 0;
     }
 
     munmap(map_addr, attribut.st_size );
@@ -413,135 +392,6 @@ QArray<int> OPimTodoAccessXML::overDue()const {
     return ids;
 }
 
-
-/* private */
-void OPimTodoAccessXML::todo( QAsciiDict<int>* dict, OPimTodo& ev,
-                            const QCString& attr, const QString& val) {
-
-    int *find=0;
-
-    find = (*dict)[ attr.data() ];
-    if (!find ) {
-        ev.setCustomField( attr, val );
-        return;
-    }
-
-    switch( *find ) {
-    case OPimTodo::Uid:
-        ev.setUid( val.toInt() );
-        break;
-    case OPimTodo::Category:
-        ev.setCategories( ev.idsFromString( val ) );
-        break;
-    case OPimTodo::HasDate:
-        ev.setHasDueDate( val.toInt() );
-        break;
-    case OPimTodo::Completed:
-        ev.setCompleted( val.toInt() );
-        break;
-    case OPimTodo::Description:
-        ev.setDescription( val );
-        break;
-    case OPimTodo::Summary:
-        ev.setSummary( val );
-        break;
-    case OPimTodo::Priority:
-        ev.setPriority( val.toInt() );
-        break;
-    case OPimTodo::DateDay:
-        m_day = val.toInt();
-        break;
-    case OPimTodo::DateMonth:
-        m_month = val.toInt();
-        break;
-    case OPimTodo::DateYear:
-        m_year = val.toInt();
-        break;
-    case OPimTodo::Progress:
-        ev.setProgress( val.toInt() );
-        break;
-    case OPimTodo::CompletedDate:
-        ev.setCompletedDate( OPimDateConversion::dateFromString( val ) );
-        break;
-    case OPimTodo::StartDate:
-        ev.setStartDate( OPimDateConversion::dateFromString( val ) );
-        break;
-    case OPimTodo::State:
-        ev.setState( val.toInt() );
-        break;
-    case OPimTodo::Alarms:{
-        OPimNotifyManager &manager = ev.notifiers();
-        QStringList als = QStringList::split(";", val );
-        for (QStringList::Iterator it = als.begin(); it != als.end(); ++it ) {
-            QStringList alarm = QStringList::split(":", (*it), TRUE ); // allow empty
-            OPimAlarm al( alarm[2].toInt(), OPimDateConversion::dateTimeFromString( alarm[0] ), alarm[1].toInt() );
-            manager.add( al );
-        }
-    }
-        break;
-    case OPimTodo::Reminders:{
-        OPimNotifyManager &manager = ev.notifiers();
-        QStringList rems = QStringList::split(";", val );
-        for (QStringList::Iterator it = rems.begin(); it != rems.end(); ++it ) {
-            OPimReminder rem( (*it).toInt() );
-            manager.add( rem );
-        }
-    }
-        break;
-    case OPimTodo::CrossReference:
-    {
-        /*
-         * A cross refernce looks like
-         * appname,id;appname,id
-         * we need to split it up
-         */
-        QStringList  refs = QStringList::split(';', val );
-        QStringList::Iterator strIt;
-        for (strIt = refs.begin(); strIt != refs.end(); ++strIt ) {
-            int pos = (*strIt).find(',');
-            if ( pos > -1 ) {
-                // ev.addRelation( (*strIt).left(pos),  (*strIt).mid(pos+1).toInt() );
-            }
-        }
-        break;
-    }
-    /* Recurrence stuff below + post processing later */
-    case FRType:
-        if ( val == "Daily" )
-            recur()->setType( OPimRecurrence::Daily );
-        else if ( val == "Weekly" )
-            recur()->setType( OPimRecurrence::Weekly);
-        else if ( val == "MonthlyDay" )
-            recur()->setType( OPimRecurrence::MonthlyDay );
-        else if ( val == "MonthlyDate" )
-            recur()->setType( OPimRecurrence::MonthlyDate );
-        else if ( val == "Yearly" )
-            recur()->setType( OPimRecurrence::Yearly );
-        else
-            recur()->setType( OPimRecurrence::NoRepeat );
-        break;
-    case FRWeekdays:
-        recur()->setDays( val.toInt() );
-        break;
-    case FRPosition:
-        recur()->setPosition( val.toInt() );
-        break;
-    case FRFreq:
-        recur()->setFrequency( val.toInt() );
-        break;
-    case FRHasEndDate:
-        recur()->setHasEndDate( val.toInt() );
-        break;
-    case FREndDate: {
-        rp_end = (time_t) val.toLong();
-        break;
-    }
-    default:
-        ev.setCustomField( attr, val );
-        break;
-    }
-}
-
 // from PalmtopRecord... GPL ### FIXME
 namespace {
 QString customToXml(const QMap<QString, QString>& customMap )
@@ -563,84 +413,29 @@ QString customToXml(const QMap<QString, QString>& customMap )
 QString OPimTodoAccessXML::toString( const OPimTodo& ev )const {
     QString str;
 
-    str += "Completed=\"" + QString::number( ev.isCompleted() ) + "\"";
-    str += " HasDate=\"" + QString::number( ev.hasDueDate() ) + "\"";
-    str += " Priority=\"" + QString::number( ev.priority() ) + "\"";
-    str += " Progress=\"" + QString::number(ev.progress() ) + "\"";
-
-    str += " Categories=\"" + toString( ev.categories() ) + "\"";
-    str += " Description=\"" + Qtopia::escapeString( ev.description() ) + "\"";
-    str += " Summary=\"" + Qtopia::escapeString( ev.summary() ) + "\"";
-
-    if ( ev.hasDueDate() ) {
-        str += " DateYear=\"" + QString::number( ev.dueDate().year() ) + "\"";
-        str += " DateMonth=\"" + QString::number( ev.dueDate().month() ) + "\"";
-        str += " DateDay=\"" + QString::number( ev.dueDate().day() ) + "\"";
+    QAsciiDict<int> dict(26);
+    initDict( dict );
+    QIntDict<QString> revdict( dict.size() );
+    dict.setAutoDelete( true );
+    // Now we need to reverse the dictionary (!)
+    for( QAsciiDictIterator<int> it( dict ); it.current(); ++it ) {
+        revdict.insert( (*it), new QString( it.currentKey() ) );
     }
-    str += " Uid=\"" + QString::number( ev.uid() ) + "\"";
 
-// append the extra options
-    /* FIXME Qtopia::Record this is currently not
-     * possible you can set custom fields
-     * but don' iterate over the list
-     * I may do #define private protected
-     * for this case - cough  --zecke
-     */
-    /*
-    QMap<QString, QString> extras = ev.extras();
-    QMap<QString, QString>::Iterator extIt;
-    for (extIt = extras.begin(); extIt != extras.end(); ++extIt )
-        str += " " + extIt.key() + "=\"" +  extIt.data() + "\"";
-    */
-    // cross refernce
-    if ( ev.hasRecurrence() ) {
-        str += ev.recurrence().toString();
-    }
-    if ( ev.hasStartDate() )
-        str += " StartDate=\""+ OPimDateConversion::dateToString( ev.startDate() ) +"\"";
-    if ( ev.hasCompletedDate() )
-        str += " CompletedDate=\""+ OPimDateConversion::dateToString( ev.completedDate() ) +"\"";
-    if ( ev.hasState() )
-        str += " State=\""+QString::number( ev.state().state() )+"\"";
+    QMap<int, QString> map = ev.toMap();
 
-    /*
-     * save reminders and notifiers!
-     * DATE_TIME:DURATION:SOUND:NOT_USED_YET;OTHER_DATE_TIME:OTHER_DURATION:SOUND:....
-     */
-    if ( ev.hasNotifiers() ) {
-        OPimNotifyManager manager = ev.notifiers();
-        OPimNotifyManager::Alarms alarms = manager.alarms();
-        if (!alarms.isEmpty() ) {
-            QStringList als;
-            OPimNotifyManager::Alarms::Iterator it = alarms.begin();
-            for ( ; it != alarms.end(); ++it ) {
-                /* only if time is valid */
-                if ( (*it).dateTime().isValid() ) {
-                    als << OPimDateConversion::dateTimeToString( (*it).dateTime() )
-                        + ":" + QString::number( (*it).duration() )
-                        + ":" + QString::number( (*it).sound() )
-                        + ":";
-                }
-            }
-            // now write the list
-            str += " Alarms=\""+als.join(";") +"\"";
-        }
-
-        /*
-         * now the same for reminders but more easy. We just save the uid of the OPimEvent.
-         */
-        OPimNotifyManager::Reminders reminders = manager.reminders();
-        if (!reminders.isEmpty() ) {
-            OPimNotifyManager::Reminders::Iterator it = reminders.begin();
-            QStringList records;
-            for ( ; it != reminders.end(); ++it ) {
-                records << QString::number( (*it).recordUid() );
-            }
-            str += " Reminders=\""+ records.join(";") +"\"";
+    for ( QMap<int, QString>::ConstIterator it = map.begin(); it != map.end(); ++it ) {
+        const QString &value = it.data();
+        int key = it.key();
+        if ( !value.isEmpty() ) {
+            str += " " + *revdict[ key ];
+            str += "=\"" + Qtopia::escapeString( value ) + "\"";
         }
     }
+    if( str[0] == ' ' )
+        str = str.mid(1);
+
     str += customToXml( ev.toExtraMap() );
-
 
     return str;
 }
