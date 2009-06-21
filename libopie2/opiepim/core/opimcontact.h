@@ -212,7 +212,10 @@ class QPC_EXPORT OPimContact : public OPimRecord
     QStringList groupList() const;
 
     QString toRichText() const;
+
     QMap<int, QString> toMap() const;
+    void fromMap( const QMap<int, QString>& map ) { mMap = map; }
+
     QString field( int key ) const { return find( key ); }
 
 

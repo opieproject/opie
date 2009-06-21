@@ -132,7 +132,11 @@ class OPimRecord : public Qtopia::Record
      * converts the internal structure to a map
      */
     virtual QMap<int, QString> toMap() const = 0;
-    // virtual fromMap( const <int, QString>& map ) = 0; // Should be added in the future (eilers)
+
+    /**
+     * converts a map to the internal structure
+     */
+    virtual void fromMap( const QMap<int, QString>& map ) = 0;
 
     /**
      * key value representation of extra items
