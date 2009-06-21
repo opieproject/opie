@@ -450,9 +450,8 @@ void DateEntry::slotChangeStartOfWeek( bool onMonday )
     startWeekOnMonday = onMonday;
 }
 
-OPimEvent DateEntry::event()
+void DateEntry::getEvent( Opie::OPimEvent &ev )
 {
-    OPimEvent ev;
     ev.setDescription( comboDescription->currentText() );
     ev.setLocation( comboLocation->currentText() );
     ev.setCategories( comboCategory->currentCategories() );
@@ -523,9 +522,6 @@ OPimEvent DateEntry::event()
     if ( rp.type() != OPimRecurrence::NoRepeat )
         ev.setRecurrence( rp );
     ev.setNote( noteStr );
-
-                //cout << "Start: " << comboStart->currentText() << endl;
-    return ev;
 }
 
 void DateEntry::setRepeatLabel()
@@ -682,7 +678,7 @@ bool DateEntryEditor::showDialog( QString caption, OPimEvent& event ) {
 
     sv->addChild( de );
     while ( QPEApplication::execDialog( &newDlg ) ) {
-        event = de->event();
+        de->getEvent( event );
         QString error = checkEvent( event );
         if ( !error.isNull() ) {
             if ( QMessageBox::warning( m_parent, QObject::tr("Error!"), error, QObject::tr("Fix it"), QObject::tr("Continue"), 0, 0, 1 ) == 0 )

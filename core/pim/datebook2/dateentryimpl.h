@@ -53,7 +53,8 @@ public:
     ~DateEntry();
 
     void setEvent( const Opie::OPimEvent & );
-    Opie::OPimEvent event();
+    void getEvent( Opie::OPimEvent & );
+
     virtual bool eventFilter( QObject *, QEvent * );
 public slots:
     void endDateChanged( int, int, int );
