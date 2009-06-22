@@ -125,7 +125,7 @@ DatebookAlldayDisp::DatebookAlldayDisp(DatebookdayAllday *allday, const OPimOccu
     : QLabel(parent,name,f),m_Ev(ev)
 {
     m_allday = allday;
-    m_holiday = m_Ev.toEvent().isValidUid();
+    m_holiday = !m_Ev.toEvent().isValidUid();
 
     QString strDesc = View::occurrenceDesc( m_Ev );
     strDesc = strDesc.replace(QRegExp("<"),"&#60;");
