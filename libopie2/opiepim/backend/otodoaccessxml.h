@@ -31,7 +31,7 @@
 
 #include <qasciidict.h>
 #include <qmap.h>
-#include <qasciidict.h>
+#include <qintdict.h>
 
 #include <opie2/otodoaccessbackend.h>
 
@@ -71,7 +71,7 @@ public:
 //@}
 private:
     void initDict( QAsciiDict<int> &dict ) const;
-    QString toString( const OPimTodo& )const;
+    QString toString( const OPimTodo&, const QIntDict<QString> & )const;
     QString toString( const QArray<int>& ints ) const;
     QMap<int, OPimTodo> m_events;
     QString m_file;

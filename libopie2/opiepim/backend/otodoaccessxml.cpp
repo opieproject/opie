@@ -271,10 +271,19 @@ bool OPimTodoAccessXML::save() {
     QString out;
     out = "<!DOCTYPE Tasks>\n<Tasks>\n";
 
+    QAsciiDict<int> dict(26);
+    initDict( dict );
+    QIntDict<QString> revdict( dict.size() );
+    dict.setAutoDelete( true );
+    // Now we need to reverse the dictionary (!)
+    for( QAsciiDictIterator<int> it( dict ); it.current(); ++it ) {
+        revdict.insert( (*it), new QString( it.currentKey() ) );
+    }
+
     // for all todos
     QMap<int, OPimTodo>::Iterator it;
     for (it = m_events.begin(); it != m_events.end(); ++it ) {
-        out+= "<Task " + toString( (*it) ) + " />\n";
+        out+= "<Task " + toString( (*it), revdict ) + " />\n";
         QCString cstr = out.utf8();
         written = f.writeBlock( cstr.data(),  cstr.length() );
 
@@ -410,17 +419,8 @@ QString customToXml(const QMap<QString, QString>& customMap )
 
 }
 
-QString OPimTodoAccessXML::toString( const OPimTodo& ev )const {
+QString OPimTodoAccessXML::toString( const OPimTodo& ev, const QIntDict<QString> &revdict )const {
     QString str;
-
-    QAsciiDict<int> dict(26);
-    initDict( dict );
-    QIntDict<QString> revdict( dict.size() );
-    dict.setAutoDelete( true );
-    // Now we need to reverse the dictionary (!)
-    for( QAsciiDictIterator<int> it( dict ); it.current(); ++it ) {
-        revdict.insert( (*it), new QString( it.currentKey() ) );
-    }
 
     QMap<int, QString> map = ev.toMap();
 
@@ -439,6 +439,7 @@ QString OPimTodoAccessXML::toString( const OPimTodo& ev )const {
 
     return str;
 }
+
 QString OPimTodoAccessXML::toString( const QArray<int>& ints ) const {
     return Qtopia::Record::idsToString( ints );
 }
