@@ -349,7 +349,7 @@ void OPimEvent::setTimeZone( const QString& tz )
 
 QString OPimEvent::timeZone() const
 {
-    if ( data->isAllDay ) return QString::fromLatin1( "Europe/London" );
+    if ( data->isAllDay ) return QString::null;
     return data->timezone;
 }
 
@@ -584,12 +584,12 @@ QMap<int, QString> OPimEvent::toMap() const
         retMap.insert( OPimEvent::FSound, ( alarm.sound() == OPimAlarm::Loud ) ? "loud" : "silent" );
     }
 
-    /* either use UTC timeZone or current() if there is was a timezone set */
-    OPimTimeZone zone( (timeZone().isEmpty()||isAllDay()) ? OPimTimeZone::utc() : OPimTimeZone::current() );
+    OPimTimeZone zone( OPimTimeZone::current() );
     retMap.insert( OPimEvent::FStart, QString::number( zone.fromDateTime( startDateTime())));
     retMap.insert( OPimEvent::FEnd, QString::number( zone.fromDateTime(   endDateTime() )));
     retMap.insert( OPimEvent::FNote, Qtopia::escapeString( note() ) );
-    retMap.insert( OPimEvent::FTimeZone, timeZone().isEmpty() ? QString( "None" ) : timeZone() );
+    if( !isAllDay() )
+        retMap.insert( OPimEvent::FTimeZone, timeZone().isEmpty() ? QString( "None" ) : timeZone() );
     if ( parent() )
         retMap.insert( OPimEvent::FRecParent, QString::number( parent() ) );
     if ( children().count() )
@@ -647,20 +647,11 @@ void OPimEvent::fromMap( const QMap<int, QString>& map )
     time_t start = ( time_t ) map[ OPimEvent::FStart ].toLong();
     time_t end = ( time_t )   map[ OPimEvent::FEnd ].toLong();
 
-    /* AllDay is always in UTC */
-    if ( isAllDay() )
-    {
-        OPimTimeZone utc = OPimTimeZone::utc();
-        setStartDateTime(utc.toDateTime( start ) );
-        setEndDateTime ( utc.toDateTime( end   ) );
-    }
-    else  {
-        /* to current date time */
-        OPimTimeZone   to_zone( timeZone().isEmpty() ? OPimTimeZone::utc() : OPimTimeZone::current() );
-
-        setStartDateTime(to_zone.toDateTime( start));
-        setEndDateTime  (to_zone.toDateTime( end));
-    }
+    /* Someone thought AllDay events should be in UTC here, but they weren't in Datebook 1, so... */
+    /* Convert to current date time */
+    OPimTimeZone to_zone( OPimTimeZone::current() );
+    setStartDateTime(to_zone.toDateTime( start));
+    setEndDateTime  (to_zone.toDateTime( end));
 
     int alarmTime = -1;
     if ( !map[ OPimEvent::FAlarm ].isEmpty() )

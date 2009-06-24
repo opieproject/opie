@@ -51,7 +51,10 @@ static QString setTimeZone( const QString& zone) {
     if( org )
         old = QString::fromLocal8Bit( org );
 
-    ::setenv( "TZ", zone.local8Bit(), true );
+    if( zone.isEmpty() )
+        ::unsetenv( "TZ" );
+    else
+        ::setenv( "TZ", zone.local8Bit(), true );
     ::tzset();
 
     return old;
@@ -184,7 +187,7 @@ time_t OPimTimeZone::fromDateTime( const QDateTime& time )
 
 time_t OPimTimeZone::fromUTCDateTime( const QDateTime& time )
 {
-    return to_Time_t( time, "Europe/London" );
+    return to_Time_t( time, "UTC" );
 }
 
 
@@ -198,7 +201,7 @@ OPimTimeZone OPimTimeZone::current()
 
 OPimTimeZone OPimTimeZone::utc()
 {
-    return OPimTimeZone( "Europe/London" );
+    return OPimTimeZone( "UTC" );
 }
 
 

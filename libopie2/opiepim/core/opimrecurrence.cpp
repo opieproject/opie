@@ -654,8 +654,9 @@ QMap<int, QString> OPimRecurrence::toMap() const
     retMap.insert( OPimRecurrence::RFreq, QString::number( data->freq ) );
     retMap.insert( OPimRecurrence::RHasEndDate, QString::number( static_cast<int>( data->hasEnd ) ) );
     if( data->hasEnd )
-        retMap.insert( OPimRecurrence::EndDate, QString::number( OPimTimeZone::current().fromUTCDateTime( QDateTime( data->end, QTime(12,0,0) ) ) ) );
-    retMap.insert( OPimRecurrence::Created, QString::number( OPimTimeZone::current().fromUTCDateTime( data->create ) ) );
+        retMap.insert( OPimRecurrence::EndDate, QString::number( OPimTimeZone::current().fromDateTime( QDateTime( data->end, QTime(12,0,0) ) ) ) );
+
+    retMap.insert( OPimRecurrence::Created, QString::number( OPimTimeZone::current().fromDateTime( data->create ) ) );
 
     if ( ! data->list.isEmpty() ) {
         // save exceptions list
@@ -687,9 +688,9 @@ void OPimRecurrence::fromMap( const QMap<int, QString>& map )
     data -> hasEnd= map[ OPimRecurrence::RHasEndDate ].toInt() ? true : false;
     OPimTimeZone cur = OPimTimeZone::current();
     if ( data -> hasEnd ){
-            data -> end = cur.fromUTCDateTime( (time_t) map[ OPimRecurrence::EndDate ].toLong() ).date();
+        data -> end = cur.toDateTime( (time_t) map[ OPimRecurrence::EndDate ].toLong() ).date();
     }
-    data -> create = cur.fromUTCDateTime( (time_t) map[ OPimRecurrence::Created ].toLong() ).date();
+    data -> create = cur.toDateTime( (time_t) map[ OPimRecurrence::Created ].toLong() );
 
     data -> list.clear();
     QString exceptStr = map[ OPimRecurrence::Exceptions ];
