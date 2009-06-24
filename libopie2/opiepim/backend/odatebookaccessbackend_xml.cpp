@@ -41,6 +41,7 @@
 /* QT */
 #include <qasciidict.h>
 #include <qfile.h>
+#include <qintdict.h>
 
 /* STD */
 #include <errno.h>
@@ -87,86 +88,30 @@ char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
 
 namespace {
 
-    // FIXME: Use OPimEvent::toMap() here !! (eilers)
-    static void save( const OPimEvent& ev, QString& buf ) {
-        buf += " description=\"" + Qtopia::escapeString(ev.description() ) + "\"";
-        if (!ev.location().isEmpty() )
-            buf += " location=\"" + Qtopia::escapeString(ev.location() ) + "\"";
+    static void save( const OPimEvent& ev, const QIntDict<QString> &revdict, QString& buf ) {
 
-        if (!ev.categories().isEmpty() )
-            buf += " categories=\""+ Qtopia::escapeString( Qtopia::Record::idsToString( ev.categories() ) ) + "\"";
+        QMap<int, QString> map = ev.toMap();
 
-        buf += " uid=\"" + QString::number( ev.uid() ) + "\"";
-
-        if (ev.isAllDay() )
-            buf += " type=\"AllDay\""; // is that all ?? (eilers)
-
-        if (ev.hasNotifiers() ) {
-            OPimAlarm alarm = ev.notifiers().alarms()[0]; // take only the first
-            int minutes = alarm.dateTime().secsTo( ev.startDateTime() ) / 60;
-            buf += " alarm=\"" + QString::number(minutes) + "\" sound=\"";
-            if ( alarm.sound() == OPimAlarm::Loud )
-                buf += "loud";
-            else
-                buf += "silent";
-            buf += "\"";
-        }
-
-        if ( ev.hasRecurrence() ) {
-            buf += ev.recurrence().toString();
-        }
-
-        /*
-         * fscking timezones :) well, we'll first convert
-         * the QDateTime to a QDateTime in UTC time
-         * and then we'll create a nice time_t
-         */
-        OPimTimeZone zone( (ev.timeZone().isEmpty()||ev.isAllDay()) ? OPimTimeZone::utc() : OPimTimeZone::current() );
-        buf += " start=\"" + QString::number( zone.fromDateTime( ev.startDateTime()))  + "\"";
-        buf += " end=\""   + QString::number( zone.fromDateTime( ev.endDateTime()  ))  + "\"";
-        if (!ev.note().isEmpty() ) {
-            buf += " note=\"" + Qtopia::escapeString( ev.note() ) + "\"";
-        }
-
-        /*
-         * Don't save a timezone if AllDay Events
-         * as they're UTC only anyway
-         */
-        if (!ev.isAllDay() ) {
-
-            buf += " timezone=\"";
-            if ( ev.timeZone().isEmpty() )
-                buf += "None";
-            else
-                buf += ev.timeZone();
-            buf += "\"";
-        }
-
-        if (ev.parent() != 0 ) {
-            buf += " recparent=\""+QString::number(ev.parent() )+"\"";
-        }
-
-        if (ev.children().count() != 0 ) {
-            QArray<int> children = ev.children();
-            buf += " recchildren=\"";
-            for ( uint i = 0; i < children.count(); i++ ) {
-                if ( i != 0 ) buf += " ";
-                buf += QString::number( children[i] );
+        for ( QMap<int, QString>::ConstIterator it = map.begin(); it != map.end(); ++it ) {
+            const QString &value = it.data();
+            int key = it.key();
+            if ( !value.isEmpty() ) {
+                buf += " " + *revdict[ key ];
+                buf += "=\"" + Qtopia::escapeString( value ) + "\"";
             }
-            buf+= "\"";
         }
 
         // skip custom writing
     }
 
-    static bool saveEachEvent( const QMap<int, OPimEvent>& list, QFile& file ) {
+    static bool saveEachEvent( const QMap<int, OPimEvent>& list, QIntDict<QString> &revdict, QFile& file ) {
         QMap<int, OPimEvent>::ConstIterator it;
         QString buf;
         QCString str;
         int total_written;
         for ( it = list.begin(); it != list.end(); ++it ) {
             buf = "<event";
-            save( it.data(), buf );
+            save( it.data(), revdict, buf );
             buf += " />\n";
             str = buf.utf8();
 
@@ -187,6 +132,31 @@ ODateBookAccessBackend_XML::ODateBookAccessBackend_XML( const QString& ,
 }
 
 ODateBookAccessBackend_XML::~ODateBookAccessBackend_XML() {
+}
+
+void ODateBookAccessBackend_XML::initDict( QAsciiDict<int> &dict ) const {
+    dict.setAutoDelete( true );
+    dict.insert( "description", new int(OPimEvent::FDescription) );
+    dict.insert( "location", new int(OPimEvent::FLocation) );
+    dict.insert( "categories", new int(OPimEvent::FCategories) );
+    dict.insert( "uid", new int(OPimEvent::FUid) );
+    dict.insert( "type", new int(OPimEvent::FType) );
+    dict.insert( "alarm", new int(OPimEvent::FAlarm) );
+    dict.insert( "sound", new int(OPimEvent::FSound) );
+    dict.insert( "rtype", new int(OPimEvent::FRType) );
+    dict.insert( "rweekdays", new int(OPimEvent::FRWeekdays) );
+    dict.insert( "rposition", new int(OPimEvent::FRPosition) );
+    dict.insert( "rfreq", new int(OPimEvent::FRFreq) );
+    dict.insert( "rhasenddate", new int(OPimEvent::FRHasEndDate) );
+    dict.insert( "enddt", new int(OPimEvent::FREndDate) );
+    dict.insert( "start", new int(OPimEvent::FStart) );
+    dict.insert( "end", new int(OPimEvent::FEnd) );
+    dict.insert( "note", new int(OPimEvent::FNote) );
+    dict.insert( "created", new int(OPimEvent::FRCreated) );
+    dict.insert( "recparent", new int(OPimEvent::FRecParent) );
+    dict.insert( "recchildren", new int(OPimEvent::FRecChildren) );
+    dict.insert( "exceptions", new int(OPimEvent::FRExceptions) );
+    dict.insert( "timezone", new int(OPimEvent::FTimeZone) );
 }
 
 bool ODateBookAccessBackend_XML::load() {
@@ -218,12 +188,21 @@ bool ODateBookAccessBackend_XML::save() {
         return false;
     }
 
-    if (!saveEachEvent( m_raw, f ) ) {
+    QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
+    initDict( dict );
+    QIntDict<QString> revdict( dict.size() );
+    dict.setAutoDelete( true );
+    // Now we need to reverse the dictionary (!)
+    for( QAsciiDictIterator<int> it( dict ); it.current(); ++it ) {
+        revdict.insert( (*it), new QString( it.currentKey() ) );
+    }
+
+    if (!saveEachEvent( m_raw, revdict, f ) ) {
         f.close();
         QFile::remove( strFileNew );
         return false;
     }
-    if (!saveEachEvent( m_rep, f ) ) {
+    if (!saveEachEvent( m_rep, revdict, f ) ) {
         f.close();
         QFile::remove( strFileNew );
         return false;
@@ -370,28 +349,7 @@ bool ODateBookAccessBackend_XML::loadFile() {
     ::close( fd );
 
     QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
-    dict.setAutoDelete( true );
-    dict.insert( "description", new int(OPimEvent::FDescription) );
-    dict.insert( "location", new int(OPimEvent::FLocation) );
-    dict.insert( "categories", new int(OPimEvent::FCategories) );
-    dict.insert( "uid", new int(OPimEvent::FUid) );
-    dict.insert( "type", new int(OPimEvent::FType) );
-    dict.insert( "alarm", new int(OPimEvent::FAlarm) );
-    dict.insert( "sound", new int(OPimEvent::FSound) );
-    dict.insert( "rtype", new int(OPimEvent::FRType) );
-    dict.insert( "rweekdays", new int(OPimEvent::FRWeekdays) );
-    dict.insert( "rposition", new int(OPimEvent::FRPosition) );
-    dict.insert( "rfreq", new int(OPimEvent::FRFreq) );
-    dict.insert( "rhasenddate", new int(OPimEvent::FRHasEndDate) );
-    dict.insert( "enddt", new int(OPimEvent::FREndDate) );
-    dict.insert( "start", new int(OPimEvent::FStart) );
-    dict.insert( "end", new int(OPimEvent::FEnd) );
-    dict.insert( "note", new int(OPimEvent::FNote) );
-    dict.insert( "created", new int(OPimEvent::FRCreated) );
-    dict.insert( "recparent", new int(OPimEvent::FRecParent) );
-    dict.insert( "recchildren", new int(OPimEvent::FRecChildren) );
-    dict.insert( "exceptions", new int(OPimEvent::FRExceptions) );
-    dict.insert( "timezone", new int(OPimEvent::FTimeZone) );
+    initDict( dict );
 
     char* dt = (char*)map_addr;
     int len = attribute.st_size;

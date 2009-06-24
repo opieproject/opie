@@ -30,6 +30,7 @@
 #define OPIE_DATE_BOOK_ACCESS_BACKEND_XML__H
 
 #include <qmap.h>
+#include <qasciidict.h>
 
 #include <opie2/odatebookaccessbackend.h>
 
@@ -71,6 +72,7 @@ private:
     bool m_noTimeZone : 1;
 
     bool loadFile();
+    void initDict( QAsciiDict<int> &dict ) const;
     inline void finalizeRecord( OPimEvent& ev );
     QString m_name;
     QMap<int, OPimEvent> m_raw;
