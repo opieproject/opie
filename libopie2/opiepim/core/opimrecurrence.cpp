@@ -31,6 +31,7 @@
 
 /* OPIE */
 #include <opie2/opimtimezone.h>
+#include <opie2/odebug.h>
 #include <qpe/timeconversion.h>
 
 /* QT */
@@ -378,11 +379,12 @@ bool OPimRecurrence::p_nextOccurrence( const QDate& from, QDate& next ) {
             diff = 1;
             if(imonth == 2 && iday > 28) {
                 /* leap year, and it counts, calculate actual frequency */
-                if(freq % 4)
+                if(freq % 4) {
                     if (freq % 2)
                         freq = freq * 4;
                     else
                         freq = freq * 2;
+                }
                 /* else divides by 4 already, leave freq alone */
                 diff = 4;
             }
@@ -645,29 +647,31 @@ QMap<int, QString> OPimRecurrence::toMap() const
     QMap<int, QString> retMap;
 
     retMap.insert( OPimRecurrence::RType, rTypeString() );
-    retMap.insert( OPimRecurrence::RWeekdays, QString::number( static_cast<int>( data->days ) ) );
-    retMap.insert( OPimRecurrence::RPosition, QString::number(data->pos ) );
+    if( data->days > 0 )
+        retMap.insert( OPimRecurrence::RWeekdays, QString::number( static_cast<int>( data->days ) ) );
+    if ( data->pos != 0 )
+        retMap.insert( OPimRecurrence::RPosition, QString::number(data->pos ) );
     retMap.insert( OPimRecurrence::RFreq, QString::number( data->freq ) );
     retMap.insert( OPimRecurrence::RHasEndDate, QString::number( static_cast<int>( data->hasEnd ) ) );
-    if( data -> hasEnd )
-            retMap.insert( OPimRecurrence::EndDate, QString::number( OPimTimeZone::current().fromUTCDateTime( QDateTime( data->end, QTime(12,0,0) ) ) ) );
+    if( data->hasEnd )
+        retMap.insert( OPimRecurrence::EndDate, QString::number( OPimTimeZone::current().fromUTCDateTime( QDateTime( data->end, QTime(12,0,0) ) ) ) );
     retMap.insert( OPimRecurrence::Created, QString::number( OPimTimeZone::current().fromUTCDateTime( data->create ) ) );
 
-    if ( data->list.isEmpty() ) return retMap;
-
-    // save exceptions list here!!
-    ExceptionList::ConstIterator it;
-    ExceptionList list = data->list;
-    QString exceptBuf;
-    QDate date;
-    for ( it = list.begin(); it != list.end(); ++it ) {
+    if ( ! data->list.isEmpty() ) {
+        // save exceptions list
+        ExceptionList::ConstIterator it;
+        ExceptionList list = data->list;
+        QString exceptBuf;
+        QDate date;
+        for ( it = list.begin(); it != list.end(); ++it ) {
             date = (*it);
             if ( it != list.begin() ) exceptBuf += " ";
 
             exceptBuf += QCString().sprintf("%04d%02d%02d", date.year(), date.month(), date.day() );
-    }
+        }
 
-    retMap.insert( OPimRecurrence::Exceptions, exceptBuf );
+        retMap.insert( OPimRecurrence::Exceptions, exceptBuf );
+    }
 
     return retMap;
 }

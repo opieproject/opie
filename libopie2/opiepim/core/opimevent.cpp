@@ -618,12 +618,6 @@ QMap<int, QString> OPimEvent::toMap() const
         retMap.insert( OPimEvent::FRCreated, recFields[ OPimRecurrence::Created ] );
         retMap.insert( OPimEvent::FRExceptions, recFields[ OPimRecurrence::Exceptions ] );
     }
-    else
-    {
-        OPimRecurrence recur = recurrence();
-        QMap<int, QString> recFields = recur.toMap();
-        retMap.insert( OPimEvent::FRType, recFields[ OPimRecurrence::RType ] );
-    }
 
     return retMap;
 }
