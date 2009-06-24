@@ -472,11 +472,9 @@ void DateEntry::getEvent( Opie::OPimEvent &ev )
     }
 
     if(checkAllDay->isChecked()) {
-        // All-day events are always in UTC
         ev.setAllDay(true);
         startTime.setHMS( 0, 0, 0 );
         endTime.setHMS( 23, 59, 59 );
-        ev.setTimeZone( "UTC" );
     }
     else
         ev.setTimeZone( timezone->currentZone() );
@@ -488,28 +486,31 @@ void DateEntry::getEvent( Opie::OPimEvent &ev )
 
 //        odebug << "tz: " << timezone->currentZone() << oendl;
 
-    // get real timezone
-    QString realTZ;
-    realTZ = QString::fromLocal8Bit( getenv("TZ") );
-
-    // set timezone
-    if ( setenv( "TZ", ev.timeZone(), true ) != 0 )
-        owarn << "There was a problem setting the timezone." << oendl;
-
-    // convert to UTC based on selected TZ (calling tzset internally)
-    start_utc = TimeConversion::toUTC( start );
-    end_utc = TimeConversion::toUTC( end );
-
-    // done playing around... put it all back
-    unsetenv( "TZ" );
-    if ( !realTZ.isNull() )
-        if ( setenv( "TZ", realTZ, true ) != 0 )
+    // get system timezone
+    QString realTZ = QString::fromLocal8Bit( getenv("TZ") );
+    if( !ev.timeZone().isEmpty() && ev.timeZone() != realTZ ) {
+        // set timezone
+        if ( setenv( "TZ", ev.timeZone(), true ) != 0 )
             owarn << "There was a problem setting the timezone." << oendl;
 
-    // convert UTC to local time (calling tzset internally)
-    ev.setStartDateTime( TimeConversion::fromUTC( start_utc ) );
-    ev.setEndDateTime( TimeConversion::fromUTC( end_utc ) );
-    
+        // convert to UTC based on selected TZ (calling tzset internally)
+        start_utc = TimeConversion::toUTC( start );
+        end_utc = TimeConversion::toUTC( end );
+
+        // done playing around... put it all back
+        unsetenv( "TZ" );
+        if ( !realTZ.isNull() )
+            if ( setenv( "TZ", realTZ, true ) != 0 )
+                owarn << "There was a problem setting the timezone." << oendl;
+
+        // convert UTC to local time (calling tzset internally)
+        ev.setStartDateTime( TimeConversion::fromUTC( start_utc ) );
+        ev.setEndDateTime( TimeConversion::fromUTC( end_utc ) );
+    }
+    else {
+        ev.setStartDateTime( start );
+        ev.setEndDateTime( end );
+    }
 
     // we only have one type of sound at the moment... LOUD!!!
     OPimAlarm::Sound st;
