@@ -74,7 +74,7 @@ class OBackendPrivate;
  * This class - as the whole PIM Api - is making use of templates
  *
  * <pre>
- *   OPimTodoAccessBackend* backend = OBackEndFactory<OPimTodoAccessBackend>::Default( OPimGlobal::TODOLIST, QString::null );
+ *   OPimTodoAccessBackend* backend = OBackendFactory<OPimTodoAccessBackend>::defaultBackend( OPimGlobal::TODOLIST, QString::null );
  *   backend->load();
  * </pre>
  *
