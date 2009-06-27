@@ -1,14 +1,15 @@
 SOURCES += \
-	backend/ocontactaccessbackend.cpp       \
+        backend/ocontactaccessbackend.cpp       \
         backend/ocontactaccessbackend_vcard.cpp \
         backend/ocontactaccessbackend_xml.cpp   \
         backend/odatebookaccessbackend.cpp      \
         backend/odatebookaccessbackend_xml.cpp  \
         backend/odatebookaccessbackend_vcal.cpp \
-	backend/opimbackendoccurrence.cpp       \
+        backend/opimbackendoccurrence.cpp       \
         backend/otodoaccessbackend.cpp          \
         backend/otodoaccessvcal.cpp             \
-        backend/otodoaccessxml.cpp              
+        backend/otodoaccessxml.cpp              \
+        backend/opimio.cpp
         
 HEADERS += \
         backend/obackendfactory.h              \
@@ -19,10 +20,11 @@ HEADERS += \
         backend/odatebookaccessbackend_xml.h   \
         backend/odatebookaccessbackend_vcal.h  \
         backend/opimaccessbackend.h            \ 
-	backend/opimbackendoccurrence.h        \       
+        backend/opimbackendoccurrence.h        \       
         backend/otodoaccessbackend.h           \
         backend/otodoaccessvcal.h              \
-        backend/otodoaccessxml.h               
+        backend/otodoaccessxml.h               \
+        backend/opimio.h
 
 contains( ENABLE_SQL_PIM_BACKEND, y ) {
 	message ( Enabling the SQL Backend for libopiepim2 )

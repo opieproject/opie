@@ -35,11 +35,14 @@
 
 #include <opie2/ocontactaccessbackend.h>
 #include <opie2/ocontactaccess.h>
+#include <opie2/xmltree.h>
+#include <opie2/opimio.h>
 
 #include <qlist.h>
 #include <qdict.h>
 
 namespace Opie {
+
 /* the default xml implementation */
 /**
  * This class is the XML implementation of a Contact backend
@@ -49,7 +52,7 @@ namespace Opie {
 class OPimContactAccessBackend_XML : public OPimContactAccessBackend 
 {
 public:
-    OPimContactAccessBackend_XML ( const QString& appname, const QString& filename = QString::null );
+    OPimContactAccessBackend_XML ( const QString& appname = QString::null, const QString& filename = QString::null );
 
     bool save();
 
@@ -72,14 +75,18 @@ public:
     bool remove ( int uid );
     bool reload();
 
+    bool loadFromStream( QTextStream &st );
+    bool write( OAbstractWriter &wr );
+
+
 private:
 
     enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
 
     void addContact_p( const OPimContact &newcontact );
 
-    /* This function loads the xml-database and the journalfile */
-    bool load( const QString filename, bool isJournal );
+    /* This function loads the xml-database or the journalfile */
+    bool loadXml( Opie::Core::XMLElement *root, bool isJournal );
 
 
     void updateJournal( const OPimContact& cnt, journal_action action );

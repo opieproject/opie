@@ -31,10 +31,26 @@
 
 #include <qmap.h>
 #include <qasciidict.h>
+#include <qxml.h>
 
 #include <opie2/odatebookaccessbackend.h>
+#include <opie2/opimio.h>
 
 namespace Opie {
+
+class ODateBookAccessBackend_XML;
+
+class OPimDateBookXmlParser : public OPimXmlParser
+{
+public:
+    OPimDateBookXmlParser( QAsciiDict<int> &dict, ODateBookAccessBackend_XML &backend );
+    void foundItemElement( const QXmlAttributes &attrs );
+protected:
+    QAsciiDict<int> &m_dict;
+    ODateBookAccessBackend_XML &m_backend;
+};
+
+
 /**
  * This is the default XML implementation for DateBoook XML storage
  * It fully implements the interface
@@ -50,6 +66,8 @@ public:
     bool load();
     bool reload();
     bool save();
+
+    bool write( OAbstractWriter &wr );
 
     QArray<int> allRecords()const;
     QArray<int> matchRegexp(const QRegExp &r) const;
@@ -67,6 +85,7 @@ public:
     OPimEvent::ValueList directNonRepeats()const;
     OPimEvent::ValueList directRawRepeats()const;
 
+    friend void OPimDateBookXmlParser::foundItemElement( const QXmlAttributes &attrs );
 private:
     bool m_changed :1 ;
     bool m_noTimeZone : 1;

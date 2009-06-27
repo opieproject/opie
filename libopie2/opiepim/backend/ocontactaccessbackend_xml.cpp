@@ -47,6 +47,7 @@
 #include <qregexp.h>
 #include <qarray.h>
 #include <qmap.h>
+#include <qtextstream.h>
 
 /* STD */
 #include <stdlib.h>
@@ -66,22 +67,31 @@ OPimContactAccessBackend_XML::OPimContactAccessBackend_XML ( const QString& appn
 
     m_appName = appname;
 
-    /* Set journalfile name ... */
-    m_journalName = getenv("HOME");
-    m_journalName +="/.abjournal" + appname;
+    if( appname.isEmpty() ) {
+        // This object will be for stream loading/saving only
+        m_journalName = QString::null;
+        m_fileName = QString::null;
+    }
+    else {
+        /* Set journalfile name ... */
+        m_journalName = getenv("HOME");
+        m_journalName +="/.abjournal" + appname;
 
-    /* Expecting to access the default filename if nothing else is set */
-    if ( filename.isEmpty() )
-        m_fileName = Global::applicationFileName( "addressbook","addressbook.xml" );
-    else
-        m_fileName = filename;
+        /* Expecting to access the default filename if nothing else is set */
+        if ( filename.isEmpty() )
+            m_fileName = Global::applicationFileName( "addressbook","addressbook.xml" );
+        else
+            m_fileName = filename;
 
-    /* Load Database now */
-    load ();
+        /* Load Database now */
+        load ();
+    }
 }
 
 bool OPimContactAccessBackend_XML::save()
 {
+    if ( m_fileName.isEmpty() )
+        return false;
 
     if ( !m_changed )
         return true;
@@ -91,46 +101,13 @@ bool OPimContactAccessBackend_XML::save()
     if ( !f.open( IO_WriteOnly|IO_Raw ) )
         return false;
 
-    int total_written;
-    int idx_offset = 0;
-    QString out;
-
-    // Write Header
-    out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE Addressbook ><AddressBook>\n"
-        " <Groups>\n"
-        " </Groups>\n"
-        " <Contacts>\n";
-    QCString cstr = out.utf8();
-    f.writeBlock( cstr.data(), cstr.length() );
-    idx_offset += cstr.length();
-    out = "";
-
-    // Write all contacts
-    QListIterator<OPimContact> it( m_contactList );
-    for ( ; it.current(); ++it ) {
-        out += "<Contact ";
-        (*it)->save( out );
-        out += "/>\n";
-        cstr = out.utf8();
-        total_written = f.writeBlock( cstr.data(), cstr.length() );
-        idx_offset += cstr.length();
-        if ( total_written != int(cstr.length()) ) {
-            f.close();
-            QFile::remove( strNewFile );
-            return false;
-        }
-        out = "";
-    }
-    out += " </Contacts>\n</AddressBook>\n";
-
-    // Write Footer
-    cstr = out.utf8();
-    total_written = f.writeBlock( cstr.data(), cstr.length() );
-    if ( total_written != int( cstr.length() ) ) {
+    OFileWriter fw( &f );
+    if( !write( fw ) ) {
         f.close();
         QFile::remove( strNewFile );
         return false;
     }
+
     f.close();
 
     // move the file over, I'm just going to use the system call
@@ -147,21 +124,73 @@ bool OPimContactAccessBackend_XML::save()
     return true;
 }
 
+bool OPimContactAccessBackend_XML::write( OAbstractWriter &wr )
+{
+    // Write Header
+    QString out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE Addressbook ><AddressBook>\n"
+        " <Groups>\n"
+        " </Groups>\n"
+        " <Contacts>\n";
+    QCString cstr = out.utf8();
+    if ( !wr.writeString( cstr ) )
+        return false;
+
+    // Write all contacts
+    QListIterator<OPimContact> it( m_contactList );
+    for ( ; it.current(); ++it ) {
+        out = "<Contact ";
+        (*it)->save( out );
+        out += "/>\n";
+        cstr = out.utf8();
+        if ( !wr.writeString( cstr ) )
+            return false;
+    }
+
+    // Write Footer
+    out = " </Contacts>\n</AddressBook>\n";
+    cstr = out.utf8();
+    if ( !wr.writeString( cstr ) )
+        return false;
+
+    return true;
+}
+
 bool OPimContactAccessBackend_XML::load ()
 {
+    if ( m_fileName.isEmpty() )
+        return false;
+
     m_contactList.clear();
     m_uidToContact.clear();
 
-    /* Load XML-File and journal if it exists */
-    if ( !load ( m_fileName, false ) )
+    /* Load XML-File if it exists */
+    XMLElement *root = XMLElement::load( m_fileName );
+    if(root) {
+        bool res = loadXml( root, false );
+        delete root;
+        if ( !res )
+            return false;
+    }
+    else
         return false;
+
+    /* We use the time of the last read to check if the file was
+     * changed externally.
+     */
+    QFileInfo fi( m_fileName );
+    m_readtime = fi.lastModified ();
+
     /* The returncode of the journalfile is ignored due to the
      * fact that it does not exist when this class is instantiated !
      * But there may such a file exist, if the application crashed.
      * Therefore we try to load it to get the changes before the #
      * crash happened...
      */
-    load (m_journalName, true);
+    root = XMLElement::load( m_journalName );
+    if(root) {
+        loadXml( root, true );
+        delete root;
+    }
 
     return true;
 }
@@ -176,10 +205,11 @@ void OPimContactAccessBackend_XML::clear ()
 
 bool OPimContactAccessBackend_XML::wasChangedExternally()
 {
+    if ( m_fileName.isEmpty() )
+        return false;
+
     QFileInfo fi( m_fileName );
-
     QDateTime lastmod = fi.lastModified ();
-
     return (lastmod != m_readtime);
 }
 
@@ -323,18 +353,21 @@ void OPimContactAccessBackend_XML::addContact_p( const OPimContact &newcontact )
     m_uidToContact.insert( QString().setNum( newcontact.uid() ), contRef );
 }
 
-/* This function loads the xml-database and the journalfile */
-bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal )
+bool OPimContactAccessBackend_XML::loadFromStream( QTextStream &st )
 {
-
-    /* We use the time of the last read to check if the file was
-     * changed externally.
-     */
-    if ( !isJournal ) {
-        QFileInfo fi( filename );
-        m_readtime = fi.lastModified ();
+    XMLElement *root = XMLElement::load( st );
+    if(root) {
+        bool res = loadXml( root, false );
+        delete root;
+        return res;
     }
+    
+    return false;
+}
 
+/* This function loads the xml-database and the journalfile */
+bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
+{
     const int JOURNALACTION = Qtopia::Notes + 1;
     const int JOURNALROW = JOURNALACTION + 1;
 
@@ -393,7 +426,6 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
     dict.insert( "action", new int(JOURNALACTION) );
     dict.insert( "actionrow", new int(JOURNALROW) );
 
-    XMLElement *root = XMLElement::load( filename );
     if(root != 0l ) { // start parsing
         /* Parse all XML-Elements and put the data into the
          * Contact-Class
@@ -495,10 +527,12 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
             /* Move to next element */
             element = element->nextChild();
         }
-    }else {
+        return true;
     }
-    delete root;
-    return true;
+    else {
+        owarn << "XML document null!" << oendl;
+        return false;
+    }
 }
 
 

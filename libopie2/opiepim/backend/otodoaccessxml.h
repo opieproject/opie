@@ -34,9 +34,23 @@
 #include <qintdict.h>
 
 #include <opie2/otodoaccessbackend.h>
+#include <opie2/opimio.h>
 
 namespace Opie {
-    class XMLElement;
+
+class XMLElement;
+class OPimTodoAccessXML;
+
+class OPimTodoXmlParser : public OPimXmlParser
+{
+public:
+    OPimTodoXmlParser( QAsciiDict<int> &dict, OPimTodoAccessXML &backend );
+    void foundItemElement( const QXmlAttributes &attrs );
+protected:
+    QAsciiDict<int> &m_dict;
+    OPimTodoAccessXML &m_backend;
+};
+
 
 class OPimTodoAccessXML : public OPimTodoAccessBackend {
 public:
@@ -50,6 +64,8 @@ public:
     bool load();
     bool reload();
     bool save();
+
+    bool write( OAbstractWriter &wr );
 
     QArray<int> allRecords()const;
     QArray<int> matchRegexp(const QRegExp &r) const;
@@ -66,11 +82,13 @@ public:
                                 bool includeNoDates )const;
     QArray<int> overDue()const;
 
+    friend void OPimTodoXmlParser::foundItemElement( const QXmlAttributes &attrs );
 //@{
     UIDArray sorted( const UIDArray&, bool, int, int, const QArray<int>& )const;
 //@}
 private:
     void initDict( QAsciiDict<int> &dict ) const;
+    inline void finalizeRecord( OPimTodo& todo );
     QString toString( const OPimTodo&, const QIntDict<QString> & )const;
     QString toString( const QArray<int>& ints ) const;
     QMap<int, OPimTodo> m_events;

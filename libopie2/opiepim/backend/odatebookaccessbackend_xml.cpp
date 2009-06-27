@@ -104,19 +104,17 @@ namespace {
         // skip custom writing
     }
 
-    static bool saveEachEvent( const QMap<int, OPimEvent>& list, QIntDict<QString> &revdict, QFile& file ) {
+    static bool saveEachEvent( const QMap<int, OPimEvent>& list, QIntDict<QString> &revdict, OAbstractWriter &wr ) {
         QMap<int, OPimEvent>::ConstIterator it;
         QString buf;
         QCString str;
-        int total_written;
         for ( it = list.begin(); it != list.end(); ++it ) {
             buf = "<event";
             save( it.data(), revdict, buf );
             buf += " />\n";
             str = buf.utf8();
 
-            total_written = file.writeBlock(str.data(), str.length() );
-            if ( total_written != int(str.length() ) )
+            if ( !wr.writeString( str ) )
                 return false;
         }
         return true;
@@ -171,22 +169,37 @@ bool ODateBookAccessBackend_XML::reload() {
 bool ODateBookAccessBackend_XML::save() {
     if (!m_changed) return true;
 
-    int total_written;
     QString strFileNew = m_name + ".new";
 
     QFile f( strFileNew );
     if (!f.open( IO_WriteOnly | IO_Raw ) ) return false;
 
-    QString buf( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" );
-    buf += "<!DOCTYPE DATEBOOK><DATEBOOK>\n";
-    buf += "<events>\n";
-    QCString str = buf.utf8();
-    total_written = f.writeBlock( str.data(), str.length() );
-    if ( total_written != int(str.length() ) ) {
+    OFileWriter fw( &f );
+    if( !write( fw ) ) {
         f.close();
         QFile::remove( strFileNew );
         return false;
     }
+
+    f.close();
+
+    if ( ::rename( strFileNew, m_name ) < 0 ) {
+        QFile::remove( strFileNew );
+        return false;
+    }
+
+    m_changed = false;
+    return true;
+}
+
+bool ODateBookAccessBackend_XML::write( OAbstractWriter &wr )
+{
+    QString buf( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" );
+    buf += "<!DOCTYPE DATEBOOK><DATEBOOK>\n";
+    buf += "<events>\n";
+    QCString str = buf.utf8();
+    if ( !wr.writeString( str ) )
+        return false;
 
     QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
     initDict( dict );
@@ -197,33 +210,16 @@ bool ODateBookAccessBackend_XML::save() {
         revdict.insert( (*it), new QString( it.currentKey() ) );
     }
 
-    if (!saveEachEvent( m_raw, revdict, f ) ) {
-        f.close();
-        QFile::remove( strFileNew );
+    if (!saveEachEvent( m_raw, revdict, wr ) )
         return false;
-    }
-    if (!saveEachEvent( m_rep, revdict, f ) ) {
-        f.close();
-        QFile::remove( strFileNew );
+    if (!saveEachEvent( m_rep, revdict, wr ) )
         return false;
-    }
 
     buf = "</events>\n</DATEBOOK>\n";
     str = buf.utf8();
-    total_written = f.writeBlock( str.data(), str.length() );
-    if ( total_written != int(str.length() ) ) {
-        f.close();
-        QFile::remove( strFileNew );
+    if ( !wr.writeString( str ) )
         return false;
-    }
-    f.close();
 
-    if ( ::rename( strFileNew, m_name ) < 0 ) {
-        QFile::remove( strFileNew );
-        return false;
-    }
-
-    m_changed = false;
     return true;
 }
 
@@ -464,5 +460,32 @@ QArray<int> ODateBookAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
 
     return m_currentQuery;
 }
+
+
+////////////////////////////////////////////////////////////////////////////
+
+OPimDateBookXmlParser::OPimDateBookXmlParser( QAsciiDict<int> &dict, ODateBookAccessBackend_XML &backend )
+    : m_dict( dict ), m_backend( backend )
+{
+    init( "events", "event" );
+}
+
+void OPimDateBookXmlParser::foundItemElement( const QXmlAttributes &attrs )
+{
+    QMap<int, QString> map;
+    OPimEvent ev;
+
+    for( int i=0; i<attrs.length(); i++ ) {
+        int *find = m_dict[attrs.localName(i)];
+        if (!find)
+            ev.setCustomField( attrs.localName(i), attrs.value(i) );
+        else
+            map[*find] = attrs.value(i);
+    }
+    
+    ev.fromMap( map );
+    m_backend.finalizeRecord( ev );
+}
+
 
 }

@@ -240,12 +240,7 @@ bool OPimTodoAccessXML::load() {
          * now add it
          */
         ev.fromMap( map );
-        if (m_events.contains( ev.uid() ) || ev.uid() == 0) {
-            ev.setUid( 1 );
-            m_changed = true;
-        }
-
-        m_events.insert(ev.uid(), ev );
+        finalizeRecord( ev );
     }
 
     munmap(map_addr, attribut.st_size );
@@ -253,23 +248,28 @@ bool OPimTodoAccessXML::load() {
     return true;
 }
 
+inline void OPimTodoAccessXML::finalizeRecord( OPimTodo& ev )
+{
+    if (m_events.contains( ev.uid() ) || ev.uid() == 0) {
+        ev.setUid( 1 );
+        m_changed = true;
+    }
+
+    m_events.insert(ev.uid(), ev );
+}
+
 bool OPimTodoAccessXML::reload() {
     m_events.clear();
     return load();
 }
 
-bool OPimTodoAccessXML::save() {
-    if (!m_opened || !m_changed ) {
-        return true;
-    }
-    QString strNewFile = m_file + ".new";
-    QFile f( strNewFile );
-    if (!f.open( IO_WriteOnly|IO_Raw ) )
-        return false;
-
-    int written;
+bool OPimTodoAccessXML::write( OAbstractWriter &wr )
+{
     QString out;
     out = "<!DOCTYPE Tasks>\n<Tasks>\n";
+    QCString cstr = out.utf8();
+    if ( !wr.writeString( cstr ) )
+        return false;
 
     QAsciiDict<int> dict(26);
     initDict( dict );
@@ -283,28 +283,36 @@ bool OPimTodoAccessXML::save() {
     // for all todos
     QMap<int, OPimTodo>::Iterator it;
     for (it = m_events.begin(); it != m_events.end(); ++it ) {
-        out+= "<Task " + toString( (*it), revdict ) + " />\n";
-        QCString cstr = out.utf8();
-        written = f.writeBlock( cstr.data(),  cstr.length() );
-
-        /* less written then we wanted */
-        if ( written != (int)cstr.length() ) {
-            f.close();
-            QFile::remove( strNewFile );
+        out = "<Task " + toString( (*it), revdict ) + " />\n";
+        cstr = out.utf8();
+        if ( !wr.writeString( cstr ) )
             return false;
-        }
-        out = QString::null;
     }
 
-    out +=  "</Tasks>";
-    QCString cstr = out.utf8();
-    written = f.writeBlock( cstr.data(), cstr.length() );
+    out =  "</Tasks>";
+    cstr = out.utf8();
+    if ( !wr.writeString( cstr ) )
+        return false;
 
-    if ( written != (int)cstr.length() ) {
+    return true;
+}
+
+bool OPimTodoAccessXML::save() {
+    if (!m_opened || !m_changed ) {
+        return true;
+    }
+    QString strNewFile = m_file + ".new";
+    QFile f( strNewFile );
+    if (!f.open( IO_WriteOnly|IO_Raw ) )
+        return false;
+
+    OFileWriter fw( &f );
+    if( !write( fw ) ) {
         f.close();
         QFile::remove( strNewFile );
         return false;
     }
+
     /* flush before renaming */
     f.close();
 
@@ -529,6 +537,32 @@ QArray<int> OPimTodoAccessXML::matchRegexp(  const QRegExp &r ) const
     currentQuery.resize(arraycounter);
 
     return currentQuery;
+}
+
+
+////////////////////////////////////////////////////////////////////////////
+
+OPimTodoXmlParser::OPimTodoXmlParser( QAsciiDict<int> &dict, OPimTodoAccessXML &backend )
+    : m_dict( dict ), m_backend( backend )
+{
+    init( "Tasks", "Task" );
+}
+
+void OPimTodoXmlParser::foundItemElement( const QXmlAttributes &attrs )
+{
+    QMap<int, QString> map;
+    OPimTodo todo;
+
+    for( int i=0; i<attrs.length(); i++ ) {
+        int *find = m_dict[attrs.localName(i)];
+        if (!find)
+            todo.setCustomField( attrs.localName(i), attrs.value(i) );
+        else
+            map[*find] = attrs.value(i);
+    }
+    
+    todo.fromMap( map );
+    m_backend.finalizeRecord( todo );
 }
 
 }
