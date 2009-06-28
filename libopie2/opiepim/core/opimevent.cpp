@@ -215,8 +215,10 @@ bool OPimEvent::hasNotifiers() const
 
 OPimRecurrence OPimEvent::recurrence() const
 {
-    if ( !data->recur )
+    if ( !data->recur ) {
         data->recur = new OPimRecurrence;
+        data->recur->setStart( data->start.date() );
+    }
 
     return *data->recur;
 }
@@ -229,6 +231,8 @@ void OPimEvent::setRecurrence( const OPimRecurrence& rec )
         ( *data->recur ) = rec;
     else
         data->recur = new OPimRecurrence( rec );
+    
+    data->recur->setStart( data->start.date() );
 }
 
 
@@ -287,6 +291,8 @@ void OPimEvent::setStartDateTime( const QDateTime& dt )
 {
     changeOrModify();
     data->start = dt;
+    if ( data->recur )
+        data->recur->setStart( data->start.date() );
 }
 
 
