@@ -322,6 +322,8 @@ bool OPimXmlMmapParser::parse( const QString &file )
     while ( ( point = strstrlen( dt+i, len -i, itemMarker, strLen ) ) != 0l ) {
         i = point -dt;
         i+= strLen;
+        map.clear();
+        extramap.clear();
 
         while ( TRUE ) {
             while ( i < len && (dt[i] == ' ' || dt[i] == '\n' || dt[i] == '\r') )
