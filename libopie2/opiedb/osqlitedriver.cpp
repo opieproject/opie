@@ -174,8 +174,8 @@ OSQLResult OSQLiteDriver::query( OSQLQuery* qu) {
 	char *err;
 	/* SQLITE_OK 0 if return code > 0 == failure */
 	if ( sqlite3_exec( m_sqlite, qu->query().utf8(), &call_back, &query, &err )  > SQLITE_OK ) {
-		owarn << "OSQLiteDriver::query: Error while executing " << err << "" << oendl;
-		free( err );
+		owarn << "OSQLiteDriver::query: error while executing: " << err << oendl;
+		sqlite3_free( err );
 		// FixMe Errors
 	}
 
