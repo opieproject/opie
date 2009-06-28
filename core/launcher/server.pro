@@ -32,7 +32,8 @@ HEADERS		+= server.h \
 		  qprocess.h \
 		  screensaver.h \
 		  $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.h \
-                  mediadlg.h 
+                  mediadlg.h \
+		  virtualfs.h
 
 SOURCES		+= server.cpp \
 		  qrr.cpp \
@@ -64,7 +65,8 @@ SOURCES		+= server.cpp \
 		  qprocess_unix.cpp \
 		  screensaver.cpp \
 		  $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.cc \
-                  mediadlg.cpp
+                  mediadlg.cpp \
+		  virtualfs.cpp
 
 
 INCLUDEPATH += $(OPIEDIR)/core/apps/calibrate

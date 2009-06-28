@@ -17,6 +17,9 @@
 ** not clear to you.
 **
 **********************************************************************/
+
+#include "virtualfs.h"
+
 #include <qserversocket.h>
 #include <qsocket.h>
 #include <qdir.h>
@@ -69,8 +72,8 @@ public:
     ServerDTP( QObject *parent = 0, const char* name = 0 );
     ~ServerDTP();
 
-    enum Mode{ Idle = 0, SendFile, SendGzipFile, SendBuffer,
-        RetrieveFile, RetrieveGzipFile, RetrieveBuffer };
+    enum Mode{ Idle = 0, SendFile, SendGzipFile, SendBuffer, SendVirtual,
+        RetrieveFile, RetrieveGzipFile, RetrieveBuffer, RetrieveVirtual };
 
     void sendFile( const QString fn );
     void sendFile( const QString fn, const QHostAddress& host, Q_UINT16 port );
@@ -79,6 +82,8 @@ public:
                        const QHostAddress& host, Q_UINT16 port );
     void sendByteArray( const QByteArray& array );
     void sendByteArray( const QByteArray& array, const QHostAddress& host, Q_UINT16 port );
+    void sendVirtual( VirtualReader *reader );
+    void sendVirtual( VirtualReader *reader, const QHostAddress& host, Q_UINT16 port );
 
     void retrieveFile( const QString fn, int fileSize );
     void retrieveFile( const QString fn, const QHostAddress& host, Q_UINT16 port, int fileSize );
@@ -86,6 +91,8 @@ public:
     void retrieveGzipFile( const QString &fn, const QHostAddress& host, Q_UINT16 port );
     void retrieveByteArray();
     void retrieveByteArray( const QHostAddress& host, Q_UINT16 port );
+    void retrieveVirtual( VirtualWriter *writer );
+    void retrieveVirtual( VirtualWriter *writer, const QHostAddress& host, Q_UINT16 port );
 
     Mode dtpMode() { return mode; }
     QByteArray buffer() { return buf.buffer(); }
@@ -114,6 +121,8 @@ private:
     QBuffer buf;
     QProcess *createTargzProc;
     QProcess *retrieveTargzProc;
+    VirtualReader *vreader;
+    VirtualWriter *vwriter;
     int recvFileSize;
 };
 
@@ -135,7 +144,7 @@ class ServerPI : public QSocket
     Q_OBJECT
 
     enum State { Connected, Wait_USER, Wait_PASS, Ready, Forbidden };
-    enum Transfer { SendFile = 0, RetrieveFile = 1, SendByteArray = 2, RetrieveByteArray = 3 };
+    enum Transfer { SendFile = 0, RetrieveFile = 1, SendByteArray = 2, RetrieveByteArray = 3, SendVirtual = 4, RetrieveVirtual = 5 };
 
 public:
     ServerPI( int socket, QObject *parent = 0, const char* name = 0 );
@@ -165,7 +174,9 @@ protected:
 
     bool sendList( const QString& arg );
     void sendFile( const QString& file );
+    void sendVirtual( VirtualReader *reader );
     void retrieveFile( const QString& file );
+    void retrieveVirtual( VirtualWriter *writer );
 
     QString permissionString( QFileInfo *info );
     QString fileListing( QFileInfo *info );
@@ -182,10 +193,14 @@ private:
     ServerDTP *dtp;
     ServerSocket *serversocket;
     QString waitfile;
+    VirtualReader *waitvreader;
+    VirtualWriter *waitvwriter;
     QDir directory;
     QByteArray waitarray;
     QString renameFrom;
     QString lastCommand;
     int waitsocket;
     int storFileSize;
+    QString virtualPath;
+    VirtualFS vfs;
 };
