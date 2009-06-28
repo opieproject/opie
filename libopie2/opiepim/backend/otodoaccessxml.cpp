@@ -128,6 +128,17 @@ bool OPimTodoAccessXML::reload() {
     return load();
 }
 
+bool OPimTodoAccessXML::read( OPimXmlReader &rd )
+{
+    QAsciiDict<int> dict(26);
+    initDict( dict );
+
+    OPimTodoXmlHandler handler( dict, *this );
+    OPimXmlStreamParser parser( handler );
+    rd.read( parser );
+    return true;
+}
+
 bool OPimTodoAccessXML::write( OAbstractWriter &wr )
 {
     QString out;

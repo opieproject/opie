@@ -64,6 +64,7 @@ public:
     bool reload();
     bool save();
 
+    bool read( OPimXmlReader &rd );
     bool write( OAbstractWriter &wr );
 
     QArray<int> allRecords()const;

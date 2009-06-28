@@ -55,6 +55,9 @@
 
 using namespace Opie::Core;
 
+const int JOURNALACTION = Qtopia::Notes + 1;
+const int JOURNALROW = JOURNALACTION + 1;
+
 
 namespace Opie {
 OPimContactAccessBackend_XML::OPimContactAccessBackend_XML ( const QString& appname, const QString& filename ):
@@ -353,32 +356,19 @@ void OPimContactAccessBackend_XML::addContact_p( const OPimContact &newcontact )
     m_uidToContact.insert( QString().setNum( newcontact.uid() ), contRef );
 }
 
-bool OPimContactAccessBackend_XML::loadFromStream( QTextStream &st )
+bool OPimContactAccessBackend_XML::read( OPimXmlReader &rd )
 {
-    XMLElement *root = XMLElement::load( st );
-    if(root) {
-        bool res = loadXml( root, false );
-        delete root;
-        return res;
-    }
-    
-    return false;
+    QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
+    initDict( dict );
+
+    OPimContactXmlHandler handler( dict, *this );
+    OPimXmlStreamParser parser( handler );
+    rd.read( parser );
+    return true;
 }
 
-/* This function loads the xml-database and the journalfile */
-bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
+void OPimContactAccessBackend_XML::initDict( QAsciiDict<int> &dict ) const 
 {
-    const int JOURNALACTION = Qtopia::Notes + 1;
-    const int JOURNALROW = JOURNALACTION + 1;
-
-    bool foundAction = false;
-    journal_action action = ACTION_ADD;
-    int journalKey = 0;
-    QMap<int, QString> contactMap;
-    QMap<QString, QString> customMap;
-    QMap<QString, QString>::Iterator customIt;
-    QAsciiDict<int> dict( 47 );
-
     dict.setAutoDelete( TRUE );
     dict.insert( "Uid", new int(Qtopia::AddressUid) );
     dict.insert( "Title", new int(Qtopia::Title) );
@@ -423,9 +413,23 @@ bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
     dict.insert( "Anniversary", new int(Qtopia::Anniversary) );
     dict.insert( "Nickname", new int(Qtopia::Nickname) );
     dict.insert( "Notes", new int(Qtopia::Notes) );
+    // technically these are for the journal
     dict.insert( "action", new int(JOURNALACTION) );
     dict.insert( "actionrow", new int(JOURNALROW) );
+}
 
+/* This function loads the xml-database and the journalfile */
+bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
+{
+    bool foundAction = false;
+    journal_action action = ACTION_ADD;
+    int journalKey = 0;
+    QMap<int, QString> contactMap;
+    QMap<QString, QString> customMap;
+    QMap<QString, QString>::Iterator customIt;
+    QAsciiDict<int> dict( 47 );
+    initDict( dict );
+ 
     if(root != 0l ) { // start parsing
         /* Parse all XML-Elements and put the data into the
          * Contact-Class
@@ -539,6 +543,9 @@ bool OPimContactAccessBackend_XML::loadXml( XMLElement *root, bool isJournal )
 void OPimContactAccessBackend_XML::updateJournal( const OPimContact& cnt,
                            journal_action action )
 {
+    if( m_journalName.isEmpty() )
+        return;
+
     QFile f( m_journalName );
     bool created = !f.exists();
     if ( !f.open(IO_WriteOnly|IO_Append) )
@@ -569,6 +576,22 @@ void OPimContactAccessBackend_XML::removeJournal()
     QFile f ( m_journalName );
     if ( f.exists() )
         f.remove();
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+OPimContactXmlHandler::OPimContactXmlHandler( QAsciiDict<int> &dict, OPimContactAccessBackend_XML &backend )
+    : OPimXmlHandler( "Contact", dict ), m_backend( backend )
+{
+}
+
+void OPimContactXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap )
+{
+    OPimContact contact( map );
+    for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
+        contact.setCustomField(it.key(), it.data() );
+    
+    m_backend.addContact_p( contact );
 }
 
 }
