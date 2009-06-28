@@ -31,7 +31,9 @@
 #define OPIMIO_H
 
 #include <qcstring.h>
-#include <qxml.h>
+#include <qasciidict.h>
+#include <qmap.h>
+#include <qsocket.h>
 
 class QFile;
 class QDataStream;
@@ -72,33 +74,81 @@ private:
 };
 
 
-class OPimXmlParser : public QXmlDefaultHandler
+class OPimXmlHandler
 {
 public:
-    bool startDocument();
-    bool endElement( const QString&, const QString&, const QString &name );
-    bool startElement( const QString&, const QString&, const QString &name, const QXmlAttributes &attrs );
+    OPimXmlHandler( const char *marker, QAsciiDict<int> &dict );
+    const char *itemMarker();
+    QAsciiDict<int> &dict();
 
-    virtual void foundItemElement( const QXmlAttributes &attrs ) = 0;
+    virtual void handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap ) = 0;
+private:
+    QCString m_itemMarker;
+    QAsciiDict<int> &m_dict;
+};
 
+
+class OPimXmlMmapParser
+{
+public:
+    OPimXmlMmapParser( OPimXmlHandler &handler );
+    bool parse( const QString &file );
+private:
+    QCString m_itemMarker;
+    OPimXmlHandler &m_handler;
+};
+
+
+class OPimXmlStreamParser
+{
+    enum ParserMode {
+        MODE_COLLECTION,
+        MODE_ITEM
+    };
+public:
+    OPimXmlStreamParser( OPimXmlHandler &handler );
+    void reset();
+    void parseBuffer( char *buffer, uint bufferlen );
+
+private:
+    void parseItem();
+    int findStr( const char *buf, uint buflen, const char *substr, uint substrlen );
+    QCString m_item;
+    QCString m_itemMarker;
+    uint m_findpos;
+    ParserMode m_mode;
+    OPimXmlHandler &m_handler;
+};
+
+
+class OPimXmlReader
+{
+public:
+    virtual void read( OPimXmlStreamParser &parser ) = 0;
+};
+
+
+class OPimXmlFileReader: public OPimXmlReader
+{
+public:
+    OPimXmlFileReader( const QString &file );
+    void read( OPimXmlStreamParser &parser );
 protected:
-    void init( QString mainElement, QString itemElement );
-
-private:
-    QString m_mainElement;
-    QString m_itemElement;
-    bool m_inMain;
+    QString m_file;
 };
 
 
-class OPimXmlTextStreamReader
+class OPimXmlSocketReader: public OPimXmlReader
 {
 public:
-    OPimXmlTextStreamReader( OPimXmlParser &parser );
-    bool read( QTextStream &stream );
-private:
-    OPimXmlParser &m_parser;
+    OPimXmlSocketReader( QSocket *socket );
+    void read( OPimXmlStreamParser &parser );
+    void readData();
+protected:
+    QSocket *m_socket;
+    OPimXmlStreamParser *m_parser;
 };
+
 
 }
 

@@ -38,16 +38,15 @@
 
 namespace Opie {
 
-class XMLElement;
 class OPimTodoAccessXML;
 
-class OPimTodoXmlParser : public OPimXmlParser
+
+class OPimTodoXmlHandler : public OPimXmlHandler
 {
 public:
-    OPimTodoXmlParser( QAsciiDict<int> &dict, OPimTodoAccessXML &backend );
-    void foundItemElement( const QXmlAttributes &attrs );
+    OPimTodoXmlHandler( QAsciiDict<int> &dict, OPimTodoAccessXML &backend );
+    void handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
 protected:
-    QAsciiDict<int> &m_dict;
     OPimTodoAccessXML &m_backend;
 };
 
@@ -82,7 +81,7 @@ public:
                                 bool includeNoDates )const;
     QArray<int> overDue()const;
 
-    friend void OPimTodoXmlParser::foundItemElement( const QXmlAttributes &attrs );
+    friend void OPimTodoXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
 //@{
     UIDArray sorted( const UIDArray&, bool, int, int, const QArray<int>& )const;
 //@}

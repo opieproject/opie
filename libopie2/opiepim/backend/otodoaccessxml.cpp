@@ -47,46 +47,8 @@
 #include <qvector.h>
 #include <qintdict.h>
 
-/* STD */
-#include <errno.h>
-#include <fcntl.h>
-
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <sys/types.h>
-
-#include <unistd.h>
-
 
 using namespace Opie;
-
-namespace {
-
-// FROM TT again
-char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
-{
-    char needleChar;
-    char haystackChar;
-    if (!needle || !haystack || !hLen || !nLen)
-        return 0;
-
-    const char* hsearch = haystack;
-
-    if ((needleChar = *needle++) != 0) {
-        nLen--; //(to make up for needle++)
-        do {
-            do {
-                if ((haystackChar = *hsearch++) == 0)
-                    return (0);
-                if (hsearch >= haystack + hLen)
-                    return (0);
-            } while (haystackChar != needleChar);
-        } while (strncmp(hsearch, needle, QMIN(hLen - (hsearch - haystack), nLen)) != 0);
-        hsearch--;
-    }
-    return ((char *)hsearch);
-}
-}
 
 namespace Opie {
 
@@ -140,112 +102,15 @@ void OPimTodoAccessXML::initDict( QAsciiDict<int> &dict ) const
 bool OPimTodoAccessXML::load() {
     m_opened = true;
     m_changed = false;
-    /* initialize dict */
+
+    // initialize dict
     QAsciiDict<int> dict(26);
     initDict(dict);
 
-    // here the custom XML parser from TT it's GPL
-    // but we want to push OpiePIM... to TT.....
-    // mmap part from zecke :)
-    int fd = ::open( QFile::encodeName(m_file).data(), O_RDONLY );
-    struct stat attribut;
-    if ( fd < 0 ) return false;
-
-    if ( fstat(fd, &attribut ) == -1 ) {
-        ::close( fd );
-        return false;
-    }
-    void* map_addr = ::mmap(NULL,  attribut.st_size, PROT_READ, MAP_SHARED, fd, 0 );
-    if ( map_addr == ( (caddr_t)-1) ) {
-        ::close(fd );
-        return false;
-    }
-    /* advise the kernel who we want to read it */
-    ::madvise( map_addr,  attribut.st_size,  MADV_SEQUENTIAL );
-    /* we do not the file any more */
-    ::close( fd );
-
-    char* dt = (char*)map_addr;
-    int len = attribut.st_size;
-    int i = 0;
-    char *point;
-    const char* collectionString = "<Task ";
-    int strLen = strlen(collectionString);
-    QMap<int, QString> map;
-    int *find;
-    while ( ( point = strstrlen( dt+i, len -i, collectionString, strLen ) ) != 0l ) {
-        i = point -dt;
-        i+= strLen;
-
-        OPimTodo ev;
-
-        while ( TRUE ) {
-            while ( i < len && (dt[i] == ' ' || dt[i] == '\n' || dt[i] == '\r') )
-                ++i;
-
-            if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
-                break;
-
-            // we have another attribute, read it.
-            int j = i;
-            while ( j < len && dt[j] != '=' )
-                ++j;
-
-            QCString attr( dt+i, j-i+1);
-
-            i = ++j; // skip =
-
-            // find the start of quotes
-            while ( i < len && dt[i] != '"' )
-                ++i;
-
-            j = ++i;
-
-            bool haveUtf = FALSE;
-            bool haveEnt = FALSE;
-            while ( j < len && dt[j] != '"' ) {
-                if ( ((unsigned char)dt[j]) > 0x7f )
-                    haveUtf = TRUE;
-                if ( dt[j] == '&' )
-                    haveEnt = TRUE;
-                ++j;
-            }
-
-            if ( i == j ) {
-                // empty value
-                i = j + 1;
-                continue;
-            }
-
-            QCString value( dt+i, j-i+1 );
-            i = j + 1;
-
-            QString str = (haveUtf ? QString::fromUtf8( value )
-                : QString::fromLatin1( value ) );
-
-            if ( haveEnt )
-                str = Qtopia::plainString( str );
-
-            /*
-             * add key + value
-             */
-            find = dict[attr.data()];
-            if (!find)
-                ev.setCustomField( attr, str );
-            else
-                map[*find] = str;
-        }
-
-        /*
-         * now add it
-         */
-        ev.fromMap( map );
-        finalizeRecord( ev );
-    }
-
-    munmap(map_addr, attribut.st_size );
-
-    return true;
+    // parse
+    OPimTodoXmlHandler handler( dict, *this );
+    OPimXmlMmapParser parser( handler );
+    return parser.parse( m_file );
 }
 
 inline void OPimTodoAccessXML::finalizeRecord( OPimTodo& ev )
@@ -542,26 +407,18 @@ QArray<int> OPimTodoAccessXML::matchRegexp(  const QRegExp &r ) const
 
 ////////////////////////////////////////////////////////////////////////////
 
-OPimTodoXmlParser::OPimTodoXmlParser( QAsciiDict<int> &dict, OPimTodoAccessXML &backend )
-    : m_dict( dict ), m_backend( backend )
+OPimTodoXmlHandler::OPimTodoXmlHandler( QAsciiDict<int> &dict, OPimTodoAccessXML &backend )
+    : OPimXmlHandler( "Task", dict ), m_backend( backend )
 {
-    init( "Tasks", "Task" );
 }
 
-void OPimTodoXmlParser::foundItemElement( const QXmlAttributes &attrs )
+void OPimTodoXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap )
 {
-    QMap<int, QString> map;
     OPimTodo todo;
-
-    for( int i=0; i<attrs.length(); i++ ) {
-        int *find = m_dict[attrs.localName(i)];
-        if (!find)
-            todo.setCustomField( attrs.localName(i), attrs.value(i) );
-        else
-            map[*find] = attrs.value(i);
-    }
-    
     todo.fromMap( map );
+    for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
+        todo.setCustomField(it.key(), it.data() );
+    
     m_backend.finalizeRecord( todo );
 }
 

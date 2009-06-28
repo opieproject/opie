@@ -43,48 +43,8 @@
 #include <qfile.h>
 #include <qintdict.h>
 
-/* STD */
-#include <errno.h>
-#include <fcntl.h>
-
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <sys/types.h>
-#include <sys/mman.h>
-#include <sys/stat.h>
-
-#include <unistd.h>
-
 
 using namespace Opie;
-
-namespace {
-    // FROM TT again
-char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
-{
-    char needleChar;
-    char haystackChar;
-    if (!needle || !haystack || !hLen || !nLen)
-        return 0;
-
-    const char* hsearch = haystack;
-
-    if ((needleChar = *needle++) != 0) {
-        nLen--; //(to make up for needle++)
-        do {
-            do {
-                if ((haystackChar = *hsearch++) == 0)
-                    return (0);
-                if (hsearch >= haystack + hLen)
-                    return (0);
-            } while (haystackChar != needleChar);
-        } while (strncmp(hsearch, needle, QMIN(hLen - (hsearch - haystack), nLen)) != 0);
-        hsearch--;
-    }
-    return ((char *)hsearch);
-}
-}
 
 namespace {
 
@@ -324,110 +284,19 @@ OPimEvent::ValueList ODateBookAccessBackend_XML::directRawRepeats()const {
     return list;
 }
 
-bool ODateBookAccessBackend_XML::loadFile() {
-    m_changed = false;
+bool ODateBookAccessBackend_XML::loadFile() 
+{
+    // initialize dict
+    QAsciiDict<int> dict(26);
+    initDict(dict);
 
-    int fd = ::open( QFile::encodeName(m_name).data(), O_RDONLY );
-    if ( fd < 0 ) return false;
+    // parse
+    OPimDateBookXmlHandler handler( dict, *this );
+    OPimXmlMmapParser parser( handler );
+    bool ret = parser.parse( m_name );
 
-    struct stat attribute;
-    if ( ::fstat(fd, &attribute ) == -1 ) {
-        ::close( fd );
-        return false;
-    }
-    void* map_addr = ::mmap(NULL, attribute.st_size, PROT_READ, MAP_SHARED, fd, 0 );
-    if ( map_addr == ( (caddr_t)-1) ) {
-        ::close( fd );
-        return false;
-    }
-
-    ::madvise( map_addr, attribute.st_size, MADV_SEQUENTIAL );
-    ::close( fd );
-
-    QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
-    initDict( dict );
-
-    char* dt = (char*)map_addr;
-    int len = attribute.st_size;
-    int i = 0;
-    char* point;
-    const char* collectionString = "<event ";
-    int strLen = ::strlen(collectionString);
-    int *find;
-    QMap<int, QString> map;
-    while ( (  point = ::strstrlen( dt+i, len -i, collectionString, strLen ) ) != 0  ) {
-        i = point -dt;
-        i+= strLen;
-
-        OPimEvent ev;
-        map.clear();
-
-        while ( TRUE ) {
-            while ( i < len && (dt[i] == ' ' || dt[i] == '\n' || dt[i] == '\r') )
-                ++i;
-        
-            if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
-                break;
-
-
-            // we have another attribute, read it.
-            int j = i;
-            while ( j < len && dt[j] != '=' )
-                ++j;
-
-            QCString attr( dt+i, j-i+1);
-
-            i = ++j; // skip =
-
-            // find the start of quotes
-            while ( i < len && dt[i] != '"' )
-                ++i;
-
-            j = ++i;
-
-            bool haveUtf = FALSE;
-            bool haveEnt = FALSE;
-            while ( j < len && dt[j] != '"' ) {
-                if ( ((unsigned char)dt[j]) > 0x7f )
-                    haveUtf = TRUE;
-                if ( dt[j] == '&' )
-                    haveEnt = TRUE;
-                ++j;
-            }
-
-            if ( i == j ) {
-                // empty value
-                i = j + 1;
-                continue;
-            }
-
-            QCString value( dt+i, j-i+1 );
-            i = j + 1;
-
-            QString str = (haveUtf ? QString::fromUtf8( value )
-                : QString::fromLatin1( value ) );
-
-            if ( haveEnt )
-                str = Qtopia::plainString( str );
-
-            /*
-             * add key + value
-             */
-            find = dict[attr.data()];
-            if (!find)
-                ev.setCustomField( attr, str );
-            else {
-                map[*find] = str;
-            }
-        }
-        /* time to finalize */
-        ev.fromMap(map);
-        finalizeRecord(ev);
-    }
-    ::munmap(map_addr, attribute.st_size );
-    m_changed = false; // changed during add
-
-    return true;
+    m_changed = false; // in case changed during add
+    return ret;
 }
 
 void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) 
@@ -440,6 +309,17 @@ void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev )
         m_rep.insert( ev.uid(), ev );
     else
         m_raw.insert( ev.uid(), ev );
+}
+
+bool ODateBookAccessBackend_XML::read( OPimXmlReader &rd )
+{
+    QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
+    initDict( dict );
+
+    OPimDateBookXmlHandler handler( dict, *this );
+    OPimXmlStreamParser parser( handler );
+    rd.read( parser );
+    return true;
 }
 
 QArray<int> ODateBookAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
@@ -464,26 +344,18 @@ QArray<int> ODateBookAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
 
 ////////////////////////////////////////////////////////////////////////////
 
-OPimDateBookXmlParser::OPimDateBookXmlParser( QAsciiDict<int> &dict, ODateBookAccessBackend_XML &backend )
-    : m_dict( dict ), m_backend( backend )
+OPimDateBookXmlHandler::OPimDateBookXmlHandler( QAsciiDict<int> &dict, ODateBookAccessBackend_XML &backend )
+    : OPimXmlHandler( "event", dict ), m_backend( backend )
 {
-    init( "events", "event" );
 }
 
-void OPimDateBookXmlParser::foundItemElement( const QXmlAttributes &attrs )
+void OPimDateBookXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap )
 {
-    QMap<int, QString> map;
     OPimEvent ev;
-
-    for( int i=0; i<attrs.length(); i++ ) {
-        int *find = m_dict[attrs.localName(i)];
-        if (!find)
-            ev.setCustomField( attrs.localName(i), attrs.value(i) );
-        else
-            map[*find] = attrs.value(i);
-    }
-    
     ev.fromMap( map );
+    for( QMap<QString, QString>::Iterator it = extramap.begin(); it != extramap.end(); ++it )
+        ev.setCustomField(it.key(), it.data() );
+    
     m_backend.finalizeRecord( ev );
 }
 

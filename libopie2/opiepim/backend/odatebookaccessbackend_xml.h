@@ -31,7 +31,6 @@
 
 #include <qmap.h>
 #include <qasciidict.h>
-#include <qxml.h>
 
 #include <opie2/odatebookaccessbackend.h>
 #include <opie2/opimio.h>
@@ -40,13 +39,12 @@ namespace Opie {
 
 class ODateBookAccessBackend_XML;
 
-class OPimDateBookXmlParser : public OPimXmlParser
+class OPimDateBookXmlHandler : public OPimXmlHandler
 {
 public:
-    OPimDateBookXmlParser( QAsciiDict<int> &dict, ODateBookAccessBackend_XML &backend );
-    void foundItemElement( const QXmlAttributes &attrs );
+    OPimDateBookXmlHandler( QAsciiDict<int> &dict, ODateBookAccessBackend_XML &backend );
+    void handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
 protected:
-    QAsciiDict<int> &m_dict;
     ODateBookAccessBackend_XML &m_backend;
 };
 
@@ -68,6 +66,7 @@ public:
     bool save();
 
     bool write( OAbstractWriter &wr );
+    bool read( OPimXmlReader &rd );
 
     QArray<int> allRecords()const;
     QArray<int> matchRegexp(const QRegExp &r) const;
@@ -85,7 +84,7 @@ public:
     OPimEvent::ValueList directNonRepeats()const;
     OPimEvent::ValueList directRawRepeats()const;
 
-    friend void OPimDateBookXmlParser::foundItemElement( const QXmlAttributes &attrs );
+    friend void OPimDateBookXmlHandler::handleItem( QMap<int, QString> &map, QMap<QString, QString> &extramap );
 private:
     bool m_changed :1 ;
     bool m_noTimeZone : 1;
