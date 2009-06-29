@@ -33,6 +33,7 @@
 #include <qcombobox.h>
 #include <qvaluestack.h>
 #include <qwhatsthis.h>
+#include <qtl.h>
 
 using namespace Opie;
 
@@ -284,6 +285,11 @@ void ODateBookMonthTable::visibleDateRange( QDate &start, QDate &end )
 void ODateBookMonthTable::setEvents( const OPimOccurrence::List &list )
 {
     d->mMonthEvents = list;
+
+    // Sort the events, because layoutEvents() relies upon them being sorted
+    // and we can't expect them to be sorted already
+    qHeapSort( d->mMonthEvents );
+
     layoutEvents();
 }
 
