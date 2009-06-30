@@ -67,6 +67,7 @@ public:
     QArray<UID> matchRegexp(  const QRegExp &r ) const;
     void removeAllCompleted();
 
+    UIDArray sorted( bool, int, int, const QArray<int>& )const;
 
 private:
     void update()const;

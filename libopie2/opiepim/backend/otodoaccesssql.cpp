@@ -34,6 +34,7 @@
 #include <opie2/osqlmanager.h>
 #include <opie2/osqlquery.h>
 
+#include <opie2/otodoaccess.h>
 #include <opie2/otodoaccesssql.h>
 #include <opie2/opimstate.h>
 #include <opie2/opimnotifymanager.h>
@@ -306,7 +307,7 @@ namespace {
 
     QString RemoveQuery::query()const {
         QString qu = "DELETE FROM todolist WHERE uid = " + QString::number(m_uid) + " ;";
-	qu += "DELETE FROM custom_data WHERE uid = " + QString::number(m_uid);
+        qu += "DELETE FROM custom_data WHERE uid = " + QString::number(m_uid);
         return qu;
     }
 
@@ -316,8 +317,8 @@ namespace {
     ClearQuery::~ClearQuery() {}
     QString ClearQuery::query()const 
     {
-	    QString qu = "drop table todolist";
-	    return qu;
+        QString qu = "drop table todolist";
+        return qu;
     }
 
     FindQuery::FindQuery(int uid)
@@ -326,7 +327,7 @@ namespace {
     }
     
     FindQuery::FindQuery(const QArray<int>& ints)
-	    : OSQLQuery(), m_uids(ints)
+        : OSQLQuery(), m_uids(ints)
     {
     }
 
@@ -553,15 +554,14 @@ QArray<int> OPimTodoAccessBackendSQL::effectiveToDos( const QDate& s,
     return uids (m_driver->query(&ef) );
 }
 
-#if 0
 /*
  *
  */
-QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
-                                           int sortFilter, int cat ) {
+UIDArray OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
+                                           int sortFilter, const QArray<int>& categories ) const{
     odebug << "sorted " << asc << ", " << sortOrder << "" << oendl;
     QString query;
-    query = "select uid from todolist WHERE ";
+    query = "";
 
     /*
      * Sort Filter stuff
@@ -570,17 +570,27 @@ QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
      *
      */
     /* Category */
-    if ( sortFilter & OPimTodoAccess::FilterCategory ) {
-        QString str;
-        if (cat != 0 ) str = QString::number( cat );
-        query += " categories like '%" +str+"%' AND";
+    QString cat_query = " categories = '";
+    bool check_cats = false;
+    
+    for ( uint cat_nu = 0; cat_nu < categories.count(); ++cat_nu ) {
+        if(categories[cat_nu] != 0) {
+            cat_query += QString::number(categories[cat_nu]);
+            check_cats = true;
+            break;
+        }
     }
+
+    if( check_cats ) {
+        query += cat_query + "' AND";
+    }
+
     /* Show only overdue */
     if ( sortFilter & OPimTodoAccess::OnlyOverDue ) {
         QDate date = QDate::currentDate();
         QString due;
         QString base;
-        base = QString("DueDate <= '%1-%2-%3' AND completed = 0")
+        base = QString("DueDate != '0000-00-00' AND DueDate <= '%1-%2-%3' AND completed = 0")
         .arg( QString::number( date.year() ).rightJustify( 4, '0' ) )
         .arg( QString::number( date.month() ).rightJustify( 2, '0' ) )
         .arg( QString::number( date.day() ).rightJustify( 2, '0' ) );
@@ -589,12 +599,13 @@ QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
     /* not show completed */
     if ( sortFilter & OPimTodoAccess::DoNotShowCompleted ) {
         query += " completed = 0 AND";
-    }else{
-       query += " ( completed = 1 OR  completed = 0) AND";
     }
-    /* strip the end */
-    query = query.remove( query.length()-3, 3 );
 
+    /* strip the end */
+    if( !query.isEmpty() )
+        query = "select uid from todolist WHERE " + query.remove( query.length()-3, 3 );
+    else
+        query = "select uid from todolist ";
 
     /*
      * sort order stuff
@@ -609,23 +620,22 @@ QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
     case OPimTodoAccess::Priority:
         query += "priority";
         break;
-    case OPimTodoAccess::SortSummary:
-        query += "summary";
-        break;
     case OPimTodoAccess::Deadline:
         query += "DueDate";
+        break;
+    case OPimTodoAccess::SortSummary:
+    default:
+        query += "summary";
         break;
     }
 
     if ( !asc )
         query += " DESC";
 
-
     odebug << query << oendl;
     OSQLRawQuery raw(query );
     return uids( m_driver->query(&raw) );
 }
-#endif
 
 
 bool OPimTodoAccessBackendSQL::date( QDate& da, const QString& str ) const{
