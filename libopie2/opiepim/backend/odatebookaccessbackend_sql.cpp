@@ -157,7 +157,7 @@ bool ODateBookAccessBackend_SQL::load()
     // Don't expect that the database exists.
     // It is save here to create the table, even if it
     // do exist. ( Is that correct for all databases ?? )
-    QString qu = "create table datebook( uid INTEGER PRIMARY KEY ";
+    QString qu = "create table if not exists datebook( uid INTEGER PRIMARY KEY ";
 
     QMap<int, QString>::Iterator it;
     for ( it = ++m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
@@ -165,7 +165,7 @@ bool ODateBookAccessBackend_SQL::load()
     }
     qu += " );";
 
-    qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
+    qu += "create table if not exists custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
 
     OSQLRawQuery raw( qu );
     OSQLResult res = m_driver->query( &raw );

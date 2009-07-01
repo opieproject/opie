@@ -165,7 +165,7 @@ namespace {
     QString CreateQuery::query()const {
         QString qu;
 
-        qu += "create table addressbook( uid PRIMARY KEY ";
+        qu += "create table if not exists addressbook( uid PRIMARY KEY ";
 
         QStringList fieldList = OPimContactFields::untrfields( false );
         for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
@@ -173,7 +173,7 @@ namespace {
         }
         qu += " );";
 
-        qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
+        qu += "create table if not exists custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
 
         return qu;
     }

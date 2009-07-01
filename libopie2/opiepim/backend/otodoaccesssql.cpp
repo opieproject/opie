@@ -178,12 +178,12 @@ namespace {
     CreateQuery::~CreateQuery() {}
     QString CreateQuery::query()const {
         QString qu;
-        qu += "create table todolist( uid PRIMARY KEY, categories, completed, ";
+        qu += "create table if not exists todolist( uid PRIMARY KEY, categories, completed, ";
         qu += "description, summary, priority, DueDate, progress ,  state, ";
     // This is the recurrance-stuff .. Exceptions are currently not supported (see OPimRecurrence.cpp) ! (eilers)
     qu += "RType, RWeekdays, RPosition, RFreq, RHasEndDate, EndDate, Created, Exceptions, ";
     qu += "reminders, alarms, maintainer, startdate, completeddate);";
-    qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
+    qu += "create table if not exists custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
         return qu;
     }
 
