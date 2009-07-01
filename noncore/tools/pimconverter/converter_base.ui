@@ -57,17 +57,6 @@
                     <number>2</number>
                 </property>
                 <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>PushButton2</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Upgrade to SQLite3</string>
-                    </property>
-                </widget>
-                <widget>
                     <class>QGroupBox</class>
                     <property stdset="1">
                         <name>name</name>
@@ -317,12 +306,6 @@
         <signal>activated(int)</signal>
         <receiver>converter_base</receiver>
         <slot>selectedDestFormat(int)</slot>
-    </connection>
-    <connection>
-        <sender>PushButton2</sender>
-        <signal>clicked()</signal>
-        <receiver>converter_base</receiver>
-        <slot>start_upgrade()</slot>
     </connection>
     <slot access="public">selectedDatabase(int)</slot>
     <slot access="public">selectedDestFormat(int)</slot>

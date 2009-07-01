@@ -41,7 +41,6 @@ public:
 
     // Slots defined in the ui-description file
     void start_conversion();
-    void start_upgrade();
     void selectedDatabase( int num );
     void selectedDestFormat( int num );
     void selectedSourceFormat( int num );
