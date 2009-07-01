@@ -161,17 +161,19 @@ DateBookWeekView *WeekView::weekViewWidget()
 
 void WeekView::showDay( int day )
 {
-    QDate d=bdate;
+    QDate d = bdate;
 
     // Calculate offset to first day of week.
-    int dayoffset=d.dayOfWeek() % 7;
+    int dayoffset = d.dayOfWeek() % 7;
 
     if( weekStartOnMonday() ) 
         dayoffset--;
 
     day--;
-    d=d.addDays(day-dayoffset);
-//X    emit showDate( d.year(), d.month(), d.day() );
+    d = d.addDays( day - dayoffset );
+
+    setDate( d );
+    showDayView();
 }
 
 void WeekView::dateChanged( QDate &newdate )
