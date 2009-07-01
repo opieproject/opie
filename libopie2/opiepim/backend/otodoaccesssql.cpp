@@ -570,19 +570,21 @@ UIDArray OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
      *
      */
     /* Category */
-    QString cat_query = " categories = '";
-    bool check_cats = false;
-    
+    QString cat_query = "";
     for ( uint cat_nu = 0; cat_nu < categories.count(); ++cat_nu ) {
-        if(categories[cat_nu] != 0) {
-            cat_query += QString::number(categories[cat_nu]);
-            check_cats = true;
+        int cat = categories[cat_nu];
+        if( cat == -1 ) {
+            cat_query += " categories = '' OR";
+            break;
+        }
+        else if( cat != 0 ) {
+            cat_query += " categories LIKE '%" + QString::number( cat ) + "%' OR";
             break;
         }
     }
-
-    if( check_cats ) {
-        query += cat_query + "' AND";
+    if( !cat_query.isEmpty() ) {
+        cat_query.remove( cat_query.length()-2, 2 );
+        query += "(" + cat_query + ") AND";
     }
 
     /* Show only overdue */
