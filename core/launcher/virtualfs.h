@@ -27,6 +27,9 @@
                              Boston, MA 02111-1307, USA.
 */
 
+#ifndef VIRTUALFS_H
+#define VIRTUALFS_H
+
 #include <qtextstream.h>
 #include <qstring.h>
 #include <qlist.h>
@@ -122,3 +125,5 @@ class VirtualTodoListWriter: public VirtualWriter
 public:
     void write( OPimXmlReader &reader );
 };
+
+#endif
