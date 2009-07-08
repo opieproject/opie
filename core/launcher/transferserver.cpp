@@ -308,8 +308,8 @@ bool SyncAuthentication::checkPassword( const QString& password )
 
 
 ServerPI::ServerPI( int socket, QObject *parent, const char* name )
-    : QSocket( parent, name ) , dtp( 0 ), serversocket( 0 ), waitsocket( 0 ),
-      storFileSize(-1)
+    : QSocket( parent, name ) , dtp( 0 ), serversocket( 0 ), 
+      waitvreader( 0 ), waitvwriter( 0 ), waitsocket( 0 ), storFileSize(-1)
 {
     state = Connected;
 
@@ -325,21 +325,20 @@ ServerPI::ServerPI( int socket, QObject *parent, const char* name )
     } else
 #endif
     {
-        connect( this, SIGNAL( readyRead() ), SLOT( read() ) );
-        connect( this, SIGNAL( connectionClosed() ), SLOT( connectionClosed() ) );
-
-        passiv = FALSE;
-        for( int i = 0; i < 4; i++ )
-            wait[i] = FALSE;
-
-        send( "220 Qtopia " QPE_VERSION " FTP Server" ); // No tr
-        state = Wait_USER;
-
         dtp = new ServerDTP( this );
         connect( dtp, SIGNAL( completed() ), SLOT( dtpCompleted() ) );
         connect( dtp, SIGNAL( failed() ), SLOT( dtpFailed() ) );
         connect( dtp, SIGNAL( error(int) ), SLOT( dtpError(int) ) );
 
+        connect( this, SIGNAL( readyRead() ), SLOT( read() ) );
+        connect( this, SIGNAL( connectionClosed() ), SLOT( connectionClosed() ) );
+
+        passiv = FALSE;
+        for( int i = 0; i < ServerDTP::NUM_MODES; i++ )
+            wait[i] = FALSE;
+
+        send( "220 Qtopia " QPE_VERSION " FTP Server" ); // No tr
+        state = Wait_USER;
 
         directory = QDir::currentDirPath();
         directory.cd("/");
@@ -1196,7 +1195,7 @@ void ServerPI::newConnection( int socket )
     else
         waitsocket = socket;
 
-    for( int i = 0; i < 4; i++ )
+    for( int i = 0; i < ServerDTP::NUM_MODES; i++ )
         wait[i] = FALSE;
 }
 
@@ -1225,9 +1224,8 @@ void ServerPI::timerEvent( QTimerEvent * )
 
 ServerDTP::ServerDTP( QObject *parent, const char* name)
   : QSocket( parent, name ), mode( Idle ), createTargzProc( 0 ),
-    retrieveTargzProc( 0 )
+    retrieveTargzProc( 0 ), vreader( 0 ), vwriter( 0 )
 {
-
     connect( this, SIGNAL( connected() ), SLOT( connected() ) );
     connect( this, SIGNAL( connectionClosed() ), SLOT( connectionClosed() ) );
     connect( this, SIGNAL( bytesWritten(int) ), SLOT( bytesWritten(int) ) );
@@ -1371,6 +1369,9 @@ void ServerDTP::connected()
         break;
     case Idle:
         odebug << "connection established but mode set to Idle; BUG!" << oendl;
+        break;
+    case NUM_MODES:
+        // just here to satisfy compiler
         break;
     }
 }

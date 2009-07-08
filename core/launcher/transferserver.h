@@ -73,7 +73,7 @@ public:
     ~ServerDTP();
 
     enum Mode{ Idle = 0, SendFile, SendGzipFile, SendBuffer, SendVirtual,
-        RetrieveFile, RetrieveGzipFile, RetrieveBuffer, RetrieveVirtual };
+        RetrieveFile, RetrieveGzipFile, RetrieveBuffer, RetrieveVirtual, NUM_MODES /* must be last */ };
 
     void sendFile( const QString fn );
     void sendFile( const QString fn, const QHostAddress& host, Q_UINT16 port );
@@ -189,7 +189,7 @@ private:
     Q_UINT16 peerport;
     QHostAddress peeraddress;
     bool passiv;
-    bool wait[4];
+    bool wait[ServerDTP::NUM_MODES];
     ServerDTP *dtp;
     ServerSocket *serversocket;
     QString waitfile;
