@@ -37,8 +37,6 @@
 
 #include <opie2/opimio.h>
 
-#define VIRTUAL_FTP_PATH "/@virtual"
-
 using namespace Opie;
 
 class VirtualReader
@@ -76,10 +74,11 @@ class VirtualFS
 public:
     VirtualFS();
 
+    void init( const QString &basedir );
     void fileListing( const QString &path, QTextStream &stream );
     bool canRead( const QString &file );
     bool canWrite( const QString &file );
-    bool canChangeDir( const QString &path );
+    bool isVirtual( const QString &file );
 
     bool deleteFile( const QString &file );
     VirtualReader *readFile( const QString &file );

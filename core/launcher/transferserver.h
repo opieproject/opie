@@ -201,6 +201,5 @@ private:
     QString lastCommand;
     int waitsocket;
     int storFileSize;
-    QString virtualPath;
     VirtualFS vfs;
 };

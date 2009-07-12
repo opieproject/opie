@@ -69,13 +69,18 @@ VirtualWriter * VirtualFile::writer() const
 VirtualFS::VirtualFS()
 {
     m_files.setAutoDelete( true );
-    m_files.append( new VirtualFile( VIRTUAL_FTP_PATH "/Applications/datebook/datebook.xml", 
+}
+
+void VirtualFS::init( const QString &basedir )
+{
+    m_files.clear();
+    m_files.append( new VirtualFile( basedir + "/Applications/datebook/datebook.xml", 
                                      new VirtualDateBookReader(), 
                                      new VirtualDateBookWriter() ) );
-    m_files.append( new VirtualFile( VIRTUAL_FTP_PATH "/Applications/addressbook/addressbook.xml", 
+    m_files.append( new VirtualFile( basedir + "/Applications/addressbook/addressbook.xml", 
                                      new VirtualContactReader(), 
                                      new VirtualContactWriter() ) );
-    m_files.append( new VirtualFile( VIRTUAL_FTP_PATH "/Applications/todolist/todolist.xml", 
+    m_files.append( new VirtualFile( basedir + "/Applications/todolist/todolist.xml", 
                                      new VirtualTodoListReader(), 
                                      new VirtualTodoListWriter() ) );
 }
@@ -120,6 +125,8 @@ QString VirtualFS::fileListingEntry( const QString &name, bool dir, const QDateT
     else
         s += "-rw-r--r--";
 
+    s += ' ';
+    
     // number of hardlinks
     int subdirs = 1;
 
@@ -171,19 +178,11 @@ bool VirtualFS::canWrite( const QString &file )
     return false;
 }
 
-bool VirtualFS::canChangeDir( const QString &path )
+bool VirtualFS::isVirtual( const QString &file )
 {
     for ( QListIterator<VirtualFile> it( m_files ); it.current(); ++it ) {
-        QString filePath = it.current()->filePath();
-        if( filePath.startsWith( path ) ) {
-            filePath = filePath.mid( path.length() );
-            QStringList fl = QStringList::split( '/', filePath );
-            if( fl.count() > 0 ) {
-                return true;
-            }
-            else
-                return false;
-        }
+        if( it.current()->filePath() == file )
+            return true;
     }
     return false;
 }

@@ -317,6 +317,9 @@ ServerPI::ServerPI( int socket, QObject *parent, const char* name )
 
     peerport = peerPort();
     peeraddress = peerAddress();
+    
+    QString home = getenv( "HOME" );
+    vfs.init( home );
 
 #ifndef INSECURE
     if ( !SyncAuthentication::isAuthorized(peeraddress) ) {
@@ -500,25 +503,11 @@ void ServerPI::process( const QString& message )
     // change working directory (CWD)
     else if ( cmd == "CWD" ) {
         if ( !args.isEmpty() ) {
-            QString dirPath = absFilePath( args );
-            if ( dirPath.startsWith( VIRTUAL_FTP_PATH ) ) {
-                if ( vfs.canChangeDir( dirPath ) ) {
-                    virtualPath = dirPath;
-                    if( virtualPath.right(1) == "/" )
-                        virtualPath = virtualPath.left( virtualPath.length() - 1 );
-                    send( "250 Requested file action okay, completed" ); // No tr
-                }
-                else
-                    send( "550 Requested action not taken" ); // No tr
+            if ( directory.cd( args, TRUE ) ) {
+                send( "250 Requested file action okay, completed" ); // No tr
             }
-            else {
-                if ( directory.cd( args, TRUE ) ) {
-                    virtualPath = QString::null;
-                    send( "250 Requested file action okay, completed" ); // No tr
-                }
-                else
-                    send( "550 Requested action not taken" ); // No tr
-            }
+            else
+                send( "550 Requested action not taken" ); // No tr
         }
         else
             send( "500 Syntax error, command unrecognized" ); // No tr
@@ -526,16 +515,10 @@ void ServerPI::process( const QString& message )
 
     // change to parent directory (CDUP)
     else if ( cmd == "CDUP" ) {
-        if ( virtualPath.isEmpty() ) {
-            if ( directory.cdUp() )
-                send( "250 Requested file action okay, completed" ); // No tr
-            else
-                send( "550 Requested action not taken" ); // No tr
-        }
-        else {
-            virtualPath = absFilePath("..");
+        if ( directory.cdUp() )
             send( "250 Requested file action okay, completed" ); // No tr
-        }
+        else
+            send( "550 Requested action not taken" ); // No tr
     }
 
     // structure mount (SMNT)
@@ -603,7 +586,7 @@ void ServerPI::process( const QString& message )
     else if ( cmd == "RETR" ) {
         if ( !args.isEmpty() ) {
             QString filePath = absFilePath( args );
-            if ( !filePath.startsWith( VIRTUAL_FTP_PATH ) ) {
+            if ( !vfs.isVirtual( filePath ) ) {
                 if ( checkReadFile( filePath )
                         || backupRestoreGzip( filePath ) ) {
                     send( "150 File status okay" ); // No tr
@@ -632,7 +615,7 @@ void ServerPI::process( const QString& message )
     else if ( cmd == "STOR" ) {
         if ( !args.isEmpty() ) {
             QString filePath = absFilePath( args );
-            if ( !filePath.startsWith( VIRTUAL_FTP_PATH ) ) {
+            if ( !vfs.isVirtual( filePath ) ) {
                 if ( checkWriteFile( filePath ) ) {
                     send( "150 File status okay" ); // No tr
                     retrieveFile( filePath );
@@ -684,8 +667,9 @@ void ServerPI::process( const QString& message )
         if ( args.isEmpty() )
             send( "500 Syntax error, command unrecognized" ); // No tr
         else {
-            if ( virtualPath.isEmpty() && !args.startsWith( VIRTUAL_FTP_PATH ) ) {
-                QFile file( absFilePath( args ) );
+            QString filePath = absFilePath( args );
+            if ( !vfs.isVirtual( filePath ) ) {
+                QFile file( filePath );
                 if ( file.exists() ) {
                     send( "350 File exists, ready for destination name" ); // No tr
                     renameFrom = absFilePath( args );
@@ -700,21 +684,22 @@ void ServerPI::process( const QString& message )
 
     // rename to (RNTO)
     else if ( cmd == "RNTO" ) {
-        if ( virtualPath.isEmpty() && !args.startsWith( VIRTUAL_FTP_PATH ) ) {
-            if ( lastCommand != "RNFR" )
-                send( "503 Bad sequence of commands" ); // No tr
-            else if ( args.isEmpty() )
-                send( "500 Syntax error, command unrecognized" ); // No tr
-            else {
-                QDir dir( absFilePath( args ) );
-                if ( dir.rename( renameFrom, absFilePath( args ), TRUE ) )
+        if ( lastCommand != "RNFR" )
+            send( "503 Bad sequence of commands" ); // No tr
+        else if ( args.isEmpty() )
+            send( "500 Syntax error, command unrecognized" ); // No tr
+        else {
+            QString filePath = absFilePath( args );
+            if ( !vfs.isVirtual( filePath ) ) {
+                QDir dir( filePath );
+                if ( dir.rename( renameFrom, filePath, TRUE ) )
                     send( "250 Requested file action okay, completed." ); // No tr
                 else
                     send( "550 Requested action not taken" ); // No tr
             }
+            else
+                send( "550 requested action not taken" ); // no tr
         }
-        else
-            send( "550 Requested action not taken" ); // No tr
     }
 
     // abort (ABOR)
@@ -731,8 +716,9 @@ void ServerPI::process( const QString& message )
         if ( args.isEmpty() )
             send( "500 Syntax error, command unrecognized" ); // No tr
         else {
-            if ( virtualPath.isEmpty() && !args.startsWith( VIRTUAL_FTP_PATH ) ) {
-                QFile file( absFilePath( args ) ) ;
+            QString filePath = absFilePath( args );
+            if ( !vfs.isVirtual( filePath ) ) {
+                QFile file( filePath ) ;
                 if ( file.remove() ) {
                     send( "250 Requested file action okay, completed" ); // No tr
                     QCopEnvelope e("QPE/System", "linkChanged(QString)" );
@@ -742,7 +728,7 @@ void ServerPI::process( const QString& message )
                     send( "550 Requested action not taken" ); // No tr
             }
             else {
-                if ( vfs.deleteFile( args ) )
+                if ( vfs.deleteFile( filePath ) )
                     send( "250 Requested file action okay, completed" ); // No tr
                 else
                     send( "550 Requested action not taken" ); // No tr
@@ -780,10 +766,7 @@ void ServerPI::process( const QString& message )
 
     // print working directory (PWD)
     else if ( cmd == "PWD" ) {
-        if ( virtualPath.isEmpty() )
-            send( "257 \"" + directory.path() +"\"" );
-        else
-            send( "257 \"" + virtualPath +"\"" );
+        send( "257 \"" + directory.path() +"\"" );
     }
 
     // list (LIST)
@@ -800,7 +783,7 @@ void ServerPI::process( const QString& message )
     // size (SIZE)
     else if ( cmd == "SIZE" ) {
         QString filePath = absFilePath( args );
-        if ( !filePath.startsWith( VIRTUAL_FTP_PATH ) ) {
+        if ( !vfs.isVirtual( filePath ) ) {
             QFileInfo fi( filePath );
             bool gzipfile = backupRestoreGzip( filePath );
             if ( !fi.exists() && !gzipfile )
@@ -1006,52 +989,52 @@ bool ServerPI::sendList( const QString& arg )
     QTextStream ts( &buffer );
     QString fn = arg;
 
-    if ( virtualPath.isEmpty() && !fn.startsWith( VIRTUAL_FTP_PATH ) ) {
-        // Real path
-        if ( fn.isEmpty() )
-            fn = directory.path();
+    // Real path
+    if ( fn.isEmpty() )
+        fn = directory.path();
 
-        QFileInfo fi( fn );
-        if ( !fi.exists() ) return FALSE;
+    QFileInfo fi( fn );
+    if ( !fi.exists() ) return FALSE;
 
+    if ( fi.isFile() ) {
         // return file listing
-        if ( fi.isFile() ) {
-            ts << fileListing( &fi ) << endl;
-        }
-
-        // return directory listing
-        else if ( fi.isDir() ) {
-            QDir dir( fn );
-            const QFileInfoList *list = dir.entryInfoList( QDir::All | QDir::Hidden );
-
-            QFileInfoListIterator it( *list );
-            QFileInfo *info;
-
-            unsigned long total = 0;
-            while ( ( info = it.current() ) ) {
-                if ( info->fileName() != "." && info->fileName() != ".." )
-                    total += info->size();
-                ++it;
-            }
-
-            ts << "total " << QString::number( total / 1024 ) << endl; // No tr
-
-            it.toFirst();
-            while ( ( info = it.current() ) ) {
-                if ( info->fileName() == "." || info->fileName() == ".." ) {
-                    ++it;
-                    continue;
-                }
-                ts << fileListing( info ) << endl;
-                ++it;
-            }
-        }
+        ts << fileListing( &fi ) << endl;
     }
-    else {
-        // Virtual path
-        if ( fn.isEmpty() )
-            fn = virtualPath;
-        vfs.fileListing( fn, ts );
+    else if ( fi.isDir() ) {
+        // return directory listing
+        QDir dir( fn );
+        const QFileInfoList *list = dir.entryInfoList( QDir::All | QDir::Hidden );
+
+        QFileInfoListIterator it( *list );
+        QFileInfo *info;
+
+        unsigned long total = 0;
+        while ( ( info = it.current() ) ) {
+            if ( info->fileName() != "." && info->fileName() != ".." )
+                total += info->size();
+            ++it;
+        }
+
+        ts << "total " << QString::number( total / 1024 ) << endl; // No tr
+
+        it.toFirst();
+        while ( ( info = it.current() ) ) {
+            if ( info->fileName() == "." || info->fileName() == ".." ) {
+                ++it;
+                continue;
+            }
+            else if( vfs.isVirtual( info->absFilePath() ) ) {
+                // in case of virtual files that also exist physically,
+                // the file will be listed below instead
+                ++it;
+                continue;
+            }
+            ts << fileListing( info ) << endl;
+            ++it;
+        }
+        
+        // List virtual files, if any
+        vfs.fileListing( fi.absFilePath(), ts );
     }
 
     if ( passiv ) {
@@ -1204,12 +1187,8 @@ QString ServerPI::absFilePath( const QString& file )
     if ( file.isEmpty() ) return file;
 
     QString filepath( file );
-    if ( file[0] != "/" ) {
-        if ( virtualPath.isEmpty() )
-            filepath = directory.path() + "/" + file;
-        else
-            filepath = QDir::cleanDirPath( virtualPath + "/" + file );            
-    }
+    if ( file[0] != "/" )
+        filepath = directory.path() + "/" + file;
 
     return filepath;
 }
