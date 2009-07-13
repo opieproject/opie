@@ -100,6 +100,7 @@ struct OPimEvent::Data : public QShared
     {
         delete manager;
         delete recur;
+        delete child;
     }
     QString description;
     QString location;

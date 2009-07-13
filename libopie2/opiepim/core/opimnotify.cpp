@@ -332,6 +332,16 @@ OPimReminder::OPimReminder( const OPimReminder& rem )
 }
 
 
+OPimReminder::~OPimReminder()
+{
+    if ( data->deref() )
+    {
+        delete data;
+        data = 0l;
+    }
+}
+
+
 OPimReminder& OPimReminder::operator=( const OPimReminder& rem )
 {
     OPimNotify::operator=( rem );

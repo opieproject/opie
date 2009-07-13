@@ -160,6 +160,7 @@ class OPimReminder : public OPimNotify
     OPimReminder( int uid = 0, const QDateTime& start = QDateTime(),
                   int duration = 0, int parent = 0 );
     OPimReminder( const OPimReminder& );
+    ~OPimReminder();
     OPimReminder &operator=( const OPimReminder& );
 
     QString type() const;
