@@ -230,6 +230,7 @@ void VirtualDateBookReader::read( QTextStream &stream )
         odebug << "Adding uid: " << uidList[i] << "" << oendl;
         OPimRecord* rec = sourceDB->record( uidList[i] );
         dest.add( *OPimEvent::safeCast( rec ) );
+        delete rec;
     }
 
     delete sourceDB;
@@ -279,6 +280,7 @@ void VirtualContactReader::read( QTextStream &stream )
         odebug << "Adding uid: " << uidList[i] << "" << oendl;
         OPimRecord* rec = sourceDB->record( uidList[i] );
         dest.add( *OPimContact::safeCast( rec ) );
+        delete rec;
     }
     
     delete sourceDB;
@@ -329,6 +331,7 @@ void VirtualTodoListReader::read( QTextStream &stream )
         odebug << "Adding uid: " << uidList[i] << "" << oendl;
         OPimRecord* rec = sourceDB->record( uidList[i] );
         dest.add( *OPimTodo::safeCast( rec ) );
+        delete rec;
     }
     
     delete sourceDB;
