@@ -30,8 +30,11 @@
 #include "virtualfs.h"
 
 #include <opie2/odatebookaccessbackend_xml.h>
-#include <opie2/opimaccessfactory.h>
+#include <opie2/ocontactaccessbackend_xml.h>
+#include <opie2/otodoaccessxml.h>
+#include <opie2/ocontactaccess.h>
 #include <opie2/odatebookaccess.h>
+#include <opie2/otodoaccess.h>
 
 using namespace Opie;
 
@@ -219,7 +222,7 @@ VirtualWriter *VirtualFS::writeFile( const QString &file )
 
 void VirtualDateBookReader::read( QTextStream &stream )
 {
-    ODateBookAccess* sourceDB = OPimAccessFactory<ODateBookAccess>::create( OPimGlobal::DATEBOOK, OPimGlobal::DEFAULT, "sync" );
+    ODateBookAccess *sourceDB = new ODateBookAccess();
     sourceDB->load();
     ODateBookAccessBackend_XML dest( QString::null );
     
@@ -244,7 +247,7 @@ void VirtualDateBookReader::read( QTextStream &stream )
 
 void VirtualDateBookWriter::write( OPimXmlReader &reader )
 {
-    ODateBookAccess* destDB = OPimAccessFactory<ODateBookAccess>::create( OPimGlobal::DATEBOOK, OPimGlobal::DEFAULT, QString::null );
+    ODateBookAccess *destDB = new ODateBookAccess();
     destDB->clear();
     ODateBookAccessBackend_XML source( QString::null );
     
@@ -269,7 +272,7 @@ void VirtualDateBookWriter::write( OPimXmlReader &reader )
 
 void VirtualContactReader::read( QTextStream &stream )
 {
-    OPimContactAccess* sourceDB = OPimAccessFactory<OPimContactAccess>::create( OPimGlobal::CONTACTLIST, OPimGlobal::DEFAULT, "sync" );
+    OPimContactAccess *sourceDB = new OPimContactAccess( "sync" );
     sourceDB->load();
     OPimContactAccessBackend_XML dest( QString::null );
     
@@ -295,7 +298,7 @@ void VirtualContactReader::read( QTextStream &stream )
 void VirtualContactWriter::write( OPimXmlReader &reader )
 {
     // FIXME need a proper way of disabling the journal here
-    OPimContactAccess* destDB = OPimAccessFactory<OPimContactAccess>::create( OPimGlobal::CONTACTLIST, OPimGlobal::DEFAULT, "sync" );
+    OPimContactAccess *destDB = new OPimContactAccess( "sync" );
     destDB->clear();
     OPimContactAccessBackend_XML source( QString::null );
     
@@ -320,7 +323,7 @@ void VirtualContactWriter::write( OPimXmlReader &reader )
 
 void VirtualTodoListReader::read( QTextStream &stream )
 {
-    OPimTodoAccess* sourceDB = OPimAccessFactory<OPimTodoAccess>::create( OPimGlobal::TODOLIST, OPimGlobal::DEFAULT, "sync" );
+    OPimTodoAccess *sourceDB = new OPimTodoAccess();
     sourceDB->load();
     OPimTodoAccessXML dest( QString::null );
     
@@ -345,7 +348,7 @@ void VirtualTodoListReader::read( QTextStream &stream )
 
 void VirtualTodoListWriter::write( OPimXmlReader &reader )
 {
-    OPimTodoAccess* destDB = OPimAccessFactory<OPimTodoAccess>::create( OPimGlobal::TODOLIST, OPimGlobal::DEFAULT, QString::null );
+    OPimTodoAccess *destDB = new OPimTodoAccess();
     destDB->load(); // need to call this or internal opened flag won't be set
     destDB->clear();
     OPimTodoAccessXML source( QString::null );
