@@ -32,6 +32,7 @@ class Wait : public QWidget
 {
 public:
     Wait( QWidget *parent );
+    ~Wait();
     void setWaiting( bool w );
     void paintEvent( QPaintEvent * );
     static Wait *getWaitObject();

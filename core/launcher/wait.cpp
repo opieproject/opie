@@ -52,6 +52,11 @@ Wait::Wait( QWidget *parent ) : QWidget( parent ),
     hide();
 }
 
+Wait::~Wait()
+{
+    delete m_centralWait;
+}
+
 
 Wait *Wait::getWaitObject()
 {
