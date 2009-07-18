@@ -35,6 +35,7 @@
 #include <qtextview.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>
+#include <qstringlist.h>
 
 using namespace Opie::Ui;
 ModulesInfo::ModulesInfo( QWidget* parent,  const char* name, WFlags fl )
@@ -125,6 +126,17 @@ void ModulesInfo::updateData()
             QString qmodsize = QString::number( modsize ).rightJustify( 6, ' ' );
             QString qusecount = QString::number( usecount ).rightJustify( 2, ' ' );
             QString qusage = QString( usage );
+            // Remove module state, memory offset and any further columns
+            int pos = qusage.find( ' ', 2 );
+            if( pos > -1 )
+                qusage = qusage.left( pos );
+            if( qusage == " -" ) {
+                qusage = "";
+            }
+            else {
+                // Add some spacing and remove blank entries at the same time
+                qusage = QStringList::split( ',', qusage ).join ( ", " );
+            }
 
             newitem = new OListViewItem( ModulesView, qmodname, qmodsize, qusecount, qusage );
             if ( qmodname == selectedmod )
