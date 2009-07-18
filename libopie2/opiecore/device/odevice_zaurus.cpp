@@ -274,6 +274,12 @@ void Zaurus::init(const QString& cpu_info)
         d->m_modelstr = "Unknown Zaurus";
     }
 
+    // Ensure vendor is set
+    if( d->m_vendor == Vendor_Unknown ) {
+        d->m_vendorstr = "SHARP";
+        d->m_vendor = Vendor_Sharp;
+    }
+
     // set path to backlight device in kernel 2.6
     switch ( d->m_model )
     {
