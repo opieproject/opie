@@ -27,18 +27,18 @@ class PowerStatus
 {
 public:
     PowerStatus() {
-	ac = Offline;
-	bs = NotPresent;
-	bbs = NotPresent;
-	percentRemain = -1;
-	secsRemain = -1;
+        ac = Offline;
+        bs = NotPresent;
+        bbs = NotPresent;
+        percentRemain = -1;
+        secsRemain = -1;
     }
 
     enum ACStatus { Offline, Online, Backup };
     ACStatus acStatus() const { return ac; }
 
     enum BatteryStatus { High=0x01, Low=0x02, VeryLow=0x04, Critical=0x08,
-			 Charging=0x10, NotPresent=0x20 };
+                         Charging=0x10, NotPresent=0x20 };
     BatteryStatus batteryStatus() const { return bs; }
     BatteryStatus backupBatteryStatus() const { return bbs; }
 
@@ -47,9 +47,9 @@ public:
     int batteryTimeRemaining() const { return secsRemain; }
 
     bool operator!=( const PowerStatus &ps ) {
-	return  (ps.ac != ac) || (ps.bs != bs) || (ps.bbs != bbs) ||
-		(ps.percentRemain != percentRemain) ||
-		(ps.secsRemain != secsRemain );
+        return  (ps.ac != ac) || (ps.bs != bs) || (ps.bbs != bbs) ||
+                (ps.percentRemain != percentRemain) ||
+                (ps.secsRemain != secsRemain );
     }
 
 private:

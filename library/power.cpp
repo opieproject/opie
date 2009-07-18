@@ -45,15 +45,15 @@ PowerStatusManager::PowerStatusManager()
     ps = new PowerStatus;
     FILE *f = fopen("/proc/apm", "r");
     if ( f ) {
-	fclose(f);
-	haveProcApm = TRUE;
+        fclose(f);
+        haveProcApm = TRUE;
     }
 }
 
 const PowerStatus &PowerStatusManager::readStatus()
 {
     if ( !powerManager )
-	(void)new PowerStatusManager;
+        (void)new PowerStatusManager;
 
     powerManager->getStatus();
 
@@ -73,60 +73,60 @@ bool PowerStatusManager::getProcApmStatus( int &ac, int &bs, int &bf, int &pc, i
 
     FILE *f = fopen("/proc/apm", "r");
     if ( f ) {
-	//I 1.13 1.2 0x02 0x00 0xff 0xff 49% 147 sec
-	char u;
-	fscanf(f, "%*[^ ] %*d.%*d 0x%*x 0x%x 0x%x 0x%x %d%% %i %c",
-		&ac, &bs, &bf, &pc, &sec, &u);
-	fclose(f);
-	switch ( u ) {
-	    case 'm': sec *= 60;
-	    case 's': break; // ok
-	    default: sec = -1; // unknown
-	}
+        //I 1.13 1.2 0x02 0x00 0xff 0xff 49% 147 sec
+        char u;
+        fscanf(f, "%*[^ ] %*d.%*d 0x%*x 0x%x 0x%x 0x%x %d%% %i %c",
+                &ac, &bs, &bf, &pc, &sec, &u);
+        fclose(f);
+        switch ( u ) {
+            case 'm': sec *= 60;
+            case 's': break; // ok
+            default: sec = -1; // unknown
+        }
 
-	// extract data
-	switch ( bs ) {
-	    case 0x00:
-		ps->bs = PowerStatus::High;
-		break;
-	    case 0x01:
-		ps->bs = PowerStatus::Low;
-		break;
-	    case 0x7f:
-		ps->bs = PowerStatus::VeryLow;
-		break;
-	    case 0x02:
-		ps->bs = PowerStatus::Critical;
-		break;
-	    case 0x03:
-		ps->bs = PowerStatus::Charging;
-		break;
-	    case 0x04:
-	    case 0xff: // 0xff is Unknown but we map to NotPresent
-	    default:
-		ps->bs = PowerStatus::NotPresent;
-		break;
-	}
+        // extract data
+        switch ( bs ) {
+            case 0x00:
+                ps->bs = PowerStatus::High;
+                break;
+            case 0x01:
+                ps->bs = PowerStatus::Low;
+                break;
+            case 0x7f:
+                ps->bs = PowerStatus::VeryLow;
+                break;
+            case 0x02:
+                ps->bs = PowerStatus::Critical;
+                break;
+            case 0x03:
+                ps->bs = PowerStatus::Charging;
+                break;
+            case 0x04:
+            case 0xff: // 0xff is Unknown but we map to NotPresent
+            default:
+                ps->bs = PowerStatus::NotPresent;
+                break;
+        }
 
-	switch ( ac ) {
-	    case 0x00:
-		ps->ac = PowerStatus::Offline;
-		break;
-	    case 0x01:
-		ps->ac = PowerStatus::Online;
-		break;
-	    case 0x02:
-		ps->ac = PowerStatus::Backup;
-		break;
-	}
+        switch ( ac ) {
+            case 0x00:
+                ps->ac = PowerStatus::Offline;
+                break;
+            case 0x01:
+                ps->ac = PowerStatus::Online;
+                break;
+            case 0x02:
+                ps->ac = PowerStatus::Backup;
+                break;
+        }
 
-	if ( pc > 100 ) pc = 100;
-	if ( pc < 0 ) pc = 0;
+        if ( pc > 100 ) pc = 100;
+        if ( pc < 0 ) pc = 0;
 
-	ps->percentRemain = pc;
-	ps->secsRemain = sec;
+        ps->percentRemain = pc;
+        ps->secsRemain = sec;
 
-	ok = true;
+        ok = true;
     }
 
     return ok;
@@ -143,29 +143,29 @@ void PowerStatusManager::getStatus()
     // constructor and we use /proc/apm instead
     int ac, bs, bf, pc, sec;
     if ( haveProcApm )
-	usedApm = getProcApmStatus( ac, bs, bf, pc, sec );
+        usedApm = getProcApmStatus( ac, bs, bf, pc, sec );
 
     if ( !usedApm ) {
 #ifdef QT_QWS_IPAQ_NO_APM
-	int fd;
-	int err;
-	struct bat_dev batt_info;
+        int fd;
+        int err;
+        struct bat_dev batt_info;
 
-	memset(&batt_info, 0, sizeof(batt_info));
+        memset(&batt_info, 0, sizeof(batt_info));
 
-	fd = ::open("/dev/ts",O_RDONLY);
-	if( fd < 0 )
-	    return;
+        fd = ::open("/dev/ts",O_RDONLY);
+        if( fd < 0 )
+            return;
 
-	ioctl(fd, GET_BATTERY_STATUS, &batt_info);
-	ac_status = batt_info.ac_status;
-	ps->percentRemain = ( 425 * batt_info.batt1_voltage ) / 1000 - 298; // from h3600_ts.c
-	ps->secsRemain = -1; // seconds is bogus on iPAQ
-	::close (fd);
+        ioctl(fd, GET_BATTERY_STATUS, &batt_info);
+        ac_status = batt_info.ac_status;
+        ps->percentRemain = ( 425 * batt_info.batt1_voltage ) / 1000 - 298; // from h3600_ts.c
+        ps->secsRemain = -1; // seconds is bogus on iPAQ
+        ::close (fd);
 #else
-	ps->percentRemain = 100;
-	ps->secsRemain = -1;
-	ps->percentAccurate = FALSE;
+        ps->percentRemain = 100;
+        ps->secsRemain = -1;
+        ps->percentAccurate = FALSE;
 #endif
     }
 }
