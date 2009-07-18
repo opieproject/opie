@@ -29,6 +29,7 @@ public:
 protected:
     void mousePressEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);
+    void doAutoSize();
 
 public slots:
     void message(const QCString &message, const QByteArray &data);

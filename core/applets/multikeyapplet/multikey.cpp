@@ -33,9 +33,18 @@ Multikey::Multikey(QWidget *parent) : QLabel(parent), popupMenu(this), current("
     QPEApplication::setStylusOperation(this, QPEApplication::RightOnHold);
     lang = 0;
     QCopEnvelope e("MultiKey/Keyboard", "getmultikey()");
+
+    doAutoSize();
     setText("EN");
     popupMenu.insertItem("EN", 0);
     show();
+}
+
+void Multikey::doAutoSize()
+{
+    QFontMetrics fm( font() );
+    setMinimumWidth( fm.width( "AA" ) );
+    setAlignment( AlignHCenter | AlignVCenter );
 }
 
 void Multikey::mousePressEvent(QMouseEvent *ev)
