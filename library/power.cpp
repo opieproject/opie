@@ -231,7 +231,7 @@ void PowerStatusManager::getStatus()
 
     ps->percentAccurate = TRUE;
 
-//    gotStatus = getSysFsStatus();
+    gotStatus = getSysFsStatus();
 
     // Some iPAQ kernel builds don't have APM. If this is not the case we
     // save ourselves an ioctl by testing if /proc/apm exists in the
