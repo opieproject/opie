@@ -24,15 +24,23 @@
 #include "custom.h"
 #endif
 
+#include <qmap.h>
+
+#include <opie2/odebug.h>
+
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
+#include <cmath>
 
 #ifdef QT_QWS_IPAQ_NO_APM
 #include <linux/h3600_ts.h>
 #endif
+
+#include <sysfs/libsysfs.h>
+
 
 PowerStatusManager *PowerStatusManager::powerManager = 0;
 PowerStatus *PowerStatusManager::ps = 0;
@@ -60,11 +68,96 @@ const PowerStatus &PowerStatusManager::readStatus()
     return *ps;
 }
 
+// Standard sysfs reader
+bool PowerStatusManager::getSysFsStatus()
+{
+    struct sysfs_class *cls = sysfs_open_class( "power_supply" );
+    if( !cls )
+        return false;
+
+    ps->bs = PowerStatus::NotPresent;    
+ 
+    QStringList props;
+    props += "type";
+    props += "charge_full";
+    props += "charge_now";
+    props += "status";
+    props += "online";
+    
+    bool ok = false;
+    struct dlist *cdevs = sysfs_get_class_devices( cls );
+    if (cdevs != NULL) {
+        struct sysfs_class_device *cdev = NULL;
+        dlist_for_each_data(cdevs, cdev, struct sysfs_class_device) {
+
+            struct dlist *attrlist = sysfs_get_classdev_attributes( cdev );
+            if (attrlist != NULL) {
+                QMap<QString,QString> propmap;
+                struct sysfs_attribute *attr = NULL;
+                dlist_for_each_data(attrlist, attr, struct sysfs_attribute) {
+                    if( props.findIndex( attr->name ) > -1 ) {
+                        if( sysfs_read_attribute( attr ) == 0 )
+                            propmap.insert( attr->name, QString( attr->value ).stripWhiteSpace() );
+                    }
+                }
+
+                ok = true;
+                if( propmap["type"] == "Battery" ) {
+                    int charge_full = propmap["charge_full"].toInt();
+                    int charge_now = propmap["charge_now"].toInt();
+                    int pc;
+                    if( charge_now == charge_full ) {
+                        ps->bs = PowerStatus::High;
+                        pc = 100;
+                    }
+                    else {
+                        pc = round( ( (double)charge_now / charge_full ) * 100 );
+                        if ( pc > 100 ) pc = 100;
+                        if ( pc < 0 ) pc = 0;
+
+                        QString status = propmap["status"];
+                        if( status == "Charging" ) {
+                            ps->bs = PowerStatus::Charging;
+                        }
+                        else {
+                            if( pc > 50 )
+                                ps->bs = PowerStatus::High;
+                            else if( pc > 35 )
+                                ps->bs = PowerStatus::Low;
+                            else if( pc > 20 )
+                                ps->bs = PowerStatus::VeryLow;
+                            else
+                                ps->bs = PowerStatus::Critical;
+                        }
+                    }
+                    
+                    ps->percentRemain = pc;
+                }
+                else if( propmap["type"] == "Mains" ) {
+                    int ac = propmap["online"].toInt();
+                    if( ac )
+                        ps->ac = PowerStatus::Online;
+                    else
+                        ps->ac = PowerStatus::Offline;
+                }
+            }
+        }
+    }
+
+    // FIXME need a way of determining time remaining
+    ps->secsRemain = -1;
+
+    sysfs_close_class( cls );
+
+    return ok;
+}
+
 // Standard /proc/apm reader
-bool PowerStatusManager::getProcApmStatus( int &ac, int &bs, int &bf, int &pc, int &sec )
+bool PowerStatusManager::getProcApmStatus()
 {
     bool ok = false;
 
+    int ac, bs, bf, pc, sec;
     ac = 0xff;
     bs = 0xff;
     bf = 0xff;
@@ -134,18 +227,19 @@ bool PowerStatusManager::getProcApmStatus( int &ac, int &bs, int &bf, int &pc, i
 
 void PowerStatusManager::getStatus()
 {
-    bool usedApm = FALSE;
+    bool gotStatus = FALSE;
 
     ps->percentAccurate = TRUE;
+
+//    gotStatus = getSysFsStatus();
 
     // Some iPAQ kernel builds don't have APM. If this is not the case we
     // save ourselves an ioctl by testing if /proc/apm exists in the
     // constructor and we use /proc/apm instead
-    int ac, bs, bf, pc, sec;
-    if ( haveProcApm )
-        usedApm = getProcApmStatus( ac, bs, bf, pc, sec );
+    if ( (!gotStatus) && haveProcApm )
+        gotStatus = getProcApmStatus();
 
-    if ( !usedApm ) {
+    if ( !gotStatus ) {
 #ifdef QT_QWS_IPAQ_NO_APM
         int fd;
         int err;

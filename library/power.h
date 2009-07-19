@@ -72,7 +72,8 @@ public:
     static const PowerStatus &readStatus();
 
 protected:
-    bool getProcApmStatus( int &ac, int &bs, int &bf, int &pc, int &sec );
+    bool getProcApmStatus();
+    bool getSysFsStatus();
     void getStatus();
 
 private:
