@@ -75,7 +75,7 @@ void BatteryMeter::mouseReleaseEvent( QMouseEvent* /*e*/ ) {
         batteryView->hide();
     } else {
         if ( !batteryView ) {
-            batteryView = new BatteryStatus( ps, 0, WStyle_StaysOnTop | WType_Popup );
+            batteryView = new BatteryStatus( ps, this, WStyle_StaysOnTop | WType_Popup );
             batteryView->setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
         }
 
