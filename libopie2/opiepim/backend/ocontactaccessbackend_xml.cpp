@@ -71,21 +71,21 @@ OPimContactAccessBackend_XML::OPimContactAccessBackend_XML ( const QString& appn
     m_appName = appname;
 
     if( appname.isEmpty() ) {
-        // This object will be for stream loading/saving only
+        // No journal
         m_journalName = QString::null;
-        m_fileName = QString::null;
     }
     else {
-        /* Set journalfile name ... */
+        // Set journal file name
         m_journalName = getenv("HOME");
         m_journalName +="/.abjournal" + appname;
 
-        /* Expecting to access the default filename if nothing else is set */
-        if ( filename.isEmpty() )
-            m_fileName = Global::applicationFileName( "addressbook","addressbook.xml" );
-        else
-            m_fileName = filename;
     }
+
+    // Expecting to access the default filename if nothing else is set
+    if ( filename.isEmpty() )
+        m_fileName = Global::applicationFileName( "addressbook","addressbook.xml" );
+    else
+        m_fileName = filename;
 }
 
 bool OPimContactAccessBackend_XML::save()

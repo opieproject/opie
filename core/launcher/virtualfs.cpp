@@ -272,7 +272,7 @@ void VirtualDateBookWriter::write( OPimXmlReader &reader )
 
 void VirtualContactReader::read( QTextStream &stream )
 {
-    OPimContactAccess *sourceDB = new OPimContactAccess( "sync" );
+    OPimContactAccess *sourceDB = new OPimContactAccess();
     sourceDB->load();
     OPimContactAccessBackend_XML dest( QString::null );
     
@@ -297,8 +297,7 @@ void VirtualContactReader::read( QTextStream &stream )
 
 void VirtualContactWriter::write( OPimXmlReader &reader )
 {
-    // FIXME need a proper way of disabling the journal here
-    OPimContactAccess *destDB = new OPimContactAccess( "sync" );
+    OPimContactAccess *destDB = new OPimContactAccess();
     destDB->clear();
     OPimContactAccessBackend_XML source( QString::null );
     

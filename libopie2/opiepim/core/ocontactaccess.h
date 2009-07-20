@@ -102,7 +102,7 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
 	/**
          * Create Database with contacts (addressbook).
 	 * @param appname Name of application which wants access to the database
-	 * (i.e. "todolist")
+	 * (e.g. "addressbook"). Specify null to disable journal.
 	 * @param filename The name of the database file. If not set, the default one
 	 * is used.
 	 * @param backend Pointer to an alternative Backend. If not set, we will use
@@ -113,7 +113,7 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
 	 * to react itself, it should be disabled by setting it to <b>false</b>
 	 * @see OPimContactAccessBackend
 	 */
-	OPimContactAccess (const QString appname, const QString filename = 0l,
+	OPimContactAccess (const QString appname = 0l, const QString filename = 0l,
                            OPimContactAccessBackend* backend = 0l, bool handlesync = true);
         ~OPimContactAccess ();
 
