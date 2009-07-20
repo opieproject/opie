@@ -31,6 +31,7 @@ AddressBookPluginWidget::AddressBookPluginWidget( QWidget *parent,  const char* 
     layoutTodo = 0l;
 
     m_contactdb = new Opie::OPimContactAccess("addressplugin");
+    m_contactdb->load();
 
     connect( m_contactdb, SIGNAL( signalChanged(const Opie::OPimContactAccess*) ),
 	     this, SLOT( refresh(const Opie::OPimContactAccess*) ) );

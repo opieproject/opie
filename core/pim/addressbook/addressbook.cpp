@@ -243,6 +243,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 	Opie::OPimContactAccessBackend* vcard_backend = new Opie::OPimContactAccessBackend_VCard( QString::null,
 									 filename );
 	Opie::OPimContactAccess* access = new Opie::OPimContactAccess ( "addressbook", QString::null , vcard_backend, true );
+    access->load();
 	Opie::OPimContactAccess::List allList = access->allRecords();
 	odebug << "Found number of contacts in File: " << allList.count() << oendl;
 
@@ -404,6 +405,7 @@ void AddressbookWindow::slotItemBeam()
 		Opie::OPimContactAccessBackend* vcard_backend = new Opie::OPimContactAccessBackend_VCard( QString::null,
 											beamFilename );
 		Opie::OPimContactAccess* access = new Opie::OPimContactAccess ( "addressbook", QString::null , vcard_backend, true );
+		access->load();
 		Opie::OPimContactAccess::List allList = access->allRecords();
 		Opie::OPimContactAccess::List::Iterator it = allList.begin();  // Just take first
 		c = *it;

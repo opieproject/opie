@@ -85,9 +85,6 @@ OPimContactAccessBackend_XML::OPimContactAccessBackend_XML ( const QString& appn
             m_fileName = Global::applicationFileName( "addressbook","addressbook.xml" );
         else
             m_fileName = filename;
-
-        /* Load Database now */
-        load ();
     }
 }
 

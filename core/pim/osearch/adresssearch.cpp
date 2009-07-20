@@ -42,6 +42,7 @@ AdressSearch::~AdressSearch()
 void AdressSearch::load()
 {
 	_contacts = new OPimContactAccess("osearch");
+	_contacts->load();
 }
 
 int AdressSearch::search()

@@ -56,7 +56,8 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	odebug << "AbView::c'tor" << oendl;
 	// Load default database and handle syncing myself.. !
 	m_contactdb = new Opie::OPimContactAccess ( "addressbook", 0l, 0l, false );
-	m_contactdb -> setReadAhead( 16 ); // Use ReadAhead-Cache if available
+	m_contactdb->setReadAhead( 16 ); // Use ReadAhead-Cache if available
+    m_contactdb->load();
 	mCat.load( categoryFileName() );
 
 	// Create Layout and put WidgetStack into it.
@@ -314,6 +315,7 @@ void AbView::showPersonal( bool personal )
 		Opie::OPimContactAccessBackend* vcard_backend = new Opie::OPimContactAccessBackend_VCard( QString::null,
 									  addressbookPersonalVCardName() );
 		m_contactdb = new Opie::OPimContactAccess ( "addressbook", QString::null , vcard_backend, true );
+		m_contactdb->load();
 
 		m_inPersonal = true;
 		m_curr_View = CardView;

@@ -372,8 +372,6 @@ OPimContactAccessBackend_SQL::OPimContactAccessBackend_SQL ( const QString& /* a
     m_driver = man.standard();
     m_driver->setUrl( m_fileName );
 
-    load();
-
     odebug << "C'tor OPimContactAccessBackend_SQL ends: " << t.elapsed() << " ms" << oendl;
 }
 

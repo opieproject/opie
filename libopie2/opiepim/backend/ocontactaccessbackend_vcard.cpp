@@ -52,7 +52,7 @@ OPimContactAccessBackend_VCard::OPimContactAccessBackend_VCard ( const QString& 
     version_major( 1 ),
     version_minor( 0 )
 {
-    load();
+
 }
 
 
