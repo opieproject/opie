@@ -150,7 +150,7 @@ bool OPimTodoAccessXML::write( OAbstractWriter &wr )
     QAsciiDict<int> dict(26);
     initDict( dict );
     QIntDict<QString> revdict( dict.size() );
-    dict.setAutoDelete( true );
+    revdict.setAutoDelete( true );
     // Now we need to reverse the dictionary (!)
     for( QAsciiDictIterator<int> it( dict ); it.current(); ++it ) {
         revdict.insert( (*it), new QString( it.currentKey() ) );

@@ -164,7 +164,7 @@ bool ODateBookAccessBackend_XML::write( OAbstractWriter &wr )
     QAsciiDict<int> dict(OPimEvent::FRecChildren+1);
     initDict( dict );
     QIntDict<QString> revdict( dict.size() );
-    dict.setAutoDelete( true );
+    revdict.setAutoDelete( true );
     // Now we need to reverse the dictionary (!)
     for( QAsciiDictIterator<int> it( dict ); it.current(); ++it ) {
         revdict.insert( (*it), new QString( it.currentKey() ) );
