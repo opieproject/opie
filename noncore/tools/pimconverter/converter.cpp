@@ -36,6 +36,7 @@
 #include <opie2/odebug.h>
 #include <opie2/opimglobal.h>
 #include <qpe/global.h>
+#include <qpe/config.h>
 // Include SQL related header files
 #define __USE_SQL
 #include <opie2/opimaccessfactory.h>
@@ -64,6 +65,59 @@ Converter::Converter(QWidget *p, const char* n,  WFlags fl):
     m_sourceFormatSelector -> setCurrentItem( m_selectedSourceFormat );
     m_destFormatSelector -> setCurrentItem( m_selectedDestFormat );
     m_eraseDB -> setChecked( true );  // Default erase on copy
+    
+    loadPimAccess();
+}
+
+void Converter::loadPimAccess()
+{
+    QString dbtype;
+    
+    Config config( "pimaccess" );
+
+    config.setGroup( "datebook" );
+    dbtype = config.readEntry( "usebackend", "xml" );
+    if( dbtype == "sql" )
+        m_datebookFormatSelector->setCurrentItem( 1 );
+    else
+        m_datebookFormatSelector->setCurrentItem( 0 );
+
+    config.setGroup( "contact" );
+    dbtype = config.readEntry( "usebackend", "xml" );
+    if( dbtype == "sql" )
+        m_contactsFormatSelector->setCurrentItem( 1 );
+    else
+        m_contactsFormatSelector->setCurrentItem( 0 );
+
+    config.setGroup( "todo" );
+    dbtype = config.readEntry( "usebackend", "xml" );
+    if( dbtype == "sql" )
+        m_todoFormatSelector->setCurrentItem( 1 );
+    else
+        m_todoFormatSelector->setCurrentItem( 0 );    
+}
+
+void Converter::savePimAccess() 
+{
+    Config config( "pimaccess" );
+    
+    config.setGroup( "datebook" );
+    if( m_datebookFormatSelector->currentItem() == 1 )
+        config.writeEntry( "usebackend", "sql" );
+    else
+        config.writeEntry( "usebackend", "xml" );
+
+    config.setGroup( "contact" );
+    if( m_contactsFormatSelector->currentItem() == 1 )
+        config.writeEntry( "usebackend", "sql" );
+    else
+        config.writeEntry( "usebackend", "xml" );
+
+    config.setGroup( "todo" );
+    if( m_todoFormatSelector->currentItem() == 1 )
+        config.writeEntry( "usebackend", "sql" );
+    else
+        config.writeEntry( "usebackend", "xml" );
 }
 
 void Converter::selectedDatabase( int num )
@@ -260,6 +314,8 @@ void Converter::start_conversion()
 
 void Converter::closeEvent( QCloseEvent *e )
 {
+    savePimAccess();
+    
     /* Due to the fact that we don't have multitasking here, this
      * critical handling don't make sense, but the future..
      */

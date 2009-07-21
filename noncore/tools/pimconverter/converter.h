@@ -70,6 +70,8 @@ private:
 
 
 private:
+    void loadPimAccess();
+    void savePimAccess();
     bool sqliteMoveAndConvert( const QString& name, const QString &src, const QString &destination );
 };
 
