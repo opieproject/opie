@@ -1,3 +1,7 @@
+configdialogbase.cpp
+configdialogbase.h
+promptactiondialog.cpp
+promptactiondialog.h
 *moc
 *.~
 Makefile*

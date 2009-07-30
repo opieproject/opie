@@ -3,3 +3,5 @@ Makefile.in
 moc*
 .moc
 .obj
+fileInfoDialog.cpp
+fileInfoDialog.h

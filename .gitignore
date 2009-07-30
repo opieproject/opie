@@ -12,3 +12,6 @@ gen.pro
 Vars.local
 a
 .patches
+*.o
+.obj/
+*~
