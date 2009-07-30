@@ -29,7 +29,7 @@ CONFIG_CLOCK	noncore/tools/clock	clock.pro
 CONFIG_CONFEDIT	noncore/apps/confedit	confedit.pro
 CONFIG_DAGGER noncore/apps/dagger dagger.pro
 CONFIG_DASHER	noncore/unsupported/dasher	dasher.pro
-CONFIG_DATEBOOK2	noncore/unsupported/datebook2	datebook2.pro
+CONFIG_DATEBOOK2	core/pim/datebook2	datebook2.pro
 CONFIG_DATEBOOK	core/pim/datebook	datebook.pro
 CONFIG_DATEBOOK_BIRTHDAYS_HOLIDAY core/pim/datebook/holiday/birthday birthdays.pro
 CONFIG_DATEBOOK_CHRISTIAN_HOLIDAY core/pim/datebook/holiday/christian christian-holidays.pro
@@ -72,6 +72,8 @@ CONFIG_HOTPLUG_QCOP	core/tools/hotplug-qcop	hotplug-qcop.pro
 CONFIG_INTERFACES	noncore/settings/networksettings/interfaces	interfaces.pro
 CONFIG_IRDAAPPLET	core/applets/irdaapplet	irdaapplet.pro
 CONFIG_JUMPX	inputmethods/jumpx	jumpx.pro
+CONFIG_KBDDCONTROL	noncore/settings/kbddcontrol	kbddcontrol.pro
+CONFIG_KBDDAPPLET	noncore/settings/kbddcontrol/applet	kbddapplet.pro
 CONFIG_KBILL	noncore/games/kbill	kbill.pro
 CONFIG_KCHECKERS	noncore/games/kcheckers	kcheckers.pro
 CONFIG_KEYBOARD	inputmethods/keyboard	keyboard.pro
@@ -179,6 +181,7 @@ CONFIG_OXYGEN	noncore/apps/oxygen	oxygen.pro
 CONFIG_PACKAGEMANAGER	noncore/settings/packagemanager	packagemanager.pro
 CONFIG_PARASHOOT	noncore/games/parashoot	parashoot.pro
 CONFIG_PCMCIA-APPLET	noncore/applets/pcmcia	pcmcia.pro
+CONFIG_CARD-APPLET	noncore/applets/cardapplet	cardapplet.pro
 CONFIG_PHASE	noncore/styles/phase	phase.pro
 CONFIG_PICKBOARD	inputmethods/pickboard	pickboard.pro
 CONFIG_PIMCONVERTER     noncore/tools/pimconverter converter.pro
