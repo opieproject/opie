@@ -71,6 +71,7 @@ public:
 protected:
     QCheckBox *m_onStart, *m_onResume, *m_noProtectConfig, *m_explanScreens;
     QSpinBox *m_nbSuccessMin;
+    QGroupBox *m_nbBox;
 private:
     friend class MultiauthConfig;
     /// pointer to the MultiauthConfig that called us
@@ -130,10 +131,14 @@ private:
     int m_nbSuccessReq;
     bool m_plugins_changed;
     bool m_pluginsInstalled;
+    bool m_loginAvailable;
     
     void readConfig();
     void writeConfig();
     void loadPlugins();
+    int countEnabledPlugins();
+    void checkMultiEnabled();
+    bool validate( bool testing );
 
     // Login and Sync stuff
     void loadUsers();

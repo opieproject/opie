@@ -75,19 +75,19 @@ class ToolButton : public QToolButton {
     boxLayout->addWidget(m_onStart, 0, 0);
     boxLayout->addWidget(m_onResume, 0, 1);
 
-    QGroupBox *nbBox = new QGroupBox(0, Qt::Vertical, tr("Multiple plugins authentication"), this, "nb box");
-    vb->addWidget(nbBox);
-    QGridLayout *nbBoxLayout = new QGridLayout( nbBox->layout() );
-    m_nbSuccessMin = new QSpinBox(nbBox);
-    QLabel *lNbSuccessMin = new QLabel( tr( "Required successes" ), nbBox);
-    nbBoxLayout->addWidget(m_nbSuccessMin, 0, 0);
-    nbBoxLayout->addWidget(lNbSuccessMin, 0, 1);
+    m_nbBox = new QGroupBox(0, Qt::Vertical, tr("Multiple plugin authentication"), this, "nb box");
+    vb->addWidget(m_nbBox);
+    QGridLayout *nbBoxLayout = new QGridLayout( m_nbBox->layout() );
+    m_nbSuccessMin = new QSpinBox(m_nbBox);
+    QLabel *lNbSuccessMin = new QLabel( tr( "Required successes" ), m_nbBox);
+    nbBoxLayout->addWidget(lNbSuccessMin, 0, 0);
+    nbBoxLayout->addWidget(m_nbSuccessMin, 0, 1);
     m_nbSuccessMin->setMinValue(1); // the max value is defined in MultiauthConfig constructor
 
     QGroupBox *devBox = new QGroupBox(0, Qt::Vertical, tr("Options"), this, "dev box");
     vb->addWidget(devBox);
     QGridLayout *devBoxLayout = new QGridLayout( devBox->layout() );
-    m_noProtectConfig = new QCheckBox( tr("Don't protect this config screen"), devBox, "don't protect config");
+    m_noProtectConfig = new QCheckBox( tr("Don't protect this settings screen"), devBox, "don't protect config");
     m_explanScreens = new QCheckBox( tr("Show explanatory screens"), devBox, "Show explan. screens");
     devBoxLayout->addWidget(m_noProtectConfig, 0, 0);
     devBoxLayout->addWidget(m_explanScreens, 1, 0);
@@ -106,23 +106,25 @@ MultiauthGeneralConfig::~MultiauthGeneralConfig()
 /// launches the authentication process, as configured, with the option to bypass it
 void MultiauthGeneralConfig::tryAuth()
 {
-    QMessageBox confirmSave(
-                         tr("Attention"),
-                         "<p>" + tr("You must save your current settings before trying to authenticate. Press OK to accept and launch a simulated authentication process.") + "</p><p><em>" +
-                         tr("If you don't like the result of this test, don't forget to change your settings before you exit the configuration application!") + "</em></p>",
-                         QMessageBox::Warning,
-                         QMessageBox::Cancel, QMessageBox::Yes, QMessageBox::NoButton,
-                         0, QString::null, TRUE, WStyle_StaysOnTop);
-    confirmSave.setButtonText(QMessageBox::Cancel, tr("Cancel"));
-    confirmSave.setButtonText(QMessageBox::Yes, tr("OK"));
+    if( m_parentConfig->validate( true ) ) {
+        QMessageBox confirmSave(
+                            tr("Attention"),
+                            "<p>" + tr("You must save your current settings before trying to authenticate. Press OK to accept and launch a simulated authentication process.") + "</p><p><em>" +
+                            tr("If you don't like the result of this test, don't forget to change your settings before you exit the configuration application!") + "</em></p>",
+                            QMessageBox::Warning,
+                            QMessageBox::Cancel, QMessageBox::Yes, QMessageBox::NoButton,
+                            0, QString::null, TRUE, WStyle_StaysOnTop);
+        confirmSave.setButtonText(QMessageBox::Cancel, tr("Cancel"));
+        confirmSave.setButtonText(QMessageBox::Yes, tr("OK"));
 
-    if ( confirmSave.exec() == QMessageBox::Yes)
-    {
-        owarn << "writing config as user accepted" << oendl;
-        m_parentConfig->writeConfigs();
-        owarn << "testing authentication" << oendl;
-        // launch the authentication in testing mode
-        Opie::Security::MultiauthPassword::authenticate(Opie::Security::TestNow);
+        if ( confirmSave.exec() == QMessageBox::Yes)
+        {
+            owarn << "writing config as user accepted" << oendl;
+            m_parentConfig->writeConfigs();
+            owarn << "testing authentication" << oendl;
+            // launch the authentication in testing mode
+            Opie::Security::MultiauthPassword::authenticate(Opie::Security::TestNow);
+        }
     }
 }
 
@@ -173,7 +175,7 @@ static void test_and_start() {
         QVBoxLayout * pluginListLayout = new QVBoxLayout(m_pluginListWidget);
         pluginListLayout->setSpacing(6);
         pluginListLayout->setMargin(11);
-        QLabel * pluginListTitle = new QLabel( tr( "Load which plugins in what order:" ), m_pluginListWidget );
+        QLabel * pluginListTitle = new QLabel( tr( "Authentication plugins to use (in order):" ), m_pluginListWidget );
         pluginListLayout->addWidget(pluginListTitle);
         QHBox * pluginListHB = new QHBox(m_pluginListWidget);
         pluginListLayout->addWidget(pluginListHB);
@@ -187,7 +189,7 @@ static void test_and_start() {
         QVBox * pluginListVB = new QVBox(pluginListHB);
         new ToolButton( pluginListVB, tr( "Move Up" ), "up",  this , SLOT( moveSelectedUp() ) );
         new ToolButton( pluginListVB, tr( "Move Down" ), "down", this , SLOT( moveSelectedDown() ) );
-        m_mainTW->addTab( m_pluginListWidget, "pass", tr( "plugins" ) );
+        m_mainTW->addTab( m_pluginListWidget, "pass", tr( "Plugins" ) );
 
         connect ( m_pluginListView , SIGNAL( clicked ( QListViewItem * ) ), this, SLOT( pluginsChanged ( ) ) );
 
@@ -196,10 +198,16 @@ static void test_and_start() {
         m_mainTW->addTab(m_generalConfig, "SettingsIcon", tr( "Authentication") );
 
     }
-    // login settings page
-    m_loginWidget = new LoginBase(m_mainTW, "login config widget");
-    m_mainTW->addTab(m_loginWidget, "security/users", tr( "Login") );
-
+    
+    m_loginAvailable = QFile::exists( QPEApplication::qpeDir() + "bin/opie-login" );
+    
+    if( m_loginAvailable ) {
+        // login settings page
+        m_loginWidget = new LoginBase(m_mainTW, "login config widget");
+        if ( m_loginAvailable )
+            m_mainTW->addTab(m_loginWidget, "security/users", tr( "Login") );
+    }
+        
     // sync settings page
     m_syncWidget = new SyncBase( m_mainTW, "sync config widget" );
     m_mainTW->addTab(m_syncWidget, "security/sync", tr( "Sync") );
@@ -211,6 +219,7 @@ static void test_and_start() {
     // read the "Security" Config file and update our UI
     readConfig();
 
+    checkMultiEnabled();
 
     if (m_pluginsInstalled)
     {
@@ -265,9 +274,6 @@ static void test_and_start() {
         QLabel * warningText = new QLabel( "<p>" + tr("To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one <em>opie-securityplugin-*</em> package! Once you have done that, you will be able to configure your PDA protection here.") + "</p>", warningBox );
 
         m_mainTW->addTab(m_pluginListWidget, "security/Security", tr( "Locking") );
-
-        // set the first tab as default.
-        m_mainTW->setCurrentTab(m_loginWidget);
     }
 
     showMaximized();
@@ -276,6 +282,24 @@ static void test_and_start() {
 /// nothing to do
 MultiauthConfig::~MultiauthConfig()
 {
+}
+
+bool MultiauthConfig::validate( bool testing )
+{
+    int count = countEnabledPlugins();
+    if( count == 0 && ( m_generalConfig->m_onStart->isChecked() || m_generalConfig->m_onResume->isChecked() ) ) {
+        QString msg;
+        msg = tr( "<p>Authentication is enabled, but no individual plugins have been enabled.</p>" ); 
+        if( testing )
+            msg += tr( "<p>Please enable one or more authentication plugins.</p>" );
+        else
+            msg += tr( "<p>Please enable one or more authentication plugins, or turn off authentication on start / resume.</p>" );
+            
+        QMessageBox::critical( this, tr( "No plugins enabled" ), msg );
+        return false;
+    }   
+    
+    return true;
 }
 
 /// saves the general and plugin(s) configurations
@@ -291,8 +315,10 @@ void MultiauthConfig::writeConfigs() {
 
 /// on QDialog::accept, we save all the configurations and exit the QDialog normally
 void MultiauthConfig::accept() {
-    writeConfigs();
-    QDialog::accept();
+    if( validate( false ) ) {
+        writeConfigs();
+        QDialog::accept();
+    }
 }
 
 void MultiauthConfig::done( int r ) {
@@ -340,8 +366,8 @@ void MultiauthConfig::readConfig()
 
     /* Login and Sync stuff */
     pcfg->setGroup("Sync");
-    int auth_peer = pcfg->readNumEntry("auth_peer",0xc0a88100);//new default 192.168.129.0/24
-    int auth_peer_bits = pcfg->readNumEntry("auth_peer_bits",24);
+    uint auth_peer = pcfg->readNumEntry("auth_peer",0xc0a88100);//new default 192.168.129.0/24
+    uint auth_peer_bits = pcfg->readNumEntry("auth_peer_bits",24);
 
     pcfg->setGroup("SyncMode");
     int mode = pcfg->readNumEntry("Mode",2); // Default to Sharp
@@ -393,14 +419,16 @@ void MultiauthConfig::readConfig()
     }
 
 
-    connect(m_loginWidget->autologinToggle, SIGNAL(toggled(bool)), this, SLOT(toggleAutoLogin(bool)));
-    connect(m_loginWidget->userlist, SIGNAL(activated(int)), this, SLOT(changeLoginName(int)));
     connect(m_syncWidget->restoredefaults,SIGNAL(clicked()), this, SLOT(restoreDefaults()));
     connect(m_syncWidget->deleteentry,SIGNAL(clicked()), this, SLOT(deleteListEntry()));
 
-    loadUsers();
-    updateGUI();
+    if ( m_loginAvailable ) {
+        connect(m_loginWidget->autologinToggle, SIGNAL(toggled(bool)), this, SLOT(toggleAutoLogin(bool)));
+        connect(m_loginWidget->userlist, SIGNAL(activated(int)), this, SLOT(changeLoginName(int)));
 
+        loadUsers();
+        updateGUI();
+    }
 }
 
 void MultiauthConfig::writeConfig()
@@ -437,7 +465,9 @@ void MultiauthConfig::writeConfig()
         pcfg.setGroup( "Misc" );
         pcfg.writeEntry( "onStart",  m_generalConfig->m_onStart->isChecked() );
         pcfg.writeEntry( "onResume",  m_generalConfig->m_onResume->isChecked() );
-        pcfg.writeEntry( "nbSuccessMin",  m_generalConfig->m_nbSuccessMin->text() );
+        if ( m_generalConfig->m_nbSuccessMin->value() > (int)include.count() )
+            m_generalConfig->m_nbSuccessMin->setValue( include.count() );
+        pcfg.writeEntry( "nbSuccessMin", m_generalConfig->m_nbSuccessMin->value() );
         pcfg.writeEntry( "noProtectConfig",  m_generalConfig->m_noProtectConfig->isChecked() );
         pcfg.writeEntry( "explanScreens",  m_generalConfig->m_explanScreens->isChecked() );
     }
@@ -510,6 +540,21 @@ void MultiauthConfig::writeConfig()
 /// slot used to record the fact plugins order has been modified
 void MultiauthConfig::pluginsChanged() {
     m_plugins_changed = true;
+    checkMultiEnabled();
+}
+
+int MultiauthConfig::countEnabledPlugins() {
+    int count = 0;
+    for ( QListViewItemIterator list_it( m_pluginListView ) ; list_it.current(); ++list_it ) {
+        if ( ((QCheckListItem *)list_it.current())-> isOn () )
+            count++;
+    }
+    return count;
+}
+
+void MultiauthConfig::checkMultiEnabled() {
+    int count = countEnabledPlugins();
+    m_generalConfig->m_nbBox->setEnabled( count > 1 );    
 }
 
 /// loads each multiauth plugin
