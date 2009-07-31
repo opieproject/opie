@@ -95,7 +95,7 @@ public:
     static bool doRestart;
     static bool allowRestart;
     static bool screenLocked();
-    static void login(bool at_poweron);
+    static bool login(bool at_poweron);
 
     static bool isStarting();
 
@@ -132,6 +132,8 @@ protected:
     bool recoverMemory();
     void keyClick(int keycode, bool press, bool repeat);
     void screenClick(bool press);
+    void doResume();
+    void doBeforeSuspend();
 
 protected slots:
     void shutdown(ShutdownImpl::Type);
@@ -161,7 +163,7 @@ private:
     bool m_screentap_sound : 1;
     bool m_alarm_sound     : 1;
     static bool ms_is_starting;
-
+    bool m_login;
 
     friend class KeyFilter;
 };

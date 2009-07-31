@@ -54,8 +54,11 @@ using namespace Opie::Core;
 #endif
 #include <stdlib.h>
 
+// NOTE: when we talk about "login" here we are talking about the
+// authentication system (MultiAuth) and not opie-login
+
 static ServerApplication *serverApp = 0;
-static int loggedin=0;
+static bool loginlock = false; // TRUE if the authentication system is currently shown
 
 QCopKeyRegister::QCopKeyRegister()
     : m_keyCode( 0 )
@@ -190,7 +193,7 @@ bool KeyFilter::keyRegistered( int key )
 
 bool KeyFilter::checkButtonAction(bool db, int keycode,  int press, int autoRepeat)
 {
-    if ( !loggedin
+    if ( loginlock
         // Permitted keys
         && keycode != Key_F34 // power
         && keycode != Key_F30 // select
@@ -311,6 +314,7 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
     : Opie::Core::OApplication( argc, argv, t )
 {
     ms_is_starting = true;
+    m_login = false;
 
     // We know we'll have lots of cached pixmaps due to App/DocLnks
     QPixmapCache::setCacheLimit(512);
@@ -482,6 +486,12 @@ void ServerApplication::systemMessage( const QCString& msg,
             e << tr( "business card" ) << card << mimetype;
         }
     }
+    else if ( msg == "systemSuspend()" ) {
+        doBeforeSuspend();
+    }
+    else if ( msg == "systemResume()" ) {
+        doResume();
+    }
 }
 
 void ServerApplication::reloadPowerWarnSettings ( )
@@ -521,20 +531,25 @@ void ServerApplication::launcherMessage( const QCString & msg, const QByteArray 
 
 bool ServerApplication::screenLocked()
 {
-    return loggedin == 0;
+    return loginlock;
 }
 
-void ServerApplication::login(bool at_poweron)
+bool ServerApplication::login(bool at_poweron)
 {
-    if ( !loggedin ) {
-        Global::terminateBuiltin("calibrate"); // No tr
-        int lockMode = at_poweron ? Opie::Security::IfPowerOn : Opie::Security::IfResume;
-        Opie::Security::MultiauthPassword::authenticate(lockMode);
-        loggedin=1;
-#ifndef QT_NO_COP
-        QCopEnvelope e( "QPE/Desktop", "unlocked()" );
-#endif
+    if(loginlock) {
+        return false;
     }
+        
+    loginlock = true;
+
+    Global::terminateBuiltin("calibrate"); // No tr
+    int lockMode = at_poweron ? Opie::Security::IfPowerOn : Opie::Security::IfResume;
+    Opie::Security::MultiauthPassword::authenticate(lockMode);
+#ifndef QT_NO_COP
+    QCopEnvelope e( "QPE/Desktop", "unlocked()" );
+#endif
+    loginlock = false;
+    return true;
 }
 
 #if defined(QPE_HAVE_TOGGLELIGHT)
@@ -569,6 +584,38 @@ namespace {
     }
 }
 
+void ServerApplication::doBeforeSuspend()
+{
+    m_suspendTime = QDateTime::currentDateTime();
+
+#ifdef QWS
+    if ( !m_login && !loginlock && Opie::Security::MultiauthPassword::needToAuthenticate ( false ) ) {
+        if ( qt_screen ) {
+            // Should use a big black window instead.
+            // But this would not show up fast enough
+            QGfx *g = qt_screen-> screenGfx ( );
+            g-> fillRect ( 0, 0, qt_screen-> width ( ), qt_screen-> height ( ));
+            delete g;
+        }
+
+        m_login = true;
+    }
+#endif
+}
+
+void ServerApplication::doResume()
+{
+    if( m_login ) {
+        if ( !login( false ) ) {
+            return;
+        }
+        m_login = false;
+    }
+
+    if( !loginlock ) {
+        execAutoStart( m_suspendTime );
+    }
+}
 
 void ServerApplication::togglePower()
 {
@@ -578,20 +625,8 @@ void ServerApplication::togglePower()
         return ;
 
     excllock = true;
-
-    bool wasloggedin = loggedin;
-    loggedin = 0;
-    m_suspendTime = QDateTime::currentDateTime();
-
-#ifdef QWS
-    if ( Opie::Security::MultiauthPassword::needToAuthenticate ( false ) && qt_screen ) {
-        // Should use a big black window instead.
-        // But this would not show up fast enough
-        QGfx *g = qt_screen-> screenGfx ( );
-        g-> fillRect ( 0, 0, qt_screen-> width ( ), qt_screen-> height ( ));
-        delete g;
-    }
-#endif
+    
+    doBeforeSuspend();
 
     ODevice::inst ( )-> suspend ( );
 
@@ -601,12 +636,6 @@ void ServerApplication::togglePower()
     {
         QCopEnvelope( "QPE/Card", "mtabChanged()" ); // might have changed while asleep
     }
-
-    if ( wasloggedin )
-        login ( false );
-
-    execAutoStart(m_suspendTime);
-    //qcopBridge->closeOpenConnections();
 
     excllock = false;
 }
