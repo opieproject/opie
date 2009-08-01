@@ -120,6 +120,7 @@ signals:
 public slots:
     virtual void systemMessage( const QCString& msg, const QByteArray& );
     virtual void launcherMessage( const QCString& msg, const QByteArray& );
+    virtual void desktopMessage( const QCString& msg, const QByteArray& );
     void rereadVolumes();
 
 protected:
@@ -133,6 +134,7 @@ protected:
     void keyClick(int keycode, bool press, bool repeat);
     void screenClick(bool press);
     void doResume();
+    void doAfterResume();
     void doBeforeSuspend();
 
 protected slots:
@@ -164,6 +166,7 @@ private:
     bool m_alarm_sound     : 1;
     static bool ms_is_starting;
     bool m_login;
+    bool m_unlock_resume;
 
     friend class KeyFilter;
 };

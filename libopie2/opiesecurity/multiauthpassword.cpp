@@ -46,11 +46,16 @@
 #include <qlabel.h>
 #include <qdir.h>
 
+#ifndef QT_NO_COP
+#include <qtopia/qcopenvelope_qws.h>
+#endif
+
 #include "multiauthpassword.h"
 
 namespace Opie {
 namespace Security {
-
+    
+static bool authLock = false;    
 
 /**
  * Tells if the users requires authentication (used internally to
@@ -71,7 +76,15 @@ bool MultiauthPassword::needToAuthenticate(bool at_poweron)
         return false;
 }
 
-
+/**
+ * Determines if the authentication system is currently shown
+ *
+ * \return true if the authentication system is showing, false otherwise
+ */
+bool MultiauthPassword::isAuthenticating()
+{
+    return authLock;
+}
 
 /**
  * \brief Require (if configured so) user authentication to unlock and continue
@@ -105,6 +118,8 @@ void MultiauthPassword::authenticate(int lockMode)
             ) )
             return;
     }
+    
+    authLock = true;
 
     /**
      * \li TestNow will ensure that the authentication window will let
@@ -127,11 +142,18 @@ void MultiauthPassword::authenticate(int lockMode)
     QRect desk = qApp->desktop()->geometry();
     win.setGeometry( 0, 0, desk.width(), desk.height() );
 
-    // the authentication has already succeeded (without win interactions)
-    if ( win.isAlreadyDone() )
-        return;
+    // Check if the authentication has already succeeded (without 
+    // win interactions); if not, then show the window
+    if ( !win.isAlreadyDone() ) {
+        win.exec();
+    }
 
-    win.exec();
+#ifndef QT_NO_COP
+    if (lockMode != TestNow)
+        QCopEnvelope e( "QPE/Desktop", "unlocked()" );
+#endif
+    
+    authLock = false;
 }
 
 }

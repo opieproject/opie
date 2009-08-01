@@ -56,7 +56,8 @@ class MultiauthPassword {
 
 public:
     static void authenticate(int authMode = LockNow);
-    static bool needToAuthenticate( bool atpoweron = false );    
+    static bool needToAuthenticate( bool atpoweron = false );
+    static bool isAuthenticating();
 };
 
 

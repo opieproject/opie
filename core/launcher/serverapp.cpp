@@ -315,6 +315,7 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
 {
     ms_is_starting = true;
     m_login = false;
+    m_unlock_resume = false;
 
     // We know we'll have lots of cached pixmaps due to App/DocLnks
     QPixmapCache::setCacheLimit(512);
@@ -337,6 +338,10 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
     connect(channel, SIGNAL(received(const QCString&,const QByteArray&) ),
             this, SLOT(launcherMessage(const QCString&,const QByteArray&) ) );
 
+    channel = new QCopChannel("QPE/Desktop", this );
+    connect(channel, SIGNAL(received(const QCString&,const QByteArray&) ),
+            this, SLOT(desktopMessage(const QCString&,const QByteArray&) ) );
+            
     m_screensaver = new OpieScreenSaver();
     m_screensaver->setInterval( -1 );
     QWSServer::setScreenSaver( m_screensaver );
@@ -528,6 +533,16 @@ void ServerApplication::launcherMessage( const QCString & msg, const QByteArray 
     }
 }
 
+void ServerApplication::desktopMessage( const QCString & msg, const QByteArray & data )
+{
+    if ( msg == "unlocked()" ) {
+        // See doResume() for an explanation of this
+        if( m_unlock_resume ) {
+            m_unlock_resume = false;
+            doAfterResume();
+        }
+    }
+}
 
 bool ServerApplication::screenLocked()
 {
@@ -545,9 +560,6 @@ bool ServerApplication::login(bool at_poweron)
     Global::terminateBuiltin("calibrate"); // No tr
     int lockMode = at_poweron ? Opie::Security::IfPowerOn : Opie::Security::IfResume;
     Opie::Security::MultiauthPassword::authenticate(lockMode);
-#ifndef QT_NO_COP
-    QCopEnvelope e( "QPE/Desktop", "unlocked()" );
-#endif
     loginlock = false;
     return true;
 }
@@ -605,18 +617,32 @@ void ServerApplication::doBeforeSuspend()
 
 void ServerApplication::doResume()
 {
+    if( !loginlock && Opie::Security::MultiauthPassword::isAuthenticating() ) {
+        // Authentication is already taking place but not by us (eg. because the 
+        // user used the lock applet before suspending), so we need to let it
+        // carry on and when we get the unlocked() QCop message we can do our 
+        // post-resume tasks ( in doAfterResume() ).
+        m_unlock_resume = true;
+        m_login = false;
+        return;
+    }        
+    
     if( m_login ) {
+        // Perform authentication
         if ( !login( false ) ) {
             return;
         }
         m_login = false;
     }
 
-    if( !loginlock ) {
-        execAutoStart( m_suspendTime );
-    }
+    doAfterResume();
 }
 
+void ServerApplication::doAfterResume()
+{
+    execAutoStart( m_suspendTime );
+}
+        
 void ServerApplication::togglePower()
 {
     static bool excllock = false;
