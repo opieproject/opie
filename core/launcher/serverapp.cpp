@@ -59,6 +59,7 @@ using namespace Opie::Core;
 
 static ServerApplication *serverApp = 0;
 static bool loginlock = false; // TRUE if the authentication system is currently shown
+static QDateTime suspendDateTime;
 
 QCopKeyRegister::QCopKeyRegister()
     : m_keyCode( 0 )
@@ -554,7 +555,20 @@ bool ServerApplication::login(bool at_poweron)
     if(loginlock) {
         return false;
     }
-        
+
+    if( !at_poweron ) {
+        // Handle minimum suspend time
+        Config pcfg("Security");
+        pcfg.setGroup( "Misc" );
+        bool skipEnabled = pcfg.readBoolEntry( "suspendTime", false );
+        if( skipEnabled ) {
+            int skipTime = pcfg.readNumEntry( "suspendTimeMins", 2 ) * 60;
+            int secsSuspended = suspendDateTime.secsTo( QDateTime::currentDateTime() );
+            if ( secsSuspended < skipTime )
+                return true;
+        }
+    }
+
     loginlock = true;
 
     Global::terminateBuiltin("calibrate"); // No tr
@@ -598,7 +612,7 @@ namespace {
 
 void ServerApplication::doBeforeSuspend()
 {
-    m_suspendTime = QDateTime::currentDateTime();
+    suspendDateTime = QDateTime::currentDateTime();
 
 #ifdef QWS
     if ( !m_login && !loginlock && Opie::Security::MultiauthPassword::needToAuthenticate ( false ) ) {
@@ -640,7 +654,7 @@ void ServerApplication::doResume()
 
 void ServerApplication::doAfterResume()
 {
-    execAutoStart( m_suspendTime );
+    execAutoStart( suspendDateTime );
 }
         
 void ServerApplication::togglePower()

@@ -69,19 +69,30 @@ class ToolButton : public QToolButton {
 
     QGroupBox *lockBox = new QGroupBox(0, Qt::Vertical, tr("When to lock Opie"), this, "lock box");
     vb->addWidget(lockBox);
-    QGridLayout *boxLayout = new QGridLayout( lockBox->layout() );
-    m_onStart = new QCheckBox( tr( "on Opie start" ), lockBox, "lock on opie start");
-    m_onResume = new QCheckBox( tr( "on Opie resume" ), lockBox, "lock on opie resume");
-    boxLayout->addWidget(m_onStart, 0, 0);
-    boxLayout->addWidget(m_onResume, 0, 1);
+    QVBoxLayout *boxLayout = new QVBoxLayout( lockBox->layout() );
+    m_onStart = new QCheckBox( tr( "On Opie start" ), lockBox, "lock on opie start");
+    m_onResume = new QCheckBox( tr( "On Opie resume" ), lockBox, "lock on opie resume");
+    boxLayout->addWidget( m_onStart );
+    boxLayout->addWidget( m_onResume );
+    connect(m_onResume, SIGNAL(toggled(bool)), this, SLOT(toggleResumeOptions(bool)));
 
+    QHBox *hb = new QHBox( lockBox );
+    (new QHBox( hb ))->setFixedSize(14,10);
+    m_skipEnabled = new QCheckBox( tr( "Only after suspended" ), hb );
+    m_skipTime = new QSpinBox( hb );
+    m_skipTime->setSuffix( tr(" min") );
+    m_skipTime->setMinValue(1);
+    m_skipTime->setMaxValue(99);
+    boxLayout->addWidget( hb );     
+    connect(m_skipEnabled, SIGNAL(toggled(bool)), this, SLOT(toggleResumeOptions(bool)));
+    
     m_nbBox = new QGroupBox(0, Qt::Vertical, tr("Multiple plugin authentication"), this, "nb box");
     vb->addWidget(m_nbBox);
-    QGridLayout *nbBoxLayout = new QGridLayout( m_nbBox->layout() );
+    QHBoxLayout *nbBoxLayout = new QHBoxLayout( m_nbBox->layout() );
     m_nbSuccessMin = new QSpinBox(m_nbBox);
     QLabel *lNbSuccessMin = new QLabel( tr( "Required successes" ), m_nbBox);
-    nbBoxLayout->addWidget(lNbSuccessMin, 0, 0);
-    nbBoxLayout->addWidget(m_nbSuccessMin, 0, 1);
+    nbBoxLayout->addWidget(lNbSuccessMin);
+    nbBoxLayout->addWidget(m_nbSuccessMin);
     m_nbSuccessMin->setMinValue(1); // the max value is defined in MultiauthConfig constructor
 
     QGroupBox *devBox = new QGroupBox(0, Qt::Vertical, tr("Options"), this, "dev box");
@@ -92,16 +103,22 @@ class ToolButton : public QToolButton {
     devBoxLayout->addWidget(m_noProtectConfig, 0, 0);
     devBoxLayout->addWidget(m_explanScreens, 1, 0);
 
-    QVGroupBox *tryBox = new QVGroupBox(tr("Testing"), this, "try box");
-    vb->addWidget(tryBox);
-    m_tryButton = new QPushButton( tr("Test the authentication now"), tryBox, "try button");
+    m_tryButton = new QPushButton( tr("Test the authentication now"), this, "try button");
+    vb->addWidget(m_tryButton);
     connect( m_tryButton, SIGNAL(clicked()), this, SLOT(tryAuth()) );
-
+    vb->addStretch();
 }
 
 /// nothing to do
 MultiauthGeneralConfig::~MultiauthGeneralConfig()
 {}
+
+void MultiauthGeneralConfig::toggleResumeOptions( bool )
+{
+    bool onresume = m_onResume->isChecked();
+    m_skipEnabled->setEnabled( onresume );
+    m_skipTime->setEnabled( onresume && m_skipEnabled->isChecked() );
+}
 
 /// launches the authentication process, as configured, with the option to bypass it
 void MultiauthGeneralConfig::tryAuth()
@@ -358,11 +375,14 @@ void MultiauthConfig::readConfig()
         m_generalConfig->m_nbSuccessMin->setValue( pcfg->readNumEntry( "nbSuccessMin", 1 ) );
         m_generalConfig->m_noProtectConfig->setChecked( pcfg->readBoolEntry( "noProtectConfig", true) );
         m_generalConfig->m_explanScreens->setChecked( pcfg->readBoolEntry( "explanScreens", true ) );
-
+        m_generalConfig->m_skipEnabled->setChecked( pcfg->readBoolEntry( "suspendTime", false ) );
+        m_generalConfig->m_skipTime->setValue( pcfg->readNumEntry( "suspendTimeMins", 2 ) );
+        
         pcfg->setGroup( "Plugins" );
         m_excludePlugins = pcfg->readListEntry( "ExcludePlugins", ',' );
         m_allPlugins = pcfg->readListEntry( "AllPlugins", ',' );
     }
+    m_generalConfig->toggleResumeOptions( true ); // (param ignored)
 
     /* Login and Sync stuff */
     pcfg->setGroup("Sync");
@@ -470,6 +490,8 @@ void MultiauthConfig::writeConfig()
         pcfg.writeEntry( "nbSuccessMin", m_generalConfig->m_nbSuccessMin->value() );
         pcfg.writeEntry( "noProtectConfig",  m_generalConfig->m_noProtectConfig->isChecked() );
         pcfg.writeEntry( "explanScreens",  m_generalConfig->m_explanScreens->isChecked() );
+        pcfg.writeEntry( "suspendTime", m_generalConfig->m_skipEnabled->isChecked() );
+        pcfg.writeEntry( "suspendTimeMins", m_generalConfig->m_skipTime->value() );
     }
 
     /* Login and Sync stuff */

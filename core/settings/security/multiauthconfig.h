@@ -69,8 +69,8 @@ public:
     MultiauthGeneralConfig(MultiauthConfig * parentConfig, QWidget * parent, const char * name);
     ~MultiauthGeneralConfig();
 protected:
-    QCheckBox *m_onStart, *m_onResume, *m_noProtectConfig, *m_explanScreens;
-    QSpinBox *m_nbSuccessMin;
+    QCheckBox *m_onStart, *m_onResume, *m_noProtectConfig, *m_explanScreens, *m_skipEnabled;
+    QSpinBox *m_nbSuccessMin, *m_skipTime;
     QGroupBox *m_nbBox;
 private:
     friend class MultiauthConfig;
@@ -79,6 +79,7 @@ private:
     QPushButton *m_tryButton;
 private slots:
     void tryAuth();
+    void toggleResumeOptions(bool);
 };
 
 /// the whole configuration dialog

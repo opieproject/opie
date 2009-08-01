@@ -156,7 +156,6 @@ private:
     PowerStatus *m_ps,  *m_ps_last;
     OpieScreenSaver *m_screensaver;
     QTimer *m_apm_timer;
-    QDateTime m_suspendTime;
     int m_powerVeryLow;
     int m_powerCritical;
     int m_currentPowerLevel;
