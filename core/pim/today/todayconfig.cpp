@@ -168,7 +168,7 @@ void TodayConfig::setAutoStart() {
 void TodayConfig::readConfig() {
     OConfig cfg( "today" );
     cfg.setGroup( "Autostart" );
-    m_autoStart = cfg.readNumEntry( "autostart", 1 );
+    m_autoStart = cfg.readNumEntry( "autostart", 0 );
     m_guiMisc->CheckBoxAuto->setChecked( m_autoStart );
     m_autoStartTimer = cfg.readNumEntry( "autostartdelay", 0 );
     m_guiMisc->SpinBoxTime->setValue( m_autoStartTimer );
