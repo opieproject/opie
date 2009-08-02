@@ -3,7 +3,8 @@
 
 #include <qstring.h>
 
-#include <net/if.h>
+#include <sys/socket.h>
+#include <linux/if.h>
 #include <netinet/ip.h>
 #include <linux/types.h>
 #include <linux/wireless.h>
