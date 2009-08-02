@@ -7,6 +7,7 @@
 #include <qpe/applnk.h>
 #include <opie2/odebug.h>
 #include <opie2/odevice.h>
+#include <qpe/sound.h>
 
 #include <libmailwrapper/settings.h>
 
@@ -133,7 +134,7 @@ void MailApplet::slotCheck() {
                 ledOnOff(true);
             }
             if ( m_config.readBoolEntry( "PlaySound", false ) )
-                ODevice::inst()->playAlarmSound();
+                Sound::soundAlarm();
             m_config.setGroup( "Status" );
             m_config.writeEntry( "newMails", m_newMails );
             {

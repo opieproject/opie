@@ -26,6 +26,7 @@
 #include <opie2/oapplication.h>
 #include <opie2/odebug.h>
 #include <opie2/odevice.h>
+#include <qpe/sound.h>
 #else
 #include <qapplication.h>
 #endif
@@ -709,7 +710,7 @@ void Wellenreiter::doAction( const QString& action, const QString& protocol, OPa
     if ( action == "TouchSound" )
         ODevice::inst()->playTouchSound();
     else if ( action == "AlarmSound" )
-        ODevice::inst()->playAlarmSound();
+        Sound::soundAlarm();
     else if ( action == "KeySound" )
         ODevice::inst()->playKeySound();
     else if ( action == "LedOn" )

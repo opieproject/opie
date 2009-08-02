@@ -25,6 +25,7 @@
 #include <opie2/oconfig.h>
 #include <opie2/odevice.h>
 #include <opie2/odebug.h>
+#include <qpe/sound.h>
 using namespace Opie::Core;
 using namespace Opie::Net;
 #endif
@@ -325,7 +326,7 @@ void WellenreiterConfigWindow::performAction( const QString& type,
     switch( action )
     {
         case 0: /* Ignore */ return;
-        case 1: /* Play Alarm */ ODevice::inst()->playAlarmSound(); return;
+        case 1: /* Play Alarm */ Sound::soundAlarm(); return;
         case 2: /* Play Click */ ODevice::inst()->playTouchSound(); return;
         case 3: /* Blink LED */ break; //FIXME: Implement this
         case 4: /* Run Script */
