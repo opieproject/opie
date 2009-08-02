@@ -74,11 +74,13 @@ bool PowerStatusManager::getSysFsStatus()
         return false;
 
     ps->bs = PowerStatus::NotPresent;    
- 
+    ps->secsRemain = -1;
+
     QStringList props;
     props += "type";
     props += "charge_full";
     props += "charge_now";
+    props += "current_now";
     props += "status";
     props += "online";
     
@@ -103,7 +105,12 @@ bool PowerStatusManager::getSysFsStatus()
                 if( propmap["type"] == "Battery" ) {
                     int charge_full = propmap["charge_full"].toInt();
                     int charge_now = propmap["charge_now"].toInt();
+                    int current_now = propmap["current_now"].toInt();
                     int pc;
+                    
+                    if( current_now > 0 )
+                        ps->secsRemain = round( ( (double)charge_now / current_now ) * 3600 );
+                    
                     if( charge_now == charge_full ) {
                         ps->bs = PowerStatus::High;
                         pc = 100;
@@ -141,9 +148,6 @@ bool PowerStatusManager::getSysFsStatus()
             }
         }
     }
-
-    // FIXME need a way of determining time remaining
-    ps->secsRemain = -1;
 
     sysfs_close_class( cls );
 
