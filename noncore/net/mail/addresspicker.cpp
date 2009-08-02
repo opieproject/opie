@@ -28,6 +28,7 @@ AddressPicker::AddressPicker( QWidget *parent, const char *name, bool modal, WFl
     QString lineEmail, lineName, contactLine;
     /* what name has to set here???? */
     Opie::OPimContactAccess m_contactdb("opiemail");
+    m_contactdb.load();
 
     QStringList mails;
     QString pre,suf;
