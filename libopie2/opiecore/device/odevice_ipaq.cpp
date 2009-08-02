@@ -35,6 +35,7 @@
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qwindowsystem_qws.h>
+#include <qgfx_qws.h>
 
 /* OPIE */
 #include <qpe/config.h>
@@ -335,11 +336,11 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
             int quarters;
             switch (d->m_rotation) {
                 case Rot0:   quarters = 0/*0deg*/; break;
-                case Rot90:  quarters = 1/*90deg*/; break;
+                case Rot90:  quarters = 3/*90deg*/; break;
                 case Rot180: quarters = 2/*180deg*/; break;
-                case Rot270: quarters = 3/*270deg*/; break;
+                case Rot270: quarters = 1/*270deg*/; break;
             }
-            newkeycode = Key_Left + ( keycode - Key_Left + quarters ) % 4;
+            newkeycode = Key_Left + ( keycode - Key_Left + quarters + qt_screen->transformOrientation() ) % 4;
             break;
         }
 

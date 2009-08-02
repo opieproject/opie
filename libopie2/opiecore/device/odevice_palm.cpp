@@ -296,25 +296,21 @@ bool Palm::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
 {
     int newkeycode = keycode;
 
-    if (qt_screen->transformOrientation() != Rot0){
+    switch ( keycode ) {
+        case Key_Left :
+        case Key_Right:
+        case Key_Up   :
+        case Key_Down :
+            newkeycode = Key_Left + ( keycode - Key_Left + qt_screen->transformOrientation() ) % 4;
+        default:
+            break;
+    }
 
-        switch ( keycode ) {
-            case Key_Left :
-            case Key_Right:
-            case Key_Up   :
-            case Key_Down :
-                newkeycode = Key_Left + ( keycode - Key_Left + 4 ) % 4;
-            default:
-                break;
+    if ( newkeycode != keycode ) {
+        if ( newkeycode != Key_unknown ) {
+            QWSServer::sendKeyEvent ( -1, newkeycode, modifiers, isPress, autoRepeat );
         }
-
-        if (newkeycode!=keycode) {
-            if ( newkeycode != Key_unknown ) {
-                QWSServer::sendKeyEvent ( -1, newkeycode, modifiers, isPress, autoRepeat );
-            }
-            return true;
-        }
-
+        return true;
     }
 
     return false;
