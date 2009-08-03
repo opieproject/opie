@@ -288,9 +288,3 @@ menu "Unsupported / Unmaintained"
   source noncore/unsupported/config.in
 endmenu
 
-comment ""
-  depends on EXPERIMENTAL
-menu "Experimental"
-  depends on EXPERIMENTAL
-  source core/qws/config.in
-endmenu
