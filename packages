@@ -30,6 +30,9 @@ CONFIG_CONFEDIT	noncore/apps/confedit	confedit.pro
 CONFIG_DAGGER noncore/apps/dagger dagger.pro
 CONFIG_DASHER	noncore/unsupported/dasher	dasher.pro
 CONFIG_DATEBOOK2	core/pim/datebook2	datebook2.pro
+CONFIG_DATEBOOK2_BIRTHDAYS_HOLIDAY core/pim/datebook2/plugins/birthday birthdays.pro
+CONFIG_DATEBOOK2_CHRISTIAN_HOLIDAY core/pim/datebook2/plugins/christian christian-holidays.pro
+CONFIG_DATEBOOK2_NATIONAL_HOLIDAY core/pim/datebook2/plugins/national national-holidays.pro
 CONFIG_DATEBOOK	core/pim/datebook	datebook.pro
 CONFIG_DATEBOOK_BIRTHDAYS_HOLIDAY core/pim/datebook/holiday/birthday birthdays.pro
 CONFIG_DATEBOOK_CHRISTIAN_HOLIDAY core/pim/datebook/holiday/christian christian-holidays.pro
