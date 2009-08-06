@@ -15,8 +15,8 @@
 
 #include <stdlib.h>
 
-OPimAlarmDlg::OPimAlarmDlg( const QDateTime &eventTime, const QString &title, const QString &desc, int defaultSnooze, int defaultSnoozeUnits, bool ampm, bool viewEnabled, bool largeDesc, QWidget *parent, bool modal )
-    : OPimAlarmDlgBase( parent, 0, modal )
+OPimAlarmDlg::OPimAlarmDlg( const QDateTime &eventTime, const QString &title, const QString &desc, int defaultSnooze, int defaultSnoozeUnits, bool ampm, bool viewEnabled, bool largeDesc, QWidget *parent )
+    : OPimAlarmDlgBase( parent, 0, TRUE, WStyle_Dialog | WStyle_NoBorder | WStyle_StaysOnTop )
 {
     m_eventTime = eventTime;
     m_response = None;

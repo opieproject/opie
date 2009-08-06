@@ -854,7 +854,7 @@ bool MainWindow::doAlarm( const QDateTime& dt, int uid ) {
         qpeconfig.setGroup("Time");
         bool ampm = qpeconfig.readBoolEntry( "AMPM", TRUE );
 
-        OPimAlarmDlg dlg( occdt, tr("Todo Alarm"), msg, 5, 0, ampm, TRUE, TRUE, this, TRUE );
+        OPimAlarmDlg dlg( occdt, tr("Todo Alarm"), msg, 5, 0, ampm, TRUE, TRUE, this );
         connect( &dlg, SIGNAL(viewItem(int)), this, SLOT(edit(int)) );
         QPEApplication::execDialog( &dlg );
                 

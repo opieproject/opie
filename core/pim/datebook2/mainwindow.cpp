@@ -991,7 +991,7 @@ bool MainWindow::doAlarm( const QDateTime &when, int uid ) {
                 bSound = TRUE;
             }
             
-            OPimAlarmDlg dlg( occurDateTime, tr("Calendar Alarm"), msg, m_snoozeTime, m_snoozeUnits, m_ampm, TRUE, FALSE, this, TRUE );
+            OPimAlarmDlg dlg( occurDateTime, tr("Calendar Alarm"), msg, m_snoozeTime, m_snoozeUnits, m_ampm, TRUE, FALSE, this );
             connect( &dlg, SIGNAL(viewItem(int)), this, SLOT(edit(int)) );
             QPEApplication::execDialog( &dlg );
             
