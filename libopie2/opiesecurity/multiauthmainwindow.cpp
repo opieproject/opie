@@ -2,6 +2,7 @@
 
 #include "multiauthcommon.h"
 #include <qpe/config.h>
+#include <qapplication.h>
 
 namespace Opie {
 namespace Security {
@@ -21,6 +22,9 @@ MultiauthMainWindow::MultiauthMainWindow(bool allowBypass)
     quit = 0;
     message2 = 0;
 
+    QRect desk = qApp->desktop()->geometry();
+    setGeometry( 0, 0, desk.width(), desk.height() );
+    
     if (allowBypass == true)
         m_explanScreens = true;
     else
@@ -73,8 +77,8 @@ MultiauthMainWindow::MultiauthMainWindow(bool allowBypass)
     }
     else
     {
-        // we will need this button only if runPlugins() fails in proceed()
-        proceedButton->hide();
+        // We want the dialog showing in case of failure
+        show();
         // let's proceed now
         proceed();
     }
@@ -86,6 +90,9 @@ MultiauthMainWindow::~MultiauthMainWindow() {
 
 /// launch the authentication
 void MultiauthMainWindow::proceed() {
+    proceedButton->hide();
+    message->setText( "<center><h3>" + tr("Please wait...") + "</h3></center>" );
+    
     int result = Internal::runPlugins();
 
     if ( (result == 0) && !m_explanScreens )
@@ -101,7 +108,7 @@ void MultiauthMainWindow::proceed() {
     else
     {
 
-        proceedButton->setText("Another try?");
+        proceedButton->setText( " " + tr("Retry") + " " );
         QString resultMessage;
 
         if (result == 0)

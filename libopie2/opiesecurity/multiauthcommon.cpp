@@ -277,6 +277,9 @@ int runPlugins() {
                 if(ownerInfoMode == oimAuthFail)
                     showOwnerInfo();
 
+                // Allow window to redraw
+                qApp->processEvents();
+                
                 /// \todo parametrize the time penalty according to \em mode (exponential,
                 /// linear or fixed) and \em basetime (time penalty for the first failure)
                 sleep(2 * tries);
