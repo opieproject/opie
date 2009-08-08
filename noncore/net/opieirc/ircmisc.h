@@ -68,8 +68,8 @@ class IRCHistoryLineEdit : public QLineEdit {
 public:
     enum KeyMode {
         KeyNextTab,
-	KeyPrevTab,
-	KeyCloseTab
+        KeyPrevTab,
+        KeyCloseTab
     };
 
     static Opie::Core::OKeyConfigManager* keyConfigInstance();

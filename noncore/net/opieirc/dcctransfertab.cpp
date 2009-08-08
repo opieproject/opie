@@ -70,12 +70,11 @@ bool DCCTransferTab::confirm(QWidget *parent, const QString &nickname, const QSt
             tr( "%1 is trying to send you the file %2\n(%3 bytes)").arg(nickname).arg(filename).arg(size),
             tr("&Accept"), tr("&Reject"));
     
-    return ( 0 == retval);
-    
+    return ( 0 == retval);  
 }
 
 void DCCTransferTab::addTransfer(DCCTransfer::Type type, Q_UINT32 ip4Addr, Q_UINT16 port,
     const QString &filename, const QString &nickname, unsigned int size)
 {
-   m_progressList.append(new DCCProgress(type, ip4Addr, port, filename, nickname, size, this));
+    m_progressList.append(new DCCProgress(type, ip4Addr, port, filename, nickname, size, this));
 }

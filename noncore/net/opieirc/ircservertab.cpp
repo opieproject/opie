@@ -7,7 +7,7 @@
 
 
 bool IRCServerTab::containsPing( const QString& text, IRCServerTab* tab ) {
-  return (text.contains(IRCMessageParser::tr("Received a CTCP PING from "))) ||
+    return (text.contains(IRCMessageParser::tr("Received a CTCP PING from "))) ||
          (text.find("ping") != -1 && text.find( tab->server()->nick() != -1));
 }
 
@@ -60,7 +60,8 @@ void IRCServerTab::appendText(QString text) {
         if (firstBreak != -1) {
             txt = "<qt bgcolor=\"" + m_backgroundColor + "\"/>" + txt.right(txt.length() - (firstBreak + 1));
         }
-    } else {
+    } 
+    else {
         m_lines++;
     }
     m_textview->setText(txt);
@@ -93,7 +94,7 @@ IRCSession *IRCServerTab::session() {
 }
 /*
 QString *IRCServerTab::mynick() {
-	return (*m_server->nick());
+    return (*m_server->nick());
 } */
 
 IRCServer *IRCServerTab::server() {
@@ -111,8 +112,8 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
     stream >> command;
     command = command.upper().right(command.length()-1);
 
-   //JOIN
-  if (command == "JOIN" || command == "J") {
+    // JOIN
+    if (command == "JOIN" || command == "J") {
         QString channel;
         stream >> channel;
         /* According to RFC 1459 */
@@ -120,7 +121,7 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
             channel.find(",") == -1 && channel.find('\007') == -1) {
             
             if (!channel.startsWith("#") && !channel.startsWith("&") 
-		&& !channel.startsWith("+") && !channel.startsWith("!")) {
+                    && !channel.startsWith("+") && !channel.startsWith("!")) {
                 channel = channel.prepend("#");
             }
             m_session->join(channel);
@@ -129,9 +130,9 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
         }
     }
 
-  //KICK
-	else if (command == "KICK"){
-		QString nickname;
+    // KICK
+    else if (command == "KICK") {
+        QString nickname;
         stream >> nickname;
         if (nickname.length() > 0) {
             if (line.length() > 7 + nickname.length()) {
@@ -145,73 +146,78 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
                 m_session->kick(((IRCChannelTab *)tab)->channel(), &person);
             }
         }
-	}
+    }
 
- else if (command == "OP"){
-		QString nickname;
+    else if (command == "OP") {
+        QString nickname;
         stream >> nickname;
         if (nickname.length() > 0) {
-                QString text = line.right(line.length()-nickname.length()-5);
-                IRCPerson person;
-                person.setNick(nickname);
-                m_session->op(((IRCChannelTab *)tab)->channel(), &person);
-            }
+            QString text = line.right(line.length()-nickname.length()-5);
+            IRCPerson person;
+            person.setNick(nickname);
+            m_session->op(((IRCChannelTab *)tab)->channel(), &person);
         }
+    }
 
-  //SEND MODES
-  else if (command == "MODE"){
-     QString text = line.right(line.length()-6);
-     if (text.length() > 0) {
-       m_session->mode(text);
-     } else {
-       tab->appendText("<font color=\"" + m_errorColor + "\">/mode channel {[+|-]|o|p|s|i|t|n|b|v} [limit] [user] [ban mask]<br>/mode nickname {[+|-]|i|w|s|o}</font><br>");
-     }
-	}
-  //SEND RAW MESSAGE TO SERVER, COMPLETELY UNCHECKED - anything in the RFC...or really anything you want
-  else if (command == "RAW"){
-     QString text = line.right(line.length()-5);
-     if (text.length() > 0) {
-       m_session->raw(text);
-     }
-  }
-  else if (command == "SUSPEND"){
-     QString text = line.right(line.length()-9);
-      if (text.upper() == "ON") {
-          QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
-      }
-      else if (text.upper() == "OFF"){
-          QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Disable;
-      } else {
-          tab->appendText("<font color=\"" + m_errorColor + "\">Line: "+ line +"</font><br>Text: "+text);
-      }
-  }
+    // SEND MODES
+    else if (command == "MODE") {
+        QString text = line.right(line.length()-6);
+        if (text.length() > 0) {
+            m_session->mode(text);
+        } else {
+            tab->appendText("<font color=\"" + m_errorColor + "\">/mode channel {[+|-]|o|p|s|i|t|n|b|v} [limit] [user] [ban mask]<br>/mode nickname {[+|-]|i|w|s|o}</font><br>");
+        }
+    }
+    // SEND RAW MESSAGE TO SERVER, COMPLETELY UNCHECKED - anything in the RFC...or really anything you want
+    else if (command == "RAW") {
+        QString text = line.right(line.length()-5);
+        if (text.length() > 0) {
+            m_session->raw(text);
+        }
+    }
+    else if (command == "SUSPEND"){
+        QString text = line.right(line.length()-9);
+        if (text.upper() == "ON") {
+            QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Enable;
+        }
+        else if (text.upper() == "OFF"){
+            QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Disable;
+        } 
+        else {
+            tab->appendText("<font color=\"" + m_errorColor + "\">Line: "+ line +"</font><br>Text: "+text);
+        }
+    }
 
-  else if (command == "QUIT"){
-     QString text = line.right(line.length()-6);
-     if (text.length() > 0) {
-       m_session->quit(text);
-     } else {
-       m_session->quit();
-     }
-	}
+    else if (command == "QUIT") {
+        QString text = line.right(line.length()-6);
+        if (text.length() > 0) {
+            m_session->quit(text);
+        } 
+        else {
+            m_session->quit();
+        }
+    }
 
-  //SEND ACTION
-	else if (command == "ME") {
+    //SEND ACTION
+    else if (command == "ME") {
         QString text = line.right(line.length()-4);
         if (text.length() > 0) {
             if (tab->isA("IRCChannelTab")) {
                 tab->appendText("<font color=\"" + m_selfColor + "\">*" + IRCOutput::toHTML(m_server.nick()) + " " + IRCOutput::toHTML(text) + "</font><br>");
                 m_session->sendAction(((IRCChannelTab *)tab)->channel(), text);
-            } else if (tab->isA("IRCQueryTab")) {
+            } 
+            else if (tab->isA("IRCQueryTab")) {
                 tab->appendText("<font color=\"" + m_selfColor + "\">*" + IRCOutput::toHTML(m_server.nick()) + " " + IRCOutput::toHTML(text) + "</font><br>");
                 m_session->sendAction(((IRCQueryTab *)tab)->person(), text);
-            } else {
+            } 
+            else {
                 tab->appendText("<font color=\"" + m_errorColor + "\">Invalid tab for this command</font><br>");
             }
         }
     }
-  //SEND PRIVMSG
-  else if (command == "MSG") {
+    
+    //SEND PRIVMSG
+    else if (command == "MSG") {
         QString nickname;
         stream >> nickname;
         if (nickname.length() > 0) {
@@ -224,7 +230,7 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
             }
         }
     }
-	else {
+    else {
         tab->appendText("<font color=\"" + m_errorColor + "\">Unknown command</font><br>");
     }
 }
@@ -248,7 +254,8 @@ void IRCServerTab::remove() {
         /* While there is a running session */
         m_close = TRUE;
         m_session->endSession();
-    } else {
+    } 
+    else {
         /* Session has previously been closed */
         m_channelTabs.first();
         while (m_channelTabs.current() != 0) {
@@ -297,7 +304,8 @@ void IRCServerTab::display(IRCOutput output) {
                     m_mainWindow->killTab(m_queryTabs.current(), true);
                 }
                 m_mainWindow->killTab(this);
-            } else {
+            } 
+            else {
                 appendText("<font color=\"" + m_errorColor + "\">" + output.htmlMessage() +"</font><br>");
                 QListIterator<IRCChannelTab> it(m_channelTabs);
                 for (; it.current(); ++it) {

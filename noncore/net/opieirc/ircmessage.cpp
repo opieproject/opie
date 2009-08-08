@@ -29,7 +29,8 @@ IRCMessage::IRCMessage(QString line) {
         stream >> temp;
         m_command = temp.upper();
         m_allParameters = line.right(line.length() - m_prefix.length() - m_command.length() - 3);
-    } else {
+    } 
+    else {
         m_command = temp.upper();
         m_allParameters = line.right(line.length() - m_command.length() - 1);
     }
@@ -42,7 +43,8 @@ IRCMessage::IRCMessage(QString line) {
             m_trailing = line.right(line.length() - line.find(" :") - 2);
             m_parameters << m_trailing;
             break;
-        } else {
+        } 
+        else {
             m_parameters << temp;
         }
     }
@@ -52,7 +54,7 @@ IRCMessage::IRCMessage(QString line) {
     /* Is this a CTCP command */
     if ((m_command == "PRIVMSG" || m_command == "NOTICE") && m_trailing.length()>0 && m_trailing.left(1) == QChar(1)) {
         m_ctcp = TRUE;
-	
+    
         m_ctcpRequest = (m_command == "PRIVMSG");
         
         /* Strip CTCP \001 characters */
@@ -109,7 +111,6 @@ QStringList IRCMessage::params(const QString &paramstring) const {
             if((*it).toUInt() < m_parameters.count())
                 retvalue << m_parameters[(*it).toUInt()];
         }
-
         else {
             unsigned int start, end;
             start = (*it).left(pos).toUInt();

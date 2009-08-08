@@ -149,7 +149,7 @@ void IRCMessageParser::parseCTCP(IRCMessage *message, int position) {
         (this->*(ctcpParserProcTable[position].proc))(message);
 }
 
-	
+
 
 void IRCMessageParser::parseNumericalServerName(IRCMessage *message) {
     emit outputReady(IRCOutput(OUTPUT_TITLE, tr("Connected to")+" <b>" + message->prefix() + "</b>"));
@@ -162,7 +162,6 @@ void IRCMessageParser::parseNumericalServerName(IRCMessage *message) {
 void IRCMessageParser::parseNumericalServerFeatures(IRCMessage *message) {
     m_session->setValidUsermodes(message->param(2));
     m_session->setValidChannelmodes(message->param(3));
-
 }
 
 void IRCMessageParser::parseNumericalServerProtocol(IRCMessage *message) {
@@ -202,7 +201,8 @@ void IRCMessageParser::parseLiteralJoin(IRCMessage *message) {
         } else {
             emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Nonexistant channel join - desynchronized?")));
         }
-    } else {
+    } 
+    else {
         /* Someone else joined */
         if (mask.nick() != m_session->m_server->nick()) {
             if (!channel->getPerson(mask.nick())) {
@@ -237,7 +237,8 @@ void IRCMessageParser::parseLiteralPart(IRCMessage *message) {
             output.addParam(channel);
             emit outputReady(output);
             delete channel;
-        } else {
+        } 
+        else {
             IRCChannelPerson *person = channel->getPerson(mask.nick());
             if (person) {
                 channel->removePerson(person);
@@ -246,11 +247,13 @@ void IRCMessageParser::parseLiteralPart(IRCMessage *message) {
                 output.addParam(person);
                 emit outputReady(output);
                 delete person;
-            } else {
+            } 
+            else {
                 emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Parting person not found - desynchronized?")));
             }
         }
-    } else {
+    } 
+    else {
         emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel for part not found - desynchronized?")));
     }
 }
@@ -269,7 +272,7 @@ void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
         output.addParam(person);
         emit outputReady(output);
     } 
-    else 
+    else {
         if (IRCChannel::isValid(message->param(0))) {
             /* IRC Channel message detected, verify sender, channel and display it */
             IRCChannel *channel = m_session->getChannel(message->param(0).lower());
@@ -290,7 +293,9 @@ void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
                 emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown channel %1").arg(message->param(0).lower()) ));
             }
         } 
-        else {emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received PRIVMSG of unknown type")));
+        else {
+            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received PRIVMSG of unknown type")));
+        }
     }
 }
 
@@ -324,7 +329,8 @@ void IRCMessageParser::parseLiteralNick(IRCMessage *message) {
               emit outputReady(output);
             }
              new code ends here 
-        } else {
+        } 
+        else {
             emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Nickname change of an unknown person")));
         }
     }*/
@@ -359,7 +365,8 @@ void IRCMessageParser::parseLiteralTopic(IRCMessage *message) {
         IRCOutput output(OUTPUT_TOPIC, mask.nick() + tr(" changed topic to ") + "\"" + message->param(1) + "\"");
         output.addParam(channel);
         emit outputReady(output);
-    } else {
+    } 
+    else {
         emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Unknown channel topic - desynchronized?")));
     }
 }
@@ -392,10 +399,12 @@ void IRCMessageParser::parseCTCPPing(IRCMessage *message) {
                 output.addParam(channel);
                 output.addParam(person);
                 emit outputReady(output);
-            } else {
+            } 
+            else {
                 emit outputReady(IRCOutput(OUTPUT_ERROR, tr("CTCP PING with unknown person - Desynchronized?")));
             }
-        } else {
+        } 
+        else {
             emit outputReady(IRCOutput(OUTPUT_ERROR, tr("CTCP PING with unknown channel - Desynchronized?")));
         }
     } else {
@@ -409,7 +418,8 @@ void IRCMessageParser::parseCTCPPing(IRCMessage *message) {
             IRCOutput output(OUTPUT_QUERYACTION, tr("Received a CTCP PING from ")+ mask.nick() );
             output.addParam(person);
             emit outputReady(output);
-        } else {
+        } 
+        else {
             emit outputReady(IRCOutput(OUTPUT_ERROR, tr("CTCP PING with bad recipient")));
         }
     }
@@ -423,7 +433,6 @@ void IRCMessageParser::parseCTCPVersion(IRCMessage *message) {
         m_session->m_connection->sendCTCPReply(mask.nick(), "VERSION", APP_VERSION " "  APP_COPYSTR);
         output.setMessage(tr("Received a CTCP VERSION request from ") + mask.nick());
     }
-
     else { 
         output.setMessage("Received CTCP VERSION reply from " + mask.nick() + ":" + message->param(0));
     }
@@ -442,13 +451,16 @@ void IRCMessageParser::parseCTCPAction(IRCMessage *message) {
                 output.addParam(channel);
                 output.addParam(person);
                 emit outputReady(output);
-            } else {
+            } 
+            else {
                 emit outputReady(IRCOutput(OUTPUT_ERROR, tr("CTCP ACTION with unknown person - Desynchronized?")));
             }
-        } else {
+        } 
+        else {
             emit outputReady(IRCOutput(OUTPUT_ERROR, tr("CTCP ACTION with unknown channel - Desynchronized?")));
         }
-    } else {
+    } 
+    else {
         if (message->ctcpDestination() == m_session->m_server->nick()) {
             IRCPerson *person = m_session->getPerson(mask.nick());
             if (!person) {
@@ -459,7 +471,8 @@ void IRCMessageParser::parseCTCPAction(IRCMessage *message) {
             IRCOutput output(OUTPUT_QUERYACTION, "*" + mask.nick() + message->param(0));
             output.addParam(person);
             emit outputReady(output);
-        } else {
+        } 
+        else {
             emit outputReady(IRCOutput(OUTPUT_ERROR, tr("CTCP ACTION with bad recipient")));
         }
     }
@@ -543,10 +556,12 @@ void IRCMessageParser::parseLiteralMode(IRCMessage *message) {
                         emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change with unknown flag")));
                     }
                 }
-        } else {
+        } 
+        else {
             emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Mode change with unknown kannel - Desynchronized?")));
         }
-    } else {
+    } 
+    else {
         emit outputReady(IRCOutput(OUTPUT_ERROR, tr("User modes not supported yet")));
     }
 }
@@ -562,7 +577,8 @@ void IRCMessageParser::parseLiteralKick(IRCMessage *message) {
                 IRCOutput output(OUTPUT_SELFKICK, tr("You were kicked from ") + channel->channelname() + tr(" by ") + mask.nick() + " (" + message->param(2) + ")");
                 output.addParam(channel);
                 emit outputReady(output);
-            } else {
+            } 
+            else {
               /* someone else got kicked */
                 channel->removePerson(person);
                 IRCOutput output(OUTPUT_OTHERKICK, person->nick() + tr(" was kicked from ") + channel->channelname() + tr(" by ") + mask.nick()+ " (" + message->param(2) + ")");
@@ -570,10 +586,12 @@ void IRCMessageParser::parseLiteralKick(IRCMessage *message) {
                 output.addParam(person);
                 emit outputReady(output);
             }
-        } else {
+        } 
+        else {
             emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Unknown person kick - desynchronized?")));
         }
-    } else {
+    } 
+    else {
          emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Unknown channel kick - desynchronized?")));
     }
 }
@@ -618,7 +636,8 @@ void IRCMessageParser::parseNumericalNames(IRCMessage *message) {
                         flag = 0;
                         break;
                 }
-            } else
+            } 
+            else
                 nick = temp;
 
             IRCPerson *person = m_session->getPerson(nick);
@@ -631,7 +650,8 @@ void IRCMessageParser::parseNumericalNames(IRCMessage *message) {
             chan_person->setFlags(flag);
             channel->addPerson(chan_person);
         }
-    } else
+    } 
+    else
         emit outputReady(IRCOutput(OUTPUT_ERROR,
                                    tr("Server message with unknown channel")));
 }
@@ -645,7 +665,8 @@ void IRCMessageParser::parseNumericalEndOfNames(IRCMessage *message) {
         IRCOutput output(OUTPUT_SELFJOIN, tr("You joined channel ") + channel->channelname());
         output.addParam(channel);
         emit outputReady(output);
-    } else {
+    } 
+    else {
         emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Server message with unknown channel")));
     }
 }
@@ -670,7 +691,8 @@ void IRCMessageParser::parseNumericalTopic(IRCMessage *message) {
         IRCOutput output(OUTPUT_TOPIC, tr("Topic for channel ") + channel->channelname() + tr(" is \"") + message->param(2) + "\"");
         output.addParam(channel);
         emit outputReady(output);
-    } else {
+    } 
+    else {
         IRCOutput output(OUTPUT_TOPIC, tr("Topic for channel ") + message->param(1) + tr(" is \"") + message->param(2) + "\"");
         output.addParam(0);
         emit outputReady(output);

@@ -83,7 +83,8 @@ void IRCChannelTab::appendText(QString text) {
         if (firstBreak != -1) {
             txt = "<qt bgcolor=\"" + m_backgroundColor + "\"/>" + txt.right(txt.length() - (firstBreak + 1));
         }
-    } else {
+    } 
+    else {
         m_lines++;
     }
     m_textview->ensureVisible(0, m_textview->contentsHeight());
@@ -97,7 +98,6 @@ void IRCChannelTab::appendText(QString text) {
         int col = text.findRev("color", -1, false);
         if ( col < p2 )
             emit ping( title() );
-
     }
 
     emit changed(this);
@@ -120,7 +120,8 @@ void IRCChannelTab::processCommand() {
                 session()->sendMessage(m_channel, m_field->text());
                 appendText("<font color=\"" + m_textColor + "\">&lt;</font><font color=\"" + m_selfColor + "\">"+m_parentTab->server()->nick()+"</font><font color=\"" + m_textColor + "\">&gt; "+IRCOutput::toHTML(m_field->text())+"</font><br>");
             }
-        } else {
+        } 
+        else {
             appendText("<font color=\"" + m_errorColor + "\">"+tr("Disconnected")+"</font><br>");
         }
     }
@@ -136,7 +137,8 @@ void IRCChannelTab::toggleList() {
     if (m_listVisible) {
         m_list->setMaximumWidth(0);
         m_listButton->setText("<");
-    } else {
+    } 
+    else {
         m_list->setMaximumWidth(LISTWIDTH);
         m_listButton->setText(">");
     }
@@ -201,7 +203,8 @@ IRCSession *IRCChannelTab::session() {
 void IRCChannelTab::remove() {
     if (session()->isSessionActive()) {
         session()->part(m_channel);
-    } else {
+    } 
+    else {
         m_mainWindow->killTab(this);
     }
 }

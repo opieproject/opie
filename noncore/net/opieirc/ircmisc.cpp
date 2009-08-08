@@ -89,7 +89,8 @@ void IRCHistoryLineEdit::keyPressEvent(QKeyEvent *event) {
             m_index++;
             setText(m_history[m_index]);
         }
-    } else if (key == Key_Down) {
+    } 
+    else if (key == Key_Down) {
         if (m_history.count() > 0 && m_index > 0) {
             m_index--;
             setText(m_history[m_index]);
@@ -98,22 +99,23 @@ void IRCHistoryLineEdit::keyPressEvent(QKeyEvent *event) {
             m_index = -1;
             setText("");
         }
-    } else if (key == Key_Return) {
+    } 
+    else if (key == Key_Return) {
         m_history.prepend(text());
         m_index = -1;
     }
 
     switch( keyConfigInstance()->handleKeyEventId( event ) ) {
-    case KeyNextTab:
-        emit nextTab();
-        return;
-    case KeyPrevTab:
-        emit prevTab();
-        return;
-    case KeyCloseTab:
-        emit closeTab();
-    default:
-        break;
+        case KeyNextTab:
+            emit nextTab();
+            return;
+        case KeyPrevTab:
+            emit prevTab();
+            return;
+        case KeyCloseTab:
+            emit closeTab();
+        default:
+            break;
     }
 
     QLineEdit::keyPressEvent(event);
