@@ -22,9 +22,9 @@ ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact,
 {
     initUI();
 
-	// Apply current profile
-	// plugin_plugin->load(profile);
-	// ... (reset profile name line edit etc.)
+    // Apply current profile
+    // plugin_plugin->load(profile);
+    // ... (reset profile name line edit etc.)
 }
 
 ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
@@ -41,7 +41,7 @@ ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
 
 Profile ProfileEditorDialog::profile() const
 {
-  	return m_prof;
+    return m_prof;
 }
 
 void ProfileEditorDialog::initUI()
@@ -135,24 +135,26 @@ void ProfileEditorDialog::initUI()
 
 }
 
-ProfileEditorDialog::~ProfileEditorDialog() {
+ProfileEditorDialog::~ProfileEditorDialog() 
+{
 
 }
+
 void ProfileEditorDialog::accept()
 {
-	if(profName().isEmpty())
-	{
-		QMessageBox::information(this,
-			QObject::tr("Invalid profile"),
-			QObject::tr("Please enter a profile name."));
-		return;
-	}
-	// Save profile and plugin profile
-	//if(plugin_plugin) plugin_plugin->save();
+    if(profName().isEmpty())
+    {
+        QMessageBox::information(this,
+            QObject::tr("Invalid profile"),
+            QObject::tr("Please enter a profile name."));
+        return;
+    }
+    // Save profile and plugin profile
+    //if(plugin_plugin) plugin_plugin->save();
 
-	// Save general values
-	m_prof.setName( profName() );
-	m_prof.setIOLayer( m_fact->internal(m_conCmb ->currentText()  ) );
+    // Save general values
+    m_prof.setName( profName() );
+    m_prof.setIOLayer( m_fact->internal(m_conCmb ->currentText()  ) );
         m_prof.setTerminalName( m_fact->internal(m_termCmb->currentText()  ) );
         m_prof.setAutoConnect( m_autoConnect->isChecked() );
 
@@ -163,28 +165,29 @@ void ProfileEditorDialog::accept()
         if (m_key)
             m_key->save( m_prof );
 
-	QDialog::accept();
+    QDialog::accept();
 }
 
 
-QString ProfileEditorDialog::profName()const
+QString ProfileEditorDialog::profName() const
 {
-	return m_name->text();
+    return m_name->text();
 }
 
-QCString ProfileEditorDialog::profType()const
+QCString ProfileEditorDialog::profType() const
 {
     /*QStringList w = m_fact->configWidgets();
-	for(QStringList::Iterator it = w.begin(); it != w.end(); it++)
-		if(device_box->currentText() == m_fact->name((*it))) return (*it);
+    for(QStringList::Iterator it = w.begin(); it != w.end(); it++)
+        if(device_box->currentText() == m_fact->name((*it))) return (*it);
     */
     return QCString();
 }
+
 /*
  * we need to switch the widget
  */
-void ProfileEditorDialog::slotConActivated( const QString& str ) {
-
+void ProfileEditorDialog::slotConActivated( const QString& str ) 
+{
     delete m_con;
 
     m_con = m_fact->newConnectionPlugin( str, m_svCon->viewport() );
@@ -199,7 +202,8 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
         m_autoConnect->setChecked( true );
         m_prof.writeEntry("Terminal", Profile::Linux );
         slotTermActivated( m_fact->external (m_prof.terminalName() ) );
-    } else {
+    } 
+    else {
         m_prof.writeEntry("Terminal", Profile::VT102 );
         slotTermActivated( m_fact->external (m_prof.terminalName() ) );
         m_autoConnect->setChecked( false );
@@ -213,8 +217,8 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
 /*
  * we need to switch the widget
  */
-void ProfileEditorDialog::slotTermActivated( const QString& str ) {
-
+void ProfileEditorDialog::slotTermActivated( const QString& str ) 
+{
     delete m_term;
 
     m_term = m_fact->newTerminalPlugin( str, m_svTerm->viewport() );
@@ -225,14 +229,13 @@ void ProfileEditorDialog::slotTermActivated( const QString& str ) {
     }
 }
 
-void ProfileEditorDialog::slotKeyActivated(const QString &str) {
+void ProfileEditorDialog::slotKeyActivated(const QString &str) 
+{
     delete m_key;
     m_key = m_fact->newKeyboardPlugin( str, m_tabKey );
 
     if (m_key) {
-
         m_key->load(m_prof);
         m_layKey->addWidget(m_key);
     }
-
 }

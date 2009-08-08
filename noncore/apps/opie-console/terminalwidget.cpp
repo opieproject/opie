@@ -35,8 +35,8 @@ namespace {
 
 TerminalWidget::TerminalWidget( const QString& name, QWidget* parent,
                                 const char* na )
-    : ProfileDialogTerminalWidget( name, parent, na ) {
-
+    : ProfileDialogTerminalWidget( name, parent, na )
+{
     m_terminal = new QLabel(tr("Terminal Type"), this );
     m_terminalBox = new QComboBox(this);
     m_colorLabel = new QLabel(tr("Color scheme"), this);
@@ -106,9 +106,13 @@ TerminalWidget::TerminalWidget( const QString& name, QWidget* parent,
             this, SLOT(slotTermOutbound(bool) ) );
 */
 }
-TerminalWidget::~TerminalWidget() {
+
+TerminalWidget::~TerminalWidget()
+{
 }
-void TerminalWidget::load( const Profile& prof ) {
+
+void TerminalWidget::load( const Profile& prof )
+{
     int term = prof.readNumEntry("Terminal");
     int color = prof.readNumEntry("Color");
 //     int fontsize = prof.readNumEntry("Font");
@@ -118,38 +122,38 @@ void TerminalWidget::load( const Profile& prof ) {
     int opt_outbound = prof.readNumEntry("Outbound");
 
     switch( term ) {
-    case Profile::VT100:
-        m_terminalBox->setCurrentItem(id_term_vt100 );
-        break;
-    case Profile::VT102:
-        m_terminalBox->setCurrentItem(id_term_vt102 );
-        break;
-    case Profile::Linux:
-        m_terminalBox->setCurrentItem(id_term_linux );
-        break;
-    case Profile::XTerm:
-        m_terminalBox->setCurrentItem(id_term_xterm );
-        break;
-    default:
-        m_terminalBox->setCurrentItem(id_term_vt102 );
-        break;
+        case Profile::VT100:
+            m_terminalBox->setCurrentItem(id_term_vt100 );
+            break;
+        case Profile::VT102:
+            m_terminalBox->setCurrentItem(id_term_vt102 );
+            break;
+        case Profile::Linux:
+            m_terminalBox->setCurrentItem(id_term_linux );
+            break;
+        case Profile::XTerm:
+            m_terminalBox->setCurrentItem(id_term_xterm );
+            break;
+        default:
+            m_terminalBox->setCurrentItem(id_term_vt102 );
+            break;
     };
 
     switch( color ) {
-    case Profile::Black:
-        m_colorCmb->setCurrentItem(id_term_black );
-        break;
-    case Profile::White:
-        m_colorCmb->setCurrentItem(id_term_white );
-        break;
-    case Profile::Green:
-        m_colorCmb->setCurrentItem(id_term_green );
-        break;
-    case Profile::Orange:
-        m_colorCmb->setCurrentItem(id_term_orange );
-        break;
-    default:
-        break;
+        case Profile::Black:
+            m_colorCmb->setCurrentItem(id_term_black );
+            break;
+        case Profile::White:
+            m_colorCmb->setCurrentItem(id_term_white );
+            break;
+        case Profile::Green:
+            m_colorCmb->setCurrentItem(id_term_green );
+            break;
+        case Profile::Orange:
+            m_colorCmb->setCurrentItem(id_term_orange );
+            break;
+        default:
+            break;
     };
 
     Config qpecfg("qpe");
@@ -172,57 +176,61 @@ void TerminalWidget::load( const Profile& prof ) {
 //         break;
 //     };
 
-    if (opt_echo) m_optionEcho->setChecked( true );
-    if (opt_wrap) m_optionWrap->setChecked( true );
-    if (opt_inbound) m_convInbound->setChecked( true );
-    if (opt_outbound) m_convOutbound->setChecked( true );
+    if (opt_echo)
+        m_optionEcho->setChecked( true );
+    if (opt_wrap)
+        m_optionWrap->setChecked( true );
+    if (opt_inbound)
+        m_convInbound->setChecked( true );
+    if (opt_outbound)
+        m_convOutbound->setChecked( true );
 
 }
-void TerminalWidget::save( Profile& profile ) {
+
+void TerminalWidget::save( Profile& profile )
+{
     switch(m_terminalBox->currentItem() ) {
-    case id_term_vt100:
-        profile.writeEntry("Terminal", Profile::VT100 );
-        break;
-    case id_term_vt102:
-        profile.writeEntry("Terminal", Profile::VT102 );
-        break;
-    case id_term_linux:
-        profile.writeEntry("Terminal", Profile::Linux );
-        break;
-    case id_term_xterm:
-        profile.writeEntry("Terminal", Profile::XTerm );
-        break;
-    //case id_term_ansi:
-    //    profile.writeEntry("Terminal", Profile::VT102 );
-    //    break;
-    default:
-        break;
+        case id_term_vt100:
+            profile.writeEntry("Terminal", Profile::VT100 );
+            break;
+        case id_term_vt102:
+            profile.writeEntry("Terminal", Profile::VT102 );
+            break;
+        case id_term_linux:
+            profile.writeEntry("Terminal", Profile::Linux );
+            break;
+        case id_term_xterm:
+            profile.writeEntry("Terminal", Profile::XTerm );
+            break;
+        //case id_term_ansi:
+        //    profile.writeEntry("Terminal", Profile::VT102 );
+        //    break;
+        default:
+            break;
     };
 
     // color
     switch(m_colorCmb->currentItem() ) {
-    case id_term_black:
-        profile.writeEntry("Color", Profile::Black );
-        break;
-    case id_term_white:
-        profile.writeEntry("Color", Profile::White );
-        break;
-    case id_term_green:
-        profile.writeEntry("Color", Profile::Green );
-        break;
-    case id_term_orange:
-        profile.writeEntry("Color", Profile::Orange );
-        break;
-    default:
-        break;
+        case id_term_black:
+            profile.writeEntry("Color", Profile::Black );
+            break;
+        case id_term_white:
+            profile.writeEntry("Color", Profile::White );
+            break;
+        case id_term_green:
+            profile.writeEntry("Color", Profile::Green );
+            break;
+        case id_term_orange:
+            profile.writeEntry("Color", Profile::Orange );
+            break;
+        default:
+            break;
     };
-
 
     profile.writeEntry( "FontSize", m_fontSelector->fontSize() );
     profile.writeEntry( "FontStyle", m_fontSelector->fontStyle() );
     profile.writeEntry( "FontCharset", m_fontSelector->fontCharSet() );
     profile.writeEntry( "Font", m_fontSelector->fontFamily() );
-
 
 //     if (m_sizeSmall->isChecked() ) {
 //         profile.writeEntry("Font", Profile::Micro );

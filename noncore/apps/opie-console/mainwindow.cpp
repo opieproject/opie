@@ -33,8 +33,8 @@ using namespace Opie::Ui;
 MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(parent, name, WStyle_ContextHelp)  {
 
 #ifdef FSCKED_DISTRI
-   FixIt fix;
-   fix.fixIt();
+    FixIt fix;
+    fix.fixIt();
 #endif
 
     m_closeOnEmpty = TRUE;
@@ -145,7 +145,6 @@ void MainWindow::initUI() {
             this, SLOT(slotTransfer() ) );
 
 
-
     /*
      * immediate change of line wrap policy
      */
@@ -167,25 +166,25 @@ void MainWindow::initUI() {
     connect( m_fullscreen, SIGNAL( activated() ),
              this,  SLOT( slotFullscreen() ) );
 
-	/*
-	 * scrollbar
-	 */
+    /*
+     * scrollbar
+     */
     sm_none = m_scrollbar->insertItem(tr( "None" ));
     sm_left = m_scrollbar->insertItem(tr( "Left" ));
     sm_right = m_scrollbar->insertItem(tr( "Right" ));
 
     m_console->insertItem(tr("Scrollbar"), m_scrollbar, -1, 0);
     connect( m_scrollbar, SIGNAL(activated(int)),
-			 this, SLOT(slotScrollbarSelected(int)));
+             this, SLOT(slotScrollbarSelected(int)));
 
     m_console->insertSeparator();
 
-	m_recordLog = new QAction();
-	m_recordLog->setText( tr("Start log") );
-	m_recordLog->addTo( m_console );
-	connect(m_recordLog, SIGNAL(activated() ), 
-			this, SLOT( slotSaveLog() ) );
- 	m_recordingLog = false;
+    m_recordLog = new QAction();
+    m_recordLog->setText( tr("Start log") );
+    m_recordLog->addTo( m_console );
+    connect(m_recordLog, SIGNAL(activated() ), 
+            this, SLOT( slotSaveLog() ) );
+    m_recordingLog = false;
 
     QAction *a = new QAction();
     a->setText( tr("Save history") );
@@ -222,9 +221,7 @@ void MainWindow::initUI() {
     m_saveScript->addTo(m_scripts);
     connect(m_saveScript, SIGNAL(activated()), this, SLOT(slotSaveScript()));
    
-	 
-	
-	
+    
     /*
      * action that open/closes the keyboard
      */
@@ -244,9 +241,9 @@ void MainWindow::initUI() {
     /* the scripts menu */
 #ifdef EAST
     Opie::Core::OConfig cfg("opie-console");
-	cfg.setGroup("10east");
-   	if( !cfg.readEntry("scripthide",0) ) {
-    	m_bar->insertItem( tr("Scripts"), m_scripts );
+    cfg.setGroup("10east");
+    if( !cfg.readEntry("scripthide",0) ) {
+        m_bar->insertItem( tr("Scripts"), m_scripts );
     }
 #endif
 
@@ -311,9 +308,11 @@ void MainWindow::initUI() {
 ProfileManager* MainWindow::manager() {
     return m_manager;
 }
+
 TabWidget* MainWindow::tabWidget() {
     return m_consoleWindow;
 }
+
 void MainWindow::populateProfiles() {
     m_sessionsPop->clear();
     Profile::ValueList list = manager()->all();
@@ -427,7 +426,8 @@ void MainWindow::slotConnect() {
             // if it does not support file transfer, disable the menu entry
             if ( ( m_curSession->layer() )->supports()[1] == 0 ) {
                 m_transfer->setEnabled( false );
-            } else {
+            } 
+            else {
                 m_transfer->setEnabled( true );
             }
 
@@ -464,7 +464,8 @@ void MainWindow::slotQuickLaunch()  {
     Profile prof = manager()->profile(  "default" );
     if ( prof.name() == "default"  )  {
         create( prof );
-    } else {
+    } 
+    else {
     #ifndef EAST
         Profile newProf =  Profile( "default",  "console", "default" ,  0, 3,  0 );
         newProf.setAutoConnect( true );
@@ -510,15 +511,13 @@ void MainWindow::slotProfile( int id) {
     create( prof );
 }
 
-
-
 void MainWindow::create( const Profile& prof ) {
     char *homeDir = getenv("HOME");
 
     if ( homeDir )
         ::chdir( homeDir );
     
-    if(m_curSession)
+    if ( m_curSession )
         if(m_curSession->transferDialog()) m_curSession->transferDialog()->hide();
 
     Session *ses = manager()->fromProfile( prof, tabWidget() );
@@ -560,7 +559,8 @@ void MainWindow::create( const Profile& prof ) {
 
     if(currentSession()->profile().readNumEntry("Wrap", 80)){
         m_isWrapped = true;
-    } else {
+    } 
+    else {
         m_isWrapped = false;
     }
 
@@ -583,25 +583,21 @@ void MainWindow::slotTransfer()
     }
 }
 
-
 void MainWindow::slotOpenKeb(bool state) {
-
-    if (state) m_keyBar->show();
-    else m_keyBar->hide();
-
+    if (state) 
+        m_keyBar->show();
+    else 
+        m_keyBar->hide();
 }
 
-
 void MainWindow::slotOpenButtons( bool state ) {
-
     if ( state ) {
         m_buttonBar->show();
-    } else {
+    } 
+    else {
         m_buttonBar->hide();
     }
 }
-
-
 
 void MainWindow::slotSessionChanged( Session* ses ) {
     if(m_curSession)
@@ -617,7 +613,8 @@ void MainWindow::slotSessionChanged( Session* ses ) {
             m_recordScript->setEnabled(!m_curSession->emulationHandler()->isRecording());
             m_saveScript->setEnabled(m_curSession->emulationHandler()->isRecording());
             m_scripts->setItemEnabled(m_runScript_id, true);
-        } else {
+        } 
+        else {
             m_connect->setEnabled( true );
             m_disconnect->setEnabled( false );
             m_recordScript->setEnabled( false );
@@ -625,24 +622,28 @@ void MainWindow::slotSessionChanged( Session* ses ) {
             m_scripts->setItemEnabled(m_runScript_id, false);
         }
 
-		if ( ( currentSession()->emulationHandler()->isLogging() ) ) {
-			 m_recordLog->setText( tr("Stop log") );
-		} else {
-			 m_recordLog->setText( tr("Start log") );
-		}
+        if ( ( currentSession()->emulationHandler()->isLogging() ) ) {
+            m_recordLog->setText( tr("Stop log") );
+        } 
+        else {
+            m_recordLog->setText( tr("Start log") );
+        }
 
         if ( ( m_curSession->layer() )->supports()[1] == 0 ) {
             m_transfer->setEnabled( false );
-        } else {
+        } 
+        else {
             m_transfer->setEnabled( true );
         }
 
         QWidget *w = m_curSession->widget();
-        if(w) w->setFocus();
+        if( w ) 
+            w->setFocus();
 
-        if(currentSession()->profile().readNumEntry("Wrap", 80)){
+        if( currentSession()->profile().readNumEntry( "Wrap", 80 ) ) {
             m_isWrapped = true;
-        } else {
+        } 
+        else {
             m_isWrapped = false;
         }
 
@@ -683,11 +684,9 @@ void MainWindow::slotSessionClosed( Session *ses )
 
 void MainWindow::slotWrap()
 {
-    if(m_curSession)
-    {
+    if( m_curSession ) {
         EmulationHandler *e = m_curSession->emulationHandler();
-        if(e)
-        {
+        if( e ) {
             e->setWrap( m_isWrapped ? 80:0 );
             m_isWrapped = !m_isWrapped;
         }
@@ -704,7 +703,8 @@ void MainWindow::slotFullscreen() {
         ( m_curSession->emulationHandler() )->cornerButton()->hide();
         disconnect( ( m_curSession->emulationHandler() )->cornerButton(), SIGNAL( pressed() ), this, SLOT( slotFullscreen() ) );
 
-    } else {
+    } 
+    else {
         savedParentFullscreen = ( m_curSession->widgetStack() )->parentWidget();
         ( m_curSession->widgetStack() )->setFrameStyle( QFrame::NoFrame );
         ( m_curSession->widgetStack() )->reparent( 0, WStyle_Tool | WStyle_Customize | WStyle_StaysOnTop
@@ -727,15 +727,13 @@ void MainWindow::slotScrollbarSelected(int index)
 
     Config cfg( "Konsole" );
     cfg.setGroup("ScrollBar");
-    if(index == sm_left)
-    {
-		loc = 1;
+    if( index == sm_left ) {
+        loc = 1;
     }
-    else if(index == sm_right)
-    {
-		loc = 2;
+    else if( index == sm_right ) {
+        loc = 2;
     }
-	
+    
     cfg.writeEntry("Position", loc);
 
     if (currentSession()) {
@@ -763,10 +761,12 @@ void MainWindow::slotKeyReceived(FKey k, ushort, ushort, bool pressed) {
         ke.ignore();
     }
 }
+
 void MainWindow::slotCopy() {
     if (!currentSession() ) return;
     currentSession()->emulationHandler()->copy();
 }
+
 void MainWindow::slotPaste() {
     if (!currentSession() ) return;
     currentSession()->emulationHandler()->paste();
@@ -778,9 +778,9 @@ void MainWindow::slotPaste() {
 
 void MainWindow::slotSaveSession() {
     if (!currentSession() ) {
-      QMessageBox::information(this, tr("Save Connection"),
-                                          tr("<qt>There is no Connection.</qt>"), 1 );
-      return;
+        QMessageBox::information(this, tr("Save Connection"),
+                                            tr("<qt>There is no Connection.</qt>"), 1 );
+        return;
     }
     manager()->add( currentSession()->profile() );
     manager()->save();
@@ -790,32 +790,33 @@ void MainWindow::slotSaveSession() {
 
 
 void MainWindow::slotSaveLog() {
-
     if( currentSession()->emulationHandler()->isLogging() ) {
-      DocLnk nf;
-      QString m_logName = currentSession()->emulationHandler()->logFileName();
-      QFileInfo info(m_logName);
-      nf.setType("text/plain");
-      nf.setFile(m_logName);
-      nf.setName(info.fileName());
-      nf.writeLink();
-      m_recordLog->setText( tr("Start log") );
-      m_recordingLog = false;
-	  currentSession()->emulationHandler()->clearLog(); 
-    } else {
-    QMap<QString, QStringList> map;
-    QStringList text;
-    text << "text/plain";
-    map.insert(tr("Log"), text );
-    Opie::Core::OConfig cfg("opie-console");
-    cfg.setGroup("defaults");
-    QString startDir = cfg.readEntry("defaultlogdir", QPEApplication::documentDir() );
-    QString m_logName = OFileDialog::getSaveFileName(2, startDir, QString::null, map, 0, startDir);
-    if (m_logName.isEmpty() ) return;
+        DocLnk nf;
+        QString m_logName = currentSession()->emulationHandler()->logFileName();
+        QFileInfo info(m_logName);
+        nf.setType("text/plain");
+        nf.setFile(m_logName);
+        nf.setName(info.fileName());
+        nf.writeLink();
+        m_recordLog->setText( tr("Start log") );
+        m_recordingLog = false;
+        currentSession()->emulationHandler()->clearLog(); 
+    } 
+    else {
+        QMap<QString, QStringList> map;
+        QStringList text;
+        text << "text/plain";
+        map.insert(tr("Log"), text );
+        Opie::Core::OConfig cfg("opie-console");
+        cfg.setGroup("defaults");
+        QString startDir = cfg.readEntry("defaultlogdir", QPEApplication::documentDir() );
+        QString m_logName = OFileDialog::getSaveFileName(2, startDir, QString::null, map, 0, startDir);
+        if (m_logName.isEmpty() ) 
+            return;
 
-    m_recordLog->setText( tr("Stop log") ); 
-    m_recordingLog = true;
-    currentSession()->emulationHandler()->startLogging(m_logName); 
+        m_recordLog->setText( tr("Stop log") ); 
+        m_recordingLog = true;
+        currentSession()->emulationHandler()->startLogging(m_logName); 
     }
 }
 

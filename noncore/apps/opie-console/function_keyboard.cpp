@@ -13,33 +13,35 @@
 
 FunctionKeyboard::FunctionKeyboard(QWidget *parent) :
     QFrame(parent), numRows(DEFAULT_ROWS), numCols(DEFAULT_COLS),
-    pressedRow(0), pressedCol(0) {
-
+    pressedRow(0), pressedCol(0)
+{
     setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed));
 
-    if (keys.isEmpty()) loadDefaults();
-
-
-
+    if (keys.isEmpty())
+        loadDefaults();
 }
 
-FunctionKeyboard::~FunctionKeyboard() {}
+FunctionKeyboard::~FunctionKeyboard()
+{
+}
 
-void FunctionKeyboard::changeRows(int r) {
-
+void FunctionKeyboard::changeRows(int r)
+{
     numRows = r;
 
     // have to do this so the whole thing gets redrawn
     hide(); show();
 }
-void FunctionKeyboard::changeCols(int c) {
 
+void FunctionKeyboard::changeCols(int c)
+{
     numCols = c;
     keyWidth = (double)width()/numCols; // have to reset this thing too
     repaint(false);
 }
-void FunctionKeyboard::load (const Profile& prof) {
 
+void FunctionKeyboard::load (const Profile& prof)
+{
     keys.clear();
 
     numRows = prof.readNumEntry("keb_rows", 2);
@@ -47,7 +49,7 @@ void FunctionKeyboard::load (const Profile& prof) {
     keyWidth = (double)width()/numCols; // have to reset this thing too
 
     /* load all the keys to the keyboard */
-    for (ushort i = 0; i <= numRows - 1; i++)
+    for (ushort i = 0; i <= numRows - 1; i++) {
         for (ushort j = 0; j <= numCols - 1; j++) {
 
             QString h = "r" + QString::number(i) + "c" + QString::number(j);
@@ -65,16 +67,17 @@ void FunctionKeyboard::load (const Profile& prof) {
                 }
             }
         }
+    }
 
-    if (keys.isEmpty()) loadDefaults();
+    if (keys.isEmpty())
+        loadDefaults();
 
     hide();
     show();
-
 }
 
-void FunctionKeyboard::paintEvent(QPaintEvent *e) {
-
+void FunctionKeyboard::paintEvent(QPaintEvent *e)
+{
     QPainter p(this);
     p.setClipRect(e->rect());
     p.fillRect(0, 0, width(), height(), QColor(255,255,255));
@@ -118,8 +121,8 @@ void FunctionKeyboard::paintEvent(QPaintEvent *e) {
     }
 }
 
-void FunctionKeyboard::paintKey(uint row, uint col) {
-
+void FunctionKeyboard::paintKey(uint row, uint col)
+{
     QPainter p(this);
 
     p.fillRect(QRect(QPoint(col * keyWidth + 1, row * keyHeight + 1),
@@ -127,13 +130,14 @@ void FunctionKeyboard::paintKey(uint row, uint col) {
                (pressedRow != -1 && pressedCol != -1 ) ? QColor(97,119,155) : QColor(255,255,255));
 
     QString handle ("r" + QString::number(row) + "c" + QString::number(col));
-    if (keys[handle].pixFile.isEmpty())
+    if (keys[handle].pixFile.isEmpty()) {
         p.drawText(
                     col * keyWidth + 1, row * keyHeight + 1,
                     keyWidth, keyHeight,
                     Qt::AlignHCenter | Qt::AlignVCenter,
                     keys[handle].label
         );
+    }
     else {
 
         ushort centerX = (ushort)(col *keyWidth) + (ushort)(keyWidth - keys[handle].pix->width()) / 2;
@@ -142,18 +146,16 @@ void FunctionKeyboard::paintKey(uint row, uint col) {
     }
 
     if (col == numCols - 1) {
-
         // sometimes it doesnt draw the last line
 
         p.drawLine((col+1) * keyWidth -1, row * keyHeight,
                    (col+1) * keyWidth -1, (row + 1) * keyHeight
         );
     }
-
 }
 
-void FunctionKeyboard::mousePressEvent(QMouseEvent *e) {
-
+void FunctionKeyboard::mousePressEvent(QMouseEvent *e)
+{
     pressedRow = e->y() / keyHeight;
     pressedCol = (int) (e->x() / keyWidth);
 
@@ -162,11 +164,10 @@ void FunctionKeyboard::mousePressEvent(QMouseEvent *e) {
     // emit that sucker!
     FKey k = keys["r" + QString::number(pressedRow) + "c" + QString::number(pressedCol)];
     emit keyPressed(k, pressedRow, pressedCol, 1);
-
 }
 
-void FunctionKeyboard::mouseReleaseEvent(QMouseEvent *) {
-
+void FunctionKeyboard::mouseReleaseEvent(QMouseEvent *)
+{
     if (pressedRow != -1 && pressedRow != -1) {
 
         int row = pressedRow; pressedRow = -1;
@@ -176,26 +177,24 @@ void FunctionKeyboard::mouseReleaseEvent(QMouseEvent *) {
         FKey k = keys["r" + QString::number(row) + "c" + QString::number(col)];
         emit keyPressed(k, row, col, 0);
     }
-
 }
 
 
-void FunctionKeyboard::resizeEvent(QResizeEvent*) {
-
+void FunctionKeyboard::resizeEvent(QResizeEvent*)
+{
     /* set he default font height/width */
     QFontMetrics fm=fontMetrics();
     keyHeight = fm.lineSpacing() + 2;
     keyWidth = (double)width()/numCols;
-
 }
 
-QSize FunctionKeyboard::sizeHint() const {
-
+QSize FunctionKeyboard::sizeHint() const
+{
     return QSize(width(), keyHeight * numRows + 1);
 }
 
-void FunctionKeyboard::loadDefaults() {
-
+void FunctionKeyboard::loadDefaults()
+{
     numRows = DEFAULT_ROWS;
     numCols = DEFAULT_COLS;
     keyWidth = (double)width()/numCols; // have to reset this thing too
@@ -224,8 +223,6 @@ void FunctionKeyboard::loadDefaults() {
     keys.insert( "r1c9", FKey ("F10", 0, 4153, 0));
     keys.insert( "r1c10", FKey ("F11", 0, 4154, 0));
     keys.insert( "r1c11", FKey ("F12", 0, 4155, 0));
-
-
 }
 
 /* FunctionKeyboardConfig {{{1 */
@@ -279,11 +276,13 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
     root->addWidget(dimentions);
     root->addWidget(editKey);
 }
+
 FunctionKeyboardConfig::~FunctionKeyboardConfig() {
 
 }
-void FunctionKeyboardConfig::load (const Profile& prof) {
 
+void FunctionKeyboardConfig::load (const Profile& prof)
+{
     kb->keys.clear();
     kb->loadDefaults();
 
@@ -291,7 +290,7 @@ void FunctionKeyboardConfig::load (const Profile& prof) {
     m_colBox->setValue(prof.readNumEntry("keb_cols", 10));
 
     /* load all the keys to the keyboard */
-    for (int i = 0; i <= m_rowBox->value() -1; i++)
+    for (int i = 0; i <= m_rowBox->value() -1; i++) {
         for (int j = 0; j <= m_colBox->value() -1; j++) {
 
             QString h = "r" + QString::number(i) + "c" + QString::number(j);
@@ -309,8 +308,9 @@ void FunctionKeyboardConfig::load (const Profile& prof) {
                 }
             }
         }
-
+    }
 }
+
 void FunctionKeyboardConfig::save (Profile& prof) {
 
     prof.writeEntry("keb_rows", m_rowBox->value());
@@ -318,7 +318,6 @@ void FunctionKeyboardConfig::save (Profile& prof) {
 
     QMap<QString, FKey>::Iterator it;
     for ( it = kb->keys.begin(); it != kb->keys.end(); it++) {
-
         FKey k = it.data();
         QString entry = k.label + "|"
                         + k.pixFile + "|"
@@ -326,22 +325,23 @@ void FunctionKeyboardConfig::save (Profile& prof) {
                         + QString::number(k.unicode);
 
         prof.writeEntry("keb_" + it.key(), entry);
-
     }
-
 }
-void FunctionKeyboardConfig::slotChangeRows(int r) {
 
+void FunctionKeyboardConfig::slotChangeRows(int r)
+{
     kb->changeRows(r);
-
 }
-void FunctionKeyboardConfig::slotChangeCols(int c) {
 
+void FunctionKeyboardConfig::slotChangeCols(int c)
+{
     kb->changeCols(c);
 }
-void FunctionKeyboardConfig::slotKeyPressed(FKey k, ushort r, ushort c, bool pressed) {
 
-    if (!pressed) return;
+void FunctionKeyboardConfig::slotKeyPressed(FKey k, ushort r, ushort c, bool pressed)
+{
+    if (!pressed)
+        return;
 
     selectedHandle = "r" + QString::number(r) +
                      "c" + QString::number(c);
@@ -349,13 +349,11 @@ void FunctionKeyboardConfig::slotKeyPressed(FKey k, ushort r, ushort c, bool pre
     selectedCol = c;
 
     if (k.pixFile.isEmpty()) {
-
         m_labels->setEditable(true);
         m_labels->setCurrentItem(0);
         m_labels->changeItem(k.label, 0);
-
-    } else {
-
+    }
+    else {
         // any better way to select the pixmap?
         m_labels->setCurrentItem((m_labels->listBox())->index((m_labels->listBox())->findItem(kb->keys[selectedHandle].pixFile)));
         m_labels->setEditable(false);
@@ -363,10 +361,10 @@ void FunctionKeyboardConfig::slotKeyPressed(FKey k, ushort r, ushort c, bool pre
     m_qvalues->changeItem(QString::number(k.qcode), 0);
     m_uniValues->changeItem(QString::number(k.unicode), 0);
 }
-void FunctionKeyboardConfig::slotChangeIcon(int index) {
 
+void FunctionKeyboardConfig::slotChangeIcon(int index)
+{
     if (index == 0) {
-
         // is text
         m_labels->setEditable(true);
         // why tf does the text get erased unless i do this?
@@ -374,9 +372,8 @@ void FunctionKeyboardConfig::slotChangeIcon(int index) {
 
         kb->keys[selectedHandle].pixFile = "";
         delete kb->keys[selectedHandle].pix;
-
-    } else {
-
+    }
+    else {
         // is a pixmap
         m_labels->setEditable(false);
         kb->keys[selectedHandle].pixFile = m_labels->currentText();
@@ -384,17 +381,20 @@ void FunctionKeyboardConfig::slotChangeIcon(int index) {
     }
     kb->paintKey(selectedRow, selectedCol);
 }
-void FunctionKeyboardConfig::slotChangeLabelText(const QString &label) {
 
+void FunctionKeyboardConfig::slotChangeLabelText(const QString &label)
+{
     kb->keys[selectedHandle].label = label;
 
     kb->paintKey(selectedRow, selectedCol);
 }
-void FunctionKeyboardConfig::slotChangeQCode(const QString& qcode) {
 
+void FunctionKeyboardConfig::slotChangeQCode(const QString& qcode)
+{
     kb->keys[selectedHandle].qcode = qcode.toUInt();
 }
-void FunctionKeyboardConfig::slotChangeUnicode(const QString& uni) {
 
+void FunctionKeyboardConfig::slotChangeUnicode(const QString& uni)
+{
     kb->keys[selectedHandle].unicode = uni.toUInt();
 }

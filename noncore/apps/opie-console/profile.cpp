@@ -3,6 +3,7 @@
 Profile::Profile() {
 
 }
+
 Profile::Profile( const QString& name,
                   const QCString& iolayerName,
                   const QCString& termName,
@@ -11,17 +12,23 @@ Profile::Profile( const QString& name,
                   int terminal )
     : m_name( name ), m_ioLayer( iolayerName ), m_term( termName), m_autoConnect(0),
       m_back( background ), m_fore( foreground ), m_terminal( terminal )
-{}
+{
+}
+
 Profile::Profile( const Profile& prof )
 {
     (*this) = prof;
 }
-bool Profile::operator==( const Profile& prof ) {
+
+bool Profile::operator==( const Profile& prof )
+{
     if ( m_name == prof.m_name ) return true;
 
     return false;
 }
-Profile &Profile::operator=( const Profile& prof ) {
+
+Profile &Profile::operator=( const Profile& prof )
+{
     m_name = prof.m_name;
     m_ioLayer = prof.m_ioLayer;
     m_autoConnect = prof.m_autoConnect;
@@ -33,72 +40,114 @@ Profile &Profile::operator=( const Profile& prof ) {
 
     return *this;
 }
+
 Profile::~Profile() {
 }
-QMap<QString, QString> Profile::conf()const {
+
+QMap<QString, QString> Profile::conf() const
+{
     return m_conf;
 }
-QString Profile::name()const {
+
+QString Profile::name()const 
+{
     return m_name;
 }
-QCString Profile::ioLayerName()const {
+
+QCString Profile::ioLayerName() const
+{
     return m_ioLayer;
 }
-QCString Profile::terminalName( )const {
+
+QCString Profile::terminalName() const
+{
     return m_term;
 }
-bool Profile::autoConnect()const {
 
+bool Profile::autoConnect() const
+{
     return m_autoConnect;
 }
-int Profile::foreground()const {
+
+int Profile::foreground() const
+{
     return m_fore;
 }
-int Profile::background()const {
+
+int Profile::background() const
+{
     return m_back;
 }
-int Profile::terminal()const {
+
+int Profile::terminal() const
+{
     return m_terminal;
 }
-void Profile::setName( const QString& str ) {
+
+void Profile::setName( const QString& str )
+{
     m_name = str;
 }
-void Profile::setIOLayer( const QCString& name ) {
+
+void Profile::setIOLayer( const QCString& name )
+{
     m_ioLayer = name;
 }
-void Profile::setTerminalName( const QCString& str ) {
+
+void Profile::setTerminalName( const QCString& str )
+{
     m_term = str;
 }
-void Profile::setAutoConnect( const bool c) {
+
+void Profile::setAutoConnect( const bool c )
+{
 
     m_autoConnect = c;
 }
-void Profile::setBackground( int back ) {
+
+void Profile::setBackground( int back )
+{
     m_back = back;
 }
-void Profile::setForeground( int fore ) {
+
+void Profile::setForeground( int fore )
+{
     m_fore = fore;
 }
-void Profile::setTerminal( int term ) {
+
+void Profile::setTerminal( int term )
+{
     m_terminal =  term;
 }
+
 /* config stuff */
-void Profile::clearConf() {
+void Profile::clearConf()
+{
     m_conf.clear();
 }
-void Profile::writeEntry( const QString& key,  const QString& value ) {
+
+void Profile::writeEntry( const QString& key,  const QString& value )
+{
     m_conf.replace( key, value );
 }
-void Profile::writeEntry( const QString& key, int num ) {
+
+void Profile::writeEntry( const QString& key, int num )
+{
     writeEntry( key,  QString::number( num ) );
 }
-void Profile::writeEntry( const QString& key, bool b ) {
+
+void Profile::writeEntry( const QString& key, bool b )
+{
     writeEntry( key, QString::number(b) );
 }
-void Profile::writeEntry( const QString& key, const QStringList& lis, const QChar& sep ) {
+
+void Profile::writeEntry( const QString& key, const QStringList& lis, const QChar& sep )
+{
     writeEntry( key, lis.join(sep) );
 }
-QString Profile::readEntry( const QString& key,  const QString& deflt )const {
+
+QString Profile::readEntry( const QString& key,  const QString& deflt ) const
+{
     QMap<QString, QString>::ConstIterator it;
     it = m_conf.find( key );
 
@@ -107,7 +156,9 @@ QString Profile::readEntry( const QString& key,  const QString& deflt )const {
 
     return deflt;
 }
-int Profile::readNumEntry( const QString& key, int def )const {
+
+int Profile::readNumEntry( const QString& key, int def ) const
+{
     QMap<QString, QString>::ConstIterator it;
     it = m_conf.find( key );
 
@@ -120,9 +171,13 @@ int Profile::readNumEntry( const QString& key, int def )const {
     }
     return def;
 }
-bool Profile::readBoolEntry( const QString& key,  bool def )const {
+
+bool Profile::readBoolEntry( const QString& key,  bool def ) const
+{
     return readNumEntry( key, def );
 }
-void Profile::setConf( const QMap<QString, QString>& conf ) {
+
+void Profile::setConf( const QMap<QString, QString>& conf )
+{
     m_conf = conf;
 };

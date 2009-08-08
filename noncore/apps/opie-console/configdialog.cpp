@@ -15,14 +15,17 @@ public:
 private:
     Profile m_prof;
 };
+
 ConfigListItem::ConfigListItem( QListView* item, const Profile& prof )
     : QListViewItem( item ), m_prof( prof )
 {
     setText(0, prof.name() );
 }
+
 ConfigListItem::~ConfigListItem() {
 
 }
+
 Profile ConfigListItem::profile()const {
     return m_prof;
 }
@@ -41,9 +44,11 @@ ConfigDialog::ConfigDialog( const Profile::ValueList& lis, MetaFactory* fa,
         }
     }
 }
+
 ConfigDialog::~ConfigDialog() {
 
 }
+
 Profile::ValueList ConfigDialog::list()const {
 /* iterate over the list */
     Profile::ValueList lst;
@@ -54,6 +59,7 @@ Profile::ValueList ConfigDialog::list()const {
     }
     return lst;
 }
+
 /* our slots */
 void ConfigDialog::slotRemove() {
     ConfigListItem* item = (ConfigListItem*)lstView->currentItem();
@@ -65,47 +71,46 @@ void ConfigDialog::slotRemove() {
 }
 
 void ConfigDialog::slotEdit() {
-	Profile p;
+    Profile p;
 
-	if(!lstView->currentItem()) return;
+    if(!lstView->currentItem()) return;
 
-	// Load profile
-	p = ((ConfigListItem*)lstView->currentItem())->profile();
+    // Load profile
+    p = ((ConfigListItem*)lstView->currentItem())->profile();
 
-	ProfileEditorDialog dlg(m_fact, p);
+    ProfileEditorDialog dlg(m_fact, p);
 
-	dlg.setCaption(tr("Edit Connection Profile"));
-	int ret = QPEApplication::execDialog( &dlg );
+    dlg.setCaption(tr("Edit Connection Profile"));
+    int ret = QPEApplication::execDialog( &dlg );
 
-	if(ret == QDialog::Accepted)
-	{
-		if(lstView->currentItem()) delete lstView->currentItem();
+    if(ret == QDialog::Accepted)
+    {
+        if(lstView->currentItem()) delete lstView->currentItem();
 
-		// use dlg.terminal()!
-		Profile p = dlg.profile();
+        // use dlg.terminal()!
+        Profile p = dlg.profile();
 
-		new ConfigListItem(lstView, p);
-	}
+        new ConfigListItem(lstView, p);
+    }
 }
 
-
 void ConfigDialog::slotAdd() {
-	ProfileEditorDialog dlg(m_fact);
+    ProfileEditorDialog dlg(m_fact);
 
-	dlg.setCaption(tr("New Connection"));
-	int ret = QPEApplication::execDialog( &dlg );
+    dlg.setCaption(tr("New Connection"));
+    int ret = QPEApplication::execDialog( &dlg );
 
-	if(ret == QDialog::Accepted)
-	{
-		// TODO: Move into general profile save part
-		// assignments
-		//QString type = dlg.term_type();
-		//if(type == "VT102") profile = Profile::VT102;
+    if(ret == QDialog::Accepted)
+    {
+        // TODO: Move into general profile save part
+        // assignments
+        //QString type = dlg.term_type();
+        //if(type == "VT102") profile = Profile::VT102;
 
-		// get profile from editor
-		Profile p = dlg.profile();
+        // get profile from editor
+        Profile p = dlg.profile();
 
-		new ConfigListItem(lstView, p);
-	}
+        new ConfigListItem(lstView, p);
+    }
 }
 

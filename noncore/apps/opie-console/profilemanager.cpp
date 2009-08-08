@@ -13,12 +13,14 @@
 ProfileManager::ProfileManager( MetaFactory* fact )
     : m_fact( fact )
 {
-
 }
-ProfileManager::~ProfileManager() {
 
+ProfileManager::~ProfileManager()
+{
 }
-void ProfileManager::load() {
+
+void ProfileManager::load()
+{
     m_list.clear();
     ProfileConfig conf("opie-console-profiles");
     QStringList groups = conf.groups();
@@ -46,12 +48,17 @@ void ProfileManager::load() {
     }
 
 }
-void ProfileManager::clear() {
+
+void ProfileManager::clear()
+{
     m_list.clear();
 }
-Profile::ValueList ProfileManager::all()const {
+
+Profile::ValueList ProfileManager::all() const 
+{
     return m_list;
 }
+
 /*
  * Our goal is to create a Session
  * We will load the the IOLayer and EmulationLayer
@@ -65,7 +72,8 @@ Profile::ValueList ProfileManager::all()const {
  * this way we only need to reparent
  * in TabWidget
  */
-Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent) {
+Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent)
+{
 /* TEST PROFILE!!!
     Profile prof;
     QString str = "/dev/ttyS0";
@@ -92,7 +100,9 @@ Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent) {
 
     return session;
 }
-void ProfileManager::save(  ) {
+
+void ProfileManager::save()
+{
     QFile::remove( (QString(getenv("HOME") )+ "/Settings/opie-console-profiles.conf" ) );
     ProfileConfig conf("opie-console-profiles");
     Profile::ValueList::Iterator it2;
@@ -117,13 +127,19 @@ void ProfileManager::save(  ) {
         conf.writeEntry( "terminal", (*it2).terminal() );
     }
 }
-void ProfileManager::add( const Profile& prof) {
+
+void ProfileManager::add( const Profile& prof )
+{
     m_list.append( prof );
 }
-void ProfileManager::setProfiles( const Profile::ValueList& list ) {
+
+void ProfileManager::setProfiles( const Profile::ValueList& list )
+{
     m_list = list;
-};
-Profile ProfileManager::profile( const QString& name )const {
+}
+
+Profile ProfileManager::profile( const QString& name ) const 
+{
     Profile prof;
     Profile::ValueList::ConstIterator it;
     for ( it = m_list.begin(); it != m_list.end(); ++it ) {

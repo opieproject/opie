@@ -108,12 +108,12 @@ private:
     MetaFactory* m_factory;
     ProfileManager* m_manager;
 
-	/*
-	 * scrollbar
-	 */
+    /*
+     * scrollbar
+     */
 
     int sm_none, sm_left, sm_right;
-	
+    
     TabWidget* m_consoleWindow;
     QToolBar* m_tool;
     QToolBar* m_icons;
@@ -138,7 +138,7 @@ private:
     QAction* m_fullscreen;
     QAction* m_wrap;
     QAction* m_closewindow;
-	QAction* m_recordLog;
+    QAction* m_recordLog;
 
     FunctionKeyboard *m_kb;
     int m_runScript_id;

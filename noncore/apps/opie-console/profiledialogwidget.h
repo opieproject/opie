@@ -30,6 +30,7 @@ public:
 
     virtual Type type()const = 0;
 };
+
 class ProfileDialogTerminalWidget : public ProfileDialogWidget {
     Q_OBJECT
 public:
@@ -38,6 +39,7 @@ public:
     ~ProfileDialogTerminalWidget();
     Type type()const;
 };
+
 class ProfileDialogConnectionWidget : public ProfileDialogWidget {
     Q_OBJECT
 public:
@@ -47,6 +49,7 @@ public:
     Type type() const;
 
 };
+
 class ProfileDialogKeyWidget : public ProfileDialogWidget {
     Q_OBJECT
 public:
@@ -65,4 +68,5 @@ class NoOptions : public ProfileDialogWidget {
     void save( Profile& );
     Type type()const{ return Connection; };
 };
+
 #endif

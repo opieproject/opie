@@ -18,38 +18,47 @@ Session::Session( const QString& na, QWidgetStack* widget, IOLayer* lay)
 //    m_emLay  = 0l;
     m_emu = 0l;
 }
+
 Session::~Session() {
     delete m_layer;
     delete m_emu;
     delete m_widget;
     /* the widget layer should be deleted by the m_widget */
 }
+
 QString Session::name()const {
     return m_name;
 }
+
 QWidgetStack* Session::widgetStack() {
     return m_widget;
 }
+
 IOLayer* Session::layer() {
     return m_layer;
 }
+
 EmulationHandler* Session::emulationHandler() {
     return m_emu;
 }
+
 QWidget* Session::widget() {
     if (!m_emu )
         return 0l;
 
     return m_emu->widget();
 }
+
 Profile Session::profile()const {
     return m_prof;
 }
+
 /*
 WidgetLayer* Session::emulationWidget() {
     return m_widLay;
 }
 */
+
 void Session::connect() {
     if ( !m_layer || !m_emu )
         return;
@@ -87,6 +96,7 @@ void Session::setWidgetStack( QWidgetStack* wid ) {
 
     m_widget = wid;
 }
+
 void Session::setIOLayer( IOLayer* lay ) {
     delete m_layer;
     m_layer = lay;
@@ -107,6 +117,7 @@ void Session::setEmulationWidget( WidgetLayer* lay ) {
     m_widLay = lay;
 }
 */
+
 void Session::setTransferDialog(QWidget *d)
 {
     m_transfer = d;

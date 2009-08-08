@@ -10,14 +10,20 @@ IOLayer::IOLayer(const Profile &)
 {
 }
 
-IOLayer::~IOLayer() {
+IOLayer::~IOLayer() 
+{
 }
-int IOLayer::rawIO()const{
+
+int IOLayer::rawIO() const {
     return -1;
 }
-void IOLayer::closeRawIO(int) {
+
+void IOLayer::closeRawIO(int) 
+{
 
 }
-void IOLayer::setSize(int, int ) {
+
+void IOLayer::setSize(int, int ) 
+{
 }
 

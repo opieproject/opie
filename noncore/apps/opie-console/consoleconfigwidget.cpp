@@ -14,7 +14,8 @@
 
 ConsoleConfigWidget::ConsoleConfigWidget( const QString& name, QWidget* parent,
                                 const char* na )
-    : ProfileDialogConnectionWidget( name, parent, na ) {
+    : ProfileDialogConnectionWidget( name, parent, na )
+{
     m_lay = new QVBoxLayout( this );
     QLabel *label = new QLabel(tr("Command to execute"), this);
     m_lay->addWidget(label);
@@ -46,7 +47,8 @@ ConsoleConfigWidget::ConsoleConfigWidget( const QString& name, QWidget* parent,
     m_lay->addWidget(hbox);
 }
 
-void ConsoleConfigWidget::slotAdd() {
+void ConsoleConfigWidget::slotAdd()
+{
     if (!(m_name->text().isEmpty() || m_value->text().isEmpty())) {
         QListViewItem *item = new QListViewItem(m_env);
         item->setText(0, m_name->text());
@@ -55,17 +57,20 @@ void ConsoleConfigWidget::slotAdd() {
     }
 }
 
-void ConsoleConfigWidget::slotRemove() {
+void ConsoleConfigWidget::slotRemove()
+{
     QListViewItem *item = m_env->currentItem();
     if (item) {
         m_env->takeItem(item);
     }
 }
 
-ConsoleConfigWidget::~ConsoleConfigWidget() {
+ConsoleConfigWidget::~ConsoleConfigWidget()
+{
 }
 
-void ConsoleConfigWidget::load( const Profile& prof ) {
+void ConsoleConfigWidget::load( const Profile& prof )
+{
     /*
      * default to the users default shell
      */
@@ -74,9 +79,9 @@ void ConsoleConfigWidget::load( const Profile& prof ) {
     int uid = getuid();
 
     ent = getpwuid(uid);
-        if (ent->pw_shell != "")  {
-            shell = ent->pw_shell;
-        }
+    if (ent->pw_shell != "")  {
+        shell = ent->pw_shell;
+    }
 
     m_cmd->setText(prof.readEntry("Command", shell ));
     int envcount = prof.readNumEntry("EnvVars", 0);
@@ -92,7 +97,8 @@ void ConsoleConfigWidget::load( const Profile& prof ) {
     }
 }
 
-void ConsoleConfigWidget::save( Profile& prof ) {
+void ConsoleConfigWidget::save( Profile& prof )
+{
     prof.writeEntry( "Command", m_cmd->text());
     QListViewItem *item = m_env->firstChild();
     int counter = 0;
