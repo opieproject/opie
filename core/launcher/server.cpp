@@ -84,13 +84,13 @@ static QWidget *calibrate(bool)
     QWidget *w = new T( 0, 0, QWidget::WDestructiveClose | QWidget::WGroupLeader ); \
     if ( maximized ) { \
         if ( qApp->desktop()->width() <= 350 ) { \
-        w->showMaximized(); \
+            w->showMaximized(); \
         } else { \
-        w->resize( QSize( 300, 300 ) ); \
+            w->resize( QSize( 300, 300 ) ); \
         } \
     } \
-    w->show(); \
-    return w; \
+        w->show(); \
+        return w; \
     }
 
 
@@ -221,20 +221,20 @@ static bool hasVisibleWindow(const QString& clientname, bool partial)
     const QList<QWSWindow> &list = qwsServer->clientWindows();
     QWSWindow* w;
     for (QListIterator<QWSWindow> it(list); (w=it.current()); ++it) {
-    if ( w->client()->identity() == clientname ) {
-        if ( partial && !w->isFullyObscured() )
-        return TRUE;
-        if ( !partial && !w->isFullyObscured() && !w->isPartiallyObscured() ) {
+        if ( w->client()->identity() == clientname ) {
+            if ( partial && !w->isFullyObscured() )
+                return TRUE;
+            if ( !partial && !w->isFullyObscured() && !w->isPartiallyObscured() ) {
 # if QT_VERSION < 0x030000
-        QRect mwr = qt_screen->mapToDevice(qt_maxWindowRect,
-            QSize(qt_screen->width(),qt_screen->height()) );
+                QRect mwr = qt_screen->mapToDevice(qt_maxWindowRect,
+                    QSize(qt_screen->width(),qt_screen->height()) );
 # else
-        QRect mwr = qt_maxWindowRect;
+                QRect mwr = qt_maxWindowRect;
 # endif
-        if ( mwr.contains(w->requested().boundingRect()) )
-            return TRUE;
+                if ( mwr.contains(w->requested().boundingRect()) )
+                    return TRUE;
+            }
         }
-    }
     }
 #endif
     return FALSE;
@@ -245,9 +245,10 @@ void Server::activate(const ODeviceButton* button, bool held)
     Global::terminateBuiltin("calibrate"); // No tr
     OQCopMessage om;
     if ( held ) {
-    om = button->heldAction();
-    } else {
-    om = button->pressedAction();
+        om = button->heldAction();
+    }
+    else {
+        om = button->pressedAction();
     }
 
     if ( om.channel() != "ignore" )
@@ -258,16 +259,17 @@ void Server::activate(const ODeviceButton* button, bool held)
     /* ### FIXME */
 #if 0
     if ( !sr.isNull() ) {
-    QString app = sr.app();
-    bool vis = hasVisibleWindow(app, app != "qpe");
-    if ( sr.message() == "raise()" && vis ) {
-        sr.setMessage("nextView()");
-    } else {
-        // "back door"
-        sr << (int)vis;
-    }
+        QString app = sr.app();
+        bool vis = hasVisibleWindow(app, app != "qpe");
+        if ( sr.message() == "raise()" && vis ) {
+            sr.setMessage("nextView()");
+        }
+        else {
+            // "back door"
+            sr << (int)vis;
+        }
 
-    sr.send();
+        sr.send();
     }
 #endif
 }
@@ -310,14 +312,15 @@ bool Server::setKeyboardLayout( const QString &kb )
 
     QIntDict<QWSServer::KeyMap> *om = 0;
     if ( kb == "us101" ) { // No tr
-    om = 0;
-    } else if ( kb == "jp109" ) {
-    om = new QIntDict<QWSServer::KeyMap>(37);
-    const KeyOverride *k = jp109keys;
-    while ( k->scan_code ) {
-        om->insert( k->scan_code, &k->map );
-        k++;
+        om = 0;
     }
+    else if ( kb == "jp109" ) {
+        om = new QIntDict<QWSServer::KeyMap>(37);
+        const KeyOverride *k = jp109keys;
+        while ( k->scan_code ) {
+            om->insert( k->scan_code, &k->map );
+            k++;
+        }
     }
     QWSServer::setOverrideKeys( om );
 
@@ -330,11 +333,11 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
     QDataStream stream( data, IO_ReadOnly );
 
     if ( msg == "securityChanged()" ) {
-    if ( transferServer )
-       transferServer->authorizeConnections();
+        if ( transferServer )
+        transferServer->authorizeConnections();
 
-    if ( qcopBridge )
-        qcopBridge->authorizeConnections();
+        if ( qcopBridge )
+            qcopBridge->authorizeConnections();
 #warning FIXME support TempScreenSaverMode
 #if 0
     } else if ( msg == "setTempScreenSaverMode(int,int)" ) {
@@ -342,29 +345,36 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         stream >> mode >> pid;
         tsmMonitor->setTempMode(mode, pid);
 #endif
-    } else if ( msg == "linkChanged(QString)" ) {
+    }
+    else if ( msg == "linkChanged(QString)" ) {
         QString link;
         stream >> link;
         odebug << "desktop.cpp systemMsg -> linkchanged( " << link << " )" << oendl;
         docList->linkChanged(link);
-    } else if (msg =="reforceDocuments()") {
+    }
+    else if (msg =="reforceDocuments()") {
         docList->reforceDocuments();
-    } else if ( msg == "serviceChanged(QString)" ) {
+    }
+    else if ( msg == "serviceChanged(QString)" ) {
         MimeType::updateApplications();
-    } else if ( msg == "mkdir(QString)" ) {
+    }
+    else if ( msg == "mkdir(QString)" ) {
         QString dir;
         stream >> dir;
         if ( !dir.isEmpty() )
             mkdir( dir );
-    } else if ( msg == "rdiffGenSig(QString,QString)" ) {
+    }
+    else if ( msg == "rdiffGenSig(QString,QString)" ) {
         QString baseFile, sigFile;
         stream >> baseFile >> sigFile;
         QRsync::generateSignature( baseFile, sigFile );
-    } else if ( msg == "rdiffGenDiff(QString,QString,QString)" ) {
+    }
+    else if ( msg == "rdiffGenDiff(QString,QString,QString)" ) {
         QString baseFile, sigFile, deltaFile;
         stream >> baseFile >> sigFile >> deltaFile;
         QRsync::generateDiff( baseFile, sigFile, deltaFile );
-    } else if ( msg == "rdiffApplyPatch(QString,QString)" ) {
+    }
+    else if ( msg == "rdiffApplyPatch(QString,QString)" ) {
         QString baseFile, deltaFile;
         stream >> baseFile >> deltaFile;
         bool fileWasCreated = false;
@@ -379,20 +389,23 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
             QCopEnvelope e( "QPE/Desktop", "patchApplied(QString)" );
             e << baseFile;
 #endif
-        } else {
+        }
+        else {
 #ifndef QT_NO_COP
             QCopEnvelope e( "QPE/Desktop", "patchUnapplied(QString)" );
             e << baseFile;
 #endif
         }
-    } else if ( msg == "rdiffCleanup()" ) {
+    }
+    else if ( msg == "rdiffCleanup()" ) {
         mkdir( "/tmp/rdiff" );
         QDir dir;
         dir.setPath( "/tmp/rdiff" );
         QStringList entries = dir.entryList();
         for ( QStringList::Iterator it = entries.begin(); it != entries.end(); ++it )
             dir.remove( *it );
-    } else if ( msg == "sendHandshakeInfo()" ) {
+    }
+    else if ( msg == "sendHandshakeInfo()" ) {
         QString home = getenv( "HOME" );
 #ifndef QT_NO_COP
         QCopEnvelope e( "QPE/Desktop", "handshakeInfo(QString,bool)" );
@@ -400,7 +413,8 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         int locked = (int) ServerApplication::screenLocked();
         e << locked;
 #endif
-    } else  if ( msg == "sendVersionInfo()" ) {
+    }
+    else  if ( msg == "sendVersionInfo()" ) {
     /*
      * @&$*! Qtopiadesktop relies on the major number
      * to start with 1. (or 2 as the case of version 2.1 will be)
@@ -415,7 +429,8 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         QString QDVersion="1.7";
         e << QDVersion << opiename;
 
-    } else if ( msg == "sendCardInfo()" ) {
+    }
+    else if ( msg == "sendCardInfo()" ) {
 #ifndef QT_NO_COP
         QCopEnvelope e( "QPE/Desktop", "cardInfo(QString)" );
 #endif
@@ -445,12 +460,14 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 #ifndef QT_NO_COP
         e << s;
 #endif
-    } else if ( msg == "sendInstallLocations()" ) {
+    }
+    else if ( msg == "sendInstallLocations()" ) {
 #ifndef QT_NO_COP
-    QCopEnvelope e( "QPE/Desktop", "installLocations(QString)" );
-    e << installLocationsString();
+        QCopEnvelope e( "QPE/Desktop", "installLocations(QString)" );
+        e << installLocationsString();
 #endif
-    } else if ( msg == "sendSyncDate(QString)" ) {
+    }
+    else if ( msg == "sendSyncDate(QString)" ) {
         QString app;
         stream >> app;
         Config cfg( "qpe" );
@@ -461,48 +478,56 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 #endif
         //odebug << "QPE/System sendSyncDate for " << app.latin1() << ": response "
         //       << cfg.readEntry( app ).latin1() << oendl;
-    } else if ( msg == "setSyncDate(QString,QString)" ) {
+    }
+    else if ( msg == "setSyncDate(QString,QString)" ) {
         QString app, date;
         stream >> app >> date;
         Config cfg( "qpe" );
         cfg.setGroup("SyncDate");
         cfg.writeEntry( app, date );
         //odebug << "setSyncDate(QString,QString) " << app << " " << date << "" << oendl;
-    } else if ( msg == "startSync(QString)" ) {
+    }
+    else if ( msg == "startSync(QString)" ) {
         QString what;
         stream >> what;
         delete syncDialog;
         syncDialog = new SyncDialog( this, what );
         syncDialog->show();
         connect( syncDialog, SIGNAL(cancel()), SLOT(cancelSync()) );
-    } else if ( msg == "stopSync()") {
+    }
+    else if ( msg == "stopSync()") {
         delete syncDialog;
         syncDialog = 0;
-    } else if (msg == "restoreDone(QString)") {
+    }
+    else if (msg == "restoreDone(QString)") {
         docList->restoreDone();
-    } else if ( msg == "getAllDocLinks()" ) {
+    }
+    else if ( msg == "getAllDocLinks()" ) {
         docList->sendAllDocLinks();
     }
 #ifdef QPE_HAVE_DIRECT_ACCESS
     else if ( msg == "prepareDirectAccess()" ) {
-    prepareDirectAccess();
-    } else if ( msg == "postDirectAccess()" ) {
-    postDirectAccess();
+        prepareDirectAccess();
+    }
+    else if ( msg == "postDirectAccess()" ) {
+        postDirectAccess();
     }
 #endif
 #ifdef Q_WS_QWS
 
- else if ( msg == "setMouseProto(QString)" ) {
+    else if ( msg == "setMouseProto(QString)" ) {
         QString mice;
         stream >> mice;
         setenv("QWS_MOUSE_PROTO",mice.latin1(),1);
         qwsServer->openMouse();
-    } else if ( msg == "setKeyboard(QString)" ) {
+    }
+    else if ( msg == "setKeyboard(QString)" ) {
         QString kb;
         stream >> kb;
         setenv("QWS_KEYBOARD",kb.latin1(),1);
         qwsServer->openKeyboard();
-    } else if ( msg == "setKeyboardAutoRepeat(int,int)" ) {
+    }
+    else if ( msg == "setKeyboardAutoRepeat(int,int)" ) {
         int delay, period;
         stream >> delay >> period;
         qwsSetKeyboardAutoRepeat( delay, period );
@@ -510,14 +535,16 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         cfg.setGroup("Keyboard");
         cfg.writeEntry( "RepeatDelay", delay );
         cfg.writeEntry( "RepeatPeriod", period );
-    } else if ( msg == "setKeyboardLayout(QString)" ) {
+    }
+    else if ( msg == "setKeyboardLayout(QString)" ) {
         QString kb;
         stream >> kb;
         setKeyboardLayout( kb );
         Config cfg( "qpe" );
         cfg.setGroup("Keyboard");
         cfg.writeEntry( "Layout", kb );
-    } else if ( msg == "autoStart(QString)" ) {
+    }
+    else if ( msg == "autoStart(QString)" ) {
         QString appName;
         stream >> appName;
         Config cfg( "autostart" );
@@ -525,17 +552,19 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
         if ( appName.compare("clear") == 0){
             cfg.writeEntry("Apps", "");
         }
-    } else if ( msg == "autoStart(QString,QString)" ) {
+    }
+    else if ( msg == "autoStart(QString,QString)" ) {
         QString modifier, appName;
         stream >> modifier >> appName;
         Config cfg( "autostart" );
         cfg.setGroup( "AutoStart" );
         if ( modifier.compare("add") == 0 ){
             // only add if appname is entered
-           if (!appName.isEmpty()) {
+            if (!appName.isEmpty()) {
                 cfg.writeEntry("Apps", appName);
             }
-        } else if (modifier.compare("remove") == 0 ) {
+        }
+        else if (modifier.compare("remove") == 0 ) {
             // need to change for multiple entries
             // actually remove is right now simular to clear, but in future there
             // should be multiple apps in autostart possible.
@@ -546,7 +575,8 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
             }
         }
         // case the autostart feature should be delayed
-    } else if ( msg == "autoStart(QString,QString,QString)") {
+    }
+    else if ( msg == "autoStart(QString,QString,QString)") {
         QString modifier, appName, delay;
         stream >> modifier >> appName >> delay;
         Config cfg( "autostart" );
@@ -572,22 +602,23 @@ QString Server::cardInfoString()
     QString homeDir = getenv("HOME");
     QString homeFs, homeFsPath;
     for ( ; it.current(); ++it ) {
-    int k4 = (*it)->blockSize()/256;
-    if ( (*it)->isRemovable() ) {
-        s += (*it)->name() + "=" + (*it)->path() + "/Documents " // No tr
-         + QString::number( (*it)->availBlocks() * k4/4 )
-         + "K " + (*it)->options() + ";";
-    } else if ( homeDir.contains( (*it)->path() ) &&
-          (*it)->path().length() > homeFsPath.length() ) {
-        homeFsPath = (*it)->path();
-        homeFs =
-        (*it)->name() + "=" + homeDir + "/Documents " // No tr
-        + QString::number( (*it)->availBlocks() * k4/4 )
-        + "K " + (*it)->options() + ";";
-    }
+        int k4 = (*it)->blockSize()/256;
+        if ( (*it)->isRemovable() ) {
+            s += (*it)->name() + "=" + (*it)->path() + "/Documents " // No tr
+            + QString::number( (*it)->availBlocks() * k4/4 )
+            + "K " + (*it)->options() + ";";
+        }
+        else if ( homeDir.contains( (*it)->path() ) &&
+                (*it)->path().length() > homeFsPath.length() ) {
+            homeFsPath = (*it)->path();
+            homeFs =
+            (*it)->name() + "=" + homeDir + "/Documents " // No tr
+            + QString::number( (*it)->availBlocks() * k4/4 )
+            + "K " + (*it)->options() + ";";
+        }
     }
     if ( !homeFs.isEmpty() )
-    s += homeFs;
+        s += homeFs;
     return s;
 }
 
@@ -600,22 +631,23 @@ QString Server::installLocationsString()
     QString homeDir = getenv("HOME");
     QString homeFs, homeFsPath;
     for ( ; it.current(); ++it ) {
-    int k4 = (*it)->blockSize()/256;
-    if ( (*it)->isRemovable() ) {
-        s += (*it)->name() + "=" + (*it)->path() + " " // No tr
-         + QString::number( (*it)->availBlocks() * k4/4 )
-         + "K " + (*it)->options() + ";";
-    } else if ( homeDir.contains( (*it)->path() ) &&
-            (*it)->path().length() > homeFsPath.length() ) {
-        homeFsPath = (*it)->path();
-        homeFs =
-        (*it)->name() + "=" + homeDir + " " // No tr
-        + QString::number( (*it)->availBlocks() * k4/4 )
-        + "K " + (*it)->options() + ";";
-    }
+        int k4 = (*it)->blockSize()/256;
+        if ( (*it)->isRemovable() ) {
+            s += (*it)->name() + "=" + (*it)->path() + " " // No tr
+            + QString::number( (*it)->availBlocks() * k4/4 )
+            + "K " + (*it)->options() + ";";
+        }
+        else if ( homeDir.contains( (*it)->path() ) &&
+                (*it)->path().length() > homeFsPath.length() ) {
+            homeFsPath = (*it)->path();
+            homeFs =
+            (*it)->name() + "=" + homeDir + " " // No tr
+            + QString::number( (*it)->availBlocks() * k4/4 )
+            + "K " + (*it)->options() + ";";
+        }
     }
     if ( !homeFs.isEmpty() )
-    s = homeFs + s;
+        s = homeFs + s;
     return s;
 }
 
@@ -625,9 +657,11 @@ void Server::receiveTaskBar(const QCString &msg, const QByteArray &data)
 
     if ( msg == "reloadApps()" ) {
       docList->reloadAppLnks();
-    } else if ( msg == "soundAlarm()" ) {
+    }
+    else if ( msg == "soundAlarm()" ) {
       ServerApplication::soundAlarm();
-    } else if ( msg == "setLed(int,bool)" ) {
+    }
+    else if ( msg == "setLed(int,bool)" ) {
         int led, status;
         stream >> led >> status;
 
@@ -654,7 +688,7 @@ bool Server::mkdir(const QString &localPath)
 {
     QDir fullDir(localPath);
     if (fullDir.exists())
-    return true;
+        return true;
 
     // at this point the directory doesn't exist
     // go through the directory tree and start creating the direcotories
@@ -671,25 +705,26 @@ bool Server::mkdir(const QString &localPath)
     }
 
     while (checkedPath != localPath) {
-    // no more seperators found, use the local path
-    if (dirIndex == -1) {
-        checkedPath = localPath;
-    } else {
-        // the next directory to check
-        checkedPath = localPath.left(dirIndex) + "/";
-        // advance the iterator; the next dir seperator
-        dirIndex = localPath.find(dirSeps, dirIndex+1);
-    }
-
-    QDir checkDir(checkedPath);
-    if (!checkDir.exists()) {
-        //odebug << "mkdir making dir " << checkedPath << "" << oendl;
-
-        if (!checkDir.mkdir(checkedPath)) {
-        odebug << "Unable to make directory " << checkedPath << "" << oendl;
-        return FALSE;
+        // no more seperators found, use the local path
+        if (dirIndex == -1) {
+            checkedPath = localPath;
         }
-    }
+        else {
+            // the next directory to check
+            checkedPath = localPath.left(dirIndex) + "/";
+            // advance the iterator; the next dir seperator
+            dirIndex = localPath.find(dirSeps, dirIndex+1);
+        }
+
+        QDir checkDir(checkedPath);
+        if (!checkDir.exists()) {
+            //odebug << "mkdir making dir " << checkedPath << "" << oendl;
+
+            if (!checkDir.mkdir(checkedPath)) {
+                odebug << "Unable to make directory " << checkedPath << "" << oendl;
+                return FALSE;
+            }
+        }
 
     }
     return TRUE;
@@ -709,7 +744,8 @@ void Server::startTransferServer()
            // ... OK
            connect( qcopBridge, SIGNAL(connectionClosed(const QHostAddress&)),
                this, SLOT(syncConnectionClosed(const QHostAddress&)) );
-       } else {
+       }
+       else {
            delete qcopBridge;
            qcopBridge = 0;
        }
@@ -720,7 +756,8 @@ void Server::startTransferServer()
         transferServer = new TransferServer( 4242 );
         if ( transferServer->ok() ) {
             // ... OK
-        } else {
+        }
+        else {
             delete transferServer;
             transferServer = 0;
         }
@@ -811,8 +848,6 @@ void Server::storageChanged()
     docList->storageChanged();
 }
 
-
-
 void Server::preloadApps()
 {
     Config cfg("Launcher");
@@ -839,7 +874,7 @@ void Server::prepareDirectAccess()
     // suspend the mtab monitor
 #ifndef QT_NO_COP
     {
-    QCopEnvelope e( "QPE/Stabmon", "suspendMonitor()" );
+        QCopEnvelope e( "QPE/Stabmon", "suspendMonitor()" );
     }
 #endif
 
@@ -852,10 +887,10 @@ void Server::prepareDirectAccess()
     pendingFlushes = 1;
     directAccessRun = FALSE;
     for ( QMap<int,QString>::ConstIterator it =
-        appLauncher->runningApplications().begin();
-      it != appLauncher->runningApplications().end();
-      ++it ) {
-    pendingFlushes++;
+            appLauncher->runningApplications().begin();
+            it != appLauncher->runningApplications().end();
+            ++it ) {
+        pendingFlushes++;
     }
 #ifndef QT_NO_COP
     QCopEnvelope e1( "QPE/System", "flush()" );
@@ -873,43 +908,49 @@ void Server::desktopMessage( const QCString &message, const QByteArray &data )
 {
     QDataStream stream( data, IO_ReadOnly );
     if ( message == "flushDone(QString)" ) {
-    QString app;
-    stream >> app;
-    qDebug( "flushDone from %s", app.latin1() );
-    if ( --pendingFlushes == 0 ) {
-        qDebug( "pendingFlushes == 0, all the apps responded" );
-        runDirectAccess();
+        QString app;
+        stream >> app;
+        qDebug( "flushDone from %s", app.latin1() );
+        if ( --pendingFlushes == 0 ) {
+            qDebug( "pendingFlushes == 0, all the apps responded" );
+            runDirectAccess();
+        }
     }
-    } else if ( message == "installStarted(QString)" ) {
-    QString package;
-    stream >> package;
-    qDebug( "\tInstall Started for package %s", package.latin1() );
+    else if ( message == "installStarted(QString)" ) {
+        QString package;
+        stream >> package;
+        qDebug( "\tInstall Started for package %s", package.latin1() );
     } else if ( message == "installStep(QString)" ) {
-    QString step;
-    stream >> step;
-    qDebug( "\tInstall Step %s", step.latin1() );
-    } else if ( message == "installDone(QString)" ) {
-    QString package;
-    stream >> package;
-    qDebug( "\tInstall Finished for package %s", package.latin1() );
-    } else if ( message == "installFailed(QString,int,QString)" ) {
-    QString package, error;
-    int status;
-    stream >> package >> status >> error;
-    qDebug( "\tInstall Failed for package %s with error code %d and error message %s",
-        package.latin1(), status, error.latin1() );
-    } else if ( message == "removeStarted(QString)" ) {
-    QString package;
-    stream >> package;
-    qDebug( "\tRemove Started for package %s", package.latin1() );
-    } else if ( message == "removeDone(QString)" ) {
-    QString package;
-    stream >> package;
-    qDebug( "\tRemove Finished for package %s", package.latin1() );
-    } else if ( message == "removeFailed(QString)" ) {
-    QString package;
-    stream >> package;
-    qDebug( "\tRemove Failed for package %s", package.latin1() );
+        QString step;
+        stream >> step;
+        qDebug( "\tInstall Step %s", step.latin1() );
+    }
+    else if ( message == "installDone(QString)" ) {
+        QString package;
+        stream >> package;
+        qDebug( "\tInstall Finished for package %s", package.latin1() );
+    }
+    else if ( message == "installFailed(QString,int,QString)" ) {
+        QString package, error;
+        int status;
+        stream >> package >> status >> error;
+        qDebug( "\tInstall Failed for package %s with error code %d and error message %s",
+            package.latin1(), status, error.latin1() );
+    }
+    else if ( message == "removeStarted(QString)" ) {
+        QString package;
+        stream >> package;
+        qDebug( "\tRemove Started for package %s", package.latin1() );
+    }
+    else if ( message == "removeDone(QString)" ) {
+        QString package;
+        stream >> package;
+        qDebug( "\tRemove Finished for package %s", package.latin1() );
+    }
+    else if ( message == "removeFailed(QString)" ) {
+        QString package;
+        stream >> package;
+        qDebug( "\tRemove Failed for package %s", package.latin1() );
     }
 
     if ( qrr && qrr->waitingForMessages )
@@ -949,7 +990,7 @@ void Server::postDirectAccess()
     // restart the mtab monitor
 #ifndef QT_NO_COP
     {
-    QCopEnvelope e( "QPE/Stabmon", "restartMonitor()" );
+        QCopEnvelope e( "QPE/Stabmon", "restartMonitor()" );
     }
 #endif
 
@@ -957,22 +998,23 @@ void Server::postDirectAccess()
     const char *queueFile = ::directAccessQueueFile();
     QFile *file = new QFile( queueFile );
     if ( !file->exists() ) {
-    delete file;
-    // Get rid of the dialog
-    if ( syncDialog ) {
-        delete syncDialog;
-        syncDialog = 0;
-    }
+        delete file;
+        // Get rid of the dialog
+        if ( syncDialog ) {
+            delete syncDialog;
+            syncDialog = 0;
+        }
 #warning FIXME support TempScreenSaverMode
 #if 0
-    QPEApplication::setTempScreenSaverMode(QPEApplication::Enable);
+        QPEApplication::setTempScreenSaverMode(QPEApplication::Enable);
 #endif
-    } else {
-    qrr = new QueuedRequestRunner( file, syncDialog );
-    connect( qrr, SIGNAL(finished()),
-         this, SLOT(finishedQueuedRequests()) );
-    QTimer::singleShot( 100, qrr, SLOT(process()) );
-    // qrr will remove the sync dialog later
+    }
+    else {
+        qrr = new QueuedRequestRunner( file, syncDialog );
+        connect( qrr, SIGNAL(finished()),
+            this, SLOT(finishedQueuedRequests()) );
+        QTimer::singleShot( 100, qrr, SLOT(process()) );
+        // qrr will remove the sync dialog later
     }
 #endif
 }
@@ -980,24 +1022,26 @@ void Server::postDirectAccess()
 void Server::finishedQueuedRequests()
 {
     if ( qrr->readyToDelete ) {
-    delete qrr;
-    qrr = 0;
-    // Get rid of the dialog
-    if ( syncDialog ) {
-        delete syncDialog;
-        syncDialog = 0;
-    }
+        delete qrr;
+        qrr = 0;
+        // Get rid of the dialog
+        if ( syncDialog ) {
+            delete syncDialog;
+            syncDialog = 0;
+        }
 #warning FIXME support TempScreenSaverMode
 #if 0
-    QPEApplication::setTempScreenSaverMode(QPEApplication::Enable);
+        QPEApplication::setTempScreenSaverMode(QPEApplication::Enable);
 #endif
-    } else {
-    qrr->readyToDelete = TRUE;
-    QTimer::singleShot( 0, this, SLOT(finishedQueuedRequests()) );
+    }
+    else {
+        qrr->readyToDelete = TRUE;
+        QTimer::singleShot( 0, this, SLOT(finishedQueuedRequests()) );
     }
 }
 
-void Server::startSoundServer() {
+void Server::startSoundServer()
+{
     if ( !process ) {
         process = new Opie::Core::OProcess( this );
         connect(process, SIGNAL(processExited(Opie::Core::OProcess*)),
@@ -1007,9 +1051,10 @@ void Server::startSoundServer() {
     process->clearArguments();
     *process << QPEApplication::qpeDir() + "bin/qss";
     if (!process->start())
-	owarn << "Sound server process did not start" << oendl;
+        owarn << "Sound server process did not start" << oendl;
 }
 
-void Server::soundServerExited() {
+void Server::soundServerExited()
+{
     QTimer::singleShot(5000, this, SLOT(startSoundServer()));
 }

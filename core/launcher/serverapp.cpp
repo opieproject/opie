@@ -115,8 +115,8 @@ public:
                QMessageBox::NoButton, QMessageBox::NoButton,
                parent, name, FALSE )
     {
-    currentPriority = INT_MAX;
-    alertCount = 0;
+        currentPriority = INT_MAX;
+        alertCount = 0;
     }
 
     void alert( const QString &text, int priority );
@@ -130,9 +130,9 @@ void DesktopPowerAlerter::alert( const QString &text, int priority )
 {
     alertCount++;
     if ( alertCount < priority )
-    return;
+        return;
     if ( priority > currentPriority )
-    return;
+        return;
     currentPriority = priority;
     setText( text );
     show();
@@ -159,20 +159,19 @@ KeyFilter::KeyFilter(QObject* parent) : QObject(parent), held_tid(0), heldButton
 void KeyFilter::timerEvent(QTimerEvent* e)
 {
     if ( e->timerId() == held_tid ) {
-    killTimer(held_tid);
-    // button held
-    if ( heldButton ) {
-        emit activate(heldButton, TRUE);
-        firedHeldButton = heldButton;
-        heldButton = 0;
-    }
-    held_tid = 0;
+        killTimer(held_tid);
+        // button held
+        if ( heldButton ) {
+            emit activate(heldButton, TRUE);
+            firedHeldButton = heldButton;
+            heldButton = 0;
+        }
+        held_tid = 0;
     }
 }
 
 void KeyFilter::registerKey( const QCopKeyRegister& key )
 {
-
     m_keys.insert( key.keyCode(), key );
 }
 
@@ -212,7 +211,8 @@ bool KeyFilter::checkButtonAction(bool db, int keycode,  int press, int autoRepe
     if (!db ) {
         if (keycode != 0 &&press && !autoRepeat && keyRegistered(keycode) )
             return true;
-    } else {
+    }
+    else {
         // First check to see if DeviceButtonManager knows something about this button:
         const ODeviceButton* button = ODevice::inst()->buttonForKeycode(keycode);
         if (button && !autoRepeat) {
@@ -225,19 +225,23 @@ bool KeyFilter::checkButtonAction(bool db, int keycode,  int press, int autoRepe
                     firedHeldButton = 0;
                     return TRUE;
                 }
-            } else if ( held_tid && heldButton != button) {
+            }
+            else if ( held_tid && heldButton != button) {
                 killTimer(held_tid);
                 held_tid = 0;
             }
+
             if ( button->heldAction().isNull() ) {
                 if ( press )
                     emit activate(button, FALSE);
-            } else if ( press ) {
+            }
+            else if ( press ) {
                 if (heldButton != button) {
                    heldButton = button;
                    held_tid = startTimer( ODevice::inst ()->buttonHoldTime () );
                 }
-            } else if ( heldButton ) {
+            }
+            else if ( heldButton ) {
                 heldButton = 0;
                 emit activate(button, FALSE);
             }
@@ -305,7 +309,8 @@ void ServerApplication::switchLCD( bool on )
     if ( on ) {
         dapp-> m_screensaver-> setDisplayState ( true );
         dapp-> m_screensaver-> setBacklight ( -3 );
-    } else
+    }
+    else
         dapp-> m_screensaver-> setDisplayState ( false );
 
 
@@ -423,7 +428,8 @@ void ServerApplication::apmTimeout()
         0, QString::null, TRUE, WStyle_StaysOnTop);
         battlow.setButtonText(QMessageBox::Cancel, tr("Ok"));
         battlow.exec();
-        } else if ( bat <= m_powerVeryLow )
+        }
+        else if ( bat <= m_powerVeryLow )
             pa->alert( tr( "The battery is running very low. "), 2 );
     }
 
@@ -722,12 +728,13 @@ bool ServerApplication::qwsEventFilter( QWSEvent *e )
               up = FALSE;
               screenClick(TRUE);
             }
-        } else if ( !up ) {
+        }
+        else if ( !up ) {
             up = TRUE;
             screenClick(FALSE);
         }
-    } else
-    if ( e->type == QWSEvent::Key ) {
+    }
+    else if ( e->type == QWSEvent::Key ) {
         QWSKeyEvent * ke = static_cast<QWSKeyEvent*>( e );
         if ( kf->checkButtonAction( false,
                                     ke-> simpleData.keycode,
@@ -787,31 +794,31 @@ void ServerApplication::shutdown( ShutdownImpl::Type t )
     char *opt = 0;
 
     switch ( t ) {
-    case ShutdownImpl::ShutdownSystem:
-        opt = "-h";
-        // fall through
-    case ShutdownImpl::RebootSystem:
-        if ( opt == 0 )
-            opt = "-r";
+        case ShutdownImpl::ShutdownSystem:
+            opt = "-h";
+            // fall through
+        case ShutdownImpl::RebootSystem:
+            if ( opt == 0 )
+                opt = "-r";
 
-        if ( execl( "/sbin/shutdown", "shutdown", opt, "now", ( void* ) 0) < 0 )
-            perror("shutdown");
+            if ( execl( "/sbin/shutdown", "shutdown", opt, "now", ( void* ) 0) < 0 )
+                perror("shutdown");
 //                      ::syslog ( LOG_ERR, "Erroring execing shutdown\n" );
 
-        break;
-    case ShutdownImpl::RestartDesktop:
-        restart();
-        break;
-    case ShutdownImpl::TerminateDesktop:
-        prepareForTermination( FALSE );
+            break;
+        case ShutdownImpl::RestartDesktop:
+            restart();
+            break;
+        case ShutdownImpl::TerminateDesktop:
+            prepareForTermination( FALSE );
 
-        // This is a workaround for a Qt bug
-        // clipboard applet has to stop its poll timer, or Qt/E
-        // will hang on quit() right before it emits aboutToQuit()
-        emit aboutToQuit ( );
+            // This is a workaround for a Qt bug
+            // clipboard applet has to stop its poll timer, or Qt/E
+            // will hang on quit() right before it emits aboutToQuit()
+            emit aboutToQuit ( );
 
-        quit();
-        break;
+            quit();
+            break;
     }
 }
 
@@ -836,7 +843,7 @@ void ServerApplication::restart()
 #else
         prepareForTermination( true );
         for ( int fd = 3; fd < 100; fd++ )
-        close( fd );
+            close( fd );
         execl( ( qpeDir() + "/bin/qpe" ).local8Bit(), "qpe", NULL );
         exit( 1 );
 #endif
@@ -853,7 +860,6 @@ void ServerApplication::rereadVolumes()
     m_alarm_sound     = cfg. readBoolEntry ( "AlarmSound" );
 }
 
-
 void ServerApplication::checkMemory()
 {
 #if defined(QPE_HAVE_MEMALERTER)
@@ -865,31 +871,31 @@ void ServerApplication::checkMemory()
 
     existingMessage = TRUE;
     switch ( memstate ) {
-    case MemUnknown:
-        break;
-    case MemLow:
-        memstate = MemUnknown;
-        if ( !recoverMemory() ) {
-        QMessageBox::warning( 0 , tr("Memory Status"),
-            tr("Memory Low\nPlease save data.") );
-        ignoreNormal = FALSE;
-        }
-        break;
-    case MemNormal:
-        memstate = MemUnknown;
-        if ( !ignoreNormal ) {
-        ignoreNormal = TRUE;
-        QMessageBox::information ( 0 , tr("Memory Status"),
-            "Memory OK" );
-        }
-        break;
-    case MemVeryLow:
-        memstate = MemUnknown;
-        QMessageBox::critical( 0 , tr("Memory Status"),
-        tr("Critical Memory Shortage\n"
-        "Please end this application\n"
-        "immediately.") );
-        recoverMemory();
+        case MemUnknown:
+            break;
+        case MemLow:
+            memstate = MemUnknown;
+            if ( !recoverMemory() ) {
+            QMessageBox::warning( 0 , tr("Memory Status"),
+                tr("Memory Low\nPlease save data.") );
+            ignoreNormal = FALSE;
+            }
+            break;
+        case MemNormal:
+            memstate = MemUnknown;
+            if ( !ignoreNormal ) {
+            ignoreNormal = TRUE;
+            QMessageBox::information ( 0 , tr("Memory Status"),
+                "Memory OK" );
+            }
+            break;
+        case MemVeryLow:
+            memstate = MemUnknown;
+            QMessageBox::critical( 0 , tr("Memory Status"),
+            tr("Critical Memory Shortage\n"
+            "Please end this application\n"
+            "immediately.") );
+            recoverMemory();
     }
     existingMessage = FALSE;
 #endif
@@ -904,7 +910,6 @@ void ServerApplication::keyClick(int , bool press, bool )
 {
     if ( press && m_keyclick_sound )
         ODevice::inst() -> playKeySound();
-
 }
 
 void ServerApplication::screenClick(bool press)
