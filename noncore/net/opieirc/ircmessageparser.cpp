@@ -126,22 +126,26 @@ void IRCMessageParser::parse(IRCMessage *message) {
 }
 
 void IRCMessageParser::parseNumerical(IRCMessage *message, int position) {
-    QString out = tr(numericalParserProcTable[position].message);
-    QString paramString = numericalParserProcTable[position].params;
+    IRCNumericalMessageParserStruct msgstruct = numericalParserProcTable[position];
     
-    if(!out.isEmpty() && !paramString.isEmpty()) {
-        QStringList params = message->params(numericalParserProcTable[position].params);
-    
-        QStringList::Iterator end = params.end();
-        for (QStringList::Iterator it = params.begin(); it != end; ++it) {
-            out = out.arg(*it);
-        }
-    
-        emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, out));
+    if(msgstruct.proc) {
+        (this->*(msgstruct.proc))(message);
     }
-    
-    if(numericalParserProcTable[position].proc)
-        (this->*(numericalParserProcTable[position].proc))(message);
+    else { 
+        QString out = tr(msgstruct.message);
+        QString paramString = msgstruct.params;
+        
+        if(!out.isEmpty() && !paramString.isEmpty()) {
+            QStringList params = message->params(msgstruct.params);
+        
+            QStringList::Iterator end = params.end();
+            for (QStringList::Iterator it = params.begin(); it != end; ++it) {
+                out = out.arg(*it);
+            }
+
+            emit outputReady(IRCOutput(OUTPUT_SERVERMESSAGE, out));
+        }
+    }
 }
 
 void IRCMessageParser::parseCTCP(IRCMessage *message, int position) {
