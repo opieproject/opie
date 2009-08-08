@@ -63,7 +63,8 @@ IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
     { 317, 0, 0, FUNC(parseNumericalWhoisIdle) },           // RPL_WHOISIDLE 
     { 318, "%1 :%2", "1,2", 0 },                            // RPL_ENDOFWHOIS
     { 319, QT_TR_NOOP("%1 is on channels: %2"), "1,2", 0 },             // RPL_WHOISCHANNELS
-    { 320, "%1 %2", "1,2", 0},                              // RPL_WHOISVIRT
+    { 320, "%1 %2", "1,2", 0 },                             // RPL_WHOISVIRT
+    { 328, "%1 %2", "1,2", 0 },                             // RPL_CHANNEL_URL
     { 332, 0, 0, FUNC(parseNumericalTopic) },               // RPL_TOPIC
     { 333, 0, 0, FUNC(parseNumericalTopicWhoTime) },        // RPL_TOPICWHOTIME*/
     { 353, QT_TR_NOOP("Names for %1: %2"), "2,3", FUNC(parseNumericalNames) },  // RPL_NAMREPLY
