@@ -73,6 +73,7 @@ private slots:
     void slotQuickLaunch();
     void slotWrap();
     void slotSessionChanged( Session* );
+    void slotSessionClosed( Session* );
     void slotKeyReceived(FKey, ushort, ushort, bool);
     void slotSaveHistory();
     void slotSaveLog();
@@ -144,6 +145,7 @@ private:
     bool m_isFullscreen;
     bool m_isWrapped;
     bool m_recordingLog;
+    bool m_closeOnEmpty;
 
     QWidget* savedParentFullscreen;
 };

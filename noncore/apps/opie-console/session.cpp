@@ -56,6 +56,8 @@ void Session::connect() {
 
     QObject::connect(m_layer, SIGNAL(received(const QByteArray&) ),
             m_emu, SLOT(recv(const QByteArray&) ) );
+    QObject::connect(m_layer, SIGNAL(closed() ),
+            this, SLOT(closed() ) );
     QObject::connect(m_emu, SIGNAL(send(const QByteArray&) ),
             m_layer, SLOT(send(const QByteArray&) ) );
     QObject::connect(m_emu, SIGNAL(changeSize(int,int) ),
@@ -94,9 +96,11 @@ void Session::setEmulationHandler( EmulationHandler* lay ) {
     delete m_emu;
     m_emu = lay;
 }
+
 void Session::setProfile( const Profile& prof ) {
     m_prof = prof;
 }
+
 /*
 void Session::setEmulationWidget( WidgetLayer* lay ) {
     delete m_widLay;
@@ -113,3 +117,7 @@ QWidget *Session::transferDialog()
     return m_transfer;
 }
 
+void Session::closed()
+{
+    emit sessionClosed( this );
+}

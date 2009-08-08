@@ -125,6 +125,7 @@ void MyPty::donePty()
     m_cpid = 0;
     m_fd = -1;
 //    emit done(status);
+    emit closed();
 }
 
 

@@ -13,7 +13,8 @@ class EmulationHandler;
  * Imagine a session like a collection of what
  * is needed to show your widget in a tab ;)
  */
-class Session {
+class Session : public QObject {
+    Q_OBJECT
 public:
     /**
      * c'tor with widget and layer
@@ -67,6 +68,12 @@ public:
     void setTransferDialog(QWidget *d);
     QWidget *transferDialog();
 
+signals:
+    void sessionClosed( Session * );
+    
+protected slots:
+    virtual void closed();
+    
 private:
     QString m_name;
     QWidgetStack* m_widget;

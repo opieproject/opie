@@ -19,6 +19,7 @@ void TabWidget::add( Session* ses ) {
     addTab( ses->widgetStack(), "console/konsole", ses->name() );
     //addTab( ses->widgetStack(), ses->name() );
     m_map.insert( ses->widgetStack(), ses );
+    connect( ses, SIGNAL(sessionClosed(Session *)), this, SLOT(slotSessionClosed(Session *)) );
 }
 
 void TabWidget::remove( Session* ses ) {
@@ -35,6 +36,17 @@ void TabWidget::slotCurChanged( QWidget* wid ) {
 
     emit activated( it.data() );
 }
+
+void TabWidget::slotSessionClosed( Session *ses ) {
+    static bool lock = false;
+    if(lock)
+        return;
+    
+    lock = true;
+    emit sessionClosed( ses );
+    lock = false;
+}
+
 void TabWidget::setCurrent( Session* ses ) {
     if (!ses )
         return;

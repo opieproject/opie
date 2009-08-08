@@ -20,8 +20,10 @@ public:
 
 signals:
     void activated(Session* ses );
+    void sessionClosed(Session *ses);
 private slots:
     void slotCurChanged( QWidget* wid );
+    void slotSessionClosed( Session *ses );
 private:
     QMap<QWidget*, Session*> m_map;
 };

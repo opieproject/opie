@@ -37,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(
    fix.fixIt();
 #endif
 
+    m_closeOnEmpty = TRUE;
+    
     setCaption(QObject::tr("Opie Console") );
     KeyTrans::loadAll();
     for (int i = 0; i < KeyTrans::count(); i++ ) {
@@ -299,6 +301,8 @@ void MainWindow::initUI() {
     m_consoleWindow = new TabWidget( this, "blah");
     connect(m_consoleWindow, SIGNAL(activated(Session*) ),
             this, SLOT(slotSessionChanged(Session*) ) );
+    connect(m_consoleWindow, SIGNAL(sessionClosed(Session*) ),
+            this, SLOT(slotSessionClosed(Session*) ) );
     setCentralWidget( m_consoleWindow );
 
     slotQuickLaunch();
@@ -493,26 +497,7 @@ void MainWindow::slotClose() {
         return;
 
     Session* ses = currentSession();
-    /* set to NULL to be safe, if its needed slotSessionChanged resets it automatically */
-    m_curSession = NULL;
-    tabWidget()->remove( /*currentSession()*/ses );
-    /*it's autodelete */
-    m_sessions.remove( ses );
-
-    if (!currentSession() ) {
-        m_connect->setEnabled( false );
-        m_disconnect->setEnabled( false );
-        m_terminate->setEnabled( false );
-        m_transfer->setEnabled( false );
-        m_recordScript->setEnabled( false );
-        m_saveScript->setEnabled( false );
-        m_scripts->setItemEnabled(m_runScript_id, false);
-        m_fullscreen->setEnabled( false );
-        m_wrap->setEnabled( false );
-        m_closewindow->setEnabled( false );
-    }
-
-    m_kb->loadDefaults();
+    slotSessionClosed(ses);
 }
 
 /*
@@ -663,6 +648,37 @@ void MainWindow::slotSessionChanged( Session* ses ) {
 
         m_kb->load(currentSession()->profile());
     }
+}
+
+void MainWindow::slotSessionClosed( Session *ses )
+{
+    /* set to NULL to be safe, if its needed slotSessionChanged resets it automatically */
+    if(ses == m_curSession) 
+        m_curSession = NULL;
+    tabWidget()->remove( ses );
+    // it's autodelete
+    m_sessions.remove( ses );
+
+    if (!currentSession() ) {
+        if( m_closeOnEmpty ) {
+            close();
+            return;
+        }
+        else {
+            m_connect->setEnabled( false );
+            m_disconnect->setEnabled( false );
+            m_terminate->setEnabled( false );
+            m_transfer->setEnabled( false );
+            m_recordScript->setEnabled( false );
+            m_saveScript->setEnabled( false );
+            m_scripts->setItemEnabled(m_runScript_id, false);
+            m_fullscreen->setEnabled( false );
+            m_wrap->setEnabled( false );
+            m_closewindow->setEnabled( false );
+        }
+    }
+
+    m_kb->loadDefaults();
 }
 
 void MainWindow::slotWrap()
