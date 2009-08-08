@@ -113,10 +113,9 @@ TerminalWidget::~TerminalWidget()
 
 void TerminalWidget::load( const Profile& prof )
 {
-    int term = prof.readNumEntry("Terminal");
-    int color = prof.readNumEntry("Color");
-//     int fontsize = prof.readNumEntry("Font");
-    int opt_echo = prof.readNumEntry("Echo");
+    int term = prof.readNumEntry("Terminal", Profile::Linux);
+    int color = prof.readNumEntry("Color", 0);
+    int opt_echo = prof.readNumEntry("Echo", 0);
     int opt_wrap = prof.readNumEntry("Wrap");
     int opt_inbound = prof.readNumEntry("Inbound");
     int opt_outbound = prof.readNumEntry("Outbound");
@@ -159,7 +158,17 @@ void TerminalWidget::load( const Profile& prof )
     Config qpecfg("qpe");
     qpecfg.setGroup("Appearance");
 
-    m_fontSelector->setSelectedFont( prof.readEntry( "Font", qpecfg.readEntry("FixedFontFamily")), prof.readEntry( "FontStyle", qpecfg.readEntry("FixedFontStyle")), prof.readNumEntry( "FontSize" , qpecfg.readNumEntry("FixedFontStyle")), prof.readEntry( "FontCharset") );
+    // try to read the fontconfig from the profile
+    QString aFont = prof.readEntry( "Font" );
+    int aFontSize = prof.readNumEntry( "FontSize" );
+    // use defaults from qpe.conf if no profile yet
+    if ( ( aFontSize == -1 ) || ( aFont == QString::null ) )
+    {
+        aFont = qpecfg.readEntry( "FixedFontFamily", "Fixed" );
+        aFontSize = qpecfg.readNumEntry( "FixedFontSize", 7 );
+    }
+    
+    m_fontSelector->setSelectedFont( aFont, prof.readEntry( "FontStyle", qpecfg.readEntry("FixedFontStyle")), aFontSize, prof.readEntry( "FontCharset") );
 
 //     switch( fontsize ) {
 //     case Profile::Micro:

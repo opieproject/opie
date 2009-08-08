@@ -44,8 +44,8 @@ void FunctionKeyboard::load (const Profile& prof)
 {
     keys.clear();
 
-    numRows = prof.readNumEntry("keb_rows", 2);
-    numCols = prof.readNumEntry("keb_cols", 10);
+    numRows = prof.readNumEntry("keb_rows", DEFAULT_ROWS);
+    numCols = prof.readNumEntry("keb_cols", DEFAULT_COLS);
     keyWidth = (double)width()/numCols; // have to reset this thing too
 
     /* load all the keys to the keyboard */
@@ -286,8 +286,8 @@ void FunctionKeyboardConfig::load (const Profile& prof)
     kb->keys.clear();
     kb->loadDefaults();
 
-    m_rowBox->setValue(prof.readNumEntry("keb_rows", 2));
-    m_colBox->setValue(prof.readNumEntry("keb_cols", 10));
+    m_rowBox->setValue(prof.readNumEntry("keb_rows", DEFAULT_ROWS));
+    m_colBox->setValue(prof.readNumEntry("keb_cols", DEFAULT_COLS));
 
     /* load all the keys to the keyboard */
     for (int i = 0; i <= m_rowBox->value() -1; i++) {

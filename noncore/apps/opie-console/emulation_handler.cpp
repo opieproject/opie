@@ -67,7 +67,7 @@ void EmulationHandler::load( const Profile& prof) {
     setColor( foreColor(num), backColor(num) );
     m_teWid->setBackgroundColor(backColor(num) );
 
-    int term = prof.readNumEntry("Terminal",  0) ;
+    int term = prof.readNumEntry("Terminal", Profile::Linux ) ;
     switch(term) {
     default:
     case Profile::VT102:

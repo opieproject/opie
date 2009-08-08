@@ -80,6 +80,7 @@
 #include <sys/types.h>
 #include <sys/ioctl.h>
 #include <sys/wait.h>
+#include <pwd.h>
 
 
 #ifdef HAVE_OPENPTY
@@ -248,7 +249,7 @@ int MyPty::openPty()
 MyPty::MyPty(const Profile& prof) : m_cpid(0)
 {
 
-    int term = prof.readNumEntry("Terminal", Profile::VT100 );
+    int term = prof.readNumEntry("Terminal", Profile::Linux );
     switch( term ) {
     default:
     case Profile::VT100:
@@ -298,7 +299,18 @@ void MyPty::close() {
 }
 void MyPty::reload( const Profile& prof) {
     m_env.clear();
-    m_cmd = prof.readEntry("Command", "/bin/sh");
+
+    // default to the users default shell
+    struct passwd *ent = 0;
+    char *shell = "/bin/sh";
+    int uid = getuid();
+
+    ent = getpwuid(uid);
+    if (ent->pw_shell != "")  {
+        shell = ent->pw_shell;
+    }
+    
+    m_cmd = prof.readEntry("Command", shell);
 
     /*
      * Lets check if m_cmd actually

@@ -38,7 +38,6 @@ void ProfileManager::load()
         prof.setAutoConnect( conf.readBoolEntry("autoConnect") );
         prof.setBackground( conf.readNumEntry("back") );
         prof.setForeground( conf.readNumEntry("fore") );
-        prof.setTerminal( conf.readNumEntry("terminal") );
 
         // THIS is evil because all data get's reset
         prof.setConf( conf.items( (*it) ) );
@@ -124,7 +123,6 @@ void ProfileManager::save()
         conf.writeEntry( "autoConnect", (*it2).autoConnect());
         conf.writeEntry( "back", (*it2).background() );
         conf.writeEntry( "fore", (*it2).foreground() );
-        conf.writeEntry( "terminal", (*it2).terminal() );
     }
 }
 
