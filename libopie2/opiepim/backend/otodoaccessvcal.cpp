@@ -46,52 +46,71 @@ using namespace Opie;
 namespace {
     static OPimTodo eventByVObj( VObject *obj ){
         OPimTodo event;
-        VObject *ob;
-        QCString name;
+        QString itemDesc, itemSummary, itemAttachNote;
+        
+        event.setCompleted( false );
+        
         // no uid, attendees, ... and no fun
-        // description
-        if( ( ob = isAPropertyOf( obj, VCDescriptionProp )) != 0 ){
-            name = vObjectStringZValue( ob );
-#if 0
-            event.setDescription( name );
-#else
-            event.setSummary( name );
-#endif
-        }
-        // summary
-        if ( ( ob = isAPropertyOf( obj,  VCSummaryProp ) ) != 0 ) {
-            name = vObjectStringZValue( ob );
-#if 0
-            event.setSummary( name );
-#else
-            event.setDescription( name );
-#endif
-        }
-        // completed
-        if( ( ob = isAPropertyOf( obj, VCStatusProp )) != 0 ){
-            name = vObjectStringZValue( ob );
-            if( name == "COMPLETED" ){
-                event.setCompleted( true );
-            }else{
-                event.setCompleted( false );
+        VObjectIterator it;
+        initPropIterator( &it, obj );
+        while( moreIteration( &it ) ) {
+            VObject *o = nextVObject( &it );
+            QCString name = vObjectName( o );
+            QCString value = vObjectStringZValue( o );
+
+            if ( name == VCDescriptionProp ) {
+                itemDesc = value;
             }
-        }else
-            event.setCompleted( false );
-        // priority
-        if ((ob = isAPropertyOf(obj, VCPriorityProp))) {
-            name = vObjectStringZValue( ob );
-            bool ok;
-            event.setPriority(name.toInt(&ok) );
+            else if ( name == VCSummaryProp ) {
+                itemSummary = value;
+            }
+            else if ( name == VCAttachProp ) {
+                itemAttachNote = value;
+            }
+            else if ( name == VCStatusProp ) {
+                if( value == "COMPLETED" )
+                    event.setCompleted( true );
+                else
+                    event.setCompleted( false );
+            }
+            else if ( name == VCPriorityProp ) {
+                bool ok;
+                event.setPriority( value.toInt(&ok) );
+            }
+            else if ( name == VCDueProp ) {
+                event.setHasDueDate( true );
+                event.setDueDate( TimeConversion::fromISO8601( value ).date() );
+            }
+            else if ( name == VCCategoriesProp ) {
+                // FIXME unhandled!
+            }
         }
-        //due date
-        if((ob = isAPropertyOf(obj, VCDueProp)) ){
-            event.setHasDueDate( true );
-            name = vObjectStringZValue( ob );
-            event.setDueDate( TimeConversion::fromISO8601( name).date() );
+        
+        // Handle description and notes
+        if( itemSummary.isEmpty() ) {
+            // This is typical of vcs files sent from older PocketPC & Palm
+            // summary is in description field and notes are an attachment
+            event.setSummary( itemDesc );
+            event.setDescription( itemAttachNote );
         }
-        // categories
-        if((ob = isAPropertyOf( obj, VCCategoriesProp )) != 0 ){
-            name = vObjectStringZValue( ob );
+        else {
+            // OTOH, KOrganiser stores events this way. Newer PocketPC versions
+            // set the description the same as the summary and put notes in an
+            // attachment.
+            event.setSummary( itemSummary );
+            if( itemAttachNote.isEmpty() )
+                event.setDescription( itemDesc );
+            else {
+                if( itemDesc.isEmpty() || itemDesc == itemSummary )
+                    event.setDescription( itemAttachNote );
+                else {
+                    // Just in case we have both
+                    QString note = itemDesc;
+                    note.append( '\n' );
+                    note.append( itemAttachNote );
+                    event.setDescription( note );
+                }
+            }
         }
 
         event.setUid( 1 );
@@ -118,27 +137,11 @@ namespace {
         addPropValue( task, VCCategoriesProp,
                       event.idsToString( event.categories() ).local8Bit() );
 
-#if 0
-
-    // There seems a misrepresentation between summary in otodoevent
-    // and summary in vcard.
-    // The same with description..
-    // Description is summary and vice versa.. Argh.. (eilers)
-
-
-        addPropValue( task, VCDescriptionProp,
-                      event.description().local8Bit() );
-
         addPropValue( task, VCSummaryProp,
                       event.summary().local8Bit() );
 
-#else
         addPropValue( task, VCDescriptionProp,
-                      event.summary().local8Bit() );
-
-        addPropValue( task, VCSummaryProp,
                       event.description().local8Bit() );
-#endif
   return task;
 };
 }

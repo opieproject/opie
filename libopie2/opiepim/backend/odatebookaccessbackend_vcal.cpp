@@ -163,8 +163,12 @@ namespace {
         QDateTime alarmTime;
         OPimAlarm::Sound soundType = OPimAlarm::Silent;
 
-        QString note1, note2;
+        QString itemSummary, itemDesc, itemAttachNote;
 
+        // We used to handle X-Qtopia-NOTES here, but since that seems to have
+        // been set as a duplicate of the event description on vcal export (and
+        // notes are not exported at all) it is useless and thus was removed.
+        
         VObjectIterator it;
         initPropIterator( &it, obj );
         while( moreIteration( &it ) ) {
@@ -179,14 +183,14 @@ namespace {
                 e.setEndDateTime( TimeConversion::fromISO8601( value ) );
                 haveEnd = TRUE;
             }
-            else if ( name == "X-Qtopia-NOTES" ) {
-                note2 = value;
-            }
             else if ( name == VCSummaryProp ) {
-                e.setDescription( value );
+                itemSummary = value;
             }
             else if ( name == VCDescriptionProp ) {
-                note1 = value;
+                itemDesc = value;
+            }
+            else if ( name == VCAttachProp ) {
+                itemAttachNote = value;
             }
             else if ( name == VCLocationProp ) {
                 e.setLocation( value );
@@ -239,17 +243,32 @@ namespace {
             e.setEndDateTime( e.startDateTime() ); // FIXME not sure this is correct
         }
 
-        QString note;
-        if( note1.isEmpty() || note1 == note2 )
-            note = note2;
+        // Handle description and notes
+        if( itemSummary.isEmpty() ) {
+            // This is typical of vcs files sent from older PocketPC & Palm
+            // summary is in description field and notes are an attachment
+            e.setDescription( itemDesc );
+            e.setNote( itemAttachNote );
+        }
         else {
-            note = note1;
-            if( !note2.isEmpty() ) {
-                note.append( '\n' );
-                note.append( note2 );
+            // OTOH, KOrganiser stores events this way. Newer PocketPC versions
+            // set the description the same as the summary and put notes in an
+            // attachment.
+            e.setDescription( itemSummary );
+            if( itemAttachNote.isEmpty() )
+                e.setNote( itemDesc );
+            else {
+                if( itemDesc.isEmpty() || itemDesc == itemSummary )
+                    e.setNote( itemAttachNote );
+                else {
+                    // Just in case we have both
+                    QString note = itemDesc;
+                    note.append( '\n' );
+                    note.append( itemAttachNote );
+                    e.setNote( note );
+                }
             }
         }
-        e.setNote( note );
 
         return e;
     }
