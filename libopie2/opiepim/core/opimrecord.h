@@ -83,13 +83,13 @@ class OPimRecord : public Qtopia::Record
     /**
      * set category names they will be resolved
      */
-    void setCategoryNames( const QStringList& );
+    void setCategoryNames( const QStringList& catnames, const QString& appname );
 
     /**
      * addCategoryName adds a name
      * to the internal category list
      */
-    void addCategoryName( const QString& );
+    void addCategoryName( const QString& category, const QString& appname );
 
     /**
      * if a Record isEmpty

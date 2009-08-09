@@ -32,6 +32,7 @@
 /* OPIE */
 #include <qpe/categories.h>
 #include <qpe/categoryselect.h>
+#include <opie2/odebug.h>
 
 /* QT */
 
@@ -91,15 +92,62 @@ QStringList OPimRecord::categoryNames( const QString& appname ) const
 }
 
 
-void OPimRecord::setCategoryNames( const QStringList& )
-{
-}
-
-
-void OPimRecord::addCategoryName( const QString& )
+void OPimRecord::setCategoryNames( const QStringList& catnames, const QString& appname )
 {
     Categories catDB;
     catDB.load( categoryFileName() );
+
+    QArray<int> cats;
+    cats.resize( catnames.count() );
+
+    bool addedCat = false;
+    uint i=0;
+    for( QStringList::ConstIterator it = catnames.begin(); it != catnames.end(); ++it )
+    {
+        QString category = (*it).stripWhiteSpace();
+        int id = catDB.id( appname, category );
+        if( id == 0 ) {
+            id = catDB.addCategory( appname, category );
+            if( id != 0 )
+                addedCat = true;
+        }
+
+        if( id != 0 )
+            cats[i++] = id;
+    }
+
+    // Just in case any couldn't be added
+    if( i < catnames.count() )
+        cats.resize( i );
+
+    if( addedCat )
+        catDB.save( categoryFileName() );
+    
+    setCategories( cats );
+}
+
+
+void OPimRecord::addCategoryName( const QString& category, const QString& appname )
+{
+    Categories catDB;
+    catDB.load( categoryFileName() );
+
+    QString catname = category.stripWhiteSpace();
+    int id = catDB.id( appname, catname );
+    if( id == 0 ) {
+        id = catDB.addCategory( appname, catname );
+        if( id != 0 )
+            catDB.save( categoryFileName() );
+    }
+
+    if( id != 0 ) {
+        QArray<int> cats = categories();
+        if( !cats.find( id ) ) {
+            cats.resize( cats.size() + 1 );
+            cats[cats.size()-1] = id;
+            setCategories( cats );
+        }
+    }
 }
 
 

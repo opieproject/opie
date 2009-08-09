@@ -82,7 +82,13 @@ namespace {
                 event.setDueDate( TimeConversion::fromISO8601( value ).date() );
             }
             else if ( name == VCCategoriesProp ) {
-                // FIXME unhandled!
+                QStringList categories = QStringList::split( ",", value );
+                // Palm likes to put X- on the start of category names
+                for( QStringList::Iterator it = categories.begin(); it != categories.end(); ++it ) {
+                    if( (*it).startsWith( "X-" ) )
+                        (*it) = (*it).mid(2);
+                }
+                event.setCategoryNames( categories, "Todo List" ); // no tr
             }
         }
         
@@ -142,6 +148,9 @@ namespace {
 
         addPropValue( task, VCDescriptionProp,
                       event.description().local8Bit() );
+
+        addPropValue( task, VCCategoriesProp,
+                      event.categoryNames( "Todo List" ).join(", ") );
   return task;
 };
 }

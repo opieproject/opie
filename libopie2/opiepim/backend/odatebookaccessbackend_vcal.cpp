@@ -148,7 +148,7 @@ namespace {
 
         // ### FIXME repeat missing
 
-        // ### FIXME categories missing
+        safeAddPropValue( event, VCCategoriesProp, e.categoryNames( "Calendar" ).join(", ") );
 
         return event;
     }
@@ -213,6 +213,15 @@ namespace {
                     }
                 }
                 e.notifiers().add( OPimAlarm( soundType, alarmTime, 0, e.uid(), alarmTime ) );
+            }
+            else if ( name == VCCategoriesProp ) {
+                QStringList categories = QStringList::split( ",", value );
+                // Palm likes to put X- on the start of category names
+                for( QStringList::Iterator it = categories.begin(); it != categories.end(); ++it ) {
+                    if( (*it).startsWith( "X-" ) )
+                        (*it) = (*it).mid(2);
+                }
+                e.setCategoryNames( categories, "Calendar" ); // no tr
             }
             else if ( name == "X-Qtopia-TIMEZONE") {
                 e.setTimeZone( value );
