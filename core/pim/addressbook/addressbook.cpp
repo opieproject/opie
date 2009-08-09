@@ -259,7 +259,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 		odebug << "Adding Contact from: " << (*it).fullName() << oendl;
 		if ( doAsk ){
 			switch( QMessageBox::information( this, tr ( "Add Contact?" ),
-							  tr( "Do you really want add contact for \n%1?" )
+							  tr( "Do you really want to add \n%1 to your contacts?" )
 							  .arg( (*it).fullName().latin1() ),
 							  tr( "&Yes" ), tr( "&No" ), tr( "&All Yes"),
 							  0,      // Enter == button 0
@@ -273,6 +273,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 				break;
 			case 2:
 				odebug << "YesAll clicked" << oendl;
+                m_abView->addEntry( *it );
 				doAsk = false;
 				break;
 			}
