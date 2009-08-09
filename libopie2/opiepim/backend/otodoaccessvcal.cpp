@@ -122,6 +122,7 @@ namespace {
         event.setUid( 1 );
         return event;
     };
+    
     static VObject *vobjByEvent( const OPimTodo &event )  {
         VObject *task = newVObject( VCTodoProp );
         if( task == 0 )
@@ -160,9 +161,13 @@ OPimTodoAccessVCal::OPimTodoAccessVCal( const QString& path )
     : m_dirty(false), m_file( path )
 {
 }
-OPimTodoAccessVCal::~OPimTodoAccessVCal() {
+
+OPimTodoAccessVCal::~OPimTodoAccessVCal()
+{
 }
-bool OPimTodoAccessVCal::load() {
+
+bool OPimTodoAccessVCal::load()
+{
     m_map.clear();
     m_dirty = false;
 
@@ -190,10 +195,14 @@ bool OPimTodoAccessVCal::load() {
 
     return true;
 }
-bool OPimTodoAccessVCal::reload() {
+
+bool OPimTodoAccessVCal::reload()
+{
     return load();
 }
-bool OPimTodoAccessVCal::save() {
+
+bool OPimTodoAccessVCal::save()
+{
     if (!m_dirty )
         return true;
 
@@ -216,36 +225,49 @@ bool OPimTodoAccessVCal::save() {
     m_dirty = false;
     return true;
 }
-void OPimTodoAccessVCal::clear() {
+
+void OPimTodoAccessVCal::clear()
+{
     m_map.clear();
     m_dirty = true;
 }
-bool OPimTodoAccessVCal::add( const OPimTodo& to ) {
+
+bool OPimTodoAccessVCal::add( const OPimTodo& to )
+{
     m_map.insert( to.uid(), to );
     m_dirty = true;
     return true;
 }
-bool OPimTodoAccessVCal::remove( int uid ) {
+
+bool OPimTodoAccessVCal::remove( int uid )
+{
     m_map.remove( uid );
     m_dirty = true;
     return true;
 }
-void OPimTodoAccessVCal::removeAllCompleted() {
+
+void OPimTodoAccessVCal::removeAllCompleted()
+{
     for ( QMap<int, OPimTodo>::Iterator it = m_map.begin(); it != m_map.end(); ++it ) {
         if ( (*it).isCompleted() )
             m_map.remove( it );
     }
 }
-bool OPimTodoAccessVCal::replace( const OPimTodo& to ) {
+
+bool OPimTodoAccessVCal::replace( const OPimTodo& to )
+{
     m_map.replace( to.uid(), to );
     m_dirty = true;
     return true;
 }
-OPimTodo OPimTodoAccessVCal::find(int uid )const {
+
+OPimTodo OPimTodoAccessVCal::find( int uid ) const
+{
     return m_map[uid];
 }
 
-QArray<int> OPimTodoAccessVCal::allRecords()const {
+QArray<int> OPimTodoAccessVCal::allRecords() const
+{
     QArray<int> ar( m_map.count() );
     QMap<int, OPimTodo>::ConstIterator it;
     int i = 0;
@@ -258,12 +280,14 @@ QArray<int> OPimTodoAccessVCal::allRecords()const {
 
 QArray<int> OPimTodoAccessVCal::effectiveToDos( const QDate& ,
                                              const QDate& ,
-                                             bool  )const {
+                                             bool  ) const
+{
     QArray<int> ar(0);
     return ar;
 }
 
-QArray<int> OPimTodoAccessVCal::overDue()const {
+QArray<int> OPimTodoAccessVCal::overDue() const
+{
     QArray<int> ar(0);
     return ar;
 }

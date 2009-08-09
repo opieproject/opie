@@ -46,39 +46,39 @@ namespace Opie {
  */
 class OPimContactAccessBackend_VCard : public OPimContactAccessBackend {
  public:
-	OPimContactAccessBackend_VCard ( const QString& appname, const QString& filename = QString::null );
+    OPimContactAccessBackend_VCard ( const QString& appname, const QString& filename = QString::null );
 
-	bool load ();
-	bool reload();
-	bool save();
-	void clear ();
+    bool load ();
+    bool reload();
+    bool save();
+    void clear ();
 
-	bool add ( const OPimContact& newcontact );
-	bool remove ( int uid );
-	bool replace ( const OPimContact& contact );
+    bool add ( const OPimContact& newcontact );
+    bool remove ( int uid );
+    bool replace ( const OPimContact& contact );
 
-	OPimContact find ( int uid ) const;
-	UIDArray allRecords() const;
+    OPimContact find ( int uid ) const;
+    UIDArray allRecords() const;
 
-	bool wasChangedExternally();
+    bool wasChangedExternally();
 
 private:
-	OPimContact parseVObject( VObject* obj );
-	VObject* createVObject( const OPimContact& c );
-	QString convDateToVCardDate( const QDate& c ) const;
-	QDate convVCardDateToDate( const QString& datestr );
-	VObject *safeAddPropValue( VObject *o, const char* prop, const QString& value );
-	VObject *safeAddProp( VObject* o, const char* prop);
+    OPimContact parseVObject( VObject* obj );
+    VObject* createVObject( const OPimContact& c );
+    QString convDateToVCardDate( const QDate& c ) const;
+    QDate convVCardDateToDate( const QString& datestr );
+    VObject *safeAddPropValue( VObject *o, const char* prop, const QString& value );
+    VObject *safeAddProp( VObject* o, const char* prop);
 
-	bool m_dirty : 1;
-	QString m_file;
-	QMap<int, OPimContact> m_map;
+    bool m_dirty : 1;
+    QString m_file;
+    QMap<int, OPimContact> m_map;
 
-	/**
-	 * Version of parsed VCard
-	 */
-	uint version_major;
-	uint version_minor;
+    /**
+     * Version of parsed VCard
+     */
+    uint version_major;
+    uint version_minor;
 
 };
 
