@@ -190,6 +190,7 @@ int OPimMainWindow::service() {
 
 bool OPimMainWindow::doAlarm( const QDateTime&, int ) {
     // Implement in descendant classes
+    return false;
 }
 
 void OPimMainWindow::startAlarm(int count  ) {
