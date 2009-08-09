@@ -95,7 +95,7 @@ namespace Datebook {
 
     protected slots:
         void populate();
-        void doSetDocument( const QString& str );
+        void setDocument( const QString& );
         void flush();
         void reload();
         int create();

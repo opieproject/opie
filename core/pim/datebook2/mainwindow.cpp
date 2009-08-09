@@ -118,8 +118,41 @@ void MainWindow::initBars() {
     // do nothing
 }
 
-void MainWindow::doSetDocument( const QString& str ) {
+void MainWindow::setDocument( const QString& filename ) {
 
+    ODateBookAccessBackend_VCal* cal = new ODateBookAccessBackend_VCal( "datebook", filename );
+
+    ODateBookAccess acc( cal );
+    if( acc.load() ) {
+        ODateBookAccess::List list = acc.allRecords();
+
+        if ( list.count() ) {
+            QString message;
+            if( list.count() == 1 )
+                message = tr("<p>A new event has arrived. Would you like to add it to your calendar?");
+            else
+                message = tr("<p>%1 new events have arrived. Would you like to add them to your calendar?").arg(list.count());
+
+            if ( QMessageBox::information(this, QWidget::tr("New Events"),
+                                        message, QMessageBox::Ok,
+                                        QMessageBox::Cancel ) == QMessageBox::Ok ) {
+                ODateBookAccess::List::Iterator it;
+                for ( it = list.begin(); it != list.end(); ++it ) {
+                    OPimEvent ev = (*it);
+
+                    // Ensure the event has a unique ID
+                    if ( ev.uid() == 0 )
+                        ev.assignUid();
+                    
+                    manager()->add( ev );
+                }
+
+                currentView()->reschedule();
+            }
+        }
+    }
+    else
+        owarn << "Unable to load from input vcalendar file" << oendl;
 }
 
 void MainWindow::flush() {
