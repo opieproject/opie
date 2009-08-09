@@ -375,29 +375,32 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
         else if ( name == VCTitleProp ) {
             c.setJobTitle( value );
         }
-        else if ( name == "X-Qtopia-Profession" ) {
+        else if ( name == "X-Qtopia-Profession" || name == "X-KADDRESSBOOK-X-Profession" ) {
             c.setProfession( value );
         }
-        else if ( name == "X-Qtopia-Manager" ) {
+        else if ( name == "X-Qtopia-Manager" || name == "X-EVOLUTION-MANAGER" || name == "X-KADDRESSBOOK-X-ManagersName" ) {
             c.setManager( value );
         }
-        else if ( name == "X-Qtopia-Assistant" ) {
+        else if ( name == "X-Qtopia-Assistant" || name == "X-MICROSOFT-ASSISTANT" || name == "X-ASSISTANT" || name == "X-EVOLUTION-ASSISTANT" || name == "X-KADDRESSBOOK-X-AssistantsName" ) {
             c.setAssistant( value );
         }
-        else if ( name == "X-Qtopia-Spouse" ) {
+        else if ( name == "X-Qtopia-Spouse" || name == "SPOUSE" || name == "X-SPOUSE" || name == "X-EVOLUTION-SPOUSE" || name == "X-KADDRESSBOOK-X-SpousesName" ) {
             c.setSpouse( value );
         }
         else if ( name == "X-Qtopia-Gender" ) {
             c.setGender( value );
         }
-        else if ( name == "X-Qtopia-Anniversary" ) {
+        else if ( name == "X-Qtopia-Anniversary" || name == "ANNIVERSARY" || name == "X-ANNIVERSARY" || name == "X-EVOLUTION-ANNIVERSARY" || name == "X-KADDRESSBOOK-X-Anniversary" ) {
             c.setAnniversary( convVCardDateToDate( value ) );
         }
-        else if ( name == "X-Qtopia-Nickname" ) {
+        else if ( name == "X-Qtopia-Nickname" || name == "NICKNAME" ) {
             c.setNickname( value );
         }
-        else if ( name == "X-Qtopia-Children" ) {
+        else if ( name == "X-Qtopia-Children" || name == "CHILDREN" ) {
             c.setChildren( value );
+        }
+        else if ( name == "X-EVOLUTION-BLOG-URL" ) {
+            c.setHomeWebpage( value );
         }
         else if ( name == VCBirthDateProp ) {
             // Reading Birthdate regarding RFC 2425 (5.8.4)
@@ -408,14 +411,14 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
         }
 #if 0
         else {
-            printf("Name: %s, value=%s\n", name.data(), QString::fromUtf8( vObjectStringZValue( o ) ) );
+            odebug << "Name: " << name << ", value=" << QString::fromUtf8( vObjectStringZValue( o ) ) << oendl;
             VObjectIterator nit;
             initPropIterator( &nit, o );
             while( moreIteration( &nit ) ) {
                 VObject *o = nextVObject( &nit );
                 QCString name = vObjectName( o );
                 QString value = QString::fromUtf8( vObjectStringZValue( o ) );
-                printf(" subprop: %s = %s\n", name.data(), value.latin1() );
+                odebug << " subprop: " << name << ", value=" << value.latin1() << oendl;
             }
         }
         else {
@@ -574,7 +577,7 @@ QDate OPimContactAccessBackend_VCard::convVCardDateToDate( const QString& datest
     if ( monthPos == -1 || dayPos == -1 ) {
         odebug << "fromString didn't find - in str = " << datestr << "; mpos = " << monthPos << " ypos = " << dayPos << "" << oendl;
         // Ok.. No "-" found, therefore we will try to read other format ( YYYYMMDD )
-        if ( datestr.length() == 8 ){
+        if ( datestr.length() == 8 || ( datestr[8] == 'T' && ( datestr.length() == 15 || datestr.length() == 16 ) ) ) {
             monthPos   = 4;
             dayPos     = 6;
             sep_ignore = 0;
@@ -586,7 +589,7 @@ QDate OPimContactAccessBackend_VCard::convVCardDateToDate( const QString& datest
     }
     int y = datestr.left( monthPos ).toInt();
     int m = datestr.mid( monthPos + sep_ignore, dayPos - monthPos - sep_ignore ).toInt();
-    int d = datestr.mid( dayPos + sep_ignore ).toInt();
+    int d = datestr.mid( dayPos + sep_ignore, 2 ).toInt();
     odebug << "TimeConversion::fromString ymd = " << datestr << " => " << y << " " << m << " " << d << "; mpos = " << monthPos << " ypos = " << dayPos << "" << oendl;
     QDate date ( y,m,d );
     return date;
