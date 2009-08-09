@@ -124,8 +124,8 @@ namespace {
 
         safeAddPropValue( event, VCDTstartProp, toISOLocal( e.startDateTime() ) );
         safeAddPropValue( event, VCDTendProp, toISOLocal( e.endDateTime() ) );
-        safeAddPropValue( event, "X-Qtopia-NOTES", e.description() );
-        safeAddPropValue( event, VCDescriptionProp, e.description() );
+        safeAddPropValue( event, VCSummaryProp, e.description() );
+        safeAddPropValue( event, VCDescriptionProp, e.note() );
         safeAddPropValue( event, VCLocationProp, e.location() );
 
         if ( e.hasNotifiers() ) {
@@ -163,6 +163,8 @@ namespace {
         QDateTime alarmTime;
         OPimAlarm::Sound soundType = OPimAlarm::Silent;
 
+        QString note1, note2;
+
         VObjectIterator it;
         initPropIterator( &it, obj );
         while( moreIteration( &it ) ) {
@@ -178,10 +180,13 @@ namespace {
                 haveEnd = TRUE;
             }
             else if ( name == "X-Qtopia-NOTES" ) {
-                e.setNote( value );
+                note2 = value;
+            }
+            else if ( name == VCSummaryProp ) {
+                e.setDescription( value );
             }
             else if ( name == VCDescriptionProp ) {
-                e.setDescription( value );
+                note1 = value;
             }
             else if ( name == VCLocationProp ) {
                 e.setLocation( value );
@@ -233,6 +238,18 @@ namespace {
             e.setAllDay( true );
             e.setEndDateTime( e.startDateTime() ); // FIXME not sure this is correct
         }
+
+        QString note;
+        if( note1.isEmpty() || note1 == note2 )
+            note = note2;
+        else {
+            note = note1;
+            if( !note2.isEmpty() ) {
+                note.append( '\n' );
+                note.append( note2 );
+            }
+        }
+        e.setNote( note );
 
         return e;
     }
