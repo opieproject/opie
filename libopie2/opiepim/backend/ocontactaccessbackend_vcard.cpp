@@ -346,16 +346,7 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
             }
         }
         else if ( name == VCURLProp ) {
-            VObjectIterator nit;
-            initPropIterator( &nit, o );
-            while( moreIteration( &nit ) ) {
-                VObject *o = nextVObject( &nit );
-                QCString name = vObjectTypeInfo( o );
-                if ( name == VCHomeProp )
-                    c.setHomeWebpage( value );
-                else if ( name == VCWorkProp )
-                    c.setBusinessWebpage( value );
-            }
+            c.setHomeWebpage( value );
         }
         else if ( name == VCOrgProp ) {
             VObjectIterator nit;
@@ -490,9 +481,6 @@ VObject* OPimContactAccessBackend_VCard::createVObject( const OPimContact &c )
     safeAddProp( home_phone, VCFaxProp );
     safeAddProp( home_phone, VCHomeProp );
 
-    VObject *url = safeAddPropValue( vcard, VCURLProp, c.homeWebpage() );
-    safeAddProp( url, VCHomeProp );
-
     // work properties
     if ( !( c.businessStreet().isEmpty() 
        && c.businessCity().isEmpty()
@@ -520,8 +508,15 @@ VObject* OPimContactAccessBackend_VCard::createVObject( const OPimContact &c )
     safeAddProp( work_phone, VCPagerProp );
     safeAddProp( work_phone, VCWorkProp );
 
-    url = safeAddPropValue( vcard, VCURLProp, c.businessWebpage() );
-    safeAddProp( url, VCWorkProp );
+    // There's only one URL allowed, and preference is given to the home webpage
+    // since that's where information specific to the contact is more likely to
+    // be found
+    if( c.homeWebpage().isEmpty() ) {
+        if( ! c.businessWebpage().isEmpty() )
+            safeAddPropValue( vcard, VCURLProp, c.businessWebpage() );
+    }
+    else
+        safeAddPropValue( vcard, VCURLProp, c.homeWebpage() );
 
     VObject *title = safeAddPropValue( vcard, VCTitleProp, c.jobTitle() );
     safeAddProp( title, VCWorkProp );
