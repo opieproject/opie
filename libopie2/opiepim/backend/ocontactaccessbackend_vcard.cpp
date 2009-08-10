@@ -372,6 +372,15 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
                     c.setOffice( value );
             }
         }
+        else if ( name == VCCategoriesProp ) {
+            QStringList categories = QStringList::split( ",", value );
+            // Palm likes to put X- on the start of category names
+            for( QStringList::Iterator it = categories.begin(); it != categories.end(); ++it ) {
+                if( (*it).startsWith( "X-" ) )
+                    (*it) = (*it).mid(2);
+            }
+            c.setCategoryNames( categories, "Contacts" ); // no tr
+        }
         else if ( name == VCTitleProp ) {
             c.setJobTitle( value );
         }
