@@ -161,7 +161,7 @@ namespace {
         bool haveStart = FALSE;
         bool haveEnd = FALSE;
         QDateTime alarmTime;
-        OPimAlarm::Sound soundType = OPimAlarm::Silent;
+        OPimAlarm::Sound soundType = OPimAlarm::Loud;
 
         QString itemSummary, itemDesc, itemAttachNote;
 
@@ -195,7 +195,7 @@ namespace {
             else if ( name == VCLocationProp ) {
                 e.setLocation( value );
             }
-            else if ( name == VCAudioContentProp ) {
+            else if ( name == VCAAlarmProp ) {
                 haveAlarm = TRUE;
                 VObjectIterator nit;
                 initPropIterator( &nit, o );
