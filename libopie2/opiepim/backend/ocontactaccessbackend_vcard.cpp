@@ -402,6 +402,12 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
         else if ( name == "X-EVOLUTION-BLOG-URL" ) {
             c.setHomeWebpage( value );
         }
+        else if ( name == "DEPT" || name == "X-KADDRESSBOOK-X-Department" ) {
+            c.setDepartment( value );
+        }
+        else if ( name == "X-KADDRESSBOOK-X-Office" ) {
+            c.setOffice( value );
+        }
         else if ( name == VCBirthDateProp ) {
             // Reading Birthdate regarding RFC 2425 (5.8.4)
             c.setBirthday( convVCardDateToDate( value ) );
