@@ -52,140 +52,140 @@ class CategorySelect;
 class QLabel;
 
 class ContactEditor : public QDialog {
-	Q_OBJECT
+    Q_OBJECT
 
-	public:
-		ContactEditor(	const Opie::OPimContact &entry,
-				QWidget *parent = 0,
-				const char *name = 0,
-				WFlags fl = 0 );
-		~ContactEditor();
-		void setNameFocus();
-		void setPersonalView( bool personal = true );
-		Opie::OPimContact entry() const { return ent; }
+    public:
+        ContactEditor( const Opie::OPimContact &entry,
+                QWidget *parent = 0,
+                const char *name = 0,
+                WFlags fl = 0 );
+        ~ContactEditor();
+        void setNameFocus();
+        void setPersonalView( bool personal = true );
+        Opie::OPimContact entry() const { return ent; }
 
-	public slots:
-		void slotNote();
-		void slotName();
-		void setEntry(const Opie::OPimContact &entry);
+    public slots:
+        void slotNote();
+        void slotName();
+        void setEntry(const Opie::OPimContact &entry);
 
-	protected slots:
-		void accept();
+    protected slots:
+        void accept();
 
-	private:
-		void init();
-		void saveEntry();
-		bool isEmpty();
-		void cleanupFields();
-		void updateDatePicker();
-		QString parseName( QString fullName, int type );
-		void chooserError( int index );
-	private slots:
-		void slotChooser1Change( const QString &textChanged );
-		void slotChooser2Change( const QString &textChanged );
-		void slotChooser3Change( const QString &textChanged );
-		void slotChooser4Change( const QString &textChanged );
-		void slotCmbChooser1Change( int index );
-		void slotCmbChooser2Change( int index );
-		void slotCmbChooser3Change( int index );
-		void slotCmbChooser4Change( int index );
-		void slotAddressTypeChange( int index );
-		void slotAddressChange( const QString &textChanged );
-		void slotAddress2Change( const QString &textChanged );
-		void slotPOBoxChange( const QString &textChanged );
-		void slotCityChange( const QString &textChanged );
-		void slotStateChange( const QString &textChanged );
-		void slotZipChange( const QString &textChanged );
-		void slotCountryChange( const QString &textChanged );
-		void slotFullNameChange( const QString &textChanged );
-		void slotSuffixChange( const QString &textChanged );
-		void slotOrganizationChange( const QString &textChanged );
-		void slotAnniversaryDateChanged( int year, int month, int day);
-		void slotBirthdayDateChanged( int year, int month, int day);
-		void slotRemoveBirthday();
-		void slotRemoveAnniversary();
-		void defaultEmailChanged(int);
+    private:
+        void init();
+        void saveEntry();
+        bool isEmpty();
+        void cleanupFields();
+        void updateDatePicker();
+        QString parseName( QString fullName, int type );
+        void chooserError( int index );
+    private slots:
+        void slotChooser1Change( const QString &textChanged );
+        void slotChooser2Change( const QString &textChanged );
+        void slotChooser3Change( const QString &textChanged );
+        void slotChooser4Change( const QString &textChanged );
+        void slotCmbChooser1Change( int index );
+        void slotCmbChooser2Change( int index );
+        void slotCmbChooser3Change( int index );
+        void slotCmbChooser4Change( int index );
+        void slotAddressTypeChange( int index );
+        void slotAddressChange( const QString &textChanged );
+        void slotAddress2Change( const QString &textChanged );
+        void slotPOBoxChange( const QString &textChanged );
+        void slotCityChange( const QString &textChanged );
+        void slotStateChange( const QString &textChanged );
+        void slotZipChange( const QString &textChanged );
+        void slotCountryChange( const QString &textChanged );
+        void slotFullNameChange( const QString &textChanged );
+        void slotSuffixChange( const QString &textChanged );
+        void slotOrganizationChange( const QString &textChanged );
+        void slotAnniversaryDateChanged( int year, int month, int day);
+        void slotBirthdayDateChanged( int year, int month, int day);
+        void slotRemoveBirthday();
+        void slotRemoveAnniversary();
+        void defaultEmailChanged(int);
 
-	private:
-		enum StackWidgets { TextField = 1, Combo };
-		int defaultEmailChooserPosition;
-		void populateDefaultEmailCmb();
-		void chooserChange( const QString&, int , QLineEdit*, int );
-		bool cmbChooserChange( int , QWidgetStack*, int );
-		Opie::OPimContactFields contactfields;
+    private:
+        enum StackWidgets { TextField = 1, Combo };
+        int defaultEmailChooserPosition;
+        void populateDefaultEmailCmb();
+        void chooserChange( const QString&, int , QLineEdit*, int );
+        bool cmbChooserChange( int , QWidgetStack*, int );
+        Opie::OPimContactFields contactfields;
 
-		Opie::OPimContact ent;
+        Opie::OPimContact ent;
 
-		QDialog *dlgNote;
-		QDialog *dlgName;
+        QDialog *dlgNote;
+        QDialog *dlgName;
 
-		QList<QLineEdit> listValue;
-		QList<QLabel> listName;
+        QList<QLineEdit> listValue;
+        QList<QLabel> listName;
 
-		QStringList slDynamicEntries;
-		QStringList trlDynamicEntries;
+        QStringList slDynamicEntries;
+        QStringList trlDynamicEntries;
 
-		bool m_personalView;
+        bool m_personalView;
 
-		QStringList slHomeAddress;
-		QStringList slBusinessAddress;
-		QStringList slChooserNames;
-		QStringList slChooserValues;
-		QStringList emails;
-		QString defaultEmail;
+        QStringList slHomeAddress;
+        QStringList slBusinessAddress;
+        QStringList slChooserNames;
+        QStringList slChooserValues;
+        QStringList emails;
+        QString defaultEmail;
 
-		QMultiLineEdit *txtNote;
-		QLabel *lblNote;
+        QMultiLineEdit *txtNote;
+        QLabel *lblNote;
 
-		//QLineEdit *txtTitle;
-		QLineEdit *txtFirstName;
-		QLineEdit *txtMiddleName;
-		QLineEdit *txtLastName;
-		QLineEdit *txtSuffix;
+        //QLineEdit *txtTitle;
+        QLineEdit *txtFirstName;
+        QLineEdit *txtMiddleName;
+        QLineEdit *txtLastName;
+        QLineEdit *txtSuffix;
 
-		Opie::Ui::OTabWidget *tabMain;
+        Opie::Ui::OTabWidget *tabMain;
         QWidget     *m_generalWidget;
-		QScrollView *svGeneral;
-		QPushButton *btnFullName;
-		QPushButton *btnNote;
-		QLineEdit *txtFullName;
-		QLineEdit *txtJobTitle;
-		QLineEdit *txtOrganization;
-		QLineEdit *txtChooserField1;
-		QLineEdit *txtChooserField2;
-		QLineEdit *txtChooserField3;
-		QLineEdit *txtChooserField4;
-		QWidgetStack* m_widgetStack1;
-		QWidgetStack* m_widgetStack2;
-		QWidgetStack* m_widgetStack3;
-		QWidgetStack* m_widgetStack4;
-		QComboBox *cmbChooserField1;
-		QComboBox *cmbChooserField2;
-		QComboBox *cmbChooserField3;
-		QComboBox *cmbChooserField4;
-		QComboBox *cmbDefaultEmail;
-		QComboBox *cmbFileAs;
-		CategorySelect *cmbCat;
-		QLabel *labCat;
+        QScrollView *svGeneral;
+        QPushButton *btnFullName;
+        QPushButton *btnNote;
+        QLineEdit *txtFullName;
+        QLineEdit *txtJobTitle;
+        QLineEdit *txtOrganization;
+        QLineEdit *txtChooserField1;
+        QLineEdit *txtChooserField2;
+        QLineEdit *txtChooserField3;
+        QLineEdit *txtChooserField4;
+        QWidgetStack* m_widgetStack1;
+        QWidgetStack* m_widgetStack2;
+        QWidgetStack* m_widgetStack3;
+        QWidgetStack* m_widgetStack4;
+        QComboBox *cmbChooserField1;
+        QComboBox *cmbChooserField2;
+        QComboBox *cmbChooserField3;
+        QComboBox *cmbChooserField4;
+        QComboBox *cmbDefaultEmail;
+        QComboBox *cmbFileAs;
+        CategorySelect *cmbCat;
+        QLabel *labCat;
 
-		QScrollView *svAddress;
-		QLineEdit *txtAddress;
-		//QLineEdit *txtAddress2;
-		//QLineEdit *txtPOBox;
-		QLineEdit *txtCity;
-		QLineEdit *txtState;
-		QLineEdit *txtZip;
-		QComboBox *cmbAddress;
-		QComboBox *cmbCountry;
+        QScrollView *svAddress;
+        QLineEdit *txtAddress;
+        //QLineEdit *txtAddress2;
+        //QLineEdit *txtPOBox;
+        QLineEdit *txtCity;
+        QLineEdit *txtState;
+        QLineEdit *txtZip;
+        QComboBox *cmbAddress;
+        QComboBox *cmbCountry;
 
-		QScrollView *svDetails;
-		QComboBox *cmbGender;
-		DateBookMonth* birthdayPicker;
-		QToolButton* birthdayButton;
-		DateBookMonth* anniversaryPicker;
-		QToolButton* anniversaryButton;
+        QScrollView *svDetails;
+        QComboBox *cmbGender;
+        DateBookMonth* birthdayPicker;
+        QToolButton* birthdayButton;
+        DateBookMonth* anniversaryPicker;
+        QToolButton* anniversaryButton;
 
-		bool initializing;
-	};
+        bool initializing;
+};
 
 #endif

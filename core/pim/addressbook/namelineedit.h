@@ -26,10 +26,10 @@ namespace ABOOK {
         void keyPressEvent( QKeyEvent* ev );
 
     private:
-	void configReader();
+        void configReader();
 
         bool m_prevSpace : 1;
-	bool m_disabled : 1;
+        bool m_disabled : 1;
     };
 }
 

@@ -43,30 +43,30 @@
 */
 
 AbTableItem::AbTableItem( QTable *t, EditType et, const QString &s,
-			  const QString &secondSortKey)
-	: QTableItem( t, et, s )
+              const QString &secondSortKey)
+    : QTableItem( t, et, s )
 {
-	//    sortKey = s.lower() + QChar( '\0' ) + secondSortKey.lower();
-	sortKey = Qtopia::buildSortKey( s, secondSortKey );
+    //    sortKey = s.lower() + QChar( '\0' ) + secondSortKey.lower();
+    sortKey = Qtopia::buildSortKey( s, secondSortKey );
 }
 
 int AbTableItem::alignment() const
 {
-	return AlignLeft|AlignVCenter;
+    return AlignLeft|AlignVCenter;
 }
 
 QString AbTableItem::key() const
 {
-	return sortKey;
+    return sortKey;
 }
 
 // A way to reset the item, without out doing a delete or a new...
 void AbTableItem::setItem( const QString &txt, const QString &secondKey )
 {
-	setText( txt );
-	sortKey = Qtopia::buildSortKey( txt, secondKey );
+    setText( txt );
+    sortKey = Qtopia::buildSortKey( txt, secondKey );
 
-	//    sortKey = txt.lower() + QChar( '\0' ) + secondKey.lower();
+    //    sortKey = txt.lower() + QChar( '\0' ) + secondKey.lower();
 }
 
 /*!
@@ -76,32 +76,32 @@ void AbTableItem::setItem( const QString &txt, const QString &secondKey )
 */
 
 AbPickItem::AbPickItem( QTable *t ) :
-	QTableItem(t, WhenCurrent, "?")
+    QTableItem(t, WhenCurrent, "?")
 {
 }
 
 QWidget *AbPickItem::createEditor() const
 {
-	QComboBox* combo = new QComboBox( table()->viewport() );
-	( (AbPickItem*)this )->cb = combo;
-	AbTable* t = static_cast<AbTable*>(table());
-	QStringList c = t->choiceNames();
-	int cur = 0;
-	for (QStringList::ConstIterator it = c.begin(); it!=c.end(); ++it) {
-		if ( *it == text() )
-			cur = combo->count();
-		combo->insertItem(*it);
-	}
-	combo->setCurrentItem(cur);
-	return combo;
+    QComboBox* combo = new QComboBox( table()->viewport() );
+    ( (AbPickItem*)this )->cb = combo;
+    AbTable* t = static_cast<AbTable*>(table());
+    QStringList c = t->choiceNames();
+    int cur = 0;
+    for (QStringList::ConstIterator it = c.begin(); it!=c.end(); ++it) {
+        if ( *it == text() )
+            cur = combo->count();
+        combo->insertItem(*it);
+    }
+    combo->setCurrentItem(cur);
+    return combo;
 }
 
 void AbPickItem::setContentFromEditor( QWidget *w )
 {
-	if ( w->inherits("QComboBox") )
-		setText( ( (QComboBox*)w )->currentText() );
-	else
-		QTableItem::setContentFromEditor( w );
+    if ( w->inherits("QComboBox") )
+        setText( ( (QComboBox*)w )->currentText() );
+    else
+        QTableItem::setContentFromEditor( w );
 }
 
 #endif
@@ -113,24 +113,24 @@ void AbPickItem::setContentFromEditor( QWidget *w )
 */
 
 AbTable::AbTable( const QValueList<int> order, QWidget *parent, const char *name )
-	: QTable( parent, name ),
-	  lastSortCol( -1 ),
-	  asc( TRUE ),
-	  intFields( order ),
-	  enablePainting( true ),
-	  columnVisible( true ),
-	  countNested( 0 )
+    : QTable( parent, name ),
+      lastSortCol( -1 ),
+      asc( TRUE ),
+      intFields( order ),
+      enablePainting( true ),
+      columnVisible( true ),
+      countNested( 0 )
 {
-	//	odebug << "C'tor start" << oendl;
-	setSelectionMode( NoSelection );
-	init();
-	setSorting( false ); // The table should not sort by itself!
+    //    odebug << "C'tor start" << oendl;
+    setSelectionMode( NoSelection );
+    init();
+    setSorting( false ); // The table should not sort by itself!
 
-	connect( this, SIGNAL(clicked(int,int,int,const QPoint&)),
-		 this, SLOT(itemClicked(int,int)) );
+    connect( this, SIGNAL(clicked(int,int,int,const QPoint&)),
+         this, SLOT(itemClicked(int,int)) );
 
-	// contactList.clear();
-	//	odebug << "C'tor end" << oendl;
+    // contactList.clear();
+    //    odebug << "C'tor end" << oendl;
 }
 
 AbTable::~AbTable()
@@ -139,174 +139,175 @@ AbTable::~AbTable()
 
 void AbTable::init()
 {
-	// :SX showChar = '\0';
-	setNumRows( 0 );
-	setNumCols( 2 );
+    // :SX showChar = '\0';
+    setNumRows( 0 );
+    setNumCols( 2 );
 
-	horizontalHeader()->setLabel( 0, tr( "Full Name" ));
-	horizontalHeader()->setLabel( 1, tr( "Contact" ));
-	setLeftMargin( 0 );
-	verticalHeader()->hide();
-	columnVisible = true;
+    horizontalHeader()->setLabel( 0, tr( "Full Name" ));
+    horizontalHeader()->setLabel( 1, tr( "Contact" ));
+    setLeftMargin( 0 );
+    verticalHeader()->hide();
+    columnVisible = true;
 }
 
 void AbTable::setContacts( const Opie::OPimContactAccess::List& viewList )
 {
-	odebug << "AbTable::setContacts()" << oendl;
+    odebug << "AbTable::setContacts()" << oendl;
 
-	clear();
-	m_viewList = viewList;
+    clear();
+    m_viewList = viewList;
 
-	setPaintingEnabled( FALSE );
+    setPaintingEnabled( FALSE );
 
-	setNumRows( m_viewList.count() );
+    setNumRows( m_viewList.count() );
 
 
-	updateVisible();
+    updateVisible();
 
-	setPaintingEnabled( TRUE );
+    setPaintingEnabled( TRUE );
 
 }
 
 void AbTable::setOrderedList( const QValueList<int> ordered )
 {
-	intFields = ordered;
+    intFields = ordered;
 }
 
 
 bool AbTable::selectContact( int UID )
 {
-	odebug << "AbTable::selectContact( " << UID << " )" << oendl;
-	int rows = numRows();
-	bool found = false;
+    odebug << "AbTable::selectContact( " << UID << " )" << oendl;
+    int rows = numRows();
+    bool found = false;
 
-	setPaintingEnabled( FALSE );
-	odebug << "Search start" << oendl;
-	for ( int r = 0; r < rows; ++r ) {
-		if ( m_viewList.uidAt( r ) == UID ){
-			ensureCellVisible( r, 0 );
-			setCurrentCell( r, 0 );
-			found = true;
-			break;
-		}
-	}
-	odebug << "Search end" << oendl;
+    setPaintingEnabled( FALSE );
+    odebug << "Search start" << oendl;
+    for ( int r = 0; r < rows; ++r ) {
+        if ( m_viewList.uidAt( r ) == UID ) {
+            ensureCellVisible( r, 0 );
+            setCurrentCell( r, 0 );
+            found = true;
+            break;
+        }
+    }
+    odebug << "Search end" << oendl;
 
-	if ( !found ){
-		ensureCellVisible( 0,0 );
-		setCurrentCell( 0, 0 );
-	}
+    if ( !found ) {
+        ensureCellVisible( 0,0 );
+        setCurrentCell( 0, 0 );
+    }
 
-	setPaintingEnabled( TRUE );
+    setPaintingEnabled( TRUE );
 
-	return true;
+    return true;
 }
 
 
 void AbTable::columnClicked( int col )
 {
-	odebug << "columClicked(" << col << ")" << oendl;
+    odebug << "columClicked(" << col << ")" << oendl;
 
-	if ( col == 0 ){
-		odebug << "Change sort order: " << asc << oendl;
-		asc = !asc;
-		emit signalSortOrderChanged( asc );
-	}
+    if ( col == 0 ) {
+        odebug << "Change sort order: " << asc << oendl;
+        asc = !asc;
+        emit signalSortOrderChanged( asc );
+    }
 }
 
 void AbTable::resort()
 {
-	owarn << "void AbTable::resort() NOT POSSIBLE !!" << oendl;
+    owarn << "void AbTable::resort() NOT POSSIBLE !!" << oendl;
 
 }
 
 Opie::OPimContact AbTable::currentEntry()
 {
-	return m_viewList[currentRow()];
+    return m_viewList[currentRow()];
 }
 
 int AbTable::currentEntry_UID()
 {
-	return ( currentEntry().uid() );
+    return ( currentEntry().uid() );
 }
 
 void AbTable::clear()
 {
-	odebug << "void AbTable::clear()" << oendl;
-	// contactList.clear();
+    odebug << "void AbTable::clear()" << oendl;
+    // contactList.clear();
 
-	setPaintingEnabled( FALSE );
-	for ( int r = 0; r < numRows(); ++r ) {
-		for ( int c = 0; c < numCols(); ++c ) {
-			if ( cellWidget( r, c ) )
-				clearCellWidget( r, c );
-			clearCell( r, c );
-		}
-	}
-	setNumRows( 0 );
-	setPaintingEnabled( TRUE );
+    setPaintingEnabled( FALSE );
+    for ( int r = 0; r < numRows(); ++r ) {
+        for ( int c = 0; c < numCols(); ++c ) {
+            if ( cellWidget( r, c ) )
+                clearCellWidget( r, c );
+            clearCell( r, c );
+        }
+    }
+    setNumRows( 0 );
+    setPaintingEnabled( TRUE );
 }
 
 // Refresh updates column 2 if the contactsettings changed
 void AbTable::refresh()
 {
-	owarn << "void AbTable::refresh() NOT IMPLEMENTED !!" << oendl;
+    owarn << "void AbTable::refresh() NOT IMPLEMENTED !!" << oendl;
 
 #if 0
-	int rows = numRows();
-	AbTableItem *abi;
-	ContactItem contactItem;
+    int rows = numRows();
+    AbTableItem *abi;
+    ContactItem contactItem;
 
-	setPaintingEnabled( FALSE );
-	for ( int r = 0; r < rows; ++r ) {
-		abi = static_cast<AbTableItem*>( item(r, 0) );
-		contactItem = findContactContact( contactList[abi], r );
-		static_cast<AbTableItem*>( item(r, 1) )->setItem( contactItem.value, abi->text() );
-		if ( !contactItem.icon.isNull() ){
-			static_cast<AbTableItem*>( item(r, 1) )->
-				setPixmap( contactItem.icon );
-		}else{
-			static_cast<AbTableItem*>( item(r, 1) )->
-				setPixmap( QPixmap() );
-		}
-	}
-	resort();
-	setPaintingEnabled( TRUE );
+    setPaintingEnabled( FALSE );
+    for ( int r = 0; r < rows; ++r ) {
+        abi = static_cast<AbTableItem*>( item(r, 0) );
+        contactItem = findContactContact( contactList[abi], r );
+        static_cast<AbTableItem*>( item(r, 1) )->setItem( contactItem.value, abi->text() );
+        if ( !contactItem.icon.isNull() ) {
+            static_cast<AbTableItem*>( item(r, 1) )->
+                setPixmap( contactItem.icon );
+        }
+        else{
+            static_cast<AbTableItem*>( item(r, 1) )->
+                setPixmap( QPixmap() );
+        }
+    }
+    resort();
+    setPaintingEnabled( TRUE );
 
 #endif
 }
 
 void AbTable::keyPressEvent( QKeyEvent *e )
 {
-	char key = toupper( e->ascii() );
+    char key = toupper( e->ascii() );
 
-	if ( key >= 'A' && key <= 'Z' )
-		moveTo( key );
+    if ( key >= 'A' && key <= 'Z' )
+        moveTo( key );
 
-	//		odebug << "Received key .." << oendl;
-	switch( e->key() ) {
-	case Qt::Key_Space:
-	case Qt::Key_Return:
-	case Qt::Key_Enter:
-		emit signalSwitch();
-		break;
-// 	case Qt::Key_Up:
-// 		odebug << "a" << oendl;
-// 		emit signalKeyUp();
-// 		break;
-// 	case Qt::Key_Down:
-// 		odebug << "b" << oendl;
-// 		emit signalKeyDown();
-// 		break;
-	default:
-		QTable::keyPressEvent( e );
-	}
+    //        odebug << "Received key .." << oendl;
+    switch( e->key() ) {
+        case Qt::Key_Space:
+        case Qt::Key_Return:
+        case Qt::Key_Enter:
+            emit signalSwitch();
+            break;
+//        case Qt::Key_Up:
+//            odebug << "a" << oendl;
+//            emit signalKeyUp();
+//            break;
+//        case Qt::Key_Down:
+//            odebug << "b" << oendl;
+//            emit signalKeyDown();
+//            break;
+        default:
+            QTable::keyPressEvent( e );
+    }
 
 }
 
 void AbTable::moveTo( char /*c*/ )
 {
-	odebug << "void AbTable::moveTo( char c ) NOT IMPLEMENTED !!" << oendl;
+    odebug << "void AbTable::moveTo( char c ) NOT IMPLEMENTED !!" << oendl;
 
 }
 
@@ -314,42 +315,42 @@ void AbTable::moveTo( char /*c*/ )
 // Useless.. Nobody uses it .. (se)
 QString AbTable::findContactName( const Opie::OPimContact &entry )
 {
-	// We use the fileAs, then company, defaultEmail
-	QString str;
-	str = entry.fileAs();
-	if ( str.isEmpty() ) {
-		str = entry.company();
-		if ( str.isEmpty() ) {
-			str = entry.defaultEmail();
-		}
-	}
-	return str;
+    // We use the fileAs, then company, defaultEmail
+    QString str;
+    str = entry.fileAs();
+    if ( str.isEmpty() ) {
+        str = entry.company();
+        if ( str.isEmpty() ) {
+            str = entry.defaultEmail();
+        }
+    }
+    return str;
 }
 #endif
 
 
 void AbTable::resizeRows() {
-	/*
-	  if (numRows()) {
-	  for (int i = 0; i < numRows(); i++) {
-	  setRowHeight( i, size );
-	  }
-	  }
-	  updateVisible();
-	*/
+    /*
+      if (numRows()) {
+          for (int i = 0; i < numRows(); i++) {
+              setRowHeight( i, size );
+          }
+      }
+      updateVisible();
+    */
 }
 
 
 void AbTable::realignTable()
 {
-	//	odebug << "void AbTable::realignTable()" << oendl;
+    //    odebug << "void AbTable::realignTable()" << oendl;
 
-	setPaintingEnabled( FALSE );
+    setPaintingEnabled( FALSE );
 
-	resizeRows();
-	fitColumns();
+    resizeRows();
+    fitColumns();
 
-	setPaintingEnabled( TRUE );
+    setPaintingEnabled( TRUE );
 
 }
 
@@ -360,14 +361,14 @@ void AbTable::realignTable()
 #ifndef SINGLE_APP
 void QTable::paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch )
 {
-	// Region of the rect we should draw
-	QRegion reg( QRect( cx, cy, cw, ch ) );
-	// Subtract the table from it
-	reg = reg.subtract( QRect( QPoint( 0, 0 ), tableSize() ) );
-	// And draw the rectangles (transformed as needed)
-	QArray<QRect> r = reg.rects();
-	for (unsigned int i=0; i<r.count(); i++)
-		p->fillRect( r[i], colorGroup().brush( QColorGroup::Base ) );
+    // Region of the rect we should draw
+    QRegion reg( QRect( cx, cy, cw, ch ) );
+    // Subtract the table from it
+    reg = reg.subtract( QRect( QPoint( 0, 0 ), tableSize() ) );
+    // And draw the rectangles (transformed as needed)
+    QArray<QRect> r = reg.rects();
+    for (unsigned int i=0; i<r.count(); i++)
+        p->fillRect( r[i], colorGroup().brush( QColorGroup::Base ) );
 }
 #endif
 #endif
@@ -392,157 +393,160 @@ void QTable::paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch )
 
 void AbTable::fitColumns()
 {
-	odebug << "void AbTable::fitColumns()" << oendl;
-	int contentsWidth = visibleWidth() / 2;
-	// Fix to better value
-	// contentsWidth = 130;
+    odebug << "void AbTable::fitColumns()" << oendl;
+    int contentsWidth = visibleWidth() / 2;
+    // Fix to better value
+    // contentsWidth = 130;
 
-	setPaintingEnabled( FALSE );
+    setPaintingEnabled( FALSE );
 
-	if ( columnVisible == false ){
-		showColumn(0);
-		columnVisible = true;
-	}
+    if ( columnVisible == false ) {
+        showColumn(0);
+        columnVisible = true;
+    }
 
-	//	odebug << "Width: " << contentsWidth << oendl;
+    //    odebug << "Width: " << contentsWidth << oendl;
 
-	setColumnWidth( 0, contentsWidth );
-	adjustColumn(1);
-	if ( columnWidth(1) < contentsWidth )
-		setColumnWidth( 1, contentsWidth );
+    setColumnWidth( 0, contentsWidth );
+    adjustColumn(1);
+    if ( columnWidth(1) < contentsWidth )
+        setColumnWidth( 1, contentsWidth );
 
-	setPaintingEnabled( TRUE );
+    setPaintingEnabled( TRUE );
 }
 
 void AbTable::show()
 {
-	//	odebug << "void AbTable::show()" << oendl;
-	realignTable();
-	QTable::show();
+    //    odebug << "void AbTable::show()" << oendl;
+    realignTable();
+    QTable::show();
 }
 
 #if 0
 void AbTable::setChoiceNames( const QStringList& list)
 {
-	choicenames = list;
-	if ( choicenames.isEmpty() ) {
-		// hide pick column
-		setNumCols( 2 );
-	} else {
-		// show pick column
-		setNumCols( 3 );
-		setColumnWidth( 2, fontMetrics().width(tr( "Pick" ))+8 );
-		horizontalHeader()->setLabel( 2, tr( "Pick" ));
-	}
-	fitColumns();
+    choicenames = list;
+    if ( choicenames.isEmpty() ) {
+        // hide pick column
+        setNumCols( 2 );
+    }
+    else {
+        // show pick column
+        setNumCols( 3 );
+        setColumnWidth( 2, fontMetrics().width(tr( "Pick" ))+8 );
+        horizontalHeader()->setLabel( 2, tr( "Pick" ));
+    }
+    fitColumns();
 }
 #endif
 
 void AbTable::itemClicked(int,int col)
 {
-	//	odebug << "AbTable::itemClicked(int, col: " << col << ")" << oendl;
-	if ( col == 2 ) {
-		return;
-	} else {
-		//	odebug << "Emitting signalSwitch()" << oendl;
-		emit signalSwitch();
-	}
+    //    odebug << "AbTable::itemClicked(int, col: " << col << ")" << oendl;
+    if ( col == 2 ) {
+        return;
+    }
+    else {
+        //    odebug << "Emitting signalSwitch()" << oendl;
+        emit signalSwitch();
+    }
 }
 
 #if 0
 QStringList AbTable::choiceNames() const
 {
-	return choicenames;
+    return choicenames;
 }
 
 #endif
 void AbTable::setChoiceSelection( const QValueList<int>& list )
 {
-	intFields = list;
+    intFields = list;
 }
 
 QStringList AbTable::choiceSelection(int /*index*/) const
 {
-	QStringList r;
-	/* ######
+    QStringList r;
+    /* ######
 
-	QString selname = choicenames.at(index);
-	for (each row) {
-	Opie::OPimContact *c = contactForRow(row);
-	if ( text(row,2) == selname ) {
-	r.append(c->email);
-	}
-	}
+    QString selname = choicenames.at(index);
+    for (each row) {
+        Opie::OPimContact *c = contactForRow(row);
+        if ( text(row,2) == selname ) {
+            r.append(c->email);
+        }
+    }
 
-	*/
-	return r;
+    */
+    return r;
 }
 
 
 void AbTable::updateVisible()
 {
-	//	odebug << "void AbTable::updateVisible()" << oendl;
+    //    odebug << "void AbTable::updateVisible()" << oendl;
 
-	int visible,
-		totalRows,
-		row,
-		selectedRow = 0;
+    int visible,
+        totalRows,
+        row,
+        selectedRow = 0;
 
-	visible = 0;
+    visible = 0;
 
-	setPaintingEnabled( FALSE );
+    setPaintingEnabled( FALSE );
 
-	realignTable();
+    realignTable();
 
-	totalRows = numRows();
-	for ( row = 0; row < totalRows; row++ ) {
-		if ( rowHeight(row) == 0 ) {
-			showRow( row );
-			adjustRow( row );
-			if ( isSelected( row,0 ) || isSelected( row,1 ) )
-				selectedRow = row;
-		}
-		visible++;
-	}
+    totalRows = numRows();
+    for ( row = 0; row < totalRows; row++ ) {
+        if ( rowHeight(row) == 0 ) {
+            showRow( row );
+            adjustRow( row );
+            if ( isSelected( row,0 ) || isSelected( row,1 ) )
+                selectedRow = row;
+        }
+        visible++;
+    }
 
-	if ( selectedRow )
-		setCurrentCell( selectedRow, 0 );
+    if ( selectedRow )
+        setCurrentCell( selectedRow, 0 );
 
-	if ( !visible )
-		setCurrentCell( -1, 0 );
+    if ( !visible )
+        setCurrentCell( -1, 0 );
 
-	setPaintingEnabled( TRUE );
+    setPaintingEnabled( TRUE );
 }
 
 
 void AbTable::setPaintingEnabled( bool e )
 {
-	//	odebug << "IN void AbTable::setPaintingEnabled( " << e << " )->Nested: "
-	//						<< countNested << oendl;
+    //    odebug << "IN void AbTable::setPaintingEnabled( " << e << " )->Nested: "
+    //                        << countNested << oendl;
 
-	if ( e ) {
-		if ( countNested > 0 )
-			--countNested;
-		if ( ! countNested ){
-			setUpdatesEnabled( true );
-			enablePainting = true;
-			rowHeightChanged( 0 );
-			viewport()->update();
-		}
-	} else {
-		++countNested;
-		enablePainting = false;
-		setUpdatesEnabled( false );
-	}
-	//	odebug << "OUT void AbTable::setPaintingEnabled( " << e << " )->Nested: "
-	//						<< countNested << oendl;
+    if ( e ) {
+        if ( countNested > 0 )
+            --countNested;
+        if ( ! countNested ) {
+            setUpdatesEnabled( true );
+            enablePainting = true;
+            rowHeightChanged( 0 );
+            viewport()->update();
+        }
+    }
+    else {
+        ++countNested;
+        enablePainting = false;
+        setUpdatesEnabled( false );
+    }
+    //    odebug << "OUT void AbTable::setPaintingEnabled( " << e << " )->Nested: "
+    //                        << countNested << oendl;
 }
 
 void AbTable::viewportPaintEvent( QPaintEvent* e ) {
-	//	odebug << "void AbTable::viewportPaintEvent( QPaintEvent* e ) -> "
-	//						<< enablePainting << oendl;
-	if ( enablePainting )
-		QTable::viewportPaintEvent( e );
+    //    odebug << "void AbTable::viewportPaintEvent( QPaintEvent* e ) -> "
+    //                        << enablePainting << oendl;
+    if ( enablePainting )
+        QTable::viewportPaintEvent( e );
 }
 
 void AbTable::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool ) {
@@ -550,7 +554,7 @@ void AbTable::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool ) 
 
     p->save();
 
-	//	odebug << "Paint row: " << row << oendl;
+    //    odebug << "Paint row: " << row << oendl;
 
     Opie::OPimContact act_contact = m_viewList[row];
 
@@ -573,197 +577,194 @@ void AbTable::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool ) 
 
     QString nameText    = act_contact.fileAs();
 
-    switch( col ){
-	    case 0:
-		    p->drawText( x + marg,2 + fm.ascent(), nameText );
-	    break;
-	    case 1:{
+    switch( col ) {
+        case 0:
+            p->drawText( x + marg,2 + fm.ascent(), nameText );
+            break;
+        case 1: {
 
-		    ContactItem contactItem = findContactContact( act_contact, 0 );
-		    QPixmap contactPic  = contactItem.icon; /* pixmap( row, col ); */
-		    QString contactText = contactItem.value;
+            ContactItem contactItem = findContactContact( act_contact, 0 );
+            QPixmap contactPic  = contactItem.icon; /* pixmap( row, col ); */
+            QString contactText = contactItem.value;
 
-		    if ( !contactPic.isNull() )
-			    {
-				    p->drawPixmap( x + marg, y, contactPic );
-				    p->drawText( x + marg + contactPic.width()
-						 + 4,2 + fm.ascent(), contactText );
-			    }
-		    else
-			    {
-				    p->drawText( x + marg,2 + fm.ascent(), contactText );
-			    }
-	    }
-	    break;
-
+            if ( !contactPic.isNull() ) {
+                p->drawPixmap( x + marg, y, contactPic );
+                p->drawText( x + marg + contactPic.width()
+                        + 4,2 + fm.ascent(), contactText );
+            }
+            else {
+                p->drawText( x + marg,2 + fm.ascent(), contactText );
+            }
+        }
+        break;
     }
     p->restore();
 }
 
 void AbTable::rowHeightChanged( int row )
 {
-	if ( enablePainting )
-		QTable::rowHeightChanged( row );
+    if ( enablePainting )
+        QTable::rowHeightChanged( row );
 }
 ContactItem AbTable::findContactContact( const Opie::OPimContact &entry, int /* row */ )
 {
 
-	int iconsize = fontMetrics().height();
-	QImage icon;
+    int iconsize = fontMetrics().height();
+    QImage icon;
 
-	ContactItem item;
-	item.value = "";
+    ContactItem item;
+    item.value = "";
 
-	for ( QValueList<int>::ConstIterator it = intFields.begin();
-	      it != intFields.end(); ++it ) {
-		icon.reset();
+    for ( QValueList<int>::ConstIterator it = intFields.begin();
+          it != intFields.end(); ++it ) {
+        icon.reset();
 
-		switch ( *it ) {
-		default:
-			break;
-		case Qtopia::Title:
-			item.value = entry.title();
-			break;
-		case Qtopia::Suffix:
-			item.value = entry.suffix();
-			break;
-		case Qtopia::FileAs:
-			item.value = entry.fileAs();
-			break;
-		case Qtopia::DefaultEmail:
-			item.value = entry.defaultEmail();
-			if ( !item.value.isEmpty() )
-				icon = Opie::Core::OResource::loadPixmap( "addressbook/email" );
-			break;
-		case Qtopia::Emails:
-			item.value = entry.emails();
-			if ( !item.value.isEmpty() )
-				icon = Opie::Core::OResource::loadPixmap( "addressbook/email" );
-			break;
-		case Qtopia::HomeStreet:
-			item.value = entry.homeStreet();
-			break;
-		case Qtopia::HomeCity:
-			item.value = entry.homeCity();
-			break;
-		case Qtopia::HomeState:
-			item.value = entry.homeState();
-			break;
-		case Qtopia::HomeZip:
-			item.value = entry.homeZip();
-			break;
-		case Qtopia::HomeCountry:
-			item.value = entry.homeCountry();
-			break;
-		case Qtopia::HomePhone:
-			item.value = entry.homePhone();
-			if ( !item.value.isEmpty() )
-				icon = Opie::Core::OResource::loadPixmap( "addressbook/phonehome" );
-			break;
-		case Qtopia::HomeFax:
-			item.value = entry.homeFax();
-			if ( !item.value.isEmpty() )
-				icon = Opie::Core::OResource::loadPixmap( "addressbook/faxhome" );
-			break;
-		case Qtopia::HomeMobile:
-			item.value = entry.homeMobile();
-			if ( !item.value.isEmpty() )
-				icon = Opie::Core::OResource::loadPixmap( "addressbook/mobilehome" );
-			break;
-		case Qtopia::HomeWebPage:
-			item.value = entry.homeWebpage();
-			if ( !item.value.isEmpty() )
-				icon = Opie::Core::OResource::loadPixmap( "addressbook/webpagehome" );
-			break;
-		case Qtopia::Company:
-			item.value = entry.company();
-			break;
-		case Qtopia::BusinessCity:
-			item.value = entry.businessCity();
-			break;
-		case Qtopia::BusinessStreet:
-			item.value = entry.businessStreet();
-			break;
-		case Qtopia::BusinessZip:
-			item.value = entry.businessZip();
-			break;
-		case Qtopia::BusinessCountry:
-			item.value = entry.businessCountry();
-			break;
-		case Qtopia::BusinessWebPage:
-			item.value = entry.businessWebpage();
-			if ( !item.value.isEmpty() )
-				icon = Opie::Core::OResource::loadPixmap( "addressbook/webpagework" );
-			break;
-		case Qtopia::JobTitle:
-			item.value = entry.jobTitle();
-			break;
-		case Qtopia::Department:
-			item.value = entry.department();
-			break;
-		case Qtopia::Office:
-			item.value = entry.office();
-			break;
-		case Qtopia::BusinessPhone:
-			item.value = entry.businessPhone();
-			if ( !item.value.isEmpty() )
-				icon = Opie::Core::OResource::loadPixmap( "addressbook/phonework" );
-			break;
-		case Qtopia::BusinessFax:
-			item.value = entry.businessFax();
-			if ( !item.value.isEmpty() )
-				icon = Opie::Core::OResource::loadPixmap( "addressbook/faxwork" );
-			break;
-		case Qtopia::BusinessMobile:
-			item.value = entry.businessMobile();
-			if ( !item.value.isEmpty() )
-				icon = Opie::Core::OResource::loadPixmap( "addressbook/mobilework" );
-			break;
-		case Qtopia::BusinessPager:
-			item.value = entry.businessPager();
-			break;
-		case Qtopia::Profession:
-			item.value = entry.profession();
-			break;
-		case Qtopia::Assistant:
-			item.value = entry.assistant();
-			break;
-		case Qtopia::Manager:
-			item.value = entry.manager();
-			break;
-		case Qtopia::Spouse:
-			item.value = entry.spouse();
-			break;
-		case Qtopia::Gender:
-			item.value = entry.gender();
-			break;
-		case Qtopia::Birthday:
-			if ( ! entry.birthday().isNull() ){
-				item.value = TimeString::numberDateString( entry.birthday() );
-			}
-			break;
-		case Qtopia::Anniversary:
-			if ( ! entry.anniversary().isNull() ){
-				item.value = TimeString::numberDateString( entry.anniversary() );
-			}
-			break;
-		case Qtopia::Nickname:
-			item.value = entry.nickname();
-			break;
-		case Qtopia::Children:
-			item.value = entry.children();
-			break;
-		case Qtopia::Notes:
-			item.value = entry.notes();
-			break;
-		}
+        switch ( *it ) {
+            default:
+                break;
+            case Qtopia::Title:
+                item.value = entry.title();
+                break;
+            case Qtopia::Suffix:
+                item.value = entry.suffix();
+                break;
+            case Qtopia::FileAs:
+                item.value = entry.fileAs();
+                break;
+            case Qtopia::DefaultEmail:
+                item.value = entry.defaultEmail();
+                if ( !item.value.isEmpty() )
+                    icon = Opie::Core::OResource::loadPixmap( "addressbook/email" );
+                break;
+            case Qtopia::Emails:
+                item.value = entry.emails();
+                if ( !item.value.isEmpty() )
+                    icon = Opie::Core::OResource::loadPixmap( "addressbook/email" );
+                break;
+            case Qtopia::HomeStreet:
+                item.value = entry.homeStreet();
+                break;
+            case Qtopia::HomeCity:
+                item.value = entry.homeCity();
+                break;
+            case Qtopia::HomeState:
+                item.value = entry.homeState();
+                break;
+            case Qtopia::HomeZip:
+                item.value = entry.homeZip();
+                break;
+            case Qtopia::HomeCountry:
+                item.value = entry.homeCountry();
+                break;
+            case Qtopia::HomePhone:
+                item.value = entry.homePhone();
+                if ( !item.value.isEmpty() )
+                    icon = Opie::Core::OResource::loadPixmap( "addressbook/phonehome" );
+                break;
+            case Qtopia::HomeFax:
+                item.value = entry.homeFax();
+                if ( !item.value.isEmpty() )
+                    icon = Opie::Core::OResource::loadPixmap( "addressbook/faxhome" );
+                break;
+            case Qtopia::HomeMobile:
+                item.value = entry.homeMobile();
+                if ( !item.value.isEmpty() )
+                    icon = Opie::Core::OResource::loadPixmap( "addressbook/mobilehome" );
+                break;
+            case Qtopia::HomeWebPage:
+                item.value = entry.homeWebpage();
+                if ( !item.value.isEmpty() )
+                    icon = Opie::Core::OResource::loadPixmap( "addressbook/webpagehome" );
+                break;
+            case Qtopia::Company:
+                item.value = entry.company();
+                break;
+            case Qtopia::BusinessCity:
+                item.value = entry.businessCity();
+                break;
+            case Qtopia::BusinessStreet:
+                item.value = entry.businessStreet();
+                break;
+            case Qtopia::BusinessZip:
+                item.value = entry.businessZip();
+                break;
+            case Qtopia::BusinessCountry:
+                item.value = entry.businessCountry();
+                break;
+            case Qtopia::BusinessWebPage:
+                item.value = entry.businessWebpage();
+                if ( !item.value.isEmpty() )
+                    icon = Opie::Core::OResource::loadPixmap( "addressbook/webpagework" );
+                break;
+            case Qtopia::JobTitle:
+                item.value = entry.jobTitle();
+                break;
+            case Qtopia::Department:
+                item.value = entry.department();
+                break;
+            case Qtopia::Office:
+                item.value = entry.office();
+                break;
+            case Qtopia::BusinessPhone:
+                item.value = entry.businessPhone();
+                if ( !item.value.isEmpty() )
+                    icon = Opie::Core::OResource::loadPixmap( "addressbook/phonework" );
+                break;
+            case Qtopia::BusinessFax:
+                item.value = entry.businessFax();
+                if ( !item.value.isEmpty() )
+                    icon = Opie::Core::OResource::loadPixmap( "addressbook/faxwork" );
+                break;
+            case Qtopia::BusinessMobile:
+                item.value = entry.businessMobile();
+                if ( !item.value.isEmpty() )
+                    icon = Opie::Core::OResource::loadPixmap( "addressbook/mobilework" );
+                break;
+            case Qtopia::BusinessPager:
+                item.value = entry.businessPager();
+                break;
+            case Qtopia::Profession:
+                item.value = entry.profession();
+                break;
+            case Qtopia::Assistant:
+                item.value = entry.assistant();
+                break;
+            case Qtopia::Manager:
+                item.value = entry.manager();
+                break;
+            case Qtopia::Spouse:
+                item.value = entry.spouse();
+                break;
+            case Qtopia::Gender:
+                item.value = entry.gender();
+                break;
+            case Qtopia::Birthday:
+                if ( ! entry.birthday().isNull() ) {
+                    item.value = TimeString::numberDateString( entry.birthday() );
+                }
+                break;
+            case Qtopia::Anniversary:
+                if ( ! entry.anniversary().isNull() ) {
+                    item.value = TimeString::numberDateString( entry.anniversary() );
+                }
+                break;
+            case Qtopia::Nickname:
+                item.value = entry.nickname();
+                break;
+            case Qtopia::Children:
+                item.value = entry.children();
+                break;
+            case Qtopia::Notes:
+                item.value = entry.notes();
+                break;
+        }
 
-		if ( !icon.isNull() ) {
-			item.icon = icon.smoothScale( iconsize, iconsize );
-		}
+        if ( !icon.isNull() ) {
+            item.icon = icon.smoothScale( iconsize, iconsize );
+        }
 
-		if ( !item.value.isEmpty() )
-			break;
-	}
-	return item;
+        if ( !item.value.isEmpty() )
+            break;
+    }
+    return item;
 }

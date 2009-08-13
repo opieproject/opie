@@ -39,8 +39,8 @@ class AbEditor : public QDialog
     Q_OBJECT
 public:
     AbEditor( const OContact &entry, const QValueList<int> *newOrdedValues,
-	      QStringList *slNewOrdered,
-	      QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+        QStringList *slNewOrdered,
+        QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~AbEditor();
     void loadFields();
     void setNameFocus();

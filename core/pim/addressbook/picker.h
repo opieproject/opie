@@ -17,54 +17,55 @@
 
 class PickerLabel: public QLabel {
 Q_OBJECT
-	public:
-		PickerLabel( QWidget *parent = 0, const char *name = 0 );
-		~PickerLabel();
+    public:
+        PickerLabel( QWidget *parent = 0, const char *name = 0 );
+        ~PickerLabel();
 
-		void setLetters( char ch1, char ch2, char ch3 );
-		void clearLetter();
+        void setLetters( char ch1, char ch2, char ch3 );
+        void clearLetter();
 
-	signals:
+    signals:
 
-		void selectedLetter( char );
-		void clearAll();
+        void selectedLetter( char );
+        void clearAll();
 
-	protected:
+    protected:
 
-		void mouseReleaseEvent( QMouseEvent *e );
-		void mousePressEvent( QMouseEvent *e );
+        void mouseReleaseEvent( QMouseEvent *e );
+        void mousePressEvent( QMouseEvent *e );
 
-	private:
+    private:
 
-		int currentLetter;
-		static char lastLetter;
-		char letter1, letter2, letter3;
+        int currentLetter;
+        static char lastLetter;
+        char letter1, letter2, letter3;
 
-	private slots:
+    private slots:
 
-		void emitClearSignal();
+        void emitClearSignal();
 
 };
+
 class LetterPicker: public QFrame {
 Q_OBJECT
-	public:
-		LetterPicker( QWidget *parent = 0, const char *name = 0 );
-		~LetterPicker();
+    public:
+        LetterPicker( QWidget *parent = 0, const char *name = 0 );
+        ~LetterPicker();
 
-		QSizePolicy sizePolicy () const;
+        QSizePolicy sizePolicy () const;
 
-	public slots:
-		void clear();
-	
-	signals:
-		void letterClicked( char );
+    public slots:
+        void clear();
+    
+    signals:
+        void letterClicked( char );
 
-	private:
-		PickerLabel *lblABC, *lblDEF, *lblGHI, *lblJKL, *lblMNO, *lblPQR, *lblSTU, *lblVWX, *lblYZ;
-		PickerLabel *lastLabel;
+    private:
+        PickerLabel *lblABC, *lblDEF, *lblGHI, *lblJKL, *lblMNO, *lblPQR, *lblSTU, *lblVWX, *lblYZ;
+        PickerLabel *lastLabel;
 
-	private slots:
-		void newLetter( char letter );
+    private slots:
+        void newLetter( char letter );
 };
 
 #endif

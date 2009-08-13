@@ -43,17 +43,17 @@ static inline bool constainsWhiteSpace( const QString &str );
 // helper functions, convert our comma delimited list to proper
 // file format...
 void parseEmailFrom( const QString &txt, QString &strDefaultEmail,
-		     QString &strAll );
+                     QString &strAll );
 
 // helper convert from file format to comma delimited...
 void parseEmailTo( const QString &strDefaultEmail,
-		   const QString &strOtherEmail, QString &strBack );
+                   const QString &strOtherEmail, QString &strBack );
 
 
 
 AbEditor::AbEditor( const OContact &entry, const QValueList<int> *newOrdered,
-		    QStringList *slNewOrdered,
-		    QWidget *parent = 0, const char *name = 0, WFlags fl = 0 )
+                    QStringList *slNewOrdered,
+                    QWidget *parent = 0, const char *name = 0, WFlags fl = 0 )
     : QDialog( parent, name, TRUE, fl ),
       orderedValues( newOrdered ),
       slOrdered( slNewOrdered )
@@ -100,24 +100,26 @@ void AbEditor::init()
 
     int i;
     bool foundGender,
-	foundNotes;
+        foundNotes;
     foundGender = foundNotes = false;
     QStringList::ConstIterator it = slOrdered->begin();
     for ( i = 0; it != slOrdered->end(); i++, ++it ) {
-	if ( !foundGender && *it == tr("Gender") ) {
-	    foundGender = true;
-	} else if ( !foundNotes && *it == tr("Notes") ) {
-	    foundNotes = true;
-	} else {
-	    l = new QLabel( *it, container );
-	    listName.append( l );
-	    gl->addWidget( l, i + 3, 0 );
-	    QLineEdit *e = new QLineEdit( container );
-	    listValue.append( e );
-	    gl->addWidget( e, i + 3, 1 );
-	    if ( *it == tr( "Middle Name" ) )
-		middleEdit = e;
-	}
+        if ( !foundGender && *it == tr("Gender") ) {
+            foundGender = true;
+        }
+        else if ( !foundNotes && *it == tr("Notes") ) {
+            foundNotes = true;
+        }
+        else {
+            l = new QLabel( *it, container );
+            listName.append( l );
+            gl->addWidget( l, i + 3, 0 );
+            QLineEdit *e = new QLineEdit( container );
+            listValue.append( e );
+            gl->addWidget( e, i + 3, 1 );
+            if ( *it == tr( "Middle Name" ) )
+                middleEdit = e;
+        }
     }
     l = new QLabel( tr("Gender"), container );
     gl->addWidget( l, slOrdered->count() + 3, 0 );
@@ -153,7 +155,7 @@ void AbEditor::initMap()
     Config cfg1( "AddressBook" );
     Config cfg2( "AddressBook" );
     QString strCfg1,
-	    strCfg2;
+            strCfg2;
     int i;
 
     // This stuff better exist...
@@ -162,13 +164,13 @@ void AbEditor::initMap()
     i = 0;
     strCfg1 = cfg1.readEntry( "Field" + QString::number(i), QString::null );
     strCfg2 = cfg2.readEntry( "XMLField" + QString::number(i++),
-			      QString::null );
+                              QString::null );
     while ( !strCfg1.isNull() && !strCfg2.isNull() ) {
-	mapField.insert( strCfg1, strCfg2 );
-	strCfg1 = cfg1.readEntry( "Field" + QString::number(i),
-				  QString::null );
-	strCfg2 = cfg2.readEntry( "XMLField" + QString::number(i++),
-				  QString::null );
+        mapField.insert( strCfg1, strCfg2 );
+        strCfg1 = cfg1.readEntry( "Field" + QString::number(i),
+                                  QString::null );
+        strCfg2 = cfg2.readEntry( "XMLField" + QString::number(i++),
+                                  QString::null );
     }
     */
 }
@@ -178,7 +180,7 @@ void AbEditor::loadFields()
     QStringList::ConstIterator it;
     QListIterator<QLabel> lit( listName );
     for ( it = slOrdered->begin(); *lit; ++lit, ++it ) {
-	(*lit)->setText( *it );
+        (*lit)->setText( *it );
     }
 }
 
@@ -194,131 +196,131 @@ void AbEditor::setEntry( const OContact &entry )
     QValueList<int>::ConstIterator itVl;
     for ( itVl = orderedValues->begin(); *it && itVl != orderedValues->end();
           ++itVl, ++it ) {
-	switch( *itVl ) {
-        case Qtopia::Title:
-            (*it)->setText(ent.title());
-            break;
-        case Qtopia::MiddleName:
-            (*it)->setText( ent.middleName() );
-            break;
-        case Qtopia::Suffix:
-            (*it)->setText( ent.suffix() );
-            break;
+        switch( *itVl ) {
+            case Qtopia::Title:
+                (*it)->setText(ent.title());
+                break;
+            case Qtopia::MiddleName:
+                (*it)->setText( ent.middleName() );
+                break;
+            case Qtopia::Suffix:
+                (*it)->setText( ent.suffix() );
+                break;
 
-            // email
-        case Qtopia::DefaultEmail:
-	case Qtopia::Emails:
-	    {
-		QString strDefEmail = ent.defaultEmail();
-		QString strAllEmail = ent.emails();
-		QString strFinal;
-		parseEmailTo( strDefEmail, strAllEmail, strFinal );
-		(*it)->setText( strFinal );
-		// make sure we see the "default"
-		(*it)->home( false );
-		break;
-	    }
+                // email
+            case Qtopia::DefaultEmail:
+            case Qtopia::Emails:
+                {
+                    QString strDefEmail = ent.defaultEmail();
+                    QString strAllEmail = ent.emails();
+                    QString strFinal;
+                    parseEmailTo( strDefEmail, strAllEmail, strFinal );
+                    (*it)->setText( strFinal );
+                    // make sure we see the "default"
+                    (*it)->home( false );
+                    break;
+                }
 
-            // home
-        case Qtopia::HomeStreet:
-            (*it)->setText(ent.homeStreet() );
-            break;
-        case Qtopia::HomeCity:
-            (*it)->setText( ent.homeCity() );
-            break;
-        case Qtopia::HomeState:
-            (*it)->setText( ent.homeState() );
-            break;
-        case Qtopia::HomeZip:
-            (*it)->setText( ent.homeZip() );
-            break;
-        case Qtopia::HomeCountry:
-            (*it)->setText( ent.homeCountry() );
-            break;
-        case Qtopia::HomePhone:
-            (*it)->setText( ent.homePhone() );
-            break;
-        case Qtopia::HomeFax:
-            (*it)->setText( ent.homeFax() );
-            break;
-        case Qtopia::HomeMobile:
-            (*it)->setText( ent.homeMobile() );
-            break;
-        case Qtopia::HomeWebPage:
-            (*it)->setText( ent.homeWebpage() );
-            break;
+                // home
+            case Qtopia::HomeStreet:
+                (*it)->setText(ent.homeStreet() );
+                break;
+            case Qtopia::HomeCity:
+                (*it)->setText( ent.homeCity() );
+                break;
+            case Qtopia::HomeState:
+                (*it)->setText( ent.homeState() );
+                break;
+            case Qtopia::HomeZip:
+                (*it)->setText( ent.homeZip() );
+                break;
+            case Qtopia::HomeCountry:
+                (*it)->setText( ent.homeCountry() );
+                break;
+            case Qtopia::HomePhone:
+                (*it)->setText( ent.homePhone() );
+                break;
+            case Qtopia::HomeFax:
+                (*it)->setText( ent.homeFax() );
+                break;
+            case Qtopia::HomeMobile:
+                (*it)->setText( ent.homeMobile() );
+                break;
+            case Qtopia::HomeWebPage:
+                (*it)->setText( ent.homeWebpage() );
+                break;
 
-            // business
-        case Qtopia::Company:
-            (*it)->setText( ent.company() );
-            break;
-        case Qtopia::BusinessStreet:
-           (*it)->setText( ent.businessStreet() );
-            break;
-        case Qtopia::BusinessCity:
-            (*it)->setText( ent.businessCity() );
-            break;
-        case Qtopia::BusinessState:
-            (*it)->setText( ent.businessState() );
-            break;
-        case Qtopia::BusinessZip:
-            (*it)->setText( ent.businessZip() );
-            break;
-        case Qtopia::BusinessCountry:
-            (*it)->setText( ent.businessCountry() );
-            break;
-        case Qtopia::BusinessWebPage:
-            (*it)->setText( ent.businessWebpage() );
-            break;
-        case Qtopia::JobTitle:
-            (*it)->setText( ent.jobTitle() );
-            break;
-        case Qtopia::Department:
-            (*it)->setText( ent.department() );
-            break;
-        case Qtopia::Office:
-            (*it)->setText( ent.office() );
-            break;
-        case Qtopia::BusinessPhone:
-            (*it)->setText( ent.businessPhone() );
-            break;
-        case Qtopia::BusinessFax:
-            (*it)->setText( ent.businessFax() );
-            break;
-        case Qtopia::BusinessMobile:
-            (*it)->setText( ent.businessMobile() );
-            break;
-        case Qtopia::BusinessPager:
-            (*it)->setText( ent.businessPager() );
-            break;
-        case Qtopia::Profession:
-            (*it)->setText( ent.profession() );
-            break;
-        case Qtopia::Assistant:
-            (*it)->setText( ent.assistant() );
-            break;
-        case Qtopia::Manager:
-            (*it)->setText( ent.manager() );
-            break;
+                // business
+            case Qtopia::Company:
+                (*it)->setText( ent.company() );
+                break;
+            case Qtopia::BusinessStreet:
+            (*it)->setText( ent.businessStreet() );
+                break;
+            case Qtopia::BusinessCity:
+                (*it)->setText( ent.businessCity() );
+                break;
+            case Qtopia::BusinessState:
+                (*it)->setText( ent.businessState() );
+                break;
+            case Qtopia::BusinessZip:
+                (*it)->setText( ent.businessZip() );
+                break;
+            case Qtopia::BusinessCountry:
+                (*it)->setText( ent.businessCountry() );
+                break;
+            case Qtopia::BusinessWebPage:
+                (*it)->setText( ent.businessWebpage() );
+                break;
+            case Qtopia::JobTitle:
+                (*it)->setText( ent.jobTitle() );
+                break;
+            case Qtopia::Department:
+                (*it)->setText( ent.department() );
+                break;
+            case Qtopia::Office:
+                (*it)->setText( ent.office() );
+                break;
+            case Qtopia::BusinessPhone:
+                (*it)->setText( ent.businessPhone() );
+                break;
+            case Qtopia::BusinessFax:
+                (*it)->setText( ent.businessFax() );
+                break;
+            case Qtopia::BusinessMobile:
+                (*it)->setText( ent.businessMobile() );
+                break;
+            case Qtopia::BusinessPager:
+                (*it)->setText( ent.businessPager() );
+                break;
+            case Qtopia::Profession:
+                (*it)->setText( ent.profession() );
+                break;
+            case Qtopia::Assistant:
+                (*it)->setText( ent.assistant() );
+                break;
+            case Qtopia::Manager:
+                (*it)->setText( ent.manager() );
+                break;
 
-            // personal
-        case Qtopia::Spouse:
-            (*it)->setText( ent.spouse() );
-            break;
-        case Qtopia::Children:
-            (*it)->setText( ent.children() );
-            break;
-        case Qtopia::Birthday:
-            (*it)->setText( ent.birthday() );
-            break;
-        case Qtopia::Anniversary:
-            (*it)->setText( ent.anniversary() );
-            break;
-        case Qtopia::Nickname:
-            (*it)->setText( ent.nickname() );
-            break;
+                // personal
+            case Qtopia::Spouse:
+                (*it)->setText( ent.spouse() );
+                break;
+            case Qtopia::Children:
+                (*it)->setText( ent.children() );
+                break;
+            case Qtopia::Birthday:
+                (*it)->setText( ent.birthday() );
+                break;
+            case Qtopia::Anniversary:
+                (*it)->setText( ent.anniversary() );
+                break;
+            case Qtopia::Nickname:
+                (*it)->setText( ent.nickname() );
+                break;
 
-	}
+        }
     }
 
     QString gender = ent.gender();
@@ -330,10 +332,10 @@ void AbEditor::setEntry( const OContact &entry )
 void AbEditor::accept()
 {
     if ( isEmpty() )
-	reject();
+        reject();
     else {
-	saveEntry();
-	QDialog::accept();
+        saveEntry();
+        QDialog::accept();
     }
 }
 
@@ -343,22 +345,22 @@ bool AbEditor::isEmpty()
     // that warrants saving...
     QString t = firstEdit->text();
     if ( !t.isEmpty() && containsAlphaNum( t ) )
-	return false;
+        return false;
 
     t = lastEdit->text();
     if ( !t.isEmpty() && containsAlphaNum( t ) )
-	return false;
+        return false;
 
     QListIterator<QLineEdit> it( listValue );
     for ( ; it.current(); ++it ) {
-	t = it.current()->text();
-	if ( !t.isEmpty() && containsAlphaNum( t ) )
-	    return false;
+        t = it.current()->text();
+        if ( !t.isEmpty() && containsAlphaNum( t ) )
+            return false;
     }
 
     t = txtNote->text();
     if ( !t.isEmpty() && containsAlphaNum( t ) )
-	return false;
+        return false;
 
     return true;
 }
@@ -369,14 +371,14 @@ void AbEditor::saveEntry()
 
     // determine if there has been a change in names
     if ( ent.firstName() != firstEdit->text() ||
-	 ent.lastName() != lastEdit->text()
-	 || (middleEdit && ent.middleName() != middleEdit->text()) ) {
-	// set the names
-	ent.setFirstName( firstEdit->text() );
-	ent.setLastName( lastEdit->text() );
-	if ( middleEdit )
-	    ent.setMiddleName( middleEdit->text() );
-	ent.setFileAs();
+         ent.lastName() != lastEdit->text()
+         || (middleEdit && ent.middleName() != middleEdit->text()) ) {
+        // set the names
+        ent.setFirstName( firstEdit->text() );
+        ent.setLastName( lastEdit->text() );
+        if ( middleEdit )
+            ent.setMiddleName( middleEdit->text() );
+        ent.setFileAs();
     }
 
     ent.setCategories( cmbCat->currentCategories() );
@@ -385,139 +387,139 @@ void AbEditor::saveEntry()
     int i;
     QValueList<int>::ConstIterator<int> vlIt;
     for ( i = 0, vlIt = orderedValues->begin();
-	  it.current(); ++it, ++vlIt, i++ ) {
-	switch( *vlIt ) {
-	case Qtopia::Title:
-	    ent.setTitle( it.current()->text() );
-	    break;
-	case Qtopia::MiddleName:
-	    ent.setMiddleName( it.current()->text() );
-	    break;
-	case Qtopia::Suffix:
-	    ent.setSuffix( it.current()->text() );
-	    break;
-// 	case Qtopia::Category:
-// 	    {
-// // 		QStringList slCat = QStringList::split( ";", value );
-// // 		QValueList<int> cat;
-// // 		for ( QStringList::ConstIterator it = slCat.begin();
-// // 		      it != slCat.end(); ++it )
-// // 		    cat.append( (*it).toInt() );
-// // 		ent.setCategories( cat );
-// 	    }
-// 	    break;
+          it.current(); ++it, ++vlIt, i++ ) {
+        switch( *vlIt ) {
+            case Qtopia::Title:
+                ent.setTitle( it.current()->text() );
+                break;
+            case Qtopia::MiddleName:
+                ent.setMiddleName( it.current()->text() );
+                break;
+            case Qtopia::Suffix:
+                ent.setSuffix( it.current()->text() );
+                break;
+//         case Qtopia::Category:
+//             {
+// //                 QStringList slCat = QStringList::split( ";", value );
+// //                 QValueList<int> cat;
+// //                 for ( QStringList::ConstIterator it = slCat.begin();
+// //                       it != slCat.end(); ++it )
+// //                     cat.append( (*it).toInt() );
+// //                 ent.setCategories( cat );
+//             }
+//             break;
 
-	    // email
-	case Qtopia::DefaultEmail:
-	case Qtopia::Emails:
-		parseEmailFrom( it.current()->text(), strDefaultEmail,
-				strOtherEmail );
-		ent.setDefaultEmail( strDefaultEmail );
-		ent.setEmails( strOtherEmail  );
-		break;
-		
-	    // home
-	case Qtopia::HomeStreet:
-	    ent.setHomeStreet( it.current()->text() );
-	    break;
-	case Qtopia::HomeCity:
-	    ent.setHomeCity( it.current()->text() );
-	    break;
-	case Qtopia::HomeState:
-	    ent.setHomeState( it.current()->text() );
-	    break;
-	case Qtopia::HomeZip:
-	    ent.setHomeZip( it.current()->text() );
-	    break;
-	case Qtopia::HomeCountry:
-	    ent.setHomeCountry( it.current()->text() );
-	    break;
-	case Qtopia::HomePhone:
-	    ent.setHomePhone( it.current()->text() );
-	    break;
-	case Qtopia::HomeFax:
-	    ent.setHomeFax( it.current()->text() );
-	    break;
-	case Qtopia::HomeMobile:
-	    ent.setHomeMobile( it.current()->text() );
-	    break;
-	case Qtopia::HomeWebPage:
-	    ent.setHomeWebpage( it.current()->text() );
-	    break;
+                // email
+            case Qtopia::DefaultEmail:
+            case Qtopia::Emails:
+                    parseEmailFrom( it.current()->text(), strDefaultEmail,
+                                    strOtherEmail );
+                    ent.setDefaultEmail( strDefaultEmail );
+                    ent.setEmails( strOtherEmail  );
+                    break;
 
-	    // business
-	case Qtopia::Company:
-	    ent.setCompany( it.current()->text() );
-	    break;
-	case Qtopia::BusinessStreet:
-	    ent.setBusinessStreet( it.current()->text() );
-	    break;
-	case Qtopia::BusinessCity:
-	    ent.setBusinessCity( it.current()->text() );
-	    break;
-	case Qtopia::BusinessState:
-	    ent.setBusinessState( it.current()->text() );
-	    break;
-	case Qtopia::BusinessZip:
-	    ent.setBusinessZip( it.current()->text() );
-	    break;
-	case Qtopia::BusinessCountry:
-	    ent.setBusinessCountry( it.current()->text() );
-	    break;
-	case Qtopia::BusinessWebPage:
-	    ent.setBusinessWebpage( it.current()->text() );
-	    break;
-	case Qtopia::JobTitle:
-	    ent.setJobTitle( it.current()->text() );
-	    break;
-	case Qtopia::Department:
-	    ent.setDepartment( it.current()->text() );
-	    break;
-	case Qtopia::Office:
-	    ent.setOffice( it.current()->text() );
-	    break;
-	case Qtopia::BusinessPhone:
-	    ent.setBusinessPhone( it.current()->text() );
-	    break;
-	case Qtopia::BusinessFax:
-	    ent.setBusinessFax( it.current()->text() );
-	    break;
-	case Qtopia::BusinessMobile:
-	    ent.setBusinessMobile( it.current()->text() );
-	    break;
-	case Qtopia::BusinessPager:
-	    ent.setBusinessPager( it.current()->text() );
-	    break;
-	case Qtopia::Profession:
-	    ent.setProfession( it.current()->text() );
-	    break;
-	case Qtopia::Assistant:
-	    ent.setAssistant( it.current()->text() );
-	    break;
-	case Qtopia::Manager:
-	    ent.setManager( it.current()->text() );
-	    break;
+                // home
+            case Qtopia::HomeStreet:
+                ent.setHomeStreet( it.current()->text() );
+                break;
+            case Qtopia::HomeCity:
+                ent.setHomeCity( it.current()->text() );
+                break;
+            case Qtopia::HomeState:
+                ent.setHomeState( it.current()->text() );
+                break;
+            case Qtopia::HomeZip:
+                ent.setHomeZip( it.current()->text() );
+                break;
+            case Qtopia::HomeCountry:
+                ent.setHomeCountry( it.current()->text() );
+                break;
+            case Qtopia::HomePhone:
+                ent.setHomePhone( it.current()->text() );
+                break;
+            case Qtopia::HomeFax:
+                ent.setHomeFax( it.current()->text() );
+                break;
+            case Qtopia::HomeMobile:
+                ent.setHomeMobile( it.current()->text() );
+                break;
+            case Qtopia::HomeWebPage:
+                ent.setHomeWebpage( it.current()->text() );
+                break;
 
-	    // personal
-	case Qtopia::Spouse:
-	    ent.setSpouse( it.current()->text() );
-	    break;
-	case Qtopia::Children:
-	    ent.setChildren( it.current()->text() );
-	    break;
-	case Qtopia::Birthday:
-	    ent.setBirthday( it.current()->text() );
-	    break;
-	case Qtopia::Anniversary:
-	    ent.setAnniversary( it.current()->text() );
-	    break;
-	case Qtopia::Nickname:
-	    ent.setNickname( it.current()->text() );
-	    break;
-	default:
-	    break;
+                // business
+            case Qtopia::Company:
+                ent.setCompany( it.current()->text() );
+                break;
+            case Qtopia::BusinessStreet:
+                ent.setBusinessStreet( it.current()->text() );
+                break;
+            case Qtopia::BusinessCity:
+                ent.setBusinessCity( it.current()->text() );
+                break;
+            case Qtopia::BusinessState:
+                ent.setBusinessState( it.current()->text() );
+                break;
+            case Qtopia::BusinessZip:
+                ent.setBusinessZip( it.current()->text() );
+                break;
+            case Qtopia::BusinessCountry:
+                ent.setBusinessCountry( it.current()->text() );
+                break;
+            case Qtopia::BusinessWebPage:
+                ent.setBusinessWebpage( it.current()->text() );
+                break;
+            case Qtopia::JobTitle:
+                ent.setJobTitle( it.current()->text() );
+                break;
+            case Qtopia::Department:
+                ent.setDepartment( it.current()->text() );
+                break;
+            case Qtopia::Office:
+                ent.setOffice( it.current()->text() );
+                break;
+            case Qtopia::BusinessPhone:
+                ent.setBusinessPhone( it.current()->text() );
+                break;
+            case Qtopia::BusinessFax:
+                ent.setBusinessFax( it.current()->text() );
+                break;
+            case Qtopia::BusinessMobile:
+                ent.setBusinessMobile( it.current()->text() );
+                break;
+            case Qtopia::BusinessPager:
+                ent.setBusinessPager( it.current()->text() );
+                break;
+            case Qtopia::Profession:
+                ent.setProfession( it.current()->text() );
+                break;
+            case Qtopia::Assistant:
+                ent.setAssistant( it.current()->text() );
+                break;
+            case Qtopia::Manager:
+                ent.setManager( it.current()->text() );
+                break;
 
-	}
+                // personal
+            case Qtopia::Spouse:
+                ent.setSpouse( it.current()->text() );
+                break;
+            case Qtopia::Children:
+                ent.setChildren( it.current()->text() );
+                break;
+            case Qtopia::Birthday:
+                ent.setBirthday( it.current()->text() );
+                break;
+            case Qtopia::Anniversary:
+                ent.setAnniversary( it.current()->text() );
+                break;
+            case Qtopia::Nickname:
+                ent.setNickname( it.current()->text() );
+                break;
+            default:
+                break;
+
+        }
     }
 
     int gender = genderCombo->currentItem();
@@ -525,14 +527,14 @@ void AbEditor::saveEntry()
 
     QString str = txtNote->text();
     if ( !str.isNull() )
-	ent.setNotes( str );
+        ent.setNotes( str );
 }
 
 void AbEditor::slotNote()
 {
     if ( ! QPEApplication::execDialog( &dlgNote ) ) {
-	// reset the note...
-	txtNote->setText( ent.notes() );
+        // reset the note...
+        txtNote->setText( ent.notes() );
     }
 }
 
@@ -542,35 +544,36 @@ void AbEditor::setNameFocus()
 }
 
 void parseEmailFrom( const QString &txt, QString &strDefaultEmail,
-		     QString &strAll )
+                     QString &strAll )
 {
     int where,
-	start;
+        start;
     if ( txt.isEmpty() )
-	return;
+        return;
 
     // find the first
     where = txt.find( ',' );
     if ( where < 0 ) {
-	strDefaultEmail = txt;
-	strAll = txt;
-    } else {
-	strDefaultEmail = txt.left( where ).stripWhiteSpace();
-	strAll = strDefaultEmail;
-	while ( where > -1 ) {
-	    strAll.append(" ");
-	    start = where;
-	    where = txt.find( ',', where + 1 );
-	    if ( where > - 1 )
-		strAll.append( txt.mid(start + 1, where - start - 1).stripWhiteSpace() );
-	    else // grab until the end...
-		strAll.append( txt.right(txt.length() - start - 1).stripWhiteSpace() );
-	}
+        strDefaultEmail = txt;
+        strAll = txt;
+    }
+    else {
+        strDefaultEmail = txt.left( where ).stripWhiteSpace();
+        strAll = strDefaultEmail;
+        while ( where > -1 ) {
+            strAll.append(" ");
+            start = where;
+            where = txt.find( ',', where + 1 );
+            if ( where > - 1 )
+                strAll.append( txt.mid(start + 1, where - start - 1).stripWhiteSpace() );
+            else // grab until the end...
+                strAll.append( txt.right(txt.length() - start - 1).stripWhiteSpace() );
+        }
     }
 }
 
 void parseEmailTo( const QString &strDefaultEmail,
-		   const QString &strOtherEmail, QString &strBack )
+                   const QString &strOtherEmail, QString &strBack )
 {
     // create a comma dilimeted set of emails...
     // use the power of short circuiting...
@@ -582,17 +585,19 @@ void parseEmailTo( const QString &strDefaultEmail,
     strBack = strDefaultEmail;
     where = 0;
     while ( where > -1 ) {
-	start = where;
-	where = strOtherEmail.find( ' ', where + 1 );
-	if ( where > 0 ) {
-	    strTmp = strOtherEmail.mid( start, where - start ).stripWhiteSpace();
-	} else
-	    strTmp = strOtherEmail.right( strOtherEmail.length() - start ).stripWhiteSpace();
-	if ( foundDefault || strTmp != strDefaultEmail ) {
-	    strBack.append( ", " );
-	    strBack.append( strTmp );
-	} else
-	    foundDefault = true;
+        start = where;
+        where = strOtherEmail.find( ' ', where + 1 );
+        if ( where > 0 ) {
+            strTmp = strOtherEmail.mid( start, where - start ).stripWhiteSpace();
+        }
+        else
+            strTmp = strOtherEmail.right( strOtherEmail.length() - start ).stripWhiteSpace();
+        if ( foundDefault || strTmp != strDefaultEmail ) {
+            strBack.append( ", " );
+            strBack.append( strTmp );
+        }
+        else
+            foundDefault = true;
     }
 }
 
@@ -600,20 +605,20 @@ void parseEmailTo( const QString &strDefaultEmail,
 static inline bool containsAlphaNum( const QString &str )
 {
     int i,
-	count = str.length();
+        count = str.length();
     for ( i = 0; i < count; i++ )
-	if ( !str[i].isSpace() )
-	    return TRUE;
+        if ( !str[i].isSpace() )
+            return TRUE;
     return FALSE;
 }
 
 static inline bool constainsWhiteSpace( const QString &str )
 {
     int i,
-	count = str.length();
+        count = str.length();
     for (i = 0; i < count; i++ )
-	if ( str[i].isSpace() )
-	    return TRUE;
+        if ( str[i].isSpace() )
+            return TRUE;
     return FALSE;
 }
 

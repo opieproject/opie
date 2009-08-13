@@ -46,29 +46,29 @@ class Opie::OPimRecord;
 
 class AddressbookWindow: public Opie::OPimMainWindow
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	enum EntryMode { NewEntry=0, EditEntry };
+    enum EntryMode { NewEntry=0, EditEntry };
 
-	static QString appName() { return QString::fromLatin1("addressbook"); }
-	AddressbookWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
-	~AddressbookWindow();
+    static QString appName() { return QString::fromLatin1("addressbook"); }
+    AddressbookWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
+    ~AddressbookWindow();
 
 protected:
-	void resizeEvent( QResizeEvent * e );
+    void resizeEvent( QResizeEvent * e );
 
-	void editPersonal();
-	void editEntry( EntryMode );
-	void closeEvent( QCloseEvent *e );
-	bool save();
+    void editPersonal();
+    void editEntry( EntryMode );
+    void closeEvent( QCloseEvent *e );
+    bool save();
 
 public slots:
-	void flush();
-	void reload();
-	void appMessage(const QCString &, const QByteArray &);
-	void setDocument( const QString & );  // Called by obex receiver and internally!
+    void flush();
+    void reload();
+    void appMessage(const QCString &, const QByteArray &);
+    void setDocument( const QString & );  // Called by obex receiver and internally!
 #ifdef __DEBUG_RELEASE
-	// void slotSave();
+    // void slotSave();
 #endif
 
 protected slots:
@@ -88,50 +88,50 @@ private slots:
     void slotItemFind();
     void slotConfigure();
 
-	void importvCard();
-	void exportvCard();
-	void slotViewBack();
-	void slotPersonalView();
-	void writeMail();
-	void beamDone( Ir * );
-	void slotSetCategory( const QString &category );
-	void slotSetLetter( char );
-	void slotSetFont(int);
+    void importvCard();
+    void exportvCard();
+    void slotViewBack();
+    void slotPersonalView();
+    void writeMail();
+    void beamDone( Ir * );
+    void slotSetCategory( const QString &category );
+    void slotSetLetter( char );
+    void slotSetFont(int);
 
-	void slotShowFind( bool show );
-	void slotFind();
-	void slotNotFound();
-	void slotWrapAround();
+    void slotShowFind( bool show );
+    void slotFind();
+    void slotNotFound();
+    void slotWrapAround();
 
-	void slotViewSwitched( int );
-	void slotListView();
-	void slotCardView();
+    void slotViewSwitched( int );
+    void slotListView();
+    void slotCardView();
 
 private:
-	QToolBar *listTools;
-	enum Panes { paneList=0, paneView, paneEdit };
-	ContactEditor *abEditor;
-	LetterPicker *pLabel;
-	AbView* m_abView;
-	QWidget *m_listContainer;
+    QToolBar *listTools;
+    enum Panes { paneList=0, paneView, paneEdit };
+    ContactEditor *abEditor;
+    LetterPicker *pLabel;
+    AbView* m_abView;
+    QWidget *m_listContainer;
 
-	// Searching stuff
-	OFloatBar* m_searchBar;
-	QLineEdit* m_searchEdit;
+    // Searching stuff
+    OFloatBar* m_searchBar;
+    QLineEdit* m_searchEdit;
 
-	QAction *m_actionPersonal, *m_actionMail;
+    QAction *m_actionPersonal, *m_actionMail;
 
-	int viewMargin;
+    int viewMargin;
 
-	bool syncing;
-	QFont *defaultFont;
-	int m_curFontSize;
+    bool syncing;
+    QFont *defaultFont;
+    int m_curFontSize;
 
-	bool isLoading;
+    bool isLoading;
 
-	AbConfig m_config;
+    AbConfig m_config;
 
-	int active_view;
+    int active_view;
 };
 
 #endif

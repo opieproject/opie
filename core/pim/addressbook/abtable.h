@@ -38,7 +38,7 @@ class AbTableItem : public QTableItem
 {
 public:
     AbTableItem( QTable *t, EditType et, const QString &s,
-		 const QString &secondSortKey);
+         const QString &secondSortKey);
     QString entryKey() const;
     void setEntryKey( const QString & k );
     virtual int alignment() const;
@@ -56,8 +56,8 @@ private:
 class ContactItem
 {
  public:
-	QPixmap icon;
-	QString value;
+    QPixmap icon;
+    QString value;
 };
 
 #if 0

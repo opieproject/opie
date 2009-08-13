@@ -23,8 +23,8 @@
 #include <opie2/odebug.h>
 
 AbLabel::AbLabel( QWidget *parent, const char *name ):
-	QTextView( parent, name ),
-	m_empty( false )
+    QTextView( parent, name ),
+    m_empty( false )
 {
 }
 
@@ -34,50 +34,50 @@ AbLabel::~AbLabel()
 
 void AbLabel::setContacts( const Opie::OPimContactAccess::List& viewList )
 {
-	m_viewList = viewList;
-	if (m_viewList.count() != 0){
-		m_empty = false;
-		m_itCurContact = m_viewList.begin();
-		sync();
-	}else{
-		// m_itCurContact.clear();
-		m_empty = true;
-		setText( "" );
-	}
+    m_viewList = viewList;
+    if (m_viewList.count() != 0){
+        m_empty = false;
+        m_itCurContact = m_viewList.begin();
+        sync();
+    }else{
+        // m_itCurContact.clear();
+        m_empty = true;
+        setText( "" );
+    }
 }
 
 int AbLabel::currentEntry_UID()
 {
-	Opie::OPimContact contact = currentEntry();
+    Opie::OPimContact contact = currentEntry();
 
-	if ( contact.isEmpty() )
-		return 0;
-	else
-		return ( contact.uid() );
+    if ( contact.isEmpty() )
+        return 0;
+    else
+        return ( contact.uid() );
 }
 
 Opie::OPimContact AbLabel::currentEntry()
 {
-	if ( ! m_empty )
-		return ( *m_itCurContact );
-	else
-		return Opie::OPimContact();
+    if ( ! m_empty )
+        return ( *m_itCurContact );
+    else
+        return Opie::OPimContact();
 }
 
 
 bool AbLabel::selectContact( int UID )
 {
 
-	for ( uint r = 0; r < m_viewList.count(); ++r ) {
-		if ( m_viewList.uidAt( r ) == UID ){
-			m_itCurContact.setCurrent( r );
-			break;
-		}
-	}
+    for ( uint r = 0; r < m_viewList.count(); ++r ) {
+        if ( m_viewList.uidAt( r ) == UID ){
+            m_itCurContact.setCurrent( r );
+            break;
+        }
+    }
 
-	sync();
+    sync();
 
-	return true;
+    return true;
 }
 
 
@@ -91,54 +91,54 @@ void AbLabel::sync()
 void AbLabel::keyPressEvent( QKeyEvent *e )
 {
 
-	// Commonly handled keys
-	if ( !m_empty ){
-		switch( e->key() ) {
-		case Qt::Key_Left:
-			odebug << "Left.." << oendl;
-		case Qt::Key_Right:
-			odebug << "Right.." << oendl;
-		case Qt::Key_F33:
-			odebug << "OK.." << oendl;
-			emit signalOkPressed();
-			break;
-		case Qt::Key_Up:
-			odebug << "Up.." << oendl;
-			if ( ( visibleHeight() < contentsHeight() ) &&
-			     ( verticalScrollBar()->value() > verticalScrollBar()->minValue() ) )
-				scrollBy( 0, -(visibleHeight()-20) );
-			else {
-				--m_itCurContact;
-				if ( *m_itCurContact != Opie::OPimContact() )
-					sync();
-				else
-					m_itCurContact = m_viewList.end();
-			}
+    // Commonly handled keys
+    if ( !m_empty ){
+        switch( e->key() ) {
+        case Qt::Key_Left:
+            odebug << "Left.." << oendl;
+        case Qt::Key_Right:
+            odebug << "Right.." << oendl;
+        case Qt::Key_F33:
+            odebug << "OK.." << oendl;
+            emit signalOkPressed();
+            break;
+        case Qt::Key_Up:
+            odebug << "Up.." << oendl;
+            if ( ( visibleHeight() < contentsHeight() ) &&
+                 ( verticalScrollBar()->value() > verticalScrollBar()->minValue() ) )
+                scrollBy( 0, -(visibleHeight()-20) );
+            else {
+                --m_itCurContact;
+                if ( *m_itCurContact != Opie::OPimContact() )
+                    sync();
+                else
+                    m_itCurContact = m_viewList.end();
+            }
 
-			break;
-		case Qt::Key_Down:
-			odebug << "Down.." << oendl;
-//			odebug << "Visible: " << visibleHeight() << ", content: " << contentHeight() << oendl;
-//			odebug << "Value: " << verticalScrollBar()->value()
-//					<< ", barMaxValue: " << verticalScrollBar()->maxValue() << oendl;
-			if ( ( visibleHeight() < contentsHeight() ) &&
-			     ( verticalScrollBar()->value() < verticalScrollBar()->maxValue() ) )
-				scrollBy( 0, visibleHeight()-20 );
-			else {
-				++m_itCurContact;
-				if ( *m_itCurContact != Opie::OPimContact() )
-					sync();
-				else
-					m_itCurContact = m_viewList.begin();
-			}
-			break;
+            break;
+        case Qt::Key_Down:
+            odebug << "Down.." << oendl;
+//            odebug << "Visible: " << visibleHeight() << ", content: " << contentHeight() << oendl;
+//            odebug << "Value: " << verticalScrollBar()->value()
+//                    << ", barMaxValue: " << verticalScrollBar()->maxValue() << oendl;
+            if ( ( visibleHeight() < contentsHeight() ) &&
+                 ( verticalScrollBar()->value() < verticalScrollBar()->maxValue() ) )
+                scrollBy( 0, visibleHeight()-20 );
+            else {
+                ++m_itCurContact;
+                if ( *m_itCurContact != Opie::OPimContact() )
+                    sync();
+                else
+                    m_itCurContact = m_viewList.begin();
+            }
+            break;
                 case Qt::Key_Return: // fall through
                 case Qt::Key_Space: // fall through
                 case Qt::Key_Enter: // we want to switch back
                         emit signalOkPressed();
                         break;
                 default: break;
-		}
-	}
+        }
+    }
 
 }
