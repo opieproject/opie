@@ -34,6 +34,7 @@
 #include <qpixmap.h>
 
 #include <qtoolbar.h>
+#include <qtoolbutton.h>
 
 #include "quickedit.h"
 
@@ -55,7 +56,7 @@ private slots:
 private:
     void reinit();
     int m_state;
-    QLabel* m_lbl;
+    QToolButton* m_prio;
     QLineEdit* m_edit;
     QLabel* m_enter;
     QLabel* m_more;

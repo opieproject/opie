@@ -32,7 +32,6 @@
 #include <qlineedit.h>
 #include <qwhatsthis.h>
 
-#include <opie2/oclickablelabel.h>
 #include <opie2/oresource.h>
 
 #include "mainwindow.h"
@@ -51,11 +50,11 @@ QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
     priority3 = Opie::Core::OResource::loadPixmap( "todo/priority3" );
     priority5 = Opie::Core::OResource::loadPixmap( "todo/priority5" );
 
-    m_lbl = new Opie::Ui::OClickableLabel( this );
-    m_lbl->setMinimumWidth( 15 );
-    m_lbl->setPixmap( priority3 );
-    connect(m_lbl, SIGNAL(clicked() ), this, SLOT(slotPrio()) );
-    QWhatsThis::add( m_lbl, QWidget::tr( "Click here to set the priority of new task.\n\nThis area is called the quick task bar.\n\nIt allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options->'Show quick task bar' from the menu above." ) );
+    m_prio = new QToolButton( this );
+    m_prio->setPixmap( priority3 );
+    m_prio->setFixedWidth( priority3.width() + 2 );
+    connect(m_prio, SIGNAL(clicked() ), this, SLOT(slotPrio()) );
+    QWhatsThis::add( m_prio, QWidget::tr( "Click here to set the priority of new task.\n\nThis area is called the quick task bar.\n\nIt allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options->'Show quick task bar' from the menu above." ) );
 
     m_edit = new QLineEdit( this );
     setStretchableWidget( m_edit );
@@ -125,14 +124,14 @@ void QuickEditImpl::slotPrio() {
 
     switch( m_state ) {
     case 1:
-        m_lbl->setPixmap( priority1 );
+        m_prio->setPixmap( priority1 );
         break;
     case 5:
-        m_lbl->setPixmap( priority5 );
+        m_prio->setPixmap( priority5 );
         break;
     case 3:
     default:
-        m_lbl->setPixmap( priority3 );
+        m_prio->setPixmap( priority3 );
         break;
     }
 }
@@ -144,6 +143,6 @@ void QuickEditImpl::slotCancel() {
 }
 void QuickEditImpl::reinit() {
     m_state = 3;
-    m_lbl->setPixmap( priority3 );
+    m_prio->setPixmap( priority3 );
     m_edit->clear();
 }
