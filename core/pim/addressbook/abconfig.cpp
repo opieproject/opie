@@ -1,5 +1,4 @@
 #include "abconfig.h"
-#include "version.h"
 
 #include <qpe/config.h>
 #include <qpe/recordfields.h>
@@ -203,12 +202,6 @@ void AbConfig::save()
         cfg.setGroup("ToolBar");
         cfg.writeEntry( "Position", m_barPos );
         cfg.writeEntry( "fixedBars", m_fixedBars );
-
-        cfg.setGroup("Version");
-        cfg.writeEntry( "AppName", APPNAME + QString(" V" ) + MAINVERSION + QString(".") + SUBVERSION + QString(".") + PATCHVERSION);
-        cfg.writeEntry( "Mainversion", MAINVERSION );
-        cfg.writeEntry( "SubVersion", SUBVERSION );
-        cfg.writeEntry( "PatchVersion", PATCHVERSION );
 
     }
 
