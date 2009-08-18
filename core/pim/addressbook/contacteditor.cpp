@@ -138,32 +138,32 @@ void ContactEditor::init() {
     QGridLayout *gl = new QGridLayout( container, 10, 2, 2, 4 );
 
     btnFullName = new QPushButton( tr( "Full Name..." ), container );
-    QWhatsThis::add( btnFullName, tr( "Press to enter last- middle and firstname" ) );
+    QWhatsThis::add( btnFullName, tr( "Press to enter last, middle and first name, and suffix" ) );
     gl->addWidget( btnFullName, 0, 0 );
         txtFullName = new ABOOK::NameLineEdit( container );
     QWhatsThis::add( txtFullName, tr( "Enter fullname directly ! If you have a lastname with multiple words ( for instance \"de la Guerra\"), please write <lastname>,<firstnames> like this: \"de la Guerra, Carlos Pedro\"" ) );
     gl->addWidget( txtFullName, 0, 1 );
 
-    QLabel *l = new QLabel( tr( "Job Title" ), container );
-    QWhatsThis::add( l, tr( "The jobtitle.." ) );
+    QLabel *l = new QLabel( tr( "Organization" ), container );
+    QWhatsThis::add( l, tr( "The workplace of the contact" ) );
     gl->addWidget( l, 1, 0 );
-    txtJobTitle = new QLineEdit( container );
-    QWhatsThis::add( txtJobTitle, tr( "The jobtitle.." ) );
-    gl->addWidget( txtJobTitle, 1, 1 );
-
-    l = new QLabel( tr("Suffix"), container );
-    QWhatsThis::add( l, tr( "Something like \"jr.\".." ) );
-    gl->addWidget( l, 2, 0 );
-    txtSuffix = new QLineEdit( container );
-    QWhatsThis::add( txtSuffix, tr( "Something like \"jr.\".." ) );
-    gl->addWidget( txtSuffix, 2, 1 );
-
-    l = new QLabel( tr( "Organization" ), container );
-    QWhatsThis::add( l, tr( "The working place of the contact" ) );
-    gl->addWidget( l, 3, 0 );
     txtOrganization = new QLineEdit( container );
-    QWhatsThis::add( txtOrganization, tr( "The working place of the contact" ) );
-    gl->addWidget( txtOrganization, 3, 1 );
+    QWhatsThis::add( txtOrganization, tr( "The workplace of the contact" ) );
+    gl->addWidget( txtOrganization, 1, 1 );
+
+    l = new QLabel( tr( "Job Title" ), container );
+    QWhatsThis::add( l, tr( "The job title of the contact." ) );
+    gl->addWidget( l, 2, 0 );
+    txtJobTitle = new QLineEdit( container );
+    QWhatsThis::add( txtJobTitle, tr( "The job title of the contact." ) );
+    gl->addWidget( txtJobTitle, 2, 1 );
+
+    l = new QLabel( tr( "Department" ), container );
+    QWhatsThis::add( l, tr( "The contact's department within their workplace" ) );
+    gl->addWidget( l, 3, 0 );
+    txtDepartment = new QLineEdit( container );
+    QWhatsThis::add( txtDepartment, tr( "The contact's department within their workplace" ) );
+    gl->addWidget( txtDepartment, 3, 1 );
 
     // Chooser 1
     cmbChooserField1 = new QComboBox( false, container );
@@ -626,10 +626,11 @@ void ContactEditor::init() {
     txtLastName = new ABOOK::NameLineEdit( dlgName );
     gl->addWidget( txtLastName, 2, 1 );
 
-//     l = new QLabel( tr("Suffix"), dlgName );
-//     gl->addWidget( l, 3, 0 );
-//     txtSuffix = new QLineEdit( dlgName );
-//     gl->addWidget( txtSuffix, 3, 1 );
+    l = new QLabel( tr("Suffix"), dlgName );
+    gl->addWidget( l, 3, 0 );
+    txtSuffix = new QLineEdit( dlgName );
+    gl->addWidget( txtSuffix, 3, 1 );
+    QWhatsThis::add( txtSuffix, tr( "Contact name suffix (e.g. \"jr.\")." ) );
     space = new QSpacerItem(1,1,
                             QSizePolicy::Maximum,
                             QSizePolicy::MinimumExpanding );
@@ -648,8 +649,6 @@ void ContactEditor::init() {
 
     connect( txtFullName, SIGNAL(textChanged(const QString&)),
             this, SLOT(slotFullNameChange(const QString&)) );
-    connect( txtSuffix, SIGNAL(textChanged(const QString&)),
-            this, SLOT(slotSuffixChange(const QString&)) );
     connect( txtOrganization, SIGNAL(textChanged(const QString&)),
             this, SLOT(slotOrganizationChange(const QString&)) );
     connect( txtChooserField1, SIGNAL(textChanged(const QString&)),
@@ -1095,13 +1094,16 @@ void ContactEditor::slotNote() {
 
 void ContactEditor::slotName() {
 
-    QString tmpName;
+    QString tmpName, suffix;
 
     txtFirstName->setText( parseName(txtFullName->text(), NAME_F) );
     txtMiddleName->setText( parseName(txtFullName->text(), NAME_M) );
     txtLastName->setText( parseName(txtFullName->text(), NAME_L) );
     // txtSuffix->setText( parseName(txtFullName->text(), NAME_S) );
 
+    // Preserve suffix, since we don't use it in the full name box at the moment
+    suffix = txtSuffix->text();
+    
     if ( QPEApplication::execDialog( dlgName ) ) {
          if ( txtLastName->text().contains( ' ', true ) )
              tmpName =  txtLastName->text() + ", " + txtFirstName->text() + " " + txtMiddleName->text();
@@ -1111,6 +1113,8 @@ void ContactEditor::slotName() {
         txtFullName->setText( tmpName.simplifyWhiteSpace() );
         slotFullNameChange( txtFullName->text() );
     }
+    else
+        txtSuffix->setText( suffix );
 
 }
 
@@ -1253,6 +1257,7 @@ void ContactEditor::cleanupFields() {
     txtFullName->setText("");
     txtJobTitle->setText("");
     txtOrganization->setText("");
+    txtDepartment->setText("");
     txtChooserField1->setText("");
     txtChooserField2->setText("");
     txtChooserField3->setText("");
@@ -1307,6 +1312,7 @@ void ContactEditor::setEntry( const Opie::OPimContact &entry ) {
 
     //    if (hasCompany)
     txtOrganization->setText( ent.company() );
+    txtDepartment->setText( ent.department() );
 
     //    if (hasNotes)
     txtNote->setText( ent.notes() );
@@ -1519,6 +1525,7 @@ void ContactEditor::saveEntry() {
 
     //if (hasCompany)
     ent.setCompany( txtOrganization->text() );
+    ent.setDepartment( txtDepartment->text() );
 
     //    if (hasNotes)
     ent.setNotes( txtNote->text() );

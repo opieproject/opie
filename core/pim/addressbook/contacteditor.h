@@ -151,6 +151,7 @@ class ContactEditor : public QDialog {
         QLineEdit *txtFullName;
         QLineEdit *txtJobTitle;
         QLineEdit *txtOrganization;
+        QLineEdit *txtDepartment;
         QLineEdit *txtChooserField1;
         QLineEdit *txtChooserField2;
         QLineEdit *txtChooserField3;
