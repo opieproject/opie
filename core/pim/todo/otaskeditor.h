@@ -46,7 +46,7 @@ class QMultiLineEdit;
 class OTaskEditor : public QDialog {
     Q_OBJECT
 public:
-    OTaskEditor(int cur);
+    OTaskEditor( const QValueList<QPixmap> &pic_priority, int cur );
     OTaskEditor( const Opie::OPimTodo& todo );
     ~OTaskEditor();
 
@@ -73,6 +73,7 @@ private:
     TaskEditorAlarms   *m_remind;
     OPimRecurrenceWidget  *m_rec;
     Opie::OPimTodo     m_todo;
+    QValueList<QPixmap> m_pic_priority;
 };
 
 #endif

@@ -33,12 +33,14 @@
 
 #include <opie2/opimtodo.h>
 
+#include <qvaluelist.h>
+#include <qpixmap.h>
 
 class OTaskEditor;
 namespace Todo {
     class Editor {
     public:
-        Editor();
+        Editor( const QValueList<QPixmap> &pic_priority );
         ~Editor();
 
         Opie::OPimTodo newTodo( int currentCatId,
@@ -53,6 +55,7 @@ namespace Todo {
     private:
         bool m_accepted: 1;
         OTaskEditor* m_self;
+        QValueList<QPixmap> m_pic_priority;
     };
 };
 

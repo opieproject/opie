@@ -35,6 +35,7 @@
 
 #include <qpixmap.h>
 #include <qwidget.h>
+#include <qvaluelist.h>
 
 class CategorySelect;
 class QCheckBox;
@@ -48,7 +49,7 @@ class TaskEditorOverView : public QWidget
     Q_OBJECT
 
 public:
-    TaskEditorOverView( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    TaskEditorOverView( const QValueList<QPixmap> &pic_priority, QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~TaskEditorOverView();
 
     QComboBox      *cmbDesc;
@@ -64,7 +65,7 @@ signals:
     void recurranceEnabled( bool );
 
 protected:
-    QPixmap m_pic_priority[ 5 ];
+    QValueList<QPixmap> m_pic_priority;
 
 protected slots:
     void slotRecClicked();

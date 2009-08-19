@@ -34,6 +34,7 @@
 #include <qtable.h>
 #include <qmap.h>
 #include <qpixmap.h>
+#include <qvaluelist.h>
 
 #include "todoview.h"
 
@@ -45,7 +46,7 @@ namespace Todo {
     class TableView : public QTable, public TodoView {
         Q_OBJECT
     public:
-        TableView( MainWindow*, QWidget* parent );
+        TableView( MainWindow*, QWidget* parent, const QValueList<QPixmap> &pic_priority );
         ~TableView();
 
 
@@ -85,7 +86,7 @@ namespace Todo {
         bool m_first : 1;
 
         QPixmap m_pic_completed;
-        QPixmap m_pic_priority[ 5 ];
+        QValueList<QPixmap> m_pic_priority;
 
     protected:
         void keyPressEvent( QKeyEvent* );

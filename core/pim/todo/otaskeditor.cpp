@@ -43,8 +43,8 @@
 using namespace Opie::Ui;
 using namespace Opie;
 
-OTaskEditor::OTaskEditor( int cur )
-    : QDialog( 0, 0, TRUE, WStyle_ContextHelp )
+OTaskEditor::OTaskEditor( const QValueList<QPixmap> &pic_priority, int cur )
+    : QDialog( 0, 0, TRUE, WStyle_ContextHelp ), m_pic_priority( pic_priority )
 {
     init();
     init( cur );
@@ -115,7 +115,7 @@ void OTaskEditor::init()
     /*
      * Add the Widgets
      */
-    m_overView = new TaskEditorOverView( m_tab );
+    m_overView = new TaskEditorOverView( m_pic_priority, m_tab );
     m_tab->addTab( m_overView, "todo/info", tr("Information") );
 
     m_stat = new TaskEditorStatus( m_tab );

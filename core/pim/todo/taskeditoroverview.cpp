@@ -43,19 +43,9 @@
 #include <qmultilineedit.h>
 #include <qwhatsthis.h>
 
-TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFlags fl )
-    : QWidget( parent, name, fl )
+TaskEditorOverView::TaskEditorOverView( const QValueList<QPixmap> &pic_priority, QWidget* parent,  const char* name, WFlags fl )
+    : QWidget( parent, name, fl ), m_pic_priority( pic_priority )
 {
-    // Load icons
-    // TODO - probably should be done globally somewhere else,
-    //        see also quickeditimpl.cpp/h, tableview.cpp/h
-    QString namestr;
-    for ( unsigned int i = 1; i < 6; i++ ) {
-        namestr = "todo/priority";
-        namestr.append( QString::number( i ) );
-        m_pic_priority[ i - 1 ] = Opie::Core::OResource::loadPixmap( namestr );
-    }
-
     QVBoxLayout *vb = new QVBoxLayout( this );
 
     QScrollView *sv = new QScrollView( this );

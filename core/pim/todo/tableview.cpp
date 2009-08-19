@@ -98,21 +98,13 @@ void TableView::initConfig()
     }
 }
 
-TableView::TableView( MainWindow* window, QWidget* wid )
-    : QTable(  wid ), TodoView( window )
-{
-
+TableView::TableView( MainWindow* window, QWidget* wid, const QValueList<QPixmap> &pic_priority )
+    : QTable(  wid ), TodoView( window ), m_pic_priority( pic_priority )
+{  
     setName("TableView");
+
     // Load icons
-    // TODO - probably should be done globally somewhere else,
-    //        see also quickeditimpl.cpp/h, taskeditoroverview.cpp/h
     m_pic_completed = Opie::Core::OResource::loadPixmap( "todo/completed" );
-    QString namestr;
-    for ( unsigned int i = 1; i < 6; i++ ) {
-        namestr = "todo/priority";
-        namestr.append( QString::number( i ) );
-        m_pic_priority[ i - 1 ] = Opie::Core::OResource::loadPixmap( namestr );
-    }
 
     setUpdatesEnabled( false );
     viewport()->setUpdatesEnabled( false );

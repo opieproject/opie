@@ -36,6 +36,7 @@
 #include <opie2/otodoaccessvcal.h>
 #include <opie2/oapplicationfactory.h>
 #include <opie2/opimalarmdlg.h>
+#include <opie2/oresource.h>
 
 #include <qpe/applnk.h>
 #include <qpe/config.h>
@@ -155,6 +156,14 @@ void MainWindow::initConfig()
 
 void MainWindow::initUI()
 {
+    // Load priority pixmaps
+    QString namestr;
+    for ( unsigned int i = 1; i < 6; i++ ) {
+        namestr = "todo/priority";
+        namestr.append( QString::number( i ) );
+        m_pic_priority.append( Opie::Core::OResource::loadPixmap( namestr ) );
+    }    
+    
     // Create main widget stack
     m_stack = new Opie::Ui::OWidgetStack(this,  "main stack");
     setCentralWidget( m_stack );
@@ -162,7 +171,7 @@ void MainWindow::initUI()
             this, SLOT(setCategory(const QString&)) );
 
     // Create quick task toolbar
-    m_curQuick = new QuickEditImpl( this, m_quicktask );
+    m_curQuick = new QuickEditImpl( this, m_quicktask, m_pic_priority );
     addToolBar( (QToolBar *)m_curQuick->widget(), QWidget::tr( "QuickEdit" ),
                 QMainWindow::Top, true );
     m_curQuick->signal()->connect( this, SLOT(slotQuickEntered()) );
@@ -170,7 +179,7 @@ void MainWindow::initUI()
 
 void MainWindow::initViews()
 {
-    TableView* tableView = new TableView( this, m_stack );
+    TableView* tableView = new TableView( this, m_stack, m_pic_priority );
     QWhatsThis::add( tableView, QWidget::tr( "This is a listing of all current tasks.\n\nThe list displays the following information:\n1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.\n2. Priority - a graphical representation of task priority.  Double-click here to modify.\n3. Description - description of task.  Click here to select the task.\n4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options->'Show task deadlines' from the menu above." ) );
     m_stack->addWidget( tableView,  m_counter++ );
     m_views.append( tableView );
@@ -184,7 +193,7 @@ void MainWindow::initViews()
 
 void MainWindow::initEditor()
 {
-    m_curEdit = new Editor();
+    m_curEdit = new Editor( m_pic_priority );
 }
 
 void MainWindow::initShow()

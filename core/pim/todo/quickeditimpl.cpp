@@ -39,17 +39,12 @@
 
 
 
-QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
-    : QToolBar( (QMainWindow *)parent ), Todo::QuickEdit( (Todo::MainWindow *)parent )
+QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible, const QValueList<QPixmap> &pic_priority )
+    : QToolBar( (QMainWindow *)parent ), Todo::QuickEdit( (Todo::MainWindow *)parent ), m_pic_priority( pic_priority )
 {
     setHorizontalStretchable( TRUE );
 
-    // Load priority icons
-    // TODO - probably should be done globally somewhere else,
-    //        see also tableview.cpp/h, taskeditoroverview.cpp/h
-    priority1 = Opie::Core::OResource::loadPixmap( "todo/priority1" );
-    priority3 = Opie::Core::OResource::loadPixmap( "todo/priority3" );
-    priority5 = Opie::Core::OResource::loadPixmap( "todo/priority5" );
+    QPixmap priority3 = m_pic_priority[2];
 
     m_prio = new QToolButton( this );
     m_prio->setPixmap( priority3 );
@@ -131,18 +126,7 @@ void QuickEditImpl::slotPrio()
     if ( m_state < 1 )
         m_state = 5;
 
-    switch( m_state ) {
-        case 1:
-            m_prio->setPixmap( priority1 );
-            break;
-        case 5:
-            m_prio->setPixmap( priority5 );
-            break;
-        case 3:
-        default:
-            m_prio->setPixmap( priority3 );
-            break;
-    }
+    m_prio->setPixmap( m_pic_priority[m_state-1] );
 }
 
 void QuickEditImpl::slotMore()
@@ -158,6 +142,6 @@ void QuickEditImpl::slotCancel()
 void QuickEditImpl::reinit()
 {
     m_state = 3;
-    m_prio->setPixmap( priority3 );
+    m_prio->setPixmap( m_pic_priority[2] );
     m_edit->clear();
 }

@@ -38,7 +38,8 @@
 using namespace Opie;
 using namespace Todo;
 
-Editor::Editor()
+Editor::Editor( const QValueList<QPixmap> &pic_priority )
+    : m_pic_priority( pic_priority )
 {
     m_accepted = false;
     m_self = 0l;
@@ -96,7 +97,7 @@ bool Editor::accepted() const
 OTaskEditor* Editor::self()
 {
     if ( !m_self )
-        m_self = new OTaskEditor(0);
+        m_self = new OTaskEditor( m_pic_priority, 0 );
 
     return m_self;
 }

@@ -32,6 +32,8 @@
 #define TODO_MAIN_WINDOW_H
 
 #include <qlist.h>
+#include <qpixmap.h>
+#include <qvaluelist.h>
 
 #include <opie2/otodoaccess.h>
 #include <opie2/opimtodo.h>
@@ -144,6 +146,7 @@ namespace Todo {
         QList<ViewBase> m_views;
         uint m_counter;
         TemplateManager* m_tempManager;
+        QValueList<QPixmap> m_pic_priority;
 
 
     private slots:

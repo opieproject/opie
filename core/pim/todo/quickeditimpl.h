@@ -32,6 +32,7 @@
 #define OPIE_QUICK_EDIT_IMPL_H
 
 #include <qpixmap.h>
+#include <qvaluelist.h>
 
 #include <qtoolbar.h>
 #include <qtoolbutton.h>
@@ -44,7 +45,7 @@ class QLabel;
 class QuickEditImpl : public QToolBar, public Todo::QuickEdit {
     Q_OBJECT
 public:
-    QuickEditImpl( QWidget* parent, bool visible);
+    QuickEditImpl( QWidget* parent, bool visible, const QValueList<QPixmap> &pic_priority );
     ~QuickEditImpl();
     OPimTodo todo() const;
     QWidget* widget();
@@ -63,10 +64,7 @@ private:
     QPopupMenu* m_menu;
     OPimTodo m_todo;
     bool m_visible;
-
-    QPixmap priority1;
-    QPixmap priority3;
-    QPixmap priority5;
+    QValueList<QPixmap> m_pic_priority;
 };
 
 #endif
