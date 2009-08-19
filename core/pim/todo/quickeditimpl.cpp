@@ -122,7 +122,7 @@ void QuickEditImpl::slotEnter()
 
 void QuickEditImpl::slotPrio()
 {
-    m_state -= 2;
+    m_state--;
     if ( m_state < 1 )
         m_state = 5;
 
