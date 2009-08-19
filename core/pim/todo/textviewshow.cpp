@@ -79,10 +79,17 @@ void TextViewShow::keyPressEvent( QKeyEvent* event )
         case Qt::Key_Enter:
         case Qt::Key_Return:
         case Qt::Key_Space:
-            escapeView();
+            hide();
             break;
         default:
             QTextView::keyPressEvent( event );
             break;
     }
 }
+
+void TextViewShow::hideEvent ( QHideEvent *event )
+{
+    escapeView();
+    QTextView::hideEvent( event );
+}
+

@@ -512,10 +512,21 @@ void MainWindow::slotShowCompleted( bool show )
 void MainWindow::slotShowQuickTask( bool show )
 {
     m_quicktask = show;
-    if ( m_quicktask )
-        m_curQuick->widget()->show();
-    else
-        m_curQuick->widget()->hide();
+
+    bool showVisible = ( m_stack->visibleWidget() == currentShow()->widget() );
+    showHideQuickTask( showVisible );
+}
+
+void MainWindow::showHideQuickTask( bool showVisible )
+{
+    if ( m_quicktask && !showVisible ) {
+        if( !m_curQuick->widget()->isVisible() )
+            m_curQuick->widget()->show();
+    }
+    else {
+        if( m_curQuick->widget()->isVisible() )
+            m_curQuick->widget()->hide();
+    }
 }
 
 bool MainWindow::showOverDue() const
@@ -629,6 +640,8 @@ void MainWindow::slotShow( int uid )
 
     currentShow()->slotShow( event( uid ) );
     m_stack->raiseWidget( currentShow()->widget() );
+
+    showHideQuickTask( true );
 }
 
 void MainWindow::slotShowNext()
@@ -915,6 +928,7 @@ void MainWindow::add( const OPimRecord& rec )
 void MainWindow::slotReturnFromView()
 {
     m_showing = false;
+    showHideQuickTask( false );
     raiseCurrentView();
 }
 

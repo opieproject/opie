@@ -45,6 +45,7 @@ namespace Todo {
 
     protected:
         void keyPressEvent( QKeyEvent* );
+        void hideEvent ( QHideEvent * );
 
     };
 };

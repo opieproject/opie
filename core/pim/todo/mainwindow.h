@@ -114,6 +114,7 @@ namespace Todo {
         void initViews();
         void initEditor();
         void initShow();
+        void showHideQuickTask( bool showVisible );
         void raiseCurrentView();
         ViewBase* currentView();
         ViewBase* m_curView;
