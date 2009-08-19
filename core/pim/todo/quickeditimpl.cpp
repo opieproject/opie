@@ -55,6 +55,7 @@ QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible, const QValueList<QP
     m_edit = new QLineEdit( this );
     setStretchableWidget( m_edit );
     QWhatsThis::add( m_edit, QWidget::tr( "Enter description of new task here.\n\nThis area is called the quick task bar.\n\nIt allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options->'Show quick task bar' from the menu above." ) );
+    connect(m_edit, SIGNAL(returnPressed() ), this, SLOT(slotEnter()) );
 
     /*
      * it's not implemented and won't be implemented for 1.0
