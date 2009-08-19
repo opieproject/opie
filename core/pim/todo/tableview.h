@@ -65,7 +65,7 @@ namespace Todo {
         void setShowCompleted( bool );
         void setShowDeadline( bool );
 
-        void setShowCategory(const QString& =QString::null );
+        void setShowCategory( const QString& =QString::null );
         void newDay();
         QWidget* widget();
         void sortColumn(int, bool, bool );
@@ -92,7 +92,7 @@ namespace Todo {
         void contentsMouseReleaseEvent( QMouseEvent *e );
         void contentsMousePressEvent( QMouseEvent *e );
         void timerEvent( QTimerEvent* e );
-        QWidget* createEditor(int row, int col, bool initFromCell )const;
+        QWidget* createEditor( int row, int col, bool initFromCell )const;
         void setCellContentFromEditor( int row, int col );
         /**
          * for inline editing on single click and to work around some
@@ -100,19 +100,19 @@ namespace Todo {
          */
         struct EditorWidget {
             EditorWidget();
-            void setCellWidget(QWidget*, int row, int col );
+            void setCellWidget( QWidget*, int row, int col );
             void releaseCellWidget();
-            QWidget* cellWidget()const;
-            int cellRow()const;
-            int cellCol()const;
+            QWidget* cellWidget() const;
+            int cellRow() const;
+            int cellCol() const;
         private:
             QWidget* m_wid;
             int m_row, m_col;
         };
         EditorWidget m_editorWidget;
 
-private slots:
-        void slotClicked(int, int, int,
+    private slots:
+        void slotClicked( int, int, int,
                          const QPoint& );
         void slotPriority();
     private:

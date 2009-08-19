@@ -110,7 +110,7 @@ namespace Todo {
         MainWindow* todoWindow();
         OPimTodo event(int uid );
         OPimTodoAccess::List list();
-        OPimTodoAccess::List sorted()const;
+        OPimTodoAccess::List sorted() const;
         void sort();
         void sort(int sort );
         void setSortOrder( int order );

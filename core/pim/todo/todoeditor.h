@@ -47,7 +47,7 @@ namespace Todo {
                              const Opie::OPimTodo& ev = Opie::OPimTodo() );
 
 
-        bool accepted()const;
+        bool accepted() const;
     protected:
         OTaskEditor* self();
     private:

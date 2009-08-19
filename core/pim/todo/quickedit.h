@@ -41,7 +41,7 @@ using Opie::OPimTodo;
 namespace Todo{
     class MainWindow;
     struct QuickEditBase {
-        virtual OPimTodo todo()const = 0;
+        virtual OPimTodo todo() const = 0;
         virtual QSignal* signal() = 0;
         virtual QWidget* widget() = 0;
     };
@@ -59,9 +59,9 @@ namespace Todo{
      */
     class QuickEdit : public QuickEditBase{
     public:
-        QuickEdit(MainWindow* main );
+        QuickEdit( MainWindow* main );
         virtual ~QuickEdit();
-        //OPimTodo todo()const;
+        //OPimTodo todo() const;
         QSignal* signal();
         //QWidget* widget();
     protected:

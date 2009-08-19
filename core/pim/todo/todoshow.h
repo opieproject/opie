@@ -50,7 +50,7 @@ namespace Todo {
     public:
         TodoShow( MainWindow* win);
         virtual ~TodoShow();
-        virtual QString type()const = 0;
+        virtual QString type() const = 0;
         virtual void slotShow( const OPimTodo& ev ) = 0;
         virtual QWidget* widget() = 0;
     protected:

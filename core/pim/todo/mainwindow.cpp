@@ -96,12 +96,16 @@ MainWindow::MainWindow( QWidget* parent,
     raiseCurrentView();
     QTimer::singleShot( 0, this, SLOT(initStuff()) );
 }
-void MainWindow::initStuff() {
+
+void MainWindow::initStuff()
+{
     m_todoMgr.load();
     setViewCategory( m_curCat );
     setCategory( m_curCat );
 }
-void MainWindow::initActions() {
+
+void MainWindow::initActions()
+{
     // Insert Task menu items
     QActionGroup *items = new QActionGroup( this, QString::null, false );
 
@@ -136,8 +140,10 @@ void MainWindow::initActions() {
 
     insertViewMenuItems( items );
 }
+
 /* m_curCat from Config */
-void MainWindow::initConfig() {
+void MainWindow::initConfig()
+{
     Config config( "todo" );
     config.setGroup( "View" );
     m_completed =  config.readBoolEntry( "ShowComplete", true );
@@ -146,7 +152,9 @@ void MainWindow::initConfig() {
     m_overdue = config.readBoolEntry("ShowOverDue", false );
     m_quicktask = config.readBoolEntry("ShowQuickTask", true);
 }
-void MainWindow::initUI() {
+
+void MainWindow::initUI()
+{
     // Create main widget stack
     m_stack = new Opie::Ui::OWidgetStack(this,  "main stack");
     setCentralWidget( m_stack );
@@ -159,8 +167,9 @@ void MainWindow::initUI() {
                 QMainWindow::Top, true );
     m_curQuick->signal()->connect( this, SLOT(slotQuickEntered()) );
 }
-void MainWindow::initViews() {
 
+void MainWindow::initViews()
+{
     TableView* tableView = new TableView( this, m_stack );
     QWhatsThis::add( tableView, QWidget::tr( "This is a listing of all current tasks.\n\nThe list displays the following information:\n1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.\n2. Priority - a graphical representation of task priority.  Double-click here to modify.\n3. Description - description of task.  Click here to select the task.\n4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options->'Show task deadlines' from the menu above." ) );
     m_stack->addWidget( tableView,  m_counter++ );
@@ -172,26 +181,40 @@ void MainWindow::initViews() {
      * and subdirs for multiple views
      */
 }
-void MainWindow::initEditor() {
+
+void MainWindow::initEditor()
+{
     m_curEdit = new Editor();
 }
-void MainWindow::initShow() {
+
+void MainWindow::initShow()
+{
     m_curShow = new TextViewShow(this, this);
     m_stack->addWidget( m_curShow->widget() , m_counter++ );
 }
-MainWindow::~MainWindow() {
+
+MainWindow::~MainWindow()
+{
     delete templateManager();
 }
-void MainWindow::connectBase( ViewBase* ) {
+
+void MainWindow::connectBase( ViewBase* )
+{
     // once templates and signals mix we'll use it again
 }
-QPopupMenu* MainWindow::contextMenu( int , bool /*recur*/ ) {
+
+QPopupMenu* MainWindow::contextMenu( int , bool /*recur*/ )
+{
     return itemContextMenu();
 }
-OPimTodoAccess::List MainWindow::list()const {
+
+OPimTodoAccess::List MainWindow::list() const
+{
     return m_todoMgr.list();
 }
-OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
+
+OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder )
+{
     int cat = 0;
     if ( m_curCat != tr( "All" ) )
         cat = currentCatId();
@@ -207,7 +230,9 @@ OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
 
     return m_todoMgr.sorted( asc, sortOrder, filter, cat );
 }
-OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter) {
+
+OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter)
+{
     int cat = 0;
     if ( m_curCat != tr( "All" ) )
         cat = currentCatId();
@@ -217,29 +242,43 @@ OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter)
 
     return m_todoMgr.sorted(asc, sortOrder, addFilter,  cat );
 }
-OPimTodo MainWindow::event( int uid ) {
+
+OPimTodo MainWindow::event( int uid )
+{
     return m_todoMgr.event( uid );
 }
-bool MainWindow::isSyncing()const {
+
+bool MainWindow::isSyncing() const
+{
     return m_syncing;
 }
-TemplateManager* MainWindow::templateManager() {
+
+TemplateManager* MainWindow::templateManager()
+{
     return m_tempManager;
 }
-Editor* MainWindow::currentEditor() {
+
+Editor* MainWindow::currentEditor()
+{
     return m_curEdit;
 }
-TodoShow* MainWindow::currentShow() {
+
+TodoShow* MainWindow::currentShow()
+{
     return m_curShow;
 }
-void MainWindow::slotReload() {
+
+void MainWindow::slotReload()
+{
     m_syncing = false;
     m_todoMgr.reload();
     currentView()->updateView( );
     raiseCurrentView();
 }
-void MainWindow::closeEvent( QCloseEvent* e ) {
-    if (m_stack->visibleWidget() == currentShow()->widget() ) {
+
+void MainWindow::closeEvent( QCloseEvent* e )
+{
+    if ( m_stack->visibleWidget() == currentShow()->widget() ) {
         m_showing = false;
         raiseCurrentView();
         e->ignore();
@@ -256,20 +295,22 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
     bool quit = false;
     if ( m_todoMgr.saveAll() ){
         quit = true;
-    }else {
-	if ( QMessageBox::critical( this, QWidget::tr("Out of space"),
-				    QWidget::tr("Todo was unable\n"
-				       "to save your changes.\n"
-				       "Free up some space\n"
-				       "and try again.\n"
-				       "\nQuit Anyway?"),
-				    QMessageBox::Yes|QMessageBox::Escape,
-				    QMessageBox::No|QMessageBox::Default)
-	     != QMessageBox::No ) {
-	    e->accept();
+    }
+    else {
+        if ( QMessageBox::critical( this, QWidget::tr("Out of space"),
+                                    QWidget::tr("Todo was unable\n"
+                                       "to save your changes.\n"
+                                       "Free up some space\n"
+                                       "and try again.\n"
+                                       "\nQuit Anyway?"),
+                                    QMessageBox::Yes|QMessageBox::Escape,
+                                    QMessageBox::No|QMessageBox::Default)
+             != QMessageBox::No ) {
+            e->accept();
             quit = true;
-	}else
-	    e->ignore();
+        }
+        else
+            e->ignore();
 
     }
 
@@ -287,44 +328,50 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
         QTimer::singleShot(0, qApp, SLOT(closeAllWindows()) );
     }
 }
-void MainWindow::slotItemNew() {
-	QStringList templateList = templateManager()->templates();
-	if(templateList.isEmpty()) {
-		// No templates, just create a blank task
-		create();
-	}
-	else {
-		// There are templates, so allow the user to select one
-		NewTaskDlg dlg( templateList, this );
-		if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
-			QString tempName = dlg.tempSelected();
-			if ( tempName.isNull() )
-				// Create new, blank task
-				create();
-			else {
-				// Create new task from the template selected
-				OPimTodo event = templateManager()->templateEvent( tempName );
-				event = currentEditor()->edit( this, event );
-				if ( currentEditor()->accepted() ) {
-					event.setUid( 1 );
-					handleAlarms( OPimTodo(), event );
-					m_todoMgr.add( event );
-					currentView()->addEvent( event );
 
-					reloadCategories();
-				}
-				raiseCurrentView();
-			}
-		}
-	}
+void MainWindow::slotItemNew()
+{
+    QStringList templateList = templateManager()->templates();
+    if( templateList.isEmpty() ) {
+        // No templates, just create a blank task
+        create();
+    }
+    else {
+        // There are templates, so allow the user to select one
+        NewTaskDlg dlg( templateList, this );
+        if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
+            QString tempName = dlg.tempSelected();
+            if ( tempName.isNull() ) {
+                // Create new, blank task
+                create();
+            }
+            else {
+                // Create new task from the template selected
+                OPimTodo event = templateManager()->templateEvent( tempName );
+                event = currentEditor()->edit( this, event );
+                if ( currentEditor()->accepted() ) {
+                        event.setUid( 1 );
+                        handleAlarms( OPimTodo(), event );
+                        m_todoMgr.add( event );
+                        currentView()->addEvent( event );
+
+                        reloadCategories();
+                }
+                raiseCurrentView();
+            }
+        }
+    }
 }
-void MainWindow::slotItemEdit() {
+
+void MainWindow::slotItemEdit()
+{
     slotEdit( currentView()->current() );
 }
+
 void MainWindow::slotItemDuplicate() {
     if(m_syncing) {
         QMessageBox::warning(this, QWidget::tr("Todo"),
-							 QWidget::tr("Data can not be edited, currently syncing"));
+                             QWidget::tr("Data can not be edited, currently syncing"));
         return;
     }
     OPimTodo ev = m_todoMgr.event( currentView()->current() );
@@ -335,14 +382,16 @@ void MainWindow::slotItemDuplicate() {
     currentView()->addEvent( ev );
     raiseCurrentView();
 }
-void MainWindow::slotItemDelete() {
-    if (!currentView()->current() )
+
+void MainWindow::slotItemDelete()
+{
+    if ( !currentView()->current() )
         return;
 
-    if(m_syncing) {
-	QMessageBox::warning(this, QWidget::tr("Todo"),
-							 QWidget::tr("Data can not be edited, currently syncing"));
-	return;
+    if( m_syncing ) {
+        QMessageBox::warning(this, QWidget::tr("Todo"),
+                             QWidget::tr("Data can not be edited, currently syncing"));
+        return;
     }
     QString strName = currentView()->currentRepresentation();
     if (!QPEMessageBox::confirmDelete(this, QWidget::tr("Todo"), strName ) )
@@ -355,23 +404,34 @@ void MainWindow::slotItemDelete() {
 }
 
 static const char *beamfile = "/tmp/opie-todo.vcs";
-void MainWindow::slotItemBeam() {
+
+void MainWindow::slotItemBeam()
+{
     beam( currentView()->current() );
 }
-void MainWindow::slotItemFind() {
+
+void MainWindow::slotItemFind()
+{
 }
-void MainWindow::slotConfigure() {
+
+void MainWindow::slotConfigure()
+{
     TemplateDialogImpl dlg( this, m_tempManager );
     if ( QPEApplication::execDialog( &dlg ) != QDialog::Accepted )
         m_tempManager->load();
 }
-void MainWindow::slotDelete(int uid ) {
-    if( uid == 0 ) return;
-    if(m_syncing) {
-	QMessageBox::warning(this, QWidget::tr("Todo"),
-							 QWidget::tr("Data can not be edited, currently syncing"));
-	return;
+
+void MainWindow::slotDelete(int uid )
+{
+    if( uid == 0 )
+        return;
+    
+    if( m_syncing ) {
+        QMessageBox::warning(this, QWidget::tr("Todo"),
+                             QWidget::tr("Data can not be edited, currently syncing"));
+        return;
     }
+    
     OPimTodo to = m_todoMgr.event(uid);
     if (!QPEMessageBox::confirmDelete(this, QWidget::tr("Todo"), to.toShortText() ) )
         return;
@@ -381,8 +441,10 @@ void MainWindow::slotDelete(int uid ) {
     currentView()->removeEvent( to.uid() );
     raiseCurrentView();
 }
-void MainWindow::slotDeleteAll() {
-    if(m_syncing) {
+
+void MainWindow::slotDeleteAll()
+{
+    if( m_syncing ) {
         QMessageBox::warning(this, QWidget::tr("Todo"),
                              QWidget::tr("Data can not be edited, currently syncing"));
         return;
@@ -397,8 +459,10 @@ void MainWindow::slotDeleteAll() {
 
     raiseCurrentView();
 }
-void MainWindow::slotDeleteCompleted() {
-    if(m_syncing) {
+
+void MainWindow::slotDeleteCompleted()
+{
+    if( m_syncing ) {
         QMessageBox::warning(this, QWidget::tr("Todo"),
                              QWidget::tr("Data can not be edited, currently syncing"));
         return;
@@ -407,14 +471,15 @@ void MainWindow::slotDeleteCompleted() {
     if ( !QPEMessageBox::confirmDelete( this, QWidget::tr( "Todo" ), QWidget::tr("all completed tasks?") ) )
         return;
 
-
     m_todoMgr.removeCompleted();
     currentView()->updateView( );
 }
+
 /*
  * set the category
  */
-void MainWindow::setCategory( const QString &category ) {
+void MainWindow::setCategory( const QString &category )
+{
     m_curCat = category;
     if ( m_curCat == tr( "All" ) )
         m_curCat = QString::null;
@@ -422,43 +487,57 @@ void MainWindow::setCategory( const QString &category ) {
     currentView()->setShowCategory( m_curCat );
     raiseCurrentView();
 }
-void MainWindow::slotShowDeadLine( bool dead) {
+
+void MainWindow::slotShowDeadLine( bool dead )
+{
     m_deadline = dead;
     currentView()->setShowDeadline( dead );
 }
-void MainWindow::slotShowCompleted( bool show) {
+
+void MainWindow::slotShowCompleted( bool show )
+{
     m_completed = show;
     currentView()->setShowCompleted( m_completed );
 }
-void MainWindow::slotShowQuickTask( bool show ) {
+
+void MainWindow::slotShowQuickTask( bool show )
+{
     m_quicktask = show;
     if ( m_quicktask )
         m_curQuick->widget()->show();
     else
         m_curQuick->widget()->hide();
 }
-bool MainWindow::showOverDue()const {
+
+bool MainWindow::showOverDue() const
+{
     return m_overdue;
 }
-void MainWindow::setDocument( const QString& fi) {
+
+void MainWindow::setDocument( const QString& fi)
+{
     DocLnk doc(fi);
-    if (doc.isValid() )
+    if ( doc.isValid() )
         receiveFile(doc.file() );
     else
         receiveFile(fi );
 }
-void MainWindow::beamDone( Ir* ir) {
+
+void MainWindow::beamDone( Ir* ir)
+{
     delete ir;
     ::unlink( beamfile );
 }
-void MainWindow::receiveFile( const QString& filename ) {
+
+void MainWindow::receiveFile( const QString& filename )
+{
     OPimTodoAccessVCal* cal = new OPimTodoAccessVCal(filename );
 
     OPimTodoAccess acc( cal );
     acc.load();
     OPimTodoAccess::List list = acc.allRecords();
 
-    if (list.count()){
+    if (list.count()) {
 
         QString message = QWidget::tr("<P>%1 new tasks arrived.<p>Would you like to add them to your Todolist?").arg(list.count() );
 
@@ -478,65 +557,94 @@ void MainWindow::slotFlush() {
     m_syncing = true;
     m_todoMgr.save();
 }
-void MainWindow::slotShowDetails() {
+
+void MainWindow::slotShowDetails()
+{
     slotShow( currentView()->current() );
 }
-bool MainWindow::showCompleted()const {
+
+bool MainWindow::showCompleted() const
+{
     return m_completed;
 }
-bool MainWindow::showDeadline()const {
+
+bool MainWindow::showDeadline() const
+{
     return m_deadline;
 }
-bool MainWindow::showQuickTask()const {
+
+bool MainWindow::showQuickTask() const
+{
     return m_quicktask;
 }
-QString MainWindow::currentCategory()const {
+
+QString MainWindow::currentCategory() const
+{
     return m_curCat;
 }
-int MainWindow::currentCatId() {
+
+int MainWindow::currentCatId()
+{
     return m_todoMgr.catId( m_curCat );
 }
-ViewBase* MainWindow::currentView() {
+
+ViewBase* MainWindow::currentView()
+{
     return m_curView;
 }
-void MainWindow::raiseCurrentView() {
+
+void MainWindow::raiseCurrentView()
+{
     // due QPE/Application/todolist show(int)
     // we might not have the populateCategories slot called once
     // we would show the otodo but then imediately switch to the currentView
     // if we're initially showing we shouldn't raise the table
     // in returnFromView we fix up m_showing
-    if (m_showing ) return;
+    if ( m_showing )
+        return;
 
     m_stack->raiseWidget( m_curView->widget() );
 }
-void MainWindow::slotShowDue(bool ov) {
+
+void MainWindow::slotShowDue( bool ov )
+{
     m_overdue = ov;
     currentView()->showOverDue( ov );
     raiseCurrentView();
 }
-void MainWindow::slotShow( int uid ) {
-    if ( uid == 0 ) return;
 
+void MainWindow::slotShow( int uid )
+{
+    if ( uid == 0 )
+        return;
 
     currentShow()->slotShow( event( uid ) );
     m_stack->raiseWidget( currentShow()->widget() );
 }
-void MainWindow::slotShowNext() {
+
+void MainWindow::slotShowNext()
+{
     int l = currentView()->next();
     if (l!=0)
         slotShow(l);
 }
-void MainWindow::slotShowPrev() {
+
+void MainWindow::slotShowPrev()
+{
     int l = currentView()->prev();
     if (l!=0)
         slotShow(l);
 }
-void MainWindow::slotEdit( int uid ) {
-    if (uid == 0 ) return;
-    if(m_syncing) {
-	QMessageBox::warning(this, QWidget::tr("Todo"),
-			     QWidget::tr("Data can't be edited, currently syncing"));
-	return;
+
+void MainWindow::slotEdit( int uid )
+{
+    if ( uid == 0 )
+        return;
+    
+    if( m_syncing ) {
+        QMessageBox::warning(this, QWidget::tr("Todo"),
+                             QWidget::tr("Data can't be edited, currently syncing"));
+        return;
     }
 
     OPimTodo old_todo = m_todoMgr.event( uid );
@@ -547,50 +655,67 @@ void MainWindow::slotEdit( int uid ) {
     if ( currentEditor()->accepted() ) {
         handleAlarms( old_todo, todo );
         m_todoMgr.update( todo.uid(), todo );
-	currentView()->replaceEvent( todo );
+        currentView()->replaceEvent( todo );
         /* a Category might have changed */
         reloadCategories();
     }
 
     raiseCurrentView();
 }
+
 /*
-void MainWindow::slotUpdate1( int uid, const SmallTodo& ev) {
+void MainWindow::slotUpdate1( int uid, const SmallTodo& ev)
+{
     m_todoMgr.update( uid, ev );
 }
 */
-void MainWindow::updateTodo(  const OPimTodo& ev) {
+
+void MainWindow::updateTodo(  const OPimTodo& ev)
+{
     m_todoMgr.update( ev.uid() , ev );
 }
+
 /* The view changed it's configuration
  * update the view menu
  */
-void MainWindow::slotUpdate3( QWidget* ) {
-
+void MainWindow::slotUpdate3( QWidget* )
+{
 }
-void MainWindow::updateList() {
+
+void MainWindow::updateList()
+{
     m_todoMgr.updateList();
 }
-void MainWindow::setReadAhead( uint count ) {
+
+void MainWindow::setReadAhead( uint count )
+{
     if (m_todoMgr.todoDB() )
         m_todoMgr.todoDB()->setReadAhead( count );
 }
-void MainWindow::slotQuickEntered() {
+
+void MainWindow::slotQuickEntered()
+{
     OPimTodo todo = quickEditor()->todo();
-    if (todo.isEmpty() )
+    if ( todo.isEmpty() )
         return;
 
     m_todoMgr.add( todo );
     currentView()->addEvent( todo );
     raiseCurrentView();
 }
-QuickEditBase* MainWindow::quickEditor() {
+
+QuickEditBase* MainWindow::quickEditor()
+{
     return m_curQuick;
 }
-void MainWindow::slotComplete( int uid ) {
+
+void MainWindow::slotComplete( int uid )
+{
     slotComplete( event(uid) );
 }
-void MainWindow::slotComplete( const OPimTodo& todo ) {
+
+void MainWindow::slotComplete( const OPimTodo& todo )
+{
     OPimTodo to = todo;
     to.setCompleted( !to.isCompleted() );
     to.setCompletedDate( QDate::currentDate() );
@@ -660,27 +785,37 @@ void MainWindow::slotComplete( const OPimTodo& todo ) {
             to2.setCompleted( false );
 
             updateTodo( to2 );
-        }else
+        }
+        else
             updateTodo( to );
-    }else
+    }
+    else
         updateTodo( to );
 
     currentView()->updateView();
     raiseCurrentView();
 }
-void MainWindow::flush() {
+
+void MainWindow::flush()
+{
     slotFlush();
 }
-void MainWindow::reload() {
+
+void MainWindow::reload()
+{
     slotReload();
 }
-int MainWindow::create() {
+
+int MainWindow::create()
+{
     int uid = 0;
-    if(m_syncing) {
-	QMessageBox::warning(this, QWidget::tr("Todo"),
-			     QWidget::tr("Data can not be edited, currently syncing"));
-	return uid;
+
+    if( m_syncing ) {
+        QMessageBox::warning(this, QWidget::tr("Todo"),
+                             QWidget::tr("Data can not be edited, currently syncing"));
+        return uid;
     }
+
     m_todoMgr.load();
 
 
@@ -688,7 +823,7 @@ int MainWindow::create() {
                                            this );
 
     if ( currentEditor()->accepted() ) {
-	//todo.assignUid();
+        //todo.assignUid();
         uid = todo.uid();
         handleAlarms( OPimTodo(), todo );
         m_todoMgr.add( todo );
@@ -704,8 +839,10 @@ int MainWindow::create() {
 
     return uid;
 }
+
 /* delete it silently... */
-bool MainWindow::remove( int uid ) {
+bool MainWindow::remove( int uid )
+{
     if (m_syncing) return false;
 
     /* argh need to get the whole OEvent... to disable alarms -zecke */
@@ -713,7 +850,9 @@ bool MainWindow::remove( int uid ) {
 
     return m_todoMgr.remove( uid );
 }
-void MainWindow::beam( int uid) {
+
+void MainWindow::beam( int uid )
+{
     if( uid == 0 ) return;
 
     ::unlink( beamfile );
@@ -730,18 +869,24 @@ void MainWindow::beam( int uid) {
             this, SLOT(beamDone(Ir*) ) );
     ir->send(beamfile, todo.summary(), "text/x-vCalendar" );
 }
-void MainWindow::show( int uid ) {
+
+void MainWindow::show( int uid )
+{
     m_todoMgr.load(); // might not be loaded yet
     m_showing = true;
     slotShow( uid );
     raise();
     QPEApplication::setKeepRunning();
 }
-void MainWindow::edit( int uid ) {
+
+void MainWindow::edit( int uid )
+{
     m_todoMgr.load();
     slotEdit( uid );
 }
-void MainWindow::add( const OPimRecord& rec) {
+
+void MainWindow::add( const OPimRecord& rec )
+{
     OPimTodo test;
     if ( rec.rtti() != test.rtti() ) return;
     m_todoMgr.load(); // might not be loaded
@@ -757,14 +902,17 @@ void MainWindow::add( const OPimRecord& rec) {
     // but only call if we changed something -zecke
     reloadCategories();
 }
-void MainWindow::slotReturnFromView() {
+
+void MainWindow::slotReturnFromView()
+{
     m_showing = false;
     raiseCurrentView();
 }
 
 namespace {
     OPimNotifyManager::Alarms findNonMatching( const OPimNotifyManager::Alarms& oldAls,
-                                               const OPimNotifyManager::Alarms& newAls ) {
+                                               const OPimNotifyManager::Alarms& newAls )
+    {
         OPimNotifyManager::Alarms nonMatching;
         OPimNotifyManager::Alarms::ConstIterator oldIt = oldAls.begin();
         OPimNotifyManager::Alarms::ConstIterator newIt;
@@ -782,14 +930,18 @@ namespace {
         }
         return nonMatching;
     }
-    void addAlarms( const OPimNotifyManager::Alarms& als, int uid ) {
+    
+    void addAlarms( const OPimNotifyManager::Alarms& als, int uid )
+    {
         OPimNotifyManager::Alarms::ConstIterator it;
         for ( it = als.begin(); it != als.end(); ++it ) {
             AlarmServer::addAlarm( (*it).dateTime(), "QPE/Application/todolist", "alarm(QDateTime,int)", uid );
         }
 
     }
-    void removeAlarms( const OPimNotifyManager::Alarms& als, int uid ) {
+    
+    void removeAlarms( const OPimNotifyManager::Alarms& als, int uid )
+    {
         OPimNotifyManager::Alarms::ConstIterator it;
         for ( it = als.begin(); it != als.end(); ++it ) {
             AlarmServer::deleteAlarm( (*it).dateTime(), "QPE/Application/todolist", "alarm(QDateTime,int)", uid );
@@ -797,11 +949,12 @@ namespace {
     }
 }
 
-void MainWindow::handleAlarms( const OPimTodo& oldTodo, const OPimTodo& newTodo) {
+void MainWindow::handleAlarms( const OPimTodo& oldTodo, const OPimTodo& newTodo)
+{
     /*
      * if oldTodo is not empty and has notifiers we need to find the deleted ones
      */
-    if(!oldTodo.isEmpty() && oldTodo.hasNotifiers() ) {
+    if( !oldTodo.isEmpty() && oldTodo.hasNotifiers() ) {
         OPimNotifyManager::Alarms removed;
         OPimNotifyManager::Alarms oldAls = oldTodo.notifiers().alarms();
         if (!newTodo.hasNotifiers() )
@@ -821,8 +974,10 @@ void MainWindow::handleAlarms( const OPimTodo& oldTodo, const OPimTodo& newTodo)
         addAlarms( added, newTodo.uid() );
     }
 }
+
 /* we might have not loaded the db */
-bool MainWindow::doAlarm( const QDateTime& dt, int uid ) {
+bool MainWindow::doAlarm( const QDateTime& dt, int uid )
+{
     bool needshow = false;
 
     m_todoMgr.load();

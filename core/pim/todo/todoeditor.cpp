@@ -38,26 +38,30 @@
 using namespace Opie;
 using namespace Todo;
 
-Editor::Editor() {
+Editor::Editor()
+{
     m_accepted = false;
     m_self = 0l;
 }
-Editor::~Editor() {
+
+Editor::~Editor()
+{
     delete m_self;
     m_self = 0;
 }
-OPimTodo Editor::newTodo( int cur,
-                           QWidget*) {
 
+OPimTodo Editor::newTodo( int cur,
+                           QWidget*)
+{
     OTaskEditor *e = self();
     e->setCaption( QObject::tr("Enter Task") );
     e->init( cur );
 
     int ret = QPEApplication::execDialog( e );
 
-    if ( QDialog::Accepted == ret ) {
+    if ( QDialog::Accepted == ret )
         m_accepted = true;
-    }else
+    else
         m_accepted = false;
 
     OPimTodo ev = e->todo();
@@ -65,8 +69,10 @@ OPimTodo Editor::newTodo( int cur,
 
     return ev;
 }
+
 OPimTodo Editor::edit( QWidget *,
-                        const OPimTodo& todo ) {
+                        const OPimTodo& todo )
+{
     OTaskEditor *e = self();
     e->init( todo );
     e->setCaption( QObject::tr( "Edit Task" ) );
@@ -81,11 +87,15 @@ OPimTodo Editor::edit( QWidget *,
 
     return ev;
 }
-bool Editor::accepted()const {
+
+bool Editor::accepted() const
+{
     return m_accepted;
 }
-OTaskEditor* Editor::self() {
-    if (!m_self )
+
+OTaskEditor* Editor::self()
+{
+    if ( !m_self )
         m_self = new OTaskEditor(0);
 
     return m_self;

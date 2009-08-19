@@ -44,9 +44,9 @@ class QLabel;
 class QuickEditImpl : public QToolBar, public Todo::QuickEdit {
     Q_OBJECT
 public:
-    QuickEditImpl( QWidget* parent,  bool visible);
+    QuickEditImpl( QWidget* parent, bool visible);
     ~QuickEditImpl();
-    OPimTodo todo()const;
+    OPimTodo todo() const;
     QWidget* widget();
 private slots:
     void slotEnter();

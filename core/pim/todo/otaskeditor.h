@@ -57,7 +57,7 @@ public:
     void init( int cur );
     void init( const Opie::OPimTodo& todo );
 
-    Opie::OPimTodo todo()const;
+    Opie::OPimTodo todo() const;
 protected:
     void showEvent( QShowEvent* );
 protected slots:
@@ -72,7 +72,7 @@ private:
     TaskEditorAlarms   *m_alarm;
     TaskEditorAlarms   *m_remind;
     OPimRecurrenceWidget  *m_rec;
-    Opie::OPimTodo		m_todo;
+    Opie::OPimTodo     m_todo;
 };
 
 #endif

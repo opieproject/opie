@@ -49,7 +49,7 @@ namespace Todo {
     class TodoManager : public QObject{
         Q_OBJECT
     public:
-        bool isLoaded()const;
+        bool isLoaded() const;
         void load();
         TodoManager(QObject* obj = 0);
         ~TodoManager();
@@ -60,7 +60,7 @@ namespace Todo {
 
         void updateList();
         /** returns the iterator sorted if set sorted*/
-        OPimTodoAccess::List list()const;
+        OPimTodoAccess::List list() const;
         OPimTodoAccess::List sorted( bool asc, int so, int f,  int cat );
 
         OPimTodoAccess::List::Iterator overDue();
@@ -84,7 +84,7 @@ namespace Todo {
 
     public slots:
         void add( const OPimTodo& );
-        void update( int uid,  const SmallTodo& );
+        void update( int uid, const SmallTodo& );
         void update( int uid, const OPimTodo& );
         bool remove( int uid );
         void remove( const QArray<int>& );

@@ -40,7 +40,8 @@
 
 
 QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
-    : QToolBar( (QMainWindow *)parent ), Todo::QuickEdit( (Todo::MainWindow *)parent ) {
+    : QToolBar( (QMainWindow *)parent ), Todo::QuickEdit( (Todo::MainWindow *)parent )
+{
     setHorizontalStretchable( TRUE );
 
     // Load priority icons
@@ -91,20 +92,26 @@ QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
     m_menu = 0l;
     reinit();
 }
-QuickEditImpl::~QuickEditImpl() {
 
+QuickEditImpl::~QuickEditImpl()
+{
 }
-OPimTodo QuickEditImpl::todo()const {
+
+OPimTodo QuickEditImpl::todo() const
+{
     return m_todo;
 }
-QWidget* QuickEditImpl::widget() {
+
+QWidget* QuickEditImpl::widget()
+{
     return this;
 }
-void QuickEditImpl::slotEnter() {
+
+void QuickEditImpl::slotEnter()
+{
     OPimTodo todo;
 
-
-    if (!m_edit->text().isEmpty() ) {
+    if ( !m_edit->text().isEmpty() ) {
         todo.setUid(1 ); // new uid
         todo.setPriority( m_state );
         todo.setSummary( m_edit->text() );
@@ -112,36 +119,44 @@ void QuickEditImpl::slotEnter() {
             todo.setCategories( ((Todo::MainWindow *)parent())->currentCatId() );
 
         m_todo = todo;
-       commit();
+        commit();
     }
     m_todo = todo;
     reinit();
 }
-void QuickEditImpl::slotPrio() {
+
+void QuickEditImpl::slotPrio()
+{
     m_state -= 2;
     if ( m_state < 1 )
         m_state = 5;
 
     switch( m_state ) {
-    case 1:
-        m_prio->setPixmap( priority1 );
-        break;
-    case 5:
-        m_prio->setPixmap( priority5 );
-        break;
-    case 3:
-    default:
-        m_prio->setPixmap( priority3 );
-        break;
+        case 1:
+            m_prio->setPixmap( priority1 );
+            break;
+        case 5:
+            m_prio->setPixmap( priority5 );
+            break;
+        case 3:
+        default:
+            m_prio->setPixmap( priority3 );
+            break;
     }
 }
-void QuickEditImpl::slotMore() {
+
+void QuickEditImpl::slotMore()
+{
     // TODO - implement
 }
-void QuickEditImpl::slotCancel() {
+
+void QuickEditImpl::slotCancel()
+{
     reinit();
 }
-void QuickEditImpl::reinit() {
+
+void QuickEditImpl::reinit()
+{
     m_state = 3;
     m_prio->setPixmap( priority3 );
     m_edit->clear();

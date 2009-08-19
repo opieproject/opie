@@ -41,6 +41,7 @@
 
 
 using namespace Opie::Ui;
+
 class AlarmItem : public QListViewItem {
 public:
     AlarmItem( QListView*, const OPimAlarm& );
@@ -52,20 +53,28 @@ private:
     QDateTime m_dt;
     int m_type;
 };
+
 AlarmItem::AlarmItem( QListView* view, const OPimAlarm& dt)
-    : QListViewItem(view) {
+    : QListViewItem(view)
+{
     setAlarm( dt );
 }
-void AlarmItem::setAlarm( const OPimAlarm& dt ) {
+
+void AlarmItem::setAlarm( const OPimAlarm& dt )
+{
     m_dt = dt.dateTime();
     m_type = dt.sound();
     setText( 0, TimeString::dateString( m_dt.date() ) );
     setText( 1, TimeString::timeString( m_dt.time() ) );
     setText( 2, m_type == 0 ? QObject::tr("silent") : QObject::tr("loud") );
 }
-AlarmItem::~AlarmItem() {
+
+AlarmItem::~AlarmItem()
+{
 }
-OPimAlarm AlarmItem::alarm()const{
+
+OPimAlarm AlarmItem::alarm() const
+{
     OPimAlarm al( m_type, m_dt );
 
     return al;
@@ -108,41 +117,49 @@ TaskEditorAlarms::TaskEditorAlarms( QWidget* parent,  int, const char* name, WFl
     layout->addWidget( btn, 1, 2 );
 }
 
-TaskEditorAlarms::~TaskEditorAlarms(){
+TaskEditorAlarms::~TaskEditorAlarms()
+{
 }
 
-void TaskEditorAlarms::slotNew(){
+void TaskEditorAlarms::slotNew()
+{
     (void)new AlarmItem(lstAlarms, OPimAlarm(0, QDateTime::currentDateTime() ) );
 }
 
-void TaskEditorAlarms::slotEdit(){
+void TaskEditorAlarms::slotEdit()
+{
 }
 
-void TaskEditorAlarms::slotDelete(){
+void TaskEditorAlarms::slotDelete()
+{
     QListViewItem* item = lstAlarms->currentItem();
-    if (!item) return;
+    if (!item)
+        return;
 
-    lstAlarms->takeItem( item ); delete item;
-
-
+    lstAlarms->takeItem( item );
+    delete item;
 }
 
-void TaskEditorAlarms::load( const OPimTodo& todo) {
+void TaskEditorAlarms::load( const OPimTodo& todo )
+{
     lstAlarms->clear();
-    if (!todo.hasNotifiers() ) return;
+    if (!todo.hasNotifiers() )
+        return;
 
     OPimNotifyManager::Alarms als = todo.notifiers().alarms();
 
-    if (als.isEmpty() ) return;
+    if (als.isEmpty() )
+        return;
 
     OPimNotifyManager::Alarms::Iterator it = als.begin();
     for ( ; it != als.end(); ++it )
         (void)new AlarmItem( lstAlarms, (*it) );
-
-
 }
-void TaskEditorAlarms::save( OPimTodo& todo ) {
-    if (lstAlarms->childCount() <= 0 ) return;
+
+void TaskEditorAlarms::save( OPimTodo& todo )
+{
+    if (lstAlarms->childCount() <= 0 )
+        return;
 
     OPimNotifyManager::Alarms alarms;
 
@@ -154,23 +171,27 @@ void TaskEditorAlarms::save( OPimTodo& todo ) {
     OPimNotifyManager& manager = todo.notifiers();
     manager.setAlarms( alarms );
 }
-void TaskEditorAlarms::inlineEdit( QListViewItem* alarm, const QPoint& p, int col ) {
+
+void TaskEditorAlarms::inlineEdit( QListViewItem* alarm, const QPoint& p, int col )
+{
     if (!alarm) return;
 
     AlarmItem* item = static_cast<AlarmItem*>(alarm);
     switch( col ) {
-        // date
-    case 0:
-        return inlineSetDate( item, p );
-        // time
-    case 1:
-        return inlineSetTime( item );
-        // type
-    case 2:
-        return inlineSetType( item, p );
+            // date
+        case 0:
+            return inlineSetDate( item, p );
+            // time
+        case 1:
+            return inlineSetTime( item );
+            // type
+        case 2:
+            return inlineSetType( item, p );
     }
 }
-void TaskEditorAlarms::inlineSetDate( AlarmItem* item, const QPoint& p ) {
+
+void TaskEditorAlarms::inlineSetDate( AlarmItem* item, const QPoint& p )
+{
     QPopupMenu* pop = popup( 0 );
     m_dbMonth->setDate( item->alarm().dateTime().date() );
     pop->exec(p);
@@ -181,21 +202,24 @@ void TaskEditorAlarms::inlineSetDate( AlarmItem* item, const QPoint& p ) {
     al.setDateTime( dt );
     item->setAlarm( al );
 }
-void TaskEditorAlarms::inlineSetType( AlarmItem* item, const QPoint& p ) {
+
+void TaskEditorAlarms::inlineSetType( AlarmItem* item, const QPoint& p )
+{
     int type;
     QPopupMenu* pop = popup( 2 );
     switch( pop->exec(p) ) {
-    case 10:
-        type = 1;
-        break;
-    case 20:
-    default:
-        type = 0;
+        case 10:
+            type = 1;
+            break;
+        case 20:
+        default:
+            type = 0;
     }
     OPimAlarm al = item->alarm();
     al.setSound( type );
     item->setAlarm( al );
 }
+
 void TaskEditorAlarms::inlineSetTime( AlarmItem* item ) {
     OPimAlarm al = item->alarm();
     QDateTime dt = al.dateTime();
@@ -209,31 +233,32 @@ void TaskEditorAlarms::inlineSetTime( AlarmItem* item ) {
         item->setAlarm( al );
     }
 }
+
 QPopupMenu* TaskEditorAlarms::popup( int column ) {
     QPopupMenu* pop = 0;
     switch( column ) {
-    case 0:{
-        if (!m_date) {
-            m_date = new QPopupMenu(this);
-            m_dbMonth = new DateBookMonth(m_date, 0, TRUE);
-            m_date->insertItem(m_dbMonth);
+        case 0:{
+            if (!m_date) {
+                m_date = new QPopupMenu(this);
+                m_dbMonth = new DateBookMonth(m_date, 0, TRUE);
+                m_date->insertItem(m_dbMonth);
+            }
+            pop = m_date;
         }
-        pop = m_date;
-    }
-        break;
-    case 1:
-        break;
-    case 2:{
-        if (!m_type) {
-            m_type = new QPopupMenu(this);
-            m_type->insertItem( QObject::tr("loud"), 10 );
-            m_type->insertItem( QObject::tr("silent"), 20 );
+            break;
+        case 1:
+            break;
+        case 2:{
+            if (!m_type) {
+                m_type = new QPopupMenu(this);
+                m_type->insertItem( QObject::tr("loud"), 10 );
+                m_type->insertItem( QObject::tr("silent"), 20 );
+            }
+            pop = m_type;
         }
-        pop = m_type;
-    }
-        break;
-    default:
-        break;
+            break;
+        default:
+            break;
     }
     return pop;
 }

@@ -39,7 +39,7 @@ namespace Todo {
         TextViewShow( QWidget* parent, MainWindow* );
         ~TextViewShow();
 
-        QString type()const;
+        QString type() const;
         void slotShow( const OPimTodo& ev );
         QWidget* widget();
 

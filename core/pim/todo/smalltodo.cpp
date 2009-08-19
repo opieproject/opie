@@ -32,7 +32,7 @@
 
 using namespace Todo;
 
-struct SmallTodo::SmallTodoPrivate  : public QShared{
+struct SmallTodo::SmallTodoPrivate : public QShared {
 
     SmallTodoPrivate() : QShared(), uid(-1) {};
     QString name;
@@ -57,34 +57,55 @@ SmallTodo::SmallTodo(int uid,
     d->complete = comp;
     d->date = date;
 }
-SmallTodo::SmallTodo( const SmallTodo& s ) : d(s.d) {
+
+SmallTodo::SmallTodo( const SmallTodo& s )
+    : d(s.d)
+{
     d->ref();
 }
-SmallTodo::~SmallTodo() {
+
+SmallTodo::~SmallTodo()
+{
     /* deref and if last one delete */
     if ( d->deref() ) {
         d->deleteSelf();
     }
 }
-bool SmallTodo::operator==( const SmallTodo& todo ) {
-    if ( d->complete != todo.d->complete ) return false;
-    if ( d->name != todo.d->name ) return false;
-    if ( d->uid != todo.d->uid ) return false;
-    if ( d->categories != todo.d->categories ) return false;
-    if ( d->date != todo.d->date ) return false;
+
+bool SmallTodo::operator==( const SmallTodo& todo )
+{
+    if ( d->complete != todo.d->complete )
+        return false;
+    if ( d->name != todo.d->name )
+        return false;
+    if ( d->uid != todo.d->uid )
+        return false;
+    if ( d->categories != todo.d->categories )
+        return false;
+    if ( d->date != todo.d->date )
+        return false;
 
     return true;
 }
-bool SmallTodo::operator==( const SmallTodo& todo ) const{
-    if ( d->complete != todo.d->complete ) return false;
-    if ( d->uid != todo.d->uid ) return false;
-    if ( d->name != todo.d->name ) return false;
-    if ( d->categories != todo.d->categories ) return false;
-    if ( d->date != todo.d->date ) return false;
+
+bool SmallTodo::operator==( const SmallTodo& todo ) const
+{
+    if ( d->complete != todo.d->complete )
+        return false;
+    if ( d->uid != todo.d->uid )
+        return false;
+    if ( d->name != todo.d->name )
+        return false;
+    if ( d->categories != todo.d->categories )
+        return false;
+    if ( d->date != todo.d->date )
+        return false;
 
     return true;
 }
-SmallTodo &SmallTodo::operator=( const SmallTodo& todo ) {
+
+SmallTodo &SmallTodo::operator=( const SmallTodo& todo )
+{
     todo.d->ref();
     deref();
 
@@ -92,24 +113,36 @@ SmallTodo &SmallTodo::operator=( const SmallTodo& todo ) {
 
     return *this;
 }
-void SmallTodo::deref() {
+
+void SmallTodo::deref()
+{
     if ( d->deref() ) {
         delete d;
         d = 0;
     }
 }
-QString SmallTodo::name() const {
+
+QString SmallTodo::name() const
+{
     return d->name;
 }
-QStringList SmallTodo::categories()const {
+
+QStringList SmallTodo::categories() const
+{
     return d->categories;
 }
-int SmallTodo::uid()const {
+
+int SmallTodo::uid() const
+{
     return d->uid;
 }
-bool SmallTodo::isCompleted()const {
+
+bool SmallTodo::isCompleted() const
+{
     return d->complete;
 }
-QDate SmallTodo::date()const {
+
+QDate SmallTodo::date() const
+{
     return d->date;
 }

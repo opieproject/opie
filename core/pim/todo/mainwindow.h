@@ -93,7 +93,7 @@ namespace Todo {
         void updateTodo( const OPimTodo& );
         Editor* currentEditor();
         void setReadAhead(uint count );
-private slots:
+    private slots:
         void slotQuickEntered();
         void slotReload();
         void slotFlush();
@@ -146,7 +146,7 @@ private slots:
         TemplateManager* m_tempManager;
 
 
-     private slots:
+    private slots:
         void initStuff();
 
         void slotItemNew();

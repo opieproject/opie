@@ -56,11 +56,11 @@ namespace Todo {
         bool operator==( const SmallTodo& ) const;
 
         SmallTodo &operator=( const SmallTodo& );
-        QString name()const;
-        QStringList categories()const;
-        int uid()const;
-        bool isCompleted()const;
-        QDate date()const;
+        QString name() const;
+        QStringList categories() const;
+        int uid() const;
+        bool isCompleted() const;
+        QDate date() const;
 
     private:
         struct SmallTodoPrivate;

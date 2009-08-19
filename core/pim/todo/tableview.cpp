@@ -54,40 +54,53 @@ namespace {
     static const int RowHeight = 20;
 }
 
-TableView::EditorWidget::EditorWidget() : m_wid(0l), m_row(-1), m_col(-1) {
+TableView::EditorWidget::EditorWidget() : m_wid(0l), m_row(-1), m_col(-1)
+{
 }
-void TableView::EditorWidget::setCellWidget(QWidget* wid, int row, int col ) {
+
+void TableView::EditorWidget::setCellWidget(QWidget* wid, int row, int col )
+{
     m_wid = wid;
     m_row = row;
     m_col = col;
 }
-void TableView::EditorWidget::releaseCellWidget() {
+
+void TableView::EditorWidget::releaseCellWidget()
+{
     m_wid = 0;
     m_row = m_col = -1;
 }
-QWidget* TableView::EditorWidget::cellWidget()const {
+
+QWidget* TableView::EditorWidget::cellWidget() const
+{
     return m_wid;
 }
-int TableView::EditorWidget::cellRow()const {
+
+int TableView::EditorWidget::cellRow() const
+{
     return m_row;
 }
-int TableView::EditorWidget::cellCol()const {
+
+int TableView::EditorWidget::cellCol() const
+{
     return m_col;
 }
 
 
-void TableView::initConfig() {
+void TableView::initConfig()
+{
     Config config( "todo" );
     config.setGroup( "Options" );
     m_completeStrokeWidth = config.readNumEntry( "CompleteStrokeWidth", 8 );
-    for (int i = 0; i < numCols(); i++ ) {
+    for ( int i = 0; i < numCols(); i++ ) {
         int width = config.readNumEntry("Width"+QString::number(i), -1 );
         setColumnWidth(i, width == -1 ? columnWidth(i) : width );
     }
 }
 
 TableView::TableView( MainWindow* window, QWidget* wid )
-    : QTable(  wid ), TodoView( window ) {
+    : QTable(  wid ), TodoView( window )
+{
 
     setName("TableView");
     // Load icons
@@ -139,55 +152,76 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     setSortOrder( Opie::OPimTodoAccess::Completed );
     setAscending( TRUE );
     m_first = true;
-
-
 }
+
 /* a new day has started
  * update the day
  */
-void TableView::newDay() {
+void TableView::newDay()
+{
     clear();
     updateView();
 }
-TableView::~TableView() {
+
+TableView::~TableView()
+{
     Config config( "todo" );
     config.setGroup( "Options" );
     for (int i = 0; i < numCols(); i++ )
         config.writeEntry("Width"+QString::number(i), columnWidth(i) );
 }
-QString TableView::type() const {
+
+QString TableView::type() const
+{
     return QString::fromLatin1( tr("Table View") );
 }
-int TableView::current() {
-    if (numRows() == 0 ) return 0;
-    int uid = sorted().uidAt(currentRow() );
 
+int TableView::current()
+{
+    if ( numRows() == 0 )
+        return 0;
+    
+    int uid = sorted().uidAt(currentRow() );
     return uid;
 }
-int TableView::next() {
-    if ( numRows() == 0 ) return 0;
-    if ( currentRow() + 1 >= numRows() ) return 0;
+
+int TableView::next()
+{
+    if ( numRows() == 0 )
+        return 0;
+    if ( currentRow() + 1 >= numRows() )
+        return 0;
+    
     setCurrentCell( currentRow() +1, currentColumn()  );
     return sorted().uidAt( currentRow() );
 }
-int TableView::prev() {
-    if ( numRows() == 0 ) return 0;
-    if ( currentRow() - 1 < 0 ) return 0;
+
+int TableView::prev()
+{
+    if ( numRows() == 0 )
+        return 0;
+    if ( currentRow() - 1 < 0 )
+        return 0;
+    
     setCurrentCell( currentRow() -1, currentColumn()  );
     return sorted().uidAt( currentRow() );
-
 }
-QString TableView::currentRepresentation() {
+
+QString TableView::currentRepresentation()
+{
     OPimTodo to = sorted()[currentRow()];
     return to.summary().isEmpty() ? to.description().left(20) : to.summary() ;
 }
+
 /* show overdue */
-void TableView::showOverDue( bool ) {
+void TableView::showOverDue( bool )
+{
     clear();
     updateView();
 }
 
-void TableView::updateView( ) {
+void TableView::updateView()
+{
     m_row = false;
     static int id;
     id = startTimer(4000 );
@@ -219,36 +253,47 @@ void TableView::updateView( ) {
     m_enablePaint = true;
 //    int el = time.elapsed();
 }
-void TableView::setTodo( int, const OPimTodo&) {
+
+void TableView::setTodo( int, const OPimTodo&)
+{
     sort();
 
     /* repaint */
     repaint();
 }
-void TableView::addEvent( const OPimTodo&) {
 
+void TableView::addEvent( const OPimTodo&)
+{
     /* fix problems of not showing the 'Haken' */
     updateView();
 }
+
 /*
  * find the event
  * and then replace the complete row
  */
-void TableView::replaceEvent( const OPimTodo& ev) {
+void TableView::replaceEvent( const OPimTodo& ev)
+{
     addEvent( ev );
 }
+
 /*
  * re aligning table can be slow too
  * FIXME: look what performs better
  * either this or the old align table
  */
-void TableView::removeEvent( int ) {
+void TableView::removeEvent( int )
+{
     updateView();
 }
-void TableView::setShowCompleted( bool ) {
+
+void TableView::setShowCompleted( bool )
+{
     updateView();
 }
-void TableView::setShowDeadline( bool b ) {
+
+void TableView::setShowDeadline( bool b )
+{
     if ( b )
         showColumn( 3 );
     else
@@ -270,18 +315,24 @@ void TableView::setShowDeadline( bool b ) {
     }
     setColumnWidth( 2, col2width );
 }
-void TableView::setShowCategory( const QString& str) {
+
+void TableView::setShowCategory( const QString& str)
+{
     if ( str != m_oleCat || m_first )
         updateView();
 
     m_oleCat = str;
     m_first = false;
 }
-void TableView::clear() {
+
+void TableView::clear()
+{
     setNumRows(0);
 }
+
 void TableView::slotClicked(int row, int col, int,
-                            const QPoint& point) {
+                            const QPoint& point)
+{
     if ( m_editorWidget.cellWidget() ) {
         //setCellContentFromEditor(m_editorWidget.cellRow(), m_editorWidget.cellCol() );
         endEdit(m_editorWidget.cellRow(), m_editorWidget.cellCol(),
@@ -292,46 +343,46 @@ void TableView::slotClicked(int row, int col, int,
     if ( !cellGeometry(row, col ).contains(point ) )
         return;
 
-    int ui= sorted().uidAt( row );
-
+    int ui = sorted().uidAt( row );
 
     switch( col ) {
-    case 0:{
-         int x = point.x() -columnPos( col );
-         int y = point.y() -rowPos( row );
-         int w = columnWidth( col );
-         int h = rowHeight( row );
-         if ( x >= ( w - BoxSize ) / 2 &&
-              x <= ( w - BoxSize ) / 2 + BoxSize &&
-              y >= ( h - BoxSize ) / 2 &&
-              y <= ( h - BoxSize ) / 2 + BoxSize ) {
-             TodoView::complete(sorted()[row] );
-         }
-    }
-        break;
+        case 0:{
+            int x = point.x() -columnPos( col );
+            int y = point.y() -rowPos( row );
+            int w = columnWidth( col );
+            int h = rowHeight( row );
+            if ( x >= ( w - BoxSize ) / 2 &&
+                x <= ( w - BoxSize ) / 2 + BoxSize &&
+                y >= ( h - BoxSize ) / 2 &&
+                y <= ( h - BoxSize ) / 2 + BoxSize ) {
+                TodoView::complete(sorted()[row] );
+            }
+        }
+            break;
 
-        // Priority emit a double click...
-    case 1:{
-        QWidget* wid = beginEdit( row, col, FALSE );
-        m_editorWidget.setCellWidget( wid, row, col );
-    }
-        break;
+            // Priority emit a double click...
+        case 1:{
+            QWidget* wid = beginEdit( row, col, FALSE );
+            m_editorWidget.setCellWidget( wid, row, col );
+        }
+            break;
 
-    case 2: {
-        showTodo( ui );
-        break;
+        case 2: {
+            showTodo( ui );
+            break;
+        }
+        case 3: {
+            TodoView::edit( ui );
+            break;
+        }
     }
-    case 3: {
-        TodoView::edit( ui );
-        break;
-    }
-    }
-
-
 }
-QWidget* TableView::widget() {
+
+QWidget* TableView::widget()
+{
     return this;
 }
+
 /*
  * We need to overwrite sortColumn
  * because we want to sort whole row
@@ -339,37 +390,42 @@ QWidget* TableView::widget() {
  * We event want to set the setOrder
  * to a sort() and update()
  */
-void TableView::sortColumn( int col, bool asc, bool ) {
+void TableView::sortColumn( int col, bool asc, bool )
+{
     switch(col) {
-    case 1:
-       col = Opie::OPimTodoAccess::Priority;
-       break;
-    case 2:
-       col = Opie::OPimTodoAccess::SortSummary;
-       break;
-    case 3:
-       col = Opie::OPimTodoAccess::Deadline;
-       break;
-    case 0:
-    default:
-       col = Opie::OPimTodoAccess::Completed;
-       break;
+        case 1:
+            col = Opie::OPimTodoAccess::Priority;
+            break;
+        case 2:
+            col = Opie::OPimTodoAccess::SortSummary;
+            break;
+        case 3:
+            col = Opie::OPimTodoAccess::Deadline;
+            break;
+        case 0:
+        default:
+            col = Opie::OPimTodoAccess::Completed;
+            break;
     }
 
     setSortOrder( col );
     setAscending( asc );
     updateView();
 }
-void TableView::viewportPaintEvent( QPaintEvent* e) {
-    if (m_enablePaint )
+
+void TableView::viewportPaintEvent( QPaintEvent* e )
+{
+    if ( m_enablePaint )
         QTable::viewportPaintEvent( e );
 }
+
 /*
  * This segment is copyrighted by TT
  * it was taken from their todolist
  * application this code is GPL
  */
-void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool ) {
+void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool )
+{
     const QColorGroup &cg = colorGroup();
 
     p->save();
@@ -404,85 +460,92 @@ void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool 
     int y = ( cr.height() - BoxSize ) / 2;
 
     switch(col) {
-    case 0:  // completed field
-    {
-        //p->setPen( QPen( cg.text() ) );
-        //p->drawRect( x + marg, y, BoxSize, BoxSize );
-        //p->drawRect( x + marg+1, y+1, BoxSize-2, BoxSize-2 );
-        if ( task.isCompleted() ) {
-            p->drawPixmap( x + marg, y, m_pic_completed );
-        }
-    }
-    break;
-    case 1:  // priority field
-    {
-       p->drawPixmap( x + marg, y, m_pic_priority[ task.priority() - 1 ] );
-    }
-    break;
-    case 2:  // description field
-    {
-        QString text = task.summary().isEmpty() ?
-                       task.description().left(20) :
-                       task.summary();
-        p->drawText(2,2 + fm.ascent(), text);
-    }
-    break;
-    case 3:
-    {
-        QString text;
-        if (task.hasDueDate()) {
-            int off = QDate::currentDate().daysTo( task.dueDate() );
-            if(off==0)
-                text = tr("today");
-            else if(off==1)
-                text = tr("1 day"); // "tomorrow" wouldn't fit
-            else
-                text = tr("%1 days").arg(QString::number(off));
-            /*
-             * set color if not completed
-             */
-            if (!task.isCompleted() ) {
-                QColor color = Qt::black;
-                if ( off < 0 )
-                    color = Qt::red;
-                else if ( off == 0 )
-                    color = Qt::darkRed;
-                else if ( off > 0 )
-                    color = Qt::green;
-                p->setPen(color  );
+        case 0:  // completed field
+        {
+            //p->setPen( QPen( cg.text() ) );
+            //p->drawRect( x + marg, y, BoxSize, BoxSize );
+            //p->drawRect( x + marg+1, y+1, BoxSize-2, BoxSize-2 );
+            if ( task.isCompleted() ) {
+                p->drawPixmap( x + marg, y, m_pic_completed );
             }
-        } else {
-            text = tr("None");
         }
-        p->drawText(2,2 + fm.ascent(), text);
-    }
-    break;
+        break;
+
+        case 1:  // priority field
+        {
+        p->drawPixmap( x + marg, y, m_pic_priority[ task.priority() - 1 ] );
+        }
+        break;
+
+        case 2:  // description field
+        {
+            QString text = task.summary().isEmpty() ?
+                        task.description().left(20) :
+                        task.summary();
+            p->drawText( 2, 2 + fm.ascent(), text );
+        }
+        break;
+        case 3:
+        {
+            QString text;
+            if (task.hasDueDate()) {
+                int off = QDate::currentDate().daysTo( task.dueDate() );
+                if( off == 0 )
+                    text = tr("today");
+                else if( off == 1 )
+                    text = tr("1 day"); // "tomorrow" wouldn't fit
+                else
+                    text = tr("%1 days").arg(QString::number(off));
+                /*
+                * set color if not completed
+                */
+                if (!task.isCompleted() ) {
+                    QColor color = Qt::black;
+                    if ( off < 0 )
+                        color = Qt::red;
+                    else if ( off == 0 )
+                        color = Qt::darkRed;
+                    else if ( off > 0 )
+                        color = Qt::green;
+                    p->setPen( color );
+                }
+            }
+            else {
+                text = tr("None");
+            }
+            p->drawText(2,2 + fm.ascent(), text);
+        }
+        break;
     }
     p->restore();
 }
-QWidget* TableView::createEditor(int row, int col, bool )const {
+
+QWidget* TableView::createEditor(int row, int col, bool ) const
+{
     switch( col ) {
-    case 1: {
-        /* the priority stuff */
-        QComboBox* combo = new QComboBox( viewport() );
-        for ( int i = 0; i < 5; i++ ) {
-            combo->insertItem( m_pic_priority[ i ] );
+        case 1: {
+            /* the priority stuff */
+            QComboBox* combo = new QComboBox( viewport() );
+            for ( int i = 0; i < 5; i++ ) {
+                combo->insertItem( m_pic_priority[ i ] );
+            }
+            combo->setCurrentItem( sorted()[row].priority()-1 );
+            return combo;
         }
-        combo->setCurrentItem( sorted()[row].priority()-1 );
-        return combo;
-    }
-        /* summary */
-    case 2:{
-        QLineEdit* edit = new QLineEdit( viewport() );
-        edit->setText( sorted()[row].summary() );
-        return edit;
-    }
-    case 0:
-    default:
-        return 0l;
+            /* summary */
+        case 2:{
+            QLineEdit* edit = new QLineEdit( viewport() );
+            edit->setText( sorted()[row].summary() );
+            return edit;
+        }
+        case 0:
+        default:
+            return 0l;
     }
 }
-void TableView::setCellContentFromEditor(int row, int col ) {
+
+void TableView::setCellContentFromEditor( int row, int col )
+{
     if ( col == 1 ) {
         QWidget* wid = cellWidget(row, 1 );
         if ( wid->inherits("QComboBox") ) {
@@ -494,7 +557,8 @@ void TableView::setCellContentFromEditor(int row, int col ) {
                 updateView();
             }
         }
-    }else if ( col == 2) {
+    }
+    else if ( col == 2) {
         QWidget* wid = cellWidget(row, 2);
         if ( wid->inherits("QLineEdit") ) {
             QString text = ((QLineEdit*)wid)->text();
@@ -507,9 +571,12 @@ void TableView::setCellContentFromEditor(int row, int col ) {
         }
     }
 }
-void TableView::slotPriority() {
+
+void TableView::slotPriority()
+{
     setCellContentFromEditor( currentRow(), currentColumn() );
 }
+
 /*
  * We'll use the TimerEvent to read ahead or to keep the cahce always
  * filled enough.
@@ -517,7 +584,8 @@ void TableView::slotPriority() {
  * up and down. On odd or even we will currentRow()+-4 or +-9
  *
  */
-void TableView::timerEvent( QTimerEvent*  ) {
+void TableView::timerEvent( QTimerEvent*  )
+{
     if (sorted().count() == 0 )
         return;
 
@@ -529,7 +597,8 @@ void TableView::timerEvent( QTimerEvent*  ) {
 
         ro = row+4;
         sorted()[ro];
-    } else {
+    }
+    else {
         int ro = row + 8;
         sorted()[ro];
 
@@ -561,7 +630,8 @@ void TableView::timerEvent( QTimerEvent*  ) {
  * WORKAROUND: strike through needs to strike through the same
  * row and two columns!
  */
-void TableView::contentsMouseReleaseEvent( QMouseEvent *e ) {
+void TableView::contentsMouseReleaseEvent( QMouseEvent *e )
+{
     int row = rowAt(m_prevP.y());
     int colOld = columnAt(m_prevP.x() );
     int colNew = columnAt(e->x() );
@@ -572,7 +642,9 @@ void TableView::contentsMouseReleaseEvent( QMouseEvent *e ) {
     }
     QTable::contentsMouseReleaseEvent( e );
 }
-void TableView::contentsMousePressEvent( QMouseEvent *e ) {
+
+void TableView::contentsMousePressEvent( QMouseEvent *e )
+{
     if ( e->button() == RightButton ) {
         QPopupMenu *menu = todoWindow()->contextMenu( current(), sorted()[currentRow()].recurrence().doesRecur() );
         menu->exec( QCursor::pos() );
@@ -582,7 +654,9 @@ void TableView::contentsMousePressEvent( QMouseEvent *e ) {
         QTable::contentsMousePressEvent( e );
     }
 }
-void TableView::keyPressEvent( QKeyEvent* event) {
+
+void TableView::keyPressEvent( QKeyEvent* event)
+{
     if ( m_editorWidget.cellWidget() ) {
 //        setCellContentFromEditor(m_editorWidget.cellRow(), m_editorWidget.cellCol() );
         endEdit(m_editorWidget.cellRow(), m_editorWidget.cellCol(),
@@ -609,24 +683,27 @@ void TableView::keyPressEvent( QKeyEvent* event) {
 
 
     switch( event->key() ) {
-    case Qt::Key_F33:
-    case Qt::Key_Enter:
-    case Qt::Key_Return:
-    case Qt::Key_Space:
-        if ( col == 0 ) {
-            TodoView::complete(sorted()[row]);
-        }else if ( col == 1 ) {
-            QWidget* wid = beginEdit(row, col, FALSE );
-            m_editorWidget.setCellWidget( wid, row, col );
-        }else if ( col == 2 ) {
-            showTodo( sorted().uidAt( currentRow() ) );
-        }else if ( col == 3 ) {
-            TodoView::edit( sorted().uidAt(row) );
-        }
-        event->accept();
-        break;
-    default:
-        QTable::keyPressEvent( event );
+        case Qt::Key_F33:
+        case Qt::Key_Enter:
+        case Qt::Key_Return:
+        case Qt::Key_Space:
+            if ( col == 0 ) {
+                TodoView::complete(sorted()[row]);
+            }
+            else if ( col == 1 ) {
+                QWidget* wid = beginEdit(row, col, FALSE );
+                m_editorWidget.setCellWidget( wid, row, col );
+            }
+            else if ( col == 2 ) {
+                showTodo( sorted().uidAt( currentRow() ) );
+            }
+            else if ( col == 3 ) {
+                TodoView::edit( sorted().uidAt(row) );
+            }
+            event->accept();
+            break;
+        default:
+            QTable::keyPressEvent( event );
     }
 }
 

@@ -37,91 +37,137 @@
 using namespace Todo;
 
 TodoManager::TodoManager( QObject *obj )
-    : QObject( obj ) {
+    : QObject( obj )
+{
     m_db = 0l;
     m_cat.load( categoryFileName() );
 }
-TodoManager::~TodoManager() {
+
+TodoManager::~TodoManager()
+{
     delete m_db;
 }
-OPimTodo TodoManager::event(int uid ) {
+
+OPimTodo TodoManager::event(int uid )
+{
     return m_db->find( uid );
 }
-void TodoManager::updateList() {
+
+void TodoManager::updateList()
+{
     m_list = m_db->allRecords();
 }
-OPimTodoAccess::List TodoManager::list() const{
+
+OPimTodoAccess::List TodoManager::list() const
+{
     return m_list;
 }
-OPimTodoAccess::List TodoManager::sorted( bool asc, int so, int f, int cat ) {
+
+OPimTodoAccess::List TodoManager::sorted( bool asc, int so, int f, int cat )
+{
     return m_db->sorted( asc, so, f, cat );
 }
-OPimTodoAccess::List::Iterator TodoManager::overDue() {
+
+OPimTodoAccess::List::Iterator TodoManager::overDue()
+{
     int filter = Opie::OPimTodoAccess::FilterCategory | Opie::OPimTodoAccess::OnlyOverDue;
     m_list = m_db->sorted(m_asc, m_sortOrder, filter,  m_ca );
     m_it = m_list.begin();
     return m_it;
 }
+
 OPimTodoAccess::List::Iterator TodoManager::fromTo( const QDate& start,
-                                      const QDate& end ) {
+                                      const QDate& end )
+{
     m_list = m_db->effectiveToDos( start, end );
     m_it = m_list.begin();
     return m_it;
 }
-OPimTodoAccess::List::Iterator TodoManager::query( const OPimTodo& ev, int query ) {
+
+OPimTodoAccess::List::Iterator TodoManager::query( const OPimTodo& ev, int query )
+{
     m_list = m_db->queryByExample( ev, query );
     m_it = m_list.begin();
     return m_it;
 }
-OPimTodoAccess* TodoManager::todoDB() {
+
+OPimTodoAccess* TodoManager::todoDB()
+{
     return m_db;
 }
-void TodoManager::add( const OPimTodo& ev ) {
+
+void TodoManager::add( const OPimTodo& ev )
+{
     m_db->add( ev );
 }
-void TodoManager::update( int, const SmallTodo& ) {
 
+void TodoManager::update( int, const SmallTodo& )
+{
 }
-void TodoManager::update( int, const OPimTodo& ev) {
+
+void TodoManager::update( int, const OPimTodo& ev )
+{
     m_db->replace( ev );
 }
-bool TodoManager::remove( int uid ) {
+
+bool TodoManager::remove( int uid )
+{
     return m_db->remove( uid );
 }
-void TodoManager::removeAll() {
+
+void TodoManager::removeAll()
+{
     m_db->clear();
 }
-void TodoManager::removeCompleted() {
+
+void TodoManager::removeCompleted()
+{
     m_db->removeAllCompleted();
 }
-void TodoManager::save() {
+
+void TodoManager::save()
+{
     m_db->save();
 }
-bool TodoManager::saveAll() {
+
+bool TodoManager::saveAll()
+{
     return m_db->save();
 }
-void TodoManager::reload() {
+
+void TodoManager::reload()
+{
     m_db->reload();
 }
-QStringList TodoManager::categories() {
-    m_cat.load(categoryFileName() );
+
+QStringList TodoManager::categories()
+{
+    m_cat.load( categoryFileName() );
     return m_cat.labels( "Todo List");
 }
+
 /*
  * we rely on load beeing called from populateCategories
  */
-int TodoManager::catId( const QString& cats ) {
+int TodoManager::catId( const QString& cats )
+{
     return m_cat.id( "Todo List", cats );
 }
-void TodoManager::remove( const QArray<int>& ids) {
-    for (uint i=0; i < ids.size(); i++ )
+
+void TodoManager::remove( const QArray<int>& ids)
+{
+    for ( uint i=0; i < ids.size(); i++ )
         remove( ids[i] );
 }
-bool TodoManager::isLoaded()const {
-    return (m_db == 0 );
+
+bool TodoManager::isLoaded()const
+{
+    return ( m_db == 0 );
 }
-void TodoManager::load() {
-    if (!m_db) {
+
+void TodoManager::load()
+{
+    if ( !m_db ) {
         m_db = new OPimTodoAccess();
         m_db->load();
     }

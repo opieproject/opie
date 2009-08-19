@@ -43,23 +43,26 @@
 using namespace Opie::Ui;
 using namespace Opie;
 
-OTaskEditor::OTaskEditor(int cur)
-    : QDialog( 0, 0, TRUE, WStyle_ContextHelp ) {
+OTaskEditor::OTaskEditor( int cur )
+    : QDialog( 0, 0, TRUE, WStyle_ContextHelp )
+{
     init();
     init( cur );
 }
 
-OTaskEditor::OTaskEditor( const OPimTodo& to)
-    : QDialog( 0, 0, TRUE, WStyle_ContextHelp ) {
+OTaskEditor::OTaskEditor( const OPimTodo& to )
+    : QDialog( 0, 0, TRUE, WStyle_ContextHelp )
+{
     init();
     init( to );
 }
 
-OTaskEditor::~OTaskEditor() {
-
+OTaskEditor::~OTaskEditor()
+{
 }
 
-void OTaskEditor::init( int cur ) {
+void OTaskEditor::init( int cur )
+{
     OPimTodo to;
     to.setUid( 1 ); // generate a new uid
     if ( cur != 0 )
@@ -67,11 +70,13 @@ void OTaskEditor::init( int cur ) {
     load(to);
 }
 
-void OTaskEditor::init( const OPimTodo& to ) {
+void OTaskEditor::init( const OPimTodo& to )
+{
     load( to );
 }
 
-OPimTodo OTaskEditor::todo()const{
+OPimTodo OTaskEditor::todo() const
+{
     OPimTodo to ( m_todo );
     m_overView->save( to );
     m_stat->save( to );
@@ -89,7 +94,8 @@ OPimTodo OTaskEditor::todo()const{
     return to;
 }
 
-void OTaskEditor::load(const OPimTodo& to) {
+void OTaskEditor::load( const OPimTodo& to )
+{
     m_overView->load( to );
     m_stat->load( to );
     m_rec->setRecurrence( to.recurrence(), to.hasDueDate() ? to.dueDate() : QDate::currentDate() );
@@ -98,7 +104,8 @@ void OTaskEditor::load(const OPimTodo& to) {
     m_todo = to;
 }
 
-void OTaskEditor::init() {
+void OTaskEditor::init()
+{
     setCaption(tr("Task Editor") );
 
     QVBoxLayout* layo = new QVBoxLayout( this );
@@ -137,13 +144,15 @@ void OTaskEditor::init() {
             m_rec, SLOT(setStartDate(const QDate&) ) );
 }
 
-void OTaskEditor::showEvent( QShowEvent* ) {
+void OTaskEditor::showEvent( QShowEvent* )
+{
     // Set appropriate focus each time the editor is shown
     m_tab->setCurrentTab( m_overView );
     m_overView->cmbDesc->setFocus();
 }
 
-void OTaskEditor::recurranceEnabled( bool enabled ) {
+void OTaskEditor::recurranceEnabled( bool enabled )
+{
     m_rec->setEnabled(enabled);
     if(enabled) {
         // Default recurrence to daily if not set
