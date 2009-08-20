@@ -38,7 +38,7 @@ LoadInfo::LoadInfo( QWidget *parent, const char *name, WFlags f )
 
     QString cpuInfo = getCpuInfo();
     if ( !cpuInfo.isNull() )
-	vb->addWidget( new QLabel( cpuInfo, this ) );
+        vb->addWidget( new QLabel( cpuInfo, this ) );
     vb->addWidget( new Load( this ), 100 );
     QLabel *l = new QLabel( this );
     l->setPixmap( makeLabel( red, tr("Application CPU usage (%)") ) );
@@ -72,36 +72,40 @@ QString LoadInfo::getCpuInfo()
     QString info = tr("Type: ");
     QFile f( "/proc/cpuinfo" );
     if ( f.open( IO_ReadOnly ) ) {
-	QTextStream ts( &f );
+        QTextStream ts( &f );
 
-	while ( !ts.atEnd() ) {
-	    QString s = ts.readLine();
-	    if ( s.find( "model name" ) == 0 ) {
-		info += s.mid( s.find( ':' ) + 2 );
-		haveInfo = TRUE;
-	    } else if ( s.find( "cpu MHz" ) == 0 ) {
-		double mhz = s.mid( s.find( ':' ) + 2 ).toDouble();
-		info += " " + QString::number( mhz, 'f', 0 );
-		info += "MHz";
-		break;
-	    } else if ( s.find( "Processor" ) == 0 ) {
-		info += s.mid( s.find( ':' ) + 2 );
-		haveInfo = TRUE;
-		break;
+        while ( !ts.atEnd() ) {
+            QString s = ts.readLine();
+            if ( s.find( "model name" ) == 0 ) {
+                info += s.mid( s.find( ':' ) + 2 );
+                haveInfo = TRUE;
+            }
+            else if ( s.find( "cpu MHz" ) == 0 ) {
+                double mhz = s.mid( s.find( ':' ) + 2 ).toDouble();
+                info += " " + QString::number( mhz, 'f', 0 );
+                info += "MHz";
+                break;
+            }
+            else if ( s.find( "Processor" ) == 0 ) {
+                info += s.mid( s.find( ':' ) + 2 );
+                haveInfo = TRUE;
+                break;
 #ifdef __MIPSEL__
-	    } else if ( s.find( "cpu model" ) == 0 ) {
-		info += " " + s.mid( s.find( ':' ) + 2 );
-		break;
-	    } else if ( s.find( "cpu" ) == 0 ) {
-		info += s.mid( s.find( ':' ) + 2 );
-		haveInfo = TRUE;
+            }
+            else if ( s.find( "cpu model" ) == 0 ) {
+                info += " " + s.mid( s.find( ':' ) + 2 );
+                break;
+            }
+            else if ( s.find( "cpu" ) == 0 ) {
+                info += s.mid( s.find( ':' ) + 2 );
+                haveInfo = TRUE;
 #endif
-	    }
-	}
+            }
+        }
     }
 
     if ( !haveInfo )
-	info = QString();
+        info = QString();
 
     return info;
 }
@@ -116,8 +120,8 @@ Load::Load( QWidget *parent, const char *name, WFlags f )
     userLoad = new double [points];
     systemLoad = new double [points];
     for ( int i = 0; i < points; i++ ) {
-	userLoad[i] = 0.0;
-	systemLoad[i] = 0.0;
+        userLoad[i] = 0.0;
+        systemLoad[i] = 0.0;
     }
     maxLoad = 1.3;
     QTimer *timer = new QTimer( this );
@@ -143,18 +147,18 @@ void Load::paintEvent( QPaintEvent * )
 
     p.setPen( green );
     for ( int i = 1; i < points; i++ ) {
-	int x1 = (i - 1) * width() / points;
-	int x2 = i * width() / points;
-	p.drawLine( x1, h - systemLoad[i-1] * mult,
-		    x2, h - systemLoad[i] * mult );
+        int x1 = (i - 1) * width() / points;
+        int x2 = i * width() / points;
+        p.drawLine( x1, h - systemLoad[i-1] * mult,
+                    x2, h - systemLoad[i] * mult );
     }
 
     p.setPen( red );
     for ( int i = 1; i < points; i++ ) {
-	int x1 = (i - 1) * width() / points;
-	int x2 = i * width() / points;
-	p.drawLine( x1, h - userLoad[i-1] * mult,
-		    x2, h - userLoad[i] * mult );
+        int x1 = (i - 1) * width() / points;
+        int x2 = i * width() / points;
+        p.drawLine( x1, h - userLoad[i-1] * mult,
+                    x2, h - userLoad[i] * mult );
     }
 }
 
@@ -177,36 +181,37 @@ void Load::timeout()
     int udiff = user - lastUser;
     int sdiff = sys - lastSys;
     if ( tdiff > 0 ) {
-	double uload = (double)udiff / (double)tdiff;
-	double sload = (double)sdiff / (double)tdiff;
-	if ( !first ) {
-	    for ( int i = 1; i < points; i++ ) {
-		userLoad[i-1] = userLoad[i];
-		systemLoad[i-1] = systemLoad[i];
-	    }
-	    userLoad[points-1] = uload;
-	    systemLoad[points-1] = sload;
-//	    scroll( -width()/points, 0, QRect( 0, 0, width() - width()/points + 1, height() ) );
-	    repaint( TRUE );
-	    double ml = 1.3;
-	    /*
-	    for ( int i = 0; i < points; i++ ) {
-		if ( userLoad[i] > ml )
-		    ml = userLoad[i];
-	    }
-	    */
-	    if ( maxLoad != ml ) {
-		maxLoad = ml;
-		update();
-	    }
-	}
+        double uload = (double)udiff / (double)tdiff;
+        double sload = (double)sdiff / (double)tdiff;
+        if ( !first ) {
+            for ( int i = 1; i < points; i++ ) {
+                userLoad[i-1] = userLoad[i];
+                systemLoad[i-1] = systemLoad[i];
+            }
+            userLoad[points-1] = uload;
+            systemLoad[points-1] = sload;
+//            scroll( -width()/points, 0, QRect( 0, 0, width() - width()/points + 1, height() ) );
+            repaint( TRUE );
+            double ml = 1.3;
+            /*
+            for ( int i = 0; i < points; i++ ) {
+                if ( userLoad[i] > ml )
+                    ml = userLoad[i];
+            }
+            */
+            if ( maxLoad != ml ) {
+                maxLoad = ml;
+                update();
+            }
+        }
 
-	last = now;
-	lastUser = user;
-	lastSys = sys;
-	first = FALSE;
-    } else if ( tdiff < 0 ) {
-	last = now;
+        last = now;
+        lastUser = user;
+        lastSys = sys;
+        first = FALSE;
+    }
+    else if ( tdiff < 0 ) {
+        last = now;
     }
 }
 

@@ -78,8 +78,7 @@ void MemoryInfo::updateData()
 {
     QFile file( "/proc/meminfo" );
 
-    if ( file.open( IO_ReadOnly ) )
-    {
+    if ( file.open( IO_ReadOnly ) ) {
         // local variables
         QString line;
         QString identifier;
@@ -87,8 +86,7 @@ void MemoryInfo::updateData()
         int position;
         QTextStream t( &file );
 
-        while ( !t.atEnd() )
-        {
+        while ( !t.atEnd() ) {
             // read a line
             line = t.readLine();
 
@@ -99,25 +97,25 @@ void MemoryInfo::updateData()
             value = value.stripWhiteSpace();
 
             // copy values in variables
-            if ( identifier == "MemTotal" )
-            {
+            if ( identifier == "MemTotal" ) {
                 total = value.toULong();
-            } else if ( identifier == "MemFree" )
-            {
+            }
+            else if ( identifier == "MemFree" ) {
                 memfree = value.toULong();
-            } else if ( identifier == "Buffers" )
-            {
+            }
+            else if ( identifier == "Buffers" ) {
                 buffers = value.toULong();
-            } else if ( identifier == "Cached" )
-            {
+            }
+            else if ( identifier == "Cached" ) {
                 cached = value.toULong();
-            } else if ( identifier == "SwapCached" )
-            {
-            } else if ( identifier == "SwapTotal" )
-            {
+            }
+            else if ( identifier == "SwapCached" ) {
+                
+            }
+            else if ( identifier == "SwapTotal" ) {
                 swaptotal = value.toULong();
-            } else if ( identifier == "SwapFree" )
-            {
+            }
+            else if ( identifier == "SwapFree" ) {
                 swapfree = value.toULong();
             }
         }
@@ -141,8 +139,7 @@ void MemoryInfo::updateData()
         graph->show();
         legend->update();
 
-        if (swaptotal > 0)
-        {
+        if ( swaptotal > 0 ) {
             swapMem->setText( tr( "Total Swap: %1 kB" ).arg( swaptotal ) );
             swapdata->clear();
             swapdata->addItem( tr("Used (%1 kB)").arg(swapused), swapused );
@@ -155,8 +152,7 @@ void MemoryInfo::updateData()
             swapgraph->repaint( FALSE );
             swaplegend->update();
         }
-        else
-        {
+        else {
             swapMem->hide();
             swapgraph->hide();
             swaplegend->hide();

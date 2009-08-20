@@ -35,17 +35,17 @@ using namespace Opie::Ui;
 MemoryMeter::MemoryMeter( QWidget *parent )
     : QWidget( parent ), memoryView(0)
 {
-	bvsz = QSize();
-	if ( qApp->desktop()->height() >= 300 )
-	{
-		memoryView = new MemoryStatus( 0, WStyle_StaysOnTop | WType_Popup );
-		memoryView->setFrameStyle( QFrame::Panel | QFrame::Raised );
-	}
-	else
-	{
-		memoryView = new MemoryStatus( 0 );
-		memoryView->showMaximized();
-	}
+    bvsz = QSize();
+    if ( qApp->desktop()->height() >= 300 )
+    {
+        memoryView = new MemoryStatus( 0, WStyle_StaysOnTop | WType_Popup );
+        memoryView->setFrameStyle( QFrame::Panel | QFrame::Raised );
+    }
+    else
+    {
+        memoryView = new MemoryStatus( 0 );
+        memoryView->showMaximized();
+    }
 
     Config config("MemoryPlugin");
     config.setGroup("Warning levels");
@@ -77,66 +77,66 @@ QSize MemoryMeter::sizeHint() const
 
 bool MemoryMeter::updateMemoryViewGeometry()
 {
-	if (memoryView != 0)
-	{
-		QSize sz = memoryView->sizeHint();
-		if ( sz != bvsz )
-		{
-			bvsz = sz;
-			QRect r(memoryView->pos(), memoryView->sizeHint());
-			if ( qApp->desktop()->height() >= 300 )
-			{
-				QPoint curPos = mapToGlobal( rect().topLeft() );
-				int lp = qApp->desktop()->width() - memoryView->sizeHint().width();
-				r.moveTopLeft( QPoint(lp, curPos.y() - memoryView->sizeHint().height()-1) );
-			}
-			memoryView->setGeometry(r);
-			return TRUE;
-		}
-		return FALSE;
-	}
+    if (memoryView != 0)
+    {
+        QSize sz = memoryView->sizeHint();
+        if ( sz != bvsz )
+        {
+            bvsz = sz;
+            QRect r(memoryView->pos(), memoryView->sizeHint());
+            if ( qApp->desktop()->height() >= 300 )
+            {
+                QPoint curPos = mapToGlobal( rect().topLeft() );
+                int lp = qApp->desktop()->width() - memoryView->sizeHint().width();
+                r.moveTopLeft( QPoint(lp, curPos.y() - memoryView->sizeHint().height()-1) );
+            }
+            memoryView->setGeometry(r);
+            return TRUE;
+        }
+        return FALSE;
+    }
 
-	return FALSE;
+    return FALSE;
 }
 
 void MemoryMeter::mousePressEvent( QMouseEvent *)
 {
     if ( memoryView->isVisible() )
-	{
-		memoryView->hide();
-	}
-	else
-	{
-		bvsz = QSize();
-		updateMemoryViewGeometry();
-		memoryView->raise();
-		memoryView->show();
+    {
+        memoryView->hide();
+    }
+    else
+    {
+        bvsz = QSize();
+        updateMemoryViewGeometry();
+        memoryView->raise();
+        memoryView->show();
     }
 }
 
 void MemoryMeter::timerEvent( QTimerEvent * )
 {
-	if (memoryView != 0)
-	{
-		// read memory status
-		percent = (memoryView->percent());
-		usageTimer->start( 1000 );
-	}
+    if (memoryView != 0)
+    {
+        // read memory status
+        percent = (memoryView->percent());
+        usageTimer->start( 1000 );
+    }
 }
 
 void MemoryMeter::usageTimeout()
 {
-	if (memoryView != 0)
-	{
-		percent = (memoryView->percent());
-		if (updateMemoryViewGeometry() && memoryView->isVisible())
-		{
-			memoryView->hide();
-			memoryView->show();
-		}
+    if (memoryView != 0)
+    {
+        percent = (memoryView->percent());
+        if (updateMemoryViewGeometry() && memoryView->isVisible())
+        {
+            memoryView->hide();
+            memoryView->show();
+        }
 
-		repaint(FALSE);
-	}
+        repaint(FALSE);
+    }
 }
 
 void MemoryMeter::paintEvent( QPaintEvent* )
@@ -147,36 +147,36 @@ void MemoryMeter::paintEvent( QPaintEvent* )
     QColor darkc;
     QColor lightc;
 
-	if (percent > low)
-		c = green;
-	else if (percent > critical)
-		c = yellow.dark(110);
-	else
-		c = red;
+    if (percent > low)
+        c = green;
+    else if (percent > critical)
+        c = yellow.dark(110);
+    else
+        c = red;
 
-	darkc = c.dark(120);
-	lightc = c.light(160);
+    darkc = c.dark(120);
+    lightc = c.light(160);
 
     //
     // To simulate a 3-d memory, we use 4 bands of colour.  From left
     // to right, these are: medium, light, medium, dark.  To avoid
     // hardcoding values for band "width", figure everything out on the run.
     //
-    int	batt_width;		    // width of each band
-    int	batt_height;		    // memory height (not including terminal)
-    int	used_height;		    // used amount of memory (scanlines)
+    int    batt_width;            // width of each band
+    int    batt_height;            // memory height (not including terminal)
+    int    used_height;            // used amount of memory (scanlines)
 
-    int	batt_yoffset;		    // top of terminal
-    int batt_xoffset;		    // left edge of core
+    int    batt_yoffset;            // top of terminal
+    int batt_xoffset;            // left edge of core
 
-    int	band_width;		    // width of colour band
+    int    band_width;            // width of colour band
 
     int w = QMIN(height(), width());
     band_width = (w-2) / 4;
     if ( band_width < 1 )
-		band_width = 1;
+        band_width = 1;
 
-    batt_width = 4 * band_width + 2;	// +2 for 1 pixel border on both sides
+    batt_width = 4 * band_width + 2;    // +2 for 1 pixel border on both sides
     batt_height = height()-2;
     batt_xoffset = (width() - batt_width) / 2;
     batt_yoffset = (height() - batt_height) / 2;
@@ -192,7 +192,7 @@ void MemoryMeter::paintEvent( QPaintEvent* )
     //
     //p.drawLine(batt_xoffset + band_width + 1, batt_yoffset, batt_xoffset + 3 * band_width, batt_yoffset);
 
-    batt_height -= 2;	// -2 because we don't want to include border
+    batt_height -= 2;   // -2 because we don't want to include border
     batt_yoffset += 2;  // +2 to account for border and terminal
     batt_xoffset++;
 
@@ -202,42 +202,42 @@ void MemoryMeter::paintEvent( QPaintEvent* )
     //
     used_height = percent * batt_height / 100;
     if (used_height < 0)
-		used_height = 0;
+        used_height = 0;
 
     //
     // Drained section.
     //
     if (used_height != 0)
-	{
-		p.setPen(NoPen);
-		p.setBrush(gray);
-		p.drawRect(batt_xoffset, batt_yoffset, band_width, used_height);
-		p.drawRect(batt_xoffset + 2 * band_width, batt_yoffset, band_width, used_height);
+    {
+        p.setPen(NoPen);
+        p.setBrush(gray);
+        p.drawRect(batt_xoffset, batt_yoffset, band_width, used_height);
+        p.drawRect(batt_xoffset + 2 * band_width, batt_yoffset, band_width, used_height);
 
-		p.setBrush(gray/*.light(130)*/);
-		p.drawRect(batt_xoffset + band_width, batt_yoffset, band_width, used_height);
+        p.setBrush(gray/*.light(130)*/);
+        p.drawRect(batt_xoffset + band_width, batt_yoffset, band_width, used_height);
 
-		p.setBrush(gray/*.dark(120)*/);
-		p.drawRect(batt_xoffset + 3 * band_width, batt_yoffset, band_width, used_height);
+        p.setBrush(gray/*.dark(120)*/);
+        p.drawRect(batt_xoffset + 3 * band_width, batt_yoffset, band_width, used_height);
     }
 
     //
     // Unused section.
     //
     if ( batt_height - used_height > 0 )
-	{
-		int unused_offset = used_height + batt_yoffset;
-		int unused_height = batt_height - used_height;
-		p.setPen(NoPen);
-		p.setBrush(c);
-		p.drawRect(batt_xoffset, unused_offset, band_width, unused_height);
-		p.drawRect(batt_xoffset + 2 * band_width, unused_offset, band_width, unused_height);
+    {
+        int unused_offset = used_height + batt_yoffset;
+        int unused_height = batt_height - used_height;
+        p.setPen(NoPen);
+        p.setBrush(c);
+        p.drawRect(batt_xoffset, unused_offset, band_width, unused_height);
+        p.drawRect(batt_xoffset + 2 * band_width, unused_offset, band_width, unused_height);
 
-		p.setBrush(lightc);
-		p.drawRect(batt_xoffset + band_width, unused_offset, band_width, unused_height);
+        p.setBrush(lightc);
+        p.drawRect(batt_xoffset + band_width, unused_offset, band_width, unused_height);
 
-		p.setBrush(darkc);
-		p.drawRect(batt_xoffset + 3 * band_width, unused_offset, band_width, unused_height);
+        p.setBrush(darkc);
+        p.drawRect(batt_xoffset + 3 * band_width, unused_offset, band_width, unused_height);
     }
 }
 

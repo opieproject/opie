@@ -37,34 +37,34 @@ public:
         ~Swapfile() {}
 
 private slots:
-	void swapon();
-	void swapoff();
-	void cfsdchecked();
-	void makeswapfile();
-	void removeswapfile();
-	void cardnotify( const QCString &msg, const QByteArray & );
-	void getStatusPcmcia();
-	void getStatusSd();
-	void status();
+    void swapon();
+    void swapoff();
+    void cfsdchecked();
+    void makeswapfile();
+    void removeswapfile();
+    void cardnotify( const QCString &msg, const QByteArray & );
+    void getStatusPcmcia();
+    void getStatusSd();
+    void status();
 
 private:
-	bool cardInPcmcia0;
+    bool cardInPcmcia0;
         bool cardInPcmcia1;
-	bool cardInSd;
+    bool cardInSd;
 
-	QRadioButton* ramRB;
-	QRadioButton* cfRB;
-	QRadioButton* sdRB;
-	QLineEdit* swapPath1;
-	QLabel* swapStatus;
-	QLabel* swapStatusIcon;
-	QComboBox* swapSize;
-	QProgressBar* mkswapProgress;
+    QRadioButton* ramRB;
+    QRadioButton* cfRB;
+    QRadioButton* sdRB;
+    QLineEdit* swapPath1;
+    QLabel* swapStatus;
+    QLabel* swapStatusIcon;
+    QComboBox* swapSize;
+    QProgressBar* mkswapProgress;
 
-	bool isRoot;
+    bool isRoot;
 
-	int exec(const QString& arg);
-	void setStatusMessage(const QString& text, bool error = false);
+    int exec(const QString& arg);
+    void setStatusMessage(const QString& text, bool error = false);
 };
 
 #endif

@@ -51,21 +51,21 @@ void PieGraph::drawContents( QPainter *p )
 
     int total = 0;
     for ( unsigned i = 0; i < data->count(); i++ )
-	total += data->value(i);
+        total += data->value(i);
 
     int angle = 0;
     for ( unsigned i = 0; i < data->count(); i++ ) {
-	int len;
-	if ( i == data->count() - 1 || !total )
-	    len = 5760 - angle;
-	else
-	    len = data->value(i) * 5760 / total;
-	QColor col;
-	col.setHsv( i * 360 / data->count(), 255, 255 );
-	p->setBrush( col );
-	p->drawPie ( contentsRect().x(), contentsRect().y(),
-		     size, size, angle, len+32 );
-	angle += len;
+        int len;
+        if ( i == data->count() - 1 || !total )
+            len = 5760 - angle;
+        else
+            len = data->value(i) * 5760 / total;
+        QColor col;
+        col.setHsv( i * 360 / data->count(), 255, 255 );
+        p->setBrush( col );
+        p->drawPie ( contentsRect().x(), contentsRect().y(),
+                     size, size, angle, len+32 );
+        angle += len;
     }
 }
 
@@ -83,40 +83,41 @@ void BarGraph::drawContents( QPainter *p )
 
     int total = 0;
     for ( unsigned i = 0; i < data->count(); i++ )
-	total += data->value(i);
+        total += data->value(i);
 
     int pos = 0;
     for ( unsigned i = 0; i < data->count(); i++ ) {
-	int len;
-	if ( i == data->count() - 1 || !total )
-	    len = contentsRect().width() - pos;
-	else
-	    len = data->value(i) * contentsRect().width() / total;
-	QColor col;
-	col.setHsv( i * 360 / data->count(), 255, 255 );
-	drawSegment( p, QRect(contentsRect().x() + pos, y, len, h), col );
-	pos += len;
+        int len;
+        if ( i == data->count() - 1 || !total )
+            len = contentsRect().width() - pos;
+        else
+            len = data->value(i) * contentsRect().width() / total;
+        QColor col;
+        col.setHsv( i * 360 / data->count(), 255, 255 );
+        drawSegment( p, QRect(contentsRect().x() + pos, y, len, h), col );
+        pos += len;
     }
 }
 
 void BarGraph::drawSegment( QPainter *p, const QRect &r, const QColor &c )
 {
     if ( QPixmap::defaultDepth() > 8 ) {
-	QColor topgrad = c.light(170);
-	QColor botgrad = c.dark();
+        QColor topgrad = c.light(170);
+        QColor botgrad = c.dark();
 
-	int h1, h2, s1, s2, v1, v2;
-	topgrad.hsv( &h1, &s1, &v1 );
-	botgrad.hsv( &h2, &s2, &v2 );
-	int ng = r.height();
-	for ( int j =0; j < ng; j++ ) {
-	    p->setPen( QColor( h1 + ((h2-h1)*j)/(ng-1),
-			s1 + ((s2-s1)*j)/(ng-1),
-			v1 + ((v2-v1)*j)/(ng-1),  QColor::Hsv ) );
-	    p->drawLine( r.x(), r.top()+j, r.x()+r.width(), r.top()+j );
-	}
-    } else {
-	p->fillRect( r.x(), r.top(), r.width(), r.height(), c );
+        int h1, h2, s1, s2, v1, v2;
+        topgrad.hsv( &h1, &s1, &v1 );
+        botgrad.hsv( &h2, &s2, &v2 );
+        int ng = r.height();
+        for ( int j =0; j < ng; j++ ) {
+            p->setPen( QColor( h1 + ((h2-h1)*j)/(ng-1),
+                        s1 + ((s2-s1)*j)/(ng-1),
+                        v1 + ((v2-v1)*j)/(ng-1),  QColor::Hsv ) );
+            p->drawLine( r.x(), r.top()+j, r.x()+r.width(), r.top()+j );
+        }
+    }
+    else {
+        p->fillRect( r.x(), r.top(), r.width(), r.height(), c );
     }
 }
 
@@ -136,25 +137,25 @@ void GraphLegend::drawContents( QPainter *p )
 {
     int total = 0;
     for ( unsigned i = 0; i < data->count(); i++ )
-	total += data->value(i);
+        total += data->value(i);
 
     int tw = width()/data->count()-1;
     int th = height()/(horz ? 1 : data->count());
     if ( th > p->fontMetrics().height() )
-	th = p->fontMetrics().height();
+        th = p->fontMetrics().height();
     int x = 0;
     int y = 0;
     for ( unsigned i = 0; i < data->count(); i++ ) {
-	QColor col;
-	col.setHsv( i * 360 / data->count(), 255, 255 );
-	p->setBrush( col );
-	p->drawRect( x+1, y+1, th - 2, th - 2 );
-	p->drawText( x+th + 1, y + p->fontMetrics().ascent()+1, data->name(i) );
-	if ( horz ) {
-	    x += tw;
-	} else {
-	    y += th;
-	}
+        QColor col;
+        col.setHsv( i * 360 / data->count(), 255, 255 );
+        p->setBrush( col );
+        p->drawRect( x+1, y+1, th - 2, th - 2 );
+        p->drawText( x+th + 1, y + p->fontMetrics().ascent()+1, data->name(i) );
+        if ( horz ) {
+            x += tw;
+        } else {
+            y += th;
+        }
     }
 }
 
@@ -163,14 +164,15 @@ QSize GraphLegend::sizeHint() const
     int th = fontMetrics().height() + 2;
     int maxw = 0;
     for ( unsigned i = 0; i < data->count(); i++ ) {
-	int w = fontMetrics().width( data->name(i) );
-	if ( w > maxw )
-	    maxw = w;
+        int w = fontMetrics().width( data->name(i) );
+        if ( w > maxw )
+            maxw = w;
     }
     if ( 0 && horz ) {
-	return QSize( maxw * data->count(), th );
-    } else {
-	return QSize( maxw, th * data->count() );
+        return QSize( maxw * data->count(), th );
+    }
+    else {
+        return QSize( maxw, th * data->count() );
     }
 }
 
