@@ -59,21 +59,21 @@ public:
 		m_style_if = iface;
 		m_settings_if = 0;
 		m_style = iface-> style ( );
-		
+
 		iface-> queryInterface ( IID_StyleExtended, (QUnknownInterface **) &m_settings_if );
 	}
-	
+
 	virtual ~StyleListItem ( )
 	{
 		delete m_style;
-	
+
 		if ( m_settings_if )
 			m_settings_if-> release ( );
 		if ( m_style_if )
 			m_style_if-> release ( );
 		delete m_lib;
 	}
-	
+
 	bool hasSettings ( ) const
 	{
 		return m_settings_if ? m_settings_if-> hasSettings ( ) : false;
@@ -83,12 +83,12 @@ public:
 	{
 		return m_settings_if ? m_settings_if-> create ( parent ) : 0;
 	}
-	
-	bool setSettings ( bool accepted ) 
+
+	bool setSettings ( bool accepted )
 	{
 		if ( !m_settings_if )
 			return false;
-	
+
 		if ( accepted )
 			return m_settings_if-> accept ( );
 		else {
@@ -104,8 +104,8 @@ public:
 		else
 			return text ( );
 	}
-	
-	QStyle *style ( ) 
+
+	QStyle *style ( )
 	{
 		return m_style;
 	}

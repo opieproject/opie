@@ -27,16 +27,16 @@
 
 #include "orkey.h"
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 //class QCheckBox;
 class QLabel;
 //class QSpinBox;
 class QListViewItem;
 
 class CLayoutPrefs : public QWidget
-{ 
+{
 
 public:
 
@@ -66,7 +66,7 @@ public:
 };
 
 class CLayoutPrefs2 : public QWidget
-{ 
+{
 
 public:
 
@@ -88,7 +88,7 @@ public:
 
 /*
 class CPluckerPrefs : public QWidget
-{ 
+{
 
 public:
 
@@ -110,7 +110,7 @@ protected:
 };
 */
 class CMiscPrefs : public QWidget
-{ 
+{
 
 public:
 
@@ -130,7 +130,7 @@ public:
 };
 
 class CScrollPrefs : public QWidget
-{ 
+{
 
 public:
 
@@ -183,7 +183,7 @@ public:
 };
 */
 class CInterPrefs : public QWidget
-{ 
+{
 
 public:
 

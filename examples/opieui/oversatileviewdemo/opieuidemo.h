@@ -39,7 +39,7 @@ public:
     void demoOComboBox();
     void demoOEditListBox();
     void demoOSelector();
-    
+
 public slots:
     void demo( int );
     void messageBox( const QString& text );
@@ -47,10 +47,10 @@ public slots:
 protected:
     void build();
     void buildVV( QVBox* b );
-    
+
 private:
     QTabWidget* main;
-    
+
     Opie::Ui::OVersatileView* vv;
 
 };

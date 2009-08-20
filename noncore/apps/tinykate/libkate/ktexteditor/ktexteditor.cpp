@@ -60,7 +60,7 @@ void View::insertText( const QString &text, bool mark )
   int line, col;
   getCursorPosition( &line, &col );
   document()->insertAt( text, line, col, mark );
-} 
+}
 
 void View::setInternalContextMenuEnabled( bool b )
 {

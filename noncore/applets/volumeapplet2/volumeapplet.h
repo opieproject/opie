@@ -87,7 +87,7 @@ class VolumeAppletControl : public QFrame
     void build();
 
   private:
-   
+
     QGridLayout* l;
 };
 

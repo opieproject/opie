@@ -73,7 +73,7 @@ bool PowerStatusManager::getSysFsStatus()
     if( !cls )
         return false;
 
-    ps->bs = PowerStatus::NotPresent;    
+    ps->bs = PowerStatus::NotPresent;
     ps->secsRemain = -1;
 
     QStringList props;
@@ -83,7 +83,7 @@ bool PowerStatusManager::getSysFsStatus()
     props += "current_now";
     props += "status";
     props += "online";
-    
+
     bool ok = false;
     struct dlist *cdevs = sysfs_get_class_devices( cls );
     if (cdevs != NULL) {
@@ -107,10 +107,10 @@ bool PowerStatusManager::getSysFsStatus()
                     int charge_now = propmap["charge_now"].toInt();
                     int current_now = propmap["current_now"].toInt();
                     int pc;
-                    
+
                     if( current_now > 0 )
                         ps->secsRemain = round( ( (double)charge_now / current_now ) * 3600 );
-                    
+
                     if( charge_now == charge_full ) {
                         ps->bs = PowerStatus::High;
                         pc = 100;
@@ -135,7 +135,7 @@ bool PowerStatusManager::getSysFsStatus()
                                 ps->bs = PowerStatus::Critical;
                         }
                     }
-                    
+
                     ps->percentRemain = pc;
                 }
                 else if( propmap["type"] == "Mains" ) {

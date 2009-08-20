@@ -100,9 +100,9 @@ protected:
     Opie::Core::OPluginLoader *m_loader;
     QList<Opie::Datebook::View> *m_views;
     QList<QWidget> m_viewConfigs;
-    Opie::Datebook::DescriptionManager m_descMan; 
+    Opie::Datebook::DescriptionManager m_descMan;
     Opie::Datebook::LocationManager m_locMan;
-    
+
     QValueList<Opie::Datebook::HolidayPluginConfigWidget*> m_cfgWidgets;
 };
 #endif

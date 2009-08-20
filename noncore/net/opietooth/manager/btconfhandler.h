@@ -20,7 +20,7 @@ namespace OpieTooth {
         BTConfHandler(const QString& conf);
         ~BTConfHandler();
         bool saveConfig();
-        
+
         bool getHcidEnable() { return hcidEnable; }
         void setHcidEnable(bool arg) { hcidEnable = arg; }
 
@@ -80,7 +80,7 @@ namespace OpieTooth {
         void setPanCache(bool arg) { pandCache = arg; }
         QString getPanCachePeriod() { return pandCachePeriod; }
         void setPanCachePeriod(QString& arg) { pandCachePeriod = arg; }
-        
+
         QString& getConfName() { return confName; }
     protected:
         bool getBoolArg(QString& str, QCString& keyword);
@@ -105,7 +105,7 @@ namespace OpieTooth {
         QString dundChannel;
         bool dundPPPd;
         QString dundPPPdPath;
-        QString dundPPPdOptions; 
+        QString dundPPPdOptions;
 
         //PAND parameters
         bool pandEnable;

@@ -73,7 +73,7 @@ class FretBoard : public QWidget {
   // slots
   public slots:
       void Finger(int finger, int position);
-  
+
   void Fret(int position){
     initial_fret = position;
     ce.fret(position);

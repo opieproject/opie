@@ -74,7 +74,7 @@ public:
 
 protected:
   //void timerEvent(QTimerEvent*);
-  
+
 signals:
   void composeRequested();
   void viewEmail(QListView *, Email *);
@@ -87,7 +87,7 @@ signals:
   void replyAll(Email&);
   void remove(Email&);
   void forward(Email&);*/
-  
+
 public slots:
   void compose();
   void cancel();
@@ -103,7 +103,7 @@ public slots:
   void inboxItemSelected();
   void outboxItemSelected();
   void inboxItemPressed();
-  void inboxItemReleased();  
+  void inboxItemReleased();
   void mailArrived(const Email &mail, bool fromDisk);
   void allMailArrived(int);
   void saveMail(const QString &fileName, QListView *view);
@@ -124,7 +124,7 @@ public slots:
 
 private slots:
   void receive(const QCString&, const QByteArray&);
-  
+
 private:
   void init();
   void initStatusBar(QWidget*);
@@ -139,20 +139,20 @@ private:
   int accountIdCount;
   AccountList accountList;
   AddressList *addressList;
-  
+
   EditAccount *editAccountView;
   EmailListItem *item;
   EmailHandler *emailHandler;
   QList<Email> quedMessages;
   MailList mailDownloadList;
   MailList tempMailDownloadList;
-  
+
   bool sending, receiving, previewingMail, allAccounts;
   QString lineShift;
   MailAccount account, *currentAccount;
-  
+
   QCopChannel* channel;
-  
+
   QToolBar *bar;
   QProgressBar *progressBar;
   QStatusBar *statusBar;
@@ -163,7 +163,7 @@ private:
   QAction *cancelButton;
   QAction *deleteButton;
   //QToolButton *setAccountButton;
-  
+
   QMenuBar *mb;
   QPopupMenu *selectAccountMenu;
   QPopupMenu *editAccountMenu;

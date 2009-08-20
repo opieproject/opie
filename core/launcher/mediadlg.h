@@ -17,7 +17,7 @@ public:
     virtual ~Mediadlg();
 protected slots:
     virtual void accept();
-    
+
 protected:
     MediumMountSetting::MediumMountWidget*m_widget;
     FileSystem*m_fs;

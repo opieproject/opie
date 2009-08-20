@@ -16,7 +16,7 @@ class KMolCalc;
 class calcDlgUI : public CalcDlg
 {
 	Q_OBJECT
-	
+
     public:
 		calcDlgUI();
         KMolCalc *kmolcalc;

@@ -9,16 +9,16 @@ class PPPRun  : public RuntimeInfo {
 
 public :
 
-      PPPRun( ANetNodeInstance * NNI, 
+      PPPRun( ANetNodeInstance * NNI,
               PPPData & Data );
 
       bool handlesInterface( const QString & I );
       bool handlesInterface( InterfaceInfo * );
 
       State_t detectState( void );
-      virtual RuntimeInfo * device( void ) 
+      virtual RuntimeInfo * device( void )
         { return this; }
-      virtual RuntimeInfo * connection( void ) 
+      virtual RuntimeInfo * connection( void )
         { return this; }
 
 protected :

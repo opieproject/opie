@@ -26,7 +26,7 @@
 
 class HelpWindow : public QWidget
 {
-public: 
+public:
     HelpWindow( QWidget *parent = 0, const char *name = 0);
 	~HelpWindow();
 };

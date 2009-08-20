@@ -1,7 +1,7 @@
 /****************************************************************************
 ** $Id: qlayoutengine_p.h,v 1.1 2004-01-13 21:15:13 mickeyl Exp $
 **
-** Internal header file. 
+** Internal header file.
 **
 ** Created : 981027
 **

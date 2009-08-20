@@ -158,19 +158,19 @@ void OTSniffing::SLOT_Trace( bool Run ) {
       SL << "-i";
       SL << OT->scanWith()->devname();
 
-      connect( HciDump, 
+      connect( HciDump,
                SIGNAL( stdoutLine( const QString & ) ),
-               this, 
+               this,
                SLOT( SLOT_Show( const QString & ) ) );
 
-      connect( HciDump, 
+      connect( HciDump,
                SIGNAL(processExited(MyProcess*) ),
-               this, 
+               this,
                SLOT( SLOT_ProcessExited(MyProcess*) ) );
 
       HciDump->process() << SL;
 
-      if( ! HciDump->process().start( OProcess::DontCare, 
+      if( ! HciDump->process().start( OProcess::DontCare,
                                       OProcess::AllOutput )
         ) {
         QMessageBox::warning(0,
@@ -212,7 +212,7 @@ void OTSniffing::SLOT_Save( void ) {
         if( ! F.open( IO_WriteOnly ) ) {
           QMessageBox::warning(0,
               tr("Save log"),
-              tr("Cannot open %1").arg(S) 
+              tr("Cannot open %1").arg(S)
           );
           return;
         }
@@ -240,7 +240,7 @@ void OTSniffing::SLOT_Load( void ) {
         }
         QTextStream TS ( &F );
         SLOT_ClearLog();
-        S = TS.read(); 
+        S = TS.read();
         // Output_LB->insertStringList( QStringList::split( "\n", S ) );
         Output_TV->setText( S );
       }
@@ -356,7 +356,7 @@ void OTPairing::SLOT_Unpair( ) {
               tr("Yes, break"),
               tr("No, don't break") ) == 0 ) {
             LinkKeyLVI * KPIt = (LinkKeyLVI *)it;
-            // break 
+            // break
             OT->removeLinkKey( KPIt->index() );
             delete KPIt;
           }
@@ -436,8 +436,8 @@ OTScan::~OTScan() {
 }
 
 // static scan dialog function
-int OTScan::getDevice( OTPeer *& Peer, 
-                       int & Channel, 
+int OTScan::getDevice( OTPeer *& Peer,
+                       int & Channel,
                        OTGateway * OT,
                        const UUIDVector & Filter,
                        QWidget* Parent ) {
@@ -527,7 +527,7 @@ void OTScan::SLOT_Selected( QListViewItem * it ) {
         return;
 
       if( Filter.count() > 0 ) {
-        // filter on service 
+        // filter on service
         if( it->depth() == 0 ) {
           // select a service and not a device
           return;
@@ -570,7 +570,7 @@ void OTScan::SLOT_CleanupOld( ) {
           // what about linkkeys ?
           for( k = 0; k < Keys.count(); k ++ ) {
             if( TheP->address() == Keys[k].to() ||
-                TheP->address() == Keys[k].from() 
+                TheP->address() == Keys[k].from()
               ) {
               // part of linkkey
               odebug << "LINKKEY " << TheP->address().toString() << oendl;
@@ -583,7 +583,7 @@ void OTScan::SLOT_CleanupOld( ) {
             // not found -> remember to remove this peer
             QListViewItem * Nit;
             OT->removePeer( TheP );
-            Nit = Lit->nextSibling(); 
+            Nit = Lit->nextSibling();
             delete Lit;
             Lit = Nit;
             continue;
@@ -621,11 +621,11 @@ void OTScan::SLOT_NewPeer( OTPeer * P, bool IsNew ){
 
       // update/show info
       it->setText( 0, P->name() );
-      it->setPixmap(0, Icons->deviceIcon( 
+      it->setPixmap(0, Icons->deviceIcon(
           OT->deviceTypeToName( P->deviceClass() ) ) );
 
       // tell peer to report its state async
-      connect( P, 
+      connect( P,
                SIGNAL( peerStateReport( OTPeer *)),
                this,
                SLOT( SLOT_PeerState( OTPeer *))
@@ -658,7 +658,7 @@ void OTScan::SLOT_PeerState( OTPeer * P ) {
         it->setPixmap( 1, 0 );
           break;
         case OTPeer::Peer_Up :
-          it->setPixmap( 1, Icons->loadPixmap( 
+          it->setPixmap( 1, Icons->loadPixmap(
             ( P->connectedTo() ) ?  "connected" : "notconnected" ) );
           if( it == Current && ! StrengthTimer->isActive() ) {
             // start showing strength
@@ -732,7 +732,7 @@ void OTScan::SLOT_UpdateStrength( void ) {
         long Q = D->getLinkQuality( Current->peer()->address() );
         Strength_PB->setProgress( Q );
         if( ! Q ) {
-          // no quality 
+          // no quality
           Strength_PB->setEnabled( TRUE );
           StrengthTimer->stop();
         }
@@ -770,7 +770,7 @@ void OTScan::SLOT_RefreshServices( void ) {
         delete PI->firstChild();
       }
 
-      for( unsigned int i = 0 ; 
+      for( unsigned int i = 0 ;
            i < V.count();
            i ++ ) {
         QString S;
@@ -781,7 +781,7 @@ void OTScan::SLOT_RefreshServices( void ) {
         }
 
         { QListViewItem * SIt;
-          UUIDVector UIDV; 
+          UUIDVector UIDV;
           QPixmap Pm;
           bool Done = 0;
           bool R = true;
@@ -901,10 +901,10 @@ OTManage::OTManage( QWidget * parent, OTIcons * _IC ) :
       MyIcons = (_IC == 0 );
       AllDrivers_LV->setSorting(-1);
 
-      connect( OT, 
+      connect( OT,
                SIGNAL( driverListChanged() ),
                this,
-               SLOT( SLOT_DriverListChanged() ) 
+               SLOT( SLOT_DriverListChanged() )
              );
       connect( OT,
                SIGNAL( stateChange( OTDriver *, bool ) ),
@@ -924,7 +924,7 @@ OTManage::~OTManage() {
 }
 
 void OTManage::SLOT_ShowDriver( QListViewItem * It ) {
-      if( It == 0 || It->depth() > 0 ) 
+      if( It == 0 || It->depth() > 0 )
         // not toplevel
         return;
 
@@ -950,7 +950,7 @@ void OTManage::SLOT_StateChange( OTDriver * D, bool Up ) {
       QListViewItem * it = AllDrivers_LV->firstChild();
       while( it ) {
         if( ((DriverLVI *)it)->driver() == D ) {
-          it->setPixmap( 0, 
+          it->setPixmap( 0,
                Icons->loadPixmap( ( Up ) ?  "bluezon" : "bluezoff" ) );
           return;
         }
@@ -976,35 +976,35 @@ void OTManage::SLOT_DriverListChanged( ) {
           First = It;
 
         It->setText( 0, D->devname() );
-        It->setPixmap( 0, 
-             Icons->loadPixmap( (D->isUp()) ? 
+        It->setPixmap( 0,
+             Icons->loadPixmap( (D->isUp()) ?
                                   "bluezon" : "bluezoff" ) );
 
         Sub = new QListViewItem( It );
         Sub->setText( 0, tr( "Name" ) );
-        Sub->setText( 1, D->name() ); 
+        Sub->setText( 1, D->name() );
 
         Sub = new QListViewItem( It );
         Sub->setText( 0, tr( "Address" ) );
-        Sub->setText( 1, D->address().toString() ); 
+        Sub->setText( 1, D->address().toString() );
 
         Sub = new QListViewItem( It );
         Sub->setText( 0, tr( "Revision" ) );
-        Sub->setText( 1, D->revision() ); 
+        Sub->setText( 1, D->revision() );
 
         Sub = new QListViewItem( It );
         Sub->setText( 0, tr( "Manufacturer" ) );
-        Sub->setText( 1, D->manufacturer() ); 
+        Sub->setText( 1, D->manufacturer() );
 
         QString Service, Device;
         D->getClass( Service, Device );
 
         Sub = new QListViewItem( It );
         Sub->setText( 0, tr( "Service classes" ) );
-        Sub->setText( 1, Service ); 
+        Sub->setText( 1, Service );
         Sub = new QListViewItem( It );
         Sub->setText( 0, tr( "Device class" ) );
-        Sub->setText( 1, Device ); 
+        Sub->setText( 1, Device );
       }
 
       if( DL.count() ) {
@@ -1037,10 +1037,10 @@ OTMain::OTMain( QWidget * parent ) : OTMainGUI( parent ) {
                this,
                SLOT( SLOT_DeviceIsEnabled( bool ) )
              );
-      connect( OT, 
+      connect( OT,
                SIGNAL( driverListChanged() ),
                this,
-               SLOT( SLOT_DriverListChanged() ) 
+               SLOT( SLOT_DriverListChanged() )
              );
       connect( OT,
                SIGNAL( stateChange( OTDriver *, bool ) ),
@@ -1074,7 +1074,7 @@ void OTMain::SLOT_DriverListChanged() {
            i ++ ) {
         D = DL[i];
         DeviceList_CB->insertItem(
-           Icons->loadPixmap( (D->isUp()) ? 
+           Icons->loadPixmap( (D->isUp()) ?
                               "bluezon" : "bluezoff" ),
            D->devname() );
         if( D == OT->scanWith() ) {

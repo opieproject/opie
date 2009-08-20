@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
+**********************************************************************/
 
 #include "tableviewer.h"
 #include "ui/tvbrowseview.h"
@@ -45,7 +45,7 @@ using namespace Opie::Core;
     \class TableViewerWindow
     \brief The main window widget of the application
 
-    This is the main widget of the table viewer application.  
+    This is the main widget of the table viewer application.
     It is the co-ordination point.
 */
 
@@ -77,7 +77,7 @@ TableViewerWindow::TableViewerWindow(QWidget *parent, const char *name, WFlags f
     file_menu->insertItem("Properties");
 
     /* later will want to set this up to clean up first via this, SLOT(quit) */
-    menu->insertItem("Document", file_menu); 
+    menu->insertItem("Document", file_menu);
 
     QPopupMenu *edit_menu = new QPopupMenu;
     edit_menu->insertItem("Edit Item", this, SLOT(editItemSlot()));
@@ -88,7 +88,7 @@ TableViewerWindow::TableViewerWindow(QWidget *parent, const char *name, WFlags f
     QPopupMenu *view_menu = new QPopupMenu;
     view_menu->insertItem("Browse View", this, SLOT(browseViewSlot()));
     view_menu->insertItem("List View", this, SLOT(listViewSlot()));
-    menu->insertItem("View", view_menu); 
+    menu->insertItem("View", view_menu);
 
     QVBoxLayout *main_layout = new QVBoxLayout;
 
@@ -135,7 +135,7 @@ TableViewerWindow::TableViewerWindow(QWidget *parent, const char *name, WFlags f
     browseView = new TVBrowseView(&ts, this, 0);
     listView = new TVListView(&ts, this, 0);
     filterView = new TVFilterView(&ts, this, 0);
-    fileSelector = new FileSelector("text/csv;text/x-xml-tableviewer", 
+    fileSelector = new FileSelector("text/csv;text/x-xml-tableviewer",
                 this, "fileselector");
     fileSelector->setNewVisible(FALSE);
     fileSelector->setCloseVisible(FALSE);
@@ -150,13 +150,13 @@ TableViewerWindow::TableViewerWindow(QWidget *parent, const char *name, WFlags f
     cw->raiseWidget(current_view);
     fileSelector->reread();
 
-    connect(browseView, SIGNAL(searchOnKey(int,TVVariant)), 
+    connect(browseView, SIGNAL(searchOnKey(int,TVVariant)),
             this, SLOT(searchOnKey(int,TVVariant)));
-    connect(browseView, SIGNAL(sortChanged(int)), 
+    connect(browseView, SIGNAL(sortChanged(int)),
             this, SLOT(setPrimaryKey(int)));
 
     connect(fileSelector, SIGNAL(closeMe()), this, SLOT(browseViewSlot()));
-    connect(fileSelector, SIGNAL(fileSelected(const DocLnk&)), 
+    connect(fileSelector, SIGNAL(fileSelected(const DocLnk&)),
              this, SLOT(openDocument(const DocLnk&)));
 
     main_layout->addWidget(menu);
@@ -196,7 +196,7 @@ void TableViewerWindow::saveDocument()
     QIODevice *dev = fm.saveFile(doc);
 
     if(!ds->saveSource(dev, doc.type())){
-  owarn << "Save unsuccessful" << oendl; 
+  owarn << "Save unsuccessful" << oendl;
   return;
     }
     dev->close();
@@ -208,10 +208,10 @@ void TableViewerWindow::newDocument()
     DocLnk nf;
     nf.setType("text/x-xml-tableviewer");
     nf.setName("table");
-   
+
     delete ds;
     ds = new DBStore();
-   
+
     ts.current_column = 0;
     ts.kRep = ds->getKeys();
     browseView->reset();
@@ -237,7 +237,7 @@ void TableViewerWindow::setDocument(const QString &f)
 void TableViewerWindow::openDocument(const DocLnk &f)
 {
 
-    if (!f.isValid()) 
+    if (!f.isValid())
   return;
 
     FileManager fm;
@@ -266,7 +266,7 @@ void TableViewerWindow::openDocument(const DocLnk &f)
         listView->clearItems();
         do {
             d = ds->getCurrentData();
-            if(d) 
+            if(d)
                 listView->addItem(d);
         } while(ds->next());
 
@@ -283,13 +283,13 @@ void TableViewerWindow::openDocument(const DocLnk &f)
 
   dirty = FALSE;
     } else {
-        owarn << tr("could not load Document") << oendl; 
+        owarn << tr("could not load Document") << oendl;
     }
     dev->close();
 }
 
-/*! 
-    Moves to the first item of the current table 
+/*!
+    Moves to the first item of the current table
 */
 void TableViewerWindow::firstItem()
 {
@@ -298,8 +298,8 @@ void TableViewerWindow::firstItem()
     browseView->rebuildData();
 }
 
-/*! 
-    Moves to the lat item of the current table 
+/*!
+    Moves to the lat item of the current table
 */
 void TableViewerWindow::lastItem()
 {
@@ -308,8 +308,8 @@ void TableViewerWindow::lastItem()
     browseView->rebuildData();
 }
 
-/*! 
-    Moves to the next item of the current table 
+/*!
+    Moves to the next item of the current table
 */
 void TableViewerWindow::nextItem()
 {
@@ -318,8 +318,8 @@ void TableViewerWindow::nextItem()
     browseView->rebuildData();
 }
 
-/*! 
-    Moves to the previous item of the current table 
+/*!
+    Moves to the previous item of the current table
 */
 void TableViewerWindow::previousItem()
 {
@@ -347,7 +347,7 @@ void TableViewerWindow::applyFilter()
     ds->first();
     do {
         d = ds->getCurrentData();
-        if(d) 
+        if(d)
             if(filterView->passesFilter(d))
     listView->addItem(d);
     } while(ds->next());
@@ -410,12 +410,12 @@ void TableViewerWindow::deleteItemSlot()
   /* delete the actual item, then do a 'filter' */
   DataElem *to_remove = ts.current_elem;
 
-  if(!to_remove) 
+  if(!to_remove)
     return;
 
     listView->removeItem();
   ds->removeItem(to_remove);
-    
+
     applyFilter();
     listView->rebuildData();
     browseView->rebuildData();
@@ -433,7 +433,7 @@ void TableViewerWindow::editKeysSlot()
 
         ts.current_column = 0;
         ts.kRep = k;
-    
+
         browseView->reset();
         listView->reset();
         filterView->reset();
@@ -447,7 +447,7 @@ void TableViewerWindow::editKeysSlot()
         listView->clearItems();
         do {
             d = ds->getCurrentData();
-            if(d) 
+            if(d)
                 listView->addItem(d);
         } while(ds->next());
 
@@ -456,9 +456,9 @@ void TableViewerWindow::editKeysSlot()
     }
 }
 
-/*! 
-    A Slot that allows for widgets above to indicate a search should be 
-    done on a specified key index for a specified value 
+/*!
+    A Slot that allows for widgets above to indicate a search should be
+    done on a specified key index for a specified value
 */
 void TableViewerWindow::searchOnKey(int i, TVVariant v)
 {

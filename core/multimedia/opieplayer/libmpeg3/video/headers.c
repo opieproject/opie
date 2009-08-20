@@ -31,7 +31,7 @@ int mpeg3video_getseqhdr(mpeg3video_t *video)
     	for(i = 0; i < 64; i++)
       		video->intra_quantizer_matrix[video->mpeg3_zigzag_scan_table[i]] = mpeg3bits_getbyte_noptr(video->vstream);
   	}
-  	else 
+  	else
 	{
     	for(i = 0; i < 64; i++)
       		video->intra_quantizer_matrix[i] = mpeg3_default_intra_quantizer_matrix[i];
@@ -43,7 +43,7 @@ int mpeg3video_getseqhdr(mpeg3video_t *video)
     	for(i = 0; i < 64; i++)
       		video->non_intra_quantizer_matrix[video->mpeg3_zigzag_scan_table[i]] = mpeg3bits_getbyte_noptr(video->vstream);
   	}
-  	else 
+  	else
 	{
     	for(i = 0; i < 64; i++)
       		video->non_intra_quantizer_matrix[i] = 16;
@@ -190,7 +190,7 @@ int mpeg3video_picture_display_extension(mpeg3video_t *video)
 
 	if(video->prog_seq || video->pict_struct != FRAME_PICTURE)
 		n = 1;
-	else 
+	else
 		n = video->repeatfirst ? 3 : 2;
 
 	for(i = 0; i < n; i++)
@@ -307,7 +307,7 @@ int mpeg3video_ext_user_data(mpeg3video_t *video)
 		!mpeg3bits_eof(video->vstream))
 	{
     	mpeg3bits_refill(video->vstream);
-		
+
     	if(code == MPEG3_EXT_START_CODE)
 		{
       		int ext_id = mpeg3bits_getbits(video->vstream, 4);
@@ -363,7 +363,7 @@ int mpeg3video_getgophdr(mpeg3video_t *video)
 	broken_link = mpeg3bits_getbit_noptr(video->vstream);
 
 /*
- * printf("%d:%d:%d:%d %d %d %d\n", video->gop_timecode.hour, video->gop_timecode.minute, video->gop_timecode.second, video->gop_timecode.frame, 
+ * printf("%d:%d:%d:%d %d %d %d\n", video->gop_timecode.hour, video->gop_timecode.minute, video->gop_timecode.second, video->gop_timecode.frame,
  *  	drop_flag, closed_gop, broken_link);
  */
 	return mpeg3bits_error(video->vstream);
@@ -427,12 +427,12 @@ int mpeg3video_get_header(mpeg3video_t *video, int dont_repeat)
     	code = mpeg3bits_next_startcode(video->vstream);
 		if(mpeg3bits_eof(video->vstream)) return 1;
 		if(code != MPEG3_SEQUENCE_END_CODE) mpeg3bits_refill(video->vstream);
- 
+
     	switch(code)
 		{
     		case MPEG3_SEQUENCE_START_CODE:
     			video->found_seqhdr = 1;
-    			mpeg3video_getseqhdr(video);  
+    			mpeg3video_getseqhdr(video);
     			mpeg3video_ext_user_data(video);
     			break;
 
@@ -471,7 +471,7 @@ int mpeg3video_getslicehdr(mpeg3_slice_t *slice, mpeg3video_t *video)
 	int slice_vertical_position_extension, intra_slice;
 	int qs;
 
-  	slice_vertical_position_extension = (video->mpeg2 && video->vertical_size > 2800) ? 
+  	slice_vertical_position_extension = (video->mpeg2 && video->vertical_size > 2800) ?
 		mpeg3slice_getbits(slice->slice_buffer, 3) : 0;
 
   	if(video->scalable_mode == SC_DP) slice->pri_brk = mpeg3slice_getbits(slice->slice_buffer, 7);
@@ -485,7 +485,7 @@ int mpeg3video_getslicehdr(mpeg3_slice_t *slice, mpeg3video_t *video)
     	mpeg3slice_getbits(slice->slice_buffer, 7);
     	mpeg3video_ext_bit_info(slice->slice_buffer);
   	}
-  	else 
+  	else
 		intra_slice = 0;
 
 	return slice_vertical_position_extension;

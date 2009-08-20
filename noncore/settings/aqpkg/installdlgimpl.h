@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -72,7 +72,7 @@ private:
     int infoLevel;
     Ipkg *pIpkg;
     bool upgradePackages;
-    
+
     QComboBox      *destination;
     QPushButton    *btnInstall;
     QPushButton    *btnOptions;
@@ -80,12 +80,12 @@ private:
     QLabel         *txtAvailableSpace;
 
     void init( bool );
-    
+
     bool runIpkg( QString &option, const QString& package, const QString& dest, int flags );
 
 signals:
     void reloadData( InstallDlgImpl * );
-        
+
 public slots:
     void optionsSelected();
     void installSelected();

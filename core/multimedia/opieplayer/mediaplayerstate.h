@@ -35,7 +35,7 @@ public:
     ~MediaPlayerState();
     bool isPaused;
 
-    bool isStreaming;    
+    bool isStreaming;
     bool fullscreen()    { return isFullscreen; }
     bool scaled()    { return isScaled; }
     bool looping()     { return isLooping; }
@@ -60,7 +60,7 @@ public slots:
     void setPaused( bool b )   { if ( isPaused     == b ) return; isPaused = b;     emit pausedToggled(b); }
 
     void setPlaying( bool b )  { if ( isPlaying == b )  return; isPlaying = b; emit playingToggled(b); }
-    
+
     void setPosition( long p )   { if ( curPosition  == p ) return; curPosition = p;  emit positionChanged(p); }
     void updatePosition( long p ){ if ( curPosition  == p ) return; curPosition = p;  emit positionUpdated(p); }
     void setLength( long l )   { if ( curLength    == l ) return; curLength = l;    emit lengthChanged(l); }

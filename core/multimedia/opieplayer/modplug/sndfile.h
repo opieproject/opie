@@ -370,7 +370,7 @@ typedef struct _INSTRUMENTHEADER
 typedef struct _MODCHANNEL
 {
 	// First 32-bytes: Most used mixing information: don't change it
-	signed char * pCurrentSample;		
+	signed char * pCurrentSample;
 	DWORD nPos;
 	DWORD nPosLo;	// actually 16-bit
 	LONG nInc;		// 16.16
@@ -651,7 +651,7 @@ public:
 	void S3MConvert(MODCOMMAND *m, BOOL bIT) const;
 	void S3MSaveConvert(UINT *pcmd, UINT *pprm, BOOL bIT) const;
 	WORD ModSaveCommand(const MODCOMMAND *m, BOOL bXM) const;
-	
+
 public:
 	// Real-time sound functions
 	VOID ResetChannels();

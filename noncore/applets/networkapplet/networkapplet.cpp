@@ -169,7 +169,7 @@ QString NetworkAppletControl::guessDevice( ONetworkInterface* iface )
 
 void NetworkAppletControl::showEvent( QShowEvent* e )
 {
-    odebug << "showEvent" << oendl; 
+    odebug << "showEvent" << oendl;
     build();
     QWidget::showEvent( e );
 }
@@ -177,7 +177,7 @@ void NetworkAppletControl::showEvent( QShowEvent* e )
 
 void NetworkAppletControl::hideEvent( QHideEvent* e )
 {
-    odebug << "hideEvent" << oendl; 
+    odebug << "hideEvent" << oendl;
     QWidget::hideEvent( e );
 
     delete l;
@@ -194,7 +194,7 @@ void NetworkAppletControl::hideEvent( QHideEvent* e )
 
     list = const_cast<QObjectList*>( children() );
     if ( list )
-        owarn << "D'oh! We still have " << list->count() << " children..." << oendl; 
+        owarn << "D'oh! We still have " << list->count() << " children..." << oendl;
 
     // renew layout
     l = new QVBoxLayout( this, 4, 2 );
@@ -205,7 +205,7 @@ void NetworkAppletControl::hideEvent( QHideEvent* e )
 QSize NetworkAppletControl::sizeHint() const
 {
     ONetwork::instance()->synchronize(); // rebuild interface database
-    odebug << "sizeHint (#ifaces=" << ONetwork::instance()->count() << ")" << oendl; 
+    odebug << "sizeHint (#ifaces=" << ONetwork::instance()->count() << ")" << oendl;
     return QSize( 14+35+105+14 + 8, ONetwork::instance()->count() * 26 );
 }
 

@@ -10,7 +10,7 @@ class QSlider;
 
 class LiquidSettings : public QWidget {
 	Q_OBJECT
-	
+
 public:
 	LiquidSettings ( QWidget *parent = 0, const char *name = 0, WFlags fl = 0 );
 
@@ -20,12 +20,12 @@ public slots:
 	void changeFlat ( bool b );
 
 	virtual bool writeConfig ( );
-	
+
 private:
 	int    m_type;
 	bool   m_shadow;
 	bool   m_flat;
-	
+
 	QSlider *     m_opacsld;
 	QSlider *     m_contsld;
 	QLabel *      m_menulbl;

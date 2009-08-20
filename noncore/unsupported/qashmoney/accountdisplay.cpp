@@ -48,11 +48,11 @@ AccountDisplay::AccountDisplay ( QWidget *parent ) : QWidget ( parent )
     listview->setMultiSelection ( FALSE );
     connect ( listview, SIGNAL ( expanded(QListViewItem*) ), this, SLOT ( setAccountExpanded(QListViewItem*) ) );
     connect ( listview, SIGNAL ( collapsed(QListViewItem*) ), this, SLOT ( setAccountCollapsed(QListViewItem*) ) );
-    
+
     listview->header()->setTracking ( FALSE );
     connect ( listview->header(), SIGNAL ( sizeChange(int,int,int) ), this, SLOT ( saveColumnSize(int,int,int) ) );
     connect ( listview->header(), SIGNAL ( clicked(int) ), this, SLOT ( saveSortingPreference(int) ) );
-    
+
     layout = new QVBoxLayout ( this, 2, 5 );
     layout->addWidget ( firstline );
     layout->addWidget ( listview );
@@ -272,7 +272,7 @@ void AccountDisplay::getTransferAccounts ( QListViewItem * item )
             // set the cleared integer if the checkbox is checked
             if ( td->clearedcheckbox->isChecked() == TRUE )
               cleared = 1;
-            odebug << "Year from transferdialog = " << td->getYear() << "" << oendl; 
+            odebug << "Year from transferdialog = " << td->getYear() << "" << oendl;
             // add the transfer with a new date if its been edited or use the default date
             if ( td->getDateEdited () == TRUE )
               transfer->addTransfer ( firstaccountid, account->getParentAccountID ( firstaccountid ), secondaccountid, account->getParentAccountID ( secondaccountid ), td->getDay(), td->getMonth(), td->getYear(), td->amount->text().toFloat(), cleared );

@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
+**********************************************************************/
 #include "tvkeyedit.h"
 #include <qtoolbutton.h>
 #include <qlineedit.h>
@@ -34,7 +34,7 @@
 class TVKEListViewItem : public QListViewItem
 {
 public:
-    TVKEListViewItem(QString n, TVVariant::KeyType kt, int p, QListView *parent) : 
+    TVKEListViewItem(QString n, TVVariant::KeyType kt, int p, QListView *parent) :
         QListViewItem(parent)
     {
         name = n;
@@ -66,7 +66,7 @@ public:
         return name;
     }
 
-    void setName(QString n) 
+    void setName(QString n)
     {
         name = n;
         repaint();
@@ -77,7 +77,7 @@ public:
         return keyType;
     }
 
-    void setKeyType(TVVariant::KeyType k) 
+    void setKeyType(TVVariant::KeyType k)
     {
         keyType = k;
         repaint();
@@ -94,7 +94,7 @@ private:
     int position;
 };
 
-TVKeyEdit::TVKeyEdit(TableState *t, QWidget* parent, const char *name, 
+TVKeyEdit::TVKeyEdit(TableState *t, QWidget* parent, const char *name,
 	WFlags fl) : TVKeyEdit_gen(parent, name, true, fl)
 {
     int i;
@@ -156,9 +156,9 @@ void TVKeyEdit::newTerm()
 
     i = working_state.addKey("<New Key>", TVVariant::String);
     //working_state.setNewFlag(i, TRUE);
-	TVKEListViewItem *nItem = new TVKEListViewItem("<New Key>", 
-                                                 TVVariant::String, 
-                                                 i, 
+	TVKEListViewItem *nItem = new TVKEListViewItem("<New Key>",
+                                                 TVVariant::String,
+                                                 i,
                                                  display);
     display->setCurrentItem(nItem);
 	setTerm(nItem);
@@ -172,9 +172,9 @@ void TVKeyEdit::newTerm()
 	}
 }
 
-void TVKeyEdit::updateTerm(const QString &newName) 
+void TVKeyEdit::updateTerm(const QString &newName)
 {
-    /* TODO if name matches a deleted term, prompt for 
+    /* TODO if name matches a deleted term, prompt for
        renewing old data instead */
     TVKEListViewItem *i = (TVKEListViewItem *)display->currentItem();
     if(i) {
@@ -183,7 +183,7 @@ void TVKeyEdit::updateTerm(const QString &newName)
     }
 }
 
-void TVKeyEdit::updateTerm(int t) 
+void TVKeyEdit::updateTerm(int t)
 {
     /* t is an index to a combo in a menu, NOT a type */
     t++; /* menu counts from 0, types count from 1 */
@@ -194,13 +194,13 @@ void TVKeyEdit::updateTerm(int t)
     }
 }
 
-/* deletes current term 
+/* deletes current term
  * really just marks key as deleted so is now invalid.
  * the actual delete will happen when data is 'cleaned'
  * or when file is saved.
  */
-   
-void TVKeyEdit::deleteTerm() 
+
+void TVKeyEdit::deleteTerm()
 {
     TVKEListViewItem *i = (TVKEListViewItem *)display->currentItem();
     if (i) {
@@ -217,12 +217,12 @@ void TVKeyEdit::deleteTerm()
 }
 
 /* clears all terminations */
-void TVKeyEdit::clearTerms() 
+void TVKeyEdit::clearTerms()
 {
     /* should pop up a warning */
-    if (QMessageBox::warning(this, "Delete all keys", 
+    if (QMessageBox::warning(this, "Delete all keys",
                          "Are you sure you want to\ndelete all the keys?",
-                         "Yes", "No") == 0) 
+                         "Yes", "No") == 0)
     {
         while(display->currentItem())
             deleteTerm();
@@ -247,8 +247,8 @@ KeyList* TVKeyEdit::openEditKeysDialog(TableState *t, QWidget *parent = 0)
 
     TVKeyEdit *dlg = new TVKeyEdit(t, parent);
 
-    if ((dlg->exec() == QDialog::Accepted) && 
-	    (dlg->working_state != *t->kRep)) 
+    if ((dlg->exec() == QDialog::Accepted) &&
+	    (dlg->working_state != *t->kRep))
 	{
 		return (new KeyList(dlg->working_state));
     }

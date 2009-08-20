@@ -24,11 +24,11 @@ New_Drink::New_Drink( QWidget* parent,  const char* name, bool modal, WFlags fl 
         setName( drinkName );
     setCaption( drinkName);
 
-    Layout5 = new QGridLayout( this); 
+    Layout5 = new QGridLayout( this);
     Layout5->setSpacing( 6 );
     Layout5->setMargin( 4 );
 
-//      Layout4 = new QHBoxLayout; 
+//      Layout4 = new QHBoxLayout;
 //      Layout4->setSpacing( 6 );
 //      Layout4->setMargin( 4 );
 
@@ -51,7 +51,7 @@ New_Drink::New_Drink( QWidget* parent,  const char* name, bool modal, WFlags fl 
     Layout5->addMultiCellWidget( MultiLineEdit1, 2, 2, 0, 2);
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 New_Drink::~New_Drink()

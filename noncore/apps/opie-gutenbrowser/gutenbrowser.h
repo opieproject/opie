@@ -121,7 +121,7 @@ private:
     QPopupMenu *fileMenu, *editMenu, *viewMenu, *DownloadMenu, *optionsMenu,
                *bookmarksMenu, *donateMenu, *helpMenu;
     bool useWrap;
-    int fileHandle, currentFilePos, currentLine; 
+    int fileHandle, currentFilePos, currentLine;
     int last_search;
 
     bool getTitle( const char *file);
@@ -161,7 +161,7 @@ protected:
 
 protected slots:
 		void hideView();
-    
+
     void BackBtn();
     void Bookmark( int);
     void ByeBye();

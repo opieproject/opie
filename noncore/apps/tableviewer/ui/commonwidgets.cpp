@@ -39,7 +39,7 @@ DateEdit::DateEdit( QWidget *parent, const char *name, WFlags f )
 
     connect(dateSelector, SIGNAL(dateClicked(int,int,int)),
         this, SLOT(subValueChanged()));
-        
+
     setText(dateSelector->selectedDate().toString());
 }
 
@@ -51,7 +51,7 @@ QDate DateEdit::date() const
     return dateSelector->selectedDate();
 }
 
-void DateEdit::setDate(QDate d) 
+void DateEdit::setDate(QDate d)
 {
     dateSelector->setDate(d.year(), d.month(), d.day());
     setText(d.toString());
@@ -66,7 +66,7 @@ QSizePolicy DateEdit::sizePolicy() const
     return sp;
 }
 
-void DateEdit::clear() 
+void DateEdit::clear()
 {
     QDate today = QDate::currentDate();
 
@@ -139,9 +139,9 @@ QTime TimeEdit::time() const
     }
     /* hour now ranges 1->24 */
 
-    if (h == 12) 
+    if (h == 12)
         h = 0;
-    if (h == 24) 
+    if (h == 24)
         h = 12;
 
     if(QTime::isValid(h, m, s))
@@ -149,7 +149,7 @@ QTime TimeEdit::time() const
     return QTime(0, 0, 0);
 }
 
-void TimeEdit::setTime(QTime t) 
+void TimeEdit::setTime(QTime t)
 {
     int h = t.hour();
     secondKey->setValue(t.second());
@@ -176,7 +176,7 @@ QSizePolicy TimeEdit::sizePolicy() const
     return sp;
 }
 
-void TimeEdit::clear() 
+void TimeEdit::clear()
 {
     secondKey->setValue(0);
     minuteKey->setValue(0);
@@ -199,12 +199,12 @@ IntEdit::IntEdit( QWidget *parent, const char *name, WFlags f )
 
 IntEdit::~IntEdit() {}
 
-int IntEdit::value() 
+int IntEdit::value()
 {
     return cleanText().toInt();
 }
 
-void IntEdit::clear() 
+void IntEdit::clear()
 {
     setValue(0);
 }

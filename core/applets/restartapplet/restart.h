@@ -35,7 +35,7 @@ private:
 //    QPixmap snapshotPixmap;
 private slots:
 
-        
+
 };
 
 

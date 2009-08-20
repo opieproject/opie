@@ -110,15 +110,15 @@ static void yuv2rgb_dispose (yuv2rgb_t *this)
   free (this);
 }
 
-static int yuv2rgb_configure (yuv2rgb_t *this, 
+static int yuv2rgb_configure (yuv2rgb_t *this,
 			      int source_width, int source_height,
 			      int y_stride, int uv_stride,
 			      int dest_width, int dest_height,
 			      int rgb_stride) {
-/*  
+/*
   printf ("yuv2rgb setup (%d x %d => %d x %d)\n", source_width, source_height,
 	  dest_width, dest_height);
-*/	  
+*/
   if (prof_scale_line == -1)
     prof_scale_line = xine_profiler_allocate_slot("xshm scale line");
 
@@ -161,7 +161,7 @@ static int yuv2rgb_configure (yuv2rgb_t *this,
 /*
   printf("yuv2rgb config: src_ht=%i, dst_ht=%i\n",source_height, dest_height);
   printf("yuv2rgb config: step_dy=%i %f\n",this->step_dy, (float)this->step_dy / 32768.0);
-*/    
+*/
   this->scale_line = find_scale_line_func(this->step_dx);
 
   if ((source_width == dest_width) && (source_height == dest_height)) {
@@ -183,7 +183,7 @@ static int yuv2rgb_configure (yuv2rgb_t *this,
 
   } else {
     this->do_scale = 1;
-    
+
     /*
      * space for two y-lines (for yuv2rgb_mlib)
      * u,v subsampled 2:1
@@ -209,7 +209,7 @@ static int yuv2rgb_configure (yuv2rgb_t *this,
       if (!this->mlib_resize_buffer)
       return 0;
     }
-#endif	
+#endif
   }
   return 1;
 }
@@ -257,7 +257,7 @@ static void scale_line_gen (uint8_t *source, uint8_t *dest,
 	p1 = p2;
 	p2 = *source++;
       }
-      
+
       dest ++;
       width --;
     }
@@ -275,7 +275,7 @@ static void scale_line_gen (uint8_t *source, uint8_t *dest,
 	p1 = p2;
 	p2 = *source++;
       }
-      
+
       dest ++;
       width --;
     }
@@ -1242,7 +1242,7 @@ static void scale_line_1_2 (uint8_t *source, uint8_t *dest,
   xine_profiler_stop_count(prof_scale_line);
 }
 
-			
+
 /*
  * Scale line with no horizontal scaling. For NTSC mpeg2 dvd input in
  * 4:3 output format (720x480 -> 720x540)
@@ -1255,7 +1255,7 @@ static void scale_line_1_1 (uint8_t *source, uint8_t *dest,
   xine_profiler_stop_count(prof_scale_line);
 }
 
-			
+
 static scale_line_func_t find_scale_line_func(int step) {
   static struct {
     int			src_step;
@@ -1428,7 +1428,7 @@ static void yuv2rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst,
 		this->dest_width >> 1, this->step_dx);
     scale_line (_pv, this->v_buffer,
 		this->dest_width >> 1, this->step_dx);
-    scale_line (_py, this->y_buffer, 
+    scale_line (_py, this->y_buffer,
 		this->dest_width, this->step_dx);
 
     dy = 0;
@@ -1448,7 +1448,7 @@ static void yuv2rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst,
 
 	  X_RGB(1);
 	  DST1(1);
-      
+
 	  X_RGB(2);
 	  DST1(2);
 
@@ -1466,7 +1466,7 @@ static void yuv2rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst,
 
       while (--dst_height > 0 && dy < 32768) {
 
-	xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width*4); 
+	xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width*4);
 
 	dy += this->step_dy;
 	_dst += this->rgb_stride;
@@ -1479,18 +1479,18 @@ static void yuv2rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst,
           dy -= 32768;
           _py += this->y_stride;
 
-          scale_line (_py, this->y_buffer, 
+          scale_line (_py, this->y_buffer,
                       this->dest_width, this->step_dx);
 
           if (height & 1) {
               _pu += this->uv_stride;
               _pv += this->uv_stride;
-	  
+
               scale_line (_pu, this->u_buffer,
                           this->dest_width >> 1, this->step_dx);
               scale_line (_pv, this->v_buffer,
                           this->dest_width >> 1, this->step_dx);
-	  
+
           }
           height++;
       } while( dy>=32768);
@@ -1522,7 +1522,7 @@ static void yuv2rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst,
 	X_RGB(3);
 	DST2(3);
 	DST1(3);
-      
+
 	pu += 4;
 	pv += 4;
 	py_1 += 8;
@@ -1531,7 +1531,7 @@ static void yuv2rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst,
 	dst_2 += 8;
       } while (--width);
 
-      _dst += 2 * this->rgb_stride; 
+      _dst += 2 * this->rgb_stride;
       _py += 2 * this->y_stride;
       _pu += this->uv_stride;
       _pv += this->uv_stride;
@@ -1559,7 +1559,7 @@ static void yuv2rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst,
 		this->dest_width >> 1, this->step_dx);
     scale_line (_pv, this->v_buffer,
 		this->dest_width >> 1, this->step_dx);
-    scale_line (_py, this->y_buffer, 
+    scale_line (_py, this->y_buffer,
 		this->dest_width, this->step_dx);
 
     dy = 0;
@@ -1579,7 +1579,7 @@ static void yuv2rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst,
 
 	  X_RGB(1);
 	  DST1RGB(1);
-      
+
 	  X_RGB(2);
 	  DST1RGB(2);
 
@@ -1597,7 +1597,7 @@ static void yuv2rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst,
 
       while (--dst_height > 0 && dy < 32768) {
 
-	xine_fast_memcpy (_dst, _dst-this->rgb_stride, this->dest_width*3); 
+	xine_fast_memcpy (_dst, _dst-this->rgb_stride, this->dest_width*3);
 
 	dy += this->step_dy;
 	_dst += this->rgb_stride;
@@ -1610,18 +1610,18 @@ static void yuv2rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst,
           dy -= 32768;
           _py += this->y_stride;
 
-          scale_line (_py, this->y_buffer, 
+          scale_line (_py, this->y_buffer,
                       this->dest_width, this->step_dx);
 
           if (height & 1) {
               _pu += this->uv_stride;
               _pv += this->uv_stride;
-	  
+
               scale_line (_pu, this->u_buffer,
                           this->dest_width >> 1, this->step_dx);
               scale_line (_pv, this->v_buffer,
                           this->dest_width >> 1, this->step_dx);
-	  
+
           }
           height++;
       } while (dy>=32768);
@@ -1662,11 +1662,11 @@ static void yuv2rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst,
 	dst_2 += 24;
       } while (--width);
 
-      _dst += 2 * this->rgb_stride; 
+      _dst += 2 * this->rgb_stride;
       _py += 2 * this->y_stride;
       _pu += this->uv_stride;
       _pv += this->uv_stride;
-      
+
     } while (--height);
   }
 }
@@ -1690,7 +1690,7 @@ static void yuv2rgb_c_24_bgr (yuv2rgb_t *this, uint8_t * _dst,
 		this->dest_width >> 1, this->step_dx);
     scale_line (_pv, this->v_buffer,
 		this->dest_width >> 1, this->step_dx);
-    scale_line (_py, this->y_buffer, 
+    scale_line (_py, this->y_buffer,
 		this->dest_width, this->step_dx);
 
     dy = 0;
@@ -1710,7 +1710,7 @@ static void yuv2rgb_c_24_bgr (yuv2rgb_t *this, uint8_t * _dst,
 
 	  X_RGB(1);
 	  DST1BGR(1);
-      
+
 	  X_RGB(2);
 	  DST1BGR(2);
 
@@ -1741,18 +1741,18 @@ static void yuv2rgb_c_24_bgr (yuv2rgb_t *this, uint8_t * _dst,
           dy -= 32768;
           _py += this->y_stride;
 
-          scale_line (_py, this->y_buffer, 
+          scale_line (_py, this->y_buffer,
                       this->dest_width, this->step_dx);
 
           if (height & 1) {
               _pu += this->uv_stride;
               _pv += this->uv_stride;
-	  
+
               scale_line (_pu, this->u_buffer,
                           this->dest_width >> 1, this->step_dx);
               scale_line (_pv, this->v_buffer,
                           this->dest_width >> 1, this->step_dx);
-	  
+
           }
           height++;
       } while( dy>=32768 );
@@ -1793,7 +1793,7 @@ static void yuv2rgb_c_24_bgr (yuv2rgb_t *this, uint8_t * _dst,
 	dst_2 += 24;
       } while (--width);
 
-      _dst += 2 * this->rgb_stride; 
+      _dst += 2 * this->rgb_stride;
       _py += 2 * this->y_stride;
       _pu += this->uv_stride;
       _pv += this->uv_stride;
@@ -1821,7 +1821,7 @@ static void yuv2rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst,
 		this->dest_width >> 1, this->step_dx);
     scale_line (_pv, this->v_buffer,
 		this->dest_width >> 1, this->step_dx);
-    scale_line (_py, this->y_buffer, 
+    scale_line (_py, this->y_buffer,
 		this->dest_width, this->step_dx);
 
     dy = 0;
@@ -1841,7 +1841,7 @@ static void yuv2rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst,
 
 	  X_RGB(1);
 	  DST1(1);
-      
+
 	  X_RGB(2);
 	  DST1(2);
 
@@ -1859,7 +1859,7 @@ static void yuv2rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst,
 
       while (--dst_height > 0 && dy < 32768) {
 
-	xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width*2); 
+	xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width*2);
 
 	dy += this->step_dy;
 	_dst += this->rgb_stride;
@@ -1872,18 +1872,18 @@ static void yuv2rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst,
           dy -= 32768;
           _py += this->y_stride;
 
-          scale_line (_py, this->y_buffer, 
+          scale_line (_py, this->y_buffer,
                       this->dest_width, this->step_dx);
 
           if (height & 1) {
               _pu += this->uv_stride;
               _pv += this->uv_stride;
-	  
+
               scale_line (_pu, this->u_buffer,
                           this->dest_width >> 1, this->step_dx);
               scale_line (_pv, this->v_buffer,
                           this->dest_width >> 1, this->step_dx);
-	  
+
           }
           height++;
       } while( dy>=32768);
@@ -1923,7 +1923,7 @@ static void yuv2rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst,
 	dst_2 += 8;
       } while (--width);
 
-      _dst += 2 * this->rgb_stride; 
+      _dst += 2 * this->rgb_stride;
       _py += 2 * this->y_stride;
       _pu += this->uv_stride;
       _pv += this->uv_stride;
@@ -1951,7 +1951,7 @@ static void yuv2rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst,
 		this->dest_width >> 1, this->step_dx);
     scale_line (_pv, this->v_buffer,
 		this->dest_width >> 1, this->step_dx);
-    scale_line (_py, this->y_buffer, 
+    scale_line (_py, this->y_buffer,
 		this->dest_width, this->step_dx);
 
     dy = 0;
@@ -1971,7 +1971,7 @@ static void yuv2rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst,
 
 	  X_RGB(1);
 	  DST1(1);
-      
+
 	  X_RGB(2);
 	  DST1(2);
 
@@ -1989,7 +1989,7 @@ static void yuv2rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst,
 
       while (--dst_height > 0 && dy < 32768) {
 
-	xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width); 
+	xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width);
 
 	dy += this->step_dy;
 	_dst += this->rgb_stride;
@@ -2002,18 +2002,18 @@ static void yuv2rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst,
           dy -= 32768;
           _py += this->y_stride;
 
-          scale_line (_py, this->y_buffer, 
+          scale_line (_py, this->y_buffer,
                       this->dest_width, this->step_dx);
 
           if (height & 1) {
               _pu += this->uv_stride;
               _pv += this->uv_stride;
-	  
+
               scale_line (_pu, this->u_buffer,
                           this->dest_width >> 1, this->step_dx);
               scale_line (_pv, this->v_buffer,
                           this->dest_width >> 1, this->step_dx);
-	  
+
           }
           height++;
       } while( dy>=32768 );
@@ -2045,7 +2045,7 @@ static void yuv2rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst,
 	X_RGB(3);
 	DST2(3);
 	DST1(3);
-      
+
 	pu += 4;
 	pv += 4;
 	py_1 += 8;
@@ -2054,7 +2054,7 @@ static void yuv2rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst,
 	dst_2 += 8;
       } while (--width);
 
-      _dst += 2 * this->rgb_stride; 
+      _dst += 2 * this->rgb_stride;
       _py += 2 * this->y_stride;
       _pu += this->uv_stride;
       _pv += this->uv_stride;
@@ -2084,7 +2084,7 @@ static void yuv2rgb_c_gray (yuv2rgb_t *this, uint8_t * _dst,
 
       while (--dst_height > 0 && dy < 32768) {
 
-	xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width); 
+	xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width);
 
 	dy += this->step_dy;
 	_dst += this->rgb_stride;
@@ -2095,7 +2095,7 @@ static void yuv2rgb_c_gray (yuv2rgb_t *this, uint8_t * _dst,
 
       _py += this->y_stride*(dy>>15);
       dy &= 32767;
-      /* dy -= 32768; 
+      /* dy -= 32768;
 	 _py += this->y_stride;
       */
     }
@@ -2146,7 +2146,7 @@ static void yuv2rgb_c_palette (yuv2rgb_t *this, uint8_t * _dst,
 
 	  X_RGB(1);
 	  DST1CMAP(1);
-      
+
 	  X_RGB(2);
 	  DST1CMAP(2);
 
@@ -2164,7 +2164,7 @@ static void yuv2rgb_c_palette (yuv2rgb_t *this, uint8_t * _dst,
 
       while (--dst_height > 0 && dy < 32768) {
 
-	xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width); 
+	xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width);
 
 	dy += this->step_dy;
 	_dst += this->rgb_stride;
@@ -2183,12 +2183,12 @@ static void yuv2rgb_c_palette (yuv2rgb_t *this, uint8_t * _dst,
           if (height & 1) {
               _pu += this->uv_stride;
               _pv += this->uv_stride;
-	  
+
               scale_line (_pu, this->u_buffer,
                           this->dest_width >> 1, this->step_dx);
               scale_line (_pv, this->v_buffer,
                           this->dest_width >> 1, this->step_dx);
-	  
+
           }
           height++;
       } while( dy>=32768 );
@@ -2228,7 +2228,7 @@ static void yuv2rgb_c_palette (yuv2rgb_t *this, uint8_t * _dst,
 	dst_2 += 8;
       } while (--width);
 
-      _dst += 2 * this->rgb_stride; 
+      _dst += 2 * this->rgb_stride;
       _py += 2 * this->y_stride;
       _pu += this->uv_stride;
       _pv += this->uv_stride;
@@ -2424,7 +2424,7 @@ static void yuv2rgb_set_csc_levels (yuv2rgb_factory_t *this,
     lprintf ("mode %d not supported by yuv2rgb\n", mode);
     _x_abort();
   }
-  
+
   for (i = 0; i < 256; i++) {
     this->table_rV[i] = (((uint8_t *) table_r) +
 			 entry_size * div_round (crv * (i-128), 76309));
@@ -2437,7 +2437,7 @@ static void yuv2rgb_set_csc_levels (yuv2rgb_factory_t *this,
 
 #if defined(ARCH_X86) || defined(ARCH_X86_64)
   mmx_yuv2rgb_set_csc_levels (this, brightness, contrast, saturation);
-#endif  
+#endif
 }
 
 static uint32_t yuv2rgb_single_pixel_32 (yuv2rgb_t *this, uint8_t y, uint8_t u, uint8_t v)
@@ -2623,10 +2623,10 @@ static void yuy22rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 		this->dest_width >> 1, this->step_dx);
   scale_line_2 (_p, this->y_buffer,
 		this->dest_width, this->step_dx);
-  
+
   dy = 0;
   height = this->next_slice (this, &_dst);
-  
+
   for (;;) {
     dst_1 = (uint32_t*)_dst;
     py_1  = this->y_buffer;
@@ -2642,10 +2642,10 @@ static void yuy22rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 
       X_RGB(1);
       DST1(1);
-      
+
       X_RGB(2);
       DST1(2);
-      
+
       X_RGB(3);
       DST1(3);
 
@@ -2654,18 +2654,18 @@ static void yuy22rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
       py_1 += 8;
       dst_1 += 8;
     } while (--width);
-    
+
     dy += this->step_dy;
     _dst += this->rgb_stride;
-    
+
     while (--height > 0 && dy < 32768) {
-      
+
       xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width*4);
-      
+
       dy += this->step_dy;
       _dst += this->rgb_stride;
     }
-    
+
     if (height <= 0)
       break;
 
@@ -2675,12 +2675,12 @@ static void yuy22rgb_c_32 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
       dy -= 32768;
       _p += this->y_stride*2;
     */
-    
+
     scale_line_4 (_p+1, this->u_buffer,
 		  this->dest_width >> 1, this->step_dx);
     scale_line_4 (_p+3, this->v_buffer,
 		  this->dest_width >> 1, this->step_dx);
-    scale_line_2 (_p, this->y_buffer, 
+    scale_line_2 (_p, this->y_buffer,
 		  this->dest_width, this->step_dx);
   }
 }
@@ -2700,30 +2700,30 @@ static void yuy22rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 		this->dest_width >> 1, this->step_dx);
   scale_line_4 (_p+3, this->v_buffer,
 		this->dest_width >> 1, this->step_dx);
-  scale_line_2 (_p, this->y_buffer, 
+  scale_line_2 (_p, this->y_buffer,
 		this->dest_width, this->step_dx);
 
   dy = 0;
   height = this->next_slice (this, &_dst);
-  
+
   for (;;) {
     dst_1 = _dst;
     py_1  = this->y_buffer;
     pu    = this->u_buffer;
     pv    = this->v_buffer;
-    
+
     width = this->dest_width >> 3;
-    
+
     do {
       X_RGB(0);
       DST1RGB(0);
-      
+
       X_RGB(1);
       DST1RGB(1);
-      
+
       X_RGB(2);
       DST1RGB(2);
-      
+
       X_RGB(3);
       DST1RGB(3);
 
@@ -2735,15 +2735,15 @@ static void yuy22rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 
     dy += this->step_dy;
     _dst += this->rgb_stride;
-    
+
     while (--height > 0 && dy < 32768) {
 
       xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width*3);
-      
+
       dy += this->step_dy;
       _dst += this->rgb_stride;
     }
-    
+
     if (height <= 0)
       break;
 
@@ -2753,7 +2753,7 @@ static void yuy22rgb_c_24_rgb (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
       dy -= 32768;
       _p += this->y_stride*2;
     */
-    
+
     scale_line_4 (_p+1, this->u_buffer,
 		  this->dest_width >> 1, this->step_dx);
     scale_line_4 (_p+3, this->v_buffer,
@@ -2778,50 +2778,50 @@ static void yuy22rgb_c_24_bgr (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 		this->dest_width >> 1, this->step_dx);
   scale_line_4 (_p+3, this->v_buffer,
 		this->dest_width >> 1, this->step_dx);
-  scale_line_2 (_p, this->y_buffer, 
+  scale_line_2 (_p, this->y_buffer,
 		this->dest_width, this->step_dx);
 
   dy = 0;
   height = this->next_slice (this, &_dst);
-  
+
   for (;;) {
     dst_1 = _dst;
     py_1  = this->y_buffer;
     pu    = this->u_buffer;
     pv    = this->v_buffer;
-    
+
     width = this->dest_width >> 3;
-    
+
     do {
       X_RGB(0);
       DST1BGR(0);
-      
+
       X_RGB(1);
       DST1BGR(1);
-      
+
       X_RGB(2);
       DST1BGR(2);
 
       X_RGB(3);
       DST1BGR(3);
-      
+
       pu += 4;
       pv += 4;
       py_1 += 8;
       dst_1 += 24;
     } while (--width);
-    
+
     dy += this->step_dy;
     _dst += this->rgb_stride;
-    
+
     while (--height > 0 && dy < 32768) {
 
       xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width*3);
-      
+
       dy += this->step_dy;
       _dst += this->rgb_stride;
     }
-    
+
     if (height <= 0)
       break;
 
@@ -2852,9 +2852,9 @@ static void yuy22rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 		this->dest_width >> 1, this->step_dx);
   scale_line_4 (_p+3, this->v_buffer,
 		this->dest_width >> 1, this->step_dx);
-  scale_line_2 (_p, this->y_buffer, 
+  scale_line_2 (_p, this->y_buffer,
 		this->dest_width, this->step_dx);
-  
+
   dy = 0;
   height = this->next_slice (this, &_dst);
 
@@ -2863,19 +2863,19 @@ static void yuy22rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
     py_1  = this->y_buffer;
     pu    = this->u_buffer;
     pv    = this->v_buffer;
-    
+
     width = this->dest_width >> 3;
-    
+
     do {
       X_RGB(0);
       DST1(0);
 
       X_RGB(1);
       DST1(1);
-      
+
       X_RGB(2);
       DST1(2);
-      
+
       X_RGB(3);
       DST1(3);
 
@@ -2884,24 +2884,24 @@ static void yuy22rgb_c_16 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
       py_1 += 8;
       dst_1 += 8;
     } while (--width);
-    
+
     dy += this->step_dy;
     _dst += this->rgb_stride;
 
     while (--height > 0 && dy < 32768) {
-      
-      xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width*2); 
+
+      xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width*2);
 
       dy += this->step_dy;
       _dst += this->rgb_stride;
     }
-    
+
     if (height <= 0)
       break;
 
     _p += this->y_stride*(dy>>15);
     dy &= 32767;
-    
+
     scale_line_4 (_p+1, this->u_buffer,
 		  this->dest_width >> 1, this->step_dx);
     scale_line_4 (_p+3, this->v_buffer,
@@ -2928,28 +2928,28 @@ static void yuy22rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
 		this->dest_width >> 1, this->step_dx);
   scale_line_2 (_p, this->y_buffer,
 		this->dest_width, this->step_dx);
-  
+
   dy = 0;
   height = this->next_slice (this, &_dst);
-  
+
   for (;;) {
     dst_1 = _dst;
     py_1  = this->y_buffer;
     pu    = this->u_buffer;
     pv    = this->v_buffer;
-    
+
     width = this->dest_width >> 3;
-    
+
     do {
       X_RGB(0);
       DST1(0);
-      
+
       X_RGB(1);
       DST1(1);
 
       X_RGB(2);
       DST1(2);
-      
+
       X_RGB(3);
       DST1(3);
 
@@ -2958,29 +2958,29 @@ static void yuy22rgb_c_8 (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
       py_1 += 8;
       dst_1 += 8;
     } while (--width);
-    
+
     dy += this->step_dy;
     _dst += this->rgb_stride;
-    
+
     while (--height > 0 && dy < 32768) {
-      
-      xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width); 
-      
+
+      xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width);
+
       dy += this->step_dy;
       _dst += this->rgb_stride;
     }
-    
+
     if (height <= 0)
       break;
 
     _p += this->y_stride*(dy>>15);
     dy &= 32767;
-    
+
     scale_line_4 (_p+1, this->u_buffer,
 		  this->dest_width >> 1, this->step_dx);
     scale_line_4 (_p+3, this->v_buffer,
 		  this->dest_width >> 1, this->step_dx);
-    scale_line_2 (_p, this->y_buffer, 
+    scale_line_2 (_p, this->y_buffer,
 		  this->dest_width, this->step_dx);
   }
 }
@@ -2995,21 +2995,21 @@ static void yuy22rgb_c_gray (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
   if (this->do_scale) {
     dy = 0;
     height = this->next_slice (this, &_dst);
-  
+
     for (;;) {
       scale_line_2 (_p, _dst, this->dest_width, this->step_dx);
-    
+
       dy += this->step_dy;
       _dst += this->rgb_stride;
-    
+
       while (--height > 0 && dy < 32768) {
-      
-	xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width); 
-      
+
+	xine_fast_memcpy (_dst, (uint8_t*)_dst-this->rgb_stride, this->dest_width);
+
 	dy += this->step_dy;
 	_dst += this->rgb_stride;
       }
-    
+
       if (height <= 0)
 	break;
 
@@ -3017,7 +3017,7 @@ static void yuy22rgb_c_gray (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
       dy &= 32767;
     }
   } else {
-    for (height = this->next_slice (this, &_dst); --height >= 0; ) { 
+    for (height = this->next_slice (this, &_dst); --height >= 0; ) {
       dst = _dst;
       y = _p;
       for (width = this->source_width; --width >= 0; ) {
@@ -3038,25 +3038,25 @@ static void yuy22rgb_c_palette (yuv2rgb_t *this, uint8_t * _dst, uint8_t * _p)
   uint8_t * dst_1;
   int width, height;
   int dy;
-  
+
   scale_line_4 (_p+1, this->u_buffer,
 		this->dest_width >> 1, this->step_dx);
   scale_line_4 (_p+3, this->v_buffer,
 		this->dest_width >> 1, this->step_dx);
   scale_line_2 (_p, this->y_buffer,
 		this->dest_width, this->step_dx);
-    
+
   dy = 0;
   height = this->next_slice (this, &_dst);
-  
+
   for (;;) {
     dst_1 = _dst;
     py_1  = this->y_buffer;
     pu    = this->u_buffer;
     pv    = this->v_buffer;
-    
+
     width = this->dest_width >> 3;
-    
+
     do {
       X_RGB(0);
       DST1CMAP(0);
@@ -3176,7 +3176,7 @@ static yuv2rgb_t *yuv2rgb_create_converter (yuv2rgb_factory_t *factory) {
 }
 
 /*
- * factory functions 
+ * factory functions
  */
 
 static void yuv2rgb_factory_dispose (yuv2rgb_factory_t *this) {
@@ -3186,7 +3186,7 @@ static void yuv2rgb_factory_dispose (yuv2rgb_factory_t *this) {
   free (this);
 }
 
-yuv2rgb_factory_t* yuv2rgb_factory_init (int mode, int swapped, 
+yuv2rgb_factory_t* yuv2rgb_factory_init (int mode, int swapped,
 					 uint8_t *cmap) {
 
   yuv2rgb_factory_t *this;

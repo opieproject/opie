@@ -11,7 +11,7 @@ ConfigFile::ConfigFile() : QObject()
 	checkDirectory();
 
 	QDir dir((QString) getenv("HOME") + "/Applications/mail/accounts");
-	QStringList entries = dir.entryList("account-*"); 
+	QStringList entries = dir.entryList("account-*");
 
 	QStringList::Iterator it;
 	for (it = entries.begin(); it != entries.end(); it++) {

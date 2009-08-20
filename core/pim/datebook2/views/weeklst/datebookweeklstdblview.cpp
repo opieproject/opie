@@ -110,9 +110,9 @@ void DateBookWeekLstDblView::setRightEvents(OPimOccurrence::List &ev1,QDate &d, 
 bool DateBookWeekLstDblView::toggleDoubleView(bool how)
 {
     if (rightView) {
-        if (how) 
+        if (how)
             rightView->show();
-        else 
+        else
             rightView->hide();
         return true;
     }

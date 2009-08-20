@@ -376,7 +376,7 @@ bool UserDialog::editUser(const char *username)
     QStringList tempList=accounts->groupStringList.grep(userRegExp);    // Find all entries in the group database, that the user is a member of.
     for(QStringList::Iterator it=tempList.begin(); it!=tempList.end(); ++it)
     {    // Iterate over all of them.
-        owarn << *it << oendl; 
+        owarn << *it << oendl;
         QListViewItemIterator lvit( edituserDialog->groupsListView );    // Compare to all groups.
         for ( ; lvit.current(); ++lvit )
         {
@@ -391,7 +391,7 @@ bool UserDialog::editUser(const char *username)
     tempList=accounts->groupStringList.grep(userRegExp);    // Find all entries in the group database, that the user is a member of.
     for(QStringList::Iterator it=tempList.begin(); it!=tempList.end(); ++it)
     {    // Iterate over all of them.
-        owarn << *it << oendl; 
+        owarn << *it << oendl;
         QListViewItemIterator lvit( edituserDialog->groupsListView );    // Compare to all groups.
         for ( ; lvit.current(); ++lvit )
         {

@@ -241,8 +241,8 @@ void MoveEngine::boardpressed(const int& x,const int& y,Marker& marker,bool non_
         {
           usedice=a;
           dice_value=dice[0];
-         }        
-    }  
+         }
+    }
     if(usedice!=-1)
     {
         move(marker_current,marker_next[usedice],usedice+1);
@@ -370,15 +370,15 @@ int MoveEngine::getPossibleMoves()
     int lastToHomeZone=abs(last_piece[player]-homezone[player]);
     for(int field=0;field<26;field++)
     {
-       
+
         for(int b=0;b<4;b++)
-        {            
+        {
             int dice_tmp=dice[b];
             if(dice[b]!=7 && dice[b]> lastToHomeZone)
               dice_tmp=lastToHomeZone;
 
             int nextfield=(player==1) ? field+dice_tmp : field-dice_tmp;
-           
+
             if(nice_dice)
             {
               if(player==1 && nextfield>homezone[1])
@@ -395,9 +395,9 @@ int MoveEngine::getPossibleMoves()
             {
               continue;
             }
-           
 
-        
+
+
             if(dice[b]!=7 && fieldColor(field)==player )  //player can only move his own pieces
             {
                 if((player==1 && nextfield > homezone[1]) || (player==2 && nextfield < homezone[2]))
@@ -459,7 +459,7 @@ int MoveEngine::getPossibleMoves()
 
 void MoveEngine::move(const int& from, int to, const int& dice)
 {
-    //odebug << "" << player << " moves from " << from << " to " << to << " (" << to-from << ") with dice " << dice << "" << oendl; 
+    //odebug << "" << player << " moves from " << from << " to " << to << " (" << to-from << ") with dice " << dice << "" << oendl;
 
     if(player==1 && to==25)
         to=26;
@@ -507,7 +507,7 @@ void MoveEngine::checkstate()
     //check if pieces are out
     pieces_out[1]=(population[0].total>0) ? true : false;
     pieces_out[2]=(population[25].total<0) ? true : false;
-    
+
     //check if all pieces are in the endzones
     allclear[1]=true;
     allclear[2]=true;
@@ -515,14 +515,14 @@ void MoveEngine::checkstate()
     last_piece[1]=25;
     bool found_last_piece1=false;
     last_piece[2]=0;
-    
+
     for(int a=0;a<26;a++)
     {
         if(a<19 && population[a].total>0)
             allclear[1]=false;
         if(a>6 && population[a].total<0)
             allclear[2]=false;
-            
+
         if(population[a].total>0 && !found_last_piece1)
         {
           last_piece[1]=a;

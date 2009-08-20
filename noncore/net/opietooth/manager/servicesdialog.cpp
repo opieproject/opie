@@ -21,7 +21,7 @@ using namespace OpieTooth;
 
 ServicesDialog::ServicesDialog(const QString& conf,
     QWidget* parent, const char* name, bool modal, WFlags fl) :
-    ServicesDialogBase(parent, name, modal, fl), 
+    ServicesDialogBase(parent, name, modal, fl),
     cfg(conf)
 {
     int i; //just an index
@@ -36,7 +36,7 @@ ServicesDialog::ServicesDialog(const QString& conf,
     dundPersistEdit->setText(cfg.getDunPersistPeriod());
     dundCacheCBox->setChecked(cfg.getDunCache());
     dundCacheEdit->setText(cfg.getDunCachePeriod());
-    for (i = 1; i < 32; i++) 
+    for (i = 1; i < 32; i++)
         dundChannelCBox->insertItem(QString::number(i));
     role = cfg.getDunChannel();
     for (i = 0; i < dundChannelCBox->count(); i++) {
@@ -50,7 +50,7 @@ ServicesDialog::ServicesDialog(const QString& conf,
     dundPPPdCBox->setChecked(cfg.getDunPPPd());
     dundPPPdPathEdit->setText(cfg.getDunPPPdPath());
     dundPPPdOptionsEdit->setText(cfg.getDunPPPdOptions());
-    
+
     pandEnableCBox->setChecked(cfg.getPanEnable());
     pandEncryptCBox->setChecked(cfg.getPanEncrypt());
     pandSecureCBox->setChecked(cfg.getPanSecure());
@@ -99,7 +99,7 @@ void ServicesDialog::accept()
     cfg.setDunPPPdPath(tmp);
     tmp = dundPPPdOptionsEdit->text();
     cfg.setDunPPPdOptions(tmp);
-    
+
     cfg.setPanEnable(pandEnableCBox->isChecked());
     cfg.setPanEncrypt(pandEncryptCBox->isChecked());
     cfg.setPanSecure(pandSecureCBox->isChecked());

@@ -29,7 +29,7 @@ public:
     enum Spacing { Fixed, Proportional };
     static bool hasUnicodeFont();
     static QFont unicodeFont( Spacing );
-    
+
 };
 
 

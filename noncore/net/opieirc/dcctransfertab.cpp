@@ -41,7 +41,7 @@ void DCCTransferTab::remove()
             delete current;
         }
     }
-    
+
     if (m_progressList.count() > 0) {
         int retval = QMessageBox::information( parentWidget() , tr("DCC Transfers in Progress"),
                             tr( "There are transfers in progress. <br>If you close this tab, they will be canceled."
@@ -59,7 +59,7 @@ void DCCTransferTab::remove()
             delete current;
         }
     }
-                                                        
+
     //Remove
     m_parent->killTab(this);
 }
@@ -69,8 +69,8 @@ bool DCCTransferTab::confirm(QWidget *parent, const QString &nickname, const QSt
     int retval = QMessageBox::information(parent, tr("DCC Transfer from %1").arg(nickname),
             tr( "%1 is trying to send you the file %2\n(%3 bytes)").arg(nickname).arg(filename).arg(size),
             tr("&Accept"), tr("&Reject"));
-    
-    return ( 0 == retval);  
+
+    return ( 0 == retval);
 }
 
 void DCCTransferTab::addTransfer(DCCTransfer::Type type, Q_UINT32 ip4Addr, Q_UINT16 port,

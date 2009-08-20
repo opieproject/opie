@@ -11,7 +11,7 @@ class AsDevice : public RuntimeInfo {
 public :
 
     AsDevice( ANetNodeInstance * NNI ) :
-        RuntimeInfo( NNI ) { 
+        RuntimeInfo( NNI ) {
       AssignedInterface = 0;
     }
 

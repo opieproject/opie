@@ -2,19 +2,19 @@
  *
  * librsync -- the library for network deltas
  * $Id: scoop.c,v 1.1 2002-01-25 22:15:09 kergoth Exp $
- * 
+ *
  * Copyright (C) 2000, 2001 by Martin Pool <mbp@samba.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
  * as published by the Free Software Foundation; either version 2.1 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -54,10 +54,10 @@
 
 
                               /*
-                               | To walk on water you've gotta sink 
+                               | To walk on water you've gotta sink
                                | in the ice.
                                |   -- Shihad, `The General Electric'.
-                               */ 
+                               */
 
 #include <config_rsync.h>
 
@@ -142,12 +142,12 @@ void rs_scoop_advance(rs_job_t *job, size_t len)
      * at them all at the same time. */
     if (job->scoop_avail) {
         /* reading from the scoop buffer */
-         rs_trace("advance over %d bytes from scoop", len); 
+         rs_trace("advance over %d bytes from scoop", len);
         assert(len <= job->scoop_avail);
         job->scoop_avail -= len;
         job->scoop_next += len;
     } else {
-         rs_trace("advance over %d bytes from input buffer", len); 
+         rs_trace("advance over %d bytes from input buffer", len);
         assert(len <= stream->avail_in);
         stream->avail_in -= len;
         stream->next_in += len;
@@ -173,7 +173,7 @@ rs_result rs_scoop_readahead(rs_job_t *job, size_t len, void **ptr)
 {
     rs_buffers_t *stream = job->stream;
     rs_job_check(job);
-    
+
     if (job->scoop_avail >= len) {
         /* We have enough data queued to satisfy the request,
          * so go straight from the scoop buffer. */
@@ -253,7 +253,7 @@ rs_result rs_scoop_read(rs_job_t *job, size_t len, void **ptr)
 rs_result rs_scoop_read_rest(rs_job_t *job, size_t *len, void **ptr)
 {
     rs_buffers_t *stream = job->stream;
-    
+
     *len = job->scoop_avail + stream->avail_in;
 
     return rs_scoop_read(job, *len, ptr);

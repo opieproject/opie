@@ -176,13 +176,13 @@ bool Interface::refresh(){
   QString fileName = QString("/tmp/%1_ifconfig_info").arg(this->name());
   int ret = system(QString("LANG=C %1 %2 > %3").arg(IFCONFIG).arg(this->name()).arg(fileName).latin1());
   if(ret != 0){
-    odebug << QString("Interface: Ifconfig return value: %1, is not 0").arg(ret).latin1() << oendl; 
+    odebug << QString("Interface: Ifconfig return value: %1, is not 0").arg(ret).latin1() << oendl;
     return false;
   }
 
   QFile file(fileName);
   if (!file.open(IO_ReadOnly)){
-    odebug << QString("Interface: Can't open file: %1").arg(fileName).latin1() << oendl; 
+    odebug << QString("Interface: Can't open file: %1").arg(fileName).latin1() << oendl;
     return false;
   }
 
@@ -240,7 +240,7 @@ bool Interface::refresh(){
 
   file.setName(dhcpFile);
   if (!file.open(IO_ReadOnly)){
-    odebug << QString("Interface: Can't open file: %1").arg(dhcpFile).latin1() << oendl; 
+    odebug << QString("Interface: Can't open file: %1").arg(dhcpFile).latin1() << oendl;
     return false;
   }
 
@@ -259,14 +259,14 @@ bool Interface::refresh(){
       renewalTime = line.mid(12, line.length()).toInt();
   }
   file.close();
-  //odebug << QString("Interface: leaseTime: %1").arg(leaseTime).latin1() << oendl; 
-  //odebug << QString("Interface: renewalTime: %1").arg(renewalTime).latin1() << oendl; 
+  //odebug << QString("Interface: leaseTime: %1").arg(leaseTime).latin1() << oendl;
+  //odebug << QString("Interface: renewalTime: %1").arg(renewalTime).latin1() << oendl;
 
   // Get the pid of the deamond
   dhcpFile = (QString(dhcpDirectory+"/dhcpcd-%1.pid").arg(this->name()));
   file.setName(dhcpFile);
   if (!file.open(IO_ReadOnly)){
-    odebug << QString("Interface: Can't open file: %1").arg(dhcpFile).latin1() << oendl; 
+    odebug << QString("Interface: Can't open file: %1").arg(dhcpFile).latin1() << oendl;
     return false;
   }
 
@@ -279,7 +279,7 @@ bool Interface::refresh(){
   file.close();
 
   if( pid == -1){
-    odebug << "Interface: Could not get pid of dhcpc deamon." << oendl; 
+    odebug << "Interface: Could not get pid of dhcpc deamon." << oendl;
     return false;
   }
 
@@ -288,7 +288,7 @@ bool Interface::refresh(){
   file.setName(fileName);
   stream.setDevice( &file );
   if (!file.open(IO_ReadOnly)){
-    odebug << QString("Interface: Can't open file: %1").arg(fileName).latin1() << oendl; 
+    odebug << QString("Interface: Can't open file: %1").arg(fileName).latin1() << oendl;
     return false;
   }
   while ( !stream.eof() ) {
@@ -317,12 +317,12 @@ bool Interface::refresh(){
     f.close();
   }
   else{
-    odebug << "Interface: Can't open /proc/uptime to retrive uptime." << oendl; 
+    odebug << "Interface: Can't open /proc/uptime to retrive uptime." << oendl;
     return false;
   }
 
   datetime = datetime.addSecs(time);
-  //odebug << QString("Interface: %1 %2").arg(datetime.toString()).arg(pid).latin1() << oendl; 
+  //odebug << QString("Interface: %1 %2").arg(datetime.toString()).arg(pid).latin1() << oendl;
 
   // Calculate the start and renew times
   leaseObtained	= datetime.toString();

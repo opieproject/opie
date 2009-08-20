@@ -186,7 +186,7 @@ void SIMpad::initButtons()
  * one can toggle power of serial, irda, dect circuits
  * change the video driver and display status and
  * many more things.
- * 
+ *
  * FIXME: I only implemented display_on maybe someone want to
  * have other parts available?
  */
@@ -197,7 +197,7 @@ void SIMpad::initButtons()
 //SIMpad touchscreen backlight strength control
 #define SIMPAD_BACKLIGHT_CONTROL "/sys/class/backlight/simpad-mq200-bl/brightness"
 
-/* 
+/*
  * Since LED1 is for charging only and LED2 is used by to show power on/off and we should not change the
  * LEDs I decided to remove this code from odevice_simpad.cpp. If you still want to get the led states
  * you will need to use /sys/class/simpad/latch_cs3/ for it.
@@ -236,7 +236,7 @@ bool SIMpad::setDisplayStatus ( bool on )
     bool res = false;
     int fd;
     int status=static_cast<int> (on);
-    
+
     if (( fd = ::open ( SIMPAD_DISPLAY_ON_CONTROLL, O_WRONLY )) >= 0 ) {
         QCString str = QFile::encodeName( QString::number(status));
         res = ( ::write(fd, str, str.length()) != -1 );

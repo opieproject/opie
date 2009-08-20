@@ -19,13 +19,13 @@ static char * ActionName[] = {
     "Down"
 };
 
-static char * StateName[] = { 
-    "Unchecked", 
-    "Unknown", 
-    "Unavailable", 
-    "Disabled", 
-    "Off", 
-    "Available", 
+static char * StateName[] = {
+    "Unchecked",
+    "Unknown",
+    "Unavailable",
+    "Disabled",
+    "Off",
+    "Available",
     "IsUp"
 };
 
@@ -88,7 +88,7 @@ bool ANetNode::isToplevel( void ) {
     return 0;
 }
 
-bool ANetNode::openFile( SystemFile & SF, 
+bool ANetNode::openFile( SystemFile & SF,
                          ANetNodeInstance * NNI,
                          QStringList & SL ) {
     return (NNI ) ? NNI->openFile( SF, SL ) : 0 ;
@@ -188,7 +188,7 @@ NetworkSetup::NetworkSetup( QTextStream & TS, bool & Dangling ) :
           append( NNI );
         } else {
           // could not find a node type -> collection invalid
-          Log(( "Node %s missing -> NetworkSetup dangling\n", 
+          Log(( "Node %s missing -> NetworkSetup dangling\n",
                       N.latin1() ));
           // create placeholder for this dangling NNI
           NNI = new ErrorNNI( N );
@@ -197,7 +197,7 @@ NetworkSetup::NetworkSetup( QTextStream & TS, bool & Dangling ) :
       }
     } while( 1 );
 
-    Log(( "Profile number %s : %d nodes\n", 
+    Log(( "Profile number %s : %d nodes\n",
           Name.latin1(), count() ));
 }
 
@@ -219,7 +219,7 @@ void NetworkSetup::save( QTextStream & TS ) {
     TS << "name=" << quote( Name ) << endl;
     TS << "number=" << number() << endl;
     ANetNodeInstance * NNI;
-    for( QListIterator<ANetNodeInstance> it(*this); 
+    for( QListIterator<ANetNodeInstance> it(*this);
          it.current();
          ++it ) {
       NNI = it.current();
@@ -231,7 +231,7 @@ void NetworkSetup::save( QTextStream & TS ) {
 
 ANetNodeInstance * NetworkSetup::getToplevel( void ) {
     ANetNodeInstance * NNI = 0;
-    for( QListIterator<ANetNodeInstance> it(*this); 
+    for( QListIterator<ANetNodeInstance> it(*this);
          it.current();
          ++it ) {
       NNI = it.current();
@@ -244,7 +244,7 @@ ANetNodeInstance * NetworkSetup::getToplevel( void ) {
 
 ANetNodeInstance * NetworkSetup::findByName( const QString & S ) {
     ANetNodeInstance * NNI = 0;
-    for( QListIterator<ANetNodeInstance> it(*this); 
+    for( QListIterator<ANetNodeInstance> it(*this);
          it.current();
          ++it ) {
       NNI = it.current();
@@ -261,7 +261,7 @@ ANetNodeInstance * NetworkSetup::findNext( ANetNodeInstance * NNI ) {
     if( ! NNI )
       getToplevel();
 
-    for( QListIterator<ANetNodeInstance> it(*this); 
+    for( QListIterator<ANetNodeInstance> it(*this);
          it.current();
          ++it ) {
       NNNI = it.current();
@@ -273,7 +273,7 @@ ANetNodeInstance * NetworkSetup::findNext( ANetNodeInstance * NNI ) {
     return 0; // no more next
 }
 
-int NetworkSetup::compareItems( QCollection::Item I1, 
+int NetworkSetup::compareItems( QCollection::Item I1,
                                   QCollection::Item I2 ) {
     ANetNodeInstance * NNI1, * NNI2;
     NNI1 = (ANetNodeInstance *)I1;
@@ -283,27 +283,27 @@ int NetworkSetup::compareItems( QCollection::Item I1,
 
 static char * State2PixmapTbl[] = {
     "NULL", // Unchecked : no pixmap
-    "check", // Unknown 
-    "delete", // unavailable 
-    "disabled", // disabled 
-    "off", // off 
-    "disconnected", // available 
-    "connected" // up 
+    "check", // Unknown
+    "delete", // unavailable
+    "disabled", // disabled
+    "off", // off
+    "disconnected", // available
+    "connected" // up
 };
 
 QPixmap NetworkSetup::devicePixmap( void ) {
     QPixmap pm = NSResources->getPixmap(
             getToplevel()->nextNode()->pixmapName()+"-large");
 
-    QPixmap Mini = NSResources->getPixmap( 
+    QPixmap Mini = NSResources->getPixmap(
             device()->netNode()->pixmapName() );
 
     if( pm.isNull() || Mini.isNull() )
 	return Resource::loadPixmap("Unknown");
 
     QPainter painter( &pm );
-    painter.drawPixmap( pm.width()-Mini.width(), 
-                        pm.height()-Mini.height(), 
+    painter.drawPixmap( pm.width()-Mini.width(),
+                        pm.height()-Mini.height(),
                         Mini );
     pm.setMask( pm.createHeuristicMask( TRUE ) );
     return pm;
@@ -335,7 +335,7 @@ QString NetworkSetup::stateName( State_t S) {
 }
 
 void NetworkSetup::reassign( void ) {
-    for( QListIterator<ANetNodeInstance> it(*this); 
+    for( QListIterator<ANetNodeInstance> it(*this);
          it.current();
          ++it ) {
       it.current()->setNetworkSetup( this );
@@ -351,7 +351,7 @@ bool NetworkSetup::hasDataForFile( SystemFile & S ) {
 }
 
 ANetNodeInstance * NetworkSetup::firstWithDataForFile( SystemFile & S ) {
-    for( QListIterator<ANetNodeInstance> it(*this); 
+    for( QListIterator<ANetNodeInstance> it(*this);
          it.current();
          ++it ) {
       if( it.current()->hasDataForFile( S ) ) {
@@ -368,11 +368,11 @@ State_t NetworkSetup::state( bool Update ) {
       // collect states of all nodes until with get the 'higest'
       // state possible
 
-      Log(( "NetworkSetup %s state %s\n", 
+      Log(( "NetworkSetup %s state %s\n",
                 Name.latin1(), StateName[CurrentState] ));
 
       CurrentState = Unknown;
-      for( QListIterator<ANetNodeInstance> it(*this); 
+      for( QListIterator<ANetNodeInstance> it(*this);
            it.current();
            ++it ) {
         Log(( "-> Detect %s\n", it.current()->name() ));
@@ -482,7 +482,7 @@ QString NetworkSetup::setState( Action_t A, bool Force ) {
     }
 
     // send actions to all nodes
-    Log(( "Action %s requires %d steps\n", 
+    Log(( "Action %s requires %d steps\n",
           ActionName[A], NoOfActions ));
 
     for( int i = 0 ; i < NoOfActions; i ++ ) {
@@ -510,8 +510,8 @@ void NetworkSetup::copyFrom( const NetworkSetup & N ) {
 //
 //
 
-QString RuntimeInfo::setState( NetworkSetup * NC, 
-                               Action_t A, 
+QString RuntimeInfo::setState( NetworkSetup * NC,
+                               Action_t A,
                                bool Force ) {
     QString M;
     RuntimeInfo * Deeper = nextNode();
@@ -519,7 +519,7 @@ QString RuntimeInfo::setState( NetworkSetup * NC,
     if( Deeper ) {
       // first go deeper
       M = Deeper->setState( NC, A, Force );
-      if( ! M.isEmpty() ) 
+      if( ! M.isEmpty() )
         return M;
     }
 

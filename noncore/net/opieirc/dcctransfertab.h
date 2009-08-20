@@ -23,10 +23,10 @@ public:
     virtual void appendText(QString){};
     virtual void remove();
     virtual void settingsChanged() {};
-    void addTransfer(DCCTransfer::Type type, Q_UINT32 ip4Addr, 
+    void addTransfer(DCCTransfer::Type type, Q_UINT32 ip4Addr,
             Q_UINT16 port, const QString &filename,
             const QString &nickname, unsigned int size);
-    static bool confirm(QWidget *parent = 0, 
+    static bool confirm(QWidget *parent = 0,
             const QString &nickname = QString::null,
             const QString &filename = QString::null,
             unsigned int size = 0);
@@ -34,7 +34,7 @@ private:
     QHBox *m_hbox;
     QList <DCCProgress> m_progressList;
     MainWindow *m_parent;
-      
+
 };
 
 #endif

@@ -21,7 +21,7 @@ u_int16_t *rpos_min = (u_int16_t *)
 "\x01\x03\x01\x04\x01\x06\x01\x08\x01\x0c\x01\x10\x01\x18\x01\x20\x01\x30\x01"
 "\x40\x01\x60";
 
-u_int8_t *rpos_delta = (u_int8_t *) 
+u_int8_t *rpos_delta = (u_int8_t *)
   "\x00\x00\x00\x00\x01\x01\x02\x02\x03\x03\x04\x04\x05\x05\x06\x06\x07\x07"
 "\x08\x08\x09\x09\x0a\x0a\x0b\x0b\x0c\x0c\x0d\x0d";
 
@@ -31,7 +31,7 @@ int iSilo::code2tree(struct s_huffman *h) {
   struct s_tree *t, *tmp;
   u_int32_t i;
   int j, b;
-  
+
   t = new s_tree();
   h->tree = t;
   if (t == NULL) return -1;
@@ -47,7 +47,7 @@ int iSilo::code2tree(struct s_huffman *h) {
 	memset(tmp->branch[b], 0, sizeof(struct s_tree));
 	tmp->value = (u_int32_t)-1;
       }
-      tmp = tmp->branch[b]; 
+      tmp = tmp->branch[b];
     }
     if (h->size[i] > 0) tmp->value = i;
   }
@@ -61,7 +61,7 @@ u_int32_t iSilo::swap_bits(u_int32_t n, int num) {
   n = ((n >>  8) & 0x00ff00ff) | ((n <<  8) & 0xff00ff00);
   n = ((n >> 16) & 0x0000ffff) | ((n << 16) & 0xffff0000);
   n >>= (32 - num);
-  return(n);                  
+  return(n);
 }
 
 
@@ -69,14 +69,14 @@ u_int32_t *iSilo::huffman_get(struct s_huffman *h)
 {
   int b;
   struct s_tree *t = h->tree;
-  
+
   while (t->value == -1) {
     b = get_bits(1);
     if (t->branch[b] == NULL) {
       return(NULL);
     }
     t = t->branch[b];
-  } 
+  }
   return (&t->value);
 }
 
@@ -85,21 +85,21 @@ int iSilo::size2code(struct s_huffman *h) {
   u_int16_t sc, c;
   u_int32_t j, k, l;
   int skip;
-  
+
   for (l = 0; l < h->num; l++) {
     if (h->size[l] > max) max = h->size[l];
   }
-  
+
   for (i = 1; i <= max; i++) {
     sc = 0;
-    c = 0; 
+    c = 0;
     for (j = 0; j < h->num; j++) {
       if (h->size[j] == i) {
 	do {
 	  skip = 0;
 	  for (k = 0; k < h->num; k++) {
 	    sk = h->size[k];
-            
+
 	    if ((sk < i) && (sk != 0) && !((h->code[k] ^ c) & ((1 << sk)-1))) {
 	      if ((c + 1) == (1 << i)) {
 		return -1;
@@ -115,8 +115,8 @@ int iSilo::size2code(struct s_huffman *h) {
 	sc++;
 	c = swap_bits(sc, i);
       }
-    }  
-  }  
+    }
+  }
   return(0);
 }
 
@@ -158,20 +158,20 @@ int iSilo::read_size(struct s_huffman *prev, struct s_huffman *h) {
   u_int32_t *j;
   u_int32_t i, n;
   int s_ok = 0, ls = 0;
-  
+
   for (i = 0;i < h->num;) {
     j = huffman_get(prev);
     if (j == NULL)
       return(-1);
     switch(*j) {
-    case HM_MEDIUM: 
-      n = get_swapped(3) + 3; /* n bytes of 0 */ 
-      memset(h->size + i, 0, n); 
+    case HM_MEDIUM:
+      n = get_swapped(3) + 3; /* n bytes of 0 */
+      memset(h->size + i, 0, n);
       i += n;
       break;
     case HM_LONG:
       n = get_swapped(7) + 11; /* n bytes of 0 */
-      memset(h->size + i, 0, n); 
+      memset(h->size + i, 0, n);
       i += n;
       break;
     case HM_SHORT:
@@ -179,7 +179,7 @@ int iSilo::read_size(struct s_huffman *prev, struct s_huffman *h) {
 	return(-1);
       }
       n = get_swapped(2) + 3; /* n+1 bytes of ls */
-      memset(h->size + i, ls, n); 
+      memset(h->size + i, ls, n);
       i += n;
       break;
     default:
@@ -208,7 +208,7 @@ void iSilo::mymemcpy(u_int8_t *dst, u_int8_t *src, u_int32_t num) {
 int iSilo::read_tree(struct s_huffman *prev, struct s_huffman *curr) {
   if (read_size(prev, curr) == -1)
     return(-1);
-  if (size2code(curr) == -1) 
+  if (size2code(curr) == -1)
     return(-1);
   if (code2tree(curr) == -1)
     return(-1);
@@ -221,29 +221,29 @@ bool iSilo::reset_trees()
   kill_huffman(lz);
   kill_huffman(text);
   kill_huffman(master);
-    
+
   master = huffman_create(19);
   text = huffman_create(get_swapped(5) + 257);
   lz = huffman_create(get_swapped(5) + 1);
   int rdmax = get_swapped(4) + 4;
-  
-  for (int i = 0; i < rdmax; i++) 
+
+  for (int i = 0; i < rdmax; i++)
     {
       master->size[rodata[i]] = get_swapped(3);
     }
-    
+
   if (size2code(master) == -1) {
     qDebug("size2code(master) error: size-table is incompatible");
     return false;
   }
-    
+
   code2tree(master);
-    
+
   if (read_tree(master, text) == -1) {
     qDebug("read_tree() failed (format incorrect?)");
     return false;
   }
-    
+
   if (read_tree(master, lz) == -1) {
     qDebug("read_tree() failed (format incorrect?)");
     return false;;
@@ -273,10 +273,10 @@ u_int32_t iSilo::get_bits(int num) {
     pos--;
     result <<= 1;
     result |= (ntohl(buf[255 - (pos/32)]) >> (31-(pos % 32))) & 1;
-  }  
+  }
   return(result);
 }
-u_int32_t iSilo::get_swapped(int num) { 
+u_int32_t iSilo::get_swapped(int num) {
   return(swap_bits(get_bits(num),num));
 }
 int iSilo::read_text() {
@@ -284,7 +284,7 @@ int iSilo::read_text() {
   u_int32_t k, l, bp, idx;
   for (bp = 0; bp < buffer_size;) {
     j = huffman_get(text);
-    if (j == NULL) 
+    if (j == NULL)
       return(-1);
     if (*j == 256) {
       break;
@@ -306,7 +306,7 @@ int iSilo::read_text() {
 	memcpy(buffer + bp, buffer + bp - l, k);
       } else {
 	mymemcpy(buffer + bp, buffer + bp - l, k);
-      } 
+      }
       bp += k;
     } else {
       buffer[bp] = *j;
@@ -353,7 +353,7 @@ bool iSilo::process_record()
 	  get_bits(0);
 	  bsize = read_text();
 	} /* end of text processing */
-    }    
+    }
   return true;
 }
 iSilo::~iSilo()

@@ -20,7 +20,7 @@ using namespace OpieTooth;
 using namespace Opie::Core;
 using namespace Opie::Ui;
 using namespace Opie::Core;
-ObexDialog::ObexDialog(const QString& device, int port, 
+ObexDialog::ObexDialog(const QString& device, int port,
     QWidget* parent,  const char* name, bool modal, WFlags fl)
     : QDialog( parent, name, modal, fl ) {
 
@@ -39,10 +39,10 @@ ObexDialog::ObexDialog(const QString& device, int port,
 
     statLine = new QLabel(this);
     statLine->setText( tr("Ready") );
-  
+
     status = new QMultiLineEdit(this);
     status->setReadOnly(true);
-    
+
     cmdLine = new QLineEdit( this );
 
     QPushButton *browserButton;

@@ -14,9 +14,9 @@
 #include <qslider.h>
 #include <qlayout.h>
 
-/* 
- *  Constructs a SettingsDialogBase which is a child of 'parent', with the 
- *  name 'name' and widget flags set to 'f' 
+/*
+ *  Constructs a SettingsDialogBase which is a child of 'parent', with the
+ *  name 'name' and widget flags set to 'f'
  *
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  TRUE to construct a modal dialog.
@@ -26,9 +26,9 @@ SettingsDialogBase::SettingsDialogBase( QWidget* parent,  const char* name, bool
 {
     if ( !name )
         setName( "SettingsDialogBase" );
-    resize( 246, 201 ); 
+    resize( 246, 201 );
     setCaption( tr( "Preferences" ) );
-    SettingsDialogBaseLayout = new QVBoxLayout( this ); 
+    SettingsDialogBaseLayout = new QVBoxLayout( this );
     SettingsDialogBaseLayout->setSpacing( 6 );
     SettingsDialogBaseLayout->setMargin( 6 );
 
@@ -42,7 +42,7 @@ SettingsDialogBase::SettingsDialogBase( QWidget* parent,  const char* name, bool
     GroupBox1Layout->setSpacing( 6 );
     GroupBox1Layout->setMargin( 11 );
 
-    Layout3 = new QGridLayout; 
+    Layout3 = new QGridLayout;
     Layout3->setSpacing( 6 );
     Layout3->setMargin( 0 );
 
@@ -89,10 +89,10 @@ SettingsDialogBase::SettingsDialogBase( QWidget* parent,  const char* name, bool
 //    QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
 //    layout->addItem( spacer, 10, 0 );
 
-    
+
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 SettingsDialogBase::~SettingsDialogBase()

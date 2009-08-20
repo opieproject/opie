@@ -2,19 +2,19 @@
  *
  * librsync -- the library for network deltas
  * $Id: patch.c,v 1.1 2002-01-25 22:15:09 kergoth Exp $
- * 
+ *
  * Copyright (C) 2000, 2001 by Martin Pool <mbp@samba.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
  * as published by the Free Software Foundation; either version 2.1 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -61,12 +61,12 @@ static rs_result rs_patch_s_copying(rs_job_t *);
 static rs_result rs_patch_s_cmdbyte(rs_job_t *job)
 {
     rs_result result;
-        
+
     if ((result = rs_suck_byte(job, &job->op)) != RS_DONE)
         return result;
 
     job->cmd = &rs_prototab[job->op];
-        
+
     rs_trace("got command byte 0x%02x (%s), len_1=%.0f", job->op,
              rs_op_kind_name(job->cmd->kind),
              (double) job->cmd->len_1);
@@ -126,7 +126,7 @@ static rs_result rs_patch_s_run(rs_job_t *job)
     case RS_KIND_LITERAL:
         job->statefn = rs_patch_s_literal;
         return RS_RUNNING;
-        
+
     case RS_KIND_END:
         return RS_DONE;
         /* so we exit here; trying to continue causes an error */
@@ -148,7 +148,7 @@ static rs_result rs_patch_s_run(rs_job_t *job)
 static rs_result rs_patch_s_literal(rs_job_t *job)
 {
     rs_long_t   len = job->param1;
-    
+
     rs_trace("LITERAL(len=%.0f)", (double) len);
 
     job->stats.lit_cmds++;
@@ -170,7 +170,7 @@ static rs_result rs_patch_s_copy(rs_job_t *job)
 
     where = job->param1;
     len = job->param2;
-        
+
     rs_trace("COPY(where=%.0f, len=%.0f)", (double) where, (double) len);
 
     if (len < 0) {
@@ -209,7 +209,7 @@ static rs_result rs_patch_s_copying(rs_job_t *job)
     rs_buffers_t    *buffs = job->stream;
 
     len = job->basis_len;
-    
+
     /* copy only as much as will fit in the output buffer, so that we
      * don't have to block or store the input. */
     if (len > buffs->avail_out)
@@ -222,13 +222,13 @@ static rs_result rs_patch_s_copying(rs_job_t *job)
              (double) len, (double) job->basis_pos);
 
     ptr = buf = rs_alloc(len, "basis buffer");
-    
+
     result = (job->copy_cb)(job->copy_arg, job->basis_pos, &len, &ptr);
     if (result != RS_DONE)
         return result;
     else
         rs_trace("copy callback returned %s", rs_strerror(result));
-    
+
     rs_trace("got %.0f bytes back from basis callback", (double) len);
 
     memcpy(buffs->next_out, ptr, len);
@@ -244,7 +244,7 @@ static rs_result rs_patch_s_copying(rs_job_t *job)
     if (!job->basis_len) {
         /* Done! */
         job->statefn = rs_patch_s_cmdbyte;
-    } 
+    }
 
     return RS_RUNNING;
 }
@@ -258,7 +258,7 @@ static rs_result rs_patch_s_header(rs_job_t *job)
     int       v;
     rs_result result;
 
-        
+
     if ((result = rs_suck_n4(job, &v)) != RS_DONE)
         return result;
 
@@ -307,7 +307,7 @@ rs_job_t *
 rs_patch_begin(rs_copy_cb *copy_cb, void *copy_arg)
 {
     rs_job_t *job = rs_job_new("patch", rs_patch_s_header);
-        
+
     job->copy_cb = copy_cb;
     job->copy_arg = copy_arg;
 

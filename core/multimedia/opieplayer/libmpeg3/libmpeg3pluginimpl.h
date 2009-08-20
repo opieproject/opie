@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef LIBMPEG3_PLUGIN_IMPL_H 
+#ifndef LIBMPEG3_PLUGIN_IMPL_H
 #define LIBMPEG3_PLUGIN_IMPL_H
 
 #include <qpe/mediaplayerplugininterface.h>

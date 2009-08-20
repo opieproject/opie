@@ -450,9 +450,9 @@ QString TimeString::longNumberDateString( const QDate &d, DateFormat dtf )
     Returns date/time \a dt as a string,
       showing year, month, date, hours, minutes, and seconds.
         \a len determines the length of the resulting string.
-        
+
           The format, including order depends on the user's settings.
-          
+
             First availability: Qtopia 1.6
 */
 //QString TimeString::localYMDHMS( const QDateTime &dt, Length len )

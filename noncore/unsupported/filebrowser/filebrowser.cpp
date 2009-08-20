@@ -181,8 +181,8 @@ bool FileItem::rename( const QString & name )
 QPixmap FileItem::drawThumbnail(const QFileInfo &file) {
 
   /*
-   * this thing is sloooooow, and it also doesn't load 
-   * dynamicly (like a web browser). if anyone knows how to 
+   * this thing is sloooooow, and it also doesn't load
+   * dynamicly (like a web browser). if anyone knows how to
    * do that, please do!
    */
   QString cacheDir = "/tmp/filebrowserThumbnailCache";
@@ -198,9 +198,9 @@ QPixmap FileItem::drawThumbnail(const QFileInfo &file) {
     QImage image (file.filePath());
 
     // if inside of cache dir, don't render thumbnails! recursive error!
-    if (image.isNull() || file.filePath().contains(QRegExp("^" + cacheDir))) { 
+    if (image.isNull() || file.filePath().contains(QRegExp("^" + cacheDir))) {
       DocLnk doc (file.filePath());
-      return doc.pixmap(); 
+      return doc.pixmap();
     }
     Config cfg("Filebrowser");
     cfg.setGroup("View");
@@ -233,7 +233,7 @@ QPixmap FileItem::drawThumbnail(const QFileInfo &file) {
 //  FileView
 //
 FileView::FileView( const QString & dir, QWidget * parent,
-          const char * name, 
+          const char * name,
           bool hidden, bool symlinks, bool thumbnails )
     : QListView( parent, name ),
       menuTimer( this ),
@@ -295,7 +295,7 @@ void FileView::setDir( const QString & dir )
 
 void FileView::generateDir( const QString & dir )
 {
-  if(menuKeepsOpen){    
+  if(menuKeepsOpen){
     cancelMenuTimer();
     }
   QDir d( dir );
@@ -310,7 +310,7 @@ void FileView::generateDir( const QString & dir )
     d.setFilter( QDir::Dirs | QDir::Files |QDir::Hidden | QDir::All);
 
      d.setSorting( QDir::Name | QDir::DirsFirst | QDir::IgnoreCase |  QDir::Reversed );
-        
+
     const QFileInfoList * list = d.entryInfoList();
     QFileInfoListIterator it( *list );
     QFileInfo *fi;
@@ -345,7 +345,7 @@ void FileView::generateDir( const QString & dir )
     ++fileCount;
   }
 
-  if (showThumbnails) { 
+  if (showThumbnails) {
     thumbProgress->close();
   }
     emit dirChanged();
@@ -528,7 +528,7 @@ void FileView::cut()
     QString cmd, dest, basename, cd = "/tmp/qpemoving";
   QStringList newflist;
   newflist.clear();
-  
+
   cmd = "rm -rf " + cd;
   system ( (const char *) cmd );
   cmd = "mkdir " + cd;
@@ -536,9 +536,9 @@ void FileView::cut()
 
 // get the names of the files to cut
     FileItem * item;
- 
+
     if((item = (FileItem *) firstChild()) == 0) return;
- 
+
     flist.clear();
     while( item ){
         if( item->isSelected() /*&& !item->isDir()*/ ){
@@ -550,14 +550,14 @@ void FileView::cut()
 // move these files into a tmp dir
     for ( QStringList::Iterator it = flist.begin(); it != flist.end(); ++it ) {
         basename = (*it).mid((*it).findRev("/") + 1, (*it).length());
- 
+
         dest = cd + "/" + basename;
 
     newflist += dest;
- 
+
         cmd = "/bin/mv -f \"" + (*it) +"\" " + "\"" + dest + "\"";
         err = system( (const char *) cmd );
- 
+
         if ( err != 0 ) {
             QMessageBox::warning( this, tr("Cut file"), tr("Cut failed!"),
                                   tr("Ok") );
@@ -566,7 +566,7 @@ void FileView::cut()
             updateDir();
             QListViewItem * im = firstChild();
             basename = dest.mid( dest.findRev("/") + 1, dest.length() );
- 
+
             while( im ){
                 if( im->text(0) == basename ){
                     setCurrentItem( im );
@@ -668,7 +668,7 @@ void FileView::itemClicked( QListViewItem * i)
 
 void FileView::itemDblClicked( QListViewItem * i)
 {
-  if(menuKeepsOpen){    
+  if(menuKeepsOpen){
     cancelMenuTimer();
   }
 
@@ -704,10 +704,10 @@ void FileView::contentsMousePressEvent( QMouseEvent * e )
 void FileView::contentsMouseReleaseEvent( QMouseEvent * e )
 {
     QListView::contentsMouseReleaseEvent( e );
-  if(!menuKeepsOpen){   
+  if(!menuKeepsOpen){
     menuTimer.stop();
   }
-  
+
 }
 
 void FileView::cancelMenuTimer()
@@ -798,7 +798,7 @@ void FileView::setShowThumbnails(bool thumbnails)
 
 void FileView::setMenuKeepsOpen(bool keepOpen)
 {
-  menuKeepsOpen=keepOpen; 
+  menuKeepsOpen=keepOpen;
 }
 
 FileBrowser::FileBrowser( QWidget * parent,
@@ -828,14 +828,14 @@ void FileBrowser::init(const QString & dir)
   bool showSymlinks=(cfg.readEntry("Symlinks","FALSE") == "TRUE");
   bool showThumbnails=(cfg.readEntry("Thumbnails","FALSE") == "TRUE");
 
-  cfg.setGroup("Menu"); 
+  cfg.setGroup("Menu");
   bool menuKeepsOpen=(cfg.readEntry("KeepOpen", "FALSE") == "TRUE");
-  
+
 
     fileView = new FileView( dir, this, 0, showHidden, showSymlinks, showThumbnails );
     fileView->setAllColumnsShowFocus( TRUE );
   fileView->setMenuKeepsOpen(menuKeepsOpen);
-  
+
     setCentralWidget( fileView );
     setToolBarsMovable( FALSE );
 
@@ -859,7 +859,7 @@ void FileBrowser::init(const QString & dir)
     sortMenu->setItemChecked( sortMenu->idAt( 5 ), TRUE );
     sortMenu->setItemChecked( sortMenu->idAt( 0 ), TRUE );
 
-    viewMenu = new QPopupMenu( this);  
+    viewMenu = new QPopupMenu( this);
   viewMenu->insertItem( tr( "Hidden"), this, SLOT( updateShowHidden() ) );
   viewMenu->insertItem( tr( "Symlinks"), this, SLOT( updateShowSymlinks() ) );
   viewMenu->insertItem( tr( "Thumbnails"), this, SLOT( updateShowThumbnails() ) );
@@ -868,7 +868,7 @@ void FileBrowser::init(const QString & dir)
     viewMenu->setItemChecked( viewMenu->idAt( 2 ), showThumbnails );
 
   menuBar->insertItem( tr("View"), viewMenu );
-    
+
     toolBar = new QToolBar( this );
 
     lastAction = new QAction( tr("Previous dir"), Resource::loadIconSet( "back" ),
@@ -1048,7 +1048,7 @@ void FileBrowser::updateShowHidden()
   valShowHidden=!valShowHidden;
     viewMenu->setItemChecked( viewMenu->idAt( 0 ), valShowHidden );
   fileView->setShowHidden(valShowHidden);
-    
+
     Config cfg("Filebrowser");
     cfg.setGroup("View");
     cfg.writeEntry("Hidden",valShowHidden?"TRUE":"FALSE");
@@ -1086,6 +1086,6 @@ void FileBrowser::updateShowThumbnails()
 
 void FileBrowser::cleanUp() {
   QString cmdr = "rm -rf /tmp/filebrowserThumbnailCache";
-//  qDebug("exit");  
+//  qDebug("exit");
   system(cmdr.latin1());
 }

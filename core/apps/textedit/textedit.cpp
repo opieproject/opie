@@ -703,7 +703,7 @@ void TextEdit::resetEditStatus() {
 }
 
 void TextEdit::checkEnableDelete() {
-    if( doc && currentFileName != "" && doc->file().left(5) != "/etc/" ) 
+    if( doc && currentFileName != "" && doc->file().left(5) != "/etc/" )
         deleteAction->setEnabled(true);
     else
         deleteAction->setEnabled(false);
@@ -757,14 +757,14 @@ bool TextEdit::save()
                 // Restore file permissions
                 if(setmode)
                     chmod( file, mode );
-            } 
+            }
             else {
                 odebug << "regular save file" << oendl;
                 QFile f(file);
                 if( f.open(IO_WriteOnly)) {
                     QCString crt = rt.utf8();
                     f.writeBlock(crt,crt.length());
-                } 
+                }
                 else {
                     QMessageBox::message(tr("Text Edit"),tr("Write Failed"));
                     return false;

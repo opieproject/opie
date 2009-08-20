@@ -2,7 +2,7 @@
 #include "bluetoothBNEP_NNI.h"
 #include "bluetoothBNEP_NN.h"
 
-ABluetoothBNEP::ABluetoothBNEP( BluetoothBNEPNetNode * PNN ) : 
+ABluetoothBNEP::ABluetoothBNEP( BluetoothBNEPNetNode * PNN ) :
     ANetNodeInstance( PNN ), Data() {
     GUI = 0;
     RT = 0;
@@ -19,8 +19,8 @@ void ABluetoothBNEP::setSpecificAttribute( QString & S, QString & A ) {
 
 void ABluetoothBNEP::saveSpecificAttribute( QTextStream & TS ) {
       TS  << "allowall=" << Data.AllowAll << endl;
-      for ( QStringList::Iterator it = Data.BDAddress.begin(); 
-            it != Data.BDAddress.end(); 
+      for ( QStringList::Iterator it = Data.BDAddress.begin();
+            it != Data.BDAddress.end();
             ++it ) {
         TS  << "bdaddress=" << (*it) << endl;
       }

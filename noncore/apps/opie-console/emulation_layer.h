@@ -50,7 +50,7 @@ public slots: // signals incoming from Widget
   virtual void onImageSizeChange(int lines, int columns);
   virtual void onHistoryCursorChange(int cursor);
   virtual void onKeyPress(QKeyEvent*);
- 
+
   virtual void clearSelection();
   virtual void onSelectionBegin(const int x, const int y);
   virtual void onSelectionExtend(const int x, const int y);
@@ -64,7 +64,7 @@ public slots: // signals incoming from data source
   void onRcvBlock(const QByteArray&);
 
 signals:
-  
+
   /**
    * will send data, encoded to suit emulation
    */
@@ -91,7 +91,7 @@ public:
    * @deprecated use qbytearray instead
    */
   virtual void sendString(const char*) = 0;
-  
+
   /**
    * sends a string to IOLayer
    * encodes to suit emulation before

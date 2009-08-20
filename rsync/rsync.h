@@ -2,19 +2,19 @@
  *
  * librsync -- library for network deltas
  * $Id: rsync.h,v 1.1 2002-01-25 22:15:09 kergoth Exp $
- * 
+ *
  * Copyright (C) 2000, 2001 by Martin Pool <mbp@samba.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -131,9 +131,9 @@ typedef enum {
     RS_RUNNING  =       2,      /**< Not yet finished or blocked.
                                  * This value should never be returned
                                  * to the caller.  */
-    
+
     RS_TEST_SKIPPED =   77,     /**< Test neither passed or failed. */
-    
+
     RS_IO_ERROR =	100,    /**< Error in file or network IO. */
     RS_SYNTAX_ERROR =   101,    /**< Command line syntax error. */
     RS_MEM_ERROR =	102,    /**< Out of memory. */
@@ -172,7 +172,7 @@ typedef struct rs_stats {
     rs_long_t       lit_bytes;  /**< Number of literal bytes. */
     rs_long_t       lit_cmdbytes; /**< Number of bytes used in literal
                                    * command headers. */
-        
+
     rs_long_t       copy_cmds, copy_bytes, copy_cmdbytes;
     rs_long_t       sig_cmds, sig_bytes;
     int             false_matches;
@@ -206,7 +206,7 @@ typedef struct rs_mdfour {
 typedef unsigned int rs_weak_sum_t;
 typedef unsigned char rs_strong_sum_t[RS_MD4_LENGTH];
 
-void            rs_mdfour(unsigned char *out, void const *in, size_t); 
+void            rs_mdfour(unsigned char *out, void const *in, size_t);
 void            rs_mdfour_begin(/* @out@ */ rs_mdfour_t * md);
 void            rs_mdfour_update(rs_mdfour_t * md, void const *,
 				 size_t n);
@@ -376,7 +376,7 @@ extern int rs_inbuflen, rs_outbuflen;
 void rs_mdfour_file(FILE *in_file, char *result);
 
 rs_result rs_sig_file(FILE *old_file, FILE *sig_file,
-                      size_t block_len, size_t strong_len, rs_stats_t *); 
+                      size_t block_len, size_t strong_len, rs_stats_t *);
 
 rs_result rs_loadsig_file(FILE *, rs_signature_t **, rs_stats_t *);
 

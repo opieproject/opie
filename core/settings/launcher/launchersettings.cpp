@@ -38,7 +38,7 @@
 #include "doctabsettings.h"
 
 using namespace Opie::Ui;
-LauncherSettings::LauncherSettings (QWidget*,const char*, WFlags) 
+LauncherSettings::LauncherSettings (QWidget*,const char*, WFlags)
     : QDialog ( 0, "LauncherSettings", false, WStyle_ContextHelp )
 {
 	setCaption ( tr( "Launcher Settings" ));
@@ -68,7 +68,7 @@ void LauncherSettings::accept ( )
 	m_menu-> accept ( );
 	m_tabs-> accept ( );
 	m_imethods-> accept ( );
-	m_doctab-> accept ( );    
+	m_doctab-> accept ( );
 
 	QDialog::accept ( );
 }

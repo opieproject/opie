@@ -35,7 +35,7 @@ class VolumeApplet;
 
 class VolumeControl : public QFrame {
     Q_OBJECT
-    
+
 public:
     VolumeControl( VolumeApplet *icon, bool showMic = false, QWidget *parent=0, const char *name=0 );
 
@@ -46,27 +46,27 @@ public:
 
 protected:
     virtual void keyPressEvent( QKeyEvent * e );
-    
+
 protected slots:
     void volumeChanged( bool muted );
     void micChanged( bool muted );
-    
+
 private slots:
     void volMoved( int percent );
     void micMoved( int percent );
     void alarmMoved( int percent );
     void bassMoved( int percent );
     void trebleMoved( int percent );
-    
+
     void volMuteToggled( bool );
     void micMuteToggled( bool );
     void alarmSoundToggled( bool );
     void keyClickToggled( bool );
-    void screenTapToggled( bool ); 
+    void screenTapToggled( bool );
 
     void buttonChanged();
     void rateTimerDone();
-    
+
 private:
     void readConfig( bool force = false );
 
@@ -89,7 +89,7 @@ private:
     Opie::Ui::OLedBox *volLed;
     Opie::Ui::OLedBox *micLed;
     Opie::Ui::OLedBox *alarmLed;
-    
+
     QCheckBox *alarmBox;
     QCheckBox *tapBox;
     QCheckBox *keyBox;
@@ -124,7 +124,7 @@ public:
 protected:
     virtual void mousePressEvent( QMouseEvent * );
     virtual void paintEvent( QPaintEvent* );
-    
+
 private:
     QPixmap *m_pixmap;
     VolumeControl *m_dialog;

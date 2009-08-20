@@ -72,8 +72,8 @@ TEScreen::TEScreen(int _lines, int _columns) :
   histCursor(0),
   horzCursor(0)
 {
-//  odebug << "Columns " << columns << "" << oendl; 
-  
+//  odebug << "Columns " << columns << "" << oendl;
+
   image = new ca[lines*columns];
   initTabStops();
 
@@ -553,7 +553,7 @@ ca* TEScreen::getCookedImage()
   if (getMode(MODE_Cursor) && (cuY+(hist.getLines()-histCursor) < lines)) // cursor visible
     reverseRendition(&merged[loc(cuX,cuY+(hist.getLines()-histCursor))]);
   return merged;
- 
+
 }
 
 
@@ -567,7 +567,7 @@ void TEScreen::reset()
   if( !cfg.readBoolEntry("HorzScroll",0) )
     setMode(MODE_Wrap  ); saveMode(MODE_Wrap  );  // wrap at end of margin
 
-    
+
   resetMode(MODE_Origin); saveMode(MODE_Origin);  // position refere to [1,1]
   resetMode(MODE_Insert); saveMode(MODE_Insert);  // overstroke
     setMode(MODE_Cursor);                         // cursor visible
@@ -713,7 +713,7 @@ void TEScreen::scrollUp(int from, int n)
 
 void TEScreen::scrollDown(int from, int n)
 {
-    
+
 //FIXME: make sure `tmargin', `bmargin', `from', `n' is in bounds.
  if (n <= 0) return;
   if (from > bmargin) return;
@@ -1010,7 +1010,7 @@ void TEScreen::setSelExtentXY(const int x, const int y)
 
 QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 {
-  if (sel_begin == -1) 
+  if (sel_begin == -1)
      return QString::null; // Selection got clear while selecting.
 
   int *m;     // buffer to fill.
@@ -1040,7 +1040,7 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
       {
         eol = sel_BR % columns + 1;
       }
-    
+
     while (hX < eol)
       {
         m[d++] = hist.getCell(hY, hX++).c;
@@ -1137,7 +1137,7 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
     {
       qc[i] = m[i];
     }
-  
+
   QString res(qc, d);
 
   delete [] m;
@@ -1207,7 +1207,7 @@ void TEScreen::setHistCursor(int cursor)
 
 void TEScreen::setHorzCursor(int cursor)
 {
-  horzCursor = cursor; 
+  horzCursor = cursor;
 }
 
 int TEScreen::getHistCursor()

@@ -25,19 +25,19 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Audio streams: %d\n", mpeg3_total_astreams(file));
 		for(i = 0; i < mpeg3_total_astreams(file); i++)
 		{
-			fprintf(stderr, "  Stream %d: channels %d sample rate %d total samples %ld\n", 
-				i, 
-				mpeg3_audio_channels(file, i), 
+			fprintf(stderr, "  Stream %d: channels %d sample rate %d total samples %ld\n",
+				i,
+				mpeg3_audio_channels(file, i),
 				mpeg3_sample_rate(file, i),
 				mpeg3_audio_samples(file, i));
 		}
 		fprintf(stderr, "Video streams: %d\n", mpeg3_total_vstreams(file));
 		for(i = 0; i < mpeg3_total_vstreams(file); i++)
 		{
-			fprintf(stderr, "  Stream %d: width %d height %d frame rate %0.3f total frames %ld\n", 
-				i, 
-				mpeg3_video_width(file, i), 
-				mpeg3_video_height(file, i), 
+			fprintf(stderr, "  Stream %d: width %d height %d frame rate %0.3f total frames %ld\n",
+				i,
+				mpeg3_video_width(file, i),
+				mpeg3_video_height(file, i),
 				mpeg3_frame_rate(file, i),
 				mpeg3_video_frames(file, i));
 		}
@@ -62,15 +62,15 @@ fprintf(stderr,"read\n");
   		for(i = 0; i < mpeg3_video_height(file, 0); i++)
   			output_rows[i] = &output[i * mpeg3_video_width(file, 0) * 3];
 // 		mpeg3_set_frame(file, 1000, 0);
- 		result = mpeg3_read_frame(file, 
- 					output_rows, 
- 					0, 
- 					0, 
- 					mpeg3_video_width(file, 0), 
-					mpeg3_video_height(file, 0), 
- 					mpeg3_video_width(file, 0), 
- 					mpeg3_video_height(file, 0), 
-					MPEG3_RGB888, 
+ 		result = mpeg3_read_frame(file,
+ 					output_rows,
+ 					0,
+ 					0,
+ 					mpeg3_video_width(file, 0),
+					mpeg3_video_height(file, 0),
+ 					mpeg3_video_width(file, 0),
+ 					mpeg3_video_height(file, 0),
+					MPEG3_RGB888,
  					0);
 
 		mpeg3_close(file);

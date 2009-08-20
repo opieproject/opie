@@ -27,7 +27,7 @@ using namespace OpieTooth;
  */
 PanPopup::PanPopup( OpieTooth::BTDeviceItem* item ) : QPopupMenu()  {
 
-    owarn << "PanPopup c'tor" << oendl; 
+    owarn << "PanPopup c'tor" << oendl;
 
     m_item = item;
     QAction *a, *b, *c;
@@ -65,7 +65,7 @@ void PanPopup::slotConnect() {
 }
 
 void PanPopup::slotDisconnect()  {
-    if (!m_panconnection) 
+    if (!m_panconnection)
         m_panconnection = new StartPanConnection( m_item->mac() );
     m_panconnection->stop();
     QMessageBox::information(this, tr("Pan Disconnect"), tr("PAN Disconnected"));

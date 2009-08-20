@@ -30,7 +30,7 @@ class Kpacman : public KTMainWindow
 public:
     Kpacman(QWidget *parent = 0, const char *name = 0, WFlags fl = 0);
     static QString appName() { return QString::fromLatin1("kpacman"); }
-    
+
     virtual ~Kpacman();
 
 public slots:

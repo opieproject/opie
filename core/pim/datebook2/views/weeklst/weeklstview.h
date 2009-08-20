@@ -25,7 +25,7 @@ namespace Datebook {
     class WeekLstViewParentWidget: public QWidget {
         Q_OBJECT
     public:
-        WeekLstViewParentWidget( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 ); 
+        WeekLstViewParentWidget( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
         void setScroll( QScrollView *scroll );
         void setHeader( DateBookWeekLstHeader *header );
     protected:

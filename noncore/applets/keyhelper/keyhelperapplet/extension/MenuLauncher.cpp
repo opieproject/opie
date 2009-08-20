@@ -1,11 +1,11 @@
-#include "MenuLauncher.h" 
+#include "MenuLauncher.h"
 extern QWidget* g_Widget;
 
 MenuLauncher::MenuLauncher(const QString& kind) : m_kind(kind)
 {
 	qDebug("MenuLauncher::MenuLauncher()");
 	m_pMenu = m_pTopMenu = NULL;
-	
+
 	m_isShowing = false;
 	m_id = -1;
 

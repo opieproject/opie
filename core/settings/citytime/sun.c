@@ -197,7 +197,7 @@ double
 jtime(t)
 struct tm *t;
 {
-	return (jdate(t) - 0.5) + 
+	return (jdate(t) - 0.5) +
 	   (((long) t->tm_sec) +
 	     60L * (t->tm_min + 60L * t->tm_hour)) / 86400.0;
 }

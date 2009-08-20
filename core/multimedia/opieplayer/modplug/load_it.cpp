@@ -90,7 +90,7 @@ BOOL CSoundFile::ITInstrToMPT(const void *p, INSTRUMENTHEADER *penv, UINT trkver
 			if (note < 128) penv->NoteMap[j] = note+1;
 			else if (note >= 0xFE) penv->NoteMap[j] = note;
 		}
-		// Volume Envelope 
+		// Volume Envelope
 		if (pis->volenv.flags & 1) penv->dwFlags |= ENV_VOLUME;
 		if (pis->volenv.flags & 2) penv->dwFlags |= ENV_VOLLOOP;
 		if (pis->volenv.flags & 4) penv->dwFlags |= ENV_VOLSUSTAIN;
@@ -102,7 +102,7 @@ BOOL CSoundFile::ITInstrToMPT(const void *p, INSTRUMENTHEADER *penv, UINT trkver
 		penv->nVolLoopEnd = pis->volenv.lpe;
 		penv->nVolSustainBegin = pis->volenv.slb;
 		penv->nVolSustainEnd = pis->volenv.sle;
-		// Panning Envelope 
+		// Panning Envelope
 		if (pis->panenv.flags & 1) penv->dwFlags |= ENV_PANNING;
 		if (pis->panenv.flags & 2) penv->dwFlags |= ENV_PANLOOP;
 		if (pis->panenv.flags & 4) penv->dwFlags |= ENV_PANSUSTAIN;
@@ -113,7 +113,7 @@ BOOL CSoundFile::ITInstrToMPT(const void *p, INSTRUMENTHEADER *penv, UINT trkver
 		penv->nPanLoopEnd = pis->panenv.lpe;
 		penv->nPanSustainBegin = pis->panenv.slb;
 		penv->nPanSustainEnd = pis->panenv.sle;
-		// Pitch Envelope 
+		// Pitch Envelope
 		if (pis->pitchenv.flags & 1) penv->dwFlags |= ENV_PITCH;
 		if (pis->pitchenv.flags & 2) penv->dwFlags |= ENV_PITCHLOOP;
 		if (pis->pitchenv.flags & 4) penv->dwFlags |= ENV_PITCHSUSTAIN;
@@ -313,7 +313,7 @@ BOOL CSoundFile::ReadIT(const BYTE *lpStream, DWORD dwMemLength)
 		}
 	}
 	// Read mix plugins information
-	if (dwMemPos + 8 < dwMemLength) 
+	if (dwMemPos + 8 < dwMemLength)
 	{
 		dwMemPos += LoadMixPlugins(lpStream+dwMemPos, dwMemLength-dwMemPos);
 	}
@@ -934,7 +934,7 @@ BOOL CSoundFile::SaveIT(LPCSTR lpszFileName, UINT nPacking)
 							b |= 0x10;
 						} else
 						{
-							lastvalue[ch].note = note;	
+							lastvalue[ch].note = note;
 							lastvalue[ch].volcmd |= 1;
 						}
 					}

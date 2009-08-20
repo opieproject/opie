@@ -29,14 +29,14 @@ using namespace Opie::Core;
 GPS::GPS( QObject* parent, const char * name )
     :QObject( parent, name )
 {
-    odebug << "GPS::GPS()" << oendl; 
+    odebug << "GPS::GPS()" << oendl;
     _socket = new QSocket( this, "gpsd commsock" );
 }
 
 
 GPS::~GPS()
 {
-    odebug << "GPS::~GPS()" << oendl; 
+    odebug << "GPS::~GPS()" << oendl;
 }
 
 
@@ -57,15 +57,15 @@ GpsLocation GPS::position() const
     if ( result )
     {
         int numAvail = _socket->bytesAvailable();
-        odebug << "GPS write succeeded, " << numAvail << " bytes available for reading..." << oendl; 
+        odebug << "GPS write succeeded, " << numAvail << " bytes available for reading..." << oendl;
         if ( numAvail )
-        {                     
+        {
             int numRead = _socket->readBlock( &buf[0], sizeof buf );
             int numScan = ::sscanf( &buf[0], "GPSD,P=%lg %lg", &lat, &lon);
-            
+
             if ( numRead < 7 || numScan != 2 )
             {
-                odebug << "GPS read " << numRead << " bytes succeeded, invalid response: '" << &buf[0] << "'" << oendl; 
+                odebug << "GPS read " << numRead << " bytes succeeded, invalid response: '" << &buf[0] << "'" << oendl;
                 return GpsLocation( -111, -111 );
             }
             else

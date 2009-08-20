@@ -7,7 +7,7 @@ class KColorDialog
 {
   public:
     enum { Accepted };
-  
+
     static int getColor( const QColor & );
 };
 

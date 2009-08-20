@@ -11,16 +11,16 @@
 
 #include <qvariant.h>
 #include <qwidget.h>
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QFrame;
 class QPushButton;
 class ThumbButton;
 class VideoCaptureView;
 
 class CameraBase : public QWidget
-{ 
+{
     Q_OBJECT
 
 public:

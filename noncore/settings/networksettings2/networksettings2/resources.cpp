@@ -51,7 +51,7 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
               InnerIt.current(); ++InnerIt ) {
 
           if( InnerIt.current() == OuterIt.current() )
-            // avoid recursive 
+            // avoid recursive
             continue;
 
           const char ** Provides = InnerIt.current()->provides();
@@ -102,7 +102,7 @@ TheNSResources::~TheNSResources( void ) {
 
 }
 
-void TheNSResources::addNodeType( const QString & ID, 
+void TheNSResources::addNodeType( const QString & ID,
                                      const QString & Name,
                                      const QString & Descr ) {
     if( NodeTypeNameMap[ID].isEmpty() ) {
@@ -111,12 +111,12 @@ void TheNSResources::addNodeType( const QString & ID,
     }
 }
 
-void TheNSResources::addSystemFile( const QString & ID, 
+void TheNSResources::addSystemFile( const QString & ID,
                                     const QString & P,
                                     bool KDI ) {
     if( ! SystemFiles.find( ID ) ) {
       // new system file
-      SystemFiles.insert( ID, new SystemFile( ID, P, KDI ) ); 
+      SystemFiles.insert( ID, new SystemFile( ID, P, KDI ) );
     } // else existed
 }
 
@@ -141,7 +141,7 @@ void TheNSResources::findAvailableNetNodes( void ){
 
     if( Plugins->isInSafeMode() ) {
       QMessageBox::information(
-            0, 
+            0,
             tr( "Today Error"),
             tr( "<qt>The plugin '%1' caused Today to crash."
                 " It could be that the plugin is not properly"
@@ -154,16 +154,16 @@ void TheNSResources::findAvailableNetNodes( void ){
     OPluginLoader::List allplugins = Plugins->filtered();
     QString lang = ::getenv("LANG");
 
-    for( OPluginLoader::List::Iterator it = allplugins.begin(); 
-         it != allplugins.end(); 
+    for( OPluginLoader::List::Iterator it = allplugins.begin();
+         it != allplugins.end();
          ++it ) {
 
       // check if this plugin supports the proper interface
-      NetNodeInterface * interface = 
+      NetNodeInterface * interface =
         Plugins->load<NetNodeInterface>( *it, IID_NetworkSettings2 );
 
       if( ! interface ) {
-        Log(( "Plugin %s from %s does not support proper interface\n", 
+        Log(( "Plugin %s from %s does not support proper interface\n",
            (*it).name().latin1(), (*it).path().latin1() ));
         continue;
       }
@@ -174,7 +174,7 @@ void TheNSResources::findAvailableNetNodes( void ){
         interface->create_plugin( PNN );
 
         if( PNN.isEmpty() ) {
-          Log(( "Plugin %s from %s does offer any nodes\n", 
+          Log(( "Plugin %s from %s does offer any nodes\n",
              (*it).name().latin1(), (*it).path().latin1() ));
           delete interface;
           continue;
@@ -190,7 +190,7 @@ void TheNSResources::findAvailableNetNodes( void ){
         }
       }
 
-      // load the translation 
+      // load the translation
       QTranslator *trans = new QTranslator(qApp);
       QString fn = QPEApplication::qpeDir()+
                 "/i18n/"+lang+"/"+ (*it).name() + ".qm";
@@ -207,7 +207,7 @@ void TheNSResources::findAvailableNetNodes( void ){
 int TheNSResources::assignNetworkSetupNumber( void ) {
       bool found = 1;
       for( int trial = 0; ; trial ++ ) {
-        found = 1; 
+        found = 1;
         for( QDictIterator<NetworkSetup> it(NetworkSetupsMap);
              it.current();
              ++it ) {
@@ -280,9 +280,9 @@ void TheNSResources::removeNetworkSetup( const QString & N ) {
         removeNodeInstance( NNI->name() );
       }
       if( NetworkSetupsMap.find( N ) ) {
-        NetworkSetupsMap.remove( N ); 
+        NetworkSetupsMap.remove( N );
       } else {
-        DanglingNetworkSetupsMap.remove( N ); 
+        DanglingNetworkSetupsMap.remove( N );
       }
 
 }
@@ -346,7 +346,7 @@ void TheNSResources::detectCurrentUser( void ) {
     CurrentUser.HomeDir = "";
 
     if( getenv( "OPIEDIR" ) == 0 ) {
-      // nothing known 
+      // nothing known
       { // open proc dir and find all dirs in it
         QRegExp R("[0-9]+");
         QDir ProcDir( "/proc" );
@@ -354,8 +354,8 @@ void TheNSResources::detectCurrentUser( void ) {
         QStringList EL = ProcDir.entryList( QDir::Dirs );
 
         // print it out
-        for ( QStringList::Iterator it = EL.begin(); 
-              it != EL.end(); 
+        for ( QStringList::Iterator it = EL.begin();
+              it != EL.end();
               ++it ) {
           if( R.match( (*it) ) >= 0 ) {
             QString S = ProcDir.path()+"/"+ (*it);
@@ -387,7 +387,7 @@ void TheNSResources::detectCurrentUser( void ) {
 
         fd = open( QPEEnvFile.latin1(), O_RDONLY );
         if( fd < 0 ) {
-          Log(("Could not open %s : %d\n", 
+          Log(("Could not open %s : %d\n",
               QPEEnvFile.latin1(), errno ));
           return;
         }
@@ -407,10 +407,10 @@ void TheNSResources::detectCurrentUser( void ) {
           EnvVar_t * Run = EV;
           while( Run->Name ) {
             if( strncmp( Data, Run->Name, Run->Len ) == 0 &&
-                Data[Run->Len] == '=' 
+                Data[Run->Len] == '='
               ) {
               CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-              CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
+              CurrentUser.EnvList[CurrentUser.EnvList.size()-1] =
                   strdup( Data );
 
               if( strcmp( Run->Name, "OPIEDIR" ) == 0 ) {
@@ -436,17 +436,17 @@ void TheNSResources::detectCurrentUser( void ) {
           struct passwd pwd;
           struct passwd * pwdres;
 
-          if( getpwnam_r( CurrentUser.UserName.latin1(), 
+          if( getpwnam_r( CurrentUser.UserName.latin1(),
                           &pwd, TB, sizeof(TB), &pwdres ) ||
               pwdres == 0 ) {
-            Log(("Could not determine user %s : %d\n", 
+            Log(("Could not determine user %s : %d\n",
                 CurrentUser.UserName.latin1(), errno ));
             return;
           }
           CurrentUser.Uid = pwd.pw_uid;
           CurrentUser.Gid = pwd.pw_gid;
         } else{
-          CurrentUser.Uid = 
+          CurrentUser.Uid =
             CurrentUser.Gid = -1;
         }
       }
@@ -463,7 +463,7 @@ void TheNSResources::detectCurrentUser( void ) {
 
           S.sprintf( "%s=%s", Run->Name, X );
           CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
-          CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
+          CurrentUser.EnvList[CurrentUser.EnvList.size()-1] =
                 strdup( S.latin1() );
 
           if( strcmp( Run->Name, "LOGNAME" ) == 0 ) {

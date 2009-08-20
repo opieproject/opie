@@ -58,10 +58,10 @@ int main( int argc, char **argv )
     bool check = true;
     for ( int i = 1; i < argc; ++i )
     {
-        odebug << "Wellenreiter::main() parsing argument " << i << " = '" << argv[i] << "'" << oendl; 
+        odebug << "Wellenreiter::main() parsing argument " << i << " = '" << argv[i] << "'" << oendl;
         if ( !strcmp( "-nocheck", argv[i] ) )
         {
-            odebug << "-nocheck found" << oendl; 
+            odebug << "-nocheck found" << oendl;
             check = false;
             break;
         }
@@ -72,7 +72,7 @@ int main( int argc, char **argv )
         // root check
         if ( getuid() )
         {
-            owarn << QObject::tr( "Wellenreiter: trying to run as non-root!" ) << oendl; 
+            owarn << QObject::tr( "Wellenreiter: trying to run as non-root!" ) << oendl;
             result = QMessageBox::warning( w, " - Wellenreiter II -  (non-root)", QObject::tr( "You have started Wellenreiter II\n"
             "as non-root. You will have\nonly limited functionality.\nProceed anyway?" ),
             QMessageBox::Yes, QMessageBox::No );
@@ -89,7 +89,7 @@ int main( int argc, char **argv )
             if ( result == QMessageBox::Yes )
             {
                 if ( -1 == ::kill( dhcpid, SIGTERM ) )
-                    owarn << "Wellenreiter: can't kill process #" << result << " (" << strerror( errno ) << ")" << oendl; 
+                    owarn << "Wellenreiter: can't kill process #" << result << " (" << strerror( errno ) << ")" << oendl;
                 else
                     killed = true;
             }

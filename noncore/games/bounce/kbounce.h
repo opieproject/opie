@@ -37,17 +37,17 @@ public:
 
 public slots:
    void newGame();
-   void pauseGame(); 
+   void pauseGame();
    void closeGame();
    void about();
 
-protected slots:   
+protected slots:
    void died();
-   void newPercent( int percent ); 
+   void newPercent( int percent );
    void second();
    void switchLevel();
    void gameOverNow();
-      		
+
 protected:
    void createLevel( int level );
    void startLevel();

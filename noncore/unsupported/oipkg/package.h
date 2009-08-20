@@ -29,7 +29,7 @@ class OipkgPackage : public QObject
   OipkgPackage( QStringList, PackageManagerSettings *s, QObject *parent=0, const char *name=0 );
   OipkgPackage( QString, PackageManagerSettings *s, QObject *parent=0, const char *name=0 );
   OipkgPackage( OipkgPackage*s, QObject *parent=0, const char *name=0 );
- 	
+
   void    setValue( QString, QString );
   void    copyValues( OipkgPackage* );
 

@@ -42,11 +42,11 @@ namespace Ui   {
 class OLedBox : public QWidget
 {
   Q_OBJECT
-	
+
   public:
 	OLedBox( const QColor& col = red, QWidget* parent = 0, const char* name = 0 );
 	virtual ~OLedBox();
-	
+
 	QColor color() const;
 	bool isOn() const;
 	void setReadOnly( bool R ) { m_readonly = R; }
@@ -65,19 +65,19 @@ class OLedBox : public QWidget
   protected:
 	virtual void paintEvent( QPaintEvent* e );
 	virtual void resizeEvent( QResizeEvent* e );
-	
+
 	virtual void mousePressEvent( QMouseEvent* e );
 
   private:
 	void drawLed( QPixmap *, const QColor& col );
 
   private:
-	QPixmap *m_pix [2];	
-	
+	QPixmap *m_pix [2];
+
 	QColor m_color;
 	bool m_on;
 	bool m_readonly;
-	
+
 	static QPixmap *s_border_pix;
 };
 };

@@ -26,7 +26,7 @@ public:
   DemoApp( int argc, char** argv ) : OApplication( argc, argv, "libopie2 debug demo" )
   {
     // you have access to your OApplication object via oApp
-    odebug << "Process-wide OApplication object @ " << oApp << "" << oendl; 
+    odebug << "Process-wide OApplication object @ " << oApp << "" << oendl;
 
     // you have access to global settings via OGlobalSettings
     int mode = OGlobalSettings::debugMode();
@@ -89,7 +89,7 @@ public slots:
   void chooseMethod(int method)
   {
     m = method;
-    odebug << "choosing method: " << method << "" << oendl; 
+    odebug << "choosing method: " << method << "" << oendl;
     OConfig* g = OGlobal::config();
     g->setGroup( "General" );
     g->writeEntry( "debugMode", m );

@@ -105,16 +105,16 @@ void IMAPBase::slotDataAvailiable()
 
 	while (_socket->canReadLine()) {
 		QString tmp = _socket-> readLine ( );
-	
+
 		_data += tmp;
 		qDebug ( "New Line [%d]: '%s'\n", _connected ? 1 : 0, tmp.latin1( ));
-		
+
 		if ( firstline || tmp. left(2) == _lasttag ) {
 			firstline = false;
-					
-//		if ( _socket-> atEnd ( )) 
+
+//		if ( _socket-> atEnd ( ))
 			qDebug ( "at end -> emitting\n" );
-		
+
 			QObject::disconnect(_socket, SIGNAL(readyRead()), this, SLOT(slotDataAvailiable()));
 			emit dataReceived(_data);
 			_data = QString::null;

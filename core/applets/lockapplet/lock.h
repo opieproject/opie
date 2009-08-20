@@ -22,7 +22,7 @@ public:
     Q_REFCOUNT
 
     virtual int position() const;
-    
+
     virtual QString name ( ) const;
     virtual QIconSet icon ( ) const;
     virtual QString text ( ) const;

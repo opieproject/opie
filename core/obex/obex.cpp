@@ -73,7 +73,7 @@ void Obex::receive()  {
 }
 
 // if currently receiving stop it send receive
-void Obex::send(const QString& fileName, const QString& addr) { 
+void Obex::send(const QString& fileName, const QString& addr) {
     ObexBase::send(fileName, addr);
     if (m_rec != 0 ) {
         if (m_rec->isRunning() ) {
@@ -121,9 +121,9 @@ void Obex::sendNow(){
 void Obex::slotExited(OProcess* proc ){
     if (proc == m_rec )  // receive process
         received();
-    else if ( proc == m_send ) 
+    else if ( proc == m_send )
         sendEnd();
-    
+
 }
 void Obex::slotStdOut(OProcess* proc, char* buf, int len){
     if ( proc == m_rec ) { // only receive

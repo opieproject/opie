@@ -43,7 +43,7 @@ class Device;
         ScanDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
         ~ScanDialog();
 
-    private: 
+    private:
 	QProgressBar* progress;
         QPushButton* StartStopButton;
         QListView* serviceView;

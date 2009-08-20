@@ -104,13 +104,13 @@ private:
     QBitmap *masks[11];
     QPixmap *buttonPixUp[11];
     QPixmap *buttonPixDown[11];
-    
+
     QPixmap *pixmaps[4];
     Opie::Ui::OTicker  songInfo;
     QSlider slider;
     QLineEdit time;
     int xoff, yoff;
-    
+
 };
 
 

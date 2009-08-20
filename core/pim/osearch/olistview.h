@@ -20,7 +20,7 @@ class QDir;
 
 class OListView : public QListView  {
    Q_OBJECT
-public: 
+public:
 	OListView(QWidget *parent=0, const char *name=0);
 	~OListView();
 protected slots:

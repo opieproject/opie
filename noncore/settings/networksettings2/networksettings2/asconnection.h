@@ -10,7 +10,7 @@ class AsNetworkSetup : public RuntimeInfo {
 public :
 
     AsNetworkSetup( ANetNodeInstance * NNI ) :
-        RuntimeInfo( NNI ) { 
+        RuntimeInfo( NNI ) {
     }
 
 };

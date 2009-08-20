@@ -368,7 +368,7 @@ void init_right_tree(void)
 					    renderer,
 					    "active", COL_BTNACT,
 					    "inconsistent", COL_BTNINC,
-					    "visible", COL_BTNVIS, 
+					    "visible", COL_BTNVIS,
 					    "radio", COL_BTNRAD, NULL);
 	/*g_signal_connect(G_OBJECT(renderer), "toggled",
 	   G_CALLBACK(renderer_toggled), NULL); */
@@ -832,7 +832,7 @@ void on_split_clicked(GtkButton * button, gpointer user_data)
 	gtk_widget_show(tree1_w);
 	gtk_window_get_default_size(GTK_WINDOW(main_wnd), &w, &h);
 	gtk_paned_set_position(GTK_PANED(hpaned), w / 2);
-	if (tree2)	
+	if (tree2)
 		gtk_tree_store_clear(tree2);
 	display_list();
 }
@@ -1414,7 +1414,7 @@ static void update_tree(struct menu *src, GtkTreeIter * dst)
 								 child2);
 				gtk_tree_store_remove(tree2, &tmp);
 				if (!valid)
-					return;	// next parent 
+					return;	// next parent
 				else
 					goto reparse;	// next child
 			} else
@@ -1439,7 +1439,7 @@ static void update_tree(struct menu *src, GtkTreeIter * dst)
 								 child2);
 				gtk_tree_store_remove(tree2, &tmp);
 				if (!valid)
-					return;	// next parent 
+					return;	// next parent
 				else
 					goto reparse;	// next child
 			}

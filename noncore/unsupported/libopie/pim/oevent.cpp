@@ -396,10 +396,10 @@ QMap<int, QString> OEvent::toMap()const {
             for ( uint i = 0; i < childr.count(); i++ ) {
 		    if ( i != 0 ) buf += " ";
 		    buf += QString::number( childr[i] );
-            }	    
+            }
 	    retMap.insert( OEvent::FRecChildren, buf );
     }
-    
+
     // Add recurrence stuff
     if( hasRecurrence() ){
 	    ORecur recur = recurrence();
@@ -417,7 +417,7 @@ QMap<int, QString> OEvent::toMap()const {
 	    QMap<int, QString> recFields = recur.toMap();
 	    retMap.insert( OEvent::FRType, recFields[ORecur::RType] );
     }
-   
+
     return retMap;
 }
 
@@ -436,7 +436,7 @@ void OEvent::fromMap( const QMap<int, QString>& map )
 		setAllDay( true );
 	else
 		setAllDay( false );
-	
+
 	int alarmTime = -1;
 	if( !map[OEvent::FAlarm].isEmpty() )
 		alarmTime = map[OEvent::FAlarm].toInt();
@@ -450,7 +450,7 @@ void OEvent::fromMap( const QMap<int, QString>& map )
 	if ( !map[OEvent::FTimeZone].isEmpty() && ( map[OEvent::FTimeZone] != "None" ) ){
 		setTimeZone( map[OEvent::FTimeZone] );
 	}
-	
+
 	time_t start = (time_t) map[OEvent::FStart].toLong();
 	time_t end   = (time_t) map[OEvent::FEnd].toLong();
 
@@ -471,7 +471,7 @@ void OEvent::fromMap( const QMap<int, QString>& map )
 		date = zone.toDateTime( end );
 		setEndDateTime  ( zone.toDateTime( date, OTimeZone::current() ) );
 	}
-	
+
 	if ( !map[OEvent::FRecParent].isEmpty() )
 		setParent( map[OEvent::FRecParent].toInt() );
 
@@ -481,7 +481,7 @@ void OEvent::fromMap( const QMap<int, QString>& map )
 			addChild( (*it).toInt() );
 		}
 	}
-	
+
 	// Fill recurrence stuff and put it directly into the ORecur-Object using fromMap..
 	if( !map[OEvent::FRType].isEmpty() ){
 		QMap<int, QString> recFields;
@@ -496,7 +496,7 @@ void OEvent::fromMap( const QMap<int, QString>& map )
 		ORecur recur( recFields );
 		setRecurrence( recur );
 	}
-	
+
 }
 
 

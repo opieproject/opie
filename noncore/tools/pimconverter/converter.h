@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) 2009 The Opie Team <opie-devel@handhelds.org>
-              =.             
+              =.
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -46,7 +46,7 @@ public:
     void selectedSourceFormat( int num );
 
     void closeEvent( QCloseEvent *e );
-    
+
 private:
     // Caution:
     // The order and value of the following enums must be regarding

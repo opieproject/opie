@@ -3,7 +3,7 @@
 #include <qpopupmenu.h>
 #include <qheader.h>
 #include <qfile.h>
-#include <qdir.h> 
+#include <qdir.h>
 
 #include <qpe/resource.h>
 
@@ -139,7 +139,7 @@ void FolderWidget::slotMenuActivated(int itemid)
 		if (((FolderWidgetItem *)currentItem())->folder().fullName().isEmpty()) return;
 
 		Folder folder = ((FolderWidgetItem *)currentItem())->folder();
-		QString newName = Rename::rename(folder.fullName(), this); 
+		QString newName = Rename::rename(folder.fullName(), this);
 		if (newName.isNull()) return;
 
 		folder.topFolder().handler()->iRename(folder.fullName(), newName);
@@ -293,7 +293,7 @@ void FolderWidget::slotIMAPList(IMAPResponse &response)
 		if (!f.open(IO_WriteOnly)) {
 			QMessageBox::critical(this, tr("Error"), tr("<p>Couldn't open folder cache file for writing!</p>"), tr("Ok"));
 			return;
-		} 
+		}
 		QTextStream t(&f);
 
 		QValueList<IMAPResponseLIST>::Iterator it;

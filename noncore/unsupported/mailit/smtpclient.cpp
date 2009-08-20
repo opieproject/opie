@@ -25,11 +25,11 @@ SmtpClient::SmtpClient()
   socket = new QSocket(this, "smtpClient");
   stream = new QTextStream(socket);
   mailList.setAutoDelete(TRUE);
-  
+
   connect(socket, SIGNAL(error(int)), this, SLOT(errorHandling(int)));
   connect(socket, SIGNAL(connected()), this, SLOT(connectionEstablished()));
   connect(socket, SIGNAL(readyRead()), this, SLOT(incomingData()));
-  
+
   sending = FALSE;
 }
 
@@ -49,19 +49,19 @@ void SmtpClient::newConnection(const QString &target, int port)
   status = Init;
   sending = TRUE;
   socket->connectToHost(target, port);
-  
+
   emit updateStatus(tr("DNS lookup"));
 }
 
 void SmtpClient::addMail(const QString &from, const QString &subject, const QStringList &to, const QString &body)
 {
   RawEmail *mail = new RawEmail;
-  
+
   mail->from = from;
   mail->subject = subject;
   mail->to = to;
   mail->body = body;
-  
+
   mailList.append(mail);
 }
 
@@ -87,10 +87,10 @@ void SmtpClient::errorHandlingWithMsg(int status, const QString & EMsg )
 void SmtpClient::incomingData()
 {
   QString response;
-  
+
   if (!socket->canReadLine())
     return;
-  
+
   response = socket->readLine();
   switch(status) {
     case Init:  {
@@ -100,7 +100,7 @@ void SmtpClient::incomingData()
             *stream << "HELO there\r\n";
           } else errorHandlingWithMsg(ErrUnknownResponse,response);
           break;
-        } 
+        }
     case From:  {
           if (response[0] == '2') {
              qDebug(mailPtr->from);
@@ -108,7 +108,7 @@ void SmtpClient::incomingData()
             status = Recv;
           } else errorHandlingWithMsg(ErrUnknownResponse, response );
           break;
-        } 
+        }
     case Recv:  {
        if (response[0] == '2') {
             it = mailPtr->to.begin();
@@ -119,7 +119,7 @@ void SmtpClient::incomingData()
             status = MRcv;
           } else errorHandlingWithMsg(ErrUnknownResponse,response);
           break;
-        } 
+        }
     case MRcv:  {
           if (response[0] == '2') {
             it++;
@@ -130,16 +130,16 @@ void SmtpClient::incomingData()
               status = Data;
             }
           } else errorHandlingWithMsg(ErrUnknownResponse,response);
-        } 
+        }
     case Data:  {
           if (response[0] == '2') {
             *stream << "DATA\r\n";
             status = Body;
             emit updateStatus(tr("Sending: ") + mailPtr->subject);
-            
+
           } else errorHandlingWithMsg(ErrUnknownResponse,response);
           break;
-        } 
+        }
     case Body:  {
           if (response[0] == '3') {
             *stream << mailPtr->body << "\r\n.\r\n";
@@ -151,7 +151,7 @@ void SmtpClient::incomingData()
             }
           } else errorHandlingWithMsg(ErrUnknownResponse,response);
           break;
-        } 
+        }
     case Quit:  {
           if (response[0] == '2') {
             *stream << "QUIT\r\n";

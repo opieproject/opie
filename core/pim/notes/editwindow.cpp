@@ -18,13 +18,13 @@ void editWindowWidget::loadFile(QString fileName)
 
     QFile file(fileName);
 
-    if (file.exists()) 
+    if (file.exists())
     {
-        if (!file.open(IO_ReadOnly)) 
+        if (!file.open(IO_ReadOnly))
         {
             QMessageBox::warning(0, tr("File i/o error"), fileName.sprintf(tr("Could not read file '%s'"), fileName));
-        } 
-        else 
+        }
+        else
         {
             QTextStream inStream(&file);
             inStream.setEncoding(QTextStream::UnicodeUTF8);
@@ -38,11 +38,11 @@ void editWindowWidget::saveFile(QString fileName)
 {
     QFile file(fileName);
 
-    if(!file.open(IO_WriteOnly)) 
+    if(!file.open(IO_WriteOnly))
     {
         QMessageBox::warning(0, tr("File i/o error"), fileName.sprintf(tr("Could not write file '%s'"), fileName));
     }
-    else 
+    else
     {
         QTextStream outStream(&file);
         outStream.setEncoding(QTextStream::UnicodeUTF8);

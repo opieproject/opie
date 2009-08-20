@@ -39,7 +39,7 @@
 
 #include <private/qcriticalsection_p.h>
 
-class QCriticalSectionPrivate 
+class QCriticalSectionPrivate
 {
 public:
     QCriticalSectionPrivate() {}

@@ -140,7 +140,7 @@ class OBackendFactory
 		config.setGroup ( backendName );
 		QString backend = config.readEntry( "usebackend" );
 
-		qWarning("Selected backend for %s is: %s", backendName.latin1(), backend.latin1() ); 
+		qWarning("Selected backend for %s is: %s", backendName.latin1(), backend.latin1() );
 
 		QAsciiDict<int> dict ( 3 );
 		dict.setAutoDelete ( TRUE );

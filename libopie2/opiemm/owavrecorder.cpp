@@ -39,14 +39,14 @@ bool OWavRecorder::setup( const QString &filename, OWavFileParameters fileparams
 {
     m_filename = filename;
     m_fileparams = fileparams;
-    
+
     if(setupSoundDevice( true )) // recording
         return setupFile();
     else
         return false;
 }
 
-bool OWavRecorder::setupFile() 
+bool OWavRecorder::setupFile()
 {
     char pointer[] = "/tmp/opierec-XXXXXX";
     int fd = 0;
@@ -63,8 +63,8 @@ bool OWavRecorder::setupFile()
         }
 
         actualFile = (QString)pointer;
-    } 
-    else { 
+    }
+    else {
         // just use regular file.. no moving
         actualFile = m_filename;
     }
@@ -88,7 +88,7 @@ void OWavRecorder::record( OWavRecorderCallback *callback )
     if(m_bufsize > 0) {
         char *buffer = (char *) malloc(m_bufsize);
         int state = 0;
-        
+
         int samplesPerBlock = m_bufsize/2;
         int fd = m_wavfile->getfd();
 
@@ -109,7 +109,7 @@ void OWavRecorder::record( OWavRecorderCallback *callback )
             else
                 number = ::write( fd, buffer, m_bufsize );
             bytesWritten += number;
-            
+
             callback->recorderCallback( buffer, number, bytesWritten, stopflag );
         }
         free(buffer);
@@ -118,7 +118,7 @@ void OWavRecorder::record( OWavRecorderCallback *callback )
     }
 }
 
-void OWavRecorder::finalize( int bytesWritten ) 
+void OWavRecorder::finalize( int bytesWritten )
 {
     m_device->closeDevice();
 

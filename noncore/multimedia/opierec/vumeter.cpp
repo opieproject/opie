@@ -42,7 +42,7 @@ VUMeter::VUMeter(QWidget *parent, const char *name, const int tr)
             j--;
         }
     }
-        
+
     buffer = new QPixmap();
     setBackgroundMode(NoBackground);
     vuTimer = new QTimer(this,"vu timer");
@@ -129,7 +129,7 @@ void VUMeter::resize() {
             painter.setPen(black);
             painter.drawText(textOffset + ox + dx * i, oy + dy * (para.leds) - 2, sx, 2 * dy, AlignCenter, str);
         }
-        
+
         painter.end();
         paint();
     }

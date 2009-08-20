@@ -47,7 +47,7 @@ namespace Opie {
  * and to more stuff
  */
 class OPimResolver {
-  
+
   public:
     enum BuiltIn { TodoList = 0,
                    DateBook,
@@ -101,7 +101,7 @@ class OPimResolver {
      */
     OPimBase* backend( const QString& service );
     OPimBase* backend( int rtti );
-    
+
   private:
     OPimResolver();
     void loadData();

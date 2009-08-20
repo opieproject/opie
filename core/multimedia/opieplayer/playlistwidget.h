@@ -80,13 +80,13 @@ protected:
 private:
     RssParser rssHandler;
     int defaultSkinIndex;
-    bool audioScan, videoScan; 
+    bool audioScan, videoScan;
     void doBlank();
     void doUnblank();
     void readm3u(const QString &);
     void readPls(const QString &);
     bool readpodcast(const QString&);
-    
+
     void initializeStates();
     void readConfig( Config& cfg );
     void writeConfig( Config& cfg ) const;
@@ -101,7 +101,7 @@ private slots:
     void writem3u();
     void writeCurrentM3u();
     void scanForAudio();
-    void scanForVideo(); 
+    void scanForVideo();
     void openFile();
     void setDocument( const QString& fileref );
     void setDocumentEx( const QString& fileref );
@@ -110,10 +110,10 @@ private slots:
     void setActiveWindow(); // need to handle this to show the right view
     void setPlaylist( bool ); // Show/Hide the playlist
     void setView( char );
-    void clearList(); 
-    void addAllToList(); 
-    void addAllMusicToList(); 
-    void addAllVideoToList(); 
+    void clearList();
+    void addAllToList();
+    void addAllMusicToList();
+    void addAllVideoToList();
     void saveList();  // Save the playlist
     void loadList( const DocLnk &);  // Load a playlist
     void playIt( QListViewItem *);
@@ -129,7 +129,7 @@ private slots:
     void listDelete();
 
    bool downloadPodcast(const QString &);
-        
+
 protected slots:
 /*     void cancelMenuTimer(); */
 /*     void showFileMenu(); */

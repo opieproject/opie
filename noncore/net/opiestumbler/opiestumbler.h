@@ -28,7 +28,7 @@ namespace Opie{
         class OProcess;
     }
 }
-            
+
 
 class OpieStumbler: public QMainWindow {
     Q_OBJECT
@@ -57,7 +57,7 @@ protected slots:
     void slotCleanSplash();
 protected:
     void loadConfig();
-    
+
     QListView *m_listCurrent;
     QListView *m_listHistory;
     QString m_interface;
@@ -75,7 +75,7 @@ protected:
     QVBoxLayout *m_splashBox;
     QLabel *m_infoLabel;
     QProgressBar *m_pbar;
-    
+
 };
 
 #endif /* OPIESTUMBLER_H */

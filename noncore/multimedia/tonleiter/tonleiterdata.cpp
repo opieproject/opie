@@ -153,7 +153,7 @@ Instrument TonleiterData::getInstrument(int id)
         return instruments[id];
     else
     {
-        odebug << "undefined insrtument " << id << " of " << instruments.count() << "" << oendl; 
+        odebug << "undefined insrtument " << id << " of " << instruments.count() << "" << oendl;
         return Instrument();
     }
 
@@ -175,7 +175,7 @@ Scale TonleiterData::getScale(int id)
         return scales[id];
     else
     {
-        odebug << "Undefined scale" << oendl; 
+        odebug << "Undefined scale" << oendl;
         return Scale();
     }
 }

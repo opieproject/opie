@@ -155,7 +155,7 @@ class CStyle
     void clearPicture();
     void setPicture(bool canScale, QImage* _g, bool il=false, unsigned long tgt=0);
     QImage* getPicture()
-	{ 
+	{
 	    QImage* pm = ((graphic != NULL) ? graphic->graphic->graphic : NULL);
 	    return pm;
 	}

@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
+**********************************************************************/
 
 #include "tvlistview.h"
 #include "../db/common.h"
@@ -47,7 +47,7 @@ TVListViewPrivate::TVListViewPrivate(QWidget *parent, const char* name,
         ;
 }
 
-class TVListViewItem : public QListViewItem 
+class TVListViewItem : public QListViewItem
 {
 public:
 
@@ -60,16 +60,16 @@ public:
     }
 
     /* Do nothing... all data for this item should be generated */
-    void setText(int i, const QString &) 
+    void setText(int i, const QString &)
     {
         ;
     }
-    QString key(int i, bool a) const 
+    QString key(int i, bool a) const
     {
         return data_reference->toSortableQString(i);
     }
 
-    void setDataElem(DataElem *d) 
+    void setDataElem(DataElem *d)
     {
         data_reference = d;
     }
@@ -77,11 +77,11 @@ public:
     DataElem *getDataElem() {
         return data_reference;
     }
-private: 
+private:
     DataElem *data_reference;
 };
 
-TVListViewItem::TVListViewItem(QListView *parent, DataElem *d) 
+TVListViewItem::TVListViewItem(QListView *parent, DataElem *d)
         : QListViewItem(parent)
 {
     data_reference =  d;
@@ -92,15 +92,15 @@ TVListViewItem::~TVListViewItem()
     data_reference = 0;
 }
 
-TVListView::TVListView(TableState *t, QWidget* parent, 
+TVListView::TVListView(TableState *t, QWidget* parent,
 	const char *name, WFlags fl ) : QWidget(parent, name, fl)
 {
-    if (!name) 
+    if (!name)
     	setName("TVListView");
 
     // the next two lines need to be rationalized.
     resize(318,457);
-    setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7, 
+    setSizePolicy(QSizePolicy((QSizePolicy::SizeType)7,
     		  (QSizePolicy::SizeType)7, sizePolicy().hasHeightForWidth()));
     setCaption(tr("List View"));
 
@@ -113,7 +113,7 @@ TVListView::TVListView(TableState *t, QWidget* parent,
 
     connect(listViewDisplay, SIGNAL(currentChanged(QListViewItem*)), this,
     		SLOT(setCurrent(QListViewItem*)));
-    connect(listViewDisplay, SIGNAL(sortChanged(int)), this, 
+    connect(listViewDisplay, SIGNAL(sortChanged(int)), this,
     		SLOT(setSorting(int)));
 
     listViewDisplay->setShowSortIndicator(true);
@@ -126,7 +126,7 @@ TVListView::~TVListView()
 {
 }
 
-void TVListView::addItem(DataElem *d) 
+void TVListView::addItem(DataElem *d)
 {
     TVListViewItem *i = new TVListViewItem(listViewDisplay, d);
 
@@ -135,7 +135,7 @@ void TVListView::addItem(DataElem *d)
 }
 
 /* remove current (it) item */
-void TVListView::removeItem() 
+void TVListView::removeItem()
 {
     QListViewItemIterator other(*it);
 
@@ -153,7 +153,7 @@ void TVListView::removeItem()
    delete other.current();
 }
 
-void TVListView::clearItems() 
+void TVListView::clearItems()
 {
     /* This is ok since the destructor for TVListItem does not know about
     the data_reference pointer.. and hence will leave it alone */
@@ -170,7 +170,7 @@ void TVListView::first()
 
 void TVListView::last()
 {
-    owarn << "TVListView::last not yet implemented" << oendl; 
+    owarn << "TVListView::last not yet implemented" << oendl;
 }
 
 void TVListView::next()
@@ -184,7 +184,7 @@ void TVListView::next()
 
 void TVListView::previous()
 {
-    QListViewItemIterator tmp = *it; 
+    QListViewItemIterator tmp = *it;
     (*it)--;
     if (!it->current()) {
         *it = tmp;
@@ -199,7 +199,7 @@ DataElem *TVListView::getCurrentData() {
 }
 
 /*! Now to implement the closest match function */
-void TVListView::findItem(int keyId, TVVariant value) 
+void TVListView::findItem(int keyId, TVVariant value)
 {
     QListViewItem *i;
     TVListViewItem *best_so_far = NULL;
@@ -209,16 +209,16 @@ void TVListView::findItem(int keyId, TVVariant value)
         /* search stuff */
         if(best_so_far) {
             if (DataElem::closer(
-                    ((TVListViewItem *)i)->getDataElem(), 
-                    best_so_far->getDataElem(), value, keyId)) 
+                    ((TVListViewItem *)i)->getDataElem(),
+                    best_so_far->getDataElem(), value, keyId))
                 best_so_far = (TVListViewItem *)i;
         } else {
             if (DataElem::closer(
-                    ((TVListViewItem *)i)->getDataElem(), 
-                    NULL, value, keyId)) 
+                    ((TVListViewItem *)i)->getDataElem(),
+                    NULL, value, keyId))
                 best_so_far = (TVListViewItem *)i;
         }
-            
+
         i = i->itemBelow();
     }
     if (best_so_far) {
@@ -236,7 +236,7 @@ void TVListView::rebuildKeys()
 
     i = listViewDisplay->columns();
 
-    while(i > 0) 
+    while(i > 0)
         listViewDisplay->removeColumn(--i);
 
     KeyListIterator kit(*ts->kRep);
@@ -252,10 +252,10 @@ void TVListView::rebuildKeys()
 }
 
 
-void TVListView::setSorting(int column) 
+void TVListView::setSorting(int column)
 {
     /* Without table state can't do anything */
-    if (ts == 0) 
+    if (ts == 0)
         return;
     if (keyIds[column] != ts->current_column) {
         ts->current_column = keyIds[column];
@@ -289,7 +289,7 @@ void TVListView::rebuildData() {
     listViewDisplay->ensureItemVisible(it->current());
 }
 
-void TVListView::reset() 
+void TVListView::reset()
 {
     int i;
     listViewDisplay->clear();
@@ -301,7 +301,7 @@ void TVListView::reset()
     keyIds.clear();
 }
 
-void TVListView::setCurrent(QListViewItem *i) 
+void TVListView::setCurrent(QListViewItem *i)
 {
     /* cast */
     TVListViewItem *t = (TVListViewItem *)i;

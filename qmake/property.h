@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Definition of QMakeProperty class.
 **
@@ -40,12 +40,12 @@
 
 class QSettings;
 
-class QMakeProperty 
+class QMakeProperty
 {
     QSettings *sett;
     QString keyBase(bool =TRUE) const;
     bool initSettings();
-    QString value(QString, bool just_check); 
+    QString value(QString, bool just_check);
 public:
     QMakeProperty();
     ~QMakeProperty();

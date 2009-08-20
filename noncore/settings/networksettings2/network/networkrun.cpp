@@ -3,7 +3,7 @@
 #include <resources.h>
 #include "networkrun.h"
 
-State_t NetworkRun::detectState( void ) { 
+State_t NetworkRun::detectState( void ) {
     InterfaceInfo * II = networkSetup()->assignedInterface();
 
     if( II && II->IsUp ) {
@@ -17,7 +17,7 @@ State_t NetworkRun::detectState( void ) {
     return Unknown;
 }
 
-QString NetworkRun::setMyState( NetworkSetup * NC, Action_t A, bool ) { 
+QString NetworkRun::setMyState( NetworkSetup * NC, Action_t A, bool ) {
     // we handle UP and DOWN
     InterfaceInfo * II = NC->assignedInterface();
 
@@ -38,7 +38,7 @@ QString NetworkRun::setMyState( NetworkSetup * NC, Action_t A, bool ) {
     }
 
     SL << QString().sprintf( "%s=A%ld%s",
-                        II->Name.latin1(), 
+                        II->Name.latin1(),
                         networkSetup()->number(),
                         II->Name.latin1() );
 

@@ -49,7 +49,7 @@ private:
     bool         m_dirty;
     QString      m_lasttext;
     QTimer *     m_timer;
-    
+
     QPixmap      m_clipboardPixmap;
 };
 

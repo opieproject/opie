@@ -54,7 +54,7 @@ void Game :: init()
 		setSeed( -1 );
 		replayList.clear();
 	}
-	
+
 	score = 0;
 	nrFrames = 0;
 	press = false;
@@ -69,7 +69,7 @@ void Game :: init()
 
 void Game :: handleKeys( SDL_KeyboardEvent &key )
 {
-	if ( !replay && 
+	if ( !replay &&
    	     (key.keysym.sym == SDLK_SPACE ||
    	     key.keysym.sym == SDLK_KP_ENTER ||
    	     key.keysym.sym == SDLK_RETURN ||
@@ -119,7 +119,7 @@ void Game :: setDifficulty( string diff )
 		difficulty = MENU_DIFFICULTY_HARD;
     else if ( diff == "Custom" )
 		difficulty = MENU_DIFFICULTY_CUSTOM;
-		
+
     init();
 }
 

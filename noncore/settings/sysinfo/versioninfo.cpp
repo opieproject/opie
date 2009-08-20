@@ -195,10 +195,10 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
             }
             break;
         }
-        /* SIEMENS */    
+        /* SIEMENS */
         case Vendor_SIEMENS:
         {
-            switch ( model ) 
+            switch ( model )
             {
                 /* SIMPAD */
                 case Model_SIMpad_CL4:

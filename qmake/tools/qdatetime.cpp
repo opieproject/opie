@@ -896,7 +896,7 @@ QDate QDate::addYears( int nyears ) const
     y += nyears;
 
     QDate tmp(y,m,1);
-    
+
     if( d > tmp.daysInMonth() )
 	d = tmp.daysInMonth();
 

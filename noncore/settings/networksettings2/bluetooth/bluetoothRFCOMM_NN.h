@@ -12,7 +12,7 @@ public:
       BluetoothRFCOMMNetNode();
       virtual ~BluetoothRFCOMMNetNode();
 
-      virtual const QString pixmapName() 
+      virtual const QString pixmapName()
         { return "Devices/bluetooth"; }
 
       virtual const QString nodeDescription() ;

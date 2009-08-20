@@ -19,11 +19,11 @@ static size_t strong_len = RS_DEFAULT_STRONG_LEN;
 
 void QRsync::generateSignature( QString baseFile, QString sigFile )
 {
-    
+
     if ( QFile::exists( baseFile ) ) {
 	FILE *basis_file, *sig_file;
 	rs_result       result;
-	    
+
 	basis_file = fopen( baseFile.latin1(), "rb" );
 	sig_file = fopen( sigFile.latin1(), "wb" );
 
@@ -50,19 +50,19 @@ void QRsync::generateDiff( QString baseFile, QString sigFile, QString deltaFile 
 
 	result = rs_loadsig_file(sig_file, &sumset, 0);
 	if (result != RS_DONE) {
-	    odebug << "rdiffGenDiff: loading of sig file failed, error=" << result << "" << oendl; 
+	    odebug << "rdiffGenDiff: loading of sig file failed, error=" << result << "" << oendl;
 	} else {
 	    result = rs_build_hash_table(sumset);
 	    if ( result != RS_DONE) {
-		odebug << "rdiffGenDiff: building of hash table failed, error=" << result << "" << oendl; 
+		odebug << "rdiffGenDiff: building of hash table failed, error=" << result << "" << oendl;
 	    } else {
 		result = rs_delta_file(sumset, new_file, delta_file, 0);
 		if ( result != RS_DONE) {
-		    odebug << "rdiffGenDiff: writing of diff file failed, error=" << result << "" << oendl; 
+		    odebug << "rdiffGenDiff: writing of diff file failed, error=" << result << "" << oendl;
 		}
 	    }
 	}
-	
+
 	if ( sumset )
 	    rs_free_sumset( sumset );
 	fclose( new_file );
@@ -84,7 +84,7 @@ void QRsync::applyDiff( QString baseFile, QString deltaFile )
 	new_file = fopen( (baseFile + ".new").latin1(), "wb" );
 #else
 	new_file =   fopen(rdiffNewFile, "wb");
-#endif	
+#endif
 
 	result = rs_patch_file(basis_file, delta_file, new_file, 0);
 
@@ -93,12 +93,12 @@ void QRsync::applyDiff( QString baseFile, QString deltaFile )
 	fclose( new_file );
 
 	if (result != RS_DONE) {
-	    odebug << "rdiffApplyDiff failed with result " << result << "" << oendl; 
+	    odebug << "rdiffApplyDiff failed with result " << result << "" << oendl;
 	    return;
 	}
 
 
-#ifdef Q_WS_WIN	
+#ifdef Q_WS_WIN
 	QDir dir;
 	QFile backup = baseFile + "~";
 	dir.rename( baseFile, backup );

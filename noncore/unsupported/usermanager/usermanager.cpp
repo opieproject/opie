@@ -30,7 +30,7 @@ using namespace Opie::Core;
  */
 UserConfig::UserConfig(QWidget* parent, const char* name, WFlags fl) : QMainWindow(parent, name, fl) {
 	setCaption(tr("Opie User Manager"));
-	
+
 	// Create an instance of the global object 'accounts'. This holds all user/group info, and functions to modify them.
 	accounts=new Passwd();
 	accounts->open();	// This actually loads the files /etc/passwd & /etc/group into memory.
@@ -71,10 +71,10 @@ UserConfig::UserConfig(QWidget* parent, const char* name, WFlags fl) : QMainWind
 	setupTabAllUsers();
 	setupTabAllGroups();
 	userPopupMenu.insertItem("Copy",0);
-	
+
 	getUsers(); // Fill out the iconview & listview with all users.
 	getGroups(); // Fill out the group listview with all groups.
-	
+
 	setCentralWidget(myTabWidget);
 }
 
@@ -87,15 +87,15 @@ void UserConfig::setupTabAccounts() {
 	QWidget *tabpage = new QWidget(this);
 	QVBoxLayout *layout = new QVBoxLayout(tabpage);
 	layout->setMargin(5);
-	
+
 	usersIconView=new QListView(tabpage,"users");
 	usersIconView->addColumn("Icon");
 	usersIconView->addColumn("Username");
 	usersIconView->setAllColumnsShowFocus(true);
 	layout->addWidget(usersIconView);
-	
+
 	connect(usersIconView,SIGNAL(returnPressed(QListViewItem*)),this,SLOT(showUserMenu(QListViewItem*)));
-	
+
 	myTabWidget->addTab(tabpage,"Users");
 }
 
@@ -103,7 +103,7 @@ void UserConfig::setupTabAllUsers() {
 	QWidget *tabpage = new QWidget(this);
 	QVBoxLayout *layout = new QVBoxLayout(tabpage);
 	layout->setMargin(5);
-	
+
 	usersListView=new QListView(tabpage,"allusers");
 	usersListView->addColumn("UID");
 	usersListView->addColumn("Login");
@@ -126,18 +126,18 @@ void UserConfig::setupTabAllGroups() {
 	layout->addWidget(groupsListView);
 	groupsListView->setSorting(1,1);
 	groupsListView->setAllColumnsShowFocus(true);
-	
+
 	myTabWidget->addTab(tabpage,"All Groups");
 }
 void UserConfig::getUsers() {
 	QString mytext;
 	QPixmap mypixmap;
 	QListViewItem *listviewitem;
-			
+
 	// Empty the iconview & the listview.
 	usersIconView->clear();
 	usersListView->clear();
-	
+
 	// availableUID is used as a deposite for the next available UID on the system, this should start at an ID over 500.
 	availableUID=500;
 	for(QStringList::Iterator it=accounts->passwdStringList.begin(); it!=accounts->passwdStringList.end(); ++it) {
@@ -196,7 +196,7 @@ void UserConfig::editUser() {
 
 void UserConfig::delUser() {
 	QString username;
-	
+
 	if(myTabWidget->currentPageIndex()==0) {	// Users, Iconview.
 		if(usersIconView->currentItem()) {	// Anything selected?
 			username=usersIconView->currentItem()->text(1);	// Get string associated with icon.
@@ -226,7 +226,7 @@ void UserConfig::delUser() {
 			QMessageBox::information(this,"No selection","No user has been selected.");
 		}
 	}
-	
+
 }
 
 void UserConfig::getGroups() {
@@ -270,5 +270,5 @@ void UserConfig::delGroup() {
 
 void UserConfig::showUserMenu(QListViewItem *item) {
 //	userPopupMenu.exec(item->mapToGlobal(QPoint(0,0)));
-	owarn << "Pressed!" << oendl; 
+	owarn << "Pressed!" << oendl;
 }

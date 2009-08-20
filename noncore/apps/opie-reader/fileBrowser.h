@@ -17,22 +17,22 @@ blah,blah,blah
 
 //#include <qvariant.h>
 #include <qdialog.h>
-#include <qfile.h> 
-#include <qdir.h> 
-#include <qstringlist.h> 
+#include <qfile.h>
+#include <qdir.h>
+#include <qstringlist.h>
 #include <qlabel.h>
 #include <qstring.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QtrListView;
 class QListViewItem;
 class QPushButton;
 class QLineEdit;
 
 class fileBrowser : public QDialog
-{ 
+{
   Q_OBJECT
 
     public:
@@ -52,13 +52,13 @@ class fileBrowser : public QDialog
   QLineEdit* m_filename;
   int filterspec;
   //    QDir::FilterSpec filterspec;
- 
+
   //QListViewItem * item;
   public slots:
 
  private:
-  QString filename; 
-  private slots: 
+  QString filename;
+  private slots:
     void upDir();
   void listDoubleClicked(QListViewItem *);
   void listClicked(QListViewItem *);
@@ -70,11 +70,11 @@ class fileBrowser : public QDialog
   void onSD();
   void onHome();
 
-  protected slots: 
+  protected slots:
 
  protected:
   void OnOK();
-  virtual void resizeEvent(QResizeEvent* e); 
+  virtual void resizeEvent(QResizeEvent* e);
   void setdir(const QString& s);
 };
 

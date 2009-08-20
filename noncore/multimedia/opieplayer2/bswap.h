@@ -71,7 +71,7 @@ inline static unsigned long long int ByteSwap64(unsigned long long int x)
       (((x) & 0x00000000ff000000LL) <<  8) | \
       (((x) & 0x0000000000ff0000LL) << 24) | \
       (((x) & 0x000000000000ff00LL) << 40) | \
-      (((x) & 0x00000000000000ffLL) << 56)) 
+      (((x) & 0x00000000000000ffLL) << 56))
 #endif  /* !__GNUC__ */
 
 #endif	/* !ARCH_X86 */
@@ -171,7 +171,7 @@ inline static unsigned long long int ByteSwap64(unsigned long long int x)
         ( (uint32_t)(unsigned char)(ch1) << 8 ) |   \
         ( (uint32_t)(unsigned char)(ch2) << 16 ) |  \
         ( (uint32_t)(unsigned char)(ch3) << 24 ) )
-        
+
 #ifdef WORDS_BIGENDIAN
 #define ME_FOURCC BE_FOURCC
 #else

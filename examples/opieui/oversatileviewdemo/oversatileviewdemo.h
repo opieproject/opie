@@ -44,7 +44,7 @@ class OVersatileViewItem;
 class OVersatileViewDemo: public QVBox
 {
   Q_OBJECT
-  
+
   public:
     OVersatileViewDemo( QWidget* parent=0, const char* name=0, WFlags f=0 );
     virtual ~OVersatileViewDemo();
@@ -58,17 +58,17 @@ class OVersatileViewDemo: public QVBox
 
     void doubleClicked( Opie::Ui::OVersatileViewItem *item );
     void returnPressed( Opie::Ui::OVersatileViewItem *item );
-  
+
     void onItem( Opie::Ui::OVersatileViewItem *item );
     void onViewport();
 
     void expanded( Opie::Ui::OVersatileViewItem *item );
     void collapsed( Opie::Ui::OVersatileViewItem *item );
-    
+
     void moved();
 
     void contextMenuRequested( Opie::Ui::OVersatileViewItem *item, const QPoint&, int col );
-    
+
   private:
     Opie::Ui::OVersatileView* vv;
 

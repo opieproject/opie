@@ -60,7 +60,7 @@ enum Operation {
 struct Op
 {
     Op() { number = 0; operation = oNop; }
-    Op( double num, Operation op ) 
+    Op( double num, Operation op )
     { number = num; operation = op; }
     double number;
     Operation operation;
@@ -92,7 +92,7 @@ private:
     void clear();
 
     void reset_conv();
-    
+
     void processStack( int op );
 
     QValueStack<Op> operationStack;
@@ -107,7 +107,7 @@ private:
     double evalExpr( int op );
     QLabel * memMark;
     QString fake;
-    
+
     // useful values for conversion stuff
     int current_mode, max_mode, conversion_mode_count, last_conversion;
 

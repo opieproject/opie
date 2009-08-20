@@ -54,17 +54,17 @@ QImage & QImageEffect::fade (QImage & img, float val, const QColor & color)
 		cb=qBlue(col);
 			        if (cr > red)
 	            r = cr - tbl[cr - red];
-	        
+
 	  else
 	            r = cr + tbl[red - cr];
 	        if (cg > green)
 	            g = cg - tbl[cg - green];
-	        
+
 	  else
 	            g = cg + tbl[green - cg];
 	        if (cb > blue)
 	            b = cb - tbl[cb - blue];
-	        
+
 	  else
 	            b = cb + tbl[blue - cb];
 	        img.setColor (i, qRgb (r, g, b));
@@ -85,17 +85,17 @@ cg=qGreen(col);
 cb=qBlue(col);
 	              if (cr > red)
 		          r = cr - tbl[cr - red];
-	              
+
 	      else
 		          r = cr + tbl[red - cr];
 	              if (cg > green)
 		          g = cg - tbl[cg - green];
-	              
+
 	      else
 		          g = cg + tbl[green - cg];
 	              if (cb > blue)
 		          b = cb - tbl[cb - blue];
-	              
+
 	      else
 		          b = cb + tbl[blue - cb];
 	              *data++ = qRgb (r, g, b);
@@ -113,6 +113,6 @@ QPixmap& QPixmapEffect::fade(QPixmap &pixmap, float val, const QColor &color)
 	QImage img = pixmap.convertToImage();
 	QImageEffect::fade(img, val, color);
 	pixmap.convertFromImage(img);
-   
+
 	return pixmap;
 }

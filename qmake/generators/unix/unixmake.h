@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Definition of UnixMakefileGenerator class.
 **
@@ -70,7 +70,7 @@ protected:
 
     void writeMakeParts(QTextStream &);
     void writeSubdirs(QTextStream &, bool=TRUE);
-    
+
 private:
     void init2();
 };

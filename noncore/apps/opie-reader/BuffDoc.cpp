@@ -101,20 +101,20 @@ static bool isvowel(unsigned short c) // Only want lower case vowels
     case 0x44E:
     case 0x44F:
     case 0x451:
-      
+
     case 0x450:
     case 0x454:
     case 0x456:
     case 0x457:
     case 0x45D:
-      
+
     case 0x463:
-      
+
     case 0x4AF:
     case 0x4B1:
     case 0x4D1:
     case 0x4D3:
-      
+
     case 0x4D5:
     case 0x4D7:
     case 0x4E3:
@@ -142,11 +142,11 @@ inline bool isconsonant(unsigned short c)
     case 0x439:
     case 0x44A:
     case 0x44C:
-      
+
     case 0x45E:
-      
+
       return false;
-      
+
     default:
       break;
     }
@@ -693,7 +693,7 @@ int BuffDoc::openfile(QWidget* _parent, const char *src)
       const QFileInfoList *list = d.entryInfoList();
       QFileInfoListIterator it( *list );      // create list iterator
       QFileInfo *fi;                          // pointer for traversing
-  
+
       int ret = -1;
       while ( ret != 0 && (fi=it.current()) )
 	{           // for each file...

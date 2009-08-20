@@ -105,7 +105,7 @@ void Menu::InstEditDialog::loadInstrument()
 {
     stringlist.clear();
     Instrument inst=data->getInstrument(instid);
-    odebug << "load Instrument : " << inst.noOfStrings() << " strings" << oendl; 
+    odebug << "load Instrument : " << inst.noOfStrings() << " strings" << oendl;
     for(uint s=0;s<inst.noOfStrings();s++)
     {
         stringlist.append(new EditStringWidget(inst.string(s),stringwidget));

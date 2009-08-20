@@ -3,9 +3,9 @@
 
 #include <qvariant.h>
 #include <qwidget.h>
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QLabel;
 class QLineEdit;
 class QListViewItem;
@@ -14,7 +14,7 @@ class QTimer;
 class QPopupMenu;
 
 class EditWidget : public QWidget
-{ 
+{
     Q_OBJECT
 
 public:

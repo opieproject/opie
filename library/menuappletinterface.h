@@ -44,14 +44,14 @@ class QPopupMenu;
 struct MenuAppletInterface : public QUnknownInterface
 {
     virtual QString name ( ) const = 0;
-    
+
     virtual int position ( ) const = 0;
     virtual QIconSet icon ( ) const = 0;
     virtual QString text ( ) const = 0;
-    
+
     virtual QPopupMenu *popup ( QWidget *parent ) const = 0;
 
-	// callback for popup() == 0    
+	// callback for popup() == 0
     virtual void activated ( ) = 0;
 };
 

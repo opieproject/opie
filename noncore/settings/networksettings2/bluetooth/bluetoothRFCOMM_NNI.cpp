@@ -2,7 +2,7 @@
 #include "bluetoothRFCOMM_NNI.h"
 #include "bluetoothRFCOMM_NN.h"
 
-ABluetoothRFCOMM::ABluetoothRFCOMM( BluetoothRFCOMMNetNode * PNN ) : 
+ABluetoothRFCOMM::ABluetoothRFCOMM( BluetoothRFCOMMNetNode * PNN ) :
                   ANetNodeInstance( PNN ), Data() {
       Data.Devices.setAutoDelete( TRUE );
       GUI = 0;

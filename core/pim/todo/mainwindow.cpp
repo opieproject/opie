@@ -162,8 +162,8 @@ void MainWindow::initUI()
         namestr = "todo/priority";
         namestr.append( QString::number( i ) );
         m_pic_priority.append( Opie::Core::OResource::loadPixmap( namestr ) );
-    }    
-    
+    }
+
     // Create main widget stack
     m_stack = new Opie::Ui::OWidgetStack(this,  "main stack");
     setCentralWidget( m_stack );
@@ -434,13 +434,13 @@ void MainWindow::slotDelete(int uid )
 {
     if( uid == 0 )
         return;
-    
+
     if( m_syncing ) {
         QMessageBox::warning(this, QWidget::tr("Todo"),
                              QWidget::tr("Data can not be edited, currently syncing"));
         return;
     }
-    
+
     OPimTodo to = m_todoMgr.event(uid);
     if (!QPEMessageBox::confirmDelete(this, QWidget::tr("Todo"), to.toShortText() ) )
         return;
@@ -662,7 +662,7 @@ void MainWindow::slotEdit( int uid )
 {
     if ( uid == 0 )
         return;
-    
+
     if( m_syncing ) {
         QMessageBox::warning(this, QWidget::tr("Todo"),
                              QWidget::tr("Data can't be edited, currently syncing"));
@@ -953,7 +953,7 @@ namespace {
         }
         return nonMatching;
     }
-    
+
     void addAlarms( const OPimNotifyManager::Alarms& als, int uid )
     {
         OPimNotifyManager::Alarms::ConstIterator it;
@@ -962,7 +962,7 @@ namespace {
         }
 
     }
-    
+
     void removeAlarms( const OPimNotifyManager::Alarms& als, int uid )
     {
         OPimNotifyManager::Alarms::ConstIterator it;
@@ -1006,7 +1006,7 @@ bool MainWindow::doAlarm( const QDateTime& dt, int uid )
     m_todoMgr.load();
 
     OPimTodo todo = m_todoMgr.event( uid );
-    if (!todo.hasNotifiers() ) 
+    if (!todo.hasNotifiers() )
         return false;
 
     /*
@@ -1020,7 +1020,7 @@ bool MainWindow::doAlarm( const QDateTime& dt, int uid )
         if ( alarm.sound() != OPimAlarm::Silent ) {
             startAlarm();
             bSound = TRUE;
-        }        
+        }
 
         QDateTime occdt = alarm.occurrenceDateTime();
         if( occdt.isNull() )
@@ -1035,7 +1035,7 @@ bool MainWindow::doAlarm( const QDateTime& dt, int uid )
         OPimAlarmDlg dlg( occdt, tr("Todo Alarm"), msg, 5, 0, ampm, TRUE, TRUE, this );
         connect( &dlg, SIGNAL(viewItem(int)), this, SLOT(edit(int)) );
         QPEApplication::execDialog( &dlg );
-                
+
         if (bSound)
             killAlarm();
 
@@ -1046,13 +1046,13 @@ bool MainWindow::doAlarm( const QDateTime& dt, int uid )
         m_todoMgr.update( uid, todo );
         m_todoMgr.save();
         handleAlarms( OPimTodo(), todo );
-        
+
         if( dlg.response() == OPimAlarmDlg::View ) {
             slotShow( uid );
             needshow = TRUE;
         }
     }
-    else 
+    else
         owarn << "Started for alarm at " << dt << " (uid=" << uid << ") that does not exist!" << oendl;
 
     return needshow;

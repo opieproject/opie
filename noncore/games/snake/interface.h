@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include <qmainwindow.h>  
+#include <qmainwindow.h>
 #include <qpe/qpeapplication.h>
 #include <qcanvas.h>
 #include <qlabel.h>
@@ -30,18 +30,18 @@
 
 class SnakeGame : public QMainWindow {
     Q_OBJECT
- 
+
 public:
     SnakeGame(QWidget* parent=0, const char* name=0, WFlags f=0);
     ~SnakeGame();
-    
-    void clear(); 
+
+    void clear();
     void createTargets();
 
     static QString appName() { return QString::fromLatin1("snake"); }
 
 protected:
-    virtual void keyPressEvent(QKeyEvent*); 
+    virtual void keyPressEvent(QKeyEvent*);
     virtual void resizeEvent(QResizeEvent *e);
 
 signals:
@@ -54,7 +54,7 @@ private slots:
     void levelUp();
     void scoreInc();
     void welcomescreen();
- 
+
 private:
     void showScore(int);
     QCanvasView* cv;
@@ -62,8 +62,8 @@ private:
     QCanvas canvas;
     QTimer* pauseTimer;
     Snake* snake;
-    int last;  
-    int level; 
+    int last;
+    int level;
     int stage;
     int targetamount;
     int notargets;

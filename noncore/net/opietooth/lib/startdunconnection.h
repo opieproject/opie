@@ -28,13 +28,13 @@ namespace OpieTooth {
 	QString m_mac;
 	ConnectionType m_connectionType;
 	Opie::Core::OProcess* m_dunConnect;
-	
+
     private slots:
 	void slotExited( Opie::Core::OProcess* proc );
                 void slotStdOut( Opie::Core::OProcess* proc, char* chars, int len );
     };
 
- 
+
 }
 
 #endif

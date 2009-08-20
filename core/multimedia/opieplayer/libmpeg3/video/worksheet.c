@@ -5,7 +5,7 @@
 
 static LONGLONG  mpeg3_MMX_601_Y_COEF = 0x0000004000400040;
 
-inline void mpeg3_601_mmx(unsigned long y, 
+inline void mpeg3_601_mmx(unsigned long y,
 		unsigned long *output)
 {
 asm("

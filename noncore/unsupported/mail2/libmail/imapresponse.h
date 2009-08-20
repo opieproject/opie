@@ -46,17 +46,17 @@ public:
 	void setHost(QString host) { _host = host; }
 	QString host() { return _host; }
 
-	QString toString() 
+	QString toString()
 	{
 		if (_name.isNull() && _mailbox.isNull() && _host.isNull())
 			return QString(0);
-		if (_name != _mailbox + "@" + _host) 
+		if (_name != _mailbox + "@" + _host)
 			return _name + " <" + _mailbox + "@" + _host + ">";
 		else
 			return _name;
 	}
 
-	QString email() 
+	QString email()
 	{
 		if (_host.isEmpty()) return _mailbox;
 		else return _mailbox + "@" + _host;
@@ -387,7 +387,7 @@ private:
 
 };
 
-class IMAPResponseEXPUNGE 
+class IMAPResponseEXPUNGE
 {
 public:
 	IMAPResponseEXPUNGE(QString mails = 0)
@@ -500,7 +500,7 @@ private:
 
 };
 
-class IMAPResponseParser : public QObject, public IMAPResponseEnums 
+class IMAPResponseParser : public QObject, public IMAPResponseEnums
 {
 	Q_OBJECT
 

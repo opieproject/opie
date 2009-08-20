@@ -61,7 +61,7 @@ protected:
  * it does implement everything available for OPimContact.
  * @see OPimAccessBackend for more information of available methods
  */
-class OPimContactAccessBackend_XML : public OPimContactAccessBackend 
+class OPimContactAccessBackend_XML : public OPimContactAccessBackend
 {
 public:
     OPimContactAccessBackend_XML ( const QString& appname = QString::null, const QString& filename = QString::null );

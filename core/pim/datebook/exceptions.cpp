@@ -35,7 +35,7 @@
 #include <qpe/qpemessagebox.h>
 
 Exceptions::Exceptions(const QString &exceptions, QWidget* parent, const char* name, bool modal,
-                       WFlags fl) : ExceptionsBase(parent, name, modal, fl) 
+                       WFlags fl) : ExceptionsBase(parent, name, modal, fl)
 {
     QStringList exceptList = QStringList::split( " ", exceptions );
     QString item;
@@ -47,7 +47,7 @@ Exceptions::Exceptions(const QString &exceptions, QWidget* parent, const char* n
             lbExceptions->insertItem(item);
         }
     }
-    
+
     connect( cmdRemove, SIGNAL(clicked()),
              this, SLOT(slotRemoveItem()) );
 }
@@ -56,7 +56,7 @@ void Exceptions::slotRemoveItem()
 {
     if(lbExceptions->currentItem() == -1)
         return;
-        
+
     if ( QPEMessageBox::confirmDelete( this, tr( "Calendar" ), lbExceptions->currentText() ) )
         lbExceptions->removeItem( lbExceptions->currentItem() );
 }

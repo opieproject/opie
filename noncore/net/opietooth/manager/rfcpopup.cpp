@@ -18,11 +18,11 @@ using namespace OpieTooth;
 /*
  * c'tor init the QAction
  */
-RfcCommPopup::RfcCommPopup(const OpieTooth::Services& service, 
+RfcCommPopup::RfcCommPopup(const OpieTooth::Services& service,
   OpieTooth::BTDeviceItem* item)
         : QPopupMenu(), m_service(service)
 {
-    owarn << "RfcCommPopup c'tor" << oendl; 
+    owarn << "RfcCommPopup c'tor" << oendl;
 
     QAction* a;
     int port = service.protocolDescriptorList().last().port();
@@ -33,8 +33,8 @@ RfcCommPopup::RfcCommPopup(const OpieTooth::Services& service,
     m_item = item;
 
     for (i = 0; i < sizeof(PPPDialog::conns) / sizeof(Connection); i++) {
-      if (PPPDialog::conns[i].port == port && 
-          PPPDialog::conns[i].btAddr == mac && 
+      if (PPPDialog::conns[i].port == port &&
+          PPPDialog::conns[i].btAddr == mac &&
           PPPDialog::conns[i].proc.isRunning()) {
           /* disconnect action */
           a = new QAction(  );
@@ -76,9 +76,9 @@ RfcCommPopup::~RfcCommPopup()
 void RfcCommPopup::slotConnect()
 {
 
-    owarn << "connect" << oendl; 
+    owarn << "connect" << oendl;
 
-    PPPDialog pppDialog(m_item->mac(), 
+    PPPDialog pppDialog(m_item->mac(),
       m_service.protocolDescriptorList().last().port());
     QPEApplication::execDialog( &pppDialog );
 }
@@ -86,7 +86,7 @@ void RfcCommPopup::slotConnect()
 
 void RfcCommPopup::slotDisconnect()
 {
-    owarn << "slot disconnected " << procId << oendl; 
+    owarn << "slot disconnected " << procId << oendl;
     if (procId >= 0)
         PPPDialog::conns[procId].proc.kill();
 }
@@ -96,7 +96,7 @@ void RfcCommPopup::slotBind()
 {
     RfcommAssignDialog rfcommAssign ( this, "RfcommAssignDialog", true, WStyle_ContextHelp  );
 
-    rfcommAssign.newDevice( m_item->mac(), 
+    rfcommAssign.newDevice( m_item->mac(),
         m_service.protocolDescriptorList().last().port());
 
     if ( QPEApplication::execDialog( &rfcommAssign ) == QDialog::Accepted )

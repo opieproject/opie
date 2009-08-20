@@ -13,7 +13,7 @@ using namespace Opie::Core;
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 
-static const char* const image0_data[] = { 
+static const char* const image0_data[] = {
 "24 16 3 1",
 ". c None",
 "# c #000040",
@@ -35,7 +35,7 @@ static const char* const image0_data[] = {
 ".......##...............",
 "........................"};
 
-static const char* const image1_data[] = { 
+static const char* const image1_data[] = {
 "24 16 4 1",
 ". c None",
 "a c #008080",
@@ -58,7 +58,7 @@ static const char* const image1_data[] = {
 "...####aa.........###...",
 "........................"};
 
-static const char* const image2_data[] = { 
+static const char* const image2_data[] = {
 "17 15 4 1",
 "# c #000000",
 ". c #dcdcdc",
@@ -81,9 +81,9 @@ static const char* const image2_data[] = {
 "..###########...."};
 
 
-/* 
- *  Constructs a ScQtFileDlg which is a child of 'parent', with the 
- *  name 'name' and widget flags set to 'f' 
+/*
+ *  Constructs a ScQtFileDlg which is a child of 'parent', with the
+ *  name 'name' and widget flags set to 'f'
  *
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  TRUE to construct a modal dialog.
@@ -96,24 +96,24 @@ ScQtFileDlg::ScQtFileDlg( QWidget* parent,  const char* name, bool modal, WFlags
     QPixmap image2( ( const char** ) image2_data );
     if ( !name )
 	setName( "ScQtFileDlg" );
-    resize( 196, 279 ); 
+    resize( 196, 279 );
     if (!name)
        setCaption( tr( "FileDlg" ) );
     else
        setCaption(name);
-    ScQtFileDlgLayout = new QVBoxLayout( this ); 
+    ScQtFileDlgLayout = new QVBoxLayout( this );
     ScQtFileDlgLayout->setSpacing( 6 );
     ScQtFileDlgLayout->setMargin( 11 );
 
-    Layout5 = new QVBoxLayout; 
+    Layout5 = new QVBoxLayout;
     Layout5->setSpacing( 6 );
     Layout5->setMargin( 0 );
 
-    Layout4 = new QVBoxLayout; 
+    Layout4 = new QVBoxLayout;
     Layout4->setSpacing( 6 );
     Layout4->setMargin( 0 );
 
-    Layout3 = new QHBoxLayout; 
+    Layout3 = new QHBoxLayout;
     Layout3->setSpacing( 6 );
     Layout3->setMargin( 0 );
 
@@ -147,7 +147,7 @@ ScQtFileDlg::ScQtFileDlg( QWidget* parent,  const char* name, bool modal, WFlags
     Layout3->addWidget( CancelButton );
     Layout4->addLayout( Layout3 );
 
-    Layout3_2 = new QHBoxLayout; 
+    Layout3_2 = new QHBoxLayout;
     Layout3_2->setSpacing( 6 );
     Layout3_2->setMargin( 0 );
 
@@ -203,7 +203,7 @@ ScQtFileDlg::ScQtFileDlg( QWidget* parent,  const char* name, bool modal, WFlags
     connect( MkDirButton, SIGNAL( clicked() ), this, SLOT( slotMkDir() ) );
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 ScQtFileDlg::~ScQtFileDlg()
@@ -213,41 +213,41 @@ ScQtFileDlg::~ScQtFileDlg()
 
 void ScQtFileDlg::slotCancel()
 {
-    owarn << "ScQtFileDlg::slotCancel(): Not implemented yet!" << oendl; 
+    owarn << "ScQtFileDlg::slotCancel(): Not implemented yet!" << oendl;
 }
 
 void ScQtFileDlg::slotDirComboBoxChanged( int )
 {
-    owarn << "ScQtFileDlg::slotDirComboBoxChanged( int ): Not implemented yet!" << oendl; 
+    owarn << "ScQtFileDlg::slotDirComboBoxChanged( int ): Not implemented yet!" << oendl;
 }
 
 void ScQtFileDlg::slotDoubleClicked(QListViewItem *)
 {
-    owarn << "ScQtFileDlg::slotDoubleClicked(QListViewItem *): Not implemented yet!" << oendl; 
+    owarn << "ScQtFileDlg::slotDoubleClicked(QListViewItem *): Not implemented yet!" << oendl;
 }
 
 void ScQtFileDlg::slotFileTextChanged( const QString & )
 {
-    owarn << "ScQtFileDlg::slotFileTextChanged( const QString & ): Not implemented yet!" << oendl; 
+    owarn << "ScQtFileDlg::slotFileTextChanged( const QString & ): Not implemented yet!" << oendl;
 }
 
 void ScQtFileDlg::slotMkDir()
 {
-    owarn << "ScQtFileDlg::slotMkDir(): Not implemented yet!" << oendl; 
+    owarn << "ScQtFileDlg::slotMkDir(): Not implemented yet!" << oendl;
 }
 
 void ScQtFileDlg::slotOK()
 {
-    owarn << "ScQtFileDlg::slotOK(): Not implemented yet!" << oendl; 
+    owarn << "ScQtFileDlg::slotOK(): Not implemented yet!" << oendl;
 }
 
 void ScQtFileDlg::slotSelectionChanged(QListViewItem *)
 {
-    owarn << "ScQtFileDlg::slotSelectionChanged(QListViewItem *): Not implemented yet!" << oendl; 
+    owarn << "ScQtFileDlg::slotSelectionChanged(QListViewItem *): Not implemented yet!" << oendl;
 }
 
 void ScQtFileDlg::slotTypeComboBoxChanged( int )
 {
-    owarn << "ScQtFileDlg::slotTypeComboBoxChanged( int ): Not implemented yet!" << oendl; 
+    owarn << "ScQtFileDlg::slotTypeComboBoxChanged( int ): Not implemented yet!" << oendl;
 }
 

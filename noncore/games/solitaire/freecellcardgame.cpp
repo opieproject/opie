@@ -51,9 +51,9 @@ FreecellCardGame::FreecellCardGame(QCanvas *c, bool snap, QWidget *parent) : Can
 void FreecellCardGame::deal(void)
 {
     highestZ = 1;
-    
+
     beginDealing();
-    
+
     for (int i = 0; i < 52; i++) {
 	Card *card = cards[i];
 	card->setFace( TRUE );
@@ -79,7 +79,7 @@ bool FreecellCardGame::checkNeeded(Card *card)
 			c = freecellPiles[i]->cardOnBottom();
 			if (c != NULL){
 				if (card->isRed()!= c->isRed() && card->getValue()== c->getValue()+1){
-					return (false); 
+					return (false);
 				}
 			}
 		}
@@ -95,8 +95,8 @@ bool FreecellCardGame::checkNeeded(Card *card)
 	}
 	return(true);
 }
-	
-//  added to move cards, on which no card can be moved, to discard pile 
+
+//  added to move cards, on which no card can be moved, to discard pile
 void FreecellCardGame::checkUnusable()
 {
 	int i,j;
@@ -124,7 +124,7 @@ void FreecellCardGame::checkUnusable()
 				}
 				j++;
 			}
-		} 
+		}
 	}
 	for (i=0;i<4;i++){
 		top_one = freecellPiles[i]->cardOnTop();
@@ -147,15 +147,15 @@ void FreecellCardGame::checkUnusable()
 				}
 				j++;
 			}
-		} 
-	}		
+		}
+	}
 }
 
 
 bool FreecellCardGame::mousePressCard( Card *c, QPoint p )
 {
     Q_UNUSED(p);
-    
+
     if ( !c->getCardPile()->isAllowedToBeMoved(c) ) {
 	moving = NULL;
 	return TRUE;

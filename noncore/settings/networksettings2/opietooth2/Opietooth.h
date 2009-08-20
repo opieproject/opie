@@ -5,9 +5,9 @@
 
 class MyProcess;
 
-namespace Opie { 
+namespace Opie {
 
-  namespace Ui { 
+  namespace Ui {
 
     class OLedBox;
 
@@ -62,7 +62,7 @@ class OTPairing : public OTPairingGUI {
 
 public :
 
-      OTPairing( QWidget * parent, 
+      OTPairing( QWidget * parent,
                  OTIcons * _Ic = 0 );
       ~OTPairing();
 
@@ -97,12 +97,12 @@ class OTScan : public OTScanGUI {
 
 public :
 
-      OTScan( QWidget * parent, 
+      OTScan( QWidget * parent,
               OTIcons * _Ic = 0 );
       ~OTScan();
 
       // static function to return a device and a channel
-      static int getDevice( OTPeer *& Peer, 
+      static int getDevice( OTPeer *& Peer,
                             int & Channel,
                             OTGateway * OT,
                             const UUIDVector & Filter = 0,

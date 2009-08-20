@@ -11,7 +11,7 @@ AI_Dialog::AI_Dialog(QWidget* parent,const char* name,bool modal,WFlags f)
 
     QGroupBox* settings=new QGroupBox(tr( "Settings" ),this);
     settings->setGeometry(10,5,220,170);
-    
+
     QLabel* rescue_label=new QLabel(tr( "<b>Rescue</b>" ),settings);
     rescue_label->setGeometry(50,20,50,20);
     rescue=new QSpinBox(0,6,1,settings);
@@ -20,7 +20,7 @@ AI_Dialog::AI_Dialog(QWidget* parent,const char* name,bool modal,WFlags f)
     rescuehelp->setGeometry(140,20,20,20);
     connect(rescuehelp,SIGNAL(pressed()),this,SLOT(rescuehelp_pressed()));
     connect(rescuehelp,SIGNAL(released()),this,SLOT(rescuehelp_released()));
-    
+
     QLabel* eliminate_label=new QLabel(tr( "<b>Eliminate</b>" ),settings);
     eliminate_label->setGeometry(50,40,50,20);
     eliminate=new QSpinBox(0,6,1,settings);
@@ -145,7 +145,7 @@ void AI_Dialog::emptyhelp_released()
   setHelpText();
 }
 
-  
+
 
 void AI_Dialog::setDefaultValues()
 {
@@ -175,7 +175,7 @@ AISettings AI_Dialog::getAISettings()
     ai.expose=expose->value();
     ai.protect=protect->value();
     ai.safe= safe->value();
-    ai.empty=empty->value();    
+    ai.empty=empty->value();
     return ai;
 }
 
@@ -183,7 +183,7 @@ void AI_Dialog::setHelpText(const QString& type)
 {
   if(type=="rescue")
   {
-    help->setText(tr( "Bring the pieces out of the endzone" ));  
+    help->setText(tr( "Bring the pieces out of the endzone" ));
   }
   else if(type=="eliminate")
   {
@@ -191,7 +191,7 @@ void AI_Dialog::setHelpText(const QString& type)
   }
   else if(type=="expose")
   {
-    help->setText(tr( "Expose you own pieces.\nAfter such a move only one piece will remain in the slot") );  
+    help->setText(tr( "Expose you own pieces.\nAfter such a move only one piece will remain in the slot") );
   }
   else if(type=="protect")
   {
@@ -199,7 +199,7 @@ void AI_Dialog::setHelpText(const QString& type)
   }
   else if(type=="safe")
   {
-    help->setText(tr( "Move piece to a slot already\noccupied by the player" ));  
+    help->setText(tr( "Move piece to a slot already\noccupied by the player" ));
   }
   else if(type=="empty")
   {

@@ -3,7 +3,7 @@
 
 #include <qlineedit.h>
 
-class KeyEdit : public QLineEdit { 
+class KeyEdit : public QLineEdit {
   Q_OBJECT
 
 public:
@@ -18,4 +18,4 @@ private:
 };
 
 #endif
- 
+

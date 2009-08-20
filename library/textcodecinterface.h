@@ -36,7 +36,7 @@ struct TextCodecInterface : public QUnknownInterface
 public:
     virtual QStringList names() const = 0;
     virtual QTextCodec *createForName( const QString &name ) = 0;
-    
+
     virtual QValueList<int> mibEnums() const = 0;
     virtual QTextCodec *createForMib( int mib ) = 0;
 };

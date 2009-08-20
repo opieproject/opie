@@ -1,16 +1,16 @@
 #include "bluetoothRFCOMM_NN.h"
 #include "bluetoothRFCOMM_NNI.h"
 
-static const char * BluetoothRFCOMMNeeds[] = 
+static const char * BluetoothRFCOMMNeeds[] =
     { 0
     };
 
-static const char * BluetoothRFCOMMProvides[] = 
+static const char * BluetoothRFCOMMProvides[] =
     { "line",
       "GPRS"
     };
 
-BluetoothRFCOMMNetNode::BluetoothRFCOMMNetNode() : 
+BluetoothRFCOMMNetNode::BluetoothRFCOMMNetNode() :
       ANetNode( tr("Bluetooth serial link") ) {
 }
 

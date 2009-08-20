@@ -347,7 +347,7 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
     channel = new QCopChannel("QPE/Desktop", this );
     connect(channel, SIGNAL(received(const QCString&,const QByteArray&) ),
             this, SLOT(desktopMessage(const QCString&,const QByteArray&) ) );
-            
+
     m_screensaver = new OpieScreenSaver();
     m_screensaver->setInterval( -1 );
     QWSServer::setScreenSaver( m_screensaver );
@@ -638,15 +638,15 @@ void ServerApplication::doBeforeSuspend()
 void ServerApplication::doResume()
 {
     if( !loginlock && Opie::Security::MultiauthPassword::isAuthenticating() ) {
-        // Authentication is already taking place but not by us (eg. because the 
+        // Authentication is already taking place but not by us (eg. because the
         // user used the lock applet before suspending), so we need to let it
-        // carry on and when we get the unlocked() QCop message we can do our 
+        // carry on and when we get the unlocked() QCop message we can do our
         // post-resume tasks ( in doAfterResume() ).
         m_unlock_resume = true;
         m_login = false;
         return;
-    }        
-    
+    }
+
     if( m_login ) {
         // Perform authentication
         if ( !login( false ) ) {
@@ -662,7 +662,7 @@ void ServerApplication::doAfterResume()
 {
     execAutoStart( suspendDateTime );
 }
-        
+
 void ServerApplication::togglePower()
 {
     static bool excllock = false;
@@ -671,7 +671,7 @@ void ServerApplication::togglePower()
         return ;
 
     excllock = true;
-    
+
     doBeforeSuspend();
 
     ODevice::inst ( )-> suspend ( );

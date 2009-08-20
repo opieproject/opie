@@ -19,7 +19,7 @@ IRCSession::~IRCSession() {
     /* We want this to get deleted automatically */
     m_channels.setAutoDelete(TRUE);
     m_people.setAutoDelete(TRUE);
-        
+
     delete m_parser;
     delete m_connection;
 }
@@ -70,7 +70,7 @@ void IRCSession::op(IRCChannel *channel, IRCPerson *person) {
 
 void IRCSession::kick(IRCChannel *channel, IRCPerson *person, QString message) {
     m_connection->sendLine("KICK " + channel->channelname() + " " + person->nick() +" :" + message);
-} 
+}
 
 void IRCSession::sendMessage(IRCPerson *person, QString message) {
     m_connection->sendLine("PRIVMSG " + person->nick() + " :" + message);
@@ -89,7 +89,7 @@ void IRCSession::sendAction(IRCPerson *person, QString message) {
 }
 
 bool IRCSession::isSessionActive() {
-    return m_connection->isConnected(); 
+    return m_connection->isConnected();
 }
 
 bool IRCSession::isLoggedIn() {
@@ -118,7 +118,7 @@ void IRCSession::setValidChannelmodes(const QString &modes) {
 void IRCSession::updateNickname(const QString &oldNickname, const QString &newNickname) {
     QList<IRCChannel> channels;
     IRCOutput output;
-    
+
     if (oldNickname == m_server->nick()) {
         m_server->setNick(newNickname);
         output = IRCOutput(OUTPUT_NICKCHANGE, tr("You are now known as %1").arg(newNickname));
@@ -127,12 +127,12 @@ void IRCSession::updateNickname(const QString &oldNickname, const QString &newNi
 
     else {
         IRCPerson *person = getPerson(oldNickname);
-        
+
         if(!person) {
             emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Nickname change of an unknown person")));
             return;
         }
-        
+
         getChannelsByPerson(person, channels);
         output = IRCOutput(OUTPUT_NICKCHANGE, tr("%1 is now known as %2").arg(oldNickname).arg(newNickname));
     }

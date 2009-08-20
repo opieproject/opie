@@ -44,14 +44,14 @@ ColumnDef::ColumnDef(const char *sName, ColumnType type, const char *sNewValue)
 void ColumnDef::addColumnValue(const QString &sValue)
 {
     if( (_type & 0x00ffffff) !=typeList )
-        odebug << "Column " << (const char *)_sName << " is not a list" << oendl; 
+        odebug << "Column " << (const char *)_sName << " is not a list" << oendl;
     else
         _valueList.append(sValue);
 }
 void ColumnDef::addColumnValue(const char *sValue)
 {
     if( (_type & 0x00ffffff)!=typeList )
-        odebug << "Column " << (const char *)_sName << " is not a list" << oendl; 
+        odebug << "Column " << (const char *)_sName << " is not a list" << oendl;
     else
         _valueList.append(sValue);
 }

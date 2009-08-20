@@ -236,7 +236,7 @@ inline void QPEApplication::setCurrentRotation( int r )
 
 /*
  * -remove me
- */ 
+ */
 #ifdef Q_WS_QWS
 extern Q_EXPORT QRect qt_maxWindowRect;
 #endif

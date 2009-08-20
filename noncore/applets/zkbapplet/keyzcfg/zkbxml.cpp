@@ -15,7 +15,7 @@ ZkbXmlHandler::ZkbXmlHandler() {
 ZkbXmlHandler::~ZkbXmlHandler() {
 }
 
-bool ZkbXmlHandler::startElement(const QString&, const QString&, 
+bool ZkbXmlHandler::startElement(const QString&, const QString&,
 	const QString& name, const QXmlAttributes& attr) {
 
 	bool ret = false;
@@ -41,7 +41,7 @@ bool ZkbXmlHandler::startElement(const QString&, const QString&,
 	return ret;
 }
 
-bool ZkbXmlHandler::endElement(const QString&, const QString&, 
+bool ZkbXmlHandler::endElement(const QString&, const QString&,
 	const QString& name) {
 
 	bool ret = false;
@@ -75,19 +75,19 @@ bool ZkbXmlHandler::startKeymapElement(int ardelay, int arperiod, const QString&
 	return false;
 }
 
-bool ZkbXmlHandler::startIncludeElement(const QString& file, 
+bool ZkbXmlHandler::startIncludeElement(const QString& file,
 	const QString& prefix) {
 
 	return false;
 }
 
-bool ZkbXmlHandler::startLabelElement(const QString& label, 
+bool ZkbXmlHandler::startLabelElement(const QString& label,
 	const QString& state) {
 
 	return false;
 }
 
-bool ZkbXmlHandler::startStateElement(const QString& name, 
+bool ZkbXmlHandler::startStateElement(const QString& name,
 	const QString& parent, bool dflt) {
 
 	return false;
@@ -97,7 +97,7 @@ bool ZkbXmlHandler::startMapElement(int keycode, bool pressed) {
 	return false;
 }
 
-bool ZkbXmlHandler::startEventElement(int keycode, int unicode, int modifiers, 
+bool ZkbXmlHandler::startEventElement(int keycode, int unicode, int modifiers,
 	bool pressed, bool autorepeat) {
 
 	return false;
@@ -423,7 +423,7 @@ bool ZkbXmlHandler::start_event(const QXmlAttributes& attr) {
 		return false;
 	}
 
-	return startEventElement(keycode, unicode, modifiers, pressed, 
+	return startEventElement(keycode, unicode, modifiers, pressed,
 		autorepeat);
 }
 

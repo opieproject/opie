@@ -196,7 +196,7 @@ unsuspend();
     chmBuffer = chmBuffer+"</HTML>";
   }
   fsize = chmBuffer.length();
-  
+
   bufpos = 0;
   bRetVal = true;
   m_currentstart = m_ui.start;

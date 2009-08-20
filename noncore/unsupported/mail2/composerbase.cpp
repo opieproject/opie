@@ -127,7 +127,7 @@ ComposerBase::ComposerBase(QWidget *parent, const char *name, WFlags fl)
 
 	attachToolbar = new QToolBar(attachWindow);
 	attachToolbar->setVerticalStretchable(true);
-	
+
 	addattach = new QAction(tr("Add an Attachement"), QIconSet(Resource::loadPixmap("mail/newmail")), 0, 0, this);
 	addattach->addTo(attachToolbar);
 

@@ -58,7 +58,7 @@ int ObexPush::send(QString& mac, int port, QString& src, QString& dst)
     //pushProc->setUseShell(true);
     if (!pushProc->start(OProcess::NotifyOnExit, OProcess::All))
         return -1;
-    else 
+    else
         return 0;
 }
 

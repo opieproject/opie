@@ -9,12 +9,12 @@ class LiquidInterface : public StyleExtendedInterface {
 public:
 	LiquidInterface ( );
 	virtual ~LiquidInterface ( );
-	
+
 	QRESULT queryInterface ( const QUuid &, QUnknownInterface ** );
 	Q_REFCOUNT
-        	
+
 	virtual QStyle *style ( );
-	
+
 	virtual QString name ( ) const;
 
 	virtual QString description ( ) const;
@@ -22,8 +22,8 @@ public:
 	virtual bool hasSettings ( ) const;
 
 	virtual QWidget *create ( QWidget *parent, const char *name = 0 );
-    
-	virtual bool accept ( );            
+
+	virtual bool accept ( );
 	virtual void reject ( );
 
 private:

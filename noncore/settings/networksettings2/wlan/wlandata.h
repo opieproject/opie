@@ -12,6 +12,6 @@ public :
       bool Encrypted;
       QString Key[4];
       bool AcceptNonEncrypted;
-} ; 
+} ;
 
 #endif

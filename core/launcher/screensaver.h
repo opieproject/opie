@@ -55,7 +55,7 @@ private:
 		LS_SensorMax,
 		LS_LightMin,
 		LS_LightMax,
-	
+
 		LS_Count
 	};
 
@@ -68,7 +68,7 @@ private:
 	bool m_backlight_forcedoff;
 
 	bool m_on_ac;
-	
+
 	int m_level;
 };
 

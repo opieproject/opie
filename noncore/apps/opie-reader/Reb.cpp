@@ -44,7 +44,7 @@ void CReb::locate(unsigned int n)
 	}
       jm = (jl+jh)/2;
     }
-  
+
   unsuspend();
   Page_detail rs = m_pagedetails[jl];
   UInt32 val = n - rs.pagestart;
@@ -65,7 +65,7 @@ void CReb::locate(unsigned int n)
 	    }
 	  jm = (jl+jh)/2;
 	}
-  
+
       qDebug("TAGS:%s", (const char*)tags[paras[jl].tag]);
       tagstring = tags[paras[jl].tag]+"<br>"; // Add br to set extra space to 0
       tagoffset = 0;
@@ -136,7 +136,7 @@ int CReb::OpenFile(const char *src)
   fseek(fin, 6, SEEK_SET);
   fread(&type, 1, sizeof(type), fin);
   qDebug("CREB:Okay %x", type);
-  
+
   if (type == 0x4f56554e || type == 0x574d4954 || type == 0x576d6954)
     {
       struct stat _stat;
@@ -332,7 +332,7 @@ void CReb::readindex(UInt32 cp)
   noparas = 0;
   nojoins = 0;
   names.clear();
-  
+
   UInt32 rspage = m_indexpages[cp];
   if (rspage != 0)
     {
@@ -717,7 +717,7 @@ void CReb::start2endSection()
 		}
 	      jm = (jl+jh)/2;
 	    }
-	  
+
 	  currentpage.m_startoff = joins[jl];
 	  currentpage.m_endoff = joins[jl+1]-1;
 	}

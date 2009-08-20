@@ -37,8 +37,8 @@ public:
 	FileItem(QListView*, DocLnk*);
 	~FileItem();
 	DocLnk* getDocLnk() {return doclnk;}
-	
-	
+
+
 private:
 	DocLnk* doclnk;
 };
@@ -49,19 +49,19 @@ class AddAtt : public QDialog
 
 public:
 	AddAtt(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
-	QStringList returnattachedFiles();	
+	QStringList returnattachedFiles();
 	QStringList returnFileTypes();
 	void getFiles();
 	void clear();
-	
-	
+
+
 public slots:
 	//void fileCategorySelected(int);
 	void addattachment();
 	void removeattachment();
 	void reject();
 	void accept();
-	
+
 private:
 	FileItem* item;
 	QListView *attView;
@@ -69,7 +69,7 @@ private:
 	QPopupMenu *fileCategories;
 	bool modified;
 	//QFileInfo *fi;
-	
+
 	OFileDialog* ofs;
 };
 

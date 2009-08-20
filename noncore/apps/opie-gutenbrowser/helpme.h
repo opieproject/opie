@@ -46,7 +46,7 @@ QLabel  *QTlabel;
     QString local_library;
 
 private slots:
-  void goToURL(); 
+  void goToURL();
   void goToURL2();
   void goToURL3();
   void help();

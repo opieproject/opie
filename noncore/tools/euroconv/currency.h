@@ -3,8 +3,8 @@
  * File:        currency.h
  *
  * Description: define constant for currency compare Euro
- *              
- *               
+ *
+ *
  * Authors:     Eric Santonacci <Eric.Santonacci@talc.fr>
  *
  *

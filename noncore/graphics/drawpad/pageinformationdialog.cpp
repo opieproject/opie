@@ -36,7 +36,7 @@ PageInformationDialog::PageInformationDialog(Page* page, QWidget* parent, const 
 
     m_pTitleLineEdit = new QLineEdit(generalGroupBox);
     m_pTitleLineEdit->setText(page->title());
-    
+
     QLabel* dateLabel = new QLabel(tr("Date:"), generalGroupBox);
     QLabel* dateValueLabel = new QLabel(dateTimeString(m_pPage->lastModified()), generalGroupBox);
 
@@ -58,7 +58,7 @@ PageInformationDialog::PageInformationDialog(Page* page, QWidget* parent, const 
     generalLayout->addWidget(m_pTitleLineEdit, 0, 1);
     generalLayout->addWidget(dateLabel, 1, 0);
     generalLayout->addWidget(dateValueLabel, 1, 1);
-    
+
     generalLayout->setColStretch(1, 1);
 
     sizeLayout->addWidget(widthLabel, 0, 0);

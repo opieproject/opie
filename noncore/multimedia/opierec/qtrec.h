@@ -15,9 +15,9 @@ copyright 2002 by L.J. Potter ljp@llornkcor.com
 class QButtonGroup;
 class QCheckBox;
 class QComboBox;
-class QGridLayout; 
+class QGridLayout;
 class QGroupBox;
-class QHBoxLayout; 
+class QHBoxLayout;
 class QIconView;
 class QIconViewItem;
 class QLabel;
@@ -28,7 +28,7 @@ class QPushButton;
 class QSlider;
 class QTabWidget;
 class QTimer;
-class QVBoxLayout; 
+class QVBoxLayout;
 class QLineEdit;
 
 //#define BUFSIZE 4096
@@ -41,7 +41,7 @@ using namespace Opie::MM;
 enum playerMode { MODE_IDLE, MODE_PLAYING, MODE_PAUSED, MODE_STOPPING, MODE_RECORDING };
 
 class QtRec : public QWidget, public OWavRecorderCallback
-{ 
+{
    Q_OBJECT
 
 public:
@@ -89,7 +89,7 @@ private:
     void fileSize(unsigned long size, QString &str);
     QString getSelectedFile();
     void recorderCallback(const char *buffer, const int bytes, const int totalbytes, bool &stopflag);
-    
+
 private slots:
     void endPlaying();
     void endRecording();
@@ -114,7 +114,7 @@ private slots:
     void doMicMuting(bool);
     void doPlayBtn();
     void doRename();
-    void doVolMuting(bool); 
+    void doVolMuting(bool);
     void forwardTimerTimeout();
     void listPressed(int, QListViewItem *, const QPoint&, int);
     void newSound();
@@ -160,7 +160,7 @@ protected:
     void receive( const QCString &, const QByteArray & );
     void showListMenu(QListViewItem * );
     void playIt();
- 
+
 };
 
 #endif // QTREC_H

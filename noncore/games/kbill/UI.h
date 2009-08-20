@@ -63,7 +63,7 @@ private:
 
 	Field* field;
 	KBill* main;
-	
+
 	QPixmap *pix;
 	QPainter paint;
 

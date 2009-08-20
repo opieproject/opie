@@ -67,7 +67,7 @@ void ChicaneCardGame::deal(void)
 	    highestZ++;
 	}
     }
-    
+
     for ( ; t < getNumberOfCards(); t++) {
 	Card *card = cards[t];
 	faceDownDealingPile->addCardToTop(card);
@@ -142,7 +142,7 @@ bool ChicaneCardGame::mousePressCard( Card *card, QPoint p )
 	    // Move 8 cards, one to each workingPile
 	    beginDealing();
 	    for (int i=0; i<8 && faceDownDealingPile->cardOnTop(); i++) {
-		CanvasCard *card =  (CanvasCard *)faceDownDealingPile->cardOnTop(); 
+		CanvasCard *card =  (CanvasCard *)faceDownDealingPile->cardOnTop();
 	        card->setZ(highestZ);
 	        highestZ++;
 		faceDownDealingPile->removeCard(card);

@@ -48,7 +48,7 @@ DWORD CSoundFile::GetLength(BOOL bAdjust, BOOL bTotal)
 	BYTE oldparam[MAX_CHANNELS];
 	BYTE chnvols[MAX_CHANNELS];
 	DWORD patloop[MAX_CHANNELS];
-	
+
 	memset(instr, 0, sizeof(instr));
 	memset(notes, 0, sizeof(notes));
 	memset(vols, 0xFF, sizeof(vols));
@@ -169,7 +169,7 @@ DWORD CSoundFile::GetLength(BOOL bAdjust, BOOL bTotal)
 				}
 				break;
 			// Pattern Delay
-			case CMD_S3MCMDEX:	
+			case CMD_S3MCMDEX:
 				if ((param & 0xF0) == 0x60) { nSpeedCount = param & 0x0F; break; } else
 				if ((param & 0xF0) == 0xB0) { param &= 0x0F; param |= 0x60; }
 			case CMD_MODCMDEX:
@@ -250,7 +250,7 @@ DWORD CSoundFile::GetLength(BOOL bAdjust, BOOL bTotal)
 				if (param) oldparam[nChn] = param; else param = oldparam[nChn];
 				pChn->nOldChnVolSlide = param;
 				if (((param & 0x0F) == 0x0F) && (param & 0xF0))
-				{	
+				{
 					param = (param >> 4) + chnvols[nChn];
 				} else
 				if (((param & 0xF0) == 0xF0) && (param & 0x0F))
@@ -782,7 +782,7 @@ BOOL CSoundFile::ProcessEffects()
 				}
 			}
 		}
-		
+
 		// Handles note/instrument/volume changes
 		if (m_nTickCount == nStartTick) // can be delayed by a note delay effect
 		{
@@ -1099,7 +1099,7 @@ BOOL CSoundFile::ProcessEffects()
 			}
 			pChn->dwFlags |= CHN_FASTVOLRAMP;
 			break;
-			
+
 		// Panning Slide
 		case CMD_PANNINGSLIDE:
 			PanningSlide(pChn, param);
@@ -1137,10 +1137,10 @@ BOOL CSoundFile::ProcessEffects()
 			case 0x10: ExtraFinePortamentoUp(pChn, param & 0x0F); break;
 			case 0x20: ExtraFinePortamentoDown(pChn, param & 0x0F); break;
 			// Modplug XM Extensions
-			case 0x50: 
-			case 0x60: 
+			case 0x50:
+			case 0x60:
 			case 0x70:
-			case 0x90: 
+			case 0x90:
 			case 0xA0: ExtendedS3MCommands(nChn, param); break;
 			}
 			break;
@@ -1286,7 +1286,7 @@ void CSoundFile::PortamentoUp(MODCHANNEL *pChn, UINT param)
 		return;
 	}
 	// Regular Slide
-	if (!(m_dwSongFlags & SONG_FIRSTTICK)) 
+	if (!(m_dwSongFlags & SONG_FIRSTTICK))
 	{
 		DoFreqSlide(pChn, -(int)(param * 4));
 	}
@@ -1908,7 +1908,7 @@ void CSoundFile::ProcessMidiMacro(UINT nChn, LPCSTR pszMidiMacro, UINT param)
 #endif // NO_FILTER
 			}
 			break;
-		
+
 		// F0.F0.01.xx: Set Resonance
 		case '1':
 			if (dwParam < 0x80) pChn->nResonance = dwParam;
@@ -1918,7 +1918,7 @@ void CSoundFile::ProcessMidiMacro(UINT nChn, LPCSTR pszMidiMacro, UINT param)
 
 			break;
 		}
-		
+
 	}
 }
 

@@ -20,7 +20,7 @@ protected:
 	{
 	    compressedbuffersize = buffersize = 64*1024;
 	}
-    void GetHeader(UInt16&, UInt16&, UInt32&, UInt8&, UInt8&);    
+    void GetHeader(UInt16&, UInt16&, UInt32&, UInt8&, UInt8&);
     int HeaderSize();
     int bgetch();
     tchar getch(bool);

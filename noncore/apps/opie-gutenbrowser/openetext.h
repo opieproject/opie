@@ -18,7 +18,7 @@
 #define OPENETEXT_H
 #include "gutenbrowser.h"
 #include <qdialog.h>
-#include <qstringlist.h> 
+#include <qstringlist.h>
 //#include <fileselector.h>
 #include <qlabel.h>
 #include <qlistbox.h>
@@ -33,11 +33,11 @@
 
 class OpenEtext : public QDialog  {
    Q_OBJECT
-public: 
+public:
   OpenEtext(QWidget *parent, QString name);
   ~OpenEtext();
 
-    QPushButton* RemoveButton, * OpenFileButton, * OpenButton, *scanButton, *editButton; 
+    QPushButton* RemoveButton, * OpenFileButton, * OpenButton, *scanButton, *editButton;
   void getTitles();
     QString title;
   QString file;
@@ -57,7 +57,7 @@ public:
     bool checkConf();
 //    CConfigFile *config;
 
-protected: 
+protected:
 
     void initDialog();
   QListBox *QListBox_1;

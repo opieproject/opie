@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) 2009 The Opie Team <opie-devel@handhelds.org>
-              =.             
+              =.
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -77,14 +77,14 @@ VirtualFS::VirtualFS()
 void VirtualFS::init( const QString &basedir )
 {
     m_files.clear();
-    m_files.append( new VirtualFile( basedir + "/Applications/datebook/datebook.xml", 
-                                     new VirtualDateBookReader(), 
+    m_files.append( new VirtualFile( basedir + "/Applications/datebook/datebook.xml",
+                                     new VirtualDateBookReader(),
                                      new VirtualDateBookWriter() ) );
-    m_files.append( new VirtualFile( basedir + "/Applications/addressbook/addressbook.xml", 
-                                     new VirtualContactReader(), 
+    m_files.append( new VirtualFile( basedir + "/Applications/addressbook/addressbook.xml",
+                                     new VirtualContactReader(),
                                      new VirtualContactWriter() ) );
-    m_files.append( new VirtualFile( basedir + "/Applications/todolist/todolist.xml", 
-                                     new VirtualTodoListReader(), 
+    m_files.append( new VirtualFile( basedir + "/Applications/todolist/todolist.xml",
+                                     new VirtualTodoListReader(),
                                      new VirtualTodoListWriter() ) );
 }
 
@@ -94,7 +94,7 @@ void VirtualFS::fileListing( const QString &path, QTextStream &stream )
     QDateTime lastModified = QDateTime::currentDateTime();
     QStringList fileEntries;
     QStringList dirEntries;
-    
+
     for ( QListIterator<VirtualFile> it( m_files ); it.current(); ++it ) {
         QString filePath = it.current()->filePath();
         if( filePath.startsWith( path ) ) {
@@ -108,7 +108,7 @@ void VirtualFS::fileListing( const QString &path, QTextStream &stream )
                 if ( !fileEntries.contains( fl[0] ) )
                     fileEntries += fl[0];
         }
-    }    
+    }
 
     for ( QStringList::Iterator it = dirEntries.begin(); it != dirEntries.end(); ++it ) {
         stream << fileListingEntry( (*it), true, lastModified ) << oendl;
@@ -129,13 +129,13 @@ QString VirtualFS::fileListingEntry( const QString &name, bool dir, const QDateT
         s += "-rw-r--r--";
 
     s += ' ';
-    
+
     // number of hardlinks
     int subdirs = 1;
 
     if ( dir )
         subdirs = 2;
-    
+
     s += QString::number( subdirs ).rightJustify( 3, ' ', TRUE ) + " ";
 
     // owner
@@ -202,18 +202,18 @@ VirtualReader *VirtualFS::readFile( const QString &file )
         if( it.current()->filePath() == file ) {
             VirtualReader *reader = it.current()->reader();
             return reader;
-        }            
+        }
     }
     return NULL;
 }
 
-VirtualWriter *VirtualFS::writeFile( const QString &file ) 
+VirtualWriter *VirtualFS::writeFile( const QString &file )
 {
     for ( QListIterator<VirtualFile> it( m_files ); it.current(); ++it ) {
         if( it.current()->filePath() == file ) {
             VirtualWriter *writer = it.current()->writer();
             return writer;
-        }            
+        }
     }
     return NULL;
 }
@@ -225,7 +225,7 @@ void VirtualDateBookReader::read( QTextStream &stream )
     ODateBookAccess *sourceDB = new ODateBookAccess();
     sourceDB->load();
     ODateBookAccessBackend_XML dest( QString::null );
-    
+
     // Copy items from source to destination
     QArray<int> uidList = sourceDB->records();
     odebug << "Try to move data for datebook.. (" << uidList.count() << " items) " << oendl;
@@ -237,7 +237,7 @@ void VirtualDateBookReader::read( QTextStream &stream )
     }
 
     delete sourceDB;
-    
+
     // Write out the stream
     OTextStreamWriter wr( &stream );
     dest.write( wr );
@@ -250,10 +250,10 @@ void VirtualDateBookWriter::write( OPimXmlReader &reader )
     ODateBookAccess *destDB = new ODateBookAccess();
     destDB->clear();
     ODateBookAccessBackend_XML source( QString::null );
-    
+
     // FIXME return code
     source.read( reader );
-    
+
     // Copy items from source to destination
     QArray<int> uidList = source.allRecords();
     odebug << "Try to move data for datebook.. (" << uidList.count() << " items) " << oendl;
@@ -275,7 +275,7 @@ void VirtualContactReader::read( QTextStream &stream )
     OPimContactAccess *sourceDB = new OPimContactAccess();
     sourceDB->load();
     OPimContactAccessBackend_XML dest( QString::null );
-    
+
     // Copy items from source to destination
     QArray<int> uidList = sourceDB->records();
     odebug << "Try to move data for contacts.. (" << uidList.count() << " items) " << oendl;
@@ -285,7 +285,7 @@ void VirtualContactReader::read( QTextStream &stream )
         dest.add( *OPimContact::safeCast( rec ) );
         delete rec;
     }
-    
+
     delete sourceDB;
 
     // Write out the stream
@@ -300,10 +300,10 @@ void VirtualContactWriter::write( OPimXmlReader &reader )
     OPimContactAccess *destDB = new OPimContactAccess();
     destDB->clear();
     OPimContactAccessBackend_XML source( QString::null );
-    
+
     // FIXME return code
     source.read( reader );
-    
+
     // Copy items from source to destination
     QArray<int> uidList = source.allRecords();
     odebug << "Try to move data for contacts.. (" << uidList.count() << " items) " << oendl;
@@ -325,7 +325,7 @@ void VirtualTodoListReader::read( QTextStream &stream )
     OPimTodoAccess *sourceDB = new OPimTodoAccess();
     sourceDB->load();
     OPimTodoAccessXML dest( QString::null );
-    
+
     // Copy items from source to destination
     QArray<int> uidList = sourceDB->records();
     odebug << "Try to move data for todolist.. (" << uidList.count() << " items) " << oendl;
@@ -335,7 +335,7 @@ void VirtualTodoListReader::read( QTextStream &stream )
         dest.add( *OPimTodo::safeCast( rec ) );
         delete rec;
     }
-    
+
     delete sourceDB;
 
     // Write out the stream
@@ -351,10 +351,10 @@ void VirtualTodoListWriter::write( OPimXmlReader &reader )
     destDB->load(); // need to call this or internal opened flag won't be set
     destDB->clear();
     OPimTodoAccessXML source( QString::null );
-    
+
     // FIXME return code
     source.read( reader );
-    
+
     // Copy items from source to destination
     QArray<int> uidList = source.allRecords();
     odebug << "Try to move data for contacts.. (" << uidList.count() << " items) " << oendl;

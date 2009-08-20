@@ -21,7 +21,7 @@ MainView::MainView(QWidget *parent, const char *name, WFlags fl) : QMainWindow(p
 {
 	setIcon( Resource::loadPixmap( "remote" ) );
 	setCaption(tr("uBrowser"));
-	
+
 	setToolBarsMovable( false );
 
 	QToolBar *toolbar = new QToolBar(this, "toolbar");
@@ -48,7 +48,7 @@ MainView::MainView(QWidget *parent, const char *name, WFlags fl) : QMainWindow(p
 	connect(back, SIGNAL(clicked()), browser, SLOT(backward()) );
 	connect(forward, SIGNAL(clicked()), browser, SLOT(forward()) );
 	connect(home, SIGNAL(clicked()), browser, SLOT(home()) );
-	
+
 //make back and forward buttons be enabled, only when you can go back or forward (again, i love QTextBrowser)
 //this doesnt seem to work, but doesnt break anything either...
 	connect(browser, SIGNAL(backwardAvailable(bool)), back, SLOT(setOn(bool)) );
@@ -58,7 +58,7 @@ MainView::MainView(QWidget *parent, const char *name, WFlags fl) : QMainWindow(p
 	connect(browser, SIGNAL(textChanged()), this, SLOT(textChanged()) );
 
 	http = new HttpFactory(browser);
-	
+
 	if( qApp->argc() > 1 )
 	{
 		char **argv = qApp->argv();
@@ -82,7 +82,7 @@ MainView::MainView(QWidget *parent, const char *name, WFlags fl) : QMainWindow(p
 void MainView::goClicked()
 {
 	location->insertItem( location->currentText() );
-	
+
 	if(location->currentText().startsWith("http://") )
 	{
 		location->setEditText(location->currentText().lower());
@@ -115,7 +115,7 @@ void MainView::textChanged()
 void MainView::setDocument( const QString& applnk_filename )
 {
 	DocLnk *file = new DocLnk( applnk_filename );
-	
+
 	location->setEditText( file->file() );
 	goClicked();
 }

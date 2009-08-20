@@ -212,10 +212,10 @@ void ODateBookMonthTable::changeDaySelection( int row, int col )
     selDay = selDate.day();
 }
 
-QDate ODateBookMonthTable::getDateAt( int row, int col ) 
+QDate ODateBookMonthTable::getDateAt( int row, int col )
 {
     int itemMonth, itemYear;
-    
+
     DayItemMonth *i = (DayItemMonth*)item( row, col );
     if ( !i )
         return QDate(1900, 1, 1);

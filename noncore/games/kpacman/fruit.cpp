@@ -15,7 +15,7 @@ void Fruit::setEaten(int duration)
     timeLeft = duration;
     actualDirection = X;
 }
-  
+
 void Fruit::setLevel(int level, int wDuration, int fDuration, int ticks)
 {
     actualLevel = level;
@@ -126,7 +126,7 @@ bool Fruit::move(bool activate)
     if (rand() % (int) ((190-IQ)/10) == 0)
         if (timeLeft > 0)               // coming home or leaving again
             d = board->closeup(actualPosition, d, homePosition);
-        else                    
+        else
             d = board->closeup(actualPosition, d, tunnelPosition);
     else
         do                              // try new direction, but not the opposite

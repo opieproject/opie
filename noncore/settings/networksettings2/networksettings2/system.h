@@ -106,7 +106,7 @@ public :
       ~System( void );
 
       QDict<InterfaceInfo> & interfaces( void );
-      InterfaceInfo * interface( const QString& N ) 
+      InterfaceInfo * interface( const QString& N )
         { return interfaces()[N]; }
 
       // exec command as root

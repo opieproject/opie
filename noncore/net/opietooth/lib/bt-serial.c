@@ -4,7 +4,7 @@
  *	(c) Copyright 2006 GPL
  *
  *	This software is provided under the GNU public license, incorporated
- *	herein by reference. The software is provided without warranty or 
+ *	herein by reference. The software is provided without warranty or
  *	support.
  */
 #include "bt-serial.h"
@@ -41,8 +41,8 @@ static sdp_session_t* register_service(uint8_t rfchannel)
     sdp_list_t* access_proto_list = 0;
     sdp_list_t* profile_list = 0;
     sdp_list_t* service_list = 0;
-    sdp_data_t* channel = 0; 
-    sdp_record_t* record = sdp_record_alloc();    
+    sdp_data_t* channel = 0;
+    sdp_record_t* record = sdp_record_alloc();
     sdp_session_t* lsession = 0;
 
     // set the general service ID
@@ -77,11 +77,11 @@ static sdp_session_t* register_service(uint8_t rfchannel)
     sdp_uuid16_create(&profile[0].uuid, SERIAL_PORT_PROFILE_ID);
     profile_list = sdp_list_append(0, &profile[0]);
     sdp_set_profile_descs(record, profile_list);
-    
+
     // set the name, provider, and description
     sdp_set_info_attr(record, service_name, service_prov, service_dsc);
 
-    // connect to the local SDP server, register the service record, and 
+    // connect to the local SDP server, register the service record, and
     // disconnect
     lsession = sdp_connect(BDADDR_ANY, BDADDR_LOCAL, SDP_RETRY_IF_BUSY);
     if (lsession == NULL)
@@ -100,7 +100,7 @@ errout:
     sdp_list_free( access_proto_list, 0 );
     sdp_list_free( profile_list, 0 );
     sdp_list_free( service_list, 0 );
-    
+
     return lsession;
 }
 
@@ -136,7 +136,7 @@ errout:
 }
 
 /*
- * bt_serialStart 
+ * bt_serialStart
  * Function starts bt-serial service
  * return 0 success -1 on error
  */
@@ -148,7 +148,7 @@ int bt_serialStart(void)
     if (hserv >= 0)
         return 0;
     hserv = socket(AF_BLUETOOTH, SOCK_STREAM, BTPROTO_RFCOMM);
-    // bind socket to port 1 of the first available 
+    // bind socket to port 1 of the first available
     // local bluetooth adapter
     memset(&loc_addr, 0, sizeof(struct sockaddr_rc));
     loc_addr.rc_family = AF_BLUETOOTH;
@@ -156,7 +156,7 @@ int bt_serialStart(void)
     for (i = 1; i < 32; i++) {
         loc_addr.rc_channel = (uint8_t)i;
         if (!(result = bind(hserv,
-            (struct sockaddr *)&loc_addr, 
+            (struct sockaddr *)&loc_addr,
             sizeof(loc_addr))) || errno == EINVAL) {
             break;
         }
@@ -229,7 +229,7 @@ int btWrite(int hbt, uint8_t* buf, int* plen)
 /*
  * This function has a hack. My BT adapter hangs if you try to write small
  * portions of data to it to often. That's why we either wait for big enough
- * (> wrThresh) portion of data from a serial port and write it to BT or 
+ * (> wrThresh) portion of data from a serial port and write it to BT or
  * wait for a timeout (tv).
  */
 int bt_serialForward(BTSerialConn* conn, const char* portName)
@@ -243,7 +243,7 @@ int bt_serialForward(BTSerialConn* conn, const char* portName)
     int maxfd; //maximal filehandler
     struct timeval tv; //time we shall wait for select
     const int wrThresh = 250; //threshold after which we send packet to bt
-    const suseconds_t waitDelay = 200000L; //Time (us) we wait for data 
+    const suseconds_t waitDelay = 200000L; //Time (us) we wait for data
     struct sockaddr_rc rem_addr; //client address
     int len = sizeof(rem_addr); //argument length
 
@@ -265,7 +265,7 @@ int bt_serialForward(BTSerialConn* conn, const char* portName)
 #endif
 
     FD_ZERO(&inSet);
-    maxfd = (conn->bt_handler > conn->ser_handler)? conn->bt_handler: 
+    maxfd = (conn->bt_handler > conn->ser_handler)? conn->bt_handler:
         conn->ser_handler;
     outBytes = 0;
     do {
@@ -283,7 +283,7 @@ int bt_serialForward(BTSerialConn* conn, const char* portName)
 #endif
             }
             if (FD_ISSET(conn->ser_handler, &inSet)) {
-                if ((nbytes = read(conn->ser_handler, 
+                if ((nbytes = read(conn->ser_handler,
                     outBuf + outBytes, sizeof(outBuf) - outBytes)) > 0) {
                     outBytes += nbytes;
                     if (outBytes > wrThresh)
@@ -291,7 +291,7 @@ int bt_serialForward(BTSerialConn* conn, const char* portName)
                 }
             }
         } else if (result == 0) {
-            if (outBytes > 0) 
+            if (outBytes > 0)
                 result = btWrite(conn->bt_handler, outBuf, &outBytes);
         }
     } while (result == 0 || (result > 0 && nbytes > 0));

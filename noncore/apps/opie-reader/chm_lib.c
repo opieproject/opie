@@ -519,7 +519,7 @@ struct chmLzxcResetTable
     UInt32      table_offset;
     UInt64      uncompressed_len;
     UInt64      compressed_len;
-    UInt64      block_len;     
+    UInt64      block_len;
 }; /* __attribute__ ((aligned (1))); */
 
 static int _unmarshal_lzxc_reset_table(unsigned char **pData,
@@ -625,11 +625,11 @@ struct chmFile
 #endif
 
     UInt64              dir_offset;
-    UInt64              dir_len;    
+    UInt64              dir_len;
     UInt64              data_offset;
     Int32               index_root;
     Int32               index_head;
-    UInt32              block_len;     
+    UInt32              block_len;
 
     UInt64              span;
     struct chmUnitInfo  rt_unit;

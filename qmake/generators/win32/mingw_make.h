@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Definition of MingwMakefileGenerator class.
 **
@@ -46,7 +46,7 @@ class MingwMakefileGenerator : public Win32MakefileGenerator
 
     bool writeMakefile(QTextStream &);
     void init();
-    
+
     virtual bool findLibraries();
 
 public:

@@ -29,7 +29,7 @@ QString NetworkInterface::device( Config& cfg ) const
 }
 
 bool NetworkInterface::isActive( Config& cfg ) const
-{    
+{
     QString dev = device(cfg);
     if ( dev.isEmpty() )
 	return FALSE;

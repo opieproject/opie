@@ -387,7 +387,7 @@ void Checkbook::adjustBalance()
     QString sRunning;
     QString symbol = _pCfg->getCurrencySymbol();
     float bal=info->startingBalance();
-    
+
     for(CBListItem *item=(CBListItem *)tranTable->firstChild(); item; item=(CBListItem *)item->nextSibling() ) {
         TranInfo *tran=item->getTranInfo();
         bal=bal + (tran->withdrawal() ? -1 : 1)*tran->amount() - tran->fee();
@@ -509,7 +509,7 @@ void Checkbook::slotNewTran()
         // Add to transaction table
         float amount;
         QString stramount;
-        amount = (traninfo->withdrawal() ? -1 : 1)*traninfo->amount();	
+        amount = (traninfo->withdrawal() ? -1 : 1)*traninfo->amount();
         stramount.sprintf( "%.2f", amount );
 	stramount.prepend(symbol);
         ( void ) new CBListItem( traninfo, tranTable, traninfo->getIdStr(), traninfo->datestr(false),

@@ -142,5 +142,5 @@ void	intrPrisonerReport PROTO(( short, short ));
 }
 #endif
 
-    
+
 #endif

@@ -25,7 +25,7 @@
 #include "bitfont.h"
 #include "painter.h"
 
-enum { Init, Introducing, Playing, Demonstration, Paused, Player, Ready, 
+enum { Init, Introducing, Playing, Demonstration, Paused, Player, Ready,
        Scoring, LevelDone, Dying, GameOver, HallOfFame };
 
 

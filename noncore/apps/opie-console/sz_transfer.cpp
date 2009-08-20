@@ -42,13 +42,13 @@ void SzTransfer::sendFile(const QString& file) {
 void SzTransfer::SzReceivedStdout(OProcess *, char *buffer, int buflen) {
     QByteArray data(buflen);
     data.fill(*buffer, buflen);
-    
-#ifdef DEBUG_RECEIVE    
+
+#ifdef DEBUG_RECEIVE
     for (uint i = 0; i < data.count(); i++ ) {
         printf("%c", buffer[i] );
     }
     printf("\n");
-#endif    
+#endif
 
     // send out through the io layer
     layer()->send(data);

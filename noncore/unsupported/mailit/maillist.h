@@ -41,7 +41,7 @@ public:
 	void moveFront(int serverId, uint size);
 	bool remove(int serverId, uint size);
 	void insert(int pos, int serverId, uint size);
-	
+
 private:
 	QList<dList> sortedList;
 	uint currentPos;

@@ -81,7 +81,7 @@ public:
   void insertItem(const QString& _item, int ref)
     {
       CBkmkSelectorItem* item = new CBkmkSelectorItem(_item, ref);
-      bkmkselector->insertItem(item); 
+      bkmkselector->insertItem(item);
     }
   QString text(int index) const { return bkmkselector->text(index); }
   void setText(const QString& _l) { exitButton->setText(_l); }

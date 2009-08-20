@@ -130,7 +130,7 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
 				img = pixBg->convertToImage();
 				pixBg->convertFromImage( img.smoothScale( width, height));
 		}
-				
+
 		setBackgroundPixmap( *pixBg );
 		currentFrame = new QImage( 220 + 2, 160, (QPixmap::defaultDepth() == 16) ? 16 : 32 );
 		slider = new QSlider( Qt::Horizontal, this );

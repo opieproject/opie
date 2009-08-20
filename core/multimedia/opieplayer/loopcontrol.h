@@ -38,7 +38,7 @@ public:
 
     bool hasVideo() const { return hasVideoChannel; }
     bool hasAudio() const { return hasAudioChannel; }
-    
+
     long totalPlaytime() { return (long)(hasVideoChannel ? total_video_frames / framerate : total_audio_samples / freq); }
 
     // These are public to run them from global functions needed to start threads
@@ -54,7 +54,7 @@ public slots:
     void setMute( bool );
     void setPaused( bool );
     void setPosition( long );
-    
+
 signals:
     void positionChanged( long, long );
 
@@ -73,13 +73,13 @@ private:
     long current_frame;
     long total_video_frames;
     long total_audio_samples;
-    
+
     float framerate;
     int freq;
     int stream;
     int framecount;
     int channels;
-     
+
     bool hasVideoChannel;
     bool hasAudioChannel;
     bool isMuted;

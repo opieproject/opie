@@ -3,11 +3,11 @@
 
 #include "netnodeinterface.h"
 
-static const char * CableNeeds[] = 
+static const char * CableNeeds[] =
     { 0
     };
 
-static const char * CableProvides[] = 
+static const char * CableProvides[] =
     { "line",
       0
     };

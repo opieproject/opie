@@ -52,7 +52,7 @@ BOOL CSoundFile::ReadAMS(LPCBYTE lpStream, DWORD dwMemLength)
 	AMSFILEHEADER *pfh = (AMSFILEHEADER *)lpStream;
 	DWORD dwMemPos;
 	UINT tmp, tmp2;
-	
+
 	if ((!lpStream) || (dwMemLength < 1024)) return FALSE;
 	if ((pfh->verhi != 0x01) || (strncmp(pfh->szHeader, "Extreme", 7))
 	 || (!pfh->patterns) || (!pfh->orders) || (!pfh->samples) || (pfh->samples > MAX_SAMPLES)
@@ -567,7 +567,7 @@ void AMSUnpack(const char *psrc, UINT inputlen, char *pdest, UINT dmax, char pac
 {
 	UINT tmplen = dmax;
 	signed char *amstmp = new signed char[tmplen];
-	
+
 	if (!amstmp) return;
 	// Unpack Loop
 	{

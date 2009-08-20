@@ -46,7 +46,7 @@ void StartDunConnection::start()  {
     connect( m_dunConnect, SIGNAL( receivedStdout(Opie::Core::OProcess*,char*,int) ),
              this, SLOT( slotStdOut(Opie::Core::OProcess*,char*,int) ) );
     if (!m_dunConnect->start( OProcess::NotifyOnExit, OProcess::AllOutput) ) {
-        owarn << "could not start" << oendl; 
+        owarn << "could not start" << oendl;
         delete m_dunConnect;
     }
 }

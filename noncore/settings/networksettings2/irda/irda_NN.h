@@ -14,7 +14,7 @@ public:
       IRDANetNode();
       virtual ~IRDANetNode();
 
-      virtual const QString pixmapName() 
+      virtual const QString pixmapName()
         { return "Devices/irda"; }
 
       virtual const QString nodeDescription() ;

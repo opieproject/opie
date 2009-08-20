@@ -19,8 +19,8 @@ class OxydataTable;
 class QStringList;
 
 /*
- * A OxydataWidget shows all known data of an element. It can 
- * be used for both the PSE and the pure Data-Dialog. It is 
+ * A OxydataWidget shows all known data of an element. It can
+ * be used for both the PSE and the pure Data-Dialog. It is
  * a simple QHBox with 2 QStrings in it plus a OxydataTable
  * which contains the rest of the data.
  *
@@ -41,13 +41,13 @@ class OxydataWidget : public QWidget
     private:
         void setTable() const;
         OxydataTable *DataTable;
-        
+
     public slots:
         void setElement( int );
 };
 
 /*
- * A OxydataTable is derived from QTable. I recoded the paintCell to have 
+ * A OxydataTable is derived from QTable. I recoded the paintCell to have
  * different colors in the backgound. Furthermore this widget never has a
  * grid, thus I removed that code in paintCell.
  *
@@ -57,7 +57,7 @@ class OxydataWidget : public QWidget
 class OxydataTable : public QTable
 {
 	Q_OBJECT
-	
+
     public:
         OxydataTable( int numRows, int numCols,
                             QWidget *parent = 0, const char *name = 0 );

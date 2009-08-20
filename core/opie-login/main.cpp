@@ -99,7 +99,7 @@ int main ( int argc, char **argv )
     QString entry = c.readEntry( "user", "" );
     if ( !entry.isEmpty() )
         autolog = ::strdup( (const char*) entry );
-        
+
     while ( true ) {
         pid_t child = ::fork ( );
 

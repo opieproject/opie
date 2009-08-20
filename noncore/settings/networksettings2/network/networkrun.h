@@ -5,11 +5,11 @@ class NetworkRun  : public RuntimeInfo {
 
 public :
 
-      NetworkRun( ANetNodeInstance * NNI, 
+      NetworkRun( ANetNodeInstance * NNI,
                   NetworkData & Data ) : RuntimeInfo( NNI )
         { }
 
-      virtual RuntimeInfo * connection( void ) 
+      virtual RuntimeInfo * connection( void )
         { return this; }
 
       State_t detectState( void );

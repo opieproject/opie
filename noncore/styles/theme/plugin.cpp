@@ -6,15 +6,15 @@
 
 
 
-ThemeInterface::ThemeInterface ( ) 
+ThemeInterface::ThemeInterface ( )
 {
 	m_widget = 0;
 }
-    
+
 ThemeInterface::~ThemeInterface ( )
 {
 }
-        
+
 QStyle *ThemeInterface::style ( )
 {
 	return new OThemeStyle ( "" );
@@ -38,7 +38,7 @@ bool ThemeInterface::hasSettings ( ) const
 QWidget *ThemeInterface::create ( QWidget *parent, const char *name )
 {
 	m_widget = new ThemeSettings ( parent, name ? name : "THEME-SETTINGS" );
-		
+
 	return m_widget;
 }
 
@@ -58,7 +58,7 @@ void ThemeInterface::reject ( )
 QRESULT ThemeInterface::queryInterface ( const QUuid &uuid, QUnknownInterface **iface )
 {
 	*iface = 0;
-	
+
 	if ( uuid == IID_QUnknown )
 		*iface = this;
 	else if ( uuid == IID_Style )
@@ -67,10 +67,10 @@ QRESULT ThemeInterface::queryInterface ( const QUuid &uuid, QUnknownInterface **
 		*iface = this;
 	else
 	    return QS_FALSE;
-	
+
 	if ( *iface )
 		(*iface)-> addRef ( );
-		
+
 	return QS_OK;
 }
 

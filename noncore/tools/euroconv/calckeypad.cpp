@@ -2,9 +2,9 @@
  *
  * File:        calckeypad.cpp
  *
- * Description:  
- *              
- *               
+ * Description:
+ *
+ *
  * Authors:     Eric Santonacci <Eric.Santonacci@talc.fr>
  *
  * Requirements:    Qt
@@ -155,7 +155,7 @@ if(iPreviousOperator){
         case 4: // Divide /
             dCurrent = dPreviousValue / dCurrent;
             break;
-            
+
     }
     display->setValue(dCurrent);
 }

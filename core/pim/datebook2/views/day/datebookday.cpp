@@ -176,7 +176,7 @@ void DateBookDayView::keyPressEvent( QKeyEvent *e )
         // we this is some sort of thing we know about...
         e->accept();
         emit sigCapturedKey( txt );
-    } 
+    }
     else {
         switch(e->key()) {
             case Key_Up:
@@ -289,7 +289,7 @@ void DateBookDayViewQuickLineEdit::focusOutEvent ( QFocusEvent* /* e */)
 
 void DateBookDayViewQuickLineEdit::mousePressEvent( QMouseEvent *e )
 {
-    // Disable the popup menu (which causes focusOut, resulting in the widget 
+    // Disable the popup menu (which causes focusOut, resulting in the widget
     // being destroyed and then a crash occurring)
     if( e->button() != RightButton )
         QLineEdit::mousePressEvent(e);
@@ -336,7 +336,7 @@ DateBookDayWidget::DateBookDayWidget( const OPimOccurrence &e, DayView *dv )
         setAllDayText( text );
     else
         setEventText( text );
-    
+
 
     text += "<br><br>" + strNote;
 

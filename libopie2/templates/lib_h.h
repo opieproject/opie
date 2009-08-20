@@ -5,10 +5,10 @@
  * Net: opienet2
  * Pim: opiepim2
  * Db:  opiedb2
- * Core: opiecore2 
+ * Core: opiecore2
  * Mm:  opiemm2
  * Ui:  opieui2
- * a class MUST start with O - so we make sure that it does not 
+ * a class MUST start with O - so we make sure that it does not
  * conflict with other stuff.
  * don't use "using namespace .." in implementations.
  */

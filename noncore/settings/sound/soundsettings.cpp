@@ -77,7 +77,7 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     if (uname(&name) != -1) {// TODO change this here,...
         QString release=name.release;
         if( release.find("embedix",0,true) != -1) {
-            odebug << "IS System Zaurus" << oendl; 
+            odebug << "IS System Zaurus" << oendl;
             systemZaurus=true;
         }
     }
@@ -105,7 +105,7 @@ void SoundSettings::updateStorageCombo() {
     config.setGroup( "System" );
     QString loc = config.readEntry("RecLocation","/");
     int i = 0;
-    int set = 0; 
+    int set = 0;
     StorageInfo storageInfo;
     QString sName, sPath;
     QStringList list;
@@ -117,16 +117,16 @@ void SoundSettings::updateStorageCombo() {
     for( ; it.current(); ++it ){
         const QString name = (*it)->name();
         const QString path = (*it)->path();
-        odebug << "storage name "+name +" storage path is "+path << oendl; 
+        odebug << "storage name "+name +" storage path is "+path << oendl;
         list << name + ": " +path;
         if( loc.find( path,0,true) != -1)
-            set = i;      
+            set = i;
 //   if(dit.current()->file().find(path) != -1 ) storage=name;
         i++;
     }
 
     LocationComboBox->insertStringList(list);
-    odebug << "set item " << set << "" << oendl; 
+    odebug << "set item " << set << "" << oendl;
     LocationComboBox->setCurrentItem(set);
 }
 

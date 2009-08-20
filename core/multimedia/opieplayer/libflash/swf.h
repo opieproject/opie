@@ -104,7 +104,7 @@ struct ActionRecord {
 	Sound			*sound;
 
 	struct ActionRecord	*next;
-	
+
 	ActionRecord() {
 		frameLabel = 0;
 		url = 0;
@@ -144,7 +144,7 @@ enum TextFlags {
 
 // Tag values that represent actions or data in a Flash script.
 enum
-{ 
+{
     stagEnd 			= 0,
     stagShowFrame 		= 1,
     stagDefineShape		= 2,

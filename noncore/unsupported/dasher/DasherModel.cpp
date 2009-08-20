@@ -20,7 +20,7 @@ CDasherModel::CDasherModel(CDashEditbox* Editbox, CLanguageModel* LanguageModel,
   : m_Dimensions(Dimensions), m_editbox(Editbox), m_languagemodel(LanguageModel), m_Root(0)
 {
 	LearnContext = m_languagemodel->GetRootNodeContext();
-	
+
 	// various settings
 	int iShift = 12;
 	m_DasherY = 1<<iShift;
@@ -38,7 +38,7 @@ CDasherModel::~CDasherModel()
 
 
 void CDasherModel::Make_root(int whichchild)
- // find a new root node 
+ // find a new root node
 {
 	symbol t=m_Root->Symbol();
 	if (t) {
@@ -47,12 +47,12 @@ void CDasherModel::Make_root(int whichchild)
 	}
 
 	CDasherNode * oldroot=m_Root;
-	
+
 	CDasherNode **children=m_Root->Children();
 	m_Root=children[whichchild];
 	//	oldroot->Children()[whichchild]=0;  // null the pointer so we don't delete the whole tree
 	//	delete oldroot;
-	
+
 	oldroots.push_back(oldroot);
 
 	myint range=m_Rootmax-m_Rootmin;
@@ -63,7 +63,7 @@ void CDasherModel::Make_root(int whichchild)
 void CDasherModel::Reparent_root(int lower, int upper)
 {
   /* Change the root node to the parent of the existing node
-     We need to recalculate the coordinates for the "new" root as the 
+     We need to recalculate the coordinates for the "new" root as the
      user may have moved around within the current root */
 
   /* Determine how zoomed in we are */
@@ -133,12 +133,12 @@ void CDasherModel::Update(CDasherNode *node,CDasherNode *under_mouse,int iSafe)
 //	dchar debug[256];
 //	wsprintf(debug,TEXT("node->Age %d %f\n"),node->Age, fr.framerate());
 //	OutputDebugString(debug);
-	
-	
+
+
 	if (node->Age() > Framerate())
 		node->Kill();
-	
-	
+
+
 	if (node->Alive()) {
 		CDasherNode **children=node->Children();
 		if (children) {
@@ -156,11 +156,11 @@ void CDasherModel::Start()
 {
 	m_Rootmin=0;
 	m_Rootmax=m_DasherY;
-	
+
 	delete m_Root;
 	CLanguageModel::CNodeContext* therootcontext=m_languagemodel->GetRootNodeContext();
-	
-	//Rootparent=new DasherNode(0,0,0,therootcontext,0,0,0,Normalization(),languagemodel);	
+
+	//Rootparent=new DasherNode(0,0,0,therootcontext,0,0,0,Normalization(),languagemodel);
 	if (m_editbox) {
 		m_editbox->set_flushed(0);
 		string ContextString;
@@ -173,11 +173,11 @@ void CDasherModel::Start()
 	}
 	m_Root=new CDasherNode(0,0,0,0,Opts::Nodes1,0,Normalization(),m_languagemodel);
 	m_Root->Push_Node(therootcontext);
-	
+
 	m_languagemodel->ReleaseNodeContext(therootcontext);
 //	ppmmodel->dump();
 //	dump();
-	
+
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -195,11 +195,11 @@ void CDasherModel::Get_new_root_coords(myint Mousex,myint Mousey)
 		if (Mousex<=0)
 			Mousex=1;
 		dRx=1.0*m_DasherOX/Mousex;
-		dRxnew=pow(dRx,1.0/iSteps);  // or exp(log(rx)/steps) - i think the replacement is faster   
-	
+		dRxnew=pow(dRx,1.0/iSteps);  // or exp(log(rx)/steps) - i think the replacement is faster
+
 		dRxnew2=1+(dRx-1)/iSteps;
 		//+(rx-1)*(rx-1)*(1.0/fr.steps()-1.0)/2/fr.steps();
-		
+
 
 		const double dRxmax=m_fr.Rxmax();
 		if (dRxnew>dRxmax)
@@ -216,7 +216,7 @@ void CDasherModel::Get_new_root_coords(myint Mousex,myint Mousey)
 		//go_back_a_char();
 		if (m_Rootmax<m_DasherY && m_Rootmin>0)
 			return;
-	} 
+	}
 //	dchar debug[256];
 //	_stprintf(debug,TEXT("rx %f rxnew %f approx %f\n"),rx,rxnew,rxnew2);
 //	OutputDebugString(debug);
@@ -236,14 +236,14 @@ void CDasherModel::Get_new_root_coords(myint Mousex,myint Mousey)
 	myint newRootmin=miNewrootzoom-myint(above*dRxnew);
 	if (newRootmin<m_DasherY/2 && newRootmax>m_DasherY/2 && newRootmax<LLONG_MAX && newRootmin>LLONG_MIN) {
 		m_Rootmax=newRootmax;
-		m_Rootmin=newRootmin;	
+		m_Rootmin=newRootmin;
 	}
 
 }
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CDasherModel::Tap_on_display(myint miMousex,myint miMousey, unsigned long ) 
+void CDasherModel::Tap_on_display(myint miMousex,myint miMousey, unsigned long )
 	// work out the next viewpoint, opens some new nodes
 {
 	// works out next viewpoint
@@ -293,7 +293,7 @@ void CDasherModel::Tap_on_display(myint miMousex,myint miMousey, unsigned long )
 	// only do this is Dasher is flying
 	if (Framerate() > 30) {
 		for (int i=1;i<int(Framerate()-30)/3;i++) {
-#if defined(_WIN32_WCE)	
+#if defined(_WIN32_WCE)
 		iRandom=Random();
 #else
 		iRandom=rand();
@@ -301,7 +301,7 @@ void CDasherModel::Tap_on_display(myint miMousex,myint miMousey, unsigned long )
 		// push at a random node on the RHS
 		CDasherNode *right=Get_node_under_mouse(50,miMousey+iRandom%1000-500);
 		right->Push_Node();
-	
+
 		}
 	}
 	Update(m_Root,under_mouse,0);
@@ -311,7 +311,7 @@ void CDasherModel::Tap_on_display(myint miMousex,myint miMousey, unsigned long )
 
 /////////////////////////////////////////////////////////////////////////////
 
-void CDasherModel::Dump() const 
+void CDasherModel::Dump() const
 	// diagnostic dump
 {
 		// OutputDebugString(TEXT(" ptr   symbol   context Next  Child    pushme pushed cscheme   lbnd  hbnd \n"));

@@ -69,7 +69,7 @@ public:
     bool localIncluded() const;
 #endif
 
-    
+
     QString currentZone() const;
     void setCurrentZone( const QString& id );
 

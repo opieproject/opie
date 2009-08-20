@@ -16,13 +16,13 @@ man.registerPath( QDir::currentDirPath() );
 OSQLBackEnd::ValueList list = man.queryBackEnd();
 
 OSQLDriver *driver = man.standard();
- owarn << "testmain" + driver->id() << oendl; 
+ owarn << "testmain" + driver->id() << oendl;
  driver->setUrl("/home/ich/zeilenweise");
  if ( driver->open() ) {
-     owarn << "could open" << oendl; 
+     owarn << "could open" << oendl;
  }else
-     owarn << "wasn't able to open" << oendl; 
- OSQLRawQuery raw2("BEGIN TRANSACTION");      
+     owarn << "wasn't able to open" << oendl;
+ OSQLRawQuery raw2("BEGIN TRANSACTION");
  OSQLRawQuery *raw = new OSQLRawQuery("create table todolist(uid,key,value)");
  OSQLResult res = driver->query( &raw2 );
  res = driver->query( raw );

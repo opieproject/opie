@@ -5,11 +5,11 @@ class CableRun  : public RuntimeInfo {
 
 public :
 
-      CableRun( ANetNodeInstance * NNI, 
+      CableRun( ANetNodeInstance * NNI,
                 CableData & D ) : RuntimeInfo( NNI )
         { Data = &D; }
 
-      virtual RuntimeInfo * line( void ) 
+      virtual RuntimeInfo * line( void )
         { return this; }
 
       virtual QString deviceFile( void );

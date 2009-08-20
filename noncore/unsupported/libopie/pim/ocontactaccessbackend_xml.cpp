@@ -464,7 +464,7 @@ bool OContactAccessBackend_XML::hasQuerySettings (uint querySettings) const
 	 */
 
 	// Step 1: Check whether the given settings are supported by this backend
-	if ( ( querySettings & ( 
+	if ( ( querySettings & (
 				OContactAccess::IgnoreCase
 				| OContactAccess::WildCards
 				| OContactAccess::DateDiff
@@ -482,7 +482,7 @@ bool OContactAccessBackend_XML::hasQuerySettings (uint querySettings) const
 	if ( querySettings == OContactAccess::IgnoreCase )
 		return false;
 
-	// WildCards, RegExp and ExactMatch should never used at the same time 
+	// WildCards, RegExp and ExactMatch should never used at the same time
 	switch ( querySettings & ~( OContactAccess::IgnoreCase
 				    | OContactAccess::DateDiff
 				    | OContactAccess::DateYear

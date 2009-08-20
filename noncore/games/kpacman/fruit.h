@@ -41,7 +41,7 @@ private:
     int  actualPosition;                // actual position on board
     int  lastPosition;                  // the last position of the fruit
     int  actualLevel;                   // level for kind of fruit and score
-    int  actualPix;             
+    int  actualPix;
     int  maxPixmaps;                    // Number of Pixmaps (1..)
 
     int  entryPosition;                 // where to come in

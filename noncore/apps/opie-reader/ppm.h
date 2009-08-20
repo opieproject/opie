@@ -33,7 +33,7 @@
 /* fréquence maximale d'un symbole */
 #define RENORM_FREQSYM 250
 
-/* fréquence maximale pour la somme des fréquences des symboles d'un contexte */ 
+/* fréquence maximale pour la somme des fréquences des symboles d'un contexte */
 #define RENORM_FREQTOT 15000
 
 /* nombre de couples symbole,fréquence dans les structures de noeuds
@@ -44,8 +44,8 @@
 /* nombre de symboles à coder sans compter les symboles spéciaux */
 #define SYM_NB 256
 
-/* nombre de symboles spéciaux: pour extension si besoin de signalisation */ 
-#define SYM_SPECIAL_NB 1        
+/* nombre de symboles spéciaux: pour extension si besoin de signalisation */
+#define SYM_SPECIAL_NB 1
 
 /* code associé au symbole ESCAPE (jamais codé de façon explicite) */
 #define SYM_ESCAPE 256
@@ -76,14 +76,14 @@ typedef struct {
 			   * de hachage */
   UCHAR order;            /* ordre du contexte */
   UCHAR sym[ORDER_MAX];   /* symboles constituant le contexte */
-  UCHAR sf_max;           /* nombre de symboles-1 dans la liste L */ 
+  UCHAR sf_max;           /* nombre de symboles-1 dans la liste L */
   union  {
     SYMFREQ sf[HDR_SFNB];   /* s'il y a moins de HDR_SFNB symboles dans
 			     * le contexte, on les stocke directement ici
 			     */
     struct {
-      USHORT freq_tot;     /* sinon on stocke la fréquence totale (c) */ 
-      USHORT sf_next;      /* et un pointeur sur le premier noeud 
+      USHORT freq_tot;     /* sinon on stocke la fréquence totale (c) */
+      USHORT sf_next;      /* et un pointeur sur le premier noeud
 			    * constituant la liste L des symboles associés
 			    * au contexte */
     } l;
@@ -112,21 +112,21 @@ class ppm_worker
 {
 
 /* gestion des noeuds */
-NODE *node_heap;           /* heap contenant tous les noeuds */           
+NODE *node_heap;           /* heap contenant tous les noeuds */
 UINT node_free_nb;         /* nombre de noeuds vides */
 UINT node_free_first;      /* premier noeud de la liste des noeuds vides */
 UINT node_free_last;       /* dernier noeud de la liste des noeuds vides */
 
-/* gestion de la liste des contextes les plus utilisés */ 
+/* gestion de la liste des contextes les plus utilisés */
 USHORT *hash_table;        /* table de hachage pour rechercher un contexte */
 UINT ctx_first;            /* premier contexte: le plus utilisé */
 UINT ctx_last;             /* dernier contexte: le moins utilisé */
 UINT ctx_nb;               /* nombre de contextes */
- 
+
 /* données caractérisant le contexte courant */
 UCHAR sym_context[ORDER_MAX+1];    /* symboles précédants le symbole en cours
 				    * de codage */
-int sym_hash[ORDER_MAX+1];         /* index dans la table de hachage 
+int sym_hash[ORDER_MAX+1];         /* index dans la table de hachage
 				    * correspondants aux différentes longueurs
 				    * de contextes
 				    */

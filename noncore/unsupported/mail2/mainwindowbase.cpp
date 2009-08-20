@@ -46,7 +46,7 @@ MainWindowBase::MainWindowBase(QWidget *parent, const char *name, WFlags fl)
 	folders->addTo(servermenu);
 	connect(folders, SIGNAL(toggled(bool)), SLOT(slotFoldersToggled(bool)));
 
-	findmails = new QAction(tr("Search mails"), QIconSet(Resource::loadPixmap("mail/find")), 0, 0, this); 
+	findmails = new QAction(tr("Search mails"), QIconSet(Resource::loadPixmap("mail/find")), 0, 0, this);
 	findmails->addTo(toolbar);
 	findmails->addTo(mailmenu);
 

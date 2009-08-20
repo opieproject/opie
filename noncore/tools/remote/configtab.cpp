@@ -35,7 +35,7 @@ ConfigTab::ConfigTab(QWidget *parent, const char *name):QWidget(parent,name)
 
 	channelGroupConf = new ChannelGroupConf(this, "channelGroupConf");
 	layout->addWidget(channelGroupConf, 1);
-	
+
 
 }
 
@@ -218,12 +218,12 @@ void ConfigTab::buttonPressed()
 		QMessageBox::warning(this, tr("Error"), tr("Please select or create\na remote layout"), QMessageBox::Ok, QMessageBox::NoButton);
 		return;
 	}
-	
+
 	const QObject *button = sender();
 	QString string = button->name();
-	
+
 	QString action = cfg->readEntry(string);
-	
+
 	ButtonDialog *bd = new ButtonDialog(((QPushButton *)button)->text(), action, this, "BD", true, 0);
 	if( bd->exec() == 1)
 	{
@@ -232,6 +232,6 @@ void ConfigTab::buttonPressed()
 		cfg->write();
 		((QPushButton *)button)->setText(bd->getLabel());
 	}
-	
+
 	delete bd;
 }

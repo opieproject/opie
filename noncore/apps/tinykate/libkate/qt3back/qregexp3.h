@@ -90,7 +90,7 @@ public:
     int searchRev(const QChar *str,int start=-1) const ;
     bool exactMatch(const QChar *str);
     bool exactMatch(const QChar *str) const;
-// end QChar versions	
+// end QChar versions
 #endif
     int searchRev( const QString& str, int start = -1 );
     int searchRev( const QString& str, int start = -1 ) const;

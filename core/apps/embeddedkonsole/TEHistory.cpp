@@ -61,8 +61,8 @@ HistoryScroll::~HistoryScroll()
 {
   setSize(0,0);
 }
- 
-void HistoryScroll::setSize(int lines, int cells) 
+
+void HistoryScroll::setSize(int lines, int cells)
 {
   // could try to preserve the existing data...
   //  printf("setSize(%d,%d)\n", lines, cells);
@@ -87,7 +87,7 @@ void HistoryScroll::setSize(int lines, int cells)
   m_last_cell = 0;
   m_start_line = 0;
 }
-  
+
 void HistoryScroll::setScroll(bool on)
 {
   Config cfg( "Konsole" );
@@ -102,7 +102,7 @@ void HistoryScroll::setScroll(bool on)
     setSize(0,0);
   }
 }
- 
+
 bool HistoryScroll::hasScroll()
 {
   return (m_max_lines > 0);
@@ -168,7 +168,7 @@ void HistoryScroll::addCells(ca *text, int count)
 {
   if (!hasScroll()) return;
   int start_cell = m_last_cell;
-  //  printf("addCells count=%d start=%d first_line=%d first_cell=%d lines=%d\n", 
+  //  printf("addCells count=%d start=%d first_line=%d first_cell=%d lines=%d\n",
   //  	 count, start_cell, m_first_line, m_lines[m_first_line], m_num_lines);
   if (count <= 0) {
     return;
@@ -183,9 +183,9 @@ void HistoryScroll::addCells(ca *text, int count)
   if (m_num_lines > 1) {
     if (m_last_cell > start_cell) {
       while(m_num_lines > 0
-	    && m_lines[m_first_line] >= start_cell 
+	    && m_lines[m_first_line] >= start_cell
 	    && m_lines[m_first_line] < m_last_cell) {
-	//		printf("A remove %d>%d && %d<%d first_line=%d num_lines=%d\n", 
+	//		printf("A remove %d>%d && %d<%d first_line=%d num_lines=%d\n",
 	//		       m_lines[m_first_line], start_cell, m_lines[m_first_line], m_last_cell,
 	//		       m_first_line, m_num_lines);
 	if (++m_first_line >= m_max_lines) {
@@ -195,9 +195,9 @@ void HistoryScroll::addCells(ca *text, int count)
       }
     } else {
       while(m_num_lines > 0
-	    && (m_lines[m_first_line] >= start_cell 
+	    && (m_lines[m_first_line] >= start_cell
 		|| m_lines[m_first_line] < m_last_cell)) {
-	//		printf("B remove %d>%d || %d<%d first_line=%d num_lines=%d\n", 
+	//		printf("B remove %d>%d || %d<%d first_line=%d num_lines=%d\n",
 	//		       m_lines[m_first_line], start_cell, m_lines[m_first_line], m_last_cell,
 	//       m_first_line, m_num_lines);
 	if (++m_first_line >= m_max_lines) {

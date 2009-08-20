@@ -64,7 +64,7 @@ void PackageList::insertPackage( OipkgPackage* pack )
 //       	p->setName( pack->name()+"["+p->version()+"]" );
 				if (!packver)
     		{
-    				packver = new QDict<OipkgPackage>();    	
+    				packver = new QDict<OipkgPackage>();
 		       	packver->insert( pack->name(), p );
           	p->setOtherVersions( packver );
         }
@@ -85,13 +85,13 @@ void PackageList::insertPackage( OipkgPackage* pack )
 }
 
 void PackageList::filterPackages( QString f )
-{	
+{
   packageList.clear();
   QDictIterator<OipkgPackage> filterIter( origPackageList );
   filterIter.toFirst();
   OipkgPackage *pack= filterIter.current() ;
   while ( pack )
-    {	
+    {
       if (
       			((aktSection=="All")||(pack->section()==aktSection)) &&
 	   				((aktSubSection=="All")||(pack->subSection()==aktSubSection)) &&
@@ -111,9 +111,9 @@ OipkgPackage* PackageList::find( QString n )
 }
 
 OipkgPackage* PackageList::first()
-{ 	
+{
   packageIter.toFirst();
-  return packageIter.current();	
+  return packageIter.current();
 }
 
 OipkgPackage* PackageList::next()
@@ -168,7 +168,7 @@ void PackageList::updateSections( OipkgPackage* pack )
 
 
 void PackageList::readFileEntries( QString filename, QString dest )
-{ 	
+{
 	pvDebug(5,"PackageList::readFileEntries "+filename+" dest "+dest);
   QStringList packEntry;
   QFile f( filename );
@@ -233,7 +233,7 @@ void PackageList::allPackages()
   filterIter.toFirst();
   OipkgPackage *pack= filterIter.current() ;
   while ( pack )
-    {	
+    {
 	  	packageList.insert( pack->name(), pack );
       ++filterIter;
       pack = filterIter.current();

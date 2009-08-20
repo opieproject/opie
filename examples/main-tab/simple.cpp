@@ -27,7 +27,7 @@
  */
 
 /* The OApplicationFactory is in the Opie::Core namespace */
-using namespace Opie::Core; 
+using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )
 
 MainWindow::MainWindow(QWidget *parent,  const char* name, WFlags fl )

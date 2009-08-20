@@ -295,7 +295,7 @@ void TimeTabWidget::slotTZChanged( const QString &newtz )
 {
 	// Check timezone has a valid file in /usr/share/zoneinfo
 	if(!QFile::exists("/usr/share/zoneinfo/" + newtz)) {
-		QMessageBox::warning(this, tr("Time zone file missing"), 
+		QMessageBox::warning(this, tr("Time zone file missing"),
 				(tr("There is no time zone file for the\nselected time zone (%1).\nYou will need to install it before the\nsystem time zone can be set correctly.")).arg(newtz));
 	}
 	else {

@@ -24,7 +24,7 @@ void CDasherView::ChangeOrientation(Dasher::Opts::ScreenOrientations Orientation
 }
 
 
-void CDasherView::FlushAt(int ,int ) 
+void CDasherView::FlushAt(int ,int )
 {
 	m_DasherModel.Flush(0,0);
 }
@@ -37,14 +37,14 @@ int CDasherView::RecursiveRender(CDasherNode* Render, myint y1,myint y2,int most
 	if (ColourMode==true) {
 	  Color = Render->Colour();
 	} else {
-	  Color = Render->Phase()%3; 
+	  Color = Render->Phase()%3;
 	}
 
 	if (RenderNode(Render->Symbol(), Color, Render->Cscheme(), y1, y2, mostleft, Render->m_bForce, text))
 		RenderGroups(Render, y1, y2, text);
 	else
 		Render->Kill();
-	
+
 	CDasherNode** const Children=Render->Children();
 	if (!Children)
 	  return 0;
@@ -77,7 +77,7 @@ void CDasherView::RenderGroups(CDasherNode* Render, myint y1, myint y2, bool tex
 		if (g!=current) {
 			lower=upper;
 			upper=i;
-			
+
 			if (current!=0) {
 				myint lbnd=Children[lower]->Lbnd();
 				myint hbnd=Children[upper]->Lbnd();

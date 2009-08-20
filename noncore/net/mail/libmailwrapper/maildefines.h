@@ -9,7 +9,7 @@ namespace MAILLIB {
         A_SMTP,
         A_MH,
         A_MBOX,
-        A_NNTP,  
+        A_NNTP,
     };
 }
 

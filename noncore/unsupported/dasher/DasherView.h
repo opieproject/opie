@@ -28,24 +28,24 @@ class Dasher::CDasherView
 {
 public:
 	CDasherView(CDasherScreen* DasherScreen, CDasherModel& DasherModel, Dasher::Opts::ScreenOrientations Orientation=Dasher::Opts::LeftToRight);
-	virtual ~CDasherView() {}		
-	
+	virtual ~CDasherView() {}
+
 	void ChangeOrientation(Dasher::Opts::ScreenOrientations Orientation);
-	
+
 	// TODO Sort this out
 	void FlushAt(int mousex,int mousey);
-	
+
 	// renders Dasher
 	inline void Render();
-	
+
 	// translates the screen coordinates to Dasher coordinates and calls
 	// dashermodel.TapOnDisplay
 	virtual void TapOnDisplay(int mousex, int mousey, unsigned long Time)=0;
-	
+
 	virtual void ChangeScreen(CDasherScreen* NewScreen)
 	{
 		m_Screen=NewScreen;
-		
+
 		// DJW - removed floating point stuff
 		//XYScale = (double)m_Screen->GetHeight() / m_Screen->GetWidth();
 	}
@@ -70,18 +70,18 @@ protected:
 private:
 	CDasherScreen* m_Screen;      // provides the graphics (text, lines, rectangles):
 	CDasherModel& m_DasherModel; // Model view represents
-	
+
 	// Pure virtuals to implement
 	virtual void Crosshair(myint sx)=0; // Tells m_Screen to draw a crosshair - or other static decoration
 	virtual int RenderNode(const symbol Character, const int Color, Opts::ColorSchemes ColorScheme,
 		myint y1, myint y2, int& mostleft, bool& force, bool text)=0;
-	
+
 	// Responsible for all the Render_node calls
 	int RecursiveRender(CDasherNode* Render, myint y1,myint y2,int mostleft, bool text);
-	
+
 	// Displays some nodes inside one parent node. Used to group capital letters, accents, punctuation etc.
 	void RenderGroups(CDasherNode* Render, myint y1, myint y2, bool text);
-	
+
 	// Orientation of Dasher Screen
 	Dasher::Opts::ScreenOrientations ScreenOrientation;
 

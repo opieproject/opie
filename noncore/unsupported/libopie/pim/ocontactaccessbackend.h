@@ -122,8 +122,8 @@ class OContactAccessBackend: public OPimAccessBackend<OContact> {
          * Returns a sorted list of records either ascendinf or descending for a giving criteria and category
          */
         virtual QArray<int> sorted( bool ascending, int sortOrder, int sortFilter, int cat ) = 0;
-	
-	
+
+
 private:
 	class Private;
 	Private *d;

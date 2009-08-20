@@ -34,7 +34,7 @@ ButtonDialog::ButtonDialog(QString buttonName, QString action, QWidget *parent, 
 	layout->addSpacing(5);
 	layout->addLayout(hlayout3);
 	layout->addSpacing(5);
-	
+
 	lh = new LircHandler();
 
 	remote = new QComboBox(false, this, "remote");
@@ -54,7 +54,7 @@ ButtonDialog::ButtonDialog(QString buttonName, QString action, QWidget *parent, 
 	hlayout2->addSpacing(5);
 	hlayout2->addWidget(button);
 	hlayout2->addSpacing(5);
-	
+
 	label = new QLineEdit(this, "label");
 	label->setText(buttonName);
 	QLabel *labelLabel = new QLabel(label, "Label: ", this, "labelLabel");
@@ -63,7 +63,7 @@ ButtonDialog::ButtonDialog(QString buttonName, QString action, QWidget *parent, 
 	hlayout3->addSpacing(5);
 	hlayout3->addWidget(label);
 	hlayout3->addSpacing(5);
-	
+
 	QStringList actionArgs = QStringList::split(' ', action);
 	if(actionArgs.count() > 1) {
 		// Remote

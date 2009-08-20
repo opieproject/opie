@@ -98,7 +98,7 @@ void OTGateway::setRefreshTimer( int T ) {
         killTimer( RefreshTimer );
       }
 
-      if( T == 0 ) 
+      if( T == 0 )
         T = 4000;
       RefreshTimer = startTimer( T );
 }
@@ -107,14 +107,14 @@ OTDevice * OTGateway::getOTDevice( ) {
       if( TheOTDevice == 0 ) {
         // load bluetooth device and check state
         TheOTDevice = new OTDevice( this );
-        connect( TheOTDevice, 
+        connect( TheOTDevice,
                  SIGNAL( isEnabled( int, bool ) ),
-                 this, 
+                 this,
                  SLOT( SLOT_Enabled( int, bool ) ) );
 
-        connect( TheOTDevice, 
+        connect( TheOTDevice,
                  SIGNAL( error( const QString & ) ),
-                 this, 
+                 this,
                  SLOT( SLOT_ShowError( const QString & ) ) );
       }
 
@@ -236,21 +236,21 @@ void OTGateway::updateDrivers( void ) {
            i ++ ) {
         D = AllDrivers[i];
 
-        connect( D, 
+        connect( D,
                  SIGNAL( error( const QString & ) ),
-                 this, 
+                 this,
                  SLOT( SLOT_ShowError( const QString & ) )
                );
 
-        connect( D, 
+        connect( D,
                  SIGNAL( stateChange( OTDriver *, bool ) ),
-                 this, 
+                 this,
                  SIGNAL( stateChange( OTDriver *, bool ) )
                );
 
-        connect( D, 
+        connect( D,
                  SIGNAL( driverDisappeared( OTDriver * ) ),
-                 this, 
+                 this,
                  SLOT( SLOT_DriverDisappeared( OTDriver * ) )
                );
       }
@@ -517,7 +517,7 @@ void OTGateway::loadActiveNetworkSetups( void ) {
         OTDeviceAddress Addr;
         OTPeer * P;
 
-        if (!(cl = (struct hci_conn_list_req *)malloc( 
+        if (!(cl = (struct hci_conn_list_req *)malloc(
                       MAXCONNECTIONS * sizeof(*ci) + sizeof(*cl)))) {
           emit error( tr("Can't allocate memory") );
           return;
@@ -557,8 +557,8 @@ void OTGateway::loadActiveNetworkSetups( void ) {
               addPeer( P );
               P->setAddress( Addr );
               // infoQueue.push_back(info);
-              P->setName( AllDrivers[i]->getPeerName( Addr ) ); 
-            } 
+              P->setName( AllDrivers[i]->getPeerName( Addr ) );
+            }
             P->setState( OTPeer::Peer_Up );
             P->setConnectedTo( AllDrivers[i] );
           }
@@ -628,7 +628,7 @@ void OTGateway::saveKnownPeers( void ) {
     AllPeersModified = 0;
 }
 
-int OTGateway::connectedToRFCommChannel( const OTDeviceAddress & Addr, 
+int OTGateway::connectedToRFCommChannel( const OTDeviceAddress & Addr,
                                          int channel ) {
 
     int s;
@@ -705,7 +705,7 @@ int OTGateway::getFreeRFCommDevice( void ) {
 
       // s
       if( dl->dev_num ) {
-        qsort( di, sizeof(struct rfcomm_dev_info), 
+        qsort( di, sizeof(struct rfcomm_dev_info),
                dl->dev_num, (int(*)(const void*,const void*))byID );
         int id = 0;
 
@@ -753,7 +753,7 @@ int OTGateway::releaseRFCommDevice( int devnr ) {
       dr = di;
       for (i = 0; i < dl->dev_num; i++, dr++) {
         if( dr->id == devnr ) {
-          // still in NetworkSetup list 
+          // still in NetworkSetup list
           struct rfcomm_dev_req req;
           int err;
 

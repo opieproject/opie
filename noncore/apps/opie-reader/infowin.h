@@ -33,7 +33,7 @@ public:
 private slots:
     void infoClose() { emit Close(); }
  signals:
- void Close(); 
+ void Close();
 };
 
 #endif

@@ -24,10 +24,10 @@ namespace OpieTooth {
     class RfcommAssignDialog: public RfcommAssignDialogBase {
     	Q_OBJECT
     public:
-    	RfcommAssignDialog(QWidget* parent = 0, const char* name = 0, 
-            bool modal = 0, WFlags fl = 0); 
+    	RfcommAssignDialog(QWidget* parent = 0, const char* name = 0,
+            bool modal = 0, WFlags fl = 0);
 	    ~RfcommAssignDialog();
-	
+
 	    void loadConfig();
 	    void saveConfig();
 

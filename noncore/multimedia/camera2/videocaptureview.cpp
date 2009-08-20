@@ -98,7 +98,7 @@ class VideoCapture {
 
 #define	VIDEO_DEVICE	    "/dev/video"
 
-bool VideoCapture::hasCamera() const 
+bool VideoCapture::hasCamera() const
 {
     return (fd != -1);
 }
@@ -108,12 +108,12 @@ QSize VideoCapture::captureSize() const
     return QSize(width, height);
 }
 
-uint VideoCapture::refocusDelay() const 
+uint VideoCapture::refocusDelay() const
 {
     return 250;
 }
 
-int VideoCapture::minimumFramePeriod() const 
+int VideoCapture::minimumFramePeriod() const
 {
     return 40;                  // milliseconds
 }
@@ -369,22 +369,22 @@ VideoCapture::~VideoCapture()
 {
 }
 
-bool VideoCapture::hasCamera() const 
+bool VideoCapture::hasCamera() const
 {
     return TRUE;
 }
 
-QSize VideoCapture::captureSize() const 
+QSize VideoCapture::captureSize() const
 {
     return QSize(640, 480);
 }
 
-uint VideoCapture::refocusDelay() const 
+uint VideoCapture::refocusDelay() const
 {
     return 0;
 }
 
-int VideoCapture::minimumFramePeriod() const 
+int VideoCapture::minimumFramePeriod() const
 {
     return 100;
 }
@@ -448,17 +448,17 @@ QValueList < QSize > VideoCapture::videoSizes() constconst
     return list;
 }
 
-QSize VideoCapture::recommendedPhotoSize() const 
+QSize VideoCapture::recommendedPhotoSize() const
 {
     return QSize(640, 480);
 }
 
-QSize VideoCapture::recommendedVideoSize() const 
+QSize VideoCapture::recommendedVideoSize() const
 {
     return QSize(320, 240);
 }
 
-QSize VideoCapture::recommendedPreviewSize() const 
+QSize VideoCapture::recommendedPreviewSize() const
 {
     return QSize(320, 240);
 }
@@ -513,22 +513,22 @@ QValueList < QSize > VideoCaptureView::videoSizes() const
     return capture->videoSizes();
 }
 
-QSize VideoCaptureView::recommendedPhotoSize() const 
+QSize VideoCaptureView::recommendedPhotoSize() const
 {
     return capture->recommendedPhotoSize();
 }
 
-QSize VideoCaptureView::recommendedVideoSize() const 
+QSize VideoCaptureView::recommendedVideoSize() const
 {
     return capture->recommendedVideoSize();
 }
 
-QSize VideoCaptureView::recommendedPreviewSize() const 
+QSize VideoCaptureView::recommendedPreviewSize() const
 {
     return capture->recommendedPreviewSize();
 }
 
-QSize VideoCaptureView::captureSize() const 
+QSize VideoCaptureView::captureSize() const
 {
     return capture->captureSize();
 }
@@ -538,12 +538,12 @@ void VideoCaptureView::setCaptureSize(QSize size)
     capture->setCaptureSize(size);
 }
 
-uint VideoCaptureView::refocusDelay() const 
+uint VideoCaptureView::refocusDelay() const
 {
     return capture->refocusDelay();
 }
 
-bool VideoCaptureView::available() const 
+bool VideoCaptureView::available() const
 {
     return capture->hasCamera();
 }

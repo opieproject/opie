@@ -167,7 +167,7 @@ void TerminalWidget::load( const Profile& prof )
         aFont = qpecfg.readEntry( "FixedFontFamily", "Fixed" );
         aFontSize = qpecfg.readNumEntry( "FixedFontSize", 7 );
     }
-    
+
     m_fontSelector->setSelectedFont( aFont, prof.readEntry( "FontStyle", qpecfg.readEntry("FixedFontStyle")), aFontSize, prof.readEntry( "FontCharset") );
 
 //     switch( fontsize ) {

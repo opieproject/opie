@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include "codes.h"  
+#include "codes.h"
 #include "base.h"
 
 #include <opie2/oresource.h>
@@ -50,7 +50,7 @@ void Base::damageBase()
       case 2: setFrame(2); ohdear.play(); break;
       case 3: setFrame(3); kaboom.play(); break;
    }
-   show(); 
+   show();
 }
 
 bool Base::baseDestroyed()

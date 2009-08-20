@@ -105,13 +105,13 @@ int sqliteRlikeCompare(const char *zPattern, const char *zString, sqregex *reg){
 
 void rlikeFunc( sqlite3_context* context, int count, sqlite3_value** values ){
     const unsigned char* argv0 = sqlite3_value_text( values[0] );
-    const unsigned char* argv1 = sqlite3_value_text( values[1] ); 
+    const unsigned char* argv1 = sqlite3_value_text( values[1] );
     if( count < 2 || argv0 == 0 || argv1 == 0 ){
 	    qWarning( "One of arguments Null!!\n" );
 	    return;
     }
     sqlite3_result_int(context, sqliteRlikeCompare((const char*)argv0,
-						      (const char*)argv1, 
+						      (const char*)argv1,
 						      (sqregex *) sqlite3_user_data( context ) ));
 }
 

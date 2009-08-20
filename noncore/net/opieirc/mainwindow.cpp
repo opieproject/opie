@@ -88,7 +88,7 @@ void MainWindow::changeEvent(IRCTab *tab) {
 void MainWindow::killTab(IRCTab *tab, bool imediate) {
     if (tab == m_dccTab)
         m_dccTab = 0;
-    
+
     m_toDelete.append( tab );
 
     if ( imediate )
@@ -149,15 +149,15 @@ void MainWindow::slotPing( const QString& /*channel*/ ) {
     raise();
 }
 
-void MainWindow::addDCC(DCCTransfer::Type type, Q_UINT32 ip4Addr, Q_UINT16 port, 
+void MainWindow::addDCC(DCCTransfer::Type type, Q_UINT32 ip4Addr, Q_UINT16 port,
         const QString &filename, const QString &nickname, unsigned int size) {
-    
+
     if (!m_dccTab) {
         m_dccTab = new DCCTransferTab(this);
         addTab(m_dccTab);
         m_dccTab->show();
     }
-    
+
     m_dccTab->addTransfer(type, ip4Addr, port, filename, nickname, size);
 }
 

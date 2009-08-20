@@ -19,9 +19,9 @@
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 
-/* 
- *  Constructs a CameraSettings which is a child of 'parent', with the 
- *  name 'name' and widget flags set to 'f' 
+/*
+ *  Constructs a CameraSettings which is a child of 'parent', with the
+ *  name 'name' and widget flags set to 'f'
  *
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  TRUE to construct a modal dialog.
@@ -31,9 +31,9 @@ CameraSettings::CameraSettings( QWidget* parent,  const char* name, bool modal, 
 {
     if ( !name )
 	setName( "CameraSettings" );
-    resize( 324, 465 ); 
+    resize( 324, 465 );
     setCaption( tr( "Settings" ) );
-    CameraSettingsLayout = new QVBoxLayout( this ); 
+    CameraSettingsLayout = new QVBoxLayout( this );
     CameraSettingsLayout->setSpacing( 6 );
     CameraSettingsLayout->setMargin( 11 );
 
@@ -50,7 +50,7 @@ CameraSettings::CameraSettings( QWidget* parent,  const char* name, bool modal, 
     photoLayout->setSpacing( 2 );
     photoLayout->setMargin( 4 );
 
-    Layout1 = new QHBoxLayout; 
+    Layout1 = new QHBoxLayout;
     Layout1->setSpacing( 6 );
     Layout1->setMargin( 0 );
 
@@ -63,7 +63,7 @@ CameraSettings::CameraSettings( QWidget* parent,  const char* name, bool modal, 
     Layout1->addWidget( photo_size );
     photoLayout->addLayout( Layout1 );
 
-    Layout2 = new QHBoxLayout; 
+    Layout2 = new QHBoxLayout;
     Layout2->setSpacing( 6 );
     Layout2->setMargin( 0 );
 
@@ -94,7 +94,7 @@ CameraSettings::CameraSettings( QWidget* parent,  const char* name, bool modal, 
     videoLayout->setSpacing( 2 );
     videoLayout->setMargin( 4 );
 
-    Layout1_2 = new QHBoxLayout; 
+    Layout1_2 = new QHBoxLayout;
     Layout1_2->setSpacing( 6 );
     Layout1_2->setMargin( 0 );
 
@@ -107,7 +107,7 @@ CameraSettings::CameraSettings( QWidget* parent,  const char* name, bool modal, 
     Layout1_2->addWidget( video_size );
     videoLayout->addLayout( Layout1_2 );
 
-    Layout2_2 = new QHBoxLayout; 
+    Layout2_2 = new QHBoxLayout;
     Layout2_2->setSpacing( 6 );
     Layout2_2->setMargin( 0 );
 
@@ -127,7 +127,7 @@ CameraSettings::CameraSettings( QWidget* parent,  const char* name, bool modal, 
     Layout2_2->addWidget( video_quality_n );
     videoLayout->addLayout( Layout2_2 );
 
-    Layout6 = new QHBoxLayout; 
+    Layout6 = new QHBoxLayout;
     Layout6->setSpacing( 6 );
     Layout6->setMargin( 0 );
 
@@ -156,7 +156,7 @@ CameraSettings::CameraSettings( QWidget* parent,  const char* name, bool modal, 
     connect( video_framerate, SIGNAL( valueChanged(int) ), TextLabel6, SLOT( setNum(int) ) );
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 CameraSettings::~CameraSettings()

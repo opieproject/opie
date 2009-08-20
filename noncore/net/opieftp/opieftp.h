@@ -20,9 +20,9 @@
 #include <qpoint.h>
 #include <qpixmap.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QComboBox;
 class QListView;
 class QListViewItem;
@@ -68,7 +68,7 @@ public:
     QPushButton *connectServerBtn, *newServerButton;
     QToolButton  *cdUpButton, *homeButton, *docButton;
     bool b;
-		
+
     int currentServerConfig;
 protected slots:
 		void initializeGui();
@@ -76,7 +76,7 @@ protected slots:
     void upDir();
     void homeButtonPushed();
     void docButtonPushed();
-    void doAbout(); 
+    void doAbout();
 
     void serverComboEdited(const QString & );
     void UsernameComboBoxEdited(const QString & );
@@ -129,7 +129,7 @@ protected slots:
     void connectorBtnToggled(bool);
     void NewServer();
     void serverListClicked( const QString &);
-    
+
 protected:
    QPixmap unknownXpm;
     bool fuckeduphack;
@@ -139,7 +139,7 @@ protected:
     QGridLayout* tabLayout;
     QGridLayout* tabLayout_2;
     QGridLayout* tabLayout_3;
-    
+
 };
 
 #endif // OPIEFTP_H

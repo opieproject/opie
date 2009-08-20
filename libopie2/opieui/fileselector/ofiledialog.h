@@ -97,7 +97,7 @@ public:
     //let's OFileSelector catch up first
     //static QString getExistingDirectory(const QString& startDir = QString::null,
     //QWidget *parent = 0, const QString& caption = QString::null );
-    
+
 private:
     class OFileDialogPrivate;
     OFileDialogPrivate *d;

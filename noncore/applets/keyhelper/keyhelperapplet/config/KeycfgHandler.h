@@ -15,7 +15,7 @@ public:
 	~KeycfgHandler();
 
 	void dispose(QXmlReader* parser, QXmlContentHandler* parent);
-	
+
 	void setKeyModifiers(KeyModifiers* mod)
 	{
 		m_pModifiers = mod;

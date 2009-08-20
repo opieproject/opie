@@ -65,7 +65,7 @@ private:
  * you would prefer using the OPluginLoader directly. This class
  * exists to minimize the application binary size due the usage
  * of templates in the specialized API.
- * 
+ *
  *
  * @since 1.2
  * @see OPluginLoader

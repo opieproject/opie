@@ -35,7 +35,7 @@ signals:
     void sortChanged(int);
 
 public:
-    TVBrowseView(TableState *t, QWidget* parent = 0, 
+    TVBrowseView(TableState *t, QWidget* parent = 0,
                  const char* name = 0, WFlags fl = 0);
     ~TVBrowseView();
 

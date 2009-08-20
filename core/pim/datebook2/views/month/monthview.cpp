@@ -87,7 +87,7 @@ void MonthView::initUI(QWidget *parent) {
 void MonthView::getEvents() {
     QDate dtStart, dtEnd;
     m_widget->visibleDateRange( dtStart, dtEnd );
-    OPimOccurrence::List eventList = events( dtStart, dtEnd );    
+    OPimOccurrence::List eventList = events( dtStart, dtEnd );
     m_widget->setEvents( eventList );
 }
 
@@ -106,7 +106,7 @@ void MonthView::slotPopulateEvents()
     getEvents();
 }
 
-void MonthView::dateClicked( int y, int m, int d ) 
+void MonthView::dateClicked( int y, int m, int d )
 {
     showDayView();
 }

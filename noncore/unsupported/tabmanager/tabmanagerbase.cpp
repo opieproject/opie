@@ -16,18 +16,18 @@
 #include <qtooltip.h>
 #include <qwhatsthis.h>
 
-/* 
- *  Constructs a TabManagerBase which is a child of 'parent', with the 
- *  name 'name' and widget flags set to 'f' 
+/*
+ *  Constructs a TabManagerBase which is a child of 'parent', with the
+ *  name 'name' and widget flags set to 'f'
  */
 TabManagerBase::TabManagerBase( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
     if ( !name )
 	setName( "TabManagerBase" );
-    resize( 289, 228 ); 
+    resize( 289, 228 );
     setCaption( tr( "Tab Manager" ) );
-    TabManagerBaseLayout = new QVBoxLayout( this ); 
+    TabManagerBaseLayout = new QVBoxLayout( this );
     TabManagerBaseLayout->setSpacing( 4 );
     TabManagerBaseLayout->setMargin( 4 );
 
@@ -37,7 +37,7 @@ TabManagerBase::TabManagerBase( QWidget* parent,  const char* name, WFlags fl )
     TabManagerBaseLayout->addWidget( tabList );
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 TabManagerBase::~TabManagerBase()

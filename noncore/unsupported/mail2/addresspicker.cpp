@@ -57,7 +57,7 @@ AddressPicker::AddressPicker(QWidget *parent, const char *name, bool modal,
 				QString email;
 				if (pos != -1) {
 					int i = 1;
-					QChar c;	
+					QChar c;
 					while (c != '"') {
 						c = (*it)[pos + 13 + i];
 						if (c != '"') email += c;
@@ -104,7 +104,7 @@ void AddressPicker::accept()
 QString AddressPicker::getNames()
 {
 	QString names = 0;
-	
+
 	AddressPicker picker(0, 0, true);
 	picker.showMaximized();
 	picker.show();

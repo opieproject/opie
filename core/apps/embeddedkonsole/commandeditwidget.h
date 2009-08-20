@@ -32,13 +32,13 @@
 
 #include <qvariant.h>
 #include <qwidget.h>
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class PlayListSelection;
 
 class Form1 : public QWidget
-{ 
+{
     Q_OBJECT
 
 public:

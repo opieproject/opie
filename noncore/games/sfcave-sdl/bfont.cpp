@@ -88,7 +88,7 @@ BFont * BFont :: SetFontColor(Uint8 r, Uint8 g, Uint8 b)
     Uint32 color_key;
 
 	newfont = new BFont(NULL);
-	
+
 	if (newfont != NULL) {
 
 		newfont->h = h;

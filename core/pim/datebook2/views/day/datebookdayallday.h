@@ -54,7 +54,7 @@ class DatebookdayAllday : public QScrollView
     Q_OBJECT
 
 public:
-    DatebookdayAllday(Opie::Datebook::DayView *view, 
+    DatebookdayAllday(Opie::Datebook::DayView *view,
             QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
     ~DatebookdayAllday();
     DatebookAlldayDisp* addEvent(const Opie::OPimOccurrence &e);
@@ -90,7 +90,7 @@ protected:
     Opie::OPimOccurrence m_Ev;
     void mousePressEvent( QMouseEvent *e );
     bool m_holiday:1;
-    DatebookdayAllday *m_allday; 
+    DatebookdayAllday *m_allday;
 };
 
 class DatebookEventDesc: public QLabel

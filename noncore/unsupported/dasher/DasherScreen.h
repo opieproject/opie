@@ -21,10 +21,10 @@ public:
         //! \param height Height of the screen
 	CDasherScreen(int width,int height)
 		: m_iWidth(width), m_iHeight(height) {}
-	
+
 	//! Set the widget interface used for communication with the core
 	virtual void SetInterface(CDasherWidgetInterface* DasherInterface) {m_DasherInterface = DasherInterface;}
-	
+
 	//! Return the width of the screen
 	int GetWidth() const { return m_iWidth; }
 
@@ -41,7 +41,7 @@ public:
 
 	//! Set the Dasher font to Normal, Big or VBig
 	virtual void SetFontSize(Dasher::Opts::FontSize fontsize)=0;
-	
+
 	//! Return the Dasher font size
 	virtual Dasher::Opts::FontSize GetFontSize()=0;
 
@@ -52,7 +52,7 @@ public:
 	//! Draw character Character of size Size positioned at x1 and y1
 	virtual void DrawText(symbol Character, int x1, int y1, int Size) const=0;
 
-	
+
 	// Draw a filled rectangle - given position and color id
 	//! Draw a filled rectangle
 	//
@@ -64,13 +64,13 @@ public:
 	//! \param Color the colour to be used (numeric)
 	//! \param ColorScheme Which colourscheme is to be used
 	virtual void DrawRectangle(int x1, int y1, int x2, int y2, int Color, Opts::ColorSchemes ColorScheme) const=0;
-	
+
 	// Draw a line of fixed colour (usually black). Intended for static UI elements such as a cross-hair
 	//! Draw a line between each of the points in the array
 	//
 	//! \param Number the number of points in the array
 	virtual void Polyline(point* Points, int Number) const=0;
-	
+
 	// Draw a filled polygon - given vertices and color id
 	// This is not (currently) used in standard Dasher. However, it could be very
 	// useful in the future. Please implement unless it will be very difficult,
@@ -82,7 +82,7 @@ public:
 	//! \param Color colour of the polygon (numeric)
 	//! \param Colorscheme Which colourscheme is to be used
 	virtual void DrawPolygon(point* Points, int Number, int Color, Opts::ColorSchemes ColorScheme) const=0;
-	
+
 	// Signal the screen when a frame is started and finished
 	//! Signal that a frame is being started
 	virtual void Blank() const=0;

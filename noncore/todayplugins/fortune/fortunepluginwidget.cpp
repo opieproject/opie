@@ -70,7 +70,7 @@ void FortunePluginWidget::getFortune() {
 		this,  SLOT(slotStdOut(Opie::Core::OProcess*,char*,int) ) );
 
 	if(!fortuneProcess->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
-		owarn << "could not start :(" << oendl; 
+		owarn << "could not start :(" << oendl;
 		fortune->setText( QString("Failed to obtain fortune.") );
 		delete fortuneProcess;
 		fortuneProcess = 0;

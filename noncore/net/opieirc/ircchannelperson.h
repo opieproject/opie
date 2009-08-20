@@ -39,7 +39,7 @@ public:
 
     IRCChannelPerson(IRCPerson *person = 0);
     ~IRCChannelPerson();
-    
+
     QString setOp(const QString &nickname, bool set);
     QString setVoice(const QString &nickname, bool set);
     QString nick();

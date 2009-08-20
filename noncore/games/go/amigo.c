@@ -63,7 +63,7 @@ Connect( color, x, y, fGroups, fCnt, eGroups, eCnt)
 	*eCnt = 0;
 	if (color == WHITE)
 		opcolor = BLACK;
-	for (point = 0; point <= 3; point++ )  
+	for (point = 0; point <= 3; point++ )
 	{
 		tx = x + xVec[point];
 		ty = y + yVec[point];
@@ -139,7 +139,7 @@ Suicide(color, x, y)
 		return FALSE;
 	return TRUE;
 }
-   
+
 /* Returns the number of liberties for x, y */
 short
 StoneLibs(x, y)
@@ -158,7 +158,7 @@ StoneLibs(x, y)
 	}
 	return cnt;
 }
-   
+
 void
 EraseMarks()
 {
@@ -243,7 +243,7 @@ GoRemoveStone(x, y)
 }
 
 /* Merges two groups -- Renumbers stones and deletes second group from
-list.  Fixes stone count of groups.  This does not fix anything else. 
+list.  Fixes stone count of groups.  This does not fix anything else.
 FixLibs must be called to fix liberties, etc. */
 void
 MergeGroups(g1, g2)
@@ -485,7 +485,7 @@ CheckForEye( x, y, groups, cnt, recheck)
 	/* It is an eye */
 	GroupList[groups[i]].eyes += 1;
 }
-   
+
 /* Set the eye count for the groups */
 void CountEyes()
 {
@@ -583,7 +583,7 @@ Black : %3d territory + %3d prisoners = %d\n\n%s.\n",
 			"A draw")));
 
 
-	
+
 	XtVaSetValues(message,XtNstring,buff,0);
 	printf( "CountUp() %s", buff );
 	*/

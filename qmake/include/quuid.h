@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Definition of QUuid class
 **
@@ -115,14 +115,14 @@ struct Q_EXPORT QUuid
     bool operator==(const QUuid &orig ) const
     {
 	uint i;
-	if ( data1 != orig.data1 || data2 != orig.data2 || 
+	if ( data1 != orig.data1 || data2 != orig.data2 ||
 	     data3 != orig.data3 )
 	    return FALSE;
 
 	for( i = 0; i < 8; i++ )
 	    if ( data4[i] != orig.data4[i] )
 		return FALSE;
-	
+
 	return TRUE;
     }
 
@@ -157,14 +157,14 @@ struct Q_EXPORT QUuid
     bool operator==( const GUID &guid ) const
     {
 	uint i;
-	if ( data1 != guid.Data1 || data2 != guid.Data2 || 
+	if ( data1 != guid.Data1 || data2 != guid.Data2 ||
 	     data3 != guid.Data3 )
 	    return FALSE;
 
 	for( i = 0; i < 8; i++ )
 	    if ( data4[i] != guid.Data4[i] )
 		return FALSE;
-	
+
 	return TRUE;
     }
 

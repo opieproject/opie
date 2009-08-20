@@ -74,7 +74,7 @@ signals:
 
 private slots:
     void repeat();
-    
+
 private:
     int getKey( int &w, int j = -1 );
     void clearHighlight();
@@ -85,7 +85,7 @@ private:
     uint alt:1;
     uint useLargeKeys:1;
     uint useOptiKeys:1;
-    
+
     int pressedKey;
 
     KeyboardPicks *picks;

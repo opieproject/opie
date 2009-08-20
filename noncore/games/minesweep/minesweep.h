@@ -59,7 +59,7 @@ private:
     QLCDNumber* guessLCD;
     QLCDNumber* timeLCD;
     QPushButton* newGameButton;
-    
+
     QDateTime starttime;
     QTimer* timer;
 };

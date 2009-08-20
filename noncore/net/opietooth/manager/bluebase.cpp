@@ -70,10 +70,10 @@ using namespace OpieTooth;
 struct SerSpeed {
     const char* str; //string value
     int val; //value itself
-} speeds[] = { 
-      { "150", B150 },   { "300", B300 },   { "600", B600 }, { "1200", B1200 }, 
-    { "2400", B2400 }, { "4800", B4800 }, { "9600", B9600 }, 
-    { "19200", B19200 }, { "38400", B38400 }, { "57600", B57600 }, 
+} speeds[] = {
+      { "150", B150 },   { "300", B300 },   { "600", B600 }, { "1200", B1200 },
+    { "2400", B2400 }, { "4800", B4800 }, { "9600", B9600 },
+    { "19200", B19200 }, { "38400", B38400 }, { "57600", B57600 },
     { "115200", B115200}
 };
 
@@ -767,11 +767,11 @@ void BlueBase::doForward()
     QString str = serDevName->text();
     forwarder = new SerialForwarder(str, speeds[serSpeed->currentItem()].val);
     if (forwarder->start(OProcess::NotifyOnExit) < 0) {
-        QMessageBox::critical(this, tr("Forwarder Error"), 
+        QMessageBox::critical(this, tr("Forwarder Error"),
             tr("Forwarder start error:") + tr(strerror(errno)));
         return;
     }
-    connect(forwarder, SIGNAL(processExited(Opie::Core::OProcess*)), 
+    connect(forwarder, SIGNAL(processExited(Opie::Core::OProcess*)),
         this, SLOT(forwardExited(Opie::Core::OProcess*)));
     runButton->setText("stop gateway");
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
@@ -800,7 +800,7 @@ void BlueBase::forwardExit(Opie::Core::OProcess* proc)
     }
 #endif
     if (proc->exitStatus() != 0)
-        QMessageBox::critical(this, tr("Forwarder Error"), 
+        QMessageBox::critical(this, tr("Forwarder Error"),
             tr("Forwarder start error"));
 }
 
@@ -819,9 +819,9 @@ void BlueBase::doEncrypt(bool doit)
 void BlueBase::editServices()
 {
     QString conf = "/etc/default/bluetooth";
-//// Use for debugging purposes    
+//// Use for debugging purposes
 ////    QString conf = "/mnt/net/opie/bin/bluetooth";
-    ServicesDialog svcEdit(conf, this, "ServicesDialog", true, 
+    ServicesDialog svcEdit(conf, this, "ServicesDialog", true,
         WStyle_ContextHelp);
 
     if (QPEApplication::execDialog(&svcEdit) == QDialog::Accepted)

@@ -32,7 +32,7 @@ public:
     enum Direction{ Left, Right, NoDir };
 
     void pointCannon(Direction dir);
-    void setCoords();  
+    void setCoords();
     double shootAngle();
     void shoot();
     int rtti() const;

@@ -43,10 +43,10 @@ typedef struct {
 } ColorMapEntry;
 
 static ColorMapEntry Palm8BitColormap[] = {
-  { 255, 255, 255 }, { 255, 204, 255 }, { 255, 153, 255 }, { 255, 102, 255 }, 
-  { 255,  51, 255 }, { 255,   0, 255 }, { 255, 255, 204 }, { 255, 204, 204 }, 
-  { 255, 153, 204 }, { 255, 102, 204 }, { 255,  51, 204 }, { 255,   0, 204 }, 
-  { 255, 255, 153 }, { 255, 204, 153 }, { 255, 153, 153 }, { 255, 102, 153 }, 
+  { 255, 255, 255 }, { 255, 204, 255 }, { 255, 153, 255 }, { 255, 102, 255 },
+  { 255,  51, 255 }, { 255,   0, 255 }, { 255, 255, 204 }, { 255, 204, 204 },
+  { 255, 153, 204 }, { 255, 102, 204 }, { 255,  51, 204 }, { 255,   0, 204 },
+  { 255, 255, 153 }, { 255, 204, 153 }, { 255, 153, 153 }, { 255, 102, 153 },
   { 255,  51, 153 }, { 255,   0, 153 }, { 204, 255, 255 }, { 204, 204, 255 },
   { 204, 153, 255 }, { 204, 102, 255 }, { 204,  51, 255 }, { 204,   0, 255 },
   { 204, 255, 204 }, { 204, 204, 204 }, { 204, 153, 204 }, { 204, 102, 204 },
@@ -140,7 +140,7 @@ QImage* Palm2QImage
   transparent_index = palmimage[12];
   compression_type = palmimage[13];
   /* bytes 14 and 15 are reserved by Palm and always 0 */
-  
+
 #if 0
 //  qDebug ("Palm image is %dx%d, %d bpp, version %d, flags 0x%x, compression %d", width, height, bits_per_pixel, version, flags, compression_type);
 #endif
@@ -156,15 +156,15 @@ QImage* Palm2QImage
   }
 
   /* as of PalmOS 4.0, there are 6 different kinds of Palm pixmaps:
-     
+
      1, 2, or 4 bit grayscale
      8-bit StaticColor using the Palm standard colormap
      8-bit PseudoColor using a user-specified colormap
      16-bit DirectColor using 5 bits for red, 6 for green, and 5 for blue
-     
+
      Each of these can be compressed with one of four compression schemes,
      "RLE", "Scanline", "PackBits", or none.
-     
+
      We begin by constructing the colormap.
      */
 
@@ -279,7 +279,7 @@ QImage* Palm2QImage
 		      ((inval >> 0) & ((1 << palm_blue_bits) - 1)) << (8-palm_blue_bits));
 */
 	QRgb colour = qRgb(
-            ((inval >> (bits_per_pixel - palm_red_bits)) & ((1 << palm_red_bits) - 1)) << (8-palm_red_bits), 
+            ((inval >> (bits_per_pixel - palm_red_bits)) & ((1 << palm_red_bits) - 1)) << (8-palm_red_bits),
             ((inval >> palm_blue_bits) & ((1 << palm_green_bits) - 1)) << (8-palm_green_bits),
             ((inval >> 0) & ((1 << palm_blue_bits) - 1)) << (8-palm_blue_bits));
         qimage->setPixel(j, i, colour);

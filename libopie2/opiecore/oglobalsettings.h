@@ -269,7 +269,7 @@ class OGlobalSettings
     static QString autostartPath() { initStatic(); return *s_autostartPath; }
 
     /**
-     * The path to the trash directory of the current user.    
+     * The path to the trash directory of the current user.
      */
      // we do not have that concept -zecke
     static QString trashPath() { initStatic(); return *s_trashPath; }
@@ -370,9 +370,9 @@ private:
 
     static QColor * OpieGray;
     static QColor * OpieBlue;
-    static QColor * OpieAlternate;   
+    static QColor * OpieAlternate;
     static QColor * OpieHighlight;
-    
+
     friend class OApplication;
 private:
     class Private;

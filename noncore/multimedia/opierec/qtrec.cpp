@@ -106,7 +106,7 @@ void QtRec::playIt()
                 }
                 else
                     number = ::read( fd, buffer, bufsize);
-    
+
                 soundDevice->devWrite(buffer);
                 waveform->newSamples( buffer, number );
                 bytesWritten += number;
@@ -422,7 +422,7 @@ void QtRec::initIconView() {
         if( lastFile == filePath)
             ListView1->setSelected( item, true);
     }
-    
+
     setButtons();
 }
 
@@ -525,7 +525,7 @@ void QtRec::stop() {
 void QtRec::doPlayBtn() {
     if( mode != MODE_IDLE ) {
         stop();
-    } 
+    }
     else {
         if(ListView1->currentItem() == 0) return;
         start();
@@ -550,16 +550,16 @@ bool QtRec::rec() { //record
 //    timeString.sprintf("%.0f",  0.0);
 //    timeLabel->setText( timeString+ " seconds");
     secCount = 1;
-    
+
     OWavFileParameters fileparams;
     bool ok;
-    
+
     fileparams.resolution = bitRateComboBox->currentText().toInt( &ok,10);
 
     if(stereoCheckBox->isChecked())
-        fileparams.channels = 2; 
+        fileparams.channels = 2;
     else
-        fileparams.channels = 1; 
+        fileparams.channels = 1;
 
     if(compressionCheckBox->isChecked())
         fileparams.format = WAVE_FORMAT_DVI_ADPCM;
@@ -578,12 +578,12 @@ bool QtRec::rec() { //record
 
         if( filePara.SecondsToRecord == 0) {
             fileSize = diskSize;
-        } 
+        }
         else if( filePara.format == WAVE_FORMAT_PCM) {
 //                odebug << "WAVE_FORMAT_PCM" << oendl;
             fileSize = (filePara.SecondsToRecord ) * filePara.channels
                 * filePara.sampleRate * ( filePara.resolution / 8) + 1000;
-        } 
+        }
         else {
 //                odebug << "WAVE_FORMAT_DVI_ADPCM" << oendl;
             fileSize = ((filePara.SecondsToRecord) * filePara.channels
@@ -598,7 +598,7 @@ bool QtRec::rec() { //record
                                     tr("You are running low of\nrecording space\n"
                                     "or a card isn't being recognized"));
             stop();
-        } 
+        }
         else {
             waveform->changeSettings( fileparams.sampleRate, fileparams.channels, m_recorder.getDeviceFormat() );
 
@@ -663,7 +663,7 @@ void QtRec::getInVol() {
 
 void QtRec::changedOutVolume() {
     int vol = -OutputSlider->value();
-    
+
     Config cfg("qpe");
     cfg.setGroup("Volume");
     cfg.writeEntry("VolumePercent", QString::number( vol ));
@@ -690,7 +690,7 @@ bool QtRec::setupAudio( bool record ) {
             sampleformat = SND_PCM_FORMAT_S16;
         else
             sampleformat = SND_PCM_FORMAT_U8;
-    } 
+    }
     else { // we want to record
         filePara.resolution = bitRateComboBox->currentText().toInt( &ok,10);  //16
 
@@ -700,9 +700,9 @@ bool QtRec::setupAudio( bool record ) {
             sampleformat = SND_PCM_FORMAT_U8;
 
         if(stereoCheckBox->isChecked())
-            filePara.channels = 2; 
+            filePara.channels = 2;
         else
-            filePara.channels = 1; 
+            filePara.channels = 1;
 
         if(compressionCheckBox->isChecked())
             filePara.format = WAVE_FORMAT_DVI_ADPCM;
@@ -711,7 +711,7 @@ bool QtRec::setupAudio( bool record ) {
 
         filePara.sampleRate = sampleRateComboBox->currentText().toInt( &ok,10);//44100;
     }
-    
+
     owarn << "<<<<<<<<<<<<<<<<<<<open dsp " << filePara.sampleRate << " " << filePara.channels << " " << sampleformat << "" << oendl;
     waveform->changeSettings( filePara.sampleRate, filePara.channels, sampleformat );
 
@@ -735,7 +735,7 @@ void QtRec::setupFileName() {
     cfg.setGroup("Settings");
 
     QString fileName = cfg.readEntry("directory", QDir::homeDirPath());
-    
+
     QDateTime dt = QDateTime::currentDateTime();
     QString date = dt.toString();
     date.replace(QRegExp("'"),"");
@@ -757,7 +757,7 @@ bool QtRec::doPlay() {
     if( mode != MODE_PAUSED ) {
         total = 0;
         filePara.numberOfRecordedSeconds = 0;
-    } 
+    }
     else {
         secCount = (int)filePara.numberOfRecordedSeconds;
     }
@@ -769,7 +769,7 @@ bool QtRec::doPlay() {
     timeString.sprintf("%f",  filePara.numberOfRecordedSeconds);
 //    timeLabel->setText( timeString+ tr(" seconds"));
 
-    odebug << "rate = " << filePara.sampleRate 
+    odebug << "rate = " << filePara.sampleRate
            << "  ch = " << filePara.channels
            << " res = " << filePara.resolution << oendl;
 
@@ -841,7 +841,7 @@ void QtRec::newSound() {
 void QtRec::deleteSound() {
     if( ListView1->currentItem() == NULL)
         return;
-    
+
     if (QMessageBox::warning(this, tr("Delete"), tr("Are you sure?"), QMessageBox::Yes, QMessageBox::No)==QMessageBox::Yes) {
         QString file = getSelectedFile();
         QFile f( file );
@@ -1080,12 +1080,12 @@ void QtRec::okRename() {
 
     if(oldfilename == newfilename)
         return;
-    
+
     odebug << "filename is  " + newfilename << oendl;
 
     FileManager fm;
     fm.renameFile(m_dirPath + oldfilename, m_dirPath + newfilename);
-    
+
     initIconView();
     update();
 }

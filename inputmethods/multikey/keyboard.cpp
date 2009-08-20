@@ -53,9 +53,9 @@ static const char * const kb_config_xpm[] = {
 
 /* Keyboard::Keyboard {{{1 */
 Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
-    QFrame(parent, _name, f),  shift(0), lock(0), ctrl(0), alt(0), 
+    QFrame(parent, _name, f),  shift(0), lock(0), ctrl(0), alt(0),
     meta(0), circumflex(0), diaeresis(0), baccent(0), accent(0),
-    useLargeKeys(TRUE), usePicks(0), useRepeat(0), 
+    useLargeKeys(TRUE), usePicks(0), useRepeat(0),
     pressedKeyRow(-1), pressedKeyCol(-1),
     unicode(-1), qkeycode(0), modifiers(0), schar(0), mchar(0), echar(0),
     configdlg(0)
@@ -101,7 +101,7 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
 
 Keyboard::~Keyboard() {
 
-    if ( configdlg ) { 
+    if ( configdlg ) {
         delete configdlg;
         configdlg = 0;
     }
@@ -190,8 +190,8 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 
         int keyWidth = keys->width(row, col);
 
-        p.fillRect(x + 1, y + 1, 
-                   keyWidth * defaultKeyWidth - 1, keyHeight - 1, 
+        p.fillRect(x + 1, y + 1,
+                   keyWidth * defaultKeyWidth - 1, keyHeight - 1,
                    pressed || keys->pressed(row, col) ? keycolor_pressed : keycolor);
 
         QImage *pix = keys->pix(row,col);
@@ -200,7 +200,7 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 
         p.setPen(textcolor);
         if (!pix) {
-            if ((shift || lock) && keys->shift(c)) 
+            if ((shift || lock) && keys->shift(c))
 
                 if (circumflex && keys->circumflex(keys->shift(c)))
                     c = keys->circumflex(keys->shift(c));
@@ -212,12 +212,12 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
                     c = keys->accent(keys->shift(c));
                 else if (meta && keys->meta(keys->shift(c)))
                     c = keys->meta(keys->shift(c));
-                else 
+                else
                     c = keys->shift(c);
 
-            else if (meta && keys->meta(c)) 
+            else if (meta && keys->meta(c))
                 c = keys->meta(c);
-            else if (circumflex && keys->circumflex(c)) 
+            else if (circumflex && keys->circumflex(c))
                 c = keys->circumflex(c);
 		  else if (baccent && keys->baccent(c))
                 c = keys->baccent(c);
@@ -227,21 +227,21 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 
                 // the diaeresis key itself has to be in the diaeresisMap,
                 // or just do this to make it display the diaeresis char.
-                
+
                 if (c == 0x2c6)
                     c = 0xa8;
-                else 
+                else
                     c = keys->diaeresis(c);
             }
-            
-            p.drawText(x, y, 
+
+            p.drawText(x, y,
                defaultKeyWidth * keyWidth + 3, keyHeight,
                AlignCenter, (QChar)c);
         }
         else
             // center the image in the middle of the key
-            p.drawImage( x + (defaultKeyWidth * keyWidth - pix->width())/2 + 1, 
-                          y + (keyHeight - pix->height())/2 + 1, 
+            p.drawImage( x + (defaultKeyWidth * keyWidth - pix->width())/2 + 1,
+                          y + (keyHeight - pix->height())/2 + 1,
                           *pix );
 
         // this fixes the problem that the very right end of the board's vertical line
@@ -270,15 +270,15 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 
             int keyWidthPix = defaultKeyWidth * keyWidth;
 
-            if (keys->pressed(row, col)) 
-                p.fillRect(x+1, y+1, keyWidthPix - 1, 
+            if (keys->pressed(row, col))
+                p.fillRect(x+1, y+1, keyWidthPix - 1,
                            keyHeight - 1, keycolor_pressed);
 
             ushort c = keys->uni(row, col);
 
             p.setPen(textcolor);
             if (!pix) {
-                if ((shift || lock) && keys->shift(c)) 
+                if ((shift || lock) && keys->shift(c))
 
                     if (circumflex && keys->circumflex(keys->shift(c)))
                         c = keys->circumflex(keys->shift(c));
@@ -290,10 +290,10 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
                         c = keys->accent(keys->shift(c));
                     else if (meta && keys->meta(keys->shift(c)))
                         c = keys->meta(keys->shift(c));
-                    else 
+                    else
                         c = keys->shift(c);
 
-                else if (meta && keys->meta(c)) 
+                else if (meta && keys->meta(c))
                     c = keys->meta(c);
                 else if (circumflex && keys->circumflex(c))
                     c = keys->circumflex(c);
@@ -305,19 +305,19 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 
                     if (c == 0x2c6)
                         c = 0xa8;
-                    else 
+                    else
                         c = keys->diaeresis(c);
                 }
 
-                p.drawText(x, y, 
+                p.drawText(x, y,
                    keyWidthPix + 3, keyHeight,
                    AlignCenter, (QChar)c);
             }
             else {
                 // center the image in the middle of the key
                 pix->setColor(1, textcolor.rgb());
-                p.drawImage( x + (keyWidthPix - pix->width())/2 + 1, 
-                              y + (keyHeight - pix->height())/2 + 1, 
+                p.drawImage( x + (keyWidthPix - pix->width())/2 + 1,
+                              y + (keyHeight - pix->height())/2 + 1,
                               QImage(*pix) );
             }
 
@@ -344,7 +344,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
     if (row > 5) row = 5;
 
     // figure out the column
-    int col = 0; 
+    int col = 0;
     for (int w = 0; e->x() >= w; col++)
         if (col < keys->numKeys(row)) // it segfaults if it trys to read past numKeys
             w += keys->width(row,col) * defaultKeyWidth;
@@ -359,22 +359,22 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
     // might need to repaint if two or more of the same keys.
     // should be faster if just paint one key even though multiple keys exist.
-    bool need_repaint = FALSE; 
+    bool need_repaint = FALSE;
 
     // circumflex and diaeresis support
     // messy to have this here, but too hard to implement any other method
-    if (unicode == 0x2c6) { 
+    if (unicode == 0x2c6) {
 
-        unicode = 0; 
+        unicode = 0;
         if (shift || lock) {
 
             // diaeresis
-            qkeycode = 0x2001; 
+            qkeycode = 0x2001;
         }
         else {
-            
+
             // circumflex
-            qkeycode = 0x2000; 
+            qkeycode = 0x2000;
         }
     }
 
@@ -418,18 +418,18 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
         if (qkeycode == Qt::Key_F1) { // toggle the pickboard
 
-            if ( configdlg ) { 
+            if ( configdlg ) {
 
-                delete configdlg; 
+                delete configdlg;
                 configdlg = 0;
             }
             else {
                configdlg = new ConfigDlg ();
-               connect(configdlg, SIGNAL(setMapToDefault()), 
+               connect(configdlg, SIGNAL(setMapToDefault()),
                        this, SLOT(setMapToDefault()));
-               connect(configdlg, SIGNAL(setMapToFile(QString)), 
+               connect(configdlg, SIGNAL(setMapToFile(QString)),
                        this, SLOT(setMapToFile(QString)));
-               connect(configdlg, SIGNAL(pickboardToggled(bool)), 
+               connect(configdlg, SIGNAL(pickboardToggled(bool)),
                        this, SLOT(togglePickboard(bool)));
                connect(configdlg, SIGNAL(repeatToggled(bool)),
                        this, SLOT(toggleRepeat(bool)));
@@ -491,7 +491,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
             }
 
 
-            /* 
+            /*
              * want to be able to hit circumflex/diaeresis -> shift
              * to type in shifted circumflex/diaeresis chars.
              * same thing with meta
@@ -538,7 +538,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
             }
 
             // reset all the other keys
-            if (shift) { *shift = 0; shift = 0; } 
+            if (shift) { *shift = 0; shift = 0; }
             if (lock) { *lock = 0; lock = 0; }
             if (circumflex) { *circumflex = 0; circumflex = 0; }
             if (diaeresis) { *diaeresis = 0; diaeresis = 0; }
@@ -565,23 +565,23 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
             /* no need to turn off shift or lock if circumflex
              * keys are pressed
-             
+
             if (shift) { *shift = 0; shift = 0; }
             if (lock) { *lock = 0; lock = 0; }
 
              */
-            
+
             // have to reset all the other keys
             if (meta) { *meta = 0; meta = 0; }
-            if (diaeresis) { 
-                
+            if (diaeresis) {
+
                 // *diaeresis and *circumflex point to the same thing
                 // when diaeresis is enabled and you hit the circumflex
                 // since they are the same key, it should turn off the
                 // key
-                
-                *diaeresis = 0; 
-                diaeresis = 0; 
+
+                *diaeresis = 0;
+                diaeresis = 0;
                 circumflex = 0;
             }
 
@@ -602,7 +602,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                 *diaeresis = true;
             }
 
-             
+
             if (shift) { *shift = 0; shift = 0; }
 
             /*
@@ -612,13 +612,13 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
              */
 
             if (meta) { *meta = 0; meta = 0; }
-            if (circumflex) { 
+            if (circumflex) {
 
-                // *circumflex = 0; 
+                // *circumflex = 0;
                 //
                 // same thing the diaeresis pointer points too
-                
-                circumflex = 0; 
+
+                circumflex = 0;
             }
 
 
@@ -645,7 +645,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 		    if (accent) { *accent = 0; accent = 0; }
 
             qkeycode = 0;
-        
+
 	   // Accent
         } else if (qkeycode == 0x2003) {
             need_repaint = TRUE;
@@ -675,7 +675,7 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
             // make diaeresis/circumflex -> shift input shifted
             // diaeresis/circumflex chars
-            
+
             if (circumflex && keys->circumflex(keys->shift(unicode)))
                 unicode = keys->circumflex(keys->shift(unicode));
             else if (diaeresis && keys->diaeresis(keys->shift(unicode)))
@@ -721,13 +721,13 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
         unicode = qkeycode - '@';
     }
 
-    QWSServer::sendKeyEvent(unicode, qkeycode, modifiers, true, false); 
+    QWSServer::sendKeyEvent(unicode, qkeycode, modifiers, true, false);
 
     // pickboard stuff
     if (usePicks) {
 
         KeyboardConfig *dc = picks->dc;
-    
+
         if (dc) {
             if (qkeycode == Qt::Key_Backspace) {
                 dc->input.remove(dc->input.last()); // remove last input
@@ -795,7 +795,7 @@ void Keyboard::mouseReleaseEvent(QMouseEvent*)
         shift = 0;  // reset the shift pointer
         repaint(FALSE);
 
-    } 
+    }
     if (ctrl && unicode != 0) {
 
         *ctrl = 0;
@@ -810,7 +810,7 @@ void Keyboard::mouseReleaseEvent(QMouseEvent*)
         repaint(FALSE);
 
     }
-    
+
     /*
      * do not make the meta key release after being pressed
      *
@@ -926,8 +926,8 @@ void Keyboard::toggleRepeat(bool on) {
 
 void Keyboard::cleanupConfigDlg() {
 
-    if ( configdlg ) { 
-        delete configdlg; 
+    if ( configdlg ) {
+        delete configdlg;
         configdlg = 0;
     }
 }
@@ -958,7 +958,7 @@ void Keyboard::setMapToDefault() {
     if (d != -1) {
 	l.remove(d, l.length()-d);
     }
-    QString key_map = QPEApplication::qpeDir() + "share/multikey/" 
+    QString key_map = QPEApplication::qpeDir() + "share/multikey/"
             + l + ".keymap";
 
     /* save change to multikey config file */
@@ -975,7 +975,7 @@ void Keyboard::setMapToDefault() {
     // have to repaint the keyboard
     if (prevRows != keys->rows()) {
 
-        QCopChannel::send ("QPE/TaskBar", "hideInputMethod()"); 
+        QCopChannel::send ("QPE/TaskBar", "hideInputMethod()");
         QCopChannel::send ("QPE/TaskBar", "showInputMethod()");
 
     } else repaint(FALSE);
@@ -995,9 +995,9 @@ void Keyboard::setMapToFile(QString map) {
     int prevRows = keys->rows();
 
     delete keys;
-    if (QFile(map).exists()) 
+    if (QFile(map).exists())
         keys = new Keys(map);
-    else 
+    else
         keys = new Keys();
 
     if (keys->rows() != prevRows) {
@@ -1059,17 +1059,17 @@ void Keyboard::loadKeyboardColors() {
 
 }
 
-/* korean input functions {{{1 
+/* korean input functions {{{1
  *
  * TODO
  * one major problem with this implementation is that you can't move the
  * cursor after inputing korean chars, otherwise it will eat up and replace
  * the char before the cursor you move to. fix that
  *
- * make backspace delete one single char, not the whole thing if still 
+ * make backspace delete one single char, not the whole thing if still
  * editing.
  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
  * how korean input works
  *
@@ -1089,7 +1089,7 @@ void Keyboard::loadKeyboardColors() {
 
 ushort Keyboard::parseKoreanInput (ushort c) {
 
-	if ((c != 0 && (c < 0x1100 || 0x11c2 < c) && (c < 0xac00 || 0xd7a3 < c)) 
+	if ((c != 0 && (c < 0x1100 || 0x11c2 < c) && (c < 0xac00 || 0xd7a3 < c))
           ||
         (c == 0 && qkeycode != Qt::Key_Shift && Qt::Key_CapsLock != qkeycode
          && qkeycode != Qt::Key_Control && qkeycode != Qt::Key_Alt)) {
@@ -1110,7 +1110,7 @@ ushort Keyboard::parseKoreanInput (ushort c) {
 
 				if (!(echar = constoe(c))) {
 
-					schar = c; mchar = 0; echar = 0; 
+					schar = c; mchar = 0; echar = 0;
 					return c;
 				}
 
@@ -1121,8 +1121,8 @@ ushort Keyboard::parseKoreanInput (ushort c) {
 
 					if (c == 0x1100) 		echar = 0x11a9; // ㄱ + ㄱ
 					else if (c == 0x1109) 	echar = 0x11aa; // ㄱ + ㅅ
-					else { 
-						schar = c; mchar = 0; echar = 0; 
+					else {
+						schar = c; mchar = 0; echar = 0;
 						return c;
 					}
 
@@ -1131,7 +1131,7 @@ ushort Keyboard::parseKoreanInput (ushort c) {
 					if (c == 0x110c)  		echar = 0x11ac; // ㄴ + ㅈ
 					else if (c == 0x1112)  	echar = 0x11ad; // ㄴ + ㅎ
 					else {
-						schar = c; mchar = 0; echar = 0; 
+						schar = c; mchar = 0; echar = 0;
 						return c;
 					}
 
@@ -1145,7 +1145,7 @@ ushort Keyboard::parseKoreanInput (ushort c) {
 					else if (c == 0x1111) 	echar = 0x11b5; // ㄹ + ㅍ
 					else if (c == 0x1112) 	echar = 0x11b6; // ㄹ + ㅎ
 					else {
-						schar = c; mchar = 0; echar = 0; 
+						schar = c; mchar = 0; echar = 0;
 						return c;
 					}
 
@@ -1153,15 +1153,15 @@ ushort Keyboard::parseKoreanInput (ushort c) {
 
 					if (c == 0x1109) 		echar = 0x11b9; // ㅂ + ㅅ
 					else {
-						schar = c; mchar = 0; echar = 0; 
+						schar = c; mchar = 0; echar = 0;
 						return c;
 					}
 
-				} else if (echar == 0x11ba) { // ㅅ 
+				} else if (echar == 0x11ba) { // ㅅ
 
-					if (c == 0x1109) 		echar = 0x11bb; // ㅅ + ㅅ 
+					if (c == 0x1109) 		echar = 0x11bb; // ㅅ + ㅅ
 					else {
-						schar = c; mchar = 0; echar = 0; 
+						schar = c; mchar = 0; echar = 0;
 						return c;
 					}
 
@@ -1208,7 +1208,7 @@ ushort Keyboard::parseKoreanInput (ushort c) {
 						return c;
 					}
 					break;
-				default: 
+				default:
 					schar = 0; mchar = 0; echar = 0;
 					return c;
 			}
@@ -1222,7 +1222,7 @@ ushort Keyboard::parseKoreanInput (ushort c) {
 				/*
 				case 0x11a9:
 					prev = combineKoreanChars(schar, mchar, 0x11a8);
-					schar = 0x1100; 
+					schar = 0x1100;
 					break;
 				*/
 				case 0x11aa:
@@ -1231,7 +1231,7 @@ ushort Keyboard::parseKoreanInput (ushort c) {
 					break;
 				case 0x11ac:
 					prev = combineKoreanChars(schar, mchar, 0x11ab);
-					schar = 0x110c; 
+					schar = 0x110c;
 					break;
 				case 0x11ad:
 					prev = combineKoreanChars(schar, mchar, 0x11ab);
@@ -1239,7 +1239,7 @@ ushort Keyboard::parseKoreanInput (ushort c) {
 					break;
 				case 0x11b0:
 					prev = combineKoreanChars(schar, mchar, 0x11af);
-					schar = 0x1100; 
+					schar = 0x1100;
 					break;
 				case 0x11b1:
 					prev = combineKoreanChars(schar, mchar, 0x11af);
@@ -1247,7 +1247,7 @@ ushort Keyboard::parseKoreanInput (ushort c) {
 					break;
 				case 0x11b2:
 					prev = combineKoreanChars(schar, mchar, 0x11af);
-					schar = 0x1107; 
+					schar = 0x1107;
 					break;
 				case 0x11b3:
 					prev = combineKoreanChars(schar, mchar, 0x11af);
@@ -1264,32 +1264,32 @@ ushort Keyboard::parseKoreanInput (ushort c) {
 				/*
 				case 0x11bb:
 					prev = combineKoreanChars(schar, mchar, 0x11ba);
-					schar = 0x1109; 
+					schar = 0x1109;
 					break;
 				*/
-				default: 
+				default:
 
 					if (constoe(echar)) {
 
 						prev = combineKoreanChars(schar, mchar, 0);
-						schar = constoe(echar); 
-					} 
+						schar = constoe(echar);
+					}
 					break;
 			}
-			
+
 			emit key( prev, prev, 0, true, false );
 
 			mchar = c; echar = 0;
 
 			return combineKoreanChars(schar, mchar, 0);
-		
-		} 
+
+		}
 		else {
 			schar = 0; mchar = 0; echar = 0;
 			return c;
 		}
 
-	} 
+	}
 	else /*if (c == ' ')*/ return c;
 
 
@@ -1376,15 +1376,15 @@ Keys::Keys() {
         config->setGroup( "Language" );
         QString l = config->readEntry( "Language" , "en" );
         delete config;
-    
-        map = QPEApplication::qpeDir() + "share/multikey/" 
+
+        map = QPEApplication::qpeDir() + "share/multikey/"
                 + l + ".keymap";
 
-    } 
+    }
     if (map.isNull() || !(QFile(map).exists())) {
         map = QPEApplication::qpeDir() + "share/multikey/en.keymap";
     }
-    
+
     setKeysFromFile(map);
 }
 
@@ -1417,7 +1417,7 @@ void Keys::setKeysFromFile(const char * filename) {
             buf.replace(QRegExp("#.*$", FALSE, FALSE), "");
 
             // key definition
-            if (buf.contains(QRegExp("^\\d+\\s+[0-1a-fx]+", FALSE, FALSE))) { 
+            if (buf.contains(QRegExp("^\\d+\\s+[0-1a-fx]+", FALSE, FALSE))) {
             // no $1 type referencing!!! this implementation of regexp sucks
 
                 // dont know of any sscanf() type funcs in Qt lib
@@ -1455,7 +1455,7 @@ void Keys::setKeysFromFile(const char * filename) {
                 if (xpmLineCount) {
 
                     xpm2pix = new QImage((const char **)xpm);
-                    for (int i = 0; i < xpmLineCount; i++) 
+                    for (int i = 0; i < xpmLineCount; i++)
 
                         delete [] (xpm[i]);
 
@@ -1550,7 +1550,7 @@ void Keys::setKeysFromFile(const char * filename) {
 
                     lang = value;
 
-                } 
+                }
 
                 buf = t.readLine();
             }
@@ -1566,7 +1566,7 @@ void Keys::setKeysFromFile(const char * filename) {
             }
 
         }
-        
+
         f.close();
     } else {
         // We couldnt find the selected keymap, give them a configure button
@@ -1578,11 +1578,11 @@ void Keys::setKeysFromFile(const char * filename) {
 
 
 // Keys::setKey {{{2
-void Keys::setKey(const int row, const int qcode, const ushort unicode, 
+void Keys::setKey(const int row, const int qcode, const ushort unicode,
                     const int width, QImage *pix) {
 
     Key * key;
-    key = new Key; 
+    key = new Key;
     key->qcode = qcode;
     key->unicode = unicode;
     key->width = width;
@@ -1592,7 +1592,7 @@ void Keys::setKey(const int row, const int qcode, const ushort unicode,
     for (int i = 1; i <= 5; i++) {
         for (unsigned int j = 0; j < keys[i].count(); j++)
             if (keys[i].at(j)->qcode == qcode && keys[i].at(j)->unicode == unicode) {
-               
+
                 key->pressed = keys[i].at(j)->pressed;
                 found = 1;
             }
@@ -1613,7 +1613,7 @@ void Keys::setKey(const int row, const int qcode, const ushort unicode,
 // Keys::~Keys {{{2
 Keys::~Keys() {
 
-    for (int i = 1; i <= 5; i++) 
+    for (int i = 1; i <= 5; i++)
         for (unsigned int j = 0; j < keys[i].count(); j++)
             delete keys[i].at(j);
 
@@ -1621,7 +1621,7 @@ Keys::~Keys() {
 
 // Keys:: other functions {{{2
 int Keys::width(const int row, const int col) {
-    
+
     return keys[row].at(col)->width;
 
 }
@@ -1670,19 +1670,19 @@ void Keys::setPressed(const int row, const int col, const bool pressed) {
 
 ushort Keys::shift(const ushort uni) {
 
-    if (shiftMap[uni]) return shiftMap[uni]; 
+    if (shiftMap[uni]) return shiftMap[uni];
     else return 0;
 }
 
 ushort Keys::meta(const ushort uni) {
 
-    if (metaMap[uni]) return metaMap[uni]; 
+    if (metaMap[uni]) return metaMap[uni];
     else return 0;
 }
 
 ushort Keys::circumflex(const ushort uni) {
 
-    if (circumflexMap[uni]) return circumflexMap[uni]; 
+    if (circumflexMap[uni]) return circumflexMap[uni];
     else return 0;
 }
 

@@ -3,11 +3,11 @@
 
 #include "netnodeinterface.h"
 
-static const char * LanCardNeeds[] = 
+static const char * LanCardNeeds[] =
     { 0
     };
 
-static const char * LanCardProvides[] = 
+static const char * LanCardProvides[] =
     { "device",
       0
     };
@@ -46,8 +46,8 @@ const char ** LanCardNetNode::provides( void ) {
       return LanCardProvides;
 }
 
-QString LanCardNetNode::genNic( long nr ) { 
-      QString S; 
+QString LanCardNetNode::genNic( long nr ) {
+      QString S;
       return S.sprintf( "eth%ld", nr );
 }
 
@@ -64,7 +64,7 @@ void LanCardNetNode::saveSpecificAttribute( QTextStream & TS) {
          << InstanceCount
          << endl;
       for( QStringList::Iterator it = NICMACAddresses.begin();
-           it != NICMACAddresses.end(); 
+           it != NICMACAddresses.end();
            ++it ) {
         TS << "macaddress="
            << (*it)

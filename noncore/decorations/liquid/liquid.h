@@ -9,15 +9,15 @@ class LiquidDecoInterface : public WindowDecorationInterface {
 public:
 	LiquidDecoInterface ( );
 	virtual ~LiquidDecoInterface ( );
-	
+
 	QRESULT queryInterface ( const QUuid &, QUnknownInterface ** );
 	Q_REFCOUNT
 
 	virtual void drawArea( Area a, QPainter *, const WindowData * ) const;
-        	
+
 	virtual QString name ( ) const;
 	virtual QPixmap icon ( ) const;
-	
+
 };
 
 #endif

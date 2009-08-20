@@ -22,7 +22,7 @@ public :
         Peer = P;
         Channel = Ch;
 
-        setText( 0, (P->name().isEmpty()) ? 
+        setText( 0, (P->name().isEmpty()) ?
                       P->address().toString() :
                       P->name() );
         QString S;
@@ -42,7 +42,7 @@ public :
       OTPeer * Peer;
 };
 
-BluetoothRFCOMMEdit::BluetoothRFCOMMEdit( QWidget * Parent ) : 
+BluetoothRFCOMMEdit::BluetoothRFCOMMEdit( QWidget * Parent ) :
       BluetoothRFCOMMGUI( Parent ){
       Modified = 0;
       OT = OTGateway::getOTGateway();
@@ -72,7 +72,7 @@ bool BluetoothRFCOMMEdit::commit( BluetoothRFCOMMData & Data ) {
       while( it ) {
 
         ct ++;
-        Data.Devices.resize( ct ); 
+        Data.Devices.resize( ct );
         I = (PeerLBI * )it;
 
         Data.Devices.insert( ct-1, new RFCOMMChannel );

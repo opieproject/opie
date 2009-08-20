@@ -117,7 +117,7 @@ int mpeg3video_idctcol(short *blk)
   x8 = W3*(x6+x7) + 4;
   x6 = (x8-(W3-W5)*x6)>>3;
   x7 = (x8-(W3+W5)*x7)>>3;
-  
+
   /* second stage */
   x8 = x0 + x1;
   x0 -= x1;
@@ -128,7 +128,7 @@ int mpeg3video_idctcol(short *blk)
   x4 -= x6;
   x6 = x5 + x7;
   x5 -= x7;
-  
+
   /* third stage */
   x7 = x8 + x3;
   x8 -= x3;
@@ -136,7 +136,7 @@ int mpeg3video_idctcol(short *blk)
   x0 -= x2;
   x2 = (181 * (x4 + x5) + 128) >> 8;
   x4 = (181 * (x4 - x5) + 128) >> 8;
-  
+
   /* fourth stage */
   blk[8 * 0] = (x7 + x1) >> 14;
   blk[8 * 1] = (x3 + x2) >> 14;

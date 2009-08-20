@@ -33,28 +33,28 @@ GBool openTempFile ( GString **name, FILE **f, char *mode, char *ext )
 {
 	char *s, *p;
 	int fd;
-	
-	if ( !ext ) 
+
+	if ( !ext )
 		ext = ".tmp";
-	
-	if (!( s = tmpnam ( 0 ))) 
+
+	if (!( s = tmpnam ( 0 )))
 		return gFalse;
-			
+
 	*name = new GString ( s );
 
 	s = (*name)-> getCString ( );
-	if (( p = strrchr ( s, '.' ))) 
+	if (( p = strrchr ( s, '.' )))
 		(*name)-> del ( p - s, (*name)-> getLength ( ) - ( p - s ));
-	
+
 	(*name)-> append ( "_qpdf" );
 	(*name)-> append ( ext );
-	
+
 	fd = open ((*name)-> getCString ( ), O_WRONLY | O_CREAT | O_EXCL, 0600 );
-	
+
 	if ( fd < 0 || !( *f = fdopen ( fd, mode ))) {
 		delete *name;
 		return gFalse;
 	}
-	
-	return gTrue;	
+
+	return gTrue;
 }

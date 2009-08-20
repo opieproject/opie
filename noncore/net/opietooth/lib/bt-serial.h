@@ -4,7 +4,7 @@
  *	(c) Copyright 2006 GPL
  *
  *	This software is provided under the GNU public license, incorporated
- *	herein by reference. The software is provided without warranty or 
+ *	herein by reference. The software is provided without warranty or
  *	support.
  */
 #ifndef _BT_SERIAL_H_
@@ -20,7 +20,7 @@ typedef struct //bt-serial connection handler
 } BTSerialConn;
 
 /*
- * bt_serialStart 
+ * bt_serialStart
  * Function starts bt-serial service
  * return 0 success -1 on error
  */

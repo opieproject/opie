@@ -7,7 +7,7 @@
  * Gestion des noeuds
  ****************************************************************************/
 
-/* 
+/*
  * Désallocation du noeud p
  */
 
@@ -36,16 +36,16 @@ UINT ppm_worker::Node_Alloc(void)  {
 }
 
 /****************************************************************************
- * Gestion des contextes 
+ * Gestion des contextes
  ****************************************************************************/
 
 
-/* 
- * Mise au début de la liste des contextes du contexte c 
+/*
+ * Mise au début de la liste des contextes du contexte c
  */
 void ppm_worker::Context_MoveFirst(UINT c) {
   NODE *ctx;
-   
+
   if (c!=ctx_first)  {
     ctx=&node_heap[c];
     /* suppression du contexte dans la liste */
@@ -69,9 +69,9 @@ void ppm_worker::Context_DeleteLast(void) {
   NODE *n;
   UINT h,h_next,node,node_next;
   USHORT *p;
-   
+
   n=&node_heap[ctx_last];
-   
+
   /* libération dans la table de hachage. Comme on ne dispose pas de
    * pointeur hash_prev dans les contextes, il faut parcourir toute
    * la liste. Heureusement, celle-ci est de longueur faible en moyenne
@@ -82,9 +82,9 @@ void ppm_worker::Context_DeleteLast(void) {
   p=&hash_table[h-HASH_ADDRESS];
   while (*p!=ctx_last) p=&node_heap[*p].hdr.hash_next;
   *p=h_next;
-   
+
   /* libération des noeuds & modification de ctx_last */
-   
+
   if (n->hdr.sf_max>=2)  {
     node=n->hdr.sf.l.sf_next;
     while (1) {
@@ -93,7 +93,7 @@ void ppm_worker::Context_DeleteLast(void) {
       if (node_next==NIL) break;
       node=node_next;
     }
-  } 
+  }
 
   node=ctx_last;
   ctx_last=n->hdr.ctx_prev;
@@ -101,7 +101,7 @@ void ppm_worker::Context_DeleteLast(void) {
   ctx_nb--;
 }
 
-/* 
+/*
  * Création d'un nouveau contexte avec un seul symbole sym de fréquence 1
  * Utilisation implicite de sym_context et sym_hash.
  * Libération de mémoire si nécessaire, et mise en premier dans la liste
@@ -110,19 +110,19 @@ void ppm_worker::Context_New(int sym,int order) {
   NODE *ctx;
   UINT i,c;
 
-#ifdef DEBUG   
+#ifdef DEBUG
   printf("Context_New: sym=%d o=%d\n",sym,order);
 #endif
 
   c=Node_Alloc();
   ctx=&node_heap[c];
-   
+
   /* mise du contexte en tête de la liste */
   ctx->hdr.ctx_next=ctx_first;
   node_heap[ctx_first].hdr.ctx_prev=c;
   ctx_first=c;
   ctx_nb++;
-   
+
   /* insertion dans la table de hachage */
   ctx->hdr.hash_next=hash_table[sym_hash[order]];
   hash_table[sym_hash[order]]=ctx_first;
@@ -147,7 +147,7 @@ void ppm_worker::Context_NewSym(int sym,UINT c) {
   NODE *n,*m;
   UINT p,sf_max;
 
-#ifdef DEBUG   
+#ifdef DEBUG
   printf("Context_NewSym: sym=%d c=%d\n",sym,c);
   Context_Print(c);
 #endif
@@ -195,7 +195,7 @@ void ppm_worker::Context_NewSym(int sym,UINT c) {
 #ifdef STAT
 int hash_nb=1;
 int hash_cnt=0;
-#endif 
+#endif
 
 /*
  * Recherche d'un contexte, utilisation de façon implicite de sym_context
@@ -207,10 +207,10 @@ UINT ppm_worker::Context_Search(int order)  {
   UCHAR *sym;
   UINT i,p;
   NODE *n;
-#ifdef DEBUG   
+#ifdef DEBUG
   printf("Context_Search: o=%d\n",order);
 #endif
-   
+
   p=hash_table[sym_hash[order]];
   sym=&sym_context[1];
 #ifdef STAT
@@ -265,30 +265,30 @@ UINT ppm_worker::Context_Search(int order)  {
 }
 
 
-/* 
- * Renormalisation d'un contexte, ie, division de toutes les fréquences 
- * par 2 et élimination des symboles de fréquence nulle  
- * Note: le contexte obtenu n'est jamais vide. 
+/*
+ * Renormalisation d'un contexte, ie, division de toutes les fréquences
+ * par 2 et élimination des symboles de fréquence nulle
+ * Note: le contexte obtenu n'est jamais vide.
  * Une amélioration prévue mais non implémentée serait de trier le contexte
  * dans l'ordre des fréquences décroissantes pour accélérer la recherche.
  * Les gains en vitesse seraient de toute façon assez faibles car les
- * contextes sont de toute façon à peu près triés vu leur méthode de 
- * construction: les caractères sont ajoutés à la fin de la liste 
+ * contextes sont de toute façon à peu près triés vu leur méthode de
+ * construction: les caractères sont ajoutés à la fin de la liste
  */
 void ppm_worker::Context_Renorm(UINT ctx) {
   NODE *n,*m;
   UINT a,b,c,i,freq_tot,sf_nb;
   SYMFREQ s,*p,tab_sf[SYM_NB];
-	 
-#ifdef DEBUG   
+
+#ifdef DEBUG
   printf("Context_Renorm: c=%d\n",ctx);
   Context_Print(ctx);
-#endif 
-   
+#endif
+
   n=&node_heap[ctx];
   freq_tot=0;
   sf_nb=0;
-	 
+
   SF_Read(n,p, {
     s=*p;
     s.freq=s.freq/2;
@@ -298,8 +298,8 @@ void ppm_worker::Context_Renorm(UINT ctx) {
       sf_nb++;
     }
   } );
-	 
-	 
+
+
   /* libération des noeuds utilisés pour stocker les symboles */
   if (n->hdr.sf_max>=HDR_SFNB) {
     a=n->hdr.sf.l.sf_next;
@@ -309,10 +309,10 @@ void ppm_worker::Context_Renorm(UINT ctx) {
       a=b;
     } while (a!=NIL);
   }
-				 
+
   /* reconstruction de la liste des "sf_nb" symboles d'apres le tableau
    * "tab_sf"
-   */ 
+   */
 
   n->hdr.sf_max=sf_nb-1;
   if (sf_nb<=HDR_SFNB)  {
@@ -353,12 +353,12 @@ void ppm_worker::Context_Renorm(UINT ctx) {
  */
 void ppm_worker::Hash_Update(int sym) {
   UINT i,k;
-   
-  for(i=ORDER_MAX;i>=2;i--) 
+
+  for(i=ORDER_MAX;i>=2;i--)
     sym_context[i]=sym_context[i-1];
   sym_context[1]=sym;
-   
-  for(i=ORDER_MAX;i>=2;i--) {  
+
+  for(i=ORDER_MAX;i>=2;i--) {
     k=sym_hash[i-1];
     sym_hash[i]=( (k<<6)-k+sym ) & (HASH_SIZE-1);
   }
@@ -367,16 +367,16 @@ void ppm_worker::Hash_Update(int sym) {
 
 
 /****************************************************************************
- * Système d'exclusion des symboles 
+ * Système d'exclusion des symboles
  ****************************************************************************/
 
 
 /*
- * Remise à zéro du tableau d'exclusion des symboles 
+ * Remise à zéro du tableau d'exclusion des symboles
  */
 void ppm_worker::Sym_ExcludeReset(void) {
   UINT i;
-   
+
   sym_excl_code++;
   if (sym_excl_code==0)  {
     for(i=0;i<SYM_NB;i++) sym_excl[i]=0;
@@ -386,7 +386,7 @@ void ppm_worker::Sym_ExcludeReset(void) {
 
 
 /****************************************************************************
- * Initialisation et Libération mémoire 
+ * Initialisation et Libération mémoire
  ****************************************************************************/
 
 /*
@@ -408,24 +408,24 @@ int ppm_worker::PPM_Init(unsigned short NODE_NBMAX) {
   node_free_first=0;
   node_free_last=NODE_NBMAX-1;
   node_free_nb=NODE_NBMAX;
-   
+
   /* contextes */
   for(i=0;i<HASH_SIZE;i++) hash_table[i]=HASH_ADDRESS+i;
-   
+
   /* cette initialisation n'est pas sûre mais simplifie beaucoup le code:
    * on suppose que le premier contexte sera alloué dans le noeud 0
    */
   ctx_first=0;
   ctx_last=0;
   ctx_nb=0;
-   
+
   /* contexte courant */
   for(i=0;i<=ORDER_MAX;i++) sym_context[i]=0;
   for(i=0;i<=ORDER_MAX;i++) sym_hash[i]=0;
 
   /* système d'exclusion des caractères */
   sym_excl_code=0xFF;
-	 
+
   return 0;
 }
 
@@ -447,13 +447,13 @@ void ppm_worker::PPM_End(void) {
 int ppm_worker::Decode_NewSym(void) {
   UINT i,freq_tot,freq_cum,f;
   UCHAR code;
-	 
+
   code=sym_excl_code;
   freq_tot=0;
   for(i=0;i<SYM_NB;i++) if (sym_excl[i]!=code) freq_tot++;
   f=arith.Arith_DecodeVal(freq_tot+SYM_SPECIAL_NB);
   if (f>=freq_tot) {
-    /* cas d'un symbole spécial */ 
+    /* cas d'un symbole spécial */
     arith.Arith_Decode(f,f+1,freq_tot+SYM_SPECIAL_NB);
     return SYM_NB+f-freq_tot;
   } else  {
@@ -479,11 +479,11 @@ int ppm_worker::Decode_NoExclude(UINT ctx) {
   UCHAR code;
   UINT i,f,freq_tot,freq_cum,freq_sym,sf_nb;
   SYMFREQ *p,s;
-	 
-	 
+
+
   n=&node_heap[ctx];
   code=sym_excl_code;
-	 
+
   /* Calcul de la somme des fréquences des caractères */
   if (n->hdr.sf_max<HDR_SFNB)  {
     freq_tot=0;
@@ -491,21 +491,21 @@ int ppm_worker::Decode_NoExclude(UINT ctx) {
   } else  {
     freq_tot=n->hdr.sf.l.freq_tot;
   }
-	 
+
   /* décodage */
   sf_nb=(UINT) n->hdr.sf_max+1;
   f=arith.Arith_DecodeVal(freq_tot+sf_nb);
   if (f>=freq_tot)  {
     /* gestion du code ESCAPE */
-			
+
     /* marquage des caractères utilisés */
     SF_Read(n,p, { sym_excl[p->sym]=code; });
-				 
+
     /* décodage ESCAPE */
     arith.Arith_Decode(freq_tot,freq_tot+sf_nb,freq_tot+sf_nb);
     return SYM_ESCAPE;
   }
-	 
+
   /* recherche du caractère en calculant la fréquence */
   freq_cum=0;
   SF_Read(n,p, {
@@ -513,7 +513,7 @@ int ppm_worker::Decode_NoExclude(UINT ctx) {
     freq_cum+=s.freq;
     if (freq_cum>f) goto decode_sym;
   } );
-	 
+
  decode_sym:
 
   freq_sym=s.freq;
@@ -521,9 +521,9 @@ int ppm_worker::Decode_NoExclude(UINT ctx) {
   if (n->hdr.sf_max>=HDR_SFNB) n->hdr.sf.l.freq_tot=freq_tot+1;
 
   arith.Arith_Decode(freq_cum-freq_sym,freq_cum,freq_tot+sf_nb);
-   
+
   /* test de la renormalisation */
-  if (freq_sym==(RENORM_FREQSYM-1) || freq_tot>=RENORM_FREQTOT) { 
+  if (freq_sym==(RENORM_FREQSYM-1) || freq_tot>=RENORM_FREQTOT) {
     Context_Renorm(ctx);
   }
   return s.sym;
@@ -539,7 +539,7 @@ int ppm_worker::Decode_Exclude(UINT ctx) {
   NODE *n;
   SYMFREQ s,*p;
   UCHAR code;
-	 
+
   n=&node_heap[ctx];
   code=sym_excl_code;
 
@@ -548,29 +548,29 @@ int ppm_worker::Decode_Exclude(UINT ctx) {
 
   SF_Read( n,p, {
     s=*p;
-    if (sym_excl[s.sym]!=code) 
+    if (sym_excl[s.sym]!=code)
       {
 	freq_tot+=s.freq;
 	sf_nb++;
       }
   } );
-	 
-	 
+
+
   f=arith.Arith_DecodeVal(freq_tot+sf_nb);
-	 
+
   if (f>=freq_tot) {
-			
+
     /* ESCAPE */
-			
+
     SF_Read(n,p, { sym_excl[p->sym]=code; } );
-			
+
     arith.Arith_Decode(freq_tot,freq_tot+sf_nb,freq_tot+sf_nb);
-			
+
     return SYM_ESCAPE;
   } else  {
-			
+
     /* recherche du caractère */
-			
+
     freq_cum=0;
     SF_Read(n,p, {
       s=*p;
@@ -579,23 +579,23 @@ int ppm_worker::Decode_Exclude(UINT ctx) {
 	if (freq_cum>f) goto decode_sym;
       }
     } );
-			
+
   decode_sym:
-			
+
     /* incrémentation de la fréquence */
-			
+
     freq_sym=p->freq;
     p->freq=freq_sym+1;
     if (n->hdr.sf_max>=HDR_SFNB) n->hdr.sf.l.freq_tot++;
-			
+
     /* décodage du caractère */
-			
+
     arith.Arith_Decode(freq_cum-freq_sym,freq_cum,freq_tot+sf_nb);
-   
-    if (freq_sym==(RENORM_FREQSYM-1) || freq_tot>=RENORM_FREQTOT) { 
+
+    if (freq_sym==(RENORM_FREQSYM-1) || freq_tot>=RENORM_FREQTOT) {
       Context_Renorm(ctx);
     }
-			
+
     return s.sym;
   }
 }
@@ -607,8 +607,8 @@ int ppm_worker::Decode_Exclude(UINT ctx) {
 int ppm_worker::PPM_Decode(void) {
   int i,order,sym;
   UINT ctx,ctx_tab[ORDER_MAX+1],ctx_last;
-   
-   
+
+
   /* recherche de l'ordre maximum */
 
   Sym_ExcludeReset();
@@ -618,14 +618,14 @@ int ppm_worker::PPM_Decode(void) {
     ctx=Context_Search(order);
     ctx_tab[order]=ctx;
     if (ctx<HASH_ADDRESS)  {
-      Context_MoveFirst(ctx); 
+      Context_MoveFirst(ctx);
       if (ctx_last==NIL)
 	sym=Decode_NoExclude(ctx);
       else
 	sym=Decode_Exclude(ctx);
       if (sym!=SYM_ESCAPE) break;
       ctx_last=ctx;
-    } 
+    }
     order--;
     if (order==-1)  {
       sym=Decode_NewSym();
@@ -634,13 +634,13 @@ int ppm_worker::PPM_Decode(void) {
     }
   }
 
-  for(i=order+1;i<=ORDER_MAX;i++) { 
-    if (ctx_tab[i]>=HASH_ADDRESS) 
+  for(i=order+1;i<=ORDER_MAX;i++) {
+    if (ctx_tab[i]>=HASH_ADDRESS)
       Context_New(sym,i);
-    else 
+    else
       Context_NewSym(sym,ctx_tab[i]);
   }
-   
+
   Hash_Update(sym);
 
   return sym;
@@ -653,7 +653,7 @@ int ppm_worker::PPM_Decode(void) {
 #ifdef STAT
 
 /****************************************************************************
- * Statistiques 
+ * Statistiques
  ****************************************************************************/
 
 
@@ -661,7 +661,7 @@ void ppm_worker::PrintStat(void)  {
   fprintf(stderr,"free=%d ctx_nb=%d hash_moy=%0.2f\n",
 	  node_free_nb,ctx_nb,
 	  (float)hash_cnt/(float)hash_nb);
-	 
+
 }
 
 /*
@@ -682,15 +682,15 @@ void ppm_worker::SF_Print(SYMFREQ s) {
 
 /*
  * Impression du contenu d'un contexte
- * utilisé pour les tests 
+ * utilisé pour les tests
  */
 
 void ppm_worker::Context_Print(UINT c) {
   NODE *n;
   int i,sf_max,sf_nb,sf_freq;
-   
+
   n=&node_heap[c];
-   
+
   sf_max=n->hdr.sf_max;
   sf_nb=sf_max+1;
   if (sf_max>=2) sf_freq=n->hdr.sf.l.freq_tot;
@@ -732,10 +732,10 @@ void ppm_worker::Context_Print(UINT c) {
 void ppm_worker::Context_Statistic(void) {
   UINT i,p;
   int tab[SYM_NB+1],tot,cnt;
-   
+
   for(i=0;i<=SYM_NB;i++) tab[i]=0;
   tot=0;
-   
+
   p=ctx_first;
   do {
     cnt=node_heap[p].hdr.sf_max+1;
@@ -743,8 +743,8 @@ void ppm_worker::Context_Statistic(void) {
     tot++;
     p=node_heap[p].hdr.ctx_next;
   } while (p!=ctx_last);
-   
-   
+
+
   printf("Context_Statistic: ");
   for(i=1;i<=SYM_NB;i++)  {
     printf("%d:%d (%0.2f%%),",i,tab[i],(float)tab[i]/(float)tot*100.0);

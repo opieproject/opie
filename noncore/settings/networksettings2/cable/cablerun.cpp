@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include "cablerun.h"
 
-State_t CableRun::detectState( void ) { 
+State_t CableRun::detectState( void ) {
 
       int fd = open( Data->Device.latin1(), O_RDWR );
 
@@ -13,7 +13,7 @@ State_t CableRun::detectState( void ) {
       return Available;
 }
 
-QString CableRun::setMyState( NetworkSetup *, Action_t , bool ) { 
+QString CableRun::setMyState( NetworkSetup *, Action_t , bool ) {
       return QString();
 }
 

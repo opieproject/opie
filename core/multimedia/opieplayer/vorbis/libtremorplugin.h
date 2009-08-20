@@ -18,7 +18,7 @@
 * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 ****************************************************************************/
 
-#ifndef LIBTREMOR_PLUGIN_H 
+#ifndef LIBTREMOR_PLUGIN_H
 #define LIBTREMOR_PLUGIN_H
 
 
@@ -47,7 +47,7 @@ public:
 
     // If decoder doesn't support audio then return 0 here
     int audioStreams();
-    int audioChannels( int stream ); 
+    int audioChannels( int stream );
     int audioFrequency( int stream );
     int audioSamples( int stream );
     bool audioSetSample( long sample, int stream );

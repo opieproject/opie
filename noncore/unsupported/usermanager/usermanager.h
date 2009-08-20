@@ -13,7 +13,7 @@
 #include <qmainwindow.h>
 #include <qtabwidget.h>
 #include <qlistview.h>
-#include <qpopupmenu.h>                       
+#include <qpopupmenu.h>
 #include <qtoolbutton.h>
 
 #include <qtoolbar.h>
@@ -25,7 +25,7 @@
 class UserConfig : public QMainWindow
 {
 	Q_OBJECT
-	
+
 public:
 	static QString appName() { return QString::fromLatin1("usermanager"); }
 	UserConfig( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
@@ -53,7 +53,7 @@ private:
 	void setupTabAbout();
 	void getUsers();
 	void getGroups();
-	
+
 private slots:
 	void addUser();
 	void editUser();

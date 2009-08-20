@@ -66,7 +66,7 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
 
     tabs = new QTabWidget( this, "tabs" );
     tabs->setEnabled( TRUE );
-    tabs->setGeometry( QRect( 0, 0, 240, 286 ) ); 
+    tabs->setGeometry( QRect( 0, 0, 240, 286 ) );
     tabs->setTabPosition( QTabWidget::Bottom );
 
     tab = new QWidget( tabs, "tab" );
@@ -99,7 +99,7 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
     chordkey->insertItem( tr( "7#9" ) );
     chordkey->insertItem( tr( QString::fromUtf8( "ø7" ) ) );
     chordkey->insertItem( tr( "5" ) );
-    chordkey->setGeometry( QRect( 40, 0, 51, 21 ) ); 
+    chordkey->setGeometry( QRect( 40, 0, 51, 21 ) );
 
     chordfret = new QComboBox( FALSE, tab, "chordfret" );
     chordfret->insertItem( tr( "open" ) );
@@ -134,12 +134,12 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
     chordnote->insertItem( tr( "A" ) );
     chordnote->insertItem( tr( "Bb" ) );
     chordnote->insertItem( tr( "B" ) );
-    chordnote->setGeometry( QRect( 0, 0, 40, 21 ) ); 
+    chordnote->setGeometry( QRect( 0, 0, 40, 21 ) );
     chordnote->setCurrentItem( 9 );
 
     QWidget* privateLayoutWidget = new QWidget( tab, "Layout1" );
-    privateLayoutWidget->setGeometry( QRect( 5, 232, 160, 20 ) ); 
-    Layout1 = new QHBoxLayout( privateLayoutWidget ); 
+    privateLayoutWidget->setGeometry( QRect( 5, 232, 160, 20 ) );
+    Layout1 = new QHBoxLayout( privateLayoutWidget );
     Layout1->setSpacing( 6 );
     Layout1->setMargin( 0 );
 
@@ -174,7 +174,7 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
     Layout1->addWidget( s1_6 );
 
     //    sound_label = new QLabel( tab, "sound_label" );
-    //    sound_label->setGeometry( QRect( 185, 160, 32, 17 ) ); 
+    //    sound_label->setGeometry( QRect( 185, 160, 32, 17 ) );
     //    sound_label->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)0, (QSizePolicy::SizeType)0, sound_label->sizePolicy().hasHeightForWidth() ) );
     //    sound_label->setPixmap( image0 );
     //    sound_label->pixmap()->setMask(*image0.mask());
@@ -185,12 +185,12 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
 
 
     Frame6 = new QFrame( tab, "Frame6" );
-    Frame6->setGeometry( QRect( 170, 145, 66, 10 ) ); 
+    Frame6->setGeometry( QRect( 170, 145, 66, 10 ) );
     Frame6->setFrameShape( QFrame::HLine );
     Frame6->setFrameShadow( QFrame::Raised );
 
     chordshow_label = new QLabel( tab, "chordshow_label" );
-    chordshow_label->setGeometry( QRect( 185, 60, 32, 17 ) ); 
+    chordshow_label->setGeometry( QRect( 185, 60, 32, 17 ) );
     //    chordshow_label->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)0, (QSizePolicy::SizeType)0, chordshow_label->sizePolicy().hasHeightForWidth() ) );
     chordshow_label->setFrameShape( QLabel::NoFrame );
     chordshow_label->setPixmap( image1 );
@@ -198,35 +198,35 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
     //    chordshow_label->setBackgroundMode( QWidget::PaletteButton );
 
     transport_rec = new QPushButton( tab, "transport_rec" );
-    transport_rec->setGeometry( QRect( 170, 80, 30, 30 ) ); 
+    transport_rec->setGeometry( QRect( 170, 80, 30, 30 ) );
     transport_rec->setText( "" );
     transport_rec->setPixmap( image2 );
 
     play_sound = new QPushButton( tab, "play_sound" );
-    play_sound->setGeometry( QRect( 170, 180, 60, 55 ) ); 
+    play_sound->setGeometry( QRect( 170, 180, 60, 55 ) );
     play_sound->setText( "" );
     play_sound->setPixmap( image3 );
 
     Frame6_2 = new QFrame( tab, "Frame6_2" );
-    Frame6_2->setGeometry( QRect( 170, 45, 66, 10 ) ); 
+    Frame6_2->setGeometry( QRect( 170, 45, 66, 10 ) );
     Frame6_2->setFrameShape( QFrame::HLine );
     Frame6_2->setFrameShadow( QFrame::Raised );
 
     transport_play = new QPushButton( tab, "transport_play" );
     transport_play->setEnabled( FALSE );
-    transport_play->setGeometry( QRect( 200, 80, 30, 30 ) ); 
+    transport_play->setGeometry( QRect( 200, 80, 30, 30 ) );
     transport_play->setText( "" );
     transport_play->setPixmap( image3 );
 
     transport_rew = new QPushButton( tab, "transport_rew" );
     transport_rew->setEnabled( FALSE );
-    transport_rew->setGeometry( QRect( 170, 110, 30, 30 ) ); 
+    transport_rew->setGeometry( QRect( 170, 110, 30, 30 ) );
     transport_rew->setText( "" );
     transport_rew->setPixmap( image4 );
 
     transport_fwd = new QPushButton( tab, "transport_fwd" );
     transport_fwd->setEnabled( FALSE );
-    transport_fwd->setGeometry( QRect( 200, 110, 30, 30 ) ); 
+    transport_fwd->setGeometry( QRect( 200, 110, 30, 30 ) );
     transport_fwd->setText( "" );
     transport_fwd->setPixmap( image5 );
 
@@ -239,13 +239,13 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
     synth = new gs();
     tuner = new gt();
     frets = new FretBoard( tab, "frets" );
-    frets->setGeometry( QRect( 0, 20, 168, 210 ) ); 
+    frets->setGeometry( QRect( 0, 20, 168, 210 ) );
     tabs->insertTab( tab, tr( "Guitar" ) );
 
     tab_2 = new QWidget( tabs, "tab_2" );
 
     optlab2 = new QLabel( tab_2, "optlab2" );
-    optlab2->setGeometry( QRect( 9, 58, 120, 41 ) ); 
+    optlab2->setGeometry( QRect( 9, 58, 120, 41 ) );
     optlab2->setText( tr( "Alternative tunings are possible" ) );
     optlab2->setAlignment( int( QLabel::WordBreak | QLabel::AlignVCenter | QLabel::AlignLeft ) );
 
@@ -255,11 +255,11 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
     span->insertItem( tr( "4" ) );
     span->insertItem( tr( "5" ) );
     span->insertItem( tr( "6" ) );
-    span->setGeometry( QRect( 180, 20, 50, 21 ) ); 
+    span->setGeometry( QRect( 180, 20, 50, 21 ) );
     span->setCurrentItem( 1 );
 
     TextLabel1 = new QLabel( tab_2, "TextLabel1" );
-    TextLabel1->setGeometry( QRect( 3, 109, 226, 140 ) ); 
+    TextLabel1->setGeometry( QRect( 3, 109, 226, 140 ) );
     TextLabel1->setText( tr( QString::fromUtf8( "©2002 Camilo Mesias\n"
 "camilo@mesias.co.uk\n"
 "Version 0.0.7 beta" ) ) );
@@ -280,10 +280,10 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
     tuning->insertItem( tr( "CGCGAE" ) );
     tuning->insertItem( tr( "FADGBE" ) );
     tuning->insertItem( tr( "G minor" ) );
-    tuning->setGeometry( QRect( 140, 70, 91, 21 ) ); 
+    tuning->setGeometry( QRect( 140, 70, 91, 21 ) );
 
     optlab1 = new QLabel( tab_2, "optlab1" );
-    optlab1->setGeometry( QRect( 8, 8, 160, 40 ) ); 
+    optlab1->setGeometry( QRect( 8, 8, 160, 40 ) );
     optlab1->setText( tr( "Span: the greatest number of frets over which you want chords to be generated" ) );
     optlab1->setAlignment( int( QLabel::WordBreak | QLabel::AlignVCenter | QLabel::AlignLeft ) );
     tabs->insertTab( tab_2, tr( "Options" ) );
@@ -291,12 +291,12 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
     Tuner = new QWidget( tabs, "Tuner" );
 
     Frame4 = new QFrame( Tuner, "Frame4" );
-    Frame4->setGeometry( QRect( 0, 0, 230, 126 ) ); 
+    Frame4->setGeometry( QRect( 0, 0, 230, 126 ) );
     Frame4->setFrameShape( QFrame::Box );
     Frame4->setFrameShadow( QFrame::Raised );
 
     vu = new VUMeter( Frame4, "vu" );
-    vu->setGeometry( QRect( 5, 5, 220, 115 ) ); 
+    vu->setGeometry( QRect( 5, 5, 220, 115 ) );
 
     tuner_note = new QComboBox( FALSE, Tuner, "tuner_note" );
     tuner_note->insertItem( tr( "auto" ) );
@@ -307,32 +307,32 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
     tuner_note->insertItem( tr( "B" ) );
     tuner_note->insertItem( tr( "C" ) );
     tuner_note->insertItem( tr( "F" ) );
-    tuner_note->setGeometry( QRect( 5, 160, 90, 20 ) ); 
+    tuner_note->setGeometry( QRect( 5, 160, 90, 20 ) );
 
     Frame8 = new QFrame( Tuner, "Frame8" );
-    Frame8->setGeometry( QRect( -2, 188, 231, 10 ) ); 
+    Frame8->setGeometry( QRect( -2, 188, 231, 10 ) );
     Frame8->setFrameShape( QFrame::HLine );
     Frame8->setFrameShadow( QFrame::Raised );
 
     tuner_start = new QPushButton( Tuner, "tuner_start" );
-    tuner_start->setGeometry( QRect( 100, 155, 91, 30 ) ); 
+    tuner_start->setGeometry( QRect( 100, 155, 91, 30 ) );
     tuner_start->setText( tr( "Start" ) );
 
     tuner_lab1 = new QLabel( Tuner, "tuner_lab1" );
-    tuner_lab1->setGeometry( QRect( 10, 130, 100, 21 ) ); 
+    tuner_lab1->setGeometry( QRect( 10, 130, 100, 21 ) );
     tuner_lab1->setText( tr( "Tuner operation" ) );
 
     tuner_lab2 = new QLabel( Tuner, "tuner_lab2" );
-    tuner_lab2->setGeometry( QRect( 10, 200, 100, 16 ) ); 
+    tuner_lab2->setGeometry( QRect( 10, 200, 100, 16 ) );
     tuner_lab2->setText( tr( "Pitch calibration" ) );
 
     tuner_calib_note = new QComboBox( FALSE, Tuner, "tuner_calib_note" );
     tuner_calib_note->insertItem( tr( "A" ) );
     tuner_calib_note->insertItem( tr( "C" ) );
-    tuner_calib_note->setGeometry( QRect( 5, 225, 90, 21 ) ); 
+    tuner_calib_note->setGeometry( QRect( 5, 225, 90, 21 ) );
 
     tuner_calib_freq = new QSpinBox( Tuner, "tuner_calib_freq" );
-    tuner_calib_freq->setGeometry( QRect( 105, 225, 71, 21 ) ); 
+    tuner_calib_freq->setGeometry( QRect( 105, 225, 71, 21 ) );
     tuner_calib_freq->setSuffix( tr( "Hz" ) );
     tuner_calib_freq->setWrapping( TRUE );
     tuner_calib_freq->setMaxValue( 500 );
@@ -340,11 +340,11 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
     tuner_calib_freq->setValue( 440 );
 
     tuner_lab3 = new QLabel( Tuner, "tuner_lab3" );
-    tuner_lab3->setGeometry( QRect( 185, 225, 40, 21 ) ); 
+    tuner_lab3->setGeometry( QRect( 185, 225, 40, 21 ) );
     tuner_lab3->setText( tr( "Pitch" ) );
 
     tuner_pic1 = new QLabel( Tuner, "tuner_pic1" );
-    tuner_pic1->setGeometry( QRect( 195, 155, 31, 31 ) ); 
+    tuner_pic1->setGeometry( QRect( 195, 155, 31, 31 ) );
     tuner_pic1->setFrameShape( QLabel::NoFrame );
     tuner_pic1->setPixmap( image6 );
     tuner_pic1->setScaledContents( TRUE );
@@ -366,7 +366,7 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
 
     // hope this does what it's supposed to!!
     //    setPalette( QPalette( QColor( 232, 227, 215) ) );
-    
+
     // signals and slots connections
 
     //cxm
@@ -419,7 +419,7 @@ void PowerchordBase::play_chord_cb(){
       audio_timer = 0;
     }else{
       // get notes from chord engine
-      
+
       int note;
       int base;
       int octave;
@@ -446,7 +446,7 @@ void PowerchordBase::play_chord_cb(){
 	return;
       }
       synth->fill_buffer();
-      
+
       // start timer
       audio_timer = new QTimer();
       connect(audio_timer, SIGNAL( timeout() ), this, SLOT( audio_cb() ));
@@ -478,7 +478,7 @@ void PowerchordBase::audio_cb(){
       }
     }
   }
-  
+
   if (synth->Playing()){
     synth->write_buffer();
     synth->fill_buffer();
@@ -498,32 +498,32 @@ void PowerchordBase::audio_cb(){
 //      simulation_timer->stop();
 //      tuner->Stop();
 //      tuner_pic1->setPixmap( *image6 );
-    
+
 //    }else{
 //      tuner_pic1->setPixmap( *image_open );
-    
+
 //      if (!simulation_timer){
 //        simulation_timer = new QTimer();
-      
-      
+
+
 //        connect(simulation_timer, SIGNAL( timeout() ), this, SLOT( tuner_cb() ));
 //      }
-    
+
 //      simulation_timer->start(50);
 //      tuner->Listen();
-    
-//    }  
+
+//    }
 //  }
 
 void PowerchordBase::tuner_cb(){
   if (tuner->Listening()){
     tuner->read_buffer();
     tuner->process_buffer();
-    
+
     // update gui
     // do something with the note: tuner->Note()
     emit frequency_change(tuner->Tuning());
-    
+
   }else{
     simulation_timer->stop();
     tuner->Stop();
@@ -541,7 +541,7 @@ void PowerchordBase::tuner_start_cb(){
     }else{
       simulation_timer = new QTimer();
       connect(simulation_timer, SIGNAL( timeout() ), this, SLOT( tuner_simulation_cb() ));
-      
+
     }
     simulation_x = -45;
     simulation_v = 0;
@@ -558,7 +558,7 @@ void PowerchordBase::tuner_simulation_cb(){
   if (simulation_x < -10 || simulation_x > 10){
     simulation_v = (simulation_v/2)-(simulation_x/5);
   }
-  
+
   simulation_x += simulation_v;
   simulation_iter++;
 
@@ -589,6 +589,6 @@ PowerchordBase::~PowerchordBase()
 
 void PowerchordBase::change_handler()
 {
-    owarn << "PowerchordBase::change_handler(): Not implemented yet!" << oendl; 
+    owarn << "PowerchordBase::change_handler(): Not implemented yet!" << oendl;
 }
 

@@ -21,7 +21,7 @@
 
 gs::gs()
 {
-  
+
   finger[0] = OPEN;
   finger[1] = OPEN;
   finger[2] = OPEN;
@@ -39,7 +39,7 @@ gs::gs()
   initial_fret = 0;
 
   audio_fd = -1;
-  
+
   pb_rate0 = 0;
   pb_rate1 = 0;
   pb_rate2 = 0;
@@ -97,7 +97,7 @@ gs::gs()
       if (numread == 0){
 	  fprintf(stderr, "failed to read bytes\n");
 	  exit(-1);
-      }    
+      }
   }
 
   close(raw_fd);
@@ -106,7 +106,7 @@ gs::gs()
   for (i=0;i<samplen;i++){
     dsp_buf[i] /= 6;
   }
-  
+
   set_tonebank(0, dsp_buf, samplen);
   set_tonebank(1, dsp_buf, samplen);
   set_tonebank(2, dsp_buf, samplen);
@@ -114,7 +114,7 @@ gs::gs()
   set_tonebank(4, dsp_buf, samplen);
   set_tonebank(5, dsp_buf, samplen);
   set_tonebank(6, dsp_buf, samplen);
-  
+
 }
 
 void gs::set_tonebank(int tb, signed short *buf, int length)
@@ -148,7 +148,7 @@ void gs::set_tonebank(int tb, signed short *buf, int length)
 	tonebank6 = buf;
 	tonebank_length6 = length;
 	break;
-	
+
     }
 }
 
@@ -208,13 +208,13 @@ int gs::Play(){
     frames = 0;
 
     if (audio_fd == -1){
-	if ( (audio_fd = open("/dev/dsp", O_WRONLY, 0) ) == -1){    
+	if ( (audio_fd = open("/dev/dsp", O_WRONLY, 0) ) == -1){
 	  audio_fd = -1;
 	  return 1;
 	}
-	
+
 	format = AFMT_S16_NE;
-	
+
 	if (ioctl(audio_fd, SNDCTL_DSP_SETFMT, &format) == -1){
 	    fprintf(stderr, "Error SNDCTL DSP SETFMT, %s\n", strerror(errno));
 	    exit(0);
@@ -226,9 +226,9 @@ int gs::Play(){
 	    fprintf(stderr, "Error SNDCTL DSP CHANNELS, %s\n", strerror(errno));
 	    exit(0);
 	}
-	
+
 	speed = 11025;
-	
+
 	if (ioctl(audio_fd, SNDCTL_DSP_SPEED, &speed) == -1){
 	    fprintf(stderr, "Error SNDCTL DSP SPEED, %s\n", strerror(errno));
 	    exit(0);
@@ -241,9 +241,9 @@ int gs::Play(){
 	//	    exit(0);
 	//	}
 	//	fprintf(stderr, "fragments %d\nfragstotal %d\nfragsize %d\nbytes %d\n", info.fragments, info.fragstotal, info.fragsize, info.bytes);
-	
-	
-	
+
+
+
 // audio math.
 // A4 = 440Hz
 // +1 octave = 2x freq
@@ -265,19 +265,19 @@ int gs::Play(){
 // G4    784  14
 // G#4   831  13
 
-	
+
     }
     else{
 	fprintf(stderr, "Already playing\n");
     }
-    
+
     return 0;
 }
 
 void gs::note_start(int chan, int note, int octave)
 {
     switch (chan){
-	
+
     case 0:
 	pb_rate0 = note_periods[note];
 	pb_oct0 = octave_step[octave];
@@ -324,8 +324,8 @@ void gs::note_start(int chan, int note, int octave)
 	fprintf(stderr, "Bad channel\n");
 	exit(-1);
     }
-    
-  
+
+
 }
 
 void gs::write_buffer(){
@@ -341,9 +341,9 @@ void gs::fill_buffer()
   int i;
 
   for (i=0;i<BUFSIZE;i++){
-      
+
       audio_buf[i] = 0;
-      
+
       if (pb_rate0){
 	  audio_buf[i] += tonebank0[pb_rsc0];
 	  pb_rsc0 += pb_oct0;
@@ -352,7 +352,7 @@ void gs::fill_buffer()
 	  if (pb_ratio0 >= pb_rate0){
 	      pb_rsc0 += pb_oct0;
 	      pb_ratio0 -= pb_rate0;
-	      
+
 	  }
 	  if (pb_rsc0 >= tonebank_length0) pb_rate0 = 0;
       }
@@ -365,7 +365,7 @@ void gs::fill_buffer()
 	  if (pb_ratio1 >= pb_rate1){
 	      pb_rsc1 += pb_oct1;
 	      pb_ratio1 -= pb_rate1;
-	      
+
 	  }
 	  if (pb_rsc1 >= tonebank_length1) pb_rate1 = 0;
       }
@@ -378,7 +378,7 @@ void gs::fill_buffer()
 	  if (pb_ratio2 >= pb_rate2){
 	      pb_rsc2 += pb_oct2;
 	      pb_ratio2 -= pb_rate2;
-	      
+
 	  }
 	  if (pb_rsc2 >= tonebank_length2) pb_rate2 = 0;
       }
@@ -391,7 +391,7 @@ void gs::fill_buffer()
 	  if (pb_ratio3 >= pb_rate3){
 	      pb_rsc3 += pb_oct3;
 	      pb_ratio3 -= pb_rate3;
-	      
+
 	  }
 	  if (pb_rsc3 >= tonebank_length3) pb_rate3 = 0;
       }
@@ -404,7 +404,7 @@ void gs::fill_buffer()
 	  if (pb_ratio4 >= pb_rate4){
 	      pb_rsc4 += pb_oct4;
 	      pb_ratio4 -= pb_rate4;
-	      
+
 	  }
 	  if (pb_rsc4 >= tonebank_length4) pb_rate4 = 0;
       }
@@ -417,7 +417,7 @@ void gs::fill_buffer()
 	  if (pb_ratio5 >= pb_rate5){
 	      pb_rsc5 += pb_oct5;
 	      pb_ratio5 -= pb_rate5;
-	      
+
 	  }
 	  if (pb_rsc5 >= tonebank_length5) pb_rate5 = 0;
       }
@@ -430,7 +430,7 @@ void gs::fill_buffer()
 	  if (pb_ratio6 >= pb_rate6){
 	      pb_rsc6 += pb_oct6;
 	      pb_ratio6 -= pb_rate6;
-	      
+
 	  }
 	  if (pb_rsc6 >= tonebank_length6) pb_rate6 = 0;
       }
@@ -452,11 +452,11 @@ void gs::Stop(){
     }
     else{
 	//ioctl(audio_fd, SNDCTL_DSP_RESET, 0);
-	
+
 	close(audio_fd);
 	audio_fd = -1;
     }
-    
+
 }
 
 gs::~gs()

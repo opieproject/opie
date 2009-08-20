@@ -1,6 +1,6 @@
 /*
  * most other tables are calculated on program start (which is (of course)
- * not ISO-conform) .. 
+ * not ISO-conform) ..
  * Layer-3 huffman table is in huffman.h
  */
 
@@ -171,7 +171,7 @@ int mpeg3audio_II_select_table(mpeg3audio_t *audio)
        	{alloc_0, alloc_1, alloc_2, alloc_3, alloc_4};
   	static int sblims[5] = {27, 30, 8, 12, 30};
 
-  	if(audio->lsf) 
+  	if(audio->lsf)
 		table = 4;
   	else
     	table = translate[audio->sampling_frequency_code][2 - audio->channels][audio->bitrate_index];
@@ -214,7 +214,7 @@ int mpeg3audio_II_step_one(mpeg3audio_t *audio, unsigned int *bit_alloc, int *sc
     	for(i = sblimit2; i; i--)
         	if(*bita++) *scfsi++ = (char)mpeg3bits_getbits(audio->astream, 2);
     }
-    else 
+    else
     {
 /* mono */
       	for(i = sblimit; i; i--, alloc1 += (1 << step))
@@ -226,22 +226,22 @@ int mpeg3audio_II_step_one(mpeg3audio_t *audio, unsigned int *bit_alloc, int *sc
 
     bita = bit_alloc;
     scfsi = scfsi_buf;
-    for(i = sblimit2; i; i--) 
+    for(i = sblimit2; i; i--)
 	{
       	if(*bita++)
-        	switch(*scfsi++) 
+        	switch(*scfsi++)
         	{
-        	  case 0: 
+        	  case 0:
                 	*scale++ = mpeg3bits_getbits(audio->astream, 6);
                 	*scale++ = mpeg3bits_getbits(audio->astream, 6);
                 	*scale++ = mpeg3bits_getbits(audio->astream, 6);
                 	break;
-        	  case 1 : 
+        	  case 1 :
                 	*scale++ = sc = mpeg3bits_getbits(audio->astream, 6);
                 	*scale++ = sc;
                 	*scale++ = mpeg3bits_getbits(audio->astream, 6);
                 	break;
-        	  case 2: 
+        	  case 2:
                 	*scale++ = sc = mpeg3bits_getbits(audio->astream, 6);
                 	*scale++ = sc;
                 	*scale++ = sc;
@@ -274,7 +274,7 @@ int mpeg3audio_II_step_two(mpeg3audio_t *audio, unsigned int *bit_alloc, mpeg3_r
         	if(ba = *bita++)
         	{
         		k = (alloc2 = alloc1 + ba)->bits;
-        		if((d1 = alloc2->d) < 0) 
+        		if((d1 = alloc2->d) < 0)
         		{
             		mpeg3_real_t cm = mpeg3_muls[k][scale[x1]];
 
@@ -282,17 +282,17 @@ int mpeg3audio_II_step_two(mpeg3audio_t *audio, unsigned int *bit_alloc, mpeg3_r
             		fraction[j][1][i] = ((mpeg3_real_t)((int)mpeg3bits_getbits(audio->astream, k) + d1)) * cm;
             		fraction[j][2][i] = ((mpeg3_real_t)((int)mpeg3bits_getbits(audio->astream, k) + d1)) * cm;
         		}
-        		else 
+        		else
         		{
-            		static int *table[] = 
+            		static int *table[] =
 						{0, 0, 0, mpeg3_grp_3tab, 0, mpeg3_grp_5tab, 0, 0, 0, mpeg3_grp_9tab};
             		unsigned int idx, *tab, m = scale[x1];
-					
+
             		idx = (unsigned int)mpeg3bits_getbits(audio->astream, k);
             		tab = (unsigned int*)(table[d1] + idx + idx + idx);
             		fraction[j][0][i] = mpeg3_muls[*tab++][m];
             		fraction[j][1][i] = mpeg3_muls[*tab++][m];
-            		fraction[j][2][i] = mpeg3_muls[*tab][m];  
+            		fraction[j][2][i] = mpeg3_muls[*tab][m];
         		}
         		scale += 3;
         	}
@@ -305,53 +305,53 @@ int mpeg3audio_II_step_two(mpeg3audio_t *audio, unsigned int *bit_alloc, mpeg3_r
     {
     	step = alloc1->bits;
 /* channel 1 and channel 2 bitalloc are the same */
-    	bita++;		
+    	bita++;
     	if((ba = *bita++))
     	{
         	k=(alloc2 = alloc1+ba)->bits;
         	if((d1 = alloc2->d) < 0)
         	{
         		mpeg3_real_t cm;
-				
+
         		cm = mpeg3_muls[k][scale[x1 + 3]];
         		fraction[1][0][i] = (fraction[0][0][i] = (mpeg3_real_t)((int)mpeg3bits_getbits(audio->astream, k) + d1)) * cm;
         		fraction[1][1][i] = (fraction[0][1][i] = (mpeg3_real_t)((int)mpeg3bits_getbits(audio->astream, k) + d1)) * cm;
         		fraction[1][2][i] = (fraction[0][2][i] = (mpeg3_real_t)((int)mpeg3bits_getbits(audio->astream, k) + d1)) * cm;
         		cm = mpeg3_muls[k][scale[x1]];
-        		fraction[0][0][i] *= cm; 
-				fraction[0][1][i] *= cm; 
+        		fraction[0][0][i] *= cm;
+				fraction[0][1][i] *= cm;
 				fraction[0][2][i] *= cm;
         	}
         	else
         	{
         	  static int *table[] = {0, 0, 0, mpeg3_grp_3tab, 0, mpeg3_grp_5tab, 0, 0, 0, mpeg3_grp_9tab};
         	  unsigned int idx, *tab, m1, m2;
-			  
-        	  m1 = scale[x1]; 
+
+        	  m1 = scale[x1];
 			  m2 = scale[x1+3];
         	  idx = (unsigned int)mpeg3bits_getbits(audio->astream, k);
         	  tab = (unsigned int*)(table[d1] + idx + idx + idx);
-        	  fraction[0][0][i] = mpeg3_muls[*tab][m1]; 
+        	  fraction[0][0][i] = mpeg3_muls[*tab][m1];
 			  fraction[1][0][i] = mpeg3_muls[*tab++][m2];
-        	  fraction[0][1][i] = mpeg3_muls[*tab][m1]; 
+        	  fraction[0][1][i] = mpeg3_muls[*tab][m1];
 			  fraction[1][1][i] = mpeg3_muls[*tab++][m2];
-        	  fraction[0][2][i] = mpeg3_muls[*tab][m1]; 
+        	  fraction[0][2][i] = mpeg3_muls[*tab][m1];
 			  fraction[1][2][i] = mpeg3_muls[*tab][m2];
         	}
         	scale += 6;
       	}
-    	else 
+    	else
 		{
         	fraction[0][0][i] = fraction[0][1][i] = fraction[0][2][i] =
         	fraction[1][0][i] = fraction[1][1][i] = fraction[1][2][i] = 0.0;
     	}
-/* 
+/*
    should we use individual scalefac for channel 2 or
    is the current way the right one , where we just copy channel 1 to
-   channel 2 ?? 
+   channel 2 ??
    The current 'strange' thing is, that we throw away the scalefac
    values for the second channel ...!!
--> changed .. now we use the scalefac values of channel one !! 
+-> changed .. now we use the scalefac values of channel one !!
 */
     }
 
@@ -390,14 +390,14 @@ int mpeg3audio_dolayer2(mpeg3audio_t *audio)
 	{
     	result |= mpeg3audio_II_step_two(audio, bit_alloc, fraction, scale, i >> 2);
 
-    	for(j = 0; j < 3; j++) 
+    	for(j = 0; j < 3; j++)
     	{
     		if(single >= 0)
     		{
 /* Monaural */
         		mpeg3audio_synth_mono(audio, fraction[single][j], audio->pcm_sample, &(audio->pcm_point));
     		}
-    		else 
+    		else
 			{
 /* Stereo */
         		int p1 = audio->pcm_point;

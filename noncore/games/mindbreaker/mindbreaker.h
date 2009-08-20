@@ -98,7 +98,7 @@ private:
     Peg *current_highlight;
     QPoint moving_pos;
 
-    // the game stuff 
+    // the game stuff
     int answer[4];
     int current_guess[4];
     int past_guesses[4*9];
@@ -136,4 +136,4 @@ private:
 };
 
 
-#endif 
+#endif

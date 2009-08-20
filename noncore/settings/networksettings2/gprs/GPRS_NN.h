@@ -16,10 +16,10 @@ public:
 
       virtual bool hasDataForFile( SystemFile & S );
 
-      virtual short generateFile( SystemFile & Sf, 
+      virtual short generateFile( SystemFile & Sf,
                                  ANetNodeInstance * NNI,
                                  long DevNr );
-      virtual const QString pixmapName() 
+      virtual const QString pixmapName()
         { return "Devices/gprs"; }
 
       virtual QStringList properFiles( void );

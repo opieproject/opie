@@ -59,7 +59,7 @@ public:
 
 private:
     OPackageManager *m_packman;     // Pointer to application instance of package manager
-    
+
     bool m_installFound; // Indicates if an install is being done, controls display of
                          // destination selection, available space
 
@@ -82,7 +82,7 @@ private slots:
     void slotDisplayAvailSpace( const QString &destination );
     void slotBtnStart();
     void slotBtnOptions();
-    
+
     // Execution slots
     void slotOutput( const QString &msg );
 

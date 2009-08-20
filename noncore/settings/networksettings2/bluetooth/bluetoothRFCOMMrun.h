@@ -7,12 +7,12 @@ class BluetoothRFCOMMRun  : public RuntimeInfo {
 
 public :
 
-      BluetoothRFCOMMRun( ANetNodeInstance * NNI, 
+      BluetoothRFCOMMRun( ANetNodeInstance * NNI,
                           BluetoothRFCOMMData & D ) : RuntimeInfo( NNI )
         {  DeviceNr = -1; Data = &D; OT = 0; }
       virtual ~BluetoothRFCOMMRun( void );
 
-      virtual RuntimeInfo * line( void ) 
+      virtual RuntimeInfo * line( void )
         { return this; }
       virtual QString deviceFile( void );
 

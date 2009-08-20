@@ -40,7 +40,7 @@ QRESULT FortunePluginImpl::queryInterface( const QUuid & uuid,  QUnknownInterfac
 		*iface = this, (*iface)->addRef();
 	}else
 	    return QS_FALSE;
-	    
+
 	return QS_OK;
 
 }

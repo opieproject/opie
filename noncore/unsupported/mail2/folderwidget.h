@@ -10,9 +10,9 @@ class IMAPHandler;
 class TopFolder
 {
 public:
-	TopFolder() 
-	{ 
-		_valid = true; 
+	TopFolder()
+	{
+		_valid = true;
 	}
 
 	bool isValid() { return _valid; }
@@ -31,9 +31,9 @@ private:
 class Folder
 {
 public:
-	Folder() 
-	{ 
-		_valid = true; 
+	Folder()
+	{
+		_valid = true;
 		_noCache = false;
 	}
 

@@ -127,7 +127,7 @@ pointList *libs;
       adjInAtari = TRUE;
     else if ((gList[gMap[groupIDs[x][y]]].libC == 2) &&
             (! gList[gMap[groupIDs[x][y]]].isLive))
-      adj2Libs = TRUE; 
+      adj2Libs = TRUE;
   } /* span */
 
 spanGroup(x, y, libs)
@@ -180,8 +180,8 @@ sPointList *libs;
     else if (gList[gMap[groupIDs[x][y]]].libC == 1)
       adjInAtari = TRUE;
     else if ((gList[gMap[groupIDs[x][y]]].libC == 2) &&
-            (! gList[gMap[groupIDs[x][y]]].isLive)) 
-      adj2Libs = TRUE; 
+            (! gList[gMap[groupIDs[x][y]]].isLive))
+      adj2Libs = TRUE;
   } /* span */
 
 sSpanGroup(x, y, libs)
@@ -418,7 +418,7 @@ intBoard dest, src;
            2  2  2
         2  4  6  4  2
      2  4  8 10  8  4  2
-  1  2  6 10 62 10  6  2  1  
+  1  2  6 10 62 10  6  2  1
      2  4  8 10  8  4  2
         2  4  6  4  2
            2  2  2
@@ -743,7 +743,7 @@ short x, y, z;
               playMark = playMark + 1;
                   playStack[playMark].kind = chLib;
                   playStack[playMark].gID = nlcGroup.v[i];
-                  playStack[playMark].uval.chLib.oldLevel = 
+                  playStack[playMark].uval.chLib.oldLevel =
 		               gList[nlcGroup.v[i]].atLevel;
                   playStack[playMark].uval.chLib.oldLC =
 		               gList[nlcGroup.v[i]].libC;
@@ -1005,7 +1005,7 @@ short x, y, *numEyes, who;
                 *numEyes = *numEyes + 1;
                 if (*numEyes > 1)
                   return TRUE;
-              }  
+              }
           }
       else if (bord[x][y] == who)
         {
@@ -1189,7 +1189,7 @@ genConnects()
                         (gList[groupIDs[x][y + 1]].libC == 1))))
                  protPoints[x][y] = 1;
             }
-        } 
+        }
   for (x = 0; x <= maxPoint; x++)
     for (y = 0; y <= maxPoint; y++)
       if (bord[x][y] != 0)
@@ -1265,7 +1265,7 @@ short x, y;
         z = b;
     }
   else
-    z = b; 
+    z = b;
   if (z != iNil)
     {
       if ((c != iNil) &&
@@ -1273,7 +1273,7 @@ short x, y;
         z = c;
     }
   else
-    z = c; 
+    z = c;
   if (z != iNil)
     {
       if ((d != iNil) &&
@@ -1281,7 +1281,7 @@ short x, y;
         z = d;
     }
   else
-    z = d; 
+    z = d;
   if ((z != iNil) &&
      ((x == 0) ||
       (y == 0) ||

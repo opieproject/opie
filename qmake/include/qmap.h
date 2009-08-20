@@ -667,7 +667,7 @@ public:
 	return *this;
     }
 #  ifdef Q_CC_HPACC    // undo the HP-UX aCC hackery done above
-#    undef Q_TYPENAME 
+#    undef Q_TYPENAME
 #    define Q_TYPENAME typename
 #  endif
 #endif

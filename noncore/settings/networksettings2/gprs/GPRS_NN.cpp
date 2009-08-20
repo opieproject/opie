@@ -6,13 +6,13 @@
 
 #include "netnodeinterface.h"
 
-static const char * GPRSNeeds[] = 
+static const char * GPRSNeeds[] =
     { "GPRS",
       0
     };
 
-static const char * GPRSProvides[] = 
-    { "connection", 
+static const char * GPRSProvides[] =
+    { "connection",
       0
     };
 
@@ -20,7 +20,7 @@ static const char * GPRSProvides[] =
  * Constructor, find all of the possible interfaces
  */
 GPRSNetNode::GPRSNetNode() : ANetNode(tr("GPRS capable device")) {
-      NSResources->addSystemFile( 
+      NSResources->addSystemFile(
         "pap-secrets", "/etc/ppp/pap-secrets", 0 );
 }
 
@@ -45,10 +45,10 @@ bool GPRSNetNode::hasDataForFile( SystemFile & S ) {
       return S.name() == "pap-secrets";
 }
 
-short GPRSNetNode::generateFile( SystemFile & , 
+short GPRSNetNode::generateFile( SystemFile & ,
                                  ANetNodeInstance * ,
                                  long ) {
-                                   
+
       return 0;
 }
 

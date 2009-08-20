@@ -44,7 +44,7 @@ namespace Opie {
     namespace Core {
         class OProcess;
         namespace Internal {
-            class OProcessController; 
+            class OProcessController;
         }
     }
 };

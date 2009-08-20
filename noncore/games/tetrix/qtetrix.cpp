@@ -153,7 +153,7 @@ QTetrix::QTetrix( QWidget *parent, const char *name, WFlags f )
     showLines->setNum( 0 );
     board->revealNextPiece(TRUE);
     board->setFocusPolicy( StrongFocus );
-    
+
     QTimer::singleShot( -1, this, SLOT(setup()) );
 }
 
@@ -181,7 +181,7 @@ void QTetrix::setNext( int x, int y, QColor *color )
     resizeEvent( 0x0 );
     showNext->drawNextSquare( x, y, color );
 }
-    
+
 void QTetrix::resizeEvent( QResizeEvent * )
 {
     // Set size of board
@@ -195,7 +195,7 @@ void QTetrix::resizeEvent( QResizeEvent * )
                                                 heightFactor * board->boardHeight() + 2 )
                                : board->resize( widthFactor * board->boardWidth() + 2,
                                                 widthFactor * board->boardHeight() + 2 );
-    
+
     // Set size of preview widget
     widthFactor = showNext->width() / 5;
     if ( widthFactor < 1 )

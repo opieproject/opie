@@ -133,7 +133,7 @@ struct OApplicationFactory : public ApplicationInterface {
         else{
 	    odebug << "Application Name = " << appName.latin1() << oendl;
 	    odebug << "ProductName      = " << Product::appName().latin1() << oendl;
-	    odebug << "The application name is not equal to the product name!" << oendl; 
+	    odebug << "The application name is not equal to the product name!" << oendl;
 	    odebug << "Please compare TARGET entry in the project file (*.pro) and the call of the OApplicationFactory< productName >" << oendl;
             return 0l;
 	}

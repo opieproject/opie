@@ -8,10 +8,10 @@ public:
 	ZkbXmlHandler();
 	virtual ~ZkbXmlHandler();
 
-	virtual bool startElement(const QString&, const QString&, 
+	virtual bool startElement(const QString&, const QString&,
 		const QString& name, const QXmlAttributes& attr);
 
-	virtual bool endElement(const QString&, const QString&, 
+	virtual bool endElement(const QString&, const QString&,
 		const QString& name);
 
 	virtual QString errorString();
@@ -20,13 +20,13 @@ protected:
 	QString err;
 	QStringList elements;
 
-	virtual bool startKeymapElement(int ardelay, int arperiod, 
+	virtual bool startKeymapElement(int ardelay, int arperiod,
 		const QString& author);
-	virtual bool startIncludeElement(const QString& file, 
+	virtual bool startIncludeElement(const QString& file,
 		const QString& prfix);
-	virtual bool startLabelElement(const QString& label, 
+	virtual bool startLabelElement(const QString& label,
 		const QString& state);
-	virtual bool startStateElement(const QString& name, 
+	virtual bool startStateElement(const QString& name,
 		const QString& parent, bool dflt);
 	virtual bool startMapElement(int key, bool pressed);
 	virtual bool startEventElement(int keycode, int unicode, int modifiers,

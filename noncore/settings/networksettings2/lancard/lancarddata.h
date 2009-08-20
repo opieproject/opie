@@ -9,6 +9,6 @@ public :
       bool AnyLanCard;
       QStringList HWAddresses;
 
-} ; 
+} ;
 
 #endif

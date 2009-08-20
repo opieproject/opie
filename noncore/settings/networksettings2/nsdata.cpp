@@ -23,7 +23,7 @@ NetworkSettingsData::NetworkSettingsData( void ) {
       return;
     }
 
-    CfgFile.sprintf( "%s/Settings/NS2.conf", 
+    CfgFile.sprintf( "%s/Settings/NS2.conf",
           NSResources->currentUser().HomeDir.latin1() );
     Log(( "Cfg from %s\n", CfgFile.latin1() ));
 
@@ -39,12 +39,12 @@ NetworkSettingsData::NetworkSettingsData( void ) {
 
       QStringList SL = D.entryList( "profile-*.up");
 
-      Log(( "System reports %d interfaces. Found %d up\n", 
+      Log(( "System reports %d interfaces. Found %d up\n",
           NSResources->system().interfaces().count(),
           SL.count() ));
 
-      for ( QStringList::Iterator it = SL.begin(); 
-            it != SL.end(); 
+      for ( QStringList::Iterator it = SL.begin();
+            it != SL.end();
             ++it ) {
         profilenr = atol( (*it).mid( 8 ).latin1() );
         // read the interface store int 'up'
@@ -54,17 +54,17 @@ NetworkSettingsData::NetworkSettingsData( void ) {
           interfacename = TS.readLine();
           F->close();
 
-          Log(( "Assign interface %s to Profile nr %d\n", 
+          Log(( "Assign interface %s to Profile nr %d\n",
                 interfacename.latin1(), profilenr ));
 
           NC = NSResources->getNetworkSetup( profilenr );
           if( NC ) {
-            NC->assignInterface( 
+            NC->assignInterface(
                 NSResources->system().findInterface( interfacename ) );
-            Log(( "Assign interface %p\n", 
+            Log(( "Assign interface %p\n",
                   NC->assignedInterface() ));
           } else {
-            Log(( "Profile nr %d no longer defined\n", 
+            Log(( "Profile nr %d no longer defined\n",
                 profilenr ));
           }
         }
@@ -96,10 +96,10 @@ void NetworkSettingsData::loadSettings( void ) {
 
          FORMAT :
 
-           [NETNODETYPE] 
+           [NETNODETYPE]
            Entries ...
            <EMPTYLINE>
-           [NetworkSetup] 
+           [NetworkSetup]
            Name=Name
            Node=Name
            <EMPTYLINE>
@@ -142,9 +142,9 @@ void NetworkSettingsData::loadSettings( void ) {
               LeftOvers.append( Line );
             } while ( ! Line.isEmpty() );
 
-            //next section 
+            //next section
             continue;
-          } 
+          }
 
           // read entries of this section
           do {
@@ -206,7 +206,7 @@ QString NetworkSettingsData::saveSettings( void ) {
 
     Log( ( "Saving settings to %s\n", CfgFile.latin1()  ));
     if( ! F.open( IO_WriteOnly | IO_Truncate ) ) {
-      ErrS = qApp->translate( "NetworkSettings", 
+      ErrS = qApp->translate( "NetworkSettings",
               "<p>Could not save setup to \"%1\" !</p>" ).
         arg(CfgFile);
       // problem
@@ -221,7 +221,7 @@ QString NetworkSettingsData::saveSettings( void ) {
         ++it ) {
         TS << "[nodetype "
            << quote( QString( it.current()->name() ) )
-           << "]" 
+           << "]"
            << endl;
 
         it.current()->saveAttributes( TS );
@@ -229,22 +229,22 @@ QString NetworkSettingsData::saveSettings( void ) {
     }
 
     // save leftovers
-    for ( QStringList::Iterator it = LeftOvers.begin(); 
+    for ( QStringList::Iterator it = LeftOvers.begin();
           it != LeftOvers.end(); ++it ) {
       TS << (*it) << endl;
     }
 
     // save all netnode instances
     { ANetNodeInstance * NNI;
-      for( QDictIterator<ANetNodeInstance> nit( 
-                          NSResources->netNodeInstances()); 
+      for( QDictIterator<ANetNodeInstance> nit(
+                          NSResources->netNodeInstances());
            nit.current();
            ++nit ) {
         // header
         NNI = nit.current();
-        TS << '[' 
-           << QString(NNI->nodeClass()->name()) 
-           << ']' 
+        TS << '['
+           << QString(NNI->nodeClass()->name())
+           << ']'
            << endl;
         NNI->saveAttributes( TS );
         TS << endl;
@@ -319,8 +319,8 @@ QString NetworkSettingsData::generateSettings( void ) {
       { QStringList SL;
         SL = CurDevNN->properFiles();
 
-        for ( QStringList::Iterator it = SL.begin(); 
-              it != SL.end(); 
+        for ( QStringList::Iterator it = SL.begin();
+              it != SL.end();
               ++it ) {
 
           Generated = 0;
@@ -340,7 +340,7 @@ QString NetworkSettingsData::generateSettings( void ) {
 
               if( ! CurDevNN->openFile( SF, nniit.current(), SL) ) {
                 // cannot open
-                S = qApp->translate( "NetworkSettings", 
+                S = qApp->translate( "NetworkSettings",
                   "<p>Cannot build proper file \"%1\" for node \"%2\"</p>" ).
                     arg( (*it) ).
                     arg( CurDevNN->name() );
@@ -348,7 +348,7 @@ QString NetworkSettingsData::generateSettings( void ) {
               }
 
               if( ! createPath( SL ) ) {
-                S = qApp->translate( "NetworkSettings", 
+                S = qApp->translate( "NetworkSettings",
                   "<p>Cannot create path \"%1\" for proper file \"%2\" for node \"%3\"</p>" ).
                     arg( SL.join("/") ).
                     arg( (*it) ).
@@ -357,7 +357,7 @@ QString NetworkSettingsData::generateSettings( void ) {
               }
 
               if( ! SF.open() ) {
-                S = qApp->translate( "NetworkSettings", 
+                S = qApp->translate( "NetworkSettings",
                   "<p>Cannot open proper file \"%1\" for node \"%2\"</p>" ).
                     arg( (*it) ).arg( CurDevNN->name() );
                 return S;
@@ -366,7 +366,7 @@ QString NetworkSettingsData::generateSettings( void ) {
               // preamble on first
               if( FirstItem ) {
                 if( CurDevNN->generatePreamble( SF ) == 2 ) {
-                  S = qApp->translate( "NetworkSettings", 
+                  S = qApp->translate( "NetworkSettings",
                     "<p>Error in section \"preamble\" for proper file \"%1\" and node \"%2\"</p>" ).
                       arg( (*it) ).
                       arg( CurDevNN->name() );
@@ -378,7 +378,7 @@ QString NetworkSettingsData::generateSettings( void ) {
 
               // item specific
               if( nniit.current()->generateFile( SF, -1 ) == 2 ) {
-                S = qApp->translate( "NetworkSettings", 
+                S = qApp->translate( "NetworkSettings",
                   "<p>Error in section for node \"%1\" for proper file \"%2\" and node class \"%3\"</p>" ).
                     arg( nniit.current()->name() ).
                     arg( (*it) ).
@@ -397,7 +397,7 @@ QString NetworkSettingsData::generateSettings( void ) {
               ) {
 
               if( ! createPath( SL ) ) {
-                S = qApp->translate( "NetworkSettings", 
+                S = qApp->translate( "NetworkSettings",
                   "<p>Cannot create path \"%1\" for proper file \"%2\" for node \"%3\"</p>" ).
                     arg( SL.join("/") ).
                     arg( (*it) ).
@@ -406,7 +406,7 @@ QString NetworkSettingsData::generateSettings( void ) {
               }
 
               if( ! SF.open() ) {
-                S = qApp->translate( "NetworkSettings", 
+                S = qApp->translate( "NetworkSettings",
                   "<p>Cannot open proper file \"%1\" for node \"%2\"</p>" ).
                     arg( (*it) ).
                     arg( CurDevNN->name() );
@@ -414,7 +414,7 @@ QString NetworkSettingsData::generateSettings( void ) {
               }
 
               if( CurDevNN->generatePostamble( SF ) == 2 ) {
-                S = qApp->translate( "NetworkSettings", 
+                S = qApp->translate( "NetworkSettings",
                   "<p>Error in section \"postamble\" for proper file \"%1\" and node \"%2\"</p>" ).
                     arg( (*it) ).
                     arg( CurDevNN->name() );
@@ -436,7 +436,7 @@ QString NetworkSettingsData::generateSettings( void ) {
 
       SF = sfit.current();
 
-      // reset all 
+      // reset all
       for( QDictIterator<ANetNode> nnit( NSResources->netNodes() );
            nnit.current();
            ++nnit ) {
@@ -460,7 +460,7 @@ QString NetworkSettingsData::generateSettings( void ) {
 
       needToGenerate = 0;
 
-      // are there netnodes that have instances and need 
+      // are there netnodes that have instances and need
       // to write data in this system file ?
       for( QDictIterator<ANetNode> nnit( NSResources->netNodes() );
            ! needToGenerate && nnit.current();
@@ -496,7 +496,7 @@ QString NetworkSettingsData::generateSettings( void ) {
 
       // ok generate this system file
       if( ! SF->open() ) {
-        S = qApp->translate( "NetworkSettings", 
+        S = qApp->translate( "NetworkSettings",
                              "<p>Cannot open system file \"%1\"</p>" ).
             arg( SF->name() );
         return S;
@@ -504,7 +504,7 @@ QString NetworkSettingsData::generateSettings( void ) {
 
       // global presection for this system file
       if( ! SF->preSection() ) {
-        S = qApp->translate( "NetworkSettings", 
+        S = qApp->translate( "NetworkSettings",
                              "<p>Error in section \"Preamble\" for file \"%1\"</p>" ).
             arg( SF->name() );
         return S;
@@ -538,19 +538,19 @@ QString NetworkSettingsData::generateSettings( void ) {
         CurDevNN = CurDev->netNode()->nodeClass();
 
         if( ! FirstWithData->nodeClass()->done() ) {
-          // generate fixed part 
+          // generate fixed part
           if( ! SF->preDeviceSection( CurDevNN ) ) {
-            S = qApp->translate( "NetworkSettings", 
+            S = qApp->translate( "NetworkSettings",
                                  "<p>Error in section \"Pre-Device\" for file \"%1\"</p>" ).
                 arg( SF->name() );
             return S;
           }
 
-          if( FirstWithData->nodeClass()->generateFile( 
-                                            *SF, 
+          if( FirstWithData->nodeClass()->generateFile(
+                                            *SF,
                                             FirstWithData,
                                             -2 ) == 2 ) {
-            S = qApp->translate( "NetworkSettings", 
+            S = qApp->translate( "NetworkSettings",
               "<p>Error in section \"Common\" for file \"%1\" and node \"%2\"</p>" ).
                 arg( SF->name() ).
                 arg( CurDevNN->name() );
@@ -575,9 +575,9 @@ QString NetworkSettingsData::generateSettings( void ) {
           // generate common device specific part
           for( int i = DevCtStart; i < NoOfDevs ; i ++ ) {
 
-            if( FirstWithData->nodeClass()->generateFile( 
+            if( FirstWithData->nodeClass()->generateFile(
                 *SF, CurDev->netNode(), i ) == 2 ) {
-              S = qApp->translate( "NetworkSettings", 
+              S = qApp->translate( "NetworkSettings",
                 "<p>Error in section \"Device\" for file \"%1\" and node \"%2\"</p>" ).
                   arg( SF->name() ).
                   arg( CurDevNN->name() );
@@ -603,14 +603,14 @@ QString NetworkSettingsData::generateSettings( void ) {
             continue;
           }
 
-          Log(("NetworkSetup %s of family %s\n", 
-                ncit2.current()->name().latin1(), 
+          Log(("NetworkSetup %s of family %s\n",
+                ncit2.current()->name().latin1(),
                 CurDev->name() ));
-          // generate 
+          // generate
           NNI = ncit2.current()->firstWithDataForFile( *SF );
           for( int i = DevCtStart; i < NoOfDevs ; i ++ ) {
             if( ! SF->preNodeSection( NNI, i ) ) {
-              S = qApp->translate( "NetworkSettings", 
+              S = qApp->translate( "NetworkSettings",
                   "<p>Error in \"Pre-Node Part\" for file \"%1\" and node \"%2\"</p>" ).
                   arg( SF->name() ).
                   arg( CurDevNN->name() );
@@ -624,7 +624,7 @@ QString NetworkSettingsData::generateSettings( void ) {
               case 1 :
                 break;
               case 2 :
-                S = qApp->translate( "NetworkSettings", 
+                S = qApp->translate( "NetworkSettings",
                   "<p>Error in section \"Node\" for file \"%1\" and node \"%2\"</p>" ).
                     arg( SF->name() ).
                     arg( CurDevNN->name() );
@@ -632,7 +632,7 @@ QString NetworkSettingsData::generateSettings( void ) {
             }
 
             if( ! SF->postNodeSection( NNI, i ) ) {
-              S = qApp->translate( "NetworkSettings", 
+              S = qApp->translate( "NetworkSettings",
                   "<p>Error in \"Post-Node Part\" for file \"%1\" and node \"%2\"</p>" ).
                   arg( SF->name() ).
                   arg( CurDevNN->name() );
@@ -646,7 +646,7 @@ QString NetworkSettingsData::generateSettings( void ) {
       }
 
       if( ! SF->postDeviceSection( CurDevNN ) ) {
-        S = qApp->translate( "NetworkSettings", 
+        S = qApp->translate( "NetworkSettings",
             "<p>Error in section \"Post-Device\" for file \"%1\" and node \"%2\"</p>" ).
                 arg( SF->name() ).
                 arg( CurDevNN->name() );
@@ -655,7 +655,7 @@ QString NetworkSettingsData::generateSettings( void ) {
 
 
       if( ! SF->postSection() ) {
-        S = qApp->translate( "NetworkSettings", 
+        S = qApp->translate( "NetworkSettings",
                 "<p>Error in section \"Closure\" for file \"%1\"</p>" ).
                   arg( SF->name() );
         return S;
@@ -667,7 +667,7 @@ QString NetworkSettingsData::generateSettings( void ) {
     return S;
 }
 
-QList<NetworkSetup> NetworkSettingsData::collectPossible( 
+QList<NetworkSetup> NetworkSettingsData::collectPossible(
                     const QString & Interface ) {
     // collect NetworkSetups that can work on top of this interface
     NetworkSetup * NC;
@@ -684,7 +684,7 @@ QList<NetworkSetup> NetworkSettingsData::collectPossible(
           NC->state() != Disabled && // if enabled
           NC->state() != IsUp  // if already used
         ) {
-        Log( ( "Append %s for %s\n", 
+        Log( ( "Append %s for %s\n",
               NC->name().latin1(), Interface.latin1() ));
         PossibleNetworkSetups.append( NC );
       }
@@ -706,7 +706,7 @@ bool NetworkSettingsData::canStart( const QString & Interface ) {
 
     PossibleNetworkSetups = collectPossible( Interface );
 
-    Log( ( "for %s : Possiblilies %d\n", 
+    Log( ( "for %s : Possiblilies %d\n",
         Interface.latin1(), PossibleNetworkSetups.count() ));
     switch( PossibleNetworkSetups.count() ) {
       case 0 : // no NetworkSetups
@@ -732,11 +732,11 @@ bool NetworkSettingsData::canStart( const QString & Interface ) {
           { QString S= NC->setState( Activate );
             if( ! S.isEmpty() ) {
               // could not bring device Online -> try other alters
-              Log(( "disallow %ld for %s : %s\n", 
+              Log(( "disallow %ld for %s : %s\n",
                   NC->number(), Interface.latin1(), S.latin1() ));
               break;
             }
-            // interface assigned 
+            // interface assigned
           }
           // FT
         case Available :
@@ -746,7 +746,7 @@ bool NetworkSettingsData::canStart( const QString & Interface ) {
           printf( "A%d%s\n", NC->number(), Interface.latin1() );
           return 0;
       }
-    } 
+    }
 
     // if we come here no alternatives are possible
     Log(( "disallow %s\n", Interface.latin1()));
@@ -774,13 +774,13 @@ bool NetworkSettingsData::couldBeTriggered( const QString & Interface ) {
 
     PossibleTriggered = collectTriggered( Interface );
 
-    Log( ( "for %s : Possiblilies %d\n", 
+    Log( ( "for %s : Possiblilies %d\n",
         Interface.latin1(), PossibleTriggered.count() ));
 
     return ( PossibleTriggered.count() ) ? 1 : 0;
 }
 
-QList<NetworkSetup> NetworkSettingsData::collectTriggered( 
+QList<NetworkSetup> NetworkSettingsData::collectTriggered(
                       const QString & Interface ) {
 
     // collect NetworkSetups that could be triggered by this interface
@@ -799,7 +799,7 @@ QList<NetworkSetup> NetworkSettingsData::collectTriggered(
           NC->state() != Disabled && // if enabled
           NC->state() != IsUp  // if already used
         ) {
-        Log( ( "Append %s for %s\n", 
+        Log( ( "Append %s for %s\n",
             NC->name().latin1(), Interface.latin1() ));
         PossibleTriggered.append( NC );
       }
@@ -811,8 +811,8 @@ bool NetworkSettingsData::createPath( const QStringList & SL ) {
 
     QDir D( SL[0] );
 
-    for ( QStringList::ConstIterator it = SL.begin(); 
-          it != SL.end(); 
+    for ( QStringList::ConstIterator it = SL.begin();
+          it != SL.end();
           ++it ) {
 
       printf( "Create %s\n", (*it).latin1() );

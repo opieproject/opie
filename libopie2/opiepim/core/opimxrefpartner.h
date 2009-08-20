@@ -58,7 +58,7 @@ class OPimXRefPartner {
     void setService( const QString& service );
     void setUid( int uid );
     void setField( int field );
-    
+
   private:
     QString m_app;
     int m_uid;

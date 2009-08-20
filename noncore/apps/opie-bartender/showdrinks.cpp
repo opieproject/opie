@@ -25,15 +25,15 @@ Show_Drink::Show_Drink( QWidget* parent,  const char* name, bool modal, WFlags f
     drinkName = name;
     setCaption( drinkName );
 
-    Layout5 = new QGridLayout( this); 
+    Layout5 = new QGridLayout( this);
     Layout5->setSpacing( 6 );
     Layout5->setMargin( 4 );
 
-    
+
       editDrinkButton = new QPushButton( tr("Edit"), this,"editBtn");
       Layout5->addMultiCellWidget(  editDrinkButton, 0, 0, 0, 0 );
       connect(editDrinkButton, SIGNAL(clicked()), this, SLOT(slotEditDrink()));
-            
+
     MultiLineEdit1 = new QMultiLineEdit( this, "MultiLineEdit1" );
     MultiLineEdit1->setWordWrap(QMultiLineEdit::WidgetWidth);
     MultiLineEdit1->setReadOnly(true);

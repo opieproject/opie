@@ -116,7 +116,7 @@ public:
 
       /**
        * Another constructor, which allows to use a custom editing widget
-       * instead of the standard OLineEdit widget. E.g. you can use a 
+       * instead of the standard OLineEdit widget. E.g. you can use a
        * @ref OURLRequester or a @ref OComboBox as input widget. The custom
        * editor must consist of a lineedit and optionally another widget that
        * is used as representation. A OComboBox or a OURLRequester have a

@@ -14,7 +14,7 @@ public :
 
       AWLan( WLanNetNode * PNN );
 
-      RuntimeInfo * runtime( void ) 
+      RuntimeInfo * runtime( void )
         { return
             ( RT ) ? RT : ( RT = new WLanRun( this, Data ) );
         }
@@ -23,11 +23,11 @@ public :
       QString acceptable( void );
       void commit( void );
 
-      virtual void  * data( void ) 
+      virtual void  * data( void )
         { return (void *)&Data; }
 
       virtual short generateFileEmbedded( SystemFile & Sf,
-                                         long DevNr ); 
+                                         long DevNr );
 
 protected :
 

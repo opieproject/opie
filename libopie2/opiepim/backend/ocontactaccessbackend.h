@@ -89,8 +89,8 @@ class OPimContactAccessBackend: public OPimAccessBackend<OPimContact> {
      */
     bool hasQuerySettings (uint querySettings) const;
 
-    /** 
-     * Advanced search mechanism. 
+    /**
+     * Advanced search mechanism.
      */
     UIDArray queryByExample( const UIDArray& uidlist, const OPimContact&, int settings, const QDateTime &d = QDateTime() ) const;
     /**

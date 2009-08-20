@@ -120,7 +120,7 @@ void  LibraryDialog::Newlibrary()
 
 void LibraryDialog::Library() {
    clearItems();
-		
+
    IDontKnowWhy = "";
    system("date");
    if ( indexLib.open( IO_ReadOnly) ) {
@@ -128,7 +128,7 @@ void LibraryDialog::Library() {
       QTextStream indexStream( &indexLib );
       QString indexLine;
       qApp->processEvents();
-      
+
       bool okToRead = false;
       while ( !indexStream.eof() ) {
          indexLine = indexStream.readLine();
@@ -174,7 +174,7 @@ void LibraryDialog::Library() {
                         }
                      title = indexLine.mid( 9, 50);
 
-                     addItems(); 
+                     addItems();
                   }
                   } else { // then try new format texts
                      file = token.last();
@@ -190,13 +190,13 @@ void LibraryDialog::Library() {
       indexLib.close();
    } else {
       QString sMsg;
-      
+
       sMsg = ( tr("<p>Error opening library index file. Please download a new one.</P> "));
       QMessageBox::message( "Error",sMsg);
    }
    system("date");
    sortLists(0);
-   
+
 } //end Library()
 
 
@@ -325,7 +325,7 @@ void LibraryDialog::addItems()
        etextStruct.author = author;
        etextStruct.year = year;
        etextStruct.file = file;
-      
+
       etextLibrary.append( etextStruct);
 
       if( author.isEmpty() )
@@ -387,7 +387,7 @@ void LibraryDialog::select_title( QListViewItem * item)
 
       bool ok = false;
 			qDebug(DlglistItemFile);
-			
+
       if(	DlglistItemFile.toInt() > 10000 ) {
          // new directory sturcture
          if( download_newEtext())
@@ -397,7 +397,7 @@ void LibraryDialog::select_title( QListViewItem * item)
             ok = true;
       }
       if(ok) {
-         if(checkBox->isChecked () ) 
+         if(checkBox->isChecked () )
             accept();
       }
 	 }
@@ -434,8 +434,8 @@ bool LibraryDialog::download_newEtext()
 		networkList.append((const char *)file); //filename
 
 		getEtext( networkList);
-   
-		return true;		
+
+		return true;
 }
 
 bool LibraryDialog::getEtext(const QStringList &networkList)
@@ -503,7 +503,7 @@ bool LibraryDialog::download_Etext()
       NewlistItemFile.replace( 0,4, DlglistItemFile.left(4));
 			qDebug("NewlistItemFile is now " + NewlistItemFile);
    }
-	 
+
    NewlistItemYear = DlglistItemYear.right(2);
    int NewlistItemYear_Int = NewlistItemYear.toInt(0, 10);
    if (NewlistItemYear_Int < 91 && NewlistItemYear_Int > 70) {
@@ -521,7 +521,7 @@ bool LibraryDialog::download_Etext()
 
 	 qDebug( "Download file: " +NewlistItemFile);
 	 qDebug("Checking: " + ftp_host + " " + dir + " " + outputFile+" " + NewlistItemFile);
-	
+
 
    QStringList networkList;
    networkList.append((const char *)ftp_host); //host
@@ -529,7 +529,7 @@ bool LibraryDialog::download_Etext()
    networkList.append((const char *)outputFile); //output filepath
    networkList.append((const char *)NewlistItemFile); //filename
    getEtext( networkList);
-   
+
  return true;
 }
 
@@ -724,10 +724,10 @@ void  LibraryDialog::parseSearchResults( QString resultStr)
 
         DlglistItemTitle  = token[0];
         DlglistItemTitle = DlglistItemTitle.stripWhiteSpace();
-			
+
         DlglistItemYear  = token[1];
         DlglistItemYear = DlglistItemYear.stripWhiteSpace();
-      
+
         DlglistItemFile = token[2];
 
         DlglistItemFile = DlglistItemFile.stripWhiteSpace();
@@ -746,7 +746,7 @@ void  LibraryDialog::parseSearchResults( QString resultStr)
 
 void LibraryDialog::sortLists(int index)
 {
-	 
+
     ListView1->setSorting(index);
     ListView2->setSorting(index);
     ListView3->setSorting(index);
@@ -836,7 +836,7 @@ void LibraryDialog::newList()
       Output *outDlg;
       buttonNewList->setDown(true);
       QString gutenindex1 = local_library + "/GUTINDEX.ALL";
-         
+
       QString cmd="wget -O " + gutenindex1 + " http://www.gutenberg.org/dirs/GUTINDEX.ALL 2>&1";
 
       int result = QMessageBox::warning( this,"Download"
@@ -957,7 +957,7 @@ void LibraryDialog::cleanStrings() {
    file = file.stripWhiteSpace();
    title = title.stripWhiteSpace();
    number = number.stripWhiteSpace();
-	 
+
 }
 
 void LibraryDialog::authBoxClicked()

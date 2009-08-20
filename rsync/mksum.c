@@ -2,20 +2,20 @@
  *
  * librsync -- library for network deltas
  * $Id: mksum.c,v 1.1 2002-01-25 22:15:09 kergoth Exp $
- * 
+ *
  * Copyright (C) 1999, 2000, 2001 by Martin Pool <mbp@samba.org>
  * Copyright (C) 1999 by Andrew Tridgell <tridge@samba.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -58,7 +58,7 @@ static rs_result rs_sig_s_header(rs_job_t *);
 static rs_result rs_sig_s_generate(rs_job_t *);
 
 
-                                           
+
 /**
  * State of trying to send the signature header.
  */
@@ -70,7 +70,7 @@ static rs_result rs_sig_s_header(rs_job_t *job)
     rs_trace("sent header (magic %#x, block len = %d, strong sum len = %d)",
              RS_SIG_MAGIC, (int) job->block_len, (int) job->strong_sum_len);
     job->stats.block_len = job->block_len;
-    
+
     job->statefn = rs_sig_s_generate;
     return RS_RUNNING;
 }
@@ -115,11 +115,11 @@ rs_sig_s_generate(rs_job_t *job)
     rs_result           result;
     size_t              len;
     void                *block;
-        
+
     /* must get a whole block, otherwise try again */
     len = job->block_len;
     result = rs_scoop_read(job, len, &block);
-        
+
     /* unless we're near eof, in which case we'll accept
      * whatever's in there */
     if ((result == RS_BLOCKED && rs_job_input_is_ending(job))) {

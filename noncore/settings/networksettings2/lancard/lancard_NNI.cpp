@@ -20,9 +20,9 @@ void ALanCard::setSpecificAttribute( QString & A, QString & V ) {
 }
 
 void ALanCard::saveSpecificAttribute( QTextStream & TS) {
-    TS << "matchanycard=" << 
+    TS << "matchanycard=" <<
       ((Data.AnyLanCard) ? "yes" : "no") << endl;
-    for( QStringList::Iterator it = Data.HWAddresses.begin(); 
+    for( QStringList::Iterator it = Data.HWAddresses.begin();
          it != Data.HWAddresses.end(); ++it ) {
       TS << "match=" << quote( *it ) << endl;
     }

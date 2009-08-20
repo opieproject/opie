@@ -60,7 +60,7 @@ inline bool CNavigation_base<T>::back(T& posn)
 	  historycurrent--;
 	}
       posn=history[historycurrent];
-      return true;   
+      return true;
     }
   else
     {

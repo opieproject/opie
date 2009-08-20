@@ -15,8 +15,8 @@ using namespace Opietooth2;
 using Opie::Core::OProcess;
 
 OTDevice::OTDevice( OTGateway * _OT ) : QObject(0, "device") {
-      
-      // initialize 
+
+      // initialize
       OT = _OT;
 
       // detect bluetooth type
@@ -65,23 +65,23 @@ bool OTDevice::attach(){
         m_hciattach = new OProcess();
         *m_hciattach << "hciattach";
         *m_hciattach << "-p"; // so that it prints its pid
-        *m_hciattach << Dev 
-                     << Mode 
+        *m_hciattach << Dev
+                     << Mode
                      << QString().setNum(Spd);
 
-        connect( m_hciattach, 
+        connect( m_hciattach,
                  SIGNAL(receivedStdout(Opie::Core::OProcess*, char*, int ) ),
                  this, SLOT
                  (slotStdOut(Opie::Core::OProcess*,char*,int) ) );
 
-        connect( m_hciattach, 
+        connect( m_hciattach,
                  SIGNAL(receivedStderr(Opie::Core::OProcess*, char*, int ) ),
                  this, SLOT
                  (slotStdErr(Opie::Core::OProcess*,char*,int) ) );
 
         // we need to start this in 'dontcare' mode because
         // if qpe exists we want the hci to keep running
-        if( ! m_hciattach->start( OProcess::DontCare, 
+        if( ! m_hciattach->start( OProcess::DontCare,
                                   OProcess::AllOutput
                                 ) ){
           emit error( tr( "Could not start hciattach" ) );
@@ -158,7 +158,7 @@ void OTDevice::slotStdOut(OProcess* proc, char* , int ) {
           m_deviceNr = 0;
           emit isEnabled( m_deviceNr, 1 );
         }
-      } 
+      }
 }
 
 void OTDevice::slotStdErr(OProcess* proc, char* chars, int len) {
@@ -183,8 +183,8 @@ pid_t OTDevice::getPidOfHCIAttach( void ) {
         QStringList EL = ProcDir.entryList( QDir::Dirs );
 
         // print it out
-        for ( QStringList::Iterator it = EL.begin(); 
-              it != EL.end(); 
+        for ( QStringList::Iterator it = EL.begin();
+              it != EL.end();
               ++it ) {
           if( R.match( (*it) ) >= 0 ) {
             // is pid

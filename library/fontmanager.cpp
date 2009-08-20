@@ -29,10 +29,10 @@
     QFontInfo doesn't work in QWS at the moment,
     otherwise we would just have used that to check
     the real values
-    
+
      For now, there are only two Unicode fonts in
      the known universe...
-    
+
 */
 
 bool FontManager::hasUnicodeFont()
@@ -69,7 +69,7 @@ QFont FontManager::unicodeFont( Spacing sp )
 	size=16;
 	key = "unifont_160_50";
     }
-	
+
     QString suffix;
     if ( qt_screen->isTransformed() ) {
 	suffix += "_t";
@@ -80,7 +80,7 @@ QFont FontManager::unicodeFont( Spacing sp )
     suffix += ".qpf";
 
     // if we cannot find it, try the other one
-	
+
     if ( !QFile::exists(fontDir+key+suffix) ) {
 	key = (sp == Fixed ) ? "arial_140_50" : "unifont_160_50";
 	if ( QFile::exists(fontDir+key+suffix) ) {

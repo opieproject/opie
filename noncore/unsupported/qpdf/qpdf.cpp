@@ -44,7 +44,7 @@
 #endif
 
 
-int main ( int argc, char **argv ) 
+int main ( int argc, char **argv )
 {
 	QPEApplication app ( argc, argv );
 
@@ -52,7 +52,7 @@ int main ( int argc, char **argv )
 	globalParams = new GlobalParams ( "" );
 	globalParams-> setErrQuiet ( true );
 
-	QPdfDlg *dlg = new QPdfDlg ( );				
+	QPdfDlg *dlg = new QPdfDlg ( );
 	app. showMainDocumentWidget ( dlg );
 
 	if (( app. argc ( ) == 3 ) && ( app. argv ( ) [1] == QCString ( "-f" )))
@@ -66,18 +66,18 @@ QPdfDlg::QPdfDlg ( ) : QMainWindow ( )
 {
 	setCaption ( tr( "QPdf" ));
 	setIcon ( Resource::loadPixmap ( "qpdf_icon" ));
-	
+
 	m_busy = false;
-	
+
 	m_doc = 0;
 	m_pages = 0;
 	m_zoom = 72;
-	m_currentpage = 0;	
+	m_currentpage = 0;
 
 	m_fullscreen = false;
 	m_renderok = false;
-		
-	
+
+
 	setToolBarsMovable ( false );
 
 	m_stack = new QWidgetStack ( this );
@@ -115,11 +115,11 @@ QPdfDlg::QPdfDlg ( ) : QMainWindow ( )
 	m_pm_zoom-> insertItem ( tr( "125%" ), 125 );
 	m_pm_zoom-> insertItem ( tr( "150%" ), 150 );
 	m_pm_zoom-> insertItem ( tr( "200%" ), 200 );
-	
+
 	connect ( m_pm_zoom, SIGNAL( activated(int)), this, SLOT( setZoom(int)));
 
 	m_tb_tool = new QToolBar ( this );
-		
+
 	new QToolButton ( Resource::loadIconSet ( "fileopen" ),    tr( "Open..." ),       QString::null, this, SLOT( openFile()),  m_tb_tool, "open" );
 	m_tb_tool-> addSeparator ( );
 	m_to_find = new QToolButton ( Resource::loadIconSet ( "find" ),        tr( "Find..." ),       QString::null, this, SLOT( toggleFindBar()),     m_tb_tool, "find" );
@@ -157,7 +157,7 @@ QPdfDlg::~QPdfDlg ( )
 
 void QPdfDlg::resizeEvent ( QResizeEvent * )
 {
-	if ( m_fullscreen && ( size ( ) != qApp-> desktop ( )-> size ( ))) 
+	if ( m_fullscreen && ( size ( ) != qApp-> desktop ( )-> size ( )))
 		setFullscreen ( true );
 }
 
@@ -181,9 +181,9 @@ void QPdfDlg::setFullscreen ( bool b )
 	static QSize normalsize;
 
 	if ( b ) {
-		if ( !normalsize. isValid ( )) 
+		if ( !normalsize. isValid ( ))
 			normalsize = size ( );
-		
+
 		setFixedSize ( qApp-> desktop ( )-> size ( ));
 		showNormal ( );
 		reparent ( 0, WStyle_Customize | WStyle_NoBorder, QPoint ( 0, 0 ));
@@ -195,7 +195,7 @@ void QPdfDlg::setFullscreen ( bool b )
 		resize ( normalsize );
 		showMaximized ( );
 		normalsize = QSize ( );
-	}	
+	}
 }
 
 // ^^ Fullscreen handling (for broken QT-lib)
@@ -204,7 +204,7 @@ void QPdfDlg::setBusy ( bool b )
 {
 	if ( b != m_busy ) {
 		m_busy = b;
-		
+
 		m_outdev-> setBusy ( m_busy );
 		setEnabled ( !m_busy );
 	}
@@ -219,11 +219,11 @@ bool QPdfDlg::busy ( ) const
 void QPdfDlg::updateCaption ( )
 {
 	QString cap = "";
-	
-	if ( !m_currentdoc. isEmpty ( )) 
+
+	if ( !m_currentdoc. isEmpty ( ))
 		cap = QString ( "%1 - " ). arg ( m_currentdoc );
 	cap += "QPdf";
-	
+
 	setCaption ( cap );
 }
 
@@ -234,21 +234,21 @@ void QPdfDlg::setZoom ( int id )
 
 	switch ( id ) {
 	case 1:
-		if ( m_doc && m_doc-> isOk ( )) 
+		if ( m_doc && m_doc-> isOk ( ))
 			dpi = m_outdev-> visibleWidth ( ) * 72 / m_doc-> getPageWidth ( m_currentpage );
 		break;
-	
+
 	case 2:
-		if ( m_doc && m_doc-> isOk ( )) 
+		if ( m_doc && m_doc-> isOk ( ))
 			dpi = QMIN( m_outdev-> visibleWidth ( ) * 72 / m_doc-> getPageWidth ( m_currentpage ), \
 			            m_outdev-> visibleHeight ( ) * 72 / m_doc-> getPageHeight ( m_currentpage ));
 		break;
-		
+
 	default:
 		dpi = id * 72 / 100;
 		break;
 	}
-	
+
 	if ( dpi < 18 )
 		dpi = 18;
 	if ( dpi > 216 )
@@ -259,7 +259,7 @@ void QPdfDlg::setZoom ( int id )
 		m_pm_zoom-> setItemChecked ( xid, xid == id );
 	}
 
-	if ( dpi != m_zoom ) { 
+	if ( dpi != m_zoom ) {
 		m_zoom = dpi;
 
 		renderPage ( );
@@ -271,22 +271,22 @@ void QPdfDlg::gotoPageDialog ( )
 {
 	QDialog *d = new QDialog ( this, "gotodlg", true );
 	d-> setCaption ( tr( "Goto page" ));
-	
-	QBoxLayout *lay = new QVBoxLayout ( d, 4, 4  );	
-	
+
+	QBoxLayout *lay = new QVBoxLayout ( d, 4, 4  );
+
 	QLabel *l = new QLabel ( tr( "Select from 1 .. %1:" ). arg ( m_pages ), d );
 	lay-> addWidget ( l );
-	
+
 	QSpinBox *spin = new QSpinBox ( 1, m_pages, 1, d );
 	spin-> setValue ( m_currentpage );
 	spin-> setWrapping ( true );
 	spin-> setButtonSymbols ( QSpinBox::PlusMinus );
 	lay-> addWidget ( spin );
-	
+
 	if ( d-> exec ( ) == QDialog::Accepted ) {
 		gotoPage ( spin-> value ( ));
 	}
-	
+
 	delete d;
 }
 
@@ -307,52 +307,52 @@ void QPdfDlg::toggleFindBar ( )
 
 void QPdfDlg::findText ( const QString &str )
 {
-	if ( !m_doc || !m_doc-> isOk ( ) || str. isEmpty ( )) 
+	if ( !m_doc || !m_doc-> isOk ( ) || str. isEmpty ( ))
 		return;
 
 	TextOutputDev *textOut = 0;
 	int pg = 0;
 
 	setBusy ( true );
-		
+
 	int len = str. length ( );
 	Unicode *u = new Unicode [len];
 	for ( int i = 0; i < len; i++ )
 		u [i] = str [i]. unicode ( );
-		
+
 	int xMin = 0, yMin = 0, xMax = 0, yMax = 0;
 	QRect selr = m_outdev-> selection ( );
-	bool fromtop = true; 
-	
+	bool fromtop = true;
+
 	if ( selr. isValid ( )) {
 		xMin = selr. right ( );
 		yMin = selr. top ( ) + selr. height ( ) / 2;
 		fromtop = false;
 	}
 
-	if ( m_outdev-> findText ( u, len, fromtop, true, &xMin, &yMin, &xMax, &yMax )) 
+	if ( m_outdev-> findText ( u, len, fromtop, true, &xMin, &yMin, &xMax, &yMax ))
 		goto found;
 
 	qApp-> processEvents ( );
-		
+
 	// search following pages
 	textOut = new TextOutputDev ( 0, gFalse, gFalse );
-	if ( !textOut-> isOk ( )) 
+	if ( !textOut-> isOk ( ))
 		goto done;
-	
+
 	qApp-> processEvents ( );
-		
+
 	for ( pg = ( m_currentpage % m_pages ) + 1; pg != m_currentpage; pg = ( pg % m_pages ) + 1 ) {
 		m_doc-> displayPage ( textOut, pg, 72, 0, gFalse );
-		
+
 		fp_t xMin1, yMin1, xMax1, yMax1;
-		
+
 		qApp-> processEvents ( );
-		
+
 		if ( textOut-> findText ( u, len, gTrue, gTrue, &xMin1, &yMin1, &xMax1, &yMax1 ))
 			goto foundPage;
-			
-		qApp-> processEvents ( );	
+
+		qApp-> processEvents ( );
 	}
 
 	// search current page ending at current selection
@@ -360,10 +360,10 @@ void QPdfDlg::findText ( const QString &str )
 		xMax = selr. left ( );
 		yMax = selr. top ( ) + selr. height ( ) / 2;
 
-		if ( m_outdev-> findText ( u, len, gTrue, gFalse, &xMin, &yMin, &xMax, &yMax )) 
+		if ( m_outdev-> findText ( u, len, gTrue, gFalse, &xMin, &yMin, &xMax, &yMax ))
 			goto found;
 	}
-	
+
 	// not found
 	QMessageBox::information ( this, tr( "Find..." ), tr( "'%1' could not be found." ). arg ( str ));
 	goto done;
@@ -372,7 +372,7 @@ foundPage:
 	qApp-> processEvents ( );
 
 	gotoPage ( pg );
-	
+
 	if ( !m_outdev-> findText ( u, len, gTrue, gTrue, &xMin, &yMin, &xMax, &yMax )) {
 		// this can happen if coalescing is bad
 		goto done;
@@ -382,14 +382,14 @@ found:
 	selr. setCoords ( xMin, yMin, xMax, yMax );
 	m_outdev-> setSelection ( selr, true ); // this will emit QPEOutputDev::selectionChanged ( ) -> copyToClipboard ( )
 
-done:			
+done:
 
-	delete [] u; 
+	delete [] u;
 	delete textOut;
 
 	setBusy ( false );
 }
-		
+
 
 void QPdfDlg::findText ( )
 {
@@ -428,10 +428,10 @@ void QPdfDlg::gotoPage ( int n )
 		n = 1;
 	if ( n > m_pages )
 		n = m_pages;
-		
+
 	if ( n != m_currentpage ) {
-		m_currentpage = n;	
-		
+		m_currentpage = n;
+
 		renderPage ( );
 	}
 }
@@ -440,13 +440,13 @@ void QPdfDlg::renderPage ( )
 {
 	if ( m_renderok && m_doc && m_doc-> isOk ( )) {
 		m_renderok = false;
-	
+
 		setBusy ( true );
-		m_doc-> displayPage ( m_outdev, m_currentpage, m_zoom, 0, true ); 
+		m_doc-> displayPage ( m_outdev, m_currentpage, m_zoom, 0, true );
 		setBusy ( false );
-		
+
 		m_outdev-> setPageCount ( m_currentpage, m_pages );
-		
+
 		m_renderok = true;
 	}
 }
@@ -480,7 +480,7 @@ void QPdfDlg::openFile ( const DocLnk &f )
 {
 	QString fn = f. file ( );
 	QFileInfo fi ( fn );
-	
+
 	if ( fi. exists ( )) {
 		delete m_doc;
 
@@ -494,16 +494,16 @@ void QPdfDlg::openFile ( const DocLnk &f )
 
 			m_pages = m_doc-> getNumPages ( );
 			m_currentpage = 0;
-		
+
 			QTimer::singleShot ( 0, this, SLOT( delayedInit()));
 		}
 		else {
 			delete m_doc;
 			m_doc = 0;
-			
+
 			m_currentdoc = QString::null;
 		}
-	
+
 		updateCaption ( );
 	}
 	else
@@ -512,29 +512,29 @@ void QPdfDlg::openFile ( const DocLnk &f )
 
 void QPdfDlg::setDocument ( const QString &f )
 {
-	if ( f. find ( ".desktop", 0, true ) == -1 ) 
+	if ( f. find ( ".desktop", 0, true ) == -1 )
 		openFile ( f );
-	else 
+	else
 		openFile ( DocLnk ( f ));
-		
+
 	closeFileSelector ( );
 }
 
 void QPdfDlg::delayedInit ( )
-{	
+{
 	closeFileSelector ( );
-	
+
 	m_currentpage = 0;
 	m_zoom = 0;
 	m_renderok = false;
-	
+
 	setZoom ( 100 );
 	gotoPage ( 1 );
-	
+
 	m_renderok = true;
-	
+
 	renderPage ( );
-	
+
 	m_outdev-> setFocus ( );
 }
 

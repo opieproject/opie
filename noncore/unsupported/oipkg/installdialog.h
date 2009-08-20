@@ -16,16 +16,16 @@
 #include "packagelistview.h"
 #include <qvariant.h>
 #include <qdialog.h>
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QCheckBox;
 class QGroupBox;
 class QListView;
 class QListViewItem;
 
 class InstallDialog : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:    InstallDialog( PackageManagerSettings* s, QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );

@@ -53,14 +53,14 @@ void OTPeer::updateServices( void ) {
 
     odebug << "Get services from " << Addr.toString() << oendl;
 
-    session = sdp_connect( &(OTDeviceAddress::any.getBDAddr()), 
+    session = sdp_connect( &(OTDeviceAddress::any.getBDAddr()),
                            &(Addr.getBDAddr()),
                            0);
 
     if (!session) {
-      odebug << "sdp_connect(" 
+      odebug << "sdp_connect("
             << Addr.toString()
-            << ") failed"  
+            << ") failed"
             << oendl;
         return; // error
     }
@@ -75,10 +75,10 @@ void OTPeer::updateServices( void ) {
 
     // get data from peer
     sdp_list_t* seq;
-    if (sdp_service_search_attr_req( session, 
+    if (sdp_service_search_attr_req( session,
                                      search,
-                                     SDP_ATTR_REQ_RANGE, 
-                                     attrId, 
+                                     SDP_ATTR_REQ_RANGE,
+                                     attrId,
                                      &seq ) ) {
       odebug << "Service Search failed" << oendl;
       sdp_close(session);
@@ -102,8 +102,8 @@ void OTPeer::updateServices( void ) {
 
       for (; attrlist; attrlist = attrlist->next) {
         int attrID = ((sdp_data_t*)(attrlist->data))->attrId;
-        service->addAttribute( 
-              attrID, 
+        service->addAttribute(
+              attrID,
               new OTSDPAttribute( (sdp_data_t*)(attrlist->data) )
             );
       }
@@ -232,13 +232,13 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
               char buf[L2CAP_CMD_HDR_SIZE + PINGSIZE + 20];
               int n;
 
-              pf[0].fd = ProbeFD; 
+              pf[0].fd = ProbeFD;
               pf[0].events = POLLOUT;
               if( (n = ::poll(pf, 1, 0)) < 0 ) {
                 odebug << address().toString()
-                      << " : errno " 
-                      << errno 
-                      << " " 
+                      << " : errno "
+                      << errno
+                      << " "
                       << strerror(errno)<<oendl;
                 ProbeTimeout = 0;
                 break;
@@ -267,19 +267,19 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
                   // connect because the device does not allow us
                   // but it is UP
                   odebug << address().toString()
-                        << " good send error " 
-                        << errno 
-                        << " " 
-                        << strerror( errno) 
+                        << " good send error "
+                        << errno
+                        << " "
+                        << strerror( errno)
                         << oendl;
                   State = OTPeer::Peer_Up;
                   ProbeTimeout = 0;
                   break;
                 } else if( errno != EBUSY ) {
                   odebug << address().toString()
-                        << " : errno " 
-                        << errno 
-                        << " " 
+                        << " : errno "
+                        << errno
+                        << " "
                         << strerror(errno)
                         << oendl;
                   ProbeTimeout = 0;
@@ -296,13 +296,13 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
               l2cap_cmd_hdr *cmd = (l2cap_cmd_hdr *) buf;
               int n;
 
-              pf[0].fd = ProbeFD; 
+              pf[0].fd = ProbeFD;
               pf[0].events = POLLIN;
               if( (n = ::poll(pf, 1, 0)) < 0 ) {
                 odebug << address().toString()
-                      << " : errno " 
-                      << errno 
-                      << " " 
+                      << " : errno "
+                      << errno
+                      << " "
                       << strerror(errno)
                       <<oendl;
                 ProbeTimeout = 0;
@@ -316,10 +316,10 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
 
               if( (n = ::recv( ProbeFD, buf, sizeof(buf), 0)) < 0) {
                 odebug << address().toString()
-                      << "errno " 
-                      << errno 
-                      << " " 
-                      << strerror(errno) 
+                      << "errno "
+                      << errno
+                      << " "
+                      << strerror(errno)
                       << oendl;
                 ProbeTimeout = 0;
                 break;
@@ -330,10 +330,10 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
                 // not our reply
                 break;
 
-              odebug << "reply from " 
+              odebug << "reply from "
                     << address().toString()
                     << oendl;
-              // whatever reply we get is a valid reply 
+              // whatever reply we get is a valid reply
               State = OTPeer::Peer_Up;
               ProbeTimeout = 0;
             }
@@ -343,7 +343,7 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
         if( State != OTPeer::Peer_Unknown ) {
           ProbeTimeout = 0;
         }
-      } 
+      }
 
       if( ProbeTimeout <= 0 ) {
         // regular timeout
@@ -354,7 +354,7 @@ void OTPeer::timerEvent( QTimerEvent * ev ) {
         if( ProbeFD >= 0 ) {
           // requested to stop by caller -> stop probing
           ::close( ProbeFD );
-        } 
+        }
         // no more waiting
         killTimer( ev->timerId() );
       }  // else sleep some more

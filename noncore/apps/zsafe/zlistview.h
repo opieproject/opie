@@ -19,14 +19,14 @@ class ZListView : public QListView
 
   protected:
     ZSafe *zs;
-    
+
   public:
     ZListView(ZSafe *, const char *);
     ~ZListView();
 
   public slots:
 
-  protected:  
+  protected:
     virtual void keyPressEvent ( QKeyEvent * e );
 };
 

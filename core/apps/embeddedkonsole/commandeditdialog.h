@@ -13,13 +13,13 @@ public:
 
 protected:
   void accept();
-  
+
 public slots:
   void showEditDialog();
   void showAddDialog();
-  
+
 signals:
-  void commandsEdited();  
+  void commandsEdited();
 };
 
 #endif

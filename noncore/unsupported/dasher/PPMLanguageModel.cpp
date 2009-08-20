@@ -16,7 +16,7 @@ using namespace std;
 typedef unsigned long ulong;
 
 ////////////////////////////////////////////////////////////////////////
-/// PPMnode definitions 
+/// PPMnode definitions
 ////////////////////////////////////////////////////////////////////////
 
 CPPMLanguageModel::CPPMnode *CPPMLanguageModel::CPPMnode::find_symbol(int sym)
@@ -42,7 +42,7 @@ CPPMLanguageModel::CPPMnode * CPPMLanguageModel::CPPMnode::add_symbol_to_node(in
 		born->next=child;
 		child=born;
 		//   node->count=1;
-		return born;		
+		return born;
 	} else {
 		if (*update) {   // perform update exclusions
 			search->count++;
@@ -50,7 +50,7 @@ CPPMLanguageModel::CPPMnode * CPPMLanguageModel::CPPMnode::add_symbol_to_node(in
 		}
 		return search;
 	}
-	
+
 }
 
 
@@ -78,15 +78,15 @@ bool CPPMLanguageModel::GetProbs(CContext *context,vector<unsigned int> &probs,d
 {
 	// seems like we have to have this hack for VC++
 	CPPMContext *ppmcontext=static_cast<CPPMContext *> (context);
-	
-	
+
+
 	int modelchars=GetNumberModelChars();
 	int norm=CLanguageModel::normalization();
 	probs.resize(modelchars);
-	CPPMnode *temp,*s; 
+	CPPMnode *temp,*s;
 	int loop,total;
-	int sym; 
-	// ulong spent=0; 
+	int sym;
+	// ulong spent=0;
 	ulong size_of_slice;
 	bool *exclusions=new bool [modelchars];
 	ulong uniform=modelchars;
@@ -102,7 +102,7 @@ bool CPPMLanguageModel::GetProbs(CContext *context,vector<unsigned int> &probs,d
 		total=0;
 		s=temp->child;
 		while (s) {
-			sym=s->symbol; 
+			sym=s->symbol;
 			if (!exclusions[s->symbol])
 				total=total+s->count;
 			s=s->next;
@@ -116,9 +116,9 @@ bool CPPMLanguageModel::GetProbs(CContext *context,vector<unsigned int> &probs,d
 					exclusions[s->symbol]=1;
 					ulong p=size_of_slice*(2*s->count-1)/2/ulong(total);
 					probs[s->symbol]+=p;
-					tospend-=p;		
+					tospend-=p;
 				}
-				//				Usprintf(debug,TEXT("sym %u counts %d p %u tospend %u \n"),sym,s->count,p,tospend);	 
+				//				Usprintf(debug,TEXT("sym %u counts %d p %u tospend %u \n"),sym,s->count,p,tospend);
 				//				DebugOutput(debug);
 				s=s->next;
 			}
@@ -127,20 +127,20 @@ bool CPPMLanguageModel::GetProbs(CContext *context,vector<unsigned int> &probs,d
 	}
 	//	Usprintf(debug,TEXT("Norm %u tospend %u\n"),Norm,tospend);
 	//	DebugOutput(debug);
-	
+
 	size_of_slice=tospend;
 	int symbolsleft=0;
 	for (sym=1;sym<modelchars;sym++)
 		if (!probs[sym])
 			symbolsleft++;
-		for (sym=1;sym<modelchars;sym++) 
+		for (sym=1;sym<modelchars;sym++)
 			if (!probs[sym]) {
 				ulong p=size_of_slice/symbolsleft;
 				probs[sym]+=p;
 				tospend-=p;
 			}
-			
-			// distribute what's left evenly	
+
+			// distribute what's left evenly
 			tospend+=uniform;
 			for (sym=1;sym<modelchars;sym++) {
 				ulong p=tospend/(modelchars-sym);
@@ -149,7 +149,7 @@ bool CPPMLanguageModel::GetProbs(CContext *context,vector<unsigned int> &probs,d
 			}
 			//	Usprintf(debug,TEXT("finaltospend %u\n"),tospend);
 			//	DebugOutput(debug);
-			
+
 			// free(exclusions); // !!!
 			// !!! NB by IAM: p577 Stroustrup 3rd Edition: "Allocating an object using new and deleting it using free() is asking for trouble"
 			delete[] exclusions;
@@ -165,17 +165,17 @@ void CPPMLanguageModel::AddSymbol(CPPMLanguageModel::CPPMContext &context,int sy
 	// sanity check
 	if (symbol==0 || symbol>=GetNumberModelChars())
 		return;
-	
+
 	CPPMnode *vineptr,*temp;
 	int updatecnt=1;
-	
+
 	temp=context.head->vine;
 	context.head=context.head->add_symbol_to_node(symbol,&updatecnt);
 	vineptr=context.head;
 	context.order++;
-	
+
 	while (temp!=0) {
-		vineptr->vine=temp->add_symbol_to_node(symbol,&updatecnt);    
+		vineptr->vine=temp->add_symbol_to_node(symbol,&updatecnt);
 		vineptr=vineptr->vine;
 		temp=temp->vine;
 	}
@@ -191,10 +191,10 @@ void CPPMLanguageModel::AddSymbol(CPPMLanguageModel::CPPMContext &context,int sy
 void CPPMLanguageModel::EnterSymbol(CContext* Context, modelchar Symbol)
 {
 	CPPMLanguageModel::CPPMContext& context = * static_cast<CPPMContext *> (Context);
-	
+
 	CPPMnode *find;
 	// CPPMnode *temp=context.head;
-	
+
 	while (context.head) {
 		find =context.head->find_symbol(Symbol);
 		if (find) {
@@ -207,12 +207,12 @@ void CPPMLanguageModel::EnterSymbol(CContext* Context, modelchar Symbol)
 		context.order--;
 		context.head=context.head->vine;
 	}
-	
+
 	if (context.head==0) {
 		context.head=root;
 		context.order=0;
 	}
-	
+
 }
 
 
@@ -265,7 +265,7 @@ void CPPMLanguageModel::dumpTrie( CPPMLanguageModel::CPPMnode *, int )
 		//TODO: Uncomment this when headers sort out
 		//DebugOutput(debug);
 	}
-	
+
 	dumpString( dumpTrieStr, 0, d );
 	Usprintf( debug,TEXT(">\n") );
 	//TODO: Uncomment this when headers sort out
@@ -274,7 +274,7 @@ void CPPMLanguageModel::dumpTrie( CPPMLanguageModel::CPPMnode *, int )
 		s = t->child;
 		while (s != 0) {
 			sym =s->symbol;
-			
+
 			dumpTrieStr [d] = sym;
 			dumpTrie( s, d+1 );
 			s = s->next;

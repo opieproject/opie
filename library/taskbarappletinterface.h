@@ -39,7 +39,7 @@ struct TaskbarAppletInterface : public QUnknownInterface
     virtual int position() const = 0;
 };
 
-// {7505E192-4977-465A-B72F-0A8DD491CF43} 
+// {7505E192-4977-465A-B72F-0A8DD491CF43}
 #ifndef IID_TaskbarNamedApplet
 #define IID_TaskbarNamedApplet QUuid( 0x7505e192, 0x4977, 0x465a, 0xb7, 0x2f, 0x0a, 0x8d, 0xd4, 0x91, 0xcf, 0x43)
 #endif

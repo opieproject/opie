@@ -193,7 +193,7 @@ void PageListBox::updateView()
         for (; it.current(); ++it) {
             new PageListBoxItem(it.current(), this);
         }
-        
+
         select(m_pDrawPadCanvas->currentPage());
     }
 }

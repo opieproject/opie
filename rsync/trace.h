@@ -2,19 +2,19 @@
  *
  * librsync -- generate and apply network deltas
  * $Id: trace.h,v 1.2 2003-11-03 16:52:30 eilers Exp $
- * 
+ *
  * Copyright (C) 2000, 2001 by Martin Pool <mbp@samba.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -39,7 +39,7 @@
 #if defined(HAVE_VARARG_MACROS) && defined(__GNUC__)
 /*
  * TODO: Don't assume this is a gcc thing; rather test in autoconf for
- * support for __FUNCTION__.  One simple way might just be to try compiling 
+ * support for __FUNCTION__.  One simple way might just be to try compiling
  * the definition of one of these functions!
  *
  * TODO: Also look for the C9X predefined identifier `_function', or

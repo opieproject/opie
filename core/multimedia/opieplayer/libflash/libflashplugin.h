@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef LIBFLASH_PLUGIN_H 
+#ifndef LIBFLASH_PLUGIN_H
 #define LIBFLASH_PLUGIN_H
 
 
@@ -30,14 +30,14 @@
 class LibFlashPlugin : public MediaPlayerDecoder {
 
 public:
-    LibFlashPlugin(); 
+    LibFlashPlugin();
     ~LibFlashPlugin() { close(); }
- 
+
     const char *pluginName() { return "LibFlashPlugin: " PLUGIN_NAME " " FLASH_VERSION_STRING; }
     const char *pluginComment() { return "This is the libflash library: " PLUGIN_NAME " " FLASH_VERSION_STRING; }
     double pluginVersion() { return 1.0; }
 
-    bool isFileSupported( const QString& fileName ) { return fileName.right(4) == ".swf"; } 
+    bool isFileSupported( const QString& fileName ) { return fileName.right(4) == ".swf"; }
     bool open( const QString& fileName );
     bool close() { FlashClose( file ); file = NULL; return TRUE; }
     bool isOpen() { return file != NULL; }

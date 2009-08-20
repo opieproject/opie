@@ -273,7 +273,7 @@ BOOL CSoundFile::ReadPSM(LPCBYTE lpStream, DWORD dwMemLength)
 		{
 			UINT flags = p[pos++];
 			UINT ch = p[pos++];
-			
+
 		#ifdef PSM_LOG
 			//Log("flags+ch: %02X.%02X\n", flags, ch);
 		#endif

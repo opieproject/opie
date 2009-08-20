@@ -31,7 +31,7 @@ extern void ITUnpack16Bit(signed char *pSample, DWORD dwLen, LPBYTE lpMemFile, D
 
 
 // Compression table
-static const signed char UnpackTable[MAX_PACK_TABLES][16] = 
+static const signed char UnpackTable[MAX_PACK_TABLES][16] =
 //--------------------------------------------
 {
 	// CPU-generated dynamic table
@@ -79,7 +79,7 @@ CSoundFile::CSoundFile()
 
 CSoundFile::~CSoundFile()
 //-----------------------
-{	
+{
 	Destroy();
 }
 
@@ -425,7 +425,7 @@ UINT CSoundFile::GetRawSongComments(LPSTR s, UINT len, UINT linesize)
 		BYTE c = (BYTE)*p++;
 		if ((c == 0x0D)	|| (c == 0x0A))
 		{
-			if (ln) 
+			if (ln)
 			{
 				while (ln < linesize) { if (s) s[i] = ' '; i++; ln++; }
 				ln = 0;
@@ -566,7 +566,7 @@ UINT CSoundFile::GetCurrentPos() const
 
 	for (UINT i=0; i<m_nCurrentPattern; i++) if (Order[i] < MAX_PATTERNS)
 		pos += PatternSize[Order[i]];
-	return pos + m_nRow; 
+	return pos + m_nRow;
 }
 
 
@@ -825,7 +825,7 @@ BOOL CSoundFile::CanPackSample(LPSTR pSample, UINT nLen, UINT nPacking, BYTE *re
 	int pos, old, oldpos, besttable = 0;
 	DWORD dwErr, dwTotal, dwResult;
 	int i,j;
-	
+
 	if (result) *result = 0;
 	if ((!pSample) || (nLen < 1024)) return FALSE;
 	// Try packing with different tables
@@ -870,7 +870,7 @@ UINT CSoundFile::WriteSample(FILE *f, MODINSTRUMENT *pins, UINT nFlags, UINT nMa
 	signed char buffer[4096];
 	signed char *pSample = (signed char *)pins->pSample;
 	UINT nLen = pins->nLength;
-	
+
 	if ((nMaxLen) && (nLen > nMaxLen)) nLen = nMaxLen;
 	if ((!pSample) || (f == NULL) || (!nLen)) return 0;
 	switch(nFlags)
@@ -879,7 +879,7 @@ UINT CSoundFile::WriteSample(FILE *f, MODINSTRUMENT *pins, UINT nFlags, UINT nMa
 	// 3: 4-bit ADPCM data
 	case RS_ADPCM4:
 		{
-			int pos; 
+			int pos;
 			len = (nLen + 1) / 2;
 			fwrite(CompressionTable, 16, 1, f);
 			bufcount = 0;
@@ -1630,7 +1630,7 @@ DWORD CSoundFile::TransposeToFrequency(int transp, int ftune)
 {
 	//---GCCFIX:  Removed assembly.
 	return (DWORD)(8363*pow(2, (transp*128+ftune)/(1536)));
-	
+
 #ifdef WIN32
 	const float _fbase = 8363;
 	const float _factor = 1.0f/(12.0f*128.0f);
@@ -1670,12 +1670,12 @@ int CSoundFile::FrequencyToTranspose(DWORD freq)
 {
 	//---GCCFIX:  Removed assembly.
 	return int(1536*(log(freq/8363)/log(2)));
-	
+
 #ifdef WIN32
 	const float _f1_8363 = 1.0f / 8363.0f;
 	const float _factor = 128 * 12;
 	LONG result;
-	
+
 	if (!freq) return 0;
 	_asm {
 	fld _factor

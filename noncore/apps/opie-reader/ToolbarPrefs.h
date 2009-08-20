@@ -25,15 +25,15 @@
 #endif
 #define USECOMBO
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 //class QCheckBox;
 class QLabel;
 //class QSpinBox;
 /*
 class CBarPrefs1 : public QWidget
-{ 
+{
     Q_OBJECT
 
 	Config& config;
@@ -52,7 +52,7 @@ class CBarPrefs1 : public QWidget
 };
 */
 class CFileBarPrefs : public QWidget
-{ 
+{
     Q_OBJECT
 
 	Config& config;
@@ -71,7 +71,7 @@ class CFileBarPrefs : public QWidget
 };
 
 class CNavBarPrefs : public QWidget
-{ 
+{
     Q_OBJECT
 
 	Config& config;
@@ -91,7 +91,7 @@ class CNavBarPrefs : public QWidget
 };
 /*
 class CBarPrefs2 : public QWidget
-{ 
+{
     Q_OBJECT
 	Config& config;
     QCheckBox *fullscreen, *zoom, *setfont, *mark, *annotate, *go_to, *Delete, *autogen, *clear, *save, *tidy, *block, *indannotate, *encoding, *ideogram;
@@ -110,7 +110,7 @@ class CBarPrefs2 : public QWidget
 };
 */
 class CViewBarPrefs : public QWidget
-{ 
+{
     Q_OBJECT
 	Config& config;
     QCheckBox *fullscreen, *rotate, *zoomin, *zoomout, *setfont, *encoding, *ideogram, *invert;
@@ -129,7 +129,7 @@ class CViewBarPrefs : public QWidget
 };
 
 class CMarkBarPrefs : public QWidget
-{ 
+{
     Q_OBJECT
 	Config& config;
     QCheckBox *mark, *annotate, *go_to, *Delete, *autogen, *clear, *save, *tidy, *startblock, *copyblock;
@@ -148,7 +148,7 @@ class CMarkBarPrefs : public QWidget
 };
 
 class CIndBarPrefs : public QWidget
-{ 
+{
     Q_OBJECT
 	Config& config;
     QCheckBox *indannotate;
@@ -167,7 +167,7 @@ class CIndBarPrefs : public QWidget
 };
 
 class CMiscBarPrefs : public QWidget
-{ 
+{
 
 public:
 

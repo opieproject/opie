@@ -20,7 +20,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 FViewer::FViewer(QString icon, QString filename, QString title, QWidget *parent, const char*name):QWidget(parent, name)
 {
 	QVBoxLayout *layout = new QVBoxLayout(this);
-	
+
 	setIcon(Opie::Core::OResource::loadPixmap("opie-sh", Opie::Core::OResource::SmallIcon));
 
 	textView = new QTextBrowser(this, "textview");
@@ -36,7 +36,7 @@ FViewer::FViewer(QString icon, QString filename, QString title, QWidget *parent,
 	{
 		setCaption(title);
 	}
-	
+
 	file = new QFile();
 
 	if(!filename.isNull())
@@ -48,7 +48,7 @@ FViewer::FViewer(QString icon, QString filename, QString title, QWidget *parent,
 	{
 		file->open(IO_ReadOnly, 0);
 	}
-	
+
 	stream =  new QTextStream(file);
 
 	string = stream->read();

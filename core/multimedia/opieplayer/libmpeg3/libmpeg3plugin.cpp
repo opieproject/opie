@@ -24,18 +24,18 @@
 
 
 bool LibMpeg3Plugin::audioReadSamples( short *output, int channel, long samples, int stream ) {
-    return file ? mpeg3_read_audio( file, 0, output, 0, channel, samples, stream ) == 1 : FALSE; 
+    return file ? mpeg3_read_audio( file, 0, output, 0, channel, samples, stream ) == 1 : FALSE;
 }
 
 
 bool LibMpeg3Plugin::audioReReadSamples( short *output, int channel, long samples, int stream ) {
-    return file ? mpeg3_reread_audio( file, 0, output, 0, channel, samples, stream ) == 1 : FALSE; 
+    return file ? mpeg3_reread_audio( file, 0, output, 0, channel, samples, stream ) == 1 : FALSE;
 }
 
 
 bool LibMpeg3Plugin::audioReadMonoSamples( short *output, long samples, long& samplesRead, int stream ) {
     samplesRead = samples;
-    return file ? mpeg3_read_audio( file, 0, output, 0, 0, samples, stream ) == 1 : FALSE; 
+    return file ? mpeg3_read_audio( file, 0, output, 0, 0, samples, stream ) == 1 : FALSE;
 }
 
 

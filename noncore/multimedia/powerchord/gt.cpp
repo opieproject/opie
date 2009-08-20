@@ -18,9 +18,9 @@
 
 gt::gt()
 {
-  
+
   audio_fd = -1;
-  
+
 }
 
 void gt::Stop(){

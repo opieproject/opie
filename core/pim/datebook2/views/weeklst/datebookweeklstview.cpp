@@ -51,11 +51,11 @@ void DateBookWeekLstView::setEvents(OPimOccurrence::List &ev, const QDate &d, bo
 
     int dayOrder[7];
     if (bStartOnMonday) {
-        for (int d=0; d<7; d++) 
+        for (int d=0; d<7; d++)
             dayOrder[d]=d+1;
-    } 
+    }
     else {
-        for (int d=0; d<7; d++) 
+        for (int d=0; d<7; d++)
             dayOrder[d]=d;
         dayOrder[0]=7;
     }

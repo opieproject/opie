@@ -234,12 +234,12 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 		if (lang == 0) // english
         	if ( shift )
             	temp = QChar( letterMapShift[row][column] );
-        	else 
+        	else
             	temp = QChar( letterMap[row][column] );
 		else if (lang == 1) // korean
         	if ( shift )
             	temp = parseKoreanInput( kletterMapShift[row][column] );
-        	else 
+        	else
             	temp = parseKoreanInput( kletterMap[row][column] );
 
         if ( temp == ' ' ) // space
@@ -558,7 +558,7 @@ void Keyboard::resetState()
  *
  * make a kor/eng swaping key
  *
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
  *
  * how korean input works
  *
@@ -574,7 +574,7 @@ void Keyboard::resetState()
  *
  * the map with everything combined is at ac00 - d7a3
  *
- * to find a combination of schar + mchar in the map, lookup 
+ * to find a combination of schar + mchar in the map, lookup
  * ((schar - 0x1100) * 587) + ((mchar - 0x1161) * 27) + (echar - 0x11a8) + 0xac00)
  *
  */
@@ -603,58 +603,58 @@ QChar Keyboard::parseKoreanInput (ushort c) {
 
 				if (!(echar = constoe(c))) {
 
-					schar = c; mchar = 0; echar = 0; 
+					schar = c; mchar = 0; echar = 0;
 					return QChar(c);
 				}
 
 			}
 			else { // must figure out what the echar is
 
-				if (echar == 0x11a8) { // 
+				if (echar == 0x11a8) { //
 
-					if (c == 0x1100) 		echar = 0x11a9; //  + 
-					else if (c == 0x1109) 	echar = 0x11aa; //  + 
-					else { 
-						schar = c; mchar = 0; echar = 0; 
+					if (c == 0x1100) 		echar = 0x11a9; //  +
+					else if (c == 0x1109) 	echar = 0x11aa; //  +
+					else {
+						schar = c; mchar = 0; echar = 0;
 						return QChar(c);
 					}
 
-				} else if (echar == 0x11ab) { // 
+				} else if (echar == 0x11ab) { //
 
-					if (c == 0x110c)  		echar = 0x11ac; //  + 
-					else if (c == 0x1112)  	echar = 0x11ad; //  + 
+					if (c == 0x110c)  		echar = 0x11ac; //  +
+					else if (c == 0x1112)  	echar = 0x11ad; //  +
 					else {
-						schar = c; mchar = 0; echar = 0; 
+						schar = c; mchar = 0; echar = 0;
 						return QChar(c);
 					}
 
-				} else if (echar == 0x11af) { // 
+				} else if (echar == 0x11af) { //
 
-					if (c == 0x1100) 		echar = 0x11b0; //  + 
-					else if (c == 0x1106) 	echar = 0x11b1; //  + 
-					else if (c == 0x1107) 	echar = 0x11b2; //  + 
-					else if (c == 0x1109) 	echar = 0x11b3; //  + 
-					else if (c == 0x1110) 	echar = 0x11b4; //  + 
-					else if (c == 0x1111) 	echar = 0x11b5; //  + 
-					else if (c == 0x1112) 	echar = 0x11b6; //  + 
+					if (c == 0x1100) 		echar = 0x11b0; //  +
+					else if (c == 0x1106) 	echar = 0x11b1; //  +
+					else if (c == 0x1107) 	echar = 0x11b2; //  +
+					else if (c == 0x1109) 	echar = 0x11b3; //  +
+					else if (c == 0x1110) 	echar = 0x11b4; //  +
+					else if (c == 0x1111) 	echar = 0x11b5; //  +
+					else if (c == 0x1112) 	echar = 0x11b6; //  +
 					else {
-						schar = c; mchar = 0; echar = 0; 
+						schar = c; mchar = 0; echar = 0;
 						return QChar(c);
 					}
 
-				} else if (echar == 0x11b8) { // 
+				} else if (echar == 0x11b8) { //
 
-					if (c == 0x1109) 		echar = 0x11b9; //  + 
+					if (c == 0x1109) 		echar = 0x11b9; //  +
 					else {
-						schar = c; mchar = 0; echar = 0; 
+						schar = c; mchar = 0; echar = 0;
 						return QChar(c);
 					}
 
-				} else if (echar == 0x11ba) { //  
+				} else if (echar == 0x11ba) { //
 
-					if (c == 0x1109) 		echar = 0x11bb; //  +  
+					if (c == 0x1109) 		echar = 0x11bb; //  +
 					else {
-						schar = c; mchar = 0; echar = 0; 
+						schar = c; mchar = 0; echar = 0;
 						return QChar(c);
 					}
 
@@ -701,7 +701,7 @@ QChar Keyboard::parseKoreanInput (ushort c) {
 						return QChar(c);
 					}
 					break;
-				default: 
+				default:
 					schar = 0; mchar = 0; echar = 0;
 					return QChar(c);
 			}
@@ -715,7 +715,7 @@ QChar Keyboard::parseKoreanInput (ushort c) {
 				/*
 				case 0x11a9:
 					prev = combineKoreanChars(schar, mchar, 0x11a8);
-					schar = 0x1100; 
+					schar = 0x1100;
 					break;
 				*/
 				case 0x11aa:
@@ -724,7 +724,7 @@ QChar Keyboard::parseKoreanInput (ushort c) {
 					break;
 				case 0x11ac:
 					prev = combineKoreanChars(schar, mchar, 0x11ab);
-					schar = 0x110c; 
+					schar = 0x110c;
 					break;
 				case 0x11ad:
 					prev = combineKoreanChars(schar, mchar, 0x11ab);
@@ -732,7 +732,7 @@ QChar Keyboard::parseKoreanInput (ushort c) {
 					break;
 				case 0x11b0:
 					prev = combineKoreanChars(schar, mchar, 0x11af);
-					schar = 0x1100; 
+					schar = 0x1100;
 					break;
 				case 0x11b1:
 					prev = combineKoreanChars(schar, mchar, 0x11af);
@@ -740,7 +740,7 @@ QChar Keyboard::parseKoreanInput (ushort c) {
 					break;
 				case 0x11b2:
 					prev = combineKoreanChars(schar, mchar, 0x11af);
-					schar = 0x1107; 
+					schar = 0x1107;
 					break;
 				case 0x11b3:
 					prev = combineKoreanChars(schar, mchar, 0x11af);
@@ -757,32 +757,32 @@ QChar Keyboard::parseKoreanInput (ushort c) {
 				/*
 				case 0x11bb:
 					prev = combineKoreanChars(schar, mchar, 0x11ba);
-					schar = 0x1109; 
+					schar = 0x1109;
 					break;
 				*/
-				default: 
+				default:
 
 					if (constoe(echar)) {
 
 						prev = combineKoreanChars(schar, mchar, 0);
-						schar = constoe(echar); 
-					} 
+						schar = constoe(echar);
+					}
 					break;
 			}
-			
+
 			emit key( prev, prev, 0, true, false );
 
 			mchar = c; echar = 0;
 
 			return QChar(combineKoreanChars(schar, mchar, 0));
-		
-		} 
+
+		}
 		else {
 			schar = 0; mchar = 0; echar = 0;
 			return QChar(c);
 		}
 
-	} 
+	}
 	else if (c == ' ') return QChar(c);
 
 

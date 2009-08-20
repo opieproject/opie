@@ -113,7 +113,7 @@ private:
      */
 
     int sm_none, sm_left, sm_right;
-    
+
     TabWidget* m_consoleWindow;
     QToolBar* m_tool;
     QToolBar* m_icons;

@@ -34,7 +34,7 @@ struct OPimBase {
      * -zecke
      */
 private:
-    OPimBasePrivate* d;     
+    OPimBasePrivate* d;
 
 };
 /**
@@ -65,9 +65,9 @@ public:
     OPimRecord* record()const;
     OPimRecord* record(int uid )const;
     static T* rec();
-    
+
 private:
-    OTemplateBasePrivate *d;    
+    OTemplateBasePrivate *d;
 };
 
 /*

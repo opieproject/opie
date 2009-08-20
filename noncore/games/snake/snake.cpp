@@ -27,7 +27,7 @@ static int Piecekey[4][4] = { {6, 0, 4, 3 }, {0, 6, 2, 1 }, { 1, 3, 5, 0 }, {2, 
 
 Snake::Snake(QCanvas* c)
 {
-   canvas = c; 
+   canvas = c;
    score = 0;
    snakelist.setAutoDelete(true);
    autoMoveTimer = new QTimer(this);
@@ -41,29 +41,29 @@ void Snake::createSnake()
    QString s0 = Opie::Core::OResource::findPixmap("snake/s0001");
    s0.replace(QRegExp("0001"),"%1");
    snakeparts->readPixmaps(s0, 15);
- 
+
    grow = 0;
    last = Key_Right;
- 
+
    QCanvasSprite* head = new QCanvasSprite(snakeparts, canvas );
    head->setFrame(7);
    snakelist.insert(0, head);
    head->show();
    head->move(34, 16);
- 
+
    QCanvasSprite* body = new QCanvasSprite(snakeparts, canvas );
    body->setFrame(6);
    snakelist.append( body );
    body->show();
    body->move(18, 16);
- 
+
    QCanvasSprite* end = new QCanvasSprite(snakeparts, canvas );
    end->setFrame(11);
    snakelist.append( end );
    end->show();
    end->move(2, 16);
- 
-   currentdir = right; 
+
+   currentdir = right;
    speed = 250;
    autoMoveTimer->start(speed);
    moveSnake();
@@ -71,7 +71,7 @@ void Snake::createSnake()
 
 void Snake::increaseSpeed()
 {
-   if (speed > 150) 
+   if (speed > 150)
        speed = speed - 5;
    autoMoveTimer->start(speed);
 }
@@ -79,10 +79,10 @@ void Snake::increaseSpeed()
 void Snake::go(int newkey)
 {
    // check key is a direction
-   if (!( (newkey == Key_Up) || (newkey == Key_Left) || 
+   if (!( (newkey == Key_Up) || (newkey == Key_Left) ||
           (newkey == Key_Right) || (newkey == Key_Down) ))
         return;
-   // check move is possible   
+   // check move is possible
    if ( ((currentdir == left) && ((newkey == Key_Right) || (newkey == Key_Left)) ) ||
         ((currentdir == right) && ((newkey == Key_Left) || (newkey == Key_Right)) ) ||
         ((currentdir == up) && ((newkey == Key_Down) || (newkey == Key_Up)) ) ||
@@ -92,7 +92,7 @@ void Snake::go(int newkey)
        Snake::changeHead(newkey);
        Snake::moveSnake();
    }
-}   
+}
 
 void Snake::move(Direction dir)
 {
@@ -118,18 +118,18 @@ void Snake::move(Direction dir)
    else
       grow--;
    sprite->show();
- 
+
    currentdir = dir;
-}                
+}
 
 void Snake::changeTail()
 {
    snakelist.removeLast();
- 
+
    double lastx = snakelist.last()->x();
    double prevx = snakelist.prev()->x();
    int index = 0;
- 
+
      if ( prevx == lastx ) {  //vertical
          if ( snakelist.prev()->y() > snakelist.last()->y() )
               index = 13;
@@ -141,15 +141,15 @@ void Snake::changeTail()
          else
               index = 12;
      }
- 
+
      snakelist.last()->setFrame(index);
 }
- 
+
 void Snake::changeHead(int lastkey)
 {
    int index = 0;
    last = lastkey;
- 
+
    switch (last)
    {
       case Key_Up: index = 10; break;
@@ -157,7 +157,7 @@ void Snake::changeHead(int lastkey)
       case Key_Right: index = 7; break;
       case Key_Down: index = 9;  break;
    }
- 
+
     if (index) {
        snakelist.first()->setFrame(index);
     }
@@ -168,11 +168,11 @@ int Snake::lookUpPiece(Direction currentdir, Direction newdir)
 {
    return Piecekey[currentdir][newdir];
 }
- 
+
 void Snake::extendSnake()
 {
    grow++;
-}         
+}
 
 void Snake::moveSnake()
 {
@@ -199,7 +199,7 @@ void Snake::detectCrash()
               target->done();
               emit targethit();
               extendSnake();
-              setScore(5); 
+              setScore(5);
               return;
        }
        // check if snake hit obstacles
@@ -212,7 +212,7 @@ void Snake::detectCrash()
     //check if snake hit itself
     for (uint i = 3; i < snakelist.count(); i++) {
        if (head->collidesWith(snakelist.at(i)) ) {
-            emit dead(); 
+            emit dead();
             autoMoveTimer->stop();
             return;
        }
@@ -220,14 +220,14 @@ void Snake::detectCrash()
    //check if snake hit edge
    if ( (head->x() > canvas->width()-5) || (head->y() > canvas->height()-10)
          || (head->x() <2) || (head->y() <-5) ) {
-        emit dead(); 
+        emit dead();
         autoMoveTimer->stop();
-        return; 
+        return;
    }
-} 
+}
 
 void Snake::setScore(int amount)
-{ 
+{
    score = score + amount;
    emit scorechanged();
 }

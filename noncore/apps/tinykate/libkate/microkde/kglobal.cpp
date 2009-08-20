@@ -12,7 +12,7 @@ KLocale *KGlobal::locale()
   if ( !mLocale ) {
     mLocale = new KLocale();
   }
-  
+
   return mLocale;
 }
 
@@ -21,7 +21,7 @@ KateConfig *KGlobal::config()
   if ( !mConfig ) {
     mConfig = new KateConfig( mAppName );
   }
-  
+
   return mConfig;
 }
 
@@ -30,7 +30,7 @@ KIconLoader *KGlobal::iconLoader()
   if ( !mIconLoader ) {
     mIconLoader = new KIconLoader();
   }
-  
+
   return mIconLoader;
 }
 
@@ -39,7 +39,7 @@ KStandardDirs *KGlobal::dirs()
   if ( !mDirs ) {
     mDirs = new KStandardDirs();
   }
-  
+
   return mDirs;
 }
 

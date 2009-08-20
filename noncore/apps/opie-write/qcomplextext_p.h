@@ -3,7 +3,7 @@
 **
 ** Internal header file.
 **
-** Created : 
+** Created :
 **
 ** Copyright (C) 2001 Trolltech AS.  All rights reserved.
 **
@@ -123,7 +123,7 @@ public:
     // positions non spacing marks relative to the base character at position pos.
     static QPointArray positionMarks( QFontPrivate *f, const QString &str, int pos, QRect *boundingRect = 0 );
 
-    static QPtrList<QTextRun> *bidiReorderLine( QBidiControl *control, const QString &str, int start, int len, 
+    static QPtrList<QTextRun> *bidiReorderLine( QBidiControl *control, const QString &str, int start, int len,
 						QChar::Direction basicDir = QChar::DirON );
     static QString bidiReorderString( const QString &str, QChar::Direction basicDir = QChar::DirON );
 };

@@ -101,10 +101,10 @@ struct ColorEntry
 {
   ColorEntry(QColor c, bool tr, bool b) : color(c), transparent(tr), bold(b) {}
   ColorEntry() : transparent(false), bold(false) {} // default constructors
-  void operator=(const ColorEntry& rhs) { 
-       color = rhs.color; 
-       transparent = rhs.transparent; 
-       bold = rhs.bold; 
+  void operator=(const ColorEntry& rhs) {
+       color = rhs.color;
+       transparent = rhs.transparent;
+       bold = rhs.bold;
   }
   QColor color;
   bool   transparent; // if used on bg

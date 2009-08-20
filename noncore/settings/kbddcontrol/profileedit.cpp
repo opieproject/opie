@@ -2,24 +2,24 @@
                =.            This file is part of the Opie Project
              .=l.            Copyright (C) 2009 Opie Developer Team <opie-devel@handhelds.org>
            .>+-=
- _;:,     .>    :=|.         This program is free software; you can 
+ _;:,     .>    :=|.         This program is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
 :`=1 )Y*s>-.--   :           the terms of the GNU General Public
 .="- .-=="i,     .._         License as published by the Free Software
  - .   .-<_>     .<>         Foundation; either version 2 of the License,
      ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.        
-    .i_,=:_.      -<s.       This program is distributed in the hope that  
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
     : ..    .:,     . . .    without even the implied warranty of
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
 ..}^=.=       =       ;      Library General Public License for more
 ++=   -.     .`     .:       details.
- :     =  ...= . :.=-        
+ :     =  ...= . :.=-
  -.   .:....=;==+<;          You should have received a copy of the GNU
   -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB. 
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -44,8 +44,8 @@
 KbddProfileEditor::KbddProfileEditor( QWidget* parent, const char* name, WFlags fl )
         : KbddProfileEditorBase( parent, name, TRUE, fl ) {
     leName->setText(tr("Keyboard"));
-    
-    // FIXME we need to do better than this 
+
+    // FIXME we need to do better than this
     // (some way of getting a list from the application perhaps?)
     cbKeybType->insertItem("foldable");
     cbKeybType->insertItem("snapntype");
@@ -81,7 +81,7 @@ KbddProfileEditor::KbddProfileEditor( QWidget* parent, const char* name, WFlags 
     cbDevice->insertItem("/dev/ttyS3");
     cbDevice->insertItem("/dev/rfcomm0");
     cbDevice->insertItem("/dev/ircomm0");
-    
+
     // Now remove all items that don't exist on this machine
     for(int i=cbDevice->count();i>=0;i--) {
         if(!QFile::exists(cbDevice->text(i))) {

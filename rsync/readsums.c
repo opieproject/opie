@@ -2,20 +2,20 @@
  *
  * librsync -- the library for network deltas
  * $Id: readsums.c,v 1.1 2002-01-25 22:15:09 kergoth Exp $
- * 
+ *
  * Copyright (C) 1999, 2000, 2001 by Martin Pool <mbp@samba.org>
  * Copyright (C) 1999 by Andrew Tridgell <tridge@samba.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
  * as published by the Free Software Foundation; either version 2.1 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -61,7 +61,7 @@ static rs_result rs_loadsig_add_sum(rs_job_t *job, rs_strong_sum_t *strong)
     new_size = sig->count * sizeof(rs_block_sig_t);
 
     sig->block_sigs = realloc(sig->block_sigs, new_size);
-    
+
     if (sig->block_sigs == NULL) {
         return RS_MEM_ERROR;
     }
@@ -132,7 +132,7 @@ static rs_result rs_loadsig_s_stronglen(rs_job_t *job)
     if ((result = rs_suck_n4(job, &l)) != RS_DONE)
         return result;
     job->strong_sum_len = l;
-    
+
     if (l < 0  ||  l > RS_MD4_LENGTH) {
         rs_error("strong sum length %d is implausible", l);
         return RS_CORRUPT;
@@ -140,12 +140,12 @@ static rs_result rs_loadsig_s_stronglen(rs_job_t *job)
 
     job->signature->block_len = job->block_len;
     job->signature->strong_sum_len = job->strong_sum_len;
-    
+
     rs_trace("allocated sigset_t (strong_sum_len=%d, block_len=%d)",
              (int) job->strong_sum_len, (int) job->block_len);
 
     job->statefn = rs_loadsig_s_weak;
-    
+
     return RS_RUNNING;
 }
 
@@ -166,7 +166,7 @@ static rs_result rs_loadsig_s_blocklen(rs_job_t *job)
 
     job->statefn = rs_loadsig_s_stronglen;
     job->stats.block_len = job->block_len;
-        
+
     return RS_RUNNING;
 }
 
@@ -208,7 +208,7 @@ rs_job_t *rs_loadsig_begin(rs_signature_t **signature)
     job = rs_job_new("loadsig", rs_loadsig_s_magic);
     *signature = job->signature = rs_alloc_struct(rs_signature_t);
     job->signature->count = 0;
-        
+
     return job;
 }
 

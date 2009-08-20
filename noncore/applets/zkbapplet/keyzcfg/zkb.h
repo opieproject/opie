@@ -146,7 +146,7 @@ public:
 	Keymap();
 	virtual ~Keymap();
 
-	virtual bool filter(int unicode, int keycode, int modifiers, 
+	virtual bool filter(int unicode, int keycode, int modifiers,
 		bool isPress, bool autoRepeat);
 
 	void enable();
@@ -164,7 +164,7 @@ public:
 	State* getCurrentState() const;
 	QString getCurrentLabel();
 
-	bool addLabel(const QString& label, const QString& state, 
+	bool addLabel(const QString& label, const QString& state,
 		int index=-1);
 	bool removeLabel(const QString& label);
 

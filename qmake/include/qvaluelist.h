@@ -132,7 +132,7 @@ class QValueListIterator
 	node = node->prev;
 	return tmp;
     }
-    
+
     QValueListIterator<T>& operator+=( int j ) {
 	while ( j-- )
 	    node = node->next;
@@ -472,7 +472,7 @@ public:
 	return TRUE;
     }
 #  ifdef Q_CC_HPACC    // undo the HP-UX aCC hackery done above
-#    undef Q_TYPENAME 
+#    undef Q_TYPENAME
 #    define Q_TYPENAME typename
 #  endif
 #endif

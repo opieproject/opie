@@ -75,13 +75,13 @@ int CardDeck::getNumberOfDecks()
 {
     return numberOfDecks;
 }
-    
+
 
 int CardDeck::getNumberOfJokers()
 {
     return numberOfJokers;
 }
-    
+
 
 Card *CardDeck::newCard( eValue v, eSuit s, bool f)
 {

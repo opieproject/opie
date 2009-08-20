@@ -553,7 +553,7 @@ void MainWindowImp::updateInterface(Interface *i)
         typeName = i->getModuleOwner()->getPixmapName(i);
 
     item->setPixmap( 1, ( Opie::Core::OResource::loadPixmap( "networksettings/" + typeName, Opie::Core::OResource::SmallIcon ) ) );
-    
+
     item->setText(2, i->getHardwareName());
     item->setText(3, QString("(%1)").arg(i->getInterfaceName()));
     item->setText(4, (i->getStatus()) ? i->getIp() : QString(""));

@@ -34,18 +34,18 @@ unsigned char mpeg3_alternate_scan_mmx[64] =
 /* zig-zag scan */
 unsigned char mpeg3_zig_zag_scan_nommx[64] =
 {
-  0, 1, 8, 16, 9, 2, 3, 10, 17, 24, 32, 25, 18, 11, 4, 5, 
-  12, 19, 26, 33, 40, 48, 41, 34, 27, 20, 13, 6, 7, 14, 21, 28, 
-  35, 42, 49, 56, 57, 50, 43, 36, 29, 22, 15, 23, 30, 37, 44, 51, 
+  0, 1, 8, 16, 9, 2, 3, 10, 17, 24, 32, 25, 18, 11, 4, 5,
+  12, 19, 26, 33, 40, 48, 41, 34, 27, 20, 13, 6, 7, 14, 21, 28,
+  35, 42, 49, 56, 57, 50, 43, 36, 29, 22, 15, 23, 30, 37, 44, 51,
   58, 59, 52, 45, 38, 31, 39, 46, 53, 60, 61, 54, 47, 55, 62, 63
 };
 
 /* alternate scan */
 unsigned char mpeg3_alternate_scan_nommx[64] =
 {
-  0, 8, 16, 24, 1, 9, 2, 10, 17, 25, 32, 40, 48, 56, 57, 49, 
-  41, 33, 26, 18, 3, 11, 4, 12, 19, 27, 34, 42, 50, 58, 35, 43, 
-  51, 59, 20, 28, 5, 13, 6, 14, 21, 29, 36, 44, 52, 60, 37, 45, 
+  0, 8, 16, 24, 1, 9, 2, 10, 17, 25, 32, 40, 48, 56, 57, 49,
+  41, 33, 26, 18, 3, 11, 4, 12, 19, 27, 34, 42, 50, 58, 35, 43,
+  51, 59, 20, 28, 5, 13, 6, 14, 21, 29, 36, 44, 52, 60, 37, 45,
   53, 61, 22, 30, 7, 15, 23, 31, 38, 46, 54, 62, 39, 47, 55, 63
 };
 
@@ -62,11 +62,11 @@ unsigned char mpeg3_default_intra_quantizer_matrix[64] =
   27, 29, 35, 38, 46, 56, 69, 83
 };
 
-unsigned char mpeg3_non_linear_mquant_table[32] = 
+unsigned char mpeg3_non_linear_mquant_table[32] =
 {
    0, 1, 2, 3, 4, 5, 6, 7,
-   8, 10, 12, 14, 16, 18, 20, 22, 
-  24, 28, 32, 36, 40, 44, 48, 52, 
+   8, 10, 12, 14, 16, 18, 20, 22,
+  24, 28, 32, 36, 40, 44, 48, 52,
   56, 64, 72, 80, 88, 96, 104, 112
 };
 
@@ -83,7 +83,7 @@ double mpeg3_frame_rate_table[16] =
   60.0,
 
   1,                    /* Unofficial economy rates */
-  5, 
+  5,
   10,
   12,
   15,
@@ -111,16 +111,16 @@ int mpeg3video_initdecoder(mpeg3video_t *video)
 
 /* Get dimensions rounded to nearest multiple of coded macroblocks */
 	video->mb_width = (video->horizontal_size + 15) / 16;
-	video->mb_height = (video->mpeg2 && !video->prog_seq) ? 
-					(2 * ((video->vertical_size + 31) / 32)) : 
+	video->mb_height = (video->mpeg2 && !video->prog_seq) ?
+					(2 * ((video->vertical_size + 31) / 32)) :
 					((video->vertical_size + 15) / 16);
 	video->coded_picture_width = 16 * video->mb_width;
 	video->coded_picture_height = 16 * video->mb_height;
-	video->chrom_width = (video->chroma_format == CHROMA444) ? 
-					video->coded_picture_width : 
+	video->chrom_width = (video->chroma_format == CHROMA444) ?
+					video->coded_picture_width :
 					(video->coded_picture_width >> 1);
-	video->chrom_height = (video->chroma_format != CHROMA420) ? 
-					video->coded_picture_height : 
+	video->chrom_height = (video->chroma_format != CHROMA420) ?
+					video->coded_picture_height :
                     (video->coded_picture_height >> 1);
 	video->blk_cnt = blk_cnt_tab[video->chroma_format - 1];
 
@@ -145,7 +145,7 @@ int mpeg3video_initdecoder(mpeg3video_t *video)
 		video->yuv_buffer[4] = (unsigned char*)calloc(1, size[2] + 2 * size[3]);
 	}
 
-/* Direct pointers to areas of contiguous fragments in YVU order per Microsoft */	
+/* Direct pointers to areas of contiguous fragments in YVU order per Microsoft */
 	for(cc = 0; cc < 3; cc++)
 	{
 		video->llframe0[cc] = 0;
@@ -377,7 +377,7 @@ mpeg3video_t* mpeg3video_new(mpeg3_t *file, mpeg3_vtrack_t *track)
 			minute = video->gop_timecode.minute;
 			second = video->gop_timecode.second;
 			frame = video->gop_timecode.frame;
-			video->first_frame = (long)(hour * 3600 * video->frame_rate + 
+			video->first_frame = (long)(hour * 3600 * video->frame_rate +
 				minute * 60 * video->frame_rate +
 				second * video->frame_rate +
 				frame);
@@ -398,7 +398,7 @@ mpeg3video_t* mpeg3video_new(mpeg3_t *file, mpeg3_vtrack_t *track)
 			second = video->gop_timecode.second;
 			frame = video->gop_timecode.frame;
 
-			video->last_frame = (long)(hour * 3600 * video->frame_rate + 
+			video->last_frame = (long)(hour * 3600 * video->frame_rate +
 				minute * 60 * video->frame_rate +
 				second * video->frame_rate +
 				frame);
@@ -421,8 +421,8 @@ mpeg3video_t* mpeg3video_new(mpeg3_t *file, mpeg3_vtrack_t *track)
 		{
 /* Gross approximation from a multiplexed file. */
 			video->first_frame = 0;
-			track->total_frames = video->last_frame = 
-				(long)(mpeg3demux_length(video->vstream->demuxer) * 
+			track->total_frames = video->last_frame =
+				(long)(mpeg3demux_length(video->vstream->demuxer) *
 					video->frame_rate);
 			video->first_frame = 0;
 		}
@@ -473,7 +473,7 @@ int mpeg3video_previous_frame(mpeg3video_t *video)
 	mpeg3bits_start_reverse(video->vstream);
 	mpeg3video_prev_code(video->vstream, MPEG3_PICTURE_START_CODE);
 	mpeg3bits_getbits_reverse(video->vstream, 32);
-	
+
 	if(mpeg3bits_bof(video->vstream)) mpeg3bits_seek_percentage(video->vstream, 0);
 	mpeg3bits_start_forward(video->vstream);
 	video->repeat_count = 0;
@@ -493,9 +493,9 @@ int mpeg3video_read_raw(mpeg3video_t *video, unsigned char *output, long *size, 
 	mpeg3_bits_t *vstream = video->vstream;
 
 	*size = 0;
-	while(code != MPEG3_PICTURE_START_CODE && 
+	while(code != MPEG3_PICTURE_START_CODE &&
 		code != MPEG3_SEQUENCE_END_CODE &&
-		*size < max_size && 
+		*size < max_size &&
 		!mpeg3bits_eof(vstream))
 	{
 		code <<= 8;
@@ -506,15 +506,15 @@ int mpeg3video_read_raw(mpeg3video_t *video, unsigned char *output, long *size, 
 	return mpeg3bits_eof(vstream);
 }
 
-int mpeg3video_read_frame(mpeg3video_t *video, 
-		long frame_number, 
+int mpeg3video_read_frame(mpeg3video_t *video,
+		long frame_number,
 		unsigned char **output_rows,
-		int in_x, 
-		int in_y, 
-		int in_w, 
-		int in_h, 
-		int out_w, 
-		int out_h, 
+		int in_x,
+		int in_y,
+		int in_w,
+		int in_h,
+		int out_w,
+		int out_h,
 		int color_model)
 {
 	int result = 0;
@@ -562,8 +562,8 @@ int mpeg3video_read_frame(mpeg3video_t *video,
 	return result;
 }
 
-int mpeg3video_read_yuvframe(mpeg3video_t *video, 
-					long frame_number, 
+int mpeg3video_read_yuvframe(mpeg3video_t *video,
+					long frame_number,
 					char *y_output,
 					char *u_output,
 					char *v_output,

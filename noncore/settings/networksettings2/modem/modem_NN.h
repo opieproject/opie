@@ -14,7 +14,7 @@ public:
     ModemNetNode();
     virtual ~ModemNetNode();
 
-    virtual const QString pixmapName() 
+    virtual const QString pixmapName()
       { return "Devices/modem"; }
 
     virtual const QString nodeDescription() ;

@@ -15,7 +15,7 @@ class GraphicScroll : public QScrollView
  protected:
   void hideEvent( QHideEvent * p)
     {
-      m_picture->setFixedSize(1,1);	    
+      m_picture->setFixedSize(1,1);
     }
  public:
   GraphicScroll( QWidget *parent=0, const char *name=0, WFlags f = 0)
@@ -35,7 +35,7 @@ class GraphicScroll : public QScrollView
 class GraphicWin : public QWidget
 {
   Q_OBJECT
-    
+
   GraphicScroll* m_scroll;
   QImage m_im;
   QImage resizeimage(int w, int h);

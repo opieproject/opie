@@ -92,7 +92,7 @@ void CSoundFile::SetupChannelFilter(MODCHANNEL *pChn, BOOL bReset, int flt_modif
 	pChn->nFilter_A0 = (int)(fg * FILTER_PRECISION);
 	pChn->nFilter_B0 = (int)(fb0 * FILTER_PRECISION);
 	pChn->nFilter_B1 = (int)(fb1 * FILTER_PRECISION);
-	
+
 	if (bReset)
 	{
 		pChn->nFilter_Y1 = pChn->nFilter_Y2 = 0;

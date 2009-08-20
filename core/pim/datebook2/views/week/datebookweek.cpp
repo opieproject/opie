@@ -53,7 +53,7 @@ DateBookWeekItem::DateBookWeekItem( const OPimOccurrence e )
     OPimEvent event = e.toEvent();
     if ( event.isAllDay() && !event.hasNotifiers() ) {
         c = Qt::green;
-    } 
+    }
     else {
         c = event.hasNotifiers() ? Qt::red : Qt::blue;
     }
@@ -103,7 +103,7 @@ void DateBookWeekView::initNames()
             for ( int i = 1; i<=7; i++  )  {
                 header->addLabel( Calendar::nameOfDay( i ) );
             }
-        } 
+        }
         else {
             header->addLabel( Calendar::nameOfDay( 7 ) );
             for ( int i = 1; i<7; i++  )  {
@@ -111,14 +111,14 @@ void DateBookWeekView::initNames()
             }
         }
         bFirst = false;
-    } 
+    }
     else {
         // we are change things...
         if ( bOnMonday ) {
             for ( int i = 1; i<=7; i++  )  {
                 header->setLabel( i, Calendar::nameOfDay( i ) );
             }
-        } 
+        }
         else {
             header->setLabel( 1, Calendar::nameOfDay( 7 ) );
             for ( int i = 1; i<7; i++  )  {
@@ -222,7 +222,7 @@ void DateBookWeekView::positionItem( DateBookWeekItem *i )
     if ( ev.isAllDay() ) {
         h = (48 * rowHeight) / 2;
         y = 0;
-    } 
+    }
     else {
         h=y2-y;
         if ( h < (1*rowHeight)/2 ) h = (1*rowHeight)/2;
@@ -317,7 +317,7 @@ void DateBookWeekView::drawContents( QPainter *p, int cx, int cy, int cw, int ch
                     else
                         s = "";
                     s += QString::number( t - 12 ) + tr("p");
-                } 
+                }
                 else {
                     if ( 12 - t < 3 )
                         s = "";
@@ -325,7 +325,7 @@ void DateBookWeekView::drawContents( QPainter *p, int cx, int cy, int cw, int ch
                         s = " ";
                     s += QString::number( t );
                 }
-            } 
+            }
             else {
                 s = QString::number( t );
                 if ( s.length() == 1 )

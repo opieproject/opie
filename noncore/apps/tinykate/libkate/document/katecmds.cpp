@@ -99,7 +99,7 @@ static int backslashString(const QString &haystack, const QString &needle, int i
 		index++;
 
 	}
-	
+
 	return -1;
 }
 
@@ -132,9 +132,9 @@ QString SedReplace::sedMagic(QString textLine, QString find, QString rep, bool n
 	while (start!=-1)
 	{
 		start=matcher.search(textLine, start);
-		
+
 		if (start==-1) break;
-		
+
 		int length=matcher.matchedLength();
 
 
@@ -160,7 +160,7 @@ QString SedReplace::sedMagic(QString textLine, QString find, QString rep, bool n
 					index+=(*i).length();
 				}
 			}
-			
+
 			refnum++;
 		}
 
@@ -171,11 +171,11 @@ QString SedReplace::sedMagic(QString textLine, QString find, QString rep, bool n
 
 	replace(textLine, "\\\\", "\\");
 	replace(textLine, "\\/", "/");
-	
+
 	return textLine;
 }
-	
-	
+
+
 static void setLineText(KateView *view, int line, const QString &text)
 {
 //	view->doc()->removeLine(line);
@@ -188,7 +188,7 @@ bool SedReplace::execCmd(QString cmd, KateView *view)
 	kdDebug(13010)<<"SedReplace::execCmd()"<<endl;
 	if (QRegExp("[$%]?s/.+/.*/[ig]*").find(cmd, 0)==-1)
 		return false;
-	
+
 	bool fullFile=cmd[0]=='%';
 	bool noCase=cmd[cmd.length()-1]=='i' || cmd[cmd.length()-2]=='i';
 	bool repeat=cmd[cmd.length()-1]=='g' || cmd[cmd.length()-2]=='g';
@@ -196,15 +196,15 @@ bool SedReplace::execCmd(QString cmd, KateView *view)
 
 	QRegExp3 splitter("^[$%]?s/((?:[^\\\\/]|\\\\[\\\\/\\$0-9tadDsSwW])*)/((?:[^\\\\/]|\\\\[\\\\/\\$0-9tadDsSwW])*)/[ig]*$");
 	if (splitter.search(cmd)<0) return false;
-	
+
 	QString find=splitter.cap(1);
 	kdDebug(13010)<< "SedReplace: find=" << find.latin1() <<endl;
 
 	QString replace=splitter.cap(2);
 	exchangeAbbrevs(replace);
 	kdDebug(13010)<< "SedReplace: replace=" << replace.latin1() <<endl;
-	
-	
+
+
 	if (fullFile)
 	{
 		int numLines=view->doc()->numLines();
@@ -238,7 +238,7 @@ bool Character::execCmd(QString cmd, KateView *view)
 	cmd=num.cap(1);
 
 	// identify the base
-	
+
 	unsigned short int number=0;
 	int base=10;
 	if (cmd[0]=='x' || cmd.left(2)=="0x")
@@ -263,7 +263,7 @@ bool Character::execCmd(QString cmd, KateView *view)
 		QChar c(number);
 		view->insertText(QString(&c, 1));
 	}
-	
+
 	return true;
 }
 

@@ -165,7 +165,7 @@ void ShutdownImpl::hide ( )
 		// hack - shutdown is a launcher dialog, but treated like a standalone app
 		QCopEnvelope e( "QPE/System", "closing(QString)" );
 		e << QString ( "shutdown" );
-	
+
 	}
 	QWidget::hide ( );
 }

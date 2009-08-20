@@ -10,7 +10,7 @@ class StatusMail
 public:
     StatusMail(QList<Account>&list);
     virtual ~StatusMail();
-    
+
     /* this should be called if opiemail is starte or a mailbox touched - may be trough
        a qcop signal or if tab on the taskbar applet*/
     virtual void reset_status();

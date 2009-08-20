@@ -31,7 +31,7 @@ public:
 
     void clear();
 
-    
+
     int currentItem() const;
     QString currentText() const;
 

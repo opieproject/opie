@@ -24,7 +24,7 @@ MultiauthMainWindow::MultiauthMainWindow(bool allowBypass)
 
     QRect desk = qApp->desktop()->geometry();
     setGeometry( 0, 0, desk.width(), desk.height() );
-    
+
     if (allowBypass == true)
         m_explanScreens = true;
     else
@@ -92,7 +92,7 @@ MultiauthMainWindow::~MultiauthMainWindow() {
 void MultiauthMainWindow::proceed() {
     proceedButton->hide();
     message->setText( "<center><h3>" + tr("Please wait...") + "</h3></center>" );
-    
+
     int result = Internal::runPlugins();
 
     if ( (result == 0) && !m_explanScreens )

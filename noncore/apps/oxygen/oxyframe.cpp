@@ -17,7 +17,7 @@
 
 #include "oxyframe.h"
 
-OxyFrame::OxyFrame(QWidget *parent, const char *name, QString symbol ) 
+OxyFrame::OxyFrame(QWidget *parent, const char *name, QString symbol )
   : QLabel(parent,name)
 {
     N = name;

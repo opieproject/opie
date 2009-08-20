@@ -627,7 +627,7 @@ void QTReader::processmousewordevent(size_t startpos, size_t startoffset, QMouse
 	    while (!QChar((*t)[i]).isLetter() && (*t)[i] != 0) i++;
 	    if ((*t)[i] == 0) break;
 	    first = i;
-	}		
+	}
     }
     if (!wrd.isEmpty())
     {
@@ -1193,7 +1193,7 @@ void QTReader::CalculateScrollParameters()
 	       +
 	       (i != 0) ? textarray[numlines-1]->lineExtraSpacing() : 0
 	       )/2-2;
-	
+
 	m_scrolldy2 = m_scrolldy-ht;
       }
       break;
@@ -1436,7 +1436,7 @@ void QTReader::doinplacescroll()
     {
       if (m_rotated)
 	{
-	  if (lastdy >= 0) 
+	  if (lastdy >= 0)
 	    {
 	      if (m_bgpm.isNull())
 		{
@@ -1451,7 +1451,7 @@ void QTReader::doinplacescroll()
 	}
       else
 	{
-	  if (lastdy >= 0) 
+	  if (lastdy >= 0)
 	    {
 	      if (m_bgpm.isNull())
 		{
@@ -1872,7 +1872,7 @@ void QTReader::redrawall()
 	  drawBackground(dbp);
 	  DrawStraight(dbp, height(), width());
 	  dbp->end();
-	  
+
 	  QWMatrix m;
 	  m.rotate(90);
 	  QPixmap rp = dbuff->xForm(m);
@@ -1886,7 +1886,7 @@ void QTReader::redrawall()
 
 	  drawBackground(&dbp);
 	  DrawStraight(&dbp, height(), width());
-	  
+
 	  QWMatrix m;
 	  m.rotate(90);
 	  QPixmap rp = dbuff.xForm(m);
@@ -1961,7 +1961,7 @@ void QTReader::drawFonts()
 	    redrawall();
 	    //	    qDebug("Not Optimised %d", m_lastwidth);
 	  }
-	else 
+	else
 	  {
 	    int newht = ((m_rotated) ? width() : height());
 	    if (m_lastheight > newht)
@@ -1971,7 +1971,7 @@ void QTReader::drawFonts()
 		int ypos = m_scrolldy1+m_topmargin;
 		for (int i = 0; i < numlines; i++)
 		  {
-		    if ((ypos += textarray[i]->lineSpacing()) > newht - hmargin)		      
+		    if ((ypos += textarray[i]->lineSpacing()) > newht - hmargin)
 		      {
 			numlines = i;
 			jumpto(mylastpos = locnarray[i+1]);
@@ -2441,7 +2441,7 @@ bool QTReader::fillbuffer(int reuse, int ht, int newht)
 	  return true;
 	}
     }
-    
+
     --numlines;
     mylastpos = locate();
     m_scrollpart = m_lastheight - lastypos - hmargin;
@@ -2554,11 +2554,11 @@ void QTReader::dopageup(unsigned int target)
 	      }
 	  }
       }
-      
+
       nbfl = 0;
       ypos = m_topmargin;
 
-      while (locate() < target) 
+      while (locate() < target)
       {
 	  if (buff[nbfl] == NULL) buff[nbfl] = new CDrawBuffer(&m_fontControl);
 	  loc[nbfl] = locate();
@@ -2999,7 +2999,7 @@ void QTReader::setrotated(bool sfs)
     m_bottommargin = (h*m_absbottommargin+500)/1000;
     m_left_border = (w*m_absleft_border+500)/1000;
     m_right_border = (w*m_absright_border+500)/1000;
-    
+
     qDebug("Top margin:%u", m_topmargin );
     qDebug("Bottom margin:%u", m_bottommargin );
     qDebug("Left margin:%u", m_left_border );
@@ -3079,7 +3079,7 @@ void QTReader::drawBackground(QPainter *p)
 	  qDebug("Unknown background type");
 	}
       //      p->setBackgroundMode(OpaqueMode);
-    } 
+    }
 }
 
 void QTReader::blitRot(int dx, int dy, int sw, int sh, CDrawBuffer* txt)
@@ -3095,7 +3095,7 @@ void QTReader::blitRot(int dx, int dy, int sw, int sh, CDrawBuffer* txt)
     }
 
   QPixmap pm(sw, sh);
- 
+
   QPainter pd(&pm, this);
   if (m_bgpm.isNull())
     {
@@ -3111,12 +3111,12 @@ void QTReader::blitRot(int dx, int dy, int sw, int sh, CDrawBuffer* txt)
 	    {
 	      qDebug("Oh no!");
 	    }
-	  
+
 	  if (fh > pm.height())
 	    {
 	      qDebug("Oh no! - 2");
 	    }
-	  
+
 	  bitBlt(&pm,0,0,dbuff,dy,sy,pm.width(),fh);
 	  bitBlt(&pm,0,fh,dbuff,dy,0,pm.width(),pm.height()-fh);
 	}
@@ -3367,7 +3367,7 @@ void QTReader::refresh(bool full)
   m_bottommargin = (h*m_absbottommargin+500)/1000;
   m_left_border = (w*m_absleft_border+500)/1000;
   m_right_border = (w*m_absright_border+500)/1000;
-  
+
   qDebug("Top margin:%u", m_topmargin );
   qDebug("Bottom margin:%u", m_bottommargin );
   qDebug("Left margin:%u", m_left_border );
@@ -3383,11 +3383,11 @@ CFilterChain* QTReader::getfilter()
 {
   CFilterChain * filt = new CFilterChain(getencoding());
   if (bstripcr) filt->addfilter(new stripcr);
-  
+
   if (btextfmt || (bautofmt && (PreferredMarkup() == cTEXT))) filt->addfilter(new textfmt);
   if (bpeanut || (bautofmt && (PreferredMarkup() == cPML))) filt->addfilter(new PeanutFormatter);
   //    if (bstriphtml || (bautofmt && (PreferredMarkup() == cHTML))) filt->addfilter(new striphtml(m_lastfile));
-  
+
 #ifdef __STATIC
   if (bstriphtml || (bautofmt && (PreferredMarkup() == cHTML))) filt->addfilter(new striphtml(m_lastfile));
   if (bautofmt && (PreferredMarkup() == cCHM))
@@ -3407,7 +3407,7 @@ CFilterChain* QTReader::getfilter()
 #endif
   m_highlightfilter = new HighlightFilter(this);
   filt->addfilter(m_highlightfilter);
-  
+
   if (bdehyphen) filt->addfilter(new dehyphen);
   if (bunindent) filt->addfilter(new unindent);
   if (brepara) filt->addfilter(new repara(m_reparastring));

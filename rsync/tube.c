@@ -2,19 +2,19 @@
  *
  * librsync -- dynamic caching and delta update in HTTP
  * $Id: tube.c,v 1.1 2002-01-25 22:15:09 kergoth Exp $
- * 
+ *
  * Copyright (C) 2000, 2001 by Martin Pool <mbp@samba.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
  * the Free Software Foundation; either version 2.1 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -131,14 +131,14 @@ rs_tube_copy_from_scoop(rs_job_t *job)
 
     stream->next_out += this_len;
     stream->avail_out -= this_len;
-        
+
     job->scoop_avail -= this_len;
     job->scoop_next += this_len;
 
     job->copy_len -= this_len;
 
     rs_trace("caught up on %ld copied bytes from scoop, %ld remain there, "
-             "%ld remain to be copied", 
+             "%ld remain to be copied",
              (long) this_len, (long) job->scoop_avail, (long) job->copy_len);
 }
 
@@ -162,7 +162,7 @@ static void rs_tube_catchup_copy(rs_job_t *job)
         /* there's still some data in the scoop, so we should use that. */
         rs_tube_copy_from_scoop(job);
     }
-    
+
     if (job->copy_len) {
         size_t  this_copy;
 
@@ -194,7 +194,7 @@ int rs_tube_catchup(rs_job_t *job)
 
     if (job->copy_len)
         rs_tube_catchup_copy(job);
-    
+
     if (job->copy_len) {
         if (job->stream->eof_in && !job->stream->avail_in && !job->scoop_avail) {
             rs_log(RS_LOG_ERR,

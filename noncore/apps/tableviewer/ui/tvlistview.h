@@ -56,10 +56,10 @@ protected slots:
     void setCurrent(QListViewItem *);
 
 public:
-	TVListView(TableState *t, QWidget* parent = 0, 
+	TVListView(TableState *t, QWidget* parent = 0,
                const char* name = 0, WFlags fl = 0);
-	~TVListView();                                                          
-    
+	~TVListView();
+
     /* to be used for setting up the list */
     void addItem(DataElem *);
     void removeItem(); // remove from list, not from program
@@ -73,7 +73,7 @@ public:
 
     void rebuildKeys();
     void rebuildData();
-    void reset(); 
+    void reset();
 
     DataElem *getCurrentData();
 

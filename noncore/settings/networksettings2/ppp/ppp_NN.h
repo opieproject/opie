@@ -14,7 +14,7 @@ public:
       PPPNetNode();
       virtual ~PPPNetNode();
 
-      virtual const QString pixmapName() 
+      virtual const QString pixmapName()
         { return "Devices/ppp"; }
 
       virtual bool hasDataForFile( SystemFile & S );

@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -74,17 +74,17 @@ void Server :: readStatusFile(  QList<Destination> &destList )
     {
         dest = dit.current();
         bool installingToRoot = false;
-        
+
         QString path = dest->getDestinationPath();
         if ( path.right( 1 ) != "/" )
             path.append( "/" );
-            
+
         if ( path == "/" )
         {
             rootRead = true;
             installingToRoot = true;
-        }   
-        
+        }
+
         packageFile = path;
         packageFile.append( "usr/lib/ipkg/status" );
         readPackageFile( 0, false, installingToRoot, &( *dest ) );
@@ -119,7 +119,7 @@ void Server :: readLocalIpks( Server *local )
         QString file = (*it)->file();
 
         // Changed to display the filename (excluding the path)
-        QString packageName = Utils::getPackageNameFromIpkFilename( file );      
+        QString packageName = Utils::getPackageNameFromIpkFilename( file );
         QString ver = Utils::getPackageVersionFromIpkFilename( file );
         Package *package = new Package( packageName );
         package->setVersion( ver );
@@ -168,7 +168,7 @@ void Server :: readPackageFile( Server *local, bool clearAll, bool installingToR
     while ( !t.eof() )
     {
         line = t.readLine();
-        
+
         pos = line.find( ':', 0 );
         if ( pos > -1 )
             key = line.mid( 0, pos ).stripWhiteSpace();
@@ -244,9 +244,9 @@ void Server :: buildLocalPackages( Server *local )
 {
     Package *curr;
     QListIterator<Package> it( packageList );
-    
+
     QList<Package> *locallist = &local->getPackageList();
-    
+
     for ( ; it.current(); ++it )
     {
         curr = it.current();
@@ -262,14 +262,14 @@ void Server :: buildLocalPackages( Server *local )
             curr->setLocalPackage( p );
             if ( p )
             {
-                // Replace local version 
+                // Replace local version
                 if ( curr->getVersion() > p->getVersion() )
                 {
                     int pos = locallist->at();
                     locallist->remove( p );
                     locallist->insert( pos, curr );
                 }
-                
+
                 // Set some default stuff like size and things
                 if ( p->getInstalledVersion() == curr->getVersion() )
                 {
@@ -278,7 +278,7 @@ void Server :: buildLocalPackages( Server *local )
                     p->setDescription( curr->getDescription() );
                 }
             }
-            
+
         }
         else
             curr->setLocalPackage( 0 );
@@ -308,7 +308,7 @@ Package *Server :: getPackage( const char *name )
 QString Server :: toString()
 {
     QString ret = QString( "Server\n   name - %1\n   url - %2\n" ).arg( serverName ).arg( serverUrl );
-                       
+
     QListIterator<Package> it( packageList );
     for ( ; it.current(); ++it )
     {

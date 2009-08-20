@@ -6,15 +6,15 @@
 
 
 
-LiquidInterface::LiquidInterface ( ) 
+LiquidInterface::LiquidInterface ( )
 {
 	m_widget = 0;
 }
-    
+
 LiquidInterface::~LiquidInterface ( )
 {
 }
-        
+
 QStyle *LiquidInterface::style ( )
 {
 	return new LiquidStyle ( );
@@ -38,7 +38,7 @@ bool LiquidInterface::hasSettings ( ) const
 QWidget *LiquidInterface::create ( QWidget *parent, const char *name )
 {
 	m_widget = new LiquidSettings ( parent, name ? name : "LIQUID-SETTINGS" );
-		
+
 	return m_widget;
 }
 
@@ -58,19 +58,19 @@ void LiquidInterface::reject ( )
 QRESULT LiquidInterface::queryInterface ( const QUuid &uuid, QUnknownInterface **iface )
 {
 	*iface = 0;
-	
+
 	if ( uuid == IID_QUnknown )
 		*iface = this;
 	else if ( uuid == IID_Style )
 		*iface = this;
-	else if ( uuid == IID_StyleExtended ) 
+	else if ( uuid == IID_StyleExtended )
 		*iface = this;
 	else
 	    return QS_FALSE;
-	
+
 	if ( *iface )
 		(*iface)-> addRef ( );
-		
+
 	return QS_OK;
 }
 

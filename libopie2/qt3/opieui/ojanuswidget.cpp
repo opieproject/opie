@@ -424,7 +424,7 @@ void OJanusWidget::addPageWidget( QFrame *page, const QStringList &items,
 				  const QString &header,const QPixmap &pixmap )
 {
   connect(page, SIGNAL(destroyed(QObject*)), SLOT(pageGone(QObject*)));
-  
+
   if( mFace == Tabbed )
   {
     mTabControl->addTab (page, items.last());
@@ -708,7 +708,7 @@ int OJanusWidget::pageIndex( QWidget *widget ) const
 void OJanusWidget::slotFontChanged()
 {
 #ifdef FIXME
-  
+
   if ( mTitleLabel != 0 )
   {
     mTitleLabel->setFont( KGlobalSettings::generalFont() );

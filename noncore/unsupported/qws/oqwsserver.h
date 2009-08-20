@@ -44,7 +44,7 @@ protected:
 #ifdef Q_WS_QWS
 	bool qwsEventFilter( QWSEvent * );
 #endif
-	
+
 private:
 	void startServers();
 	void terminateServers();

@@ -30,7 +30,7 @@ namespace Opie
 
 /**
  *  A small xml lib written by Simon Hausmann.
- */ 
+ */
 class XMLElement
 {
 public:
@@ -46,7 +46,7 @@ public:
      *  The ownership of the child get's transfered to the
      *  this XMLElement.
      *  If child is already the child of another parent
-     *  it's get removed from the other parent first. 
+     *  it's get removed from the other parent first.
      */
     void appendChild( XMLElement *child );
 

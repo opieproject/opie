@@ -2,19 +2,19 @@
  *
  * librsync -- the library for network deltas
  * $Id: job.h,v 1.1 2002-01-25 22:15:09 kergoth Exp $
- * 
+ *
  * Copyright (C) 2000, 2001 by Martin Pool <mbp@samba.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
  * as published by the Free Software Foundation; either version 2.1 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -26,7 +26,7 @@ struct rs_job {
 
     /** Human-readable job operation name. */
     const char          *job_name;
-    
+
     rs_buffers_t *stream;
 
     /** Callback for each processing step. */
@@ -44,7 +44,7 @@ struct rs_job {
     /** Signature that's either being read in, or used for
      * generating a delta. */
     rs_signature_t      *signature;
-    
+
     /** Command byte currently being processed, if any. */
     unsigned char       op;
 
@@ -58,7 +58,7 @@ struct rs_job {
 
     /** Lengths of expected parameters. */
     rs_long_t           param1, param2;
-    
+
     struct rs_prototab_ent const *cmd;
     rs_mdfour_t      output_md4;
 
@@ -72,7 +72,7 @@ struct rs_job {
     char       *scoop_next;
     size_t      scoop_alloc;
     size_t      scoop_avail;
-        
+
     /** If USED is >0, then buf contains that much write data to
      * be sent out. */
     char        write_buf[16];

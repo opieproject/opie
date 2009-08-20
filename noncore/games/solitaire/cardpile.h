@@ -54,7 +54,7 @@ public:
     int getWidth() { return pileWidth; }
     int getHeight() { return pileHeight; }
     int getOffsetDown() { return pileOffsetDown; }
-    int getAnzCardsInPile() { 
+    int getAnzCardsInPile() {
 	int anz=0;
 	Card *card = cardOnBottom();
 	while (card != NULL) { anz++; card = cardInfront(card); }
@@ -68,7 +68,7 @@ public:
     void setWidth(int width) { pileWidth = width; }
     void setHeight(int height) { pileHeight = height; }
     void setOffsetDown(int down) { pileOffsetDown = down; }
-    
+
     void beginDealing() { dealing = TRUE; }
     void endDealing() { dealing = FALSE; }
     bool isDealing() { return dealing; }
@@ -76,10 +76,10 @@ public:
     void beginPileResize() { PileResize = TRUE; }
     void endPileResize() { PileResize = FALSE; }
     bool isPileResize() { return PileResize; }
-    
+
     int distanceFromPile(int x, int y);
     int distanceFromNextPos(int x, int y);
-    
+
     Card *cardOnTop() { return getLast(); }
     Card *cardOnBottom() { return getFirst(); }
     Card *cardInfront(Card *c);
@@ -88,7 +88,7 @@ public:
     bool addCardToTop(Card *c);
     bool addCardToBottom(Card *c);
     bool removeCard(Card *c);
-    
+
     virtual void cardAddedToTop(Card *) { }
     virtual void cardAddedToBottom(Card *) { }
     virtual void cardRemoved(Card *) { }
@@ -99,8 +99,8 @@ public:
     virtual QPoint getHypertheticalNextCardPos() { return QPoint(pileX, pileY); }
 
     void writeConfig( Config& cfg, QString name );
-    
-protected:    
+
+protected:
     int pileX, pileY;
     int pileNextX, pileNextY;
     int pileWidth, pileHeight;

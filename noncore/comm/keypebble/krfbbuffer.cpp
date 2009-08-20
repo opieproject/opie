@@ -47,10 +47,10 @@ KRFBBuffer::~KRFBBuffer()
 
 void KRFBBuffer::resize( int w, int h )
 {
-  owarn << "Resizing buffer" << oendl; 
+  owarn << "Resizing buffer" << oendl;
 
   pix->resize( w, h );
-  
+
   QPalette pal = qApp->palette();
   pix->fill( pal.active().base() );
 
@@ -69,7 +69,7 @@ void KRFBBuffer::mouseEvent( QMouseEvent *e )
 
 void KRFBBuffer::keyPressEvent( QKeyEvent *e )
 {
-    owarn << "Buffer got a key" << oendl; 
+    owarn << "Buffer got a key" << oendl;
 
   decoder->sendKeyPressEvent( e );
 }
@@ -82,7 +82,7 @@ void KRFBBuffer::keyReleaseEvent( QKeyEvent *e )
 void KRFBBuffer::copyRect( int srcX, int srcY,
                            int destX, int destY, int w, int h )
 {
-//  owarn << "Got copy rect" << oendl; 
+//  owarn << "Got copy rect" << oendl;
   bitBlt( pix, destX, destY, pix, srcX, srcY, w, h, CopyROP );
 
   emit updated( destX, destY, w, h );
@@ -105,7 +105,7 @@ void KRFBBuffer::drawRawRectChunk( void *data,
 
     uint r,g,b;
 
-		
+
     for ( int j = 0; j < h; j++) {
       for ( int i = 0; i < w ; i++ ) {
 	r = d[ j * w + i ];
@@ -201,7 +201,7 @@ void KRFBBuffer::drawRawRectChunk( void *data,
 		 if (w/scaleFactor != 0)
 			p.drawImage( x/scaleFactor, y/scaleFactor, img.smoothScale(w/scaleFactor,h/scaleFactor) );
 		 emit updated( x/scaleFactor, y/scaleFactor, w/scaleFactor, h/scaleFactor );
-	} 
+	}
 	else {
 		 p.drawImage( x, y, img);
 		 emit updated( x, y, w, h );

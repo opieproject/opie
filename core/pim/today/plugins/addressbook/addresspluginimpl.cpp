@@ -38,7 +38,7 @@ QRESULT AddressBookPluginImpl::queryInterface( const QUuid & uuid,  QUnknownInte
         *iface = this, (*iface)->addRef();
     }else
 	return QS_FALSE;
-    
+
     return QS_OK;
 
 }

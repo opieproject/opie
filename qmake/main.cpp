@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** ???
 **
@@ -81,14 +81,14 @@ int main(int argc, char **argv)
 	    if(!tmp_dir.isEmpty() && QFile::exists(tmp_dir))
 		dir = tmp_dir;
 	}
-	if(!dir.isNull() && dir != ".") 
+	if(!dir.isNull() && dir != ".")
 	    Option::output_dir = dir;
 	if(QDir::isRelativePath(Option::output_dir))
 	    Option::output_dir.prepend(oldpwd);
     }
 
     QMakeProperty prop;
-    if(Option::qmake_mode == Option::QMAKE_QUERY_PROPERTY || Option::qmake_mode == Option::QMAKE_SET_PROPERTY) 
+    if(Option::qmake_mode == Option::QMAKE_QUERY_PROPERTY || Option::qmake_mode == Option::QMAKE_SET_PROPERTY)
 	return prop.exec() ? 0 : 101;
 
     QMakeProject proj(&prop);
@@ -116,17 +116,17 @@ int main(int argc, char **argv)
 
 	    /* read project.. */
 	    if(!proj.read(fn, oldpwd)) {
-		fprintf(stderr, "Error processing project file: %s\n", 
+		fprintf(stderr, "Error processing project file: %s\n",
 			fn == "-" ? "(stdin)" : (*pfile).latin1());
 		exit_val = 2;
 		continue;
 	    }
 	    if(Option::mkfile::do_preprocess) //no need to create makefile
 		continue;
-	    
+
 	    /* let Option post-process */
 	    if(!Option::postProcessProject(&proj)) {
-		fprintf(stderr, "Error post-processing project file: %s", 
+		fprintf(stderr, "Error post-processing project file: %s",
 			fn == "-" ? "(stdin)" : (*pfile).latin1());
 		exit_val = 8;
 		continue;

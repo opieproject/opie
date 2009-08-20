@@ -27,7 +27,7 @@ protected slots:
   virtual void menuAction(int ) {};
 protected:
 	int _type;
-	static QPopupMenu* _popupMenu; 
+	static QPopupMenu* _popupMenu;
 };
 
 #endif

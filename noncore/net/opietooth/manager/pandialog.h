@@ -42,7 +42,7 @@ namespace OpieTooth {
         QCheckBox* doEncryption;
         QCheckBox* doSecure;
         Opie::Core::OProcess* m_panConnect;
-        
+
     private:
         QString m_device; //device BT address
     };

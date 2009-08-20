@@ -34,7 +34,7 @@ namespace QuickPrivate {
 
 	// This code is very platform specific.. We should find better
 	// solutions to handle names.. Maybe one central function would be
-	// better than checking this ".so" stuff all around in the sources.. 
+	// better than checking this ".so" stuff all around in the sources..
 	// (eilers)
 
         // Below lines from TT then mine again

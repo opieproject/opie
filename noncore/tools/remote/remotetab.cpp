@@ -52,10 +52,10 @@ RemoteTab::RemoteTab(QWidget *parent, const char *name):QWidget(parent,name)
 int RemoteTab::sendIR()
 {
 	LircHandler lh;
-	
+
 	if(!lh.checkLircdConfValid(false))
 		return 0;
-	
+
 	QString curr_remote = topGroup->getRemotesText();
 	if(curr_remote != "")
 		cfg->setGroup(curr_remote);
@@ -63,7 +63,7 @@ int RemoteTab::sendIR()
 		QMessageBox::warning(this, tr("Error"), tr("Please select or create\na remote layout"), QMessageBox::Ok, QMessageBox::NoButton);
 		return 0;
 	}
-	
+
 	const QObject *button = sender();
 	QString string = cfg->readEntry(button->name());
 	if(string != "") {
@@ -81,7 +81,7 @@ void RemoteTab::setConfig(Config *newCfg)
 	cfg = newCfg;
 	cfg->setGroup("Remotes");
 	topGroup->updateRemotes(cfg);
-	
+
 	QString curr_remote = topGroup->getRemotesText();
 	if(curr_remote != "")
 		remoteSelected(curr_remote);
@@ -110,7 +110,7 @@ void RemoteTab::remoteSelected(const QString &string)
 			}
 		}
 	}
-	
+
 	objList = dvdGroup->children();
 	for(obj = ((QObjectList *)objList)->first(); obj != 0; obj=((QObjectList *)objList)->next())
 	{
@@ -169,7 +169,7 @@ void RemoteTab::remoteSelected(const QString &string)
 void RemoteTab::updateRemotesList()
 {
 	topGroup->updateRemotes(cfg);
-	
+
 	QString curr_remote = topGroup->getRemotesText();
 	if(curr_remote != "")
 		remoteSelected(curr_remote);

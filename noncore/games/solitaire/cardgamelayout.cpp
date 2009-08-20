@@ -32,15 +32,15 @@ CardPile *CardGameLayout::closestPile(int x, int y, int maxDistance)
 {
     int closestDistance = maxDistance * maxDistance;
     CardPile *closestPile = NULL;
-    
+
     for (CardPile *p = first(); p != NULL; p = next()) {
 	int d = p->distanceFromNextPos(x, y);
 	if (d < closestDistance) {
 	    closestDistance = d;
-	    closestPile = p;		
+	    closestPile = p;
 	}
     }
-    
+
     return closestPile;
 }
 

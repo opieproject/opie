@@ -599,7 +599,7 @@ void TEmuVt102::tau( int token, int p, int q )
 /*                                                                           */
 /* ------------------------------------------------------------------------- */
 
-/* 
+/*
    Outgoing bytes originate from several sources:
 
    - Replies to Enquieries.
@@ -781,7 +781,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
 
 // Character Set Conversion ------------------------------------------------ --
 
-/* 
+/*
    The processing contains a VT100 specific code translation layer.
    It's still in use and mainly responsible for the line drawing graphics.
 
@@ -792,7 +792,7 @@ void TEmuVt102::onKeyPress( QKeyEvent* ev )
    in the pipeline. It only applies to tokens, which represent
    plain characters.
 
-   This conversion it eventually continued in TEWidget.C, since 
+   This conversion it eventually continued in TEWidget.C, since
    it might involve VT100 enhanced fonts, which have these
    particular glyphs allocated in (0x00-0x1f) in their code page.
 */

@@ -86,7 +86,7 @@ MailFactory::MailFactory(SendMail &smail, QWidget *parent)
 				QString file;
 				while (!t.atEnd()) file += t.readLine() + "\n";
 				f.close();
-				QString mimetype = (new MimeType((*it).docLnk()))->id(); 
+				QString mimetype = (new MimeType((*it).docLnk()))->id();
 
 				_body += "\n--" + boundary + "\n";
 				_body += "Content-Type: " + mimetype + "; name=\"" + (*it).newName() + "\"\n";
@@ -95,7 +95,7 @@ MailFactory::MailFactory(SendMail &smail, QWidget *parent)
 				_body += "Content-Transfer-Encoding: base64\n";
 
 				_body += "Content-Disposition: attachment; filename=\"" + (*it).newName() + "\"\n";
-				if (!(*it).description().isEmpty()) 
+				if (!(*it).description().isEmpty())
 					_body += "Content-Description: " + (*it).description() + "\n";
 
 				_body += "\n" + MiscFunctions::encodeBase64(file) + "\n";

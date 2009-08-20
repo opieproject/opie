@@ -41,32 +41,32 @@ public:
 	ExceptListItem ( QListView *lv, QListViewItem *after, const QString &t, bool nostyle = true, bool nofont = true, bool nodeco = true ) : QListViewItem ( lv, after )
 	{
 		m_text = t;
-		
+
 		m_nofont = nofont;
 		m_nostyle = nostyle;
 		m_nodeco = nodeco;
-		
+
 		init ( );
 	}
-	
+
 	virtual ~ExceptListItem ( )
 	{
 	}
-	
+
 	static void overlay ( QImage &img, const QImage &ovl )
 	{
-		if (( img. size ( ) != ovl. size ( )) || 
+		if (( img. size ( ) != ovl. size ( )) ||
 		    ( img. depth ( ) != ovl. depth ( )))
 			return;
-		
+
 		for ( int y = 0; y != img. height ( ); y++ ) {
 			QRgb *iline = (QRgb *) img. scanLine ( y );
 			QRgb *oline = (QRgb *) ovl. scanLine ( y );
-			
+
 			for ( int x = 0; x != img. width ( ); x++ ) {
 				QRgb i = *iline;
 				QRgb o = *oline;
-			
+
 				*iline = qRgba (( qRed ( i ) + qRed ( o )) / 2,
 				                ( qGreen ( i ) + qGreen ( o )) / 2,
 				                ( qBlue ( i ) + qBlue ( o )) / 2,
@@ -76,14 +76,14 @@ public:
 			}
 		}
 	}
-	
+
 	static void init ( )
 	{
 		static bool init = false;
-		
-		if ( init ) 
+
+		if ( init )
 			return;
-	
+
 		QImage noimg    = Opie::Core::OResource::loadImage ( "appearance/no.png", Opie::Core::OResource::SmallIcon );
 		QImage fontimg  = Opie::Core::OResource::loadImage ( "appearance/font.png", Opie::Core::OResource::SmallIcon );
 		QImage styleimg = Opie::Core::OResource::loadImage ( "appearance/style.png", Opie::Core::OResource::SmallIcon );
@@ -109,7 +109,7 @@ public:
 
 		init = true;
 	}
-	
+
 	bool noFont ( ) const
 	{
 		return m_nofont;
@@ -148,12 +148,12 @@ public:
 			repaint ( );
 		}
 	}
-	
-	QString pattern ( ) const 
+
+	QString pattern ( ) const
 	{
 		return m_text;
 	}
-	
+
 	void setPattern ( const QString &s )
 	{
 		if ( s != m_text ) {
@@ -169,9 +169,9 @@ public:
 			return m_text;
 		else
 			return QString::null;
-	
+
 	}
-	
+
 	const QPixmap *pixmap ( int i ) const
 	{
 		if ( i == 0 )
@@ -189,7 +189,7 @@ private:
 	bool m_nofont;
 	bool m_nostyle;
 	bool m_nodeco;
-	
+
 	static QPixmap *s_stylepix [2];
 	static QPixmap *s_fontpix [2];
 	static QPixmap *s_decopix [2];

@@ -74,7 +74,7 @@ static inline int mpeg3video_getdclum(mpeg3_slice_buffer_t *slice_buffer)
     	size = mpeg3_DClumtab0[code].val;
     	mpeg3slice_flushbits(slice_buffer, mpeg3_DClumtab0[code].len);
 	}
-	else 
+	else
 	{
     	code = mpeg3slice_showbits9(slice_buffer) - 0x1f0;
     	size = mpeg3_DClumtab1[code].val;
@@ -82,7 +82,7 @@ static inline int mpeg3video_getdclum(mpeg3_slice_buffer_t *slice_buffer)
 	}
 
 	if(size == 0) val = 0;
-	else 
+	else
 	{
     	val = mpeg3slice_getbits(slice_buffer, size);
     	if((val & (1 << (size - 1))) == 0)  val -= (1 << size) - 1;
@@ -104,7 +104,7 @@ int mpeg3video_getdcchrom(mpeg3_slice_buffer_t *slice_buffer)
     	size = mpeg3_DCchromtab0[code].val;
     	mpeg3slice_flushbits(slice_buffer, mpeg3_DCchromtab0[code].len);
 	}
-	else 
+	else
 	{
     	code = mpeg3slice_showbits(slice_buffer, 10) - 0x3e0;
     	size = mpeg3_DCchromtab1[code].val;
@@ -112,7 +112,7 @@ int mpeg3video_getdcchrom(mpeg3_slice_buffer_t *slice_buffer)
 	}
 
 	if(size == 0) val = 0;
-	else 
+	else
 	{
       val = mpeg3slice_getbits(slice_buffer, size);
       if((val & (1 << (size - 1))) == 0) val -= (1 << size) - 1;
@@ -124,9 +124,9 @@ int mpeg3video_getdcchrom(mpeg3_slice_buffer_t *slice_buffer)
 
 /* decode one intra coded MPEG-1 block */
 
-int mpeg3video_getintrablock(mpeg3_slice_t *slice, 
+int mpeg3video_getintrablock(mpeg3_slice_t *slice,
 		mpeg3video_t *video,
-		int comp, 
+		int comp,
 		int dc_dct_pred[])
 {
 	int val, i, j, sign;
@@ -136,12 +136,12 @@ int mpeg3video_getintrablock(mpeg3_slice_t *slice,
 	mpeg3_slice_buffer_t *slice_buffer = slice->slice_buffer;
 
 /* decode DC coefficients */
-  	if(comp < 4)         
+  	if(comp < 4)
   		bp[0] = (dc_dct_pred[0] += mpeg3video_getdclum(slice_buffer)) << 3;
-  	else 
-  	if(comp == 4)   
+  	else
+  	if(comp == 4)
   		bp[0] = (dc_dct_pred[1] += mpeg3video_getdcchrom(slice_buffer)) << 3;
-	else                
+	else
   		bp[0] = (dc_dct_pred[2] += mpeg3video_getdcchrom(slice_buffer)) << 3;
 
 #ifdef HAVE_MMX
@@ -157,21 +157,21 @@ int mpeg3video_getintrablock(mpeg3_slice_t *slice,
     	code = mpeg3slice_showbits16(slice_buffer);
     	if(code >= 16384)
 			tab = &mpeg3_DCTtabnext[(code >> 12) - 4];
-    	else 
+    	else
 		if(code >= 1024) tab = &mpeg3_DCTtab0[(code >> 8) - 4];
-    	else 
+    	else
 		if(code >= 512) tab = &mpeg3_DCTtab1[(code >> 6) - 8];
-    	else 
+    	else
 		if(code >= 256) tab = &mpeg3_DCTtab2[(code >> 4) - 16];
-    	else 
+    	else
 		if(code >= 128) tab = &mpeg3_DCTtab3[(code >> 3) - 16];
-    	else 
+    	else
 		if(code >= 64) tab = &mpeg3_DCTtab4[(code >> 2) - 16];
-    	else 
+    	else
 		if(code >= 32) tab = &mpeg3_DCTtab5[(code >> 1) - 16];
-    	else 
+    	else
 		if(code >= 16) tab = &mpeg3_DCTtab6[code - 16];
-    	else 
+    	else
 		{
 /*    	  	fprintf(stderr, "mpeg3video_getintrablock: invalid Huffman code\n"); */
     	  	slice->fault = 1;
@@ -187,18 +187,18 @@ int mpeg3video_getintrablock(mpeg3_slice_t *slice,
 /* escape */
     		i += mpeg3slice_getbits(slice_buffer, 6);
 
-    		if((val = mpeg3slice_getbits(slice_buffer, 8)) == 0) 
+    		if((val = mpeg3slice_getbits(slice_buffer, 8)) == 0)
 				val = mpeg3slice_getbits(slice_buffer, 8);
-    		else 
-			if(val == 128)         
+    		else
+			if(val == 128)
 				val = mpeg3slice_getbits(slice_buffer, 8) - 256;
-    		else 
-			if(val > 128)          
+    		else
+			if(val > 128)
 				val -= 256;
 
     		if((sign = (val < 0)) != 0) val= -val;
     	}
-    	else 
+    	else
 		{
     		i += tab->run;
     		val = tab->level;
@@ -212,7 +212,7 @@ int mpeg3video_getintrablock(mpeg3_slice_t *slice,
     	  	slice->fault = 1;
     	  	return 1;
 		}
-			
+
 
 #ifdef HAVE_MMX
 		if(video->have_mmx)
@@ -230,7 +230,7 @@ int mpeg3video_getintrablock(mpeg3_slice_t *slice,
     	bp[j] = sign ? -val : val;
 	}
 
-	if(j != 0) 
+	if(j != 0)
 	{
 /* not a sparse matrix ! */
        slice->sparse[comp] = 0;
@@ -241,13 +241,13 @@ int mpeg3video_getintrablock(mpeg3_slice_t *slice,
 
 /* decode one non-intra coded MPEG-1 block */
 
-int mpeg3video_getinterblock(mpeg3_slice_t *slice, 
-		mpeg3video_t *video, 
+int mpeg3video_getinterblock(mpeg3_slice_t *slice,
+		mpeg3video_t *video,
 		int comp)
 {
 	int val, i, j, sign;
 	unsigned int code;
-	mpeg3_DCTtab_t *tab; 
+	mpeg3_DCTtab_t *tab;
 	short *bp = slice->block[comp];
 	mpeg3_slice_buffer_t *slice_buffer = slice->slice_buffer;
 
@@ -257,26 +257,26 @@ int mpeg3video_getinterblock(mpeg3_slice_t *slice,
     	code = mpeg3slice_showbits16(slice_buffer);
     	if(code >= 16384)
 		{
-    	    if(i == 0) 
+    	    if(i == 0)
 				tab = &mpeg3_DCTtabfirst[(code >> 12) - 4];
-    	    else      
+    	    else
 				tab = &mpeg3_DCTtabnext[(code >> 12) - 4];
     	}
-    	else 
+    	else
 		if(code >= 1024) tab = &mpeg3_DCTtab0[(code >> 8) - 4];
-    	else 
+    	else
 		if(code >= 512)  tab = &mpeg3_DCTtab1[(code >> 6) - 8];
-    	else 
+    	else
 		if(code >= 256)  tab = &mpeg3_DCTtab2[(code >> 4) - 16];
-    	else 
+    	else
 		if(code >= 128)  tab = &mpeg3_DCTtab3[(code >> 3) - 16];
-    	else 
+    	else
 		if(code >= 64)   tab = &mpeg3_DCTtab4[(code >> 2) - 16];
-    	else 
+    	else
 		if(code >= 32)   tab = &mpeg3_DCTtab5[(code >> 1) - 16];
-    	else 
+    	else
 		if(code >= 16)   tab = &mpeg3_DCTtab6[code - 16];
-    	else 
+    	else
 		{
 // invalid Huffman code
     		slice->fault = 1;
@@ -287,24 +287,24 @@ int mpeg3video_getinterblock(mpeg3_slice_t *slice,
 
 /* end of block */
     	if(tab->run == 64)
-    	   break;   
+    	   break;
 
     	if(tab->run == 65)
-		{          
+		{
 /* escape  */
     		i += mpeg3slice_getbits(slice_buffer, 6);
-    		if((val = mpeg3slice_getbits(slice_buffer, 8)) == 0) 
+    		if((val = mpeg3slice_getbits(slice_buffer, 8)) == 0)
 				val = mpeg3slice_getbits(slice_buffer, 8);
-    		else 
-			if(val == 128)  
+    		else
+			if(val == 128)
 				val = mpeg3slice_getbits(slice_buffer, 8) - 256;
-    		else 
-			if(val > 128) 
+    		else
+			if(val > 128)
 				val -= 256;
 
     		if((sign = (val < 0)) != 0) val = -val;
     	}
-    	else 
+    	else
 		{
     		i += tab->run;
     		val = tab->level;
@@ -329,7 +329,7 @@ int mpeg3video_getinterblock(mpeg3_slice_t *slice,
     	bp[j] = sign ? -val : val;
 	}
 
-	if(j != 0) 
+	if(j != 0)
 	{
 /* not a sparse matrix ! */
        slice->sparse[comp] = 0;
@@ -339,9 +339,9 @@ int mpeg3video_getinterblock(mpeg3_slice_t *slice,
 
 
 /* decode one intra coded MPEG-2 block */
-int mpeg3video_getmpg2intrablock(mpeg3_slice_t *slice, 
-		mpeg3video_t *video, 
-		int comp, 
+int mpeg3video_getmpg2intrablock(mpeg3_slice_t *slice,
+		mpeg3video_t *video,
+		int comp,
 		int dc_dct_pred[])
 {
 	int val, i, j, sign, nc;
@@ -359,12 +359,12 @@ int mpeg3video_getmpg2intrablock(mpeg3_slice_t *slice,
          : video->chroma_intra_quantizer_matrix;
 
 /* decode DC coefficients */
-	if(comp < 4)           
+	if(comp < 4)
 		val = (dc_dct_pred[0] += mpeg3video_getdclum(slice_buffer));
-	else 
-	if((comp & 1) == 0) 
+	else
+	if((comp & 1) == 0)
 		val = (dc_dct_pred[1] += mpeg3video_getdcchrom(slice_buffer));
-	else                  
+	else
 		val = (dc_dct_pred[2] += mpeg3video_getdcchrom(slice_buffer));
 
   	if(slice->fault) return 1;
@@ -384,33 +384,33 @@ int mpeg3video_getmpg2intrablock(mpeg3_slice_t *slice,
 
     	if(code >= 16384 && !video->intravlc)
 			tab = &mpeg3_DCTtabnext[(code >> 12) - 4];
-    	else 
+    	else
 		if(code >= 1024)
 		{
-    		if(video->intravlc) 
+    		if(video->intravlc)
 				tab = &mpeg3_DCTtab0a[(code >> 8) - 4];
-    		else 
+    		else
 				tab = &mpeg3_DCTtab0[(code >> 8) - 4];
     	}
-    	else 
+    	else
 		if(code >= 512)
 		{
-    		if(video->intravlc)     
+    		if(video->intravlc)
 		  	  	tab = &mpeg3_DCTtab1a[(code >> 6) - 8];
-    		else              
+    		else
 				tab = &mpeg3_DCTtab1[(code >> 6) - 8];
     	}
-    	else 
+    	else
 		if(code >= 256) tab = &mpeg3_DCTtab2[(code >> 4) - 16];
-    	else 
+    	else
 		if(code >= 128) tab = &mpeg3_DCTtab3[(code >> 3) - 16];
-    	else 
+    	else
 		if(code >= 64)  tab = &mpeg3_DCTtab4[(code >> 2) - 16];
-    	else 
+    	else
 		if(code >= 32)  tab = &mpeg3_DCTtab5[(code >> 1) - 16];
-    	else 
+    	else
 		if(code >= 16)  tab = &mpeg3_DCTtab6[code - 16];
-    	else 
+    	else
 		{
 /*    		fprintf(stderr,"mpeg3video_getmpg2intrablock: invalid Huffman code\n"); */
     		slice->fault = 1;
@@ -421,7 +421,7 @@ int mpeg3video_getmpg2intrablock(mpeg3_slice_t *slice,
 
 /* end_of_block */
     	if(tab->run == 64)
-    	   	break; 
+    	   	break;
 
     	if(tab->run == 65)
 		{
@@ -437,7 +437,7 @@ int mpeg3video_getmpg2intrablock(mpeg3_slice_t *slice,
     	  	}
     	  	if((sign = (val >= 2048)) != 0) val = 4096 - val;
     	}
-    	else 
+    	else
 		{
     		i += tab->run;
     		val = tab->level;
@@ -468,8 +468,8 @@ int mpeg3video_getmpg2intrablock(mpeg3_slice_t *slice,
 
 /* decode one non-intra coded MPEG-2 block */
 
-int mpeg3video_getmpg2interblock(mpeg3_slice_t *slice, 
-		mpeg3video_t *video, 
+int mpeg3video_getmpg2interblock(mpeg3_slice_t *slice,
+		mpeg3video_t *video,
 		int comp)
 {
 	int val, i, j, sign, nc;
@@ -497,21 +497,21 @@ int mpeg3video_getmpg2interblock(mpeg3_slice_t *slice,
     	  if(i == 0) tab = &mpeg3_DCTtabfirst[(code >> 12) - 4];
     	  else      tab = &mpeg3_DCTtabnext[(code >> 12) - 4];
     	}
-    	else 
+    	else
 		if(code >= 1024) tab = &mpeg3_DCTtab0[(code >> 8) - 4];
-    	else 
+    	else
 		if(code >= 512)  tab = &mpeg3_DCTtab1[(code >> 6) - 8];
-    	else 
+    	else
 		if(code >= 256)  tab = &mpeg3_DCTtab2[(code >> 4) - 16];
-    	else 
+    	else
 		if(code >= 128)  tab = &mpeg3_DCTtab3[(code >> 3) - 16];
-    	else 
+    	else
 		if(code >= 64)   tab = &mpeg3_DCTtab4[(code >> 2) - 16];
-    	else 
+    	else
 		if(code >= 32)   tab = &mpeg3_DCTtab5[(code >> 1) - 16];
-    	else 
+    	else
 		if(code >= 16)   tab = &mpeg3_DCTtab6[code - 16];
-    	else 
+    	else
 		{
 // invalid Huffman code
     		slice->fault = 1;
@@ -522,10 +522,10 @@ int mpeg3video_getmpg2interblock(mpeg3_slice_t *slice,
 
 /* end_of_block */
     	if(tab->run == 64)
-       		break;          
+       		break;
 
     	if(tab->run == 65)
-		{                 
+		{
 /* escape */
     		i += mpeg3slice_getbits(slice_buffer, 6);
     		val = mpeg3slice_getbits(slice_buffer, 12);
@@ -537,7 +537,7 @@ int mpeg3video_getmpg2interblock(mpeg3_slice_t *slice,
     		}
     		if((sign = (val >= 2048)) != 0) val = 4096 - val;
     	}
-    	else 
+    	else
 		{
     		i += tab->run;
     		val = tab->level;
@@ -557,7 +557,7 @@ int mpeg3video_getmpg2interblock(mpeg3_slice_t *slice,
     	nc++;
 	}
 
-	if(j != 0) 
+	if(j != 0)
 	{
       	slice->sparse[comp] = 0;
 	}
@@ -577,8 +577,8 @@ int mpeg3video_get_macroblocks(mpeg3video_t *video, int framenum)
 /* Load every slice into a buffer array */
 	video->total_slice_buffers = 0;
 	current_buffer = 0;
-	while(!mpeg3bits_eof(vstream) && 
-		mpeg3bits_showbits32_noptr(vstream) >= MPEG3_SLICE_MIN_START && 
+	while(!mpeg3bits_eof(vstream) &&
+		mpeg3bits_showbits32_noptr(vstream) >= MPEG3_SLICE_MIN_START &&
 		mpeg3bits_showbits32_noptr(vstream) <= MPEG3_SLICE_MAX_START)
 	{
 /* Initialize the buffer */
@@ -706,7 +706,7 @@ int mpeg3video_getpicture(mpeg3video_t *video, int framenum)
 		{
 			video->newframe[i] = video->auxframe[i];
 		}
-    	else 
+    	else
 		{
     	  	if(!video->secondfield && !video->current_repeat)
 			{
@@ -732,7 +732,7 @@ int mpeg3video_getpicture(mpeg3video_t *video, int framenum)
 /* The first repeat must consititutively read a B frame if its B frame is going to be */
 /* used in a later repeat. */
 	if(!video->current_repeat)
-		if(!(video->skip_bframes && video->pict_type == B_TYPE) || 
+		if(!(video->skip_bframes && video->pict_type == B_TYPE) ||
 			(video->repeat_count >= 100 + 100 * video->skip_bframes))
   			result = mpeg3video_get_macroblocks(video, framenum);
 
@@ -751,7 +751,7 @@ int mpeg3video_getpicture(mpeg3video_t *video, int framenum)
 				video->output_src = video->oldrefframe;
 			}
     	}
-    	else 
+    	else
 		{
 			mpeg3video_display_second_field(video);
 		}

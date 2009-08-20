@@ -6,12 +6,12 @@ class QPixmap;
 class QColor;
 
 class QImageEffect {
-public:	
+public:
 	static QImage &fade ( QImage &, float, const QColor & );
 };
 
 class QPixmapEffect {
-public:	
+public:
 	static QPixmap &fade ( QPixmap &, float, const QColor & );
 };
 

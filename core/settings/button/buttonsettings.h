@@ -15,7 +15,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -58,11 +58,11 @@ protected:
 
 private:
 	buttoninfo *buttonInfoForKeycode ( ushort key );
-	
+
 	void edit ( buttoninfo *bi, bool hold );
 	QString qcopToString ( const Opie::Core::OQCopMessage &c );
 
-private:	
+private:
 	QTimer *m_timer;
 	buttoninfo *m_last_button;
 

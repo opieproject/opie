@@ -9,12 +9,12 @@
 namespace OpieTooth {
 
     class RfCommConfObject {
-	
+
     public:
-	RfCommConfObject( int number, QString mac, int channel, QString comment, 
+	RfCommConfObject( int number, QString mac, int channel, QString comment,
         bool bind);
 	~RfCommConfObject();
-	
+
 	void setNumber( int number );
 	int number() { return m_number; };
 	void setMac( QString mac );
@@ -32,19 +32,19 @@ namespace OpieTooth {
 	QString m_mac;
 	int m_channel;
 	QString m_comment;
-	
+
     };
-    
+
     class RfCommConfHandler  {
-	
+
     public:
 	RfCommConfHandler( const QString & filename );
 	~RfCommConfHandler();
 
 	void save( QMap<QString, RfCommConfObject*> devices );
-	
+
 	QMap<QString, RfCommConfObject*> foundEntries();
-	
+
     private:
 	void load();
 

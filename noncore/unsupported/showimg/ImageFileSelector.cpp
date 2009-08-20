@@ -6,7 +6,7 @@
 using namespace Opie::Core;
 
 /* QT */
-#include <qlabel.h>   
+#include <qlabel.h>
 #include <qfileinfo.h>
 
 /* STD */
@@ -15,7 +15,7 @@ using namespace Opie::Core;
 ThumbWidget::ThumbWidget(QPixmap p,QString text,const DocLnk& f,QWidget *parent,int w)
         : QWidget( parent ),fl(f)
 {
-    setBackgroundMode(NoBackground);  
+    setBackgroundMode(NoBackground);
     if ( w!=-1 )
         setMinimumSize(w,p.height()+24);
     else
@@ -63,7 +63,7 @@ ImageFileSelectorItem::ImageFileSelectorItem( QListView *parent, const DocLnk &f
 
 ImageFileSelectorItem::~ImageFileSelectorItem()
 {
-    
+
 }
 
 
@@ -73,8 +73,8 @@ ImageFileSelector::ImageFileSelector( CURRENT_VIEW scv,QWidget *parent,const cha
 
     detailed=new QListView(this);
 
-    detailed->addColumn (tr("Title")); 
-    detailed->addColumn (tr("Type")); 
+    detailed->addColumn (tr("Title"));
+    detailed->addColumn (tr("Type"));
     detailed->setAllColumnsShowFocus( true );
 
     tList.setAutoDelete(true);
@@ -99,12 +99,12 @@ ImageFileSelector::ImageFileSelector( CURRENT_VIEW scv,QWidget *parent,const cha
 
     cView=UNKNOWN;
     setView(scv);
-    reread();    
+    reread();
 
 }
 ImageFileSelector::~ImageFileSelector()
 {
-    
+
 }
 
 
@@ -128,12 +128,12 @@ void ImageFileSelector::setView(CURRENT_VIEW v)
 
     if ( cView!=DETAILED )
     {
-        raiseWidget(thumb);            
+        raiseWidget(thumb);
         updateSizes();
     }
     else
     {
-        raiseWidget(detailed);              
+        raiseWidget(detailed);
         updateSizes();
     }
 
@@ -152,12 +152,12 @@ void ImageFileSelector::updateSizes()
     detailed->setColumnWidth(0,(int)w);
     detailed->setColumnWidth(1,ww-(int)w);
     background->setMinimumWidth(thumb->visibleWidth());
-    thumb->updateScrollBars(); 
+    thumb->updateScrollBars();
 }
 
 void ImageFileSelector::reread(bool)
 {
-//    odebug << "reread" << oendl; 
+//    odebug << "reread" << oendl;
     ImageFileSelectorItem *item = (ImageFileSelectorItem *)detailed->selectedItem();
     QString oldFile;
     if ( item )
@@ -180,7 +180,7 @@ void ImageFileSelector::reread(bool)
     thumb->setUpdatesEnabled(false);
 
     for ( ; dit.current(); ++dit ) {
-        item = new ImageFileSelectorItem( detailed, **dit );        
+        item = new ImageFileSelectorItem( detailed, **dit );
         if ( item->file().file() == oldFile )
             detailed->setCurrentItem( item );
     }
@@ -194,9 +194,9 @@ void ImageFileSelector::reread(bool)
         if( !img.isNull()) {
             img=img.smoothScale(64,64);
             QPixmap pix;
-            pix.convertFromImage(img);                
+            pix.convertFromImage(img);
             l=new ThumbWidget(pix,ii->file().name(),ii->file(),background,width);
-            l->setBackgroundColor(colorGroup().base());        
+            l->setBackgroundColor(colorGroup().base());
             gl->addWidget(l,j,i);
             i++;
             if ( i==2 ) {
@@ -223,7 +223,7 @@ int ImageFileSelector::fileCount()
 }
 const DocLnk * ImageFileSelector::selected()
 {
-    odebug << "image selected" << oendl; 
+    odebug << "image selected" << oendl;
     ImageFileSelectorItem *item = (ImageFileSelectorItem *) detailed->selectedItem();
     if ( item )
         return new DocLnk( item->file() );
@@ -244,19 +244,19 @@ void ImageFileSelector::fileClicked( int button, QListViewItem *i, const QPoint 
     // pressed to get 'right down'
 void ImageFileSelector::filePressed( int, QListViewItem *, const QPoint &, int )
 {
-    
+
 }
 void ImageFileSelector::fileClicked( QListViewItem *i)
 {
     if ( !i )
         return;
     emit fileSelected( ( (ImageFileSelectorItem*)i )->file() );
-    emit closeMe();     
+    emit closeMe();
 }
 
 void ImageFileSelector::thumbClicked(const DocLnk &f)
 {
     emit fileSelected( f );
-    emit closeMe();     
+    emit closeMe();
 }
 

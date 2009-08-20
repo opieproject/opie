@@ -27,7 +27,7 @@ class Passwd
 public:
 	QStringList passwdStringList;	// List of all users (name,passwd,uid,gid,gecos,dir,shell)
 	QStringList groupStringList;	// List of all groups (name,gid,mem)
-	
+
 	// pwentry
 	QString pw_name;
 	QString pw_passwd;
@@ -41,7 +41,7 @@ public:
 	QString gr_name;
 	int gr_gid;
 	QStringList gr_mem;
-	
+
 	Passwd(void);
 	~Passwd(void);
 	bool open(void);
@@ -67,7 +67,7 @@ public:
 private:
 	QString userString;
 	QString groupString;
-	
+
 	int i64c(int i);
 	bool searchUser(QRegExp &userRegExp);
 	bool deleteUser(QRegExp &userRegExp, bool delGroup);
@@ -75,7 +75,7 @@ private:
 	bool deleteGroup(QRegExp &groupRegExp);
 	QStringList userdataStringList;
 	QStringList groupdataStringList;
-	
+
 	QFile *passwd_file;
 	QFile *group_file;
 };

@@ -74,7 +74,7 @@ bool KeyModifiers::pressKey(int keycode, int modifiers)
 	int keymask;
 
 	keymask = getState(modifiers, true);
-	
+
 	for(ModifierList::Iterator it=m_modifiers.begin();
 			it!=m_modifiers.end(); ++it){
 		if((*it)->keycode == keycode

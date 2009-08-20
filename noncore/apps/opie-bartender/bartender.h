@@ -18,21 +18,21 @@
 #include <qmainwindow.h>
 #include <qfile.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QListView;
 class QListViewItem;
 class QToolBar;
 
 class Bartender : public QMainWindow
-{ 
+{
     Q_OBJECT
 
 public:
     Bartender( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~Bartender();
-    
+
     static QString appName() { return QString::fromLatin1("bartender"); }
 
     QToolBar* ToolBar1;
@@ -40,12 +40,12 @@ public:
     DrinkData drinkDB;
 public slots:
     void doEdit();
-    
+
 protected:
 
 protected slots:
     void fileMenuActivated(int);
-    void editMenuActivated(int); 
+    void editMenuActivated(int);
     void cleanUp();
     void fileNew();
     void showDrink( QListViewItem *);
@@ -60,7 +60,7 @@ protected slots:
 private:
     void clearList();
     void fillList();
- 
+
 };
 
 #endif // BARTENDER_H

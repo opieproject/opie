@@ -20,7 +20,7 @@
 #ifndef TIMECODE_H
 #define TIMECODE_H
 
-typedef struct 
+typedef struct
 {
 	long hour;
 	long minute;

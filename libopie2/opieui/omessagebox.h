@@ -41,7 +41,7 @@
 
 
 
-class OMessageBox 
+class OMessageBox
 #ifdef QWS
 : public QPEMessageBox
 #else

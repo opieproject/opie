@@ -38,7 +38,7 @@ private:
     bool changed();
     void readConfig();
     void writeConfig();
-    
+
     TodoPluginConfigBase *m_gui;
 
 

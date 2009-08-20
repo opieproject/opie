@@ -49,7 +49,7 @@ ConfigDlg::ConfigDlg () : QDialog ()
      */
 
     QVBoxLayout *base_lay = new QVBoxLayout(this);
- 
+
     QTabWidget *tabs = new QTabWidget(this, "tabs");
 
     QWidget *gen_box = new QWidget(tabs, "gen_tab");
@@ -61,7 +61,7 @@ ConfigDlg::ConfigDlg () : QDialog ()
     keymaps = new QListBox(hbox1);
     keymaps->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
     QVBox *vbox1 = new QVBox(hbox1);
-    
+
     QToolButton *tb1 = new QToolButton(vbox1, tr("Move Up"));
     tb1->setUsesBigPixmap( qApp->desktop()->size().width() > 330 );
     tb1->setPixmap(Opie::Core::OResource::loadPixmap("up", Opie::Core::OResource::SmallIcon));
@@ -81,7 +81,7 @@ ConfigDlg::ConfigDlg () : QDialog ()
     QString cur(tr("Current Language"));
     keymaps->insertItem(cur);
     keymaps->setSelected(0, true);
-    
+
     QDir map_dir(QPEApplication::qpeDir() + "share/multikey", "*.keymap");
     default_maps = map_dir.entryList(); // so the object can access keymaps in other places
     custom_maps = config.readListEntry("maps", QChar('|'));
@@ -96,7 +96,7 @@ ConfigDlg::ConfigDlg () : QDialog ()
 	    keymap_map =  map_dir.absPath() + "/" + sw_copy[i];
 	} else {
 
-	    if (map_dir.exists(QFileInfo(sw_copy[i]).fileName(), false) 
+	    if (map_dir.exists(QFileInfo(sw_copy[i]).fileName(), false)
 		|| !QFile::exists(sw_copy[i])) {
 
 		custom_maps.remove(sw_copy[i]);
@@ -119,7 +119,7 @@ ConfigDlg::ConfigDlg () : QDialog ()
 	    while (!map.atEnd()) {
 
 		if (line.find(QRegExp("^title\\s*=\\s*")) != -1) {
-                
+
 		    keymaps->insertItem(line.right(line.length() - line.find(QChar('=')) - 1).stripWhiteSpace());
 		    found = 1;
 		    break;
@@ -185,7 +185,7 @@ ConfigDlg::ConfigDlg () : QDialog ()
      */
 
     QWidget *color_box = new QWidget(tabs, "color_tab");
-    
+
     QGridLayout *color_lay = new QGridLayout(color_box);
     QGrid *color_grid = new QGrid(2, color_box);
     color_lay->setAlignment(Qt::AlignTop);
@@ -403,7 +403,7 @@ void ConfigDlg::addMap() {
         while (!map_file.atEnd()) {
 
             if (line.find(QRegExp("^title\\s*=\\s*")) != -1) {
-                
+
                 keymaps->insertItem(line.right(line.length() - line.find(QChar('=')) - 1).stripWhiteSpace());
                 found = 1;
                 break;
@@ -434,7 +434,7 @@ void ConfigDlg::removeMap() {
  *
  * these four slots are almost the same, except for the names. i was thinking
  * of making a map with pointers to the buttons and names of the configEntry
- * so it could be one slot, but then there would be no way of telling which 
+ * so it could be one slot, but then there would be no way of telling which
  * of the buttons was clicked if they all connect to the same slot.
  *
  */
@@ -454,7 +454,7 @@ void ConfigDlg::keyColorClicked() {
 
     config.writeEntry("keycolor", color, QChar(','));
     config.write();
-    
+
     keycolor_button->setPalette(QPalette(newcolor));
     emit reloadKeyboard();
 }
@@ -473,7 +473,7 @@ void ConfigDlg::keyColorPressedClicked() {
 
     config.writeEntry("keycolor_pressed", color, QChar(','));
     config.write();
-    
+
     keycolor_pressed_button->setPalette(QPalette(newcolor));
     emit reloadKeyboard();
 }
@@ -492,7 +492,7 @@ void ConfigDlg::keyColorLinesClicked() {
 
     config.writeEntry("keycolor_lines", color, QChar(','));
     config.write();
-    
+
     keycolor_lines_button->setPalette(QPalette(newcolor));
     emit reloadKeyboard();
 }
@@ -511,7 +511,7 @@ void ConfigDlg::textColorClicked() {
 
     config.writeEntry("textcolor", color, QChar(','));
     config.write();
-    
+
     textcolor_button->setPalette(QPalette(newcolor));
     emit reloadKeyboard();
 }

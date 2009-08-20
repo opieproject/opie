@@ -14,8 +14,8 @@ public :
 
       ABluetoothRFCOMM( BluetoothRFCOMMNetNode * PNN );
 
-      RuntimeInfo * runtime( void ) 
-        { return 
+      RuntimeInfo * runtime( void )
+        { return
            ( RT ) ? RT : ( RT = new BluetoothRFCOMMRun( this, Data ) );
         }
 

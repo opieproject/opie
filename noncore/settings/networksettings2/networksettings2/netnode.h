@@ -86,9 +86,9 @@ public:
     //
     //
 
-    inline int done( void ) 
+    inline int done( void )
       { return Done; }
-    inline void setDone( int D ) 
+    inline void setDone( int D )
       { Done = D; }
 
     // does this Node provide a NetworkSetup
@@ -101,7 +101,7 @@ public:
     // compiled references to 'needed' NetNodes -> needs list
     inline void setAlternatives( NetNodeList * Alt )
       { Alternatives = Alt; }
-    inline NetNodeList & alternatives( void ) 
+    inline NetNodeList & alternatives( void )
       { return *Alternatives; }
 
     //
@@ -111,18 +111,18 @@ public:
     //
 
     // do instances of this noce class have data for this file
-    virtual bool hasDataForFile( SystemFile & ) 
+    virtual bool hasDataForFile( SystemFile & )
       { return 0; }
 
     // open proper file SF identified by S
-    // this method is called by NS2.  
+    // this method is called by NS2.
     //
     // overrule this ONLY if this proper file is a common file
     // for all NNI of this node class and the data generated
     // by each of the NNI needs to be put in one file
     //
     // the function can return a set of folders that should
-    // be created (or perhaps already exist) prior to opening 
+    // be created (or perhaps already exist) prior to opening
     // the file
     //
     // if this is the case the file should be (re)opened in append
@@ -145,17 +145,17 @@ public:
     // 0 : data output, 1 no data, 2 error
     virtual short generateFile( SystemFile &,
                                ANetNodeInstance * ,
-                               long ) 
+                               long )
       { return 1; }
 
     // generate NIC name based on instance nr
     // only relevant if node instances are devices
-    virtual QString genNic( long ) 
+    virtual QString genNic( long )
       { return QString(""); }
 
     // max number of instances for this node type
     // only relevant if node instances are devices
-    virtual long instanceCount( void ) 
+    virtual long instanceCount( void )
       { return 1; }
 
     // return ID list for each file generated specially for
@@ -204,21 +204,21 @@ public:
         { IsModified=0; NodeType = NN; IsNew = TRUE; }
     virtual ~ANetNodeInstance( void ) { }
 
-    inline int done( void ) 
+    inline int done( void )
       { return Done; }
-    inline void setDone( int D ) 
+    inline void setDone( int D )
       { Done = D; }
 
     // return data was modified
-    inline void setModified( bool M ) 
+    inline void setModified( bool M )
       {  IsModified = M; }
-    inline bool isModified( void ) 
+    inline bool isModified( void )
       {  return IsModified; }
 
     // get next node
     ANetNodeInstance * nextNode();
     // return NetNode this is an instance of
-    ANetNode * nodeClass( void ) 
+    ANetNode * nodeClass( void )
         { return NodeType; }
 
     // intialize am instance of a net node
@@ -229,15 +229,15 @@ public:
     void saveAttributes( QTextStream & TS ) ;
 
     // return true if node isntance is NEW and not loaded
-    inline void setNew( bool IsN ) 
+    inline void setNew( bool IsN )
       { IsNew = IsN; }
-    inline bool isNew( void ) 
+    inline bool isNew( void )
       { return IsNew; }
 
     // return description for this instance
-    inline QString & description( void ) 
+    inline QString & description( void )
       { return Description; }
-    inline void setDescription( const QString & S ) 
+    inline void setDescription( const QString & S )
       { Description = S; }
 
     // pixmap for this instance -> from NetNode
@@ -250,9 +250,9 @@ public:
     inline const char ** needs( void )
       { return NodeType->needs(); }
 
-    inline void setNetworkSetup( NetworkSetup * NC ) 
+    inline void setNetworkSetup( NetworkSetup * NC )
       { TheNetworkSetup = NC; }
-    inline NetworkSetup * networkSetup( void ) 
+    inline NetworkSetup * networkSetup( void )
       { return TheNetworkSetup; }
 
     //
@@ -269,22 +269,22 @@ public:
       { return 0; }
 
     // check if this node (or sub nodes) have data for this file
-    virtual bool hasDataForFile( SystemFile & S ) 
+    virtual bool hasDataForFile( SystemFile & S )
       { return nodeClass()->hasDataForFile( S ); }
 
     // generate code specific for this node but embedded
     // in the section of the parent
     // this is called within the code of the parent
     virtual short generateFileEmbedded( SystemFile & SF,
-                                       long DevNr ) 
+                                       long DevNr )
       { ANetNodeInstance * NNI = nextNode();
         return (NNI) ? NNI->generateFileEmbedded( SF, DevNr ) : 1;
       }
 
-    // generate code specific for this node 
+    // generate code specific for this node
     // (or find the first node that does)
     virtual short generateFile( SystemFile & SF,
-                               long  DevNr ) 
+                               long  DevNr )
       { ANetNodeInstance * NNI = nextNode();
         return (NNI) ? NNI->generateFile( SF, DevNr ) : 1;
       }
@@ -425,7 +425,7 @@ public :
       virtual const QString & description( void ) {
         return fullSetup()->description( );
       }
-      // return triggers that should fire when this 
+      // return triggers that should fire when this
       // setup is brought up
       virtual const QStringList & triggers( void ) {
         return fullSetup()->triggers( );
@@ -478,16 +478,16 @@ public :
           return (RI) ? RI->fullSetup() : 0;
         }
 
-      inline ANetNodeInstance * netNode() 
+      inline ANetNodeInstance * netNode()
         { return NNI; }
 
-      inline NetworkSetup * networkSetup() 
+      inline NetworkSetup * networkSetup()
         { return NNI->networkSetup(); }
 
       virtual State_t detectState( void ) = 0;
       // public API to set the state
-      virtual QString setState( NetworkSetup * NC, 
-                                Action_t A, 
+      virtual QString setState( NetworkSetup * NC,
+                                Action_t A,
                                 bool Force = 0 );
 
       inline RuntimeInfo * nextNode( void ) {
@@ -503,8 +503,8 @@ signals :
 protected :
 
       // set state of this node (private API)
-      virtual QString setMyState( NetworkSetup * NC, 
-                                Action_t A, 
+      virtual QString setMyState( NetworkSetup * NC,
+                                Action_t A,
                                 bool Force = 0 ) = 0;
 
       // networkSetup this runtime info belongs to
@@ -519,25 +519,25 @@ public :
       NetworkSetup( QTextStream & TS, bool & Dangling );
       ~NetworkSetup( void );
 
-      // copy settings from NC to this 
+      // copy settings from NC to this
       void copyFrom( const NetworkSetup & NC );
 
-      inline int done( void ) 
+      inline int done( void )
         { return Done; }
-      inline void setDone( int D ) 
+      inline void setDone( int D )
         { Done = D; }
 
-      inline int number( void ) 
+      inline int number( void )
         { return Number; }
-      inline void setNumber( int i ) 
+      inline void setNumber( int i )
         { Number = i; }
-      inline bool isNew( void ) 
+      inline bool isNew( void )
         { return IsNew; }
-      inline void setNew( bool N ) 
+      inline void setNew( bool N )
         { IsNew = N ; }
-      inline bool isModified( void ) 
+      inline bool isModified( void )
         { return IsModified; }
-      inline void setModified( bool N ) 
+      inline void setModified( bool N )
         { IsModified = N ; }
 
       inline bool handlesInterface( const QString & S ) {
@@ -574,10 +574,10 @@ public :
       // get the ixmap for this device
       QPixmap devicePixmap( void );
       QPixmap statePixmap( State_t S );
-      inline QPixmap statePixmap( bool Update = 0 ) 
+      inline QPixmap statePixmap( bool Update = 0 )
         { return statePixmap( state(Update) ); }
       QString stateName( State_t );
-      inline QString stateName( bool Update = 0 ) 
+      inline QString stateName( bool Update = 0 )
         { return stateName( state(Update) ); }
 
       QString setState( Action_t A, bool Force = 0 );
@@ -586,7 +586,7 @@ public :
 
       void append( ANetNodeInstance * NNI );
 
-      // makes sure that all items in the networkSetup point to 
+      // makes sure that all items in the networkSetup point to
       // that connectoin
       void reassign( void );
 
@@ -607,7 +607,7 @@ public :
       inline void setCurrentState( State_t S )
         { CurrentState = S; }
 
-      // return TRUE if this node can have data to be inserted in 
+      // return TRUE if this node can have data to be inserted in
       // file identified by S
       bool hasDataForFile( SystemFile & S );
       ANetNodeInstance * firstWithDataForFile( SystemFile & );
@@ -623,7 +623,7 @@ public :
 
 private :
 
-      int compareItems ( QCollection::Item item1, 
+      int compareItems ( QCollection::Item item1,
                          QCollection::Item item2 );
 
       long Number;

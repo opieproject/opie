@@ -14,7 +14,7 @@ class IMAPBase : public QObject
 public:
 	IMAPBase(const Account &account);
 
-	enum Error { IMAPErrConnectionRefused, IMAPErrHostNotFound, 
+	enum Error { IMAPErrConnectionRefused, IMAPErrHostNotFound,
 		     IMAPErrSocketRead, IMAPErrUnknownError,
 		     IMAPErrLoginFailed };
 

@@ -22,9 +22,9 @@
 #include <qpe/fontdatabase.h>
 #include <qfont.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QCheckBox;
 class QComboBox;
 class QLabel;
@@ -35,7 +35,7 @@ class QTabWidget;
 class QWidget;
 
 class optionsDialog : public QDialog
-{ 
+{
   Q_OBJECT
 
     public:
@@ -73,8 +73,8 @@ class optionsDialog : public QDialog
   QString ftpSite,  ListFile, s_site,  host, base_dir, browserName;
 //  int styleInt;
   // font dialog
-  FontDialog *fontDlg; 
-   
+  FontDialog *fontDlg;
+
 //  bool styleChanged;
  protected:
   void openSiteList();
@@ -90,7 +90,7 @@ class optionsDialog : public QDialog
   void getSelection(  QListBoxItem *item);
   //    void lineEditChanged(const QString &);
   private slots:
-    void slotWordWrap(bool); 
+    void slotWordWrap(bool);
   void slotQueryExit();
   void changeFonts();
   protected slots:

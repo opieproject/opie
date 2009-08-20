@@ -140,7 +140,7 @@ BrightnessAppletControl::~BrightnessAppletControl()
 
 
 void BrightnessAppletControl::hideEvent( QHideEvent* e )
-{    
+{
     BrightnessApplet* applet = static_cast<BrightnessApplet*>( parent() );
     applet->writeSystemBrightness( applet->calcBrightnessValue() );
     QFrame::hideEvent( e );
@@ -183,7 +183,7 @@ int BrightnessApplet::readSystemBrightness(void)
     } else {
         cfg.setGroup("Battery");
     }
-    
+
     odebug << "reading brightness " << cfg.readNumEntry("Brightness", 128) << oendl;
 
     return cfg.readNumEntry("Brightness", 128);

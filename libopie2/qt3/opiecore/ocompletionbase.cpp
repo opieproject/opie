@@ -74,7 +74,7 @@ OCompletion* OCompletionBase::completionObject( bool hsig )
 {
     if ( m_delegate )
         return m_delegate->completionObject( hsig );
-    
+
     if ( !m_pCompObj )
     {
         setCompletionObject( new OCompletion(), hsig );
@@ -89,7 +89,7 @@ void OCompletionBase::setCompletionObject( OCompletion* compObj, bool hsig )
         m_delegate->setCompletionObject( compObj, hsig );
         return;
     }
-    
+
     if ( m_bAutoDelCompObj && compObj != m_pCompObj )
         delete m_pCompObj;
 
@@ -115,7 +115,7 @@ void OCompletionBase::setCompletionMode( OGlobalSettings::Completion mode )
         m_delegate->setCompletionMode( mode );
         return;
     }
-    
+
     m_iCompletionMode = mode;
     // Always sync up OCompletion mode with ours as long as we
     // are performing completions.
@@ -141,13 +141,13 @@ bool OCompletionBase::setKeyBinding( KeyBindingType item, const OShortcut& cut )
 void OCompletionBase::useGlobalKeyBindings()
 {
 
-/*    
+/*
 
     if ( m_delegate ) {
         m_delegate->useGlobalKeyBindings();
         return;
     }
-    
+
     m_keyMap.clear();
     m_keyMap.insert( TextCompletion, 0 );
     m_keyMap.insert( PrevCompletionMatch, 0 );
@@ -155,7 +155,7 @@ void OCompletionBase::useGlobalKeyBindings()
     m_keyMap.insert( SubstringCompletion, 0 );
 
 */
-    
+
 }
 
 void OCompletionBase::setup( bool autodel, bool hsig, bool esig )
@@ -164,7 +164,7 @@ void OCompletionBase::setup( bool autodel, bool hsig, bool esig )
         m_delegate->setup( autodel, hsig, esig );
         return;
     }
-    
+
     m_bAutoDelCompObj = autodel;
     m_bHandleSignals = hsig;
     m_bEmitSignals = esig;

@@ -254,7 +254,7 @@ void Palm::init(const QString& cpu_info)
     if(test.exists() && ((list_len=test.count())>2)) {
         m_backlightdev += test[list_len-1];
         m_backlightdev += "/";
-    } 
+    }
     else {
        m_backlightdev = "";
     }

@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) Holger Freyther <freyther@handhelds.org>
-			     Copyright (C) Stefan Eilers <stefan@eilers-online.net> 
+			     Copyright (C) Stefan Eilers <stefan@eilers-online.net>
               =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
@@ -266,10 +266,10 @@ UIDArray OPimContactAccessBackend::sorted( const UIDArray& ar, bool asc, int sor
 			/* -1 == unfiled */
 			for ( uint cat_nu = 0; cat_nu < cat_count; ++cat_nu ) {
 				cat = categories[cat_nu];
-			
-				if ( cat == -1 ) { 
-					// We should search unfiled contacts. 
-					// Unfiled categories have no category set, thus continue if 
+
+				if ( cat == -1 ) {
+					// We should search unfiled contacts.
+					// Unfiled categories have no category set, thus continue if
 					// this contact has no empty category.
 					if( !contact.categories().isEmpty() )
 						contactPassed = false;
@@ -277,7 +277,7 @@ UIDArray OPimContactAccessBackend::sorted( const UIDArray& ar, bool asc, int sor
 					if ( !contact.categories().contains( cat ) )
 						contactPassed = false;
 			}
-			
+
 		}
 	}
         /*

@@ -29,7 +29,7 @@ class Dasher::CDasherViewSquare : public Dasher::CDasherView
 public:
 	CDasherViewSquare(CDasherScreen* DasherScreen, CDasherModel& DasherModel, Dasher::Opts::ScreenOrientations Orientation=Dasher::Opts::LeftToRight);
 	void TapOnDisplay(int mousex,int mousey, unsigned long Time);
-	
+
 	void ChangeScreen(CDasherScreen* NewScreen);
 	void DrawMouse(int mousex, int mousey);
 	void DrawKeyboard();
@@ -38,10 +38,10 @@ private:
 	inline const void screen2dasher(int *mousex, int *mousey);
 	inline const int dasherx2screen(const myint sx);
 	inline const int dashery2screen(myint sy);
-	
+
 	int RenderNode(const symbol Character, const int Color, Opts::ColorSchemes ColorScheme,
 		myint y1, myint y2, int& mostleft, bool& force, bool text);
-	
+
 	void CheckForNewRoot();
 	inline void Crosshair(myint sx);
 	double m_dXmpa,m_dXmpb,m_dXmpc,m_dXmpd;

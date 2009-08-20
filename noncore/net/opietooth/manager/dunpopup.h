@@ -30,7 +30,7 @@ namespace OpieTooth {
 
     private:
         QAction* m_push;
-        OpieTooth::BTDeviceItem *m_item; //device item 
+        OpieTooth::BTDeviceItem *m_item; //device item
         Services m_service; //device service (port)
     private slots:
         void slotConnect();

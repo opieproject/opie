@@ -19,7 +19,7 @@
 **********************************************************************/
 #include "cardgame.h"
 
-    
+
 void CardGame::newGame()
 {
     // Create Cards
@@ -27,7 +27,7 @@ void CardGame::newGame()
 
     // Shuffle Cards
     shuffle();
- 
+
     // Deal Cards
     deal();
 }

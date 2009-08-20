@@ -21,7 +21,7 @@ class QLineEdit;
 class QSpinBox;
 
 class NewPageDialog : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:

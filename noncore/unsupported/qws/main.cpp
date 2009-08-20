@@ -4,7 +4,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <unistd.h> 
+#include <unistd.h>
 
 #include <syslog.h>
 #include <stdio.h>
@@ -39,7 +39,7 @@ int daemon_init(void)
 
     setsid();
 
-    chdir("/");	
+    chdir("/");
 
     umask(0);
 

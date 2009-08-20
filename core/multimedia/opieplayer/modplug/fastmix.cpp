@@ -43,7 +43,7 @@ extern LONG gnRvbLOfsVol;
 // 4x256 taps polyphase FIR resampling filter
 extern short int gFastSinc[];
 extern short int gKaiserSinc[]; // 8-taps polyphase
-/* 
+/*
   ------------------------------------------------------------------------------------------------
    cubic spline interpolation doc,
 	(derived from "digital image warping", g. wolberg)
@@ -143,7 +143,7 @@ CzCUBICSPLINE::~CzCUBICSPLINE( )
 
 CzCUBICSPLINE sspline;
 
-/* 
+/*
   ------------------------------------------------------------------------------------------------
    fir interpolation doc,
 	(derived from "an engineer's guide to fir digital filters", n.j. loy)
@@ -458,7 +458,7 @@ CzWINDOWEDFIR sfir;
 		vol_r  += (CzWINDOWEDFIR::lut[firidx+6]*(int)p[(poshi+7-4)*2+1]);	\
 		vol_r  += (CzWINDOWEDFIR::lut[firidx+7]*(int)p[(poshi+8-4)*2+1]);	\
 		vol_r >>= WFIR_8SHIFT;
-			
+
 #define SNDMIX_GETSTEREOVOL16FIRFILTER \
 	int poshi   = nPos >> 16;\
 	int poslo   = (nPos & 0xFFFF);\
@@ -604,7 +604,7 @@ typedef VOID (MPPASMCALL * LPMIXINTERFACE)(MODCHANNEL *, int *, int *);
 #define BEGIN_MIX_FLT_INTERFACE(func)\
 	BEGIN_MIX_INTERFACE(func)\
 	MIX_BEGIN_FILTER
-	
+
 
 #define END_MIX_FLT_INTERFACE()\
 	SNDMIX_ENDSAMPLELOOP\
@@ -630,7 +630,7 @@ typedef VOID (MPPASMCALL * LPMIXINTERFACE)(MODCHANNEL *, int *, int *);
 #define BEGIN_MIX_STFLT_INTERFACE(func)\
 	BEGIN_MIX_INTERFACE(func)\
 	MIX_BEGIN_STEREO_FILTER
-	
+
 
 #define END_MIX_STFLT_INTERFACE()\
 	SNDMIX_ENDSAMPLELOOP\
@@ -1283,7 +1283,7 @@ const LPMIXINTERFACE gpMixFunctionTable[2*2*16] =
 	// Spline SRC, Filter
 	FilterMono8BitSplineMix,	FilterMono16BitSplineMix,	FilterStereo8BitSplineMix,	FilterStereo16BitSplineMix,
 	FilterMono8BitSplineRampMix,FilterMono16BitSplineRampMix,FilterStereo8BitSplineRampMix,FilterStereo16BitSplineRampMix,
-	
+
 	// FirFilter  SRC
 	Mono8BitFirFilterMix,			Mono16BitFirFilterMix,			Stereo8BitFirFilterMix,	Stereo16BitFirFilterMix,
 	Mono8BitFirFilterRampMix,		Mono16BitFirFilterRampMix,		Stereo8BitFirFilterRampMix,Stereo16BitFirFilterRampMix,
@@ -1306,14 +1306,14 @@ const LPMIXINTERFACE gpFastMixFunctionTable[2*2*16] =
 	// Linear SRC, Filter
 	FilterMono8BitLinearMix,	FilterMono16BitLinearMix,	FilterStereo8BitLinearMix,	FilterStereo16BitLinearMix,
 	FilterMono8BitLinearRampMix,FilterMono16BitLinearRampMix,FilterStereo8BitLinearRampMix,FilterStereo16BitLinearRampMix,
-	
+
 	// Spline SRC
 	Mono8BitSplineMix,		Mono16BitSplineMix,		Stereo8BitSplineMix,	Stereo16BitSplineMix,
 	Mono8BitSplineRampMix,	Mono16BitSplineRampMix,	Stereo8BitSplineRampMix,Stereo16BitSplineRampMix,
 	// Spline SRC, Filter
 	FilterMono8BitSplineMix,	FilterMono16BitSplineMix,	FilterStereo8BitSplineMix,	FilterStereo16BitSplineMix,
 	FilterMono8BitSplineRampMix,FilterMono16BitSplineRampMix,FilterStereo8BitSplineRampMix,FilterStereo16BitSplineRampMix,
-	
+
 	// FirFilter SRC
 	Mono8BitFirFilterMix,		Mono16BitFirFilterMix,		Stereo8BitFirFilterMix,	Stereo16BitFirFilterMix,
 	Mono8BitFirFilterRampMix,	Mono16BitFirFilterRampMix,	Stereo8BitFirFilterRampMix,Stereo16BitFirFilterRampMix,
@@ -1469,7 +1469,7 @@ UINT CSoundFile::CreateStereoMix(int count)
 			else if( (gdwSoundSetup & (SNDMIX_HQRESAMPLER)) == SNDMIX_HQRESAMPLER )
 				nFlags += MIXNDX_SPLINESRC;
 			else
-				nFlags += MIXNDX_LINEARSRC; // use 
+				nFlags += MIXNDX_LINEARSRC; // use
 		}
 		if ((nFlags < 0x40) && (pChannel->nLeftVol == pChannel->nRightVol)
 		 && ((!pChannel->nRampLength) || (pChannel->nLeftRamp == pChannel->nRightRamp)))
@@ -1644,7 +1644,7 @@ __declspec(naked) DWORD MPPASMCALL X86_Convert32To8(LPVOID lp8, int *pBuffer, DW
 	for (UINT i=0; i<lSampleCount; i++)
 	{
 		int n = pBuffer[i];
-		if (n < MIXING_CLIPMIN)	
+		if (n < MIXING_CLIPMIN)
 			n = MIXING_CLIPMIN;
 		else if (n > MIXING_CLIPMAX)
 			n = MIXING_CLIPMAX;
@@ -2111,7 +2111,7 @@ __declspec(naked) void MPPASMCALL X86_StereoFill(int *pBuffer, UINT nSamples, LP
 {
 	int rofs = *lpROfs;
 	int lofs = *lpLOfs;
-	
+
 	if ((!rofs) && (!lofs))
 	{
 		X86_InitMixBuffer(pBuffer, nSamples*2);
@@ -2179,7 +2179,7 @@ void MPPASMCALL X86_EndChannelOfs(MODCHANNEL *pChannel, int *pBuffer, UINT nSamp
 {
 	int rofs = pChannel->nROfs;
 	int lofs = pChannel->nLOfs;
-	
+
 	if ((!rofs) && (!lofs)) return;
 	for (UINT i=0; i<nSamples; i++)
 	{

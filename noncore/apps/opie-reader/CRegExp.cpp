@@ -248,7 +248,7 @@ unsigned int CRegExpFilt::preprocessing(const QString& pat, bool insens)
 		  {
 		    mask |= bit[i];
 		  }
-	       
+
 		for (iter it = CV.begin(); it != CV.end(); ++it)
 		  {
 		    if (CV[it.first()] & bit[m-1])
@@ -514,7 +514,7 @@ void usage(void)
 int getline(tchar *s,int lim,FILE *f)
 {
   int c, i;
-    
+
   for (i = 0; i < lim-1 && (c = getc(f)) != EOF && c != '\n'; )
     {
       s[i++] = (tchar)c;
@@ -575,7 +575,7 @@ int main(int argc, char **argv)
     {
       lino++;
       bool ret = false;
-   
+
       {
 	tchar *textend = line+len;
 	tchar *text = line;

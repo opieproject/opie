@@ -85,7 +85,7 @@ namespace {
 #if 0
 
 	// There seems a misrepresentation between summary in otodoevent
-	// and summary in vcard. 
+	// and summary in vcard.
 	// The same with description..
 	// Description is summary and vice versa.. Argh.. (eilers)
 
@@ -102,7 +102,7 @@ namespace {
 
         addPropValue( task, VCSummaryProp,
                       event.description().local8Bit() );
-#endif 
+#endif
   return task;
 };
 }

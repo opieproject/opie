@@ -53,7 +53,7 @@ namespace OpieObex {
          */
         virtual void receive();
         /**
-         * Send the file 
+         * Send the file
          * @param the name of the file
          * @param the address of the device
          */
@@ -82,7 +82,7 @@ namespace OpieObex {
          * signal sent The file got beamed to the remote location
          */
         void sent(bool);
-        void done(bool);        
+        void done(bool);
     protected:
         uint m_count;
         QString m_file;
@@ -92,7 +92,7 @@ namespace OpieObex {
     protected slots:
         virtual void slotError();
     };
-};    
+};
 
 #endif
 //eof

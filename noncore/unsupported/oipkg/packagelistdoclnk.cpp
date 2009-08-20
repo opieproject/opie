@@ -44,7 +44,7 @@ PackageListDocLnk::~PackageListDocLnk()
 
 void PackageListDocLnk::update()
 {
-	pvDebug(2,"PackageListDocLnk::update ");	
+	pvDebug(2,"PackageListDocLnk::update ");
 	QList<DocLnk> packlist = doclnkset->children();
   for (DocLnk *pack =packlist.first(); pack != 0; pack=packlist.next() )
   {

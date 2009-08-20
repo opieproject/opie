@@ -309,7 +309,7 @@ void MyPty::reload( const Profile& prof) {
     if (ent->pw_shell != "")  {
         shell = ent->pw_shell;
     }
-    
+
     m_cmd = prof.readEntry("Command", shell);
 
     /*
@@ -320,9 +320,9 @@ void MyPty::reload( const Profile& prof) {
      * will fallback to /bin/sh
      * which should be there 100%
      */
-    if ( m_cmd.stripWhiteSpace() == "/bin/bash" && !QFile::exists(QFile::encodeName(m_cmd) ) )        
+    if ( m_cmd.stripWhiteSpace() == "/bin/bash" && !QFile::exists(QFile::encodeName(m_cmd) ) )
             m_cmd = "/bin/sh";
-        
+
 
     int envcount = prof.readNumEntry("EnvVars", 0);
     for (int i=0; i<envcount; i++) {

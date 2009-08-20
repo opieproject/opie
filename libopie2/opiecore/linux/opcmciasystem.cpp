@@ -239,10 +239,10 @@ void OPcmciaSystem::synchronize()
 
     // Now, check if there are any cards in the sockets
     // FIXME This may not be reliable with multi-function cards
-    
+
     QDir carddir("/sys/bus/pcmcia/devices");
     carddir.setFilter( QDir::Dirs );
-    
+
     for ( unsigned int i=0; i<carddir.count(); i++ ) {
         QString devid = carddir[i];
         if(devid[0] == '.') continue;
@@ -448,13 +448,13 @@ QStringList OPcmciaSocket::productIdentityVector() const
         for (i=0;i<4;i++) {
             if (prod_id[i]) {
                 qDebug( " PRODID = '%s'", prod_id[i] );
-                list += prod_id[i]; 
+                list += prod_id[i];
                 free(prod_id[i]);
             }
             else
-                list += ""; 
+                list += "";
         }
-    } 
+    }
     else
         list += "<unknown>";
 

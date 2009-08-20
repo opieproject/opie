@@ -51,7 +51,7 @@ public:
 	QValidator(parent,name)
     {
     }
- 
+
     State validate( QString &s, int &pos ) const
     {
 	int i;

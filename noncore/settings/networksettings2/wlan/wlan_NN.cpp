@@ -4,11 +4,11 @@
 
 #include "netnodeinterface.h"
 
-static const char * WLanNeeds[] = 
+static const char * WLanNeeds[] =
     { 0
     };
 
-static const char * WLanProvides[] = 
+static const char * WLanProvides[] =
     { "device",
       0
     };
@@ -48,8 +48,8 @@ const char ** WLanNetNode::provides( void ) {
       return WLanProvides;
 }
 
-QString WLanNetNode::genNic( long nr ) { 
-      QString S; 
+QString WLanNetNode::genNic( long nr ) {
+      QString S;
       return S.sprintf( "wlan%ld", nr );
 }
 

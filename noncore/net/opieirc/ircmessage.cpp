@@ -12,7 +12,7 @@ using namespace Opie::Core;
 
 /*
  * Create a new IRCMessage by evaluating
- * a received string 
+ * a received string
  */
 
 IRCMessage::IRCMessage(QString line) {
@@ -21,7 +21,7 @@ IRCMessage::IRCMessage(QString line) {
         line = line.left(line.length() - 1);
     QTextIStream stream(&line);
     QString temp;
-    
+
     stream >> temp;
     if (temp.startsWith(":")) {
         /* extract the prefix */
@@ -29,12 +29,12 @@ IRCMessage::IRCMessage(QString line) {
         stream >> temp;
         m_command = temp.upper();
         m_allParameters = line.right(line.length() - m_prefix.length() - m_command.length() - 3);
-    } 
+    }
     else {
         m_command = temp.upper();
         m_allParameters = line.right(line.length() - m_command.length() - 1);
     }
-    
+
     /* Create a list of all parameters */
     while(!(stream.atEnd())) {
         stream >> temp;
@@ -43,20 +43,20 @@ IRCMessage::IRCMessage(QString line) {
             m_trailing = line.right(line.length() - line.find(" :") - 2);
             m_parameters << m_trailing;
             break;
-        } 
+        }
         else {
             m_parameters << temp;
         }
     }
 
-    
+
     m_commandNumber = m_command.toInt(&m_isNumerical);
     /* Is this a CTCP command */
     if ((m_command == "PRIVMSG" || m_command == "NOTICE") && m_trailing.length()>0 && m_trailing.left(1) == QChar(1)) {
         m_ctcp = TRUE;
-    
+
         m_ctcpRequest = (m_command == "PRIVMSG");
-        
+
         /* Strip CTCP \001 characters */
         m_allParameters = m_allParameters.replace(QRegExp(QChar(1)), "");
         QTextIStream ctcpStream(&m_allParameters);
@@ -68,32 +68,32 @@ IRCMessage::IRCMessage(QString line) {
         length -= m_ctcpDestination.length() + 1;
         if (length <= 0) {
             m_allParameters = "";
-        } 
+        }
         else {
             m_allParameters = m_allParameters.right(length);
             m_parameters << m_allParameters;
         }
-    } 
+    }
     else {
         m_ctcp = FALSE;
     }
 
-    
+
     odebug << "Parsed: " << line << oendl;
     odebug << "Prefix: " << m_prefix << oendl;
     odebug << "Command: " << m_command << oendl;
     odebug << "Allparameters: " << m_allParameters << oendl;
-    
+
     for (unsigned int i=0; i<m_parameters.count(); i++) {
         odebug << "Parameter " << i << ":" << m_parameters[i] << oendl;
     }
-    
+
     if(m_ctcp) {
         odebug << "CTCP " << (m_ctcpRequest? "Request" : "Reply")  << ": " << m_ctcpCommand << oendl;
         odebug << "CTCP Destination: " << m_ctcpDestination << oendl;
         odebug << "CTCP param count is: " << m_parameters.count() << oendl;
     }
-    
+
 }
 
 QString IRCMessage::param(int param) {
@@ -103,11 +103,11 @@ QString IRCMessage::param(int param) {
 QStringList IRCMessage::params(const QString &paramstring) const {
     QStringList params, retvalue;
     params = QStringList::split(',', paramstring);
-    QStringList::Iterator end = params.end(); 
-    
+    QStringList::Iterator end = params.end();
+
     for (QStringList::Iterator it = params.begin(); it != end; ++it) {
         int pos = (*it).find(':');
-        if(pos < 0) {    
+        if(pos < 0) {
             if((*it).toUInt() < m_parameters.count())
                 retvalue << m_parameters[(*it).toUInt()];
         }
@@ -118,9 +118,9 @@ QStringList IRCMessage::params(const QString &paramstring) const {
             for (unsigned int i=start;i<=end && i < m_parameters.count() ;++i) {
                 retvalue << m_parameters[i];
             }
-        }      
+        }
     }
-    
+
     return retvalue;
 }
 

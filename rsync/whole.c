@@ -170,7 +170,7 @@ rs_result rs_patch_file(FILE *basis_file, FILE *delta_file, FILE *new_file,
     job = rs_patch_begin(rs_file_copy_cb, basis_file);
 
     r = rs_whole_run(job, delta_file, new_file);
-    
+
     if (stats)
         memcpy(stats, &job->stats, sizeof *stats);
 

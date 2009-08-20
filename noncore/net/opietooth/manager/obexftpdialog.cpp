@@ -54,9 +54,9 @@ static void info_cb(int event, const char *msg, int len, void* data);
  * device - bluetooth address of the device
  * port - port to connect to
  */
-ObexFtpDialog::ObexFtpDialog(const QString& device, int port, 
-    QWidget* parent, const char* name, bool modal, WFlags fl) 
-    : ObexFtpDialogBase(parent, name, modal, fl), m_device(device), 
+ObexFtpDialog::ObexFtpDialog(const QString& device, int port,
+    QWidget* parent, const char* name, bool modal, WFlags fl)
+    : ObexFtpDialogBase(parent, name, modal, fl), m_device(device),
     m_port(port), curdir("")
 {
     client = NULL;
@@ -74,17 +74,17 @@ ObexFtpDialog::ObexFtpDialog(const QString& device, int port,
     localLayout = new QVBoxLayout(localFs);
     localLayout->setSpacing( 0 );
     localLayout->setMargin( 0 );
-    destFile = new OFileSelector(localFs, 
-        OFileSelector::FileSelector, 
+    destFile = new OFileSelector(localFs,
+        OFileSelector::FileSelector,
         OFileSelector::ExtendedAll, localCurdir, "");
     destFile->setCloseVisible(false);
     destFile->setNewVisible(false);
     localLayout->addWidget(destFile);
     nReries->setValue(nRetries);
     connect(browseOK, SIGNAL(clicked()), SLOT(slotBrowse()));
-    connect(fileList, SIGNAL(clicked(QListViewItem*)), 
+    connect(fileList, SIGNAL(clicked(QListViewItem*)),
         SLOT(slotCd(QListViewItem*)));
-    connect(getButton, 
+    connect(getButton,
         SIGNAL(clicked()),
         SLOT(getFile()));
     connect(putButton,
@@ -93,13 +93,13 @@ ObexFtpDialog::ObexFtpDialog(const QString& device, int port,
     connect(delButton,
         SIGNAL(clicked()),
         SLOT(delFile()));
-    connect(destFile, 
+    connect(destFile,
         SIGNAL(dirSelected (const QString&)),
         SLOT(updateDir(const QString&)));
-    connect(saveButton, 
+    connect(saveButton,
         SIGNAL(clicked()),
         SLOT(slotSaveLog()));
-    connect(browseButton, 
+    connect(browseButton,
         SIGNAL(clicked()),
         SLOT(slotBrowseLog()));
 }
@@ -128,9 +128,9 @@ void ObexFtpDialog::doBrowse(bool reconnect)
     int len; //uuid length
     FileListItem* root; //root node
     int fsize; //file size
-    bool numOk; //true if the string is a number 
+    bool numOk; //true if the string is a number
     int tmp; //just a temp var
-    
+
     status(tr("Connecting to ") + m_device);
     odebug << "Browse device " << m_device << oendl;
     browseLog->clear();
@@ -174,9 +174,9 @@ void ObexFtpDialog::doBrowse(bool reconnect)
         }
         else
             fsize = 0;
-		log(QString(ent->name) + QString(" ") + 
+		log(QString(ent->name) + QString(" ") +
             QString::number(ent->mode));
-        
+
         a = new FileListItem(fileList, ent, fsize);
 	}
 	obexftp_closedir(dir);
@@ -283,13 +283,13 @@ void ObexFtpDialog::getFile()
         status(tr("Receiving file ") + file2get);
         result = obexftp_get(client, local, file2get);
         if (result < 0) {
-            log(file2get + QString(" receive ERROR:\n") + tr(strerror(errno))); 
+            log(file2get + QString(" receive ERROR:\n") + tr(strerror(errno)));
             errBox(file2get + QString(" receive ERROR"));
             status(file2get + QString(" receive ERROR"));
         }
         else {
-            log(file2get + QString(" received")); 
-            status(file2get + QString(" received")); 
+            log(file2get + QString(" received"));
+            status(file2get + QString(" received"));
             destFile->reread();
         }
     }
@@ -303,7 +303,7 @@ void ObexFtpDialog::putFile()
     int result; //OPeration result
     int idx; //Index of a symbol in the string
     struct stat localFStat; //Local file information
-    
+
     if (client == NULL) {
         errBox("No connection established");
         return;
@@ -315,7 +315,7 @@ void ObexFtpDialog::putFile()
     }
     result = stat(local, &localFStat);
     if (result < 0) {
-        errBox(tr("Wrong file selected ") + local + tr(" ") + 
+        errBox(tr("Wrong file selected ") + local + tr(" ") +
             tr(strerror(errno)));
         return;
     }
@@ -323,9 +323,9 @@ void ObexFtpDialog::putFile()
     if (idx > 0) {
         file2get = local.right(local.length() - idx - 1);
     }
-    else 
+    else
         file2get = local;
-    
+
     odebug << "Copy " << local << " to " << file2get << oendl;
     progressStatus = 0;
     fileProgress->setTotalSteps(localFStat.st_size / 1024);
@@ -333,14 +333,14 @@ void ObexFtpDialog::putFile()
     status(tr("Sending file ") + local);
     result = obexftp_put_file(client, local, file2get);
     if (result < 0) {
-        log(local + QString(" send ERROR:\n") + tr(strerror(errno))); 
+        log(local + QString(" send ERROR:\n") + tr(strerror(errno)));
         errBox(local + QString(" send ERROR"));
         status(local + QString(" send ERROR"));
     }
     else {
         doBrowse();
-        log(local + QString(" sent")); 
-        status(local + QString(" sent")); 
+        log(local + QString(" sent"));
+        status(local + QString(" sent"));
     }
 }
 
@@ -364,26 +364,26 @@ void ObexFtpDialog::delFile()
             file2get += "/";
         file2get += file->text(0);
     }
-    result = QMessageBox::warning(this, tr("Remove File"), 
+    result = QMessageBox::warning(this, tr("Remove File"),
         tr("Do you want to remove\n") + file2get, "Yes", "No");
     if (result != 0)
         return;
     odebug << "Remove " << file2get << oendl;
     result = obexftp_del(client, file2get);
     if (result < 0) {
-        log(file2get + QString(" remove ERROR\n") + tr(strerror(errno))); 
+        log(file2get + QString(" remove ERROR\n") + tr(strerror(errno)));
         errBox(file2get + QString(" remove ERROR"));
         status(file2get + QString(" remove ERROR"));
     }
     else {
         doBrowse();
-        log(file2get + QString(" removed")); 
-        status(file2get + QString(" removed")); 
+        log(file2get + QString(" removed"));
+        status(file2get + QString(" removed"));
     }
 }
 
 /* connect with given uuid. re-connect every time */
-int ObexFtpDialog::cli_connect_uuid(const uint8_t *uuid, int uuid_len, 
+int ObexFtpDialog::cli_connect_uuid(const uint8_t *uuid, int uuid_len,
     bool reconnect)
 {
 	int retry;
@@ -414,7 +414,7 @@ int ObexFtpDialog::cli_connect_uuid(const uint8_t *uuid, int uuid_len,
                 return TRUE;
             break;
         case OBEX_TRANS_BLUETOOTH:
-            if (obexftp_connect_uuid(client, m_device, m_port, 
+            if (obexftp_connect_uuid(client, m_device, m_port,
                 uuid, uuid_len) >= 0)
                 return TRUE;
             break;
@@ -476,13 +476,13 @@ void ObexFtpDialog::slotSaveLog()
 {
     QFile logFile(saveLogEdit->text());
     if (!logFile.open(IO_WriteOnly)) {
-        errBox(tr("Unable to open file ") + saveLogEdit->text() + tr(" ") + 
+        errBox(tr("Unable to open file ") + saveLogEdit->text() + tr(" ") +
             tr(strerror(errno)));
         return;
     }
     QTextStream stream(&logFile);
     stream << browseLog->text() << endl;
-    QMessageBox::information(this, tr("Saving"), 
+    QMessageBox::information(this, tr("Saving"),
         tr("Log file saved to ") + saveLogEdit->text());
 }
 
@@ -546,7 +546,7 @@ static void info_cb(int event, const char *msg, int len, void* data)
 
 	case OBEXFTP_EV_INFO:
         // 64 bit problems ?
-		dlg->log(QString("Got info ") + QString::number((int)msg)); 
+		dlg->log(QString("Got info ") + QString::number((int)msg));
 		break;
 
 	case OBEXFTP_EV_BODY:

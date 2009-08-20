@@ -14,8 +14,8 @@ class KIcon
 
 class KIconLoader
 {
-  public:    
-    QPixmap loadIcon( const QString &name, int ); 
+  public:
+    QPixmap loadIcon( const QString &name, int );
 
     QString iconPath( const QString &, int );
 };

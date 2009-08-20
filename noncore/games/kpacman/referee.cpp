@@ -498,7 +498,7 @@ void Referee::fillMapName()
         fileInfo.setFile(map);
         if (!fileInfo.isReadable())
             map = "";
-        
+
         mapName.append(map);
     }
 }
@@ -960,7 +960,7 @@ void Referee::introPlay()
                             id++;
                             break;
                         }
-                
+
             if (id >= 0 && id <= 4)
                 for (Monster *m = monsters->first(); m != 0; m = monsters->next())
                     if (m && m->id() == id && m->position() == OUT) {
@@ -1001,7 +1001,7 @@ void Referee::introPlay()
                   pacman->setPosition(37*BoardWidth-1);
                   repaintFigures();
                   start();
-                  return;               
+                  return;
     }
 
     if (timerCount++ < 15)
@@ -1013,7 +1013,7 @@ void Referee::demo()
     if (gameState.testBit(Ready))
         return;
 
-    if (gameState.testBit(Paused) || gameState.testBit(HallOfFame)) {   
+    if (gameState.testBit(Paused) || gameState.testBit(HallOfFame)) {
         QTimer::singleShot(afterPauseMS, this, SLOT(demo()));
         return;
     }
@@ -1192,7 +1192,7 @@ void Referee::start()
         repaint(pix->rect(pix->rect(pacman->position(), MonsterPix),
                           pix->rect(pacman->position(), MonsterScorePix, monstersEaten-1)));
     }
-        
+
     if (!gameTimer)
         gameTimer = startTimer( speed [level] );
 

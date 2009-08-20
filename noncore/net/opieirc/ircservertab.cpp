@@ -60,7 +60,7 @@ void IRCServerTab::appendText(QString text) {
         if (firstBreak != -1) {
             txt = "<qt bgcolor=\"" + m_backgroundColor + "\"/>" + txt.right(txt.length() - (firstBreak + 1));
         }
-    } 
+    }
     else {
         m_lines++;
     }
@@ -119,8 +119,8 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
         /* According to RFC 1459 */
         if (channel.length() > 0 && channel.length() < 200 &&
             channel.find(",") == -1 && channel.find('\007') == -1) {
-            
-            if (!channel.startsWith("#") && !channel.startsWith("&") 
+
+            if (!channel.startsWith("#") && !channel.startsWith("&")
                     && !channel.startsWith("+") && !channel.startsWith("!")) {
                 channel = channel.prepend("#");
             }
@@ -182,7 +182,7 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
         }
         else if (text.upper() == "OFF"){
             QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::Disable;
-        } 
+        }
         else {
             tab->appendText("<font color=\"" + m_errorColor + "\">Line: "+ line +"</font><br>Text: "+text);
         }
@@ -192,7 +192,7 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
         QString text = line.right(line.length()-6);
         if (text.length() > 0) {
             m_session->quit(text);
-        } 
+        }
         else {
             m_session->quit();
         }
@@ -205,17 +205,17 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
             if (tab->isA("IRCChannelTab")) {
                 tab->appendText("<font color=\"" + m_selfColor + "\">*" + IRCOutput::toHTML(m_server.nick()) + " " + IRCOutput::toHTML(text) + "</font><br>");
                 m_session->sendAction(((IRCChannelTab *)tab)->channel(), text);
-            } 
+            }
             else if (tab->isA("IRCQueryTab")) {
                 tab->appendText("<font color=\"" + m_selfColor + "\">*" + IRCOutput::toHTML(m_server.nick()) + " " + IRCOutput::toHTML(text) + "</font><br>");
                 m_session->sendAction(((IRCQueryTab *)tab)->person(), text);
-            } 
+            }
             else {
                 tab->appendText("<font color=\"" + m_errorColor + "\">Invalid tab for this command</font><br>");
             }
         }
     }
-    
+
     //SEND PRIVMSG
     else if (command == "MSG") {
         QString nickname;
@@ -254,7 +254,7 @@ void IRCServerTab::remove() {
         /* While there is a running session */
         m_close = TRUE;
         m_session->endSession();
-    } 
+    }
     else {
         /* Session has previously been closed */
         m_channelTabs.first();
@@ -304,7 +304,7 @@ void IRCServerTab::display(IRCOutput output) {
                     m_mainWindow->killTab(m_queryTabs.current(), true);
                 }
                 m_mainWindow->killTab(this);
-            } 
+            }
             else {
                 appendText("<font color=\"" + m_errorColor + "\">" + output.htmlMessage() +"</font><br>");
                 QListIterator<IRCChannelTab> it(m_channelTabs);
@@ -425,4 +425,4 @@ void IRCServerTab::slotUpdateChannels() {
 MainWindow *IRCServerTab::mainwindow() {
     return m_mainWindow;
 }
-                                                                                                 
+

@@ -33,12 +33,12 @@ PackageListRemote::~PackageListRemote()
 void PackageListRemote::query(QString s)
 {
 	pvDebug(4,"set query "+s);
-	searchString = s;	
+	searchString = s;
 }
 
 void PackageListRemote::update()
 {
-	pvDebug(2,"PackageListRemote::update");	
+	pvDebug(2,"PackageListRemote::update");
  	if (searchString.isEmpty()) return;
  	int r=0;
   QString cmdQuery;
@@ -48,10 +48,10 @@ void PackageListRemote::update()
   // use file for output
   cmdWget += " --output-document="+redirect;
 //http://ipkgfind.handhelds.org/packages.phtml?format=pda&query=ipkg&searchtype=package&section=
-	QString server="http://ipkgfind.handhelds.org/"; 	
+	QString server="http://ipkgfind.handhelds.org/";
   cmdQuery = cmdWget+" \""+server+"packages.phtml?";
   cmdQuery += "format=pda&searchtype=package&section=";
-  cmdQuery += "&query="+searchString;           	
+  cmdQuery += "&query="+searchString;
   cmdQuery += "\"";
 
   pvDebug(4,"search :"+cmdQuery);
@@ -60,9 +60,9 @@ void PackageListRemote::update()
 
 //[15:30:38] <killefiz> http://killefiz.de/zaurus/oipkg.php?query=puzzle
   QFile::remove(redirect);
-  server="http://killefiz.de/"; 	
+  server="http://killefiz.de/";
   cmdQuery = cmdWget+" \""+server+"zaurus/oipkg.php?";
-  cmdQuery += "query="+searchString;           	
+  cmdQuery += "query="+searchString;
   cmdQuery += "\"";
 
   pvDebug(4,"search :"+cmdQuery);

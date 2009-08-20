@@ -40,9 +40,9 @@ const char url_history_beg[]="/table.csv?s=";
 /* The stock is defined by its symbol.                                       */
 /* The history file starts at date1 and stops at date2.                      */
 /*****************************************************************************/
-libstocks_return_code get_history_csv(char *symbol, 
-				      char *date1, 
-				      char *date2, 
+libstocks_return_code get_history_csv(char *symbol,
+				      char *date1,
+				      char *date2,
 				      char **csv_file)
 {
   char *data;
@@ -55,7 +55,7 @@ libstocks_return_code get_history_csv(char *symbol,
   char *d1, *d2;
 
   libstocks_return_code error;
-  
+
   char *test;
 
   int ch_printed = snprintf(url, 80, "%s%s", url_history_beg, symbol);
@@ -105,7 +105,7 @@ libstocks_return_code get_history_csv(char *symbol,
   /* The server returns "No data available for symbol" */
   /* when the stock is not available */
   test = strstr(data, "No data available");
-  if (test) 
+  if (test)
     {
       free(data);
       return ERRDATA;
@@ -114,7 +114,7 @@ libstocks_return_code get_history_csv(char *symbol,
   /* The server return "No Prices in this date range" */
   /* when dates have not the good range */
   test = strstr(data, "No Prices in this date range");
-  if (test) 
+  if (test)
     {
       free(data);
       return ERRRANG;
@@ -130,9 +130,9 @@ libstocks_return_code get_history_csv(char *symbol,
 /* The stock is defined by its symbol.                                       */
 /* The history file starts at date1 and stops at date2.                      */
 /*****************************************************************************/
-libstocks_return_code get_stock_history(char *symbol, 
-				        char *date1, 
-				        char *date2, 
+libstocks_return_code get_stock_history(char *symbol,
+				        char *date1,
+				        char *date2,
 				        stock **stock_history)
 {
   libstocks_return_code error;

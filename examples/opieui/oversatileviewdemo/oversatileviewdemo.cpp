@@ -44,27 +44,27 @@ OVersatileViewDemo::OVersatileViewDemo( QWidget* parent, const char* name, WFlag
                    :QVBox( parent, name, f )
 {
     vv = new OVersatileView( this );
-    
+
     vv->addColumn( "First" );
     vv->addColumn( "2nd" );
     vv->addColumn( "IIIrd" );
-    
+
     QString counter;
-    
+
     QPixmap leaf( "leaf.png" );
     QPixmap opened( "folder_opened.png" );
     QPixmap closed( "folder_closed.png" );
-    
+
     QPixmap leaf32( "leaf32.png" );
     QPixmap opened32( "folder_opened32.png" );
     QPixmap closed32( "folder_closed32.png" );
-    
+
     vv->setDefaultPixmaps( OVersatileView::Tree, leaf, opened, closed );
     vv->setDefaultPixmaps( OVersatileView::Icons, leaf32, opened32, closed32 );
-    
+
     OVersatileViewItem* item;
     OVersatileViewItem* item2;
-    
+
     for ( int i = 0; i < 5; ++i )
     {
         counter.sprintf( "%d", i );
@@ -74,7 +74,7 @@ OVersatileViewDemo::OVersatileViewDemo( QWidget* parent, const char* name, WFlag
         item2->setRenameEnabled( true );
 
     }
-   
+
     connect( vv, SIGNAL( selectionChanged() ), this, SLOT( selectionChanged() ) );
     connect( vv, SIGNAL( selectionChanged(OVersatileViewItem*) ), this, SLOT( selectionChanged(OVersatileViewItem*) ) );
     connect( vv, SIGNAL( currentChanged(OVersatileViewItem*) ), this, SLOT( currentChanged(OVersatileViewItem*) ) );
@@ -83,17 +83,17 @@ OVersatileViewDemo::OVersatileViewDemo( QWidget* parent, const char* name, WFlag
 
     connect( vv, SIGNAL( doubleClicked(OVersatileViewItem*) ), this, SLOT( doubleClicked(OVersatileViewItem*) ) );
     connect( vv, SIGNAL( returnPressed(OVersatileViewItem*) ), this, SLOT( returnPressed(OVersatileViewItem*) ) );
-  
+
     connect( vv, SIGNAL( onItem(OVersatileViewItem*) ), this, SLOT( onItem(OVersatileViewItem*) ) );
     connect( vv, SIGNAL( onViewport() ), this, SLOT( onViewport() ) );
-    
+
     connect( vv, SIGNAL( expanded(OVersatileViewItem*) ), this, SLOT( expanded(OVersatileViewItem*) ) );
     connect( vv, SIGNAL( collapsed(OVersatileViewItem*) ), this, SLOT( collapsed(OVersatileViewItem*) ) );
 
     connect( vv, SIGNAL( moved() ), this, SLOT( moved() ) );
 
     connect( vv, SIGNAL( contextMenuRequested(OVersatileViewItem*,const QPoint&,int) ), this, SLOT( contextMenuRequested(OVersatileViewItem*,const QPoint&,int) ) );
-    
+
 }
 
 OVersatileViewDemo::~OVersatileViewDemo()
@@ -102,59 +102,59 @@ OVersatileViewDemo::~OVersatileViewDemo()
 
 void OVersatileViewDemo::selectionChanged()
 {
-    odebug << "received signal selectionChanged()" << oendl; 
+    odebug << "received signal selectionChanged()" << oendl;
 }
 void OVersatileViewDemo::selectionChanged( OVersatileViewItem * item )
 {
-    odebug << "received signal selectionChanged(OVersatileViewItem*)" << oendl; 
+    odebug << "received signal selectionChanged(OVersatileViewItem*)" << oendl;
 }
 void OVersatileViewDemo::currentChanged( OVersatileViewItem * item )
 {
-    odebug << "received signal currentChanged( OVersatileViewItem * )" << oendl; 
+    odebug << "received signal currentChanged( OVersatileViewItem * )" << oendl;
 }
 void OVersatileViewDemo::clicked( OVersatileViewItem * item )
 {
-    odebug << "received signal clicked( OVersatileViewItem * )" << oendl; 
+    odebug << "received signal clicked( OVersatileViewItem * )" << oendl;
 }
 void OVersatileViewDemo::pressed( OVersatileViewItem * item )
 {
-    odebug << "received signal pressed( OVersatileViewItem * )" << oendl; 
+    odebug << "received signal pressed( OVersatileViewItem * )" << oendl;
 }
 
 void OVersatileViewDemo::doubleClicked( OVersatileViewItem *item )
 {
-    odebug << "received signal doubleClicked( OVersatileViewItem *item )" << oendl; 
+    odebug << "received signal doubleClicked( OVersatileViewItem *item )" << oendl;
 }
 void OVersatileViewDemo::returnPressed( OVersatileViewItem *item )
 {
-    odebug << "received signal returnPressed( OVersatileViewItem *item )" << oendl; 
+    odebug << "received signal returnPressed( OVersatileViewItem *item )" << oendl;
 }
 
 void OVersatileViewDemo::onItem( OVersatileViewItem *item )
 {
-    odebug << "received signal onItem( OVersatileViewItem *item )" << oendl; 
+    odebug << "received signal onItem( OVersatileViewItem *item )" << oendl;
 }
 void OVersatileViewDemo::onViewport()
 {
-    odebug << "received signal onViewport()" << oendl; 
+    odebug << "received signal onViewport()" << oendl;
 }
 
 void OVersatileViewDemo::expanded( OVersatileViewItem *item )
 {
-    odebug << "received signal expanded( OVersatileViewItem *item )" << oendl; 
+    odebug << "received signal expanded( OVersatileViewItem *item )" << oendl;
 }
 
 void OVersatileViewDemo::collapsed( OVersatileViewItem *item )
 {
-    odebug << "received signal collapsed( OVersatileViewItem *item )" << oendl; 
+    odebug << "received signal collapsed( OVersatileViewItem *item )" << oendl;
 }
 
 void OVersatileViewDemo::moved()
 {
-    odebug << "received signal moved( OVersatileViewItem *item )" << oendl; 
+    odebug << "received signal moved( OVersatileViewItem *item )" << oendl;
 }
 
 void OVersatileViewDemo::contextMenuRequested( OVersatileViewItem *item, const QPoint& pos, int col )
 {
-    odebug << "received signal contextMenuRequested( OVersatileViewItem *item )" << oendl; 
+    odebug << "received signal contextMenuRequested( OVersatileViewItem *item )" << oendl;
 }

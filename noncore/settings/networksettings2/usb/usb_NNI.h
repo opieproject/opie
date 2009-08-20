@@ -14,7 +14,7 @@ public :
 
       AUSB( USBNetNode * PNN );
 
-      RuntimeInfo * runtime( void ) 
+      RuntimeInfo * runtime( void )
         { return
             ( RT ) ? RT : ( RT = new USBRun( this, Data ) );
         }
@@ -23,7 +23,7 @@ public :
       QString acceptable( void );
       void commit( void );
 
-      virtual void * data( void ) 
+      virtual void * data( void )
         { return (void *)&Data; }
 
       virtual short generateFileEmbedded( SystemFile & TS,

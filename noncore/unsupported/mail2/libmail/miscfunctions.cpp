@@ -58,7 +58,7 @@ QString MiscFunctions::encodeBase64(const QString &src)
 		}
 	}
 
-	return temp;	
+	return temp;
 }
 
 void MiscFunctions::encodeBase64Base(char *src, QString *dest, int len)
@@ -123,10 +123,10 @@ QString MiscFunctions::decodeBase64(const QString &src)
 	char *destPtr;
 	QByteArray buffer;
 	uint bufCount = 0, pos = 0, decodedCount, x;
-	
+
 	buffer.resize(src.length() * 3 / 4);
 	destPtr = buffer.data();
-	
+
 	while (pos < src.length()) {
 		decodedCount = 4;
 		x = 0;
@@ -143,7 +143,7 @@ QString MiscFunctions::decodeBase64(const QString &src)
 			bufCount += decodedCount;
 		}
 	}
-	
+
 	buffer.resize(bufCount);
 	return QString(buffer);
 }
@@ -156,7 +156,7 @@ int MiscFunctions::decodeBase64Base(char *src, char *bufOut)
 
 	for (int x = 0; x < 4; x++) {
 		c = src[x];
-	
+
 		if ( (int) c >= 'A' && (int) c <= 'Z')
 			li[x] = (int) c - (int) 'A';
 		if ( (int) c >= 'a' && (int) c <= 'z')
@@ -168,13 +168,13 @@ int MiscFunctions::decodeBase64Base(char *src, char *bufOut)
 		if (c == '/')
 			li[x] = 63;
 	}
-	
+
 	processed = 1;
 	bufOut[0] = (char) li[0] & (32+16+8+4+2+1);
 	bufOut[0] <<= 2;
 	z = li[1] >> 4;
 	bufOut[0] = bufOut[0] | z;
-		
+
 	if (src[2] != '=') {
 		bufOut[1] = (char) li[1] & (8+4+2+1);
 		bufOut[1] <<= 4;
@@ -264,7 +264,7 @@ QString MiscFunctions::smtpAuthCramMd5(const QString &data, const QString &key)
 		MD5_Final(tk, &tctx);
 
 		key_int = tk;
-	}	
+	}
 
 	bzero(k_ipad, sizeof k_ipad);
 	bzero(k_opad, sizeof k_opad);

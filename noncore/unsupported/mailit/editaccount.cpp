@@ -42,7 +42,7 @@ void EditAccount::setAccount(MailAccount *in, bool newOne)
 		smtpServerInput->setText("");
 		syncCheckBox->setChecked(TRUE);
 		syncLimitInput->setValue(2);
-	
+
 		setCaption( tr("Create new Account") );
 	} else {
 		accountNameInput->setText(account->accountName);
@@ -104,12 +104,12 @@ void EditAccount::init()
     syncCheckBox = new QCheckBox( tr( "Synchronize"  ), this);
     syncCheckBox->setChecked( TRUE );
     grid->addWidget( syncCheckBox,7,0);
-    
+
     syncLimitInputLabel = new QLabel(tr("Mail Size (k)"), syncBox);
     //syncBox->addWidget( syncLimitInputLabel);
     syncLimitInput = new QSpinBox( syncBox, "syncSize" );
     //syncBox->addWidget(syncLimitInput);
-    
+
 }
 
 
@@ -124,7 +124,7 @@ void EditAccount::accept()
 	account->smtpServer = smtpServerInput->text();
 	account->synchronize = syncCheckBox->isChecked();
 	account->syncLimit = syncLimitInput->value()*1000;	//Display in kB
-	
+
 	QDialog::accept();
 }
 

@@ -36,7 +36,7 @@ Menu::ScaleEditDialog::ScaleEditDialog(TonleiterData* data,QWidget* parent,const
 
     pianoscale=new PianoScale(this);
     masterlayout->addWidget(pianoscale);
-    
+
     //make dialog fit the screen
     QPEApplication::showDialog( this );
 }

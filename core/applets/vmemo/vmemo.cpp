@@ -3,7 +3,7 @@
               =.             Copyright 2009 Team Opie <opie@handhelds.org>
             .=l.             Copyright 2002 Jeremy Cowgar <jc@cowgar.com>
            .>+-=             Copyright 2002 and 2003 L.J.Potter <ljp@llornkcor.com>
- _;:,     .>    :=|.         
+ _;:,     .>    :=|.
 .> <`_,   >  .   <=          This program is free software; you can
 :`=1 )Y*s>-.--   :           redistribute it and/or  modify it under
 .="- .-=="i,     .._         the terms of the GNU Library General Public
@@ -117,7 +117,7 @@ void VMemo::mousePressEvent( QMouseEvent *me ) {
             if(!startRecording() ){
                 QMessageBox::critical(0, tr("vmemo"), tr("Recording aborted"));
             }
-        } 
+        }
         else if ( opt == 1 ) {
             // Show vmemo settings
             QCopEnvelope e("QPE/Application/sound", "raise()" );
@@ -137,7 +137,7 @@ void VMemo::mouseReleaseEvent( QMouseEvent * )
 void VMemo::setupStatusWidget( QString fileTitle )
 {
     m_statusWidget = new QWidget();
-    QHBoxLayout *layout2 = new QHBoxLayout( m_statusWidget ); 
+    QHBoxLayout *layout2 = new QHBoxLayout( m_statusWidget );
     layout2->setSpacing( 4 );
     layout2->setMargin( 2 );
     QVBoxLayout *layout = new QVBoxLayout( m_statusWidget );
@@ -322,7 +322,7 @@ void VMemo::readSettings()
 
     vmCfg.setGroup("Defaults");
     bool useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
-    if( useADPCM ) 
+    if( useADPCM )
         m_fileparams.format = WAVE_FORMAT_DVI_ADPCM;
     else
         m_fileparams.format = WAVE_FORMAT_PCM;

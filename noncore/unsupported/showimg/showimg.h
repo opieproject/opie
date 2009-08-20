@@ -53,7 +53,7 @@ class ImageWidget : public QWidget
  public:
     ImageWidget( QWidget *parent=0 )
         : QWidget( parent )   {
-        setBackgroundMode(NoBackground);        
+        setBackgroundMode(NoBackground);
     }
     ~ImageWidget() {  }
 
@@ -79,13 +79,13 @@ class InfoDialog:public QDialog
 
 public:
 
-    static void displayInfo(const QString &caption, const QStringList text, QWidget *parent); 
+    static void displayInfo(const QString &caption, const QStringList text, QWidget *parent);
 
 private:
 
     InfoDialog(const QString &caption,const QStringList text,   QWidget *parent);
 
-};  
+};
 
 class ControlsDialog:public QDialog
 {
@@ -106,7 +106,7 @@ private:
     QSpinBox *spb;
     QImage  img;
     int *b;
-}; 
+};
 
 
 class ImagePane : public QWidget
@@ -126,11 +126,11 @@ public:
 
 
     int  paneWidth() const {
-        return image->visibleWidth(); 
+        return image->visibleWidth();
     }
 
     int  paneHeight() const {
-        return image->visibleHeight(); 
+        return image->visibleHeight();
     }
 
     void setPosition(int x, int y) {
@@ -145,7 +145,7 @@ signals:
     void clicked();
 
 private:
-    QScrollView   *image;    
+    QScrollView   *image;
     ImageWidget  *pic;
     QVBoxLayout *vb;
 
@@ -209,7 +209,7 @@ private:
 private slots:
 
     void slideShow( bool on );
-    void help(); 
+    void help();
     void slideUpdate();
     bool nextImage();
     bool prevImage();
@@ -269,7 +269,7 @@ private:
     ImageFileSelector *fileSelector;
     bool isFullScreen;
     bool isSized;                   // true if image is to be resized to fit the window size
-    bool bFromDocView;              // a flag to indicate whether or not we were 
+    bool bFromDocView;              // a flag to indicate whether or not we were
                                     // launched from the document view...
 
     int slideDelay;
@@ -280,7 +280,7 @@ private:
     QTimer *slideTimer;
     QValueList<DocLnk> imageList;
     QAction *slideAction;
-    
+
 
     QString imageInfo[LAST];
 };

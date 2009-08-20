@@ -57,7 +57,7 @@ TESession::TESession(QMainWindow* main, TEWidget* _te, const char* _pgm, QStrLis
   QObject::connect( em,SIGNAL(changeColumns(int)),
                     main,SLOT(changeColumns(int)) );
 
-  
+
 
   QObject::connect( em,SIGNAL(changeTitle(int,const QString&)),
                     this,SLOT(changeTitle(int,const QString&)) );

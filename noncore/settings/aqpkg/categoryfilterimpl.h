@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -41,7 +41,7 @@ class QListBox;
 class CategoryFilterImpl : public QDialog
 {
    Q_OBJECT
-public: 
+public:
     CategoryFilterImpl(const QString &categories, const QString &selectedCategories, QWidget *parent=0, const char *name=0);
     ~CategoryFilterImpl();
 

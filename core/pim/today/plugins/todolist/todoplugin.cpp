@@ -17,7 +17,7 @@
 #include "todoplugin.h"
 #include "todopluginconfig.h"
 
-TodolistPlugin::TodolistPlugin() 
+TodolistPlugin::TodolistPlugin()
     : m_widget(0l)
 {
 }

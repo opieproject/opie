@@ -8,15 +8,15 @@ class ProfileRun  : public RuntimeInfo {
 
 public :
 
-      ProfileRun( ANetNodeInstance * NNI, ProfileData & D ) : 
+      ProfileRun( ANetNodeInstance * NNI, ProfileData & D ) :
             RuntimeInfo( NNI )
         { Data = &D;  }
 
-      virtual RuntimeInfo * fullSetup( void ) 
+      virtual RuntimeInfo * fullSetup( void )
         { return this; }
       virtual const QString & description( void )
         { return Data->Description; }
-      virtual bool triggersVPN( void ) 
+      virtual bool triggersVPN( void )
         { return Data->TriggerVPN; }
 
       State_t detectState( void );

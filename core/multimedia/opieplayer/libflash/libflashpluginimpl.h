@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef LIBFLASH_PLUGIN_IMPL_H 
+#ifndef LIBFLASH_PLUGIN_IMPL_H
 #define LIBFLASH_PLUGIN_IMPL_H
 
 

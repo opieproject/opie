@@ -36,7 +36,7 @@
 #define WAVE_FORMAT_DVI_ADPCM (0x0011)
 #define WAVE_FORMAT_PCM (0x0001)
 
-typedef struct { 
+typedef struct {
     char           riffID[4];
     unsigned long  riffLen;
     char           wavID[4];
@@ -76,7 +76,7 @@ typedef struct {
 class OWavFile {
 public:
     OWavFile( const QString &fileName );
-    OWavFile( const QString &fileName, OWavFileParameters fileparams, 
+    OWavFile( const QString &fileName, OWavFileParameters fileparams,
         unsigned short samplesPerBlock );
     ~OWavFile();
     bool adjustHeaders( unsigned long total );

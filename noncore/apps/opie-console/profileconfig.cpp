@@ -10,7 +10,7 @@ ProfileConfig::~ProfileConfig()
 {
 }
 
-QStringList ProfileConfig::groups() const 
+QStringList ProfileConfig::groups() const
 {
     QStringList list;
     QMap<QString, ConfigGroup>::ConstIterator it;
@@ -39,7 +39,7 @@ void ProfileConfig::clearGroup( const QString& str )
     setGroup( cur );
 }
 
-QMap<QString, QString> ProfileConfig::items( const QString& group ) const 
+QMap<QString, QString> ProfileConfig::items( const QString& group ) const
 {
     QMap<QString, QString> map;
     QMap<QString, ConfigGroup>::ConstIterator it;

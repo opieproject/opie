@@ -87,14 +87,14 @@ int Field::getBall(int x, int y)
 {
 	if( checkBounds(x,y) )
 		return field[y][x].getColor();
-	else 
+	else
 		return NOBALL;
 }
 int Field::getAnim(int x, int y)
 {
 	if( checkBounds(x,y) )
 		return field[y][x].getAnim();
-	else 
+	else
 		return NOBALL;
 }
 void Field::setAnim(int x, int y, int anim)

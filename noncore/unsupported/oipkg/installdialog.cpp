@@ -26,7 +26,7 @@ InstallDialog::InstallDialog( PackageManagerSettings* s, QWidget* parent,  const
 		settings = s;
     if ( !name )
 			setName( "InstallDialog" );
-    resize( 223, 269 ); 
+    resize( 223, 269 );
     setCaption( tr( "Install" ) );
     InstallDialogLayout = new QGridLayout( this );
     InstallDialogLayout->setSpacing( 2 );
@@ -49,7 +49,7 @@ InstallDialog::InstallDialog( PackageManagerSettings* s, QWidget* parent,  const
     _force_depends = new QCheckBox( GroupBoxOptions, "_force_depends" );
     QFont _force_depends_font(  _force_depends->font() );
     _force_depends_font.setPointSize( 8 );
-    _force_depends->setFont( _force_depends_font ); 
+    _force_depends->setFont( _force_depends_font );
     _force_depends->setText( tr( "-force-depends" ) );
     //_force_depends->setChecked( true );
 
@@ -58,7 +58,7 @@ InstallDialog::InstallDialog( PackageManagerSettings* s, QWidget* parent,  const
     _force_reinstall = new QCheckBox( GroupBoxOptions, "_force_reinstall" );
     QFont _force_reinstall_font(  _force_reinstall->font() );
     _force_reinstall_font.setPointSize( 8 );
-    _force_reinstall->setFont( _force_reinstall_font ); 
+    _force_reinstall->setFont( _force_reinstall_font );
     _force_reinstall->setText( tr( "-force-reinstall" ) );
 
     GroupBoxOptionsLayout->addWidget( _force_reinstall, 1, 0 );
@@ -85,7 +85,7 @@ InstallDialog::InstallDialog( PackageManagerSettings* s, QWidget* parent,  const
 
 }
 
-/*  
+/*
  *  Destroys the object and frees any allocated resources
  */
 InstallDialog::~InstallDialog()
@@ -93,24 +93,24 @@ InstallDialog::~InstallDialog()
     // no need to delete child widgets, Qt does it all for us
 }
 
-/*  
+/*
  *  Main event handler. Reimplemented to handle application
  *  font changes
  */
 bool InstallDialog::event( QEvent* ev )
 {
-    bool ret = QDialog::event( ev ); 
+    bool ret = QDialog::event( ev );
     if ( ev->type() == QEvent::ApplicationFontChange ) {
 	QFont _force_depends_font(  _force_depends->font() );
 	_force_depends_font.setPointSize( 8 );
-	_force_depends->setFont( _force_depends_font ); 
+	_force_depends->setFont( _force_depends_font );
 	QFont _force_reinstall_font(  _force_reinstall->font() );
 	_force_reinstall_font.setPointSize( 8 );
 	_force_reinstall->setFont( _force_reinstall_font );
 	QFont _force_remove_font(  _force_remove->font() );
 	QFont _force_overwrite_font(  _force_overwrite->font() );
 	_force_remove_font.setPointSize( 8 );
-	_force_remove->setFont( _force_remove_font ); 
+	_force_remove->setFont( _force_remove_font );
     }
     return ret;
 }

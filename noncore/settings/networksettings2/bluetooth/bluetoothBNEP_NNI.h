@@ -14,8 +14,8 @@ public :
 
       ABluetoothBNEP( BluetoothBNEPNetNode * PNN );
 
-      RuntimeInfo * runtime( void ) 
-        { return 
+      RuntimeInfo * runtime( void )
+        { return
            ( RT ) ? RT : ( RT = new BluetoothBNEPRun( this, Data ) );
         }
 

@@ -16,16 +16,16 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QCheckBox;
 class QLabel;
 class QLineEdit;
 class QString;
 
 class filePermissions : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
@@ -43,15 +43,15 @@ public:
 private slots:
     void ownReadCheck();
     void ownWriteCheck();
-    void ownExeCheck(); 
+    void ownExeCheck();
 
     void grpReadCheck();
     void grpWriteCheck();
-    void grpExeCheck(); 
+    void grpExeCheck();
 
     void wrldReadCheck();
     void wrldWriteCheck();
-    void wrldExeCheck(); 
+    void wrldExeCheck();
     void accept();
 };
 

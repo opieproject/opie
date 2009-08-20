@@ -178,7 +178,7 @@ void QashMoney::changeTabDisplay ()
             transactiondisplay->listview->setColumnWidth ( 4, preferences->getColumnPreference ( 9 ) ); // transaction account width
             transactiondisplay->listview->setColumnWidthMode ( 4, QListView::Manual );
           }
-	
+
 	// pull the column sorting preference from the preferences table, and configure the listview accordingly
 	int column = 0;
 	int direction = 0;

@@ -40,7 +40,7 @@ public:
     void killTab(IRCTab *tab, bool now = false);
     static QString appName() { return QString::fromLatin1("opieirc"); }
     static QString appCaption();
-    void addDCC(DCCTransfer::Type type, Q_UINT32 ip4Addr, Q_UINT16 port, 
+    void addDCC(DCCTransfer::Type type, Q_UINT32 ip4Addr, Q_UINT16 port,
         const QString &filename, const QString &nickname, unsigned int size);
 signals:
     void updateScroll();
@@ -51,8 +51,8 @@ protected slots:
     void changeEvent(IRCTab *);
 
     void slotNextTab();
-    void slotPrevTab();   
-    void slotPing(const QString&);    
+    void slotPrevTab();
+    void slotPing(const QString&);
     void slotKillTabsLater();
 
 protected:

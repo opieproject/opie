@@ -49,15 +49,15 @@ void AWLan::saveSpecificAttribute( QTextStream & S ) {
     S << "essid=" << quote( Data.ESSID ) << endl;
     S << "nodename=" << quote( Data.NodeName ) << endl;
     S << "mode=" << Data.Mode << endl;
-    S << "specificap=" 
-      << ((Data.SpecificAP) ? "yes" : "no") 
+    S << "specificap="
+      << ((Data.SpecificAP) ? "yes" : "no")
       << endl;
     S << "apmac=" << Data.APMac << endl;
-    S << "encrypted=" 
-      << ((Data.Encrypted) ? "yes" : "no") 
+    S << "encrypted="
+      << ((Data.Encrypted) ? "yes" : "no")
       << endl;
-    S << "acceptnonencrypted=" 
-      << ((Data.AcceptNonEncrypted) ? "yes" : "no") 
+    S << "acceptnonencrypted="
+      << ((Data.AcceptNonEncrypted) ? "yes" : "no")
       << endl;
     for( int i = 0 ;i < 4 ; i ++ ) {
       S << "key" << i << "=" << Data.Key[i] << endl;
@@ -98,12 +98,12 @@ short AWLan::generateFileEmbedded( SystemFile & SF,
             char Buf[100];
             if( gethostname(Buf, sizeof(Buf) ) == 0 ) {
               Buf[99] = '\0'; // just to make sure
-              SF << "  wireless_nick "  
+              SF << "  wireless_nick "
                  << Buf
                  << endl;
             }
           } else {
-            SF << "  wireless_nick \""  
+            SF << "  wireless_nick \""
                << Data.NodeName
                << "\""
                << endl;
@@ -112,12 +112,12 @@ short AWLan::generateFileEmbedded( SystemFile & SF,
 
         char * M = "Auto";
         switch ( Data.Mode ) {
-          case 0 : 
+          case 0 :
             break;
-          case 1 : 
+          case 1 :
             M = "Managed";
             break;
-          case 2 : 
+          case 2 :
             M = "Ad-Hoc";
             break;
         }

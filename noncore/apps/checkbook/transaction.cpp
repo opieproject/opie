@@ -336,6 +336,6 @@ void Transaction::slotActivated(const QString &arg )
 // slotNotNew -----------------------------------------------------------------
 void Transaction::slotNotNew()
 {
-    odebug << "Not new" << oendl; 
+    odebug << "Not new" << oendl;
     _bNew=false;
 }

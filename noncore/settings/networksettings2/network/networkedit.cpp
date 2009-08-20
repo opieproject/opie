@@ -13,7 +13,7 @@ NetworkEdit::NetworkEdit( QWidget * Parent ) : NetworkGUI( Parent ){
     AddPreUp_TB->setPixmap( NSResources->getPixmap( "add" ) );
     AddPostDown_TB->setPixmap( NSResources->getPixmap( "add" ) );
     AddPostUp_TB->setPixmap( NSResources->getPixmap( "add" ) );
-    
+
     DeletePreDown_TB->setPixmap( NSResources->getPixmap( "remove" ) );
     DeletePreUp_TB->setPixmap( NSResources->getPixmap( "remove" ) );
     DeletePostDown_TB->setPixmap( NSResources->getPixmap( "remove" ) );
@@ -34,7 +34,7 @@ NetworkEdit::NetworkEdit( QWidget * Parent ) : NetworkGUI( Parent ){
 QString NetworkEdit::acceptable( void ) {
     if( DHCP_CB->isChecked() ) {
       if( SendHostname_CB->isChecked() )
-        if( Hostname_LE->text().isEmpty() ) 
+        if( Hostname_LE->text().isEmpty() )
           return tr("Hostname needed");
       return QString();
     }
@@ -43,7 +43,7 @@ QString NetworkEdit::acceptable( void ) {
       return tr("IPAddress needed");
     if( Broadcast_LE->text().isEmpty() )
       return tr("Broadcast needed");
-    if( SubnetMask_LE->text().isEmpty() ) 
+    if( SubnetMask_LE->text().isEmpty() )
       return tr("Subnet mask needed");
 
     // valid IP ?
@@ -119,8 +119,8 @@ bool NetworkEdit::updateList( QStringList & SL, QListBox * LB ) {
 
     // Same size -> same content ?
     Changed = 0;
-    for ( QStringList::Iterator it = NewSL.begin(); 
-          it != NewSL.end(); 
+    for ( QStringList::Iterator it = NewSL.begin();
+          it != NewSL.end();
           ++it ) {
       if( SL.findIndex( (*it) ) < 0 ) {
         // new or modified item
@@ -134,8 +134,8 @@ bool NetworkEdit::updateList( QStringList & SL, QListBox * LB ) {
 
 void NetworkEdit::populateList( QStringList & SL, QListBox * LB ) {
     LB->clear();
-    for ( QStringList::Iterator it = SL.begin(); 
-          it != SL.end(); 
+    for ( QStringList::Iterator it = SL.begin();
+          it != SL.end();
           ++it ) {
       LB->insertItem( (*it) );
     }
@@ -145,7 +145,7 @@ void NetworkEdit::SLOT_NetmaskModified( const QString & ) {
     QString IP, SN;
     IP = IPAddress_LE->text();
     SN = SubnetMask_LE->text();
-    if( IP.isEmpty() || SN.isEmpty() ) 
+    if( IP.isEmpty() || SN.isEmpty() )
       return;
 
     if( ! validIP(IP) || ! validIP( SN ) )

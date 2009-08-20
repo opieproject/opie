@@ -166,9 +166,9 @@ void LiquidDecoration::paintButton( QPainter *painter, const QWidget *w,
 	}
 
 	if ( img ) {
-		if ( ( state & QWSButton::MouseOver ) && ( state & QWSButton::Clicked ) ) 
+		if ( ( state & QWSButton::MouseOver ) && ( state & QWSButton::Clicked ) )
 			painter->drawImage( brect.x() + 1, brect.y() + 3, *img );
-		else 
+		else
 			painter->drawImage( brect.x(), brect.y() + 2, *img );
 	}
 }

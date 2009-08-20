@@ -62,7 +62,7 @@ private:
   void out( QString );
 	QStringList* getList( QString, QString );
 	void processFileList( QStringList*, QString );
- 	
+
 
 };
 

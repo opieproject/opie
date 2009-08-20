@@ -31,10 +31,10 @@
 #define ARPHRD_IEEE80211 801
 #endif
 
-static char Dig2Hex[] = { 
-  '0', '1', '2', '3', 
-  '4', '5', '6', '7', 
-  '8', '9', 'A', 'B', 
+static char Dig2Hex[] = {
+  '0', '1', '2', '3',
+  '4', '5', '6', '7',
+  '8', '9', 'A', 'B',
   'C', 'D', 'E', 'F'
 };
 
@@ -72,8 +72,8 @@ int System::runAsRoot( QStringList & S, MyProcess * Prc ) {
     }
 
     if( getenv( "NS2TESTMODE" ) ) {
-      odebug << "TESTMODE !!! execute " 
-            << S.join( " ") 
+      odebug << "TESTMODE !!! execute "
+            << S.join( " ")
             << oendl;
     } else {
       MyProcess * P;
@@ -84,17 +84,17 @@ int System::runAsRoot( QStringList & S, MyProcess * Prc ) {
         P = new MyProcess();
         emit processEvent( tr("Command : ") + S.join( " " ) );
 
-        connect( P, 
+        connect( P,
                  SIGNAL( stdoutLine( const QString & ) ),
-                 this, 
+                 this,
                  SIGNAL( stdoutLine( const QString & ) ) );
 
-        connect( P, 
+        connect( P,
                  SIGNAL( stderrLine( const QString & ) ),
-                 this, 
+                 this,
                  SIGNAL( stderrLine( const QString & ) ) );
 
-        connect( P, 
+        connect( P,
                  SIGNAL(processExited(MyProcess*) ),
                  this, SLOT
                  (SLOT_ProcessExited(MyProcess*) ) );
@@ -104,7 +104,7 @@ int System::runAsRoot( QStringList & S, MyProcess * Prc ) {
 
       Log(("Executing %s\n", S.join( " " ).latin1() ));
 
-      if( ! P->process().start( OProcess::DontCare, 
+      if( ! P->process().start( OProcess::DontCare,
                       OProcess::AllOutput ) ) {
         odebug << "Error starting " << S << oendl;
         if( ! Prc )
@@ -150,16 +150,16 @@ int System::execAsUser( QStringList & SL, bool Synchronous ) {
 
       emit processEvent( tr("Command : ") + SL.join( " " ) );
 
-      Log(("Executing as user %s : %s\n", 
+      Log(("Executing as user %s : %s\n",
             CU.UserName.latin1(),
             SL.join( " " ).latin1() ));
 
       P->setEchoMode( Synchronous );
 
-      bool rv = P->process().start( 
-            (Synchronous) ? OProcess::Block : 
-                            OProcess::DontCare,  
-            (Synchronous) ? OProcess::AllOutput : 
+      bool rv = P->process().start(
+            (Synchronous) ? OProcess::Block :
+                            OProcess::DontCare,
+            (Synchronous) ? OProcess::AllOutput :
                             OProcess::NoCommunication );
       delete P;
 
@@ -175,9 +175,9 @@ void System::SLOT_ProcessExited( MyProcess * P ) {
       QString R;
 
       for( QValueListConstIterator<QCString> it = P->process().args().begin();
-           it != P->process().args().end(); 
+           it != P->process().args().end();
            ++it ) {
-        R += (*it); 
+        R += (*it);
         R += " ";
       }
 
@@ -207,14 +207,14 @@ void System::refreshStatistics( InterfaceInfo & I ) {
       version = 3;
     else if( line.find( "bytes" ) )
       version = 2;
-    else 
+    else
       version = 1;
     while((line = procTs.readLine().simplifyWhiteSpace()) != QString::null) {
       if( (loc = line.find(":") ) == -1) {
         continue;
       }
 
-      if( I.Name != line.left(loc) ) 
+      if( I.Name != line.left(loc) )
         continue;
 
       // tokenize
@@ -280,7 +280,7 @@ void System::probeInterfaces( void ) {
     InterfaceInfo * IFI;
 
     // flag all as 'down'
-    for( QDictIterator<InterfaceInfo> it( ProbedInterfaces ); 
+    for( QDictIterator<InterfaceInfo> it( ProbedInterfaces );
          it.current();
          ++it ) {
       it.current()->IsUp = 0;
@@ -289,7 +289,7 @@ void System::probeInterfaces( void ) {
     sockfd = socket(PF_INET, SOCK_DGRAM, 0);
     if(sockfd == -1) {
       odebug << "Cannot open INET socket "
-            << errno 
+            << errno
             << " "
             << strerror( errno )
             << oendl;
@@ -300,10 +300,10 @@ void System::probeInterfaces( void ) {
     // SIOCGIFCONF does not return ALL interfaces ???!?
     ProcDevNet = new QFile(PROCNETDEV);
     if( ! ProcDevNet->open(IO_ReadOnly) ) {
-      odebug << "Cannot open " 
+      odebug << "Cannot open "
             << PROCNETDEV
             << " "
-            << errno 
+            << errno
             << " "
             << strerror( errno )
             << oendl;
@@ -350,7 +350,7 @@ void System::probeInterfaces( void ) {
 
         if( IFI->IsPointToPoint ) {
           if( ioctl(sockfd, SIOCGIFDSTADDR, &ifrs) >= 0 ) {
-            IFI->DstAddress = 
+            IFI->DstAddress =
              inet_ntoa(((struct sockaddr_in*)&ifrs.ifr_dstaddr)->sin_addr);
           }
         }
@@ -359,7 +359,7 @@ void System::probeInterfaces( void ) {
         IFI->MACAddress = "";
 
         if( ioctl(sockfd, SIOCGIFHWADDR, &ifrs) >= 0 ) {
-          Log(("Family for NIC %s : %d\n", IFI->Name.latin1(), 
+          Log(("Family for NIC %s : %d\n", IFI->Name.latin1(),
               ifrs.ifr_hwaddr.sa_family ));
 
           IFI->CardType = ifrs.ifr_hwaddr.sa_family;
@@ -439,20 +439,20 @@ void System::probeInterfaces( void ) {
       }
 
       if( ioctl(sockfd, SIOCGIFADDR, &ifrs) >= 0 ) {
-        IFI->Address = 
+        IFI->Address =
            inet_ntoa(((struct sockaddr_in*)&ifrs.ifr_addr)->sin_addr);
       } else {
         IFI->Address = "";
         IFI->IsUp = 0;
       }
       if( ioctl(sockfd, SIOCGIFBRDADDR, &ifrs) >= 0 ) {
-        IFI->BCastAddress = 
+        IFI->BCastAddress =
            inet_ntoa(((struct sockaddr_in*)&ifrs.ifr_broadaddr)->sin_addr);
       } else {
         IFI->BCastAddress = "";
       }
       if( ioctl(sockfd, SIOCGIFNETMASK, &ifrs) >= 0 ) {
-        IFI->Netmask = 
+        IFI->Netmask =
            inet_ntoa(((struct sockaddr_in*)&ifrs.ifr_netmask)->sin_addr);
       } else {
         IFI->Netmask = "";
@@ -497,7 +497,7 @@ void VLog( char * Format, ... ) {
         }
 
         if( ! logf ) {
-          fprintf( stderr, "Cannot open logfile %s : %d\n", 
+          fprintf( stderr, "Cannot open logfile %s : %d\n",
               S.latin1(), errno );
           logf = (FILE *)1;
         } else {
@@ -525,7 +525,7 @@ void LogClose( void ) {
 
 QString removeSpaces( const QString & X ) {
       QString Y;
-      Y = X.simplifyWhiteSpace(); 
+      Y = X.simplifyWhiteSpace();
       Y.replace( QRegExp(" "), "_" );
       odebug << X <<  " **" << Y << "**" << oendl;
       return Y;
@@ -539,16 +539,16 @@ QString removeSpaces( const QString & X ) {
 
 MyProcess::MyProcess() : QObject(), StdoutBuffer(), StderrBuffer() {
       P = new OProcess();
-      connect( P, 
+      connect( P,
                SIGNAL( receivedStdout(Opie::Core::OProcess*, char*, int ) ),
-               this, 
+               this,
                SLOT( SLOT_Stdout(Opie::Core::OProcess*,char*,int) ) );
 
-      connect( P, 
+      connect( P,
                SIGNAL( receivedStderr(Opie::Core::OProcess*, char*, int ) ),
-               this, 
+               this,
                SLOT( SLOT_Stderr(Opie::Core::OProcess*,char*,int) ) );
-      connect( P, 
+      connect( P,
                SIGNAL( processExited(Opie::Core::OProcess*) ),
                this,
                SLOT( SLOT_ProcessExited(Opie::Core::OProcess*) ) );

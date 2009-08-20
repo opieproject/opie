@@ -128,7 +128,7 @@ bool OSoundDevice::setDeviceRate( unsigned int rate) {
         owarn << "Error setting rate to " << rate << ": " << snd_strerror(rc) << oendl;
         return false;
     }
-    if ( rate != actual_rate ) 
+    if ( rate != actual_rate )
         owarn << "The rate " << rate << " Hz is not supported by your hardware, using " << actual_rate << " Hz instead" << oendl;
     devRate = rate;
     return true;
@@ -186,10 +186,10 @@ int OSoundDevice::devWrite(char *buffer) {
     if (rc == -EPIPE) {
         owarn << "underrun occurred" << oendl;
         snd_pcm_prepare(m_handle);
-    } 
+    }
     else if (rc < 0) {
         owarn << "error from writei: " << snd_strerror(rc) << oendl;
-    }  
+    }
     else if (rc != (int)m_frames) {
         owarn << "short write, wrote " << rc << " frames" << oendl;
     }
@@ -201,10 +201,10 @@ int OSoundDevice::devRead(char *buffer) {
     if (rc == -EPIPE) {
         owarn << "overrun occurred" << oendl;
         snd_pcm_prepare(m_handle);
-    } 
+    }
     else if (rc < 0) {
         owarn << "error from readi: " << snd_strerror(rc) << oendl;
-    }  
+    }
     else if (rc != (int)m_frames) {
         owarn << "short read, read " << rc << " frames" << oendl;
     }

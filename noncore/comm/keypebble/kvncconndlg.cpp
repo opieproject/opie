@@ -38,7 +38,7 @@ KVNCConnDlg::KVNCConnDlg( KRFBServer *options,
 		bit->setChecked( options->colors256 );
 		shared->setChecked( options->shared );
 		timeBox->setValue( options->updateRate );
-		    
+
 		serverPassword->setEchoMode(QLineEdit::Password);
 
 		connect(togglePassword, SIGNAL( stateChanged(int) ), this, SLOT( showPassword(int) ) );

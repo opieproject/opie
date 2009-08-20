@@ -43,8 +43,8 @@ class XineControl : public QObject  {
 public:
     // note that this constructor takes over ownership of the passed
     // XINE::Lib object.
-    XineControl( XINE::Lib *xine, XineVideoWidget *xineWidget, 
-                 MediaPlayerState &_mediaPlayerState, 
+    XineControl( XINE::Lib *xine, XineVideoWidget *xineWidget,
+                 MediaPlayerState &_mediaPlayerState,
                  QObject *parent = 0, const char *name =0 );
     ~XineControl();
 

@@ -348,7 +348,7 @@ bool QIMPenCharSet::load( const QString &fn, Domain d )
 		if ( file.status() == IO_Ok )
 			ok = TRUE;
 	}
-	setHidden ( false ); 
+	setHidden ( false );
 	return ok;
 }
 
@@ -383,16 +383,16 @@ bool QIMPenCharSet::save( Domain d )
  * the domain is User, the Char is User and it's not deleted - OR
  * the domain is User, the Char is System and it is deleted - AND
  * the character is not an automated Combined Character
- * 
+ *
  * This is required to ensure that we don't save user defined chars that have been deleted, but
  * we *DO* save System chars that have been deleted. There is still the issue of deleted combined
  * chars but I'm not sure how to tackle that yet
  *
  */
- 
+
 		if ( ( ( (d == System) && pc->testFlag( QIMPenChar::System ) ) ||
 		 ( (d == User) && !pc->testFlag( QIMPenChar::System ) && !pc->testFlag( QIMPenChar::Deleted ) ) ||
-		 ( (d == User) && pc->testFlag( QIMPenChar::System ) && pc->testFlag( QIMPenChar::Deleted ) ) ) && 
+		 ( (d == User) && pc->testFlag( QIMPenChar::System ) && pc->testFlag( QIMPenChar::Deleted ) ) ) &&
                  ( !pc->testFlag (QIMPenChar::Combined ) ) ) {
 				ds << *pc;
 			}
@@ -473,7 +473,7 @@ QIMPenCharMatchList QIMPenCharSet::match( QIMPenChar *ch )
 	/*
 	   QIMPenCharMatchList::Iterator it;
 	   for ( it = matches.begin(); it != matches.end(); ++it ) {
-	
+
 	   odebug << "Match: \'" << (*it).penChar->character() "\', error " << (*it).error ", strokes " <<(*it).penChar->penStrokes().count() << oendl;
 	   }
 	   */

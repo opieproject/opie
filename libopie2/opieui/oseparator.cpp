@@ -68,10 +68,10 @@ void OSeparator::setOrientation(int orientation)
          setFrameStyle( QFrame::VLine | QFrame::Sunken );
          setMinimumSize(2, 0);
          break;
-      
+
       default:
          owarn << "OSeparator::setOrientation(): invalid orientation, using default orientation HLine" << oendl;
-         
+
       case Horizontal:
       case HLine:
          setFrameStyle( QFrame::HLine | QFrame::Sunken );
@@ -86,10 +86,10 @@ int OSeparator::orientation() const
 {
    if ( frameStyle() & VLine )
       return VLine;
-   
+
    if ( frameStyle() & HLine )
       return HLine;
-   
+
    return 0;
 }
 
@@ -121,9 +121,9 @@ QSize OSeparator::sizeHint() const
 {
    if ( frameStyle() & VLine )
       return QSize(2, 0);
-   
+
    if ( frameStyle() & HLine )
       return QSize(0, 2);
-   
+
    return QSize(-1, -1);
 }

@@ -94,7 +94,7 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
     }
 
   /* create socket */
-  if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
+  if ((s = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
 #ifdef DEBUG
       printf(" create socket : NOK\n");
@@ -120,21 +120,21 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
     }
 
   /* create header */
-  if (http_proxy_server) 
+  if (http_proxy_server)
     {
       sprintf(header,"GET http://%.128s:80%.256s HTTP/1.0\015\012\015\012",
               http_server, http_file);
     }
-  else 
+  else
     {
       sprintf(header,"GET %s HTTP/1.0\015\012\015\012",http_file);
     }
 
   hlg=strlen(header);
-  
+
   /* send header */
 #ifdef __UNIX__
-  if (write(s,header,hlg)!=hlg) 
+  if (write(s,header,hlg)!=hlg)
 #elif __WINDOWS__
   if (send(s,header,hlg, 0)!=hlg)
 #endif
@@ -142,7 +142,7 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
 #ifdef DEBUG
       printf(" send header : NOK\n");
 #endif
-      return ERRWHEA;         
+      return ERRWHEA;
     }
 
   data_lgr = 0;
@@ -156,8 +156,8 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
       r=read(s,buf,BUF_SIZE);
 #elif __WINDOWS__
       r=recv(s,buf,BUF_SIZE,0);
-#endif      
-      
+#endif
+
       if (r > 0)
         {
           if(!data_lgr)
@@ -168,7 +168,7 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
                           __FILE__, __LINE__);
                   exit(1);
                 }
-        
+
               memcpy(data,buf,r);
               data_lgr = r;
               data[r]=0;
@@ -190,7 +190,7 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
             }
         }
     }
-  
+
   /* close socket */
 #ifdef __UNIX__
   close(s);
@@ -204,7 +204,7 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
 
   /* get headers to test status line */
   /* and to split headers and content */
-  
+
   temp = data;
   header_founded = 0;
   while( !header_founded )
@@ -226,7 +226,7 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
   temp++;
 
   sscanf(data,"HTTP/1.%*d %03d",&error_code);
-  
+
   if (error_code != 200)
     {
 #ifdef DEBUG
@@ -243,7 +243,7 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
               __FILE__, __LINE__);
       exit(1);
     }
-      
+
   memcpy(csv_ptr, temp, strlen(temp)+1);
   free(data);
 
@@ -253,7 +253,7 @@ libstocks_return_code http_get(char *http_file, char *http_server, char **pdata)
 #endif
 
   *pdata = csv_ptr;
-  
+
   return 0;
 }
 
@@ -286,7 +286,7 @@ libstocks_return_code set_proxy(char *proxy)
   *(ptr-1)=0;  /* clear the ":"  */
 
   http_proxy_server=strdup(proxy);
-  
+
 #ifdef DEBUG
   printf("http_proxy_server : %s\n", http_proxy_server);
 #endif

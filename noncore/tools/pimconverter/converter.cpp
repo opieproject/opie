@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) 2009 The Opie Team <opie-devel@handhelds.org>
-              =.             
+              =.
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -65,14 +65,14 @@ Converter::Converter(QWidget *p, const char* n,  WFlags fl):
     m_sourceFormatSelector -> setCurrentItem( m_selectedSourceFormat );
     m_destFormatSelector -> setCurrentItem( m_selectedDestFormat );
     m_eraseDB -> setChecked( true );  // Default erase on copy
-    
+
     loadPimAccess();
 }
 
 void Converter::loadPimAccess()
 {
     QString dbtype;
-    
+
     Config config( "pimaccess" );
 
     config.setGroup( "datebook" );
@@ -94,13 +94,13 @@ void Converter::loadPimAccess()
     if( dbtype == "sql" )
         m_todoFormatSelector->setCurrentItem( 1 );
     else
-        m_todoFormatSelector->setCurrentItem( 0 );    
+        m_todoFormatSelector->setCurrentItem( 0 );
 }
 
-void Converter::savePimAccess() 
+void Converter::savePimAccess()
 {
     Config config( "pimaccess" );
-    
+
     config.setGroup( "datebook" );
     if( m_datebookFormatSelector->currentItem() == 1 )
         config.writeEntry( "usebackend", "sql" );
@@ -183,7 +183,7 @@ void Converter::start_conversion()
                         sourceDB = OPimAccessFactory<OPimContactAccess>::create( OPimGlobal::CONTACTLIST, OPimGlobal::SQL, "converter" );
                     }
                     break;
-                case TODOLIST: 
+                case TODOLIST:
                     {
                         sourceDB = OPimAccessFactory<OPimTodoAccess>::create( OPimGlobal::TODOLIST, OPimGlobal::SQL, "converter" );
                     }
@@ -315,7 +315,7 @@ void Converter::start_conversion()
 void Converter::closeEvent( QCloseEvent *e )
 {
     savePimAccess();
-    
+
     /* Due to the fact that we don't have multitasking here, this
      * critical handling don't make sense, but the future..
      */

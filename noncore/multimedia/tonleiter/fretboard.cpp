@@ -32,7 +32,7 @@ void Graph::FretBoard::paintEvent(QPaintEvent* pe)
 
     int instid=data->getCurrentInstrumentID();
     inst=data->getInstrument(instid);
-    //odebug << "inst " << instid << "  is " << inst.instName().data() << "" << oendl; 
+    //odebug << "inst " << instid << "  is " << inst.instName().data() << "" << oendl;
 
     QRect mysize=rect();
 
@@ -148,17 +148,17 @@ void Graph::FretBoard::paintScale(QPainter* p)
                 //no more than six octaves can be visualised (there is a zero octave)
                 int octave=Note::octaveOfBaseNote(data->getCurrentBaseNote(),note)-baseoctave;
                 if(octave<0)
-                    odebug << "" << octave << "," << baseoctave << "" << oendl; 
+                    odebug << "" << octave << "," << baseoctave << "" << oendl;
                 if(octave>5)
                 {
-                    odebug << "octave out of range" << oendl; 
+                    odebug << "octave out of range" << oendl;
                     octave=5;
                 }
 
                 p->setPen(QColor(255,0,0));
                 int c= ( (note-12*baseoctave) - (12*octave+data->getCurrentBaseNote()) )*15;
                 if(c<0 || c>255)
-                    odebug << "" << c << " = " << note << " - ( " << 12*octave << " + " << data->getCurrentBaseNote() << ")" << oendl; 
+                    odebug << "" << c << " = " << note << " - ( " << 12*octave << " + " << data->getCurrentBaseNote() << ")" << oendl;
                 QColor dotcolor(255,255,255);
 
                 if(octave==0)

@@ -2,18 +2,18 @@
 ** Copyright (C) 2000-2006 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the Qtopia Environment.
-** 
+**
 ** This program is free software; you can redistribute it and/or modify it
 ** under the terms of the GNU General Public License as published by the
 ** Free Software Foundation; either version 2 of the License, or (at your
 ** option) any later version.
-** 
-** A copy of the GNU GPL license version 2 is included in this package as 
+**
+** A copy of the GNU GPL license version 2 is included in this package as
 ** LICENSE.GPL.
 **
 ** This program is distributed in the hope that it will be useful, but
 ** WITHOUT ANY WARRANTY; without even the implied warranty of
-** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+** MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ** See the GNU General Public License for more details.
 **
 ** In addition, as a special exception Trolltech gives permission to link
@@ -25,7 +25,7 @@
 ** this file, you may extend this exception to your version of the file,
 ** but you are not obligated to do so. If you do not wish to do so, delete
 ** this exception statement from your version.
-** 
+**
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
 ** Contact info@trolltech.com if any conditions of this licensing are
@@ -141,7 +141,7 @@ QSize Image::loadScaledImageSize(const QString & filename, int target_width, int
     return aspectScaleSize(w, h, target_width, target_height, mode);
 }
 
-// Load an image to be used as a portrait. Force its height to height, 
+// Load an image to be used as a portrait. Force its height to height,
 // scale width to new height, and crop the width if it's still > width
 // XXX : Should be using integer math
 QImage Image::loadPortrait(const QString & filename, const int width, const int height)

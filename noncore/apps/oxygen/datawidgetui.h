@@ -31,7 +31,7 @@ class QStringList;
 class dataWidgetUI : public QWidget
 {
 	Q_OBJECT
-	
+
     public:
 		dataWidgetUI(const QStringList &list=0);
 

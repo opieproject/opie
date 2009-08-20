@@ -11,7 +11,7 @@
 #include <qstring.h>
 
 struct BroswerContent
-{ 
+{
 	QString top;
 	QString bottom;
 };
@@ -29,7 +29,7 @@ class DingWidget
 		void setQueryWord( QString );
 		void setDict( QString );
 		void loadValues();
-		
+
 		QString lang1_name,
 				lang2_name;
 
@@ -41,7 +41,7 @@ class DingWidget
 		BroswerContent s_strings;
 
 		QString dictName;
-		
+
 		QString search_word;
 		QString queryword;
 		QString methodname;

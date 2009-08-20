@@ -10,7 +10,7 @@ using namespace Opie::Core;
 #include <qtextstream.h>
 #include <qlistbox.h>
 
-KVNCBookmarkDlg::KVNCBookmarkDlg( QWidget * parent, const char * name, WFlags f ) 
+KVNCBookmarkDlg::KVNCBookmarkDlg( QWidget * parent, const char * name, WFlags f )
 
 : KVNCBookmarkDlgBase( parent, name,f)
 {
@@ -50,7 +50,7 @@ KRFBServer *KVNCBookmarkDlg::getServer(QString name)
 		KRFBServer * server=0;
     for ( server=servers.first(); server != 0; server=servers.next() ) {
         if (server->name==name)
-          
+
             return server;
     }
 		return 0;
@@ -103,14 +103,14 @@ void KVNCBookmarkDlg::readBookmarks(void)
 		QStringList entry;
 		QString key, val;
 		KRFBServer * server=0;
-		
+
 		if ( f.open(IO_ReadOnly) ) {
 				QTextStream t( &f );
 				QString s;
 				int n = 1;
 				while ( !t.eof() ) {
 						s = t.readLine();
-						
+
 
 						entry=QStringList::split('=',s);
 						key=entry[0].stripWhiteSpace().lower();
@@ -129,31 +129,31 @@ void KVNCBookmarkDlg::readBookmarks(void)
 								server->name=val;
 
 						}
-						else if (key=="hostname") 
+						else if (key=="hostname")
 								server->hostname=val;
-						else if (key=="password") 
+						else if (key=="password")
 							server->password=decipher(val);
-						else if (key=="display")  
+						else if (key=="display")
 								server->display=val.toInt();
-						else if (key=="hextile") 
+						else if (key=="hextile")
 								server->hexTile=val.toInt();
-						else if (key=="corre") 
+						else if (key=="corre")
 								server->corre=val.toInt();
-						else if (key=="rre") 
+						else if (key=="rre")
 								server->rre=val.toInt();
-						else if (key=="copyrect") 
+						else if (key=="copyrect")
 								server->copyrect=val.toInt();
-						else if (key=="colors256") 
+						else if (key=="colors256")
 								server->colors256=val.toInt();
-						else if (key=="shared") 
+						else if (key=="shared")
 								server->shared=val.toInt();
-						else if (key=="readonly") 
+						else if (key=="readonly")
 								server->readOnly=val.toInt();
-						else if (key=="deiconify") 
+						else if (key=="deiconify")
 								server->deIconify=val.toInt();
-						else if (key=="updaterate") 
+						else if (key=="updaterate")
 								server->updateRate=val.toInt();
-						else if (key=="scalefactor") 
+						else if (key=="scalefactor")
 								server->scaleFactor=val.toInt();
 
 				}
@@ -168,12 +168,12 @@ void KVNCBookmarkDlg::readBookmarks(void)
 void KVNCBookmarkDlg::writeBookmarks(void)
 {
 		QString filename=Global::applicationFileName("keypebble","bookmarks");
-						
+
 		QFile f(filename);
 
 		QString key, val;
 		KRFBServer * server=0;
-		
+
 		if ( f.open(IO_ReadWrite) ) {
 				QTextStream t( &f );
 				QString s;
@@ -181,7 +181,7 @@ void KVNCBookmarkDlg::writeBookmarks(void)
         KRFBServer *server;
 
          for ( server=servers.first(); server != 0; server=servers.next() ) {
-		odebug << server->name << oendl; 
+		odebug << server->name << oendl;
           t << "server=" << server->name << '\n';
 					t << "\thostname=" << server->hostname << '\n';
 					t << "\tpassword=" << encipher(server->password )<< '\n';

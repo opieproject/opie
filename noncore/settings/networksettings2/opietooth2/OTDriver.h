@@ -68,7 +68,7 @@ public:
       /*
        * Return true if the device is opened.
        */
-      int isOpen() 
+      int isOpen()
         { return Fd != -1; };
 
       /*
@@ -93,10 +93,10 @@ public:
       void bringDown();
 
       // is the device UP now
-      bool isUp() const 
+      bool isUp() const
          { return IsUp; }
 
-      // get current state 
+      // get current state
       // return 1 if UP, 0 if DOWN, -1 if ERROR
       int currentState();
 
@@ -106,67 +106,67 @@ public:
        */
       QString name();
 
-      int devId() const 
+      int devId() const
           { return Dev_id; };
 
       /*
        * Returns the string representation of the device id,
        * with the same format of the hciconfig tool.
        */
-      QString devname() 
+      QString devname()
           { return Dev; };
 
       /*
        * Returns the file descriptor for the local
        * networkSetup to this device
        */
-      int fd() const 
+      int fd() const
           { return Fd; };
-      void setfd(int _fd) 
+      void setfd(int _fd)
           { Fd = _fd; };
 
-      void setType(int _type) 
+      void setType(int _type)
          { Type = _type; };
-      int type() const 
+      int type() const
          { return Type; };
       QString strType();
 
-      int iscan() const 
+      int iscan() const
         { return Iscan; }
-      void setIScan(int _iscan) 
+      void setIScan(int _iscan)
         { Iscan = _iscan; }
 
-      int pscan() const 
+      int pscan() const
         { return Pscan; }
-      void setPScan(int _pscan) 
+      void setPScan(int _pscan)
         { Pscan = _pscan; }
 
-      int authentication() const 
+      int authentication() const
         { return Auth; }
-      void setAuthentication(int _auth) 
+      void setAuthentication(int _auth)
         { Auth = _auth; }
 
-      int encryption() const 
+      int encryption() const
         { return Encrypt; }
-      void setEncryption(int _encrypt) 
+      void setEncryption(int _encrypt)
         { Encrypt = _encrypt; }
 
-      void setDevId(int _dev_id) 
+      void setDevId(int _dev_id)
         { Dev_id = _dev_id; };
-      void setDev(char* _dev) 
+      void setDev(char* _dev)
         { Dev = _dev; };
 
       void setFlags( unsigned long flags);
 
-      const OTDeviceAddress & address() 
+      const OTDeviceAddress & address()
         { return Address; }
 
       void setFeatures( unsigned char * _f);
-      QString features() 
+      QString features()
         { return Features; }
 
       void setManufacturer(int compid);
-      QString manufacturer() 
+      QString manufacturer()
         { return Manufacturer; }
 
       QString revision();
@@ -178,10 +178,10 @@ public:
       void changeEncryption(bool _encryption);
       void changeAuthentication(bool _auth);
 
-      void getClass( QString & service,  
+      void getClass( QString & service,
                      QString & device );
-      void changeClass( unsigned char service, 
-                        unsigned char major, 
+      void changeClass( unsigned char service,
+                        unsigned char major,
                         unsigned char minor);
 
       QString getPeerName( const OTDeviceAddress & PAddr );
@@ -224,7 +224,7 @@ private:
       // socket bound to this device
       OTHCISocket * Socket;
 
-      // backpointer to opietooth system 
+      // backpointer to opietooth system
       OTGateway *   OT;
 };
 

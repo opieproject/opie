@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) 2009 The Opie Team <opie-devel@handhelds.org>
-              =.             
+              =.
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -45,7 +45,7 @@ namespace Opie {
 namespace Datebook {
     class MainWindow;
     class View;
-    
+
     class View: public QObject {
         Q_OBJECT
     public:
@@ -196,8 +196,8 @@ namespace Datebook {
     class ViewSelectAction : public QAction {
     public:
         ViewSelectAction(View *view, int accel, QObject *parent, const char *name = 0)
-            : QAction(view->name(), view->pixmap(), QString::null, accel, parent, name, TRUE) 
-        { 
+            : QAction(view->name(), view->pixmap(), QString::null, accel, parent, name, TRUE)
+        {
             setWhatsThis( view->description() );
         };
     };

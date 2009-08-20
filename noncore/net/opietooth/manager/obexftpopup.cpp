@@ -18,11 +18,11 @@
 using namespace Opie::Core;
 using namespace OpieTooth;
 
-ObexFtpPopup::ObexFtpPopup(const OpieTooth::Services& service,  
+ObexFtpPopup::ObexFtpPopup(const OpieTooth::Services& service,
     OpieTooth::BTDeviceItem* item)
     : QPopupMenu(), m_service(service)
 {
-    odebug << "ObexFtpPopup c'tor" << oendl; 
+    odebug << "ObexFtpPopup c'tor" << oendl;
 
     m_item = item;
     /* connect action */
@@ -50,7 +50,7 @@ ObexFtpPopup::~ObexFtpPopup()
 void ObexFtpPopup::slotBrowse()
 {
     odebug << "browse" <<oendl;
-    ObexFtpDialog ftpDlg(m_item->mac(), 
+    ObexFtpDialog ftpDlg(m_item->mac(),
         m_service.protocolDescriptorList().last().port());
     QPEApplication::execDialog(&ftpDlg);
 }
@@ -61,7 +61,7 @@ void ObexFtpPopup::slotPush()
     int port = m_service.protocolDescriptorList().last().port();
     device += "@";
     device += QString::number(port);
-    owarn << "push something to " << device << oendl; 
+    owarn << "push something to " << device << oendl;
     ObexDialog obexDialog(device);
     QPEApplication::execDialog( &obexDialog );
 }

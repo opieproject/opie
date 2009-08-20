@@ -43,7 +43,7 @@ GroupDialog::GroupDialog(QWidget* parent, const char* name, bool modal, WFlags f
 	hlayout->addLayout(vlayout1);
 	hlayout->addLayout(vlayout2);
 	layout->addSpacing(5);
-	
+
 //	showMaximized();
 }
 

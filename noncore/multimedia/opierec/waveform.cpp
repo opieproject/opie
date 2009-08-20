@@ -41,9 +41,9 @@ Waveform::Waveform( QWidget *parent, const char *name, WFlags fl )
 void Waveform::changeSettings( int frequency, int channels, snd_pcm_format_t format )
 {
     makePixmap();
-//   owarn << "change waveform " << frequency << ", " << channels << "" << oendl; 
+//   owarn << "change waveform " << frequency << ", " << channels << "" << oendl;
     samplesPerPixel = frequency * channels / (5 * windowSize);
-//   owarn << "Waveform::changeSettings " << samplesPerPixel << "" << oendl; 
+//   owarn << "Waveform::changeSettings " << samplesPerPixel << "" << oendl;
     if ( !samplesPerPixel )
         samplesPerPixel = 1;
     currentValue = 0;
@@ -105,7 +105,7 @@ void Waveform::newSamples( const char *buf, int len )
     }
 
     // Copy the final state back to the object.
-//owarn << "" << currentValue << ", " << numSamples << ", " << windowPosn << "" << oendl; 
+//owarn << "" << currentValue << ", " << numSamples << ", " << windowPosn << "" << oendl;
     this->currentValue = currentValue;
     this->numSamples = numSamples;
     this->windowPosn = windowPosn;

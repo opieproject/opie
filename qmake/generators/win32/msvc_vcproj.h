@@ -1,6 +1,6 @@
 
 /****************************************************************************
-** 
+**
 **
 ** Definition of VcprojGenerator class.
 **
@@ -73,7 +73,7 @@ protected:
     virtual bool findLibraries();
     virtual void outputVariables();
     QString fixFilename(QString ofile) const;
-    
+
     void initOld();
     void initProject();
     void initConfiguration();
@@ -112,7 +112,7 @@ inline QString VcprojGenerator::defaultMakefile() const
 }
 
 inline bool VcprojGenerator::findLibraries()
-{ 
+{
     return Win32MakefileGenerator::findLibraries("MSVCVCPROJ_LIBS");
 }
 

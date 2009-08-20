@@ -225,7 +225,7 @@ void EmulationLayer::onKeyPress( QKeyEvent* ev )
     QByteArray c = QByteArray( 1 );
     c.at( 0 ) = ev->ascii();
     // ibot: qbytearray is emited not char*
-    
+
     emit sndBlock( (QByteArray) c );
   }
 }
@@ -242,7 +242,7 @@ void EmulationLayer::onRcvBlock(const QByteArray &s )
   bulk_incnt += 1;
   for (int i = 0; i < s.size(); i++)
   {
-    //TODO: ibot: maybe decoding qbytearray to unicode in io_layer? 
+    //TODO: ibot: maybe decoding qbytearray to unicode in io_layer?
     QString result = decoder->toUnicode(&s[i],1);
     int reslen = result.length();
     for (int j = 0; j < reslen; j++)

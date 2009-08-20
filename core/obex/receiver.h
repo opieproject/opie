@@ -7,7 +7,7 @@
 
 //Receiver type
 typedef enum _RecType {
-    REC_IRDA = 0, 
+    REC_IRDA = 0,
     REC_BLUETOOTH = 1
 } RecType;
 

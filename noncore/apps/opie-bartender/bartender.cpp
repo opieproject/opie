@@ -117,7 +117,7 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
         drinkDB.setFile("db/drinkdb.txt");
     else
         drinkDB.setFile(QPEApplication::qpeDir()+"etc/bartender/drinkdb.txt");
-    
+
     initDrinkDb();
 
     DrinkView->setFocus();
@@ -152,7 +152,7 @@ void Bartender::fillList() {
     int i=0;
     QListViewItem * item ;
     QString s;
-    
+
     DrinkList::Iterator it = drinkDB.getBegin();
     while ( it != drinkDB.getEnd() ) {
         item= new QListViewItem( DrinkView, 0 );
@@ -160,7 +160,7 @@ void Bartender::fillList() {
         i++;
         ++it;
     }
-    
+
     if( lastName != "" ) {
         QListViewItemIterator it( DrinkView );
         for ( ; it.current(); ++it ) {
@@ -172,8 +172,8 @@ void Bartender::fillList() {
     }
     else if( DrinkView->childCount() > 0)
         DrinkView->setCurrentItem(DrinkView->firstChild());
-    
-    odebug << "there are currently " << i << " of drinks" << oendl; 
+
+    odebug << "there are currently " << i << " of drinks" << oendl;
 }
 
 void Bartender::fileNew() {
@@ -215,7 +215,7 @@ void Bartender::showDrink( QListViewItem *item) {
     DrinkList::Iterator it = drinkDB.findDrink(myDrink);
     if(it != drinkDB.getEnd()) {
         showDrinks->MultiLineEdit1->setText((*it).getIngredients());
-    
+
         connect(showDrinks->editDrinkButton, SIGNAL(clicked()), this, SLOT(doEdit()));
         QPEApplication::execDialog( showDrinks );
     }
@@ -249,7 +249,7 @@ void Bartender::doSearchByName() {
         QListViewItemIterator it( DrinkView );
         for ( ; it.current(); ++it ) {
             if ( it.current()->text(0).find( searchForDrinkName, 0, FALSE) != -1 ) {
-//                 odebug << it.current()->text(0) << oendl; 
+//                 odebug << it.current()->text(0) << oendl;
                 searchList.append(it.current()->text(0));
             }
         }
@@ -276,13 +276,13 @@ void Bartender::doSearchByIngredient() {
         while ( it != drinkDB.getEnd() ) {
             lastDrinkName = (*it).getName();
             lastDrinkIngredients = (*it).getIngredients();
-            
+
             if( lastDrinkIngredients.find( searchForIngredient ,0, FALSE) != -1 )
                 searchList.append( lastDrinkName );
-            
+
             ++it;
         }
-        
+
         if(searchList.count() >0)
             showSearchResult(searchList);
         else
@@ -307,7 +307,7 @@ void Bartender::showSearchResult(QStringList &searchList) {
     QListViewItemIterator it2( DrinkView );
     for ( ; it2.current(); ++it2 ) {
         if ( it2.current()->text(0)== result ) {
-//                odebug << it2.current()->text(0) << oendl; 
+//                odebug << it2.current()->text(0) << oendl;
             showDrink(it2.current());
         }
     }
@@ -322,7 +322,7 @@ void Bartender::doEdit() {
 
     QString myDrink;
     myDrink= DrinkView->currentItem()->text(0);
-    
+
     New_Drink *newDrinks;
     newDrinks = new New_Drink(this,"Edit Drink", TRUE);
     QString newName, newIng;
@@ -332,11 +332,11 @@ void Bartender::doEdit() {
     if(drinkItem != drinkDB.getEnd()) {
         newDrinks->LineEdit1->setText((*drinkItem).getName());
         newDrinks->MultiLineEdit1->setText((*drinkItem).getIngredients());
-        
+
         newDrinks->exec();
         newName = newDrinks->LineEdit1->text();
         newIng= newDrinks->MultiLineEdit1->text();
-    
+
         if( newDrinks ->result() == 1 ) {
             (*drinkItem).setName(newName);
             (*drinkItem).setIngredients(newIng);
@@ -346,7 +346,7 @@ void Bartender::doEdit() {
             fillList();
         }
     }
-    
+
     delete newDrinks;
 }
 
@@ -367,7 +367,7 @@ void Bartender::openCurrentDrink() {
 }
 
 void Bartender::fileMenuActivated( int item) {
-    odebug << "Item " << item << "" << oendl; 
+    odebug << "Item " << item << "" << oendl;
     switch(item) {
       case -3: //        new -3
           fileNew();
@@ -388,7 +388,7 @@ void Bartender::fileMenuActivated( int item) {
 }
 
 void Bartender::editMenuActivated(int item) {
-    odebug << "Item " << item << "" << oendl; 
+    odebug << "Item " << item << "" << oendl;
       /*
         edit -8
       */

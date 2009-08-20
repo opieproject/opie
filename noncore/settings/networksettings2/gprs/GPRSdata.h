@@ -19,6 +19,6 @@ public :
       bool                   DefaultGateway;
       short                  Debug;
       QVector<GPRSRoutingEntry> Routing;
-} ; 
+} ;
 
 #endif

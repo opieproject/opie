@@ -32,7 +32,7 @@ int mpeg3_copy_title(mpeg3_title_t *dst, mpeg3_title_t *src)
 
 	mpeg3_copy_fs(dst->fs, src->fs);
 	dst->total_bytes = src->total_bytes;
-	
+
 	if(src->timecode_table_size)
 	{
 		dst->timecode_table_allocation = src->timecode_table_allocation;
@@ -49,15 +49,15 @@ int mpeg3_copy_title(mpeg3_title_t *dst, mpeg3_title_t *src)
 int mpeg3_dump_title(mpeg3_title_t *title)
 {
 	int i;
-	
+
 	for(i = 0; i < title->timecode_table_size; i++)
 	{
-		printf("%f: %d - %d %f %f %d\n", 
-			title->timecode_table[i].absolute_start_time, 
-			title->timecode_table[i].start_byte, 
-			title->timecode_table[i].end_byte, 
-			title->timecode_table[i].start_time, 
-			title->timecode_table[i].end_time, 
+		printf("%f: %d - %d %f %f %d\n",
+			title->timecode_table[i].absolute_start_time,
+			title->timecode_table[i].start_byte,
+			title->timecode_table[i].end_byte,
+			title->timecode_table[i].start_time,
+			title->timecode_table[i].end_time,
 			title->timecode_table[i].program);
 	}
 }

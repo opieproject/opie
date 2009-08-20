@@ -1,4 +1,4 @@
-/* 
+/*
  * Encodage & décodage arithmétique
  */
 

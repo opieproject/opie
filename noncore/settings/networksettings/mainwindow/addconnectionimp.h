@@ -1,4 +1,4 @@
-#ifndef ADDCONNECTIONIMP_H 
+#ifndef ADDCONNECTIONIMP_H
 #define ADDCONNECTIONIMP_H
 
 #include "addconnection.h"
@@ -9,11 +9,11 @@ class QListViewItem;
 class AddConnectionImp : public AddConnection {
 
 Q_OBJECT
-	
+
 public:
   AddConnectionImp(QWidget *parent=0, const char *name=0, WFlags f=0);
   void addConnections(const QMap<QString, QString> &newList);
-   
+
 private slots:
   void changed();
 

@@ -40,7 +40,7 @@ void KRFBConnection::connectTo( KRFBServer server)
 {
 		if ( currentState_ != Disconnected )
 				disconnect();
-		
+
     (*options_)=server;
 
 		sock = new QSocket( this, "rfbSocket" );
@@ -50,7 +50,7 @@ void KRFBConnection::connectTo( KRFBServer server)
 		connect( sock, SIGNAL( error(int) ), SLOT( gotSocketError(int) ) );
 		connect( sock, SIGNAL( connected() ), SLOT( gotSocketConnection() ) );
 
-		owarn << "Connecting..." << oendl; 
+		owarn << "Connecting..." << oendl;
 
 		currentState_ = Connecting;
 		sock->connectToHost( options_->hostname.latin1(), portBase_ + options_->display );
@@ -58,7 +58,7 @@ void KRFBConnection::connectTo( KRFBServer server)
 
 void KRFBConnection::disconnect()
 {
-		owarn << "Disconnecting from server" << oendl; 
+		owarn << "Disconnecting from server" << oendl;
 
 		if ( ( currentState_ != Disconnected )
 						&& ( currentState_ != Disconnecting )
@@ -89,7 +89,7 @@ void KRFBConnection::gotSocketConnection()
 {
 		currentState_ = LoggingIn;
 
-		owarn << "Connected, logging in..." << oendl; 
+		owarn << "Connected, logging in..." << oendl;
 
 		static QString statusMsg = tr( "Connected" );
 		emit statusChanged( statusMsg );
@@ -100,7 +100,7 @@ void KRFBConnection::gotSocketConnection()
 
 void KRFBConnection::gotRFBConnection()
 {
-		owarn << "Logged into server" << oendl; 
+		owarn << "Logged into server" << oendl;
 
 		currentState_ = Connected;
 		emit connected();
@@ -129,7 +129,7 @@ void KRFBConnection::gotSocketError( int err )
 		currentState_ = Error;
 
 		// Do some error handling stuff
-		owarn << "KRFBConnection: Socket error " << err << "" << oendl; 
+		owarn << "KRFBConnection: Socket error " << err << "" << oendl;
 
 		static QString refused = tr( "Connection Refused" );
 		static QString host = tr( "Host not found" );
@@ -179,11 +179,11 @@ void KRFBConnection::waitForData( unsigned int sz )
 		assert( currentState_ != Error );
 
 		if ( sock->size() >= sz ) {
-				//    owarn << "No need to wait for data" << oendl; 
+				//    owarn << "No need to wait for data" << oendl;
 				emit gotEnoughData();
 		}
 		else {
-				//    owarn << "Waiting for " << sz << " bytes" << oendl; 
+				//    owarn << "Waiting for " << sz << " bytes" << oendl;
 				minData_ = sz;
 				connect( sock, SIGNAL( readyRead() ), SLOT( gotMoreData() ) );
 		}

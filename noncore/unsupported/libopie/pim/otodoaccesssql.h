@@ -39,7 +39,7 @@ public:
     QBitArray supports()const;
     QArray<int> matchRegexp(  const QRegExp &r ) const;
     void removeAllCompleted();
-    
+
 
 private:
     void update()const;

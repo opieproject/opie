@@ -12,7 +12,7 @@
 #include "wlan_NN.h"
 #include "wlan_NNI.h"
 
-WLanEdit::WLanEdit( QWidget * Parent, ANetNodeInstance * TNNI ) : 
+WLanEdit::WLanEdit( QWidget * Parent, ANetNodeInstance * TNNI ) :
       WLanGUI( Parent ), RefreshTimer(this){
 
       InterfaceInfo * II;
@@ -45,7 +45,7 @@ WLanEdit::WLanEdit( QWidget * Parent, ANetNodeInstance * TNNI ) :
       }
 }
 
-WLanEdit::~WLanEdit( void ) { 
+WLanEdit::~WLanEdit( void ) {
       if( WE )
         delete WE;
 }

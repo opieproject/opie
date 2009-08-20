@@ -13,27 +13,27 @@ using namespace Opie::Core;
 /**
  * Constructor.  If wireless extensions are enabled on device name then
  * start a timer that every second will update the information.
- */ 
+ */
 WlanInfoImp::WlanInfoImp( QWidget* parent, const char* name, WFlags fl): WlanInfo(parent, name, fl){
   WExtensions *wExtensions = new WExtensions(name);
   if(!wExtensions->doesHaveWirelessExtensions()){
     delete  wExtensions;
-    odebug << "WlanInfoImp::No wireless extension" << oendl; 
+    odebug << "WlanInfoImp::No wireless extension" << oendl;
     return;
   }
   delete  wExtensions;
   timer = new QTimer( this );
   connect( timer, SIGNAL(timeout()), this, SLOT(update()));
-  timer->start( 1000, false );    
+  timer->start( 1000, false );
 }
 
 /**
  * Updates the information about the wireless device.
- */ 
+ */
 void WlanInfoImp::update(){
   WExtensions *wExtensions = new WExtensions(this->name());
   if(!wExtensions->doesHaveWirelessExtensions()){
-    odebug << "No extension" << oendl; 
+    odebug << "No extension" << oendl;
     delete wExtensions;
     timer->stop();
     return;

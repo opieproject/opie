@@ -51,7 +51,7 @@ class OPimRecurrence {
                      MonthlyDate, Yearly };
     enum Days { MON = 0x01, TUE = 0x02, WED = 0x04, THU = 0x08,
                 FRI = 0x10, SAT = 0x20, SUN = 0x40 };
-    enum Fields{ RType = 0, RWeekdays, RPosition, RFreq, RHasEndDate, 
+    enum Fields{ RType = 0, RWeekdays, RPosition, RFreq, RHasEndDate,
                 EndDate, Created, Exceptions };
 
     OPimRecurrence();
@@ -112,13 +112,13 @@ class OPimRecurrence {
     void addException( const QDate &dt );
 
     void setService( const QString& ser );
-    
+
     QMap<int, QString> toMap() const;
     void fromMap( const QMap<int, QString>& map );
 
     /* almost internal */
     QString toString()const;
-    
+
   private:
     bool p_nextOccurrence( const QDate& from, QDate& next );
     void deref();

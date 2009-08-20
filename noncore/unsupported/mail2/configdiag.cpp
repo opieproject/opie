@@ -25,7 +25,7 @@ AccountListItem::AccountListItem(QListView *parent, Account &account)
 		setText(0, _account.email());
 	else if (!_account.realName().isEmpty() && _account.email().isEmpty())
 		setText(0, _account.realName());
-	else 
+	else
 		setText(0, QObject::tr("(no name)"));
 
 	setPixmap(0, Resource::loadPixmap("mail/inbox"));
@@ -109,7 +109,7 @@ void ConfigDiag::slotEditAccount()
 
 void ConfigDiag::slotDelAccount()
 {
-	if (!accountList->currentItem()) { 
+	if (!accountList->currentItem()) {
 		QMessageBox::information(this, tr("Error"), tr("<p>You have to select an account first.</p>"), tr("Ok"));
 		return;
 	}

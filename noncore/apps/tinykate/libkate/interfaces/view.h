@@ -5,7 +5,7 @@
     copyright            : (C) 2001 by Christoph "Crossfire" Cullmann
                            (C) 2002 by Joseph Wenninger
     email                : crossfire@babylon2k.de
-                           jowenn@kde.org 
+                           jowenn@kde.org
 ***************************************************************************/
 
 /***************************************************************************

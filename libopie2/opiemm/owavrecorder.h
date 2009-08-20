@@ -41,7 +41,7 @@ class OWavRecorder;
 class OWavRecorderCallback
 {
     friend class OWavRecorder;
-    
+
     virtual void recorderCallback(const char *buffer, const int bytes, const int totalbytes, bool &stopflag) = 0;
 };
 
@@ -59,7 +59,7 @@ class OWavRecorder : public OWavHandler
     bool setup( const QString &filename, OWavFileParameters fileparams );
     void record( OWavRecorderCallback *callback );
     QString getWriteFileName();
-    snd_pcm_format_t getDeviceFormat(); 
+    snd_pcm_format_t getDeviceFormat();
 
   protected:
     QString m_filename;

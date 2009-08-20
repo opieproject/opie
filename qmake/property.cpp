@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of QMakeProperty class.
 **
@@ -158,7 +158,7 @@ QMakeProperty::exec()
 	    }
 	    return TRUE;
 	}
-	for(QStringList::Iterator it = Option::prop::properties.begin(); 
+	for(QStringList::Iterator it = Option::prop::properties.begin();
 	    it != Option::prop::properties.end(); it++) {
 	    if(Option::prop::properties.count() > 1)
 		fprintf(stdout, "%s:", (*it).latin1());
@@ -170,7 +170,7 @@ QMakeProperty::exec()
 	    }
 	}
     } else if(Option::qmake_mode == Option::QMAKE_SET_PROPERTY) {
-	for(QStringList::Iterator it = Option::prop::properties.begin(); 
+	for(QStringList::Iterator it = Option::prop::properties.begin();
 	    it != Option::prop::properties.end(); it++) {
 	    QString var = (*it);
 	    it++;

@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of ProjectBuilderMakefileGenerator class.
 **
@@ -66,9 +66,9 @@ ProjectBuilderMakefileGenerator::writeMakefile(QTextStream &t)
 
     project->variables()["MAKEFILE"].clear();
     project->variables()["MAKEFILE"].append("Makefile");
-    if(project->first("TEMPLATE") == "app" || project->first("TEMPLATE") == "lib") 
+    if(project->first("TEMPLATE") == "app" || project->first("TEMPLATE") == "lib")
 	return writeMakeParts(t);
-    else if(project->first("TEMPLATE") == "subdirs") 
+    else if(project->first("TEMPLATE") == "subdirs")
 	return writeSubdirs(t, FALSE);
     return FALSE;
 }
@@ -76,7 +76,7 @@ ProjectBuilderMakefileGenerator::writeMakefile(QTextStream &t)
 bool
 ProjectBuilderMakefileGenerator::writeSubdirs(QTextStream &t, bool direct)
 {
-    QString mkwrap = fileFixify(pbx_dir + Option::dir_sep + ".." + Option::dir_sep + project->first("MAKEFILE"), 
+    QString mkwrap = fileFixify(pbx_dir + Option::dir_sep + ".." + Option::dir_sep + project->first("MAKEFILE"),
 				QDir::currentDirPath());
     QFile mkwrapf(mkwrap);
     if(mkwrapf.open(IO_WriteOnly | IO_Translate)) {
@@ -152,10 +152,10 @@ ProjectBuilderMakefileGenerator::writeSubdirs(QTextStream &t, bool direct)
 				    for(QStringList::Iterator dir_it = dirs.begin(); dir_it != dirs.end(); ++dir_it) {
 					QString new_grp(last_grp + Option::dir_sep + (*dir_it)), new_grp_key(keyFor(new_grp));
 					if(dir_it == dirs.begin()) {
-					    if(!groups.contains(new_grp)) 
+					    if(!groups.contains(new_grp))
 						project->variables()["QMAKE_PBX_GROUPS"].append(new_grp_key);
 					} else {
-					    if(!groups[last_grp].contains(new_grp_key)) 
+					    if(!groups[last_grp].contains(new_grp_key))
 						groups[last_grp] += new_grp_key;
 					}
 					last_grp = new_grp;
@@ -205,13 +205,13 @@ nextfile:
     //BUILDSTYLE
     QString active_buildstyle;
 #if 0
-    for(int as_release = 0; as_release < 2; as_release++) 
+    for(int as_release = 0; as_release < 2; as_release++)
 #else
 	bool as_release = !project->isActiveConfig("debug");
 #endif
     {
 	QString key = keyFor("QMAKE_PBX_" + QString(as_release ? "RELEASE" : "DEBUG"));
-	if(project->isActiveConfig("debug") != as_release) 
+	if(project->isActiveConfig("debug") != as_release)
 	    active_buildstyle = key;
 	project->variables()["QMAKE_PBX_BUILDSTYLES"].append(key);
 	t << "\t\t" << key << " = {" << "\n"
@@ -219,7 +219,7 @@ nextfile:
 	  << "\t\t\t" << ");" << "\n"
 	  << "\t\t\t" << "buildSettings = {" << "\n"
 	  << "\t\t\t\t" << "COPY_PHASE_STRIP = " << (as_release ? "YES" : "NO") << ";" << "\n";
-	if(as_release) 
+	if(as_release)
 	    t << "\t\t\t\t" << "DEBUGGING_SYMBOLS = NO;" << "\n";
 	t << "\t\t\t" << "};" << "\n"
 	  << "\t\t\t" << "isa = PBXBuildStyle;" << "\n"
@@ -319,7 +319,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 
     //DUMP SOURCES
     QMap<QString, QStringList> groups;
-    QString srcs[] = { "HEADERS", "SOURCES", "SRCMOC", "UICIMPLS", "QMAKE_IMAGE_COLLECTION", 
+    QString srcs[] = { "HEADERS", "SOURCES", "SRCMOC", "UICIMPLS", "QMAKE_IMAGE_COLLECTION",
 		       "FORMS", "QMAKE_INTERNAL_INCLUDED_FILES", QString::null };
     for(i = 0; !srcs[i].isNull(); i++) {
 	tmp = project->variables()[srcs[i]];
@@ -333,7 +333,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 
 	//hard coded groups..
 	QString src_group;
-	if(srcs[i] == "SOURCES") 
+	if(srcs[i] == "SOURCES")
 	    src_group = "Sources";
 	else if(srcs[i] == "HEADERS")
 	    src_group = "Headers";
@@ -363,7 +363,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 		QString file = (*file_it);
 		if(file.length() >= 2 && (file[0] == '"' || file[0] == '\'') && file[(int) file.length()-1] == file[0])
 		    file = file.mid(1, file.length()-2);
-		if(file.endsWith(Option::cpp_moc_ext) || file.endsWith(Option::prl_ext)) 
+		if(file.endsWith(Option::cpp_moc_ext) || file.endsWith(Option::prl_ext))
 		    continue;
 		bool in_root = TRUE;
 		QString src_key = keyFor(file), name = file;
@@ -383,7 +383,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 			for(QStringList::Iterator dir_it = dirs.begin(); dir_it != dirs.end(); ++dir_it) {
 			    QString new_grp(last_grp + Option::dir_sep + (*dir_it)), new_grp_key(keyFor(new_grp));
 			    if(dir_it == dirs.begin()) {
-				if(!src_list.contains(new_grp_key)) 
+				if(!src_list.contains(new_grp_key))
 				    src_list.append(new_grp_key);
 			    } else {
 				if(!groups[last_grp].contains(new_grp_key))
@@ -395,7 +395,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 			in_root = FALSE;
 		    }
 		}
-		if(in_root) 
+		if(in_root)
 		    src_list.append(src_key);
 		//source reference
 		t << "\t\t" << src_key << " = {" << "\n"
@@ -450,7 +450,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	    }
 
 	    QString src_group_key = keyFor(src_group);
-	    if(root_group_list.findIndex(src_group_key) == -1) 
+	    if(root_group_list.findIndex(src_group_key) == -1)
 		root_group_list += src_group_key;
 	    groups[src_group] += src_list;
 	}
@@ -598,7 +598,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 				if(libinfo.readLib(lib_file)) {
 				    if(!libinfo.isEmpty("QMAKE_PRL_TARGET")) {
 					library = (*lit) + Option::dir_sep + libinfo.first("QMAKE_PRL_TARGET");
-					debug_msg(1, "pbuilder: Found library (%s) via PRL %s (%s)", 
+					debug_msg(1, "pbuilder: Found library (%s) via PRL %s (%s)",
 						  opt.latin1(), lib_file.latin1(), library.latin1());
 					remove = TRUE;
 				    }
@@ -611,7 +611,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 				QString tmp =  (*lit) + Option::dir_sep + lib + extns[n];
 				if(QFile::exists(tmp)) {
 				    library = tmp;
-				    debug_msg(1, "pbuilder: Found library (%s) via %s", 
+				    debug_msg(1, "pbuilder: Found library (%s) via %s",
 					      opt.latin1(), library.latin1());
 				    remove = TRUE;
 				}
@@ -768,7 +768,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	if(project->first("TEMPLATE") == "app") {
 	    if(project->isActiveConfig("resource_fork") && !project->isActiveConfig("console"))
 		targ += ".app";
-	} else if(!project->isActiveConfig("staticlib") && !project->isActiveConfig("plugin") && 
+	} else if(!project->isActiveConfig("staticlib") && !project->isActiveConfig("plugin") &&
 	   !project->isActiveConfig("frameworklib")) {
 	    QString li[] = { "TARGET_", "TARGET_x", "TARGET_x.y", QString::null };
 	    for(int n = 0; !li[n].isNull(); n++) {
@@ -807,11 +807,11 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	    QTextStream sht(&shf);
 	    sht << "#!/bin/sh" << endl;
 	    //copy the actual target
-	    sht << "OUT_TARG=\"${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\"\n" 
+	    sht << "OUT_TARG=\"${TARGET_BUILD_DIR}/${FULL_PRODUCT_NAME}\"\n"
                 << "if [ -e \"$OUT_TARG\" ]; then" << "\n"
-                << "  [ \"$OUT_TARG\" = \"" 
-		<< (dstdir.isEmpty() ? QDir::currentDirPath() + QDir::separator(): dstdir) << targ << "\" ] || " 
-		<< "[ \"$OUT_TARG\" = \"" << targ << "\" ] || " 
+                << "  [ \"$OUT_TARG\" = \""
+		<< (dstdir.isEmpty() ? QDir::currentDirPath() + QDir::separator(): dstdir) << targ << "\" ] || "
+		<< "[ \"$OUT_TARG\" = \"" << targ << "\" ] || "
 		<< "cp -r \"$OUT_TARG\" " << "\"" << dstdir << targ << "\"" << "\n"
                 << "fi" << endl;
 	    //rename as a framework
@@ -819,7 +819,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 		sht << "ln -sf \"" << targ <<  "\" " << "\"" << dstdir << targ << "\"" << endl;
 	    //create all the version symlinks (just to be like unixmake)
 	    for(QStringList::Iterator it = links.begin(); it != links.end(); ++it) {
-		if(targ != (*it)) 
+		if(targ != (*it))
 		    sht << "ln -sf \"" << targ <<  "\" " << "\"" << dstdir << (*it) << "\"" << endl;
 	    }
 	    shf.close();
@@ -905,7 +905,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	} else {
 	    t << "\t\t\t" << "isa = PBXExecutableFileReference;" << "\n";
 	}
-	QString app = (!project->isEmpty("DESTDIR") ? project->first("DESTDIR") + project->first("QMAKE_ORIG_TARGET") : 
+	QString app = (!project->isEmpty("DESTDIR") ? project->first("DESTDIR") + project->first("QMAKE_ORIG_TARGET") :
 		       QDir::currentDirPath()) + Option::dir_sep + targ;
 	t << "\t\t\t" << "name = " <<  targ << ";" << "\n"
 	  << "\t\t\t" << "path = \"" << targ << "\";" << "\n"
@@ -1001,7 +1001,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 #if 1
     t << "\t\t\t\t" << "BUILD_ROOT = \"" << QDir::currentDirPath() << "\";" << "\n";
 #endif
-    if(!project->isActiveConfig("staticlib")) 
+    if(!project->isActiveConfig("staticlib"))
 	t << "\t\t\t\t" << "OTHER_LDFLAGS = \"" << fixEnvsList("SUBLIBS") << " " <<
 	    fixEnvsList("QMAKE_LFLAGS") << " " << fixEnvsList("QMAKE_LIBDIR_FLAGS") <<
 	    " " << fixEnvsList("QMAKE_LIBS") << "\";" << "\n";
@@ -1015,10 +1015,10 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	t << "\t\t\t\t" << "INSTALL_PATH = \"" <<  "\";" << "\n";
     }
     if(!project->isEmpty("VERSION") && project->first("VERSION") != "0.0.0") {
-	t << "\t\t\t\t" << "DYLIB_CURRENT_VERSION = \"" << project->first("VER_MAJ") << "." 
+	t << "\t\t\t\t" << "DYLIB_CURRENT_VERSION = \"" << project->first("VER_MAJ") << "."
 	  << project->first("VER_MIN") << "." << project->first("VER_PAT")  << "\";" << "\n";
 	if(project->isEmpty("COMPAT_VERSION"))
-	    t << "\t\t\t\t" << "DYLIB_COMPATIBILITY_VERSION = \"" << project->first("VER_MAJ") << "." 
+	    t << "\t\t\t\t" << "DYLIB_COMPATIBILITY_VERSION = \"" << project->first("VER_MAJ") << "."
 	      << project->first("VER_MIN")  << "\";" << "\n";
     }
     if(!project->isEmpty("COMPAT_VERSION"))
@@ -1068,7 +1068,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	t << "\t\t\t" << "isa = PBXNativeTarget;" << "\n";
     if(project->first("TEMPLATE") == "app") {
 	if(project->isActiveConfig("console")) {
-	    if(ideType() == MAC_XCODE) 
+	    if(ideType() == MAC_XCODE)
 		t << "\t\t\t" << "productType = \"com.apple.product-type.tool\";" << "\n";
 	    else
 		t << "\t\t\t" << "isa = PBXToolTarget;" << "\n";
@@ -1084,14 +1084,14 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
                 if(plist.open(IO_ReadOnly)) {
                     read_plist = true;
                     QTextStream stream(&plist);
-                    while(!stream.eof()) 
+                    while(!stream.eof())
                         t << stream.readLine().replace('"', "\\\"") << endl;
                 }
             }
             if(!read_plist) {
-                t << "<?xml version=" 
+                t << "<?xml version="
                   << "\\\"1.0\\\" encoding=" << "\\\"UTF-8\\\"" << "?>" << "\n"
-                  << "\t\t\t\t" << "<!DOCTYPE plist SYSTEM \\\"file://localhost/System/" 
+                  << "\t\t\t\t" << "<!DOCTYPE plist SYSTEM \\\"file://localhost/System/"
                   << "Library/DTDs/PropertyList.dtd\\\">" << "\n"
                   << "\t\t\t\t" << "<plist version=\\\"0.9\\\">" << "\n"
                   << "\t\t\t\t" << "<dict>" << "\n"
@@ -1141,13 +1141,13 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
     //DEBUG/RELEASE
     QString active_buildstyle;
 #if 0
-    for(int as_release = 0; as_release < 2; as_release++) 
+    for(int as_release = 0; as_release < 2; as_release++)
 #else
 	bool as_release = !project->isActiveConfig("debug");
 #endif
     {
 	QString key = keyFor("QMAKE_PBX_" + QString(as_release ? "RELEASE" : "DEBUG"));
-	if(project->isActiveConfig("debug") != as_release) 
+	if(project->isActiveConfig("debug") != as_release)
 	    active_buildstyle = key;
 	project->variables()["QMAKE_PBX_BUILDSTYLES"].append(key);
 	t << "\t\t" << key << " = {" << "\n"
@@ -1158,7 +1158,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	if(as_release) {
 	    t << "\t\t\t\t" << "DEBUGGING_SYMBOLS = NO;" << "\n";
 	} else {
-	    t << "\t\t\t\t" << "GCC_ENABLE_FIX_AND_CONTINUE = " 
+	    t << "\t\t\t\t" << "GCC_ENABLE_FIX_AND_CONTINUE = "
 	      << (project->isActiveConfig("no_fix_and_continue") ? "NO" : "YES") << ";" << "\n"
 	      << "\t\t\t\t" << "GCC_GENERATE_DEBUGGING_SYMBOLS = YES;" << "\n"
 	      << "\t\t\t\t" << "GCC_OPTIMIZATION_LEVEL = 0;" << "\n"
@@ -1190,7 +1190,7 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
       << "}" << endl;
 
     if(project->isActiveConfig("generate_pbxbuild_makefile")) {
-	QString mkwrap = fileFixify(pbx_dir + Option::dir_sep + ".." + Option::dir_sep + project->first("MAKEFILE"), 
+	QString mkwrap = fileFixify(pbx_dir + Option::dir_sep + ".." + Option::dir_sep + project->first("MAKEFILE"),
 				    QDir::currentDirPath());
 	QFile mkwrapf(mkwrap);
 	if(mkwrapf.open(IO_WriteOnly | IO_Translate)) {
@@ -1199,16 +1199,16 @@ ProjectBuilderMakefileGenerator::writeMakeParts(QTextStream &t)
 	    writeHeader(mkwrapt);
 	    const char *cleans = "uiclean mocclean preprocess_clean ";
 	    mkwrapt << "#This is a makefile wrapper for PROJECT BUILDER\n"
-		    << "all:" << "\n\t" 
+		    << "all:" << "\n\t"
 		    << "cd " << project->first("QMAKE_ORIG_TARGET") << projectSuffix() << "/ && " << pbxbuild() << "\n"
-		    << "install: all" << "\n\t" 
+		    << "install: all" << "\n\t"
 		    << "cd " << project->first("QMAKE_ORIG_TARGET") << projectSuffix() << "/ && " << pbxbuild() << " install\n"
-		    << "distclean clean: preprocess_clean" << "\n\t" 
+		    << "distclean clean: preprocess_clean" << "\n\t"
 		    << "cd " << project->first("QMAKE_ORIG_TARGET") << projectSuffix() << "/ && " << pbxbuild() << " clean" << "\n"
 		    << (!did_preprocess ? cleans : "") << ":" << "\n";
-	    if(did_preprocess) 
+	    if(did_preprocess)
 		mkwrapt << cleans << ":" << "\n\t"
-			<< "make -f " 
+			<< "make -f "
 			<< pbx_dir << Option::dir_sep << "qt_preprocess.mak $@" << endl;
 	}
     }
@@ -1288,7 +1288,7 @@ ProjectBuilderMakefileGenerator::openOutput(QFile &file) const
     }
     bool ret = UnixMakefileGenerator::openOutput(file);
     ((ProjectBuilderMakefileGenerator*)this)->pbx_dir = Option::output_dir.section(Option::dir_sep, 0, -1);
-    Option::output_dir = pbx_dir.section(Option::dir_sep, 0, -2); 
+    Option::output_dir = pbx_dir.section(Option::dir_sep, 0, -2);
     return ret;
 }
 
@@ -1364,7 +1364,7 @@ ProjectBuilderMakefileGenerator::reftypeForFile(const QString &where)
     int ret = 0; //absolute is the default..
     if(QDir::isRelativePath(where))
 	ret = 4; //relative
-    return ret; 
+    return ret;
 }
 
 ProjectBuilderMakefileGenerator::IDE_TYPE

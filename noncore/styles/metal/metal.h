@@ -27,11 +27,11 @@ public:
     void polish( QWidget* );
     void unPolish( QWidget* );
 
-    
+
     void drawMetalButton( QPainter *p, int x, int y, int w, int h,
 			  bool sunken = FALSE, bool horz = TRUE );
-    
-    
+
+
     void drawButton( QPainter *p, int x, int y, int w, int h,
 			     const QColorGroup &g, bool sunken = FALSE,
 			     const QBrush *fill = 0 );
@@ -45,17 +45,17 @@ public:
 		    const QColorGroup &, bool sunken,
 		    int lineWidth, const QBrush *fill );
 
-    
+
     void drawSlider( QPainter *p,
 		     int x, int y, int w, int h,
 		     const QColorGroup &g,
 		     Orientation orient, bool tickAbove, bool tickBelow );
-    
+
     void drawScrollBarControls( QPainter* p, const QScrollBar* sb,
 				int sliderStart, uint controls,
 				uint activeControl );
 
-    
+
     void drawComboButton( QPainter *p, int x, int y, int w, int h,
 			  const QColorGroup &g, bool sunken = FALSE,
 			  bool editable = FALSE,

@@ -18,7 +18,7 @@ using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<Gutenbrowser> )
 
 // #ifdef QT_QWS_NONOPIE
-		
+
 // #include <qpe/qpeapplication.h>
 // #include "gutenbrowser.h"
 // #include <qstring.h>
@@ -37,7 +37,7 @@ OPIE_EXPORT_APP( OApplicationFactory<Gutenbrowser> )
 // //                     {
 // //                     case 'v': // help
 // //                         printf("Gutenbrowser: "VERSION"\n");
-// // //                        odebug << "Gutenbrowser: "VERSION << oendl; 
+// // //                        odebug << "Gutenbrowser: "VERSION << oendl;
 // //                           //                      return 0;
 // //                         break;
 // //                     case 't': // current time 19:34:20 04/03/00

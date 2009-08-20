@@ -18,7 +18,7 @@
 #define KLINES_H
 
 #include <qwidget.h>
-#include <qmenubar.h> 
+#include <qmenubar.h>
 #include <qlabel.h>
 #include <qpushbutton.h>
 #include <qmainwindow.h>
@@ -46,7 +46,7 @@ public slots:
   void switchPrompt();
   void help();
 	void undo();
-  
+
 protected:
   void resizeEvent( QResizeEvent * );
 

@@ -150,7 +150,7 @@ void QIMPenStroke::endInput()
 	links[0] = gl;
     }
 
-    //odebug << "Points: " << links.count() << oendl; 
+    //odebug << "Points: " << links.count() << oendl;
 }
 
 /*!

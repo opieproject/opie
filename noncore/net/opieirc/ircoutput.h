@@ -56,7 +56,7 @@ typedef struct IRCOutputEscapeSecuences {
 };
 
 /* The IRCOutput class is used as a kind of message which is sent by the
-   IRC parser to inform the GUI of changes. This could for example be a 
+   IRC parser to inform the GUI of changes. This could for example be a
    channel message or a nickname change */
 
 class IRCOutput {
@@ -65,15 +65,15 @@ public:
     /* Used to add a parameter to this IRCOutput. Parameters are dependent
        on which IRCOutputType we are using (see above) */
     void addParam(void *data);
-    
+
     IRCOutputType type();
     QString message();
     /* Return the message with all HTML code escaped (for example &lt; instead of '<') */
     QString htmlMessage();
-    
+
     void setType(IRCOutputType);
     void setMessage(const QString &message);
-    
+
     static QString toHTML(const QString &message);
     void *getParam(int index);
 protected:

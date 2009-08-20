@@ -22,7 +22,7 @@ public:
 
 protected slots:
     virtual void slotGetNG();
-    
+
 protected:
     virtual void fillGroups();
 

@@ -234,7 +234,7 @@ CalculatorImpl::CalculatorImpl( QWidget * parent, const char * name, WFlags f )
     tmp += "etc/unit_conversion.dat";
     QFile myfile(tmp);
     if ( !myfile.open( IO_Translate | IO_ReadOnly ) ) {
-        odebug << "Data file unit_conversion.dat not found\nNo conversion features will be available\n"+tmp << oendl; 
+        odebug << "Data file unit_conversion.dat not found\nNo conversion features will be available\n"+tmp << oendl;
         // disable the f button if no conv file available
         ComboBoxFunction->setEnabled(FALSE);
     }
@@ -509,7 +509,7 @@ void CalculatorImpl::execOp( Operation i )
     return;
       processStack( oAdd );
       if ( operationStack.top().operation != oOpenBrace )
-    odebug << "Calculator: internal Error" << oendl; 
+    odebug << "Calculator: internal Error" << oendl;
       operationStack.pop();
       state = sNewNumber;
       numOpenBraces--;

@@ -14,7 +14,7 @@ class SmtpHandler : public QObject
 
 public:
 	SmtpHandler(const QString &header, const QString &message, Account &account, const QString &to);
-	
+
 	enum SmtpError {
 		ErrConnectionRefused,
 		ErrHostNotFound,
@@ -39,7 +39,7 @@ private slots:
 
 private:
 	void sendToSocket(const QString &text, bool log = true);
-	
+
 	enum State { Ehlo, Auth, ReadAuth, Helo, Mail, Rcpt,
 		Data, Body, Quit, Close };
 

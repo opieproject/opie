@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) 2009 The Opie Team <opie-devel@handhelds.org>
-              =.             
+              =.
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -119,7 +119,7 @@ bool OFileWriter::writeString( const QCString &str )
     uint total_written = m_file->writeBlock( str.data(), len );
     return ( total_written == len );
 }
- 
+
 ///////////////////////////////////////////////////////////////////////
 
 OPimXmlHandler::OPimXmlHandler( const char *marker, QAsciiDict<int> &dict )
@@ -155,7 +155,7 @@ void OPimXmlStreamParser::reset()
     m_mode = MODE_COLLECTION;
 }
 
-int OPimXmlStreamParser::findStr( const char *buf, uint buflen, const char *substr, uint substrlen ) 
+int OPimXmlStreamParser::findStr( const char *buf, uint buflen, const char *substr, uint substrlen )
 {
     for( uint i=0; i<buflen; i++ ) {
         if( buf[i] == substr[m_findpos] )
@@ -164,7 +164,7 @@ int OPimXmlStreamParser::findStr( const char *buf, uint buflen, const char *subs
             m_findpos=0;
         if( m_findpos == substrlen ) {
             m_findpos=0;
-            return i; 
+            return i;
         }
     }
     return -1;
@@ -206,7 +206,7 @@ void OPimXmlStreamParser::parseBuffer( char *buffer, uint bufferlen )
     }
 }
 
-void OPimXmlStreamParser::parseItem() 
+void OPimXmlStreamParser::parseItem()
 {
     int i = 0;
     int *find;
@@ -221,7 +221,7 @@ void OPimXmlStreamParser::parseItem()
     while ( TRUE ) {
         while ( i < len && (dt[i] == ' ' || dt[i] == '\n' || dt[i] == '\r') )
             ++i;
-    
+
         if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
             break;
 
@@ -440,7 +440,7 @@ void OPimXmlSocketReader::readData()
                 oerr << "error occurred during socket readBlock!" << oendl;
                 return;
             }
-            m_parser->parseBuffer( buf.data(), len ); 
+            m_parser->parseBuffer( buf.data(), len );
             len = m_socket->bytesAvailable();
         }
     }

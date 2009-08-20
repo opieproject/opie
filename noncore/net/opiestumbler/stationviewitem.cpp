@@ -15,7 +15,7 @@ StationViewItem::StationViewItem( QListView *parent, const QString &ssid,
 StationViewItem::StationViewItem( QListView *parent, const QString &ssid,
         const QString &channel, const QString &level, const QString &enc,
         const QString &vendor, const QString &mac )
-    
+
 : QListViewItem( parent, ssid, channel, level, enc, vendor, mac )
 {
 }
@@ -25,7 +25,7 @@ void StationViewItem::paintCell( QPainter *p, const QColorGroup &cg,
 {
     QColor c;
     QColorGroup ch(cg);
-        
+
     if ( column == OpieStumbler::CURSIGNAL ) {
         int value = text(column).toInt();
         if ( value < 20 )
@@ -34,7 +34,7 @@ void StationViewItem::paintCell( QPainter *p, const QColorGroup &cg,
             c.setRgb(255, 255, 0);
         else if ( value < 60 )
             c.setRgb(0, 255, 0);
-        else 
+        else
             c.setRgb(0, 0, 255);
         ch.setColor( QColorGroup::Text, c );
     }

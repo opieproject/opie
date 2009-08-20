@@ -124,7 +124,7 @@ class OPimAlarm : public OPimNotify
     void setFile( const QString& sound );
 
     /**
-     * Occurrence datetime (the actual occurrence of the event 
+     * Occurrence datetime (the actual occurrence of the event
      * that the notification is about - important for snoozing)
      */
     QDateTime occurrenceDateTime();

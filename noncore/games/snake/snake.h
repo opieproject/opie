@@ -35,7 +35,7 @@ public:
    void changeTail();
    void detectCrash();
    void createSnake();
-   void extendSnake(); 
+   void extendSnake();
    int lookUpPiece(Direction currentdir, Direction newdir);
    void setScore(int amount);
    int getScore();
@@ -52,7 +52,7 @@ private slots:
 private:
    QCanvasPixmapArray* snakeparts;
    QList<QCanvasSprite>snakelist;
-   QTimer* autoMoveTimer; 
+   QTimer* autoMoveTimer;
    QCanvas* canvas;
    int grow;
    int last;

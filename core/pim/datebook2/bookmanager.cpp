@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) 2009 The Opie Team <opie-devel@handhelds.org>
-              =.             
+              =.
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -134,17 +134,17 @@ void BookManager::addAlarms( const OPimEvent &ev ) {
     for ( it = als.begin(); it != als.end(); ++it ) {
         QDateTime alarmDateTime = (*it).dateTime();
         if( ev.hasRecurrence() ) {
-            // HACK: The application only supports setting an alarm n seconds before 
-            // the event, not at a specific datetime; however all we have from the 
-            // notifiers list is a datetime which is event start + n seconds, and in 
-            // the case of a recurring event we need the datetime n seconds prior to 
+            // HACK: The application only supports setting an alarm n seconds before
+            // the event, not at a specific datetime; however all we have from the
+            // notifiers list is a datetime which is event start + n seconds, and in
+            // the case of a recurring event we need the datetime n seconds prior to
             // the next occurrence, not the first one.
             int warn = alarmDateTime.secsTo( ev.startDateTime() );
             if( ! nextOccurrence( ev, QDateTime::currentDateTime().addSecs( warn + 1 ), alarmDateTime ) )
                 continue;
             alarmDateTime = alarmDateTime.addSecs(-warn);
         }
-        
+
         if( alarmDateTime < QDateTime::currentDateTime() )
             continue;
 
@@ -172,7 +172,7 @@ void BookManager::setupAllAlarms() {
     ODateBookAccess::List allrecs = allRecords();
     for ( ODateBookAccess::List::Iterator it = allrecs.begin(); it != allrecs.end(); ++it ) {
         addAlarms( (*it) );
-    }    
+    }
 }
 
 // FIXME: this ought to be moved to somewhere in libopiepim2
@@ -227,7 +227,7 @@ OPimEvent BookManager::find( const QString &str, bool caseSensitive, QDateTime &
     QDateTime min;
     OPimEvent minev;
     OPimRecordListIterator<OPimEvent> it;
-    for( it = lst.begin(); it != lst.end(); ++it ) 
+    for( it = lst.begin(); it != lst.end(); ++it )
     {
         QDateTime evdate;
         if( nextOccurrence( (*it), dt, evdate ) ) {

@@ -40,7 +40,7 @@ public:
     int id();
 
     static void setUseTimeStamps(bool b);
-    static QString  appendTimestamp(const QString& tex);   
+    static QString  appendTimestamp(const QString& tex);
 
     virtual QString title() = 0;
     virtual IRCSession *session() = 0;
@@ -65,7 +65,7 @@ protected:
     QVBoxLayout *m_layout;
     int          m_id;
 public:
-    /* Configuration shared accross all instances - contains HTML style colors (#rrggbb) */ 
+    /* Configuration shared accross all instances - contains HTML style colors (#rrggbb) */
     static QString m_errorColor;
     static QString m_serverColor;
     static QString m_textColor;

@@ -1,26 +1,26 @@
-/* 
+/*
  *
  *  This file is part of libmpeg3
- *	
+ *
  *  libmpeg3 is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 2, or (at your option)
  *  any later version.
- *   
+ *
  *  libmpeg3 is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- *   
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with GNU Make; see the file COPYING.  If not, write to
- *  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. 
+ *  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
 /*
  * Discrete Cosine Tansform (DCT) for subband synthesis
- * optimized for machines with no auto-increment. 
+ * optimized for machines with no auto-increment.
  * The performance is highly compiler dependend. Maybe
  * the dct64.c version for 'normal' processor may be faster
  * even for Intel processors.
@@ -79,23 +79,23 @@ int mpeg3audio_dct64_1(mpeg3_real_t *out0, mpeg3_real_t *out1, mpeg3_real_t *b1,
 
 	costab = mpeg3_pnts[1];
 
-	b2[0x00] = b1[0x00] + b1[0x0F]; 
-	b2[0x01] = b1[0x01] + b1[0x0E]; 
+	b2[0x00] = b1[0x00] + b1[0x0F];
+	b2[0x01] = b1[0x01] + b1[0x0E];
 	b2[0x0F] = (b1[0x00] - b1[0x0F]) * costab[0];
 	b2[0x0E] = (b1[0x01] - b1[0x0E]) * costab[1];
 
-	b2[0x02] = b1[0x02] + b1[0x0D]; 
-	b2[0x03] = b1[0x03] + b1[0x0C]; 
+	b2[0x02] = b1[0x02] + b1[0x0D];
+	b2[0x03] = b1[0x03] + b1[0x0C];
 	b2[0x0D] = (b1[0x02] - b1[0x0D]) * costab[2];
 	b2[0x0C] = (b1[0x03] - b1[0x0C]) * costab[3];
 
-	b2[0x04] = b1[0x04] + b1[0x0B]; 
-	b2[0x05] = b1[0x05] + b1[0x0A]; 
+	b2[0x04] = b1[0x04] + b1[0x0B];
+	b2[0x05] = b1[0x05] + b1[0x0A];
 	b2[0x0B] = (b1[0x04] - b1[0x0B]) * costab[4];
 	b2[0x0A] = (b1[0x05] - b1[0x0A]) * costab[5];
 
-	b2[0x06] = b1[0x06] + b1[0x09]; 
-	b2[0x07] = b1[0x07] + b1[0x08]; 
+	b2[0x06] = b1[0x06] + b1[0x09];
+	b2[0x07] = b1[0x07] + b1[0x08];
 	b2[0x09] = (b1[0x06] - b1[0x09]) * costab[6];
 	b2[0x08] = (b1[0x07] - b1[0x08]) * costab[7];
 
@@ -287,7 +287,7 @@ int mpeg3audio_dct64_1(mpeg3_real_t *out0, mpeg3_real_t *out1, mpeg3_real_t *b1,
 	out1[0x10*10] = b1[0x0B] + b1[0x0F];
 	out1[0x10*14] = b1[0x0F];
 
-	{ 
+	{
 		register mpeg3_real_t tmp;
 		tmp = b1[0x18] + b1[0x1C];
 		out0[0x10*15] = tmp + b1[0x10];
@@ -303,7 +303,7 @@ int mpeg3audio_dct64_1(mpeg3_real_t *out0, mpeg3_real_t *out1, mpeg3_real_t *b1,
 		out0[0x10* 1] = tmp + b1[0x11];
 		tmp = b1[0x19] + b1[0x1D];
 		out1[0x10* 1] = tmp + b1[0x11];
-		out1[0x10* 3] = tmp + b1[0x15]; 
+		out1[0x10* 3] = tmp + b1[0x15];
 		tmp = b1[0x1D] + b1[0x1B];
 		out1[0x10* 5] = tmp + b1[0x15];
 		out1[0x10* 7] = tmp + b1[0x13];
@@ -378,7 +378,7 @@ int mpeg3audio_dct36(mpeg3_real_t *inbuf, mpeg3_real_t *o1, mpeg3_real_t *o2, mp
 
     	{
     		mpeg3_real_t t3;
-    		{ 
+    		{
     			mpeg3_real_t t0, t1, t2;
 
     			t0 = mpeg3_COS6_2 * (in[8] + in[16] - in[4]);
@@ -611,7 +611,7 @@ int mpeg3audio_dct12(mpeg3_real_t *in,mpeg3_real_t *rawout1,mpeg3_real_t *rawout
     	 ts[(17-2)*SBLIMIT] += in4 * wi[5-2];
 	}
 
-    in++; 
+    in++;
 
 	{
     	mpeg3_real_t in0,in1,in2,in3,in4,in5;
@@ -662,40 +662,40 @@ static mpeg3_real_t mpeg3_xsin2[AC3_N / 8];
 #endif
 
 /* 128 point bit-reverse LUT */
-static unsigned char mpeg3_bit_reverse_512[] = 
+static unsigned char mpeg3_bit_reverse_512[] =
 {
-	0x00, 0x40, 0x20, 0x60, 0x10, 0x50, 0x30, 0x70, 
-	0x08, 0x48, 0x28, 0x68, 0x18, 0x58, 0x38, 0x78, 
-	0x04, 0x44, 0x24, 0x64, 0x14, 0x54, 0x34, 0x74, 
-	0x0c, 0x4c, 0x2c, 0x6c, 0x1c, 0x5c, 0x3c, 0x7c, 
-	0x02, 0x42, 0x22, 0x62, 0x12, 0x52, 0x32, 0x72, 
-	0x0a, 0x4a, 0x2a, 0x6a, 0x1a, 0x5a, 0x3a, 0x7a, 
-	0x06, 0x46, 0x26, 0x66, 0x16, 0x56, 0x36, 0x76, 
-	0x0e, 0x4e, 0x2e, 0x6e, 0x1e, 0x5e, 0x3e, 0x7e, 
-	0x01, 0x41, 0x21, 0x61, 0x11, 0x51, 0x31, 0x71, 
-	0x09, 0x49, 0x29, 0x69, 0x19, 0x59, 0x39, 0x79, 
-	0x05, 0x45, 0x25, 0x65, 0x15, 0x55, 0x35, 0x75, 
-	0x0d, 0x4d, 0x2d, 0x6d, 0x1d, 0x5d, 0x3d, 0x7d, 
-	0x03, 0x43, 0x23, 0x63, 0x13, 0x53, 0x33, 0x73, 
-	0x0b, 0x4b, 0x2b, 0x6b, 0x1b, 0x5b, 0x3b, 0x7b, 
-	0x07, 0x47, 0x27, 0x67, 0x17, 0x57, 0x37, 0x77, 
+	0x00, 0x40, 0x20, 0x60, 0x10, 0x50, 0x30, 0x70,
+	0x08, 0x48, 0x28, 0x68, 0x18, 0x58, 0x38, 0x78,
+	0x04, 0x44, 0x24, 0x64, 0x14, 0x54, 0x34, 0x74,
+	0x0c, 0x4c, 0x2c, 0x6c, 0x1c, 0x5c, 0x3c, 0x7c,
+	0x02, 0x42, 0x22, 0x62, 0x12, 0x52, 0x32, 0x72,
+	0x0a, 0x4a, 0x2a, 0x6a, 0x1a, 0x5a, 0x3a, 0x7a,
+	0x06, 0x46, 0x26, 0x66, 0x16, 0x56, 0x36, 0x76,
+	0x0e, 0x4e, 0x2e, 0x6e, 0x1e, 0x5e, 0x3e, 0x7e,
+	0x01, 0x41, 0x21, 0x61, 0x11, 0x51, 0x31, 0x71,
+	0x09, 0x49, 0x29, 0x69, 0x19, 0x59, 0x39, 0x79,
+	0x05, 0x45, 0x25, 0x65, 0x15, 0x55, 0x35, 0x75,
+	0x0d, 0x4d, 0x2d, 0x6d, 0x1d, 0x5d, 0x3d, 0x7d,
+	0x03, 0x43, 0x23, 0x63, 0x13, 0x53, 0x33, 0x73,
+	0x0b, 0x4b, 0x2b, 0x6b, 0x1b, 0x5b, 0x3b, 0x7b,
+	0x07, 0x47, 0x27, 0x67, 0x17, 0x57, 0x37, 0x77,
 	0x0f, 0x4f, 0x2f, 0x6f, 0x1f, 0x5f, 0x3f, 0x7f
 };
 
-static unsigned char mpeg3_bit_reverse_256[] = 
+static unsigned char mpeg3_bit_reverse_256[] =
 {
-	0x00, 0x20, 0x10, 0x30, 0x08, 0x28, 0x18, 0x38, 
-	0x04, 0x24, 0x14, 0x34, 0x0c, 0x2c, 0x1c, 0x3c, 
-	0x02, 0x22, 0x12, 0x32, 0x0a, 0x2a, 0x1a, 0x3a, 
-	0x06, 0x26, 0x16, 0x36, 0x0e, 0x2e, 0x1e, 0x3e, 
-	0x01, 0x21, 0x11, 0x31, 0x09, 0x29, 0x19, 0x39, 
-	0x05, 0x25, 0x15, 0x35, 0x0d, 0x2d, 0x1d, 0x3d, 
-	0x03, 0x23, 0x13, 0x33, 0x0b, 0x2b, 0x1b, 0x3b, 
+	0x00, 0x20, 0x10, 0x30, 0x08, 0x28, 0x18, 0x38,
+	0x04, 0x24, 0x14, 0x34, 0x0c, 0x2c, 0x1c, 0x3c,
+	0x02, 0x22, 0x12, 0x32, 0x0a, 0x2a, 0x1a, 0x3a,
+	0x06, 0x26, 0x16, 0x36, 0x0e, 0x2e, 0x1e, 0x3e,
+	0x01, 0x21, 0x11, 0x31, 0x09, 0x29, 0x19, 0x39,
+	0x05, 0x25, 0x15, 0x35, 0x0d, 0x2d, 0x1d, 0x3d,
+	0x03, 0x23, 0x13, 0x33, 0x0b, 0x2b, 0x1b, 0x3b,
 	0x07, 0x27, 0x17, 0x37, 0x0f, 0x2f, 0x1f, 0x3f
 };
 
 /* Windowing function for Modified DCT - Thank you acroread */
-static mpeg3_real_t mpeg3_window[] = 
+static mpeg3_real_t mpeg3_window[] =
 {
 	0.00014, 0.00024, 0.00037, 0.00051, 0.00067, 0.00086, 0.00107, 0.00130,
 	0.00157, 0.00187, 0.00220, 0.00256, 0.00297, 0.00341, 0.00390, 0.00443,
@@ -728,7 +728,7 @@ static mpeg3_real_t mpeg3_window[] =
 	0.99978, 0.99981, 0.99984, 0.99986, 0.99988, 0.99990, 0.99992, 0.99993,
 	0.99994, 0.99995, 0.99996, 0.99997, 0.99998, 0.99998, 0.99998, 0.99999,
 	0.99999, 0.99999, 0.99999, 1.00000, 1.00000, 1.00000, 1.00000, 1.00000,
-	1.00000, 1.00000, 1.00000, 1.00000, 1.00000, 1.00000, 1.00000, 1.00000 
+	1.00000, 1.00000, 1.00000, 1.00000, 1.00000, 1.00000, 1.00000, 1.00000
 };
 
 mpeg3_complex_t cmplx_mult(mpeg3_complex_t a, mpeg3_complex_t b)
@@ -750,14 +750,14 @@ int mpeg3audio_imdct_init(mpeg3audio_t *audio)
 /* Twiddle factors to turn IFFT into IMDCT */
 	for(i = 0; i < AC3_N / 4; i++)
 	{
-		mpeg3_xcos1[i] = -cos(2.0f * M_PI * (8 * i + 1 ) / ( 8 * AC3_N)); 
+		mpeg3_xcos1[i] = -cos(2.0f * M_PI * (8 * i + 1 ) / ( 8 * AC3_N));
 		mpeg3_xsin1[i] = -sin(2.0f * M_PI * (8 * i + 1 ) / ( 8 * AC3_N));
 	}
-	
+
 /* More twiddle factors to turn IFFT into IMDCT */
 	for(i = 0; i < AC3_N / 8; i++)
 	{
-		mpeg3_xcos2[i] = -cos(2.0f * M_PI * (8 * i + 1 ) / ( 4 * AC3_N)); 
+		mpeg3_xcos2[i] = -cos(2.0f * M_PI * (8 * i + 1 ) / ( 4 * AC3_N));
 		mpeg3_xsin2[i] = -sin(2.0f * M_PI * (8 * i + 1 ) / ( 4 * AC3_N));
 	}
 
@@ -858,11 +858,11 @@ inline void swap_cmplx(mpeg3_complex_t *a, mpeg3_complex_t *b)
 	*a = *b;
 	*b = tmp;
 }
- 
-void mpeg3audio_ac3_imdct_do_512(mpeg3audio_t *audio, 
-		mpeg3_real_t data[], 
-		mpeg3_real_t *y, 
-		int step, 
+
+void mpeg3audio_ac3_imdct_do_512(mpeg3audio_t *audio,
+		mpeg3_real_t data[],
+		mpeg3_real_t *y,
+		int step,
 		mpeg3_real_t *delay)
 {
 	int i, k;
@@ -890,7 +890,7 @@ void mpeg3audio_ac3_imdct_do_512(mpeg3audio_t *audio,
 
 /* Bit reversed shuffling */
 	for(i = 0; i < AC3_N / 4; i++)
-	{ 
+	{
 		k = mpeg3_bit_reverse_512[i];
 		if(k < i)
 			swap_cmplx(&buf[i], &buf[k]);
@@ -938,16 +938,16 @@ void mpeg3audio_ac3_imdct_do_512(mpeg3audio_t *audio,
 	window_ptr = mpeg3_window;
 
 /* Window and convert to real valued signal */
-	for(i = 0; i < AC3_N / 8; i++) 
-	{ 
+	for(i = 0; i < AC3_N / 8; i++)
+	{
 		*y_ptr = -buf[AC3_N / 8 + i].imag     * *window_ptr++ + *delay_ptr++;
 		y_ptr += step;
 		*y_ptr =  buf[AC3_N / 8 - i - 1].real * *window_ptr++ + *delay_ptr++;
 		y_ptr += step;
 	}
 
-	for(i = 0; i < AC3_N / 8; i++) 
-	{ 
+	for(i = 0; i < AC3_N / 8; i++)
+	{
 		*y_ptr = -buf[i].real                * *window_ptr++ + *delay_ptr++;
 		y_ptr += step;
 		*y_ptr = buf[AC3_N / 4 - i - 1].imag * *window_ptr++ + *delay_ptr++;
@@ -959,21 +959,21 @@ void mpeg3audio_ac3_imdct_do_512(mpeg3audio_t *audio,
 
 	for(i = 0; i < AC3_N / 8; i++)
 	{
-		*delay_ptr++  = -buf[AC3_N / 8 + i].real     * *--window_ptr; 
-		*delay_ptr++  =  buf[AC3_N / 8 - i - 1].imag * *--window_ptr; 
+		*delay_ptr++  = -buf[AC3_N / 8 + i].real     * *--window_ptr;
+		*delay_ptr++  =  buf[AC3_N / 8 - i - 1].imag * *--window_ptr;
 	}
 
-	for(i = 0; i < AC3_N / 8; i++) 
+	for(i = 0; i < AC3_N / 8; i++)
 	{
-		*delay_ptr++  =  buf[i].imag                 * *--window_ptr; 
-		*delay_ptr++  = -buf[AC3_N / 4 - i - 1].real * *--window_ptr; 
+		*delay_ptr++  =  buf[i].imag                 * *--window_ptr;
+		*delay_ptr++  = -buf[AC3_N / 4 - i - 1].real * *--window_ptr;
 	}
 }
 
-void mpeg3audio_ac3_imdct_do_256(mpeg3audio_t *audio, 
-	mpeg3_real_t data[], 
-	mpeg3_real_t *y, 
-	int step, 
+void mpeg3audio_ac3_imdct_do_256(mpeg3audio_t *audio,
+	mpeg3_real_t data[],
+	mpeg3_real_t *y,
+	int step,
 	mpeg3_real_t *delay)
 {
 	int i, k;
@@ -1003,9 +1003,9 @@ void mpeg3audio_ac3_imdct_do_256(mpeg3audio_t *audio,
 		q = 2 * (2 * k);
 
 		buf_1[k].real =    data[p] * mpeg3_xcos2[k] - data[q] * mpeg3_xsin2[k];
-	    buf_1[k].imag = - (data[q] * mpeg3_xcos2[k] + data[p] * mpeg3_xsin2[k]); 
+	    buf_1[k].imag = - (data[q] * mpeg3_xcos2[k] + data[p] * mpeg3_xsin2[k]);
 		buf_2[k].real =    data[p + 1] * mpeg3_xcos2[k] - data[q + 1] * mpeg3_xsin2[k];
-	    buf_2[k].imag = - (data[q + 1] * mpeg3_xcos2[k] + data[p + 1] * mpeg3_xsin2[k]); 
+	    buf_2[k].imag = - (data[q + 1] * mpeg3_xcos2[k] + data[p + 1] * mpeg3_xsin2[k]);
 	}
 
 /* IFFT Bit reversed shuffling */
@@ -1076,16 +1076,16 @@ void mpeg3audio_ac3_imdct_do_256(mpeg3audio_t *audio,
 	delay_ptr = delay;
 	window_ptr = mpeg3_window;
 
-	for(i = 0; i < AC3_N / 8; i++) 
-	{ 
+	for(i = 0; i < AC3_N / 8; i++)
+	{
 		*y_ptr = -buf[AC3_N / 8 + i].imag     * *window_ptr++ + *delay_ptr++;
 		y_ptr += step;
 		*y_ptr =  buf[AC3_N / 8 - i - 1].real * *window_ptr++ + *delay_ptr++;
 		y_ptr += step;
 	}
 
-	for(i = 0; i < AC3_N / 8; i++) 
-	{ 
+	for(i = 0; i < AC3_N / 8; i++)
+	{
 		*y_ptr = -buf[i].real                * *window_ptr++ + *delay_ptr++;
 		y_ptr += step;
 		*y_ptr = buf[AC3_N / 4 - i - 1].imag * *window_ptr++ + *delay_ptr++;
@@ -1097,20 +1097,20 @@ void mpeg3audio_ac3_imdct_do_256(mpeg3audio_t *audio,
 
 	for(i = 0; i < AC3_N / 8; i++)
 	{
-		*delay_ptr++  = -buf[AC3_N / 8 + i].real     * *--window_ptr; 
-		*delay_ptr++  =  buf[AC3_N / 8 - i - 1].imag * *--window_ptr; 
+		*delay_ptr++  = -buf[AC3_N / 8 + i].real     * *--window_ptr;
+		*delay_ptr++  =  buf[AC3_N / 8 - i - 1].imag * *--window_ptr;
 	}
 
-	for(i = 0; i < AC3_N / 8; i++) 
+	for(i = 0; i < AC3_N / 8; i++)
 	{
-		*delay_ptr++  =  buf[i].imag                 * *--window_ptr; 
-		*delay_ptr++  = -buf[AC3_N / 4 - i - 1].real * *--window_ptr; 
+		*delay_ptr++  =  buf[i].imag                 * *--window_ptr;
+		*delay_ptr++  = -buf[AC3_N / 4 - i - 1].real * *--window_ptr;
 	}
 }
 
-int mpeg3audio_ac3_imdct(mpeg3audio_t *audio, 
+int mpeg3audio_ac3_imdct(mpeg3audio_t *audio,
 		mpeg3_ac3bsi_t *bsi,
-		mpeg3_ac3audblk_t *audblk, 
+		mpeg3_ac3audblk_t *audblk,
 		mpeg3ac3_stream_samples_t samples)
 {
 	int i;
@@ -1118,16 +1118,16 @@ int mpeg3audio_ac3_imdct(mpeg3audio_t *audio,
 	for(i = 0; i < bsi->nfchans; i++)
 	{
 		if(audblk->blksw[i])
-			mpeg3audio_ac3_imdct_do_256(audio, 
-				samples[i], 
-				audio->pcm_sample + audio->pcm_point + i, 
-				bsi->nfchans, 
+			mpeg3audio_ac3_imdct_do_256(audio,
+				samples[i],
+				audio->pcm_sample + audio->pcm_point + i,
+				bsi->nfchans,
 				audio->ac3_delay[i]);
 		else
-			mpeg3audio_ac3_imdct_do_512(audio, 
-				samples[i], 
-				audio->pcm_sample + audio->pcm_point + i, 
-				bsi->nfchans, 
+			mpeg3audio_ac3_imdct_do_512(audio,
+				samples[i],
+				audio->pcm_sample + audio->pcm_point + i,
+				bsi->nfchans,
 				audio->ac3_delay[i]);
 	}
 	audio->pcm_point += AC3_N / 2 * bsi->nfchans;

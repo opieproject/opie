@@ -39,10 +39,10 @@ MainWidget::MainWidget( QWidget* parent, const char* name )
 	Form1Layout->addItem( spacer_2, 0, 2 );
 
 	QHBox *bottom=new QHBox(this);
-	
+
 	mPoints=new QLabel(bottom);
 	bottom->setStretchFactor(mPoints, 2);
-	
+
 	lPrompt = new LinesPrompt(bPainter, bottom);
 
 	Form1Layout->addWidget( bottom, 1, 1 );

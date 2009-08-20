@@ -45,12 +45,12 @@ OPIE_EXPORT_APP( OApplicationFactory<Konsole> )
 
 /* --| main |------------------------------------------------------ */
 		int main(int argc, char* argv[]) {
-		if(setuid(getuid()) !=0) odebug << "setuid failed" << oendl; 
+		if(setuid(getuid()) !=0) odebug << "setuid failed" << oendl;
 		if(setgid(getgid()) != 0) odebug << "setgid failed" << oendl;  // drop privileges
 
 		QPEApplication a( argc, argv );
 #ifdef FAKE_CTRL_AND_ALT
-    odebug << "Fake Ctrl and Alt defined" << oendl; 
+    odebug << "Fake Ctrl and Alt defined" << oendl;
 		QPEApplication::grabKeyboard(); // for CTRL and ALT
 #endif
 
@@ -61,7 +61,7 @@ OPIE_EXPORT_APP( OApplicationFactory<Konsole> )
 				struct passwd *ent = 0;
 				uid_t me = getuid();
 				shell = "/bin/sh";
-    
+
 				while ( (ent = getpwent()) != 0 ) {
 						if (ent->pw_uid == me) {
 								if (ent->pw_shell != "")

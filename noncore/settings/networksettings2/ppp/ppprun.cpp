@@ -2,18 +2,18 @@
 #include "ppprun.h"
 
 PPPRun::PPPRun( ANetNodeInstance * NNI, PPPData & Data ) :
-          RuntimeInfo( NNI ), Pat( "eth[0-9]" ) { 
-      D = &Data; 
+          RuntimeInfo( NNI ), Pat( "eth[0-9]" ) {
+      D = &Data;
 }
 
 State_t PPPRun::detectState( void ) {
     if( isMyPPPDRunning( ) ) {
       return ( isMyPPPUp() ) ? IsUp : Available;
-    } 
+    }
     return Off;
 }
 
-QString PPPRun::setMyState( NetworkSetup * , Action_t , bool ) { 
+QString PPPRun::setMyState( NetworkSetup * , Action_t , bool ) {
     return QString();
 }
 
@@ -31,13 +31,13 @@ bool PPPRun::isMyPPPUp( void ) {
          ++It ) {
       Run = It.current();
       if( R.match( Run->Name ) >= 0 &&
-          Run->IsPointToPoint 
+          Run->IsPointToPoint
         ) {
         // this is a LAN card
         if( Run->assignedToNetworkSetup() == netNode()->networkSetup() ) {
           // assigned to us
           return 1;
-        } 
+        }
       }
     }
     return 0;

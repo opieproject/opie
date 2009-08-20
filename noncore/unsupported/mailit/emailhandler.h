@@ -78,7 +78,7 @@ struct Email
   QString contentAttribute;     //0 = plain, 1 = html
   EnclosureList files;
   uint size;
-  
+
   void addEnclosure(Enclosure *e)
   {
     files.append(e);
@@ -103,7 +103,7 @@ struct MailAccount
   const int ErrUnknownResponse = 1001;
   const int ErrLoginFailed = 1002;
   const int ErrCancel = 1003;
-  
+
 
 class EmailHandler : public QObject
 {
@@ -124,7 +124,7 @@ public:
   int encodeFile(const QString &fileName, QString *toBody);
   void encode64base(char *src, QString *dest, int len);
   void cancel();
-  
+
 signals:
   void mailSent();
   void smtpError(int, const QString & Msg );
@@ -139,7 +139,7 @@ signals:
 
 public slots:
   void messageArrived(const QString &, int id, uint size, bool complete);
-  
+
 private:
   MailAccount mailAccount;
   SmtpClient *smtpClient;

@@ -122,7 +122,7 @@ void OPimRecord::setCategoryNames( const QStringList& catnames, const QString& a
 
     if( addedCat )
         catDB.save( categoryFileName() );
-    
+
     setCategories( cats );
 }
 

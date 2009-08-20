@@ -29,7 +29,7 @@ void FlyTerrain :: setPoint( int point )
         dir *= -1;
 
     int prevPoint = mapBottom[point-1];
-    
+
     int nextPoint = prevPoint + (dir * nextInt( fly_difficulty_levels[0] ) );
 
     if ( nextPoint > sHeight )
@@ -50,7 +50,7 @@ void FlyTerrain :: drawTerrain( SDL_Surface *screen )
 {
 	Terrain::drawTerrain( screen );
 	int tmpOffset = offset + speed*segSize;
-	
+
 	for ( int i = 0 ; i < MAPSIZE -1; ++i )
 	{
 
@@ -78,10 +78,10 @@ void FlyTerrain :: drawTerrain( SDL_Surface *screen )
 				}
 
 				lineRGBA( screen, (i*segSize) - tmpOffset, mapBottom[i]-flyScoreZones[j][0], ((i+1)*segSize)-tmpOffset, mapBottom[i+1]-flyScoreZones[j][0], r, g, b, 255 );
-				
+
 			}
 
-		}        
+		}
 	}
 }
 
@@ -96,7 +96,7 @@ int FlyTerrain :: getScore( int difficulty, int dist )
 			break;
 		}
 	}
-	
+
 	return score;
 }
 

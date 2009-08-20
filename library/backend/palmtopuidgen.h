@@ -59,7 +59,7 @@ public:
     int id = sign * (int) ::time(NULL);
     while ( ids.contains( id ) ) {
 	id += sign;
-	
+
 	// check for overflow cases; if so, wrap back to beginning of
 	// set ( -1 or 1 )
 	if ( sign == -1 && id > 0 || sign == 1 && id < 0 )

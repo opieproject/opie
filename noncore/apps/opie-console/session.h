@@ -70,10 +70,10 @@ public:
 
 signals:
     void sessionClosed( Session * );
-    
+
 protected slots:
     virtual void closed();
-    
+
 private:
     QString m_name;
     QWidgetStack* m_widget;

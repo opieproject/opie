@@ -1,21 +1,21 @@
 /////////////////////////////////////////////////////////////
 // Flash Plugin and Player
 // Copyright (C) 1998,1999 Olivier Debon
-// 
+//
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
 // as published by the Free Software Foundation; either version 2
 // of the License, or (at your option) any later version.
-// 
+//
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-// 
+//
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-// 
+//
 ///////////////////////////////////////////////////////////////
 #ifndef _SHAPE_H_
 #define _SHAPE_H_
@@ -94,7 +94,7 @@ struct StyleList {
     long		 nbNewFillStyles;
     LineStyleDef	*newLineStyles; // Array
     long		 nbNewLineStyles;
-    
+
     StyleList *next;
 };
 
@@ -137,7 +137,7 @@ struct ShapeParser {
 class Shape : public Character {
  public:
 	int		 defLevel; // 1,2 or 3
-        
+
 
 	Rect		 boundary;
 	FillStyleDef	 defaultFillStyle;
@@ -164,7 +164,7 @@ public:
 
 	void	 setBoundingBox(Rect rect);
 	int	 execute(GraphicDevice *gd, Matrix *matrix, Cxform *cxform);
-	void	 getRegion(GraphicDevice *gd, Matrix *matrix, 
+	void	 getRegion(GraphicDevice *gd, Matrix *matrix,
                            void *id, ScanLineFunc scan_line_func);
 
 	void	 getBoundingBox(Rect *bb, DisplayListEntry *);

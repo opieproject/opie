@@ -139,7 +139,7 @@ bool OTSDPService::rfcommChannel(unsigned int &n) {
     return false;
 }
 
-bool OTSDPService::hasClassID(const OTUUID & uuid) { 
+bool OTSDPService::hasClassID(const OTUUID & uuid) {
     OTSDPAttribute * ClassIDAttr;
 
     // Get the the ClassID descriptor list attribute (0x01)

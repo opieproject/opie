@@ -976,7 +976,7 @@ static char* lexGetQuotedPrintable()
 
 	    if (next == '\n') {
 		// skip and only skip the \n
-		lexSkipLookahead(); 
+		lexSkipLookahead();
 		c = lexLookahead();
 		++mime_lineNum; // aid in error reporting
 		continue;
@@ -988,7 +988,7 @@ static char* lexGetQuotedPrintable()
 		// we have been sent buggy stuff. doesn't matter
 		// what we do so long as we keep going.
 		// should probably spit an error here
-		lexSkipLookahead(); 
+		lexSkipLookahead();
 		c = lexLookahead();
 		continue;
 	    }
@@ -1006,7 +1006,7 @@ static char* lexGetQuotedPrintable()
 		// we have been sent buggy stuff. doesn't matter
 		// what we do so long as we keep going.
 		// should probably spit an error here
-		lexSkipLookahead(); 
+		lexSkipLookahead();
 		c = lexLookahead();
 		continue;
 	    }
@@ -1171,7 +1171,7 @@ DLLEXPORT(VObject*) Parse_MIME(const char *input, unsigned long len)
 DLLEXPORT(VObject*) Parse_MIME_FromFile(CFile *file)
     {
     unsigned long startPos;
-    VObject *result;	
+    VObject *result;
 
     initLex(0,-1,file);
     startPos = file->GetPosition();
@@ -1184,7 +1184,7 @@ DLLEXPORT(VObject*) Parse_MIME_FromFile(CFile *file)
 
 VObject* Parse_MIME_FromFile(FILE *file)
     {
-    VObject *result;	
+    VObject *result;
     long startPos;
 
     initLex(0,(unsigned long)-1,file);

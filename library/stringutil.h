@@ -48,7 +48,7 @@ QString QPC_EXPORT plainString( const QString& string );
 int compare( const QString & s1, const QString & s2 );
 QString buildSortKey( const QString & s );
 QString buildSortKey( const QString & s1, const QString & s2 );
-QString buildSortKey( const QString & s1, const QString & s2, 
+QString buildSortKey( const QString & s1, const QString & s2,
 		      const QString & s3 );
 
 }

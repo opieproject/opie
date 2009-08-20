@@ -22,19 +22,19 @@ int mpeg3audio_head_check(unsigned long head)
 
 int mpeg3audio_decode_header(mpeg3audio_t *audio)
 {
-    if(audio->newhead & (1 << 20)) 
+    if(audio->newhead & (1 << 20))
 	{
         audio->lsf = (audio->newhead & (1 << 19)) ? 0x0 : 0x1;
         audio->mpeg35 = 0;
     }
-    else 
+    else
 	{
     	audio->lsf = 1;
     	audio->mpeg35 = 1;
     }
 
     audio->layer = 4 - ((audio->newhead >> 17) & 3);
-    if(audio->mpeg35) 
+    if(audio->mpeg35)
         audio->sampling_frequency_code = 6 + ((audio->newhead >> 10) & 0x3);
     else
         audio->sampling_frequency_code = ((audio->newhead >> 10) & 0x3) + (audio->lsf * 3);
@@ -50,7 +50,7 @@ int mpeg3audio_decode_header(mpeg3audio_t *audio)
     audio->original  = ((audio->newhead >> 2) & 0x1);
     audio->emphasis  = audio->newhead & 0x3;
     audio->channels    = (audio->mode == MPG_MD_MONO) ? 1 : 2;
-	if(audio->channels > 1) 
+	if(audio->channels > 1)
 		audio->single = -1;
 	else
 		audio->single = 3;
@@ -60,7 +60,7 @@ int mpeg3audio_decode_header(mpeg3audio_t *audio)
     if(!audio->bitrate_index) return 1;
 	audio->bitrate = 1000 * mpeg3_tabsel_123[audio->lsf][audio->layer - 1][audio->bitrate_index];
 
-    switch(audio->layer) 
+    switch(audio->layer)
 	{
       	case 1:
         	audio->framesize  = (long)mpeg3_tabsel_123[audio->lsf][0][audio->bitrate_index] * 12000;
@@ -82,7 +82,7 @@ int mpeg3audio_decode_header(mpeg3audio_t *audio)
         	audio->framesize  = (long)mpeg3_tabsel_123[audio->lsf][2][audio->bitrate_index] * 144000;
         	audio->framesize /= mpeg3_freqs[audio->sampling_frequency_code] << (audio->lsf);
         	audio->framesize = audio->framesize + audio->padding - 4;
-        	break; 
+        	break;
       	default:
         	return 1;
     }
@@ -146,15 +146,15 @@ int mpeg3audio_read_header(mpeg3audio_t *audio)
 					attempt++;
 					mpeg3bits_getbyte_noptr(audio->astream);
 					audio->newhead = mpeg3bits_showbits(audio->astream, 32);
-				}while(!mpeg3bits_eof(audio->astream) && 
-					attempt < 65536 && 
+				}while(!mpeg3bits_eof(audio->astream) &&
+					attempt < 65536 &&
 					(mpeg3audio_head_check(audio->newhead) || mpeg3audio_decode_header(audio)));
     		}
 
 /* Skip the 4 bytes containing the header */
 			mpeg3bits_getbits(audio->astream, 32);
 			break;
-		
+
 		case AUDIO_PCM:
 			mpeg3audio_read_pcm_header(audio);
 			break;

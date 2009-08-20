@@ -8,11 +8,11 @@
 //
 //
 
-static const char * BluetoothBNEPNeeds[] = 
+static const char * BluetoothBNEPNeeds[] =
     { 0
     };
 
-static const char * BluetoothBNEPProvides[] = 
+static const char * BluetoothBNEPProvides[] =
     { "device",
       0
     };
@@ -20,7 +20,7 @@ static const char * BluetoothBNEPProvides[] =
 /**
  * Constructor, find all of the possible interfaces
  */
-BluetoothBNEPNetNode::BluetoothBNEPNetNode() : 
+BluetoothBNEPNetNode::BluetoothBNEPNetNode() :
       ANetNode(tr("Bluetooth PAN/NAP")) {
       InstanceCount = 7; // default
 }
@@ -51,8 +51,8 @@ const char ** BluetoothBNEPNetNode::provides( void ) {
       return BluetoothBNEPProvides;
 }
 
-QString BluetoothBNEPNetNode::genNic( long nr ) { 
-      QString S; 
+QString BluetoothBNEPNetNode::genNic( long nr ) {
+      QString S;
       return S.sprintf( "bnep%ld", nr );
 }
 
@@ -75,11 +75,11 @@ void BluetoothBNEPNetNode::saveSpecificAttribute( QTextStream & TS) {
 //
 //
 
-static const char * BluetoothRFCOMMNeeds[] = 
+static const char * BluetoothRFCOMMNeeds[] =
     { 0
     };
 
-BluetoothRFCOMMNetNode::BluetoothRFCOMMNetNode() : 
+BluetoothRFCOMMNetNode::BluetoothRFCOMMNetNode() :
       ANetNode( tr("Bluetooth serial link") ) {
 }
 

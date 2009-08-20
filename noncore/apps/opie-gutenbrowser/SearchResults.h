@@ -14,15 +14,15 @@
 #include <qstringlist.h>
 #include <qlistbox.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 //class QListBox;
 class QListBoxItem;
 class QPushButton;
 
 class SearchResultsDlg : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:

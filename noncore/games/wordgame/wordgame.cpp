@@ -445,7 +445,7 @@ bool WordGame::mayEndGame()
 	    out = i;
     if ( out<0 ) {
 	if ( QMessageBox::warning(this,tr("End game"),
-				  tr("Do you want to end the game early?"), 
+				  tr("Do you want to end the game early?"),
 				  tr("Yes"), tr("No") )!=0 )
 	{
 	    return FALSE;
@@ -683,7 +683,7 @@ if (s>0 || current==QPoint(5,1)){
 QString st;
 for ( int i=0; i<n; i++ )
     st += tiles[i]->text();
-odebug << "" << current.x() << "," << current.y() << ": " << st.latin1() << " (" << n << ") for " << s << "" << oendl; 
+odebug << "" << current.x() << "," << current.y() << ": " << st.latin1() << " (" << n << ") for " << s << "" << oendl;
 }
 */
     if ( s > best_score ) {
@@ -1110,7 +1110,7 @@ int Board::score(QPoint at, const Tile** tiles, int n, const Tile* blankvalue, c
 	    int sidetotal = tilevalue;
 	    {
 		QPoint side = at-otherd;
-		
+
 		while ( contains(side) && (t=tile(side)) ) {
 		    sidetotal += t->value();
 		    sideword.prepend(t->text());

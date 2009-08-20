@@ -34,10 +34,10 @@ int MailList::count()
 int* MailList::first()
 {
   dList *mPtr;
-  
+
   if (sortedList.count() == 0)
     return NULL;
-    
+
   mPtr = sortedList.at(0);
   currentPos = 1;
   return &(mPtr->serverId);
@@ -46,10 +46,10 @@ int* MailList::first()
 int* MailList::next()
 {
   dList *mPtr;
-  
+
   if ( (currentPos) >= sortedList.count())
     return NULL;
-  
+
   mPtr = sortedList.at(currentPos);
   currentPos++;
   return &(mPtr->serverId);
@@ -59,11 +59,11 @@ void MailList::sizeInsert(int serverId, uint size)
 {
   dList *tempPtr;
   int x;
-  
+
   dList *newEntry = new dList;
   newEntry->serverId = serverId;
   newEntry->size = size;
-  
+
   for (tempPtr = sortedList.first(); tempPtr != NULL; tempPtr = sortedList.next() ) {
     if (newEntry->size < tempPtr->size) {
       x = sortedList.at();
@@ -79,7 +79,7 @@ void MailList::moveFront(int serverId, uint/* size*/)
   dList *currentPtr;
   uint tempPos;
   QString temp;
-  
+
   tempPos = currentPos;
   if ( tempPos >= sortedList.count() )
     return;
@@ -88,11 +88,11 @@ void MailList::moveFront(int serverId, uint/* size*/)
     tempPos++;
     currentPtr = sortedList.at(tempPos);
   }
-  
+
   if ( (currentPtr != NULL) && (currentPtr->serverId == serverId) ) {
     temp.setNum(currentPtr->serverId);
     qWarning("moved to front, message: " + temp);
-    
+
     dList *itemPtr = sortedList.take(tempPos);
     sortedList.insert(currentPos, itemPtr);
   }
@@ -105,7 +105,7 @@ bool MailList::remove(int serverId, uint /*size*/)
   dList *currentPtr;
   uint tempPos;
   QString temp;
-  
+
   tempPos = currentPos;
   if ( tempPos >=sortedList.count() )
     return FALSE;
@@ -114,12 +114,12 @@ bool MailList::remove(int serverId, uint /*size*/)
     tempPos++;
     currentPtr = sortedList.at(tempPos);
   }
-  
+
   if ( (currentPtr != NULL) && (currentPtr->serverId == serverId) ) {
     temp.setNum(currentPtr->serverId);
     qWarning("deleted message: " + temp);
     sortedList.remove(tempPos);
-    
+
     return TRUE;
   }
   return FALSE;

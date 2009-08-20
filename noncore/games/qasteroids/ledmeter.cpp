@@ -94,7 +94,7 @@ void KALedMeter::drawContents( QPainter *p )
     unsigned cidx = 0;
     int ncol = mCount;
     QColor col = colorGroup().foreground();
-   
+
     if ( !mCRanges.isEmpty() )
     {
         col = mCRanges.at( cidx )->mColor;

@@ -8,11 +8,11 @@ class VPNRun  : public RuntimeInfo {
 
 public :
 
-      VPNRun( ANetNodeInstance * NNI, VPNData & Data ) : 
+      VPNRun( ANetNodeInstance * NNI, VPNData & Data ) :
               RuntimeInfo( NNI )
         { }
 
-      virtual RuntimeInfo * connection( void ) 
+      virtual RuntimeInfo * connection( void )
         { return this; }
 
       State_t detectState( void )

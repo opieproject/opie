@@ -16,8 +16,8 @@ StationInfo::StationInfo( const QString &ssid, const QString &type, const QStrin
     QGridLayout *grid = new QGridLayout( this, 1, 2, 5);
     QVBoxLayout *layLeft = new QVBoxLayout(0, 0, 6);
     QVBoxLayout *layRight = new QVBoxLayout(0, 0, 6);
-    
-    
+
+
     m_ssidLabel = new QLabel( tr("SSID:"), this );
     layLeft->addWidget(m_ssidLabel);
     m_typeLabel = new QLabel( tr("Type:"), this );
@@ -56,8 +56,8 @@ StationInfo::StationInfo( const QString &ssid, const QString &type, const QStrin
     layRight->addWidget(m_vendor);
     m_lastTime = new QLabel( time, this);
     layRight->addWidget(m_lastTime);
-            
-    
+
+
     grid->addLayout( layRight, 0, 1);
-    grid->addLayout( layLeft, 0, 0 );   
+    grid->addLayout( layLeft, 0, 0 );
 }

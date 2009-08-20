@@ -52,7 +52,7 @@ public:
     static int flyHardScores[7][3];
     int *flyScores;
 
-    
+
     double thrustUp;
     double noThrust;
     double maxUpThrust;
@@ -61,7 +61,7 @@ public:
     int gateDistance;
     int nextGate;
     int lastGateBottomY;
-    
+
     static QString menuOptions[NR_MENUS][MAX_MENU_OPTIONS];
     int currentMenuNr;
     static int nrMenuOptions[NR_MENUS];
@@ -99,11 +99,11 @@ public:
 	~SFCave();
 
 	static QString appName() { return QString::fromLatin1( QUICKAPP_NAME ); }
-	
+
 public slots:
 	void start();
 public:
-	
+
     void setSeed( int seed );
 	int nextInt( int range );
 	void setUp();

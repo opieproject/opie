@@ -72,7 +72,7 @@ using namespace Opie::DB;
 #define __STORE_HORIZONTAL_
 
 // Distinct loading is not very fast. If I expect that every person has just
-// one (and always one) 'Last Name', I can request all uid's for existing lastnames, 
+// one (and always one) 'Last Name', I can request all uid's for existing lastnames,
 // which is faster..
 // But this may not be true for all entries, like company contacts..
 // The current AddressBook application handles this problem, but other may not.. (eilers)
@@ -97,7 +97,7 @@ namespace {
 		~CreateQuery();
 		QString query()const;
 	};
-	
+
 	/**
 	 * Clears (delete) a Table
 	 */
@@ -106,9 +106,9 @@ namespace {
 		ClearQuery();
 		~ClearQuery();
 		QString query()const;
-		
+
 	};
-	
+
 
 	/**
 	 * LoadQuery
@@ -120,7 +120,7 @@ namespace {
 		~LoadQuery();
 		QString query()const;
 	};
-	
+
 	/**
 	 * inserts/adds a OContact to the table
 	 */
@@ -132,7 +132,7 @@ namespace {
 	private:
 		OContact m_contact;
 	};
-	
+
 
 	/**
 	 * removes one from the table
@@ -145,7 +145,7 @@ namespace {
 	private:
 		int m_uid;
 	};
-	
+
 	/**
 	 * a find query for noncustom elements
 	 */
@@ -177,14 +177,14 @@ namespace {
 		QArray<int> m_uids;
 		int m_uid;
 	};
-	
+
 
 
 	// We using three tables to store the information:
 	// 1. addressbook  : It contains General information about the contact (non custom)
 	// 2. custom_data  : Not official supported entries
 	// All tables are connected by the uid of the contact.
-	// Maybe I should add a table for meta-information ? 
+	// Maybe I should add a table for meta-information ?
 	CreateQuery::CreateQuery() : OSQLQuery() {}
 	CreateQuery::~CreateQuery() {}
 	QString CreateQuery::query()const {
@@ -198,7 +198,7 @@ namespace {
 			qu += QString( ",\"%1\" VARCHAR(10)" ).arg( *it );
 		}
 		qu += " );";
-		
+
 		qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR, priority INTEGER, value VARCHAR, PRIMARY KEY /* identifier */ (uid, id) );";
 
 #else
@@ -210,7 +210,7 @@ namespace {
 #endif // __STORE_HORIZONTAL_
 		return qu;
 	}
-	
+
 	ClearQuery::ClearQuery()
 		: OSQLQuery() {}
 	ClearQuery::~ClearQuery() {}
@@ -229,16 +229,16 @@ namespace {
 #ifdef __STORE_HORIZONTAL_
 		qu += "select uid from addressbook";
 #else
-#  ifndef __USE_SUPERFAST_LOADQUERY 
+#  ifndef __USE_SUPERFAST_LOADQUERY
 		qu += "select distinct uid from addressbook";
 #  else
 		qu += "select uid from addressbook where type = 'Last Name'";
-#  endif // __USE_SUPERFAST_LOADQUERY 
+#  endif // __USE_SUPERFAST_LOADQUERY
 #endif // __STORE_HORIZONTAL_
-		
+
 		return qu;
 	}
-	
+
 
 	InsertQuery::InsertQuery( const OContact& contact )
 		: OSQLQuery(), m_contact( contact ) {
@@ -254,13 +254,13 @@ namespace {
 
 #ifdef __STORE_HORIZONTAL_
 		QString qu;
-		qu  += "insert into addressbook VALUES( " + 
+		qu  += "insert into addressbook VALUES( " +
 			QString::number( m_contact.uid() );
 
 		// Get all information out of the contact-class
-		// Remember: The category is stored in contactMap, too ! 
+		// Remember: The category is stored in contactMap, too !
 		QMap<int, QString> contactMap = m_contact.toMap();
-		
+
 		QStringList fieldList = OContactFields::untrfields( false );
 		QMap<QString, int> translate = OContactFields::untrFieldsToId();
 		for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
@@ -303,25 +303,25 @@ namespace {
 		}
 		qu += " );";
 
-			
+
 #else
 		// Get all information out of the contact-class
-		// Remember: The category is stored in contactMap, too ! 
+		// Remember: The category is stored in contactMap, too !
 		QMap<int, QString> contactMap = m_contact.toMap();
-		
+
 		QMap<QString, QString> addressbook_db;
-		
+
 		// Get the translation from the ID to the String
 		QMap<int, QString> transMap = OContactFields::idToUntrFields();
-		
-		for( QMap<int, QString>::Iterator it = contactMap.begin(); 
+
+		for( QMap<int, QString>::Iterator it = contactMap.begin();
 		     it != contactMap.end(); ++it ){
 			switch ( it.key() ){
 			case Qtopia::Birthday:{
 				// These entries should stored in a special format
 				// year-month-day
 				QDate day = m_contact.birthday();
-				addressbook_db.insert( transMap[it.key()], 
+				addressbook_db.insert( transMap[it.key()],
 						       QString("%1-%2-%3")
 						       .arg( day.year() )
 						       .arg( day.month() )
@@ -332,7 +332,7 @@ namespace {
 				// These entries should stored in a special format
 				// year-month-day
 				QDate day = m_contact.anniversary();
-				addressbook_db.insert( transMap[it.key()], 
+				addressbook_db.insert( transMap[it.key()],
 						       QString("%1-%2-%3")
 						       .arg( day.year() )
 						       .arg( day.month() )
@@ -345,69 +345,69 @@ namespace {
 				addressbook_db.insert( transMap[it.key()], it.data() );
 				break;
 			}
-		
+
 		}
-		
+
 		// Now convert this whole stuff into a SQL String, beginning with
 		// the addressbook table..
 		QString qu;
 		// qu  += "begin transaction;";
 		int id = 0;
-		for( QMap<QString, QString>::Iterator it = addressbook_db.begin(); 
+		for( QMap<QString, QString>::Iterator it = addressbook_db.begin();
 		     it != addressbook_db.end(); ++it ){
-			qu  += "insert into addressbook VALUES(" 
+			qu  += "insert into addressbook VALUES("
 				+  QString::number( m_contact.uid() )
 				+ ","
-				+  QString::number( id++ ) 
-				+ ",'" 
+				+  QString::number( id++ )
+				+ ",'"
 				+ it.key() //.latin1()
 				+ "',"
 				+ "0"  // Priority for future enhancements
-				+ ",'" 
+				+ ",'"
 				+ it.data()  //.latin1()
 				+ "');";
 		}
 
-#endif 	//__STORE_HORIZONTAL_	
+#endif 	//__STORE_HORIZONTAL_
 		// Now add custom data..
 #ifdef __STORE_HORIZONTAL_
 		int id = 0;
 #endif
 		id = 0;
 		QMap<QString, QString> customMap = m_contact.toExtraMap();
-		for( QMap<QString, QString>::Iterator it = customMap.begin(); 
+		for( QMap<QString, QString>::Iterator it = customMap.begin();
 		     it != customMap.end(); ++it ){
-			qu  += "insert into custom_data VALUES(" 
+			qu  += "insert into custom_data VALUES("
 				+  QString::number( m_contact.uid() )
 				+ ","
-				+  QString::number( id++ ) 
-				+ ",'" 
+				+  QString::number( id++ )
+				+ ",'"
 				+ it.key() //.latin1()
 				+ "',"
 				+ "0" // Priority for future enhancements
-				+ ",'" 
+				+ ",'"
 				+ it.data() //.latin1()
 				+ "');";
-		}		
+		}
 		// qu  += "commit;";
 		qWarning("add %s", qu.latin1() );
 		return qu;
 	}
-	
+
 
 	RemoveQuery::RemoveQuery(int uid )
 		: OSQLQuery(), m_uid( uid ) {}
 	RemoveQuery::~RemoveQuery() {}
 	QString RemoveQuery::query()const {
-		QString qu = "DELETE from addressbook where uid = " 
+		QString qu = "DELETE from addressbook where uid = "
 			+ QString::number(m_uid) + ";";
-		qu += "DELETE from custom_data where uid = " 
+		qu += "DELETE from custom_data where uid = "
 			+ QString::number(m_uid) + ";";
 		return qu;
 	}
-	
 
-	
+
+
 
 	FindQuery::FindQuery(int uid)
 		: OSQLQuery(), m_uid( uid ) {
@@ -430,7 +430,7 @@ namespace {
 		for (uint i = 0; i < m_uids.count(); i++ ) {
 			qu += " UID = " + QString::number( m_uids[i] ) + " OR";
 		}
-		qu.remove( qu.length()-2, 2 ); // Hmmmm.. 
+		qu.remove( qu.length()-2, 2 ); // Hmmmm..
 		return qu;
 	}
 	*/
@@ -474,8 +474,8 @@ namespace {
 
 /* --------------------------------------------------------------------------- */
 
-OContactAccessBackend_SQL::OContactAccessBackend_SQL ( const QString& /* appname */, 
-						       const QString& filename ): 
+OContactAccessBackend_SQL::OContactAccessBackend_SQL ( const QString& /* appname */,
+						       const QString& filename ):
 	OContactAccessBackend(), m_changed(false), m_driver( NULL )
 {
 	qWarning("C'tor OContactAccessBackend_SQL starts");
@@ -491,7 +491,7 @@ OContactAccessBackend_SQL::OContactAccessBackend_SQL ( const QString& /* appname
 	// Get the standart sql-driver from the OSQLManager..
 	OSQLManager man;
 	m_driver = man.standard();
-	m_driver->setUrl( m_fileName );	
+	m_driver->setUrl( m_fileName );
 
 	load();
 
@@ -550,9 +550,9 @@ QArray<int> OContactAccessBackend_SQL::allRecords() const
 
 	// FIXME: Think about cute handling of changed tables..
 	// Thus, we don't have to call update here...
- 	if ( m_changed )  
+ 	if ( m_changed )
 		((OContactAccessBackend_SQL*)this)->update();
-	
+
 	return m_uids;
 }
 
@@ -567,7 +567,7 @@ bool OContactAccessBackend_SQL::add ( const OContact &newcontact )
 	int c = m_uids.count();
 	m_uids.resize( c+1 );
 	m_uids[c] = newcontact.uid();
-	
+
 	return true;
 }
 
@@ -589,7 +589,7 @@ bool OContactAccessBackend_SQL::replace ( const OContact &contact )
 {
 	if ( !remove( contact.uid() ) )
 		return false;
-	
+
 	return add( contact );
 }
 
@@ -630,12 +630,12 @@ QArray<int> OContactAccessBackend_SQL::queryByExample ( const OContact &query, i
 				// LIKE is not case sensitive, GLOB is case sensitive
 				// Do exist a better solution to switch this ?
 				if ( settings & OContactAccess::IgnoreCase )
-					qu += "(\"" + *it + "\"" + " LIKE " + "'" 
-						+ queryStr.replace(QRegExp("\\*"),"%") + "'" + ") AND "; 
+					qu += "(\"" + *it + "\"" + " LIKE " + "'"
+						+ queryStr.replace(QRegExp("\\*"),"%") + "'" + ") AND ";
 				else
-					qu += "(\"" + *it + "\"" + " GLOB " + "'" 
-						+ queryStr + "'" + ") AND "; 
-					
+					qu += "(\"" + *it + "\"" + " GLOB " + "'"
+						+ queryStr + "'" + ") AND ";
+
 			}
 		}
 	}
@@ -655,7 +655,7 @@ QArray<int> OContactAccessBackend_SQL::queryByExample ( const OContact &query, i
 
 	QArray<int> list = extractUids( res );
 
-	return list;		
+	return list;
 }
 
 QArray<int> OContactAccessBackend_SQL::matchRegexp(  const QRegExp &r ) const
@@ -666,7 +666,7 @@ QArray<int> OContactAccessBackend_SQL::matchRegexp(  const QRegExp &r ) const
 
 const uint OContactAccessBackend_SQL::querySettings()
 {
-	return OContactAccess::IgnoreCase 
+	return OContactAccess::IgnoreCase
 		|| OContactAccess::WildCards;
 }
 
@@ -678,7 +678,7 @@ bool OContactAccessBackend_SQL::hasQuerySettings (uint querySettings) const
 	 */
 
 	// Step 1: Check whether the given settings are supported by this backend
-	if ( ( querySettings & ( 
+	if ( ( querySettings & (
 				OContactAccess::IgnoreCase
 				| OContactAccess::WildCards
 // 				| OContactAccess::DateDiff
@@ -696,7 +696,7 @@ bool OContactAccessBackend_SQL::hasQuerySettings (uint querySettings) const
 	if ( querySettings == OContactAccess::IgnoreCase )
 		return false;
 
-	// WildCards, RegExp and ExactMatch should never used at the same time 
+	// WildCards, RegExp and ExactMatch should never used at the same time
 	switch ( querySettings & ~( OContactAccess::IgnoreCase
 				    | OContactAccess::DateDiff
 				    | OContactAccess::DateYear
@@ -734,7 +734,7 @@ QArray<int> OContactAccessBackend_SQL::sorted( bool asc,  int , int ,  int )
 	if ( !asc )
 		query += "DESC";
 
-	// qWarning("sorted query is: %s", query.latin1() ); 
+	// qWarning("sorted query is: %s", query.latin1() );
 
 	OSQLRawQuery raw( query );
 	OSQLResult res = m_driver->query( &raw );
@@ -799,7 +799,7 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 	t.start();
 
 	QMap<int, QString> nonCustomMap;
-	
+
 	int t2needed = 0;
 	int t3needed = 0;
 	QTime t2;
@@ -821,7 +821,7 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 
 		int id =  translate[*it];
 		QString value = resItem.data( (*it) );
-		
+
 		// qWarning("Reading %s... found: %s", (*it).latin1(), value.latin1() );
 
 		switch( id ){
@@ -847,11 +847,11 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 	}
 
 	// First insert uid
-	nonCustomMap.insert( Qtopia::AddressUid, resItem.data( "uid" ) ); 
+	nonCustomMap.insert( Qtopia::AddressUid, resItem.data( "uid" ) );
 	t3needed = t3.elapsed();
 
 	// qWarning("Adding UID: %s", resItem.data( "uid" ).latin1() );
-	qWarning("RequestNonCustom needed: insg.:%d ms, query: %d ms, mapping: %d ms", 
+	qWarning("RequestNonCustom needed: insg.:%d ms, query: %d ms, mapping: %d ms",
 		 t.elapsed(), t2needed, t3needed  );
 
 	return nonCustomMap;
@@ -864,7 +864,7 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 	t.start();
 
 	QMap<int, QString> nonCustomMap;
-	
+
 	int t2needed = 0;
 	QTime t2;
 	t2.start();
@@ -876,7 +876,7 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 		qWarning("OSQLResult::Failure in find query !!");
 		QMap<int, QString> empty;
 		return empty;
-	}	
+	}
 
 	int t3needed = 0;
 	QTime t3;
@@ -906,7 +906,7 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 			}
 				break;
 			default:
-				nonCustomMap.insert( typeId, 
+				nonCustomMap.insert( typeId,
 						     (*it).data( "value" ) );
 			}
 		}
@@ -927,7 +927,7 @@ QMap<QString, QString>  OContactAccessBackend_SQL::requestCustom( int uid ) cons
 	t.start();
 
 	QMap<QString, QString> customMap;
-	
+
 	FindCustomQuery query( uid );
 	OSQLResult res_custom = m_driver->query( &query );
 

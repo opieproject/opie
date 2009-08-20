@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Declaration of the QLocalePrivate class
 **
@@ -83,7 +83,7 @@ public:
 
     enum Flags {
 	NoFlags	    	= 0,
-	
+
 	// These correspond to the options in a printf format string
 	Alternate           = 0x01,
 	ZeroPadded          = 0x02,

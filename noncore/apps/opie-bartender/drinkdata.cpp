@@ -33,17 +33,17 @@ void DrinkData::setFile(const QString &filename) {
 
 bool DrinkData::read(void) {
     QFile dbFile;
-    
+
     dbFile.setName(filename);
     if ( !dbFile.open( IO_ReadOnly)) {
         return false;
     }
-    
+
     items.clear();
-    
+
     QTextStream t( &dbFile);
     QString s, name = "", ingredients = "";
-    
+
     while ( !t.eof()) {
         s = t.readLine();
         if(s.find( "#", 0, TRUE) != -1 || dbFile.atEnd()) {
@@ -59,8 +59,8 @@ bool DrinkData::read(void) {
             ingredients += s;
         }
     }
-    
-    dbFile.close(); 
+
+    dbFile.close();
 
     return true;
 }
@@ -90,26 +90,26 @@ DrinkList::Iterator DrinkData::getEnd(void) {
 
 bool DrinkData::writeChanges(void) {
     QFile dbFile;
-    
+
     dbFile.setName(filename);
     if ( !dbFile.open( IO_WriteOnly | IO_Truncate )) {
         return false;
     }
-    
+
     QTextStream t( &dbFile);
-    
+
     DrinkList::Iterator it = items.begin();
     while ( it != items.end() ) {
         t << "# " << (*it).getName() << '\n';
         t << (*it).getIngredients() << '\n';
         ++it;
     }
-    
+
     dbFile.close();
-    
+
     return true;
 }
-    
+
 
 // ----- DrinkItem -----
 

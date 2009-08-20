@@ -35,7 +35,7 @@
 #include <qpe/qpemessagebox.h>
 
 Exceptions::Exceptions(const Opie::OPimRecurrence::ExceptionList &exceptions, QWidget* parent, const char* name, bool modal,
-                       WFlags fl) : ExceptionsBase(parent, name, modal, fl) 
+                       WFlags fl) : ExceptionsBase(parent, name, modal, fl)
 {
     QString item;
     Opie::OPimRecurrence::ExceptionList::ConstIterator it;
@@ -44,7 +44,7 @@ Exceptions::Exceptions(const Opie::OPimRecurrence::ExceptionList &exceptions, QW
         item = QCString().sprintf("%04d%02d%02d", (*it).year(), (*it).month(), (*it).day() );;
         lbExceptions->insertItem(item);
     }
-    
+
     connect( cmdRemove, SIGNAL(clicked()),
              this, SLOT(slotRemoveItem()) );
 }
@@ -53,7 +53,7 @@ void Exceptions::slotRemoveItem()
 {
     if(lbExceptions->currentItem() == -1)
         return;
-        
+
     if ( QPEMessageBox::confirmDelete( this, tr( "Calendar" ), lbExceptions->currentText() ) )
         lbExceptions->removeItem( lbExceptions->currentItem() );
 }

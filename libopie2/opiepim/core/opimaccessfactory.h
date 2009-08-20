@@ -74,21 +74,21 @@ class OPimAccessFactory
 	 * @param fileName Filename of database if something different as the default should be used.
 	 * @see OPimGlobal()
 	 */
-	static T* create( OPimGlobal::PimType type, OPimGlobal::DatabaseStyle dbStyle, const QString& appName, 
+	static T* create( OPimGlobal::PimType type, OPimGlobal::DatabaseStyle dbStyle, const QString& appName,
 			  const QString& fileName = QString::null ){
             OPimBase *base;
 		switch ( type ){
 		case OPimGlobal::TODOLIST:
-		        base = new OPimTodoAccess( OBackendFactory<OPimTodoAccessBackend>::create( type, dbStyle, 
+		        base = new OPimTodoAccess( OBackendFactory<OPimTodoAccessBackend>::create( type, dbStyle,
 												   appName, fileName ) );
                         break;
 		case OPimGlobal::CONTACTLIST:
-		        base = new OPimContactAccess( QString::null, QString::null, 
-						      OBackendFactory<OPimContactAccessBackend>::create( type, dbStyle, 
+		        base = new OPimContactAccess( QString::null, QString::null,
+						      OBackendFactory<OPimContactAccessBackend>::create( type, dbStyle,
 													 appName, fileName ) );
                         break;
 		case OPimGlobal::DATEBOOK:
-		        base = new ODateBookAccess( OBackendFactory<ODateBookAccessBackend>::create( type, dbStyle, 
+		        base = new ODateBookAccess( OBackendFactory<ODateBookAccessBackend>::create( type, dbStyle,
 												     appName, fileName ) );
                         break;
 		default:

@@ -441,7 +441,7 @@ void	placestone (enum bVal c, short x, short y )
 
 void	intrMoveReport(enum bVal c ,char *coord ,char *reason )
 {
-    odebug << "intrMoveReport colour " << c << ", " << coord << " " << reason << "" << oendl; 
+    odebug << "intrMoveReport colour " << c << ", " << coord << " " << reason << "" << oendl;
 }
 
 void	intrPrisonerReport( short blackcnt, short whitecnt )

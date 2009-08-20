@@ -50,7 +50,7 @@ QString Dir_DirLister::currentPath()const {
 QStringList Dir_DirLister::folders()const {
     QStringList dirs = m_currentDir.entryList( QDir::Dirs );
     dirs.remove(".");
-    
+
     return dirs;
 }
 

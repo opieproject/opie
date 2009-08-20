@@ -3,8 +3,8 @@
  *            kPPP: A front end for pppd for the KDE project
  *
  * $Id: modeminfo.h,v 1.3 2003-08-09 17:14:55 kergoth Exp $
- * 
- * Copyright (C) 1997 Bernd Johannes Wuebben 
+ *
+ * Copyright (C) 1997 Bernd Johannes Wuebben
  * wuebben@math.cornell.edu
  *
  *
@@ -46,7 +46,7 @@ class ModemTransfer : public QDialog {
   Q_OBJECT
 public:
   ModemTransfer(Modem*, QWidget *parent=0, const char *name=0);
-  
+
 public slots:
   void init();
   void readtty();

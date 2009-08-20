@@ -27,9 +27,9 @@
 #include <qwidgetstack.h>
 #include <qtimer.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class ZListView;
 class QListViewItem;
 class QToolButton;
@@ -49,7 +49,7 @@ class QPixmap;
 #define FIELD_SIZE 7
 
 class ZSafe : public QMainWindow
-{ 
+{
     Q_OBJECT
 
 protected:
@@ -63,8 +63,8 @@ public:
     ~ZSafe();
     static QString appName() { return QString::fromLatin1( QUICKAPP_NAME ); }
 
-     static const QColor *evenRowColor; 
-     static const QColor *oddRowColor;  
+     static const QColor *evenRowColor;
+     static const QColor *oddRowColor;
 
     ZListView* ListView;
 
@@ -81,19 +81,19 @@ public:
     bool modified; // true if database is modified
     bool showpwd;  // show PWD Dialog
 
-    QListViewItem *lastSearchedCategory; 
-    QListViewItem *lastSearchedItem; 
+    QListViewItem *lastSearchedCategory;
+    QListViewItem *lastSearchedItem;
     QString        lastSearchedName;
     QString        lastSearchedUsername;
     QString        lastSearchedComment;
-   
+
 
     CategoryList categories; // list of categories
 
     bool isCategory(QListViewItem *_item);
     void getDocPassword(QString title);
     QString filename;
-   
+
     enum {
                 PWERR_GOOD,     // success
                 PWERR_OPEN,     // can't open filedescriptor / can't create file

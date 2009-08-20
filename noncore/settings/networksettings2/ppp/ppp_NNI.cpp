@@ -44,7 +44,7 @@ void APPP::setSpecificAttribute( QString & A, QString & V ) {
         Data.DNS.DomainName = V;
       } else if( A == "dnsserver" ) {
         Data.DNS.Servers.resize( Data.DNS.Servers.size()+1 );
-        Data.DNS.Servers[Data.DNS.Servers.size()-1] = 
+        Data.DNS.Servers[Data.DNS.Servers.size()-1] =
             new QString( V );
       }
     } else if( A.startsWith( "auth" ) ) {
@@ -99,7 +99,7 @@ void APPP::setSpecificAttribute( QString & A, QString & V ) {
 }
 
 void APPP::saveSpecificAttribute( QTextStream & TS ) {
-    TS << "dnsserverassigned=" << 
+    TS << "dnsserverassigned=" <<
         ( ( Data.DNS.ServerAssigned ) ? "yes" : "no" ) << endl;
     TS << "dnsdomainname=" << Data.DNS.DomainName << endl;
     for( unsigned int i = 0; i < Data.DNS.Servers.size(); i ++ ) {
@@ -149,12 +149,12 @@ void APPP::commit( void ) {
 bool APPP::openFile( SystemFile & SF, QStringList & SL ) {
       if( SF.name() == "peers" ) {
         SL << "/tmp/ppp" << "peers" ;
-        SF.setPath( removeSpaces( 
+        SF.setPath( removeSpaces(
             QString( "/tmp/ppp/peers/" ) + networkSetup()->name() ) );
         return 1;
       } else if ( SF.name() == "chatscripts" ) {
         SL << "/tmp/chatscripts";
-        SF.setPath( removeSpaces( 
+        SF.setPath( removeSpaces(
             QString( "/tmp/chatscripts/" ) + networkSetup()->name() ) );
         return 1;
       }
@@ -171,17 +171,17 @@ short APPP::generateFile( SystemFile & SF, long DevNr ) {
       Log(("Generate PPP for %s\n", SF.name().latin1() ));
 
       if( Data.Auth.Mode == 1 && Data.Auth.PCEMode == 0 ) {
-        SF << "# secrets for " 
-           << networkSetup()->name().latin1() 
+        SF << "# secrets for "
+           << networkSetup()->name().latin1()
            << endl;
-        SF << Data.Auth.Client 
-           << " " 
-           << Data.Auth.Server 
-           << " " 
+        SF << Data.Auth.Client
+           << " "
+           << Data.Auth.Server
+           << " "
            << Data.Auth.Secret
            << endl;
         rvl = 0;
-        rvd = networkSetup()->getToplevel()->generateFileEmbedded( 
+        rvd = networkSetup()->getToplevel()->generateFileEmbedded(
                 SF, DevNr );
       }
     } else if( SF.name() == "chap-secrets" ) {
@@ -189,17 +189,17 @@ short APPP::generateFile( SystemFile & SF, long DevNr ) {
       if( Data.Auth.Mode == 1 && Data.Auth.PCEMode != 0 ) {
         // used for both EAP and Chap
         SF << "# secrets for "
-           << networkSetup()->name().latin1() 
+           << networkSetup()->name().latin1()
            << endl;
-        SF << Data.Auth.Client 
-           << " " 
-           << Data.Auth.Server 
-           << " " 
+        SF << Data.Auth.Client
+           << " "
+           << Data.Auth.Server
+           << " "
            << Data.Auth.Secret
            << endl;
 
         rvl = 0;
-        rvd = networkSetup()->getToplevel()->generateFileEmbedded( 
+        rvd = networkSetup()->getToplevel()->generateFileEmbedded(
             SF, DevNr );
       }
     } else if ( SF.name() == "peers" ) {
@@ -213,7 +213,7 @@ short APPP::generateFile( SystemFile & SF, long DevNr ) {
          << endl;
 
       if( Data.IP.GWIsDefault ) {
-        SF << "defaultroute" 
+        SF << "defaultroute"
            << endl;
       }
 

@@ -17,7 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef WAV_PLUGIN_IMPL_H 
+#ifndef WAV_PLUGIN_IMPL_H
 #define WAV_PLUGIN_IMPL_H
 
 

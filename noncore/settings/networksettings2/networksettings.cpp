@@ -23,14 +23,14 @@
 #include "netnode.h"
 #include "editconnection.h"
 
-NetworkSettings::NetworkSettings( QWidget *parent, 
-               const char *name, 
-               WFlags fl ) : NetworkSettingsGUI(parent,name,fl), 
+NetworkSettings::NetworkSettings( QWidget *parent,
+               const char *name,
+               WFlags fl ) : NetworkSettingsGUI(parent,name,fl),
                              NSD() {
 
     UpdateTimer = new QTimer( this );
 
-    // set pixmaps 
+    // set pixmaps
     Add_TB->setPixmap( NSResources->getPixmap( "add" ) );
     Delete_TB->setPixmap( NSResources->getPixmap( "remove" ) );
     CheckState_TB->setPixmap( NSResources->getPixmap( "check" ) );
@@ -57,10 +57,10 @@ NetworkSettings::NetworkSettings( QWidget *parent,
 
     // populate main Listbox
     Profiles_LB->clear();
-    QPEApplication::setStylusOperation( 
+    QPEApplication::setStylusOperation(
         Profiles_LB->viewport(), QPEApplication::RightOnHold );
 
-    connect( Profiles_LB, 
+    connect( Profiles_LB,
              SIGNAL(rightButtonPressed(QListBoxItem*,const QPoint&)),
              this, SLOT(SLOT_EditNode(QListBoxItem*)) );
 
@@ -85,15 +85,15 @@ NetworkSettings::NetworkSettings( QWidget *parent,
       QTimer::singleShot( 100, this, SLOT(SLOT_AddNode() ) );
     }
 
-    connect( &(NSResources->system()), 
+    connect( &(NSResources->system()),
              SIGNAL( stdoutLine(const QString &) ),
              this, SLOT( SLOT_CmdMessage(const QString &) ) );
 
-    connect( &(NSResources->system()), 
+    connect( &(NSResources->system()),
              SIGNAL( stderrLine(const QString &) ),
              this, SLOT( SLOT_CmdMessage(const QString &) ) );
 
-    connect( &(NSResources->system()), 
+    connect( &(NSResources->system()),
              SIGNAL( processEvent(const QString &) ),
              this, SLOT( SLOT_CmdMessage(const QString &) ) );
 
@@ -116,7 +116,7 @@ NetworkSettings::~NetworkSettings() {
         S.append( "</p>" );
         // problem saving
         QMessageBox::warning(
-              0, 
+              0,
               tr( "Saving setup" ), S );
       }
 
@@ -161,8 +161,8 @@ void NetworkSettings::SLOT_RefreshStates( void ) {
         State_t NewS = NC->state(1);
         if( OldS != NewS ) {
           is = Profiles_LB->isSelected(i);
-          Profiles_LB->changeItem( NC->statePixmap(NewS), 
-                                   NC->name(), 
+          Profiles_LB->changeItem( NC->statePixmap(NewS),
+                                   NC->name(),
                                    i );
           if( is ) {
             Profiles_LB->setSelected( i, TRUE );
@@ -180,15 +180,15 @@ void NetworkSettings::SLOT_AddNode( void ) {
 }
 
 void NetworkSettings::SLOT_DeleteNode( void ) {
-    QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() ); 
+    QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() );
 
-    if ( ! LBI ) 
+    if ( ! LBI )
       return;
 
     if( QMessageBox::warning(
-          0, 
+          0,
           tr( "Removing profile" ),
-          tr( "Remove selected profile ?" ), 
+          tr( "Remove selected profile ?" ),
           1, 0 ) == 1 ) {
       NSResources->removeNetworkSetup( LBI->text() );
       delete LBI;
@@ -211,7 +211,7 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
     }
 
     EC.showMaximized();
-    // disable refresh timer 
+    // disable refresh timer
     UpdateTimer->stop();
 
     // we need to retry
@@ -227,7 +227,7 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
                     NC->name() );
               if( LCN ) {
                 QMessageBox::warning(
-                  0, 
+                  0,
                   tr( "In System Config" ),
                   tr( "Name %1 already exists" ).arg(NC->name())
                 );
@@ -256,7 +256,7 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
           SLOT_RefreshStates();
         }
       } else {
-        // cancelled : reset NetworkSetup 
+        // cancelled : reset NetworkSetup
         if( LBI ) {
           NetworkSetup * NC = NSResources->findNetworkSetup( LBI->text() );
           NC->reassign();
@@ -264,12 +264,12 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
       }
       break;
     }
-    // reenable 
+    // reenable
     UpdateTimer->start( 5000 );
 }
 
 void NetworkSettings::SLOT_ShowNode( QListBoxItem * LBI ) {
-    if( LBI == 0 ) 
+    if( LBI == 0 )
       return;
 
     NetworkSetup * NC = NSResources->findNetworkSetup( LBI->text() );
@@ -324,8 +324,8 @@ void NetworkSettings::SLOT_ShowNode( QListBoxItem * LBI ) {
 }
 
 void NetworkSettings::SLOT_CheckState( void ) {
-    QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() ); 
-    if ( ! LBI ) 
+    QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() );
+    if ( ! LBI )
       return;
     updateProfileState( LBI );
 }
@@ -342,7 +342,7 @@ void NetworkSettings::SLOT_GenerateConfig( void ) {
       S.insert( 0, "<p>" );
       S.append( "</p>" );
       QMessageBox::warning(
-          0, 
+          0,
           tr( "Generate config" ),
           S);
     }
@@ -352,7 +352,7 @@ void NetworkSettings::SLOT_Disable( bool T ) {
     QListBoxItem * LBI = Profiles_LB->item( Profiles_LB->currentItem() );
     QString Msg;
 
-    if ( ! LBI ) 
+    if ( ! LBI )
       return;
 
     NetworkSetup * NC = NSResources->findNetworkSetup( LBI->text() );
@@ -363,7 +363,7 @@ void NetworkSettings::SLOT_Disable( bool T ) {
       Msg.insert( 0, "<p>" );
       Msg.append( "</p>" );
       QMessageBox::warning(
-          0, 
+          0,
           tr( "Activating profile" ),
           Msg );
       return;
@@ -381,10 +381,10 @@ void NetworkSettings::SLOT_Up( void ) {
     QString Msg;
     int led = -1;
 
-    if ( ! LBI ) 
+    if ( ! LBI )
       return;
 
-    NetworkSetup * NC = 
+    NetworkSetup * NC =
         NSResources->findNetworkSetup( LBI->text() );
 
     switch( NC->state() ) {
@@ -414,7 +414,7 @@ void NetworkSettings::SLOT_Up( void ) {
       Msg.insert( 0, "<p>" );
       Msg.append( "</p>" );
       QMessageBox::warning(
-          0, 
+          0,
           tr( "Increase availability" ),
           Msg );
       return;
@@ -422,7 +422,7 @@ void NetworkSettings::SLOT_Up( void ) {
 
     updateProfileState( LBI );
 
-    // set color of led we should change 
+    // set color of led we should change
     if( led > 0 ) {
       Leds[led]->setColor( blue );
       Leds[led]->setOn( true );
@@ -437,10 +437,10 @@ void NetworkSettings::SLOT_Down( void ) {
     int led = -1;
     QString Msg;
 
-    if ( ! LBI ) 
+    if ( ! LBI )
       return;
 
-    NetworkSetup * NC = 
+    NetworkSetup * NC =
         NSResources->findNetworkSetup( LBI->text() );
 
     switch( NC->state() ) {
@@ -472,7 +472,7 @@ void NetworkSettings::SLOT_Down( void ) {
       Msg.insert( 0, "<p>" );
       Msg.append( "</p>" );
       QMessageBox::warning(
-          0, 
+          0,
           tr( "Decrease availability" ),
           Msg );
       return;
@@ -480,7 +480,7 @@ void NetworkSettings::SLOT_Down( void ) {
 
     updateProfileState( LBI );
 
-    // set color of led we should change 
+    // set color of led we should change
     if( led >= 0 ) {
       Leds[led]->setColor( blue );
     }

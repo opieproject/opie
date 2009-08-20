@@ -12,12 +12,12 @@
 
 #include "profileedit.h"
 
-ProfileEdit::ProfileEdit( QWidget * Parent, ANetNodeInstance * TNNI ) : 
+ProfileEdit::ProfileEdit( QWidget * Parent, ANetNodeInstance * TNNI ) :
       ProfileGUI( Parent ), RefreshTimer(this) {
       InterfaceInfo * II;
 
       II = TNNI->networkSetup()->assignedInterface();
-      Log(( "Interface %p %p %p: %d\n", II, 
+      Log(( "Interface %p %p %p: %d\n", II,
             TNNI, TNNI->networkSetup(), (II) ? II->IsUp : 0 ));
 
       NNI = TNNI;

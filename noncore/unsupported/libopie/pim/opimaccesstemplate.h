@@ -70,12 +70,12 @@ public:
      * you can iterate over them
      */
     virtual List allRecords()const;
- 
-     /** 
+
+     /**
      * return a List of records
      * that match the regex
      */
-    virtual List matchRegexp(  const QRegExp &r ) const;   
+    virtual List matchRegexp(  const QRegExp &r ) const;
 
     /**
      * queryByExample.

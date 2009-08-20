@@ -66,7 +66,7 @@ public:
 
 	/* Return whether we are currently recording a log */
 	bool isLogging();
-	
+
 	QString logFileName();
 
     /* Return the current script (or NULL) */
@@ -74,7 +74,7 @@ public:
 
     /* Stop recording and remove the current script from memory */
     void clearScript();
-    
+
     /* Stop logging and remove the current log from memory */
     void clearLog();
 

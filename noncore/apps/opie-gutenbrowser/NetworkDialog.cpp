@@ -205,7 +205,7 @@ bool NetworkDialog::downloadFile( QString networkUrl )
 					File_Name =  s_partialFileName;
 					qDebug("new dir " + File_Name);
 			}
-			
+
 
 			Config cfg("Gutenbrowser");
 			cfg.setGroup("General");

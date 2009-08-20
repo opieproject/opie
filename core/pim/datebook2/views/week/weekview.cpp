@@ -134,7 +134,7 @@ QDate WeekView::weekDate() const
 
     // Calculate offset to first day of week.
     int dayoffset=d.dayOfWeek();
-    if( weekStartOnMonday() ) 
+    if( weekStartOnMonday() )
         dayoffset--;
     else if( dayoffset == 7 )
         dayoffset = 0;
@@ -166,7 +166,7 @@ void WeekView::showDay( int day )
     // Calculate offset to first day of week.
     int dayoffset = d.dayOfWeek() % 7;
 
-    if( weekStartOnMonday() ) 
+    if( weekStartOnMonday() )
         dayoffset--;
 
     day--;

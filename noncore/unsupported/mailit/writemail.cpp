@@ -26,7 +26,7 @@ WriteMail::WriteMail( QWidget* parent,  const char* name, WFlags fl ):QMainWindo
 {
   showingAddressList = FALSE;
   init();
-  
+
   addAtt = new AddAtt(0, "Add Attachments");
 }
 
@@ -38,9 +38,9 @@ WriteMail::~WriteMail()
 void WriteMail::setAddressList(AddressList *list)
 {
   AContact *cPtr;
-  
+
   addressList = list;
-  
+
   addressView->clear();
   QList<AContact> *cListPtr = addressList->getContactList();
   QListViewItem *item;
@@ -52,7 +52,7 @@ void WriteMail::setAddressList(AddressList *list)
 void WriteMail::init()
 {
   setToolBarsMovable(FALSE);
-  
+
   bar = new QToolBar(this);
   bar->setHorizontalStretchable( TRUE );
 
@@ -62,20 +62,20 @@ void WriteMail::init()
   menu->insertItem( tr( "&Mail" ), mailMenu);
   addMenu = new QPopupMenu(menu);
   menu->insertItem( tr( "&Add" ), addMenu);
-  
+
   bar = new QToolBar(this);
   attachButton = new QAction(tr("Attachment"), Resource::loadPixmap("mailit/attach"), QString::null, 0, this, 0);
   attachButton->addTo(bar);
   attachButton->addTo(addMenu);
   connect( attachButton, SIGNAL( activated() ), this, SLOT( attachFile() ) );
   attachButton->setWhatsThis(tr("Click here to attach files to your mail"));
-    
+
   confirmButton = new QAction(tr("Enque mail"), Resource::loadPixmap("OKButton"), QString::null, 0, this, 0);
   confirmButton->addTo(bar);
   confirmButton->addTo(mailMenu);
   connect( confirmButton, SIGNAL( activated() ), this, SLOT( accept() ) );
   confirmButton->setWhatsThis(tr("This button puts your mail in the send queue"));
-  
+
   newButton = new QAction(tr("New mail"), Resource::loadPixmap("new"), QString::null, 0, this, 0);
   newButton->addTo(mailMenu);
   connect( newButton, SIGNAL( activated() ), this, SLOT( newMail() ) );
@@ -86,11 +86,11 @@ void WriteMail::init()
 
   recipientsBox = new QComboBox( FALSE, widget, "toLabel" );
   recipientsBox->insertItem( tr( "To:"  ) );
-  recipientsBox->insertItem( tr( "CC:"  ) );  
+  recipientsBox->insertItem( tr( "CC:"  ) );
   recipientsBox->setCurrentItem(0);
   grid->addWidget( recipientsBox, 0, 0 );
   connect(recipientsBox,SIGNAL(activated(int)),this, SLOT(changeRecipients(int)));
-  
+
   subjetLabel = new QLabel( widget, "subjetLabel" );
   subjetLabel->setText( tr( "Subject:"  ) );
 
@@ -138,7 +138,7 @@ void WriteMail::init()
   okButton->hide();
   connect(okButton, SIGNAL(clicked()), this, SLOT(addRecipients()) );
   QWhatsThis::add(okButton,QWidget::tr("Queue your mail by clicking here"));
-  
+
   setCentralWidget(widget);
 }
 
@@ -151,48 +151,48 @@ void WriteMail::accept()
 {
   QStringList attachedFiles, attachmentsType;
   int idCount = 0;
-  
-  if (toInput->text() == "") 
+
+  if (toInput->text() == "")
   {
     QMessageBox::warning(this,tr("No recipient"), tr("Send mail to whom?"), tr("OK\n"));
     return;
   }
-  
-  if (! getRecipients(false) ) 
+
+  if (! getRecipients(false) )
   {
     QMessageBox::warning(this,tr("Incorrect recipient separator"),
         tr("Recipients must be separated by ;\nand be valid emailaddresses"), tr("OK\n"));
     return;
   }
-  
-  if ((ccInput->text()!="") && (! getRecipients(true) )) 
+
+  if ((ccInput->text()!="") && (! getRecipients(true) ))
   {
     QMessageBox::warning(this,tr("Incorrect carbon copy separator"),
         tr("CC Recipients must be separated by ;\nand be valid emailaddresses"), tr("OK\n"));
     return;
   }
-  
+
   mail.subject = subjectInput->text();
   mail.body = emailInput->text();
   mail.sent = false;
   mail.received = false;
-  
+
   mail.rawMail = "To: ";
-  
+
   for (QStringList::Iterator it = mail.recipients.begin();
     it != mail.recipients.end(); ++it) {
-    
+
     mail.rawMail += (*it);
     mail.rawMail += ",\n";
   }
-  
+
   mail.rawMail.truncate(mail.rawMail.length()-2);
-    
+
   mail.rawMail += "\nCC: ";
-  
+
   for (QStringList::Iterator it = mail.carbonCopies.begin();
     it != mail.carbonCopies.end(); ++it) {
-    
+
     mail.rawMail += (*it);
     mail.rawMail += ",\n";
   }
@@ -201,12 +201,12 @@ void WriteMail::accept()
   mail.rawMail += "\nSubject: ";
   mail.rawMail += mail.subject;
   mail.rawMail += "\n\n";
-  
+
   attachedFiles = addAtt->returnattachedFiles();
   attachmentsType = addAtt->returnFileTypes();
 
   QStringList::Iterator itType = attachmentsType.begin();
-  
+
   Enclosure e;
   for ( QStringList::Iterator it = attachedFiles.begin(); it != attachedFiles.end(); ++it ) {
     e.id = idCount;
@@ -215,7 +215,7 @@ void WriteMail::accept()
     e.contentAttribute = (*itType).latin1();
     e.saved = TRUE;
     mail.addEnclosure(&e);
-    
+
     itType++;
     idCount++;
   }
@@ -229,12 +229,12 @@ void WriteMail::accept()
 void WriteMail::getAddress()
 {
   showingAddressList = !showingAddressList;
-  
+
   if (showingAddressList) {
     emailInput->hide();
     addressView->show();
     okButton->show();
-    
+
   } else {
     addressView->hide();
     okButton->hide();
@@ -251,15 +251,15 @@ void WriteMail::reply(Email replyMail, bool replyAll)
 {
   int pos;
   QString ccRecipients;
-  
+
   mail = replyMail;
   mail.files.clear();
-  
+
   toInput->setText(mail.fromMail);
-  
+
   if (replyAll)
-  { 
-    for (QStringList::Iterator it = mail.carbonCopies.begin();it != mail.carbonCopies.end(); ++it) 
+  {
+    for (QStringList::Iterator it = mail.carbonCopies.begin();it != mail.carbonCopies.end(); ++it)
     {
       ccRecipients.append(*it);
       ccRecipients.append(";");
@@ -268,14 +268,14 @@ void WriteMail::reply(Email replyMail, bool replyAll)
     ccInput->setText(ccRecipients);
   }
   else ccInput->clear();
-  
+
   subjectInput->setText(tr("Re: ") + mail.subject);
-  
+
   QString citation=mail.fromMail;
   citation.append(tr(" wrote on "));
   citation.append(mail.date);
   citation.append(":\n");
-  
+
 
   //mail.body.insert(0,tr("On"));
   pos = 0;
@@ -285,26 +285,26 @@ void WriteMail::reply(Email replyMail, bool replyAll)
     if (pos != -1)
       mail.body.insert(++pos, ">");
   }
-  mail.body.insert(0,citation); 
+  mail.body.insert(0,citation);
   emailInput->setText(mail.body);
 }
 
 void WriteMail::forward(Email forwMail)
 {
    // int pos=0;
-  
+
   QString fwdBody=tr("======forwarded message from ");
   fwdBody.append(forwMail.fromMail);
   fwdBody.append(tr(" starts======\n\n"));
-  
+
   mail=forwMail;
   toInput->setText("");
   ccInput->setText("");
   subjectInput->setText(tr("FWD: ") + mail.subject);
-  
+
   fwdBody+=mail.body;
   fwdBody+=QString(tr("======end of forwarded message======\n\n"));
-  
+
   emailInput->setText(fwdBody);
 }
 
@@ -312,18 +312,18 @@ bool WriteMail::getRecipients(bool ccField)
 {
   QString str, temp;
   int pos = 0;
-  
+
   if (ccField)
   {
     mail.carbonCopies.clear();
     temp = ccInput->text();
-  } 
-  else 
+  }
+  else
   {
-    mail.recipients.clear(); 
+    mail.recipients.clear();
     temp=toInput->text() ;
   }
-  
+
   while ( (pos = temp.find(';')) != -1) {
     str = temp.left(pos).stripWhiteSpace();
     temp = temp.right(temp.length() - (pos + 1));
@@ -337,21 +337,21 @@ bool WriteMail::getRecipients(bool ccField)
     return false;
   ccField ? mail.carbonCopies.append(temp) : mail.recipients.append(temp);
   //addressList->addContact(temp, "");
-  
+
   return TRUE;
 }
 
 void WriteMail::addRecipients()
 {
   toInput->isVisible() ? addRecipients(false) : addRecipients(true);
-}     
-       
+}
+
 void WriteMail::addRecipients(bool ccField)
 {
   QString recipients = "";
-  
+
   mail.recipients.clear();
-  
+
   QListViewItem *item = addressView->firstChild();
   while (item != NULL) {
     if ( item->isSelected() ) {
@@ -363,9 +363,9 @@ void WriteMail::addRecipients(bool ccField)
     }
     item = item->nextSibling();
   }
-  
+
   ccField ? ccInput->setText(recipients):toInput->setText(recipients);
-  
+
   addressView->hide();
   okButton->hide();
   emailInput->show();

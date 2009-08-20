@@ -20,23 +20,23 @@ public:
 public slots:
 	void beginBusy ( );
 	void endBusy ( );
-	
-	void setBusy ( bool b ); 
+
+	void setBusy ( bool b );
 
 protected:
 	virtual void paintEvent ( QPaintEvent *e );
-	
+
 private slots:
 	void slotTimeout ( );
-	
+
 private:
 	QTimer *m_timer;
 	int     m_busy;
 
 	int     m_div;
 	int     m_pos;  // 0 .. 2 * m_div - 1
-	int     m_fade; // 0 .. m_div - 1	
-	int 	m_speed;	
+	int     m_fade; // 0 .. m_div - 1
+	int 	m_speed;
 	QColor *m_fadecols;
 };
 

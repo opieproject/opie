@@ -17,10 +17,10 @@ public:
     DCCProgress(DCCTransfer::Type type, Q_UINT32 ip4Addr, Q_UINT16 port,
             const QString &filename, const QString &nickname, unsigned int size,
             QWidget *parent = 0, char *name = 0, WFlags f = 0);
-    
+
     bool finished();
     void cancel();
-    
+
 public slots:
     void slotSetProgress(int progress);
     void slotFinished(DCCTransfer *transfer, DCCTransfer::EndCode code);

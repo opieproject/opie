@@ -31,7 +31,7 @@ class QTabWidget;
 class VUMeter;
 
 class PowerchordBase : public QWidget
-{ 
+{
     Q_OBJECT
 
 public:
@@ -88,7 +88,7 @@ public:
 public slots:
       virtual void change_handler();
 
- void transport_rec_cb(); 
+ void transport_rec_cb();
  void list_remove_cb();
  void play_chord_cb();
  void tuner_start_cb();

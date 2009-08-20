@@ -34,7 +34,7 @@ QPixmap Bitfont::text(QString str, QColor fg, QColor bg)
         else
             if (*s >= fontFirstChar && *s <= fontLastChar)
                 bitBlt(&MASK, i*fontWidth, 0, &font,
-                       (*s-fontFirstChar)*fontWidth, 0, fontWidth, fontHeight);         
+                       (*s-fontFirstChar)*fontWidth, 0, fontWidth, fontHeight);
         s++;
     }
 

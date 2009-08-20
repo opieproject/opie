@@ -9,6 +9,6 @@ public :
 
         bool        AllowAll;
         QStringList BDAddress;
-}; 
+};
 
 #endif

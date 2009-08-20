@@ -112,7 +112,7 @@ void ODateBookMonthTable::setDate(int y, int m, int d)
         setCurrentCell( r2, c2 );
         //updateCell(r1,c1);
         //updateCell(r2,c2);
-    } 
+    }
     else {
         selYear = year = y;
         selMonth = month = m;
@@ -158,7 +158,7 @@ void ODateBookMonthTable::setupTable()
         if ( col == 6 ) {
             ++row;
             col = 0;
-        } 
+        }
         else {
             ++col;
         }
@@ -214,10 +214,10 @@ void ODateBookMonthTable::changeDaySelection( int row, int col )
     selDay = selDate.day();
 }
 
-QDate ODateBookMonthTable::getDateAt( int row, int col ) 
+QDate ODateBookMonthTable::getDateAt( int row, int col )
 {
     int itemMonth, itemYear;
-    
+
     ODayItemMonth *i = (ODayItemMonth*)item( row, col );
     if ( !i )
         return QDate(1900, 1, 1);
@@ -515,11 +515,11 @@ void ODayItemMonth::paint( QPainter *p, const QColorGroup &cg,
                 if (!ev.isValidUid()) {
                     holidayAllDay = TRUE;
                 }
-            } 
+            }
             else {
                 repeatAllDay = TRUE;
             }
-        } 
+        }
         else {
             int sLine, eLine;
             if (f == 0)
@@ -549,7 +549,7 @@ void ODayItemMonth::paint( QPainter *p, const QColorGroup &cg,
             if (!ev.hasRecurrence()) {
                 normalLine.push(sLine);
                 normalLine.push(eLine);
-            } 
+            }
             else {
                 repeatLine.push(sLine);
                 repeatLine.push(eLine);
@@ -567,12 +567,12 @@ void ODayItemMonth::paint( QPainter *p, const QColorGroup &cg,
                         s_colorNormalLight );
                 p->fillRect( 0, cr.height() / 2, cr.width(), cr.height() / 2,
                         colorRepeatLight );
-            } 
+            }
             else {
                 if (!holidayAllDay) {
                     p->fillRect( 0, 0, cr.width(), cr.height(),
                     s_colorNormalLight );
-                } 
+                }
                 else {
                     p->fillRect( 0, 0, cr.width(), cr.height(),
                     s_colorHolidayLight );
@@ -582,8 +582,8 @@ void ODayItemMonth::paint( QPainter *p, const QColorGroup &cg,
         else if (repeatAllDay) {
             p->fillRect( 0, 0, cr.width(), cr.height(),
                     s_colorRepeatLight );
-        }        
-    } 
+        }
+    }
     else {
         p->fillRect( 0, 0, cr.width(),
                 cr.height(), selected

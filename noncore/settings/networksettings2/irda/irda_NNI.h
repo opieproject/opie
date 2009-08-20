@@ -15,7 +15,7 @@ public :
       AIRDA( IRDANetNode * PNN );
 
       RuntimeInfo * runtime( void )
-        {  return 
+        {  return
            ( RT ) ? RT : ( RT = new IRDARun( this, Data ) );
         }
 
@@ -23,7 +23,7 @@ public :
       QString acceptable( void );
       void commit( void );
 
-      virtual void * data( void ) 
+      virtual void * data( void )
         { return (void *)&Data; }
 
 protected :

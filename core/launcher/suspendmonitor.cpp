@@ -50,7 +50,7 @@ void TempScreenSaverMonitor::setTempMode(int mode, int pid)
 	case QPEApplication::Enable:
 	    break;
 	default:
-	    owarn << "Unrecognized temp power setting.  Ignored" << oendl; 
+	    owarn << "Unrecognized temp power setting.  Ignored" << oendl;
 	    return;
     }
     updateAll();
@@ -79,7 +79,7 @@ void TempScreenSaverMonitor::updateAll()
 	mode = QPEApplication::DisableLightOff;
     } else if ( sStatus[2].count() ) {
 	mode = QPEApplication::DisableSuspend;
-    } 
+    }
 
     if ( mode != currentMode ) {
 #ifdef QTOPIA_MAX_SCREEN_DISABLE_TIME
@@ -112,7 +112,7 @@ int TempScreenSaverMonitor::timerValue()
     tid = QTOPIA_MAX_SCREEN_DISABLE_TIME;
 
     char *env = getenv("QTOPIA_DISABLED_APM_TIMEOUT");
-    if ( !env ) 
+    if ( !env )
 	return tid;
 
     QString strEnv = env;
@@ -124,7 +124,7 @@ int TempScreenSaverMonitor::timerValue()
 	    return 0;
 	else if ( envTime <= QTOPIA_MIN_SCREEN_DISABLE_TIME )
 	    return tid;
-	else 
+	else
 	    return envTime;
     }
 #endif
@@ -136,13 +136,13 @@ void TempScreenSaverMonitor::timerEvent(QTimerEvent *t)
 {
 #ifdef QTOPIA_MAX_SCREEN_DISABLE_TIME
     if ( timerId && (t->timerId() == timerId) ) {
-	
+
 	/*  Clean up	*/
 	killTimer(timerId);
 	timerId = 0;
 	currentMode = QPEApplication::Enable;
 	QCopEnvelope("QPE/System", "setScreenSaverMode(int)") << currentMode;
-	
+
 	// signal starts on a merry-go-round, which ends up in Desktop::togglePower()
 	emit forceSuspend();
 	// if we have apm we are asleep at this point, next line will be executed when we
@@ -153,7 +153,7 @@ void TempScreenSaverMonitor::timerEvent(QTimerEvent *t)
 	    QString str =  tr("<qt>The running applications disabled the screen saver for more than the allowed time (%1).<p>The system was forced to suspend</p></qt>").arg( t.toString() );
 	    QMessageBox::information(0, tr("Forced suspend"), str);
 	}
-	
+
 	// Reset all requests.
 	for (int i = 0; i < 3; i++)
 	    sStatus[i].clear();

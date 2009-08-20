@@ -252,7 +252,7 @@ UINT CSoundFile::Read(LPVOID lpDestBuffer, UINT cbBuffer)
 	UINT lRead, lMax, lSampleSize, lCount, lSampleCount, nStat=0;
 	LONG nVUMeterMin = 0x7FFFFFFF, nVUMeterMax = -0x7FFFFFFF;
 	UINT nMaxPlugins;
-		
+
 	{
 		nMaxPlugins = MAX_MIXPLUGINS;
 		while ((nMaxPlugins > 0) && (!m_MixPlugins[nMaxPlugins-1].pMixPlugin)) nMaxPlugins--;
@@ -261,8 +261,8 @@ UINT CSoundFile::Read(LPVOID lpDestBuffer, UINT cbBuffer)
 	lSampleSize = gnChannels;
 	if (gnBitsPerSample == 16) { lSampleSize *= 2; pCvt = X86_Convert32To16; }
 #ifndef FASTSOUNDLIB
-	else if (gnBitsPerSample == 24) { lSampleSize *= 3; pCvt = X86_Convert32To24; } 
-	else if (gnBitsPerSample == 32) { lSampleSize *= 4; pCvt = X86_Convert32To32; } 
+	else if (gnBitsPerSample == 24) { lSampleSize *= 3; pCvt = X86_Convert32To24; }
+	else if (gnBitsPerSample == 32) { lSampleSize *= 4; pCvt = X86_Convert32To32; }
 #endif
 	lMax = cbBuffer / lSampleSize;
 	if ((!lMax) || (!lpBuffer) || (!m_nChannels)) return 0;
@@ -491,7 +491,7 @@ BOOL CSoundFile::ReadNote()
 		if ((pChn->nPeriod)	&& (pChn->nLength))
 		{
 			int vol = pChn->nVolume + pChn->nVolSwing;
-			
+
 			if (vol < 0) vol = 0;
 			if (vol > 256) vol = 256;
 			// Tremolo
@@ -751,7 +751,7 @@ BOOL CSoundFile::ReadNote()
 					}
 				}
 			}
-			
+
 			// Vibrato
 			if (pChn->dwFlags & CHN_VIBRATO)
 			{
@@ -917,7 +917,7 @@ BOOL CSoundFile::ReadNote()
 			if (ninc > 0xFF0000) ninc = 0xFF0000;
 			pChn->nInc = (ninc+1) & ~3;
 		}
-		
+
 		// Increment envelope position
 		if (pChn->pHeader)
 		{

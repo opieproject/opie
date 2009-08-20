@@ -21,7 +21,7 @@ OPimAlarmDlg::OPimAlarmDlg( const QDateTime &eventTime, const QString &title, co
     m_eventTime = eventTime;
     m_response = None;
     m_ampm = ampm;
-    
+
     if( largeDesc ) {
         fraTop->hide();
         lblDesc->hide();
@@ -30,7 +30,7 @@ OPimAlarmDlg::OPimAlarmDlg( const QDateTime &eventTime, const QString &title, co
     }
     else {
         pixmap->setPixmap( Opie::Core::OResource::loadPixmap("clock/alarmbell") );
-        lblTitle->setText( tr("Alarm") ); 
+        lblTitle->setText( tr("Alarm") );
         tvDesc->hide();
         lblDesc->setText( desc );
         updateTime();
@@ -47,7 +47,7 @@ OPimAlarmDlg::OPimAlarmDlg( const QDateTime &eventTime, const QString &title, co
     connect( cmdSnooze, SIGNAL( clicked() ), this, SLOT( snoozeClicked() ) );
     connect( cmdDismiss, SIGNAL( clicked() ), this, SLOT( accept() ) );
     connect( cbSnoozeUnits, SIGNAL( activated(int) ), this, SLOT( slotSnoozeUnitsChanged(int) ));
-    if( viewEnabled ) 
+    if( viewEnabled )
         connect( cmdView, SIGNAL( clicked() ), this, SLOT( viewClicked() ) );
     else
         cmdView->hide();
@@ -104,7 +104,7 @@ void OPimAlarmDlg::snoozeClicked()
 void OPimAlarmDlg::updateTime()
 {
     QString timeStr = TimeString::dateString( m_eventTime, m_ampm ) + "<br>";
-    
+
     int warn = QDateTime::currentDateTime().secsTo( m_eventTime );
     if( warn >= 0 )
         warn += 5; // help with slight delays

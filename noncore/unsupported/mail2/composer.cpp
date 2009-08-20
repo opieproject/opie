@@ -171,9 +171,9 @@ void Composer::slotSendQueued()
 	_sendCount = 0;
 	_sendError = 0;
 	_toSend = cfg.readNumEntry( "count", 0 );
-	
+
  	if (_toSend == 0) close();
-	
+
  	qDebug("%i messages to send", _toSend);
   QString str;
 	for (int i=1;i<=_toSend;i++)
@@ -201,7 +201,7 @@ void Composer::slotSendQueued()
       qDebug("setMessage %s",str.latin1());
 	    smail.setMessage( str ); //message->text());
 	    smail.setNeedsMime( cfg.readBoolEntry("mime") ); //attachView->childCount() == 0 ? false : true);
-	
+
      	qDebug("setting account [%i]",cfg.readNumEntry("account"));
      	Account accnt = accountsLoaded[ cfg.readNumEntry("account") ];
 	    smail.setAccount( accnt ); //accountsLoaded[from->currentItem()]);
@@ -230,7 +230,7 @@ void Composer::slotSendQueued()
 	      a.setNewName(cfg.readEntry( an + "newName" ));
 	      a.setDescription(cfg.readEntry( an + "description" ));
 	      a.setDocLnk( DocLnk( cfg.readEntry( an + "docLnk" )) );
-	      attachments.append( a ); 
+	      attachments.append( a );
 	    }
 
 	    smail.setAttachments(attachments);
@@ -296,7 +296,7 @@ void Composer::slotQueueMail()
 		cfg.writeEntry( an + "fileName", a.fileName() );
 		cfg.writeEntry( an + "newName", a.newName() );
 		cfg.writeEntry( an + "description", a.description() );
-		cfg.writeEntry( an + "docLnk", a.docLnk().file() );	
+		cfg.writeEntry( an + "docLnk", a.docLnk().file() );
 	}
 
 	QMessageBox::information(this, tr("Success"), tr("<p>The mail was queued successfully.</p><p>The queue contains ")+QString::number(count)+tr(" mails.</p>"), tr("Ok"));
@@ -327,7 +327,7 @@ void Composer::slotSendFinished()
 
 void Composer::slotSendQueuedFinished()
 {
-	
+
 	_sendCount++;
  	qDebug("finished send mail %i of %i (error %i)",_sendCount,_toSend,_sendError);
 	if (_sendCount < _toSend) return;
@@ -409,7 +409,7 @@ void Composer::slotAddAttach()
 	attachment.setFileName(lnk.file());
 	attachment.setNewName(lnk.name());
 	attachment.setDocLnk(lnk);
-	
+
 	(void) new AttachViewItem(attachView, attachment);
 }
 

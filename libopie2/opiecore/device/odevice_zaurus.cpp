@@ -816,7 +816,7 @@ bool Zaurus::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress,
             if (rotation()==Rot90)
                 newkeycode = Key_Left + ( keycode - Key_Left + 3 ) % 4;
             break;
-            
+
         }
         break;
 

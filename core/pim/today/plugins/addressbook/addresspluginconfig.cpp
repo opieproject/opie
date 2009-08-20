@@ -93,7 +93,7 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     layout->addWidget( box5 );
     layout->addWidget( box6 );
     layout->addWidget( box7 );
-    
+
     /*
      * pack the widgets together
      */

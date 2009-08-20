@@ -41,7 +41,7 @@ PacketView::PacketView( QWidget * parent, const char * name, WFlags f )
 {
     Config c( "qpe" );
     c.setGroup( "Appearance" );
-    
+
     _number = new QSpinBox( this );
     _number->setPrefix( "Pkt# " );
     _label = new QLabel( this );

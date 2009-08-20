@@ -62,7 +62,7 @@ void OSoundSystem::synchronize()
 {
     _interfaces.clear();
     _interfaces.insert( "soundcard", new OSoundCard( this, "soundcard" ) );
-    
+
     /*
 
     QString str;
@@ -215,14 +215,14 @@ void OMixerInterface::init()
     }
     for ( int i = 0; i < max_device_nr; ++i )
     {
-        if ( _devmask & ( 1 << i ) ) 
+        if ( _devmask & ( 1 << i ) )
         {
             _channels.insert( QString( device_label[i] ).stripWhiteSpace(), i );
             odebug << "OMixerInterface::init() - channel '" << device_label[i] << "'" << oendl;
         }
     }
-}    
-    
+}
+
 
 QStringList OMixerInterface::allChannels() const
 {

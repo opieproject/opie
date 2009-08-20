@@ -151,8 +151,8 @@ void QTReaderApp::listBkmkFiles()
     }
 
 
-  
-		
+
+
         d.setFilter( QDir::Files | QDir::NoSymLinks );
 //        d.setSorting( QDir::Size | QDir::Reversed );
 
@@ -160,13 +160,13 @@ void QTReaderApp::listBkmkFiles()
         QFileInfoListIterator it( *list );      // create list iterator
         QFileInfo *fi;                          // pointer for traversing
         while ( (fi=it.current()) ) {           // for each file...
-  
+
 		    bkmkselector->insertItem(fi->fileName(), cnt++);
-			
+
 			//qDebug( "%10li %s", fi->size(), fi->fileName().data() );
             ++it;                               // goto next list element
         }
- 
+
 #else /* USEQPE */
     int cnt = 0;
     DIR *d;
@@ -279,7 +279,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 //    doc = 0;
 
 	m_fBkmksChanged = false;
-    
+
   QString lang = getenv( "LANG" );
   QString rot = getenv( "QWS_DISPLAY" );
 
@@ -424,7 +424,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
 
     // don't need the close visible, it is redundant...
     importSelector->setCloseVisible( FALSE );
-*/    
+*/
 //    qDebug("Reading file list");
     readfilelist();
 
@@ -682,7 +682,7 @@ QTReaderApp::QTReaderApp( QWidget *parent, const char *name, WFlags f )
     m_pageup_action = new QAction( tr( "Up" ), geticon( "up" ), QString::null, 0, this, 0 );
     connect( m_pageup_action, SIGNAL( activated() ), this, SLOT( pageup() ) );
     m_pageup_action->addTo( navigation );
-    
+
     m_pagedn_action = new QAction( tr( "Down" ), geticon( "down" ), QString::null, 0, this, 0 );
     connect( m_pagedn_action, SIGNAL( activated() ), this, SLOT( pagedn() ) );
     m_pagedn_action->addTo( navigation );
@@ -1228,7 +1228,7 @@ void QTReaderApp::addtoolbars(Config* config)
 	{
 	    m_bkmkAvail = new QAction( tr( "Annotation" ), geticon( "find" ), QString::null, 0, this, 0 );
 	    connect( m_bkmkAvail, SIGNAL( activated() ), this, SLOT( showAnnotation() ) );
-	
+
 	    m_bkmkAvail->setEnabled(false);
 	}
 	QLabel *spacer = new QLabel(markBar, "");
@@ -1864,7 +1864,7 @@ void QTReaderApp::fileClose()
 #endif /* USEQPE */
 	    }
 	}
-    
+
 	fileOpen2();
     }
     delete cd;
@@ -1938,7 +1938,7 @@ void QTReaderApp::fileOpen2()
 	{
 	    if (QMessageBox::warning(this, PROGNAME, "Save bookmarks?", "Save", "Don't bother") == 0)
  		savebkmks();
-	}     
+	}
 	delete pBkmklist;
 	reader->pBkmklist = pBkmklist = NULL;
 	m_fBkmksChanged = false;
@@ -2037,7 +2037,7 @@ void QTReaderApp::showprefs()
     prefwin->minibarcol(m_scrollbarcolor);
     prefwin->foreground(m_foreground);
     prefwin->background(m_background);
-    prefwin->twotouch(m_twoTouch); 
+    prefwin->twotouch(m_twoTouch);
     prefwin->propfontchange(m_propogatefontchange);
     prefwin->StripCR(reader->bstripcr);
     prefwin->InlineTables(!reader->bNoInlineTables);
@@ -2737,7 +2737,7 @@ bool QTReaderApp::dosearch(size_t start, CDrawBuffer& test, const QRegExp& arg)
 	      reader->setFocus();
 	      lastpc = pc;
 	  }
-	  
+
 	  if (reader->buffdoc.getpara(test) < 0)
 	  {
 	      if (QMessageBox::warning(this, "Can't find", searchEdit->text(), 1, 2) == 2)
@@ -2849,7 +2849,7 @@ void QTReaderApp::openFile( const QString &f, unsigned int loc )
       QMessageBox::information(this, PROGNAME, msg);
       reader->m_lastfile = QString::null;
     }
-	
+
 }
 /*
 void QTReaderApp::resizeEvent(QResizeEvent* e)
@@ -2948,7 +2948,7 @@ void QTReaderApp::handlekey(QKeyEvent* e)
 	{
 	  doAction(e);
 	}
-	
+
 /*
 	QString msg("Key press was:");
 	QString key;
@@ -3000,7 +3000,7 @@ void QTReaderApp::showEditTools()
 	if (viewBar != NULL) viewBar->hide();
 	if (navBar != NULL) navBar->hide();
 	if (markBar != NULL) markBar->hide();
-	if (m_prog != NULL) 
+	if (m_prog != NULL)
 	  {
 	    //	    qDebug("Hiding status");
 	    m_prog->hide();
@@ -3042,7 +3042,7 @@ void QTReaderApp::showEditTools()
 	    if (viewBar != NULL) viewBar->show();
 	    if (navBar != NULL) navBar->show();
 	    if (markBar != NULL) markBar->show();
-	    if (m_prog != NULL && !m_statusishidden) 
+	    if (m_prog != NULL && !m_statusishidden)
 	      {
 		//		qDebug("Showing status");
 		m_prog->show();
@@ -3069,7 +3069,7 @@ void QTReaderApp::showEditTools()
 //	qDebug("sn");
 	showNormal();
 //	qDebug("sm");
-#if defined(USEQPE) && !defined(SIMPAD) 
+#if defined(USEQPE) && !defined(SIMPAD)
 	showMaximized();
 #endif
 //	setCentralWidget(reader);
@@ -3320,7 +3320,7 @@ bool QTReaderApp::openfrombkmk(Bkmk* bk)
 //	qDebug("Opening");
 	struct stat fnstat;
 	stat((const char *)fn, &fnstat);
-	
+
 	if (CFiledata(bk->anno()).date()
 	    != fnstat.st_mtime)
 	{
@@ -3605,7 +3605,7 @@ void QTReaderApp::do_jump(const QString& _lcn)
 	  }
       }
     if (ok)
-	reader->locate(ulcn);      
+	reader->locate(ulcn);
     else
 	QMessageBox::information(this, PROGNAME, "Must be a number\nor a percentage");
 }
@@ -3843,7 +3843,7 @@ void info_cb(Fl_Widget* o, void* _data)
 
     if (infowin == NULL)
     {
-	
+
 	infowin = new Fl_Window(160,240);
 	filename = new Fl_Output(45,5,110,14,"Filename");
 	filesize = new Fl_Output(45,25,110,14,"Filesize");
@@ -4092,7 +4092,7 @@ void QTReaderApp::OnRedraw()
       //qDebug("OnRedraw:[%u, %u]", reader->buffdoc.startSection(), reader->buffdoc.endSection());
       scrollbar->setRange(reader->buffdoc.startSection(), reader->buffdoc.endSection()-1);
       scrollbar->setPageStep(reader->locate()-reader->pagelocate());
-      scrollbar->setValue((reader->m_rotated) ? 
+      scrollbar->setValue((reader->m_rotated) ?
 			  (reader->buffdoc.endSection() - reader->locate()+reader->buffdoc.startSection()) :
 			  reader->pagelocate());
     }
@@ -4328,7 +4328,7 @@ void QTReaderApp::doAction(QKeyEvent* e)
 		/*
 		ftime(&m_lastkeytime);
 		m_fndelay = m_debounce;
-		//		
+		//
 			if (m_debounce != 0)
 			{
 			timeb now;
@@ -4363,7 +4363,7 @@ void QTReaderApp::doAction(QKeyEvent* e)
 }
 
 void QTReaderApp::setTwoTouch(bool _b) { reader->setTwoTouch(_b); }
-void QTReaderApp::restoreFocus() { reader->setFocus(); } 
+void QTReaderApp::restoreFocus() { reader->setFocus(); }
 
 void QTReaderApp::SaveConfig()
 {
@@ -4700,7 +4700,7 @@ bool QTReaderApp::readconfig(const QString& dirname, const QString& _txt, bool f
     m_propogatefontchange = config.readBoolEntry( "RequestorFontChange", m_propogatefontchange);
     reader->setBaseSize(config.readNumEntry( "Basesize", reader->getBaseSize() ));
     reader->setTwoTouch(m_twoTouch);
-    
+
     reader->m_outputName = config.readEntry( "OutputCodec", reader->m_outputName);
 
     m_touch_action->setOn(m_twoTouch);
@@ -4743,13 +4743,13 @@ bool QTReaderApp::PopulateConfig(const char* tgtdir, bool usedirs)
     QFileInfo *fi;                          // pointer for traversing
 
     while ( (fi=it.current()) ) {           // for each file...
-  
+
 	bkmkselector->insertItem(fi->fileName(), cnt++);
-			
+
 	//qDebug( "%10li %s", fi->size(), fi->fileName().data() );
 	++it;                               // goto next list element
     }
- 
+
 #else /* USEQPE */
     int cnt = 0;
     DIR *d;
@@ -5016,7 +5016,7 @@ void QTReaderApp::forceopen(const QString& filename)
 	  if (m_fBkmksChanged)
 	    {
 	      savebkmks();
-	    }     
+	    }
 	  delete pBkmklist;
 	  pBkmklist = NULL;
 	  m_fBkmksChanged = false;
@@ -5070,5 +5070,5 @@ void QTReaderApp::setBackgroundBitmap()
      myChannel = new QCopChannel( "QPE/FooBar", this );
       connect( myChannel, SIGNAL(received(const QCString &, const QByteArray &)),
                this, SLOT(fooBarMessage( const QCString &, const QByteArray &)) );
-  
+
 */

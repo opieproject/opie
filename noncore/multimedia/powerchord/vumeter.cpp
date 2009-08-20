@@ -29,11 +29,11 @@ VUMeter::VUMeter(QWidget *parent, const char *name )
   : QWidget( parent, name ), Lannot("A"), Rannot("440 Hz")
 {
   //  setPalette( QPalette( QColor( 250, 250, 200) ) );
- 
+
   vuvalue = 0;
 
   pix = 0;
-  
+
 
 }
 
@@ -60,7 +60,7 @@ void VUMeter::bupdate(){
 
   p.setBrush(white);
   p.setPen(NoPen);
-  
+
   p.drawRect( QRect(0, 0, width(), height()) );
 
   p.translate(width()/2, 0);

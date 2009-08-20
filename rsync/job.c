@@ -2,19 +2,19 @@
  *
  * librsync -- the library for network deltas
  * $Id: job.c,v 1.2 2004-09-10 11:18:45 zecke Exp $
- * 
+ *
  * Copyright (C) 2000, 2001 by Martin Pool <mbp@samba.org>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public License
  * as published by the Free Software Foundation; either version 2.1 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this program; if not, write to the Free Software
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
@@ -103,7 +103,7 @@ static rs_result rs_job_s_complete(rs_job_t *job)
 static rs_result rs_job_complete(rs_job_t *job, rs_result result)
 {
     rs_job_check(job);
-    
+
     job->statefn = rs_job_s_complete;
     job->final_result = result;
 
@@ -122,7 +122,7 @@ static rs_result rs_job_complete(rs_job_t *job, rs_result result)
 }
 
 
-/** 
+/**
  * \brief Run a ::rs_job_t state machine until it blocks
  * (::RS_BLOCKED), returns an error, or completes (::RS_COMPLETE).
  *
@@ -142,7 +142,7 @@ rs_result rs_job_iter(rs_job_t *job, rs_buffers_t *buffers)
 
     result = rs_job_work(job, buffers);
 
-    if (result == RS_BLOCKED  ||  result == RS_DONE) 
+    if (result == RS_BLOCKED  ||  result == RS_DONE)
         if ((orig_in == buffers->avail_in)  &&  (orig_out == buffers->avail_out)
             && orig_in && orig_out) {
             rs_log(RS_LOG_ERR, "internal error: job made no progress "
@@ -168,7 +168,7 @@ rs_job_work(rs_job_t *job, rs_buffers_t *buffers)
         return RS_PARAM_ERROR;
     }
     job->stream = buffers;
-    
+
     while (1) {
         result = rs_tube_catchup(job);
         if (result == RS_BLOCKED)

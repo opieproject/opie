@@ -528,7 +528,7 @@ OPimContact OPimContactAccessBackend_SQL::find( int uid, const UIDArray& queryUi
 }
 
 
-UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist, const OPimContact &query, int settings, 
+UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist, const OPimContact &query, int settings,
 							   const QDateTime& qd ) const
 {
     QString searchQuery = "";
@@ -585,9 +585,9 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
 
                 if ( settings & OPimContactAccess::DateDiff ) {
 		    // To handle datediffs correctly, we need to remove the year information from
-		    // the birthday and anniversary. 
+		    // the birthday and anniversary.
 		    // To do this efficiently, we will create a temporary table which contains the
-		    // information we need and do the query on it. 
+		    // information we need and do the query on it.
 		    // This table is just visible for this process and will be removed
 		    // automatically after using.
 				datediff_query = "SELECT uid,substr(\"Birthday\", 6, 10) as \"BirthdayMD\", substr(\"Anniversary\", 6, 10) as \"AnniversaryMD\" FROM addressbook WHERE ( \"Birthday\" != '' OR \"Anniversary\" != '' ) AND ";
@@ -644,7 +644,7 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
 
         delete endDate;
 
-	// The following if line is a replacement for 
+	// The following if line is a replacement for
 	// if ( searchQuery.endsWith( "AND" ) )
 	if ( searchQuery.findRev( "AND" ) == static_cast<int>( searchQuery.length() - 3 ) ){
 		odebug << "remove AND" << oendl;
@@ -654,7 +654,7 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
     }
 
     // Now compose the complete query
-    QString qu = "SELECT uid FROM addressbook WHERE " + uid_query; 
+    QString qu = "SELECT uid FROM addressbook WHERE " + uid_query;
 
     if ( !datediff_query.isEmpty() && !searchQuery.isEmpty() ){
 	    // If we use DateDiff, we have to intersect two queries.
@@ -666,7 +666,7 @@ UIDArray OPimContactAccessBackend_SQL::queryByExample ( const UIDArray& uidlist,
     } else if ( datediff_query.isEmpty() && searchQuery.isEmpty() ){
 	    UIDArray empty;
 	    return empty;
-    } 
+    }
 
     odebug << "queryByExample query: " << qu << "" << oendl;
 
@@ -774,7 +774,7 @@ bool OPimContactAccessBackend_SQL::hasQuerySettings (uint querySettings) const
 }
 
 UIDArray OPimContactAccessBackend_SQL::sorted( const UIDArray& ar, bool asc, int sortOrder,
-                                  int filter, const QArray<int>& categories )const 
+                                  int filter, const QArray<int>& categories )const
 {
     QTime t;
     t.start();
@@ -822,12 +822,12 @@ UIDArray OPimContactAccessBackend_SQL::sorted( const UIDArray& ar, bool asc, int
 	    if ( filter & OPimContactAccess::DoNotShowWithoutBusinessAddress ){
 		    // Expect that no Street means no Address, too! (eilers)
 		    query += " AND ( \"Business Street\" != '' )";
-	    } 
+	    }
 
     }
-   
+
     query += " ORDER BY";
-    
+
     switch ( sortOrder ) {
     case OPimContactAccess::SortSummary:
 	    query += " \"Notes\"";

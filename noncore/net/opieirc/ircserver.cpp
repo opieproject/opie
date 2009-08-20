@@ -59,7 +59,7 @@ QString IRCServer::name() {
 unsigned short int IRCServer::port() {
     if(m_port)
         return m_port;
-    
+
     return 6667;
 }
 
@@ -86,7 +86,7 @@ QString IRCServer::realname() {
         if(!realName.isEmpty())
             return realName;
     }
-              
+
     return QString(APP_VERSION + QObject::tr(" User"));
 }
 

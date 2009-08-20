@@ -24,7 +24,7 @@ void progressMailSend::setCurrentMails(unsigned int aCurrent)
     allMailProgressBar->setProgress(aCurrent);
     setMails();
 }
-    
+
 void progressMailSend::setSingleMail(unsigned int aCurrent,unsigned int aMax)
 {
     m_current_single = aCurrent;

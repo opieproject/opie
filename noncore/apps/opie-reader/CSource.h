@@ -56,7 +56,7 @@ class CMemSink : public CSink
       if (m_current < m_total_size)
 	{
 	  m_buffer[m_current++] = c;
-	} 
+	}
     }
 };
 #endif

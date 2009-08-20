@@ -43,9 +43,9 @@ void ACable::saveSpecificAttribute( QTextStream & TS ) {
     TS << "parity=" << Data.Parity << endl;
     TS << "databits=" << Data.DataBits << endl;
     TS << "stopbits=" << Data.StopBits << endl;
-    TS << "hardwarecontrol=" << 
+    TS << "hardwarecontrol=" <<
       ((Data.HardwareControl) ? "yes" : "no") << endl;
-    TS << "softwarecontrol=" << 
+    TS << "softwarecontrol=" <<
       ((Data.SoftwareControl) ? "yes" : "no") << endl;
 }
 
@@ -59,7 +59,7 @@ short ACable::generateFileEmbedded( SystemFile & SF,
            << endl;
         SF << Data.Speed
            << endl;
-        SF << "lock " 
+        SF << "lock "
            << Data.LockFile
            << endl;
         rvl = 0;
@@ -72,7 +72,7 @@ short ACable::generateFileEmbedded( SystemFile & SF,
 
 QWidget * ACable::edit( QWidget * parent ) {
     GUI = new CableEdit( parent );
-    GUI->showData( Data ); 
+    GUI->showData( Data );
     return GUI;
 }
 

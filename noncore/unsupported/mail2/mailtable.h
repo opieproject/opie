@@ -52,7 +52,7 @@ private:
 	QString _from, _to, _subject, _body;
 	QDate _date;
 	QValueList<MailPart> _parts;
-	ReadState _readState;	 
+	ReadState _readState;
 
 };
 

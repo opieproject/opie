@@ -15,9 +15,9 @@
 #include <qwidget.h>
 #include <qdialog.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QLabel;
 class QLineEdit;
 class QMultiLineEdit;
@@ -25,7 +25,7 @@ class QString;
 class QPushButton;
 
 class Show_Drink : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:

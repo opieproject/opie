@@ -54,11 +54,11 @@ bool OPimTodoAccessBackend::hasQuerySettings (uint querySettings) const
 
 
 UIDArray OPimTodoAccessBackend::queryByExample( const UIDArray& uidlist, const OPimTodo& query, int settings,
-                                                 const QDateTime& startperiod )const 
+                                                 const QDateTime& startperiod )const
 {
 	qDebug( "Accessing OPimTodoAccessBackend::queryByExample() which is not implemented!" );
 	return UIDArray();
-    
+
 //     odebug << "Using Unaccelerated OPimContactAccessBackend implementation of queryByExample!" << oendl;
 
 //     UIDArray m_currentQuery( uid_array.count() );

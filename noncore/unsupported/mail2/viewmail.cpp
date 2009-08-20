@@ -38,17 +38,17 @@ ViewMail::ViewMail(IMAPResponseFETCH &mail, IMAPHandler *handler, QWidget *paren
 		"%5"
 		"<b>Date:</b> %6<hr>"
 		"<font face=fixed>%7</font>")
-		.arg(deHtml(mail.envelope().subject().isNull() ? tr("(no subject)") 
+		.arg(deHtml(mail.envelope().subject().isNull() ? tr("(no subject)")
 			: deHtml(mail.envelope().subject())))
-		.arg(deHtml(mail.envelope().from().toString().isNull() ? tr("(no from)") 
+		.arg(deHtml(mail.envelope().from().toString().isNull() ? tr("(no from)")
 			: mail.envelope().from().toString()))
 		.arg(deHtml(mail.envelope().to().toString().isNull() ? tr("(no recipient)")
 			: mail.envelope().to().toString()))
-		.arg(mail.envelope().cc().toString().isNull() ? QString(0) 
+		.arg(mail.envelope().cc().toString().isNull() ? QString(0)
 			: tr("<b>Cc:</b> %1<br>").arg(deHtml(mail.envelope().cc().toString())))
 		.arg(mail.envelope().bcc().toString().isNull() ? QString(0)
 			: tr("<b>Bcc:</b> %1<br>").arg(deHtml(mail.envelope().bcc().toString())))
-		.arg(mail.envelope().mailDate().isNull() ? tr("(no date)") 
+		.arg(mail.envelope().mailDate().isNull() ? tr("(no date)")
 			: mail.envelope().mailDate())
 		.arg("%1");
 

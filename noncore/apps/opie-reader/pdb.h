@@ -45,7 +45,7 @@ typedef struct {
 typedef struct {
     LocalID nextRecordListID;     // local chunkID of next list
     UInt16  numRecords;           // number of records in this list
-    UInt16  firstEntry;           // array of Record/Rsrc entries 
+    UInt16  firstEntry;           // array of Record/Rsrc entries
                                 // starts here
 } RecordListType;
 

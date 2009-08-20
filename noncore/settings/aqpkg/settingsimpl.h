@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -72,7 +72,7 @@ private:
     QWidget *initServerTab();
     QWidget *initDestinationTab();
     QWidget *initProxyTab();
-    
+
     void setupConnections();
     void setupData();
 

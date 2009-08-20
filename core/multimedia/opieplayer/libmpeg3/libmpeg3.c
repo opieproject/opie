@@ -68,7 +68,7 @@ int mpeg3_check_sig(char *path)
 		if(ext)
 		{
 /* Test file extension. */
-			if(strncasecmp(ext, ".mp2", 4) && 
+			if(strncasecmp(ext, ".mp2", 4) &&
 //				strncasecmp(ext, ".mp3", 4) &&
 				strncasecmp(ext, ".m1v", 4) &&
 				strncasecmp(ext, ".m2v", 4) &&
@@ -197,9 +197,9 @@ mpeg3_t* mpeg3_open_copy(char *path, mpeg3_t *old_file)
 		{
 			if(file->demuxer->astream_table[i])
 			{
-				file->atrack[file->total_astreams] = mpeg3_new_atrack(file, 
-					i, 
-					file->demuxer->astream_table[i], 
+				file->atrack[file->total_astreams] = mpeg3_new_atrack(file,
+					i,
+					file->demuxer->astream_table[i],
 					file->demuxer);
 				if(file->atrack[file->total_astreams]) file->total_astreams++;
 			}
@@ -334,7 +334,7 @@ long mpeg3_get_sample(mpeg3_t *file,
 	return -1;
 }
 
-int mpeg3_set_sample(mpeg3_t *file, 
+int mpeg3_set_sample(mpeg3_t *file,
 		long sample,
 		int stream)
 {
@@ -405,7 +405,7 @@ long mpeg3_get_frame(mpeg3_t *file,
 	return -1;
 }
 
-int mpeg3_set_frame(mpeg3_t *file, 
+int mpeg3_set_frame(mpeg3_t *file,
 		long frame,
 		int stream)
 {
@@ -479,7 +479,7 @@ double mpeg3_get_time(mpeg3_t *file)
 /* Use percentage and total time */
 		if(file->has_audio)
 		{
-			atime = mpeg3demux_tell_percentage(file->atrack[0]->demuxer) * 
+			atime = mpeg3demux_tell_percentage(file->atrack[0]->demuxer) *
 						mpeg3_audio_samples(file, 0) / mpeg3_sample_rate(file, 0);
 		}
 
@@ -508,14 +508,14 @@ int mpeg3_end_of_video(mpeg3_t *file, int stream)
 }
 
 
-int mpeg3_read_frame(mpeg3_t *file, 
-		unsigned char **output_rows, 
-		int in_x, 
-		int in_y, 
-		int in_w, 
-		int in_h, 
-		int out_w, 
-		int out_h, 
+int mpeg3_read_frame(mpeg3_t *file,
+		unsigned char **output_rows,
+		int in_x,
+		int in_y,
+		int in_w,
+		int in_h,
+		int out_w,
+		int out_h,
 		int color_model,
 		int stream)
 {
@@ -523,13 +523,13 @@ int mpeg3_read_frame(mpeg3_t *file,
 
 	if(file->has_video)
 	{
-		result = mpeg3video_read_frame(file->vtrack[stream]->video, 
-					file->vtrack[stream]->current_position, 
+		result = mpeg3video_read_frame(file->vtrack[stream]->video,
+					file->vtrack[stream]->current_position,
 					output_rows,
-					in_x, 
-					in_y, 
-					in_w, 
-					in_h, 
+					in_x,
+					in_y,
+					in_w,
+					in_h,
 					out_w,
 					out_h,
 					color_model);
@@ -546,7 +546,7 @@ int mpeg3_drop_frames(mpeg3_t *file, long frames, int stream)
 
 	if(file->has_video)
 	{
-		result = mpeg3video_drop_frames(file->vtrack[stream]->video, 
+		result = mpeg3video_drop_frames(file->vtrack[stream]->video,
 						frames);
 		if(frames > 0) file->vtrack[stream]->current_position += frames;
 		file->last_type_read = 2;
@@ -559,7 +559,7 @@ int mpeg3_read_yuvframe(mpeg3_t *file,
 		char *y_output,
 		char *u_output,
 		char *v_output,
-		int in_x, 
+		int in_x,
 		int in_y,
 		int in_w,
 		int in_h,
@@ -570,8 +570,8 @@ int mpeg3_read_yuvframe(mpeg3_t *file,
 //printf("mpeg3_read_yuvframe 1 %d %d\n", mpeg3demux_tell(file->vtrack[stream]->demuxer), mpeg3demuxer_total_bytes(file->vtrack[stream]->demuxer));
 	if(file->has_video)
 	{
-		result = mpeg3video_read_yuvframe(file->vtrack[stream]->video, 
-					file->vtrack[stream]->current_position, 
+		result = mpeg3video_read_yuvframe(file->vtrack[stream]->video,
+					file->vtrack[stream]->current_position,
 					y_output,
 					u_output,
 					v_output,
@@ -588,10 +588,10 @@ int mpeg3_read_yuvframe(mpeg3_t *file,
 }
 
 
-int mpeg3_read_audio(mpeg3_t *file, 
-		mpeg3_real_t *output_f, 
+int mpeg3_read_audio(mpeg3_t *file,
+		mpeg3_real_t *output_f,
 		short *output_i, int sampleSpacing,
-		int channel, 
+		int channel,
 		long samples,
 		int stream)
 {
@@ -600,11 +600,11 @@ int mpeg3_read_audio(mpeg3_t *file,
 //printf("mpeg3_read_audio 1 %d %d\n", mpeg3demux_tell(file->atrack[stream]->demuxer), mpeg3demuxer_total_bytes(file->atrack[stream]->demuxer));
 	if(file->has_audio)
 	{
-		result = mpeg3audio_decode_audio(file->atrack[stream]->audio, 
-					output_f, 
-					output_i, sampleSpacing, 
-					channel, 
-					file->atrack[stream]->current_position, 
+		result = mpeg3audio_decode_audio(file->atrack[stream]->audio,
+					output_f,
+					output_i, sampleSpacing,
+					channel,
+					file->atrack[stream]->current_position,
 					samples);
 		file->last_type_read = 1;
 		file->last_stream_read = stream;
@@ -615,33 +615,33 @@ int mpeg3_read_audio(mpeg3_t *file,
 	return result;
 }
 
-int mpeg3_reread_audio(mpeg3_t *file, 
-		mpeg3_real_t *output_f, 
+int mpeg3_reread_audio(mpeg3_t *file,
+		mpeg3_real_t *output_f,
 		short *output_i, int sampleSpacing,
-		int channel, 
+		int channel,
 		long samples,
 		int stream)
 {
 	if(file->has_audio)
 	{
-		mpeg3_set_sample(file, 
+		mpeg3_set_sample(file,
 			file->atrack[stream]->current_position - samples,
 			stream);
 		file->last_type_read = 1;
 		file->last_stream_read = stream;
-		return mpeg3_read_audio(file, 
-			output_f, 
+		return mpeg3_read_audio(file,
+			output_f,
 			output_i, sampleSpacing,
-			channel, 
+			channel,
 			samples,
 			stream);
 	}
 	return -1;
 }
 
-int mpeg3_read_audio_chunk(mpeg3_t *file, 
-		unsigned char *output, 
-		long *size, 
+int mpeg3_read_audio_chunk(mpeg3_t *file,
+		unsigned char *output,
+		long *size,
 		long max_size,
 		int stream)
 {
@@ -655,9 +655,9 @@ int mpeg3_read_audio_chunk(mpeg3_t *file,
 	return result;
 }
 
-int mpeg3_read_video_chunk(mpeg3_t *file, 
-		unsigned char *output, 
-		long *size, 
+int mpeg3_read_video_chunk(mpeg3_t *file,
+		unsigned char *output,
+		long *size,
 		long max_size,
 		int stream)
 {

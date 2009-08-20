@@ -14,6 +14,6 @@ public :
       bool HardwareControl;
       bool SoftwareControl;
 
-} ; 
+} ;
 
 #endif

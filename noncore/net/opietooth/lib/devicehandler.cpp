@@ -35,13 +35,13 @@ QString path = QDir::homeDirPath() + "/Settings/bluetooth";
             if ( (*it) == "." || (*it) == ".." )
                 continue;
 
-            odebug << (*it).latin1() << oendl; 
+            odebug << (*it).latin1() << oendl;
             Config conf(path + "/"+(*it),  Config::File);
             conf.setGroup("Info");
             name = conf.readEntry("name", "Error");
             mac = conf.readEntry("mac", QString::null);
-            odebug << "MAC: " + mac << oendl; 
-            odebug << "NAME: " + name << oendl; 
+            odebug << "MAC: " + mac << oendl;
+            odebug << "NAME: " + name << oendl;
             if (mac.isEmpty() )
                 continue;
             RemoteDevice currentDevice( mac , name  );
@@ -68,14 +68,14 @@ void DeviceHandler::save( const RemoteDevice::ValueList& list) {
      */
     rm = "mkdir ";
     rm += QDir::homeDirPath() + "/Settings/bluetooth";
-    owarn << "out " << rm.data() << "" << oendl; 
+    owarn << "out " << rm.data() << "" << oendl;
     system( rm.data() );
 
     RemoteDevice::ValueList::ConstIterator it;
     // write the config
 
     for ( it = list.begin(); it != list.end(); ++it ) {
-        odebug << "/Settings/bluetooth/" + (*it).mac() + ".conf" << oendl; 
+        odebug << "/Settings/bluetooth/" + (*it).mac() + ".conf" << oendl;
 
         Config conf( QDir::homeDirPath() +
                      "/Settings/bluetooth/" +

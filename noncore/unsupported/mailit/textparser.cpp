@@ -23,7 +23,7 @@ TextParser::TextParser(const QString &in, const QString &lineBreak)
 {
   data = in;
   lineSep = lineBreak;
-  
+
   init();
   createSeparators();
   split();
@@ -33,7 +33,7 @@ TextParser::TextParser(const QString &in, const QString &lineBreak, const QStrin
 {
   data = in;
   lineSep = lineBreak;
-  
+
   init();
   separators = sep;
   split();
@@ -62,32 +62,32 @@ void TextParser::createSeparators()
 /*  Returns pos of given search criteria, -1 if not found */
 int TextParser::find(const QString &target, QChar sep, int pos, bool upperCase)
 {
-  
+
   t_splitElm parsstr;
   QString pString, pTarget;
   pTarget = target;
   int atLine = 0, atPosElm = 0;
-  
+
   getLineReference(pos,&atLine,&atPosElm);
-  
-  for (int x = pos; x < totalElmCount; x++) 
+
+  for (int x = pos; x < totalElmCount; x++)
   {
     parsstr=splitDone[atLine].elm[atPosElm++];
-  
+
     if (upperCase)
     {
       pString=parsstr.str.upper();
       pTarget=pTarget.upper();
-    } 
+    }
     else
     {
       pString=parsstr.str;
-    }       
+    }
     if ((pString == pTarget) && (parsstr.separator == sep))
     {
       return x;
-    } 
-    if (atPosElm >= splitDone[atLine].elmCount) 
+    }
+    if (atPosElm >= splitDone[atLine].elmCount)
     {  //new Line
       atLine++;
       atPosElm = 0;
@@ -105,7 +105,7 @@ QChar TextParser::separatorAt(int pos)
 {
   if (getLineReference(pos, &sepAtLine, &sepAtPosElm) == -1)
     return QChar::null;
-  
+
   separatorPos = pos;
   return splitDone[sepAtLine].elm[sepAtPosElm].separator;
 }
@@ -117,7 +117,7 @@ QChar TextParser::nextSeparator()
     sepAtLine++;
     sepAtPosElm = 0;
   }
-  
+
   separatorPos++;
   return splitDone[sepAtLine].elm[sepAtPosElm].separator;
 }
@@ -131,7 +131,7 @@ QString TextParser::wordAt(int pos)
 {
   if (getLineReference(pos, &wordAtLine, &wordAtPosElm) == -1)
     return NULL;
-  
+
   wordPos = pos;
   return splitDone[wordAtLine].elm[wordAtPosElm].str;
 }
@@ -143,7 +143,7 @@ QString TextParser::nextWord()
     wordAtLine++;
     wordAtPosElm = 0;
   }
-    
+
   wordPos++;
   return splitDone[wordAtLine].elm[wordAtPosElm].str;
 }
@@ -158,12 +158,12 @@ QString TextParser::getString(int *pos, QChar stop, bool lineEnd = false)
   QString returnStr = wordAt(*pos);
   QChar chr = separatorAt(*pos);
   QString s;
-  
+
   if (returnStr == "")
     return "";
   if (chr == stop)
     return returnStr;
-  
+
   if (!lineEnd) {
     while ((chr != stop) && hasNextWord()) {
       returnStr.append(chr);
@@ -184,7 +184,7 @@ QString TextParser::getString(int *pos, QChar stop, bool lineEnd = false)
       atPosElm++;
     }
   }
-  
+
   *pos = wordPos;
   return returnStr;
 }
@@ -209,14 +209,14 @@ int TextParser::endLinePos(int pos)
 {
   if ( (getLineReference(pos, &atLine, &atPosElm)) == -1)
     return -1;
-  
+
   return (pos + (splitDone[atLine].elmCount - atPosElm) + 1);
 }
 
 int TextParser::getLineReference(int pos, int *line, int *inLinePos)
 {
   int currentPos = 0;
-  
+
   for (int x = 0; x < lineCount; x++) {
     if ( currentPos + splitDone[x].elmCount > pos) {
       *line = x;
@@ -245,7 +245,7 @@ t_splitLine TextParser::splitLine(t_splitLine line)
   uint pos = 0;
   uint elmCount = 0;
   t_splitLine tempLine = line;
-  
+
   tempLine.str = line.str.simplifyWhiteSpace();
   tempLine.elm[0].str = "";
   while ( pos < line.str.length() ) {
@@ -264,7 +264,7 @@ t_splitLine TextParser::splitLine(t_splitLine line)
       pos++;
     }
   }
-  
+
   tempLine.elmCount = elmCount + 1;
   return tempLine;
 }
@@ -282,23 +282,23 @@ t_splitLine TextParser::nextLine()
 {
   int newLinePos;
   t_splitLine lineType;
-  
+
   newLinePos = data.find(lineSep, linePos);
-  
+
   lineType.lineType = NewLine;
   lineType.str = "";
-  
+
   if (newLinePos == -1) {
     newLinePos = data.length();
     lineType.lineType = LastLine;
   }
-  
+
   for (int x = linePos; x < newLinePos; x++)
     lineType.str += data[x];
-    
+
   linePos = newLinePos;
   if ((uint) linePos < data.length())   //if not EOF, add length of lineSep
     linePos += lineSep.length();
-  
+
   return lineType;
 }

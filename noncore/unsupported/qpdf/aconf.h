@@ -4,8 +4,8 @@
  *
  * Copyright 2002 Derek B. Noonburg
  */
- 
-/* 
+
+/*
  * Manually edited for QPDF (Robert Griebl)
  */
 

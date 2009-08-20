@@ -28,7 +28,7 @@ ImageEdit::ImageEdit( QWidget *parent, const char *name)
 
 ImageEdit::~ImageEdit()
 {
-    
+
 }
 
 void ImageEdit::contentsMousePressEvent( QMouseEvent *e )

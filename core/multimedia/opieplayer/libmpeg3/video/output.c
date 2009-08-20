@@ -29,12 +29,12 @@ static unsigned char mpeg3_601_to_rgb[256];
 /* 			b = (int)(*y + 1.732 * (*cb - 128)); */
 
 #ifdef HAVE_MMX
-inline void mpeg3video_rgb16_mmx(unsigned char *lum, 
-			unsigned char *cr, 
+inline void mpeg3video_rgb16_mmx(unsigned char *lum,
+			unsigned char *cr,
 			unsigned char *cb,
-            unsigned char *out, 
-			int rows, 
-			int cols, 
+            unsigned char *out,
+			int rows,
+			int cols,
 			int mod)
 {
 	unsigned short *row1;
@@ -194,14 +194,14 @@ inline void mpeg3video_rgb16_mmx(unsigned char *lum,
         "movl           $0,     %6\n"
         "cmpl           %8,     %2\n"
         "jl             1b\n"
-        : : "r" (cr), 
-			"r" (cb), 
-			"r" (lum), 
-			"r" (cols), 
+        : : "r" (cr),
+			"r" (cb),
+			"r" (lum),
+			"r" (cols),
 			"r" (row1) ,
-			"r" (col1), 
-			"m" (x), 
-			"m" (mod), 
+			"r" (col1),
+			"m" (x),
+			"m" (mod),
 			"m" (y)
 		);
 }
@@ -213,13 +213,13 @@ static LONGLONG  mpeg3_MMX_V_COEF        = 0x00000000ffea006fLL;
 static LONGLONG  mpeg3_MMX_601_Y_COEF    = 0x0000004800480048LL;
 static LONGLONG  mpeg3_MMX_601_Y_DIFF    = 0x0000000000000010LL;
 
-inline void mpeg3_bgra32_mmx(unsigned long y, 
-		unsigned long u, 
-		unsigned long v, 
+inline void mpeg3_bgra32_mmx(unsigned long y,
+		unsigned long u,
+		unsigned long v,
 		unsigned long *output)
 {
 
-asm(    
+asm(
 /* Output will be 0x00rrggbb with the 00 trailing so this can also be used */
 /* for bgr24. */
         "movd (%0), %%mm0;"          /* Load y   0x00000000000000yy */
@@ -255,9 +255,9 @@ asm(
 : "r" (&y), "r" (&u), "r" (&v), "r" (output));
 }
 
-inline void mpeg3_601_bgra32_mmx(unsigned long y, 
-		unsigned long u, 
-		unsigned long v, 
+inline void mpeg3_601_bgra32_mmx(unsigned long y,
+		unsigned long u,
+		unsigned long v,
 		unsigned long *output)
 {
 asm(
@@ -302,9 +302,9 @@ static unsigned LONGLONG  mpeg3_MMX_V_80_RGB    = 0x0000008000800000LL;
 static LONGLONG  mpeg3_MMX_U_COEF_RGB    = 0x00000000ffd30058LL;
 static LONGLONG  mpeg3_MMX_V_COEF_RGB    = 0x0000006fffea0000LL;
 
-inline void mpeg3_rgba32_mmx(unsigned long y, 
-		unsigned long u, 
-		unsigned long v, 
+inline void mpeg3_rgba32_mmx(unsigned long y,
+		unsigned long u,
+		unsigned long v,
 		unsigned long *output)
 {
 asm(
@@ -343,9 +343,9 @@ asm(
 : "r" (&y), "r" (&v), "r" (&u), "r" (output));
 }
 
-inline void mpeg3_601_rgba32_mmx(unsigned long y, 
-		unsigned long u, 
-		unsigned long v, 
+inline void mpeg3_601_rgba32_mmx(unsigned long y,
+		unsigned long u,
+		unsigned long v,
 		unsigned long *output)
 {
 asm(
@@ -524,17 +524,17 @@ int mpeg3video_ditherframe(mpeg3video_t *video, unsigned char **src, unsigned ch
 		(video->color_model == MPEG3_RGB565 || video->color_model == MPEG3_601_RGB565))
 	{
 /* Unscaled 16 bit */
-		mpeg3video_rgb16_mmx(src[0], 
-			src[2], 
-			src[1], 
-			output_rows[0], 
-			video->out_h, 
-			video->out_w, 
+		mpeg3video_rgb16_mmx(src[0],
+			src[2],
+			src[1],
+			output_rows[0],
+			video->out_h,
+			video->out_w,
 			(output_rows[1] - output_rows[0]) / 2 - video->out_w);
 	}
 	else
-	if(video->have_mmx && 
-		(video->color_model == MPEG3_BGRA8888 || 
+	if(video->have_mmx &&
+		(video->color_model == MPEG3_BGRA8888 ||
 		video->color_model == MPEG3_BGR888 ||
 /*		video->color_model == MPEG3_RGB888 || */
 		video->color_model == MPEG3_RGBA8888 ||
@@ -563,19 +563,19 @@ int mpeg3video_ditherframe(mpeg3video_t *video, unsigned char **src, unsigned ch
 					case MPEG3_BGRA8888:
 					case MPEG3_BGR888:
 						DITHER_MMX_SCALE_HEAD
-							mpeg3_bgra32_mmx(y_in[video->x_table[w]], 
-								cr_in[uv_subscript], 
-								cb_in[uv_subscript], 
+							mpeg3_bgra32_mmx(y_in[video->x_table[w]],
+								cr_in[uv_subscript],
+								cb_in[uv_subscript],
 								(unsigned long*)data);
 						DITHER_MMX_SCALE_TAIL
 						break;
-					
+
 					case MPEG3_601_BGRA8888:
 					case MPEG3_601_BGR888:
 						DITHER_MMX_SCALE_HEAD
-							mpeg3_601_bgra32_mmx(y_in[video->x_table[w]], 
-								cr_in[uv_subscript], 
-								cb_in[uv_subscript], 
+							mpeg3_601_bgra32_mmx(y_in[video->x_table[w]],
+								cr_in[uv_subscript],
+								cb_in[uv_subscript],
 								(unsigned long*)data);
 						DITHER_MMX_SCALE_TAIL
 						break;
@@ -583,9 +583,9 @@ int mpeg3video_ditherframe(mpeg3video_t *video, unsigned char **src, unsigned ch
 					case MPEG3_RGBA8888:
 					case MPEG3_RGB888:
 						DITHER_MMX_SCALE_HEAD
-							mpeg3_rgba32_mmx(y_in[video->x_table[w]], 
-								cr_in[uv_subscript], 
-								cb_in[uv_subscript], 
+							mpeg3_rgba32_mmx(y_in[video->x_table[w]],
+								cr_in[uv_subscript],
+								cb_in[uv_subscript],
 								(unsigned long*)data);
 						DITHER_MMX_SCALE_TAIL
 						break;
@@ -593,9 +593,9 @@ int mpeg3video_ditherframe(mpeg3video_t *video, unsigned char **src, unsigned ch
 					case MPEG3_601_RGBA8888:
 					case MPEG3_601_RGB888:
 						DITHER_MMX_SCALE_HEAD
-							mpeg3_601_rgba32_mmx(y_in[video->x_table[w]], 
-								cr_in[uv_subscript], 
-								cb_in[uv_subscript], 
+							mpeg3_601_rgba32_mmx(y_in[video->x_table[w]],
+								cr_in[uv_subscript],
+								cb_in[uv_subscript],
 								(unsigned long*)data);
 						DITHER_MMX_SCALE_TAIL
 						break;
@@ -610,14 +610,14 @@ int mpeg3video_ditherframe(mpeg3video_t *video, unsigned char **src, unsigned ch
 					case MPEG3_BGRA8888:
 					case MPEG3_BGR888:
 						DITHER_MMX_HEAD
-							mpeg3_bgra32_mmx(*y_in++, 
-								*cr_in, 
-								*cb_in, 
+							mpeg3_bgra32_mmx(*y_in++,
+								*cr_in,
+								*cb_in,
 								(unsigned long*)data);
 							data += step;
-							mpeg3_bgra32_mmx(*y_in++, 
-								*cr_in, 
-								*cb_in, 
+							mpeg3_bgra32_mmx(*y_in++,
+								*cr_in,
+								*cb_in,
 								(unsigned long*)data);
 						DITHER_MMX_TAIL
 						break;
@@ -626,14 +626,14 @@ int mpeg3video_ditherframe(mpeg3video_t *video, unsigned char **src, unsigned ch
 					case MPEG3_601_BGRA8888:
 					case MPEG3_601_BGR888:
 						DITHER_MMX_HEAD
-							mpeg3_601_bgra32_mmx(*y_in++, 
-								*cr_in, 
-								*cb_in, 
+							mpeg3_601_bgra32_mmx(*y_in++,
+								*cr_in,
+								*cb_in,
 								(unsigned long*)data);
 							data += step;
-							mpeg3_601_bgra32_mmx(*y_in++, 
-								*cr_in, 
-								*cb_in, 
+							mpeg3_601_bgra32_mmx(*y_in++,
+								*cr_in,
+								*cb_in,
 								(unsigned long*)data);
 						DITHER_MMX_TAIL
 						break;
@@ -642,14 +642,14 @@ int mpeg3video_ditherframe(mpeg3video_t *video, unsigned char **src, unsigned ch
 					case MPEG3_RGBA8888:
 					case MPEG3_RGB888:
 						DITHER_MMX_HEAD
-							mpeg3_rgba32_mmx(*y_in++, 
-								*cr_in, 
-								*cb_in, 
+							mpeg3_rgba32_mmx(*y_in++,
+								*cr_in,
+								*cb_in,
 								(unsigned long*)data);
 							data += step;
-							mpeg3_rgba32_mmx(*y_in++, 
-								*cr_in, 
-								*cb_in, 
+							mpeg3_rgba32_mmx(*y_in++,
+								*cr_in,
+								*cb_in,
 								(unsigned long*)data);
 						DITHER_MMX_TAIL
 						break;
@@ -658,14 +658,14 @@ int mpeg3video_ditherframe(mpeg3video_t *video, unsigned char **src, unsigned ch
 					case MPEG3_601_RGBA8888:
 					case MPEG3_601_RGB888:
 						DITHER_MMX_HEAD
-							mpeg3_601_rgba32_mmx(*y_in++, 
-								*cr_in, 
-								*cb_in, 
+							mpeg3_601_rgba32_mmx(*y_in++,
+								*cr_in,
+								*cb_in,
 								(unsigned long*)data);
 							data += step;
-							mpeg3_601_rgba32_mmx(*y_in++, 
-								*cr_in, 
-								*cb_in, 
+							mpeg3_601_rgba32_mmx(*y_in++,
+								*cr_in,
+								*cb_in,
 								(unsigned long*)data);
 						DITHER_MMX_TAIL
 						break;
@@ -858,7 +858,7 @@ void memcpy_fast(unsigned char *output, unsigned char *input, long len)
  * 			((MPEG3_INT64*)output)[i] = ((MPEG3_INT64*)input)[i];
  * 			i++;
  * 		}
- * 
+ *
  * 		for(i *= 16; i < len; i++)
  * 		{
  * 			output[i] = input[i];
@@ -898,7 +898,7 @@ int mpeg3video_present_frame(mpeg3video_t *video)
 		if(!video->y_output) return 0;
 
 /* Copy a frame */
-		if(video->in_x == 0 && 
+		if(video->in_x == 0 &&
 			video->in_w >= video->coded_picture_width)
 		{
 			size[0] = video->coded_picture_width * video->in_h;
@@ -922,14 +922,14 @@ int mpeg3video_present_frame(mpeg3video_t *video)
 		{
 			for(i = 0, j = video->in_y; i < video->in_h; i++, j++)
 			{
-				memcpy(video->y_output + i * video->in_w, 
-					src[0] + j * video->coded_picture_width + video->in_x, 
+				memcpy(video->y_output + i * video->in_w,
+					src[0] + j * video->coded_picture_width + video->in_x,
 					video->in_w);
-				memcpy(video->u_output + i * video->in_w / 4, 
-					src[1] + j * video->chrom_width / 2 + video->in_x / 4, 
+				memcpy(video->u_output + i * video->in_w / 4,
+					src[1] + j * video->chrom_width / 2 + video->in_x / 4,
 					video->in_w / 4);
-				memcpy(video->v_output + i * video->in_w / 4, 
-					src[2] + j * video->chrom_width / 2 + video->in_x / 4, 
+				memcpy(video->v_output + i * video->in_w / 4,
+					src[2] + j * video->chrom_width / 2 + video->in_x / 4,
 					video->in_w / 4);
 			}
 		}
@@ -950,7 +950,7 @@ int mpeg3video_present_frame(mpeg3video_t *video)
   	}
 	else
 	{
-   		if((video->pict_struct == FRAME_PICTURE && video->topfirst) || 
+   		if((video->pict_struct == FRAME_PICTURE && video->topfirst) ||
 			video->pict_struct == BOTTOM_FIELD)
 		{
 /* top field first */
@@ -959,13 +959,13 @@ int mpeg3video_present_frame(mpeg3video_t *video)
         		mpeg3video_dithertop(video, src);
         		mpeg3video_ditherbot(video, src);
     		}
-    		else 
+    		else
 			{
         		mpeg3video_dithertop444(video, src);
         		mpeg3video_ditherbot444(video, src);
     		}
     	}
-    	else 
+    	else
 		{
 /* bottom field first */
     		if(video->chroma_format != CHROMA444)
@@ -973,7 +973,7 @@ int mpeg3video_present_frame(mpeg3video_t *video)
         		mpeg3video_ditherbot(video, src);
         		mpeg3video_dithertop(video, src);
     		}
-    		else 
+    		else
 			{
         		mpeg3video_ditherbot444(video, src);
         		mpeg3video_dithertop444(video, src);

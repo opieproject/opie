@@ -56,7 +56,7 @@ class FileView : public QListView
 
 public:
     FileView( const QString & dir, QWidget * parent = 0,
-        const char * name = 0, 
+        const char * name = 0,
         bool hidden = FALSE,
         bool symlinks = FALSE,
         bool thumbnails = FALSE );
@@ -71,7 +71,7 @@ public:
   void setShowThumbnails(bool thumbnails);
   bool getShowThumbnails () const { return showThumbnails; }
   void setMenuKeepsOpen(bool keepOpen);
-  
+
 public slots:
     void updateDir();
     void parentDir();
@@ -111,7 +111,7 @@ private:
     bool    showHidden;
     bool    showSymlinks;
   bool    showThumbnails;
-  bool menuKeepsOpen; 
+  bool menuKeepsOpen;
 
     bool copyFile( const QString & dest, const QString & src );
 
@@ -157,7 +157,7 @@ private slots:
     void updateDirMenu();
     void dirSelected( int id );
     void cleanUp();
-    
+
 };
 
 #endif

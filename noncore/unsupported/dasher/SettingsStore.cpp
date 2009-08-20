@@ -28,7 +28,7 @@ bool CSettingsStore::GetBoolOption(const string& Key)
 		LoadSetting(Key, &Value);
 		BoolMap[Key] = Value;
 	}
-	
+
 	return BoolMap[Key];
 }
 
@@ -40,7 +40,7 @@ long CSettingsStore::GetLongOption(const string& Key)
 		LoadSetting(Key, &Value);
 		LongMap[Key] = Value;
 	}
-	
+
 	return LongMap[Key];
 }
 
@@ -52,7 +52,7 @@ string& CSettingsStore::GetStringOption(const string& Key)
 		LoadSetting(Key, &Value);
 		StringMap[Key] = Value;
 	}
-	
+
 	return StringMap[Key];
 }
 

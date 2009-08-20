@@ -81,31 +81,31 @@ void ChordEngine::calculate(){
   //js_MMM[3] = 7;
   //js_MMM[4] = 11;
   //js_MMM[5] = 4;
-  
+
   int js_D = base_note;
-  
+
   int js_Q = span_size;
-  
+
   js_Q += 2;
-  
+
   int js_V = variation;
-  
+
   int js_FR = fret_pos;
-  
+
   int js_G = 0;
-  
+
   int js_A = 0;
-  
+
   if (js_FR){
     js_G = 8;
   }
-  
+
   js_L = 1;
   js_Y = 1;
   js_Z = 1;
-  
+
   js_vboy(variation);
-  
+
   js_Y += js_Q;
   int js_K = 0;
   int js_W = js_D - js_Z;
@@ -114,7 +114,7 @@ void ChordEngine::calculate(){
   int js_TCK[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
   int js_E = 0;
   int js_X = 0;
-  
+
   for (int j=0; j<41; j++){
     js_A = 0;
     for (int b=0; b<7; b++){
@@ -146,7 +146,7 @@ void ChordEngine::calculate(){
     int js_S = 0;
     js_W = (js_W + js_Z)%12;
     js_H = (js_H + js_Z)%12;
-    
+
     while (js_S < js_Y){
       js_S++;
       if (js_E > js_Q){
@@ -187,22 +187,22 @@ void ChordEngine::calculate(){
       // js_W - represents the note we want????
 
       int js_F = (js_MMM[js_K]+js_E+js_FR)%12;
-      
+
       if ((js_W==js_F)&&(js_N[js_K]==0)){
-	
+
 	int js_EG = js_E+js_G;
-	
+
 	string[js_K] = js_EG;
 	notename[js_K] = notes[js_W];
-	
+
 	js_N[js_K] = 1;
 	js_TCK[js_H] = 1;
 	js_S = BREAK;
       }
       js_E += js_VM;
-      
+
     }
-    
+
   }
 
 }
@@ -271,7 +271,7 @@ const int ChordEngine::chordbases[][12] = {
 void ChordEngine::js_whatchord(int c){
   for (int i=0;i<12;i++){
     js_T[i] = ChordEngine::chordbases[c][i];
-  }  
+  }
 }
 
 void ChordEngine::js_vboy(int v){

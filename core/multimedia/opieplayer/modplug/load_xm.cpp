@@ -297,7 +297,7 @@ BOOL CSoundFile::ReadXM(const BYTE *lpStream, DWORD dwMemLength)
 		DWORD samplesize[32];
 		UINT samplemap[32];
 		WORD nsamples;
-				
+
 		if (dwMemPos + sizeof(XMINSTRUMENTHEADER) >= dwMemLength) return TRUE;
 		pih = (XMINSTRUMENTHEADER *)(lpStream+dwMemPos);
 		if (dwMemPos + bswapLE32(pih->size) > dwMemLength) return TRUE;
@@ -592,7 +592,7 @@ BOOL CSoundFile::ReadXM(const BYTE *lpStream, DWORD dwMemLength)
 		}
 	}
 	// Read mix plugins information
-	if (dwMemPos + 8 < dwMemLength) 
+	if (dwMemPos + 8 < dwMemLength)
 	{
 		dwMemPos += LoadMixPlugins(lpStream+dwMemPos, dwMemLength-dwMemPos);
 	}

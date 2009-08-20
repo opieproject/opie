@@ -5,10 +5,10 @@
 /*
   A special version of execl that opens a shared library and executes the main() function in
   the lib. Requires the quickexec daemon to run.
-  
+
   Note: You do not need to call fork() before calling quickexec, the function actually returns.
 
-  WARNING: path has to be a shared library, otherwise quickexec will hang 
+  WARNING: path has to be a shared library, otherwise quickexec will hang
 */
 
 extern int quickexecl( const char *path, const char *, ...);

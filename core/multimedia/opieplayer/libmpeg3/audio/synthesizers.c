@@ -22,7 +22,7 @@ int mpeg3audio_synth_stereo(mpeg3audio_t *audio, mpeg3_real_t *bandPtr, int chan
     	audio->bo &= 0xf;
     	buf = audio->synth_stereo_buffs[0];
 	}
-	else 
+	else
 	{
     	samples++;
     	buf = audio->synth_stereo_buffs[1];
@@ -34,7 +34,7 @@ int mpeg3audio_synth_stereo(mpeg3audio_t *audio, mpeg3_real_t *bandPtr, int chan
     	bo1 = audio->bo;
     	mpeg3audio_dct64(buf[1] + ((audio->bo + 1) & 0xf), buf[0] + audio->bo, bandPtr);
 	}
-	else 
+	else
 	{
     	b0 = buf[1];
     	bo1 = audio->bo + 1;

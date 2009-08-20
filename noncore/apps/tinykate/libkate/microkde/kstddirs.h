@@ -11,11 +11,11 @@ class KStandardDirs
 {
   public:
     QStringList findAllResources( const QString &, const QString &, bool, bool);
-    QString findResourceDir( const QString &, const QString & ); 
+    QString findResourceDir( const QString &, const QString & );
 
     static void setAppDir( const QString & );
     static QString appDir() { return mAppDir; }
-  
+
   private:
     static QString mAppDir;
 };

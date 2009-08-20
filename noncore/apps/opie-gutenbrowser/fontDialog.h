@@ -12,9 +12,9 @@ copyright 2002 by L.J. Potter ljp@llornkcor.com
 #include <qpe/fontdatabase.h>
 #include <qfont.h>
 
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QLabel;
 class QListBox;
 class QListBoxItem;
@@ -24,7 +24,7 @@ class QMultiLineEdit;
 class QComboBox;
 
 class FontDialog : public /*QDialog*/  QWidget
-{ 
+{
     Q_OBJECT
 
 public:
@@ -50,10 +50,10 @@ protected slots:
 
     void familyListBoxSlot(const QString &);
     void styleListBoxSlot(const QString &);
-    void sizeComboBoxSlot(const QString &); 
-//    void sizeListBoxSlot(const QString &); 
+    void sizeComboBoxSlot(const QString &);
+//    void sizeListBoxSlot(const QString &);
 
-    
+
 };
 
 #endif // FONTDIALOG_H

@@ -36,7 +36,7 @@ IRCChannelPerson::~IRCChannelPerson()
     //if(m_person)
     //    delete m_person;
 }
-    
+
 QString IRCChannelPerson::setOp(const QString &nickname, bool set)
 {
     if(set) {
@@ -63,7 +63,7 @@ QString IRCChannelPerson::nick()
 {
     if(m_person)
         return m_person->nick();
-    
+
     return QString::null;
 }
 

@@ -135,14 +135,14 @@ CameraMainWindow::CameraMainWindow(QWidget * parent, const char *name, WFlags f)
     connect(a_vview, SIGNAL(activated()), this, SLOT(viewVideos()));
 
     a_settings =
-        new QAction(tr("Settings..."),  Opie::Core::OResource::loadPixmap("camera2/settings", Opie::Core::OResource::SmallIcon), 
+        new QAction(tr("Settings..."),  Opie::Core::OResource::loadPixmap("camera2/settings", Opie::Core::OResource::SmallIcon),
                     QString::null, 0, this, 0);
     connect(a_settings, SIGNAL(activated()), this, SLOT(doSettings()));
 
-    a_th_edit = new QAction(tr("Edit"),  Opie::Core::OResource::loadPixmap("edit", Opie::Core::OResource::SmallIcon), 
+    a_th_edit = new QAction(tr("Edit"),  Opie::Core::OResource::loadPixmap("edit", Opie::Core::OResource::SmallIcon),
                             QString::null, 0, this, 0);
     connect(a_th_edit, SIGNAL(activated()), this, SLOT(editThumb()));
-    a_th_del = new QAction(tr("Delete"),  Opie::Core::OResource::loadPixmap("trash", Opie::Core::OResource::SmallIcon), 
+    a_th_del = new QAction(tr("Delete"),  Opie::Core::OResource::loadPixmap("trash", Opie::Core::OResource::SmallIcon),
                            QString::null, 0, this, 0);
     connect(a_th_del, SIGNAL(activated()), this, SLOT(delThumb()));
     a_th_add =
@@ -150,11 +150,11 @@ CameraMainWindow::CameraMainWindow(QWidget * parent, const char *name, WFlags f)
                     QString::null, 0, this, 0);
     connect(a_th_add, SIGNAL(activated()), this, SLOT(moveToContact()));
     a_send =
-        new QAction(tr("Beam to Contact..."),  Opie::Core::OResource::loadPixmap("beam", Opie::Core::OResource::SmallIcon), 
+        new QAction(tr("Beam to Contact..."),  Opie::Core::OResource::loadPixmap("beam", Opie::Core::OResource::SmallIcon),
                     QString::null, 0, this, 0);
     connect(a_send, SIGNAL(activated()), this, SLOT(sendFile()));
 
-    
+
 #ifndef QTOPIA_PHONE
     // Create Toolbars
     QPEToolBar *bar = new QPEToolBar(this);

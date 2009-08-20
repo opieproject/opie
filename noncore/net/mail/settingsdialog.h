@@ -18,7 +18,7 @@ private:
     void writeConfig();
 
 
-private slots:   
+private slots:
     void accept();
 
 

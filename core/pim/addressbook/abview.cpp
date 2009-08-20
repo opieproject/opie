@@ -162,7 +162,7 @@ void AbView::load()
     emit signalClearLetterPicker();
 
     odebug << "selected Category: " << m_curr_category << oendl;
-    
+
     if ( m_curr_category == -1 ) {
         // Show just unfiled contacts
         m_list = m_contactdb->sorted( m_sortOrder, Opie::OPimContactAccess::SortFileAsName,

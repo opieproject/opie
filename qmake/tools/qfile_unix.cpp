@@ -632,7 +632,7 @@ Q_LONG QFile::writeBlock( const char *p, Q_ULONG len )
   Returns the file handle of the file.
 
   This is a small positive integer, suitable for use with C library
-  functions such as fdopen() and fcntl(). On systems that use file 
+  functions such as fdopen() and fcntl(). On systems that use file
   descriptors for sockets (ie. Unix systems, but not Windows) the handle
   can be used with QSocketNotifier as well.
 

@@ -9,7 +9,7 @@
 // Input script object definition.
 //////////////////////////////////////////////////////////////////////
 
-// An input script object.  This object represents a script created from 
+// An input script object.  This object represents a script created from
 // an external file that is meant to be inserted into an output script.
 struct CInputScript  : public Dict
 {
@@ -78,8 +78,8 @@ struct CInputScript  : public Dict
 	char *GetString(void);
 
 	// Routines for reading arbitrary sized bit fields from the stream.
-	// Always call start bits before gettings bits and do not intermix 
-	// these calls with GetByte, etc...	
+	// Always call start bits before gettings bits and do not intermix
+	// these calls with GetByte, etc...
 	void InitBits();
 	S32 GetSBits(S32 n);
 	U32 GetBits(S32 n);
@@ -106,7 +106,7 @@ struct CInputScript  : public Dict
 	void ParseSetBackgroundColor();                	// 09: stagSetBackgroundColor
 	void ParseDefineFont();         		//x 10: stagDefineFont
 	void ParseDefineText(int hasAplha);    		//x 11: stagDefineText    33: stagDefineText2
-	void ParseDoAction();                          	// 12: stagDoAction	
+	void ParseDoAction();                          	// 12: stagDoAction
 	void ParseDefineFontInfo();     		//x 13: stagDefineFontInfo
 	void ParseDefineSound();                       	// 14: stagDefineSound
 	void ParseStartSound();                        	// 15: stagStartSound

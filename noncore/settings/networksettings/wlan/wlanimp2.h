@@ -41,7 +41,7 @@ private:
 
   void parseKeyStr(QString keystr);
   QString formatKey(QString input);
-  
+
   void handlePacket( Opie::Net::OPacket* );
   void displayFoundNetwork( const QString& mode, int channel, const QString& ssid, const Opie::Net::OMacAddress& mac );
 

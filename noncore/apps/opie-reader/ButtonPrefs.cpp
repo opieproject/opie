@@ -159,10 +159,10 @@ CButtonPrefs::CButtonPrefs( QMap<orKey, int>* _kmap, QWidget* parent,  const cha
     lo->addStretch(1);
     QPushButton* delButton = new QPushButton("Delete", this);
     connect(delButton, SIGNAL( clicked() ), this, SLOT( erasemapping() ));
-    lo->addWidget(delButton);     
+    lo->addWidget(delButton);
     QPushButton* exitButton = new QPushButton("Close", this);
     connect(exitButton, SIGNAL( clicked() ), this, SLOT( slotClosed() ) );
-    lo->addWidget(exitButton);     
+    lo->addWidget(exitButton);
     vo->addLayout(lo);
 }
 

@@ -22,12 +22,12 @@ Search_Results::Search_Results( QWidget* parent,  const char* name, bool modal, 
     drinkName = name;
     setCaption( drinkName );
 
-    Layout5 = new QGridLayout( this ); 
+    Layout5 = new QGridLayout( this );
     Layout5->setSpacing( 6 );
     Layout5->setMargin( 4 );
 
     ListBox1 = new QListBox( this, "ListBox1" );
-    
+
     Layout5->addMultiCellWidget(  ListBox1, 0, 1, 0, 3 );
     connect( ListBox1, SIGNAL( clicked(QListBoxItem*)), SLOT( listSelected(QListBoxItem*)) );
 }
@@ -37,7 +37,7 @@ Search_Results::~Search_Results() {
 
 
 void Search_Results::listSelected(QListBoxItem *) {
-    
+
     QDialog::accept();
 }
 

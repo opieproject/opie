@@ -18,7 +18,7 @@
  * definitions; now uses stuff from dpkg's config.h.
  *  - Ian Jackson <ijackson@nyx.cs.du.edu>.
  * Still in the public domain.
- * 
+ *
  * md5_buffer added by Steven Fuller
  * Still in the public domain.
  */
@@ -47,12 +47,12 @@ byteSwap(UWORD32 *buf, unsigned words)
 void md5_buffer(char const *buffer, unsigned int len, char *digest)
 {
 	struct MD5Context md5c;
-	
+
 	MD5Init(&md5c);
 	MD5Update(&md5c, (md5byte const *)buffer, len);
 	MD5Final((md5byte *)digest, &md5c);
-}	
-	
+}
+
 /*
  * Start MD5 accumulation.  Set bit count to 0 and buffer to mysterious
  * initialization constants.
@@ -110,7 +110,7 @@ MD5Update(struct MD5Context *ctx, md5byte const *buf, unsigned len)
 }
 
 /*
- * Final wrapup - pad to 64-byte boundary with the bit pattern 
+ * Final wrapup - pad to 64-byte boundary with the bit pattern
  * 1 0* (64-bit count of bits processed, MSB-first)
  */
 void

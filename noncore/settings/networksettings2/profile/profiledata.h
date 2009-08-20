@@ -12,6 +12,6 @@ public :
       // bring this networkSetup up
       bool Enabled;
       bool TriggerVPN;
-} ; 
+} ;
 
 #endif

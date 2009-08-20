@@ -88,7 +88,7 @@ private:
 			 LinkTag = 4,
        pubDateTag = 5,
 /*
-       ImageTag = 6, 
+       ImageTag = 6,
        UrlTag = 7,
        WidthTag = 8,
        HeightTag = 9,
@@ -101,7 +101,7 @@ private:
 	 rssItem *Item;
 	 rssChannel *channel;
 	 rssImage *image;
-	 
+
 	 bool isItem;
    QStringList tokenNames;
 	 QString htmlString;
@@ -115,7 +115,7 @@ protected:
 	 bool warning(const QXmlParseException &);
 	 bool error(const QXmlParseException &);
 	 bool fatalError(const QXmlParseException &);
-	 
+
 	 QString itemTitle, itemLink, itemDescription;
 };
 

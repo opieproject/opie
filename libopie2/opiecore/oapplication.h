@@ -49,12 +49,12 @@ class OApplication : public QPEApplication
   Q_OBJECT
 
   public:
-  
+
     /**
      * Constructor. Compatible to QPEApplication
      */
     OApplication( int& argc, char** argv, Type type=GuiClient);
-  
+
     /**
      * Constructor. Parses command-line arguments and sets the window caption.
      *

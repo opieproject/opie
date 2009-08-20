@@ -1,5 +1,5 @@
 /****************************************************************************
-** 
+**
 **
 ** Implementation of Win32MakefileGenerator class.
 **
@@ -234,7 +234,7 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
 		dep = (*dep_it);
 	    deps += " " + dep;
 	}
-	if(!project->variables()["QMAKE_NOFORCE"].isEmpty() && 
+	if(!project->variables()["QMAKE_NOFORCE"].isEmpty() &&
 	   project->variables()[(*sit) + ".CONFIG"].findIndex("phony") != -1)
 	    deps += QString(" ") + "FORCE";
 	t << "\n\n" << targ << ":" << deps << "\n\t"
@@ -282,7 +282,7 @@ Win32MakefileGenerator::findDependency(const QString &dep)
 	    QString targ = var((*it) + ".target");
 	    if(targ.isEmpty())
 		targ = (*it);
-	    if(targ.endsWith(dep)) 
+	    if(targ.endsWith(dep))
 		return targ;
 	}
     }
@@ -301,7 +301,7 @@ Win32MakefileGenerator::findDependency(const QString &dep)
 		    QFileInfo fi(Option::fixPathToLocalOS((*input)));
 		    out.replace("${QMAKE_FILE_BASE}", fi.baseName());
 		    out.replace("${QMAKE_FILE_NAME}", fi.fileName());
-		    if(out.endsWith(dep)) 
+		    if(out.endsWith(dep))
 			return out;
 		}
 	    }

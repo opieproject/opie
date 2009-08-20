@@ -13,9 +13,9 @@
 
 #include <qvariant.h>
 #include <qdialog.h>
-class QVBoxLayout; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBoxLayout;
+class QHBoxLayout;
+class QGridLayout;
 class QComboBox;
 class QLCDNumber;
 class QLabel;
@@ -23,7 +23,7 @@ class QPushButton;
 class QSpinBox;
 
 class BacDialog : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
@@ -54,7 +54,7 @@ protected:
 
 protected slots:
     void calculate();
-        
+
 };
 
 #endif // BACDIALOG_H

@@ -14,7 +14,7 @@ class QWidget;
 #endif
 
 enum OAppPos { leftPos, midPos, rightPos };
- 
+
 struct OAppInterface : public QUnknownInterface
 {
     virtual QList<QWidget> widgets() = 0;

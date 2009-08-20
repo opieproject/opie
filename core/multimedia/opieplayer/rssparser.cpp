@@ -76,9 +76,9 @@ bool RssParser::startElement( const QString &, const QString & /*localName*/,con
 //      qWarning(qName +" attributes %d", atts.length());
 //       Item->attributes << qName;
 //       for(int i=0; i < atts.length(); i++) {
-//          Item->attributes << atts.qName(i) << atts.value(atts.qName(i));  
+//          Item->attributes << atts.qName(i) << atts.value(atts.qName(i));
 //       }
-      
+
       QStringList *sList;
       sList = new QStringList();
       sList->append(qName);
@@ -187,7 +187,7 @@ bool RssParser::fatalError(const QXmlParseException &e)
 }
 
 QVector<rssItem> &RssParser::getItems()
-{   
+{
     return channel->rssItems;
 }
 

@@ -101,13 +101,13 @@ EditNetworkSetup::EditNetworkSetup( QWidget* parent ) :
       Mapping = new QPtrDict<ANetNode>;
       Mapping->setAutoDelete( FALSE );
       Nodes_LV->header()->hide();
-      // popluate tree with all NetNodes 
+      // popluate tree with all NetNodes
       buildFullTree();
 }
 
 NetworkSetup * EditNetworkSetup::getTmpCollection( void ) {
 
-      if( TmpIsValid ) 
+      if( TmpIsValid )
         // content is stil OK
         return &(TmpCollection);
 
@@ -137,19 +137,19 @@ NetworkSetup * EditNetworkSetup::getTmpCollection( void ) {
           node to the deepest node
 
       */
-      ANetNodeInstance * NNI = 
+      ANetNodeInstance * NNI =
         (SelectedNodes) ? SelectedNodes->first() : 0 ;
 
       TmpCollection.setModified( 0 );
 
-      // the listview always starts with the toplevel 
+      // the listview always starts with the toplevel
       // hierarchy.  This is always a controller item
       while ( it ) {
         NN = (*Mapping)[it];
         if( NN == 0 ) {
-          // this item is a controller -> 
-          // has radio items as children -> 
-          // find selected one 
+          // this item is a controller ->
+          // has radio items as children ->
+          // find selected one
           it = it->firstChild();
           while( it ) {
             if( ((QCheckListItem *)it)->isOn() ) {
@@ -223,9 +223,9 @@ void EditNetworkSetup::setNetworkSetup( NetworkSetup * NC ) {
       while ( it ) {
         NN = (*Mapping)[it];
         if( NN == 0 ) {
-          // this item is a controller -> 
-          // has radio items as children -> 
-          // find selected one 
+          // this item is a controller ->
+          // has radio items as children ->
+          // find selected one
           it = it->firstChild();
           Found = 0;
           while( it ) {
@@ -248,7 +248,7 @@ void EditNetworkSetup::setNetworkSetup( NetworkSetup * NC ) {
             // probably INCOMPATIBLE collection OR Missing plugin
 	    QString pluginName = NNI ? NNI->nodeClass()->name() : "";
             QMessageBox::warning(
-                0, 
+                0,
                 tr( "Error presentig NetworkSetup" ),
                 tr( "<p>Old NetworkSetup or missing plugin \"<i>%1</i>\"</p>" ).
                     arg(pluginName) );
@@ -258,18 +258,18 @@ void EditNetworkSetup::setNetworkSetup( NetworkSetup * NC ) {
           // it now contains selected radio
           NN = (*Mapping)[it];
         } else {
-          // automatic selection 
+          // automatic selection
           if( NNI == 0 ||  it->text(0) != NNI->nodeClass()->name() ) {
             // should exist and be the same
             if( NNI ) {
               QMessageBox::warning(
-                  0, 
+                  0,
                   tr( "Error presentig NetworkSetup" ),
                   tr( "<p>Old NetworkSetup or missing plugin \"<i>%1</i>\"</p>" ).
                       arg(NNI->nodeClass()->name()) );
             } else {
               QMessageBox::warning(
-                  0, 
+                  0,
                   tr( "Error presentig NetworkSetup" ),
                   tr( "<p>Missing NetworkSetup\"<i>%1</i>\"</p>" ).
                       arg(it->text(0)) );
@@ -285,14 +285,14 @@ void EditNetworkSetup::setNetworkSetup( NetworkSetup * NC ) {
 NetworkSetup * EditNetworkSetup::networkSetup( void ) {
 
       if( SelectedNodes == 0 ) {
-        // new collection 
+        // new collection
         SelectedNodes = new NetworkSetup;
       }
 
       // clean out old entries
       SelectedNodes->clear();
 
-      // transfer 
+      // transfer
       for( QListIterator<ANetNodeInstance> it(TmpCollection);
            it.current();
            ++it ) {
@@ -310,17 +310,17 @@ NetworkSetup * EditNetworkSetup::networkSetup( void ) {
       return SelectedNodes;
 }
 
-// Build device tree -> start 
+// Build device tree -> start
 void EditNetworkSetup::buildFullTree( void ) {
     ANetNode * NN;
 
     // toplevel item
-    MyQCheckListItem * TheTop = new MyQCheckListItem( 
-        Nodes_LV, 
+    MyQCheckListItem * TheTop = new MyQCheckListItem(
+        Nodes_LV,
         NSResources->netNode2Name("fullsetup"),
         QCheckListItem::Controller );
     TheTop->setOpen( TRUE );
-    Description_LBL->setText( 
+    Description_LBL->setText(
           NSResources->netNode2Description( "fullsetup" ) );
     Nodes_LV->setSelected( TheTop, TRUE );
 
@@ -335,10 +335,10 @@ void EditNetworkSetup::buildFullTree( void ) {
         continue;
       }
 
-      MyQCheckListItem * it = new MyQCheckListItem( TheTop, 
-          NN->name(), 
+      MyQCheckListItem * it = new MyQCheckListItem( TheTop,
+          NN->name(),
           QCheckListItem::RadioButton );
-      it->setPixmap( 0, 
+      it->setPixmap( 0,
                      NSResources->getPixmap( NN->pixmapName() )
                    );
       // remember that this node maps to this listitem
@@ -347,14 +347,14 @@ void EditNetworkSetup::buildFullTree( void ) {
     }
 }
 
-// Build device tree -> help function 
+// Build device tree -> help function
 void EditNetworkSetup::buildSubTree( QListViewItem * it, ANetNode *NN ) {
     ANetNode::NetNodeList & NNL = NN->alternatives();
 
     if( NNL.size() > 1 ) {
       // this node has alternatives -> needs radio buttons
-      it = new MyQCheckListItem( 
-        it, 
+      it = new MyQCheckListItem(
+        it,
         NSResources->netNode2Name(NN->needs()[0]),
         QCheckListItem::Controller );
       it->setSelectable( FALSE );
@@ -364,8 +364,8 @@ void EditNetworkSetup::buildSubTree( QListViewItem * it, ANetNode *NN ) {
       QListViewItem * CI;
       if( NNL.size() > 1 ) {
         // generate radio buttons
-        CI = new MyQCheckListItem( 
-                (QCheckListItem *)it, 
+        CI = new MyQCheckListItem(
+                (QCheckListItem *)it,
                 NNL[i]->name(), QCheckListItem::RadioButton );
         // remember that this node maps to this listitem
         CI->setPixmap( 0, NSResources->getPixmap( NNL[i]->pixmapName() ) );
@@ -387,7 +387,7 @@ void EditNetworkSetup::buildSubTree( QListViewItem * it, ANetNode *NN ) {
 void EditNetworkSetup::accept( void ) {
     if( ! haveCompleteConfig( 0 ) || Name_LE->text().isEmpty() ) {
       QMessageBox::warning(
-          0, 
+          0,
           tr( "Closing NetworkSetup Setup" ),
           tr( "Definition not complete or no name" ) );
       return;
@@ -406,7 +406,7 @@ void EditNetworkSetup::accept( void ) {
         S = NNI->acceptable();
         if( ! S.isEmpty() ) {
           QMessageBox::warning(
-              0, 
+              0,
               tr( "Cannot save" ),
               S );
           return;
@@ -432,7 +432,7 @@ void EditNetworkSetup::SLOT_AutoCollapse( bool b ) {
 void EditNetworkSetup::SLOT_SelectNode( QListViewItem * it ) {
     ANetNode * NN;
     if( it == 0 || it->depth() == 0 ) {
-      Description_LBL->setText( 
+      Description_LBL->setText(
           NSResources->netNode2Description( "fullsetup" ) );
       // topevel or no selection
       return;
@@ -454,7 +454,7 @@ void EditNetworkSetup::SLOT_SelectNode( QListViewItem * it ) {
       return;
     }
 
-    // clicked on regular node 
+    // clicked on regular node
     Description_LBL->setText( NN->nodeDescription() );
 
     if( ! it->isSelectable() ) {
@@ -475,7 +475,7 @@ void EditNetworkSetup::SLOT_SelectNode( QListViewItem * it ) {
       return;
     }
 
-    // item has really changed -> update 
+    // item has really changed -> update
     TmpIsValid = 0;
     updateGUI( it, NN );
 }
@@ -517,7 +517,7 @@ void EditNetworkSetup::SLOT_AlterTab( const QString & S ) {
             // add edit widget
             W = NNI->edit( Setup_WS );
             if( ! W) {
-              W = new QLabel( Setup_WS, 
+              W = new QLabel( Setup_WS,
                               tr("No configuration required"));
             }
             Setup_WS->addWidget( W , i );
@@ -551,8 +551,8 @@ void EditNetworkSetup::updateGUI( QListViewItem * it, ANetNode * NN ) {
 
     // enable selected path (as deep as it goes
     it->setOpen( TRUE );
-    enablePath( it->firstChild(), 
-                (it->depth()==1) ? 
+    enablePath( it->firstChild(),
+                (it->depth()==1) ?
                     1 : // toplevel always alternatives
                     (NN->alternatives().size() > 1) );
 }
@@ -582,7 +582,7 @@ void EditNetworkSetup::enablePath( QListViewItem * it, bool pha ) {
             it->setOpen( doOn );
           if( doOn ) {
             // selected alternative
-            enablePath( it->firstChild(), 
+            enablePath( it->firstChild(),
                         NN->alternatives().size() > 1);
           } else {
             // non-selected alternative
@@ -616,9 +616,9 @@ bool EditNetworkSetup::haveCompleteConfig( QListViewItem * it ) {
     while ( it ) {
       NN = (*Mapping)[it];
       if( NN == 0 ) {
-        // this item is a controller -> 
-        // has radio items as children -> 
-        // find selected one 
+        // this item is a controller ->
+        // has radio items as children ->
+        // find selected one
         it = it->firstChild();
         Found = 0;
         while( it ) {
@@ -639,7 +639,7 @@ bool EditNetworkSetup::haveCompleteConfig( QListViewItem * it ) {
         // it now contains selected radio
         NN = (*Mapping)[it];
       } else {
-        // automatic selection 
+        // automatic selection
         it = it->firstChild();
       }
     }

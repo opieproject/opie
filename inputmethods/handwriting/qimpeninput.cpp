@@ -355,7 +355,7 @@ void QIMPenInput::matchedCharacters( const QIMPenCharMatchList &cl )
 	case QIMPenChar::Caps:
 	    if ( profile->style() == QIMPenProfile::ToggleCases ) {
 //		odebug << "Caps" << oendl;
-//		
+//
 		if ( mode == SwitchLock ) {
 //		    odebug << "Switch to normal" << oendl;
 		    pw->changeCharSet( profile->lowercase(), currCharSet );
@@ -378,7 +378,7 @@ void QIMPenInput::matchedCharacters( const QIMPenCharMatchList &cl )
 		    baseSets.remove( currCharSet );
 		    baseSets.insert( currCharSet, profile->lowercase() );
 		    mode = Normal;
-		} else {		
+		} else {
 //		    odebug << "Switch to caps lock" << oendl;
 		    pw->changeCharSet( profile->uppercase(), currCharSet );
 		    // change our base set to upper.

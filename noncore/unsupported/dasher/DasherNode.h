@@ -16,7 +16,7 @@
 namespace Dasher {class CDasherNode;}
 class Dasher::CDasherNode : private NoClones
 {
-	// CDasherNode represents a rectangle and character 
+	// CDasherNode represents a rectangle and character
 	// nodes have children, siblings and parents
 private:
 	const unsigned int m_iLbnd,m_iHbnd;// the cumulative lower and upper bound prob relative to parent
@@ -29,19 +29,19 @@ private:
 	Opts::ColorSchemes m_ColorScheme;
 	int m_iPhase;                      // index for coloring
 	int m_iColour;                     // for the advanced colour mode
-	
+
 	const symbol m_Symbol;             // the character to display
-	CLanguageModel *m_languagemodel;   // pointer to the language model - in future, could be different for each node	
+	CLanguageModel *m_languagemodel;   // pointer to the language model - in future, could be different for each node
 	CDasherNode **m_Children;          // pointer to array of children
 	CDasherNode *m_parent;             // pointer to parent - only needed to grab parent context
 	CLanguageModel::CNodeContext *m_context;
 public:
-	
+
 	CDasherNode(CDasherNode *parent,symbol Symbol, unsigned int igroup, int iphase, Opts::ColorSchemes ColorScheme,int ilbnd,int ihbnd,CLanguageModel *lm, int Colour);
 	~CDasherNode();
 	bool m_bForce;                     // flag to force a node to be drawn - shouldn't be public
-    
-	// return private data members - read only 
+
+	// return private data members - read only
 	CDasherNode ** const Children() const {return m_Children;}
 	unsigned int Lbnd() const {return m_iLbnd;}
 	bool Alive() {return m_bAlive;}
@@ -55,7 +55,7 @@ public:
 	int Phase() const {return m_iPhase;}
 	Opts::ColorSchemes Cscheme() const {return m_ColorScheme;}
 	int Colour() const {return m_iColour;}
-	
+
 	CDasherNode* const Get_node_under(int,myint y1,myint y2,myint smousex,myint smousey); // find node under given co-ords
 	void Get_string_under(const int,const myint y1,const myint y2,const myint smousex,const myint smousey,std::vector<symbol>&) const; // get string under given co-ords
 	void Generic_Push_Node(CLanguageModel::CNodeContext *context);
@@ -78,18 +78,18 @@ inline CDasherNode::CDasherNode(CDasherNode *parent,symbol Symbol, unsigned int 
  	  m_iLbnd(ilbnd),
 	  m_iHbnd(ihbnd),
 	  m_iGroup(igroup),
-          m_iChars(0), 
-          m_iAge(0), 
-	  m_bAlive(1), 
+          m_iChars(0),
+          m_iAge(0),
+	  m_bAlive(1),
           m_bControlChild(false),
-	  m_ColorScheme(ColorScheme), 
+	  m_ColorScheme(ColorScheme),
 	  m_iPhase(iphase),
           m_iColour(Colour),
 	  m_Symbol(Symbol),
 	  m_languagemodel(lm),
-          m_Children(0), 
+          m_Children(0),
 	  m_parent(parent),
-	  m_context(0),  
+	  m_context(0),
 	  m_bForce(false)
 {
 	/*
@@ -115,21 +115,21 @@ inline CDasherNode::CDasherNode(CDasherNode *parent,symbol Symbol, unsigned int 
 
 /////////////////////////////////////////////////////////////////////////////
 
-inline void CDasherNode::Delete_children() 
+inline void CDasherNode::Delete_children()
 {
 	if (m_Children) {
-		unsigned int i; 
+		unsigned int i;
 		for (i=1;i<m_iChars;i++)
 			delete m_Children[i];
 		delete [] m_Children;
 	}
 	m_Children=0;
-	
+
 }
 
 /////////////////////////////////////////////////////////////////////////////
 
-inline CDasherNode::~CDasherNode() 
+inline CDasherNode::~CDasherNode()
 {
 	Delete_children();
 	if (m_context)

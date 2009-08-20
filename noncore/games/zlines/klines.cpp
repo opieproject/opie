@@ -131,7 +131,7 @@ void KLines::generateRandomBalls()
 
 	for( int i = 0 ; i < BALLSDROP ; i++ )
 	{
-		nextBalls_undo[i] = nextBalls[i];		
+		nextBalls_undo[i] = nextBalls[i];
 		nextBalls[i] = bUndo ?
 			rand() % NCOLORS:
 			nextBalls_redo[i];
@@ -152,7 +152,7 @@ void KLines::undo()
 		return;
 	for( int i = 0 ; i < BALLSDROP ; i++ )
 	{
-		nextBalls_redo[i] = nextBalls[i];		
+		nextBalls_redo[i] = nextBalls[i];
 		nextBalls[i] = nextBalls_undo[i];
 	}
 	lPrompt->SetBalls(nextBalls);

@@ -320,7 +320,7 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
 
   Config cfg("Konsole");
   cfg.setGroup("ScrollBar");
-  
+
   scrollLoc = cfg.readNumEntry("Position", -1);
 
   // bugfix for #1647

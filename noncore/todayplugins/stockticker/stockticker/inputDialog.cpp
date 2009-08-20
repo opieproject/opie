@@ -56,7 +56,7 @@ void InputDialog::doLookup() {
     QString url = "\"http://finance.yahoo.com/l?m=&s="+LineEdit1->text()+"\"";
     QString tempHtml = "/tmp/stockticker.html";
      QString cmd = "wget -O "+tempHtml+" "+url;
-     odebug << cmd << oendl; 
+     odebug << cmd << oendl;
 
 
 /*
@@ -78,7 +78,7 @@ void InputDialog::doLookup() {
 }
 
 void InputDialog::showBrowser(OProcess*) {
-    odebug << "BLAH" << oendl; 
+    odebug << "BLAH" << oendl;
     QString tempHtml = "/tmp/stockticker.html";
 
     HelpWindow *StockLookup = new HelpWindow( tempHtml,".",this, "SymbolLookup");

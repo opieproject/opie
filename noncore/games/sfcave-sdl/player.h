@@ -28,7 +28,7 @@ public:
 	double getValue( int valueType );
     string getValueString( int valueType );
     string getValueTypeString( int valueType );
-    void setValue( int valueType, double val );	
+    void setValue( int valueType, double val );
 
 private:
 	AnimatedImage *explosion;

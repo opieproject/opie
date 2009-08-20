@@ -34,11 +34,11 @@ void IRCConnection::sendLine(QString line) {
 }
 
 void IRCConnection::sendCTCPReply(const QString &nickname, const QString &type, const QString &args) {
-    sendLine("NOTICE " + nickname + " :\001" + type + " " + args + "\001"); 
+    sendLine("NOTICE " + nickname + " :\001" + type + " " + args + "\001");
 }
 
 void IRCConnection::sendCTCPRequest(const QString &nickname, const QString &type, const QString &args) {
-    sendLine("PRIVMSG " + nickname + " :\001" + type + " " + args + "\001"); 
+    sendLine("PRIVMSG " + nickname + " :\001" + type + " " + args + "\001");
 }
 
 void IRCConnection::sendCTCPPing(const QString &nickname) {
@@ -59,12 +59,12 @@ void IRCConnection::whois(const QString &nickname) {
 void IRCConnection::login() {
     char hostname[256];
     QString loginString;
-    
+
     emit outputReady(IRCOutput(OUTPUT_CLIENTMESSAGE, tr("Connected, logging in ..")));
     m_connected = TRUE;
     gethostname(hostname, sizeof(hostname)-1);
     hostname[sizeof (hostname) - 1] = 0;
-    
+
     /* Create a logon string and send it */
     if (m_server->password().length()>0) {
         loginString += "PASS " + m_server->password() + "\r\n";
@@ -85,7 +85,7 @@ void IRCConnection::dataReady() {
             for (QStringList::Iterator it = channels.begin(); it != channels.end(); ++it) {
                 QString channelName = (*it).stripWhiteSpace();
                 if (channelName.startsWith("#") || channelName.startsWith("+")) {
-                    sendLine("JOIN "+ channelName); 
+                    sendLine("JOIN "+ channelName);
                 }
             }
             m_loggedIn = TRUE;
@@ -115,7 +115,7 @@ bool IRCConnection::isLoggedIn() {
 }
 
 void IRCConnection::close() {
-    m_socket->close(); 
+    m_socket->close();
     if (m_socket->state()==QSocket::Idle) {
         disconnect();
     }
