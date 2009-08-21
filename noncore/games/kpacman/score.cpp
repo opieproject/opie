@@ -441,12 +441,15 @@ void Score::read()
     if (highscoreFile.exists() && highscoreFile.size() > 4) {
         if (highscoreFile.open(IO_ReadOnly)) {
             QDataStream s(&highscoreFile);
-            char *name;
+            char *name = 0;
             for (int i = 0; i < 10; i++) {
                 s >> hallOfFame[i].points >> hallOfFame[i].levels >> hallOfFame[i].duration >>
                      hallOfFame[i].moment >> name;
                 hallOfFame[i].name = QString::fromLatin1(name);
-                delete(name);
+		if (name)
+                    delete name;
+
+		name = 0;
             }
             highscoreFile.close();
         }
