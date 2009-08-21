@@ -628,6 +628,7 @@ void Checkbook::slotDrawGraph()
     if ( graphInfo )
     {
         delete graphInfo;
+        graphInfo = 0;
     }
 
     switch ( graphList->currentItem() )
@@ -640,7 +641,9 @@ void Checkbook::slotDrawGraph()
             break;
     };
 
-    graphWidget->setGraphInfo( graphInfo );
+    if ( graphInfo )
+        graphWidget->setGraphInfo( graphInfo );
+
     graphWidget->drawGraph( TRUE );
 }
 
