@@ -13782,6 +13782,7 @@ QString &QString::sprintf( const char* cformat, ... )
     if ( !cformat || !*cformat ) {
 	// Qt 1.x compat
 	*this = fromLatin1( "" );
+	va_end( ap );
 	return *this;
     }
     QString format = fromAscii( cformat );
