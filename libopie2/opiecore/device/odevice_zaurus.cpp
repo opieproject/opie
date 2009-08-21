@@ -437,7 +437,7 @@ void Zaurus::buzzer( int sound )
 #endif
 }
 
-bool Zaurus::hasWaveAudio()
+bool Zaurus::hasWaveAudio() const
 {
     // All devices except collie have a DSP device
     return ( d->m_model != Model_Zaurus_SL5000

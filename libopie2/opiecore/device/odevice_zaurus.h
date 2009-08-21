@@ -113,7 +113,7 @@ class Zaurus : public OAbstractMobileDevice, public QWSServer::KeyboardFilter
     virtual bool setDisplayStatus( bool on );
     virtual int displayBrightnessResolution() const;
 
-    virtual bool hasWaveAudio();
+    virtual bool hasWaveAudio() const;
     virtual void playAlarmSound();
     virtual void playKeySound();
     virtual void playTouchSound();
