@@ -51,7 +51,8 @@ class OPimResolver {
   public:
     enum BuiltIn { TodoList = 0,
                    DateBook,
-                   AddressBook
+                   AddressBook,
+                   Notes
     };
     static OPimResolver* self();
 

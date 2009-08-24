@@ -25,7 +25,9 @@ HEADERS += \
         core/opimxrefmanager.h    \
         core/opimxrefpartner.h    \      
         core/otodoaccess.h        \
-        core/osortweekdaybuttons.h
+        core/osortweekdaybuttons.h \
+        core/opimmemo.h           \
+        core/omemoaccess.h
 
 SOURCES += \
         core/ocontactaccess.cpp     \
@@ -49,5 +51,7 @@ SOURCES += \
         core/opimxrefmanager.cpp    \
         core/opimxrefpartner.cpp    \        
         core/otodoaccess.cpp        \
-        core/osortweekdaybuttons.cpp
+        core/osortweekdaybuttons.cpp \
+        core/opimmemo.cpp           \
+        core/omemoaccess.cpp
  

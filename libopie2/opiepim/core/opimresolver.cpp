@@ -32,6 +32,7 @@
 /* OPIE */
 #include <opie2/ocontactaccess.h>
 #include <opie2/otodoaccess.h>
+#include <opie2/omemoaccess.h>
 #include <qpe/qcopenvelope_qws.h>
 
 /* QT */
@@ -43,7 +44,7 @@ OPimResolver* OPimResolver::m_self = 0l;
 
 OPimResolver::OPimResolver() {
     /* the built in channels */
-    m_builtIns << "Todolist" << "Addressbook" << "Datebook";
+    m_builtIns << "Todolist" << "Addressbook" << "Datebook" << "Memo";
 }
 OPimResolver* OPimResolver::self() {
     if (!m_self)
@@ -101,6 +102,9 @@ QCString OPimResolver::qcopChannel( enum BuiltIn& built)const {
     case AddressBook:
         str += "Addressbook";
         break;
+    case Notes:
+        str += "Notes";
+        break;
     default:
         break;
     }
@@ -128,6 +132,9 @@ QCString OPimResolver::applicationChannel( enum BuiltIn& built)const {
     case AddressBook:
         str += "addressbook";
         break;
+    case Notes:
+        str += "notes";
+        break;
     }
 
     return str;
@@ -142,6 +149,8 @@ QCString OPimResolver::applicationChannel( const QString& service )const {
             str += "datebook";
         else if ( service == "Addressbook" )
             str += "addressbook";
+        else if ( service == "Notes" )
+            str += "notes";
     }else
         ; // FIXME for additional stuff
 
@@ -162,6 +171,9 @@ QString OPimResolver::serviceName( int rtti ) const{
     case AddressBook:
         str = "Addressbook";
         break;
+    case Notes:
+        str = "Notes";
+        break;
     default:
         break;
     }
@@ -176,6 +188,8 @@ int OPimResolver::serviceId( const QString& service ) {
         rtti = DateBook;
     else if ( service == "Addressbook" )
         rtti = AddressBook;
+    else if ( service == "Notes" )
+        rtti = Notes;
 
     return rtti;
 }
@@ -217,6 +231,9 @@ OPimBase* OPimResolver::backend( int rtti ) {
         break;
     case AddressBook:
         base = new OPimContactAccess("Resolver");
+        break;
+    case Notes:
+        base = new OPimMemoAccess("Resolver");
         break;
     default:
         break;

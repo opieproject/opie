@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) Stefan Eilers <eilers.stefan@epost.de>
-              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+                             
+              =.             Copyright (C) 2009 The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -26,52 +26,22 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#ifndef __OPIMGLOBAL_H_
-#define __OPIMGLOBAL_H_
 
-#include <qarray.h>
+#include "opimmemosortvector.h"
+#include <opie2/omemoaccess.h>
 
-namespace Opie{
+namespace Opie {
+namespace Internal {
 
-/**
- * The unique identifier for every
- * PIM record. For now it is a negative
- * int but we could change it to long or QUuid
- * in the future
- */
-typedef int UID;
-typedef QArray<UID> UIDArray;
+OPimMemoSortVector::OPimMemoSortVector( uint size, bool asc, int sort )
+    : OPimSortVector<OPimMemo>( size, asc, sort )
+{
+}
 
-namespace Pim{
-
-
-	/**
-	 * Contains global types and enums for the PIM-API
-	 */
-class OPimGlobal{
- public:
-	enum PimType {
-		TODOLIST,
-		CONTACTLIST,
-		DATEBOOK,
-        NOTES,
-		_END_PimType
-	};
-
-	enum DatabaseStyle {
-		DEFAULT,      // Use default Database
-		UNKNOWN,      // Unknown database style
-		XML,
-		SQL,
-		VCARD,        // Also used for VCAL !
-		_END_DatabaseStyle
-	};
-
-
-};
+int OPimMemoSortVector::compareItems( const OPimMemo& con1, const OPimMemo& con2 )
+{
+    return QString::compare( con1.text(), con2.text() );
+}
 
 }
 }
-
-
-#endif

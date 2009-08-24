@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) Stefan Eilers <eilers.stefan@epost.de>
-              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+                             Copyright (C) Stefan Eilers (Eilers.Stefan@epost.de)
+              =.             Copyright (C) 2009 The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -26,52 +26,64 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#ifndef __OPIMGLOBAL_H_
-#define __OPIMGLOBAL_H_
-
-#include <qarray.h>
-
-namespace Opie{
-
-/**
- * The unique identifier for every
- * PIM record. For now it is a negative
- * int but we could change it to long or QUuid
- * in the future
+/*
+ * XML Backend for the OPIE-Notes Database.
  */
-typedef int UID;
-typedef QArray<UID> UIDArray;
 
-namespace Pim{
+#ifndef _OPimMemoAccessBackend_Text_
+#define _OPimMemoAccessBackend_Text_
 
+#include <opie2/omemoaccessbackend.h>
+#include <opie2/omemoaccess.h>
 
-	/**
-	 * Contains global types and enums for the PIM-API
-	 */
-class OPimGlobal{
- public:
-	enum PimType {
-		TODOLIST,
-		CONTACTLIST,
-		DATEBOOK,
-        NOTES,
-		_END_PimType
-	};
+#include <qlist.h>
+#include <qdict.h>
 
-	enum DatabaseStyle {
-		DEFAULT,      // Use default Database
-		UNKNOWN,      // Unknown database style
-		XML,
-		SQL,
-		VCARD,        // Also used for VCAL !
-		_END_DatabaseStyle
-	};
+namespace Opie {
 
 
+
+/* the default xml implementation */
+/**
+ * This class is the flat text implementation of a memo backend
+ * it does implement everything available for OPimMemo.
+ * @see OPimAccessBackend for more information of available methods
+ */
+class OPimMemoAccessBackend_Text : public OPimMemoAccessBackend
+{
+public:
+    OPimMemoAccessBackend_Text ( const QString& appname = QString::null, const QString& path = QString::null );
+
+    bool save();
+
+    bool load ();
+
+    void clear ();
+
+    bool wasChangedExternally();
+
+    UIDArray allRecords() const;
+
+    OPimMemo find ( int uid ) const;
+
+    UIDArray matchRegexp(  const QRegExp &r ) const;
+
+    bool add ( const OPimMemo &newmemo );
+
+    bool replace ( const OPimMemo &memo );
+
+    bool remove ( int uid );
+    bool reload();
+
+private:
+    bool loadMemo( int uid, OPimMemo &memo ) const;
+    bool saveMemo( const OPimMemo &memo, bool mustExist = false ) const;
+
+protected:
+    QString m_path;
+    QString m_appName;
 };
 
 }
-}
-
 
 #endif
